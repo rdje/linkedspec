@@ -1571,7 +1571,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.1.47` | `pending` | Read the owned remaining-static, admission, source-alias and staged-test ranges after clean .1.46; preserve all thirty-four repair roots, known runtime failures, native-error exclusions and parked named arguments. |
+| 1 | `LUA-STARTUP-READING.1.48` | `pending` | Read staged-enrichment lines 241-1740 after clean .1.47; preserve all thirty-four repair roots, known runtime/fixture failures, native-error exclusions and parked named arguments. |
 
 ## Decisions
 

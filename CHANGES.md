@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-13 — Lua semantic admission and source-alias consumer reading
+
+- Read four ranges in ten complete windows: 1,500 fragments /58,749 bytes; cumulative 47/51 and 2,522,437 bytes, with 90 complete files.
+- Remaining-static 122/admission 408/source-alias 638 pass per host, 2336 assertions total; staged 1-222 helpers load without later behavior credit.
+- Neutral semantic 6/20/128 retains 9/9 rollout and 6/6 admission; typed-source 14/0/231 passes. Existing runtime, source, query and fixture defects stay open.
+- LUA-STARTUP-READING.1.47 extends existing guidance ownership without production changes or new repair nodes; .1.48 owns the next staged-test range.
+
 ## 2026-09-13 — Lua semantic foundation and observation-fixture reading
 
 - Read five ranges in eleven complete windows: 1,500 fragments /62,032 bytes; cumulative 46/51 and 2,463,688 bytes, with 87 complete files.

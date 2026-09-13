@@ -329,12 +329,12 @@ step. `PARSER-AUTHORING-APIS.4` owns grammar/binding, definition choices,
 representation compatibility and bounded implementation planning; these four
 children remain unactivated and current startup reading continues.
 
-**Lua source reading is underway (46/51 groups):** the complete
+**Lua source reading is underway (47/51 groups):** the complete
 99-file inventory covers 71,268 physical lines and 2,732,450 bytes. Its 51 owned
 reading groups include generated tables, native adapters and both-ABI tests.
 Two UTF-8-safe byte windows retain an oversized generated MCP line, so the
 per-window total is 71,269 fragments. The independent range audit proves complete
-ownership. The first 46 groups physically read 64,540 fragments /2,463,688 bytes,
+ownership. The first 47 groups physically read 66,040 fragments /2,522,437 bytes,
 including the complete README, both commands, all three native C bindings, ActionIR
 constructors, call names, contracts, the complete parser, bounded authority,
 compiled state and corpus modules, facade, interpreter, JSON and matching. They
@@ -357,8 +357,9 @@ Cursor execution, generated source, normalization and option-removal tests are
 complete. The package runner is fully read, as are semantic call-core, staged/
 generated-provenance and compilation-foundation tests. Query-kernel and generated
 observation tests are fully read, as are native observation, runtime projection,
-source foundation and static graph. Remaining-static reading reaches line 73.
-Eighty-seven files are fully read. The remaining five groups require
+source foundation and static graph. Remaining-static, semantic admission and
+source-alias tests are complete; staged-enrichment reading reaches line 240.
+Ninety files are fully read. The remaining four groups require
 their own reading and verified commits; source reading does not close the limitations below.
 
 **Lua Unicode casing and rule-label verification:** all property tables match the
@@ -845,6 +846,36 @@ The required notes rollover preserves every historical byte. The retained
 original record separator; exact archive queries and clean-parent provenance pass.
 Scope, runtime limits, fixture repair and history reconstruction:
 `docs/knowledge/lua-semantic-foundation-observation-fixture-reading.md`.
+
+**Lua remaining-static, admission and source-alias verification:** the completed
+remaining-static suite passes 122 assertions per host. Private privacy projections
+retain source evidence even under an identity ceiling; public queries apply the
+ceiling before returning records. Runtime-static snapshots omit execution events,
+and failed snapshots distinguish the original native diagnostic from its portable
+projection. Repeated lifecycle occurrences and detached values retain exact identity.
+
+The twelve-role admission consumer passes 408 assertions per host. It compares
+all twenty query digests and direct, loaded, reconstructed, generated and traced
+routes. A fresh emitted child independently verifies results, events and observed
+digests. These are the established fixture cases; known nil-callback, malformed-
+fixture and query-budget limitations remain open.
+
+The seven source-boundary aliases pass 638 assertions per host. All 92 canonical
+helpers resolve, while aliases stay outside the current 250-name inventory.
+Normal and reversed Unicode capture fixtures agree across native, reconstructed,
+loaded, generated-plan and emitted-module routes. Those emitted modules run in the
+current host. Named maps, anonymous boundaries and attributed unknown-helper
+errors retain their expected behavior.
+
+Staged-enrichment reading reaches a partial options constructor. Only complete
+helpers through line 222 load in this leaf; later behavior tests receive no fresh
+credit. The three complete suites total 2,336 assertions across both hosts.
+Neutral checks also pass: semantic rollout 9/9, native admission 6/6 and 128
+mutations; typed-source rollout 14/14 and 231 mutations. These checks preserve
+current ledger state and do not rerun every backend or resolve prior defects.
+
+Exact scope, replay and existing guidance ownership:
+`docs/knowledge/lua-semantic-admission-source-alias-consumer-reading.md`.
 
 **Known Lua test-coverage limitation — six missing fields are actually tables:**
 the observation-test helper retains its sentinel table when asked to remove a

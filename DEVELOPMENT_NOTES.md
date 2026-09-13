@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-13 — Keep admission fixtures and source-alias proof exact
+
+- Complete remaining-static, twelve-role semantic admission and seven-alias consumers; read staged enrichment through 240 and load only its complete helper prefix 1-222.
+- Eight native jobs pass with 2336 assertions plus two helper loads; admission executes a fresh generated child and all 20 hashes, while aliases compare five current-host carriers.
+- Private identity-ceiling projections retain source details for later query redaction; failed native and portable diagnostics remain distinct. The passing fixtures do not close .2.2/.2.34 or existing query/source gaps.
+- LUA-STARTUP-READING.1.47 records exact replay in docs/knowledge/lua-semantic-admission-source-alias-consumer-reading.md; semantic and typed neutral checkers retain all current complete rows.
+
 ## 2026-09-13 — Verify semantic fixture inputs and preserve source-coordinate evidence
 
 - Complete native observation, runtime projection, source foundation and static graph reading; remaining-static 1-73 ends inside a helper, with only complete 1-63 loaded.
