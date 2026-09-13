@@ -2272,12 +2272,28 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.6.0 - freeze exact Lua reading ownership and capacity intake`
 
 - ID: `SESSION-STARTUP-READING.3.7`
-  Status: `pending`
+  Status: `active`
   Goal: Split and read all 158 entries under specs, ebnf, noncore, conf, and tablescript.
+  Children: `.3.7.0` completes decomposition; SUPPORTING-SOURCE-READING.1 owns 21 reading groups, .2 new repair intake, .3 independent closeout.
+  Reading owner: `docs/tasks/SUPPORTING-SOURCE-READING.md`; exact physical reading 0/21, next .1.1; no prior startup Scope range credit.
   Acceptance: Account for legacy adapters, plugins, authored grammars, configuration, and non-TypeScript `.ts` data;
     use LinkedSpec probes before investigating a spec's behavior, and do not infer defects from historical syntax alone.
   Verification: `pending`
   Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.7.0`
+  Status: `done`
+  Activation commit: `735f0337883baef5ac4422976879d09725e0e8ea`.
+  Goal: Inventory supporting sources, reconcile exact prior reading and own every unread range before execution.
+  Scope: All 158 baseline entries under specs, ebnf, noncore, conf and tablescript; current mode/blob/membership deltas; explicit prior coverage; bounded reading and evidence capacity within existing limits.
+  Dependencies: Lua reading closeout .3.2 committed under ADR0119; clean handoff, empty brief, all jobs consumed.
+  Acceptance: Account for every baseline/current byte without reading credit from enumeration. Preserve proven earlier ranges and all repairs; define coherent children within 1500 fragments/65536 bytes before source reading. Measure the actual decomposition against current controls without unapproved increases. Keep book, roadmaps and continuity aligned; no parser, runtime, dependency or gate change.
+  Verification tier: `focused`
+  Focused checks: Independent Git/current-delta inventory, disjoint full-range reconstruction and prior-evidence reconciliation; actual capacity, task/source/Knowledge/history preservation, memory, both histories, book and normal doctrines.
+  Canonical trigger: None for this read-only inventory and documentation decomposition; no milestone closeout or infrastructure implementation. ADR0119 and the director authorize continuing reading; preserve later verification and compatible dependency reuse.
+  Verification: Supporting-source inventory .3.7.0 reconciles all 158 baseline-identical files under conf, tablescript, noncore, specs and ebnf: 25,612 LF delimiters, 25,613 fragments and 964,256 bytes. SUPPORTING-SOURCE-READING owns 21 pending groups/174 disjoint ranges; independent Git, current-delta and published-task reconstruction pass with every group within 1,500 fragments /65,536 bytes. No exact earlier startup Scope coverage is credited; physical reading is 0/21. The resulting decomposition uses existing controls, preserves all repairs and changes no source. Lua reading remains closed under ADR0119; next supporting .1.1 reads configuration. No dependency compilation or canonical gate is run; full codebase/book/policy prerequisites and later verification remain. Exact replay and ownership: docs/knowledge/supporting-source-reading-coverage.md; docs/tasks/SUPPORTING-SOURCE-READING.md.
+  Candidate verification: All three exact published recipes pass; preservation retains 1589 prior source/card/decision/history files and 2589/2590 prior task nodes, changing only startup .3.7 and adding exactly 26 owned nodes. All 92 Known headings, historical chronology and three published payloads remain exact; no reading credit is added. Knowledge generation is 1139 facts/9091 keys; memory 60 lines; histories 375/305 lines, 68 segments and 34 mutation controls pass without rollover. Book rendering/content and all 20 resulting pressure surfaces/62 routes/32 mutation classes pass; normal doctrine hooks govern landing.
+  Commit: `SESSION-STARTUP-READING.3.7.0 - own exact supporting-source reading ranges`.
 
 - ID: `SESSION-STARTUP-READING.3.8`
   Status: `pending`
@@ -4607,7 +4623,7 @@ startup implementation prerequisites and the rgx reading exclusion remain intact
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.7` | `pending` | Lua reading closes under ADR0119; inventory 158 supporting entries and current deltas, reconcile prior exact reading, and own bounded unread ranges before read-only continuation. Preserve all repairs and reuse compatible unchanged dependency products. |
+| 1 | `SUPPORTING-SOURCE-READING.1.1` | `pending` | After clean startup .3.7.0, read the first exact configuration ranges with Knowledge reconciliation; grant no implementation or remaining-source credit. |
 
 ## Reading Ledger
 
@@ -7346,6 +7362,8 @@ All 53 owned scopes are read: HLink delimiter/raw text, Liberty scalar/complex a
 
 ## Decisions
 
+- `2026-09-13` .3.7.0: Freeze 21 complete supporting groups under existing capacity; exact prior startup Scope records grant no supporting-file reading credit. Continue authorized read-only work while reusing compatible dependencies.
+
 - `2026-09-11`: .3.5.0 uses a separate bounded Julia member because the 572-line minimum plan exceeds startup member headroom. All 52 scopes are fixed before reading; no limit increase or source-reading credit. Future history capacity belongs to JULIA-STARTUP-READING.4.
 
 - `2026-09-06`: The director explicitly excluded `rgx` from this reading pass; the exclusion includes its nested
@@ -7384,6 +7402,8 @@ All 53 owned scopes are read: HLink delimiter/raw text, Liberty scalar/complex a
   Both retain startup .3/.4/.5 prerequisites; intake .80.0 authorizes no source repair or OS mitigation.
 
 ## Verification Log
+
+- `2026-09-13` .3.7.0: Supporting-source inventory .3.7.0 reconciles all 158 baseline-identical files under conf, tablescript, noncore, specs and ebnf: 25,612 LF delimiters, 25,613 fragments and 964,256 bytes. SUPPORTING-SOURCE-READING owns 21 pending groups/174 disjoint ranges; independent Git, current-delta and published-task reconstruction pass with every group within 1,500 fragments /65,536 bytes. No exact earlier startup Scope coverage is credited; physical reading is 0/21. The resulting decomposition uses existing controls, preserves all repairs and changes no source. Lua reading remains closed under ADR0119; next supporting .1.1 reads configuration. No dependency compilation or canonical gate is run; full codebase/book/policy prerequisites and later verification remain.
 
 - `2026-09-12` .3.6.0: Lua decomposition freezes 51 pending reading children across 99 baseline-identical files: 71,268 physical lines, 71,269 fragments and 2,732,450 bytes. The independent 149-range audit includes two UTF-8-safe byte windows for an oversized generated MCP line. No source comprehension is claimed. The current plan fits unchanged limits; comparable Julia reading growth exceeds remaining Knowledge capacity. LUA-STARTUP-READING.4.1 prepares a coherent capacity disposition before reading. All previous reading, repairs and verification requirements remain intact.
 
@@ -7553,6 +7573,8 @@ CLI66x2 and Phase0 1032/1032; 1163 seconds is Phase0 only, with 25 optional gate
 
 ## Commit Log
 
+- `2026-09-13` .3.7.0: `SESSION-STARTUP-READING.3.7.0 - own exact supporting-source reading ranges`; activation 735f0337883baef5ac4422976879d09725e0e8ea; next supporting .1.1 after clean proof and empty brief.
+
 - `2026-09-12` .3.6.0: `SESSION-STARTUP-READING.3.6.0 - freeze exact Lua reading ownership and capacity intake`.
 
 - .3.5.0: `SESSION-STARTUP-READING.3.5.0 - freeze exact bounded Julia reading plan`.
@@ -7560,6 +7582,8 @@ CLI66x2 and Phase0 1032/1032; 1163 seconds is Phase0 only, with 25 optional gate
 Each canonical task node owns its exact `Commit` subject and retained completion note. Query landed history with `git log --all --format="%h %s" --fixed-strings --grep="SESSION-STARTUP-READING."`; this replaces the proven duplicate 102-row table.
 
 ## Changelog
+
+- `2026-09-13` .3.7.0: Decompose all supporting sources into exact bounded reading owners; preserve prior work, unread-source honesty and dependency reuse.
 
 - `2026-09-12` .3.6.0: Freeze exact Lua reading ownership and route the measured capacity intake; all prior evidence and repairs remain.
 

@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-13 — Exact supporting-source inventory and bounded ownership
+
+- Reconcile all 158 baseline/current files under conf, tablescript, noncore, specs and ebnf: 25612 LF delimiters, 25613 fragments and 964256 bytes, with zero source deltas.
+- Define SUPPORTING-SOURCE-READING with 21 groups/174 disjoint ranges; independent task/Git reconstruction verifies every byte and 1500-fragment/65536-byte bounds.
+- Preserve earlier source, repair and history evidence; prior startup Scope records grant no completed supporting-file coverage, so physical reading begins at 0/21.
+- SESSION-STARTUP-READING.3.7.0 synchronizes book and current pointers within existing controls; next .1.1 reads configuration without dependency compilation.
+
 ## 2026-09-13 — Authorized Lua reading closeout and supporting handoff
 
 - Record the director's read-only disposition in ADR0119; use focused proof for this Lua reading closeout without canonical CI/receipt or a fresh full Lua/PUC5.4 pass.

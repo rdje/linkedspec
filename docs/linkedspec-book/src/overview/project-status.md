@@ -383,6 +383,17 @@ and avoid unnecessary rebuilds; it does not restrict reading. Full-codebase
 reading, formal book reconciliation and policy review remain incomplete.
 Exact evidence and scope: `docs/knowledge/lua-reading-commit-closeout-audit.md`.
 
+**Supporting-source reading is now explicitly owned:** the next lane contains
+158 unchanged files across configuration, TableScript data, legacy adapters and
+plugins, authored specifications and EBNF grammars. Twenty-one bounded groups
+cover 25,613 line fragments and 964,256 bytes through 174 disjoint ranges. The
+inventory and independent range audit are complete; physical reading is still
+0/21. Earlier isolated probes and source mirrors do not substitute for complete
+reading of these baseline files. This work requires no RGX/PGEN compilation and
+changes no runtime behavior. Exact ownership and replay:
+`docs/tasks/SUPPORTING-SOURCE-READING.md` and
+`docs/knowledge/supporting-source-reading-coverage.md`.
+
 **Lua Unicode casing and rule-label verification:** all property tables match the
 pinned Unicode 17 neutral data. Four Sigma contexts at 2,030 property endpoints
 and adjacent scalars, plus valid width and expansion controls, produce 8,138 exact

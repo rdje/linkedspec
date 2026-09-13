@@ -2268,7 +2268,7 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.7` | `pending` | Lua reading closes under ADR0119; inventory 158 supporting entries and current deltas, reconcile prior exact reading, and own bounded unread ranges before read-only continuation. Preserve all repairs and reuse compatible unchanged dependency products. |
+| 1 | `SUPPORTING-SOURCE-READING.1.1` | `pending` | After clean startup .3.7.0, read the first exact configuration ranges with Knowledge reconciliation; grant no implementation or remaining-source credit. |
 
 ## Decisions
 

@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-13 — Supporting inventory separates ownership from reading credit
+
+- The supporting lane is 964256 bytes across 158 unchanged UTF-8 files; the longest line is 11763 bytes, so no oversized single-line byte split is needed.
+- Five configuration groups, two TableScript groups, nine legacy adapter/plugin groups, three authored-spec groups and two EBNF groups account for 174 exact ranges.
+- Existing startup Scope records contain no completed range for these prefixes; isolated probes, mirror reading and facts are retained without granting exhaustive baseline-file coverage.
+- SESSION-STARTUP-READING.3.7.0 keeps source and all repairs unchanged; coherent Knowledge owners and existing capacity govern later evidence instead of mechanically creating one card per slice.
+
 ## 2026-09-13 — Dependency reuse does not prohibit read-only progress
 
 - The director authorizes the pending Lua reading-only disposition and continued reading; ADR0119 distinguishes this authority from earlier narrowly scoped Julia/capacity approvals.

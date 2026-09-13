@@ -1,12 +1,12 @@
 # MEMORY
 
-- activation_commit: `21210a8bcfa70f605897a13ddafa8c2fe65078ba` — clean authorized Lua reading closeout activation.
-- latest_completed_leaf: `LUA-STARTUP-READING.3.2 - close authorized Lua reading and resume supporting inventory`; exact .3.1 audits pass again; reading .1/.3/startup .3.6 close under ADR0119; all 145 repair nodes remain pending.
-- active_work_unit: `SESSION-STARTUP-READING.3.7` — supporting-source inventory and bounded unread-range ownership.
-- next_action: Under SESSION-STARTUP-READING.3.7, inventory the 158 baseline supporting entries and current deltas, reconcile exact previously read ranges, and task-own bounded unread ranges within existing capacity before continuing read-only PNT. Reuse compatible dependency products; no unnecessary RGX/PGEN builds.
+- activation_commit: `735f0337883baef5ac4422976879d09725e0e8ea` — clean supporting-source inventory activation.
+- latest_completed_leaf: `SESSION-STARTUP-READING.3.7.0 - own exact supporting-source reading ranges`; exact 158-file/21-group/174-range inventory and task coverage pass; no physical reading credit; all prior repairs remain.
+- active_work_unit: `SUPPORTING-SOURCE-READING.1.1` — first configuration source-reading group.
+- next_action: Read SUPPORTING-SOURCE-READING.1.1: exact conf ranges from ambitiming.conf line1 through pt_cases_analysis.conf line3, 1500 fragments/61165 bytes. Retrieve canonical configuration/legacy facts first, read complete bounded windows, own any new finding and commit focused evidence before .1.2; avoid unnecessary dependency builds.
   Named-argument direction PARSER-AUTHORING-APIS.4 is approved and parked; other authoring proposals and approved formats stay parked.
-- in_flight_uncommitted: none; .3.2 authorized reading closeout, book and continuity are committed at current Git HEAD; no background result remains.
-- blockers: none for authorized read-only continuation. ADR0119 resolves Lua reading closeout; preserve all failed/excluded validation, repair prerequisites and later full-CI obligations. Dependency reuse is not a reading restriction.
+- in_flight_uncommitted: none; startup .3.7.0 source inventory, task decomposition, book and continuity are committed at current Git HEAD; no background result remains.
+- blockers: none for bounded supporting reading. Existing evidence controls remain; measure each candidate. Keep all known failures and repair prerequisites; dependency reuse is not a reading restriction.
 - current_rust_warning_debt: Repeated carriers report 1,870 pgen plus 26 rgx-core output warnings; RUST-DEPENDENCY-WARNING-ZERO.1-.7 own causal repair/pins/enforcement without suppression after Lua intake.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
   active table; the task metadata doctrine inventories all consumers, permits arbitrary frontier-row rewrites,
@@ -57,4 +57,4 @@
   Lua .1.36 rollover preserves the exact clean-HEAD suffix as segment4977-65e8f007697e; earlier archive bytes and other history controls remain unchanged. Proportionate governance: ADR0115.
 - current_ci_build_reuse: Director requires PGEN/RGX builds once after submodule updates, then reuse for LinkedSpec-only CI; startup .80.1-.4 own implementation.
   Initial/update preparation, zero dependency compilation in ordinary CI and explicit missing-artifact handling remain pending; startup prerequisites remain.
-- latest_bootstrap_read: 2026-09-13 — roadmap Yes / full codebase No / physical mdBook Yes; Perl/Rust/Dart/Julia/Lua reading closed; all 51 Lua groups independently audited under ADR0119. Supporting .3.7-.3.10, final delta .3.11, formal book .4 and policy .5 remain.
+- latest_bootstrap_read: 2026-09-13 — roadmap Yes / full codebase No / physical mdBook Yes; Perl/Rust/Dart/Julia/Lua reading closed. Supporting .3.7 is planned at 0/21; .3.8-.3.10, final delta .3.11, formal book .4 and policy .5 remain.
