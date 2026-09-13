@@ -329,12 +329,12 @@ step. `PARSER-AUTHORING-APIS.4` owns grammar/binding, definition choices,
 representation compatibility and bounded implementation planning; these four
 children remain unactivated and current startup reading continues.
 
-**Lua source reading is underway (22/51 groups):** the complete
+**Lua source reading is underway (23/51 groups):** the complete
 99-file inventory covers 71,268 physical lines and 2,732,450 bytes. Its 51 owned
 reading groups include generated tables, native adapters and both-ABI tests.
 Two UTF-8-safe byte windows retain an oversized generated MCP line, so the
 per-window total is 71,269 fragments. The independent range audit proves complete
-ownership. The first 22 groups physically read 28,651 fragments /1,124,280 bytes,
+ownership. The first 23 groups physically read 30,151 fragments /1,178,760 bytes,
 including the complete README, both commands, all three native C bindings, ActionIR
 constructors, call names, contracts, the complete parser, bounded authority,
 compiled state and corpus modules, facade, interpreter, JSON and matching. They
@@ -342,8 +342,8 @@ also cover the complete generated MCP module, contract runtime, decoded server,
 wire, primary CLI, private recognition transaction module and its runtime adapter,
 scoped binding, scalar numeric, compilation outcome, semantic index, observation
 and query, both complete semantic projectors, SHA hashing, the complete emitter and
-typed-source modules, spec AST, loader and spec parser, plus the validator prefix.
-The remaining 29 groups require
+typed-source modules, spec AST, loader, spec parser and validator, plus the staged
+AST enrichment prefix. The remaining 28 groups require
 their own reading and verified commits; source reading does not close the limitations below.
 
 **Generated Lua MCP binding:** the current 83,166-byte module matches its neutral
@@ -421,6 +421,14 @@ parser/compiler/runtime cases expose the lexical limits below. Compact quoted
 parentheses and whitespace remain valid. These tests leave malformed-source
 reconstructed/generated/emitted coverage to the repair verification owners.
 
+**Lua validator and staged verification:** the unchanged staged suite passes 890
+assertions and the gap-capture suite passes 392 on each installed host, 2,564 total.
+The staged consumer retains its existing native, reconstructed, generated and
+emitted positive controls. Separate host-input probes establish the array and
+validator-option limitations below, with zero parent callbacks and unchanged
+caller inputs. These checks do not close the declared-PUC prerequisite or earlier
+failures, and do not prove malformed-input behavior across production carriers.
+
 **Approved Lua evidence capacity:** the director explicitly approved the complete
 Lua proposal under ADR0118. Containment `.14` implements exactly these eleven
 controls for 51 reading groups plus six support slots:
@@ -449,11 +457,25 @@ The director also granted one containment `.14` exception for this bounded capac
 implementation before full codebase reading, using focused proof and normal hooks
 without canonical CI/receipt. Later milestone, repair and push requirements remain;
 dependency build-on-update implementation stays separately owned. Lua source reading
-is 22/51; the next group reads the validator suffix and staged AST enrichment prefix.
+is 23/51; the next group completes staged enrichment and reads capture provenance
+and the parse-job prefix.
 The installed-host test failures below remain open.
 All known limitations below retain their repair owners.
 Exact admission and replay: `docs/knowledge/lua-reading-evidence-capacity-admission.md`.
 The historical proposal remains in `docs/knowledge/lua-reading-evidence-capacity-proposal.md`.
+
+**Known Lua staged limitation — malformed host arrays can lose members:** a host
+can create a tagged JSON array containing `"nodes"` and then add an extra named
+member or sparse third element. The private staged job-identity and parent-AST
+copy paths currently retain only the dense prefix. The copied parent becomes
+`["nodes"]`, and the job digest matches the clean prefix because the extra data
+was omitted before hashing. The caller’s input remains unchanged, and the parent
+probe executes zero callbacks. Plain malformed arrays reject; valid dense false
+and null elements survive. Cache capability arrays also reject extra members.
+Lua `.2.25.1/.2` own full membership validation and independent supported-carrier
+proof. These controlled host-table cases do not establish data loss from ordinary
+spec text or valid serialized JSON. Exact evidence:
+`docs/knowledge/lua-validator-staged-prefix-reading-and-array-gaps.md`.
 
 **Known Lua syntax limitation — unfinished edge blocks and fluents can execute:**
 with Done defined before Top, this missing closing brace is currently accepted and
@@ -759,6 +781,9 @@ Parser and loaded-engine options have the same false-default problem.
 while true, zero and text reject with the existing parse/loader errors. Lua
 `.2.8.11/.2.8.12` own absence-only handling and independent proof, preserving
 source identity, trace validation, caller option copies and successful loaded values.
+The public `validate_spec(spec, false)` similarly accepts defaults; true, zero and
+text options reject the typed table error. Lua `.2.8.13/.14` own absent-only
+validator defaults and independent proof, preserving strict and trace validation.
 
 **Known Lua limitation — nested parser step budget:** when a parent callback has
 consumed its one-step allowance, its nested callback can still run against the

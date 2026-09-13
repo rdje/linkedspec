@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-13 — Lua validator and staged prefix reading with array validation ownership
+
+- Read two ranges /1,500 fragments /54,480 bytes; cumulative 23/51, 30,151 fragments /1,178,760 bytes.
+- Staged890 and gap392 assertions pass per installed host; 52 exact validator/job/cache/parent observations agree across hosts.
+- Own omitted staged tagged-array members under .2.25 and validator false options under .2.8.13/.14; preserve all previous repairs and parked named arguments.
+- LUA-STARTUP-READING.1.23 retains exact source, copy/digest controls and qualified governance proof; next .1.24.
+
 ## 2026-09-13 — Lua source parser reading and lexical completeness ownership
 
 - Read three ranges /1,500 fragments /44,459 bytes; cumulative 22/51, 28,651 fragments /1,124,280 bytes.

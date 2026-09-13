@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-13 — Tagged arrays still require complete membership validation
+
+- A declared JSON array kind does not prove dense one-based keys; copying only its selected length can erase malformed host input before validation or hashing.
+- Staged job identity and parent detachment share this omission; the cache capability path correctly validates density first. Equal digests follow omitted input, not a hashing defect.
+- Finite/cyclic and plain malformed controls reject; parent tests execute zero callbacks and preserve caller inputs. Valid serialized JSON and authored reachability are not established.
+- LUA-STARTUP-READING.1.23 preserves replay in docs/knowledge/lua-validator-staged-prefix-reading-and-array-gaps.md; .2.25 owns repair and proof.
+
 ## 2026-09-13 — Preserve delimiter evidence until syntax validation is complete
 
 - Returning accumulated edge code at EOF loses the missing outer close; converting failed fluent extraction to empty args also erases invalid input.
