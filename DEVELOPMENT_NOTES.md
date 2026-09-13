@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-13 — Historical parser samples are not application requirements
+
+- Directory/suffix discovery explains the live Lispish dependency on 53 conf and 23 TableScript inputs; their obsolete application semantics are outside current maintenance scope.
+- The exact helper checks nonempty advancing results and guards no progress, without expected-AST or complete-input assertions. Six passing smoke assertions do not establish full configuration validity.
+- A 1015-file reference census resolves 14 lines in five files; generic PathSearch receives explicit spec extension, legacy env references have no current loader reference, and doctrine examples are synthetic.
+- SUPPORTING-SOURCE-READING.0 preserves original inventory and completed .1.1 while superseding six further historical-data reading groups; remaining current grammar/source reading and all defect owners stay explicit.
+
 ## 2026-09-13 — Configuration comprehension keeps historical consumers separate
 
 - Parenthesized legacy records combine textual regexes, host expressions and templates; Lighttpd has its own syntax, and neither establishes current function/named-argument semantics.

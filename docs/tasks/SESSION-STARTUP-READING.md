@@ -2275,7 +2275,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Status: `active`
   Goal: Split and read all 158 entries under specs, ebnf, noncore, conf, and tablescript.
   Children: `.3.7.0` completes decomposition; SUPPORTING-SOURCE-READING.1 owns 21 reading groups, .2 new repair intake, .3 independent closeout.
-  Reading owner: `docs/tasks/SUPPORTING-SOURCE-READING.md`; exact physical reading 1/21, 1500 fragments/61165 bytes and 23 complete files; next .0 audits director-narrowed historical configuration dependencies; no prior startup Scope range credit.
+  Reading owner: `docs/tasks/SUPPORTING-SOURCE-READING.md`; .1.1 retains 1500 fragments/61165 bytes of completed historical reading. .0 supersedes further fixture-reading .1.2-.1.7 without credit; 14 code groups/77 files/17291 fragments/673899 bytes remain. Next .1.17 prioritizes authored specs, then EBNF and remaining legacy-code review.
   Acceptance: Account for legacy adapters, plugins, authored grammars, configuration, and non-TypeScript `.ts` data;
     use LinkedSpec probes before investigating a spec's behavior, and do not infer defects from historical syntax alone.
   Verification: `pending`
@@ -4623,7 +4623,7 @@ startup implementation prerequisites and the rgx reading exclusion remain intact
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SUPPORTING-SOURCE-READING.0` | `pending` | Director identifies conf inputs as historical; audit current spec/test dependency reachability before further configuration reading. |
+| 1 | `SUPPORTING-SOURCE-READING.1.17` | `pending` | After clean .0, read current authored specs (1099 fragments/62580 bytes); historical conf/TableScript data and tests remain intact without further manual reading. |
 
 ## Reading Ledger
 

@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `SUPPORTING-SOURCE-READING`
-- Status: `active` / inventory complete; physical reading 1/21
+- Status: `active` / one historical reading group complete; six fixture-reading groups superseded; fourteen code-reading groups pending
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.7`
 - Created: `2026-09-13`
 - Last updated: `2026-09-13`
@@ -12,8 +12,8 @@
 
 ## Goal
 
-Read every supporting-source baseline byte and current delta, preserving exact
-coverage, comprehension and actionable finding ownership. Reading is distinct
+Read every currently required supporting-source range and current delta, preserving
+original baseline coverage, explicit historical exclusions, comprehension and finding ownership. Reading is distinct
 from runtime signoff. Existing startup and backend repairs remain open.
 
 ## Scope and acceptance
@@ -22,8 +22,9 @@ from runtime signoff. Existing startup and backend repairs remain open.
 - Exact selectors: prefixes `conf/`, `tablescript/`, `noncore/`, `specs/`, `ebnf/`.
 - All 158 baseline modes/blobs/current bytes are unchanged: 25,612 LF delimiters, 25,613 fragments, 964,256 bytes; no empty or binary member.
 - Twenty-one groups contain 174 disjoint inclusive line ranges, bounded by 1500 fragments /65536 bytes each. Smaller output windows remain mandatory.
-- Read roots in order: configuration, TableScript data, legacy adapters/plugins, authored specs, EBNF grammars. Crossing constructs retain explicit suffix ownership.
+- Original root order and baseline ranges remain below. .0 changes current execution order to authored specs, EBNF, then remaining legacy code; historical configuration/TableScript content is not a current application-maintenance requirement. Crossing constructs retain explicit suffix ownership.
 - No complete baseline-range reading is credited from earlier startup source records; isolated diagnostics and references do not establish exhaustive physical coverage.
+- Historical-data disposition under .0: conf/ (58 files) and tablescript/ (23 files) are Lispish-era application data. Retain all inputs and existing parser-corpus tests; stop further manual fixture-content reading under superseded .1.2-.1.7. Completed .1.1 and every original Scope/digest remain historical evidence, with no excluded-byte credit. Current required code: 77 files/88 ranges/17291 fragments/673899 bytes in .1.8-.1.21. Read authored specs and EBNF first (.1.17-.1.21), then remaining legacy code (.1.8-.1.16).
 - Retrieve Knowledge before interpreting source; use LinkedSpec Toolbox probes before diagnosing specification behavior. Do not classify historical syntax as a new defect by inspection alone.
 - Preserve executable/file provenance and qualified legacy versus supported behavior. Do not run historical adapters or arbitrary configuration side effects merely to read them.
 - No source repair before remaining startup prerequisites. Reuse compatible dependency products; reading requires no RGX/PGEN compilation.
@@ -40,20 +41,26 @@ from runtime signoff. Existing startup and backend repairs remain open.
   Children: `.0`, `.1`, `.2`, `.3`
 
 - ID: `SUPPORTING-SOURCE-READING.0`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `0e3423a19addad30c8f932b1f23fb270e22f1677`.
+  Verification tier: `focused`
+  Focused checks: Tracked current dependency-reference census and exact caller/loader/test-fixture inspection; canonical retirement and Lispish facts; original source/range/history preservation, Knowledge, memory, histories, book and normal doctrines.
+  Canonical trigger: Director-authorized read-only reading-scope disposition; no source, test, runtime, build or gate change.
+  Director clarification: Conf, Tk and TableScript inputs were Lispish data for obsolete day-job applications whose Perl AST consumers are no longer here. The director supplies their provenance/background and clarifies their limited current value, so .0 retains smoke coverage without further manual data reading. Original application specs described work activities; spec.spec attempted to describe the spec format itself. Current roles must be checked from current source/tests; historical provenance alone does not remove a maintained grammar.
   Goal: Apply the director’s historical-configuration reading boundary using current dependency evidence.
   Dependencies: .1.1 committed clean; no further historical configuration reading before this audit.
-  Scope: Metadata and current spec/test/tool/core references to historical conf inputs, including transitive or default-extension loaders; existing retirement/quarantine decisions; scope disposition for remaining .1.2-.1.5 ranges and mixed .tk inputs.
-  Acceptance: Identify every demonstrated live dependency and read only necessary historical input ranges; otherwise exclude historical configuration from further mandatory reading without claiming it read, deleting files or altering runtime tests. Preserve original inventory/ranges and completed evidence; reconcile current tasks, Knowledge, roadmap and book.
-  Verification: `pending`
-  Commit: `pending`
+  Scope: Current corpus/spec/test/tool references, historical conf/TableScript provenance, exact focused corpus extraction, and retirement of further historical fixture reading while preserving every source/test and original range.
+  Acceptance: Distinguish retained Lispish smoke-test inputs from obsolete application requirements; honor the director’s relevance clarification by ending further manual conf/TableScript reading. Preserve all source/tests, original inventory and completed evidence; mark omitted reading superseded without credit, prioritize current authored grammar, and synchronize tasks/Knowledge/roadmaps/book.
+  Verification: Supporting .0 records conf and TableScript as historical Lispish application data, retaining their existing narrow parser-corpus use. The exact focused Phase 0 subtest passes six assertions over 53 conf/23 TableScript/7 EBNF inputs; no obsolete application consumer or dependency build runs. Further manual reading of conf and TableScript data is retired under .1.2-.1.7, with no deletion or reading credit; completed .1.1 and the original 158-file/174-range inventory remain exact. Required supporting code is now 77 files/88 ranges/17291 fragments/673899 bytes in 14 pending groups. Next .1.17 reads shipped backend-neutral specs, followed by EBNF and the remaining legacy-code review. Every prior defect owner and later startup obligation remains. Exact source/reference and scope replay: docs/knowledge/legacy-configuration-source-contracts.md. Focused corpus block and six helper bodies are copied byte-exact; full test-source SHA-256 6b7fc16ee751ab02f2ae06109cfe4fb2516aa29b22c7a5ba3b2f77827a98a82a. No complete-input/AST-content validation or full CI is claimed.
+  Candidate proof: 2480 prior files remain byte-exact; two mutable Knowledge cards preserve earlier evidence with declared current-state updates and the explicit superseded-status extension to tree replay. Preserve 2605/2617 prior task nodes; twelve intended scope/order/provenance nodes change, no new ID, all repair nodes and completed .1.1 remain exact. All 92 prior book limitation headings remain. Exact new audit/extraction recipes and successful six-assertion TAP agree; memory is 60 lines, Knowledge 1140 facts/9099 keys, histories 389/35965 and 319/35219 lines/bytes. Rendered book and all nine doctrine hooks govern focused landing.
+  Commit: `SUPPORTING-SOURCE-READING.0 - reconcile historical Lispish inputs with current corpus use`
 
 - ID: `SUPPORTING-SOURCE-READING.1`
   Status: `active`
-  Goal: Read every owned supporting-source range in the frozen order.
+  Goal: Read current required supporting code in the .0 execution order; preserve original inventory, completed historical reading and explicit fixture-reading retirement.
   Dependencies: Startup .3.7.0 decomposition committed; clean activation for every child.
   Children: `.1.1-.1.21`
-  Acceptance: Every child records complete source coverage, comprehension, Knowledge reconciliation, actionable findings, focused checks and a clean per-leaf commit.
+  Acceptance: Each required code-reading child records exact original Scope coverage, comprehension, Knowledge reconciliation, owned findings, focused checks and clean per-leaf commit. Six superseded historical-data groups are explicit omissions and receive no reading credit.
   Verification: `pending`
   Commit: `pending`
 
@@ -74,71 +81,77 @@ from runtime signoff. Existing startup and backend repairs remain open.
   Commit: `SUPPORTING-SOURCE-READING.1.1 - read legacy configuration data and templates`
 
 - ID: `SUPPORTING-SOURCE-READING.1.2`
-  Status: `pending`
+  Status: `superseded`
   Goal: Read and understand supporting conf group 2.
   Scope: `conf/pt_cases_analysis.conf` lines 4-57; `conf/ptiming.conf` lines 1-44; `conf/qcflow.conf` lines 1-488; `conf/qcflow_filter.conf` lines 1-11; `conf/qcflow_table2ss.conf` lines 1-183; `conf/regrestatus.conf` lines 1-6; `conf/regrestatus.tk` lines 1-35; `conf/router.conf` lines 1-98; `conf/rpt_consolidate.tk` lines 1-80; `conf/rtl.conf` lines 1-21; `conf/sdcgen.conf` lines 1-6; `conf/setup_hold_tmaxmin.conf` lines 1-40; `conf/seview.conf` lines 1-36; `conf/skew.conf` lines 1-91; `conf/spyglass.conf` lines 1-30; `conf/stan_backend.conf` lines 1-52; `conf/stan_backend_table2ss.conf` lines 1-20; `conf/stan_dm_measures.conf` lines 1-98; `conf/stan_dm_sheets.conf` lines 1-107
   Baseline evidence: 1500 fragments / 56777 bytes; ordered range SHA-256 `256ce40549a189f8c3d437233d412f6d1ab4108720d0e9a63938bb036f73109c`.
-  Dependencies: .1.1 committed with clean handoff.
-  Acceptance: Read all scoped bytes in complete bounded windows; preserve comprehension, canonical facts, owned findings, source identity, focused proof and clean per-leaf continuity.
-  Verification: `pending`
-  Commit: `pending`
+  Dependencies: .1.1 and .0 dependency disposition committed with clean handoff.
+  Acceptance: Superseded by .0 historical-data disposition; retain original Scope/digest as inventory only. No physical reading or application verification is claimed for this group; all files and current corpus tests remain.
+  Superseded by: `SUPPORTING-SOURCE-READING.0`
+  Verification: Further manual reading omitted as historical Lispish application data; existing focused corpus smoke remains green and unchanged. This is scope retirement, not completed reading.
+  Commit: `none - superseded without additional reading`
 
 - ID: `SUPPORTING-SOURCE-READING.1.3`
-  Status: `pending`
+  Status: `superseded`
   Goal: Read and understand supporting conf group 3.
   Scope: `conf/stan_dm_sheets.conf` lines 108-255; `conf/stan_old.conf` lines 1-313; `conf/table2ss.conf` lines 1-431; `conf/tablegrep.conf` lines 1-200; `conf/tcfix.conf` lines 1-7; `conf/tcfix.tk` lines 1-21; `conf/tcflow.conf` lines 1-77; `conf/tcflow.tk` lines 1-149; `conf/tkcommands.conf` lines 1-154
   Baseline evidence: 1500 fragments / 50605 bytes; ordered range SHA-256 `04db2e07831eb7022523d7703879b76fe35ab20e225a30b45d46bdb81a457061`.
   Dependencies: .1.2 committed with clean handoff.
-  Acceptance: Read all scoped bytes in complete bounded windows; preserve comprehension, canonical facts, owned findings, source identity, focused proof and clean per-leaf continuity.
-  Verification: `pending`
-  Commit: `pending`
+  Acceptance: Superseded by .0 historical-data disposition; retain original Scope/digest as inventory only. No physical reading or application verification is claimed for this group; all files and current corpus tests remain.
+  Superseded by: `SUPPORTING-SOURCE-READING.0`
+  Verification: Further manual reading omitted as historical Lispish application data; existing focused corpus smoke remains green and unchanged. This is scope retirement, not completed reading.
+  Commit: `none - superseded without additional reading`
 
 - ID: `SUPPORTING-SOURCE-READING.1.4`
-  Status: `pending`
+  Status: `superseded`
   Goal: Read and understand supporting conf group 4.
   Scope: `conf/tkcommands.conf` lines 155-417; `conf/tkgui.tk` lines 1-179; `conf/tss2sta.conf` lines 1-171; `conf/tssio.conf` lines 1-75; `conf/uref_2cidl.conf` lines 1-278; `conf/vhdl_template.conf` lines 1-4; `conf/vhdl_uc.conf` lines 1-8; `conf/violators.conf` lines 1-522
   Baseline evidence: 1500 fragments / 47232 bytes; ordered range SHA-256 `48ab9238732756db5df119fdde4b5626d73af695fcb609bd2dcd2e5f74f6d8b4`.
   Dependencies: .1.3 committed with clean handoff.
-  Acceptance: Read all scoped bytes in complete bounded windows; preserve comprehension, canonical facts, owned findings, source identity, focused proof and clean per-leaf continuity.
-  Verification: `pending`
-  Commit: `pending`
+  Acceptance: Superseded by .0 historical-data disposition; retain original Scope/digest as inventory only. No physical reading or application verification is claimed for this group; all files and current corpus tests remain.
+  Superseded by: `SUPPORTING-SOURCE-READING.0`
+  Verification: Further manual reading omitted as historical Lispish application data; existing focused corpus smoke remains green and unchanged. This is scope retirement, not completed reading.
+  Commit: `none - superseded without additional reading`
 
 - ID: `SUPPORTING-SOURCE-READING.1.5`
-  Status: `pending`
+  Status: `superseded`
   Goal: Read and understand supporting conf group 5.
   Scope: `conf/violators.conf` lines 523-1110; `conf/xif.conf` lines 1-64
   Baseline evidence: 652 fragments / 21863 bytes; ordered range SHA-256 `c3d7df0e453accaf0569cc3f879b6a817e3f2a4b1deda86068df1a8ec753c348`.
   Dependencies: .1.4 committed with clean handoff.
-  Acceptance: Read all scoped bytes in complete bounded windows; preserve comprehension, canonical facts, owned findings, source identity, focused proof and clean per-leaf continuity.
-  Verification: `pending`
-  Commit: `pending`
+  Acceptance: Superseded by .0 historical-data disposition; retain original Scope/digest as inventory only. No physical reading or application verification is claimed for this group; all files and current corpus tests remain.
+  Superseded by: `SUPPORTING-SOURCE-READING.0`
+  Verification: Further manual reading omitted as historical Lispish application data; existing focused corpus smoke remains green and unchanged. This is scope retirement, not completed reading.
+  Commit: `none - superseded without additional reading`
 
 - ID: `SUPPORTING-SOURCE-READING.1.6`
-  Status: `pending`
+  Status: `superseded`
   Goal: Read and understand supporting tablescript group 6.
   Scope: `tablescript/designsync.ts` lines 1-4; `tablescript/edalog.ts` lines 1-20; `tablescript/jpcts.ts` lines 1-14; `tablescript/libview_table2ss.ts` lines 1-19; `tablescript/lstype_long_i2chs.ts` lines 1-20; `tablescript/matrix.ts` lines 1-24; `tablescript/module_interface.ts` lines 1-98; `tablescript/network.ts` lines 1-53; `tablescript/nlc.ts` lines 1-138; `tablescript/peruser.ts` lines 1-9; `tablescript/postsyn.ts` lines 1-242; `tablescript/pt_cases_analysis.ts` lines 1-38; `tablescript/qcflow_table2ss.ts` lines 1-431; `tablescript/quick_omap2430c_dft_table2ss.ts` lines 1-12; `tablescript/raw.ts` lines 1-11; `tablescript/seview.ts` lines 1-15; `tablescript/skew.ts` lines 1-53; `tablescript/spyglass.ts` lines 1-26; `tablescript/stan_backend_table2ss.ts` lines 1-61; `tablescript/table2ss.ts` lines 1-212
   Baseline evidence: 1500 fragments / 47282 bytes; ordered range SHA-256 `b0997334b5fc70e981b8d452a574c0cd6030bff6f7685c3cc825198dbb7db8df`.
   Dependencies: .1.5 committed with clean handoff.
-  Acceptance: Read all scoped bytes in complete bounded windows; preserve comprehension, canonical facts, owned findings, source identity, focused proof and clean per-leaf continuity.
-  Verification: `pending`
-  Commit: `pending`
+  Acceptance: Superseded by .0 historical-data disposition; retain original Scope/digest as inventory only. No physical reading or application verification is claimed for this group; all files and current corpus tests remain.
+  Superseded by: `SUPPORTING-SOURCE-READING.0`
+  Verification: Further manual reading omitted as historical Lispish application data; existing focused corpus smoke remains green and unchanged. This is scope retirement, not completed reading.
+  Commit: `none - superseded without additional reading`
 
 - ID: `SUPPORTING-SOURCE-READING.1.7`
-  Status: `pending`
+  Status: `superseded`
   Goal: Read and understand supporting tablescript group 7.
   Scope: `tablescript/table2ss.ts` lines 213-257; `tablescript/tree.ts` lines 1-16; `tablescript/wrapgen.ts` lines 1-9; `tablescript/xhierarchy.ts` lines 1-100
   Baseline evidence: 170 fragments / 5433 bytes; ordered range SHA-256 `7ec16ed9dba9a4a259323295bcb92287a7d96bace88edf84cff8f987913cee8e`.
   Dependencies: .1.6 committed with clean handoff.
-  Acceptance: Read all scoped bytes in complete bounded windows; preserve comprehension, canonical facts, owned findings, source identity, focused proof and clean per-leaf continuity.
-  Verification: `pending`
-  Commit: `pending`
+  Acceptance: Superseded by .0 historical-data disposition; retain original Scope/digest as inventory only. No physical reading or application verification is claimed for this group; all files and current corpus tests remain.
+  Superseded by: `SUPPORTING-SOURCE-READING.0`
+  Verification: Further manual reading omitted as historical Lispish application data; existing focused corpus smoke remains green and unchanged. This is scope retirement, not completed reading.
+  Commit: `none - superseded without additional reading`
 
 - ID: `SUPPORTING-SOURCE-READING.1.8`
   Status: `pending`
   Goal: Read and understand supporting noncore group 8.
   Scope: `noncore/AmbiTiming.pm` lines 1-214; `noncore/EasyTk.pm` lines 1-788; `noncore/EncounTiming.pm` lines 1-216; `noncore/Global.pm` lines 1-61; `noncore/HDisplay.pm` lines 1-32; `noncore/HLinkSubst.pm` lines 1-152; `noncore/HTML/PathLinks.pm` lines 1-37
   Baseline evidence: 1500 fragments / 44204 bytes; ordered range SHA-256 `40b62d3cefc4bd4f39121ed8fd98919ab71a1b0dc13717cda614f8a4753d80c5`.
-  Dependencies: .1.7 committed with clean handoff.
+  Dependencies: .1.21 authored-spec/EBNF reading and .0 historical-data disposition committed with clean handoff; this begins remaining legacy-code review.
   Acceptance: Read all scoped bytes in complete bounded windows; preserve comprehension, canonical facts, owned findings, source identity, focused proof and clean per-leaf continuity.
   Verification: `pending`
   Commit: `pending`
@@ -228,7 +241,7 @@ from runtime signoff. Existing startup and backend repairs remain open.
   Goal: Read and understand supporting specs group 17.
   Scope: `specs/BNF.spec` lines 1-65; `specs/DT.spec` lines 1-43; `specs/Lispish.spec` lines 1-86; `specs/ds_vhistory.spec` lines 1-95; `specs/ebnf.spec` lines 1-214; `specs/hlink_substitution.spec` lines 1-29; `specs/ifelse.spec` lines 1-30; `specs/lib_reader.spec` lines 1-15; `specs/operators_try.spec` lines 1-47; `specs/portmap.spec` lines 1-33; `specs/pplugin.spec` lines 1-33; `specs/regdef.spec` lines 1-23; `specs/sdce.spec` lines 1-15; `specs/simenv.spec` lines 1-225; `specs/spec.spec` lines 1-146
   Baseline evidence: 1099 fragments / 62580 bytes; ordered range SHA-256 `8248125baaedfc4f2c1ebdfc253610c654da3ca973c28b3ca10aded6872611a3`.
-  Dependencies: .1.16 committed with clean handoff.
+  Dependencies: .0 historical-data disposition committed with clean handoff; prioritize current authored specs before remaining legacy-code reading.
   Acceptance: Read all scoped bytes in complete bounded windows; preserve comprehension, canonical facts, owned findings, source identity, focused proof and clean per-leaf continuity.
   Verification: `pending`
   Commit: `pending`
@@ -240,6 +253,7 @@ from runtime signoff. Existing startup and backend repairs remain open.
   Baseline evidence: 338 fragments / 65500 bytes; ordered range SHA-256 `63dfc52c5cc5e8727600df003f2bdbf1b9cfb9d1de64ca5f32d03fc6b56cdae5`.
   Dependencies: .1.17 committed with clean handoff.
   Acceptance: Read all scoped bytes in complete bounded windows; preserve comprehension, canonical facts, owned findings, source identity, focused proof and clean per-leaf continuity.
+  Director provenance (2026-09-13, recorded by .0): tclite.spec attempted to capture basic Tcl constructs. A separate historical Perl tclite script walked its returned AST and executed basic Tcl files; that script is no longer in this repository. Preserve grammar-versus-interpreter distinction; determine current behavior from current source/tests rather than assuming the old interpreter is shipped.
   Verification: `pending`
   Commit: `pending`
 
@@ -293,9 +307,13 @@ from runtime signoff. Existing startup and backend repairs remain open.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SUPPORTING-SOURCE-READING.0` | `pending` | Director identifies conf inputs as historical; audit current spec/test dependency reachability before further configuration reading. |
+| 1 | `SUPPORTING-SOURCE-READING.1.17` | `pending` | After clean .0, read current authored specs (1099 fragments/62580 bytes); historical conf/TableScript data and tests remain intact without further manual reading. |
 
 ## Decisions
+
+- `2026-09-13` .0 provenance intake: The director explains that old application specs modeled work activities, spec.spec attempted self-description, and tclite.spec returned ASTs executed by a now-absent separate Perl script. The tclite owner SUPPORTING-SOURCE-READING.1.18 retains that history without a current interpreter claim.
+
+- `2026-09-13` .0: Director background identifies .conf, .tk and TableScript .ts as Lispish-era application inputs and clarifies their limited relevance to current LinkedSpec. Current 53-conf/23-TableScript smoke remains useful but does not require further manual application-data reading. Retire .1.2-.1.7, preserve original evidence and every source/test, and prioritize current authored grammar.
 
 - `2026-09-13` director clarification during .1.1: These configurations belong to historical Perl-only handwritten LinkedSpec and no longer apply to FSMGEN; further reading is warranted only where current LinkedSpec specs/tests require them. .0 owns dependency evidence and explicit scope disposition before remaining configuration reading. Existing .1.1 physical evidence remains valid.
 
@@ -303,9 +321,11 @@ from runtime signoff. Existing startup and backend repairs remain open.
 
 ## Blockers
 
-- None for the bounded dependency audit; pause further historical configuration reading until .0 records the applicable scope. Existing failures, repair prerequisites, capacity controls and dependency reuse retain their owners.
+- None for current authored-spec reading. Historical fixture/application behavior stays outside current maintenance scope. Existing failures, repair prerequisites, capacity controls and dependency reuse retain their owners.
 
 ## Verification Log
+
+- `2026-09-13` .0: Supporting .0 records conf and TableScript as historical Lispish application data, retaining their existing narrow parser-corpus use. The exact focused Phase 0 subtest passes six assertions over 53 conf/23 TableScript/7 EBNF inputs; no obsolete application consumer or dependency build runs. Further manual reading of conf and TableScript data is retired under .1.2-.1.7, with no deletion or reading credit; completed .1.1 and the original 158-file/174-range inventory remain exact. Required supporting code is now 77 files/88 ranges/17291 fragments/673899 bytes in 14 pending groups. Next .1.17 reads shipped backend-neutral specs, followed by EBNF and the remaining legacy-code review. Every prior defect owner and later startup obligation remains.
 
 - `2026-09-13` .1.1: Supporting reading .1.1 completes 29 windows/24 configuration ranges: 1500 fragments/61165 bytes, 23 files through EOF and case-analysis lines 1–3 only. Exact baseline/current identity and independent 174-range coverage pass; physical reading is 1/21. Canonical path facts distinguish caller design inputs and historical templates from supported runtime proof. No new defect is demonstrated and every previous repair remains open. The director identifies these configurations as historical and limits further reading to current test/spec dependencies. Next .0 audits that reachability before remaining configuration reading; no dependency compilation or canonical gate is required for this ordinary reading slice.
 
@@ -313,11 +333,15 @@ from runtime signoff. Existing startup and backend repairs remain open.
 
 ## Commit Log
 
+- `2026-09-13` .0: `SUPPORTING-SOURCE-READING.0 - reconcile historical Lispish inputs with current corpus use`; activation 0e3423a19addad30c8f932b1f23fb270e22f1677; next .1.17 authored specs after clean proof and empty brief.
+
 - `2026-09-13` .1.1: `SUPPORTING-SOURCE-READING.1.1 - read legacy configuration data and templates`; activation d806aa674f8b0ae8202b78e3f8b40a1b898ede2a; next .0 dependency audit after clean proof and empty brief.
 
 - `2026-09-13`: Decomposition lands with `SESSION-STARTUP-READING.3.7.0`; current Git identifies its commit.
 
 ## Changelog
+
+- `2026-09-13` .0: Reconcile historical Lispish provenance and current smoke coverage; supersede six further fixture-reading groups and prioritize current grammar, with no source/test change or omitted-byte credit.
 
 - `2026-09-13` .1.1: Read first exact configuration group; preserve historical source, all repair nodes and remaining reading obligations.
 

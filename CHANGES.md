@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-13 — Historical Lispish data and current parser coverage
+
+- Record director background: conf, tk and TableScript ts were Lispish data for obsolete applications; their original Perl AST consumers are no longer in this repository.
+- Preserve current corpus use with the exact focused Phase 0 subtest: six assertions pass over 53 conf/23 TableScript/7 EBNF inputs, without application consumers or dependency compilation.
+- Retire further manual historical-data reading under superseded .1.2-.1.7, retaining every fixture/test and original scope; no omitted byte receives reading credit.
+- SUPPORTING-SOURCE-READING.0 prioritizes current authored specs/EBNF before remaining legacy code: 77 required files/88 ranges/17291 fragments/673899 bytes; all completed evidence and repairs remain.
+
 ## 2026-09-13 — First legacy configuration reading group
 
 - Read 24 exact ranges through 29 complete windows: 1500 fragments/61165 bytes, 23 files through EOF and case-analysis lines1–3 only.

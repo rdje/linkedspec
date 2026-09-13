@@ -8,7 +8,7 @@ answers:
   - how much prior supporting-source reading credit is established
   - does supporting-source reading require rebuilding RGX or PGEN
 date: 2026-09-13
-status: exact inventory and decomposition complete; physical reading 1 of 21 groups
+status: original inventory preserved; one historical group read, six superseded, fourteen required code groups pending
 tags: [startup, reading, supporting, inventory, continuity]
 evidence: "SESSION-STARTUP-READING.3.7.0; clean Lua closeout 735f0337883baef5ac4422976879d09725e0e8ea; baseline baeb984e36a94a15951cd23d4c52def5064cdaca."
 reverify: "Run SUPPORTING_SOURCE_INVENTORY, SUPPORTING_SOURCE_PLAN, then SUPPORTING_SOURCE_TREE below; these identity/range audits grant no additional physical reading credit."
@@ -58,16 +58,23 @@ source change requires an explicit delta audit, not rewriting historical evidenc
 | Ordered inventory path/mode/blob/count/hash records | `0bd5e398ef52c2de0f2389d8931b4543c112f43401842b74306310c80cdb9ec1` |
 | Ordered 21-group plan with 174 ranges | `2a4bd96b87345719946abad085eb7b2b934dcacd063ab421a2447ea036a4903c` |
 
-# Current reading progress — 2026-09-13
+# Current reading disposition — 2026-09-13
 
-`SUPPORTING-SOURCE-READING.1.1` reads the first 1,500 fragments /61,165 bytes
-through 29 complete windows: 23 complete files and case-analysis lines 1–3.
-Configuration comprehension and runtime boundaries are recorded in
-[[legacy-configuration-source-contracts]]. All later reading groups remain pending;
-the initial inventory evidence and recipes below are unchanged. The director
-subsequently identifies conf inputs as historical; `.0` audits current spec/test
-dependencies before any further configuration reading. This scope review grants
-no additional reading credit.
+`SUPPORTING-SOURCE-READING.1.1` retains its completed 1,500 fragments /61,165 bytes
+through 29 windows. The director supplies the historical Lispish provenance of
+conf/.tk/TableScript data and explains its limited current relevance. `.0` retires
+further manual fixture reading while preserving all inputs and the existing
+53-conf/23-TableScript smoke test. `.1.2-.1.7` are superseded without reading credit.
+Required code is now 77 files /88 ranges /17,291 fragments /673,899 bytes in
+fourteen pending groups. Current authored specs and EBNF precede the remaining
+legacy-code review. Exact provenance, reference census, focused corpus result and
+scope replay live in [[legacy-configuration-source-contracts]].
+
+Original inventory/plan recipes remain unchanged. The tree recipe below now
+permits explicit superseded nodes; it preserves all original Scope/digest coverage
+and counts only actually completed reading. The new dependency audit independently
+verifies the six exact omissions and current required groups. Earlier recipe bytes
+remain recoverable from the .1.1 commit; no historical source interval is rewritten.
 
 # Verification and continuity boundaries
 
@@ -223,7 +230,7 @@ for g in plan:
  assert (fragments,size)==(g['fragments'],g['bytes'])
  assert g['range_sha256'] in n and fragments<=1500 and size<=65536
  status=re.search(r'^  Status: `([^`]+)`$',n,re.M)[1]
- assert status in ['pending','active','done'];complete+=status=='done'
+ assert status in ['pending','active','done','superseded'];complete+=status=='done'
 for path,ranges in coverage.items():
  cursor=0
  for lo,hi in sorted(ranges):assert lo==cursor,(path,lo,cursor);cursor=hi
@@ -234,7 +241,7 @@ old=subprocess.check_output(['git','show','735f0337883baef5ac4422976879d09725e0e
 prior_scopes=re.findall(r'^  Scope: (.+)$',old,re.M)
 prior_matches=[line for line in prior_scopes if re.search(r'`(?:conf|tablescript|noncore|specs|ebnf)/',line)]
 assert not prior_matches,prior_matches
-print('PASS independent published-tree/Git-byte coverage: 21 groups,174 ranges,158 complete files; all budgets/digests; completed reading children='+str(complete)+'. No exact prior startup Scope coverage is credited.')
+print('PASS independent published-tree/Git-byte coverage: 21 groups,174 ranges,158 complete files; all budgets/digests; completed historical-or-required reading children='+str(complete)+'. No exact prior startup Scope coverage is credited.')
 SUPPORTING_SOURCE_TREE
 ```
 

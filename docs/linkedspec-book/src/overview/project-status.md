@@ -383,30 +383,29 @@ and avoid unnecessary rebuilds; it does not restrict reading. Full-codebase
 reading, formal book reconciliation and policy review remain incomplete.
 Exact evidence and scope: `docs/knowledge/lua-reading-commit-closeout-audit.md`.
 
-**Supporting-source reading is now explicitly owned:** the next lane contains
-158 unchanged files across configuration, TableScript data, legacy adapters and
-plugins, authored specifications and EBNF grammars. Twenty-one bounded groups
-cover 25,613 line fragments and 964,256 bytes through 174 disjoint ranges. The
-inventory and independent range audit are complete; physical reading is now
-1/21, covering 1,500 line fragments /61,165 bytes and 23 complete configuration
-files. The director identifies these configurations as historical material from
-the handwritten Perl-only era. The next audit checks current spec/test dependencies
-before deciding which remaining configuration inputs warrant reading. Earlier
-isolated probes and source mirrors do not substitute for complete reading of these baseline files. This work requires no RGX/PGEN compilation and
-changes no runtime behavior. Exact ownership and replay:
-`docs/tasks/SUPPORTING-SOURCE-READING.md` and
-`docs/knowledge/supporting-source-reading-coverage.md`.
+**Historical Lispish data and current source reading:** the director explains
+that `conf/*.conf`, `conf/*.tk` and `tablescript/*.ts` were Lispish input for old
+applications whose Perl AST consumers are no longer in this repository. These
+settings are historical data; TableScript `.ts` here is not TypeScript. Current
+LinkedSpec development centers on the backend-neutral `.spec` language and its
+implementations across Perl, Rust, Dart, Julia and Lua.
 
-The first configuration group contains historical application data and templates.
-For example, `conf/network.conf` selects `design.ddc` relative to a caller-chosen
-design root; `conf/postsyn.conf` maps report diagnostics to callbacks and messages;
-`conf/fsmgen.conf` supplies VHDL naming and process templates. `conf/lighttpd.conf`
-is a historical server template with unresolved host/port placeholders. Reading
-these files does not launch their consumers or establish current compatibility.
-Their syntax does not define current LinkedSpec named-argument support. The
-structural path check passes; no new runtime defect is demonstrated by this group.
-Further configuration reading is limited to demonstrated current spec/test needs;
-no historical file is deleted by this scope change. Detailed source interpretation:
+Those files retain narrow parser-smoke value. The exact focused Phase 0 corpus
+subtest passes six assertions over 53 conf, 23 TableScript and seven EBNF inputs.
+For conf/TableScript it checks a nonempty list of advancing Lispish parse results;
+it does not compare application AST contents or require complete file consumption.
+Every fixture and test is retained, without an obsolete application consumer or
+dependency build.
+
+Further manual reading of historical conf/TableScript contents is retired. The
+first completed group remains honestly recorded; six remaining fixture-reading
+groups are superseded and receive no reading credit. The original 158-file /
+174-range inventory is preserved. Required supporting code now comprises 77 files /
+17,291 fragments /673,899 bytes in fourteen groups. Current authored specs and
+EBNF come next, followed by the remaining legacy-code review. No fixture is deleted
+and no parser assertion is weakened by this scope decision.
+Ownership and replay: `docs/tasks/SUPPORTING-SOURCE-READING.md`,
+`docs/knowledge/supporting-source-reading-coverage.md`, and
 `docs/knowledge/legacy-configuration-source-contracts.md`.
 
 **Lua Unicode casing and rule-label verification:** all property tables match the

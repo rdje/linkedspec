@@ -1571,7 +1571,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SUPPORTING-SOURCE-READING.0` | `pending` | Director identifies conf inputs as historical; audit current spec/test dependency reachability before further configuration reading. |
+| 1 | `SUPPORTING-SOURCE-READING.1.17` | `pending` | After clean .0, read current authored specs (1099 fragments/62580 bytes); historical conf/TableScript data and tests remain intact without further manual reading. |
 
 ## Decisions
 
