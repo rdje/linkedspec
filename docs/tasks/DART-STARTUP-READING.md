@@ -1571,7 +1571,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SUPPORTING-SOURCE-READING.1.18` | `pending` | After clean .1.17, read spec.spec147–226 and user_function_definition.spec1–115 (195 fragments/62203 bytes); preserve historical exclusions and all repairs. |
+| 1 | `SUPPORTING-SOURCE-READING.1.19` | `pending` | After clean .1.18, read user_function_definition.spec116–370 (255 fragments/8134 bytes); preserve historical exclusions, five new repair roots and all earlier repairs. |
 
 ## Decisions
 

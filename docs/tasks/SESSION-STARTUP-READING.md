@@ -2275,7 +2275,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Status: `active`
   Goal: Account for all 158 original supporting entries and read the current language/runtime dependencies required by the director’s clarified scope.
   Children: `.3.7.0` completes decomposition; SUPPORTING-SOURCE-READING.1 owns 21 reading groups, .2 new repair intake, .3 independent closeout.
-  Reading owner: `docs/tasks/SUPPORTING-SOURCE-READING.md`; .0/.4 preserve completed historical .1.1 and seventeen superseded groups without credit. .1.17 reads 179 fragments/26444 bytes of the required three grammars; .1.18-.1.19 retain 450 fragments/70337 bytes. Original Scope/digests, all source/tests and repair owners remain; next .1.18.
+  Reading owner: `docs/tasks/SUPPORTING-SOURCE-READING.md`; .0/.4 preserve historical .1.1 and seventeen superseded groups without new credit. .1.17-.1.18 read 374 fragments/88647 bytes of three required grammars; .1.19 retains 255 fragments/8134 bytes. Five confirmed grammar/literal repair roots with seven repair leaves remain pending; all original source/tests and earlier repair owners remain. Next .1.19.
   Acceptance: Account for legacy adapters, plugins, authored grammars, configuration, and non-TypeScript `.ts` data;
     use LinkedSpec probes before investigating a spec's behavior, and do not infer defects from historical syntax alone.
   Verification: `pending`
@@ -4623,7 +4623,7 @@ startup implementation prerequisites and the rgx reading exclusion remain intact
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SUPPORTING-SOURCE-READING.1.18` | `pending` | After clean .1.17, read spec.spec147–226 and user_function_definition.spec1–115 (195 fragments/62203 bytes); preserve historical exclusions and all repairs. |
+| 1 | `SUPPORTING-SOURCE-READING.1.19` | `pending` | After clean .1.18, read user_function_definition.spec116–370 (255 fragments/8134 bytes); preserve historical exclusions, five new repair roots and all earlier repairs. |
 
 ## Reading Ledger
 

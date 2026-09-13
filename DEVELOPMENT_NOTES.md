@@ -10,6 +10,14 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-13 — SUPPORTING-SOURCE-READING.1.18 — self-hosted grammar mechanisms and retained role
+
+The completed self-hosted source audit separates typed production omission, dropped attached block text, optional participating-capture compaction misuse, indentation-dependent earliest-match selection and general Perl string interpolation. Six primary function registration controls succeed, including typed forms; the comparison grammar is not the primary parser. Five grammar/literal roots and seven implementation-and-verification leaves remain open behind startup prerequisites. The director agrees to retain spec.spec as a tested, accurate self-description; authority is a requirement to verify, not an unqualified completeness claim. Exact dated probes and causes are in self-hosted-grammar-ast-drift; no source repair, dependency build or earlier defect closure is claimed.
+
+The first normal commit attempt exposed duplicate task-capacity limits and failed two doctrines. Supporting .2.6 owns the checker/registry drift. Revised task structure keeps implementation and focused verification together in seven bounded repair slices, preserving every criterion while removing nine redundant nodes and retaining both gates.
+
+Verification: exact range/window reconstruction, parser/descriptor/generated-source reproductions, prior source/evidence/repair preservation, Knowledge, memory, both histories, rendered book and registered doctrines. Reproduction success is not repair signoff; no canonical CI.
+
 ## 2026-09-13 — SUPPORTING-SOURCE-READING.1.17 — paragraph and body-text grammar boundaries
 
 The self-hosted prefix owns copied paragraph grouping and ordered token dispatch; rule headers preserve exact label/raw mode/top, regex nodes preserve named versus anonymous shape, and action blocks retain complete string-aware nested text. The plugin grammar returns a name/body-text hash; callbacks belong to the separately loaded legacy adapter. Exact AST/body-text proof and Unicode/mirror verification pass. Existing bootstrap-primary/function-bridge qualifications remain; later grammar bodies are still .1.18-owned. No new defect is demonstrated and every existing repair remains open.

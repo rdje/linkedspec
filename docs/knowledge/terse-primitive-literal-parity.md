@@ -61,3 +61,12 @@ Rust and other runtime behavior were not remeasured by this reading checkpoint.
 - Tree: [[SPEC-FORMAT-TERSE]] leaf `.1.5.2`.
 - Related ground truth: [[terse-literals-calls-separators-access-ground-truth]].
 - Mutation boundary: [[terse-mutation-surface-ground-truth]].
+
+## September 13 string-literal fidelity qualification
+
+A primary Perl double-quoted `"@capture_gaps"` action literal returns empty while
+its single-quoted twin retains the text. Primitive literal lowering passes the
+quoted token into generated Perl unchanged, exposing host interpolation.
+[[self-hosted-grammar-ast-drift]] records exact controls and the affected directive
+AST. `SUPPORTING-SOURCE-READING.2.4` owns general literal repair and verification;
+the string contract and existing boolean repair remain unchanged.

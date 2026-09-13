@@ -108,3 +108,14 @@ print $json->encode({ paragraphs => $actual, plugin_body_text => $bodies,
                       legacy_adapter_loaded => JSON::PP::false }), "\n";
 SUPPORTING_GRAMMAR_AST_PROBE
 ```
+
+# September 13 complete canonical grammar reading qualification
+
+`.1.18` completes the canonical file and finds concrete AST drift. Typed-final
+functions are omitted, bare fluent blocks are dropped, optional captures shift
+fields, indented lifecycle fluents lose reservation, and a directive exposes Perl
+literal interpolation. [[self-hosted-grammar-ast-drift]] owns exact causes and
+reproductions; `SUPPORTING-SOURCE-READING.2.1-.2.5` own verified repair. The director
+agrees to retain this grammar as a tested self-description. Its permanent-owner
+policy remains a requirement; current completeness/equivalence is not established.
+Primary Perl typed functions remain registered through the dedicated grammar.

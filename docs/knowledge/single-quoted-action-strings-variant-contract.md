@@ -22,3 +22,11 @@ double-quoted form remains valid.
 
 Backslash content still belongs to the string/pattern. In a single-quoted pattern, `\s` remains the regex whitespace
 escape across the current Perl, Rust, Dart, and Julia parsers.
+
+## September 13 implementation qualification
+
+The shared scalar-string contract remains. Exact primary Perl probes now show
+`"@capture_gaps"` becoming empty through generated host interpolation while its
+single-quoted twin preserves the literal. [[self-hosted-grammar-ast-drift]] records
+the source/generated mechanism and `SUPPORTING-SOURCE-READING.2.4` repair ownership.
+The earlier pattern fixture does not cover this sigil-bearing case.

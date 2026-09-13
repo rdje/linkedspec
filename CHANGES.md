@@ -10,6 +10,14 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-13 — SUPPORTING-SOURCE-READING.1.18 — self-hosted fidelity audit and five repair roots
+
+Supporting .1.18 completes ten windows/two required ranges: 195 fragments/62203 bytes, finishing spec.spec and reading user_function_definition.spec1–115. Six function comparisons, fourteen edge AST cases, ten mechanism AST cases, three selection comparisons and three literal controls establish five grammar/literal repair roots with seven concrete repair leaves: typed self-description, attached blocks, optional captures, Perl literal fidelity and lifecycle precedence. Primary typed functions remain registered; no repair is closed. Two of three required grammar groups are read (374 fragments/88647 bytes); .1.19 retains 255 fragments/8134 bytes. Historical exclusions, all original sources/tests and earlier repair owners remain intact. Next .1.19 finishes the dedicated function grammar.
+
+The first normal commit attempt exposed duplicate task-capacity limits and failed two doctrines. Supporting .2.6 owns the checker/registry drift. Revised task structure keeps implementation and focused verification together in seven bounded repair slices, preserving every criterion while removing nine redundant nodes and retaining both gates.
+
+Verification: exact range/window reconstruction, parser/descriptor/generated-source reproductions, prior source/evidence/repair preservation, Knowledge, memory, both histories, rendered book and registered doctrines. Reproduction success is not repair signoff; no canonical CI.
+
 ## 2026-09-13 — SUPPORTING-SOURCE-READING.1.17 — required grammar prefix reading
 
 Supporting .1.17 reads seven complete windows/two required ranges: 179 fragments/26444 bytes, completing pplugin.spec and spec.spec lines1–146. The exact AST probe preserves paragraph grouping, named/anonymous regex nodes, indexed action targets, nested braces and a quoted closing brace; the plugin grammar returns body text without loading the legacy adapter. Unicode/mirror verification passes 806 ranges/9 positive/8 negative/2 distinct pairs. One of three current grammar groups is read; 450 fragments/70337 bytes remain in .1.18-.1.19. Historical .1.1, seventeen superseded groups, all original ranges/sources/tests and existing repair owners remain exact. Next .1.18 continues the self-hosted grammar and function-definition prefix.

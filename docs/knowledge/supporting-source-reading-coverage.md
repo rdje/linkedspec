@@ -8,10 +8,10 @@ answers:
   - how much prior supporting-source reading credit is established
   - does supporting-source reading require rebuilding RGX or PGEN
 date: 2026-09-13
-status: original inventory preserved; one historical and one current group read, seventeen superseded, two required groups pending
+status: original inventory preserved; one historical and two current groups read, seventeen superseded, one required group pending
 tags: [startup, reading, supporting, inventory, continuity]
 evidence: "SESSION-STARTUP-READING.3.7.0; clean Lua closeout 735f0337883baef5ac4422976879d09725e0e8ea; baseline baeb984e36a94a15951cd23d4c52def5064cdaca."
-reverify: "Run SUPPORTING_SOURCE_INVENTORY, SUPPORTING_SOURCE_PLAN, SUPPORTING_SOURCE_TREE and SUPPORTING_CURRENT_GROUP17 below; these identity/range audits grant no additional physical reading credit."
+reverify: "Run SUPPORTING_SOURCE_INVENTORY, SUPPORTING_SOURCE_PLAN, SUPPORTING_SOURCE_TREE, SUPPORTING_CURRENT_GROUP17 and SUPPORTING_CURRENT_GROUP18 below; these identity/range audits grant no additional physical reading credit."
 ---
 
 # Exact supporting-source inventory
@@ -158,6 +158,90 @@ scratch.mkdir(parents=True, exist_ok=True)
 (scratch/'audit.json').write_text(json.dumps({'ranges':ranges,'windows':windows},indent=2)+'\n')
 print('PASS exact required range/window reconstruction: seven windows/two ranges/179 fragments/26444 bytes; pplugin EOF and spec.spec1–146 only. Identity verification does not create reading credit.')
 SUPPORTING_CURRENT_GROUP17
+```
+
+# Current grammar group .1.18 — 2026-09-13
+
+Ten complete windows physically cover `specs/spec.spec`147–226 (EOF) and
+`specs/user_function_definition.spec`1–115: 195 fragments/62,203 bytes. Cumulative
+required coverage is 374 fragments/88,647 bytes across two of three groups;
+255 fragments/8,134 bytes remain in `.1.19`. The long Unicode patterns are read
+completely. Historical `.1.1` and seventeen superseded groups remain separate;
+original Scope fields do not create reading credit for omitted applications.
+
+| Window | File | Inclusive lines | Bytes |
+| --- | --- | --- | ---: |
+| 1 | specs/spec.spec | 147–150 | 6,204 |
+| 2 | specs/spec.spec | 151–154 | 6,031 |
+| 3 | specs/spec.spec | 155–158 | 6,048 |
+| 4 | specs/spec.spec | 159–162 | 6,161 |
+| 5 | specs/spec.spec | 163–166 | 5,973 |
+| 6 | specs/spec.spec | 167–167 | 11,763 |
+| 7 | specs/spec.spec | 168–174 | 6,457 |
+| 8 | specs/spec.spec | 175–182 | 6,406 |
+| 9 | specs/spec.spec | 183–226 | 2,615 |
+| 10 | specs/user_function_definition.spec | 1–115 | 4,545 |
+
+Ordered range SHA-256:
+`3cd1f38e22645be4ebff171713b57588cd261e1b2c967c880d5f989cdb1092bb`.
+Ordered window SHA-256:
+`30e95f636941d945b5b532854562a6c158b63e7a3401848a79cec593178f9dce`.
+The following independent reconstruction checks exact baseline bytes and bounds;
+it does not itself establish physical reading.
+
+Comprehension follows complete fluent/block/marker productions and the dedicated
+typed-function prefix, including staged body payload, source/body spans and parse
+job provenance. The dedicated malformed-definition error continues past115 and
+remains `.1.19`-owned. [[self-hosted-grammar-ast-drift]] records six function,
+fourteen edge AST, ten mechanism AST, three selection and three literal controls.
+Five confirmed grammar/literal defects have seven concrete implementation-and-verification leaves under
+`SUPPORTING-SOURCE-READING.2.1-.2.5`; all remain open behind startup prerequisites.
+The primary typed-function registration path remains supported. No native matrix,
+dependency build, canonical CI or repair closure is claimed.
+
+```bash
+bash tools/project_data_run.sh python3 - <<'SUPPORTING_CURRENT_GROUP18'
+from pathlib import Path
+import hashlib, json, re, subprocess
+
+baseline = 'baeb984e36a94a15951cd23d4c52def5064cdaca'
+tree = Path('docs/tasks/SUPPORTING-SOURCE-READING.md').read_text()
+node = re.search(r'^- ID: `SUPPORTING-SOURCE-READING\.1\.18`\n.*?(?=^- ID: |^## |\Z)', tree, re.M | re.S)[0]
+scope = re.search(r'^  Required reading scope: (.+)$', node, re.M)[1]
+found = [(p, int(a), int(b)) for p, a, b in re.findall(r'`([^`]+)` lines (\d+)-(\d+)', scope)]
+assert found == [('specs/spec.spec', 147, 226), ('specs/user_function_definition.spec', 1, 115)]
+ranges, windows = [], []
+for path, first, last in found:
+    raw = Path(path).read_bytes()
+    assert raw == subprocess.check_output(['git', 'show', baseline + ':' + path])
+    lines = raw.splitlines(keepends=True)
+    chunk = b''.join(lines[first-1:last])
+    ranges.append({'path': path, 'start': first, 'end': last,
+                   'bytes': len(chunk), 'sha256': hashlib.sha256(chunk).hexdigest()})
+    start, current = first, []
+    for number in range(first, last+1):
+        line = lines[number-1]
+        if current and sum(map(len,current)) + len(line) > 6500:
+            data = b''.join(current)
+            windows.append({'path': path, 'start': start, 'end': number-1,
+                            'bytes': len(data), 'sha256': hashlib.sha256(data).hexdigest()})
+            start, current = number, []
+        current.append(line)
+    if current:
+        data = b''.join(current)
+        windows.append({'path': path, 'start': start, 'end': last,
+                        'bytes': len(data), 'sha256': hashlib.sha256(data).hexdigest()})
+digest = lambda rows: hashlib.sha256(json.dumps(rows,separators=(',',':')).encode()).hexdigest()
+assert digest(ranges) == '3cd1f38e22645be4ebff171713b57588cd261e1b2c967c880d5f989cdb1092bb'
+assert digest(windows) == '30e95f636941d945b5b532854562a6c158b63e7a3401848a79cec593178f9dce'
+assert len(windows) == 10
+assert sum(r['end']-r['start']+1 for r in ranges) == 195
+assert sum(r['bytes'] for r in ranges) == sum(w['bytes'] for w in windows) == 62203
+scratch = Path('.linkedspec-data/scratch/support118')
+scratch.mkdir(parents=True, exist_ok=True)
+(scratch/'audit.json').write_text(json.dumps({'ranges':ranges,'windows':windows},indent=2)+'\n')
+print('PASS exact required range/window reconstruction: ten windows/two ranges/195 fragments/62203 bytes; spec.spec147–226 EOF and user_function_definition.spec1–115 only. Identity verification does not create reading credit.')
+SUPPORTING_CURRENT_GROUP18
 ```
 
 # Verification and continuity boundaries

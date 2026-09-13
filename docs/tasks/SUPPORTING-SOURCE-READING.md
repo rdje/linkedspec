@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `SUPPORTING-SOURCE-READING`
-- Status: `active` / one historical and one current grammar group complete; seventeen groups superseded; two required groups pending
+- Status: `active` / one historical and two current grammar groups complete; seventeen groups superseded; one required group pending
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.7`
 - Created: `2026-09-13`
 - Last updated: `2026-09-13`
@@ -61,7 +61,7 @@ from runtime signoff. Existing startup and backend repairs remain open.
   Dependencies: Startup .3.7.0 decomposition committed; clean activation for every child.
   Children: `.1.1-.1.21`
   Acceptance: Each required child records exact Required reading scope coverage, comprehension, Knowledge reconciliation, owned findings, focused proof and clean commit. Seventeen superseded groups and excluded intervals of mixed groups receive no reading credit; original Scope/digests remain exact.
-  Verification: Current required reading: .1.17 complete (179 fragments/26444 bytes); .1.18-.1.19 pending (450 fragments/70337 bytes). Completed historical .1.1 and seventeen explicit omissions remain distinct; all original Scope/digests and repair owners remain.
+  Verification: Current required reading: .1.17-.1.18 complete (374 fragments/88647 bytes); .1.19 pending (255 fragments/8134 bytes). Five new repair roots remain open. Completed historical .1.1, seventeen explicit omissions, all original Scope/digests and earlier repair owners remain.
   Commit: `pending`
 
 - ID: `SUPPORTING-SOURCE-READING.1.1`
@@ -265,7 +265,11 @@ from runtime signoff. Existing startup and backend repairs remain open.
   Commit: `SUPPORTING-SOURCE-READING.1.17 - read current grammar paragraph and plugin body parsing`
 
 - ID: `SUPPORTING-SOURCE-READING.1.18`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `cf36237dccb500dc8a39c21786c484f0a9ee679b`.
+  Verification tier: `focused`
+  Focused checks: Complete required-range/window reading and source identity; canonical self-hosted/function/lifecycle reconciliation and focused AST probes; prior evidence/source/repair preservation, memory, Knowledge, both histories, rendered book and normal doctrines.
+  Canonical trigger: Ordinary source-reading and comprehension evidence only; no implementation, dependency, test, gate or milestone change.
   Goal: Read and understand supporting specs group 18.
   Scope: `specs/spec.spec` lines 147-226; `specs/tablegrep.spec` lines 1-86; `specs/tclite.spec` lines 1-35; `specs/tkgui.spec` lines 1-22; `specs/user_function_definition.spec` lines 1-115
   Baseline evidence: 338 fragments / 65500 bytes; ordered range SHA-256 `63dfc52c5cc5e8727600df003f2bdbf1b9cfb9d1de64ca5f32d03fc6b56cdae5`.
@@ -275,8 +279,11 @@ from runtime signoff. Existing startup and backend repairs remain open.
   Dependencies: .1.17 committed with clean handoff.
   Acceptance: Read every Required reading scope byte in complete bounded windows; preserve comprehension, canonical facts, owned findings, source identity, focused proof and clean per-leaf continuity. Original Scope is inventory, not an assertion of omitted-byte reading.
   Director provenance (2026-09-13, recorded by .0): tclite.spec attempted to capture basic Tcl constructs. A separate historical Perl tclite script walked its returned AST and executed basic Tcl files; that script is no longer in this repository. Preserve grammar-versus-interpreter distinction; determine current behavior from current source/tests rather than assuming the old interpreter is shipped.
-  Verification: `pending`
-  Commit: `pending`
+  Comprehension: Explicit fluent forms retain raw text; block forms preserve string-aware nested code; bare fluent attached text and optional capture fields expose precise grammar gaps. Lifecycle and bare-edge selection follows earliest source start, explaining indentation drift. Fixed/variadic self-definition productions omit typed-final forms; the dedicated prefix constructs typed signatures and staged body provenance with body/source spans, pending parse job ordinal and replace-field/body_ast policy. Its malformed-definition construction continues past115 under .1.19. Split markers preserve text/name; directive literal exposes general Perl quote interpolation.
+  Verification: Supporting .1.18 completes ten windows/two required ranges: 195 fragments/62203 bytes, finishing spec.spec and reading user_function_definition.spec1–115. Six function comparisons, fourteen edge AST cases, ten mechanism AST cases, three selection comparisons and three literal controls establish five grammar/literal repair roots with seven concrete repair leaves: typed self-description, attached blocks, optional captures, Perl literal fidelity and lifecycle precedence. Primary typed functions remain registered; no repair is closed. Two of three required grammar groups are read (374 fragments/88647 bytes); .1.19 retains 255 fragments/8134 bytes. Historical exclusions, all original sources/tests and earlier repair owners remain intact. Next .1.19 finishes the dedicated function grammar. Ordered range SHA-256 3cd1f38e22645be4ebff171713b57588cd261e1b2c967c880d5f989cdb1092bb; ordered window SHA-256 30e95f636941d945b5b532854562a6c158b63e7a3401848a79cec593178f9dce. Exact replay: supporting-source-reading-coverage and self-hosted-grammar-ast-drift knowledge cards. Reproduction success is not repair signoff; no dependency compilation or canonical CI.
+  Candidate proof: Exact independent required range/window and current three-grammar scope audits pass; all ten windows were physically consumed. All 36 dated comparison/control cases exit0, confirming observations rather than repairs. Preserve 2477 prior files byte-exact and earlier evidence in six updated cards; 2614/2618 prior task nodes remain exact, four current owner/reading nodes change, nine new nodes own five grammar/literal repairs and one checker defect. All earlier 92 book limitation headings remain and two qualified limitations are added. Six published replay bodies match executed scratch exactly. Knowledge is 1143 facts/9121 keys; memory is 60 lines; histories pass at 409/39608 and 339/38718 lines/bytes. Rendered limitations/remaining coverage pass; normal doctrine hooks govern focused landing.
+  Initial landing failure: Normal hooks rejected the initial task decomposition at the checker's obsolete 88000-line cap; seven doctrines passed and two failed. .2.6 owns the registry/checker disagreement. Revised decomposition keeps implementation and focused verification in each bounded repair leaf, retaining all seven concrete repairs and acceptance criteria while removing nine redundant nodes. Both existing gates and all source/history bytes remain unchanged; fresh normal hook proof is required.
+  Commit: `SUPPORTING-SOURCE-READING.1.18 - audit self-hosted grammar fidelity and own five repairs`
 
 - ID: `SUPPORTING-SOURCE-READING.1.19`
   Status: `pending`
@@ -318,7 +325,93 @@ from runtime signoff. Existing startup and backend repairs remain open.
   Goal: Own every newly established supporting-source defect or documentation gap through repair and verification.
   Dependencies: Each finding has exact source/tool evidence; implementation retains startup .3/.4/.5 prerequisites.
   Acceptance: Reconcile existing repair owners first; add bounded actionable nodes before new diagnostic or repair changes. Reading and logging never close a defect.
+  Children: `.2.1`, `.2.2`, `.2.3`, `.2.4`, `.2.5`, `.2.6`
+  Verification: .1.18 establishes five grammar/literal repair roots comprising seven implementation-and-verification leaves; .2.6 separately owns checker drift; exact reproductions and causes are in docs/knowledge/self-hosted-grammar-ast-drift.md. All repairs remain pending.
+  Commit: `pending`
+
+- ID: `SUPPORTING-SOURCE-READING.2.1`
+  Status: `pending`
+  Goal: Preserve accepted typed final-codeblock definitions in the canonical self-hosted AST.
+  Intake owner: `.1.18` complete source reading and bounded LinkedSpec descriptor/parser/generated-source probes.
+  Confirmed evidence: spec.spec dispatch/function productions195–215 omit a typed form; dedicated user_function_definition.spec22–107 recognizes it. Six controls register one primary Perl function each; typed-final and typed-only each produce no self-hosted function node. Fixed/variadic controls remain recognized.
+  Dependencies: .1.18 owns diagnosis/intake; implementation retains SESSION-STARTUP-READING .3/.4/.5 prerequisites. Preserve existing unrelated repair owners.
+  Acceptance: Use the accepted signature/declaration contract and staged-body provenance; preserve fixed, variadic and malformed-definition behavior. Do not add a second hardcoded permanent grammar owner. Assert typed-only/fixed-plus-typed AST signature and body fidelity, primary registration and governed consumers; include omission-sensitive recurrence. Run applicable milestone proof without gratuitous unchanged dependency builds. Focused changed-surface/direct-dependent checks govern ordinary repairs; designated verification and push boundaries follow ADR 0073.
+  Verification: Confirmed open; exact dated replay and source mechanism in docs/knowledge/self-hosted-grammar-ast-drift.md.
+  Commit: `pending`
+
+- ID: `SUPPORTING-SOURCE-READING.2.2`
+  Status: `pending`
+  Goal: Preserve optional attached blocks in self-hosted bare fluent edges.
+  Intake owner: `.1.18` complete source reading and bounded LinkedSpec descriptor/parser/generated-source probes.
+  Confirmed evidence: spec.spec171 captures blkBEF but172 returns no body/raw field. Two indexed bare fluent inputs differing in attached return text produce identical ASTs. Explicit action/blind fluents preserve raw text and grouped bare blocks preserve code.
+  Dependencies: .1.18 owns diagnosis/intake; implementation retains SESSION-STARTUP-READING .3/.4/.5 prerequisites. Preserve existing unrelated repair owners.
+  Acceptance: Preserve complete string-aware nested block text and existing target/chain semantics; consume the established canonical AST contract rather than silently dropping syntax. Compare at least two different bodies and absent-body, explicit fluent and grouped-block controls; cover indexed/unindexed forms jointly with .2.3 and update public examples. Focused changed-surface/direct-dependent checks govern ordinary repairs; designated verification and push boundaries follow ADR 0073.
+  Verification: Confirmed open; exact dated replay and source mechanism in docs/knowledge/self-hosted-grammar-ast-drift.md.
+  Commit: `pending`
+
+- ID: `SUPPORTING-SOURCE-READING.2.3`
+  Status: `pending`
+  Goal: Repair optional-capture assumptions in canonical self-hosted AST fields.
+  Intake owner: `.1.18` complete source reading and bounded LinkedSpec descriptor/parser/generated-source probes.
+  Confirmed evidence: Numbered captures intentionally compact nonparticipating groups. Generated bare_edge_fluent/fixed/variadic handlers use fixed indexes after optional groups: Child.with() shifts chain into index, fn zero() shifts body into params, fn rest(...args) shifts rest/body and invents one fixed parameter. Indexed/fixed-prefix controls and all six primary registration controls succeed.
+  Dependencies: .1.18 owns diagnosis/intake; implementation retains SESSION-STARTUP-READING .3/.4/.5 prerequisites. Preserve existing unrelated repair owners.
+  Acceptance: Each of the three production repairs commits with exact AST and direct-consumer recurrence, including primary function registration where relevant. Preserve participating-empty versus absent captures and update the book in each slice; no runtime capture semantic change. Reproducing a defect does not close it.
+  Children: `.2.3.1`, `.2.3.2`, `.2.3.3`
+  Verification: Confirmed open; exact dated replay and source mechanism in docs/knowledge/self-hosted-grammar-ast-drift.md.
+  Commit: `pending`
+
+- ID: `SUPPORTING-SOURCE-READING.2.3.1`
+  Status: `pending`
+  Goal: Make bare fluent target/index/chain capture access participation-safe.
+  Dependencies: Startup .3/.4/.5 complete; preceding sibling repairs committed with clean handoff where applicable.
+  Acceptance: Preserve the admitted zero-based participating-capture runtime contract. Assert exact fields with and without numeric/named indexes and chained calls; keep .2.2 block text. Add exact repaired AST and direct-consumer recurrence, relevant primary registration controls and public reconciliation in this same slice. Focused changed-surface/direct-dependent checks govern ordinary repairs; designated verification and push boundaries follow ADR 0073.
   Verification: `pending`
+  Commit: `pending`
+
+- ID: `SUPPORTING-SOURCE-READING.2.3.2`
+  Status: `pending`
+  Goal: Make fixed zero-argument function capture access participation-safe.
+  Dependencies: Startup .3/.4/.5 complete; preceding sibling repairs committed with clean handoff where applicable.
+  Acceptance: Preserve fn zero() name, empty parameters and full body along with nonempty fixed-parameter controls; update governed mirrors. Add exact repaired AST and direct-consumer recurrence, relevant primary registration controls and public reconciliation in this same slice. Focused changed-surface/direct-dependent checks govern ordinary repairs; designated verification and push boundaries follow ADR 0073.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SUPPORTING-SOURCE-READING.2.3.3`
+  Status: `pending`
+  Goal: Make rest-only variadic function capture access participation-safe.
+  Dependencies: Startup .3/.4/.5 complete; preceding sibling repairs committed with clean handoff where applicable.
+  Acceptance: Preserve empty fixed prefix, rest name, minimum arity zero and complete body, with fixed-prefix variadic controls; update governed mirrors. Add exact repaired AST and direct-consumer recurrence, relevant primary registration controls and public reconciliation in this same slice. Focused changed-surface/direct-dependent checks govern ordinary repairs; designated verification and push boundaries follow ADR 0073.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SUPPORTING-SOURCE-READING.2.4`
+  Status: `pending`
+  Goal: Repair Perl string-literal fidelity exposed by the self-hosted capture_gaps directive.
+  Intake owner: `.1.18` complete source reading and bounded LinkedSpec descriptor/parser/generated-source probes.
+  Confirmed evidence: The directive node has an empty directive value. ValueExpr::_lower_primitive_literal_expr passes quoted text through; generated Perl contains return "@capture_gaps" and interpolates it. Primary double-quoted literal control returns empty; single-quoted control preserves @capture_gaps and ordinary double-quoted text remains intact. This extends beyond grammar metadata; no gap-runtime execution failure is claimed.
+  Dependencies: .1.18 owns diagnosis/intake; implementation retains SESSION-STARTUP-READING .3/.4/.5 prerequisites. Preserve existing unrelated repair owners.
+  Acceptance: Use the backend-neutral string contract; preserve sigils, quotes, backslashes and supported escapes through the responsible literal/aggregate lowering surfaces. Do not close the general defect by changing only one grammar quote. Add exact returned-value and AST recurrence for both quote styles, sigils and escape controls; test affected self-hosted directive and applicable runtime/generated paths, compare the neutral contract, and reconcile public limitations. Focused changed-surface/direct-dependent checks govern ordinary repairs; designated verification and push boundaries follow ADR 0073.
+  Verification: Confirmed open; exact dated replay and source mechanism in docs/knowledge/self-hosted-grammar-ast-drift.md.
+  Commit: `pending`
+
+- ID: `SUPPORTING-SOURCE-READING.2.5`
+  Status: `pending`
+  Goal: Reserve lifecycle fluents at indented physical member boundaries.
+  Intake owner: `.1.18` complete source reading and bounded LinkedSpec descriptor/parser/generated-source probes.
+  Confirmed evidence: LinkedRE::or and compiled descriptor candidates prove unindented I.return has equal start7 and lifecycle wins authored order. Space/tab variants give lifecycle start8 versus bare-edge start7, so bare wins earliest-start selection. lifecycle_fluent187 lacks the indentation-consuming line prefix of bare_edge_fluent171. Explicit/standalone brace controls succeed.
+  Dependencies: .1.18 owns diagnosis/intake; implementation retains SESSION-STARTUP-READING .3/.4/.5 prerequisites. Preserve existing unrelated repair owners.
+  Acceptance: Repair the canonical grammar and governed mirrors while retaining normal earliest-start/authored-order choice semantics; include all reserved lifecycle markers, supported indentation, fluent spacing and genuine bare-edge labels. Assert exact marker/chain/body identity for unindented, space and tab cases; cover multiline/nested/string controls and neighboring bare members, then run applicable grammar-consumer proof and reconcile the book. Focused changed-surface/direct-dependent checks govern ordinary repairs; designated verification and push boundaries follow ADR 0073.
+  Verification: Confirmed open; exact dated replay and source mechanism in docs/knowledge/self-hosted-grammar-ast-drift.md.
+  Commit: `pending`
+
+- ID: `SUPPORTING-SOURCE-READING.2.6`
+  Status: `pending`
+  Goal: Reconcile the task partition checker with the canonical approved task-evidence capacity and prevent silent duplicate-limit drift.
+  Intake owner: .1.18 commit verification; normal hooks reject the complete candidate before any commit lands.
+  Evidence: scripts/check_task_tree_partitions.pl hardcodes 88000 lines/9437184 bytes; doctrine/readme_stability/routes.jsonl and ADR0118 record 92000 lines/10485760 bytes. The self-tests repeat the old constants, so they pass while the collection rejects. TASK-TREE-METADATA and README-STABILITY fail; seven other doctrines pass. No hook bypass or source repair is performed.
+  Dependencies: Current .1.18 remains uncommitted and owns bounded read-only diagnosis/proposal; no task-tree pivot. Prior ADR0118 before-reading/focused exception explicitly covered .14 and eleven registry scalars only, not this checker correction. Retain those prerequisites; no immediate exception is requested. Consolidating implementation and focused verification into the same bounded repair leaf removes redundant task scaffolding while preserving every criterion and allows .1.18 to remain within both current controls.
+  Acceptance: Keep every approved ceiling and source/history record; align duplicate enforcement and add registry-agreement recurrence, inclusive/overflow controls and all normal doctrine proof. Exact checker/registry reproduction lives in docs/knowledge/task-partition-capacity-registry-drift.md. No new limit increase or dependency rebuild is proposed.
+  Verification: Confirmed duplicate-limit defect; ordinary reading closeout retains both gates and the approved registry limits. Repair follows startup prerequisites.
   Commit: `pending`
 
 - ID: `SUPPORTING-SOURCE-READING.3`
@@ -348,9 +441,11 @@ from runtime signoff. Existing startup and backend repairs remain open.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SUPPORTING-SOURCE-READING.1.18` | `pending` | After clean .1.17, read spec.spec147–226 and user_function_definition.spec1–115 (195 fragments/62203 bytes); preserve historical exclusions and all repairs. |
+| 1 | `SUPPORTING-SOURCE-READING.1.19` | `pending` | After clean .1.18, read user_function_definition.spec116–370 (255 fragments/8134 bytes); preserve historical exclusions, five new repair roots and all earlier repairs. |
 
 ## Decisions
+
+- `2026-09-13` director asks whether spec.spec remains relevant: current source still loads it as a comparison parser and maintains canonical fixtures. Retain its self-description/grammar-evolution role under existing ADR0012; the primary Perl bootstrap plus dedicated function grammar remain distinct. The engineer recommends verified coverage and repairs for measured drift rather than treating policy alone as completeness proof. No removal, primary-parser migration or activity pivot is requested. The director replies “ok”, accepting this retained, verified self-description role.
 
 - `2026-09-13` .4: The director explains the historical spec/optional Lispish configuration/separate Perl AST-consumer flow and explicitly prioritizes current LinkedSpec. Retain current grammar dependencies, fixtures/tests and all repairs; omit irrelevant manual historical reading. No legacy application restoration is authorized or required.
 
@@ -368,6 +463,8 @@ from runtime signoff. Existing startup and backend repairs remain open.
 
 ## Verification Log
 
+- `2026-09-13` .1.18: Supporting .1.18 completes ten windows/two required ranges: 195 fragments/62203 bytes, finishing spec.spec and reading user_function_definition.spec1–115. Six function comparisons, fourteen edge AST cases, ten mechanism AST cases, three selection comparisons and three literal controls establish five grammar/literal repair roots with seven concrete repair leaves: typed self-description, attached blocks, optional captures, Perl literal fidelity and lifecycle precedence. Primary typed functions remain registered; no repair is closed. Two of three required grammar groups are read (374 fragments/88647 bytes); .1.19 retains 255 fragments/8134 bytes. Historical exclusions, all original sources/tests and earlier repair owners remain intact. Next .1.19 finishes the dedicated function grammar.
+
 - `2026-09-13` .1.17: Supporting .1.17 reads seven complete windows/two required ranges: 179 fragments/26444 bytes, completing pplugin.spec and spec.spec lines1–146. The exact AST probe preserves paragraph grouping, named/anonymous regex nodes, indexed action targets, nested braces and a quoted closing brace; the plugin grammar returns body text without loading the legacy adapter. Unicode/mirror verification passes 806 ranges/9 positive/8 negative/2 distinct pairs. One of three current grammar groups is read; 450 fragments/70337 bytes remain in .1.18-.1.19. Historical .1.1, seventeen superseded groups, all original ranges/sources/tests and existing repair owners remain exact. Next .1.18 continues the self-hosted grammar and function-definition prefix.
 
 - `2026-09-13` .4: Supporting .4 applies the director’s current-project boundary to historical spec/config/Perl application bundles. Three grammar inputs retain current language or compatibility roles: spec.spec, user_function_definition.spec and pplugin.spec. Their descriptors compile with no blocked or compatibility rules and no legacy adapter load. Required reading is three groups/five ranges/629 fragments/96781 bytes; seventeen original groups are superseded without reading credit, and completed historical .1.1 remains exact. All 158 files, regression fixtures, original ranges and repair owners remain. Next .1.17 reads only its two required grammar ranges; no dependency build or canonical CI is claimed.
@@ -380,6 +477,8 @@ from runtime signoff. Existing startup and backend repairs remain open.
 
 ## Commit Log
 
+- `2026-09-13` .1.18: `SUPPORTING-SOURCE-READING.1.18 - audit self-hosted grammar fidelity and own five repairs`; activation cf36237dccb500dc8a39c21786c484f0a9ee679b; next .1.19 after focused proof, empty brief and clean handoff.
+
 - `2026-09-13` .1.17: `SUPPORTING-SOURCE-READING.1.17 - read current grammar paragraph and plugin body parsing`; activation 4f2508fd5695231cbae98ebef27c8223170a4149; next .1.18 after focused proof, empty brief and clean handoff.
 
 - `2026-09-13` .4: `SUPPORTING-SOURCE-READING.4 - focus supporting reading on current grammar dependencies`; activation 5faaf61b9a5c56f18a01dde2c655f176b2828d19; next .1.17 required grammar ranges after all focused checks, clean handoff and empty brief.
@@ -391,6 +490,8 @@ from runtime signoff. Existing startup and backend repairs remain open.
 - `2026-09-13`: Decomposition lands with `SESSION-STARTUP-READING.3.7.0`; current Git identifies its commit.
 
 ## Changelog
+
+- `2026-09-13` .1.18: Complete self-hosted grammar reading, root-cause five fidelity defects and own seven concrete implementation-and-verification leaves; retain source, historical evidence and every earlier repair.
 
 - `2026-09-13` .1.17: Read the first required current grammar group; retain exact original inventory, historical exclusions and all defects.
 

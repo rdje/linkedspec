@@ -317,3 +317,11 @@ die "authorization count $authorizations" unless $authorizations==54;
 print "PASS $thresholds actual threshold and $authorizations actual authorization executions; detached inputs only.\n";
 ```
 
+
+# September 13 enforcement qualification
+
+[[task-partition-capacity-registry-drift]] proves that the partition checker
+retained its older aggregate task limits while this admission changed only the
+registry. The routing-function threshold proof above does not establish agreement
+of that second guard. `SUPPORTING-SOURCE-READING.2.6` owns correction; the original
+approval, evidence and scoped verification exception remain unchanged.

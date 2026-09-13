@@ -1,11 +1,11 @@
 # MEMORY
 
-- activation_commit: `4f2508fd5695231cbae98ebef27c8223170a4149` — clean first required current grammar reading activation.
-- latest_completed_leaf: `SUPPORTING-SOURCE-READING.1.17 - read current grammar paragraph and plugin body parsing`; exact AST/body-text probe and Unicode/mirror check pass; all source and repair owners retained.
-- active_work_unit: `SUPPORTING-SOURCE-READING.1.18` — remaining self-hosted grammar and function-definition prefix.
-- next_action: Read SUPPORTING-SOURCE-READING.1.18 Required reading scope: spec.spec lines147–226 and user_function_definition.spec lines1–115, 195 fragments/62203 bytes. Retrieve canonical facts, read complete bounded windows including long Unicode patterns, reconcile findings and commit focused evidence before .1.19.
+- activation_commit: `cf36237dccb500dc8a39c21786c484f0a9ee679b` — clean second required current grammar reading activation.
+- latest_completed_leaf: `SUPPORTING-SOURCE-READING.1.18 - audit self-hosted grammar fidelity and own five repairs`; exact dated reproductions establish five open repair roots, not repair closure; source and earlier evidence retained.
+- active_work_unit: `SUPPORTING-SOURCE-READING.1.19` — dedicated function-definition grammar suffix.
+- next_action: Read SUPPORTING-SOURCE-READING.1.19 Required reading scope: user_function_definition.spec116–370, 255 fragments/8134 bytes. Retrieve relevant canonical facts, read every remaining window, reconcile dedicated function/body/error behavior and commit focused evidence before the supporting closeout. Preserve the five new open repair roots and startup implementation prerequisites.
   Named-argument direction PARSER-AUTHORING-APIS.4 is approved and parked; other authoring proposals and approved formats stay parked.
-- in_flight_uncommitted: none; supporting .1.17 reading, focused proof, book and continuity are committed at current Git HEAD; no background result remains.
+- in_flight_uncommitted: none; supporting .1.18 reading, root causes, repair ownership, focused proof and book continuity are committed at current Git HEAD; no background result remains.
 - blockers: none for current authored-spec reading. Existing evidence controls remain; measure each candidate. Keep all known failures and repair prerequisites; dependency reuse is not a reading restriction.
 - current_rust_warning_debt: Repeated carriers report 1,870 pgen plus 26 rgx-core output warnings; RUST-DEPENDENCY-WARNING-ZERO.1-.7 own causal repair/pins/enforcement without suppression after Lua intake.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
@@ -57,4 +57,4 @@
   Lua .1.36 rollover preserves the exact clean-HEAD suffix as segment4977-65e8f007697e; earlier archive bytes and other history controls remain unchanged. Proportionate governance: ADR0115.
 - current_ci_build_reuse: Director requires PGEN/RGX builds once after submodule updates, then reuse for LinkedSpec-only CI; startup .80.1-.4 own implementation.
   Initial/update preparation, zero dependency compilation in ordinary CI and explicit missing-artifact handling remain pending; startup prerequisites remain.
-- latest_bootstrap_read: 2026-09-13 — roadmap Yes / full codebase No / physical mdBook Yes; all five backend reading lanes closed. Supporting .1.17 completes 1/3 current grammar groups (179 fragments/26444 bytes); 450 fragments/70337 bytes remain. Historical .1.1 and seventeen omissions retained; .3.8-.3.11, formal book .4 and policy .5 remain.
+- latest_bootstrap_read: 2026-09-13 — roadmap Yes / full codebase No / physical mdBook Yes; all five backend reading lanes closed. Supporting current coverage 2/3 groups (374 fragments/88647 bytes); .1.19 retains 255 fragments/8134 bytes. Five new repair roots remain pending. Historical exclusions, .3.8-.3.11, formal book .4 and policy .5 remain.

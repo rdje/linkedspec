@@ -419,6 +419,39 @@ its indexed target and complete action text: the quoted brace does not end the
 block, and the inner block stays balanced. A focused parser probe verifies these
 exact AST values. Parsing that action text does not execute it.
 
+**Known self-hosted grammar fidelity gaps (September 13):** `spec.spec` remains
+useful as a tested self-description and comparison parser. Current probes show
+that its AST is incomplete for accepted typed function definitions and loses or
+misclassifies some fields. The primary Perl parser still registers both
+`fn probe(value, body: codeblock) { return(value) }` and
+`fn probe(body: codeblock) { return(1) }`; the self-hosted comparison omits them.
+
+| Self-hosted input | Current limitation | Repair owner |
+| --- | --- | --- |
+| `Child[1].with() { return("a") }` | Changing the attached body to `"b"` leaves the same AST; the body is lost. | Supporting `.2.2` |
+| `Child.with()` | The chain is put in the index field. | Supporting `.2.3` |
+| `fn zero() { return(1) }` | Body text shifts into the parameter field. | Supporting `.2.3` |
+| `fn rest(...args) { return(1) }` | Rest name/body and minimum arity are wrong. | Supporting `.2.3` |
+| An indented `I.return("a")` | Classified as a bare edge rather than lifecycle `I`. | Supporting `.2.5` |
+
+Typed-definition coverage belongs to supporting `.2.1`. Optional capture groups
+explain the shifted fields: absent groups are omitted from numbered capture
+results, so the grammar must account for that established behavior. Indentation
+explains the lifecycle selection: the bare pattern starts earlier. Explicit
+fluent edges retain raw action text, and explicit/standalone brace lifecycle
+controls remain correct. These observations concern the comparison AST; they do
+not establish equivalent primary execution failures. Each repair has concrete
+implementation and verification tasks and remains open.
+
+**Known Perl string-literal fidelity gap (September 13):** a primary action
+returning `"@capture_gaps"` currently returns an empty string; returning the
+single-quoted `'@capture_gaps'` preserves its text. Generated Perl interpolates
+the double-quoted token. This also empties the self-hosted directive node's
+`directive` value. Both quote styles remain scalar-string language syntax;
+supporting `.2.4` owns the general literal repair and directive verification.
+This probe does not show a failure of gap capture execution. Exact causes and
+dated controls are retained in the self-hosted grammar AST drift knowledge card.
+
 The retained plugin grammar similarly returns `foo { 1 + 2 }` as the mapping
 `foo` to the body string ` 1 + 2 `. Legacy callback construction belongs to the
 separate Perl adapter; this probe leaves that adapter unloaded.
@@ -432,10 +465,14 @@ retaining them does not claim that frontend is implemented.
 
 Further manual historical application reading is omitted. The current required
 supporting grammar scope is three files/five ranges/629 fragments/96,781 bytes.
-The first current group is read (179 fragments/26,444 bytes), with 450 fragments/
-70,337 bytes remaining in the self-hosted suffix and function-definition grammar.
+Two current groups are read (374 fragments/88,647 bytes), completing the plugin
+and self-hosted grammars. The dedicated function-definition suffix still has
+255 fragments/8,134 bytes to read.
 Seventeen original groups are superseded without reading credit; completed
 historical reading and the original 158-file/174-range inventory remain exact.
+The audit also found conflicting task-document size limits in two checks. The
+reading commit keeps its repair tasks within both controls; supporting `.2.6`
+owns alignment of the checker with the approved registry and a recurrence check.
 No fixture or regression assertion is removed. Current dependency evidence and
 replay: `docs/knowledge/current-supporting-grammar-dependencies.md`;
 historical corpus proof: `docs/knowledge/legacy-configuration-source-contracts.md`.
