@@ -5,19 +5,21 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Perl, Rust, Dart and Julia reading are complete. Canonical capacity admission is complete at a67a18bf. Supporting .2.6 applies the exact director-approved task checker correction under ADR0120: existing aggregate ceilings92,000 lines/10,485,760 bytes and all three member/file limits now agree with the real registry on every run. Original source produces four agreement errors; applied source passes syntax,37 self-tests,50 detached registry cases and actual partition validation. Registry limits and runtime sources remain unchanged. Six grammar/literal repair roots remain open. Required supporting reading and its independent audit are complete; authorized focused parent closeout follows separately, then startup .3.8. Dart reading is 55/55 children, 80,297 fragments / 2,471,305 bytes. Dart .7 is approved: containment .11 / ADR0113 implement the exact engineering-history counts with fresh source/history and 22-boundary proof; the director granted a one-time focused/receipt exception on September 11, closing the capacity boundary at ad64f76f before .1.47. The director requires build-on-update PGEN/RGX reuse under .80. Remaining reading and repairs stay open.
+  findings, and donor-policy comparisons. Perl, Rust, Dart and Julia reading are complete. Canonical capacity admission is complete at a67a18bf. Supporting reading .1 and startup .3.7 close under ADR0120 after the exact checker correction at1d6e8fe51. Independent reconstruction preserves all158 original sources/174 ranges: required reading629 fragments/96,781 bytes, historical reading1,500/61,165 and explicit omissions23,484/806,310. Three reading commits/five required ranges/nineteen windows retain exact source, activation and node evidence. Six grammar/literal repair roots/nine pending nodes remain unchanged; only the checker defect is repaired. Current registry limits remain fixed. PNT continues at startup .3.8 for the160 conformance/test/Unicode entries; later source reading, formal book/policy prerequisites and canonical boundaries remain. Dart reading is 55/55 children, 80,297 fragments / 2,471,305 bytes. Dart .7 is approved: containment .11 / ADR0113 implement the exact engineering-history counts with fresh source/history and 22-boundary proof; the director granted a one-time focused/receipt exception on September 11, closing the capacity boundary at ad64f76f before .1.47. The director requires build-on-update PGEN/RGX reuse under .80. Remaining reading and repairs stay open.
 - Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.82` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `SUPPORTING-SOURCE-READING.2.6 - align task checker with approved registry and prevent limit drift` — Supporting .2.6 applies the exact director-approved task checker correction under ADR0120: existing aggregate ceilings92,000 lines/10,485,760 bytes and all three member/file limits now agree with the real registry on every run. Original source produces four agreement errors; applied source passes syntax,37 self-tests,50 detached registry cases and actual partition validation. Registry limits and runtime sources remain unchanged. Six grammar/literal repair roots remain open. Required supporting reading and its independent audit are complete; authorized focused parent closeout follows separately, then startup .3.8.
+- `SUPPORTING-SOURCE-READING.1 - close audited supporting reading under explicit focused grant` — Supporting reading .1 and startup .3.7 close under ADR0120 after the exact checker correction at1d6e8fe51. Independent reconstruction preserves all158 original sources/174 ranges: required reading629 fragments/96,781 bytes, historical reading1,500/61,165 and explicit omissions23,484/806,310. Three reading commits/five required ranges/nineteen windows retain exact source, activation and node evidence. Six grammar/literal repair roots/nine pending nodes remain unchanged; only the checker defect is repaired. Current registry limits remain fixed. PNT continues at startup .3.8 for the160 conformance/test/Unicode entries; later source reading, formal book/policy prerequisites and canonical boundaries remain.
 
 ## Next Action
 
-- `SUPPORTING-SOURCE-READING.1` — Close supporting .1 and startup .3.7 in a separate focused reading-only commit under the already granted ADR0120 disposition: reconcile coverage/reading commits and six remaining grammar/literal repair roots, preserve source/history, verify normal doctrines and the book; then continue authorized PNT at startup .3.8. No new permission or RGX/PGEN build is needed.
+- `SESSION-STARTUP-READING.3.8` — Activate SESSION-STARTUP-READING.3.8 from clean HEAD: inventory the160 baseline conformance/test/Unicode entries, reconcile current deltas, and create a bounded task-tree decomposition before physically reading its exact ranges. Include all four decoded pinned Unicode inputs; retain source/history and existing capacity controls. Continue PNT with focused proof and a clean commit per reading slice.
 
 ## Recent Completions
+
+- `2026-09-13` — `SUPPORTING-SOURCE-READING.1` closes audited required reading and startup .3.7 under ADR0120; original sources/exclusions, three reading commits and six grammar/literal repair roots remain exact. Next startup .3.8.
 
 - `2026-09-13` — `SUPPORTING-SOURCE-READING.2.6` applies the granted exact checker correction;37 self-tests/50 registry cases and actual partition validation pass. Existing limits remain fixed; separate focused reading closeout is authorized by ADR0120.
 
@@ -48,8 +50,6 @@
 - `2026-09-13` — `LUA-STARTUP-READING.1.49` reaches 69,040 fragments/2,642,497 bytes and 94 complete files; 6572 assertions and three neutral checks pass; all 34 repair roots remain open; next .1.50.
 
 - `2026-09-13` — `LUA-STARTUP-READING.1.48` reaches 67,540 fragments/2,584,712 bytes; staged prefix 704 passes per host with neutral/public proof; no new repair node and all 34 existing roots remain open; next .1.49.
-
-- `2026-09-13` — `LUA-STARTUP-READING.1.47` reaches 90 complete files; remaining 122/admission 408/aliases 638 pass per host with both neutral checkers; all previous failures and 34 repair roots remain open; next .1.48.
 
 ## History
 

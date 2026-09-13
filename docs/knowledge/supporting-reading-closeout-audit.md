@@ -1,6 +1,6 @@
 ---
 id: supporting-reading-closeout-audit
-title: "Supporting reading is independently audited; the checker correction and focused parent closeout are authorized"
+title: "Required supporting reading and startup .3.7 close with exact coverage and preserved repair ownership"
 answers:
   - "is supporting source reading independently audited"
   - "which supporting source bytes were read or explicitly omitted"
@@ -9,21 +9,24 @@ answers:
   - "what exact supporting closeout exception is proposed"
   - "why is more approval needed after the Lua reading waiver"
 date: 2026-09-13
-status: audit complete; checker repaired under .2.6, authorized parent closeout follows
+status: required supporting reading closed under ADR0120; six grammar/literal repair roots remain open
 tags: [startup, reading, audit, continuity, verification, capacity, SUPPORTING-SOURCE-READING]
 evidence: "SUPPORTING-SOURCE-READING.3 independently reconstructs all 174 original ranges/158 unchanged sources, five required ranges/nineteen complete windows/three clean reading commits and seven open repair roots. Physical required coverage is 629 fragments/96781 bytes; historical reading 1500/61165, explicit omissions 23484/806310. No additional physical reading, runtime signoff, defect closure, gate change or new ceiling is claimed."
-reverify: "The original SUPPORTING_READING_CLOSEOUT_AUDIT below retains its audit-time assumptions and pending-node counts. Use the applied checker replay in task-partition-capacity-registry-drift.md; the separate authorized parent closeout will reconcile current repair status. No canonical receipt is claimed."
+reverify: "Run SUPPORTING_READING_PARENT_CLOSEOUT below for original committed coverage plus current source/repair/parent reconciliation. The original SUPPORTING_READING_CLOSEOUT_AUDIT retains its audit-time assumptions and pending-node counts. No canonical receipt or runtime signoff is claimed."
 ---
 
 # Current disposition
 
-The director grants both actions proposed in audit commit
+The director grants both actions proposed at
 `693e11e48168aba753b179b88cdb6800d4b06513`; ADR0120 records the exact scope.
-Supporting `.2.6` applies the approved checker correction with focused proof.
-Formal supporting `.1`/startup `.3.7` closure follows in a separate commit under
-the same grant. No further permission is needed for either authorized action.
-Six grammar/literal repair roots remain; the checker repair closes only `.2.6`.
-The original audit and proposed-disposition text below remain dated evidence.
+Checker `.2.6` is committed at `1d6e8fe51c63b2f9797698cd750ee032d274344f`.
+Supporting `.1` and startup `.3.7` now close in a separate focused commit. Exact
+current reconciliation preserves all 21 reading nodes, three reading commits,
+original source/ranges and nine pending nodes under six grammar/literal roots.
+Only the checker repair is closed. Startup `.3.8-.3.11`, formal book `.4` and
+policy `.5` remain incomplete. Historical omissions receive no reading credit.
+The earlier audit and proposal below remain dated evidence, followed by the
+current replay that explicitly reconciles the one committed repair.
 
 # Independent coverage and continuity
 
@@ -192,3 +195,58 @@ SUPPORTING_READING_CLOSEOUT_AUDIT
 Related: [[supporting-source-reading-coverage]],
 [[current-supporting-grammar-dependencies]], [[self-hosted-grammar-ast-drift]],
 [[task-partition-capacity-registry-drift]], and [[SUPPORTING-SOURCE-READING]].
+
+# Current parent closeout — 2026-09-13
+
+The replay reruns the exact historical source/range/commit audit at its pinned
+reading snapshot, then independently checks current reading-node preservation,
+the committed checker fix, all nine unchanged pending grammar/literal nodes and
+exactly the two authorized parent closures. It gives no new physical-reading or
+runtime-test credit. Normal focused doctrines and book/preservation proof govern
+this closeout under ADR0120.
+
+```bash
+bash tools/project_data_run.sh python3 - <<'SUPPORTING_READING_PARENT_CLOSEOUT'
+from pathlib import Path
+import hashlib,json,re,subprocess
+activation='1d6e8fe51c63b2f9797698cd750ee032d274344f'
+current=subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip()
+subprocess.run(['git','merge-base','--is-ancestor',activation,current],check=True)
+card=Path('docs/knowledge/supporting-reading-closeout-audit.md').read_text()
+marker='SUPPORTING_READING_CLOSEOUT_AUDIT'
+original=card.split("<<'"+marker+"'\n",1)[1].split('\n'+marker,1)[0]+'\n'
+old_assert="assert subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip()==head"
+assert original.count(old_assert)==1
+body=original.replace(old_assert,"subprocess.run(['git','merge-base','--is-ancestor',head,'HEAD'],check=True)")
+body=body.replace("Path('.linkedspec-data/scratch/support31')","Path('.linkedspec-data/scratch/support_closeout')")
+space={};exec(compile(body,'historical_supporting_reading_audit','exec'),space)
+historical=space['tree'];nodes=space['nodes'];git=space['git']
+current_nodes=nodes(Path('docs/tasks/SUPPORTING-SOURCE-READING.md').read_text())
+for i in range(1,22):
+ key='SUPPORTING-SOURCE-READING.1.'+str(i)
+ assert historical[key]==current_nodes[key],key
+pending=[]
+for key in space['repairs']:
+ if key=='SUPPORTING-SOURCE-READING.2.6':
+  assert 'Status: `done`' in current_nodes[key]
+  fixed=nodes(git('show',activation+':docs/tasks/SUPPORTING-SOURCE-READING.md').decode())[key]
+  assert current_nodes[key]==fixed
+ else:
+  assert historical[key]==current_nodes[key]
+  assert 'Status: `pending`' in current_nodes[key]
+  pending.append(key)
+assert len(pending)==9
+assert 'Status: `done`' in current_nodes['SUPPORTING-SOURCE-READING.1']
+startup=nodes(Path('docs/tasks/SESSION-STARTUP-READING.md').read_text())
+assert 'Status: `done`' in startup['SESSION-STARTUP-READING.3.7']
+for key in ['SESSION-STARTUP-READING.3.8','SESSION-STARTUP-READING.3.9','SESSION-STARTUP-READING.3.10','SESSION-STARTUP-READING.3.11','SESSION-STARTUP-READING.4','SESSION-STARTUP-READING.5']:
+ assert 'Status: `done`' not in startup[key],key
+assert hashlib.sha256(Path('scripts/check_task_tree_partitions.pl').read_bytes()).hexdigest()=='9f4e5c1a3f268fc8364e6430583a8df58a522cd9c12bc24575d11181758a0206'
+for path in ['doctrine/readme_stability/routes.jsonl','docs/decisions/0120-supporting-reading-unblock.md']:
+ assert Path(path).read_bytes()==git('show',activation+':'+path),path
+out={'activation':activation,'required_fragments':629,'required_bytes':96781,'historical_fragments':1500,'historical_bytes':61165,'omitted_fragments':23484,'omitted_bytes':806310,'original_sources':158,'original_ranges':174,'reading_commits':3,'windows':19,'pending_repair_nodes':sorted(pending),'pending_repair_roots':6,'checker_repair_commit':activation,'parents_closed':['SUPPORTING-SOURCE-READING.1','SESSION-STARTUP-READING.3.7']}
+Path('.linkedspec-data/scratch/support_closeout/current_audit.json').write_text(json.dumps(out,indent=2)+'\n')
+print(json.dumps(out,indent=2))
+print('PASS current source/reading/repair reconciliation; only the granted reading parents close.')
+SUPPORTING_READING_PARENT_CLOSEOUT
+```

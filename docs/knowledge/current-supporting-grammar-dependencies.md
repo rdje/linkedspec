@@ -10,7 +10,7 @@ answers:
   - did the noncore quarantine lose a module since its initial relocation
   - where is the current three grammar supporting reading scope verified
 date: 2026-09-13
-status: current dependency disposition; all required reading independently audited, formal parent closure pending
+status: current dependency disposition; required reading and formal parent closeout complete under ADR0120
 tags: [startup, reading, grammar, legacy, dependencies, continuity]
 evidence: "SUPPORTING-SOURCE-READING.4; activation 5faaf61b9a5c56f18a01dde2c655f176b2828d19; current loader inspection and descriptor-only probe; NONCORE-QUARANTINE and initial relocation 2baddbd56."
 reverify: "Run the original inventory/plan/tree recipes in supporting-source-reading-coverage.md, then CURRENT_SUPPORTING_SCOPE and CURRENT_GRAMMAR_DESCRIPTORS below. Inspect the named loader sites if source identities change; these checks grant no physical reading or full runtime signoff."
@@ -83,8 +83,8 @@ without reading credit. The three required files total 629 fragments/96,781 byte
 
 These three physical reading groups were pending at the .4 scope checkpoint.
 Subsequent `.1.17-.1.19` complete all five required ranges; independent `.3`
-reconciliation passes. Formal parent closure remains pending; exact audit and
-scoped proposal are in [[supporting-reading-closeout-audit]].
+reconciliation passes. Formal parent closure is complete under ADR0120; exact
+audit, source/repair preservation and replay are in [[supporting-reading-closeout-audit]].
 Current physical coverage and exact window replay live in
 [[supporting-source-reading-coverage]].
 Descriptor compilation passes for all three named grammars: readiness1.0000,

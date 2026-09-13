@@ -2272,14 +2272,14 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.6.0 - freeze exact Lua reading ownership and capacity intake`
 
 - ID: `SESSION-STARTUP-READING.3.7`
-  Status: `active`
+  Status: `done`
   Goal: Account for all 158 original supporting entries and read the current language/runtime dependencies required by the director’s clarified scope.
   Children: `.3.7.0` completes decomposition; SUPPORTING-SOURCE-READING.1 owns 21 reading groups, .2 new repair intake, .3 independent closeout.
-  Reading owner: `docs/tasks/SUPPORTING-SOURCE-READING.md`; required reading and independent audit complete. ADR0120 checker correction .2.6 is complete; separately authorized focused supporting .1/startup .3.7 closeout follows. Six grammar/literal repair roots and all historical exclusions remain.
+  Reading owner: `docs/tasks/SUPPORTING-SOURCE-READING.md`; required .1 reading and independent .3 audit close under explicit ADR0120 grant after checker .2.6 commits clean. Six grammar/literal repair roots and all historical exclusions remain separate.
   Acceptance: Account for legacy adapters, plugins, authored grammars, configuration, and non-TypeScript `.ts` data;
     use LinkedSpec probes before investigating a spec's behavior, and do not infer defects from historical syntax alone.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Supporting .1 closes with exact158-source/174-range baseline and current identity; required629/96781, historical1500/61165 and explicit omissions23484/806310 fragments/bytes. All21 reading nodes, three reading commits/five ranges/nineteen windows and nine pending repair nodes reconcile; focused normal doctrines/book/preservation replace this one full-CI closeout under ADR0120. No remaining reading or runtime signoff is implied.
+  Commit: `SUPPORTING-SOURCE-READING.1 - close audited supporting reading under explicit focused grant`
 
 - ID: `SESSION-STARTUP-READING.3.7.0`
   Status: `done`
@@ -4623,7 +4623,7 @@ startup implementation prerequisites and the rgx reading exclusion remain intact
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SUPPORTING-SOURCE-READING.1` | `active` | Close supporting reading and startup .3.7 with the already granted ADR0120 focused audit/preservation proof, then continue startup .3.8. |
+| 1 | `SESSION-STARTUP-READING.3.8` | `pending` | Inventory and decompose the160 conformance/test/Unicode entries, then read exact bounded ranges; preserve decoded Unicode inputs and existing repair/capacity obligations. |
 
 ## Reading Ledger
 

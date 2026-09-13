@@ -10,6 +10,12 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-13 — SUPPORTING-SOURCE-READING.1 — close required supporting reading
+
+Supporting reading .1 and startup .3.7 close under ADR0120 after the exact checker correction at1d6e8fe51. Independent reconstruction preserves all158 original sources/174 ranges: required reading629 fragments/96,781 bytes, historical reading1,500/61,165 and explicit omissions23,484/806,310. Three reading commits/five required ranges/nineteen windows retain exact source, activation and node evidence. Six grammar/literal repair roots/nine pending nodes remain unchanged; only the checker defect is repaired. Current registry limits remain fixed. PNT continues at startup .3.8 for the160 conformance/test/Unicode entries; later source reading, formal book/policy prerequisites and canonical boundaries remain.
+
+Verification: independent original/current coverage, reading-commit and repair reconciliation; prior source/task/history preservation, memory, Knowledge, both histories, rendered book and normal doctrine hooks. Focused reading-only closeout under explicit ADR0120; no fresh runtime matrix or canonical receipt.
+
 ## 2026-09-13 — SUPPORTING-SOURCE-READING.2.6 — align duplicate task capacity enforcement
 
 Supporting .2.6 applies the exact director-approved task checker correction under ADR0120: existing aggregate ceilings92,000 lines/10,485,760 bytes and all three member/file limits now agree with the real registry on every run. Original source produces four agreement errors; applied source passes syntax,37 self-tests,50 detached registry cases and actual partition validation. Registry limits and runtime sources remain unchanged. Six grammar/literal repair roots remain open. Required supporting reading and its independent audit are complete; authorized focused parent closeout follows separately, then startup .3.8.

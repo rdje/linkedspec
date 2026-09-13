@@ -10,6 +10,12 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-13 — SUPPORTING-SOURCE-READING.1 — separate reading closure from retained repair ownership
+
+The current closeout reruns the exact historical source/range/reading-commit audit using its pinned snapshot, then checks current reading nodes and repair statuses independently. All21 reading nodes and nine pending grammar/literal nodes remain byte-exact; the one changed checker node is exactly its committed repaired form at1d6e8fe51. Only supporting .1 and startup .3.7 close under ADR0120. Historical omissions receive no reading credit; later conformance/test/Unicode/tooling reading and formal book/policy remain. This consumes the second granted exception without a dependency build or full-CI claim.
+
+Verification: independent original/current coverage, reading-commit and repair reconciliation; prior source/task/history preservation, memory, Knowledge, both histories, rendered book and normal doctrine hooks. Focused reading-only closeout under explicit ADR0120; no fresh runtime matrix or canonical receipt.
+
 ## 2026-09-13 — SUPPORTING-SOURCE-READING.2.6 — approved checker correction and separate reading-closeout grant
 
 ADR0120 records the director’s explicit grant for the exact prepared checker correction before remaining reading and focused verification for this correction and the separate supporting-reading closeout. The applied source matches the proposal SHA-256, updates only duplicate aggregate limits and checks registry agreement across all five inclusive/+1 boundaries. Source identity,37 internal tests,50 detached registry cases and actual partition validation pass. Historical diagnosis/proposal recipes remain preserved; the new applied replay retrieves the exact old Git source for RED/GREEN comparison. No registry ceiling, runtime source or dependency build changes.

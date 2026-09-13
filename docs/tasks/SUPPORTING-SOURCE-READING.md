@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `SUPPORTING-SOURCE-READING`
-- Status: `active` / all required reading audited; checker repaired, six grammar/literal roots open; authorized parent closeout next
+- Status: `active` / required reading and formal startup .3.7 closeout complete; checker repaired; six grammar/literal repair roots remain open
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.7`
 - Created: `2026-09-13`
 - Last updated: `2026-09-13`
@@ -56,13 +56,18 @@ from runtime signoff. Existing startup and backend repairs remain open.
   Commit: `SUPPORTING-SOURCE-READING.0 - reconcile historical Lispish inputs with current corpus use`
 
 - ID: `SUPPORTING-SOURCE-READING.1`
-  Status: `active`
+  Status: `done`
+  Activation commit: `1d6e8fe51c63b2f9797698cd750ee032d274344f`.
+  Verification tier: `focused`
+  Focused checks: Independent source/range/reading-commit audit at the pinned reading snapshot plus exact current repair/correction reconciliation; all prior source/task/history preservation, memory, Knowledge, histories, rendered book and normal doctrine hooks.
+  Canonical trigger: ADR0120 records the director’s explicit grant to waive only the full CI run/receipt for this supporting .1/startup .3.7 reading-only closeout; the separate .2.6 correction is already committed. Later requirements remain.
   Goal: Read the three current grammar groups required by .4; preserve original inventory, historical reading and explicit omissions.
   Dependencies: Startup .3.7.0 decomposition committed; clean activation for every child.
   Children: `.1.1-.1.21`
   Acceptance: Each required child records exact Required reading scope coverage, comprehension, Knowledge reconciliation, owned findings, focused proof and clean commit. Seventeen superseded groups and excluded intervals of mixed groups receive no reading credit; original Scope/digests remain exact.
-  Verification: Required .1.17-.1.19 reading and independent .3 audit are complete: three files/five ranges/629 fragments/96781 bytes. ADR0120 authorizes separate focused parent closure after .2.6 lands clean. Historical .1.1, seventeen omissions, original Scope/digests and all six remaining grammar/literal repair roots remain preserved.
-  Commit: `pending`
+  Verification: Independent original source/range/commit audit and current repair reconciliation PASS:158 sources/174 original ranges, required629/96781, historical1500/61165 and omitted23484/806310 fragments/bytes. All21 original reading nodes and nine pending grammar/literal repair nodes remain exact; checker .2.6 is exactly its committed repaired node. Three reading commits/five required ranges/nineteen windows reconcile. Close only this reading parent and startup .3.7 under ADR0120; remaining startup/book/policy and runtime repairs stay open. Exact current replay SUPPORTING_READING_PARENT_CLOSEOUT is published in supporting-reading-closeout-audit. Preservation, memory, Knowledge, histories, rendered book and normal doctrine hooks govern focused landing.
+  Candidate proof: Preserve2484 prior files byte-exact, all historical recipe blocks,2626/2628 task nodes and all94 book limitation headings; only the two granted parent nodes change, no ID is added. Current audit PASS retains six repair roots/nine pending nodes; memory60, histories433/44059 and363/42976 lines/bytes, and rendered book PASS. Normal doctrine hooks govern focused closeout landing.
+  Commit: `SUPPORTING-SOURCE-READING.1 - close audited supporting reading under explicit focused grant`
 
 - ID: `SUPPORTING-SOURCE-READING.1.1`
   Status: `done`
@@ -472,10 +477,11 @@ from runtime signoff. Existing startup and backend repairs remain open.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SUPPORTING-SOURCE-READING.1` | `active` | Close supporting reading and startup .3.7 with the already granted ADR0120 focused audit/preservation proof, then continue startup .3.8. |
+| 1 | `SESSION-STARTUP-READING.3.8` | `pending` | Inventory and decompose the160 conformance/test/Unicode entries, then read exact bounded ranges; preserve decoded Unicode inputs and existing repair/capacity obligations. |
 
 ## Decisions
 
+- `2026-09-13` .1: Use the already granted ADR0120 focused supporting .1/startup .3.7 closeout; do not request the same permission again. Preserve separate reading completion, explicit historical omissions and six open grammar/literal repair roots.
 - `2026-09-13` .2.6: Director replies “Granted” to the complete two-action proposal at693e11e48. ADR0120 records this exact before-reading checker correction and focused correction/reading-parent exceptions; no later blanket waiver.
 - `2026-09-13` .3: Prepare the exact two-action proposal before asking: .2.6 checker correction before remaining reading with focused proof; supporting .1/startup .3.7 read-only parent closeout with focused proof. Existing ceilings and all later requirements remain.
 - `2026-09-13` director asks whether spec.spec remains relevant: current source still loads it as a comparison parser and maintains canonical fixtures. Retain its self-description/grammar-evolution role under existing ADR0012; the primary Perl bootstrap plus dedicated function grammar remain distinct. The engineer recommends verified coverage and repairs for measured drift rather than treating policy alone as completeness proof. No removal, primary-parser migration or activity pivot is requested. The director replies “ok”, accepting this retained, verified self-description role.
@@ -496,6 +502,7 @@ from runtime signoff. Existing startup and backend repairs remain open.
 
 ## Verification Log
 
+- `2026-09-13` .1: Supporting reading .1 and startup .3.7 close under ADR0120 after the exact checker correction at1d6e8fe51. Independent reconstruction preserves all158 original sources/174 ranges: required reading629 fragments/96,781 bytes, historical reading1,500/61,165 and explicit omissions23,484/806,310. Three reading commits/five required ranges/nineteen windows retain exact source, activation and node evidence. Six grammar/literal repair roots/nine pending nodes remain unchanged; only the checker defect is repaired. Current registry limits remain fixed. PNT continues at startup .3.8 for the160 conformance/test/Unicode entries; later source reading, formal book/policy prerequisites and canonical boundaries remain.
 - `2026-09-13` .2.6: Supporting .2.6 applies the exact director-approved task checker correction under ADR0120: existing aggregate ceilings92,000 lines/10,485,760 bytes and all three member/file limits now agree with the real registry on every run. Original source produces four agreement errors; applied source passes syntax,37 self-tests,50 detached registry cases and actual partition validation. Registry limits and runtime sources remain unchanged. Six grammar/literal repair roots remain open. Required supporting reading and its independent audit are complete; authorized focused parent closeout follows separately, then startup .3.8.
 - `2026-09-13` .3: Independent committed coverage/source/repair audit and exact proposed-checker syntax/37+50 controls pass; no parent closure or production change.
 - `2026-09-13` .1.19: Supporting .1.19 reads two complete windows/255 fragments/8134 bytes and finishes user_function_definition.spec. All three required grammar groups are physically read: five ranges/629 fragments/96781 bytes. The unchanged dedicated AST fixture passes 44 assertions; six exact signature/body/payload/job controls pass. Four matched body comparisons confirm the July self-hosted regex-brace truncation finding; new .2.7 owns its repair, while the older zero-argument audit is linked to .2.3.2. Six grammar/literal repair roots with eight repair leaves and the separate checker owner .2.6 remain open. All original sources, exclusions and earlier repair evidence remain; next .3 independently reconciles supporting reading and routes startup continuation.
@@ -514,6 +521,7 @@ from runtime signoff. Existing startup and backend repairs remain open.
 
 ## Commit Log
 
+- `2026-09-13` .1: `SUPPORTING-SOURCE-READING.1 - close audited supporting reading under explicit focused grant`; activation 1d6e8fe51c63b2f9797698cd750ee032d274344f; startup .3.8 follows clean handoff and zero-byte brief.
 - `2026-09-13` .2.6: `SUPPORTING-SOURCE-READING.2.6 - align task checker with approved registry and prevent limit drift`; activation 693e11e48168aba753b179b88cdb6800d4b06513; separate supporting parent closeout follows clean handoff.
 - `2026-09-13` .3: `SUPPORTING-SOURCE-READING.3 - independently audit reading and prepare bounded unblock proposal`; activation 51fa104fe3b8cff023bb9272e17e4f2a222f9ecf; scoped disposition remains pending after clean audit landing.
 - `2026-09-13` .1.19: `SUPPORTING-SOURCE-READING.1.19 - complete dedicated function grammar reading and reconcile body fidelity`; activation 7a3f0b8aa1e649d74be405e822eb462227eb26be; next .3 after focused proof, empty brief and clean handoff.
@@ -532,6 +540,7 @@ from runtime signoff. Existing startup and backend repairs remain open.
 
 ## Changelog
 
+- `2026-09-13` .1: Close required supporting reading with independent exact source/commit/repair reconciliation; continue authorized startup .3.8.
 - `2026-09-13` .2.6: Correct duplicate task-limit enforcement and add recurring real-registry agreement; all existing ceilings and other repairs remain.
 - `2026-09-13` .3: Complete independent supporting audit and publish exact blocker correction/proof; keep all source/history and seven repair roots.
 - `2026-09-13` .1.19: Complete the three current grammar groups, preserve historical scope and give the earlier self-hosted regex-body defect a concrete repair owner; no source change or defect closure.

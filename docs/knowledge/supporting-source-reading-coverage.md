@@ -8,7 +8,7 @@ answers:
   - how much prior supporting-source reading credit is established
   - does supporting-source reading require rebuilding RGX or PGEN
 date: 2026-09-13
-status: original inventory preserved; required reading independently audited, formal parent closure pending
+status: original inventory preserved; required reading and formal startup .3.7 closeout complete under ADR0120
 tags: [startup, reading, supporting, inventory, continuity]
 evidence: "SESSION-STARTUP-READING.3.7.0; clean Lua closeout 735f0337883baef5ac4422976879d09725e0e8ea; baseline baeb984e36a94a15951cd23d4c52def5064cdaca."
 reverify: "Run SUPPORTING_SOURCE_INVENTORY, SUPPORTING_SOURCE_PLAN, SUPPORTING_SOURCE_TREE and SUPPORTING_CURRENT_GROUP17/18/19 below; these identity/range audits grant no additional physical reading credit."
@@ -485,6 +485,6 @@ Related facts: [[startup-codebase-reading-inventory]], [[lua-reading-commit-clos
 ranges/158 unchanged sources, three reading commits/five required ranges/nineteen
 windows and all seven repair roots. Required reading is 629 fragments/96,781 bytes;
 historical reading is 1,500/61,165; explicit omissions are 23,484/806,310. No extra
-reading credit or defect closure is granted. The audit is complete. ADR0120 now authorizes the separate focused parent
-closeout, and `.2.6` completes the granted checker correction; six grammar/literal
-repair roots remain open.
+reading credit or defect closure is granted. The audit and separate focused parent closeout are complete under ADR0120.
+Checker `.2.6` is repaired; six grammar/literal repair roots remain open. Current
+closeout replay preserves all nine pending nodes and routes startup `.3.8`.

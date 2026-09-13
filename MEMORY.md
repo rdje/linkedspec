@@ -1,12 +1,12 @@
 # MEMORY
 
-- activation_commit: `693e11e48168aba753b179b88cdb6800d4b06513` — clean authorized checker-correction activation.
-- latest_completed_leaf: `SUPPORTING-SOURCE-READING.2.6 - align task checker with approved registry and prevent limit drift`; checker defect repaired under explicit ADR0120 grant.
-- active_work_unit: `SUPPORTING-SOURCE-READING.1` — separately authorized focused reading-parent closeout; six grammar/literal repair roots remain open.
-- next_action: Close supporting .1 and startup .3.7 in a separate focused reading-only commit under the already granted ADR0120 disposition: reconcile coverage/reading commits and six remaining grammar/literal repair roots, preserve source/history, verify normal doctrines and the book; then continue authorized PNT at startup .3.8. No new permission or RGX/PGEN build is needed.
+- activation_commit: `1d6e8fe51c63b2f9797698cd750ee032d274344f` — clean authorized supporting-reading closeout activation.
+- latest_completed_leaf: `SUPPORTING-SOURCE-READING.1 - close audited supporting reading under explicit focused grant`; required supporting reading and startup .3.7 close under ADR0120.
+- active_work_unit: `SESSION-STARTUP-READING.3.8` — conformance/test/Unicode inventory and bounded reading decomposition; six supporting grammar/literal repair roots remain open.
+- next_action: Activate SESSION-STARTUP-READING.3.8 from clean HEAD: inventory the160 baseline conformance/test/Unicode entries, reconcile current deltas, and create a bounded task-tree decomposition before physically reading its exact ranges. Include all four decoded pinned Unicode inputs; retain source/history and existing capacity controls. Continue PNT with focused proof and a clean commit per reading slice.
   Named-argument direction PARSER-AUTHORING-APIS.4 is approved and parked; other authoring proposals and approved formats stay parked.
-- in_flight_uncommitted: none; applied correction, grant, checks and next action committed at Git HEAD; no background result remains.
-- blockers: none for the authorized supporting-reading closeout and continuing read-only PNT. ADR0120 grants the exact checker/parent exceptions; other source repairs and later canonical boundaries remain gated.
+- in_flight_uncommitted: none; supporting reading closure, exact proof and next action committed at Git HEAD; no background result remains.
+- blockers: none for authorized read-only PNT at startup .3.8. Both exact ADR0120 exceptions are consumed; other source repairs and later canonical boundaries remain gated.
 - current_rust_warning_debt: Repeated carriers report 1,870 pgen plus 26 rgx-core output warnings; RUST-DEPENDENCY-WARNING-ZERO.1-.7 own causal repair/pins/enforcement without suppression after Lua intake.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
   active table; the task metadata doctrine inventories all consumers, permits arbitrary frontier-row rewrites,
@@ -57,4 +57,4 @@
   Lua .1.36 rollover preserves the exact clean-HEAD suffix as segment4977-65e8f007697e; earlier archive bytes and other history controls remain unchanged. Proportionate governance: ADR0115.
 - current_ci_build_reuse: Director requires PGEN/RGX builds once after submodule updates, then reuse for LinkedSpec-only CI; startup .80.1-.4 own implementation.
   Initial/update preparation, zero dependency compilation in ordinary CI and explicit missing-artifact handling remain pending; startup prerequisites remain.
-- latest_bootstrap_read: 2026-09-13 — roadmap Yes / full codebase No / physical mdBook Yes; five backend reading lanes closed. Three supporting grammars read and independently audited (629 fragments/96781 bytes); checker correction complete. Authorized .3.7 closeout follows; six grammar/literal roots, .3.8-.3.11, book .4 and policy .5 remain.
+- latest_bootstrap_read: 2026-09-13 — roadmap Yes / full codebase No / physical mdBook Yes; five backend reading lanes and supporting .3.7 closed. Three current grammars629 fragments/96781 bytes independently audited; historical omissions remain explicit. Startup .3.8-.3.11, formal book .4 and policy .5 remain, alongside six grammar/literal repair roots.

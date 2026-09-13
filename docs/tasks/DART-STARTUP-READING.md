@@ -1571,7 +1571,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SUPPORTING-SOURCE-READING.1` | `active` | Close supporting reading and startup .3.7 with the already granted ADR0120 focused audit/preservation proof, then continue startup .3.8. |
+| 1 | `SESSION-STARTUP-READING.3.8` | `pending` | Inventory and decompose the160 conformance/test/Unicode entries, then read exact bounded ranges; preserve decoded Unicode inputs and existing repair/capacity obligations. |
 
 ## Decisions
 
