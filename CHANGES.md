@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-13 — Lua package function execution and generated-module reading
+
+- Read package 3353-4852 in eight complete windows: 1,500 fragments /62,438 bytes; cumulative 40/51 and 2,105,839 bytes.
+- Both installed hosts pass 22 complete selected groups each: staged dispatch, function execution, compiled descriptors and generated modules.
+- Ten generated families match native values in process; fresh valid and malformed-payload children verify exact results, typed failures and cleanup.
+- LUA-STARTUP-READING.1.40 extends only existing .2.1 stage-pointer qualifications, preserves all thirty-three repair roots and earlier failures, and hands off to .1.41.
+
 ## 2026-09-13 — Lua package validation, function and registry reading
 
 - Read package 1956-3352 in eight complete windows: 1,397 fragments /65,503 bytes; cumulative 39/51 and 2,043,401 bytes.

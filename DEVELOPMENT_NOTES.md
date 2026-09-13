@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-13 — Distinguish in-process families from fresh generated children
+
+- Complete groups 3341-4818 use original helpers; all 22 pass per host, while the all-family child runner starts 4819 and remains partial.
+- Fixed/variadic arguments evaluate once in caller order, isolated functions restore callers, and typed keywords plus direct/mutual recursion reject.
+- Effective function-v1/v2/v3 state emits deterministic ASCII under module-v2; fresh valid/corrupt children verify Unicode identity, direct/traced values, failures and exact cleanup.
+- LUA-STARTUP-READING.1.40 records replay in docs/knowledge/lua-package-function-generated-execution-reading.md; existing .2.1 owns stale runtime/generated stage pointers and prior limitations remain open.
+
 ## 2026-09-13 — Keep function metadata proof distinct from deferred runtime work
 
 - Complete groups 1985-3340 use their original helpers and preamble; all 34 pass per host, while staged-registry continuation remains outside this selection.

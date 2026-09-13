@@ -329,12 +329,12 @@ step. `PARSER-AUTHORING-APIS.4` owns grammar/binding, definition choices,
 representation compatibility and bounded implementation planning; these four
 children remain unactivated and current startup reading continues.
 
-**Lua source reading is underway (39/51 groups):** the complete
+**Lua source reading is underway (40/51 groups):** the complete
 99-file inventory covers 71,268 physical lines and 2,732,450 bytes. Its 51 owned
 reading groups include generated tables, native adapters and both-ABI tests.
 Two UTF-8-safe byte windows retain an oversized generated MCP line, so the
 per-window total is 71,269 fragments. The independent range audit proves complete
-ownership. The first 39 groups physically read 54,040 fragments /2,043,401 bytes,
+ownership. The first 40 groups physically read 55,540 fragments /2,105,839 bytes,
 including the complete README, both commands, all three native C bindings, ActionIR
 constructors, call names, contracts, the complete parser, bounded authority,
 compiled state and corpus modules, facade, interpreter, JSON and matching. They
@@ -354,9 +354,9 @@ complete, as are stdio, progressive dispatch, storage and recognition transactio
 Recursive observation, repeated actions and root-selection admission are complete.
 Root core, root routes, cursor admission and cursor descriptor tests are complete.
 Cursor execution, generated source, normalization and option-removal tests are
-complete. The package runner is read through line 3352, including pipeline, corpus,
-AST, parser, validator, function and registry tests. Seventy-seven files are fully
-read. The remaining 12 groups require
+complete. The package runner is read through line 4852, including pipeline, corpus,
+frontend, registry, function execution, compiled and generated-module tests.
+Seventy-seven files are fully read. The remaining 11 groups require
 their own reading and verified commits; source reading does not close the limitations below.
 
 **Lua Unicode casing and rule-label verification:** all property tables match the
@@ -585,8 +585,8 @@ Stale current CLI counts, module guidance and historical endpoint wording are
 owned by the existing documentation repair. Exact scope and replay:
 `docs/knowledge/lua-package-pipeline-corpus-frontend-reading.md`.
 
-**Lua package validation, function and registry verification:** 34 complete groups
-pass per installed host, 68 total. Validation accepts a markerless nonempty spec,
+**Lua package validation, function and registry verification:** `.1.39` records
+34 complete groups per installed host, 68 total. Validation accepts a markerless nonempty spec,
 rejects zero rules and duplicate labels, and checks edge ownership, targets, slots,
 lightweight regex structure and strict unused rules. All shipped sources and
 exactly 102 rule-only corpus sources validate. The shared inventory has 250 names;
@@ -613,10 +613,42 @@ valid inputs. Separate calls receive independent empty rest arrays. Body stitchi
 preserves the source spec and copies the supplied AST. Earlier malformed tagged-
 container limitations remain open.
 
-This selection ends before the staged-registry group that begins at line 3341.
-It does not claim later runtime tests or the entire package gate. Exact reading,
+That selection ends before the staged-registry group at line 3341, which is
+completed in the next proof below. It does not claim the entire package gate. Exact reading,
 replay and stale-guidance ownership:
 `docs/knowledge/lua-package-validation-function-registry-reading.md`.
+
+**Lua package function and generated execution verification:** 22 complete groups
+pass on each installed host, 44 total. Staged dispatch orders jobs by their paths,
+retains exact cache/provider identity, copies stitched bodies, and reports distinct
+resolution, top-rule, sidecar and duplicate-job failures.
+
+Fixed and variadic functions evaluate positional arguments once in written order.
+Their isolated stores preserve caller arrays, harrays and bindings; returns and
+receiver chains retain value kinds. Contextual callbacks run in the current
+function frame, while static helpers and registered functions take precedence over
+colliding callback names. Typed keyword arguments, invalid arities, direct/mutual
+recursion and missing or mismatched staged bodies reject with attributed errors.
+
+Compiled-state tests preserve rule order, last-definition behavior and dependency
+slots. Descriptors match the shared rule-local cursor metadata and exact fixed-v1,
+variadic-v2 and final-codeblock-v3 function records. Those function record versions
+are distinct from the current generated-module v2 contract.
+
+Emission produces deterministic ASCII and reconstructs only effective rules and
+ordered function state. In-process generated execution matches native values for
+all ten families, with four precise plan rejections and attributed family failure.
+The variadic fixture also survives emitted-module reconstruction and execution.
+
+A fresh valid child on each host verifies Unicode identity, direct/traced results
+and a typed missing-entry failure. A separate malformed-payload child verifies
+the generated compile/load error. Both produce exact output and empty stderr;
+normal and intentionally failing cleanup paths leave no temporary directory.
+The later all-family child runner is partly read and remains outside this proof.
+Earlier invalid-identity and malformed-container limitations stay open.
+
+Exact reading, replay and existing guidance repair:
+`docs/knowledge/lua-package-function-generated-execution-reading.md`.
 
 **Known Lua invocation limitation — nested array members can disappear:** a
 caller-supplied tagged array with an extra member or a sparse tail is accepted,
