@@ -10,6 +10,12 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-13 — CONFORMANCE-SOURCE-READING.1.19 — retain supplementary scalars and width-preserving mappings
+
+The range closes the prior A79E entry and reads Latin extended mappings including A7AA-to-0266, A7B3-to-AB53, A7C4-to-A794, A7CB-to-0264 and A7DC-to-019B. Ligatures FB00 through FB06 and FB13 through FB17 retain lower identity rows. Fullwidth FF21-to-FF41 through FF3A-to-FF5A preserves width. Supplementary scalar families include 10400-to-10428 through 10427-to-1044F, 104B0-to-104D8 through 104D3-to-104FB, sparse 10570-to-10597 through 10595-to-105BC, and 10C80-to-10CC0 through 10CB2-to-10CF2. The explicit holes in the 105xx family remain authoritative. The next 10D50-to-10D70 family is read through the 10D5B-to-10D7B value at line 8638; its closing delimiters and later mappings remain .1.20-owned. Five-digit hexadecimal values denote supplementary scalars, not surrogate halves; no new native execution or width/ligature normalization is inferred.
+
+Retain the unchanged Unicode 17 generation, byte-equality and 12-fixture proof from CONFORMANCE-SOURCE-READING.1.14 at 704e261b. Fresh window replay, complete range inventory, cumulative coverage, source/task/history preservation, rendered book, memory and document-pressure checks govern this ordinary reading leaf. Native admission evidence remains separately scoped; normal commit doctrines remain required.
+
 ## 2026-09-13 — CONFORMANCE-SOURCE-READING.1.18 — preserve encoded forms and sparse lowercase mappings
 
 The range closes the prior 2160 entry, completes numeral pairs 2161-to-2171 through 216F-to-217F plus 2183-to-2184, and preserves circled letters 24B6-to-24D0 through 24CF-to-24E9. Glagolitic 2C00-to-2C30 through 2C2F-to-2C5F precedes Latin mappings with non-adjacent results such as 2C62-to-026B, 2C63-to-1D7D and 2C7F-to-0240. Coptic pairs include sparse 2CEB/2CED/2CF2 rows; Cyrillic extended rows retain the gap after A66C and continue A680 through A69A. Latin extended reading includes A77D-to-1D79 and A78D-to-0265 among adjacent pairs. Circled and numeral results preserve their encoded forms; casing does not imply compatibility normalization. Line 7138 ends at the A79E-to-A79F value, whose closing delimiters and subsequent mappings remain .1.19-owned.

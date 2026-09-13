@@ -497,15 +497,15 @@ the director's focused-verification grant used for this correction and the separ
 supporting-reading closeout. Reading completion establishes audited comprehension;
 it does not close the six grammar/literal repair roots or establish runtime signoff.
 Conformance, test and Unicode reading has exact ownership for all 160 inputs in
-143 bounded groups covering 8,257,059 decoded bytes. Eighteen groups now account for
-21,431 fragments and 921,969 bytes, including 51 complete files. Unicode lowercase
-reading covers Roman numerals, circled letters, Glagolitic, Coptic, Cyrillic extended
-and further Latin mappings. Circled U+24B6 maps to circled U+24D0, preserving the
-encoded form; casing does not imply compatibility normalization. Sparse entries
-and non-adjacent Latin results remain explicit. The unchanged offline generation
-proof is retained. Reading continues through the next mapping range, with all
-runtime repair tasks open. Named-argument support remains an approved future
-direction. The capability guide still has stale
+143 bounded groups covering 8,257,059 decoded bytes. Nineteen groups now account for
+22,931 fragments and 936,817 bytes, including 51 complete files. Unicode lowercase
+reading includes identity ligature entries, fullwidth Latin pairs and supplementary
+characters. Fullwidth U+FF21 maps to U+FF41, preserving width. Supplementary mappings
+retain complete scalar values, for example U+10400 to U+10428, along with explicit
+gaps in sparse ranges. These results do not imply width or ligature normalization.
+The unchanged offline generation proof is retained. Reading continues through the
+next mapping range, with all runtime repair tasks open. Named-argument support
+remains an approved future direction. The capability guide still has stale
 current census, governance/inventory/public counts and generic-callable wording.
 Existing startup `.41.6` and `.41.7` now own these exact paragraphs and meaningful
 checks against recurrence. Their selected-marker guards currently miss the
