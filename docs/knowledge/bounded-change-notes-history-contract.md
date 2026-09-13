@@ -132,3 +132,40 @@ assert source.endswith(segment)
 print('PASS exact clean source suffix, immutable segment identity and all30 older manifest records.')
 CONFORMANCE_NOTES_HISTORY_ROLLOVER
 ```
+
+
+## September 13 mapping-reading change-history rollover
+
+`CONFORMANCE-SOURCE-READING.1.26` requires rollover at 379 lines/59,584 bytes.
+The existing tool retains 156 lines/31,451 bytes and archives clean commit
+`38c45c2883d9932f38ec4a511130c1f5bd94de1b` lines 151-373: 223 lines/28,133 bytes
+as segment 4975-3da9552f81c9. All 35 older records and target bytes remain exact.
+The resulting collection is 38 files/49,979 lines/3,661,922 bytes; its 37-line,
+21,071-byte manifest reaches the existing file/manifest limits without exceeding
+them. No capacity or history-tool change is included. Combined current-plus-archive
+reconstruction after removing only the new leaf entry equals the prior 3,639,484 bytes,
+SHA-256 `cdd90e7085fe008777fbfe64259b8a0c0b8ee40b80467cce842026473b8c9a6a`.
+The actual archive reader agrees with the manifest concatenation; exact older
+record and source evidence remains independently replayable:
+
+```bash
+bash tools/project_data_run.sh python3 - <<'CONFORMANCE_MAPPING_HISTORY_ROLLOVER'
+from pathlib import Path
+import hashlib,json,subprocess
+base='38c45c2883d9932f38ec4a511130c1f5bd94de1b'
+path='docs/history/changes/manifest.jsonl'
+old=subprocess.check_output(['git','show',base+':'+path]).splitlines(True)
+current=Path(path).read_bytes().splitlines(True)
+index=next(i for i,line in enumerate(current) if json.loads(line).get('segment_id')=='4975')
+row=json.loads(current[index]);assert current[index+1:]==old[1:]
+assert row['source_commit']==base and row['source_start_line']==151 and row['source_end_line']==373
+segment=Path(row['target_path']).read_bytes()
+source=subprocess.check_output(['git','show',base+':CHANGES.md'])
+assert subprocess.check_output(['git','rev-parse',base+':CHANGES.md'],text=True).strip()==row['source_blob']
+assert segment==b''.join(source.splitlines(True)[150:373])
+assert len(segment)==row['byte_count']==28133 and segment.count(b'\n')==row['line_count']==223
+assert hashlib.sha256(segment).hexdigest()==row['sha256']=='3da9552f81c93de15c4add8d42685f2880d29a0361026a7f29cdb677faaa54a0'
+assert source.endswith(segment)
+print('PASS exact clean source suffix, immutable segment identity and all35 older manifest records.')
+CONFORMANCE_MAPPING_HISTORY_ROLLOVER
+```

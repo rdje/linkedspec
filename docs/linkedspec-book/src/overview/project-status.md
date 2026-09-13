@@ -497,16 +497,14 @@ the director's focused-verification grant used for this correction and the separ
 supporting-reading closeout. Reading completion establishes audited comprehension;
 it does not close the six grammar/literal repair roots or establish runtime signoff.
 Conformance, test and Unicode reading has exact ownership for all 160 inputs in
-143 bounded groups covering 8,257,059 decoded bytes. Twenty-five groups now account for
-31,931 fragments and 1,024,983 bytes, including 51 complete files. The Unicode
-lowercase mapping array is fully read; uppercase reading includes Cherokee, Latin
-and Armenian ligatures, fullwidth pairs and supplementary characters. U+FB03
-expands to U+0046, U+0046 and U+0049 (`FFI`); U+FB05 and U+FB06 both become
-U+0053 followed by U+0054 (`ST`). Fullwidth uppercase results preserve width.
-These full-case mappings do not imply blanket compatibility normalization. The
-unchanged offline generation proof is retained. Later entries and all runtime
-repair tasks remain open. Named-argument support remains an approved future
-direction. The capability guide still has stale
+143 bounded groups covering 8,257,059 decoded bytes. Twenty-six groups now account for
+33,431 fragments and 1,039,982 bytes, including 51 complete files. Both Unicode
+case mapping arrays are fully read. Reading has begun on the `Cased` property
+ranges, which classify characters separately from the conversion sequences. The
+initial ranges include ASCII letters and singleton entries such as U+00AA and
+U+0345. The unchanged offline generation proof is retained. Later property ranges,
+context rules, fixtures and upstream inputs remain to be read; all runtime repair
+tasks stay open. Named-argument support remains an approved future direction. The capability guide still has stale
 current census, governance/inventory/public counts and generic-callable wording.
 Existing startup `.41.6` and `.41.7` now own these exact paragraphs and meaningful
 checks against recurrence. Their selected-marker guards currently miss the
