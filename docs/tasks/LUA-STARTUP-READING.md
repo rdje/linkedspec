@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `LUA-STARTUP-READING`
-- Status: `active` / approved capacity; source reading 41/51
+- Status: `active` / approved capacity; source reading 42/51
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.6`
 - Created: `2026-09-12`
 - Last updated: `2026-09-13`
@@ -45,7 +45,7 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
 - Ordered range SHA-256: `81c58b8319def28af518fb134a3787513fe746f0f0f73bcacb0e20b9ede1c9d6`.
 - Child-summary SHA-256: `f56ecac262800bd3cc1e6bba0cc25bfe22f095c3dfee41f1c6595d4200145290`.
 - Coordinates are one-based inclusive LF physical lines or absolute file bytes; both byte windows decode as UTF-8.
-- Current physical reading: 41/51 children, 57,040/71,269 fragments and 2,170,080/2,732,450 bytes.
+- Current physical reading: 42/51 children, 58,540/71,269 fragments and 2,231,215/2,732,450 bytes.
 - Exact independent replay and capacity evidence: `docs/knowledge/lua-startup-reading-coverage.md`.
 
 ## Task Tree
@@ -695,14 +695,18 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
   Commit: `LUA-STARTUP-READING.1.41 - read generated host runtime and cursor package tests`.
 
 - ID: `LUA-STARTUP-READING.1.42`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `d4c9f938d30e5f49161f0854113066ebcfb4133a`.
+  Verification tier: `focused`
+  Focused checks: Exact owned source range and unchanged baseline; safe complete read package groups on both installed hosts; Knowledge and repair reconciliation, source/history preservation, reconstructed coverage, book, explicit memory and normal doctrines.
+  Canonical trigger: Ordinary package-test reading and bounded repair intake without production changes; native-error exclusions and runtime prerequisites remain; startup closeout and push retain canonical prerequisites.
   Goal: Read and understand group 42: run.lua.
   Scope: `lua/test/run.lua` lines 6353-7852
   Baseline evidence: 1500 fragments / 61135 bytes; ordered range SHA-256 `109237226136012ab79b71665b6ea225a776eb20b151e1a549c26f9e6c06267f`.
   Dependencies: .1.41 committed with clean handoff.
   Acceptance: Read every scoped byte without truncation; record comprehension, Knowledge and repair reconciliation, focused proof and a clean per-leaf commit.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Lua .1.42 reads package lines 6353-7852 in eight complete windows: 1,500 fragments /61,135 bytes; cumulative 42/51, 58,540 fragments /2,231,215 bytes. All 99 Lua sources remain baseline-identical; 77 files are fully read. Both installed hosts pass 17 safe complete selected package groups each, 34 total: boundary/named captures, marker timing, scalar text, child reuse, punctuation aliases and copied scoped/tree callbacks. Three malformed-native-regex groups 6820-6977 stay unexecuted under .2.3; no failure is induced. Existing .2.1 gains exact stage and receiver-kind qualifications; no new repair node. All thirty-three repair roots and earlier failures remain open. Next .1.43 reads package lines 7853-9352; named arguments and startup/ADR0118 prerequisites remain unchanged. Exact evidence: docs/knowledge/lua-package-named-capture-scoped-callback-reading.md.
+  Commit: `LUA-STARTUP-READING.1.42 - read named capture and scoped callback package tests`.
 
 - ID: `LUA-STARTUP-READING.1.43`
   Status: `pending`
@@ -832,6 +836,7 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
   Reading .1.39 extension: lua-frontend-validation still states top-rule presence and current239 names, while the current consumer accepts markerless nonempty source, rejects zero rules and locks250 names; lua-actionir-contract-resolver also retains the current239 sentence. Qualify these precise claims without erasing the dated60/239 milestones. Qualify lua-user-function-registry blanket nested-copy/cycle guarantees against already-owned .2.33 malformed tagged-array member loss; valid dense rest-array and caller-isolation tests remain green. Existing generated/callable forward-pointer repairs stay unchanged.
   Reading .1.40 extension: lua-fixed-v1-user-function-runtime final paragraph still calls contextual-stage status current and native loading active; lua-variadic-v2-runtime still calls generated admission future; lua-generated-source-emitter-core metadata ends with census .8.4 pending although its body and successor closeout mark it closed. Date or qualify these precise stage pointers, preserving historical counts and current execution behavior. The existing .2.33 nested-copy qualification also applies to fixed/variadic runtime prose; accepted dense-value and generated tests do not close it.
   Reading .1.41 extension: lua-runtime-matching-state still says module pairs and blanket typed invalid-pattern failures; qualify against the current three-module wrapper and .2.3 observed native formatting failure. lua-runtime-structured-diagnostics retains top_rule_selection/current126/status wording despite current select_entry_rule/no_rules_defined fields and later status; lua-runtime-trace-events retains .5.3 pending/current trace-only status despite complete pipeline admission. Date these exact claims, preserving their historical checks and existing healthy-writer/runtime qualifications.
+  Reading .1.42 extension: lua-capture-cursor-runtime-audit and punctuation-light-zero-argument-calls retain future generated-source wording despite the admitted emitter/runtime; the capture audit also retains a next diagnostic owner. lua-string-helper-parity-closeout still presents numeric helpers as the next active frontier and shipped-fixture admission as future; lua-helper-regex-split-mutation-preflight retains present-tense missing runtime mechanisms despite its implementation updates. Date these exact stages and qualify invalid-pattern guarantees against .2.3. lua-runtime-harray-tree-callbacks says any non-harray receiver returns null although its generalized dispatcher admits array roots; qualify that sentence to the harray route and preserve the exact cross-kind leaf contract. Existing .1.9 explicit-callable and .2.33 malformed-container qualifications remain; do not rewrite historical proof.
   Acceptance: Remove the false current failure projection, distinguish historical counts from current guidance, preserve useful unique history through canonical pointers, and independently verify the resulting public wording and native command examples.
   Verification: `pending`
   Commit: `pending`
@@ -890,6 +895,7 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
   Children: `.2.3.1`, `.2.3.2`
   Dependencies: Startup .3/.4/.5 before repair; preserve .2.2 declared-primary identity ownership.
   Reading .1.41 extension: Package run.lua5193-5215 includes a direct malformed-pattern compile through the same native formatting path. The entire group is explicitly excluded from both installed-host reading proofs; its regex/input/boundary/mode/foreign-match checks retain this repair owner and must be re-admitted after the native fix and runtime prerequisites. No fresh failure or crash is induced; all other safe complete groups are selected unchanged.
+  Reading .1.42 extension: Package groups 6820-6860 (helper matches), 6861-6907 (pure split), and 6908-6977 (statement regex substitution) contain malformed patterns that reach the known native compile path. All three complete groups remain unexecuted on both installed hosts; their otherwise-valid flag/value/mutation cases are not counted as fresh passes. Re-admit the full original groups after the native fix and runtime prerequisites; no new failure is induced.
   Acceptance: Locate the failure with an exact native stack and valid/malformed controls; preserve meaningful offset/provider detail through supported Lua error formatting and high-level typed wrappers; prove malformed caller patterns cannot crash supported runtimes. Keep observed 5.5 behavior distinct from declared 5.4 proof.
   Verification: `pending`
   Commit: `pending`
@@ -2126,7 +2132,7 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.1.42` | `pending` | Read the owned package-test lines 6353-7852 after clean .1.41; preserve all repair owners, native-error exclusions, prior failures and parked named arguments. |
+| 1 | `LUA-STARTUP-READING.1.43` | `pending` | Read the owned package-test lines 7853-9352 after clean .1.42; preserve all repair owners, native-error exclusions, prior failures and parked named arguments. |
 
 ## Decisions
 
@@ -2144,9 +2150,11 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 ## Blockers
 
-- None for bounded Lua .1.42 reading after clean .1.41. Installed5.5 native/generated nil-error tests remain failed under .2.2; declared5.4 proof remains pending. The baseline public-selector failure is tracked under startup .28.7 and is not a passing gate. The finite ADR0118 allowance and each actual candidate remain checked; startup .80 and all later verification/repair prerequisites retain their owners.
+- None for bounded Lua .1.43 reading after clean .1.42. Installed5.5 native/generated nil-error tests remain failed under .2.2; declared5.4 proof remains pending. The baseline public-selector failure is tracked under startup .28.7 and is not a passing gate. The finite ADR0118 allowance and each actual candidate remain checked; startup .80 and all later verification/repair prerequisites retain their owners.
 
 ## Verification Log
+
+- `2026-09-13` .1.42: Lua .1.42 reads package lines 6353-7852 in eight complete windows: 1,500 fragments /61,135 bytes; cumulative 42/51, 58,540 fragments /2,231,215 bytes. All 99 Lua sources remain baseline-identical; 77 files are fully read. Both installed hosts pass 17 safe complete selected package groups each, 34 total: boundary/named captures, marker timing, scalar text, child reuse, punctuation aliases and copied scoped/tree callbacks. Three malformed-native-regex groups 6820-6977 stay unexecuted under .2.3; no failure is induced. Existing .2.1 gains exact stage and receiver-kind qualifications; no new repair node. All thirty-three repair roots and earlier failures remain open. Next .1.43 reads package lines 7853-9352; named arguments and startup/ADR0118 prerequisites remain unchanged.
 
 - `2026-09-13` .1.41: Lua .1.41 reads package lines 4853-6352 in eight complete windows: 1,500 fragments /64,241 bytes; cumulative 41/51, 57,040 fragments /2,170,080 bytes. All 99 Lua sources remain baseline-identical; 77 files are fully read. Both installed hosts pass 25 safe complete selected package groups each, 50 total: fresh all-family and accepted-eight generated children, compiled/matching/runtime diagnostics, cursor views and anonymous captures. The entire native malformed-regex group 5193-5215 stays unexecuted under existing .2.3; no failure is induced. Existing .2.1 gains exact matching/status/trace qualifications; no new repair node. All thirty-three repair roots and earlier failures remain open. Next .1.42 reads package lines 6353-7852; named arguments and startup/ADR0118 prerequisites remain unchanged.
 
@@ -2238,6 +2246,8 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 ## Commit Log
 
+- `2026-09-13` .1.42: `LUA-STARTUP-READING.1.42 - read named capture and scoped callback package tests`; activation d4c9f938d; next .1.43 after clean proof and empty brief.
+
 - `2026-09-13` .1.41: `LUA-STARTUP-READING.1.41 - read generated host runtime and cursor package tests`; activation 10acd96d5; next .1.42 after clean proof and empty brief.
 
 - `2026-09-13` .1.40: `LUA-STARTUP-READING.1.40 - read package function execution and generated module tests`; activation 325588c73; next .1.41 after clean proof and empty brief.
@@ -2327,6 +2337,8 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 - `SESSION-STARTUP-READING.3.6.0 - freeze exact Lua reading ownership and capacity intake` owns creation of this plan.
 
 ## Changelog
+
+- `2026-09-13` .1.42: Read named captures, slot markers, scalar text, child reuse and scoped/tree callback tests; verify safe dual-host groups and retain three native-error exclusions with their repair owner.
 
 - `2026-09-13` .1.41: Read generated-host/matching/runtime/cursor/capture package groups; verify safe selected dual-host execution and preserve the known native-error exclusion with its repair owner.
 

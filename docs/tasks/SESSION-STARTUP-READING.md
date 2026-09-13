@@ -2253,9 +2253,9 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Status: `active`
   Goal: Split and read all 99 baseline Lua entries, including native adapters, both-ABI tests, runtime, and commands.
   Children: `.3.6.0` owns decomposition; LUA-STARTUP-READING.1 owns 51 reading children and .3 owns independent closeout.
-  Reading owner: `docs/tasks/LUA-STARTUP-READING.md`; .4/.4.2 close under ADR0118 and containment .14; exact reading is 41/51; .1.42 follows child 41; .2.1-.2.33 own thirty-three concrete repair roots, with installed5.5 nil-error failures under .2.2 and shared Lua budget repair under .82.3.1; .28.7 owns the baseline public-check failure.
+  Reading owner: `docs/tasks/LUA-STARTUP-READING.md`; .4/.4.2 close under ADR0118 and containment .14; exact reading is 42/51; .1.43 follows child 42; .2.1-.2.33 own thirty-three concrete repair roots, with installed5.5 nil-error failures under .2.2 and shared Lua budget repair under .82.3.1; .28.7 owns the baseline public-check failure.
   Acceptance: Define bounded file/range children before reading; generated tables and the large test runner stay in scope.
-  Verification: Lua .1.41 reads package lines 4853-6352 in eight complete windows: 1,500 fragments /64,241 bytes; cumulative 41/51, 57,040 fragments /2,170,080 bytes. All 99 Lua sources remain baseline-identical; 77 files are fully read. Both installed hosts pass 25 safe complete selected package groups each, 50 total: fresh all-family and accepted-eight generated children, compiled/matching/runtime diagnostics, cursor views and anonymous captures. The entire native malformed-regex group 5193-5215 stays unexecuted under existing .2.3; no failure is induced. Existing .2.1 gains exact matching/status/trace qualifications; no new repair node. All thirty-three repair roots and earlier failures remain open. Next .1.42 reads package lines 6353-7852; named arguments and startup/ADR0118 prerequisites remain unchanged.
+  Verification: Lua .1.42 reads package lines 6353-7852 in eight complete windows: 1,500 fragments /61,135 bytes; cumulative 42/51, 58,540 fragments /2,231,215 bytes. All 99 Lua sources remain baseline-identical; 77 files are fully read. Both installed hosts pass 17 safe complete selected package groups each, 34 total: boundary/named captures, marker timing, scalar text, child reuse, punctuation aliases and copied scoped/tree callbacks. Three malformed-native-regex groups 6820-6977 stay unexecuted under .2.3; no failure is induced. Existing .2.1 gains exact stage and receiver-kind qualifications; no new repair node. All thirty-three repair roots and earlier failures remain open. Next .1.43 reads package lines 7853-9352; named arguments and startup/ADR0118 prerequisites remain unchanged.
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.3.6.0`
@@ -4607,7 +4607,7 @@ startup implementation prerequisites and the rgx reading exclusion remain intact
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.1.42` | `pending` | Read the owned package-test lines 6353-7852 after clean .1.41; preserve all repair owners, native-error exclusions, prior failures and parked named arguments. |
+| 1 | `LUA-STARTUP-READING.1.43` | `pending` | Read the owned package-test lines 7853-9352 after clean .1.42; preserve all repair owners, native-error exclusions, prior failures and parked named arguments. |
 
 ## Reading Ledger
 

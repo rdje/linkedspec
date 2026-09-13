@@ -329,12 +329,12 @@ step. `PARSER-AUTHORING-APIS.4` owns grammar/binding, definition choices,
 representation compatibility and bounded implementation planning; these four
 children remain unactivated and current startup reading continues.
 
-**Lua source reading is underway (41/51 groups):** the complete
+**Lua source reading is underway (42/51 groups):** the complete
 99-file inventory covers 71,268 physical lines and 2,732,450 bytes. Its 51 owned
 reading groups include generated tables, native adapters and both-ABI tests.
 Two UTF-8-safe byte windows retain an oversized generated MCP line, so the
 per-window total is 71,269 fragments. The independent range audit proves complete
-ownership. The first 41 groups physically read 57,040 fragments /2,170,080 bytes,
+ownership. The first 42 groups physically read 58,540 fragments /2,231,215 bytes,
 including the complete README, both commands, all three native C bindings, ActionIR
 constructors, call names, contracts, the complete parser, bounded authority,
 compiled state and corpus modules, facade, interpreter, JSON and matching. They
@@ -354,9 +354,9 @@ complete, as are stdio, progressive dispatch, storage and recognition transactio
 Recursive observation, repeated actions and root-selection admission are complete.
 Root core, root routes, cursor admission and cursor descriptor tests are complete.
 Cursor execution, generated source, normalization and option-removal tests are
-complete. The package runner is read through line 6352, including generated hosts,
-matching, runtime diagnostics, cursor views and anonymous captures. Seventy-seven
-files are fully read. The remaining 10 groups require
+complete. The package runner is read through line 7852, including generated hosts,
+matching, runtime diagnostics, named captures, marker timing and scoped/tree
+callbacks. Seventy-seven files are fully read. The remaining nine groups require
 their own reading and verified commits; source reading does not close the limitations below.
 
 **Lua Unicode casing and rule-label verification:** all property tables match the
@@ -650,8 +650,8 @@ Earlier invalid-identity and malformed-container limitations stay open.
 Exact reading, replay and existing guidance repair:
 `docs/knowledge/lua-package-function-generated-execution-reading.md`.
 
-**Lua generated-host, runtime and cursor verification:** 25 complete selected
-groups pass on each installed host, 50 total. Fresh children execute all ten
+**Lua generated-host, runtime and cursor verification:** `.1.41` records
+25 complete selected groups per installed host, 50 total. Fresh children execute all ten
 generated families and the exact eight-module accepted subset. The latter validates
 the full corpus, proves native expected values before emission, and compares
 ordered values, metadata and plans after independent loading. Both child roles
@@ -679,10 +679,45 @@ from empty collections and present zero-width matches. Cursor views, slicing,
 save/restore and rewinds retain Unicode coordinates. Anonymous capture variants
 share a rule-local boundary, advance it only on successful takes and preserve it
 after reversed spans. Existing numeric, malformed-container and writer limits stay
-open. The next boundary-capture group is only partly read here.
+open. Boundary capture was partly read in that leaf and is completed below.
 
 Exact scope, exclusions and replay:
 `docs/knowledge/lua-package-generated-runtime-cursor-reading.md`.
+
+**Lua named-capture and scoped-callback verification:** 17 complete selected groups
+pass on each installed host, 34 total. Boundary capture seeks the earliest usable
+rule without consuming its match, uses input end when a usable rule has no later
+match, and leaves the cursor alone when no rule is usable. Named captures preserve
+Unicode positions, rule-local marks, anonymous bridges and valid-only advancement
+through native execution and public AST reconstruction.
+
+Compiled slot markers apply after their associated action: that action sees the
+old state and later slots see the update. Preferred and compatibility spellings,
+the shipped EBNF marker and typed malformed-marker diagnostics are covered.
+Scalar text preserves false/zero, null propagation, Unicode slicing, lazy coalesce
+and receiver boundaries. Statement split replaces its target and preserves its
+source. Three separate regex-helper groups remain unexecuted under `.2.3` because
+they include the known malformed native compile path; their valid cases are also
+outside this fresh proof.
+
+The call-name census reaches every admitted name and retains exactly 13 documented
+non-function cases. It detects unsupported dispatch rather than proving every
+helper result. Direct child calls refresh `retv`; action-edge calls reuse one
+selected child, passive terminals avoid re-search, and unrelated calls keep their
+own dispatch. Punctuation-light aliases preserve semantic ASTs and ordinary
+identifier exclusions. Eager blocks return their last value or local return.
+
+Final-block metadata is copied. Scoped execution restores exact prior or absent
+scalar/array/harray stores after success and a callback error. Attached and explicit
+`with` spellings share copied scope. Tree traversal visits sorted harray keys or
+zero-based array paths according to the root kind; cross-kind aggregates remain
+leaves. Source values and outer bindings survive callback mutation. Empty trees
+skip callbacks, invalid receivers skip callback/seed evaluation, and reduce stays
+terminal. Prior malformed-container and nil-error limitations remain open. Inline
+value controls are only partially read in this leaf.
+
+Exact reading, exclusions, replay and existing guidance repair:
+`docs/knowledge/lua-package-named-capture-scoped-callback-reading.md`.
 
 **Known Lua invocation limitation — nested array members can disappear:** a
 caller-supplied tagged array with an extra member or a sparse tail is accepted,

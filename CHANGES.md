@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-13 — Lua named captures and scoped callback package reading
+
+- Read package 6353-7852 in eight complete windows: 1,500 fragments /61,135 bytes; cumulative 42/51 and 2,231,215 bytes.
+- Both installed hosts pass 17 safe complete groups each, covering marks, slot timing, scalar text, child reuse, punctuation aliases and scoped/tree callbacks.
+- Three groups containing malformed native regex patterns remain unexecuted under existing .2.3; call-name census proves dispatch coverage rather than every helper result.
+- LUA-STARTUP-READING.1.42 extends existing .2.1/.2.3 evidence, preserves all thirty-three repair roots and earlier failures, and hands off to .1.43.
+
 ## 2026-09-13 — Lua generated-host, runtime and cursor package reading
 
 - Read package 4853-6352 in eight complete windows: 1,500 fragments /64,241 bytes; cumulative 41/51 and 2,170,080 bytes.

@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-13 — Keep capture timing and callback copy evidence exact
+
+- Select original helpers plus complete groups 6312-6819 and 6978-7804; all three malformed-native-regex groups 6820-6977 stay unexecuted under .2.3.
+- Named/anonymous bridges and slot markers retain Unicode positions, same-slot versus later-slot timing, valid-only advancement and public AST reconstruction.
+- Child calls reuse the selected edge once; scoped frames restore all stores and tree traversal follows root-kind recursion, copied callback values and exact ordering.
+- LUA-STARTUP-READING.1.42 records replay in docs/knowledge/lua-package-named-capture-scoped-callback-reading.md; .2.1 owns precise stale stage and receiver-kind wording.
+
 ## 2026-09-13 — Preserve excluded native-error proof and exact runtime boundaries
 
 - Select complete groups 4863-6311 with original helpers, excluding all of 5193-5215 because its malformed native compile reaches the already-located formatter defect; no raw failure is repeated.

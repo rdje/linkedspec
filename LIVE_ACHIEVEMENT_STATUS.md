@@ -5,19 +5,21 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Perl, Rust, Dart and Julia reading are complete. Canonical capacity admission is complete at a67a18bf. Lua .1.41 reads package lines 4853-6352 in eight complete windows: 1,500 fragments /64,241 bytes; cumulative 41/51, 57,040 fragments /2,170,080 bytes. All 99 Lua sources remain baseline-identical; 77 files are fully read. Both installed hosts pass 25 safe complete selected package groups each, 50 total: fresh all-family and accepted-eight generated children, compiled/matching/runtime diagnostics, cursor views and anonymous captures. The entire native malformed-regex group 5193-5215 stays unexecuted under existing .2.3; no failure is induced. Existing .2.1 gains exact matching/status/trace qualifications; no new repair node. All thirty-three repair roots and earlier failures remain open. Next .1.42 reads package lines 6353-7852; named arguments and startup/ADR0118 prerequisites remain unchanged. Dart reading is 55/55 children, 80,297 fragments / 2,471,305 bytes. Dart .7 is approved: containment .11 / ADR0113 implement the exact engineering-history counts with fresh source/history and 22-boundary proof; the director granted a one-time focused/receipt exception on September 11, closing the capacity boundary at ad64f76f before .1.47. The director requires build-on-update PGEN/RGX reuse under .80. Remaining reading and repairs stay open.
+  findings, and donor-policy comparisons. Perl, Rust, Dart and Julia reading are complete. Canonical capacity admission is complete at a67a18bf. Lua .1.42 reads package lines 6353-7852 in eight complete windows: 1,500 fragments /61,135 bytes; cumulative 42/51, 58,540 fragments /2,231,215 bytes. All 99 Lua sources remain baseline-identical; 77 files are fully read. Both installed hosts pass 17 safe complete selected package groups each, 34 total: boundary/named captures, marker timing, scalar text, child reuse, punctuation aliases and copied scoped/tree callbacks. Three malformed-native-regex groups 6820-6977 stay unexecuted under .2.3; no failure is induced. Existing .2.1 gains exact stage and receiver-kind qualifications; no new repair node. All thirty-three repair roots and earlier failures remain open. Next .1.43 reads package lines 7853-9352; named arguments and startup/ADR0118 prerequisites remain unchanged. Dart reading is 55/55 children, 80,297 fragments / 2,471,305 bytes. Dart .7 is approved: containment .11 / ADR0113 implement the exact engineering-history counts with fresh source/history and 22-boundary proof; the director granted a one-time focused/receipt exception on September 11, closing the capacity boundary at ad64f76f before .1.47. The director requires build-on-update PGEN/RGX reuse under .80. Remaining reading and repairs stay open.
 - Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.82` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `LUA-STARTUP-READING.1.41 - read generated host runtime and cursor package tests` — Lua .1.41 reads package lines 4853-6352 in eight complete windows: 1,500 fragments /64,241 bytes; cumulative 41/51, 57,040 fragments /2,170,080 bytes. All 99 Lua sources remain baseline-identical; 77 files are fully read. Both installed hosts pass 25 safe complete selected package groups each, 50 total: fresh all-family and accepted-eight generated children, compiled/matching/runtime diagnostics, cursor views and anonymous captures. The entire native malformed-regex group 5193-5215 stays unexecuted under existing .2.3; no failure is induced. Existing .2.1 gains exact matching/status/trace qualifications; no new repair node. All thirty-three repair roots and earlier failures remain open. Next .1.42 reads package lines 6353-7852; named arguments and startup/ADR0118 prerequisites remain unchanged.
+- `LUA-STARTUP-READING.1.42 - read named capture and scoped callback package tests` — Lua .1.42 reads package lines 6353-7852 in eight complete windows: 1,500 fragments /61,135 bytes; cumulative 42/51, 58,540 fragments /2,231,215 bytes. All 99 Lua sources remain baseline-identical; 77 files are fully read. Both installed hosts pass 17 safe complete selected package groups each, 34 total: boundary/named captures, marker timing, scalar text, child reuse, punctuation aliases and copied scoped/tree callbacks. Three malformed-native-regex groups 6820-6977 stay unexecuted under .2.3; no failure is induced. Existing .2.1 gains exact stage and receiver-kind qualifications; no new repair node. All thirty-three repair roots and earlier failures remain open. Next .1.43 reads package lines 7853-9352; named arguments and startup/ADR0118 prerequisites remain unchanged.
 
 ## Next Action
 
-- `LUA-STARTUP-READING.1.42` — Read lua/test/run.lua lines 6353-7852 in bounded complete windows; reconcile Knowledge and existing repair owners, verify selected complete read groups while preserving native-error exclusions, sync the book and commit.
+- `LUA-STARTUP-READING.1.43` — Read lua/test/run.lua lines 7853-9352 in bounded complete windows; reconcile Knowledge and existing repair owners, verify safe complete read groups while preserving native-error exclusions, sync the book and commit.
 
 ## Recent Completions
+
+- `2026-09-13` — `LUA-STARTUP-READING.1.42` reads 1,500 fragments/61,135 bytes; 17 safe package groups per host pass, including named captures and scoped/tree callbacks; three native-error groups remain with .2.3; next .1.43.
 
 - `2026-09-13` — `LUA-STARTUP-READING.1.41` reads 1,500 fragments/64,241 bytes; 25 safe package groups per host pass, including fresh generated family/subset children; native-error group remains with .2.3; next .1.42.
 
@@ -48,8 +50,6 @@
 - `2026-09-13` — `LUA-STARTUP-READING.1.28` reads 1,500 fragments/34,274 bytes; 16,276 valid casing observations, 136 UTF-8 rejections and 3,412 classifier assertions pass; neutral tables and generation match; next .1.29.
 
 - `2026-09-13` — `LUA-STARTUP-READING.1.27` reads 1,500 fragments/35,947 bytes; all 2,964 uppercase mappings and fifteen neutral property ranges pass; repairs preserved; next .1.28.
-
-- `2026-09-13` — `LUA-STARTUP-READING.1.26` reads 1,500 fragments/35,080 bytes; all 2,994 scoped mappings and 198 fixture assertions pass; repairs preserved; next .1.27.
 
 ## History
 
