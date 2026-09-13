@@ -1571,7 +1571,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.1.29` | `pending` | Read the rule-label suffix, function-definition parser and shell, and registry prefix after clean .1.28; preserve every repair owner, prior failure and parked named arguments. |
+| 1 | `LUA-STARTUP-READING.1.30` | `pending` | Read the registry suffix and owned body-fluent, callable-codeblock and diagnostic test ranges after clean .1.29; preserve all repair owners, prior failures and parked named arguments. |
 
 ## Decisions
 

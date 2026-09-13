@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-13 — Lua function projection reading and concrete repair ownership
+
+- Read the classifier suffix, complete function parser/shell and registry prefix: 1,500 fragments /50,431 bytes; cumulative 29/51 and 1,442,482 bytes.
+- Eleven focused tests pass 169 assertions per host; both hosts agree on all 166 complete projection and optional-boundary observations; neutral callable checks pass.
+- LUA-STARTUP-READING.2.31 owns payload versions and source-line metadata; .2.32 owns codeblock caller mutation; six .2.8 children own measured defaults.
+- Preserve historical proof and qualify the Julia counterpart; LUA-STARTUP-READING.1.29 advances to .1.30 with all thirty-two repair roots open.
+
 ## 2026-09-13 — Lua casing algorithm and Unicode rule-label table reading
 
 - Read every casing line 3170-3846 and rule-label line 1-823: 1,500 fragments /34,274 bytes; cumulative 28/51 and 1,392,051 bytes.

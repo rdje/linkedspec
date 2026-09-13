@@ -1607,6 +1607,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
   Dependencies: Startup .3/.4/.5 and .1.32; retain executable definition grammar and projection boundary.
   Evidence: UserFunctionDefinitionShell752-759 accepts Bool as Integer; payload validation omits version; span validation checks scalar text and positive line ordering without deriving lines. Native projection/staging/compile/runtime accept true definition version, payload version99 and source/body line99 for a line1 function.
   Children: .2.22.1 schema scalar/version validation; .2.22.2 source-coordinate validation; .2.22.3 supported-carrier/public proof.
+  Lua counterpart intake .1.29: LUA-STARTUP-READING.2.31 confirms missing/99/false/null payload versions and mutually false line99 spans survive native staging/compile/runtime. Lua correctly rejects boolean outer version/arity. Coordinate metadata closure without recounting original Julia measurements or claiming fresh Julia execution; exact evidence: docs/knowledge/lua-function-projection-reading-and-boundary-gaps.md.
   Acceptance: Strict neutral types and accepted version unions, exact source-bound coordinates and sidecar agreement, stable typed rejection before artifacts, unchanged legitimate fixed/variadic/final-codeblock output. Audit counterparts through existing tools without assuming parity.
   Verification: `pending` repair; .1.32 records native diagnostic evidence only.
   Commit: `pending`
@@ -1741,7 +1742,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.1.29` | `pending` | Read the rule-label suffix, function-definition parser and shell, and registry prefix after clean .1.28; preserve every repair owner, prior failure and parked named arguments. |
+| 1 | `LUA-STARTUP-READING.1.30` | `pending` | Read the registry suffix and owned body-fluent, callable-codeblock and diagnostic test ranges after clean .1.29; preserve all repair owners, prior failures and parked named arguments. |
 
 ## Decisions
 

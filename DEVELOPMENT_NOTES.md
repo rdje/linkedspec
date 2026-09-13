@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-13 — Check function metadata against source and preserve caller nodes
+
+- Real grammar-produced nodes isolate five malformed metadata acceptances through staging/compile/runtime; clean nodes and six typed rejecting comparisons retain exact caller state.
+- Final-codeblock canonicalization mutates caller nodes in all three projection routes and partially converts the payload before a failing job check; fixed and variadic controls remain unchanged.
+- Nil-only admission is separately owned for function options, optional parser objects and private classifier positions; current named-argument policy stays parked.
+- LUA-STARTUP-READING.1.29 records exact complete payloads in docs/knowledge/lua-function-projection-reading-and-boundary-gaps.md; source and historical facts remain unchanged.
+
 ## 2026-09-13 — Verify Unicode property boundaries and strict scalar decoding
 
 - Four Final Sigma contexts cover 2,030 unique property endpoints and adjacent scalars; full strings agree with the neutral conversion algorithm on both installed hosts.

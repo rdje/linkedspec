@@ -329,12 +329,12 @@ step. `PARSER-AUTHORING-APIS.4` owns grammar/binding, definition choices,
 representation compatibility and bounded implementation planning; these four
 children remain unactivated and current startup reading continues.
 
-**Lua source reading is underway (28/51 groups):** the complete
+**Lua source reading is underway (29/51 groups):** the complete
 99-file inventory covers 71,268 physical lines and 2,732,450 bytes. Its 51 owned
 reading groups include generated tables, native adapters and both-ABI tests.
 Two UTF-8-safe byte windows retain an oversized generated MCP line, so the
 per-window total is 71,269 fragments. The independent range audit proves complete
-ownership. The first 28 groups physically read 37,651 fragments /1,392,051 bytes,
+ownership. The first 29 groups physically read 39,151 fragments /1,442,482 bytes,
 including the complete README, both commands, all three native C bindings, ActionIR
 constructors, call names, contracts, the complete parser, bounded authority,
 compiled state and corpus modules, facade, interpreter, JSON and matching. They
@@ -346,9 +346,10 @@ typed-source modules, spec AST, loader, spec parser and validator, complete stag
 AST enrichment, capture storage and parse-job declarations, the narrow staged
 registry and tracing. Unicode casing is completely read, including both mapping
 tables, all 158 `Cased` and 464 `Case_Ignorable` ranges, strict UTF-8 decoding and
-Final Sigma conversion. All 806 Unicode rule-label table ranges are also read;
-its classifier algorithm remains the next group. Forty-eight files are fully read.
-The remaining 23 groups require
+Final Sigma conversion. The Unicode rule-label table and classifier, automatic
+function parser and complete function shell are read, followed by the registry
+through line 367. Fifty-one files are fully read.
+The remaining 22 groups require
 their own reading and verified commits; source reading does not close the limitations below.
 
 **Lua Unicode casing and rule-label verification:** all property tables match the
@@ -371,6 +372,35 @@ identical; earlier runs are not counted again. Current proof uses the installed
 PUC 5.5.1 and LuaJIT hosts; PUC 5.4 verification remains pending. Exact scope,
 complete-result digests and reproduction:
 `docs/knowledge/lua-unicode-casing-properties-and-rule-label-reading.md`.
+
+**Lua function reading verification:** eleven focused existing tests pass 169
+assertions per installed host. Fixed, variadic and final-codeblock metadata,
+Unicode projection, typed failures, nested output shapes, automatic parsing and
+registry order retain their measured behavior. Both neutral callable contract
+checks pass. Another 166 complete diagnostic observations identify the caller-
+supplied metadata, mutation and default-validation limitations below. Earlier
+classifier proof remains dated; current function reading does not add named
+arguments or close the pending PUC 5.4 verification.
+
+**Known Lua function metadata limitation — payload versions and line numbers:**
+caller-supplied function nodes can retain payload `version: 99`, a missing version,
+`false` or `null` through body staging, compilation and execution. Coherently setting
+all definition/body/payload/job line spans to 99 also succeeds for a line-1 function,
+while provenance retains line 1. The character slices are checked, but their line
+coordinates are not derived from source. Ordinary parser output remains clean.
+Lua `.2.31.1/.2/.3` own version validation, source-derived coordinates and supported-
+carrier proof; the existing Julia `.2.22` owner gains a qualified counterpart link.
+Lua already rejects boolean outer version/arity, unlike that separate Julia finding.
+
+**Known Lua function projection limitation — caller nodes can change:** final-
+codeblock projection rewrites `fixed_params`/`codeblock_param` into `params`/`arity`
+in supplied nodes and both sidecars. A wrong job parameter kind rejects after the
+payload has already changed, leaving a partial caller-side update. This occurs
+through direct projection, rule-shell composition and staged composition. Fixed
+and variadic comparison nodes remain unchanged. Lua `.2.32.1/.2` own detached
+canonicalization and complete success/failure proof, preserving current canonical
+output and typed errors. Exact metadata, mutation and default evidence:
+`docs/knowledge/lua-function-projection-reading-and-boundary-gaps.md`.
 
 **Generated Lua MCP binding:** the current 83,166-byte module matches its neutral
 repository inputs. Both installed Lua hosts pass 116 focused binding checks each,
@@ -500,8 +530,8 @@ The director also granted one containment `.14` exception for this bounded capac
 implementation before full codebase reading, using focused proof and normal hooks
 without canonical CI/receipt. Later milestone, repair and push requirements remain;
 dependency build-on-update implementation stays separately owned. Lua source reading
-is 28/51; the next group reads the rule-label classifier suffix, function-definition
-parser and shell, and the registry prefix.
+is 29/51; the next group completes registry reading and covers the owned body-fluent,
+callable-codeblock and diagnostic test ranges.
 The installed-host test failures below remain open.
 All known limitations below retain their repair owners.
 Exact admission and replay: `docs/knowledge/lua-reading-evidence-capacity-admission.md`.
@@ -898,6 +928,14 @@ The staged authority constructor similarly replaces `total_calls=false` with zer
 Absent, zero and positive seeds retain their intended values; other invalid types
 reject. Lua `.2.8.15/.16` own this constructor boundary. Actual exhausted-call
 admission correctly rejects before incrementing, including at 9,007,199,254,740,991.
+
+Function parser, metadata, projection, shell and registry option arguments also
+accept `false` as default options across eight measured public routes. The optional
+parser object accepts `false` as the cached parser. Lua `.2.8.21–.24` own those
+absence-only defaults and direct-consumer proof. Separately, the private rule-label
+prefix scanner treats `position=false` as byte 1; `.2.8.25/.26` own its generator
+and boundary controls. Omitted and empty options remain valid; true, zero and text
+retain their existing invalid-value behavior. These checks do not widen syntax.
 
 **Known Lua limitation — nested parser step budget:** when a parent callback has
 consumed its one-step allowance, its nested callback can still run against the
