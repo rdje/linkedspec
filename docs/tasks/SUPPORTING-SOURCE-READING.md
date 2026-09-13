@@ -477,7 +477,7 @@ from runtime signoff. Existing startup and backend repairs remain open.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.1` | `pending` | Read capability_conformance/README.md lines1-770 in complete bounded windows; preserve source identity, claim verification, repair ownership and per-leaf continuity. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.2` | `pending` | Finish capability README771-897, read the three complete callable/signature/named-mark contracts and diagnostic prefix1-268 in exact bounded windows. |
 
 ## Decisions
 

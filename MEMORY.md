@@ -1,12 +1,12 @@
 # MEMORY
 
-- activation_commit: `9833430954c3999769045abbcaa4d20389a7af4c` — clean conformance/test/Unicode reading decomposition activation.
-- latest_completed_leaf: `SESSION-STARTUP-READING.3.8.0 - own exact conformance test and decoded Unicode reading ranges`; all160 current inputs/143 groups/302 ranges are task-owned, no new physical reading.
-- active_work_unit: `CONFORMANCE-SOURCE-READING.1.1` — first bounded conformance/test/Unicode reading group; tree docs/tasks/CONFORMANCE-SOURCE-READING.md.
-- next_action: Read CONFORMANCE-SOURCE-READING.1.1 from clean HEAD: capability_conformance/README.md lines1-770 (770 fragments/65485 bytes) in complete bounded windows. Retrieve relevant Knowledge, reconcile claims and exact source identity, task-own any confirmed findings, run focused checks, update the book/live records and commit before .1.2. Continue PNT; later source repairs and canonical boundaries retain their prerequisites.
+- activation_commit: `d3cfa5973beed85de5ae58dc81798262cafe18ad` — clean conformance capability-guide reading activation.
+- latest_completed_leaf: `CONFORMANCE-SOURCE-READING.1.1 - read capability guide prefix and own stale current claims`; physical conformance reading1/143, exact guide defects added to existing repair owners.
+- active_work_unit: `CONFORMANCE-SOURCE-READING.1.2` — finish capability guide and read callable/signature/named-mark contracts plus diagnostic prefix.
+- next_action: Read CONFORMANCE-SOURCE-READING.1.2 from clean HEAD: capability_conformance/README.md771-897; complete callable_codeblock_contract.json1-237, callable_signature_contract.json1-125 and complete_named_mark_contract.json1-51; diagnostic_output_contract.json1-268. Total808 fragments/65502 bytes. Use exact bounded windows, reconcile Knowledge/claims and owned repairs, run focused proof, update book/live records and commit before .1.3. Continue PNT.
   Named-argument direction PARSER-AUTHORING-APIS.4 is approved and parked; other authoring proposals and approved formats stay parked.
-- in_flight_uncommitted: none; exact decomposition, proof and next action committed at Git HEAD; no background result remains.
-- blockers: none for authorized read-only PNT at conformance .1.1. Existing registry ceilings remain; ADR0120 exceptions are consumed. Other source repairs and later canonical boundaries remain gated.
+- in_flight_uncommitted: none; reading evidence, exact claim/repair ownership and next action committed at Git HEAD; no background result remains.
+- blockers: none for authorized read-only PNT at conformance .1.2. Startup .41.6/.41.7 own current guide drift; source repairs and later canonical boundaries retain prerequisites. Existing registry ceilings remain.
 - current_rust_warning_debt: Repeated carriers report 1,870 pgen plus 26 rgx-core output warnings; RUST-DEPENDENCY-WARNING-ZERO.1-.7 own causal repair/pins/enforcement without suppression after Lua intake.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
   active table; the task metadata doctrine inventories all consumers, permits arbitrary frontier-row rewrites,
@@ -57,4 +57,4 @@
   Lua .1.36 rollover preserves the exact clean-HEAD suffix as segment4977-65e8f007697e; earlier archive bytes and other history controls remain unchanged. Proportionate governance: ADR0115.
 - current_ci_build_reuse: Director requires PGEN/RGX builds once after submodule updates, then reuse for LinkedSpec-only CI; startup .80.1-.4 own implementation.
   Initial/update preparation, zero dependency compilation in ordinary CI and explicit missing-artifact handling remain pending; startup prerequisites remain.
-- latest_bootstrap_read: 2026-09-13 — roadmap Yes / full codebase No / physical mdBook Yes; five backend lanes and supporting .3.7 closed. Conformance/test/Unicode .3.8 now owns143 pending reading groups, including four decoded Unicode inputs. Later .3.9-.3.11, formal book .4 and policy .5 remain; no existing repair is closed by this plan.
+- latest_bootstrap_read: 2026-09-13 — roadmap Yes / full codebase No / physical mdBook Yes; five backend lanes and supporting .3.7 closed. Conformance .1.1 reads770 fragments/65485 bytes;142 groups remain, including the README suffix and all four decoded Unicode inputs. Later .3.9-.3.11, formal book .4 and policy .5 remain; no runtime repair closes.

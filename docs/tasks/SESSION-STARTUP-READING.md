@@ -2299,7 +2299,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Status: `active`
   Goal: Split and read all 160 entries under capability_conformance, cli_conformance, t, tests, and unicode_case.
   Children: `.3.8.0` owns exact decomposition; `CONFORMANCE-SOURCE-READING.1` owns all143 reading groups; .2 findings and .3 independent closeout stay separate.
-  Reading owner: `docs/tasks/CONFORMANCE-SOURCE-READING.md`; .3.8.0 owns143 groups/302 exact ranges over all160 baseline-identical inputs including four decoded pinned Unicode sources. Physical reading0/143; next .1.1 reads capability README1-770. Existing repairs and remaining startup prerequisites remain.
+  Reading owner: `docs/tasks/CONFORMANCE-SOURCE-READING.md`; .3.8.0 preserves143 groups/302 exact ranges over160 baseline-identical inputs. Physical reading1/143: capability guide1-770,770 fragments/65485 bytes. Next .1.2 owns guide suffix and four contract ranges; .41.6/.41.7 own confirmed guide-current drift. All other repairs/prerequisites remain.
   Acceptance: Include phase0, neutral contracts, fixtures, generators, and four explicitly decoded pinned Unicode
     inputs. Keep generated/fixture bytes in scope; count neither a hash nor enumeration as full reading.
   Verification: `pending`
@@ -3334,6 +3334,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     Reconcile expr.rs test name parse_shape_literal_rhs_keeps_scalar_assignment_ast_until_target_inference_leaf
     with completed duck-typed assignment and later uniform-binding retirement; retain its AST assertions while
     removing the misleading pending target-inference implication. This is naming debt, not a failed AST check.
+    Conformance .1.1 confirms capability_conformance/README.md lines347-348 still calls generic callable-codeblock future, with similar “until” first-class-literal wording at741-742, although current five-backend admission removes that exclusion. The unchanged callable checker passes while checking other required markers and exact denials. Qualify the historical final-codeblock-v3 admission boundary without presenting generic callables as currently future, and test this actual paragraph plus controlled variants; conformance-capability-guide-reading owns exact evidence.
   Verification: `pending` — full-book reading identifies the listed assessment candidates. The additional
     TOOLBOX guidance defect is confirmed at .3.2.44: standalone neutral proof passes 15 documents /
     seven denials / fourteen mutations while omitting that file. No unmeasured runtime failure is claimed.
@@ -3357,6 +3358,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     genuinely historical 68-count milestones and do not infer an optional matrix rerun from that check.
     Julia .1.1 adds exact bare corpus commands in julia/README.md lines 515 and 963; route them through tools/run_julia_project_data.sh. No unmanaged execution or off-volume write was performed or inferred by this reading. Preserve dated counts while repairing copyable current guidance.
     Julia .1.2 completes README reading and adds the same bare-command defect at lines 964–965; both managed help paths pass. See julia-facade-action-model-reading Knowledge.
+    Conformance .1.1 adds capability_conformance/README.md lines330-336: current17/85 contradicts the same guide and exact20/100 manifest; its24 semantic-mutation claim contradicts the current19 exclusion mutations. The same prefix also says current72 cursor migration files versus actual74, repeated-action44 mutations versus54, and logical20 documents/13 denials versus19/14; retain explicitly historical milestones while correcting these present-tense mismatches. The unchanged capability checker passes both paragraphs because public validation checks selected markers/denials only. Correct or explicitly date these actual claims and add meaningful recurrence; exact evidence belongs to conformance-capability-guide-reading.
   Verification: `pending` — local-CI prose says full gate for every behavior change and default toolchain
     independence; current canonical gate runs mandatory backend admissions and reports 20 capabilities/100 states.
   Commit: `pending`
@@ -4638,7 +4640,7 @@ startup implementation prerequisites and the rgx reading exclusion remain intact
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.1` | `pending` | Read capability_conformance/README.md lines1-770 in complete bounded windows; preserve source identity, claim verification, repair ownership and per-leaf continuity. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.2` | `pending` | Finish capability README771-897, read the three complete callable/signature/named-mark contracts and diagnostic prefix1-268 in exact bounded windows. |
 
 ## Reading Ledger
 

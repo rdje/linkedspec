@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `CONFORMANCE-SOURCE-READING`
-- Status: `active` / exact decomposition; physical reading 0/143
+- Status: `active` / exact decomposition; physical reading 1/143
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.8`
 - Created: `2026-09-13`
 - Last updated: `2026-09-13`
@@ -39,7 +39,7 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
   Children: `.1`, `.2`, `.3`
 
 - ID: `CONFORMANCE-SOURCE-READING.1`
-  Status: `pending`
+  Status: `active`
   Goal: Physically read and comprehend all143 bounded source groups, reconciling current deltas and existing Knowledge.
   Children: `.1.1-.1.143`
   Dependencies: Startup .3.8.0 decomposition committed clean; clean activation and commit per reading child.
@@ -48,14 +48,21 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
   Commit: `pending`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.1`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `d3cfa5973beed85de5ae58dc81798262cafe18ad`.
+  Verification tier: `focused`
+  Focused checks: Complete untruncated exact770-line guide prefix and baseline identity; canonical capability/contract/status facts and owned claim gaps; focused direct-consumer checks, prior evidence preservation, memory, Knowledge, histories, book and normal doctrine hooks.
+  Canonical trigger: Ordinary source-reading/comprehension leaf; no source/public-contract/registry change or parent closeout. Preserve later verification and repair prerequisites.
   Goal: Read and understand conformance/test/Unicode group 1.
   Scope: `capability_conformance/README.md` lines 1-770
   Baseline evidence: 770 fragments / 65485 decoded bytes; ordered range SHA-256 `33fdc07fa05ee9ed692d82225187f11f1ead806289d86b44f247da2f5b13ca4d`.
   Dependencies: Startup .3.8.0 decomposition committed with clean handoff.
   Acceptance: Read every scoped byte in complete bounded windows; retain source identity, exact comprehension, canonical Knowledge reconciliation, concrete finding ownership, focused proof and per-leaf continuity. Unread crossing constructs retain the next range owner.
-  Verification: `pending`
-  Commit: `pending`
+  Reading evidence: 11 complete windows / 770 fragments / 65485 bytes; ordered window SHA-256 `82c1b7aca6d2fd95e45a51c2b93fb7a50e3c19f1b2b42c77f90cfa8457e7f180`.
+  Comprehension: Separates capability/exclusion census, frozen mutation authorities, recurring proof and public claims; MCP transport/bindings/admission and semantic snapshots/query outcomes have distinct owners. Typed sources, recognition, observation, gaps, bounded dispatch and staged jobs preserve private authority/public exclusions. Root selection, duplicate identity, repetition results, scalar/logical rules and variadic signatures retain separate neutral contracts. The callable-codeblock section begins at the final line; its suffix remains .1.2-owned.
+  Verification: All11 complete source windows read through line770; full-source SHA-2569a0836a3b314bf3edfbf48cd1882027de739bad094edbadfee4086db5d8948f3 and scope SHA-25615e215a231e1fbe97483ee8a318a5934b8ea8336483b4166bebc891590e821df remain baseline-identical. Exact guide-claim probe confirms seven stale phrases behind passing capability20/100/19, callable23, signature3/9/7, cursor74/60, repetition54, logical19/14/26 and root7/54 structural/neutral checks. Startup .41.6/.41.7 own precise repair/recurrence; no source/runtime repair or fresh matrix. Comprehension and exact source/checker cause live in conformance-capability-guide-reading; range/window/source/preservation, memory, Knowledge, histories, book and normal doctrine proof govern landing.
+  Candidate proof: Preserve2487 prior files byte-exact, historical recipe blocks,2770/2776 prior task nodes and all94 book limitation headings. Six intended reading/intake/current-owner nodes change, no new ID; all other repair nodes remain exact. Complete143-group/302-range audit and recorded11-window reconstruction PASS. Memory60; histories445/46488 and375/45358 lines/bytes; rendered book and git diff --check PASS. Normal doctrine hooks govern focused landing.
+  Commit: `CONFORMANCE-SOURCE-READING.1.1 - read capability guide prefix and own stale current claims`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.2`
   Status: `pending`
@@ -1478,11 +1485,11 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
   Commit: `pending`
 
 - ID: `CONFORMANCE-SOURCE-READING.2`
-  Status: `pending`
+  Status: `active`
   Goal: Own concrete defects discovered during source comprehension, with implementation and verification acceptance for each.
   Dependencies: Diagnose with the Toolbox; preserve existing repair owners and remaining startup prerequisites.
   Acceptance: Route each confirmed defect to its current owner or create a precise pending repair leaf before continuing. Do not invent a defect from an unexecuted fixture or silently close it through reading.
-  Verification: No new finding at decomposition; prior startup/backend/supporting repair obligations remain unchanged.
+  Verification: .1.1 confirms current capability-guide census/governance and generic-callable status drift behind passing structural checkers. Existing startup .41.7 owns count/workflow guidance; .41.6 owns the callable-current paragraph and claim recurrence. No duplicate repair leaf or runtime defect is invented. Exact evidence: conformance-capability-guide-reading.
   Commit: `pending`
 
 - ID: `CONFORMANCE-SOURCE-READING.3`
@@ -1497,10 +1504,11 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
 
 | Rank | Leaf | Status | Next action |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.1` | `pending` | Read capability_conformance/README.md lines1-770 in complete bounded windows after clean decomposition commit. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.2` | `pending` | Finish capability README771-897, read the three complete callable/signature/named-mark contracts and diagnostic prefix1-268 in exact bounded windows. |
 
 ## Decisions
 
+- `2026-09-13` .1.1: Extend existing startup .41.6/.41.7 with exact guide-current contradictions and checker coverage; preserve historical milestones and keep code repairs behind startup prerequisites. No duplicate repair owner or current runtime failure is invented.
 - `2026-09-13`: All160 inputs remain required by startup .3.8; gzip coordinates describe decoded source. The exact existing1500-fragment/65536-byte budgets yield143 groups; no source or capacity policy changes.
 
 ## Blockers
@@ -1509,12 +1517,15 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
 
 ## Verification Log
 
+- `2026-09-13` .1.1: Conformance .1.1 reads all 11 complete windows of capability_conformance/README.md lines1-770: 770 fragments/65,485 baseline-identical bytes. Physical conformance reading is1/143; the README suffix771-897 and later contracts remain .1.2-owned. Seven focused structural/neutral checks pass, while exact current census, mutation/inventory/public-count and generic-callable claims remain stale. Existing startup .41.7 and .41.6 now own those actual paragraphs and meaningful recurrence; the marker/denial-only cause is recorded without changing source or runtime. All143 groups/302 ranges, prior source/history, six supporting repair roots and existing capacity limits remain. No fresh backend matrix, dependency build or parent closeout is claimed.
 - `2026-09-13`: Startup .3.8.0 independently verifies all160 files/143 groups/302 ranges and four decoded hashes; Unicode casing and rule-label checks PASS. Source/task/history, actual capacity, memory, Knowledge, histories, rendered book and normal hooks govern planning. Physical reading remains0/143.
 
 ## Commit Log
 
+- `2026-09-13` .1.1: `CONFORMANCE-SOURCE-READING.1.1 - read capability guide prefix and own stale current claims`; activation d3cfa5973beed85de5ae58dc81798262cafe18ad; next .1.2 after clean handoff and zero-byte brief.
 - `2026-09-13`: Decomposition lands under `SESSION-STARTUP-READING.3.8.0`; Git owns the resulting commit identity.
 
 ## Changelog
 
+- `2026-09-13` .1.1: Complete the first11 guide windows; retain clear suffix ownership and concrete repair acceptance for current-claim drift.
 - `2026-09-13`: Own every conformance/test/Unicode range before reading; preserve all existing source, history, repair and capacity obligations.

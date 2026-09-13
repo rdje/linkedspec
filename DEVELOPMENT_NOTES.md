@@ -10,6 +10,12 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-13 — CONFORMANCE-SOURCE-READING.1.1 — finite guide markers do not validate surrounding current claims
+
+The exact capability guide prefix contains current17/85 versus20/100, exclusion24 versus19, cursor72 versus74, repetition44 versus54 and logical20/13 versus19/14 count claims. Generic-callable future/first-class-until wording also conflicts with current five-backend admission. Seven unchanged structural/neutral checkers pass; their public readers require selected markers and exact denials, leaving these actual paragraphs untested. Existing startup .41.6/.41.7 now require correction or explicit historical qualification plus meaningful recurrence for these examples. All11 source windows/770 fragments are fully consumed; the callable-codeblock section begins at the last line and remains suffix-owned. No runtime defect is inferred from guide prose.
+
+Verification: exact source/window and complete range-plan reconstruction; guide-claim assertions; capability, callable, signature, cursor, repeated-action, logical and root neutral/structural checks; preservation, memory, Knowledge, both histories, rendered book and normal doctrine hooks. Ordinary focused reading; no source repair, dependency build or fresh backend matrix.
+
 ## 2026-09-13 — SESSION-STARTUP-READING.3.8.0 — source coordinates and exact once-only coverage
 
 The conformance lane has160 baseline-identical inputs with167,604 LF delimiters and167,606 decoded line fragments. Four gzip sources are decoded losslessly and validated as UTF-8; the task uses explicit decoded-line coordinates. Independent replay reads ownership from143 task Scope fields and checks302 disjoint ranges, exact byte/range hashes and unchanged Git mode/blob/path identity. The longest logical line is14,687 bytes; smaller complete byte windows prevent output truncation without omitting it. Git and task Scope fields remain canonical; no parallel tracked inventory is added. Unicode regeneration checks are current focused proof, not physical-reading or cross-backend runtime credit.

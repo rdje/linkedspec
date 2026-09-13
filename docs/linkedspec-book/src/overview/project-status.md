@@ -496,12 +496,16 @@ checks,50 detached registry cases and actual collection validation. ADR0120 reco
 the director's focused-verification grant used for this correction and the separate
 supporting-reading closeout. Reading completion establishes audited comprehension;
 it does not close the six grammar/literal repair roots or establish runtime signoff.
-The next source-review lane now has exact ownership for all 160 conformance, test
-and Unicode inputs: 143 bounded groups covering 8,257,059 decoded bytes. The four
-pinned gzip inputs have explicit decompressed-text coordinates. Independent range
-and source-identity checks, plus neutral Unicode generation checks, pass; manual
-reading of this lane has not started. This planning checkpoint establishes no new
-runtime signoff and changes no language behavior.
+Conformance, test and Unicode reading has exact ownership for all 160 inputs in
+143 bounded groups covering 8,257,059 decoded bytes. The first group completes
+the capability guide's first 770 lines (65,485 bytes); its suffix remains unread.
+Seven focused structural/neutral checks pass, but the guide still has stale
+current census, governance/inventory/public counts and generic-callable wording.
+Existing startup `.41.6` and `.41.7` now own these exact paragraphs and meaningful
+checks against recurrence. Their selected-marker guards currently miss the
+surrounding claims; reading and passing checks do not close those repairs.
+The four pinned gzip inputs retain explicit decompressed-text coordinates for
+later reading. This checkpoint changes no language behavior or admission status.
 
 No fixture or regression assertion is removed. Current dependency evidence and
 replay: `docs/knowledge/current-supporting-grammar-dependencies.md`;

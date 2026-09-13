@@ -8,7 +8,7 @@ answers:
   - "how do I verify conformance reading source and range coverage"
   - "which conformance source reading file has the longest line"
 date: 2026-09-13
-status: exact decomposition; physical reading 0/143
+status: exact decomposition preserved; physical reading 1/143, README suffix and142 groups remain
 tags: [reading, conformance, tests, unicode, continuity, CONFORMANCE-SOURCE-READING]
 evidence: "Startup .3.8.0 independently accounts for160 baseline-identical files,5,422,313 stored bytes and8,257,059 decoded bytes in167,606 line fragments/167,604 LF delimiters. Four gzip inputs contribute54,500 decoded lines. All143 groups/302 ranges are contiguous, disjoint and bounded at1500 fragments/65536 bytes. No source, registry or runtime behavior changes; no physical-reading credit from inventory."
 reverify: "Run CONFORMANCE_SOURCE_READING_COVERAGE below through the project-data wrapper; it derives source identity from Git and range ownership from the task-tree rather than a parallel manifest. Use scripts/check_task_tree_metadata.sh for actual task collection limits."
@@ -116,3 +116,43 @@ CONFORMANCE_SOURCE_READING_COVERAGE
 Related: [[startup-codebase-reading-inventory]], [[unicode-17-case-contract-data]],
 [[supporting-reading-closeout-audit]], [[task-partition-capacity-registry-drift]],
 and [[CONFORMANCE-SOURCE-READING]].
+
+# Recorded reading-window reconstruction
+
+Group `.1.1` completes11 windows/770 fragments/65,485 bytes. Its comprehension
+and confirmed guide-claim repair ownership live in [[conformance-capability-guide-reading]].
+The task Reading evidence field pins its ordered windows. This reusable replay
+checks a completed group against baseline source; it does not replace physical
+reading or grant a second reading credit. Pass the desired completed leaf as the
+argument. A long logical line may need smaller complete presentation chunks while
+its source-window identity remains exact.
+
+```bash
+bash tools/project_data_run.sh python3 - CONFORMANCE-SOURCE-READING.1.1 <<'CONFORMANCE_READING_WINDOWS'
+from pathlib import Path
+import gzip,hashlib,json,re,subprocess,sys
+leaf=sys.argv[1] if len(sys.argv)>1 else 'CONFORMANCE-SOURCE-READING.1.1'
+text=Path('docs/tasks/CONFORMANCE-SOURCE-READING.md').read_text()
+node=re.search(r'^- ID: `'+re.escape(leaf)+r'`\n.*?(?=^- ID: |^## |\Z)',text,re.M|re.S)
+assert node and 'Status: `done`' in node[0]
+scope=re.search(r'^  Scope: (.+)$',node[0],re.M)[1];windows=[];fragments=size=0
+for path,kind,a,b in re.findall(r'`([^`]+)` (decoded lines|lines) (\d+)-(\d+)',scope):
+ a=int(a);b=int(b);raw=Path(path).read_bytes()
+ assert raw==subprocess.check_output(['git','show','baeb984e36a94a15951cd23d4c52def5064cdaca:'+path])
+ decoded=gzip.decompress(raw) if kind=='decoded lines' else raw
+ lines=decoded.splitlines(True);start=a;buffer=[]
+ for number in range(a,b+1):
+  line=lines[number-1]
+  if buffer and sum(map(len,buffer))+len(line)>6500:
+   chunk=b''.join(buffer);windows.append(dict(path=path,start=start,end=number-1,bytes=len(chunk),sha256=hashlib.sha256(chunk).hexdigest()));start=number;buffer=[]
+  buffer.append(line)
+ if buffer:
+  chunk=b''.join(buffer);windows.append(dict(path=path,start=start,end=b,bytes=len(chunk),sha256=hashlib.sha256(chunk).hexdigest()))
+ fragments+=b-a+1;size+=sum(map(len,lines[a-1:b]))
+digest=hashlib.sha256(json.dumps(windows,separators=(',',':')).encode()).hexdigest()
+evidence=re.search(r'^  Reading evidence: (\d+) complete windows / (\d+) fragments / (\d+) bytes; ordered window SHA-256 `([0-9a-f]+)`',node[0],re.M)
+assert evidence and (len(windows),fragments,size,digest)==(int(evidence[1]),int(evidence[2]),int(evidence[3]),evidence[4])
+print(json.dumps(dict(leaf=leaf,windows=len(windows),fragments=fragments,bytes=size,window_sha256=digest)))
+print('PASS reconstruction of recorded complete reading windows; hashes are continuity evidence, not new reading credit.')
+CONFORMANCE_READING_WINDOWS
+```

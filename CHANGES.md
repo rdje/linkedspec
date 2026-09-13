@@ -10,6 +10,12 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-13 — CONFORMANCE-SOURCE-READING.1.1 — read capability guide prefix and track actual current-claim gaps
+
+Conformance .1.1 reads all 11 complete windows of capability_conformance/README.md lines1-770: 770 fragments/65,485 baseline-identical bytes. Physical conformance reading is1/143; the README suffix771-897 and later contracts remain .1.2-owned. Seven focused structural/neutral checks pass, while exact current census, mutation/inventory/public-count and generic-callable claims remain stale. Existing startup .41.7 and .41.6 now own those actual paragraphs and meaningful recurrence; the marker/denial-only cause is recorded without changing source or runtime. All143 groups/302 ranges, prior source/history, six supporting repair roots and existing capacity limits remain. No fresh backend matrix, dependency build or parent closeout is claimed.
+
+Verification: exact source/window and complete range-plan reconstruction; guide-claim assertions; capability, callable, signature, cursor, repeated-action, logical and root neutral/structural checks; preservation, memory, Knowledge, both histories, rendered book and normal doctrine hooks. Ordinary focused reading; no source repair, dependency build or fresh backend matrix.
+
 ## 2026-09-13 — SESSION-STARTUP-READING.3.8.0 — bound conformance and decoded Unicode reading
 
 Startup .3.8.0 owns all160 baseline-identical conformance/test/Unicode inputs in CONFORMANCE-SOURCE-READING:5,422,313 stored bytes,8,257,059 decoded bytes and167,606 fragments/167,604 LF delimiters. All143 groups/302 exact ranges satisfy1500-fragment/65536-byte limits and cover every byte once. Four gzip inputs retain explicit decoded coordinates and pinned hashes. Managed Unicode casing and rule-label checks pass; inventory and regeneration receive no physical-reading credit. Reading remains0/143; first .1.1 owns capability_conformance/README.md lines1-770. Existing sources, histories, six supporting repair roots and all capacity limits remain. Supporting .1/startup .3.7 and the checker correction stay closed under consumed ADR0120 exceptions.
