@@ -1741,7 +1741,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.1.26` | `pending` | Read every Unicode mapping line 170-1669 after clean .1.25; preserve provenance, trace and all earlier repair owners plus parked named arguments. |
+| 1 | `LUA-STARTUP-READING.1.27` | `pending` | Read every Unicode mapping line 1670-3169 after clean .1.26; preserve all thirty repair roots, existing failures and parked named arguments. |
 
 ## Decisions
 

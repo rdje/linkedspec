@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `LUA-STARTUP-READING`
-- Status: `active` / approved capacity; source reading 25/51
+- Status: `active` / approved capacity; source reading 26/51
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.6`
 - Created: `2026-09-12`
 - Last updated: `2026-09-13`
@@ -45,7 +45,7 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
 - Ordered range SHA-256: `81c58b8319def28af518fb134a3787513fe746f0f0f73bcacb0e20b9ede1c9d6`.
 - Child-summary SHA-256: `f56ecac262800bd3cc1e6bba0cc25bfe22f095c3dfee41f1c6595d4200145290`.
 - Coordinates are one-based inclusive LF physical lines or absolute file bytes; both byte windows decode as UTF-8.
-- Current physical reading: 25/51 children, 33,151/71,269 fragments and 1,286,750/2,732,450 bytes.
+- Current physical reading: 26/51 children, 34,651/71,269 fragments and 1,321,830/2,732,450 bytes.
 - Exact independent replay and capacity evidence: `docs/knowledge/lua-startup-reading-coverage.md`.
 
 ## Task Tree
@@ -470,14 +470,18 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
   Commit: `LUA-STARTUP-READING.1.25 - read declarations and trace and own validation repairs`.
 
 - ID: `LUA-STARTUP-READING.1.26`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `67a97d3d32beb8b83fa1864e45102966699d7836`.
+  Verification tier: `focused`
+  Focused checks: Complete bounded generated-table reading, exact baseline/range identity and Unicode Knowledge reconciliation; scoped mapping evidence plus preserved prior generation/contract proof; memory, Knowledge, both histories, book and normal doctrines.
+  Canonical trigger: Ordinary generated-source reading only; no source, generated format, Unicode version or contract change. Later closeout and push retain canonical prerequisites.
   Goal: Read and understand group 26: unicode_case_mapping.lua.
   Scope: `lua/src/linkedspec/unicode_case_mapping.lua` lines 170-1669
   Baseline evidence: 1500 fragments / 35080 bytes; ordered range SHA-256 `899f29584aa57d08bbafabeb7e7840e98be6710a2beb66c418dcd09fa4274439`.
   Dependencies: .1.25 committed with clean handoff.
   Acceptance: Read every scoped byte without truncation; record comprehension, Knowledge and repair reconciliation, focused proof and a clean per-leaf commit.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Lua .1.26 reads all Unicode mapping lines 170-1669 in seven complete windows: 1,500 fragments /35,080 bytes; cumulative 26/51, 34,651 fragments /1,321,830 bytes. All 99 Lua sources remain baseline-identical; 47 files are fully read. Every scoped mapping matches the neutral contract: 1,398 lower and 99 upper entries. Both installed hosts pass all 2,994 direct mapping observations and 198 existing Unicode fixture assertions. Twelve generation/proof inputs remain identical to .1.25, preserving its successful regeneration without recounting that run. No new defect is found in this range; all thirty Lua repair roots and earlier failures remain open. Next .1.27 reads Unicode lines 1670-3169; named arguments and startup/ADR0118 prerequisites remain unchanged. Exact evidence: docs/knowledge/lua-unicode-lower-completion-reading.md.
+  Commit: `LUA-STARTUP-READING.1.26 - complete lower-case table reading and verify scoped mappings`.
 
 - ID: `LUA-STARTUP-READING.1.27`
   Status: `pending`
@@ -1876,7 +1880,7 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.1.26` | `pending` | Read every Unicode mapping line 170-1669 after clean .1.25; preserve provenance, trace and all earlier repair owners plus parked named arguments. |
+| 1 | `LUA-STARTUP-READING.1.27` | `pending` | Read every Unicode mapping line 1670-3169 after clean .1.26; preserve all thirty repair roots, existing failures and parked named arguments. |
 
 ## Decisions
 
@@ -1894,9 +1898,11 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 ## Blockers
 
-- None for bounded Lua .1.26 reading after clean .1.25. Installed5.5 native/generated nil-error tests remain failed under .2.2; declared5.4 proof remains pending. The baseline public-selector failure is tracked under startup .28.7 and is not a passing gate. The finite ADR0118 allowance and each actual candidate remain checked; startup .80 and all later verification/repair prerequisites retain their owners.
+- None for bounded Lua .1.27 reading after clean .1.26. Installed5.5 native/generated nil-error tests remain failed under .2.2; declared5.4 proof remains pending. The baseline public-selector failure is tracked under startup .28.7 and is not a passing gate. The finite ADR0118 allowance and each actual candidate remain checked; startup .80 and all later verification/repair prerequisites retain their owners.
 
 ## Verification Log
+
+- `2026-09-13` .1.26: Lua .1.26 reads all Unicode mapping lines 170-1669 in seven complete windows: 1,500 fragments /35,080 bytes; cumulative 26/51, 34,651 fragments /1,321,830 bytes. All 99 Lua sources remain baseline-identical; 47 files are fully read. Every scoped mapping matches the neutral contract: 1,398 lower and 99 upper entries. Both installed hosts pass all 2,994 direct mapping observations and 198 existing Unicode fixture assertions. Twelve generation/proof inputs remain identical to .1.25, preserving its successful regeneration without recounting that run. No new defect is found in this range; all thirty Lua repair roots and earlier failures remain open. Next .1.27 reads Unicode lines 1670-3169; named arguments and startup/ADR0118 prerequisites remain unchanged.
 
 - `2026-09-13` .1.25: Lua .1.25 completes parse-job declarations, the narrow registry and tracing, and reads the Unicode prefix in nine complete windows: 1,500 fragments /51,794 bytes; cumulative 25/51, 33,151 fragments /1,286,750 bytes. All 99 Lua sources remain baseline-identical; 47 files are fully read. Five selected trace/registry tests pass 134 assertions per installed host, 268 total. The 164 complete observations confirm provenance type/segment admission, false options, trace error replacement and formatter cleanup gaps. New .2.29/.2.30 own provenance and trace repairs; .2.8.17-.20 own registry/trace admission and .2.1 retains guidance reconciliation. Dart .2.19 records independent Lua confirmation without new Dart execution. Neutral staged123/public129, typed231 and Unicode17/12 fixtures pass as governance. All thirty Lua repair roots and earlier failures remain open. Next .1.26 reads Unicode lines 170-1669; named arguments and startup/ADR0118 prerequisites remain unchanged.
 
@@ -1956,6 +1962,8 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 ## Commit Log
 
+- `2026-09-13` .1.26: `LUA-STARTUP-READING.1.26 - complete lower-case table reading and verify scoped mappings`; activation 67a97d3d3; next .1.27 after clean proof and empty brief.
+
 - `2026-09-13` .1.25: `LUA-STARTUP-READING.1.25 - read declarations and trace and own validation repairs`; activation 813b2aad2; next .1.26 after clean proof and empty brief.
 
 - `2026-09-13`: `LUA-STARTUP-READING.1.24 - finish staged reading and own diagnostic and provenance repairs` closes exact reading child 24 from clean 8469d5ba1.
@@ -2013,6 +2021,8 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 - `SESSION-STARTUP-READING.3.6.0 - freeze exact Lua reading ownership and capacity intake` owns creation of this plan.
 
 ## Changelog
+
+- `2026-09-13` .1.26: Complete all lower-case mapping reading and first 99 upper-case entries; verify every scoped mapping and preserve all earlier repair and historical evidence.
 
 - `2026-09-13` .1.25: Complete declaration/registry/trace reading and Unicode prefix; own original provenance validation and trace cleanup, extend option/guidance owners, and preserve all prior evidence.
 

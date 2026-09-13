@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-13 — Lua generated lower-case table reading and complete scoped proof
+
+- Read every Unicode mapping line 170-1669: 1,500 fragments /35,080 bytes; cumulative 26/51 and 1,321,830 bytes.
+- All 1,398 lower and 99 upper entries match the neutral contract; both installed hosts pass 2,994 exact mapping observations and 198 existing fixture assertions.
+- Twelve generation/proof inputs remain byte-identical to the preceding successful regeneration; no source, contract or Unicode version changes.
+- LUA-STARTUP-READING.1.26 preserves all thirty repair roots and earlier evidence; next .1.27 reads lines 1670-3169.
+
 ## 2026-09-13 — Lua declaration and trace reading preserves validation repairs
 
 - Read all five exact ranges: 1,500 fragments /51,794 bytes; cumulative 25/51 and 1,286,750 bytes; source unchanged.

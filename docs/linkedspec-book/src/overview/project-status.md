@@ -329,12 +329,12 @@ step. `PARSER-AUTHORING-APIS.4` owns grammar/binding, definition choices,
 representation compatibility and bounded implementation planning; these four
 children remain unactivated and current startup reading continues.
 
-**Lua source reading is underway (25/51 groups):** the complete
+**Lua source reading is underway (26/51 groups):** the complete
 99-file inventory covers 71,268 physical lines and 2,732,450 bytes. Its 51 owned
 reading groups include generated tables, native adapters and both-ABI tests.
 Two UTF-8-safe byte windows retain an oversized generated MCP line, so the
 per-window total is 71,269 fragments. The independent range audit proves complete
-ownership. The first 25 groups physically read 33,151 fragments /1,286,750 bytes,
+ownership. The first 26 groups physically read 34,651 fragments /1,321,830 bytes,
 including the complete README, both commands, all three native C bindings, ActionIR
 constructors, call names, contracts, the complete parser, bounded authority,
 compiled state and corpus modules, facade, interpreter, JSON and matching. They
@@ -344,10 +344,20 @@ scoped binding, scalar numeric, compilation outcome, semantic index, observation
 and query, both complete semantic projectors, SHA hashing, the complete emitter and
 typed-source modules, spec AST, loader, spec parser and validator, complete staged
 AST enrichment, capture storage and parse-job declarations, the narrow staged
-registry and tracing. The generated Unicode mapping is read through line 169,
-including the lower-case entry U+01CF → U+01D0. Forty-seven files are fully read.
-The remaining 26 groups require
+registry and tracing. The generated Unicode mapping is read through line 1669:
+the lower-case table is complete, followed by the first 99 upper-case entries
+through U+014D → U+014C. Forty-seven files are fully read.
+The remaining 25 groups require
 their own reading and verified commits; source reading does not close the limitations below.
+
+**Lua Unicode mapping verification:** all 1,398 lower-case and 99 upper-case
+entries in the latest read range match the pinned neutral data. Both installed
+hosts produce all 1,497 exact mapped strings, and the existing twelve-fixture
+consumer passes 99 assertions per host through direct, helper, receiver and array
+paths. The uppercase prefix includes `ß → SS` and U+0149 → U+02BC U+004E;
+mapping values preserve complete scalar sequences. The prior successful offline
+regeneration remains applicable because all twelve inputs are byte-identical.
+Remaining tables and the conversion algorithm retain their own reading leaves.
 
 **Generated Lua MCP binding:** the current 83,166-byte module matches its neutral
 repository inputs. Both installed Lua hosts pass 116 focused binding checks each,
@@ -477,7 +487,7 @@ The director also granted one containment `.14` exception for this bounded capac
 implementation before full codebase reading, using focused proof and normal hooks
 without canonical CI/receipt. Later milestone, repair and push requirements remain;
 dependency build-on-update implementation stays separately owned. Lua source reading
-is 25/51; the next group reads every generated Unicode mapping line 170–1669.
+is 26/51; the next group reads every generated Unicode mapping line 1670–3169.
 The installed-host test failures below remain open.
 All known limitations below retain their repair owners.
 Exact admission and replay: `docs/knowledge/lua-reading-evidence-capacity-admission.md`.

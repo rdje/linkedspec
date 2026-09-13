@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-13 — Preserve complete generated casing data and scoped runtime evidence
+
+- Mapping values remain scalar sequences: the read upper prefix includes sharp-s to SS and U+0149 to U+02BC U+004E; explicit identity entries remain neutral-data exact.
+- Full scoped comparison covers every mapping row and table boundary; hashes and consumer execution grant no credit to unread algorithm or table lines.
+- Prior regeneration proof remains applicable through exact comparison of all twelve inputs, while fresh direct and existing fixture execution establish this slice’s runtime evidence.
+- LUA-STARTUP-READING.1.26 retains exact reproduction in docs/knowledge/lua-unicode-lower-completion-reading.md; no new defect or repair closure is inferred.
+
 ## 2026-09-13 — Validate original provenance and preserve primary trace failures
 
 - Diagnostic fallback labels must not replace malformed original source fields before typed validation; literal placeholder strings remain valid inputs.
