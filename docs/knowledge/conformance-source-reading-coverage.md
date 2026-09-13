@@ -9,7 +9,7 @@ answers:
   - "how do I verify conformance reading source and range coverage"
   - "which conformance source reading file has the longest line"
 date: 2026-09-13
-status: exact decomposition preserved; physical reading 15/143, 51 files complete and 128 groups remain
+status: exact decomposition preserved; physical reading 16/143, 51 files complete and 127 groups remain
 tags: [reading, conformance, tests, unicode, continuity, CONFORMANCE-SOURCE-READING]
 evidence: "Startup .3.8.0 independently accounts for160 baseline-identical files,5,422,313 stored bytes and8,257,059 decoded bytes in167,606 line fragments/167,604 LF delimiters. Four gzip inputs contribute54,500 decoded lines. All143 groups/302 ranges are contiguous, disjoint and bounded at1500 fragments/65536 bytes. No source, registry or runtime behavior changes; no physical-reading credit from inventory."
 reverify: "Run CONFORMANCE_SOURCE_READING_COVERAGE below through the project-data wrapper; it derives source identity from Git and range ownership from the task-tree rather than a parallel manifest. Use scripts/check_task_tree_metadata.sh for actual task collection limits."
@@ -406,3 +406,13 @@ Latin/Greek/Cyrillic entries preserve exact scalar sequences; ordinary03A3-to03C
 coexists with the separate Final Sigma rule. [[unicode-17-case-contract-data]]
 retains the unchanged704e261b offline proof; [[six-variant-unicode-17-case-parity]]
 retains native admission history. Later arrays and all repairs remain owned.
+
+
+## September 13 Unicode reading .1.16
+
+`CONFORMANCE-SOURCE-READING.1.16` reads 3 windows, 1,500 fragments and 14,500 bytes.
+Cumulative reading is 16/143, 18,431 fragments, 892,969 bytes and 51 complete files.
+Armenian, Georgian and Cherokee rows use their exact authored target ranges; sparse
+entries do not authorize a universal offset. Latin additional reading reaches the
+1E3E-to-1E3F value at line 4138. Unchanged Unicode proof remains at 704e261b;
+[[unicode-17-case-contract-data]] separates current generated data from native history.

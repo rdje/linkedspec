@@ -10,6 +10,12 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-13 — CONFORMANCE-SOURCE-READING.1.16 — preserve distinct lowercase mapping families
+
+The range closes the prior 0522 entry, finishes Cyrillic pairs through 052E-to-052F, reads Armenian 0531-to-0561 through 0556-to-0586 and the identity 0587 row, and then reads two distinct Georgian families: 10A0-to-2D00 through the sparse 10C7/10CD entries, and 1C90-to-10D0 through 1CBF-to-10FF. Cherokee 13A0-to-AB70 through 13EF-to-ABBF differs from the final 13F0-to-13F8 through 13F5-to-13FD group. Cyrillic 1C89-to-1C8A and Latin additional pairs follow. Exact mappings and omitted code points remain explicit, with no inferred universal offset or normalization. Line 4138 ends at the 1E3E-to-1E3F value; its closing delimiters and later mappings remain .1.17-owned.
+
+Retain the unchanged Unicode 17 generation, byte-equality and 12-fixture proof from CONFORMANCE-SOURCE-READING.1.14 at 704e261b. Fresh window replay, complete range inventory, cumulative coverage, source/task/history preservation, rendered book, memory and document-pressure checks govern this ordinary reading leaf. Native admission evidence remains separately scoped; normal commit doctrines remain required.
+
 ## 2026-09-13 — CONFORMANCE-SOURCE-READING.1.15 — preserve table mappings and contextual Sigma separately
 
 The range closes the prior01EE mapping and reads Latin extensions, Greek and Cyrillic lowercase entries through the0522-to0523 value. Examples include titlecase01F1/01F2 converging on01F3, non-adjacent023A-to2C65 and023E-to2C66, Greek03F4-to03B8 and03FD-to037B, ordinary03A3-to03C3, and Cyrillic04C0-to04CF. The default Sigma mapping does not override the separately specified Final_Sigma context. Identity rows such as01F0 and0390 preserve exact scalar sequences without normalization. The last entry closing delimiters and all later mappings remain .1.16-owned. No new casing behavior or universal native proof is inferred.

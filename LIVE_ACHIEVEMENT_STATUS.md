@@ -5,19 +5,21 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Perl, Rust, Dart and Julia reading are complete. Canonical capacity admission is complete at a67a18bf. Conformance .1.15 reads 3 complete windows, 1,500 fragments and 14,500 baseline-identical bytes. Physical reading is 15/143: 16,931 fragments, 878,469 bytes and 51 complete files. The lowercase table continues through Latin, Greek and Cyrillic mappings, retaining exact non-adjacent mappings and the default Sigma entry. Existing Final Sigma context remains a separate rule. Unicode generation proof from clean704e261b remains valid for unchanged inputs; no behavior, native admission or runtime repair changes. Next .1.16 owns the crossing0522 mapping and continuation. Dart reading is 55/55 children, 80,297 fragments / 2,471,305 bytes. Dart .7 is approved: containment .11 / ADR0113 implement the exact engineering-history counts with fresh source/history and 22-boundary proof; the director granted a one-time focused/receipt exception on September 11, closing the capacity boundary at ad64f76f before .1.47. The director requires build-on-update PGEN/RGX reuse under .80. Remaining reading and repairs stay open.
+  findings, and donor-policy comparisons. Perl, Rust, Dart and Julia reading are complete. Canonical capacity admission is complete at a67a18bf. Conformance .1.16 reads 3 complete windows, 1,500 fragments and 14,500 baseline-identical bytes. Physical reading is 16/143: 18,431 fragments, 892,969 bytes and 51 complete files. Lowercase reading covers Armenian, Georgian and Cherokee families, preserving sparse entries and their distinct target ranges, then continues into Latin additional mappings. Existing offline Unicode generation proof remains applicable to unchanged inputs. Next .1.17 owns the crossing 1E3E entry and following mappings; all runtime repairs remain open. Dart reading is 55/55 children, 80,297 fragments / 2,471,305 bytes. Dart .7 is approved: containment .11 / ADR0113 implement the exact engineering-history counts with fresh source/history and 22-boundary proof; the director granted a one-time focused/receipt exception on September 11, closing the capacity boundary at ad64f76f before .1.47. The director requires build-on-update PGEN/RGX reuse under .80. Remaining reading and repairs stay open.
 - Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.82` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `CONFORMANCE-SOURCE-READING.1.15 - read Unicode Latin Greek and Cyrillic lowercase mappings` — Conformance .1.15 reads 3 complete windows, 1,500 fragments and 14,500 baseline-identical bytes. Physical reading is 15/143: 16,931 fragments, 878,469 bytes and 51 complete files. The lowercase table continues through Latin, Greek and Cyrillic mappings, retaining exact non-adjacent mappings and the default Sigma entry. Existing Final Sigma context remains a separate rule. Unicode generation proof from clean704e261b remains valid for unchanged inputs; no behavior, native admission or runtime repair changes. Next .1.16 owns the crossing0522 mapping and continuation.
+- `CONFORMANCE-SOURCE-READING.1.16 - read Armenian Georgian and Cherokee lowercase mappings` — Conformance .1.16 reads 3 complete windows, 1,500 fragments and 14,500 baseline-identical bytes. Physical reading is 16/143: 18,431 fragments, 892,969 bytes and 51 complete files. Lowercase reading covers Armenian, Georgian and Cherokee families, preserving sparse entries and their distinct target ranges, then continues into Latin additional mappings. Existing offline Unicode generation proof remains applicable to unchanged inputs. Next .1.17 owns the crossing 1E3E entry and following mappings; all runtime repairs remain open.
 
 ## Next Action
 
-- `CONFORMANCE-SOURCE-READING.1.16` — Read CONFORMANCE-SOURCE-READING.1.16 from clean HEAD: `capability_conformance/unicode_case_contract.json` lines 2639-4138. Total 1,500 fragments/14,500 bytes. Read every bounded window, preserve crossing mapping ownership, retain unchanged generated-data proof proportionately, update live records/book and commit before .1.17. Continue PNT.
+- `CONFORMANCE-SOURCE-READING.1.17` — Read CONFORMANCE-SOURCE-READING.1.17 from clean HEAD: `capability_conformance/unicode_case_contract.json` lines 4139-5638. Total 1,500 fragments/14,500 bytes. Read every bounded window, preserve crossing mapping ownership, retain unchanged generated-data proof proportionately, update live records/book and commit before .1.18. Continue PNT.
 
 ## Recent Completions
+
+- `2026-09-13` — `CONFORMANCE-SOURCE-READING.1.16` reads 3 windows/1500 fragments/14500 bytes; 51 files complete. Unchanged generated-data proof retained; next .1.17.
 
 - `2026-09-13` — `CONFORMANCE-SOURCE-READING.1.15` reads 3 windows/1500 fragments/14500 bytes; 51 files complete. Unchanged generated-data proof retained; next .1.16.
 
@@ -48,8 +50,6 @@
 - `2026-09-13` — `CONFORMANCE-SOURCE-READING.1.2` reads12 windows/808 fragments/65502 bytes; four source files complete, diagnostic269-273 remains; two fresh neutral checks pass; next .1.3.
 
 - `2026-09-13` — `CONFORMANCE-SOURCE-READING.1.1` reads11 windows/770 fragments/65,485 bytes. Seven structural/neutral checks pass while exact current-guide claims remain stale; existing startup .41.6/.41.7 own correction and recurrence. Next .1.2.
-
-- `2026-09-13` — `SESSION-STARTUP-READING.3.8.0` owns160 inputs in143 bounded groups/302 exact ranges, including four decoded Unicode files; baseline/mode/hash/coverage and Unicode checks pass. No source reading credit yet; next conformance .1.1.
 
 ## History
 
