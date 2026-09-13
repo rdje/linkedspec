@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-13 — Lua reading evidence is complete; closeout authority is separate
+
+- All 51 historical reading bodies and their linked comprehension cards remain exact; independent Git/range/activation proof adds no physical reading credit and does not remediate any of the 145 pending repair nodes.
+- Retained-result verification must preserve failed PUC native120/121 and generated79/80 suites, native-error exclusions, prefix/full-consumer distinctions and the existing public-selector baseline failure. No full Lua or declared5.4 gate passes here.
+- Six dependency drivers remain identical to startup .80.0; earlier Julia and finite-capacity approvals do not waive this Lua milestone or authorize dependency builds.
+- LUA-STARTUP-READING.3.1 owns the exact proposal and replay in docs/knowledge/lua-reading-commit-closeout-audit.md; .3.2 requires new explicit disposition before reading-only closure and supporting-code handoff.
+
 ## 2026-09-13 — Separate physical reading from audited startup closeout
 
 - All Lua source bytes are read, including generated content and the intentionally dormant progressive authority. .1 and startup .3.6 still require independent audit and canonical closeout or a new scoped exception.

@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-13 — Independent Lua reading audit and closeout proposal
+
+- Verify all 51 unique reading commits, first-parent MEMORY activations and byte-exact task/card evidence; 149 ranges cover all 99 baseline sources, 71269 fragments and 2732450 bytes.
+- Preserve 35 repair roots/145 pending nodes; reconcile nine retained-result verifiers, exact PUC failures, four native-error exclusions, public-selector baseline and unchanged dependency-build drivers.
+- Correct the startup current-owner count from 33 to 35; synchronize book, roadmaps and current frontiers around the exact pending reading-only closeout proposal.
+- LUA-STARTUP-READING.3.1 closes only this focused audit; .3.2 and reading parents remain open for explicit disposition, with normal doctrines and later startup/repair/canonical requirements intact.
+
 ## 2026-09-13 — Final Lua source ranges and complete consumer proof
 
 - Read final two ranges in five complete windows: 729 fragments /28118 bytes; all 51 groups and 99 baseline-identical files physically read, 71269 fragments /2732450 bytes.

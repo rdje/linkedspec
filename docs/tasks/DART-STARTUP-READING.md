@@ -1571,7 +1571,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.3` | `pending` | Independently audit all 51 committed source-reading groups and closeout prerequisites after clean .1.51; preserve all 35 repair roots, known failures and no-build restrictions before supporting-code handoff. |
+| 1 | `LUA-STARTUP-READING.3.2` | `pending` | Independent .3.1 audit is complete; obtain explicit disposition of the committed reading-only closeout proposal before closing parents or routing supporting .3.7. Preserve all 35 repair roots/145 nodes, failed/excluded checks and no-build restrictions. |
 
 ## Decisions
 

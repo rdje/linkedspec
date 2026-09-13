@@ -329,7 +329,7 @@ step. `PARSER-AUTHORING-APIS.4` owns grammar/binding, definition choices,
 representation compatibility and bounded implementation planning; these four
 children remain unactivated and current startup reading continues.
 
-**Lua physical source reading is complete (51/51 groups); independent audit is pending:** the complete
+**Lua physical source reading and independent audit are complete; reading closeout remains pending:** the complete
 99-file inventory covers 71,268 physical lines and 2,732,450 bytes. Its 51 owned
 reading groups include generated tables, native adapters and both-ABI tests.
 Two UTF-8-safe byte windows retain an oversized generated MCP line, so the
@@ -361,9 +361,26 @@ source foundation and static graph. Remaining-static, semantic admission and
 source-alias, staged-enrichment, standalone-lifecycle, typed-source and Unicode
 classifier, identity, negative-isolation and parser-route tests are complete;
 write-vivification and the dormant progressive-authority consumer are complete.
-All ninety-nine files are physically read. Independent coverage/comprehension and
-commit-activation audit plus canonical closeout remain; physical reading does not
-close the limitations below or the supporting-code/startup prerequisites.
+All ninety-nine files are physically read. The independent audit verifies each of
+the 51 unique reading commits, its first-parent activation and linked comprehension
+card, plus all 149 exact ranges and baseline-identical source trees. All 35 repair
+roots and 145 pending repair nodes retain their exact evidence; none is closed.
+
+Nine retained-result verifiers confirm the recorded boundaries. PUC 5.5 native
+observation remains failed at 120/121 and generated observation at 79/80; LuaJIT
+passes those suites. Four package groups exercising the known native regex-error
+path remain excluded. The declared PUC 5.4 proof and a passing full Lua component
+gate remain unavailable at this boundary. The existing public-selector baseline
+failure is also still open. These limits are retained alongside the passing
+focused results below.
+
+Canonical closeout retains a separate prerequisite: the unchanged CI drivers
+include PGEN/RGX build routes, while the required build-on-update lifecycle is
+still pending. A concrete one-time Lua reading-only closeout proposal awaits
+explicit director disposition. It would close only reading containers and route
+supporting-code reading, preserving all defects, normal hooks and later checks.
+The proposal does not change runtime behavior or claim full-codebase completion.
+Exact evidence and scope: `docs/knowledge/lua-reading-commit-closeout-audit.md`.
 
 **Lua Unicode casing and rule-label verification:** all property tables match the
 pinned Unicode 17 neutral data. Four Sigma contexts at 2,030 property endpoints

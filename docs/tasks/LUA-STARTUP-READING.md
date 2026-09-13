@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `LUA-STARTUP-READING`
-- Status: `active` / approved capacity; source reading 51/51
+- Status: `active` / approved capacity; source reading 51/51; independent audit complete; closeout pending
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.6`
 - Created: `2026-09-12`
 - Last updated: `2026-09-13`
@@ -1896,10 +1896,34 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
   Commit: `pending`
 
 - ID: `LUA-STARTUP-READING.3`
-  Status: `pending`
+  Status: `active`
   Goal: Independently close Lua reading and route the remaining supporting-code lanes.
   Dependencies: All .1 reading children committed and every finding repair-owned.
   Acceptance: Audit exact coverage/current deltas, comprehension, unique commits and first-parent activations. Preserve all repairs and satisfy canonical milestone proof or a newly explicit scoped exception before closing .1/startup .3.6.
+  Verification: `pending`
+  Commit: `pending`
+  Children: `.3.1`, `.3.2`
+
+- ID: `LUA-STARTUP-READING.3.1`
+  Status: `done`
+  Activation commit: `7ead9e003b2cfb1bb356f990d8644e2d8bcad3d4`.
+  Goal: Independently audit all committed Lua reading evidence and prepare a concrete closeout disposition.
+  Scope: All 51 source-reading commits, 149 exact ranges, 99 baseline entries, linked comprehension/verification cards, pending repairs, current Lua driver and canonical dependency-build prerequisites; documentation-only audit and proposal.
+  Dependencies: .1.1-.1.51 committed with clean handoff.
+  Acceptance: Verify exact scopes and source trees at every unique commit, first-parent activations, durable comprehension/proof and pending repair preservation. Reconcile every known failed/excluded check, supported-host limits, current no-build directive and actual candidate capacity; make the closeout proposal reviewable without closing parents, changing gates or running excluded probes.
+  Verification tier: `focused`
+  Focused checks: Independent source/range/commit/card/repair audit; exact retained focused-result and known-failure boundaries; current versus retained CI-driver identity; prior evidence preservation, memory, Knowledge, both bounded histories, book rendering and all normal doctrine hooks.
+  Canonical trigger: Documentation-only independent audit and proposal, not milestone closure. .3.2 requires canonical milestone proof or a newly explicit scoped exception; no prior exception or build authorization is extended.
+  Verification: Lua .3.1 independently verifies all 51 reading commits and first-parent activations, 149 ranges, 99 baseline-identical sources, 71,269 fragments /2,732,450 bytes and 51 exact comprehension/replay cards. All 35 repair roots/145 pending nodes remain byte-exact. Nine retained-result verifiers pass while preserving PUC5.5 native120/121 and generated79/80 failures, four excluded native-error groups and startup .28.7 public-check failure. Current runtime identities and six unchanged dependency drivers confirm the unresolved PUC5.4 and no-build boundaries. Correct the startup current-owner count from 33 to 35 roots. The concrete .3.2 reading-only exception proposal is pending explicit approval; no parent is closed and no repair, gate or dependency is changed. Supporting-code reading, formal book/policy, named arguments and later canonical requirements remain pending. Exact identities, retained outcomes and proposal: docs/knowledge/lua-reading-commit-closeout-audit.md.
+  Candidate verification: Both exact new card recipes pass; preservation retains 1429 prior files and 2586/2588 prior task nodes, with only the .3 container and startup .3.6 current owner changed and exactly two new audit/closeout children. All 92 prior Known headings and historical chronology bytes remain; rendered status matches audit and pending disposition. Knowledge is 1138 facts/9086 keys; memory 60 lines; histories 361/291 lines with no rollover, 68 immutable segments and 34 mutation controls. All 20 resulting pressure surfaces/62 routes/32 mutation classes and diff checks pass. Normal doctrine hooks govern landing.
+  Commit: `LUA-STARTUP-READING.3.1 - audit Lua reading commits and prepare scoped closeout`.
+
+- ID: `LUA-STARTUP-READING.3.2`
+  Status: `pending`
+  Goal: Close independently audited Lua reading under a verified canonical boundary or a newly explicit director disposition.
+  Scope: Reading parent .1, audit/closeout .3, startup .3.6 and supporting-code .3.7 handoff; preserve every runtime/test repair and all remaining startup requirements.
+  Dependencies: .3.1 committed; canonical milestone proof consistent with the PGEN/RGX no-build directive, or explicit approval of the exact committed reading-only exception proposal.
+  Acceptance: Reverify the committed audit and all source/repair boundaries; close only reading containers after the required disposition. Never report the known PUC5.5 component failures or excluded native regex cases as passing. Normal hooks, memory, book and continuity remain required; no runtime, gate, receipt, capacity or dependency change belongs to this closeout.
   Verification: `pending`
   Commit: `pending`
 
@@ -2238,9 +2262,11 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.3` | `pending` | Independently audit all 51 committed source-reading groups and closeout prerequisites after clean .1.51; preserve all 35 repair roots, known failures and no-build restrictions before supporting-code handoff. |
+| 1 | `LUA-STARTUP-READING.3.2` | `pending` | Independent .3.1 audit is complete; obtain explicit disposition of the committed reading-only closeout proposal before closing parents or routing supporting .3.7. Preserve all 35 repair roots/145 nodes, failed/excluded checks and no-build restrictions. |
 
 ## Decisions
+
+- `2026-09-13` .3.1: Prepare the exact .3.2 proposal without inferring approval or changing standing verification; .1/.3/startup .3.6 remain open.
 
 - `2026-09-12` .4.2: Explicit Granted approval closes .4.2 and admits the exact ADR0118 capacity under containment .14. The historical .4.1 proposal remains byte-exact.
 
@@ -2252,13 +2278,17 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 ## Open Questions
 
+- .3.2 requires a new explicit disposition of the exact proposal in docs/knowledge/lua-reading-commit-closeout-audit.md; earlier Julia and capacity approvals do not waive Lua closeout.
+
 - .4.2 resolved: explicit Granted approval is recorded under ADR0118; no further decision is needed for this bounded admission.
 
 ## Blockers
 
-- None for independent Lua .3 audit after clean .1.51; canonical closeout and the explicit no-build directive require reconciliation. Installed5.5 native/generated nil-error tests remain failed under .2.2; declared5.4 proof remains pending. The baseline public-selector failure is tracked under startup .28.7 and is not a passing gate. The finite ADR0118 allowance and each actual candidate remain checked; startup .80 and all later verification/repair prerequisites retain their owners.
+- Independent .3.1 audit is complete. .3.2 awaits explicit reading-only disposition or compatible canonical proof; the concrete proposal retains absent full-component/PUC5.4 proof and all failed/excluded checks. Installed5.5 native/generated nil-error tests remain failed under .2.2; declared5.4 proof remains pending. The baseline public-selector failure is tracked under startup .28.7 and is not a passing gate. The finite ADR0118 allowance and each actual candidate remain checked; startup .80 and all later verification/repair prerequisites retain their owners.
 
 ## Verification Log
+
+- `2026-09-13` .3.1: Lua .3.1 independently verifies all 51 reading commits and first-parent activations, 149 ranges, 99 baseline-identical sources, 71,269 fragments /2,732,450 bytes and 51 exact comprehension/replay cards. All 35 repair roots/145 pending nodes remain byte-exact. Nine retained-result verifiers pass while preserving PUC5.5 native120/121 and generated79/80 failures, four excluded native-error groups and startup .28.7 public-check failure. Current runtime identities and six unchanged dependency drivers confirm the unresolved PUC5.4 and no-build boundaries. Correct the startup current-owner count from 33 to 35 roots. The concrete .3.2 reading-only exception proposal is pending explicit approval; no parent is closed and no repair, gate or dependency is changed. Supporting-code reading, formal book/policy, named arguments and later canonical requirements remain pending.
 
 - `2026-09-13` .1.51: Lua .1.51 reads the final two exact ranges in five complete windows: 729 fragments /28,118 bytes. Physical Lua source reading reaches 51/51 groups, all 99 baseline-identical files, 71,269 fragments /2,732,450 bytes. Full write 438 and dormant progressive authority 273 pass per installed host, 1,422 ordinary assertions total; write and progressive/public neutral checkers pass. All nineteen wrong expected_binding records individually survive the complete write consumer per host (38 full-suite mutations), extending existing .2.35 coverage evidence without establishing incorrect runtime state. Authority non-discovery is intentional; its healthy nested-budget and disconnected parent-state fixtures do not close earlier integration defects. Existing .2.1 owns dated progressive guidance qualifications. All 35 repair roots, known PUC5.5 failures and native-error exclusions remain open. Next .3 independently audits coverage, comprehension, commits/activations and closeout prerequisites; the reading parent and startup .3.6 remain open pending their canonical proof or a newly explicit scoped exception. Named arguments, supporting-code reading and startup/ADR0118 prerequisites remain unchanged.
 
@@ -2370,6 +2400,8 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 ## Commit Log
 
+- `2026-09-13` .3.1: `LUA-STARTUP-READING.3.1 - audit Lua reading commits and prepare scoped closeout`; activation 7ead9e003b2cfb1bb356f990d8644e2d8bcad3d4; pending .3.2 disposition after clean proof and empty brief.
+
 - `2026-09-13` .1.51: `LUA-STARTUP-READING.1.51 - finish Lua source reading and verify final consumers`; activation 91ff8a642; next .3 after clean proof and empty brief.
 
 - `2026-09-13` .1.50: `LUA-STARTUP-READING.1.50 - read Unicode consumers and track write failure-state gap`; activation 204e60348; next .1.51 after clean proof and empty brief.
@@ -2479,6 +2511,8 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 - `SESSION-STARTUP-READING.3.6.0 - freeze exact Lua reading ownership and capacity intake` owns creation of this plan.
 
 ## Changelog
+
+- `2026-09-13` .3.1: Complete independent source/commit/card/repair audit and current verification reconciliation; prepare reviewable reading-only closeout while preserving all historical evidence.
 
 - `2026-09-13` .1.51: Finish every Lua source byte and the last consumer proofs; retain .2.35 after full-suite mutations and distinguish physical coverage from independent canonical startup closeout.
 

@@ -2253,9 +2253,9 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Status: `active`
   Goal: Split and read all 99 baseline Lua entries, including native adapters, both-ABI tests, runtime, and commands.
   Children: `.3.6.0` owns decomposition; LUA-STARTUP-READING.1 owns 51 reading children and .3 owns independent closeout.
-  Reading owner: `docs/tasks/LUA-STARTUP-READING.md`; .4/.4.2 close under ADR0118 and containment .14; exact reading is 51/51; .3 follows child 51; .2.1-.2.33 own thirty-three concrete repair roots, with installed5.5 nil-error failures under .2.2 and shared Lua budget repair under .82.3.1; .28.7 owns the baseline public-check failure.
+  Reading owner: `docs/tasks/LUA-STARTUP-READING.md`; .4/.4.2 close under ADR0118 and containment .14; exact reading is 51/51; .3.1 audit is complete and .3.2 awaits explicit disposition; .2.1-.2.35 own thirty-five concrete repair roots, with installed5.5 nil-error failures under .2.2 and shared Lua budget repair under .82.3.1; .28.7 owns the baseline public-check failure.
   Acceptance: Define bounded file/range children before reading; generated tables and the large test runner stay in scope.
-  Verification: Lua .1.51 reads the final two exact ranges in five complete windows: 729 fragments /28,118 bytes. Physical Lua source reading reaches 51/51 groups, all 99 baseline-identical files, 71,269 fragments /2,732,450 bytes. Full write 438 and dormant progressive authority 273 pass per installed host, 1,422 ordinary assertions total; write and progressive/public neutral checkers pass. All nineteen wrong expected_binding records individually survive the complete write consumer per host (38 full-suite mutations), extending existing .2.35 coverage evidence without establishing incorrect runtime state. Authority non-discovery is intentional; its healthy nested-budget and disconnected parent-state fixtures do not close earlier integration defects. Existing .2.1 owns dated progressive guidance qualifications. All 35 repair roots, known PUC5.5 failures and native-error exclusions remain open. Next .3 independently audits coverage, comprehension, commits/activations and closeout prerequisites; the reading parent and startup .3.6 remain open pending their canonical proof or a newly explicit scoped exception. Named arguments, supporting-code reading and startup/ADR0118 prerequisites remain unchanged.
+  Verification: Lua .3.1 independently verifies all 51 reading commits and first-parent activations, 149 ranges, 99 baseline-identical sources, 71,269 fragments /2,732,450 bytes and 51 exact comprehension/replay cards. All 35 repair roots/145 pending nodes remain byte-exact. Nine retained-result verifiers pass while preserving PUC5.5 native120/121 and generated79/80 failures, four excluded native-error groups and startup .28.7 public-check failure. Current runtime identities and six unchanged dependency drivers confirm the unresolved PUC5.4 and no-build boundaries. Correct the startup current-owner count from 33 to 35 roots. The concrete .3.2 reading-only exception proposal is pending explicit approval; no parent is closed and no repair, gate or dependency is changed. Supporting-code reading, formal book/policy, named arguments and later canonical requirements remain pending.
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.3.6.0`
@@ -4607,7 +4607,7 @@ startup implementation prerequisites and the rgx reading exclusion remain intact
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.3` | `pending` | Independently audit all 51 committed source-reading groups and closeout prerequisites after clean .1.51; preserve all 35 repair roots, known failures and no-build restrictions before supporting-code handoff. |
+| 1 | `LUA-STARTUP-READING.3.2` | `pending` | Independent .3.1 audit is complete; obtain explicit disposition of the committed reading-only closeout proposal before closing parents or routing supporting .3.7. Preserve all 35 repair roots/145 nodes, failed/excluded checks and no-build restrictions. |
 
 ## Reading Ledger
 
