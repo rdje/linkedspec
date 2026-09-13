@@ -10,6 +10,12 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-13 — CONFORMANCE-SOURCE-READING.1.12 — read staged scheduling and policy boundaries
+
+Conformance .1.12 reads 11 complete windows, 1,012 fragments and 65,472 baseline-identical bytes. The semantic model reaches EOF; staged enrichment is read through line 996, inside the ownership inventory. Physical reading is 12/143: 13,090 fragments, 765,127 bytes and 48 complete files. Staged reading separates deferred declaration, caller-prepared parser selection, typed provenance, deterministic identity, breadth-first scheduling, shared bounds, isolated child state and detached stitching. Focused staged neutral/public proof passes; prior semantic proof remains scoped to unchanged inputs. No runtime, admission or dependency change; .1.13 owns the remaining ownership/public records and following contracts.
+
+Verification: reconstruct all 11 source windows and all 143 groups/302 ranges; verify cumulative reading, source/task/history preservation and prior Knowledge recipes. Run focused staged neutral/public proof and semantic proof for the changed governed book surface. Memory, Knowledge, both history checks, rendered book, git diff --check and normal doctrines govern focused landing. No native matrix, dependency build, runtime repair or unrelated outward admission is claimed.
+
 ## 2026-09-13 — CONFORMANCE-SOURCE-READING.1.11 — read semantic rollout and model identities
 
 Conformance .1.11 reads 12 complete windows, 554 fragments and 65,425 baseline-identical bytes. The semantic-introspection contract reaches EOF; model reading reaches line 201, inside the identity-limited snapshot. Physical reading is 11/143: 12,078 fragments, 699,655 bytes and 47 complete files. The model separates duplicate slots, staged payload/job/result provenance, generated plans, compilation failure and captured runtime observation. The staged-schema card now explicitly dates its private implementation milestones and points to completed public rollout. Existing semantic neutral proof is retained and rechecked after governed documentation edits; no native admission or runtime repair is claimed.

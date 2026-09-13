@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `CONFORMANCE-SOURCE-READING`
-- Status: `active` / exact decomposition; physical reading 11/143
+- Status: `active` / exact decomposition; physical reading 12/143
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.8`
 - Created: `2026-09-13`
 - Last updated: `2026-09-13`
@@ -240,14 +240,21 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
   Commit: `CONFORMANCE-SOURCE-READING.1.11 - read semantic rollout and model identities`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.12`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `abdfb235ff8cc15829af187d4dd26b9972b684e6`.
+  Verification tier: `focused`
+  Focused checks: Read exact baseline-identical scoped windows; reconcile canonical Knowledge and proportionate proof, preserve source/task/history, and verify memory, book and normal doctrines.
+  Canonical trigger: Ordinary bounded source-reading leaf; no source or public-contract change, admission or parent closeout. Later prerequisites remain.
   Goal: Read and understand conformance/test/Unicode group 12.
   Scope: `capability_conformance/semantic_introspection_model.json` lines 202-217; `capability_conformance/staged_ast_enrichment_contract.json` lines 1-996
   Baseline evidence: 1012 fragments / 65472 decoded bytes; ordered range SHA-256 `20ce86d11ec6bdd19057b8d37a8dd36ccd32f79cfa079026cd826bdf4f7f9c1a`.
   Dependencies: .1.11 committed with clean handoff.
   Acceptance: Read every scoped byte in complete bounded windows; retain source identity, exact comprehension, canonical Knowledge reconciliation, concrete finding ownership, focused proof and per-leaf continuity. Unread crossing constructs retain the next range owner.
-  Verification: `pending`
-  Commit: `pending`
+  Reading evidence: 11 complete windows / 1012 fragments / 65472 bytes; ordered window SHA-256 `eb7cf1b80d4f38641e07e6f1f22a4b00caed402e48927f1d79dc604a09ee0f7c`.
+  Comprehension: The semantic identity-limited suffix retains the same internal source/model records while query policy limits the returned detail. Staged parse_job constructs one inert dedicated marker and sidecar; scheduling follows the completed parent AST and uses only caller-frozen already-compiled entries. Direct Unicode-scalar spans and ordered derived spans materialize exact text; selected top rule enters job identity before hashing. Alias/relative collision and same-priority ambiguity are hard errors. Cache identity includes content, imports, versions, selected top and sorted capabilities. Complete-depth ordering compares path indices numerically, uses provenance/job-ID ties and queues returned jobs at the next depth. Siblings receive fresh runtime state but share decreasing budgets and fixed cancellation/deadline authority. Four result policies and three failure policies preserve exact text where appropriate; plain-data detachment, cycle/decrease and resource checks remain explicit. Five consumer sources/six routes, four carriers, 37 diagnostic shapes and nine completed rollout rows are read. Narrow function-body v1 remains separate. Ownership rows stop at Julia dormant-red; .1.13 owns the suffix and public contract.
+  Verification: reconstruct all 11 source windows and all 143 groups/302 ranges; verify cumulative reading, source/task/history preservation and prior Knowledge recipes. Run focused staged neutral/public proof and semantic proof for the changed governed book surface. Memory, Knowledge, both history checks, rendered book, git diff --check and normal doctrines govern focused landing. No native matrix, dependency build, runtime repair or unrelated outward admission is claimed.
+  Candidate proof: All11 windows reconstruct exactly; all160 baseline inputs/143 groups/302 ranges remain identical. Cumulative12/143,13090 fragments/765127 bytes,48 complete files. Preservation compares2490 files byte-for-byte,2774/2776 nodes unchanged, all prior Knowledge recipes and94 book limitation headings retained. Staged neutral proof passes4 entries/8 provenance/8 resolution/6 authority/10 cache/4 queue/3 isolation/4 result/3 failure/10 chain/5 detachment/5 consumers/6 routes/37 diagnostics/9 rollout/35 owners/123 mutations; public6 documents/17 denials/10 outward guards/129 mutations. Semantic6 groups/20 queries/128 mutations/9 rollout/6 admissions passes after the governed book edit. Memory60 lines, rendered book and plain git diff --check pass. History checks: CHANGES295 lines/43480 bytes and notes183/33741, both OK. Existing book search-index warning remains startup41.9-owned; normal doctrines remain required.
+  Commit: `CONFORMANCE-SOURCE-READING.1.12 - read staged enrichment scheduling and policy boundaries`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.13`
   Status: `pending`
@@ -1580,7 +1587,7 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
 
 | Rank | Leaf | Status | Next action |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.12` | `pending` | Read semantic model202-217 and staged-enrichment contract1-996:1012 fragments/65472 bytes. Preserve exact bounded presentation, crossing snapshot ownership and all repairs. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.13` | `pending` | Read staged-enrichment997-1136, standalone lifecycle1-249 and typed-source1-452:841 fragments/65510 bytes. Preserve bounded windows, crossing ownership and all repairs. |
 
 ## Decisions
 
@@ -1593,6 +1600,7 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
 
 ## Verification Log
 
+- `2026-09-13` .1.12: Conformance .1.12 reads 11 complete windows, 1,012 fragments and 65,472 baseline-identical bytes. The semantic model reaches EOF; staged enrichment is read through line 996, inside the ownership inventory. Physical reading is 12/143: 13,090 fragments, 765,127 bytes and 48 complete files. Staged reading separates deferred declaration, caller-prepared parser selection, typed provenance, deterministic identity, breadth-first scheduling, shared bounds, isolated child state and detached stitching. Focused staged neutral/public proof passes; prior semantic proof remains scoped to unchanged inputs. No runtime, admission or dependency change; .1.13 owns the remaining ownership/public records and following contracts.
 - `2026-09-13` .1.11: Conformance .1.11 reads 12 complete windows, 554 fragments and 65,425 baseline-identical bytes. The semantic-introspection contract reaches EOF; model reading reaches line 201, inside the identity-limited snapshot. Physical reading is 11/143: 12,078 fragments, 699,655 bytes and 47 complete files. The model separates duplicate slots, staged payload/job/result provenance, generated plans, compilation failure and captured runtime observation. The staged-schema card now explicitly dates its private implementation milestones and points to completed public rollout. Existing semantic neutral proof is retained and rechecked after governed documentation edits; no native admission or runtime repair is claimed.
 - `2026-09-13` .1.10: Conformance .1.10 reads 18 complete windows, 789 fragments and 65,489 baseline-identical bytes. Cursor ownership, numeric/text contracts and six semantic fixture inputs reach EOF; semantic-introspection contract reading reaches line 363. Physical reading is 10/143: 11,524 fragments, 634,230 bytes and 46 complete files. Numeric 55-case/18-helper, Perl scalar-text 7-test and semantic neutral proof pass. Numeric rejection of booleans remains distinct from scalar-text conversion; paging budgets and source-detail ceilings remain explicit. No source or runtime defect changes; .1.11 owns the crossing Dart admission consumer and semantic model prefix.
 - `2026-09-13` .1.9: Conformance .1.9 reads 11 complete windows, 1,445 fragments and 65,519 baseline-identical bytes. Repetition and root-selection contracts reach EOF; the cursor contract is read through line 160. Physical reading is 9/143: 10,735 fragments, 568,741 bytes and 37 complete files. Fresh repetition8/10/8-complete/54, root8/3/3/7-complete/54 and cursor36/18/8/74-files/8-complete/60 neutral proof passes. Repetition values, lifecycle exits, authored marker identity, execution selection, strict-unused edges and intrinsic child cursor policy remain distinct. Current root public24/18 and cursor public30/28 inventories reconcile their dated milestones. No source or runtime defect changes; .1.10 owns the crossing Rust cursor-role list and following scalar/semantic inputs.
@@ -1608,6 +1616,7 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
 
 ## Commit Log
 
+- `2026-09-13` .1.12: `CONFORMANCE-SOURCE-READING.1.12 - read staged enrichment scheduling and policy boundaries`; activation abdfb235ff8cc15829af187d4dd26b9972b684e6; next .1.13 after clean handoff and zero-byte brief.
 - `2026-09-13` .1.11: `CONFORMANCE-SOURCE-READING.1.11 - read semantic rollout and model identities`; activation 388f09aec9b7fe4c71362bae29a3f9b39b78259b; next .1.12 after clean handoff and zero-byte brief.
 - `2026-09-13` .1.10: `CONFORMANCE-SOURCE-READING.1.10 - read scalar contracts and semantic query prefix`; activation d4ea5c63d7d87b7b113c9ebac846b58ab700654f; next .1.11 after clean handoff and zero-byte brief.
 - `2026-09-13` .1.9: `CONFORMANCE-SOURCE-READING.1.9 - read repetition root selection and cursor ownership`; activation 445764d606459a8ff43ecb4c985b0a189593d3b3; next .1.10 after clean handoff and zero-byte brief.
@@ -1623,6 +1632,7 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
 
 ## Changelog
 
+- `2026-09-13` .1.12: Complete semantic model and staged scheduling/policy reading. Preserve narrow-v1 compatibility, all existing runtime repairs and remaining ownership/public-contract reading.
 - `2026-09-13` .1.11: Complete semantic rollout reading and five model snapshots; qualify dated private-projection milestones. Keep the identity-limited suffix, history controls and all repairs owned.
 - `2026-09-13` .1.10: Complete cursor/scalar and semantic fixture reading; read semantic schema/query prefix without changing source, historical evidence or repair state.
 - `2026-09-13` .1.9: Complete repetition/root-selection reading and cursor prefix; reconcile current public inventories without changing source, authority, historical evidence or repair state.

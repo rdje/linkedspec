@@ -9,7 +9,7 @@ answers:
   - "how do I verify conformance reading source and range coverage"
   - "which conformance source reading file has the longest line"
 date: 2026-09-13
-status: exact decomposition preserved; physical reading 11/143, forty-seven files complete and132 groups remain
+status: exact decomposition preserved; physical reading 12/143, forty-eight files complete and131 groups remain
 tags: [reading, conformance, tests, unicode, continuity, CONFORMANCE-SOURCE-READING]
 evidence: "Startup .3.8.0 independently accounts for160 baseline-identical files,5,422,313 stored bytes and8,257,059 decoded bytes in167,606 line fragments/167,604 LF delimiters. Four gzip inputs contribute54,500 decoded lines. All143 groups/302 ranges are contiguous, disjoint and bounded at1500 fragments/65536 bytes. No source, registry or runtime behavior changes; no physical-reading credit from inventory."
 reverify: "Run CONFORMANCE_SOURCE_READING_COVERAGE below through the project-data wrapper; it derives source identity from Git and range ownership from the task-tree rather than a parallel manifest. Use scripts/check_task_tree_metadata.sh for actual task collection limits."
@@ -348,3 +348,19 @@ Duplicate slots, staged versus generated provenance, failed compilation and
 captured execution remain distinct. Unicode byte spans and scalar columns differ.
 The identity-limited model suffix remains unread. Existing semantic proof is
 retained and rechecked after governed public edits; no native matrix is claimed.
+
+
+## September 13 staged scheduling and policy reading
+
+`.1.12` reads 11 windows, 1,012 fragments and 65,472 baseline-identical bytes.
+The semantic model reaches EOF; staged enrichment1–996 stops inside ownership.
+Cumulative reading is 12/143, 13,090 fragments, 765,127 bytes and 48 complete files.
+[[general-staged-ast-enrichment-neutral-contract]] separates declaration from
+post-AST scheduling, exact typed provenance, complete-depth ordering, isolated
+child state, shared limits and detached result/failure policies. The historical
+milestones in [[general-staged-ast-current-boundary]] remain explicitly dated;
+[[staged-parser-registry-dispatch-contract]] already qualifies resolve/load/compile
+as caller preparation for general v2. [[staged-ast-enrichment-recurring-gate]] and
+[[general-staged-ast-enrichment-recomposition]] own existing runtime admissions.
+Focused neutral/public checks do not close known resource or backend defects.
+The remaining ownership/public records belong to `.1.13`; no source changes.

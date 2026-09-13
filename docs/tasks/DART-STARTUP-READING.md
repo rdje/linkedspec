@@ -1571,7 +1571,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.12` | `pending` | Read semantic model202-217 and staged-enrichment contract1-996:1012 fragments/65472 bytes. Preserve exact bounded presentation, crossing snapshot ownership and all repairs. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.13` | `pending` | Read staged-enrichment997-1136, standalone lifecycle1-249 and typed-source1-452:841 fragments/65510 bytes. Preserve bounded windows, crossing ownership and all repairs. |
 
 ## Decisions
 

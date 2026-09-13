@@ -2299,7 +2299,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Status: `active`
   Goal: Split and read all 160 entries under capability_conformance, cli_conformance, t, tests, and unicode_case.
   Children: `.3.8.0` owns exact decomposition; `CONFORMANCE-SOURCE-READING.1` owns all143 reading groups; .2 findings and .3 independent closeout stay separate.
-  Reading owner: `docs/tasks/CONFORMANCE-SOURCE-READING.md`; .3.8.0 preserves143 groups/302 exact ranges over160 baseline-identical inputs. Physical reading11/143: cumulative12078 fragments/699655 bytes,47 complete files and semantic model1-201. Existing semantic neutral proof is rechecked after public edits; .1.12 owns the identity-limited suffix and staged enrichment. All repairs/prerequisites remain.
+  Reading owner: `docs/tasks/CONFORMANCE-SOURCE-READING.md`; .3.8.0 preserves143 groups/302 exact ranges over160 baseline-identical inputs. Physical reading12/143: cumulative13090 fragments/765127 bytes,48 complete files and staged contract1-996. Focused staged/semantic proof governs landing; .1.13 owns remaining ownership/public records and following contracts. All repairs/prerequisites remain.
   Acceptance: Include phase0, neutral contracts, fixtures, generators, and four explicitly decoded pinned Unicode
     inputs. Keep generated/fixture bytes in scope; count neither a hash nor enumeration as full reading.
   Verification: `pending`
@@ -4641,7 +4641,7 @@ startup implementation prerequisites and the rgx reading exclusion remain intact
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.12` | `pending` | Read semantic model202-217 and staged-enrichment contract1-996:1012 fragments/65472 bytes. Preserve exact bounded presentation, crossing snapshot ownership and all repairs. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.13` | `pending` | Read staged-enrichment997-1136, standalone lifecycle1-249 and typed-source1-452:841 fragments/65510 bytes. Preserve bounded windows, crossing ownership and all repairs. |
 
 ## Reading Ledger
 

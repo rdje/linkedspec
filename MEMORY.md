@@ -1,12 +1,12 @@
 # MEMORY
 
-- activation_commit: `388f09aec9b7fe4c71362bae29a3f9b39b78259b` — clean semantic rollout/model source-reading activation.
-- latest_completed_leaf: `CONFORMANCE-SOURCE-READING.1.11 - read semantic rollout and model identities`; physical reading11/143,47 complete files and semantic model through line201.
-- active_work_unit: `CONFORMANCE-SOURCE-READING.1.12` — semantic model suffix and staged enrichment contract prefix.
-- next_action: Read CONFORMANCE-SOURCE-READING.1.12 from clean HEAD: capability_conformance/semantic_introspection_model.json202-217 and staged_ast_enrichment_contract.json1-996. Total 1,012 fragments/65,472 bytes in two exact ranges. Read complete bounded windows, split oversized lines losslessly if needed, reconcile Knowledge and focused proof, preserve source/history, update live records/book and commit before .1.13. Continue PNT.
+- activation_commit: `abdfb235ff8cc15829af187d4dd26b9972b684e6` — clean staged-enrichment source-reading activation.
+- latest_completed_leaf: `CONFORMANCE-SOURCE-READING.1.12 - read staged enrichment scheduling and policy boundaries`; physical reading12/143,48 complete files and staged contract through line996.
+- active_work_unit: `CONFORMANCE-SOURCE-READING.1.13` — staged contract suffix, standalone lifecycle and typed source prefix.
+- next_action: Read CONFORMANCE-SOURCE-READING.1.13 from clean HEAD: capability_conformance/staged_ast_enrichment_contract.json997-1136, standalone_lifecycle_block_contract.json1-249 and typed_source_location_contract.json1-452. Total 841 fragments/65,510 bytes in three exact ranges. Read complete bounded windows, split oversized lines losslessly if needed, reconcile Knowledge and focused proof, preserve source/history, update live records/book and commit before .1.14. Continue PNT.
   Named-argument direction PARSER-AUTHORING-APIS.4 is approved and parked; other authoring proposals and approved formats stay parked.
 - in_flight_uncommitted: none; reading evidence, exact claim/repair ownership and next action committed at Git HEAD; no background result remains.
-- blockers: none for authorized read-only PNT at conformance .1.12. Existing runtime/guide repairs, source prerequisites and later canonical boundaries remain; registry ceilings are unchanged.
+- blockers: none for authorized read-only PNT at conformance .1.13. Existing runtime/guide repairs, source prerequisites and later canonical boundaries remain; registry ceilings are unchanged.
 - current_rust_warning_debt: Repeated carriers report 1,870 pgen plus 26 rgx-core output warnings; RUST-DEPENDENCY-WARNING-ZERO.1-.7 own causal repair/pins/enforcement without suppression after Lua intake.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
   active table; the task metadata doctrine inventories all consumers, permits arbitrary frontier-row rewrites,
@@ -57,4 +57,4 @@
   Conformance .1.4 preserves clean baaebc8e CHANGES242-457 as segment4976-6d1dd54d605a:216 lines/18973 bytes; all earlier archive records and controls remain exact. Proportionate governance: ADR0115.
 - current_ci_build_reuse: Director requires PGEN/RGX builds once after submodule updates, then reuse for LinkedSpec-only CI; startup .80.1-.4 own implementation.
   Initial/update preparation, zero dependency compilation in ordinary CI and explicit missing-artifact handling remain pending; startup prerequisites remain.
-- latest_bootstrap_read: 2026-09-13 — roadmap Yes / full codebase No / physical mdBook Yes; five backend lanes and supporting .3.7 closed. Conformance11/143 reads12078 fragments/699655 bytes;132 groups remain, including semantic model/staged enrichment and four decoded Unicode inputs. Later .3.9-.3.11, formal book .4 and policy .5 remain; no runtime repair closes.
+- latest_bootstrap_read: 2026-09-13 — roadmap Yes / full codebase No / physical mdBook Yes; five backend lanes and supporting .3.7 closed. Conformance12/143 reads13090 fragments/765127 bytes;131 groups remain, including staged/lifecycle/typed source and four decoded Unicode inputs. Later .3.9-.3.11, formal book .4 and policy .5 remain; no runtime repair closes.
