@@ -1742,7 +1742,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SUPPORTING-SOURCE-READING.2.6` | `pending` | Await explicit scoped before-reading/focused disposition for the verified one-file checker correction and formal reading parent closeout; exact proposal is committed under .3. |
+| 1 | `SUPPORTING-SOURCE-READING.1` | `active` | Close supporting reading and startup .3.7 with the already granted ADR0120 focused audit/preservation proof, then continue startup .3.8. |
 
 ## Decisions
 

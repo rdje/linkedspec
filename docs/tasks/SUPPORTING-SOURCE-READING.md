@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `SUPPORTING-SOURCE-READING`
-- Status: `active` / all required reading independently audited; seven repairs open; scoped checker/parent-closeout disposition pending
+- Status: `active` / all required reading audited; checker repaired, six grammar/literal roots open; authorized parent closeout next
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.7`
 - Created: `2026-09-13`
 - Last updated: `2026-09-13`
@@ -27,7 +27,7 @@ from runtime signoff. Existing startup and backend repairs remain open.
 - Current disposition under .0/.4: one historical group complete; seventeen groups explicitly superseded. Required current grammar reading is three files/five ranges/629 fragments/96781 bytes in .1.17-.1.19. Preserve every original Scope/digest, all files/tests and existing repair owners. See docs/knowledge/current-supporting-grammar-dependencies.md for role evidence and exact replay.
 - Retrieve Knowledge before interpreting source; use LinkedSpec Toolbox probes before diagnosing specification behavior. Do not classify historical syntax as a new defect by inspection alone.
 - Preserve executable/file provenance and qualified legacy versus supported behavior. Do not run historical adapters or arbitrary configuration side effects merely to read them.
-- No source repair before remaining startup prerequisites. Reuse compatible dependency products; reading requires no RGX/PGEN compilation.
+- Ordinary source repairs retain remaining startup prerequisites. ADR0120 explicitly authorizes only .2.6 before-reading checker correction with focused proof and the separate focused supporting-reading closeout. Reuse compatible dependency products; reading requires no RGX/PGEN compilation.
 - Commit each verified reading child; synchronize current evidence, memory, roadmaps and relevant book understanding. Keep prior task bodies and immutable history exact.
 - Route new durable facts to their canonical Knowledge owners; related reading can share a coherent fact card. Do not create one card per slice by convention or pack unrelated evidence to evade limits.
 - Remeasure every candidate against existing controls; this decomposition changes no capacity limit and does not extend ADR0118 into an unlimited allowance.
@@ -61,7 +61,7 @@ from runtime signoff. Existing startup and backend repairs remain open.
   Dependencies: Startup .3.7.0 decomposition committed; clean activation for every child.
   Children: `.1.1-.1.21`
   Acceptance: Each required child records exact Required reading scope coverage, comprehension, Knowledge reconciliation, owned findings, focused proof and clean commit. Seventeen superseded groups and excluded intervals of mixed groups receive no reading credit; original Scope/digests remain exact.
-  Verification: Required .1.17-.1.19 reading and independent .3 audit are complete: three files/five ranges/629 fragments/96781 bytes. Formal parent closure awaits the proposed scoped verification disposition. Historical .1.1, seventeen omissions, every original Scope/digest and all seven repair roots remain distinct and preserved.
+  Verification: Required .1.17-.1.19 reading and independent .3 audit are complete: three files/five ranges/629 fragments/96781 bytes. ADR0120 authorizes separate focused parent closure after .2.6 lands clean. Historical .1.1, seventeen omissions, original Scope/digests and all six remaining grammar/literal repair roots remain preserved.
   Commit: `pending`
 
 - ID: `SUPPORTING-SOURCE-READING.1.1`
@@ -411,14 +411,26 @@ from runtime signoff. Existing startup and backend repairs remain open.
   Commit: `pending`
 
 - ID: `SUPPORTING-SOURCE-READING.2.6`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `693e11e48168aba753b179b88cdb6800d4b06513`.
+  Verification tier: `focused`
+  Focused checks: Exact approved patch identity; Perl syntax,37 internal self-tests,50 registry cases and RED/GREEN boundaries; actual task metadata and all doctrines; source/registry/history preservation, memory, Knowledge, histories and rendered book.
+  Canonical trigger: Director granted the prepared two-action proposal on 2026-09-13: this exact checker correction before remaining startup reading and focused verification instead of full CI for this correction and the separate supporting-reading closeout. No later or blanket waiver.
   Goal: Reconcile the task partition checker with the canonical approved task-evidence capacity and prevent silent duplicate-limit drift.
   Intake owner: .1.18 commit verification; normal hooks reject the complete candidate before any commit lands.
-  Evidence: scripts/check_task_tree_partitions.pl hardcodes 88000 lines/9437184 bytes; doctrine/readme_stability/routes.jsonl and ADR0118 record 92000 lines/10485760 bytes. The self-tests repeat the old constants, so they pass while the collection rejects. TASK-TREE-METADATA and README-STABILITY fail; seven other doctrines pass. No hook bypass or source repair is performed.
-  Dependencies: Startup .3/.4/.5 and canonical infrastructure proof ordinarily apply. Completed .3 audit publishes a new exact proposal for this correction before remaining reading with focused verification; await explicit director disposition. Prior ADR0118 .14-only exception is not extended. Keep the tree clean before activating this correction.
+  Evidence: Historical .1.18 diagnosis: older hardcoded88000-line/9437184-byte ceilings disagreed with the canonical92000/10485760 registry; repeated old self-tests missed the mismatch. The dated original and exact approved patch remain in task-partition-capacity-registry-drift.
+  Dependencies: Clean activation verified at 693e11e48168aba753b179b88cdb6800d4b06513; explicit director grant authorizes the exact prepared .2.6 correction before remaining startup reading with focused proof. The separately approved supporting .1/startup .3.7 closeout follows this clean commit. Other startup prerequisites and later canonical boundaries remain.
   Acceptance: Keep every approved ceiling and source/history record; align duplicate enforcement and add registry-agreement recurrence, inclusive/overflow controls and all normal doctrine proof. Exact checker/registry reproduction lives in docs/knowledge/task-partition-capacity-registry-drift.md. No new limit increase or dependency rebuild is proposed.
-  Verification: Confirmed open; exact one-file proposed correction passes Perl syntax,37 internal checks and50 detached registry cases, including RED original/GREEN proposed authority agreement. Production script and all registry limits remain unchanged. Proposed patch/source hashes and exact replay live in task-partition-capacity-registry-drift; no applied fix or canonical receipt is claimed.
-  Commit: `pending`
+  Verification: Applied source SHA-2569f4e5c1a3f268fc8364e6430583a8df58a522cd9c12bc24575d11181758a0206 matches the granted draft exactly. Perl syntax and actual partition gate PASS;37 internal self-tests and50 detached registry cases PASS, with original four agreement errors and applied zero. Registry limits stay byte-exact; focused preservation, memory, Knowledge, histories, rendered book and all normal doctrines govern landing. Exact current replay TASK_CHECKER_APPLIED_PROOF and ADR0120 preserve authorization/evidence. No canonical CI receipt or dependency build is claimed.
+  Candidate proof: Preserve2481 prior files byte-exact, all prior recipe blocks,2625/2628 prior task nodes, all94 book limitation headings and the exact registry bytes; only three current owner nodes change and no ID is added. Actual task metadata PASS at104 files/88010 lines/9383610 bytes before this annotation. Memory60; histories427/42949 and357/41947 lines/bytes; rendered status confirms applied enforcement and retained repairs. Normal doctrine hooks govern final landing.
+  Commit: `SUPPORTING-SOURCE-READING.2.6 - align task checker with approved registry and prevent limit drift`
+  Acceptance Checklist (.2.6):
+  - [x] **REPRODUCE / ISSUE** — scripts/check_task_tree_metadata.sh originally rejects approved task capacity; exact historical functions reproduce four registry-agreement errors.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — scripts/check_task_tree_partitions.pl:222 retained older aggregate constants and repeated them in self-tests; the registry independently admitted larger ceilings.
+  - [x] **FIX** — Apply the exact approved one-file patch; align aggregate boundaries and validate all five registry boundaries on each invocation, preserving registry limits and member safeguards.
+  - [x] **ADDRESSED (verified)** — TASK_CHECKER_APPLIED_PROOF records four original agreement errors to zero applied;50 registry cases PASS and actual partition validation exits0.
+  - [x] **NO REGRESSION** — Perl syntax and37 internal self-tests PASS; scripts/check_task_tree_metadata.sh and normal doctrine hooks validate actual collection/partitions. ADR0120 grants focused proof for this correction.
+  - [x] **LOCKSTEP** — Task, ADR0120, Knowledge, roadmaps, book, CHANGES, DEVELOPMENT_NOTES and MEMORY describe the applied correction and separately authorized next closeout; git diff --check verifies hygiene.
 
 - ID: `SUPPORTING-SOURCE-READING.2.7`
   Status: `pending`
@@ -460,10 +472,11 @@ from runtime signoff. Existing startup and backend repairs remain open.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SUPPORTING-SOURCE-READING.2.6` | `pending` | Await explicit scoped before-reading/focused disposition for the verified one-file checker correction and formal reading parent closeout; exact proposal is committed under .3. |
+| 1 | `SUPPORTING-SOURCE-READING.1` | `active` | Close supporting reading and startup .3.7 with the already granted ADR0120 focused audit/preservation proof, then continue startup .3.8. |
 
 ## Decisions
 
+- `2026-09-13` .2.6: Director replies “Granted” to the complete two-action proposal at693e11e48. ADR0120 records this exact before-reading checker correction and focused correction/reading-parent exceptions; no later blanket waiver.
 - `2026-09-13` .3: Prepare the exact two-action proposal before asking: .2.6 checker correction before remaining reading with focused proof; supporting .1/startup .3.7 read-only parent closeout with focused proof. Existing ceilings and all later requirements remain.
 - `2026-09-13` director asks whether spec.spec remains relevant: current source still loads it as a comparison parser and maintains canonical fixtures. Retain its self-description/grammar-evolution role under existing ADR0012; the primary Perl bootstrap plus dedicated function grammar remain distinct. The engineer recommends verified coverage and repairs for measured drift rather than treating policy alone as completeness proof. No removal, primary-parser migration or activity pivot is requested. The director replies “ok”, accepting this retained, verified self-description role.
 
@@ -483,6 +496,7 @@ from runtime signoff. Existing startup and backend repairs remain open.
 
 ## Verification Log
 
+- `2026-09-13` .2.6: Supporting .2.6 applies the exact director-approved task checker correction under ADR0120: existing aggregate ceilings92,000 lines/10,485,760 bytes and all three member/file limits now agree with the real registry on every run. Original source produces four agreement errors; applied source passes syntax,37 self-tests,50 detached registry cases and actual partition validation. Registry limits and runtime sources remain unchanged. Six grammar/literal repair roots remain open. Required supporting reading and its independent audit are complete; authorized focused parent closeout follows separately, then startup .3.8.
 - `2026-09-13` .3: Independent committed coverage/source/repair audit and exact proposed-checker syntax/37+50 controls pass; no parent closure or production change.
 - `2026-09-13` .1.19: Supporting .1.19 reads two complete windows/255 fragments/8134 bytes and finishes user_function_definition.spec. All three required grammar groups are physically read: five ranges/629 fragments/96781 bytes. The unchanged dedicated AST fixture passes 44 assertions; six exact signature/body/payload/job controls pass. Four matched body comparisons confirm the July self-hosted regex-brace truncation finding; new .2.7 owns its repair, while the older zero-argument audit is linked to .2.3.2. Six grammar/literal repair roots with eight repair leaves and the separate checker owner .2.6 remain open. All original sources, exclusions and earlier repair evidence remain; next .3 independently reconciles supporting reading and routes startup continuation.
 
@@ -500,6 +514,7 @@ from runtime signoff. Existing startup and backend repairs remain open.
 
 ## Commit Log
 
+- `2026-09-13` .2.6: `SUPPORTING-SOURCE-READING.2.6 - align task checker with approved registry and prevent limit drift`; activation 693e11e48168aba753b179b88cdb6800d4b06513; separate supporting parent closeout follows clean handoff.
 - `2026-09-13` .3: `SUPPORTING-SOURCE-READING.3 - independently audit reading and prepare bounded unblock proposal`; activation 51fa104fe3b8cff023bb9272e17e4f2a222f9ecf; scoped disposition remains pending after clean audit landing.
 - `2026-09-13` .1.19: `SUPPORTING-SOURCE-READING.1.19 - complete dedicated function grammar reading and reconcile body fidelity`; activation 7a3f0b8aa1e649d74be405e822eb462227eb26be; next .3 after focused proof, empty brief and clean handoff.
 
@@ -517,6 +532,7 @@ from runtime signoff. Existing startup and backend repairs remain open.
 
 ## Changelog
 
+- `2026-09-13` .2.6: Correct duplicate task-limit enforcement and add recurring real-registry agreement; all existing ceilings and other repairs remain.
 - `2026-09-13` .3: Complete independent supporting audit and publish exact blocker correction/proof; keep all source/history and seven repair roots.
 - `2026-09-13` .1.19: Complete the three current grammar groups, preserve historical scope and give the earlier self-hosted regex-body defect a concrete repair owner; no source change or defect closure.
 

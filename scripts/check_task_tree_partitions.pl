@@ -31,6 +31,8 @@ my @ROOT_SOURCE_RANGES = ('1-75', '22879-22954', '24108-24307');
 chdir $ROOT or die "cannot enter repository root: $!\n";
 run_self_tests();
 my @errors;
+my ($capacity_records) = decode_index('doctrine/readme_stability/routes.jsonl', \@errors);
+push @errors, collection_registry_errors($capacity_records);
 push @errors, 'task-tree partition index is missing or symbolic'
     if !-f $INDEX_PATH || path_has_symlink($INDEX_PATH);
 my ($records, $canonical_lines) = decode_index($INDEX_PATH, \@errors);
@@ -219,8 +221,45 @@ sub collection_total_errors {
     my ($files, $lines, $bytes) = @_;
     my @errors;
     push @errors, 'task collection exceeds 128 files' if $files > 128;
-    push @errors, 'task collection exceeds 88,000 lines' if $lines > 88_000;
-    push @errors, 'task collection exceeds 9,437,184 bytes' if $bytes > 9_437_184;
+    push @errors, 'task collection exceeds 92,000 lines' if $lines > 92_000;
+    push @errors, 'task collection exceeds 10,485,760 bytes' if $bytes > 10_485_760;
+    return @errors;
+}
+
+sub collection_registry_errors {
+    my ($records) = @_;
+    return ('task capacity registry is not an array') if ref($records) ne 'ARRAY';
+    my @rows = grep { ref($_) eq 'HASH' && ($_->{id} // '') eq 'task_evidence' } @$records;
+    return ('task capacity registry needs exactly one task_evidence row') if @rows != 1;
+    my $limits = $rows[0]{limits};
+    my @keys = qw(max_files max_total_lines max_total_bytes max_lines_per_file max_bytes_per_file);
+    return ('task capacity limits do not have the exact five fields') if !exact_keys($limits, \@keys);
+    for my $key (@keys) {
+        return ("task capacity $key is not a positive integer")
+            if !defined($limits->{$key}) || ref($limits->{$key})
+                || $limits->{$key} !~ /\A[1-9][0-9]*\z/;
+    }
+    my @aggregate = @{$limits}{qw(max_files max_total_lines max_total_bytes)};
+    my @member = @{$limits}{qw(max_lines_per_file max_bytes_per_file)};
+    my @errors;
+    push @errors, 'task aggregate checker rejects the registry inclusive boundary'
+        if collection_total_errors(@aggregate);
+    push @errors, 'task member checker rejects the registry inclusive boundary'
+        if collection_member_errors('registry-boundary.md', @member);
+    for my $i (0 .. 2) {
+        my @over = @aggregate;
+        ++$over[$i];
+        my @got = collection_total_errors(@over);
+        push @errors, 'task aggregate checker does not reject exactly registry ' . $keys[$i] . '+1'
+            if @got != 1;
+    }
+    for my $i (0 .. 1) {
+        my @over = @member;
+        ++$over[$i];
+        my @got = collection_member_errors('registry-boundary.md', @over);
+        push @errors, 'task member checker does not reject exactly registry ' . $keys[$i + 3] . '+1'
+            if @got != 1;
+    }
     return @errors;
 }
 
@@ -387,7 +426,33 @@ sub command_capture {
 }
 
 sub run_self_tests {
+    my $registry_fixture = sub {
+        return [{id => 'task_evidence', limits => {
+            max_files => 128, max_total_lines => 92_000, max_total_bytes => 10_485_760,
+            max_lines_per_file => 8_000, max_bytes_per_file => 1_048_576,
+        }}];
+    };
     my @tests = (
+        ['registry_capacity_agrees', sub { !collection_registry_errors($registry_fixture->()) }],
+        ['registry_capacity_missing', sub { !!collection_registry_errors([]) }],
+        ['registry_capacity_duplicate', sub {
+            !!collection_registry_errors([@{$registry_fixture->()}, @{$registry_fixture->()}]);
+        }],
+        ['registry_capacity_invalid', sub {
+            my $records = $registry_fixture->();
+            $records->[0]{limits}{max_total_lines} = 0;
+            return !!collection_registry_errors($records);
+        }],
+        ['registry_capacity_line_drift', sub {
+            my $records = $registry_fixture->();
+            --$records->[0]{limits}{max_total_lines};
+            return !!collection_registry_errors($records);
+        }],
+        ['registry_capacity_byte_drift', sub {
+            my $records = $registry_fixture->();
+            ++$records->[0]{limits}{max_total_bytes};
+            return !!collection_registry_errors($records);
+        }],
         ['absolute_path', sub { !safe_path('/tmp/x') }],
         ['traversal_path', sub { !safe_path('../x') && !safe_path('a/../b') && !safe_path('./x') }],
         ['safe_path', sub { safe_path('docs/tasks/x.md') }],
@@ -400,20 +465,20 @@ sub run_self_tests {
         ['line_limit', sub { 5_001 > 5_000 }],
         ['byte_limit', sub { 786_433 > 786_432 }],
         ['collection_inclusive_bounds', sub {
-            return same_strings([collection_total_errors(128, 88_000, 9_437_184)], [])
+            return same_strings([collection_total_errors(128, 92_000, 10_485_760)], [])
                 && same_strings([collection_member_errors('member.md', 8_000, 1_048_576)], []);
         }],
         ['collection_file_limit', sub {
-            return same_strings([collection_total_errors(129, 88_000, 9_437_184)],
+            return same_strings([collection_total_errors(129, 92_000, 10_485_760)],
                 ['task collection exceeds 128 files']);
         }],
         ['collection_line_limit', sub {
-            return same_strings([collection_total_errors(128, 88_001, 9_437_184)],
-                ['task collection exceeds 88,000 lines']);
+            return same_strings([collection_total_errors(128, 92_001, 10_485_760)],
+                ['task collection exceeds 92,000 lines']);
         }],
         ['collection_byte_limit', sub {
-            return same_strings([collection_total_errors(128, 88_000, 9_437_185)],
-                ['task collection exceeds 9,437,184 bytes']);
+            return same_strings([collection_total_errors(128, 92_000, 10_485_761)],
+                ['task collection exceeds 10,485,760 bytes']);
         }],
         ['collection_member_line_limit', sub {
             return same_strings([collection_member_errors('member.md', 8_001, 1_048_576)],
@@ -424,9 +489,9 @@ sub run_self_tests {
                 ['task collection member exceeds 1,048,576 bytes: member.md']);
         }],
         ['collection_independent_errors', sub {
-            return same_strings([collection_total_errors(129, 88_001, 9_437_185)],
-                ['task collection exceeds 128 files', 'task collection exceeds 88,000 lines',
-                 'task collection exceeds 9,437,184 bytes'])
+            return same_strings([collection_total_errors(129, 92_001, 10_485_761)],
+                ['task collection exceeds 128 files', 'task collection exceeds 92,000 lines',
+                 'task collection exceeds 10,485,760 bytes'])
                 && same_strings([collection_member_errors('member.md', 8_001, 1_048_577)],
                     ['task collection member exceeds 8,000 lines: member.md',
                      'task collection member exceeds 1,048,576 bytes: member.md']);

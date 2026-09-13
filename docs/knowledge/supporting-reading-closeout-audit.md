@@ -1,6 +1,6 @@
 ---
 id: supporting-reading-closeout-audit
-title: "Supporting reading is independently reconciled; parent closeout and task checker correction await scoped disposition"
+title: "Supporting reading is independently audited; the checker correction and focused parent closeout are authorized"
 answers:
   - "is supporting source reading independently audited"
   - "which supporting source bytes were read or explicitly omitted"
@@ -9,11 +9,21 @@ answers:
   - "what exact supporting closeout exception is proposed"
   - "why is more approval needed after the Lua reading waiver"
 date: 2026-09-13
-status: audit complete; parent closure and checker correction pending new disposition
+status: audit complete; checker repaired under .2.6, authorized parent closeout follows
 tags: [startup, reading, audit, continuity, verification, capacity, SUPPORTING-SOURCE-READING]
 evidence: "SUPPORTING-SOURCE-READING.3 independently reconstructs all 174 original ranges/158 unchanged sources, five required ranges/nineteen complete windows/three clean reading commits and seven open repair roots. Physical required coverage is 629 fragments/96781 bytes; historical reading 1500/61165, explicit omissions 23484/806310. No additional physical reading, runtime signoff, defect closure, gate change or new ceiling is claimed."
-reverify: "Run SUPPORTING_READING_CLOSEOUT_AUDIT below; run the exact proposed-checker extraction/isolated proof in task-partition-capacity-registry-drift.md. Use normal doctrines, memory, Knowledge, both histories and rendered book for the audit/proposal commit. No canonical receipt is created by these probes."
+reverify: "The original SUPPORTING_READING_CLOSEOUT_AUDIT below retains its audit-time assumptions and pending-node counts. Use the applied checker replay in task-partition-capacity-registry-drift.md; the separate authorized parent closeout will reconcile current repair status. No canonical receipt is claimed."
 ---
+
+# Current disposition
+
+The director grants both actions proposed in audit commit
+`693e11e48168aba753b179b88cdb6800d4b06513`; ADR0120 records the exact scope.
+Supporting `.2.6` applies the approved checker correction with focused proof.
+Formal supporting `.1`/startup `.3.7` closure follows in a separate commit under
+the same grant. No further permission is needed for either authorized action.
+Six grammar/literal repair roots remain; the checker repair closes only `.2.6`.
+The original audit and proposed-disposition text below remain dated evidence.
 
 # Independent coverage and continuity
 
@@ -52,7 +62,7 @@ The most recent dedicated fixture 44/signature 6/body-comparison 4 results remai
 owned by `.1.19`; the `.1.18` AST/descriptor/literal probes remain dated there.
 This audit verifies their source and committed evidence, not a new runtime matrix.
 
-# Concrete pending disposition
+# Historical proposal, now granted
 
 `COMMIT.md` and ADR0073 require canonical CI/receipt for parent closeout and for a
 checker change. The startup instruction also keeps code changes behind full

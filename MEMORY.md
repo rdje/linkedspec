@@ -1,12 +1,12 @@
 # MEMORY
 
-- activation_commit: `51fa104fe3b8cff023bb9272e17e4f2a222f9ecf` — clean independent supporting-reading audit activation.
-- latest_completed_leaf: `SUPPORTING-SOURCE-READING.3 - independently audit reading and prepare bounded unblock proposal`; complete audit/proposal committed, all seven repair roots and formal parent closure remain pending.
-- active_work_unit: `SUPPORTING-SOURCE-READING.2.6` — verified checker correction awaits explicit scoped disposition; no implementation in flight.
-- next_action: Await the director’s disposition on docs/knowledge/supporting-reading-closeout-audit.md: authorize the exact .2.6 checker correction before remaining startup reading with focused proof, and focused supporting .1/startup .3.7 reading-only parent closeout. On approval, apply/verify/commit .2.6, then close the reading parent separately and continue startup .3.8. Existing registry ceilings stay fixed; no dependency rebuild or later blanket waiver.
+- activation_commit: `693e11e48168aba753b179b88cdb6800d4b06513` — clean authorized checker-correction activation.
+- latest_completed_leaf: `SUPPORTING-SOURCE-READING.2.6 - align task checker with approved registry and prevent limit drift`; checker defect repaired under explicit ADR0120 grant.
+- active_work_unit: `SUPPORTING-SOURCE-READING.1` — separately authorized focused reading-parent closeout; six grammar/literal repair roots remain open.
+- next_action: Close supporting .1 and startup .3.7 in a separate focused reading-only commit under the already granted ADR0120 disposition: reconcile coverage/reading commits and six remaining grammar/literal repair roots, preserve source/history, verify normal doctrines and the book; then continue authorized PNT at startup .3.8. No new permission or RGX/PGEN build is needed.
   Named-argument direction PARSER-AUTHORING-APIS.4 is approved and parked; other authoring proposals and approved formats stay parked.
-- in_flight_uncommitted: none; supporting .3 audit, exact correction proposal, verification evidence and pending decision are committed at current Git HEAD; no background result remains.
-- blockers: Await new scoped disposition for .2.6 before-reading checker correction and focused infrastructure/reading-parent proof. Old task guard leaves only five lines; current read-only audit is complete. COMMIT.md/ADR0073 canonical rules and startup prerequisites remain; ADR0119 waived only Lua closeout.
+- in_flight_uncommitted: none; applied correction, grant, checks and next action committed at Git HEAD; no background result remains.
+- blockers: none for the authorized supporting-reading closeout and continuing read-only PNT. ADR0120 grants the exact checker/parent exceptions; other source repairs and later canonical boundaries remain gated.
 - current_rust_warning_debt: Repeated carriers report 1,870 pgen plus 26 rgx-core output warnings; RUST-DEPENDENCY-WARNING-ZERO.1-.7 own causal repair/pins/enforcement without suppression after Lua intake.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
   active table; the task metadata doctrine inventories all consumers, permits arbitrary frontier-row rewrites,
@@ -57,4 +57,4 @@
   Lua .1.36 rollover preserves the exact clean-HEAD suffix as segment4977-65e8f007697e; earlier archive bytes and other history controls remain unchanged. Proportionate governance: ADR0115.
 - current_ci_build_reuse: Director requires PGEN/RGX builds once after submodule updates, then reuse for LinkedSpec-only CI; startup .80.1-.4 own implementation.
   Initial/update preparation, zero dependency compilation in ordinary CI and explicit missing-artifact handling remain pending; startup prerequisites remain.
-- latest_bootstrap_read: 2026-09-13 — roadmap Yes / full codebase No / physical mdBook Yes; five backend reading lanes closed. Three supporting grammars read and independently audited (629 fragments/96781 bytes). Formal .3.7 closure awaits scoped disposition; seven repairs, historical exclusions, .3.8-.3.11, book .4 and policy .5 remain.
+- latest_bootstrap_read: 2026-09-13 — roadmap Yes / full codebase No / physical mdBook Yes; five backend reading lanes closed. Three supporting grammars read and independently audited (629 fragments/96781 bytes); checker correction complete. Authorized .3.7 closeout follows; six grammar/literal roots, .3.8-.3.11, book .4 and policy .5 remain.

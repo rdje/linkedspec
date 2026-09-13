@@ -485,5 +485,6 @@ Related facts: [[startup-codebase-reading-inventory]], [[lua-reading-commit-clos
 ranges/158 unchanged sources, three reading commits/five required ranges/nineteen
 windows and all seven repair roots. Required reading is 629 fragments/96,781 bytes;
 historical reading is 1,500/61,165; explicit omissions are 23,484/806,310. No extra
-reading credit or defect closure is granted. The audit is complete; formal parent
-closure and the exact `.2.6` checker correction await the new scoped disposition.
+reading credit or defect closure is granted. The audit is complete. ADR0120 now authorizes the separate focused parent
+closeout, and `.2.6` completes the granted checker correction; six grammar/literal
+repair roots remain open.

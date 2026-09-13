@@ -484,7 +484,7 @@ or the README `.4` adoption/closeout that installs the guard.
 
 ## Current Frontier
 
-Complete through .14 under director-approved ADR0118. After the verified commit, empty brief and clean proof, await the explicit scoped disposition recorded by completed `SUPPORTING-SOURCE-READING.3`; .2.6 owns the exact checker/registry correction proposal and formal reading parent closure remains pending; Lua reading is closed under ADR0119. All source repairs and later canonical/push requirements remain.
+Complete through .14 under director-approved ADR0118. After the verified commit, empty brief and clean proof, continue the separately authorized focused supporting reading-parent closeout under ADR0120; .2.6 applies the granted checker correction without changing registry ceilings; Lua reading is closed under ADR0119. All source repairs and later canonical/push requirements remain.
 
 Historical .13 handoff (preserved):
 Complete through .13 under director-approved ADR0116. After the verified commit, empty brief and clean proof, resume `JULIA-STARTUP-READING.1.38` in its separate active reading tree.

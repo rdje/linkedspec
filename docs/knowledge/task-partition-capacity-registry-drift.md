@@ -1,17 +1,24 @@
 ---
 id: task-partition-capacity-registry-drift
-title: "Partition checker retains older task collection ceilings than the canonical registry"
+title: "Task partition checker now agrees with the approved registry and rejects duplicate-limit drift"
 answers:
   - "why does task tree metadata reject 88000 lines when the registry allows 92000"
   - "do all task collection gates use the approved capacity"
   - "why did supporting source reading 1.18 fail its first commit"
   - "where is the duplicate task capacity checker repair owned"
 date: 2026-09-13
-status: confirmed open; current reading candidate contained within both gates
+status: repaired under SUPPORTING-SOURCE-READING.2.6; prior diagnosis and proposal retained below
 tags: [tasks, capacity, doctrine, verification, continuity, SUPPORTING-SOURCE-READING]
 evidence: "SUPPORTING-SOURCE-READING.1.18 normal hooks exit1: TASK-TREE-METADATA and README-STABILITY fail the older 88000-line cap, seven other doctrines pass. Exact production-function boundary probes expose line and byte disagreement with the approved registry. .2.6 owns repair after startup prerequisites. The revised reading task decomposition retains seven concrete grammar/literal repair slices with focused verification in each, removing nine redundant nodes; no source, registry, gate or prior history change."
-reverify: "Run TASK_CAPACITY_CHECKER_DRIFT below through the project-data wrapper, then scripts/check_task_tree_metadata.sh for the actual current collection. The four boundary cases assert the dated discrepancy; update after .2.6 repair."
+reverify: "Run TASK_CHECKER_APPLIED_PROOF below and scripts/check_task_tree_metadata.sh. Earlier diagnosis/proposal recipes are historical pre-fix evidence; the current replay retrieves their exact original Git source and compares the applied checker."
 ---
+
+Current disposition: the director granted the exact prepared correction and its
+focused verification before remaining reading; ADR0120 records that authority.
+The applied source matches the proposal digest, preserves all registry limits, and
+passes the actual partition gate plus37 self-tests/50 detached registry cases.
+
+# Historical diagnosis and proposal before the correction
 
 The registry's `task_evidence` row permits 92,000 total lines and 10,485,760
 bytes; the partition checker instead hardcodes 88,000 lines and 9,437,184 bytes.
@@ -305,4 +312,42 @@ check_case('extra key',sub {$_[0][0]{limits}{extra}=1},1);
 die "case count $cases" unless $cases==50;
 print $json->encode({production_sha256=>sha256_hex($old),proposed_sha256=>sha256_hex($new),red_green=>\@report,registry_cases=>$cases}),"\n";
 TASK_CHECKER_PROPOSAL_PROOF
+```
+
+# Applied correction — 2026-09-13
+
+Supporting `.2.6` applies the exact approved diff above. The real registry is checked
+on every run: its inclusive boundaries must pass and each single-dimension
+overflow must produce exactly one rejection. Missing/duplicate rows and malformed
+limits fail. The same proof reports four original disagreements and zero applied
+disagreements. This closes the checker defect; six grammar/literal repair roots
+remain. Full CI is waived only for this correction and the separate supporting
+reading closeout under `docs/decisions/0120-supporting-reading-unblock.md`.
+
+The earlier embedded recipes remain dated evidence, with their original source
+assumptions. This current replay uses Git to restore that exact original input in
+managed scratch and exercises the applied production functions.
+
+```bash
+bash tools/project_data_run.sh env PERL5LIB= python3 - <<'TASK_CHECKER_APPLIED_PROOF'
+from pathlib import Path
+import re,hashlib,subprocess
+card=Path('docs/knowledge/task-partition-capacity-registry-drift.md').read_text()
+source=Path('scripts/check_task_tree_partitions.pl').read_bytes()
+assert hashlib.sha256(source).hexdigest()=='9f4e5c1a3f268fc8364e6430583a8df58a522cd9c12bc24575d11181758a0206'
+base='693e11e48168aba753b179b88cdb6800d4b06513'
+old=subprocess.check_output(['git','show',base+':scripts/check_task_tree_partitions.pl'])
+assert hashlib.sha256(old).hexdigest()=='bd1a52602dd2e6e82c8adf2fc8603c9602eb9c8bf610252c5627728ff51e9a0a'
+s=Path('.linkedspec-data/scratch/support26');s.mkdir(parents=True,exist_ok=True)
+(s/'original.pl').write_bytes(old)
+helper=re.search(rb'^sub collection_registry_errors \{.*?^\}\n\n',source,re.M|re.S);assert helper
+(s/'helper.txt').write_bytes(helper[0])
+marker='TASK_CHECKER_PROPOSAL_PROOF'
+body=card.split("<<'"+marker+"'\n",1)[1].split('\n'+marker,1)[0]+'\n'
+body=body.replace("my $old=read_raw('scripts/check_task_tree_partitions.pl');", "my $old=read_raw('.linkedspec-data/scratch/support26/original.pl');")
+body=body.replace("my $new=read_raw('.linkedspec-data/scratch/support31/check_task_tree_partitions.proposed.pl');", "my $new=read_raw('scripts/check_task_tree_partitions.pl');")
+body=body.replace('.linkedspec-data/scratch/support31/checker-helper.txt','.linkedspec-data/scratch/support26/helper.txt')
+(s/'applied_proof.pl').write_text(body)
+subprocess.run(['perl',str(s/'applied_proof.pl')],check=True)
+TASK_CHECKER_APPLIED_PROOF
 ```

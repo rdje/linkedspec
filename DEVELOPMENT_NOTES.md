@@ -10,6 +10,12 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-13 — SUPPORTING-SOURCE-READING.2.6 — approved checker correction and separate reading-closeout grant
+
+ADR0120 records the director’s explicit grant for the exact prepared checker correction before remaining reading and focused verification for this correction and the separate supporting-reading closeout. The applied source matches the proposal SHA-256, updates only duplicate aggregate limits and checks registry agreement across all five inclusive/+1 boundaries. Source identity,37 internal tests,50 detached registry cases and actual partition validation pass. Historical diagnosis/proposal recipes remain preserved; the new applied replay retrieves the exact old Git source for RED/GREEN comparison. No registry ceiling, runtime source or dependency build changes.
+
+Verification: focused applied-checker syntax/37+50 cases, actual task metadata, prior source/registry/history preservation, Knowledge, memory, both histories, rendered book and normal doctrine hooks. Full CI/receipt waived for this correction by the explicit grant; later requirements remain.
+
 ## 2026-09-13 — SUPPORTING-SOURCE-READING.3 — task capacity enforcement disagreement and closeout boundaries
 
 The independent audit reconstructs original/required/historical/omitted source exactly and preserves all seven repair roots. The older partition guard is separate from the approved registry; the exact one-file correction updates two aggregate constants and self-tests, then checks all five inclusive/+1 boundaries against the real registry. Prototype syntax,37 self-tests and50 detached registry cases pass; the original emits four agreement failures. Implementation before remaining reading and focused infrastructure/parent-closeout proof need a new scoped disposition. No production source, registry ceiling, immutable history, dependency or gate changes.

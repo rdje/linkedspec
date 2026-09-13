@@ -481,20 +481,19 @@ Further manual historical application reading is omitted. The current required
 supporting grammar scope is three files/five ranges/629 fragments/96,781 bytes.
 All three required grammar groups are physically read and independently audited
 (629 fragments/96,781 bytes). Original source, historical exclusions, reading
-commits and all seven repair owners reconcile exactly. Formal reading-parent
-closure still awaits its verification disposition; later codebase/book/policy
-prerequisites remain open.
+commits and all original repair owners reconcile exactly. The checker correction
+is complete; six grammar/literal repair roots remain open. The separate reading
+closeout is authorized with focused verification; later prerequisites remain open.
 Seventeen original groups are superseded without reading credit; completed
 historical reading and the original 158-file/174-range inventory remain exact.
-The audit also found conflicting task-document limits: the checker uses 88,000
-lines/9,437,184 bytes while the registry allows 92,000/10,485,760. A prepared one-file
-correction aligns the checker and adds recurring registry-boundary checks. Its
-prototype passes syntax checking, 37 internal checks and 50 boundary cases; it is
-not applied. The audit/proposal fits both current controls with five task lines
-remaining. Supporting `.2.6` awaits explicit permission for this correction before
-the remaining reading, using focused verification. A separate scoped exception
-is proposed for the supporting reading-only parent closeout. All normal hooks,
-existing ceilings, later verification requirements and defect owners remain.
+Task-document capacity enforcement now matches the approved registry: 92,000 lines
+and 10,485,760 bytes in total, with the existing 128-file, 8,000-line/member and
+1,048,576-byte/member safeguards. Every partition-checker run compares all five
+inclusive and overflow boundaries against the actual registry, so future duplicate
+limit drift produces an immediate error. The applied correction passes 37 internal
+checks,50 detached registry cases and actual collection validation. ADR0120 records
+the director's focused-verification grant for this correction and the separate
+supporting-reading closeout. All six grammar/literal repair roots remain open.
 No fixture or regression assertion is removed. Current dependency evidence and
 replay: `docs/knowledge/current-supporting-grammar-dependencies.md`;
 historical corpus proof: `docs/knowledge/legacy-configuration-source-contracts.md`.

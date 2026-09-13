@@ -10,6 +10,12 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-13 — SUPPORTING-SOURCE-READING.2.6 — align duplicate task capacity enforcement
+
+Supporting .2.6 applies the exact director-approved task checker correction under ADR0120: existing aggregate ceilings92,000 lines/10,485,760 bytes and all three member/file limits now agree with the real registry on every run. Original source produces four agreement errors; applied source passes syntax,37 self-tests,50 detached registry cases and actual partition validation. Registry limits and runtime sources remain unchanged. Six grammar/literal repair roots remain open. Required supporting reading and its independent audit are complete; authorized focused parent closeout follows separately, then startup .3.8.
+
+Verification: focused applied-checker syntax/37+50 cases, actual task metadata, prior source/registry/history preservation, Knowledge, memory, both histories, rendered book and normal doctrine hooks. Full CI/receipt waived for this correction by the explicit grant; later requirements remain.
+
 ## 2026-09-13 — SUPPORTING-SOURCE-READING.3 — independent supporting audit and bounded unblock proposal
 
 Supporting .3 independently reconciles all158 original files/174 ranges: required current reading629 fragments/96781 bytes, historical reading1500/61165 and explicit omissions23484/806310. Three reading commits/five required ranges/nineteen windows match exact activations and unchanged source. All seven repair roots/ten pending nodes remain. The task checker still uses88000 lines/9437184 bytes versus the registry92000/10485760; a one-file correction passes syntax,37 internal checks and50 detached registry cases. The audit/proposal is complete; checker implementation and formal supporting/startup .3.7 parent closure await a new scoped before-reading/focused-verification disposition. No code, limit, dependency or runtime change is made.
