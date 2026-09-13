@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-13 — Lua uppercase table completion and complete scoped verification
+
+- Read every Unicode mapping line 1670-3169: 1,500 fragments /35,947 bytes; cumulative 27/51 and 1,357,777 bytes.
+- All 1,482 uppercase entries and fifteen Cased ranges match neutral data; both installed hosts pass 2,964 complete mapping observations.
+- Preserve prior native fixture and regeneration evidence through exact source identity; no new source, contract, Unicode version or policy changes.
+- LUA-STARTUP-READING.1.27 preserves all thirty repair roots and earlier evidence; next .1.28 reads the casing suffix and rule-label prefix.
+
 ## 2026-09-13 — Lua generated lower-case table reading and complete scoped proof
 
 - Read every Unicode mapping line 170-1669: 1,500 fragments /35,080 bytes; cumulative 26/51 and 1,321,830 bytes.

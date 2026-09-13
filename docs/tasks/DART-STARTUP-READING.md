@@ -1571,7 +1571,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.1.27` | `pending` | Read every Unicode mapping line 1670-3169 after clean .1.26; preserve all thirty repair roots, existing failures and parked named arguments. |
+| 1 | `LUA-STARTUP-READING.1.28` | `pending` | Read the casing suffix 3170-3846 and rule-label prefix 1-823 after clean .1.27; preserve every repair owner, prior failure and parked named arguments. |
 
 ## Decisions
 

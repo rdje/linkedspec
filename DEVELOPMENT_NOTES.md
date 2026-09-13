@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-13 — Preserve full uppercase expansions and exact property endpoints
+
+- The read uppercase suffix contains 84 two-scalar and sixteen three-scalar expansions; all ordered outputs remain exact, including Greek combining sequences and ligatures.
+- Fifteen initial Cased ranges match their neutral endpoints; the remaining properties and conversion algorithm retain independent reading ownership.
+- Complete fresh scoped observations complement earlier fixture and regeneration proof; unchanged earlier runs are qualified and never counted again as fresh evidence.
+- LUA-STARTUP-READING.1.27 records exact reproduction in docs/knowledge/lua-unicode-upper-completion-reading.md; no new defect or repair closure is inferred.
+
 ## 2026-09-13 — Preserve complete generated casing data and scoped runtime evidence
 
 - Mapping values remain scalar sequences: the read upper prefix includes sharp-s to SS and U+0149 to U+02BC U+004E; explicit identity entries remain neutral-data exact.
