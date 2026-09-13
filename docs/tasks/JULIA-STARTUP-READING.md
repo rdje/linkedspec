@@ -1742,7 +1742,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.3` | `pending` | Read diagnostic suffix, duplicate-slot contract, six capability fixtures, generated-source fixture/contract and gap prefix1-805:1500 fragments/52668 bytes. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.4` | `pending` | Read gap806-1213, complete logical-helper contract and capability manifest, then map-leaves1-33: 1022 fragments/65375 bytes. |
 
 ## Decisions
 

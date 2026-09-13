@@ -2299,7 +2299,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Status: `active`
   Goal: Split and read all 160 entries under capability_conformance, cli_conformance, t, tests, and unicode_case.
   Children: `.3.8.0` owns exact decomposition; `CONFORMANCE-SOURCE-READING.1` owns all143 reading groups; .2 findings and .3 independent closeout stay separate.
-  Reading owner: `docs/tasks/CONFORMANCE-SOURCE-READING.md`; .3.8.0 preserves143 groups/302 exact ranges over160 baseline-identical inputs. Physical reading2/143: cumulative1578 fragments/130987 bytes, four complete files and diagnostic prefix1-268. Next .1.3 owns diagnostic suffix and following contracts/fixtures; .41.6/.41.7 retain exact guide-current repairs. All other repairs/prerequisites remain.
+  Reading owner: `docs/tasks/CONFORMANCE-SOURCE-READING.md`; .3.8.0 preserves 143 groups/302 exact ranges over 160 baseline-identical inputs. Physical reading 3/143: cumulative 3078 fragments/183655 bytes, 16 complete files and gap prefix1-805. Next .1.4 owns the gap suffix and following contracts; all existing repairs and prerequisites remain.
   Acceptance: Include phase0, neutral contracts, fixtures, generators, and four explicitly decoded pinned Unicode
     inputs. Keep generated/fixture bytes in scope; count neither a hash nor enumeration as full reading.
   Verification: `pending`
@@ -4641,7 +4641,7 @@ startup implementation prerequisites and the rgx reading exclusion remain intact
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.3` | `pending` | Read diagnostic suffix, duplicate-slot contract, six capability fixtures, generated-source fixture/contract and gap prefix1-805:1500 fragments/52668 bytes. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.4` | `pending` | Read gap806-1213, complete logical-helper contract and capability manifest, then map-leaves1-33: 1022 fragments/65375 bytes. |
 
 ## Reading Ledger
 

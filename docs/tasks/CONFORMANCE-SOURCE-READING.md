@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `CONFORMANCE-SOURCE-READING`
-- Status: `active` / exact decomposition; physical reading 2/143
+- Status: `active` / exact decomposition; physical reading 3/143
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.8`
 - Created: `2026-09-13`
 - Last updated: `2026-09-13`
@@ -82,14 +82,21 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
   Commit: `CONFORMANCE-SOURCE-READING.1.2 - complete guide and read callable mark and diagnostic contracts`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.3`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `51c7ea8fe89e4f96b5927ec02bc5b629d33d8986`.
+  Verification tier: `focused`
+  Focused checks: Complete exact baseline-identical windows; diagnostic suffix, duplicate-slot identity, capability fixtures, generated-source roles and gap-prefix comprehension; relevant neutral proof, evidence preservation, memory, histories, book and normal doctrines.
+  Canonical trigger: Ordinary bounded reading leaf; no source, public-contract or infrastructure change and no parent closeout. Later repair and canonical prerequisites remain.
   Goal: Read and understand conformance/test/Unicode group 3.
   Scope: `capability_conformance/diagnostic_output_contract.json` lines 269-273; `capability_conformance/duplicate_regex_slot_identity_contract.json` lines 1-280; `capability_conformance/fixtures/capability_capture_anonymous_surface.spec` lines 1-51; `capability_conformance/fixtures/capability_capture_named_surface.spec` lines 1-61; `capability_conformance/fixtures/capability_control_marker_surface.spec` lines 1-26; `capability_conformance/fixtures/capability_cursor_control_surface.spec` lines 1-24; `capability_conformance/fixtures/capability_position_helper_surface.spec` lines 1-41; `capability_conformance/fixtures/capability_pure_helper_surface.spec` lines 1-38; `capability_conformance/generated_source/fixtures/default_action_result_trace_identity/expected.json` lines 1-1; `capability_conformance/generated_source/fixtures/default_action_result_trace_identity/input.spec` lines 1-5; `capability_conformance/generated_source/fixtures/default_action_result_trace_identity/input.txt` lines 1-1; `capability_conformance/generated_source_contract.json` lines 1-162; `capability_conformance/inter_match_gap_capture_contract.json` lines 1-805
   Baseline evidence: 1500 fragments / 52668 decoded bytes; ordered range SHA-256 `b50f26b02c97ce5b04829dc991161454d9cf979b990caae89fa249ed3ecb2f08`.
   Dependencies: .1.2 committed with clean handoff.
   Acceptance: Read every scoped byte in complete bounded windows; retain source identity, exact comprehension, canonical Knowledge reconciliation, concrete finding ownership, focused proof and per-leaf continuity. Unread crossing constructs retain the next range owner.
-  Verification: `pending`
-  Commit: `pending`
+  Reading evidence: 19 complete windows / 1500 fragments / 52668 bytes; ordered window SHA-256 `80286e7145eaf93781f463140168b0dea04b2e61a235991a90395b8d15448b96`.
+  Comprehension: Ordered matching tests the required target-rule/index identity; choice uses earliest start then authored order, and repetitions reset the required sequence. Six capability fixtures exercise anonymous/named capture, control markers, cursor save/restore, position and value helpers without claiming complete semantics from name coverage. Generated v1 is a semantic portability baseline with ten plan families, stable errors and interpreter-first independent load/execute roles; current format v2 identity is a separate contract. Gap identifiers preserve exact Unicode/XID identity; selected-edge provenance, candidate visibility, accepted-exit commit, terminal tails and per-invocation suspension/rollback are explicit. Falsey payloads still accept matches, and rollback excludes user/output/host effects. Gap mutation-list and later sections remain .1.4-owned.
+  Verification: complete 19-window source reconstruction and all 143-group/302-range identities; duplicate-slot neutral 5 fixtures/2 diagnostics/6 runtimes/7 complete/21 documents/11 denials/59 mutations, generated-source 10 families/1 behavior case and declared 8/105 plus Rust 105/105 roles, language 250 calls/105 corpus plus named-mark fixture/126 public contracts, and gap 8+10 fixtures/3 sources/16 transitions/10 segmentations/9 diagnostics/9 complete/63 semantic and 34 public mutations. These are fresh structural/neutral checks, not rebuilt or executed backend matrices. Preservation, memory, Knowledge, histories, rendered book, git diff --check and normal doctrines govern landing. Canonical duplicate-slot/generated-source/gap admission cards reconcile dated milestones with current contracts. No new runtime defect is inferred and no existing repair node changes. Diagnostic reading reaches EOF; gap reading ends at805.
+  Candidate proof: Recorded19-window, all143-group/302-range and cumulative3-group/3078-fragment/183655-byte/16-complete-file audits PASS. Preserve2487 prior files, prior recipes,2774/2776 task nodes and all94 book limitation headings; only this reading node and startup .3.8 change. Memory60; histories457/49603 and387/48072 lines/bytes; rendered book and git diff --check PASS. Normal doctrines govern focused landing.
+  Commit: `CONFORMANCE-SOURCE-READING.1.3 - read slot identity fixtures generated roles and gap prefix`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.4`
   Status: `pending`
@@ -1512,7 +1519,7 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
 
 | Rank | Leaf | Status | Next action |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.3` | `pending` | Read diagnostic suffix, duplicate-slot contract, six capability fixtures, generated-source fixture/contract and gap prefix1-805:1500 fragments/52668 bytes. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.4` | `pending` | Read gap806-1213, complete logical-helper contract and capability manifest, then map-leaves1-33: 1022 fragments/65375 bytes. |
 
 ## Decisions
 
@@ -1525,18 +1532,21 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
 
 ## Verification Log
 
+- `2026-09-13` .1.3: Conformance .1.3 reads 19 complete windows, 1,500 fragments and 52,668 baseline-identical bytes across 13 ranges. Diagnostic, duplicate-slot, six capability fixtures, three generated fixture files and the generated-source contract are complete; gap reading stops at line 805. Physical reading is 3/143, cumulatively 3,078 fragments and 183,655 bytes with 16 complete files. Fresh structural/neutral proof passes duplicate identity 5 fixtures/59 mutations, generated roles 10 families, language coverage 250 calls/126 public contracts and gap semantics 63/public 34 mutations. Authored slot identity, independent generated execution, gap state and user effects retain separate contracts. No new defect or runtime signoff is inferred; all existing repair, source, history and capacity obligations remain. Next .1.4 owns the exact gap suffix and following contracts.
 - `2026-09-13` .1.2: Conformance .1.2 reads12 complete windows/808 fragments/65,502 baseline-identical bytes: capability guide EOF, complete callable/signature/named-mark contracts and diagnostic lines1-268. Physical reading is2/143, cumulatively1,578 fragments/130,987 bytes and four complete files; diagnostic269-273 remains .1.3-owned. Current positional-only call contracts preserve the approved parked named-argument direction; mark isolation is by rule label, and diagnostics use a quiet per-invocation typed sink. Fresh named-mark and diagnostic neutral checks pass; prior unchanged callable/signature proof remains dated. Guide-suffix current17/80 claims extend existing startup .41.7, while current diagnostic metadata measures15 public documents/9 denials. Source, prior evidence, all repairs and capacity limits remain; no backend matrix, dependency build or parent closeout is claimed.
 - `2026-09-13` .1.1: Conformance .1.1 reads all 11 complete windows of capability_conformance/README.md lines1-770: 770 fragments/65,485 baseline-identical bytes. Physical conformance reading is1/143; the README suffix771-897 and later contracts remain .1.2-owned. Seven focused structural/neutral checks pass, while exact current census, mutation/inventory/public-count and generic-callable claims remain stale. Existing startup .41.7 and .41.6 now own those actual paragraphs and meaningful recurrence; the marker/denial-only cause is recorded without changing source or runtime. All143 groups/302 ranges, prior source/history, six supporting repair roots and existing capacity limits remain. No fresh backend matrix, dependency build or parent closeout is claimed.
 - `2026-09-13`: Startup .3.8.0 independently verifies all160 files/143 groups/302 ranges and four decoded hashes; Unicode casing and rule-label checks PASS. Source/task/history, actual capacity, memory, Knowledge, histories, rendered book and normal hooks govern planning. Physical reading remains0/143.
 
 ## Commit Log
 
+- `2026-09-13` .1.3: `CONFORMANCE-SOURCE-READING.1.3 - read slot identity fixtures generated roles and gap prefix`; activation 51c7ea8fe89e4f96b5927ec02bc5b629d33d8986; next .1.4 after clean handoff and zero-byte brief.
 - `2026-09-13` .1.2: `CONFORMANCE-SOURCE-READING.1.2 - complete guide and read callable mark and diagnostic contracts`; activation 724185e83987bcd7597dae3840efd23af352859f; next .1.3 after clean handoff and zero-byte brief.
 - `2026-09-13` .1.1: `CONFORMANCE-SOURCE-READING.1.1 - read capability guide prefix and own stale current claims`; activation d3cfa5973beed85de5ae58dc81798262cafe18ad; next .1.2 after clean handoff and zero-byte brief.
 - `2026-09-13`: Decomposition lands under `SESSION-STARTUP-READING.3.8.0`; Git owns the resulting commit identity.
 
 ## Changelog
 
+- `2026-09-13` .1.3: Complete diagnostic/duplicate-slot/fixtures/generated-source reading and gap prefix; preserve all prior findings and the exact unread suffix.
 - `2026-09-13` .1.2: Complete guide and three contract files; preserve the diagnostic suffix boundary, current metadata and all existing repair ownership.
 - `2026-09-13` .1.1: Complete the first11 guide windows; retain clear suffix ownership and concrete repair acceptance for current-claim drift.
 - `2026-09-13`: Own every conformance/test/Unicode range before reading; preserve all existing source, history, repair and capacity obligations.

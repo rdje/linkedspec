@@ -8,7 +8,7 @@ answers:
   - "how do I verify conformance reading source and range coverage"
   - "which conformance source reading file has the longest line"
 date: 2026-09-13
-status: exact decomposition preserved; physical reading 2/143, four files complete and141 groups remain
+status: exact decomposition preserved; physical reading 3/143, sixteen files complete and140 groups remain
 tags: [reading, conformance, tests, unicode, continuity, CONFORMANCE-SOURCE-READING]
 evidence: "Startup .3.8.0 independently accounts for160 baseline-identical files,5,422,313 stored bytes and8,257,059 decoded bytes in167,606 line fragments/167,604 LF delimiters. Four gzip inputs contribute54,500 decoded lines. All143 groups/302 ranges are contiguous, disjoint and bounded at1500 fragments/65536 bytes. No source, registry or runtime behavior changes; no physical-reading credit from inventory."
 reverify: "Run CONFORMANCE_SOURCE_READING_COVERAGE below through the project-data wrapper; it derives source identity from Git and range ownership from the task-tree rather than a parallel manifest. Use scripts/check_task_tree_metadata.sh for actual task collection limits."
@@ -155,4 +155,38 @@ assert evidence and (len(windows),fragments,size,digest)==(int(evidence[1]),int(
 print(json.dumps(dict(leaf=leaf,windows=len(windows),fragments=fragments,bytes=size,window_sha256=digest)))
 print('PASS reconstruction of recorded complete reading windows; hashes are continuity evidence, not new reading credit.')
 CONFORMANCE_READING_WINDOWS
+```
+
+
+# September 13 identity, fixture and gap-prefix comprehension
+
+`CONFORMANCE-SOURCE-READING.1.3` reads all 19 recorded windows, 1,500 fragments
+and 52,668 bytes. Diagnostic and duplicate-slot contracts, six capability fixtures,
+three generated behavior fixture files and the generated-source contract are now
+complete; gap reading stops at805. Cumulative reading is 3,078 fragments/183,655
+bytes and16 complete files. The next leaf owns gap806–1213, including the remaining
+mutation list, admission and public sections. The generic recorded-window recipe
+above reconstructs this leaf with its exact task Scope and reading evidence.
+
+Canonical comprehension remains with [[duplicate-regex-slot-identity-contract]],
+[[generated-source-contract-v1]], [[inter-match-gap-recurring-public-closeout-plan]]
+and [[typed-lossless-gap-composition]]. Authored identity cannot be recovered from
+duplicate pattern text. Generated v1 is the semantic baseline, distinct from the
+current v2 format; fixture inventory and source markers alone do not prove fresh
+independent host execution. Gap state commits accepted match presence, including
+falsey payloads, and is suspended/restored per invocation. Gap rollback does not
+promise rollback of user variables, AST/output, diagnostics or host effects.
+
+Fresh structural/neutral checks pass duplicate identity5 fixtures/59 mutations,
+generated roles10 families/one behavior fixture, language250 names/105 corpus plus
+one named-mark fixture/126 public contracts, and gap63 semantic/34 public mutations
+with current9-complete rollout. Older246-name and neutral-only gap milestone cards
+are dated evidence; the later gap public-admission card records current250/126.
+These checks do not execute backend matrices, rebuild dependencies or close repairs.
+
+```bash
+bash tools/run_python_project_data.sh tools/check_duplicate_regex_slot_identity_contract.py
+bash tools/project_data_run.sh env PERL5LIB= perl tools/check_generated_source_contract.pl
+bash tools/project_data_run.sh env PERL5LIB= perl tools/check_language_capability_coverage.pl
+bash tools/run_python_project_data.sh tools/check_inter_match_gap_capture_contract.py
 ```

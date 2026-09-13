@@ -10,6 +10,12 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-13 — CONFORMANCE-SOURCE-READING.1.3 — preserve structural identity and distinguish gap rollback from user effects
+
+Ordered matching tests its required structural slot while choice uses earliest start and authored-order ties. Generated-source v1 fixes independent compile/load/execute roles without requiring identical host syntax; current v2 identity remains separate. Six capability fixtures are concrete surface probes, not complete behavioral coverage. Gap selection stages a candidate before LS, commits accepted exits after LE and clears it before IT; terminal tails, recursive suspension and rollback have explicit boundaries. User variables, output and other effects remain outside gap rollback. Reading is 3/143 with 16 complete files and gap1-805; existing runtime findings remain open.
+
+Verification: complete 19-window source reconstruction and all 143-group/302-range identities; duplicate-slot neutral 5 fixtures/2 diagnostics/6 runtimes/7 complete/21 documents/11 denials/59 mutations, generated-source 10 families/1 behavior case and declared 8/105 plus Rust 105/105 roles, language 250 calls/105 corpus plus named-mark fixture/126 public contracts, and gap 8+10 fixtures/3 sources/16 transitions/10 segmentations/9 diagnostics/9 complete/63 semantic and 34 public mutations. These are fresh structural/neutral checks, not rebuilt or executed backend matrices. Preservation, memory, Knowledge, histories, rendered book, git diff --check and normal doctrines govern landing.
+
 ## 2026-09-13 — CONFORMANCE-SOURCE-READING.1.2 — separate callable signatures mark scope and diagnostic delivery
 
 Exact contract reading distinguishes deferred caller-time codeblocks from eager blocks, fixed/variadic signatures from approved future named arguments, rule-label marks from recursive invocation isolation, and typed diagnostic sinks from parse results and trace. Four sources are complete; diagnostic reading stops at268. The guide suffix extends existing stale current-census repair .41.7. Fresh neutral proof validates named marks and diagnostics; current diagnostic public metadata is15 documents/9 denials, with the older16-document milestone explicitly qualified. Prior source/runtime findings and all143-group ownership remain intact.

@@ -57,3 +57,9 @@ denials and omits root `README.md`; the earlier 16-document count above describe
 the dated rollout milestone, not today's inventory. The exact baseline-identical
 source and current metadata probe is `CONFORMANCE_SUFFIX_CLAIMS` in
 [[conformance-capability-guide-reading]]. No fresh six-runtime matrix is claimed.
+
+
+`CONFORMANCE-SOURCE-READING.1.3` subsequently reads the final five lines269–273.
+The complete diagnostic source is now read: its last three rollout rows record
+generated/primary, recurring and public completion. The unchanged-source neutral
+proof above remains dated to `.1.2`; reading those rows is not a new matrix run.
