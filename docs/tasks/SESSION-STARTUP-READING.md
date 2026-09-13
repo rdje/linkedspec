@@ -2253,9 +2253,9 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Status: `active`
   Goal: Split and read all 99 baseline Lua entries, including native adapters, both-ABI tests, runtime, and commands.
   Children: `.3.6.0` owns decomposition; LUA-STARTUP-READING.1 owns 51 reading children and .3 owns independent closeout.
-  Reading owner: `docs/tasks/LUA-STARTUP-READING.md`; .4/.4.2 close under ADR0118 and containment .14; exact reading is 47/51; .1.48 follows child 47; .2.1-.2.33 own thirty-three concrete repair roots, with installed5.5 nil-error failures under .2.2 and shared Lua budget repair under .82.3.1; .28.7 owns the baseline public-check failure.
+  Reading owner: `docs/tasks/LUA-STARTUP-READING.md`; .4/.4.2 close under ADR0118 and containment .14; exact reading is 48/51; .1.49 follows child 48; .2.1-.2.33 own thirty-three concrete repair roots, with installed5.5 nil-error failures under .2.2 and shared Lua budget repair under .82.3.1; .28.7 owns the baseline public-check failure.
   Acceptance: Define bounded file/range children before reading; generated tables and the large test runner stay in scope.
-  Verification: Lua .1.47 reads four exact ranges in ten complete windows: 1,500 fragments /58,749 bytes; cumulative 47/51, 66,040 fragments /2,522,437 bytes. All 99 Lua sources remain baseline-identical; 90 files are fully read. Remaining-static 122/admission 408/source-alias 638 pass per installed host, 2,336 assertions total, with two staged helper loads and no later staged behavior credit. Neutral semantic proof is 6/20/128 with rollout 9/9 and admission 6/6; typed-source proof is 14/0/231. Existing .2.1 gains exact admission-stage and alias-count/typed-source qualifications; no repair node is added. All thirty-four repair roots, known PUC5.5 nil failures, fixture .2.34 and prior exclusions remain open. Next .1.48 reads staged-enrichment 241-1740; named arguments and startup/ADR0118 prerequisites remain unchanged.
+  Verification: Lua .1.48 reads staged-enrichment 241-1740 in eight complete windows: 1,500 fragments /62,275 bytes; cumulative 48/51, 67,540 fragments /2,584,712 bytes. All 99 Lua sources remain baseline-identical; 90 files remain fully read. The unchanged test prefix 1-1728, with its existing IIFE closed at that complete statement boundary, passes 704 assertions per host, 1408 total. This covers declaration/provenance, frozen current-depth policies and recursion through cumulative node limits; later rebasing and fresh production-carrier checks remain unexecuted. Neutral staged proof retains 9/9/123 plus public 6/17/10/129. No new defect or repair node; all 34 repair roots, known runtime failures and native-error exclusions remain open. Next .1.49 completes staged reading and reads lifecycle, typed-source and Unicode-label test ranges; named arguments and startup/ADR0118 prerequisites remain unchanged.
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.3.6.0`
@@ -4607,7 +4607,7 @@ startup implementation prerequisites and the rgx reading exclusion remain intact
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.1.48` | `pending` | Read staged-enrichment lines 241-1740 after clean .1.47; preserve all thirty-four repair roots, known runtime/fixture failures, native-error exclusions and parked named arguments. |
+| 1 | `LUA-STARTUP-READING.1.49` | `pending` | Complete staged reading and read the four owned lifecycle/source/Unicode ranges after clean .1.48; preserve all 34 repair roots, known failures, native-error exclusions and parked named arguments. |
 
 ## Reading Ledger
 

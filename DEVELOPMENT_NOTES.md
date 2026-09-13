@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-13 — Keep staged prefix and recursive resource proof bounded
+
+- Read and understand staged declarations, exact source provenance, complete-depth reservation, deterministic ordering, plan-only caching and all result/failure policies.
+- The copied prefix passes 704 per host: valid markers remain inert in one-depth execution; recursive results queue breadth first with fresh contexts and shared steps/calls/nodes.
+- Selection ends at 1728 before direct rebasing; it closes the original IIFE without changing any retained assertion. Full 890 and fresh production-seed carrier proof remain dated earlier evidence.
+- LUA-STARTUP-READING.1.48 records replay in docs/knowledge/lua-staged-declaration-depth-recursion-consumer-reading.md; existing malformed-array, provenance, marker-cycle and diagnostic-budget repairs remain open.
+
 ## 2026-09-13 — Keep admission fixtures and source-alias proof exact
 
 - Complete remaining-static, twelve-role semantic admission and seven-alias consumers; read staged enrichment through 240 and load only its complete helper prefix 1-222.

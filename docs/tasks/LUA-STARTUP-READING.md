@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `LUA-STARTUP-READING`
-- Status: `active` / approved capacity; source reading 47/51
+- Status: `active` / approved capacity; source reading 48/51
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.6`
 - Created: `2026-09-12`
 - Last updated: `2026-09-13`
@@ -45,7 +45,7 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
 - Ordered range SHA-256: `81c58b8319def28af518fb134a3787513fe746f0f0f73bcacb0e20b9ede1c9d6`.
 - Child-summary SHA-256: `f56ecac262800bd3cc1e6bba0cc25bfe22f095c3dfee41f1c6595d4200145290`.
 - Coordinates are one-based inclusive LF physical lines or absolute file bytes; both byte windows decode as UTF-8.
-- Current physical reading: 47/51 children, 66,040/71,269 fragments and 2,522,437/2,732,450 bytes.
+- Current physical reading: 48/51 children, 67,540/71,269 fragments and 2,584,712/2,732,450 bytes.
 - Exact independent replay and capacity evidence: `docs/knowledge/lua-startup-reading-coverage.md`.
 
 ## Task Tree
@@ -780,14 +780,18 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
   Commit: `LUA-STARTUP-READING.1.47 - read semantic admission and source alias consumers`.
 
 - ID: `LUA-STARTUP-READING.1.48`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `a4ccda13e00a701eab22a8540158d7c1922e98fe`.
+  Verification tier: `focused`
+  Focused checks: Exact staged-enrichment241-1740 source bytes and unchanged Lua baseline; completely read bounded staged checks on both installed hosts after helper/fixture reconciliation; retain every prior failure and repair owner, verify coverage and source/task/history preservation, render book, check explicit memory and all normal doctrines.
+  Canonical trigger: Ordinary bounded source reading and evidence intake without production or infrastructure change; complete-consumer admission, supported-runtime repairs, startup closeout and push retain canonical prerequisites.
   Goal: Read and understand group 48: staged_ast_enrichment_contract_test.lua.
   Scope: `lua/test/staged_ast_enrichment_contract_test.lua` lines 241-1740
   Baseline evidence: 1500 fragments / 62275 bytes; ordered range SHA-256 `e246f1a148b9bc27c539469ffa83a8afa48b7f782caa2934e908bc528c6b03c8`.
   Dependencies: .1.47 committed with clean handoff.
   Acceptance: Read every scoped byte without truncation; record comprehension, Knowledge and repair reconciliation, focused proof and a clean per-leaf commit.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Lua .1.48 reads staged-enrichment 241-1740 in eight complete windows: 1,500 fragments /62,275 bytes; cumulative 48/51, 67,540 fragments /2,584,712 bytes. All 99 Lua sources remain baseline-identical; 90 files remain fully read. The unchanged test prefix 1-1728, with its existing IIFE closed at that complete statement boundary, passes 704 assertions per host, 1408 total. This covers declaration/provenance, frozen current-depth policies and recursion through cumulative node limits; later rebasing and fresh production-carrier checks remain unexecuted. Neutral staged proof retains 9/9/123 plus public 6/17/10/129. No new defect or repair node; all 34 repair roots, known runtime failures and native-error exclusions remain open. Next .1.49 completes staged reading and reads lifecycle, typed-source and Unicode-label test ranges; named arguments and startup/ADR0118 prerequisites remain unchanged. Exact evidence: docs/knowledge/lua-staged-declaration-depth-recursion-consumer-reading.md.
+  Commit: `LUA-STARTUP-READING.1.48 - read staged declaration depth and recursion tests`.
 
 - ID: `LUA-STARTUP-READING.1.49`
   Status: `pending`
@@ -2189,7 +2193,7 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.1.48` | `pending` | Read staged-enrichment lines 241-1740 after clean .1.47; preserve all thirty-four repair roots, known runtime/fixture failures, native-error exclusions and parked named arguments. |
+| 1 | `LUA-STARTUP-READING.1.49` | `pending` | Complete staged reading and read the four owned lifecycle/source/Unicode ranges after clean .1.48; preserve all 34 repair roots, known failures, native-error exclusions and parked named arguments. |
 
 ## Decisions
 
@@ -2207,9 +2211,11 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 ## Blockers
 
-- None for bounded Lua .1.48 reading after clean .1.47. Installed5.5 native/generated nil-error tests remain failed under .2.2; declared5.4 proof remains pending. The baseline public-selector failure is tracked under startup .28.7 and is not a passing gate. The finite ADR0118 allowance and each actual candidate remain checked; startup .80 and all later verification/repair prerequisites retain their owners.
+- None for bounded Lua .1.49 reading after clean .1.48. Installed5.5 native/generated nil-error tests remain failed under .2.2; declared5.4 proof remains pending. The baseline public-selector failure is tracked under startup .28.7 and is not a passing gate. The finite ADR0118 allowance and each actual candidate remain checked; startup .80 and all later verification/repair prerequisites retain their owners.
 
 ## Verification Log
+
+- `2026-09-13` .1.48: Lua .1.48 reads staged-enrichment 241-1740 in eight complete windows: 1,500 fragments /62,275 bytes; cumulative 48/51, 67,540 fragments /2,584,712 bytes. All 99 Lua sources remain baseline-identical; 90 files remain fully read. The unchanged test prefix 1-1728, with its existing IIFE closed at that complete statement boundary, passes 704 assertions per host, 1408 total. This covers declaration/provenance, frozen current-depth policies and recursion through cumulative node limits; later rebasing and fresh production-carrier checks remain unexecuted. Neutral staged proof retains 9/9/123 plus public 6/17/10/129. No new defect or repair node; all 34 repair roots, known runtime failures and native-error exclusions remain open. Next .1.49 completes staged reading and reads lifecycle, typed-source and Unicode-label test ranges; named arguments and startup/ADR0118 prerequisites remain unchanged.
 
 - `2026-09-13` .1.47: Lua .1.47 reads four exact ranges in ten complete windows: 1,500 fragments /58,749 bytes; cumulative 47/51, 66,040 fragments /2,522,437 bytes. All 99 Lua sources remain baseline-identical; 90 files are fully read. Remaining-static 122/admission 408/source-alias 638 pass per installed host, 2,336 assertions total, with two staged helper loads and no later staged behavior credit. Neutral semantic proof is 6/20/128 with rollout 9/9 and admission 6/6; typed-source proof is 14/0/231. Existing .2.1 gains exact admission-stage and alias-count/typed-source qualifications; no repair node is added. All thirty-four repair roots, known PUC5.5 nil failures, fixture .2.34 and prior exclusions remain open. Next .1.48 reads staged-enrichment 241-1740; named arguments and startup/ADR0118 prerequisites remain unchanged.
 
@@ -2313,6 +2319,8 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 ## Commit Log
 
+- `2026-09-13` .1.48: `LUA-STARTUP-READING.1.48 - read staged declaration depth and recursion tests`; activation a4ccda13e; next .1.49 after clean proof and empty brief.
+
 - `2026-09-13` .1.47: `LUA-STARTUP-READING.1.47 - read semantic admission and source alias consumers`; activation 93b9ed32b; next .1.48 after clean proof and empty brief.
 
 - `2026-09-13` .1.46: `LUA-STARTUP-READING.1.46 - read semantic foundations and track missing-field fixture gap`; activation 47bea50a5; next .1.47 after clean proof and empty brief.
@@ -2414,6 +2422,8 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 - `SESSION-STARTUP-READING.3.6.0 - freeze exact Lua reading ownership and capacity intake` owns creation of this plan.
 
 ## Changelog
+
+- `2026-09-13` .1.48: Read staged declaration/current-depth/recursive test mechanisms and verify the exact bounded prefix; preserve prior defects and defer unread rebasing/production-carrier checks to the next leaf.
 
 - `2026-09-13` .1.47: Complete semantic admission/source-alias reading, verify exact dual-host and neutral proof, preserve every prior defect and leave staged behavior checks to their owned source ranges.
 

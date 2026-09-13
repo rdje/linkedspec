@@ -329,12 +329,12 @@ step. `PARSER-AUTHORING-APIS.4` owns grammar/binding, definition choices,
 representation compatibility and bounded implementation planning; these four
 children remain unactivated and current startup reading continues.
 
-**Lua source reading is underway (47/51 groups):** the complete
+**Lua source reading is underway (48/51 groups):** the complete
 99-file inventory covers 71,268 physical lines and 2,732,450 bytes. Its 51 owned
 reading groups include generated tables, native adapters and both-ABI tests.
 Two UTF-8-safe byte windows retain an oversized generated MCP line, so the
 per-window total is 71,269 fragments. The independent range audit proves complete
-ownership. The first 47 groups physically read 66,040 fragments /2,522,437 bytes,
+ownership. The first 48 groups physically read 67,540 fragments /2,584,712 bytes,
 including the complete README, both commands, all three native C bindings, ActionIR
 constructors, call names, contracts, the complete parser, bounded authority,
 compiled state and corpus modules, facade, interpreter, JSON and matching. They
@@ -358,8 +358,8 @@ complete. The package runner is fully read, as are semantic call-core, staged/
 generated-provenance and compilation-foundation tests. Query-kernel and generated
 observation tests are fully read, as are native observation, runtime projection,
 source foundation and static graph. Remaining-static, semantic admission and
-source-alias tests are complete; staged-enrichment reading reaches line 240.
-Ninety files are fully read. The remaining four groups require
+source-alias tests are complete; staged-enrichment reading reaches line 1740.
+Ninety files are fully read. The remaining three groups require
 their own reading and verified commits; source reading does not close the limitations below.
 
 **Lua Unicode casing and rule-label verification:** all property tables match the
@@ -876,6 +876,34 @@ current ledger state and do not rerun every backend or resolve prior defects.
 
 Exact scope, replay and existing guidance ownership:
 `docs/knowledge/lua-semantic-admission-source-alias-consumer-reading.md`.
+
+**Lua staged declaration, depth and recursion verification:** the read prefix
+passes 704 assertions per installed host. Exact assignment-form markers preserve
+literal options and live source provenance through native, reconstructed,
+generated-plan and current-host emitted routes. Equal and Unicode captures keep
+distinct source spans; copied/transformed text and unsupported marker placements
+reject. Recognition-reachable staged declarations also reject before execution.
+
+Frozen registry selection and exact job/cache identities pass. Complete-depth
+processing reserves targets before callbacks, retains all four result and three
+failure policies, and gives siblings fresh state. Invalid or conflicting targets
+invoke no callback; failed depths leave the caller AST unchanged. Repeated jobs
+reuse plans while executing callbacks again, including recovery after failure.
+
+One-depth execution leaves returned markers inert. Recursive execution queues
+successful child markers breadth first with shared cancellation, deadlines, steps,
+calls and result-node limits. Exact cycles and non-decreasing spans reject;
+settled callback contexts expire. The four-call fixture ends with twelve remaining
+steps and 116 remaining result nodes, without resetting resources at a new depth.
+
+Execution stops after the complete node-limit fixture at line 1728. Source rebasing
+and fresh production-seed carrier tests remain in the next range. The exact total
+is 1,408 assertions, with neutral 9/9/123 and public 6/17/10/129 checks passing.
+Previously tracked malformed-container, provenance, marker-cycle, diagnostic-byte
+and runtime limitations remain open; this slice finds no new defect.
+
+Exact reading, prefix construction and proof limits:
+`docs/knowledge/lua-staged-declaration-depth-recursion-consumer-reading.md`.
 
 **Known Lua test-coverage limitation — six missing fields are actually tables:**
 the observation-test helper retains its sentinel table when asked to remove a

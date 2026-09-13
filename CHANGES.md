@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-13 — Lua staged declaration, depth and recursion reading
+
+- Read staged-test 241-1740 in eight complete windows: 1500 fragments /62275 bytes; cumulative 48/51, 2,584,712 bytes, 90 complete files.
+- Exact prefix 1-1728 passes 704 assertions per installed host, 1408 total; the existing IIFE is closed after the complete cumulative-node test.
+- Declaration/provenance, frozen depth policies and bounded recursion pass; later source rebasing and fresh production carriers remain outside this proof. Neutral 9/9/123 and public 6/17/10/129 pass.
+- LUA-STARTUP-READING.1.48 adds no new repair node and preserves all prior failures/owners; .1.49 completes staged reading and the next four test ranges.
+
 ## 2026-09-13 — Lua semantic admission and source-alias consumer reading
 
 - Read four ranges in ten complete windows: 1,500 fragments /58,749 bytes; cumulative 47/51 and 2,522,437 bytes, with 90 complete files.
