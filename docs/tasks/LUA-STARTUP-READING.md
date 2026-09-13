@@ -2268,7 +2268,7 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.33` | `pending` | `t/actionir_ast_parser.t` lines 384-1419; `t/callable_codeblock_literal_contract.t` lines 1-345; 1381 fragments/65521 bytes. Preserve complete bounded windows, source identity and all repairs. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.34` | `pending` | `t/callable_codeblock_literal_contract.t` lines 346-565; `t/cli_conformance_runner.t` lines 1-287; `t/complete_named_mark_contract.t` lines 1-79; `t/diagnostic_output_perl_contract.t` lines 1-461; `t/duplicate_regex_slot_identity_perl_contract.t` lines 1-300; `t/generated_source_contract.t` lines 1-153; 1500 fragments/56255 bytes. Preserve complete bounded windows, source identity and all repairs. |
 
 ## Decisions
 

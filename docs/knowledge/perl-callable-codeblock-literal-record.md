@@ -44,3 +44,33 @@ Variable-call resolution and dynamic caller execution have since landed under
 
 Related facts: [[callable-codeblock-literal-contract]], [[perl-actionir-ast-block-value-lowering]],
 [[variadic-user-function-contract]].
+
+
+## September 13 callable literal consumer reading
+
+`CONFORMANCE-SOURCE-READING.1.33` reads `t/callable_codeblock_literal_contract.t`
+lines 1-345. It covers exact literal fields and spans, inert construction,
+user-function transport, the neutral dynamic-caller fixture, generated execution
+loaded into a package in the same process, static callable precedence and typed
+invocation failures. The direct failing-body control restores its shadowed
+parameter. This is not a fresh-process generated-artifact test.
+
+Fresh managed execution of the complete target passes ten top-level tests.
+Neutral validation passes seven literals, 11 calls, nine invalid literals, seven
+invalid calls, four invalid declarations, eight contextual forms and 23 rejected
+governance mutations. Executing the entire target adds no physical-reading credit
+for lines 346-565, which remain `.1.34`-owned. The same leaf completes the AST
+parser-test reading and retains its unchanged 23-test proof from `.1.32` at
+`3d633f3b6`; its lowering-string assertions are not execution of every emitted
+fragment or admission of deliberately injected older internal AST shapes.
+
+```bash
+bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/callable_codeblock_literal_contract.t
+bash tools/run_python_project_data.sh tools/check_callable_codeblock_contract.py
+```
+
+[[perl-callable-codeblock-dynamic-invocation]] retains the current caller-binding
+model. [[perl-codeblock-boolean-literal-kind-drift]] and
+[[perl-dynamic-codeblock-receiver-guard-gap]] remain open under startup `.35` and
+`.19`. These finite passing fixtures close neither defect. Current keyword-call
+rejection remains separate from the approved parked named-argument direction.

@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `CONFORMANCE-SOURCE-READING`
-- Status: `active` / exact decomposition; physical reading 32/143
+- Status: `active` / exact decomposition; physical reading 33/143
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.8`
 - Created: `2026-09-13`
 - Last updated: `2026-09-13`
@@ -606,14 +606,21 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
   Commit: `CONFORMANCE-SOURCE-READING.1.32 - complete CLI manifest and read ActionIR parser tests`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.33`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `3d633f3b650aec95a283d36cc494cae076d41c6c`.
+  Verification tier: `focused`
+  Focused checks: Read exact baseline-identical scoped windows; reconcile canonical Knowledge and proportionate proof, preserve source/task/history, and verify memory, book and normal doctrines.
+  Canonical trigger: Ordinary bounded source-reading leaf; no source or public-contract change, admission or parent closeout. Later prerequisites remain.
   Goal: Read and understand conformance/test/Unicode group 33.
   Scope: `t/actionir_ast_parser.t` lines 384-1419; `t/callable_codeblock_literal_contract.t` lines 1-345
   Baseline evidence: 1381 fragments / 65521 decoded bytes; ordered range SHA-256 `d599d85b6f3034b709e12a21de4e3eb5101ce70e14e0292f5b4a24674656b478`.
   Dependencies: .1.32 committed with clean handoff.
   Acceptance: Read every scoped byte in complete bounded windows; retain source identity, exact comprehension, canonical Knowledge reconciliation, concrete finding ownership, focused proof and per-leaf continuity. Unread crossing constructs retain the next range owner.
-  Verification: `pending`
-  Commit: `pending`
+  Reading evidence: 11 complete windows / 1381 fragments / 65521 bytes; ordered window SHA-256 `2111becc93e8b13b4bd1dca7181969f9e3d41f06af081f4fe3d4e66ac37e7335`.
+  Comprehension: The AST suffix completes switch/while, assignment, helper, fluent, return-payload and block-value lowering controls. Deliberately inconsistent source fields test use of typed data; some fixtures inject older internal assign_hash_index or aggregate-wrapper shapes rather than asserting their authored-syntax validity. Value helpers preserve authored argument arity before optional-scope fallback. Covered malformed helpers produce readiness diagnostics, while unresolved standalone calls and narrow raw return compatibility retain their separately reported roles. Most lowering assertions inspect generated text and descriptors; they do not independently execute every emitted fragment. Callable1-345 reads eight-field inert literal records with exact signature/body/spans, canonical UTF-8 JSON-to-hex reconstruction, no captured environment, user-function transport, dynamic caller fixture execution and generated code loaded into a package in the same process. Helpers and registered functions precede variable calls. Fixed-arity, current keyword rejection, non-callable values and recursion retain typed failures; direct failing-body invocation restores a shadowed parameter. Later literal-test source remains .1.34-owned. Existing dynamic boolean loss under startup35 and receiver guard gap under startup19 remain separately owned; named-argument work stays parked.
+  Verification: Fresh managed t/callable_codeblock_literal_contract.t passes10 top-level tests. Fresh neutral checker passes7 literals,11 calls,9 invalid literals,7 invalid calls,4 invalid declarations,8 contextual forms and23 governance mutations. Retain unchanged AST target23 proof from .1.32 at3d633f3b6. Whole-test execution grants no reading credit beyond345. Fresh window replay, baseline inventory, cumulative coverage, preservation, rendered book, memory and history checks govern this focused leaf; no new canonical or cross-backend admission.
+  Candidate proof: All11 windows consumed completely; replay confirms1381 fragments/65521 bytes. All160 baseline inputs/143 groups/302 ranges remain exact. Independent cumulative coverage is33 groups/43538 fragments/1297268 bytes/79 complete files, with only callable literal tests partial. Fresh managed callable target10 and neutral7/11/9/7/4/8 plus23 governance mutations pass; unchanged AST23 proof retained from .1.32. Preservation passes2493 exact prior files,2780 unchanged prior nodes, all94 book limitation headings and all prior Knowledge recipes/footer; the literal card keeps its exact prior46-line body. Rendered book, memory60lines/7403bytes and plain diff checks pass. CHANGES198lines/40169bytes and notes156lines/38438bytes are OK. Known book-index warning remains startup41.9-owned; startup19/35 and other repairs remain unchanged. No full matrix, canonical CI, dependency build or push.
+  Commit: `CONFORMANCE-SOURCE-READING.1.33 - complete AST lowering tests and read callable literal coverage`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.34`
   Status: `pending`
@@ -1792,7 +1799,7 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
 
 | Rank | Leaf | Status | Next action |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.33` | `pending` | `t/actionir_ast_parser.t` lines 384-1419; `t/callable_codeblock_literal_contract.t` lines 1-345; 1381 fragments/65521 bytes. Preserve complete bounded windows, source identity and all repairs. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.34` | `pending` | `t/callable_codeblock_literal_contract.t` lines 346-565; `t/cli_conformance_runner.t` lines 1-287; `t/complete_named_mark_contract.t` lines 1-79; `t/diagnostic_output_perl_contract.t` lines 1-461; `t/duplicate_regex_slot_identity_perl_contract.t` lines 1-300; `t/generated_source_contract.t` lines 1-153; 1500 fragments/56255 bytes. Preserve complete bounded windows, source identity and all repairs. |
 
 ## Decisions
 
@@ -1805,6 +1812,7 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
 
 ## Verification Log
 
+- `2026-09-13` .1.33: Conformance .1.33 reads 11 complete windows, 1,381 fragments and 65,521 baseline-identical bytes. Physical reading is 33/143: 43,538 fragments, 1,297,268 bytes and 79 complete files. The complete ActionIR test file is read, preserving the distinction between AST-field lowering checks and authored-syntax admission. Callable literal reading covers inert records, dynamic invocation, in-process generated execution, precedence and typed failure/restoration checks. Fresh callable target10/10 and neutral governance pass; unchanged AST23 proof is retained. Next .1.34 owns later callable tests. Existing boolean and receiver-guard defects and all other repairs remain open.
 - `2026-09-13` .1.32: Conformance .1.32 reads 9 complete windows, 1,500 fragments and 55,235 baseline-identical bytes. Physical reading is 32/143: 42,157 fragments, 1,231,747 bytes and 78 complete files. All 66 CLI cases are read:2 help,20 usage,12 success,8 Unicode,4 operational failure and20 trace cases. The ActionIR test prefix distinguishes typed reads/writes, trailing blocks and control nodes, then checks if-lowering against deliberately inconsistent source text. Fresh Perl CLI default/POSIX and the complete AST test target pass within their separate scopes. Next .1.33 owns the crossing test body and continuation; all repairs remain open.
 - `2026-09-13` .1.31: Conformance .1.31 reads 32 complete windows, 1,226 fragments and 65,536 baseline-identical bytes. Physical reading is 31/143: 40,657 fragments, 1,176,512 bytes and 77 complete files. Uniform binding and both write contracts are fully read, along with the CLI guide and selected exact output fixtures. Frozen mutation metadata is reconciled with later admitted owners. Neutral write/map checks and both managed Perl help cases pass. New .2.2 owns missing storage setup in the standalone guide example. The bounded reading checkpoint is named for its broader conformance scope. Next .1.32 owns later CLI manifest cases; existing repairs remain open.
 - `2026-09-13` .1.30: Conformance .1.30 reads 5 complete windows, 1,500 fragments and 23,627 baseline-identical bytes. Physical reading is 30/143: 39,431 fragments, 1,110,976 bytes and 53 complete files. All 806 rule-label ranges and 9 positive/8 negative/2 distinct fixtures are read. The uniform-binding prefix specifies typed bare reads, mutation results, exact selector retirement and retained constructors. Fresh neutral binding proof passes; new .2.1 owns stale rollout guidance with repair and independent verification children. Next .1.31 owns the final fixture expectations and later contracts; runtime repairs remain open.
@@ -1841,6 +1849,7 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
 
 ## Commit Log
 
+- `2026-09-13` .1.33: `CONFORMANCE-SOURCE-READING.1.33 - complete AST lowering tests and read callable literal coverage`; activation 3d633f3b650aec95a283d36cc494cae076d41c6c; next .1.34 after clean handoff and zero-byte brief.
 - `2026-09-13` .1.32: `CONFORMANCE-SOURCE-READING.1.32 - complete CLI manifest and read ActionIR parser tests`; activation 62f79df1aa84da1c7c1c5dea01c78a73508c305c; next .1.33 after clean handoff and zero-byte brief.
 - `2026-09-13` .1.31: `CONFORMANCE-SOURCE-READING.1.31 - read write composition and CLI fixture contracts`; activation 74ecae96ebe59e4d40856ea62ee6ba2f73eea4ff; next .1.32 after clean handoff and zero-byte brief.
 - `2026-09-13` .1.30: `CONFORMANCE-SOURCE-READING.1.30 - complete rule-label data and read uniform-binding contract`; activation 1fe980f972a650b77e7f1e55e18da67e4f12a8f5; next .1.31 after clean handoff and zero-byte brief.
@@ -1877,6 +1886,7 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
 
 ## Changelog
 
+- `2026-09-13` .1.33: The complete ActionIR test file is read, preserving the distinction between AST-field lowering checks and authored-syntax admission. Callable literal reading covers inert records, dynamic invocation, in-process generated execution, precedence and typed failure/restoration checks. Fresh callable target10/10 and neutral governance pass; unchanged AST23 proof is retained. Next .1.34 owns later callable tests. Existing boolean and receiver-guard defects and all other repairs remain open.
 - `2026-09-13` .1.32: All 66 CLI cases are read:2 help,20 usage,12 success,8 Unicode,4 operational failure and20 trace cases. The ActionIR test prefix distinguishes typed reads/writes, trailing blocks and control nodes, then checks if-lowering against deliberately inconsistent source text. Fresh Perl CLI default/POSIX and the complete AST test target pass within their separate scopes. Next .1.33 owns the crossing test body and continuation; all repairs remain open.
 - `2026-09-13` .1.31: Uniform binding and both write contracts are fully read, along with the CLI guide and selected exact output fixtures. Frozen mutation metadata is reconciled with later admitted owners. Neutral write/map checks and both managed Perl help cases pass. New .2.2 owns missing storage setup in the standalone guide example. The bounded reading checkpoint is named for its broader conformance scope. Next .1.32 owns later CLI manifest cases; existing repairs remain open.
 - `2026-09-13` .1.30: All 806 rule-label ranges and 9 positive/8 negative/2 distinct fixtures are read. The uniform-binding prefix specifies typed bare reads, mutation results, exact selector retirement and retained constructors. Fresh neutral binding proof passes; new .2.1 owns stale rollout guidance with repair and independent verification children. Next .1.31 owns the final fixture expectations and later contracts; runtime repairs remain open.

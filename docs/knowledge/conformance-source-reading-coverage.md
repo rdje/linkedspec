@@ -9,7 +9,7 @@ answers:
   - "how do I verify conformance reading source and range coverage"
   - "which conformance source reading file has the longest line"
 date: 2026-09-13
-status: exact decomposition preserved; physical reading 32/143, 78 files complete and 111 groups remain
+status: exact decomposition preserved; physical reading 33/143, 79 files complete and 110 groups remain
 tags: [reading, conformance, tests, unicode, continuity, CONFORMANCE-SOURCE-READING]
 evidence: "Startup .3.8.0 independently accounts for160 baseline-identical files,5,422,313 stored bytes and8,257,059 decoded bytes in167,606 line fragments/167,604 LF delimiters. Four gzip inputs contribute54,500 decoded lines. All143 groups/302 ranges are contiguous, disjoint and bounded at1500 fragments/65536 bytes. No source, registry or runtime behavior changes; no physical-reading credit from inventory."
 reverify: "Run CONFORMANCE_SOURCE_READING_COVERAGE below through the project-data wrapper; it derives source identity from Git and range ownership from the task-tree rather than a parallel manifest. Use scripts/check_task_tree_metadata.sh for actual task collection limits."
@@ -399,12 +399,12 @@ properties, context rules, fixtures or decoded upstream inputs. All repairs rema
 
 ## Conformance reading checkpoint
 
-`CONFORMANCE-SOURCE-READING.1.32` reads 9 windows, 1,500 fragments and 55,235 bytes.
-Cumulative reading is 32/143, 42,157 fragments, 1,231,747 bytes and 78 complete files.
-The full66-case CLI manifest is read; ActionIR tests1-383 remain partial. Read and
-write path nodes keep their different roles; if-lowering checks typed fields against
-inconsistent source strings. [[neutral-cli-fixture-runner]] records fresh Perl66/66
-in both environments; the whole AST target passes23 top-level tests. Repairs remain.
+`CONFORMANCE-SOURCE-READING.1.33` reads 11 windows, 1,381 fragments and 65,521 bytes.
+Cumulative reading is 33/143, 43,538 fragments, 1,297,268 bytes and 79 complete files.
+The AST test file is fully read; callable literals1-345 remain partial. Lowering-text
+controls differ from authored-syntax admission and emitted execution. Existing
+[[perl-callable-codeblock-literal-record]] records fresh target10 and neutral23
+mutation proof; AST23 is retained. Startup19/35 and all other repairs remain open.
 
 Lowercase table entries and Final Sigma context remain separate. Exact scalar
 sequences, sparse ranges, fullwidth forms and ligature identities are preserved;

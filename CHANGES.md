@@ -10,6 +10,12 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-13 — CONFORMANCE-SOURCE-READING.1.33 — complete AST lowering tests and read callable literal coverage
+
+Conformance .1.33 reads 11 complete windows, 1,381 fragments and 65,521 baseline-identical bytes. Physical reading is 33/143: 43,538 fragments, 1,297,268 bytes and 79 complete files. The complete ActionIR test file is read, preserving the distinction between AST-field lowering checks and authored-syntax admission. Callable literal reading covers inert records, dynamic invocation, in-process generated execution, precedence and typed failure/restoration checks. Fresh callable target10/10 and neutral governance pass; unchanged AST23 proof is retained. Next .1.34 owns later callable tests. Existing boolean and receiver-guard defects and all other repairs remain open.
+
+Fresh managed t/callable_codeblock_literal_contract.t passes10 top-level tests. Fresh neutral checker passes7 literals,11 calls,9 invalid literals,7 invalid calls,4 invalid declarations,8 contextual forms and23 governance mutations. Retain unchanged AST target23 proof from .1.32 at3d633f3b6. Whole-test execution grants no reading credit beyond345. Fresh window replay, baseline inventory, cumulative coverage, preservation, rendered book, memory and history checks govern this focused leaf; no new canonical or cross-backend admission.
+
 ## 2026-09-13 — CONFORMANCE-SOURCE-READING.1.32 — complete CLI manifest and read ActionIR parser tests
 
 Conformance .1.32 reads 9 complete windows, 1,500 fragments and 55,235 baseline-identical bytes. Physical reading is 32/143: 42,157 fragments, 1,231,747 bytes and 78 complete files. All 66 CLI cases are read:2 help,20 usage,12 success,8 Unicode,4 operational failure and20 trace cases. The ActionIR test prefix distinguishes typed reads/writes, trailing blocks and control nodes, then checks if-lowering against deliberately inconsistent source text. Fresh Perl CLI default/POSIX and the complete AST test target pass within their separate scopes. Next .1.33 owns the crossing test body and continuation; all repairs remain open.
