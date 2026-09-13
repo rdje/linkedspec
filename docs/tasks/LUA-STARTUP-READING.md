@@ -2268,7 +2268,7 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SUPPORTING-SOURCE-READING.1.19` | `pending` | After clean .1.18, read user_function_definition.spec116–370 (255 fragments/8134 bytes); preserve historical exclusions, five new repair roots and all earlier repairs. |
+| 1 | `SUPPORTING-SOURCE-READING.3` | `pending` | After clean .1.19, independently reconcile all five required ranges/three reading commits, historical omissions and seven repair roots; route startup .3.8 with applicable closeout proof. |
 
 ## Decisions
 

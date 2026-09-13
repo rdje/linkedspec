@@ -10,6 +10,12 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-13 — SUPPORTING-SOURCE-READING.1.19 — required grammar reading complete; independent closeout remains
+
+Supporting .1.19 reads two complete windows/255 fragments/8134 bytes and finishes user_function_definition.spec. All three required grammar groups are physically read: five ranges/629 fragments/96781 bytes. The unchanged dedicated AST fixture passes 44 assertions; six exact signature/body/payload/job controls pass. Four matched body comparisons confirm the July self-hosted regex-brace truncation finding; new .2.7 owns its repair, while the older zero-argument audit is linked to .2.3.2. Six grammar/literal repair roots with eight repair leaves and the separate checker owner .2.6 remain open. All original sources, exclusions and earlier repair evidence remain; next .3 independently reconciles supporting reading and routes startup continuation.
+
+Verification: exact required range/window and unchanged fixture extraction; focused AST44/signature6/body-comparison4; prior source/evidence/repair preservation, Knowledge, memory, histories, rendered book and normal doctrines. No dependency build, canonical CI or defect closure.
+
 ## 2026-09-13 — SUPPORTING-SOURCE-READING.1.18 — self-hosted fidelity audit and five repair roots
 
 Supporting .1.18 completes ten windows/two required ranges: 195 fragments/62203 bytes, finishing spec.spec and reading user_function_definition.spec1–115. Six function comparisons, fourteen edge AST cases, ten mechanism AST cases, three selection comparisons and three literal controls establish five grammar/literal repair roots with seven concrete repair leaves: typed self-description, attached blocks, optional captures, Perl literal fidelity and lifecycle precedence. Primary typed functions remain registered; no repair is closed. Two of three required grammar groups are read (374 fragments/88647 bytes); .1.19 retains 255 fragments/8134 bytes. Historical exclusions, all original sources/tests and earlier repair owners remain intact. Next .1.19 finishes the dedicated function grammar.

@@ -2275,7 +2275,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Status: `active`
   Goal: Account for all 158 original supporting entries and read the current language/runtime dependencies required by the director’s clarified scope.
   Children: `.3.7.0` completes decomposition; SUPPORTING-SOURCE-READING.1 owns 21 reading groups, .2 new repair intake, .3 independent closeout.
-  Reading owner: `docs/tasks/SUPPORTING-SOURCE-READING.md`; .0/.4 preserve historical .1.1 and seventeen superseded groups without new credit. .1.17-.1.18 read 374 fragments/88647 bytes of three required grammars; .1.19 retains 255 fragments/8134 bytes. Five confirmed grammar/literal repair roots with seven repair leaves remain pending; all original source/tests and earlier repair owners remain. Next .1.19.
+  Reading owner: `docs/tasks/SUPPORTING-SOURCE-READING.md`; required .1.17-.1.19 physically complete: three files/five ranges/629 fragments/96781 bytes. Independent closeout .3 remains; seven repair roots, original inventory and historical .0/.4 dispositions remain. No omitted-byte credit or defect closure; route startup .3.8 after applicable reconciliation.
   Acceptance: Account for legacy adapters, plugins, authored grammars, configuration, and non-TypeScript `.ts` data;
     use LinkedSpec probes before investigating a spec's behavior, and do not infer defects from historical syntax alone.
   Verification: `pending`
@@ -4623,7 +4623,7 @@ startup implementation prerequisites and the rgx reading exclusion remain intact
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SUPPORTING-SOURCE-READING.1.19` | `pending` | After clean .1.18, read user_function_definition.spec116–370 (255 fragments/8134 bytes); preserve historical exclusions, five new repair roots and all earlier repairs. |
+| 1 | `SUPPORTING-SOURCE-READING.3` | `pending` | After clean .1.19, independently reconcile all five required ranges/three reading commits, historical omissions and seven repair roots; route startup .3.8 with applicable closeout proof. |
 
 ## Reading Ledger
 

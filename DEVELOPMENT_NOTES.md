@@ -10,6 +10,12 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-13 — SUPPORTING-SOURCE-READING.1.19 — dedicated named captures, body tokens and historical gap ownership
+
+The dedicated grammar preserves fixed/variadic/typed signature identity, exact source/body text and spans, staged provenance and inert parse-job fields. Named captures handle absent parameter prefixes; linked lexical tokens shield nested/string/comment/regex braces before outer finalizers. The unchanged fixture passes44 assertions and six exact payload controls pass. Four current comparisons confirm the July self-hosted regex-body gap, now .2.7-owned; the older zero-argument fact maps to .2.3.2. All seven repair roots remain open. Three required grammar groups are physically read; independent .3 audit and later startup obligations remain.
+
+Verification: exact required range/window and unchanged fixture extraction; focused AST44/signature6/body-comparison4; prior source/evidence/repair preservation, Knowledge, memory, histories, rendered book and normal doctrines. No dependency build, canonical CI or defect closure.
+
 ## 2026-09-13 — SUPPORTING-SOURCE-READING.1.18 — self-hosted grammar mechanisms and retained role
 
 The completed self-hosted source audit separates typed production omission, dropped attached block text, optional participating-capture compaction misuse, indentation-dependent earliest-match selection and general Perl string interpolation. Six primary function registration controls succeed, including typed forms; the comparison grammar is not the primary parser. Five grammar/literal roots and seven implementation-and-verification leaves remain open behind startup prerequisites. The director agrees to retain spec.spec as a tested, accurate self-description; authority is a requirement to verify, not an unqualified completeness claim. Exact dated probes and causes are in self-hosted-grammar-ast-drift; no source repair, dependency build or earlier defect closure is claimed.

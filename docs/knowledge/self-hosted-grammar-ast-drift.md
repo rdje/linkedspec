@@ -306,3 +306,15 @@ SELF_HOSTED_SELECTION_LITERAL
 Related: [[spec-spec-self-hosted-grammar]], [[bootstrapspec-vs-spec-spec-dual-path]],
 [[spec-defined-user-function-definition-parser]], [[terse-primitive-literal-parity]],
 [[supporting-source-reading-coverage]], and [[current-supporting-grammar-dependencies]].
+
+# September 13 suffix-reading reconciliation
+
+`.1.19` finds the existing July [[function-definition-staged-ast-audit]] card:
+zero-argument drift was already known and now maps explicitly to `.2.3.2`.
+Four current comparisons also confirm its self-hosted regex-brace truncation
+finding in both fixed and fixed-prefix variadic definitions. New `.2.7` owns
+faithful body extraction and recurrence; the dedicated parser preserves all four
+body strings. Exact reproduction and source cause live in that historical audit
+card. There are now six grammar/literal repair roots with eight bounded repair
+leaves, plus the separately owned checker mismatch `.2.6`; every repair remains
+open. The earlier `.1.18` counts are its dated checkpoint, not the current total.

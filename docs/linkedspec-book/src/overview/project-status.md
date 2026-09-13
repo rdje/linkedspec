@@ -432,6 +432,7 @@ misclassifies some fields. The primary Perl parser still registers both
 | `Child.with()` | The chain is put in the index field. | Supporting `.2.3` |
 | `fn zero() { return(1) }` | Body text shifts into the parameter field. | Supporting `.2.3` |
 | `fn rest(...args) { return(1) }` | Rest name/body and minimum arity are wrong. | Supporting `.2.3` |
+| `fn probe(value) { return(matches(value, /}/)) }` | The function body truncates at the regex brace. The dedicated parser preserves it. | Supporting `.2.7` |
 | An indented `I.return("a")` | Classified as a bare edge rather than lifecycle `I`. | Supporting `.2.5` |
 
 Typed-definition coverage belongs to supporting `.2.1`. Optional capture groups
@@ -452,6 +453,19 @@ supporting `.2.4` owns the general literal repair and directive verification.
 This probe does not show a failure of gap capture execution. Exact causes and
 dated controls are retained in the self-hosted grammar AST drift knowledge card.
 
+The dedicated function-definition grammar separately passes 44 maintained AST
+assertions, including 13 ordered definitions, nested/quoted/regex braces and
+malformed/unbalanced diagnostics. Six exact controls verify fixed, rest-only,
+fixed-plus-rest and final-codeblock signatures together with body/source spans,
+payload provenance and pending parse-job metadata. For example,
+`fn collect(...args) { return(1) }` has no fixed parameters, rest name `args`, and
+minimum arity 0; `fn zero() { return(1) }` preserves an empty parameter list and
+complete inner body. The grammar returns body text and parsing instructions;
+the registry performs the later body parse. These controls do not execute the
+function bodies. The self-hosted zero-argument and regex-body gaps were already
+identified in July; their dedicated-parser counterparts working today does not
+close the separate self-description repairs.
+
 The retained plugin grammar similarly returns `foo { 1 + 2 }` as the mapping
 `foo` to the body string ` 1 + 2 `. Legacy callback construction belongs to the
 separate Perl adapter; this probe leaves that adapter unloaded.
@@ -465,9 +479,9 @@ retaining them does not claim that frontend is implemented.
 
 Further manual historical application reading is omitted. The current required
 supporting grammar scope is three files/five ranges/629 fragments/96,781 bytes.
-Two current groups are read (374 fragments/88,647 bytes), completing the plugin
-and self-hosted grammars. The dedicated function-definition suffix still has
-255 fragments/8,134 bytes to read.
+All three required grammar groups are physically read (629 fragments/96,781
+bytes). An independent supporting-reading closeout remains before the next
+startup lane; the full codebase/book/policy prerequisites are not yet closed.
 Seventeen original groups are superseded without reading credit; completed
 historical reading and the original 158-file/174-range inventory remain exact.
 The audit also found conflicting task-document size limits in two checks. The

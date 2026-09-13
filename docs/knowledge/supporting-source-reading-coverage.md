@@ -8,10 +8,10 @@ answers:
   - how much prior supporting-source reading credit is established
   - does supporting-source reading require rebuilding RGX or PGEN
 date: 2026-09-13
-status: original inventory preserved; one historical and two current groups read, seventeen superseded, one required group pending
+status: original inventory preserved; one historical and all three current groups read, seventeen superseded, independent closeout pending
 tags: [startup, reading, supporting, inventory, continuity]
 evidence: "SESSION-STARTUP-READING.3.7.0; clean Lua closeout 735f0337883baef5ac4422976879d09725e0e8ea; baseline baeb984e36a94a15951cd23d4c52def5064cdaca."
-reverify: "Run SUPPORTING_SOURCE_INVENTORY, SUPPORTING_SOURCE_PLAN, SUPPORTING_SOURCE_TREE, SUPPORTING_CURRENT_GROUP17 and SUPPORTING_CURRENT_GROUP18 below; these identity/range audits grant no additional physical reading credit."
+reverify: "Run SUPPORTING_SOURCE_INVENTORY, SUPPORTING_SOURCE_PLAN, SUPPORTING_SOURCE_TREE and SUPPORTING_CURRENT_GROUP17/18/19 below; these identity/range audits grant no additional physical reading credit."
 ---
 
 # Exact supporting-source inventory
@@ -242,6 +242,69 @@ scratch.mkdir(parents=True, exist_ok=True)
 (scratch/'audit.json').write_text(json.dumps({'ranges':ranges,'windows':windows},indent=2)+'\n')
 print('PASS exact required range/window reconstruction: ten windows/two ranges/195 fragments/62203 bytes; spec.spec147–226 EOF and user_function_definition.spec1–115 only. Identity verification does not create reading credit.')
 SUPPORTING_CURRENT_GROUP18
+```
+
+# Current grammar group .1.19 — 2026-09-13
+
+Two complete windows cover `specs/user_function_definition.spec`116–370 (EOF):
+255 fragments/8,134 bytes. Window 1 (116–306) is 6,465 bytes; window 2 (307–370)
+is 1,669 bytes. Physical excerpts116–240 and241–370 cover both completely.
+All three required grammar groups are now read: five ranges/629 fragments/96,781
+bytes. Independent `.3` reconciliation remains; this is not aggregate signoff,
+full-codebase completion, historical omitted-byte credit or defect closure.
+
+Range SHA-256 `a580a5d7ae6ba32b9a19fa21a98203742090f7159cd47f131266a47d0b6eb2ae`;
+window SHA-256 `e6bf546c68d82178106cac912714ae4e731e80555626372a832197e0c2504b71`.
+The replay below checks exact baseline bytes and bounds without creating reading
+credit. [[spec-defined-user-function-definition-parser]] publishes the unchanged
+44-assertion AST fixture extraction and six exact signature/payload/job controls.
+[[function-definition-staged-ast-audit]] preserves the earlier July findings and
+four current body comparisons; self-hosted regex-body repair `.2.7` remains open,
+and prior zero-argument evidence maps to `.2.3.2`. All seven repair roots remain.
+
+```bash
+bash tools/project_data_run.sh python3 - <<'SUPPORTING_CURRENT_GROUP19'
+from pathlib import Path
+import hashlib, json, re, subprocess
+
+baseline = 'baeb984e36a94a15951cd23d4c52def5064cdaca'
+tree = Path('docs/tasks/SUPPORTING-SOURCE-READING.md').read_text()
+node = re.search(r'^- ID: `SUPPORTING-SOURCE-READING\.1\.19`\n.*?(?=^- ID: |^## |\Z)', tree, re.M | re.S)[0]
+scope = re.search(r'^  Required reading scope: (.+)$', node, re.M)[1]
+found = [(p, int(a), int(b)) for p, a, b in re.findall(r'`([^`]+)` lines (\d+)-(\d+)', scope)]
+assert found == [('specs/user_function_definition.spec', 116, 370)]
+ranges, windows = [], []
+for path, first, last in found:
+    raw = Path(path).read_bytes()
+    assert raw == subprocess.check_output(['git', 'show', baseline + ':' + path])
+    lines = raw.splitlines(keepends=True)
+    chunk = b''.join(lines[first-1:last])
+    ranges.append({'path': path, 'start': first, 'end': last,
+                   'bytes': len(chunk), 'sha256': hashlib.sha256(chunk).hexdigest()})
+    start, current = first, []
+    for number in range(first, last+1):
+        line = lines[number-1]
+        if current and sum(map(len,current)) + len(line) > 6500:
+            data = b''.join(current)
+            windows.append({'path': path, 'start': start, 'end': number-1,
+                            'bytes': len(data), 'sha256': hashlib.sha256(data).hexdigest()})
+            start, current = number, []
+        current.append(line)
+    if current:
+        data = b''.join(current)
+        windows.append({'path': path, 'start': start, 'end': last,
+                        'bytes': len(data), 'sha256': hashlib.sha256(data).hexdigest()})
+digest = lambda rows: hashlib.sha256(json.dumps(rows,separators=(',',':')).encode()).hexdigest()
+assert digest(ranges) == 'a580a5d7ae6ba32b9a19fa21a98203742090f7159cd47f131266a47d0b6eb2ae'
+assert digest(windows) == 'e6bf546c68d82178106cac912714ae4e731e80555626372a832197e0c2504b71'
+assert len(windows) == 2
+assert sum(r['end']-r['start']+1 for r in ranges) == 255
+assert sum(r['bytes'] for r in ranges) == sum(w['bytes'] for w in windows) == 8134
+scratch = Path('.linkedspec-data/scratch/support119')
+scratch.mkdir(parents=True, exist_ok=True)
+(scratch/'audit.json').write_text(json.dumps({'ranges':ranges,'windows':windows},indent=2)+'\n')
+print('PASS exact required range/window reconstruction: two windows/one range/255 fragments/8134 bytes; user_function_definition.spec116–370 EOF. Identity verification does not create reading credit.')
+SUPPORTING_CURRENT_GROUP19
 ```
 
 # Verification and continuity boundaries

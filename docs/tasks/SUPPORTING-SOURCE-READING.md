@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `SUPPORTING-SOURCE-READING`
-- Status: `active` / one historical and two current grammar groups complete; seventeen groups superseded; one required group pending
+- Status: `active` / one historical and all three current grammar groups read; seventeen superseded; independent closeout pending
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.7`
 - Created: `2026-09-13`
 - Last updated: `2026-09-13`
@@ -61,7 +61,7 @@ from runtime signoff. Existing startup and backend repairs remain open.
   Dependencies: Startup .3.7.0 decomposition committed; clean activation for every child.
   Children: `.1.1-.1.21`
   Acceptance: Each required child records exact Required reading scope coverage, comprehension, Knowledge reconciliation, owned findings, focused proof and clean commit. Seventeen superseded groups and excluded intervals of mixed groups receive no reading credit; original Scope/digests remain exact.
-  Verification: Current required reading: .1.17-.1.18 complete (374 fragments/88647 bytes); .1.19 pending (255 fragments/8134 bytes). Five new repair roots remain open. Completed historical .1.1, seventeen explicit omissions, all original Scope/digests and earlier repair owners remain.
+  Verification: Required .1.17-.1.19 reading is complete: three files/five ranges/629 fragments/96781 bytes, independent reconciliation pending .3. Historical .1.1, seventeen omissions, every original Scope/digest and all seven repair roots remain distinct and preserved.
   Commit: `pending`
 
 - ID: `SUPPORTING-SOURCE-READING.1.1`
@@ -286,7 +286,11 @@ from runtime signoff. Existing startup and backend repairs remain open.
   Commit: `SUPPORTING-SOURCE-READING.1.18 - audit self-hosted grammar fidelity and own five repairs`
 
 - ID: `SUPPORTING-SOURCE-READING.1.19`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `7a3f0b8aa1e649d74be405e822eb462227eb26be`.
+  Verification tier: `focused`
+  Focused checks: Complete remaining required windows and baseline identity; dedicated signature/body/error source comprehension with exact focused parser controls; prior evidence/source/repair preservation, Knowledge, memory, histories, book and normal doctrines.
+  Canonical trigger: Ordinary source-reading evidence only; no implementation or dependency change. Preserve all six repair roots and both task-capacity controls.
   Goal: Read and understand supporting specs group 19.
   Scope: `specs/user_function_definition.spec` lines 116-370; `specs/verilog.spec` lines 1-1; `specs/vhdl.spec` lines 1-384
   Baseline evidence: 640 fragments / 25134 bytes; ordered range SHA-256 `b50e1c4b57d9e600cecfd8fdaa76304228ee7572c25b9731bfe8ebd59f612d36`.
@@ -295,8 +299,10 @@ from runtime signoff. Existing startup and backend repairs remain open.
   Scope disposition: .4 retains only current language/runtime grammar dependencies. Other original Scope intervals remain historical fixture inventory without reading credit; no file or test is removed.
   Dependencies: .1.18 committed with clean handoff.
   Acceptance: Read every Required reading scope byte in complete bounded windows; preserve comprehension, canonical facts, owned findings, source identity, focused proof and clean per-leaf continuity. Original Scope is inventory, not an assertion of omitted-byte reading.
-  Verification: `pending`
-  Commit: `pending`
+  Comprehension: Named captures preserve empty fixed lists and rest-only signatures. Fixed v1 and variadic v2 records duplicate exact signature/body/span identity into inert staged payload/job records; outer finalizer edges retain complete source while linked body_brace, quoted strings, comments and regex tokens shield internal braces. Malformed headers and unbalanced bodies produce diagnostic records. rule_paragraph skips ordinary rule text; later staged registry work assigns real source-order paths and executes body jobs. Current controls prove the bounded cases, not arbitrary lexical completeness.
+  Verification: Supporting .1.19 reads two complete windows/255 fragments/8134 bytes and finishes user_function_definition.spec. All three required grammar groups are physically read: five ranges/629 fragments/96781 bytes. The unchanged dedicated AST fixture passes 44 assertions; six exact signature/body/payload/job controls pass. Four matched body comparisons confirm the July self-hosted regex-brace truncation finding; new .2.7 owns its repair, while the older zero-argument audit is linked to .2.3.2. Six grammar/literal repair roots with eight repair leaves and the separate checker owner .2.6 remain open. All original sources, exclusions and earlier repair evidence remain; next .3 independently reconciles supporting reading and routes startup continuation. Ordered range SHA-256 a580a5d7ae6ba32b9a19fa21a98203742090f7159cd47f131266a47d0b6eb2ae; ordered window SHA-256 e6bf546c68d82178106cac912714ae4e731e80555626372a832197e0c2504b71. Exact required-range replay, unchanged fixture extraction and current probes are published in canonical Knowledge. No dependency build, canonical CI, aggregate closeout or defect closure.
+  Candidate proof: Exact required windows/current scope and baseline source identity pass. The unchanged fixture block is117 lines/7112 bytes, SHA-256 43fa8370fbabf08787b5e26d37e07cd9379e44ccfefe87f6331117306a54a64e, with two byte-exact helpers; AST44/signature6/body-comparison4 pass. Preserve 2480 prior files byte-exact, prior evidence in five updated cards and 2622/2627 prior task nodes; five current owner/reading/history-reconciliation nodes change, one new regex-body repair leaf is added, all94 previous book limitation headings remain. Four published replay bodies match executed scratch. Knowledge is1143 facts/9121 keys; memory60; histories415/40761 and345/39769 lines/bytes, below required rollover. Rendered book and ordinary doctrine hooks govern landing; task evidence remains within both current capacity controls.
+  Commit: `SUPPORTING-SOURCE-READING.1.19 - complete dedicated function grammar reading and reconcile body fidelity`
 
 - ID: `SUPPORTING-SOURCE-READING.1.20`
   Status: `superseded`
@@ -325,8 +331,8 @@ from runtime signoff. Existing startup and backend repairs remain open.
   Goal: Own every newly established supporting-source defect or documentation gap through repair and verification.
   Dependencies: Each finding has exact source/tool evidence; implementation retains startup .3/.4/.5 prerequisites.
   Acceptance: Reconcile existing repair owners first; add bounded actionable nodes before new diagnostic or repair changes. Reading and logging never close a defect.
-  Children: `.2.1`, `.2.2`, `.2.3`, `.2.4`, `.2.5`, `.2.6`
-  Verification: .1.18 establishes five grammar/literal repair roots comprising seven implementation-and-verification leaves; .2.6 separately owns checker drift; exact reproductions and causes are in docs/knowledge/self-hosted-grammar-ast-drift.md. All repairs remain pending.
+  Children: `.2.1`, `.2.2`, `.2.3`, `.2.4`, `.2.5`, `.2.6`, `.2.7`
+  Verification: .1.18 owns five grammar/literal roots with seven repair leaves plus checker drift .2.6. .1.19 reconciles the July zero-argument finding with .2.3.2 and adds the confirmed historical regex-body repair .2.7. Six grammar/literal roots/eight concrete repair leaves and the checker remain open; no source fix or defect closure.
   Commit: `pending`
 
 - ID: `SUPPORTING-SOURCE-READING.2.1`
@@ -373,7 +379,7 @@ from runtime signoff. Existing startup and backend repairs remain open.
   Goal: Make fixed zero-argument function capture access participation-safe.
   Dependencies: Startup .3/.4/.5 complete; preceding sibling repairs committed with clean handoff where applicable.
   Acceptance: Preserve fn zero() name, empty parameters and full body along with nonempty fixed-parameter controls; update governed mirrors. Add exact repaired AST and direct-consumer recurrence, relevant primary registration controls and public reconciliation in this same slice. Focused changed-surface/direct-dependent checks govern ordinary repairs; designated verification and push boundaries follow ADR 0073.
-  Verification: `pending`
+  Verification: Pending repair. .1.19 reconciles this .1.18-confirmed self-hosted gap with the already-recorded STAGED-LINKED-PARSING.5.2 July2 audit; no first-discovery claim. The dedicated grammar has correct zero-argument named captures and exact body provenance, verified by its unchanged fixture and current controls.
   Commit: `pending`
 
 - ID: `SUPPORTING-SOURCE-READING.2.3.3`
@@ -414,6 +420,15 @@ from runtime signoff. Existing startup and backend repairs remain open.
   Verification: Confirmed duplicate-limit defect; ordinary reading closeout retains both gates and the approved registry limits. Repair follows startup prerequisites.
   Commit: `pending`
 
+- ID: `SUPPORTING-SOURCE-READING.2.7`
+  Status: `pending`
+  Goal: Preserve regex-literal braces in canonical self-hosted fixed and variadic function bodies.
+  Intake owner: .1.19 reconciles the existing July2 STAGED-LINKED-PARSING.5.2 audit with the dedicated grammar and current comparison parser; no first-discovery claim.
+  Dependencies: Startup .3/.4/.5; preserve dedicated parser behavior and existing .2.1/.2.3 function repairs.
+  Acceptance: Root-cause with exact matched self-hosted/dedicated body probes; replace the responsible quote-only body boundary handling with faithful lexical extraction in the canonical grammar and governed mirrors. Commit repaired exact regex-brace, quoted-brace, nested, malformed and adjacent-body recurrence with focused direct-consumer proof and public reconciliation. Do not close merely because the dedicated parser already succeeds.
+  Verification: Confirmed open by four matched current comparisons: fixed and fixed-prefix variadic bodies with /}/ both truncate at the regex brace in spec.spec; quoted-brace twins and all four dedicated body strings remain exact. The self-hosted monolithic body regex protects quotes/nested braces but has no regex token boundary; dedicated linked regex_literal shields it. Existing July evidence is retained in function-definition-staged-ast-audit; .1.19 records exact replay there.
+  Commit: `pending`
+
 - ID: `SUPPORTING-SOURCE-READING.3`
   Status: `pending`
   Goal: Independently reconcile all supporting-source reading evidence and route the next startup lane.
@@ -441,7 +456,7 @@ from runtime signoff. Existing startup and backend repairs remain open.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SUPPORTING-SOURCE-READING.1.19` | `pending` | After clean .1.18, read user_function_definition.spec116–370 (255 fragments/8134 bytes); preserve historical exclusions, five new repair roots and all earlier repairs. |
+| 1 | `SUPPORTING-SOURCE-READING.3` | `pending` | After clean .1.19, independently reconcile all five required ranges/three reading commits, historical omissions and seven repair roots; route startup .3.8 with applicable closeout proof. |
 
 ## Decisions
 
@@ -463,6 +478,8 @@ from runtime signoff. Existing startup and backend repairs remain open.
 
 ## Verification Log
 
+- `2026-09-13` .1.19: Supporting .1.19 reads two complete windows/255 fragments/8134 bytes and finishes user_function_definition.spec. All three required grammar groups are physically read: five ranges/629 fragments/96781 bytes. The unchanged dedicated AST fixture passes 44 assertions; six exact signature/body/payload/job controls pass. Four matched body comparisons confirm the July self-hosted regex-brace truncation finding; new .2.7 owns its repair, while the older zero-argument audit is linked to .2.3.2. Six grammar/literal repair roots with eight repair leaves and the separate checker owner .2.6 remain open. All original sources, exclusions and earlier repair evidence remain; next .3 independently reconciles supporting reading and routes startup continuation.
+
 - `2026-09-13` .1.18: Supporting .1.18 completes ten windows/two required ranges: 195 fragments/62203 bytes, finishing spec.spec and reading user_function_definition.spec1–115. Six function comparisons, fourteen edge AST cases, ten mechanism AST cases, three selection comparisons and three literal controls establish five grammar/literal repair roots with seven concrete repair leaves: typed self-description, attached blocks, optional captures, Perl literal fidelity and lifecycle precedence. Primary typed functions remain registered; no repair is closed. Two of three required grammar groups are read (374 fragments/88647 bytes); .1.19 retains 255 fragments/8134 bytes. Historical exclusions, all original sources/tests and earlier repair owners remain intact. Next .1.19 finishes the dedicated function grammar.
 
 - `2026-09-13` .1.17: Supporting .1.17 reads seven complete windows/two required ranges: 179 fragments/26444 bytes, completing pplugin.spec and spec.spec lines1–146. The exact AST probe preserves paragraph grouping, named/anonymous regex nodes, indexed action targets, nested braces and a quoted closing brace; the plugin grammar returns body text without loading the legacy adapter. Unicode/mirror verification passes 806 ranges/9 positive/8 negative/2 distinct pairs. One of three current grammar groups is read; 450 fragments/70337 bytes remain in .1.18-.1.19. Historical .1.1, seventeen superseded groups, all original ranges/sources/tests and existing repair owners remain exact. Next .1.18 continues the self-hosted grammar and function-definition prefix.
@@ -477,6 +494,8 @@ from runtime signoff. Existing startup and backend repairs remain open.
 
 ## Commit Log
 
+- `2026-09-13` .1.19: `SUPPORTING-SOURCE-READING.1.19 - complete dedicated function grammar reading and reconcile body fidelity`; activation 7a3f0b8aa1e649d74be405e822eb462227eb26be; next .3 after focused proof, empty brief and clean handoff.
+
 - `2026-09-13` .1.18: `SUPPORTING-SOURCE-READING.1.18 - audit self-hosted grammar fidelity and own five repairs`; activation cf36237dccb500dc8a39c21786c484f0a9ee679b; next .1.19 after focused proof, empty brief and clean handoff.
 
 - `2026-09-13` .1.17: `SUPPORTING-SOURCE-READING.1.17 - read current grammar paragraph and plugin body parsing`; activation 4f2508fd5695231cbae98ebef27c8223170a4149; next .1.18 after focused proof, empty brief and clean handoff.
@@ -490,6 +509,8 @@ from runtime signoff. Existing startup and backend repairs remain open.
 - `2026-09-13`: Decomposition lands with `SESSION-STARTUP-READING.3.7.0`; current Git identifies its commit.
 
 ## Changelog
+
+- `2026-09-13` .1.19: Complete the three current grammar groups, preserve historical scope and give the earlier self-hosted regex-body defect a concrete repair owner; no source change or defect closure.
 
 - `2026-09-13` .1.18: Complete self-hosted grammar reading, root-cause five fidelity defects and own seven concrete implementation-and-verification leaves; retain source, historical evidence and every earlier repair.
 
