@@ -477,7 +477,7 @@ from runtime signoff. Existing startup and backend repairs remain open.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.34` | `pending` | `t/callable_codeblock_literal_contract.t` lines 346-565; `t/cli_conformance_runner.t` lines 1-287; `t/complete_named_mark_contract.t` lines 1-79; `t/diagnostic_output_perl_contract.t` lines 1-461; `t/duplicate_regex_slot_identity_perl_contract.t` lines 1-300; `t/generated_source_contract.t` lines 1-153; 1500 fragments/56255 bytes. Preserve complete bounded windows, source identity and all repairs. |
+| 1 | `BACKEND-INTEGRATION-GUIDES.0` | `pending` | Director-authorized temporary documentation pivot after clean conformance .1.34; implement and verify all five backend integration guides, then resume `CONFORMANCE-SOURCE-READING.1.35` at its unchanged Scope. |
 
 ## Decisions
 

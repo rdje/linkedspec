@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `CONFORMANCE-SOURCE-READING`
-- Status: `active` / exact decomposition; physical reading 33/143
+- Status: `active` / exact decomposition; physical reading 34/143
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.8`
 - Created: `2026-09-13`
 - Last updated: `2026-09-13`
@@ -623,14 +623,23 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
   Commit: `CONFORMANCE-SOURCE-READING.1.33 - complete AST lowering tests and read callable literal coverage`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.34`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `d10305097eb502c0fe29309ec230437396e26d82`.
+  Verification tier: `focused`
+  Focused checks: Read exact baseline-identical scoped windows; reconcile canonical Knowledge and proportionate proof, preserve source/task/history, and verify memory, book and normal doctrines.
+  Canonical trigger: Ordinary bounded source-reading leaf; no source or public-contract change, admission or parent closeout. Later prerequisites remain.
   Goal: Read and understand conformance/test/Unicode group 34.
   Scope: `t/callable_codeblock_literal_contract.t` lines 346-565; `t/cli_conformance_runner.t` lines 1-287; `t/complete_named_mark_contract.t` lines 1-79; `t/diagnostic_output_perl_contract.t` lines 1-461; `t/duplicate_regex_slot_identity_perl_contract.t` lines 1-300; `t/generated_source_contract.t` lines 1-153
   Baseline evidence: 1500 fragments / 56255 decoded bytes; ordered range SHA-256 `d7c3d32b96d69703881506fb7bf1454a585e47b91fb044b29570dd0fd23e180d`.
   Dependencies: .1.33 committed with clean handoff.
+  Discussion continuity: The director asks how ARCHOGEN could embed Lispish through the Rust backend. This leaf owns a bounded read-only integration note in docs/knowledge/archogen-rust-lispish-integration.md, using existing native-loading, Lispish and dependency-build authorities. Record checkout/bootstrap prerequisites, direct-value API and historical tree/full-input limits; no ARCHOGEN implementation, dependency build, fresh consumer admission or task pivot is authorized by the question.
+  Director follow-up: Own the requested integration documentation for every backend in docs/tasks/BACKEND-INTEGRATION-GUIDES.md, with matching task index, roadmaps, Knowledge and book intake pointers. This leaf records the approved work and exact future acceptance; startup prerequisites and the current reading frontier remain. Guide implementation is authorized once those prerequisites and clean activation are satisfied; no additional approval is needed for ordinary documentation work.
   Acceptance: Read every scoped byte in complete bounded windows; retain source identity, exact comprehension, canonical Knowledge reconciliation, concrete finding ownership, focused proof and per-leaf continuity. Unread crossing constructs retain the next range owner.
-  Verification: `pending`
-  Commit: `pending`
+  Reading evidence: 11 complete windows / 1500 fragments / 56255 bytes; ordered window SHA-256 `db04deab6c0365f8bc454e2695d410324a120104a232c213346f2b23ad16aef3`.
+  Comprehension: Callable suffix tests preserve final-codeblock version3 carriers and contextual normalization, execute helper/receiver/user-function forms, and distinguish malformed headers from body colons and actual harray argument kinds. CLI runner tests cover real help, schema-before-launch, exact placeholders/artifacts, binary hex inputs, six rejected source shapes and first-byte mismatch. Named marks cover symbolic lowerings and an exact Unicode Top/Child fixture, not same-label recursion. Diagnostic fixtures replace E with an action edge plus Done and append x; ordered eager events, quiet defaults, exception identity, typed exit and arity-before-effects are checked on this adapted source. Generated roles load through eval into separate packages in the same process. Duplicate slots retain required structural identity, choice priority, repeated resets, loaded/descriptor/generated/trace routes and two diagnostics in twelve roles. Generated-source1-153 reads five seek/five consume policies and removed-option precedence, then opens the next family fixture. The director-requested BACKEND-INTEGRATION-GUIDES tree owns common setup plus five native guides and consumer examples, first-time dependency preparation versus reuse, packaging/errors and independent final verification; activate after this clean commit, then resume .1.35. Startup reading is temporarily deferred only for this expressly requested documentation activity.
+  Verification: Fresh managed prove passes five targets and43 top-level tests: CLI runner, complete named marks, diagnostic output, duplicate slots and generated source. Neutral proof passes named marks7 helpers/3 mutations, diagnostics3 helpers/11 render cases/6 scenarios/20 mutations, and duplicate slots5 fixtures/2 diagnostics/59 mutations. Unchanged callable10 and neutral23-mutation proof from .1.33 are retained; whole-target execution gives no suffix reading credit. Fresh exact-window/inventory/cumulative/preservation, memory/history and rendered-book checks govern focused landing. ARCHOGEN guidance is source/documentation review only; no consumer build, dependency build, canonical gate or backend admission is claimed.
+  Candidate proof: Eleven complete windows replay exactly; the160-input/143-group/302-range plan and cumulative34/45038 fragments/1353523 bytes/84 complete files pass. Preservation verifies2494 exact prior files,2780 unchanged prior nodes,19 newly pending integration nodes,94 book limitation headings and all earlier recipes. Memory passes at60 lines; the rendered book and exact temporary-pivot/return pointers agree. Both history checks are OK: changes204 lines/41621 bytes, notes162/40726. The known large book search-index warning remains startup41.9-owned. Five focused Perl targets pass43 tests; three neutral contracts and plain whitespace pass. All hooks and the post-commit pointer check remain required before clean activation of BACKEND-INTEGRATION-GUIDES.0.
+  Commit: `CONFORMANCE-SOURCE-READING.1.34 - read Perl conformance consumers and schedule integration guides`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.35`
   Status: `pending`
@@ -1799,7 +1808,7 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
 
 | Rank | Leaf | Status | Next action |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.34` | `pending` | `t/callable_codeblock_literal_contract.t` lines 346-565; `t/cli_conformance_runner.t` lines 1-287; `t/complete_named_mark_contract.t` lines 1-79; `t/diagnostic_output_perl_contract.t` lines 1-461; `t/duplicate_regex_slot_identity_perl_contract.t` lines 1-300; `t/generated_source_contract.t` lines 1-153; 1500 fragments/56255 bytes. Preserve complete bounded windows, source identity and all repairs. |
+| 1 | `BACKEND-INTEGRATION-GUIDES.0` | `pending` | Director-authorized temporary documentation pivot after clean conformance .1.34; implement and verify all five backend integration guides, then resume `CONFORMANCE-SOURCE-READING.1.35` at its unchanged Scope. |
 
 ## Decisions
 
@@ -1812,6 +1821,7 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
 
 ## Verification Log
 
+- `2026-09-13` .1.34: Conformance .1.34 reads 11 complete windows, 1,500 fragments and 56,255 baseline-identical bytes. Physical reading is 34/143: 45,038 fragments, 1,353,523 bytes and 84 complete files. Five more test files are fully read; generated-source reading stops at153. Five managed Perl targets pass43 tests and three neutral contracts pass. Evidence distinguishes adapted diagnostic fixtures and in-process generated loading. The director requests a temporary clean-checkpoint pivot to BACKEND-INTEGRATION-GUIDES.0, covering all five backends; return to conformance .1.35 after that activity. Existing repairs remain open.
 - `2026-09-13` .1.33: Conformance .1.33 reads 11 complete windows, 1,381 fragments and 65,521 baseline-identical bytes. Physical reading is 33/143: 43,538 fragments, 1,297,268 bytes and 79 complete files. The complete ActionIR test file is read, preserving the distinction between AST-field lowering checks and authored-syntax admission. Callable literal reading covers inert records, dynamic invocation, in-process generated execution, precedence and typed failure/restoration checks. Fresh callable target10/10 and neutral governance pass; unchanged AST23 proof is retained. Next .1.34 owns later callable tests. Existing boolean and receiver-guard defects and all other repairs remain open.
 - `2026-09-13` .1.32: Conformance .1.32 reads 9 complete windows, 1,500 fragments and 55,235 baseline-identical bytes. Physical reading is 32/143: 42,157 fragments, 1,231,747 bytes and 78 complete files. All 66 CLI cases are read:2 help,20 usage,12 success,8 Unicode,4 operational failure and20 trace cases. The ActionIR test prefix distinguishes typed reads/writes, trailing blocks and control nodes, then checks if-lowering against deliberately inconsistent source text. Fresh Perl CLI default/POSIX and the complete AST test target pass within their separate scopes. Next .1.33 owns the crossing test body and continuation; all repairs remain open.
 - `2026-09-13` .1.31: Conformance .1.31 reads 32 complete windows, 1,226 fragments and 65,536 baseline-identical bytes. Physical reading is 31/143: 40,657 fragments, 1,176,512 bytes and 77 complete files. Uniform binding and both write contracts are fully read, along with the CLI guide and selected exact output fixtures. Frozen mutation metadata is reconciled with later admitted owners. Neutral write/map checks and both managed Perl help cases pass. New .2.2 owns missing storage setup in the standalone guide example. The bounded reading checkpoint is named for its broader conformance scope. Next .1.32 owns later CLI manifest cases; existing repairs remain open.
@@ -1849,6 +1859,7 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
 
 ## Commit Log
 
+- `2026-09-13` .1.34: `CONFORMANCE-SOURCE-READING.1.34 - read Perl conformance consumers and schedule integration guides`; activation d10305097eb502c0fe29309ec230437396e26d82; next .1.35 after clean handoff and zero-byte brief.
 - `2026-09-13` .1.33: `CONFORMANCE-SOURCE-READING.1.33 - complete AST lowering tests and read callable literal coverage`; activation 3d633f3b650aec95a283d36cc494cae076d41c6c; next .1.34 after clean handoff and zero-byte brief.
 - `2026-09-13` .1.32: `CONFORMANCE-SOURCE-READING.1.32 - complete CLI manifest and read ActionIR parser tests`; activation 62f79df1aa84da1c7c1c5dea01c78a73508c305c; next .1.33 after clean handoff and zero-byte brief.
 - `2026-09-13` .1.31: `CONFORMANCE-SOURCE-READING.1.31 - read write composition and CLI fixture contracts`; activation 74ecae96ebe59e4d40856ea62ee6ba2f73eea4ff; next .1.32 after clean handoff and zero-byte brief.
@@ -1886,6 +1897,7 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
 
 ## Changelog
 
+- `2026-09-13` .1.34: Five more test files are fully read; generated-source reading stops at153. Five managed Perl targets pass43 tests and three neutral contracts pass. Evidence distinguishes adapted diagnostic fixtures and in-process generated loading. The director requests a temporary clean-checkpoint pivot to BACKEND-INTEGRATION-GUIDES.0, covering all five backends; return to conformance .1.35 after that activity. Existing repairs remain open.
 - `2026-09-13` .1.33: The complete ActionIR test file is read, preserving the distinction between AST-field lowering checks and authored-syntax admission. Callable literal reading covers inert records, dynamic invocation, in-process generated execution, precedence and typed failure/restoration checks. Fresh callable target10/10 and neutral governance pass; unchanged AST23 proof is retained. Next .1.34 owns later callable tests. Existing boolean and receiver-guard defects and all other repairs remain open.
 - `2026-09-13` .1.32: All 66 CLI cases are read:2 help,20 usage,12 success,8 Unicode,4 operational failure and20 trace cases. The ActionIR test prefix distinguishes typed reads/writes, trailing blocks and control nodes, then checks if-lowering against deliberately inconsistent source text. Fresh Perl CLI default/POSIX and the complete AST test target pass within their separate scopes. Next .1.33 owns the crossing test body and continuation; all repairs remain open.
 - `2026-09-13` .1.31: Uniform binding and both write contracts are fully read, along with the CLI guide and selected exact output fixtures. Frozen mutation metadata is reconciled with later admitted owners. Neutral write/map checks and both managed Perl help cases pass. New .2.2 owns missing storage setup in the standalone guide example. The bounded reading checkpoint is named for its broader conformance scope. Next .1.32 owns later CLI manifest cases; existing repairs remain open.

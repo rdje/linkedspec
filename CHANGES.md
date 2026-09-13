@@ -10,6 +10,12 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-13 — CONFORMANCE-SOURCE-READING.1.34 — read Perl conformance consumers and schedule integration guides
+
+Conformance .1.34 reads 11 complete windows, 1,500 fragments and 56,255 baseline-identical bytes. Physical reading is 34/143: 45,038 fragments, 1,353,523 bytes and 84 complete files. Five more test files are fully read; generated-source reading stops at153. Five managed Perl targets pass43 tests and three neutral contracts pass. Evidence distinguishes adapted diagnostic fixtures and in-process generated loading. The director requests a temporary clean-checkpoint pivot to BACKEND-INTEGRATION-GUIDES.0, covering all five backends; return to conformance .1.35 after that activity. Existing repairs remain open.
+
+Fresh managed prove passes five targets and43 top-level tests: CLI runner, complete named marks, diagnostic output, duplicate slots and generated source. Neutral proof passes named marks7 helpers/3 mutations, diagnostics3 helpers/11 render cases/6 scenarios/20 mutations, and duplicate slots5 fixtures/2 diagnostics/59 mutations. Unchanged callable10 and neutral23-mutation proof from .1.33 are retained; whole-target execution gives no suffix reading credit. Fresh exact-window/inventory/cumulative/preservation, memory/history and rendered-book checks govern focused landing. ARCHOGEN guidance is source/documentation review only; no consumer build, dependency build, canonical gate or backend admission is claimed.
+
 ## 2026-09-13 — CONFORMANCE-SOURCE-READING.1.33 — complete AST lowering tests and read callable literal coverage
 
 Conformance .1.33 reads 11 complete windows, 1,381 fragments and 65,521 baseline-identical bytes. Physical reading is 33/143: 43,538 fragments, 1,297,268 bytes and 79 complete files. The complete ActionIR test file is read, preserving the distinction between AST-field lowering checks and authored-syntax admission. Callable literal reading covers inert records, dynamic invocation, in-process generated execution, precedence and typed failure/restoration checks. Fresh callable target10/10 and neutral governance pass; unchanged AST23 proof is retained. Next .1.34 owns later callable tests. Existing boolean and receiver-guard defects and all other repairs remain open.

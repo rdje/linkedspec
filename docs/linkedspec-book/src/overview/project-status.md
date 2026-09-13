@@ -497,19 +497,20 @@ the director's focused-verification grant used for this correction and the separ
 supporting-reading closeout. Reading completion establishes audited comprehension;
 it does not close the six grammar/literal repair roots or establish runtime signoff.
 Conformance, test and Unicode reading has exact ownership for all 160 inputs in
-143 bounded groups covering 8,257,059 decoded bytes. Thirty-three groups now account for
-43,538 fragments and 1,297,268 bytes, including 79 complete files. The ActionIR
-test file is fully read; its typed-field lowering checks retain the earlier
-23-test proof. The callable-literal test prefix checks inert records such as
-`{|value| return(value) }`, exact source spans, user-function transport and dynamic
-caller invocation. Construction does not execute the body or capture an environment.
-The neutral fixture also executes generated code loaded into a package in the same
-process. Helpers and registered functions retain precedence over same-named
-codeblock bindings. Fresh callable coverage passes 10 top-level tests and neutral
-governance rejects 23 mutations. These fixtures do not close the separately owned
-dynamic-boolean and receiver-guard defects. Later callable-test source and all
-other repairs remain open. Named-argument support remains an approved future
-direction. The capability guide still has stale
+143 bounded groups covering 8,257,059 decoded bytes. Thirty-four groups now account for
+45,038 fragments and 1,353,523 bytes, including 84 complete files. Callable, CLI
+runner, named-mark, diagnostic-output and duplicate-slot test files are fully read;
+generated-source reading reaches line153. Fresh focused Perl proof passes43 tests
+across five targets, with neutral named-mark, diagnostic and slot-identity checks.
+The diagnostic consumer adapts its neutral source into an action-edge fixture.
+Its emitted code and the other read generated consumers load into separate packages
+in the same process; that evidence does not establish fresh-process deployment.
+The director has requested integration guides and runnable consumer examples for
+Perl, Rust, Dart, Julia and Lua, covering recursive checkout, dependency preparation
+and reuse, native APIs, results/errors and packaging. This temporary activity is
+owned by `docs/tasks/BACKEND-INTEGRATION-GUIDES.md` and starts after the current
+clean handoff; conformance .1.35 is the return point. Existing runtime repairs and
+unread source remain open. The capability guide still has stale
 current census, governance/inventory/public counts and generic-callable wording.
 Existing startup `.41.6` and `.41.7` now own these exact paragraphs and meaningful
 checks against recurrence. Their selected-marker guards currently miss the

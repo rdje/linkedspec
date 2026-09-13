@@ -9,7 +9,7 @@ answers:
   - "how do I verify conformance reading source and range coverage"
   - "which conformance source reading file has the longest line"
 date: 2026-09-13
-status: exact decomposition preserved; physical reading 33/143, 79 files complete and 110 groups remain
+status: exact decomposition preserved; physical reading 34/143, 84 files complete and 109 groups remain
 tags: [reading, conformance, tests, unicode, continuity, CONFORMANCE-SOURCE-READING]
 evidence: "Startup .3.8.0 independently accounts for160 baseline-identical files,5,422,313 stored bytes and8,257,059 decoded bytes in167,606 line fragments/167,604 LF delimiters. Four gzip inputs contribute54,500 decoded lines. All143 groups/302 ranges are contiguous, disjoint and bounded at1500 fragments/65536 bytes. No source, registry or runtime behavior changes; no physical-reading credit from inventory."
 reverify: "Run CONFORMANCE_SOURCE_READING_COVERAGE below through the project-data wrapper; it derives source identity from Git and range ownership from the task-tree rather than a parallel manifest. Use scripts/check_task_tree_metadata.sh for actual task collection limits."
@@ -399,12 +399,12 @@ properties, context rules, fixtures or decoded upstream inputs. All repairs rema
 
 ## Conformance reading checkpoint
 
-`CONFORMANCE-SOURCE-READING.1.33` reads 11 windows, 1,381 fragments and 65,521 bytes.
-Cumulative reading is 33/143, 43,538 fragments, 1,297,268 bytes and 79 complete files.
-The AST test file is fully read; callable literals1-345 remain partial. Lowering-text
-controls differ from authored-syntax admission and emitted execution. Existing
-[[perl-callable-codeblock-literal-record]] records fresh target10 and neutral23
-mutation proof; AST23 is retained. Startup19/35 and all other repairs remain open.
+`CONFORMANCE-SOURCE-READING.1.34` reads 11 windows, 1,500 fragments and 56,255 bytes.
+Cumulative reading is 34/143, 45,038 fragments, 1,353,523 bytes and 84 complete files.
+Only generated-source tests1-153 remain partial. [[conformance-perl-consumer-reading]]
+records adapted diagnostic fixtures, in-process generated loading and fresh43-test
+proof. The director authorizes BACKEND-INTEGRATION-GUIDES as the next temporary
+activity; conformance .1.35 is the exact return point. All existing repairs remain.
 
 Lowercase table entries and Final Sigma context remain separate. Exact scalar
 sequences, sparse ranges, fullwidth forms and ligature identities are preserved;
