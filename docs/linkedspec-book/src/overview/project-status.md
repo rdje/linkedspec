@@ -497,15 +497,20 @@ the director's focused-verification grant used for this correction and the separ
 supporting-reading closeout. Reading completion establishes audited comprehension;
 it does not close the six grammar/literal repair roots or establish runtime signoff.
 Conformance, test and Unicode reading has exact ownership for all 160 inputs in
-143 bounded groups covering 8,257,059 decoded bytes. Twenty-seven groups now account for
-34,931 fragments and 1,055,117 bytes, including 51 complete files. Both case mapping
-arrays and all `Cased` ranges are fully read. Reading continues through the
-`Case_Ignorable` ranges, which include punctuation, combining marks, modifiers
-and format controls. These are separate properties that can overlap: U+2071,
-for example, appears in both sets. The unchanged offline generation proof is
-retained. Later ranges, context rules, fixtures and upstream inputs remain to be
-read; all runtime repair tasks stay open. Named-argument support remains an
-approved future direction. The capability guide still has stale
+143 bounded groups covering 8,257,059 decoded bytes. Twenty-eight groups now account for
+36,431 fragments and 1,072,226 bytes, including 52 complete files. The Unicode
+casing contract is fully read, including both mapping arrays, all Cased and
+Case_Ignorable ranges, the separate Final Sigma rule and 12 fixtures. For example,
+`ΟΣ` lowers to `ος`, while `ΟΣΑ` lowers to `οσα`; combining marks can leave the
+surrounding cased context unchanged. The rule-label contract uses `XID_Continue`
+at every position, including the first: digits and underscore are admitted.
+Identity preserves case and exact scalar sequence without normalization or case
+mapping; other identifier grammars remain separately defined. Its first 119
+complete ranges are read. Fresh offline rule-label generation passes all 806
+ranges and the 9 positive, 8 negative and 2 distinct fixtures. Unchanged casing
+generation proof is retained; this reading adds no native runtime admission.
+Later source ranges and runtime repair tasks remain open. Named-argument support
+remains an approved future direction. The capability guide still has stale
 current census, governance/inventory/public counts and generic-callable wording.
 Existing startup `.41.6` and `.41.7` now own these exact paragraphs and meaningful
 checks against recurrence. Their selected-marker guards currently miss the

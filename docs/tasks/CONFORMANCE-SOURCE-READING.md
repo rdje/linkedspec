@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `CONFORMANCE-SOURCE-READING`
-- Status: `active` / exact decomposition; physical reading 27/143
+- Status: `active` / exact decomposition; physical reading 28/143
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.8`
 - Created: `2026-09-13`
 - Last updated: `2026-09-13`
@@ -519,14 +519,21 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
   Commit: `CONFORMANCE-SOURCE-READING.1.27 - complete Cased ranges and read Case Ignorable prefix`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.28`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `7f0d7ffd3b40c0fed3f24088750e69f32615e30f`.
+  Verification tier: `focused`
+  Focused checks: Read exact baseline-identical scoped windows; reconcile canonical Knowledge and proportionate proof, preserve source/task/history, and verify memory, book and normal doctrines.
+  Canonical trigger: Ordinary bounded source-reading leaf; no source or public-contract change, admission or parent closeout. Later prerequisites remain.
   Goal: Read and understand conformance/test/Unicode group 28.
   Scope: `capability_conformance/unicode_case_contract.json` lines 20639-21621; `capability_conformance/unicode_rule_label_contract.json` lines 1-517
   Baseline evidence: 1500 fragments / 17109 decoded bytes; ordered range SHA-256 `20287f9706225c05dbb4d480ca10ab9c37e0ca0cdc032340616073f1ddb68ed8`.
   Dependencies: .1.27 committed with clean handoff.
   Acceptance: Read every scoped byte in complete bounded windows; retain source identity, exact comprehension, canonical Knowledge reconciliation, concrete finding ownership, focused proof and per-leaf continuity. Unread crossing constructs retain the next range owner.
-  Verification: `pending`
-  Commit: `pending`
+  Reading evidence: 3 complete windows / 1500 fragments / 17109 bytes; ordered window SHA-256 `1037e3515d1483911ffebcdb419a90369abc6d0ef6abf2ce8f82ad51bc6186ef`.
+  Comprehension: The casing suffix closes A82C, continues through supplementary marks, modifiers and format characters, and ends Case_Ignorable at E0100-E01EF. Together with earlier leaves all 158 Cased and 464 Case_Ignorable ranges are read. The separate Final_Sigma context record maps 03A3 to 03C2; 12 fixtures distinguish expansion, supplementary pairs, cased context before/after ignorable scalars and no implicit normalization. The rule-label policy uses one or more XID_Continue scalars, including the first position, with exact case-sensitive scalar identity, no normalization or case mapping and strict UTF-8 at the boundary. Metadata pins Unicode17.0.0, upstream hashes and 806 ranges/9 positive/8 negative/2 distinct fixtures. The physically read prefix contains 119 complete ranges through 0B85-0B8A plus the next lower endpoint 0B8E; its remaining bytes are .1.29-owned. Existing unicode-rule-label-contract and Lua property-reading cards already own the semantics; this reading adds no native admission or broader identifier policy.
+  Verification: Fresh managed tools/check_unicode_rule_label_contract.py passes offline regeneration and byte comparison at Unicode17.0.0, 806 ranges, 9 positive, 8 negative and 2 distinct pairs. Retain unchanged casing generation/12-fixture proof from .1.14 at 704e261b. Fresh window replay, full range inventory, cumulative coverage, source/task/history preservation, rendered book, memory and document-pressure checks govern this focused leaf. Native proofs remain separately scoped; normal commit doctrines remain required.
+  Candidate proof: All three source windows were consumed completely; the initially lost casing output received no credit and both windows were re-presented separately before marking read. Window replay and all160 baseline inputs/143 groups/302 ranges pass; independent cumulative coverage is28 groups/36431 fragments/1072226 bytes/52 complete files, with only rule-label data partial. Preservation passes2491 byte-exact files,2774 unchanged prior nodes, all94 book limitation headings and the bounded checkpoint/footer. Fresh offline label regeneration806/9/8/2, rendered book, memory60 and plain diff checks pass. CHANGES168lines/33839bytes is OK; notes279lines/56775bytes is WARN without required rollover. Known book-index warning remains startup41.9-owned. No new native run, full CI, dependency build or push.
+  Commit: `CONFORMANCE-SOURCE-READING.1.28 - complete casing contract and read rule-label policy`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.29`
   Status: `pending`
@@ -1699,7 +1706,7 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
 
 | Rank | Leaf | Status | Next action |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.28` | `pending` | `capability_conformance/unicode_case_contract.json` lines 20639-21621; `capability_conformance/unicode_rule_label_contract.json` lines 1-517; 1500 fragments/17109 bytes. Preserve complete bounded windows, source identity and all repairs. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.29` | `pending` | `capability_conformance/unicode_rule_label_contract.json` lines 518-2017; 1500 fragments/15123 bytes. Preserve complete bounded windows, source identity and all repairs. |
 
 ## Decisions
 
@@ -1712,6 +1719,7 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
 
 ## Verification Log
 
+- `2026-09-13` .1.28: Conformance .1.28 reads 3 complete windows, 1,500 fragments and 17,109 baseline-identical bytes. Physical reading is 28/143: 36,431 fragments, 1,072,226 bytes and 52 complete files. The casing contract is fully read: 464 Case_Ignorable ranges, the separate Final Sigma rule and all 12 fixtures. The rule-label prefix fixes exact scalar identity and admits XID_Continue at every position, with 119 complete ranges read. Fresh offline rule-label regeneration passes. Next .1.29 owns the crossing 0B8E range and continuation; runtime repairs remain open.
 - `2026-09-13` .1.27: Conformance .1.27 reads 3 complete windows, 1,500 fragments and 15,135 baseline-identical bytes. Physical reading is 27/143: 34,931 fragments, 1,055,117 bytes and 51 complete files. All Cased property ranges are read, followed by the first 239 complete Case_Ignorable ranges and the next lower endpoint. The separate property sets can overlap; the existing Lua audit already owns that fact and its scoped context proof. Two direct Knowledge questions improve retrieval without altering its historical evidence. The bounded checkpoint is updated in place; unchanged Unicode generation proof is retained. Next .1.28 owns the crossing A82C range and continuation; all runtime repairs remain open.
 - `2026-09-13` .1.26: Conformance .1.26 reads 3 complete windows, 1,500 fragments and 14,999 baseline-identical bytes. Physical reading is 26/143: 33,431 fragments, 1,039,982 bytes and 51 complete files. Both Unicode case mapping arrays are fully read. Supplementary uppercase rows close before the initial Cased property ranges, whose classification role remains distinct from conversion sequences. The required change-history rollover preserves exact committed suffix records and unchanged capacity limits. The bounded checkpoint is updated in place; unchanged offline Unicode proof is retained. Next .1.27 owns later property ranges and all runtime repairs remain open.
 - `2026-09-13` .1.25: Conformance .1.25 reads 3 complete windows, 1,500 fragments and 14,739 baseline-identical bytes. Physical reading is 25/143: 31,931 fragments, 1,024,983 bytes and 51 complete files. Uppercase reading covers further Latin and Cherokee rows, ordered Latin/Armenian ligature expansions, fullwidth pairs and supplementary scalars. Exact scalar sequences and encoded forms remain distinct. The bounded checkpoint is updated in place. Unchanged offline Unicode proof is retained. Next .1.26 owns the crossing 104F8-to-104D0 entry and continuation; all runtime repairs remain open.
@@ -1743,6 +1751,7 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
 
 ## Commit Log
 
+- `2026-09-13` .1.28: `CONFORMANCE-SOURCE-READING.1.28 - complete casing contract and read rule-label policy`; activation 7f0d7ffd3b40c0fed3f24088750e69f32615e30f; next .1.29 after clean handoff and zero-byte brief.
 - `2026-09-13` .1.27: `CONFORMANCE-SOURCE-READING.1.27 - complete Cased ranges and read Case Ignorable prefix`; activation 0660046fb9b9afdc2f6e8266c404139f261763b8; next .1.28 after clean handoff and zero-byte brief.
 - `2026-09-13` .1.26: `CONFORMANCE-SOURCE-READING.1.26 - complete case mapping arrays and begin property ranges`; activation 38c45c2883d9932f38ec4a511130c1f5bd94de1b; next .1.27 after clean handoff and zero-byte brief.
 - `2026-09-13` .1.25: `CONFORMANCE-SOURCE-READING.1.25 - read Cherokee ligature and supplementary uppercase mappings`; activation 66c75ec5c83c00880cfaed4bb7ca4921b003a1a6; next .1.26 after clean handoff and zero-byte brief.
@@ -1774,6 +1783,7 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
 
 ## Changelog
 
+- `2026-09-13` .1.28: The casing contract is fully read: 464 Case_Ignorable ranges, the separate Final Sigma rule and all 12 fixtures. The rule-label prefix fixes exact scalar identity and admits XID_Continue at every position, with 119 complete ranges read. Fresh offline rule-label regeneration passes. Next .1.29 owns the crossing 0B8E range and continuation; runtime repairs remain open.
 - `2026-09-13` .1.27: All Cased property ranges are read, followed by the first 239 complete Case_Ignorable ranges and the next lower endpoint. The separate property sets can overlap; the existing Lua audit already owns that fact and its scoped context proof. Two direct Knowledge questions improve retrieval without altering its historical evidence. The bounded checkpoint is updated in place; unchanged Unicode generation proof is retained. Next .1.28 owns the crossing A82C range and continuation; all runtime repairs remain open.
 - `2026-09-13` .1.26: Both Unicode case mapping arrays are fully read. Supplementary uppercase rows close before the initial Cased property ranges, whose classification role remains distinct from conversion sequences. The required change-history rollover preserves exact committed suffix records and unchanged capacity limits. The bounded checkpoint is updated in place; unchanged offline Unicode proof is retained. Next .1.27 owns later property ranges and all runtime repairs remain open.
 - `2026-09-13` .1.25: Uppercase reading covers further Latin and Cherokee rows, ordered Latin/Armenian ligature expansions, fullwidth pairs and supplementary scalars. Exact scalar sequences and encoded forms remain distinct. The bounded checkpoint is updated in place. Unchanged offline Unicode proof is retained. Next .1.26 owns the crossing 104F8-to-104D0 entry and continuation; all runtime repairs remain open.
