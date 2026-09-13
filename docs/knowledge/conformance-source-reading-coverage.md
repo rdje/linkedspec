@@ -9,7 +9,7 @@ answers:
   - "how do I verify conformance reading source and range coverage"
   - "which conformance source reading file has the longest line"
 date: 2026-09-13
-status: exact decomposition preserved; physical reading 17/143, 51 files complete and 126 groups remain
+status: exact decomposition preserved; physical reading 18/143, 51 files complete and 125 groups remain
 tags: [reading, conformance, tests, unicode, continuity, CONFORMANCE-SOURCE-READING]
 evidence: "Startup .3.8.0 independently accounts for160 baseline-identical files,5,422,313 stored bytes and8,257,059 decoded bytes in167,606 line fragments/167,604 LF delimiters. Four gzip inputs contribute54,500 decoded lines. All143 groups/302 ranges are contiguous, disjoint and bounded at1500 fragments/65536 bytes. No source, registry or runtime behavior changes; no physical-reading credit from inventory."
 reverify: "Run CONFORMANCE_SOURCE_READING_COVERAGE below through the project-data wrapper; it derives source identity from Git and range ownership from the task-tree rather than a parallel manifest. Use scripts/check_task_tree_metadata.sh for actual task collection limits."
@@ -426,3 +426,13 @@ Latin additional and Greek extended rows preserve identity entries, titlecase
 convergence and exact scalar results. Letterlike 212A maps to 006B and 212B to 00E5
 through casing; this does not imply normalization or invertibility. The 2160-to-2170
 value at line 5638 crosses into .1.18. Unchanged Unicode proof remains at 704e261b.
+
+
+## September 13 Unicode reading .1.18
+
+`CONFORMANCE-SOURCE-READING.1.18` reads 3 windows, 1,500 fragments and 14,500 bytes.
+Cumulative reading is 18/143, 21,431 fragments, 921,969 bytes and 51 complete files.
+Numeral and circled-letter casing preserves encoded forms; Glagolitic, Coptic and
+Cyrillic rows retain exact sparse ranges. Latin examples include A77D-to-1D79 and
+A78D-to-0265. The A79E-to-A79F value at line 7138 crosses into .1.19.
+Unchanged generated-data proof remains at 704e261b; all runtime repairs remain owned.

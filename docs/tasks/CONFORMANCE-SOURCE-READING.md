@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `CONFORMANCE-SOURCE-READING`
-- Status: `active` / exact decomposition; physical reading 17/143
+- Status: `active` / exact decomposition; physical reading 18/143
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.8`
 - Created: `2026-09-13`
 - Last updated: `2026-09-13`
@@ -344,14 +344,21 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
   Commit: `CONFORMANCE-SOURCE-READING.1.17 - read Latin and Greek extended lowercase mappings`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.18`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `90067fbfea184b29a1f5c936a5fc99df9b8d7419`.
+  Verification tier: `focused`
+  Focused checks: Read exact baseline-identical scoped windows; reconcile canonical Knowledge and proportionate proof, preserve source/task/history, and verify memory, book and normal doctrines.
+  Canonical trigger: Ordinary bounded source-reading leaf; no source or public-contract change, admission or parent closeout. Later prerequisites remain.
   Goal: Read and understand conformance/test/Unicode group 18.
   Scope: `capability_conformance/unicode_case_contract.json` lines 5639-7138
   Baseline evidence: 1500 fragments / 14500 decoded bytes; ordered range SHA-256 `44c866b4499f10805ebccd70d094fa2c8f23baa623925827baccb887dc40fcaf`.
   Dependencies: .1.17 committed with clean handoff.
   Acceptance: Read every scoped byte in complete bounded windows; retain source identity, exact comprehension, canonical Knowledge reconciliation, concrete finding ownership, focused proof and per-leaf continuity. Unread crossing constructs retain the next range owner.
-  Verification: `pending`
-  Commit: `pending`
+  Reading evidence: 3 complete windows / 1500 fragments / 14500 bytes; ordered window SHA-256 `5dabed0b70ae515a7de3a120313ae6141d76df6eed666bb952989d6832961920`.
+  Comprehension: The range closes the prior 2160 entry, completes numeral pairs 2161-to-2171 through 216F-to-217F plus 2183-to-2184, and preserves circled letters 24B6-to-24D0 through 24CF-to-24E9. Glagolitic 2C00-to-2C30 through 2C2F-to-2C5F precedes Latin mappings with non-adjacent results such as 2C62-to-026B, 2C63-to-1D7D and 2C7F-to-0240. Coptic pairs include sparse 2CEB/2CED/2CF2 rows; Cyrillic extended rows retain the gap after A66C and continue A680 through A69A. Latin extended reading includes A77D-to-1D79 and A78D-to-0265 among adjacent pairs. Circled and numeral results preserve their encoded forms; casing does not imply compatibility normalization. Line 7138 ends at the A79E-to-A79F value, whose closing delimiters and subsequent mappings remain .1.19-owned.
+  Verification: Retain the unchanged Unicode 17 generation, byte-equality and 12-fixture proof from CONFORMANCE-SOURCE-READING.1.14 at 704e261b. Fresh window replay, complete range inventory, cumulative coverage, source/task/history preservation, rendered book, memory and document-pressure checks govern this ordinary reading leaf. Native admission evidence remains separately scoped; normal commit doctrines remain required.
+  Candidate proof: Three complete windows replay exactly; full160-input/143-group/302-range inventory and cumulative18/21431 fragments/921969 bytes/51 complete files pass. Preservation verifies2490 exact files,2774 prior nodes,94 book limitation headings and all prior recipes. Memory passes at60 lines; actual rendered coverage and circled-letter example pass with the already-owned large search-index warning. Both history checks pass: changes331 lines/50553 bytes, notes219 lines/42244 bytes. Whitespace is clean; unchanged .1.14 Unicode generation proof is retained. Normal commit doctrines remain required.
+  Commit: `CONFORMANCE-SOURCE-READING.1.18 - read numeral circled and extended lowercase mappings`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.19`
   Status: `pending`
@@ -1624,7 +1631,7 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
 
 | Rank | Leaf | Status | Next action |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.18` | `pending` | `capability_conformance/unicode_case_contract.json` lines 5639-7138; 1500 fragments/14500 bytes. Preserve complete bounded windows, source identity and all repairs. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.19` | `pending` | `capability_conformance/unicode_case_contract.json` lines 7139-8638; 1500 fragments/14848 bytes. Preserve complete bounded windows, source identity and all repairs. |
 
 ## Decisions
 
@@ -1637,6 +1644,7 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
 
 ## Verification Log
 
+- `2026-09-13` .1.18: Conformance .1.18 reads 3 complete windows, 1,500 fragments and 14,500 baseline-identical bytes. Physical reading is 18/143: 21,431 fragments, 921,969 bytes and 51 complete files. Lowercase reading completes Roman numeral and circled-letter rows, then covers Glagolitic, Coptic, Cyrillic extended and further Latin mappings. Exact non-adjacent Latin results remain distinct from adjacent pairs. Unchanged offline Unicode proof is retained. Next .1.19 owns the crossing A79E entry and continuation; all runtime repairs remain open.
 - `2026-09-13` .1.17: Conformance .1.17 reads 3 complete windows, 1,500 fragments and 14,500 baseline-identical bytes. Physical reading is 17/143: 19,931 fragments, 907,469 bytes and 51 complete files. Lowercase reading completes the Latin additional and Greek extended mapping families, including identity rows, titlecase convergence and non-adjacent mappings. Letterlike symbols map to their exact lowercase values; Roman numeral reading begins. Unchanged offline Unicode proof remains valid, and .1.18 owns the crossing 2160 entry and following mappings. Runtime repairs remain open.
 - `2026-09-13` .1.16: Conformance .1.16 reads 3 complete windows, 1,500 fragments and 14,500 baseline-identical bytes. Physical reading is 16/143: 18,431 fragments, 892,969 bytes and 51 complete files. Lowercase reading covers Armenian, Georgian and Cherokee families, preserving sparse entries and their distinct target ranges, then continues into Latin additional mappings. Existing offline Unicode generation proof remains applicable to unchanged inputs. Next .1.17 owns the crossing 1E3E entry and following mappings; all runtime repairs remain open.
 - `2026-09-13` .1.15: Conformance .1.15 reads 3 complete windows, 1,500 fragments and 14,500 baseline-identical bytes. Physical reading is 15/143: 16,931 fragments, 878,469 bytes and 51 complete files. The lowercase table continues through Latin, Greek and Cyrillic mappings, retaining exact non-adjacent mappings and the default Sigma entry. Existing Final Sigma context remains a separate rule. Unicode generation proof from clean704e261b remains valid for unchanged inputs; no behavior, native admission or runtime repair changes. Next .1.16 owns the crossing0522 mapping and continuation.
@@ -1658,6 +1666,7 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
 
 ## Commit Log
 
+- `2026-09-13` .1.18: `CONFORMANCE-SOURCE-READING.1.18 - read numeral circled and extended lowercase mappings`; activation 90067fbfea184b29a1f5c936a5fc99df9b8d7419; next .1.19 after clean handoff and zero-byte brief.
 - `2026-09-13` .1.17: `CONFORMANCE-SOURCE-READING.1.17 - read Latin and Greek extended lowercase mappings`; activation e2ef71ff62406dcc82b35840e3b1d8ebc71a22fe; next .1.18 after clean handoff and zero-byte brief.
 - `2026-09-13` .1.16: `CONFORMANCE-SOURCE-READING.1.16 - read Armenian Georgian and Cherokee lowercase mappings`; activation d7daa22753c1a6065d26bcfaeefdb776aaabd5f8; next .1.17 after clean handoff and zero-byte brief.
 - `2026-09-13` .1.15: `CONFORMANCE-SOURCE-READING.1.15 - read Unicode Latin Greek and Cyrillic lowercase mappings`; activation 704e261b9032d121e6ffa2d7402c648ac5e2f2ab; next .1.16 after clean handoff and zero-byte brief.
@@ -1679,6 +1688,7 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
 
 ## Changelog
 
+- `2026-09-13` .1.18: Lowercase reading completes Roman numeral and circled-letter rows, then covers Glagolitic, Coptic, Cyrillic extended and further Latin mappings. Exact non-adjacent Latin results remain distinct from adjacent pairs. Unchanged offline Unicode proof is retained. Next .1.19 owns the crossing A79E entry and continuation; all runtime repairs remain open.
 - `2026-09-13` .1.17: Lowercase reading completes the Latin additional and Greek extended mapping families, including identity rows, titlecase convergence and non-adjacent mappings. Letterlike symbols map to their exact lowercase values; Roman numeral reading begins. Unchanged offline Unicode proof remains valid, and .1.18 owns the crossing 2160 entry and following mappings. Runtime repairs remain open.
 - `2026-09-13` .1.16: Lowercase reading covers Armenian, Georgian and Cherokee families, preserving sparse entries and their distinct target ranges, then continues into Latin additional mappings. Existing offline Unicode generation proof remains applicable to unchanged inputs. Next .1.17 owns the crossing 1E3E entry and following mappings; all runtime repairs remain open.
 - `2026-09-13` .1.15: The lowercase table continues through Latin, Greek and Cyrillic mappings, retaining exact non-adjacent mappings and the default Sigma entry. Existing Final Sigma context remains a separate rule. Unicode generation proof from clean704e261b remains valid for unchanged inputs; no behavior, native admission or runtime repair changes. Next .1.16 owns the crossing0522 mapping and continuation.

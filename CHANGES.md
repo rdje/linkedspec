@@ -10,6 +10,12 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-13 — CONFORMANCE-SOURCE-READING.1.18 — read numeral circled and extended lowercase mappings
+
+Conformance .1.18 reads 3 complete windows, 1,500 fragments and 14,500 baseline-identical bytes. Physical reading is 18/143: 21,431 fragments, 921,969 bytes and 51 complete files. Lowercase reading completes Roman numeral and circled-letter rows, then covers Glagolitic, Coptic, Cyrillic extended and further Latin mappings. Exact non-adjacent Latin results remain distinct from adjacent pairs. Unchanged offline Unicode proof is retained. Next .1.19 owns the crossing A79E entry and continuation; all runtime repairs remain open.
+
+Retain the unchanged Unicode 17 generation, byte-equality and 12-fixture proof from CONFORMANCE-SOURCE-READING.1.14 at 704e261b. Fresh window replay, complete range inventory, cumulative coverage, source/task/history preservation, rendered book, memory and document-pressure checks govern this ordinary reading leaf. Native admission evidence remains separately scoped; normal commit doctrines remain required.
+
 ## 2026-09-13 — CONFORMANCE-SOURCE-READING.1.17 — read Latin and Greek extended lowercase mappings
 
 Conformance .1.17 reads 3 complete windows, 1,500 fragments and 14,500 baseline-identical bytes. Physical reading is 17/143: 19,931 fragments, 907,469 bytes and 51 complete files. Lowercase reading completes the Latin additional and Greek extended mapping families, including identity rows, titlecase convergence and non-adjacent mappings. Letterlike symbols map to their exact lowercase values; Roman numeral reading begins. Unchanged offline Unicode proof remains valid, and .1.18 owns the crossing 2160 entry and following mappings. Runtime repairs remain open.

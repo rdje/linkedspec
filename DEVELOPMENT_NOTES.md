@@ -10,6 +10,12 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-13 — CONFORMANCE-SOURCE-READING.1.18 — preserve encoded forms and sparse lowercase mappings
+
+The range closes the prior 2160 entry, completes numeral pairs 2161-to-2171 through 216F-to-217F plus 2183-to-2184, and preserves circled letters 24B6-to-24D0 through 24CF-to-24E9. Glagolitic 2C00-to-2C30 through 2C2F-to-2C5F precedes Latin mappings with non-adjacent results such as 2C62-to-026B, 2C63-to-1D7D and 2C7F-to-0240. Coptic pairs include sparse 2CEB/2CED/2CF2 rows; Cyrillic extended rows retain the gap after A66C and continue A680 through A69A. Latin extended reading includes A77D-to-1D79 and A78D-to-0265 among adjacent pairs. Circled and numeral results preserve their encoded forms; casing does not imply compatibility normalization. Line 7138 ends at the A79E-to-A79F value, whose closing delimiters and subsequent mappings remain .1.19-owned.
+
+Retain the unchanged Unicode 17 generation, byte-equality and 12-fixture proof from CONFORMANCE-SOURCE-READING.1.14 at 704e261b. Fresh window replay, complete range inventory, cumulative coverage, source/task/history preservation, rendered book, memory and document-pressure checks govern this ordinary reading leaf. Native admission evidence remains separately scoped; normal commit doctrines remain required.
+
 ## 2026-09-13 — CONFORMANCE-SOURCE-READING.1.17 — preserve identity rows and non-adjacent lowercase values
 
 The range closes the prior 1E3E entry and continues Latin additional pairs through 1EFE-to-1EFF, retaining identity rows 1E96 through 1E9A and the non-adjacent 1E9E-to-00DF mapping. Greek extended rows preserve scalar results, sparse groups and lower identity entries: for example 1F88-to-1F80, 1FBC-to-1FB3, 1FCC-to-1FC3, 1FEC-to-1FE5 and 1FFC-to-1FF3. Exact table casing preserves these precomposed results without implying normalization, reversibility or the unread uppercase expansion behavior. Letterlike mappings include 2126-to-03C9, 212A-to-006B, 212B-to-00E5 and 2132-to-214E. Line 5638 ends at the 2160-to-2170 value; its closing delimiters and later mappings remain .1.18-owned.
