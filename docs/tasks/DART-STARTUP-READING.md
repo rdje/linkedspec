@@ -1571,7 +1571,7 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SUPPORTING-SOURCE-READING.3` | `pending` | After clean .1.19, independently reconcile all five required ranges/three reading commits, historical omissions and seven repair roots; route startup .3.8 with applicable closeout proof. |
+| 1 | `SUPPORTING-SOURCE-READING.2.6` | `pending` | Await explicit scoped before-reading/focused disposition for the verified one-file checker correction and formal reading parent closeout; exact proposal is committed under .3. |
 
 ## Decisions
 

@@ -8,7 +8,7 @@ answers:
   - how much prior supporting-source reading credit is established
   - does supporting-source reading require rebuilding RGX or PGEN
 date: 2026-09-13
-status: original inventory preserved; one historical and all three current groups read, seventeen superseded, independent closeout pending
+status: original inventory preserved; required reading independently audited, formal parent closure pending
 tags: [startup, reading, supporting, inventory, continuity]
 evidence: "SESSION-STARTUP-READING.3.7.0; clean Lua closeout 735f0337883baef5ac4422976879d09725e0e8ea; baseline baeb984e36a94a15951cd23d4c52def5064cdaca."
 reverify: "Run SUPPORTING_SOURCE_INVENTORY, SUPPORTING_SOURCE_PLAN, SUPPORTING_SOURCE_TREE and SUPPORTING_CURRENT_GROUP17/18/19 below; these identity/range audits grant no additional physical reading credit."
@@ -478,3 +478,12 @@ SUPPORTING_SOURCE_TREE
 
 Related facts: [[startup-codebase-reading-inventory]], [[lua-reading-commit-closeout-audit]],
 [[rust-ci-pgen-missing-input-rebuilds]].
+
+# Independent reconciliation — 2026-09-13
+
+[[supporting-reading-closeout-audit]] independently verifies all 174 original
+ranges/158 unchanged sources, three reading commits/five required ranges/nineteen
+windows and all seven repair roots. Required reading is 629 fragments/96,781 bytes;
+historical reading is 1,500/61,165; explicit omissions are 23,484/806,310. No extra
+reading credit or defect closure is granted. The audit is complete; formal parent
+closure and the exact `.2.6` checker correction await the new scoped disposition.

@@ -2268,7 +2268,7 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SUPPORTING-SOURCE-READING.3` | `pending` | After clean .1.19, independently reconcile all five required ranges/three reading commits, historical omissions and seven repair roots; route startup .3.8 with applicable closeout proof. |
+| 1 | `SUPPORTING-SOURCE-READING.2.6` | `pending` | Await explicit scoped before-reading/focused disposition for the verified one-file checker correction and formal reading parent closeout; exact proposal is committed under .3. |
 
 ## Decisions
 

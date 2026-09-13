@@ -10,6 +10,12 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-13 — SUPPORTING-SOURCE-READING.3 — task capacity enforcement disagreement and closeout boundaries
+
+The independent audit reconstructs original/required/historical/omitted source exactly and preserves all seven repair roots. The older partition guard is separate from the approved registry; the exact one-file correction updates two aggregate constants and self-tests, then checks all five inclusive/+1 boundaries against the real registry. Prototype syntax,37 self-tests and50 detached registry cases pass; the original emits four agreement failures. Implementation before remaining reading and focused infrastructure/parent-closeout proof need a new scoped disposition. No production source, registry ceiling, immutable history, dependency or gate changes.
+
+Verification: independent committed coverage/activation/source/repair audit; exact draft extraction, syntax and original/proposed37+50 controls; preservation, Knowledge, memory, histories, rendered book and ordinary doctrine hooks. This commits the audit/proposal, not a parent closeout, source fix or canonical receipt.
+
 ## 2026-09-13 — SUPPORTING-SOURCE-READING.1.19 — dedicated named captures, body tokens and historical gap ownership
 
 The dedicated grammar preserves fixed/variadic/typed signature identity, exact source/body text and spans, staged provenance and inert parse-job fields. Named captures handle absent parameter prefixes; linked lexical tokens shield nested/string/comment/regex braces before outer finalizers. The unchanged fixture passes44 assertions and six exact payload controls pass. Four current comparisons confirm the July self-hosted regex-body gap, now .2.7-owned; the older zero-argument fact maps to .2.3.2. All seven repair roots remain open. Three required grammar groups are physically read; independent .3 audit and later startup obligations remain.

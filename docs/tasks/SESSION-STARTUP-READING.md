@@ -2275,7 +2275,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Status: `active`
   Goal: Account for all 158 original supporting entries and read the current language/runtime dependencies required by the director’s clarified scope.
   Children: `.3.7.0` completes decomposition; SUPPORTING-SOURCE-READING.1 owns 21 reading groups, .2 new repair intake, .3 independent closeout.
-  Reading owner: `docs/tasks/SUPPORTING-SOURCE-READING.md`; required .1.17-.1.19 physically complete: three files/five ranges/629 fragments/96781 bytes. Independent closeout .3 remains; seven repair roots, original inventory and historical .0/.4 dispositions remain. No omitted-byte credit or defect closure; route startup .3.8 after applicable reconciliation.
+  Reading owner: `docs/tasks/SUPPORTING-SOURCE-READING.md`; required .1.17-.1.19 reading and independent .3 audit are complete. Original158 files/174 ranges and exact required/historical/omitted classes reconcile; seven repair roots remain. Formal parent closure awaits the new scoped .3 proposal for focused closure and .2.6 checker correction; no omitted-byte credit or defect closure.
   Acceptance: Account for legacy adapters, plugins, authored grammars, configuration, and non-TypeScript `.ts` data;
     use LinkedSpec probes before investigating a spec's behavior, and do not infer defects from historical syntax alone.
   Verification: `pending`
@@ -4623,7 +4623,7 @@ startup implementation prerequisites and the rgx reading exclusion remain intact
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SUPPORTING-SOURCE-READING.3` | `pending` | After clean .1.19, independently reconcile all five required ranges/three reading commits, historical omissions and seven repair roots; route startup .3.8 with applicable closeout proof. |
+| 1 | `SUPPORTING-SOURCE-READING.2.6` | `pending` | Await explicit scoped before-reading/focused disposition for the verified one-file checker correction and formal reading parent closeout; exact proposal is committed under .3. |
 
 ## Reading Ledger
 

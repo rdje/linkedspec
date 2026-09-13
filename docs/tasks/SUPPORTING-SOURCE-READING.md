@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `SUPPORTING-SOURCE-READING`
-- Status: `active` / one historical and all three current grammar groups read; seventeen superseded; independent closeout pending
+- Status: `active` / all required reading independently audited; seven repairs open; scoped checker/parent-closeout disposition pending
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.7`
 - Created: `2026-09-13`
 - Last updated: `2026-09-13`
@@ -61,7 +61,7 @@ from runtime signoff. Existing startup and backend repairs remain open.
   Dependencies: Startup .3.7.0 decomposition committed; clean activation for every child.
   Children: `.1.1-.1.21`
   Acceptance: Each required child records exact Required reading scope coverage, comprehension, Knowledge reconciliation, owned findings, focused proof and clean commit. Seventeen superseded groups and excluded intervals of mixed groups receive no reading credit; original Scope/digests remain exact.
-  Verification: Required .1.17-.1.19 reading is complete: three files/five ranges/629 fragments/96781 bytes, independent reconciliation pending .3. Historical .1.1, seventeen omissions, every original Scope/digest and all seven repair roots remain distinct and preserved.
+  Verification: Required .1.17-.1.19 reading and independent .3 audit are complete: three files/five ranges/629 fragments/96781 bytes. Formal parent closure awaits the proposed scoped verification disposition. Historical .1.1, seventeen omissions, every original Scope/digest and all seven repair roots remain distinct and preserved.
   Commit: `pending`
 
 - ID: `SUPPORTING-SOURCE-READING.1.1`
@@ -415,9 +415,9 @@ from runtime signoff. Existing startup and backend repairs remain open.
   Goal: Reconcile the task partition checker with the canonical approved task-evidence capacity and prevent silent duplicate-limit drift.
   Intake owner: .1.18 commit verification; normal hooks reject the complete candidate before any commit lands.
   Evidence: scripts/check_task_tree_partitions.pl hardcodes 88000 lines/9437184 bytes; doctrine/readme_stability/routes.jsonl and ADR0118 record 92000 lines/10485760 bytes. The self-tests repeat the old constants, so they pass while the collection rejects. TASK-TREE-METADATA and README-STABILITY fail; seven other doctrines pass. No hook bypass or source repair is performed.
-  Dependencies: Current .1.18 remains uncommitted and owns bounded read-only diagnosis/proposal; no task-tree pivot. Prior ADR0118 before-reading/focused exception explicitly covered .14 and eleven registry scalars only, not this checker correction. Retain those prerequisites; no immediate exception is requested. Consolidating implementation and focused verification into the same bounded repair leaf removes redundant task scaffolding while preserving every criterion and allows .1.18 to remain within both current controls.
+  Dependencies: Startup .3/.4/.5 and canonical infrastructure proof ordinarily apply. Completed .3 audit publishes a new exact proposal for this correction before remaining reading with focused verification; await explicit director disposition. Prior ADR0118 .14-only exception is not extended. Keep the tree clean before activating this correction.
   Acceptance: Keep every approved ceiling and source/history record; align duplicate enforcement and add registry-agreement recurrence, inclusive/overflow controls and all normal doctrine proof. Exact checker/registry reproduction lives in docs/knowledge/task-partition-capacity-registry-drift.md. No new limit increase or dependency rebuild is proposed.
-  Verification: Confirmed duplicate-limit defect; ordinary reading closeout retains both gates and the approved registry limits. Repair follows startup prerequisites.
+  Verification: Confirmed open; exact one-file proposed correction passes Perl syntax,37 internal checks and50 detached registry cases, including RED original/GREEN proposed authority agreement. Production script and all registry limits remain unchanged. Proposed patch/source hashes and exact replay live in task-partition-capacity-registry-drift; no applied fix or canonical receipt is claimed.
   Commit: `pending`
 
 - ID: `SUPPORTING-SOURCE-READING.2.7`
@@ -430,12 +430,16 @@ from runtime signoff. Existing startup and backend repairs remain open.
   Commit: `pending`
 
 - ID: `SUPPORTING-SOURCE-READING.3`
-  Status: `pending`
-  Goal: Independently reconcile all supporting-source reading evidence and route the next startup lane.
+  Status: `done`
+  Activation commit: `51fa104fe3b8cff023bb9272e17e4f2a222f9ecf`.
+  Verification tier: `focused`
+  Focused checks: Independent original/required/historical coverage and reading-commit/source/repair reconciliation; exact current capacity and checker proposal controls; preservation, Knowledge, memory, histories, book and normal doctrines.
+  Canonical trigger: Ordinary read-only audit/proposal leaf; no reading parent closes. Parent closeout and checker implementation remain pending their existing verification/prerequisite requirements. No production source, registry or gate changes.
+  Goal: Independently reconcile all supporting-source reading evidence and route the next required action; preserve separate formal parent-closeout requirements.
   Dependencies: Required .1.17-.1.19 reading children committed; .0/.4 scope dispositions committed; every finding repair-owned.
   Acceptance: Audit all original baseline/current bytes by required reading, completed historical reading or explicit omission; reconstruct exact Required reading scope coverage, comprehension and commits/activations. Preserve repairs, applicable closeout verification and later startup obligations; omitted bytes receive no reading credit.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Independent exact committed-source/original-scope audit passes: 158 files/174 original ranges; required629/96781, historical1500/61165, omitted23484/806310 fragments/bytes; three activation-correct reading commits/five required ranges/nineteen windows and seven open roots/ten pending repair nodes. The exact one-file .2.6 proposal preserves registry limits and passes syntax,37 self-tests and50 isolated registry cases; the unchanged original fails four registry-agreement checks. Canonical audit/proposal and replays: supporting-reading-closeout-audit and task-partition-capacity-registry-drift Knowledge cards. No parent is closed, code changed or approval assumed. Preserve2482 prior files byte-exact, earlier evidence in three updated cards,2624/2628 prior task nodes and all94 book limitation headings; four intended current owner/audit nodes change, no new ID. Three published recipes and the exact patch match tested scratch. Knowledge1144/9127; memory60; histories421/41938 and351/40865 lines/bytes. Rendered book and task metadata pass at104 files/87995 lines/9380030 bytes before this result annotation; normal doctrines govern audit-only landing.
+  Commit: `SUPPORTING-SOURCE-READING.3 - independently audit reading and prepare bounded unblock proposal`
 
 - ID: `SUPPORTING-SOURCE-READING.4`
   Status: `done`
@@ -456,10 +460,11 @@ from runtime signoff. Existing startup and backend repairs remain open.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SUPPORTING-SOURCE-READING.3` | `pending` | After clean .1.19, independently reconcile all five required ranges/three reading commits, historical omissions and seven repair roots; route startup .3.8 with applicable closeout proof. |
+| 1 | `SUPPORTING-SOURCE-READING.2.6` | `pending` | Await explicit scoped before-reading/focused disposition for the verified one-file checker correction and formal reading parent closeout; exact proposal is committed under .3. |
 
 ## Decisions
 
+- `2026-09-13` .3: Prepare the exact two-action proposal before asking: .2.6 checker correction before remaining reading with focused proof; supporting .1/startup .3.7 read-only parent closeout with focused proof. Existing ceilings and all later requirements remain.
 - `2026-09-13` director asks whether spec.spec remains relevant: current source still loads it as a comparison parser and maintains canonical fixtures. Retain its self-description/grammar-evolution role under existing ADR0012; the primary Perl bootstrap plus dedicated function grammar remain distinct. The engineer recommends verified coverage and repairs for measured drift rather than treating policy alone as completeness proof. No removal, primary-parser migration or activity pivot is requested. The director replies “ok”, accepting this retained, verified self-description role.
 
 - `2026-09-13` .4: The director explains the historical spec/optional Lispish configuration/separate Perl AST-consumer flow and explicitly prioritizes current LinkedSpec. Retain current grammar dependencies, fixtures/tests and all repairs; omit irrelevant manual historical reading. No legacy application restoration is authorized or required.
@@ -478,6 +483,7 @@ from runtime signoff. Existing startup and backend repairs remain open.
 
 ## Verification Log
 
+- `2026-09-13` .3: Independent committed coverage/source/repair audit and exact proposed-checker syntax/37+50 controls pass; no parent closure or production change.
 - `2026-09-13` .1.19: Supporting .1.19 reads two complete windows/255 fragments/8134 bytes and finishes user_function_definition.spec. All three required grammar groups are physically read: five ranges/629 fragments/96781 bytes. The unchanged dedicated AST fixture passes 44 assertions; six exact signature/body/payload/job controls pass. Four matched body comparisons confirm the July self-hosted regex-brace truncation finding; new .2.7 owns its repair, while the older zero-argument audit is linked to .2.3.2. Six grammar/literal repair roots with eight repair leaves and the separate checker owner .2.6 remain open. All original sources, exclusions and earlier repair evidence remain; next .3 independently reconciles supporting reading and routes startup continuation.
 
 - `2026-09-13` .1.18: Supporting .1.18 completes ten windows/two required ranges: 195 fragments/62203 bytes, finishing spec.spec and reading user_function_definition.spec1–115. Six function comparisons, fourteen edge AST cases, ten mechanism AST cases, three selection comparisons and three literal controls establish five grammar/literal repair roots with seven concrete repair leaves: typed self-description, attached blocks, optional captures, Perl literal fidelity and lifecycle precedence. Primary typed functions remain registered; no repair is closed. Two of three required grammar groups are read (374 fragments/88647 bytes); .1.19 retains 255 fragments/8134 bytes. Historical exclusions, all original sources/tests and earlier repair owners remain intact. Next .1.19 finishes the dedicated function grammar.
@@ -494,6 +500,7 @@ from runtime signoff. Existing startup and backend repairs remain open.
 
 ## Commit Log
 
+- `2026-09-13` .3: `SUPPORTING-SOURCE-READING.3 - independently audit reading and prepare bounded unblock proposal`; activation 51fa104fe3b8cff023bb9272e17e4f2a222f9ecf; scoped disposition remains pending after clean audit landing.
 - `2026-09-13` .1.19: `SUPPORTING-SOURCE-READING.1.19 - complete dedicated function grammar reading and reconcile body fidelity`; activation 7a3f0b8aa1e649d74be405e822eb462227eb26be; next .3 after focused proof, empty brief and clean handoff.
 
 - `2026-09-13` .1.18: `SUPPORTING-SOURCE-READING.1.18 - audit self-hosted grammar fidelity and own five repairs`; activation cf36237dccb500dc8a39c21786c484f0a9ee679b; next .1.19 after focused proof, empty brief and clean handoff.
@@ -510,6 +517,7 @@ from runtime signoff. Existing startup and backend repairs remain open.
 
 ## Changelog
 
+- `2026-09-13` .3: Complete independent supporting audit and publish exact blocker correction/proof; keep all source/history and seven repair roots.
 - `2026-09-13` .1.19: Complete the three current grammar groups, preserve historical scope and give the earlier self-hosted regex-body defect a concrete repair owner; no source change or defect closure.
 
 - `2026-09-13` .1.18: Complete self-hosted grammar reading, root-cause five fidelity defects and own seven concrete implementation-and-verification leaves; retain source, historical evidence and every earlier repair.

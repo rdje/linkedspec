@@ -10,6 +10,12 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-13 — SUPPORTING-SOURCE-READING.3 — independent supporting audit and bounded unblock proposal
+
+Supporting .3 independently reconciles all158 original files/174 ranges: required current reading629 fragments/96781 bytes, historical reading1500/61165 and explicit omissions23484/806310. Three reading commits/five required ranges/nineteen windows match exact activations and unchanged source. All seven repair roots/ten pending nodes remain. The task checker still uses88000 lines/9437184 bytes versus the registry92000/10485760; a one-file correction passes syntax,37 internal checks and50 detached registry cases. The audit/proposal is complete; checker implementation and formal supporting/startup .3.7 parent closure await a new scoped before-reading/focused-verification disposition. No code, limit, dependency or runtime change is made.
+
+Verification: independent committed coverage/activation/source/repair audit; exact draft extraction, syntax and original/proposed37+50 controls; preservation, Knowledge, memory, histories, rendered book and ordinary doctrine hooks. This commits the audit/proposal, not a parent closeout, source fix or canonical receipt.
+
 ## 2026-09-13 — SUPPORTING-SOURCE-READING.1.19 — required grammar reading complete; independent closeout remains
 
 Supporting .1.19 reads two complete windows/255 fragments/8134 bytes and finishes user_function_definition.spec. All three required grammar groups are physically read: five ranges/629 fragments/96781 bytes. The unchanged dedicated AST fixture passes 44 assertions; six exact signature/body/payload/job controls pass. Four matched body comparisons confirm the July self-hosted regex-brace truncation finding; new .2.7 owns its repair, while the older zero-argument audit is linked to .2.3.2. Six grammar/literal repair roots with eight repair leaves and the separate checker owner .2.6 remain open. All original sources, exclusions and earlier repair evidence remain; next .3 independently reconciles supporting reading and routes startup continuation.
