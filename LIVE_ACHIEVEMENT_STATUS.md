@@ -5,19 +5,21 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Perl, Rust, Dart and Julia reading are complete. Canonical capacity admission is complete at a67a18bf. Conformance .1.19 reads 3 complete windows, 1,500 fragments and 14,848 baseline-identical bytes. Physical reading is 19/143: 22,931 fragments, 936,817 bytes and 51 complete files. Lowercase reading covers the remaining Latin extended rows in this range, identity ligatures, fullwidth Latin pairs and supplementary scalar mappings. Sparse ranges and non-adjacent targets remain explicit. Unchanged offline Unicode proof is retained. Next .1.20 owns the crossing 10D5B entry and continuation; all runtime repairs remain open. Dart reading is 55/55 children, 80,297 fragments / 2,471,305 bytes. Dart .7 is approved: containment .11 / ADR0113 implement the exact engineering-history counts with fresh source/history and 22-boundary proof; the director granted a one-time focused/receipt exception on September 11, closing the capacity boundary at ad64f76f before .1.47. The director requires build-on-update PGEN/RGX reuse under .80. Remaining reading and repairs stay open.
+  findings, and donor-policy comparisons. Perl, Rust, Dart and Julia reading are complete. Canonical capacity admission is complete at a67a18bf. Conformance .1.20 reads 3 complete windows, 1,500 fragments and 14,781 baseline-identical bytes. Physical reading is 20/143: 24,431 fragments, 951,598 bytes and 51 complete files. The complete lowercase mapping array is read, and uppercase reading reaches the closed 016F-to-016E entry. Uppercase expansions preserve ordered scalar sequences rather than reversing lowercase mappings. The Unicode reading card now retains one bounded current checkpoint; earlier exact evidence remains in Git and its task leaves. Unchanged offline Unicode proof is retained. Next .1.21 owns subsequent uppercase entries; all runtime repairs remain open. Dart reading is 55/55 children, 80,297 fragments / 2,471,305 bytes. Dart .7 is approved: containment .11 / ADR0113 implement the exact engineering-history counts with fresh source/history and 22-boundary proof; the director granted a one-time focused/receipt exception on September 11, closing the capacity boundary at ad64f76f before .1.47. The director requires build-on-update PGEN/RGX reuse under .80. Remaining reading and repairs stay open.
 - Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.82` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `CONFORMANCE-SOURCE-READING.1.19 - read fullwidth and supplementary lowercase mappings` — Conformance .1.19 reads 3 complete windows, 1,500 fragments and 14,848 baseline-identical bytes. Physical reading is 19/143: 22,931 fragments, 936,817 bytes and 51 complete files. Lowercase reading covers the remaining Latin extended rows in this range, identity ligatures, fullwidth Latin pairs and supplementary scalar mappings. Sparse ranges and non-adjacent targets remain explicit. Unchanged offline Unicode proof is retained. Next .1.20 owns the crossing 10D5B entry and continuation; all runtime repairs remain open.
+- `CONFORMANCE-SOURCE-READING.1.20 - complete lowercase array and read uppercase prefix` — Conformance .1.20 reads 3 complete windows, 1,500 fragments and 14,781 baseline-identical bytes. Physical reading is 20/143: 24,431 fragments, 951,598 bytes and 51 complete files. The complete lowercase mapping array is read, and uppercase reading reaches the closed 016F-to-016E entry. Uppercase expansions preserve ordered scalar sequences rather than reversing lowercase mappings. The Unicode reading card now retains one bounded current checkpoint; earlier exact evidence remains in Git and its task leaves. Unchanged offline Unicode proof is retained. Next .1.21 owns subsequent uppercase entries; all runtime repairs remain open.
 
 ## Next Action
 
-- `CONFORMANCE-SOURCE-READING.1.20` — Read CONFORMANCE-SOURCE-READING.1.20 from clean HEAD: `capability_conformance/unicode_case_contract.json` lines 8639-10138. Total 1,500 fragments/14,781 bytes. Read every bounded window, preserve crossing mapping ownership, retain unchanged generated-data proof proportionately, update live records/book and commit before .1.21. Continue PNT.
+- `CONFORMANCE-SOURCE-READING.1.21` — Read CONFORMANCE-SOURCE-READING.1.21 from clean HEAD: `capability_conformance/unicode_case_contract.json` lines 10139-11638. Total 1,500 fragments/14,528 bytes. Read every bounded window, preserve crossing mapping ownership, retain unchanged generated-data proof proportionately, update live records/book and commit before .1.22. Continue PNT.
 
 ## Recent Completions
+
+- `2026-09-13` — `CONFORMANCE-SOURCE-READING.1.20` reads 3 windows/1500 fragments/14781 bytes; 51 files complete. Unchanged generated-data proof retained; next .1.21.
 
 - `2026-09-13` — `CONFORMANCE-SOURCE-READING.1.19` reads 3 windows/1500 fragments/14848 bytes; 51 files complete. Unchanged generated-data proof retained; next .1.20.
 
@@ -48,8 +50,6 @@
 - `2026-09-13` — `CONFORMANCE-SOURCE-READING.1.6` reads12 windows/1500 fragments/63045 bytes;25 files complete. Transport error layers and payload identity reconcile to canonical facts; next .1.7.
 
 - `2026-09-13` — `CONFORMANCE-SOURCE-READING.1.5` reads11 windows/13 presentations/690 fragments/65516 bytes;21 files complete and frames1-12 read. MCP35/10/10/76 and admission5/5+6/6/141 pass; next .1.6.
-
-- `2026-09-13` — `CONFORMANCE-SOURCE-READING.1.4` reads 13 windows/1022 fragments/65375 bytes; 19 files complete and map1-33 read. Logical/capability/mutation checks pass; exact change-history rollover; next .1.5.
 
 ## History
 

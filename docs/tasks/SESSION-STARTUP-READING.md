@@ -2299,7 +2299,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Status: `active`
   Goal: Split and read all 160 entries under capability_conformance, cli_conformance, t, tests, and unicode_case.
   Children: `.3.8.0` owns exact decomposition; `CONFORMANCE-SOURCE-READING.1` owns all143 reading groups; .2 findings and .3 independent closeout stay separate.
-  Reading owner: `docs/tasks/CONFORMANCE-SOURCE-READING.md`; .3.8.0 preserves143 groups/302 exact ranges over160 baseline-identical inputs. Physical reading19/143: cumulative22931 fragments/936817 bytes,51 complete files and Unicode-case1-8638. Prior unchanged Unicode generation proof remains scoped; .1.20 owns the continuation. All repairs/prerequisites remain.
+  Reading owner: `docs/tasks/CONFORMANCE-SOURCE-READING.md`; .3.8.0 preserves143 groups/302 exact ranges over160 baseline-identical inputs. Physical reading20/143: cumulative24431 fragments/951598 bytes,51 complete files and Unicode-case1-10138. Prior unchanged Unicode generation proof remains scoped; .1.21 owns the continuation. All repairs/prerequisites remain.
   Acceptance: Include phase0, neutral contracts, fixtures, generators, and four explicitly decoded pinned Unicode
     inputs. Keep generated/fixture bytes in scope; count neither a hash nor enumeration as full reading.
   Verification: `pending`
@@ -4641,7 +4641,7 @@ startup implementation prerequisites and the rgx reading exclusion remain intact
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.20` | `pending` | `capability_conformance/unicode_case_contract.json` lines 8639-10138; 1500 fragments/14781 bytes. Preserve complete bounded windows, source identity and all repairs. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.21` | `pending` | `capability_conformance/unicode_case_contract.json` lines 10139-11638; 1500 fragments/14528 bytes. Preserve complete bounded windows, source identity and all repairs. |
 
 ## Reading Ledger
 

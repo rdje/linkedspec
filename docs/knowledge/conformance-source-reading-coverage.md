@@ -9,7 +9,7 @@ answers:
   - "how do I verify conformance reading source and range coverage"
   - "which conformance source reading file has the longest line"
 date: 2026-09-13
-status: exact decomposition preserved; physical reading 19/143, 51 files complete and 124 groups remain
+status: exact decomposition preserved; physical reading 20/143, 51 files complete and 123 groups remain
 tags: [reading, conformance, tests, unicode, continuity, CONFORMANCE-SOURCE-READING]
 evidence: "Startup .3.8.0 independently accounts for160 baseline-identical files,5,422,313 stored bytes and8,257,059 decoded bytes in167,606 line fragments/167,604 LF delimiters. Four gzip inputs contribute54,500 decoded lines. All143 groups/302 ranges are contiguous, disjoint and bounded at1500 fragments/65536 bytes. No source, registry or runtime behavior changes; no physical-reading credit from inventory."
 reverify: "Run CONFORMANCE_SOURCE_READING_COVERAGE below through the project-data wrapper; it derives source identity from Git and range ownership from the task-tree rather than a parallel manifest. Use scripts/check_task_tree_metadata.sh for actual task collection limits."
@@ -397,52 +397,20 @@ convergence. Offline byte equality grants no reading credit for later mappings,
 properties, context rules, fixtures or decoded upstream inputs. All repairs remain.
 
 
-## September 13 Unicode reading .1.15
+## Unicode reading checkpoint
 
-`CONFORMANCE-SOURCE-READING.1.15` reads 3 windows, 1,500 fragments and 14,500 bytes.
-Cumulative reading is15/143,16,931 fragments,878,469 bytes and51 complete files.
-The lower-table prefix now reaches line2638, through the0522-to0523 value.
-Latin/Greek/Cyrillic entries preserve exact scalar sequences; ordinary03A3-to03C3
-coexists with the separate Final Sigma rule. [[unicode-17-case-contract-data]]
-retains the unchanged704e261b offline proof; [[six-variant-unicode-17-case-parity]]
-retains native admission history. Later arrays and all repairs remain owned.
+`CONFORMANCE-SOURCE-READING.1.20` reads 3 windows, 1,500 fragments and 14,781 bytes.
+Cumulative reading is 20/143, 24,431 fragments, 951,598 bytes and 51 complete files.
+The lower mapping array closes at line 9439; upper reading reaches 016F-to-016E
+at line 10138. Ordered expansions include 00DF-to-0053+0053 and 0149-to-02BC+004E.
+Uppercase is not the inverse of lowercase. Unchanged Unicode proof remains at
+704e261b; unread arrays and all runtime repairs remain owned.
 
-
-## September 13 Unicode reading .1.16
-
-`CONFORMANCE-SOURCE-READING.1.16` reads 3 windows, 1,500 fragments and 14,500 bytes.
-Cumulative reading is 16/143, 18,431 fragments, 892,969 bytes and 51 complete files.
-Armenian, Georgian and Cherokee rows use their exact authored target ranges; sparse
-entries do not authorize a universal offset. Latin additional reading reaches the
-1E3E-to-1E3F value at line 4138. Unchanged Unicode proof remains at 704e261b;
-[[unicode-17-case-contract-data]] separates current generated data from native history.
-
-
-## September 13 Unicode reading .1.17
-
-`CONFORMANCE-SOURCE-READING.1.17` reads 3 windows, 1,500 fragments and 14,500 bytes.
-Cumulative reading is 17/143, 19,931 fragments, 907,469 bytes and 51 complete files.
-Latin additional and Greek extended rows preserve identity entries, titlecase
-convergence and exact scalar results. Letterlike 212A maps to 006B and 212B to 00E5
-through casing; this does not imply normalization or invertibility. The 2160-to-2170
-value at line 5638 crosses into .1.18. Unchanged Unicode proof remains at 704e261b.
-
-
-## September 13 Unicode reading .1.18
-
-`CONFORMANCE-SOURCE-READING.1.18` reads 3 windows, 1,500 fragments and 14,500 bytes.
-Cumulative reading is 18/143, 21,431 fragments, 921,969 bytes and 51 complete files.
-Numeral and circled-letter casing preserves encoded forms; Glagolitic, Coptic and
-Cyrillic rows retain exact sparse ranges. Latin examples include A77D-to-1D79 and
-A78D-to-0265. The A79E-to-A79F value at line 7138 crosses into .1.19.
-Unchanged generated-data proof remains at 704e261b; all runtime repairs remain owned.
-
-
-## September 13 Unicode reading .1.19
-
-`CONFORMANCE-SOURCE-READING.1.19` reads 3 windows, 1,500 fragments and 14,848 bytes.
-Cumulative reading is 19/143, 22,931 fragments, 936,817 bytes and 51 complete files.
-Fullwidth lower mappings preserve width and lower ligature rows preserve identity.
-Supplementary values remain complete scalars, with exact sparse ranges and targets.
-The 10D5B-to-10D7B value at line 8638 crosses into .1.20.
-Unchanged generated-data proof remains at 704e261b; all runtime repairs remain owned.
+Lowercase table entries and Final Sigma context remain separate. Exact scalar
+sequences, sparse ranges, fullwidth forms and ligature identities are preserved;
+none of these imply normalization or reversible casing. Native admission proof
+remains separately scoped by [[six-variant-unicode-17-case-parity]].
+Earlier checkpoints retain exact task ownership in CONFORMANCE-SOURCE-READING.1.15-.1.19.
+Their exact former card wording is available with
+`git show 978ed9f903dee68026a35ce5885035dc9bc0541d:docs/knowledge/conformance-source-reading-coverage.md`.
+Update this current checkpoint in place; do not append per-leaf reading chronology.
