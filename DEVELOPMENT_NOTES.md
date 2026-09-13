@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-13 — Bound package proof and preserve historical cursor evidence
+
+- Select only complete groups451-1939 with the original preamble1-199; all36 pass on both installed hosts without claiming later package groups or a full local gate.
+- Corpus validation precedes selection; per-fixture failures remain records, while full105 execution passes through both library and runner with exact wrapped output.
+- Core endpoint6/6 is the current test expectation, corrected by September4 write-vivification commit7ed47a0a11; the earlier1/1 admission remains dated evidence.
+- LUA-STARTUP-READING.1.38 records exact scope and replay in docs/knowledge/lua-package-pipeline-corpus-frontend-reading.md; current CLI/count/module guidance joins .2.1 and all prior runtime limitations stay open.
+
 ## 2026-09-13 — Distinguish fresh generated execution from package-prefix proof
 
 - The generated-v2 consumer checks all ten family policies, native/generated outcomes and deterministic emitted bytes; its independent child runs direct/traced execution and typed load failures.

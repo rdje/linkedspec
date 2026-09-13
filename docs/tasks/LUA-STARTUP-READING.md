@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `LUA-STARTUP-READING`
-- Status: `active` / approved capacity; source reading 37/51
+- Status: `active` / approved capacity; source reading 38/51
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.6`
 - Created: `2026-09-12`
 - Last updated: `2026-09-13`
@@ -45,7 +45,7 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
 - Ordered range SHA-256: `81c58b8319def28af518fb134a3787513fe746f0f0f73bcacb0e20b9ede1c9d6`.
 - Child-summary SHA-256: `f56ecac262800bd3cc1e6bba0cc25bfe22f095c3dfee41f1c6595d4200145290`.
 - Coordinates are one-based inclusive LF physical lines or absolute file bytes; both byte windows decode as UTF-8.
-- Current physical reading: 37/51 children, 51,151/71,269 fragments and 1,912,415/2,732,450 bytes.
+- Current physical reading: 38/51 children, 52,643/71,269 fragments and 1,977,898/2,732,450 bytes.
 - Exact independent replay and capacity evidence: `docs/knowledge/lua-startup-reading-coverage.md`.
 
 ## Task Tree
@@ -639,14 +639,18 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
   Commit: `LUA-STARTUP-READING.1.37 - complete cursor consumers and read package test prefix`.
 
 - ID: `LUA-STARTUP-READING.1.38`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `55f61211631bf713af833087c0fccd0fd8fa3dfa`.
+  Verification tier: `focused`
+  Focused checks: Exact bounded source/baseline reading; package CLI, JSON, resolution and subsequent owned groups reconciled with Knowledge; execute only complete read groups; directly relevant neutral evidence, memory, Knowledge, history, book and normal doctrines.
+  Canonical trigger: Ordinary package-test reading and bounded repair intake; no production change. Existing runtime/native-error limitations remain explicit; later closeout and push retain canonical prerequisites.
   Goal: Read and understand group 38: run.lua.
   Scope: `lua/test/run.lua` lines 464-1955
   Baseline evidence: 1492 fragments / 65483 bytes; ordered range SHA-256 `53217793de0f5e01e545e422435ded9aa1f395fd8c3cda097625283c92b324c7`.
   Dependencies: .1.37 committed with clean handoff.
   Acceptance: Read every scoped byte without truncation; record comprehension, Knowledge and repair reconciliation, focused proof and a clean per-leaf commit.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Lua .1.38 reads package lines 464-1955 in eight complete windows: 1,492 fragments /65,483 bytes; cumulative 38/51, 52,643 fragments /1,977,898 bytes. All 99 Lua sources remain baseline-identical; 77 files are fully read. Both installed hosts pass 36 complete selected package groups each, 72 total, including all 105 corpus cases through the library and developer runner. Native resolution, trace identity, strict IO, AST roundtrips and frontend parsing pass. Existing .2.1 gains exact stale CLI/status/core-endpoint guidance; no new repair node. All thirty-three repair roots and earlier failures remain open. Next .1.39 reads package lines 1956-3352; named arguments and startup/ADR0118 prerequisites remain unchanged. Exact evidence: docs/knowledge/lua-package-pipeline-corpus-frontend-reading.md.
+  Commit: `LUA-STARTUP-READING.1.38 - read package pipeline corpus and frontend tests`.
 
 - ID: `LUA-STARTUP-READING.1.39`
   Status: `pending`
@@ -812,6 +816,7 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
   Reading .1.34 extension: lua-progressive-span-dispatch-admission and lua-progressive-span-dispatch-carriers retain current pending-recurrence/public metadata despite the closed recomposition successor and fresh 9/9/116 plus public6/12/10/60. lua-recognition-transaction-integration retains a current 243-assertion consumer sentence, superseded by admitted 246 proof. lua-project-data-ssd-storage still describes a two-module build despite its current three-module oracle. Qualify these exact current-guidance statements while preserving their dated implementation counts and unchanged private interfaces.
   Reading .1.35 extension: lua-recursive-observation-admission metadata and final current guidance still leave public closeout pending despite the completed observation-specific and program-wide successors (fresh typed14/0/231, observation-public6/6/10). lua-root-rule-selection-routes still leaves final public .6 pending despite the completed five-backend successor and fresh root7/0/54/public24/18. Qualify these precise current-guidance statements while preserving dated milestones, supported-runtime limits and unchanged private/selection behavior.
   Reading .1.36 extension: lua-rule-local-cursor-descriptor current875 count is superseded by fresh912; its and lua-root-rule-selection-routes/outward-compiled-descriptor-four-backend-contract loaded byte-identity guidance must account for logical source IDs, and loaded proof uses its explicit fixtures rather than all36 family rows. lua-rule-local-cursor-admission final pending recurrence/public/root wording is superseded by closed neutral cursor8/0/60 and root7/0/54. The shared cursor-neutral card current65-case primary sentence is superseded by the exact current66-case manifest. Qualify these precise current statements, retaining dated counts and the already-owned descriptor generated-v1/outer-option qualification.
+  Reading .1.38 extension: lua-primary-cli-adapter, lua-primary-cli-recurring-admission and lua-primary-cli-no-drift-closeout retain unqualified current169/61 and pending-generated wording; the last also describes two native modules. Qualify against the already-recorded177/66 and current three-module owners, preserving dated milestones. lua-controlled-corpus-execution describes the permanent core endpoint as1/1; the current consumer locks6/6 after the September4 stale child-regex cursor evidence correction in write-vivification commit7ed47a0a11. Date the old endpoint with the historical admission card, and qualify lua-core-spec-parser final later-owner wording against implemented compilation/runtime/corpus/CLI. Existing corpus-scaffold, frontend-current-count and trace-writer corrections remain owned here; no runtime repair or historical-node rewrite follows from these documentation discrepancies.
   Acceptance: Remove the false current failure projection, distinguish historical counts from current guidance, preserve useful unique history through canonical pointers, and independently verify the resulting public wording and native command examples.
   Verification: `pending`
   Commit: `pending`
@@ -2105,7 +2110,7 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.1.38` | `pending` | Read the owned package-test lines 464-1955 after clean .1.37; preserve all repair owners, prior failures and parked named arguments. |
+| 1 | `LUA-STARTUP-READING.1.39` | `pending` | Read the owned package-test lines 1956-3352 after clean .1.38; preserve all repair owners, prior failures and parked named arguments. |
 
 ## Decisions
 
@@ -2123,9 +2128,11 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 ## Blockers
 
-- None for bounded Lua .1.38 reading after clean .1.37. Installed5.5 native/generated nil-error tests remain failed under .2.2; declared5.4 proof remains pending. The baseline public-selector failure is tracked under startup .28.7 and is not a passing gate. The finite ADR0118 allowance and each actual candidate remain checked; startup .80 and all later verification/repair prerequisites retain their owners.
+- None for bounded Lua .1.39 reading after clean .1.38. Installed5.5 native/generated nil-error tests remain failed under .2.2; declared5.4 proof remains pending. The baseline public-selector failure is tracked under startup .28.7 and is not a passing gate. The finite ADR0118 allowance and each actual candidate remain checked; startup .80 and all later verification/repair prerequisites retain their owners.
 
 ## Verification Log
+
+- `2026-09-13` .1.38: Lua .1.38 reads package lines 464-1955 in eight complete windows: 1,492 fragments /65,483 bytes; cumulative 38/51, 52,643 fragments /1,977,898 bytes. All 99 Lua sources remain baseline-identical; 77 files are fully read. Both installed hosts pass 36 complete selected package groups each, 72 total, including all 105 corpus cases through the library and developer runner. Native resolution, trace identity, strict IO, AST roundtrips and frontend parsing pass. Existing .2.1 gains exact stale CLI/status/core-endpoint guidance; no new repair node. All thirty-three repair roots and earlier failures remain open. Next .1.39 reads package lines 1956-3352; named arguments and startup/ADR0118 prerequisites remain unchanged.
 
 - `2026-09-13` .1.37: Lua .1.37 completes cursor-execution, generated-source, normalization and option-removal tests and reads package lines 1-463 in eleven complete windows: 1,500 fragments /59,736 bytes; cumulative 37/51, 51,151 fragments /1,912,415 bytes. All 99 Lua sources remain baseline-identical; 77 files are fully read. Both installed hosts pass 1,136 assertions: execution108, generated106, normalization258 and removal96 each, plus five complete package-prefix groups each. Fresh child processes verify generated-v2 execution and version-before-payload rejection; current generated ledger passes and prior cursor-neutral inputs remain exact. No new repair node or guidance extension; all thirty-three repair roots and earlier failures remain open. Next .1.38 reads package lines 464-1955; named arguments and startup/ADR0118 prerequisites remain unchanged.
 
@@ -2209,6 +2216,8 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 ## Commit Log
 
+- `2026-09-13` .1.38: `LUA-STARTUP-READING.1.38 - read package pipeline corpus and frontend tests`; activation 55f612116; next .1.39 after clean proof and empty brief.
+
 - `2026-09-13` .1.37: `LUA-STARTUP-READING.1.37 - complete cursor consumers and read package test prefix`; activation 968ebb99a; next .1.38 after clean proof and empty brief.
 
 - `2026-09-13` .1.36: `LUA-STARTUP-READING.1.36 - read root routes and rule-local cursor consumers`; activation 5e716ab1e; next .1.37 after clean proof and empty brief.
@@ -2290,6 +2299,8 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 - `SESSION-STARTUP-READING.3.6.0 - freeze exact Lua reading ownership and capacity intake` owns creation of this plan.
 
 ## Changelog
+
+- `2026-09-13` .1.38: Read complete package pipeline/corpus/frontend groups; verify selected dual-host execution and exact full105 library/runner results; extend existing guidance repair and preserve all other ownership.
 
 - `2026-09-13` .1.37: Complete cursor execution/generated/normalization/removal reading and the package prefix; verify fresh generated child execution and exact bounded package groups; preserve all repair ownership.
 

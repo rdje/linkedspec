@@ -329,12 +329,12 @@ step. `PARSER-AUTHORING-APIS.4` owns grammar/binding, definition choices,
 representation compatibility and bounded implementation planning; these four
 children remain unactivated and current startup reading continues.
 
-**Lua source reading is underway (37/51 groups):** the complete
+**Lua source reading is underway (38/51 groups):** the complete
 99-file inventory covers 71,268 physical lines and 2,732,450 bytes. Its 51 owned
 reading groups include generated tables, native adapters and both-ABI tests.
 Two UTF-8-safe byte windows retain an oversized generated MCP line, so the
 per-window total is 71,269 fragments. The independent range audit proves complete
-ownership. The first 37 groups physically read 51,151 fragments /1,912,415 bytes,
+ownership. The first 38 groups physically read 52,643 fragments /1,977,898 bytes,
 including the complete README, both commands, all three native C bindings, ActionIR
 constructors, call names, contracts, the complete parser, bounded authority,
 compiled state and corpus modules, facade, interpreter, JSON and matching. They
@@ -354,8 +354,8 @@ complete, as are stdio, progressive dispatch, storage and recognition transactio
 Recursive observation, repeated actions and root-selection admission are complete.
 Root core, root routes, cursor admission and cursor descriptor tests are complete.
 Cursor execution, generated source, normalization and option-removal tests are
-complete. The package runner is read through line 463. Seventy-seven files are
-fully read. The remaining 14 groups require
+complete. The package runner is read through line 1955, including pipeline, corpus,
+AST and parser tests. Seventy-seven files are fully read. The remaining 13 groups require
 their own reading and verified commits; source reading does not close the limitations below.
 
 **Lua Unicode casing and rule-label verification:** all property tables match the
@@ -527,8 +527,8 @@ The same reading slice performs the required change-history rollover. The retain
 249-line root and its new immutable segment reconstruct every pre-rollover byte
 with the original record separator; earlier history remains intact. This uses the existing bounded-history allowance.
 
-**Lua cursor completion and package-prefix verification:** both installed hosts
-pass 108 cursor-execution checks, 106 generated-source checks, 258 normalization
+**Lua cursor completion and package-prefix verification:** `.1.37` records these
+checks on both installed hosts: 108 cursor-execution checks, 106 generated-source checks, 258 normalization
 checks and 96 option-removal checks: 1,136 assertions. Five complete package-test
 groups also pass on each host. These are selected package groups, with the rest
 retaining its owned reading and verification work.
@@ -552,6 +552,37 @@ exact help and argument errors. The trace fixtures use healthy writers; earlier
 writer-failure limitations remain open. The neutral generated ledger passes its
 existing inventory checks; prior cursor-neutral inputs remain byte-identical.
 Exact scope and replay: `docs/knowledge/lua-cursor-completion-package-prefix-reading.md`.
+
+**Lua package pipeline, corpus and frontend verification:** 36 complete selected
+package groups pass on each installed host, 72 groups total. The selection uses
+the original preamble and complete groups at lines 451–1939; the next partially
+read validation helper remains outside this proof.
+
+Named, file and inline CLI routes preserve canonical JSON. Compilation precedes
+input-file loading. Native loading consumes all 14 name, nine resolution and four
+text-loading cases, preserves logical/path identity, and attributes parse,
+validation and compilation failures to their owning stages. One caller-owned trace
+emitter crosses construction and runtime with no hidden factory calls. Healthy
+writer fixtures verify ordered topics, balanced failures, unchanged descriptors
+and results, quiet output and filtering; earlier writer limitations remain open.
+
+Strict corpus validation precedes selection and rejects manifest/file drift.
+Controlled fixture failures remain records so later selected cases still run.
+The 40 core, six capability and 59 advanced/shipped windows pass with exact output
+and endpoints. A separate unselected library run and developer-runner child each
+pass all 105 cases on both hosts. Current core endpoints are 6/6; the earlier 1/1
+evidence predates the September 4 correction in commit `7ed47a0a11`.
+
+AST groups retain provenance and typed variants through JSON reconstruction.
+Parser groups cover inline headers, indexed/grouped edges, fluent continuations,
+physical statement boundaries and quoted braces. Every shipped source and each
+rule-only corpus fixture parses; direct rule parsing still rejects top-level
+function shells, while the automatic pipeline above handles them.
+
+This selected proof does not claim the entire package suite or primary matrix.
+Stale current CLI counts, module guidance and historical endpoint wording are
+owned by the existing documentation repair. Exact scope and replay:
+`docs/knowledge/lua-package-pipeline-corpus-frontend-reading.md`.
 
 **Known Lua invocation limitation — nested array members can disappear:** a
 caller-supplied tagged array with an extra member or a sparse tail is accepted,

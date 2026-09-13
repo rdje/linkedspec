@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-13 — Lua package pipeline, corpus and frontend reading
+
+- Read package464-1955 in eight complete windows: 1,492 fragments /65,483 bytes; cumulative 38/51 and 1,977,898 bytes.
+- Both installed hosts pass 36 complete selected package groups each, including full105 library and developer-runner execution.
+- Native resolution and pipeline trace preserve typed failures and source/result identity; strict IO, AST and frontend groups pass.
+- LUA-STARTUP-READING.1.38 extends only existing .2.1 stale guidance ownership, preserves all thirty-three repair roots and earlier failures, and hands off to .1.39.
+
 ## 2026-09-13 — Lua cursor completion and package-prefix reading
 
 - Read cursor-execution328-424, generated1-439, normalization1-225, option-removal1-276 and package1-463: 1,500 fragments /59,736 bytes; cumulative 37/51 and 1,912,415 bytes.

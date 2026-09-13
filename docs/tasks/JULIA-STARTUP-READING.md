@@ -1742,7 +1742,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.1.38` | `pending` | Read the owned package-test lines 464-1955 after clean .1.37; preserve all repair owners, prior failures and parked named arguments. |
+| 1 | `LUA-STARTUP-READING.1.39` | `pending` | Read the owned package-test lines 1956-3352 after clean .1.38; preserve all repair owners, prior failures and parked named arguments. |
 
 ## Decisions
 
