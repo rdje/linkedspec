@@ -9,7 +9,7 @@ answers:
   - "how do I verify conformance reading source and range coverage"
   - "which conformance source reading file has the longest line"
 date: 2026-09-13
-status: exact decomposition preserved; physical reading 12/143, forty-eight files complete and131 groups remain
+status: exact decomposition preserved; physical reading 13/143, fifty files complete and130 groups remain
 tags: [reading, conformance, tests, unicode, continuity, CONFORMANCE-SOURCE-READING]
 evidence: "Startup .3.8.0 independently accounts for160 baseline-identical files,5,422,313 stored bytes and8,257,059 decoded bytes in167,606 line fragments/167,604 LF delimiters. Four gzip inputs contribute54,500 decoded lines. All143 groups/302 ranges are contiguous, disjoint and bounded at1500 fragments/65536 bytes. No source, registry or runtime behavior changes; no physical-reading credit from inventory."
 reverify: "Run CONFORMANCE_SOURCE_READING_COVERAGE below through the project-data wrapper; it derives source identity from Git and range ownership from the task-tree rather than a parallel manifest. Use scripts/check_task_tree_metadata.sh for actual task collection limits."
@@ -364,3 +364,19 @@ as caller preparation for general v2. [[staged-ast-enrichment-recurring-gate]] a
 [[general-staged-ast-enrichment-recomposition]] own existing runtime admissions.
 Focused neutral/public checks do not close known resource or backend defects.
 The remaining ownership/public records belong to `.1.13`; no source changes.
+
+
+## September 13 lifecycle and typed-source reading
+
+`.1.13` reads 11 windows, 841 fragments and 65,510 baseline-identical bytes.
+Staged enrichment and lifecycle contracts reach EOF; typed source1–452 stops
+inside recursive-observation public assertions. Cumulative reading is13/143,
+13,931 fragments,830,637 bytes and50 complete files. [[standalone-lifecycle-block-audit]]
+owns normalization, duplicate order, earlier brace ownership and inert legacy
+plain nodes; its Rust/Dart/Julia annotations limit emitted and malformed proof.
+[[typed-source-location-neutral-contract-plan]] now labels its75-mutation envelope
+and ordered admissions as historical; current14/0/231 and internal value boundaries
+remain explicit. Positions/spans, invocation-local state, one-terminal transactions
+and detached observations retain distinct roles. The92-helper/7-alias/2-internal-ID
+map and33 diagnostics are read; the public assertion suffix remains `.1.14`-owned.
+Existing lexical/resource/runtime repairs are unchanged; no native matrix is claimed.

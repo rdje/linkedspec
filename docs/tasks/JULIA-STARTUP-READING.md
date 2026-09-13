@@ -1742,7 +1742,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.13` | `pending` | Read staged-enrichment997-1136, standalone lifecycle1-249 and typed-source1-452:841 fragments/65510 bytes. Preserve bounded windows, crossing ownership and all repairs. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.14` | `pending` | Read typed-source453-814 and Unicode-case1-1138:1500 fragments/33332 bytes. Preserve bounded windows, crossing rollout ownership and all repairs. |
 
 ## Decisions
 

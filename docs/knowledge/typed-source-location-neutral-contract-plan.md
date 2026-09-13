@@ -58,6 +58,18 @@ The first executable artifact is
 `tools/run_python_project_data.sh`. Recurring composition calls that exact route from one repository-managed driver;
 neither path uses off-volume scratch.
 
+## Current boundary and historical rollout
+
+Current governance is 14 complete / 0 pending / 231 mutations. The private
+recursive-observation spelling and its public documentation are current across
+six runtimes; Position and Span remain internal values, with no new facade,
+schema, semantic/MCP or CLI admission. See the current executable contract.
+
+The envelope and ordered implementation narrative below preserve their dated
+checkpoints. Their 75-mutation count and future/private admission labels describe
+those milestones, not the completed current rollout. Reading `.1.13` verifies
+the contract through line452; later public assertions retain the next reading owner.
+
 The frozen neutral envelope has three decoded sources, seven position conversions, six direct spans, three derived
 text/provenance cases, eight invocation-state transitions, eight transaction transitions, 33 recursive-observation
 transitions, six detached recursive-observation cases, four structural-authoring cases, 92 canonical helper

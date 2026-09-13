@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `CONFORMANCE-SOURCE-READING`
-- Status: `active` / exact decomposition; physical reading 12/143
+- Status: `active` / exact decomposition; physical reading 13/143
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.8`
 - Created: `2026-09-13`
 - Last updated: `2026-09-13`
@@ -257,14 +257,22 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
   Commit: `CONFORMANCE-SOURCE-READING.1.12 - read staged enrichment scheduling and policy boundaries`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.13`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `a7b6ba42d639c970420fd14bf9ac03823e4b2571`.
+  Verification tier: `focused`
+  Focused checks: Read exact baseline-identical scoped windows; reconcile canonical Knowledge and proportionate proof, preserve source/task/history, and verify memory, book and normal doctrines.
+  Canonical trigger: Ordinary bounded source-reading leaf; no source or public-contract change, admission or parent closeout. Later prerequisites remain.
+  Closeout assembly repair: The first scratch closeout matched the live-status insertion instead of the book insertion and omitted five live owners. Before any commit or gate, the exact12 generated file changes were restored from clean a7b6ba42; this active leaf and completed reading evidence remain owned here. The selector now starts at the book owner, and the rebuilt candidate must update all17 expected files before preservation and focused proof.
   Goal: Read and understand conformance/test/Unicode group 13.
   Scope: `capability_conformance/staged_ast_enrichment_contract.json` lines 997-1136; `capability_conformance/standalone_lifecycle_block_contract.json` lines 1-249; `capability_conformance/typed_source_location_contract.json` lines 1-452
   Baseline evidence: 841 fragments / 65510 decoded bytes; ordered range SHA-256 `6f5ec2d872aecad8afdfe7fba6ac2c9996f67e0c121078103c767084cffdeaf6`.
   Dependencies: .1.12 committed with clean handoff.
   Acceptance: Read every scoped byte in complete bounded windows; retain source identity, exact comprehension, canonical Knowledge reconciliation, concrete finding ownership, focused proof and per-leaf continuity. Unread crossing constructs retain the next range owner.
-  Verification: `pending`
-  Commit: `pending`
+  Reading evidence: 11 complete windows / 841 fragments / 65510 bytes; ordered window SHA-256 `cbdf78b226b23bffb9e1c9dd35aca264bd1c0c81025fb6d4bf23f218df1caf15`.
+  Comprehension: The staged suffix completes ownership and 123 neutral mutation IDs; its separate public checker projection remains independently governed. Standalone balanced rule-item blocks normalize to lifecycle I at the same position, preserving source/opening lines and explicit-twin ActionIR. Duplicate mixtures append in authored order; action/blind/bare edges, callable/function bodies and nested braces retain earlier ownership. Legacy plain nodes stay readable and inert. Existing Rust/Dart/Julia consumer reading limits emitted-source claims; malformed comparison strength also differs by consumer. Typed source positions use same-source Unicode-scalar offsets, with derived byte/line/column evidence; empty spans are valid and derived text retains ordered provenance. Invocation marks stay local, accepted children advance the parent cursor, and transaction tokens invalidate after one terminal action. Recursive observations use a separate detached nine-field harray, monotone IDs and no parse-wide history; ordinary child payloads retain their values. The complete92-helper/7-alias/2-internal-ID map and33 diagnostics are read, along with four recurring topologies. Typed line452 starts the combined public rollout assertion; .1.14 owns its suffix.
+  Verification: reconstruct all 11 source windows and all 143 groups/302 ranges; verify cumulative reading, source/task/history preservation and prior Knowledge recipes. Run focused standalone-lifecycle/typed checks and staged/semantic proof for the changed governed book surface. Memory, Knowledge, both history checks, rendered book, git diff --check and normal doctrines govern focused landing. Existing emitted-source inspection limits, lexical repairs and runtime defects remain; no native matrix or dependency build is claimed.
+  Candidate proof: Rebuilt candidate contains exactly17 expected owners; the scratch writer now asserts the owner set before writing. All11 source windows reconstruct exactly and all160 baseline inputs/143 groups/302 ranges remain unchanged. Cumulative13/143,13931 fragments/830637 bytes,50 complete files. Preservation compares2489 files byte-for-byte,2774/2776 nodes unchanged, two cards retain all prior recipes and94 book limitation headings remain. Lifecycle9 placements/4 duplicates/6 ownership/3 malformed/15 public/7 denials/14 mutations, typed3 sources/7 positions/6 spans/3 derived/8+8+33 transitions/6 observations/92+7+2 helpers/33 diagnostics/14 complete/231 mutations, staged123+129 and semantic20 queries/128 mutations all pass after final governed edits. Memory60 lines, actual rendered book and plain git diff --check pass. History checks: CHANGES301 lines/44821 bytes and notes189/35625, both OK. Existing book search-index warning remains startup41.9-owned; all normal doctrines remain required.
+  Commit: `CONFORMANCE-SOURCE-READING.1.13 - read lifecycle normalization and typed source boundaries`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.14`
   Status: `pending`
@@ -1587,7 +1595,7 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
 
 | Rank | Leaf | Status | Next action |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.13` | `pending` | Read staged-enrichment997-1136, standalone lifecycle1-249 and typed-source1-452:841 fragments/65510 bytes. Preserve bounded windows, crossing ownership and all repairs. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.14` | `pending` | Read typed-source453-814 and Unicode-case1-1138:1500 fragments/33332 bytes. Preserve bounded windows, crossing rollout ownership and all repairs. |
 
 ## Decisions
 
@@ -1600,6 +1608,7 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
 
 ## Verification Log
 
+- `2026-09-13` .1.13: Conformance .1.13 reads 11 complete windows, 841 fragments and 65,510 baseline-identical bytes. Staged enrichment and standalone lifecycle contracts reach EOF; typed-source reading reaches line 452, inside public rollout assertions. Physical reading is 13/143: 13,931 fragments, 830,637 bytes and 50 complete files. Lifecycle normalization preserves authored order and earlier brace owners; typed positions, invocation state, transactions and detached recursive observations remain distinct. The typed Knowledge card explicitly qualifies its older 75-mutation narrative. Focused lifecycle/typed and governed-book checks pass without expanding native carrier evidence or closing runtime repairs.
 - `2026-09-13` .1.12: Conformance .1.12 reads 11 complete windows, 1,012 fragments and 65,472 baseline-identical bytes. The semantic model reaches EOF; staged enrichment is read through line 996, inside the ownership inventory. Physical reading is 12/143: 13,090 fragments, 765,127 bytes and 48 complete files. Staged reading separates deferred declaration, caller-prepared parser selection, typed provenance, deterministic identity, breadth-first scheduling, shared bounds, isolated child state and detached stitching. Focused staged neutral/public proof passes; prior semantic proof remains scoped to unchanged inputs. No runtime, admission or dependency change; .1.13 owns the remaining ownership/public records and following contracts.
 - `2026-09-13` .1.11: Conformance .1.11 reads 12 complete windows, 554 fragments and 65,425 baseline-identical bytes. The semantic-introspection contract reaches EOF; model reading reaches line 201, inside the identity-limited snapshot. Physical reading is 11/143: 12,078 fragments, 699,655 bytes and 47 complete files. The model separates duplicate slots, staged payload/job/result provenance, generated plans, compilation failure and captured runtime observation. The staged-schema card now explicitly dates its private implementation milestones and points to completed public rollout. Existing semantic neutral proof is retained and rechecked after governed documentation edits; no native admission or runtime repair is claimed.
 - `2026-09-13` .1.10: Conformance .1.10 reads 18 complete windows, 789 fragments and 65,489 baseline-identical bytes. Cursor ownership, numeric/text contracts and six semantic fixture inputs reach EOF; semantic-introspection contract reading reaches line 363. Physical reading is 10/143: 11,524 fragments, 634,230 bytes and 46 complete files. Numeric 55-case/18-helper, Perl scalar-text 7-test and semantic neutral proof pass. Numeric rejection of booleans remains distinct from scalar-text conversion; paging budgets and source-detail ceilings remain explicit. No source or runtime defect changes; .1.11 owns the crossing Dart admission consumer and semantic model prefix.
@@ -1616,6 +1625,7 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
 
 ## Commit Log
 
+- `2026-09-13` .1.13: `CONFORMANCE-SOURCE-READING.1.13 - read lifecycle normalization and typed source boundaries`; activation a7b6ba42d639c970420fd14bf9ac03823e4b2571; next .1.14 after clean handoff and zero-byte brief.
 - `2026-09-13` .1.12: `CONFORMANCE-SOURCE-READING.1.12 - read staged enrichment scheduling and policy boundaries`; activation abdfb235ff8cc15829af187d4dd26b9972b684e6; next .1.13 after clean handoff and zero-byte brief.
 - `2026-09-13` .1.11: `CONFORMANCE-SOURCE-READING.1.11 - read semantic rollout and model identities`; activation 388f09aec9b7fe4c71362bae29a3f9b39b78259b; next .1.12 after clean handoff and zero-byte brief.
 - `2026-09-13` .1.10: `CONFORMANCE-SOURCE-READING.1.10 - read scalar contracts and semantic query prefix`; activation d4ea5c63d7d87b7b113c9ebac846b58ab700654f; next .1.11 after clean handoff and zero-byte brief.
@@ -1632,6 +1642,7 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
 
 ## Changelog
 
+- `2026-09-13` .1.13: Complete staged and lifecycle contract reading; qualify dated typed-envelope milestones and preserve exact consumer proof limits. Typed public assertions and all repairs remain owned.
 - `2026-09-13` .1.12: Complete semantic model and staged scheduling/policy reading. Preserve narrow-v1 compatibility, all existing runtime repairs and remaining ownership/public-contract reading.
 - `2026-09-13` .1.11: Complete semantic rollout reading and five model snapshots; qualify dated private-projection milestones. Keep the identity-limited suffix, history controls and all repairs owned.
 - `2026-09-13` .1.10: Complete cursor/scalar and semantic fixture reading; read semantic schema/query prefix without changing source, historical evidence or repair state.

@@ -497,16 +497,17 @@ the director's focused-verification grant used for this correction and the separ
 supporting-reading closeout. Reading completion establishes audited comprehension;
 it does not close the six grammar/literal repair roots or establish runtime signoff.
 Conformance, test and Unicode reading has exact ownership for all 160 inputs in
-143 bounded groups covering 8,257,059 decoded bytes. Twelve groups now account for
-13,090 fragments and 765,127 bytes, including 48 complete files. The semantic
-model is fully read. Staged-enrichment reading covers deferred job declaration,
-caller-prepared parser entries, exact source provenance and breadth-first ordering.
-Child jobs receive fresh runtime state while sharing the caller's resource limits.
-Four result policies and three failure policies control how detached results or
-diagnostics enter the AST. The narrow function-body adapter remains separate.
-Reading continues with staged ownership and public-contract records, then lifecycle
-and typed-source contracts. Focused checks preserve existing admission scope and
-all runtime repair tasks. Named-argument support remains an approved future direction. The capability guide still has stale
+143 bounded groups covering 8,257,059 decoded bytes. Thirteen groups now account for
+13,931 fragments and 830,637 bytes, including 50 complete files. Staged and
+standalone lifecycle contracts are fully read. Standalone blocks normalize to
+entry lifecycle `I`, preserving authored duplicate order and earlier brace owners.
+Typed-source reading separates immutable positions and spans from invocation-local
+state, one-terminal recognition transactions and detached recursive observations.
+Unicode-scalar offsets are authoritative; byte offsets and line/column coordinates
+are derived. Reading continues inside the typed public rollout assertions, followed
+by Unicode-case fixtures. Focused proof preserves the existing limits of backend
+carrier tests and all runtime repair tasks. Named-argument support remains an
+approved future direction. The capability guide still has stale
 current census, governance/inventory/public counts and generic-callable wording.
 Existing startup `.41.6` and `.41.7` now own these exact paragraphs and meaningful
 checks against recurrence. Their selected-marker guards currently miss the

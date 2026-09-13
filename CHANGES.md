@@ -10,6 +10,12 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-13 — CONFORMANCE-SOURCE-READING.1.13 — read lifecycle normalization and typed source boundaries
+
+Conformance .1.13 reads 11 complete windows, 841 fragments and 65,510 baseline-identical bytes. Staged enrichment and standalone lifecycle contracts reach EOF; typed-source reading reaches line 452, inside public rollout assertions. Physical reading is 13/143: 13,931 fragments, 830,637 bytes and 50 complete files. Lifecycle normalization preserves authored order and earlier brace owners; typed positions, invocation state, transactions and detached recursive observations remain distinct. The typed Knowledge card explicitly qualifies its older 75-mutation narrative. Focused lifecycle/typed and governed-book checks pass without expanding native carrier evidence or closing runtime repairs.
+
+Verification: reconstruct all 11 source windows and all 143 groups/302 ranges; verify cumulative reading, source/task/history preservation and prior Knowledge recipes. Run focused standalone-lifecycle/typed checks and staged/semantic proof for the changed governed book surface. Memory, Knowledge, both history checks, rendered book, git diff --check and normal doctrines govern focused landing. Existing emitted-source inspection limits, lexical repairs and runtime defects remain; no native matrix or dependency build is claimed.
+
 ## 2026-09-13 — CONFORMANCE-SOURCE-READING.1.12 — read staged scheduling and policy boundaries
 
 Conformance .1.12 reads 11 complete windows, 1,012 fragments and 65,472 baseline-identical bytes. The semantic model reaches EOF; staged enrichment is read through line 996, inside the ownership inventory. Physical reading is 12/143: 13,090 fragments, 765,127 bytes and 48 complete files. Staged reading separates deferred declaration, caller-prepared parser selection, typed provenance, deterministic identity, breadth-first scheduling, shared bounds, isolated child state and detached stitching. Focused staged neutral/public proof passes; prior semantic proof remains scoped to unchanged inputs. No runtime, admission or dependency change; .1.13 owns the remaining ownership/public records and following contracts.
