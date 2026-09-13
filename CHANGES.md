@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-13 — Lua package validation, function and registry reading
+
+- Read package 1956-3352 in eight complete windows: 1,397 fragments /65,503 bytes; cumulative 39/51 and 2,043,401 bytes.
+- Both installed hosts pass 34 complete selected groups each: validation, function variants, ActionIR and registry behavior.
+- All 102 rule-only corpus sources validate; exact 250 names, seven named-mark helpers and caller-isolated typed rest arrays pass.
+- LUA-STARTUP-READING.1.39 extends only existing .2.1 guidance ownership, preserves all thirty-three repair roots and earlier failures, and hands off to .1.40.
+
 ## 2026-09-13 — Lua package pipeline, corpus and frontend reading
 
 - Read package464-1955 in eight complete windows: 1,492 fragments /65,483 bytes; cumulative 38/51 and 1,977,898 bytes.

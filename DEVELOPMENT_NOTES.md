@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-13 — Keep function metadata proof distinct from deferred runtime work
+
+- Complete groups 1985-3340 use their original helpers and preamble; all 34 pass per host, while staged-registry continuation remains outside this selection.
+- Fixed-v1 and variadic-v2 state, outward final-codeblock-v3 fields, contextual normalization and rest-array isolation pass without closing malformed-host-container repairs.
+- ActionIR explicitly treats option=true as a positional assignment; approved named arguments remain parked and no authoring-tree byte changes.
+- LUA-STARTUP-READING.1.39 records exact replay in docs/knowledge/lua-package-validation-function-registry-reading.md; current 239/top-marker prose and blanket nested-copy guidance join existing .2.1.
+
 ## 2026-09-13 — Bound package proof and preserve historical cursor evidence
 
 - Select only complete groups451-1939 with the original preamble1-199; all36 pass on both installed hosts without claiming later package groups or a full local gate.

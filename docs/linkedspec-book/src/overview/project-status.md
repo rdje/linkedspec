@@ -329,12 +329,12 @@ step. `PARSER-AUTHORING-APIS.4` owns grammar/binding, definition choices,
 representation compatibility and bounded implementation planning; these four
 children remain unactivated and current startup reading continues.
 
-**Lua source reading is underway (38/51 groups):** the complete
+**Lua source reading is underway (39/51 groups):** the complete
 99-file inventory covers 71,268 physical lines and 2,732,450 bytes. Its 51 owned
 reading groups include generated tables, native adapters and both-ABI tests.
 Two UTF-8-safe byte windows retain an oversized generated MCP line, so the
 per-window total is 71,269 fragments. The independent range audit proves complete
-ownership. The first 38 groups physically read 52,643 fragments /1,977,898 bytes,
+ownership. The first 39 groups physically read 54,040 fragments /2,043,401 bytes,
 including the complete README, both commands, all three native C bindings, ActionIR
 constructors, call names, contracts, the complete parser, bounded authority,
 compiled state and corpus modules, facade, interpreter, JSON and matching. They
@@ -354,8 +354,9 @@ complete, as are stdio, progressive dispatch, storage and recognition transactio
 Recursive observation, repeated actions and root-selection admission are complete.
 Root core, root routes, cursor admission and cursor descriptor tests are complete.
 Cursor execution, generated source, normalization and option-removal tests are
-complete. The package runner is read through line 1955, including pipeline, corpus,
-AST and parser tests. Seventy-seven files are fully read. The remaining 13 groups require
+complete. The package runner is read through line 3352, including pipeline, corpus,
+AST, parser, validator, function and registry tests. Seventy-seven files are fully
+read. The remaining 12 groups require
 their own reading and verified commits; source reading does not close the limitations below.
 
 **Lua Unicode casing and rule-label verification:** all property tables match the
@@ -553,10 +554,10 @@ writer-failure limitations remain open. The neutral generated ledger passes its
 existing inventory checks; prior cursor-neutral inputs remain byte-identical.
 Exact scope and replay: `docs/knowledge/lua-cursor-completion-package-prefix-reading.md`.
 
-**Lua package pipeline, corpus and frontend verification:** 36 complete selected
-package groups pass on each installed host, 72 groups total. The selection uses
-the original preamble and complete groups at lines 451–1939; the next partially
-read validation helper remains outside this proof.
+**Lua package pipeline, corpus and frontend verification:** `.1.38` records
+36 complete selected package groups per installed host, 72 groups total. The selection uses
+the original preamble and complete groups at lines 451–1939. The validation
+helper was outside that proof; the next selection below uses it in full.
 
 Named, file and inline CLI routes preserve canonical JSON. Compilation precedes
 input-file loading. Native loading consumes all 14 name, nine resolution and four
@@ -583,6 +584,39 @@ This selected proof does not claim the entire package suite or primary matrix.
 Stale current CLI counts, module guidance and historical endpoint wording are
 owned by the existing documentation repair. Exact scope and replay:
 `docs/knowledge/lua-package-pipeline-corpus-frontend-reading.md`.
+
+**Lua package validation, function and registry verification:** 34 complete groups
+pass per installed host, 68 total. Validation accepts a markerless nonempty spec,
+rejects zero rules and duplicate labels, and checks edge ownership, targets, slots,
+lightweight regex structure and strict unused rules. All shipped sources and
+exactly 102 rule-only corpus sources validate. The shared inventory has 250 names;
+all seven named-mark helpers resolve to their declared capture family.
+
+Function tests preserve ordered fixed parameters, variadic signatures and final
+codeblock metadata across projection, typed AST, staged bodies, compiled state
+and exact descriptor fields. Invalid signature mixtures, sidecar drift, reserved
+or duplicate parameters and overlapping spans reject. Automatic function parsing
+reuses one compiled grammar and preserves parse, validation, execution, output,
+projection and staged-body failure ownership.
+
+ActionIR tests cover all four value kinds, Unicode spans, physical statement
+separators, nested assignments, controls, receiver chains and generic trailing
+blocks. `helper(value, option=true)` remains a call with a positional assignment
+expression. Typed keyword records exist programmatically; this does not implement
+the approved named-argument proposal, whose owner remains parked.
+
+Registry tests preserve order and snapshots, resolve registered arity before
+helper fallback, normalize attached and parenthesized contextual blocks without
+promoting harrays, and bind surplus variadic arguments into fresh typed arrays.
+Mutating copied arrays, harrays and blocks leaves caller values intact for these
+valid inputs. Separate calls receive independent empty rest arrays. Body stitching
+preserves the source spec and copies the supplied AST. Earlier malformed tagged-
+container limitations remain open.
+
+This selection ends before the staged-registry group that begins at line 3341.
+It does not claim later runtime tests or the entire package gate. Exact reading,
+replay and stale-guidance ownership:
+`docs/knowledge/lua-package-validation-function-registry-reading.md`.
 
 **Known Lua invocation limitation — nested array members can disappear:** a
 caller-supplied tagged array with an extra member or a sparse tail is accepted,
