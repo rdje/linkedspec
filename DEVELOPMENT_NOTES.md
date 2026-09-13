@@ -10,6 +10,12 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-13 — SESSION-STARTUP-READING.3.8.0 — source coordinates and exact once-only coverage
+
+The conformance lane has160 baseline-identical inputs with167,604 LF delimiters and167,606 decoded line fragments. Four gzip sources are decoded losslessly and validated as UTF-8; the task uses explicit decoded-line coordinates. Independent replay reads ownership from143 task Scope fields and checks302 disjoint ranges, exact byte/range hashes and unchanged Git mode/blob/path identity. The longest logical line is14,687 bytes; smaller complete byte windows prevent output truncation without omitting it. Git and task Scope fields remain canonical; no parallel tracked inventory is added. Unicode regeneration checks are current focused proof, not physical-reading or cross-backend runtime credit.
+
+Verification: independent baseline/current/source/decoded-range coverage; existing managed Unicode casing and rule-label checks; source/task/history preservation, memory, Knowledge, both histories, rendered book and normal doctrine hooks. Ordinary focused planning; no code, dependency build, registry change or parent closeout.
+
 ## 2026-09-13 — SUPPORTING-SOURCE-READING.1 — separate reading closure from retained repair ownership
 
 The current closeout reruns the exact historical source/range/reading-commit audit using its pinned snapshot, then checks current reading nodes and repair statuses independently. All21 reading nodes and nine pending grammar/literal nodes remain byte-exact; the one changed checker node is exactly its committed repaired form at1d6e8fe51. Only supporting .1 and startup .3.7 close under ADR0120. Historical omissions receive no reading credit; later conformance/test/Unicode/tooling reading and formal book/policy remain. This consumes the second granted exception without a dependency build or full-CI claim.

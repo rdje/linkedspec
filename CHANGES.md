@@ -10,6 +10,12 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-13 — SESSION-STARTUP-READING.3.8.0 — bound conformance and decoded Unicode reading
+
+Startup .3.8.0 owns all160 baseline-identical conformance/test/Unicode inputs in CONFORMANCE-SOURCE-READING:5,422,313 stored bytes,8,257,059 decoded bytes and167,606 fragments/167,604 LF delimiters. All143 groups/302 exact ranges satisfy1500-fragment/65536-byte limits and cover every byte once. Four gzip inputs retain explicit decoded coordinates and pinned hashes. Managed Unicode casing and rule-label checks pass; inventory and regeneration receive no physical-reading credit. Reading remains0/143; first .1.1 owns capability_conformance/README.md lines1-770. Existing sources, histories, six supporting repair roots and all capacity limits remain. Supporting .1/startup .3.7 and the checker correction stay closed under consumed ADR0120 exceptions.
+
+Verification: independent baseline/current/source/decoded-range coverage; existing managed Unicode casing and rule-label checks; source/task/history preservation, memory, Knowledge, both histories, rendered book and normal doctrine hooks. Ordinary focused planning; no code, dependency build, registry change or parent closeout.
+
 ## 2026-09-13 — SUPPORTING-SOURCE-READING.1 — close required supporting reading
 
 Supporting reading .1 and startup .3.7 close under ADR0120 after the exact checker correction at1d6e8fe51. Independent reconstruction preserves all158 original sources/174 ranges: required reading629 fragments/96,781 bytes, historical reading1,500/61,165 and explicit omissions23,484/806,310. Three reading commits/five required ranges/nineteen windows retain exact source, activation and node evidence. Six grammar/literal repair roots/nine pending nodes remain unchanged; only the checker defect is repaired. Current registry limits remain fixed. PNT continues at startup .3.8 for the160 conformance/test/Unicode entries; later source reading, formal book/policy prerequisites and canonical boundaries remain.

@@ -2296,12 +2296,27 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Commit: `SESSION-STARTUP-READING.3.7.0 - own exact supporting-source reading ranges`.
 
 - ID: `SESSION-STARTUP-READING.3.8`
-  Status: `pending`
+  Status: `active`
   Goal: Split and read all 160 entries under capability_conformance, cli_conformance, t, tests, and unicode_case.
+  Children: `.3.8.0` owns exact decomposition; `CONFORMANCE-SOURCE-READING.1` owns all143 reading groups; .2 findings and .3 independent closeout stay separate.
+  Reading owner: `docs/tasks/CONFORMANCE-SOURCE-READING.md`; .3.8.0 owns143 groups/302 exact ranges over all160 baseline-identical inputs including four decoded pinned Unicode sources. Physical reading0/143; next .1.1 reads capability README1-770. Existing repairs and remaining startup prerequisites remain.
   Acceptance: Include phase0, neutral contracts, fixtures, generators, and four explicitly decoded pinned Unicode
     inputs. Keep generated/fixture bytes in scope; count neither a hash nor enumeration as full reading.
   Verification: `pending`
   Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.3.8.0`
+  Status: `done`
+  Activation commit: `9833430954c3999769045abbcaa4d20389a7af4c`.
+  Verification tier: `focused`
+  Focused checks: Exact baseline/current Git mode/blob/path and decoded-source inventory; all143 groups/302 disjoint ranges and per-group budgets; four pinned Unicode inputs; source/task/history preservation, memory, Knowledge, histories, rendered book and normal doctrine hooks.
+  Canonical trigger: Ordinary source-reading decomposition; no source/runtime/dependency/registry change or parent closeout. Earlier ADR0120 exceptions are consumed and are not extended.
+  Goal: Own every conformance/test/Unicode reading range before reading, preserving exact baseline identity and continuity.
+  Dependencies: Supporting reading .1/startup .3.7 close at983343095 with all doctrines, zero-byte brief and clean handoff.
+  Acceptance: Account for all160 baseline paths and current deltas, including four explicitly decoded pinned Unicode inputs; create exact bounded reading tasks and reproducible independent coverage proof. Preserve generated fixtures, original sources, existing repairs and capacity limits; inventory/decompression/hashes receive no physical-reading credit.
+  Verification: Independent baseline/current Git mode/blob/path and present-byte equality PASS for160 files/5422313 stored bytes; four gzip sources decode to8257059 total bytes/167606 fragments. Exact Scope-driven audit validates143 groups/302 disjoint ranges, all1500/65536 budgets and four decoded hashes. Unicode casing1563/1581 mappings,158/464 property ranges/12 fixtures and rule labels806/9/8/2 PASS. No physical-reading credit, source change or new limit. Canonical evidence and current replay: conformance-source-reading-coverage. Preservation, memory, Knowledge, histories, rendered book and all normal doctrines govern focused planning landing.
+  Candidate proof: Preserve2486 prior files byte-exact, all earlier recipe blocks,2627/2628 prior nodes and all94 book limitation headings. Only startup .3.8 changes; new .3.8.0 plus147 conformance-tree nodes own the plan. Metadata PASS at105 files/89554 lines/9507983 bytes before this annotation;2776 current IDs are unique. Memory60; histories439/45244 and369/44107 lines/bytes; rendered book PASS. Normal doctrine hooks govern landing.
+  Commit: `SESSION-STARTUP-READING.3.8.0 - own exact conformance test and decoded Unicode reading ranges`
 
 - ID: `SESSION-STARTUP-READING.3.9`
   Status: `pending`
@@ -4623,7 +4638,7 @@ startup implementation prerequisites and the rgx reading exclusion remain intact
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.8` | `pending` | Inventory and decompose the160 conformance/test/Unicode entries, then read exact bounded ranges; preserve decoded Unicode inputs and existing repair/capacity obligations. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.1` | `pending` | Read capability_conformance/README.md lines1-770 in complete bounded windows; preserve source identity, claim verification, repair ownership and per-leaf continuity. |
 
 ## Reading Ledger
 

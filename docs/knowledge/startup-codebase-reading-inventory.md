@@ -265,3 +265,12 @@ The 90 pending repair-node bodies hash to
 `3664cc76bff42040631d688fee5fa75bd4410f6588e1fd9eb45a882532ea967b`.
 These dated digests are comparison evidence, not constraints against future
 task-owned repair progress.
+
+## September 13 conformance/test/Unicode decomposition
+
+Supporting reading and its exact checker correction are complete under ADR0120.
+Startup `.3.8.0` now owns all160 conformance/test/Unicode baseline inputs in
+`docs/tasks/CONFORMANCE-SOURCE-READING.md`:143 groups/302 exact ranges,8,257,059
+decoded bytes and167,606 fragments. The four pinned gzip inputs contribute54,500
+decoded lines. No new physical-reading credit is granted by enumeration or hashes.
+Exact current source/decoding/range replay: [[conformance-source-reading-coverage]].

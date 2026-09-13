@@ -2268,7 +2268,7 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.3.8` | `pending` | Inventory and decompose the160 conformance/test/Unicode entries, then read exact bounded ranges; preserve decoded Unicode inputs and existing repair/capacity obligations. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.1` | `pending` | Read capability_conformance/README.md lines1-770 in complete bounded windows; preserve source identity, claim verification, repair ownership and per-leaf continuity. |
 
 ## Decisions
 
