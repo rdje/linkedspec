@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-13 — Lua gap, logical and map-leaves consumer completion
+
+- Read gap948-1462, logical1-280, map-leaves1-696 and MCP-binding1-9: 1,500 fragments /61,938 bytes; cumulative 32/51 and 1,619,661 bytes.
+- Both hosts pass gap392, logical359 and map530: 2,562 assertions, including fresh child-process emitted gap proof and current-host logical/map emitted execution.
+- Neutral logical8/0/26 and mutation167+592 pass; prior gap governance remains dated and input-identical; no new repair is found.
+- LUA-STARTUP-READING.1.32 preserves all thirty-three repair roots and earlier failures; next .1.33 completes binding and reads MCP admission/dispatch/stdio ranges.
+
 ## 2026-09-13 — Lua diagnostic, duplicate-slot and gap-prefix reading
 
 - Read diagnostic242-327, duplicate-slot1-467 and gap1-947: 1,500 fragments /54,442 bytes; cumulative 31/51 and 1,557,723 bytes.

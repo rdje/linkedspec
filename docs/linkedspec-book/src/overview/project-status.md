@@ -329,12 +329,12 @@ step. `PARSER-AUTHORING-APIS.4` owns grammar/binding, definition choices,
 representation compatibility and bounded implementation planning; these four
 children remain unactivated and current startup reading continues.
 
-**Lua source reading is underway (31/51 groups):** the complete
+**Lua source reading is underway (32/51 groups):** the complete
 99-file inventory covers 71,268 physical lines and 2,732,450 bytes. Its 51 owned
 reading groups include generated tables, native adapters and both-ABI tests.
 Two UTF-8-safe byte windows retain an oversized generated MCP line, so the
 per-window total is 71,269 fragments. The independent range audit proves complete
-ownership. The first 31 groups physically read 42,151 fragments /1,557,723 bytes,
+ownership. The first 32 groups physically read 43,651 fragments /1,619,661 bytes,
 including the complete README, both commands, all three native C bindings, ActionIR
 constructors, call names, contracts, the complete parser, bounded authority,
 compiled state and corpus modules, facade, interpreter, JSON and matching. They
@@ -348,9 +348,9 @@ registry and tracing. Unicode casing is completely read, including both mapping
 tables, all 158 `Cased` and 464 `Case_Ignorable` ranges, strict UTF-8 decoding and
 Final Sigma conversion. The Unicode rule-label table and classifier, automatic
 function parser, complete function shell and registry are read. The complete
-body-fluent, callable, diagnostic and duplicate-slot tests are read, along with
-the gap-capture test through line 947. Fifty-six files are fully read.
-The remaining 20 groups require
+body-fluent, callable, diagnostic, duplicate-slot, gap-capture, logical-helper and
+map-leaves tests are read, along with the MCP-binding header through line 9.
+Fifty-nine files are fully read. The remaining 19 groups require
 their own reading and verified commits; source reading does not close the limitations below.
 
 **Lua Unicode casing and rule-label verification:** all property tables match the
@@ -390,23 +390,31 @@ Callable proof includes inert construction, ordered invocation, independently lo
 emitted modules and workspace cleanup on success and injected failure. Prior neutral
 callable checker results remain dated; their four inputs are unchanged.
 
-**Lua diagnostic, slot and gap verification:** both installed hosts now pass the
-complete diagnostic consumer (119 checks), complete duplicate-slot consumer
-(112), and complete gap-prefix blocks through line 810 (185): 832 checks total.
-Diagnostic events remain separate from tracing. Duplicate patterns retain their
-authored slot identity across ordered and choice matching; generated direct and
-traced execution preserve it. That consumer checks emitted source structurally.
+**Lua consumer verification:** both installed hosts pass the complete gap-capture
+(392 checks), logical-helper (359) and map-leaves mutation (530) suites: 2,562 checks
+total. Gap proof includes ten value and two typed-error emitted modules loaded in
+a fresh child process per host, plus all nine admission roles. It preserves Unicode
+and empty gaps, entry-slot identity, lifecycle order, nested isolation, rollback,
+detached descriptors, generated-v2 plans, source identity and workspace cleanup.
 
-The gap prefix verifies Unicode and empty spans, child entry-slot identity,
-candidate visibility before `LS`, child-extended cursor commits, successful tails,
-nested isolation, rollback, detached descriptors and unchanged generated-v2 plans.
-Its 106 metadata, 33 native and 46 carrier checks precede independent emitted
-execution. The earlier full 392-check run remains dated evidence: another 72
-metadata checks occur later in the file. Fresh neutral governance passes all nine
-gap rollout rows, 63 semantic mutations and the current 8/15/10/34 public boundary;
-duplicate-slot governance remains 7/0/59. These checks preserve the current language
-and leave the existing runtime and caller-input limitations below open.
-Exact reading and reproduction: `docs/knowledge/lua-diagnostic-slot-gap-consumer-reading.md`.
+Logical helpers evaluate accepted arguments once in written order; invalid arity
+fails before operand effects. Native, reconstructed, generated and loaded emitted
+routes preserve results and typed failures. The mutation consumer verifies
+`tree.map_leaves!() { return(cat(value, "!")) }`: it visits the original tree shape,
+guards the receiver binding while callbacks run, and commits the rebuilt tree
+before evaluating continuation. Callback failure preserves the original receiver;
+unrelated completed effects persist. A continuation failure preserves the committed
+tree. Copied frames and distinct function-parameter identities keep ordinary local
+changes independent. Logical and mutation emitted modules execute in the current
+host; they are separate from the gap consumer's fresh process proof.
+
+Fresh neutral logical governance passes all eight rollout rows and 26 mutations;
+the frozen mutation oracle rejects 167 base and 592 composition mutations. The
+preceding diagnostic119, duplicate-slot112 and gap governance9/0/63/public8/15/10/34
+results remain dated evidence on unchanged inputs. Existing runtime and caller-input
+limitations below remain open; these are scoped checks on the installed hosts,
+with PUC5.4 verification still pending. Exact scope and reproduction:
+`docs/knowledge/lua-gap-logical-map-consumer-reading.md`.
 
 **Known Lua invocation limitation — nested array members can disappear:** a
 caller-supplied tagged array with an extra member or a sparse tail is accepted,

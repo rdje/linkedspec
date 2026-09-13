@@ -2253,9 +2253,9 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Status: `active`
   Goal: Split and read all 99 baseline Lua entries, including native adapters, both-ABI tests, runtime, and commands.
   Children: `.3.6.0` owns decomposition; LUA-STARTUP-READING.1 owns 51 reading children and .3 owns independent closeout.
-  Reading owner: `docs/tasks/LUA-STARTUP-READING.md`; .4/.4.2 close under ADR0118 and containment .14; exact reading is 31/51; .1.32 follows child 31; .2.1-.2.33 own thirty-three concrete repair roots, with installed5.5 nil-error failures under .2.2 and shared Lua budget repair under .82.3.1; .28.7 owns the baseline public-check failure.
+  Reading owner: `docs/tasks/LUA-STARTUP-READING.md`; .4/.4.2 close under ADR0118 and containment .14; exact reading is 32/51; .1.33 follows child 32; .2.1-.2.33 own thirty-three concrete repair roots, with installed5.5 nil-error failures under .2.2 and shared Lua budget repair under .82.3.1; .28.7 owns the baseline public-check failure.
   Acceptance: Define bounded file/range children before reading; generated tables and the large test runner stay in scope.
-  Verification: Lua .1.31 completes diagnostic and duplicate-slot tests and reads gap-capture lines 1-947 in eight complete windows: 1,500 fragments /54,442 bytes; cumulative 31/51, 42,151 fragments /1,557,723 bytes. All 99 Lua sources remain baseline-identical; 56 files are fully read. Both installed hosts pass 832 focused assertions: diagnostic119, duplicate-slot112 and gap-prefix185 each. Neutral duplicate-slot7/0/59 and gap9/0/63 with public8/15/10/34 pass. Gap metadata checks span two source regions, so the prefix does not rerun the earlier full392 proof. Existing .2.1 owns precise private-stage guidance qualification; all thirty-three repair roots and earlier failures remain open. Next .1.32 completes gap tests and reads logical, map-leaves and MCP-binding ranges; named arguments and startup/ADR0118 prerequisites remain unchanged.
+  Verification: Lua .1.32 completes gap-capture, logical-helper and map-leaves tests and reads the MCP-binding header in ten complete windows: 1,500 fragments /61,938 bytes; cumulative 32/51, 43,651 fragments /1,619,661 bytes. All 99 Lua sources remain baseline-identical; 59 files are fully read. Both installed hosts pass 2,562 assertions: gap392, logical359 and map530 each. Fresh gap proof includes independent emitted children and all nine admitted roles; logical/map emitted modules execute in their current host. Neutral logical8/0/26 and mutation167+592 pass; prior gap governance remains dated and input-identical. No new repair is found; all thirty-three roots and earlier failures remain open. Next .1.33 completes binding and reads MCP admission, dispatch and stdio ranges; named arguments and startup/ADR0118 prerequisites remain unchanged.
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.3.6.0`
@@ -4607,7 +4607,7 @@ startup implementation prerequisites and the rgx reading exclusion remain intact
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.1.32` | `pending` | Read the gap suffix and owned logical/map-leaves/MCP-binding test ranges after clean .1.31; preserve all repair owners, prior failures and parked named arguments. |
+| 1 | `LUA-STARTUP-READING.1.33` | `pending` | Read the MCP-binding suffix and owned admission/dispatch/stdio test ranges after clean .1.32; preserve all repair owners, prior failures and parked named arguments. |
 
 ## Reading Ledger
 

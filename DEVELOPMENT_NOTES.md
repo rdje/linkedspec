@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-13 — Preserve exact execution and mutation boundaries
+
+- Gap emitted proof loads ten value and two typed-error modules in a fresh child per host; all nine admission roles also execute, with managed cleanup.
+- Logical helpers remain eager with arity rejection before operand effects; generated and emitted failures retain typed source identity.
+- Map-leaves bang preserves original-shape traversal, binding-identity guards, atomic receiver publication and commit before continuation; unrelated effects and distinct shadow bindings retain their specified behavior.
+- LUA-STARTUP-READING.1.32 stores exact source and 2,562-assertion replay in docs/knowledge/lua-gap-logical-map-consumer-reading.md; MCP header reading grants no new binding execution proof.
+
 ## 2026-09-13 — Distinguish test roles and source-region assertion counts
 
 - Duplicate-slot emitted-source proof checks structural emission; direct/traced generated execution and primary execution are separate actual runtime roles.
