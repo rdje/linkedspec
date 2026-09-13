@@ -477,7 +477,7 @@ from runtime signoff. Existing startup and backend repairs remain open.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.4` | `pending` | Read gap806-1213, complete logical-helper contract and capability manifest, then map-leaves1-33: 1022 fragments/65375 bytes. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.5` | `pending` | Read map-leaves34-461, MCP admission1-250 and canonical frames1-12: 690 fragments/65516 bytes; split long-line presentation into complete byte chunks if needed. |
 
 ## Decisions
 

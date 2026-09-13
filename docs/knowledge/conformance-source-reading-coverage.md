@@ -8,7 +8,7 @@ answers:
   - "how do I verify conformance reading source and range coverage"
   - "which conformance source reading file has the longest line"
 date: 2026-09-13
-status: exact decomposition preserved; physical reading 3/143, sixteen files complete and140 groups remain
+status: exact decomposition preserved; physical reading 4/143, nineteen files complete and139 groups remain
 tags: [reading, conformance, tests, unicode, continuity, CONFORMANCE-SOURCE-READING]
 evidence: "Startup .3.8.0 independently accounts for160 baseline-identical files,5,422,313 stored bytes and8,257,059 decoded bytes in167,606 line fragments/167,604 LF delimiters. Four gzip inputs contribute54,500 decoded lines. All143 groups/302 ranges are contiguous, disjoint and bounded at1500 fragments/65536 bytes. No source, registry or runtime behavior changes; no physical-reading credit from inventory."
 reverify: "Run CONFORMANCE_SOURCE_READING_COVERAGE below through the project-data wrapper; it derives source identity from Git and range ownership from the task-tree rather than a parallel manifest. Use scripts/check_task_tree_metadata.sh for actual task collection limits."
@@ -190,3 +190,13 @@ bash tools/project_data_run.sh env PERL5LIB= perl tools/check_generated_source_c
 bash tools/project_data_run.sh env PERL5LIB= perl tools/check_language_capability_coverage.pl
 bash tools/run_python_project_data.sh tools/check_inter_match_gap_capture_contract.py
 ```
+
+
+The subsequent `.1.4` reads all 13 windows of gap806–1213, logical1–303,
+manifest1–278 and map-leaves1–33: 1,022 fragments/65,375 bytes. This completes the
+first three sources, bringing cumulative reading to4,100 fragments/249,030 bytes
+and19 complete files; map34–461 remains `.1.5`-owned. Fresh logical26,
+capability20/100/one legacy exclusion and mutation167+592 neutral proof pass.
+[[logical-helper-neutral-contract]] and [[mutation-capability-admission]] explain
+why historical fixture boundaries/frozen status must be reconciled with later
+admission; passing metadata does not close the current runtime repair backlog.

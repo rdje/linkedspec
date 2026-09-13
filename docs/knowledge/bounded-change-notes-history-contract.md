@@ -2,6 +2,8 @@
 id: bounded-change-notes-history-contract
 title: Changes and engineering notes use bounded hot shards with complete-record rollover
 answers:
+  - does document history --all include the current hot shard
+  - how do I verify exact history preservation across rollover
   - where is old CHANGES.md history
   - where are old development notes
   - how do I search archived changes
@@ -53,3 +55,46 @@ generation; conflicting bytes or metadata fail closed.
 Initial legacy history uses IDs `5000` upward. Future generations consume lower IDs (`4999`, `4998`, ...), which
 keeps manifest order ascending and newest-to-oldest without renaming immutable targets. The route file-count caps
 require reviewed evolution long before the numeric reserve is exhausted.
+
+
+## Archive-only query and September 13 rollover verification
+
+`tools/read_document_history.pl --all` concatenates the immutable manifest
+segments only; it does not include the current hot root. The reader removes
+manifest metadata before iterating the segment records at lines30–35. Comparing
+archive-only output before and after rollover must therefore differ by the new
+segment. Compare `hot_root_bytes + archived_bytes` across that same candidate
+instead. Manifest metadata advances its segment count; older segment record bytes
+and target bytes remain unchanged. This clarifies query scope, not a product defect.
+
+`CONFORMANCE-SOURCE-READING.1.4` initially made that archive-only comparison,
+then verified the actual reader and exact combined reconstruction:3,613,557 bytes,
+SHA-256 `9c8ea4a6eee5f1e5b5a23383a5ee1103a2236cd2a9b40dfdad610f6a0b0a5e98`.
+The required463-line candidate became247 lines/32,290 bytes by archiving precisely
+216 clean-HEAD lines/18,973 bytes. Its new segment is4976-6d1dd54d605a; all34 older
+records remain exact. The resulting37-file collection and36-line/20,495-byte
+manifest fit ADR0118's unchanged limits. No reader or rollover implementation changes.
+
+The immutable source/segment proof remains independently replayable:
+
+```bash
+bash tools/project_data_run.sh python3 - <<'CONFORMANCE_CHANGE_HISTORY_ROLLOVER'
+from pathlib import Path
+import hashlib,json,subprocess
+base='baaebc8ef62baf84447767c2b361458c3ac57d9e'
+path='docs/history/changes/manifest.jsonl'
+old=subprocess.check_output(['git','show',base+':'+path]).splitlines(True)
+current=Path(path).read_bytes().splitlines(True)
+index=next(i for i,line in enumerate(current) if json.loads(line).get('segment_id')=='4976')
+row=json.loads(current[index]);assert current[index+1:]==old[1:]
+assert row['source_commit']==base and row['source_start_line']==242 and row['source_end_line']==457
+segment=Path(row['target_path']).read_bytes()
+source=subprocess.check_output(['git','show',base+':CHANGES.md'])
+assert subprocess.check_output(['git','rev-parse',base+':CHANGES.md'],text=True).strip()==row['source_blob']
+assert segment==b''.join(source.splitlines(True)[241:457])
+assert len(segment)==row['byte_count']==18973 and segment.count(b'\n')==row['line_count']==216
+assert hashlib.sha256(segment).hexdigest()==row['sha256']=='6d1dd54d605a5363a60cfc39d7918f91cd6d3934f8df6e3d57c00f14c1d0d026'
+assert source.endswith(segment)
+print('PASS exact clean source suffix, immutable segment identity and all34 older manifest records.')
+CONFORMANCE_CHANGE_HISTORY_ROLLOVER
+```

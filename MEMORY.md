@@ -1,12 +1,12 @@
 # MEMORY
 
-- activation_commit: `51c7ea8fe89e4f96b5927ec02bc5b629d33d8986` — clean conformance identity/fixture/gap reading activation.
-- latest_completed_leaf: `CONFORMANCE-SOURCE-READING.1.3 - read slot identity fixtures generated roles and gap prefix`; physical reading 3/143, 16 complete files and exact gap prefix.
-- active_work_unit: `CONFORMANCE-SOURCE-READING.1.4` — gap suffix, logical-helper/capability manifest and map-leaves prefix.
-- next_action: Read CONFORMANCE-SOURCE-READING.1.4 from clean HEAD: inter_match_gap_capture_contract.json806-1213, logical_helper_contract.json1-303, manifest.json1-278 and map_leaves_mutation_contract.json1-33. Total 1,022 fragments/65,375 bytes in four exact ranges. Read complete bounded windows, reconcile canonical facts and existing repairs, run focused proof, update book/live records and commit before .1.5. Continue PNT.
+- activation_commit: `baaebc8ef62baf84447767c2b361458c3ac57d9e` — clean conformance gap/logical/manifest reading activation.
+- latest_completed_leaf: `CONFORMANCE-SOURCE-READING.1.4 - read gap logical and capability authorities with frozen mutation prefix`; physical reading 4/143, 19 complete files and exact mutation prefix.
+- active_work_unit: `CONFORMANCE-SOURCE-READING.1.5` — map-leaves suffix, MCP admission and canonical transport frame prefix.
+- next_action: Read CONFORMANCE-SOURCE-READING.1.5 from clean HEAD: map_leaves_mutation_contract.json34-461, mcp_implementation_admission.json1-250 and mcp_semantic_transport/canonical_frames.jsonl1-12. Total 690 fragments/65,516 bytes in three exact ranges. Use complete bounded windows and explicit byte chunks if a logical line is too long; reconcile Knowledge, run focused proof, preserve sources/history, update book/live records and commit before .1.6. Continue PNT.
   Named-argument direction PARSER-AUTHORING-APIS.4 is approved and parked; other authoring proposals and approved formats stay parked.
 - in_flight_uncommitted: none; reading evidence, exact claim/repair ownership and next action committed at Git HEAD; no background result remains.
-- blockers: none for authorized read-only PNT at conformance .1.4. Existing runtime/guide repairs, source prerequisites and later canonical boundaries remain; registry ceilings are unchanged.
+- blockers: none for authorized read-only PNT at conformance .1.5. Existing runtime/guide repairs, source prerequisites and later canonical boundaries remain; registry ceilings are unchanged.
 - current_rust_warning_debt: Repeated carriers report 1,870 pgen plus 26 rgx-core output warnings; RUST-DEPENDENCY-WARNING-ZERO.1-.7 own causal repair/pins/enforcement without suppression after Lua intake.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
   active table; the task metadata doctrine inventories all consumers, permits arbitrary frontier-row rewrites,
@@ -53,8 +53,8 @@
   use exact staged canonical CI; task-tree/index, Knowledge Map, mdBook, and bounded live/history move in lockstep.
 - current_engineering_notes_capacity: ADR0118 admits 34 files /33 manifest lines /19902 manifest bytes and 28000 aggregate lines for finite Lua reading.
   Lua .1.46 rollover preserves exact history as segment4976-8f23f4b6bde6; current manifest is 18678 bytes /31 lines, collection 32 files including hot root; other limits remain unchanged.
-- current_change_history_capacity: ADR0118 admits 38 files /37 manifest lines /21071 manifest bytes; current collection uses 36 files /35 manifest lines /19919 manifest bytes.
-  Lua .1.36 rollover preserves the exact clean-HEAD suffix as segment4977-65e8f007697e; earlier archive bytes and other history controls remain unchanged. Proportionate governance: ADR0115.
+- current_change_history_capacity: ADR0118 admits 38 files /37 manifest lines /21071 manifest bytes; current collection uses 37 files /36 manifest lines /20495 manifest bytes.
+  Conformance .1.4 preserves clean baaebc8e CHANGES242-457 as segment4976-6d1dd54d605a:216 lines/18973 bytes; all earlier archive records and controls remain exact. Proportionate governance: ADR0115.
 - current_ci_build_reuse: Director requires PGEN/RGX builds once after submodule updates, then reuse for LinkedSpec-only CI; startup .80.1-.4 own implementation.
   Initial/update preparation, zero dependency compilation in ordinary CI and explicit missing-artifact handling remain pending; startup prerequisites remain.
-- latest_bootstrap_read: 2026-09-13 — roadmap Yes / full codebase No / physical mdBook Yes; five backend lanes and supporting .3.7 closed. Conformance 3/143 reads 3078 fragments/183655 bytes; 140 groups remain, including gap suffix and four decoded Unicode inputs. Later .3.9-.3.11, formal book .4 and policy .5 remain; no runtime repair closes.
+- latest_bootstrap_read: 2026-09-13 — roadmap Yes / full codebase No / physical mdBook Yes; five backend lanes and supporting .3.7 closed. Conformance 4/143 reads4100 fragments/249030 bytes; 139 groups remain, including map-leaves suffix and four decoded Unicode inputs. Later .3.9-.3.11, formal book .4 and policy .5 remain; no runtime repair closes.

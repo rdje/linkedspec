@@ -497,15 +497,15 @@ the director's focused-verification grant used for this correction and the separ
 supporting-reading closeout. Reading completion establishes audited comprehension;
 it does not close the six grammar/literal repair roots or establish runtime signoff.
 Conformance, test and Unicode reading has exact ownership for all 160 inputs in
-143 bounded groups covering 8,257,059 decoded bytes. Three groups now account for
-3,078 fragments and 183,655 bytes, including 16 complete files and the gap-capture
-contract through line 805. The remaining gap contract and later sources retain
-explicit reading ownership. The contracts distinguish authored regex-slot identity
-from regex text, generated-source portability from independently executed proof,
-and per-invocation gap state from user effects outside rollback. Fresh identity,
-generated-source, language-coverage and gap structural/neutral checks pass.
-Existing callable, mark and diagnostic semantics are unchanged; named-argument
-support remains an approved future direction. The capability guide still has stale
+143 bounded groups covering 8,257,059 decoded bytes. Four groups now account for
+4,100 fragments and 249,030 bytes, including 19 complete files and the map-leaves
+contract through line 33. Gap, logical-helper and capability-manifest reading is
+complete. Logical helpers evaluate arguments eagerly; their typed truthiness is
+distinct from lazy control flow. Frozen mutation contracts retain their original
+status text while later capability records carry admission. Fresh logical,
+capability and mutation neutral checks pass; their scope does not close known
+runtime defects. Named-argument support remains an approved future direction.
+The capability guide still has stale
 current census, governance/inventory/public counts and generic-callable wording.
 Existing startup `.41.6` and `.41.7` now own these exact paragraphs and meaningful
 checks against recurrence. Their selected-marker guards currently miss the

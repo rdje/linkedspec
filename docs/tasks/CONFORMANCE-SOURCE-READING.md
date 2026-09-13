@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `CONFORMANCE-SOURCE-READING`
-- Status: `active` / exact decomposition; physical reading 3/143
+- Status: `active` / exact decomposition; physical reading 4/143
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.8`
 - Created: `2026-09-13`
 - Last updated: `2026-09-13`
@@ -99,14 +99,22 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
   Commit: `CONFORMANCE-SOURCE-READING.1.3 - read slot identity fixtures generated roles and gap prefix`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.4`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `baaebc8ef62baf84447767c2b361458c3ac57d9e`.
+  Verification tier: `focused`
+  Focused checks: Exact baseline-identical gap/logical/capability/map-prefix windows, canonical Knowledge reconciliation and relevant neutral checks; preserved source/task/history, bounded history rollover if required, memory, book and normal doctrines.
+  Canonical trigger: Ordinary bounded source-reading leaf and prescribed documentation rollover only; no runtime, contract or infrastructure change and no parent closeout. Later prerequisites remain.
   Goal: Read and understand conformance/test/Unicode group 4.
   Scope: `capability_conformance/inter_match_gap_capture_contract.json` lines 806-1213; `capability_conformance/logical_helper_contract.json` lines 1-303; `capability_conformance/manifest.json` lines 1-278; `capability_conformance/map_leaves_mutation_contract.json` lines 1-33
   Baseline evidence: 1022 fragments / 65375 decoded bytes; ordered range SHA-256 `5be3f9bc37cea2f28b36f750b93cf0b640df9cdb2187bc8078d9d25598a0b62d`.
   Dependencies: .1.3 committed with clean handoff.
   Acceptance: Read every scoped byte in complete bounded windows; retain source identity, exact comprehension, canonical Knowledge reconciliation, concrete finding ownership, focused proof and per-leaf continuity. Unread crossing constructs retain the next range owner.
-  Verification: `pending`
-  Commit: `pending`
+  Reading evidence: 13 complete windows / 1022 fragments / 65375 bytes; ordered window SHA-256 `da9916088f3eeedc594e7bbafea749360f96060a919268f230a42643158739c1`.
+  Comprehension: Gap completion locks exact neutral-plus-six-runtime route order, carrier roles, four source-read calls, legacy divergence, eight public documents/fifteen denials and ten outward guards. Logical helpers validate arity before eager ordered arguments, return typed booleans and keep codeblocks inert; lazy controls remain distinct. Capability schema v2 separates twenty independently referenced backend rows from the sole legacy exclusion and its disposition/retention fields. Frozen map-leaves prefix specifies bare receiver identity, root-kind original-shape traversal, detached callbacks/results, receiver guard, atomic commit and post-commit continuation; later admission does not rewrite its original future-neutral status. Map syntax suffix and cases remain .1.5-owned.
+  Verification: exact 13-window/source and 143-group/302-range audits; fresh logical 17/10/3, 19 documents/14 denials/26 mutations; capability 20/100, one exclusion, 19 exclusion/16 admission/17 recurring/4 mutation-public/6 public/4 language mutations; map-leaves 4 valid/14 invalid/5 exclusions/10 successes/8 failures, 6 callback plus1 continuation compositions and167+592 mutations. Prior gap structural proof remains unchanged-source dated evidence. Preserve source/task/history, verify required complete-record rollover, memory, Knowledge, both histories, rendered book, git diff --check and normal doctrines. No dependency build or fresh backend matrix. No new runtime defect is inferred; startup .58/.59 and all earlier repairs remain open. Full gap/logical/manifest sources and exact map1-33 prefix are read; no unread map suffix credit.
+  Rollover proof: Required463-line CHANGES candidate becomes247 lines/32290 bytes. Exact clean activation CHANGES242-457 is segment4976-6d1dd54d605a,216 lines/18973 bytes, SHA-2566d1dd54d605a5363a60cfc39d7918f91cd6d3934f8df6e3d57c00f14c1d0d026. All34 older manifest records remain byte-exact; current collection37 files/36 manifest lines/20495 bytes fits unchanged limits. Hot-root plus archive reconstruction is identical at3613557 bytes/SHA-2569c8ea4a6eee5f1e5b5a23383a5ee1103a2236cd2a9b40dfdad610f6a0b0a5e98. The first archive-only comparison was invalid because read_document_history --all intentionally excludes the hot root (reader lines30-35); source inspection and combined reconstruction resolve it without a product change. General guidance is recorded in bounded-change-notes-history-contract.
+  Candidate proof: Recorded13-window, all143-group/302-range and cumulative4-group/4100-fragment/249030-byte/19-complete-file audits PASS. Preserve2486 prior files, all prior recipe blocks,2774/2776 nodes and all94 book limitation headings; only this reading leaf/startup .3.8 change. Memory60, histories247/32290 and393/49578 lines/bytes, rendered book PASS. Plain git diff --check reports only the exact retained CHANGES247 record-separator blank at EOF; strict checking of every other path plus command-scoped core.whitespace=-blank-at-eof for CHANGES alone passes. No global setting, attribute or hook changes; byte-exact chronology is preserved. Normal doctrines govern focused landing.
+  Commit: `CONFORMANCE-SOURCE-READING.1.4 - read gap logical and capability authorities with frozen mutation prefix`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.5`
   Status: `pending`
@@ -1519,7 +1527,7 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
 
 | Rank | Leaf | Status | Next action |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.4` | `pending` | Read gap806-1213, complete logical-helper contract and capability manifest, then map-leaves1-33: 1022 fragments/65375 bytes. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.5` | `pending` | Read map-leaves34-461, MCP admission1-250 and canonical frames1-12: 690 fragments/65516 bytes; split long-line presentation into complete byte chunks if needed. |
 
 ## Decisions
 
@@ -1532,6 +1540,7 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
 
 ## Verification Log
 
+- `2026-09-13` .1.4: Conformance .1.4 reads 13 complete windows, 1,022 fragments and 65,375 baseline-identical bytes. Gap, logical-helper and capability-manifest reading reaches EOF; map-leaves reading covers only lines1-33. Physical reading is 4/143, cumulatively 4,100 fragments/249,030 bytes and 19 complete files. Logical proof passes 17 truthiness/10 helper/3 effect/26 mutation cases; capability schema v2 records 20 capabilities/100 pass states/one legacy exclusion; map-leaves neutral proof rejects 167 base plus 592 composition mutations. Frozen mutation status and later external admission remain distinct, and current logical/gap public inventories reconcile with their dated milestones. Existing source, runtime repair and capacity obligations remain. The prescribed change-history rollover preserves exact clean-HEAD suffix records; next .1.5 owns map-leaves34-461 and subsequent MCP sources.
 - `2026-09-13` .1.3: Conformance .1.3 reads 19 complete windows, 1,500 fragments and 52,668 baseline-identical bytes across 13 ranges. Diagnostic, duplicate-slot, six capability fixtures, three generated fixture files and the generated-source contract are complete; gap reading stops at line 805. Physical reading is 3/143, cumulatively 3,078 fragments and 183,655 bytes with 16 complete files. Fresh structural/neutral proof passes duplicate identity 5 fixtures/59 mutations, generated roles 10 families, language coverage 250 calls/126 public contracts and gap semantics 63/public 34 mutations. Authored slot identity, independent generated execution, gap state and user effects retain separate contracts. No new defect or runtime signoff is inferred; all existing repair, source, history and capacity obligations remain. Next .1.4 owns the exact gap suffix and following contracts.
 - `2026-09-13` .1.2: Conformance .1.2 reads12 complete windows/808 fragments/65,502 baseline-identical bytes: capability guide EOF, complete callable/signature/named-mark contracts and diagnostic lines1-268. Physical reading is2/143, cumulatively1,578 fragments/130,987 bytes and four complete files; diagnostic269-273 remains .1.3-owned. Current positional-only call contracts preserve the approved parked named-argument direction; mark isolation is by rule label, and diagnostics use a quiet per-invocation typed sink. Fresh named-mark and diagnostic neutral checks pass; prior unchanged callable/signature proof remains dated. Guide-suffix current17/80 claims extend existing startup .41.7, while current diagnostic metadata measures15 public documents/9 denials. Source, prior evidence, all repairs and capacity limits remain; no backend matrix, dependency build or parent closeout is claimed.
 - `2026-09-13` .1.1: Conformance .1.1 reads all 11 complete windows of capability_conformance/README.md lines1-770: 770 fragments/65,485 baseline-identical bytes. Physical conformance reading is1/143; the README suffix771-897 and later contracts remain .1.2-owned. Seven focused structural/neutral checks pass, while exact current census, mutation/inventory/public-count and generic-callable claims remain stale. Existing startup .41.7 and .41.6 now own those actual paragraphs and meaningful recurrence; the marker/denial-only cause is recorded without changing source or runtime. All143 groups/302 ranges, prior source/history, six supporting repair roots and existing capacity limits remain. No fresh backend matrix, dependency build or parent closeout is claimed.
@@ -1539,6 +1548,7 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
 
 ## Commit Log
 
+- `2026-09-13` .1.4: `CONFORMANCE-SOURCE-READING.1.4 - read gap logical and capability authorities with frozen mutation prefix`; activation baaebc8ef62baf84447767c2b361458c3ac57d9e; next .1.5 after clean handoff and zero-byte brief.
 - `2026-09-13` .1.3: `CONFORMANCE-SOURCE-READING.1.3 - read slot identity fixtures generated roles and gap prefix`; activation 51c7ea8fe89e4f96b5927ec02bc5b629d33d8986; next .1.4 after clean handoff and zero-byte brief.
 - `2026-09-13` .1.2: `CONFORMANCE-SOURCE-READING.1.2 - complete guide and read callable mark and diagnostic contracts`; activation 724185e83987bcd7597dae3840efd23af352859f; next .1.3 after clean handoff and zero-byte brief.
 - `2026-09-13` .1.1: `CONFORMANCE-SOURCE-READING.1.1 - read capability guide prefix and own stale current claims`; activation d3cfa5973beed85de5ae58dc81798262cafe18ad; next .1.2 after clean handoff and zero-byte brief.
@@ -1546,6 +1556,7 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
 
 ## Changelog
 
+- `2026-09-13` .1.4: Complete gap/logical/manifest sources and frozen mutation prefix; retain all existing repairs and apply the required exact history rollover.
 - `2026-09-13` .1.3: Complete diagnostic/duplicate-slot/fixtures/generated-source reading and gap prefix; preserve all prior findings and the exact unread suffix.
 - `2026-09-13` .1.2: Complete guide and three contract files; preserve the diagnostic suffix boundary, current metadata and all existing repair ownership.
 - `2026-09-13` .1.1: Complete the first11 guide windows; retain clear suffix ownership and concrete repair acceptance for current-claim drift.
