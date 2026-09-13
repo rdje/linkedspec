@@ -1,12 +1,12 @@
 # MEMORY
 
-- activation_commit: `baaebc8ef62baf84447767c2b361458c3ac57d9e` — clean conformance gap/logical/manifest reading activation.
-- latest_completed_leaf: `CONFORMANCE-SOURCE-READING.1.4 - read gap logical and capability authorities with frozen mutation prefix`; physical reading 4/143, 19 complete files and exact mutation prefix.
-- active_work_unit: `CONFORMANCE-SOURCE-READING.1.5` — map-leaves suffix, MCP admission and canonical transport frame prefix.
-- next_action: Read CONFORMANCE-SOURCE-READING.1.5 from clean HEAD: map_leaves_mutation_contract.json34-461, mcp_implementation_admission.json1-250 and mcp_semantic_transport/canonical_frames.jsonl1-12. Total 690 fragments/65,516 bytes in three exact ranges. Use complete bounded windows and explicit byte chunks if a logical line is too long; reconcile Knowledge, run focused proof, preserve sources/history, update book/live records and commit before .1.6. Continue PNT.
+- activation_commit: `24d3b9347d30254d4e3e2bc1a7b1df238aa3cad5` — clean conformance mutation/MCP reading activation.
+- latest_completed_leaf: `CONFORMANCE-SOURCE-READING.1.5 - read mutation and MCP admission with complete transport chunks`; physical reading5/143,21 complete files and exact frame prefix.
+- active_work_unit: `CONFORMANCE-SOURCE-READING.1.6` — remaining canonical frames, corpus/schema/semantic payloads and validator prefix.
+- next_action: Read CONFORMANCE-SOURCE-READING.1.6 from clean HEAD: canonical_frames.jsonl13-35, corpus.json1-471, schema.json1-664, semantic_payloads.json1-291 and validator_cases.json1-51 under capability_conformance/mcp_semantic_transport. Total1,500 fragments/63,045 bytes in five exact ranges. Read complete bounded windows, split oversized lines losslessly, reconcile Knowledge and focused proof, preserve source/history, update book/live records and commit before .1.7. Continue PNT.
   Named-argument direction PARSER-AUTHORING-APIS.4 is approved and parked; other authoring proposals and approved formats stay parked.
 - in_flight_uncommitted: none; reading evidence, exact claim/repair ownership and next action committed at Git HEAD; no background result remains.
-- blockers: none for authorized read-only PNT at conformance .1.5. Existing runtime/guide repairs, source prerequisites and later canonical boundaries remain; registry ceilings are unchanged.
+- blockers: none for authorized read-only PNT at conformance .1.6. Existing runtime/guide repairs, source prerequisites and later canonical boundaries remain; registry ceilings are unchanged.
 - current_rust_warning_debt: Repeated carriers report 1,870 pgen plus 26 rgx-core output warnings; RUST-DEPENDENCY-WARNING-ZERO.1-.7 own causal repair/pins/enforcement without suppression after Lua intake.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
   active table; the task metadata doctrine inventories all consumers, permits arbitrary frontier-row rewrites,
@@ -57,4 +57,4 @@
   Conformance .1.4 preserves clean baaebc8e CHANGES242-457 as segment4976-6d1dd54d605a:216 lines/18973 bytes; all earlier archive records and controls remain exact. Proportionate governance: ADR0115.
 - current_ci_build_reuse: Director requires PGEN/RGX builds once after submodule updates, then reuse for LinkedSpec-only CI; startup .80.1-.4 own implementation.
   Initial/update preparation, zero dependency compilation in ordinary CI and explicit missing-artifact handling remain pending; startup prerequisites remain.
-- latest_bootstrap_read: 2026-09-13 — roadmap Yes / full codebase No / physical mdBook Yes; five backend lanes and supporting .3.7 closed. Conformance 4/143 reads4100 fragments/249030 bytes; 139 groups remain, including map-leaves suffix and four decoded Unicode inputs. Later .3.9-.3.11, formal book .4 and policy .5 remain; no runtime repair closes.
+- latest_bootstrap_read: 2026-09-13 — roadmap Yes / full codebase No / physical mdBook Yes; five backend lanes and supporting .3.7 closed. Conformance5/143 reads4790 fragments/314546 bytes;138 groups remain, including frame suffix and four decoded Unicode inputs. Later .3.9-.3.11, formal book .4 and policy .5 remain; no runtime repair closes.

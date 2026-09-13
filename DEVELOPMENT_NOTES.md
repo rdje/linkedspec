@@ -10,6 +10,12 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-13 — CONFORMANCE-SOURCE-READING.1.5 — retain whole-line identity across bounded presentation
+
+The completed mutation cases preserve callback atomicity, unrelated effects, distinct shadow bindings, guard release, aggregate detachment and continuation after commit. MCP admission binds five source implementations and six runtime rows to one twelve-role contract and all-twenty recurring identity proof. Canonical frames1-12 contain discovery, tool schemas and semantic request/results. The14687-byte tools-list frame is fully consumed as6500+6500+1687 UTF-8 bytes; the original source-window identity and exact chunk hashes are both retained. Reading and structural validation remain distinct from executing native servers; all earlier repair obligations remain.
+
+Verification: exact11-window and long-line three-chunk reconstruction, all143-group/302-range source ownership and cumulative reading; fresh MCP materializer35/10/10, independent validator76 and implementation/admission5/5+6/6 complete/141 proof. Map-leaves167+592 remains the unchanged-source .1.4 neutral run. No native/server execution, dependency build or fresh matrix is claimed. Source/task/history preservation, memory, Knowledge, both history checks, rendered book, git diff --check and normal doctrines govern focused landing.
+
 ## 2026-09-13 — CONFORMANCE-SOURCE-READING.1.4 — separate frozen neutral authorities from later admission
 
 The complete gap suffix records six-runtime recurrence, four current source-read calls, eight public documents/fifteen denials and ten guarded outward surfaces. Logical arguments are eager after arity validation; typed truthiness uses emptiness for strings/aggregates, also treats null/false/numeric zero as false, and never invokes a codeblock. Capability schema v2 records 20 rows/100 pass states with a single explicit legacy exclusion. The map-leaves prefix remains a frozen pre-implementation authority whose later admission is external and digest-bound. Existing receiver-guard/substitution repairs stay open. Reading ends at map line33; prescribed history rollover preserves complete clean-HEAD records without raising limits.

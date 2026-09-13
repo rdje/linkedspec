@@ -2299,7 +2299,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Status: `active`
   Goal: Split and read all 160 entries under capability_conformance, cli_conformance, t, tests, and unicode_case.
   Children: `.3.8.0` owns exact decomposition; `CONFORMANCE-SOURCE-READING.1` owns all143 reading groups; .2 findings and .3 independent closeout stay separate.
-  Reading owner: `docs/tasks/CONFORMANCE-SOURCE-READING.md`; .3.8.0 preserves 143 groups/302 exact ranges over 160 baseline-identical inputs. Physical reading 4/143: cumulative4100 fragments/249030 bytes, 19 complete files and map-leaves1-33. Next .1.5 owns the exact map suffix and MCP sources; all existing repairs and prerequisites remain.
+  Reading owner: `docs/tasks/CONFORMANCE-SOURCE-READING.md`; .3.8.0 preserves143 groups/302 exact ranges over160 baseline-identical inputs. Physical reading5/143: cumulative4790 fragments/314546 bytes,21 complete files and canonical frames1-12. The14687-byte line8 is fully read in three exact chunks. Next .1.6 owns remaining frames and transport inputs; all repairs/prerequisites remain.
   Acceptance: Include phase0, neutral contracts, fixtures, generators, and four explicitly decoded pinned Unicode
     inputs. Keep generated/fixture bytes in scope; count neither a hash nor enumeration as full reading.
   Verification: `pending`
@@ -4641,7 +4641,7 @@ startup implementation prerequisites and the rgx reading exclusion remain intact
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.5` | `pending` | Read map-leaves34-461, MCP admission1-250 and canonical frames1-12: 690 fragments/65516 bytes; split long-line presentation into complete byte chunks if needed. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.6` | `pending` | Read canonical frames13-35, complete corpus/schema/semantic payloads and validator cases1-51:1500 fragments/63045 bytes. Preserve exact long-line presentation. |
 
 ## Reading Ledger
 

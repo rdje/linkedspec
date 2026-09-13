@@ -2,13 +2,14 @@
 id: conformance-source-reading-coverage
 title: Conformance and Unicode reading has exact baseline ownership in 143 bounded groups
 answers:
+  - "how are oversized source lines read without truncation"
   - "where is conformance test and Unicode source reading tracked"
   - "how many conformance source reading groups remain"
   - "does source reading include decompressed pinned Unicode inputs"
   - "how do I verify conformance reading source and range coverage"
   - "which conformance source reading file has the longest line"
 date: 2026-09-13
-status: exact decomposition preserved; physical reading 4/143, nineteen files complete and139 groups remain
+status: exact decomposition preserved; physical reading 5/143, twenty-one files complete and138 groups remain
 tags: [reading, conformance, tests, unicode, continuity, CONFORMANCE-SOURCE-READING]
 evidence: "Startup .3.8.0 independently accounts for160 baseline-identical files,5,422,313 stored bytes and8,257,059 decoded bytes in167,606 line fragments/167,604 LF delimiters. Four gzip inputs contribute54,500 decoded lines. All143 groups/302 ranges are contiguous, disjoint and bounded at1500 fragments/65536 bytes. No source, registry or runtime behavior changes; no physical-reading credit from inventory."
 reverify: "Run CONFORMANCE_SOURCE_READING_COVERAGE below through the project-data wrapper; it derives source identity from Git and range ownership from the task-tree rather than a parallel manifest. Use scripts/check_task_tree_metadata.sh for actual task collection limits."
@@ -200,3 +201,46 @@ capability20/100/one legacy exclusion and mutation167+592 neutral proof pass.
 [[logical-helper-neutral-contract]] and [[mutation-capability-admission]] explain
 why historical fixture boundaries/frozen status must be reconciled with later
 admission; passing metadata does not close the current runtime repair backlog.
+
+
+# Complete presentation of an oversized source line
+
+`.1.5` reads11 source windows in13 complete presentations:690 fragments/65,516
+bytes, bringing cumulative reading to4,790 fragments/314,546 bytes and21 complete
+files. The14,687-byte canonical frame at line8 is consumed in three exact UTF-8
+byte intervals: [0,6500), [6500,13000), [13000,14687). The task's `Long-line evidence`
+retains each chunk hash and the whole-line identity. Presentation boundaries are
+not source-line boundaries and do not omit or duplicate bytes. Frames13–35 remain
+`.1.6`-owned; full-file materialization/validation is not reading credit for them.
+
+Fresh MCP proof is35 canonical frames/10 raw inputs/10 lifecycle cases/76 transport
+mutations and5/5 implementations plus6/6 runtimes/141 admission mutations. The
+current contract and its historical rollout remain in [[mcp-2026-07-28-stdio-contract]];
+completed map-leaves reading reconciles [[map-leaves-mutation-neutral-contract]]
+and [[write-map-leaves-neutral-composition]] without closing known runtime repairs.
+
+```bash
+bash tools/project_data_run.sh python3 - <<'CONFORMANCE_LONG_LINE_WINDOWS'
+from pathlib import Path
+import hashlib,json,re,subprocess,sys
+leaf=sys.argv[1] if len(sys.argv)>1 else 'CONFORMANCE-SOURCE-READING.1.5'
+text=Path('docs/tasks/CONFORMANCE-SOURCE-READING.md').read_text()
+node=re.search(r'^- ID: `'+re.escape(leaf)+r'`\n.*?(?=^- ID: |^## |\Z)',text,re.M|re.S)
+assert node and 'Status: `done`' in node[0]
+records=json.loads(re.search(r'^  Long-line evidence: (.+)$',node[0],re.M)[1])
+assert records
+for record in records:
+ path=record['path'];raw=Path(path).read_bytes()
+ assert raw==subprocess.check_output(['git','show','baeb984e36a94a15951cd23d4c52def5064cdaca:'+path])
+ line=raw.splitlines(True)[record['line']-1]
+ assert len(line)==record['bytes'] and hashlib.sha256(line).hexdigest()==record['sha256']
+ chunks=[];position=0
+ for chunk in record['chunks']:
+  assert chunk['start']==position and position<chunk['end']<=len(line)
+  value=line[position:chunk['end']];value.decode('utf-8')
+  assert len(value)==chunk['bytes']<=6500 and hashlib.sha256(value).hexdigest()==chunk['sha256']
+  chunks.append(value);position=chunk['end']
+ assert position==len(line) and b''.join(chunks)==line
+print('PASS exact recorded UTF-8 byte chunks; reconstruction grants no new physical-reading credit.')
+CONFORMANCE_LONG_LINE_WINDOWS
+```

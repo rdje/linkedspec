@@ -2268,7 +2268,7 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.5` | `pending` | Read map-leaves34-461, MCP admission1-250 and canonical frames1-12: 690 fragments/65516 bytes; split long-line presentation into complete byte chunks if needed. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.6` | `pending` | Read canonical frames13-35, complete corpus/schema/semantic payloads and validator cases1-51:1500 fragments/63045 bytes. Preserve exact long-line presentation. |
 
 ## Decisions
 

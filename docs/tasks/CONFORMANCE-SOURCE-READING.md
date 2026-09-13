@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `CONFORMANCE-SOURCE-READING`
-- Status: `active` / exact decomposition; physical reading 4/143
+- Status: `active` / exact decomposition; physical reading 5/143
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.8`
 - Created: `2026-09-13`
 - Last updated: `2026-09-13`
@@ -117,14 +117,23 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
   Commit: `CONFORMANCE-SOURCE-READING.1.4 - read gap logical and capability authorities with frozen mutation prefix`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.5`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `24d3b9347d30254d4e3e2bc1a7b1df238aa3cad5`.
+  Verification tier: `focused`
+  Focused checks: Complete baseline-identical map-leaves/MCP admission/frame-prefix windows with lossless long-line presentation; reconcile canonical facts and relevant neutral evidence, preserve source/task/history, and verify memory, book and normal doctrines.
+  Canonical trigger: Ordinary bounded reading leaf; no source, public-contract or infrastructure change, admission or parent closeout. Later prerequisites remain.
   Goal: Read and understand conformance/test/Unicode group 5.
   Scope: `capability_conformance/map_leaves_mutation_contract.json` lines 34-461; `capability_conformance/mcp_implementation_admission.json` lines 1-250; `capability_conformance/mcp_semantic_transport/canonical_frames.jsonl` lines 1-12
   Baseline evidence: 690 fragments / 65516 decoded bytes; ordered range SHA-256 `10df429dd735f3791c7272b059b52cbf97b77fdc2ea97335fc23b39429df526d`.
   Dependencies: .1.4 committed with clean handoff.
   Acceptance: Read every scoped byte in complete bounded windows; retain source identity, exact comprehension, canonical Knowledge reconciliation, concrete finding ownership, focused proof and per-leaf continuity. Unread crossing constructs retain the next range owner.
-  Verification: `pending`
-  Commit: `pending`
+  Reading evidence: 11 complete windows / 690 fragments / 65516 bytes; ordered window SHA-256 `ae5793857ec10b86ff7d0b4a4a661b92f25ab04cccd47dfbafab966aa0d68cc2`.
+  Long-line evidence: [{"path":"capability_conformance/mcp_semantic_transport/canonical_frames.jsonl","line":8,"bytes":14687,"sha256":"2d319315848ce9dfa0b3128e07a899340c83f456982c18b6a2033acb4935145f","chunks":[{"start":0,"end":6500,"bytes":6500,"sha256":"4587ea9b2d4451234a5e3de7db6517fdb41fbf8aa1114752f6a22fbd844fcf98"},{"start":6500,"end":13000,"bytes":6500,"sha256":"f66a73941fd1158905effb8d26bc6cf5566d83f362ca033fca358e450e90804c"},{"start":13000,"end":14687,"bytes":1687,"sha256":"b0ae7acde0d9fbacfbce650d2cc4fbfa7f89c7d3ebf32d978e36d98f200d5736"}]}]
+  Presentation: Eleven source windows use thirteen complete presentations. Canonical frame8 is read in UTF-8 byte intervals[0,6500),[6500,13000),[13000,14687); every chunk is fully consumed and their concatenation is the exact source line. No source fragment is omitted or counted twice.
+  Comprehension: The completed mutation contract fixes exact typed AST/diagnostic spans, original-root-kind traversal, copied callback frames, unrelated effects, callback rollback, shadow identity, guard release, detached boundaries and continuation after commit. Known guard/substitution repairs remain separate. MCP admission binds one transport digest, five production implementations and six runtime consumers to twelve ordered roles, with all-twenty native/MCP identity recurrence and independent primary-CLI proof. Read canonical frames cover discovery identities, two tool schemas, capabilities and rule-list request/results; inner canonical semantic JSON equals structured payload while envelopes carry runtime identity. Remaining frames and transport source inputs stay .1.6-owned.
+  Verification: exact11-window and long-line three-chunk reconstruction, all143-group/302-range source ownership and cumulative reading; fresh MCP materializer35/10/10, independent validator76 and implementation/admission5/5+6/6 complete/141 proof. Map-leaves167+592 remains the unchanged-source .1.4 neutral run. No native/server execution, dependency build or fresh matrix is claimed. Source/task/history preservation, memory, Knowledge, both history checks, rendered book, git diff --check and normal doctrines govern focused landing. Canonical MCP transport and mutation-composition facts reconcile earlier pending milestones with current admission. No new runtime defect or repaired path is inferred.
+  Candidate proof: Recorded11-window/three-chunk, all143-group/302-range and cumulative5-group/4790-fragment/314546-byte/21-complete-file audits PASS. Preserve2489 prior files, all prior recipe blocks,2774/2776 nodes and all94 book limitation headings; only this leaf/startup .3.8 change. Memory60, histories253/33836 and399/50893 lines/bytes, rendered book and plain git diff --check PASS. An initial history check used the read-only query command with an unsupported --check option; corrected to both COMMIT-mandated roll_document_history --check invocations, which pass. Normal doctrines govern focused landing.
+  Commit: `CONFORMANCE-SOURCE-READING.1.5 - read mutation and MCP admission with complete transport chunks`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.6`
   Status: `pending`
@@ -1527,7 +1536,7 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
 
 | Rank | Leaf | Status | Next action |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.5` | `pending` | Read map-leaves34-461, MCP admission1-250 and canonical frames1-12: 690 fragments/65516 bytes; split long-line presentation into complete byte chunks if needed. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.6` | `pending` | Read canonical frames13-35, complete corpus/schema/semantic payloads and validator cases1-51:1500 fragments/63045 bytes. Preserve exact long-line presentation. |
 
 ## Decisions
 
@@ -1540,6 +1549,7 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
 
 ## Verification Log
 
+- `2026-09-13` .1.5: Conformance .1.5 reads 11 complete source windows in 13 presentations, covering 690 fragments/65,516 baseline-identical bytes. Map-leaves and MCP admission reach EOF; canonical frames1-12 are read, including the complete14,687-byte tools-list line in three contiguous chunks. Physical reading is5/143, cumulatively4,790 fragments/314,546 bytes with21 complete files. MCP materialization matches35 frames/10 raw inputs/10 lifecycle cases; independent transport validation rejects76 mutations, and admission reports5/5 implementations plus6/6 runtimes with141 mutations. Prior mutation167+592 proof remains unchanged-source dated evidence. Receiver identity, callback atomicity and post-commit continuation remain distinct from runtime admission and transport payload identity. All existing repairs, source/history and capacity limits remain; frames13-35 and following sources belong to .1.6.
 - `2026-09-13` .1.4: Conformance .1.4 reads 13 complete windows, 1,022 fragments and 65,375 baseline-identical bytes. Gap, logical-helper and capability-manifest reading reaches EOF; map-leaves reading covers only lines1-33. Physical reading is 4/143, cumulatively 4,100 fragments/249,030 bytes and 19 complete files. Logical proof passes 17 truthiness/10 helper/3 effect/26 mutation cases; capability schema v2 records 20 capabilities/100 pass states/one legacy exclusion; map-leaves neutral proof rejects 167 base plus 592 composition mutations. Frozen mutation status and later external admission remain distinct, and current logical/gap public inventories reconcile with their dated milestones. Existing source, runtime repair and capacity obligations remain. The prescribed change-history rollover preserves exact clean-HEAD suffix records; next .1.5 owns map-leaves34-461 and subsequent MCP sources.
 - `2026-09-13` .1.3: Conformance .1.3 reads 19 complete windows, 1,500 fragments and 52,668 baseline-identical bytes across 13 ranges. Diagnostic, duplicate-slot, six capability fixtures, three generated fixture files and the generated-source contract are complete; gap reading stops at line 805. Physical reading is 3/143, cumulatively 3,078 fragments and 183,655 bytes with 16 complete files. Fresh structural/neutral proof passes duplicate identity 5 fixtures/59 mutations, generated roles 10 families, language coverage 250 calls/126 public contracts and gap semantics 63/public 34 mutations. Authored slot identity, independent generated execution, gap state and user effects retain separate contracts. No new defect or runtime signoff is inferred; all existing repair, source, history and capacity obligations remain. Next .1.4 owns the exact gap suffix and following contracts.
 - `2026-09-13` .1.2: Conformance .1.2 reads12 complete windows/808 fragments/65,502 baseline-identical bytes: capability guide EOF, complete callable/signature/named-mark contracts and diagnostic lines1-268. Physical reading is2/143, cumulatively1,578 fragments/130,987 bytes and four complete files; diagnostic269-273 remains .1.3-owned. Current positional-only call contracts preserve the approved parked named-argument direction; mark isolation is by rule label, and diagnostics use a quiet per-invocation typed sink. Fresh named-mark and diagnostic neutral checks pass; prior unchanged callable/signature proof remains dated. Guide-suffix current17/80 claims extend existing startup .41.7, while current diagnostic metadata measures15 public documents/9 denials. Source, prior evidence, all repairs and capacity limits remain; no backend matrix, dependency build or parent closeout is claimed.
@@ -1548,6 +1558,7 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
 
 ## Commit Log
 
+- `2026-09-13` .1.5: `CONFORMANCE-SOURCE-READING.1.5 - read mutation and MCP admission with complete transport chunks`; activation 24d3b9347d30254d4e3e2bc1a7b1df238aa3cad5; next .1.6 after clean handoff and zero-byte brief.
 - `2026-09-13` .1.4: `CONFORMANCE-SOURCE-READING.1.4 - read gap logical and capability authorities with frozen mutation prefix`; activation baaebc8ef62baf84447767c2b361458c3ac57d9e; next .1.5 after clean handoff and zero-byte brief.
 - `2026-09-13` .1.3: `CONFORMANCE-SOURCE-READING.1.3 - read slot identity fixtures generated roles and gap prefix`; activation 51c7ea8fe89e4f96b5927ec02bc5b629d33d8986; next .1.4 after clean handoff and zero-byte brief.
 - `2026-09-13` .1.2: `CONFORMANCE-SOURCE-READING.1.2 - complete guide and read callable mark and diagnostic contracts`; activation 724185e83987bcd7597dae3840efd23af352859f; next .1.3 after clean handoff and zero-byte brief.
@@ -1556,6 +1567,7 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
 
 ## Changelog
 
+- `2026-09-13` .1.5: Complete mutation/MCP admission and twelve canonical frames, with independently replayable full long-line chunks; all repairs and later source scopes remain.
 - `2026-09-13` .1.4: Complete gap/logical/manifest sources and frozen mutation prefix; retain all existing repairs and apply the required exact history rollover.
 - `2026-09-13` .1.3: Complete diagnostic/duplicate-slot/fixtures/generated-source reading and gap prefix; preserve all prior findings and the exact unread suffix.
 - `2026-09-13` .1.2: Complete guide and three contract files; preserve the diagnostic suffix boundary, current metadata and all existing repair ownership.

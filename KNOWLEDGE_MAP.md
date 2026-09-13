@@ -3,7 +3,7 @@
 > **AUTO-GENERATED — DO NOT EDIT.** Regenerate with `knowledge-map/scripts/gen_knowledge_map.sh`.
 > Source of truth = YAML front-matter in: `docs/knowledge docs/decisions`. Edit the fact files, never this map.
 > A fact is any `.md` whose front-matter has a non-empty `answers:` list.
-> **1146** facts · **9141** question keys.
+> **1146** facts · **9142** question keys.
 
 ## Questions → fact
 
@@ -3242,6 +3242,7 @@
 - "how are ordinary Lua harray helpers routed" -> [lua-runtime-harray-helper-closeout](docs/knowledge/lua-runtime-harray-helper-closeout.md) · 2026-07-13 · reverify: `bash tools/run_lua_local.sh && bash tools/run_python_project_data.sh tools/check_uniform_binding_mutation_result_surface.py && bash tools/run_python_project_data.sh tools/check_public_aggregate_selector_surface.py && perl tools/check_capability_conformance.pl && rg -n 'local HASH_HELPERS|local PURE_HASH_HELPERS|evaluate_hash_helper|execute_hash_set_key_statement' lua/src/linkedspec/action_contracts.lua lua/src/linkedspec/interpreter.lua`
 - "how are oversized Dart source lines split for reading" -> [dart-startup-reading-coverage](docs/knowledge/dart-startup-reading-coverage.md) · 2026-09-09
 - "how are oversized Lua source lines split for reading" -> [lua-startup-reading-coverage](docs/knowledge/lua-startup-reading-coverage.md) · 2026-09-12
+- "how are oversized source lines read without truncation" -> [conformance-source-reading-coverage](docs/knowledge/conformance-source-reading-coverage.md) · 2026-09-13 · reverify: `Run CONFORMANCE_SOURCE_READING_COVERAGE below through the project-data wrapper; it derives source identity from Git and range ownership from the task-tree rather than a parallel manifest. Use scripts/check_task_tree_metadata.sh for actual task collection limits.`
 - "how are portable generated trace roles exposed in Rust" -> [rust-generated-source-v1-result-projection](docs/knowledge/rust-generated-source-v1-result-projection.md) · 2026-09-07 · reverify: `cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test source_emitter generated_source_v2_neutral_plan_and_trace_roles_are_exact; cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test trace_controls; rg -n 'execute_generated_value_with_plan|execute_generated_with_plan_context|generated_rule_enter|generated_family_decision|generated_rule_exit' rust/linkedspec-runtime/src/engine.rs rust/linkedspec-runtime/src/source_emitter.rs`
 - "how are prefix interstitial and tail gaps defined" -> [inter-match-gap-executable-contract-plan](docs/knowledge/inter-match-gap-executable-contract-plan.md) · 2026-08-16 · reverify: `bash tools/check_inter_match_gap_capture_six_runtime.sh && prove -Iperl t/inter_match_gap_capture_perl_contract.t && bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test inter_match_gap_capture_contract`
 - "how are progressive dispatch cycles and progress checked" -> [progressive-span-dispatch-audit-plan](docs/knowledge/progressive-span-dispatch-audit-plan.md) · 2026-08-17
@@ -9587,8 +9588,8 @@ _Capability guide retains stale current census and callable claims behind passin
 ### conformance-source-reading-coverage
 _Conformance and Unicode reading has exact baseline ownership in 143 bounded groups_
 
-- **answers:** where is conformance test and Unicode source reading tracked | how many conformance source reading groups remain | does source reading include decompressed pinned Unicode inputs | how do I verify conformance reading source and range coverage | which conformance source reading file has the longest line
-- **date:** 2026-09-13 · **status:** exact decomposition preserved; physical reading 4/143, nineteen files complete and139 groups remain
+- **answers:** how are oversized source lines read without truncation | where is conformance test and Unicode source reading tracked | how many conformance source reading groups remain | does source reading include decompressed pinned Unicode inputs | how do I verify conformance reading source and range coverage | which conformance source reading file has the longest line
+- **date:** 2026-09-13 · **status:** exact decomposition preserved; physical reading 5/143, twenty-one files complete and138 groups remain
 - **evidence:** `Startup .3.8.0 independently accounts for160 baseline-identical files,5,422,313 stored bytes and8,257,059 decoded bytes in167,606 line fragments/167,604 LF delimiters. Four gzip inputs contribute54,500 decoded lines. All143 groups/302 ranges are contiguous, disjoint and bounded at1500 fragments/65536 bytes. No source, registry or runtime behavior changes; no physical-reading credit from inventory.`
 - **reverify:** `Run CONFORMANCE_SOURCE_READING_COVERAGE below through the project-data wrapper; it derives source identity from Git and range ownership from the task-tree rather than a parallel manifest. Use scripts/check_task_tree_metadata.sh for actual task collection limits.`
 - **source:** [`docs/knowledge/conformance-source-reading-coverage.md`](docs/knowledge/conformance-source-reading-coverage.md)
