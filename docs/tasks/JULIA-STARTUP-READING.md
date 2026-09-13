@@ -1742,7 +1742,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.1.51` | `pending` | Complete write tests and read dormant progressive dispatch after clean .1.50; preserve all 35 repair roots including the failure-state coverage gap, known failures, native-error exclusions and parked named arguments. |
+| 1 | `LUA-STARTUP-READING.3` | `pending` | Independently audit all 51 committed source-reading groups and closeout prerequisites after clean .1.51; preserve all 35 repair roots, known failures and no-build restrictions before supporting-code handoff. |
 
 ## Decisions
 

@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-13 — Final Lua source ranges and complete consumer proof
+
+- Read final two ranges in five complete windows: 729 fragments /28118 bytes; all 51 groups and 99 baseline-identical files physically read, 71269 fragments /2732450 bytes.
+- Complete write 438 and dormant authority 273 pass per installed host, 1422 ordinary assertions; write/progressive/public neutral proof and discovery topology pass.
+- All nineteen individually wrong expected bindings survive the full write consumer per host, extending .2.35 with 38 full-suite observations while preserving prior prefix evidence.
+- LUA-STARTUP-READING.1.51 keeps all 35 repairs and parent/startup closeout open; .3 now owns the independent audit and exact canonical/no-build boundary before supporting-code handoff.
+
 ## 2026-09-13 — Lua Unicode completion and write failure-state coverage
 
 - Read four exact ranges in eleven complete windows: 1500 fragments /61835 bytes; cumulative 50/51, 70540 fragments /2704332 bytes, 97 complete files.

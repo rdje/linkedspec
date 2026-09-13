@@ -329,12 +329,12 @@ step. `PARSER-AUTHORING-APIS.4` owns grammar/binding, definition choices,
 representation compatibility and bounded implementation planning; these four
 children remain unactivated and current startup reading continues.
 
-**Lua source reading is underway (50/51 groups):** the complete
+**Lua physical source reading is complete (51/51 groups); independent audit is pending:** the complete
 99-file inventory covers 71,268 physical lines and 2,732,450 bytes. Its 51 owned
 reading groups include generated tables, native adapters and both-ABI tests.
 Two UTF-8-safe byte windows retain an oversized generated MCP line, so the
 per-window total is 71,269 fragments. The independent range audit proves complete
-ownership. The first 50 groups physically read 70,540 fragments /2,704,332 bytes,
+ownership. All 51 groups physically read 71,269 fragments /2,732,450 bytes,
 including the complete README, both commands, all three native C bindings, ActionIR
 constructors, call names, contracts, the complete parser, bounded authority,
 compiled state and corpus modules, facade, interpreter, JSON and matching. They
@@ -360,8 +360,10 @@ observation tests are fully read, as are native observation, runtime projection,
 source foundation and static graph. Remaining-static, semantic admission and
 source-alias, staged-enrichment, standalone-lifecycle, typed-source and Unicode
 classifier, identity, negative-isolation and parser-route tests are complete;
-write-vivification reading reaches line 399. Ninety-seven files are fully read.
-The remaining group requires its own reading and verified commit; source reading does not close the limitations below.
+write-vivification and the dormant progressive-authority consumer are complete.
+All ninety-nine files are physically read. Independent coverage/comprehension and
+commit-activation audit plus canonical closeout remain; physical reading does not
+close the limitations below or the supporting-code/startup prerequisites.
 
 **Lua Unicode casing and rule-label verification:** all property tables match the
 pinned Unicode 17 neutral data. Four Sigma contexts at 2,030 property endpoints
@@ -952,18 +954,48 @@ primary traces percent-encode unsafe selector bytes.
 The write prefix passes 408 per host through line 384. It checks exact typed path
 syntax and scalar spans, successful binding/result values, expression order,
 structural diagnostics, injected expression-error identity, non-creating reads and
-detachment. Execution excludes the partially read function/carrier suffix. Neutral
-Unicode and write checks pass, giving an ordinary total of 4,976 assertions.
+detachment. That child-50 prefix excluded the function/carrier suffix; child 51
+completes it below. Its Unicode and write checks pass, giving an ordinary total
+of 4,976 assertions.
 The separate failure-state mutation finding below limits what those passing tests
 establish. Exact scope, replay and repair ownership:
 `docs/knowledge/lua-unicode-write-failure-state-consumer-reading.md`.
+
+**Lua final source-consumer verification:** the complete write suite passes
+438 assertions per installed host. Its suffix checks fresh function locals, bound
+null rejection, dynamic path identity in descriptors and reconstructed/generated/
+current-host emitted/primary execution. Empty compiled paths reject across four
+admission routes, and a reserved root rejects at the state validator. These tests
+do not fill the nineteen missing failure-state oracles described below.
+
+The intentionally dormant progressive authority passes 273 per host. All neutral
+view, authority, cancellation, chain and execution fixtures run, and all 26 governed
+diagnostic contexts are observed. Nested scalar positions and spans rebase correctly;
+retained views/requests expire. Returned values detach, while cycles, nonfinite
+values, extra array members and live-looking fields reject. The healthy nested
+20-minus-2-minus-3 case leaves 15 steps and two calls; the separately measured
+parent-ceiling inheritance defect remains open.
+
+The authority's parent-state fixture compares a local copied value that was never
+passed to the callback or authority. It is fixture consistency, not independent
+proof against shared-state mutation. Its one-byte truncation check concerns the
+child-diagnostic text field. Intentional absence from ordinary and canonical
+discovery is verified alongside the separate admitted carrier's registrations.
+No full driver or other-backend matrix is run by this final reading child.
+
+The ordinary total is 1,422 assertions; write and progressive/public neutral checks
+pass. All 99 Lua files are now physically read, while independent reading audit,
+canonical startup closeout and all 35 repair roots remain open. Exact evidence:
+`docs/knowledge/lua-final-source-consumer-reading.md`.
 
 **Known Lua test-coverage limitation — write failure state is not asserted:**
 the sixteen structural-failure and three expression-failure loops do not observe
 the binding after failure, although their neutral fixtures specify its required
 presence and value. Changing each expected state individually to a contradictory
 object still leaves all 408 prefix assertions passing on both hosts: 38 surviving
-mutations. For example, the outer array-gap case requires an earlier RHS update
+mutations. Child 51 confirms all nineteen mutants also survive the complete
+438-assertion consumer on each host, adding 38 full-suite observations.
+For example, the outer array-gap case requires an earlier RHS update
 to remain visible; its existing checks verify diagnostics and event order but do
 not verify that final binding.
 

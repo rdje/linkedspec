@@ -2253,9 +2253,9 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Status: `active`
   Goal: Split and read all 99 baseline Lua entries, including native adapters, both-ABI tests, runtime, and commands.
   Children: `.3.6.0` owns decomposition; LUA-STARTUP-READING.1 owns 51 reading children and .3 owns independent closeout.
-  Reading owner: `docs/tasks/LUA-STARTUP-READING.md`; .4/.4.2 close under ADR0118 and containment .14; exact reading is 50/51; .1.51 follows child 50; .2.1-.2.33 own thirty-three concrete repair roots, with installed5.5 nil-error failures under .2.2 and shared Lua budget repair under .82.3.1; .28.7 owns the baseline public-check failure.
+  Reading owner: `docs/tasks/LUA-STARTUP-READING.md`; .4/.4.2 close under ADR0118 and containment .14; exact reading is 51/51; .3 follows child 51; .2.1-.2.33 own thirty-three concrete repair roots, with installed5.5 nil-error failures under .2.2 and shared Lua budget repair under .82.3.1; .28.7 owns the baseline public-check failure.
   Acceptance: Define bounded file/range children before reading; generated tables and the large test runner stay in scope.
-  Verification: Lua .1.50 reads four exact ranges in eleven complete windows: 1,500 fragments /61,835 bytes; cumulative 50/51, 70,540 fragments /2,704,332 bytes. All 99 Lua sources remain baseline-identical; 97 files are fully read. Full Unicode identity 359/negative isolation 1542/routes 179 and exact write prefix 408 pass per installed host, 4,976 assertions total; Unicode and write neutral checkers pass. Nineteen individually changed expected_binding fixture records still pass that unchanged prefix on each host (38 surviving mutations), locating a post-failure state-oracle gap in the sixteen structural and three expression-failure loops. New .2.35/.1/.2 own assertion and mutation repairs; no runtime-state defect is inferred. Existing .2.1 gains precise write-admission and coverage qualifications. All 35 repair roots, earlier failures and native-error exclusions remain open. Next .1.51 completes write tests and reads the dormant progressive consumer; named arguments and startup/ADR0118 prerequisites remain unchanged.
+  Verification: Lua .1.51 reads the final two exact ranges in five complete windows: 729 fragments /28,118 bytes. Physical Lua source reading reaches 51/51 groups, all 99 baseline-identical files, 71,269 fragments /2,732,450 bytes. Full write 438 and dormant progressive authority 273 pass per installed host, 1,422 ordinary assertions total; write and progressive/public neutral checkers pass. All nineteen wrong expected_binding records individually survive the complete write consumer per host (38 full-suite mutations), extending existing .2.35 coverage evidence without establishing incorrect runtime state. Authority non-discovery is intentional; its healthy nested-budget and disconnected parent-state fixtures do not close earlier integration defects. Existing .2.1 owns dated progressive guidance qualifications. All 35 repair roots, known PUC5.5 failures and native-error exclusions remain open. Next .3 independently audits coverage, comprehension, commits/activations and closeout prerequisites; the reading parent and startup .3.6 remain open pending their canonical proof or a newly explicit scoped exception. Named arguments, supporting-code reading and startup/ADR0118 prerequisites remain unchanged.
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.3.6.0`
@@ -4607,7 +4607,7 @@ startup implementation prerequisites and the rgx reading exclusion remain intact
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.1.51` | `pending` | Complete write tests and read dormant progressive dispatch after clean .1.50; preserve all 35 repair roots including the failure-state coverage gap, known failures, native-error exclusions and parked named arguments. |
+| 1 | `LUA-STARTUP-READING.3` | `pending` | Independently audit all 51 committed source-reading groups and closeout prerequisites after clean .1.51; preserve all 35 repair roots, known failures and no-build restrictions before supporting-code handoff. |
 
 ## Reading Ledger
 

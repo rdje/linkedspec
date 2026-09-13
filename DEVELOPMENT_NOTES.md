@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-13 — Separate physical reading from audited startup closeout
+
+- All Lua source bytes are read, including generated content and the intentionally dormant progressive authority. .1 and startup .3.6 still require independent audit and canonical closeout or a new scoped exception.
+- The dormant 273 authority fixture checks neutral diagnostics, rebasing, detachment, expiry and healthy shared budgets; its local parent_state comparison is disconnected fixture consistency, and startup .37.1 stays open.
+- The full 438 write suite adds function presence, reconstructed/generated/emitted and primary routes plus malformed-carrier rejection; none consumes the nineteen failure-state oracles, as 38 full-suite mutations confirm.
+- LUA-STARTUP-READING.1.51 records exact replay in docs/knowledge/lua-final-source-consumer-reading.md; preserve .2.35, all prior failures and no unauthorized dependency builds while preparing the audit.
+
 ## 2026-09-13 — Missing failure-state assertions despite passing write tests
 
 - The sixteen structural and three expression-failure loops inspect diagnostics and event order but never read expected_binding; 19 independent single-field input mutations survive on both hosts, 38 observations.
