@@ -329,12 +329,12 @@ step. `PARSER-AUTHORING-APIS.4` owns grammar/binding, definition choices,
 representation compatibility and bounded implementation planning; these four
 children remain unactivated and current startup reading continues.
 
-**Lua source reading is underway (29/51 groups):** the complete
+**Lua source reading is underway (30/51 groups):** the complete
 99-file inventory covers 71,268 physical lines and 2,732,450 bytes. Its 51 owned
 reading groups include generated tables, native adapters and both-ABI tests.
 Two UTF-8-safe byte windows retain an oversized generated MCP line, so the
 per-window total is 71,269 fragments. The independent range audit proves complete
-ownership. The first 29 groups physically read 39,151 fragments /1,442,482 bytes,
+ownership. The first 30 groups physically read 40,651 fragments /1,503,281 bytes,
 including the complete README, both commands, all three native C bindings, ActionIR
 constructors, call names, contracts, the complete parser, bounded authority,
 compiled state and corpus modules, facade, interpreter, JSON and matching. They
@@ -347,9 +347,10 @@ AST enrichment, capture storage and parse-job declarations, the narrow staged
 registry and tracing. Unicode casing is completely read, including both mapping
 tables, all 158 `Cased` and 464 `Case_Ignorable` ranges, strict UTF-8 decoding and
 Final Sigma conversion. The Unicode rule-label table and classifier, automatic
-function parser and complete function shell are read, followed by the registry
-through line 367. Fifty-one files are fully read.
-The remaining 22 groups require
+function parser, complete function shell and registry are read. Both complete
+body-fluent and callable tests, plus the diagnostic prefix through line 241, are
+also read. Fifty-four files are fully read.
+The remaining 21 groups require
 their own reading and verified commits; source reading does not close the limitations below.
 
 **Lua Unicode casing and rule-label verification:** all property tables match the
@@ -373,7 +374,7 @@ PUC 5.5.1 and LuaJIT hosts; PUC 5.4 verification remains pending. Exact scope,
 complete-result digests and reproduction:
 `docs/knowledge/lua-unicode-casing-properties-and-rule-label-reading.md`.
 
-**Lua function reading verification:** eleven focused existing tests pass 169
+**Lua function reading verification:** `.1.29`’s eleven tests passed 169
 assertions per installed host. Fixed, variadic and final-codeblock metadata,
 Unicode projection, typed failures, nested output shapes, automatic parsing and
 registry order retain their measured behavior. Both neutral callable contract
@@ -381,6 +382,25 @@ checks pass. Another 166 complete diagnostic observations identify the caller-
 supplied metadata, mutation and default-validation limitations below. Earlier
 classifier proof remains dated; current function reading does not add named
 arguments or close the pending PUC 5.4 verification.
+
+**Lua invocation and callable consumer verification:** both installed hosts pass
+166 body-fluent checks, 449 callable checks, 62 registry/invocation checks and 105
+checks from the complete diagnostic blocks read so far: 782 per host, 1,564 total.
+Callable proof includes inert construction, ordered invocation, independently loaded
+emitted modules and workspace cleanup on success and injected failure. The remaining
+diagnostic blocks retain their own reading and verification owner. Prior neutral
+callable checker results remain dated; their four inputs are unchanged.
+
+**Known Lua invocation limitation — nested array members can disappear:** a
+caller-supplied tagged array with an extra member or a sparse tail is accepted,
+but the frame keeps only its dense prefix. This also affects arrays nested in
+harrays, and can discard a cycle stored under an extra array key. A normal array-
+element cycle and malformed outer argument list already reject. Dense false/null
+and aggregate controls remain intact, and every supplied caller graph is unchanged.
+Lua `.2.33.1/.2` own complete nested-array admission and exact graph/consumer proof.
+This is a direct host-input boundary before function execution; ordinary source
+arrays and the separate AST/staged array repairs retain their existing contracts.
+Exact evidence: `docs/knowledge/lua-invocation-and-callable-consumer-reading.md`.
 
 **Known Lua function metadata limitation — payload versions and line numbers:**
 caller-supplied function nodes can retain payload `version: 99`, a missing version,
@@ -530,8 +550,8 @@ The director also granted one containment `.14` exception for this bounded capac
 implementation before full codebase reading, using focused proof and normal hooks
 without canonical CI/receipt. Later milestone, repair and push requirements remain;
 dependency build-on-update implementation stays separately owned. Lua source reading
-is 29/51; the next group completes registry reading and covers the owned body-fluent,
-callable-codeblock and diagnostic test ranges.
+is 30/51; the next group reads the diagnostic suffix and the owned duplicate-slot
+and gap-capture test ranges.
 The installed-host test failures below remain open.
 All known limitations below retain their repair owners.
 Exact admission and replay: `docs/knowledge/lua-reading-evidence-capacity-admission.md`.
@@ -936,6 +956,12 @@ absence-only defaults and direct-consumer proof. Separately, the private rule-la
 prefix scanner treats `position=false` as byte 1; `.2.8.25/.26` own its generator
 and boundary controls. Omitted and empty options remain valid; true, zero and text
 retain their existing invalid-value behavior. These checks do not widen syntax.
+
+Invocation adds a ninth function-option route with the same false-default gap.
+Its `active_names=false` argument also becomes an empty path. Other supplied wrong
+types reject, an existing `other` name stays in order, and a self-name correctly
+reports `one -> one`. Existing `.2.8.21/.22` include invocation options; new
+`.2.8.27/.28` own active-path admission and recursion controls.
 
 **Known Lua limitation — nested parser step budget:** when a parent callback has
 consumed its one-step allowance, its nested callback can still run against the

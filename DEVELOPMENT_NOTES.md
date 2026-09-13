@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-13 — Preserve every nested argument member before frame construction
+
+- Top-level invocation lists validate density, but the nested tagged-array copier walks only ipairs; four malformed shapes lose extra or sparse members, including an extra-key cycle.
+- Complete graph snapshots preserve caller members and references while proving the exact copied loss; dense false/null values and ordinary cycle/top-level rejection remain correct.
+- Current callable tests retain inert construction, ordered dynamic invocation and independently emitted identity with successful and failure-path cleanup; diagnostic proof is explicitly limited to the read prefix.
+- LUA-STARTUP-READING.1.30 stores exact replay in docs/knowledge/lua-invocation-and-callable-consumer-reading.md; source repairs and named arguments remain gated or parked.
+
 ## 2026-09-13 — Check function metadata against source and preserve caller nodes
 
 - Real grammar-produced nodes isolate five malformed metadata acceptances through staging/compile/runtime; clean nodes and six typed rejecting comparisons retain exact caller state.

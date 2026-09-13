@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-13 — Lua invocation registry and callable consumer reading
+
+- Read registry368-539, complete body-fluent/callable tests and diagnostic1-241: 1,500 fragments /60,799 bytes; cumulative 30/51 and 1,503,281 bytes.
+- Both installed hosts pass 1,564 focused assertions, including independent emitted callable execution, and agree on 46 complete graph/default observations.
+- LUA-STARTUP-READING.2.33 owns lost nested array members; .2.8.27/.28 own false active-name defaults and existing option proof gains invocation.
+- LUA-STARTUP-READING.1.30 preserves all thirty-three repair roots and prior neutral evidence; next .1.31 completes diagnostics and reads owned slot/gap tests.
+
 ## 2026-09-13 — Lua function projection reading and concrete repair ownership
 
 - Read the classifier suffix, complete function parser/shell and registry prefix: 1,500 fragments /50,431 bytes; cumulative 29/51 and 1,442,482 bytes.

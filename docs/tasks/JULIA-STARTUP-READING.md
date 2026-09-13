@@ -1742,7 +1742,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.1.30` | `pending` | Read the registry suffix and owned body-fluent, callable-codeblock and diagnostic test ranges after clean .1.29; preserve all repair owners, prior failures and parked named arguments. |
+| 1 | `LUA-STARTUP-READING.1.31` | `pending` | Read the diagnostic suffix and owned duplicate-slot/gap-capture test ranges after clean .1.30; preserve all repair owners, prior failures and parked named arguments. |
 
 ## Decisions
 

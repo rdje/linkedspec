@@ -2253,9 +2253,9 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Status: `active`
   Goal: Split and read all 99 baseline Lua entries, including native adapters, both-ABI tests, runtime, and commands.
   Children: `.3.6.0` owns decomposition; LUA-STARTUP-READING.1 owns 51 reading children and .3 owns independent closeout.
-  Reading owner: `docs/tasks/LUA-STARTUP-READING.md`; .4/.4.2 close under ADR0118 and containment .14; exact reading is 29/51; .1.30 follows child 29; .2.1-.2.32 own thirty-two concrete repair roots, with installed5.5 nil-error failures under .2.2 and shared Lua budget repair under .82.3.1; .28.7 owns the baseline public-check failure.
+  Reading owner: `docs/tasks/LUA-STARTUP-READING.md`; .4/.4.2 close under ADR0118 and containment .14; exact reading is 30/51; .1.31 follows child 30; .2.1-.2.33 own thirty-three concrete repair roots, with installed5.5 nil-error failures under .2.2 and shared Lua budget repair under .82.3.1; .28.7 owns the baseline public-check failure.
   Acceptance: Define bounded file/range children before reading; generated tables and the large test runner stay in scope.
-  Verification: Lua .1.29 reads the classifier suffix, full function parser/shell and registry prefix in eight complete windows: 1,500 fragments /50,431 bytes; cumulative 29/51, 39,151 fragments /1,442,482 bytes. All 99 Lua sources remain baseline-identical; 51 files are fully read. Eleven selected tests pass 169 assertions per installed host; 166 complete diagnostic observations match across hosts and both neutral callable checkers pass. New .2.31 owns payload versions and false line metadata; .2.32 owns caller mutation during codeblock projection. Existing .2.8 gains six default-validation children, .2.1 gains exact guidance evidence and Julia .2.22 gains a qualified counterpart link. Prior classifier proof remains dated. All thirty-two repair roots and earlier failures remain open. Next .1.30 reads the registry suffix and focused test sources; named arguments and startup/ADR0118 prerequisites remain unchanged.
+  Verification: Lua .1.30 reads the registry suffix, complete body-fluent/callable tests and diagnostic prefix in eight complete windows: 1,500 fragments /60,799 bytes; cumulative 30/51, 40,651 fragments /1,503,281 bytes. All 99 Lua sources remain baseline-identical; 54 files are fully read. Both installed hosts pass 1,564 focused assertions and match 46 complete graph/default observations. New .2.33 owns nested runtime-array member loss; .2.8.27/.28 own active-name defaults, and existing function-option proof gains its ninth route. Prior neutral callable proof remains dated and input-identical. All thirty-three repair roots and earlier failures remain open. Next .1.31 reads remaining diagnostic and owned duplicate-slot/gap tests; named arguments and startup/ADR0118 prerequisites remain unchanged.
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.3.6.0`
@@ -4607,7 +4607,7 @@ startup implementation prerequisites and the rgx reading exclusion remain intact
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.1.30` | `pending` | Read the registry suffix and owned body-fluent, callable-codeblock and diagnostic test ranges after clean .1.29; preserve all repair owners, prior failures and parked named arguments. |
+| 1 | `LUA-STARTUP-READING.1.31` | `pending` | Read the diagnostic suffix and owned duplicate-slot/gap-capture test ranges after clean .1.30; preserve all repair owners, prior failures and parked named arguments. |
 
 ## Reading Ledger
 

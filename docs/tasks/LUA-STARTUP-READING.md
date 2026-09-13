@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `LUA-STARTUP-READING`
-- Status: `active` / approved capacity; source reading 29/51
+- Status: `active` / approved capacity; source reading 30/51
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.6`
 - Created: `2026-09-12`
 - Last updated: `2026-09-13`
@@ -45,7 +45,7 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
 - Ordered range SHA-256: `81c58b8319def28af518fb134a3787513fe746f0f0f73bcacb0e20b9ede1c9d6`.
 - Child-summary SHA-256: `f56ecac262800bd3cc1e6bba0cc25bfe22f095c3dfee41f1c6595d4200145290`.
 - Coordinates are one-based inclusive LF physical lines or absolute file bytes; both byte windows decode as UTF-8.
-- Current physical reading: 29/51 children, 39,151/71,269 fragments and 1,442,482/2,732,450 bytes.
+- Current physical reading: 30/51 children, 40,651/71,269 fragments and 1,503,281/2,732,450 bytes.
 - Exact independent replay and capacity evidence: `docs/knowledge/lua-startup-reading-coverage.md`.
 
 ## Task Tree
@@ -526,14 +526,18 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
   Commit: `LUA-STARTUP-READING.1.29 - read function projection and own metadata and caller-copy repairs`.
 
 - ID: `LUA-STARTUP-READING.1.30`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `4a5feb8ff5a65a82b10a2db8d4dc67f3fdb1a474`.
+  Verification tier: `focused`
+  Focused checks: Exact bounded source/baseline reading; function registry, body-fluent, callable-codeblock and diagnostic Knowledge reconciliation; safe focused native consumers and boundary evidence; memory, Knowledge, shared history, book and normal doctrines.
+  Canonical trigger: Ordinary reading and bounded repair intake; no production or named-argument implementation. Earlier native-error safety and supported-runtime limitations remain explicit; later closeout/push retain canonical prerequisites.
   Goal: Read and understand group 30: user_function_registry.lua through diagnostic_output_contract_test.lua.
   Scope: `lua/src/linkedspec/user_function_registry.lua` lines 368-539; `lua/test/body_fluent_whole_token_test.lua` lines 1-137; `lua/test/callable_codeblock_literal_contract_test.lua` lines 1-950; `lua/test/diagnostic_output_contract_test.lua` lines 1-241
   Baseline evidence: 1500 fragments / 60799 bytes; ordered range SHA-256 `f3f1e9a54ed0dbb2b52b171dcc5bf01141ae86b6deb0121f91d40d7eac08f093`.
   Dependencies: .1.29 committed with clean handoff.
   Acceptance: Read every scoped byte without truncation; record comprehension, Knowledge and repair reconciliation, focused proof and a clean per-leaf commit.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Lua .1.30 reads the registry suffix, complete body-fluent/callable tests and diagnostic prefix in eight complete windows: 1,500 fragments /60,799 bytes; cumulative 30/51, 40,651 fragments /1,503,281 bytes. All 99 Lua sources remain baseline-identical; 54 files are fully read. Both installed hosts pass 1,564 focused assertions and match 46 complete graph/default observations. New .2.33 owns nested runtime-array member loss; .2.8.27/.28 own active-name defaults, and existing function-option proof gains its ninth route. Prior neutral callable proof remains dated and input-identical. All thirty-three repair roots and earlier failures remain open. Next .1.31 reads remaining diagnostic and owned duplicate-slot/gap tests; named arguments and startup/ADR0118 prerequisites remain unchanged. Exact evidence: docs/knowledge/lua-invocation-and-callable-consumer-reading.md.
+  Commit: `LUA-STARTUP-READING.1.30 - read invocation consumers and own nested argument-copy repairs`.
 
 - ID: `LUA-STARTUP-READING.1.31`
   Status: `pending`
@@ -748,7 +752,7 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
 - ID: `LUA-STARTUP-READING.2`
   Status: `pending`
   Goal: Own every newly confirmed Lua defect or coverage gap without losing existing shared repair ownership.
-  Children: `.2.1` owns README status; `.2.2` primary identity; `.2.3` native error safety; `.2.4` executable diagnostic teaching; `.2.5` complete quoted-literal parsing; `.2.6` harray pair completeness; `.2.7` complete switch contract diagnostics; `.2.8` iteration/options/matching-cursor validation; `.2.9` false delimiter preservation; `.2.10` whole child-result false preservation; `.2.11` exact representable integer JSON encoding; `.2.12` finite private recognition coordinates and progress; `.2.13` scalar/reducer and typed-slice integer overflow; `.2.14` semantic diagnostic null preservation; `.2.15` rejected semantic query false evidence; `.2.16` mixed structural-slot correlation; `.2.17` regex-aware call source correlation; `.2.18` explicit child-slot runtime match ownership; `.2.19` conditional entry-explanation coverage; `.2.20` explicit generated-contract validation; `.2.21` finite typed-source diagnostic coordinates; `.2.22` native AST false-field defaults; `.2.23` typed JSON array and payload validation; `.2.24` complete outer parser delimiters and lexical state; `.2.25` complete staged typed-array copying; `.2.26` retained staged diagnostic bytes; `.2.27` marker detachment cycle/null handling; `.2.28` private capture-range admission; `.2.29` original provenance and complete segments; `.2.30` trace error precedence and cleanup; `.2.31` source-bound function payload metadata; `.2.32` non-mutating codeblock function projection.
+  Children: `.2.1` owns README status; `.2.2` primary identity; `.2.3` native error safety; `.2.4` executable diagnostic teaching; `.2.5` complete quoted-literal parsing; `.2.6` harray pair completeness; `.2.7` complete switch contract diagnostics; `.2.8` iteration/options/matching-cursor validation; `.2.9` false delimiter preservation; `.2.10` whole child-result false preservation; `.2.11` exact representable integer JSON encoding; `.2.12` finite private recognition coordinates and progress; `.2.13` scalar/reducer and typed-slice integer overflow; `.2.14` semantic diagnostic null preservation; `.2.15` rejected semantic query false evidence; `.2.16` mixed structural-slot correlation; `.2.17` regex-aware call source correlation; `.2.18` explicit child-slot runtime match ownership; `.2.19` conditional entry-explanation coverage; `.2.20` explicit generated-contract validation; `.2.21` finite typed-source diagnostic coordinates; `.2.22` native AST false-field defaults; `.2.23` typed JSON array and payload validation; `.2.24` complete outer parser delimiters and lexical state; `.2.25` complete staged typed-array copying; `.2.26` retained staged diagnostic bytes; `.2.27` marker detachment cycle/null handling; `.2.28` private capture-range admission; `.2.29` original provenance and complete segments; `.2.30` trace error precedence and cleanup; `.2.31` source-bound function payload metadata; `.2.32` non-mutating codeblock function projection; `.2.33` complete nested runtime-argument array admission.
   Reading .1.25 owners: `.2.29` owns original provenance types and complete derived segment membership; `.2.30` owns trace failure precedence and scope cleanup.
   Acceptance: Define concrete causal evidence, affected behavior and repair/verification children before implementing any finding; preserve startup prerequisites and all earlier owners.
   Verification: `pending`
@@ -773,6 +777,7 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
   Reading .1.25 extension: lua-staged-function-body-registry still calls public parse_job and recursive queues future; lua-staged-function-execution-split retains pending descriptors/generated/callable wording despite later admitted owners. Reconcile these dated/current boundaries. Qualify trace control silence against explicit file-reset semantics and full-pipeline original-error/balanced-scope claims against the newly measured .2.30 limitations; retain original healthy-writer test evidence.
   Reading .1.28 extension: lua-unicode-rule-label-implementation-plan metadata line19 and final paragraph still describe source/outcome planning .10.7.2.0 as next despite the current admitted semantic owners. Date or qualify these two precise forward pointers under this existing repair; preserve the historical classifier, route, identity, negative-isolation and recomposition results, and the explicitly superseded preflight. Exact current reading and verification: docs/knowledge/lua-unicode-casing-properties-and-rule-label-reading.md.
   Reading .1.29 extension: lua-spec-defined-function-parser, lua-user-function-registry, lua-variadic-v2-signature-state and lua-final-codeblock-metadata retain future descriptor/generated/explicit-callable guidance despite admitted successors. Date those exact later-owner sentences and qualify lua-function-definition-shell-projection sidecar-copy wording against .2.32; preserve original milestones, runtime facts and historical counts.
+  Reading .1.30 extension: lua-body-fluent-suffix-loss ends with source/outcome planning .10.7.2.0 as a future step despite later admitted semantic owners. Qualify that precise forward pointer while preserving the repaired suffix behavior, original milestone counts and current 166-assertion consumer proof.
   Acceptance: Remove the false current failure projection, distinguish historical counts from current guidance, preserve useful unique history through canonical pointers, and independently verify the resulting public wording and native command examples.
   Verification: `pending`
   Commit: `pending`
@@ -961,9 +966,9 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
 
 - ID: `LUA-STARTUP-READING.2.8`
   Status: `pending`
-  Goal: Reject explicitly invalid iteration and staged seeded-call counts, optional runtime/matching/MCP/generated/parser/loaded-engine/validator tables and matching cursors before applying absent-value defaults.
+  Goal: Reject explicitly invalid optional API fields, tables, parser objects, active-name lists and cursor positions before applying absent-value defaults.
   Evidence: Reading .1.7 executes the real native facade on PUC 5.5.1 and LuaJIT. max_iterations=false creates an engine with 10000; omitted options also use 10000, positive 1/2 are retained, and true/0/-1/1.5/string "2" reject. interpreter.lua line 144 uses options.max_iterations or 10000 before the type/range check, so false is replaced before validation. This is an option-validation defect; no long-running parser failure is inferred.
-  Children: `.2.8.1`, `.2.8.2` own the iteration field; `.2.8.3`, `.2.8.4` own public runtime optional-table boundaries; `.2.8.5`, `.2.8.6` own matching defaults; `.2.8.7`, `.2.8.8` own MCP constructor options; `.2.8.9`, `.2.8.10` own generated execution/failure options; `.2.8.11`, `.2.8.12` own parser and loaded-engine options; `.2.8.13`, `.2.8.14` own validator options; `.2.8.15`, `.2.8.16` own staged seeded-call admission; `.2.8.17`, `.2.8.18` own narrow registry options; `.2.8.19`, `.2.8.20` own trace table/field admission; `.2.8.21`, `.2.8.22` own function option tables; `.2.8.23`, `.2.8.24` own optional parser objects; `.2.8.25`, `.2.8.26` own private rule-label positions.
+  Children: `.2.8.1`, `.2.8.2` own the iteration field; `.2.8.3`, `.2.8.4` own public runtime optional-table boundaries; `.2.8.5`, `.2.8.6` own matching defaults; `.2.8.7`, `.2.8.8` own MCP constructor options; `.2.8.9`, `.2.8.10` own generated execution/failure options; `.2.8.11`, `.2.8.12` own parser and loaded-engine options; `.2.8.13`, `.2.8.14` own validator options; `.2.8.15`, `.2.8.16` own staged seeded-call admission; `.2.8.17`, `.2.8.18` own narrow registry options; `.2.8.19`, `.2.8.20` own trace table/field admission; `.2.8.21`, `.2.8.22` own function option tables; `.2.8.23`, `.2.8.24` own optional parser objects; `.2.8.25`, `.2.8.26` own private rule-label positions; `.2.8.27`, `.2.8.28` own invocation active-name list admission.
   Dependencies: Startup .3/.4/.5; preserve the declared PUC target and existing toolchain repair .2.2.
   Reading .1.10 extension: Native engine/parse/execute/traced-parse/traced-execute all accept false options while nil/empty tables pass and true/zero/string reject typed table errors. Three options or {} owners replace false before validation; the execution aliases inherit that behavior. Keep this additional surface decomposed under .2.8.3/.4, independently from the numeric field.
   Reading .1.11 extension: Matching seek/consume/required-slot, register cursor construction and cursor setter accept false as zero; false register options become defaults. Other invalid cursors/options reject typed errors, and false capture_start_byte correctly rejects. Keep matching normalization isolated in new .2.8.5/.6; retain existing clamping and capture clearing semantics.
@@ -974,6 +979,7 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
   Reading .1.24 extension: recursive_authority uses config.total_calls or 0 at line1462; false becomes zero while true/fraction/text reject the total_calls diagnostic. Absent/zero/one controls retain 0/0/1. The actual saturated-call dispatcher correctly rejects before increment at line1779; this defect concerns constructor admission only.
   Reading .1.25 extension: Five narrow registry entrypoints accept false options through staged_parser_registry.lua37; trace config/emitter accept false tables through trace.lua157/352. Config level/sink fields and enabled/with helpers replace false with none/stdout at147/149, while direct parsers and environment false correctly reject. Fifty-one complete observations per installed host retain valid booleans reset_file=false and emoji=false. Children `.2.8.17/.18` own registry options and `.2.8.19/.20` own trace admission; no file reset occurs in the boundary probe.
   Reading .1.29 extension: Eight function parser/metadata/projection/shell/registry operations accept false options through definition_parser.lua59/75, definition_shell.lua713/764 and user_function_registry.lua167. Optional parser false selects the cached default at definition_parser.lua177; private rule-label prefix position false selects byte1 at unicode_rule_label.lua905. Nil/empty or valid1 controls retain values; true/zero/text comparisons reject at the established boundary. Fifty-nine complete observations per host. New .2.8.21/.22 own function table options, .23/.24 optional parser admission, and .25/.26 classifier positions; preserve private/public boundaries and current function syntax.
+  Reading .1.30 extension: prepare_invocation accepts false options and active_names after defaulting in user_function_registry.lua429-430. Nil/empty controls pass, true/zero/text reject; a real other-name path is preserved and a self-name path correctly reports one -> one. Fourteen complete observations per host. Extend .2.8.21/.22 to the ninth function option route; .2.8.27/.28 own explicit active-name list admission independently from nested argument arrays.
   Acceptance: Default only when the field or optional table is absent, retain positive integer behavior, reject explicitly invalid supplied values with the established typed error, and preserve source identity and successful parser behavior. Decompose any additional affected option surfaces before expanding scope.
   Verification: `pending`; .1.7 retains the exact native comparison in docs/knowledge/lua-interpreter-prefix-reading-and-iteration-option-gap.md.
   Commit: `pending`
@@ -1050,6 +1056,7 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
   Goal: Reject false function frontend and registry option tables.
   Scope: The eight recorded parser/metadata/node/staged/project/shell/from-functions/from-spec routes.
   Dependencies: Startup .3/.4/.5 and complete Lua reading; retain .2.2 supported-runtime ownership.
+  Reading .1.30 scope extension: include prepare_user_function_invocation as the ninth measured function-option route; its false option becomes an empty table before the existing typed check. Retain the original eight-route .1.29 evidence unchanged.
   Acceptance: Default only nil; reject false/true/number/text with established typed owners before construction or projection; preserve valid trace and source identity.
   Verification: `pending`; exact intake and replay: docs/knowledge/lua-function-projection-reading-and-boundary-gaps.md.
   Commit: `pending`
@@ -1059,6 +1066,7 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
   Goal: Verify function option admission through direct and composed consumers.
   Scope: Eight public option routes on supported hosts, with omitted/empty/invalid controls.
   Dependencies: Startup .3/.4/.5 and complete Lua reading; .2.8.21.
+  Reading .1.30 scope extension: include prepare_user_function_invocation as the ninth measured function-option route; its false option becomes an empty table before the existing typed check. Retain the original eight-route .1.29 evidence unchanged.
   Acceptance: Retain cache counts, proper errors, valid projections and public examples; run canonical proof only at designated closure.
   Verification: `pending`; exact intake and replay: docs/knowledge/lua-function-projection-reading-and-boundary-gaps.md.
   Commit: `pending`
@@ -1097,6 +1105,24 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
   Dependencies: Startup .3/.4/.5 and complete Lua reading; .2.8.25.
   Acceptance: False/true/zero/text and omitted/one/Unicode controls retain exact label and position semantics; supported-host proof remains explicit.
   Verification: `pending`; exact intake and replay: docs/knowledge/lua-function-projection-reading-and-boundary-gaps.md.
+  Commit: `pending`
+
+- ID: `LUA-STARTUP-READING.2.8.27`
+  Status: `pending`
+  Goal: Reject false invocation active-name lists before defaulting.
+  Scope: prepare_invocation active_names admission and direct caller contract.
+  Dependencies: Startup .3/.4/.5 and complete Lua reading; retain .2.2 supported-runtime ownership.
+  Acceptance: Only omission selects an empty path; false and other wrong types reject as dense-list errors; genuine paths and recursion diagnostics remain unchanged.
+  Verification: `pending`; exact intake and replay: docs/knowledge/lua-invocation-and-callable-consumer-reading.md.
+  Commit: `pending`
+
+- ID: `LUA-STARTUP-READING.2.8.28`
+  Status: `pending`
+  Goal: Verify active-name admission and recursion controls.
+  Scope: Direct invocation with nil/empty/false/true/number/text/other/self-name inputs.
+  Dependencies: Startup .3/.4/.5 and complete Lua reading; .2.8.27.
+  Acceptance: Retain correct order, one -> one recursion identity and fresh caller paths; no recursion-policy or named-argument expansion.
+  Verification: `pending`; exact intake and replay: docs/knowledge/lua-invocation-and-callable-consumer-reading.md.
   Commit: `pending`
 
 - ID: `LUA-STARTUP-READING.2.9`
@@ -1673,6 +1699,35 @@ Preserve comprehension, exact coverage and actionable repair ownership. Startup
   Verification: `pending`; exact intake and replay: docs/knowledge/lua-function-projection-reading-and-boundary-gaps.md.
   Commit: `pending`
 
+- ID: `LUA-STARTUP-READING.2.33`
+  Status: `pending`
+  Goal: Reject malformed nested tagged-array arguments before constructing invocation stores.
+  Evidence: .1.30 supplies tagged arrays with extra=false, index3=false after index1, an extra-key cycle, and a sparse array nested in a harray. All four pass and lose the non-prefix member in arguments and parameter stores. The caller graph stays exact. Dense false/null/aggregate controls pass; a direct array-element cycle, untyped mixed table and malformed top-level argument lists correctly reject. Nine complete graph-preserving observations per installed host.
+  Cause: clone_runtime_value validates kind/cycle but copies tagged arrays with ipairs at user_function_registry.lua103-107, without applying validate_dense_list to the nested container. prepare_invocation validates only the outer evaluated_values list before invoking that copier for arguments and stores.
+  Children: `.2.33.1` nested array admission; `.2.33.2` exact graph and direct-consumer proof.
+  Dependencies: Startup .3/.4/.5 and complete Lua reading; retain the separate typed-AST .2.23 and staged-identity .2.25 array owners.
+  Acceptance: Reject every malformed nested array before producing any invocation frame; preserve valid false/null values, dense arrays, harrays, typed codeblocks, independent stores and caller graph identity. Do not claim a source-authored malformed array or runtime body execution from this direct host-input diagnostic.
+  Verification: `pending`; docs/knowledge/lua-invocation-and-callable-consumer-reading.md retains complete results and replay.
+  Commit: `pending`
+
+- ID: `LUA-STARTUP-READING.2.33.1`
+  Status: `pending`
+  Goal: Validate complete nested argument arrays before copying.
+  Scope: clone_runtime_value and all direct invocation copies, including arrays nested in harrays.
+  Dependencies: Startup .3/.4/.5 and complete Lua reading; preserve separate staged/AST array repair ownership.
+  Acceptance: Extra string members, sparse indexes and extra-member cycles cannot silently disappear; established typed rejection and valid copied values remain unchanged.
+  Verification: `pending`; exact intake and replay: docs/knowledge/lua-invocation-and-callable-consumer-reading.md.
+  Commit: `pending`
+
+- ID: `LUA-STARTUP-READING.2.33.2`
+  Status: `pending`
+  Goal: Verify nested argument graph completeness and copy isolation.
+  Scope: Public invocation frames plus fixed/variadic/final-codeblock direct consumers.
+  Dependencies: Startup .3/.4/.5 and complete Lua reading; .2.33.1.
+  Acceptance: Whole graph snapshots preserve every caller member; all four malformed inputs reject while dense values, existing cycle rejection, arity, rest arrays and separate stores stay correct.
+  Verification: `pending`; exact intake and replay: docs/knowledge/lua-invocation-and-callable-consumer-reading.md.
+  Commit: `pending`
+
 - ID: `LUA-STARTUP-READING.3`
   Status: `pending`
   Goal: Independently close Lua reading and route the remaining supporting-code lanes.
@@ -2016,7 +2071,7 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.1.30` | `pending` | Read the registry suffix and owned body-fluent, callable-codeblock and diagnostic test ranges after clean .1.29; preserve all repair owners, prior failures and parked named arguments. |
+| 1 | `LUA-STARTUP-READING.1.31` | `pending` | Read the diagnostic suffix and owned duplicate-slot/gap-capture test ranges after clean .1.30; preserve all repair owners, prior failures and parked named arguments. |
 
 ## Decisions
 
@@ -2034,9 +2089,11 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 ## Blockers
 
-- None for bounded Lua .1.30 reading after clean .1.29. Installed5.5 native/generated nil-error tests remain failed under .2.2; declared5.4 proof remains pending. The baseline public-selector failure is tracked under startup .28.7 and is not a passing gate. The finite ADR0118 allowance and each actual candidate remain checked; startup .80 and all later verification/repair prerequisites retain their owners.
+- None for bounded Lua .1.31 reading after clean .1.30. Installed5.5 native/generated nil-error tests remain failed under .2.2; declared5.4 proof remains pending. The baseline public-selector failure is tracked under startup .28.7 and is not a passing gate. The finite ADR0118 allowance and each actual candidate remain checked; startup .80 and all later verification/repair prerequisites retain their owners.
 
 ## Verification Log
+
+- `2026-09-13` .1.30: Lua .1.30 reads the registry suffix, complete body-fluent/callable tests and diagnostic prefix in eight complete windows: 1,500 fragments /60,799 bytes; cumulative 30/51, 40,651 fragments /1,503,281 bytes. All 99 Lua sources remain baseline-identical; 54 files are fully read. Both installed hosts pass 1,564 focused assertions and match 46 complete graph/default observations. New .2.33 owns nested runtime-array member loss; .2.8.27/.28 own active-name defaults, and existing function-option proof gains its ninth route. Prior neutral callable proof remains dated and input-identical. All thirty-three repair roots and earlier failures remain open. Next .1.31 reads remaining diagnostic and owned duplicate-slot/gap tests; named arguments and startup/ADR0118 prerequisites remain unchanged.
 
 - `2026-09-13` .1.29: Lua .1.29 reads the classifier suffix, full function parser/shell and registry prefix in eight complete windows: 1,500 fragments /50,431 bytes; cumulative 29/51, 39,151 fragments /1,442,482 bytes. All 99 Lua sources remain baseline-identical; 51 files are fully read. Eleven selected tests pass 169 assertions per installed host; 166 complete diagnostic observations match across hosts and both neutral callable checkers pass. New .2.31 owns payload versions and false line metadata; .2.32 owns caller mutation during codeblock projection. Existing .2.8 gains six default-validation children, .2.1 gains exact guidance evidence and Julia .2.22 gains a qualified counterpart link. Prior classifier proof remains dated. All thirty-two repair roots and earlier failures remain open. Next .1.30 reads the registry suffix and focused test sources; named arguments and startup/ADR0118 prerequisites remain unchanged.
 
@@ -2104,6 +2161,8 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 
 ## Commit Log
 
+- `2026-09-13` .1.30: `LUA-STARTUP-READING.1.30 - read invocation consumers and own nested argument-copy repairs`; activation 4a5feb8ff; next .1.31 after clean proof and empty brief.
+
 - `2026-09-13` .1.29: `LUA-STARTUP-READING.1.29 - read function projection and own metadata and caller-copy repairs`; activation e38ca0938; next .1.30 after clean proof and empty brief.
 
 - `2026-09-13` .1.28: `LUA-STARTUP-READING.1.28 - complete casing algorithm and rule-label table reading`; activation e7ddb725a; next .1.29 after clean proof and empty brief.
@@ -2169,6 +2228,8 @@ all member limits and each actual leaf's checks. No unique evidence is discarded
 - `SESSION-STARTUP-READING.3.6.0 - freeze exact Lua reading ownership and capacity intake` owns creation of this plan.
 
 ## Changelog
+
+- `2026-09-13` .1.30: Complete the invocation registry and callable/body-fluent consumer reading; verify exact caller graphs, own nested array-copy and active-name admission, and preserve prior evidence.
 
 - `2026-09-13` .1.29: Complete the classifier and function shell/parser reading; own payload metadata and caller-copy repairs plus precise defaults, preserve prior evidence and coordinate the existing Julia metadata owner.
 
