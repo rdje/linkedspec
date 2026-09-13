@@ -497,14 +497,15 @@ the director's focused-verification grant used for this correction and the separ
 supporting-reading closeout. Reading completion establishes audited comprehension;
 it does not close the six grammar/literal repair roots or establish runtime signoff.
 Conformance, test and Unicode reading has exact ownership for all 160 inputs in
-143 bounded groups covering 8,257,059 decoded bytes. Twenty-two groups now account for
-27,431 fragments and 980,636 bytes, including 51 complete files. The Unicode
-lowercase mapping array is fully read; uppercase reading continues through
-Cyrillic, Armenian, Georgian, short Cherokee and further Latin entries. Armenian
-U+0587 expands to U+0535 followed by U+0552. Cyrillic U+1C84 and U+1C85 share
-the uppercase result U+0422. Exact sequences and sparse ranges remain explicit.
-The unchanged offline generation proof is retained. Remaining entries and all
-runtime repair tasks stay open. Named-argument support remains an approved future
+143 bounded groups covering 8,257,059 decoded bytes. Twenty-three groups now account for
+28,931 fragments and 995,744 bytes, including 51 complete files. The Unicode
+lowercase mapping array is fully read; uppercase reading covers Latin additional
+and Greek extended expansions and reaches the first Roman numeral entry.
+U+1FB7 expands to U+0391, U+0342 and U+0399 in that order. Some lowercase and
+titlecase characters share the same full uppercase sequence. Exact sequence order
+belongs to the mapping and does not imply a separate normalization pass. The
+unchanged offline generation proof is retained. Later entries and all runtime
+repair tasks remain open. Named-argument support remains an approved future
 direction. The capability guide still has stale
 current census, governance/inventory/public counts and generic-callable wording.
 Existing startup `.41.6` and `.41.7` now own these exact paragraphs and meaningful
