@@ -497,16 +497,13 @@ the director's focused-verification grant used for this correction and the separ
 supporting-reading closeout. Reading completion establishes audited comprehension;
 it does not close the six grammar/literal repair roots or establish runtime signoff.
 Conformance, test and Unicode reading has exact ownership for all 160 inputs in
-143 bounded groups covering 8,257,059 decoded bytes. Fourteen groups now account for
-15,431 fragments and 863,969 bytes, including 51 complete files. The typed-source
-contract is fully read. Unicode-case reading covers the pinned input metadata and
-the start of the lowercase table, including dotted-I expansion to `i` plus a
-combining dot. LinkedSpec uses Unicode 17.0.0 full default case conversion, including
-Final Sigma, with no locale tailoring or implicit normalization. Its generated
-tables have an offline verification path; host-language case APIs retain historical
-comparison value. Reading continues through the lowercase mappings. Focused proof
-preserves all runtime repair tasks. Named-argument support remains an approved
-future direction. The capability guide still has stale
+143 bounded groups covering 8,257,059 decoded bytes. Fifteen groups now account for
+16,931 fragments and 878,469 bytes, including 51 complete files. Unicode lowercase
+reading continues through Latin, Greek and Cyrillic mappings. The ordinary Sigma
+table entry remains distinct from the Final Sigma context rule; both belong to the
+pinned Unicode 17.0.0 contract. The unchanged offline generation proof is retained,
+and reading continues through the next mapping range. All runtime repair tasks
+remain open. Named-argument support remains an approved future direction. The capability guide still has stale
 current census, governance/inventory/public counts and generic-callable wording.
 Existing startup `.41.6` and `.41.7` now own these exact paragraphs and meaningful
 checks against recurrence. Their selected-marker guards currently miss the

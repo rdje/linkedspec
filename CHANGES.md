@@ -10,6 +10,12 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-13 — CONFORMANCE-SOURCE-READING.1.15 — read Unicode Latin Greek and Cyrillic lowercase mappings
+
+Conformance .1.15 reads 3 complete windows, 1,500 fragments and 14,500 baseline-identical bytes. Physical reading is 15/143: 16,931 fragments, 878,469 bytes and 51 complete files. The lowercase table continues through Latin, Greek and Cyrillic mappings, retaining exact non-adjacent mappings and the default Sigma entry. Existing Final Sigma context remains a separate rule. Unicode generation proof from clean704e261b remains valid for unchanged inputs; no behavior, native admission or runtime repair changes. Next .1.16 owns the crossing0522 mapping and continuation.
+
+Retain the unchanged Unicode17 generation/byte-equality/12-fixture proof from CONFORMANCE-SOURCE-READING.1.14 at704e261b; canonical Knowledge separates that proof from historical native admissions. Fresh checks reconstruct the three reading windows, all143 groups/302 ranges, cumulative coverage, source/task/history and prior recipe preservation, actual rendered book, memory and document pressure. Ordinary commit doctrines remain required. No redundant backend build, native matrix, source change or runtime repair is claimed.
+
 ## 2026-09-13 — CONFORMANCE-SOURCE-READING.1.14 — read typed closeout and Unicode case prefix
 
 Conformance .1.14 reads six complete windows, 1,500 fragments and 33,332 baseline-identical bytes. The typed-source contract reaches EOF; Unicode-case reading reaches line 1138, inside the lowercase mapping table. Physical reading is 14/143: 15,431 fragments, 863,969 bytes and 51 complete files. Typed composition retains six distinct recurring authorities and all14 completed rollout rows. Unicode 17 full default conversion uses pinned offline data, Final Sigma and no locale tailoring or normalization. The casing card separates historical host probes from current generated-table verification. Focused Unicode and governed-book checks pass; all runtime repairs remain owned.

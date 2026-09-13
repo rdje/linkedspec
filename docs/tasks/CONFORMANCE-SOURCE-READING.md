@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `CONFORMANCE-SOURCE-READING`
-- Status: `active` / exact decomposition; physical reading 14/143
+- Status: `active` / exact decomposition; physical reading 15/143
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.8`
 - Created: `2026-09-13`
 - Last updated: `2026-09-13`
@@ -292,14 +292,21 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
   Commit: `CONFORMANCE-SOURCE-READING.1.14 - read typed closeout and Unicode case prefix`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.15`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `704e261b9032d121e6ffa2d7402c648ac5e2f2ab`.
+  Verification tier: `focused`
+  Focused checks: Read exact baseline-identical scoped windows; reconcile canonical Knowledge and proportionate proof, preserve source/task/history, and verify memory, book and normal doctrines.
+  Canonical trigger: Ordinary bounded source-reading leaf; no source or public-contract change, admission or parent closeout. Later prerequisites remain.
   Goal: Read and understand conformance/test/Unicode group 15.
   Scope: `capability_conformance/unicode_case_contract.json` lines 1139-2638
   Baseline evidence: 1500 fragments / 14500 decoded bytes; ordered range SHA-256 `84f88e75f0b8cca02f4f43134f6a3b7771231539ff88198725049d1ced86e9e1`.
   Dependencies: .1.14 committed with clean handoff.
   Acceptance: Read every scoped byte in complete bounded windows; retain source identity, exact comprehension, canonical Knowledge reconciliation, concrete finding ownership, focused proof and per-leaf continuity. Unread crossing constructs retain the next range owner.
-  Verification: `pending`
-  Commit: `pending`
+  Reading evidence: 3 complete windows / 1500 fragments / 14500 bytes; ordered window SHA-256 `3a95f86671c03196955ea22c629892bdf53e812a67bbaa7e288ffda6571f4762`.
+  Comprehension: The range closes the prior01EE mapping and reads Latin extensions, Greek and Cyrillic lowercase entries through the0522-to0523 value. Examples include titlecase01F1/01F2 converging on01F3, non-adjacent023A-to2C65 and023E-to2C66, Greek03F4-to03B8 and03FD-to037B, ordinary03A3-to03C3, and Cyrillic04C0-to04CF. The default Sigma mapping does not override the separately specified Final_Sigma context. Identity rows such as01F0 and0390 preserve exact scalar sequences without normalization. The last entry closing delimiters and all later mappings remain .1.16-owned. No new casing behavior or universal native proof is inferred.
+  Verification: Retain the unchanged Unicode17 generation/byte-equality/12-fixture proof from CONFORMANCE-SOURCE-READING.1.14 at704e261b; canonical Knowledge separates that proof from historical native admissions. Fresh checks reconstruct the three reading windows, all143 groups/302 ranges, cumulative coverage, source/task/history and prior recipe preservation, actual rendered book, memory and document pressure. Ordinary commit doctrines remain required. No redundant backend build, native matrix, source change or runtime repair is claimed.
+  Candidate proof: Fresh reading replay and 160-input/143-group/302-range inventory pass; cumulative15/16931 fragments/878469 bytes/51 complete files. Preservation verifies2490 byte-exact files,2774 unchanged prior nodes,94 book limitation headings and all prior recipes. Memory passes at60 lines; change-history313 lines/47363 bytes and engineering-notes201 lines/38558 bytes remain below rollover. Rendered-book coverage passes; build log records successful HTML output and the already-owned large search-index warning. The previous parallel check output was truncated; fresh logged preservation, inventory, memory, cumulative and history checks completed with exit0 and were consumed. Unchanged .1.14 Unicode generation proof is retained; normal commit doctrines remain required.
+  Commit: `CONFORMANCE-SOURCE-READING.1.15 - read Unicode Latin Greek and Cyrillic lowercase mappings`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.16`
   Status: `pending`
@@ -1602,7 +1609,7 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
 
 | Rank | Leaf | Status | Next action |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.15` | `pending` | Read Unicode-case1139-2638:1500 fragments/14500 bytes. Preserve complete bounded mapping windows, source identity and all repairs; retain unchanged proof proportionately. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.16` | `pending` | `capability_conformance/unicode_case_contract.json` lines 2639-4138; 1500 fragments/14500 bytes. Preserve complete bounded windows, source identity and all repairs. |
 
 ## Decisions
 
@@ -1615,6 +1622,7 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
 
 ## Verification Log
 
+- `2026-09-13` .1.15: Conformance .1.15 reads 3 complete windows, 1,500 fragments and 14,500 baseline-identical bytes. Physical reading is 15/143: 16,931 fragments, 878,469 bytes and 51 complete files. The lowercase table continues through Latin, Greek and Cyrillic mappings, retaining exact non-adjacent mappings and the default Sigma entry. Existing Final Sigma context remains a separate rule. Unicode generation proof from clean704e261b remains valid for unchanged inputs; no behavior, native admission or runtime repair changes. Next .1.16 owns the crossing0522 mapping and continuation.
 - `2026-09-13` .1.14: Conformance .1.14 reads six complete windows, 1,500 fragments and 33,332 baseline-identical bytes. The typed-source contract reaches EOF; Unicode-case reading reaches line 1138, inside the lowercase mapping table. Physical reading is 14/143: 15,431 fragments, 863,969 bytes and 51 complete files. Typed composition retains six distinct recurring authorities and all14 completed rollout rows. Unicode 17 full default conversion uses pinned offline data, Final Sigma and no locale tailoring or normalization. The casing card separates historical host probes from current generated-table verification. Focused Unicode and governed-book checks pass; all runtime repairs remain owned.
 - `2026-09-13` .1.13: Conformance .1.13 reads 11 complete windows, 841 fragments and 65,510 baseline-identical bytes. Staged enrichment and standalone lifecycle contracts reach EOF; typed-source reading reaches line 452, inside public rollout assertions. Physical reading is 13/143: 13,931 fragments, 830,637 bytes and 50 complete files. Lifecycle normalization preserves authored order and earlier brace owners; typed positions, invocation state, transactions and detached recursive observations remain distinct. The typed Knowledge card explicitly qualifies its older 75-mutation narrative. Focused lifecycle/typed and governed-book checks pass without expanding native carrier evidence or closing runtime repairs.
 - `2026-09-13` .1.12: Conformance .1.12 reads 11 complete windows, 1,012 fragments and 65,472 baseline-identical bytes. The semantic model reaches EOF; staged enrichment is read through line 996, inside the ownership inventory. Physical reading is 12/143: 13,090 fragments, 765,127 bytes and 48 complete files. Staged reading separates deferred declaration, caller-prepared parser selection, typed provenance, deterministic identity, breadth-first scheduling, shared bounds, isolated child state and detached stitching. Focused staged neutral/public proof passes; prior semantic proof remains scoped to unchanged inputs. No runtime, admission or dependency change; .1.13 owns the remaining ownership/public records and following contracts.
@@ -1633,6 +1641,7 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
 
 ## Commit Log
 
+- `2026-09-13` .1.15: `CONFORMANCE-SOURCE-READING.1.15 - read Unicode Latin Greek and Cyrillic lowercase mappings`; activation 704e261b9032d121e6ffa2d7402c648ac5e2f2ab; next .1.16 after clean handoff and zero-byte brief.
 - `2026-09-13` .1.14: `CONFORMANCE-SOURCE-READING.1.14 - read typed closeout and Unicode case prefix`; activation 6bc8f569ce36642381b3cd25451ac059e1c43113; next .1.15 after clean handoff and zero-byte brief.
 - `2026-09-13` .1.13: `CONFORMANCE-SOURCE-READING.1.13 - read lifecycle normalization and typed source boundaries`; activation a7b6ba42d639c970420fd14bf9ac03823e4b2571; next .1.14 after clean handoff and zero-byte brief.
 - `2026-09-13` .1.12: `CONFORMANCE-SOURCE-READING.1.12 - read staged enrichment scheduling and policy boundaries`; activation abdfb235ff8cc15829af187d4dd26b9972b684e6; next .1.13 after clean handoff and zero-byte brief.
@@ -1651,6 +1660,7 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
 
 ## Changelog
 
+- `2026-09-13` .1.15: The lowercase table continues through Latin, Greek and Cyrillic mappings, retaining exact non-adjacent mappings and the default Sigma entry. Existing Final Sigma context remains a separate rule. Unicode generation proof from clean704e261b remains valid for unchanged inputs; no behavior, native admission or runtime repair changes. Next .1.16 owns the crossing0522 mapping and continuation.
 - `2026-09-13` .1.14: Complete typed composition and read Unicode metadata/lowercase prefix. Preserve historical host probes while pointing current casing verification to the generated-table checker; all later ranges and runtime repairs remain owned.
 - `2026-09-13` .1.13: Complete staged and lifecycle contract reading; qualify dated typed-envelope milestones and preserve exact consumer proof limits. Typed public assertions and all repairs remain owned.
 - `2026-09-13` .1.12: Complete semantic model and staged scheduling/policy reading. Preserve narrow-v1 compatibility, all existing runtime repairs and remaining ownership/public-contract reading.
