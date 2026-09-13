@@ -9,7 +9,7 @@ answers:
   - "how do I verify conformance reading source and range coverage"
   - "which conformance source reading file has the longest line"
 date: 2026-09-13
-status: exact decomposition preserved; physical reading 20/143, 51 files complete and 123 groups remain
+status: exact decomposition preserved; physical reading 21/143, 51 files complete and 122 groups remain
 tags: [reading, conformance, tests, unicode, continuity, CONFORMANCE-SOURCE-READING]
 evidence: "Startup .3.8.0 independently accounts for160 baseline-identical files,5,422,313 stored bytes and8,257,059 decoded bytes in167,606 line fragments/167,604 LF delimiters. Four gzip inputs contribute54,500 decoded lines. All143 groups/302 ranges are contiguous, disjoint and bounded at1500 fragments/65536 bytes. No source, registry or runtime behavior changes; no physical-reading credit from inventory."
 reverify: "Run CONFORMANCE_SOURCE_READING_COVERAGE below through the project-data wrapper; it derives source identity from Git and range ownership from the task-tree rather than a parallel manifest. Use scripts/check_task_tree_metadata.sh for actual task collection limits."
@@ -399,12 +399,12 @@ properties, context rules, fixtures or decoded upstream inputs. All repairs rema
 
 ## Unicode reading checkpoint
 
-`CONFORMANCE-SOURCE-READING.1.20` reads 3 windows, 1,500 fragments and 14,781 bytes.
-Cumulative reading is 20/143, 24,431 fragments, 951,598 bytes and 51 complete files.
-The lower mapping array closes at line 9439; upper reading reaches 016F-to-016E
-at line 10138. Ordered expansions include 00DF-to-0053+0053 and 0149-to-02BC+004E.
-Uppercase is not the inverse of lowercase. Unchanged Unicode proof remains at
-704e261b; unread arrays and all runtime repairs remain owned.
+`CONFORMANCE-SOURCE-READING.1.21` reads 3 windows, 1,500 fragments and 14,528 bytes.
+Cumulative reading is 21/143, 25,931 fragments, 966,126 bytes and 51 complete files.
+Upper reading reaches 045F-to-040F, then opens the next entry at line 11638.
+Greek 0390 expands to 0399+0308+0301, and both 03C2 and 03C3 map to 03A3.
+Titlecase convergence and ordered scalar expansions remain explicit. Unchanged
+Unicode proof remains at 704e261b; unread ranges and runtime repairs remain owned.
 
 Lowercase table entries and Final Sigma context remain separate. Exact scalar
 sequences, sparse ranges, fullwidth forms and ligature identities are preserved;

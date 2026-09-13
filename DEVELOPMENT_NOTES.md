@@ -10,6 +10,12 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-13 — CONFORMANCE-SOURCE-READING.1.21 — preserve uppercase convergence and ordered combining sequences
+
+The range starts with 0171-to-0170 and reads extended Latin uppercase pairs and non-adjacent targets, including 017F-to-0053, 019B-to-A7DC, 023F-to-2C7E and 0264-to-A7CB. Titlecase/lowercase 01C5/01C6 converge on 01C4, with analogous 01C8/01C9, 01CB/01CC and 01F2/01F3 groups. Expansion 01F0-to-004A+030C preserves order. Greek includes combining 0345-to-0399, 0390-to-0399+0308+0301 and 03B0-to-03A5+0308+0301; ordinary and final lowercase Sigma 03C3/03C2 both map to 03A3. Variant Greek forms retain exact non-adjacent results. Cyrillic reading runs 0430-to-0410 through 044F-to-042F and 0450-to-0400 through 045F-to-040F. Line 11638 opens the next array entry without its scalar key; .1.22 owns that continuation. These ordered full-case sequences do not imply normalization, invertibility or any new native admission.
+
+Retain the unchanged Unicode 17 generation, byte-equality and 12-fixture proof from CONFORMANCE-SOURCE-READING.1.14 at 704e261b. Fresh window replay, complete range inventory, cumulative coverage, source/task/history preservation, rendered book, memory and document-pressure checks govern this ordinary reading leaf. Native admission evidence remains separately scoped; normal commit doctrines remain required.
+
 ## 2026-09-13 — CONFORMANCE-SOURCE-READING.1.20 — separate full uppercase sequences from lowercase inverses
 
 The range closes the prior 10D5B entry, finishes 10D5C-to-10D7C through 10D65-to-10D85, and reads supplementary families 118A0-to-118C0 through 118BF-to-118DF, 16E40-to-16E60 through 16E5F-to-16E7F, 16EA0-to-16EBB through 16EB8-to-16ED3, and 1E900-to-1E922 through 1E921-to-1E943. The lowercase array closes at line 9439; upper_mappings opens at 9440. Upper ASCII and Latin rows include non-adjacent 00B5-to-039C and 00FF-to-0178, expansion 00DF-to-0053+0053, identity 0130, dotless 0131-to-0049 and ordered expansion 0149-to-02BC+004E. This confirms that uppercase results cannot be obtained by simply reversing lowercase pairs. Line 10138 closes the 016F-to-016E entry; .1.21 owns subsequent entries. The uppercase suffix, properties, context rules, fixtures and decoded upstream files remain unread and task-owned.

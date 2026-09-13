@@ -497,15 +497,15 @@ the director's focused-verification grant used for this correction and the separ
 supporting-reading closeout. Reading completion establishes audited comprehension;
 it does not close the six grammar/literal repair roots or establish runtime signoff.
 Conformance, test and Unicode reading has exact ownership for all 160 inputs in
-143 bounded groups covering 8,257,059 decoded bytes. Twenty groups now account for
-24,431 fragments and 951,598 bytes, including 51 complete files. The Unicode
-lowercase mapping array is fully read, and reading has begun on the uppercase
-array. Uppercase results may contain multiple scalars: U+00DF becomes U+0053
-followed by U+0053 (`SS`), while U+0149 becomes U+02BC followed by U+004E.
-Uppercase conversion therefore cannot be obtained by reversing lowercase pairs.
-The unchanged offline generation proof is retained. Later uppercase entries,
-properties, context rules and fixtures remain to be read; all runtime repair tasks
-stay open. Named-argument support remains an approved future direction. The capability guide still has stale
+143 bounded groups covering 8,257,059 decoded bytes. Twenty-one groups now account for
+25,931 fragments and 966,126 bytes, including 51 complete files. The Unicode
+lowercase mapping array is fully read; uppercase reading now covers further Latin,
+Greek and Cyrillic entries. Greek U+0390 expands to U+0399, U+0308 and U+0301
+in that order. Both lowercase Sigma forms, U+03C2 and U+03C3, map to U+03A3.
+These mappings preserve exact full-case sequences and convergence without implying
+normalization or invertibility. The unchanged offline generation proof is retained.
+Remaining arrays and all runtime repair tasks stay open. Named-argument support
+remains an approved future direction. The capability guide still has stale
 current census, governance/inventory/public counts and generic-callable wording.
 Existing startup `.41.6` and `.41.7` now own these exact paragraphs and meaningful
 checks against recurrence. Their selected-marker guards currently miss the
