@@ -484,7 +484,7 @@ or the README `.4` adoption/closeout that installs the guard.
 
 ## Current Frontier
 
-Complete through .14 under director-approved ADR0118. After the verified commit, empty brief and clean proof, continue `SUPPORTING-SOURCE-READING.1.17` with its two required grammar ranges after .4 excludes irrelevant historical application reading; Lua reading is closed under ADR0119. All source repairs and later canonical/push requirements remain.
+Complete through .14 under director-approved ADR0118. After the verified commit, empty brief and clean proof, continue `SUPPORTING-SOURCE-READING.1.18` after the first required grammar group; .4 historical exclusions remain and .1.17 focused reading is complete; Lua reading is closed under ADR0119. All source repairs and later canonical/push requirements remain.
 
 Historical .13 handoff (preserved):
 Complete through .13 under director-approved ADR0116. After the verified commit, empty brief and clean proof, resume `JULIA-STARTUP-READING.1.38` in its separate active reading tree.

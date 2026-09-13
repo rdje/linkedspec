@@ -21,6 +21,7 @@ evidence: "specs/spec.spec exists and compiles at language_agnostic_ready_ratio 
 evidence_update_2026_07_22: "FUTURE-PARITY-BACKLOG.10.5.0.1.2.0 regenerates the complete 105-case oracle with ORACLE_TIMEOUT=30 and makes all four spec_spec_* input.spec files byte-identical to canonical specs/spec.spec at SHA-256 43cddeaea03cfaddce941ca87f66185de1abf81e281e86c29156fbad16f6d2ce. tools/check_unicode_rule_label_contract.py now fails on any byte or hash drift. Perl generation plus Rust, Dart, Julia, and Lua complete corpus routes preserve all expected outputs."
 evidence_update_2026_08_29: "FUTURE-PARITY-BACKLOG.15.2 adds complete-line lifecycle precedence and standalone lifecycle-I normalization to canonical specs/spec.spec. The first canonical attempt rejects the stale spec_spec_minimal_rule snapshot, proving the existing freshness guard. All four spec_spec_* input.spec mirrors are then updated through the same three grammar hunks and are byte-identical to canonical source at SHA-256 03cfb50459984806c806e9ec3f2b072add897c207a2cb93fd267d640a5808004; the Unicode rule-label contract passes. Canonical Phase 0 then exposes that its bootstrap-ownership guard raw-scanned all serialized payload text and mistook return(value) inside a valid lifecycle ICODE node for function ownership. The repaired guard recursively inspects only array tags and hash kind/node_type/tag/type identities, so ordinary lifecycle source is allowed while exact fn/function/function_definition/user_function_definition/FN_DEF node identities remain forbidden."
 evidence_update_2026_09_08: "SESSION-STARTUP-READING.3.3.44 reconciles its four baseline scopes (225 lines / 65,141 bytes), completing the action-edge grammar copy through EOF. Canonical specs/spec.spec and all four corpus mirrors are 83,452 bytes / 226 lines at unchanged SHA-256 03cfb50459984806c806e9ec3f2b072add897c207a2cb93fd267d640a5808004. The freshness/Unicode check passes: Unicode 17.0.0, 806 ranges, 9 positive labels, 8 negatives, 2 distinct pairs. This reading checkpoint does not rerun the complete native or CLI parsing matrix."
+evidence_update_2026_09_13: "SUPPORTING-SOURCE-READING.1.17 physically reads canonical spec.spec1–146 plus pplugin.spec1–33; exact paragraph/body-text probe below passes without legacy adapter load. Unicode/mirror check passes 806 ranges/9 positive/8 negative/2 distinct pairs. Remaining grammar bodies retain .1.18 ownership; no new primary-frontend or native-matrix claim."
 reverify: "bash tools/run_python_project_data.sh tools/check_unicode_rule_label_contract.py && rg -n 'function_definition:|-> function_definition|temporary pre-bootstrap registry bridge|SPEC-FORMAT-TERSE\\.4\\.2\\.1|staged linked parsing|0012' specs/spec.spec docs/tasks/SPEC-FORMAT-TERSE.md docs/tasks/STAGED-LINKED-PARSING.md docs/decisions/0012-staged-linked-parsing-architecture.md && ! rg -n '\\bfn\\s+[A-Za-z_][A-Za-z0-9_]*\\s*\\(|function_definition|user_function_definition|FN_DEF' perl/LinkedSpec/BootstrapSpec.pm perl/LinkedSpec/BootstrapSpec/Core.pm"
 ---
 
@@ -49,3 +50,61 @@ ADR `0014` applies the same rule to the future `parse_job(text_expr, options)`
 annotation helper for staged parsing.
 Canonical home: `docs/tasks/PHASE7-SELF-HOSTED-SPEC.md`, `specs/spec.spec` header.
 Related: [[andplusplus-lx-parser-hang]].
+
+# Source comprehension and focused AST probe — 2026-09-13
+
+The `spec_file` root initializes paragraph/current arrays, copies a completed
+paragraph on each next rule header and flushes the last one at LX. Ordered
+dispatch prefers block/fluent forms before bare forms and skips comments.
+Header nodes preserve exact label, raw mode and top marker; named regex nodes
+carry slot name and pattern, anonymous regex nodes carry pattern. The action-block
+rule returns trimmed target text and the complete balanced, string-aware block.
+These are parser AST values; the probe does not execute their action text.
+
+The source header's equality-to-bootstrap description remains qualified by
+[[bootstrapspec-vs-spec-spec-dual-path]] and the permanent function-owner policy
+above: the Perl bootstrap is still primary, while function definitions have their
+temporary registry bridge. Later rule bodies remain in .1.18; this reading does
+not claim all dispatcher destinations are already physically covered.
+
+The following exact probe checks two paragraph arrays, top/mode identity, a named
+slot, an anonymous regex and an indexed action with both a nested block and a
+quoted closing brace. It also checks that the retained pplugin grammar returns
+body text without loading the legacy adapter. No callback is constructed or run.
+
+```bash
+bash tools/project_data_run.sh env PERL5LIB= perl -Iperl - <<'SUPPORTING_GRAMMAR_AST_PROBE'
+use strict;
+use warnings;
+use LinkedSpec;
+use JSON::PP;
+
+my $json = JSON::PP->new->canonical;
+my $source = <<'SPEC';
+# grammar reading probe
+Main:: AND
+ first=/a/
+ -> Child[1] { return("}"); if(1) { return("x") } }
+Child: /a/
+SPEC
+my $parser = LinkedSpec::get_parser('spec');
+my $actual = $parser->(\$source);
+my $expected = [
+    [ { type => 'rule', label => 'Main', top => 1, mode => 'AND' },
+      { type => 'regex', pattern => 'a', slot_name => 'first' },
+      { type => 'action_edge', targets => 'Child[1]', code => '{ return("}"); if(1) { return("x") } }' } ],
+    [ { type => 'rule', label => 'Child', top => 0, mode => '' },
+      { type => 'regex', pattern => 'a' } ],
+];
+die "paragraph AST mismatch: " . $json->encode($actual) . "\n"
+    unless $json->encode($actual) eq $json->encode($expected);
+my $plugin_parser = LinkedSpec::get_parser('pplugin');
+my $plugin_source = 'foo { 1 + 2 }';
+my $bodies = $plugin_parser->(\$plugin_source);
+die "body text mismatch: " . $json->encode($bodies) . "\n"
+    unless $json->encode($bodies) eq $json->encode({ foo => ' 1 + 2 ' });
+die "legacy adapter unexpectedly loaded\n" if exists $INC{'PPlugin.pm'};
+print $json->encode({ paragraphs => $actual, plugin_body_text => $bodies,
+                      legacy_adapter_loaded => JSON::PP::false }), "\n";
+SUPPORTING_GRAMMAR_AST_PROBE
+```

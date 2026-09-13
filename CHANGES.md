@@ -10,6 +10,12 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-13 — SUPPORTING-SOURCE-READING.1.17 — required grammar prefix reading
+
+Supporting .1.17 reads seven complete windows/two required ranges: 179 fragments/26444 bytes, completing pplugin.spec and spec.spec lines1–146. The exact AST probe preserves paragraph grouping, named/anonymous regex nodes, indexed action targets, nested braces and a quoted closing brace; the plugin grammar returns body text without loading the legacy adapter. Unicode/mirror verification passes 806 ranges/9 positive/8 negative/2 distinct pairs. One of three current grammar groups is read; 450 fragments/70337 bytes remain in .1.18-.1.19. Historical .1.1, seventeen superseded groups, all original ranges/sources/tests and existing repair owners remain exact. Next .1.18 continues the self-hosted grammar and function-definition prefix.
+
+Verification: exact required-range/window identity and prior evidence/source/repair preservation; small grammar AST probe, Unicode/mirror check, Knowledge, memory, both histories, rendered book and normal doctrine hooks. No dependency build or canonical CI.
+
 ## 2026-09-13 — SUPPORTING-SOURCE-READING.4 — current grammar dependency scope
 
 Supporting .4 applies the director’s current-project boundary to historical spec/config/Perl application bundles. Three grammar inputs retain current language or compatibility roles: spec.spec, user_function_definition.spec and pplugin.spec. Their descriptors compile with no blocked or compatibility rules and no legacy adapter load. Required reading is three groups/five ranges/629 fragments/96781 bytes; seventeen original groups are superseded without reading credit, and completed historical .1.1 remains exact. All 158 files, regression fixtures, original ranges and repair owners remain. Next .1.17 reads only its two required grammar ranges; no dependency build or canonical CI is claimed.

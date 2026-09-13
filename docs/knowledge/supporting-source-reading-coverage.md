@@ -8,10 +8,10 @@ answers:
   - how much prior supporting-source reading credit is established
   - does supporting-source reading require rebuilding RGX or PGEN
 date: 2026-09-13
-status: original inventory preserved; one historical group read, seventeen superseded, three current grammar groups pending
+status: original inventory preserved; one historical and one current group read, seventeen superseded, two required groups pending
 tags: [startup, reading, supporting, inventory, continuity]
 evidence: "SESSION-STARTUP-READING.3.7.0; clean Lua closeout 735f0337883baef5ac4422976879d09725e0e8ea; baseline baeb984e36a94a15951cd23d4c52def5064cdaca."
-reverify: "Run SUPPORTING_SOURCE_INVENTORY, SUPPORTING_SOURCE_PLAN, then SUPPORTING_SOURCE_TREE below; these identity/range audits grant no additional physical reading credit."
+reverify: "Run SUPPORTING_SOURCE_INVENTORY, SUPPORTING_SOURCE_PLAN, SUPPORTING_SOURCE_TREE and SUPPORTING_CURRENT_GROUP17 below; these identity/range audits grant no additional physical reading credit."
 ---
 
 # Exact supporting-source inventory
@@ -80,6 +80,85 @@ reading. Current dependency evidence and scope replay live in
 [[current-supporting-grammar-dependencies]]. The earlier .0 evidence remains in
 [[legacy-configuration-source-contracts]], with its task input pinned to its dated
 commit for honest historical replay.
+
+# Current grammar group .1.17 — 2026-09-13
+
+All seven complete windows of the Required reading scope are physically read:
+`specs/pplugin.spec`1–33 and `specs/spec.spec`1–146, totaling 179 fragments/26,444
+bytes. The pplugin file reaches EOF; the self-hosted grammar suffix remains .1.18.
+The original wider Scope stays inventory only. Current required reading is 1/3;
+450 fragments/70,337 bytes remain, distinct from completed historical .1.1 and
+seventeen superseded groups. No new defect or repair closure is established.
+
+| Window | File | Inclusive lines | Bytes |
+| --- | --- | --- | ---: |
+| 1 | specs/pplugin.spec | 1–33 | 650 |
+| 2 | specs/spec.spec | 1–108 | 6,468 |
+| 3 | specs/spec.spec | 109–126 | 775 |
+| 4 | specs/spec.spec | 127–139 | 6,471 |
+| 5 | specs/spec.spec | 140–142 | 143 |
+| 6 | specs/spec.spec | 143 | 11,758 |
+| 7 | specs/spec.spec | 144–146 | 179 |
+
+Window2 was displayed in adjacent complete excerpts1–94 and95–108; all windows
+are completely consumed. The long Unicode action pattern is one complete line,
+not a truncated or omitted interval. Ordered range SHA-256 is
+`910001b25a8dc5581ff6254cb39f5bc5888dbb3c1665af061fa8edc0205a6e39`;
+ordered window SHA-256 is
+`254938dc997bd16d9511d0cbff833be5b7cc064b4225f09bab674aa03ef8a3e2`.
+The independent replay verifies baseline identity and reconstructs these bounds;
+it does not create physical reading credit by itself.
+
+Comprehension and exact paragraph/body-text probe:
+[[spec-spec-self-hosted-grammar]] and
+[[pplugin-descriptor-ready-legacy-runtime-boundary]]. The Unicode/mirror check
+passes 806 ranges, nine positive labels, eight negatives and two distinct pairs.
+No adapter callback, dependency build or complete native matrix is executed.
+
+```bash
+bash tools/project_data_run.sh python3 - <<'SUPPORTING_CURRENT_GROUP17'
+from pathlib import Path
+import hashlib, json, re, subprocess
+
+baseline = 'baeb984e36a94a15951cd23d4c52def5064cdaca'
+tree = Path('docs/tasks/SUPPORTING-SOURCE-READING.md').read_text()
+node = re.search(r'^- ID: `SUPPORTING-SOURCE-READING\.1\.17`\n.*?(?=^- ID: |^## |\Z)', tree, re.M | re.S)[0]
+scope = re.search(r'^  Required reading scope: (.+)$', node, re.M)[1]
+found = [(p, int(a), int(b)) for p, a, b in re.findall(r'`([^`]+)` lines (\d+)-(\d+)', scope)]
+assert found == [('specs/pplugin.spec', 1, 33), ('specs/spec.spec', 1, 146)]
+ranges, windows = [], []
+for path, first, last in found:
+    raw = Path(path).read_bytes()
+    assert raw == subprocess.check_output(['git', 'show', baseline + ':' + path])
+    lines = raw.splitlines(keepends=True)
+    chunk = b''.join(lines[first-1:last])
+    ranges.append({'path': path, 'start': first, 'end': last,
+                   'bytes': len(chunk), 'sha256': hashlib.sha256(chunk).hexdigest()})
+    start, current = first, []
+    for number in range(first, last+1):
+        line = lines[number-1]
+        if current and sum(map(len,current)) + len(line) > 6500:
+            data = b''.join(current)
+            windows.append({'path': path, 'start': start, 'end': number-1,
+                            'bytes': len(data), 'sha256': hashlib.sha256(data).hexdigest()})
+            start, current = number, []
+        current.append(line)
+    if current:
+        data = b''.join(current)
+        windows.append({'path': path, 'start': start, 'end': last,
+                        'bytes': len(data), 'sha256': hashlib.sha256(data).hexdigest()})
+digest = lambda rows: hashlib.sha256(json.dumps(rows,separators=(',',':')).encode()).hexdigest()
+assert digest(ranges) == '910001b25a8dc5581ff6254cb39f5bc5888dbb3c1665af061fa8edc0205a6e39'
+assert digest(windows) == '254938dc997bd16d9511d0cbff833be5b7cc064b4225f09bab674aa03ef8a3e2'
+assert len(windows) == 7
+assert sum(r['end']-r['start']+1 for r in ranges) == 179
+assert sum(r['bytes'] for r in ranges) == sum(w['bytes'] for w in windows) == 26444
+scratch = Path('.linkedspec-data/scratch/support117')
+scratch.mkdir(parents=True, exist_ok=True)
+(scratch/'audit.json').write_text(json.dumps({'ranges':ranges,'windows':windows},indent=2)+'\n')
+print('PASS exact required range/window reconstruction: seven windows/two ranges/179 fragments/26444 bytes; pplugin EOF and spec.spec1–146 only. Identity verification does not create reading credit.')
+SUPPORTING_CURRENT_GROUP17
+```
 
 # Verification and continuity boundaries
 

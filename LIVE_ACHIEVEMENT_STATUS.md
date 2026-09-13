@@ -5,19 +5,21 @@
 - `SESSION-STARTUP-READING` owns the required reading before Rust mutation setup. Roadmap reading and
   physical mdBook reading are complete; codebase reading remains incomplete. `rgx` and its dependencies are excluded.
 - Intakes `.31`/`.3.2.42` preserve all Perl and book source reading, supporting native/tool ranges, confirmed
-  findings, and donor-policy comparisons. Perl, Rust, Dart and Julia reading are complete. Canonical capacity admission is complete at a67a18bf. Supporting .4 applies the director’s current-project boundary to historical spec/config/Perl application bundles. Three grammar inputs retain current language or compatibility roles: spec.spec, user_function_definition.spec and pplugin.spec. Their descriptors compile with no blocked or compatibility rules and no legacy adapter load. Required reading is three groups/five ranges/629 fragments/96781 bytes; seventeen original groups are superseded without reading credit, and completed historical .1.1 remains exact. All 158 files, regression fixtures, original ranges and repair owners remain. Next .1.17 reads only its two required grammar ranges; no dependency build or canonical CI is claimed. Dart reading is 55/55 children, 80,297 fragments / 2,471,305 bytes. Dart .7 is approved: containment .11 / ADR0113 implement the exact engineering-history counts with fresh source/history and 22-boundary proof; the director granted a one-time focused/receipt exception on September 11, closing the capacity boundary at ad64f76f before .1.47. The director requires build-on-update PGEN/RGX reuse under .80. Remaining reading and repairs stay open.
+  findings, and donor-policy comparisons. Perl, Rust, Dart and Julia reading are complete. Canonical capacity admission is complete at a67a18bf. Supporting .1.17 reads seven complete windows/two required ranges: 179 fragments/26444 bytes, completing pplugin.spec and spec.spec lines1–146. The exact AST probe preserves paragraph grouping, named/anonymous regex nodes, indexed action targets, nested braces and a quoted closing brace; the plugin grammar returns body text without loading the legacy adapter. Unicode/mirror verification passes 806 ranges/9 positive/8 negative/2 distinct pairs. One of three current grammar groups is read; 450 fragments/70337 bytes remain in .1.18-.1.19. Historical .1.1, seventeen superseded groups, all original ranges/sources/tests and existing repair owners remain exact. Next .1.18 continues the self-hosted grammar and function-definition prefix. Dart reading is 55/55 children, 80,297 fragments / 2,471,305 bytes. Dart .7 is approved: containment .11 / ADR0113 implement the exact engineering-history counts with fresh source/history and 22-boundary proof; the director granted a one-time focused/receipt exception on September 11, closing the capacity boundary at ad64f76f before .1.47. The director requires build-on-update PGEN/RGX reuse under .80. Remaining reading and repairs stay open.
 - Repairs `.7`–`.30`, `.32`–`.47`, and `.49`–`.82` are task-owned. `.7` blocks recovery/purge; `.29` belongs to policy adoption `.5`.
   Runtime and public repairs follow required reading and the relevant policy review.
 
 ## Latest Completed Slice
 
-- `SUPPORTING-SOURCE-READING.4 - focus supporting reading on current grammar dependencies` — Supporting .4 applies the director’s current-project boundary to historical spec/config/Perl application bundles. Three grammar inputs retain current language or compatibility roles: spec.spec, user_function_definition.spec and pplugin.spec. Their descriptors compile with no blocked or compatibility rules and no legacy adapter load. Required reading is three groups/five ranges/629 fragments/96781 bytes; seventeen original groups are superseded without reading credit, and completed historical .1.1 remains exact. All 158 files, regression fixtures, original ranges and repair owners remain. Next .1.17 reads only its two required grammar ranges; no dependency build or canonical CI is claimed.
+- `SUPPORTING-SOURCE-READING.1.17 - read current grammar paragraph and plugin body parsing` — Supporting .1.17 reads seven complete windows/two required ranges: 179 fragments/26444 bytes, completing pplugin.spec and spec.spec lines1–146. The exact AST probe preserves paragraph grouping, named/anonymous regex nodes, indexed action targets, nested braces and a quoted closing brace; the plugin grammar returns body text without loading the legacy adapter. Unicode/mirror verification passes 806 ranges/9 positive/8 negative/2 distinct pairs. One of three current grammar groups is read; 450 fragments/70337 bytes remain in .1.18-.1.19. Historical .1.1, seventeen superseded groups, all original ranges/sources/tests and existing repair owners remain exact. Next .1.18 continues the self-hosted grammar and function-definition prefix.
 
 ## Next Action
 
-- `SUPPORTING-SOURCE-READING.1.17` — Read SUPPORTING-SOURCE-READING.1.17 Required reading scope: pplugin.spec lines1–33 and spec.spec lines1–146, 179 fragments/26444 bytes. Retrieve canonical grammar/runtime facts, read complete bounded windows, reconcile findings and commit focused evidence before .1.18.
+- `SUPPORTING-SOURCE-READING.1.18` — Read SUPPORTING-SOURCE-READING.1.18 Required reading scope: spec.spec lines147–226 and user_function_definition.spec lines1–115, 195 fragments/62203 bytes. Retrieve canonical facts, read complete bounded windows including long Unicode patterns, reconcile findings and commit focused evidence before .1.19.
 
 ## Recent Completions
+
+- `2026-09-13` — `SUPPORTING-SOURCE-READING.1.17` reads 179 fragments/26444 bytes through seven windows; exact paragraph/body-text probe and Unicode/mirror check pass; one of three current grammar groups complete, historical exclusions/repairs intact; next .1.18.
 
 - `2026-09-13` — `SUPPORTING-SOURCE-READING.4` retains three current grammar inputs; seventeen groups superseded without credit, all 158 sources/tests and original evidence intact; descriptor-only probe passes; next .1.17 required ranges.
 
@@ -48,8 +50,6 @@
 - `2026-09-13` — `LUA-STARTUP-READING.1.44` reads 1,500 fragments/58,471 bytes and completes 81 files; seven package groups plus exact semantic/SHA proof pass on each host; all prior limitations remain; next .1.45.
 
 - `2026-09-13` — `LUA-STARTUP-READING.1.43` reads 1,500 fragments/52,604 bytes; 28 complete package groups per host pass, covering controls, numeric contracts, binding and copied collections; all repair owners remain; next .1.44.
-
-- `2026-09-13` — `LUA-STARTUP-READING.1.42` reads 1,500 fragments/61,135 bytes; 17 safe package groups per host pass, including named captures and scoped/tree callbacks; three native-error groups remain with .2.3; next .1.43.
 
 ## History
 

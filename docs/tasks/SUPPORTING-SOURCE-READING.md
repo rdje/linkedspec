@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `SUPPORTING-SOURCE-READING`
-- Status: `active` / one historical reading group complete; seventeen groups superseded; three current grammar groups pending
+- Status: `active` / one historical and one current grammar group complete; seventeen groups superseded; two required groups pending
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.7`
 - Created: `2026-09-13`
 - Last updated: `2026-09-13`
@@ -61,7 +61,7 @@ from runtime signoff. Existing startup and backend repairs remain open.
   Dependencies: Startup .3.7.0 decomposition committed; clean activation for every child.
   Children: `.1.1-.1.21`
   Acceptance: Each required child records exact Required reading scope coverage, comprehension, Knowledge reconciliation, owned findings, focused proof and clean commit. Seventeen superseded groups and excluded intervals of mixed groups receive no reading credit; original Scope/digests remain exact.
-  Verification: `pending`
+  Verification: Current required reading: .1.17 complete (179 fragments/26444 bytes); .1.18-.1.19 pending (450 fragments/70337 bytes). Completed historical .1.1 and seventeen explicit omissions remain distinct; all original Scope/digests and repair owners remain.
   Commit: `pending`
 
 - ID: `SUPPORTING-SOURCE-READING.1.1`
@@ -246,7 +246,11 @@ from runtime signoff. Existing startup and backend repairs remain open.
   Commit: `none - superseded without additional reading`
 
 - ID: `SUPPORTING-SOURCE-READING.1.17`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `4f2508fd5695231cbae98ebef27c8223170a4149`.
+  Verification tier: `focused`
+  Focused checks: Complete required-range/window reading and source identity; canonical grammar/runtime reconciliation and bounded descriptor checks; prior evidence/source/repair preservation, memory, Knowledge, both histories, rendered book and normal doctrines.
+  Canonical trigger: Ordinary source-reading and comprehension evidence only; no implementation, dependency, test, gate or milestone change.
   Goal: Read and understand supporting specs group 17.
   Scope: `specs/BNF.spec` lines 1-65; `specs/DT.spec` lines 1-43; `specs/Lispish.spec` lines 1-86; `specs/ds_vhistory.spec` lines 1-95; `specs/ebnf.spec` lines 1-214; `specs/hlink_substitution.spec` lines 1-29; `specs/ifelse.spec` lines 1-30; `specs/lib_reader.spec` lines 1-15; `specs/operators_try.spec` lines 1-47; `specs/portmap.spec` lines 1-33; `specs/pplugin.spec` lines 1-33; `specs/regdef.spec` lines 1-23; `specs/sdce.spec` lines 1-15; `specs/simenv.spec` lines 1-225; `specs/spec.spec` lines 1-146
   Baseline evidence: 1099 fragments / 62580 bytes; ordered range SHA-256 `8248125baaedfc4f2c1ebdfc253610c654da3ca973c28b3ca10aded6872611a3`.
@@ -255,8 +259,10 @@ from runtime signoff. Existing startup and backend repairs remain open.
   Scope disposition: .4 retains only current language/runtime grammar dependencies. Other original Scope intervals remain historical fixture inventory without reading credit; no file or test is removed.
   Dependencies: .4 current-dependency disposition committed with clean handoff; begin the three required current grammar groups.
   Acceptance: Read every Required reading scope byte in complete bounded windows; preserve comprehension, canonical facts, owned findings, source identity, focused proof and clean per-leaf continuity. Original Scope is inventory, not an assertion of omitted-byte reading.
-  Verification: `pending`
-  Commit: `pending`
+  Comprehension: The top grammar copies completed paragraph arrays on each rule header and at LX; ordered token dispatch keeps block/fluent forms ahead of bare edges. Header nodes preserve raw mode, top marker and Unicode label; named regex declarations preserve slot name/pattern, anonymous literals preserve pattern, and action-block nodes retain trimmed target text plus balanced string-aware block text. pplugin gathers name/body pairs into a hash with nested/quoted body handling; it returns text, not executable callbacks. Canonical dual-path/bootstrap, Unicode, permanent-function-owner and legacy-adapter facts remain qualified; later rule bodies belong to .1.18.
+  Verification: Supporting .1.17 reads seven complete windows/two required ranges: 179 fragments/26444 bytes, completing pplugin.spec and spec.spec lines1–146. The exact AST probe preserves paragraph grouping, named/anonymous regex nodes, indexed action targets, nested braces and a quoted closing brace; the plugin grammar returns body text without loading the legacy adapter. Unicode/mirror verification passes 806 ranges/9 positive/8 negative/2 distinct pairs. One of three current grammar groups is read; 450 fragments/70337 bytes remain in .1.18-.1.19. Historical .1.1, seventeen superseded groups, all original ranges/sources/tests and existing repair owners remain exact. Next .1.18 continues the self-hosted grammar and function-definition prefix. Range SHA-256 910001b25a8dc5581ff6254cb39f5bc5888dbb3c1665af061fa8edc0205a6e39; window SHA-256 254938dc997bd16d9511d0cbff833be5b7cc064b4225f09bab674aa03ef8a3e2. Exact replay: docs/knowledge/supporting-source-reading-coverage.md. No new demonstrated defect or repair closure; no dependency compilation, full component matrix or canonical CI.
+  Candidate proof: Exact independent window/range reconstruction and current three-file scope replay pass. Preserve 2479 prior files byte-exact and earlier evidence in four updated canonical cards; 2615/2618 prior task nodes remain exact, only three current reading/owner nodes change, no new task ID. All defects, original Scope/digests, historical .1.1/.0/.4 and 92 prior book limitation headings remain. Published probe/replay bodies match executed scratch exactly. Knowledge is 1141 facts/9106 keys; memory is 60 lines; histories pass at 401/38082 and 331/37207 lines/bytes. Rendered examples and all normal doctrine hooks govern focused landing.
+  Commit: `SUPPORTING-SOURCE-READING.1.17 - read current grammar paragraph and plugin body parsing`
 
 - ID: `SUPPORTING-SOURCE-READING.1.18`
   Status: `pending`
@@ -342,7 +348,7 @@ from runtime signoff. Existing startup and backend repairs remain open.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SUPPORTING-SOURCE-READING.1.17` | `pending` | After clean .4, read only pplugin.spec1–33 and spec.spec1–146 (179 fragments/26444 bytes); retained historical fixtures and quarantined code receive no new reading credit. |
+| 1 | `SUPPORTING-SOURCE-READING.1.18` | `pending` | After clean .1.17, read spec.spec147–226 and user_function_definition.spec1–115 (195 fragments/62203 bytes); preserve historical exclusions and all repairs. |
 
 ## Decisions
 
@@ -362,6 +368,8 @@ from runtime signoff. Existing startup and backend repairs remain open.
 
 ## Verification Log
 
+- `2026-09-13` .1.17: Supporting .1.17 reads seven complete windows/two required ranges: 179 fragments/26444 bytes, completing pplugin.spec and spec.spec lines1–146. The exact AST probe preserves paragraph grouping, named/anonymous regex nodes, indexed action targets, nested braces and a quoted closing brace; the plugin grammar returns body text without loading the legacy adapter. Unicode/mirror verification passes 806 ranges/9 positive/8 negative/2 distinct pairs. One of three current grammar groups is read; 450 fragments/70337 bytes remain in .1.18-.1.19. Historical .1.1, seventeen superseded groups, all original ranges/sources/tests and existing repair owners remain exact. Next .1.18 continues the self-hosted grammar and function-definition prefix.
+
 - `2026-09-13` .4: Supporting .4 applies the director’s current-project boundary to historical spec/config/Perl application bundles. Three grammar inputs retain current language or compatibility roles: spec.spec, user_function_definition.spec and pplugin.spec. Their descriptors compile with no blocked or compatibility rules and no legacy adapter load. Required reading is three groups/five ranges/629 fragments/96781 bytes; seventeen original groups are superseded without reading credit, and completed historical .1.1 remains exact. All 158 files, regression fixtures, original ranges and repair owners remain. Next .1.17 reads only its two required grammar ranges; no dependency build or canonical CI is claimed.
 
 - `2026-09-13` .0: Supporting .0 records conf and TableScript as historical Lispish application data, retaining their existing narrow parser-corpus use. The exact focused Phase 0 subtest passes six assertions over 53 conf/23 TableScript/7 EBNF inputs; no obsolete application consumer or dependency build runs. Further manual reading of conf and TableScript data is retired under .1.2-.1.7, with no deletion or reading credit; completed .1.1 and the original 158-file/174-range inventory remain exact. Required supporting code is now 77 files/88 ranges/17291 fragments/673899 bytes in 14 pending groups. Next .1.17 reads shipped backend-neutral specs, followed by EBNF and the remaining legacy-code review. Every prior defect owner and later startup obligation remains.
@@ -372,6 +380,8 @@ from runtime signoff. Existing startup and backend repairs remain open.
 
 ## Commit Log
 
+- `2026-09-13` .1.17: `SUPPORTING-SOURCE-READING.1.17 - read current grammar paragraph and plugin body parsing`; activation 4f2508fd5695231cbae98ebef27c8223170a4149; next .1.18 after focused proof, empty brief and clean handoff.
+
 - `2026-09-13` .4: `SUPPORTING-SOURCE-READING.4 - focus supporting reading on current grammar dependencies`; activation 5faaf61b9a5c56f18a01dde2c655f176b2828d19; next .1.17 required grammar ranges after all focused checks, clean handoff and empty brief.
 
 - `2026-09-13` .0: `SUPPORTING-SOURCE-READING.0 - reconcile historical Lispish inputs with current corpus use`; activation 0e3423a19addad30c8f932b1f23fb270e22f1677; next .1.17 authored specs after clean proof and empty brief.
@@ -381,6 +391,8 @@ from runtime signoff. Existing startup and backend repairs remain open.
 - `2026-09-13`: Decomposition lands with `SESSION-STARTUP-READING.3.7.0`; current Git identifies its commit.
 
 ## Changelog
+
+- `2026-09-13` .1.17: Read the first required current grammar group; retain exact original inventory, historical exclusions and all defects.
 
 - `2026-09-13` .4: Preserve historical inventories and narrow further reading to three evidenced current grammar inputs; retain all tests and repair ownership.
 

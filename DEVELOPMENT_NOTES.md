@@ -10,6 +10,12 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-13 — SUPPORTING-SOURCE-READING.1.17 — paragraph and body-text grammar boundaries
+
+The self-hosted prefix owns copied paragraph grouping and ordered token dispatch; rule headers preserve exact label/raw mode/top, regex nodes preserve named versus anonymous shape, and action blocks retain complete string-aware nested text. The plugin grammar returns a name/body-text hash; callbacks belong to the separately loaded legacy adapter. Exact AST/body-text proof and Unicode/mirror verification pass. Existing bootstrap-primary/function-bridge qualifications remain; later grammar bodies are still .1.18-owned. No new defect is demonstrated and every existing repair remains open.
+
+Verification: exact required-range/window identity and prior evidence/source/repair preservation; small grammar AST probe, Unicode/mirror check, Knowledge, memory, both histories, rendered book and normal doctrine hooks. No dependency build or canonical CI.
+
 ## 2026-09-13 — SUPPORTING-SOURCE-READING.4 — application history versus grammar dependencies
 
 Historical application bundles do not define present feature obligations. Current spec.spec/function-definition loaders and the retained lazy pplugin compatibility grammar justify three precise reading inputs. Quarantined modules and example/EBNF corpora remain preserved regression/history material; the accepted future EBNF-like frontend is a separate direction. Exact initial/current quarantine membership resolves the old 36-module count as an overcount: both contain 35 modules, 13 plugins and the ledger. Scope overlays preserve original inventory without granting omitted-byte credit. Canonical role evidence and replay live in docs/knowledge/current-supporting-grammar-dependencies.md.

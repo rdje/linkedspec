@@ -411,6 +411,18 @@ Current grammar dependencies are distinguished explicitly:
 | `specs/user_function_definition.spec` | Grammar loaded by the Perl function-definition parser; other backends implement the corresponding language surface. |
 | `specs/pplugin.spec` | Small grammar retained for the shipped lazy legacy plugin adapter; this compatibility route is transition machinery. |
 
+The self-hosted parser returns paragraph arrays containing typed parts. For
+example, `Main:: AND` records a top rule and raw mode `AND`; `first=/a/` records
+the named regex slot, while `Child: /a/` starts another paragraph with an anonymous
+regex. An edge such as `-> Child[1] { return("}"); if(1) { return("x") } }` keeps
+its indexed target and complete action text: the quoted brace does not end the
+block, and the inner block stays balanced. A focused parser probe verifies these
+exact AST values. Parsing that action text does not execute it.
+
+The retained plugin grammar similarly returns `foo { 1 + 2 }` as the mapping
+`foo` to the body string ` 1 + 2 `. Legacy callback construction belongs to the
+separate Perl adapter; this probe leaves that adapter unloaded.
+
 A descriptor-only probe compiles all three with zero blocked or compatibility
 rules and leaves the legacy adapter unloaded. This proves descriptor readiness,
 not a backend-neutral plugin runtime or complete cross-backend execution parity.
@@ -420,6 +432,8 @@ retaining them does not claim that frontend is implemented.
 
 Further manual historical application reading is omitted. The current required
 supporting grammar scope is three files/five ranges/629 fragments/96,781 bytes.
+The first current group is read (179 fragments/26,444 bytes), with 450 fragments/
+70,337 bytes remaining in the self-hosted suffix and function-definition grammar.
 Seventeen original groups are superseded without reading credit; completed
 historical reading and the original 158-file/174-range inventory remain exact.
 No fixture or regression assertion is removed. Current dependency evidence and
