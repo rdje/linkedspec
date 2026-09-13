@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-13 — Lua control numeric and collection package reading
+
+- Read package 7853-9352 in eight complete windows: 1,500 fragments /52,604 bytes; cumulative 43/51 and 2,283,819 bytes.
+- Both installed hosts pass 28 complete groups each, covering controls, numeric/logical contracts, selector rejection, uniform bindings and copied collections.
+- Exact direct-write diagnostics differ from statement set_key; finite neutral numeric cases do not close earlier integer overflow or false-value limitations.
+- LUA-STARTUP-READING.1.43 extends existing .2.1 guidance, preserves all thirty-three repair roots and earlier exclusions/failures, and hands off to .1.44.
+
 ## 2026-09-13 — Lua named captures and scoped callback package reading
 
 - Read package 6353-7852 in eight complete windows: 1,500 fragments /61,135 bytes; cumulative 42/51 and 2,231,215 bytes.

@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-13 — Preserve exact control flow and collection mutation contracts
+
+- Select original helpers and all 28 complete groups 7805-9319; partial array transforms remain outside the proof and earlier native-error exclusions stay intact.
+- Lazy branches and attached loops preserve action versus local return, exact-limit rechecks and attributed structural failures; valid logical operands stay eager.
+- Selector rejection covers dead/deferred/mutated routes; typed binding snapshots, child push, explicit splicing, receiver copy and ordered harray/array results pass unchanged.
+- LUA-STARTUP-READING.1.43 records replay in docs/knowledge/lua-package-control-numeric-collection-reading.md; .2.1 owns direct nested-write/numeric scope and historical control-stage wording.
+
 ## 2026-09-13 — Keep capture timing and callback copy evidence exact
 
 - Select original helpers plus complete groups 6312-6819 and 6978-7804; all three malformed-native-regex groups 6820-6977 stay unexecuted under .2.3.
