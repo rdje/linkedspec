@@ -13643,7 +13643,7 @@ _Lua query and generated observation consumer reading retains the PUC nil-error 
 _Lua independent reading audit preserves source commits and unresolved verification_
 
 - **answers:** have all 51 Lua reading commits been independently verified | which commit completes physical Lua source reading | what verification blocks Lua reading parent closeout | does complete Lua source reading close its runtime defects | which failed and excluded Lua checks remain after reading | what exact one-time Lua reading closeout exception is proposed | do earlier capacity or Julia approvals waive Lua closeout verification
-- **date:** 2026-09-13 · **status:** independent audit complete; reading closeout proposal pending explicit director disposition
+- **date:** 2026-09-13 · **status:** Lua reading closed under director-authorized ADR0119; all repairs remain open
 - **evidence:** `LUA-STARTUP-READING.3.1; physical checkpoint 7ead9e003b2cfb1bb356f990d8644e2d8bcad3d4; baseline baeb984e36a94a15951cd23d4c52def5064cdaca.`
 - **reverify:** `Run LUA_READING_COMMIT_AUDIT, then LUA_READING_VALIDATION_BOUNDARIES below. The second recipe checks retained artifacts; it runs no Lua tests, excluded native regex case, Cargo build or canonical gate.`
 - **source:** [`docs/knowledge/lua-reading-commit-closeout-audit.md`](docs/knowledge/lua-reading-commit-closeout-audit.md)

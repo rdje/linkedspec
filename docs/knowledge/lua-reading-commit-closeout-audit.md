@@ -10,11 +10,22 @@ answers:
   - what exact one-time Lua reading closeout exception is proposed
   - do earlier capacity or Julia approvals waive Lua closeout verification
 date: 2026-09-13
-status: independent audit complete; reading closeout proposal pending explicit director disposition
+status: Lua reading closed under director-authorized ADR0119; all repairs remain open
 tags: [lua, startup, reading, audit, continuity, verification]
 evidence: "LUA-STARTUP-READING.3.1; physical checkpoint 7ead9e003b2cfb1bb356f990d8644e2d8bcad3d4; baseline baeb984e36a94a15951cd23d4c52def5064cdaca."
 reverify: "Run LUA_READING_COMMIT_AUDIT, then LUA_READING_VALIDATION_BOUNDARIES below. The second recipe checks retained artifacts; it runs no Lua tests, excluded native regex case, Cargo build or canonical gate."
 ---
+
+## September 13 director disposition
+
+After reviewing the exact proposal and its explanation, the director authorizes
+unblocking and continuing the read-only work while avoiding unnecessary RGX/PGEN
+rebuilds. ADR0119 records this new scope; .3.2 closes only Lua reading and routes
+supporting startup .3.7. Both recipes below pass again; all 145 repair nodes and
+failed/excluded results remain exact. No canonical CI, fresh full Lua/PUC5.4 pass
+or dependency build is claimed. The earlier no-build wording meant the build-reuse
+requirement; it is not a blanket prohibition or a restriction on source reading.
+The original audit and pending proposal below remain dated evidence from .3.1.
 
 # Independent reading audit
 

@@ -1,12 +1,12 @@
 # MEMORY
 
-- activation_commit: `7ead9e003b2cfb1bb356f990d8644e2d8bcad3d4` — clean independent Lua reading audit activation.
-- latest_completed_leaf: `LUA-STARTUP-READING.3.1 - audit Lua reading commits and prepare scoped closeout`; exact 51-commit/99-source/51-card audit and retained-result verification pass; all 35 repair roots/145 nodes remain pending.
-- active_work_unit: `LUA-STARTUP-READING.3.2` — pending explicit disposition of the committed Lua reading-only closeout proposal.
-- next_action: Obtain the explicit director disposition for the committed LUA-STARTUP-READING.3.2 reading-only proposal in docs/knowledge/lua-reading-commit-closeout-audit.md. If approved, record its exact scope, reverify the audit and normal checks, close only Lua reading containers and route startup .3.7; otherwise canonical closeout remains blocked by the no-build and unresolved validation constraints.
+- activation_commit: `21210a8bcfa70f605897a13ddafa8c2fe65078ba` — clean authorized Lua reading closeout activation.
+- latest_completed_leaf: `LUA-STARTUP-READING.3.2 - close authorized Lua reading and resume supporting inventory`; exact .3.1 audits pass again; reading .1/.3/startup .3.6 close under ADR0119; all 145 repair nodes remain pending.
+- active_work_unit: `SESSION-STARTUP-READING.3.7` — supporting-source inventory and bounded unread-range ownership.
+- next_action: Under SESSION-STARTUP-READING.3.7, inventory the 158 baseline supporting entries and current deltas, reconcile exact previously read ranges, and task-own bounded unread ranges within existing capacity before continuing read-only PNT. Reuse compatible dependency products; no unnecessary RGX/PGEN builds.
   Named-argument direction PARSER-AUTHORING-APIS.4 is approved and parked; other authoring proposals and approved formats stay parked.
-- in_flight_uncommitted: none; .3.1 independent audit, proposal, book and continuity are committed at the current Git HEAD; no background result remains.
-- blockers: New explicit disposition is required for .3.2: COMMIT.md/ADR0073 mandate canonical closeout; ADR0117 is Julia-only and ADR0118 is containment .14-only. The proposal retains no-build restrictions, .2.2 failures, excluded native-error groups, startup .28.7 and absent full Lua/PUC5.4 proof.
+- in_flight_uncommitted: none; .3.2 authorized reading closeout, book and continuity are committed at current Git HEAD; no background result remains.
+- blockers: none for authorized read-only continuation. ADR0119 resolves Lua reading closeout; preserve all failed/excluded validation, repair prerequisites and later full-CI obligations. Dependency reuse is not a reading restriction.
 - current_rust_warning_debt: Repeated carriers report 1,870 pgen plus 26 rgx-core output warnings; RUST-DEPENDENCY-WARNING-ZERO.1-.7 own causal repair/pins/enforcement without suppression after Lua intake.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
   active table; the task metadata doctrine inventories all consumers, permits arbitrary frontier-row rewrites,
@@ -57,4 +57,4 @@
   Lua .1.36 rollover preserves the exact clean-HEAD suffix as segment4977-65e8f007697e; earlier archive bytes and other history controls remain unchanged. Proportionate governance: ADR0115.
 - current_ci_build_reuse: Director requires PGEN/RGX builds once after submodule updates, then reuse for LinkedSpec-only CI; startup .80.1-.4 own implementation.
   Initial/update preparation, zero dependency compilation in ordinary CI and explicit missing-artifact handling remain pending; startup prerequisites remain.
-- latest_bootstrap_read: 2026-09-13 — roadmap Yes / full codebase No / physical mdBook Yes; Perl/Rust/Dart/Julia reading closed; Lua physically read 51/51 and independently audited; .3.2 closeout disposition pending. Supporting code, formal book .4 and policy .5 remain.
+- latest_bootstrap_read: 2026-09-13 — roadmap Yes / full codebase No / physical mdBook Yes; Perl/Rust/Dart/Julia/Lua reading closed; all 51 Lua groups independently audited under ADR0119. Supporting .3.7-.3.10, final delta .3.11, formal book .4 and policy .5 remain.

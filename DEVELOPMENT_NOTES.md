@@ -10,6 +10,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-13 — Dependency reuse does not prohibit read-only progress
+
+- The director authorizes the pending Lua reading-only disposition and continued reading; ADR0119 distinguishes this authority from earlier narrowly scoped Julia/capacity approvals.
+- Calling the requirement a no-build directive was too broad: reuse compatible products and avoid unnecessary recompilation; reading has no dependency-build prerequisite.
+- Native120/121 and generated79/80 PUC failures, four native-error exclusions, absent full Lua/PUC5.4 proof and public-selector baseline remain explicit; all 35 roots/145 repair nodes stay open.
+- LUA-STARTUP-READING.3.2 closes reading containers only after exact audit replay; remaining source inventory, formal book/policy and later executable verification retain their owners.
+
 ## 2026-09-13 — Lua reading evidence is complete; closeout authority is separate
 
 - All 51 historical reading bodies and their linked comprehension cards remain exact; independent Git/range/activation proof adds no physical reading credit and does not remediate any of the 145 pending repair nodes.

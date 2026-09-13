@@ -10,6 +10,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-13 — Authorized Lua reading closeout and supporting handoff
+
+- Record the director's read-only disposition in ADR0119; use focused proof for this Lua reading closeout without canonical CI/receipt or a fresh full Lua/PUC5.4 pass.
+- Reexecute both exact .3.1 recipes: all 51 reading commits/cards, 99 source files and 145 pending repair nodes remain identical; known failed and excluded checks retain their original outcomes.
+- Close only Lua .1/.3/.3.2 and startup .3.6; synchronize book, roadmaps and current pointers for supporting-source inventory under startup .3.7.
+- LUA-STARTUP-READING.3.2 performs no dependency build. Reuse compatible unchanged RGX/PGEN products; that requirement does not block authorized reading or close any repair.
+
 ## 2026-09-13 — Independent Lua reading audit and closeout proposal
 
 - Verify all 51 unique reading commits, first-parent MEMORY activations and byte-exact task/card evidence; 149 ranges cover all 99 baseline sources, 71269 fragments and 2732450 bytes.

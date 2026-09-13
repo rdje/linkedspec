@@ -141,6 +141,8 @@ changed* lives in git (layer D), not here.
 
 | [0118](0118-approved-lua-reading-evidence-capacity.md) | Admit eleven finite Lua reading evidence controls under explicit approval and a .14-only focused exception | 2026-09-12 | accepted | lua, capacity, knowledge, history, verification |
 
+| [0119](0119-authorized-lua-reading-closeout.md) | Close audited Lua reading under current director authorization; continue read-only work while reusing compatible dependency products | 2026-09-13 | accepted | lua, reading, verification, dependency-reuse |
+
 ## How to add a record
 1. Copy the shape of an existing record (`Date`, `Status`, `Tags`, then `## Context /
    Decision / Consequences / Links`).

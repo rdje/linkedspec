@@ -484,7 +484,7 @@ or the README `.4` adoption/closeout that installs the guard.
 
 ## Current Frontier
 
-Complete through .14 under director-approved ADR0118. After the verified commit, empty brief and clean proof, continue `LUA-STARTUP-READING.3.2` after the independent .3.1 audit and required explicit closeout disposition. All source repairs and later canonical/push requirements remain.
+Complete through .14 under director-approved ADR0118. After the verified commit, empty brief and clean proof, continue `SESSION-STARTUP-READING.3.7` after authorized Lua reading closeout under ADR0119. All source repairs and later canonical/push requirements remain.
 
 Historical .13 handoff (preserved):
 Complete through .13 under director-approved ADR0116. After the verified commit, empty brief and clean proof, resume `JULIA-STARTUP-READING.1.38` in its separate active reading tree.

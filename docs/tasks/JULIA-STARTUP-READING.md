@@ -1742,7 +1742,7 @@ startup reading prerequisites. Startup .3.5 remains the reading-closeout owner.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `LUA-STARTUP-READING.3.2` | `pending` | Independent .3.1 audit is complete; obtain explicit disposition of the committed reading-only closeout proposal before closing parents or routing supporting .3.7. Preserve all 35 repair roots/145 nodes, failed/excluded checks and no-build restrictions. |
+| 1 | `SESSION-STARTUP-READING.3.7` | `pending` | Lua reading closes under ADR0119; inventory 158 supporting entries and current deltas, reconcile prior exact reading, and own bounded unread ranges before read-only continuation. Preserve all repairs and reuse compatible unchanged dependency products. |
 
 ## Decisions
 

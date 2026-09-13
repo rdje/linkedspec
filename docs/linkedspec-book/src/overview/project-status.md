@@ -329,7 +329,7 @@ step. `PARSER-AUTHORING-APIS.4` owns grammar/binding, definition choices,
 representation compatibility and bounded implementation planning; these four
 children remain unactivated and current startup reading continues.
 
-**Lua physical source reading and independent audit are complete; reading closeout remains pending:** the complete
+**Lua source reading and independent audit are complete under ADR0119:** the complete
 99-file inventory covers 71,268 physical lines and 2,732,450 bytes. Its 51 owned
 reading groups include generated tables, native adapters and both-ABI tests.
 Two UTF-8-safe byte windows retain an oversized generated MCP line, so the
@@ -374,12 +374,13 @@ gate remain unavailable at this boundary. The existing public-selector baseline
 failure is also still open. These limits are retained alongside the passing
 focused results below.
 
-Canonical closeout retains a separate prerequisite: the unchanged CI drivers
-include PGEN/RGX build routes, while the required build-on-update lifecycle is
-still pending. A concrete one-time Lua reading-only closeout proposal awaits
-explicit director disposition. It would close only reading containers and route
-supporting-code reading, preserving all defects, normal hooks and later checks.
-The proposal does not change runtime behavior or claim full-codebase completion.
+The director authorizes this reading-only closeout under ADR0119 and continued
+read-only startup work. Both exact audit recipes pass again; only the Lua reading
+containers close, and supporting-source inventory is next. No canonical CI receipt
+or new full component pass is claimed. All defects and later executable checks
+remain open. The dependency requirement is to reuse compatible RGX/PGEN products
+and avoid unnecessary rebuilds; it does not restrict reading. Full-codebase
+reading, formal book reconciliation and policy review remain incomplete.
 Exact evidence and scope: `docs/knowledge/lua-reading-commit-closeout-audit.md`.
 
 **Lua Unicode casing and rule-label verification:** all property tables match the
