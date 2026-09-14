@@ -15,6 +15,30 @@ It is compact, but it is not a toy. It demonstrates:
 
 Read this chapter after [Worked `.spec` Walkthrough](../user-model/worked-spec-walkthrough.md) if you want to see the same concepts in a shipped parser.
 
+For a Rust application's complete submodule, build, UTF-8 file, result-adaptation
+and deployment path, use [the Rust integration guide](../public-api/integration-rust.md).
+
+## Current document and token limits
+
+The shipped grammar extracts the first parenthesized form; it does not validate
+the whole file. Native Rust and independently checked Perl examples both return
+the first form for `prefix (a) suffix` and `(a)(b)`. Empty input and `(a b` return
+no value; a leading unmatched `)` produces an error. A returned value alone is
+therefore insufficient to establish valid, fully consumed input.
+
+The rules can skip malformed token delimiters: `("abc)` returns an `abc` atom,
+`([])` has the empty-form result, and `(a ;comment)` returns `a` and `comment`
+because comments require a terminating newline. Double-quoted escapes retain
+their literal backslash characters; they are not decoded. Numeric text stays
+text, and the parent rules do not preserve symbol/string/number token kinds.
+These outcomes were characterized directly on Rust; nine selected Perl values
+agree. They are not an all-backend malformed-input guarantee.
+
+The Rust guide supplies the exact tested cases and an adapter, but that adapter
+cannot recover skipped text or missing token distinctions. Strict document/token
+parsing is pending under `SESSION-STARTUP-READING.83.1-.83.3`. The walkthrough's
+valid examples below retain their historical head/tail representation.
+
 ## How to run it
 
 `Lispish.spec` is the backend-neutral contract; any LinkedSpec backend can run it. The

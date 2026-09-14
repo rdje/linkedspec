@@ -9,7 +9,7 @@ answers:
   - "where is the diagnosis evidence checklist enforced"
   - "what should I do if TASK-ACCEPTANCE fires unexpectedly"
   - "what are the known limits of the task acceptance evidence gate"
-date: 2026-07-08
+date: 2026-09-13
 status: current
 tags: [doctrine-enforcement, task-trees, evidence, tooling]
 evidence: "scripts/check_diagnosis_evidence.sh; scripts/check_doctrines.sh; DOCTRINE_ENFORCEMENT.md §10; TOOLBOX.md; docs/tasks/DOCTRINE-ENFORCEMENT-ADOPT.md"
@@ -39,3 +39,13 @@ owning task-tree checklist, or splitting the work into a smaller leaf with its
 own evidence trail. The known limit is deliberate: the check proves staged
 evidence shape and ownership, not truthfulness, historical completeness, or that
 the cited commands have been re-run.
+
+September13 integration .2.2 confirms that the check examines every occurrence
+of each checked-label line across the staged task file, including older slice
+checklists. A checked line containing the literal `pending`, `TODO`, `TBD` or an
+angle-bracket placeholder is rejected. Thus a completed preservation statement
+about unrelated pending repairs also triggers it. Keep the completed evidence on
+the checked line and its retained open-scope qualification in the following
+paragraph/continuation; do not change the repair's status or imply its completion.
+The Rust landing-page change triggers this rule because all `rust/` paths are
+governed. `scripts/check_diagnosis_evidence.sh` remains unchanged.

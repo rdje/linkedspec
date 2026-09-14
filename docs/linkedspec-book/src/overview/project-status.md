@@ -512,12 +512,14 @@ and reuse, native APIs, results/errors and packaging. This temporary activity is
 owned by `docs/tasks/BACKEND-INTEGRATION-GUIDES.md`. Its inventory is complete:
 Rust requires RGX/PGEN preparation; Dart has no runtime package dependency; Julia
 uses JSON3 and standard libraries; Lua requires three ABI-matched native modules.
-The [Rust integration guide](../public-api/integration-rust.md) now supplies a
-locked native consumer. Two four-input runs match the reference values and four
-argument-rejection checks pass. Both Cargo commands rebuilt the dependency chain;
-the director has cancelled the no-rebuild restriction. Fresh-checkout preparation
-is not yet claimed. Lispish adaptation and deployment are the next Rust slice;
-the remaining backend guides and final verification stay open.
+The [Rust integration guide](../public-api/integration-rust.md) supplies native
+word and Lispish file consumers, typed application values, structured failures
+and relocatable grammar packaging. Clean committed LinkedSpec/RGX/PGEN sources
+bootstrap successfully; a separate application builds locked/offline and passes
+actual-file and outside-cwd deployment checks. Normal dependency builds are
+authorized. Lispish still extracts the first form and can skip malformed/extra
+text; strict document/token parsing remains owned by startup .83.1-.83.3. The
+remaining backend guides and final verification stay open.
 Conformance .1.35 remains the return point after the complete guide activity. Existing runtime repairs and
 unread source remain open. The capability guide still has stale
 current census, governance/inventory/public counts and generic-callable wording.

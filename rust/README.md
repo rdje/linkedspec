@@ -2,6 +2,11 @@
 
 A Rust implementation of the [LinkedSpec](https://github.com/rdje/linkedspec) progressive-extraction parser DSL.
 
+To embed this backend in another Rust project, follow the
+[application integration guide](../docs/linkedspec-book/src/public-api/integration-rust.md):
+pinned submodules, initial PGEN preparation, Cargo setup, native Lispish file
+parsing, typed application values, errors and relocatable grammar packaging.
+
 ## Standalone lifecycle block
 
 A rule-item-leading `{ ... }` is exact shorthand for `I { ... }`. Source parsing emits lifecycle `I` directly,

@@ -100,13 +100,13 @@ ARCHOGEN's use of Lispish through Rust. The requested scope is every backend.
   Commit: `pending`
 
 - ID: `BACKEND-INTEGRATION-GUIDES.2`
-  Status: `active`
+  Status: `done`
   Goal: Deliver the Rust integration guide with the ARCHOGEN-relevant Lispish example.
   Children: `.2.1`, `.2.2`
   Dependencies: `.0`; coordinate existing startup .80 dependency-reuse and .41.7 toolchain/guide repairs.
   Acceptance: Cargo, initial preparation, direct values, Lispish adaptation, packaging and repeat-run evidence satisfy the shared criteria.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: PASS three Rust adapter tests; 34 native Lispish probes and nine exact Perl comparisons; maintained verifier's18 same-engine file values plus published settings, structured grammar/runtime failures, I/O/UTF-8/usage checks, earlier-output behavior and packaged/relocated outside-cwd execution. Clean-source bootstrap creates12 generated files/18576534 bytes including four Rust parsers. The200-package consumer lock preserves every version; isolated locked/offline builds complete in40.50s and4.87s, both reporting dependency compilation. Original checkout build4m34s and test build6m37s also pass. Pins and original PGEN full-index diff remain exact. Focused render/preservation/doctrine proof and receipt-bound canonical CI govern landing; no release-profile, empty-cache installation, all-backend malformed-input or actual ARCHOGEN application proof is claimed.
+  Commit: `BACKEND-INTEGRATION-GUIDES.2.2 - deliver Rust Lispish file integration and deployment`
 
 - ID: `BACKEND-INTEGRATION-GUIDES.2.1`
   Status: `done`
@@ -128,13 +128,22 @@ ARCHOGEN's use of Lispish through Rust. The requested scope is every backend.
   Commit: `BACKEND-INTEGRATION-GUIDES.2.1 - document and verify native Rust integration`
 
 - ID: `BACKEND-INTEGRATION-GUIDES.2.2`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `42490a9d917ec7e30d2703f0695aa6c225f49a5b`.
+  Verification tier: `canonical`
+  Focused checks: Native Rust Lispish values and independent-input reuse; UTF-8 file consumer and explicit domain adaptation; structured failures; pinned-source preparation with consumer-local stores; packaged grammar and outside-cwd/relocation runs; Rust formatting, book rendering, source/task/history preservation and all normal doctrines.
+  Canonical trigger: Complete the Rust integration parent and the director-requested early push boundary. Consumer dependency-manifest/lock changes also require an exact staged canonical receipt. Preserve existing nested PGEN edits and dependency pins; use clean committed sources for preparation proof.
+  Scope: Extend the existing Rust guide and runnable consumer with Lispish files, typed result adaptation, exact failure/consumption evidence and deployment. Verify and correct the initial bootstrap recipe against the pinned build sources, including its target-directory assumptions. Link the Rust landing page to its completed guide. No unrelated runtime change or other backend implementation belongs to this leaf.
+  Initial native evidence: The 34 bounded prepared-checkout probes in .linkedspec-data/scratch/backend-integration22/native-results.jsonl reproduce the documented nested/head-tail values. Rust returns the first form for leading/trailing text and multiple forms, null for missing closing parentheses, and an exit_now error for a leading unmatched close. An unterminated double quote can still yield an atom; empty square brackets disappear; a comment without its required newline can become content. These are observed outcomes, not whole-file validation guarantees. Trace/descriptor diagnosis and durable classification remain required before guide completion. Quoted backslash output also needs an exact native/reference comparison before any preservation claim.
+  Comparison and follow-up ownership: All nine independently compared Perl/Rust values agree, including exact escaped-string codepoints; capture, join_values and cat controls preserve those same bytes. No Rust escaping defect was found. LinkedSpec::Get descriptors show seek/default-scan policy; generated source shows first-child return at line82 and no-match null paths at lines55/132. This leaf now owns registering the already-described historical grammar follow-ons as pending SESSION-STARTUP-READING.83.1-.83.3 (contract, implementation, independent admission), without pivoting or changing the shipped grammar. Integration documentation must expose the limitation; it cannot count strict document parsing as delivered.
+  Candidate proof: PASS2792 prior files byte-exact,2798 of2801 prior task nodes and all94 existing book limitation headings. Only this Rust parent/leaf and the startup root change; four new pending .83 nodes own the grammar follow-up. Every earlier change/notes/history byte and historical integration discussion is preserved. Rendered source/sample includes resolve. Existing word consumer still returns four exact values and rejects four bad argument cases. All nine doctrines and memory pass before staging; both histories remain below rollover thresholds. The exact staged canonical receipt and post-commit pointer check remain required. The evidence-gate card is additionally updated by the staged correction below.
+  Staged evidence-format correction: Canonical attempt1 stops at TASK-ACCEPTANCE because the Rust landing path is governed and check_diagnosis_evidence.sh rejects the literal word pending on any checked-label line, including historical checklists in the same file. Wrap the retained repair qualifications onto continuation lines; every word, repair status and acceptance obligation remains unchanged. Update the existing evidence-gate Knowledge card, rerun the exact staged check and all doctrines, then restart canonical CI. This is evidence formatting, not a runtime repair or gate change.
   Goal: Add tested Lispish result adaptation, error handling and Rust deployment guidance.
   Dependencies: `.2.1`
   Acceptance: Demonstrate nested/empty forms, atom/string representation, comments and malformed-input outcomes. State and test complete-input and multiple-top-level-form behavior without importing a Perl-only finding as a Rust result. Package or embed the grammar, verify outside-cwd use and preserve consumer-local caches/artifacts.
   Director delivery: Provide the complete submodule-to-build-to-native-file-parsing path for a separate Rust application using specs/Lispish.spec. Verify preparation from recursively pinned source and actual UTF-8 file input, then commit and push this Rust checkpoint after exact canonical proof. Notify the director of the pushed commit; no link-only handoff. Continue other backend guides afterward.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: PASS three Rust adapter tests; 34 native Lispish probes and nine exact Perl comparisons; maintained verifier's18 same-engine file values plus published settings, structured grammar/runtime failures, I/O/UTF-8/usage checks, earlier-output behavior and packaged/relocated outside-cwd execution. Clean-source bootstrap creates12 generated files/18576534 bytes including four Rust parsers. The200-package consumer lock preserves every version; isolated locked/offline builds complete in40.50s and4.87s, both reporting dependency compilation. Original checkout build4m34s and test build6m37s also pass. Pins and original PGEN full-index diff remain exact. Focused render/preservation/doctrine proof and receipt-bound canonical CI govern landing; no release-profile, empty-cache installation, all-backend malformed-input or actual ARCHOGEN application proof is claimed.
+  Commit: `BACKEND-INTEGRATION-GUIDES.2.2 - deliver Rust Lispish file integration and deployment`
 
 - ID: `BACKEND-INTEGRATION-GUIDES.3`
   Status: `pending`
@@ -228,11 +237,11 @@ ARCHOGEN's use of Lispish through Rust. The requested scope is every backend.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `BACKEND-INTEGRATION-GUIDES.2.2` | `pending` | Native Rust setup/example verified; add Lispish adaptation, exact failure/consumption evidence and deployment. Normal Cargo builds are authorized. Return to conformance .1.35 after the full activity. |
+| 1 | `BACKEND-INTEGRATION-GUIDES.1.1` | `pending` | First push the completed Rust checkpoint from a verified clean tree, then Perl setup/native parsing. Other guides and .7 remain required before returning to conformance .1.35. |
 
 The director explicitly requests a temporary pivot at the next clean handoff.
 Conformance .1.34 is committed at 00f9783a1 and inventory .0 is complete.
-Rust .2.1 is complete. Activate Lispish/deployment .2.2 next and deliver this activity. Ordinary guide/example work needs no further permission.
+Rust .2.1 is committed at42490a9d9 with canonical CI PASS, both CLI66/66 and Phase0 1032/1032; its brief is empty and its root handoff is clean. Lispish/deployment .2.2 completes from that boundary; its exact staged canonical receipt and clean push remain the delivery boundary. Ordinary guide/example work needs no further permission.
 
 Return point: `CONFORMANCE-SOURCE-READING.1.35`, whose unchanged Scope is
 `t/generated_source_contract.t` lines154-506; `t/inspect_spec_codegen.t` lines1-121;
@@ -259,12 +268,25 @@ not declared complete by this scoped documentation authorization.
 
 - [x] **REPRODUCE / ISSUE** — Cursor discovery reports unowned integration-rust.md; canonical attempt3 reports mutation expected63/observed64; selector preflight reports expected62/observed63 and one unclassified existing Julia example. Native consumer values independently pass.
 - [x] **ROOT CAUSE (WHY + WHERE)** — Cursor observed_inventory rejects the new chapter link at tools/check_rule_local_cursor_contract.py:1194. The other two public_markdown_paths functions include every book page; selector sentence_at isolates the old Julia code fence from its negative-language prose. Git6308ff4e24 owns all three added Julia references. LinkedSpec::Get/generated-source probes establish the word grammar's child-dispatch mechanism.
-- [x] **FIX** — Register the new guide in all three current inventories, reconcile the three Julia historical references and add an explicit invalid/retired fence comment. Preserve complete examples, pending runtime repairs and every semantic/rollout field.
+- [x] **FIX** — Register the new guide in all three current inventories, reconcile the three Julia historical references and add an explicit invalid/retired fence comment.
+  Preserve complete examples, pending runtime repairs and every semantic/rollout field.
 - [x] **ADDRESSED (verified)** — Cursor75/60 mutations, mutation64/50 mutations and selector63/35 references/11 mutations all PASS; native build/run and four argument rejections also PASS. The selector check retains zero current examples and composes capability100/0/0.
 - [x] **NO REGRESSION** — Exact contract/checker projections remove only census deltas and equal clean HEAD; all existing mutations pass. The Julia example loses no source or limitation text; all three mutation authorities and backend source bytes are unchanged. Receipt-bound canonical CI governs landing.
 - [x] **LOCKSTEP** — Guide/source includes, current census docs, Knowledge, task/memory/history pointers and mdBook are synchronized; conformance .1.35 remains the unchanged post-activity return point.
 
+## Acceptance Checklist — .2.2
+
+- [x] **REPRODUCE / ISSUE** — Missing end-to-end Rust file integration;34 probes expose historical whole-file/token limitations.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Descriptors/generated source and execution trace show seek scanning, first-child return and token-regex boundaries. Nine independent Perl results match Rust, including exact backslashes; no Rust escaping defect.
+- [x] **FIX** — Complete consumer-local pinned preparation, file adapter, structured errors, grammar packaging and canonical guide;
+  strict grammar repairs remain explicit pending .83 children, not a claimed implementation.
+- [x] **ADDRESSED (verified)** — Three adapter tests and maintained real-file/error/deployment verifier pass; clean-source bootstrap and locked/offline repeat builds pass.
+- [x] **NO REGRESSION** — Existing word consumer and dependency versions/pins are retained; original nested PGEN diff is byte-exact. Canonical CI governs landing.
+- [x] **LOCKSTEP** — Book, Rust landing, Knowledge, roadmap and live/task pointers describe verified integration and the still-open strict parsing scope.
+
 ## Verification Log
+
+- `2026-09-13` .2.2: PASS three Rust adapter tests; 34 native Lispish probes and nine exact Perl comparisons; maintained verifier's18 same-engine file values plus published settings, structured grammar/runtime failures, I/O/UTF-8/usage checks, earlier-output behavior and packaged/relocated outside-cwd execution. Clean-source bootstrap creates12 generated files/18576534 bytes including four Rust parsers. The200-package consumer lock preserves every version; isolated locked/offline builds complete in40.50s and4.87s, both reporting dependency compilation. Original checkout build4m34s and test build6m37s also pass. Pins and original PGEN full-index diff remain exact. Focused render/preservation/doctrine proof and receipt-bound canonical CI govern landing; no release-profile, empty-cache installation, all-backend malformed-input or actual ARCHOGEN application proof is claimed.
 
 - `2026-09-13` .2.1: PASS offline locked 200-package resolution with every manifest under the repository; Rust1.95.0 builds in3m12s and4m02s, both compiling PGEN/RGX/core/runtime/example. Two native four-value runs match the independent four-value Perl oracle; four usage/non-UTF-8 rejections exit1 with empty stdout. Rustfmt passes. Present generated EBNF/regex sources were retained; no fresh-clone/bootstrap proof is claimed. The new consumer Cargo.lock requires canonical tier; exact staged receipt-bound CI governs this commit. Earlier guard rejection and unsuccessful retained-library link are diagnostic failures, superseded by the successful normal Cargo builds.
 
@@ -276,6 +298,8 @@ not declared complete by this scoped documentation authorization.
 
 ## Commit Log
 
+- `.2.2`: `BACKEND-INTEGRATION-GUIDES.2.2 - deliver Rust Lispish file integration and deployment`; activation42490a9d917e; requested early push then Perl .1.1.
+
 - `.2.1`: `BACKEND-INTEGRATION-GUIDES.2.1 - document and verify native Rust integration`; activation4d32e895e; next .2.2 after clean handoff.
 
 - `.0`: `BACKEND-INTEGRATION-GUIDES.0 - inventory native integration setup and guide ownership`; activation 00f9783a1e4b625bc251a3e260ef1eef60c35888; next .2.1 after clean handoff.
@@ -283,6 +307,8 @@ not declared complete by this scoped documentation authorization.
 - Guide/example leaves: pending.
 
 ## Changelog
+
+- `2026-09-13` .2.2: Complete Rust Lispish file/deployment guide and clean pinned-source proof; record exact extraction limits and own strict parsing under startup .83.
 
 - `2026-09-13` .2.1: Deliver Rust setup/native guide and runnable locked consumer; cancel the no-dependency-build restriction as directed; retain startup .80 performance ownership.
 

@@ -10,6 +10,14 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-13 — BACKEND-INTEGRATION-GUIDES.2.2 - deliver Rust Lispish file integration and deployment
+
+Clean source means committed dependency blobs, not a development checkout with pre-existing nested edits. Verified42490a9d917e/8763a0e6bea9/db6f8c6836fe with a byte-checked registry seed. PGEN bootstrap must set its own rust/target because Make invokes ./target/debug/ast_pipeline; application Cargo retains its separate local target. Missing offline mimalloc metadata required normal online preparation, not an allocator build claim. Generated inputs, bootstrap lock and application lock remain local and measured.
+
+Lispish returns historical head/tail values and scans for the first form. Trace/descriptor proof plus nine native/reference comparisons resolve the surprising partial-input results and literal escapes. The typed adapter only converts result shape; it cannot prove consumption or restore token kinds. Startup .83 owns contract/implementation/independent admission. No runtime or dependency source changed. The preservation checker initially compared abbreviated against full-index Git diffs; matching the original full-index command proves the original18-file PGEN diff unchanged.
+
+PASS three Rust adapter tests; 34 native Lispish probes and nine exact Perl comparisons; maintained verifier's18 same-engine file values plus published settings, structured grammar/runtime failures, I/O/UTF-8/usage checks, earlier-output behavior and packaged/relocated outside-cwd execution. Clean-source bootstrap creates12 generated files/18576534 bytes including four Rust parsers. The200-package consumer lock preserves every version; isolated locked/offline builds complete in40.50s and4.87s, both reporting dependency compilation. Original checkout build4m34s and test build6m37s also pass. Pins and original PGEN full-index diff remain exact. Focused render/preservation/doctrine proof and receipt-bound canonical CI govern landing; no release-profile, empty-cache installation, all-backend malformed-input or actual ARCHOGEN application proof is claimed.
+
 ## 2026-09-13 — BACKEND-INTEGRATION-GUIDES.2.1 - document and verify native Rust integration
 
 The new examples/integration/rust application depends directly on the runtime crate and compiles the shared word grammar once. The direct-value API returns the grammar array without a legacy accumulator wrapper. The child regex supplies entry_group(0); a regex stored only on the entered root does not create a dispatch loop. Cargo owns the full native dependency graph.

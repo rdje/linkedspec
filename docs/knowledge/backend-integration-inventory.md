@@ -9,7 +9,7 @@ answers:
   - which runtime versions were observed for integration guide preparation
   - how was the standalone Rust integration example verified
 date: 2026-09-13
-status: inventory and Rust setup/native consumer verified; Lispish/deployment and other guides pending
+status: inventory and complete Rust integration verified; other backend guides pending
 tags: [integration, documentation, perl, rust, dart, julia, lua]
 evidence: "BACKEND-INTEGRATION-GUIDES.0, activation 00f9783a1e4b625bc251a3e260ef1eef60c35888. Canonical Knowledge, ADR0040, companion tree, manifests, six complete setup scripts and native loader/result seams inspected. Managed version commands and read-only pkg-config identities consumed with exit0; no compiler, dependency preparation or consumer execution ran."
 reverify: "Inspect the exact sources in the matrix below. Version-only commands: bash tools/run_cargo_local.sh --version; bash tools/run_dart_project_data.sh --version; bash tools/run_julia_project_data.sh --project=julia --version; bash tools/project_data_run.sh perl -e 'printf qq{Perl %vd\\n}, $^V'; bash tools/project_data_run.sh lua -v; bash tools/project_data_run.sh luajit -v; bash tools/project_data_run.sh pkg-config --modversion lua luajit libpcre2-8. These commands establish installed identity, not consumer support or a passing backend suite."
@@ -74,7 +74,10 @@ Create the common entry at
 `docs/linkedspec-book/src/public-api/integration-perl.md`, `integration-rust.md`,
 `integration-dart.md`, `integration-julia.md`, and `integration-lua.md` in that
 same directory. The Rust page and native word consumer are delivered by .2.1;
-the other pages remain planned until their owning leaves land.
+.2.2 completes actual Lispish files, typed adaptation, failures, clean pinned
+preparation and moved/outside-cwd deployment. See [[archogen-rust-lispish-integration]]
+for measured scope and the still-open strict document/token repair under startup
+.83. The other pages remain planned until their owning leaves land.
 Add navigation through SUMMARY.md and the existing backend landing pages.
 
 Runnable sources belong under `examples/integration/`, with shared grammar/input

@@ -1,12 +1,12 @@
 # MEMORY
 
-- activation_commit: `4d32e895e08a9b1784f5ebcc384c72f577799338` — clean Rust integration activation.
-- latest_completed_leaf: `BACKEND-INTEGRATION-GUIDES.2.1 - document and verify native Rust integration`; native setup/example and normal Cargo builds verified.
-- active_work_unit: `BACKEND-INTEGRATION-GUIDES.2.2` — Rust Lispish, failures and deployment.
-- next_action: Activate BACKEND-INTEGRATION-GUIDES.2.2 from clean HEAD. Verify the complete Rust/Lispish file-integration guide, domain adapter, failures, clean pinned-source preparation and outside-cwd deployment. Normal RGX/PGEN builds are authorized. The director requests an early clean push of that verified Rust checkpoint and notification of its commit, then the other backend guides and final .7. Resume CONFORMANCE-SOURCE-READING.1.35 afterward.
+- activation_commit: `42490a9d917ec7e30d2703f0695aa6c225f49a5b` — clean Rust Lispish/deployment activation.
+- latest_completed_leaf: `BACKEND-INTEGRATION-GUIDES.2.2 - deliver Rust Lispish file integration and deployment`; clean-source preparation, file consumer and deployment verified.
+- active_work_unit: `BACKEND-INTEGRATION-GUIDES.1.1` — pending activation after the requested Rust checkpoint push.
+- next_action: Push the completed verified Rust checkpoint from the clean tree and notify its commit, as requested. Then activate BACKEND-INTEGRATION-GUIDES.1.1 for Perl native setup, complete the other backend guides and final .7, and resume CONFORMANCE-SOURCE-READING.1.35. Normal RGX/PGEN builds are authorized; strict Lispish repair remains pending under startup .83.
   Named-argument direction PARSER-AUTHORING-APIS.4 is approved and parked; other authoring proposals and approved formats stay parked.
-- in_flight_uncommitted: none; completed Rust setup/example and director update are committed at Git HEAD; no background result remains.
-- blockers: none for the authorized integration guide activity. Normal RGX/PGEN builds are authorized; fresh-clone, other-backend and final canonical proof remain required at their owning leaves.
+- in_flight_uncommitted: none; this completed leaf lands the clean Rust checkpoint. Derive its committed identity and push state from Git.
+- blockers: none for the authorized integration guide activity. Other-backend and final canonical proof remain required at their owning leaves; startup .83 owns strict Lispish parsing.
 - current_rust_warning_debt: Repeated carriers report 1,870 pgen plus 26 rgx-core output warnings; RUST-DEPENDENCY-WARNING-ZERO.1-.7 own causal repair/pins/enforcement without suppression after Lua intake.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
   active table; the task metadata doctrine inventories all consumers, permits arbitrary frontier-row rewrites,
