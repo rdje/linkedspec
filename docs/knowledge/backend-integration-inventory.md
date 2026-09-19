@@ -12,8 +12,10 @@ answers:
   - how is clean Perl submodule integration verified without RGX and PGEN
   - how does a Perl embedding application handle runtime context errors and diagnostics
   - why does an empty PERL_UNICODE setting double encode JSON bytes
+  - does a Dart embedding app need hosted packages or RGX PGEN
+  - which supporting grammar must a Dart native application package
 date: 2026-09-19
-status: Rust complete and both Perl leaves verified; other guides and independent closeout pending
+status: Rust complete, Perl leaves and Dart native setup verified; other guides and independent closeout pending
 tags: [integration, documentation, perl, rust, dart, julia, lua]
 evidence: "BACKEND-INTEGRATION-GUIDES.0, activation 00f9783a1e4b625bc251a3e260ef1eef60c35888. Canonical Knowledge, ADR0040, companion tree, manifests, six complete setup scripts and native loader/result seams inspected. Managed version commands and read-only pkg-config identities consumed with exit0; no compiler, dependency preparation or consumer execution ran."
 reverify: "Inspect the exact sources in the matrix below. Version-only commands: bash tools/run_cargo_local.sh --version; bash tools/run_dart_project_data.sh --version; bash tools/run_julia_project_data.sh --project=julia --version; bash tools/project_data_run.sh perl -e 'printf qq{Perl %vd\\n}, $^V'; bash tools/project_data_run.sh lua -v; bash tools/project_data_run.sh luajit -v; bash tools/project_data_run.sh pkg-config --modversion lua luajit libpcre2-8. These commands establish installed identity, not consumer support or a passing backend suite."
@@ -82,8 +84,8 @@ same directory. The Rust page and native word consumer are delivered by .2.1;
 preparation and moved/outside-cwd deployment. See [[archogen-rust-lispish-integration]]
 for measured scope and the still-open strict document/token repair under startup
 .83. Perl setup, deployment and runtime diagnostics are verified under .1.1-.1.2;
-independent parent closeout remains .7. The common, Dart, Julia and Lua pages remain
-planned until their owning leaves land.
+independent parent closeout remains .7. Dart setup is delivered by .3.1; its deployment/errors remain .3.2. The common,
+Julia and Lua pages remain planned until their owning leaves land.
 Add navigation through SUMMARY.md and the existing backend landing pages.
 
 Runnable sources belong under `examples/integration/`, with shared grammar/input
@@ -268,3 +270,39 @@ mirror requests and requires JSON-only stdout on validation/handler failure.
 Typed events/exit retain their separate [[perl-diagnostic-output-events]] contract;
 no failure rollback or subsequent parser reuse is promised. The source/runtime
 and dependency pins remain unchanged; final .7 retains independent parent closure.
+
+## Dart native application — September19, integration .3.1
+
+The canonical integration-dart chapter and examples/integration/dart package use
+SpecRequest.path, loadAndCompileSpec, createEngine and execute(input).value. The
+shared word grammar gives the same four direct values as the Perl/Rust examples.
+Both working and clean pinned-source consumers pass9 groups. Pub has exactly two
+local package roots and one relative path dependency; the application does not
+inherit the library's test-only hosted dependencies. The separate application
+resolves offline with an initially empty cache in0.90s and runs in1.44s/1.37s on
+SDK3.13.3/macOS arm64. Its clean submodule0aac639a9 preserves2822 files/58656678 bytes,
+leaves RGX/PGEN uninitialized, and keeps source/data on this volume. The lockfile's
+path does not replace the Git submodule revision pin.
+
+The default staged file loader requires specs/user_function_definition.spec even
+for source without a function. Copy that asset from the pinned checkout into the
+application specs/ directory and execute from the application root. Default
+lookup searches cwd/script ancestors, not the Dart path-package root. The verifier
+uses an invalid owned copy to force parse_spec/spec_parse_failed, then restores
+identical bytes and succeeds. That control rules out accidental success from a
+convenient parent checkout. [[dart-function-definition-shell-projection]] owns the
+underlying parser mechanism. Lower-level explicit parserSpecSource remains a
+separate supported input; no new loadAndCompileSpec option is invented.
+
+Replay the nine groups with managed Python, which launches only wrapped Dart:
+
+```sh
+bash tools/run_python_project_data.sh examples/integration/dart/verify_words.py
+```
+
+The consumer-only formatter/strict analyzer and13 loader/function/native-trace tests
+pass. [[dart-component-gate-sdk-compatibility]] retains the already-confirmed full
+component failures under .2.24/.2.25; no complete Dart gate success is inferred.
+The new page advances only public counts66/65, preserving all semantic checks.
+Deployment, comprehensive runtime errors and sinks remain .3.2; .7 retains final
+independent replay/parent closeout before conformance .1.35.

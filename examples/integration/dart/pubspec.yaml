@@ -1,0 +1,11 @@
+name: linkedspec_integration_example
+description: Native Dart word parsing with a local LinkedSpec package.
+version: 0.1.0
+publish_to: none
+
+environment:
+  sdk: ">=3.9.0 <4.0.0"
+
+dependencies:
+  linkedspec_dart:
+    path: ../../../dart

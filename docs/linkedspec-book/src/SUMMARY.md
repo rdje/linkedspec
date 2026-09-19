@@ -24,6 +24,7 @@
 - [Native Spec Loading](public-api/native-spec-loading.md)
 - [Perl Application Integration](public-api/integration-perl.md)
 - [Rust Application Integration](public-api/integration-rust.md)
+- [Dart Application Integration](public-api/integration-dart.md)
 - [Descriptor Introspection](public-api/descriptor-introspection.md)
 - [Semantic Introspection](public-api/semantic-introspection.md)
 - [Trace API](public-api/trace-api.md)

@@ -2,6 +2,7 @@
 id: dart-function-definition-shell-projection
 title: Dart consumes spec-returned user-function definition AST nodes instead of raw-scanning fn source
 answers:
+  - why does the Dart file loader need user_function_definition.spec for a word grammar
   - does Dart parse user function definitions
   - does Dart raw-scan fn definitions
   - how does Dart consume specs/user_function_definition.spec output
@@ -10,7 +11,7 @@ answers:
   - what owns Dart function-definition shell semantics
   - do Dart top-level fn corpus fixtures pass
   - how does Dart corpus execution route top-level fn fixtures
-date: 2026-07-09
+date: 2026-09-19
 status: current
 tags: [dart, parser, user-functions, staged-parsing, ast]
 evidence: "DART-BACKEND-PARITY.2.4 adds dart/lib/src/parser/user_function_definition_shell.dart and test/user_function_definition_shell_test.dart. The projection APIs consume function_definition / function_definition_error nodes returned by specs/user_function_definition.spec, validate spans and staged sidecars, normalize parent_ast_path and body_parse_job ids, strip returned source spans, and attach FunctionDefinition records before rule parsing. Tests assert successful projection, malformed-node diagnostics, sidecar drift rejection, and that empty-node parsing does not raw-scan a leading fn shell. DART-BACKEND-PARITY.6.2.5 adds dart/lib/src/parser/user_function_definition_parser.dart, executes specs/user_function_definition.spec through the Dart runtime to obtain spec-produced nodes, feeds those nodes through parseSpecWithStagedUserFunctionDefinitionAsts(...), and routes executeCorpusFixtures(...) through that shell only when rule-only parseSpec(...) rejects top-level fn source. The three routed top-level fn corpus fixtures pass."
@@ -100,3 +101,15 @@ reject malformed/drifting sidecars and reject a leading fn source when no return
 nodes are supplied. Their synthetic fixture helpers use ASCII source coordinates;
 they do not add independent astral span proof. All 43 selected tests pass.
 No raw scanner, builder or MCP parser-construction feature is introduced.
+
+## September19 native application asset proof
+
+Integration .3.1 verifies that loadAndCompileSpec invokes this staged frontend even
+for the function-free word example. Its default support-grammar discovery searches
+cwd ancestors before script ancestors, not the linked package root. A standalone
+application therefore copies the exact pinned specs/user_function_definition.spec
+into its own specs/ and runs from its root. A controlled invalid owned copy rejects
+the native request with parse_spec/spec_parse_failed; byte-exact restoration returns
+the expected words. This excludes accidental use of the original ancestor checkout
+in same-volume test workspaces. Both native consumers pass the nine-group verifier;
+see [[backend-integration-inventory]]. No parser or discovery behavior changes.
