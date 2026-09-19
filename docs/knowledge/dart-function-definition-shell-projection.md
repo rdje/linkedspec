@@ -113,3 +113,12 @@ the native request with parse_spec/spec_parse_failed; byte-exact restoration ret
 the expected words. This excludes accidental use of the original ancestor checkout
 in same-volume test workspaces. Both native consumers pass the nine-group verifier;
 see [[backend-integration-inventory]]. No parser or discovery behavior changes.
+
+Integration .3.2 extends the proof to native AOT deployment. Its Bash launcher
+checks the packaged support file, resolves the application grammar against the
+caller's cwd, then changes to the bundle root. An invalid caller-owned support
+grammar makes the bare executable fail while the launcher succeeds; an invalid
+packaged copy makes the launcher fail. A missing packaged file is rejected before
+the frontend can search ancestors. Source and compiled consumers preserve the
+same existing parser behavior, including after a Unicode-path move. The library
+does not gain an explicit asset-root option or a different discovery policy.

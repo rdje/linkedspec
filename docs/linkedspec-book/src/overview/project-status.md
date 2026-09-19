@@ -527,13 +527,15 @@ standard native libraries on Perl 5.34.1/macOS arm64. A clean source submodule
 runs without RGX/PGEN initialization. The guide now includes a relocatable source
 bundle, optional Unicode diagnostics and structured runtime failures. The deployment
 verifier passes17 clean-source groups, and three focused Perl suites pass27 tests.
-The [Dart integration guide](../public-api/integration-dart.md) now supplies a
-local path package, required frontend grammar asset and native word consumer.
-Both current and clean pinned-source setup pass9 verification groups; two local
-package roots resolve offline without hosted runtime packages or RGX/PGEN setup.
-Dart deployment/errors, Julia, Lua, common navigation and independent final
-verification remain open. Existing Dart component formatting and SDK adapter
-analysis failures remain separately owned; consumer checks do not close them.
+The [Dart integration guide](../public-api/integration-dart.md) supplies a local
+path package, required frontend grammar asset, native values and typed diagnostic
+and error handling. Source and AOT deployment pass 36 checks in both current and
+clean pinned-source applications; nine package/value checks and 23 native API
+tests pass. The six-file native bundle runs after a Unicode-path move, outside
+its directory and without a Dart command on PATH. No RGX/PGEN setup is required.
+Julia, Lua, common navigation and independent final verification remain open.
+Existing Dart component formatting and SDK adapter analysis failures remain
+separately owned; consumer checks do not close them.
 Conformance .1.35 remains the return point after the complete guide activity. Existing runtime repairs and
 unread source remain open. The capability guide still has stale
 current census, governance/inventory/public counts and generic-callable wording.

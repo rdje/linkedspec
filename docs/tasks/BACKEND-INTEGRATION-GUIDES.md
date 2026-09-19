@@ -182,12 +182,19 @@ ARCHOGEN's use of Lispish through Rust. The requested scope is every backend.
   Commit: `BACKEND-INTEGRATION-GUIDES.3.1 - document and verify native Dart integration`
 
 - ID: `BACKEND-INTEGRATION-GUIDES.3.2`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `0826ca2d4df918f87962efc6dcf1dc132f45a2d6`.
+  Verification tier: `focused`
+  Focused checks: Native Dart value/diagnostic/exit/error examples and consumer-only formatting/strict analysis; focused loader, diagnostic-output and trace tests; packaged and moved application with outside-cwd execution, exact assets and same-volume storage; existing public inventories, rendered book, source/task/history preservation and all doctrines.
+  Canonical trigger: Ordinary existing-guide/example extension using admitted native APIs; no runtime, dependency, public-inventory constant or gate change is planned. Independent parent closeout and the final clean push remain .7 canonical boundaries. Escalate before landing if that scope changes.
+  Existing gate boundary: Preserve the complete-component formatter/SDK findings owned by DART-STARTUP-READING.2.24/.2.25. Select consumer-only nonwriting format/analysis and the direct native suites; do not run the unrelated mutating formatter gate or claim complete Dart component admission.
+  Scope: Extend the maintained Dart consumer and guide with explicit diagnostic events, runtime failures, typed exit handling and verified native deployment. Prove supporting-grammar selection without borrowing an ancestor checkout. Preserve compiler/runtime source, dependency pins, prior reading credit and all unrelated findings; .7 retains independent parent closure.
+  Shell portability: An unpublished launcher draft's empty-array expansion under nounset fails with exit127 in system Bash3.2.57. Replace it with scalar flags and positional arguments. The final 36-check working replay passes with Bash5.3.15 and the 36-check clean-source replay passes with system Bash3.2.57; no source-runtime defect or outstanding launcher failure remains.
   Goal: Verify Dart grammar/native-library packaging and diagnostic/error handling.
   Dependencies: `.3.1`
   Acceptance: Outside-cwd execution works with packaged assets; missing-source and parse/runtime errors match the documented API. Unsupported deployment surfaces are qualified without speculative claims; ordinary repeat runs reuse compatible preparation.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: PASS 36 application checks against both current and clean pinned 0826ca2d4 source: thirteen source and thirteen AOT diagnostic/value/error cases plus ten deployment controls. Exact Unicode events, typed exit status and prior-output/stop behavior, runtime source identity, null success, option-like grammar names and inherited trace separation pass. The six-file native bundle preserves hashes after moving to a Unicode path and read-only file modes; outside-cwd calls work without Dart on PATH. Bad caller/packaged assets prove selection, and missing packaged grammar/executable fail explicitly. Nine word/package groups and 23 native loader/diagnostic/trace tests pass; both consumers pass strict analysis and the maintained source passes nonwriting formatting. Clean source matches 2828 files/58692124 bytes; nested dependencies stay uninitialized, no hosted runtime packages are fetched, source/data stay on this volume and the original PGEN diff remains exact. Mutation 66/14/11/10/50 and selector 65/35/0/5/11 stay green without checker changes. Focused book, source/task/history preservation, Knowledge and all doctrines govern this ordinary commit. No runtime/pin change, complete Dart component-gate claim or reading credit; .7 retains independent parent closeout and canonical push.
+  Commit: `BACKEND-INTEGRATION-GUIDES.3.2 - verify Dart native deployment and diagnostics`
 
 - ID: `BACKEND-INTEGRATION-GUIDES.4`
   Status: `pending`
@@ -257,7 +264,7 @@ ARCHOGEN's use of Lispish through Rust. The requested scope is every backend.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `BACKEND-INTEGRATION-GUIDES.3.2` | `pending` | Dart native setup and clean source/package/asset proof are verified; next deployment/errors from the clean committed tree. Rust ad290bdb4 is pushed. Final .7 retains independent parent closure before conformance .1.35. |
+| 1 | `BACKEND-INTEGRATION-GUIDES.4.1` | `pending` | Dart setup, diagnostics and native deployment are verified; next Julia setup/native consumer from the clean committed tree. Rust ad290bdb4 is pushed. Independent .7 retains parent closure before conformance .1.35. |
 
 The director explicitly requests a temporary pivot at the next clean handoff.
 Conformance .1.34 is committed at 00f9783a1 and inventory .0 is complete.
@@ -331,7 +338,18 @@ not declared complete by this scoped documentation authorization.
 - [x] **NO REGRESSION** — Consumer format/analysis and13 native tests pass; mutation50/selector11 remain. Existing full-component formatting/SDK-adapter failures stay owned by Dart .2.24/.2.25; exact staged canonical core/required-consumer proof governs landing.
 - [x] **LOCKSTEP** — Guide/source includes, Knowledge, roadmap, task and bounded history agree; .3.2 follows clean commit and .7 retains final independent closeout before conformance .1.35.
 
+## Acceptance Checklist — .3.2
+
+- [x] **REPRODUCE / ISSUE** — The prior consumer treats --diagnostics as a missing grammar; the guide has no deployed native bundle. Controlled caller/packaged support assets distinguish frontend selection from accidental ancestor success.
+- [x] **ROOT CAUSE (WHY + WHERE)** — The admitted Dart API already supplies diagnosticOutputSink and RuntimeExitNow, but the example does not project them. Default function-parser discovery searches cwd before script ancestors; an AOT executable still needs the support grammar at runtime.
+- [x] **FIX** — Extend the application adapter with optional typed events/exit handling, and package the compiled executable with a caller-relative-path-preserving Bash launcher and exact grammar assets. Library/runtime semantics and pins remain unchanged.
+- [x] **ADDRESSED (verified)** — Both current and clean pinned-source applications pass 36 source/AOT/deployment checks; moved Unicode paths, read-only files, missing assets and no Dart on PATH are verified. Every bundle byte survives the move and calls.
+- [x] **NO REGRESSION** — Nine word/package checks, 23 native API tests, consumer analysis/formatting, unchanged public inventory checks and source preservation pass. Existing complete Dart component failures stay separately owned by .2.24/.2.25.
+- [x] **LOCKSTEP** — Runnable includes, guide, Knowledge, roadmap, task and bounded history agree. Julia .4.1 follows clean commit; independent .7 retains parent closeout and canonical push before conformance .1.35.
+
 ## Verification Log
+
+- `2026-09-19` .3.2: PASS 36 application checks against both current and clean pinned 0826ca2d4 source: thirteen source and thirteen AOT diagnostic/value/error cases plus ten deployment controls. Exact Unicode events, typed exit status and prior-output/stop behavior, runtime source identity, null success, option-like grammar names and inherited trace separation pass. The six-file native bundle preserves hashes after moving to a Unicode path and read-only file modes; outside-cwd calls work without Dart on PATH. Bad caller/packaged assets prove selection, and missing packaged grammar/executable fail explicitly. Nine word/package groups and 23 native loader/diagnostic/trace tests pass; both consumers pass strict analysis and the maintained source passes nonwriting formatting. Clean source matches 2828 files/58692124 bytes; nested dependencies stay uninitialized, no hosted runtime packages are fetched, source/data stay on this volume and the original PGEN diff remains exact. Mutation 66/14/11/10/50 and selector 65/35/0/5/11 stay green without checker changes. Focused book, source/task/history preservation, Knowledge and all doctrines govern this ordinary commit. No runtime/pin change, complete Dart component-gate claim or reading credit; .7 retains independent parent closeout and canonical push.
 
 - `2026-09-19` .3.1: PASS9 native consumer groups in both the working checkout and clean pinned-source application: exact independent/repeated words, Unicode cwd/path, usage/missing source/strict UTF-8 failures, two exact package roots and controlled supporting-grammar selection/restoration. Clean source0aac639a9 matches2822 files/58656678 bytes; source/data remain on this volume and the original PGEN diff is exact. One local path dependency resolves offline with an initially empty app cache in0.90s; no hosted package payload or nested dependency initialization/build. Native runs pass in1.44s and1.37s. Consumer format/strict analysis and13 loader/function/pipeline-trace tests pass. New-page preflight fails65-to66 mutation and64-to65 selector inventories; only the two expected counts/current references advance, with classifier logic and frozen authorities intact. Mutation66/14/11/10/50 and selector65/35/0/5/11 pass. Book, memory/history, source/task preservation, all doctrines and exact staged canonical CI govern landing. Deployment/errors/sinks remain .3.2; independent parent closeout remains .7. Existing component formatting/SDK regex-interface failures remain Dart .2.24/.2.25; no runtime repair or source-reading credit is claimed.
 
@@ -351,6 +369,8 @@ not declared complete by this scoped documentation authorization.
 
 ## Commit Log
 
+- `.3.2`: `BACKEND-INTEGRATION-GUIDES.3.2 - verify Dart native deployment and diagnostics`; activation 0826ca2d4; next Julia .4.1 after clean handoff.
+
 - `.3.1`: `BACKEND-INTEGRATION-GUIDES.3.1 - document and verify native Dart integration`; activation0aac639a9; next .3.2 after clean handoff.
 
 - `.1.2`: `BACKEND-INTEGRATION-GUIDES.1.2 - verify Perl deployment and diagnostic handling`; activation5289471f9; next Dart .3.1 after clean handoff.
@@ -366,6 +386,8 @@ not declared complete by this scoped documentation authorization.
 - Guide/example leaves: pending.
 
 ## Changelog
+
+- `2026-09-19` .3.2: Verify native Dart diagnostic events, typed failures and relocated AOT deployment; retain all runtime/gate repair ownership.
 
 - `2026-09-19` .3.1: Deliver Dart native integration with local package and required supporting-grammar proof; preserve existing runtime/gate repair ownership.
 

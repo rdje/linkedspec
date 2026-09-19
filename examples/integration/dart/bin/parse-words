@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+CALLER_ROOT=$(pwd -P)
+SCRIPT_DIR=${BASH_SOURCE[0]%/*}
+[[ "$SCRIPT_DIR" != "${BASH_SOURCE[0]}" ]] || SCRIPT_DIR=.
+APP_ROOT=$(cd -- "$SCRIPT_DIR/.." && pwd -P)
+
+[[ -x "$APP_ROOT/bin/parse_words" ]] || {
+  printf '%s\n' '{"type":"deployment_error","detail":"Missing executable bin/parse_words"}' >&2
+  exit 1
+}
+[[ -f "$APP_ROOT/specs/user_function_definition.spec" ]] || {
+  printf '%s\n' '{"type":"deployment_error","detail":"Missing packaged specs/user_function_definition.spec"}' >&2
+  exit 1
+}
+
+# Retain caller-relative grammar meaning before selecting the packaged frontend.
+include_diagnostics=0
+include_separator=0
+if [[ "${1:-}" == --diagnostics ]]; then
+  include_diagnostics=1
+  shift
+fi
+if [[ "${1:-}" == -- ]]; then
+  include_separator=1
+  shift
+fi
+if (( $# > 0 )) && [[ -n "$1" && "$1" != /* ]]; then
+  grammar="$CALLER_ROOT/$1"
+  shift
+  set -- "$grammar" "$@"
+fi
+if (( include_separator )); then
+  set -- -- "$@"
+fi
+if (( include_diagnostics )); then
+  set -- --diagnostics "$@"
+fi
+cd -- "$APP_ROOT"
+exec "$APP_ROOT/bin/parse_words" "$@"

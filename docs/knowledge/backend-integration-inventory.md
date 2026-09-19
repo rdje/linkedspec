@@ -14,8 +14,9 @@ answers:
   - why does an empty PERL_UNICODE setting double encode JSON bytes
   - does a Dart embedding app need hosted packages or RGX PGEN
   - which supporting grammar must a Dart native application package
+  - how does the Dart integration example deploy a compiled executable outside its working directory
 date: 2026-09-19
-status: Rust complete, Perl leaves and Dart native setup verified; other guides and independent closeout pending
+status: Rust complete, Perl and Dart leaves verified; other guides and independent closeout pending
 tags: [integration, documentation, perl, rust, dart, julia, lua]
 evidence: "BACKEND-INTEGRATION-GUIDES.0, activation 00f9783a1e4b625bc251a3e260ef1eef60c35888. Canonical Knowledge, ADR0040, companion tree, manifests, six complete setup scripts and native loader/result seams inspected. Managed version commands and read-only pkg-config identities consumed with exit0; no compiler, dependency preparation or consumer execution ran."
 reverify: "Inspect the exact sources in the matrix below. Version-only commands: bash tools/run_cargo_local.sh --version; bash tools/run_dart_project_data.sh --version; bash tools/run_julia_project_data.sh --project=julia --version; bash tools/project_data_run.sh perl -e 'printf qq{Perl %vd\\n}, $^V'; bash tools/project_data_run.sh lua -v; bash tools/project_data_run.sh luajit -v; bash tools/project_data_run.sh pkg-config --modversion lua luajit libpcre2-8. These commands establish installed identity, not consumer support or a passing backend suite."
@@ -84,7 +85,7 @@ same directory. The Rust page and native word consumer are delivered by .2.1;
 preparation and moved/outside-cwd deployment. See [[archogen-rust-lispish-integration]]
 for measured scope and the still-open strict document/token repair under startup
 .83. Perl setup, deployment and runtime diagnostics are verified under .1.1-.1.2;
-independent parent closeout remains .7. Dart setup is delivered by .3.1; its deployment/errors remain .3.2. The common,
+independent parent closeout remains .7. Dart setup and deployment/errors are verified by .3.1-.3.2. The common,
 Julia and Lua pages remain planned until their owning leaves land.
 Add navigation through SUMMARY.md and the existing backend landing pages.
 
@@ -306,3 +307,39 @@ component failures under .2.24/.2.25; no complete Dart gate success is inferred.
 The new page advances only public counts66/65, preserving all semantic checks.
 Deployment, comprehensive runtime errors and sinks remain .3.2; .7 retains final
 independent replay/parent closeout before conformance .1.35.
+
+## Dart source and AOT deployment — September19, integration .3.2
+
+The maintained parse_words.dart accepts optional --diagnostics and --, emits
+typed per-call diagnostic records separately from direct JSON values, retains
+RuntimeInterpreterException.toJson() and handles RuntimeExitNow as its own
+status-bearing record. This adapter chooses process exit 1 for failures and
+typed exits. Prior output remains delivered and the input loop stops immediately.
+It does not install native trace or infer configuration from inherited trace
+environment variables. The admitted native APIs are unchanged.
+
+The 36-group deployment verifier passes on both current source and a separate
+application whose clean LinkedSpec submodule is pinned to 0826ca2d4. Each run
+checks thirteen source and thirteen AOT behaviors, then ten packaging controls.
+The native bundle contains only the compiled executable, Bash launcher, three
+application grammars and the pinned user_function_definition.spec. Its launcher
+preserves caller-relative grammar meaning before selecting the bundle root.
+A bad caller support grammar breaks the bare executable but not the launcher;
+a bad packaged copy fails, a missing copy returns deployment_error without
+ancestor fallback, and restoration/moving preserve exact bundle bytes. Moved
+Unicode paths and read-only file modes work with no Dart command on PATH.
+This is measured macOS arm64/Dart 3.13.3 evidence, not another target's admission.
+The working deployment replay uses Bash 5.3.15 and the clean-source replay uses
+system Bash 3.2.57. An unpublished launcher draft expanded an empty array under
+nounset, which system Bash rejected with exit 127. Scalar flags plus positional
+argument reconstruction replace that construct; both complete replays pass.
+
+The word verifier remains nine groups; consumer analysis and 23 loader,
+diagnostic-output, trace and native-pipeline tests pass. Build with managed
+`dart compile exe bin/parse_words.dart -o build/bin/parse_words`, then run
+`bash tools/run_python_project_data.sh examples/integration/dart/verify_deployment.py`
+from the repository root. The verifier reuses that binary and does not compile
+or fetch dependencies. For a separate application, pass --package, --library-root,
+--grammar and --fixtures explicitly; --bash selects the deployment-control shell.
+Existing complete Dart component failures remain under .2.24/.2.25; final
+independent integration closeout remains .7.
