@@ -524,9 +524,10 @@ Rust checkpoint is pushed at `ad290bdb4`. The
 module setup, consumer-local execution and a reusable native word parser.
 Its verified closure is 66 repository modules plus 37 Perl core modules and 10
 standard native libraries on Perl 5.34.1/macOS arm64. A clean source submodule
-runs without RGX/PGEN initialization. Setup/value/Unicode-path checks are current;
-Perl deployment/runtime-diagnostic guidance, the other backend guides and final
-verification remain open.
+runs without RGX/PGEN initialization. The guide now includes a relocatable source
+bundle, optional Unicode diagnostics and structured runtime failures. The deployment
+verifier passes17 clean-source groups, and three focused Perl suites pass27 tests.
+Dart, Julia, Lua, common navigation and independent final verification remain open.
 Conformance .1.35 remains the return point after the complete guide activity. Existing runtime repairs and
 unread source remain open. The capability guide still has stale
 current census, governance/inventory/public counts and generic-callable wording.

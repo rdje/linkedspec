@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Install this launcher in the application's bin/ directory beside parse_words.pl.
+APP_ROOT=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd -P)
+export LINKEDSPEC_PROJECT_DATA_ROOT="$APP_ROOT/.app-data/linkedspec"
+export LINKEDSPEC_CACHE_ROOT="$LINKEDSPEC_PROJECT_DATA_ROOT/cache"
+export LINKEDSPEC_SCRATCH_ROOT="$LINKEDSPEC_PROJECT_DATA_ROOT/scratch"
+exec bash "$APP_ROOT/vendor/linkedspec/tools/project_data_run.sh" \
+  env PERL5LIB= PERL5OPT= PERL_UNICODE=0 \
+  perl -I"$APP_ROOT/vendor/linkedspec/perl" "$APP_ROOT/bin/parse_words.pl" "$@"

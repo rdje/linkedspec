@@ -22,7 +22,7 @@ def main():
     grammar = args.grammar.resolve(strict=True)
     scratch = Path(os.environ["TMPDIR"]).resolve(strict=True)
     assert scratch.stat().st_dev == root.stat().st_dev, "scratch must be on the repository volume"
-    environment = dict(os.environ, PERL5LIB="", PERL5OPT="", PERL_UNICODE="")
+    environment = dict(os.environ, PERL5LIB="", PERL5OPT="", PERL_UNICODE="0")
     command = [args.perl, "-I" + str(modules), str(consumer)]
     checked = []
 

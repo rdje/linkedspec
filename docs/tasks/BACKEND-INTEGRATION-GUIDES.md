@@ -6,7 +6,7 @@
 - Status: `active` / director-authorized temporary documentation activity
 - Roadmap lane: `Phase 6 documentation and adoption / native backend integration`
 - Created: `2026-09-13`
-- Last updated: `2026-09-14`
+- Last updated: `2026-09-19`
 - Owner: repo-local workflow
 - Intake owner: `CONFORMANCE-SOURCE-READING.1.34`
 
@@ -99,12 +99,18 @@ ARCHOGEN's use of Lispish through Rust. The requested scope is every backend.
   Commit: `BACKEND-INTEGRATION-GUIDES.1.1 - document and verify native Perl integration`
 
 - ID: `BACKEND-INTEGRATION-GUIDES.1.2`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `5289471f9550bf9b103dd6563f84001147689681`.
+  Verification tier: `focused`
+  Focused checks: Existing native word/module proof plus packaged and relocated execution, structured loader/runtime failures, quiet/default and explicit diagnostic sinks, failure continuation boundaries, source/grammar preservation, targeted Perl contracts, book rendering, memory/history and all doctrines.
+  Canonical trigger: None for this ordinary guide/example slice: extend the existing page and consumer without runtime, dependency, shared-wrapper, public-contract or checker changes. Independent replay and final parent closeout remain .7; any newly required infrastructure change must be classified before editing.
+  Scope: Complete Perl integration assembly/deployment and accurate error/diagnostic examples using existing APIs. Preserve all source/runtime semantics and pre-existing nested dependency edits. Include the due read-only generated-artifact census; retain reusable caches, current evidence and ambiguous files, with no broad cleanup or recovery operation.
+  Investigation: The first Unicode probe double-encoded its own JSON because empty PERL_UNICODE enables UTF-8 streams. Eight inline/file controls retain exact codepoints and emit exact Unicode after PERL_UNICODE=0; the maintained consumer already sets raw streams. Forced handler failure exposes known DUMP_NONE stdout tracing, not a new core defect; the example owns explicit trace policy and runtime-context inspection. Correct the existing trace card's stale no-output wording and the diagnostic card's missing related-fact pointer here.
   Goal: Verify Perl deployment, structured failures and diagnostic-sink examples.
   Dependencies: `.1.1`
   Acceptance: Relocated/outside-cwd use preserves module and grammar resolution; missing grammar and malformed input produce documented outcomes; runtime data remain consumer-local. Generated source dependencies are explicit if taught.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: PASS8 word/module groups with66 repository modules/37 core modules/10 standard native libraries on Perl5.34.1/macOS arm64. Deployment15 plus2 isolated trace controls pass in the working source; the complete17-group verifier passes using clean ad290bdb4 library source. Checks include exact Unicode events/raw streams, typed exit/arity, prior-output/stop-on-failure, undefined success, forced real handler last_error without outer throw, invalid UTF-8/malformed grammar, trace-file preservation, packaged and relocated caller-relative/outside-cwd use, same-volume data and exact source/grammar hashes. The old consumer fails the new diagnostic-option expectation as intended. Three focused Perl suites pass27 tests. Existing public mutation65 and selector64 inventories remain exact; book, memory/history, source/task preservation and all doctrines govern landing. Artifact census2864 candidates/5843871557 bytes deletes0 and retains caches/evidence. No runtime/dependency source, checker, pin, source-reading count or unrelated repair changes; independent parent closure and canonical push remain .7.
+  Commit: `BACKEND-INTEGRATION-GUIDES.1.2 - verify Perl deployment and diagnostic handling`
 
 - ID: `BACKEND-INTEGRATION-GUIDES.2`
   Status: `done`
@@ -244,11 +250,11 @@ ARCHOGEN's use of Lispish through Rust. The requested scope is every backend.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `BACKEND-INTEGRATION-GUIDES.1.2` | `pending` | Perl native setup is verified; next deployment/runtime failures/sinks from the clean committed tree. Rust ad290bdb4 is already pushed. Other guides and .7 remain required before conformance .1.35. |
+| 1 | `BACKEND-INTEGRATION-GUIDES.3.1` | `pending` | Perl .1.1-.1.2 are verified; activate Dart native setup from the clean committed tree. Rust ad290bdb4 is pushed. Final .7 independently replays and closes parents before conformance .1.35. |
 
 The director explicitly requests a temporary pivot at the next clean handoff.
 Conformance .1.34 is committed at 00f9783a1 and inventory .0 is complete.
-Rust .2.2 is committed and pushed atad290bdb427bc19a5af81de0f0b07e119c8999ff. Canonical CI PASS includes both CLI66/66 and Phase0 1032/1032 in1086s;25 optional extensions were skipped. Post-commit receipt promotion, empty brief, clean root status and remote main identity were verified. Perl .1.1 activates from that clean boundary. Ordinary guide/example work needs no further permission.
+Rust .2.2 is committed and pushed atad290bdb427bc19a5af81de0f0b07e119c8999ff. Canonical CI PASS includes both CLI66/66 and Phase0 1032/1032 in1086s;25 optional extensions were skipped. Post-commit receipt promotion, empty brief, clean root status and remote main identity were verified. Perl .1.1 commits at5289471f9 and .1.2 verifies deployment/errors before Dart .3.1; final .7 retains independent parent closure. Ordinary guide/example work needs no further permission.
 
 Return point: `CONFORMANCE-SOURCE-READING.1.35`, whose unchanged Scope is
 `t/generated_source_contract.t` lines154-506; `t/inspect_spec_codegen.t` lines1-121;
@@ -300,7 +306,18 @@ not declared complete by this scoped documentation authorization.
 - [x] **NO REGRESSION** — Native resolution5, mutation50 and selector11 mutations pass; frozen authorities, classifier logic, cursor75/60 and pre-existing PGEN edits remain unchanged. Exact staged canonical CI governs landing.
 - [x] **LOCKSTEP** — Source includes, navigation, Knowledge, roadmap, task and live/history records agree; Perl deployment/errors remain .1.2 and the post-activity return is conformance .1.35.
 
+## Acceptance Checklist — .1.2
+
+- [x] **REPRODUCE / ISSUE** — Prior consumer fails the new diagnostic-option expectation. Native probes distinguish quiet events, typed exit, successful undef, and a real generated-handler error returned through runtime context.
+- [x] **ROOT CAUSE (WHY + WHERE)** — LinkedSpec::Get generated source calls RuntimeDiagnosticOutput; SpecEntry records ordinary handler errors and emits level-zero native trace. Empty PERL_UNICODE caused the scratch observer's double encoding; runtime codepoints stayed exact.
+- [x] **FIX** — Extend only the application adapter and existing guide; add a relative-layout launcher, diagnostic/exit fixtures and deployment verifier. Own JSON channels through explicit native trace configuration, context inspection and selected typed-error projection.
+- [x] **ADDRESSED (verified)** — Fifteen working-checkout groups plus two trace controls and the complete17-group clean-source replay pass, including packaged/relocated outside-cwd execution and unchanged source/grammar hashes.
+- [x] **NO REGRESSION** — Word/module8 and focused Perl27 pass; public inventories/checker logic, runtime sources, dependency pins and original PGEN edits remain unchanged. The artifact census deletes nothing ambiguous or reusable.
+- [x] **LOCKSTEP** — Book source includes, Knowledge, roadmap, task and bounded history agree. Dart .3.1 follows clean commit; final .7 retains parent closure/canonical push before conformance .1.35.
+
 ## Verification Log
+
+- `2026-09-19` .1.2: PASS8 word/module groups with66 repository modules/37 core modules/10 standard native libraries on Perl5.34.1/macOS arm64. Deployment15 plus2 isolated trace controls pass in the working source; the complete17-group verifier passes using clean ad290bdb4 library source. Checks include exact Unicode events/raw streams, typed exit/arity, prior-output/stop-on-failure, undefined success, forced real handler last_error without outer throw, invalid UTF-8/malformed grammar, trace-file preservation, packaged and relocated caller-relative/outside-cwd use, same-volume data and exact source/grammar hashes. The old consumer fails the new diagnostic-option expectation as intended. Three focused Perl suites pass27 tests. Existing public mutation65 and selector64 inventories remain exact; book, memory/history, source/task preservation and all doctrines govern landing. Artifact census2864 candidates/5843871557 bytes deletes0 and retains caches/evidence. No runtime/dependency source, checker, pin, source-reading count or unrelated repair changes; independent parent closure and canonical push remain .7.
 
 - `2026-09-14` .1.1: PASS native four-value setup and repeat; maintained verifier8 groups in both current and clean source consumers, including independent values, UTF-8 input/path rejection, Unicode cwd/path, exact module provenance and owned fixture cleanup. Module proof is66 repository modules/37 core modules/10 standard native libraries on Perl5.34.1 macOS arm64. Clean submodule ad290bdb4 preserves2814 files/58588415 bytes and leaves nested dependencies uninitialized; no CPAN installation or dependency build is required by this route. Native resolution passes5 subtests; public mutation65/14/11/10/50 and selector64/35/0/5/11 pass; cursor75/60 remains unchanged. Book rendering, source/task/history preservation and normal doctrines govern completion; exact staged canonical receipt and post-commit pointer proof remain required. Perl deployment/runtime-error/sink coverage remains .1.2, with no other-backend or minimum-version claim.
 
@@ -316,6 +333,8 @@ not declared complete by this scoped documentation authorization.
 
 ## Commit Log
 
+- `.1.2`: `BACKEND-INTEGRATION-GUIDES.1.2 - verify Perl deployment and diagnostic handling`; activation5289471f9; next Dart .3.1 after clean handoff.
+
 - `.1.1`: `BACKEND-INTEGRATION-GUIDES.1.1 - document and verify native Perl integration`; activationad290bdb4; next .1.2 after clean handoff.
 
 - `.2.2`: `BACKEND-INTEGRATION-GUIDES.2.2 - deliver Rust Lispish file integration and deployment`; activation42490a9d917e; requested early push then Perl .1.1.
@@ -327,6 +346,8 @@ not declared complete by this scoped documentation authorization.
 - Guide/example leaves: pending.
 
 ## Changelog
+
+- `2026-09-19` .1.2: Verify Perl deployment/errors/sinks; retain independent parent closeout at .7 and advance to Dart .3.1.
 
 - `2026-09-14` .1.1: Deliver native Perl setup and measured core/module closure; preserve dependency sources and update the two direct public inventories. Rust checkpoint push is verified.
 

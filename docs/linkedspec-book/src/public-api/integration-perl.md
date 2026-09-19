@@ -57,6 +57,7 @@ From the application root, copy the maintained example and its grammar:
 ```sh
 mkdir -p bin specs
 cp vendor/linkedspec/examples/integration/perl/parse_words.pl bin/parse_words.pl
+cp vendor/linkedspec/examples/integration/perl/parse-words bin/parse-words
 cp vendor/linkedspec/examples/integration/word.spec specs/word.spec
 ```
 
@@ -93,7 +94,7 @@ export LINKEDSPEC_PROJECT_DATA_ROOT="$APP_ROOT/.app-data/linkedspec"
 export LINKEDSPEC_CACHE_ROOT="$LINKEDSPEC_PROJECT_DATA_ROOT/cache"
 export LINKEDSPEC_SCRATCH_ROOT="$LINKEDSPEC_PROJECT_DATA_ROOT/scratch"
 bash vendor/linkedspec/tools/project_data_run.sh \
-  env PERL5LIB= PERL5OPT= PERL_UNICODE= \
+  env PERL5LIB= PERL5OPT= PERL_UNICODE=0 \
   perl -I"$APP_ROOT/vendor/linkedspec/perl" "$APP_ROOT/bin/parse_words.pl" \
   "$APP_ROOT/specs/word.spec" alpha Beta 123 '123 alpha rest'
 ```
@@ -104,8 +105,9 @@ successful run scratch. The interpreter and its standard libraries are required
 read-only toolchain dependencies. This example writes results to stdout; if you
 redirect them, select an application-owned output path.
 
-The empty Perl environment overrides remove ambient module injection, startup
-options and automatic Unicode stream settings for this invocation. The script
+The empty `PERL5LIB` and `PERL5OPT` overrides remove ambient module injection and
+startup options. `PERL_UNICODE=0` disables automatic Unicode stream settings; an
+empty value would enable them. The script also explicitly sets raw output streams. The script
 decodes command-line arguments strictly as UTF-8 and emits UTF-8 JSON bytes.
 Each `INPUT` argument is text to parse, rather than a file name.
 
@@ -154,10 +156,11 @@ documented in [`Get(...)` and `get_parser(...)`](get-and-get-parser.md).
 From the LinkedSpec repository root:
 
 ```sh
-bash tools/project_data_run.sh env PERL5LIB= PERL5OPT= PERL_UNICODE= \
+bash tools/project_data_run.sh env PERL5LIB= PERL5OPT= PERL_UNICODE=0 \
   perl -Iperl examples/integration/perl/parse_words.pl \
   examples/integration/word.spec alpha Beta 123 '123 alpha rest'
 bash tools/run_python_project_data.sh examples/integration/perl/verify_words.py
+bash tools/run_python_project_data.sh examples/integration/perl/verify_deployment.py
 ```
 
 Python is used only by the example verifier. The application runs Perl directly.
@@ -168,5 +171,154 @@ and grammar, invalid UTF-8 arguments on POSIX, and cleanup of its own fixtures.
 Native setup was also replayed using a clean
 pinned LinkedSpec submodule, without initializing its nested dependencies.
 
-This chapter currently verifies setup and the native word consumer. Deployment
-packaging, runtime failures and optional diagnostic sinks are not yet covered.
+The deployment verifier additionally exercises quiet and explicit diagnostics,
+Unicode event bytes, typed exits and arity errors, invalid UTF-8 source,
+undefined successful values, and a forced failure in the real generated handler.
+It packages the runtime sources and launcher, moves the application to a Unicode
+path, executes from outside that directory, checks source/grammar hashes and
+same-volume storage, and removes its own test fixtures.
+
+## Handle runtime outcomes explicitly
+
+The parser has two failure channels. Catch exceptions with `eval` and immediately
+save `$@`. Also inspect `$loaded->runtime_ctx->{last_error}`: a generated rule
+handler can record a structured failure and return `undef` without throwing to
+the outer caller. Check the context before treating the value as a success.
+Conversely, a grammar that explicitly returns `undef` without an error is a
+successful undefined value; the example writes JSON `null`.
+
+The standalone JSON adapter also selects `trace_level => -1` and an empty
+`route` destination, and clears inherited native trace settings within its work.
+Native level-zero tracing can otherwise print failure records on stdout; it is
+separate from the grammar's `diagnostic_sink` events. These trace controls affect
+the Perl process's shared trace configuration. An embedded application with
+multiple parsers should choose its own process-wide trace policy instead of
+silently overriding another component's settings.
+
+The application example serializes a selected view of error fields:
+
+| Outcome | Example stderr record | Process exit |
+| --- | --- | --- |
+| Missing grammar | `spec_pipeline_error`, stage `resolve_spec_path`, code `spec_path_not_found` | 1 |
+| Invalid UTF-8 grammar bytes | `spec_pipeline_error`, stage `decode_spec_content`, code `invalid_utf8` | 1 |
+| Recorded handler/parser error | `runtime_error` with a `context` object | 1 |
+| `exit_now(7)` | `runtime_exit_now` with `status: 7` and `rule_label` | 1 |
+| Diagnostic helper arity failure | `runtime_diagnostic_output_error` with its code and helper fields | 1 |
+| Bad arguments or another host exception | `consumer_error` with class and detail | 1 |
+
+These JSON envelopes belong to the example. Native applications receive the
+original Perl values and exception objects. In particular, `exit_now` throws a
+`LinkedSpec::RuntimeExitNow` object; it does not terminate your process. The host
+chooses its own process exit policy. The example consistently exits 1 on failure
+and reports the grammar's requested status separately.
+
+Runtime context details can retain typed objects. Preserve those objects in a
+native application; when exporting JSON, choose the fields your application
+needs. Generic blessed-object conversion can otherwise erase useful details.
+The example projects referenced context fields as class plus string detail.
+
+The consumer stops on its first failure. Earlier result lines and events remain
+emitted; later inputs are not attempted. This is not a transaction or a promise
+that a failed parser can safely continue with its prior state. Create a new
+compiled parser when your application needs to recover; design application
+side effects and retry policy separately.
+
+The word grammar is an extractor. Digits, punctuation and incomplete language-like
+text do not necessarily fail: only its ASCII words are collected. A strict
+configuration parser needs a grammar and checks that enforce its complete-input
+contract.
+
+## Capture diagnostics only when requested
+
+The parser's optional second argument accepts a `diagnostic_sink` callback:
+
+```perl
+my @events;
+my $input = 'x';
+my $value = $parser->(\$input, {
+    diagnostic_sink => sub { push @events, {%{$_[0]}} },
+});
+```
+
+Each callback receives a blessed `LinkedSpec::RuntimeDiagnosticOutputEvent` hash
+with `helper_name`, `rule_label` and `message`. `say` appends a newline; `print`
+does not. Delivery is synchronous. Without a sink, the diagnostic helpers write
+nothing to host stdout or stderr, though their arguments still evaluate.
+If your callback throws, its exception escapes unchanged and later delivery
+stops; handle that host exception as well as runtime context errors.
+
+Copy the demonstration grammars into your application's assets:
+
+```sh
+cp vendor/linkedspec/examples/integration/perl/diagnostics.spec specs/diagnostics.spec
+cp vendor/linkedspec/examples/integration/perl/exit.spec specs/exit.spec
+bash bin/parse-words --diagnostics specs/diagnostics.spec x
+```
+
+The diagnostic grammar is:
+
+```text
+{{#include ../../../../examples/integration/perl/diagnostics.spec}}
+```
+
+Stdout contains `"ok"`. Stderr contains two UTF-8 JSON lines:
+
+```json
+{"event":{"helper_name":"say","message":"héllo 雪\n","rule_label":"Top"},"type":"diagnostic"}
+{"event":{"helper_name":"print","message":"done","rule_label":"Top"},"type":"diagnostic"}
+```
+
+Omit `--diagnostics` to keep stderr empty on this successful parse. An optional
+`--` ends option processing if the grammar path itself is `--diagnostics`.
+
+The exit example makes the failure boundary visible:
+
+```sh
+bash bin/parse-words --diagnostics specs/exit.spec x y x
+```
+
+It emits one `"ok"` result for the first input. The second input emits the
+`before\n` event followed by `{"rule_label":"Top","status":7,"type":"runtime_exit_now"}`,
+and the process exits 1. The third input is never parsed.
+
+## Package and relocate the application
+
+Install the maintained launcher alongside `bin/parse_words.pl`:
+
+```sh
+{{#include ../../../../examples/integration/perl/parse-words}}
+```
+
+It derives the application root from its own location, selects the bundled Perl
+modules, and places managed data under that root's `.app-data/`. It preserves the
+caller's working directory: relative grammar arguments remain relative to the
+caller. Invoke it with `bash`; executable permission is not required.
+
+A source deployment needs the complete `vendor/linkedspec/perl/` tree and its
+sibling `specs/`. This launcher also needs `vendor/linkedspec/tools/` for the
+managed storage wrapper. Retain the checkout's license and notices. Keep your
+application's `bin/` and `specs/` assets together with that layout. Git metadata,
+RGX/PGEN and Rust build products are not required for this Perl consumer. The
+full pinned source checkout is also a valid deployment; no CPAN installation or
+LinkedSpec compilation is needed by the verified word/diagnostic route.
+
+For example, after placing that layout at `release/my-app`, invoke it from the
+application repository root:
+
+```sh
+APP_ROOT=$(cd release/my-app && pwd -P)
+bash "$APP_ROOT/bin/parse-words" "$APP_ROOT/specs/word.spec" 'one two'
+```
+
+This returns `["one","two"]` regardless of the caller's directory. Moving the
+whole bundle preserves the relative module and asset relationships. The launcher
+recomputes storage paths at each invocation. Keep reusable data on the same
+volume as the application, and make the selected `.app-data/` location writable;
+the wrapper also maintains a small checkout identity under the bundled library's
+`.linkedspec-data/` directory. This example does not target a read-only bundle.
+
+The host must still provide the compatible Perl distribution, its core native
+libraries, Bash and the platform utilities used by the storage wrapper. The
+verified deployment is macOS arm64 with Perl 5.34.1. A successful relocation on
+that host does not establish another operating system or interpreter version.
+This guide uses live compilation; it does not package a standalone emitted parser.

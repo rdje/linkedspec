@@ -10,8 +10,10 @@ answers:
   - how was the standalone Rust integration example verified
   - which modules and native libraries does the Perl integration example require
   - how is clean Perl submodule integration verified without RGX and PGEN
-date: 2026-09-14
-status: Rust complete and Perl native setup verified; Perl deployment and other guides pending
+  - how does a Perl embedding application handle runtime context errors and diagnostics
+  - why does an empty PERL_UNICODE setting double encode JSON bytes
+date: 2026-09-19
+status: Rust complete and both Perl leaves verified; other guides and independent closeout pending
 tags: [integration, documentation, perl, rust, dart, julia, lua]
 evidence: "BACKEND-INTEGRATION-GUIDES.0, activation 00f9783a1e4b625bc251a3e260ef1eef60c35888. Canonical Knowledge, ADR0040, companion tree, manifests, six complete setup scripts and native loader/result seams inspected. Managed version commands and read-only pkg-config identities consumed with exit0; no compiler, dependency preparation or consumer execution ran."
 reverify: "Inspect the exact sources in the matrix below. Version-only commands: bash tools/run_cargo_local.sh --version; bash tools/run_dart_project_data.sh --version; bash tools/run_julia_project_data.sh --project=julia --version; bash tools/project_data_run.sh perl -e 'printf qq{Perl %vd\\n}, $^V'; bash tools/project_data_run.sh lua -v; bash tools/project_data_run.sh luajit -v; bash tools/project_data_run.sh pkg-config --modversion lua luajit libpcre2-8. These commands establish installed identity, not consumer support or a passing backend suite."
@@ -79,8 +81,8 @@ same directory. The Rust page and native word consumer are delivered by .2.1;
 .2.2 completes actual Lispish files, typed adaptation, failures, clean pinned
 preparation and moved/outside-cwd deployment. See [[archogen-rust-lispish-integration]]
 for measured scope and the still-open strict document/token repair under startup
-.83. Perl setup and its native example are current under .1.1; deployment and
-runtime diagnostics remain .1.2. The common, Dart, Julia and Lua pages remain
+.83. Perl setup, deployment and runtime diagnostics are verified under .1.1-.1.2;
+independent parent closeout remains .7. The common, Dart, Julia and Lua pages remain
 planned until their owning leaves land.
 Add navigation through SUMMARY.md and the existing backend landing pages.
 
@@ -218,9 +220,9 @@ The original checkout's pre-existing PGEN diff remains exact.
 Replay syntax, native values, module closure and failures from the repository root:
 
 ```sh
-bash tools/project_data_run.sh env PERL5LIB= PERL5OPT= PERL_UNICODE= perl -Iperl -c examples/integration/perl/parse_words.pl
+bash tools/project_data_run.sh env PERL5LIB= PERL5OPT= PERL_UNICODE=0 perl -Iperl -c examples/integration/perl/parse_words.pl
 bash tools/run_python_project_data.sh examples/integration/perl/verify_words.py
-bash tools/project_data_run.sh env PERL5LIB= PERL5OPT= PERL_UNICODE= prove -Iperl t/native_spec_resolution.t
+bash tools/project_data_run.sh env PERL5LIB= PERL5OPT= PERL_UNICODE=0 prove -Iperl t/native_spec_resolution.t
 ```
 
 The maintained verifier additionally proves Unicode cwd/grammar paths, absent
@@ -231,3 +233,38 @@ runtime. Setup proof does not complete Perl deployment/runtime-error/sink .1.2.
 Other backend guides and final .7 remain required before conformance .1.35 resumes.
 Rust .2.2 is already committed and pushed atad290bdb4; full CI passed with both
 CLI66/66 and Phase0 1032/1032, and the remote main hash was verified.
+
+## Perl deployment and error channels — September19, integration .1.2
+
+The existing guide and consumer now cover optional diagnostic_sink events, typed
+exit/arity errors, structured loader failures and nonthrowing handler last_error.
+The word/module verifier remains8 groups/66 project modules/37 core modules/10
+standard native libraries. The deployment verifier passes17 groups using clean
+pinned ad290bdb4 source; the current source passes15 plus the two isolated native
+trace controls. Three targeted Perl suites pass27 tests. Source/grammar hashes
+survive packaging and a move to a Unicode path; two outside-cwd calls and one
+caller-relative grammar call pass. The source bundle retains perl/, specs/ and
+tools/; launcher-derived .app-data and the wrapper checkout identity stay on the
+same volume. This is writable source deployment, not an immutable bundle or
+another operating-system/ABI claim. No nested dependency initialization/build
+is needed for this Perl route. Replay:
+
+```sh
+bash tools/run_python_project_data.sh examples/integration/perl/verify_deployment.py
+bash tools/run_python_project_data.sh examples/integration/perl/verify_words.py
+bash tools/project_data_run.sh env PERL5LIB= PERL5OPT= PERL_UNICODE=0 prove -Iperl t/native_spec_resolution.t t/diagnostic_output_perl_contract.t t/generated_source_contract.t
+```
+
+A scratch probe initially double-encoded its own UTF-8 JSON: empty PERL_UNICODE
+adds an output UTF-8 layer. Eight inline/file codepoint controls prove the parser
+preserved Latin-1 and wider Unicode values; PERL_UNICODE=0 and raw output remove
+the observer artifact. The maintained consumer uses both controls. Native trace
+is separate: SpecEntry emits level-zero records on ordinary handler failure,
+as documented by [[perl-primary-cli-conformance-audit]]. This standalone adapter
+selects negative-level/empty-route trace configuration and clears inherited trace
+settings; an application embedding multiple parsers must choose a process-wide
+policy. The verifier preserves a sentinel trace file despite inherited reset/
+mirror requests and requires JSON-only stdout on validation/handler failure.
+Typed events/exit retain their separate [[perl-diagnostic-output-events]] contract;
+no failure rollback or subsequent parser reuse is promised. The source/runtime
+and dependency pins remain unchanged; final .7 retains independent parent closure.

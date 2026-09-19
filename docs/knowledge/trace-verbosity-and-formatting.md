@@ -7,7 +7,7 @@ answers:
   - "how do I configure trace output"
   - "where does log_output go"
   - "can I set DUMP_VERBOSITY directly"
-date: 2026-06-12
+date: 2026-09-19
 status: current
 tags: [trace, diagnostics, verbosity, formatting]
 evidence: "perl/LinkedSpec/Trace.pm; LinkedSpec.pm facade wrappers; TRACE-OBSERVABILITY.1 measured that facade-level $LinkedSpec::DUMP_VERBOSITY assignment before lazy Trace load does not enable log_output, while configure_trace/env/per-call options do"
@@ -18,7 +18,7 @@ reverify: "rg -n 'DUMP_NONE|DUMP_DEBUG|configure_trace|trace_log_file|trace_rese
 and output routing. It is reached through `LinkedSpec::OwnerDispatch` by all consumers.
 
 **Verbosity levels** (UVM-style, defined as constants in `LinkedSpec.pm`):
-- `DUMP_NONE` (0) — no output
+- `DUMP_NONE` (0) — level-zero critical/failure records remain visible
 - `DUMP_LOW` (100) — essential: errors, final results
 - `DUMP_MEDIUM` (200) — standard: parse results, generated spec
 - `DUMP_HIGH` (300) — detailed: rule info, handlers
@@ -54,3 +54,11 @@ lazy structured stringification. `log_dump` enforces its level only when `enforc
 it is not equivalent to `log_output` gating. `_trace_stringify` uses the exception-preserving owner
 seam, while direct lazy branch-detail eval does not; [[perl-lazy-trace-exception-state-drift]] owns
 that measured exception-state boundary. No sink-error contract or caller path policy is expanded.
+
+Integration .1.2 replays a forced generated-handler failure: `SpecEntry` records
+`runtime_handler:rule_handler_eval`, returns undef, and emits a DUMP_NONE decision.
+The native default route writes that trace to stdout. This agrees with the earlier
+[[perl-primary-cli-conformance-audit]]; zero is not a universal silence setting.
+The standalone integration JSON consumer follows the primary adapter's explicit
+negative-level/empty-route policy while retaining structured errors and optional
+diagnostic events. Its trace configuration is process-wide, not parse-local.

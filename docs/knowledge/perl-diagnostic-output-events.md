@@ -10,7 +10,7 @@ answers:
   - what does Perl exit_now throw
   - do Perl generated handlers call host print say or exit
   - what do Perl print say and print_each lower to
-date: 2026-07-16
+date: 2026-09-19
 status: current
 tags: [Perl, runtime, ActionIR, diagnostic-output, events, sink, Unicode, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.5.1.2 adds LinkedSpec::RuntimeDiagnosticOutput, rewires ActionIR output and exit lowering, and installs an invocation-local sink in Compiler-generated live parsers. FUTURE-PARITY-BACKLOG.5.1.7 extends independently emitted Execute/ExecuteWithTrace/Get while preserving generated failure attribution. t/diagnostic_output_perl_contract.t consumes linkedspec-diagnostic-output-v1 and proves native/generated ordered events, quietness, sink-failure identity, typed exit, and arity-before-effects."
@@ -50,7 +50,7 @@ $helper, $values)`. `print_each` passes one snapshotted array plus prefix/suffix
 controls argument evaluation or delivery.
 
 Related facts: [[diagnostic-output-neutral-contract]], [[cross-backend-diagnostic-output-drift]],
-[[lua-diagnostic-output-events]], [[perl-generated-handler-runtime-errors]].
+[[lua-diagnostic-output-events]], [[perl-compiler-pipeline-stage-and-mode-boundaries]].
 
 The September 6 `.3.2.41` checkpoint reads RuntimeDiagnosticOutput 1–247: sink option validation,
 descriptor-local control-error identity, rendering, arity checks, ordered delivery, and typed exit remain
@@ -59,3 +59,10 @@ is inferred. The neutral checker passes 3 helpers / 11 render cases / 6 scenario
 The four focused Perl runtime suites pass 137 tests collectively. Four public exit controls retain status
 seven while exposing the recognition-specific unwind gap in [[perl-recognition-unwind-actual-state-gap]],
 owned by `.40`; diagnostic exception identity alone does not prove parser-state rollback.
+
+Integration .1.2 distinguishes diagnostic events from the process-wide native
+trace stream. A quiet diagnostic sink does not suppress level-zero native failure
+traces; standalone JSON adapters must choose their own trace routing. The maintained
+Perl integration consumer uses negative trace level and an empty route destination,
+preserves typed exit/error fields, and checks runtime context even when the parser
+returns without throwing. See [[backend-integration-inventory]].
