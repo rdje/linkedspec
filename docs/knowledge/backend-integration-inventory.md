@@ -8,8 +8,10 @@ answers:
   - how do native integration callers obtain direct parser values
   - which runtime versions were observed for integration guide preparation
   - how was the standalone Rust integration example verified
-date: 2026-09-13
-status: inventory and complete Rust integration verified; other backend guides pending
+  - which modules and native libraries does the Perl integration example require
+  - how is clean Perl submodule integration verified without RGX and PGEN
+date: 2026-09-14
+status: Rust complete and Perl native setup verified; Perl deployment and other guides pending
 tags: [integration, documentation, perl, rust, dart, julia, lua]
 evidence: "BACKEND-INTEGRATION-GUIDES.0, activation 00f9783a1e4b625bc251a3e260ef1eef60c35888. Canonical Knowledge, ADR0040, companion tree, manifests, six complete setup scripts and native loader/result seams inspected. Managed version commands and read-only pkg-config identities consumed with exit0; no compiler, dependency preparation or consumer execution ran."
 reverify: "Inspect the exact sources in the matrix below. Version-only commands: bash tools/run_cargo_local.sh --version; bash tools/run_dart_project_data.sh --version; bash tools/run_julia_project_data.sh --project=julia --version; bash tools/project_data_run.sh perl -e 'printf qq{Perl %vd\\n}, $^V'; bash tools/project_data_run.sh lua -v; bash tools/project_data_run.sh luajit -v; bash tools/project_data_run.sh pkg-config --modversion lua luajit libpcre2-8. These commands establish installed identity, not consumer support or a passing backend suite."
@@ -26,7 +28,7 @@ ordinary guide/example work within that request.
 
 | Backend | Package or module wiring | Required setup for the inspected route | Direct result path |
 | --- | --- | --- | --- |
-| Perl | Add the checkout's `perl/` to `@INC`; use `LinkedSpec::SpecLoader`. | Perl and the repo-owned modules; verify the actual loaded-module closure with the consumer. The facade declares `use 5.010`, which is not a fresh minimum-version support test. | `load_and_compile_spec(...)->compiled` yields the parser coderef; invoke it with a scalar reference and optional invocation options. |
+| Perl | Add the checkout's `perl/` to `@INC`; use `LinkedSpec::SpecLoader`. | Perl and the repo-owned modules; .1.1 verifies66 repository modules plus37 core modules and10 standard native libraries on Perl5.34.1. The facade declares `use 5.010`, which is not a fresh minimum-version support test. | `load_and_compile_spec(...)->compiled` yields the parser coderef; invoke it with a scalar reference and optional invocation options. |
 | Rust | Cargo path dependency on `rust/linkedspec-runtime`; it brings core and `rgx-core`. | Compatible Rust toolchain, recursively initialized RGX/PGEN, required generated PGEN parser sources and Cargo dependencies. Existing local dependencies declare Rust1.95. | `load_and_compile_spec(...).into_engine()` then `execute_value_with_diagnostics(input, &options)` returns the direct JSON value. |
 | Dart | `linkedspec_dart` path dependency on `dart/`. | SDK constraint `>=3.9.0 <4.0.0`; no runtime package dependencies in pubspec.yaml. `test` is a development dependency. The regex implementation uses Dart matching and its repo-owned bridge. | `loadAndCompileSpec(...).createEngine().execute(input).value`; execute delegates to parse. |
 | Julia | `LinkedSpecJulia`, UUID `8eec5991-a432-4f89-ae45-eeda2e697757`, local package at `julia/`. | Project compatibility Julia1.12 and JSON3 1.14.3; Base64, Random and SHA are standard-library dependencies. Regex is Julia's `Regex` type. Retain package sources and the consumer-local depot. | `load_and_compile_spec(...)`, `create_engine(...)`, then `runtime_execute(engine, input).value`. |
@@ -77,7 +79,9 @@ same directory. The Rust page and native word consumer are delivered by .2.1;
 .2.2 completes actual Lispish files, typed adaptation, failures, clean pinned
 preparation and moved/outside-cwd deployment. See [[archogen-rust-lispish-integration]]
 for measured scope and the still-open strict document/token repair under startup
-.83. The other pages remain planned until their owning leaves land.
+.83. Perl setup and its native example are current under .1.1; deployment and
+runtime diagnostics remain .1.2. The common, Dart, Julia and Lua pages remain
+planned until their owning leaves land.
 Add navigation through SUMMARY.md and the existing backend landing pages.
 
 Runnable sources belong under `examples/integration/`, with shared grammar/input
@@ -182,3 +186,48 @@ documents, eleven semantic examples, fifty mutation cases, five selector contras
 and eleven contrast mutations remain unchanged. The generated-source, native
 resolution and language-coverage checks pass. Exact semantic contracts stay
 byte-identical; final receipt-bound canonical verification still governs landing.
+
+## Perl native consumer — September14, integration .1.1
+
+The canonical chapter is `docs/linkedspec-book/src/public-api/integration-perl.md`.
+The runnable consumer and its module/value verifier live in `examples/integration/perl/`.
+An explicit -I selects the checkout's complete perl/ tree; the portable SpecLoader
+receives one exact grammar path, explicit cwd and no search roots. One compilation
+serves independent input scalars and returns the shared word grammar's array directly.
+The original four values are ["alpha"], ["Beta"], [], ["alpha","rest"].
+
+Both the current checkout and a clean pinned source submodule pass eight verifier
+groups. inspect_modules.pl snapshots %INC after the actual consumer, before its
+inspection-only imports. There are66 repository module files plus the consumer,
+37 Perl core module files and10 native libraries supplied by Perl5.34.1 on macOS
+arm64. The verifier checks core-catalog identities and actual distribution paths;
+no third-party CPAN dependency, PathSearch.pm or PPlugin.pm is loaded in this route.
+This is not a minimum-version or all-plugin dependency claim. Retain the complete
+source checkout and specs/ for other facilities described by
+[[current-supporting-grammar-dependencies]].
+
+The fresh consumer uses a real Git submodule atad290bdb4, with the public HTTPS
+origin preserved. A command-scoped local transport rewrite avoids downloading
+already-owned Git objects; all2814 source files/58588415 bytes match committed
+blobs. Nested RGX/PGEN remains uninitialized. The candidate consumer and common
+grammar are copied byte-exactly into the application's bin/ and specs/ directories.
+No package installation or dependency build is needed; independent and repeated
+native runs pass. Consumer data is rooted under its own .app-data on this volume.
+The original checkout's pre-existing PGEN diff remains exact.
+
+Replay syntax, native values, module closure and failures from the repository root:
+
+```sh
+bash tools/project_data_run.sh env PERL5LIB= PERL5OPT= PERL_UNICODE= perl -Iperl -c examples/integration/perl/parse_words.pl
+bash tools/run_python_project_data.sh examples/integration/perl/verify_words.py
+bash tools/project_data_run.sh env PERL5LIB= PERL5OPT= PERL_UNICODE= prove -Iperl t/native_spec_resolution.t
+```
+
+The maintained verifier additionally proves Unicode cwd/grammar paths, absent
+grammar, usage and invalid UTF-8 argument rejection, plus cleanup of owned fixtures.
+For another managed consumer, supply its --perl-root, --consumer and --grammar
+paths to the same verifier. These paths are derived from the current root at
+runtime. Setup proof does not complete Perl deployment/runtime-error/sink .1.2.
+Other backend guides and final .7 remain required before conformance .1.35 resumes.
+Rust .2.2 is already committed and pushed atad290bdb4; full CI passed with both
+CLI66/66 and Phase0 1032/1032, and the remote main hash was verified.

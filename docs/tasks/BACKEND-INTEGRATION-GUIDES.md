@@ -6,7 +6,7 @@
 - Status: `active` / director-authorized temporary documentation activity
 - Roadmap lane: `Phase 6 documentation and adoption / native backend integration`
 - Created: `2026-09-13`
-- Last updated: `2026-09-13`
+- Last updated: `2026-09-14`
 - Owner: repo-local workflow
 - Intake owner: `CONFORMANCE-SOURCE-READING.1.34`
 
@@ -76,7 +76,7 @@ ARCHOGEN's use of Lispish through Rust. The requested scope is every backend.
   Commit: `BACKEND-INTEGRATION-GUIDES.0 - inventory native integration setup and guide ownership`
 
 - ID: `BACKEND-INTEGRATION-GUIDES.1`
-  Status: `pending`
+  Status: `active`
   Goal: Deliver the Perl integration guide and executable consumer.
   Children: `.1.1`, `.1.2`
   Dependencies: `.0`
@@ -85,11 +85,18 @@ ARCHOGEN's use of Lispish through Rust. The requested scope is every backend.
   Commit: `pending`
 
 - ID: `BACKEND-INTEGRATION-GUIDES.1.1`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `ad290bdb427bc19a5af81de0f0b07e119c8999ff`.
+  Verification tier: `canonical`
+  Focused checks: Managed native Perl consumer with explicit module/grammar resolution and exact independent values; actual loaded-module closure and core-dependency census; clean pinned-source consumer setup and repeat runs; syntax and native-resolution contract; public-inventory projections/mutations, book rendering, source/task/history preservation and all doctrines.
+  Canonical trigger: The new public guide requires current public-documentation census maintenance in existing contract checkers. Preserve their semantic checks and mutation cases; exact staged canonical proof governs these gate-owner edits. No dependency lock, backend source, shared wrapper or dependency pin change is planned.
+  Scope: Create integration-perl.md and a runnable native word consumer using the shared grammar, explicit application-relative module setup and the portable loader. Identify actual core versus optional dependencies with in-process module inventory. Own only the direct-dependent new-page census and current count references. Deployment, comprehensive failures and diagnostic sinks remain .1.2.
+  Direct-dependent evidence: New-page preflight reports mutation expected64/observed65 and selector expected63/observed64. Both public_markdown_paths functions include every book page. Change only their EXPECTED_PUBLIC_FILE_COUNT values and current census prose; all classifier logic, three frozen mutation authorities and existing mutations remain exact. The page adds no cursor-migration or selector reference.
+  Candidate preservation: PASS 2796 prior files byte-exact and 2803 of2805 prior task nodes unchanged; only this leaf and Perl parent change. Every previous change/notes/history byte and all94 book limitation headings remain. Both checker projections differ only in their expected public-file count. Rendered consumer/grammar includes resolve, memory60 passes and histories remain below rollover pressure at232 lines/48275 bytes and192/47875. A clean native repeat returns the four expected values in10.85s; pre-existing PGEN full-index diff remains exact. No source-reading coverage or unrelated repair completion is claimed.
   Goal: Document and verify Perl checkout, module search path, managed setup and native parsing.
   Acceptance: A consumer loads the intended modules and grammar explicitly, compiles once, parses two independent inputs and checks exact direct values. Identify core versus optional Perl dependencies and portable loader versus legacy discovery; no accidental ambient module path.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: PASS native four-value setup and repeat; maintained verifier8 groups in both current and clean source consumers, including independent values, UTF-8 input/path rejection, Unicode cwd/path, exact module provenance and owned fixture cleanup. Module proof is66 repository modules/37 core modules/10 standard native libraries on Perl5.34.1 macOS arm64. Clean submodule ad290bdb4 preserves2814 files/58588415 bytes and leaves nested dependencies uninitialized; no CPAN installation or dependency build is required by this route. Native resolution passes5 subtests; public mutation65/14/11/10/50 and selector64/35/0/5/11 pass; cursor75/60 remains unchanged. Book rendering, source/task/history preservation and normal doctrines govern completion; exact staged canonical receipt and post-commit pointer proof remain required. Perl deployment/runtime-error/sink coverage remains .1.2, with no other-backend or minimum-version claim.
+  Commit: `BACKEND-INTEGRATION-GUIDES.1.1 - document and verify native Perl integration`
 
 - ID: `BACKEND-INTEGRATION-GUIDES.1.2`
   Status: `pending`
@@ -237,11 +244,11 @@ ARCHOGEN's use of Lispish through Rust. The requested scope is every backend.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `BACKEND-INTEGRATION-GUIDES.1.1` | `pending` | First push the completed Rust checkpoint from a verified clean tree, then Perl setup/native parsing. Other guides and .7 remain required before returning to conformance .1.35. |
+| 1 | `BACKEND-INTEGRATION-GUIDES.1.2` | `pending` | Perl native setup is verified; next deployment/runtime failures/sinks from the clean committed tree. Rust ad290bdb4 is already pushed. Other guides and .7 remain required before conformance .1.35. |
 
 The director explicitly requests a temporary pivot at the next clean handoff.
 Conformance .1.34 is committed at 00f9783a1 and inventory .0 is complete.
-Rust .2.1 is committed at42490a9d9 with canonical CI PASS, both CLI66/66 and Phase0 1032/1032; its brief is empty and its root handoff is clean. Lispish/deployment .2.2 completes from that boundary; its exact staged canonical receipt and clean push remain the delivery boundary. Ordinary guide/example work needs no further permission.
+Rust .2.2 is committed and pushed atad290bdb427bc19a5af81de0f0b07e119c8999ff. Canonical CI PASS includes both CLI66/66 and Phase0 1032/1032 in1086s;25 optional extensions were skipped. Post-commit receipt promotion, empty brief, clean root status and remote main identity were verified. Perl .1.1 activates from that clean boundary. Ordinary guide/example work needs no further permission.
 
 Return point: `CONFORMANCE-SOURCE-READING.1.35`, whose unchanged Scope is
 `t/generated_source_contract.t` lines154-506; `t/inspect_spec_codegen.t` lines1-121;
@@ -284,7 +291,18 @@ not declared complete by this scoped documentation authorization.
 - [x] **NO REGRESSION** — Existing word consumer and dependency versions/pins are retained; original nested PGEN diff is byte-exact. Canonical CI governs landing.
 - [x] **LOCKSTEP** — Book, Rust landing, Knowledge, roadmap and live/task pointers describe verified integration and the still-open strict parsing scope.
 
+## Acceptance Checklist — .1.1
+
+- [x] **REPRODUCE / ISSUE** — The missing Perl setup guide requires a native consumer and measured dependency closure; new-page preflight reports mutation expected64/observed65 and selector expected63/observed64.
+- [x] **ROOT CAUSE (WHY + WHERE)** — LinkedSpec::SpecLoader composes LinkedSpec::Get and returns its parser coderef; the existing shared-grammar descriptor/oracle establishes word dispatch. Both public_markdown_paths functions include the new book page; their exact cardinality constants reject its unreviewed addition.
+- [x] **FIX** — Add the canonical Perl guide, direct parser consumer and module/value verifier; advance only the two public-file cardinalities and current census references.
+- [x] **ADDRESSED (verified)** — Both native environments pass eight verifier groups and module66/core37/native10 checks; clean source2814 files/58588415 bytes is exact, with nested dependencies uninitialized.
+- [x] **NO REGRESSION** — Native resolution5, mutation50 and selector11 mutations pass; frozen authorities, classifier logic, cursor75/60 and pre-existing PGEN edits remain unchanged. Exact staged canonical CI governs landing.
+- [x] **LOCKSTEP** — Source includes, navigation, Knowledge, roadmap, task and live/history records agree; Perl deployment/errors remain .1.2 and the post-activity return is conformance .1.35.
+
 ## Verification Log
+
+- `2026-09-14` .1.1: PASS native four-value setup and repeat; maintained verifier8 groups in both current and clean source consumers, including independent values, UTF-8 input/path rejection, Unicode cwd/path, exact module provenance and owned fixture cleanup. Module proof is66 repository modules/37 core modules/10 standard native libraries on Perl5.34.1 macOS arm64. Clean submodule ad290bdb4 preserves2814 files/58588415 bytes and leaves nested dependencies uninitialized; no CPAN installation or dependency build is required by this route. Native resolution passes5 subtests; public mutation65/14/11/10/50 and selector64/35/0/5/11 pass; cursor75/60 remains unchanged. Book rendering, source/task/history preservation and normal doctrines govern completion; exact staged canonical receipt and post-commit pointer proof remain required. Perl deployment/runtime-error/sink coverage remains .1.2, with no other-backend or minimum-version claim.
 
 - `2026-09-13` .2.2: PASS three Rust adapter tests; 34 native Lispish probes and nine exact Perl comparisons; maintained verifier's18 same-engine file values plus published settings, structured grammar/runtime failures, I/O/UTF-8/usage checks, earlier-output behavior and packaged/relocated outside-cwd execution. Clean-source bootstrap creates12 generated files/18576534 bytes including four Rust parsers. The200-package consumer lock preserves every version; isolated locked/offline builds complete in40.50s and4.87s, both reporting dependency compilation. Original checkout build4m34s and test build6m37s also pass. Pins and original PGEN full-index diff remain exact. Focused render/preservation/doctrine proof and receipt-bound canonical CI govern landing; no release-profile, empty-cache installation, all-backend malformed-input or actual ARCHOGEN application proof is claimed.
 
@@ -298,6 +316,8 @@ not declared complete by this scoped documentation authorization.
 
 ## Commit Log
 
+- `.1.1`: `BACKEND-INTEGRATION-GUIDES.1.1 - document and verify native Perl integration`; activationad290bdb4; next .1.2 after clean handoff.
+
 - `.2.2`: `BACKEND-INTEGRATION-GUIDES.2.2 - deliver Rust Lispish file integration and deployment`; activation42490a9d917e; requested early push then Perl .1.1.
 
 - `.2.1`: `BACKEND-INTEGRATION-GUIDES.2.1 - document and verify native Rust integration`; activation4d32e895e; next .2.2 after clean handoff.
@@ -307,6 +327,8 @@ not declared complete by this scoped documentation authorization.
 - Guide/example leaves: pending.
 
 ## Changelog
+
+- `2026-09-14` .1.1: Deliver native Perl setup and measured core/module closure; preserve dependency sources and update the two direct public inventories. Rust checkpoint push is verified.
 
 - `2026-09-13` .2.2: Complete Rust Lispish file/deployment guide and clean pinned-source proof; record exact extraction limits and own strict parsing under startup .83.
 

@@ -10,6 +10,12 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-14 — BACKEND-INTEGRATION-GUIDES.1.1 - document and verify native Perl integration
+
+The Perl consumer selects the checkout with -I, supplies an exact grammar path and explicit cwd to SpecLoader, compiles once and passes fresh input scalars to the resulting coderef. The verifier snapshots %INC before its own inspection imports, checks all project module paths against the selected perl/ tree, and requires external module identities plus module/native paths to belong to the tested core distribution. A loaded consumer file is counted separately from the66 module files. Complete-source submodule proof avoids ambient checkout or initialized RGX/PGEN assumptions.
+
+PASS native four-value setup and repeat; maintained verifier8 groups in both current and clean source consumers, including independent values, UTF-8 input/path rejection, Unicode cwd/path, exact module provenance and owned fixture cleanup. Module proof is66 repository modules/37 core modules/10 standard native libraries on Perl5.34.1 macOS arm64. Clean submodule ad290bdb4 preserves2814 files/58588415 bytes and leaves nested dependencies uninitialized; no CPAN installation or dependency build is required by this route. Native resolution passes5 subtests; public mutation65/14/11/10/50 and selector64/35/0/5/11 pass; cursor75/60 remains unchanged. Book rendering, source/task/history preservation and normal doctrines govern completion; exact staged canonical receipt and post-commit pointer proof remain required. Perl deployment/runtime-error/sink coverage remains .1.2, with no other-backend or minimum-version claim.
+
 ## 2026-09-13 — BACKEND-INTEGRATION-GUIDES.2.2 - deliver Rust Lispish file integration and deployment
 
 Clean source means committed dependency blobs, not a development checkout with pre-existing nested edits. Verified42490a9d917e/8763a0e6bea9/db6f8c6836fe with a byte-checked registry seed. PGEN bootstrap must set its own rust/target because Make invokes ./target/debug/ast_pipeline; application Cargo retains its separate local target. Missing offline mimalloc metadata required normal online preparation, not an allocator build claim. Generated inputs, bootstrap lock and application lock remain local and measured.

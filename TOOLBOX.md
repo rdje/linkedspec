@@ -699,7 +699,7 @@ primary adapter. See [[inter-match-gap-lua-implementation-plan]].
 - **WHEN:** changing aggregate-selector migration teaching, public Markdown inventory, bare-binding examples,
   selector-retirement status, or the bounded historical-reference census.
 - **HOW:** `bash tools/run_python_project_data.sh tools/check_public_aggregate_selector_surface.py`.
-- **OUTPUT:** 63 public files / 35 classified historical references / zero current examples, five exact ordered
+- **OUTPUT:** 64 public files / 35 classified historical references / zero current examples, five exact ordered
   migration contrasts, eleven rejected contrast mutations, zero executable positives, and capability admission.
 - **BOUNDARY:** the seven concrete retired spellings are allowed only inside the uniquely bounded mdBook migration
   section. Executable `.spec` inputs and current examples remain selector-free.
@@ -816,7 +816,7 @@ primary adapter. See [[inter-match-gap-lua-implementation-plan]].
 - **WHEN:** changing nested-write or `map_leaves!` public examples/status, any mutation-owning public document, or
   the public Markdown inventory. Historical task/decision/Knowledge records are outside the stale-current scan.
 - **HOW:** `bash tools/run_python_project_data.sh tools/check_mutation_public_surface.py`.
-- **OUTPUT:** 64 public files, 14 governed documents, eleven semantic example classes, ten stale claims rejected,
+- **OUTPUT:** 65 public files, 14 governed documents, eleven semantic example classes, ten stale claims rejected,
   and 50 independently rejected in-memory authority/document/status mutations.
 - **BOUNDARY:** `.19.9` adds only public-current teaching and recurring no-drift. It does not modify the three
   frozen JSON authorities, runtime code, generated carriers, capability rows, facades, schemas, MCP, or CLI.

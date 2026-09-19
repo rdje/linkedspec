@@ -1,11 +1,11 @@
 # MEMORY
 
-- activation_commit: `42490a9d917ec7e30d2703f0695aa6c225f49a5b` — clean Rust Lispish/deployment activation.
-- latest_completed_leaf: `BACKEND-INTEGRATION-GUIDES.2.2 - deliver Rust Lispish file integration and deployment`; clean-source preparation, file consumer and deployment verified.
-- active_work_unit: `BACKEND-INTEGRATION-GUIDES.1.1` — pending activation after the requested Rust checkpoint push.
-- next_action: Push the completed verified Rust checkpoint from the clean tree and notify its commit, as requested. Then activate BACKEND-INTEGRATION-GUIDES.1.1 for Perl native setup, complete the other backend guides and final .7, and resume CONFORMANCE-SOURCE-READING.1.35. Normal RGX/PGEN builds are authorized; strict Lispish repair remains pending under startup .83.
+- activation_commit: `ad290bdb427bc19a5af81de0f0b07e119c8999ff` — clean, pushed Rust checkpoint; Perl guide activation.
+- latest_completed_leaf: `BACKEND-INTEGRATION-GUIDES.1.1 - document and verify native Perl integration`; explicit Perl native setup and clean-source consumer verified.
+- active_work_unit: `BACKEND-INTEGRATION-GUIDES.1.2` — pending clean activation for Perl deployment/errors.
+- next_action: Activate BACKEND-INTEGRATION-GUIDES.1.2 from the clean committed tree for Perl deployment, runtime failures and diagnostic sinks. Complete the remaining backend guides through .7, then resume CONFORMANCE-SOURCE-READING.1.35. Rust ad290bdb4 is already pushed; normal RGX/PGEN builds are authorized and strict Lispish repair remains owned by startup .83.
   Named-argument direction PARSER-AUTHORING-APIS.4 is approved and parked; other authoring proposals and approved formats stay parked.
-- in_flight_uncommitted: none; this completed leaf lands the clean Rust checkpoint. Derive its committed identity and push state from Git.
+- in_flight_uncommitted: none; this leaf lands the verified Perl setup guide. Derive its committed identity from Git.
 - blockers: none for the authorized integration guide activity. Other-backend and final canonical proof remain required at their owning leaves; startup .83 owns strict Lispish parsing.
 - current_rust_warning_debt: Repeated carriers report 1,870 pgen plus 26 rgx-core output warnings; RUST-DEPENDENCY-WARNING-ZERO.1-.7 own causal repair/pins/enforcement without suppression after Lua intake.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
@@ -42,7 +42,7 @@
 - current_map_leaves_scope_resolution: option A preserves pure functions. Helper-mediated rejection uses inline
   explicit-target `set(tree, ...)`; post-commit receiver-write proof uses caller-scoped `.with()`. No implicit
   caller capture or arbitrary user-defined bang method is admitted.
-- current_mutation_public_no_drift: `.19.9` closes public no-drift; current inventory is 64 Markdown files / 14 governed documents / eleven
+- current_mutation_public_no_drift: `.19.9` closes public no-drift; current inventory is 65 Markdown files / 14 governed documents / eleven
   authority-bound example classes / ten stale-current denials / 50 isolated public-checker mutations. Capability
   governance independently pins the owner and exact-one CI registration through four mutations.
 - current_core_state: typed source is 14/0/231; recognition 138/250/58; progressive 9/9/116 plus public

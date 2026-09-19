@@ -10,7 +10,7 @@ answers:
   - "are backend READMEs checked for removed aggregate selector examples"
   - "does the aggregate selector source scanner inspect untracked files"
   - "why did the pre-staging aggregate selector scan miss a new test"
-date: 2026-09-13
+date: 2026-09-14
 status: current
 tags: [language, bindings, retirement, no-drift, perl, rust, dart, julia, lua]
 evidence: "FUTURE-PARITY-BACKLOG.12.1.8.6 adds tools/check_aggregate_selector_retirement.py. It requires Perl, Rust, Dart, Julia, and Lua focused suites to consume all six invalid_selector_cases and portable code/surface/identifier/replacement fields from linkedspec-uniform-binding-v1; requires each backend's compiled-state validation boundaries and eight retained constructor/literal classes; forbids known selector-only runtime symbols/patterns; and composes the executable-source scanner. On 2026-07-12 it reported five backends, six invalid selectors, eight retained classes, zero runtime compatibility, zero executable positives, and 19 classified rejection occurrences. Final admission .12.1.9 composes this under tools/check_public_aggregate_selector_surface.py and removes the capability future exclusion. Follow-up .12.1.10 removes 14 missed Rust/Dart/Julia/Lua README positives and expands public proof to 56 root/component/mdBook files, 31 classified references, and zero current examples."
@@ -49,7 +49,7 @@ every invocation and removes the probe in a `finally` block. Tests that need ret
 canonical neutral JSON invalid fixtures rather than embedding a second positive spelling.
 
 `tools/check_public_aggregate_selector_surface.py` also discovers every immediate component README and requires
-bare-binding anchors in the Rust, Dart, Julia, and Lua documents. Its exact 63-file inventory prevents a backend
+bare-binding anchors in the Rust, Dart, Julia, and Lua documents. Its exact 64-file inventory prevents a backend
 entry document from falling outside the public zero-current-example claim.
 
 The September13 integration .2.1 review adds the Rust integration page and updates
@@ -64,3 +64,13 @@ Related facts: [[spec-facing-aggregate-selector-retirement-inventory]],
 [[perl-aggregate-selector-compile-rejection]],
 [[rust-aggregate-selector-compile-rejection]], [[dart-aggregate-selector-compile-rejection]],
 [[julia-aggregate-selector-compile-rejection]], [[lua-aggregate-selector-compile-rejection]].
+
+## September 14 Perl integration-page review
+
+`BACKEND-INTEGRATION-GUIDES.1.1` adds only the new Perl integration
+chapter to public discovery. Preflight reproduces mutation expected64/observed65
+and selector expected63/observed64. The reviewed correction changes only each
+checker's expected file count and current census references. The selector's35
+classified references, zero current examples and11 contrast mutations remain;
+mutation's14 governed documents,11 example classes,10 denials and50 mutations
+remain. Earlier dated evidence is preserved. Reverify with the existing command.
