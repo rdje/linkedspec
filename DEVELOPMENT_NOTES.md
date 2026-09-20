@@ -10,6 +10,12 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-20 — BACKEND-INTEGRATION-GUIDES.8.1 - own ARCHOGEN and SEMULITH consumer reports
+
+Consumer report numbers collide across projects, so every reference is qualified as ARCHOGEN/LS-NNN or SEMULITH/LS-NNN. The ten reports describe seven actionable concerns plus withdrawn/no-action controls; documented extraction and type erasure remain compatibility requirements rather than newly discovered Rust engine defects. The LF patch is supplied evidence awaiting independent execution. Intake records exact source manifests and concrete fix owners, not closure by warning.
+
+Reproducers need isolated owned workspaces and explicit temporary storage before execution; broad source-copy defaults must not include the working repository or its caches. Existing PGEN edits remain unchanged. Complete-input proof must cover skipped interior text as well as a trailing cursor, and eADL domain validation remains consumer work. No new grammar/API contract is admitted by this documentation slice.
+
 ## 2026-09-20 — BACKEND-INTEGRATION-GUIDES.5.1 - document and verify native Lua integration
 
 Lua integration uses the generic managed wrapper, exact package.path/package.cpath and interpreter -E. The ordinary consumer loads PCRE2 and filesystem modules; the verifier additionally loads the MCP module to check all three builder outputs. The builder always recompiles when invoked; retained products avoid that invocation on ordinary runs. Separate PUC/LuaJIT directories match their installed headers and interpreter banners. The supporting user-function grammar is resolved from the Lua module source and compiled once per process, even for a grammar without user functions. A caller-local invalid supporting grammar cannot override it. Direct values use tagged arrays/harrays and explicit json.null for host nil; false remains false. Both working and clean-submodule consumers pass 13 checks per runtime while preserving all native hashes/mtimes. Read-only SDK/compiler/header/library inputs are necessary; project data remains application-owned on this volume. Five selected native loader tests avoid the known invalid-regex formatter path. The existing target and formatter repair leaves remain authoritative; no minimum-version or complete Lua gate claim is made.

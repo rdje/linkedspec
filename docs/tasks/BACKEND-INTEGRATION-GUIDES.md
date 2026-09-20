@@ -55,7 +55,7 @@ ARCHOGEN's use of Lispish through Rust. The requested scope is every backend.
 - ID: `BACKEND-INTEGRATION-GUIDES`
   Status: `active`
   Goal: Deliver tested native integration guidance for all five backends.
-  Children: `.0`, `.1`, `.2`, `.3`, `.4`, `.5`, `.6`, `.7`
+  Children: `.0`, `.1`, `.2`, `.3`, `.4`, `.5`, `.6`, `.7`, `.8`
   Acceptance: Every shared criterion has backend-specific evidence; navigation, examples and limits agree.
   Verification: `pending`
   Commit: `pending`
@@ -274,8 +274,58 @@ ARCHOGEN's use of Lispish through Rust. The requested scope is every backend.
 - ID: `BACKEND-INTEGRATION-GUIDES.7`
   Status: `pending`
   Goal: Independently verify and close the complete integration documentation delivery.
-  Dependencies: `.6`
+  Dependencies: `.6`, `.8.2`, `.8.3`, `.8.4`
   Acceptance: Replay documented setup/use/deployment/error paths from managed consumer workspaces, consume all job outcomes, render affected books, verify links and evidence limits, run required canonical CI, and close all verified parent nodes. Commit cleanly before the final push boundary; no pending backend may be counted complete.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `BACKEND-INTEGRATION-GUIDES.8`
+  Status: `active`
+  Goal: Incorporate the director-supplied ARCHOGEN and SEMULITH consumer reports without losing the ongoing integration delivery.
+  Children: `.8.1`, `.8.2`, `.8.3`, `.8.4`
+  Dependencies: Clean .5.1 checkpoint 7f2afcbf428a6a29b7c82d8c618e2312eaa16e6c.
+  Acceptance: Every report has a qualified disposition and an executable repair owner where action is required. Integration setup repairs precede final .7; grammar/runtime repairs keep their startup prerequisites and explicit implementation ownership.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `BACKEND-INTEGRATION-GUIDES.8.1`
+  Status: `done`
+  Activation commit: `7f2afcbf428a6a29b7c82d8c618e2312eaa16e6c`.
+  Verification tier: `focused`
+  Focused checks: Read every supplied report, setup/validation document, reproducer and fixture; verify report identity/state, same-volume input provenance and deterministic report manifests; reconcile existing Knowledge and task owners, preserve source and prior task/history evidence, render the book and run all doctrines plus memory/history checks.
+  Canonical trigger: None for this bounded documentation/intake leaf. No source, dependency, manifest, workflow, checker or public-language contract changes; all actual reproductions and fixes remain explicit subsequent leaves. Final integration .7 retains canonical proof.
+  Scope: Own the September20 director-supplied read-only inputs from ARCHOGEN docs/feedback/linkedspec and SEMULITH docs/upstream/linkedspec. Persist source-qualified report IDs, duplicate relationships, supplied observations versus local evidence, and concrete repair ownership. Keep both application repositories and all nested dependency edits unchanged. Give new setup defects bounded leaves before implementation and attach Lispish findings to startup .83.
+  Goal: Preserve and qualify all ten consumer reports and their repair routes.
+  Acceptance: Account for seven ARCHOGEN and three SEMULITH reports, including the withdrawn and no-action reports. Never label a supplied reproducer result as locally executed. Record blocked consumer requirements, source snapshots, verification limits and the next integration repair, while preserving the Lua deployment and conformance return points.
+  Verification: PASS complete read of seven ARCHOGEN and three SEMULITH reports, their setup/validation instructions, reproducers, fixtures and frozen evidence. Same-volume snapshots preserve 43 files/75512 bytes and29/26871 bytes with exact sorted per-file manifests; source-qualified state and duplicate mapping account for all ten reports. No supplied reproducer or patch was executed. The canonical Knowledge card records exact manifests, provenance and verification boundaries; focused book/public, source/task/history and normal doctrine checks govern landing. No source-reading credit, runtime repair, consumer application mutation or strict-parser admission is claimed.
+  Outcome: docs/knowledge/archogen-rust-lispish-integration.md is the canonical ten-report register. Integration .8.2/.8.3/.8.4 own concrete setup remedies; startup .83.1/.83.2/.83.3 own grammar contract, actual fixes and independent admission. Lua .5.2 and conformance .1.35 remain intact. The supplied LF patch and workspace/bootstrap symptoms require the subsequent local proof; withdrawn/no-action findings remain unchanged.
+  Candidate proof: PASS2836 prior files byte-exact and2801/2805 prior task nodes unchanged; only the integration root/.7 and startup .83/.83.1 acquire the declared ownership/dependencies, with five new .8 nodes. All archived/history bytes, runtime sources, dependency pins, existing PGEN edits and94 book limitation headings remain exact. Rendered reports/limits and local links pass; public mutation68/14/11/10/50 and selector67/35/0/5/11 stay green without checker edits. Memory60 passes; history pressure is150 lines/33127 bytes and118/33067. The known large book search-index warning remains startup .41.9; normal doctrines remain required.
+  Commit: `BACKEND-INTEGRATION-GUIDES.8.1 - own ARCHOGEN and SEMULITH consumer reports`
+
+- ID: `BACKEND-INTEGRATION-GUIDES.8.2`
+  Status: `pending`
+  Goal: Reproduce and repair Rust onboarding inside an enclosing Cargo workspace.
+  Dependencies: `.8.1` committed clean.
+  Scope: ARCHOGEN/LS-001 and SEMULITH/LS-003 item1; example manifest and PGEN preparation route, preserving the library's existing workspace boundary and all pre-existing nested edits.
+  Acceptance: Use isolated clean committed source under a real host workspace; prove the reported failure and a supported remedy for both affected manifests. Verify an existing multi-crate application path and standalone use. Record the verification tier before any manifest or infrastructure edit. Do not patch the director's dirty PGEN checkout or claim metadata-only success proves a consumer build; split any necessary dependency work before changing pins.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `BACKEND-INTEGRATION-GUIDES.8.3`
+  Status: `pending`
+  Goal: Make the documented PGEN preparation route stop on failed prerequisites and report generated products truthfully.
+  Dependencies: `.8.1` committed clean; coordinate `.8.2` without hiding the independent failure case.
+  Scope: ARCHOGEN/LS-004; inspect and reproduce the pinned bootstrap in isolated owned storage, then provide a verified fail-fast route or separately owned upstream repair.
+  Acceptance: A controlled prerequisite failure stops subsequent generation and cannot print a false seed-success claim; a successful preparation verifies the required files and permits the native consumer build. Preserve dependency source/pins and existing nested edits unless a separately activated dependency leaf owns a necessary change. Select canonical tier for workflow/infrastructure changes; a warning alone cannot close this repair.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `BACKEND-INTEGRATION-GUIDES.8.4`
+  Status: `pending`
+  Goal: Close first-consumer setup-ordering and checkout-cost gaps in the Rust guide.
+  Dependencies: `.8.1`, and the supported setup remedies from `.8.2` and `.8.3`.
+  Scope: ARCHOGEN/LS-005 and SEMULITH/LS-003 items2-3; forward prerequisite pointer after checkout, a prerequisite back-reference at file parsing, and clear targeted dependency initialization.
+  Acceptance: A reader entering either setup or file parsing reaches all required preparation before building. Explain optional recursive checkout cost with qualified evidence; do not turn a downstream disk measurement into a universal size guarantee. Verify the rendered navigation and final runnable sequence without duplicating the canonical setup instructions.
   Verification: `pending`
   Commit: `pending`
 
@@ -283,11 +333,11 @@ ARCHOGEN's use of Lispish through Rust. The requested scope is every backend.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `BACKEND-INTEGRATION-GUIDES.5.2` | `pending` | Lua native setup and approved history admission are verified; next deployment, typed errors and diagnostic sinks from the clean committed tree. Independent .7 retains final parent closure and canonical push. |
+| 1 | `BACKEND-INTEGRATION-GUIDES.8.2` | `pending` | After the .8.1 report-intake commit, reproduce and repair enclosing Cargo workspace onboarding. Bootstrap .8.3 and guidance .8.4 follow; Lua deployment .5.2, common navigation and independent .7 remain before conformance .1.35. |
 
 The director explicitly requests a temporary pivot at the next clean handoff.
 Conformance .1.34 is committed at 00f9783a1 and inventory .0 is complete.
-Rust .2.2 is committed and pushed atad290bdb427bc19a5af81de0f0b07e119c8999ff. Canonical CI PASS includes both CLI66/66 and Phase0 1032/1032 in1086s;25 optional extensions were skipped. Post-commit receipt promotion, empty brief, clean root status and remote main identity were verified. Perl .1.1 commits at5289471f9 and .1.2 verifies deployment/errors before Dart .3.1; final .7 retains independent parent closure. Ordinary guide/example work needs no further permission.
+Rust .2.2 is committed and pushed at ad290bdb427bc19a5af81de0f0b07e119c8999ff. Perl, Dart and Julia guide leaves are committed. Lua setup .5.1 commits at 7f2afcbf428a6a29b7c82d8c618e2312eaa16e6c after exact canonical CI, both CLI66/66 and Phase0 1032/1032 in1168s;25 optional extensions were skipped. Its post-commit pointer, promoted receipt, empty brief, clean root and unchanged PGEN edits are verified. The director's consumer reports now require bounded integration setup repairs before final .7. Ordinary guide/example work needs no further permission.
 
 Return point: `CONFORMANCE-SOURCE-READING.1.35`, whose unchanged Scope is
 `t/generated_source_contract.t` lines154-506; `t/inspect_spec_codegen.t` lines1-121;
@@ -474,6 +524,8 @@ No verification waiver is requested or applied. Lua .5.2 follows clean landing.
 
 ## Verification Log
 
+- `2026-09-20` .8.1: Read all ten source-qualified reports and supporting instructions/reproducers/fixtures/evidence. Byte-exact same-volume snapshots contain ARCHOGEN43 files/75512 bytes and SEMULITH29/26871, with manifest identities in the canonical Knowledge card. Five open ARCHOGEN reports, one withdrawn, one no-action and three draft SEMULITH reports are all accounted for. Runtime reproduction count is zero for this intake; supplied patch and build observations are not promoted into local proof. Setup repairs are .8.2-.8.4; grammar fixes retain startup .83 prerequisites and implementation/admission owners. Focused preservation, book/public checks, Knowledge, memory/history and all doctrines govern landing.
+
 - `2026-09-20` .5.1: PASS 13 setup checks per runtime in working and clean pinned 0b409e305 applications on macOS arm64, PUC Lua 5.5.1, LuaJIT 2.1.1788460057 and PCRE2 10.48. Exact interpreter/header identities, source/module paths, native trio loading, module-owned supporting grammar and its one-build cache are verified. Independent/repeated values, Unicode grammar paths, missing arguments/files, strict UTF-8, successful null/false and ambient-init exclusion pass. Six retained native products preserve hashes and modification times across fresh processes. Five selected existing native loader tests pass per runtime; excluded malformed-regex and unfiltered Lua gates are not run, and the declared PUC 5.4 target remains unverified. Clean source matches 2842 files / 58811026 bytes with public submodule URL, uninitialized nested dependencies, same-volume source/data and exact original PGEN edits. Artifact census retains 3260 candidates / 6165392650 bytes and deletes zero. New-page RED counts are mutation 67/68 and selector 66/67; only expected counts and current prose advance to 68 and 67. Book, source/task/history preservation, Knowledge and all doctrines govern landing; exact staged canonical CI is required. No runtime, dependency pin or reading-credit change; .5.2 and independent .7 remain open.
 
 - `2026-09-20` .4.2: PASS 24 deployment checks in both current and clean pinned 29bf3fdd1 applications on Julia 1.12.7/macOS arm64. Twelve source cases cover exact Unicode events, quiet defaults, typed exit/prior-output/stop behavior, runtime source identity, null success, four loader stages, usage and inherited trace separation. Git-archived source and verified package/registry copies prepare offline without copied compiled caches. Outside-cwd, option-like paths, controlled bad/missing packaged grammar, Unicode relocation and fresh-process reuse pass. The clean application manifest is copied byte-exactly; source, manifest and package hashes survive preparation/moving. Both word verifiers pass 11 groups; native loader 82 and diagnostic 82 assertions pass. Clean source matches 2838 files / 58774855 bytes; nested dependencies stay uninitialized, all project data remains on this volume and original PGEN edits remain exact. Public mutation 67/14/11/10/50 and selector 66/35/0/5/11 pass unchanged. Focused book, source/task/history preservation, Knowledge and all doctrines govern landing. No runtime/pin changes or reading credit; independent parent closeout and canonical push remain .7.
@@ -500,6 +552,8 @@ No verification waiver is requested or applied. Lua .5.2 follows clean landing.
 
 ## Commit Log
 
+- `.8.1`: `BACKEND-INTEGRATION-GUIDES.8.1 - own ARCHOGEN and SEMULITH consumer reports`; activation7f2afcbf4; next isolated Rust workspace repair .8.2.
+
 - `.5.1`: `BACKEND-INTEGRATION-GUIDES.5.1 - document and verify native Lua integration`; activation 0b409e305. Native setup and approved ADR0121 capacity proof verified; exact staged canonical receipt governs landing.
 
 - `.4.2`: `BACKEND-INTEGRATION-GUIDES.4.2 - verify Julia source deployment and diagnostics`; activation29bf3fdd1; next Lua .5.1 after clean focused handoff.
@@ -523,6 +577,8 @@ No verification waiver is requested or applied. Lua .5.2 follows clean landing.
 - Guide/example leaves: pending.
 
 ## Changelog
+
+- `2026-09-20` .8.1: Own the director-supplied ARCHOGEN and SEMULITH reports, preserve their distinct states and route concrete fixes without closing unverified scope.
 
 - `2026-09-20` .5.1: Verify Lua native setup and retained products on both installed runtimes; preserve target/formatter exclusions and independent .7 closeout.
 

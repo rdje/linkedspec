@@ -4640,6 +4640,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Dependencies: Startup .3/.4/.5 and a clean integration-documentation handoff; no implementation pivot during BACKEND-INTEGRATION-GUIDES.2.2.
   Evidence: Integration .2.2 runs34 native Rust cases and independently matches nine complete Perl values. Leading/trailing text and a second form are ignored, an unterminated quote can become an atom, empty square brackets disappear, and a semicolon comment without newline can become content. Get descriptors show seek/default-scan policy, and generated source proves first-child return and no-match null paths. Exact quoted-string codepoints are preserved; no Rust-specific escaping defect was found.
   Historical ownership: PHASE0-BACKHALF-TRIAGE.5.2 fixed the old corpus driver's non-progress loop and described deeper parser/grammar follow-ons without implementing them. This node gives the document/token contract follow-on explicit contract, implementation and verification owners. Its current evidence does not reverify or reopen the dated same-buffer never-undef claim.
+  September20 consumer intake: BACKEND-INTEGRATION-GUIDES.8.1 attaches ARCHOGEN/LS-002 complete-input/all-form requirements, ARCHOGEN/LS-003 and SEMULITH/LS-002 token-kind requirements, and SEMULITH/LS-001 reported multiline-string tree corruption with its unverified candidate patch. Exact source-qualified states, snapshots and local-versus-supplied evidence live in docs/knowledge/archogen-rust-lispish-integration.md. Contract .83.1 must resolve compatibility; .83.2 owns actual fixes and .83.3 their independent proof. No report is closed by a documentation warning or this intake, and startup prerequisites remain.
   Acceptance: Establish an explicit complete-document contract, implement the accepted strict path and independently prove it. Preserve existing historical behavior unless a reviewed migration deliberately changes it; a documentation warning alone cannot close this repair.
   Verification: `pending`
   Commit: `pending`
@@ -4649,6 +4650,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Goal: Define strict Lispish document consumption, token validity and compatibility boundaries.
   Dependencies: Parent .83 prerequisites.
   Acceptance: Specify one versus multiple top-level forms, leading/trailing text, empty input, missing/extra delimiters, unterminated quotes, bracket/brace forms, newline and EOF comments, and exact escape/token-kind semantics. Reconcile these with the current first-form extraction grammar and decide whether strict behavior is a separate/versioned grammar or a deliberate migration. Record the decision and independent expected values/errors before implementation.
+  Consumer acceptance: Include quoted LF versus tab/CR controls, multiline strings followed by sibling forms, parentheses within such strings, numeric-looking quoted versus bare atoms and the four-form eADL case. Specify how skipped leading/interstitial/trailing text is rejected rather than relying only on a final cursor. Preserve the withdrawn hex-underscore and documented adjacency controls; distinguish grammar validation from consumer domain validation.
   Verification: `pending`
   Commit: `pending`
 
@@ -4676,7 +4678,7 @@ startup implementation prerequisites and the rgx reading exclusion remain intact
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `BACKEND-INTEGRATION-GUIDES.1.1` | `pending` | Push the completed Rust file/deployment checkpoint, then Perl native setup and remaining backend guides through .7. Strict Lispish repair remains owned by .83. Normal RGX/PGEN builds are authorized. Resume conformance .1.35 afterward. |
+| 1 | `BACKEND-INTEGRATION-GUIDES.8.2` | `pending` | After the .8.1 consumer-report intake commits, repair Rust workspace onboarding and subsequent setup defects; then finish Lua deployment, common navigation and independent .7. Strict Lispish consumer requirements remain owned by .83 with startup prerequisites. Resume conformance .1.35 afterward. |
 
 ## Reading Ledger
 

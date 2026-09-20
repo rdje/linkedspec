@@ -1,12 +1,12 @@
 # MEMORY
 
-- activation_commit: `0b409e30531ca898e84245220cde26606f65b7b9` — clean Julia deployment checkpoint; Lua setup activation.
-- latest_completed_leaf: `BACKEND-INTEGRATION-GUIDES.5.1 - document and verify native Lua integration`; dual-runtime setup and approved six-control history admission verified.
-- active_work_unit: `BACKEND-INTEGRATION-GUIDES.5.2` — pending clean activation for Lua deployment and diagnostics.
-- next_action: Activate BACKEND-INTEGRATION-GUIDES.5.2 from the clean committed tree for Lua deployment, value conversion, structured errors and optional diagnostic sinks. Complete common navigation and independent .7, then resume CONFORMANCE-SOURCE-READING.1.35. Rust ad290bdb4 is already pushed; normal dependency builds remain authorized and strict Lispish repair remains startup .83.
+- activation_commit: `7f2afcbf428a6a29b7c82d8c618e2312eaa16e6c` — clean Lua setup checkpoint; consumer-report intake activation.
+- latest_completed_leaf: `BACKEND-INTEGRATION-GUIDES.8.1 - own ARCHOGEN and SEMULITH consumer reports`; ten reports qualified and repair-owned; no new runtime fix claimed.
+- active_work_unit: `BACKEND-INTEGRATION-GUIDES.8.2` — pending clean activation for Rust workspace onboarding repair.
+- next_action: Activate BACKEND-INTEGRATION-GUIDES.8.2 from the clean committed tree to reproduce and repair enclosing Cargo workspace onboarding; then .8.3 bootstrap failures and .8.4 prerequisite guidance. Finish Lua .5.2, common navigation and independent .7 before conformance .1.35. Strict Lispish reports remain startup .83; normal dependency builds remain authorized.
   Named-argument direction PARSER-AUTHORING-APIS.4 is approved and parked; other authoring proposals and approved formats stay parked.
-- in_flight_uncommitted: none; this leaf lands verified Lua setup, the guide and approved ADR0121 history capacity. Derive its committed identity from Git.
-- blockers: none for the authorized integration activity. Lua deployment, common navigation and final canonical .7 remain required; strict Lispish repair stays startup .83.
+- in_flight_uncommitted: none; this leaf lands the verified report inventory, explicit repair owners and current book limitations. Derive its commit identity from Git.
+- blockers: none for the integration intake. Workspace/bootstrap/guidance repairs, Lua deployment and final .7 remain open; strict Lispish implementation retains startup .83 prerequisites.
 - current_rust_warning_debt: Repeated carriers report 1,870 pgen plus 26 rgx-core output warnings; RUST-DEPENDENCY-WARNING-ZERO.1-.7 own causal repair/pins/enforcement without suppression after Lua intake.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
   active table; the task metadata doctrine inventories all consumers, permits arbitrary frontier-row rewrites,

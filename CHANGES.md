@@ -10,6 +10,12 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-20 — BACKEND-INTEGRATION-GUIDES.8.1 - own ARCHOGEN and SEMULITH consumer reports
+
+Record seven ARCHOGEN and three SEMULITH reports with source-qualified IDs, duplicate relationships and explicit repair leaves. Integration .8.2-.8.4 own workspace onboarding, bootstrap failures and prerequisite guidance; startup .83 owns complete-document, atom-kind and multiline-string work. Preserve the withdrawn and no-action reports. The Rust guide and book status qualify the newly reported limitations.
+
+Verification: read both complete report sets and retain same-volume byte-exact snapshots (43/75512 and29/26871 files/bytes). No supplied reproducer or candidate patch was executed, and no application, runtime, dependency or manifest changed. Focused source/task/history preservation, book/public checks, Knowledge and all doctrines govern landing. Next .8.2; Lua deployment and final independent delivery remain open.
+
 ## 2026-09-20 — BACKEND-INTEGRATION-GUIDES.5.1 - document and verify native Lua integration
 
 Add the Lua integration chapter and native consumer with explicit Lua/native paths, matching ABI preparation, application-owned storage and retained native products. The adapter compiles once for independent inputs and maps successful nil to JSON null. The verifier proves source/supporting-grammar identity, runtime/header agreement, Unicode paths, structured loader failures and fresh-process reuse. Update the two exact public-page counts and current census references; preserve all semantic classifiers.

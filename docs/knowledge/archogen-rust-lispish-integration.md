@@ -11,12 +11,70 @@ answers:
   - does Rust Lispish validate a whole input file
   - does Lispish decode quoted escape sequences
   - which task owns strict Lispish document parsing
-date: 2026-09-13
-status: Rust file consumer, clean pinned preparation and deployment verified; no ARCHOGEN application test
+  - which ARCHOGEN and SEMULITH reports are owned by LinkedSpec
+  - which task owns the Cargo workspace integration failure
+  - which task owns the PGEN bootstrap false success report
+  - has the reported Lispish multiline string patch been verified locally
+date: 2026-09-20
+status: Rust integration verified in the recorded scope; ten downstream reports received and repair-owned, not locally reproduced by the intake
 tags: [rust, lispish, embedding, dependencies, discussion]
-evidence: "CONFORMANCE-SOURCE-READING.1.34 director discussion; existing Rust native loading and Lispish walkthrough; root/RGX submodule declarations, Cargo manifests and RGX README build note. No project or dependency source changed."
+evidence: "September13 CONFORMANCE-SOURCE-READING.1.34 discussion and integration .2.2 native/clean-source proof; September20 BACKEND-INTEGRATION-GUIDES.8.1 complete read and byte-exact snapshots of seven ARCHOGEN and three SEMULITH reports. Intake changes documentation/ownership only; supplied reproducer and patch results are not local execution claims."
 reverify: "Run bash tools/run_cargo_local.sh test --offline --locked --manifest-path examples/integration/rust/Cargo.toml; build --bins with the same wrapper/manifest/options; run bash tools/run_python_project_data.sh examples/integration/rust/verify_lispish.py --binary rust/target/debug/lispish_file. Replay clean preparation from docs/linkedspec-book/src/public-api/integration-rust.md. Historical discussion/source pointers remain below; an actual ARCHOGEN integration test remains consumer work."
 ---
+
+## September 20 downstream report intake
+
+The director supplied two read-only input directories, both on the repository's
+filesystem volume: `../archogen/docs/feedback/linkedspec` and
+`../semulith/docs/upstream/linkedspec`. Their report bodies, setup/validation
+instructions, reproducers, inputs and frozen observations were read under
+`BACKEND-INTEGRATION-GUIDES.8.1`. Neither application repository was modified.
+Report IDs are qualified by their source because the two projects reuse `LS-001`
+and other numbers for different concerns.
+
+| Report | Supplied state and concern | LinkedSpec repair owner |
+| --- | --- | --- |
+| ARCHOGEN/LS-001 | Open/blocker: the example and PGEN bootstrap manifests encounter an enclosing Cargo workspace. | Integration `.8.2`: isolated reproduction, supported setup remedy and actual consumer build. |
+| ARCHOGEN/LS-002 | Open/blocker for eADL: first-form extraction ignores additional/trailing input; requests complete validation and all forms. | Startup `.83.1` contract, `.83.2` implementation, `.83.3` independent admission. |
+| ARCHOGEN/LS-003 | Open/major for eADL: symbols, quoted strings and numbers lose their token-kind distinction. | Startup `.83.1-.83.3`; same requirement as SEMULITH/LS-002. |
+| ARCHOGEN/LS-004 | Open/moderate: failed bootstrap prerequisites are followed by a false seed-success message. | Integration `.8.3`: independently reproduce failure, stop promptly and verify products before success. |
+| ARCHOGEN/LS-005 | Open/minor: checkout instructions need an explicit forward pointer to required preparation. | Integration `.8.4`, coordinated with `.8.2-.8.3`. |
+| ARCHOGEN/LS-006 | Withdrawn by reporter: the hex underscore remains intact. | Intake retains the correction; no defect repair claimed or requested. |
+| ARCHOGEN/LS-007 | No-action: adjacent fragments join as documented. | Intake retains the measured compatibility case; no behavior change requested. |
+| SEMULITH/LS-001 | Draft/high, blocks SOT-FORMAT.9: LF inside a quoted string reportedly becomes syntax and changes the tree. | Startup `.83.1` newline/compatibility decision, `.83.2` concrete token repair, `.83.3` regression admission. |
+| SEMULITH/LS-002 | Draft/medium: documented atom-kind erasure limits source-preserving consumers; explicitly a design request. | Startup `.83.1-.83.3`; no silent change to historical Lispish requested. |
+| SEMULITH/LS-003 | Draft/low: enclosing workspace, file-section prerequisite back-reference, optional recursive checkout cost. | Integration `.8.2` for item1; `.8.4` for items2-3. |
+
+These are **supplied observations**, not ten newly reproduced defects. Both
+projects name LinkedSpec `ad290bdb427bc19a5af81de0f0b07e119c8999ff`, RGX
+`8763a0e6bea97879f027237439d57725f83ead23` and PGEN
+`db6f8c6836fefa5a57b1337d3ffbf6f15774089f` on Rust 1.95.0/macOS arm64.
+SEMULITH supplies a `(?s)` quote-pattern patch and reports four failures before
+and eight passing cases after it. LinkedSpec has not executed that patch during
+this intake. Its fixtures distinguish LF from space, parentheses, tab and CR;
+the single-quote change and malformed-input effects still need independent proof.
+SEMULITH's 1.7 GB / 30-submodule recursive-checkout measurement is a dated
+downstream observation, not a universal checkout-size guarantee.
+
+The existing September13 local evidence below already establishes first-form
+extraction and lost token kinds. New consumer requirements strengthen the repair
+acceptance; they do not turn historical extraction into a strict parser. A final
+cursor alone cannot establish that leading or interstitial text was validated.
+Likewise, failure to recover original token kinds is narrower than a blanket
+claim that no application value can be serialized. No generic parser obligation
+to enforce eADL domain rules such as positive periods is inferred from its probes.
+
+The input snapshots contain ARCHOGEN **43 files / 75512 bytes**, manifest SHA256
+`7d791417288694ec44c969e7bd683dbbd71f0eaac6b1740496a70dba7b719df5`, and
+SEMULITH **29 files / 26871 bytes**, manifest SHA256
+`a77e92fedc744643db03edea346d3619c60c1ac3cb20dc97ab444f7cd82ed3af`.
+Each digest hashes sorted UTF-8 lines of `sha256(file bytes)`, two spaces,
+the path relative to that report directory, and LF. Same-volume byte-exact
+copies and per-file manifests are retained as reproducible runtime evidence in
+`.linkedspec-data/scratch/backend-integration81/`; the task ownership and qualified
+conclusions are durable here and in the task trees. Upstream reproducers were
+read, not executed: their default work directories/copy operations and temporary
+file allocation must be routed into isolated owned storage before replay.
 
 ## September 13 native Lispish characterization
 

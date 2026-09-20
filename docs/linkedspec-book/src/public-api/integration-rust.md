@@ -308,6 +308,18 @@ requiring strict document validation or multiple top-level forms need an explici
 grammar/contract for those requirements. That work is tracked by
 `SESSION-STARTUP-READING.83.1-.83.3`; it is not implemented by this example.
 
+Consumer reports received on September 20 add concrete cases to that work:
+ARCHOGEN requires every top-level form and retained atom kinds; SEMULITH reports
+that a literal LF inside a double-quoted string can change the returned tree,
+including following sibling forms. SEMULITH supplied a candidate pattern change,
+but its result has not yet been independently verified by LinkedSpec. Treat
+multiline quoted strings as an unresolved limitation of this integration path.
+Both consumers also reported setup difficulties inside an enclosing Cargo
+workspace. Those onboarding and bootstrap-reporting repairs are tracked in
+`BACKEND-INTEGRATION-GUIDES.8.2-.8.4`; the earlier clean-source checks below did
+not cover an enclosing workspace. These reports do not establish new guarantees
+for strict parsing, token recovery or workspace onboarding.
+
 ### Handle failures and diagnostics
 
 The executable exits 1 on its first error. Grammar-pipeline errors are JSON on

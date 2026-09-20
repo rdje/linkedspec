@@ -547,6 +547,12 @@ runtime; five selected native loader tests pass per runtime. Repeated calls reta
 native hashes and modification times. The measured PUC 5.5 route does not establish
 the declared 5.4 target or malformed-regex error handling. Lua deployment, common
 navigation and independent final verification remain open.
+ARCHOGEN and SEMULITH supplied ten consumer reports on September20. Their Rust
+workspace/setup reports have integration repair owners `.8.2-.8.4`; complete-input,
+token-kind and reported multiline-string problems attach to startup `.83.1-.83.3`.
+The [Rust guide](../public-api/integration-rust.md) states the current limits.
+This intake does not independently reproduce their proposed fixes, close the
+grammar repairs or change the withdrawn/no-action status of two ARCHOGEN reports.
 Existing Dart component formatting and SDK adapter analysis failures remain
 separately owned; consumer checks do not close them.
 Conformance .1.35 remains the return point after the complete guide activity. Existing runtime repairs and
