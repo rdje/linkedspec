@@ -10,6 +10,12 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-20 — BACKEND-INTEGRATION-GUIDES.4.2 - verify Julia source deployment and diagnostics
+
+Extend the Julia integration guide and maintained consumer with optional Unicode diagnostic events, typed exits/errors and an application-rooted source launcher. Document Git archive assembly, retained package sources, offline preparation and relocation. The adapter preserves earlier output and stops on the first failure. Runtime/compiler code, package manifests, pins and pre-existing PGEN edits remain unchanged.
+
+Verification: both working and clean 29bf3fdd1 applications pass 24 deployment checks and11 setup/value groups; native loader 82 and diagnostic 82 assertions pass. Public counts 67/66 stay exact. Source/package/manifest hashes survive Unicode relocation; clean source is 2838 files / 58774855 bytes. Focused book, preservation, history and doctrine checks govern this commit. Lua .5.1 is next; independent .7 retains final closeout and canonical push.
+
 ## 2026-09-20 — BACKEND-INTEGRATION-GUIDES.4.1 - document and verify native Julia integration
 
 Rust Lispish integration .2.2 is pushed at ad290bdb4; Perl and Dart integration leaves and Julia setup are verified. Julia .4.1 adds an application-owned relative path project/manifest, same-volume depot and native word consumer. Both current and clean pinned-source applications pass 11 setup/value groups; 82 native loader assertions pass. The application locks its own five registry packages, retains the full checkout for the supporting grammar and reuses its prepared depot. Julia deployment/errors .4.2 is next; remaining guides and independent .7 precede conformance .1.35. Reading remains 34/143 and 84 complete files; original nested edits and strict Lispish startup .83 ownership remain.

@@ -533,11 +533,13 @@ and error handling. Source and AOT deployment pass 36 checks in both current and
 clean pinned-source applications; nine package/value checks and 23 native API
 tests pass. The six-file native bundle runs after a Unicode-path move, outside
 its directory and without a Dart command on PATH. No RGX/PGEN setup is required.
-The [Julia integration guide](../public-api/integration-julia.md) now supplies
-application project activation, relative package/manifest wiring, application-owned
-storage and a native word consumer. Both current and clean pinned-source setup
-pass 11 verification groups; 82 native loader assertions pass. The full checkout
-supplies the supporting grammar from the package source. Julia deployment/errors,
+The [Julia integration guide](../public-api/integration-julia.md) supplies native
+package setup, application-owned storage, diagnostic events and typed failures.
+Both current and clean pinned-source applications pass 11 setup/value groups and
+24 deployment checks; 164 native loader/diagnostic assertions pass. The source
+bundle prepares offline from retained package sources, preserves its manifest
+and runs after moving to a Unicode path, outside its own working directory.
+An installed Julia runtime and writable application data remain required.
 Lua, common navigation and independent final verification remain open.
 Existing Dart component formatting and SDK adapter analysis failures remain
 separately owned; consumer checks do not close them.

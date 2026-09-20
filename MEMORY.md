@@ -1,11 +1,11 @@
 # MEMORY
 
-- activation_commit: `49758cbc97745dabd1baf701686f843858cf0b94` — clean Dart deployment checkpoint; Julia setup activation.
-- latest_completed_leaf: `BACKEND-INTEGRATION-GUIDES.4.1 - document and verify native Julia integration`; native package setup and clean-source application proof verified.
-- active_work_unit: `BACKEND-INTEGRATION-GUIDES.4.2` — pending clean activation for Julia deployment/runtime diagnostics.
-- next_action: Activate BACKEND-INTEGRATION-GUIDES.4.2 from the clean committed tree for Julia deployment, cache expectations and runtime diagnostics. Complete Julia, Lua, common navigation and independent .7, then resume CONFORMANCE-SOURCE-READING.1.35. Rust ad290bdb4 is already pushed; normal dependency builds remain authorized and strict Lispish repair remains startup .83.
+- activation_commit: `29bf3fdd12c1f12b0fc414258229c78df1e4d5bc` — clean Julia setup checkpoint; deployment activation.
+- latest_completed_leaf: `BACKEND-INTEGRATION-GUIDES.4.2 - verify Julia source deployment and diagnostics`; source deployment, typed diagnostics and clean-source application proof verified.
+- active_work_unit: `BACKEND-INTEGRATION-GUIDES.5.1` — pending clean activation for Lua ABI-specific native setup.
+- next_action: Activate BACKEND-INTEGRATION-GUIDES.5.1 from the clean committed tree for Lua ABI-specific native setup and integration. Complete Lua, common navigation and independent .7, then resume CONFORMANCE-SOURCE-READING.1.35. Rust ad290bdb4 is already pushed; normal dependency builds remain authorized and strict Lispish repair remains startup .83.
   Named-argument direction PARSER-AUTHORING-APIS.4 is approved and parked; other authoring proposals and approved formats stay parked.
-- in_flight_uncommitted: none; this leaf lands verified Julia setup. Derive its committed identity from Git.
+- in_flight_uncommitted: none; this leaf lands verified Julia deployment and diagnostics. Derive its committed identity from Git.
 - blockers: none for the authorized integration guide activity. Other-backend and final canonical proof remain required at their owning leaves; startup .83 owns strict Lispish parsing.
 - current_rust_warning_debt: Repeated carriers report 1,870 pgen plus 26 rgx-core output warnings; RUST-DEPENDENCY-WARNING-ZERO.1-.7 own causal repair/pins/enforcement without suppression after Lua intake.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the

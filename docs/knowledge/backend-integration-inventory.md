@@ -18,8 +18,9 @@ answers:
   - how does a Julia application activate a relative LinkedSpec path package
   - does a Julia consumer inherit the library manifest or need its own package lock
   - what Julia package data must an offline integration retain
+  - how does a Julia application deploy and relocate offline
 date: 2026-09-20
-status: Rust complete, Perl and Dart leaves verified, Julia setup verified; deployment, Lua and independent closeout pending
+status: Rust complete, Perl/Dart/Julia leaves verified; Lua and independent closeout pending
 tags: [integration, documentation, perl, rust, dart, julia, lua]
 evidence: "BACKEND-INTEGRATION-GUIDES.0, activation 00f9783a1e4b625bc251a3e260ef1eef60c35888. Canonical Knowledge, ADR0040, companion tree, manifests, six complete setup scripts and native loader/result seams inspected. Managed version commands and read-only pkg-config identities consumed with exit0; no compiler, dependency preparation or consumer execution ran."
 reverify: "Inspect the exact sources in the matrix below. Version-only commands: bash tools/run_cargo_local.sh --version; bash tools/run_dart_project_data.sh --version; bash tools/run_julia_project_data.sh --project=julia --version; bash tools/project_data_run.sh perl -e 'printf qq{Perl %vd\\n}, $^V'; bash tools/project_data_run.sh lua -v; bash tools/project_data_run.sh luajit -v; bash tools/project_data_run.sh pkg-config --modversion lua luajit libpcre2-8. These commands establish installed identity, not consumer support or a passing backend suite."
@@ -88,7 +89,7 @@ same directory. The Rust page and native word consumer are delivered by .2.1;
 preparation and moved/outside-cwd deployment. See [[archogen-rust-lispish-integration]]
 for measured scope and the still-open strict document/token repair under startup
 .83. Perl setup, deployment and runtime diagnostics are verified under .1.1-.1.2;
-independent parent closeout remains .7. Dart setup and deployment/errors are verified by .3.1-.3.2. Julia setup is verified by .4.1; its deployment/errors remain .4.2. The common
+independent parent closeout remains .7. Dart setup and deployment/errors are verified by .3.1-.3.2. Julia setup and deployment/errors are verified by .4.1-.4.2. The common
 and Lua pages remain planned until their owning leaves land.
 Add navigation through SUMMARY.md and the existing backend landing pages.
 
@@ -401,3 +402,27 @@ independent-input calls take12.39s and12.61s, with fresh-process repeat calls12.
 and11.88s respectively on this host. These are observations, not performance
 contracts. All2832 pinned source files/58732023 bytes match committed blobs; nested
 RGX/PGEN is uninitialized and the original PGEN diff remains unchanged.
+
+## Julia source deployment — September20, integration .4.2
+
+The maintained adapter now accepts --diagnostics and --, passing a typed sink to
+runtime_execute and projecting RuntimeExitNow separately from runtime errors.
+The application launcher fixes its project and owned depot from its own location;
+relative grammar paths retain application-root meaning. Missing packaged function
+grammar fails explicitly before native ancestor lookup. Exact event/typed-error
+semantics remain [[julia-diagnostic-output-helpers]].
+
+Both current and clean 29bf3fdd1 applications pass 24 deployment checks,11 setup/value
+groups and 164 native loader/diagnostic assertions. Git archive packages committed
+source without nested dependency contents. The separate application's manifest is
+copied byte-exactly; the in-repository example lets Pkg generate the bundle-relative
+local source entry while preserving all five registry versions and content hashes.
+Only owned package sources and registries are copied; fresh offline preparation
+creates compiled caches. Source, manifest and package hashes survive moving to a
+Unicode path and outside-cwd calls. The deployed source/data remain writable.
+
+Replay `bash tools/run_python_project_data.sh examples/integration/julia/verify_deployment.py`.
+Use --package, --library-root, --grammar and --fixtures for a prepared separate app;
+--bash selects the deployment shell. Both Bash 5.3.15 and system Bash 3.2.57 pass on
+Julia 1.12.7/macOS arm64. Clean source is 2838 files / 58774855 bytes. Runtime source,
+pins and original PGEN changes remain exact; final parent closeout remains .7.

@@ -218,12 +218,17 @@ ARCHOGEN's use of Lispish through Rust. The requested scope is every backend.
   Commit: `BACKEND-INTEGRATION-GUIDES.4.1 - document and verify native Julia integration`
 
 - ID: `BACKEND-INTEGRATION-GUIDES.4.2`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `29bf3fdd12c1f12b0fc414258229c78df1e4d5bc`.
+  Verification tier: `focused`
+  Focused checks: Existing Julia setup/value proof; optional diagnostic events and typed runtime failures; packaged, relocated and outside-cwd source application with retained package sources and explicit application storage; native loader/diagnostic/trace tests, public inventories, book, source/task/history preservation and all doctrines.
+  Canonical trigger: Ordinary extension of the existing consumer and guide using admitted APIs, without runtime, dependency, public-inventory or shared-wrapper changes. Independent parent closeout and the final push remain .7 canonical boundaries; escalate if implementation requires a governed infrastructure change.
+  Scope: Complete Julia source deployment, application-owned cache expectations and error/diagnostic examples. Preserve runtime/compiler sources, dependency manifests and pins, previous reading credit and pre-existing PGEN edits. Retain package sources and caches; no Julia standalone executable or unmeasured platform claim.
   Goal: Verify Julia deployment, compilation/cache expectations and typed failure handling.
   Dependencies: `.4.1`
   Acceptance: Relocated/outside-cwd execution finds its grammar and required libraries; errors and diagnostics match the guide. Distinguish initial package preparation, Julia compilation and ordinary parser execution using measured repeat-run evidence.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: PASS 24 deployment checks in both current and clean pinned 29bf3fdd1 applications on Julia 1.12.7/macOS arm64. Twelve source cases cover exact Unicode events, quiet defaults, typed exit/prior-output/stop behavior, runtime source identity, null success, four loader stages, usage and inherited trace separation. Git-archived source and verified package/registry copies prepare offline without copied compiled caches. Outside-cwd, option-like paths, controlled bad/missing packaged grammar, Unicode relocation and fresh-process reuse pass. The clean application manifest is copied byte-exactly; source, manifest and package hashes survive preparation/moving. Both word verifiers pass 11 groups; native loader 82 and diagnostic 82 assertions pass. Clean source matches 2838 files / 58774855 bytes; nested dependencies stay uninitialized, all project data remains on this volume and original PGEN edits remain exact. Public mutation 67/14/11/10/50 and selector 66/35/0/5/11 pass unchanged. Focused book, source/task/history preservation, Knowledge and all doctrines govern landing. No runtime/pin changes or reading credit; independent parent closeout and canonical push remain .7.
+  Commit: `BACKEND-INTEGRATION-GUIDES.4.2 - verify Julia source deployment and diagnostics`
 
 - ID: `BACKEND-INTEGRATION-GUIDES.5`
   Status: `pending`
@@ -269,7 +274,7 @@ ARCHOGEN's use of Lispish through Rust. The requested scope is every backend.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `BACKEND-INTEGRATION-GUIDES.4.2` | `pending` | Julia native setup is verified; next deployment/runtime diagnostics from the clean committed tree. Rust ad290bdb4 is pushed. Independent .7 retains parent closure before conformance .1.35. |
+| 1 | `BACKEND-INTEGRATION-GUIDES.5.1` | `pending` | Julia setup and deployment leaves are verified; next Lua ABI-specific native setup from the clean committed tree. Independent .7 retains parent closure before conformance .1.35. |
 
 The director explicitly requests a temporary pivot at the next clean handoff.
 Conformance .1.34 is committed at 00f9783a1 and inventory .0 is complete.
@@ -361,7 +366,18 @@ not declared complete by this scoped documentation authorization.
 - [x] **NO REGRESSION** — Eighty-two native loader assertions and the14/9/4 contract pass. Inventory changes are count-only; source, pins, existing task nodes, book limitations and immutable history are preserved. Exact staged canonical CI governs this public-page/manifest landing.
 - [x] **LOCKSTEP** — Guide, runnable includes, Knowledge, roadmap, task and bounded history agree. Julia deployment/errors .4.2 follows clean commit; independent .7 retains parent closeout and canonical push before conformance .1.35.
 
+## Acceptance Checklist — .4.2
+
+- [x] **REPRODUCE / ISSUE** — The previous adapter rejects --diagnostics as a missing grammar; there is no application deployment launcher. Its native library already exposes the required typed events and exits.
+- [x] **ROOT CAUSE (WHY + WHERE)** — The adapter does not supply runtime_execute's diagnostic_output_sink or classify RuntimeExitNow. Julia package-source grammar discovery and relative application manifests must remain valid in a deployed source tree.
+- [x] **FIX** — Extend only the consumer, add diagnostic/exit fixtures and an application-rooted launcher, and document pinned Git archive assembly with retained package sources and explicit offline preparation.
+- [x] **ADDRESSED (verified)** — Both applications pass 24 deployment checks and11 setup/value groups. Bad packaged assets prove selection; missing assets fail before ancestor fallback. Exact source, manifest and package hashes survive Unicode relocation and repeated outside-cwd calls.
+- [x] **NO REGRESSION** — Native loader 82 plus diagnostic 82 assertions pass. Public inventories remain67/66 with unchanged semantic checkers; runtime source, pins, prior tasks, history and book limitations are preserved.
+- [x] **LOCKSTEP** — Runnable includes, guide, Knowledge, roadmap and task records agree. Focused proof governs this leaf; Lua .5.1 follows clean commit and independent .7 retains final parent closeout/canonical push.
+
 ## Verification Log
+
+- `2026-09-20` .4.2: PASS 24 deployment checks in both current and clean pinned 29bf3fdd1 applications on Julia 1.12.7/macOS arm64. Twelve source cases cover exact Unicode events, quiet defaults, typed exit/prior-output/stop behavior, runtime source identity, null success, four loader stages, usage and inherited trace separation. Git-archived source and verified package/registry copies prepare offline without copied compiled caches. Outside-cwd, option-like paths, controlled bad/missing packaged grammar, Unicode relocation and fresh-process reuse pass. The clean application manifest is copied byte-exactly; source, manifest and package hashes survive preparation/moving. Both word verifiers pass 11 groups; native loader 82 and diagnostic 82 assertions pass. Clean source matches 2838 files / 58774855 bytes; nested dependencies stay uninitialized, all project data remains on this volume and original PGEN edits remain exact. Public mutation 67/14/11/10/50 and selector 66/35/0/5/11 pass unchanged. Focused book, source/task/history preservation, Knowledge and all doctrines govern landing. No runtime/pin changes or reading credit; independent parent closeout and canonical push remain .7.
 
 - `2026-09-20` .4.1: PASS 11 setup/value groups against both current and clean pinned 49758cbc9 source on Julia1.12.7/macOS arm64: explicit application project, relative manifest path, package/module provenance, source-first supporting grammar with controlled bad cwd asset, independent/repeated values, Unicode/relative paths, strict UTF-8, missing arguments/files and successful null. Native loader tests pass82 assertions (34/24/10/6/8), and the shared contract remains14/9/4. Initial online preparation writes only the application depot; subsequent offline preparation and fresh-process parsing pass. Clean preparation copies/verifies148 package-source files/734878 bytes and2 registry files/11419507 bytes from the owned depot without copying compiled caches. The app-generated manifest selects JSON3 1.14.3, Parsers2.8.8, PrecompileTools1.3.4, Preferences1.6.0 and StructTypes1.11.0; the backend manifest and source remain unchanged. Clean submodule source matches2832 files/58732023 bytes, retains the public origin and leaves nested dependencies uninitialized. Source/data stay on this volume and the original PGEN diff remains exact. Public RED expected66/observed67 and65/66 becomes GREEN mutation67/14/11/10/50 and selector66/35/0/5/11 by count-only updates; classifier/frozen authorities stay unchanged. Book, source/task/history preservation, Knowledge and all doctrines govern this leaf; exact staged canonical CI is required for landing. No runtime/pin changes, minimum-version/platform expansion or reading credit; .4.2 retains deployment/runtime diagnostics and .7 retains independent parent closeout and canonical push.
 
@@ -385,6 +401,8 @@ not declared complete by this scoped documentation authorization.
 
 ## Commit Log
 
+- `.4.2`: `BACKEND-INTEGRATION-GUIDES.4.2 - verify Julia source deployment and diagnostics`; activation29bf3fdd1; next Lua .5.1 after clean focused handoff.
+
 - `.4.1`: `BACKEND-INTEGRATION-GUIDES.4.1 - document and verify native Julia integration`; activation49758cbc9; next Julia .4.2 after clean canonical handoff.
 
 - `.3.2`: `BACKEND-INTEGRATION-GUIDES.3.2 - verify Dart native deployment and diagnostics`; activation 0826ca2d4; next Julia .4.1 after clean handoff.
@@ -404,6 +422,8 @@ not declared complete by this scoped documentation authorization.
 - Guide/example leaves: pending.
 
 ## Changelog
+
+- `2026-09-20` .4.2: Verify Julia source deployment, optional diagnostic events and typed failures; retain independent parent closeout at .7.
 
 - `2026-09-20` .4.1: Verify native Julia application setup, local package/depot ownership and exact source/grammar provenance; retain deployment and runtime diagnostics for .4.2.
 

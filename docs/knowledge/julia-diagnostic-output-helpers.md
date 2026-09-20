@@ -15,7 +15,8 @@ answers:
   - why did Julia ds_vhistory once return proj foo
   - what did JULIA-BACKEND-PARITY.6.2.4.2.2 prove
   - how do generated Julia parsers expose diagnostic output
-date: 2026-07-16
+  - how does the Julia integration adapter report typed diagnostic events and exits
+date: 2026-09-20
 status: current
 tags: [Julia, runtime, helpers, diagnostic-output, events, sink, Unicode, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.5.1.5 adds RuntimeDiagnosticOutputEvent/Sink and RuntimeExitNow to native parse/execute and traced aliases. FUTURE-PARITY-BACKLOG.5.1.7 threads the optional sink through generated helpers and emitted direct/traced entrypoints. diagnostic_output_contract_test.jl consumes native and generated linkedspec-diagnostic-output-v1 scenarios and proves exact events, values, trace separation, caller-object identity, and typed exit."
@@ -73,3 +74,16 @@ controls use an actual codeblock_literal, retain state=before and one empty prin
 event, passing12 assertions with eager comparisons. Runtime behavior is correct
 for those controls; .2.25 owns the permanent fixture correction and counterpart
 audit. Exact proof: [[julia-contract-consumer-reading]].
+
+## September20 — application adapter
+
+Integration .4.2 demonstrates the admitted API in
+examples/integration/julia/bin/parse_words.jl. Optional --diagnostics passes a sink
+for each runtime_execute call, serializing event fields to stderr while stdout
+holds only direct values. RuntimeExitNow retains its grammar status in a separate
+record; the application chooses process exit 1 and stops the input loop. Prior
+values/events remain delivered. RuntimeInterpreterException keeps to_json fields,
+and native trace remains separate. Working and clean-source consumers verify
+exact Unicode events, typed exit/prior-output behavior and runtime source identity.
+The existing 82-assertion diagnostic suite, including caller sink identity and
+trace separation, passes unchanged. No runtime API or exception semantics change.

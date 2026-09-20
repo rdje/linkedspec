@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+APP_ROOT=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd -P)
+LINKEDSPEC_ROOT="$APP_ROOT/vendor/linkedspec"
+
+fail() {
+  printf '{"type":"deployment_error","detail":"%s"}\n' "$1" >&2
+  exit 1
+}
+
+[[ -f "$APP_ROOT/Project.toml" && -f "$APP_ROOT/Manifest.toml" ]] ||
+  fail 'Prepare the application Project.toml and Manifest.toml first'
+[[ -f "$APP_ROOT/bin/parse_words.jl" ]] || fail 'Missing bin/parse_words.jl'
+[[ -f "$LINKEDSPEC_ROOT/specs/user_function_definition.spec" ]] ||
+  fail 'Missing packaged specs/user_function_definition.spec'
+[[ -f "$LINKEDSPEC_ROOT/tools/run_julia_project_data.sh" ]] ||
+  fail 'Missing LinkedSpec managed Julia wrapper'
+command -v "${LINKEDSPEC_JULIA_CMD:-julia}" >/dev/null 2>&1 ||
+  fail 'Julia is required on PATH or through LINKEDSPEC_JULIA_CMD'
+
+export LINKEDSPEC_PROJECT_DATA_ROOT="$APP_ROOT/.app-data/linkedspec"
+export LINKEDSPEC_CACHE_ROOT="$LINKEDSPEC_PROJECT_DATA_ROOT/cache"
+export LINKEDSPEC_SCRATCH_ROOT="$LINKEDSPEC_PROJECT_DATA_ROOT/scratch"
+export JULIA_DEPOT_PATH="$LINKEDSPEC_CACHE_ROOT/julia-depot:"
+export LINKEDSPEC_JULIA_DEPOT_PATH="$JULIA_DEPOT_PATH"
+export JULIA_LOAD_PATH='@:@stdlib'
+export JULIA_PKG_OFFLINE=true
+export TMPDIR="$LINKEDSPEC_SCRATCH_ROOT/tmp"
+export TMP="$TMPDIR"
+export TEMP="$TMPDIR"
+
+# The Julia consumer resolves relative grammar paths against APP_ROOT.
+exec bash "$LINKEDSPEC_ROOT/tools/run_julia_project_data.sh" \
+  --project="$APP_ROOT" "$APP_ROOT/bin/parse_words.jl" "$@"
