@@ -319,13 +319,20 @@ ARCHOGEN's use of Lispish through Rust. The requested scope is every backend.
   Commit: `BACKEND-INTEGRATION-GUIDES.8.2 - repair Rust consumer workspace boundaries`
 
 - ID: `BACKEND-INTEGRATION-GUIDES.8.3`
-  Status: `pending`
-  Goal: Make the documented PGEN preparation route stop on failed prerequisites and report generated products truthfully.
-  Dependencies: `.8.1` committed clean; coordinate `.8.2` without hiding the independent failure case.
-  Scope: ARCHOGEN/LS-004; inspect and reproduce the pinned bootstrap in isolated owned storage, then provide a verified fail-fast route or separately owned upstream repair.
-  Acceptance: A controlled prerequisite failure stops subsequent generation and cannot print a false seed-success claim; a successful preparation verifies the required files and permits the native consumer build. Preserve dependency source/pins and existing nested edits unless a separately activated dependency leaf owns a necessary change. Select canonical tier for workflow/infrastructure changes; a warning alone cannot close this repair.
-  Verification: `pending`
-  Commit: `pending`
+  Status: `done`
+  Activation commit: `effe3e7b2544abf79f7786a7aa54e77b1893880e`.
+  Verification tier: `focused`
+  Focused checks: Isolated committed-source RGX public bootstrap and repeat; native two-member consumer build, word/file/deployment values and adapter tests; public-interface failure evidence; source/pin/lock preservation; dependency-knowledge residue audit; rendered guidance, public guards, Knowledge and all doctrines.
+  Canonical trigger: None for the corrected documentation-only leaf. The proposed helper/test are removed; no source, manifest, dependency pin, workflow implementation or checker changes remain. Existing RGX and managed-runner interfaces are used. Final integration .7 retains canonical proof; the stopped obsolete candidate run is diagnostic only.
+  Goal: Use RGX's published integration interface and remove dependency-internal knowledge from maintained guidance and plans.
+  Dependencies: `.8.1`, `.8.2` committed clean.
+  Scope: ARCHOGEN/LS-004 public-interface reporting and the September20 director correction. LinkedSpec integrates only with RGX; RGX owns PGEN and transitive preparation. Remove the uncommitted internal-procedure helper/test, dependency implementation assumptions and contrary pending plans. Preserve published contracts, observable results and upstream report ownership.
+  Acceptance: Use RGX's documented make bootstrap command through existing managed storage. Prove normal supported use without source overlays and report failure-path behavior without internal investigation. Keep unresolved upstream reports open. RGX/PGEN source and pins are read-only; do not inspect or analyze implementation. Agent instructions, Knowledge, book and task plans must enforce this boundary.
+  Director correction: The candidate incorrectly reconstructed transitive preparation despite the already-adopted RGX public build contract. It was discarded before commit; original dependency edits/pins remained unchanged. Canonical session87814 was deliberately stopped/consumed with exit143 and grants no receipt. Prior implementation-derived experiments do not certify the replacement and are removed from maintained knowledge.
+  Public verification: RGX's documented command succeeds on Git-archived LinkedSpec effe3e7b2 and unchanged dependency revisions, with no source overlays. Offline preparation56.19s and repeat0.22s use a verified local registry copy. Native two-member host build26.65s, exact outside-cwd word result,18 Lispish file/deployment groups and three adapter tests pass. Locks remain exact. Evidence: .linkedspec-data/scratch/backend-integration83/public-interface. No actual downstream application, empty-cache network, release/cross-platform, grammar repair or upstream message fix claimed.
+  Upstream ownership: RGX-CONSUMER-BUILD-REPORTS.1 owns the reported misleading progress message through public-interface reproduction and upstream response; no dependency diagnosis or patch is authorized. This documentation correction does not close that report.
+  Verification: PASS public bootstrap/repeat and native consumer proof above; empty-store offline public bootstrap exits2 with misleading intermediate progress and no final success message. The self-contained report is docs/upstream/rgx/bootstrap-progress-status.md; no internal diagnosis or fix is claimed. Retired implementation knowledge/helper/tests are removed; 29 obsolete scratch paths (33940 files/5503577031 bytes) are deleted with exact absence and unchanged original submodule diff. Mechanical preservation verifies2828 unchanged parent files, all three consumer source snapshots with zero overlays, exact locks and unchanged original sources/pins. Knowledge1151/9193, rendered book, public mutation68/14/11/10/50, selector67/35/0/5/11 and all nine doctrines pass. Final memory/history/staged checks govern landing; no canonical receipt is claimed.
+  Commit: `BACKEND-INTEGRATION-GUIDES.8.3 - use RGX public integration`
 
 - ID: `BACKEND-INTEGRATION-GUIDES.8.4`
   Status: `pending`
@@ -340,7 +347,7 @@ ARCHOGEN's use of Lispish through Rust. The requested scope is every backend.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `BACKEND-INTEGRATION-GUIDES.8.3` | `pending` | Workspace .8.2 is verified; activate truthful, fail-fast PGEN preparation at its clean commit. Guidance .8.4, Lua deployment .5.2, common navigation and independent .7 remain before conformance .1.35. |
+| 1 | `BACKEND-INTEGRATION-GUIDES.8.4` | `pending` | Activate prerequisite navigation and targeted checkout guidance after the clean .8.3 public-interface correction commit; then Lua .5.2, common .6 and final .7. |
 
 The director explicitly requests a temporary pivot at the next clean handoff.
 Conformance .1.34 is committed at 00f9783a1 and inventory .0 is complete.
@@ -529,7 +536,19 @@ No verification waiver is requested or applied. Lua .5.2 follows clean landing.
 - [x] **NO REGRESSION** — Five selected loader tests pass per runtime. Existing PUC 5.4 proof and malformed-regex exclusions remain visible and owned; runtime source, pins, prior tasks and book limitations remain unchanged.
 - [x] **LOCKSTEP** — Guide/includes, Knowledge and live records agree. ADR0121 implements the six approved history controls with exact preservation and 44/34 production-function checks; all normal doctrines and exact staged canonical CI govern landing. Deployment is .5.2; independent parent closure and final push remain .7.
 
+## Acceptance Checklist — .8.3
+
+- [x] **REPRODUCE / ISSUE** — Verify RGX's published bootstrap route on isolated committed sources; retain any failure-path report with exact public command/environment/output.
+- [x] **ROOT CAUSE (WHY + WHERE)** — LinkedSpec's guide bypassed the existing RGX integration contract. Correct the caller boundary; dependency implementation diagnosis remains upstream.
+- [x] **FIX** — Remove the uncommitted custom helper/test, use only RGX's documented interface, and remove internal dependency knowledge and contrary plans.
+- [x] **ADDRESSED (verified)** — Prove native consumer use and preserved sources/pins/locks. Keep unresolved upstream and Lispish reports explicitly open.
+- [x] **PREVENT** — AGENTS, MEMORY, Knowledge and task guidance enforce RGX-only public integration without implementation inspection.
+- [x] **VERIFY / COMMIT** — Finish residue/preservation, book/public, Knowledge/history/memory and doctrine checks; commit this leaf and clear the brief before .8.4.
+
+
 ## Verification Log
+
+- `2026-09-20` .8.3: Use RGX public integration only; discarded procedure and internal dependency knowledge removed. Public bootstrap, native consumer, preserved sources/pins, report and focused documentation checks pass. Upstream message issue remains open; guidance .8.4 follows clean commit.
 
 - `2026-09-20` .8.2: PASS two exit 101 baselines and twelve remedy probes in an actual isolated Git submodule at ff74b4c3b, with unchanged RGX/PGEN pins. The maintained committed-source verifier passes ten standalone/host/exclusion checks. A two-member application and separate example build locked/offline in 28.17s/18.72s; exact word values, three adapter tests and 18 Lispish file/deployment groups per consumer pass, including outside-cwd and relocation. Source blobs, 12 generated files/18576534 bytes and 15360 registry files/380075770 bytes are byte-verified. The 200-package reference lock is exact; the 201-package host graph changes only local identities. No PGEN source/pin/dirty-file mutation, new bootstrap, minimum-version/platform expansion or actual downstream application build is claimed. Book/public, preservation and all doctrines govern landing; exact staged canonical CI is required before commit.
 
@@ -561,6 +580,8 @@ No verification waiver is requested or applied. Lua .5.2 follows clean landing.
 
 ## Commit Log
 
+- `.8.3`: `BACKEND-INTEGRATION-GUIDES.8.3 - use RGX public integration`; activation effe3e7b2; focused documentation/public-interface proof, then guidance .8.4.
+
 - `.8.2`: `BACKEND-INTEGRATION-GUIDES.8.2 - repair Rust consumer workspace boundaries`; activation ff74b4c3b; manifest infrastructure requires exact staged canonical proof, then bootstrap .8.3.
 
 - `.8.1`: `BACKEND-INTEGRATION-GUIDES.8.1 - own ARCHOGEN and SEMULITH consumer reports`; activation7f2afcbf4; next isolated Rust workspace repair .8.2.
@@ -588,6 +609,8 @@ No verification waiver is requested or applied. Lua .5.2 follows clean landing.
 - Guide/example leaves: pending.
 
 ## Changelog
+
+- `2026-09-20` .8.3: Use RGX public integration only; discarded procedure and internal dependency knowledge removed. Public bootstrap, native consumer, preserved sources/pins, report and focused documentation checks pass. Upstream message issue remains open; guidance .8.4 follows clean commit.
 
 - `2026-09-20` .8.2: Repair Cargo example/host boundaries with committed-source regression and native two-member consumer proof; preserve pins, locks and all earlier dependency edits.
 

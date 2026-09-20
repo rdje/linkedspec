@@ -510,7 +510,7 @@ The director has requested integration guides and runnable consumer examples for
 Perl, Rust, Dart, Julia and Lua, covering recursive checkout, dependency preparation
 and reuse, native APIs, results/errors and packaging. This temporary activity is
 owned by `docs/tasks/BACKEND-INTEGRATION-GUIDES.md`. Its inventory is complete:
-Rust requires RGX/PGEN preparation; Dart has no runtime package dependency; Julia
+Rust uses RGX's published integration/build interface; Dart has no runtime package dependency; Julia
 uses JSON3 and standard libraries; Lua requires three ABI-matched native modules.
 The [Rust integration guide](../public-api/integration-rust.md) supplies native
 word and Lispish file consumers, typed application values, structured failures
@@ -551,8 +551,11 @@ ARCHOGEN and SEMULITH supplied ten consumer reports on September20. Their Rust
 workspace membership failures are reproduced and repaired by integration `.8.2`:
 the example owns its workspace, and enclosing applications exclude the vendored
 dependency. Ten boundary checks and a two-member native consumer pass with
-unchanged dependency pins. Bootstrap reporting and setup navigation remain
-`.8.3-.8.4`; complete-input, token-kind and reported multiline-string problems
+unchanged dependency pins. Integration `.8.3` uses RGX's published build interface
+and removes dependency-internal procedures and assumptions. LinkedSpec integrates
+with RGX only; transitive preparation belongs to RGX. Bootstrap progress reporting
+remains upstream-owned; setup navigation remains `.8.4`. Complete-input, token-kind
+and reported multiline-string problems
 attach to startup `.83.1-.83.3`.
 The [Rust guide](../public-api/integration-rust.md) states the current limits.
 The workspace repair does not verify the supplied grammar patch, close those
@@ -2338,7 +2341,7 @@ and acceptance criteria. The Dart component gate remains failed.
 This one-time reading exception permits no runtime signoff, defect closure,
 dependency rebuild, weakened gate or future verification waiver. Formatting and
 SDK-adapter repairs remain mandatory before Dart signoff. Startup `.80.1-.4` still
-own optional PGEN/RGX freshness/performance repair. The September13 director update
+own public build-performance observations and RGX upstream reports. The September13 director update
 separately authorizes normal dependency builds and cancels the former no-rebuild
 restriction. No canonical CI or dependency build ran for
 this reading closure; normal commit hooks remain enabled.
@@ -2400,30 +2403,20 @@ Twenty-two actual-validator executions verify the boundaries. Every other ceilin
 and repair prerequisite stays unchanged. Dart intake `.6` closes under canonical
 capacity commit `bef5dafd`. This storage change grants no reading credit.
 
-**Dependency-build requirement — implementation pending:** the director requires
-PGEN and RGX to be compiled once following a submodule update, then reused by
-ordinary LinkedSpec CI. Repeated verification and LinkedSpec-only source/test edits
-must compile neither dependency. Startup `.80.1-.4` own explicit initial/update
-preparation, retained artifacts and proof of that behavior; missing or incompatible
-artifacts must be handled explicitly. This archive-capacity change does not
-implement the build workflow.
+**Dependency builds — current boundary:** normal documented dependency builds
+are authorized; the director cancelled the no-rebuild requirement on September13.
+Retain compatible products and caches. LinkedSpec integrates only through RGX's
+published integration document, public APIs and contracts. RGX owns its transitive
+dependencies. Do not inspect or modify implementation or retain internal build
+procedures as LinkedSpec knowledge. Startup `.80` is limited to observable build
+behavior, upstream reports and LinkedSpec-owned retention improvements.
 
-**CI performance — diagnosed, repairs pending:** PGEN currently asks Cargo to watch
-eight generated-parser inputs even though six optional files are absent. Cargo documents
-that missing watched files can repeatedly trigger its build script. Startup `.80` owns
-exact fingerprint diagnosis, correct file creation/deletion and environment tracking,
-compatible dependency-cache reuse, and measured warm-build proof. The required
-PGEN → RGX → LinkedSpec chain and all tests remain in place. In the completed capacity
-gate, eleven visible Rust test-build stages totalled 78m02s; this is observed elapsed
-build cost, including compiler/link waits, and is not a measured saving.
-
-A separate newer macOS startup issue is owned by startup `.81`. A relocation sample about
-14 minutes after process launch showed only `_dyld_start`; the test subsequently passed
-in 2.25 seconds. That sample locates a pre-main wait without establishing its OS cause
-or a remedy. The older macOS 26.5.2 closeout does not resolve this macOS 26.6.2 observation.
-The evidence and repair criteria are logged by `SESSION-STARTUP-READING.80.0`; source
-changes remain behind the existing startup prerequisites. The intake is committed at
-`eaf4331e`; approved containment .11 is committed at `ad64f76f`; Dart reading closes under `.3.2` / ADR0114; approved containment .12 enabled Julia .1.4, and current reading progress is tracked above. [Cargo's missing-file explanation](https://doc.rust-lang.org/cargo/faq.html?highlight=rebuild).
+**CI performance — measured costs, upstream follow-up pending:** eleven Rust
+build stages in an earlier completed capacity gate totalled78m02s. This is an
+observed elapsed build cost, including compiler/link waits, not a measured saving
+or a dependency-internal diagnosis. Startup `.80` may compare documented public
+commands and report results to RGX. Implementation-derived explanations have
+been removed; ordinary correctness checks and native consumer coverage remain.
 
 **Known Dart limitation — null named selectors in reconstructed state:** a programmatically
 reconstructed target with these fields is incorrectly accepted:
@@ -3803,7 +3796,7 @@ Three backbone items tracked major structural modernization — all done:
 - **Post-parity structured-text program** - ADRs `0034`, `0037`, and `0038` plus `STRUCTURED-TEXT-FORMAT-PROGRAM` map all 91 eligible rows in the Unicode structured-text catalog. Each format's composed `.spec` graph is the sole parser source and is dynamically compiled for immediate use on every backend; host source/caches are derivative only. The catalog becomes requirements evidence for reusable neutral `.spec` evolution: a format-discovered mechanism must reach exact Perl/Rust/Dart/Julia/Lua parity before that format continues. JSON/XML/YAML/HTML/Markdown/RDF foundations are reused; conditional formats use named profiles; text-to-AST stays distinct from evaluation/domain semantics; HTML owns a full WHATWG tokenizer/tree-builder lane; accuracy, Unicode, diagnostics, conformance, separate cold-construction/warm-reuse/parse measurements, and correlated compile/runtime trace with exact emission-only rule filters are required. A separate non-blocking `NATIVE-PARSER-ACCELERATOR` horizon may later derive measured backend-native artifacts, but the dynamic parser remains primary, oracle, and fallback and Perl acceleration is not required. Lua `.8.4` satisfies the full-backend parity prerequisite; readiness leaf `.1` remains pending explicit activation and no format implementation has started.
 - **Approved and parked coverage extension (8 September 2026)** - The director has approved an explicit programming-language coverage track and a mechanism/authoring-difficulty matrix within the existing format program. The original 91 rows remain unchanged; language membership and versions will be selected separately at activation. `STRUCTURED-TEXT-FORMAT-PROGRAM.2.8` owns the future matrix and `.12` owns language coverage, with minimal reproductions and repair owners for confirmed gaps. Conformance, authoring difficulty, performance and confidence remain separate; untried cases stay unassessed. Readiness `.1` is inactive, so this planning approval starts no implementation. See [the approved parked direction](../architecture/structured-format-program.md#approved-and-parked-language-coverage-and-authoring-difficulty).
 - **Planned Rust mutation testing** - ADR `0039` and `RUST-MUTATION-TESTING` adopt `cargo-mutants` as an explicit test-strength campaign, never a per-commit/pre-commit/ordinary-local-CI gate. The list-only baseline is 3,333 candidates across 19 files; no mutant has executed and no score is claimed. A safe manual surface and targeted pilot must precede any resource-guarded milestone/release sharding. Every survivor receives a durable disposition and true gaps gain behavior-focused tests; the generated Unicode table is the initial provenance-backed exclusion.
-- **Planned Rust warning cleanup** - `RUST-DEPENDENCY-WARNING-ZERO` owns the warning stream repeatedly reproduced by clean canonical Rust carriers: the current output reports 1,870 `pgen` warnings and 26 `rgx-core` warnings. Those totals are not yet unique-cause counts. A census must separate authored code from generator-owned parser output, `rgx-core`, and direct LinkedSpec crates before bounded repairs, deterministic regeneration, explicit nested dependency pin updates, and warning-denying recurrence. Global allowances, warning filtering, and blind bulk fixes are excluded. Documentation-only intake `.0` is complete and the cleanup remains durably queued after mutation public closeout.
+- **Planned Rust warning cleanup** - `RUST-DEPENDENCY-WARNING-ZERO` tracks the observed1870 pgen/26 rgx-core warning output through RGX public build reports and upstream-owned resolutions. These are output counts, not unique-cause counts. Dependency internals are out of scope; LinkedSpec-owned fixes remain task-owned locally. No suppression or pin changes are authorized.
 - **Planned backend implementation companions** - ADR `0040` and `BACKEND-COMPANION-BOOKS` retain this book as
   the sole normative source for language semantics, portable behavior, and shared contracts, while planning one
   independently buildable companion for Perl, Rust, Dart, Julia, and Lua. Those optional guides will explain

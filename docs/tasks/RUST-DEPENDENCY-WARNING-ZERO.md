@@ -1,24 +1,31 @@
 # RUST-DEPENDENCY-WARNING-ZERO: Eliminate canonical Rust dependency warning noise
 
+**Direct dependency boundary:** LinkedSpec integrates only with RGX. RGX's
+published integration document, public APIs and contracts are the sole authority.
+RGX owns PGEN and all transitive preparation; no separate PGEN procedure or
+internal dependency knowledge belongs in LinkedSpec. Reports go to RGX.
+
 ## Metadata
 
 - Tree ID: `RUST-DEPENDENCY-WARNING-ZERO`
 - Status: `proposed` / non-blocking; intake `.0` focused-signoff-complete
 - Roadmap lane: `Repository quality / Rust dependency and generated-source hygiene`
 - Created: `2026-09-04`
-- Last updated: `2026-09-04`
+- Last updated: `2026-09-20`
 - Owner: repo-local workflow
 
 ## Goal
 
-Make every maintained Rust build used by LinkedSpec's canonical gate warning-clean, including the pinned `rgx`
-submodule, its nested `pgen` dependency, generated parser output, and LinkedSpec's direct Rust crates. Repair causes
-at their authoritative authored or generator source, regenerate deterministically, update the pinned dependency,
-and enforce the zero-warning boundary without suppressing actionable diagnostics.
+Achieve warning-clean maintained Rust builds through LinkedSpec-owned fixes and
+upstream-owned dependency repairs. RGX and PGEN are black boxes: use only RGX's
+published interfaces/contracts, observe build output, and prepare reports for RGX.
+Do not inspect or analyze implementation, reconstruct internal procedures, apply
+submodule changes, or change pins. The September20 director boundary overrides
+all contrary historical plans. No dependency implementation assumptions are retained.
 
 ## Non-Goals
 
-- Do not apply `cargo fix` indiscriminately or hand-edit generated parser artifacts whose source is a generator.
+- Do not apply source-changing tools to RGX/PGEN or investigate their implementation.
 - Do not hide warnings through global `RUSTFLAGS=-Awarnings`, crate-wide `allow` attributes, stderr filtering, or
   reduced canonical coverage.
 - Do not change `.spec` language semantics, parser behavior, runtime results, generated-state formats, or backend
@@ -28,9 +35,9 @@ and enforce the zero-warning boundary without suppressing actionable diagnostics
 ## Acceptance Criteria
 
 - A repository-local, reproducible warning census records exact commands, toolchain identity, warning classes,
-  counts, authored/generated ownership, and the pinned `rgx`/nested-`pgen` commits.
-- Every warning is repaired at the correct authority: authored `pgen`, parser generator/template, `rgx-core`, or
-  direct LinkedSpec crate/test source. Generated artifacts remain byte-fresh after regeneration.
+  counts, public command/environment identity, and the pinned dependency revisions.
+- Dependency findings have reproducible public-interface reports and upstream-owned resolutions;
+  LinkedSpec-owned findings have local task-owned fixes. No internal dependency recipe is inferred.
 - Warning cleanup preserves all existing Rust and cross-backend semantic contracts and exact generated carriers.
 - Maintained Rust build/check/test surfaces pass with warnings denied, without broad suppression or stderr masks.
 - A focused recurring guard detects warning reintroduction; canonical CI and its storage/relocation proof pass.
@@ -49,7 +56,7 @@ and enforce the zero-warning boundary without suppressing actionable diagnostics
     commit `7ed47a0a1104d984967808c98f52a3e1d5031520`; no push)
   Goal: Durably own the director-requested warning cleanup and freeze a safe implementation split.
   Acceptance: Record the reproduced baseline, dependency/pin boundary, prohibited suppression shortcuts, separate
-    authored/generator/dependency/direct-crate leaves, zero-warning enforcement outcome, and non-blocking return to
+    upstream-report and LinkedSpec-owned repair leaves, zero-warning enforcement outcome, and non-blocking return to
     Lua `.19.6.2`; synchronize task/roadmap/live/Knowledge/continuity surfaces without changing build behavior.
   Verification tier: `focused` — planning and durable defect ownership only; no Rust source, dependency pin,
     generator, generated artifact, CI behavior, or runtime semantics change.
@@ -61,9 +68,9 @@ and enforce the zero-warning boundary without suppressing actionable diagnostics
   Signoff evidence: multiple clean canonical carriers independently reproduced the 1,870-`pgen` / 26-`rgx-core`
     output baseline both within and outside the outer execution sandbox; the unchanged authorized `.19.6.1`
     canonical run passed through exact receipt and committed clean at `7ed47a0a`. Gitlink/nested-repository
-    inspection proves the upstream integration boundary. The new task tree separates census, authored `pgen`,
-    generator/generated `pgen`, `rgx-core`, direct LinkedSpec, pin integration, and enforcement; the Knowledge
-    card preserves the searchable causal fact. Task metadata passes 1,732/1,732 unique IDs and all partition/
+    inspection proves the upstream integration boundary. The task tree records the warning-clean objective and public output baseline;
+    implementation-specific dependency plans were removed on September20. The Knowledge card now
+    preserves the public integration boundary. Task metadata passes 1,732/1,732 unique IDs and all partition/
     closed-marker checks; Knowledge regenerates at 935 facts / 7,942 keys; Memory is 59 lines; all 49
     document-history segments reconstruct; README routing passes 20 surfaces / 62 routes / 32 mutations; the
     mdBook renders 82 files / 15.7 MiB and the exact status entry is present; generated output is removed.
@@ -74,47 +81,42 @@ and enforce the zero-warning boundary without suppressing actionable diagnostics
 
 - ID: `RUST-DEPENDENCY-WARNING-ZERO.1`
   Status: `pending`
-  Goal: Build the exact repository-local warning census and ownership map before any warning repair.
+  Goal: Capture observable warning output from documented build interfaces.
   Dependencies: `.0`
-  Acceptance: Capture pinned commits and toolchain; run each maintained Rust build/check/test route with machine-
-    readable diagnostics under repository-local project storage; classify every warning by crate, lint, authored
-    versus generated origin, generator authority, duplication factor, and safe remediation class; prove the
-    observed headline counts are not mistaken for unique root causes; split further before implementation if one
-    leaf would exceed a safe review boundary.
+  Acceptance: Record command, toolchain, pins, exit status and warnings from a warranted public build.
+    Do not equate repeated output with distinct root causes. Route dependency reports upstream without
+    source inspection; separate LinkedSpec-owned diagnostics for local repair.
   Verification: `pending`
   Commit: `RUST-DEPENDENCY-WARNING-ZERO.1 - census Rust warnings`
 
 - ID: `RUST-DEPENDENCY-WARNING-ZERO.2`
   Status: `pending`
-  Goal: Repair authored `pgen` warning causes in bounded, behavior-preserving slices.
+  Goal: Track upstream resolution of PGEN warnings visible through supported builds.
   Dependencies: `.1`
-  Acceptance: Remove only census-owned warnings rooted in authored `rgx/subs/pgen/rust` source; preserve parser,
-    generator, corpus, and public API behavior; use narrow justified attributes only where a real conditional-
-    compilation or compatibility obligation makes code intentionally inactive; commit upstream changes and keep
-    the nested dependency boundary recoverable.
+  Acceptance: Prepare a self-contained public RGX-command report with environment and observed output.
+    Record upstream response and published fix status; verify via the public interface when available.
+    Do not inspect or modify PGEN implementation or change its pin.
   Verification: `pending`
-  Commit: `RUST-DEPENDENCY-WARNING-ZERO.2 - clean authored pgen warnings`
+  Commit: `RUST-DEPENDENCY-WARNING-ZERO.2 - track RGX dependency warning resolution`
 
 - ID: `RUST-DEPENDENCY-WARNING-ZERO.3`
   Status: `pending`
-  Goal: Repair generator/template causes and deterministically regenerate warning-clean `pgen` parser sources.
-  Dependencies: `.1`, `.2`
-  Acceptance: Trace generated warnings to their authoritative generator/template; repair the authority rather than
-    generated leaves; regenerate all affected artifacts; prove byte freshness/idempotence, exact parser behavior,
-    and zero census-owned generated warnings across every maintained generated parser.
+  Goal: Track upstream handling of remaining PGEN build-warning reports.
+  Dependencies: `.1`
+  Acceptance: Let the upstream maintainer determine internal ownership and remedy. Preserve observable
+    reproduction and published response, without generator investigation, output rewriting or internal
+    assumptions. Verify any delivered resolution only through the supported public build and consumer API.
   Verification: `pending`
-  Commit: `RUST-DEPENDENCY-WARNING-ZERO.3 - clean generated pgen warnings`
+  Commit: `RUST-DEPENDENCY-WARNING-ZERO.3 - verify remaining upstream warning reports`
 
 - ID: `RUST-DEPENDENCY-WARNING-ZERO.4`
   Status: `pending`
-  Goal: Repair the census-owned `rgx-core` warning classes without semantic regression.
+  Goal: Track upstream resolution of RGX warnings visible through supported builds.
   Dependencies: `.1`
-  Acceptance: Resolve architecture-specific unreachable paths, unused/dead owners, missing documentation, and all
-    other classified `rgx-core` diagnostics at their real causes; preserve scalar/SIMD behavior and every regex,
-    capture, parser, VM, and LinkedSpec integration contract; keep intentional platform branches explicit and
-    narrowly justified.
+  Acceptance: Report public command, environment and observable warning output. Record the upstream
+    response and verify published behavior; do not inspect or modify RGX implementation or change pins.
   Verification: `pending`
-  Commit: `RUST-DEPENDENCY-WARNING-ZERO.4 - clean rgx core warnings`
+  Commit: `RUST-DEPENDENCY-WARNING-ZERO.4 - verify upstream RGX warning resolution`
 
 - ID: `RUST-DEPENDENCY-WARNING-ZERO.5`
   Status: `pending`
@@ -128,13 +130,13 @@ and enforce the zero-warning boundary without suppressing actionable diagnostics
 
 - ID: `RUST-DEPENDENCY-WARNING-ZERO.6`
   Status: `pending`
-  Goal: Integrate the warning-clean upstream commits and update LinkedSpec's pinned `rgx` dependency atomically.
+  Goal: Verify upstream-published resolutions through supported consumer interfaces.
   Dependencies: `.2`, `.3`, `.4`, `.5`
-  Acceptance: Verify clean nested `pgen` and `rgx` repositories at explicit commits, update the parent `rgx` and
-    LinkedSpec gitlinks, reproduce the zero-warning census from a clean checkout/carrier, and retain exact build,
-    generated-source, corpus, CLI, runtime, storage, and relocation behavior.
+  Acceptance: Check public release notes/contracts and run the documented build plus native consumer
+    tests when the required dependency version is supplied. Do not change pins or modify submodule code.
+    Preserve original nested edits and report unresolved upstream issues without false closure.
   Verification: `pending`
-  Commit: `RUST-DEPENDENCY-WARNING-ZERO.6 - pin warning-clean Rust dependencies`
+  Commit: `RUST-DEPENDENCY-WARNING-ZERO.6 - verify supplied dependency resolutions`
 
 - ID: `RUST-DEPENDENCY-WARNING-ZERO.7`
   Status: `pending`
@@ -142,7 +144,7 @@ and enforce the zero-warning boundary without suppressing actionable diagnostics
   Dependencies: `.6`
   Acceptance: Add a focused repository-local warning guard that fails on any maintained Rust warning without
     suppressing output; register it at the appropriate doctrine/CI cadence; independently rerun the exact census,
-    all affected Rust/cross-backend contracts, generated freshness, project-data storage/relocation proof, mdBook,
+    all affected published Rust/cross-backend contracts, project-data storage/relocation proof, mdBook,
     Knowledge, doctrines, and receipt-bound canonical CI; close the tree only at zero warnings and a clean commit.
   Verification: `pending`
   Commit: `RUST-DEPENDENCY-WARNING-ZERO.7 - enforce zero Rust warnings`
@@ -151,42 +153,29 @@ and enforce the zero-warning boundary without suppressing actionable diagnostics
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `.1` | `pending` / non-blocking | Exact unique-root-cause census is required before warning cleanup, after explicit future activation. |
+| 1 | `.1` | `pending` / non-blocking | Public warning-output census precedes upstream reporting, after explicit future activation. |
 
 ## Baseline Evidence
 
-- During receipt-bound canonical verification of `FUTURE-PARITY-BACKLOG.19.6.1` on 2026-09-04, multiple clean
-  Rust carriers independently reported `pgen (lib) generated 1870 warnings`, with Cargo offering 1,360 automated
-  suggestions. The stream included both authored `src/ast_pipeline/*` diagnostics and generated parser diagnostics;
-  therefore 1,870 is a build-output count, not yet a unique-root-cause count.
-- The same carriers reported 26 warnings from `rgx-core`, including architecture-specific unreachable expressions,
-  unused/dead owners, and missing documentation. Earlier task evidence also records separate direct-runtime lint
-  baselines; `.1` must measure rather than merge these counts by assumption.
-- The warning baseline reproduced both inside and outside the outer execution sandbox. The sandboxed canonical run's
-  later status 71 was the separately known nested-`sandbox-exec` restriction; the unchanged authorized rerun passed.
-- LinkedSpec tracks `rgx` as gitlink `8763a0e6bea97879f027237439d57725f83ead23`; `rgx/subs/pgen` is a nested Git
-  dependency. Cleanup therefore requires explicit upstream commits and pin integration, not hidden main-tree edits.
+- Completed public build logs repeatedly report1870 pgen and26 rgx-core warnings.
+  These are output counts, not unique defect counts or an internal causal model.
+- The original nested source edits and dependency pins remain unchanged.
+- The upstream RGX maintainer owns transitive warning diagnosis and repair.
+  LinkedSpec reports public commands/results and verifies published resolutions.
 
 ## Decisions
 
-- `2026-09-04`: Own the warning set as a defect-remediation program rather than accepting recurring canonical noise.
-- `2026-09-04`: Keep the tree proposed/non-blocking after intake; resume Lua `.19.6.2` before implementation unless
-  the director reprioritizes it.
-- `2026-09-04`: Treat warning elimination as causal repair. Broad suppression, output filtering, and blind bulk
-  fixes do not satisfy the task.
-- `2026-09-04`: Separate authored `pgen`, generated `pgen`, `rgx-core`, direct LinkedSpec, dependency-pin, and final
-  enforcement work so each commit is reviewable and recoverable.
+- 2026-09-04: Own the warning-clean outcome without suppressing diagnostics.
+- 2026-09-20: The director prohibits RGX/PGEN implementation inspection or changes.
+  Remove internal repair assumptions. Existing task IDs retain public observation,
+  upstream-report and result-verification responsibilities only, except `.5`,
+  which may repair LinkedSpec-owned code.
 
 ## Open Questions
 
-- `.1` must determine the unique warning/root-cause distribution and whether further per-lint or per-generator
-  subdivision is required; this does not block intake ownership or current Lua parity work.
-- `.1` must identify which upstream repositories/remotes accept the `pgen` and `rgx-core` commits before `.2-.4`;
-  no push or external publication is authorized by this planning leaf.
-
-## Blockers
-
-- None for intake `.0` or resuming Lua parity. Upstream integration details are intentionally deferred to `.1`.
+- Which observable warnings remain after an upstream-published resolution?
+- What LinkedSpec-owned fixes or cache-retention improvements are independently
+  warranted by public build results? No dependency implementation inference.
 
 ## Verification Log
 

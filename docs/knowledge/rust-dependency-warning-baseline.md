@@ -1,39 +1,34 @@
 ---
 id: rust-dependency-warning-baseline
-title: Canonical Rust carriers expose reproducible pgen and rgx-core warning debt
+title: Dependency warning output is upstream-owned black-box evidence
 answers:
   - why does canonical Rust compilation print thousands of warnings
   - how many warnings does pgen currently emit
-  - are the Rust dependency warnings just sandbox noise
-  - which task owns Rust dependency warning cleanup
-  - can cargo fix be used blindly on pgen warnings
-  - where must generated parser warnings be fixed
+  - which task owns Rust dependency warning reports
+  - may LinkedSpec patch RGX or PGEN warning causes
   - what git boundary owns rgx and pgen warning fixes
-date: 2026-09-04
-status: current baseline; cleanup durably owned by RUST-DEPENDENCY-WARNING-ZERO and intentionally non-blocking
-tags: [rust, pgen, rgx, warnings, generated-source, diagnostics, task-tree]
-evidence: "During exact staged canonical verification of FUTURE-PARITY-BACKLOG.19.6.1, multiple independent clean Rust carriers reported `pgen (lib) generated 1870 warnings` and 1360 Cargo fix suggestions, plus 26 `rgx-core` warnings. The pgen stream includes authored ast_pipeline files and generated parser files, so 1870 is a repeated build-output count rather than a proven unique-cause count. The same baseline appeared inside and outside the outer execution sandbox; the sandboxed run's later status 71 was only the separately known nested sandbox-exec restriction, and the unchanged authorized canonical rerun passed. Main Git tracks rgx as gitlink 8763a0e6bea97879f027237439d57725f83ead23, while rgx/subs/pgen is nested beneath that repository. RUST-DEPENDENCY-WARNING-ZERO.1 must perform a machine-readable unique-cause census before repairs; later leaves separate authored pgen, generator/generated pgen, rgx-core, direct LinkedSpec, pin integration, and zero-warning enforcement. Broad allow attributes, RUSTFLAGS=-Awarnings, output filtering, and blind cargo fix do not satisfy the task."
-reverify: "bash tools/run_ci_local.sh"
+date: 2026-09-20
+status: observable baseline retained; upstream implementation investigation and edits forbidden
+tags: [rust, dependencies, warnings, public-contract, task-tree]
+evidence: "Repeated completed canonical build logs report 1870 pgen and26 rgx-core warnings. September20 director boundary restricts LinkedSpec to published dependency interfaces and upstream reports."
+reverify: "Observe ordinary documented build output when a build is otherwise warranted; retain exact command, versions and exit status. Do not inspect dependency source or run source-changing repair tools."
 ---
 
-# Rust dependency warning baseline
+**Direct dependency boundary:** LinkedSpec integrates only with RGX. RGX's
+published integration document, public APIs and contracts are the sole authority.
+RGX owns PGEN and all transitive preparation; no separate PGEN procedure or
+internal dependency knowledge belongs in LinkedSpec. Reports go to RGX.
 
-Canonical Rust consumers repeatedly build the pinned `rgx` dependency and its nested
-`pgen` parser generator. The current build output reports 1,870 warnings for the
-`pgen` library and 26 for `rgx-core`. The larger number is not yet a count of distinct
-defects: generated parser repetition and multiple build targets can amplify one
-authoritative cause.
+Completed Rust builds repeatedly reported 1,870 warnings for `pgen` and 26 for
+`rgx-core`. These are output counts for those runs, not a proven count of distinct
+bugs or a causal explanation. Do not suppress the warnings to claim a clean build.
 
-Cleanup must begin with structured diagnostic capture and source ownership. Authored
-`pgen` code, generator templates, regenerated parser artifacts, `rgx-core`, and direct
-LinkedSpec crates are separate repair surfaces. A warning originating in generated
-source is fixed in its generator/template and then regenerated; a broad suppression or
-an unreviewed bulk rewrite would only conceal the causal boundary.
+`RUST-DEPENDENCY-WARNING-ZERO` retains ownership of the desired warning-clean
+outcome. For RGX/PGEN, its work is limited to public-interface reproduction,
+upstream reports and evaluation of upstream-published results. It does not permit
+reading dependency implementation, applying fixes, reconstructing generators or
+changing pins. LinkedSpec-owned code can be repaired in its own task-owned slices.
 
-The dependency boundary is also explicit. LinkedSpec pins the `rgx` repository as a Git
-submodule, and `pgen` is nested within it. Durable repair therefore requires clean
-upstream commits plus reviewed gitlink integration before a zero-warning guard can be
-admitted here.
-
-Related: [[project-data-process-locality-proof]], [[repository-root-path-portability]],
-[[verification-cadence-policy]], and task tree `RUST-DEPENDENCY-WARNING-ZERO`.
+Published contracts and observable command results are the integration authority.
+Implementation-derived dependency plans and conclusions have been removed.
+Related: [[rust-ci-pgen-missing-input-rebuilds]], [[verification-cadence-policy]].

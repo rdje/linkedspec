@@ -10,6 +10,12 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-20 — BACKEND-INTEGRATION-GUIDES.8.3 - use RGX public integration
+
+The director requires LinkedSpec to integrate only through RGX's published document/APIs/contracts. Remove the uncommitted custom preparation helper/test and internal dependency recipes/conclusions from maintained knowledge, book, agent instructions and pending plans. RGX owns all transitive preparation; both submodule sources/pins remain unchanged. The misleading progress-message report remains upstream-owned and open.
+
+Public-interface proof: isolated committed-source make bootstrap passes offline in56.19s, repeat0.22s; native host build26.65s, exact words,18 file/deployment groups and three adapter tests pass with exact locks. An empty-store offline public bootstrap exits2 but prints misleading intermediate progress; the report records that observable distinction without internal diagnosis. The obsolete candidate's canonical run was stopped/consumed at143; it grants no receipt. Focused proof passes source/pin/lock/history preservation, knowledge-residue checks, book rendering with49 local links, public mutation/selector guards and all nine doctrines. Final integration .7 retains canonical proof.
+
 ## 2026-09-20 — BACKEND-INTEGRATION-GUIDES.8.2 - repair Rust consumer workspace boundaries
 
 Reproduce ARCHOGEN/LS-001 and SEMULITH/LS-003 item1 in a real submodule consumer. Give the runnable Rust example its own workspace and document the enclosing host exclusion for vendor/linkedspec, including member-relative dependency paths. PGEN source, dependency pins and the reference lock remain unchanged. A maintained metadata regression covers ten standalone/host/exclusion cases.
@@ -153,4 +159,3 @@ Retain the unchanged Unicode 17 generation, byte-equality and 12-fixture proof f
 Conformance .1.24 reads 3 complete windows, 1,500 fragments and 14,500 baseline-identical bytes. Physical reading is 24/143: 30,431 fragments, 1,010,244 bytes and 51 complete files. Uppercase reading covers numeral, circled-letter, Glagolitic, Coptic, Georgian and extended Cyrillic/Latin mappings. Sparse entries and non-adjacent targets remain explicit, including the Georgian 2Dxx family. The bounded checkpoint is updated in place. Unchanged offline Unicode proof is retained. Next .1.25 starts after the closed A74F-to-A74E entry; all runtime repairs remain open.
 
 Retain the unchanged Unicode 17 generation, byte-equality and 12-fixture proof from CONFORMANCE-SOURCE-READING.1.14 at 704e261b. Fresh window replay, complete range inventory, cumulative coverage, source/task/history preservation, rendered book, memory and document-pressure checks govern this ordinary reading leaf. Native admission evidence remains separately scoped; normal commit doctrines remain required.
-

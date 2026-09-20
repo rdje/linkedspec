@@ -21,17 +21,18 @@ From your application's repository root:
 ```sh
 git submodule add https://github.com/rdje/linkedspec.git vendor/linkedspec
 git -C vendor/linkedspec submodule update --init rgx
-git -C vendor/linkedspec/rgx submodule update --init subs/pgen
 git -C vendor/linkedspec rev-parse HEAD
 git add .gitmodules vendor/linkedspec
 ```
 
 Review the revision and commit the submodule pointer with your application. For
 an existing application clone, first run `git submodule update --init
-vendor/linkedspec`, then the two nested commands above. These commands retrieve
-the Rust dependency closure. `git submodule update --init --recursive` also works,
+vendor/linkedspec`, then initialize RGX with the command above. RGX owns preparation
+of its transitive dependencies through its published bootstrap command.
+`git submodule update --init --recursive` also works,
 but retrieves additional optional dependency/test repositories which this native
-Rust example does not need. Checkout does not generate PGEN's parser inputs.
+Rust example does not require directly. Checkout alone does not complete RGX's
+documented preparation.
 
 To update deliberately, fetch LinkedSpec, check out the reviewed revision inside
 `vendor/linkedspec`, initialize its pinned nested dependencies again, then verify your
@@ -52,7 +53,7 @@ should commit their resulting `Cargo.lock` as well as the submodule pointer.
 
 ### Applications with a Cargo workspace
 
-Before preparing PGEN or building, add `vendor/linkedspec` to `exclude` in the
+Before running RGX bootstrap or building, add `vendor/linkedspec` to `exclude` in the
 **application workspace root** manifest. Merge it with existing members and
 exclusions; do not add a second `[workspace]` table. For example:
 
@@ -74,19 +75,19 @@ linkedspec-runtime = { path = "../vendor/linkedspec/rust/linkedspec-runtime" }
 ```
 
 LinkedSpec's native Rust library and runnable example each have their own
-workspace. The pinned PGEN bootstrap package also needs the **host exclusion**:
-the example's own `[workspace]` cannot isolate that separate package. Without the
-exclusion, Cargo can stop with “current package believes it's in a workspace when
-it's not” while preparing PGEN. Do not modify dependency manifests or add vendored
-crates to the application's workspace members to work around this error.
+workspace. The host exclusion also keeps vendored dependencies outside the
+application's workspace. Without it, a dependency build can stop with “current
+package believes it's in a workspace when it's not”. Follow the public workspace
+setup; do not modify dependency manifests or add vendored crates to the application's
+workspace members to work around this error.
 An application with no enclosing `[workspace]` does not need this exclusion.
 See [Cargo workspace membership](https://doc.rust-lang.org/cargo/reference/workspaces.html#the-members-and-exclude-fields)
 for Cargo's parent-manifest discovery and exclusion rules.
 
-The inspected RGX/PGEN dependency manifests require Rust **1.95**. The checked-in
+RGX's published integration contract requires Rust **1.95**. The checked-in
 example therefore declares `rust-version = "1.95"` and edition 2024. Recheck the
-chosen revision's manifests when updating; older Rust README wording is not the
-authority for these dependency requirements. Verification currently uses Rust
+chosen revision's published requirements when updating; older README wording is
+not the authority for that release. Verification currently uses Rust
 1.95.0 on macOS arm64, not a minimum-version or cross-platform test matrix.
 
 ## Keep preparation and build products local
@@ -107,65 +108,58 @@ bash vendor/linkedspec/tools/run_cargo_local.sh --version
 Ignore `.app-data/` in the application repository. Keep these runtime-derived
 paths in a launcher; do not save the expanded machine-specific values in a
 manifest. The wrapper supplies local temporary directories and cache locations.
-It changes to the LinkedSpec root, so pass the application's manifest explicitly:
-
-```sh
-bash vendor/linkedspec/tools/run_cargo_local.sh metadata \
-  --format-version 1 --manifest-path "$APP_ROOT/Cargo.toml"
-```
+It changes to the LinkedSpec root, so pass the application's manifest explicitly
+in Cargo commands after preparation.
 
 Initial package resolution may need network access. After preparing and locking
 the graph, add `--offline --locked` to require the retained package store and
 lockfile. Copying only a target directory is insufficient: source packages and
 the exact nested checkout are also required.
 
-### Initial PGEN preparation
+### Initial RGX preparation
 
-Fresh PGEN checkouts do not ship the generated parser Rust sources. With Rust,
-Cargo, a native linker/toolchain, Bash and Make available, prepare the pinned
-dependency once. Keep the environment from the preceding section. Initial Cargo
-package resolution needs network access when the local store is incomplete:
+Use RGX's published downstream build interface. Its integration contract is
+`rgx/docs/INTEGRATION.md` inside LinkedSpec, also available in the
+[pinned RGX integration guide](https://github.com/rdje/rgx/blob/8763a0e6bea97879f027237439d57725f83ead23/docs/INTEGRATION.md).
+RGX owns preparation of its dependencies. Applications should not reproduce
+PGEN's internal generation steps or modify either submodule.
+
+After configuring the workspace and local storage above, run from the application
+root, with Rust, Cargo, a native toolchain, Bash and Make available:
 
 ```sh
-# The pinned Makefile runs ./target/debug/ast_pipeline directly.
-CARGO_TARGET_DIR="$APP_ROOT/vendor/linkedspec/rgx/subs/pgen/rust/target" \
 CARGO_NET_OFFLINE=false \
 bash vendor/linkedspec/tools/project_data_run.sh \
-  make -C vendor/linkedspec/rgx/subs/pgen/rust \
-  SHELL=/bin/bash regex_parser_bootstrap
+  env -u CARGO_TARGET_DIR make -C "$APP_ROOT/vendor/linkedspec/rgx" bootstrap
 ```
 
-This command's target-directory override is deliberate: the pinned Makefile
-expects its executable beneath PGEN's own `rust/target`. Normal application
-builds continue to use `.app-data/target`. Both locations are on the application's
-volume. Retain PGEN's generated directory and target products. The verified
-bootstrap produces `ebnf.rs`, `regex_parser.rs`, `return_annotation_parser.rs`
-and `semantic_annotation_parser.rs` under `rgx/subs/pgen/generated/`, relative to
-LinkedSpec. Do not commit those generated products as dependency source changes.
+The existing runner retains the selected local Cargo package store and temporary
+storage. `env -u CARGO_TARGET_DIR` lets the dependency's documented build use its
+default target locations for this child process. The application's exported
+`CARGO_TARGET_DIR` is unchanged. Keep the checkout and its build products on the
+application's volume and retain compatible outputs for subsequent builds.
 
-Run this preparation when the files are absent or a reviewed pin/toolchain update
-requires regeneration. Subsequent application builds use ordinary Cargo. An
-offline package-resolution failure means the selected store is incomplete; it
-does not justify silently using a home-directory cache. Prepare that same local
-store online, retain the resulting locks, and then use locked offline builds.
+Initial package resolution may need network access. With the required package
+store already populated, use `CARGO_NET_OFFLINE=true`. If the command fails,
+stop before building the application and preserve its exit status and full log.
+An intermediate progress message is not the overall command result. Report a
+failure against RGX's published interface with the exact dependency revision;
+do not repair it by editing submodule code or inventing another bootstrap recipe.
+ARCHOGEN's reported misleading bootstrap progress message remains upstream-owned.
 
-Keep compatible generated sources and Cargo products across application builds.
-A changed compiler, target, features, build flags, dependency source or generated
-input can legitimately require new products. Cargo follows the dependency chain
-`LinkedSpec → RGX → PGEN` and builds dependencies automatically when needed.
-Keep the target directory between routine runs so Cargo can reuse compatible work.
+After successful preparation, confirm the application graph with its explicit
+manifest:
 
-### Current Cargo reuse limitation
+```sh
+bash vendor/linkedspec/tools/run_cargo_local.sh metadata \
+  --format-version 1 --manifest-path "$APP_ROOT/Cargo.toml"
+```
 
-The inspected PGEN build script watches optional files even when they do not
-exist. Cargo can report missing `generated/json_parser.rs` and schedule dependency
-compilation on an otherwise unchanged run. The normal Cargo command still builds
-the required chain; no separate RGX or PGEN compilation command is needed.
-
-This known performance issue is tracked by `SESSION-STARTUP-READING.80.1-.4`.
-It does not prevent native API use. Do not create dummy parser files or change
-Cargo fingerprints to suppress legitimate dependency checks. Build measurements
-must distinguish actual reuse from compilation.
+Then build the application through the ordinary Cargo commands below. RGX
+documents bootstrap as reusable when already prepared.
+Normal Cargo builds may still compile dependencies; retain caches and measure
+actual results rather than promising zero compilation. A dependency update must
+be checked against that release's published integration contract.
 
 ## Compile once, parse independent inputs
 
@@ -432,30 +426,16 @@ verification dependency; the deployed application remains Rust.
 The workspace verifier uses committed native source and dependency pins, with
 the current example manifest, in an isolated local fixture. Ten Cargo metadata
 checks cover standalone use, enclosing-workspace boundaries and the required
-host exclusion for PGEN. It performs no dependency build and does not copy local
+host exclusion for vendored dependency builds. It performs no dependency build and does not copy local
 dependency edits. This verifier needs Python 3.12 or later for filtered archive
 extraction. The native checks above verify execution separately.
 
-An additional clean-source application with two workspace members was verified
-on macOS arm64 with Rust 1.95.0, using LinkedSpec `ff74b4c3b`, its unchanged RGX/PGEN
-pins and the example workspace fix. The host exclusion preserves separate native
-library, example and PGEN workspace roots. Locked offline application and example
-builds passed, followed by exact word values, three adapter tests and the file
-verifier against both binaries. Existing generated parser inputs and public
-registry packages were hash-verified before reuse; no fresh bootstrap is claimed
-by this workspace check. All external dependency versions and the example lock
-remained unchanged. This was an isolated consumer, not an ARCHOGEN/SEMULITH build.
-
-Clean preparation was verified from committed LinkedSpec `42490a9d917e`,
-RGX `8763a0e6bea9` and PGEN `db6f8c6836fe` sources, with this file consumer copied
-into a separate application. All tracked source blobs were checked against Git;
-the original checkout's local PGEN edits were excluded. Only the Rust dependency
-closure was initialized. A byte-verified public registry copy seeded the local
-store; initial PGEN package resolution then needed online metadata/downloads.
-Bootstrap and the subsequent locked offline application build passed on macOS
-arm64, Rust 1.95.0. This is clean-source preparation evidence, not an empty-cache
-network installation or a test of the actual ARCHOGEN repository.
-The separate application built in 40.50 seconds, then 4.87 seconds on a repeat;
-both logs reported dependency compilation. The file/deployment verifier passed
-against that application and the repository example. These measurements do not
-promise zero dependency work or a portable build-time bound.
+The current documented RGX command was independently exercised on Git-archived
+LinkedSpec `effe3e7b2` and its unchanged dependency pins, without source overlays.
+The clean preparation completed offline in 56.19 seconds using a byte-verified
+local registry copy and retained lockfiles; a repeat completed in 0.22 seconds.
+The two-member consumer built locked/offline in 26.65 seconds, returned the exact
+word values outside its source directory and passed all 18 Lispish file/deployment
+groups. The example's three adapter tests also passed. This verifies the published
+build route on macOS arm64/Rust 1.95.0; it does not establish an empty-cache network,
+release-profile, cross-platform or actual ARCHOGEN/SEMULITH application result.

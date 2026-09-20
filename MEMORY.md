@@ -1,13 +1,13 @@
 # MEMORY
 
-- activation_commit: `ff74b4c3b1977c2762ecd99a3f2a45cd460a4170` — clean report-intake checkpoint; Rust workspace repair activation.
-- latest_completed_leaf: `BACKEND-INTEGRATION-GUIDES.8.2 - repair Rust consumer workspace boundaries`; example/host boundaries verified with unchanged dependency pins and native consumer proof.
-- active_work_unit: `BACKEND-INTEGRATION-GUIDES.8.3` — pending clean activation for truthful, fail-fast PGEN preparation.
-- next_action: Activate BACKEND-INTEGRATION-GUIDES.8.3 from the clean committed tree to reproduce and repair PGEN bootstrap false success; then .8.4 setup guidance, Lua .5.2, common navigation and independent .7 before conformance .1.35. Strict Lispish reports remain startup .83.
+- activation_commit: `effe3e7b2544abf79f7786a7aa54e77b1893880e` — clean workspace-repair checkpoint; RGX public integration correction activation.
+- latest_completed_leaf: `BACKEND-INTEGRATION-GUIDES.8.3 - use RGX public integration`; published build/native proof and dependency-knowledge cleanup verified.
+- active_work_unit: `BACKEND-INTEGRATION-GUIDES.8.4` — pending clean activation for prerequisite navigation and targeted checkout guidance.
+- next_action: Activate .8.4 from the clean .8.3 commit, then Lua .5.2, common .6 and independent .7 before conformance .1.35. RGX-CONSUMER-BUILD-REPORTS.1 remains upstream-owned; strict Lispish remains startup .83.
   Named-argument direction PARSER-AUTHORING-APIS.4 is approved and parked; other authoring proposals and approved formats stay parked.
-- in_flight_uncommitted: none; this leaf lands the verified workspace repair and its exact staged canonical proof. Derive its commit identity from Git.
-- blockers: none for the next integration leaf. Bootstrap/guidance repairs, Lua deployment and final .7 remain open; strict Lispish work retains startup .83 prerequisites.
-- current_rust_warning_debt: Repeated carriers report 1,870 pgen plus 26 rgx-core output warnings; RUST-DEPENDENCY-WARNING-ZERO.1-.7 own causal repair/pins/enforcement without suppression after Lua intake.
+- in_flight_uncommitted: none; this focused documentation leaf lands the RGX-only boundary and verified public integration. Derive current commit identity from Git.
+- blockers: none for the next integration leaf. Guidance, Lua deployment and final .7 remain open; strict Lispish retains startup .83 prerequisites.
+- current_rust_warning_debt: Repeated carriers report 1,870 pgen plus 26 rgx-core output warnings; RUST-DEPENDENCY-WARNING-ZERO.1-.7 own public RGX reports and result verification without suppression; dependency internals are excluded.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
   active table; the task metadata doctrine inventories all consumers, permits arbitrary frontier-row rewrites,
   and requires every exact current task ID to be unique across partitioned and unpartitioned storage.
@@ -55,6 +55,6 @@
   Notes segment4973 preserves clean HEAD lines107-220 byte-exactly; older archives and all other controls remain unchanged.
 - current_change_history_capacity: ADR0121 admits 39 collection files /38 manifest lines /21647 manifest bytes for integration delivery; all three current counts match.
   Changes segment4974 preserves clean HEAD lines137-262 byte-exactly; earlier archives and all other controls remain unchanged.
-- current_ci_build_reuse: September13 director update cancels the RGX/PGEN no-rebuild requirement. Normal Cargo builds are authorized, including either dependency; retain caches.
-  Startup .80.1-.4 now own optional freshness/performance improvements, not a mandatory zero-build lifecycle or integration-guide prerequisite.
+- dependency_boundary: September20: LinkedSpec integrates only with RGX via its published integration document/APIs/contracts. RGX owns PGEN; no separate PGEN procedure, internal inspection/analysis, patches or pin changes.
+  Normal documented builds remain authorized; retain caches. Startup .80.1-.4 may observe public behavior or track upstream repairs, not investigate dependency internals.
 - latest_bootstrap_read: 2026-09-13 — roadmap Yes / full codebase No / physical mdBook Yes; five backend lanes and supporting .3.7 closed. Conformance34/143 reads45038 fragments/1353523 bytes;109 groups remain, including conformance tests and four decoded Unicode inputs. Later .3.9-.3.11, formal book .4 and policy .5 remain; no runtime repair closes.

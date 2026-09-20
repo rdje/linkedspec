@@ -5159,8 +5159,8 @@ per ABI; final census admission `.8.4` is also closed at five-backend 80/0/0.
 - `/opt/homebrew/bin/luajit` reports LuaJIT `2.1.1753364724` over Lua `5.1` language semantics.
 - `require("lpeg")` succeeds on both runtimes.
 - LuaRocks, Busted, Luacheck, and StyLua are not installed.
-- No repository-owned `lua/` backend or `.lua` implementation files exist; `rgx/rgx-core/src/lua.rs` is Rust-side
-  Lua integration evidence, not a LinkedSpec Lua backend.
+- At that historical inventory, no repository-owned LinkedSpec Lua backend existed.
+  Dependency implementation references were removed by the September20 black-box directive.
 
 These observations guided `.1.1`. The locked policy below deliberately leaves the regex provider to `.4.1` and
 does not claim that LuaJIT already passes the later complete secondary compatibility gate.

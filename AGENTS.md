@@ -37,6 +37,16 @@ point back here. The system of record is **`README.md`** (the project) +
 
 ## Non-negotiable working rules
 
+- **RGX and PGEN are black boxes (director instruction, 2026-09-20).** LinkedSpec
+  integrates with RGX only: use RGX's published integration document, public APIs
+  and contracts. RGX owns all transitive dependency preparation; LinkedSpec must
+  not carry a separate PGEN build procedure or consult its internals. Do not inspect,
+  analyze or modify their implementation, reconstruct internal build procedures, or
+  change submodule pins. Source access is not authorization. Reproduce problems through
+  RGX's public interface and report them to RGX. Remove implementation-derived
+  dependency assumptions from maintained knowledge and plans; historical observations
+  do not override this boundary. Normal documented builds and reuse of their outputs
+  are permitted. This rule overrides contrary older reading or dependency task plans.
 - **No change without an owning task-tree leaf first** (`docs/TASK_TREE_README.md`;
   doctrine: `docs/decisions/0001-task-tree-and-commit-doctrine.md`).
 - **Keep `README.md` a bounded stable landing page** (`README_POLICY.md`, ADR `0063`). Route changing detail to

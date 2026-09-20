@@ -40,7 +40,7 @@ ordinary guide/example work within that request.
 | Backend | Package or module wiring | Required setup for the inspected route | Direct result path |
 | --- | --- | --- | --- |
 | Perl | Add the checkout's `perl/` to `@INC`; use `LinkedSpec::SpecLoader`. | Perl and the repo-owned modules; .1.1 verifies66 repository modules plus37 core modules and10 standard native libraries on Perl5.34.1. The facade declares `use 5.010`, which is not a fresh minimum-version support test. | `load_and_compile_spec(...)->compiled` yields the parser coderef; invoke it with a scalar reference and optional invocation options. |
-| Rust | Cargo path dependency on `rust/linkedspec-runtime`; it brings core and `rgx-core`. | Compatible Rust toolchain, recursively initialized RGX/PGEN, required generated PGEN parser sources and Cargo dependencies. Existing local dependencies declare Rust1.95. | `load_and_compile_spec(...).into_engine()` then `execute_value_with_diagnostics(input, &options)` returns the direct JSON value. |
+| Rust | Cargo path dependency on `rust/linkedspec-runtime`; it brings core and `rgx-core`. | Rust1.95 per RGX published integration requirements, initialized required dependency checkouts, RGX public bootstrap and Cargo dependencies. | `load_and_compile_spec(...).into_engine()` then `execute_value_with_diagnostics(input, &options)` returns the direct JSON value. |
 | Dart | `linkedspec_dart` path dependency on `dart/`. | SDK constraint `>=3.9.0 <4.0.0`; no runtime package dependencies in pubspec.yaml. `test` is a development dependency. The regex implementation uses Dart matching and its repo-owned bridge. | `loadAndCompileSpec(...).createEngine().execute(input).value`; execute delegates to parse. |
 | Julia | `LinkedSpecJulia`, UUID `8eec5991-a432-4f89-ae45-eeda2e697757`, local package at `julia/`. | Project compatibility Julia1.12 and JSON3 1.14.3; Base64, Random and SHA are standard-library dependencies. Regex is Julia's `Regex` type. Retain package sources and the consumer-local depot. | `load_and_compile_spec(...)`, `create_engine(...)`, then `runtime_execute(engine, input).value`. |
 | Lua | `lua/src/?.lua` and `lua/src/?/init.lua` in the module search path; three native modules in the selected ABI's native path. | Matching Lua interpreter/headers, C compiler, pkg-config and PCRE2 development files. Build `linkedspec_regex_pcre2`, `linkedspec_filesystem_native` and `linkedspec_mcp_system` for the chosen ABI. No LuaRocks dependency. | `load_and_compile_spec(...)`, `loaded:create_engine()`, then `runtime_parse(engine, input).value`; the result also carries matched/cursor/output fields. |
@@ -77,7 +77,7 @@ Rust-first delivery addresses the motivating ARCHOGEN question. A Cargo consumer
 must report actual Cargo behavior rather than manufacture a warm-run claim.
 The director cancelled the no-rebuild requirement on September13: ordinary
 RGX/PGEN builds are authorized and must not be blocked by a compiler guard.
-Retain caches; the optional-file freshness repair keeps its existing owner and
+Retain caches; the public build-performance report keeps its existing owner and
 is no longer a prerequisite for these guides.
 
 ## Exact content destinations and ownership

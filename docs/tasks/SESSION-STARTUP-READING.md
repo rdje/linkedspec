@@ -4454,10 +4454,11 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Status: `pending`
   Goal: Reuse compatible PGEN and RGX build artifacts while preserving every real-input invalidation and test.
   Children: `.80.0`, `.80.1`, `.80.2`, `.80.3`, `.80.4`
-  Acceptance: Diagnose exact Cargo freshness reasons, repair unnecessary optional-input watches, assess recurring
-    target retention, and measure unchanged warm runs plus valid rebuild controls. Preserve the required
-    PGEN → RGX → LinkedSpec dependency chain and existing nested work. Startup latency is separately owned by .81.
-  Current director direction (2026-09-13): The prior September10 build-on-update-only/no-rebuild requirement is cancelled. Resume normal Cargo builds, including RGX/PGEN compilation whenever Cargo requests it. Retain caches, preserve nested source/pin work and measure actual rebuild causes. This performance repair is no longer an integration-guide prerequisite; .80.1-.4 retain correctness and optimization work without a mandatory zero-build lifecycle.
+  Acceptance: Measure documented public build behavior and LinkedSpec-owned target retention. Report
+    dependency issues upstream without implementation inspection or modification. Preserve source/pins,
+    compatible artifacts and ordinary correct builds. Startup latency is separately owned by .81.
+  Director boundary (2026-09-20): RGX/PGEN are black boxes; only published interfaces/contracts and observable results may guide this work. No internal inspection, causal reconstruction, patches or pin changes. Older implementation-derived notes are removed and cannot authorize future work.
+  Earlier build permission (2026-09-13): The prior September10 build-on-update-only/no-rebuild requirement is cancelled. Resume normal Cargo builds, including RGX/PGEN compilation whenever Cargo requests it. Retain caches, preserve nested source/pin work and measure observable build behavior. This performance repair is no longer an integration-guide prerequisite; .80.1-.4 retain correctness and optimization work without a mandatory zero-build lifecycle.
 
 
 - ID: `SESSION-STARTUP-READING.80.0`
@@ -4466,8 +4467,8 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Scope: Read-only evidence intake, pending repair ownership, Knowledge retrieval, book understanding and continuity.
   Activation: Clean `bef5dafd928ca723b79eda524351a9fb5c1cf66a`; zero-byte brief; promoted canonical receipt;
     containment .10 and every diagnostic job are complete and consumed before this task-tree-first change.
-  Acceptance: Record source and saved metadata identities, eight watches/two present files, the exact build-stage
-    baseline and its limits, successful and failed sample outcomes, and separately gated .80/.81 children.
+  Acceptance: Preserve the public build-stage baseline and its limits, observed sample outcomes and
+    separately gated .80/.81 ownership. Dependency-internal conclusions are removed by director instruction.
     Preserve all earlier task/Knowledge/history evidence, reading coverage, dependency work and source bytes;
     return to DART-STARTUP-READING.1.37 after the focused commit and clean proof.
   Verification tier: `focused`
@@ -4478,7 +4479,8 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     CI, cache, policy, storage, capability or generated-contract implementation changes.
   Checklist: [x] clean activation/task ownership [x] evidence and pending owners [x] Knowledge/book/live lockstep
     [x] focused verification [x] commit/brief/clean handoff.
-  Verification: Exact source/watch/build/sample/receipt replay, prior-record preservation, Knowledge 1048/8543,
+  Verification: Historical build/sample/receipt intake and Knowledge 1048/8543; implementation-derived
+    dependency details removed on September20. Original documentation checks included
     rendered book, memory, both history-pressure checks, all nine doctrines and final scope/whitespace pass.
     The preceding capacity commit passes all nine doctrines, required
     consumers, storage/relocation, CLI 66x2 and Phase 0 1,032/1,032 in 1,163 seconds (Phase 0 only);
@@ -4487,28 +4489,19 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 
 - ID: `SESSION-STARTUP-READING.80.1`
   Status: `pending`
-  Goal: Establish exact Cargo freshness reasons and compatible cold/warm build baselines.
+  Goal: Measure cold/repeated public builds and supported consumer configurations.
   Dependencies: `.3`, `.4`, `.5`, `.80.0`.
-  Acceptance: Use supported fingerprint tracing with the installed Cargo and quiescent managed targets.
-    Separate source, generated-file availability, environment, toolchain, profile, feature and flag changes;
-    distinguish ordinary/progressive graphs, fresh emitted callers, optional disposable targets and relocation.
-    Measure build, compiler/loader wait, test startup and execution separately. Preserve all existing artifacts
-    and nested source work; the observed missing watches are not proof that every rebuild has the same cause.
-  Direction update (2026-09-13): Measure actual ordinary-CI dependency compilation and compatible artifact configurations. Normal missing/incompatible-product builds are authorized; the earlier mandatory prohibition is cancelled. Integration .2.1 provides a fresh exact optional-json-file fingerprint observation, without closing this broader baseline.
-
+  Acceptance: Run documented interfaces under managed storage, preserving inputs and caches. Record
+    commands, toolchain, pins, exit status and build/test durations separately. Observe outputs without
+    inspecting dependency implementation or inferring private freshness mechanisms. No zero-build promise.
 
 - ID: `SESSION-STARTUP-READING.80.2`
   Status: `pending`
-  Goal: Correct PGEN optional-input watches and integrate only the reviewed dependency changes.
+  Goal: Track upstream reports and published resolutions for measured dependency build costs.
   Dependencies: `.80.1`.
-  Acceptance: Keep edits/deletion of present files, creation of absent files, environment overrides and genuine
-    generated EBNF/regex changes visible to Cargo. Cover cold bootstrap with all generated files or their
-    directory absent; avoid self-invalidating build-output directory watches. Preserve parser availability,
-    compiler/profile/features/flags invalidation and the normal dependency chain. Prove repeated warm reuse.
-    Own upstream changes and pin integration explicitly; preserve pre-existing nested work without staging it
-    incidentally. No fake parser stubs, warning suppression, hand-edited fingerprints or freshness bypass.
-  Direction update (2026-09-13): Correct only measured unnecessary invalidation; normal Cargo builds remain permitted before and after repair. There is no mandatory build-on-update-only lifecycle to enforce. Any upstream source/pin change remains separately reviewed and preserves existing nested work.
-
+  Acceptance: Supply a self-contained public-command reproduction and observable result. The upstream
+    maintainer owns diagnosis and repair. Verify a supplied resolution through published interfaces;
+    do not inspect internals, patch dependency source, reconstruct build steps or change pins.
 
 - ID: `SESSION-STARTUP-READING.80.3`
   Status: `pending`
@@ -7621,8 +7614,8 @@ All 53 owned scopes are read: HLink delimiter/raw text, Liberty scalar/complex a
 | `2026-09-07` | `SESSION-STARTUP-READING.3.3.41` | Exact two-file reading/baseline identity; complete Unicode coverage; callable assertion scope; Unicode/callable neutral checks; four Knowledge cards; 99-commit batch census; memory/history/diff and receipt-bound canonical gate | PASS focused reading and census; exact staged canonical receipt required before landing, with final result in the commit body. |
 | `2026-09-08` | `SESSION-STARTUP-READING.3.3.42` | Exact scoped reading/baseline identity; callable/named-mark neutral checks; Knowledge, memory, histories, diff and all doctrines | PASS focused reading; pressure maintenance owns the next clean pivot. |
 
-Current CI intake, `2026-09-10` / `SESSION-STARTUP-READING.80.0`: exact source, eight watches/two present files,
-eleven build stages, both successful samples and failed compiler-sample outcome, prior-record preservation,
+Current CI intake, `2026-09-10` / `SESSION-STARTUP-READING.80.0`: eleven public build stages
+(dependency-internal details removed September20), both successful samples and failed compiler-sample outcome, prior-record preservation,
 Knowledge/book/memory/history/whitespace and all nine doctrines pass. Preceding canonical `bef5dafd` passes
 CLI66x2 and Phase0 1032/1032; 1163 seconds is Phase0 only, with 25 optional gates skipped.
 

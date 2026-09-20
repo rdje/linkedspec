@@ -512,6 +512,14 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
 - **HOW:** `bash tools/test_rust_project_data_storage.sh`. `tools/run_rust_local.sh` invokes the oracle after the
   complete package/build proof and reuses those expensive results.
 
+#### Rust dependency integration boundary
+
+Treat RGX and PGEN as black boxes. Use `rgx/docs/INTEGRATION.md` and published APIs;
+RGX's downstream preparation command is `make -C rgx bootstrap`. The Rust integration
+chapter supplies the application workspace and managed-storage context. Do not inspect
+implementation, reconstruct dependency build procedures, patch source or change pins.
+Reproduce failures through the public interface and track upstream reports.
+
 #### macOS Rust first-launch latency: classify before changing anything
 
 On macOS, a freshly started Cargo test can be silent before Rust `main` while operating-system policy assessment

@@ -17,11 +17,39 @@ answers:
   - has the reported Lispish multiline string patch been verified locally
   - how does a host Cargo workspace exclude the LinkedSpec and PGEN packages
 date: 2026-09-20
-status: Rust workspace onboarding repaired and locally verified; remaining bootstrap/guidance and strict Lispish reports retain their separate owners
+status: workspace repair and public integration correction verified; bootstrap message and strict Lispish reports remain open
 tags: [rust, lispish, embedding, dependencies, discussion]
-evidence: "September13 integration .2.2 native/clean-source proof; September20 .8.1 complete ten-report intake and .8.2 two Cargo workspace failures, twelve remedy probes, ten maintained boundary checks and native two-member consumer/example builds. Supplied Lispish patch results remain unverified locally."
-reverify: "Run bash tools/run_python_project_data.sh examples/integration/rust/verify_workspace.py; bash tools/run_cargo_local.sh test --offline --locked --manifest-path examples/integration/rust/Cargo.toml; build --bins with the same wrapper/manifest/options; run bash tools/run_python_project_data.sh examples/integration/rust/verify_lispish.py --binary rust/target/debug/lispish_file. Replay the enclosing-workspace setup in docs/linkedspec-book/src/public-api/integration-rust.md. Actual ARCHOGEN/SEMULITH application builds remain consumer work."
+evidence: "September13 native Lispish proof; September20 report intake, workspace repair and successful RGX public bootstrap/native consumer proof. Supplied grammar patch remains unverified locally."
+reverify: "Follow the public preparation/workspace sequence in docs/linkedspec-book/src/public-api/integration-rust.md, then its native consumer checks. Treat rgx/docs/INTEGRATION.md as the dependency authority; do not inspect implementation."
 ---
+
+**Direct dependency boundary:** LinkedSpec integrates only with RGX. RGX's
+published integration document, public APIs and contracts are the sole authority.
+RGX owns PGEN and all transitive preparation; no separate PGEN procedure or
+internal dependency knowledge belongs in LinkedSpec. Reports go to RGX.
+
+## September 20 public build boundary
+
+The director requires RGX and PGEN to be black boxes. The integration authority is
+`rgx/docs/INTEGRATION.md`: use RGX's public `make bootstrap` before the consumer's
+Cargo build. Do not inspect or reconstruct dependency internals. A proposed local
+bootstrap implementation was discarded before commit; its internal recipes and
+conclusions are removed from maintained knowledge. Dependency source and pins
+were unchanged throughout. `BACKEND-INTEGRATION-GUIDES.8.3` owns this correction
+and public-interface verification; ARCHOGEN/LS-004 is not thereby declared fixed.
+
+On unchanged committed source, the documented RGX bootstrap passes offline in
+56.19s and repeats in 0.22s using a populated local package store. The two-member
+host application builds in 26.65s; exact word values, 18 Lispish file/deployment
+groups and three adapter tests pass with unchanged locks. An empty offline store
+makes the same public command exit 2 correctly, while printing misleading
+intermediate progress. The public reproduction is
+`docs/upstream/rgx/bootstrap-progress-status.md`, with upstream follow-up owned by
+`RGX-CONSUMER-BUILD-REPORTS.1`. It has not been posted externally. Evidence lives
+under `.linkedspec-data/scratch/backend-integration83/public-interface/`.
+This proves native use on macOS arm64/Rust 1.95.0 with committed source archives
+and retained packages; it does not prove fresh network checkout/initialization,
+release builds, another platform or an actual downstream application build.
 
 ## September 20 Cargo workspace repair
 
@@ -33,7 +61,7 @@ RGX 8763a0e6 and PGEN db6f8c68. SEMULITH/LS-003 item 1 is the same setup issue.
 
 The example now declares its own empty `[workspace]`. An enclosing application
 must merge `exclude = ["vendor/linkedspec"]` into its root `[workspace]` before
-PGEN preparation, adjusting the path to its submodule location. The example's
+RGX preparation, adjusting the path to its submodule location. The example's
 boundary alone does **not** isolate the separate PGEN package. Twelve controlled
 metadata probes establish the distinction; the maintained `verify_workspace.py`
 checks ten standalone/host/exclusion cases using Git-archived committed sources
@@ -59,7 +87,7 @@ pass in 28.17s/18.72s, with normal dependency compilation. These are reuse-assis
 clean-source builds, not a new bootstrap, empty-cache network installation,
 release-profile guarantee or actual downstream application build.
 Evidence is under `.linkedspec-data/scratch/backend-integration82/`.
-Bootstrap false-success repair remains `.8.3`; prerequisite guidance is `.8.4`.
+The `.8.3` public-interface correction is described above; prerequisite guidance remains `.8.4`.
 
 ## September 20 downstream report intake
 
@@ -76,7 +104,7 @@ and other numbers for different concerns.
 | ARCHOGEN/LS-001 | Reported open/blocker: example and PGEN manifests encounter an enclosing Cargo workspace. | Integration `.8.2`: reproduced and repaired as above; downstream report state unchanged. |
 | ARCHOGEN/LS-002 | Open/blocker for eADL: first-form extraction ignores additional/trailing input; requests complete validation and all forms. | Startup `.83.1` contract, `.83.2` implementation, `.83.3` independent admission. |
 | ARCHOGEN/LS-003 | Open/major for eADL: symbols, quoted strings and numbers lose their token-kind distinction. | Startup `.83.1-.83.3`; same requirement as SEMULITH/LS-002. |
-| ARCHOGEN/LS-004 | Open/moderate: failed bootstrap prerequisites are followed by a false seed-success message. | Integration `.8.3`: independently reproduce failure, stop promptly and verify products before success. |
+| ARCHOGEN/LS-004 | Reported open/moderate: failed bootstrap prerequisites are followed by a false seed-success message. | Integration `.8.3`: public-interface report and guidance correction; no upstream fix or downstream state change claimed. |
 | ARCHOGEN/LS-005 | Open/minor: checkout instructions need an explicit forward pointer to required preparation. | Integration `.8.4`, coordinated with `.8.2-.8.3`. |
 | ARCHOGEN/LS-006 | Withdrawn by reporter: the hex underscore remains intact. | Intake retains the correction; no defect repair claimed or requested. |
 | ARCHOGEN/LS-007 | No-action: adjacent fragments join as documented. | Intake retains the measured compatibility case; no behavior change requested. |
@@ -132,11 +160,8 @@ cloned from committed objects with every tracked blob checked. Only the Rust
 dependency closure was initialized, not optional PCRE2/HDL test repositories.
 A byte-verified public registry seed copied12738files/348484293bytes. Initial
 offline PGEN resolution lacked mimalloc metadata; normal online preparation
-then passed. No claim is made that mimalloc itself was compiled. Bootstrap
-produced12files/18576534bytes, including EBNF, regex and both annotation Rust
-parsers. The pinned Makefile executes `./target/debug/ast_pipeline`, so bootstrap
-must select PGEN's own `rust/target`; application builds use their separate local
-target. The guide now contains the verified override.
+then passed. No claim is made that mimalloc itself was compiled. Those earlier preparation details do not define the dependency contract.
+Current preparation must follow RGX's published interface above.
 
 The separate application preserves the200-package reference lock's versions.
 Locked offline builds took40.50s then4.87s; both logs report normal dependency
@@ -207,17 +232,13 @@ and RGX through existing path dependencies. LinkedSpec's nested RGX submodule
 contains PGEN and PCRE2 submodules; recursive initialization preserves that layout.
 This is source checkout, not a requirement to build every nested product.
 
-The RGX README explicitly documents a fresh-checkout prerequisite: PGEN's
-generated EBNF and regex parser sources are not shipped in Git. Prepare them once
-when absent or invalidated by the pinned dependency update, then retain compatible
-products and Cargo caches on the consumer repository volume. The documented
-bootstrap target is `regex_parser_bootstrap` in PGEN's Rust Makefile. This note
-does not run it or certify a clean consumer bootstrap. Repeated-build remediation
-remains owned by `SESSION-STARTUP-READING.80`; no automatic reuse guarantee is added.
-The September13 director update cancels the no-rebuild prohibition: normal Cargo
-compilation of RGX/PGEN is authorized. This performance repair does not block the
-integration guides, and existing dependency sources/pins remain untouched.
-The current local RGX/PGEN manifests declare Rust 1.95. The older README 1.85
+RGX's published integration document requires its public bootstrap command on a
+fresh downstream checkout. Follow that contract rather than an internal PGEN
+procedure. Normal documented builds are authorized; retain compatible outputs
+and same-volume caches. Startup `.80` tracks observable performance and upstream
+reports only. Source inspection, implementation-derived assumptions and local
+submodule patches are forbidden by the September20 director instruction.
+The published RGX integration contract requires Rust 1.95. The older README 1.85
 claim and actual compiler support proof remain owned by startup .41.7; see
 [[rust-build-requirements-documentation-gap]].
 
