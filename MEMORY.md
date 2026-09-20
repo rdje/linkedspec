@@ -1,12 +1,12 @@
 # MEMORY
 
-- activation_commit: `29bf3fdd12c1f12b0fc414258229c78df1e4d5bc` — clean Julia setup checkpoint; deployment activation.
-- latest_completed_leaf: `BACKEND-INTEGRATION-GUIDES.4.2 - verify Julia source deployment and diagnostics`; source deployment, typed diagnostics and clean-source application proof verified.
-- active_work_unit: `BACKEND-INTEGRATION-GUIDES.5.1` — pending clean activation for Lua ABI-specific native setup.
-- next_action: Activate BACKEND-INTEGRATION-GUIDES.5.1 from the clean committed tree for Lua ABI-specific native setup and integration. Complete Lua, common navigation and independent .7, then resume CONFORMANCE-SOURCE-READING.1.35. Rust ad290bdb4 is already pushed; normal dependency builds remain authorized and strict Lispish repair remains startup .83.
+- activation_commit: `0b409e30531ca898e84245220cde26606f65b7b9` — clean Julia deployment checkpoint; Lua setup activation.
+- latest_completed_leaf: `BACKEND-INTEGRATION-GUIDES.5.1 - document and verify native Lua integration`; dual-runtime setup and approved six-control history admission verified.
+- active_work_unit: `BACKEND-INTEGRATION-GUIDES.5.2` — pending clean activation for Lua deployment and diagnostics.
+- next_action: Activate BACKEND-INTEGRATION-GUIDES.5.2 from the clean committed tree for Lua deployment, value conversion, structured errors and optional diagnostic sinks. Complete common navigation and independent .7, then resume CONFORMANCE-SOURCE-READING.1.35. Rust ad290bdb4 is already pushed; normal dependency builds remain authorized and strict Lispish repair remains startup .83.
   Named-argument direction PARSER-AUTHORING-APIS.4 is approved and parked; other authoring proposals and approved formats stay parked.
-- in_flight_uncommitted: none; this leaf lands verified Julia deployment and diagnostics. Derive its committed identity from Git.
-- blockers: none for the authorized integration guide activity. Other-backend and final canonical proof remain required at their owning leaves; startup .83 owns strict Lispish parsing.
+- in_flight_uncommitted: none; this leaf lands verified Lua setup, the guide and approved ADR0121 history capacity. Derive its committed identity from Git.
+- blockers: none for the authorized integration activity. Lua deployment, common navigation and final canonical .7 remain required; strict Lispish repair stays startup .83.
 - current_rust_warning_debt: Repeated carriers report 1,870 pgen plus 26 rgx-core output warnings; RUST-DEPENDENCY-WARNING-ZERO.1-.7 own causal repair/pins/enforcement without suppression after Lua intake.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
   active table; the task metadata doctrine inventories all consumers, permits arbitrary frontier-row rewrites,
@@ -42,7 +42,7 @@
 - current_map_leaves_scope_resolution: option A preserves pure functions. Helper-mediated rejection uses inline
   explicit-target `set(tree, ...)`; post-commit receiver-write proof uses caller-scoped `.with()`. No implicit
   caller capture or arbitrary user-defined bang method is admitted.
-- current_mutation_public_no_drift: `.19.9` closes public no-drift; current inventory is 67 Markdown files / 14 governed documents / eleven
+- current_mutation_public_no_drift: `.19.9` closes public no-drift; current inventory is 68 Markdown files / 14 governed documents / eleven
   authority-bound example classes / ten stale-current denials / 50 isolated public-checker mutations. Capability
   governance independently pins the owner and exact-one CI registration through four mutations.
 - current_core_state: typed source is 14/0/231; recognition 138/250/58; progressive 9/9/116 plus public
@@ -51,10 +51,10 @@
 - standing_contracts: all durable paths are repo-relative; all project data stays on the repository filesystem;
   README remains bounded; ordinary leaves use focused proof and designated infrastructure/public/push boundaries
   use exact staged canonical CI; task-tree/index, Knowledge Map, mdBook, and bounded live/history move in lockstep.
-- current_engineering_notes_capacity: ADR0118 admits 34 files /33 manifest lines /19902 manifest bytes and 28000 aggregate lines for finite Lua reading.
-  Lua .1.46 rollover preserves exact history as segment4976-8f23f4b6bde6; current manifest is 18678 bytes /31 lines, collection 32 files including hot root; other limits remain unchanged.
-- current_change_history_capacity: ADR0118 admits 38 files /37 manifest lines /21071 manifest bytes; current collection uses 37 files /36 manifest lines /20495 manifest bytes.
-  Conformance .1.4 preserves clean baaebc8e CHANGES242-457 as segment4976-6d1dd54d605a:216 lines/18973 bytes; all earlier archive records and controls remain exact. Proportionate governance: ADR0115.
+- current_engineering_notes_capacity: ADR0121 admits 35 collection files /34 manifest lines /20514 manifest bytes for integration delivery; all three current counts match.
+  Notes segment4973 preserves clean HEAD lines107-220 byte-exactly; older archives and all other controls remain unchanged.
+- current_change_history_capacity: ADR0121 admits 39 collection files /38 manifest lines /21647 manifest bytes for integration delivery; all three current counts match.
+  Changes segment4974 preserves clean HEAD lines137-262 byte-exactly; earlier archives and all other controls remain unchanged.
 - current_ci_build_reuse: September13 director update cancels the RGX/PGEN no-rebuild requirement. Normal Cargo builds are authorized, including either dependency; retain caches.
   Startup .80.1-.4 now own optional freshness/performance improvements, not a mandatory zero-build lifecycle or integration-guide prerequisite.
 - latest_bootstrap_read: 2026-09-13 — roadmap Yes / full codebase No / physical mdBook Yes; five backend lanes and supporting .3.7 closed. Conformance34/143 reads45038 fragments/1353523 bytes;109 groups remain, including conformance tests and four decoded Unicode inputs. Later .3.9-.3.11, formal book .4 and policy .5 remain; no runtime repair closes.

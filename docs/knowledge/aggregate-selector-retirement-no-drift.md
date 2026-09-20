@@ -49,7 +49,7 @@ every invocation and removes the probe in a `finally` block. Tests that need ret
 canonical neutral JSON invalid fixtures rather than embedding a second positive spelling.
 
 `tools/check_public_aggregate_selector_surface.py` also discovers every immediate component README and requires
-bare-binding anchors in the Rust, Dart, Julia, and Lua documents. Its exact 66-file inventory prevents a backend
+bare-binding anchors in the Rust, Dart, Julia, and Lua documents. Its exact 67-file inventory prevents a backend
 entry document from falling outside the public zero-current-example claim.
 
 The September13 integration .2.1 review adds the Rust integration page and updates
@@ -88,6 +88,15 @@ Earlier dated evidence stays intact; reverify with the existing command.
 
 `BACKEND-INTEGRATION-GUIDES.4.1` adds the native Julia integration chapter.
 Preflight reproduces mutation expected66/observed67 and selector expected65/observed66.
+Only the two expected file counts and current census references advance. Classifier
+logic, frozen authorities,35 selector references,zero current examples,11 contrast
+mutations and mutation14/11/10/50 checks remain unchanged. Earlier evidence stays
+intact; reverify with the existing command.
+
+## September 20 Lua integration-page review
+
+`BACKEND-INTEGRATION-GUIDES.5.1` adds the native Lua integration chapter.
+Preflight reproduces mutation expected67/observed68 and selector expected66/observed67.
 Only the two expected file counts and current census references advance. Classifier
 logic, frozen authorities,35 selector references,zero current examples,11 contrast
 mutations and mutation14/11/10/50 checks remain unchanged. Earlier evidence stays

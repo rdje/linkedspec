@@ -19,7 +19,7 @@ reverify: "bash tools/run_python_project_data.sh tools/check_mutation_public_sur
 
 The canonical teaching destination is `docs/linkedspec-book/src/dsl/values-containers-and-flow-helpers.md`.
 Fourteen current public documents own exact mutation status or semantics; the checker inventories those documents
-within a bounded 67-file public Markdown surface and fails when a new public file appears without explicit review.
+within a bounded 68-file public Markdown surface and fails when a new public file appears without explicit review.
 
 The required examples cover missing-container creation, dense arrays, existing-kind conflicts, segment/RHS
 evaluation order, original-shape traversal, callback fields, receiver-identity guarding, rollback, detached
@@ -67,6 +67,15 @@ Earlier dated evidence stays intact; reverify with the existing command.
 
 `BACKEND-INTEGRATION-GUIDES.4.1` adds the native Julia integration chapter.
 Preflight reproduces mutation expected66/observed67 and selector expected65/observed66.
+Only the two expected file counts and current census references advance. Classifier
+logic, frozen authorities,35 selector references,zero current examples,11 contrast
+mutations and mutation14/11/10/50 checks remain unchanged. Earlier evidence stays
+intact; reverify with the existing command.
+
+## September 20 Lua integration-page review
+
+`BACKEND-INTEGRATION-GUIDES.5.1` adds the native Lua integration chapter.
+Preflight reproduces mutation expected67/observed68 and selector expected66/observed67.
 Only the two expected file counts and current census references advance. Classifier
 logic, frozen authorities,35 selector references,zero current examples,11 contrast
 mutations and mutation14/11/10/50 checks remain unchanged. Earlier evidence stays

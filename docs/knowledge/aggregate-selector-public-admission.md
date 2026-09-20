@@ -30,7 +30,7 @@ Public documentation may retain the removed spelling only to state a boundary, e
 clearly historical milestone. It may not present the spelling as an accepted example, a remaining compatibility
 surface, or future work. `tools/check_public_aggregate_selector_surface.py` enforces that distinction across the
 root README/roadmaps/architecture state, capability guide, and every mdBook source page. Its exact current inventory
-is 66 public files. It composes the runtime/source retirement checker so public and executable admission cannot
+is 67 public files. It composes the runtime/source retirement checker so public and executable admission cannot
 diverge. Its current inventory is 35 classified retired/history references and zero current examples. Seven concrete
 retired spellings are confined to one uniquely bounded migration section: two rejected examples and five ordered
 old-to-new contrasts guarded by eleven in-memory mutations. Four earlier counted occurrences were prose false
@@ -87,6 +87,15 @@ Earlier dated evidence stays intact; reverify with the existing command.
 
 `BACKEND-INTEGRATION-GUIDES.4.1` adds the native Julia integration chapter.
 Preflight reproduces mutation expected66/observed67 and selector expected65/observed66.
+Only the two expected file counts and current census references advance. Classifier
+logic, frozen authorities,35 selector references,zero current examples,11 contrast
+mutations and mutation14/11/10/50 checks remain unchanged. Earlier evidence stays
+intact; reverify with the existing command.
+
+## September 20 Lua integration-page review
+
+`BACKEND-INTEGRATION-GUIDES.5.1` adds the native Lua integration chapter.
+Preflight reproduces mutation expected67/observed68 and selector expected66/observed67.
 Only the two expected file counts and current census references advance. Classifier
 logic, frozen authorities,35 selector references,zero current examples,11 contrast
 mutations and mutation14/11/10/50 checks remain unchanged. Earlier evidence stays

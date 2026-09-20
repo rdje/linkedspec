@@ -19,8 +19,10 @@ answers:
   - does a Julia consumer inherit the library manifest or need its own package lock
   - what Julia package data must an offline integration retain
   - how does a Julia application deploy and relocate offline
+  - how does a Lua application retain native products without rebuilding each run
+  - what blocks committing the verified Lua integration guide
 date: 2026-09-20
-status: Rust complete, Perl/Dart/Julia leaves verified; Lua and independent closeout pending
+status: Rust complete, Perl/Dart/Julia leaves and Lua setup verified; Lua deployment and independent closeout pending
 tags: [integration, documentation, perl, rust, dart, julia, lua]
 evidence: "BACKEND-INTEGRATION-GUIDES.0, activation 00f9783a1e4b625bc251a3e260ef1eef60c35888. Canonical Knowledge, ADR0040, companion tree, manifests, six complete setup scripts and native loader/result seams inspected. Managed version commands and read-only pkg-config identities consumed with exit0; no compiler, dependency preparation or consumer execution ran."
 reverify: "Inspect the exact sources in the matrix below. Version-only commands: bash tools/run_cargo_local.sh --version; bash tools/run_dart_project_data.sh --version; bash tools/run_julia_project_data.sh --project=julia --version; bash tools/project_data_run.sh perl -e 'printf qq{Perl %vd\\n}, $^V'; bash tools/project_data_run.sh lua -v; bash tools/project_data_run.sh luajit -v; bash tools/project_data_run.sh pkg-config --modversion lua luajit libpcre2-8. These commands establish installed identity, not consumer support or a passing backend suite."
@@ -426,3 +428,55 @@ Use --package, --library-root, --grammar and --fixtures for a prepared separate 
 --bash selects the deployment shell. Both Bash 5.3.15 and system Bash 3.2.57 pass on
 Julia 1.12.7/macOS arm64. Clean source is 2838 files / 58774855 bytes. Runtime source,
 pins and original PGEN changes remain exact; final parent closeout remains .7.
+
+## Lua setup — September 20, integration .5.1
+
+The native consumer and guide now select exact Lua and ABI-specific native paths,
+use interpreter -E, and keep reusable products in application build directories.
+Thirteen setup checks pass on both working and clean pinned 0b409e305 applications
+for each installed runtime: PUC Lua 5.5.1 and LuaJIT 2.1.1788460057 with PCRE2 10.48.
+Five selected native loader tests pass per runtime. Clean source is 2842 files /
+58811026 bytes; nested RGX/PGEN remain uninitialized and original PGEN edits stay
+exact. Native product hashes/mtimes are unchanged across fresh processes.
+
+Detailed build/reuse, module and supporting-grammar facts are in
+[[lua-project-data-ssd-storage]]. The maintained verifier is
+examples/integration/lua/verify_words.py (--runtime puc or luajit); build the chosen
+ABI once as documented in the guide before running it. Optional --package,
+--library-root and --grammar select a prepared separate consumer. Declared PUC 5.4
+and invalid-regex handling remain unverified; .5.2 owns deployment/diagnostics and
+.7 owns independent parent closeout. No runtime source, pin or reading credit changes.
+
+## Lua setup landing — history capacity proposal, September 20
+
+Native/setup proof is complete; .5.1 is not committed. Its two required normal
+rollovers preserve clean 0b409e305 source exactly but exceed current controls.
+The task-tree section "Lua integration history capacity" owns the exact proposal,
+six old/new limits, reconstruction identities and seven-record finite forecast.
+Change-history files/manifest lines/bytes would be 39/38/21647 (limits38/37/21071);
+engineering notes would be 35/34/20514 (limits34/33/19902). No limits changed.
+Both new archive segments reproduce exact HEAD suffixes; all older rows/archives
+are unchanged. Both current hot shards pass roll_document_history --check, while
+scripts/check_readme_stability.sh rejects exactly those six controls.
+
+The proposal requests one slot per collection, preserving all other controls and
+normal canonical CI. README_POLICY.md requires an accepted indexed ADR before any
+routed limit changes; ADR0118's finite Lua-reading allowance does not authorize
+later increases. Seven further records of14 lines/2048 bytes fit the retained hot
+shards without another rollover (240/46302 and208/46175 maxima). This forecast
+covers remaining integration and bounded closeout overhead, not unlimited PNT.
+Reverify actual state with both history --check commands and the routing checker;
+the current task owns disposition and repair before .5.1 can land.
+
+### Approved disposition and implementation
+
+The director granted all six proposed limits on September 20. ADR0121 records the
+exact old/new objects and normal canonical verification. Its implementation changes
+only those six registry scalars. Actual production functions pass 44 boundary and
+34 authorization cases; unchanged guards reject absent/altered authority and every
+tested unapproved increase. The proposal above is dated pre-admission evidence.
+Reverify the current candidate with scripts/check_readme_stability.sh and both
+history --check commands; exact staged canonical CI still governs .5.1 landing.
+All previous archives and historical manifest rows remain byte-exact. Finite
+forecast counts are recomputed after admission overhead; this is not an unlimited
+PNT capacity grant. Continue Lua deployment .5.2 after a clean committed handoff.

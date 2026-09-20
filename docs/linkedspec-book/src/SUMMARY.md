@@ -26,6 +26,7 @@
 - [Rust Application Integration](public-api/integration-rust.md)
 - [Dart Application Integration](public-api/integration-dart.md)
 - [Julia Application Integration](public-api/integration-julia.md)
+- [Lua Application Integration](public-api/integration-lua.md)
 - [Descriptor Introspection](public-api/descriptor-introspection.md)
 - [Semantic Introspection](public-api/semantic-introspection.md)
 - [Trace API](public-api/trace-api.md)

@@ -231,7 +231,7 @@ ARCHOGEN's use of Lispish through Rust. The requested scope is every backend.
   Commit: `BACKEND-INTEGRATION-GUIDES.4.2 - verify Julia source deployment and diagnostics`
 
 - ID: `BACKEND-INTEGRATION-GUIDES.5`
-  Status: `pending`
+  Status: `active`
   Goal: Deliver Lua integration guidance for the supported PUC Lua and LuaJIT routes.
   Children: `.5.1`, `.5.2`
   Dependencies: `.0`; preserve LUA-STARTUP-READING.2.3 exclusions and missing-ABI proof boundaries.
@@ -240,11 +240,20 @@ ARCHOGEN's use of Lispish through Rust. The requested scope is every backend.
   Commit: `pending`
 
 - ID: `BACKEND-INTEGRATION-GUIDES.5.1`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `0b409e30531ca898e84245220cde26606f65b7b9`.
+  Verification tier: `canonical`
+  Focused checks: Retained ABI-specific native products and explicit module paths for installed PUC Lua and LuaJIT; exact independent values, package/native/supporting-grammar provenance and clean pinned-source setup; selected loader/frontend tests within existing exclusions; public inventories, book, source/task/history preservation and all doctrines.
+  Canonical trigger: A new backend integration chapter changes the two exact public-page inventory constants. Preserve classifier/frozen-contract semantics and require exact staged canonical CI before landing this designated public-inventory boundary. The director-approved six-control history admission is also canonical infrastructure.
+  Scope: Document and verify Lua setup with existing native APIs and build tools, separate PUC Lua/LuaJIT products, source/runtime dependencies and owned same-volume output. Retain prepared products and caches. Preserve runtime source, pins, missing PUC5.4 proof and LUA-STARTUP-READING.2.3 malformed-regex/unfiltered-gate exclusions. Include the due generated-artifact census, deleting only provably unnecessary owned artifacts. Deployment and comprehensive diagnostics remain .5.2; parent closeout remains .7.
+  Direct-dependent scope: Correct the existing Lua storage card's stale two-module wording to the current builder trio; document retained application products versus the disposable test wrapper. This is documentation alignment for the inspected existing builder, with no storage infrastructure change.
+  Director disposition (2026-09-20): Granted the exact six history controls proposed below: changes files38->39, manifest lines37->38 and bytes21071->21647; notes files34->35, manifest lines33->34 and bytes19902->20514. Implement the accepted indexed ADR and only those six registry scalars within this active canonical leaf, preserve every earlier history byte and all other controls, then run exact staged canonical CI. No verification waiver, dirty-tree pivot or dependency restriction is introduced.
   Goal: Verify Lua module search paths, ABI-specific native products and native parsing.
   Acceptance: Separate PUC Lua/LuaJIT setup and product compatibility; exercise the full staged loader with explicit module/library paths and exact direct values. Initial preparation is separate from repeated engine use; no excluded unfiltered runtime gate.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: PASS 13 setup checks per runtime in working and clean pinned 0b409e305 applications on macOS arm64, PUC Lua 5.5.1, LuaJIT 2.1.1788460057 and PCRE2 10.48. Exact interpreter/header identities, source/module paths, native trio loading, module-owned supporting grammar and its one-build cache are verified. Independent/repeated values, Unicode grammar paths, missing arguments/files, strict UTF-8, successful null/false and ambient-init exclusion pass. Six retained native products preserve hashes and modification times across fresh processes. Five selected existing native loader tests pass per runtime; excluded malformed-regex and unfiltered Lua gates are not run, and the declared PUC 5.4 target remains unverified. Clean source matches 2842 files / 58811026 bytes with public submodule URL, uninitialized nested dependencies, same-volume source/data and exact original PGEN edits. Artifact census retains 3260 candidates / 6165392650 bytes and deletes zero. New-page RED counts are mutation 67/68 and selector 66/67; only expected counts and current prose advance to 68 and 67. Book, source/task/history preservation, Knowledge and all doctrines govern landing; exact staged canonical CI is required. No runtime, dependency pin or reading-credit change; .5.2 and independent .7 remain open.
+  Commit: `BACKEND-INTEGRATION-GUIDES.5.1 - document and verify native Lua integration`
+
+  Capacity admission: ADR0121 implements exactly the six director-approved controls. Production functions pass 44 threshold and 34 authorization cases, including exact/missing/altered authority and unauthorized limits. Prior histories reconstruct byte-exactly; normal doctrines and receipt-bound canonical CI govern landing. No verification exception.
 
 - ID: `BACKEND-INTEGRATION-GUIDES.5.2`
   Status: `pending`
@@ -274,7 +283,7 @@ ARCHOGEN's use of Lispish through Rust. The requested scope is every backend.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `BACKEND-INTEGRATION-GUIDES.5.1` | `pending` | Julia setup and deployment leaves are verified; next Lua ABI-specific native setup from the clean committed tree. Independent .7 retains parent closure before conformance .1.35. |
+| 1 | `BACKEND-INTEGRATION-GUIDES.5.2` | `pending` | Lua native setup and approved history admission are verified; next deployment, typed errors and diagnostic sinks from the clean committed tree. Independent .7 retains final parent closure and canonical push. |
 
 The director explicitly requests a temporary pivot at the next clean handoff.
 Conformance .1.34 is committed at 00f9783a1 and inventory .0 is complete.
@@ -375,7 +384,97 @@ not declared complete by this scoped documentation authorization.
 - [x] **NO REGRESSION** — Native loader 82 plus diagnostic 82 assertions pass. Public inventories remain67/66 with unchanged semantic checkers; runtime source, pins, prior tasks, history and book limitations are preserved.
 - [x] **LOCKSTEP** — Runnable includes, guide, Knowledge, roadmap and task records agree. Focused proof governs this leaf; Lua .5.1 follows clean commit and independent .7 retains final parent closeout/canonical push.
 
+## Lua integration history capacity — September 20 proposal and approval
+
+The director granted the exact proposal below on September 20. Its pre-admission
+measurements remain historical evidence; ADR0121 records the accepted implementation.
+
+Owner: `BACKEND-INTEGRATION-GUIDES.5.1`; preserve its unfinished native-guide candidate.
+No pivot or threshold change has occurred. The current canonical leaf cannot land
+while the README routing-pressure doctrine rejects the required history rollover.
+
+Both new complete records crossed the existing 90% hot-shard rollover threshold:
+CHANGES was 268 lines / 59031 bytes; DEVELOPMENT_NOTES was 224 / 60008.
+The normal rollover tool preserved clean 0b409e305 history as two exact new segments:
+changes 4974, 126 lines / 27065 bytes, SHA256
+38bd13bb0125cfb12dbba6255586b14c13c541438a7904a29547e5135143ef92;
+notes 4973, 114 lines / 28169 bytes, SHA256
+2fb7ebaade12c0117e9f726745d8ec73fd615d8b99d0166f396e830437ec3bd7.
+Earlier segment bytes and manifest rows are unchanged. Removing the new record
+from each hot shard and appending its new archive reconstructs the prior HEAD
+file exactly. The gate rejects only these six current history controls:
+
+| Surface | Control | Current limit | Proposed limit / actual candidate |
+| --- | --- | ---: | ---: |
+| change_history | Collection files, including root and manifest | 38 | 39 |
+| change_history | Manifest lines | 37 | 38 |
+| change_history | Manifest bytes | 21071 | 21647 |
+| engineering_notes | Collection files, including root and manifest | 34 | 35 |
+| engineering_notes | Manifest lines | 33 | 34 |
+| engineering_notes | Manifest bytes | 19902 | 20514 |
+
+This proposal adds one archive slot per collection. All live-file, per-archive and
+aggregate byte/line limits, routes, schemas, checkers and stable responsibilities
+remain unchanged. It requests no CI exception. After approval, an accepted indexed
+ADR must record the exact old/new objects before the six registry values change;
+canonical CI and all normal hooks must pass before .5.1 can commit.
+
+Finite scope: the remaining integration deployment, navigation and final review,
+plus four capacity/closeout allowances, are modeled as seven complete records of
+at most 14 lines / 2048 bytes each. After the current rollover, the resulting hot
+shards would be at most 240 lines / 46302 bytes and 208 / 46175: no additional
+rollover. This allowance does not cover the later unlimited PNT/source-reading
+activity. Remeasure each actual candidate.
+
+Alternatives considered: retaining the longer hot shards violates the mandatory
+90% rollover rule; deleting or repacking immutable history breaks preservation.
+Shorter current summaries could defer this one rollover, but do not provide the
+measured space for the remaining activity. The proposed two slots retain ordinary
+readable per-slice records and existing retrieval. README_POLICY.md requires an
+accepted decision for a routed-limit increase, and ADR0118 explicitly says its
+finite Lua-reading allowance does not authorize later capacity increases.
+
+Validation already consumed: 13 checks per consumer/runtime (four runs), five
+selected native tests per runtime, neutral contract 14/9/4, mutation 68/14/11/10/50,
+selector 67/35/0/5/11, book render and exact preservation of 2821 prior files,
+2803/2805 task nodes, 94 known book limitation headings and original PGEN edits.
+All nine worktree doctrines were consumed: eight pass; README-STABILITY alone
+fails on those six capacity controls. No inputs are staged, so this is not a
+canonical receipt or pre-commit acceptance claim. The remaining blockers are
+capacity disposition, accepted authority if approved, all-doctrine closeout and
+exact staged canonical CI. No gate receipt or commit is
+claimed. Replay the maintained Lua verifier and both history pressure checks;
+scripts/check_readme_stability.sh reproduces the six denials before admission.
+
+### Approved implementation and verification
+
+The September 20 **Granted** reply authorizes exactly the six controls above.
+ADR0121 is accepted and indexed; only those six registry scalars change.
+Forty-four production threshold checks and 34 production authorization cases pass,
+including absent/altered ADR, missing index, wrong surface and unauthorized limits.
+The pre-admission eight-pass/one-fail report above remains dated RED evidence;
+the complete resulting candidate must pass normal doctrines and canonical CI.
+Original history, classifier behavior and runtime sources remain unchanged.
+Final preservation verifies 2819 prior files, 2803 of 2805 prior task nodes, all
+94 book limitation headings, the original PGEN edits and every earlier history
+byte. Exactly six approved registry scalars differ; the decision index retains
+all earlier bytes. With final admission overhead, seven further records produce
+at most 242 lines / 46536 bytes and 210 lines / 46409 bytes. All hot-shard,
+archive and aggregate controls remain unchanged.
+No verification waiver is requested or applied. Lua .5.2 follows clean landing.
+
+## Acceptance Checklist — .5.1
+
+- [x] **REPRODUCE / ISSUE** — Lua lacks an application integration chapter and retained-product consumer; the existing targeted test wrapper rebuilds disposable modules. Adding the page exposes exact public inventory counts 67/68 and 66/67.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Module search paths, selected ABI products and module-relative supporting grammar must agree. The generic managed wrapper preserves caller cwd; the targeted Lua wrapper creates and deletes native products per invocation.
+- [x] **FIX** — Add explicit-path native consumer, setup verifier and guide; document matching interpreter/header identities, per-ABI builds, application storage, direct values and native reuse. Reconcile only current public-file counts and stale storage-card wording.
+- [x] **ADDRESSED (verified)** — Both working and clean pinned applications pass 13 groups per runtime, including supporting grammar identity/cache, Unicode paths, null/false, failures and ambient initialization exclusion. All six native hashes and mtimes remain exact.
+- [x] **NO REGRESSION** — Five selected loader tests pass per runtime. Existing PUC 5.4 proof and malformed-regex exclusions remain visible and owned; runtime source, pins, prior tasks and book limitations remain unchanged.
+- [x] **LOCKSTEP** — Guide/includes, Knowledge and live records agree. ADR0121 implements the six approved history controls with exact preservation and 44/34 production-function checks; all normal doctrines and exact staged canonical CI govern landing. Deployment is .5.2; independent parent closure and final push remain .7.
+
 ## Verification Log
+
+- `2026-09-20` .5.1: PASS 13 setup checks per runtime in working and clean pinned 0b409e305 applications on macOS arm64, PUC Lua 5.5.1, LuaJIT 2.1.1788460057 and PCRE2 10.48. Exact interpreter/header identities, source/module paths, native trio loading, module-owned supporting grammar and its one-build cache are verified. Independent/repeated values, Unicode grammar paths, missing arguments/files, strict UTF-8, successful null/false and ambient-init exclusion pass. Six retained native products preserve hashes and modification times across fresh processes. Five selected existing native loader tests pass per runtime; excluded malformed-regex and unfiltered Lua gates are not run, and the declared PUC 5.4 target remains unverified. Clean source matches 2842 files / 58811026 bytes with public submodule URL, uninitialized nested dependencies, same-volume source/data and exact original PGEN edits. Artifact census retains 3260 candidates / 6165392650 bytes and deletes zero. New-page RED counts are mutation 67/68 and selector 66/67; only expected counts and current prose advance to 68 and 67. Book, source/task/history preservation, Knowledge and all doctrines govern landing; exact staged canonical CI is required. No runtime, dependency pin or reading-credit change; .5.2 and independent .7 remain open.
 
 - `2026-09-20` .4.2: PASS 24 deployment checks in both current and clean pinned 29bf3fdd1 applications on Julia 1.12.7/macOS arm64. Twelve source cases cover exact Unicode events, quiet defaults, typed exit/prior-output/stop behavior, runtime source identity, null success, four loader stages, usage and inherited trace separation. Git-archived source and verified package/registry copies prepare offline without copied compiled caches. Outside-cwd, option-like paths, controlled bad/missing packaged grammar, Unicode relocation and fresh-process reuse pass. The clean application manifest is copied byte-exactly; source, manifest and package hashes survive preparation/moving. Both word verifiers pass 11 groups; native loader 82 and diagnostic 82 assertions pass. Clean source matches 2838 files / 58774855 bytes; nested dependencies stay uninitialized, all project data remains on this volume and original PGEN edits remain exact. Public mutation 67/14/11/10/50 and selector 66/35/0/5/11 pass unchanged. Focused book, source/task/history preservation, Knowledge and all doctrines govern landing. No runtime/pin changes or reading credit; independent parent closeout and canonical push remain .7.
 
@@ -401,6 +500,8 @@ not declared complete by this scoped documentation authorization.
 
 ## Commit Log
 
+- `.5.1`: `BACKEND-INTEGRATION-GUIDES.5.1 - document and verify native Lua integration`; activation 0b409e305. Native setup and approved ADR0121 capacity proof verified; exact staged canonical receipt governs landing.
+
 - `.4.2`: `BACKEND-INTEGRATION-GUIDES.4.2 - verify Julia source deployment and diagnostics`; activation29bf3fdd1; next Lua .5.1 after clean focused handoff.
 
 - `.4.1`: `BACKEND-INTEGRATION-GUIDES.4.1 - document and verify native Julia integration`; activation49758cbc9; next Julia .4.2 after clean canonical handoff.
@@ -422,6 +523,8 @@ not declared complete by this scoped documentation authorization.
 - Guide/example leaves: pending.
 
 ## Changelog
+
+- `2026-09-20` .5.1: Verify Lua native setup and retained products on both installed runtimes; preserve target/formatter exclusions and independent .7 closeout.
 
 - `2026-09-20` .4.2: Verify Julia source deployment, optional diagnostic events and typed failures; retain independent parent closeout at .7.
 

@@ -144,6 +144,8 @@ changed* lives in git (layer D), not here.
 | [0119](0119-authorized-lua-reading-closeout.md) | Close audited Lua reading under current director authorization; continue read-only work while reusing compatible dependency products | 2026-09-13 | accepted | lua, reading, verification, dependency-reuse |
 | [0120](0120-supporting-reading-unblock.md) | Apply the prepared task checker correction before remaining reading; focused proof for correction and supporting-reading closeout | 2026-09-13 | accepted | reading, verification, task-trees, capacity |
 
+| [0121](0121-approved-integration-history-capacity.md) | Admit the six approved history controls for remaining backend integration delivery; preserve normal canonical verification | 2026-09-20 | accepted | integration, history, capacity, verification |
+
 ## How to add a record
 1. Copy the shape of an existing record (`Date`, `Status`, `Tags`, then `## Context /
    Decision / Consequences / Links`).
