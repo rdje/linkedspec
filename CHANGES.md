@@ -10,6 +10,12 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-20 — BACKEND-INTEGRATION-GUIDES.8.2 - repair Rust consumer workspace boundaries
+
+Reproduce ARCHOGEN/LS-001 and SEMULITH/LS-003 item1 in a real submodule consumer. Give the runnable Rust example its own workspace and document the enclosing host exclusion for vendor/linkedspec, including member-relative dependency paths. PGEN source, dependency pins and the reference lock remain unchanged. A maintained metadata regression covers ten standalone/host/exclusion cases.
+
+Verification: two exit101 baseline failures, twelve remedy probes, ten maintained boundary checks, native two-member and example builds, three adapter tests and 18 file/deployment groups per consumer pass. Clean committed sources, reused generated inputs and registry copies are byte-verified; all external versions and original PGEN edits remain exact. Book/public checks, preservation and all doctrines govern landing; the manifest change requires exact staged canonical CI. Bootstrap false-success repair is .8.3; strict Lispish work remains startup .83.
+
 ## 2026-09-20 — BACKEND-INTEGRATION-GUIDES.8.1 - own ARCHOGEN and SEMULITH consumer reports
 
 Record seven ARCHOGEN and three SEMULITH reports with source-qualified IDs, duplicate relationships and explicit repair leaves. Integration .8.2-.8.4 own workspace onboarding, bootstrap failures and prerequisite guidance; startup .83 owns complete-document, atom-kind and multiline-string work. Preserve the withdrawn and no-action reports. The Rust guide and book status qualify the newly reported limitations.

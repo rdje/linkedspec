@@ -6,6 +6,9 @@ rust-version = "1.95"
 publish = false
 default-run = "linkedspec-integration-example"
 
+# Keep this runnable example independent of an enclosing application's workspace.
+[workspace]
+
 [dependencies]
 linkedspec-runtime = { path = "../../../rust/linkedspec-runtime" }
 serde = { version = "1", features = ["derive"] }

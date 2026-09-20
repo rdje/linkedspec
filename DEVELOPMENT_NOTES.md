@@ -10,6 +10,12 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-20 — BACKEND-INTEGRATION-GUIDES.8.2 - repair Rust consumer workspace boundaries
+
+An example-owned workspace isolates that package only. The pinned PGEN package is excluded by RGX but can still discover an enclosing application workspace. Controlled Cargo metadata probes establish that excluding vendor/linkedspec at the application root fixes both reported paths without modifying dependency manifests or absorbing vendor crates into application membership. The native library already has its own workspace.
+
+The regression archives committed sources at recorded submodule pins and overlays only the current example manifest, excluding developer dependency edits and generated/cache products. Metadata is separate from native build/use proof: a real two-member host and standalone example pass locked offline builds and actual values. Reuse-assisted preparation preserves the 200-package reference lock; the host adds only its local package identities. This repair does not re-run bootstrap or close independent bootstrap/grammar reports.
+
 ## 2026-09-20 — BACKEND-INTEGRATION-GUIDES.8.1 - own ARCHOGEN and SEMULITH consumer reports
 
 Consumer report numbers collide across projects, so every reference is qualified as ARCHOGEN/LS-NNN or SEMULITH/LS-NNN. The ten reports describe seven actionable concerns plus withdrawn/no-action controls; documented extraction and type erasure remain compatibility requirements rather than newly discovered Rust engine defects. The LF patch is supplied evidence awaiting independent execution. Intake records exact source manifests and concrete fix owners, not closure by warning.

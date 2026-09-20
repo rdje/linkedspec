@@ -15,12 +15,51 @@ answers:
   - which task owns the Cargo workspace integration failure
   - which task owns the PGEN bootstrap false success report
   - has the reported Lispish multiline string patch been verified locally
+  - how does a host Cargo workspace exclude the LinkedSpec and PGEN packages
 date: 2026-09-20
-status: Rust integration verified in the recorded scope; ten downstream reports received and repair-owned, not locally reproduced by the intake
+status: Rust workspace onboarding repaired and locally verified; remaining bootstrap/guidance and strict Lispish reports retain their separate owners
 tags: [rust, lispish, embedding, dependencies, discussion]
-evidence: "September13 CONFORMANCE-SOURCE-READING.1.34 discussion and integration .2.2 native/clean-source proof; September20 BACKEND-INTEGRATION-GUIDES.8.1 complete read and byte-exact snapshots of seven ARCHOGEN and three SEMULITH reports. Intake changes documentation/ownership only; supplied reproducer and patch results are not local execution claims."
-reverify: "Run bash tools/run_cargo_local.sh test --offline --locked --manifest-path examples/integration/rust/Cargo.toml; build --bins with the same wrapper/manifest/options; run bash tools/run_python_project_data.sh examples/integration/rust/verify_lispish.py --binary rust/target/debug/lispish_file. Replay clean preparation from docs/linkedspec-book/src/public-api/integration-rust.md. Historical discussion/source pointers remain below; an actual ARCHOGEN integration test remains consumer work."
+evidence: "September13 integration .2.2 native/clean-source proof; September20 .8.1 complete ten-report intake and .8.2 two Cargo workspace failures, twelve remedy probes, ten maintained boundary checks and native two-member consumer/example builds. Supplied Lispish patch results remain unverified locally."
+reverify: "Run bash tools/run_python_project_data.sh examples/integration/rust/verify_workspace.py; bash tools/run_cargo_local.sh test --offline --locked --manifest-path examples/integration/rust/Cargo.toml; build --bins with the same wrapper/manifest/options; run bash tools/run_python_project_data.sh examples/integration/rust/verify_lispish.py --binary rust/target/debug/lispish_file. Replay the enclosing-workspace setup in docs/linkedspec-book/src/public-api/integration-rust.md. Actual ARCHOGEN/SEMULITH application builds remain consumer work."
 ---
+
+## September 20 Cargo workspace repair
+
+`BACKEND-INTEGRATION-GUIDES.8.2` independently reproduces both ARCHOGEN/LS-001
+failures on Cargo 1.95.0: the example and pinned PGEN manifest exit 101 with
+“current package believes it's in a workspace when it's not”. The fixture is an
+actual Git submodule under an application workspace, at LinkedSpec ff74b4c3b,
+RGX 8763a0e6 and PGEN db6f8c68. SEMULITH/LS-003 item 1 is the same setup issue.
+
+The example now declares its own empty `[workspace]`. An enclosing application
+must merge `exclude = ["vendor/linkedspec"]` into its root `[workspace]` before
+PGEN preparation, adjusting the path to its submodule location. The example's
+boundary alone does **not** isolate the separate PGEN package. Twelve controlled
+metadata probes establish the distinction; the maintained `verify_workspace.py`
+checks ten standalone/host/exclusion cases using Git-archived committed sources
+and pinned dependencies, with only the candidate example manifest overlaid.
+It never copies the developer's dependency edits or builds generated parsers.
+This matches [Cargo's workspace discovery/exclusion contract](https://doc.rust-lang.org/cargo/reference/workspaces.html#the-members-and-exclude-fields).
+
+The two-member application (`app` and `support`) builds and parses through the
+native runtime. The separately built example also passes its exact word values,
+three adapter tests and 18 Lispish file/deployment groups; the copied host file
+consumer passes the same 18 groups. Both run outside their source directories.
+The application lock changes only local package identities (201 packages versus
+the example's 200); all external versions/checksums and the example lock remain
+exact. No dependency manifest, source or pin changes. The original 18-file PGEN
+diff remains byte-exact.
+
+Source proof checks 2849 LinkedSpec files/58888246 bytes, 857 RGX/138872410 and
+2710 PGEN/72528444 against committed blobs. Same-pin prepared parser inputs from
+the .2.2 proof are rechecked and copied byte-exactly: 12 files/18576534 bytes.
+The application-owned public registry seed contains 15360 files/380075770 bytes;
+all copied bytes and filesystem devices match. Offline locked host/example builds
+pass in 28.17s/18.72s, with normal dependency compilation. These are reuse-assisted
+clean-source builds, not a new bootstrap, empty-cache network installation,
+release-profile guarantee or actual downstream application build.
+Evidence is under `.linkedspec-data/scratch/backend-integration82/`.
+Bootstrap false-success repair remains `.8.3`; prerequisite guidance is `.8.4`.
 
 ## September 20 downstream report intake
 
@@ -34,7 +73,7 @@ and other numbers for different concerns.
 
 | Report | Supplied state and concern | LinkedSpec repair owner |
 | --- | --- | --- |
-| ARCHOGEN/LS-001 | Open/blocker: the example and PGEN bootstrap manifests encounter an enclosing Cargo workspace. | Integration `.8.2`: isolated reproduction, supported setup remedy and actual consumer build. |
+| ARCHOGEN/LS-001 | Reported open/blocker: example and PGEN manifests encounter an enclosing Cargo workspace. | Integration `.8.2`: reproduced and repaired as above; downstream report state unchanged. |
 | ARCHOGEN/LS-002 | Open/blocker for eADL: first-form extraction ignores additional/trailing input; requests complete validation and all forms. | Startup `.83.1` contract, `.83.2` implementation, `.83.3` independent admission. |
 | ARCHOGEN/LS-003 | Open/major for eADL: symbols, quoted strings and numbers lose their token-kind distinction. | Startup `.83.1-.83.3`; same requirement as SEMULITH/LS-002. |
 | ARCHOGEN/LS-004 | Open/moderate: failed bootstrap prerequisites are followed by a false seed-success message. | Integration `.8.3`: independently reproduce failure, stop promptly and verify products before success. |
@@ -43,7 +82,7 @@ and other numbers for different concerns.
 | ARCHOGEN/LS-007 | No-action: adjacent fragments join as documented. | Intake retains the measured compatibility case; no behavior change requested. |
 | SEMULITH/LS-001 | Draft/high, blocks SOT-FORMAT.9: LF inside a quoted string reportedly becomes syntax and changes the tree. | Startup `.83.1` newline/compatibility decision, `.83.2` concrete token repair, `.83.3` regression admission. |
 | SEMULITH/LS-002 | Draft/medium: documented atom-kind erasure limits source-preserving consumers; explicitly a design request. | Startup `.83.1-.83.3`; no silent change to historical Lispish requested. |
-| SEMULITH/LS-003 | Draft/low: enclosing workspace, file-section prerequisite back-reference, optional recursive checkout cost. | Integration `.8.2` for item1; `.8.4` for items2-3. |
+| SEMULITH/LS-003 | Draft/low: enclosing workspace, file-section prerequisite back-reference, optional recursive checkout cost. | Item1 repaired by `.8.2`; `.8.4` retains items2-3. Downstream report remains draft. |
 
 These are **supplied observations**, not ten newly reproduced defects. Both
 projects name LinkedSpec `ad290bdb427bc19a5af81de0f0b07e119c8999ff`, RGX

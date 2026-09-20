@@ -303,13 +303,20 @@ ARCHOGEN's use of Lispish through Rust. The requested scope is every backend.
   Commit: `BACKEND-INTEGRATION-GUIDES.8.1 - own ARCHOGEN and SEMULITH consumer reports`
 
 - ID: `BACKEND-INTEGRATION-GUIDES.8.2`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `ff74b4c3b1977c2762ecd99a3f2a45cd460a4170`.
+  Verification tier: `canonical`
+  Focused checks: Isolated committed-source Cargo workspace reproduction for the example and PGEN manifests; standalone and enclosing-workspace metadata boundaries; successful managed native consumer build/use after the supported remedy; byte-exact dependency/source/lock preservation, guide rendering, public guards and all doctrines.
+  Canonical trigger: The example Cargo manifest/workspace-boundary change is dependency/build infrastructure and requires the exact staged canonical receipt before landing. The remedy was selected from actual reproduction. No PGEN source/pin change or arbitrary dependency refresh is part of this leaf.
   Goal: Reproduce and repair Rust onboarding inside an enclosing Cargo workspace.
   Dependencies: `.8.1` committed clean.
   Scope: ARCHOGEN/LS-001 and SEMULITH/LS-003 item1; example manifest and PGEN preparation route, preserving the library's existing workspace boundary and all pre-existing nested edits.
   Acceptance: Use isolated clean committed source under a real host workspace; prove the reported failure and a supported remedy for both affected manifests. Verify an existing multi-crate application path and standalone use. Record the verification tier before any manifest or infrastructure edit. Do not patch the director's dirty PGEN checkout or claim metadata-only success proves a consumer build; split any necessary dependency work before changing pins.
-  Verification: `pending`
-  Commit: `pending`
+  Reproduction: Cargo 1.95.0 reproduces both reported exit 101 workspace errors in an actual isolated Git submodule at ff74b4c3b with unchanged RGX 8763a0e6/PGEN db6f8c68. Twelve controlled metadata cases establish that excluding vendor/linkedspec in the host workspace isolates example, native library and PGEN; an example-only empty workspace leaves PGEN failing. Inputs are restored byte-exactly after each probe; no bootstrap or build is inferred from metadata.
+  Selected remedy: The maintained example owns an empty workspace; enclosing applications merge vendor/linkedspec into their exclusion list before bootstrap/build. The pinned PGEN manifest and native library workspace remain unchanged. A two-member host consumer and separate example use verified same-pin generated inputs; standalone metadata, exact locks/source and native values pass.
+  Verification: PASS two exit 101 baselines and twelve remedy probes in an actual isolated Git submodule at ff74b4c3b, with unchanged RGX/PGEN pins. The maintained committed-source verifier passes ten standalone/host/exclusion checks. A two-member application and separate example build locked/offline in 28.17s/18.72s; exact word values, three adapter tests and 18 Lispish file/deployment groups per consumer pass, including outside-cwd and relocation. Source blobs, 12 generated files/18576534 bytes and 15360 registry files/380075770 bytes are byte-verified. The 200-package reference lock is exact; the 201-package host graph changes only local identities. No PGEN source/pin/dirty-file mutation, new bootstrap, minimum-version/platform expansion or actual downstream application build is claimed. Book/public, preservation and all doctrines govern landing; exact staged canonical CI is required before commit.
+  Candidate proof: PASS 2836 prior files and 2809/2810 prior task nodes unchanged, all previous history bytes and 94 book limitation headings preserved. Only this leaf changes a prior task node. Public mutation68/14/11/10/50 and selector67/35/0/5/11, book/includes/links, Knowledge1151/9198, memory60, both history checks and all nine doctrines pass. History roots are156 lines/34168 bytes and124/34121. The known search-index warning (10811336 bytes) remains startup .41.9. No source-reading credit or grammar repair claimed.
+  Commit: `BACKEND-INTEGRATION-GUIDES.8.2 - repair Rust consumer workspace boundaries`
 
 - ID: `BACKEND-INTEGRATION-GUIDES.8.3`
   Status: `pending`
@@ -333,7 +340,7 @@ ARCHOGEN's use of Lispish through Rust. The requested scope is every backend.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `BACKEND-INTEGRATION-GUIDES.8.2` | `pending` | After the .8.1 report-intake commit, reproduce and repair enclosing Cargo workspace onboarding. Bootstrap .8.3 and guidance .8.4 follow; Lua deployment .5.2, common navigation and independent .7 remain before conformance .1.35. |
+| 1 | `BACKEND-INTEGRATION-GUIDES.8.3` | `pending` | Workspace .8.2 is verified; activate truthful, fail-fast PGEN preparation at its clean commit. Guidance .8.4, Lua deployment .5.2, common navigation and independent .7 remain before conformance .1.35. |
 
 The director explicitly requests a temporary pivot at the next clean handoff.
 Conformance .1.34 is committed at 00f9783a1 and inventory .0 is complete.
@@ -524,6 +531,8 @@ No verification waiver is requested or applied. Lua .5.2 follows clean landing.
 
 ## Verification Log
 
+- `2026-09-20` .8.2: PASS two exit 101 baselines and twelve remedy probes in an actual isolated Git submodule at ff74b4c3b, with unchanged RGX/PGEN pins. The maintained committed-source verifier passes ten standalone/host/exclusion checks. A two-member application and separate example build locked/offline in 28.17s/18.72s; exact word values, three adapter tests and 18 Lispish file/deployment groups per consumer pass, including outside-cwd and relocation. Source blobs, 12 generated files/18576534 bytes and 15360 registry files/380075770 bytes are byte-verified. The 200-package reference lock is exact; the 201-package host graph changes only local identities. No PGEN source/pin/dirty-file mutation, new bootstrap, minimum-version/platform expansion or actual downstream application build is claimed. Book/public, preservation and all doctrines govern landing; exact staged canonical CI is required before commit.
+
 - `2026-09-20` .8.1: Read all ten source-qualified reports and supporting instructions/reproducers/fixtures/evidence. Byte-exact same-volume snapshots contain ARCHOGEN43 files/75512 bytes and SEMULITH29/26871, with manifest identities in the canonical Knowledge card. Five open ARCHOGEN reports, one withdrawn, one no-action and three draft SEMULITH reports are all accounted for. Runtime reproduction count is zero for this intake; supplied patch and build observations are not promoted into local proof. Setup repairs are .8.2-.8.4; grammar fixes retain startup .83 prerequisites and implementation/admission owners. Focused preservation, book/public checks, Knowledge, memory/history and all doctrines govern landing.
 
 - `2026-09-20` .5.1: PASS 13 setup checks per runtime in working and clean pinned 0b409e305 applications on macOS arm64, PUC Lua 5.5.1, LuaJIT 2.1.1788460057 and PCRE2 10.48. Exact interpreter/header identities, source/module paths, native trio loading, module-owned supporting grammar and its one-build cache are verified. Independent/repeated values, Unicode grammar paths, missing arguments/files, strict UTF-8, successful null/false and ambient-init exclusion pass. Six retained native products preserve hashes and modification times across fresh processes. Five selected existing native loader tests pass per runtime; excluded malformed-regex and unfiltered Lua gates are not run, and the declared PUC 5.4 target remains unverified. Clean source matches 2842 files / 58811026 bytes with public submodule URL, uninitialized nested dependencies, same-volume source/data and exact original PGEN edits. Artifact census retains 3260 candidates / 6165392650 bytes and deletes zero. New-page RED counts are mutation 67/68 and selector 66/67; only expected counts and current prose advance to 68 and 67. Book, source/task/history preservation, Knowledge and all doctrines govern landing; exact staged canonical CI is required. No runtime, dependency pin or reading-credit change; .5.2 and independent .7 remain open.
@@ -552,6 +561,8 @@ No verification waiver is requested or applied. Lua .5.2 follows clean landing.
 
 ## Commit Log
 
+- `.8.2`: `BACKEND-INTEGRATION-GUIDES.8.2 - repair Rust consumer workspace boundaries`; activation ff74b4c3b; manifest infrastructure requires exact staged canonical proof, then bootstrap .8.3.
+
 - `.8.1`: `BACKEND-INTEGRATION-GUIDES.8.1 - own ARCHOGEN and SEMULITH consumer reports`; activation7f2afcbf4; next isolated Rust workspace repair .8.2.
 
 - `.5.1`: `BACKEND-INTEGRATION-GUIDES.5.1 - document and verify native Lua integration`; activation 0b409e305. Native setup and approved ADR0121 capacity proof verified; exact staged canonical receipt governs landing.
@@ -577,6 +588,8 @@ No verification waiver is requested or applied. Lua .5.2 follows clean landing.
 - Guide/example leaves: pending.
 
 ## Changelog
+
+- `2026-09-20` .8.2: Repair Cargo example/host boundaries with committed-source regression and native two-member consumer proof; preserve pins, locks and all earlier dependency edits.
 
 - `2026-09-20` .8.1: Own the director-supplied ARCHOGEN and SEMULITH reports, preserve their distinct states and route concrete fixes without closing unverified scope.
 

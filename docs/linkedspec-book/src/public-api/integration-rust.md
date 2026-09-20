@@ -50,6 +50,39 @@ the crate directory, not the LinkedSpec root or the `rust/` workspace. Applicati
 should commit their resulting `Cargo.lock` as well as the submodule pointer.
 [Cargo path dependencies](https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html#specifying-path-dependencies)
 
+### Applications with a Cargo workspace
+
+Before preparing PGEN or building, add `vendor/linkedspec` to `exclude` in the
+**application workspace root** manifest. Merge it with existing members and
+exclusions; do not add a second `[workspace]` table. For example:
+
+```toml
+[workspace]
+resolver = "2"
+members = ["app", "support"]
+exclude = ["vendor/linkedspec"]
+```
+
+The exclusion path is relative to this workspace root. Adjust it if the submodule
+lives elsewhere. It keeps the vendored packages out of the application's workspace;
+the application still uses `linkedspec-runtime` as a normal path dependency.
+In this layout, `app/Cargo.toml` would contain:
+
+```toml
+[dependencies]
+linkedspec-runtime = { path = "../vendor/linkedspec/rust/linkedspec-runtime" }
+```
+
+LinkedSpec's native Rust library and runnable example each have their own
+workspace. The pinned PGEN bootstrap package also needs the **host exclusion**:
+the example's own `[workspace]` cannot isolate that separate package. Without the
+exclusion, Cargo can stop with “current package believes it's in a workspace when
+it's not” while preparing PGEN. Do not modify dependency manifests or add vendored
+crates to the application's workspace members to work around this error.
+An application with no enclosing `[workspace]` does not need this exclusion.
+See [Cargo workspace membership](https://doc.rust-lang.org/cargo/reference/workspaces.html#the-members-and-exclude-fields)
+for Cargo's parent-manifest discovery and exclusion rules.
+
 The inspected RGX/PGEN dependency manifests require Rust **1.95**. The checked-in
 example therefore declares `rust-version = "1.95"` and edition 2024. Recheck the
 chosen revision's manifests when updating; older Rust README wording is not the
@@ -315,10 +348,11 @@ including following sibling forms. SEMULITH supplied a candidate pattern change,
 but its result has not yet been independently verified by LinkedSpec. Treat
 multiline quoted strings as an unresolved limitation of this integration path.
 Both consumers also reported setup difficulties inside an enclosing Cargo
-workspace. Those onboarding and bootstrap-reporting repairs are tracked in
-`BACKEND-INTEGRATION-GUIDES.8.2-.8.4`; the earlier clean-source checks below did
-not cover an enclosing workspace. These reports do not establish new guarantees
-for strict parsing, token recovery or workspace onboarding.
+workspace. The [workspace setup above](#applications-with-a-cargo-workspace)
+addresses the reproduced membership failures without changing dependency pins.
+Bootstrap error reporting and prerequisite navigation remain tracked in
+`BACKEND-INTEGRATION-GUIDES.8.3-.8.4`. These setup repairs do not change Lispish's
+input-consumption or token-kind behavior.
 
 ### Handle failures and diagnostics
 
@@ -380,6 +414,7 @@ verification. OS runtime libraries remain platform dependencies.
 From LinkedSpec's root:
 
 ```sh
+bash tools/run_python_project_data.sh examples/integration/rust/verify_workspace.py
 bash tools/run_cargo_local.sh test --offline --locked \
   --manifest-path examples/integration/rust/Cargo.toml
 bash tools/run_cargo_local.sh build --bins --offline --locked \
@@ -393,6 +428,23 @@ adapter depth boundary. The Python verifier checks 18 real file values in one
 engine, file/argument/grammar/runtime failures, packaged assets, a different
 working directory and a moved bundle with spaces in its path. Python is only a
 verification dependency; the deployed application remains Rust.
+
+The workspace verifier uses committed native source and dependency pins, with
+the current example manifest, in an isolated local fixture. Ten Cargo metadata
+checks cover standalone use, enclosing-workspace boundaries and the required
+host exclusion for PGEN. It performs no dependency build and does not copy local
+dependency edits. This verifier needs Python 3.12 or later for filtered archive
+extraction. The native checks above verify execution separately.
+
+An additional clean-source application with two workspace members was verified
+on macOS arm64 with Rust 1.95.0, using LinkedSpec `ff74b4c3b`, its unchanged RGX/PGEN
+pins and the example workspace fix. The host exclusion preserves separate native
+library, example and PGEN workspace roots. Locked offline application and example
+builds passed, followed by exact word values, three adapter tests and the file
+verifier against both binaries. Existing generated parser inputs and public
+registry packages were hash-verified before reuse; no fresh bootstrap is claimed
+by this workspace check. All external dependency versions and the example lock
+remained unchanged. This was an isolated consumer, not an ARCHOGEN/SEMULITH build.
 
 Clean preparation was verified from committed LinkedSpec `42490a9d917e`,
 RGX `8763a0e6bea9` and PGEN `db6f8c6836fe` sources, with this file consumer copied
