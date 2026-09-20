@@ -9,7 +9,9 @@ answers:
   - which task owns permission denied liveness repair
   - why did managed generation report child setpgid operation not permitted
   - does the run wrapper verify child process group establishment
-date: 2026-09-07
+  - can a warned managed child still have the expected process group
+  - why did the Lua consumer return correct JSON with unexpected stderr
+date: 2026-09-20
 status: confirmed defect; repair pending under SESSION-STARTUP-READING.7
 tags: [storage, cleanup, process, liveness, permissions, sandbox, defect]
 evidence: "SESSION-STARTUP-READING.6 at source d6d3c890c2e4aa49747879b2db227f2577db0fb6 launches a managed 45-second sleep. Same-run restricted list reports abandoned and permitted list reports live. Restricted kill-zero on wrapper 91044, child 91271, and group -91271 returns zero with errno 1 / EPERM; permitted ps shows both alive at 27 seconds and all three kill-zero probes succeed. The wrapper exits 0 and final permitted list finds zero leftovers. No recover/purge/deletion probe runs."
@@ -81,3 +83,30 @@ establishment claim follows. The documented follow-up control reports PID/PGID
 The unchanged wrapper still records child_pid as group identity without a check.
 Startup .7 already owns establishment/failure coverage and remains pending; no
 recovery/purge or deletion probe ran. This adds a recurrence, not a new cause.
+
+## September 20: warning with measured successful group establishment
+
+Integration `.5.3` replays the exact four-way consumer workload from clean
+`1ab8e8ac394900f68eaf55f5ca012787bbfb3331`, stopping in round5. Nineteen complete
+working/clean PUC/LuaJIT routes pass13 setup and24 deployment groups each.
+The clean LuaJIT setup route returns the correct two word values with status0,
+but Bash's managed wrapper emits `child setpgid (571 to 571): Operation not permitted`.
+This identifies the emitting layer for that captured recurrence; it does not
+identify the earlier PUC stream lost by the old integration verifier.
+
+A separate bounded four-way probe runs the documented Perl PID/PGID command,
+retaining every stdout/stderr/status and stopping after a warning. It completes
+1000 invocations: all exit0 with matching child PID/PGID;999 have empty stderr.
+The warned invocation reports PID29222, PGID29222 and parent28526 while stderr
+names the same child29222. Thus this actual warned child has the expected group.
+The reason for the denied child-side call remains unproved; neither a specific
+parent/child timing cause nor a general lifecycle guarantee follows.
+
+The emitting mechanism remains tools/project_data_run.sh's monitor-mode launch
+(set -m, background command, then PID-as-PGID bookkeeping without verification).
+Startup `.7` owns verifying establishment and preserving denied/unknown liveness,
+with its required-reading prerequisites unchanged. Integration `.5.3` consolidates
+the observation into this existing repair owner; no wrapper or Lua engine fix is
+claimed. Do not suppress the warning to pass a consumer check. Recovery/purge stay
+prohibited. Exact raw streams and group observations are retained in
+.linkedspec-data/scratch/backend-integration53, including state.json and group-probe.json.

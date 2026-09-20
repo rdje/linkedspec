@@ -25,7 +25,7 @@ answers:
   - does Lua runtime error JSON include all native arity fields
   - which task owns the unexplained non JSON Lua consumer stderr occurrence
 date: 2026-09-20
-status: five-backend setup and deployment evidence recorded; common navigation, unexplained Lua stderr and independent closeout remain open
+status: five-backend setup and deployment verified; captured wrapper stderr is owned by startup .7; common navigation and independent closeout remain open
 tags: [integration, documentation, perl, rust, dart, julia, lua]
 evidence: "BACKEND-INTEGRATION-GUIDES.0, activation 00f9783a1e4b625bc251a3e260ef1eef60c35888. Canonical Knowledge, ADR0040, companion tree, manifests, six complete setup scripts and native loader/result seams inspected. Managed version commands and read-only pkg-config identities consumed with exit0; no compiler, dependency preparation or consumer execution ran."
 reverify: "Inspect the exact sources in the matrix below. Version-only commands: bash tools/run_cargo_local.sh --version; bash tools/run_dart_project_data.sh --version; bash tools/run_julia_project_data.sh --project=julia --version; bash tools/project_data_run.sh perl -e 'printf qq{Perl %vd\\n}, $^V'; bash tools/project_data_run.sh lua -v; bash tools/project_data_run.sh luajit -v; bash tools/project_data_run.sh pkg-config --modversion lua luajit libpcre2-8. These commands establish installed identity, not consumer support or a passing backend suite."
@@ -476,13 +476,14 @@ per runtime. The maintained verifiers are examples/integration/lua/verify_words.
 and verify_deployment.py; neither builds native products. The declared PUC target,
 malformed-regex exclusions and other runtime repair owners stay unchanged.
 
-**Unresolved observation:** an earlier parallel working-PUC run emitted non-JSON
-stderr at its invalid-UTF8 case. Its old harness lost the raw stream on a JSON
-decode exception. The harness now retains command/status/streams; all four full
-replay routes and120 managed/40 direct focused repetitions pass. These results
-do not establish the original cause or a runtime repair. Integration .5.3 owns
-recurrence capture, diagnosis and resolution before final parent closeout.
-Evidence lives under .linkedspec-data/scratch/backend-integration52.
+An earlier parallel PUC run's non-JSON stderr was lost by its old harness; full
+capture is now retained. Integration .5.3 captures a separate correct-value/status0
+LuaJIT call with the managed wrapper's child-setpgid warning. A warned standalone
+probe has matching PID/PGID. [[project-data-liveness-permission-denial]] owns the
+exact evidence and limits; existing startup .7 owns the wrapper repair after its
+required reading. The original lost stream remains unidentified. No Lua engine
+or wrapper fix is claimed, and warnings are not filtered. Evidence is retained
+under .linkedspec-data/scratch/backend-integration52 and backend-integration53.
 
 ## Lua setup capacity admission — September 20
 

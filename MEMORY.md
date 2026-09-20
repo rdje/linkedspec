@@ -1,12 +1,12 @@
 # MEMORY
 
-- activation_commit: `6e37288f7564d99480f1353231b226a678a9568f` — clean Rust prerequisite guidance checkpoint; Lua deployment activation.
-- latest_completed_leaf: `BACKEND-INTEGRATION-GUIDES.5.2 - verify Lua deployment and diagnostics`; final dual-runtime setup/deployment proof passes; initial unexplained stderr is owned by .5.3.
-- active_work_unit: `BACKEND-INTEGRATION-GUIDES.5.3` — pending clean activation for unexplained stderr investigation with complete capture.
-- next_action: Activate .5.3 from clean Lua .5.2 and replay the exact concurrent workload with raw capture; then common .6 and final .7 before conformance .1.35. RGX-CONSUMER-BUILD-REPORTS.1 remains upstream-owned; strict Lispish remains startup .83.
+- activation_commit: `1ab8e8ac394900f68eaf55f5ca012787bbfb3331` — clean Lua deployment checkpoint; unexplained stderr investigation activation.
+- latest_completed_leaf: `BACKEND-INTEGRATION-GUIDES.5.3 - trace consumer stderr to managed wrapper`; captured warning/group evidence transferred to existing startup .7; defect remains open.
+- active_work_unit: `BACKEND-INTEGRATION-GUIDES.6` — pending clean activation for common integration navigation and example checks.
+- next_action: Activate common .6 after clean .5.3, then final .7 before conformance .1.35. Startup .7 owns the wrapper repair after required reading; RGX-CONSUMER-BUILD-REPORTS.1 remains upstream-owned and strict Lispish remains startup .83.
   Named-argument direction PARSER-AUTHORING-APIS.4 is approved and parked; other authoring proposals and approved formats stay parked.
-- in_flight_uncommitted: none; this focused example/guide leaf lands Lua deployment and diagnostic proof with the unexplained prior stderr explicitly tracked.
-- blockers: .5.3 gates final parent closeout: original non-JSON stderr was not captured; full replay and160 focused controls pass but do not establish its cause. Common .6 remains independently executable.
+- in_flight_uncommitted: none; this focused diagnostic leaf preserves exact raw evidence and canonical repair ownership. Derive current commit identity from Git.
+- blockers: none for common .6. Startup .7 remains open for wrapper establishment/liveness; a warned child had correct PGID, but the denied-call cause and original lost PUC stream remain unproved. Recovery/purge stay prohibited.
 - current_rust_warning_debt: Repeated carriers report 1,870 pgen plus 26 rgx-core output warnings; RUST-DEPENDENCY-WARNING-ZERO.1-.7 own public RGX reports and result verification without suppression; dependency internals are excluded.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
   active table; the task metadata doctrine inventories all consumers, permits arbitrary frontier-row rewrites,

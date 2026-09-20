@@ -10,6 +10,12 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-20 — BACKEND-INTEGRATION-GUIDES.5.3 - trace consumer stderr to managed wrapper
+
+Capture a managed Bash process-group warning during clean-LuaJIT setup: the child returns correct values and exit0 while stderr violates the quiet-output check. Nineteen complete concurrent consumer routes pass13 setup/24 deployment groups. A separate1000-command probe captures the warning with actual child PID/PGID29222 matching;999 invocations have empty stderr and all1000 exit0 with matching groups.
+
+This documentation-only investigation transfers evidence to existing SESSION-STARTUP-READING.7; its reading prerequisites and open repair status remain unchanged. Neither the denied-call cause nor the original lost PUC stream is established. The book distinguishes launcher stderr from native diagnostic events. No implementation fix, suppression, recovery/purge, native rebuild or dependency analysis. Focused evidence/preservation, book/public, Knowledge, memory/history and all doctrines govern landing; common .6 is next.
+
 ## 2026-09-20 — BACKEND-INTEGRATION-GUIDES.5.2 - verify Lua deployment and diagnostics
 
 Extend the Lua consumer with opt-in typed diagnostic events, distinct immediate-exit records and available native arity fields. Add a relative-root launcher, diagnostic grammars and maintained deployment checks. The guide covers source/native packaging, caller-relative grammar paths, ordered events, earlier values before failure and explicit deployment errors. The bundle needs two parsing modules; no RGX/PGEN or MCP module is loaded.

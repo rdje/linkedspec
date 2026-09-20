@@ -190,7 +190,12 @@ Other caught errors,
 including missing arguments, use `consumer_error`.
 
 Module or native-library loading happens before that handler and uses Lua's own
-error reporting. See [Native Spec Loading](native-spec-loading.md) for the loader
+error reporting. The managed launcher can also emit its own process-control
+diagnostics; a captured warning accompanies correct parser values and status0.
+Its verification/repair remains tracked in [project status](../overview/project-status.md).
+For programmatic event handling, use the native `diagnostic_sink` callback:
+stderr can contain interpreter and launcher messages in addition to adapter records.
+See [Native Spec Loading](native-spec-loading.md) for the loader
 contract and [Diagnostics](../compiler/diagnostics.md) for runtime fields.
 Ordinary parsing repeats the interpreter command, without invoking the native
 builder. Each fresh process loads the retained modules and compiles its grammar

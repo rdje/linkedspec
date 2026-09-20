@@ -10,6 +10,12 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-20 — BACKEND-INTEGRATION-GUIDES.5.3 - trace consumer stderr to managed wrapper
+
+The concurrent consumer replay captures the already-owned child-setpgid warning in the managed wrapper, with successful Lua values/status0. A separate probe records the actual group of a warned child: PID=PGID29222, parent28526. That one warning did not prevent the final expected group. It does not establish a kernel cause, prove the original lost PUC stream, or guarantee signal/drain behavior.
+
+Keep startup .7 as the single infrastructure repair owner, with required reading .3/.4/.5 unchanged. Its repair must verify actual group establishment and retain denied/unknown liveness states. This integration leaf closes bounded diagnosis and evidence handoff only; the defect remains open. Consumer programs should use native diagnostic sinks for structured events because stderr can also carry launcher/interpreter output. Evidence lives under .linkedspec-data/scratch/backend-integration53; the durable qualified conclusion is docs/knowledge/project-data-liveness-permission-denial.md.
+
 ## 2026-09-20 — BACKEND-INTEGRATION-GUIDES.5.2 - verify Lua deployment and diagnostics
 
 Lua's native RuntimeInterpreterException carries optional helper-arity fields, while its standard to_json projection returns message plus diagnostic. The adapter copies those public fields explicitly and handles RuntimeExitNow separately; process failure remains1 while requested status is recorded as data. Diagnostic sinks are per-parse and synchronous. An explicit disabled trace emitter preserves inherited trace files and prevents trace mixing. The launcher keeps caller cwd and derives its package/ABI roots. A committed lua/src/specs/tools closure with two parsing modules retains module-relative grammar discovery after relocation; bad caller/packaged grammar controls prove selection. Writable application data and checkout identity remain required despite read-only source/native files.

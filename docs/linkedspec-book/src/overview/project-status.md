@@ -550,10 +550,13 @@ opt-in diagnostic events, typed failures and a relocatable source/native bundle.
 Both working and clean pinned applications pass24 deployment checks per runtime;
 the native diagnostic contract passes119 assertions per runtime, with no native
 rebuild. Source and native bytes survive relocation and controlled asset failures.
-One earlier parallel PUC run emitted unexplained non-JSON stderr; its initial
-harness lost the raw stream. Full replay and160 focused repetitions pass, but
-the cause is not established. Integration `.5.3` owns that unresolved observation
-before parent closeout. Common navigation and independent final verification remain open.
+One earlier parallel PUC run's non-JSON stderr was lost by its initial harness.
+Integration `.5.3` captures a separate clean LuaJIT call with correct values/status0
+and a managed Bash process-group warning. A standalone warned invocation has the
+expected PID/PGID; its denied-call cause remains unproved. Existing startup `.7`
+owns establishment/liveness verification and repair after required reading.
+No wrapper or Lua engine fix is claimed, and the original lost stream is not
+retroactively identified. Common navigation and independent final verification remain open.
 ARCHOGEN and SEMULITH supplied ten consumer reports on September20. Their Rust
 workspace membership failures are reproduced and repaired by integration `.8.2`:
 the example owns its workspace, and enclosing applications exclude the vendored

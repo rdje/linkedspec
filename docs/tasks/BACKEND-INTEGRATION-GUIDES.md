@@ -270,13 +270,19 @@ ARCHOGEN's use of Lispish through Rust. The requested scope is every backend.
   Commit: `BACKEND-INTEGRATION-GUIDES.5.2 - verify Lua deployment and diagnostics`
 
 - ID: `BACKEND-INTEGRATION-GUIDES.5.3`
-  Status: `pending`
-  Goal: Resolve the unexplained non-JSON stderr occurrence in the Lua consumer verification.
+  Status: `done` / diagnosis and canonical repair handoff; defect not fixed
+  Activation commit: `1ab8e8ac394900f68eaf55f5ca012787bbfb3331`.
+  Verification tier: `focused`
+  Focused checks: Bounded exact four-way setup/deployment workload with complete command/status/raw-stream capture; compare any recurrence against direct and managed native controls; source/native preservation, evidence ownership, Knowledge/book/continuity and all doctrines.
+  Canonical trigger: None for initial read-only diagnosis and evidence recording. Escalate before any workflow, storage, gate, dependency or public-contract implementation change. No RGX/PGEN internals or native rebuilds are involved.
+  Initial experiment: Replay at most eight complete four-way rounds, retaining every subprocess result and stopping after the first unexpected result. Each route runs13 setup groups then24 deployment groups; previous160 focused invalid-UTF8 controls passed. Do not change the expected result or infer a cause without the actual stream.
+  Goal: Identify a reproducible source of unexpected consumer stderr and attach the measured repair obligation to its canonical owner.
   Dependencies: `.5.2` supplies complete failure capture and retained initial/replay/control evidence.
-  Scope: One working PUC invalid-UTF8 case during four concurrent consumer runs. The original raw stderr was not retained, so the emitting component and cause are unknown; no Lua engine defect is established.
-  Acceptance: Capture an actual recurrence with exact command/environment/status/raw streams; isolate native versus managed execution and identify the responsible component. Repair a confirmed project-owned cause with regression proof, or obtain a justified external disposition. Do not close merely because retries pass or invent a diagnosis. Original failure, full successful replay and160 successful focused controls remain in the record. Final .7 must consume this disposition before parent closeout.
-  Verification: `pending`; non-reproduction is measured, not a fix.
-  Commit: `pending`
+  Scope: The original PUC stream was lost and remains unidentified. A captured clean-LuaJIT recurrence emits the existing managed Bash process-group warning while returning correct values/status0. Investigation remains read-only; wrapper implementation belongs to existing startup .7, whose required-reading dependencies are unchanged.
+  Acceptance: Capture exact command/status/raw streams, identify the emitting layer for actual captured evidence, measure the warned child's group when possible, and preserve uncertainty about the original lost stream and kernel cause. Consolidate an already-owned infrastructure defect into its existing repair instead of duplicating or bypassing its prerequisites. Final .7 must consume the qualified outcome; no warning filter, inferred Lua defect or false repair closure.
+  Scope disposition: Startup .7 already owns this exact warning, establishment verification and denied/unknown liveness handling. It depends on required reading .3/.4/.5. The integration leaf therefore closes diagnosis/evidence handoff only; the infrastructure defect remains open there. Common .6 and final documentation review may proceed with that limitation explicit.
+  Verification: PASS captured evidence: four complete concurrent rounds plus three routes in round5 give19 complete13-setup/24-deployment routes. The remaining clean-LuaJIT setup call returns correct values/status0 with child-setpgid EPERM for child571. A separate bounded probe completes1000 invocations; all exit0 with matching child PID/PGID and999 have empty stderr. The warned invocation's PID/PGID29222 matches the warning's child; parent28526. This establishes that invocation's final group, not the denied-call cause or a lifecycle guarantee. Read-only listing reports found0/removed0/skipped0. No recover/purge, source change, native build, dependency analysis or fix. Canonical facts and startup .7 acceptance retain the actual warned-group control. Book/public, preservation, Knowledge, memory/history and all doctrines govern focused landing.
+  Commit: `BACKEND-INTEGRATION-GUIDES.5.3 - trace consumer stderr to managed wrapper`
 
 - ID: `BACKEND-INTEGRATION-GUIDES.6`
   Status: `pending`
@@ -366,8 +372,7 @@ ARCHOGEN's use of Lispish through Rust. The requested scope is every backend.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `BACKEND-INTEGRATION-GUIDES.5.3` | `pending` | Replay the exact concurrent workload with complete raw capture after clean .5.2; final .7 needs the unexplained stderr disposition. |
-| 2 | `BACKEND-INTEGRATION-GUIDES.6` | `pending` | Connect the common entry and backend guides; native setup/deployment examples are verified. |
+| 1 | `BACKEND-INTEGRATION-GUIDES.6` | `pending` | Connect common navigation after clean .5.3 diagnosis/handoff; the managed-wrapper defect stays owned by startup .7 with unchanged reading prerequisites. |
 
 The director explicitly requests a temporary pivot at the next clean handoff.
 Conformance .1.34 is committed at 00f9783a1 and inventory .0 is complete.
@@ -584,7 +589,18 @@ No verification waiver is requested or applied. Lua .5.2 follows clean landing.
 - [x] **NO REGRESSION** — Native hashes/mtimes, source/pins/locks and immutable history stay exact. LINKEDSPEC_TRACE_LEVEL hostile controls preserve caller trace bytes. Prior malformed-regex and PUC5.4 exclusions remain; the unexplained initial stderr is owned by .5.3, not classified as fixed.
 - [x] **LOCKSTEP** — Guide, project status, Knowledge, task/index, roadmaps, bounded histories and MEMORY describe the verified routes and unresolved observation. Focused public/book/doctrines and git diff --check govern landing; .7 retains canonical proof.
 
+## Acceptance Checklist — .5.3
+
+- [x] **REPRODUCE / ISSUE** — Exact four-way Lua consumer replay captures a correct-value/status0 command with non-JSON child-setpgid stderr in round5; full raw streams retained.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Captured stderr names the managed Bash wrapper. rg -n and its monitor-mode launch identify the emitting layer; the Knowledge Map maps the same warning to existing startup .7. Kernel/timing cause and the original lost PUC stream remain unproved.
+- [x] **FIX** — Correct integration guidance and route concrete evidence to the existing mandatory-reading-gated infrastructure repair. No implementation fix, warning suppression or prerequisite bypass is claimed.
+- [x] **ADDRESSED (verified)** — A1000-command public PID/PGID probe captures one warned invocation with actual matching PID/PGID29222; all outcomes consumed. This closes the integration investigation/handoff, not startup .7.
+- [x] **NO REGRESSION** — Source/native/dependency/history bytes remain unchanged; no rebuild or recovery/purge. Read-only list finds0 runs. Public documentation guards and git diff --check govern the documentation-only slice.
+- [x] **LOCKSTEP** — Book, canonical Knowledge, existing repair acceptance, task/index, roadmaps and bounded continuity retain the exact evidence and remaining limitations.
+
 ## Verification Log
+
+- `2026-09-20` .5.3: Capture the managed-wrapper warning with correct Lua values/status0;19 complete consumer routes precede/parallel the failing quiet-stderr expectation. A1000-command probe captures matching actual/warned PID/PGID29222. Existing startup .7 remains the repair owner; original lost stream and denied-call cause remain unknown. No implementation change or defect closure.
 
 - `2026-09-20` .5.2: Final13 setup/24 deployment groups pass in four consumer/runtime routes;119 native diagnostic assertions pass per ABI. Clean2852-file library,172-file runtime closure and179-file diagnostic bundle are verified without native builds. Original non-JSON stderr remains .5.3 despite full replay plus160 clean focused controls; harness now preserves raw failure evidence.
 
@@ -622,6 +638,8 @@ No verification waiver is requested or applied. Lua .5.2 follows clean landing.
 
 ## Commit Log
 
+- `.5.3`: `BACKEND-INTEGRATION-GUIDES.5.3 - trace consumer stderr to managed wrapper`; activation1ab8e8ac3; focused diagnosis/public-evidence handoff, then common .6.
+
 - `.5.2`: `BACKEND-INTEGRATION-GUIDES.5.2 - verify Lua deployment and diagnostics`; activation6e37288f7; focused examples/book proof. Unexplained stderr .5.3 follows; common .6 and final .7 remain.
 
 - `.8.4`: `BACKEND-INTEGRATION-GUIDES.8.4 - clarify Rust integration prerequisites`; activation a1166ee1d; focused navigation proof, then Lua .5.2.
@@ -655,6 +673,8 @@ No verification waiver is requested or applied. Lua .5.2 follows clean landing.
 - Guide/example leaves: pending.
 
 ## Changelog
+
+- `2026-09-20` .5.3: Capture unexpected stderr's managed-wrapper layer and a warned child with the expected group; consolidate repair evidence into startup .7 without source changes or a false fix claim.
 
 - `2026-09-20` .5.2: Deliver Lua deployment/diagnostic examples with dual-runtime proof; own unexplained initial stderr separately under .5.3 without a false fix claim.
 
