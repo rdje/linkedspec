@@ -17,8 +17,10 @@ reverify: "Historical draft: DART146_ENGINEERING_PROPOSAL. Approved implementati
 
 The director has cancelled the RGX/PGEN no-rebuild/build-on-update-only
 restriction recorded below. Normal Cargo dependency compilation is authorized;
-startup .80 retains optional freshness/performance repair ownership. The dated
-reading-only evidence and its separate CI exception below remain unchanged.
+startup .80 owns public RGX build observations, upstream reports and LinkedSpec
+target retention. The September20 boundary excludes dependency implementation
+inspection and repair. The dated reading evidence and CI exception below remain
+unchanged; they do not authorize a private dependency procedure.
 
 
 ## Exact pending proposal

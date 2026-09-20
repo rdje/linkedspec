@@ -564,8 +564,13 @@ Independent final verification remains open.
 ARCHOGEN and SEMULITH supplied ten consumer reports on September20. Their Rust
 workspace membership failures are reproduced and repaired by integration `.8.2`:
 the example owns its workspace, and enclosing applications exclude the vendored
-dependency. Ten boundary checks and a two-member native consumer pass with
-unchanged dependency pins. Integration `.8.3` uses RGX's published build interface
+dependency. The original ten metadata checks included private dependency probes;
+integration `.8.5` replaces those with nine LinkedSpec/application-only controls.
+The two-member native consumer and public bootstrap proof remain distinct from
+metadata, with unchanged dependency pins. Rust build guidance now follows RGX's
+published 1.95 requirement and root-managed commands. Integration `.8.6` separately
+owns retiring the Lua test's private grammar fixture before final review.
+Integration `.8.3` uses RGX's published build interface
 and removes dependency-internal procedures and assumptions. LinkedSpec integrates
 with RGX only; transitive preparation belongs to RGX. Bootstrap progress reporting
 remains upstream-owned. Integration `.8.4` adds prerequisite links after checkout

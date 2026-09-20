@@ -10,6 +10,14 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-21 — BACKEND-INTEGRATION-GUIDES.8.5 - remove private dependency workspace probes
+
+A passing dependency-internal metadata probe is not a sustainable integration contract. Keep workspace regression tests on LinkedSpec/application manifests, with a controlled missing own boundary and an explicit host exclusion. Use the retained RGX checkout as an opaque Cargo dependency; never select its internal directories or invoke a transitive manifest. Published RGX bootstrap and native execution provide the separate preparation/use evidence.
+
+The prepared consumer repeats public bootstrap in0.204s, returns exact word values and passes18 Lispish file/deployment groups. Two native binary hashes/mtimes and five source/grammar/lock comparisons remain exact. This is retained-product proof, not a fresh network checkout, older compiler, release build, different platform or upstream progress-message fix. Keep historical reading evidence intact while retiring its outdated current build direction. The Lua foreign-fixture read is separately owned by .8.6; no compiler/interpreter change or reading credit occurs here.
+
+Focused preservation, three public guards and13 rendered pages/309 links pass. The previous common-entry commit fbb135d63 completed canonical CI, CLI66x2 and Phase0 1032/1032 in1077s with25 optional skips. Its compiler sample only locates one wait in the LinkedSpec compiler process; startup .81 retains causal diagnosis. The current ordinary verifier/guidance leaf does not repeat full CI; final .7 retains that boundary.
+
 ## 2026-09-20 — BACKEND-INTEGRATION-GUIDES.6 - connect native application integration guides
 
 Keep consumer assembly in the six integration pages and shared semantics in their existing loading/value/diagnostic owners under ADR0040. Common navigation must work both from the book and each backend landing. LinkedSpec consumes RGX only; transitive preparation remains its published interface responsibility. No companion scaffolding or backend build recipes are duplicated.

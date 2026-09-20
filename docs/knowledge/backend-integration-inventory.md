@@ -26,7 +26,7 @@ answers:
   - how does a Lua application package native parsing and diagnostic events
   - does Lua runtime error JSON include all native arity fields
   - which task owns the unexplained non JSON Lua consumer stderr occurrence
-date: 2026-09-20
+date: 2026-09-21
 status: five-backend guides and common navigation verified; captured wrapper stderr remains startup .7; independent closeout remains open
 tags: [integration, documentation, perl, rust, dart, julia, lua]
 evidence: "BACKEND-INTEGRATION-GUIDES.0, activation 00f9783a1e4b625bc251a3e260ef1eef60c35888. Canonical Knowledge, ADR0040, companion tree, manifests, six complete setup scripts and native loader/result seams inspected. Managed version commands and read-only pkg-config identities consumed with exit0; no compiler, dependency preparation or consumer execution ran."
@@ -72,8 +72,8 @@ access; no toolchain installation or external project-data write occurred.
 
 Existing owners remain authoritative:
 
-- startup .80: optional-file freshness/performance repair; former no-rebuild requirement cancelled September13;
-- startup .41.7: Rust README1.85 contradiction with required local Rust1.95 declarations;
+- startup .80: public RGX build observations, upstream reports and LinkedSpec target retention; normal builds authorized;
+- integration .8.5 aligns Rust README with RGX's published1.95 requirement; startup .41.7 retains other workflow/count repairs;
 - Lua .2.2: declared PUC5.4 target versus measured PUC5.5.1/header selection;
 - Lua .2.3: invalid-regex formatter failure; no excluded malformed-regex or unfiltered Lua gate;
 - legacy Lispish facts: historical head/tail representation and dated Perl multi-form/no-progress findings.
@@ -84,6 +84,10 @@ The director cancelled the no-rebuild requirement on September13: ordinary
 RGX/PGEN builds are authorized and must not be blocked by a compiler guard.
 Retain caches; the public build-performance report keeps its existing owner and
 is no longer a prerequisite for these guides.
+
+September21 .8.5 replaces private workspace probes with nine LinkedSpec/application-only
+metadata checks. Public RGX bootstrap and retained native word/Lispish checks pass;
+see [[archogen-rust-lispish-integration]]. Lua fixture isolation remains .8.6.
 
 ## Exact content destinations and ownership
 
@@ -161,10 +165,9 @@ LinkedSpec::Get reference: ["alpha"], ["Beta"], [], ["alpha","rest"].
 Both normal Cargo build/run commands pass. The first build reports3m12s and the
 repeat4m02s; each compiles PGEN, RGX, core, runtime and the example. This is actual
 rebuilding, not a warm dependency-reuse claim. The director explicitly cancelled
-the no-rebuild requirement during this leaf. The earlier guard rejected PGEN
-compilation, and a narrower retained-library link failed for a missing PGEN rlib;
-neither failed diagnostic is successful consumer evidence. The later normal
-Cargo-built binary and repeat command provide the accepted native proof.
+the no-rebuild requirement during this leaf. Two earlier attempted reuse
+diagnostics failed and do not certify consumer use. The normal Cargo-built
+binary and repeat command provide the accepted native proof.
 
 Four argument rejections pass: missing grammar, missing input, non-UTF-8 grammar
 path and non-UTF-8 input. Each returns exit1 with empty stdout and its expected

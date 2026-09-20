@@ -474,14 +474,22 @@ All 21 shipped `.spec` files from the parent `specs/` directory are parsed, vali
 
 ## Building
 
-Requirements: Rust 1.85+ (edition 2024).
+RGX's [published integration contract](../rgx/docs/INTEGRATION.md) requires
+Rust **1.95 or newer**. LinkedSpec's integration proof uses Rust 1.95.0 on macOS
+arm64; it does not establish support for an older compiler or another platform.
+Follow that contract's bootstrap instructions before building a new checkout,
+running preparation through `tools/project_data_run.sh` to keep its data local.
+For an embedding application, the [application integration guide](../docs/linkedspec-book/src/public-api/integration-rust.md#initial-rgx-preparation)
+also supplies host workspace and storage setup. RGX owns transitive preparation.
+
+Run development commands from the LinkedSpec repository root so the maintained
+wrapper keeps package stores, temporary files and build products local:
 
 ```bash
-cd rust/
-cargo build
-cargo test
-cargo clippy
-cargo build --release
+bash tools/run_cargo_local.sh build --manifest-path rust/Cargo.toml
+bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml
+bash tools/run_cargo_local.sh clippy --manifest-path rust/Cargo.toml
+bash tools/run_cargo_local.sh build --release --manifest-path rust/Cargo.toml
 ```
 
 ## License

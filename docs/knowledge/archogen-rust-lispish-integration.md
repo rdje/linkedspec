@@ -15,8 +15,9 @@ answers:
   - which task owns the Cargo workspace integration failure
   - which task owns the PGEN bootstrap false success report
   - has the reported Lispish multiline string patch been verified locally
-  - how does a host Cargo workspace exclude the LinkedSpec and PGEN packages
-date: 2026-09-20
+  - how does a host Cargo workspace exclude vendored LinkedSpec
+  - does the workspace verifier query dependency internals
+date: 2026-09-21
 status: workspace and public integration verified; prerequisite guidance corrected; bootstrap message and strict Lispish reports remain open
 tags: [rust, lispish, embedding, dependencies, discussion]
 evidence: "September13 native Lispish proof; September20 report intake, workspace repair and successful RGX public bootstrap/native consumer proof. Supplied grammar patch remains unverified locally."
@@ -53,21 +54,21 @@ release builds, another platform or an actual downstream application build.
 
 ## September 20 Cargo workspace repair
 
-`BACKEND-INTEGRATION-GUIDES.8.2` independently reproduces both ARCHOGEN/LS-001
-failures on Cargo 1.95.0: the example and pinned PGEN manifest exit 101 with
-“current package believes it's in a workspace when it's not”. The fixture is an
-actual Git submodule under an application workspace, at LinkedSpec ff74b4c3b,
-RGX 8763a0e6 and PGEN db6f8c68. SEMULITH/LS-003 item 1 is the same setup issue.
+Integration `.8.2` repaired ARCHOGEN/LS-001 and SEMULITH/LS-003 item1:
+the example declares its own empty `[workspace]`, and an enclosing application
+adds `exclude = ["vendor/linkedspec"]` at its workspace root before preparation.
+The original private dependency metadata probes are retired by `.8.5`; they are
+not a maintained integration contract. The dated experiment remains in Git.
 
-The example now declares its own empty `[workspace]`. An enclosing application
-must merge `exclude = ["vendor/linkedspec"]` into its root `[workspace]` before
-RGX preparation, adjusting the path to its submodule location. The example's
-boundary alone does **not** isolate the separate PGEN package. Twelve controlled
-metadata probes establish the distinction; the maintained `verify_workspace.py`
-checks ten standalone/host/exclusion cases using Git-archived committed sources
-and pinned dependencies, with only the candidate example manifest overlaid.
-It never copies the developer's dependency edits or builds generated parsers.
-This matches [Cargo's workspace discovery/exclusion contract](https://doc.rust-lang.org/cargo/reference/workspaces.html#the-members-and-exclude-fields).
+The current `verify_workspace.py` archives only LinkedSpec-owned Rust/example
+source and links the retained RGX checkout as an opaque dependency. Nine locked,
+offline metadata controls query only LinkedSpec/application manifests. Removing
+the example's boundary reproduces Cargo's enclosing-workspace rejection; host
+exclusion restores valid independent membership. Standalone library/example and
+two-member host membership remain exact. No internal dependency directories or manifests
+are selected, copied or queried directly. Metadata is only membership proof;
+RGX's documented bootstrap and the native consumer checks establish actual use.
+This follows [Cargo's workspace discovery/exclusion contract](https://doc.rust-lang.org/cargo/reference/workspaces.html#the-members-and-exclude-fields).
 
 The two-member application (`app` and `support`) builds and parses through the
 native runtime. The separately built example also passes its exact word values,
@@ -93,6 +94,17 @@ workspace setup, local storage and RGX's public preparation precede Cargo use.
 It qualifies SEMULITH's recursive-checkout observation without claiming a measured
 size or fresh network initialization for the targeted route. Runnable examples
 and commands remain unchanged; rendered navigation is the changed surface.
+
+## September 21 public boundary verification
+
+Integration .8.5 passes nine workspace controls through Cargo1.95.0. The retained
+public-interface consumer repeats RGX bootstrap in0.204s with status0/empty stderr,
+returns the exact word value and passes all18 Lispish file/deployment groups.
+Both native executables preserve hashes and modification times; five application
+source/grammar/lock files match the maintained inputs. This reuses the existing
+prepared source/package store and establishes no fresh network, older compiler,
+new platform, release build or upstream progress-message repair. The Rust README
+now follows RGX's public requirement and root-managed Building commands.
 
 ## September 20 downstream report intake
 
@@ -163,10 +175,9 @@ checkout path. The domain adapter is shape conversion, not source validation.
 Clean LinkedSpec42490a9d917e, RGX8763a0e6bea9 and PGENdb6f8c6836fe sources were
 cloned from committed objects with every tracked blob checked. Only the Rust
 dependency closure was initialized, not optional PCRE2/HDL test repositories.
-A byte-verified public registry seed copied12738files/348484293bytes. Initial
-offline PGEN resolution lacked mimalloc metadata; normal online preparation
-then passed. No claim is made that mimalloc itself was compiled. Those earlier preparation details do not define the dependency contract.
-Current preparation must follow RGX's published interface above.
+A byte-verified public registry seed copied12738files/348484293bytes. Earlier
+preparation details are retired; current preparation follows RGX's published
+interface and its separately recorded successful consumer proof above.
 
 The separate application preserves the200-package reference lock's versions.
 Locked offline builds took40.50s then4.87s; both logs report normal dependency
@@ -233,9 +244,8 @@ linkedspec-runtime = { path = "vendor/linkedspec/rust/linkedspec-runtime" }
 
 This assumes Cargo.toml is at the ARCHOGEN repository root. A workspace member's
 path must instead be relative to that member's manifest. The runtime brings core
-and RGX through existing path dependencies. LinkedSpec's nested RGX submodule
-contains PGEN and PCRE2 submodules; recursive initialization preserves that layout.
-This is source checkout, not a requirement to build every nested product.
+and RGX through the published crate interface. Initialize the direct RGX
+checkout and let its public bootstrap own all transitive requirements.
 
 RGX's published integration document requires its public bootstrap command on a
 fresh downstream checkout. Follow that contract rather than an internal PGEN
@@ -243,8 +253,9 @@ procedure. Normal documented builds are authorized; retain compatible outputs
 and same-volume caches. Startup `.80` tracks observable performance and upstream
 reports only. Source inspection, implementation-derived assumptions and local
 submodule patches are forbidden by the September20 director instruction.
-The published RGX integration contract requires Rust 1.95. The older README 1.85
-claim and actual compiler support proof remain owned by startup .41.7; see
+The published RGX integration contract requires Rust1.95. Integration .8.5
+removes the stale README1.85 claim and routes its Building commands through
+managed storage. Tested1.95.0/macOS arm64 is not a minimum/platform matrix; see
 [[rust-build-requirements-documentation-gap]].
 
 The public file pipeline is `SpecRequest::path` with explicit `SpecLoadOptions`,

@@ -1,76 +1,47 @@
 ---
 id: rust-build-requirements-documentation-gap
-title: Rust README compiler requirement conflicts with locked local dependency declarations
+title: Rust build guidance follows RGX's published toolchain requirement
 answers:
   - what minimum Rust compiler does the README claim
-  - why is the Rust README 1.85 requirement stale
-  - which required local dependencies declare Rust 1.95
+  - why was the Rust README 1.85 requirement stale
+  - where is the published RGX Rust toolchain requirement
   - does Cargo metadata prove the earliest working Rust compiler
   - who owns the Rust build requirements and command documentation repair
-date: 2026-09-07
-status: verified declared-requirement mismatch; compiler support floor and documentation repair pending
+date: 2026-09-21
+status: integration requirement and Building commands corrected; broader startup .41.7 repairs remain open
 tags: [rust, cargo, requirements, documentation, SESSION-STARTUP-READING]
-evidence: "SESSION-STARTUP-READING.3.3.2 reads the complete Rust README and manifests, then resolves locked offline Cargo metadata: 199 packages, empty stderr, required local pgen 1.0.0 and rgx-core 0.1.0 declaring Rust 1.95 against README line 472's 1.85+. No older compiler was run. Existing repair .41.7 owns the requirements, managed commands, and stale primary-case count; .41.2 owns generated-classifier wording."
-reverify: "bash tools/run_cargo_local.sh metadata --manifest-path rust/Cargo.toml --locked --offline --format-version 1"
+evidence: "RGX public rgx/docs/INTEGRATION.md sections3/12 requires Rust 1.95. Integration .8.5 replaces Rust README's1.85 wording and unmanaged Building block. Observed Cargo/rustc 1.95.0, prior native consumer proof and canonical fbb135d63 qualify actual support; no earlier compiler/platform matrix is claimed."
+reverify: "Read rgx/docs/INTEGRATION.md sections3/12, rust/README.md Building and the Rust integration guide. Run bash tools/run_cargo_local.sh --version and bash tools/project_data_run.sh rustc --version; use the guide's managed native consumer checks for actual execution."
 ---
 
-`rust/README.md` line 472 claims Rust 1.85+ with edition 2024. The workspace and
-core manifests use the relative local `rgx` dependency. Locked offline metadata
-resolves 199 packages and declares the following requirements above 1.85:
+The maintained requirement is **Rust 1.95 or newer**, as published by RGX's
+integration contract. LinkedSpec does not derive that requirement from private
+manifests or a transitive dependency census. Recheck the selected RGX revision's
+published contract when updating.
 
-| Package | Version | Declared rust_version | Source |
-| --- | --- | --- | --- |
-| wasip2 | 1.0.4+wasi-0.2.12 | 1.87.0 | registry |
-| wasip3 | 0.4.0+wasi-0.3.0-rc-2026-01-06 | 1.87.0 | registry |
-| wit-bindgen | 0.51.0 | 1.87.0 | registry |
-| wit-bindgen-core | 0.51.0 | 1.87.0 | registry |
-| wit-bindgen-rust | 0.51.0 | 1.87.0 | registry |
-| ar_archive_writer | 0.5.2 | 1.88.0 | registry |
-| home | 0.5.12 | 1.88 | registry |
-| pgen | 1.0.0 | 1.95 | local |
-| rgx-core | 0.1.0 | 1.95 | local |
+`BACKEND-INTEGRATION-GUIDES.8.5` replaces the stale Rust README 1.85 statement and
+its Building block. Commands now run from the LinkedSpec root through
+`tools/run_cargo_local.sh` with an explicit `rust/Cargo.toml` path. New checkout
+preparation links to the Rust application guide's managed storage/public RGX
+bootstrap sequence. No separate transitive preparation procedure is maintained.
 
-The required local declarations contradict the README. Platform-specific registry
-rows do not establish a universal host requirement. Metadata describes package
-declarations, not the earliest compiler on which the complete project has been
-tested. This checkpoint neither runs an older compiler nor changes dependencies,
-pins, manifests, or the public support promise. It reads necessary Cargo metadata,
-not excluded nested dependency source.
+Cargo and rustc report 1.95.0 on the measured macOS arm64 host. Native consumer
+build/use was verified in integration .2.1/.2.2/.8.3, and .6's canonical checkpoint
+fbb135d63 verifies required Rust admissions and relocation. This establishes the
+observed route, not the earliest possible compiler, all platforms, every optional
+Rust suite, clippy or a release-profile build. A version-only command is not a
+substitute for a native build/use result.
 
-The exact managed census is reproducible without fetching dependencies:
+The September 7 declared-version census is superseded as a requirements authority;
+its exact historical record remains in Git. The public RGX contract and measured
+consumer results govern current guidance. Cargo metadata describes declarations;
+it cannot establish the earliest compiler on which an application works.
 
-```bash
-bash tools/project_data_run.sh env PYTHONDONTWRITEBYTECODE=1 python3 - <<'RUSTMSRVREAD'
-import subprocess, json
-run = subprocess.run([
-    'bash', 'tools/run_cargo_local.sh', 'metadata', '--manifest-path',
-    'rust/Cargo.toml', '--locked', '--offline', '--format-version', '1'
-], capture_output=True, text=True, check=True)
-data = json.loads(run.stdout)
-def parts(version):
-    return tuple(int(x) for x in version.split('.')[:2])
-higher = [
-    {'name': p['name'], 'version': p['version'],
-     'rust_version': p['rust_version'],
-     'source_kind': 'registry' if (p.get('source') or '').startswith('registry+') else 'local'}
-    for p in data['packages']
-    if p.get('rust_version') and parts(p['rust_version']) > (1, 85)
-]
-print(json.dumps({
-    'metadata_packages': len(data['packages']),
-    'declared_above_readme_1_85': sorted(higher, key=lambda p: (parts(p['rust_version']), p['name'])),
-    'stderr': run.stderr
-}))
-RUSTMSRVREAD
-```
+Startup `.41.7` retains its other development-command, cadence and stale-count
+repairs. `.41.2` retains generated-source classification wording. Neither task is
+closed by this bounded integration correction, and no source-reading credit is
+added.
 
-`SESSION-STARTUP-READING.41.7` owns an actual managed compiler/build proof before
-publishing a corrected support floor, root-relative managed Cargo examples, and
-the README's stale 63-case primary claim against the current 66-case authority.
-`.41.2` owns reconciliation of the subset wording with the unconditional 105-case
-generated-source classifier. A classifier's existence is separate from whether
-the optional full Rust gate ran in a particular canonical invocation. The current
-reading checkpoint does not claim fresh execution of that optional gate.
-
-Related: [[rust-project-data-ssd-storage]],
-[[rust-generated-source-full-manifest-classification]], [[rust-local-verification-gate]].
+Related: [[archogen-rust-lispish-integration]], [[rust-ci-pgen-missing-input-rebuilds]],
+[[rust-project-data-ssd-storage]], [[rust-generated-source-full-manifest-classification]],
+[[rust-local-verification-gate]].

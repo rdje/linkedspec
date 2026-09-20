@@ -6,7 +6,7 @@
 - Status: `active` / director-authorized temporary documentation activity
 - Roadmap lane: `Phase 6 documentation and adoption / native backend integration`
 - Created: `2026-09-13`
-- Last updated: `2026-09-20`
+- Last updated: `2026-09-21`
 - Owner: repo-local workflow
 - Intake owner: `CONFORMANCE-SOURCE-READING.1.34`
 
@@ -301,15 +301,15 @@ ARCHOGEN's use of Lispish through Rust. The requested scope is every backend.
 - ID: `BACKEND-INTEGRATION-GUIDES.7`
   Status: `pending`
   Goal: Independently verify and close the complete integration documentation delivery.
-  Dependencies: `.6`, `.8.2`, `.8.3`, `.8.4`, `.5.3`
+  Dependencies: `.6`, `.8.2`, `.8.3`, `.8.4`, `.5.3`, `.8.5`, `.8.6`
   Acceptance: Replay documented setup/use/deployment/error paths from managed consumer workspaces, consume all job outcomes, render affected books, verify links and evidence limits, run required canonical CI, and close all verified parent nodes. Commit cleanly before the final push boundary; no pending backend may be counted complete.
   Verification: `pending`
   Commit: `pending`
 
 - ID: `BACKEND-INTEGRATION-GUIDES.8`
   Status: `active`
-  Goal: Incorporate the director-supplied ARCHOGEN and SEMULITH consumer reports without losing the ongoing integration delivery.
-  Children: `.8.1`, `.8.2`, `.8.3`, `.8.4`
+  Goal: Incorporate consumer reports and enforce the director's public RGX integration boundary before final delivery.
+  Children: `.8.1`, `.8.2`, `.8.3`, `.8.4`, `.8.5`, `.8.6`
   Dependencies: Clean .5.1 checkpoint 7f2afcbf428a6a29b7c82d8c618e2312eaa16e6c.
   Acceptance: Every report has a qualified disposition and an executable repair owner where action is required. Integration setup repairs precede final .7; grammar/runtime repairs keep their startup prerequisites and explicit implementation ownership.
   Verification: `pending`
@@ -374,11 +374,35 @@ ARCHOGEN's use of Lispish through Rust. The requested scope is every backend.
   Verification: PASS two rendered prerequisite entry points and56 local links across the Rust guide/status pages; all includes resolve. All21 fenced examples match clean a1166ee1d byte-for-byte, preserving the previously verified public RGX/native sequence. SEMULITH's reported1.7GB/30-submodule observation is explicitly dated and qualified, not a measurement of the targeted route. Mutation68/14/11/10/50 and selector67/35/0/5/11 pass without checker changes. Source/pins/locks and prior history remain unchanged; Knowledge, memory/history and all doctrines govern focused landing. No dependency rebuild, fresh network checkout, upstream repair or grammar fix is claimed. Evidence: .linkedspec-data/scratch/backend-integration84.
   Commit: `BACKEND-INTEGRATION-GUIDES.8.4 - clarify Rust integration prerequisites`
 
+- ID: `BACKEND-INTEGRATION-GUIDES.8.5`
+  Status: `done`
+  Activation commit: `fbb135d6396cc7a0251a360fbdb2a10ff2c4af97`.
+  Verification tier: `focused`
+  Focused checks: LinkedSpec-owned Cargo workspace RED/GREEN metadata controls with retained opaque RGX dependency; documented public RGX preparation and native consumer reuse; exact source/pin/original-edit preservation; maintained knowledge/plan residue review, Rust requirement/navigation, rendered book/public guards, memory/history and all doctrines.
+  Canonical trigger: None for this bounded integration verifier and guidance correction. No manifest, lock, dependency pin, production runtime, shared workflow or contract checker changes. Final .7 retains canonical proof and push.
+  Goal: Remove private dependency probes from the maintained workspace verifier and current integration guidance.
+  Dependencies: Clean .6 checkpoint with canonical receipt, empty brief and all jobs consumed.
+  Scope: Replace selected dependency-directory archives and direct transitive-manifest probes in examples/integration/rust/verify_workspace.py with tests of LinkedSpec/application manifests only. Use the retained RGX root as an opaque dependency through normal Cargo resolution; RGX public bootstrap remains the preparation authority. Remove superseded private build premises from roadmap/current Knowledge updates, and align Rust README integration requirements/commands with the RGX public contract. Annotate the limited .41.7 guidance completion while leaving its broader repairs open. Own only current guidance and explicit supersession; immutable history remains exact.
+  Finding: The .6 final review found an executable workspace verifier that still enumerates dependency internals, two roadmap summaries retaining an obsolete private build premise, seven later-update paragraphs with stale repair direction, and Rust README's1.85 statement conflicting with RGX's published1.95 requirement. No dependency source was inspected to establish these LinkedSpec-owned defects.
+  Acceptance: The maintained verifier never selects or directly queries a dependency-internal path. It proves standalone, enclosing and excluded LinkedSpec workspace behavior plus a negative own-manifest control. Public bootstrap/native reuse passes without private source inspection, overlays or pin changes. Current roadmap/book/Knowledge claims use published requirements and observed public results; historical private probes are explicitly retired. Preserve required-reading coverage and unrelated repair ownership. Lua's separate private fixture coupling is .8.6.
+  Verification: PASS nine locked/offline LinkedSpec/application metadata controls, including rejected missing example boundary and successful host exclusion. RGX public bootstrap repeats in0.204s with exit0/empty stderr; retained native words and18 Lispish file/deployment groups pass. Two native binaries preserve hashes/mtimes; five source/grammar/lock inputs match. Cargo/rustc1.95.0 and the published RGX requirement qualify README guidance without an older-compiler/platform claim. Thirteen rendered pages/309 links and unchanged guide fences pass. Public mutation69/14/11/10/50, selector68/35/0/5/11 and cursor76/60 pass with unchanged checkers. Preservation checks2833 prior files/50455564 bytes, original dependency edits/pins, locks, runtime/contract/history sources and seven exact historical audit bodies. Knowledge, memory/history and all doctrines govern focused landing; .8.6 and final .7 follow.
+  Commit: `BACKEND-INTEGRATION-GUIDES.8.5 - remove private dependency workspace probes`
+
+- ID: `BACKEND-INTEGRATION-GUIDES.8.6`
+  Status: `pending`
+  Goal: Replace the Lua validation test's dependency-owned grammar input with a LinkedSpec-authored fixture.
+  Dependencies: `.8.5` committed clean.
+  Scope: Only the direct foreign-fixture read in lua/test/run.lua and its two current Knowledge descriptions, plus normal continuity/book evidence. No compiler/interpreter, dependency source, native module, contract semantics or reading-credit change.
+  Acceptance: Preserve the existing marker count/spelling/slot, timing, Unicode, reconstructed-source and error assertions. Author the small replacement from LinkedSpec's public DSL; never read or copy the dependency fixture. A focused control rejects dependency-file access before opening it, and the selected test passes on both retained Lua ABIs. Keep unrelated malformed-regex/target limits and runtime repair prerequisites intact.
+  Verification: `pending`
+  Commit: `pending`
+
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `BACKEND-INTEGRATION-GUIDES.7` | `pending` | Independently review all integration lanes and limits after clean .6; final canonical proof/push precede return to conformance .1.35. |
+| 1 | `BACKEND-INTEGRATION-GUIDES.8.6` | `pending` | Replace the Lua test fixture coupling after clean .8.5. |
+| 2 | `BACKEND-INTEGRATION-GUIDES.7` | `pending` | Independently close delivery, run canonical proof/push, then resume conformance .1.35. |
 
 The director explicitly requests a temporary pivot at the next clean handoff.
 Conformance .1.34 is committed at 00f9783a1 and inventory .0 is complete.
@@ -613,7 +637,19 @@ No verification waiver is requested or applied. Lua .5.2 follows clean landing.
 - [x] **NO REGRESSION** — Seven prepared native products retain bytes/mtimes. No runtime/grammar, dependency source/pin or mutation-authority change. Cursor semantic fields, rollout, cases and historical denials remain exact; the common page gains its required inventory row and75-to76 current-marker mirrors. Public semantic guards pass with unchanged behavior coverage.
 - [x] **LOCKSTEP** — Book/status, Knowledge, task/index, roadmaps, bounded history and MEMORY preserve remaining Lispish, wrapper and runtime limits. Exact staged canonical CI and all doctrines are required for this commit; final independent .7 follows a clean checkpoint.
 
+## Acceptance Checklist — .8.5
+
+- [x] **REPRODUCE / ISSUE** — The old maintained verifier selects internal dependency directories and directly queries a transitive manifest. Current roadmaps/Knowledge retain stale private build premises; Rust README says1.85 against RGX's published1.95 requirement.
+- [x] **ROOT CAUSE (WHY + WHERE)** — LinkedSpec-owned verify_workspace.py archive/metadata calls encode the foreign layout. The supported replacement queries only example/library/application manifests; its managed Cargo control rejects a removed own workspace boundary with101 and succeeds after host exclusion. No dependency implementation diagnosis is used.
+- [x] **FIX** — Archive only LinkedSpec source, link the retained RGX root opaquely, and replace private probes with nine own-workspace controls. Remove current private premises; route Rust Building commands through managed storage and its requirement through the public RGX contract.
+- [x] **ADDRESSED (verified)** — Nine workspace controls, public bootstrap, retained native word/Lispish checks, Rust requirement/command syntax,13 rendered pages/309 links and three public guards pass. Metadata and native-use proof remain explicitly distinct.
+- [x] **NO REGRESSION** — Preserve2833 prior files, original dependency work/pins, locks, runtime/checker/history bytes, seven historical audit bodies and both native binaries. Existing guide code fences are unchanged; no source-reading credit or runtime repair is claimed.
+- [x] **LOCKSTEP** — Task owners, roadmap summaries, current Knowledge and public guide/status agree; focused verification governs this bounded correction.
+  Lua fixture isolation is separately owned by .8.6; final .7 retains independent closeout and canonical push. Broader startup .41.7 repairs remain open.
+
 ## Verification Log
+
+- `2026-09-21` .8.5: PASS nine locked/offline LinkedSpec/application metadata controls, including rejected missing example boundary and successful host exclusion. RGX public bootstrap repeats in0.204s with exit0/empty stderr; retained native words and18 Lispish file/deployment groups pass. Two native binaries preserve hashes/mtimes; five source/grammar/lock inputs match. Cargo/rustc1.95.0 and the published RGX requirement qualify README guidance without an older-compiler/platform claim. Thirteen rendered pages/309 links and unchanged guide fences pass. Public mutation69/14/11/10/50, selector68/35/0/5/11 and cursor76/60 pass with unchanged checkers. Preservation checks2833 prior files/50455564 bytes, original dependency edits/pins, locks, runtime/contract/history sources and seven exact historical audit bodies. Knowledge, memory/history and all doctrines govern focused landing; .8.6 and final .7 follow.
 
 - `2026-09-20` .6: Six native routes return the same four direct word values; retained Rust binary and six Lua modules keep exact hashes/mtimes without a build. Thirteen rendered pages,309 local links, five guide backlinks and backend landing links pass; all existing guide code fences remain unchanged. Public guard RED expected68/observed69 and67/68 becomes GREEN69/14/11/10/50 and68/35/0/5/11 through count-only changes. Source, mutation authorities, history, dependency pins and pre-existing nested edits stay unchanged. Exact staged canonical CI governs landing; independent final .7 remains.
 
@@ -655,6 +691,8 @@ No verification waiver is requested or applied. Lua .5.2 follows clean landing.
 
 ## Commit Log
 
+- `.8.5`: `BACKEND-INTEGRATION-GUIDES.8.5 - remove private dependency workspace probes`; activationfbb135d63; focused public-interface cleanup, then .8.6.
+
 - `.6`: `BACKEND-INTEGRATION-GUIDES.6 - connect native application integration guides`; activation16192f04d; canonical public-inventory boundary, then final .7.
 
 - `.5.3`: `BACKEND-INTEGRATION-GUIDES.5.3 - trace consumer stderr to managed wrapper`; activation1ab8e8ac3; focused diagnosis/public-evidence handoff, then common .6.
@@ -692,6 +730,8 @@ No verification waiver is requested or applied. Lua .5.2 follows clean landing.
 - Guide/example leaves: pending.
 
 ## Changelog
+
+- `2026-09-21` .8.5: Retire private workspace probes and current build premises; align Rust requirements with RGX public guidance while preserving all dependency work.
 
 - `2026-09-20` .6: Connect the common integration entry and all backend guides; verify identical direct values and retain RGX-only dependency preparation.
 

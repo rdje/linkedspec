@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
-"""Exercise Cargo workspace discovery against isolated committed native sources.
+"""Exercise LinkedSpec's Cargo workspace boundaries in an isolated application.
 
 Run through tools/run_python_project_data.sh from the LinkedSpec root. Only the
-current example manifest is overlaid; dependency worktrees are never copied or
-edited. This metadata regression needs no generated parser sources or builds.
-The separate Lispish verifier checks actual native execution.
+current example manifest is overlaid. The prepared RGX checkout is linked as an
+opaque dependency; no internal dependency directories or manifests are selected, copied,
+queried directly or edited. Prepare RGX through its published integration guide
+before running this check. Metadata proves LinkedSpec/application membership;
+the separate public-bootstrap and Lispish checks prove preparation/native use.
 """
 
 import io
@@ -22,35 +24,34 @@ def main():
     scratch.mkdir(parents=True, exist_ok=True)
     if scratch.stat().st_dev != root.stat().st_dev:
         raise RuntimeError("workspace fixtures must share the repository volume")
+    dependency = (root / "rgx").resolve(strict=True)
+    if dependency.stat().st_dev != root.stat().st_dev:
+        raise RuntimeError("RGX must share the repository volume")
+    if not (dependency / "docs/INTEGRATION.md").is_file():
+        raise RuntimeError("initialize RGX and follow its published integration guide first")
     checks = []
 
     with tempfile.TemporaryDirectory(prefix="rust-workspace-", dir=scratch) as temporary:
         host = Path(temporary)
         vendor = host / "vendor/linkedspec"
 
-        def archive(checkout, destination, paths, revision="HEAD"):
-            # Git supplies committed blobs, excluding generated outputs,
-            # caches and unrelated changes in a developer's dependency worktree.
+        def archive_linkedspec():
+            # Only LinkedSpec-owned source enters the fixture. Cargo handles
+            # the opaque dependency through the normal published crate path.
             raw = subprocess.check_output(
-                ["git", "-C", str(checkout), "archive", revision, *paths], timeout=120,
+                ["git", "-C", str(root), "archive", "HEAD", "rust", "examples/integration/rust"],
+                timeout=120,
             )
-            destination.mkdir(parents=True, exist_ok=True)
+            vendor.mkdir(parents=True, exist_ok=True)
             with tarfile.open(fileobj=io.BytesIO(raw)) as source:
-                source.extractall(destination, filter="data")
+                source.extractall(vendor, filter="data")
 
-        rgx_pin = subprocess.check_output(
-            ["git", "-C", str(root), "rev-parse", "HEAD:rgx"], text=True,
-        ).strip()
-        pgen_pin = subprocess.check_output(
-            ["git", "-C", str(root / "rgx"), "rev-parse", f"{rgx_pin}:subs/pgen"], text=True,
-        ).strip()
-        archive(root, vendor, ["rust", "examples/integration/rust"])
-        archive(root / "rgx", vendor / "rgx", [
-            "Cargo.toml", "rgx-core", "rgx-cli", "rgx-bench", "rgx-wasm", "rgx-capi",
-        ], rgx_pin)
-        archive(root / "rgx/subs/pgen", vendor / "rgx/subs/pgen", ["rust"], pgen_pin)
+        archive_linkedspec()
+        (vendor / "rgx").symlink_to(os.path.relpath(dependency, vendor), target_is_directory=True)
         example = vendor / "examples/integration/rust/Cargo.toml"
-        example.write_bytes((root / "examples/integration/rust/Cargo.toml").read_bytes())
+        example_source = (root / "examples/integration/rust/Cargo.toml").read_text(encoding="utf-8")
+        assert example_source.count("\n[workspace]\n") == 1, "example must own one workspace boundary"
+        example.write_text(example_source, encoding="utf-8")
         for name in ("app", "support"):
             package = host / name
             (package / "src").mkdir(parents=True)
@@ -65,7 +66,7 @@ def main():
 
         def metadata(label, path, expected_root=None, expected_members=None):
             result = subprocess.run(
-                wrapper + ["metadata", "--offline", "--no-deps", "--format-version", "1",
+                wrapper + ["metadata", "--offline", "--locked", "--no-deps", "--format-version", "1",
                            "--manifest-path", str(path)],
                 cwd=host, capture_output=True, text=True, encoding="utf-8", timeout=120,
                 check=False,
@@ -82,22 +83,23 @@ def main():
                 assert members == expected_members, (label, members)
             checks.append(label)
 
-        pgen = vendor / "rgx/subs/pgen/rust/Cargo.toml"
         library = vendor / "rust/Cargo.toml"
-        # No host manifest: the three packages/workspaces stand alone.
+        # Only LinkedSpec and application manifests are passed to Cargo.
         metadata("standalone example", example, example.parent, {"linkedspec-integration-example"})
-        metadata("standalone PGEN", pgen, pgen.parent, {"pgen"})
         metadata("standalone library", library, library.parent, {"linkedspec-core", "linkedspec-runtime"})
 
         manifest.write_text(host_workspace, encoding="utf-8")
         metadata("example isolates itself in a host", example, example.parent, {"linkedspec-integration-example"})
         metadata("library isolates itself in a host", library, library.parent, {"linkedspec-core", "linkedspec-runtime"})
-        metadata("PGEN still requires host exclusion", pgen)
+        example.write_text(example_source.replace("\n[workspace]\n", "\n", 1), encoding="utf-8")
+        metadata("missing example boundary rejects enclosing workspace", example)
 
         manifest.write_text(host_workspace + 'exclude = ["vendor/linkedspec"]\n', encoding="utf-8")
+        metadata("host exclusion isolates boundary-less example", example, example.parent,
+                 {"linkedspec-integration-example"})
+        example.write_text(example_source, encoding="utf-8")
         metadata("host keeps only application members", manifest, host, {"app", "support"})
         metadata("excluded example", example, example.parent, {"linkedspec-integration-example"})
-        metadata("excluded PGEN", pgen, pgen.parent, {"pgen"})
         metadata("excluded library", library, library.parent, {"linkedspec-core", "linkedspec-runtime"})
 
     print(json.dumps({"status": "PASS", "checks": checks}))

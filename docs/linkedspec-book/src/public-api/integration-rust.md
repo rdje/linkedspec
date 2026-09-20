@@ -103,8 +103,7 @@ for Cargo's parent-manifest discovery and exclusion rules.
 
 RGX's published integration contract requires Rust **1.95**. The checked-in
 example therefore declares `rust-version = "1.95"` and edition 2024. Recheck the
-chosen revision's published requirements when updating; older README wording is
-not the authority for that release. Verification currently uses Rust
+chosen revision's published requirements when updating. Verification currently uses Rust
 1.95.0 on macOS arm64, not a minimum-version or cross-platform test matrix.
 
 ## Keep preparation and build products local
@@ -441,8 +440,15 @@ bash tools/run_python_project_data.sh examples/integration/rust/verify_lispish.p
   --binary rust/target/debug/lispish_file
 ```
 
+The workspace verifier checks only LinkedSpec and application manifests. It
+archives LinkedSpec-owned source, links the prepared RGX checkout as an opaque
+dependency, and uses locked offline Cargo metadata. Its nine checks include a
+missing LinkedSpec workspace boundary that must fail, followed by the application
+exclusion that must succeed. It neither probes transitive manifests nor replaces
+RGX's documented bootstrap and the native build checks.
+
 The three Rust tests check published result shapes, rejected shapes and the
-adapter depth boundary. The Python verifier checks 18 real file values in one
+adapter depth boundary. The Lispish verifier checks 18 real file values in one
 engine, file/argument/grammar/runtime failures, packaged assets, a different
 working directory and a moved bundle with spaces in its path. Python is only a
 verification dependency; the deployed application remains Rust.

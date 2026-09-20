@@ -3350,9 +3350,10 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
     Julia/Dart/Cargo examples and retain documented toolchain dependencies. Make existing task ownership
     explicit for small doc fixes. Replace moving capacity/capability-count duplication with canonical
     pointers or qualified dated evidence; cover actual workflow claims and render without inventing policy.
-    Reconcile rust/README.md claiming Rust 1.85+ with locked metadata declaring Rust 1.95 for required
-    local rgx-core/pgen packages. Establish the actual supported compiler through a managed build before
-    publishing a replacement minimum; do not treat manifest declarations as a tested minimum. Qualify the
+    Integration .8.5 corrects the Rust README requirement using RGX's published Rust1.95 contract and
+    converts its Building block to managed root commands. Native consumer/canonical proof uses1.95.0
+    on macOS arm64; no earlier compiler or broader platform floor is established. Retain other command
+    and verification-cadence repairs here, and recheck the public contract for future releases. Qualify the
     stale 63-case CLI claim against the 66-case authority and replace direct Cargo examples with root-managed commands.
     Replace TOOLBOX section 4.10's two current 68-mutation claims with the canonical MCP transport
     authority or dated evidence: the unchanged September 7 canonical checker reports 76. Preserve

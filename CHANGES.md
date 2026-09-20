@@ -10,6 +10,14 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-21 — BACKEND-INTEGRATION-GUIDES.8.5 - remove private dependency workspace probes
+
+Replace the integration workspace verifier's selected dependency archives and direct transitive-manifest probes with nine LinkedSpec/application-only Cargo metadata controls. The fixture archives only LinkedSpec source and links the prepared RGX root opaquely; removing the example workspace boundary fails as expected, and host exclusion restores membership. RGX's public bootstrap remains the preparation authority.
+
+Remove superseded private build premises from both roadmap summaries and current Knowledge updates. Correct Rust README's1.85 claim using RGX's published1.95 requirement and convert its Building commands to root-managed wrappers. Qualify actual1.95.0/macOS arm64 proof; broader startup .41.7 repairs remain open. Register separate Lua fixture cleanup .8.6 before final .7.
+
+PASS nine locked/offline LinkedSpec/application metadata controls, including rejected missing example boundary and successful host exclusion. RGX public bootstrap repeats in0.204s with exit0/empty stderr; retained native words and18 Lispish file/deployment groups pass. Two native binaries preserve hashes/mtimes; five source/grammar/lock inputs match. Cargo/rustc1.95.0 and the published RGX requirement qualify README guidance without an older-compiler/platform claim. Thirteen rendered pages/309 links and unchanged guide fences pass. Public mutation69/14/11/10/50, selector68/35/0/5/11 and cursor76/60 pass with unchanged checkers. Preservation checks2833 prior files/50455564 bytes, original dependency edits/pins, locks, runtime/contract/history sources and seven exact historical audit bodies. Knowledge, memory/history and all doctrines govern focused landing; .8.6 and final .7 follow.
+
 ## 2026-09-20 — BACKEND-INTEGRATION-GUIDES.6 - connect native application integration guides
 
 Deliver the common application integration entry with backend selection, pinned checkout, application-local data/asset rules, the included word grammar and maintained-check links. Connect book/native entry points, all five guide backlinks and backend READMEs; correct Rust landing wording to RGX public preparation. Existing guide code examples remain byte-exact.
