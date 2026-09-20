@@ -68,6 +68,7 @@ From the application root:
 ```sh
 mkdir -p bin specs
 cp vendor/linkedspec/examples/integration/lua/bin/parse_words.lua bin/parse_words.lua
+cp vendor/linkedspec/examples/integration/lua/bin/parse-words bin/parse-words
 cp vendor/linkedspec/examples/integration/word.spec specs/word.spec
 
 APP_ROOT=$(pwd -P)
@@ -181,7 +182,11 @@ failure and exits 1. Loader errors use `spec_pipeline_error_to_json`, retaining
 type, stage, code and source identity. Missing grammar paths report
 `resolve_spec_path` / `spec_path_not_found`; invalid file bytes report
 `decode_spec_content` / `invalid_utf8`. Runtime errors retain their message and
-optional structured diagnostic in a `runtime_error` record. Other caught errors,
+optional structured diagnostic in a `runtime_error` record. The adapter also
+copies `code`, `helper_name`, `expected_arity` and `actual_arity` from the native
+error when present; those fields are not all included by the standard error JSON
+projection. A distinct `runtime_exit_now` record preserves the requested `status`.
+Other caught errors,
 including missing arguments, use `consumer_error`.
 
 Module or native-library loading happens before that handler and uses Lua's own
@@ -191,7 +196,113 @@ Ordinary parsing repeats the interpreter command, without invoking the native
 builder. Each fresh process loads the retained modules and compiles its grammar
 in memory; the example does not persist an engine across processes.
 
-## Run the maintained setup checks
+## Capture diagnostic events and handle failures
+
+Diagnostic helpers deliver typed events separately from parse values. The example
+enables a per-parse sink only when its first argument is `--diagnostics`.
+For a grammar name equal to that option, put `--` before the grammar argument.
+The sink writes one JSON record per event to stderr; successful values stay on
+stdout. Delivery is synchronous and ordered, including events before a failure.
+Without the option, diagnostic helpers are quiet and values are unchanged.
+
+The maintained `diagnostics.spec` is:
+
+```text
+{{#include ../../../../examples/integration/lua/diagnostics.spec}}
+```
+
+Copy it into the application and run with the selected interpreter/native products:
+
+```sh
+cp "$LINKEDSPEC_ROOT/examples/integration/lua/diagnostics.spec" "$APP_ROOT/specs/"
+bash "$LINKEDSPEC_ROOT/tools/project_data_run.sh" lua -E \
+  "$APP_ROOT/bin/parse_words.lua" --diagnostics "$APP_ROOT/specs/diagnostics.spec" x
+```
+
+Stdout contains `"ok"`. Stderr contains these two records, whose key order is not
+part of the contract:
+
+```json
+{"type":"diagnostic_output","helper_name":"say","rule_label":"Top","message":"héllo 雪\n"}
+{"type":"diagnostic_output","helper_name":"print","rule_label":"Top","message":"done"}
+```
+
+Use `luajit -E` with the LuaJIT native directory for that route. Diagnostic events
+are not parser trace events. This JSON adapter supplies a disabled trace emitter
+explicitly and does not construct one from the ambient trace environment; an
+inherited trace-file/reset setting therefore does not replace or mix with its
+diagnostic output. Applications wanting parser tracing can inject a separate
+caller-owned emitter through the [trace API](trace-api.md).
+
+The maintained `exit.spec` demonstrates earlier values and immediate termination:
+
+```text
+{{#include ../../../../examples/integration/lua/exit.spec}}
+```
+
+With `--diagnostics`, parsing the three inputs `x y x` produces one stdout value
+`"ok"`, then the stderr event `say` / `before\n`, followed by
+`{"type":"runtime_exit_now","status":7}`. The final input is not executed.
+This adapter exits **1 for any caught failure**, including typed `exit_now`;
+the requested status is data for the application, not its process exit code.
+Previously written values and delivered events remain observable.
+
+A native helper arity failure retains its message, available error fields and
+structured source attribution. Missing files and invalid UTF-8 remain loader
+failures. A successful null or false value remains a successful JSON value.
+Module loading occurs before the handler and still uses the interpreter's native
+error output. These checks do not exercise the excluded malformed-regex path.
+
+## Package and relocate the application
+
+The launcher `bin/parse-words` derives its application root from its own location,
+selects `vendor/linkedspec` and the chosen ABI directory, and configures writable
+application-local data. It preserves the caller's working directory, so a relative
+grammar argument is caller-relative. It rejects missing supporting grammar/native
+products before starting the parser. For example:
+
+```sh
+bash "$APP_ROOT/bin/parse-words" puc "$APP_ROOT/specs/word.spec" alpha Beta
+```
+
+Keep a matching Lua interpreter and PCRE2 runtime library installed. Native
+products are specific to their ABI, architecture and linked runtime libraries;
+moving them on the verified host does not prove compatibility with another host.
+No compiler, dependency build or native rebuild is needed for ordinary execution.
+
+For a smaller source deployment, archive the committed Lua modules, grammar assets
+and managed wrappers while preserving their relative layout. Copy the application's
+adapter, launcher, grammar and already-built parsing modules:
+
+```sh
+ABI=puc
+BUNDLE="$APP_ROOT/dist/lua-app"
+mkdir -p "$BUNDLE/bin" "$BUNDLE/specs" "$BUNDLE/vendor/linkedspec" \
+  "$BUNDLE/build/native/$ABI"
+git -C "$LINKEDSPEC_ROOT" archive HEAD lua/src specs tools | \
+  tar -x -C "$BUNDLE/vendor/linkedspec"
+cp "$APP_ROOT/bin/parse_words.lua" "$APP_ROOT/bin/parse-words" "$BUNDLE/bin/"
+cp "$APP_ROOT/specs/word.spec" "$BUNDLE/specs/"
+cp "$APP_ROOT/build/native/$ABI/linkedspec_regex_pcre2.so" \
+  "$APP_ROOT/build/native/$ABI/linkedspec_filesystem_native.so" \
+  "$BUNDLE/build/native/$ABI/"
+bash "$BUNDLE/bin/parse-words" "$ABI" "$BUNDLE/specs/word.spec" 'alpha Beta'
+```
+
+Choose `ABI=luajit` for its matching prepared products. Copy any additional
+application grammars you use. The word parser does not load the MCP interface,
+so its third native module is unnecessary in this bundle. RGX/PGEN are absent.
+Package reviewed committed source and compatible native products together;
+`git archive` does not include uncommitted source edits.
+
+The bundle returns `["alpha","Beta"]` and can be moved as a unit. Invoke the
+launcher at its new location and supply the moved grammar path, or an explicit
+caller-relative application grammar. Source/native files may be read-only, but
+the bundle's application data and managed checkout-identity directories must be
+writable. No immutable-bundle, standalone-executable, other-platform or PUC 5.4
+guarantee is implied by these macOS arm64 checks.
+
+## Run the maintained consumer checks
 
 From the LinkedSpec repository root, prepare the checked-in example:
 
@@ -209,6 +320,8 @@ bash tools/build_lua_native.sh puc "$APP_ROOT/build/native/puc"
 bash tools/build_lua_native.sh luajit "$APP_ROOT/build/native/luajit"
 bash tools/run_python_project_data.sh examples/integration/lua/verify_words.py --runtime puc
 bash tools/run_python_project_data.sh examples/integration/lua/verify_words.py --runtime luajit
+bash tools/run_python_project_data.sh examples/integration/lua/verify_deployment.py --runtime puc
+bash tools/run_python_project_data.sh examples/integration/lua/verify_deployment.py --runtime luajit
 ```
 
 The Python 3.9+ verifier uses already-built products and performs no native build.
@@ -225,3 +338,14 @@ For a prepared separate application, supply `--package`, `--library-root` and
 products; do not substitute `tools/run_lua_project_data.sh` for the ordinary
 consumer command, because that targeted test wrapper builds disposable native
 products on every invocation.
+
+The deployment verifier additionally checks exact Unicode events, typed exit and
+arity records, stop behavior, null/false/nested values, trace separation and
+option-like grammar paths. It constructs the committed source closure without
+copying caches, packages only the two parsing modules, moves it to a Unicode path,
+and verifies outside-cwd calls and unchanged source/native bytes. Controlled bad
+caller and bad packaged supporting grammars prove which asset is selected;
+missing assets fail explicitly. Its source-identity check compares the selected
+library against the verifier repository's committed revision. Run it from a
+matching checkout; a prepared separate application can use the same `--package`,
+`--library-root` and `--grammar` options. No native build runs in either verifier.

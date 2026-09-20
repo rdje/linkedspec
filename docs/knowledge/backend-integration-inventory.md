@@ -21,8 +21,11 @@ answers:
   - how does a Julia application deploy and relocate offline
   - how does a Lua application retain native products without rebuilding each run
   - what blocks committing the verified Lua integration guide
+  - how does a Lua application package native parsing and diagnostic events
+  - does Lua runtime error JSON include all native arity fields
+  - which task owns the unexplained non JSON Lua consumer stderr occurrence
 date: 2026-09-20
-status: Rust complete, Perl/Dart/Julia leaves and Lua setup verified; Lua deployment and independent closeout pending
+status: five-backend setup and deployment evidence recorded; common navigation, unexplained Lua stderr and independent closeout remain open
 tags: [integration, documentation, perl, rust, dart, julia, lua]
 evidence: "BACKEND-INTEGRATION-GUIDES.0, activation 00f9783a1e4b625bc251a3e260ef1eef60c35888. Canonical Knowledge, ADR0040, companion tree, manifests, six complete setup scripts and native loader/result seams inspected. Managed version commands and read-only pkg-config identities consumed with exit0; no compiler, dependency preparation or consumer execution ran."
 reverify: "Inspect the exact sources in the matrix below. Version-only commands: bash tools/run_cargo_local.sh --version; bash tools/run_dart_project_data.sh --version; bash tools/run_julia_project_data.sh --project=julia --version; bash tools/project_data_run.sh perl -e 'printf qq{Perl %vd\\n}, $^V'; bash tools/project_data_run.sh lua -v; bash tools/project_data_run.sh luajit -v; bash tools/project_data_run.sh pkg-config --modversion lua luajit libpcre2-8. These commands establish installed identity, not consumer support or a passing backend suite."
@@ -447,36 +450,48 @@ ABI once as documented in the guide before running it. Optional --package,
 and invalid-regex handling remain unverified; .5.2 owns deployment/diagnostics and
 .7 owns independent parent closeout. No runtime source, pin or reading credit changes.
 
-## Lua setup landing — history capacity proposal, September 20
+## Lua deployment — September 20, integration .5.2
 
-Native/setup proof is complete; .5.1 is not committed. Its two required normal
-rollovers preserve clean 0b409e305 source exactly but exceed current controls.
-The task-tree section "Lua integration history capacity" owns the exact proposal,
-six old/new limits, reconstruction identities and seven-record finite forecast.
-Change-history files/manifest lines/bytes would be 39/38/21647 (limits38/37/21071);
-engineering notes would be 35/34/20514 (limits34/33/19902). No limits changed.
-Both new archive segments reproduce exact HEAD suffixes; all older rows/archives
-are unchanged. Both current hot shards pass roll_document_history --check, while
-scripts/check_readme_stability.sh rejects exactly those six controls.
+The consumer accepts opt-in diagnostic events, preserves typed immediate-exit
+status, and stops after failure while retaining earlier stdout values/events.
+It explicitly disables parser tracing in this JSON adapter. Native exception
+`code`, `helper_name`, `expected_arity` and `actual_arity` are copied when present:
+the existing standard exception projection contains message/diagnostic, not all
+these native fields. A public native probe and interpreter.lua's to_json branch
+establish that distinction; no runtime serializer change is made.
 
-The proposal requests one slot per collection, preserving all other controls and
-normal canonical CI. README_POLICY.md requires an accepted indexed ADR before any
-routed limit changes; ADR0118's finite Lua-reading allowance does not authorize
-later increases. Seven further records of14 lines/2048 bytes fit the retained hot
-shards without another rollover (240/46302 and208/46175 maxima). This forecast
-covers remaining integration and bounded closeout overhead, not unlimited PNT.
-Reverify actual state with both history --check commands and the routing checker;
-the current task owns disposition and repair before .5.1 can land.
+The launcher derives paths from its location and requires the packaged supporting
+grammar and selected parsing modules. A source closure of172 committed files /
+3643774 bytes (lua/src, specs, tools) plus the application files and two parsing
+modules runs after a Unicode-path move, outside cwd, with source/native files
+read-only. The MCP native module and RGX/PGEN are absent. Writable application
+data and checkout identity metadata remain required. This is the installed
+macOS arm64/PUC5.5.1/LuaJIT route, not PUC5.4 or cross-platform admission.
 
-### Approved disposition and implementation
+Both working and clean pinned6e37288f7 applications pass13 setup groups and24
+deployment checks per runtime. Clean source contains2852 files/58902045 bytes,
+without source overlays; retained native products are copied byte-exactly and
+their hashes/mtimes remain unchanged. Native diagnostic proof passes119 assertions
+per runtime. The maintained verifiers are examples/integration/lua/verify_words.py
+and verify_deployment.py; neither builds native products. The declared PUC target,
+malformed-regex exclusions and other runtime repair owners stay unchanged.
 
-The director granted all six proposed limits on September 20. ADR0121 records the
-exact old/new objects and normal canonical verification. Its implementation changes
-only those six registry scalars. Actual production functions pass 44 boundary and
-34 authorization cases; unchanged guards reject absent/altered authority and every
-tested unapproved increase. The proposal above is dated pre-admission evidence.
-Reverify the current candidate with scripts/check_readme_stability.sh and both
-history --check commands; exact staged canonical CI still governs .5.1 landing.
-All previous archives and historical manifest rows remain byte-exact. Finite
-forecast counts are recomputed after admission overhead; this is not an unlimited
-PNT capacity grant. Continue Lua deployment .5.2 after a clean committed handoff.
+**Unresolved observation:** an earlier parallel working-PUC run emitted non-JSON
+stderr at its invalid-UTF8 case. Its old harness lost the raw stream on a JSON
+decode exception. The harness now retains command/status/streams; all four full
+replay routes and120 managed/40 direct focused repetitions pass. These results
+do not establish the original cause or a runtime repair. Integration .5.3 owns
+recurrence capture, diagnosis and resolution before final parent closeout.
+Evidence lives under .linkedspec-data/scratch/backend-integration52.
+
+## Lua setup capacity admission — September 20
+
+The earlier proposal is resolved. The director approved the exact six controls
+in ADR0121, and Lua setup .5.1 committed at7f2afcbf428a6a29b7c82d8c618e2312eaa16e6c
+with canonical proof, post-commit pointer and clean handoff verified. The full
+proposal, old/new controls, source reconstruction,44 boundary/34 authorization
+checks and finite forecast remain in docs/tasks/BACKEND-INTEGRATION-GUIDES.md
+under "Lua integration history capacity" and the indexed ADR0121. All prior
+archive/manifest bytes were preserved. This is a finite admission, not unlimited
+PNT capacity. Reverify current pressure with scripts/check_readme_stability.sh
+and both history --check commands; no capacity change belongs to .5.2.

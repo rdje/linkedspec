@@ -545,8 +545,15 @@ paths, separate native products for PUC Lua and LuaJIT, and a native word consum
 Both current and clean pinned-source applications pass 13 setup checks per installed
 runtime; five selected native loader tests pass per runtime. Repeated calls retain
 native hashes and modification times. The measured PUC 5.5 route does not establish
-the declared 5.4 target or malformed-regex error handling. Lua deployment, common
-navigation and independent final verification remain open.
+the declared 5.4 target or malformed-regex error handling. Lua deployment adds
+opt-in diagnostic events, typed failures and a relocatable source/native bundle.
+Both working and clean pinned applications pass24 deployment checks per runtime;
+the native diagnostic contract passes119 assertions per runtime, with no native
+rebuild. Source and native bytes survive relocation and controlled asset failures.
+One earlier parallel PUC run emitted unexplained non-JSON stderr; its initial
+harness lost the raw stream. Full replay and160 focused repetitions pass, but
+the cause is not established. Integration `.5.3` owns that unresolved observation
+before parent closeout. Common navigation and independent final verification remain open.
 ARCHOGEN and SEMULITH supplied ten consumer reports on September20. Their Rust
 workspace membership failures are reproduced and repaired by integration `.8.2`:
 the example owns its workspace, and enclosing applications exclude the vendored

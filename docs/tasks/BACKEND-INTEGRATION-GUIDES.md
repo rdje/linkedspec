@@ -233,7 +233,7 @@ ARCHOGEN's use of Lispish through Rust. The requested scope is every backend.
 - ID: `BACKEND-INTEGRATION-GUIDES.5`
   Status: `active`
   Goal: Deliver Lua integration guidance for the supported PUC Lua and LuaJIT routes.
-  Children: `.5.1`, `.5.2`
+  Children: `.5.1`, `.5.2`, `.5.3`
   Dependencies: `.0`; preserve LUA-STARTUP-READING.2.3 exclusions and missing-ABI proof boundaries.
   Acceptance: Module/native-library paths, exact ABI preparation, values and deployment satisfy the shared criteria without extending unverified host claims.
   Verification: `pending`
@@ -256,11 +256,26 @@ ARCHOGEN's use of Lispish through Rust. The requested scope is every backend.
   Capacity admission: ADR0121 implements exactly the six director-approved controls. Production functions pass 44 threshold and 34 authorization cases, including exact/missing/altered authority and unauthorized limits. Prior histories reconstruct byte-exactly; normal doctrines and receipt-bound canonical CI govern landing. No verification exception.
 
 - ID: `BACKEND-INTEGRATION-GUIDES.5.2`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `6e37288f7564d99480f1353231b226a678a9568f`.
+  Verification tier: `focused`
+  Focused checks: Prepared PUC Lua/LuaJIT consumer diagnostics, typed failures, value identity and stop behavior; packaged/moved outside-cwd use with exact source/native products and required-asset failures; existing setup and native diagnostic tests; guide rendering/public guards, Knowledge, history/memory, preservation and all doctrines.
+  Canonical trigger: None for the bounded example/guide leaf. Preserve runtime/native implementation, dependency pins, inventory checkers and workflow infrastructure; final .7 retains canonical proof. Escalate before changing any designated owner.
+  Scope: Extend the existing consumer with opt-in diagnostic events and typed immediate-exit handling; supply a launcher, relocatable source/native bundle instructions and maintained deployment checks. Reuse compatible prepared ABI products. Preserve declared PUC5.4 and invalid-regex proof exclusions; do not run the excluded unfiltered Lua gate. Align the integration inventory's superseded capacity-proposal note with the committed .5.1 outcome.
+  Verification investigation: Initial24 deployment checks pass on both runtimes; native diagnostic contract119 each passes. A subsequent four-way run passes all13 setup groups and three deployment routes, but working PUC emits non-JSON stderr at invalid-UTF8. The original harness omitted raw output from its decode exception; it now retains complete command/status/streams on decode failure. The complete four-route replay and120 managed/40 direct focused controls all pass. This resolves the harness evidence-loss defect, not the unexplained output's cause. New .5.3 owns that unresolved occurrence and gates parent closeout; do not erase it or infer a runtime fix from passing retries. Evidence: .linkedspec-data/scratch/backend-integration52.
   Goal: Verify Lua deployment, value conversion, structured errors and optional diagnostic sinks.
   Dependencies: `.5.1`
   Acceptance: Outside-cwd examples locate packaged grammar/modules/libraries; failure examples and nil/array conventions are accurate. Document only ABI routes actually verified and keep missing proof visibly owned.
-  Verification: `pending`
+  Verification: PASS final four-route replay:13 setup and24 deployment groups for each working/clean consumer on PUC5.5.1 and LuaJIT2.1.1788460057. Native diagnostic contract119 assertions per runtime and exact public error/projection probe pass. Clean6e37288f7 library has2852 files/58902045 bytes with no overlays; the checked runtime closure is172 files/3643774 bytes and diagnostic bundle179 files with only two native parsing modules. Unicode/moved/outside-cwd calls, read-only source files, exact source attribution, events, typed exit/arity, null/false, trace separation, and controlled wrong/missing assets pass. All six original native products retain hashes/mtimes; no build or dependency source/pin change. The earlier unexplained non-JSON stream is explicitly owned by .5.3; passing retries and160 focused controls do not close its cause. Book/public, source/history preservation, Knowledge, memory/history and all doctrines govern this focused commit; final .7 remains gated.
+  Commit: `BACKEND-INTEGRATION-GUIDES.5.2 - verify Lua deployment and diagnostics`
+
+- ID: `BACKEND-INTEGRATION-GUIDES.5.3`
+  Status: `pending`
+  Goal: Resolve the unexplained non-JSON stderr occurrence in the Lua consumer verification.
+  Dependencies: `.5.2` supplies complete failure capture and retained initial/replay/control evidence.
+  Scope: One working PUC invalid-UTF8 case during four concurrent consumer runs. The original raw stderr was not retained, so the emitting component and cause are unknown; no Lua engine defect is established.
+  Acceptance: Capture an actual recurrence with exact command/environment/status/raw streams; isolate native versus managed execution and identify the responsible component. Repair a confirmed project-owned cause with regression proof, or obtain a justified external disposition. Do not close merely because retries pass or invent a diagnosis. Original failure, full successful replay and160 successful focused controls remain in the record. Final .7 must consume this disposition before parent closeout.
+  Verification: `pending`; non-reproduction is measured, not a fix.
   Commit: `pending`
 
 - ID: `BACKEND-INTEGRATION-GUIDES.6`
@@ -274,7 +289,7 @@ ARCHOGEN's use of Lispish through Rust. The requested scope is every backend.
 - ID: `BACKEND-INTEGRATION-GUIDES.7`
   Status: `pending`
   Goal: Independently verify and close the complete integration documentation delivery.
-  Dependencies: `.6`, `.8.2`, `.8.3`, `.8.4`
+  Dependencies: `.6`, `.8.2`, `.8.3`, `.8.4`, `.5.3`
   Acceptance: Replay documented setup/use/deployment/error paths from managed consumer workspaces, consume all job outcomes, render affected books, verify links and evidence limits, run required canonical CI, and close all verified parent nodes. Commit cleanly before the final push boundary; no pending backend may be counted complete.
   Verification: `pending`
   Commit: `pending`
@@ -351,7 +366,8 @@ ARCHOGEN's use of Lispish through Rust. The requested scope is every backend.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `BACKEND-INTEGRATION-GUIDES.5.2` | `pending` | Rust report-guidance .8.4 is verified; activate Lua deployment from its clean commit, then common .6 and final .7 before conformance .1.35. |
+| 1 | `BACKEND-INTEGRATION-GUIDES.5.3` | `pending` | Replay the exact concurrent workload with complete raw capture after clean .5.2; final .7 needs the unexplained stderr disposition. |
+| 2 | `BACKEND-INTEGRATION-GUIDES.6` | `pending` | Connect the common entry and backend guides; native setup/deployment examples are verified. |
 
 The director explicitly requests a temporary pivot at the next clean handoff.
 Conformance .1.34 is committed at 00f9783a1 and inventory .0 is complete.
@@ -559,7 +575,18 @@ No verification waiver is requested or applied. Lua .5.2 follows clean landing.
 - [x] **NO REGRESSION** — Native examples, runtime, manifests, dependency source/pins/locks and grammar limits are unchanged; public guards pass.
 - [x] **VERIFY / COMMIT** — Focused book/navigation/preservation, Knowledge/history/memory and doctrine checks govern this leaf's commit and brief cleanup; Lua .5.2 follows only from a clean tree.
 
+## Acceptance Checklist — .5.2
+
+- [x] **REPRODUCE / ISSUE** — Managed native old-consumer probes reject --diagnostics as a grammar path and classify typed exit as consumer_error. Existing Lua runtime_parse/diagnostic APIs supply the required events/control type.
+- [x] **ROOT CAUSE (WHY + WHERE)** — examples/integration/lua/bin/parse_words.lua lacks option/sink/exit branches. Public native error/projection output and interpreter.lua to_json establish why optional arity fields need explicit adapter copying. No runtime serializer defect is inferred.
+- [x] **FIX** — Add the bounded adapter, relative-root launcher, grammar examples, deployment verifier and matching guide; preserve runtime and native implementation.
+- [x] **ADDRESSED (verified)** — Final working/clean applications pass13 setup and24 deployment groups per ABI; native diagnostic contract119 per ABI passes. Exact events, typed records, source attribution, earlier outputs and stopping behavior match expectations.
+- [x] **NO REGRESSION** — Native hashes/mtimes, source/pins/locks and immutable history stay exact. LINKEDSPEC_TRACE_LEVEL hostile controls preserve caller trace bytes. Prior malformed-regex and PUC5.4 exclusions remain; the unexplained initial stderr is owned by .5.3, not classified as fixed.
+- [x] **LOCKSTEP** — Guide, project status, Knowledge, task/index, roadmaps, bounded histories and MEMORY describe the verified routes and unresolved observation. Focused public/book/doctrines and git diff --check govern landing; .7 retains canonical proof.
+
 ## Verification Log
+
+- `2026-09-20` .5.2: Final13 setup/24 deployment groups pass in four consumer/runtime routes;119 native diagnostic assertions pass per ABI. Clean2852-file library,172-file runtime closure and179-file diagnostic bundle are verified without native builds. Original non-JSON stderr remains .5.3 despite full replay plus160 clean focused controls; harness now preserves raw failure evidence.
 
 - `2026-09-20` .8.4: PASS two prerequisite entry points,56 rendered local links,21 unchanged fenced examples and both public guards. Recursive cost is a qualified downstream report; no new build or grammar proof. Final focused preservation/continuity/doctrines govern landing.
 
@@ -595,6 +622,8 @@ No verification waiver is requested or applied. Lua .5.2 follows clean landing.
 
 ## Commit Log
 
+- `.5.2`: `BACKEND-INTEGRATION-GUIDES.5.2 - verify Lua deployment and diagnostics`; activation6e37288f7; focused examples/book proof. Unexplained stderr .5.3 follows; common .6 and final .7 remain.
+
 - `.8.4`: `BACKEND-INTEGRATION-GUIDES.8.4 - clarify Rust integration prerequisites`; activation a1166ee1d; focused navigation proof, then Lua .5.2.
 
 - `.8.3`: `BACKEND-INTEGRATION-GUIDES.8.3 - use RGX public integration`; activation effe3e7b2; focused documentation/public-interface proof, then guidance .8.4.
@@ -626,6 +655,8 @@ No verification waiver is requested or applied. Lua .5.2 follows clean landing.
 - Guide/example leaves: pending.
 
 ## Changelog
+
+- `2026-09-20` .5.2: Deliver Lua deployment/diagnostic examples with dual-runtime proof; own unexplained initial stderr separately under .5.3 without a false fix claim.
 
 - `2026-09-20` .8.4: Correct Rust setup/file-entry navigation and qualify recursive-checkout cost; source/examples and public RGX preparation stay unchanged.
 

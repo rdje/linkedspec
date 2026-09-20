@@ -10,6 +10,12 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-20 — BACKEND-INTEGRATION-GUIDES.5.2 - verify Lua deployment and diagnostics
+
+Extend the Lua consumer with opt-in typed diagnostic events, distinct immediate-exit records and available native arity fields. Add a relative-root launcher, diagnostic grammars and maintained deployment checks. The guide covers source/native packaging, caller-relative grammar paths, ordered events, earlier values before failure and explicit deployment errors. The bundle needs two parsing modules; no RGX/PGEN or MCP module is loaded.
+
+Final working/clean PUC5.5.1 and LuaJIT2.1.1788460057 routes each pass13 setup and24 deployment groups; the native diagnostic contract passes119 assertions each. Clean6e37288f7 source is2852 files/58902045 bytes without overlays; the deployed source closure is172 files/3643774 bytes and the diagnostic fixture bundle179 files. Native hashes/mtimes stay exact with no rebuild. One earlier parallel PUC invalid-UTF8 check produced non-JSON stderr; the original harness lost that stream. Full replay and120 managed/40 direct controls pass, but do not identify or fix the cause. The harness now captures complete failures; new .5.3 owns investigation and gates final .7. Common .6 is independently executable. Focused book/public, preservation and normal continuity/doctrines govern landing; no runtime, dependency, PUC5.4, malformed-regex or other-platform admission.
+
 ## 2026-09-20 — BACKEND-INTEGRATION-GUIDES.8.4 - clarify Rust integration prerequisites
 
 Add explicit prerequisite links immediately after Rust checkout and at the Lispish file section. Both routes reach workspace exclusion, application-local storage and RGX's published preparation before Cargo use. Qualify SEMULITH's reported1.7GB/30-submodule recursive-checkout observation; the targeted route has no new size or network-initialization claim.

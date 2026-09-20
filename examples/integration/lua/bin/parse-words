@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+APP_ROOT=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd -P)
+LINKEDSPEC_ROOT="$APP_ROOT/vendor/linkedspec"
+
+fail() {
+  printf '{"type":"deployment_error","detail":"%s"}\n' "$1" >&2
+  exit 1
+}
+
+[[ $# -ge 1 ]] || fail 'Usage: parse-words puc|luajit [--diagnostics] [--] GRAMMAR INPUT [INPUT ...]'
+case "$1" in
+  puc) runtime=lua ;;
+  luajit) runtime=luajit ;;
+  *) fail 'Select puc or luajit and its matching prepared native products' ;;
+esac
+export LINKEDSPEC_LUA_NATIVE_ROOT="$APP_ROOT/build/native/$1"
+shift
+
+[[ -f "$APP_ROOT/bin/parse_words.lua" ]] || fail 'Missing bin/parse_words.lua'
+[[ -f "$LINKEDSPEC_ROOT/specs/user_function_definition.spec" ]] ||
+  fail 'Missing packaged specs/user_function_definition.spec'
+[[ -f "$LINKEDSPEC_ROOT/tools/project_data_run.sh" ]] || fail 'Missing LinkedSpec managed wrapper'
+for name in linkedspec_regex_pcre2 linkedspec_filesystem_native; do
+  [[ -f "$LINKEDSPEC_LUA_NATIVE_ROOT/$name.so" ]] || fail 'Missing selected native parsing modules'
+done
+command -v "$runtime" >/dev/null 2>&1 || fail 'The selected Lua interpreter is required on PATH'
+
+export LINKEDSPEC_PROJECT_DATA_ROOT="$APP_ROOT/.app-data/linkedspec"
+export LINKEDSPEC_CACHE_ROOT="$LINKEDSPEC_PROJECT_DATA_ROOT/cache"
+export LINKEDSPEC_SCRATCH_ROOT="$LINKEDSPEC_PROJECT_DATA_ROOT/scratch"
+export TMPDIR="$LINKEDSPEC_SCRATCH_ROOT/tmp"
+export TMP="$TMPDIR"
+export TEMP="$TMPDIR"
+
+# The managed wrapper preserves the caller's cwd, including relative grammar paths.
+exec bash "$LINKEDSPEC_ROOT/tools/project_data_run.sh" \
+  "$runtime" -E "$APP_ROOT/bin/parse_words.lua" "$@"
