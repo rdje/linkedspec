@@ -10,6 +10,12 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-21 — BACKEND-INTEGRATION-GUIDES.8.6 - isolate Lua marker fixture from dependencies
+
+Replace the Lua marker test's dependency-file input with the authored `Pair:AND /a/ /b/ @move_pos` rule. Preserve its event count, spelling and slot assertions plus every surrounding test byte. Current Knowledge descriptions now use the owned fixture and provide a retained-product recheck; historical full-suite counts remain dated.
+
+The selected existing test is RED on both ABIs when foreign-file access is rejected before opening, then GREEN1/1 on PUC5.5.1 and LuaJIT2.1.1788460057 with zero denied opens and empty stderr. Six native hashes/mtimes stay exact; no native build or dependency input read occurs. Focused rendered-book/public, source/task/history, memory and doctrine checks govern landing. Final integration .7 retains canonical closure/push. This fixture correction does not close malformed-regex, Lua5.4 or strict Lispish repairs.
+
 ## 2026-09-21 — BACKEND-INTEGRATION-GUIDES.8.5 - remove private dependency workspace probes
 
 Replace the integration workspace verifier's selected dependency archives and direct transitive-manifest probes with nine LinkedSpec/application-only Cargo metadata controls. The fixture archives only LinkedSpec source and links the prepared RGX root opaquely; removing the example workspace boundary fails as expected, and host exclusion restores membership. RGX's public bootstrap remains the preparation authority.

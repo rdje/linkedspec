@@ -6628,14 +6628,12 @@ Value:AND
   assert_equal(events[5].regex_index, 3, "shipped move-pos alias slot")
   assert_equal(events[5].marker, "@move_pos", "shipped move-pos spelling")
 
-  local shipped_source = read_file("rgx/subs/pgen/specs/ebnf.spec")
-  local shipped_line = shipped_source:match("logging_annotation:[^\r\n]+")
-  local shipped_owner = linkedspec.compile_spec(linkedspec.parse_spec(
-    "Top::AND\n => logging_annotation\n\n" .. shipped_line .. "\n"
-  )):rule("logging_annotation")
-  assert_equal(#shipped_owner.rule_slot_events, 1, "shipped EBNF marker has one executable owner")
-  assert_equal(shipped_owner.rule_slot_events[1].marker, "@move_pos", "shipped EBNF marker spelling")
-  assert_equal(shipped_owner.rule_slot_events[1].regex_index, 1, "shipped EBNF marker slot")
+  local inline_owner = linkedspec.compile_spec(linkedspec.parse_spec(
+    "Top::AND\n => Pair\n\nPair:AND /a/ /b/ @move_pos\n"
+  )):rule("Pair")
+  assert_equal(#inline_owner.rule_slot_events, 1, "inline marker has one executable owner")
+  assert_equal(inline_owner.rule_slot_events[1].marker, "@move_pos", "inline marker spelling")
+  assert_equal(inline_owner.rule_slot_events[1].regex_index, 1, "inline marker slot")
 
   local expected = json.harray({
     same_opener_slice = "",

@@ -10,6 +10,12 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-21 — BACKEND-INTEGRATION-GUIDES.8.6 - isolate Lua marker fixture from dependencies
+
+A test of LinkedSpec's inline marker placement must own its input. The minimal two-regex rule preserves the second-slot `@move_pos` assertion without knowing a dependency's grammar. A scratch registration filter runs the unchanged existing timing, Unicode, reconstructed-source and malformed-marker checks, with `io.open` rejecting dependency paths before the original open call. Baseline RED and candidate GREEN distinguish fixture independence from a passing dependency read.
+
+The same retained six native modules serve both proofs; hashes and modification times remain identical. The Knowledge recipe regenerates the selected scratch harness from current maintained source. It neither expands the production test runner nor makes a full-suite or declared-target admission. Private dependency internals remain excluded; published RGX integration remains the only Rust preparation authority.
+
 ## 2026-09-21 — BACKEND-INTEGRATION-GUIDES.8.5 - remove private dependency workspace probes
 
 A passing dependency-internal metadata probe is not a sustainable integration contract. Keep workspace regression tests on LinkedSpec/application manifests, with a controlled missing own boundary and an explicit host exclusion. Use the retained RGX checkout as an opaque Cargo dependency; never select its internal directories or invoke a transitive manifest. Published RGX bootstrap and native execution provide the separate preparation/use evidence.

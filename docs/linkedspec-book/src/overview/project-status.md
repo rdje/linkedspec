@@ -568,8 +568,10 @@ dependency. The original ten metadata checks included private dependency probes;
 integration `.8.5` replaces those with nine LinkedSpec/application-only controls.
 The two-member native consumer and public bootstrap proof remain distinct from
 metadata, with unchanged dependency pins. Rust build guidance now follows RGX's
-published 1.95 requirement and root-managed commands. Integration `.8.6` separately
-owns retiring the Lua test's private grammar fixture before final review.
+published 1.95 requirement and root-managed commands. Integration `.8.6` replaces
+the Lua test's private grammar input with a LinkedSpec-authored inline marker. The
+existing timing/Unicode/reconstruction/error test passes on both installed runtimes
+with dependency-file access denied; retained native products are unchanged.
 Integration `.8.3` uses RGX's published build interface
 and removes dependency-internal procedures and assumptions. LinkedSpec integrates
 with RGX only; transitive preparation belongs to RGX. Bootstrap progress reporting

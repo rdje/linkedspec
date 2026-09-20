@@ -389,20 +389,24 @@ ARCHOGEN's use of Lispish through Rust. The requested scope is every backend.
   Commit: `BACKEND-INTEGRATION-GUIDES.8.5 - remove private dependency workspace probes`
 
 - ID: `BACKEND-INTEGRATION-GUIDES.8.6`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `9485b1fa7fad890b9c4cc98fb9f7cdd719a7e969`.
+  Verification tier: `focused`
+  Focused checks: Selected existing Lua marker test on both retained ABIs with dependency file access denied before opening; baseline RED and owned-fixture GREEN, exact assertion/source preservation, native-product integrity, current Knowledge/book cleanup, public guards, memory/history and all doctrines.
+  Canonical trigger: None for this test-input and current-description correction. Production source, dependencies, native modules, shared runners and contract semantics stay unchanged; final .7 retains canonical closure/push.
   Goal: Replace the Lua validation test's dependency-owned grammar input with a LinkedSpec-authored fixture.
   Dependencies: `.8.5` committed clean.
   Scope: Only the direct foreign-fixture read in lua/test/run.lua and its two current Knowledge descriptions, plus normal continuity/book evidence. No compiler/interpreter, dependency source, native module, contract semantics or reading-credit change.
   Acceptance: Preserve the existing marker count/spelling/slot, timing, Unicode, reconstructed-source and error assertions. Author the small replacement from LinkedSpec's public DSL; never read or copy the dependency fixture. A focused control rejects dependency-file access before opening it, and the selected test passes on both retained Lua ABIs. Keep unrelated malformed-regex/target limits and runtime repair prerequisites intact.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: PASS selected existing marker test RED/GREEN on both retained ABIs with dependency access rejected before opening. The candidate passes1/1 per runtime with zero denied opens and empty stderr; all surrounding source and six native hashes/mtimes stay unchanged. A durable selected-test recipe and current Knowledge/book descriptions replace dependency provenance. Focused source/task/history, render/public, memory and doctrine checks govern landing; final .7 retains canonical closure/push.
+  Candidate proof: PASS11 owned files;2846 prior files/51796222 bytes and26 other integration nodes exact. The durable recipe independently passes both ABIs. Thirteen rendered pages/309 links and unchanged guide fences pass; mutation69/14/11/10/50, selector68/35/0/5/11 and cursor76/60 remain green with unchanged checkers. Knowledge remains1151 facts/9204 keys; memory60 and both bounded histories pass. Dependency identities and original nested edits remain exact.
+  Commit: `BACKEND-INTEGRATION-GUIDES.8.6 - isolate Lua marker fixture from dependencies`
 
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `BACKEND-INTEGRATION-GUIDES.8.6` | `pending` | Replace the Lua test fixture coupling after clean .8.5. |
-| 2 | `BACKEND-INTEGRATION-GUIDES.7` | `pending` | Independently close delivery, run canonical proof/push, then resume conformance .1.35. |
+| 1 | `BACKEND-INTEGRATION-GUIDES.7` | `pending` | Independently close delivery, run canonical proof/push, then resume conformance .1.35. |
 
 The director explicitly requests a temporary pivot at the next clean handoff.
 Conformance .1.34 is committed at 00f9783a1 and inventory .0 is complete.
@@ -649,6 +653,8 @@ No verification waiver is requested or applied. Lua .5.2 follows clean landing.
 
 ## Verification Log
 
+- `2026-09-21` .8.6: Selected unchanged marker checks fail before dependency open on the original input and pass with the authored inline rule on PUC5.5.1/LuaJIT2.1.1788460057. Native modules remain byte/mtime exact. Runtime semantics, unrelated tests and all existing repair owners stay unchanged; final .7 follows.
+
 - `2026-09-21` .8.5: PASS nine locked/offline LinkedSpec/application metadata controls, including rejected missing example boundary and successful host exclusion. RGX public bootstrap repeats in0.204s with exit0/empty stderr; retained native words and18 Lispish file/deployment groups pass. Two native binaries preserve hashes/mtimes; five source/grammar/lock inputs match. Cargo/rustc1.95.0 and the published RGX requirement qualify README guidance without an older-compiler/platform claim. Thirteen rendered pages/309 links and unchanged guide fences pass. Public mutation69/14/11/10/50, selector68/35/0/5/11 and cursor76/60 pass with unchanged checkers. Preservation checks2833 prior files/50455564 bytes, original dependency edits/pins, locks, runtime/contract/history sources and seven exact historical audit bodies. Knowledge, memory/history and all doctrines govern focused landing; .8.6 and final .7 follow.
 
 - `2026-09-20` .6: Six native routes return the same four direct word values; retained Rust binary and six Lua modules keep exact hashes/mtimes without a build. Thirteen rendered pages,309 local links, five guide backlinks and backend landing links pass; all existing guide code fences remain unchanged. Public guard RED expected68/observed69 and67/68 becomes GREEN69/14/11/10/50 and68/35/0/5/11 through count-only changes. Source, mutation authorities, history, dependency pins and pre-existing nested edits stay unchanged. Exact staged canonical CI governs landing; independent final .7 remains.
@@ -691,6 +697,8 @@ No verification waiver is requested or applied. Lua .5.2 follows clean landing.
 
 ## Commit Log
 
+- `.8.6`: `BACKEND-INTEGRATION-GUIDES.8.6 - isolate Lua marker fixture from dependencies`; activation9485b1fa7; focused fixture isolation, then final .7.
+
 - `.8.5`: `BACKEND-INTEGRATION-GUIDES.8.5 - remove private dependency workspace probes`; activationfbb135d63; focused public-interface cleanup, then .8.6.
 
 - `.6`: `BACKEND-INTEGRATION-GUIDES.6 - connect native application integration guides`; activation16192f04d; canonical public-inventory boundary, then final .7.
@@ -730,6 +738,8 @@ No verification waiver is requested or applied. Lua .5.2 follows clean landing.
 - Guide/example leaves: pending.
 
 ## Changelog
+
+- `2026-09-21` .8.6: Isolate the Lua marker fixture from dependency content and preserve the full selected test on both retained ABIs.
 
 - `2026-09-21` .8.5: Retire private workspace probes and current build premises; align Rust requirements with RGX public guidance while preserving all dependency work.
 
