@@ -10,7 +10,9 @@ answers:
   - what is parse_user_function_definition_asts
   - what is parse_spec_with_staged_user_function_definitions
   - what is JULIA-BACKEND-PARITY.6.2.5
-date: 2026-07-10
+  - where does a Julia application find the supporting user function grammar
+  - does Julia prefer the package source or working directory for its function parser spec
+date: 2026-09-20
 status: current
 tags: [julia, parser, corpus, user-functions, staged-parsing, in-memory, JULIA-BACKEND-PARITY]
 evidence: "JULIA-BACKEND-PARITY.6.2.5 adds source-driven parser execution and a permanent regression; .6.3 includes it in 99/99. .7.3.2.1 traces it and .7.3.2.2 re-proves it in the current 920-assertion/99-fixture gate."
@@ -59,3 +61,29 @@ Julia .1.12 subsequently reads the final18 lines: ancestor search terminates at 
 filesystem root; a failed match is accepted only when the remaining character
 suffix is whitespace or the reported character cursor has reached the source end.
 This completes physical reading of the249-line parser, without changing behavior.
+
+## September 20 native integration lookup proof
+
+`BACKEND-INTEGRATION-GUIDES.4.1` verifies the default supporting asset independently
+of the application's requested grammar. `_user_function_definition_spec_path`
+searches ancestors of the package parser source first, then ancestors of `pwd()`.
+A complete checkout therefore supplies `specs/user_function_definition.spec`
+beside the package's `julia/` directory. The native staged file loader requires
+this asset even for the word example without user functions. Retaining only the
+Julia subtree loses that arrangement; a nearby unrelated checkout is not a
+packaging contract. Explicit parser source remains a lower-level API choice.
+
+The integration verifier changes cwd inside Julia to an owned temporary directory
+containing a deliberately invalid competing asset. It checks the exact selected
+package-owned path and the successful direct word result. This is an explicit
+Julia `cd`, because the managed Julia wrapper itself selects the checkout root
+before invoking Julia. Application-relative grammar resolution is separately
+anchored to the example's bin/ parent by `SpecLoadOptions`. Replay:
+
+```sh
+bash tools/run_python_project_data.sh examples/integration/julia/verify_words.py
+```
+
+See [[backend-integration-inventory]] for application preparation and the two
+consumer environments. These checks neither change parser behavior nor advance
+the paused conformance source-reading ledger.

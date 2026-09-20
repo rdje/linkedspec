@@ -1,11 +1,11 @@
 # MEMORY
 
-- activation_commit: `0826ca2d4df918f87962efc6dcf1dc132f45a2d6` — clean Dart setup checkpoint; deployment activation.
-- latest_completed_leaf: `BACKEND-INTEGRATION-GUIDES.3.2 - verify Dart native deployment and diagnostics`; Dart source/AOT deployment and clean-source diagnostic proof verified.
-- active_work_unit: `BACKEND-INTEGRATION-GUIDES.4.1` — pending clean activation for Julia setup/native consumer.
-- next_action: Activate BACKEND-INTEGRATION-GUIDES.4.1 from the clean committed tree for Julia native package setup and an executable consumer. Complete Julia, Lua, common navigation and independent .7, then resume CONFORMANCE-SOURCE-READING.1.35. Rust ad290bdb4 is already pushed; normal dependency builds remain authorized and strict Lispish repair remains startup .83.
+- activation_commit: `49758cbc97745dabd1baf701686f843858cf0b94` — clean Dart deployment checkpoint; Julia setup activation.
+- latest_completed_leaf: `BACKEND-INTEGRATION-GUIDES.4.1 - document and verify native Julia integration`; native package setup and clean-source application proof verified.
+- active_work_unit: `BACKEND-INTEGRATION-GUIDES.4.2` — pending clean activation for Julia deployment/runtime diagnostics.
+- next_action: Activate BACKEND-INTEGRATION-GUIDES.4.2 from the clean committed tree for Julia deployment, cache expectations and runtime diagnostics. Complete Julia, Lua, common navigation and independent .7, then resume CONFORMANCE-SOURCE-READING.1.35. Rust ad290bdb4 is already pushed; normal dependency builds remain authorized and strict Lispish repair remains startup .83.
   Named-argument direction PARSER-AUTHORING-APIS.4 is approved and parked; other authoring proposals and approved formats stay parked.
-- in_flight_uncommitted: none; this leaf lands verified Dart deployment and diagnostics. Derive its committed identity from Git.
+- in_flight_uncommitted: none; this leaf lands verified Julia setup. Derive its committed identity from Git.
 - blockers: none for the authorized integration guide activity. Other-backend and final canonical proof remain required at their owning leaves; startup .83 owns strict Lispish parsing.
 - current_rust_warning_debt: Repeated carriers report 1,870 pgen plus 26 rgx-core output warnings; RUST-DEPENDENCY-WARNING-ZERO.1-.7 own causal repair/pins/enforcement without suppression after Lua intake.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
@@ -42,7 +42,7 @@
 - current_map_leaves_scope_resolution: option A preserves pure functions. Helper-mediated rejection uses inline
   explicit-target `set(tree, ...)`; post-commit receiver-write proof uses caller-scoped `.with()`. No implicit
   caller capture or arbitrary user-defined bang method is admitted.
-- current_mutation_public_no_drift: `.19.9` closes public no-drift; current inventory is 66 Markdown files / 14 governed documents / eleven
+- current_mutation_public_no_drift: `.19.9` closes public no-drift; current inventory is 67 Markdown files / 14 governed documents / eleven
   authority-bound example classes / ten stale-current denials / 50 isolated public-checker mutations. Capability
   governance independently pins the owner and exact-one CI registration through four mutations.
 - current_core_state: typed source is 14/0/231; recognition 138/250/58; progressive 9/9/116 plus public

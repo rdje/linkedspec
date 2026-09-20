@@ -6,7 +6,7 @@
 - Status: `active` / director-authorized temporary documentation activity
 - Roadmap lane: `Phase 6 documentation and adoption / native backend integration`
 - Created: `2026-09-13`
-- Last updated: `2026-09-19`
+- Last updated: `2026-09-20`
 - Owner: repo-local workflow
 - Intake owner: `CONFORMANCE-SOURCE-READING.1.34`
 
@@ -197,7 +197,7 @@ ARCHOGEN's use of Lispish through Rust. The requested scope is every backend.
   Commit: `BACKEND-INTEGRATION-GUIDES.3.2 - verify Dart native deployment and diagnostics`
 
 - ID: `BACKEND-INTEGRATION-GUIDES.4`
-  Status: `pending`
+  Status: `active`
   Goal: Deliver the Julia integration guide and executable consumer.
   Children: `.4.1`, `.4.2`
   Dependencies: `.0`
@@ -206,11 +206,16 @@ ARCHOGEN's use of Lispish through Rust. The requested scope is every backend.
   Commit: `pending`
 
 - ID: `BACKEND-INTEGRATION-GUIDES.4.1`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `49758cbc97745dabd1baf701686f843858cf0b94`.
+  Verification tier: `canonical`
+  Focused checks: Native Julia application with a relative local package path, explicit project activation and same-volume depot; exact independent word values and module/package provenance; clean pinned-source application preparation; focused native loader/frontend tests, direct-dependent public inventories, book, source/task/history preservation and all doctrines.
+  Canonical trigger: A new backend guide changes exact public-page inventories, and maintained application project/manifest metadata is expected. Classify this public-inventory/dependency-metadata boundary before editing; exact staged canonical CI is required before commit.
+  Scope: Document and verify Julia setup and a minimal native consumer using existing APIs. Separate package/source preparation, precompilation and repeated parser execution; retain required package sources and caches. Preserve runtime/compiler/dependency source and pins. Deployment and comprehensive diagnostics stay .4.2; independent parent closeout stays .7.
   Goal: Verify Julia project activation, local module/package setup, depot placement and native parsing.
   Acceptance: A consumer follows the actual supported package/module surface, prepares required products once, loads the grammar and reuses the engine for exact independent results. No implicit home depot or unrelated dependency rebuild.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: PASS 11 setup/value groups against both current and clean pinned 49758cbc9 source on Julia1.12.7/macOS arm64: explicit application project, relative manifest path, package/module provenance, source-first supporting grammar with controlled bad cwd asset, independent/repeated values, Unicode/relative paths, strict UTF-8, missing arguments/files and successful null. Native loader tests pass82 assertions (34/24/10/6/8), and the shared contract remains14/9/4. Initial online preparation writes only the application depot; subsequent offline preparation and fresh-process parsing pass. Clean preparation copies/verifies148 package-source files/734878 bytes and2 registry files/11419507 bytes from the owned depot without copying compiled caches. The app-generated manifest selects JSON3 1.14.3, Parsers2.8.8, PrecompileTools1.3.4, Preferences1.6.0 and StructTypes1.11.0; the backend manifest and source remain unchanged. Clean submodule source matches2832 files/58732023 bytes, retains the public origin and leaves nested dependencies uninitialized. Source/data stay on this volume and the original PGEN diff remains exact. Public RED expected66/observed67 and65/66 becomes GREEN mutation67/14/11/10/50 and selector66/35/0/5/11 by count-only updates; classifier/frozen authorities stay unchanged. Book, source/task/history preservation, Knowledge and all doctrines govern this leaf; exact staged canonical CI is required for landing. No runtime/pin changes, minimum-version/platform expansion or reading credit; .4.2 retains deployment/runtime diagnostics and .7 retains independent parent closeout and canonical push.
+  Commit: `BACKEND-INTEGRATION-GUIDES.4.1 - document and verify native Julia integration`
 
 - ID: `BACKEND-INTEGRATION-GUIDES.4.2`
   Status: `pending`
@@ -264,7 +269,7 @@ ARCHOGEN's use of Lispish through Rust. The requested scope is every backend.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `BACKEND-INTEGRATION-GUIDES.4.1` | `pending` | Dart setup, diagnostics and native deployment are verified; next Julia setup/native consumer from the clean committed tree. Rust ad290bdb4 is pushed. Independent .7 retains parent closure before conformance .1.35. |
+| 1 | `BACKEND-INTEGRATION-GUIDES.4.2` | `pending` | Julia native setup is verified; next deployment/runtime diagnostics from the clean committed tree. Rust ad290bdb4 is pushed. Independent .7 retains parent closure before conformance .1.35. |
 
 The director explicitly requests a temporary pivot at the next clean handoff.
 Conformance .1.34 is committed at 00f9783a1 and inventory .0 is complete.
@@ -347,7 +352,18 @@ not declared complete by this scoped documentation authorization.
 - [x] **NO REGRESSION** — Nine word/package checks, 23 native API tests, consumer analysis/formatting, unchanged public inventory checks and source preservation pass. Existing complete Dart component failures stay separately owned by .2.24/.2.25.
 - [x] **LOCKSTEP** — Runnable includes, guide, Knowledge, roadmap, task and bounded history agree. Julia .4.1 follows clean commit; independent .7 retains parent closeout and canonical push before conformance .1.35.
 
+## Acceptance Checklist — .4.1
+
+- [x] **REPRODUCE / ISSUE** — No Julia application integration page or standalone consumer project exists at activation. The new page deliberately makes the exact public inventory gates RED until count-only reconciliation.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Native loading APIs are already admitted, but application project activation, relative local source selection, own dependency lock/depot and package-owned supporting grammar are not assembled into a runnable onboarding path.
+- [x] **FIX** — Add the application project, Pkg-generated manifest, direct-value consumer, setup verifier and source-included chapter. Keep application grammar resolution explicit because the managed Julia wrapper changes cwd.
+- [x] **ADDRESSED (verified)** — Eleven groups pass on both working and clean pinned-source applications. Fresh owned online preparation and separately prepared offline source/registry reuse pass; exact package and supporting-grammar provenance are checked.
+- [x] **NO REGRESSION** — Eighty-two native loader assertions and the14/9/4 contract pass. Inventory changes are count-only; source, pins, existing task nodes, book limitations and immutable history are preserved. Exact staged canonical CI governs this public-page/manifest landing.
+- [x] **LOCKSTEP** — Guide, runnable includes, Knowledge, roadmap, task and bounded history agree. Julia deployment/errors .4.2 follows clean commit; independent .7 retains parent closeout and canonical push before conformance .1.35.
+
 ## Verification Log
+
+- `2026-09-20` .4.1: PASS 11 setup/value groups against both current and clean pinned 49758cbc9 source on Julia1.12.7/macOS arm64: explicit application project, relative manifest path, package/module provenance, source-first supporting grammar with controlled bad cwd asset, independent/repeated values, Unicode/relative paths, strict UTF-8, missing arguments/files and successful null. Native loader tests pass82 assertions (34/24/10/6/8), and the shared contract remains14/9/4. Initial online preparation writes only the application depot; subsequent offline preparation and fresh-process parsing pass. Clean preparation copies/verifies148 package-source files/734878 bytes and2 registry files/11419507 bytes from the owned depot without copying compiled caches. The app-generated manifest selects JSON3 1.14.3, Parsers2.8.8, PrecompileTools1.3.4, Preferences1.6.0 and StructTypes1.11.0; the backend manifest and source remain unchanged. Clean submodule source matches2832 files/58732023 bytes, retains the public origin and leaves nested dependencies uninitialized. Source/data stay on this volume and the original PGEN diff remains exact. Public RED expected66/observed67 and65/66 becomes GREEN mutation67/14/11/10/50 and selector66/35/0/5/11 by count-only updates; classifier/frozen authorities stay unchanged. Book, source/task/history preservation, Knowledge and all doctrines govern this leaf; exact staged canonical CI is required for landing. No runtime/pin changes, minimum-version/platform expansion or reading credit; .4.2 retains deployment/runtime diagnostics and .7 retains independent parent closeout and canonical push.
 
 - `2026-09-19` .3.2: PASS 36 application checks against both current and clean pinned 0826ca2d4 source: thirteen source and thirteen AOT diagnostic/value/error cases plus ten deployment controls. Exact Unicode events, typed exit status and prior-output/stop behavior, runtime source identity, null success, option-like grammar names and inherited trace separation pass. The six-file native bundle preserves hashes after moving to a Unicode path and read-only file modes; outside-cwd calls work without Dart on PATH. Bad caller/packaged assets prove selection, and missing packaged grammar/executable fail explicitly. Nine word/package groups and 23 native loader/diagnostic/trace tests pass; both consumers pass strict analysis and the maintained source passes nonwriting formatting. Clean source matches 2828 files/58692124 bytes; nested dependencies stay uninitialized, no hosted runtime packages are fetched, source/data stay on this volume and the original PGEN diff remains exact. Mutation 66/14/11/10/50 and selector 65/35/0/5/11 stay green without checker changes. Focused book, source/task/history preservation, Knowledge and all doctrines govern this ordinary commit. No runtime/pin change, complete Dart component-gate claim or reading credit; .7 retains independent parent closeout and canonical push.
 
@@ -369,6 +385,8 @@ not declared complete by this scoped documentation authorization.
 
 ## Commit Log
 
+- `.4.1`: `BACKEND-INTEGRATION-GUIDES.4.1 - document and verify native Julia integration`; activation49758cbc9; next Julia .4.2 after clean canonical handoff.
+
 - `.3.2`: `BACKEND-INTEGRATION-GUIDES.3.2 - verify Dart native deployment and diagnostics`; activation 0826ca2d4; next Julia .4.1 after clean handoff.
 
 - `.3.1`: `BACKEND-INTEGRATION-GUIDES.3.1 - document and verify native Dart integration`; activation0aac639a9; next .3.2 after clean handoff.
@@ -386,6 +404,8 @@ not declared complete by this scoped documentation authorization.
 - Guide/example leaves: pending.
 
 ## Changelog
+
+- `2026-09-20` .4.1: Verify native Julia application setup, local package/depot ownership and exact source/grammar provenance; retain deployment and runtime diagnostics for .4.2.
 
 - `2026-09-19` .3.2: Verify native Dart diagnostic events, typed failures and relocated AOT deployment; retain all runtime/gate repair ownership.
 

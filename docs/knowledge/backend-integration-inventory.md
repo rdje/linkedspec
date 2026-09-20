@@ -15,8 +15,11 @@ answers:
   - does a Dart embedding app need hosted packages or RGX PGEN
   - which supporting grammar must a Dart native application package
   - how does the Dart integration example deploy a compiled executable outside its working directory
-date: 2026-09-19
-status: Rust complete, Perl and Dart leaves verified; other guides and independent closeout pending
+  - how does a Julia application activate a relative LinkedSpec path package
+  - does a Julia consumer inherit the library manifest or need its own package lock
+  - what Julia package data must an offline integration retain
+date: 2026-09-20
+status: Rust complete, Perl and Dart leaves verified, Julia setup verified; deployment, Lua and independent closeout pending
 tags: [integration, documentation, perl, rust, dart, julia, lua]
 evidence: "BACKEND-INTEGRATION-GUIDES.0, activation 00f9783a1e4b625bc251a3e260ef1eef60c35888. Canonical Knowledge, ADR0040, companion tree, manifests, six complete setup scripts and native loader/result seams inspected. Managed version commands and read-only pkg-config identities consumed with exit0; no compiler, dependency preparation or consumer execution ran."
 reverify: "Inspect the exact sources in the matrix below. Version-only commands: bash tools/run_cargo_local.sh --version; bash tools/run_dart_project_data.sh --version; bash tools/run_julia_project_data.sh --project=julia --version; bash tools/project_data_run.sh perl -e 'printf qq{Perl %vd\\n}, $^V'; bash tools/project_data_run.sh lua -v; bash tools/project_data_run.sh luajit -v; bash tools/project_data_run.sh pkg-config --modversion lua luajit libpcre2-8. These commands establish installed identity, not consumer support or a passing backend suite."
@@ -85,8 +88,8 @@ same directory. The Rust page and native word consumer are delivered by .2.1;
 preparation and moved/outside-cwd deployment. See [[archogen-rust-lispish-integration]]
 for measured scope and the still-open strict document/token repair under startup
 .83. Perl setup, deployment and runtime diagnostics are verified under .1.1-.1.2;
-independent parent closeout remains .7. Dart setup and deployment/errors are verified by .3.1-.3.2. The common,
-Julia and Lua pages remain planned until their owning leaves land.
+independent parent closeout remains .7. Dart setup and deployment/errors are verified by .3.1-.3.2. Julia setup is verified by .4.1; its deployment/errors remain .4.2. The common
+and Lua pages remain planned until their owning leaves land.
 Add navigation through SUMMARY.md and the existing backend landing pages.
 
 Runnable sources belong under `examples/integration/`, with shared grammar/input
@@ -343,3 +346,58 @@ or fetch dependencies. For a separate application, pass --package, --library-roo
 --grammar and --fixtures explicitly; --bash selects the deployment-control shell.
 Existing complete Dart component failures remain under .2.24/.2.25; final
 independent integration closeout remains .7.
+
+## Julia native application — September20, integration .4.1
+
+The maintained Project.toml selects LinkedSpecJulia through `[sources]` with the
+relative path ../../../julia. A separate Git application uses vendor/linkedspec/julia
+and pins clean source49758cbc9. Both explicitly activate the application project,
+restrict JULIA_LOAD_PATH to @:@stdlib, and put the first writable depot and temporary
+data under application-owned .app-data on the same volume. The trailing depot
+separator retains the installed Julia system depots as read-only toolchain inputs,
+not the home depot. Set both JULIA_DEPOT_PATH and LINKEDSPEC_JULIA_DEPOT_PATH because
+the latter is the managed wrapper's higher-priority override.
+
+The first application preparation fetches the General registry and five package
+source trees into a new application depot, then precompiles. Pkg generates a
+relative-path application Manifest.toml: JSON3 1.14.3, Parsers2.8.8, PrecompileTools
+1.3.4, Preferences1.6.0 and StructTypes1.11.0 on Julia1.12.7/macOS arm64. The package's
+own manifest is not a consumer lock; the existing library manifest remains byte
+exact. Compatibility ranges can admit different versions in a newly resolved app.
+Commit the application's generated manifest and the Git submodule pointer, which
+own different parts of reproducibility.
+
+The separate consumer receives only copied/verified project-owned package sources
+(148 files/734878 bytes, manifest SHA256 e75ea14d524f33c408d668c99fd0504af4658f5bc97e8b8ca60b36b00808eee4)
+and registry inputs (2 files/11419507 bytes, manifest SHA256 8bbac5a5f2252c96dd55791ee13c6ff53012ebc644e1aa23f95775719ad0e025).
+No compiled depot is copied. Offline preparation must retain source and registry
+inputs; an initially empty depot cannot load JSON3 from cache filenames alone.
+These copies are both repository-local; no shared home cache is deleted or used.
+
+The public guide includes the actual native consumer and shared word grammar.
+The adapter fixes application-relative grammar meaning with an explicit cwd,
+compiles once and parses independent inputs in one Julia process, serializing
+only result.value. Fresh ordinary processes reuse the prepared environment; no
+package update command or RGX/PGEN build is required for each parse. This is not
+a claim of zero Julia compilation or persisted compiled-parser objects. Package
+source-first support grammar selection is owned by
+[[julia-spec-driven-function-shell-parser]].
+
+Replay the application setup checks with:
+
+```sh
+bash tools/run_python_project_data.sh examples/integration/julia/verify_words.py
+```
+
+Supply --package, --library-root and --grammar for a prepared separate application.
+Native loader tests cover82 assertions, including the function-bearing staged
+pipeline and source identity; the shared resolution contract remains14/9/4.
+The new public page advances only inventory counts67/66. Julia deployment,
+comprehensive runtime diagnostics and cache relocation remain .4.2; independent
+parent closeout and final canonical push remain .7.
+
+Both maintained and clean-source applications pass11 setup/value groups; their
+independent-input calls take12.39s and12.61s, with fresh-process repeat calls12.43s
+and11.88s respectively on this host. These are observations, not performance
+contracts. All2832 pinned source files/58732023 bytes match committed blobs; nested
+RGX/PGEN is uninitialized and the original PGEN diff remains unchanged.

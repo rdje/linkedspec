@@ -24,7 +24,7 @@ contrasts. Every executable `.spec` input and every current authoring example re
 The public no-drift checker now requires that unique bounded section, the exact rejected examples, and five ordered
 non-identity mappings whose old side contains a removed one-identifier selector and whose replacement does not.
 Eleven in-memory mutations cover collapse, omission, wrong replacements, selector retention, and reordering. The
-composed proof reports 65 public files / 35 classified historical references / zero current examples, zero
+composed proof reports 66 public files / 35 classified historical references / zero current examples, zero
 executable positives, five backend rejection routes, and capability 90/0/0. This is documentation/governance only;
 the broader current-status audit and parent closeout remain owned by `.23.2`.
 
@@ -533,7 +533,12 @@ and error handling. Source and AOT deployment pass 36 checks in both current and
 clean pinned-source applications; nine package/value checks and 23 native API
 tests pass. The six-file native bundle runs after a Unicode-path move, outside
 its directory and without a Dart command on PATH. No RGX/PGEN setup is required.
-Julia, Lua, common navigation and independent final verification remain open.
+The [Julia integration guide](../public-api/integration-julia.md) now supplies
+application project activation, relative package/manifest wiring, application-owned
+storage and a native word consumer. Both current and clean pinned-source setup
+pass 11 verification groups; 82 native loader assertions pass. The full checkout
+supplies the supporting grammar from the package source. Julia deployment/errors,
+Lua, common navigation and independent final verification remain open.
 Existing Dart component formatting and SDK adapter analysis failures remain
 separately owned; consumer checks do not close them.
 Conformance .1.35 remains the return point after the complete guide activity. Existing runtime repairs and
@@ -3849,7 +3854,7 @@ Three backbone items tracked major structural modernization — all done:
   ABIs. Rust/Dart/Julia/Lua pre-existing `.contains()` missing-argument outcomes are owned by helper backlog `.5`.
   Lua generated-source preservation remains `.8.1-.8.4`; `.16.7` admits and closes the current syntax. Parenthesis-free `if`/`while`
   condition headers are explicitly outside this lane.
-- **Uniform-binding selector retirement is complete** - every construct yields scalar, array, harray, or codeblock; unused expression values are silently discarded; callable signatures govern trailing codeblocks; runtime value type drives dispatch. `FUTURE-PARITY-BACKLOG.12.1` removed spec-facing `array(IDENTIFIER)` / `hash(IDENTIFIER)` namespace, typed-read, and mutation semantics. A boundary-correct inventory found 600 exact forms in 82 tracked specs; neutral contract `.12.1.1` fixes bare mutation, precedence, results, diagnostics, and constructor classification. All five backends execute that contract; migration removed all 600 file-backed occurrences and all 1,356 positive embedded-source occurrences. Perl, Rust, Dart, Julia, and Lua reject exact selectors before execution with the portable diagnostic. Cross-variant `.12.1.8.6` locks those five boundaries and zero runtime selector compatibility in canonical CI. Public admission `.12.1.9` plus backend-README follow-up `.12.1.10` established the discovered guard; its current inventory covers all 65 root/component/mdBook files at zero current examples.
+- **Uniform-binding selector retirement is complete** - every construct yields scalar, array, harray, or codeblock; unused expression values are silently discarded; callable signatures govern trailing codeblocks; runtime value type drives dispatch. `FUTURE-PARITY-BACKLOG.12.1` removed spec-facing `array(IDENTIFIER)` / `hash(IDENTIFIER)` namespace, typed-read, and mutation semantics. A boundary-correct inventory found 600 exact forms in 82 tracked specs; neutral contract `.12.1.1` fixes bare mutation, precedence, results, diagnostics, and constructor classification. All five backends execute that contract; migration removed all 600 file-backed occurrences and all 1,356 positive embedded-source occurrences. Perl, Rust, Dart, Julia, and Lua reject exact selectors before execution with the portable diagnostic. Cross-variant `.12.1.8.6` locks those five boundaries and zero runtime selector compatibility in canonical CI. Public admission `.12.1.9` plus backend-README follow-up `.12.1.10` established the discovered guard; its current inventory covers all 66 root/component/mdBook files at zero current examples.
 - **Structural, progressive, and staged authoring clarification** - typical `.spec` authoring uses small readable
   zero/one/two-regex rules for coordination, leaves, and entry/exit boundaries; deep recursion belongs in linked
   action-edge OR and blind-call AND structure rather than recursive regexes. Progressive parsing means invoking
