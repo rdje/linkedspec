@@ -1,7 +1,7 @@
 # ARCHITECTURE STATE
 
-Current cursor inventory, September13: the Rust integration guide adds one public
-documentation path. The ledger is now 75 migration files / 8 complete + 0 pending / 60 mutations;
+Current cursor inventory, September20: the common integration entry adds one public
+documentation path after the Rust guide. The ledger is now 76 migration files / 8 complete + 0 pending / 60 mutations;
 runtime behavior and earlier dated admission evidence below remain unchanged.
 
 ## Nested-write and receiver-mutation capabilities are portable

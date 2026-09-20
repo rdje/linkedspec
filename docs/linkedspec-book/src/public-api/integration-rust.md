@@ -1,5 +1,8 @@
 # Integrating LinkedSpec into a Rust application
 
+See [Application Integration](integration.md) for backend selection, shared
+checkout and storage principles, and the common example.
+
 Use the `linkedspec-runtime` crate to load a `.spec`, compile it once and parse
 inputs inside your Rust process. Cargo brings `linkedspec-core` and the RGX regex
 engine through path dependencies. There is no Perl parser process in this route.

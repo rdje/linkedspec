@@ -10,6 +10,16 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-20 — BACKEND-INTEGRATION-GUIDES.6 - connect native application integration guides
+
+Keep consumer assembly in the six integration pages and shared semantics in their existing loading/value/diagnostic owners under ADR0040. Common navigation must work both from the book and each backend landing. LinkedSpec consumes RGX only; transitive preparation remains its published interface responsibility. No companion scaffolding or backend build recipes are duplicated.
+
+The shared extraction example returns24 exact values across six native routes from retained products. It is not strict-document validation or a whole-runtime parity claim. All native hashes/mtimes and existing guide code fences remain unchanged. The new page is the sole public inventory increment; focused guards and309 rendered links pass. A canonical staged gate remains required for the count-owner boundary, and .7 retains independent activity/push closeout.
+
+Initial canonical CI identifies the new chapter link as an unowned cursor migration path. Register it under the existing public owner and advance only the75-to76 census and ten current-marker mirrors. Focused cursor proof passes60 drift mutations; semantic fields, rollout, cases and historical denials remain exact. A new exact staged canonical run is required; the first failed run grants no receipt.
+
+The second gate exposes the stable task-index validator's known mirrored census; its single constant moves75-to76. Task metadata and README freshness share that cause. Direct marker proof precedes the next canonical run; families, marker placement, consumers and mutation checks are preserved.
+
 ## 2026-09-20 — BACKEND-INTEGRATION-GUIDES.5.3 - trace consumer stderr to managed wrapper
 
 The concurrent consumer replay captures the already-owned child-setpgid warning in the managed wrapper, with successful Lua values/status0. A separate probe records the actual group of a warned child: PID=PGID29222, parent28526. That one warning did not prevent the final expected group. It does not establish a kernel cause, prove the original lost PUC stream, or guarantee signal/drain behavior.

@@ -30,7 +30,7 @@
 > and primary help/request trace no longer expose the retired flag. One exact
 > 15-role consumer now admits the complete projection on both Lua ABIs;
 > v1 generated artifacts must be regenerated. The recurring six-runtime plus
-> selected 5x2x5 gate and current public surfaces are admitted at 75 migration
+> selected 5x2x5 gate and current public surfaces are admitted at 76 migration
 > files, 8 complete / 0 pending, and 60 rejected mutations.
 >
 > **Accepted source-location/cursor architecture:** ADR `0056` requires one backend-neutral immutable model

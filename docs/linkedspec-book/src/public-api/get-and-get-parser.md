@@ -1,5 +1,9 @@
 # `Get(...)`, `get_parser(...)`, and `emit_generated_source(...)`
 
+For application assembly, dependency setup and deployment, follow
+[Application Integration](integration.md) and the
+[Perl integration guide](integration-perl.md) for the reference backend.
+
 > **Current Perl API:** ADR `0044` removes public/global `parse_mode` from all
 > construction and execution surfaces. Perl `Get`, `get_parser`, and
 > `emit_generated_source` now reject the legacy dynamic key during

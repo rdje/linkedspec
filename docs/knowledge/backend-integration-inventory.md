@@ -2,6 +2,8 @@
 id: backend-integration-inventory
 title: Five native integration guides have distinct setup dependencies and one common content route
 answers:
+  - where is the common application integration entry
+  - do the five backend examples return the same word values
   - what is the implementation plan for the five backend integration guides
   - which LinkedSpec backends require RGX and PGEN for native use
   - where will the integration guides and executable consumer examples live
@@ -25,7 +27,7 @@ answers:
   - does Lua runtime error JSON include all native arity fields
   - which task owns the unexplained non JSON Lua consumer stderr occurrence
 date: 2026-09-20
-status: five-backend setup and deployment verified; captured wrapper stderr is owned by startup .7; common navigation and independent closeout remain open
+status: five-backend guides and common navigation verified; captured wrapper stderr remains startup .7; independent closeout remains open
 tags: [integration, documentation, perl, rust, dart, julia, lua]
 evidence: "BACKEND-INTEGRATION-GUIDES.0, activation 00f9783a1e4b625bc251a3e260ef1eef60c35888. Canonical Knowledge, ADR0040, companion tree, manifests, six complete setup scripts and native loader/result seams inspected. Managed version commands and read-only pkg-config identities consumed with exit0; no compiler, dependency preparation or consumer execution ran."
 reverify: "Inspect the exact sources in the matrix below. Version-only commands: bash tools/run_cargo_local.sh --version; bash tools/run_dart_project_data.sh --version; bash tools/run_julia_project_data.sh --project=julia --version; bash tools/project_data_run.sh perl -e 'printf qq{Perl %vd\\n}, $^V'; bash tools/project_data_run.sh lua -v; bash tools/project_data_run.sh luajit -v; bash tools/project_data_run.sh pkg-config --modversion lua luajit libpcre2-8. These commands establish installed identity, not consumer support or a passing backend suite."
@@ -85,39 +87,44 @@ is no longer a prerequisite for these guides.
 
 ## Exact content destinations and ownership
 
-Create the common entry at
-`docs/linkedspec-book/src/public-api/integration.md` and backend guides at
-`docs/linkedspec-book/src/public-api/integration-perl.md`, `integration-rust.md`,
-`integration-dart.md`, `integration-julia.md`, and `integration-lua.md` in that
-same directory. The Rust page and native word consumer are delivered by .2.1;
-.2.2 completes actual Lispish files, typed adaptation, failures, clean pinned
-preparation and moved/outside-cwd deployment. See [[archogen-rust-lispish-integration]]
-for measured scope and the still-open strict document/token repair under startup
-.83. Perl setup, deployment and runtime diagnostics are verified under .1.1-.1.2;
-independent parent closeout remains .7. Dart setup and deployment/errors are verified by .3.1-.3.2. Julia setup and deployment/errors are verified by .4.1-.4.2. The common
-and Lua pages remain planned until their owning leaves land.
-Add navigation through SUMMARY.md and the existing backend landing pages.
+The common entry is `docs/linkedspec-book/src/public-api/integration.md`.
+Its five backend guides are `integration-perl.md`, `integration-rust.md`,
+`integration-dart.md`, `integration-julia.md`, and `integration-lua.md` in the
+same directory. These own consumer setup, dependency wiring, assembly, packaging
+and worked native usage. All five setup/deployment lanes are verified; independent
+parent closeout remains .7. The common page links the Rust/Lispish file recipe
+and its still-open strict document/token limits (startup .83).
 
-Runnable sources belong under `examples/integration/`, with shared grammar/input
-fixtures and a directory for each backend. The guides will show both the checked-in
-example invocation and the application's actual local dependency wiring after a
-`vendor/linkedspec` submodule is added. Keep code listings sourced from the runnable
-files where useful; never require a user to infer how an example becomes an app.
+SUMMARY, the book home, native loading and Get pages lead to the common entry.
+Every backend guide links back; Rust/Dart/Julia/Lua READMEs link their guide,
+and the reference Get page links Perl. Rust's landing uses RGX published
+preparation only. ADR0040 keeps normative semantics in their existing loading,
+value, trace and diagnostic chapters. No companion scaffold or chapter migration
+occurs; future companions route these owned pages instead of copying contracts.
 
-Existing `get-and-get-parser.md`, `native-spec-loading.md`, tracing/diagnostic/value
-chapters and the Lispish walkthrough retain their normative explanations. The new
-pages own consumer setup, assembly, packaging and worked native usage. Link to
-those semantic owners rather than copy their contracts. Existing content stays
-in place; this activity neither creates independent companion scaffolds nor moves
-chapters. BACKEND-COMPANION-BOOKS later inventories and routes these owned pages
-under ADR0040 before any companion population.
+Runnable sources live under `examples/integration/`, with shared word.spec and
+one directory per backend. The common page includes that actual grammar and
+links each guide's maintained setup/deployment checks. Preparation precedes
+verification; package/native storage remains application-owned on this volume.
 
-Each example will accept explicit runtime-derived grammar/input locations, reuse
-one compiled engine for independent inputs, check exact results, and demonstrate
-documented failures. Deployment checks run outside the checkout's working
-directory; complete-input and multi-form guarantees must be tested before claimed.
-Storage and example-check workflow changes receive their required verification
-tier before editing. Final activity closeout retains canonical CI.
+September20 .6 executes the same four inputs through all six native routes:
+Perl, Rust, Dart, Julia, PUC Lua and LuaJIT. All return ["alpha"], ["Beta"], [],
+and ["alpha","rest"] for alpha, Beta, 123 and '123 alpha rest', respectively.
+Each process reuses its engine across independent inputs. Retained Rust binary
+and six Lua modules keep exact hashes/mtimes; no native build is needed for this
+probe. Evidence: .linkedspec-data/scratch/backend-integration6/values.json.
+This extraction example proves neither strict document validation nor all input
+or platform parity. The lost original PUC stderr, known launcher warning,
+minimum-version and malformed-regex limits remain explicitly open.
+
+Adding the common page reproduces public counts expected68/observed69 and
+expected67/observed68. Initial canonical CI also identifies its link to the
+parse-mode-named chapter as an unowned cursor migration path. Registration under
+the existing public owner, ten marker mirrors and the stable task-index validator
+advance75 to76; semantics,
+rollout, cases and historical denials stay exact. Focused cursor proof passes60
+mutations. The failed gate grants no receipt; a new exact staged canonical run
+governs landing. Final .7 owns independent closeout and the clean push boundary.
 
 ## Managed wrapper boundaries read for this inventory
 

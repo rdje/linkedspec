@@ -1,5 +1,8 @@
 # Native Spec Loading
 
+For a complete application setup, follow [Application Integration](integration.md)
+and its backend guides. This chapter defines the shared loading and native API contract.
+
 LinkedSpec distinguishes a portable **named spec identity** from an exact **host path**. This distinction keeps
 library callers in control of filesystem policy while giving every backend the same deterministic resolution and
 text boundary.

@@ -556,7 +556,11 @@ and a managed Bash process-group warning. A standalone warned invocation has the
 expected PID/PGID; its denied-call cause remains unproved. Existing startup `.7`
 owns establishment/liveness verification and repair after required reading.
 No wrapper or Lua engine fix is claimed, and the original lost stream is not
-retroactively identified. Common navigation and independent final verification remain open.
+retroactively identified. The [common integration entry](../public-api/integration.md)
+now connects all five guides, native setup/deployment checks and shared asset/storage
+principles. Its four-input word example returns the same direct values on Perl,
+Rust, Dart, Julia, PUC Lua and LuaJIT using retained products without new builds.
+Independent final verification remains open.
 ARCHOGEN and SEMULITH supplied ten consumer reports on September20. Their Rust
 workspace membership failures are reproduced and repaired by integration `.8.2`:
 the example owns its workspace, and enclosing applications exclude the vendored
@@ -746,8 +750,8 @@ logical file source ID; the test checks that ID and then normalizes it to compar
 the remaining descriptor bytes with inline compilation. It does not claim raw
 loaded and inline descriptors are identical.
 
-Fresh cursor governance reports all eight rollout rows complete, 60 rejected
-mutations, 30 public documents, 28 current-claim denials and 75 migration files.
+Current cursor governance reports all eight rollout rows complete, 60 rejected
+mutations, 30 public documents, 28 current-claim denials and 76 migration files.
 The prior root-neutral proof retains byte-identical inputs. Older count, source
 identity and staged-guidance statements remain owned for correction. Exact source
 scope, proof limits and reproduction: `docs/knowledge/lua-root-cursor-consumer-reading.md`.
@@ -3412,8 +3416,8 @@ entered. Complete Julia is 3,428, shared primary is 65/65 twice, corpus is 105/1
 67/5+3/44 at Julia admission. Lua/LuaJIT public-option removal and composed cursor admission are implemented. The
 cursor consumer passes 119/119 per ABI at its 69/6+2/49 admission boundary. Recurring cursor admission and public
 no-drift now compose Perl, Rust, Dart, Julia, PUC Lua, LuaJIT, selected 5x2x5 primary cases, support ledgers, and
-the current public surface at 75 migration files / 8 complete + 0 pending / 60 rejected mutations after root
-README status detail moved to its canonical owners. Run
+the current public surface at 76 migration files / 8 complete + 0 pending / 60 rejected mutations, including the Rust
+guide and common integration entry. Run
 `bash tools/check_rule_local_cursor_five_backend.sh` for the exact recurring proof. A separate shared-source root consumer
 executes its exact 15 roles on each ABI: topology RED 3/3x2 becomes 139/139x2, package 177/177x2, primary
 65/65x4, and corpus 105/105x2. Final recurring/public admission closes root governance at 7 complete / 0 pending

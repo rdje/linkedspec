@@ -30,6 +30,7 @@ The target is broad and explicit:
 
 - Start with the overview chapters if you are new to LinkedSpec.
 - Jump to the user-model and public-API chapters if you want to use it.
+- Start with [Application Integration](public-api/integration.md) to embed a backend in your own project.
 - Read the compiler/runtime and architecture chapters if you want to understand the internals.
 - Use the development chapters when you are contributing or evaluating the project as a maintained system.
 

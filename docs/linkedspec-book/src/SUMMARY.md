@@ -22,6 +22,7 @@
 
 - [`Get(...)` and `get_parser(...)`](public-api/get-and-get-parser.md)
 - [Native Spec Loading](public-api/native-spec-loading.md)
+- [Application Integration](public-api/integration.md)
 - [Perl Application Integration](public-api/integration-perl.md)
 - [Rust Application Integration](public-api/integration-rust.md)
 - [Dart Application Integration](public-api/integration-dart.md)

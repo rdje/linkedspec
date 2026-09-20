@@ -285,12 +285,18 @@ ARCHOGEN's use of Lispish through Rust. The requested scope is every backend.
   Commit: `BACKEND-INTEGRATION-GUIDES.5.3 - trace consumer stderr to managed wrapper`
 
 - ID: `BACKEND-INTEGRATION-GUIDES.6`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `16192f04d161de1e78c371d90dc0c68783cc1461`.
+  Verification tier: `canonical`
+  Focused checks: Execute the shared four-input word example through all five backend adapters and both Lua runtimes with retained prepared products; verify exact values and source/native preservation. Render the common page and all five guide/backlink routes; run public surface guards, Knowledge, memory/history and all doctrines.
+  Canonical trigger: New common public page changes the exact public-document inventory; count-only checker updates require canonical staged-candidate proof. No backend semantics, dependency internals or pins change.
+  Scope: Deliver the planned public-api/integration.md entry, shared checkout/pinning/storage guidance and links to canonical backend setup/value/deployment checks. Add missing backend landing links, correct Rust landing's stale direct-PGEN wording, and retain documented runtime/grammar/launcher limits. Do not duplicate backend build recipes or create companion books.
+  Direct-dependent cursor census: Initial canonical CI stops at migration inventory missing=[]/unowned=[common page]. The checker scans literal parse-mode in the linked chapter filename; the existing September13 integration .2.1 fact documents this mechanism. Register this page under the existing public_no_drift owner, advance only75-to76 census/current-marker mirrors, preserve all semantics/rollout/tests/forbidden historical claims, and rerun focused cursor proof plus the exact staged canonical gate. The second attempt exposes the known stable task-index validator mirror, also consumed by README freshness checks. Update its single census constant and run it directly; preserve its eight families, twelve markers, fifteen consumers and stable marker location. This is bounded ownership maintenance within .6, not a runtime repair.
   Goal: Connect the common integration entry, all five guides and the executable example checks.
   Dependencies: `.1.1-.5.2`
   Acceptance: Book/backend landing navigation is complete with one canonical owner per topic; the common example produces equivalent direct values on verified runtime routes. Add only meaningful example checks; classify any workflow/governance infrastructure changes as canonical before editing them.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Six native routes return the same four direct word values; retained Rust binary and six Lua modules keep exact hashes/mtimes without a build. Thirteen rendered pages,309 local links, five guide backlinks and backend landing links pass; all existing guide code fences remain unchanged. Public guard RED expected68/observed69 and67/68 becomes GREEN69/14/11/10/50 and68/35/0/5/11 through count-only changes. Source, mutation authorities, history, dependency pins and pre-existing nested edits stay unchanged. Exact staged canonical CI governs landing; independent final .7 remains.
+  Commit: `BACKEND-INTEGRATION-GUIDES.6 - connect native application integration guides`
 
 - ID: `BACKEND-INTEGRATION-GUIDES.7`
   Status: `pending`
@@ -372,7 +378,7 @@ ARCHOGEN's use of Lispish through Rust. The requested scope is every backend.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `BACKEND-INTEGRATION-GUIDES.6` | `pending` | Connect common navigation after clean .5.3 diagnosis/handoff; the managed-wrapper defect stays owned by startup .7 with unchanged reading prerequisites. |
+| 1 | `BACKEND-INTEGRATION-GUIDES.7` | `pending` | Independently review all integration lanes and limits after clean .6; final canonical proof/push precede return to conformance .1.35. |
 
 The director explicitly requests a temporary pivot at the next clean handoff.
 Conformance .1.34 is committed at 00f9783a1 and inventory .0 is complete.
@@ -598,7 +604,18 @@ No verification waiver is requested or applied. Lua .5.2 follows clean landing.
 - [x] **NO REGRESSION** — Source/native/dependency/history bytes remain unchanged; no rebuild or recovery/purge. Read-only list finds0 runs. Public documentation guards and git diff --check govern the documentation-only slice.
 - [x] **LOCKSTEP** — Book, canonical Knowledge, existing repair acceptance, task/index, roadmaps and bounded continuity retain the exact evidence and remaining limitations.
 
+## Acceptance Checklist — .6
+
+- [x] **REPRODUCE / ISSUE** — The planned common integration entry is absent; backend guides lack shared navigation and Dart/Julia/Lua landing pointers. Rust's landing still names direct PGEN preparation.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Published page/SUMMARY/README inventory and the native adapters identify the missing routes; public checkers reject the new page at their exact inventory guard.
+- [x] **FIX** — Add the canonical common entry, unchanged shared-grammar include, setup/deployment/check links and backend backlinks. Correct the Rust landing to RGX's published preparation; change only expected public-page counts plus cursor inventory/current-marker projections.
+- [x] **ADDRESSED (verified)** — Native direct-value calls on Perl/Rust/Dart/Julia/PUC/LuaJIT match24 expected values; thirteen rendered pages and309 local links pass, with five backlinks and unchanged existing guide code fences.
+- [x] **NO REGRESSION** — Seven prepared native products retain bytes/mtimes. No runtime/grammar, dependency source/pin or mutation-authority change. Cursor semantic fields, rollout, cases and historical denials remain exact; the common page gains its required inventory row and75-to76 current-marker mirrors. Public semantic guards pass with unchanged behavior coverage.
+- [x] **LOCKSTEP** — Book/status, Knowledge, task/index, roadmaps, bounded history and MEMORY preserve remaining Lispish, wrapper and runtime limits. Exact staged canonical CI and all doctrines are required for this commit; final independent .7 follows a clean checkpoint.
+
 ## Verification Log
+
+- `2026-09-20` .6: Six native routes return the same four direct word values; retained Rust binary and six Lua modules keep exact hashes/mtimes without a build. Thirteen rendered pages,309 local links, five guide backlinks and backend landing links pass; all existing guide code fences remain unchanged. Public guard RED expected68/observed69 and67/68 becomes GREEN69/14/11/10/50 and68/35/0/5/11 through count-only changes. Source, mutation authorities, history, dependency pins and pre-existing nested edits stay unchanged. Exact staged canonical CI governs landing; independent final .7 remains.
 
 - `2026-09-20` .5.3: Capture the managed-wrapper warning with correct Lua values/status0;19 complete consumer routes precede/parallel the failing quiet-stderr expectation. A1000-command probe captures matching actual/warned PID/PGID29222. Existing startup .7 remains the repair owner; original lost stream and denied-call cause remain unknown. No implementation change or defect closure.
 
@@ -638,6 +655,8 @@ No verification waiver is requested or applied. Lua .5.2 follows clean landing.
 
 ## Commit Log
 
+- `.6`: `BACKEND-INTEGRATION-GUIDES.6 - connect native application integration guides`; activation16192f04d; canonical public-inventory boundary, then final .7.
+
 - `.5.3`: `BACKEND-INTEGRATION-GUIDES.5.3 - trace consumer stderr to managed wrapper`; activation1ab8e8ac3; focused diagnosis/public-evidence handoff, then common .6.
 
 - `.5.2`: `BACKEND-INTEGRATION-GUIDES.5.2 - verify Lua deployment and diagnostics`; activation6e37288f7; focused examples/book proof. Unexplained stderr .5.3 follows; common .6 and final .7 remain.
@@ -673,6 +692,8 @@ No verification waiver is requested or applied. Lua .5.2 follows clean landing.
 - Guide/example leaves: pending.
 
 ## Changelog
+
+- `2026-09-20` .6: Connect the common integration entry and all backend guides; verify identical direct values and retain RGX-only dependency preparation.
 
 - `2026-09-20` .5.3: Capture unexpected stderr's managed-wrapper layer and a warned child with the expected group; consolidate repair evidence into startup .7 without source changes or a false fix claim.
 

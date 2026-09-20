@@ -1,5 +1,9 @@
 # LinkedSpec Julia Backend
 
+To embed this backend in another application, follow the
+[application integration guide](../docs/linkedspec-book/src/public-api/integration-julia.md):
+application-owned package/depot setup, native values, diagnostics and relocatable source deployment.
+
 ## Standalone lifecycle block
 
 A rule-item-leading `{ ... }` is exact shorthand for `I { ... }`. The parser emits lifecycle `I` with exact

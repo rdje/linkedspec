@@ -1,5 +1,8 @@
 # Integrating LinkedSpec into a Dart application
 
+See [Application Integration](integration.md) for backend selection, shared
+checkout and storage principles, and the common example.
+
 Use `package:linkedspec_dart/linkedspec_dart.dart` to load a grammar, compile it
 once and parse inputs inside your Dart process. The package uses Dart's runtime
 and its own regex compatibility code. This route requires no RGX/PGEN build,

@@ -1,5 +1,8 @@
 # Integrating LinkedSpec into a Perl application
 
+See [Application Integration](integration.md) for backend selection, shared
+checkout and storage principles, and the common example.
+
 Use `LinkedSpec::SpecLoader` to load a grammar, compile it once and call the
 resulting Perl parser directly. The example in this chapter collects ASCII
 words from several independent inputs and prints one JSON value per input.

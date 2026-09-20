@@ -1,12 +1,12 @@
 # MEMORY
 
-- activation_commit: `1ab8e8ac394900f68eaf55f5ca012787bbfb3331` — clean Lua deployment checkpoint; unexplained stderr investigation activation.
-- latest_completed_leaf: `BACKEND-INTEGRATION-GUIDES.5.3 - trace consumer stderr to managed wrapper`; captured warning/group evidence transferred to existing startup .7; defect remains open.
-- active_work_unit: `BACKEND-INTEGRATION-GUIDES.6` — pending clean activation for common integration navigation and example checks.
-- next_action: Activate common .6 after clean .5.3, then final .7 before conformance .1.35. Startup .7 owns the wrapper repair after required reading; RGX-CONSUMER-BUILD-REPORTS.1 remains upstream-owned and strict Lispish remains startup .83.
+- activation_commit: `16192f04d161de1e78c371d90dc0c68783cc1461` — clean Lua diagnostic checkpoint; common integration activation.
+- latest_completed_leaf: `BACKEND-INTEGRATION-GUIDES.6 - connect native application integration guides`; six native routes and common navigation verified.
+- active_work_unit: `BACKEND-INTEGRATION-GUIDES.7` — pending clean activation for independent integration closeout and canonical push.
+- next_action: Independently verify and close final integration .7, then resume conformance .1.35. Startup .7 owns wrapper repair after required reading; RGX-CONSUMER-BUILD-REPORTS.1 remains upstream-owned and strict Lispish remains startup .83.
   Named-argument direction PARSER-AUTHORING-APIS.4 is approved and parked; other authoring proposals and approved formats stay parked.
-- in_flight_uncommitted: none; this focused diagnostic leaf preserves exact raw evidence and canonical repair ownership. Derive current commit identity from Git.
-- blockers: none for common .6. Startup .7 remains open for wrapper establishment/liveness; a warned child had correct PGID, but the denied-call cause and original lost PUC stream remain unproved. Recovery/purge stay prohibited.
+- in_flight_uncommitted: none; common integration navigation and direct-value evidence are durable. Derive current commit identity from Git.
+- blockers: none for integration .7. Wrapper startup .7 remains open; warned-child group matched, but denied-call cause and original lost PUC stream remain unproved. Recovery/purge stay prohibited.
 - current_rust_warning_debt: Repeated carriers report 1,870 pgen plus 26 rgx-core output warnings; RUST-DEPENDENCY-WARNING-ZERO.1-.7 own public RGX reports and result verification without suppression; dependency internals are excluded.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
   active table; the task metadata doctrine inventories all consumers, permits arbitrary frontier-row rewrites,
@@ -42,7 +42,7 @@
 - current_map_leaves_scope_resolution: option A preserves pure functions. Helper-mediated rejection uses inline
   explicit-target `set(tree, ...)`; post-commit receiver-write proof uses caller-scoped `.with()`. No implicit
   caller capture or arbitrary user-defined bang method is admitted.
-- current_mutation_public_no_drift: `.19.9` closes public no-drift; current inventory is 68 Markdown files / 14 governed documents / eleven
+- current_mutation_public_no_drift: `.19.9` closes public no-drift; current inventory is 69 Markdown files / 14 governed documents / eleven
   authority-bound example classes / ten stale-current denials / 50 isolated public-checker mutations. Capability
   governance independently pins the owner and exact-one CI registration through four mutations.
 - current_core_state: typed source is 14/0/231; recognition 138/250/58; progressive 9/9/116 plus public

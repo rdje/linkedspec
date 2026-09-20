@@ -1,5 +1,8 @@
 # Integrating LinkedSpec into a Lua application
 
+See [Application Integration](integration.md) for backend selection, shared
+checkout and storage principles, and the common example.
+
 Use `require("linkedspec")` to load a grammar, compile it once and parse independent
 inputs in your Lua process. The repository supplies the Lua modules and JSON
 codec. Matching uses a small native PCRE2 binding; native filesystem inspection

@@ -43,7 +43,7 @@ MARKER_FAMILIES = (
     {
         "id": "rule_local_cursor",
         "markers": (
-            "rule-local cursor recurring/public no-drift at 75 files / 8 complete + 0 pending / 60 mutations",
+            "rule-local cursor recurring/public no-drift at 76 files / 8 complete + 0 pending / 60 mutations",
             "Explicit repeated-OR action-result shape `.9.1.10` remains",
         ),
         "consumers": (

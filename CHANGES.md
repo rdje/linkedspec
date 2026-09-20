@@ -10,6 +10,16 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-20 — BACKEND-INTEGRATION-GUIDES.6 - connect native application integration guides
+
+Deliver the common application integration entry with backend selection, pinned checkout, application-local data/asset rules, the included word grammar and maintained-check links. Connect book/native entry points, all five guide backlinks and backend READMEs; correct Rust landing wording to RGX public preparation. Existing guide code examples remain byte-exact.
+
+Six native routes return the same four direct word values; retained Rust binary and six Lua modules keep exact hashes/mtimes without a build. Thirteen rendered pages,309 local links, five guide backlinks and backend landing links pass; all existing guide code fences remain unchanged. Public guard RED expected68/observed69 and67/68 becomes GREEN69/14/11/10/50 and68/35/0/5/11 through count-only changes. Source, mutation authorities, history, dependency pins and pre-existing nested edits stay unchanged. Exact staged canonical CI governs landing; independent final .7 remains.
+
+Initial canonical CI identifies the new chapter link as an unowned cursor migration path. Register it under the existing public owner and advance only the75-to76 census and ten current-marker mirrors. Focused cursor proof passes60 drift mutations; semantic fields, rollout, cases and historical denials remain exact. A new exact staged canonical run is required; the first failed run grants no receipt.
+
+The second gate exposes the stable task-index validator's known mirrored census; its single constant moves75-to76. Task metadata and README freshness share that cause. Direct marker proof precedes the next canonical run; families, marker placement, consumers and mutation checks are preserved.
+
 ## 2026-09-20 — BACKEND-INTEGRATION-GUIDES.5.3 - trace consumer stderr to managed wrapper
 
 Capture a managed Bash process-group warning during clean-LuaJIT setup: the child returns correct values and exit0 while stderr violates the quiet-output check. Nineteen complete concurrent consumer routes pass13 setup/24 deployment groups. A separate1000-command probe captures the warning with actual child PID/PGID29222 matching;999 invocations have empty stderr and all1000 exit0 with matching groups.

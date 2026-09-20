@@ -1,5 +1,8 @@
 # Integrating LinkedSpec into a Julia application
 
+See [Application Integration](integration.md) for backend selection, shared
+checkout and storage principles, and the common example.
+
 Use the `LinkedSpecJulia` package to load a grammar, compile it once and parse
 independent inputs in your Julia process. The package uses Julia's `Regex` and
 requires JSON3 plus Julia standard libraries. This native route does not require

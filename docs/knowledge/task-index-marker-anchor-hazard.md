@@ -2,6 +2,7 @@
 id: task-index-marker-anchor-hazard
 title: Immutable closeout markers anchored in the mutable task-index row cause avoidable canonical restarts
 answers:
+  - "which validators must change when the common integration guide adds a cursor chapter link"
   - "which checker mirrors the cursor migration census in the stable task index marker"
   - "why did the repeated-action checker fail after updating docs TASK_TREE"
   - "which marker must survive FUTURE-PARITY-BACKLOG active row rewrites"
@@ -10,7 +11,7 @@ answers:
   - "why did Dart calls canonical CI fail on repeated-action governance"
   - "does repeated-action still require a historical handoff in bounded MEMORY"
   - "why did Julia recursive observation canonical CI fail on repeated-action governance"
-date: 2026-07-21
+date: 2026-09-20
 status: current
 tags: [task-tree, doctrine, governance, repeated-action, local-ci, no-drift]
 evidence: docs/TASK_TREE.md; tools/check_task_tree_closed_capability_markers.py; tools/check_repeated_action_result_contract.py; capability_conformance/repeated_action_result_contract.json; docs/tasks/FUTURE-PARITY-BACKLOG.09.md; docs/tasks/FUTURE-PARITY-BACKLOG.15-24.md leaf .22
@@ -49,3 +50,10 @@ Update that one constant; do not remove the stable marker or move it into a
 mutable frontier. The eight families, twelve markers, fifteen consumers and
 closed rollout remain unchanged. Current fact and public census owners move
 together, while dated ADR0067 and architecture chronology retain their old counts.
+
+September20 integration .6 repeats this exact75-to76 mirror requirement for the
+common entry's chapter link. The second candidate fails both task metadata and
+README routing freshness through the same stale validator constant. Its one
+literal changes with the stable marker; direct marker proof must precede another
+canonical run. All8 families/12 markers/15 consumers/4 mutations remain. The
+first two failed gates grant no receipts; no guard is removed or weakened.

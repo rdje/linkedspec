@@ -8,7 +8,7 @@ answers:
   - "what is the final rule local cursor rollout"
   - "how many rule local cursor mutations are rejected"
   - "does cursor closeout also close the AND OR semantics parent"
-date: 2026-07-20
+date: 2026-09-20
 status: public no-drift complete; rollout 8 complete / 0 pending
 tags: [cursor, parse-mode, public-contract, documentation, mdbook, parity, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.9.1.9 adds `public_contract` to `capability_conformance/rule_local_cursor_contract.json` and mirrored validation to `tools/check_rule_local_cursor_contract.py`. Required current markers cover README, toolbox, user guide, capability/CLI guidance, both roadmaps, architecture/live/task state, ADR 0044, mdBook API/backend/runtime/status/user-model pages, and Knowledge Map cards. Exact stale-current claims about accepted global `parse_mode`, pending backend migration, generated-v1 admission, and pending public closeout fail mechanically. The checker advances only `public_no_drift`, closes at 75 migration files / 8 complete + 0 pending / 60 mutations, and leaves `.9.1`/`.9` active because pending child `.9.1.10` owns explicit repeated-OR action-result shape."
@@ -17,6 +17,17 @@ evidence_update_2026_07_20_and_or_closure: "FUTURE-PARITY-BACKLOG.9.1.10.7 close
 evidence_update_2026_08_30_mdbook_reconciliation: "FUTURE-PARITY-BACKLOG.23.2 adds the action-placement and formal-grammar pages to the same exact public contract, requires their all-five-backend 8/0 cursor and bare-edge markers, and denies three exact staged-rollout claims. Current governance is 30 documents / 28 stale-current denials while the existing 60 semantic/topology/recurring/public mutations and 74-file migration inventory remain unchanged."
 reverify: "bash tools/run_python_project_data.sh tools/check_rule_local_cursor_contract.py; bash tools/check_rule_local_cursor_five_backend.sh"
 ---
+
+## Current inventory update — September20
+
+BACKEND-INTEGRATION-GUIDES.6 adds the common integration entry. Its link to the
+rule/cursor chapter contains the scanned parse-mode token in the filename, so
+canonical CI identifies one unowned path. Register it under public_no_drift and
+advance current markers plus their contract/checker mirrors. The ledger is now
+76 migration files / 8 complete + 0 pending / 60 mutations. Semantic fields,
+rollout, recurring consumers and all forbidden historical claims stay exact.
+The initial failed gate grants no receipt; focused cursor proof and a new exact
+staged canonical run govern landing. Earlier dated evidence retains its counts.
 
 ## Current inventory update — September13
 

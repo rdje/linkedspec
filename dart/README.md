@@ -1,5 +1,9 @@
 # linkedspec_dart
 
+To embed this backend in another application, follow the
+[application integration guide](../docs/linkedspec-book/src/public-api/integration-dart.md):
+local package setup, supporting grammar assets, native values, diagnostics and AOT deployment.
+
 ## Standalone lifecycle block
 
 A rule-item-leading `{ ... }` is exact shorthand for `I { ... }`. The parser emits the existing lifecycle `I`

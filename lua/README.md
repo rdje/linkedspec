@@ -1,5 +1,9 @@
 # LinkedSpec Lua Backend
 
+To embed this backend in another application, follow the
+[application integration guide](../docs/linkedspec-book/src/public-api/integration-lua.md):
+matching runtime/native products, explicit module paths, native values, diagnostics and deployment.
+
 ## Standalone lifecycle block
 
 A rule-item-leading `{ ... }` is exact shorthand for `I { ... }`. The shared parser emits lifecycle `I` with

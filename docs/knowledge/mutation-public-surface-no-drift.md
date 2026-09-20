@@ -19,7 +19,7 @@ reverify: "bash tools/run_python_project_data.sh tools/check_mutation_public_sur
 
 The canonical teaching destination is `docs/linkedspec-book/src/dsl/values-containers-and-flow-helpers.md`.
 Fourteen current public documents own exact mutation status or semantics; the checker inventories those documents
-within a bounded 68-file public Markdown surface and fails when a new public file appears without explicit review.
+within a bounded 69-file public Markdown surface and fails when a new public file appears without explicit review.
 
 The required examples cover missing-container creation, dense arrays, existing-kind conflicts, segment/RHS
 evaluation order, original-shape traversal, callback fields, receiver-identity guarding, rollback, detached
@@ -80,3 +80,11 @@ Only the two expected file counts and current census references advance. Classif
 logic, frozen authorities,35 selector references,zero current examples,11 contrast
 mutations and mutation14/11/10/50 checks remain unchanged. Earlier evidence stays
 intact; reverify with the existing command.
+
+## September20 common integration-entry review
+
+Integration .6 adds the common entry and backend navigation. The original guards
+reject expected68/observed69 and expected67/observed68. Count-only updates admit
+the one page; mutation69/14/11/10/50 and selector68/35/0/5/11 pass. Classifiers,
+semantic examples and frozen authorities remain unchanged. Canonical staged
+proof governs landing; prior dated results above retain their original counts.
