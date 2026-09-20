@@ -17,7 +17,7 @@ answers:
   - has the reported Lispish multiline string patch been verified locally
   - how does a host Cargo workspace exclude the LinkedSpec and PGEN packages
 date: 2026-09-20
-status: workspace repair and public integration correction verified; bootstrap message and strict Lispish reports remain open
+status: workspace and public integration verified; prerequisite guidance corrected; bootstrap message and strict Lispish reports remain open
 tags: [rust, lispish, embedding, dependencies, discussion]
 evidence: "September13 native Lispish proof; September20 report intake, workspace repair and successful RGX public bootstrap/native consumer proof. Supplied grammar patch remains unverified locally."
 reverify: "Follow the public preparation/workspace sequence in docs/linkedspec-book/src/public-api/integration-rust.md, then its native consumer checks. Treat rgx/docs/INTEGRATION.md as the dependency authority; do not inspect implementation."
@@ -87,7 +87,12 @@ pass in 28.17s/18.72s, with normal dependency compilation. These are reuse-assis
 clean-source builds, not a new bootstrap, empty-cache network installation,
 release-profile guarantee or actual downstream application build.
 Evidence is under `.linkedspec-data/scratch/backend-integration82/`.
-The `.8.3` public-interface correction is described above; prerequisite guidance remains `.8.4`.
+The `.8.3` public-interface correction is described above. `.8.4` adds explicit
+prerequisite links immediately after checkout and at the Lispish file section:
+workspace setup, local storage and RGX's public preparation precede Cargo use.
+It qualifies SEMULITH's recursive-checkout observation without claiming a measured
+size or fresh network initialization for the targeted route. Runnable examples
+and commands remain unchanged; rendered navigation is the changed surface.
 
 ## September 20 downstream report intake
 
@@ -105,12 +110,12 @@ and other numbers for different concerns.
 | ARCHOGEN/LS-002 | Open/blocker for eADL: first-form extraction ignores additional/trailing input; requests complete validation and all forms. | Startup `.83.1` contract, `.83.2` implementation, `.83.3` independent admission. |
 | ARCHOGEN/LS-003 | Open/major for eADL: symbols, quoted strings and numbers lose their token-kind distinction. | Startup `.83.1-.83.3`; same requirement as SEMULITH/LS-002. |
 | ARCHOGEN/LS-004 | Reported open/moderate: failed bootstrap prerequisites are followed by a false seed-success message. | Integration `.8.3`: public-interface report and guidance correction; no upstream fix or downstream state change claimed. |
-| ARCHOGEN/LS-005 | Open/minor: checkout instructions need an explicit forward pointer to required preparation. | Integration `.8.4`, coordinated with `.8.2-.8.3`. |
+| ARCHOGEN/LS-005 | Open/minor: checkout instructions need an explicit forward pointer to required preparation. | Integration `.8.4` corrects and verifies prerequisite navigation; downstream report state unchanged. |
 | ARCHOGEN/LS-006 | Withdrawn by reporter: the hex underscore remains intact. | Intake retains the correction; no defect repair claimed or requested. |
 | ARCHOGEN/LS-007 | No-action: adjacent fragments join as documented. | Intake retains the measured compatibility case; no behavior change requested. |
 | SEMULITH/LS-001 | Draft/high, blocks SOT-FORMAT.9: LF inside a quoted string reportedly becomes syntax and changes the tree. | Startup `.83.1` newline/compatibility decision, `.83.2` concrete token repair, `.83.3` regression admission. |
 | SEMULITH/LS-002 | Draft/medium: documented atom-kind erasure limits source-preserving consumers; explicitly a design request. | Startup `.83.1-.83.3`; no silent change to historical Lispish requested. |
-| SEMULITH/LS-003 | Draft/low: enclosing workspace, file-section prerequisite back-reference, optional recursive checkout cost. | Item1 repaired by `.8.2`; `.8.4` retains items2-3. Downstream report remains draft. |
+| SEMULITH/LS-003 | Draft/low: enclosing workspace, file-section prerequisite back-reference, optional recursive checkout cost. | Item1 repaired by `.8.2`; items2-3 corrected by `.8.4` navigation and qualified observation. Downstream report remains draft. |
 
 These are **supplied observations**, not ten newly reproduced defects. Both
 projects name LinkedSpec `ad290bdb427bc19a5af81de0f0b07e119c8999ff`, RGX

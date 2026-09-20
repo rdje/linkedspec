@@ -25,6 +25,12 @@ git -C vendor/linkedspec rev-parse HEAD
 git add .gitmodules vendor/linkedspec
 ```
 
+**Before running Cargo metadata or building:** complete
+[workspace setup](#applications-with-a-cargo-workspace), when applicable,
+[application-local storage](#keep-preparation-and-build-products-local), and
+[RGX preparation](#initial-rgx-preparation). The checkout commands above obtain
+source; the preparation section is a required part of this setup sequence.
+
 Review the revision and commit the submodule pointer with your application. For
 an existing application clone, first run `git submodule update --init
 vendor/linkedspec`, then initialize RGX with the command above. RGX owns preparation
@@ -34,9 +40,17 @@ but retrieves additional optional dependency/test repositories which this native
 Rust example does not require directly. Checkout alone does not complete RGX's
 documented preparation.
 
+Recursive checkout can also consume substantially more disk space. One downstream
+report (SEMULITH, reviewed 2026-09-20) measured about **1.7 GB across 30 submodules**.
+That is a dated observation of one recursive checkout, not a fixed size or a
+measurement of the targeted commands above. Initialize LinkedSpec and its direct
+RGX submodule as shown, then let RGX's published bootstrap own its transitive
+requirements. Do not replace that public command with a manual dependency recipe.
+
 To update deliberately, fetch LinkedSpec, check out the reviewed revision inside
-`vendor/linkedspec`, initialize its pinned nested dependencies again, then verify your
-application before committing the changed pointer. Keep local nested changes out
+`vendor/linkedspec`, initialize its pinned RGX checkout again, follow that revision's
+published preparation contract, then verify your application before committing the
+changed pointer. Keep local nested changes out
 of that update. Do not substitute an unreviewed branch tip for a release pin.
 
 Add this dependency to the application's existing `Cargo.toml`:
@@ -223,6 +237,13 @@ and exits unsuccessfully. See [native loading](native-spec-loading.md) and
 [diagnostics](../compiler/diagnostics.md) for the detailed contracts.
 
 ## Parse Lispish files in your application
+
+If you arrived directly at this section, first complete
+[source checkout](#add-and-pin-the-source-dependency),
+[workspace setup](#applications-with-a-cargo-workspace), when applicable,
+[application-local storage](#keep-preparation-and-build-products-local), and
+[RGX preparation](#initial-rgx-preparation). The commands below use the `APP_ROOT`
+and `CARGO_TARGET_DIR` set there and assume preparation succeeded.
 
 The case-sensitive shipped path is **`specs/Lispish.spec`**. The example reads
 each file as exact UTF-8 text, loads and compiles the grammar once, and executes

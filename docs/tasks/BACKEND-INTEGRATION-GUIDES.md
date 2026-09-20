@@ -335,19 +335,23 @@ ARCHOGEN's use of Lispish through Rust. The requested scope is every backend.
   Commit: `BACKEND-INTEGRATION-GUIDES.8.3 - use RGX public integration`
 
 - ID: `BACKEND-INTEGRATION-GUIDES.8.4`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `a1166ee1d9ce8fce0dfc8f75903d0734ab41c975`.
+  Verification tier: `focused`
+  Focused checks: Rendered forward/back prerequisite links and command ordering; qualified downstream checkout observation; unchanged runnable examples, source, dependencies and locks; public documentation guards, Knowledge, both history checks and all doctrines.
+  Canonical trigger: None for navigation and qualification prose only. No code, manifests, dependency pins, public contract or infrastructure change; final .7 retains canonical proof.
   Goal: Close first-consumer setup-ordering and checkout-cost gaps in the Rust guide.
   Dependencies: `.8.1`, and the supported setup remedies from `.8.2` and `.8.3`.
   Scope: ARCHOGEN/LS-005 and SEMULITH/LS-003 items2-3; forward prerequisite pointer after checkout, a prerequisite back-reference at file parsing, and clear targeted dependency initialization.
   Acceptance: A reader entering either setup or file parsing reaches all required preparation before building. Explain optional recursive checkout cost with qualified evidence; do not turn a downstream disk measurement into a universal size guarantee. Verify the rendered navigation and final runnable sequence without duplicating the canonical setup instructions.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: PASS two rendered prerequisite entry points and56 local links across the Rust guide/status pages; all includes resolve. All21 fenced examples match clean a1166ee1d byte-for-byte, preserving the previously verified public RGX/native sequence. SEMULITH's reported1.7GB/30-submodule observation is explicitly dated and qualified, not a measurement of the targeted route. Mutation68/14/11/10/50 and selector67/35/0/5/11 pass without checker changes. Source/pins/locks and prior history remain unchanged; Knowledge, memory/history and all doctrines govern focused landing. No dependency rebuild, fresh network checkout, upstream repair or grammar fix is claimed. Evidence: .linkedspec-data/scratch/backend-integration84.
+  Commit: `BACKEND-INTEGRATION-GUIDES.8.4 - clarify Rust integration prerequisites`
 
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `BACKEND-INTEGRATION-GUIDES.8.4` | `pending` | Activate prerequisite navigation and targeted checkout guidance after the clean .8.3 public-interface correction commit; then Lua .5.2, common .6 and final .7. |
+| 1 | `BACKEND-INTEGRATION-GUIDES.5.2` | `pending` | Rust report-guidance .8.4 is verified; activate Lua deployment from its clean commit, then common .6 and final .7 before conformance .1.35. |
 
 The director explicitly requests a temporary pivot at the next clean handoff.
 Conformance .1.34 is committed at 00f9783a1 and inventory .0 is complete.
@@ -546,7 +550,18 @@ No verification waiver is requested or applied. Lua .5.2 follows clean landing.
 - [x] **VERIFY / COMMIT** — Finish residue/preservation, book/public, Knowledge/history/memory and doctrine checks; commit this leaf and clear the brief before .8.4.
 
 
+## Acceptance Checklist — .8.4
+
+- [x] **REPRODUCE / ISSUE** — Source-qualified ARCHOGEN/LS-005 and SEMULITH/LS-003 items2-3 identify missing preparation pointers and recursive-checkout cost guidance.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Rust checkout and file-parsing entry points lacked direct links to the existing required workspace, storage and RGX sections.
+- [x] **FIX** — Add forward/back prerequisite links and a dated, qualified checkout observation; retain one canonical setup sequence and RGX's public authority.
+- [x] **ADDRESSED (verified)** — Both entry points resolve all three prerequisites;56 rendered local links and includes pass. All21 fenced examples remain byte-exact.
+- [x] **NO REGRESSION** — Native examples, runtime, manifests, dependency source/pins/locks and grammar limits are unchanged; public guards pass.
+- [x] **VERIFY / COMMIT** — Focused book/navigation/preservation, Knowledge/history/memory and doctrine checks govern this leaf's commit and brief cleanup; Lua .5.2 follows only from a clean tree.
+
 ## Verification Log
+
+- `2026-09-20` .8.4: PASS two prerequisite entry points,56 rendered local links,21 unchanged fenced examples and both public guards. Recursive cost is a qualified downstream report; no new build or grammar proof. Final focused preservation/continuity/doctrines govern landing.
 
 - `2026-09-20` .8.3: Use RGX public integration only; discarded procedure and internal dependency knowledge removed. Public bootstrap, native consumer, preserved sources/pins, report and focused documentation checks pass. Upstream message issue remains open; guidance .8.4 follows clean commit.
 
@@ -580,6 +595,8 @@ No verification waiver is requested or applied. Lua .5.2 follows clean landing.
 
 ## Commit Log
 
+- `.8.4`: `BACKEND-INTEGRATION-GUIDES.8.4 - clarify Rust integration prerequisites`; activation a1166ee1d; focused navigation proof, then Lua .5.2.
+
 - `.8.3`: `BACKEND-INTEGRATION-GUIDES.8.3 - use RGX public integration`; activation effe3e7b2; focused documentation/public-interface proof, then guidance .8.4.
 
 - `.8.2`: `BACKEND-INTEGRATION-GUIDES.8.2 - repair Rust consumer workspace boundaries`; activation ff74b4c3b; manifest infrastructure requires exact staged canonical proof, then bootstrap .8.3.
@@ -609,6 +626,8 @@ No verification waiver is requested or applied. Lua .5.2 follows clean landing.
 - Guide/example leaves: pending.
 
 ## Changelog
+
+- `2026-09-20` .8.4: Correct Rust setup/file-entry navigation and qualify recursive-checkout cost; source/examples and public RGX preparation stay unchanged.
 
 - `2026-09-20` .8.3: Use RGX public integration only; discarded procedure and internal dependency knowledge removed. Public bootstrap, native consumer, preserved sources/pins, report and focused documentation checks pass. Upstream message issue remains open; guidance .8.4 follows clean commit.
 

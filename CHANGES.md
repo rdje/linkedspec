@@ -10,6 +10,12 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-20 — BACKEND-INTEGRATION-GUIDES.8.4 - clarify Rust integration prerequisites
+
+Add explicit prerequisite links immediately after Rust checkout and at the Lispish file section. Both routes reach workspace exclusion, application-local storage and RGX's published preparation before Cargo use. Qualify SEMULITH's reported1.7GB/30-submodule recursive-checkout observation; the targeted route has no new size or network-initialization claim.
+
+PASS two prerequisite entry points and56 local links across rendered guide/status pages; all includes resolve and all21 fenced examples remain byte-exact. Public mutation68/14/11/10/50 and selector67/35/0/5/11 pass without checker changes. Source/pin/lock/history preservation and Knowledge/memory/history/doctrine checks govern focused landing. No native rebuild, runtime or grammar change; upstream progress reporting and strict Lispish remain open. Lua .5.2 is next.
+
 ## 2026-09-20 — BACKEND-INTEGRATION-GUIDES.8.3 - use RGX public integration
 
 The director requires LinkedSpec to integrate only through RGX's published document/APIs/contracts. Remove the uncommitted custom preparation helper/test and internal dependency recipes/conclusions from maintained knowledge, book, agent instructions and pending plans. RGX owns all transitive preparation; both submodule sources/pins remain unchanged. The misleading progress-message report remains upstream-owned and open.

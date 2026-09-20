@@ -554,7 +554,9 @@ dependency. Ten boundary checks and a two-member native consumer pass with
 unchanged dependency pins. Integration `.8.3` uses RGX's published build interface
 and removes dependency-internal procedures and assumptions. LinkedSpec integrates
 with RGX only; transitive preparation belongs to RGX. Bootstrap progress reporting
-remains upstream-owned; setup navigation remains `.8.4`. Complete-input, token-kind
+remains upstream-owned. Integration `.8.4` adds prerequisite links after checkout
+and before Lispish file parsing, plus a qualified recursive-checkout size observation.
+Complete-input, token-kind
 and reported multiline-string problems
 attach to startup `.83.1-.83.3`.
 The [Rust guide](../public-api/integration-rust.md) states the current limits.

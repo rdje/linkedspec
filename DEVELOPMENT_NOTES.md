@@ -10,6 +10,12 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-20 — BACKEND-INTEGRATION-GUIDES.8.4 - clarify Rust integration prerequisites
+
+A reader can enter the Rust guide through either checkout or the Lispish file section. Both now link to the same workspace/storage/RGX preparation owners, so prerequisites stay discoverable without duplicate command sequences. RGX alone owns transitive preparation. The dated SEMULITH recursive-checkout measurement is useful context but does not establish the size or initialization behavior of another route.
+
+PASS rendered navigation at both entry points,56 local links and resolved includes;21 fenced examples match the prior committed guide exactly. Existing public guards pass unchanged. This prose-only change reuses .8.3 public/native evidence without rebuilding dependencies. Source/pin/lock/history preservation and normal focused continuity/doctrines govern landing; final .7 retains canonical CI. ARCHOGEN/LS-005 and SEMULITH/LS-003 guidance items are corrected locally; downstream report files and unresolved upstream/grammar status stay unchanged.
+
 ## 2026-09-20 — BACKEND-INTEGRATION-GUIDES.8.3 - use RGX public integration
 
 The director requires LinkedSpec to integrate only through RGX's published document/APIs/contracts. Remove the uncommitted custom preparation helper/test and internal dependency recipes/conclusions from maintained knowledge, book, agent instructions and pending plans. RGX owns all transitive preparation; both submodule sources/pins remain unchanged. The misleading progress-message report remains upstream-owned and open.
