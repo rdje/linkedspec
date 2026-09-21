@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.80 - read shape and receiver checks and own absent host-slot leakage
+
+Colon/shape tests preserve evaluated key and scalar-held binding semantics; current receiver returns and terminal boundaries match the dated Knowledge updates. A fresh twelve-assertion array-receiver replay passes. Its exact public source contains no missing scalar declaration but reads undeclared @missing, correcting the initial diagnostic hypothesis before any claim. Four live-empty/independently-loaded controls reproduce host-array sensitivity only for the absent receiver (1/0), with explicit empty binding stable (1/1). Extend startup .17.1 with this concrete case and loaded-source regression obligation, preserving implicit rule accumulators. .2.14 separately owns old explicit-selector descriptions. No dropped-declaration mutation controls were run or claimed for this fixture.
+
 ## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.79 - read binding and newline checks and extend observation repair
 
 Read current scalar-held declaration/mutation/copy paths, genuine operator/helper contrasts and repeated-call results. Extend existing .2.14 with exact identical-input comparisons (direct path, set nodes, current-helper twins, one spacing pair) and stale keyword/deferred descriptions. These source-qualified gaps do not negate separate exact lowering or runtime assertions. A three-assertion public lowering recipe passes. Retained canonical ordinals 983–1001 cover 246 assertions without a fresh full run. Newline controls distinguish balanced payloads, marker chains and switch do-block termination; the colon-hash test remains partial.

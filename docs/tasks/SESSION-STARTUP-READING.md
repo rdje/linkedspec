@@ -2299,7 +2299,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Status: `active`
   Goal: Split and read all 160 entries under capability_conformance, cli_conformance, t, tests, and unicode_case.
   Children: `.3.8.0` owns exact decomposition; `CONFORMANCE-SOURCE-READING.1` owns all143 reading groups; .2 findings and .3 independent closeout stay separate.
-  Reading owner: `docs/tasks/CONFORMANCE-SOURCE-READING.md`; 143 groups / 302 baseline ranges over 160 inputs. Physical reading 79/143 groups, 95,686 fragments / 4,216,269 baseline bytes and 97 complete files; Phase0 through 46191. Approved 113-byte inventory delta stays separate. Retained proof: 19 completed subtests, ordinals 983–1001 with 246 direct assertions and no nested plans. Binding and newline tests preserve concrete runtime and lowering claims; .2.14 now owns the adjacent collapsed comparisons and stale descriptions. .2.5–.2.14 and all prerequisites remain. .1.80: reading colon-hash literal support and subsequent current syntax checks. ADR0122/containment .15 are canonically admitted at ec10be6b.
+  Reading owner: `docs/tasks/CONFORMANCE-SOURCE-READING.md`; 143 groups / 302 baseline ranges over 160 inputs. Physical reading 80/143 groups, 96,802 fragments / 4,281,755 baseline bytes and 97 complete files; Phase0 through 47307. Approved 113-byte inventory delta stays separate. Retained proof: 17 completed subtests, ordinals 1002–1018 with 244 direct assertions and no nested plans. Shape/receiver and numeric comparison checks retain exact results; startup .17.1 now owns reproduced absent-receiver host-slot leakage and .2.14 owns remaining obsolete target descriptions. .2.5–.2.14 and all prerequisites remain. .1.81: reading aggregate assignment expression values and subsequent mutation expressions. ADR0122/containment .15 are canonically admitted at ec10be6b.
   Acceptance: Include phase0, neutral contracts, fixtures, generators, and four explicitly decoded pinned Unicode
     inputs. Keep generated/fixture bytes in scope; count neither a hash nor enumeration as full reading.
   Verification: `pending`
@@ -2584,6 +2584,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 - ID: `SESSION-STARTUP-READING.17.1`
   Status: `pending`
   Goal: Guard array helpers by the evaluated DSL value kind before host-slot fallback.
+  Conformance .1.80 extension: Public generated source for the missing.sorted().is_empty() fixture reads undeclared @missing without a scalar binding. Fresh independently loaded public source returns 1 with an empty generated-package host array and 0 with one unrelated host element; an explicit set(missing, []) control returns 1 in both states. This existing isolation repair now includes absent bare receivers as well as wrong-kind operands, preserves legitimate implicit rule accumulators and once-only operand evaluation, and must verify live plus independently loaded source. Evidence/replay: docs/knowledge/perl-wrong-kind-collection-host-slot-drift.md. The .2.14 description audit must not misreport an absent scalar declaration as present.
   Acceptance: Lock count/first/last on wrong-kind values against isolated empty/nonempty same-named host arrays.
     Audit direct array-helper consumers, evaluate operands once, preserve valid binding/array behavior and
     supported generated/loaded routes, and update the book and Knowledge with focused direct-dependent proof.
@@ -4673,7 +4674,7 @@ startup implementation prerequisites and the rgx reading exclusion remain intact
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.80` | `pending` | Read Phase0 lines 46192–47307 (1,116 fragments / 65,486 baseline bytes), reading colon-hash literal support and subsequent current syntax checks. Repairs .2.5–.2.14 and earlier repairs retain required source/book/policy reading prerequisites. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.81` | `pending` | Read Phase0 lines 47308–48409 (1,102 fragments / 65,521 baseline bytes), reading aggregate assignment expression values and subsequent mutation expressions. Repairs .2.5–.2.14 and earlier repairs retain required source/book/policy reading prerequisites. |
 
 ## Reading Ledger
 

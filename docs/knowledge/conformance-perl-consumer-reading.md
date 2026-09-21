@@ -61,8 +61,9 @@ answers:
   - what do Phase0 trace cursor and generated-source presence tests actually observe
   - what do Phase0 function staging recursion and working-variable tests establish
   - which Phase0 binding and newline checks retain meaningful contrast evidence
+  - which Phase0 receiver tests expose absent binding host-slot leakage
 date: 2026-09-21
-status: groups 34–79 physically read; Phase0 partial through line 46191; all observation-gap and runtime repairs retain prerequisites
+status: groups 34–80 physically read; Phase0 partial through line 47307; all observation-gap and runtime repairs retain prerequisites
 tags: [conformance, perl, reading, diagnostics, generated-source]
 evidence: "CONFORMANCE-SOURCE-READING.1.34 at activation d10305097eb502c0fe29309ec230437396e26d82; eleven complete windows, 1500 fragments, 56255 bytes, ordered window SHA-256 db04deab6c0365f8bc454e2695d410324a120104a232c213346f2b23ad16aef3. Five managed Perl targets pass43 top-level tests; neutral named marks3, diagnostics20 and duplicate-slot59 mutations pass."
 evidence_update_2026_09_21: "Ten complete windows cover 1,500 fragments / 51,804 baseline bytes; ordered window SHA-256 1164b42887bab92a4ea03d85fcaf4a9dc0c6913fc7607fe21a0d66cb0a424992. Cumulative reading is 35/143, 46,538 fragments / 1,405,327 baseline bytes and 86 complete files; gap tests remain partial through line 1026. Retained exact integration commit 87b35665e proof passes generated-source (6), inspector (2) and gap (124) tests (132 total), with unchanged source identities. The old uniform-identity audit fails on the approved integration delta; its corrected recipe passes all 160 inputs/143 groups/302 ranges and six rejected snapshot mutations. No new runtime execution, native build, full CI or push is claimed for this focused reading leaf."
@@ -70,8 +71,8 @@ evidence_update_2026_09_21_group36: "Eleven complete windows cover 1,500 fragmen
 reverify: "bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/cli_conformance_runner.t t/complete_named_mark_contract.t t/diagnostic_output_perl_contract.t t/duplicate_regex_slot_identity_perl_contract.t t/generated_source_contract.t; bash tools/run_python_project_data.sh tools/check_complete_named_mark_contract.py; bash tools/run_python_project_data.sh tools/check_diagnostic_output_contract.py; bash tools/run_python_project_data.sh tools/check_duplicate_regex_slot_identity_contract.py"
 evidence_update_2026_09_21_group37: "Fourteen complete windows cover 1,500 fragments / 63,613 baseline bytes; ordered window SHA-256 98d4de26a6f747975c45fe91277d218c6947936925d1ae233586706bef952d64. Cumulative reading is 37/143: 49,538 fragments / 1,527,897 baseline bytes and 97 complete files. Phase0 remains partial at lines 1–43. Fresh managed metadata/oracle checks pass 9 top-level tests. Unchanged integration commit 87b35665e retains native-loader (5), MCP binding/dispatch/stdio (23), admission (13) and Phase0 1032 proof. Full-target execution grants no reading credit to the unread Phase0 body. Header correction .2.4 is pending after prerequisites; helper repair .2.3 and existing runtime repairs remain open. No dependency build, new canonical run or push is claimed."
 evidence_update_2026_09_21_group38: "Eleven complete windows cover 1,067 fragments / 65,529 baseline bytes; ordered window SHA-256 f57116fee0db80f49969546da5cd033988e06b55191fc88358b7c6d6d334fd3e. Cumulative reading is 38/143: 50,605 fragments / 1,593,426 baseline bytes and 97 complete files. Phase0 is partial through line 1110. Exact unchanged canonical commit 87b35665e supplies PASS for all 38 fully read subtests (ordinals 2–39). The crossing facade error-state test remains partial; its suffix is .1.39-owned. The complete 1032-test gate remains retained historical proof, not new execution or reading credit. No new defect, runtime repair, dependency build, full CI or push is claimed; all existing repairs retain their prerequisites."
-evidence_phase0_checkpoint: "11 complete windows cover 1,128 fragments / 65,516 baseline bytes; ordered window SHA-256 6c7eecbae2348e4e71e41d2ad0a66a2e3f146b18202b4e608f81794c79689cbc. Cumulative reading is 79/143 groups, 95,686 fragments / 4,216,269 baseline bytes and 97 complete files. Phase0 is partial through line 46191. Unchanged canonical commit ec10be6b retains PASS for 19 completed subtests, ordinals 983–1001 with 246 direct assertions and no nested plans. Exact TAP numbering and source identity are verified. Scalar-held binding counts, exact runtime values and genuine operator/helper contrasts remain meaningful. Identical direct-path, set-node, helper-twin and spacing inputs cannot establish the advertised contrast; existing .2.14 owns these specific cases. A fresh three-assertion public lowering probe passes. Newline checks cover balanced payloads, CRLF/CR, marker chains and the switch do-block terminator. The next colon-hash test is partial after JSON setup. Reading extends existing .2.14 without closing a repair; no production change, dependency build, canonical run or push is claimed; .2.5–.2.14 and all prerequisites remain."
-reverify_phase0_checkpoint: "Replay .1.79 using conformance-source-reading-coverage; verify 19 completed subtests, ordinals 983–1001 with 246 direct assertions and no nested plans against unchanged ec10be6b sources. Replay CURRENT_BINDING_LOWERING in phase0-working-variable-observation-drift and inspect its source-qualified .1.79 inventory; retained TAP is historical, not fresh execution of the full family."
+evidence_phase0_checkpoint: "11 complete windows cover 1,116 fragments / 65,486 baseline bytes; ordered window SHA-256 22f63513d9476c07cb7936e5124a36243391d1bed417b8ea1b4c884eb92c0eae. Cumulative reading is 80/143 groups, 96,802 fragments / 4,281,755 baseline bytes and 97 complete files. Phase0 is partial through line 47307. Unchanged canonical commit ec10be6b retains PASS for 17 completed subtests, ordinals 1002–1018 with 244 direct assertions and no nested plans. Exact TAP numbering and source identity are verified. Colon literals evaluate bare keys while quoted keys are fixed; retired fat-arrow source diagnoses. Shape binding, receiver families and numeric/string comparisons retain exact lowering/runtime proof. Fresh array-receiver replay passes 12 assertions. Exact public capture has no missing scalar declaration but reads undeclared @missing; four public controls show independently loaded absent-receiver results depend on isolated host-array state, while an explicit empty binding does not. Startup .17.1 owns that defect, .2.14 retains bounded description corrections, and no production repair is claimed. The next aggregate-assignment test is partial inside its runtime helper. Reading extends existing .2.14 and startup .17.1 without closing a repair; no production change, dependency build, canonical run or push is claimed; .2.5–.2.14 and all prerequisites remain."
+reverify_phase0_checkpoint: "Replay .1.80 using conformance-source-reading-coverage; verify 17 completed subtests, ordinals 1002–1018 with 244 direct assertions and no nested plans against unchanged ec10be6b sources. Replay ABSENT_RECEIVER_HOST_SLOT in perl-wrong-kind-collection-host-slot-drift; preserve the distinction between independent generated-package host-state proof and ordinary live empty-state controls. Keep .2.14 description corrections separate."
 reverify_group38: "Replay .1.38 using conformance-source-reading-coverage and compare its 38 complete subtest names with retained canonical commit 87b35665e; this grants no new source-reading or runtime credit."
 reverify_group37: "bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/noncurrent_helper_metadata.t t/oracle_root_target_regex_semantics.t; retain unchanged dated MCP/native-loader proof separately."
 reverify_group36: "bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/logical_helper_perl_contract.t t/map_leaves_mutation_perl_contract.t; reproduce the helper observation with HELPER_PATH below, and retain the dated gap/MCP proof separately."
@@ -444,37 +445,38 @@ PUSH_LABELS
 
 ## Phase0 reading checkpoint
 
-Group 79 reads Phase0 lines 45064–46191. Scalar-held working-variable tests
-retain declaration counts, lexical placement, kind-aware copy/push/nested-write
-lowering and exact mutation results. Repeated calls check invocation resets.
-Direct mixed paths lower to scalar dereferences; reserved path atoms remain
-outside that lowering. Static child-rule push retains its documented precedence.
+Group 80 reads Phase0 lines 46192–47307. Colon hash literals evaluate bare keys
+and values, preserve quoted fixed keys and nested shapes, and coexist with
+expression-valued blocks. Retired fat-arrow and mixed source yield the colon
+migration diagnostic; generated Perl still uses its own host hashref syntax.
+Shape tests check concrete array/hash values, one scalar-held declaration,
+absence of old aggregate declarations and generated assignment/return patterns.
 
-Several comparisons lost their distinguishing inputs during earlier migration:
-direct access compares the same expression twice, set-node comparison repeats set,
-terse/canonical runtime fixtures are byte-identical, and one spacing pair has no
-spacing difference. Existing .2.14 now explicitly owns those cases and adjacent
-keyword-argument/deferred-read descriptions. The separate exact lowering,
-lexical counts and runtime outputs remain useful. A fresh three-assertion public
-probe confirms current direct-path, set and bare-return lowering. No sensitivity
-mutation of these additional comparisons or production failure is claimed.
+Array-end mutations preserve current independent updated values. Pure receiver
+chains bridge arrays, hashes, strings, numbers and block yields; named mutation
+receivers differ from unsupported temporary receivers. String/number/reducer
+terminal continuations return null. Tests retain exact result lists, including
+block receivers ["1,2,3", "x|y", 2, "a,b", 5]. Word/symbol numeric aliases
+and explicit lexical str_* comparisons use distinguishing 10/2 examples. Scalar
+assignment values compose in helpers, functions, blocks and receiver chains.
 
-Genuine scalar assignment/set and append/push contrasts remain distinct. Typed
-nested-write differs intentionally from harray-only set_key. Literal tests check
-true/false/null/numbers and reserved-name precedence. Five spacing pairs actually
-differ; no-parenthesis forms remain raw. Statement tests reject same-line implicit
-separation and protect nested/string/substitution payloads. Universal newline
-checks include CRLF/CR, comments, marker chains and exact cursor positions.
-Closing switch's generated do-block needs a terminator before a following return;
-ordinary if closure does not. The combined control fixture returns [elif, case-b].
-Explicit mixed hash/array access returns one, with a repeated expected-source
-assertion whose redundancy must not be inflated into a missing runtime proof.
+Fresh replay of the array-receiver test passes its twelve assertions. Its exact
+public generated capture has zero missing scalar declarations, zero missing
+array declarations and an undeclared @missing read. Therefore its no-preamble
+observation is accurate, but does not prove host-slot isolation. Four fresh
+public controls establish an absent receiver in independently loaded source:
+empty/populated host arrays yield 1/0, versus 1/1 for an explicit empty binding.
+Live parsers pass ordinary empty-state controls only; seeded live isolation was
+not measured. Existing startup .17.1 now explicitly owns this defect and its
+loaded-source controls. [[perl-wrong-kind-collection-host-slot-drift]] preserves
+the exact replay; [[phase0-working-variable-observation-drift]] keeps the
+separate stale explicit-aggregate descriptions with .2.14.
 
-Canonical ordinals 983–1001 retain 246 direct assertions across 19 completed
-subtests, with no nested plans. The colon-hash subtest has only its setup read;
-.1.80 owns the continuation. .2.5–.2.14 and all prerequisite reading remain.
+Canonical ordinals 1002–1018 retain 244 direct assertions across 17 completed
+subtests, with no nested plans. Aggregate assignment expressions are partial
+inside the runtime helper; .1.81 continues. All repair prerequisites remain.
 
-Reading is 79/143 groups, 95,686 fragments / 4,216,269 baseline bytes and 97 complete files.
+Reading is 80/143 groups, 96,802 fragments / 4,281,755 baseline bytes and 97 complete files.
 
 Related facts: [[perl-callable-codeblock-literal-record]], [[neutral-cli-fixture-runner]],
 [[complete-named-mark-perl-rust-parity]], [[perl-diagnostic-output-events]],

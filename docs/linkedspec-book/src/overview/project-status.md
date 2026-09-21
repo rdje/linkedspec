@@ -498,35 +498,36 @@ the director's focused-verification grant used for this correction and the separ
 supporting-reading closeout. Reading completion establishes audited comprehension;
 it does not close the six grammar/literal repair roots or establish runtime signoff.
 Conformance, test and Unicode reading has exact ownership for all 160 inputs in
-143 bounded groups covering 8,257,059 baseline decoded bytes. Reading now covers 79/143 groups, 95,686 fragments / 4,216,269 baseline bytes and 97 complete files.
-Phase0 reaches line 46191.
+143 bounded groups covering 8,257,059 baseline decoded bytes. Reading now covers 80/143 groups, 96,802 fragments / 4,281,755 baseline bytes and 97 complete files.
+Phase0 reaches line 47307.
 
-Working-variable checks cover the current scalar-held bindings: declaration
-counts and placement, copying runtime array or hash values, mutations, direct
-mixed-path access and repeated parser calls. Concrete results and distinct
-operator/helper comparisons remain useful evidence.
+Colon hash literals evaluate their key expressions. For example, binding key to
+"stage" makes `{ key : value }` use that field name; quote a fixed field name.
+Tests cover nested shapes, assignment values and expression-valued blocks.
+Retired hash-literal `=>` source produces a migration diagnostic, while generated
+Perl retains its own host hash syntax.
 
-**The existing .2.14 repair now includes adjacent migrated comparisons.** Some
-tests compare an expression with itself or compile two identical fixtures while
-describing an old/new syntax contrast. One spacing pair has identical inputs;
-five others actually differ in spacing. A keyword-argument description also
-points to a fixture that now uses set. These cases need accurate observations
-and descriptions, while preserving exact lowering and runtime checks. A fresh
-public probe passes three current lowering expectations; it does not establish
-parser-runtime failure or close the repair.
+Receiver tests preserve concrete array, hash, string, numeric and block results.
+Named array-end mutations return independent updated arrays. Pure methods can
+bridge compatible families; terminal string/number/reducer calls followed by
+incompatible methods yield null. Numeric word/symbol comparisons remain distinct
+from lexical str_* comparisons, including the values "10" and "2".
 
-Statement checks distinguish newline separators from same-line adjacency and
-protect semicolons/newlines inside balanced payloads. They cover CRLF/CR,
-comments, if/elseif and switch markers. A switch's generated do-block requires
-a terminator before the following statement; an ordinary if block does not.
-The combined control example returns ["elif", "case-b"]. Mixed hash/array access
-returns "one". Typed nested-write and harray-only set_key remain distinct.
+**An absent-receiver isolation defect is owned by startup .17.1.** In independently
+loaded generated Perl, `missing.sorted().is_empty()` reads an undeclared host
+array. It returns 1 with an empty host array and 0 with an unrelated host element.
+Explicitly assigning `missing = []` keeps the result at 1 in both states. The
+four diagnostic controls pass, and the twelve existing array-receiver assertions
+also pass; they do not test that isolation boundary. Ordinary live empty-state
+controls pass, but seeded live behavior was not measured. The repair must cover
+the loaded-source route and preserve legitimate implicit rule accumulators.
 
-The 19 completed subtests retain canonical proof with 246 direct assertions and
-no nested plans. The colon-hash literal test is partial after setup; .1.80
-continues. MethodExpr .2.5 and repairs .2.6–.2.14 retain their prerequisites.
-The unused dependency grammar snapshot and separate 113-byte inventory delta
-remain unchanged.
+The existing .2.14 repair also owns remaining descriptions that call current
+bare bindings explicit aggregate targets or receivers. No production repair has
+landed. Seventeen completed subtests retain canonical proof with 244 direct
+assertions and no nested plans. Aggregate assignment expressions are partial;
+.1.81 continues. MethodExpr .2.5, other repairs and the reading prerequisites
+remain, as do the unused dependency grammar snapshot and separate inventory delta.
 
 The director approved the finite documentation-capacity proposal under ADR0122.
 Containment `.15` admits exactly fourteen controls for the remaining 93 reading
@@ -553,7 +554,7 @@ The history files keep their 512-line / 65,536-byte caps, mandatory rollover and
 immutable archives. General card/part limits remain unchanged. Admission consumes
 one of the conservative 99 reserve units; the remaining 98 units are forecast
 after actual admission overhead. This capacity does not complete source reading
-or repair tests: reading now reaches 79/143, `.1.80` is next, and the test and recipe
+or repair tests: reading now reaches 80/143, `.1.81` is next, and the test and recipe
 repairs `.2.5`–`.2.14` remain open.
 
 The director has requested integration guides and runnable consumer examples for

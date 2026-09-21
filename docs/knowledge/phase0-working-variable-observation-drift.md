@@ -73,6 +73,16 @@ repeated-invocation controls must survive. No production failure follows from
 these source-qualified observation limits, and no sensitivity mutation of these
 additional comparisons is claimed.
 
+Group 80 extends the description audit to the shape-binding `.11_2` and array-end
+`.1_6` tests: their current bare targets/receivers are still called explicit
+aggregate selectors in comments or labels. The aggregate assignment `.3_3_2`
+introduction also calls retired selector targets temporary aliases; its body
+continues in group 81. The array receiver-chain test's missing receiver is a
+different case: public capture confirms zero scalar declarations and an
+undeclared host-array read. Do not invent a missing positive declaration there.
+Its demonstrated host-state sensitivity is owned by startup `.17.1` and recorded
+in [[perl-wrong-kind-collection-host-slot-drift]].
+
 `CONFORMANCE-SOURCE-READING.2.14` owns that bounded repair after required
 source/book/policy reading. It must observe actual nonempty scalar-held binding
 declarations, reject declaration removal/duplication, preserve distinct setup,

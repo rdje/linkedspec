@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `CONFORMANCE-SOURCE-READING`
-- Status: `active` / exact decomposition; physical reading 79/143
+- Status: `active` / exact decomposition; physical reading 80/143
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.8`
 - Created: `2026-09-13`
 - Last updated: `2026-09-21`
@@ -1413,14 +1413,21 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
   Commit: `CONFORMANCE-SOURCE-READING.1.79 - read binding and newline checks and extend observation repair`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.80`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `a19e2588eeff6e4f06de889b4abdd165be5c06cf`.
+  Verification tier: `focused`
+  Focused checks: Complete source/window/coverage and retained TAP checks; reconcile observation boundaries with canonical Knowledge; preservation, memory, histories, rendered book, direct public checks and normal doctrines.
+  Canonical trigger: Ordinary bounded reading and fact reconciliation; no source/public-contract/dependency/infrastructure change or parent closeout.
   Goal: Read and understand conformance/test/Unicode group 80.
   Scope: `t/phase0_regression.t` lines 46192-47307
   Baseline evidence: 1116 fragments / 65486 decoded bytes; ordered range SHA-256 `f35ebcadb1b16ea4d67e8d763d0d3971ef53bb2ddf53ae46e53bc791b9246303`.
   Dependencies: .1.79 committed with clean handoff.
   Acceptance: Read every scoped byte in complete bounded windows; retain source identity, exact comprehension, canonical Knowledge reconciliation, concrete finding ownership, focused proof and per-leaf continuity. Unread crossing constructs retain the next range owner.
-  Verification: `pending`
-  Commit: `pending`
+  Reading evidence: 11 complete windows / 1116 fragments / 65486 bytes; ordered window SHA-256 `22f63513d9476c07cb7936e5124a36243391d1bed417b8ea1b4c884eb92c0eae`.
+  Comprehension: Colon literals evaluate bare keys and preserve quoted fixed fields, nested values and expression blocks; retired fat-arrow source diagnoses without raw fallback. Shape binding, receiver families, terminal continuations and numeric/string alias distinctions have exact lowering/runtime checks. Existing .2.14 extends to remaining obsolete explicit-aggregate descriptions and the missing-receiver preamble claim, with public source confirming no missing scalar declaration but an undeclared host-array read. Four public controls reproduce independently loaded host-state sensitivity, now owned by startup .17.1. Scalar assignment expressions return stored values across function/block/helper contexts. Aggregate assignment expression test is partial inside its runtime helper.
+  Verification: Unchanged canonical commit ec10be6b retains PASS for 17 completed subtests, ordinals 1002–1018 with 244 direct assertions and no nested plans. Exact TAP numbering and source identity are verified. Colon literals evaluate bare keys while quoted keys are fixed; retired fat-arrow source diagnoses. Shape binding, receiver families and numeric/string comparisons retain exact lowering/runtime proof. Fresh array-receiver replay passes 12 assertions. Exact public capture has no missing scalar declaration but reads undeclared @missing; four public controls show independently loaded absent-receiver results depend on isolated host-array state, while an explicit empty binding does not. Startup .17.1 owns that defect, .2.14 retains bounded description corrections, and no production repair is claimed. The next aggregate-assignment test is partial inside its runtime helper. Reading extends existing .2.14 and startup .17.1 without closing a repair; no production change, dependency build, canonical run or push is claimed; .2.5–.2.14 and all prerequisites remain.
+  Candidate proof: Exact baseline inventory/windows and retained TAP PASS; fresh array-receiver 12/12 and public host-state controls 4/4 PASS, with the durable recipe replayed. Knowledge 1157 facts / 9292 question keys; memory 60 lines; histories 284 lines / 46705 bytes and 282 lines / 50060 bytes; mdBook rendered; mutation and aggregate-selector public checks PASS. Preservation verifies 2851 other tracked files / 50664406 bytes, prior task bodies apart from the documented .2.14 and startup .17.1 extensions, 53 other book files / all 1039 headings, histories and parent gitlink. No canonical rerun or push.
+  Commit: `CONFORMANCE-SOURCE-READING.1.80 - read shape and receiver checks and own absent host-slot leakage`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.81`
   Status: `pending`
@@ -2252,6 +2259,7 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
   Evidence: .1.78 public source capture of the exact fluent .push(items) fixture produces one my $items and no my @items, while the test labels absence of my @items as deferred auto-declaration. The adjacent wrapped/setup dedup test now uses bare targets/reads, including two byte-identical scalar fixture strings. Canonical diagnosis: docs/knowledge/phase0-working-variable-observation-drift.md.
   Scope: Audit the contiguous spec_format_terse_1_1_1 and spec_format_terse_1_2_1 test family, including the unread .1.79 continuation, for stale wrapper/sigil/channel claims and vacuous legacy-sigil denials. Preserve genuinely distinct setup, per-invocation and recursion controls; reconcile associated maintained working-variable guidance.
   Reading .1.79 extension: Audit the adjacent .1_2_3 direct-access self-comparison, .1_4_1 set-node self-comparison and identical terse/canonical fixtures, .1_5_3 identical spacing inputs, and .1_3_4 keyword-argument/deferred-read descriptions. Replace unsupported contrast claims with distinct current-contract cases or direct expected observations; retain meaningful exact lowering, runtime values, declaration counts and repeated-call controls. The .1_5_5_1 explicit-segment test also duplicates its mixed-path expected assertion. No retired syntax is to be reintroduced merely to manufacture a comparison.
+  Reading .1.80 extension: Audit the .11_2 shape-binding and .1_6 array-end descriptions that still call current bare bindings explicit aggregate targets/receivers, and the .3_3_2 temporary-alias introduction whose body continues in .1.81. The .2_3_5_1 missing receiver genuinely has no scalar declaration; its generated host-array read and independently loaded host-state sensitivity belong to the extended SESSION-STARTUP-READING.17.1 isolation repair. Preserve exact shape/receiver runtime values and current independent array-end results.
   Dependencies: Required source/book/policy reading, including the complete working-variable test family, before tracked test edits. Current .1.78 owns public diagnosis and current-claim correction only.
   Acceptance: Assert the actual nonempty scalar-held binding declarations, reject removal/duplication of the intended lexical declaration, preserve current helper lowering and run-twice scoping positives, replace obsolete wrapper/deferred descriptions with accurate current observations, avoid restoring retired syntax, and independently verify the focused family plus book/Knowledge alignment.
   Verification: `pending`
@@ -2688,7 +2696,7 @@ additional reading credit from integration delivery.
 
 | Rank | Leaf | Status | Next action |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.80` | `pending` | Read Phase0 lines 46192–47307 (1,116 fragments / 65,486 baseline bytes), reading colon-hash literal support and subsequent current syntax checks. Repairs .2.5–.2.14 and earlier repairs retain required source/book/policy reading prerequisites. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.81` | `pending` | Read Phase0 lines 47308–48409 (1,102 fragments / 65,521 baseline bytes), reading aggregate assignment expression values and subsequent mutation expressions. Repairs .2.5–.2.14 and earlier repairs retain required source/book/policy reading prerequisites. |
 
 ## Decisions
 
@@ -2700,6 +2708,8 @@ additional reading credit from integration delivery.
 - None at decomposition. Ordinary source repairs retain startup prerequisites; later collection pressure must be measured rather than assumed away.
 
 ## Verification Log
+
+- `2026-09-21` .1.80: 11 complete windows cover 1,116 fragments / 65,486 baseline bytes; ordered window SHA-256 22f63513d9476c07cb7936e5124a36243391d1bed417b8ea1b4c884eb92c0eae. Cumulative reading is 80/143 groups, 96,802 fragments / 4,281,755 baseline bytes and 97 complete files. Phase0 is partial through line 47307. Unchanged canonical commit ec10be6b retains PASS for 17 completed subtests, ordinals 1002–1018 with 244 direct assertions and no nested plans. Exact TAP numbering and source identity are verified. Colon literals evaluate bare keys while quoted keys are fixed; retired fat-arrow source diagnoses. Shape binding, receiver families and numeric/string comparisons retain exact lowering/runtime proof. Fresh array-receiver replay passes 12 assertions. Exact public capture has no missing scalar declaration but reads undeclared @missing; four public controls show independently loaded absent-receiver results depend on isolated host-array state, while an explicit empty binding does not. Startup .17.1 owns that defect, .2.14 retains bounded description corrections, and no production repair is claimed. The next aggregate-assignment test is partial inside its runtime helper. Reading extends existing .2.14 and startup .17.1 without closing a repair; no production change, dependency build, canonical run or push is claimed; .2.5–.2.14 and all prerequisites remain.
 
 - `2026-09-21` .1.79: 11 complete windows cover 1,128 fragments / 65,516 baseline bytes; ordered window SHA-256 6c7eecbae2348e4e71e41d2ad0a66a2e3f146b18202b4e608f81794c79689cbc. Cumulative reading is 79/143 groups, 95,686 fragments / 4,216,269 baseline bytes and 97 complete files. Phase0 is partial through line 46191. Unchanged canonical commit ec10be6b retains PASS for 19 completed subtests, ordinals 983–1001 with 246 direct assertions and no nested plans. Exact TAP numbering and source identity are verified. Scalar-held binding counts, exact runtime values and genuine operator/helper contrasts remain meaningful. Identical direct-path, set-node, helper-twin and spacing inputs cannot establish the advertised contrast; existing .2.14 owns these specific cases. A fresh three-assertion public lowering probe passes. Newline checks cover balanced payloads, CRLF/CR, marker chains and the switch do-block terminator. The next colon-hash test is partial after JSON setup. Reading extends existing .2.14 without closing a repair; no production change, dependency build, canonical run or push is claimed; .2.5–.2.14 and all prerequisites remain.
 
@@ -2831,6 +2841,8 @@ additional reading credit from integration delivery.
 
 ## Commit Log
 
+- `2026-09-21` .1.80: `CONFORMANCE-SOURCE-READING.1.80 - read shape and receiver checks and own absent host-slot leakage`; activation a19e2588e; .1.81 follows clean handoff and empty brief.
+
 - `2026-09-21` .1.79: `CONFORMANCE-SOURCE-READING.1.79 - read binding and newline checks and extend observation repair`; activation 6ae473495; .1.80 follows clean handoff and empty brief.
 
 - `2026-09-21` .1.78: `CONFORMANCE-SOURCE-READING.1.78 - read function staging and own working variable observation drift`; activation 2defd6def; .1.79 follows clean handoff and empty brief.
@@ -2960,6 +2972,8 @@ additional reading credit from integration delivery.
 - `2026-09-13`: Decomposition lands under `SESSION-STARTUP-READING.3.8.0`; Git owns the resulting commit identity.
 
 ## Changelog
+
+- `2026-09-21` .1.80: Shape/receiver and numeric comparison checks retain exact results; startup .17.1 now owns reproduced absent-receiver host-slot leakage and .2.14 owns remaining obsolete target descriptions.
 
 - `2026-09-21` .1.79: Binding and newline tests preserve concrete runtime and lowering claims; .2.14 now owns the adjacent collapsed comparisons and stale descriptions.
 
