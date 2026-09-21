@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.54 - read structured branch and lifecycle equivalence coverage
+
+Read Phase0 16880–18057:54/143 groups,67,552 fragments/2,639,708 baseline bytes. Retained proof covers20 completed subtests/227 direct assertions, including12 nested results whose inner plans separately pass96 assertions. No new defect or runtime execution; all repairs remain. Exact windows and comprehension are task/card-owned; .1.55 continues the seven-tag lifecycle test.
+
 ## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.53 - read collection and branch lowering contracts
 
 Read Phase0 16062–16879:53/143 groups,66,374 fragments/2,574,186 baseline bytes. Retained proof covers13 completed subtests/224 assertions. Fresh lowering confirms two push descriptions still claim wrapped targets despite bare inputs; .2.9 owns correction. Exact windows, comprehension and recipe are task/card-owned. .1.54 continues the partial lifecycle switch/case test; all prior repairs remain.

@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `CONFORMANCE-SOURCE-READING`
-- Status: `active` / exact decomposition; physical reading 53/143
+- Status: `active` / exact decomposition; physical reading 54/143
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.8`
 - Created: `2026-09-13`
 - Last updated: `2026-09-21`
@@ -970,14 +970,21 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
   Commit: `CONFORMANCE-SOURCE-READING.1.53 - read collection and branch lowering contracts`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.54`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `c7585a9604820c3c015ebc4ddcb2eafa5259fa7d`.
+  Verification tier: `focused`
+  Focused checks: Complete source reading, exact baseline/window and retained canonical direct/nested TAP proof; Knowledge, preservation, memory, both history checks, book, direct public checks and normal doctrines.
+  Canonical trigger: Ordinary bounded reading and fact reconciliation only; no runtime, dependency, public-contract, infrastructure or parent-closeout change.
   Goal: Read and understand conformance/test/Unicode group 54.
   Scope: `t/phase0_regression.t` lines 16880-18057
   Baseline evidence: 1178 fragments / 65522 decoded bytes; ordered range SHA-256 `f002e310ba21be1c3e18ddd52ff977d482292dcc9bf5150b6803b76517aa4f06`.
   Dependencies: .1.53 committed with clean handoff.
   Acceptance: Read every scoped byte in complete bounded windows; retain source identity, exact comprehension, canonical Knowledge reconciliation, concrete finding ownership, focused proof and per-leaf continuity. Unread crossing constructs retain the next range owner.
-  Verification: `pending`
-  Commit: `pending`
+  Reading evidence: 11 complete windows / 1178 fragments / 65522 bytes; ordered window SHA-256 `dfbb974fc119147c1fa1ef5035b4098fd8430e1190a99a873d6e51382ff77abb`.
+  Comprehension: Multi-step action-edge and LX fluent/structured if/switch pairs compare exact ACODE/LXCODE, canonical node coverage, readiness and zero fallback/raw-dependency/unresolved counts; helpers ASSIGN/PUSH/SAY remain represented. Inline switch list, parenthesized structured branch, and attached case/default forms preserve code output; attached switch hit maps contain RETURN2 on action edges versus RETURN3 for LX because the separate authored action return is counted too. Inline if versus marker form filters marker-only ENDIF before comparing node coverage. Inline/list/structured/attached if twins retain action/LX code equality and node presence. Two complete lifecycle loops cover I,LS,LE,E,EX,IT, each six nested subtests/eight assertions per tag, comparing its code field plus canonical nodes/hits. Fluent outer action attached-if compares metadata/node/hit/readiness but has no exact ACODE assertion. None of these read fixtures executes its target parser or proves generated-module/runtime equivalence. Final seven-tag loop adds LX and is read only through its two descriptor-build assertions and first metadata assignment. No new defect established; existing branch runtime and test repair owners remain open.
+  Verification: Unchanged canonical commit ec10be6b retains PASS for 20 completed subtests, ordinals 487–506 with 227 direct assertions, including12 nested subtest results. Those12 nested plans independently pass96 inner assertions (six lifecycle tags/eight assertions in each of two loops); every TAP sequence and unchanged Phase0/own Perl/spec identity is verified. The next seven-tag lifecycle loop has fixtures and two descriptor-build assertions read per iteration, stopping at its first metadata assignment; .1.55 owns the remaining six assertions per tag. No new defect, runtime execution, repair, dependency build, canonical run or push is claimed. Whole-gate1032 proof remains retained, and all existing repair prerequisites remain.
+  Candidate proof: Exact 160-input/143-group/302-range audit and eleven-window replay pass. Preservation verifies 2,849 other files / 50,645,496 bytes, 512 prior task nodes, 53 other book files and all 1,039 headings; all earlier repairs, historical ranges, recipes, histories and parent Gitlink remain exact. Direct and nested retained TAP plans reconcile independently. Memory, both history-pressure checks, mdBook, public mutation (69 files / 50 mutations), public selector (68 files / 11 contrast mutations) and diff checks pass. Hot histories are changes180 lines/32729 bytes and notes176/32992, below rollover. Knowledge is1,153 facts/9,246 keys. Normal nine-doctrine hooks govern landing; no new canonical run is required by this focused leaf.
+  Commit: `CONFORMANCE-SOURCE-READING.1.54 - read structured branch and lifecycle equivalence coverage`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.55`
   Status: `pending`
@@ -2454,7 +2461,7 @@ additional reading credit from integration delivery.
 
 | Rank | Leaf | Status | Next action |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.54` | `pending` | Read Phase0 lines 16880–18057 (1,178 fragments / 65,522 baseline bytes), completing lifecycle switch/case assertion12. Repairs .2.5–.2.9 and earlier repairs retain required-reading prerequisites. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.55` | `pending` | Read Phase0 lines 18058–19557 (1,500 fragments / 63,518 baseline bytes), continuing the seven-tag fluent attached-if lifecycle test. Repairs .2.5–.2.9 and earlier repairs retain required-reading prerequisites. |
 
 ## Decisions
 
@@ -2466,6 +2473,8 @@ additional reading credit from integration delivery.
 - None at decomposition. Ordinary source repairs retain startup prerequisites; later collection pressure must be measured rather than assumed away.
 
 ## Verification Log
+
+- `2026-09-21` .1.54: Eleven complete windows cover 1,178 fragments / 65,522 baseline bytes; ordered window SHA-256 dfbb974fc119147c1fa1ef5035b4098fd8430e1190a99a873d6e51382ff77abb. Cumulative reading is 54/143: 67,552 fragments / 2,639,708 baseline bytes and 97 complete files. Phase0 is partial through line 18057. Unchanged canonical commit ec10be6b retains PASS for 20 completed subtests, ordinals 487–506 with 227 direct assertions, including12 nested subtest results. Those12 nested plans independently pass96 inner assertions (six lifecycle tags/eight assertions in each of two loops); every TAP sequence and unchanged Phase0/own Perl/spec identity is verified. The next seven-tag lifecycle loop has fixtures and two descriptor-build assertions read per iteration, stopping at its first metadata assignment; .1.55 owns the remaining six assertions per tag. No new defect, runtime execution, repair, dependency build, canonical run or push is claimed. Whole-gate1032 proof remains retained, and all existing repair prerequisites remain.
 
 - `2026-09-21` .1.53: Eleven complete windows cover 818 fragments / 65,478 baseline bytes; ordered window SHA-256 81bcf143f79f0bceb1342b47b28ffae9f64dec588fbb8daa76da2a9ad35d14c8. Cumulative reading is 53/143: 66,374 fragments / 2,574,186 baseline bytes and 97 complete files. Phase0 is partial through line 16879. Unchanged canonical commit ec10be6b retains PASS for 13 completed subtests, ordinals 474–486 with 224 assertions; sequential TAP numbers and unchanged Phase0/own Perl/spec identities are verified. Fresh Toolbox extraction confirms exactly two wrapped-target descriptions actually exercise bare items bindings; .2.9 owns correction while preserving the two-bare-token static-handler precedence. The lifecycle switch/case equivalence test has11 completed assertions and the final compound assertion read only through its DEFAULT predicate; .1.54 owns its suffix. Retained whole-gate proof remains1032 top-level tests, separate from fresh focused diagnosis. The malformed num_min fixture remains .2.8-owned; no runtime repair, dependency build, new canonical run or push is claimed.
 
@@ -2545,6 +2554,8 @@ additional reading credit from integration delivery.
 
 ## Commit Log
 
+- `2026-09-21` .1.54: `CONFORMANCE-SOURCE-READING.1.54 - read structured branch and lifecycle equivalence coverage`; activation c7585a960; .1.55 follows clean handoff and empty brief.
+
 - `2026-09-21` .1.53: `CONFORMANCE-SOURCE-READING.1.53 - read collection and branch lowering contracts`; activation 0e7552f9f; .1.54 follows clean handoff and empty brief.
 
 - `2026-09-21` .1.52: `CONFORMANCE-SOURCE-READING.1.52 - read entry and match helpers and diagnose invalid numeric fixture`; activation b71ea10ae; .1.53 follows clean handoff and empty brief.
@@ -2622,6 +2633,8 @@ additional reading credit from integration delivery.
 - `2026-09-13`: Decomposition lands under `SESSION-STARTUP-READING.3.8.0`; Git owns the resulting commit identity.
 
 ## Changelog
+
+- `2026-09-21` .1.54: Read action/LX branch forms and six-tag lifecycle equivalence loops; preserve code/metadata versus runtime boundaries, exact nested TAP proof and all earlier repairs.
 
 - `2026-09-21` .1.53: Read collection/push/structured-return and branch equivalence coverage; own two stale wrapped-target descriptions under .2.9 and preserve .2.8 and all earlier repairs.
 

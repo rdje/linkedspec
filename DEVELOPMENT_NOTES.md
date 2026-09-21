@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.54 - read structured branch and lifecycle equivalence coverage
+
+Branch fixtures establish code/metadata equality, not target execution. Inline-if comparisons remove marker-only ENDIF; LX switch hit counts include the separate action return. Two six-tag loops have96 inner assertions, counted separately from227 direct assertions including12 nested results. Canonical comprehension: conformance-perl-consumer-reading.
+
 ## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.53 - read collection and branch lowering contracts
 
 Collection/branch equivalence tests compare metadata and selected ICODE/ACODE/LXCODE fields, separately from executed push controls. Two bare-target push inputs retain inaccurate wrapped-target labels; .2.9 owns wording correction, with exact lowering in conformance-perl-consumer-reading. Static child-call precedence remains intact.

@@ -2299,7 +2299,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Status: `active`
   Goal: Split and read all 160 entries under capability_conformance, cli_conformance, t, tests, and unicode_case.
   Children: `.3.8.0` owns exact decomposition; `CONFORMANCE-SOURCE-READING.1` owns all143 reading groups; .2 findings and .3 independent closeout stay separate.
-  Reading owner: `docs/tasks/CONFORMANCE-SOURCE-READING.md`;143 groups/302 baseline ranges over160 inputs. Physical reading53/143:66,374 fragments/2,574,186 baseline bytes and97 complete files; Phase0 through16879. Approved113-byte inventory delta stays separately pinned. Retained ec10be6b proof covers13 completed subtests/224 assertions; .1.54 continues. Fresh push-label lowering owns .2.9 alongside .2.5–.2.8; all repair prerequisites remain. ADR0122/containment .15 are canonically admitted at ec10be6b.
+  Reading owner: `docs/tasks/CONFORMANCE-SOURCE-READING.md`;143 groups/302 baseline ranges over160 inputs. Physical reading54/143:67,552 fragments/2,639,708 baseline bytes and97 complete files; Phase0 through18057. Approved113-byte inventory delta stays separately pinned. Retained ec10be6b proof covers20 completed subtests/227 direct assertions, including12 nested results with96 verified inner assertions. .1.55 continues the seven-tag lifecycle loop. No new defect; .2.5–.2.9 and all repair prerequisites remain. ADR0122/containment .15 are canonically admitted at ec10be6b.
   Acceptance: Include phase0, neutral contracts, fixtures, generators, and four explicitly decoded pinned Unicode
     inputs. Keep generated/fixture bytes in scope; count neither a hash nor enumeration as full reading.
   Verification: `pending`
@@ -4673,7 +4673,7 @@ startup implementation prerequisites and the rgx reading exclusion remain intact
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.54` | `pending` | Read Phase0 lines 16880–18057 (1,178 fragments / 65,522 baseline bytes), completing lifecycle switch/case assertion12. Repairs .2.5–.2.9 and earlier repairs retain required-reading prerequisites. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.55` | `pending` | Read Phase0 lines 18058–19557 (1,500 fragments / 63,518 baseline bytes), continuing the seven-tag fluent attached-if lifecycle test. Repairs .2.5–.2.9 and earlier repairs retain required-reading prerequisites. |
 
 ## Reading Ledger
 
