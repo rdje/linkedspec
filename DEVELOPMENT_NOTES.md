@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.37 - read MCP and loader tests and own header correction
+
+MCP response equality, in-memory wire checks, source exclusions and actual process/timing guarantees are different evidence boundaries. Loader non_regular fixtures are directories; oracle root checks are textual inventory, not corpus execution. The Phase0 header 989 count disagrees with retained exact1032 output; .2.4 owns a stable-header correction after required reading. Native-loader reverify now uses managed storage and the ordinary focused tier.
+
 ## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.36 - read Perl contracts and own helper path repair
 
 TestHelpers.pm constructs one include string and splits it back into arguments; a space inside an include path becomes a script-name boundary. Three local controls isolate the failure without a dependency or production change. Conformance .2.3 owns literal arguments, non-path include-entry policy and independent regression proof. The separate Phase0 local helper is outside this demonstrated result. Test-source comprehension also distinguishes adapted neutral fixtures, same-process generated loading, AST projection and emitted-text checks from broader runtime claims.

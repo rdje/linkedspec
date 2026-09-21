@@ -9,11 +9,12 @@ answers:
   - what structured error does Perl native spec loading throw
   - how does Perl retain loaded spec identity through compilation
   - what did FUTURE-PARITY-BACKLOG 1.6.4.5 implement
-date: 2026-07-11
+date: 2026-09-21
 status: current
 tags: [perl, resolution, files, utf8, diagnostics, native-api, parity, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.1.6.4.5 adds public LinkedSpec::SpecLoader and t/native_spec_resolution.t, consumes all 14 name + 9 resolution + 4 text cases directly, composes into LinkedSpec::Get with identity and structured errors, wires proof into canonical CI, and passes Phase 0 1..1030 plus 61x2 CLI."
-reverify: "PERL5LIB= prove -v -Iperl t/native_spec_resolution.t && PERL5LIB= bash tools/run_ci_local.sh"
+evidence_update_2026_09_21: "CONFORMANCE-SOURCE-READING.1.37 reads the complete 222-line consumer. Retained unchanged canonical 87b35665e proof passes 5 top-level tests. The fixture represents non_regular as a directory, and the current reverify command uses managed project storage with ordinary focused verification. No new canonical run or broader file-kind proof is claimed."
+reverify: "bash tools/project_data_run.sh env PERL5LIB= prove -v -Iperl t/native_spec_resolution.t"
 ---
 
 `LinkedSpec::SpecLoader` is Perl's portable file-oriented API. `name_request(...)` selects a traversal-safe logical

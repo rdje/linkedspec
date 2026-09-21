@@ -498,21 +498,21 @@ the director's focused-verification grant used for this correction and the separ
 supporting-reading closeout. Reading completion establishes audited comprehension;
 it does not close the six grammar/literal repair roots or establish runtime signoff.
 Conformance, test and Unicode reading has exact ownership for all 160 inputs in
-143 bounded groups covering 8,257,059 baseline decoded bytes. Thirty-six groups account for
-48,038 fragments and 1,464,284 baseline bytes, including 91 complete files. Gap, shared-helper,
-logical, mutation and MCP-binding tests are fully read; MCP admission reaches line 451.
-Fresh logical/mutation proof passes 16 top-level tests. Prior unchanged gap and MCP proof
-remains separately scoped; executing a complete test target gives no unread-source credit.
-Logical fixtures adapt their neutral entry action to a Perl action edge. Generated logical
-roles load into the same process; their primary-command test launches a separate process.
-The mutation suite's final emitted-source checks inspect text. MCP comparison uses native
-capability and query results; individual error cases do not resolve the known mixed-error
-precedence discrepancy. Historical source ranges and the pinned 113-byte inventory delta
-remain separate, and existing parser/runtime repairs stay open.
-A new bounded helper probe confirms that the exported test subprocess utility splits include
-paths at spaces. Plain and literal-argument controls succeed. Repair .2.3 owns correction and
-regression checks after required reading; this is not a demonstrated parser or Phase0 failure.
-No production behavior changes in this reading slice.
+143 bounded groups covering 8,257,059 baseline decoded bytes. Thirty-seven groups account for
+49,538 fragments and 1,527,897 baseline bytes, including 97 complete files. MCP admission,
+decoded dispatch, stdio, native resolution, helper metadata and oracle source checks are fully
+read; Phase0 reaches line 43. Fresh metadata/oracle checks pass 9 top-level tests. Earlier
+unchanged MCP and native-loader proof remains scoped to its exact consumers.
+MCP tests use in-memory streams and bounded fixtures, with native-result comparisons,
+policy call counts, framing, cancellation and release checks. Their response equality is
+not timing proof, and overlong-input outcomes are not peak-memory measurements. The known
+combined-error ordering issue stays open. The native loader's non-regular fixture is a
+directory; the oracle test scans source shapes without executing its corpus.
+Historical reading ranges remain separate from the pinned 113-byte integration delta.
+The Phase0 header's 989 count is stale: retained canonical output has 1,031 subtests
+and 1,032 top-level tests;
+repair .2.4 owns the comment correction after full reading. Helper path repair .2.3 and all
+existing parser/runtime repairs retain their prerequisites. No production behavior changes.
 The director has requested integration guides and runnable consumer examples for
 Perl, Rust, Dart, Julia and Lua, covering recursive checkout, dependency preparation
 and reuse, native APIs, results/errors and packaging. This temporary activity is

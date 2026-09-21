@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `CONFORMANCE-SOURCE-READING`
-- Status: `active` / exact decomposition; physical reading 36/143
+- Status: `active` / exact decomposition; physical reading 37/143
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.8`
 - Created: `2026-09-13`
 - Last updated: `2026-09-21`
@@ -679,14 +679,22 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
   Commit: `CONFORMANCE-SOURCE-READING.1.36 - read Perl contracts and own helper path repair`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.37`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `22e0b2d46b2e926508575915f3577b791cdd2c4f`.
+  Verification tier: `focused`
+  Focused checks: Complete bounded physical source reading; verify exact baseline ranges, reconcile canonical Knowledge and retained unchanged test proof, then validate documentation, memory, book, histories, preservation and normal doctrines.
+  Canonical trigger: Ordinary bounded source-reading leaf; no runtime, dependency, public-contract, infrastructure or parent-closeout change. Existing repair prerequisites remain.
   Goal: Read and understand conformance/test/Unicode group 37.
+  Finding owner: `.2.4` owns the stale Phase0 header count (989 versus retained 1031 subtests / 1032 total tests); preserve full source-reading prerequisites and executable assertions.
   Scope: `t/mcp_server_perl_admission.t` lines 452-656; `t/mcp_server_perl_dispatch.t` lines 1-403; `t/mcp_server_perl_stdio.t` lines 1-472; `t/native_spec_resolution.t` lines 1-222; `t/noncurrent_helper_metadata.t` lines 1-68; `t/oracle_root_target_regex_semantics.t` lines 1-87; `t/phase0_regression.t` lines 1-43
   Baseline evidence: 1500 fragments / 63613 decoded bytes; ordered range SHA-256 `9d2fc07302eebc1f1dcc1294523f599be987d9834a59648e1c92f958cd06a42c`.
   Dependencies: .1.36 committed with clean handoff.
   Acceptance: Read every scoped byte in complete bounded windows; retain source identity, exact comprehension, canonical Knowledge reconciliation, concrete finding ownership, focused proof and per-leaf continuity. Unread crossing constructs retain the next range owner.
-  Verification: `pending`
-  Commit: `pending`
+  Reading evidence: 14 complete windows / 1500 fragments / 63613 bytes; ordered window SHA-256 `98d4de26a6f747975c45fe91277d218c6947936925d1ae233586706bef952d64`.
+  Comprehension: MCP admission closes all twelve ordered roles with policy call counts, indistinguishable response values, cancellation boundaries, fixed I/O diagnostics, cleanup and static API/source exclusions. Decoded tests distinguish omitted/partial overlays from explicit lower ceilings; stdio tests preserve lexical numeric IDs, exact UTF-8 byte limits, duplicate/depth/line handling, canonical LF framing, final EOF frames and continuation after rejected input. These use in-memory handles and bounded fixtures, not process-launch or timing/peak-memory measurements. Native resolution consumes all 14 name, 9 resolution and 4 text cases, models non_regular as a directory, and checks compiled identity and typed errors. Retired-helper tests inspect metadata; oracle tests inspect source shapes and counts without executing the corpus. Phase0 prefix contains its imports and a stale 989 header count; .2.4 owns correction against the retained 1032 plan.
+  Verification: Fresh managed metadata/oracle checks pass 9 top-level tests. Unchanged integration commit 87b35665e retains native-loader (5), MCP binding/dispatch/stdio (23), admission (13) and Phase0 1032 proof. Full-target execution grants no reading credit to the unread Phase0 body. Header correction .2.4 is pending after prerequisites; helper repair .2.3 and existing runtime repairs remain open. No dependency build, new canonical run or push is claimed.
+  Candidate proof: Exact coverage and fourteen-window replay pass. Preservation verifies 2,843 other files / 50,531,501 bytes, 502 earlier task nodes, 53 other book files and all 1,039 book headings; prior histories, coverage recipes, dependency pins and original edits remain exact. Memory, both history-pressure checks, mdBook, public mutation (69 files / 50 mutations), public selector (68 files / 11 contrast mutations) and diff checks pass. Knowledge remains at 1,151 facts / 9,209 keys; normal nine-doctrine hooks govern landing.
+  Commit: `CONFORMANCE-SOURCE-READING.1.37 - read MCP and loader tests and own header correction`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.38`
   Status: `pending`
@@ -1758,6 +1766,7 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
   Reading .1.30 extension: New .2.1 owns the exact stale neutral uniform-binding rollout guidance; its implementation and independent closeout remain prerequisite-gated. No runtime defect follows from the unchanged neutral cases.
   Reading .1.31 extension: .2.2 owns the CLI guide standalone command missing its required managed-storage setup, with implementation and independent verification children. Frozen future-neutral mutation strings remain intentionally preserved under their admitted canonical authorities and are not new runtime defects.
   Reading .1.36 extension: .2.3 owns the confirmed exported test-helper include-path split; plain and literal-argument controls isolate the mechanism. Repair remains prerequisite-gated, with no inferred Phase0 failure.
+  Reading .1.37 extension: .2.4 owns the stale literal Phase0 header count; retained unchanged canonical output establishes 1031 subtests and the 1032-test plan. No runtime failure or new gate is inferred.
   Commit: `pending`
 
 - ID: `CONFORMANCE-SOURCE-READING.2.1`
@@ -1841,6 +1850,16 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
   Verification: `pending`
   Commit: `pending`
 
+- ID: `CONFORMANCE-SOURCE-READING.2.4`
+  Status: `pending`
+  Goal: Remove the stale literal Phase0 header count after complete source reading.
+  Evidence: .1.37 reads t/phase0_regression.t line3 claiming 989 subtests. The unchanged-source canonical run at 87b35665e has 1031 top-level subtest headers, 1032 passing top-level assertions and exact plan 1..1032. The header is a stale navigation comment, not a failing runtime or a new canonical execution.
+  Scope: The Phase0 header's current test-count claim; preserve every executable assertion and distinguish approximate navigation from authoritative runtime counts.
+  Dependencies: Required source/book/policy reading, including the remaining Phase0 body.
+  Acceptance: Replace the drifting literal with a stable description or a mechanically checked authoritative count; preserve executable bytes, run focused syntax/header verification and applicable preservation checks, update Knowledge/book continuity and commit. Do not edit assertions to match the old comment.
+  Verification: `pending`
+  Commit: `pending`
+
 - ID: `CONFORMANCE-SOURCE-READING.3`
   Status: `pending`
   Goal: Independently reconcile all source/range/reading-commit/repair evidence and close only the required reading lane with applicable verification.
@@ -1868,7 +1887,7 @@ additional reading credit from integration delivery.
 
 | Rank | Leaf | Status | Next action |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.37` | `pending` | Continue MCP admission 452–656 and its exact seven-source, 1,500-fragment / 63,613-byte scope. Helper repair .2.3 and all earlier repairs retain their prerequisites. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.38` | `pending` | Read Phase0 lines 44–1110: 1,067 fragments / 65,529 baseline bytes. Keep header .2.4, helper .2.3 and all runtime repairs prerequisite-gated. |
 
 ## Decisions
 
@@ -1880,6 +1899,8 @@ additional reading credit from integration delivery.
 - None at decomposition. Ordinary source repairs retain startup prerequisites; later collection pressure must be measured rather than assumed away.
 
 ## Verification Log
+
+- `2026-09-21` .1.37: Fourteen complete windows cover 1,500 fragments / 63,613 baseline bytes; ordered window SHA-256 98d4de26a6f747975c45fe91277d218c6947936925d1ae233586706bef952d64. Cumulative reading is 37/143: 49,538 fragments / 1,527,897 baseline bytes and 97 complete files. Phase0 remains partial at lines 1–43. Fresh managed metadata/oracle checks pass 9 top-level tests. Unchanged integration commit 87b35665e retains native-loader (5), MCP binding/dispatch/stdio (23), admission (13) and Phase0 1032 proof. Full-target execution grants no reading credit to the unread Phase0 body. Header correction .2.4 is pending after prerequisites; helper repair .2.3 and existing runtime repairs remain open. No dependency build, new canonical run or push is claimed.
 
 - `2026-09-21` .1.36: Eleven complete windows cover 1,500 fragments / 58,957 baseline bytes; ordered window SHA-256 071b58880845a0a7108956fb5110d4cc52fb015640fdb95b9e4d286d3e472f1f. Cumulative reading is 36/143: 48,038 fragments / 1,464,284 baseline bytes and 91 complete files. MCP admission remains partial through line 451. Fresh managed logical/map-leaves tests pass 16 top-level tests. Exact unchanged integration proof retains gap (124) and admission (13), plus the binding target within the earlier three-target MCP group (23 tests). Three bounded helper controls confirm the literal include-path defect and its mechanism; .2.3 owns implementation and independent verification after required prerequisites. No production repair, dependency build, new canonical CI or push is claimed.
 
@@ -1923,6 +1944,8 @@ additional reading credit from integration delivery.
 
 ## Commit Log
 
+- `2026-09-21` .1.37: `CONFORMANCE-SOURCE-READING.1.37 - read MCP and loader tests and own header correction`; activation 22e0b2d46; next .1.38 after clean handoff and empty brief.
+
 - `2026-09-21` .1.36: `CONFORMANCE-SOURCE-READING.1.36 - read Perl contracts and own helper path repair`; activation bd4ffa4ca; .1.37 follows clean handoff and empty brief.
 
 - `2026-09-21` .1.35: `CONFORMANCE-SOURCE-READING.1.35 - read generated and gap consumers and reconcile source delta`; activation 87b35665e; next .1.36 after clean handoff and zero-byte brief.
@@ -1964,6 +1987,8 @@ additional reading credit from integration delivery.
 - `2026-09-13`: Decomposition lands under `SESSION-STARTUP-READING.3.8.0`; Git owns the resulting commit identity.
 
 ## Changelog
+
+- `2026-09-21` .1.37: Complete six more source files, begin Phase0 imports and own stale header correction .2.4.
 
 - `2026-09-21` .1.36: Complete five more source files, read MCP admission through line 451, and own the exported helper include-path repair under .2.3.
 
