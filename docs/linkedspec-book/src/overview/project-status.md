@@ -498,12 +498,12 @@ the director's focused-verification grant used for this correction and the separ
 supporting-reading closeout. Reading completion establishes audited comprehension;
 it does not close the six grammar/literal repair roots or establish runtime signoff.
 Conformance, test and Unicode reading has exact ownership for all 160 inputs in
-143 bounded groups covering 8,257,059 baseline decoded bytes. Sixty-three groups account for
-80,753 fragments and 3,179,902 baseline bytes, including 97 complete files. Phase0 reading
-reaches line 31258. Several cross-family inline/marker switch fixtures check only selected
-control nodes in the marker descriptor; they do not compare the complete node lists or hit
-maps. The carried multi-case marker-switch lifecycle test does compare node lists. These
-metadata observations remain distinct, and target branch execution is unproved.
+143 bounded groups covering 8,257,059 baseline decoded bytes. Sixty-four groups account for
+82,253 fragments and 3,234,113 baseline bytes, including 97 complete files. Phase0 reading
+reaches line 32758. Same-family nested-switch pairs compare canonical node and hit maps.
+Deep mutual marker if/switch fixtures check minimum IF/SWITCH/CASE/DEFAULT helper counts
+and required control nodes. Those are descriptor metadata checks; target branch execution
+remains unproved. Explicit absent-slot checks make a separate shape claim.
 
 **The earlier generated-code equivalence claim remains withdrawn:** absent uppercase
 code slots cannot establish emitted-code equality. Code-output-labelled comparisons remain
@@ -511,12 +511,12 @@ in .2.10, which owns meaningful code/behavior observations and a changed-payload
 control. Repair .2.11 owns invalid scalar dereferences of source chunks; explicit scalar
 capture works.
 
-Ten completed subtests retain canonical proof with 90 direct assertions, including 35
-nested results whose inner plans verify 252 assertions. The next lifecycle fixture remains
-partially read; .1.64 continues. MethodExpr .2.5, EmitContext descriptions .2.6, mark_copy
-.2.7, invalid num_min fixture .2.8 and push descriptions .2.9 remain open. No independently
-reproduced new defect or target execution is established. The pinned 113-byte inventory
-delta and all repair prerequisites remain unchanged.
+Eleven completed subtests retain canonical proof with 95 direct assertions, including 42
+nested results whose inner plans verify 329 assertions. The next composite-if deep-marker
+action fixture remains partially read; .1.65 continues. MethodExpr .2.5, EmitContext
+descriptions .2.6, mark_copy .2.7, invalid num_min fixture .2.8 and push descriptions .2.9
+remain open. No independently reproduced new defect or target execution is established.
+The pinned 113-byte inventory delta and all repair prerequisites remain unchanged.
 
 The director approved the finite documentation-capacity proposal under ADR0122.
 Containment `.15` admits exactly fourteen controls for the remaining 93 reading
@@ -543,7 +543,7 @@ The history files keep their 512-line / 65,536-byte caps, mandatory rollover and
 immutable archives. General card/part limits remain unchanged. Admission consumes
 one of the conservative 99 reserve units; the remaining 98 units are forecast
 after actual admission overhead. This capacity does not complete source reading
-or repair tests: reading now reaches 63/143, `.1.64` is next, and the test and recipe
+or repair tests: reading now reaches 64/143, `.1.65` is next, and the test and recipe
 repairs `.2.5`–`.2.11` remain open.
 
 The director has requested integration guides and runnable consumer examples for

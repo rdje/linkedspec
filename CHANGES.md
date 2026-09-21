@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.64 - read mutual marker nesting and bounded helper coverage
+
+Read Phase0 31259–32758: 64/143 groups, 82,253 fragments / 3,234,113 baseline bytes. Retained eleven-subtest proof has 95 direct assertions, including 42 nested results / 329 inner assertions. Same-family node/hit comparisons and deep mutual marker helper thresholds retain exact metadata limits; code-output-labelled slot comparisons remain .2.10-owned. No new runtime execution or repair; .1.65 continues the partial action fixture.
+
 ## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.63 - read outer-family selected-node checks and comparison limits
 
 Read Phase0 29759–31258: 63/143 groups, 80,753 fragments / 3,179,902 baseline bytes. Retained ten-subtest proof has 90 direct assertions, including 35 nested results / 252 inner assertions. Selected marker-node checks are distinct from complete node-list or hit-map equality; code-output-labelled slot comparisons remain .2.10-owned. No new runtime execution or repair; .1.64 continues the partial lifecycle fixture.

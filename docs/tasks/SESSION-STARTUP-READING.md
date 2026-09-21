@@ -2299,7 +2299,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Status: `active`
   Goal: Split and read all 160 entries under capability_conformance, cli_conformance, t, tests, and unicode_case.
   Children: `.3.8.0` owns exact decomposition; `CONFORMANCE-SOURCE-READING.1` owns all143 reading groups; .2 findings and .3 independent closeout stay separate.
-  Reading owner: `docs/tasks/CONFORMANCE-SOURCE-READING.md`; 143 groups/302 baseline ranges over160 inputs. Physical reading63/143:80,753 fragments/3,179,902 baseline bytes and97 complete files; Phase0 through31258. Approved113-byte inventory delta stays separate. Retained ten-subtest proof has90 direct assertions including35 nested results/252 inner assertions. Selected marker-node presence is distinct from node-list equality; existing .2.10 code-observation limits remain; .2.5–.2.11 and all prerequisites remain. .1.64 continues the first composite-if inline-switch lifecycle fixture. ADR0122/containment .15 are canonically admitted at ec10be6b.
+  Reading owner: `docs/tasks/CONFORMANCE-SOURCE-READING.md`; 143 groups/302 baseline ranges over160 inputs. Physical reading64/143:82,253 fragments/3,234,113 baseline bytes and97 complete files; Phase0 through32758. Approved113-byte inventory delta stays separate. Retained eleven-subtest proof has95 direct assertions including42 nested results/329 inner assertions. Deep mutual marker fixtures inspect minimum helper hits and node presence; existing .2.10 code-observation limits remain; .2.5–.2.11 and all prerequisites remain. .1.65 continues the composite-if deep-marker action fixture. ADR0122/containment .15 are canonically admitted at ec10be6b.
   Acceptance: Include phase0, neutral contracts, fixtures, generators, and four explicitly decoded pinned Unicode
     inputs. Keep generated/fixture bytes in scope; count neither a hash nor enumeration as full reading.
   Verification: `pending`
@@ -4673,7 +4673,7 @@ startup implementation prerequisites and the rgx reading exclusion remain intact
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.64` | `pending` | Read Phase0 lines 31259–32758 (1,500 fragments / 54,211 baseline bytes), continuing the first inline-switch fixture in the outer-family composite-if multi-case lifecycle comparison. Repairs .2.5–.2.11 and earlier repairs retain required reading prerequisites. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.65` | `pending` | Read Phase0 lines 32759–33715 (957 fragments / 65,498 baseline bytes), continuing the first fixture of the composite-if branch-block deep mutual marker action test. Repairs .2.5–.2.11 and earlier repairs retain required reading prerequisites. |
 
 ## Reading Ledger
 

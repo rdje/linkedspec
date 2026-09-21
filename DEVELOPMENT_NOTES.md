@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.64 - read mutual marker nesting and bounded helper coverage
+
+Deep mutual marker fixtures require at least three IF/SWITCH/CASE/DEFAULT helper hits and expected control nodes. Standalone lifecycle plans use six assertions; marker outer attached-branch lifecycle plans add explicit undef slot shape. Same-family branch pairs retain node/hit equality but their code-output-labelled slot checks remain .2.10-owned. Six seven-tag loops retain 329 inner assertions; comprehension remains in conformance-perl-consumer-reading.
+
 ## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.63 - read outer-family selected-node checks and comparison limits
 
 The carried eight-assertion lifecycle loop compares node lists; subsequent seven-assertion loops and eleven-assertion action tests only require selected control nodes in the marker descriptor. Neither this presence check nor slot equality establishes complete metadata or execution parity. Five seven-tag loops retain 252 inner assertions. Exact comprehension and .2.10 limits remain in conformance-perl-consumer-reading.
