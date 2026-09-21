@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `CONFORMANCE-SOURCE-READING`
-- Status: `active` / exact decomposition; physical reading 78/143
+- Status: `active` / exact decomposition; physical reading 79/143
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.8`
 - Created: `2026-09-13`
 - Last updated: `2026-09-21`
@@ -1396,14 +1396,21 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
   Commit: `CONFORMANCE-SOURCE-READING.1.78 - read function staging and own working variable observation drift`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.79`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `6ae473495c409fcb08136bf9c5190d875ab41130`.
+  Verification tier: `focused`
+  Focused checks: Complete source/window/coverage and retained TAP checks; reconcile observation boundaries with canonical Knowledge; preservation, memory, histories, rendered book, direct public checks and normal doctrines.
+  Canonical trigger: Ordinary bounded reading and fact reconciliation; no source/public-contract/dependency/infrastructure change or parent closeout.
   Goal: Read and understand conformance/test/Unicode group 79.
   Scope: `t/phase0_regression.t` lines 45064-46191
   Baseline evidence: 1128 fragments / 65516 decoded bytes; ordered range SHA-256 `09f266622584ba8da284fdc9c9d293f178093b42c798d55088e538d9afb16b57`.
   Dependencies: .1.78 committed with clean handoff.
   Acceptance: Read every scoped byte in complete bounded windows; retain source identity, exact comprehension, canonical Knowledge reconciliation, concrete finding ownership, focused proof and per-leaf continuity. Unread crossing constructs retain the next range owner.
-  Verification: `pending`
-  Commit: `pending`
+  Reading evidence: 11 complete windows / 1128 fragments / 65516 bytes; ordered window SHA-256 `6c7eecbae2348e4e71e41d2ad0a66a2e3f146b18202b4e608f81794c79689cbc`.
+  Comprehension: Current scalar-held bindings support exact helper lowering, declaration counts and repeated-call runtime values. Several adjacent migrated comparisons use identical inputs and cannot establish the advertised old/new contrast; .2.14 is extended with exact cases. Genuine operator/helper comparisons and typed nested-write distinctions remain meaningful. Newline tests distinguish balanced payloads, CRLF/CR, marker chains and the switch do-block terminator. Explicit mixed-path access returns one; the colon-hash test is partial after its JSON setup.
+  Verification: Unchanged canonical commit ec10be6b retains PASS for 19 completed subtests, ordinals 983–1001 with 246 direct assertions and no nested plans. Exact TAP numbering and source identity are verified. Scalar-held binding counts, exact runtime values and genuine operator/helper contrasts remain meaningful. Identical direct-path, set-node, helper-twin and spacing inputs cannot establish the advertised contrast; existing .2.14 owns these specific cases. A fresh three-assertion public lowering probe passes. Newline checks cover balanced payloads, CRLF/CR, marker chains and the switch do-block terminator. The next colon-hash test is partial after JSON setup. Reading extends existing .2.14 without closing a repair; no production change, dependency build, canonical run or push is claimed; .2.5–.2.14 and all prerequisites remain.
+  Candidate proof: Exact baseline inventory/windows and retained TAP PASS; fresh public lowering 3/3 PASS; Knowledge 1157 facts / 9289 question keys; memory 60 lines; histories 280 lines / 46082 bytes and 278 lines / 49151 bytes; mdBook rendered; mutation and aggregate-selector public checks PASS. Preservation verifies 2852 other tracked files / 50667648 bytes, prior task bodies (including the explicit .2.14 extension), 53 other book files / all 1039 headings, histories and parent gitlink. No canonical rerun or push.
+  Commit: `CONFORMANCE-SOURCE-READING.1.79 - read binding and newline checks and extend observation repair`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.80`
   Status: `pending`
@@ -2244,6 +2251,7 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
   Goal: Align Phase0 working-variable declaration observations and descriptions with current scalar-held typed bindings.
   Evidence: .1.78 public source capture of the exact fluent .push(items) fixture produces one my $items and no my @items, while the test labels absence of my @items as deferred auto-declaration. The adjacent wrapped/setup dedup test now uses bare targets/reads, including two byte-identical scalar fixture strings. Canonical diagnosis: docs/knowledge/phase0-working-variable-observation-drift.md.
   Scope: Audit the contiguous spec_format_terse_1_1_1 and spec_format_terse_1_2_1 test family, including the unread .1.79 continuation, for stale wrapper/sigil/channel claims and vacuous legacy-sigil denials. Preserve genuinely distinct setup, per-invocation and recursion controls; reconcile associated maintained working-variable guidance.
+  Reading .1.79 extension: Audit the adjacent .1_2_3 direct-access self-comparison, .1_4_1 set-node self-comparison and identical terse/canonical fixtures, .1_5_3 identical spacing inputs, and .1_3_4 keyword-argument/deferred-read descriptions. Replace unsupported contrast claims with distinct current-contract cases or direct expected observations; retain meaningful exact lowering, runtime values, declaration counts and repeated-call controls. The .1_5_5_1 explicit-segment test also duplicates its mixed-path expected assertion. No retired syntax is to be reintroduced merely to manufacture a comparison.
   Dependencies: Required source/book/policy reading, including the complete working-variable test family, before tracked test edits. Current .1.78 owns public diagnosis and current-claim correction only.
   Acceptance: Assert the actual nonempty scalar-held binding declarations, reject removal/duplication of the intended lexical declaration, preserve current helper lowering and run-twice scoping positives, replace obsolete wrapper/deferred descriptions with accurate current observations, avoid restoring retired syntax, and independently verify the focused family plus book/Knowledge alignment.
   Verification: `pending`
@@ -2680,7 +2688,7 @@ additional reading credit from integration delivery.
 
 | Rank | Leaf | Status | Next action |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.79` | `pending` | Read Phase0 lines 45064–46191 (1,128 fragments / 65,516 baseline bytes), reading the bare-mutation repeated-invocation test body and subsequent declaration checks. Repairs .2.5–.2.14 and earlier repairs retain required source/book/policy reading prerequisites. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.80` | `pending` | Read Phase0 lines 46192–47307 (1,116 fragments / 65,486 baseline bytes), reading colon-hash literal support and subsequent current syntax checks. Repairs .2.5–.2.14 and earlier repairs retain required source/book/policy reading prerequisites. |
 
 ## Decisions
 
@@ -2692,6 +2700,8 @@ additional reading credit from integration delivery.
 - None at decomposition. Ordinary source repairs retain startup prerequisites; later collection pressure must be measured rather than assumed away.
 
 ## Verification Log
+
+- `2026-09-21` .1.79: 11 complete windows cover 1,128 fragments / 65,516 baseline bytes; ordered window SHA-256 6c7eecbae2348e4e71e41d2ad0a66a2e3f146b18202b4e608f81794c79689cbc. Cumulative reading is 79/143 groups, 95,686 fragments / 4,216,269 baseline bytes and 97 complete files. Phase0 is partial through line 46191. Unchanged canonical commit ec10be6b retains PASS for 19 completed subtests, ordinals 983–1001 with 246 direct assertions and no nested plans. Exact TAP numbering and source identity are verified. Scalar-held binding counts, exact runtime values and genuine operator/helper contrasts remain meaningful. Identical direct-path, set-node, helper-twin and spacing inputs cannot establish the advertised contrast; existing .2.14 owns these specific cases. A fresh three-assertion public lowering probe passes. Newline checks cover balanced payloads, CRLF/CR, marker chains and the switch do-block terminator. The next colon-hash test is partial after JSON setup. Reading extends existing .2.14 without closing a repair; no production change, dependency build, canonical run or push is claimed; .2.5–.2.14 and all prerequisites remain.
 
 - `2026-09-21` .1.78: 11 complete windows cover 1,147 fragments / 65,472 baseline bytes; ordered window SHA-256 5ad019d2a261916fd5179bd2fc9ec14efb9946c205d1841bd9d0d9c8420ac52f. Cumulative reading is 78/143 groups, 94,558 fragments / 4,150,753 baseline bytes and 97 complete files. Phase0 is partial through line 45063. Unchanged canonical commit ec10be6b retains PASS for 22 completed subtests, ordinals 961–982 with 392 direct assertions and no nested plans. Exact TAP numbering and source identity are verified. The selected Markdown scan covers 65 current files, not all tracked Markdown. Self-hosting smokes check bounded completion/defined results; function-body tests check exact AST metadata, spans, jobs, diagnostics and runtime values. Recursion checks distinguish termination, LX sequence results and entry/local match ownership. Genuine declaration-count and repeated-call checks coexist with stale wrapper/channel labels. Public capture plus declaration-removal controls establish .2.14; the next bare-mutation test has only its declaration read. Fresh diagnosis confirms .2.14 without closing a repair; no production change, dependency build, canonical run or push is claimed; .2.5–.2.14 and all prerequisites remain.
 
@@ -2821,6 +2831,8 @@ additional reading credit from integration delivery.
 
 ## Commit Log
 
+- `2026-09-21` .1.79: `CONFORMANCE-SOURCE-READING.1.79 - read binding and newline checks and extend observation repair`; activation 6ae473495; .1.80 follows clean handoff and empty brief.
+
 - `2026-09-21` .1.78: `CONFORMANCE-SOURCE-READING.1.78 - read function staging and own working variable observation drift`; activation 2defd6def; .1.79 follows clean handoff and empty brief.
 
 - `2026-09-21` .1.77: `CONFORMANCE-SOURCE-READING.1.77 - read trace and cursor tests and own missing source observation`; activation c57bd928e; .1.78 follows clean handoff and empty brief.
@@ -2948,6 +2960,8 @@ additional reading credit from integration delivery.
 - `2026-09-13`: Decomposition lands under `SESSION-STARTUP-READING.3.8.0`; Git owns the resulting commit identity.
 
 ## Changelog
+
+- `2026-09-21` .1.79: Binding and newline tests preserve concrete runtime and lowering claims; .2.14 now owns the adjacent collapsed comparisons and stale descriptions.
 
 - `2026-09-21` .1.78: Function staging, runtime values and recursion checks retain bounded claims; new .2.14 owns working-variable observation and description drift.
 

@@ -2299,7 +2299,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Status: `active`
   Goal: Split and read all 160 entries under capability_conformance, cli_conformance, t, tests, and unicode_case.
   Children: `.3.8.0` owns exact decomposition; `CONFORMANCE-SOURCE-READING.1` owns all143 reading groups; .2 findings and .3 independent closeout stay separate.
-  Reading owner: `docs/tasks/CONFORMANCE-SOURCE-READING.md`; 143 groups / 302 baseline ranges over 160 inputs. Physical reading 78/143 groups, 94,558 fragments / 4,150,753 baseline bytes and 97 complete files; Phase0 through 45063. Approved 113-byte inventory delta stays separate. Retained proof: 22 completed subtests, ordinals 961–982 with 392 direct assertions and no nested plans. Function staging, runtime values and recursion checks retain bounded claims; new .2.14 owns working-variable observation and description drift. .2.5–.2.14 and all prerequisites remain. .1.79: reading the bare-mutation repeated-invocation test body and subsequent declaration checks. ADR0122/containment .15 are canonically admitted at ec10be6b.
+  Reading owner: `docs/tasks/CONFORMANCE-SOURCE-READING.md`; 143 groups / 302 baseline ranges over 160 inputs. Physical reading 79/143 groups, 95,686 fragments / 4,216,269 baseline bytes and 97 complete files; Phase0 through 46191. Approved 113-byte inventory delta stays separate. Retained proof: 19 completed subtests, ordinals 983–1001 with 246 direct assertions and no nested plans. Binding and newline tests preserve concrete runtime and lowering claims; .2.14 now owns the adjacent collapsed comparisons and stale descriptions. .2.5–.2.14 and all prerequisites remain. .1.80: reading colon-hash literal support and subsequent current syntax checks. ADR0122/containment .15 are canonically admitted at ec10be6b.
   Acceptance: Include phase0, neutral contracts, fixtures, generators, and four explicitly decoded pinned Unicode
     inputs. Keep generated/fixture bytes in scope; count neither a hash nor enumeration as full reading.
   Verification: `pending`
@@ -4673,7 +4673,7 @@ startup implementation prerequisites and the rgx reading exclusion remain intact
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.79` | `pending` | Read Phase0 lines 45064–46191 (1,128 fragments / 65,516 baseline bytes), reading the bare-mutation repeated-invocation test body and subsequent declaration checks. Repairs .2.5–.2.14 and earlier repairs retain required source/book/policy reading prerequisites. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.80` | `pending` | Read Phase0 lines 46192–47307 (1,116 fragments / 65,486 baseline bytes), reading colon-hash literal support and subsequent current syntax checks. Repairs .2.5–.2.14 and earlier repairs retain required source/book/policy reading prerequisites. |
 
 ## Reading Ledger
 

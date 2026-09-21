@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.79 - read binding and newline checks and extend observation repair
+
+Read current scalar-held declaration/mutation/copy paths, genuine operator/helper contrasts and repeated-call results. Extend existing .2.14 with exact identical-input comparisons (direct path, set nodes, current-helper twins, one spacing pair) and stale keyword/deferred descriptions. These source-qualified gaps do not negate separate exact lowering or runtime assertions. A three-assertion public lowering recipe passes. Retained canonical ordinals 983–1001 cover 246 assertions without a fresh full run. Newline controls distinguish balanced payloads, marker chains and switch do-block termination; the colon-hash test remains partial.
+
 ## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.78 - read function staging and own working variable observation drift
 
 Function-body-v1 tests preserve exact shell AST/body spans, normalized payload/job provenance, deterministic built-in dispatch, source-qualified failures and concrete execution values. They do not re-admit general-v2 staging. Recursion tests separate no-progress termination from LX sequence return and match_group/entry_text ownership. The document-path helper selects eleven named root documents plus book Markdown, yielding 65 current assertions. Public capture of the exact fluent push fixture emits one scalar-held items declaration and zero array declarations. Its six assertions pass after removing the actual declaration; a positive scratch assertion distinguishes the removal. .2.14 owns this observation gap and adjacent stale wrapper descriptions after remaining reading. The initial scratch preparation typo failed before target creation and was discarded; all reported controls use the corrected isolated target.

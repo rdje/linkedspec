@@ -498,42 +498,35 @@ the director's focused-verification grant used for this correction and the separ
 supporting-reading closeout. Reading completion establishes audited comprehension;
 it does not close the six grammar/literal repair roots or establish runtime signoff.
 Conformance, test and Unicode reading has exact ownership for all 160 inputs in
-143 bounded groups covering 8,257,059 baseline decoded bytes. Reading now covers 78/143 groups, 94,558 fragments / 4,150,753 baseline bytes and 97 complete files.
-Phase0 reaches line 45063.
+143 bounded groups covering 8,257,059 baseline decoded bytes. Reading now covers 79/143 groups, 95,686 fragments / 4,216,269 baseline bytes and 97 complete files.
+Phase0 reaches line 46191.
 
-The self-hosting smokes check completion and defined results. Stronger function
-checks separately inspect thirteen definitions, exact body text and spans,
-payload provenance, normalized job paths, stitched body ASTs and diagnostics.
-Their function-body-v1 adapter is distinct from the later general-v2 staged
-parsing contract.
+Working-variable checks cover the current scalar-held bindings: declaration
+counts and placement, copying runtime array or hash values, mutations, direct
+mixed-path access and repeated parser calls. Concrete results and distinct
+operator/helper comparisons remain useful evidence.
 
-Runtime examples preserve concrete values: the staged prototype returns
-["x", "ab", 2, "v"]. User-function tests also cover local-variable isolation,
-early and final returns, nested calls, mutation arguments and receiver chains.
-Wrong arity, recursion, parser-state access and host-shaped function bodies have
-separate descriptor diagnostics; standalone registered calls discard their values.
+**The existing .2.14 repair now includes adjacent migrated comparisons.** Some
+tests compare an expression with itself or compile two identical fixtures while
+describing an old/new syntax contrast. One spacing pair has identical inputs;
+five others actually differ in spacing. A keyword-argument description also
+points to a fixture that now uses set. These cases need accurate observations
+and descriptions, while preserving exact lowering and runtime checks. A fresh
+public probe passes three current lowering expectations; it does not establish
+parser-runtime failure or close the repair.
 
-Recursion tests distinguish termination from result shape. A body wrapper returns
-one form, while a top rule with LX accumulates a sequence of forms. A top rule's
-own matched fields come from match_group; entry_text has no entering match in
-that example. Repeated calls to the same parser check that working state resets.
+Statement checks distinguish newline separators from same-line adjacency and
+protect semicolons/newlines inside balanced payloads. They cover CRLF/CR,
+comments, if/elseif and switch markers. A switch's generated do-block requires
+a terminator before the following statement; an ordinary if block does not.
+The combined control example returns ["elif", "case-b"]. Mixed hash/array access
+returns "one". Typed nested-write and harray-only set_key remain distinct.
 
-**A working-variable test gap is owned by .2.14.** The fluent push fixture now
-emits a scalar-held declaration, but its assertion denies only the old array-sigil
-form and calls declaration deferred. All six assertions pass after the real
-declaration is removed from the observed source. A positive diagnostic assertion
-rejects that removal. Nearby wrapped-target descriptions also refer to fixtures
-that now use bare bindings. The repair will align observations and descriptions
-with the current contract without reintroducing retired syntax.
-
-The 22 completed subtests retain canonical proof with 392 direct assertions and
-no nested plans. A fresh path scan passes its 65 selected documents; that selection
-is narrower than all tracked Markdown. Fresh .2.14 diagnostic controls are recorded
-separately. MethodExpr .2.5 and repairs .2.6–.2.13 remain open, including the
-withdrawn uppercase-slot equivalence claims and the cursor-source presence gap.
-The next bare-mutation test is partial at its declaration; .1.79 continues.
-All repair prerequisites, the unused dependency grammar snapshot and the separate
-113-byte inventory delta remain.
+The 19 completed subtests retain canonical proof with 246 direct assertions and
+no nested plans. The colon-hash literal test is partial after setup; .1.80
+continues. MethodExpr .2.5 and repairs .2.6–.2.14 retain their prerequisites.
+The unused dependency grammar snapshot and separate 113-byte inventory delta
+remain unchanged.
 
 The director approved the finite documentation-capacity proposal under ADR0122.
 Containment `.15` admits exactly fourteen controls for the remaining 93 reading
@@ -560,7 +553,7 @@ The history files keep their 512-line / 65,536-byte caps, mandatory rollover and
 immutable archives. General card/part limits remain unchanged. Admission consumes
 one of the conservative 99 reserve units; the remaining 98 units are forecast
 after actual admission overhead. This capacity does not complete source reading
-or repair tests: reading now reaches 78/143, `.1.79` is next, and the test and recipe
+or repair tests: reading now reaches 79/143, `.1.80` is next, and the test and recipe
 repairs `.2.5`–`.2.14` remain open.
 
 The director has requested integration guides and runnable consumer examples for

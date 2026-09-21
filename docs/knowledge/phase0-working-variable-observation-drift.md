@@ -6,6 +6,7 @@ answers:
   - which Phase0 working-variable test misses a removed scalar declaration
   - why do working-variable dedup tests still describe wrapped targets
   - which task owns Phase0 working-variable observation drift
+  - which migrated Phase0 equivalence tests compare identical current inputs
 date: 2026-09-21
 status: confirmed test observation and description drift; .2.14 repair retains required reading prerequisites
 tags: [perl, phase0, working-variables, tests, uniform-binding, observation-gap]
@@ -44,6 +45,34 @@ meaningful, but they no longer distinguish a bare case from a wrapped case.
 Historical channel comments and sigil claims throughout this family need an
 explicit current-contract audit, including the unread continuation in group 79.
 
+Group 79 has now read that continuation and the adjacent migrated helper tests.
+Its extension to `.2.14` owns these additional bounded observation mismatches:
+
+- `spec_format_terse_1_2_3_3_3_direct_access_bare_path_atoms_auto_exist`
+  compares `return(foo["a"][z])` with itself while describing an explicit-index
+  contrast. Its separate exact lowering and runtime result remain useful.
+- `spec_format_terse_1_4_1_set_is_full_assign_alias` compares the node set for
+  `set(x, 1)` with itself. The old alias claim is unsupported by that comparison;
+  the exact assignment lowering and lexical placement/count checks remain useful.
+- `spec_format_terse_1_4_1_terse_spec_runs_identically_to_canonical` builds two
+  byte-identical current-spelling fixtures. It checks repeat compilation and
+  concrete `["a!","b!","c!"]` results, but does not distinguish helper renames.
+- `spec_format_terse_1_5_3_call_spacing_and_parentheses_locks` has one identical
+  `return(name)` pair labeled a whitespace contrast. Five other pairs actually
+  differ in spacing. Their normalized-node comparisons retain that distinction.
+- The scalar-assignment test labels a `set(name, entry_group(1))` fixture as a
+  `name=entry_group(1)` keyword argument. The append test's deferred-read comment
+  also predates its current bare-binding contract.
+
+Repeated exact expectations elsewhere are not automatically defects. In
+particular, the explicit mixed-path test repeats its expected dereference chain;
+the repair should describe or consolidate that redundancy without claiming a
+missing runtime result. Genuine scalar-assignment/set and append/push contrasts,
+typed nested-write versus harray-only set_key distinctions, mutation results and
+repeated-invocation controls must survive. No production failure follows from
+these source-qualified observation limits, and no sensitivity mutation of these
+additional comparisons is claimed.
+
 `CONFORMANCE-SOURCE-READING.2.14` owns that bounded repair after required
 source/book/policy reading. It must observe actual nonempty scalar-held binding
 declarations, reject declaration removal/duplication, preserve distinct setup,
@@ -53,6 +82,25 @@ The historical channel chronology in [[terse-bare-working-vars-engine-gaps]]
 does not override the current [[perl-uniform-binding-runtime]] contract.
 
 ## Reproduction
+
+For the group-79 extension, inspect the named subtests in the unchanged Phase0
+source and use this public lowering probe. It confirms current outputs; the
+identical fixture inputs themselves establish the missing contrast. The retained
+canonical run at `ec10be6b06934ba87c8c41b1f1f8d079714564a7` passes all nineteen
+completed group-79 subtests (ordinals 983–1001, 246 direct assertions).
+
+```bash
+bash tools/project_data_run.sh perl -Iperl - <<'CURRENT_BINDING_LOWERING'
+use strict; use warnings; use Test::More; use LinkedSpec;
+is(LinkedSpec::call_spec_handler_subst('Top', 'return(foo["a"][z])'),
+   'return $foo->{"a"}->[$z]', 'current mixed-path lowering');
+is(LinkedSpec::call_spec_handler_subst('Top', 'set(x, 1)'),
+   '$x = 1', 'current scalar assignment lowering');
+is(LinkedSpec::call_spec_handler_subst('Top', 'return(name)'),
+   'return $name', 'current bare scalar read');
+done_testing();
+CURRENT_BINDING_LOWERING
+```
 
 ```bash
 bash tools/project_data_run.sh python3 - <<'WORKING_VARIABLE_OBSERVATION'

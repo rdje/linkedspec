@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.79 - read binding and newline checks and extend observation repair
+
+Read Phase0 45064–46191: 79/143 groups, 95,686 fragments / 4,216,269 baseline bytes and 97 complete files. Retained proof covers 19 completed subtests, ordinals 983–1001 with 246 direct assertions and no nested plans. Binding and newline tests preserve concrete runtime and lowering claims; .2.14 now owns the adjacent collapsed comparisons and stale descriptions. The bounded .2.14 inventory is extended; all repairs retain prerequisites; .1.80 continues.
+
 ## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.78 - read function staging and own working variable observation drift
 
 Read Phase0 43917–45063: 78/143 groups, 94,558 fragments / 4,150,753 baseline bytes and 97 complete files. Retained proof covers 22 completed subtests, ordinals 961–982 with 392 direct assertions and no nested plans. Function staging, runtime values and recursion checks retain bounded claims; new .2.14 owns working-variable observation and description drift. Fresh diagnosis is owned by .2.14; all repairs retain prerequisites; .1.79 continues.
