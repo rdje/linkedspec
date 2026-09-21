@@ -498,32 +498,31 @@ the director's focused-verification grant used for this correction and the separ
 supporting-reading closeout. Reading completion establishes audited comprehension;
 it does not close the six grammar/literal repair roots or establish runtime signoff.
 Conformance, test and Unicode reading has exact ownership for all 160 inputs in
-143 bounded groups covering 8,257,059 baseline decoded bytes. Seventy-three groups account for
-89,937 fragments and 3,823,480 baseline bytes, including 97 complete files. Phase0 reading reaches
-line 40442. The new range covers switch/while behavior, semicolonless helper blocks, and
-compatibility and migration metadata.
+143 bounded groups covering 8,257,059 baseline decoded bytes. Seventy-four groups account for
+90,690 fragments and 3,888,884 baseline bytes, including 97 complete files. Phase0 reading
+reaches line 41195 and covers source-boundary projections and legacy classifications.
 
-Retained switch runtime tests select the first matching branch, a later branch and default.
-While tests skip a false initial condition, observe a counter reach 3 after repeated condition
-evaluation, and capture a nonterminating loop's 10,000-iteration guard. The guard yields a
-failed match and diagnostic. Same-line statements after attached controls still require a
-semicolon; this is separate from the resolved newline switch-terminator repair.
+The tests distinguish live cursor, immediate-entry match, local match, anonymous capture,
+named marks and whole-input anchors. For example, capture_slice_len checks an exact width
+expression ending at the local-match left edge; through-cursor helpers inspect the live cursor,
+while rest helpers inspect end-of-input projections. Take variants inspect calls that update
+the anonymous boundary or a named mark, including trace labels.
 
-Readiness metadata distinguishes raw-Perl fallback from unresolved helpers. Compatibility
-forms may remain ready while retaining a separate migration count. For example, supported
-legacy call wrappers lower to handler calls without raw fallback. These are descriptor and
-lowering observations; readiness alone does not establish execution on other backends.
+These tests inspect lowering text and metadata. A runtime-call substring does not independently
+prove full endpoint arithmetic or execute a boundary advance. Legacy print, declaration,
+position and assignment forms remain separately classified; print_each lowers through the
+parse-scoped diagnostic event seam. Readiness metadata alone is not runtime portability proof.
 
-**The earlier generated-code equivalence claim remains withdrawn:** six completed assertions
-in this range still compare absent uppercase slots and remain .2.10-owned. The five-tag
-semicolonless loop checks metadata and helper hits, without generated-code comparison.
-Repair .2.11 owns source-capture recipes; .2.12 owns stale assignment descriptions.
+**The earlier generated-code equivalence claim remains withdrawn:** .2.10 still owns absent
+uppercase-slot comparisons elsewhere. This range's completed tests contain no such comparison
+or parser-result assertion. Repair .2.11 owns source-capture recipes; .2.12 owns stale assignment
+descriptions. The separately admitted typed-source runtime contract remains unchanged.
 
-Twenty-eight completed subtests retain 291 direct plan entries, including five nested results
-whose plans contain 40 assertions. No new defect or fresh runtime run is claimed. Prefix-newline
-linecount remains partial after descriptor build; .1.74 continues. MethodExpr .2.5,
-EmitContext descriptions .2.6, mark_copy .2.7, invalid num_min fixture .2.8, push descriptions
-.2.9 and broader lifecycle repairs remain open. The pinned 113-byte delta and prerequisites remain.
+Twenty-nine completed subtests retain canonical proof with 323 direct assertions and no nested
+plans. No new defect or fresh runtime run is claimed. Split/trim/filter remains partial after
+descriptor build; .1.75 continues. MethodExpr .2.5, EmitContext descriptions .2.6, mark_copy .2.7,
+invalid num_min fixture .2.8, push descriptions .2.9 and broader lifecycle repairs remain open.
+The pinned 113-byte delta and all prerequisites remain.
 
 The director approved the finite documentation-capacity proposal under ADR0122.
 Containment `.15` admits exactly fourteen controls for the remaining 93 reading
@@ -550,7 +549,7 @@ The history files keep their 512-line / 65,536-byte caps, mandatory rollover and
 immutable archives. General card/part limits remain unchanged. Admission consumes
 one of the conservative 99 reserve units; the remaining 98 units are forecast
 after actual admission overhead. This capacity does not complete source reading
-or repair tests: reading now reaches 73/143, `.1.74` is next, and the test and recipe
+or repair tests: reading now reaches 74/143, `.1.75` is next, and the test and recipe
 repairs `.2.5`–`.2.12` remain open.
 
 The director has requested integration guides and runnable consumer examples for

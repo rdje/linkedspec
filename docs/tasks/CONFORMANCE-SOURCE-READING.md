@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `CONFORMANCE-SOURCE-READING`
-- Status: `active` / exact decomposition; physical reading 73/143
+- Status: `active` / exact decomposition; physical reading 74/143
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.8`
 - Created: `2026-09-13`
 - Last updated: `2026-09-21`
@@ -1310,14 +1310,22 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
   Commit: `CONFORMANCE-SOURCE-READING.1.73 - read switch safety and compatibility migration observations`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.74`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `8bb0fd15c3faa502370dec8cff9d30bdf9121d1f`.
+  Verification tier: `focused`
+  Focused checks: Complete source/window/coverage and retained TAP checks; reconcile source-projection and legacy classification observations with canonical Knowledge; preservation, memory, histories, rendered book, direct public checks and normal doctrines.
+  Canonical trigger: Ordinary bounded reading and fact reconciliation; no source/public-contract/dependency/infrastructure change or parent closeout.
   Goal: Read and understand conformance/test/Unicode group 74.
   Scope: `t/phase0_regression.t` lines 40443-41195
   Baseline evidence: 753 fragments / 65404 decoded bytes; ordered range SHA-256 `d48cb6243066d0ed51cbdbc924791a016905e344777495e753a3ee284defd3f4`.
   Dependencies: .1.73 committed with clean handoff.
   Acceptance: Read every scoped byte in complete bounded windows; retain source identity, exact comprehension, canonical Knowledge reconciliation, concrete finding ownership, focused proof and per-leaf continuity. Unread crossing constructs retain the next range owner.
-  Verification: `pending`
-  Commit: `pending`
+  Reading evidence: 11 complete windows / 753 fragments / 65404 bytes; ordered window SHA-256 `2bb4a08a7e319a21ab3cfdfcd732a88e1045c54ae0a07d25fc4bc4db88c717ce`.
+  Comprehension: Completes legacy prefix-newline classification, then cursor/entry/match line and column projections, explicit start edges, cursor tails, anonymous capture widths/tails/take operations, named marks and boundary bridges, whole-input reads and advancing through-cursor/two-mark helpers. Metadata checks pair canonical nodes/readiness with lowering substrings for typed SourceLocation runtime calls and trace operations. Direct capture_slice_len has an exact anonymous-boundary expression; other presence checks do not independently prove all endpoint arithmetic or executed boundary advancement. Later legacy capture print, declarations, position tracking, regex substitution, lexical/destructuring assignment and foreach printing preserve their original text while avoiding raw fallback. print_each uses the parse-scoped diagnostic seam with zero compatibility events. No parser-result assertions or uppercase descriptor-code comparisons occur among these completed tests. The split/trim/filter compatibility test remains partial after descriptor build and metadata extraction; .1.75 owns its suffix.
+  Verification: Unchanged canonical commit ec10be6b retains PASS for twenty-nine completed subtests, ordinals 828–856 with 323 direct assertions and no nested plans. Exact TAP numbering and source identity are verified. Typed source-location runtime-call substrings, trace operations, canonical nodes and readiness are observed; these checks do not execute endpoint arithmetic or mark advancement. Direct capture_slice_len has an exact anonymous-boundary expression. Legacy print/declaration/position/regex/assignment forms preserve authored text; print_each uses typed diagnostic output. No parser-result assertions or uppercase descriptor-code comparisons occur in these completed tests. Split/trim/filter remains partial after descriptor build; .1.75 owns the suffix. No new defect, fresh target execution, repair, dependency build, canonical run or push is claimed; .2.5–.2.12 and all prerequisites remain.
+  Execution observation: Documentation preparation emitted child setpgid (77478 to 77478): Operation not permitted, then exited 0. Resulting edits are independently checked; the original final PGID was not captured. This matches the known project-data-liveness-permission-denial recurrence owned by SESSION-STARTUP-READING.7. No group-establishment, new-cause or lifecycle-safety claim; recovery/purge remain prohibited.
+  Candidate proof: Exact 160-file/143-group/302-range audit and eleven-window reconstruction PASS; independently summed 74 groups total 90,690 fragments / 3,888,884 baseline bytes. Preserve 2,851 other files / 50,660,630 bytes, 515 prior task nodes, 53 other book files and all 1,039 headings, prior recipes/history and gitlink. Memory 60; Knowledge 1,155 facts / 9,275 keys; histories 260/43,318 and 258/45,035 lines/bytes. Rendered book, direct public checks and diff check PASS; normal doctrine hooks govern focused landing.
+  Commit: `CONFORMANCE-SOURCE-READING.1.74 - read source boundary projections and legacy classification checks`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.75`
   Status: `pending`
@@ -2624,7 +2632,7 @@ additional reading credit from integration delivery.
 
 | Rank | Leaf | Status | Next action |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.74` | `pending` | Read Phase0 lines 40443–41195 (753 fragments / 65,404 baseline bytes), continuing prefix-newline linecount metadata assertions. Repairs .2.5–.2.12 and earlier repairs retain required source/book/policy reading prerequisites. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.75` | `pending` | Read Phase0 lines 41196–42087 (892 fragments / 65,464 baseline bytes), continuing split/trim/filter compatibility metadata after descriptor build. Repairs .2.5–.2.12 and earlier repairs retain required source/book/policy reading prerequisites. |
 
 ## Decisions
 
@@ -2636,6 +2644,8 @@ additional reading credit from integration delivery.
 - None at decomposition. Ordinary source repairs retain startup prerequisites; later collection pressure must be measured rather than assumed away.
 
 ## Verification Log
+
+- `2026-09-21` .1.74: Eleven complete windows cover 753 fragments / 65,404 baseline bytes; ordered window SHA-256 2bb4a08a7e319a21ab3cfdfcd732a88e1045c54ae0a07d25fc4bc4db88c717ce. Cumulative reading is 74/143: 90,690 fragments / 3,888,884 baseline bytes and 97 complete files. Phase0 is partial through line 41195. Unchanged canonical commit ec10be6b retains PASS for twenty-nine completed subtests, ordinals 828–856 with 323 direct assertions and no nested plans. Exact TAP numbering and source identity are verified. Typed source-location runtime-call substrings, trace operations, canonical nodes and readiness are observed; these checks do not execute endpoint arithmetic or mark advancement. Direct capture_slice_len has an exact anonymous-boundary expression. Legacy print/declaration/position/regex/assignment forms preserve authored text; print_each uses typed diagnostic output. No parser-result assertions or uppercase descriptor-code comparisons occur in these completed tests. Split/trim/filter remains partial after descriptor build; .1.75 owns the suffix. No new defect, fresh target execution, repair, dependency build, canonical run or push is claimed; .2.5–.2.12 and all prerequisites remain.
 
 - `2026-09-21` .1.73: Eleven complete windows cover 1088 fragments / 65,436 baseline bytes; ordered window SHA-256 67008351310e458e80937388d3cc69050216d09547fd38070cc9e80cd583192f. Cumulative reading is 73/143: 89,937 fragments / 3,823,480 baseline bytes and 97 complete files. Phase0 is partial through line 40442. Unchanged canonical commit ec10be6b retains PASS for twenty-eight completed subtests, ordinals 800–827 with 291 direct plan entries including five nested-subtest results; those five nested plans contain 40 further assertions. Exact TAP numbering and source identity are verified. Switch cases execute first/later/default selection; while cases execute false-entry skip, condition mutation and a nonterminating-loop guard returning a failed match with diagnostic. Six uppercase-slot assertions retain .2.10 limits; the five-tag semicolonless loop checks metadata and hits without reading its code-key variables. Compatibility/readiness summaries remain distinct from runtime portability. Prefix-newline linecount is partial after descriptor build; .1.74 owns the suffix. No new defect, fresh target execution, repair, dependency build, canonical run or push is claimed; .2.5–.2.12 and all prerequisites remain.
 
@@ -2755,6 +2765,8 @@ additional reading credit from integration delivery.
 
 ## Commit Log
 
+- `2026-09-21` .1.74: `CONFORMANCE-SOURCE-READING.1.74 - read source boundary projections and legacy classification checks`; activation 8bb0fd15c; .1.75 follows clean handoff and empty brief.
+
 - `2026-09-21` .1.73: `CONFORMANCE-SOURCE-READING.1.73 - read switch safety and compatibility migration observations`; activation 1e74f9842; .1.74 follows clean handoff and empty brief.
 
 - `2026-09-21` .1.72: `CONFORMANCE-SOURCE-READING.1.72 - read reducers and meaningful lifecycle source and result locks`; activation fa907be6e; .1.73 follows clean handoff and empty brief.
@@ -2872,6 +2884,8 @@ additional reading credit from integration delivery.
 - `2026-09-13`: Decomposition lands under `SESSION-STARTUP-READING.3.8.0`; Git owns the resulting commit identity.
 
 ## Changelog
+
+- `2026-09-21` .1.74: Read typed source-boundary projections and legacy classification checks; preserve the difference between observed lowering text and executed state transitions.
 
 - `2026-09-21` .1.73: Read switch/loop controls, semicolonless metadata and compatibility migration observations; preserve runtime, metadata and descriptor-slot boundaries.
 

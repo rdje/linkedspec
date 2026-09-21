@@ -10,6 +10,12 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.74 - read source boundary projections and legacy classification checks
+
+Cursor, entry, local-match, anonymous, named-mark and whole-input anchors remain distinct. Capture_slice_len has an exact anonymous span expression; take/rest/through-cursor/two-mark checks inspect typed read/write calls and trace labels. These substring checks are bounded lowering observations. Legacy printing, declarations, position tracking, substitution and assignments preserve authored text while avoiding raw fallback; print_each instead uses the parse-scoped diagnostic seam. Canonical source taxonomy and typed-runtime admission remain separate from these metadata checks.
+
+Managed preparation repeated the known child setpgid warning for PID 77478 and exited 0; the final PGID was not captured. Independent document/preservation checks validate the output, not process-group establishment. Existing startup .7 ownership and the recovery/purge restriction remain unchanged.
+
 ## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.73 - read switch safety and compatibility migration observations
 
 Switch fixtures cover first/later/default branches; attached while covers skip, condition mutation and a captured 10,000-iteration failed-match diagnostic. Remaining-tag semicolonless tests check metadata/hits only despite unused code-key variables; six separate uppercase-slot assertions retain .2.10 limits. Canonical event payloads, raw/unresolved blockers and compatibility summaries preserve distinct readiness and migration axes. Bare return/exit and supported call wrappers remain legacy observations, while exit_now uses typed termination. Readiness does not prove cross-backend execution.

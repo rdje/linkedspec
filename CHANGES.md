@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.74 - read source boundary projections and legacy classification checks
+
+Read Phase0 40443–41195: 74/143 groups, 90,690 fragments / 3,888,884 baseline bytes. Retained twenty-nine-subtest proof has 323 assertions for typed source-boundary projections and legacy classification. Runtime-call substrings and metadata do not independently execute endpoint arithmetic or boundary advancement. Existing repairs remain; no new defect or fresh execution; .1.75 continues split/trim/filter metadata.
+
 ## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.73 - read switch safety and compatibility migration observations
 
 Read Phase0 39355–40442: 73/143 groups, 89,937 fragments / 3,823,480 baseline bytes. Retained twenty-eight-subtest proof has 291 direct plan entries including 5 nested results, with 40 inner assertions. Switch/while runtime controls, semicolonless metadata, raw/unresolved blockers and compatibility migration summaries remain distinct observations. Existing .2.10 and other repairs remain; no new defect or fresh execution; .1.74 continues prefix-newline metadata.
