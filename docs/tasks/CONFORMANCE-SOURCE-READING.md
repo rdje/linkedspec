@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `CONFORMANCE-SOURCE-READING`
-- Status: `active` / exact decomposition; physical reading 76/143
+- Status: `active` / exact decomposition; physical reading 77/143
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.8`
 - Created: `2026-09-13`
 - Last updated: `2026-09-21`
@@ -1362,14 +1362,21 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
   Commit: `CONFORMANCE-SOURCE-READING.1.76 - read shipped grammar runtime smokes and adapter boundaries`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.77`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `c57bd928ef7fe1bd385b80a1e029ca3960ae3532`.
+  Verification tier: `focused`
+  Focused checks: Complete source/window/coverage and retained TAP checks; reconcile observation boundaries with canonical Knowledge; preservation, memory, histories, rendered book, direct public checks and normal doctrines.
+  Canonical trigger: Ordinary bounded reading and fact reconciliation; no source/public-contract/dependency/infrastructure change or parent closeout.
   Goal: Read and understand conformance/test/Unicode group 77.
   Scope: `t/phase0_regression.t` lines 42888-43916
   Baseline evidence: 1029 fragments / 65477 decoded bytes; ordered range SHA-256 `b47206ff5e1b9e509629d9ecae475aebd9c311dc324d423db88e6948e6ce68a7`.
   Dependencies: .1.76 committed with clean handoff.
   Acceptance: Read every scoped byte in complete bounded windows; retain source identity, exact comprehension, canonical Knowledge reconciliation, concrete finding ownership, focused proof and per-leaf continuity. Unread crossing constructs retain the next range owner.
-  Verification: `pending`
-  Commit: `pending`
+  Reading evidence: 11 complete windows / 1029 fragments / 65477 bytes; ordered window SHA-256 `8e331eed03bfb3e6fd8e61d9b3dc8908326dabcadd7d88ce8b1e36d4c805a25c`.
+  Comprehension: Completes tkgui metadata then exact AST/quiet-output smoke. Simenv and Lispish tests retain helper/source migration checks; simenv also checks nested assignment AST, quiet output and cursor before the final newline. Lispish checks its historical nested AST; VHDL checks selected tags and EBNF top rule names, not full output/strict document acceptance. Three core corpus datasets exclude retired noncore plugins. Trace tests observe owner/decision scopes, mark positions with caret excerpts and exact capture AST, plus nonempty file routing. Five ACODE/LXCODE/CODE comparisons remain in the .2.10 inventory, while the lifecycle emptiness test compares metadata only. Default seek and AND consume subprocesses test actual input outcomes. Descriptor cursor checks and removed parse_mode structured errors are separate. A newly reproduced negative-only source-observation gap is owned by .2.13: original assertions pass with empty captured source. The Markdown path scan remains partial after leak-array initialization; .1.78 owns its scan/assertions.
+  Verification: Unchanged canonical commit ec10be6b retains PASS for 35 completed subtests, ordinals 926–960 with 479 direct assertions and no nested plans. Exact TAP numbering and source identity are verified. Tkgui and simenv check exact ASTs and quiet output; Lispish checks its historical AST, while VHDL/EBNF smoke checks cover selected tags/names. Trace checks include scopes, mark positions/caret excerpts, exact capture output and nonempty file routing. Five uppercase-slot comparisons retain .2.10 limits. Default seek and AND consume execute input controls; parse_mode rejection checks structured prepare-options diagnostics. The Markdown path scan is partial after leak-array initialization; .1.78 owns its suffix. Fresh diagnosis confirms .2.13 without closing a repair; no production change, dependency build, canonical run or push is claimed; .2.5–.2.13 and all prerequisites remain.
+  Candidate proof: Exact 160-file/143-group/302-range audit and eleven-window reconstruction PASS; independently summed 77 groups total 93,411 fragments / 4,085,281 baseline bytes. Fresh .2.13 controls: original 12/12 pristine and empty observations PASS; guarded 13/13 pristine PASS, empty/unrelated observations fail only added assertion12 as expected; tracked five-case recipe replay PASS. Preserve 2,851 other files / 50,660,630 bytes, 515 prior task nodes, 53 other book files and all 1,039 headings, prior recipes/history and gitlink; only new .2.13 is added. Memory 60; Knowledge 1,156 facts / 9,282 keys; histories 272/44,935 and 270/47,348 lines/bytes. Rendered book, direct public checks and diff check PASS; normal doctrine hooks govern focused landing.
+  Commit: `CONFORMANCE-SOURCE-READING.1.77 - read trace and cursor tests and own missing source observation`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.78`
   Status: `pending`
@@ -2215,6 +2222,16 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
   Verification: `pending`
   Commit: `pending`
 
+- ID: `CONFORMANCE-SOURCE-READING.2.13`
+  Status: `pending`
+  Goal: Make the Phase0 rule-local cursor generated-source check detect missing or wrong source.
+  Evidence: .1.77 public dump_parser_source capture returns 11,417 bytes with the current default-family three-argument LinkedRE::or call. The exact twelve-assertion subtest passes both pristine and after its subprocess observation is replaced with an empty string; the negative-only source assertion cannot detect missing output. Canonical diagnosis: docs/knowledge/phase0-cursor-source-observation-gap.md.
+  Scope: Correct return_descriptor_and_generated_source_share_rule_local_cursor_contract and audit equivalent negative-only source observations in its bounded cursor-contract test family. Keep descriptor and runtime cursor proofs distinct.
+  Dependencies: Required source/book/policy reading, including the remaining Phase0 body, before tracked test edits. Current .1.77 owns diagnosis and current-claim correction only.
+  Acceptance: Require nonempty captured source and a positive current rule-specific dispatch observation; retain the consume-override denial, descriptor metadata and seek/consume runtime positives; reject empty and wrong-dispatch observations without changing production to fit stale text. Synchronize Knowledge and the book, then close only after pristine and independent negative controls pass.
+  Verification: `pending`
+  Commit: `pending`
+
 - ID: `CONFORMANCE-SOURCE-READING.3`
   Status: `pending`
   Goal: Independently reconcile all source/range/reading-commit/repair evidence and close only the required reading lane with applicable verification.
@@ -2646,7 +2663,7 @@ additional reading credit from integration delivery.
 
 | Rank | Leaf | Status | Next action |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.77` | `pending` | Read Phase0 lines 42888–43916 (1,029 fragments / 65,477 baseline bytes), completing tkgui canonical-node and migration-summary checks before subsequent tests. Repairs .2.5–.2.12 and earlier repairs retain required source/book/policy reading prerequisites. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.78` | `pending` | Read Phase0 lines 43917–45063 (1,147 fragments / 65,472 baseline bytes), completing the Markdown absolute-path scan before subsequent regression tests. Repairs .2.5–.2.13 and earlier repairs retain required source/book/policy reading prerequisites. |
 
 ## Decisions
 
@@ -2658,6 +2675,8 @@ additional reading credit from integration delivery.
 - None at decomposition. Ordinary source repairs retain startup prerequisites; later collection pressure must be measured rather than assumed away.
 
 ## Verification Log
+
+- `2026-09-21` .1.77: 11 complete windows cover 1,029 fragments / 65,477 baseline bytes; ordered window SHA-256 8e331eed03bfb3e6fd8e61d9b3dc8908326dabcadd7d88ce8b1e36d4c805a25c. Cumulative reading is 77/143 groups, 93,411 fragments / 4,085,281 baseline bytes and 97 complete files. Phase0 is partial through line 43916. Unchanged canonical commit ec10be6b retains PASS for 35 completed subtests, ordinals 926–960 with 479 direct assertions and no nested plans. Exact TAP numbering and source identity are verified. Tkgui and simenv check exact ASTs and quiet output; Lispish checks its historical AST, while VHDL/EBNF smoke checks cover selected tags/names. Trace checks include scopes, mark positions/caret excerpts, exact capture output and nonempty file routing. Five uppercase-slot comparisons retain .2.10 limits. Default seek and AND consume execute input controls; parse_mode rejection checks structured prepare-options diagnostics. The Markdown path scan is partial after leak-array initialization; .1.78 owns its suffix. Fresh diagnosis confirms .2.13 without closing a repair; no production change, dependency build, canonical run or push is claimed; .2.5–.2.13 and all prerequisites remain.
 
 - `2026-09-21` .1.76: 11 complete windows cover 800 fragments / 65,456 baseline bytes; ordered window SHA-256 4cf7775ac2ba5691da7e40961a1fffa66cb8f9db6837120d880949270205683c. Cumulative reading is 76/143 groups, 92,382 fragments / 4,019,804 baseline bytes and 97 complete files. Phase0 is partial through line 42887. Unchanged canonical commit ec10be6b retains PASS for 33 completed subtests, ordinals 893–925 with 650 direct assertions and no nested plans. Exact TAP numbering and source identity are verified. VHDL source migrations and shipped-spec readiness remain bounded metadata/source checks. Runtime smokes cover ifelse undef/quiet stdout, three hlink ASTs, lib_reader grouped attributes, EBNF logging annotations and seven portmap classifications. Pplugin preserves body text before its legacy Perl adapter creates and executes coderefs. Tkgui is partial after its three-rule metadata loop; .1.77 owns node/summary assertions. No new defect, fresh target execution, repair, dependency build, canonical run or push is claimed; .2.5–.2.12 and all prerequisites remain.
 
@@ -2783,6 +2802,8 @@ additional reading credit from integration delivery.
 
 ## Commit Log
 
+- `2026-09-21` .1.77: `CONFORMANCE-SOURCE-READING.1.77 - read trace and cursor tests and own missing source observation`; activation c57bd928e; .1.78 follows clean handoff and empty brief.
+
 - `2026-09-21` .1.76: `CONFORMANCE-SOURCE-READING.1.76 - read shipped grammar runtime smokes and adapter boundaries`; activation cadf2cc0d; .1.77 follows clean handoff and empty brief.
 
 - `2026-09-21` .1.75: `CONFORMANCE-SOURCE-READING.1.75 - read quote boundaries and shipped grammar migration checks`; activation 90235115c; .1.76 follows clean handoff and empty brief.
@@ -2906,6 +2927,8 @@ additional reading credit from integration delivery.
 - `2026-09-13`: Decomposition lands under `SESSION-STARTUP-READING.3.8.0`; Git owns the resulting commit identity.
 
 ## Changelog
+
+- `2026-09-21` .1.77: Trace and runtime cursor observations remain distinct from descriptor equality; new .2.13 owns the reproduced negative-only source check.
 
 - `2026-09-21` .1.76: Grammar metadata and source checks remain distinct from bounded parser results and legacy Perl adapter execution.
 

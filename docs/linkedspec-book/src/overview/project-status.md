@@ -498,37 +498,40 @@ the director's focused-verification grant used for this correction and the separ
 supporting-reading closeout. Reading completion establishes audited comprehension;
 it does not close the six grammar/literal repair roots or establish runtime signoff.
 Conformance, test and Unicode reading has exact ownership for all 160 inputs in
-143 bounded groups covering 8,257,059 baseline decoded bytes. Reading now covers 76/143 groups, 92,382 fragments / 4,019,804 baseline bytes and 97 complete files.
-Phase0 reaches line 42887.
+143 bounded groups covering 8,257,059 baseline decoded bytes. Reading now covers 77/143 groups, 93,411 fragments / 4,085,281 baseline bytes and 97 complete files.
+Phase0 reaches line 43916.
 
-This checkpoint separates grammar migration checks from observed parser results.
-VHDL checks helper-based declaration and payload source forms. Descriptor checks
-for the other shipped grammars inspect canonical nodes, fallback counts and
-readiness summaries; those fields alone do not establish runtime portability.
+The tkgui and simenv smokes check exact parser results as well as quiet output.
+Simenv also checks its cursor at the final newline. Lispish preserves its historical
+nested AST. The VHDL smoke checks selected tags; EBNF checks the Expr and Term rule
+names. Those narrower checks do not establish full AST or strict file validation.
+Strict Lispish document parsing remains owned by startup .83.
 
-The retained runtime examples are concrete: hlink turns foo[bar]{baz} into
-["foo", "bar", "{baz}"]; lib_reader returns the expected cell/attribute tree;
-EBNF preserves the log_rule annotation with expr and term arguments; portmap
-classifies seven inputs, including bar[0] and a concatenation. Ifelse returns
-undef quietly without a caller sink. Quiet undef output alone does not establish
-that every branch in its sample input executed.
+Trace coverage checks owning file/function/line labels, decisions and invocation
+scopes. Its mark example parses foo(alpha,beta), checking alpha, beta and beta)
+captures alongside position events and caret excerpts. File routing requires
+nonempty trace content and excludes those routed events from captured stdout.
+The default cursor family accepts a later anchor in xxa; AND rejects xxa and
+accepts a. Removed parse_mode options yield structured prepare-options errors.
 
-Pplugin first returns exact body text for foo and bar. Its separate legacy Perl
-adapter then creates callbacks whose results are 3 and ok. This test preserves
-the boundary between parsing plugin definitions and executing Perl body text.
-It grants no cross-backend callback contract and does not use the approved
-RGX/PGEN EBNF snapshot.
+**A new test observation gap is owned by .2.13.** The cursor generated-source
+assertion passes even when its captured output is empty: it only denies a
+consume-call spelling. A fresh public capture produced source normally. A
+scratch positive source check passes on that capture and rejects empty or
+unrelated text. This demonstrates missing test sensitivity, not a compiler
+failure. The tracked repair retains the required source/book/policy prerequisites.
 
-**The earlier generated-code equivalence claim remains withdrawn:** .2.10 owns
-absent uppercase-slot comparisons elsewhere. Source-capture recipes .2.11 and
-assignment descriptions .2.12 also remain open. MethodExpr .2.5, EmitContext
-labels .2.6, mark_copy .2.7, invalid num_min fixture .2.8, push labels .2.9 and
-broader lifecycle repairs retain their prerequisites.
+**The earlier generated-code equivalence claim remains withdrawn:** five more
+uppercase-slot comparisons belong to .2.10's inventory. Source-capture recipes
+.2.11 and assignment descriptions .2.12 remain open. MethodExpr .2.5, EmitContext
+labels .2.6, mark_copy .2.7, invalid num_min .2.8, push labels .2.9 and broader
+lifecycle repairs also retain their prerequisites.
 
-The 33 completed subtests retain canonical proof with 650 direct assertions and
-no nested plans. No new defect or fresh target execution is claimed. Tkgui is
-partial after its three-rule metadata loop; .1.77 continues with node/summary
-assertions. The pinned 113-byte inventory delta remains separate.
+The 35 completed subtests retain canonical proof with 479 direct assertions and
+no nested plans. Fresh .2.13 diagnostic controls are recorded separately. The
+Markdown path scan is partial after leak-array initialization; .1.78 continues.
+The approved dependency grammar snapshot remains unused and the pinned
+113-byte inventory delta stays separate.
 
 The director approved the finite documentation-capacity proposal under ADR0122.
 Containment `.15` admits exactly fourteen controls for the remaining 93 reading
@@ -555,8 +558,8 @@ The history files keep their 512-line / 65,536-byte caps, mandatory rollover and
 immutable archives. General card/part limits remain unchanged. Admission consumes
 one of the conservative 99 reserve units; the remaining 98 units are forecast
 after actual admission overhead. This capacity does not complete source reading
-or repair tests: reading now reaches 76/143, `.1.77` is next, and the test and recipe
-repairs `.2.5`–`.2.12` remain open.
+or repair tests: reading now reaches 77/143, `.1.78` is next, and the test and recipe
+repairs `.2.5`–`.2.13` remain open.
 
 The director has requested integration guides and runnable consumer examples for
 Perl, Rust, Dart, Julia and Lua, covering recursive checkout, dependency preparation

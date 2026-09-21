@@ -2299,7 +2299,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Status: `active`
   Goal: Split and read all 160 entries under capability_conformance, cli_conformance, t, tests, and unicode_case.
   Children: `.3.8.0` owns exact decomposition; `CONFORMANCE-SOURCE-READING.1` owns all143 reading groups; .2 findings and .3 independent closeout stay separate.
-  Reading owner: `docs/tasks/CONFORMANCE-SOURCE-READING.md`; 143 groups / 302 baseline ranges over 160 inputs. Physical reading 76/143 groups, 92,382 fragments / 4,019,804 baseline bytes and 97 complete files; Phase0 through 42887. Approved 113-byte inventory delta stays separate. Retained proof: 33 completed subtests, ordinals 893–925 with 650 direct assertions and no nested plans. Grammar metadata and source checks remain distinct from bounded parser results and legacy Perl adapter execution. .2.5–.2.12 and all prerequisites remain. .1.77: completing tkgui canonical-node and migration-summary checks before subsequent tests. ADR0122/containment .15 are canonically admitted at ec10be6b.
+  Reading owner: `docs/tasks/CONFORMANCE-SOURCE-READING.md`; 143 groups / 302 baseline ranges over 160 inputs. Physical reading 77/143 groups, 93,411 fragments / 4,085,281 baseline bytes and 97 complete files; Phase0 through 43916. Approved 113-byte inventory delta stays separate. Retained proof: 35 completed subtests, ordinals 926–960 with 479 direct assertions and no nested plans. Trace and runtime cursor observations remain distinct from descriptor equality; new .2.13 owns the reproduced negative-only source check. .2.5–.2.13 and all prerequisites remain. .1.78: completing the Markdown absolute-path scan before subsequent regression tests. ADR0122/containment .15 are canonically admitted at ec10be6b.
   Acceptance: Include phase0, neutral contracts, fixtures, generators, and four explicitly decoded pinned Unicode
     inputs. Keep generated/fixture bytes in scope; count neither a hash nor enumeration as full reading.
   Verification: `pending`
@@ -4673,7 +4673,7 @@ startup implementation prerequisites and the rgx reading exclusion remain intact
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.77` | `pending` | Read Phase0 lines 42888–43916 (1,029 fragments / 65,477 baseline bytes), completing tkgui canonical-node and migration-summary checks before subsequent tests. Repairs .2.5–.2.12 and earlier repairs retain required source/book/policy reading prerequisites. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.78` | `pending` | Read Phase0 lines 43917–45063 (1,147 fragments / 65,472 baseline bytes), completing the Markdown absolute-path scan before subsequent regression tests. Repairs .2.5–.2.13 and earlier repairs retain required source/book/policy reading prerequisites. |
 
 ## Reading Ledger
 

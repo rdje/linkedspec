@@ -11,7 +11,7 @@ answers:
   - "what evidence capacity blocks remaining conformance reading"
   - "what exact fourteen limits are proposed for remaining conformance reading"
 date: 2026-09-21
-status: exact baseline decomposition preserved; physical reading 76/143, 97 files complete and 67 groups remain; one approved current-source delta
+status: exact baseline decomposition preserved; physical reading 77/143, 97 files complete and 66 groups remain; one approved current-source delta
 tags: [reading, conformance, tests, unicode, continuity, CONFORMANCE-SOURCE-READING]
 evidence: "Startup .3.8.0 independently accounts for160 baseline-identical files,5,422,313 stored bytes and8,257,059 decoded bytes in167,606 line fragments/167,604 LF delimiters. Four gzip inputs contribute54,500 decoded lines. All143 groups/302 ranges are contiguous, disjoint and bounded at1500 fragments/65536 bytes. No source, registry or runtime behavior changes; no physical-reading credit from inventory."
 reverify: "Run CONFORMANCE_SOURCE_READING_COVERAGE below through the project-data wrapper; it derives source identity from Git and range ownership from the task-tree rather than a parallel manifest. Use scripts/check_task_tree_metadata.sh for actual task collection limits."
@@ -428,14 +428,14 @@ properties, context rules, fixtures or decoded upstream inputs. All repairs rema
 
 ## Conformance reading checkpoint
 
-`CONFORMANCE-SOURCE-READING.1.76` reads 11 windows, 800 fragments and 65,456 baseline bytes.
-Cumulative reading is 76/143 groups, 92,382 fragments / 4,019,804 baseline bytes and 97 complete files.
-Phase0 is partial through line 42887; .1.77 owns the crossing test suffix.
+`CONFORMANCE-SOURCE-READING.1.77` reads 11 windows, 1,029 fragments and 65,477 baseline bytes.
+Cumulative reading is 77/143 groups, 93,411 fragments / 4,085,281 baseline bytes and 97 complete files.
+Phase0 is partial through line 43916; .1.78 owns the crossing test suffix.
 [[conformance-perl-consumer-reading]] records this checkpoint's exact observation boundaries.
-Retained proof covers 33 completed subtests, ordinals 893–925 with 650 direct assertions and no nested plans.
-No new defect or fresh target execution is claimed; .2.5–.2.12 and earlier repairs remain.
-The pinned 113-byte delta stays separate; these ranges total 4,019,917 current bytes.
-Next .1.77: completing tkgui canonical-node and migration-summary checks before subsequent tests.
+Retained proof covers 35 completed subtests, ordinals 926–960 with 479 direct assertions and no nested plans.
+Fresh source-observation diagnosis is owned by .2.13; .2.5–.2.13 and earlier repairs remain.
+The pinned 113-byte delta stays separate; these ranges total 4,085,394 current bytes.
+Next .1.78: completing the Markdown absolute-path scan before subsequent regression tests.
 
 Lowercase table entries and Final Sigma context remain separate. Exact scalar
 sequences, sparse ranges, fullwidth forms and ligature identities are preserved;

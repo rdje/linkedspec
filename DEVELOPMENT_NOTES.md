@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.77 - read trace and cursor tests and own missing source observation
+
+Tkgui/simenv exact AST and quiet-output checks, historical Lispish AST, limited VHDL tags/EBNF names, three corpus datasets and trace source/decision/mark/route observations remain distinct. Five uppercase-slot comparisons extend existing .2.10 inventory without new generated-code claims. Public dump_parser_source returns 11,417 bytes, but the exact cursor-contract twelve-assertion test also passes after emptying its subprocess output. Scratch positive source observation passes pristine and rejects empty/unrelated output while the original denial still passes. New .2.13 owns the correction and independent controls after prerequisites; production and the separate actual seek/consume controls remain unchanged.
+
 ## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.76 - read shipped grammar runtime smokes and adapter boundaries
 
 VHDL declaration/payload source checks and shipped grammar readiness metadata retain bounded claims. Six runtime-bearing subtests separately observe ifelse quiet undef output, hlink exact delimiter ASTs, lib_reader grouped attributes and context, EBNF logging annotations, seven portmap classifications and pplugin body-text parsing followed by legacy Perl callback execution. Quiet undef alone does not prove branch execution; pplugin readiness does not make callbacks portable. Existing diagnostic/null-output, hlink migration, EBNF migration and pplugin boundary cards agree with these observations. No new defect or dependency snapshot validation is claimed.
