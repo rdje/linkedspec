@@ -2299,7 +2299,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Status: `active`
   Goal: Split and read all 160 entries under capability_conformance, cli_conformance, t, tests, and unicode_case.
   Children: `.3.8.0` owns exact decomposition; `CONFORMANCE-SOURCE-READING.1` owns all143 reading groups; .2 findings and .3 independent closeout stay separate.
-  Reading owner: `docs/tasks/CONFORMANCE-SOURCE-READING.md`; .3.8.0 preserves 143 groups/302 baseline ranges over 160 inputs. Physical reading 35/143: cumulative 46,538 fragments / 1,405,327 baseline bytes and 86 complete files; gap tests remain partial through 1026. The approved 113-byte cursor-inventory delta is independently pinned; 159 other current files remain exact. Retained unchanged canonical proof passes 132 tests. .1.36 owns the continuation; all repairs/prerequisites remain.
+  Reading owner: `docs/tasks/CONFORMANCE-SOURCE-READING.md`; 143 groups/302 baseline ranges over 160 inputs. Physical reading 36/143: 48038 fragments / 1,464,284 baseline bytes and 91 complete files; MCP admission remains partial through line 451. The approved 113-byte cursor-inventory delta stays separately pinned. Helper path repair .2.3 is owned; .1.37 continues reading. All earlier repairs/prerequisites remain.
   Acceptance: Include phase0, neutral contracts, fixtures, generators, and four explicitly decoded pinned Unicode
     inputs. Keep generated/fixture bytes in scope; count neither a hash nor enumeration as full reading.
   Verification: `pending`
@@ -4673,7 +4673,7 @@ startup implementation prerequisites and the rgx reading exclusion remain intact
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.36` | `pending` | Continue the exact 1,500-fragment / 58,957-byte source range after the clean .1.35 commit. Preserve historical reading hashes, the pinned integration delta and all runtime repair prerequisites. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.37` | `pending` | Read its exact 1,500-fragment / 63,613-byte scope after the clean .1.36 commit. Preserve baseline evidence, helper repair .2.3 and all earlier prerequisites. |
 
 ## Reading Ledger
 

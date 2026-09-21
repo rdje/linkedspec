@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.36 - read Perl contracts and own helper path repair
+
+TestHelpers.pm constructs one include string and splits it back into arguments; a space inside an include path becomes a script-name boundary. Three local controls isolate the failure without a dependency or production change. Conformance .2.3 owns literal arguments, non-path include-entry policy and independent regression proof. The separate Phase0 local helper is outside this demonstrated result. Test-source comprehension also distinguishes adapted neutral fixtures, same-process generated loading, AST projection and emitted-text checks from broader runtime claims.
+
 ## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.35 - read generated and gap consumers and reconcile source delta
 
 The 113-byte mismatch came from treating current cursor-inventory bytes as historical reading bytes. The only changed input is the approved integration contract blob 0efd2ef33198b9e0fa3a90e23308a402824e4c00; ten census markers, one count and one path list replace twelve existing lines. The audit now reads historical ranges from Git baseline, pins the current exception exactly and rejects six path/mode/content mutations. Earlier task/window evidence is unchanged. Dated authored-gap staging and generated-source migration statements are explicitly qualified rather than reused as current availability claims.

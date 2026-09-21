@@ -9,7 +9,7 @@ answers:
   - "how do I verify conformance reading source and range coverage"
   - "which conformance source reading file has the longest line"
 date: 2026-09-21
-status: exact baseline decomposition preserved; physical reading 35/143, 86 files complete and 108 groups remain; one approved current-source delta
+status: exact baseline decomposition preserved; physical reading 36/143, 91 files complete and 107 groups remain; one approved current-source delta
 tags: [reading, conformance, tests, unicode, continuity, CONFORMANCE-SOURCE-READING]
 evidence: "Startup .3.8.0 independently accounts for160 baseline-identical files,5,422,313 stored bytes and8,257,059 decoded bytes in167,606 line fragments/167,604 LF delimiters. Four gzip inputs contribute54,500 decoded lines. All143 groups/302 ranges are contiguous, disjoint and bounded at1500 fragments/65536 bytes. No source, registry or runtime behavior changes; no physical-reading credit from inventory."
 reverify: "Run CONFORMANCE_SOURCE_READING_COVERAGE below through the project-data wrapper; it derives source identity from Git and range ownership from the task-tree rather than a parallel manifest. Use scripts/check_task_tree_metadata.sh for actual task collection limits."
@@ -425,15 +425,15 @@ properties, context rules, fixtures or decoded upstream inputs. All repairs rema
 
 ## Conformance reading checkpoint
 
-`CONFORMANCE-SOURCE-READING.1.35` reads 10 windows, 1,500 fragments and 51,804 baseline bytes.
-Cumulative reading is 35/143, 46,538 fragments, 1,405,327 baseline bytes and 86 complete files.
-Generated-source and inspector tests are complete; gap tests 1–1026 remain partial.
-[[conformance-perl-consumer-reading]] records the exact coverage and evidence limits.
-The clean integration commit 87b35665e supplies retained unchanged generated (6)/inspector (2)/gap (124)
-proof. The approved cursor-inventory delta is separately pinned above; its 113 extra current
-bytes do not rewrite earlier reading hashes. Current bytes across the same historical ranges
-would total 1,405,440, which is not the historical reading-credit counter.
-Next conformance .1.36 continues gap tests. All existing runtime repairs remain open.
+`CONFORMANCE-SOURCE-READING.1.36` reads 11 windows, 1,500 fragments and 58,957 baseline bytes.
+Cumulative reading is 36/143, 48,038 fragments, 1,464,284 baseline bytes and 91 complete files.
+Gap, shared helper, logical, mutation and MCP binding tests are complete;
+MCP admission is partial through line 451. [[conformance-perl-consumer-reading]]
+records exact coverage, focused proof and the confirmed helper include-path defect.
+Repair .2.3 retains implementation and independent verification prerequisites.
+The approved cursor-inventory delta remains separately pinned; its 113 extra current
+bytes do not rewrite historical reading hashes. The same current ranges total 1,464,397 bytes.
+Next .1.37 continues MCP admission. All existing runtime repairs remain open.
 
 Lowercase table entries and Final Sigma context remain separate. Exact scalar
 sequences, sparse ranges, fullwidth forms and ligature identities are preserved;

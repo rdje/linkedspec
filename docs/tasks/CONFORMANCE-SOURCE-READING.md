@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `CONFORMANCE-SOURCE-READING`
-- Status: `active` / exact decomposition; physical reading 35/143
+- Status: `active` / exact decomposition; physical reading 36/143
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.8`
 - Created: `2026-09-13`
 - Last updated: `2026-09-21`
@@ -660,14 +660,23 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
   Commit: `CONFORMANCE-SOURCE-READING.1.35 - read generated and gap consumers and reconcile source delta`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.36`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `bd4ffa4cad99e5fb7dd0a7fe2cb77f9c7c5f0f6a`.
+  Verification tier: `focused`
+  Focused checks: Complete bounded physical source reading; verify exact baseline ranges, reconcile canonical Knowledge and retained unchanged test proof, then validate documentation, memory, book, histories, preservation and normal doctrines.
+  Canonical trigger: Ordinary bounded source-reading leaf; no runtime, dependency, public-contract, infrastructure or parent-closeout change. Existing repair prerequisites remain.
   Goal: Read and understand conformance/test/Unicode group 36.
+  Finding owner: `.2.3` owns the confirmed TestHelpers literal include-path defect; three bounded process controls isolate join/split argument loss. No production source is changed during required reading.
+  Diagnostic scope: Check the exported TestHelpers subprocess helper with literal include paths containing spaces using a bounded repository-local fixture. Distinguish its callable behavior from the separate Phase-0 local helper; if confirmed, create a prerequisite-gated repair owner before continuing.
   Scope: `t/inter_match_gap_capture_perl_contract.t` lines 1027-1154; `t/lib/TestHelpers.pm` lines 1-137; `t/logical_helper_perl_contract.t` lines 1-285; `t/map_leaves_mutation_perl_contract.t` lines 1-374; `t/mcp_contract_perl_binding.t` lines 1-125; `t/mcp_server_perl_admission.t` lines 1-451
   Baseline evidence: 1500 fragments / 58957 decoded bytes; ordered range SHA-256 `5acc1fa20e3243969fc5a7d065139ece45aa08d6ff1f2d80cecd2cc91247147e`.
   Dependencies: .1.35 committed with clean handoff.
   Acceptance: Read every scoped byte in complete bounded windows; retain source identity, exact comprehension, canonical Knowledge reconciliation, concrete finding ownership, focused proof and per-leaf continuity. Unread crossing constructs retain the next range owner.
-  Verification: `pending`
-  Commit: `pending`
+  Reading evidence: 11 complete windows / 1500 fragments / 58957 bytes; ordered window SHA-256 `071b58880845a0a7108956fb5110d4cc52fb015640fdb95b9e4d286d3e472f1f`.
+  Comprehension: Gap suffix preserves typed live/generated/trace diagnostics, direct-entry absence and legacy rolling compatibility. Logical tests adapt neutral E fixtures to a Done edge, check typed truthiness/real booleans, eager evaluation and arity-before-effects across live and same-process emitted roles, plus primary CLI and typed lowering. Mutation tests check projected AST fields, original-shape traversal, receiver guards, rollback/unrelated effects, alias detachment, shadow identities and post-commit continuation; their final emitted-source assertions inspect text rather than execute that source. MCP binding checks generated freshness, all 35 canonical frames, schema and clone boundaries, with static I/O exclusions. Admission reading covers inventory, canonical dispatch, native capabilities/all 19 query identities, raw cases and lifecycle through the I/O cleanup prefix; later assertions remain .1.37-owned. Existing mixed-error ordering and callback-substitution defects remain open.
+  Verification: Fresh managed logical/map-leaves tests pass 16 top-level tests. Exact unchanged integration proof retains gap (124) and admission (13), plus the binding target within the earlier three-target MCP group (23 tests). Three bounded helper controls confirm the literal include-path defect and its mechanism; .2.3 owns implementation and independent verification after required prerequisites. No production repair, dependency build, new canonical CI or push is claimed.
+  Candidate proof: Exact coverage and eleven-window replay pass. Preservation verifies 2,844 other files / 50,534,011 bytes, 499 earlier task nodes, 53 other book files and all 1,039 book headings; original histories, coverage recipes, dependency pins and developer edits remain exact. Three new pending repair nodes own .2.3. The published helper reproduction, memory, both history-pressure checks, mdBook, public mutation (69 files / 50 mutations), public selector (68 files / 11 contrast mutations) and diff checks pass. Knowledge remains at 1,151 facts / 9,207 keys; the normal nine-doctrine commit hook governs landing.
+  Commit: `CONFORMANCE-SOURCE-READING.1.36 - read Perl contracts and own helper path repair`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.37`
   Status: `pending`
@@ -1748,6 +1757,7 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
   Reading continuation: .1.2 adds guide803-804 current-seventeenth and896-897 current80 claims to .41.7. Exact current diagnostic public metadata is15 documents/9 denials; its Knowledge card preserves the older dated16-document milestone and adds current evidence. No new runtime defect or duplicate repair root.
   Reading .1.30 extension: New .2.1 owns the exact stale neutral uniform-binding rollout guidance; its implementation and independent closeout remain prerequisite-gated. No runtime defect follows from the unchanged neutral cases.
   Reading .1.31 extension: .2.2 owns the CLI guide standalone command missing its required managed-storage setup, with implementation and independent verification children. Frozen future-neutral mutation strings remain intentionally preserved under their admitted canonical authorities and are not new runtime defects.
+  Reading .1.36 extension: .2.3 owns the confirmed exported test-helper include-path split; plain and literal-argument controls isolate the mechanism. Repair remains prerequisite-gated, with no inferred Phase0 failure.
   Commit: `pending`
 
 - ID: `CONFORMANCE-SOURCE-READING.2.1`
@@ -1804,6 +1814,33 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
   Verification: `pending`
   Commit: `pending`
 
+- ID: `CONFORMANCE-SOURCE-READING.2.3`
+  Status: `pending`
+  Goal: Preserve literal include paths in the exported Perl test subprocess helper.
+  Evidence: Reading .1.36 executes t::lib::TestHelpers::run_perl_snippet_in_subprocess with identical fixture modules in plain and space-containing repository-local include directories. Plain path returns status 0 / output ok; space path returns status 2 / no stdout and attempts to open script "space". Passing the same space path as one literal -I argument succeeds. TestHelpers.pm lines 105/117 join and whitespace-split @INC, changing argument boundaries. Phase0 defines a separate local helper; no Phase0 failure or complete-checkout relocation failure is claimed by this probe.
+  Scope: The exported helper's include-argument construction and meaningful direct regression controls; preserve normal snippet values, output/error capture and repository-local temporary data.
+  Children: `.2.3.1`, `.2.3.2`
+  Dependencies: Required startup reading/book/policy prerequisites. No dependency implementation or pin is in scope.
+  Acceptance: Preserve each include path as one argument, demonstrate RED/GREEN with spaces and plain controls, verify the supported include-entry policy without stringifying non-path hooks, and independently close the bounded helper repair. Any separate process-lifecycle issue needs its own evidence and owner.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `CONFORMANCE-SOURCE-READING.2.3.1`
+  Status: `pending`
+  Goal: Repair literal include-argument construction in the exported test helper.
+  Dependencies: Parent prerequisites.
+  Acceptance: Use direct argument-list construction, specify the handling of non-path @INC entries, preserve normal output/error/status behavior and managed storage, add exact plain/space-path controls, update applicable documentation and commit before independent closeout.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `CONFORMANCE-SOURCE-READING.2.3.2`
+  Status: `pending`
+  Goal: Independently verify and close the exported helper include-path repair.
+  Dependencies: `.2.3.1` committed with clean handoff.
+  Acceptance: Reproduce documented path controls in a fresh managed process, verify literal argument boundaries and project-volume temporary files, identify actual import consumers, and preserve the separate Phase0 helper's evidence boundary.
+  Verification: `pending`
+  Commit: `pending`
+
 - ID: `CONFORMANCE-SOURCE-READING.3`
   Status: `pending`
   Goal: Independently reconcile all source/range/reading-commit/repair evidence and close only the required reading lane with applicable verification.
@@ -1831,7 +1868,7 @@ additional reading credit from integration delivery.
 
 | Rank | Leaf | Status | Next action |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.36` | `pending` | Continue gap tests 1027–1154, then the five remaining sources in its exact 1,500-fragment / 58,957-byte scope. Preserve baseline reading hashes and the separately pinned integration delta. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.37` | `pending` | Continue MCP admission 452–656 and its exact seven-source, 1,500-fragment / 63,613-byte scope. Helper repair .2.3 and all earlier repairs retain their prerequisites. |
 
 ## Decisions
 
@@ -1843,6 +1880,8 @@ additional reading credit from integration delivery.
 - None at decomposition. Ordinary source repairs retain startup prerequisites; later collection pressure must be measured rather than assumed away.
 
 ## Verification Log
+
+- `2026-09-21` .1.36: Eleven complete windows cover 1,500 fragments / 58,957 baseline bytes; ordered window SHA-256 071b58880845a0a7108956fb5110d4cc52fb015640fdb95b9e4d286d3e472f1f. Cumulative reading is 36/143: 48,038 fragments / 1,464,284 baseline bytes and 91 complete files. MCP admission remains partial through line 451. Fresh managed logical/map-leaves tests pass 16 top-level tests. Exact unchanged integration proof retains gap (124) and admission (13), plus the binding target within the earlier three-target MCP group (23 tests). Three bounded helper controls confirm the literal include-path defect and its mechanism; .2.3 owns implementation and independent verification after required prerequisites. No production repair, dependency build, new canonical CI or push is claimed.
 
 - `2026-09-21` .1.35: Ten complete windows cover 1,500 fragments / 51,804 baseline bytes; ordered window SHA-256 1164b42887bab92a4ea03d85fcaf4a9dc0c6913fc7607fe21a0d66cb0a424992. Cumulative reading is 35/143, 46,538 fragments / 1,405,327 baseline bytes and 86 complete files; gap tests remain partial through line 1026. Retained exact integration commit 87b35665e proof passes generated-source (6), inspector (2) and gap (124) tests (132 total), with unchanged source identities. The old uniform-identity audit fails on the approved integration delta; its corrected recipe passes all 160 inputs/143 groups/302 ranges and six rejected snapshot mutations. No new runtime execution, native build, full CI or push is claimed for this focused reading leaf. Existing runtime repairs remain open.
 
@@ -1884,6 +1923,8 @@ additional reading credit from integration delivery.
 
 ## Commit Log
 
+- `2026-09-21` .1.36: `CONFORMANCE-SOURCE-READING.1.36 - read Perl contracts and own helper path repair`; activation bd4ffa4ca; .1.37 follows clean handoff and empty brief.
+
 - `2026-09-21` .1.35: `CONFORMANCE-SOURCE-READING.1.35 - read generated and gap consumers and reconcile source delta`; activation 87b35665e; next .1.36 after clean handoff and zero-byte brief.
 
 - `2026-09-13` .1.34: `CONFORMANCE-SOURCE-READING.1.34 - read Perl conformance consumers and schedule integration guides`; activation d10305097eb502c0fe29309ec230437396e26d82; next .1.35 after clean handoff and zero-byte brief.
@@ -1923,6 +1964,8 @@ additional reading credit from integration delivery.
 - `2026-09-13`: Decomposition lands under `SESSION-STARTUP-READING.3.8.0`; Git owns the resulting commit identity.
 
 ## Changelog
+
+- `2026-09-21` .1.36: Complete five more source files, read MCP admission through line 451, and own the exported helper include-path repair under .2.3.
 
 - `2026-09-21` .1.35: Complete generated/inspector source reading, read gap consumer 1–1026, and repair baseline/current audit separation for the approved 113-byte integration delta.
 
