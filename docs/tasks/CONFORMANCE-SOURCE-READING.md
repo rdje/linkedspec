@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `CONFORMANCE-SOURCE-READING`
-- Status: `active` / exact decomposition; physical reading 64/143
+- Status: `active` / exact decomposition; physical reading 65/143
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.8`
 - Created: `2026-09-13`
 - Last updated: `2026-09-21`
@@ -1157,14 +1157,21 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
   Commit: `CONFORMANCE-SOURCE-READING.1.64 - read mutual marker nesting and bounded helper coverage`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.65`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `e0123d86e06b217b1e74afa59c47c78803a65713`.
+  Verification tier: `focused`
+  Focused checks: Complete reading and exact coverage/window replay; retained direct/nested TAP proof and canonical observation-gap reconciliation; Knowledge, preservation, memory, histories, book, direct public checks and normal doctrines.
+  Canonical trigger: Ordinary bounded reading and fact reconciliation; no runtime, dependency, public contract, infrastructure or parent-closeout change.
   Goal: Read and understand conformance/test/Unicode group 65.
   Scope: `t/phase0_regression.t` lines 32759-33715
   Baseline evidence: 957 fragments / 65498 decoded bytes; ordered range SHA-256 `02117d7574f9a1c24d7cd383c22a319447676bf7a77dd87368f8d16d22bc3274`.
   Dependencies: .1.64 committed with clean handoff.
   Acceptance: Read every scoped byte in complete bounded windows; retain source identity, exact comprehension, canonical Knowledge reconciliation, concrete finding ownership, focused proof and per-leaf continuity. Unread crossing constructs retain the next range owner.
-  Verification: `pending`
-  Commit: `pending`
+  Reading evidence: 11 complete windows / 957 fragments / 65498 bytes; ordered window SHA-256 `3086a7521b7042366071ae5a8e16d12033568731a8b5d5a28bf2bbc24d27a8e0`.
+  Comprehension: Completes deep mutual marker if-branch comparisons, then reads fluent/structured snapshot branches and join_values, projected keys/values, first/last, length, composed container reads, drop_front, take and slice descriptors. The helper comparisons have twelve assertions: builds, uppercase-slot equality, fallback, raw dependencies, unresolved helpers, node-list equality, readiness and required nodes. Existing .2.10 owns absent-slot observations; node presence does not establish runtime helper semantics, copy isolation, or hit-map equality. Repeated ASSIGN predicates still claim presence only. Lifecycle slice-array comparison is partial after its tenth assertion; .1.66 owns readiness and final node check.
+  Verification: Unchanged canonical commit ec10be6b retains PASS for nineteen completed subtests, ordinals 641–659 with 222 direct assertions, including seven nested results. The seven-tag lifecycle loop separately verifies 63 inner assertions with nine assertions per tag and exact TAP numbering. Seventeen complete fluent/structured helper comparisons have twelve assertions each. Their uppercase-slot equality remains .2.10-owned; metadata node presence and node-list equality do not establish runtime helper semantics, copy isolation or hit-map equality. The lifecycle slice-array test is partial after assertion ten; .1.66 owns readiness and final node checks. No independently reproduced new defect, runtime execution, repair, dependency build, canonical run or push is claimed; .2.5–.2.11 and all prerequisites remain.
+  Candidate proof: Exact inventory and .1.65 window replay PASS; cumulative 65/143 independently totals 83,210 fragments / 3,299,611 baseline bytes. Retained TAP identity/numbering PASS. Preservation PASS for 2,850 other files, 514 prior nodes and all 1,039 book headings. Knowledge 1,154 facts / 9,262 keys; memory 60 lines; history bounds, mdBook build, mutation public surface (50 mutations), aggregate selector (11 contrasts / capability 100 matches) and diff whitespace PASS. Normal commit doctrines are the final boundary.
+  Commit: `CONFORMANCE-SOURCE-READING.1.65 - read fluent container helper comparisons and observation limits`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.66`
   Status: `pending`
@@ -2551,7 +2558,7 @@ additional reading credit from integration delivery.
 
 | Rank | Leaf | Status | Next action |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.65` | `pending` | Read Phase0 lines 32759–33715 (957 fragments / 65,498 baseline bytes), continuing the first fixture of the composite-if branch-block deep mutual marker action test. Repairs .2.5–.2.11 and earlier repairs retain required reading prerequisites. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.66` | `pending` | Read Phase0 lines 33716–34545 (830 fragments / 65,423 baseline bytes), continuing the readiness and final node assertions of the lifecycle slice-array comparison. Repairs .2.5–.2.11 and earlier repairs retain required reading prerequisites. |
 
 ## Decisions
 
@@ -2563,6 +2570,8 @@ additional reading credit from integration delivery.
 - None at decomposition. Ordinary source repairs retain startup prerequisites; later collection pressure must be measured rather than assumed away.
 
 ## Verification Log
+
+- `2026-09-21` .1.65: Eleven complete windows cover 957 fragments / 65,498 baseline bytes; ordered window SHA-256 3086a7521b7042366071ae5a8e16d12033568731a8b5d5a28bf2bbc24d27a8e0. Cumulative reading is 65/143: 83,210 fragments / 3,299,611 baseline bytes and 97 complete files. Phase0 is partial through line 33715. Unchanged canonical commit ec10be6b retains PASS for nineteen completed subtests, ordinals 641–659 with 222 direct assertions, including seven nested results. The seven-tag lifecycle loop separately verifies 63 inner assertions with nine assertions per tag and exact TAP numbering. Seventeen complete fluent/structured helper comparisons have twelve assertions each. Their uppercase-slot equality remains .2.10-owned; metadata node presence and node-list equality do not establish runtime helper semantics, copy isolation or hit-map equality. The lifecycle slice-array test is partial after assertion ten; .1.66 owns readiness and final node checks. No independently reproduced new defect, runtime execution, repair, dependency build, canonical run or push is claimed; .2.5–.2.11 and all prerequisites remain.
 
 - `2026-09-21` .1.64: Nine complete windows cover 1,500 fragments / 54,211 baseline bytes; ordered window SHA-256 c37e9c1631c4bbf54e5fa1eb9af15a2b8914e9fbb8c941937902c704e6ad8963. Cumulative reading is 64/143: 82,253 fragments / 3,234,113 baseline bytes and 97 complete files. Phase0 is partial through line 32758. Unchanged canonical commit ec10be6b retains PASS for eleven completed subtests, ordinals 630–640 with 95 direct assertions, including 42 nested results. Six seven-tag lifecycle loops separately verify 329 inner assertions with per-tag plans 7,9,9,9,6,7 and exact TAP numbering. The next composite-if deep-marker action test is partial in its first fixture; .1.65 owns its suffix. Minimum helper-hit and node-presence assertions establish bounded descriptor metadata coverage. Code-output-labelled slot comparisons remain in existing .2.10 inventory and do not establish emitted-code or target execution equivalence. No independently reproduced new defect, runtime execution, repair, dependency build, canonical run or push is claimed; .2.5–.2.11 and all prerequisites remain.
 
@@ -2664,6 +2673,8 @@ additional reading credit from integration delivery.
 
 ## Commit Log
 
+- `2026-09-21` .1.65: `CONFORMANCE-SOURCE-READING.1.65 - read fluent container helper comparisons and observation limits`; activation e0123d86e; .1.66 follows clean handoff and empty brief.
+
 - `2026-09-21` .1.64: `CONFORMANCE-SOURCE-READING.1.64 - read mutual marker nesting and bounded helper coverage`; activation 55cb6fdf9; .1.65 follows clean handoff and empty brief.
 
 - `2026-09-21` .1.63: `CONFORMANCE-SOURCE-READING.1.63 - read outer-family selected-node checks and comparison limits`; activation 04d32b093; .1.64 follows clean handoff and empty brief.
@@ -2763,6 +2774,8 @@ additional reading credit from integration delivery.
 - `2026-09-13`: Decomposition lands under `SESSION-STARTUP-READING.3.8.0`; Git owns the resulting commit identity.
 
 ## Changelog
+
+- `2026-09-21` .1.65: Read fluent/structured snapshot branches and container helper descriptors; keep node observations distinct from execution proof.
 
 - `2026-09-21` .1.64: Read same-family nested switch comparisons and deep mutual marker fixtures; distinguish minimum helper-hit and node-presence checks from execution proof.
 

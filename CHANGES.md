@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.65 - read fluent container helper comparisons and observation limits
+
+Read Phase0 32759–33715: 65/143 groups, 83,210 fragments / 3,299,611 baseline bytes. Retained nineteen-subtest proof has 222 direct assertions, including seven nested results / 63 inner assertions. Fluent snapshot branches and container helper pairs inspect descriptor metadata; uppercase-slot observations remain .2.10-owned. No new runtime execution or repair; .1.66 continues the lifecycle slice-array comparison.
+
 ## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.64 - read mutual marker nesting and bounded helper coverage
 
 Read Phase0 31259–32758: 64/143 groups, 82,253 fragments / 3,234,113 baseline bytes. Retained eleven-subtest proof has 95 direct assertions, including 42 nested results / 329 inner assertions. Same-family node/hit comparisons and deep mutual marker helper thresholds retain exact metadata limits; code-output-labelled slot comparisons remain .2.10-owned. No new runtime execution or repair; .1.65 continues the partial action fixture.
