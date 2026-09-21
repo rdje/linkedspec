@@ -8,8 +8,8 @@ answers:
   - "does source reading include decompressed pinned Unicode inputs"
   - "how do I verify conformance reading source and range coverage"
   - "which conformance source reading file has the longest line"
-date: 2026-09-13
-status: exact decomposition preserved; physical reading 34/143, 84 files complete and 109 groups remain
+date: 2026-09-21
+status: exact baseline decomposition preserved; physical reading 35/143, 86 files complete and 108 groups remain; one approved current-source delta
 tags: [reading, conformance, tests, unicode, continuity, CONFORMANCE-SOURCE-READING]
 evidence: "Startup .3.8.0 independently accounts for160 baseline-identical files,5,422,313 stored bytes and8,257,059 decoded bytes in167,606 line fragments/167,604 LF delimiters. Four gzip inputs contribute54,500 decoded lines. All143 groups/302 ranges are contiguous, disjoint and bounded at1500 fragments/65536 bytes. No source, registry or runtime behavior changes; no physical-reading credit from inventory."
 reverify: "Run CONFORMANCE_SOURCE_READING_COVERAGE below through the project-data wrapper; it derives source identity from Git and range ownership from the task-tree rather than a parallel manifest. Use scripts/check_task_tree_metadata.sh for actual task collection limits."
@@ -24,7 +24,19 @@ Ordered selectors are capability_conformance, cli_conformance, t, tests and
 unicode_case. Git owns all path/mode/blob identities; task Scope fields own
 reading progress. No separate tracked source manifest is introduced.
 
-All160 baseline files match current Git and present bytes. Four pinned upstream
+The 160-file baseline remains the authority for historical reading ranges. Current
+Git differs only in `capability_conformance/rule_local_cursor_contract.json`:
+integration commits `42490a9d9` and `fbb135d63` update ten current census markers,
+one count and one path list on twelve existing lines. The two added guide paths
+increase the file by 113 bytes without changing line coordinates or runtime
+semantics. Its approved blob is `0efd2ef33198b9e0fa3a90e23308a402824e4c00`;
+all other 159 files remain exact. Current stored/decoded totals are 5,422,426 /
+8,257,172 bytes. These additional bytes are not added to historical reading credit.
+
+Group 35 owns the audit-recipe correction: the old uniform-identity assertion
+fails on this known integration delta. The current audit pins its exact identity
+and rejects any other path, mode or content change; range reconstruction always
+uses baseline bytes. Four pinned upstream
 `.gz` inputs are decompressed losslessly in memory, then decoded strictly as UTF-8.
 Their Scope fields explicitly say `decoded lines`, so compressed bytes cannot be
 mistaken for source-reading coordinates. Exact decoded hashes remain pinned below.
@@ -64,18 +76,32 @@ baseline='baeb984e36a94a15951cd23d4c52def5064cdaca'
 selectors=['capability_conformance/','cli_conformance/','t/','tests/','unicode_case/']
 def git(*args):return subprocess.check_output(['git',*args])
 records=git('ls-tree','-r','-z',baseline,'--',*selectors)
-assert records==git('ls-tree','-r','-z','HEAD','--',*selectors)
-sources={};stored_total=0;decoded_inputs=[]
+def parse_tree(data):
+ return {p.decode():tuple(m.decode().split()) for m,p in (r.split(b'\t',1) for r in data.rstrip(b'\0').split(b'\0'))}
+def validate_snapshot(original,current,approved):
+ assert set(current)==set(original)
+ for path,row in original.items():
+  assert current[path][:2]==row[:2],path
+  assert current[path][2]==approved.get(path,row[2]),path
+ assert {p for p in original if current[p]!=original[p]}==set(approved)
+approved={'capability_conformance/rule_local_cursor_contract.json':'0efd2ef33198b9e0fa3a90e23308a402824e4c00'}
+current=parse_tree(git('ls-tree','-r','-z','HEAD','--',*selectors))
+validate_snapshot(parse_tree(records),current,approved)
+sources={};stored_total=0;current_total=0;decoded_inputs=[]
 for record in records.rstrip(b'\0').split(b'\0'):
  meta,path=record.split(b'\t',1);path=path.decode();mode,kind,blob=meta.decode().split()
  assert kind=='blob' and mode in ['100644','100755']
- raw=git('cat-file','blob',blob);assert Path(path).read_bytes()==raw,path
+ raw=git('cat-file','blob',blob);present=git('cat-file','blob',current[path][2])
+ assert Path(path).read_bytes()==present,path
+ assert len(present.splitlines(True))==len(raw.splitlines(True)),path
+ current_total+=len(present)
  stored_total+=len(raw);decoded=gzip.decompress(raw) if path.endswith('.gz') else raw
  decoded.decode('utf-8');assert b'\0' not in decoded
  lines=decoded.splitlines(True);assert lines and b''.join(lines)==decoded
  sources[path]=lines
  if path.endswith('.gz'):decoded_inputs.append(dict(path=path,stored_bytes=len(raw),decoded_bytes=len(decoded),fragments=len(lines),sha256=hashlib.sha256(decoded).hexdigest()))
 assert len(sources)==160 and stored_total==5422313 and len(decoded_inputs)==4
+assert current_total==5422426 and current_total-stored_total==113
 text=Path('docs/tasks/CONFORMANCE-SOURCE-READING.md').read_text()
 nodes={m[1]:m[0] for m in re.finditer(r'^- ID: `([^`]+)`\n.*?(?=^- ID: |^## |\Z)',text,re.M|re.S)}
 coverage={p:[0]*len(lines) for p,lines in sources.items()};groups=[];count_ranges=0
@@ -105,9 +131,9 @@ expected={
 'SpecialCasing.txt.gz':'efc25faf19de21b92c1194c111c932e03d2a5eaf18194e33f1156e96de4c9588',
 'UnicodeData.txt.gz':'2e1efc1dcb59c575eedf5ccae60f95229f706ee6d031835247d843c11d96470c'}
 assert {Path(x['path']).name:x['sha256'] for x in decoded_inputs}==expected
-assert not git('diff','--name-only',baseline,'--',*selectors).strip()
+assert set(git('diff','--name-only',baseline,'--',*selectors).decode().splitlines())==set(approved)
 assert not git('ls-files','--others','--exclude-standard','--',*selectors).strip()
-report=dict(baseline=baseline,current_head=git('rev-parse','HEAD').decode().strip(),files=160,stored_bytes=stored_total,decoded_bytes=8257059,line_fragments=167606,lf_delimiters=sum(b''.join(x).count(b'\n') for x in sources.values()),groups=143,ranges=count_ranges,group_statuses=dict(collections.Counter(g['status'] for g in groups)),tree_sha256=hashlib.sha256(records).hexdigest(),decoded_inputs=decoded_inputs)
+report=dict(baseline=baseline,current_head=git('rev-parse','HEAD').decode().strip(),files=160,stored_bytes=stored_total,decoded_bytes=8257059,current_stored_bytes=current_total,current_decoded_bytes=8257172,approved_current_blobs=approved,line_fragments=167606,lf_delimiters=sum(b''.join(x).count(b'\n') for x in sources.values()),groups=143,ranges=count_ranges,group_statuses=dict(collections.Counter(g['status'] for g in groups)),tree_sha256=hashlib.sha256(records).hexdigest(),decoded_inputs=decoded_inputs)
 s=Path('.linkedspec-data/scratch/conformance_plan');s.mkdir(parents=True,exist_ok=True);(s/'audit.json').write_text(json.dumps(report,indent=2)+'\n')
 print(json.dumps(report,indent=2))
 print('PASS exact complete source/range/budget/decoded-input inventory; this audit grants no physical-reading credit.')
@@ -127,6 +153,7 @@ checks a completed group against baseline source; it does not replace physical
 reading or grant a second reading credit. Pass the desired completed leaf as the
 argument. A long logical line may need smaller complete presentation chunks while
 its source-window identity remains exact.
+Run the independent audit above separately to validate current source identities.
 
 ```bash
 bash tools/project_data_run.sh python3 - CONFORMANCE-SOURCE-READING.1.1 <<'CONFORMANCE_READING_WINDOWS'
@@ -138,8 +165,7 @@ node=re.search(r'^- ID: `'+re.escape(leaf)+r'`\n.*?(?=^- ID: |^## |\Z)',text,re.
 assert node and 'Status: `done`' in node[0]
 scope=re.search(r'^  Scope: (.+)$',node[0],re.M)[1];windows=[];fragments=size=0
 for path,kind,a,b in re.findall(r'`([^`]+)` (decoded lines|lines) (\d+)-(\d+)',scope):
- a=int(a);b=int(b);raw=Path(path).read_bytes()
- assert raw==subprocess.check_output(['git','show','baeb984e36a94a15951cd23d4c52def5064cdaca:'+path])
+ a=int(a);b=int(b);raw=subprocess.check_output(['git','show','baeb984e36a94a15951cd23d4c52def5064cdaca:'+path])
  decoded=gzip.decompress(raw) if kind=='decoded lines' else raw
  lines=decoded.splitlines(True);start=a;buffer=[]
  for number in range(a,b+1):
@@ -399,12 +425,15 @@ properties, context rules, fixtures or decoded upstream inputs. All repairs rema
 
 ## Conformance reading checkpoint
 
-`CONFORMANCE-SOURCE-READING.1.34` reads 11 windows, 1,500 fragments and 56,255 bytes.
-Cumulative reading is 34/143, 45,038 fragments, 1,353,523 bytes and 84 complete files.
-Only generated-source tests1-153 remain partial. [[conformance-perl-consumer-reading]]
-records adapted diagnostic fixtures, in-process generated loading and fresh43-test
-proof. The director authorizes BACKEND-INTEGRATION-GUIDES as the next temporary
-activity; conformance .1.35 is the exact return point. All existing repairs remain.
+`CONFORMANCE-SOURCE-READING.1.35` reads 10 windows, 1,500 fragments and 51,804 baseline bytes.
+Cumulative reading is 35/143, 46,538 fragments, 1,405,327 baseline bytes and 86 complete files.
+Generated-source and inspector tests are complete; gap tests 1–1026 remain partial.
+[[conformance-perl-consumer-reading]] records the exact coverage and evidence limits.
+The clean integration commit 87b35665e supplies retained unchanged generated (6)/inspector (2)/gap (124)
+proof. The approved cursor-inventory delta is separately pinned above; its 113 extra current
+bytes do not rewrite earlier reading hashes. Current bytes across the same historical ranges
+would total 1,405,440, which is not the historical reading-credit counter.
+Next conformance .1.36 continues gap tests. All existing runtime repairs remain open.
 
 Lowercase table entries and Final Sigma context remain separate. Exact scalar
 sequences, sparse ranges, fullwidth forms and ligature identities are preserved;

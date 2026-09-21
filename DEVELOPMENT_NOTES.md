@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.35 - read generated and gap consumers and reconcile source delta
+
+The 113-byte mismatch came from treating current cursor-inventory bytes as historical reading bytes. The only changed input is the approved integration contract blob 0efd2ef33198b9e0fa3a90e23308a402824e4c00; ten census markers, one count and one path list replace twelve existing lines. The audit now reads historical ranges from Git baseline, pins the current exception exactly and rejects six path/mode/content mutations. Earlier task/window evidence is unchanged. Dated authored-gap staging and generated-source migration statements are explicitly qualified rather than reused as current availability claims.
+
 ## 2026-09-21 — BACKEND-INTEGRATION-GUIDES.7 - close native backend integration delivery
 
 A final integration review combines native values, explicit provenance, setup recurrence and deployment/error checks. A successful value alone does not certify packaged assets or whole-input grammar acceptance. Retained binaries/modules must keep both content and modification-time identities; Julia source deployment may prepare its own offline caches. Consumer tests do not promote an untested minimum version or platform.

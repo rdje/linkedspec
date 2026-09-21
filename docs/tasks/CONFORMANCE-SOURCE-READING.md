@@ -3,10 +3,10 @@
 ## Metadata
 
 - Tree ID: `CONFORMANCE-SOURCE-READING`
-- Status: `active` / exact decomposition; physical reading 34/143
+- Status: `active` / exact decomposition; physical reading 35/143
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.8`
 - Created: `2026-09-13`
-- Last updated: `2026-09-13`
+- Last updated: `2026-09-21`
 - Owner: repo-local workflow
 - Decomposition owner: `SESSION-STARTUP-READING.3.8.0`
 
@@ -19,7 +19,7 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
 
 - Baseline: `baeb984e36a94a15951cd23d4c52def5064cdaca`; clean planning activation `9833430954c3999769045abbcaa4d20389a7af4c`.
 - Exact ordered selectors: `capability_conformance/`, `cli_conformance/`, `t/`, `tests/`, `unicode_case/`.
-- All160 baseline/current modes, blobs and paths match;5,422,313 stored bytes decode to8,257,059 UTF-8 bytes,167,604 LF delimiters and167,606 line fragments. No empty or binary decoded input.
+- At the September 13 decomposition, all 160 baseline/current modes, blobs and paths match;5,422,313 stored bytes decode to8,257,059 UTF-8 bytes,167,604 LF delimiters and167,606 line fragments. No empty or binary decoded input.
 - Decode precisely the four tracked `.gz` inputs under `unicode_case/upstream/17.0.0/`; Scope coordinates for them refer to decompressed UTF-8 text. Their complete compressed Git identity and decoded hashes are verified by the canonical coverage recipe.
 - All143 reading groups/302 inclusive ranges cover the lane exactly once; each group is at most1500 fragments and65536 bytes. Smaller complete output windows are mandatory, including byte windows for a long logical line when needed.
 - Counts, enumeration, decompression, generated-data equality and earlier test execution are not physical reading credit. Existing dated comprehension/proof may be reconciled through Knowledge without claiming a new runtime run.
@@ -642,14 +642,22 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
   Commit: `CONFORMANCE-SOURCE-READING.1.34 - read Perl conformance consumers and schedule integration guides`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.35`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `87b35665e1a8e0de1f03a27e31dbd4d34d8e2d94`.
+  Verification tier: `focused`
+  Focused checks: Read every baseline-identical scoped byte in complete bounded windows; reconcile generated-source, inspector and gap-consumer Knowledge, retain exact unchanged canonical proof where applicable, and verify coverage, source/task/history preservation, memory, book and normal doctrines.
+  Canonical trigger: Ordinary bounded source-reading leaf after the clean integration push; no runtime, dependency, public-contract, gate or parent-closeout change. Remaining startup prerequisites stay open.
   Goal: Read and understand conformance/test/Unicode group 35.
+  Audit correction: Own the stale baseline-equals-current coverage recipe exposed by the 113-byte cumulative mismatch. Integration commits 42490a9d9 and fbb135d63 change only twelve existing lines in rule_local_cursor_contract.json: ten current census markers, one count and one path list. Preserve original group hashes and reading totals; verify the exact approved file identity separately, reject every other source/mode/path delta, and qualify dated Knowledge statements. No runtime repair or new reading credit is implied by this reconciliation.
   Scope: `t/generated_source_contract.t` lines 154-506; `t/inspect_spec_codegen.t` lines 1-121; `t/inter_match_gap_capture_perl_contract.t` lines 1-1026
   Baseline evidence: 1500 fragments / 51804 decoded bytes; ordered range SHA-256 `9811fc24e1ee0addc55fb94051e23da5ed0edc9ceffee39f36a655f6f8b88bee`.
   Dependencies: .1.34 committed with clean handoff.
   Acceptance: Read every scoped byte in complete bounded windows; retain source identity, exact comprehension, canonical Knowledge reconciliation, concrete finding ownership, focused proof and per-leaf continuity. Unread crossing constructs retain the next range owner.
-  Verification: `pending`
-  Commit: `pending`
+  Reading evidence: 10 complete windows / 1500 fragments / 51804 bytes; ordered window SHA-256 `1164b42887bab92a4ea03d85fcaf4a9dc0c6913fc7607fe21a0d66cb0a424992`.
+  Comprehension: Generated-source tests classify all ten family plans, compare deterministic/public/legacy emission and exact metadata, validate version/plan errors, execute seek/consume and indexed slash-bearing alternatives, and observe generated trace roles. Emitted packages load by eval in the same process. The inspector locks explicit compiler/bootstrap owners and five snippet forms with zero fallback/unresolved counts. Gap metadata tests verify named/numeric provenance, exact Unicode identity, duplicate-text reordering and ten compile diagnostics; live fixtures cover Unicode/empty gaps, child-extended commit cursors, nested distinct owners, rollback, LX/EX/E tails, typed context/IT/regression failures and legacy compatibility. Generated reading reaches the nested/rollback parity call at 1026. Returned-span mutation is checked by a subsequent invocation, and distinct nested labels are not proof of same-rule recursive isolation. Later generated failure coverage remains .1.36-owned.
+  Verification: Retained exact integration commit 87b35665e proof passes generated-source (6), inspector (2) and gap (124) tests (132 total), with unchanged source identities. The old uniform-identity audit fails on the approved integration delta; its corrected recipe passes all 160 inputs/143 groups/302 ranges and six rejected snapshot mutations. No new runtime execution, native build, full CI or push is claimed for this focused reading leaf.
+  Candidate proof: Exact coverage and .1.10/.1.35 window replay pass; six unexpected snapshot mutations are rejected. Preservation verifies 2,842 other files / 50,525,462 bytes, 500 earlier task nodes, 53 other book files and all 1,039 book headings, prior chronology, original dependency edits and pins. Public mutation (69 files / 50 mutations) and selector (68 files / 11 contrast mutations) checks pass. Knowledge has 1,151 facts / 9,205 keys; memory, both history-pressure checks, mdBook rendering and diff hygiene pass. The normal nine-doctrine commit hook remains mandatory; no new canonical run is required.
+  Commit: `CONFORMANCE-SOURCE-READING.1.35 - read generated and gap consumers and reconcile source delta`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.36`
   Status: `pending`
@@ -1823,7 +1831,7 @@ additional reading credit from integration delivery.
 
 | Rank | Leaf | Status | Next action |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.35` | `pending` | Integration .7 closes the temporary documentation activity. After its clean canonical commit/push, resume the unchanged three-source, 1,500-fragment / 51,804-byte reading range. All runtime repair prerequisites remain. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.36` | `pending` | Continue gap tests 1027–1154, then the five remaining sources in its exact 1,500-fragment / 58,957-byte scope. Preserve baseline reading hashes and the separately pinned integration delta. |
 
 ## Decisions
 
@@ -1835,6 +1843,8 @@ additional reading credit from integration delivery.
 - None at decomposition. Ordinary source repairs retain startup prerequisites; later collection pressure must be measured rather than assumed away.
 
 ## Verification Log
+
+- `2026-09-21` .1.35: Ten complete windows cover 1,500 fragments / 51,804 baseline bytes; ordered window SHA-256 1164b42887bab92a4ea03d85fcaf4a9dc0c6913fc7607fe21a0d66cb0a424992. Cumulative reading is 35/143, 46,538 fragments / 1,405,327 baseline bytes and 86 complete files; gap tests remain partial through line 1026. Retained exact integration commit 87b35665e proof passes generated-source (6), inspector (2) and gap (124) tests (132 total), with unchanged source identities. The old uniform-identity audit fails on the approved integration delta; its corrected recipe passes all 160 inputs/143 groups/302 ranges and six rejected snapshot mutations. No new runtime execution, native build, full CI or push is claimed for this focused reading leaf. Existing runtime repairs remain open.
 
 - `2026-09-13` .1.34: Conformance .1.34 reads 11 complete windows, 1,500 fragments and 56,255 baseline-identical bytes. Physical reading is 34/143: 45,038 fragments, 1,353,523 bytes and 84 complete files. Five more test files are fully read; generated-source reading stops at153. Five managed Perl targets pass43 tests and three neutral contracts pass. Evidence distinguishes adapted diagnostic fixtures and in-process generated loading. The director requests a temporary clean-checkpoint pivot to BACKEND-INTEGRATION-GUIDES.0, covering all five backends; return to conformance .1.35 after that activity. Existing repairs remain open.
 - `2026-09-13` .1.33: Conformance .1.33 reads 11 complete windows, 1,381 fragments and 65,521 baseline-identical bytes. Physical reading is 33/143: 43,538 fragments, 1,297,268 bytes and 79 complete files. The complete ActionIR test file is read, preserving the distinction between AST-field lowering checks and authored-syntax admission. Callable literal reading covers inert records, dynamic invocation, in-process generated execution, precedence and typed failure/restoration checks. Fresh callable target10/10 and neutral governance pass; unchanged AST23 proof is retained. Next .1.34 owns later callable tests. Existing boolean and receiver-guard defects and all other repairs remain open.
@@ -1874,6 +1884,8 @@ additional reading credit from integration delivery.
 
 ## Commit Log
 
+- `2026-09-21` .1.35: `CONFORMANCE-SOURCE-READING.1.35 - read generated and gap consumers and reconcile source delta`; activation 87b35665e; next .1.36 after clean handoff and zero-byte brief.
+
 - `2026-09-13` .1.34: `CONFORMANCE-SOURCE-READING.1.34 - read Perl conformance consumers and schedule integration guides`; activation d10305097eb502c0fe29309ec230437396e26d82; next .1.35 after clean handoff and zero-byte brief.
 - `2026-09-13` .1.33: `CONFORMANCE-SOURCE-READING.1.33 - complete AST lowering tests and read callable literal coverage`; activation 3d633f3b650aec95a283d36cc494cae076d41c6c; next .1.34 after clean handoff and zero-byte brief.
 - `2026-09-13` .1.32: `CONFORMANCE-SOURCE-READING.1.32 - complete CLI manifest and read ActionIR parser tests`; activation 62f79df1aa84da1c7c1c5dea01c78a73508c305c; next .1.33 after clean handoff and zero-byte brief.
@@ -1911,6 +1923,8 @@ additional reading credit from integration delivery.
 - `2026-09-13`: Decomposition lands under `SESSION-STARTUP-READING.3.8.0`; Git owns the resulting commit identity.
 
 ## Changelog
+
+- `2026-09-21` .1.35: Complete generated/inspector source reading, read gap consumer 1–1026, and repair baseline/current audit separation for the approved 113-byte integration delta.
 
 - `2026-09-13` .1.34: Five more test files are fully read; generated-source reading stops at153. Five managed Perl targets pass43 tests and three neutral contracts pass. Evidence distinguishes adapted diagnostic fixtures and in-process generated loading. The director requests a temporary clean-checkpoint pivot to BACKEND-INTEGRATION-GUIDES.0, covering all five backends; return to conformance .1.35 after that activity. Existing repairs remain open.
 - `2026-09-13` .1.33: The complete ActionIR test file is read, preserving the distinction between AST-field lowering checks and authored-syntax admission. Callable literal reading covers inert records, dynamic invocation, in-process generated execution, precedence and typed failure/restoration checks. Fresh callable target10/10 and neutral governance pass; unchanged AST23 proof is retained. Next .1.34 owns later callable tests. Existing boolean and receiver-guard defects and all other repairs remain open.

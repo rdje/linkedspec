@@ -6,12 +6,16 @@ answers:
   - does the diagnostic-output Perl consumer execute the neutral source unchanged
   - what does the CLI runner test prove about fixture bytes
   - what Perl conformance reading and focused proof completed in group 34
-date: 2026-09-13
-status: group 34 physically read; five focused Perl targets pass; later generated-source test body unread
+  - what generated-source inspector and gap coverage is read in group 35
+date: 2026-09-21
+status: groups 34/35 physically read; generated/inspector complete and gap source read through 1026; runtime proof remains separately scoped
 tags: [conformance, perl, reading, diagnostics, generated-source]
 evidence: "CONFORMANCE-SOURCE-READING.1.34 at activation d10305097eb502c0fe29309ec230437396e26d82; eleven complete windows, 1500 fragments, 56255 bytes, ordered window SHA-256 db04deab6c0365f8bc454e2695d410324a120104a232c213346f2b23ad16aef3. Five managed Perl targets pass43 top-level tests; neutral named marks3, diagnostics20 and duplicate-slot59 mutations pass."
+evidence_update_2026_09_21: "Ten complete windows cover 1,500 fragments / 51,804 baseline bytes; ordered window SHA-256 1164b42887bab92a4ea03d85fcaf4a9dc0c6913fc7607fe21a0d66cb0a424992. Cumulative reading is 35/143, 46,538 fragments / 1,405,327 baseline bytes and 86 complete files; gap tests remain partial through line 1026. Retained exact integration commit 87b35665e proof passes generated-source (6), inspector (2) and gap (124) tests (132 total), with unchanged source identities. The old uniform-identity audit fails on the approved integration delta; its corrected recipe passes all 160 inputs/143 groups/302 ranges and six rejected snapshot mutations. No new runtime execution, native build, full CI or push is claimed for this focused reading leaf."
 reverify: "bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/cli_conformance_runner.t t/complete_named_mark_contract.t t/diagnostic_output_perl_contract.t t/duplicate_regex_slot_identity_perl_contract.t t/generated_source_contract.t; bash tools/run_python_project_data.sh tools/check_complete_named_mark_contract.py; bash tools/run_python_project_data.sh tools/check_diagnostic_output_contract.py; bash tools/run_python_project_data.sh tools/check_duplicate_regex_slot_identity_contract.py"
 ---
+
+## Group 34 checkpoint — September 13
 
 The exact task scope finishes callable literals and reads the complete CLI runner,
 named-mark, diagnostic-output and duplicate-slot Perl consumers. Generated-source
@@ -54,6 +58,33 @@ same test process. That is generated execution with package isolation; none of
 those loaders alone demonstrates a fresh process or an independently deployed
 artifact. The generated-source prefix also checks five seek/five consume family
 policies and removed cursor-option precedence over invalid source parsing.
+
+## Group 35 checkpoint — September 21
+
+The generated-source suffix checks exact ten-family plan classification. It separately
+executes the neutral default result, seek/consume policies and two indexed alternatives,
+including a slash-bearing regex; plan classification alone is not every-family execution.
+Deterministic emission matches the legacy capture seam. Metadata, root-entry order, trace
+roles, v1 rejection and four plan-shape errors preserve typed stages and source identity.
+The emitted source loads into another package in the same process, not a fresh host.
+
+The inspector test calls the real script for five raw/lifecycle/edge forms and statically
+locks its explicit BootstrapSpec/EmitContext owners. The observed output contains generated
+Perl and canonical nodes with zero fallback/unresolved counts; it does not execute each
+printed fragment. Its current repair owner is [[codegen-inspector-thin-facade-break]].
+
+Gap reading includes exact authored slot metadata, named/numeric provenance, Unicode
+identity, duplicate-text reorder and ten static diagnostic fixtures. Live cases cover
+empty/Unicode gaps, child-extended commits, nested distinct owners, rollback, terminal tails,
+unavailable contexts, post-commit IT and cursor regression, plus unchanged legacy output.
+Generated cases compare canonical JSON values and cursor positions with live execution.
+Returned-span mutation is checked against a subsequent invocation. Distinct nested rule
+labels do not independently prove same-rule recursive isolation. Reading stops inside the
+generated nested/rollback parity call at 1026; group 36 owns the remaining source.
+
+Current gap admission is [[inter-match-gap-recurring-governance]], not the older authored
+staging milestone. The unchanged integration CI at 87b35665e passes generated (6), inspector (2)
+and gap (124) top-level tests. Whole-target proof gives no extra reading credit for the suffix.
 
 Related facts: [[perl-callable-codeblock-literal-record]], [[neutral-cli-fixture-runner]],
 [[complete-named-mark-perl-rust-parity]], [[perl-diagnostic-output-events]],

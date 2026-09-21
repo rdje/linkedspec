@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.35 - read generated and gap consumers and reconcile source delta
+
+Complete the generated-source and code-generation inspector reading, then read the Perl gap consumer through line 1026. Ten complete windows cover 1,500 fragments / 51,804 baseline bytes; ordered window SHA-256 1164b42887bab92a4ea03d85fcaf4a9dc0c6913fc7607fe21a0d66cb0a424992. Cumulative reading is 35/143, 46,538 fragments / 1,405,327 baseline bytes and 86 complete files; gap tests remain partial through line 1026. Retained exact integration commit 87b35665e proof passes generated-source (6), inspector (2) and gap (124) tests (132 total), with unchanged source identities. The old uniform-identity audit fails on the approved integration delta; its corrected recipe passes all 160 inputs/143 groups/302 ranges and six rejected snapshot mutations. No new runtime execution, native build, full CI or push is claimed for this focused reading leaf.
+
 ## 2026-09-21 — BACKEND-INTEGRATION-GUIDES.7 - close native backend integration delivery
 
 Complete the director-requested common integration entry and five native backend guides. Independent final setup/use/deployment/error replay confirms the maintained examples and explicit asset, ABI, storage and relocation requirements. Perl 8 setup / 17 deployment, Dart 9 / 36 source/AOT, Julia 11 / 24 and PUC Lua/LuaJIT 13 / 24 each pass. Nine own-workspace Rust controls, RGX public bootstrap/native reuse and 18 Lispish file groups pass. Six current native routes return the same 24 direct values; 17 retained native products preserve hashes/mtimes.

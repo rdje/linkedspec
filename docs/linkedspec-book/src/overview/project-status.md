@@ -498,14 +498,19 @@ the director's focused-verification grant used for this correction and the separ
 supporting-reading closeout. Reading completion establishes audited comprehension;
 it does not close the six grammar/literal repair roots or establish runtime signoff.
 Conformance, test and Unicode reading has exact ownership for all 160 inputs in
-143 bounded groups covering 8,257,059 decoded bytes. Thirty-four groups now account for
-45,038 fragments and 1,353,523 bytes, including 84 complete files. Callable, CLI
-runner, named-mark, diagnostic-output and duplicate-slot test files are fully read;
-generated-source reading reaches line153. Fresh focused Perl proof passes43 tests
-across five targets, with neutral named-mark, diagnostic and slot-identity checks.
-The diagnostic consumer adapts its neutral source into an action-edge fixture.
-Its emitted code and the other read generated consumers load into separate packages
-in the same process; that evidence does not establish fresh-process deployment.
+143 bounded groups covering 8,257,059 baseline decoded bytes. Thirty-five groups account for
+46,538 fragments and 1,405,327 baseline bytes, including 86 complete files. Generated-source
+and code-generation inspector tests are fully read; gap-consumer reading reaches line 1026.
+The unchanged integration CI supplies 132 top-level tests across generated-source, inspector
+and gap consumers. Test execution does not grant reading credit for the unread suffix.
+Generated plan classification covers ten families; dedicated result tests cover their stated
+fixtures. Emitted Perl loads into separate packages in the same process, which alone does
+not establish fresh-process deployment. Nested gap fixtures use distinct rule labels, and
+returned-span mutation is checked against a subsequent invocation. These are bounded tests,
+not claims about every possible recursive or shared-state interaction.
+Historical source ranges remain frozen. The approved integration-guidance delta adds 113
+current bytes in the cursor inventory; the audit pins that exact file separately and rejects
+all other path, mode or content drift. No parser behavior changes in this reading slice.
 The director has requested integration guides and runnable consumer examples for
 Perl, Rust, Dart, Julia and Lua, covering recursive checkout, dependency preparation
 and reuse, native APIs, results/errors and packaging. This temporary activity is

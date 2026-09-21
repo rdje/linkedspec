@@ -48,6 +48,9 @@ regenerate from the original `.spec` source. Caller-package inference makes
 that rejection work for old self-contained v1 wrappers that cannot pass the
 new explicit contract argument.
 
+Historical July 17 migration boundary (later backend migrations are recorded in
+[[generated-source-contract-v1]]; the shared semantic ledger is distinct from artifact versions):
+
 The shared five-backend [[generated-source-contract-v1]] remains the
 convergence baseline for Rust, Dart, Julia, and Lua until their dependency-
 ordered rule-local cursor migrations.

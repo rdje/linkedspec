@@ -10,15 +10,23 @@ answers:
   - "are digit only slot names valid"
   - "does capture_gaps execute in Perl"
   - "how does generated Perl preserve selector provenance"
-date: 2026-08-13
-status: confirmed; authored/static and private native-live staging complete, generated loading and admission pending
+date: 2026-09-21
+status: historical authored/native staging; current complete rollout owned by inter-match-gap-recurring-governance
 tags: [perl, capture, named-slots, unicode, descriptor, generated-source, diagnostics, dormant]
 evidence: "INTER-MATCH-GAP-CAPTURE.2.1 from clean 8f826923 permanently adds named declarations, named selectors, and capture_gaps parsing to specs/spec.spec and the reference bridge. Its 108-assertion dormant Perl consumer proves metadata and ordinary named selection while live and generated gap modes remain deliberately unavailable. The neutral rollout remains 1 complete + 8 pending with 55 mutations, plus 10 independent Perl dormancy mutations."
 evidence_update_2026_08_13_live: "INTER-MATCH-GAP-CAPTURE.2.2 from clean 912fc5ed makes the private native live mode pass all nine lifecycle/accessor groups and advances recognition effects to 137/246/58. Default metadata mode now passes 110 assertions. The exact consumer remains absent from ordinary/canonical/recurring admission, independently loaded generated execution remains .2.3, and gap rollout remains 1 complete + 8 pending / 55 mutations plus the same 10 dormancy locks."
 reverify: "prove -Iperl t/inter_match_gap_capture_perl_contract.t && bash tools/run_python_project_data.sh tools/check_inter_match_gap_capture_contract.py && bash tools/run_python_project_data.sh tools/check_unicode_rule_label_contract.py"
 ---
 
-# Perl authored inter-match-gap metadata
+# Current boundary — September 21
+
+CONFORMANCE-SOURCE-READING.1.35 confirms that the consumer defaults to all roles;
+unchanged canonical proof at 87b35665e passes 124 top-level tests. The pending/dormant
+statements below describe the August 13 staging checkpoint, not current availability.
+[[inter-match-gap-perl-implementation-plan]] and [[inter-match-gap-recurring-governance]]
+own subsequent generated, all-runtime and public admission. This reading closes no repair.
+
+# Historical authored inter-match-gap metadata — August 13
 
 The Perl reference accepts a same-line rule member `name=/regex/`, with optional horizontal whitespace on either
 side of `=`. `Rule`, `Rule[N]`, and `Rule[name]` are the selector forms. Named and anonymous declarations share
