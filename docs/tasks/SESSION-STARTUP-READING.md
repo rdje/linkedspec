@@ -2299,7 +2299,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Status: `active`
   Goal: Split and read all 160 entries under capability_conformance, cli_conformance, t, tests, and unicode_case.
   Children: `.3.8.0` owns exact decomposition; `CONFORMANCE-SOURCE-READING.1` owns all143 reading groups; .2 findings and .3 independent closeout stay separate.
-  Reading owner: `docs/tasks/CONFORMANCE-SOURCE-READING.md`; 143 groups/302 baseline ranges over160 inputs. Physical reading65/143:83,210 fragments/3,299,611 baseline bytes and97 complete files; Phase0 through33715. Approved113-byte inventory delta stays separate. Retained nineteen-subtest proof has222 direct assertions including7 nested results/63 inner assertions. Fluent container helper pairs inspect canonical nodes; existing .2.10 code-observation limits remain; .2.5–.2.11 and all prerequisites remain. .1.66 continues the lifecycle slice-array comparison. ADR0122/containment .15 are canonically admitted at ec10be6b.
+  Reading owner: `docs/tasks/CONFORMANCE-SOURCE-READING.md`; 143 groups/302 baseline ranges over160 inputs. Physical reading66/143:84,040 fragments/3,365,034 baseline bytes and97 complete files; Phase0 through34545. Approved113-byte inventory delta stays separate. Retained twenty-subtest proof has240 direct assertions and no nested plans. Scalar/numeric helper pairs inspect canonical nodes; existing .2.10 code-observation limits remain; .2.5–.2.11 and all prerequisites remain. .1.67 continues the lifecycle min/max comparison. ADR0122/containment .15 are canonically admitted at ec10be6b.
   Acceptance: Include phase0, neutral contracts, fixtures, generators, and four explicitly decoded pinned Unicode
     inputs. Keep generated/fixture bytes in scope; count neither a hash nor enumeration as full reading.
   Verification: `pending`
@@ -4673,7 +4673,7 @@ startup implementation prerequisites and the rgx reading exclusion remain intact
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.66` | `pending` | Read Phase0 lines 33716–34545 (830 fragments / 65,423 baseline bytes), continuing the readiness and final node assertions of the lifecycle slice-array comparison. Repairs .2.5–.2.11 and earlier repairs retain required reading prerequisites. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.67` | `pending` | Read Phase0 lines 34546–35429 (884 fragments / 65,500 baseline bytes), continuing the remaining eleven assertions of the lifecycle numeric min/max comparison. Repairs .2.5–.2.11 and earlier repairs retain required reading prerequisites. |
 
 ## Reading Ledger
 

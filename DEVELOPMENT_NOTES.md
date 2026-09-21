@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.66 - read scalar and numeric descriptor comparisons
+
+Twenty completed fluent/structured comparisons have twelve assertions each. Scalar boundary, substring, concatenation, regex and numeric fixtures compare descriptor nodes without checking evaluated helper results or hit-map equality; replace_substr additionally requires IF/ELSE nodes. The lifecycle min/max fixture ends after its first build assertion. Exact comprehension remains in conformance-perl-consumer-reading.
+
 ## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.65 - read fluent container helper comparisons and observation limits
 
 Fluent/structured helper pairs use twelve assertions covering builds, slots, fallback, raw dependencies, unresolved helpers, node-list equality, readiness and selected nodes. They do not execute helper outputs or prove copy isolation or hit-map equality. Repeated ASSIGN terms still assert presence only. Seventeen complete helper comparisons plus the carried marker comparisons retain nineteen completed subtests; exact comprehension is in conformance-perl-consumer-reading.

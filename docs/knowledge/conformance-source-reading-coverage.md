@@ -11,7 +11,7 @@ answers:
   - "what evidence capacity blocks remaining conformance reading"
   - "what exact fourteen limits are proposed for remaining conformance reading"
 date: 2026-09-21
-status: exact baseline decomposition preserved; physical reading 65/143, 97 files complete and 78 groups remain; one approved current-source delta
+status: exact baseline decomposition preserved; physical reading 66/143, 97 files complete and 77 groups remain; one approved current-source delta
 tags: [reading, conformance, tests, unicode, continuity, CONFORMANCE-SOURCE-READING]
 evidence: "Startup .3.8.0 independently accounts for160 baseline-identical files,5,422,313 stored bytes and8,257,059 decoded bytes in167,606 line fragments/167,604 LF delimiters. Four gzip inputs contribute54,500 decoded lines. All143 groups/302 ranges are contiguous, disjoint and bounded at1500 fragments/65536 bytes. No source, registry or runtime behavior changes; no physical-reading credit from inventory."
 reverify: "Run CONFORMANCE_SOURCE_READING_COVERAGE below through the project-data wrapper; it derives source identity from Git and range ownership from the task-tree rather than a parallel manifest. Use scripts/check_task_tree_metadata.sh for actual task collection limits."
@@ -428,16 +428,15 @@ properties, context rules, fixtures or decoded upstream inputs. All repairs rema
 
 ## Conformance reading checkpoint
 
-`CONFORMANCE-SOURCE-READING.1.65` reads 11 windows, 957 fragments and 65,498 baseline bytes.
-Cumulative reading is 65/143, 83,210 fragments, 3,299,611 baseline bytes and 97 complete files.
-Phase0 is partial through line 33715, after assertion ten in the lifecycle slice-array comparison.
-[[conformance-perl-consumer-reading]] records fluent container helper comparisons with their
+`CONFORMANCE-SOURCE-READING.1.66` reads 11 windows, 830 fragments and 65,423 baseline bytes.
+Cumulative reading is 66/143, 84,040 fragments, 3,365,034 baseline bytes and 97 complete files.
+Phase0 is partial through line 34545, after the first build assertion in the lifecycle min/max comparison.
+[[conformance-perl-consumer-reading]] records scalar and numeric helper comparisons with their
 observation limits. [[phase0-code-slot-equivalence-observation-gap]] remains the
 code-equivalence limitation; all .2.5–.2.11 and earlier repairs stay open.
-Retained proof covers nineteen subtests with 222 direct assertions, including seven nested results
-with 63 verified inner assertions. No new defect or target execution is claimed.
-The pinned 113-byte inventory delta stays separate; these ranges total 3,299,724 current
-bytes. Next .1.66 reads Phase0 lines 33716–34545.
+Retained proof covers twenty subtests with 240 direct assertions and no nested plans. No new defect or target execution is claimed.
+The pinned 113-byte inventory delta stays separate; these ranges total 3,365,147 current
+bytes. Next .1.67 reads Phase0 lines 34546–35429.
 
 Lowercase table entries and Final Sigma context remain separate. Exact scalar
 sequences, sparse ranges, fullwidth forms and ligature identities are preserved;
