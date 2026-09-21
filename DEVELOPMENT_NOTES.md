@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.63 - read outer-family selected-node checks and comparison limits
+
+The carried eight-assertion lifecycle loop compares node lists; subsequent seven-assertion loops and eleven-assertion action tests only require selected control nodes in the marker descriptor. Neither this presence check nor slot equality establishes complete metadata or execution parity. Five seven-tag loops retain 252 inner assertions. Exact comprehension and .2.10 limits remain in conformance-perl-consumer-reading.
+
 ## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.62 - read switch outer-family comparisons and exact metadata limits
 
 Same-family switch branch pairs compare canonical node/hit maps with thirteen action or nine lifecycle assertions; cross-family inline/marker outer switches omit hit-map equality and use twelve/eight. Five seven-tag loops retain 308 inner assertions. Code-output labels still observe uppercase slots under .2.10; the next lifecycle declaration is partial after I and LS. Comprehension remains in conformance-perl-consumer-reading.
