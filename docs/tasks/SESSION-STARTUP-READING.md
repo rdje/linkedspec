@@ -2299,7 +2299,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Status: `active`
   Goal: Split and read all 160 entries under capability_conformance, cli_conformance, t, tests, and unicode_case.
   Children: `.3.8.0` owns exact decomposition; `CONFORMANCE-SOURCE-READING.1` owns all143 reading groups; .2 findings and .3 independent closeout stay separate.
-  Reading owner: `docs/tasks/CONFORMANCE-SOURCE-READING.md`; 143 groups/302 baseline ranges over 160 inputs. Physical reading 48/143: 61,350 fragments / 2,247,019 baseline bytes and 97 complete files; Phase0 remains partial through line 11855. The approved 113-byte cursor-inventory delta stays separately pinned. Retained proof covers twenty-seven completed subtests / 313 assertions; .1.49 continues reading. All runtime repair prerequisites remain.
+  Reading owner: `docs/tasks/CONFORMANCE-SOURCE-READING.md`; 143 groups/302 baseline ranges over 160 inputs. Physical reading 49/143: 62,344 fragments / 2,312,539 baseline bytes and 97 complete files; Phase0 remains partial through line 12849. The approved 113-byte cursor-inventory delta stays separately pinned. Retained proof covers twenty-nine completed subtests / 202 assertions; .1.50 continues reading. All runtime repair prerequisites remain.
   Acceptance: Include phase0, neutral contracts, fixtures, generators, and four explicitly decoded pinned Unicode
     inputs. Keep generated/fixture bytes in scope; count neither a hash nor enumeration as full reading.
   Verification: `pending`
@@ -4673,7 +4673,7 @@ startup implementation prerequisites and the rgx reading exclusion remain intact
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.49` | `pending` | Read Phase0 lines 11856–12849 (994 fragments / 65,520 baseline bytes), continuing the compiler success-cleanup test. All repair prerequisites remain. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.50` | `pending` | Read Phase0 lines 12850–13631 (782 fragments / 65,470 baseline bytes), continuing the Diagnostics lazy-load subprocess. Repair .2.5 and all earlier repairs retain required-reading prerequisites. |
 
 ## Reading Ledger
 

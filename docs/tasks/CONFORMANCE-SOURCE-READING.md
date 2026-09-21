@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `CONFORMANCE-SOURCE-READING`
-- Status: `active` / exact decomposition; physical reading 48/143
+- Status: `active` / exact decomposition; physical reading 49/143
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.8`
 - Created: `2026-09-13`
 - Last updated: `2026-09-21`
@@ -885,14 +885,21 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
   Commit: `CONFORMANCE-SOURCE-READING.1.48 - read public diagnostic propagation and handler lifecycle contracts`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.49`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `7a166581c022029c461ebb78d95971f4a6666bb2`.
+  Verification tier: `focused`
+  Focused checks: Complete bounded source reading, exact baseline/window and retained canonical proof; reconcile Knowledge, preserve unrelated source/history/task evidence, memory, both history checks, book, direct public checks and normal doctrines.
+  Canonical trigger: Ordinary bounded reading and fact reconciliation only; no runtime, dependency, public-contract, infrastructure or parent-closeout change.
   Goal: Read and understand conformance/test/Unicode group 49.
   Scope: `t/phase0_regression.t` lines 11856-12849
   Baseline evidence: 994 fragments / 65520 decoded bytes; ordered range SHA-256 `935b7c9398809a4c668d89e6f3a6dcdf32bdf6e1d982d761ecffdf1cf6c9305d`.
   Dependencies: .1.48 committed with clean handoff.
   Acceptance: Read every scoped byte in complete bounded windows; retain source identity, exact comprehension, canonical Knowledge reconciliation, concrete finding ownership, focused proof and per-leaf continuity. Unread crossing constructs retain the next range owner.
-  Verification: `pending`
-  Commit: `pending`
+  Reading evidence: 11 complete windows / 994 fragments / 65520 bytes; ordered window SHA-256 `d73aae559d4b4280080e5d3df87d2300a07cc2f30f85439045cde24f95689a60`.
+  Comprehension: Compiler controls finish success cleanup, then distinguish absent top label, handler and descriptor entry at invocation; artificial setter suppression or validation bypass isolates the relevant boundary. Default dependency-map construction receives explicit compiled state; direct state validation and ordered migration metadata precede outward projection. The projection trap observes validation entry, not an independent validation-completion timestamp. Removed facade/dependency-builder traps preserve selected EmitContext outputs, canonical RETURN classification and duplicate unresolved counts. Nine lowering examples check generated strings without executing those strings. ScannerCore binds five symbols exactly once for one return-bare scan. Cold subprocesses check require-only and on-demand owner loading. The MethodExpr Deps marker is emitted before parsing despite a post-parse assertion label; a controlled fixture load survives all seven assertions while explicit before/after probes detect it. The production module is absent and normal parsing leaves Deps unloaded. New .2.5 owns test repair after prerequisites. Diagnostics lazy-load reading stops inside its child heredoc before assertions.
+  Verification: Unchanged canonical commit 87b35665e retains PASS for 29 completed subtests, ordinals 365–393 with 202 assertions; sequential TAP numbers and unchanged Phase0/own Perl/spec identities are verified. Fresh TOOLBOX6.2 extraction passes the MethodExpr test with all7 assertions both unchanged and with an inert post-parse Deps fixture load; independent cold probes observe 0/0 versus 0/1. Repair .2.5 owns the wrong-time observation. The Diagnostics lazy-load heredoc remains partial before its assertions; .1.50 owns the suffix. Targeted helper inspection at48608–48631 grants no reading credit outside this scope. Historical whole-gate proof remains 1032 top-level tests; no new full gate, runtime repair, dependency build or push is claimed.
+  Candidate proof: Exact 160-input/143-group/302-range audit and eleven-window replay pass. Preservation verifies 2,844 other files / 50,534,669 bytes, 504 earlier task nodes, 53 other book files and all 1,039 book headings; new pending repair .2.5 and its finding section in the existing consumer fact card are admitted. Historical scopes, recipes and parent Gitlink remain exact. Fresh reproduction from the committed-form fact recipe confirms original/injected tests both pass7 assertions and independent 00/01 before/after states. All six current reading-index rows agree on next .1.50. Memory, both history checks, mdBook, public mutation (69 files / 50 mutations), public selector (68 files / 11 contrast mutations) and diff checks pass. Hot histories remain below required rollover. Knowledge is 1,151 facts / 9,224 keys. The first commit hook rejected a new 1,153rd Knowledge collection file against the unchanged 1,152-file cap. Its complete finding body, replay recipe and three question keys were merged into the existing consumer card; no fact or scope is dropped and no control increases. Normal nine-doctrine hooks govern landing.
+  Commit: `CONFORMANCE-SOURCE-READING.1.49 - read compiler owner paths and diagnose lazy-load test blind spot`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.50`
   Status: `pending`
@@ -1938,6 +1945,16 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
   Verification: `pending`
   Commit: `pending`
 
+- ID: `CONFORMANCE-SOURCE-READING.2.5`
+  Status: `pending`
+  Goal: Make the MethodExpr lazy-load test observe Deps state after the operation it claims to verify.
+  Evidence: .1.49 reads the exact Phase0 test: __DEPS_STILL_UNLOADED__ is printed before _parse_method_function_expr, yet assertion four claims the parse keeps Deps unloaded. TOOLBOX6.2 extraction passes all7 assertions both unchanged and with an inert project-local Deps fixture explicitly required after the parse. Independent cold probes observe before/after 0/0 normally and 0/1 with that fixture. The production Deps module is absent; the first direct require attempt therefore failed and is not a runtime regression. Canonical fact: docs/knowledge/conformance-perl-consumer-reading.md#methodexpr-post-parse-deps-observation-gap.
+  Scope: The Phase0 MethodExpr subprocess observation and a meaningful post-operation forced-load rejection control; keep the current correct lazy-loading behavior and separate pre/post assertions.
+  Dependencies: Required source/book/policy reading, including the remaining Phase0 body, before tracked test repair.
+  Acceptance: Add an explicit post-parse Deps observation, preserve independent initial-load and parsed-result checks, show the isolated post-parse fixture-load mutation fails the intended assertion, remove the fixture from normal execution, pass focused pristine controls and direct-dependent checks, update book/Knowledge continuity and commit. Do not infer production loading from an injected fixture or reuse a pre-call marker as post-call evidence.
+  Verification: `pending`
+  Commit: `pending`
+
 - ID: `CONFORMANCE-SOURCE-READING.3`
   Status: `pending`
   Goal: Independently reconcile all source/range/reading-commit/repair evidence and close only the required reading lane with applicable verification.
@@ -1965,7 +1982,7 @@ additional reading credit from integration delivery.
 
 | Rank | Leaf | Status | Next action |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.49` | `pending` | Read Phase0 lines 11856–12849 (994 fragments / 65,520 baseline bytes), continuing the compiler success-cleanup test. All repair prerequisites remain. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.50` | `pending` | Read Phase0 lines 12850–13631 (782 fragments / 65,470 baseline bytes), continuing the Diagnostics lazy-load subprocess. Repair .2.5 and all earlier repairs retain required-reading prerequisites. |
 
 ## Decisions
 
@@ -1977,6 +1994,8 @@ additional reading credit from integration delivery.
 - None at decomposition. Ordinary source repairs retain startup prerequisites; later collection pressure must be measured rather than assumed away.
 
 ## Verification Log
+
+- `2026-09-21` .1.49: Eleven complete windows cover 994 fragments / 65,520 baseline bytes; ordered window SHA-256 d73aae559d4b4280080e5d3df87d2300a07cc2f30f85439045cde24f95689a60. Cumulative reading is 49/143: 62,344 fragments / 2,312,539 baseline bytes and 97 complete files. Phase0 is partial through line 12849. Unchanged canonical commit 87b35665e retains PASS for 29 completed subtests, ordinals 365–393 with 202 assertions; sequential TAP numbers and unchanged Phase0/own Perl/spec identities are verified. Fresh TOOLBOX6.2 extraction passes the MethodExpr test with all7 assertions both unchanged and with an inert post-parse Deps fixture load; independent cold probes observe 0/0 versus 0/1. Repair .2.5 owns the wrong-time observation. The Diagnostics lazy-load heredoc remains partial before its assertions; .1.50 owns the suffix. Targeted helper inspection at48608–48631 grants no reading credit outside this scope. Historical whole-gate proof remains 1032 top-level tests; no new full gate, runtime repair, dependency build or push is claimed.
 
 - `2026-09-21` .1.48: Eleven complete windows cover 1,032 fragments / 65,524 baseline bytes; ordered window SHA-256 d84f1017d31b0bd33fb239a44e9da6beebddfb6e5ea680e820ef93ff495cd896. Cumulative reading is 48/143: 61,350 fragments / 2,247,019 baseline bytes and 97 complete files. Phase0 is partial through line 11855. Unchanged canonical commit 87b35665e retains PASS for 27 completed subtests, ordinals 338–364 with 313 assertions. Phase0, own Perl sources and shipped specs remain unchanged; TAP replay verifies every sequential assertion number. The compiler success-cleanup test stops after its first of eight assertions; .1.49 owns the seven remaining assertions and invocation. Historical whole-gate proof remains 1032 top-level tests. No new runtime execution, runtime repair, dependency build, full CI or push is claimed; all repair prerequisites remain.
 
@@ -2044,6 +2063,8 @@ additional reading credit from integration delivery.
 
 ## Commit Log
 
+- `2026-09-21` .1.49: `CONFORMANCE-SOURCE-READING.1.49 - read compiler owner paths and diagnose lazy-load test blind spot`; activation 7a166581c; .1.50 follows clean handoff and empty brief.
+
 - `2026-09-21` .1.48: `CONFORMANCE-SOURCE-READING.1.48 - read public diagnostic propagation and handler lifecycle contracts`; activation 0a8c217a1; .1.49 follows clean handoff and empty brief.
 
 - `2026-09-21` .1.47: `CONFORMANCE-SOURCE-READING.1.47 - read mode-result validation and runtime-context reuse contracts`; activation 3e0468533; .1.48 follows clean handoff and empty brief.
@@ -2109,6 +2130,8 @@ additional reading credit from integration delivery.
 - `2026-09-13`: Decomposition lands under `SESSION-STARTUP-READING.3.8.0`; Git owns the resulting commit identity.
 
 ## Changelog
+
+- `2026-09-21` .1.49: Read compiler owner/state and ActionIR bridge controls; root-cause the wrong-time Deps observation and own repair .2.5 while preserving all prerequisites.
 
 - `2026-09-21` .1.48: Read public diagnostic propagation, handler invocation and compile-once controls; preserve the partial success-cleanup test and all repair prerequisites.
 

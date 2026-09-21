@@ -498,17 +498,17 @@ the director's focused-verification grant used for this correction and the separ
 supporting-reading closeout. Reading completion establishes audited comprehension;
 it does not close the six grammar/literal repair roots or establish runtime signoff.
 Conformance, test and Unicode reading has exact ownership for all 160 inputs in
-143 bounded groups covering 8,257,059 baseline decoded bytes. Forty-eight groups account for
-61,350 fragments and 2,247,019 baseline bytes, including 97 complete files. Phase0 reading
-reaches line 11855. Public diagnostics preserve file and rule identity across resolution,
-compilation and invocation. Tests distinguish trapped handler failures from rethrown parser
-errors, exercise successful recovery, and observe one handler compilation reused by two calls.
-Invalid generated syntax produces diagnostic state on invocation. These controls invoke handlers
-directly; independent emitted-module behavior remains a separate proof boundary. Twenty-seven
-completed subtests retain unchanged canonical proof with 313 assertions. The compiler cleanup
-test remains partial. No fresh runtime execution or whole-file reading credit is claimed.
-The pinned 113-byte inventory delta stays separate; helper .2.3, header .2.4 and all parser/runtime
-repairs remain open.
+143 bounded groups covering 8,257,059 baseline decoded bytes. Forty-nine groups account for
+62,344 fragments and 2,312,539 baseline bytes, including 97 complete files. Phase0 reading
+reaches line 12849. Compiler tests distinguish missing entry state and preserve ordered state
+through validation and projection. ActionIR tests check selected owner paths, generated strings
+and cold module loading. These observations have separate evidence limits. Fresh focused probes
+found a test blind spot: the MethodExpr test uses a pre-call Deps marker for a post-call claim.
+Normal parsing keeps Deps unloaded; a forced fixture load escapes the existing assertion. Repair
+.2.5 owns an explicit post-call observation and mutation control after required reading.
+Twenty-nine completed subtests retain unchanged canonical proof with 202 assertions. The Diagnostics
+lazy-load test remains partial; no full-gate execution or whole-file reading credit is claimed.
+The pinned 113-byte inventory delta stays separate; all prerequisite-gated repairs remain open.
 The director has requested integration guides and runnable consumer examples for
 Perl, Rust, Dart, Julia and Lua, covering recursive checkout, dependency preparation
 and reuse, native APIs, results/errors and packaging. This temporary activity is
