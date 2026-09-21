@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.44 - read validation compiler and runtime-context contracts
+
+Eleven complete windows cover 1,190 fragments / 65,521 baseline bytes; ordered window SHA-256 1482c40e24c0dc3b8c8985c7a8bd3a70ae78c9f2085dbd86f727dafff9d3039a. Cumulative reading is 44/143: 57,321 fragments / 1,985,093 baseline bytes and 97 complete files. Phase0 is partial through line 7826. Unchanged canonical commit 87b35665e retains PASS for 37 completed subtests, ordinals 217–253 with 295 assertions. Phase0, own Perl sources and all shipped specs remain unchanged. TAP replay checks every assertion number, including four valid description-free ok lines. The owner-default-error test is partial after five assertions and its final fallback call; .1.45 owns the sixth assertion. Historical whole-gate proof remains 1032 top-level tests. No new runtime execution, runtime repair, dependency build, full CI or push is claimed; all repair prerequisites remain.
+
 ## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.43 - read bounded AND and paragraph validation contracts
 
 Eleven complete windows cover 1,500 fragments / 64,877 baseline bytes; ordered window SHA-256 8749a8dc08b927f83439d0e9056e12252e8206c7243c342095145adc4d72a28d. Cumulative reading is 43/143: 56,131 fragments / 1,919,572 baseline bytes and 97 complete files. Phase0 is partial through line 6636. Unchanged canonical commit 87b35665e retains PASS for 54 completed subtests, ordinals 163–216 with 311 assertions. Phase0, own Perl sources and Lispish.spec remain unchanged. The unclosed-multiline-block test is partial at its spec heredoc; .1.44 owns its invocation and all four assertions. Historical whole-gate proof remains 1032 top-level tests. No new runtime execution, runtime repair, dependency build, full CI or push is claimed; all repair prerequisites remain.

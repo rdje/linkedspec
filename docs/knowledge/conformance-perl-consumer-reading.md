@@ -17,8 +17,9 @@ answers:
   - what do Phase0 plugin compatibility and spec lookup tests establish
   - what do Phase0 resolution error and rule-family tests establish
   - what do Phase0 bounded AND and paragraph validation tests establish
+  - what do Phase0 compiler boundary and runtime context tests establish
 date: 2026-09-21
-status: groups 34–43 physically read; Phase0 partial through line 6636; all runtime repair prerequisites remain
+status: groups 34–44 physically read; Phase0 partial through line 7826; all runtime repair prerequisites remain
 tags: [conformance, perl, reading, diagnostics, generated-source]
 evidence: "CONFORMANCE-SOURCE-READING.1.34 at activation d10305097eb502c0fe29309ec230437396e26d82; eleven complete windows, 1500 fragments, 56255 bytes, ordered window SHA-256 db04deab6c0365f8bc454e2695d410324a120104a232c213346f2b23ad16aef3. Five managed Perl targets pass43 top-level tests; neutral named marks3, diagnostics20 and duplicate-slot59 mutations pass."
 evidence_update_2026_09_21: "Ten complete windows cover 1,500 fragments / 51,804 baseline bytes; ordered window SHA-256 1164b42887bab92a4ea03d85fcaf4a9dc0c6913fc7607fe21a0d66cb0a424992. Cumulative reading is 35/143, 46,538 fragments / 1,405,327 baseline bytes and 86 complete files; gap tests remain partial through line 1026. Retained exact integration commit 87b35665e proof passes generated-source (6), inspector (2) and gap (124) tests (132 total), with unchanged source identities. The old uniform-identity audit fails on the approved integration delta; its corrected recipe passes all 160 inputs/143 groups/302 ranges and six rejected snapshot mutations. No new runtime execution, native build, full CI or push is claimed for this focused reading leaf."
@@ -26,8 +27,8 @@ evidence_update_2026_09_21_group36: "Eleven complete windows cover 1,500 fragmen
 reverify: "bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/cli_conformance_runner.t t/complete_named_mark_contract.t t/diagnostic_output_perl_contract.t t/duplicate_regex_slot_identity_perl_contract.t t/generated_source_contract.t; bash tools/run_python_project_data.sh tools/check_complete_named_mark_contract.py; bash tools/run_python_project_data.sh tools/check_diagnostic_output_contract.py; bash tools/run_python_project_data.sh tools/check_duplicate_regex_slot_identity_contract.py"
 evidence_update_2026_09_21_group37: "Fourteen complete windows cover 1,500 fragments / 63,613 baseline bytes; ordered window SHA-256 98d4de26a6f747975c45fe91277d218c6947936925d1ae233586706bef952d64. Cumulative reading is 37/143: 49,538 fragments / 1,527,897 baseline bytes and 97 complete files. Phase0 remains partial at lines 1–43. Fresh managed metadata/oracle checks pass 9 top-level tests. Unchanged integration commit 87b35665e retains native-loader (5), MCP binding/dispatch/stdio (23), admission (13) and Phase0 1032 proof. Full-target execution grants no reading credit to the unread Phase0 body. Header correction .2.4 is pending after prerequisites; helper repair .2.3 and existing runtime repairs remain open. No dependency build, new canonical run or push is claimed."
 evidence_update_2026_09_21_group38: "Eleven complete windows cover 1,067 fragments / 65,529 baseline bytes; ordered window SHA-256 f57116fee0db80f49969546da5cd033988e06b55191fc88358b7c6d6d334fd3e. Cumulative reading is 38/143: 50,605 fragments / 1,593,426 baseline bytes and 97 complete files. Phase0 is partial through line 1110. Exact unchanged canonical commit 87b35665e supplies PASS for all 38 fully read subtests (ordinals 2–39). The crossing facade error-state test remains partial; its suffix is .1.39-owned. The complete 1032-test gate remains retained historical proof, not new execution or reading credit. No new defect, runtime repair, dependency build, full CI or push is claimed; all existing repairs retain their prerequisites."
-evidence_phase0_checkpoint: "Eleven complete windows cover 1,500 fragments / 64,877 baseline bytes; ordered window SHA-256 8749a8dc08b927f83439d0e9056e12252e8206c7243c342095145adc4d72a28d. Cumulative reading is 43/143: 56,131 fragments / 1,919,572 baseline bytes and 97 complete files. Phase0 is partial through line 6636. Unchanged canonical commit 87b35665e retains PASS for 54 completed subtests, ordinals 163–216 with 311 assertions. Phase0, own Perl sources and Lispish.spec remain unchanged. The unclosed-multiline-block test is partial at its spec heredoc; .1.44 owns its invocation and all four assertions. Historical whole-gate proof remains 1032 top-level tests. No new runtime execution, runtime repair, dependency build, full CI or push is claimed; all repair prerequisites remain."
-reverify_phase0_checkpoint: "Replay .1.43 using conformance-source-reading-coverage; compare ordinals 163–216 and unchanged own Perl sources against canonical commit 87b35665e. Retained execution grants no additional reading credit."
+evidence_phase0_checkpoint: "Eleven complete windows cover 1,190 fragments / 65,521 baseline bytes; ordered window SHA-256 1482c40e24c0dc3b8c8985c7a8bd3a70ae78c9f2085dbd86f727dafff9d3039a. Cumulative reading is 44/143: 57,321 fragments / 1,985,093 baseline bytes and 97 complete files. Phase0 is partial through line 7826. Unchanged canonical commit 87b35665e retains PASS for 37 completed subtests, ordinals 217–253 with 295 assertions. Phase0, own Perl sources and all shipped specs remain unchanged. TAP replay checks every assertion number, including four valid description-free ok lines. The owner-default-error test is partial after five assertions and its final fallback call; .1.45 owns the sixth assertion. Historical whole-gate proof remains 1032 top-level tests. No new runtime execution, runtime repair, dependency build, full CI or push is claimed; all repair prerequisites remain."
+reverify_phase0_checkpoint: "Replay .1.44 using conformance-source-reading-coverage; compare ordinals 217–253 and unchanged own Perl sources against canonical commit 87b35665e. Retained execution grants no additional reading credit."
 reverify_group38: "Replay .1.38 using conformance-source-reading-coverage and compare its 38 complete subtest names with retained canonical commit 87b35665e; this grants no new source-reading or runtime credit."
 reverify_group37: "bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/noncurrent_helper_metadata.t t/oracle_root_target_regex_semantics.t; retain unchanged dated MCP/native-loader proof separately."
 reverify_group36: "bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/logical_helper_perl_contract.t t/map_leaves_mutation_perl_contract.t; reproduce the helper observation with HELPER_PATH below, and retain the dated gap/MCP proof separately."
@@ -199,31 +200,31 @@ grants reading credit to the unread Phase0 body.
 
 ## Phase0 reading checkpoint
 
-Group 43 reads Phase0 lines 5137–6636. AND+ and open bounded AND produce identical
-nested sequence results and reject empty input. Bounded AND descriptor tests preserve
-action/blind families and repetition bounds; separate runtime cases check lower and upper
-limits. Intrinsic cursor ownership is governed by [[rule-local-cursor-and-bare-edge-contract]],
-which supersedes the older global cursor-axis wording in [[spec-rule-mode-semantics-map]].
+Group 44 reads Phase0 lines 6637–7826. Validation covers EOF-open blocks, fluent/lifecycle
+surfaces, grouped/indexed edges, and lax/strict contrasts for undefined and unused rules.
+The shipped-spec glob is checked through both validators; this establishes acceptance for
+that inventory, not execution. The zero-argument-flow cases use blocks, despite the test name
+also mentioning parentheses. Existing diagnostic-source repairs remain separately owned.
 
-Interleaved and same-line paragraph controls compare normalized bootstrap payloads and
-descriptor fields; they do not execute the resulting parsers. Validation tests distinguish
-labels, preambles, split markers, header/paragraph members, closers, regexes, mixed edge kinds,
-selectors, fluent suffixes, grouped targets and missing targets. Hash rockets and edge-like
-strings in action bodies test lexical isolation only; they do not admit those bodies to the
-portable DSL. Blind-call fluent/block equivalence compares normalized BCODE payloads.
+Split aliases and named marks check tokens, typed LECODE, emit-context lowering and regex
+slots. They do not execute capture behavior or prove recursive mark isolation. Authored
+ActionIR dependency ordering and explicit compiled-state fields reconcile with
+[[compilerstate-internal-model]]. Callback exceptions and invalid callbacks, tuples, containers
+and individual entries have distinct structured compiler errors and attribution boundaries.
 
-Open-block rule-label rejection includes direct validation, one parser-build rejection and
-nested blocks. Permissive non-label block contents remain validation-only fixtures. The
-extra-colon and nested-mode loops check stderr only for their last iteration. Invalid bounds
-establish rejection without requiring nonempty diagnostic text. These limits qualify claims;
-they do not establish a new runtime defect or close existing validation/grammar repairs.
+Facade tests check direct Runtime delegation, one scalar-result execution and empty-hash
+fallback for odd option lists. [[runtimecontext-boundary]] owns hash/scalar-slot normalization,
+capture-array identity and reset/flush behavior, spec/top identity and handler-source labels.
+Context preparation preserves caller fields while clearing stale build fields; fallback errors
+preserve existing structured payloads. Synthetic path strings exercise state only, with no I/O.
 
-Fifty-four completed subtests retain canonical PASS at ordinals 163–216 (311 assertions),
-with Phase0, own Perl sources and Lispish.spec unchanged from 87b35665e. No new execution
-is claimed. The unclosed-multiline-block fixture stops inside its spec heredoc; .1.44 owns
-the validation invocation and all four assertions. Reading is 43/143, 56,131 fragments /
-1,919,572 baseline bytes and 97 complete files. Earlier evidence remains in task nodes and Git.
-All runtime and prerequisite-gated repairs remain open.
+Thirty-seven completed subtests retain canonical PASS at ordinals 217–253 (295 assertions),
+with Phase0, own Perl sources and all shipped specs unchanged from 87b35665e. Replay checks
+each sequential assertion number, including four valid TAP lines without descriptions; the
+former space-after-number pattern omitted those lines. This was a local proof-script issue,
+not a test failure. No new execution is claimed. The owner-default-error test has five of six
+assertions read; .1.45 owns its final preservation assertion. Reading is 44/143, 57,321 fragments /
+1,985,093 baseline bytes and 97 complete files. All prerequisite-gated runtime repairs remain open.
 
 Related facts: [[perl-callable-codeblock-literal-record]], [[neutral-cli-fixture-runner]],
 [[complete-named-mark-perl-rust-parity]], [[perl-diagnostic-output-events]],
