@@ -498,38 +498,34 @@ the director's focused-verification grant used for this correction and the separ
 supporting-reading closeout. Reading completion establishes audited comprehension;
 it does not close the six grammar/literal repair roots or establish runtime signoff.
 Conformance, test and Unicode reading has exact ownership for all 160 inputs in
-143 bounded groups covering 8,257,059 baseline decoded bytes. Reading now covers 82/143 groups, 99,404 fragments / 4,399,178 baseline bytes and 100 complete files.
-Phase0, validation fuzz and progressive authority are complete; progressive contract is partial through line 353.
+143 bounded groups covering 8,257,059 baseline decoded bytes. Reading now covers 83/143 groups, 100,904 fragments / 4,449,693 baseline bytes and 103 complete files.
+Progressive contract, punctuation contract and recognition authority are complete; recognition contract is partial through line 549.
 
-The Phase0 file is now fully read, along with validation fuzz and the private
-progressive authority consumer. Phase0 contains 1,031 subtests within its
-1,032-result top-level plan; the preceding checkpoint's wording is corrected.
-The validation fuzz suite uses deterministic cases, including 168 combinations
-of labels, colon forms and modes. It separates envelope validity, syntax validity
-and edge presence.
+The progressive carrier checks exact child payloads in live, reconstructed and
+generated execution, along with typed failures and logical metadata. Generated
+source is loaded into separate packages in the same process. These checks do not
+observe actual parent registers before and after dispatch; repair .2.15 retains
+that precise coverage gap.
 
-**Two subprocess defects are owned by .2.16.** Four Phase0 capture helpers report
-a signal-terminated child as successful because they discard the signal bits.
-They also wait for stdout to close before draining stderr, which can block a
-child that fills stderr first. Forty-eight controlled outcomes confirm the
-mechanisms and distinguish in-memory guards. All eight timed-out owned children
-were terminated and reaped; no real CI child was signalled. The two repair slices
-will preserve termination status and drain both streams with exact-output checks.
+Zero-argument punctuation tests compare admitted bare forms with parenthesized
+twins, retain ordinary identifiers, check exclusions and execute the neutral
+fixture live and from generated source. Recognition tests observe real frame
+snapshots, recursive marks, falsey staged values and typed misuse diagnostics.
 
-**A parent-state observation gap is owned by .2.15.** The private progressive
-authority test compares a local fixture copy that is never passed to execution.
-Four independently changed states remain invisible to that predicate. This does
-not demonstrate runtime parent-state corruption. The repair must observe actual
-supported carrier state while preserving the authority's deliberate exclusion
-of parent registers.
+**Recognition compatibility coverage needs repair (.2.17).** Its private-authority
+test compares an unrelated local fixture, so changes to external cursor-stack or
+mark state remain invisible. Four controlled observations confirm this test gap;
+no runtime interference is demonstrated. The repair must observe supported runtime
+state and reject a relevant interference mutation while preserving private state
+ownership. The separate completed-token restoration defect remains startup .38.
 
-Progressive tests retain concrete registry, source-view, rebasing, resource,
-chain and result-detachment checks. Their computed ceiling checks do not close
-the separate enforcement defect owned by startup .37. Fresh focused proof passes
-94 top-level and 571 nested assertions. Only the first 353 lines of the admitted
-carrier consumer are read and executed here; its runtime suffix remains .1.83.
-MethodExpr .2.5, the bounded .2.14 repairs and other prerequisites remain open.
-The dependency grammar snapshot remains unused.
+Fresh focused proof passes 195 top-level and 424 nested TAP results. Recognition
+carrier reading stops inside a recursive fixture at line 549; only complete cases
+through 535 run here, including static effect barriers, falsey/miss terminals and
+zero-width behavior. Remaining recursive/generated cases continue in .1.84.
+MethodExpr .2.5 and every earlier repair retain their prerequisites. Phase0
+child-status loss and sequential pipe draining remain owned by .2.16. The supplied
+dependency grammar snapshot remains unused.
 
 The director approved the finite documentation-capacity proposal under ADR0122.
 Containment `.15` admits exactly fourteen controls for the remaining 93 reading
@@ -556,8 +552,8 @@ The history files keep their 512-line / 65,536-byte caps, mandatory rollover and
 immutable archives. General card/part limits remain unchanged. Admission consumes
 one of the conservative 99 reserve units; the remaining 98 units are forecast
 after actual admission overhead. This capacity does not complete source reading
-or repair tests: reading now reaches 82/143, `.1.83` is next, and the test and recipe
-repairs `.2.5`–`.2.16` remain open.
+or repair tests: reading now reaches 83/143, `.1.84` is next, and the test and recipe
+repairs `.2.5`–`.2.17` remain open.
 
 The director has requested integration guides and runnable consumer examples for
 Perl, Rust, Dart, Julia and Lua, covering recursive checkout, dependency preparation

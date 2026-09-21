@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.83 - read progressive punctuation and recognition observation boundaries
+
+Read the .1.83 four-file scope: 83/143 groups, 100,904 fragments / 4,449,693 baseline bytes and 103 complete files. Focused proof: Fresh focused proof passes 195 top-level and 424 nested TAP results: progressive contract129/0, punctuation7/73, recognition authority8/285 and the complete read recognition prefix through535 at51/76; four source-extracted compatibility scope controls also pass. Three files finish. .2.15 retains the full progressive carrier observation limit; new .2.17 owns disconnected recognition compatibility observations. New .2.17 ownership and the .2.15 carrier audit are recorded; all repairs retain prerequisites; .1.84 continues.
+
 ## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.82 - complete Phase0 and own subprocess and parent observation gaps
 
 Read the .1.82 four-file scope: 82/143 groups, 99,404 fragments / 4,399,178 baseline bytes and 100 complete files. Focused proof: Fresh focused proof passes 94 top-level assertions and 571 nested assertions across validation fuzz, private progressive authority and the exact read contract prefix; source-extracted parent controls add eight scope checks, and 48 process controls confirm status/pipe behavior with eight timeout children reaped. Three files finish. New .2.15 owns disconnected parent observations; .2.16 owns signal-status loss and sequential-pipe blocking. Prior .1.81 count wording is corrected. New .2.15/.2.16 owners and the .1.81 count correction are recorded; all repairs retain prerequisites; .1.83 continues.

@@ -29,8 +29,12 @@ This is an observation gap, not demonstrated runtime parent-state corruption.
 The result-detachment, budget and diagnostic assertions remain meaningful.
 
 `CONFORMANCE-SOURCE-READING.2.15` owns actual supported-carrier state observations
-and a relevant mutation rejected by the same observation. The admitted carrier
-suffix remains .1.83-owned and must be read before selecting those controls.
+and a relevant mutation rejected by the same observation. Reading .1.83 completes
+the admitted carrier suffix: it checks exact payloads across live, reconstructed
+and generated routes, missing-registry diagnostics, invalid operands and active
+recognition visibility. It adds no before/after observation of actual parent
+cursor/capture/mark/variable registers. Generated package loads share the process;
+they are not fresh-process proof. Preserve those valid assertions during repair.
 Private authority deliberately excludes parent registers; a repair must preserve
 that boundary and distinguish it from integration regression coverage.
 Startup `.37` separately owns resource-ceiling enforcement.

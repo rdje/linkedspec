@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.83 - read progressive punctuation and recognition observation boundaries
+
+Complete progressive carrier, punctuation and recognition authority reading; stop recognition carrier inside direct-recursive fixture at549 and execute only complete constructs through535. Focused proof195 top-level/424 nested TAP results (nested subtest results included). Four added recognition compatibility scope controls pass alongside285 original nested authority assertions: its fixture never enters execution. .2.17 owns actual supported-carrier observations, distinct from startup .38 completed-token restoration. Extend .2.15 with the absence of actual parent-register comparisons in the full progressive carrier while preserving exact payload/diagnostic proof. Same-process package loads are not fresh-process evidence; no runtime corruption, source repair, canonical run or grammar use claimed.
+
 ## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.82 - complete Phase0 and own subprocess and parent observation gaps
 
 Read the final Phase0 helpers and two complete test files plus the admitted progressive contract prefix. Exact fresh proof is fuzz 5 top/307 nested, authority 9/264 and contract prefix80; no unread carrier suffix is executed or credited. Parent observation uses a fixture clone only: eight scope controls pass with the original authority assertions, without proving runtime corruption. Four source-extracted subprocess helpers each lose SIGTERM status and block on stderr-first/interleaved large output; 48 original/guard outcomes pass and all eight timeout children are reaped. .2.15 owns actual parent observations; .2.16 splits status and concurrent capture. Correct .1.81 terminology to the previously established 1031 subtests within 1032 top-level assertions; retained runtime results and source bytes are unchanged.
