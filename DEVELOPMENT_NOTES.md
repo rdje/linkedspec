@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.67 - read payload branches and captured-call descriptor comparisons
+
+Modulo/clamp and array-drop pairs precede join-values and flat-list branches, direct call capture and action if/elseif call capture. Node requirements distinguish IF/ELIF, SWITCH/CASE/DEFAULT and ASSIGN/CALL/RETURN, but do not execute helper outputs or Leaf return propagation. The action switch call-value predicate remains partial after CALL. Exact comprehension remains in conformance-perl-consumer-reading.
+
 ## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.66 - read scalar and numeric descriptor comparisons
 
 Twenty completed fluent/structured comparisons have twelve assertions each. Scalar boundary, substring, concatenation, regex and numeric fixtures compare descriptor nodes without checking evaluated helper results or hit-map equality; replace_substr additionally requires IF/ELSE nodes. The lifecycle min/max fixture ends after its first build assertion. Exact comprehension remains in conformance-perl-consumer-reading.

@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `CONFORMANCE-SOURCE-READING`
-- Status: `active` / exact decomposition; physical reading 66/143
+- Status: `active` / exact decomposition; physical reading 67/143
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.8`
 - Created: `2026-09-13`
 - Last updated: `2026-09-21`
@@ -1191,14 +1191,21 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
   Commit: `CONFORMANCE-SOURCE-READING.1.66 - read scalar and numeric descriptor comparisons`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.67`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `b193bfa9d9615d5fdb2299caf04dd54d55e2e366`.
+  Verification tier: `focused`
+  Focused checks: Complete reading and exact coverage/window replay; retained direct/nested TAP proof and canonical observation-gap reconciliation; Knowledge, preservation, memory, histories, book, direct public checks and normal doctrines.
+  Canonical trigger: Ordinary bounded reading and fact reconciliation; no runtime, dependency, public contract, infrastructure or parent-closeout change.
   Goal: Read and understand conformance/test/Unicode group 67.
   Scope: `t/phase0_regression.t` lines 34546-35429
   Baseline evidence: 884 fragments / 65500 decoded bytes; ordered range SHA-256 `ee0342959ecfbfb9c39a7587cf966140a5a97437980a38a35f168011be428850`.
   Dependencies: .1.66 committed with clean handoff.
   Acceptance: Read every scoped byte in complete bounded windows; retain source identity, exact comprehension, canonical Knowledge reconciliation, concrete finding ownership, focused proof and per-leaf continuity. Unread crossing constructs retain the next range owner.
-  Verification: `pending`
-  Commit: `pending`
+  Reading evidence: 11 complete windows / 884 fragments / 65500 bytes; ordered window SHA-256 `bb1fc116fa44e396ffb67f08fc017e0f2445fde3899c086284da032f9ceb07ed`.
+  Comprehension: Completes lifecycle min/max, then action/LX modulo, clamp, drop_back and combined drop_front/drop_back comparisons. Join-values and flat-list payloads each cover action/LX if/elseif and switch branches. Direct call-value pairs plus action if/elseif capture Leaf into retv and return hash/array payloads. All completed plans use twelve descriptor assertions; node requirements distinguish IF/ELIF, SWITCH/CASE/DEFAULT and ASSIGN/CALL/RETURN. Existing .2.10 owns meaningful code observation; these checks do not execute helper values, branch choices or Leaf call results. The action switch call-value test has eleven assertions complete but its final node predicate is partial after CALL; .1.68 owns the suffix.
+  Verification: Unchanged canonical commit ec10be6b retains PASS for twenty completed subtests, ordinals 680–699 with 240 direct assertions, twelve per subtest and no nested plans. Exact TAP numbering and source identity are verified. Modulo/clamp and drop helpers precede action/LX join-values and flat-list branches, direct call capture and action if/elseif call capture. Existing .2.10 owns meaningful code observation; descriptor checks do not establish helper values, executed branch choices or Leaf call results. The action switch call-value test has eleven complete assertions and a partial final node predicate after CALL; .1.68 owns its suffix. No independently reproduced new defect, runtime execution, repair, dependency build, canonical run or push is claimed; .2.5–.2.11 and all prerequisites remain.
+  Candidate proof: Exact inventory and .1.67 window replay PASS; cumulative 67/143 independently totals 84,924 fragments / 3,430,534 baseline bytes. Retained TAP identity/numbering PASS. Preservation PASS for 2,850 other files, 514 prior nodes and all 1,039 book headings. Knowledge 1,154 facts / 9,264 keys; memory 60 lines; history bounds, mdBook build, mutation public surface (50 mutations), aggregate selector (11 contrasts / capability 100 matches) and diff whitespace PASS. Normal commit doctrines are the final boundary.
+  Commit: `CONFORMANCE-SOURCE-READING.1.67 - read payload branches and captured-call descriptor comparisons`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.68`
   Status: `pending`
@@ -2565,7 +2572,7 @@ additional reading credit from integration delivery.
 
 | Rank | Leaf | Status | Next action |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.67` | `pending` | Read Phase0 lines 34546–35429 (884 fragments / 65,500 baseline bytes), continuing the remaining eleven assertions of the lifecycle numeric min/max comparison. Repairs .2.5–.2.11 and earlier repairs retain required reading prerequisites. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.68` | `pending` | Read Phase0 lines 35430–36290 (861 fragments / 65,511 baseline bytes), continuing the final node predicate of the action switch call-value comparison. Repairs .2.5–.2.11 and earlier repairs retain required reading prerequisites. |
 
 ## Decisions
 
@@ -2577,6 +2584,8 @@ additional reading credit from integration delivery.
 - None at decomposition. Ordinary source repairs retain startup prerequisites; later collection pressure must be measured rather than assumed away.
 
 ## Verification Log
+
+- `2026-09-21` .1.67: Eleven complete windows cover 884 fragments / 65,500 baseline bytes; ordered window SHA-256 bb1fc116fa44e396ffb67f08fc017e0f2445fde3899c086284da032f9ceb07ed. Cumulative reading is 67/143: 84,924 fragments / 3,430,534 baseline bytes and 97 complete files. Phase0 is partial through line 35429. Unchanged canonical commit ec10be6b retains PASS for twenty completed subtests, ordinals 680–699 with 240 direct assertions, twelve per subtest and no nested plans. Exact TAP numbering and source identity are verified. Modulo/clamp and drop helpers precede action/LX join-values and flat-list branches, direct call capture and action if/elseif call capture. Existing .2.10 owns meaningful code observation; descriptor checks do not establish helper values, executed branch choices or Leaf call results. The action switch call-value test has eleven complete assertions and a partial final node predicate after CALL; .1.68 owns its suffix. No independently reproduced new defect, runtime execution, repair, dependency build, canonical run or push is claimed; .2.5–.2.11 and all prerequisites remain.
 
 - `2026-09-21` .1.66: Eleven complete windows cover 830 fragments / 65,423 baseline bytes; ordered window SHA-256 c8fbb8436dda0ca3c4c2e13fb09209cb1a87ac3e54995f521ad690153ddf6b00. Cumulative reading is 66/143: 84,040 fragments / 3,365,034 baseline bytes and 97 complete files. Phase0 is partial through line 34545. Unchanged canonical commit ec10be6b retains PASS for twenty completed subtests, ordinals 660–679 with 240 direct assertions, twelve per subtest and no nested plans. Exact TAP numbering and source identity are verified. Action/LX pairs cover take_last, scalar boundaries and transforms, substring operations, concatenation, regex predicates, arithmetic and product/division; the action min/max comparison is complete. Existing .2.10 owns meaningful code observation; descriptor-node comparisons do not establish helper results or hit-map equality. The lifecycle min/max test is partial after its first build assertion; .1.67 owns the remaining eleven assertions. No independently reproduced new defect, runtime execution, repair, dependency build, canonical run or push is claimed; .2.5–.2.11 and all prerequisites remain.
 
@@ -2682,6 +2691,8 @@ additional reading credit from integration delivery.
 
 ## Commit Log
 
+- `2026-09-21` .1.67: `CONFORMANCE-SOURCE-READING.1.67 - read payload branches and captured-call descriptor comparisons`; activation b193bfa9d; .1.68 follows clean handoff and empty brief.
+
 - `2026-09-21` .1.66: `CONFORMANCE-SOURCE-READING.1.66 - read scalar and numeric descriptor comparisons`; activation 4c25d22ac; .1.67 follows clean handoff and empty brief.
 
 - `2026-09-21` .1.65: `CONFORMANCE-SOURCE-READING.1.65 - read fluent container helper comparisons and observation limits`; activation e0123d86e; .1.66 follows clean handoff and empty brief.
@@ -2785,6 +2796,8 @@ additional reading credit from integration delivery.
 - `2026-09-13`: Decomposition lands under `SESSION-STARTUP-READING.3.8.0`; Git owns the resulting commit identity.
 
 ## Changelog
+
+- `2026-09-21` .1.67: Read numeric/drop helpers, payload branches and captured calls; distinguish descriptor coverage from executed branches and values.
 
 - `2026-09-21` .1.66: Read fluent/structured scalar and numeric helper descriptors; keep metadata checks distinct from evaluated helper results.
 

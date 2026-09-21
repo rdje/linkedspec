@@ -498,14 +498,14 @@ the director's focused-verification grant used for this correction and the separ
 supporting-reading closeout. Reading completion establishes audited comprehension;
 it does not close the six grammar/literal repair roots or establish runtime signoff.
 Conformance, test and Unicode reading has exact ownership for all 160 inputs in
-143 bounded groups covering 8,257,059 baseline decoded bytes. Sixty-six groups account for
-84,040 fragments and 3,365,034 baseline bytes, including 97 complete files. Phase0 reading
-reaches line 34545. The new range completes lifecycle slice checks and reads action/LX
-pairs for take_last, scalar boundaries and substring operations, prefix/suffix removal,
-concatenation, regex predicates, arithmetic and multiplication/division. One replacement
-fixture normalizes a name and uses another replacement inside a str_eq if/else; numeric
-fixtures compose array counts with decimals and min/max. Their twelve-assertion tests
-inspect descriptor metadata. They do not execute and compare the helper results.
+143 bounded groups covering 8,257,059 baseline decoded bytes. Sixty-seven groups account for
+84,924 fragments and 3,430,534 baseline bytes, including 97 complete files. Phase0 reading
+reaches line 35429. The new range completes lifecycle min/max and reads modulo, clamp,
+array trimming, joined/flat payload branches and captured rule calls. For example, the
+call fixtures assign call(Leaf) to retv and wrap it in a hash or alternate array; Leaf
+contains return("x"). Their assertions inspect CALL and related descriptor nodes, without
+executing the parser to check that returned value or its propagation into the payload.
+Likewise, branch-node checks do not prove which payload executes.
 
 **The earlier generated-code equivalence claim remains withdrawn:** absent uppercase
 code slots cannot establish emitted-code equality. Code-output-labelled comparisons remain
@@ -514,8 +514,8 @@ control. Repair .2.11 owns invalid scalar dereferences of source chunks; explici
 capture works.
 
 Twenty completed subtests retain canonical proof with 240 direct assertions, twelve per
-subtest and no nested plans. The lifecycle min/max comparison remains partial after its
-first build assertion; .1.67 continues. MethodExpr .2.5, EmitContext descriptions .2.6,
+subtest and no nested plans. The action switch call-value comparison remains partial in
+its final node predicate; .1.68 continues. MethodExpr .2.5, EmitContext descriptions .2.6,
 mark_copy .2.7, invalid num_min fixture .2.8 and push descriptions .2.9 remain open.
 No independently reproduced new defect or target execution is established. The pinned
 113-byte inventory delta and all prerequisites remain unchanged.
@@ -545,7 +545,7 @@ The history files keep their 512-line / 65,536-byte caps, mandatory rollover and
 immutable archives. General card/part limits remain unchanged. Admission consumes
 one of the conservative 99 reserve units; the remaining 98 units are forecast
 after actual admission overhead. This capacity does not complete source reading
-or repair tests: reading now reaches 66/143, `.1.67` is next, and the test and recipe
+or repair tests: reading now reaches 67/143, `.1.68` is next, and the test and recipe
 repairs `.2.5`–`.2.11` remain open.
 
 The director has requested integration guides and runnable consumer examples for
