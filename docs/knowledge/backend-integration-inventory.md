@@ -27,16 +27,17 @@ answers:
   - does Lua runtime error JSON include all native arity fields
   - which task owns the unexplained non JSON Lua consumer stderr occurrence
 date: 2026-09-21
-status: five-backend guides and common navigation verified; captured wrapper stderr remains startup .7; independent closeout remains open
+status: five-backend integration delivery independently verified; unrelated runtime and wrapper repairs remain open
 tags: [integration, documentation, perl, rust, dart, julia, lua]
 evidence: "BACKEND-INTEGRATION-GUIDES.0, activation 00f9783a1e4b625bc251a3e260ef1eef60c35888. Canonical Knowledge, ADR0040, companion tree, manifests, six complete setup scripts and native loader/result seams inspected. Managed version commands and read-only pkg-config identities consumed with exit0; no compiler, dependency preparation or consumer execution ran."
+evidence_update_2026_09_21: "Final integration .7: Perl 8 setup / 17 deployment, Dart 9 / 36 source/AOT, Julia 11 / 24 and PUC Lua/LuaJIT 13 / 24 each pass. Nine own-workspace Rust controls, RGX public bootstrap/native reuse and 18 Lispish file groups pass. Six current native routes return the same 24 direct values; 17 retained native products preserve hashes/mtimes. Published RGX bootstrap is the sole preparation interface. Lua uses a verified current Git archive and retained modules; no dependency build/implementation procedure is introduced. Rendered navigation and exact canonical proof govern final clean commit/push. Existing strict Lispish, wrapper, Lua-target/formatter and other runtime repairs remain open."
 reverify: "Inspect the exact sources in the matrix below. Version-only commands: bash tools/run_cargo_local.sh --version; bash tools/run_dart_project_data.sh --version; bash tools/run_julia_project_data.sh --project=julia --version; bash tools/project_data_run.sh perl -e 'printf qq{Perl %vd\\n}, $^V'; bash tools/project_data_run.sh lua -v; bash tools/project_data_run.sh luajit -v; bash tools/project_data_run.sh pkg-config --modversion lua luajit libpcre2-8. These commands establish installed identity, not consumer support or a passing backend suite."
 ---
 
 The director explicitly requests implementation of all backend integration guides
 after the clean conformance .1.34 checkpoint, then a return to conformance .1.35.
-The current activity is `docs/tasks/BACKEND-INTEGRATION-GUIDES.md`. Remaining source
-reading is temporarily deferred for this activity; its coverage and unrelated
+The completed activity is `docs/tasks/BACKEND-INTEGRATION-GUIDES.md`. Remaining source
+reading resumes at conformance .1.35 after the clean push; its coverage and unrelated
 runtime repair obligations remain unchanged. No further approval is needed for
 ordinary guide/example work within that request.
 
@@ -87,7 +88,7 @@ is no longer a prerequisite for these guides.
 
 September21 .8.5 replaces private workspace probes with nine LinkedSpec/application-only
 metadata checks. Public RGX bootstrap and retained native word/Lispish checks pass;
-see [[archogen-rust-lispish-integration]]. Lua fixture isolation remains .8.6.
+see [[archogen-rust-lispish-integration]]. Lua fixture isolation closes in .8.6.
 
 ## Exact content destinations and ownership
 
@@ -95,8 +96,8 @@ The common entry is `docs/linkedspec-book/src/public-api/integration.md`.
 Its five backend guides are `integration-perl.md`, `integration-rust.md`,
 `integration-dart.md`, `integration-julia.md`, and `integration-lua.md` in the
 same directory. These own consumer setup, dependency wiring, assembly, packaging
-and worked native usage. All five setup/deployment lanes are verified; independent
-parent closeout remains .7. The common page links the Rust/Lispish file recipe
+and worked native usage. Final .7 independently verifies all five setup/deployment
+lanes and closes delivery. The common page links the Rust/Lispish file recipe
 and its still-open strict document/token limits (startup .83).
 
 SUMMARY, the book home, native loading and Get pages lead to the common entry.

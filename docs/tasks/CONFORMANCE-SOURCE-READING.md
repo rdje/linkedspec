@@ -1815,10 +1815,15 @@ selector public-file census62->63. It classifies three existing Julia limitation
 references (32->35 total) with one invalid-example comment; runtime contracts and
 the existing Julia repair remain unchanged. Preserve these checker-only deltas
 in the later tooling/source audit without rewriting historical reading evidence.
+Integration .6 later advances current public counts to mutation69/selector68 and
+cursor76, with count-only checker/mirror changes. Integration .8.6 replaces one
+Lua test input with an owned inline marker fixture; production semantics remain
+unchanged. Retain these deltas in the eventual source reconciliation, with no
+additional reading credit from integration delivery.
 
 | Rank | Leaf | Status | Next action |
 | --- | --- | --- | --- |
-| 1 | `BACKEND-INTEGRATION-GUIDES.2.2` | `pending` | Director-authorized integration activity: Rust setup/native consumer passes; add Lispish/deployment, then other guides and final .7. Normal RGX/PGEN builds are authorized. Resume conformance .1.35 afterward. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.35` | `pending` | Integration .7 closes the temporary documentation activity. After its clean canonical commit/push, resume the unchanged three-source, 1,500-fragment / 51,804-byte reading range. All runtime repair prerequisites remain. |
 
 ## Decisions
 

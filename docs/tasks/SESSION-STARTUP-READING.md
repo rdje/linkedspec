@@ -4673,7 +4673,7 @@ startup implementation prerequisites and the rgx reading exclusion remain intact
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `BACKEND-INTEGRATION-GUIDES.8.2` | `pending` | After the .8.1 consumer-report intake commits, repair Rust workspace onboarding and subsequent setup defects; then finish Lua deployment, common navigation and independent .7. Strict Lispish consumer requirements remain owned by .83 with startup prerequisites. Resume conformance .1.35 afterward. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.35` | `pending` | Integration .7 closes the temporary documentation activity. After its clean canonical commit/push, resume the unchanged three-source, 1,500-fragment / 51,804-byte reading range. All runtime repair prerequisites remain. |
 
 ## Reading Ledger
 

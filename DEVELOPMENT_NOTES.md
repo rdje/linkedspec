@@ -10,6 +10,12 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-21 — BACKEND-INTEGRATION-GUIDES.7 - close native backend integration delivery
+
+A final integration review combines native values, explicit provenance, setup recurrence and deployment/error checks. A successful value alone does not certify packaged assets or whole-input grammar acceptance. Retained binaries/modules must keep both content and modification-time identities; Julia source deployment may prepare its own offline caches. Consumer tests do not promote an untested minimum version or platform.
+
+The Lua consumer is an archived source snapshot, so Git invoked inside it can walk to the enclosing repository and report that repository's HEAD. Its origin must instead come from a manifest checked against exact Git blob identities. Final .7 creates a current verified archive and copies the existing ABI products; earlier snapshots remain intact. The existing deployment closure guard correctly requires committed source identity. The final replay preserves all raw failure/output evidence and reuses only already-passing unchanged command results. No dependency internals or speculative build rules are involved.
+
 ## 2026-09-21 — BACKEND-INTEGRATION-GUIDES.8.6 - isolate Lua marker fixture from dependencies
 
 A test of LinkedSpec's inline marker placement must own its input. The minimal two-regex rule preserves the second-slot `@move_pos` assertion without knowing a dependency's grammar. A scratch registration filter runs the unchanged existing timing, Unicode, reconstructed-source and malformed-marker checks, with `io.open` rejecting dependency paths before the original open call. Baseline RED and candidate GREEN distinguish fixture independence from a passing dependency read.

@@ -560,7 +560,11 @@ retroactively identified. The [common integration entry](../public-api/integrati
 now connects all five guides, native setup/deployment checks and shared asset/storage
 principles. Its four-input word example returns the same direct values on Perl,
 Rust, Dart, Julia, PUC Lua and LuaJIT using retained products without new builds.
-Independent final verification remains open.
+Final integration `.7` independently replays setup/deployment/error checks across
+all five backends: Perl 8 / 17, Dart 9 / 36, Julia 11 / 24 and PUC Lua/LuaJIT 13 / 24 each.
+Nine Rust workspace controls and 18 Lispish file checks pass through the published
+RGX preparation route. Retained native product identities are unchanged. The
+guides are complete for these measured routes; existing limitations remain below.
 ARCHOGEN and SEMULITH supplied ten consumer reports on September20. Their Rust
 workspace membership failures are reproduced and repaired by integration `.8.2`:
 the example owns its workspace, and enclosing applications exclude the vendored

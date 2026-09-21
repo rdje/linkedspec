@@ -1,12 +1,12 @@
 # MEMORY
 
-- activation_commit: `9485b1fa7fad890b9c4cc98fb9f7cdd719a7e969` — clean workspace/public-guidance checkpoint; Lua fixture activation.
-- latest_completed_leaf: `BACKEND-INTEGRATION-GUIDES.8.6 - isolate Lua marker fixture from dependencies`; selected dual-ABI RED/GREEN proof preserves native products.
-- active_work_unit: `BACKEND-INTEGRATION-GUIDES.7` — pending final independent delivery verification.
-- next_action: Activate final integration .7, independently replay consumer paths, run canonical proof, commit/push and resume conformance .1.35. Startup wrapper .7, strict Lispish .83 and upstream RGX reports retain their owners.
+- activation_commit: `457d3e518388ea07c4ec3ab11d4f84863473fada` — clean Lua fixture checkpoint; final integration activation.
+- latest_completed_leaf: `BACKEND-INTEGRATION-GUIDES.7 - close native backend integration delivery`; independent five-backend consumer proof and final canonical boundary.
+- active_work_unit: `CONFORMANCE-SOURCE-READING.1.35` — pending resumption after the completed integration activity.
+- next_action: After verifying the clean integration push, activate conformance .1.35 and read its unchanged 1,500-fragment / 51,804-byte scope. Startup wrapper .7, strict Lispish .83 and upstream RGX reports retain their owners.
   Named-argument direction PARSER-AUTHORING-APIS.4 is approved and parked; other authoring proposals and approved formats stay parked.
-- in_flight_uncommitted: none; fixture isolation is verified and the next leaf starts only from the clean checkpoint.
-- blockers: none for integration .7. Wrapper startup .7 remains open; warned-child group matched, but denied-call cause and original lost PUC stream remain unproved. Recovery/purge stay prohibited.
+- in_flight_uncommitted: none; integration closeout is verified and reading resumes only from its clean checkpoint.
+- blockers: none for conformance .1.35. Wrapper startup .7 remains open; warned-child group matched, but denied-call cause and original lost PUC stream remain unproved. Recovery/purge stay prohibited.
 - current_rust_warning_debt: Repeated carriers report 1,870 pgen plus 26 rgx-core output warnings; RUST-DEPENDENCY-WARNING-ZERO.1-.7 own public RGX reports and result verification without suppression; dependency internals are excluded.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
   active table; the task metadata doctrine inventories all consumers, permits arbitrary frontier-row rewrites,

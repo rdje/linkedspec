@@ -10,6 +10,12 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-21 — BACKEND-INTEGRATION-GUIDES.7 - close native backend integration delivery
+
+Complete the director-requested common integration entry and five native backend guides. Independent final setup/use/deployment/error replay confirms the maintained examples and explicit asset, ABI, storage and relocation requirements. Perl 8 setup / 17 deployment, Dart 9 / 36 source/AOT, Julia 11 / 24 and PUC Lua/LuaJIT 13 / 24 each pass. Nine own-workspace Rust controls, RGX public bootstrap/native reuse and 18 Lispish file groups pass. Six current native routes return the same 24 direct values; 17 retained native products preserve hashes/mtimes.
+
+Final proof compares 230 consumed source/support/wrapper paths and a current Lua archive of 2,857 files / 58,999,939 bytes. Published RGX integration alone owns transitive preparation. Current task frontiers, roadmaps, Knowledge and book agree; strict Lispish, wrapper, Lua target/formatter and all other runtime repairs stay open. Exact staged canonical CI governs the final commit and clean push; source reading resumes at conformance .1.35.
+
 ## 2026-09-21 — BACKEND-INTEGRATION-GUIDES.8.6 - isolate Lua marker fixture from dependencies
 
 Replace the Lua marker test's dependency-file input with the authored `Pair:AND /a/ /b/ @move_pos` rule. Preserve its event count, spelling and slot assertions plus every surrounding test byte. Current Knowledge descriptions now use the owned fixture and provide a retained-product recheck; historical full-suite counts remain dated.

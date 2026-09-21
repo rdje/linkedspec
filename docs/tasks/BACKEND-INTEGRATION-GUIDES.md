@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `BACKEND-INTEGRATION-GUIDES`
-- Status: `active` / director-authorized temporary documentation activity
+- Status: `done` / verified native integration documentation delivery
 - Roadmap lane: `Phase 6 documentation and adoption / native backend integration`
 - Created: `2026-09-13`
 - Last updated: `2026-09-21`
@@ -53,12 +53,12 @@ ARCHOGEN's use of Lispish through Rust. The requested scope is every backend.
 ## Task Tree
 
 - ID: `BACKEND-INTEGRATION-GUIDES`
-  Status: `active`
+  Status: `done`
   Goal: Deliver tested native integration guidance for all five backends.
   Children: `.0`, `.1`, `.2`, `.3`, `.4`, `.5`, `.6`, `.7`, `.8`
   Acceptance: Every shared criterion has backend-specific evidence; navigation, examples and limits agree.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Perl 8 setup / 17 deployment, Dart 9 / 36 source/AOT, Julia 11 / 24 and PUC Lua/LuaJIT 13 / 24 each pass. Nine own-workspace Rust controls, RGX public bootstrap/native reuse and 18 Lispish file groups pass. Six current native routes return the same 24 direct values; 17 retained native products preserve hashes/mtimes. Five guides/common navigation and qualified deployment/error limits meet the shared acceptance; exact staged canonical CI governs final landing/push. Unrelated runtime repairs and required reading remain open.
+  Commit: `BACKEND-INTEGRATION-GUIDES.7 - close native backend integration delivery`
 
 - ID: `BACKEND-INTEGRATION-GUIDES.0`
   Status: `done`
@@ -76,13 +76,13 @@ ARCHOGEN's use of Lispish through Rust. The requested scope is every backend.
   Commit: `BACKEND-INTEGRATION-GUIDES.0 - inventory native integration setup and guide ownership`
 
 - ID: `BACKEND-INTEGRATION-GUIDES.1`
-  Status: `active`
+  Status: `done`
   Goal: Deliver the Perl integration guide and executable consumer.
   Children: `.1.1`, `.1.2`
   Dependencies: `.0`
   Acceptance: Perl setup, native use, packaging, error and reuse examples satisfy the shared criteria.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: PASS earlier clean-source preparation and independent final 8 setup / 17 deployment controls, including explicit modules, direct values, typed errors, diagnostics and relocated source packaging.
+  Commit: `BACKEND-INTEGRATION-GUIDES.7 - close native backend integration delivery`
 
 - ID: `BACKEND-INTEGRATION-GUIDES.1.1`
   Status: `done`
@@ -159,13 +159,13 @@ ARCHOGEN's use of Lispish through Rust. The requested scope is every backend.
   Commit: `BACKEND-INTEGRATION-GUIDES.2.2 - deliver Rust Lispish file integration and deployment`
 
 - ID: `BACKEND-INTEGRATION-GUIDES.3`
-  Status: `active`
+  Status: `done`
   Goal: Deliver the Dart integration guide and executable consumer.
   Children: `.3.1`, `.3.2`
   Dependencies: `.0`
   Acceptance: Package wiring, native requirements, direct values, deployment and errors satisfy the shared criteria.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: PASS earlier clean-source package preparation and independent final 9 setup / 36 source/AOT deployment controls with retained executable identity and explicit support grammar assets.
+  Commit: `BACKEND-INTEGRATION-GUIDES.7 - close native backend integration delivery`
 
 - ID: `BACKEND-INTEGRATION-GUIDES.3.1`
   Status: `done`
@@ -197,13 +197,13 @@ ARCHOGEN's use of Lispish through Rust. The requested scope is every backend.
   Commit: `BACKEND-INTEGRATION-GUIDES.3.2 - verify Dart native deployment and diagnostics`
 
 - ID: `BACKEND-INTEGRATION-GUIDES.4`
-  Status: `active`
+  Status: `done`
   Goal: Deliver the Julia integration guide and executable consumer.
   Children: `.4.1`, `.4.2`
   Dependencies: `.0`
   Acceptance: Project/module wiring, depot/native requirements, direct values, deployment and errors satisfy the shared criteria.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: PASS earlier clean-source package preparation and independent final 11 setup / 24 deployment controls. Offline source packaging preserves application lock/registry identities and runs outside cwd after relocation.
+  Commit: `BACKEND-INTEGRATION-GUIDES.7 - close native backend integration delivery`
 
 - ID: `BACKEND-INTEGRATION-GUIDES.4.1`
   Status: `done`
@@ -231,13 +231,13 @@ ARCHOGEN's use of Lispish through Rust. The requested scope is every backend.
   Commit: `BACKEND-INTEGRATION-GUIDES.4.2 - verify Julia source deployment and diagnostics`
 
 - ID: `BACKEND-INTEGRATION-GUIDES.5`
-  Status: `active`
+  Status: `done`
   Goal: Deliver Lua integration guidance for the supported PUC Lua and LuaJIT routes.
   Children: `.5.1`, `.5.2`, `.5.3`
   Dependencies: `.0`; preserve LUA-STARTUP-READING.2.3 exclusions and missing-ABI proof boundaries.
   Acceptance: Module/native-library paths, exact ABI preparation, values and deployment satisfy the shared criteria without extending unverified host claims.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: PASS earlier explicit ABI preparation plus final 13 setup / 24 deployment checks per installed runtime; six reused native products retain hashes/mtimes. Current committed-source archive preserves 2,857 files / 58,999,939 bytes before use. Lua5.4, malformed-regex and managed-wrapper repair limits remain open.
+  Commit: `BACKEND-INTEGRATION-GUIDES.7 - close native backend integration delivery`
 
 - ID: `BACKEND-INTEGRATION-GUIDES.5.1`
   Status: `done`
@@ -299,21 +299,28 @@ ARCHOGEN's use of Lispish through Rust. The requested scope is every backend.
   Commit: `BACKEND-INTEGRATION-GUIDES.6 - connect native application integration guides`
 
 - ID: `BACKEND-INTEGRATION-GUIDES.7`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `457d3e518388ea07c4ec3ab11d4f84863473fada`.
+  Verification tier: `canonical`
+  Focused checks: Independently replay maintained setup/use/deployment/error verifiers against retained same-volume consumer applications; compare consumed own sources and native identities, use RGX public bootstrap only, validate current six-route values, exact guide navigation/limitations, source/task/history preservation, memory and all doctrines.
+  Canonical trigger: Final public delivery/parent closeout and the authorized clean push boundary require exact staged canonical CI, successful commit/receipt promotion, empty brief and a clean repository.
   Goal: Independently verify and close the complete integration documentation delivery.
   Dependencies: `.6`, `.8.2`, `.8.3`, `.8.4`, `.5.3`, `.8.5`, `.8.6`
   Acceptance: Replay documented setup/use/deployment/error paths from managed consumer workspaces, consume all job outcomes, render affected books, verify links and evidence limits, run required canonical CI, and close all verified parent nodes. Commit cleanly before the final push boundary; no pending backend may be counted complete.
-  Verification: `pending`
-  Commit: `pending`
+  Replay input correction: The earlier Lua archive predates current tools/check_mutation_public_surface.py; the maintained deployment closure assertion rejects it at line 125. Its Git command also resolves the enclosing checkout, so that observer label cannot establish archive origin. Final replay uses a fresh 2,857-file / 58,999,939-byte owned archive verified against 457d3e518, plus unchanged native products. Initial raw output and archive evidence are preserved; already-passing identical Perl/Dart/Julia commands are reused. No product or dependency repair is inferred.
+  Verification: Perl 8 setup / 17 deployment, Dart 9 / 36 source/AOT, Julia 11 / 24 and PUC Lua/LuaJIT 13 / 24 each pass. Nine own-workspace Rust controls, RGX public bootstrap/native reuse and 18 Lispish file groups pass. Six current native routes return the same 24 direct values; 17 retained native products preserve hashes/mtimes. Consumed-source comparison covers 230 runtime/support/wrapper paths; Lua archive provenance is verified against Git blob identities. Rendered navigation, source/task/history preservation, memory/history and doctrines govern acceptance. Final canonical proof must bind the exact staged candidate before this commit and the clean push. No optional/full-component, minimum-version, cross-platform or strict-parser admission is implied.
+  Canonical preparation correction: The first gate rejects a live external reading row under this completed tree; README freshness reports the same metadata failure. This frontier now shows completed .7, while the pending return remains in the active conformance/startup trees. No receipt was granted by the failed run; repeat canonical verification on the corrected exact candidate.
+  Candidate proof: PASS: 13 owned documentation files; 2,844 prior files / 50,392,372 bytes, 20 other integration nodes and all 502 startup/conformance nodes exact. Thirteen rendered pages / 309 links and every existing guide fence pass. All runtime/contract/checker sources, dependency identities, original nested edits and prior history remain unchanged. Knowledge 1,151 / 9,204, memory 60 and both history pressure checks pass. Final canonical receipt remains required before landing.
+  Commit: `BACKEND-INTEGRATION-GUIDES.7 - close native backend integration delivery`
 
 - ID: `BACKEND-INTEGRATION-GUIDES.8`
-  Status: `active`
+  Status: `done`
   Goal: Incorporate consumer reports and enforce the director's public RGX integration boundary before final delivery.
   Children: `.8.1`, `.8.2`, `.8.3`, `.8.4`, `.8.5`, `.8.6`
   Dependencies: Clean .5.1 checkpoint 7f2afcbf428a6a29b7c82d8c618e2312eaa16e6c.
   Acceptance: Every report has a qualified disposition and an executable repair owner where action is required. Integration setup repairs precede final .7; grammar/runtime repairs keep their startup prerequisites and explicit implementation ownership.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: PASS all ten source-qualified reports have distinct states and concrete repair owners. Workspace/guidance defects are repaired; public RGX-only preparation and owned Lua marker input are verified. Strict Lispish .83 and the upstream progress report remain open; no dependency implementation or grammar/runtime fix is claimed.
+  Commit: `BACKEND-INTEGRATION-GUIDES.7 - close native backend integration delivery`
 
 - ID: `BACKEND-INTEGRATION-GUIDES.8.1`
   Status: `done`
@@ -406,7 +413,7 @@ ARCHOGEN's use of Lispish through Rust. The requested scope is every backend.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `BACKEND-INTEGRATION-GUIDES.7` | `pending` | Independently close delivery, run canonical proof/push, then resume conformance .1.35. |
+| 1 | `BACKEND-INTEGRATION-GUIDES.7` | `done` | All integration leaves are verified. The external return point is conformance .1.35 after this clean canonical commit/push. |
 
 The director explicitly requests a temporary pivot at the next clean handoff.
 Conformance .1.34 is committed at 00f9783a1 and inventory .0 is complete.
@@ -653,6 +660,8 @@ No verification waiver is requested or applied. Lua .5.2 follows clean landing.
 
 ## Verification Log
 
+- `2026-09-21` .7: Perl 8 setup / 17 deployment, Dart 9 / 36 source/AOT, Julia 11 / 24 and PUC Lua/LuaJIT 13 / 24 each pass. Nine own-workspace Rust controls, RGX public bootstrap/native reuse and 18 Lispish file groups pass. Six current native routes return the same 24 direct values; 17 retained native products preserve hashes/mtimes. All raw stdout/stderr and state/results are retained under .linkedspec-data/scratch/backend-integration7. Lua uses a fresh owned Git archive with retained ABI products; archive identity is read from its verified manifest, never inferred by Git walking to an enclosing checkout. Read-only artifact census sees 3,431 candidates / 8,604,611,543 bytes, skips dependency/Git/symlink trees, and deletes none because obsolescence is unproved and startup .7 still prohibits recovery/purge. Canonical CI governs landing; known defects remain open.
+
 - `2026-09-21` .8.6: Selected unchanged marker checks fail before dependency open on the original input and pass with the authored inline rule on PUC5.5.1/LuaJIT2.1.1788460057. Native modules remain byte/mtime exact. Runtime semantics, unrelated tests and all existing repair owners stay unchanged; final .7 follows.
 
 - `2026-09-21` .8.5: PASS nine locked/offline LinkedSpec/application metadata controls, including rejected missing example boundary and successful host exclusion. RGX public bootstrap repeats in0.204s with exit0/empty stderr; retained native words and18 Lispish file/deployment groups pass. Two native binaries preserve hashes/mtimes; five source/grammar/lock inputs match. Cargo/rustc1.95.0 and the published RGX requirement qualify README guidance without an older-compiler/platform claim. Thirteen rendered pages/309 links and unchanged guide fences pass. Public mutation69/14/11/10/50, selector68/35/0/5/11 and cursor76/60 pass with unchanged checkers. Preservation checks2833 prior files/50455564 bytes, original dependency edits/pins, locks, runtime/contract/history sources and seven exact historical audit bodies. Knowledge, memory/history and all doctrines govern focused landing; .8.6 and final .7 follow.
@@ -695,7 +704,18 @@ No verification waiver is requested or applied. Lua .5.2 follows clean landing.
   ADR0040 and the companion tree. Guide/example implementation and consumer proof
   are pending. CONFORMANCE-SOURCE-READING.1.34 owns intake validation and commit.
 
+## Acceptance Checklist — .7
+
+- [x] **REPRODUCE / ISSUE** — Native API presence did not supply a complete downstream checkout/setup/use/deployment story; ten later consumer reports exposed specific integration and grammar requirements.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Earlier leaves establish exact native loader/result/error paths with LinkedSpec tools and public contracts. Workspace boundaries, supporting grammar assets and ABI paths are application responsibilities; RGX owns transitive preparation.
+- [x] **FIX** — One common entry, five native guides and runnable maintained consumers cover all requested integration stages. Bounded .8.2-.8.6 repair setup/guidance and private fixture/probe coupling without dependency implementation changes.
+- [x] **ADDRESSED (verified)** — Perl 8 setup / 17 deployment, Dart 9 / 36 source/AOT, Julia 11 / 24 and PUC Lua/LuaJIT 13 / 24 each pass. Nine own-workspace Rust controls, RGX public bootstrap/native reuse and 18 Lispish file groups pass. Six current native routes return the same 24 direct values; 17 retained native products preserve hashes/mtimes.
+- [x] **NO REGRESSION** — Runtime sources, semantic authorities, existing guide examples, pins and original nested work remain unchanged by this final leaf. Exact staged canonical CI is mandatory before landing; known unrelated defects remain owned.
+- [x] **LOCKSTEP** — Roadmaps, common/backend navigation, Knowledge, task frontiers, live status and bounded history agree. Return to conformance .1.35; no reading credit or engine repair is inferred from guide delivery.
+
 ## Commit Log
+
+- `.7`: `BACKEND-INTEGRATION-GUIDES.7 - close native backend integration delivery`; activation457d3e518; exact staged canonical closeout, then clean push and conformance .1.35.
 
 - `.8.6`: `BACKEND-INTEGRATION-GUIDES.8.6 - isolate Lua marker fixture from dependencies`; activation9485b1fa7; focused fixture isolation, then final .7.
 
@@ -735,9 +755,11 @@ No verification waiver is requested or applied. Lua .5.2 follows clean landing.
 
 - `.0`: `BACKEND-INTEGRATION-GUIDES.0 - inventory native integration setup and guide ownership`; activation 00f9783a1e4b625bc251a3e260ef1eef60c35888; next .2.1 after clean handoff.
 - Intake: `CONFORMANCE-SOURCE-READING.1.34`; derive its commit from Git history.
-- Guide/example leaves: pending.
+- All guide/example leaves and independent final delivery are complete; Git owns their exact commit identities.
 
 ## Changelog
+
+- `2026-09-21` .7: Complete independent native consumer replay and final integration closeout; resume required reading after clean canonical commit/push.
 
 - `2026-09-21` .8.6: Isolate the Lua marker fixture from dependency content and preserve the full selected test on both retained ABIs.
 
