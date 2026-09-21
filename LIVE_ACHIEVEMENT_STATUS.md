@@ -11,13 +11,15 @@
 
 ## Latest Completed Slice
 
-- `CONFORMANCE-SOURCE-READING.4.1 - propose finite remaining-reading evidence capacity` — Clean 7b921a195 has notes241/58910 and changes273/58671 lines/bytes. Both archive file/manifest limits are full; next notes allowance is only72 bytes below mandatory90% rollover. Fifty exact reading commits establish bounded positive-growth maxima. Independent and extracted-production 99-record models agree on eight rollovers per history with exact reconstruction. The actual routing predicate passes187 below/equal/above and old/proposed reserve executions. Full actual-candidate-plus99-unit census is required after all proposal edits; registry, sources, repairs and historical records remain unchanged.
+- `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.15 - admit approved conformance evidence capacity` — ADR0122 admits exactly fourteen director-approved controls, preserves both governed history rollovers and all prior source/reading/repair evidence, and forecasts the remaining 98 allowance units. Production probes pass156 threshold/61 authorization cases; the explicitly granted checker mirror passes37 self-tests/50 registry cases after the preserved failed gate. Fresh exact staged canonical receipt governs landing.
 
 ## Next Action
 
-- Obtain explicit .4.2 disposition; implement only approved controls under canonical proof before resuming unread .1.51.
+- Read conformance .1.51, Phase0 lines13632–14984; reading remains50/143 and repairs .2.5/.2.6 remain open.
 
 ## Recent Completions
+
+- `2026-09-21` — `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.15` admits the fourteen granted controls under ADR0122 with history preservation and finite reserve; conformance .4 closes, .1.51 resumes after canonical landing.
 
 - `2026-09-21` — `CONFORMANCE-SOURCE-READING.4.1` commits the finite remaining-reading capacity proposal; 50/143 reading groups stay complete, .4.2 awaits disposition and no controls change.
 
@@ -48,8 +50,6 @@
 - `2026-09-21` — `CONFORMANCE-SOURCE-READING.1.38` reads Phase0 through line 1110 with exact retained proof for 38 complete subtests; .1.39 owns the crossing facade suffix.
 
 - `2026-09-21` — `CONFORMANCE-SOURCE-READING.1.37` completes six source files, reaches Phase0 line 43 and owns header correction .2.4; .1.38 next.
-
-- `2026-09-21` — `CONFORMANCE-SOURCE-READING.1.36` completes five source files, reaches MCP admission line 451 and owns helper path repair .2.3; .1.37 next.
 
 ## History
 

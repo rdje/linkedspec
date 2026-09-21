@@ -146,6 +146,8 @@ changed* lives in git (layer D), not here.
 
 | [0121](0121-approved-integration-history-capacity.md) | Admit the six approved history controls for remaining backend integration delivery; preserve normal canonical verification | 2026-09-20 | accepted | integration, history, capacity, verification |
 
+| [0122](0122-approved-conformance-evidence-capacity.md) | Admit fourteen approved finite remaining-conformance evidence controls; preserve ordinary canonical verification | 2026-09-21 | accepted | conformance, reading, history, capacity |
+
 ## How to add a record
 1. Copy the shape of an existing record (`Date`, `Status`, `Tags`, then `## Context /
    Decision / Consequences / Links`).

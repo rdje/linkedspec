@@ -221,8 +221,8 @@ sub collection_total_errors {
     my ($files, $lines, $bytes) = @_;
     my @errors;
     push @errors, 'task collection exceeds 128 files' if $files > 128;
-    push @errors, 'task collection exceeds 92,000 lines' if $lines > 92_000;
-    push @errors, 'task collection exceeds 10,485,760 bytes' if $bytes > 10_485_760;
+    push @errors, 'task collection exceeds 120,000 lines' if $lines > 120_000;
+    push @errors, 'task collection exceeds 12,582,912 bytes' if $bytes > 12_582_912;
     return @errors;
 }
 
@@ -428,7 +428,7 @@ sub command_capture {
 sub run_self_tests {
     my $registry_fixture = sub {
         return [{id => 'task_evidence', limits => {
-            max_files => 128, max_total_lines => 92_000, max_total_bytes => 10_485_760,
+            max_files => 128, max_total_lines => 120_000, max_total_bytes => 12_582_912,
             max_lines_per_file => 8_000, max_bytes_per_file => 1_048_576,
         }}];
     };
@@ -465,20 +465,20 @@ sub run_self_tests {
         ['line_limit', sub { 5_001 > 5_000 }],
         ['byte_limit', sub { 786_433 > 786_432 }],
         ['collection_inclusive_bounds', sub {
-            return same_strings([collection_total_errors(128, 92_000, 10_485_760)], [])
+            return same_strings([collection_total_errors(128, 120_000, 12_582_912)], [])
                 && same_strings([collection_member_errors('member.md', 8_000, 1_048_576)], []);
         }],
         ['collection_file_limit', sub {
-            return same_strings([collection_total_errors(129, 92_000, 10_485_760)],
+            return same_strings([collection_total_errors(129, 120_000, 12_582_912)],
                 ['task collection exceeds 128 files']);
         }],
         ['collection_line_limit', sub {
-            return same_strings([collection_total_errors(128, 92_001, 10_485_760)],
-                ['task collection exceeds 92,000 lines']);
+            return same_strings([collection_total_errors(128, 120_001, 12_582_912)],
+                ['task collection exceeds 120,000 lines']);
         }],
         ['collection_byte_limit', sub {
-            return same_strings([collection_total_errors(128, 92_000, 10_485_761)],
-                ['task collection exceeds 10,485,760 bytes']);
+            return same_strings([collection_total_errors(128, 120_000, 12_582_913)],
+                ['task collection exceeds 12,582,912 bytes']);
         }],
         ['collection_member_line_limit', sub {
             return same_strings([collection_member_errors('member.md', 8_001, 1_048_576)],
@@ -489,9 +489,9 @@ sub run_self_tests {
                 ['task collection member exceeds 1,048,576 bytes: member.md']);
         }],
         ['collection_independent_errors', sub {
-            return same_strings([collection_total_errors(129, 92_001, 10_485_761)],
-                ['task collection exceeds 128 files', 'task collection exceeds 92,000 lines',
-                 'task collection exceeds 10,485,760 bytes'])
+            return same_strings([collection_total_errors(129, 120_001, 12_582_913)],
+                ['task collection exceeds 128 files', 'task collection exceeds 120,000 lines',
+                 'task collection exceeds 12,582,912 bytes'])
                 && same_strings([collection_member_errors('member.md', 8_001, 1_048_577)],
                     ['task collection member exceeds 8,000 lines: member.md',
                      'task collection member exceeds 1,048,576 bytes: member.md']);

@@ -3,10 +3,10 @@
 ## Metadata
 
 - Tree ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT`
-- Status: `done` / .14 approved finite Lua reading evidence capacity
+- Status: `done` / .15 admission including explicitly granted .15.1 checker mirror
 - Roadmap lane: `Repository architecture / documentation sustainability`
 - Created: `2026-08-09`
-- Last updated: `2026-09-12` (.14 approved implementation; prior leaves remain complete)
+- Last updated: `2026-09-21` (.15 approved implementation; prior leaves remain complete)
 - Owner: repo-local workflow
 
 ## Goal
@@ -58,10 +58,10 @@ or the README `.4` adoption/closeout that installs the guard.
 ## Task Tree
 
 - ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT`
-  Status: `done` (.0-.14 complete; Lua source reading 0/51)
+  Status: `done` (.0-.15 complete; conformance source reading remains 50/143)
   Goal: Replace measured oversized routed destinations with bounded views over durable stores.
   Depends on: `README-STABILITY-POLICY.4.2`
-  Children: `.0-.14`
+  Children: `.0-.15`
 
 - ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.0`
   Status: `done` (2026-08-09; committed atomically at `dc8dd896` as 176/300; brief cleared; clean proof passed;
@@ -482,7 +482,43 @@ or the README `.4` adoption/closeout that installs the guard.
   Verification: Explicit ADR0118 approval admits exactly eleven finite Lua evidence controls and the .14-only focused/receipt exception. The complete actual-plus-57-unit reserve fits; independent and production history models agree on four rollovers per collection. Actual routing functions pass 125 threshold and 54 authorization cases. Previous source, cards, decisions, task evidence and immutable history remain exact. Lua .4/.4.2 close; source reading remains 0/51 and .1.1 follows the clean commit. Later verification and startup repair prerequisites remain unchanged. Exact reproduction is retained in docs/knowledge/lua-reading-evidence-capacity-admission.md. Final candidate preservation, reserve, rendered book and normal doctrines govern landing.
   Commit: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.14 - admit approved Lua reading evidence capacity`
 
+- ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.15`
+  Status: `done`
+  Goal: Admit the fourteen approved finite remaining-conformance evidence controls and the separately granted exact checker mirror correction.
+  Children: `.15.1` is the inseparable admission correction; both land in this canonical unit.
+  Activation commit: `5fab5aa6dfdf0f52f9a9018aba2dc5cb7449e537`.
+  Authorization: The director answered Granted to CONFORMANCE-SOURCE-READING.4.1's exact fourteen controls and bounded implementation before required reading finishes. Ordinary canonical CI and normal hooks remain required.
+  Dependencies: Clean proposal commit; explicit .4.2 disposition; newly accepted indexed ADR0122 before registry changes.
+  Scope: Exact fourteen registry scalars in the preserved .4.1 proposal, required governed history rollovers, finite reserve and preservation proof, and synchronized continuity/book evidence. The subsequent explicit .15.1 grant adds only checker SHA-256 cb9dd627 and its proof; no policy, dependency pin or other implementation changes.
+  Acceptance: Independently verify the exact registry difference, prior source/card/question/task/history preservation, finite remaining reserve, production threshold and authorization behavior, normal doctrines and rendered book; obtain exact staged canonical receipt, commit and clear the brief before resuming .1.51. Reading remains 50/143 and repairs .2.5/.2.6 remain open.
+  Verification tier: `canonical`
+  Focused checks: Exact fourteen-scalar diff, finite reserve, production boundary/authorization controls, immutable-history reconstruction, prior evidence preservation, Knowledge/memory, both history checks, book and direct documentation checks.
+  Canonical trigger: Routed capacity infrastructure admission; exact staged candidate requires tools/run_ci_local.sh and normal receipt-bound hooks.
+  Verification: Exact fourteen-scalar identity, all 528 prior task nodes and all unrelated blobs pass preservation. Both histories reconstruct exactly; independent and production 98-unit models agree on seven future rollovers per collection. Production validators pass156 threshold/61 authorization controls. Complete candidate reserve, Knowledge/memory, histories, book, direct documentation checks and normal doctrines are selected; ordinary exact staged canonical receipt is required before landing. Reproduction: docs/knowledge/conformance-evidence-capacity-admission.md.
+  Diff check: Ordinary diff checking flags only two preserved record-separator EOF blanks in rolled hot roots. Keep those historical bytes; apply command-scoped -blank-at-eof only to CHANGES.md/DEVELOPMENT_NOTES.md, ordinary checking everywhere else. Exact reconstruction independently verifies both boundaries.
+  Resolved intake: The first canonical gate exits1 on mirrored limits. The director grants exact .15.1; applied checker passes37 self-tests/50 detached registry cases and the actual partition gate. Fresh exact staged canonical proof remains mandatory before landing.
+  Commit: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.15 - admit approved conformance evidence capacity`
+
+- ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.15.1`
+  Status: `done`
+  Authorization: The director answered Granted to the exact prepared one-file mirror/test correction before remaining codebase reading. Apply draft SHA-256 cb9dd627bb5d657d0fc504b611cd25b377e2b9b3b6602f352680bf3c635cd9e9; preserve the fourteen already-approved registry transitions and all other source. This inseparable admission correction lands atomically with .15 under ordinary canonical CI and normal hooks.
+  Goal: Resolve the task-partition checker's mirrored-capacity mismatch exposed by .15 canonical verification.
+  Dependencies: .15 exact fourteen-control approval; separate before-reading authority if its source-preservation scope must expand.
+  Scope: Diagnose with actual checker functions, prepare the smallest exact two-limit mirror/test update in managed scratch, preserve the failed gate evidence, and obtain explicit disposition before changing production checker source. All approved registry controls remain as granted.
+  Acceptance: Prove current checker mismatch and proposed agreement at inclusive/independent-overflow boundaries, preserve the existing agreement guard and all member/file controls, run all37 self-tests and50 malformed/drift registry cases, then rerun ordinary exact staged canonical CI if the extension is approved. No hook bypass or inferred CI exception.
+  Verification: Canonical gate exposes four disagreements against the approved registry; current source mirrors92000/10485760. Exact one-file draft cb9dd627 passes syntax, all37 self-tests and50 registry cases, with four original/zero proposed mismatches. Full draft/replay is in docs/knowledge/conformance-evidence-capacity-admission.md. The director subsequently grants the exact source extension. Applied source matches cb9dd627; fresh37 self-tests/50 registry cases and the actual partition gate pass. Original diagnosis remains historical; normal canonical rerun governs atomic admission.
+  Failed canonical evidence: Candidate c8f6695f16fee2296f64b76952fc8c4d2ed44da474a91741e5f93d12db6ab575 exits1; seven doctrines pass, TASK-TREE-METADATA and README-STABILITY fail. Four registry/checker disagreements are primary; the later README report also notices the diagnosis task edit made after those failures. No receipt. Log .linkedspec-data/scratch/conformance-capacity-admission/canonical-mirror-failure.log SHA-256 22760a6cd522684e9ec9656268842efe06af2397aa44868376852120e3f6c748. Earlier superseded formatting run exits143 and supplies no proof.
+  Commit: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.15 - admit approved conformance evidence capacity`
+
 ## Current Frontier
+
+Director steering during .15 (2026-09-21): `rgx/subs/pgen/grammars/*.ebnf` are explicitly offered as optional inputs for training/validating `ebnf.spec`. Retain this input authorization for an appropriate future EBNF task-tree leaf after the current clean boundary; no grammar reading or training occurs in .15. This narrow caller-authorized input use does not authorize dependency implementation analysis or pin changes.
+
+Snapshot qualification: The director notes these grammars are actively changing and authorizes this particular snapshot. Read-only Git metadata pins RGX `8763a0e6bea97879f027237439d57725f83ead23` and its PGEN gitlink/checkout `db6f8c6836fefa5a57b1337d3ffbf6f15774089f`; `git -C rgx/subs/pgen status --short -- 'grammars/*.ebnf'` reports no grammar changes. Future EBNF work must resolve this pinned input set, record individual input hashes and review any later update separately. No implementation source was inspected.
+
+Complete through `.15`, including the subsequently granted exact `.15.1` checker mirror correction under ADR0122. After fresh exact staged canonical verification, committed landing, empty brief and clean proof, resume `CONFORMANCE-SOURCE-READING.1.51` (Phase0 lines13632–14984). Reading remains50/143; MethodExpr .2.5 and EmitContext descriptions .2.6 retain unchanged repair prerequisites.
+
+Historical .14 handoff (preserved):
 
 Complete through .14 under director-approved ADR0118. After the verified commit, empty brief and clean proof, complete the director-authorized integration guide activity, then continue conformance .1.35 after .1.34 reads generated-source tests1-153; cumulative45038 fragments/1353523 bytes; startup .3.8.0 owns all160 inputs/143 groups; supporting .1/startup .3.7 close under ADR0120; .2.6 applies the granted checker correction without changing registry ceilings; Lua reading is closed under ADR0119. All source repairs and later canonical/push requirements remain.
 

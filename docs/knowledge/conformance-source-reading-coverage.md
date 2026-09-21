@@ -454,7 +454,8 @@ Source reading remains 50/143. `.4.1` owns the concrete fourteen-scalar proposal
 Its five complete replay recipes pin the clean baseline, derive maxima from the first
 fifty reading commits, verify immutable history, compare independent/production
 rollover models and test detached limits with the actual production predicate.
-No capacity has been admitted. `.4.2` awaits explicit director disposition before
-bounded implementation under the normal canonical tier; `.1.51` remains unread.
+The director granted the exact proposal and before-reading implementation.
+ADR0122 and containment .15 own ordinary canonical admission; `.1.51` remains unread.
+Exact current admission proof: [[conformance-evidence-capacity-admission]].
 The 99-unit reserve covers the 93 remaining children and six support allowances,
 not later startup lanes or runtime repairs. Both `.2.5` and `.2.6` remain owned/open.

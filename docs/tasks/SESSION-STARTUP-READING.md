@@ -2299,7 +2299,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Status: `active`
   Goal: Split and read all 160 entries under capability_conformance, cli_conformance, t, tests, and unicode_case.
   Children: `.3.8.0` owns exact decomposition; `CONFORMANCE-SOURCE-READING.1` owns all143 reading groups; .2 findings and .3 independent closeout stay separate.
-  Reading owner: `docs/tasks/CONFORMANCE-SOURCE-READING.md`; 143 groups/302 baseline ranges over 160 inputs. Physical reading 50/143: 63,126 fragments / 2,378,009 baseline bytes and 97 complete files; Phase0 remains partial through line 13631. The approved 113-byte cursor-inventory delta stays separately pinned. Retained proof covers thirteen completed subtests / 118 assertions; .1.51 continues reading. Repairs .2.5/.2.6 retain prerequisites. Capacity proposal .4.1 is complete; explicit .4.2 disposition and governed admission precede unread .1.51.
+  Reading owner: `docs/tasks/CONFORMANCE-SOURCE-READING.md`; 143 groups/302 baseline ranges over 160 inputs. Physical reading 50/143: 63,126 fragments / 2,378,009 baseline bytes and 97 complete files; Phase0 remains partial through line 13631. The approved 113-byte cursor-inventory delta stays separately pinned. Retained proof covers thirteen completed subtests / 118 assertions; .1.51 continues reading. Repairs .2.5/.2.6 retain prerequisites. ADR0122/containment .15 implement the fourteen explicitly granted controls with ordinary canonical admission; unread .1.51 follows clean landing.
   Acceptance: Include phase0, neutral contracts, fixtures, generators, and four explicitly decoded pinned Unicode
     inputs. Keep generated/fixture bytes in scope; count neither a hash nor enumeration as full reading.
   Verification: `pending`
@@ -4673,7 +4673,7 @@ startup implementation prerequisites and the rgx reading exclusion remain intact
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.4.2` | `pending` | Obtain explicit disposition of conformance .4.1 finite capacity proposal; preserve 50/143 reading credit, all repairs and canonical admission before .1.51. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.51` | `pending` | Read Phase0 lines13632–14984 after ADR0122/containment .15 canonical landing; preserve 50/143 reading credit and all repairs. |
 
 ## Reading Ledger
 

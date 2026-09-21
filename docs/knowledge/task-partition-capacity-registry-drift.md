@@ -1,17 +1,27 @@
 ---
 id: task-partition-capacity-registry-drift
-title: "Task partition checker now agrees with the approved registry and rejects duplicate-limit drift"
+title: "Task partition checker mirrors reviewed capacity and rejects unsynchronized registry changes"
 answers:
   - "why does task tree metadata reject 88000 lines when the registry allows 92000"
   - "do all task collection gates use the approved capacity"
   - "why did supporting source reading 1.18 fail its first commit"
   - "where is the duplicate task capacity checker repair owned"
 date: 2026-09-13
-status: repaired under SUPPORTING-SOURCE-READING.2.6; prior diagnosis and proposal retained below
+status: current; ADR0122 and containment .15.1 synchronize the subsequently approved task limits
 tags: [tasks, capacity, doctrine, verification, continuity, SUPPORTING-SOURCE-READING]
 evidence: "SUPPORTING-SOURCE-READING.1.18 normal hooks exit1: TASK-TREE-METADATA and README-STABILITY fail the older 88000-line cap, seven other doctrines pass. Exact production-function boundary probes expose line and byte disagreement with the approved registry. .2.6 owns repair after startup prerequisites. The revised reading task decomposition retains seven concrete grammar/literal repair slices with focused verification in each, removing nine redundant nodes; no source, registry, gate or prior history change."
-reverify: "Run TASK_CHECKER_APPLIED_PROOF below and scripts/check_task_tree_metadata.sh. Earlier diagnosis/proposal recipes are historical pre-fix evidence; the current replay retrieves their exact original Git source and compares the applied checker."
+reverify: "Use the current applied-correction recipe in docs/knowledge/conformance-evidence-capacity-admission.md and run scripts/check_task_tree_metadata.sh. The September13 recipes below preserve their historical source hashes and registry assumptions."
 ---
+
+Current September21 disposition: containment `.15.1` applies the director-granted
+exact mirror/test correction for ADR0122:120,000 aggregate lines/12,582,912 bytes.
+The existing agreement guard correctly blocked the initial unsynchronized
+candidate with four errors. Applied source cb9dd627 passes37 self-tests/50 registry
+cases and the actual partition gate. Source and registry must be reviewed together
+at every later capacity transition; no guard or member/file limit was relaxed.
+Current reproduction: [[conformance-evidence-capacity-admission]].
+
+## Historical September13 record
 
 Current disposition: the director granted the exact prepared correction and its
 focused verification before remaining reading; ADR0120 records that authority.

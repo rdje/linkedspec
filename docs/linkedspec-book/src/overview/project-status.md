@@ -510,14 +510,12 @@ blind spot remains separately owned by .2.5. Neither finding establishes a produ
 loading failure. No fresh full-gate run or whole-file reading credit is claimed.
 The pinned 113-byte inventory delta stays separate; all prerequisite-gated repairs remain open.
 
-Remaining conformance reading now needs a documentation-capacity decision. The notes
-file had 72 bytes left at proposal activation; its complete compact proposal record
-leaves five bytes before mandatory rollover. Both archive collections remain at
-their approved membership limits. A 99-unit reserve covers the 93 remaining reading
-children and six support allowances. No limits have changed. The exact proposal,
-calculations and five replay recipes live in `CONFORMANCE-SOURCE-READING.4.1`.
+The director approved the finite documentation-capacity proposal under ADR0122.
+Containment `.15` admits exactly fourteen controls for the remaining 93 reading
+groups and bounded supporting work. Its preservation proof keeps the existing
+history and reading evidence; ordinary canonical CI governs the admission.
 
-| Proposed capacity | Current | Proposed |
+| Controlled capacity | Previous | Approved |
 | --- | ---: | ---: |
 | Changes collection files / manifest lines / manifest bytes | 39 / 38 / 21,647 | 47 / 46 / 26,255 |
 | Notes collection files / manifest lines / manifest bytes | 35 / 34 / 20,514 | 43 / 42 / 25,410 |
@@ -526,12 +524,18 @@ calculations and five replay recipes live in `CONFORMANCE-SOURCE-READING.4.1`.
 | Generated Knowledge Map lines | 20,000 | 22,500 |
 | Task aggregate lines / bytes | 92,000 / 10,485,760 | 120,000 / 12,582,912 |
 
-These are fourteen scalar changes. Both live history files keep their 512-line /
-65,536-byte caps; general per-card/part limits and immutable history remain unchanged.
-`.4.2` requires explicit approval, including bounded implementation before required
-reading finishes. Implementation keeps ordinary canonical CI and commit hooks.
-Source reading stays at 50/143 until governed admission permits `.1.51` to resume;
-all test/runtime repairs remain open under their existing prerequisites.
+The first admission check detected older mirrored limits in the task-partition
+checker. Its agreement guard correctly rejected the mismatch. A separately
+granted `.15.1` correction synchronizes those two limits and their boundary tests;
+all37 self-tests and50 registry cases pass. The ordinary canonical gate must
+verify the corrected complete candidate before admission lands.
+
+The history files keep their 512-line / 65,536-byte caps, mandatory rollover and
+immutable archives. General card/part limits remain unchanged. Admission consumes
+one of the conservative 99 reserve units; the remaining 98 units are forecast
+after actual admission overhead. This capacity does not complete source reading
+or repair tests: reading stays 50/143, `.1.51` follows clean admission, and the
+MethodExpr observation gap `.2.5` and six descriptions `.2.6` remain open.
 
 The director has requested integration guides and runnable consumer examples for
 Perl, Rust, Dart, Julia and Lua, covering recursive checkout, dependency preparation

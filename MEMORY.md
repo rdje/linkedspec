@@ -1,12 +1,12 @@
 # MEMORY
 
-- activation_commit: `7b921a1954b1a8cf4089315491474979c580046b` — clean conformance .1.50 checkpoint; capacity proposal .4.1 activation.
-- latest_completed_leaf: `CONFORMANCE-SOURCE-READING.4.1 - propose finite remaining-reading evidence capacity`; proposal only, no limit or source changes.
-- active_work_unit: `CONFORMANCE-SOURCE-READING.4.2` — pending explicit director disposition.
-- next_action: Obtain approval of the fourteen exact scalar changes and before-reading capacity implementation in conformance .4.1. Then admit through a bounded containment leaf with canonical proof; resume unread .1.51 only after clean admission.
+- activation_commit: `5fab5aa6dfdf0f52f9a9018aba2dc5cb7449e537` — clean capacity proposal; containment .15 activation.
+- latest_completed_leaf: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.15 - admit approved conformance evidence capacity`; approved fourteen-scalar admission, exact granted checker mirror, preserved histories and finite remaining reserve.
+- active_work_unit: `CONFORMANCE-SOURCE-READING.1.51` — next unread Phase0 range 13632–14984.
+- next_action: Read conformance .1.51 exactly; preserve 50/143 completed groups, 63,126 fragments / 2,378,009 baseline bytes, all repair prerequisites and approved ADR0122 capacity controls.
   Named-argument direction PARSER-AUTHORING-APIS.4 is approved and parked; other authoring proposals and approved formats stay parked.
-- in_flight_uncommitted: none; .4.1 proposal is verified and committed before requesting disposition.
-- blockers: History capacity: next note exceeds mandatory rollover without new archive room; .4.2 owns approval. Wrapper startup .7 remains open; warned-child group matched, but denied-call cause and original lost PUC stream remain unproved. Recovery/purge stay prohibited.
+- in_flight_uncommitted: none; containment .15 lands with exact canonical receipt and normal hooks before source reading resumes.
+- blockers: Wrapper startup .7 remains open; warned-child group matched, but denied-call cause and original lost PUC stream remain unproved. Recovery/purge stay prohibited.
 - current_rust_warning_debt: Repeated carriers report 1,870 pgen plus 26 rgx-core output warnings; RUST-DEPENDENCY-WARNING-ZERO.1-.7 own public RGX reports and result verification without suppression; dependency internals are excluded.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
   active table; the task metadata doctrine inventories all consumers, permits arbitrary frontier-row rewrites,
@@ -51,10 +51,10 @@
 - standing_contracts: all durable paths are repo-relative; all project data stays on the repository filesystem;
   README remains bounded; ordinary leaves use focused proof and designated infrastructure/public/push boundaries
   use exact staged canonical CI; task-tree/index, Knowledge Map, mdBook, and bounded live/history move in lockstep.
-- current_engineering_notes_capacity: ADR0121 admits 35 collection files /34 manifest lines /20514 manifest bytes for integration delivery; all three current counts match.
-  Notes segment4973 preserves clean HEAD lines107-220 byte-exactly; older archives and all other controls remain unchanged.
-- current_change_history_capacity: ADR0121 admits 39 collection files /38 manifest lines /21647 manifest bytes for integration delivery; all three current counts match.
-  Changes segment4974 preserves clean HEAD lines137-262 byte-exactly; earlier archives and all other controls remain unchanged.
+- current_engineering_notes_capacity: ADR0122 admits 43 collection files /42 manifest lines /25410 manifest bytes; current36/35/21125 stay bounded.
+  Notes segment4972 preserves 89 lines /28550 bytes from clean 5fab5aa6; old archive rows/bytes remain exact.
+- current_change_history_capacity: ADR0122 admits 47 collection files /46 manifest lines /26255 manifest bytes; current40/39/22223 stay bounded.
+  Changes segment4973 preserves 117 lines /29044 bytes from clean 5fab5aa6; old archive rows/bytes remain exact.
 - dependency_boundary: September20: LinkedSpec integrates only with RGX via its published integration document/APIs/contracts. RGX owns PGEN; no separate PGEN procedure, internal inspection/analysis, patches or pin changes.
   Normal documented builds remain authorized; retain caches. Startup .80.1-.4 may observe public behavior or track upstream repairs, not investigate dependency internals.
 - latest_bootstrap_read: 2026-09-21 — roadmap Yes / full codebase No / physical mdBook Yes; five backend lanes and supporting .3.7 closed. Conformance 50/143 reads 63,126 fragments / 2,378,009 baseline bytes; 93 groups remain, including conformance tests and four decoded Unicode inputs. Later .3.9-.3.11, formal book .4 and policy .5 remain; no runtime repair closes.

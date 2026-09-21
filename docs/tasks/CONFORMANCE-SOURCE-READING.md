@@ -1981,13 +1981,13 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
   Commit: `pending`
 
 - ID: `CONFORMANCE-SOURCE-READING.4`
-  Status: `active`
+  Status: `done`
   Goal: Resolve measured evidence capacity before the remaining 93 reading children, without losing history or silently increasing controls.
   Children: `.4.1`, `.4.2`
   Dependencies: .1.50 committed clean; .1.51 remains unread and pending.
   Acceptance: Preserve exact prior content, derive a finite reviewable reserve, obtain explicit disposition before any capacity implementation and restore the source-reading frontier only after governed admission.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Explicit Granted disposition recorded under accepted indexed ADR0122. Containment .15 independently proves exact fourteen controls, finite remaining reserve, prior source/task/history preservation and production boundary/authorization behavior; its ordinary exact staged canonical receipt governs landing. Reading stays 50/143 and all repairs remain open.
+  Commit: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.15 - admit approved conformance evidence capacity`
 
 - ID: `CONFORMANCE-SOURCE-READING.4.1`
   Status: `done`
@@ -2003,12 +2003,23 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
   Commit: `CONFORMANCE-SOURCE-READING.4.1 - propose finite remaining-reading evidence capacity`
 
 - ID: `CONFORMANCE-SOURCE-READING.4.2`
-  Status: `pending`
+  Status: `done`
   Goal: Record the director's explicit disposition and route an approved bounded implementation from a clean checkpoint.
   Dependencies: .4.1 committed; explicit approval of exact proposed controls and implementation before completion of required reading.
   Acceptance: No elapsed-time or prior-ADR approval inference. After approval, create a bounded LIVE-DOCUMENT-PRESSURE-CONTAINMENT implementation owner, newly accepted indexed ADR and canonical staged proof; independently verify exact changes and preservation before resuming .1.51. Otherwise retain the proposal and select an authorized alternative with the director.
-  Verification: `pending`
-  Commit: `pending`
+  Authorization: The director answered Granted on 2026-09-21 to the exact fourteen controls and bounded implementation before required reading finishes; no CI or hook exception. LIVE-DOCUMENT-PRESSURE-CONTAINMENT.15 owns implementation from clean 5fab5aa6, with accepted indexed ADR0122.
+  Verification: Explicit Granted disposition recorded under accepted indexed ADR0122. Containment .15 independently proves exact fourteen controls, finite remaining reserve, prior source/task/history preservation and production boundary/authorization behavior; its ordinary exact staged canonical receipt governs landing. Reading stays 50/143 and all repairs remain open.
+  Commit: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.15 - admit approved conformance evidence capacity`
+
+## Approved capacity disposition — 2026-09-21
+
+The director answered **Granted** to all fourteen exact controls and bounded
+before-reading implementation. Containment `.15` owns admission from clean
+5fab5aa6 with accepted indexed ADR0122, independent preservation/reserve proof
+and the ordinary exact staged canonical receipt. The original proposal below
+is preserved as historical evidence; its pending language describes its date.
+Source reading remains 50/143; `.1.51` resumes after clean admission. Repairs
+`.2.5` and `.2.6` remain open with unchanged acceptance and prerequisites.
 
 ## Remaining-reading capacity proposal
 
@@ -2392,7 +2403,7 @@ additional reading credit from integration delivery.
 
 | Rank | Leaf | Status | Next action |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.4.2` | `pending` | Obtain explicit disposition of the fourteen-scalar remaining-reading capacity proposal and before-reading implementation authority. Registry and source remain unchanged; .1.51 resumes only after governed admission. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.51` | `pending` | Read Phase0 lines13632–14984 after approved ADR0122/containment .15 canonical admission; preserve 50/143 reading credit and open repairs .2.5/.2.6. |
 
 ## Decisions
 
