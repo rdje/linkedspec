@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.56 - read switch coverage and own vacuous code comparisons
+
+The exact six-tag inline-switch test passes 48 assertions after a branch payload changes: both compared uppercase descriptor fields are absent. Captured generated handlers show different return expressions. ARRAY source chunks require a join or explicit parser_source_ref, not scalar dereference. Exact public probes and discarded bootstrap-wrapper setup error are documented in phase0-code-slot-equivalence-observation-gap; .2.10/.2.11 own bounded repairs after prerequisites.
+
 ## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.55 - read mixed branches and nested switch equivalence
 
 Mixed branch carriers compare metadata; nested marker/inline switch pairs also compare code fields. Descriptor fixtures with unbound selectors and undef-only branches do not prove runtime branch selection. Eight seven-tag loops have448 inner assertions, separate from151 direct assertions including56 nested results. Canonical comprehension: conformance-perl-consumer-reading.

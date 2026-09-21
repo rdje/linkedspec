@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `CONFORMANCE-SOURCE-READING`
-- Status: `active` / exact decomposition; physical reading 55/143
+- Status: `active` / exact decomposition; physical reading 56/143
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.8`
 - Created: `2026-09-13`
 - Last updated: `2026-09-21`
@@ -1004,14 +1004,21 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
   Commit: `CONFORMANCE-SOURCE-READING.1.55 - read mixed branches and nested switch equivalence`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.56`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `e258190c84fa85aa819c4e4eb13e353ec63d585f`.
+  Verification tier: `focused`
+  Focused checks: Complete reading and exact coverage/window replay; retained direct/nested TAP proof; fresh Toolbox descriptor, changed-payload and capture controls; Knowledge, preservation, memory, histories, book, direct public checks and normal doctrines.
+  Canonical trigger: Ordinary bounded reading and test-observation diagnosis; no runtime, dependency, public contract, infrastructure or parent-closeout change.
   Goal: Read and understand conformance/test/Unicode group 56.
   Scope: `t/phase0_regression.t` lines 19558-21057
   Baseline evidence: 1500 fragments / 64289 decoded bytes; ordered range SHA-256 `1ef2959331e2e7b7ffdfb0b0ee3da905223bf608e022bad0b756e60646982c18`.
   Dependencies: .1.55 committed with clean handoff.
   Acceptance: Read every scoped byte in complete bounded windows; retain source identity, exact comprehension, canonical Knowledge reconciliation, concrete finding ownership, focused proof and per-leaf continuity. Unread crossing constructs retain the next range owner.
-  Verification: `pending`
-  Commit: `pending`
+  Reading evidence: 10 complete windows / 1500 fragments / 64289 bytes; ordered window SHA-256 `212809d8081a3124d296fa3477c4a77a790ef50ce94329103c5f75a4ccbc8ce1`.
+  Comprehension: Nested if/elseif marker and inline switches compare structured and attached forms. Three six-tag loops cover fluent inline switch, if branch blocks and switch branch blocks; a seven-tag loop checks attached switch hit maps. Five additional seven-tag nested-flow loops assert descriptor slots are undef and verify metadata for marker if/switch, composite if, inline switch and if/elseif bodies. Their rule-wide RETURN counts include the separate action-edge return; SWITCH hit counts are canonical metadata, not a literal count of authored switch calls. Action flat-list fixtures compose flat_hash/pick_keys and flat_array/sorted_keys but do not execute their target branches; the LX counterpart stops after assertion8. Fresh public-output probes establish that uppercase code-slot equality compares absent fields, and a changed payload still passes all48 inner assertions despite different captured generated returns. New .2.10 owns real code/behavior observation; .2.11 owns source-capture recipes that scalar-dereference an ARRAY. Prior generated-code equivalence wording is superseded; meaningful descriptor metadata and historical passes remain. No production runtime defect or repair is claimed.
+  Verification: Unchanged canonical commit ec10be6b retains PASS for 18 completed subtests, ordinals 523–540 with 148 direct assertions, including 74 nested results. Eleven lifecycle loops separately verify 557 inner assertions, with exact tag order, TAP numbering and plans. Fresh original and changed-payload probes each pass all 48 inner assertions while twelve descriptors lack uppercase code slots; captured generated returns distinguish the payloads. Public source capture confirms ARRAY chunks and working explicit scalar capture. New .2.10 and .2.11 own both defects; prior slot-equality claims are superseded. The LX flat-list test is partial after eight of twelve assertions; .1.57 owns its suffix. No production runtime defect, source repair, dependency build, new canonical run or push is claimed.
+  Candidate proof: Exact 160-input/143-group/302-range audit and ten-window replay pass. Preservation verifies 2,849 other files / 50,645,496 bytes, 512 prior task nodes, 53 other book files and all 1,039 headings; exactly two new repair nodes and one fact card are added. Historical ranges, recipes, histories and parent Gitlink remain exact. The maintained reproduction independently passes pristine and changed-payload controls, each48 inner assertions; I/LS/LE generated values differ while this handler omits E/EX/IT bodies. Source-capture shape controls pass. Memory, both history-pressure checks, mdBook, public mutation (69 files / 50 mutations), public selector (68 files / 11 contrast mutations) and diff checks pass. Hot histories are changes188 lines/33765 bytes and notes184/34059, below rollover. Knowledge is1,154 facts/9,253 keys. Normal nine-doctrine hooks govern landing; this focused leaf requires no new canonical run.
+  Commit: `CONFORMANCE-SOURCE-READING.1.56 - read switch coverage and own vacuous code comparisons`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.57`
   Status: `pending`
@@ -2037,6 +2044,26 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
   Verification: `pending`
   Commit: `pending`
 
+- ID: `CONFORMANCE-SOURCE-READING.2.10`
+  Status: `pending`
+  Goal: Replace vacuous Phase0 code-slot equivalence assertions with observations of actual lowering or execution.
+  Evidence: .1.56 Toolbox probe of the exact remaining-lifecycle inline-switch test passes all six nested eight-assertion plans, while all twelve descriptors have only dependency_refs/handler/meta/re keys at spec.Top and lack every asserted uppercase code slot. Equality therefore compares undef with undef. Canonical diagnosis and mutation reproduction: docs/knowledge/phase0-code-slot-equivalence-observation-gap.md.
+  Scope: Audit the Phase0 action/lifecycle code-slot comparisons as one bounded inventory, then implement owned slices with an explicit observed nonempty code representation or independent branch execution. Reconcile earlier reading claims that treated absent-slot equality as generated-code proof.
+  Dependencies: Required source/book/policy reading, including the remaining Phase0 body, before tracked test edits. Current .1.56 owns diagnosis and current-claim correction only.
+  Acceptance: Preserve meaningful descriptor/metadata checks; prove the compared representation exists and contains the intended action; reject a changed branch payload that currently escapes; preserve pristine positives and lifecycle coverage in handler shapes that actually emit each hook; retain existing startup .27.1 ownership of mode/finalization reconciliation; synchronize Knowledge and the book. Split the inventory into bounded child repairs if necessary, and close only after independent negative-control verification.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `CONFORMANCE-SOURCE-READING.2.11`
+  Status: `pending`
+  Goal: Correct source-capture recipes that dereference an array of chunks as a scalar.
+  Evidence: .1.56 follows TOOLBOX.md section2.2 and reproduces Not a SCALAR reference. RuntimeContext.pm ensure_runtime_ctx_parser_source_chunks_ref stores an ARRAY; flush_runtime_ctx_parser_source joins those chunks and writes a caller-provided parser_source_ref SCALAR. A valid public Get control confirms ARRAY storage and nonempty explicit scalar capture. The same stale scalar dereference appears in top-rule-is-ordinary-rule-entered-first's reverify recipe.
+  Scope: TOOLBOX.md source-capture example and matching maintained recipes; inventory exact scalar-dereference uses without altering historical evidence or unrelated runtime code.
+  Dependencies: Remaining required source/book/policy reading before tracked recipe repair; .1.56 owns discovery and the corrected diagnostic recipe.
+  Acceptance: Use parser_source_ref or an explicit join over validated ARRAY chunks; execute each corrected current recipe through managed project storage, demonstrate nonempty captured source and no reference-type error, preserve all supported capture outputs, update Knowledge and relevant public guidance, then commit.
+  Verification: `pending`
+  Commit: `pending`
+
 - ID: `CONFORMANCE-SOURCE-READING.3`
   Status: `pending`
   Goal: Independently reconcile all source/range/reading-commit/repair evidence and close only the required reading lane with applicable verification.
@@ -2468,7 +2495,7 @@ additional reading credit from integration delivery.
 
 | Rank | Leaf | Status | Next action |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.56` | `pending` | Read Phase0 lines 19558–21057 (1,500 fragments / 64,289 baseline bytes), continuing the lifecycle nested if/elseif multi-case inline-switch cases list. Repairs .2.5–.2.9 and earlier repairs retain prerequisites. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.57` | `pending` | Read Phase0 lines 21058–22258 (1,201 fragments / 65,530 baseline bytes), completing the LX flat-list test after assertion8. Repairs .2.5–.2.11 and earlier repairs retain required reading prerequisites. |
 
 ## Decisions
 
@@ -2480,6 +2507,8 @@ additional reading credit from integration delivery.
 - None at decomposition. Ordinary source repairs retain startup prerequisites; later collection pressure must be measured rather than assumed away.
 
 ## Verification Log
+
+- `2026-09-21` .1.56: Ten complete windows cover 1,500 fragments / 64,289 baseline bytes; ordered window SHA-256 212809d8081a3124d296fa3477c4a77a790ef50ce94329103c5f75a4ccbc8ce1. Cumulative reading is 56/143: 70,552 fragments / 2,767,515 baseline bytes and 97 complete files. Phase0 is partial through line 21057. Unchanged canonical commit ec10be6b retains PASS for 18 completed subtests, ordinals 523–540 with 148 direct assertions, including 74 nested results. Eleven lifecycle loops separately verify 557 inner assertions, with exact tag order, TAP numbering and plans. Fresh original and changed-payload probes each pass all 48 inner assertions while twelve descriptors lack uppercase code slots; captured generated returns distinguish the payloads. Public source capture confirms ARRAY chunks and working explicit scalar capture. New .2.10 and .2.11 own both defects; prior slot-equality claims are superseded. The LX flat-list test is partial after eight of twelve assertions; .1.57 owns its suffix. No production runtime defect, source repair, dependency build, new canonical run or push is claimed.
 
 - `2026-09-21` .1.55: Ten complete windows cover 1,500 fragments / 63,518 baseline bytes; ordered window SHA-256 0f2a18bc08cda6675d7eb1014ca0f86d1b7ab4751e5fabf8b998980ea9faf881. Cumulative reading is 55/143: 69,052 fragments / 2,703,226 baseline bytes and 97 complete files. Phase0 is partial through line 19557. Unchanged canonical commit ec10be6b retains PASS for16 completed subtests, ordinals507–522 with151 direct assertions, including56 nested subtest results. Eight seven-tag lifecycle loops separately verify448 inner assertions, with exact tag order, sequential TAP numbers and plans. Phase0/own Perl/spec identities remain unchanged. The next lifecycle test is read only through the I/LS/LE/E prefix of its cases list; .1.56 owns the remaining list, plan, fixtures and assertions. No new defect, target runtime execution, repair, dependency build, canonical run or push is claimed. Whole-gate1032 proof remains retained, and all existing repair prerequisites remain.
 
@@ -2563,6 +2592,8 @@ additional reading credit from integration delivery.
 
 ## Commit Log
 
+- `2026-09-21` .1.56: `CONFORMANCE-SOURCE-READING.1.56 - read switch coverage and own vacuous code comparisons`; activation e258190c8; .1.57 follows clean handoff and empty brief.
+
 - `2026-09-21` .1.55: `CONFORMANCE-SOURCE-READING.1.55 - read mixed branches and nested switch equivalence`; activation bbb20ca7c; .1.56 follows clean handoff and empty brief.
 
 - `2026-09-21` .1.54: `CONFORMANCE-SOURCE-READING.1.54 - read structured branch and lifecycle equivalence coverage`; activation c7585a960; .1.55 follows clean handoff and empty brief.
@@ -2644,6 +2675,8 @@ additional reading credit from integration delivery.
 - `2026-09-13`: Decomposition lands under `SESSION-STARTUP-READING.3.8.0`; Git owns the resulting commit identity.
 
 ## Changelog
+
+- `2026-09-21` .1.56: Read nested switch/lifecycle and flat-list coverage. Own absent-code-slot equality and invalid scalar source-capture recipes; correct current interpretation while preserving historical reading and test results.
 
 - `2026-09-21` .1.55: Read mixed branch carriers and nested marker/inline switch equivalence, with eight seven-tag nested plans verified separately. Preserve all earlier repairs and runtime evidence boundaries.
 
