@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.71 - read array ordering and own assignment description drift
+
+Sorted_values follows key order; sorted compares lexical terms and reversed changes element order. Numeric reducer expressions validate each term, with sum identity zero and empty average undef. The public assignment outputs use scalar-held arrays despite four stale list-context-flattening labels; inner list construction is distinct. Exact source extraction and four compiled lowering controls confirm the wording mismatch. phase0-array-assignment-description-drift owns durable reproduction; .2.12 owns correction after reading. Descriptor comparisons retain .2.10 limits.
+
 ## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.70 - read hash transformations and snapshot lowering checks
 
 Seven four-assertion direct plans inspect hash lookup, merging, copying and key transforms through expressions and anchored patterns. Bare copy observes one runtime-typed binding; the composed known-hash case checks a shallow snapshot. Rename moves existing keys, drop deletes from a local copy and pick projects existing requested keys. Fourteen descriptor comparisons retain .2.10 limits; lifecycle pick_keys ends before readiness. Exact comprehension remains in conformance-perl-consumer-reading.

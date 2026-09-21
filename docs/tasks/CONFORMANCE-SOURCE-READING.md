@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `CONFORMANCE-SOURCE-READING`
-- Status: `active` / exact decomposition; physical reading 70/143
+- Status: `active` / exact decomposition; physical reading 71/143
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.8`
 - Created: `2026-09-13`
 - Last updated: `2026-09-21`
@@ -1259,14 +1259,21 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
   Commit: `CONFORMANCE-SOURCE-READING.1.70 - read hash transformations and snapshot lowering checks`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.71`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `a9b874f7b704ca9fa7446944d7767077eb256afb`.
+  Verification tier: `focused`
+  Focused checks: Complete reading and exact coverage/window replay; retained TAP and four fresh exact subtests/public assignment controls; durable recipe replay, Knowledge, preservation, memory, histories, book, direct public checks and normal doctrines.
+  Canonical trigger: Ordinary bounded reading and diagnosis; no tracked runtime/test, dependency, public contract, infrastructure or parent-closeout change.
   Goal: Read and understand conformance/test/Unicode group 71.
   Scope: `t/phase0_regression.t` lines 37745-38503
   Baseline evidence: 759 fragments / 65504 decoded bytes; ordered range SHA-256 `23ace6853a715825816ce55d79c7b975ce9fadef04e2c80d2073308c7c26b438`.
   Dependencies: .1.70 committed with clean handoff.
   Acceptance: Read every scoped byte in complete bounded windows; retain source identity, exact comprehension, canonical Knowledge reconciliation, concrete finding ownership, focused proof and per-leaf continuity. Unread crossing constructs retain the next range owner.
-  Verification: `pending`
-  Commit: `pending`
+  Reading evidence: 11 complete windows / 759 fragments / 65504 bytes; ordered window SHA-256 `59d454151dbf825b3c0242fd66d004452f8a6c21093d9cca573fdba96c46dce7`.
+  Comprehension: Completes lifecycle pick_keys, then reads sorted_keys, sorted_values, concat_arrays, lexical sorted, reversed, num_sum and num_avg direct lowering and action/LX descriptor comparisons. Sorted values follow sorted keys; concatenation guards nested ARRAY values and constructs one array; sorting compares defined terms as strings with undef mapped to empty text. Numeric sum/average text validates every term, with sum identity zero and empty average undef. Seven four-assertion textual plans and fourteen twelve-assertion descriptor plans complete. Lifecycle num_avg is partial after assertion four; .1.72 owns the suffix. Fresh exact four-subtest proof passes 16 assertions; four public assignment executions return expected ARRAY references. Their list-context-flattening labels are stale and repair-owned by .2.12; actual inner list construction remains distinct. Existing .2.10 uppercase-slot limits remain.
+  Verification: Unchanged canonical commit ec10be6b retains PASS for twenty-one completed subtests, ordinals 762–782 with 196 direct assertions and no nested plans: fourteen descriptor plans contribute 168 and seven direct-lowering plans contribute 28. Exact TAP numbering/source identity are verified. Four freshly extracted subtests pass 16 assertions; four public assignment executions return expected ARRAY references. Their list-context-flattening descriptions are stale; .2.12 owns correction after prerequisites, with exact reproduction in phase0-array-assignment-description-drift. Inner list construction remains valid; descriptor uppercase-slot limits remain .2.10-owned. Lifecycle num_avg is partial after assertion four. No tracked test repair, dependency build, canonical run or push; .2.5–.2.12 and earlier repairs remain.
+  Candidate proof: Exact 160-file/143-group/302-range audit and eleven-window reconstruction PASS; cumulative71 groups independently sum to87,998fragments/3,692,510baseline bytes. Both new tracked recipes replay PASS. Preserve2,850other files/50,654,378bytes,514prior task nodes,53other book files/all1,039headings, prior recipes/histories and gitlink; add only repair .2.12. Memory60; Knowledge1,155facts/9,272keys; histories248/41,634 and244/42,535lines/bytes; book/direct public checks and diff check PASS. Normal doctrine hooks govern focused landing.
+  Commit: `CONFORMANCE-SOURCE-READING.1.71 - read array ordering and own assignment description drift`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.72`
   Status: `pending`
@@ -2162,6 +2169,16 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
   Verification: `pending`
   Commit: `pending`
 
+- ID: `CONFORMANCE-SOURCE-READING.2.12`
+  Status: `pending`
+  Goal: Correct Phase0 assignment descriptions that claim list-context flattening for scalar-held array results.
+  Evidence: .1.71 completes the exact four-phrase census at Phase0 lines 37778/37890/38110/38218. Public call_spec_handler_subst outputs for sorted_keys, sorted_values, sorted and reversed assign scalar-held ARRAY references; all four exact lowered expressions execute with expected contents. The four authored subtests pass 16 assertions. Root mismatch is assertion prose versus scalar-binding observation; inner list construction remains valid. Reproduction: docs/knowledge/phase0-array-assignment-description-drift.md.
+  Scope: The four current Phase0 descriptions containing list-context flattening, with precise input/lowering/result evidence for each; preserve existing runtime behavior and assertion strength.
+  Dependencies: Required source/book/policy reading before tracked test edits; .1.71 owns diagnosis and current-claim reconciliation only.
+  Acceptance: Complete the four-case inventory, describe scalar assignment of array-valued results accurately, retain useful lowering assertions, execute the exact focused subtests and public lowering/result controls, verify no source-list flattening claim remains, synchronize Knowledge/book and commit. Do not reintroduce retired namespace selectors or change production lowering to satisfy stale wording.
+  Verification: `pending`
+  Commit: `pending`
+
 - ID: `CONFORMANCE-SOURCE-READING.3`
   Status: `pending`
   Goal: Independently reconcile all source/range/reading-commit/repair evidence and close only the required reading lane with applicable verification.
@@ -2593,7 +2610,7 @@ additional reading credit from integration delivery.
 
 | Rank | Leaf | Status | Next action |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.71` | `pending` | Read Phase0 lines 37745–38503 (759 fragments / 65,504 baseline bytes), continuing readiness and the final node check of the lifecycle pick_keys comparison. Repairs .2.5–.2.11 and earlier repairs retain required reading prerequisites. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.72` | `pending` | Read Phase0 lines 38504–39354 (851 fragments / 65,534 baseline bytes), continuing lifecycle num_avg after assertion four. Repairs .2.5–.2.12 and earlier repairs retain required source/book/policy reading prerequisites. |
 
 ## Decisions
 
@@ -2605,6 +2622,8 @@ additional reading credit from integration delivery.
 - None at decomposition. Ordinary source repairs retain startup prerequisites; later collection pressure must be measured rather than assumed away.
 
 ## Verification Log
+
+- `2026-09-21` .1.71: Eleven complete windows cover 759 fragments / 65,504 baseline bytes; ordered window SHA-256 59d454151dbf825b3c0242fd66d004452f8a6c21093d9cca573fdba96c46dce7. Cumulative reading is 71/143: 87,998 fragments / 3,692,510 baseline bytes and 97 complete files. Phase0 is partial through line 38503. Unchanged canonical commit ec10be6b retains PASS for twenty-one completed subtests, ordinals 762–782 with 196 direct assertions and no nested plans: fourteen descriptor plans contribute 168 and seven direct-lowering plans contribute 28. Exact TAP numbering/source identity are verified. Four freshly extracted subtests pass 16 assertions; four public assignment executions return expected ARRAY references. Their list-context-flattening descriptions are stale; .2.12 owns correction after prerequisites, with exact reproduction in phase0-array-assignment-description-drift. Inner list construction remains valid; descriptor uppercase-slot limits remain .2.10-owned. Lifecycle num_avg is partial after assertion four. No tracked test repair, dependency build, canonical run or push; .2.5–.2.12 and earlier repairs remain.
 
 - `2026-09-21` .1.70: Eleven complete windows cover 797 fragments / 65,524 baseline bytes; ordered window SHA-256 4fb287cc34d0db219abf17c32d98bf8a374eeea673663960ca7ddc882f7d6611. Cumulative reading is 70/143: 87,239 fragments / 3,627,006 baseline bytes and 97 complete files. Phase0 is partial through line 37744. Unchanged canonical commit ec10be6b retains PASS for twenty-one completed subtests, ordinals 741–761 with 196 direct assertions and no nested plans. Fourteen descriptor comparisons contribute 168 assertions; seven four-assertion direct-lowering plans contribute 28 textual checks. Exact TAP numbering and source identity are verified. Hash lookup, merge, snapshot and key-transform expectations inspect expressions and patterns; they do not execute copy isolation, collision outcomes or mutation behavior. Descriptor uppercase-slot comparisons remain .2.10-owned. Lifecycle pick_keys is partial after ten assertions at the opening of readiness; .1.71 owns the final two. No independently reproduced new defect, runtime execution, repair, dependency build, canonical run or push is claimed; .2.5–.2.11 and all prerequisites remain.
 
@@ -2718,6 +2737,8 @@ additional reading credit from integration delivery.
 
 ## Commit Log
 
+- `2026-09-21` .1.71: `CONFORMANCE-SOURCE-READING.1.71 - read array ordering and own assignment description drift`; activation a9b874f7b; .1.72 follows clean handoff and empty brief.
+
 - `2026-09-21` .1.70: `CONFORMANCE-SOURCE-READING.1.70 - read hash transformations and snapshot lowering checks`; activation ff9a9b83c; .1.71 follows clean handoff and empty brief.
 
 - `2026-09-21` .1.69: `CONFORMANCE-SOURCE-READING.1.69 - read scalar membership and reducer lowering checks`; activation e057c0336; .1.70 follows clean handoff and empty brief.
@@ -2829,6 +2850,8 @@ additional reading credit from integration delivery.
 - `2026-09-13`: Decomposition lands under `SESSION-STARTUP-READING.3.8.0`; Git owns the resulting commit identity.
 
 ## Changelog
+
+- `2026-09-21` .1.71: Read array ordering/concatenation and numeric reduction expectations; own four stale scalar-assignment descriptions under .2.12 with public execution proof.
 
 - `2026-09-21` .1.70: Read hash lookup, merge, snapshots and key-transform expectations; distinguish lowering observations from executed isolation and mutation behavior.
 

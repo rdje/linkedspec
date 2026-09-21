@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.71 - read array ordering and own assignment description drift
+
+Read Phase0 37745–38503:71/143 groups,87,998 fragments /3,692,510 baseline bytes. Retained twenty-one-subtest proof has 196 assertions; four fresh exact subtests pass 16 assertions and four public assignment executions return expected arrays. Own the four stale list-context-flattening descriptions under .2.12 with durable reproduction; no test/runtime repair closes. .1.72 continues lifecycle num_avg.
+
 ## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.70 - read hash transformations and snapshot lowering checks
 
 Read Phase0 36948–37744: 70/143 groups, 87,239 fragments / 3,627,006 baseline bytes. Retained twenty-one-subtest proof has 196 assertions: 168 descriptor and 28 direct-lowering checks. Hash lookup, merge, snapshot and key-transform expressions remain distinct from executed isolation/mutation behavior and .2.10-owned code-slot comparisons. No repair closes; .1.71 continues lifecycle pick_keys.

@@ -52,8 +52,9 @@ answers:
   - which Phase0 fallback and normalization tests inspect actual lowering text
   - what do Phase0 membership replacement boundary and reducer lowering checks observe
   - what do Phase0 hash transformation and snapshot lowering checks observe
+  - what do Phase0 array ordering and numeric reduction lowering checks observe
 date: 2026-09-21
-status: groups 34–70 physically read; Phase0 partial through line 37744; all observation-gap and runtime repairs retain prerequisites
+status: groups 34–71 physically read; Phase0 partial through line 38503; all observation-gap and runtime repairs retain prerequisites
 tags: [conformance, perl, reading, diagnostics, generated-source]
 evidence: "CONFORMANCE-SOURCE-READING.1.34 at activation d10305097eb502c0fe29309ec230437396e26d82; eleven complete windows, 1500 fragments, 56255 bytes, ordered window SHA-256 db04deab6c0365f8bc454e2695d410324a120104a232c213346f2b23ad16aef3. Five managed Perl targets pass43 top-level tests; neutral named marks3, diagnostics20 and duplicate-slot59 mutations pass."
 evidence_update_2026_09_21: "Ten complete windows cover 1,500 fragments / 51,804 baseline bytes; ordered window SHA-256 1164b42887bab92a4ea03d85fcaf4a9dc0c6913fc7607fe21a0d66cb0a424992. Cumulative reading is 35/143, 46,538 fragments / 1,405,327 baseline bytes and 86 complete files; gap tests remain partial through line 1026. Retained exact integration commit 87b35665e proof passes generated-source (6), inspector (2) and gap (124) tests (132 total), with unchanged source identities. The old uniform-identity audit fails on the approved integration delta; its corrected recipe passes all 160 inputs/143 groups/302 ranges and six rejected snapshot mutations. No new runtime execution, native build, full CI or push is claimed for this focused reading leaf."
@@ -61,8 +62,8 @@ evidence_update_2026_09_21_group36: "Eleven complete windows cover 1,500 fragmen
 reverify: "bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/cli_conformance_runner.t t/complete_named_mark_contract.t t/diagnostic_output_perl_contract.t t/duplicate_regex_slot_identity_perl_contract.t t/generated_source_contract.t; bash tools/run_python_project_data.sh tools/check_complete_named_mark_contract.py; bash tools/run_python_project_data.sh tools/check_diagnostic_output_contract.py; bash tools/run_python_project_data.sh tools/check_duplicate_regex_slot_identity_contract.py"
 evidence_update_2026_09_21_group37: "Fourteen complete windows cover 1,500 fragments / 63,613 baseline bytes; ordered window SHA-256 98d4de26a6f747975c45fe91277d218c6947936925d1ae233586706bef952d64. Cumulative reading is 37/143: 49,538 fragments / 1,527,897 baseline bytes and 97 complete files. Phase0 remains partial at lines 1–43. Fresh managed metadata/oracle checks pass 9 top-level tests. Unchanged integration commit 87b35665e retains native-loader (5), MCP binding/dispatch/stdio (23), admission (13) and Phase0 1032 proof. Full-target execution grants no reading credit to the unread Phase0 body. Header correction .2.4 is pending after prerequisites; helper repair .2.3 and existing runtime repairs remain open. No dependency build, new canonical run or push is claimed."
 evidence_update_2026_09_21_group38: "Eleven complete windows cover 1,067 fragments / 65,529 baseline bytes; ordered window SHA-256 f57116fee0db80f49969546da5cd033988e06b55191fc88358b7c6d6d334fd3e. Cumulative reading is 38/143: 50,605 fragments / 1,593,426 baseline bytes and 97 complete files. Phase0 is partial through line 1110. Exact unchanged canonical commit 87b35665e supplies PASS for all 38 fully read subtests (ordinals 2–39). The crossing facade error-state test remains partial; its suffix is .1.39-owned. The complete 1032-test gate remains retained historical proof, not new execution or reading credit. No new defect, runtime repair, dependency build, full CI or push is claimed; all existing repairs retain their prerequisites."
-evidence_phase0_checkpoint: "Eleven complete windows cover 797 fragments / 65,524 baseline bytes; ordered window SHA-256 4fb287cc34d0db219abf17c32d98bf8a374eeea673663960ca7ddc882f7d6611. Cumulative reading is 70/143: 87,239 fragments / 3,627,006 baseline bytes and 97 complete files. Phase0 is partial through line 37744. Unchanged canonical commit ec10be6b retains PASS for twenty-one completed subtests, ordinals 741–761 with 196 direct assertions and no nested plans. Fourteen descriptor comparisons contribute 168 assertions; seven four-assertion direct-lowering plans contribute 28 textual checks. Exact TAP numbering and source identity are verified. Hash lookup, merge, snapshot and key-transform expectations inspect expressions and patterns; they do not execute copy isolation, collision outcomes or mutation behavior. Descriptor uppercase-slot comparisons remain .2.10-owned. Lifecycle pick_keys is partial after ten assertions at the opening of readiness; .1.71 owns the final two. No independently reproduced new defect, runtime execution, repair, dependency build, canonical run or push is claimed; .2.5–.2.11 and all prerequisites remain."
-reverify_phase0_checkpoint: "Replay .1.70 using conformance-source-reading-coverage; verify ordinals 741–761, fourteen twelve-assertion descriptor plans and seven four-assertion direct-lowering plans against unchanged ec10be6b sources. Distinguish hash expression/pattern checks from executed isolation or mutation behavior; .2.10 owns code-slot equality repair."
+evidence_phase0_checkpoint: "Eleven complete windows cover 759 fragments / 65,504 baseline bytes; ordered window SHA-256 59d454151dbf825b3c0242fd66d004452f8a6c21093d9cca573fdba96c46dce7. Cumulative reading is 71/143: 87,998 fragments / 3,692,510 baseline bytes and 97 complete files. Phase0 is partial through line 38503. Unchanged canonical commit ec10be6b retains PASS for twenty-one completed subtests, ordinals 762–782 with 196 direct assertions and no nested plans: fourteen descriptor plans contribute 168 and seven direct-lowering plans contribute 28. Exact TAP numbering/source identity are verified. Four freshly extracted subtests pass 16 assertions; four public assignment executions return expected ARRAY references. Their list-context-flattening descriptions are stale; .2.12 owns correction after prerequisites, with exact reproduction in phase0-array-assignment-description-drift. Inner list construction remains valid; descriptor uppercase-slot limits remain .2.10-owned. Lifecycle num_avg is partial after assertion four. No tracked test repair, dependency build, canonical run or push; .2.5–.2.12 and earlier repairs remain."
+reverify_phase0_checkpoint: "Replay .1.71 using conformance-source-reading-coverage; verify ordinals 762–782 and 196 direct assertions against unchanged ec10be6b sources. Run both phase0-array-assignment-description-drift recipes; distinguish fresh four-case execution from retained descriptor proof and .2.10 observation limits."
 reverify_group38: "Replay .1.38 using conformance-source-reading-coverage and compare its 38 complete subtest names with retained canonical commit 87b35665e; this grants no new source-reading or runtime credit."
 reverify_group37: "bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/noncurrent_helper_metadata.t t/oracle_root_target_regex_semantics.t; retain unchanged dated MCP/native-loader proof separately."
 reverify_group36: "bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/logical_helper_perl_contract.t t/map_leaves_mutation_perl_contract.t; reproduce the helper observation with HELPER_PATH below, and retain the dated gap/MCP proof separately."
@@ -435,34 +436,30 @@ PUSH_LABELS
 
 ## Phase0 reading checkpoint
 
-Group 70 reads Phase0 lines 36948–37744. It completes lifecycle count_keys,
-then reads has_key, merge_hash, hash snapshots, set_key, rename_key, drop_keys
-and pick_keys lowering tests and action/LX descriptor comparisons.
+Group 71 reads Phase0 lines 37745–38503, completing lifecycle pick_keys.
+Sorted keys are lexical; sorted_values returns corresponding values in key
+order. Concat_arrays constructs one array from working arrays and guarded
+ARRAY dereferences. Sorted compares defined terms as strings, mapping undef
+to empty text for comparison. Reversed reverses the composed array.
 
-Has_key expectations use exists, including guarded hash-valued fallback
-expressions. Merge expectations flatten working, constructed and fallback
-hashes into one expression. Bare copy patterns inspect a single runtime-typed
-scalar binding with array/hash handling; the exact composed copy expectation
-checks a shallow hash snapshot, guarded by an explicit HASH reference test.
-The tests inspect lowering text, without executing copy isolation.
+Num_sum/num_avg text guards the source and validates every numeric term.
+Sum starts at zero; average returns undef for an empty input. These authored
+checks inspect expressions for method, flow, assignment and return contexts;
+they do not execute every reducer edge case.
 
-Set_key text copies into a local hash and assigns one key. Rename_key copies,
-then moves the old value only when the key exists. Drop_keys copies then
-deletes requested keys; pick_keys builds a projection containing only existing
-requested keys. Flow composition, return payloads and assignment patterns are
-covered. These observations do not execute collision outcomes or mutation
-behavior; the descriptor pairs likewise inspect nodes rather than results.
+Four assignment descriptions incorrectly claim list-context flattening while
+their patterns check scalar bindings. Fresh extraction passes 16 assertions and
+four public lowered assignments execute with expected ARRAY-reference results.
+[[phase0-array-assignment-description-drift]] preserves exact examples and
+recipes; .2.12 owns the correction after prerequisites. Inner list construction
+is a separate valid observation. No production failure is established.
 
 Fourteen completed descriptor comparisons retain twelve assertions each and
 the .2.10 uppercase-slot limits in [[phase0-code-slot-equivalence-observation-gap]].
-Repair .2.11 and earlier repairs retain prerequisites. No independently
-reproduced new defect or target execution is claimed.
-
-Retained canonical PASS covers ordinals 741–761: 168 descriptor assertions plus
-28 textual assertions in seven four-assertion direct plans, totaling 196 with
-no nested plans. Lifecycle pick_keys has ten assertions complete; the range
-ends at the opening of readiness. .1.71 owns the final two checks. Reading is
-70/143, 87,239 fragments / 3,627,006 baseline bytes and 97 complete files.
+Retained canonical ordinals 762–782 total 196 assertions: 168 descriptor and 28 textual
+checks in seven direct plans, with no nested plans. Lifecycle num_avg has four
+assertions complete; .1.72 owns the suffix. Reading is 71/143, 87,998 fragments /
+3,692,510 baseline bytes and 97 complete files. All repairs retain prerequisites.
 
 Related facts: [[perl-callable-codeblock-literal-record]], [[neutral-cli-fixture-runner]],
 [[complete-named-mark-perl-rust-parity]], [[perl-diagnostic-output-events]],

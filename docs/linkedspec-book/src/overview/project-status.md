@@ -498,26 +498,29 @@ the director's focused-verification grant used for this correction and the separ
 supporting-reading closeout. Reading completion establishes audited comprehension;
 it does not close the six grammar/literal repair roots or establish runtime signoff.
 Conformance, test and Unicode reading has exact ownership for all 160 inputs in
-143 bounded groups covering 8,257,059 baseline decoded bytes. Seventy groups account for
-87,239 fragments and 3,627,006 baseline bytes, including 97 complete files. Phase0 reading
-reaches line 37744. The new range covers hash lookup, merging, snapshots and key transforms.
-Direct text checks inspect exists-based lookup, shallow hash copying and local hash updates.
-For example, rename_key moves a value only when the old key exists, while pick_keys copies
-only requested keys that exist. These are lowering observations; the tests do not execute
-copy isolation, key-collision outcomes or mutation behavior.
+143 bounded groups covering 8,257,059 baseline decoded bytes. Seventy-one groups account for
+87,998 fragments and 3,692,510 baseline bytes, including 97 complete files. Phase0 reading
+reaches line 38503 and covers array ordering, concatenation and numeric reduction checks.
+Sorted_values follows sorted key order: kind=NODE, source=rule and stage=normalized yield
+`[NODE, rule, normalized]`, not values sorted independently.
+
+Four test descriptions incorrectly claim list-context flattening for scalar-held array
+assignments. Public lowering and execution confirm array-reference results: sorting
+`[beta, alpha, gamma, delta]` gives `[alpha, beta, delta, gamma]`, while reversing gives
+`[delta, gamma, alpha, beta]`. The four original subtests pass 16 assertions; the mismatch is
+in their wording. Repair .2.12 owns precise corrections after required reading. Internal
+array construction still uses list context; no production failure is established.
 
 **The earlier generated-code equivalence claim remains withdrawn:** absent uppercase
-code slots cannot establish emitted-code equality. Code-output-labelled descriptor
-comparisons remain in .2.10, which owns meaningful code/behavior observations and a
-changed-payload negative control. The separate direct-lowering tests remain useful.
-Repair .2.11 owns invalid scalar dereferences of source chunks; explicit scalar capture works.
+code slots cannot establish emitted-code equality. Descriptor comparisons remain in
+.2.10, which owns meaningful code/behavior observations and a changed-payload negative
+control. Repair .2.11 owns invalid scalar dereferences of source chunks.
 
 Twenty-one completed subtests retain canonical proof with 196 direct assertions: 168 from
 fourteen descriptor comparisons and 28 from seven direct-lowering tests, with no nested plans.
-The lifecycle pick_keys comparison remains partial after ten assertions; .1.71 continues.
-MethodExpr .2.5, EmitContext descriptions .2.6, mark_copy .2.7, invalid num_min fixture .2.8
-and push descriptions .2.9 remain open. No independently reproduced new defect or target
-execution is established. The pinned 113-byte delta and all prerequisites remain.
+Lifecycle num_avg remains partial after four assertions; .1.72 continues. MethodExpr .2.5,
+EmitContext descriptions .2.6, mark_copy .2.7, invalid num_min fixture .2.8 and push
+descriptions .2.9 remain open. The pinned 113-byte delta and all prerequisites remain.
 
 The director approved the finite documentation-capacity proposal under ADR0122.
 Containment `.15` admits exactly fourteen controls for the remaining 93 reading
@@ -544,8 +547,8 @@ The history files keep their 512-line / 65,536-byte caps, mandatory rollover and
 immutable archives. General card/part limits remain unchanged. Admission consumes
 one of the conservative 99 reserve units; the remaining 98 units are forecast
 after actual admission overhead. This capacity does not complete source reading
-or repair tests: reading now reaches 70/143, `.1.71` is next, and the test and recipe
-repairs `.2.5`–`.2.11` remain open.
+or repair tests: reading now reaches 71/143, `.1.72` is next, and the test and recipe
+repairs `.2.5`–`.2.12` remain open.
 
 The director has requested integration guides and runnable consumer examples for
 Perl, Rust, Dart, Julia and Lua, covering recursive checkout, dependency preparation
