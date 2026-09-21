@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.43 - read bounded AND and paragraph validation contracts
+
+Eleven complete windows cover 1,500 fragments / 64,877 baseline bytes; ordered window SHA-256 8749a8dc08b927f83439d0e9056e12252e8206c7243c342095145adc4d72a28d. Cumulative reading is 43/143: 56,131 fragments / 1,919,572 baseline bytes and 97 complete files. Phase0 is partial through line 6636. Unchanged canonical commit 87b35665e retains PASS for 54 completed subtests, ordinals 163–216 with 311 assertions. Phase0, own Perl sources and Lispish.spec remain unchanged. The unclosed-multiline-block test is partial at its spec heredoc; .1.44 owns its invocation and all four assertions. Historical whole-gate proof remains 1032 top-level tests. No new runtime execution, runtime repair, dependency build, full CI or push is claimed; all repair prerequisites remain.
+
 ## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.42 - read Perl resolution errors and rule-family contracts
 
 Eleven complete windows cover 1,397 fragments / 65,472 baseline bytes; ordered window SHA-256 a8d3e208ff956277f6f6e0ca38e9e3beab59d8c3c22b83c97132d8845352e4af. Cumulative reading is 42/143: 54,631 fragments / 1,854,695 baseline bytes and 97 complete files. Phase0 is partial through line 5136. Unchanged canonical commit 87b35665e retains PASS for 41 completed subtests, ordinals 122–162 with 353 assertions. Phase0, own Perl sources and Lispish.spec remain unchanged. The AND+ comparison is partial after both parser-build assertions and the first invocation; .1.43 owns its result assertions. Historical whole-gate proof remains 1032 top-level tests. No new runtime execution, runtime repair, dependency build, full CI or push is claimed; all repair prerequisites remain.

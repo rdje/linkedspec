@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.43 - read bounded AND and paragraph validation contracts
+
+AND+ and open bounded AND collect the same nested sequence results and reject empty input; bounded AND descriptors preserve action/blind family and exact bounds, while runtime cases separately check lower and upper limits. Interleaved and same-line paragraph tests compare bootstrap payloads and descriptor fields without executing their parsers. Validation distinguishes malformed labels, preambles, split markers, paragraph/header content, closers, regex tokens, mixed edges, selectors, fluent suffixes, grouped targets and missing targets. Hash rockets and edge-like strings inside action code remain lexical validation controls, not portable DSL admission. Blind fluent/block equivalence compares normalized BCODE only. Open-block rule-label rejection includes parser-build coverage and nested blocks; permissive non-label contents are validation-only fixtures. The extra-colon and nested-mode loops assert stderr only for their final case. EOF-unclosed-block reading stops inside its heredoc before validation or assertions. The older rule-mode card now explicitly defers its global cursor-axis account to the admitted intrinsic-cursor contract. Historical evidence is retained.
+
 ## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.42 - read Perl resolution errors and rule-family contracts
 
 Resolution, validation, generated-handler errors and top-level parser-input failures have distinct proof boundaries. Descriptor families and loop/bound metadata are separate from runtime repetition checks. Bootstrap selector provenance and grouped expansion do not themselves prove child execution; equality-only AST checks do not require defined values. Retained ordinals 122–162 cover 353 assertions. AND+ comparison outcomes and local test helper bodies retain later reading ownership.

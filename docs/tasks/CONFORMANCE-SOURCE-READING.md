@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `CONFORMANCE-SOURCE-READING`
-- Status: `active` / exact decomposition; physical reading 42/143
+- Status: `active` / exact decomposition; physical reading 43/143
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.8`
 - Created: `2026-09-13`
 - Last updated: `2026-09-21`
@@ -783,14 +783,21 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
   Commit: `CONFORMANCE-SOURCE-READING.1.42 - read Perl resolution errors and rule-family contracts`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.43`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `6c5dc205a8822b744476c5eb65bbb3b2a0697ddc`.
+  Verification tier: `focused`
+  Focused checks: Complete bounded source reading, exact baseline/window and retained canonical proof; reconcile Knowledge, preserve unrelated source/history/task evidence, memory, both history checks, book, direct public checks and normal doctrines.
+  Canonical trigger: Ordinary bounded reading and fact reconciliation only; no runtime, dependency, public-contract, infrastructure or parent-closeout change.
   Goal: Read and understand conformance/test/Unicode group 43.
   Scope: `t/phase0_regression.t` lines 5137-6636
   Baseline evidence: 1500 fragments / 64877 decoded bytes; ordered range SHA-256 `944f19375169eb35a0aa51939a66270a2f319c261ec2aca28544168ba7b3e4ef`.
   Dependencies: .1.42 committed with clean handoff.
   Acceptance: Read every scoped byte in complete bounded windows; retain source identity, exact comprehension, canonical Knowledge reconciliation, concrete finding ownership, focused proof and per-leaf continuity. Unread crossing constructs retain the next range owner.
-  Verification: `pending`
-  Commit: `pending`
+  Reading evidence: 11 complete windows / 1500 fragments / 64877 bytes; ordered window SHA-256 `8749a8dc08b927f83439d0e9056e12252e8206c7243c342095145adc4d72a28d`.
+  Comprehension: AND+ and open bounded AND collect the same nested sequence results and reject empty input; bounded AND descriptors preserve action/blind family and exact bounds, while runtime cases separately check lower and upper limits. Interleaved and same-line paragraph tests compare bootstrap payloads and descriptor fields without executing their parsers. Validation distinguishes malformed labels, preambles, split markers, paragraph/header content, closers, regex tokens, mixed edges, selectors, fluent suffixes, grouped targets and missing targets. Hash rockets and edge-like strings inside action code remain lexical validation controls, not portable DSL admission. Blind fluent/block equivalence compares normalized BCODE only. Open-block rule-label rejection includes parser-build coverage and nested blocks; permissive non-label contents are validation-only fixtures. The extra-colon and nested-mode loops assert stderr only for their final case. EOF-unclosed-block reading stops inside its heredoc before validation or assertions.
+  Verification: Unchanged canonical commit 87b35665e retains PASS for 54 completed subtests, ordinals 163–216 with 311 assertions. Phase0, own Perl sources and Lispish.spec remain unchanged. The unclosed-multiline-block test is partial at its spec heredoc; .1.44 owns its invocation and all four assertions. Historical whole-gate proof remains 1032 top-level tests. No new runtime execution, runtime repair, dependency build, full CI or push is claimed; all repair prerequisites remain.
+  Candidate proof: Exact 160-input/143-group/302-range audit and eleven-window replay pass. Preservation verifies 2,843 other files / 50,531,292 bytes, 504 earlier task nodes, 53 other book files and all 1,039 book headings; history, original scopes, recipes and parent Gitlink remain exact. Preservation was rerun successfully after the concurrent public checker finished and no untracked fixture remained. Memory, both history-pressure checks, mdBook, public mutation (69 files / 50 mutations), public selector (68 files / 11 contrast mutations), intrinsic cursor (76 migration files / 60 mutations) and diff checks pass. Knowledge remains at 1,151 facts / 9,215 keys; normal nine-doctrine hooks govern landing.
+  Commit: `CONFORMANCE-SOURCE-READING.1.43 - read bounded AND and paragraph validation contracts`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.44`
   Status: `pending`
@@ -1923,7 +1930,7 @@ additional reading credit from integration delivery.
 
 | Rank | Leaf | Status | Next action |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.43` | `pending` | Read Phase0 lines 5137–6636 (1,500 fragments / 64,877 baseline bytes), continuing the AND+ comparison. All repair prerequisites remain. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.44` | `pending` | Read Phase0 lines 6637–7826 (1,190 fragments / 65,521 baseline bytes), continuing the unclosed-block validation test. All repair prerequisites remain. |
 
 ## Decisions
 
@@ -1935,6 +1942,8 @@ additional reading credit from integration delivery.
 - None at decomposition. Ordinary source repairs retain startup prerequisites; later collection pressure must be measured rather than assumed away.
 
 ## Verification Log
+
+- `2026-09-21` .1.43: Eleven complete windows cover 1,500 fragments / 64,877 baseline bytes; ordered window SHA-256 8749a8dc08b927f83439d0e9056e12252e8206c7243c342095145adc4d72a28d. Cumulative reading is 43/143: 56,131 fragments / 1,919,572 baseline bytes and 97 complete files. Phase0 is partial through line 6636. Unchanged canonical commit 87b35665e retains PASS for 54 completed subtests, ordinals 163–216 with 311 assertions. Phase0, own Perl sources and Lispish.spec remain unchanged. The unclosed-multiline-block test is partial at its spec heredoc; .1.44 owns its invocation and all four assertions. Historical whole-gate proof remains 1032 top-level tests. No new runtime execution, runtime repair, dependency build, full CI or push is claimed; all repair prerequisites remain.
 
 - `2026-09-21` .1.42: Eleven complete windows cover 1,397 fragments / 65,472 baseline bytes; ordered window SHA-256 a8d3e208ff956277f6f6e0ca38e9e3beab59d8c3c22b83c97132d8845352e4af. Cumulative reading is 42/143: 54,631 fragments / 1,854,695 baseline bytes and 97 complete files. Phase0 is partial through line 5136. Unchanged canonical commit 87b35665e retains PASS for 41 completed subtests, ordinals 122–162 with 353 assertions. Phase0, own Perl sources and Lispish.spec remain unchanged. The AND+ comparison is partial after both parser-build assertions and the first invocation; .1.43 owns its result assertions. Historical whole-gate proof remains 1032 top-level tests. No new runtime execution, runtime repair, dependency build, full CI or push is claimed; all repair prerequisites remain.
 
@@ -1990,6 +1999,8 @@ additional reading credit from integration delivery.
 
 ## Commit Log
 
+- `2026-09-21` .1.43: `CONFORMANCE-SOURCE-READING.1.43 - read bounded AND and paragraph validation contracts`; activation 6c5dc205a; .1.44 follows clean handoff and empty brief.
+
 - `2026-09-21` .1.42: `CONFORMANCE-SOURCE-READING.1.42 - read Perl resolution errors and rule-family contracts`; activation 83f86d57c; .1.43 follows clean handoff and empty brief.
 
 - `2026-09-21` .1.41: `CONFORMANCE-SOURCE-READING.1.41 - read Perl plugin compatibility and spec lookup tests`; activation 8eff21340; .1.42 follows clean handoff and empty brief.
@@ -2043,6 +2054,8 @@ additional reading credit from integration delivery.
 - `2026-09-13`: Decomposition lands under `SESSION-STARTUP-READING.3.8.0`; Git owns the resulting commit identity.
 
 ## Changelog
+
+- `2026-09-21` .1.43: Read bounded AND, paragraph normalization and validation boundaries; qualify the superseded global cursor-axis card and preserve all repair prerequisites.
 
 - `2026-09-21` .1.42: Read resolution/runtime errors, descriptor families and bounded execution; preserve the partial AND+ comparison and repair prerequisites.
 
