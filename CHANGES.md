@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.40 - read Perl wrapper and dependency-map contracts
+
+Eleven complete windows cover 1,040 fragments / 65,471 baseline bytes; ordered window SHA-256 3afe1dca0df301909510c1f6c86f4f5c27613121cd041c866262d2fd9acd3f44. Cumulative reading is 40/143: 52,061 fragments / 1,723,739 baseline bytes and 97 complete files. Phase0 is partial through line 2566. Unchanged canonical commit 87b35665e retains PASS for thirty completed subtests, ordinals 50–79 with 181 assertions. Phase0 and LinkedSpec-owned Perl sources remain unchanged. The ActionIR dependency-builder test is partial in fixture setup; .1.41 owns its assertions. Historical whole-gate proof remains 1032 top-level tests. No new runtime execution, runtime repair, dependency build, full CI or push is claimed; all repair prerequisites remain.
+
 ## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.39 - read Perl owner dispatch structural contracts
 
 Eleven complete windows cover 416 fragments / 64,842 baseline bytes; ordered window SHA-256 637b617933d223c8317d6c27901ead86ed5835131a0fc2201b1422db311bae5f. Cumulative reading is 39/143: 51,021 fragments / 1,658,268 baseline bytes and 97 complete files. Phase0 is partial through line 1526. Unchanged canonical commit 87b35665e retains PASS for ten completed subtests, ordinals 40–49 with 344 assertions: the crossing facade test, shared-owner structural checks and eight inline-validation checks. All 28 inspected source targets remain byte-identical. ParserFactory validation crosses into .1.40. Historical whole-gate proof remains 1032 top-level tests; no new runtime execution, dependency build, full CI or push is claimed. All runtime repairs retain their prerequisites. The canonical OwnerDispatch card now agrees with its unchanged seven-item list.

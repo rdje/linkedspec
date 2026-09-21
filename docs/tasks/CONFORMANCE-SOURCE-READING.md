@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `CONFORMANCE-SOURCE-READING`
-- Status: `active` / exact decomposition; physical reading 39/143
+- Status: `active` / exact decomposition; physical reading 40/143
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.8`
 - Created: `2026-09-13`
 - Last updated: `2026-09-21`
@@ -732,14 +732,21 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
   Commit: `CONFORMANCE-SOURCE-READING.1.39 - read Perl owner dispatch structural contracts`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.40`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `cea5e399bbc59d500fa71485b60057ba8f13da60`.
+  Verification tier: `focused`
+  Focused checks: Complete bounded physical source reading; verify exact baseline ranges, reconcile canonical Knowledge and retained unchanged test proof, then validate documentation, memory, book, histories, preservation and normal doctrines.
+  Canonical trigger: Ordinary bounded source-reading leaf; no runtime, dependency, public-contract, infrastructure or parent-closeout change. Existing repair prerequisites remain.
   Goal: Read and understand conformance/test/Unicode group 40.
   Scope: `t/phase0_regression.t` lines 1527-2566
   Baseline evidence: 1040 fragments / 65471 decoded bytes; ordered range SHA-256 `d5a9d405495fac023b401318c972eb0442e1db38717695e859a6046cd2dab759`.
   Dependencies: .1.39 committed with clean handoff.
   Acceptance: Read every scoped byte in complete bounded windows; retain source identity, exact comprehension, canonical Knowledge reconciliation, concrete finding ownership, focused proof and per-leaf continuity. Unread crossing constructs retain the next range owner.
-  Verification: `pending`
-  Commit: `pending`
+  Reading evidence: 11 complete windows / 1040 fragments / 65471 bytes; ordered window SHA-256 `3afe1dca0df301909510c1f6c86f4f5c27613121cd041c866262d2fd9acd3f44`.
+  Comprehension: Eight source-shape validation tests finish, including the crossing ParserFactory test. Actual OwnerDispatch calls resolve synthetic callbacks, preserve requested map entries and delegated list context, and assemble mixed callback/value bundles. Twelve EmitContext owner-map tests substitute each owner and map builder to check package selection, returned markers, local entrypoints and successful caller error-state preservation. Other wrapper tests cover Trace, Data::Dumper, LinkedRE, runtime/bootstrap, SpecEntry, compiler, plugins and injected ParserFactory orchestration. They verify wrappers with controlled collaborators, not the replaced implementations; already-loaded package fixtures do not prove first-time disk loading. The next 24-assertion ActionIR dependency-builder test has only imports and synthetic callback setup read through line 2566; none of its assertions has been read yet.
+  Verification: Unchanged canonical commit 87b35665e retains PASS for thirty completed subtests, ordinals 50–79 with 181 assertions. Phase0 and LinkedSpec-owned Perl sources remain unchanged. The ActionIR dependency-builder test is partial in fixture setup; .1.41 owns its assertions. Historical whole-gate proof remains 1032 top-level tests. No new runtime execution, runtime repair, dependency build, full CI or push is claimed; all repair prerequisites remain.
+  Candidate proof: Exact coverage and eleven-window replay pass. Preservation verifies 2,844 other files / 50,534,644 bytes, 504 earlier task nodes, 53 other book files and all 1,039 book headings; prior histories, coverage recipes, dependency pins and original edits remain exact. Memory, both history-pressure checks, mdBook, public mutation (69 files / 50 mutations), public selector (68 files / 11 contrast mutations) and diff checks pass. Knowledge remains at 1,151 facts / 9,212 keys; normal nine-doctrine hooks govern landing.
+  Commit: `CONFORMANCE-SOURCE-READING.1.40 - read Perl wrapper and dependency-map contracts`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.41`
   Status: `pending`
@@ -1902,7 +1909,7 @@ additional reading credit from integration delivery.
 
 | Rank | Leaf | Status | Next action |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.40` | `pending` | Finish the ParserFactory structural check and read Phase0 lines 1527–2566: 1,040 fragments / 65,471 baseline bytes. All repairs retain their prerequisites. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.41` | `pending` | Read Phase0 lines 2567–3739 (1,173 fragments / 65,484 baseline bytes), continuing the ActionIR dependency-builder test. All repair prerequisites remain. |
 
 ## Decisions
 
@@ -1914,6 +1921,8 @@ additional reading credit from integration delivery.
 - None at decomposition. Ordinary source repairs retain startup prerequisites; later collection pressure must be measured rather than assumed away.
 
 ## Verification Log
+
+- `2026-09-21` .1.40: Eleven complete windows cover 1,040 fragments / 65,471 baseline bytes; ordered window SHA-256 3afe1dca0df301909510c1f6c86f4f5c27613121cd041c866262d2fd9acd3f44. Cumulative reading is 40/143: 52,061 fragments / 1,723,739 baseline bytes and 97 complete files. Phase0 is partial through line 2566. Unchanged canonical commit 87b35665e retains PASS for thirty completed subtests, ordinals 50–79 with 181 assertions. Phase0 and LinkedSpec-owned Perl sources remain unchanged. The ActionIR dependency-builder test is partial in fixture setup; .1.41 owns its assertions. Historical whole-gate proof remains 1032 top-level tests. No new runtime execution, runtime repair, dependency build, full CI or push is claimed; all repair prerequisites remain.
 
 - `2026-09-21` .1.39: Eleven complete windows cover 416 fragments / 64,842 baseline bytes; ordered window SHA-256 637b617933d223c8317d6c27901ead86ed5835131a0fc2201b1422db311bae5f. Cumulative reading is 39/143: 51,021 fragments / 1,658,268 baseline bytes and 97 complete files. Phase0 is partial through line 1526. Unchanged canonical commit 87b35665e retains PASS for ten completed subtests, ordinals 40–49 with 344 assertions: the crossing facade test, shared-owner structural checks and eight inline-validation checks. All 28 inspected source targets remain byte-identical. ParserFactory validation crosses into .1.40. Historical whole-gate proof remains 1032 top-level tests; no new runtime execution, dependency build, full CI or push is claimed. All runtime repairs retain their prerequisites.
 
@@ -1963,6 +1972,8 @@ additional reading credit from integration delivery.
 
 ## Commit Log
 
+- `2026-09-21` .1.40: `CONFORMANCE-SOURCE-READING.1.40 - read Perl wrapper and dependency-map contracts`; activation cea5e399b; .1.41 follows clean handoff and empty brief.
+
 - `2026-09-21` .1.39: `CONFORMANCE-SOURCE-READING.1.39 - read Perl owner dispatch structural contracts`; activation fc5fad04f; .1.40 follows clean handoff and empty brief.
 
 - `2026-09-21` .1.38: `CONFORMANCE-SOURCE-READING.1.38 - read Phase0 lazy-loading and plugin contracts`; activation a1c65b959; .1.39 follows clean handoff and empty brief.
@@ -2010,6 +2021,8 @@ additional reading credit from integration delivery.
 - `2026-09-13`: Decomposition lands under `SESSION-STARTUP-READING.3.8.0`; Git owns the resulting commit identity.
 
 ## Changelog
+
+- `2026-09-21` .1.40: Read source-shape, wrapper and owner-map contracts; keep substituted behavior and unread dependency-builder assertions distinct.
 
 - `2026-09-21` .1.39: Complete facade and owner-dispatch structural reading, correct the canonical card count and preserve all repair ownership.
 

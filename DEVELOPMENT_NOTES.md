@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.40 - read Perl wrapper and dependency-map contracts
+
+OwnerDispatch synthetic callback resolution, mixed value/callback bundles and list returns are exercised directly. Twelve EmitContext tests substitute owner maps and implementations to validate package selection and error-state preservation. Their markers prove the wrapper route, not underlying parser semantics or real first-load behavior. Retained ordinals 50–79 cover 181 assertions; the next 24-assertion dependency-builder test is read only into fixture setup.
+
 ## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.39 - read Perl owner dispatch structural contracts
 
 Facade substitution checks, source-pattern checks and real owner execution are distinct evidence boundaries. Shared-owner coverage uses 298 structural assertions over 28 files; eight inline-validation groups contribute 24 more. Together with the crossing facade group, retained ordinals 40–49 total 344 assertions. The stale five-primitives card introduction is corrected without changing its seven entries; ParserFactory and local subprocess-helper reading remain incomplete.

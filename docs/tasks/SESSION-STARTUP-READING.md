@@ -2299,7 +2299,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Status: `active`
   Goal: Split and read all 160 entries under capability_conformance, cli_conformance, t, tests, and unicode_case.
   Children: `.3.8.0` owns exact decomposition; `CONFORMANCE-SOURCE-READING.1` owns all143 reading groups; .2 findings and .3 independent closeout stay separate.
-  Reading owner: `docs/tasks/CONFORMANCE-SOURCE-READING.md`; 143 groups/302 baseline ranges over 160 inputs. Physical reading 39/143: 51,021 fragments / 1,658,268 baseline bytes and 97 complete files; Phase0 remains partial through line 1526. The approved 113-byte cursor-inventory delta stays separately pinned. Retained proof covers ten completed subtests and 28 unchanged structural targets; .1.40 continues reading. All runtime repair prerequisites remain.
+  Reading owner: `docs/tasks/CONFORMANCE-SOURCE-READING.md`; 143 groups/302 baseline ranges over 160 inputs. Physical reading 40/143: 52,061 fragments / 1,723,739 baseline bytes and 97 complete files; Phase0 remains partial through line 2566. The approved 113-byte cursor-inventory delta stays separately pinned. Retained proof covers thirty completed subtests / 181 assertions; .1.41 continues reading. All runtime repair prerequisites remain.
   Acceptance: Include phase0, neutral contracts, fixtures, generators, and four explicitly decoded pinned Unicode
     inputs. Keep generated/fixture bytes in scope; count neither a hash nor enumeration as full reading.
   Verification: `pending`
@@ -4673,7 +4673,7 @@ startup implementation prerequisites and the rgx reading exclusion remain intact
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.40` | `pending` | Continue the ParserFactory structural test and Phase0 lines 1527–2566 after the clean .1.39 commit. Preserve all historical evidence and repair prerequisites. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.41` | `pending` | Read Phase0 lines 2567–3739 (1,173 fragments / 65,484 baseline bytes), continuing the ActionIR dependency-builder test. All repair prerequisites remain. |
 
 ## Reading Ledger
 
