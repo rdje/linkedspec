@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `CONFORMANCE-SOURCE-READING`
-- Status: `active` / exact decomposition; physical reading 77/143
+- Status: `active` / exact decomposition; physical reading 78/143
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.8`
 - Created: `2026-09-13`
 - Last updated: `2026-09-21`
@@ -1379,14 +1379,21 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
   Commit: `CONFORMANCE-SOURCE-READING.1.77 - read trace and cursor tests and own missing source observation`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.78`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `2defd6def6f2fab08ac62e5b2f119186dc26cb9a`.
+  Verification tier: `focused`
+  Focused checks: Complete source/window/coverage and retained TAP checks; reconcile observation boundaries with canonical Knowledge; preservation, memory, histories, rendered book, direct public checks and normal doctrines.
+  Canonical trigger: Ordinary bounded reading and fact reconciliation; no source/public-contract/dependency/infrastructure change or parent closeout.
   Goal: Read and understand conformance/test/Unicode group 78.
   Scope: `t/phase0_regression.t` lines 43917-45063
   Baseline evidence: 1147 fragments / 65472 decoded bytes; ordered range SHA-256 `8e7281c18857a910da9a21947835cb4102bdb3c9f1931bc5516468d7d8ea4130`.
   Dependencies: .1.77 committed with clean handoff.
   Acceptance: Read every scoped byte in complete bounded windows; retain source identity, exact comprehension, canonical Knowledge reconciliation, concrete finding ownership, focused proof and per-leaf continuity. Unread crossing constructs retain the next range owner.
-  Verification: `pending`
-  Commit: `pending`
+  Reading evidence: 11 complete windows / 1147 fragments / 65472 bytes; ordered window SHA-256 `5ad019d2a261916fd5179bd2fc9ec14efb9946c205d1841bd9d0d9c8420ac52f`.
+  Comprehension: Completes the selected Markdown path scan; its discovery helper covers eleven named top-level files and book Markdown, not all tracked Markdown. Self-hosting smokes bound termination and defined results; function grammar ownership stays in spec.spec. User-function AST tests check thirteen definitions, source spans, pending/normalized payload paths, provenance, staged job identities, body ASTs, diagnostics and exact execution values. Narrow function-body-v1 dispatch remains distinct from general-v2 staging. PluginBridge assertion only preserves its compatibility label. Fork-bounded recursion tests separate termination, body recursion and LX sequence results; match_group versus entry_text checks top-rule match ownership. Auto-variable tests use genuine generated declaration counts and same-parser repeated calls, but old wrapper/channel wording and the fluent legacy-array-sigil denial drift from current scalar-held storage. Public capture and declaration-removal mutation confirm new .2.14 observation/description repair ownership. The bare-mutation repeated-invocation test has only its opening declaration read; .1.79 owns its body.
+  Verification: Unchanged canonical commit ec10be6b retains PASS for 22 completed subtests, ordinals 961–982 with 392 direct assertions and no nested plans. Exact TAP numbering and source identity are verified. The selected Markdown scan covers 65 current files, not all tracked Markdown. Self-hosting smokes check bounded completion/defined results; function-body tests check exact AST metadata, spans, jobs, diagnostics and runtime values. Recursion checks distinguish termination, LX sequence results and entry/local match ownership. Genuine declaration-count and repeated-call checks coexist with stale wrapper/channel labels. Public capture plus declaration-removal controls establish .2.14; the next bare-mutation test has only its declaration read. Fresh diagnosis confirms .2.14 without closing a repair; no production change, dependency build, canonical run or push is claimed; .2.5–.2.14 and all prerequisites remain.
+  Candidate proof: Exact 160-file/143-group/302-range audit and eleven-window reconstruction PASS; independently summed 78 groups total 94,558 fragments / 4,150,753 baseline bytes. Fresh selected Markdown scan passes65. Fresh .2.14 controls: original6/6 pristine and declaration-removed observations PASS; guarded7/7 pristine PASS and removal fails only added assertion7 as expected; tracked four-case recipe replay PASS. Preserve 2,852 other files / 50,667,648 bytes, 516 prior task nodes, 53 other book files and all 1,039 headings, prior recipes/history and gitlink; only new .2.14 is added. Memory60; Knowledge1,157 facts /9,287 keys; histories276/45,505 and274/48,393 lines/bytes. Rendered book, direct public checks and diff check PASS; normal doctrine hooks govern focused landing.
+  Commit: `CONFORMANCE-SOURCE-READING.1.78 - read function staging and own working variable observation drift`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.79`
   Status: `pending`
@@ -2232,6 +2239,16 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
   Verification: `pending`
   Commit: `pending`
 
+- ID: `CONFORMANCE-SOURCE-READING.2.14`
+  Status: `pending`
+  Goal: Align Phase0 working-variable declaration observations and descriptions with current scalar-held typed bindings.
+  Evidence: .1.78 public source capture of the exact fluent .push(items) fixture produces one my $items and no my @items, while the test labels absence of my @items as deferred auto-declaration. The adjacent wrapped/setup dedup test now uses bare targets/reads, including two byte-identical scalar fixture strings. Canonical diagnosis: docs/knowledge/phase0-working-variable-observation-drift.md.
+  Scope: Audit the contiguous spec_format_terse_1_1_1 and spec_format_terse_1_2_1 test family, including the unread .1.79 continuation, for stale wrapper/sigil/channel claims and vacuous legacy-sigil denials. Preserve genuinely distinct setup, per-invocation and recursion controls; reconcile associated maintained working-variable guidance.
+  Dependencies: Required source/book/policy reading, including the complete working-variable test family, before tracked test edits. Current .1.78 owns public diagnosis and current-claim correction only.
+  Acceptance: Assert the actual nonempty scalar-held binding declarations, reject removal/duplication of the intended lexical declaration, preserve current helper lowering and run-twice scoping positives, replace obsolete wrapper/deferred descriptions with accurate current observations, avoid restoring retired syntax, and independently verify the focused family plus book/Knowledge alignment.
+  Verification: `pending`
+  Commit: `pending`
+
 - ID: `CONFORMANCE-SOURCE-READING.3`
   Status: `pending`
   Goal: Independently reconcile all source/range/reading-commit/repair evidence and close only the required reading lane with applicable verification.
@@ -2663,7 +2680,7 @@ additional reading credit from integration delivery.
 
 | Rank | Leaf | Status | Next action |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.78` | `pending` | Read Phase0 lines 43917–45063 (1,147 fragments / 65,472 baseline bytes), completing the Markdown absolute-path scan before subsequent regression tests. Repairs .2.5–.2.13 and earlier repairs retain required source/book/policy reading prerequisites. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.79` | `pending` | Read Phase0 lines 45064–46191 (1,128 fragments / 65,516 baseline bytes), reading the bare-mutation repeated-invocation test body and subsequent declaration checks. Repairs .2.5–.2.14 and earlier repairs retain required source/book/policy reading prerequisites. |
 
 ## Decisions
 
@@ -2675,6 +2692,8 @@ additional reading credit from integration delivery.
 - None at decomposition. Ordinary source repairs retain startup prerequisites; later collection pressure must be measured rather than assumed away.
 
 ## Verification Log
+
+- `2026-09-21` .1.78: 11 complete windows cover 1,147 fragments / 65,472 baseline bytes; ordered window SHA-256 5ad019d2a261916fd5179bd2fc9ec14efb9946c205d1841bd9d0d9c8420ac52f. Cumulative reading is 78/143 groups, 94,558 fragments / 4,150,753 baseline bytes and 97 complete files. Phase0 is partial through line 45063. Unchanged canonical commit ec10be6b retains PASS for 22 completed subtests, ordinals 961–982 with 392 direct assertions and no nested plans. Exact TAP numbering and source identity are verified. The selected Markdown scan covers 65 current files, not all tracked Markdown. Self-hosting smokes check bounded completion/defined results; function-body tests check exact AST metadata, spans, jobs, diagnostics and runtime values. Recursion checks distinguish termination, LX sequence results and entry/local match ownership. Genuine declaration-count and repeated-call checks coexist with stale wrapper/channel labels. Public capture plus declaration-removal controls establish .2.14; the next bare-mutation test has only its declaration read. Fresh diagnosis confirms .2.14 without closing a repair; no production change, dependency build, canonical run or push is claimed; .2.5–.2.14 and all prerequisites remain.
 
 - `2026-09-21` .1.77: 11 complete windows cover 1,029 fragments / 65,477 baseline bytes; ordered window SHA-256 8e331eed03bfb3e6fd8e61d9b3dc8908326dabcadd7d88ce8b1e36d4c805a25c. Cumulative reading is 77/143 groups, 93,411 fragments / 4,085,281 baseline bytes and 97 complete files. Phase0 is partial through line 43916. Unchanged canonical commit ec10be6b retains PASS for 35 completed subtests, ordinals 926–960 with 479 direct assertions and no nested plans. Exact TAP numbering and source identity are verified. Tkgui and simenv check exact ASTs and quiet output; Lispish checks its historical AST, while VHDL/EBNF smoke checks cover selected tags/names. Trace checks include scopes, mark positions/caret excerpts, exact capture output and nonempty file routing. Five uppercase-slot comparisons retain .2.10 limits. Default seek and AND consume execute input controls; parse_mode rejection checks structured prepare-options diagnostics. The Markdown path scan is partial after leak-array initialization; .1.78 owns its suffix. Fresh diagnosis confirms .2.13 without closing a repair; no production change, dependency build, canonical run or push is claimed; .2.5–.2.13 and all prerequisites remain.
 
@@ -2802,6 +2821,8 @@ additional reading credit from integration delivery.
 
 ## Commit Log
 
+- `2026-09-21` .1.78: `CONFORMANCE-SOURCE-READING.1.78 - read function staging and own working variable observation drift`; activation 2defd6def; .1.79 follows clean handoff and empty brief.
+
 - `2026-09-21` .1.77: `CONFORMANCE-SOURCE-READING.1.77 - read trace and cursor tests and own missing source observation`; activation c57bd928e; .1.78 follows clean handoff and empty brief.
 
 - `2026-09-21` .1.76: `CONFORMANCE-SOURCE-READING.1.76 - read shipped grammar runtime smokes and adapter boundaries`; activation cadf2cc0d; .1.77 follows clean handoff and empty brief.
@@ -2927,6 +2948,8 @@ additional reading credit from integration delivery.
 - `2026-09-13`: Decomposition lands under `SESSION-STARTUP-READING.3.8.0`; Git owns the resulting commit identity.
 
 ## Changelog
+
+- `2026-09-21` .1.78: Function staging, runtime values and recursion checks retain bounded claims; new .2.14 owns working-variable observation and description drift.
 
 - `2026-09-21` .1.77: Trace and runtime cursor observations remain distinct from descriptor equality; new .2.13 owns the reproduced negative-only source check.
 

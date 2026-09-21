@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.78 - read function staging and own working variable observation drift
+
+Function-body-v1 tests preserve exact shell AST/body spans, normalized payload/job provenance, deterministic built-in dispatch, source-qualified failures and concrete execution values. They do not re-admit general-v2 staging. Recursion tests separate no-progress termination from LX sequence return and match_group/entry_text ownership. The document-path helper selects eleven named root documents plus book Markdown, yielding 65 current assertions. Public capture of the exact fluent push fixture emits one scalar-held items declaration and zero array declarations. Its six assertions pass after removing the actual declaration; a positive scratch assertion distinguishes the removal. .2.14 owns this observation gap and adjacent stale wrapper descriptions after remaining reading. The initial scratch preparation typo failed before target creation and was discarded; all reported controls use the corrected isolated target.
+
 ## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.77 - read trace and cursor tests and own missing source observation
 
 Tkgui/simenv exact AST and quiet-output checks, historical Lispish AST, limited VHDL tags/EBNF names, three corpus datasets and trace source/decision/mark/route observations remain distinct. Five uppercase-slot comparisons extend existing .2.10 inventory without new generated-code claims. Public dump_parser_source returns 11,417 bytes, but the exact cursor-contract twelve-assertion test also passes after emptying its subprocess output. Scratch positive source observation passes pristine and rejects empty/unrelated output while the original denial still passes. New .2.13 owns the correction and independent controls after prerequisites; production and the separate actual seek/consume controls remain unchanged.

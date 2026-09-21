@@ -59,8 +59,9 @@ answers:
   - what do Phase0 quote boundary and shipped grammar migration checks observe
   - what do Phase0 shipped grammar runtime smokes and legacy adapter checks establish
   - what do Phase0 trace cursor and generated-source presence tests actually observe
+  - what do Phase0 function staging recursion and working-variable tests establish
 date: 2026-09-21
-status: groups 34–77 physically read; Phase0 partial through line 43916; all observation-gap and runtime repairs retain prerequisites
+status: groups 34–78 physically read; Phase0 partial through line 45063; all observation-gap and runtime repairs retain prerequisites
 tags: [conformance, perl, reading, diagnostics, generated-source]
 evidence: "CONFORMANCE-SOURCE-READING.1.34 at activation d10305097eb502c0fe29309ec230437396e26d82; eleven complete windows, 1500 fragments, 56255 bytes, ordered window SHA-256 db04deab6c0365f8bc454e2695d410324a120104a232c213346f2b23ad16aef3. Five managed Perl targets pass43 top-level tests; neutral named marks3, diagnostics20 and duplicate-slot59 mutations pass."
 evidence_update_2026_09_21: "Ten complete windows cover 1,500 fragments / 51,804 baseline bytes; ordered window SHA-256 1164b42887bab92a4ea03d85fcaf4a9dc0c6913fc7607fe21a0d66cb0a424992. Cumulative reading is 35/143, 46,538 fragments / 1,405,327 baseline bytes and 86 complete files; gap tests remain partial through line 1026. Retained exact integration commit 87b35665e proof passes generated-source (6), inspector (2) and gap (124) tests (132 total), with unchanged source identities. The old uniform-identity audit fails on the approved integration delta; its corrected recipe passes all 160 inputs/143 groups/302 ranges and six rejected snapshot mutations. No new runtime execution, native build, full CI or push is claimed for this focused reading leaf."
@@ -68,8 +69,8 @@ evidence_update_2026_09_21_group36: "Eleven complete windows cover 1,500 fragmen
 reverify: "bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/cli_conformance_runner.t t/complete_named_mark_contract.t t/diagnostic_output_perl_contract.t t/duplicate_regex_slot_identity_perl_contract.t t/generated_source_contract.t; bash tools/run_python_project_data.sh tools/check_complete_named_mark_contract.py; bash tools/run_python_project_data.sh tools/check_diagnostic_output_contract.py; bash tools/run_python_project_data.sh tools/check_duplicate_regex_slot_identity_contract.py"
 evidence_update_2026_09_21_group37: "Fourteen complete windows cover 1,500 fragments / 63,613 baseline bytes; ordered window SHA-256 98d4de26a6f747975c45fe91277d218c6947936925d1ae233586706bef952d64. Cumulative reading is 37/143: 49,538 fragments / 1,527,897 baseline bytes and 97 complete files. Phase0 remains partial at lines 1–43. Fresh managed metadata/oracle checks pass 9 top-level tests. Unchanged integration commit 87b35665e retains native-loader (5), MCP binding/dispatch/stdio (23), admission (13) and Phase0 1032 proof. Full-target execution grants no reading credit to the unread Phase0 body. Header correction .2.4 is pending after prerequisites; helper repair .2.3 and existing runtime repairs remain open. No dependency build, new canonical run or push is claimed."
 evidence_update_2026_09_21_group38: "Eleven complete windows cover 1,067 fragments / 65,529 baseline bytes; ordered window SHA-256 f57116fee0db80f49969546da5cd033988e06b55191fc88358b7c6d6d334fd3e. Cumulative reading is 38/143: 50,605 fragments / 1,593,426 baseline bytes and 97 complete files. Phase0 is partial through line 1110. Exact unchanged canonical commit 87b35665e supplies PASS for all 38 fully read subtests (ordinals 2–39). The crossing facade error-state test remains partial; its suffix is .1.39-owned. The complete 1032-test gate remains retained historical proof, not new execution or reading credit. No new defect, runtime repair, dependency build, full CI or push is claimed; all existing repairs retain their prerequisites."
-evidence_phase0_checkpoint: "11 complete windows cover 1,029 fragments / 65,477 baseline bytes; ordered window SHA-256 8e331eed03bfb3e6fd8e61d9b3dc8908326dabcadd7d88ce8b1e36d4c805a25c. Cumulative reading is 77/143 groups, 93,411 fragments / 4,085,281 baseline bytes and 97 complete files. Phase0 is partial through line 43916. Unchanged canonical commit ec10be6b retains PASS for 35 completed subtests, ordinals 926–960 with 479 direct assertions and no nested plans. Exact TAP numbering and source identity are verified. Tkgui and simenv check exact ASTs and quiet output; Lispish checks its historical AST, while VHDL/EBNF smoke checks cover selected tags/names. Trace checks include scopes, mark positions/caret excerpts, exact capture output and nonempty file routing. Five uppercase-slot comparisons retain .2.10 limits. Default seek and AND consume execute input controls; parse_mode rejection checks structured prepare-options diagnostics. The Markdown path scan is partial after leak-array initialization; .1.78 owns its suffix. Fresh diagnosis confirms .2.13 without closing a repair; no production change, dependency build, canonical run or push is claimed; .2.5–.2.13 and all prerequisites remain."
-reverify_phase0_checkpoint: "Replay .1.77 using conformance-source-reading-coverage; verify 35 completed subtests, ordinals 926–960 with 479 direct assertions and no nested plans against unchanged ec10be6b sources. Keep five code-slot comparisons in .2.10 and replay phase0-cursor-source-observation-gap for .2.13; distinguish exact parser results from selected tags/names and corpus acceptance."
+evidence_phase0_checkpoint: "11 complete windows cover 1,147 fragments / 65,472 baseline bytes; ordered window SHA-256 5ad019d2a261916fd5179bd2fc9ec14efb9946c205d1841bd9d0d9c8420ac52f. Cumulative reading is 78/143 groups, 94,558 fragments / 4,150,753 baseline bytes and 97 complete files. Phase0 is partial through line 45063. Unchanged canonical commit ec10be6b retains PASS for 22 completed subtests, ordinals 961–982 with 392 direct assertions and no nested plans. Exact TAP numbering and source identity are verified. The selected Markdown scan covers 65 current files, not all tracked Markdown. Self-hosting smokes check bounded completion/defined results; function-body tests check exact AST metadata, spans, jobs, diagnostics and runtime values. Recursion checks distinguish termination, LX sequence results and entry/local match ownership. Genuine declaration-count and repeated-call checks coexist with stale wrapper/channel labels. Public capture plus declaration-removal controls establish .2.14; the next bare-mutation test has only its declaration read. Fresh diagnosis confirms .2.14 without closing a repair; no production change, dependency build, canonical run or push is claimed; .2.5–.2.14 and all prerequisites remain."
+reverify_phase0_checkpoint: "Replay .1.78 using conformance-source-reading-coverage; verify 22 completed subtests, ordinals 961–982 with 392 direct assertions and no nested plans against unchanged ec10be6b sources. Replay the selected current Markdown scan and phase0-working-variable-observation-drift; distinguish function-body-v1 staging from general-v2 admission and preserve existing .2.13 source-observation ownership."
 reverify_group38: "Replay .1.38 using conformance-source-reading-coverage and compare its 38 complete subtest names with retained canonical commit 87b35665e; this grants no new source-reading or runtime credit."
 reverify_group37: "bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/noncurrent_helper_metadata.t t/oracle_root_target_regex_semantics.t; retain unchanged dated MCP/native-loader proof separately."
 reverify_group36: "bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/logical_helper_perl_contract.t t/map_leaves_mutation_perl_contract.t; reproduce the helper observation with HELPER_PATH below, and retain the dated gap/MCP proof separately."
@@ -442,38 +443,40 @@ PUSH_LABELS
 
 ## Phase0 reading checkpoint
 
-Group 77 reads Phase0 lines 42888–43916. Tkgui checks its exact name/body
-hash and quiet stdout/stderr. Simenv checks nested begin/end assignments and
-stopping before the trailing newline. Lispish checks its historical nested AST;
-VHDL checks three tags and EBNF the Expr/Term rule names, without complete AST
-or strict document acceptance claims. Three corpus datasets exclude retired
-noncore plugins. Strict Lispish remains startup .83-owned; see
-[[archogen-rust-lispish-integration]].
+Group 78 reads Phase0 lines 43917–45063. The Markdown path test scans eleven
+named root documents plus book Markdown: 65 current files pass a fresh replay.
+It is not an all-tracked-Markdown census. Discovery/slurp helpers were inspected
+only to reproduce that scan; no extra reading-range credit is assigned.
 
-Trace tests inspect owning file/function/line metadata, decisions, parser/rule
-scopes, named-mark positions and caret excerpts. The mark example also checks
-[?Top:, alpha, beta, beta)] after capture_take and capture_between. A route-file
-test requires nonempty file content and absence of routed events from stdout.
+Self-hosting samples use alarms and defined-result checks. The structural smoke
+name does not imply complete AST assertions. Separate function grammar tests
+prove bootstrap lacks structured function-definition identities, while the
+self-hosted parser owns them. Thirteen definition examples check exact body text,
+spans and payload provenance, including string/regex/nested braces and diagnostic
+nodes for malformed or unbalanced input.
 
-Five ACODE/LXCODE/CODE comparisons remain inventory under
-[[phase0-code-slot-equivalence-observation-gap]]; no generated-equivalence proof
-is claimed. The lifecycle emptiness counterpart only checks metadata. Repeated
-ASSIGN presence terms are redundant and add no distinct node coverage.
+Function-body-v1 registry tests check deterministic queue order, built-in adapter
+identity/digest, resolve/load/compile/execute phases, normalized parent paths,
+replace_field/body_ast/fail metadata and structured missing-parser/wrong-top errors.
+The prototype returns [x, ab, 2, v]. Further function tests check final/early
+returns, local isolation, mutation arguments, receiver chains and wrong arity;
+standalone calls produce VALUE_DROP, while unknown host-shaped calls retain
+compatibility debt. [[function-body-staged-registry-dispatch]] separates this
+narrow route from the later general-v2 [[general-staged-ast-current-boundary]].
 
-Default seek accepts a later anchor in xxa; AND rejects xxa and accepts a.
-Descriptor model/order metadata and removed parse_mode errors are independently
-checked. The generated-source denial has a separate reproduced gap:
-[[phase0-cursor-source-observation-gap]]. Its twelve assertions pass even after
-captured output is emptied. A scratch positive source check passes pristine and
-rejects empty/unrelated text; .2.13 owns the tracked correction after reading.
-This does not establish a cursor runtime defect or close another repair.
+Fork-bounded recursion tests separate no-progress termination, nested body output,
+and LX top-level sequence accumulation. Top-rule match_group yields populated
+name/value fields while entry_text yields nulls. Declaration counts and same-parser
+repeated calls establish bounded lexical/scoping behavior. They do not validate
+stale wrapped-target or deferred-sigil wording. Fresh public capture and removal
+controls confirm [[phase0-working-variable-observation-drift]], owned by .2.14.
 
-Canonical ordinals 926–960 retain 479 direct assertions across 35 completed
-subtests, with no nested plans. Fresh diagnostic evidence is recorded separately
-in the .2.13 card. The Markdown path scan remains partial after leak-array
-initialization; .1.78 owns its scan/assertions. All .2.5–.2.13 repairs remain open.
+Canonical ordinals 961–982 retain 392 direct assertions across 22 completed
+subtests, with no nested plans. Fresh Markdown and .2.14 diagnostic controls are
+separate evidence. Existing .2.5–.2.14 repairs remain open. The next bare-mutation
+repeated-invocation test has only its declaration read; .1.79 owns its body.
 
-Reading is 77/143 groups, 93,411 fragments / 4,085,281 baseline bytes and 97 complete files.
+Reading is 78/143 groups, 94,558 fragments / 4,150,753 baseline bytes and 97 complete files.
 
 Related facts: [[perl-callable-codeblock-literal-record]], [[neutral-cli-fixture-runner]],
 [[complete-named-mark-perl-rust-parity]], [[perl-diagnostic-output-events]],

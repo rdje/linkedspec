@@ -498,40 +498,42 @@ the director's focused-verification grant used for this correction and the separ
 supporting-reading closeout. Reading completion establishes audited comprehension;
 it does not close the six grammar/literal repair roots or establish runtime signoff.
 Conformance, test and Unicode reading has exact ownership for all 160 inputs in
-143 bounded groups covering 8,257,059 baseline decoded bytes. Reading now covers 77/143 groups, 93,411 fragments / 4,085,281 baseline bytes and 97 complete files.
-Phase0 reaches line 43916.
+143 bounded groups covering 8,257,059 baseline decoded bytes. Reading now covers 78/143 groups, 94,558 fragments / 4,150,753 baseline bytes and 97 complete files.
+Phase0 reaches line 45063.
 
-The tkgui and simenv smokes check exact parser results as well as quiet output.
-Simenv also checks its cursor at the final newline. Lispish preserves its historical
-nested AST. The VHDL smoke checks selected tags; EBNF checks the Expr and Term rule
-names. Those narrower checks do not establish full AST or strict file validation.
-Strict Lispish document parsing remains owned by startup .83.
+The self-hosting smokes check completion and defined results. Stronger function
+checks separately inspect thirteen definitions, exact body text and spans,
+payload provenance, normalized job paths, stitched body ASTs and diagnostics.
+Their function-body-v1 adapter is distinct from the later general-v2 staged
+parsing contract.
 
-Trace coverage checks owning file/function/line labels, decisions and invocation
-scopes. Its mark example parses foo(alpha,beta), checking alpha, beta and beta)
-captures alongside position events and caret excerpts. File routing requires
-nonempty trace content and excludes those routed events from captured stdout.
-The default cursor family accepts a later anchor in xxa; AND rejects xxa and
-accepts a. Removed parse_mode options yield structured prepare-options errors.
+Runtime examples preserve concrete values: the staged prototype returns
+["x", "ab", 2, "v"]. User-function tests also cover local-variable isolation,
+early and final returns, nested calls, mutation arguments and receiver chains.
+Wrong arity, recursion, parser-state access and host-shaped function bodies have
+separate descriptor diagnostics; standalone registered calls discard their values.
 
-**A new test observation gap is owned by .2.13.** The cursor generated-source
-assertion passes even when its captured output is empty: it only denies a
-consume-call spelling. A fresh public capture produced source normally. A
-scratch positive source check passes on that capture and rejects empty or
-unrelated text. This demonstrates missing test sensitivity, not a compiler
-failure. The tracked repair retains the required source/book/policy prerequisites.
+Recursion tests distinguish termination from result shape. A body wrapper returns
+one form, while a top rule with LX accumulates a sequence of forms. A top rule's
+own matched fields come from match_group; entry_text has no entering match in
+that example. Repeated calls to the same parser check that working state resets.
 
-**The earlier generated-code equivalence claim remains withdrawn:** five more
-uppercase-slot comparisons belong to .2.10's inventory. Source-capture recipes
-.2.11 and assignment descriptions .2.12 remain open. MethodExpr .2.5, EmitContext
-labels .2.6, mark_copy .2.7, invalid num_min .2.8, push labels .2.9 and broader
-lifecycle repairs also retain their prerequisites.
+**A working-variable test gap is owned by .2.14.** The fluent push fixture now
+emits a scalar-held declaration, but its assertion denies only the old array-sigil
+form and calls declaration deferred. All six assertions pass after the real
+declaration is removed from the observed source. A positive diagnostic assertion
+rejects that removal. Nearby wrapped-target descriptions also refer to fixtures
+that now use bare bindings. The repair will align observations and descriptions
+with the current contract without reintroducing retired syntax.
 
-The 35 completed subtests retain canonical proof with 479 direct assertions and
-no nested plans. Fresh .2.13 diagnostic controls are recorded separately. The
-Markdown path scan is partial after leak-array initialization; .1.78 continues.
-The approved dependency grammar snapshot remains unused and the pinned
-113-byte inventory delta stays separate.
+The 22 completed subtests retain canonical proof with 392 direct assertions and
+no nested plans. A fresh path scan passes its 65 selected documents; that selection
+is narrower than all tracked Markdown. Fresh .2.14 diagnostic controls are recorded
+separately. MethodExpr .2.5 and repairs .2.6–.2.13 remain open, including the
+withdrawn uppercase-slot equivalence claims and the cursor-source presence gap.
+The next bare-mutation test is partial at its declaration; .1.79 continues.
+All repair prerequisites, the unused dependency grammar snapshot and the separate
+113-byte inventory delta remain.
 
 The director approved the finite documentation-capacity proposal under ADR0122.
 Containment `.15` admits exactly fourteen controls for the remaining 93 reading
@@ -558,8 +560,8 @@ The history files keep their 512-line / 65,536-byte caps, mandatory rollover and
 immutable archives. General card/part limits remain unchanged. Admission consumes
 one of the conservative 99 reserve units; the remaining 98 units are forecast
 after actual admission overhead. This capacity does not complete source reading
-or repair tests: reading now reaches 77/143, `.1.78` is next, and the test and recipe
-repairs `.2.5`–`.2.13` remain open.
+or repair tests: reading now reaches 78/143, `.1.79` is next, and the test and recipe
+repairs `.2.5`–`.2.14` remain open.
 
 The director has requested integration guides and runnable consumer examples for
 Perl, Rust, Dart, Julia and Lua, covering recursive checkout, dependency preparation
