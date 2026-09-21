@@ -498,13 +498,14 @@ the director's focused-verification grant used for this correction and the separ
 supporting-reading closeout. Reading completion establishes audited comprehension;
 it does not close the six grammar/literal repair roots or establish runtime signoff.
 Conformance, test and Unicode reading has exact ownership for all 160 inputs in
-143 bounded groups covering 8,257,059 baseline decoded bytes. Forty-five groups account for
-58,366 fragments and 2,050,502 baseline bytes, including 97 complete files. Phase0 reading
-reaches line 8871. Context preparation differs by entry point while retaining caller state
-and clearing stale build fields. Compiler failure tests separately check stage, summary, detail,
-rule attribution and requested-top fallback. Generated helper assertions inspect source text;
-they do not independently execute that source. Twenty-six completed subtests retain unchanged
-canonical proof with 289 assertions. The compile-entry exception case remains partial. No new
+143 bounded groups covering 8,257,059 baseline decoded bytes. Forty-six groups account for
+59,339 fragments and 2,115,985 baseline bytes, including 97 complete files. Phase0 reading
+reaches line 9844. Compiler tests check explicit state composition, ordered descriptor
+projection and precise failure attribution. Parser-factory controls preserve specific resolver
+diagnostics across setup, resolution, loading and compilation failures. Source inspection,
+callback observation and descriptor construction provide different evidence; handler presence
+alone does not establish handler execution. Thirty completed subtests retain unchanged canonical
+proof with 274 assertions. The non-coderef compile callback test remains partial. No fresh
 runtime execution or whole-file reading credit is claimed. The pinned 113-byte inventory delta
 stays separate; helper .2.3, header .2.4 and all parser/runtime repairs remain open.
 The director has requested integration guides and runnable consumer examples for

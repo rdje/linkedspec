@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `CONFORMANCE-SOURCE-READING`
-- Status: `active` / exact decomposition; physical reading 45/143
+- Status: `active` / exact decomposition; physical reading 46/143
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.8`
 - Created: `2026-09-13`
 - Last updated: `2026-09-21`
@@ -834,14 +834,21 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
   Commit: `CONFORMANCE-SOURCE-READING.1.45 - read context preparation and compiler failure attribution`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.46`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `38997866e1735b63e01a5cbf86286af14f7a4d4f`.
+  Verification tier: `focused`
+  Focused checks: Complete bounded source reading, exact baseline/window and retained canonical proof; reconcile Knowledge, preserve unrelated source/history/task evidence, memory, both history checks, book, direct public checks and normal doctrines.
+  Canonical trigger: Ordinary bounded reading and fact reconciliation only; no runtime, dependency, public-contract, infrastructure or parent-closeout change.
   Goal: Read and understand conformance/test/Unicode group 46.
   Scope: `t/phase0_regression.t` lines 8872-9844
   Baseline evidence: 973 fragments / 65483 decoded bytes; ordered range SHA-256 `8292afe74aabb6ce967f52d6b6aea097a9398d4d3aac710c9f67f992d423d6ca`.
   Dependencies: .1.45 committed with clean handoff.
   Acceptance: Read every scoped byte in complete bounded windows; retain source identity, exact comprehension, canonical Knowledge reconciliation, concrete finding ownership, focused proof and per-leaf continuity. Unread crossing constructs retain the next range owner.
-  Verification: `pending`
-  Commit: `pending`
+  Reading evidence: 11 complete windows / 973 fragments / 65483 bytes; ordered window SHA-256 `84b8930f933767a2b8b7a091aa173d1b18171640995e77a1813f700a1ce6124d`.
+  Comprehension: Compiler controls complete compile-entry diagnostics, reject empty compile tuples and malformed dependency shapes, and attribute default dependency assembly failures to the active rule. CompilerState tests distinguish explicit versioned owner states, ordered dependency rows, outward descriptor projection and removed internal aliases/wrappers. Thirteen wrapped owner calls and nine retired-wrapper absence checks establish bounded delegation and descriptor construction; they do not invoke every generated handler. Compiled descriptor validation bypasses the legacy dependency-map entrypoint and success clears stale compiler errors. ParserFactory tests separate resolution, setup, name validation, file loading and compile fallback failures, preserving specific resolver summaries/detail and requested rule/spec identity. Selected RuntimeContext ownership checks inspect source text while Compiler forwarding is callback-observed. Mock /tmp-shaped paths are inert; the real unreadable-file fixture uses managed File::Temp. The non-coderef callback case is partial inside dependency setup; its assertions remain unread.
+  Verification: Unchanged canonical commit 87b35665e retains PASS for 30 completed subtests, ordinals 280–309 with 274 assertions. Phase0, own Perl sources and shipped specs remain unchanged; TAP replay verifies every sequential assertion number. The non-coderef compile callback test stops inside setup before its callback and assertions; .1.47 owns the unread suffix. Historical whole-gate proof remains 1032 top-level tests. No new runtime execution, runtime repair, dependency build, full CI or push is claimed; all repair prerequisites remain.
+  Candidate proof: Exact 160-input/143-group/302-range audit and eleven-window replay pass. Preservation verifies 2,844 other files / 50,534,669 bytes, 504 earlier task nodes, 53 other book files and all 1,039 book headings; history, scopes, recipes and parent Gitlink remain exact. All six current reading-index rows agree on next .1.47. Memory, both history-pressure checks, mdBook, public mutation (69 files / 50 mutations), public selector (68 files / 11 contrast mutations) and diff checks pass. Hot histories measure changes 257 lines / 55,031 bytes and notes 225 / 54,890, above warning but below required rollover. Knowledge remains at 1,151 facts / 9,218 keys; normal nine-doctrine hooks govern landing.
+  Commit: `CONFORMANCE-SOURCE-READING.1.46 - read compiler-state composition and parser-factory error contracts`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.47`
   Status: `pending`
@@ -1944,7 +1951,7 @@ additional reading credit from integration delivery.
 
 | Rank | Leaf | Status | Next action |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.46` | `pending` | Read Phase0 lines 8872–9844 (973 fragments / 65,483 baseline bytes), continuing the compile-entry failure test. All repair prerequisites remain. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.47` | `pending` | Read Phase0 lines 9845–10823 (979 fragments / 65,510 baseline bytes), continuing the non-coderef compile callback test. All repair prerequisites remain. |
 
 ## Decisions
 
@@ -1956,6 +1963,8 @@ additional reading credit from integration delivery.
 - None at decomposition. Ordinary source repairs retain startup prerequisites; later collection pressure must be measured rather than assumed away.
 
 ## Verification Log
+
+- `2026-09-21` .1.46: Eleven complete windows cover 973 fragments / 65,483 baseline bytes; ordered window SHA-256 84b8930f933767a2b8b7a091aa173d1b18171640995e77a1813f700a1ce6124d. Cumulative reading is 46/143: 59,339 fragments / 2,115,985 baseline bytes and 97 complete files. Phase0 is partial through line 9844. Unchanged canonical commit 87b35665e retains PASS for 30 completed subtests, ordinals 280–309 with 274 assertions. Phase0, own Perl sources and shipped specs remain unchanged; TAP replay verifies every sequential assertion number. The non-coderef compile callback test stops inside setup before its callback and assertions; .1.47 owns the unread suffix. Historical whole-gate proof remains 1032 top-level tests. No new runtime execution, runtime repair, dependency build, full CI or push is claimed; all repair prerequisites remain.
 
 - `2026-09-21` .1.45: Eleven complete windows cover 1,045 fragments / 65,409 baseline bytes; ordered window SHA-256 57fa586148e84cf02124246fd1ea0621df41394f0111f36e7fa069638e3ac60c. Cumulative reading is 45/143: 58,366 fragments / 2,050,502 baseline bytes and 97 complete files. Phase0 is partial through line 8871. Unchanged canonical commit 87b35665e retains PASS for 26 completed subtests, ordinals 254–279 with 289 assertions. Phase0, own Perl sources and shipped specs remain unchanged; TAP replay verifies every sequential assertion number. The compile-entry exception test is partial after four of twelve assertions; .1.46 owns the remaining eight. Historical whole-gate proof remains 1032 top-level tests. No new runtime execution, runtime repair, dependency build, full CI or push is claimed; all repair prerequisites remain.
 
@@ -2017,6 +2026,8 @@ additional reading credit from integration delivery.
 
 ## Commit Log
 
+- `2026-09-21` .1.46: `CONFORMANCE-SOURCE-READING.1.46 - read compiler-state composition and parser-factory error contracts`; activation 38997866e; .1.47 follows clean handoff and empty brief.
+
 - `2026-09-21` .1.45: `CONFORMANCE-SOURCE-READING.1.45 - read context preparation and compiler failure attribution`; activation f4a9ea296; .1.46 follows clean handoff and empty brief.
 
 - `2026-09-21` .1.44: `CONFORMANCE-SOURCE-READING.1.44 - read validation compiler and runtime-context contracts`; activation cc3a8591f; .1.45 follows clean handoff and empty brief.
@@ -2076,6 +2087,8 @@ additional reading credit from integration delivery.
 - `2026-09-13`: Decomposition lands under `SESSION-STARTUP-READING.3.8.0`; Git owns the resulting commit identity.
 
 ## Changelog
+
+- `2026-09-21` .1.46: Read compiler-state composition and parser-factory error contracts; preserve the partial non-coderef callback case and all repair prerequisites.
 
 - `2026-09-21` .1.45: Read owner-specific context preparation and compiler failure attribution; preserve the partial compile-entry exception case and all repair prerequisites.
 

@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.46 - read compiler-state composition and parser-factory error contracts
+
+Eleven complete windows cover 973 fragments / 65,483 baseline bytes; ordered window SHA-256 84b8930f933767a2b8b7a091aa173d1b18171640995e77a1813f700a1ce6124d. Cumulative reading is 46/143: 59,339 fragments / 2,115,985 baseline bytes and 97 complete files. Phase0 is partial through line 9844. Unchanged canonical commit 87b35665e retains PASS for 30 completed subtests, ordinals 280–309 with 274 assertions. Phase0, own Perl sources and shipped specs remain unchanged; TAP replay verifies every sequential assertion number. The non-coderef compile callback test stops inside setup before its callback and assertions; .1.47 owns the unread suffix. Historical whole-gate proof remains 1032 top-level tests. No new runtime execution, runtime repair, dependency build, full CI or push is claimed; all repair prerequisites remain.
+
 ## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.45 - read context preparation and compiler failure attribution
 
 Eleven complete windows cover 1,045 fragments / 65,409 baseline bytes; ordered window SHA-256 57fa586148e84cf02124246fd1ea0621df41394f0111f36e7fa069638e3ac60c. Cumulative reading is 45/143: 58,366 fragments / 2,050,502 baseline bytes and 97 complete files. Phase0 is partial through line 8871. Unchanged canonical commit 87b35665e retains PASS for 26 completed subtests, ordinals 254–279 with 289 assertions. Phase0, own Perl sources and shipped specs remain unchanged; TAP replay verifies every sequential assertion number. The compile-entry exception test is partial after four of twelve assertions; .1.46 owns the remaining eight. Historical whole-gate proof remains 1032 top-level tests. No new runtime execution, runtime repair, dependency build, full CI or push is claimed; all repair prerequisites remain.
