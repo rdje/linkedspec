@@ -2299,7 +2299,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Status: `active`
   Goal: Split and read all 160 entries under capability_conformance, cli_conformance, t, tests, and unicode_case.
   Children: `.3.8.0` owns exact decomposition; `CONFORMANCE-SOURCE-READING.1` owns all143 reading groups; .2 findings and .3 independent closeout stay separate.
-  Reading owner: `docs/tasks/CONFORMANCE-SOURCE-READING.md`; 143 groups/302 baseline ranges over160 inputs. Physical reading57/143:71,753 fragments/2,833,045 baseline bytes and97 complete files; Phase0 through22258. Approved113-byte inventory delta stays separate. Retained18-subtest proof has195 direct assertions including59 nested results/472 inner assertions. Snapshot and bare-marker metadata do not establish emitted-code equivalence or target execution; .2.5–.2.11 and all prerequisites remain. .1.58 completes the fluent outer-switch test. ADR0122/containment .15 are canonically admitted at ec10be6b.
+  Reading owner: `docs/tasks/CONFORMANCE-SOURCE-READING.md`; 143 groups/302 baseline ranges over160 inputs. Physical reading58/143:73,253 fragments/2,895,669 baseline bytes and97 complete files; Phase0 through23758. Approved113-byte inventory delta stays separate. Retained18-subtest proof has160 direct assertions including63 nested results/476 inner assertions. Mixed switches and nested marker metadata preserve the explicit slot-shape versus code-equivalence distinction; .2.5–.2.11 and all prerequisites remain. .1.59 continues the marker-outer nested-flow fixture. ADR0122/containment .15 are canonically admitted at ec10be6b.
   Acceptance: Include phase0, neutral contracts, fixtures, generators, and four explicitly decoded pinned Unicode
     inputs. Keep generated/fixture bytes in scope; count neither a hash nor enumeration as full reading.
   Verification: `pending`
@@ -4673,7 +4673,7 @@ startup implementation prerequisites and the rgx reading exclusion remain intact
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.58` | `pending` | Read Phase0 lines 22259–23758 (1,500 fragments / 62,624 baseline bytes), completing the fluent outer-switch test’s final ok expression. Repairs .2.5–.2.11 and earlier repairs retain required reading prerequisites. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.59` | `pending` | Read Phase0 lines 23759–25258 (1,500 fragments / 55,331 baseline bytes), continuing the marker-outer nested if/elseif inline-switch fixture. Repairs .2.5–.2.11 and earlier repairs retain required reading prerequisites. |
 
 ## Reading Ledger
 

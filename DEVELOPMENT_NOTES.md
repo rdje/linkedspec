@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.58 - read mixed switch and nested marker metadata
+
+Marker outer plus nested marker switch expects two SWITCH/two ENDSWITCH hits; marker outer plus two inline switches expects three SWITCH/one ENDSWITCH. Nine seven-tag loops verify 476 inner assertions at three distinct plan lengths. Slot-shape labels make a narrower claim than code equivalence; .2.10 remains the latter repair owner. Canonical comprehension remains in conformance-perl-consumer-reading.
+
 ## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.57 - read snapshot and bare-marker descriptor coverage
 
 Bare-switch fixtures include ENDCASE twice; optional-semicolon fixtures omit it, so expected hit maps remain fixture-specific. Two paired seven-tag loops, one paired five-tag loop and three seven-tag loops separately verify 472 inner assertions. Snapshot descriptors do not prove copy isolation, and absent-slot comparisons do not prove generated-code equality. Canonical comprehension remains in conformance-perl-consumer-reading and the .2.10 observation-gap card.
