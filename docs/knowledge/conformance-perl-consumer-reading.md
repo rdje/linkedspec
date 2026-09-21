@@ -53,8 +53,9 @@ answers:
   - what do Phase0 membership replacement boundary and reducer lowering checks observe
   - what do Phase0 hash transformation and snapshot lowering checks observe
   - what do Phase0 array ordering and numeric reduction lowering checks observe
+  - which Phase0 lifecycle tests observe generated markers and actual return values
 date: 2026-09-21
-status: groups 34–71 physically read; Phase0 partial through line 38503; all observation-gap and runtime repairs retain prerequisites
+status: groups 34–72 physically read; Phase0 partial through line 39354; all observation-gap and runtime repairs retain prerequisites
 tags: [conformance, perl, reading, diagnostics, generated-source]
 evidence: "CONFORMANCE-SOURCE-READING.1.34 at activation d10305097eb502c0fe29309ec230437396e26d82; eleven complete windows, 1500 fragments, 56255 bytes, ordered window SHA-256 db04deab6c0365f8bc454e2695d410324a120104a232c213346f2b23ad16aef3. Five managed Perl targets pass43 top-level tests; neutral named marks3, diagnostics20 and duplicate-slot59 mutations pass."
 evidence_update_2026_09_21: "Ten complete windows cover 1,500 fragments / 51,804 baseline bytes; ordered window SHA-256 1164b42887bab92a4ea03d85fcaf4a9dc0c6913fc7607fe21a0d66cb0a424992. Cumulative reading is 35/143, 46,538 fragments / 1,405,327 baseline bytes and 86 complete files; gap tests remain partial through line 1026. Retained exact integration commit 87b35665e proof passes generated-source (6), inspector (2) and gap (124) tests (132 total), with unchanged source identities. The old uniform-identity audit fails on the approved integration delta; its corrected recipe passes all 160 inputs/143 groups/302 ranges and six rejected snapshot mutations. No new runtime execution, native build, full CI or push is claimed for this focused reading leaf."
@@ -62,8 +63,8 @@ evidence_update_2026_09_21_group36: "Eleven complete windows cover 1,500 fragmen
 reverify: "bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/cli_conformance_runner.t t/complete_named_mark_contract.t t/diagnostic_output_perl_contract.t t/duplicate_regex_slot_identity_perl_contract.t t/generated_source_contract.t; bash tools/run_python_project_data.sh tools/check_complete_named_mark_contract.py; bash tools/run_python_project_data.sh tools/check_diagnostic_output_contract.py; bash tools/run_python_project_data.sh tools/check_duplicate_regex_slot_identity_contract.py"
 evidence_update_2026_09_21_group37: "Fourteen complete windows cover 1,500 fragments / 63,613 baseline bytes; ordered window SHA-256 98d4de26a6f747975c45fe91277d218c6947936925d1ae233586706bef952d64. Cumulative reading is 37/143: 49,538 fragments / 1,527,897 baseline bytes and 97 complete files. Phase0 remains partial at lines 1–43. Fresh managed metadata/oracle checks pass 9 top-level tests. Unchanged integration commit 87b35665e retains native-loader (5), MCP binding/dispatch/stdio (23), admission (13) and Phase0 1032 proof. Full-target execution grants no reading credit to the unread Phase0 body. Header correction .2.4 is pending after prerequisites; helper repair .2.3 and existing runtime repairs remain open. No dependency build, new canonical run or push is claimed."
 evidence_update_2026_09_21_group38: "Eleven complete windows cover 1,067 fragments / 65,529 baseline bytes; ordered window SHA-256 f57116fee0db80f49969546da5cd033988e06b55191fc88358b7c6d6d334fd3e. Cumulative reading is 38/143: 50,605 fragments / 1,593,426 baseline bytes and 97 complete files. Phase0 is partial through line 1110. Exact unchanged canonical commit 87b35665e supplies PASS for all 38 fully read subtests (ordinals 2–39). The crossing facade error-state test remains partial; its suffix is .1.39-owned. The complete 1032-test gate remains retained historical proof, not new execution or reading credit. No new defect, runtime repair, dependency build, full CI or push is claimed; all existing repairs retain their prerequisites."
-evidence_phase0_checkpoint: "Eleven complete windows cover 759 fragments / 65,504 baseline bytes; ordered window SHA-256 59d454151dbf825b3c0242fd66d004452f8a6c21093d9cca573fdba96c46dce7. Cumulative reading is 71/143: 87,998 fragments / 3,692,510 baseline bytes and 97 complete files. Phase0 is partial through line 38503. Unchanged canonical commit ec10be6b retains PASS for twenty-one completed subtests, ordinals 762–782 with 196 direct assertions and no nested plans: fourteen descriptor plans contribute 168 and seven direct-lowering plans contribute 28. Exact TAP numbering/source identity are verified. Four freshly extracted subtests pass 16 assertions; four public assignment executions return expected ARRAY references. Their list-context-flattening descriptions are stale; .2.12 owns correction after prerequisites, with exact reproduction in phase0-array-assignment-description-drift. Inner list construction remains valid; descriptor uppercase-slot limits remain .2.10-owned. Lifecycle num_avg is partial after assertion four. No tracked test repair, dependency build, canonical run or push; .2.5–.2.12 and earlier repairs remain."
-reverify_phase0_checkpoint: "Replay .1.71 using conformance-source-reading-coverage; verify ordinals 762–782 and 196 direct assertions against unchanged ec10be6b sources. Run both phase0-array-assignment-description-drift recipes; distinguish fresh four-case execution from retained descriptor proof and .2.10 observation limits."
+evidence_phase0_checkpoint: "Eleven complete windows cover 851 fragments / 65,534 baseline bytes; ordered window SHA-256 3a7f14ed253714738cfc2014066b4b868b00667ab0c90726df1c48cc538a6f06. Cumulative reading is 72/143: 88,849 fragments / 3,758,044 baseline bytes and 97 complete files. Phase0 is partial through line 39354. Unchanged canonical commit ec10be6b retains PASS for seventeen completed subtests, ordinals 783–799 with 235 direct assertions and no nested plans. Seven descriptor plans contribute 84 assertions; three numeric text plans contribute 14; flat-list/string/tagged-record plans contribute 48; three conditional/lifecycle plans contribute 89, including nine parser-result assertions and seven positive marker source checks. Exact TAP numbering and source identity are verified. Meaningful bounded source/runtime observations remain distinct from .2.10 uppercase-slot equality and startup .27 lifecycle drift. Switch coverage is partial before its first expected pattern; .1.73 owns the suffix. No new defect, fresh target execution, repair, dependency build, canonical run or push is claimed; .2.5–.2.12 and all prerequisites remain."
+reverify_phase0_checkpoint: "Replay .1.72 using conformance-source-reading-coverage; verify ordinals 783–799 and plans 12/4/12/12/4/12/12/6/12/12/16/11/14/7/26/30/33 against unchanged ec10be6b sources. Keep nine runtime results and seven positive marker source checks separate from descriptor equality and broader startup .27 drift."
 reverify_group38: "Replay .1.38 using conformance-source-reading-coverage and compare its 38 complete subtest names with retained canonical commit 87b35665e; this grants no new source-reading or runtime credit."
 reverify_group37: "bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/noncurrent_helper_metadata.t t/oracle_root_target_regex_semantics.t; retain unchanged dated MCP/native-loader proof separately."
 reverify_group36: "bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/logical_helper_perl_contract.t t/map_leaves_mutation_perl_contract.t; reproduce the helper observation with HELPER_PATH below, and retain the dated gap/MCP proof separately."
@@ -436,30 +437,34 @@ PUSH_LABELS
 
 ## Phase0 reading checkpoint
 
-Group 71 reads Phase0 lines 37745–38503, completing lifecycle pick_keys.
-Sorted keys are lexical; sorted_values returns corresponding values in key
-order. Concat_arrays constructs one array from working arrays and guarded
-ARRAY dereferences. Sorted compares defined terms as strings, mapping undef
-to empty text for comparison. Reversed reverses the composed array.
+Group 72 reads Phase0 lines 38504–39354, completing lifecycle num_avg.
+Median text validates terms, sorts numerically and selects the middle value
+or averages the middle pair. Range tracks min/max and subtracts them. Unary
+array min/max track extrema; these expressions return undef for empty or
+invalid inputs. These are lowering-text observations, not fresh edge-case runs.
 
-Num_sum/num_avg text guards the source and validates every numeric term.
-Sum starts at zero; average returns undef for an empty input. These authored
-checks inspect expressions for method, flow, assignment and return contexts;
-they do not execute every reducer edge case.
+Flat_array/flat_hash checks cover bare and guarded composed sources, including
+capture groups and projected hashes. Typed split/trim/filter/case/uniq helpers
+operate on one binding, with inner-to-outer nested composition. Tagged records
+map split fields into arrays containing the requested tag and extra values.
 
-Four assignment descriptions incorrectly claim list-context flattening while
-their patterns check scalar bindings. Fresh extraction passes 16 assertions and
-four public lowered assignments execute with expected ARRAY-reference results.
-[[phase0-array-assignment-description-drift]] preserves exact examples and
-recipes; .2.12 owns the correction after prerequisites. Inner list construction
-is a separate valid observation. No production failure is established.
+Conditional tests combine exact lowering, metadata, scalar source capture and
+actual parser-result assertions. Four otherwise cases cover dotted/bare forms
+on action and lifecycle surfaces. Lifecycle source checks positively match
+I/LS/LE/LX assignments under AND and E/EX/IT under collection mode. Three result
+cases distinguish an ordinary final statement, an explicit rule return and
+an expression-block-local return. Across the three conditional/lifecycle plans,
+nine parser-result assertions are retained. These are meaningful observations
+for the selected fixtures; they do not close [[perl-lifecycle-final-value-e-drift]]
+or generalize [[terse-lifecycle-value-drop-return-channel]] to every handler.
 
-Fourteen completed descriptor comparisons retain twelve assertions each and
-the .2.10 uppercase-slot limits in [[phase0-code-slot-equivalence-observation-gap]].
-Retained canonical ordinals 762–782 total 196 assertions: 168 descriptor and 28 textual
-checks in seven direct plans, with no nested plans. Lifecycle num_avg has four
-assertions complete; .1.72 owns the suffix. Reading is 71/143, 87,998 fragments /
-3,692,510 baseline bytes and 97 complete files. All repairs retain prerequisites.
+Retained canonical ordinals 783–799 pass 235 direct assertions: seven descriptor
+plans contribute 84, numeric text plans 14, flat/string/tagged plans 48, and
+conditional/lifecycle plans 89. No nested plans or fresh execution is claimed.
+Descriptor-slot limits in [[phase0-code-slot-equivalence-observation-gap]] remain;
+[[phase0-array-assignment-description-drift]] and all other repairs retain prerequisites.
+The switch test stops before its first expected pattern; .1.73 owns the suffix.
+Reading is 72/143, 88,849 fragments / 3,758,044 baseline bytes and 97 complete files.
 
 Related facts: [[perl-callable-codeblock-literal-record]], [[neutral-cli-fixture-runner]],
 [[complete-named-mark-perl-rust-parity]], [[perl-diagnostic-output-events]],

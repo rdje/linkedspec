@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `CONFORMANCE-SOURCE-READING`
-- Status: `active` / exact decomposition; physical reading 71/143
+- Status: `active` / exact decomposition; physical reading 72/143
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.8`
 - Created: `2026-09-13`
 - Last updated: `2026-09-21`
@@ -1276,14 +1276,21 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
   Commit: `CONFORMANCE-SOURCE-READING.1.71 - read array ordering and own assignment description drift`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.72`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `fa907be6e446f19ed0bcde060e2814c0f562b467`.
+  Verification tier: `focused`
+  Focused checks: Complete source/window/coverage and retained TAP checks; reconcile actual source/runtime observations with canonical Knowledge limits; preservation, memory, histories, rendered book, direct public checks and normal doctrines.
+  Canonical trigger: Ordinary bounded reading and fact reconciliation; no source/public-contract/dependency/infrastructure change or parent closeout.
   Goal: Read and understand conformance/test/Unicode group 72.
   Scope: `t/phase0_regression.t` lines 38504-39354
   Baseline evidence: 851 fragments / 65534 decoded bytes; ordered range SHA-256 `79d7822ef3324308df225adc573dd141b794f0800065d8887448e0cf67c744bd`.
   Dependencies: .1.71 committed with clean handoff.
   Acceptance: Read every scoped byte in complete bounded windows; retain source identity, exact comprehension, canonical Knowledge reconciliation, concrete finding ownership, focused proof and per-leaf continuity. Unread crossing constructs retain the next range owner.
-  Verification: `pending`
-  Commit: `pending`
+  Reading evidence: 11 complete windows / 851 fragments / 65534 bytes; ordered window SHA-256 `3a7f14ed253714738cfc2014066b4b868b00667ab0c90726df1c48cc538a6f06`.
+  Comprehension: Completes lifecycle num_avg; reads numeric median, range and unary-array min/max lowering plus action/LX descriptor pairs. Median sorts validated numeric terms and averages the middle pair for even length; range tracks extrema; empty/non-numeric inputs yield undef in the inspected expressions. Flat-array/hash lowering expands bare and guarded composed sources, while typed split/trim/filter/case/uniq helpers operate on one binding and preserve inner-to-outer composition. Tagged-record construction maps split fields into tagged arrays. Fluent/attached conditionals include exact lowering, source capture, metadata and actual parser-result assertions. Four otherwise cases cover action/lifecycle and dotted/bare forms. Lifecycle source locks positively observe I/LS/LE/LX under AND and E/EX/IT under collection mode; three runtime cases distinguish discarded final expression, surrounding-rule return and block-local return. These bounded observations do not close known broader lifecycle drift or .2.10 descriptor-slot gaps. The next switch test is partial before its first expected pattern; .1.73 owns its suffix.
+  Verification: Unchanged canonical commit ec10be6b retains PASS for seventeen completed subtests, ordinals 783–799 with 235 direct assertions and no nested plans. Seven descriptor plans contribute 84 assertions; three numeric text plans contribute 14; flat-list/string/tagged-record plans contribute 48; three conditional/lifecycle plans contribute 89, including nine parser-result assertions and seven positive marker source checks. Exact TAP numbering and source identity are verified. Meaningful bounded source/runtime observations remain distinct from .2.10 uppercase-slot equality and startup .27 lifecycle drift. Switch coverage is partial before its first expected pattern; .1.73 owns the suffix. No new defect, fresh target execution, repair, dependency build, canonical run or push is claimed; .2.5–.2.12 and all prerequisites remain.
+  Candidate proof: Exact 160-file/143-group/302-range audit and eleven-window reconstruction PASS; independently summed 72 groups total 88,849 fragments / 3,758,044 baseline bytes. Preserve 2,851 other files / 50,660,630 bytes, 515 prior task nodes, 53 other book files and all 1,039 headings, prior recipes/history and gitlink. Memory 60; Knowledge 1,155 facts / 9,273 keys; histories 252/42,196 and 248/43,318 lines/bytes. Rendered book, direct public checks and diff check PASS; normal doctrine hooks govern focused landing.
+  Commit: `CONFORMANCE-SOURCE-READING.1.72 - read reducers and meaningful lifecycle source and result locks`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.73`
   Status: `pending`
@@ -2610,7 +2617,7 @@ additional reading credit from integration delivery.
 
 | Rank | Leaf | Status | Next action |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.72` | `pending` | Read Phase0 lines 38504–39354 (851 fragments / 65,534 baseline bytes), continuing lifecycle num_avg after assertion four. Repairs .2.5–.2.12 and earlier repairs retain required source/book/policy reading prerequisites. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.73` | `pending` | Read Phase0 lines 39355–40442 (1,088 fragments / 65,436 baseline bytes), continuing the first fluent switch assertion and its remaining cases. Repairs .2.5–.2.12 and earlier repairs retain required source/book/policy reading prerequisites. |
 
 ## Decisions
 
@@ -2622,6 +2629,8 @@ additional reading credit from integration delivery.
 - None at decomposition. Ordinary source repairs retain startup prerequisites; later collection pressure must be measured rather than assumed away.
 
 ## Verification Log
+
+- `2026-09-21` .1.72: Eleven complete windows cover 851 fragments / 65,534 baseline bytes; ordered window SHA-256 3a7f14ed253714738cfc2014066b4b868b00667ab0c90726df1c48cc538a6f06. Cumulative reading is 72/143: 88,849 fragments / 3,758,044 baseline bytes and 97 complete files. Phase0 is partial through line 39354. Unchanged canonical commit ec10be6b retains PASS for seventeen completed subtests, ordinals 783–799 with 235 direct assertions and no nested plans. Seven descriptor plans contribute 84 assertions; three numeric text plans contribute 14; flat-list/string/tagged-record plans contribute 48; three conditional/lifecycle plans contribute 89, including nine parser-result assertions and seven positive marker source checks. Exact TAP numbering and source identity are verified. Meaningful bounded source/runtime observations remain distinct from .2.10 uppercase-slot equality and startup .27 lifecycle drift. Switch coverage is partial before its first expected pattern; .1.73 owns the suffix. No new defect, fresh target execution, repair, dependency build, canonical run or push is claimed; .2.5–.2.12 and all prerequisites remain.
 
 - `2026-09-21` .1.71: Eleven complete windows cover 759 fragments / 65,504 baseline bytes; ordered window SHA-256 59d454151dbf825b3c0242fd66d004452f8a6c21093d9cca573fdba96c46dce7. Cumulative reading is 71/143: 87,998 fragments / 3,692,510 baseline bytes and 97 complete files. Phase0 is partial through line 38503. Unchanged canonical commit ec10be6b retains PASS for twenty-one completed subtests, ordinals 762–782 with 196 direct assertions and no nested plans: fourteen descriptor plans contribute 168 and seven direct-lowering plans contribute 28. Exact TAP numbering/source identity are verified. Four freshly extracted subtests pass 16 assertions; four public assignment executions return expected ARRAY references. Their list-context-flattening descriptions are stale; .2.12 owns correction after prerequisites, with exact reproduction in phase0-array-assignment-description-drift. Inner list construction remains valid; descriptor uppercase-slot limits remain .2.10-owned. Lifecycle num_avg is partial after assertion four. No tracked test repair, dependency build, canonical run or push; .2.5–.2.12 and earlier repairs remain.
 
@@ -2737,6 +2746,8 @@ additional reading credit from integration delivery.
 
 ## Commit Log
 
+- `2026-09-21` .1.72: `CONFORMANCE-SOURCE-READING.1.72 - read reducers and meaningful lifecycle source and result locks`; activation fa907be6e; .1.73 follows clean handoff and empty brief.
+
 - `2026-09-21` .1.71: `CONFORMANCE-SOURCE-READING.1.71 - read array ordering and own assignment description drift`; activation a9b874f7b; .1.72 follows clean handoff and empty brief.
 
 - `2026-09-21` .1.70: `CONFORMANCE-SOURCE-READING.1.70 - read hash transformations and snapshot lowering checks`; activation ff9a9b83c; .1.71 follows clean handoff and empty brief.
@@ -2850,6 +2861,8 @@ additional reading credit from integration delivery.
 - `2026-09-13`: Decomposition lands under `SESSION-STARTUP-READING.3.8.0`; Git owns the resulting commit identity.
 
 ## Changelog
+
+- `2026-09-21` .1.72: Read numeric reducers, flat-list/typed transforms and bounded conditional/lifecycle source and runtime locks; preserve distinct observation and repair boundaries.
 
 - `2026-09-21` .1.71: Read array ordering/concatenation and numeric reduction expectations; own four stale scalar-assignment descriptions under .2.12 with public execution proof.
 

@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.72 - read reducers and meaningful lifecycle source and result locks
+
+Median validates and numerically sorts terms; range tracks extrema; unary array min/max inspect validated terms. Flat and typed-transform cases distinguish list construction from one-binding mutation. Conditional/lifecycle plans include scalar source capture and real parser-result checks. Seven positive marker checks use AND versus collection fixtures deliberately; three runtime cases distinguish final statement, surrounding-rule return and block-local return. Preserve these bounded observations without closing the broader lifecycle drift or nonexistent uppercase descriptor-slot repair. Canonical Knowledge is reconciled in conformance-perl-consumer-reading.
+
 ## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.71 - read array ordering and own assignment description drift
 
 Sorted_values follows key order; sorted compares lexical terms and reversed changes element order. Numeric reducer expressions validate each term, with sum identity zero and empty average undef. The public assignment outputs use scalar-held arrays despite four stale list-context-flattening labels; inner list construction is distinct. Exact source extraction and four compiled lowering controls confirm the wording mismatch. phase0-array-assignment-description-drift owns durable reproduction; .2.12 owns correction after reading. Descriptor comparisons retain .2.10 limits.

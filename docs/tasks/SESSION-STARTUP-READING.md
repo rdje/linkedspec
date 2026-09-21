@@ -2299,7 +2299,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Status: `active`
   Goal: Split and read all 160 entries under capability_conformance, cli_conformance, t, tests, and unicode_case.
   Children: `.3.8.0` owns exact decomposition; `CONFORMANCE-SOURCE-READING.1` owns all143 reading groups; .2 findings and .3 independent closeout stay separate.
-  Reading owner: `docs/tasks/CONFORMANCE-SOURCE-READING.md`; 143 groups / 302 baseline ranges over 160 inputs. Physical reading 71/143:87,998 fragments / 3,692,510 baseline bytes and 97 complete files; Phase0 through 38503. Approved113-byte inventory delta stays separate. Retained twenty-one-subtest proof has 196 direct assertions and no nested plans. Four fresh exact subtests and four public result controls confirm stale scalar-assignment descriptions; .2.12 owns correction. Existing .2.10 code-observation limits remain; .2.5–.2.12 and all prerequisites remain. .1.72 continues lifecycle num_avg. ADR0122/containment .15 are canonically admitted at ec10be6b.
+  Reading owner: `docs/tasks/CONFORMANCE-SOURCE-READING.md`; 143 groups / 302 baseline ranges over 160 inputs. Physical reading 72/143: 88,849 fragments / 3,758,044 baseline bytes and 97 complete files; Phase0 through 39354. Approved 113-byte inventory delta stays separate. Retained seventeen-subtest proof has 235 direct assertions and no nested plans. Meaningful bounded lifecycle source/results remain distinct from .2.10 descriptor-slot and startup .27 handler-shape gaps; .2.5–.2.12 and all prerequisites remain. .1.73 continues fluent switch assertions. ADR0122/containment .15 are canonically admitted at ec10be6b.
   Acceptance: Include phase0, neutral contracts, fixtures, generators, and four explicitly decoded pinned Unicode
     inputs. Keep generated/fixture bytes in scope; count neither a hash nor enumeration as full reading.
   Verification: `pending`
@@ -4673,7 +4673,7 @@ startup implementation prerequisites and the rgx reading exclusion remain intact
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.72` | `pending` | Read Phase0 lines 38504–39354 (851 fragments / 65,534 baseline bytes), continuing lifecycle num_avg after assertion four. Repairs .2.5–.2.12 and earlier repairs retain required source/book/policy reading prerequisites. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.73` | `pending` | Read Phase0 lines 39355–40442 (1,088 fragments / 65,436 baseline bytes), continuing the first fluent switch assertion and its remaining cases. Repairs .2.5–.2.12 and earlier repairs retain required source/book/policy reading prerequisites. |
 
 ## Reading Ledger
 
