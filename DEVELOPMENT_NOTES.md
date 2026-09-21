@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.70 - read hash transformations and snapshot lowering checks
+
+Seven four-assertion direct plans inspect hash lookup, merging, copying and key transforms through expressions and anchored patterns. Bare copy observes one runtime-typed binding; the composed known-hash case checks a shallow snapshot. Rename moves existing keys, drop deletes from a local copy and pick projects existing requested keys. Fourteen descriptor comparisons retain .2.10 limits; lifecycle pick_keys ends before readiness. Exact comprehension remains in conformance-perl-consumer-reading.
+
 ## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.69 - read scalar membership and reducer lowering checks
 
 Ten direct-lowering plans include nine of four assertions and a six-assertion boundary-transform plan. Exact text retains undefined-needle membership, literal replacement trailing fields, empty/nonmatching boundary identity, concatenation boolean/negative-zero handling, first-match indexes and aggregate reducers. Nine descriptor comparisons retain .2.10 limits. Lifecycle count_keys is partial after both builds. Exact comprehension remains in conformance-perl-consumer-reading.
