@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.61 - read structured switch branch comparisons and preserve observation limits
+
+Read Phase0 26759–28258: 61/143 groups, 77,753 fragments / 3,067,280 baseline bytes. Retained eleven-subtest proof has 107 direct assertions, including 42 nested results / 364 inner assertions. Structured switch branch comparisons retain metadata proof; code-output-labelled slot comparisons remain .2.10-owned. No independently reproduced new defect or target execution; all repairs remain. .1.62 continues the partial action pair.
+
 ## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.60 - read multi-case switch composition and metadata coverage
 
 Read Phase0 25259–26758: 60/143 groups, 76,253 fragments / 3,006,852 baseline bytes. Retained twelve-subtest proof has 108 direct assertions, including 42 nested results / 336 inner assertions. Multi-case switch compositions inspect metadata and current slot shape, without code or execution equivalence claims. No new defect or target execution; all repairs remain. .1.61 continues the partial lifecycle fixture.
