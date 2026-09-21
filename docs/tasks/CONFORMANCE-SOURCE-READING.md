@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `CONFORMANCE-SOURCE-READING`
-- Status: `active` / exact decomposition; physical reading 51/143
+- Status: `active` / exact decomposition; physical reading 52/143
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.8`
 - Created: `2026-09-13`
 - Last updated: `2026-09-21`
@@ -936,14 +936,21 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
   Commit: `CONFORMANCE-SOURCE-READING.1.51 - read capture boundaries and diagnose mark-copy clearing test gap`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.52`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `b71ea10aea6b498925d0c16d5cb84c159d8b228f`.
+  Verification tier: `focused`
+  Focused checks: Complete source reading, exact baseline/window and retained canonical proof, fresh Toolbox numeric-lowering compilation controls; Knowledge, preservation, memory, both history checks, book, direct public checks and normal doctrines.
+  Canonical trigger: Ordinary bounded reading and fact reconciliation only; no runtime, dependency, public-contract, infrastructure or parent-closeout change.
   Goal: Read and understand conformance/test/Unicode group 52.
   Scope: `t/phase0_regression.t` lines 14985-16061
   Baseline evidence: 1077 fragments / 65180 decoded bytes; ordered range SHA-256 `852040242decbd55b0baa1f102069209f4fc087a79ce760ead45cf170ceb6906`.
   Dependencies: .1.51 committed with clean handoff.
   Acceptance: Read every scoped byte in complete bounded windows; retain source identity, exact comprehension, canonical Knowledge reconciliation, concrete finding ownership, focused proof and per-leaf continuity. Unread crossing constructs retain the next range owner.
-  Verification: `pending`
-  Commit: `pending`
+  Reading evidence: 11 complete windows / 1077 fragments / 65180 bytes; ordered window SHA-256 `0cd7ac0599e5f1aaa474cb501b73cd912672f6a43f5401f814707576d3b10737`.
+  Comprehension: Capture-boundary column/position suffix and runtime current-match/entry helpers distinguish stable immediate entry foo( at0..4 from local bar at4..7 and closing match at7..8. Group index0 is the first captured group; absent positional/named groups are undef, presence is1/0, outer list/map snapshots preserve earlier captures after the local slot changes. Start line/column aliases keep left-edge meaning; end projections use exclusive right-edge positions, including newline transitions. Explicit top_rule wins over the first authored marker. Named entry/match marks snapshot0/4/7 while later cursor reaches8; mark_here advances a checkpoint. clear_mark and mark_exists observe real pre-existing marks and before/after presence, including flow branches. Setup descriptor checks ASSIGN with zero raw fallback/unresolved helpers. The partial79-assertion method-contract test compares textual lowering for trim/coalesce, arithmetic reducers and Numeric::evaluate dispatch, string prefix/suffix and drop_front; these comparisons do not execute generated code. One num_min fixture has an extra authored and expected closing parenthesis; exact lowering fails compilation while the balanced twin compiles and returns2. New .2.8 owns that positive-fixture repair.
+  Verification: Unchanged canonical commit ec10be6b retains PASS for 27 completed subtests, ordinals 447–473 with 129 assertions; sequential TAP numbers and unchanged Phase0/own Perl/spec identities are verified. Fresh Toolbox lowering reproduces the num_min fixture expectation but independent compilation rejects its extra closing parenthesis; removing that one authored character compiles and returns 2 for raw_name=abcd, limit=2. New .2.8 owns positive-fixture repair. The 79-assertion method-contract test has 41 complete assertions read and only the actual argument of assertion42; .1.53 owns the suffix. Retained whole-gate proof remains1032 top-level tests, separate from fresh focused diagnosis. No production repair, dependency build, new canonical run or push is claimed.
+  Candidate proof: Exact 160-input/143-group/302-range audit and eleven-window replay pass. Preservation verifies 2,848 other files / 50,641,987 bytes, 510 prior task nodes, 53 other book files and all 1,039 headings; historical ranges, recipes, histories and parent Gitlink remain exact. The maintained numeric-fixture recipe independently reproduces original syntax failure and balanced value2. Memory, both history-pressure checks, mdBook, public mutation (69 files / 50 mutations), public selector (68 files / 11 contrast mutations) and diff checks pass. Hot histories are changes172 lines/31736 bytes and notes168/32092, below rollover. Knowledge is1,153 facts/9,243 keys. Normal nine-doctrine hooks govern landing; no new canonical run is required by this focused leaf.
+  Commit: `CONFORMANCE-SOURCE-READING.1.52 - read entry and match helpers and diagnose invalid numeric fixture`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.53`
   Status: `pending`
@@ -1989,6 +1996,16 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
   Verification: `pending`
   Commit: `pending`
 
+- ID: `CONFORMANCE-SOURCE-READING.2.8`
+  Status: `pending`
+  Goal: Correct the positive num_min lowering fixture that currently blesses invalid generated Perl.
+  Evidence: .1.52 reads the floor_value assignment in emit_context_lowers_method_contracts_for_capture_and_structured_return_values at Phase0 lines15950–15954. The input set(...num_min(...)) has an extra closing parenthesis and the expected generated string retains it. Fresh Toolbox call_spec_handler_subst output equals that expectation but fails independent compilation near }); removing exactly the extra authored parenthesis produces valid lowered code and returns2 for raw_name=abcd, limit=2. Canonical reproduction: docs/knowledge/phase0-num-min-lowering-fixture.md.
+  Scope: This malformed positive assignment fixture, its expected lowering and meaningful compilation/execution control. Preserve genuine malformed-input diagnostics and raw-host compatibility boundaries; no production repair is inferred from this fixture typo.
+  Dependencies: Required source/book/policy reading, including the remaining Phase0 body, before tracked test repair.
+  Acceptance: Correct the authored and expected parentheses, prove the original positive fixture cannot compile, independently compile and execute the corrected assignment with representative values, retain text-shape intent and surrounding numeric contracts, run focused pristine/rejection and direct-dependent checks, update Knowledge/book continuity and commit. If a public malformed-input behavior requires repair, reproduce it separately and assign its exact scope.
+  Verification: `pending`
+  Commit: `pending`
+
 - ID: `CONFORMANCE-SOURCE-READING.3`
   Status: `pending`
   Goal: Independently reconcile all source/range/reading-commit/repair evidence and close only the required reading lane with applicable verification.
@@ -2420,7 +2437,7 @@ additional reading credit from integration delivery.
 
 | Rank | Leaf | Status | Next action |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.52` | `pending` | Read Phase0 lines 14985–16061 (1,077 fragments / 65,180 baseline bytes), completing the capture_slice_col assertion and continuing source comprehension. Repairs .2.5/.2.6/.2.7 and earlier repairs retain required-reading prerequisites. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.53` | `pending` | Read Phase0 lines 16062–16879 (818 fragments / 65,478 baseline bytes), completing method-contract assertion42 and continuing the required reading. Repairs .2.5–.2.8 and earlier repairs retain prerequisites. |
 
 ## Decisions
 
@@ -2432,6 +2449,8 @@ additional reading credit from integration delivery.
 - None at decomposition. Ordinary source repairs retain startup prerequisites; later collection pressure must be measured rather than assumed away.
 
 ## Verification Log
+
+- `2026-09-21` .1.52: Eleven complete windows cover 1,077 fragments / 65,180 baseline bytes; ordered window SHA-256 0cd7ac0599e5f1aaa474cb501b73cd912672f6a43f5401f814707576d3b10737. Cumulative reading is 52/143: 65,556 fragments / 2,508,708 baseline bytes and 97 complete files. Phase0 is partial through line 16061. Unchanged canonical commit ec10be6b retains PASS for 27 completed subtests, ordinals 447–473 with 129 assertions; sequential TAP numbers and unchanged Phase0/own Perl/spec identities are verified. Fresh Toolbox lowering reproduces the num_min fixture expectation but independent compilation rejects its extra closing parenthesis; removing that one authored character compiles and returns 2 for raw_name=abcd, limit=2. New .2.8 owns positive-fixture repair. The 79-assertion method-contract test has 41 complete assertions read and only the actual argument of assertion42; .1.53 owns the suffix. Retained whole-gate proof remains1032 top-level tests, separate from fresh focused diagnosis. No production repair, dependency build, new canonical run or push is claimed.
 
 - `2026-09-21` .1.51: Eleven complete windows cover 1,353 fragments / 65,519 baseline bytes; ordered window SHA-256 8b0f53760e7cc18be9d701d37d8d7f0c56a1a7a0c93727d97ef64ea4a3f69563. Cumulative reading is 51/143: 64,479 fragments / 2,443,528 baseline bytes and 97 complete files. Phase0 is partial through line 14984. Unchanged canonical commit ec10be6b retains PASS for forty completed subtests, ordinals 407–446 with 266 assertions; sequential TAP numbers and unchanged Phase0/own Perl/spec identities are verified. Fresh four-case mark_copy diagnosis confirms original4/4 and deletion-no-op original4/4 both pass, while a seeded-zero pristine control passes4/4 and its deletion-no-op twin fails exactly assertion2 with target0 instead of undef. New .2.7 owns fixture repair; production clears the seeded target correctly. The final capture_slice_col test has its first assertion read and the second opened through the expected array; .1.52 owns the suffix. Retained whole-gate proof is1032 top-level tests, not fresh execution for this reading leaf. No runtime repair, dependency build, new full gate or push is claimed.
 
@@ -2507,6 +2526,8 @@ additional reading credit from integration delivery.
 
 ## Commit Log
 
+- `2026-09-21` .1.52: `CONFORMANCE-SOURCE-READING.1.52 - read entry and match helpers and diagnose invalid numeric fixture`; activation b71ea10ae; .1.53 follows clean handoff and empty brief.
+
 - `2026-09-21` .1.51: `CONFORMANCE-SOURCE-READING.1.51 - read capture boundaries and diagnose mark-copy clearing test gap`; activation ec10be6b0; .1.52 follows clean handoff and empty brief.
 
 - `2026-09-21` .4.1: `CONFORMANCE-SOURCE-READING.4.1 - propose finite remaining-reading evidence capacity`; activation 7b921a195; approval remains pending under .4.2.
@@ -2580,6 +2601,8 @@ additional reading credit from integration delivery.
 - `2026-09-13`: Decomposition lands under `SESSION-STARTUP-READING.3.8.0`; Git owns the resulting commit identity.
 
 ## Changelog
+
+- `2026-09-21` .1.52: Read entry/local-match projections and stable marks; own the invalid num_min positive fixture under .2.8 with independent compilation evidence. Preserve all earlier repairs.
 
 - `2026-09-21` .1.51: Read capture and named-mark execution, preserve generated-text evidence boundaries and own the confirmed clearing-observation gap under .2.7; earlier repairs remain open.
 

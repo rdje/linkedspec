@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.52 - read entry and match helpers and diagnose invalid numeric fixture
+
+Equal generated strings can both be invalid: the positive num_min fixture contains an extra input/expected parenthesis. Toolbox output plus independent compilation isolates it; a one-character-balanced input returns2. Reproduction and repair ownership: phase0-num-min-lowering-fixture / .2.8. Reading does not close repairs.
+
 ## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.51 - read capture boundaries and diagnose mark-copy clearing test gap
 
 An absent target cannot prove deletion. Original mark_copy4/4 passes a deletion-no-op; observing a seeded-zero target makes that same mutation fail the intended assertion while pristine behavior passes. .2.7 owns tracked repair after prerequisites; recipe: conformance-perl-consumer-reading. Retained canonical ec10be6b proof and fresh diagnosis remain separate.

@@ -2299,7 +2299,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Status: `active`
   Goal: Split and read all 160 entries under capability_conformance, cli_conformance, t, tests, and unicode_case.
   Children: `.3.8.0` owns exact decomposition; `CONFORMANCE-SOURCE-READING.1` owns all143 reading groups; .2 findings and .3 independent closeout stay separate.
-  Reading owner: `docs/tasks/CONFORMANCE-SOURCE-READING.md`; 143 groups/302 baseline ranges over160 inputs. Physical reading51/143:64,479 fragments/2,443,528 baseline bytes and97 complete files; Phase0 through14984. Approved113-byte cursor-inventory delta stays separately pinned. Retained ec10be6b proof covers40 completed subtests/266 assertions; .1.52 continues. Fresh deletion-no-op diagnosis owns .2.7 alongside .2.5/.2.6; all repair prerequisites remain. ADR0122/containment .15 are canonically admitted at ec10be6b.
+  Reading owner: `docs/tasks/CONFORMANCE-SOURCE-READING.md`;143 groups/302 baseline ranges over160 inputs. Physical reading52/143:65,556 fragments/2,508,708 baseline bytes and97 complete files; Phase0 through16061. Approved113-byte inventory delta stays separately pinned. Retained ec10be6b proof covers27 completed subtests/129 assertions; .1.53 continues. Fresh num_min compilation controls own .2.8 alongside .2.5–.2.7; all repair prerequisites remain. ADR0122/containment .15 are canonically admitted at ec10be6b.
   Acceptance: Include phase0, neutral contracts, fixtures, generators, and four explicitly decoded pinned Unicode
     inputs. Keep generated/fixture bytes in scope; count neither a hash nor enumeration as full reading.
   Verification: `pending`
@@ -4673,7 +4673,7 @@ startup implementation prerequisites and the rgx reading exclusion remain intact
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.52` | `pending` | Read Phase0 lines 14985–16061 (1,077 fragments / 65,180 baseline bytes), completing the capture_slice_col assertion and continuing source comprehension. Repairs .2.5/.2.6/.2.7 and earlier repairs retain required-reading prerequisites. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.53` | `pending` | Read Phase0 lines 16062–16879 (818 fragments / 65,478 baseline bytes), completing method-contract assertion42 and continuing the required reading. Repairs .2.5–.2.8 and earlier repairs retain prerequisites. |
 
 ## Reading Ledger
 

@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.52 - read entry and match helpers and diagnose invalid numeric fixture
+
+Read Phase0 14985–16061:52/143 groups,65,556 fragments/2,508,708 baseline bytes. Retained proof covers27 completed subtests/129 assertions. Exact num_min lowering matches a malformed positive expectation but fails compilation; the balanced twin returns2. .2.8 owns fixture correction and executable proof. Comprehension, exact windows and diagnosis are task/card-owned; .1.53 continues the partial method-contract test. Earlier repairs remain.
+
 ## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.51 - read capture boundaries and diagnose mark-copy clearing test gap
 
 Read Phase0 13632–14984:51/143 groups,64,479 fragments/2,443,528 baseline bytes. Retained ec10be6b proof covers40 completed subtests/266 assertions. Four fresh controls confirm the mark_copy clearing observation gap; .2.7 owns repair. Production clears a seeded-zero target. Exact windows, comprehension and reproduction are task/card-owned; .1.52 continues the partial capture-column test. All earlier repairs and prerequisites remain.
