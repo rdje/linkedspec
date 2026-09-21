@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.53 - read collection and branch lowering contracts
+
+Collection/branch equivalence tests compare metadata and selected ICODE/ACODE/LXCODE fields, separately from executed push controls. Two bare-target push inputs retain inaccurate wrapped-target labels; .2.9 owns wording correction, with exact lowering in conformance-perl-consumer-reading. Static child-call precedence remains intact.
+
 ## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.52 - read entry and match helpers and diagnose invalid numeric fixture
 
 Equal generated strings can both be invalid: the positive num_min fixture contains an extra input/expected parenthesis. Toolbox output plus independent compilation isolates it; a one-character-balanced input returns2. Reproduction and repair ownership: phase0-num-min-lowering-fixture / .2.8. Reading does not close repairs.

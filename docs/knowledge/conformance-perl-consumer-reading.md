@@ -33,8 +33,10 @@ answers:
   - which task fixes the mark_copy deletion observation gap
   - what do Phase0 entry and local match projection tests establish
   - which numeric lowering fixture compares invalid generated code
+  - what do Phase0 collection and branch lowering tests establish
+  - why do two push assertions still describe wrapped target symbols
 date: 2026-09-21
-status: groups 34–52 physically read; Phase0 partial through line 16061; all runtime repair prerequisites remain
+status: groups 34–53 physically read; Phase0 partial through line 16879; all runtime repair prerequisites remain
 tags: [conformance, perl, reading, diagnostics, generated-source]
 evidence: "CONFORMANCE-SOURCE-READING.1.34 at activation d10305097eb502c0fe29309ec230437396e26d82; eleven complete windows, 1500 fragments, 56255 bytes, ordered window SHA-256 db04deab6c0365f8bc454e2695d410324a120104a232c213346f2b23ad16aef3. Five managed Perl targets pass43 top-level tests; neutral named marks3, diagnostics20 and duplicate-slot59 mutations pass."
 evidence_update_2026_09_21: "Ten complete windows cover 1,500 fragments / 51,804 baseline bytes; ordered window SHA-256 1164b42887bab92a4ea03d85fcaf4a9dc0c6913fc7607fe21a0d66cb0a424992. Cumulative reading is 35/143, 46,538 fragments / 1,405,327 baseline bytes and 86 complete files; gap tests remain partial through line 1026. Retained exact integration commit 87b35665e proof passes generated-source (6), inspector (2) and gap (124) tests (132 total), with unchanged source identities. The old uniform-identity audit fails on the approved integration delta; its corrected recipe passes all 160 inputs/143 groups/302 ranges and six rejected snapshot mutations. No new runtime execution, native build, full CI or push is claimed for this focused reading leaf."
@@ -42,8 +44,8 @@ evidence_update_2026_09_21_group36: "Eleven complete windows cover 1,500 fragmen
 reverify: "bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/cli_conformance_runner.t t/complete_named_mark_contract.t t/diagnostic_output_perl_contract.t t/duplicate_regex_slot_identity_perl_contract.t t/generated_source_contract.t; bash tools/run_python_project_data.sh tools/check_complete_named_mark_contract.py; bash tools/run_python_project_data.sh tools/check_diagnostic_output_contract.py; bash tools/run_python_project_data.sh tools/check_duplicate_regex_slot_identity_contract.py"
 evidence_update_2026_09_21_group37: "Fourteen complete windows cover 1,500 fragments / 63,613 baseline bytes; ordered window SHA-256 98d4de26a6f747975c45fe91277d218c6947936925d1ae233586706bef952d64. Cumulative reading is 37/143: 49,538 fragments / 1,527,897 baseline bytes and 97 complete files. Phase0 remains partial at lines 1–43. Fresh managed metadata/oracle checks pass 9 top-level tests. Unchanged integration commit 87b35665e retains native-loader (5), MCP binding/dispatch/stdio (23), admission (13) and Phase0 1032 proof. Full-target execution grants no reading credit to the unread Phase0 body. Header correction .2.4 is pending after prerequisites; helper repair .2.3 and existing runtime repairs remain open. No dependency build, new canonical run or push is claimed."
 evidence_update_2026_09_21_group38: "Eleven complete windows cover 1,067 fragments / 65,529 baseline bytes; ordered window SHA-256 f57116fee0db80f49969546da5cd033988e06b55191fc88358b7c6d6d334fd3e. Cumulative reading is 38/143: 50,605 fragments / 1,593,426 baseline bytes and 97 complete files. Phase0 is partial through line 1110. Exact unchanged canonical commit 87b35665e supplies PASS for all 38 fully read subtests (ordinals 2–39). The crossing facade error-state test remains partial; its suffix is .1.39-owned. The complete 1032-test gate remains retained historical proof, not new execution or reading credit. No new defect, runtime repair, dependency build, full CI or push is claimed; all existing repairs retain their prerequisites."
-evidence_phase0_checkpoint: "Eleven complete windows cover 1,077 fragments / 65,180 baseline bytes; ordered window SHA-256 0cd7ac0599e5f1aaa474cb501b73cd912672f6a43f5401f814707576d3b10737. Cumulative reading is 52/143: 65,556 fragments / 2,508,708 baseline bytes and 97 complete files. Phase0 is partial through line 16061. Unchanged canonical commit ec10be6b retains PASS for 27 completed subtests, ordinals 447–473 with 129 assertions; sequential TAP numbers and unchanged Phase0/own Perl/spec identities are verified. Fresh Toolbox lowering reproduces the num_min fixture expectation but independent compilation rejects its extra closing parenthesis; removing that one authored character compiles and returns 2 for raw_name=abcd, limit=2. New .2.8 owns positive-fixture repair. The 79-assertion method-contract test has 41 complete assertions read and only the actual argument of assertion42; .1.53 owns the suffix. Retained whole-gate proof remains1032 top-level tests, separate from fresh focused diagnosis. No production repair, dependency build, new canonical run or push is claimed."
-reverify_phase0_checkpoint: "Replay .1.52 using conformance-source-reading-coverage; compare ordinals447–473 and unchanged own Perl sources against canonical commit ec10be6b. Retained execution grants no additional reading credit."
+evidence_phase0_checkpoint: "Eleven complete windows cover 818 fragments / 65,478 baseline bytes; ordered window SHA-256 81bcf143f79f0bceb1342b47b28ffae9f64dec588fbb8daa76da2a9ad35d14c8. Cumulative reading is 53/143: 66,374 fragments / 2,574,186 baseline bytes and 97 complete files. Phase0 is partial through line 16879. Unchanged canonical commit ec10be6b retains PASS for 13 completed subtests, ordinals 474–486 with 224 assertions; sequential TAP numbers and unchanged Phase0/own Perl/spec identities are verified. Fresh Toolbox extraction confirms exactly two wrapped-target descriptions actually exercise bare items bindings; .2.9 owns correction while preserving the two-bare-token static-handler precedence. The lifecycle switch/case equivalence test has11 completed assertions and the final compound assertion read only through its DEFAULT predicate; .1.54 owns its suffix. Retained whole-gate proof remains1032 top-level tests, separate from fresh focused diagnosis. The malformed num_min fixture remains .2.8-owned; no runtime repair, dependency build, new canonical run or push is claimed."
+reverify_phase0_checkpoint: "Replay .1.53 using conformance-source-reading-coverage; compare ordinals474–486 and unchanged own Perl sources against canonical commit ec10be6b. Retained execution grants no additional reading credit."
 reverify_group38: "Replay .1.38 using conformance-source-reading-coverage and compare its 38 complete subtest names with retained canonical commit 87b35665e; this grants no new source-reading or runtime credit."
 reverify_group37: "bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/noncurrent_helper_metadata.t t/oracle_root_target_regex_semantics.t; retain unchanged dated MCP/native-loader proof separately."
 reverify_group36: "bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/logical_helper_perl_contract.t t/map_leaves_mutation_perl_contract.t; reproduce the helper observation with HELPER_PATH below, and retain the dated gap/MCP proof separately."
@@ -378,38 +380,73 @@ print('PASS: original fixture misses deletion no-op; seeded-zero control rejects
 MARK_COPY_OBSERVATION
 ```
 
+## Push descriptions still claim wrapped targets
+
+Two assertions in `emit_context_lowers_push_method_contract` describe wrapped
+target symbols, but their inputs are `push(items, array(tag, name))` and
+`push(items, retv)`. Fresh Toolbox lowering confirms bare scalar-held items; the
+array constructor supplies the value. Two bare tokens retain static-rule-handler
+precedence, with binding append as the fallback. [[perl-uniform-binding-runtime]]
+owns that distinction. The unchanged canonical subtest passes all 19 assertions.
+`CONFORMANCE-SOURCE-READING.2.9` owns correcting these two descriptions after
+prerequisites while preserving actual assertions and retired-selector rejection.
+This is test wording drift, not a runtime defect or authorization to restore wrappers.
+
+```bash
+bash tools/project_data_run.sh env PERL5LIB= perl -Iperl - <<'PUSH_LABELS'
+use strict;
+use warnings;
+use LinkedSpec;
+use JSON::PP;
+open my $fh, '<', 't/phase0_regression.t' or die $!;
+local $/;
+my $source = <$fh>;
+my ($block) = $source =~ /(subtest 'emit_context_lowers_push_method_contract'.*?)(?=\nsubtest ')/s;
+die 'missing subtest' unless defined $block;
+my @cases;
+while ($block =~ /LinkedSpec::call_spec_handler_subst\('Top', '([^']+)'\),\n\s*qr\/[^\n]+\n\s*'([^']*wrapped target[^']*)'/g) {
+    my ($action, $description) = ($1, $2);
+    my $lowered = LinkedSpec::call_spec_handler_subst('Top', $action);
+    die 'expected bare target' unless $action =~ /^push\(items, /;
+    die 'expected typed binding lowering' unless $lowered =~ /BindingRuntime::push_value\(\$items, "items", /;
+    push @cases, { action=>$action, description=>$description, lowered=>$lowered };
+}
+die 'expected exactly two stale descriptions' unless @cases == 2;
+print JSON::PP->new->canonical->pretty->encode(\@cases);
+PUSH_LABELS
+```
+
 ## Phase0 reading checkpoint
 
-Group 52 reads Phase0 lines 14985–16061. The crossing capture-column test finishes,
-then boundary position 6 is distinct from cursor 7. Entry remains foo( at offsets 0–4
-while local matches change from bar at 4–7 to the closing delimiter at 7–8. Group 0
-means the first captured group; missing positional/named captures yield undef.
-Presence is 1/0. Stored list/map projections retain earlier outer contents when the
-active slot changes; this is not deep-copy proof. The canonical boundary remains
-[[perl-source-location-slice-compatibility]]. Start aliases preserve left-edge line
-and column; end coordinates project exclusive right edges, including newlines.
+Group 53 reads Phase0 lines 16062–16879. The crossing method-contract test finishes
+assertions 42–79: collection slices/tails, first/last, hash projections, child-call
+assignment and regex substitution compare generated text; its ending descriptor
+checks RETURN/ASSIGN/REGEX_SUBST. Textual count normalization does not establish
+executed numeric-domain coverage. The num_min positive-fixture defect remains
+owned by .2.8 and [[phase0-num-min-lowering-fixture]].
 
-The root test exercises first-marker selection over an earlier ordinary rule and
-explicit top_rule precedence. Entry/match marks snapshot 0/4/7 while the cursor later
-reaches 8. mark_here advances a checkpoint; clear_mark and mark_exists explicitly
-observe a pre-existing mark and its removal, also through if/else branches. These
-controls do not repair the distinct mark_copy missing-source gap under .2.7.
-Canonical containers return the expected hash payload with current bare bindings.
+Push lowering distinguishes typed binding append, handler-first two-token dispatch,
+scoped/indexed child calls and implicit rule accumulation. Executed controls append
+a/b, retain the whole child payload as one element, and guard a capture append with
+is_nonempty. A generated-source dump counts one scalar-held items declaration;
+it is not independently deployed module execution. The two stale labels above
+remain separate from correct current push behavior.
 
-Setup metadata checks ASSIGN and zero raw fallback/unresolved helpers. The next
-79-assertion test has 41 complete textual comparisons for trim/coalesce, numeric
-dispatch, prefix/suffix predicates and drop_front. Lowering equality does not prove
-compilability or execution: the num_min positive input and expectation share one
-extra parenthesis. [[phase0-num-min-lowering-fixture]] preserves exact failing
-compilation and the balanced control returning 2; .2.8 owns tracked correction.
-Known malformed-helper and compatibility boundaries stay with
-[[perl-actionir-ast-covered-call-diagnostics]] and [[perl-actionir-fallback-boundary-audit]].
+Snapshot/assignment and nested returns check selected typed-binding and internal
+accumulator routes, mixed index/key paths, legacy tagged return and return_undef.
+[[perl-uniform-binding-runtime]] owns current binding/accumulator distinctions.
+Fluent/block pairs compare readiness/node coverage and zero fallback/unresolved
+metadata. Selected collection/lifecycle pairs additionally compare ICODE, ACODE
+or LXCODE exactly; these checks do not establish general runtime equivalence.
+Nested arrays/hashes compose through IF/ELIF/ELSE/ENDIF and
+SWITCH/CASE/DEFAULT/ENDSWITCH structures.
 
-Twenty-seven completed subtests retain canonical PASS at ordinals 447–473 with 129
-assertions. Assertion 42 of the method-contract test stops after its actual argument;
-.1.53 owns the expected value and suffix. Reading is 52/143, 65,556 fragments /
-2,508,708 baseline bytes and 97 complete files. Fresh numeric-fixture diagnosis is
-separate from retained canonical execution; .2.5–.2.8 and prior repairs remain open.
+Thirteen completed subtests retain canonical PASS at ordinals 474–486 with 224
+assertions. The final lifecycle switch/case test has 11 completed assertions;
+its twelfth compound predicate stops after DEFAULT. The remaining ENDSWITCH
+predicate, description and closure belong to .1.54. Reading is 53/143, 66,374
+fragments / 2,574,186 baseline bytes and 97 complete files. Repairs .2.5–.2.9
+and all earlier prerequisite-gated repairs remain open.
 
 Related facts: [[perl-callable-codeblock-literal-record]], [[neutral-cli-fixture-runner]],
 [[complete-named-mark-perl-rust-parity]], [[perl-diagnostic-output-events]],

@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.53 - read collection and branch lowering contracts
+
+Read Phase0 16062–16879:53/143 groups,66,374 fragments/2,574,186 baseline bytes. Retained proof covers13 completed subtests/224 assertions. Fresh lowering confirms two push descriptions still claim wrapped targets despite bare inputs; .2.9 owns correction. Exact windows, comprehension and recipe are task/card-owned. .1.54 continues the partial lifecycle switch/case test; all prior repairs remain.
+
 ## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.52 - read entry and match helpers and diagnose invalid numeric fixture
 
 Read Phase0 14985–16061:52/143 groups,65,556 fragments/2,508,708 baseline bytes. Retained proof covers27 completed subtests/129 assertions. Exact num_min lowering matches a malformed positive expectation but fails compilation; the balanced twin returns2. .2.8 owns fixture correction and executable proof. Comprehension, exact windows and diagnosis are task/card-owned; .1.53 continues the partial method-contract test. Earlier repairs remain.

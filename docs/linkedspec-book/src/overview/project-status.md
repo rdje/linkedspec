@@ -498,19 +498,18 @@ the director's focused-verification grant used for this correction and the separ
 supporting-reading closeout. Reading completion establishes audited comprehension;
 it does not close the six grammar/literal repair roots or establish runtime signoff.
 Conformance, test and Unicode reading has exact ownership for all 160 inputs in
-143 bounded groups covering 8,257,059 baseline decoded bytes. Fifty-two groups account for
-65,556 fragments and 2,508,708 baseline bytes, including 97 complete files. Phase0 reading
-reaches line 16061. Entry text, captures and positions stay stable while local matches change;
-start coordinates describe left edges and end coordinates describe exclusive right edges.
-Named marks retain snapshots as the cursor advances. The explicit clear_mark tests observe
-pre-existing marks, separately from the mark_copy fixture gap under .2.7.
-Twenty-seven completed subtests retain canonical proof with 129 assertions. A positive
-num_min lowering fixture has an extra parenthesis in both its input and expected output:
-string equality passes, but independent compilation fails. A balanced control compiles and
-returns the correct value. Repair .2.8 owns corrected syntax and executable proof. MethodExpr
-.2.5, EmitContext descriptions .2.6 and mark_copy .2.7 remain open. The numeric method-contract
-test is partial after 41 of 79 assertions; .1.53 continues. The separately pinned 113-byte
-inventory delta and all repair prerequisites remain unchanged.
+143 bounded groups covering 8,257,059 baseline decoded bytes. Fifty-three groups account for
+66,374 fragments and 2,574,186 baseline bytes, including 97 complete files. Phase0 reading
+reaches line 16879. Collection and structured-return tests distinguish generated-text checks,
+descriptor metadata and selected parser execution. Push controls execute value append, whole
+child-result accumulation and guarded capture append. Fluent/block pairs compare canonical
+nodes and selected generated code fields; this is narrower than general runtime equivalence.
+Thirteen completed subtests retain canonical proof with 224 assertions. Two push descriptions
+still claim wrapped targets although their inputs use bare bindings; .2.9 owns that wording
+repair. MethodExpr .2.5, EmitContext descriptions .2.6, mark_copy .2.7 and the invalid num_min
+positive fixture .2.8 remain open. The final lifecycle switch/case test has 11 of 12 assertions
+fully read; .1.54 continues its final predicate. The pinned 113-byte inventory delta and all
+repair prerequisites remain unchanged.
 
 The director approved the finite documentation-capacity proposal under ADR0122.
 Containment `.15` admits exactly fourteen controls for the remaining 93 reading
@@ -537,8 +536,8 @@ The history files keep their 512-line / 65,536-byte caps, mandatory rollover and
 immutable archives. General card/part limits remain unchanged. Admission consumes
 one of the conservative 99 reserve units; the remaining 98 units are forecast
 after actual admission overhead. This capacity does not complete source reading
-or repair tests: reading now reaches 52/143, `.1.53` is next, and the test repairs
-`.2.5`–`.2.8` remain open.
+or repair tests: reading now reaches 53/143, `.1.54` is next, and the test repairs
+`.2.5`–`.2.9` remain open.
 
 The director has requested integration guides and runnable consumer examples for
 Perl, Rust, Dart, Julia and Lua, covering recursive checkout, dependency preparation
