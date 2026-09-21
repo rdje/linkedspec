@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.76 - read shipped grammar runtime smokes and adapter boundaries
+
+VHDL declaration/payload source checks and shipped grammar readiness metadata retain bounded claims. Six runtime-bearing subtests separately observe ifelse quiet undef output, hlink exact delimiter ASTs, lib_reader grouped attributes and context, EBNF logging annotations, seven portmap classifications and pplugin body-text parsing followed by legacy Perl callback execution. Quiet undef alone does not prove branch execution; pplugin readiness does not make callbacks portable. Existing diagnostic/null-output, hlink migration, EBNF migration and pplugin boundary cards agree with these observations. No new defect or dependency snapshot validation is claimed.
+
 ## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.75 - read quote boundaries and shipped grammar migration checks
 
 Quoted/commented/nested semicolons preserve statement boundaries; backtick payloads remain authored source. EBNF, ds_vhistory, regdef, tablegrep and VHDL helper migrations are observed through metadata, canonical nodes and source patterns. Regdef adds a four-assertion parser smoke including the exact CTRL/ENABLE/MODE AST. Zero raw fallback or blocked-rule counts do not independently establish arbitrary EBNF input acceptance or cross-backend runtime parity. The approved dependency grammar snapshot remains unused; canonical fallback and EBNF migration facts retain their own evidence.

@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `CONFORMANCE-SOURCE-READING`
-- Status: `active` / exact decomposition; physical reading 75/143
+- Status: `active` / exact decomposition; physical reading 76/143
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.8`
 - Created: `2026-09-13`
 - Last updated: `2026-09-21`
@@ -1345,14 +1345,21 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
   Commit: `CONFORMANCE-SOURCE-READING.1.75 - read quote boundaries and shipped grammar migration checks`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.76`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `cadf2cc0d4fcf988c13ac69e8929e2a0bdad56c2`.
+  Verification tier: `focused`
+  Focused checks: Complete source/window/coverage and retained TAP checks; reconcile observation boundaries with canonical Knowledge; preservation, memory, histories, rendered book, direct public checks and normal doctrines.
+  Canonical trigger: Ordinary bounded reading and fact reconciliation; no source/public-contract/dependency/infrastructure change or parent closeout.
   Goal: Read and understand conformance/test/Unicode group 76.
   Scope: `t/phase0_regression.t` lines 42088-42887
   Baseline evidence: 800 fragments / 65456 decoded bytes; ordered range SHA-256 `f7a4521038b590b5c26699bfeffe4a7e5f2a0c2aec8840bc80d881864bca9bac`.
   Dependencies: .1.75 committed with clean handoff.
   Acceptance: Read every scoped byte in complete bounded windows; retain source identity, exact comprehension, canonical Knowledge reconciliation, concrete finding ownership, focused proof and per-leaf continuity. Unread crossing constructs retain the next range owner.
-  Verification: `pending`
-  Commit: `pending`
+  Reading evidence: 11 complete windows / 800 fragments / 65456 bytes; ordered window SHA-256 `4cf7775ac2ba5691da7e40961a1fffa66cb8f9db6837120d880949270205683c`.
+  Comprehension: Completes VHDL concurrent-assignment source denial, then port/declaration/payload/lowercase source checks. Simenv, ifelse, BNF, operators_try, DT, hlink_substitution, lib_reader, sdce, ebnf, portmap and pplugin checks distinguish helper metadata and source spelling from runtime results. Ifelse checks undef output and quiet stdout without a sink; this alone cannot prove all control-flow branches ran. Hlink checks three exact delimiter ASTs; lib_reader checks grouped attribute output, clear last_error and optional top_rule stability; EBNF checks normalized logging_annotation plus PUSH/CAPTURE_SLICE_START and absent CAPTURE_IF; portmap checks seven classifications including zero bit index and concatenation. Pplugin checks exact parsed body text, then deliberately normalizes it into legacy Perl coderefs and checks values 3 and ok, without extending portability. Tkgui descriptor coverage is partial after the three-rule metadata loop; .1.77 owns canonical-node and summary assertions. No new repair is established.
+  Verification: Unchanged canonical commit ec10be6b retains PASS for 33 completed subtests, ordinals 893–925 with 650 direct assertions and no nested plans. Exact TAP numbering and source identity are verified. VHDL source migrations and shipped-spec readiness remain bounded metadata/source checks. Runtime smokes cover ifelse undef/quiet stdout, three hlink ASTs, lib_reader grouped attributes, EBNF logging annotations and seven portmap classifications. Pplugin preserves body text before its legacy Perl adapter creates and executes coderefs. Tkgui is partial after its three-rule metadata loop; .1.77 owns node/summary assertions. No new defect, fresh target execution, repair, dependency build, canonical run or push is claimed; .2.5–.2.12 and all prerequisites remain.
+  Candidate proof: Exact 160-file/143-group/302-range audit and eleven-window reconstruction PASS; independently summed 76 groups total 92,382 fragments / 4,019,804 baseline bytes. Preserve 2,851 other files / 50,660,630 bytes, 515 prior task nodes, 53 other book files and all 1,039 headings, prior recipes/history and gitlink. Memory 60; Knowledge 1,155 facts / 9,277 keys; histories 268/44,373 and 266/46,513 lines/bytes. Rendered book, direct public checks and diff check PASS; normal doctrine hooks govern focused landing.
+  Commit: `CONFORMANCE-SOURCE-READING.1.76 - read shipped grammar runtime smokes and adapter boundaries`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.77`
   Status: `pending`
@@ -2639,7 +2646,7 @@ additional reading credit from integration delivery.
 
 | Rank | Leaf | Status | Next action |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.76` | `pending` | Read Phase0 lines 42088–42887 (800 fragments / 65,456 baseline bytes), completing the VHDL concurrent-assignment source test and subsequent grammar migration checks. Repairs .2.5–.2.12 and earlier repairs retain required source/book/policy reading prerequisites. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.77` | `pending` | Read Phase0 lines 42888–43916 (1,029 fragments / 65,477 baseline bytes), completing tkgui canonical-node and migration-summary checks before subsequent tests. Repairs .2.5–.2.12 and earlier repairs retain required source/book/policy reading prerequisites. |
 
 ## Decisions
 
@@ -2651,6 +2658,8 @@ additional reading credit from integration delivery.
 - None at decomposition. Ordinary source repairs retain startup prerequisites; later collection pressure must be measured rather than assumed away.
 
 ## Verification Log
+
+- `2026-09-21` .1.76: 11 complete windows cover 800 fragments / 65,456 baseline bytes; ordered window SHA-256 4cf7775ac2ba5691da7e40961a1fffa66cb8f9db6837120d880949270205683c. Cumulative reading is 76/143 groups, 92,382 fragments / 4,019,804 baseline bytes and 97 complete files. Phase0 is partial through line 42887. Unchanged canonical commit ec10be6b retains PASS for 33 completed subtests, ordinals 893–925 with 650 direct assertions and no nested plans. Exact TAP numbering and source identity are verified. VHDL source migrations and shipped-spec readiness remain bounded metadata/source checks. Runtime smokes cover ifelse undef/quiet stdout, three hlink ASTs, lib_reader grouped attributes, EBNF logging annotations and seven portmap classifications. Pplugin preserves body text before its legacy Perl adapter creates and executes coderefs. Tkgui is partial after its three-rule metadata loop; .1.77 owns node/summary assertions. No new defect, fresh target execution, repair, dependency build, canonical run or push is claimed; .2.5–.2.12 and all prerequisites remain.
 
 - `2026-09-21` .1.75: Eleven complete windows cover 892 fragments / 65,464 baseline bytes; ordered window SHA-256 0fd9f0f9d1f4d1539f116ce5aeaa7290432c1c7c3c0115ce1d88086f81689311. Cumulative reading is 75/143: 91,582 fragments / 3,954,348 baseline bytes and 97 complete files. Phase0 is partial through line 42087. Unchanged canonical commit ec10be6b retains PASS for thirty-six completed subtests, ordinals 857–892 with 470 direct assertions and no nested plans. Exact TAP numbering and source identity are verified. Quote-aware statement boundaries preserve nested and quoted semicolons. EBNF, ds_vhistory, regdef, tablegrep and VHDL checks primarily observe descriptor metadata and helper source spelling; regdef also executes a parser and checks an exact AST. Readiness metadata is not arbitrary grammar acceptance or cross-backend runtime proof. The concurrent VHDL assignment source test remains partial after its positive reorder assertion; .1.76 owns the suffix. No new defect, fresh target execution, repair, dependency build, canonical run or push is claimed; .2.5–.2.12 and all prerequisites remain.
 
@@ -2774,6 +2783,8 @@ additional reading credit from integration delivery.
 
 ## Commit Log
 
+- `2026-09-21` .1.76: `CONFORMANCE-SOURCE-READING.1.76 - read shipped grammar runtime smokes and adapter boundaries`; activation cadf2cc0d; .1.77 follows clean handoff and empty brief.
+
 - `2026-09-21` .1.75: `CONFORMANCE-SOURCE-READING.1.75 - read quote boundaries and shipped grammar migration checks`; activation 90235115c; .1.76 follows clean handoff and empty brief.
 
 - `2026-09-21` .1.74: `CONFORMANCE-SOURCE-READING.1.74 - read source boundary projections and legacy classification checks`; activation 8bb0fd15c; .1.75 follows clean handoff and empty brief.
@@ -2895,6 +2906,8 @@ additional reading credit from integration delivery.
 - `2026-09-13`: Decomposition lands under `SESSION-STARTUP-READING.3.8.0`; Git owns the resulting commit identity.
 
 ## Changelog
+
+- `2026-09-21` .1.76: Grammar metadata and source checks remain distinct from bounded parser results and legacy Perl adapter execution.
 
 - `2026-09-21` .1.75: Read quote-aware statement boundaries and shipped grammar migration checks; distinguish metadata/source observations from the exact regdef runtime result.
 

@@ -498,34 +498,37 @@ the director's focused-verification grant used for this correction and the separ
 supporting-reading closeout. Reading completion establishes audited comprehension;
 it does not close the six grammar/literal repair roots or establish runtime signoff.
 Conformance, test and Unicode reading has exact ownership for all 160 inputs in
-143 bounded groups covering 8,257,059 baseline decoded bytes. Seventy-five groups account for
-91,582 fragments and 3,954,348 baseline bytes, including 97 complete files. Phase0 reading
-reaches line 42087 and covers quote boundaries and shipped grammar migration checks.
+143 bounded groups covering 8,257,059 baseline decoded bytes. Reading now covers 76/143 groups, 92,382 fragments / 4,019,804 baseline bytes and 97 complete files.
+Phase0 reaches line 42887.
 
-Quoted and balanced payloads preserve their internal semicolons. For example, a backtick
-payload remains source text inside one compatibility statement; the following CALL stays
-separate. Those tests inspect classification and preserved text, without executing backticks.
+This checkpoint separates grammar migration checks from observed parser results.
+VHDL checks helper-based declaration and payload source forms. Descriptor checks
+for the other shipped grammars inspect canonical nodes, fallback counts and
+readiness summaries; those fields alone do not establish runtime portability.
 
-EBNF, ds_vhistory, regdef, tablegrep and VHDL tests inspect canonical helper nodes,
-compatibility counts, migration summaries and source spelling. Regdef also constructs and
-executes a parser and checks the exact CTRL register result with ENABLE/RW and MODE/RO fields.
-That result check provides a bounded runtime observation. Descriptor readiness alone does
-not establish acceptance of arbitrary EBNF inputs or runtime parity across backends.
+The retained runtime examples are concrete: hlink turns foo[bar]{baz} into
+["foo", "bar", "{baz}"]; lib_reader returns the expected cell/attribute tree;
+EBNF preserves the log_rule annotation with expr and term arguments; portmap
+classifies seven inputs, including bar[0] and a concatenation. Ifelse returns
+undef quietly without a caller sink. Quiet undef output alone does not establish
+that every branch in its sample input executed.
 
-The approved RGX/PGEN grammar snapshot has not been used or validated by this reading slice.
-Future use retains snapshot ownership and input identity requirements. VHDL source checks
-cover cursor and capture helpers, entry text/groups and helper-based accumulator returns.
+Pplugin first returns exact body text for foo and bar. Its separate legacy Perl
+adapter then creates callbacks whose results are 3 and ok. This test preserves
+the boundary between parsing plugin definitions and executing Perl body text.
+It grants no cross-backend callback contract and does not use the approved
+RGX/PGEN EBNF snapshot.
 
-**The earlier generated-code equivalence claim remains withdrawn:** .2.10 owns absent
-uppercase-slot comparisons elsewhere; .2.11 owns source-capture recipes and .2.12 owns stale
-assignment descriptions. The separately admitted typed-source runtime contract is unchanged.
+**The earlier generated-code equivalence claim remains withdrawn:** .2.10 owns
+absent uppercase-slot comparisons elsewhere. Source-capture recipes .2.11 and
+assignment descriptions .2.12 also remain open. MethodExpr .2.5, EmitContext
+labels .2.6, mark_copy .2.7, invalid num_min fixture .2.8, push labels .2.9 and
+broader lifecycle repairs retain their prerequisites.
 
-Thirty-six completed subtests retain canonical proof with 470 direct assertions and no nested
-plans. No new defect or fresh target execution is claimed. The VHDL concurrent-assignment
-source test is partial after its positive reorder assertion; .1.76 continues. MethodExpr .2.5,
-EmitContext descriptions .2.6, mark_copy .2.7, invalid num_min fixture .2.8, push descriptions
-.2.9 and broader lifecycle repairs remain open. The pinned 113-byte delta and all prerequisites
-remain.
+The 33 completed subtests retain canonical proof with 650 direct assertions and
+no nested plans. No new defect or fresh target execution is claimed. Tkgui is
+partial after its three-rule metadata loop; .1.77 continues with node/summary
+assertions. The pinned 113-byte inventory delta remains separate.
 
 The director approved the finite documentation-capacity proposal under ADR0122.
 Containment `.15` admits exactly fourteen controls for the remaining 93 reading
@@ -552,7 +555,7 @@ The history files keep their 512-line / 65,536-byte caps, mandatory rollover and
 immutable archives. General card/part limits remain unchanged. Admission consumes
 one of the conservative 99 reserve units; the remaining 98 units are forecast
 after actual admission overhead. This capacity does not complete source reading
-or repair tests: reading now reaches 75/143, `.1.76` is next, and the test and recipe
+or repair tests: reading now reaches 76/143, `.1.77` is next, and the test and recipe
 repairs `.2.5`–`.2.12` remain open.
 
 The director has requested integration guides and runnable consumer examples for

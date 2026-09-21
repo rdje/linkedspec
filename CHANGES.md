@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.76 - read shipped grammar runtime smokes and adapter boundaries
+
+Read Phase0 42088–42887: 76/143 groups, 92,382 fragments / 4,019,804 baseline bytes and 97 complete files. Retained proof covers 33 completed subtests, ordinals 893–925 with 650 direct assertions and no nested plans. Grammar metadata and source checks remain distinct from bounded parser results and legacy Perl adapter execution. Existing repairs remain; no new defect or fresh execution; .1.77 continues.
+
 ## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.75 - read quote boundaries and shipped grammar migration checks
 
 Read Phase0 41196–42087: 75/143 groups, 91,582 fragments / 3,954,348 baseline bytes. Retained thirty-six-subtest proof has 470 assertions for quote-aware statement boundaries and shipped grammar migration checks. Descriptor/source observations remain distinct from the exact regdef parser result. Existing repairs remain; no new defect or fresh execution; .1.76 completes the VHDL concurrent-assignment source test.

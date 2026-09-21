@@ -1,11 +1,11 @@
 # MEMORY
 
-- activation_commit: `90235115cc8bd2950ed603abe0c020a0fe22c526` — clean conformance .1.74 checkpoint; .1.75 activation.
-- latest_completed_leaf: `CONFORMANCE-SOURCE-READING.1.75 - read quote boundaries and shipped grammar migration checks`; exact reading and retained TAP proof.
-- active_work_unit: `CONFORMANCE-SOURCE-READING.1.76` — pending required source reading.
-- next_action: Read Phase0 lines 42088–42887 (800 fragments / 65,456 baseline bytes), completing the VHDL concurrent-assignment source test and subsequent grammar migration checks. Repairs .2.5–.2.12 and earlier repairs retain required source/book/policy reading prerequisites.
+- activation_commit: `cadf2cc0d4fcf988c13ac69e8929e2a0bdad56c2` — clean conformance .1.75 checkpoint; .1.76 activation.
+- latest_completed_leaf: `CONFORMANCE-SOURCE-READING.1.76 - read shipped grammar runtime smokes and adapter boundaries`; exact reading and retained TAP proof.
+- active_work_unit: `CONFORMANCE-SOURCE-READING.1.77` — pending required source reading.
+- next_action: Read Phase0 lines 42888–43916 (1,029 fragments / 65,477 baseline bytes), completing tkgui canonical-node and migration-summary checks before subsequent tests. Repairs .2.5–.2.12 and earlier repairs retain required source/book/policy reading prerequisites.
   Named-argument direction PARSER-AUTHORING-APIS.4 is approved and parked; other authoring proposals and approved formats stay parked.
-- in_flight_uncommitted: none; reading .1.75 is verified and committed before the next leaf.
+- in_flight_uncommitted: none; reading .1.76 is verified and committed before the next leaf.
 - blockers: Wrapper startup .7 remains open; warned-child group matched, but denied-call cause and original lost PUC stream remain unproved. Recovery/purge stay prohibited.
 - current_rust_warning_debt: Repeated carriers report 1,870 pgen plus 26 rgx-core output warnings; RUST-DEPENDENCY-WARNING-ZERO.1-.7 own public RGX reports and result verification without suppression; dependency internals are excluded.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
@@ -57,4 +57,4 @@
   Changes segment4973 preserves 117 lines /29044 bytes from clean 5fab5aa6; old archive rows/bytes remain exact.
 - dependency_boundary: September20: LinkedSpec integrates only with RGX via its published integration document/APIs/contracts. RGX owns PGEN; no separate PGEN procedure, internal inspection/analysis, patches or pin changes.
   Normal documented builds remain authorized; retain caches. Startup .80.1-.4 may observe public behavior or track upstream repairs, not investigate dependency internals.
-- latest_bootstrap_read: 2026-09-21 — roadmap Yes / full codebase No / physical mdBook Yes; five backend lanes and supporting .3.7 closed. Conformance 75/143 reads 91,582 fragments / 3,954,348 baseline bytes; 68 groups remain, including conformance tests and four decoded Unicode inputs. Later .3.9-.3.11, formal book .4 and policy .5 remain; no runtime repair closes.
+- latest_bootstrap_read: 2026-09-21 — roadmap Yes / full codebase No / physical mdBook Yes; five backend lanes and supporting .3.7 closed. Conformance 76/143 reads 92,382 fragments / 4,019,804 baseline bytes; 67 groups remain, including conformance tests and four decoded Unicode inputs. Later .3.9-.3.11, formal book .4 and policy .5 remain; no runtime repair closes.
