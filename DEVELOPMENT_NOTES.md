@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.41 - read Perl plugin compatibility and spec lookup tests
+
+Legacy plugin fixture results remain Perl compatibility evidence. Registered-first dispatch, invalid-name callback counts, sorted discovery and override/error behavior are distinct from portable parser semantics. Real Lispish probes assert parser/AST shapes and tracing, not complete AST equality; backslash spellings are not platform coverage. Retained ordinals 80–121 cover 282 assertions. Local helper implementations and the partial dot-spec diagnostic case keep later reading ownership.
+
 ## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.40 - read Perl wrapper and dependency-map contracts
 
 OwnerDispatch synthetic callback resolution, mixed value/callback bundles and list returns are exercised directly. Twelve EmitContext tests substitute owner maps and implementations to validate package selection and error-state preservation. Their markers prove the wrapper route, not underlying parser semantics or real first-load behavior. Retained ordinals 50–79 cover 181 assertions; the next 24-assertion dependency-builder test is read only into fixture setup.

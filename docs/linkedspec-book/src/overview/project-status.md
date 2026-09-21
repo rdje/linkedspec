@@ -498,17 +498,17 @@ the director's focused-verification grant used for this correction and the separ
 supporting-reading closeout. Reading completion establishes audited comprehension;
 it does not close the six grammar/literal repair roots or establish runtime signoff.
 Conformance, test and Unicode reading has exact ownership for all 160 inputs in
-143 bounded groups covering 8,257,059 baseline decoded bytes. Forty groups account for
-52,061 fragments and 1,723,739 baseline bytes, including 97 complete files. Phase0 reading
-reaches line 2566. The current range distinguishes source-pattern assertions from executable
-wrapper tests with controlled callbacks. Those wrapper tests cover argument routing, list
-returns, dependency-map selection and successful preservation of caller error state; they
-replace selected collaborators and do not prove those implementations or first-time loads.
-Thirty completed subtests retain unchanged canonical proof with 181 assertions. The next
-ActionIR dependency-builder test is partial in fixture setup. No new runtime execution or
-whole-file reading credit is claimed. Historical reading stays separate from the pinned
-113-byte integration delta. Helper .2.3, header .2.4 and all parser/runtime repairs remain
-open. No production behavior changes in this slice.
+143 bounded groups covering 8,257,059 baseline decoded bytes. Forty-one groups account for
+53,234 fragments and 1,789,223 baseline bytes, including 97 complete files. Phase0 reading
+reaches line 3739. Current coverage includes controlled plugin dispatch and synthetic legacy
+registry fixtures; those remain Perl compatibility behavior, not a portable plugin-runtime
+contract. Real Lispish probes check parser execution, option routing and trace markers while
+retired facade paths are trapped. Name/path cases distinguish invalid values, missing files,
+directories and non-regular OS input; a backslash spelling is not a Windows-platform run.
+Forty-two completed subtests retain unchanged canonical proof with 282 assertions. The
+missing-dot-spec-name test is partially read. No new runtime execution or whole-file reading
+credit is claimed. The pinned 113-byte inventory delta stays separate; helper .2.3, header
+.2.4 and all parser/runtime repairs remain open. No production behavior changes here.
 The director has requested integration guides and runnable consumer examples for
 Perl, Rust, Dart, Julia and Lua, covering recursive checkout, dependency preparation
 and reuse, native APIs, results/errors and packaging. This temporary activity is

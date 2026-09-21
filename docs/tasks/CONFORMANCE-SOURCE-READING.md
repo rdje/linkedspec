@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `CONFORMANCE-SOURCE-READING`
-- Status: `active` / exact decomposition; physical reading 40/143
+- Status: `active` / exact decomposition; physical reading 41/143
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.8`
 - Created: `2026-09-13`
 - Last updated: `2026-09-21`
@@ -749,14 +749,21 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
   Commit: `CONFORMANCE-SOURCE-READING.1.40 - read Perl wrapper and dependency-map contracts`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.41`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `8eff213401d198e710464f7d87d40ac1e8e45be0`.
+  Verification tier: `focused`
+  Focused checks: Complete bounded physical source reading; verify exact baseline ranges, reconcile canonical Knowledge and retained unchanged test proof, then validate documentation, memory, book, histories, preservation and normal doctrines.
+  Canonical trigger: Ordinary bounded source-reading leaf; no runtime, dependency, public-contract, infrastructure or parent-closeout change. Existing repair prerequisites remain.
   Goal: Read and understand conformance/test/Unicode group 41.
   Scope: `t/phase0_regression.t` lines 2567-3739
   Baseline evidence: 1173 fragments / 65484 decoded bytes; ordered range SHA-256 `2ae790e06398a17ba62a899d756c0a307f10d824187fb81288980b2beae8ee92`.
   Dependencies: .1.40 committed with clean handoff.
   Acceptance: Read every scoped byte in complete bounded windows; retain source identity, exact comprehension, canonical Knowledge reconciliation, concrete finding ownership, focused proof and per-leaf continuity. Unread crossing constructs retain the next range owner.
-  Verification: `pending`
-  Commit: `pending`
+  Reading evidence: 11 complete windows / 1173 fragments / 65484 bytes; ordered window SHA-256 `e3f5aa84a083b491167df80df3b8e73afb6c8c14b89e69c206f02aba094241a4`.
+  Comprehension: The crossing dependency-builder test checks defined callback results and preserved caller error state for twelve owners, not exact equality of every payload. Plugin probes cover registration/clear counts, registry-first dispatch, invalid-name rejection before fallback and controlled callback forwarding. Synthetic legacy fixtures cover ordered roots/files, duplicate override precedence, malformed/missing-file diagnostics and explicit reader source shapes. These retain the existing Perl compatibility boundary. Real Lispish probes compile and execute from changed working directories while retired facade/dependency paths are trapped; they assert CODE/ARRAY shapes, option normalization and trace markers rather than full AST equality. Spec-name/path cases distinguish invalid scalar/reference values, missing slash/backslash spellings, directories and OS devnull while checking diagnostics and absence of PathSearch. Backslash spelling does not establish Windows-platform execution; local subprocess/capture helper bodies remain later-read owners. The crossing missing-dot-spec test has only three of six assertions read through line 3739.
+  Verification: Unchanged canonical commit 87b35665e retains PASS for 42 completed subtests, ordinals 80–121 with 282 assertions. Phase0, own Perl sources and Lispish.spec remain unchanged. The missing-dot-spec-name test is partial after three of six assertions; .1.42 owns the suffix. Historical whole-gate proof remains 1032 top-level tests. No new runtime execution, runtime repair, dependency build, full CI or push is claimed; all repair prerequisites remain.
+  Candidate proof: Exact coverage and eleven-window replay pass. Preservation verifies 2,844 other files / 50,534,644 bytes, 504 earlier task nodes, 53 other book files and all 1,039 book headings; prior histories, coverage recipes, dependency pins and original edits remain exact. Memory, both history-pressure checks, mdBook, public mutation (69 files / 50 mutations), public selector (68 files / 11 contrast mutations) and diff checks pass. Knowledge remains at 1,151 facts / 9,213 keys; normal nine-doctrine hooks govern landing.
+  Commit: `CONFORMANCE-SOURCE-READING.1.41 - read Perl plugin compatibility and spec lookup tests`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.42`
   Status: `pending`
@@ -1909,7 +1916,7 @@ additional reading credit from integration delivery.
 
 | Rank | Leaf | Status | Next action |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.41` | `pending` | Read Phase0 lines 2567–3739 (1,173 fragments / 65,484 baseline bytes), continuing the ActionIR dependency-builder test. All repair prerequisites remain. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.42` | `pending` | Read Phase0 lines 3740–5136 (1,397 fragments / 65,472 baseline bytes), continuing the missing-dot-spec-name test. All repair prerequisites remain. |
 
 ## Decisions
 
@@ -1921,6 +1928,8 @@ additional reading credit from integration delivery.
 - None at decomposition. Ordinary source repairs retain startup prerequisites; later collection pressure must be measured rather than assumed away.
 
 ## Verification Log
+
+- `2026-09-21` .1.41: Eleven complete windows cover 1,173 fragments / 65,484 baseline bytes; ordered window SHA-256 e3f5aa84a083b491167df80df3b8e73afb6c8c14b89e69c206f02aba094241a4. Cumulative reading is 41/143: 53,234 fragments / 1,789,223 baseline bytes and 97 complete files. Phase0 is partial through line 3739. Unchanged canonical commit 87b35665e retains PASS for 42 completed subtests, ordinals 80–121 with 282 assertions. Phase0, own Perl sources and Lispish.spec remain unchanged. The missing-dot-spec-name test is partial after three of six assertions; .1.42 owns the suffix. Historical whole-gate proof remains 1032 top-level tests. No new runtime execution, runtime repair, dependency build, full CI or push is claimed; all repair prerequisites remain.
 
 - `2026-09-21` .1.40: Eleven complete windows cover 1,040 fragments / 65,471 baseline bytes; ordered window SHA-256 3afe1dca0df301909510c1f6c86f4f5c27613121cd041c866262d2fd9acd3f44. Cumulative reading is 40/143: 52,061 fragments / 1,723,739 baseline bytes and 97 complete files. Phase0 is partial through line 2566. Unchanged canonical commit 87b35665e retains PASS for thirty completed subtests, ordinals 50–79 with 181 assertions. Phase0 and LinkedSpec-owned Perl sources remain unchanged. The ActionIR dependency-builder test is partial in fixture setup; .1.41 owns its assertions. Historical whole-gate proof remains 1032 top-level tests. No new runtime execution, runtime repair, dependency build, full CI or push is claimed; all repair prerequisites remain.
 
@@ -1972,6 +1981,8 @@ additional reading credit from integration delivery.
 
 ## Commit Log
 
+- `2026-09-21` .1.41: `CONFORMANCE-SOURCE-READING.1.41 - read Perl plugin compatibility and spec lookup tests`; activation 8eff21340; .1.42 follows clean handoff and empty brief.
+
 - `2026-09-21` .1.40: `CONFORMANCE-SOURCE-READING.1.40 - read Perl wrapper and dependency-map contracts`; activation cea5e399b; .1.41 follows clean handoff and empty brief.
 
 - `2026-09-21` .1.39: `CONFORMANCE-SOURCE-READING.1.39 - read Perl owner dispatch structural contracts`; activation fc5fad04f; .1.40 follows clean handoff and empty brief.
@@ -2021,6 +2032,8 @@ additional reading credit from integration delivery.
 - `2026-09-13`: Decomposition lands under `SESSION-STARTUP-READING.3.8.0`; Git owns the resulting commit identity.
 
 ## Changelog
+
+- `2026-09-21` .1.41: Read plugin compatibility and spec lookup tests; preserve the partial path diagnostic case and all repair prerequisites.
 
 - `2026-09-21` .1.40: Read source-shape, wrapper and owner-map contracts; keep substituted behavior and unread dependency-builder assertions distinct.
 
