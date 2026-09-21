@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.50 - read ActionIR lazy-loading and capture lowering tests
+
+Six EmitContext labels overstate lazy loading; .2.6 owns correction. Exact probes and partial lowering evidence: conformance-perl-consumer-reading.
+
 ## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.49 - read compiler owner paths and diagnose lazy-load test blind spot
 
 Compiler projection ordering observes validation entry, not completion; lowering-string checks are not execution proof. Fresh cold probes confirm a MethodExpr test blind spot: its Deps marker precedes parsing. All seven assertions still pass after an inert fixture is required post-parse, while explicit before/after observations distinguish 0/0 from 0/1. Normal production loading is correct. CONFORMANCE-SOURCE-READING.2.5 owns repair after prerequisites; docs/knowledge/conformance-perl-consumer-reading.md#methodexpr-post-parse-deps-observation-gap preserves the exact reproduction.

@@ -498,16 +498,16 @@ the director's focused-verification grant used for this correction and the separ
 supporting-reading closeout. Reading completion establishes audited comprehension;
 it does not close the six grammar/literal repair roots or establish runtime signoff.
 Conformance, test and Unicode reading has exact ownership for all 160 inputs in
-143 bounded groups covering 8,257,059 baseline decoded bytes. Forty-nine groups account for
-62,344 fragments and 2,312,539 baseline bytes, including 97 complete files. Phase0 reading
-reaches line 12849. Compiler tests distinguish missing entry state and preserve ordered state
-through validation and projection. ActionIR tests check selected owner paths, generated strings
-and cold module loading. These observations have separate evidence limits. Fresh focused probes
-found a test blind spot: the MethodExpr test uses a pre-call Deps marker for a post-call claim.
-Normal parsing keeps Deps unloaded; a forced fixture load escapes the existing assertion. Repair
-.2.5 owns an explicit post-call observation and mutation control after required reading.
-Twenty-nine completed subtests retain unchanged canonical proof with 202 assertions. The Diagnostics
-lazy-load test remains partial; no full-gate execution or whole-file reading credit is claimed.
+143 bounded groups covering 8,257,059 baseline decoded bytes. Fifty groups account for
+63,126 fragments and 2,378,009 baseline bytes, including 97 complete files. Phase0 reading
+reaches line 13631. ActionIR tests distinguish bridge setup, lazy owner loading, callback
+execution and generated-text checks. The capture/mark helper test is partial after 73 of
+90 assertions; those comparisons do not independently execute the generated fragments.
+Thirteen completed subtests retain unchanged canonical proof with 118 assertions. Fresh
+six-test/42-assertion probes confirm that six descriptions wrongly attribute EmitContext's
+setup load to a later helper; .2.6 owns correction. The MethodExpr pre-call Deps marker
+blind spot remains separately owned by .2.5. Neither finding establishes a production
+loading failure. No fresh full-gate run or whole-file reading credit is claimed.
 The pinned 113-byte inventory delta stays separate; all prerequisite-gated repairs remain open.
 The director has requested integration guides and runnable consumer examples for
 Perl, Rust, Dart, Julia and Lua, covering recursive checkout, dependency preparation

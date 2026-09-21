@@ -26,8 +26,10 @@ answers:
   - does the Phase0 MethodExpr test detect Deps loading during parsing
   - which task fixes the MethodExpr pre-call observation gap
   - does MethodExpr currently load the retired Deps module
+  - what do Phase0 owner loading and capture lowering tests establish
+  - why do six Phase0 tests incorrectly claim helpers lazy-load EmitContext
 date: 2026-09-21
-status: groups 34–49 physically read; Phase0 partial through line 12849; all runtime repair prerequisites remain
+status: groups 34–50 physically read; Phase0 partial through line 13631; all runtime repair prerequisites remain
 tags: [conformance, perl, reading, diagnostics, generated-source]
 evidence: "CONFORMANCE-SOURCE-READING.1.34 at activation d10305097eb502c0fe29309ec230437396e26d82; eleven complete windows, 1500 fragments, 56255 bytes, ordered window SHA-256 db04deab6c0365f8bc454e2695d410324a120104a232c213346f2b23ad16aef3. Five managed Perl targets pass43 top-level tests; neutral named marks3, diagnostics20 and duplicate-slot59 mutations pass."
 evidence_update_2026_09_21: "Ten complete windows cover 1,500 fragments / 51,804 baseline bytes; ordered window SHA-256 1164b42887bab92a4ea03d85fcaf4a9dc0c6913fc7607fe21a0d66cb0a424992. Cumulative reading is 35/143, 46,538 fragments / 1,405,327 baseline bytes and 86 complete files; gap tests remain partial through line 1026. Retained exact integration commit 87b35665e proof passes generated-source (6), inspector (2) and gap (124) tests (132 total), with unchanged source identities. The old uniform-identity audit fails on the approved integration delta; its corrected recipe passes all 160 inputs/143 groups/302 ranges and six rejected snapshot mutations. No new runtime execution, native build, full CI or push is claimed for this focused reading leaf."
@@ -35,8 +37,8 @@ evidence_update_2026_09_21_group36: "Eleven complete windows cover 1,500 fragmen
 reverify: "bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/cli_conformance_runner.t t/complete_named_mark_contract.t t/diagnostic_output_perl_contract.t t/duplicate_regex_slot_identity_perl_contract.t t/generated_source_contract.t; bash tools/run_python_project_data.sh tools/check_complete_named_mark_contract.py; bash tools/run_python_project_data.sh tools/check_diagnostic_output_contract.py; bash tools/run_python_project_data.sh tools/check_duplicate_regex_slot_identity_contract.py"
 evidence_update_2026_09_21_group37: "Fourteen complete windows cover 1,500 fragments / 63,613 baseline bytes; ordered window SHA-256 98d4de26a6f747975c45fe91277d218c6947936925d1ae233586706bef952d64. Cumulative reading is 37/143: 49,538 fragments / 1,527,897 baseline bytes and 97 complete files. Phase0 remains partial at lines 1–43. Fresh managed metadata/oracle checks pass 9 top-level tests. Unchanged integration commit 87b35665e retains native-loader (5), MCP binding/dispatch/stdio (23), admission (13) and Phase0 1032 proof. Full-target execution grants no reading credit to the unread Phase0 body. Header correction .2.4 is pending after prerequisites; helper repair .2.3 and existing runtime repairs remain open. No dependency build, new canonical run or push is claimed."
 evidence_update_2026_09_21_group38: "Eleven complete windows cover 1,067 fragments / 65,529 baseline bytes; ordered window SHA-256 f57116fee0db80f49969546da5cd033988e06b55191fc88358b7c6d6d334fd3e. Cumulative reading is 38/143: 50,605 fragments / 1,593,426 baseline bytes and 97 complete files. Phase0 is partial through line 1110. Exact unchanged canonical commit 87b35665e supplies PASS for all 38 fully read subtests (ordinals 2–39). The crossing facade error-state test remains partial; its suffix is .1.39-owned. The complete 1032-test gate remains retained historical proof, not new execution or reading credit. No new defect, runtime repair, dependency build, full CI or push is claimed; all existing repairs retain their prerequisites."
-evidence_phase0_checkpoint: "Eleven complete windows cover 994 fragments / 65,520 baseline bytes; ordered window SHA-256 d73aae559d4b4280080e5d3df87d2300a07cc2f30f85439045cde24f95689a60. Cumulative reading is 49/143: 62,344 fragments / 2,312,539 baseline bytes and 97 complete files. Phase0 is partial through line 12849. Unchanged canonical commit 87b35665e retains PASS for 29 completed subtests, ordinals 365–393 with 202 assertions; sequential TAP numbers and unchanged Phase0/own Perl/spec identities are verified. Fresh TOOLBOX6.2 extraction passes the MethodExpr test with all7 assertions both unchanged and with an inert post-parse Deps fixture load; independent cold probes observe 0/0 versus 0/1. Repair .2.5 owns the wrong-time observation. The Diagnostics lazy-load heredoc remains partial before its assertions; .1.50 owns the suffix. Targeted helper inspection at48608–48631 grants no reading credit outside this scope. Historical whole-gate proof remains 1032 top-level tests; no new full gate, runtime repair, dependency build or push is claimed."
-reverify_phase0_checkpoint: "Replay .1.49 using conformance-source-reading-coverage; compare ordinals 365–393 and unchanged own Perl sources against canonical commit 87b35665e. Retained execution grants no additional reading credit."
+evidence_phase0_checkpoint: "Eleven complete windows cover 782 fragments / 65,470 baseline bytes; ordered window SHA-256 519c197576d4307f13e2b7fa04bbf2d6b053a89aa3ef03d698cd9c570849a4c8. Cumulative reading is 50/143: 63,126 fragments / 2,378,009 baseline bytes and 97 complete files. Phase0 is partial through line 13631. Unchanged canonical commit 87b35665e retains PASS for thirteen completed subtests, ordinals 394–406 with 118 assertions; sequential TAP numbers and unchanged Phase0/own Perl/spec identities are verified. Fresh TOOLBOX6.2 extraction passes six lazy-load subtests with 42 assertions; exact child probes show EmitContext 0/1/1 before require/after require/after helper while each ActionIR owner goes 0/1. New .2.6 owns inaccurate EmitContext assertion descriptions. The helper-substitution test has 73 of 90 assertions read, followed by the opening of assertion 74; .1.51 owns the suffix. Historical whole-gate proof remains 1032 top-level tests; no fresh full gate, runtime repair, dependency build or push is claimed."
+reverify_phase0_checkpoint: "Replay .1.50 using conformance-source-reading-coverage; compare ordinals 394–406 and unchanged own Perl sources against canonical commit 87b35665e. Retained execution grants no additional reading credit."
 reverify_group38: "Replay .1.38 using conformance-source-reading-coverage and compare its 38 complete subtest names with retained canonical commit 87b35665e; this grants no new source-reading or runtime credit."
 reverify_group37: "bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/noncurrent_helper_metadata.t t/oracle_root_target_regex_semantics.t; retain unchanged dated MCP/native-loader proof separately."
 reverify_group36: "bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/logical_helper_perl_contract.t t/map_leaves_mutation_perl_contract.t; reproduce the helper observation with HELPER_PATH below, and retain the dated gap/MCP proof separately."
@@ -263,33 +265,82 @@ for tag,extra,expected in [('original','','00'),('injected_load',injected,'01')]
 METHOD_EXPR_OBSERVATION
 ```
 
+## EmitContext load description mismatch
+
+Six Phase0 lazy-loading tests cover FlowExpr, ArrayPipeline, ValueExpr, ControlFlow,
+MethodLowering and DeclareMethod. Each explicitly requires EmitContext before invoking
+its helper. The later EmitContext presence assertion says the helper lazy-loads it;
+that description overstates the observation. The owner's own pre/post checks are sound.
+Fresh TOOLBOX6.2 extraction at d70f77f4d passes all six tests / 42 assertions. Exact
+child snippets show EmitContext 0/1/1 before require / after require / after helper;
+the actual ActionIR owner changes from 0 to 1. This is an assertion-description defect,
+not a runtime load failure. `CONFORMANCE-SOURCE-READING.2.6` owns correcting those six
+descriptions while retaining owner and payload checks after required reading. The
+separate MethodExpr missing post-call observation remains open under `.2.5` above.
+
+Reproduce from the current test and local subprocess helper without editing either:
+
+```bash
+bash tools/project_data_run.sh env PERL5LIB= python3 - <<'EMITCONTEXT_LOAD_LABELS'
+from pathlib import Path
+import re,subprocess
+w=Path('.linkedspec-data/scratch/emitcontext-load-labels');w.mkdir(parents=True,exist_ok=True)
+s=Path('t/phase0_regression.t').read_text()
+scope=''.join(s.splitlines(True)[12850-1:13631])
+blocks=re.findall(r"^subtest '([^']+)' => sub \{\n(.*?)^\};",scope,re.M|re.S)
+a=s.index('sub run_perl_snippet_in_subprocess {');b=s.index('\nsub run_perl_test_file_in_subprocess',a)
+pre='use strict;use warnings;use Test::More;use IPC::Open3;use Symbol qw(gensym);use Cwd qw(getcwd);our $Bin=getcwd()."/t";\n'+s[a:b]+'\n'
+selected=[(n,b) for n,b in blocks if re.search(r"lazy-loads? EmitContext on demand",b)]
+assert len(selected)==6
+for name,body in selected:
+ path=w/(name+'.t');path.write_text(pre+"subtest '"+name+"' => sub {\n"+body+'};\ndone_testing();\n')
+ result=subprocess.run(['perl','-Iperl',str(path)],capture_output=True,text=True)
+ assert result.returncode==0 and 'not ok' not in result.stdout,(name,result)
+ assert len(re.findall(r'^    ok \d+(?: |$)',result.stdout,re.M))==7
+ (w/(name+'.log')).write_text(result.stdout+result.stderr)
+ code=re.search(r"<<'PERL'\);\n(.*?)^PERL$",body,re.M|re.S).group(1)
+ observe='print exists($INC{"LinkedSpec/RuleIR/EmitContext.pm"})?"__EC_1__\n":"__EC_0__\n";'
+ assert code.startswith('require LinkedSpec::RuleIR::EmitContext;\n')
+ probe=observe+code.replace('require LinkedSpec::RuleIR::EmitContext;','require LinkedSpec::RuleIR::EmitContext;'+observe,1)+observe
+ result=subprocess.run(['perl','-Iperl','-e',probe],capture_output=True,text=True)
+ assert result.returncode==0 and not result.stderr,(name,result)
+ assert re.findall(r'__EC_([01])__',result.stdout)==['0','1','1'],(name,result.stdout)
+ assert re.search(r'__(?:FLOW_EXPR|ARRAY_PIPELINE|VALUE_EXPR|CONTROL_FLOW|METHOD_LOWERING|DECLARE_METHOD)_STILL_LAZY__',result.stdout)
+ assert re.search(r'__(?:FLOW_EXPR|ARRAY_PIPELINE|VALUE_EXPR|CONTROL_FLOW|METHOD_LOWERING|DECLARE_METHOD)_AFTER_HELPER__',result.stdout)
+ (w/(name+'.probe.log')).write_text(result.stdout)
+ print(name+': seven assertions pass; EmitContext before-require/after-require/after-helper=0/1/1; target owner=0/1')
+EMITCONTEXT_LOAD_LABELS
+```
+
 ## Phase0 reading checkpoint
 
-Group 49 reads Phase0 lines 11856–12849. Success cleanup completes; invocation controls then
-separate missing top labels, handlers and descriptor entries. Setter suppression and validation
-bypass deliberately isolate those boundaries. [[perl-compiler-pipeline-stage-and-mode-boundaries]]
-and [[compilerstate-internal-model]] own the state/default-builder, validation and ordered metadata
-contracts. The projection trap observes validation entry; it does not independently timestamp
-completion of validation before projection.
+Group 50 reads Phase0 lines 12850–13631. Cold subprocesses observe unloaded owners
+before helper calls, loaded owners afterward and selected payload shapes. The bridge
+itself is explicitly required up front; the six misleading bridge-load descriptions
+are separately reproduced above. [[emitcontext-owner-registry]] and
+[[actionir-lowering-stack]] own the current dispatch graph. The MethodExpr-prefetch
+trap covers its named legacy seam only, not every possible package-loading route.
 
-Removed facade/dependency-builder traps preserve selected EmitContext outputs, canonical RETURN
-classification and duplicate unresolved-helper counts. Nine lowering examples compare generated
-strings without executing those strings. ScannerCore binds five dependency symbols once for one
-return-bare event. [[emitcontext-owner-registry]] owns the current dispatch graph. Cold subprocess
-controls observe require-only state and lazy MethodExpr/CanonicalEvents loading.
+Ten synthetic callback packages exercise default dependency builders: forty assertions
+check loading, hash shape and one executed representative callback per package. Their
+real temporary files inherit the managed project-data environment. This does not
+execute every supplied callback. Scanner/statement/contract/rewriter checks preserve
+specific event, splitting, callback and canonical RETURN payloads.
 
-The MethodExpr test labels a pre-call Deps marker as post-parse evidence. Fresh TOOLBOX6.2
-extraction passes all seven assertions both unchanged and after a forced inert fixture load.
-Independent before/after probes report 0/0 normally and 0/1 with the fixture. Deps is absent from
-production; this is a test blind spot, not a runtime loading defect. Repair .2.5 and the exact
-replay live in the MethodExpr post-parse Deps observation gap section above, gated by required reading.
+The next 90-assertion helper-substitution test has 73 complete assertions read. It
+compares generated text for dispatch, captures, boundary movement, marks, input and
+entry/local-match reads, including compatibility aliases. Typed SourceLocation calls
+and trace argument strings are not independently executed artifacts. Current mark
+isolation belongs to [[perl-recognition-transaction-private-authority]]; the older
+seven-helper fixture only proves different-label cases. Source slicing retains the
+[[perl-source-location-slice-compatibility]] boundary. No new runtime contract is inferred.
 
-Twenty-nine completed subtests retain canonical PASS at ordinals 365–393 (202 assertions),
-with Phase0, own Perl sources and shipped specs unchanged from 87b35665e. Fresh diagnostic
-extraction remains separate from retained canonical execution. The Diagnostics lazy-load heredoc
-is partial before its assertions; .1.50 owns the suffix. Targeted helper inspection at48608–48631
-adds no reading credit. Reading is 49/143, 62,344 fragments / 2,312,539 baseline bytes and
-97 complete files. All prerequisite-gated repairs remain open; exact prior checkpoints remain in Git.
+Thirteen completed subtests retain unchanged canonical PASS at ordinals 394–406,
+with 118 assertions. Fresh six-test/42-assertion load diagnostics remain separate
+from that retained whole-gate proof. The final line opens assertion74; .1.51 owns
+its arguments and all remaining assertions. Reading is 50/143, 63,126 fragments /
+2,378,009 baseline bytes and 97 complete files. Repairs .2.5/.2.6 and all earlier
+prerequisite-gated repairs remain open; exact prior checkpoints remain in Git.
 
 Related facts: [[perl-callable-codeblock-literal-record]], [[neutral-cli-fixture-runner]],
 [[complete-named-mark-perl-rust-parity]], [[perl-diagnostic-output-events]],

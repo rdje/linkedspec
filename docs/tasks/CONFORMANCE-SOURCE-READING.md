@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `CONFORMANCE-SOURCE-READING`
-- Status: `active` / exact decomposition; physical reading 49/143
+- Status: `active` / exact decomposition; physical reading 50/143
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.8`
 - Created: `2026-09-13`
 - Last updated: `2026-09-21`
@@ -902,14 +902,21 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
   Commit: `CONFORMANCE-SOURCE-READING.1.49 - read compiler owner paths and diagnose lazy-load test blind spot`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.50`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `d70f77f4d1abf7c4a1297731ee014a369940303c`.
+  Verification tier: `focused`
+  Focused checks: Complete source reading, exact baseline/window and retained canonical proof, fresh TOOLBOX6.2 load observations; reconcile Knowledge, preserve unrelated source/history/task evidence, memory, both history checks, book, direct public checks and normal doctrines.
+  Canonical trigger: Ordinary bounded reading and fact reconciliation only; no runtime, dependency, public-contract, infrastructure or parent-closeout change.
   Goal: Read and understand conformance/test/Unicode group 50.
   Scope: `t/phase0_regression.t` lines 12850-13631
   Baseline evidence: 782 fragments / 65470 decoded bytes; ordered range SHA-256 `7e2fe3f81d5eb0a39d7995310a1985e283f54bf7967d3cbcaa2d378f841c3676`.
   Dependencies: .1.49 committed with clean handoff.
   Acceptance: Read every scoped byte in complete bounded windows; retain source identity, exact comprehension, canonical Knowledge reconciliation, concrete finding ownership, focused proof and per-leaf continuity. Unread crossing constructs retain the next range owner.
-  Verification: `pending`
-  Commit: `pending`
+  Reading evidence: 11 complete windows / 782 fragments / 65470 bytes; ordered window SHA-256 `519c197576d4307f13e2b7fa04bbf2d6b053a89aa3ef03d698cd9c570849a4c8`.
+  Comprehension: Cold subprocesses distinguish Diagnostics, Scanner, StatementSplit, Contracts, RewritePipeline and six lowering owners from their EmitContext bridge. Payload checks validate selected arrays, contract callbacks, rewrite strings and stack mutation; they do not execute the emitted strings. Six assertion descriptions incorrectly attribute an explicit setup load of EmitContext to the helper; exact child probes isolate 0/1/1 bridge state versus 0/1 owner state, with .2.6 owning correction. The MethodExpr-prefetch trap covers the named legacy seam only. Ten synthetic callback packages are required by default dependency builders; one representative callback per package is executed across forty assertions. The partial 90-assertion pipeline test compares 73 completed generated-text results for call/push, anonymous and named capture, boundary movement, mark copying, input/entry/local-match reads and compatibility aliases. Typed SourceLocation runtime calls and trace arguments are textual expectations, not standalone generated execution or recursive mark-isolation proof. Current invocation ownership stays with RecognitionTransaction; the older seven-helper named-mark fixture is different-label evidence. Reading stops after the opening is( for assertion74.
+  Verification: Unchanged canonical commit 87b35665e retains PASS for thirteen completed subtests, ordinals 394–406 with 118 assertions; sequential TAP numbers and unchanged Phase0/own Perl/spec identities are verified. Fresh TOOLBOX6.2 extraction passes six lazy-load subtests with 42 assertions; exact child probes show EmitContext 0/1/1 before require/after require/after helper while each ActionIR owner goes 0/1. New .2.6 owns inaccurate EmitContext assertion descriptions. The helper-substitution test has 73 of 90 assertions read, followed by the opening of assertion 74; .1.51 owns the suffix. Historical whole-gate proof remains 1032 top-level tests; no fresh full gate, runtime repair, dependency build or push is claimed.
+  Candidate proof: Exact 160-input/143-group/302-range audit and eleven-window replay pass. Preservation verifies 2,844 other files / 50,534,669 bytes, 505 prior task nodes, 53 other book files and 1,039 book headings; .2.5 and its complete recipe remain byte-exact, with only new pending repair .2.6 added. The durable six-test recipe replays all42 assertions and independent bridge 0/1/1 versus owner 0/1 states. All historical recipes and original scopes, parent Gitlink and exact two roadmap substitutions are preserved. Memory, mdBook, public mutation (69 files / 50 mutations), public selector (68 files / 11 contrast mutations) and diff checks pass. Hot histories are changes273 lines/58671 bytes and notes241/58910, below required rollover; concise new records route full evidence to the canonical task/card. Knowledge remains 1,151 facts / 9,226 keys and unchanged collection limits. Normal nine-doctrine hooks govern landing.
+  Commit: `CONFORMANCE-SOURCE-READING.1.50 - read ActionIR lazy-loading and capture lowering tests`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.51`
   Status: `pending`
@@ -1955,6 +1962,16 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
   Verification: `pending`
   Commit: `pending`
 
+- ID: `CONFORMANCE-SOURCE-READING.2.6`
+  Status: `pending`
+  Goal: Correct six lazy-load assertion descriptions that attribute setup's EmitContext load to the later helper call.
+  Evidence: .1.50 TOOLBOX6.2 extracts the FlowExpr, ArrayPipeline, ValueExpr, ControlFlow, MethodLowering and DeclareMethod cold subprocess tests. All six pass their seven assertions. Instrumented exact child snippets observe EmitContext absent before require, present immediately after require and present after the helper (0/1/1); each actual ActionIR owner changes from absent to present across the helper. The post-helper EmitContext assertion checks continued presence, not on-demand loading. Exact recipe: docs/knowledge/conformance-perl-consumer-reading.md#emitcontext-load-description-mismatch.
+  Scope: Those six Phase0 assertion descriptions and focused evidence that retains independent ActionIR owner pre/post observations; do not change correct runtime loading to satisfy an inaccurate label.
+  Dependencies: Required source/book/policy reading, including remaining Phase0 source, before tracked test edits.
+  Acceptance: Describe the EmitContext assertion as continued availability after explicit setup loading, preserve each owner's actual lazy-load checks and payload assertions, pass all six focused tests with before/after observations, update durable Knowledge/book status and commit. Keep this description defect separate from .2.5's missing post-operation observation.
+  Verification: `pending`
+  Commit: `pending`
+
 - ID: `CONFORMANCE-SOURCE-READING.3`
   Status: `pending`
   Goal: Independently reconcile all source/range/reading-commit/repair evidence and close only the required reading lane with applicable verification.
@@ -1982,7 +1999,7 @@ additional reading credit from integration delivery.
 
 | Rank | Leaf | Status | Next action |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.50` | `pending` | Read Phase0 lines 12850–13631 (782 fragments / 65,470 baseline bytes), continuing the Diagnostics lazy-load subprocess. Repair .2.5 and all earlier repairs retain required-reading prerequisites. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.51` | `pending` | Read Phase0 lines 13632–14984 (1,353 fragments / 65,519 baseline bytes), continuing helper-substitution assertion 74. Repairs .2.5/.2.6 and earlier repairs retain required-reading prerequisites. |
 
 ## Decisions
 
@@ -1994,6 +2011,8 @@ additional reading credit from integration delivery.
 - None at decomposition. Ordinary source repairs retain startup prerequisites; later collection pressure must be measured rather than assumed away.
 
 ## Verification Log
+
+- `2026-09-21` .1.50: Eleven complete windows cover 782 fragments / 65,470 baseline bytes; ordered window SHA-256 519c197576d4307f13e2b7fa04bbf2d6b053a89aa3ef03d698cd9c570849a4c8. Cumulative reading is 50/143: 63,126 fragments / 2,378,009 baseline bytes and 97 complete files. Phase0 is partial through line 13631. Unchanged canonical commit 87b35665e retains PASS for thirteen completed subtests, ordinals 394–406 with 118 assertions; sequential TAP numbers and unchanged Phase0/own Perl/spec identities are verified. Fresh TOOLBOX6.2 extraction passes six lazy-load subtests with 42 assertions; exact child probes show EmitContext 0/1/1 before require/after require/after helper while each ActionIR owner goes 0/1. New .2.6 owns inaccurate EmitContext assertion descriptions. The helper-substitution test has 73 of 90 assertions read, followed by the opening of assertion 74; .1.51 owns the suffix. Historical whole-gate proof remains 1032 top-level tests; no fresh full gate, runtime repair, dependency build or push is claimed.
 
 - `2026-09-21` .1.49: Eleven complete windows cover 994 fragments / 65,520 baseline bytes; ordered window SHA-256 d73aae559d4b4280080e5d3df87d2300a07cc2f30f85439045cde24f95689a60. Cumulative reading is 49/143: 62,344 fragments / 2,312,539 baseline bytes and 97 complete files. Phase0 is partial through line 12849. Unchanged canonical commit 87b35665e retains PASS for 29 completed subtests, ordinals 365–393 with 202 assertions; sequential TAP numbers and unchanged Phase0/own Perl/spec identities are verified. Fresh TOOLBOX6.2 extraction passes the MethodExpr test with all7 assertions both unchanged and with an inert post-parse Deps fixture load; independent cold probes observe 0/0 versus 0/1. Repair .2.5 owns the wrong-time observation. The Diagnostics lazy-load heredoc remains partial before its assertions; .1.50 owns the suffix. Targeted helper inspection at48608–48631 grants no reading credit outside this scope. Historical whole-gate proof remains 1032 top-level tests; no new full gate, runtime repair, dependency build or push is claimed.
 
@@ -2063,6 +2082,8 @@ additional reading credit from integration delivery.
 
 ## Commit Log
 
+- `2026-09-21` .1.50: `CONFORMANCE-SOURCE-READING.1.50 - read ActionIR lazy-loading and capture lowering tests`; activation d70f77f4d; .1.51 follows clean handoff and empty brief.
+
 - `2026-09-21` .1.49: `CONFORMANCE-SOURCE-READING.1.49 - read compiler owner paths and diagnose lazy-load test blind spot`; activation 7a166581c; .1.50 follows clean handoff and empty brief.
 
 - `2026-09-21` .1.48: `CONFORMANCE-SOURCE-READING.1.48 - read public diagnostic propagation and handler lifecycle contracts`; activation 0a8c217a1; .1.49 follows clean handoff and empty brief.
@@ -2130,6 +2151,8 @@ additional reading credit from integration delivery.
 - `2026-09-13`: Decomposition lands under `SESSION-STARTUP-READING.3.8.0`; Git owns the resulting commit identity.
 
 ## Changelog
+
+- `2026-09-21` .1.50: Read ActionIR owner loading and partial capture/mark lowering checks; own the six inaccurate bridge-load assertion descriptions under .2.6 and preserve .2.5 and all prerequisites.
 
 - `2026-09-21` .1.49: Read compiler owner/state and ActionIR bridge controls; root-cause the wrong-time Deps observation and own repair .2.5 while preserving all prerequisites.
 
