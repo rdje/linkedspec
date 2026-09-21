@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.60 - read multi-case switch composition and metadata coverage
+
+Multi-case inline/marker switches compose beneath if/elseif and directly beneath outer switch branches. Exact helper-hit expectations remain descriptor metadata rather than executed branch counts. Six seven-tag loops use nine or seven assertions per tag; the next marker/marker lifecycle fixture remains partial. Canonical comprehension and the existing .2.10/.2.11 limitations remain in conformance-perl-consumer-reading.
+
 ## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.59 - read deep switch nesting and descriptor slot shape
 
 Structured and attached if/elseif bodies compose under inline/marker outer switches and single/multiple-case inner switches. Independent selectors and undef-only branch values remain descriptor inputs. Four seven-tag loops each use nine inner assertions; explicit slot-shape checks remain narrower than generated-code proof. Canonical comprehension and the existing .2.10/.2.11 limitations remain in conformance-perl-consumer-reading.

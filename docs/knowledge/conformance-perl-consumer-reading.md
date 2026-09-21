@@ -41,8 +41,9 @@ answers:
   - what do Phase0 snapshot and bare-marker descriptor tests establish
   - what do Phase0 mixed switch and nested marker tests establish
   - what do Phase0 deeply nested inline and marker switch tests establish
+  - what do Phase0 multi-case switch composition metadata tests cover
 date: 2026-09-21
-status: groups 34–59 physically read; Phase0 partial through line 25258; all observation-gap and runtime repairs retain prerequisites
+status: groups 34–60 physically read; Phase0 partial through line 26758; all observation-gap and runtime repairs retain prerequisites
 tags: [conformance, perl, reading, diagnostics, generated-source]
 evidence: "CONFORMANCE-SOURCE-READING.1.34 at activation d10305097eb502c0fe29309ec230437396e26d82; eleven complete windows, 1500 fragments, 56255 bytes, ordered window SHA-256 db04deab6c0365f8bc454e2695d410324a120104a232c213346f2b23ad16aef3. Five managed Perl targets pass43 top-level tests; neutral named marks3, diagnostics20 and duplicate-slot59 mutations pass."
 evidence_update_2026_09_21: "Ten complete windows cover 1,500 fragments / 51,804 baseline bytes; ordered window SHA-256 1164b42887bab92a4ea03d85fcaf4a9dc0c6913fc7607fe21a0d66cb0a424992. Cumulative reading is 35/143, 46,538 fragments / 1,405,327 baseline bytes and 86 complete files; gap tests remain partial through line 1026. Retained exact integration commit 87b35665e proof passes generated-source (6), inspector (2) and gap (124) tests (132 total), with unchanged source identities. The old uniform-identity audit fails on the approved integration delta; its corrected recipe passes all 160 inputs/143 groups/302 ranges and six rejected snapshot mutations. No new runtime execution, native build, full CI or push is claimed for this focused reading leaf."
@@ -50,8 +51,8 @@ evidence_update_2026_09_21_group36: "Eleven complete windows cover 1,500 fragmen
 reverify: "bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/cli_conformance_runner.t t/complete_named_mark_contract.t t/diagnostic_output_perl_contract.t t/duplicate_regex_slot_identity_perl_contract.t t/generated_source_contract.t; bash tools/run_python_project_data.sh tools/check_complete_named_mark_contract.py; bash tools/run_python_project_data.sh tools/check_diagnostic_output_contract.py; bash tools/run_python_project_data.sh tools/check_duplicate_regex_slot_identity_contract.py"
 evidence_update_2026_09_21_group37: "Fourteen complete windows cover 1,500 fragments / 63,613 baseline bytes; ordered window SHA-256 98d4de26a6f747975c45fe91277d218c6947936925d1ae233586706bef952d64. Cumulative reading is 37/143: 49,538 fragments / 1,527,897 baseline bytes and 97 complete files. Phase0 remains partial at lines 1–43. Fresh managed metadata/oracle checks pass 9 top-level tests. Unchanged integration commit 87b35665e retains native-loader (5), MCP binding/dispatch/stdio (23), admission (13) and Phase0 1032 proof. Full-target execution grants no reading credit to the unread Phase0 body. Header correction .2.4 is pending after prerequisites; helper repair .2.3 and existing runtime repairs remain open. No dependency build, new canonical run or push is claimed."
 evidence_update_2026_09_21_group38: "Eleven complete windows cover 1,067 fragments / 65,529 baseline bytes; ordered window SHA-256 f57116fee0db80f49969546da5cd033988e06b55191fc88358b7c6d6d334fd3e. Cumulative reading is 38/143: 50,605 fragments / 1,593,426 baseline bytes and 97 complete files. Phase0 is partial through line 1110. Exact unchanged canonical commit 87b35665e supplies PASS for all 38 fully read subtests (ordinals 2–39). The crossing facade error-state test remains partial; its suffix is .1.39-owned. The complete 1032-test gate remains retained historical proof, not new execution or reading credit. No new defect, runtime repair, dependency build, full CI or push is claimed; all existing repairs retain their prerequisites."
-evidence_phase0_checkpoint: "Nine complete windows cover 1,500 fragments / 55,331 baseline bytes; ordered window SHA-256 8820745511b704f049a371d28568870836a228096b590b1193370fa18000a75f. Cumulative reading is 59/143: 74,753 fragments / 2,951,000 baseline bytes and 97 complete files. Phase0 is partial through line 25258. Unchanged canonical commit ec10be6b retains PASS for nine completed subtests, ordinals 577–585 with 93 direct assertions, including 28 nested results. Four seven-tag lifecycle loops separately verify 252 inner assertions, each nine assertions per tag, with exact TAP numbering and plans. The following marker-outer multi-case lifecycle loop has its plan read but is partial inside the first fixture; .1.60 owns its suffix. Explicit slot-shape and metadata checks do not establish code or target execution equivalence. No new defect, runtime execution, repair, dependency build, canonical run or push is claimed; .2.5–.2.11 and all prerequisites remain."
-reverify_phase0_checkpoint: "Replay .1.59 using conformance-source-reading-coverage; verify ordinals 577–585 and four seven-tag nine-assertion loops against unchanged ec10be6b sources. Preserve the separate .2.10 observation-gap authority and distinguish slot shape from actual code or execution."
+evidence_phase0_checkpoint: "Nine complete windows cover 1,500 fragments / 55,852 baseline bytes; ordered window SHA-256 a72b414e4aba4d0b75d5895dc4bb7520ff47518e158903ab2d3d1882064ffb91. Cumulative reading is 60/143: 76,253 fragments / 3,006,852 baseline bytes and 97 complete files. Phase0 is partial through line 26758. Unchanged canonical commit ec10be6b retains PASS for twelve completed subtests, ordinals 586–597 with 108 direct assertions, including 42 nested results. Six seven-tag lifecycle loops separately verify 336 inner assertions: three loops with nine assertions per tag and three with seven, with exact TAP numbering and plans. The following marker/marker multi-case lifecycle loop has its plan read but is partial inside the first fixture; .1.61 owns its suffix. Explicit slot-shape and metadata checks do not establish code or target execution equivalence. No new defect, runtime execution, repair, dependency build, canonical run or push is claimed; .2.5–.2.11 and all prerequisites remain."
+reverify_phase0_checkpoint: "Replay .1.60 using conformance-source-reading-coverage; verify ordinals 586–597 and six seven-tag loops (three with nine assertions per tag, three with seven) against unchanged ec10be6b sources. Preserve the separate .2.10 observation-gap authority and distinguish slot shape from actual code or execution."
 reverify_group38: "Replay .1.38 using conformance-source-reading-coverage and compare its 38 complete subtest names with retained canonical commit 87b35665e; this grants no new source-reading or runtime credit."
 reverify_group37: "bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/noncurrent_helper_metadata.t t/oracle_root_target_regex_semantics.t; retain unchanged dated MCP/native-loader proof separately."
 reverify_group36: "bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/logical_helper_perl_contract.t t/map_leaves_mutation_perl_contract.t; reproduce the helper observation with HELPER_PATH below, and retain the dated gap/MCP proof separately."
@@ -424,30 +425,34 @@ PUSH_LABELS
 
 ## Phase0 reading checkpoint
 
-Group 59 reads Phase0 lines 23759–25258. Nested if/elseif switches inside outer
-case/default branches compare parenthesized structured if bodies with attached
-if/elseif/else bodies. Completed pairs cover marker outer with inline inner,
-inline outer with marker inner, marker outer with marker inner, and inline outer
-with multi-case marker switches. The marker-outer multi-case action pair completes;
-its seven-tag lifecycle counterpart is partial inside its first fixture.
+Group 60 reads Phase0 lines 25259–26758. The marker-outer if/elseif multi-case
+marker-switch lifecycle pair completes. Inline and marker outer switches then
+contain composite if/elseif branches with multi-case inline switches, comparing
+structured bodies with attached if/elseif/else bodies. Action pairs use thirteen
+assertions and lifecycle pairs nine per tag; descriptor metadata and current slot
+shape are compared while selectors stay unbound and branches return undef.
 
-Independent mode/mode2/kind/kind2 selectors and x/y, a/b, m/n, p/q alternatives
-remain unbound descriptor inputs with return_undef branch payloads. Action tests
-use thirteen assertions; lifecycle tests use nine per tag. They compare builds,
-current uppercase slot shape, fallback, unresolved counts, node/hit equality,
-readiness and control-node presence. Marker surfaces include ENDSWITCH expectations.
+The next fixtures compose multi-case switches without intervening if branches.
+Inline/marker outer and inner combinations expect CASE 5, DEFAULT 3 and RETURN 6
+for action or 7 for lifecycle fixtures. Their exact helper-hit expectations are
+SWITCH 1 with inline outer or 3 with marker outer, and ENDSWITCH 0/1/2/3 according
+to the marker surfaces. These are metadata expectations, not executed branch counts.
+Ten-assertion action fixtures also check raw dependencies and empty unresolved
+name/statement lists. Seven-assertion lifecycle fixtures cover all seven tags.
+All explicitly expect absent uppercase descriptor slots.
 
-These assertions explicitly describe slot shape. They do not establish generated-
-code equality or executed branch selection. The separate code-equivalence gap
-remains under .2.10 and [[phase0-code-slot-equivalence-observation-gap]]; .2.11 still
-owns the capture-recipe error. No repeated diagnosis or fresh runtime proof is claimed.
+Neither slot shape nor metadata establishes generated-code equality or executed
+branch selection. The separate code-equivalence gap remains under .2.10 and
+[[phase0-code-slot-equivalence-observation-gap]]; .2.11 still owns capture recipes.
+No repeated diagnosis or fresh runtime proof is claimed.
 
-Nine completed subtests retain canonical PASS at ordinals 577–585 with 93 direct
-assertions, including 28 nested results. Four seven-tag loops separately verify
-252 inner assertions. The next loop's cases and nine-assertion plan are read, but
-its first fixture stops after the inner else clause in the outer default branch;
-.1.60 owns the suffix. Reading is 59/143, 74,753 fragments / 2,951,000 baseline
-bytes and 97 complete files. No new defect; all .2.5–.2.11 and earlier repairs remain.
+Twelve completed subtests retain canonical PASS at ordinals 586–597 with 108 direct
+assertions, including 42 nested results. Six seven-tag loops separately verify
+336 inner assertions: three loops with nine assertions per tag and three with seven.
+The final marker/marker lifecycle loop has its cases and seven-assertion plan read;
+its first fixture stops at the inner default opening within the outer default branch.
+.1.61 owns the suffix. Reading is 60/143, 76,253 fragments / 3,006,852 baseline bytes
+and 97 complete files. No new defect; all .2.5–.2.11 and earlier repairs remain.
 
 Related facts: [[perl-callable-codeblock-literal-record]], [[neutral-cli-fixture-runner]],
 [[complete-named-mark-perl-rust-parity]], [[perl-diagnostic-output-events]],
