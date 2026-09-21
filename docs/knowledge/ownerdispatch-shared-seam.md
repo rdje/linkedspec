@@ -7,15 +7,16 @@ answers:
   - "how is $@ preserved across owner dispatch"
   - "where does build_dep_map live"
   - "how do ActionIR owners resolve their dependencies"
-date: 2026-06-12
+date: 2026-09-21
 status: current
 tags: [architecture, ownerdispatch, dependency-injection, seam]
 evidence: "perl/LinkedSpec/OwnerDispatch.pm (220 lines); 12+ owner modules spend this seam directly; build_dep_map and build_dep_bundle centralize dependency assembly"
+evidence_update_2026_09_21: "CONFORMANCE-SOURCE-READING.1.39 reconciles the existing seven-item list with the Phase0 structural assertions. The stale five-primitives introduction is corrected; all seven entries and their meanings remain unchanged."
 reverify: "grep -l 'OwnerDispatch' perl/LinkedSpec/*.pm perl/LinkedSpec/ActionIR/*.pm | wc -l"
 ---
 
 `LinkedSpec::OwnerDispatch` (220 lines) is the small shared module that eliminated repeated
-thin-wrapper boilerplate across the owner tree. It provides five primitives:
+thin-wrapper boilerplate across the owner tree. It provides the following primitives:
 
 - `call_preserving_err($cb)` — execute a callback without clobbering caller-visible `$@`
 - `require_pkg($owner, $target)` — lazy-load one package with owner-attributed diagnostics

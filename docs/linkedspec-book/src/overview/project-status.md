@@ -498,17 +498,17 @@ the director's focused-verification grant used for this correction and the separ
 supporting-reading closeout. Reading completion establishes audited comprehension;
 it does not close the six grammar/literal repair roots or establish runtime signoff.
 Conformance, test and Unicode reading has exact ownership for all 160 inputs in
-143 bounded groups covering 8,257,059 baseline decoded bytes. Thirty-eight groups account for
-50,605 fragments and 1,593,426 baseline bytes, including 97 complete files. Phase0 reading
-reaches line 1110, inside the facade error-state preservation test. The range distinguishes
-shipped-spec construction/readiness from selected tclite execution and legacy Lispish lookup.
-Module-loading snippets check expected load markers and return/diagnostic values. Statement
-splitting tests assert exact string partitions; plugin and facade routing tests substitute
-specific owner functions, so their claims stay separate from complete parser behavior.
-All 38 fully read subtests pass in retained unchanged canonical proof. No new runtime run or
-whole-file reading credit is claimed. The crossing assertions remain next, and the historical
-baseline remains separate from the pinned 113-byte integration delta. Helper .2.3, header .2.4
-and all parser/runtime repairs remain open. No production behavior changes in this slice.
+143 bounded groups covering 8,257,059 baseline decoded bytes. Thirty-nine groups account for
+51,021 fragments and 1,658,268 baseline bytes, including 97 complete files. Phase0 reading
+reaches line 1526. The facade tests check successful delegation and caller error-state
+preservation with substituted owners. Separate owner-dispatch and callback-validation
+tests inspect expected source patterns across 28 LinkedSpec files; those structural
+assertions do not establish execution of every matched branch or complete parser behavior.
+Ten completed subtests retain unchanged canonical proof with 344 assertions. The crossing
+ParserFactory check remains next; no new runtime execution or whole-file reading credit is
+claimed. Historical reading remains separate from the pinned 113-byte integration delta.
+Helper .2.3, header .2.4 and all parser/runtime repairs remain open. No production behavior
+changes in this slice.
 The director has requested integration guides and runnable consumer examples for
 Perl, Rust, Dart, Julia and Lua, covering recursive checkout, dependency preparation
 and reuse, native APIs, results/errors and packaging. This temporary activity is

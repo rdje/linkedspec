@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.39 - read Perl owner dispatch structural contracts
+
+Facade substitution checks, source-pattern checks and real owner execution are distinct evidence boundaries. Shared-owner coverage uses 298 structural assertions over 28 files; eight inline-validation groups contribute 24 more. Together with the crossing facade group, retained ordinals 40–49 total 344 assertions. The stale five-primitives card introduction is corrected without changing its seven entries; ParserFactory and local subprocess-helper reading remain incomplete.
+
 ## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.38 - read Phase0 lazy-loading and plugin contracts
 
 Phase0 module-loading cases observe %INC markers and values through requested snippet calls; the local helper implementation still belongs to later source reading. Splitter checks are exact partition tests with injected dependencies. Plugin/facade routing substitutes owners, preserving forwarding and caller error state without proving each replaced implementation. Retained canonical rows 2–39 bind all 38 completely read subtests; the crossing facade assertions remain .1.39-owned.

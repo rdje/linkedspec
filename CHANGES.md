@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.39 - read Perl owner dispatch structural contracts
+
+Eleven complete windows cover 416 fragments / 64,842 baseline bytes; ordered window SHA-256 637b617933d223c8317d6c27901ead86ed5835131a0fc2201b1422db311bae5f. Cumulative reading is 39/143: 51,021 fragments / 1,658,268 baseline bytes and 97 complete files. Phase0 is partial through line 1526. Unchanged canonical commit 87b35665e retains PASS for ten completed subtests, ordinals 40–49 with 344 assertions: the crossing facade test, shared-owner structural checks and eight inline-validation checks. All 28 inspected source targets remain byte-identical. ParserFactory validation crosses into .1.40. Historical whole-gate proof remains 1032 top-level tests; no new runtime execution, dependency build, full CI or push is claimed. All runtime repairs retain their prerequisites. The canonical OwnerDispatch card now agrees with its unchanged seven-item list.
+
 ## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.38 - read Phase0 lazy-loading and plugin contracts
 
 Eleven complete windows cover 1,067 fragments / 65,529 baseline bytes; ordered window SHA-256 f57116fee0db80f49969546da5cd033988e06b55191fc88358b7c6d6d334fd3e. Cumulative reading is 38/143: 50,605 fragments / 1,593,426 baseline bytes and 97 complete files. Phase0 is partial through line 1110. Exact unchanged canonical commit 87b35665e supplies PASS for all 38 fully read subtests (ordinals 2–39). The crossing facade error-state test remains partial; its suffix is .1.39-owned. The complete 1032-test gate remains retained historical proof, not new execution or reading credit. No new defect, runtime repair, dependency build, full CI or push is claimed; all existing repairs retain their prerequisites.

@@ -9,7 +9,7 @@ answers:
   - "how do I verify conformance reading source and range coverage"
   - "which conformance source reading file has the longest line"
 date: 2026-09-21
-status: exact baseline decomposition preserved; physical reading 38/143, 97 files complete and 105 groups remain; one approved current-source delta
+status: exact baseline decomposition preserved; physical reading 39/143, 97 files complete and 104 groups remain; one approved current-source delta
 tags: [reading, conformance, tests, unicode, continuity, CONFORMANCE-SOURCE-READING]
 evidence: "Startup .3.8.0 independently accounts for160 baseline-identical files,5,422,313 stored bytes and8,257,059 decoded bytes in167,606 line fragments/167,604 LF delimiters. Four gzip inputs contribute54,500 decoded lines. All143 groups/302 ranges are contiguous, disjoint and bounded at1500 fragments/65536 bytes. No source, registry or runtime behavior changes; no physical-reading credit from inventory."
 reverify: "Run CONFORMANCE_SOURCE_READING_COVERAGE below through the project-data wrapper; it derives source identity from Git and range ownership from the task-tree rather than a parallel manifest. Use scripts/check_task_tree_metadata.sh for actual task collection limits."
@@ -425,14 +425,14 @@ properties, context rules, fixtures or decoded upstream inputs. All repairs rema
 
 ## Conformance reading checkpoint
 
-`CONFORMANCE-SOURCE-READING.1.38` reads 11 windows, 1,067 fragments and 65,529 baseline bytes.
-Cumulative reading is 38/143, 50,605 fragments, 1,593,426 baseline bytes and 97 complete files.
-Phase0 is partial through line 1110, inside the facade error-state preservation test.
-[[conformance-perl-consumer-reading]] records lazy-loading, splitter and plugin coverage.
-All 38 completely read subtests retain exact unchanged PASS at 87b35665e; no new runtime
-execution or whole-file reading credit is claimed. All repairs remain open.
+`CONFORMANCE-SOURCE-READING.1.39` reads 11 windows, 416 fragments and 64,842 baseline bytes.
+Cumulative reading is 39/143, 51,021 fragments, 1,658,268 baseline bytes and 97 complete files.
+Phase0 is partial through line 1526, inside the ParserFactory source-shape check.
+[[conformance-perl-consumer-reading]] separates structural assertions from runtime behavior.
+Ten completed subtests retain unchanged PASS at 87b35665e, including the crossing facade
+check; the 28 source targets also remain exact. All runtime repairs remain open.
 The pinned 113-byte current cursor-inventory delta stays separate from historical reading;
-the same current ranges total 1,593,539 bytes. Next .1.39 reads Phase0 lines 1111–1526.
+the same current ranges total 1,658,381 bytes. Next .1.40 reads Phase0 lines 1527–2566.
 
 Lowercase table entries and Final Sigma context remain separate. Exact scalar
 sequences, sparse ranges, fullwidth forms and ligature identities are preserved;
