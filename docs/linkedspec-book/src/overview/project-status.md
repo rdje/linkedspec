@@ -498,16 +498,16 @@ the director's focused-verification grant used for this correction and the separ
 supporting-reading closeout. Reading completion establishes audited comprehension;
 it does not close the six grammar/literal repair roots or establish runtime signoff.
 Conformance, test and Unicode reading has exact ownership for all 160 inputs in
-143 bounded groups covering 8,257,059 baseline decoded bytes. Forty-six groups account for
-59,339 fragments and 2,115,985 baseline bytes, including 97 complete files. Phase0 reading
-reaches line 9844. Compiler tests check explicit state composition, ordered descriptor
-projection and precise failure attribution. Parser-factory controls preserve specific resolver
-diagnostics across setup, resolution, loading and compilation failures. Source inspection,
-callback observation and descriptor construction provide different evidence; handler presence
-alone does not establish handler execution. Thirty completed subtests retain unchanged canonical
-proof with 274 assertions. The non-coderef compile callback test remains partial. No fresh
-runtime execution or whole-file reading credit is claimed. The pinned 113-byte inventory delta
-stays separate; helper .2.3, header .2.4 and all parser/runtime repairs remain open.
+143 bounded groups covering 8,257,059 baseline decoded bytes. Forty-seven groups account for
+60,318 fragments and 2,181,495 baseline bytes, including 97 complete files. Phase0 reading
+reaches line 10823. Single-mode tests distinguish successful parse/generate-only undef returns
+from structured failures, preserve deeper error ownership, and check context identity and
+source-capture replacement across repeated calls. Constructed handlers are not invoked by
+these controls. Combined-mode precedence remains a separately owned repair. Twenty-eight
+completed subtests retain unchanged canonical proof with 280 assertions; one final assertion
+in the reused-context resolution-failure test remains unread. No fresh runtime execution or
+whole-file reading credit is claimed. The pinned 113-byte inventory delta stays separate;
+helper .2.3, header .2.4 and all parser/runtime repairs remain open.
 The director has requested integration guides and runnable consumer examples for
 Perl, Rust, Dart, Julia and Lua, covering recursive checkout, dependency preparation
 and reuse, native APIs, results/errors and packaging. This temporary activity is

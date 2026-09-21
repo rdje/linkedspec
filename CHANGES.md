@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.47 - read mode-result validation and runtime-context reuse contracts
+
+Eleven complete windows cover 979 fragments / 65,510 baseline bytes; ordered window SHA-256 b46257ef9b64fa75fb31c9e49bc403bc3d5c96e59c69f3e6b13d44b040baa1a4. Cumulative reading is 47/143: 60,318 fragments / 2,181,495 baseline bytes and 97 complete files. Phase0 is partial through line 10823. Unchanged canonical commit 87b35665e retains PASS for 28 completed subtests, ordinals 310–337 with 280 assertions. Phase0, own Perl sources and shipped specs remain unchanged; TAP replay verifies every sequential assertion number. The reused-context resolution-failure test stops after eight of nine assertions; .1.48 owns its final assertion. Historical whole-gate proof remains 1032 top-level tests. No new runtime execution, runtime repair, dependency build, full CI or push is claimed; all repair prerequisites remain.
+
 ## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.46 - read compiler-state composition and parser-factory error contracts
 
 Eleven complete windows cover 973 fragments / 65,483 baseline bytes; ordered window SHA-256 84b8930f933767a2b8b7a091aa173d1b18171640995e77a1813f700a1ce6124d. Cumulative reading is 46/143: 59,339 fragments / 2,115,985 baseline bytes and 97 complete files. Phase0 is partial through line 9844. Unchanged canonical commit 87b35665e retains PASS for 30 completed subtests, ordinals 280–309 with 274 assertions. Phase0, own Perl sources and shipped specs remain unchanged; TAP replay verifies every sequential assertion number. The non-coderef compile callback test stops inside setup before its callback and assertions; .1.47 owns the unread suffix. Historical whole-gate proof remains 1032 top-level tests. No new runtime execution, runtime repair, dependency build, full CI or push is claimed; all repair prerequisites remain.
