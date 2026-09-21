@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `CONFORMANCE-SOURCE-READING`
-- Status: `active` / exact decomposition; physical reading 58/143
+- Status: `active` / exact decomposition; physical reading 59/143
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.8`
 - Created: `2026-09-13`
 - Last updated: `2026-09-21`
@@ -1055,14 +1055,21 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
   Commit: `CONFORMANCE-SOURCE-READING.1.58 - read mixed switch and nested marker metadata`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.59`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `67f38c76cddd9074f1697687e1c99c2dad9581cb`.
+  Verification tier: `focused`
+  Focused checks: Complete reading and exact coverage/window replay; retained direct/nested TAP proof and canonical observation-gap reconciliation; Knowledge, preservation, memory, histories, book, direct public checks and normal doctrines.
+  Canonical trigger: Ordinary bounded reading and fact reconciliation; no runtime, dependency, public contract, infrastructure or parent-closeout change.
   Goal: Read and understand conformance/test/Unicode group 59.
   Scope: `t/phase0_regression.t` lines 23759-25258
   Baseline evidence: 1500 fragments / 55331 decoded bytes; ordered range SHA-256 `7d72c94dee04a686c444c25f061c9aa75dfaefcc8e5854f2cc2b8f5bdcb2513d`.
   Dependencies: .1.58 committed with clean handoff.
   Acceptance: Read every scoped byte in complete bounded windows; retain source identity, exact comprehension, canonical Knowledge reconciliation, concrete finding ownership, focused proof and per-leaf continuity. Unread crossing constructs retain the next range owner.
-  Verification: `pending`
-  Commit: `pending`
+  Reading evidence: 9 complete windows / 1500 fragments / 55331 bytes; ordered window SHA-256 `8820745511b704f049a371d28568870836a228096b590b1193370fa18000a75f`.
+  Comprehension: Reads nested if/elseif switches inside outer case/default branches, comparing parenthesized structured if bodies with attached if/elseif/else bodies. Completed pairs cover marker outer with inline inner switches, inline outer with marker inner switches, marker outer with marker inner switches, and inline outer with multi-case marker switches; the marker-outer multi-case action pair also completes. Independent mode/mode2/kind/kind2 selectors and two-case alternatives x/y, a/b, m/n, p/q remain unbound descriptor inputs with return_undef payloads. Thirteen-assertion action tests and nine-assertion-per-tag lifecycle tests compare descriptor builds, current uppercase slot shape, fallback, unresolved counts, node/hit equality, readiness and control-node presence. ENDSWITCH is expected when a marker surface appears. These checks explicitly claim slot shape and do not establish generated-code or executed branch equivalence. Four complete seven-tag loops are read; the next seven-tag marker-outer multi-case loop remains inside its first fixture. No new defect or runtime execution; existing .2.10 equivalence gap, .2.11 capture recipes and all earlier repairs retain prerequisites.
+  Verification: Unchanged canonical commit ec10be6b retains PASS for nine completed subtests, ordinals 577–585 with 93 direct assertions, including 28 nested results. Four seven-tag lifecycle loops separately verify 252 inner assertions, each nine assertions per tag, with exact TAP numbering and plans. The following marker-outer multi-case lifecycle loop has its plan read but is partial inside the first fixture; .1.60 owns its suffix. Explicit slot-shape and metadata checks do not establish code or target execution equivalence. No new defect, runtime execution, repair, dependency build, canonical run or push is claimed; .2.5–.2.11 and all prerequisites remain.
+  Candidate proof: Exact 160-input/143-group/302-range audit and nine-window replay pass. Preservation verifies 2,850 other files / 50,654,378 bytes, 514 prior task nodes, 53 other book files and all 1,039 headings; all prior repair evidence, historical ranges, recipes, histories and parent Gitlink remain exact. Whole-roadmap normalization preserves all non-checkpoint prose. Direct and nested retained TAP plans reconcile independently. Memory, both history-pressure checks, mdBook, public mutation (69 files / 50 mutations), public selector (68 files / 11 contrast mutations) and diff checks pass. Hot histories are changes200 lines/35367 bytes and notes196/35674, below rollover. Knowledge is1,154 facts/9,256 keys. Normal nine-doctrine hooks govern landing; no new canonical run is required by this focused leaf.
+  Commit: `CONFORMANCE-SOURCE-READING.1.59 - read deep switch nesting and descriptor slot shape`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.60`
   Status: `pending`
@@ -2509,7 +2516,7 @@ additional reading credit from integration delivery.
 
 | Rank | Leaf | Status | Next action |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.59` | `pending` | Read Phase0 lines 23759–25258 (1,500 fragments / 55,331 baseline bytes), continuing the marker-outer nested if/elseif inline-switch fixture. Repairs .2.5–.2.11 and earlier repairs retain required reading prerequisites. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.60` | `pending` | Read Phase0 lines 25259–26758 (1,500 fragments / 55,852 baseline bytes), continuing the first fixture of the marker-outer multi-case lifecycle test. Repairs .2.5–.2.11 and earlier repairs retain required reading prerequisites. |
 
 ## Decisions
 
@@ -2521,6 +2528,8 @@ additional reading credit from integration delivery.
 - None at decomposition. Ordinary source repairs retain startup prerequisites; later collection pressure must be measured rather than assumed away.
 
 ## Verification Log
+
+- `2026-09-21` .1.59: Nine complete windows cover 1,500 fragments / 55,331 baseline bytes; ordered window SHA-256 8820745511b704f049a371d28568870836a228096b590b1193370fa18000a75f. Cumulative reading is 59/143: 74,753 fragments / 2,951,000 baseline bytes and 97 complete files. Phase0 is partial through line 25258. Unchanged canonical commit ec10be6b retains PASS for nine completed subtests, ordinals 577–585 with 93 direct assertions, including 28 nested results. Four seven-tag lifecycle loops separately verify 252 inner assertions, each nine assertions per tag, with exact TAP numbering and plans. The following marker-outer multi-case lifecycle loop has its plan read but is partial inside the first fixture; .1.60 owns its suffix. Explicit slot-shape and metadata checks do not establish code or target execution equivalence. No new defect, runtime execution, repair, dependency build, canonical run or push is claimed; .2.5–.2.11 and all prerequisites remain.
 
 - `2026-09-21` .1.58: Ten complete windows cover 1,500 fragments / 62,624 baseline bytes; ordered window SHA-256 617330f9895feb45a764ca6838fc3682994e771eac5a675bab8c3c71517ffbe6. Cumulative reading is 58/143: 73,253 fragments / 2,895,669 baseline bytes and 97 complete files. Phase0 is partial through line 23758. Unchanged canonical commit ec10be6b retains PASS for 18 completed subtests, ordinals 559–576 with 160 direct assertions, including 63 nested results. Nine seven-tag loops separately verify 476 inner assertions with exact tag order, TAP numbering and plans. The next marker-outer nested if/elseif inline-switch test is partial inside its first fixture; .1.59 owns the suffix. Current-slot-shape checks are distinguished from absent-slot equivalence claims, which remain .2.10-owned. No new defect, target runtime execution, repair, dependency build, canonical run or push is claimed; all prerequisites remain.
 
@@ -2610,6 +2619,8 @@ additional reading credit from integration delivery.
 
 ## Commit Log
 
+- `2026-09-21` .1.59: `CONFORMANCE-SOURCE-READING.1.59 - read deep switch nesting and descriptor slot shape`; activation 67f38c76c; .1.60 follows clean handoff and empty brief.
+
 - `2026-09-21` .1.58: `CONFORMANCE-SOURCE-READING.1.58 - read mixed switch and nested marker metadata`; activation cebbd8466; .1.59 follows clean handoff and empty brief.
 
 - `2026-09-21` .1.57: `CONFORMANCE-SOURCE-READING.1.57 - read snapshot and bare-marker descriptor coverage`; activation 1983e2fc4; .1.58 follows clean handoff and empty brief.
@@ -2697,6 +2708,8 @@ additional reading credit from integration delivery.
 - `2026-09-13`: Decomposition lands under `SESSION-STARTUP-READING.3.8.0`; Git owns the resulting commit identity.
 
 ## Changelog
+
+- `2026-09-21` .1.59: Read deeper nested if/elseif switches with inline/marker and multi-case branches. Keep explicit slot-shape and metadata proof bounded; all prior repairs remain.
 
 - `2026-09-21` .1.58: Read mixed attached/plain switch branches and nested marker/composite flow. Distinguish explicit current-slot shape checks from .2.10-owned equivalence claims; no new repair or target execution.
 

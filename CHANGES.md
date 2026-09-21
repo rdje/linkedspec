@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.59 - read deep switch nesting and descriptor slot shape
+
+Read Phase0 23759–25258: 59/143 groups, 74,753 fragments / 2,951,000 baseline bytes. Retained nine-subtest proof has 93 direct assertions, including 28 nested results / 252 inner assertions. Deep inline/marker and multi-case switch fixtures compare metadata and current slot shape, without code or execution equivalence claims. No new defect or target execution; all repairs remain. .1.60 continues the partial lifecycle fixture.
+
 ## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.58 - read mixed switch and nested marker metadata
 
 Read Phase0 22259–23758: 58/143 groups, 73,253 fragments / 2,895,669 baseline bytes. Retained 18-subtest proof has 160 direct assertions, including 63 nested results / 476 inner assertions. Mixed attached/plain switches and nested marker flow preserve the distinction between explicit slot shape and unsupported code-equivalence claims. No new defect or target execution; all repairs remain. .1.59 continues the next partial fixture.
