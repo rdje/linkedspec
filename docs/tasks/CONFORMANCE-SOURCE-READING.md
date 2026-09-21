@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `CONFORMANCE-SOURCE-READING`
-- Status: `active` / exact decomposition; physical reading 47/143
+- Status: `active` / exact decomposition; physical reading 48/143
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.8`
 - Created: `2026-09-13`
 - Last updated: `2026-09-21`
@@ -868,14 +868,21 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
   Commit: `CONFORMANCE-SOURCE-READING.1.47 - read mode-result validation and runtime-context reuse contracts`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.48`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `0a8c217a19276c9416f302dd9d90a7716ed63e29`.
+  Verification tier: `focused`
+  Focused checks: Complete bounded source reading, exact baseline/window and retained canonical proof; reconcile Knowledge, preserve unrelated source/history/task evidence, memory, both history checks, book, direct public checks and normal doctrines.
+  Canonical trigger: Ordinary bounded reading and fact reconciliation only; no runtime, dependency, public-contract, infrastructure or parent-closeout change.
   Goal: Read and understand conformance/test/Unicode group 48.
   Scope: `t/phase0_regression.t` lines 10824-11855
   Baseline evidence: 1032 fragments / 65524 decoded bytes; ordered range SHA-256 `f1fd2107d5d3c0f983821b84deffb49bc48f347b073ea56d794f4bd18e5d3686`.
   Dependencies: .1.47 committed with clean handoff.
   Acceptance: Read every scoped byte in complete bounded windows; retain source identity, exact comprehension, canonical Knowledge reconciliation, concrete finding ownership, focused proof and per-leaf continuity. Unread crossing constructs retain the next range owner.
-  Verification: `pending`
-  Commit: `pending`
+  Reading evidence: 11 complete windows / 1032 fragments / 65524 bytes; ordered window SHA-256 `d84f1017d31b0bd33fb239a44e9da6beebddfb6e5ea680e820ef93ff495cd896`.
+  Comprehension: Public get_parser controls preserve scalar-slot identity and caller fields while refreshing requested spec/top identity, clearing stale source chunks in place and dropping the stale emitter before failed resolution. Real load, validation and injected setup/compile failures preserve specific summaries, source identity, owner stage and requested-top labels through the facades. Invoked generated handlers trap forced LinkedRE failures as runtime_handler errors with inner eval text; a subsequent successful inline invocation clears the error. Injected raw handlers instead throw through the runtime_parser boundary, which records top-rule/variant identity and rethrows; invalid ARRAY input records validate_input_ref with the targeted message. A BEGIN counter proves one source compilation during one handler construction and reuse across two calls. Invalid generated syntax yields a wrapper, suppresses construction warnings and publishes compile detail only when invoked. These direct invocation controls do not establish independently emitted-module behavior. The final compiler success-cleanup control has only its parser-construction assertion read; invocation and seven assertions remain.
+  Verification: Unchanged canonical commit 87b35665e retains PASS for 27 completed subtests, ordinals 338–364 with 313 assertions. Phase0, own Perl sources and shipped specs remain unchanged; TAP replay verifies every sequential assertion number. The compiler success-cleanup test stops after its first of eight assertions; .1.49 owns the seven remaining assertions and invocation. Historical whole-gate proof remains 1032 top-level tests. No new runtime execution, runtime repair, dependency build, full CI or push is claimed; all repair prerequisites remain.
+  Candidate proof: Exact 160-input/143-group/302-range audit and eleven-window replay pass. Preservation verifies 2,844 other files / 50,534,669 bytes, 504 earlier task nodes, 53 other book files and all 1,039 book headings; history, scopes, recipes and parent Gitlink remain exact. All six current reading-index rows agree on next .1.49. Memory, both history-pressure checks, mdBook, public mutation (69 files / 50 mutations), public selector (68 files / 11 contrast mutations) and diff checks pass. Hot histories measure changes 265 lines / 56,930 bytes and notes 233 / 57,948, above warning but below required rollover. Knowledge remains at 1,151 facts / 9,220 keys; normal nine-doctrine hooks govern landing.
+  Commit: `CONFORMANCE-SOURCE-READING.1.48 - read public diagnostic propagation and handler lifecycle contracts`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.49`
   Status: `pending`
@@ -1958,7 +1965,7 @@ additional reading credit from integration delivery.
 
 | Rank | Leaf | Status | Next action |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.48` | `pending` | Read Phase0 lines 10824–11855 (1,032 fragments / 65,524 baseline bytes), completing the reused-context resolution-failure test. All repair prerequisites remain. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.49` | `pending` | Read Phase0 lines 11856–12849 (994 fragments / 65,520 baseline bytes), continuing the compiler success-cleanup test. All repair prerequisites remain. |
 
 ## Decisions
 
@@ -1970,6 +1977,8 @@ additional reading credit from integration delivery.
 - None at decomposition. Ordinary source repairs retain startup prerequisites; later collection pressure must be measured rather than assumed away.
 
 ## Verification Log
+
+- `2026-09-21` .1.48: Eleven complete windows cover 1,032 fragments / 65,524 baseline bytes; ordered window SHA-256 d84f1017d31b0bd33fb239a44e9da6beebddfb6e5ea680e820ef93ff495cd896. Cumulative reading is 48/143: 61,350 fragments / 2,247,019 baseline bytes and 97 complete files. Phase0 is partial through line 11855. Unchanged canonical commit 87b35665e retains PASS for 27 completed subtests, ordinals 338–364 with 313 assertions. Phase0, own Perl sources and shipped specs remain unchanged; TAP replay verifies every sequential assertion number. The compiler success-cleanup test stops after its first of eight assertions; .1.49 owns the seven remaining assertions and invocation. Historical whole-gate proof remains 1032 top-level tests. No new runtime execution, runtime repair, dependency build, full CI or push is claimed; all repair prerequisites remain.
 
 - `2026-09-21` .1.47: Eleven complete windows cover 979 fragments / 65,510 baseline bytes; ordered window SHA-256 b46257ef9b64fa75fb31c9e49bc403bc3d5c96e59c69f3e6b13d44b040baa1a4. Cumulative reading is 47/143: 60,318 fragments / 2,181,495 baseline bytes and 97 complete files. Phase0 is partial through line 10823. Unchanged canonical commit 87b35665e retains PASS for 28 completed subtests, ordinals 310–337 with 280 assertions. Phase0, own Perl sources and shipped specs remain unchanged; TAP replay verifies every sequential assertion number. The reused-context resolution-failure test stops after eight of nine assertions; .1.48 owns its final assertion. Historical whole-gate proof remains 1032 top-level tests. No new runtime execution, runtime repair, dependency build, full CI or push is claimed; all repair prerequisites remain.
 
@@ -2035,6 +2044,8 @@ additional reading credit from integration delivery.
 
 ## Commit Log
 
+- `2026-09-21` .1.48: `CONFORMANCE-SOURCE-READING.1.48 - read public diagnostic propagation and handler lifecycle contracts`; activation 0a8c217a1; .1.49 follows clean handoff and empty brief.
+
 - `2026-09-21` .1.47: `CONFORMANCE-SOURCE-READING.1.47 - read mode-result validation and runtime-context reuse contracts`; activation 3e0468533; .1.48 follows clean handoff and empty brief.
 
 - `2026-09-21` .1.46: `CONFORMANCE-SOURCE-READING.1.46 - read compiler-state composition and parser-factory error contracts`; activation 38997866e; .1.47 follows clean handoff and empty brief.
@@ -2098,6 +2109,8 @@ additional reading credit from integration delivery.
 - `2026-09-13`: Decomposition lands under `SESSION-STARTUP-READING.3.8.0`; Git owns the resulting commit identity.
 
 ## Changelog
+
+- `2026-09-21` .1.48: Read public diagnostic propagation, handler invocation and compile-once controls; preserve the partial success-cleanup test and all repair prerequisites.
 
 - `2026-09-21` .1.47: Read single-mode result validation, preserved error ownership and context reuse; keep combined-mode repair and the partial resolution-failure test open.
 
