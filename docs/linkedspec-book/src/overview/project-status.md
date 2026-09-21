@@ -498,15 +498,15 @@ the director's focused-verification grant used for this correction and the separ
 supporting-reading closeout. Reading completion establishes audited comprehension;
 it does not close the six grammar/literal repair roots or establish runtime signoff.
 Conformance, test and Unicode reading has exact ownership for all 160 inputs in
-143 bounded groups covering 8,257,059 baseline decoded bytes. Forty-four groups account for
-57,321 fragments and 1,985,093 baseline bytes, including 97 complete files. Phase0 reading
-reaches line 7826. Validation acceptance, typed marker lowering and compiled-state construction
-have separate evidence. Compiler boundary tests check structured failure attribution; context
-helpers preserve hash/scalar-slot and capture-array identity, reset stale fields and retain prior
-structured errors. Thirty-seven completed subtests retain unchanged canonical proof with 295
-assertions. The owner-default-error test remains partial. No new runtime execution or whole-file
-reading credit is claimed. The pinned 113-byte inventory delta stays separate; helper .2.3,
-header .2.4 and all parser/runtime repairs remain open. No production behavior changes here.
+143 bounded groups covering 8,257,059 baseline decoded bytes. Forty-five groups account for
+58,366 fragments and 2,050,502 baseline bytes, including 97 complete files. Phase0 reading
+reaches line 8871. Context preparation differs by entry point while retaining caller state
+and clearing stale build fields. Compiler failure tests separately check stage, summary, detail,
+rule attribution and requested-top fallback. Generated helper assertions inspect source text;
+they do not independently execute that source. Twenty-six completed subtests retain unchanged
+canonical proof with 289 assertions. The compile-entry exception case remains partial. No new
+runtime execution or whole-file reading credit is claimed. The pinned 113-byte inventory delta
+stays separate; helper .2.3, header .2.4 and all parser/runtime repairs remain open.
 The director has requested integration guides and runnable consumer examples for
 Perl, Rust, Dart, Julia and Lua, covering recursive checkout, dependency preparation
 and reuse, native APIs, results/errors and packaging. This temporary activity is
