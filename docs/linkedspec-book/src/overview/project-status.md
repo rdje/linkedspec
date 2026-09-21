@@ -498,40 +498,38 @@ the director's focused-verification grant used for this correction and the separ
 supporting-reading closeout. Reading completion establishes audited comprehension;
 it does not close the six grammar/literal repair roots or establish runtime signoff.
 Conformance, test and Unicode reading has exact ownership for all 160 inputs in
-143 bounded groups covering 8,257,059 baseline decoded bytes. Reading now covers 81/143 groups, 97,904 fragments / 4,347,276 baseline bytes and 97 complete files.
-Phase0 reaches line 48409.
+143 bounded groups covering 8,257,059 baseline decoded bytes. Reading now covers 82/143 groups, 99,404 fragments / 4,399,178 baseline bytes and 100 complete files.
+Phase0, validation fuzz and progressive authority are complete; progressive contract is partial through line 353.
 
-Assignment expressions preserve stored values and mutation snapshots. Tests
-exercise scalar and aggregate results inside helpers, user functions, blocks
-and receiver chains. Nested writes update existing paths, append at array length
-and create missing intermediate containers.
+The Phase0 file is now fully read, along with validation fuzz and the private
+progressive authority consumer. Phase0 contains 1,031 subtests within its
+1,032-result top-level plan; the preceding checkpoint's wording is corrected.
+The validation fuzz suite uses deterministic cases, including 168 combinations
+of labels, colon forms and modes. It separates envelope validity, syntax validity
+and edge presence.
 
-Block tests distinguish a block-local early return from returning out of its
-caller. Helper and receiver with examples restore the outer value binding.
-Hash-tree traversal visits sorted keys and treats arrays as leaves; array-tree
-traversal visits indices in order and treats hashes as leaves. Concrete outputs
-check paths, depth, empty reductions and restoration of callback bindings.
-These immediate examples do not replace the later generic codeblock contract.
+**Two subprocess defects are owned by .2.16.** Four Phase0 capture helpers report
+a signal-terminated child as successful because they discard the signal bits.
+They also wait for stdout to close before draining stderr, which can block a
+child that fills stderr first. Forty-eight controlled outcomes confirm the
+mechanisms and distinguish in-memory guards. All eight timed-out owned children
+were terminated and reaped; no real CI child was signalled. The two repair slices
+will preserve termination status and drain both streams with exact-output checks.
 
-**The host-slot isolation repair now includes absent hash operands.** Independently
-loaded `count_keys(missing)` returns 0 with an empty host hash and 1 with an
-unrelated host key. Explicitly binding missing to an empty hash keeps it at 0.
-Startup .17.2 owns that case beside .17.1's absent-array case. Four fresh controls
-pass; ordinary live empty-state results do not establish seeded live isolation.
-No production repair has landed.
+**A parent-state observation gap is owned by .2.15.** The private progressive
+authority test compares a local fixture copy that is never passed to execution.
+Four independently changed states remain invisible to that predicate. This does
+not demonstrate runtime parent-state corruption. The repair must observe actual
+supported carrier state while preserving the authority's deliberate exclusion
+of parent registers.
 
-The .2.14 observation repair now has three bounded children: actual declaration
-sensitivity, meaningful comparisons, and remaining descriptions/guidance. They
-preserve useful runtime checks and remove claims about retired wrapper syntax.
-Inline-control checks also preserve their actual scope: fluent returns check the
-selected final payload without requiring an exact tag string.
-
-All Phase0 subtests have now been read. This slice retains canonical proof for
-the last fourteen, with 236 direct assertions. Its final wrapper verifies the
-admitted staged-AST child's exit and exact 143-test plan; that child was not
-freshly executed here. Trailing Phase0 helpers and the next test-file ranges
-remain for .1.82. MethodExpr .2.5, other repair prerequisites and the unused
-dependency grammar snapshot remain.
+Progressive tests retain concrete registry, source-view, rebasing, resource,
+chain and result-detachment checks. Their computed ceiling checks do not close
+the separate enforcement defect owned by startup .37. Fresh focused proof passes
+94 top-level and 571 nested assertions. Only the first 353 lines of the admitted
+carrier consumer are read and executed here; its runtime suffix remains .1.83.
+MethodExpr .2.5, the bounded .2.14 repairs and other prerequisites remain open.
+The dependency grammar snapshot remains unused.
 
 The director approved the finite documentation-capacity proposal under ADR0122.
 Containment `.15` admits exactly fourteen controls for the remaining 93 reading
@@ -558,8 +556,8 @@ The history files keep their 512-line / 65,536-byte caps, mandatory rollover and
 immutable archives. General card/part limits remain unchanged. Admission consumes
 one of the conservative 99 reserve units; the remaining 98 units are forecast
 after actual admission overhead. This capacity does not complete source reading
-or repair tests: reading now reaches 81/143, `.1.82` is next, and the test and recipe
-repairs `.2.5`–`.2.14` remain open.
+or repair tests: reading now reaches 82/143, `.1.83` is next, and the test and recipe
+repairs `.2.5`–`.2.16` remain open.
 
 The director has requested integration guides and runnable consumer examples for
 Perl, Rust, Dart, Julia and Lua, covering recursive checkout, dependency preparation

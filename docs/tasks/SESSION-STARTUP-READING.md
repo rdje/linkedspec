@@ -2299,7 +2299,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Status: `active`
   Goal: Split and read all 160 entries under capability_conformance, cli_conformance, t, tests, and unicode_case.
   Children: `.3.8.0` owns exact decomposition; `CONFORMANCE-SOURCE-READING.1` owns all143 reading groups; .2 findings and .3 independent closeout stay separate.
-  Reading owner: `docs/tasks/CONFORMANCE-SOURCE-READING.md`; 143 groups / 302 baseline ranges over 160 inputs. Physical reading 81/143 groups, 97,904 fragments / 4,347,276 baseline bytes and 97 complete files; Phase0 through 48409. Approved 113-byte inventory delta stays separate. Retained proof: 14 completed subtests, ordinals 1019–1032 with 236 direct assertions and no nested plans. All Phase0 subtests are read; helpers remain. .2.14 has three bounded repair children, and startup .17.2 owns reproduced absent-hash host-slot leakage. .2.5–.2.14 and all prerequisites remain. .1.82: finishing Phase0 helpers, then reading validation fuzz, progressive authority and the progressive contract prefix. ADR0122/containment .15 are canonically admitted at ec10be6b.
+  Reading owner: `docs/tasks/CONFORMANCE-SOURCE-READING.md`; 143 groups / 302 baseline ranges over 160 inputs. Physical reading 82/143 groups, 99,404 fragments / 4,399,178 baseline bytes and 100 complete files; Phase0, validation fuzz and progressive authority are complete; progressive contract is partial through line 353. Approved 113-byte inventory delta stays separate. Focused proof: Fresh focused proof passes 94 top-level assertions and 571 nested assertions across validation fuzz, private progressive authority and the exact read contract prefix; source-extracted parent controls add eight scope checks, and 48 process controls confirm status/pipe behavior with eight timeout children reaped. Three files finish. New .2.15 owns disconnected parent observations; .2.16 owns signal-status loss and sequential-pipe blocking. Prior .1.81 count wording is corrected. .2.5–.2.16 and all prerequisites remain. .1.83: reading the progressive contract suffix, zero-argument punctuation contract, recognition authority and recognition contract prefix. ADR0122/containment .15 are canonically admitted at ec10be6b.
   Acceptance: Include phase0, neutral contracts, fixtures, generators, and four explicitly decoded pinned Unicode
     inputs. Keep generated/fixture bytes in scope; count neither a hash nor enumeration as full reading.
   Verification: `pending`
@@ -4675,7 +4675,7 @@ startup implementation prerequisites and the rgx reading exclusion remain intact
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.82` | `pending` | Read the .1.82 four-file scope (1,500 fragments / 51,902 baseline bytes), finishing Phase0 helpers, then reading validation fuzz, progressive authority and the progressive contract prefix. Repairs .2.5–.2.14 and earlier repairs retain required source/book/policy reading prerequisites. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.83` | `pending` | Read the .1.83 scope (1,500 fragments / 50,515 baseline bytes), reading the progressive contract suffix, zero-argument punctuation contract, recognition authority and recognition contract prefix. Repairs .2.5–.2.16 and earlier repairs retain required source/book/policy reading prerequisites. |
 
 ## Reading Ledger
 

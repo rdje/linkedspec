@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.82 - complete Phase0 and own subprocess and parent observation gaps
+
+Read the .1.82 four-file scope: 82/143 groups, 99,404 fragments / 4,399,178 baseline bytes and 100 complete files. Focused proof: Fresh focused proof passes 94 top-level assertions and 571 nested assertions across validation fuzz, private progressive authority and the exact read contract prefix; source-extracted parent controls add eight scope checks, and 48 process controls confirm status/pipe behavior with eight timeout children reaped. Three files finish. New .2.15 owns disconnected parent observations; .2.16 owns signal-status loss and sequential-pipe blocking. Prior .1.81 count wording is corrected. New .2.15/.2.16 owners and the .1.81 count correction are recorded; all repairs retain prerequisites; .1.83 continues.
+
 ## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.81 - finish Phase0 subtests and bound remaining observation repairs
 
 Read Phase0 47308–48409: 81/143 groups, 97,904 fragments / 4,347,276 baseline bytes and 97 complete files. Retained proof covers 14 completed subtests, ordinals 1019–1032 with 236 direct assertions and no nested plans. All Phase0 subtests are read; helpers remain. .2.14 has three bounded repair children, and startup .17.2 owns reproduced absent-hash host-slot leakage. The bounded .2.14 inventory is extended; all repairs retain prerequisites; .1.82 continues.

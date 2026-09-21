@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.82 - complete Phase0 and own subprocess and parent observation gaps
+
+Read the final Phase0 helpers and two complete test files plus the admitted progressive contract prefix. Exact fresh proof is fuzz 5 top/307 nested, authority 9/264 and contract prefix80; no unread carrier suffix is executed or credited. Parent observation uses a fixture clone only: eight scope controls pass with the original authority assertions, without proving runtime corruption. Four source-extracted subprocess helpers each lose SIGTERM status and block on stderr-first/interleaved large output; 48 original/guard outcomes pass and all eight timeout children are reaped. .2.15 owns actual parent observations; .2.16 splits status and concurrent capture. Correct .1.81 terminology to the previously established 1031 subtests within 1032 top-level assertions; retained runtime results and source bytes are unchanged.
+
 ## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.81 - finish Phase0 subtests and bound remaining observation repairs
 
 Complete the aggregate assignment through final admitted staged-AST subtests: retained ordinals 1019–1032, 236 direct assertions. Exact block/traversal/restoration and inline-control payload checks remain bounded; the final child wrapper proves its retained exit/143-plan/top-level-failure conditions. All Phase0 subtests are physically read, but discovery and subprocess helpers remain. Split .2.14 into declaration sensitivity, genuine comparisons and description/guidance children before repair; preserve existing scope and acceptance. Four public live-empty/independently-loaded controls reproduce the absent-hash counterpart (0/1 versus explicitly bound 0/0), now owned by startup .17.2. No implementation or canonical rerun.

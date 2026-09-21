@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `CONFORMANCE-SOURCE-READING`
-- Status: `active` / exact decomposition; physical reading 81/143
+- Status: `active` / exact decomposition; physical reading 82/143
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.8`
 - Created: `2026-09-13`
 - Last updated: `2026-09-21`
@@ -1442,19 +1442,26 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
   Acceptance: Read every scoped byte in complete bounded windows; retain source identity, exact comprehension, canonical Knowledge reconciliation, concrete finding ownership, focused proof and per-leaf continuity. Unread crossing constructs retain the next range owner.
   Reading evidence: 11 complete windows / 1102 fragments / 65521 bytes; ordered window SHA-256 `88b6d7a76f044daca7b58c419ac2783e71e5d7bfadbcba02fdffbf9bc495dee7`.
   Comprehension: Assignment/mutation values preserve exact scalar-held shapes and snapshots, typed paths vivify missing intermediates, and block-local return plus with/traversal callbacks retain exact value/restoration controls. Inline control tests check selected payloads and descriptor condition, not exact fluent tag identity. The last admitted staged-AST wrapper checks child exit, exact 143 top-level plan and absence of top-level failure. All Phase0 subtests are now read through 1032, but discover_markdown_docs remains partial after the root-document loop. Existing .2.14 splits into declaration, contrast and description children; startup .17.2 owns fresh independently loaded absent hash host-state sensitivity.
-  Verification: Unchanged canonical commit ec10be6b retains PASS for 14 completed subtests, ordinals 1019–1032 with 236 direct assertions and no nested plans. Exact TAP numbering and source identity are verified. Assignment snapshots, typed paths, block-local returns, scoped with/traversal callbacks and selected inline-control payloads retain concrete checks. Fluent controls do not demand an exact tag string. The admitted staged-AST wrapper checks exit, exact 143 plan and top-level failures. Four fresh public controls reproduce absent-hash host-state sensitivity in independently loaded source, with explicit empty binding stable; startup .17.2 owns the repair. .2.14 is split into declaration, contrast and description children. All 1032 Phase0 subtests are read, but Markdown discovery and later helpers remain unread. Reading decomposes .2.14 and extends startup .17.2 without closing a repair; no production change, dependency build, canonical run or push is claimed; .2.5–.2.14 and all prerequisites remain.
+  Verification: Unchanged canonical commit ec10be6b retains PASS for 14 completed subtests, ordinals 1019–1032 with 236 direct assertions and no nested plans. Exact TAP numbering and source identity are verified. Assignment snapshots, typed paths, block-local returns, scoped with/traversal callbacks and selected inline-control payloads retain concrete checks. Fluent controls do not demand an exact tag string. The admitted staged-AST wrapper checks exit, exact 143 plan and top-level failures. Four fresh public controls reproduce absent-hash host-state sensitivity in independently loaded source, with explicit empty binding stable; startup .17.2 owns the repair. .2.14 is split into declaration, contrast and description children. All 1031 Phase0 subtests within 1032 top-level assertions are read, but Markdown discovery and later helpers remain unread. Reading decomposes .2.14 and extends startup .17.2 without closing a repair; no production change, dependency build, canonical run or push is claimed; .2.5–.2.14 and all prerequisites remain.
   Candidate proof: Exact baseline inventory/windows and retained TAP PASS; fresh absent-hash controls 4/4 PASS and durable recipe replay PASS. Knowledge 1157 facts / 9295 question keys; memory 60 lines; histories 288 lines / 47289 bytes and 286 lines / 50910 bytes; mdBook rendered; mutation and aggregate-selector public checks PASS. Preservation verifies 2851 other tracked files / 50664406 bytes, prior task bodies apart from documented .2.14 decomposition and startup .17.2 extension, exactly three new repair children, 53 other book files / all 1039 headings, histories and parent gitlink. Earlier diagnostic recipes remain exact. No canonical rerun or push.
   Commit: `CONFORMANCE-SOURCE-READING.1.81 - finish Phase0 subtests and bound remaining observation repairs`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.82`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `dc88fc1397b01a6dadb7b2d8a8cbf91b2169e1e0`.
+  Verification tier: `focused`
+  Focused checks: Complete source/window/coverage, focused TAP and source-extracted diagnostic checks; reconcile observation boundaries with canonical Knowledge; preservation, memory, histories, rendered book, direct public checks and normal doctrines.
+  Canonical trigger: Ordinary bounded reading and fact reconciliation; no source/public-contract/dependency/infrastructure change or parent closeout.
   Goal: Read and understand conformance/test/Unicode group 82.
   Scope: `t/phase0_regression.t` lines 48410-48675; `t/phase0_validation_fuzz.t` lines 1-450; `t/progressive_span_dispatch_perl_authority.t` lines 1-431; `t/progressive_span_dispatch_perl_contract.t` lines 1-353
   Baseline evidence: 1500 fragments / 51902 decoded bytes; ordered range SHA-256 `b256551d9615b13f84aa3fdcb475e0769153347e7d818f3f7118e61267a34f5c`.
   Dependencies: .1.81 committed with clean handoff.
   Acceptance: Read every scoped byte in complete bounded windows; retain source identity, exact comprehension, canonical Knowledge reconciliation, concrete finding ownership, focused proof and per-leaf continuity. Unread crossing constructs retain the next range owner.
-  Verification: `pending`
-  Commit: `pending`
+  Reading evidence: 11 complete windows / 1500 fragments / 51902 bytes; ordered window SHA-256 `2065b7fb8b41826e1ac61dc1d44dc734f927abae3cec287f1953574b8e73a4e5`.
+  Comprehension: Phase0 helpers finish Markdown discovery, cached parser smokes, Lispish forward-progress termination, captured IO and four open3 subprocess helpers. Validation fuzz is five deterministic surface matrices, including 168 label combinations, envelope/syntax distinction and edge presence. Private progressive authority checks registry seed isolation, views/rebasing, effective minima, budgets/chains, detached results and diagnostics; its parent copy is disconnected. Contract prefix freezes neutral inventories and private admission, rejects non-assignment dispatch and staged-adapter use, then ends after authored fixture text. Phase0 has 1031 subtests within 1032 top-level assertions, correcting .1.81 wording.
+  Verification: Fresh focused proof passes 94 top-level assertions and 571 nested assertions across validation fuzz, private progressive authority and the exact read contract prefix; source-extracted parent controls add eight scope checks, and 48 process controls confirm status/pipe behavior with eight timeout children reaped. Fuzz coverage is deterministic, not randomized. Progressive effective minima do not prove the ceilings whose enforcement remains startup .37-owned. Four parent fixture copies are disconnected from runtime state; independent changed-state controls leave the old assertions passing. Four Phase0 helpers report owned SIGTERM as zero and block on stderr-first/interleaved large output; in-memory guards distinguish both, and all timed-out children are reaped. Only the read 353-line contract prefix is executed; no carrier-suffix reading or runtime proof is credited. Phase0 has 1031 subtests within 1032 top-level assertions, correcting .1.81 terminology. New .2.15/.2.16 repair ownership and the .1.81 count correction are recorded; no production change, dependency build, canonical run or push is claimed; .2.5–.2.16 and all prerequisites remain.
+  Candidate proof: Exact baseline inventory/windows PASS; focused tests 94 top-level / 571 nested PASS; parent scope controls and 48 process controls PASS, with both durable recipes replayed. Knowledge 1159 facts / 9303 question keys; memory 60 lines; histories 292 lines / 48137 bytes and 290 lines / 51850 bytes; mdBook rendered; mutation and aggregate-selector public checks PASS. Preservation verifies 2853 other tracked files / 50683734 bytes, prior task bodies with only the explicit .1.81 subtest-count correction, exactly four new repair nodes, 53 other book files / all 1039 headings, histories and parent gitlink. Three newly complete files advance the cumulative complete-file count from 97 to 100. No canonical rerun or push.
+  Commit: `CONFORMANCE-SOURCE-READING.1.82 - complete Phase0 and own subprocess and parent observation gaps`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.83`
   Status: `pending`
@@ -2301,6 +2308,44 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
   Verification: `pending`
   Commit: `pending`
 
+- ID: `CONFORMANCE-SOURCE-READING.2.15`
+  Status: `pending`
+  Goal: Replace disconnected Perl progressive parent-state observations with actual supported-carrier state proof.
+  Evidence: .1.82 reads the execution matrix in t/progressive_span_dispatch_perl_authority.t: parent is a local fixture clone that is never passed to the invocation or callback, then compared only with its own saved serialization. Runtime corruption is not established.
+  Scope: The four execution rows' parent-preservation claims; audit the admitted carrier's remaining suffix before choosing actual state observations, and preserve independent result, resource, diagnostic and detachment checks.
+  Dependencies: Required source/book/policy reading, including conformance .1.83's carrier suffix; retain startup .37 resource-ceiling repair.
+  Acceptance: Observe actual supported-carrier cursor/capture/mark/variable/transaction state where available; distinguish deliberately inaccessible private-authority state from integration proof. Include a mutation control rejected by the same observation, preserve success/failure and falsey results, and align Knowledge/book claims with the exact exercised surface.
+  Verification: .1.82 source-extracted controls pass all original authority assertions plus eight scope checks: four independent changed states differ while the original parent predicates still pass. Exact recipe: docs/knowledge/perl-progressive-parent-state-test-gap.md. No runtime corruption or repair claimed.
+  Commit: `pending`
+
+- ID: `CONFORMANCE-SOURCE-READING.2.16`
+  Status: `pending`
+  Goal: Make Phase0 subprocess capture preserve child failure and remain live under output on either pipe.
+  Scope: run_get_parser_in_subprocess, run_parser_invocation_in_subprocess, run_perl_snippet_in_subprocess and run_perl_test_file_in_subprocess in t/phase0_regression.t. They drain stdout before stderr and interpret only the shifted exit byte. Startup .79 separately owns routing-verifier process status; use its established signal diagnosis without merging unrelated implementation surfaces.
+  Dependencies: Required source/book/policy reading; source-extracted .1.82 controls must confirm each claimed failure before repair.
+  Children: `.2.16.1`, `.2.16.2`.
+  Acceptance: Preserve ordinary success/nonzero exits, reject signal/wait failures, drain both pipes without deadlock, bound and reap controlled children, keep stdout/stderr exact, and run focused consumers plus appropriate broader verification without weakening diagnostics.
+  Verification: .1.82 diagnosis: 48 source-extracted controls pass: four helpers times six child outcomes times original/guard variants; all eight timed-out owned children are reaped. Evidence/replay: docs/knowledge/phase0-subprocess-capture-status-and-pipe-gap.md. No tracked implementation repair.
+  Commit: `pending`
+
+- ID: `CONFORMANCE-SOURCE-READING.2.16.1`
+  Status: `pending`
+  Goal: Preserve signal termination and wait failure in Phase0 subprocess status.
+  Scope: The four subprocess helpers owned by .2.16; retain public helper tuple compatibility or update all direct consumers coherently.
+  Dependencies: Parent .2.16 prerequisites and confirmed status controls.
+  Acceptance: Success, exit 7 and owned SIGTERM controls distinguish their outcomes; valid wait and normal termination are required for zero status. Preserve output and direct consumer diagnostics, including the admitted staged-AST wrapper.
+  Verification: .1.82 diagnosis: All four original helpers map owned SIGTERM to zero; in-memory guards report 143 while success/exit7 and small output remain correct. Evidence/replay: docs/knowledge/phase0-subprocess-capture-status-and-pipe-gap.md. No tracked implementation repair.
+  Commit: `pending`
+
+- ID: `CONFORMANCE-SOURCE-READING.2.16.2`
+  Status: `pending`
+  Goal: Drain Phase0 child output concurrently and reap every bounded test child.
+  Scope: The same four .2.16 helpers and their direct consumers; check shared TestHelpers separately before choosing reuse.
+  Dependencies: Parent .2.16 prerequisites and .2.16.1 clean handoff.
+  Acceptance: Large stderr before stdout, large stdout before stderr and interleaved output complete with exact captures; timeout/failure paths terminate and reap owned children. Preserve ordinary parser-marker and test-plan controls, run focused integration and reconcile both children before parent closeout.
+  Verification: .1.82 diagnosis: All four original helpers time out on stderr-first and interleaved large writes; multiplex controls complete with expected byte counts. All eight timeout children are terminated and reaped; exact large-output regression remains repair acceptance. Evidence/replay: docs/knowledge/phase0-subprocess-capture-status-and-pipe-gap.md. No tracked implementation repair.
+  Commit: `pending`
+
 - ID: `CONFORMANCE-SOURCE-READING.3`
   Status: `pending`
   Goal: Independently reconcile all source/range/reading-commit/repair evidence and close only the required reading lane with applicable verification.
@@ -2732,7 +2777,7 @@ additional reading credit from integration delivery.
 
 | Rank | Leaf | Status | Next action |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.82` | `pending` | Read the .1.82 four-file scope (1,500 fragments / 51,902 baseline bytes), finishing Phase0 helpers, then reading validation fuzz, progressive authority and the progressive contract prefix. Repairs .2.5–.2.14 and earlier repairs retain required source/book/policy reading prerequisites. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.83` | `pending` | Read the .1.83 scope (1,500 fragments / 50,515 baseline bytes), reading the progressive contract suffix, zero-argument punctuation contract, recognition authority and recognition contract prefix. Repairs .2.5–.2.16 and earlier repairs retain required source/book/policy reading prerequisites. |
 
 ## Decisions
 
@@ -2745,7 +2790,9 @@ additional reading credit from integration delivery.
 
 ## Verification Log
 
-- `2026-09-21` .1.81: 11 complete windows cover 1,102 fragments / 65,521 baseline bytes; ordered window SHA-256 88b6d7a76f044daca7b58c419ac2783e71e5d7bfadbcba02fdffbf9bc495dee7. Cumulative reading is 81/143 groups, 97,904 fragments / 4,347,276 baseline bytes and 97 complete files. Phase0 is partial through line 48409. Unchanged canonical commit ec10be6b retains PASS for 14 completed subtests, ordinals 1019–1032 with 236 direct assertions and no nested plans. Exact TAP numbering and source identity are verified. Assignment snapshots, typed paths, block-local returns, scoped with/traversal callbacks and selected inline-control payloads retain concrete checks. Fluent controls do not demand an exact tag string. The admitted staged-AST wrapper checks exit, exact 143 plan and top-level failures. Four fresh public controls reproduce absent-hash host-state sensitivity in independently loaded source, with explicit empty binding stable; startup .17.2 owns the repair. .2.14 is split into declaration, contrast and description children. All 1032 Phase0 subtests are read, but Markdown discovery and later helpers remain unread. Reading decomposes .2.14 and extends startup .17.2 without closing a repair; no production change, dependency build, canonical run or push is claimed; .2.5–.2.14 and all prerequisites remain.
+- `2026-09-21` .1.82: 11 complete windows cover 1,500 fragments / 51,902 baseline bytes; ordered window SHA-256 2065b7fb8b41826e1ac61dc1d44dc734f927abae3cec287f1953574b8e73a4e5. Cumulative reading is 82/143 groups, 99,404 fragments / 4,399,178 baseline bytes and 100 complete files. Phase0, validation fuzz and progressive authority are complete; progressive contract is partial through line 353. Fresh focused proof passes 94 top-level assertions and 571 nested assertions across validation fuzz, private progressive authority and the exact read contract prefix; source-extracted parent controls add eight scope checks, and 48 process controls confirm status/pipe behavior with eight timeout children reaped. Fuzz coverage is deterministic, not randomized. Progressive effective minima do not prove the ceilings whose enforcement remains startup .37-owned. Four parent fixture copies are disconnected from runtime state; independent changed-state controls leave the old assertions passing. Four Phase0 helpers report owned SIGTERM as zero and block on stderr-first/interleaved large output; in-memory guards distinguish both, and all timed-out children are reaped. Only the read 353-line contract prefix is executed; no carrier-suffix reading or runtime proof is credited. Phase0 has 1031 subtests within 1032 top-level assertions, correcting .1.81 terminology. New .2.15/.2.16 repair ownership and the .1.81 count correction are recorded; no production change, dependency build, canonical run or push is claimed; .2.5–.2.16 and all prerequisites remain.
+
+- `2026-09-21` .1.81: 11 complete windows cover 1,102 fragments / 65,521 baseline bytes; ordered window SHA-256 88b6d7a76f044daca7b58c419ac2783e71e5d7bfadbcba02fdffbf9bc495dee7. Cumulative reading is 81/143 groups, 97,904 fragments / 4,347,276 baseline bytes and 97 complete files. Phase0 is partial through line 48409. Unchanged canonical commit ec10be6b retains PASS for 14 completed subtests, ordinals 1019–1032 with 236 direct assertions and no nested plans. Exact TAP numbering and source identity are verified. Assignment snapshots, typed paths, block-local returns, scoped with/traversal callbacks and selected inline-control payloads retain concrete checks. Fluent controls do not demand an exact tag string. The admitted staged-AST wrapper checks exit, exact 143 plan and top-level failures. Four fresh public controls reproduce absent-hash host-state sensitivity in independently loaded source, with explicit empty binding stable; startup .17.2 owns the repair. .2.14 is split into declaration, contrast and description children. All 1031 Phase0 subtests within 1032 top-level assertions are read, but Markdown discovery and later helpers remain unread. Reading decomposes .2.14 and extends startup .17.2 without closing a repair; no production change, dependency build, canonical run or push is claimed; .2.5–.2.14 and all prerequisites remain.
 
 - `2026-09-21` .1.80: 11 complete windows cover 1,116 fragments / 65,486 baseline bytes; ordered window SHA-256 22f63513d9476c07cb7936e5124a36243391d1bed417b8ea1b4c884eb92c0eae. Cumulative reading is 80/143 groups, 96,802 fragments / 4,281,755 baseline bytes and 97 complete files. Phase0 is partial through line 47307. Unchanged canonical commit ec10be6b retains PASS for 17 completed subtests, ordinals 1002–1018 with 244 direct assertions and no nested plans. Exact TAP numbering and source identity are verified. Colon literals evaluate bare keys while quoted keys are fixed; retired fat-arrow source diagnoses. Shape binding, receiver families and numeric/string comparisons retain exact lowering/runtime proof. Fresh array-receiver replay passes 12 assertions. Exact public capture has no missing scalar declaration but reads undeclared @missing; four public controls show independently loaded absent-receiver results depend on isolated host-array state, while an explicit empty binding does not. Startup .17.1 owns that defect, .2.14 retains bounded description corrections, and no production repair is claimed. The next aggregate-assignment test is partial inside its runtime helper. Reading extends existing .2.14 and startup .17.1 without closing a repair; no production change, dependency build, canonical run or push is claimed; .2.5–.2.14 and all prerequisites remain.
 
@@ -2878,6 +2925,8 @@ additional reading credit from integration delivery.
 - `2026-09-13`: Startup .3.8.0 independently verifies all160 files/143 groups/302 ranges and four decoded hashes; Unicode casing and rule-label checks PASS. Source/task/history, actual capacity, memory, Knowledge, histories, rendered book and normal hooks govern planning. Physical reading remains0/143.
 
 ## Commit Log
+
+- `2026-09-21` .1.82: `CONFORMANCE-SOURCE-READING.1.82 - complete Phase0 and own subprocess and parent observation gaps`; activation dc88fc139; .1.83 follows clean handoff and empty brief.
 
 - `2026-09-21` .1.81: `CONFORMANCE-SOURCE-READING.1.81 - finish Phase0 subtests and bound remaining observation repairs`; activation dc8976d29; .1.82 follows clean handoff and empty brief.
 
@@ -3012,6 +3061,8 @@ additional reading credit from integration delivery.
 - `2026-09-13`: Decomposition lands under `SESSION-STARTUP-READING.3.8.0`; Git owns the resulting commit identity.
 
 ## Changelog
+
+- `2026-09-21` .1.82: Three files finish. New .2.15 owns disconnected parent observations; .2.16 owns signal-status loss and sequential-pipe blocking. Prior .1.81 count wording is corrected.
 
 - `2026-09-21` .1.81: All Phase0 subtests are read; helpers remain. .2.14 has three bounded repair children, and startup .17.2 owns reproduced absent-hash host-slot leakage.
 

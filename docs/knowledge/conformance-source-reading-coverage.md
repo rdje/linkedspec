@@ -11,7 +11,7 @@ answers:
   - "what evidence capacity blocks remaining conformance reading"
   - "what exact fourteen limits are proposed for remaining conformance reading"
 date: 2026-09-21
-status: exact baseline decomposition preserved; physical reading 81/143, 97 files complete and 62 groups remain; one approved current-source delta
+status: exact baseline decomposition preserved; physical reading 82/143, 100 files complete and 61 groups remain; one approved current-source delta
 tags: [reading, conformance, tests, unicode, continuity, CONFORMANCE-SOURCE-READING]
 evidence: "Startup .3.8.0 independently accounts for160 baseline-identical files,5,422,313 stored bytes and8,257,059 decoded bytes in167,606 line fragments/167,604 LF delimiters. Four gzip inputs contribute54,500 decoded lines. All143 groups/302 ranges are contiguous, disjoint and bounded at1500 fragments/65536 bytes. No source, registry or runtime behavior changes; no physical-reading credit from inventory."
 reverify: "Run CONFORMANCE_SOURCE_READING_COVERAGE below through the project-data wrapper; it derives source identity from Git and range ownership from the task-tree rather than a parallel manifest. Use scripts/check_task_tree_metadata.sh for actual task collection limits."
@@ -428,15 +428,15 @@ properties, context rules, fixtures or decoded upstream inputs. All repairs rema
 
 ## Conformance reading checkpoint
 
-`CONFORMANCE-SOURCE-READING.1.81` reads 11 windows, 1,102 fragments and 65,521 baseline bytes.
-Cumulative reading is 81/143 groups, 97,904 fragments / 4,347,276 baseline bytes and 97 complete files.
-Phase0 is partial through line 48409; .1.82 owns the helper suffix and remaining test-file ranges.
+`CONFORMANCE-SOURCE-READING.1.82` reads 11 windows, 1,500 fragments and 51,902 baseline bytes.
+Cumulative reading is 82/143 groups, 99,404 fragments / 4,399,178 baseline bytes and 100 complete files.
+Phase0, validation fuzz and progressive authority are complete; progressive contract is partial through line 353.
 [[conformance-perl-consumer-reading]] records this checkpoint's exact observation boundaries.
-Retained proof covers 14 completed subtests, ordinals 1019–1032 with 236 direct assertions and no nested plans.
-Startup .17.2 owns the reproduced absent-hash host-slot leak; .2.14 has three bounded repair children.
-All .2.5–.2.14 and earlier repairs retain prerequisites.
-The pinned 113-byte delta stays separate; these ranges total 4,347,389 current bytes.
-Next .1.82: finishing Phase0 helpers, then reading validation fuzz, progressive authority and the progressive contract prefix.
+Focused proof: Fresh focused proof passes 94 top-level assertions and 571 nested assertions across validation fuzz, private progressive authority and the exact read contract prefix; source-extracted parent controls add eight scope checks, and 48 process controls confirm status/pipe behavior with eight timeout children reaped.
+New .2.15 owns parent-state observations; .2.16 owns subprocess status and pipe draining.
+All .2.5–.2.16 and earlier repairs retain prerequisites.
+The pinned 113-byte delta stays separate; these ranges total 4,399,291 current bytes.
+Next .1.83: reading the progressive contract suffix, zero-argument punctuation contract, recognition authority and recognition contract prefix.
 
 Lowercase table entries and Final Sigma context remain separate. Exact scalar
 sequences, sparse ranges, fullwidth forms and ligature identities are preserved;
