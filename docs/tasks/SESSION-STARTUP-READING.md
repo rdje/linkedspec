@@ -2299,7 +2299,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Status: `active`
   Goal: Split and read all 160 entries under capability_conformance, cli_conformance, t, tests, and unicode_case.
   Children: `.3.8.0` owns exact decomposition; `CONFORMANCE-SOURCE-READING.1` owns all143 reading groups; .2 findings and .3 independent closeout stay separate.
-  Reading owner: `docs/tasks/CONFORMANCE-SOURCE-READING.md`; 143 groups / 302 baseline ranges over 160 inputs. Physical reading 80/143 groups, 96,802 fragments / 4,281,755 baseline bytes and 97 complete files; Phase0 through 47307. Approved 113-byte inventory delta stays separate. Retained proof: 17 completed subtests, ordinals 1002–1018 with 244 direct assertions and no nested plans. Shape/receiver and numeric comparison checks retain exact results; startup .17.1 now owns reproduced absent-receiver host-slot leakage and .2.14 owns remaining obsolete target descriptions. .2.5–.2.14 and all prerequisites remain. .1.81: reading aggregate assignment expression values and subsequent mutation expressions. ADR0122/containment .15 are canonically admitted at ec10be6b.
+  Reading owner: `docs/tasks/CONFORMANCE-SOURCE-READING.md`; 143 groups / 302 baseline ranges over 160 inputs. Physical reading 81/143 groups, 97,904 fragments / 4,347,276 baseline bytes and 97 complete files; Phase0 through 48409. Approved 113-byte inventory delta stays separate. Retained proof: 14 completed subtests, ordinals 1019–1032 with 236 direct assertions and no nested plans. All Phase0 subtests are read; helpers remain. .2.14 has three bounded repair children, and startup .17.2 owns reproduced absent-hash host-slot leakage. .2.5–.2.14 and all prerequisites remain. .1.82: finishing Phase0 helpers, then reading validation fuzz, progressive authority and the progressive contract prefix. ADR0122/containment .15 are canonically admitted at ec10be6b.
   Acceptance: Include phase0, neutral contracts, fixtures, generators, and four explicitly decoded pinned Unicode
     inputs. Keep generated/fixture bytes in scope; count neither a hash nor enumeration as full reading.
   Verification: `pending`
@@ -2594,6 +2594,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 - ID: `SESSION-STARTUP-READING.17.2`
   Status: `pending`
   Goal: Apply the same evaluated-value boundary to hash counts, key views, and membership.
+  Conformance .1.81 extension: Public count_keys(missing) with an absent bare binding returns 0/1 under empty/populated isolated host hashes in independently loaded generated source; set(missing, {}) stays 0/0. Include absent bare hash operands and loaded-source isolation alongside the existing wrong-kind cases. Four fresh controls pass; ordinary live empty-state checks do not establish seeded live behavior. Exact reproduction: docs/knowledge/perl-wrong-kind-collection-host-slot-drift.md.
   Acceptance: Lock count_keys/sorted_keys/has_key against unrelated host hashes; cover wrong kinds, present null,
     missing keys, evaluated key order, detached views and snapshots, side effects, and supported carriers.
     Reconcile the governed wrong-kind contract before changing results; preserve valid aggregate bindings.
@@ -4674,7 +4675,7 @@ startup implementation prerequisites and the rgx reading exclusion remain intact
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.81` | `pending` | Read Phase0 lines 47308–48409 (1,102 fragments / 65,521 baseline bytes), reading aggregate assignment expression values and subsequent mutation expressions. Repairs .2.5–.2.14 and earlier repairs retain required source/book/policy reading prerequisites. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.82` | `pending` | Read the .1.82 four-file scope (1,500 fragments / 51,902 baseline bytes), finishing Phase0 helpers, then reading validation fuzz, progressive authority and the progressive contract prefix. Repairs .2.5–.2.14 and earlier repairs retain required source/book/policy reading prerequisites. |
 
 ## Reading Ledger
 

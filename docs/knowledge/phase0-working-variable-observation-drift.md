@@ -7,6 +7,7 @@ answers:
   - why do working-variable dedup tests still describe wrapped targets
   - which task owns Phase0 working-variable observation drift
   - which migrated Phase0 equivalence tests compare identical current inputs
+  - which bounded repair leaves own declaration contrast and description drift
 date: 2026-09-21
 status: confirmed test observation and description drift; .2.14 repair retains required reading prerequisites
 tags: [perl, phase0, working-variables, tests, uniform-binding, observation-gap]
@@ -82,6 +83,18 @@ different case: public capture confirms zero scalar declarations and an
 undeclared host-array read. Do not invent a missing positive declaration there.
 Its demonstrated host-state sensitivity is owned by startup `.17.1` and recorded
 in [[perl-wrong-kind-collection-host-slot-drift]].
+
+Group 81 completes `.3_3_2`: two repeated current `set` cases still claim
+temporary explicit aggregate targets, and its runtime label mentions a scalar
+wrapper that the fixture no longer uses. The quoted-constructor `.2_3_5_6`
+and `.11_2` value-memory tests also retain wrapper/view wording. The `.2_1_2`
+block introduction calls retired fat-arrow braces current hash literals, even
+though its assertions correctly use colon pairs. Their concrete results survive.
+
+The repair now has three bounded children: `.2.14.1` for actual declaration
+sensitivity, `.2.14.2` for meaningful migrated comparisons, and `.2.14.3` for
+remaining descriptions and associated maintained guidance. Each retains required
+reading and its own verification/commit boundary; this decomposition closes none.
 
 `CONFORMANCE-SOURCE-READING.2.14` owns that bounded repair after required
 source/book/policy reading. It must observe actual nonempty scalar-held binding

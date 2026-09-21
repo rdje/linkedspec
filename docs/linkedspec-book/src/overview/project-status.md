@@ -498,36 +498,40 @@ the director's focused-verification grant used for this correction and the separ
 supporting-reading closeout. Reading completion establishes audited comprehension;
 it does not close the six grammar/literal repair roots or establish runtime signoff.
 Conformance, test and Unicode reading has exact ownership for all 160 inputs in
-143 bounded groups covering 8,257,059 baseline decoded bytes. Reading now covers 80/143 groups, 96,802 fragments / 4,281,755 baseline bytes and 97 complete files.
-Phase0 reaches line 47307.
+143 bounded groups covering 8,257,059 baseline decoded bytes. Reading now covers 81/143 groups, 97,904 fragments / 4,347,276 baseline bytes and 97 complete files.
+Phase0 reaches line 48409.
 
-Colon hash literals evaluate their key expressions. For example, binding key to
-"stage" makes `{ key : value }` use that field name; quote a fixed field name.
-Tests cover nested shapes, assignment values and expression-valued blocks.
-Retired hash-literal `=>` source produces a migration diagnostic, while generated
-Perl retains its own host hash syntax.
+Assignment expressions preserve stored values and mutation snapshots. Tests
+exercise scalar and aggregate results inside helpers, user functions, blocks
+and receiver chains. Nested writes update existing paths, append at array length
+and create missing intermediate containers.
 
-Receiver tests preserve concrete array, hash, string, numeric and block results.
-Named array-end mutations return independent updated arrays. Pure methods can
-bridge compatible families; terminal string/number/reducer calls followed by
-incompatible methods yield null. Numeric word/symbol comparisons remain distinct
-from lexical str_* comparisons, including the values "10" and "2".
+Block tests distinguish a block-local early return from returning out of its
+caller. Helper and receiver with examples restore the outer value binding.
+Hash-tree traversal visits sorted keys and treats arrays as leaves; array-tree
+traversal visits indices in order and treats hashes as leaves. Concrete outputs
+check paths, depth, empty reductions and restoration of callback bindings.
+These immediate examples do not replace the later generic codeblock contract.
 
-**An absent-receiver isolation defect is owned by startup .17.1.** In independently
-loaded generated Perl, `missing.sorted().is_empty()` reads an undeclared host
-array. It returns 1 with an empty host array and 0 with an unrelated host element.
-Explicitly assigning `missing = []` keeps the result at 1 in both states. The
-four diagnostic controls pass, and the twelve existing array-receiver assertions
-also pass; they do not test that isolation boundary. Ordinary live empty-state
-controls pass, but seeded live behavior was not measured. The repair must cover
-the loaded-source route and preserve legitimate implicit rule accumulators.
+**The host-slot isolation repair now includes absent hash operands.** Independently
+loaded `count_keys(missing)` returns 0 with an empty host hash and 1 with an
+unrelated host key. Explicitly binding missing to an empty hash keeps it at 0.
+Startup .17.2 owns that case beside .17.1's absent-array case. Four fresh controls
+pass; ordinary live empty-state results do not establish seeded live isolation.
+No production repair has landed.
 
-The existing .2.14 repair also owns remaining descriptions that call current
-bare bindings explicit aggregate targets or receivers. No production repair has
-landed. Seventeen completed subtests retain canonical proof with 244 direct
-assertions and no nested plans. Aggregate assignment expressions are partial;
-.1.81 continues. MethodExpr .2.5, other repairs and the reading prerequisites
-remain, as do the unused dependency grammar snapshot and separate inventory delta.
+The .2.14 observation repair now has three bounded children: actual declaration
+sensitivity, meaningful comparisons, and remaining descriptions/guidance. They
+preserve useful runtime checks and remove claims about retired wrapper syntax.
+Inline-control checks also preserve their actual scope: fluent returns check the
+selected final payload without requiring an exact tag string.
+
+All Phase0 subtests have now been read. This slice retains canonical proof for
+the last fourteen, with 236 direct assertions. Its final wrapper verifies the
+admitted staged-AST child's exit and exact 143-test plan; that child was not
+freshly executed here. Trailing Phase0 helpers and the next test-file ranges
+remain for .1.82. MethodExpr .2.5, other repair prerequisites and the unused
+dependency grammar snapshot remain.
 
 The director approved the finite documentation-capacity proposal under ADR0122.
 Containment `.15` admits exactly fourteen controls for the remaining 93 reading
@@ -554,7 +558,7 @@ The history files keep their 512-line / 65,536-byte caps, mandatory rollover and
 immutable archives. General card/part limits remain unchanged. Admission consumes
 one of the conservative 99 reserve units; the remaining 98 units are forecast
 after actual admission overhead. This capacity does not complete source reading
-or repair tests: reading now reaches 80/143, `.1.81` is next, and the test and recipe
+or repair tests: reading now reaches 81/143, `.1.82` is next, and the test and recipe
 repairs `.2.5`–`.2.14` remain open.
 
 The director has requested integration guides and runnable consumer examples for

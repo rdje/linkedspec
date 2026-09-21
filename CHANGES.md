@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.81 - finish Phase0 subtests and bound remaining observation repairs
+
+Read Phase0 47308–48409: 81/143 groups, 97,904 fragments / 4,347,276 baseline bytes and 97 complete files. Retained proof covers 14 completed subtests, ordinals 1019–1032 with 236 direct assertions and no nested plans. All Phase0 subtests are read; helpers remain. .2.14 has three bounded repair children, and startup .17.2 owns reproduced absent-hash host-slot leakage. The bounded .2.14 inventory is extended; all repairs retain prerequisites; .1.82 continues.
+
 ## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.80 - read shape and receiver checks and own absent host-slot leakage
 
 Read Phase0 46192–47307: 80/143 groups, 96,802 fragments / 4,281,755 baseline bytes and 97 complete files. Retained proof covers 17 completed subtests, ordinals 1002–1018 with 244 direct assertions and no nested plans. Shape/receiver and numeric comparison checks retain exact results; startup .17.1 now owns reproduced absent-receiver host-slot leakage and .2.14 owns remaining obsolete target descriptions. The bounded .2.14 inventory is extended; all repairs retain prerequisites; .1.81 continues.

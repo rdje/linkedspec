@@ -7,6 +7,7 @@ answers:
   - "which task owns collection helper host-slot isolation"
   - "can an absent bare array receiver read an unrelated host array"
   - "why does missing sorted is empty depend on generated package state"
+  - "can count_keys of an absent binding read an unrelated host hash"
 date: 2026-09-21
 status: dated diagnostic evidence; repair state belongs to the owning task-tree
 tags: ["startup-reading","perl","collections","lowering"]
@@ -96,4 +97,60 @@ for my $case (['absent','','Probe::Conformance80Absent'], ['bound','set(missing,
 }
 done_testing();
 ABSENT_RECEIVER_HOST_SLOT
+```
+
+## Absent hash operand extension — September 21
+
+Conformance group 81 reads the quoted-constructor boundary test: its public
+helper-only `count_keys(bar)` expectation still uses the bare host-hash fallback,
+while the full runtime fixture initializes a typed `meta` binding first. Those
+observations must not be conflated.
+
+Four fresh controls reproduce the absent hash counterpart through public APIs.
+Independently loaded `count_keys(missing)` returns 0 with an empty host hash and
+1 with an unrelated host key. Explicit `set(missing, {})` stays 0 in both states.
+Ordinary live empty-state controls also return 0; seeded live behavior remains
+unmeasured. Startup `.17.2` explicitly owns this case and its generated-source
+regression. As above, this diagnostic expects the current defect, not repaired
+behavior.
+
+```bash
+bash tools/project_data_run.sh perl -Iperl - <<'ABSENT_HASH_HOST_SLOT'
+use strict;
+use warnings;
+use LinkedSpec;
+use JSON::PP;
+use Test::More;
+
+my $json = JSON::PP->new->canonical->allow_nonref;
+for my $case (
+    ['absent', '', 'Probe::Conformance81Absent'],
+    ['bound', 'set(missing, {}); ', 'Probe::Conformance81Bound'],
+) {
+    my ($name, $prefix, $package) = @$case;
+    my $spec = "Top::\n /x/ -> Done { ${prefix}return(count_keys(missing)) }\n"
+             . "\nDone::\n /[a-z]+/\n";
+    my $live = LinkedSpec::Get(\$spec);
+    my $input = 'xhello';
+    is($live->(\$input), 0, "$name live empty-state control");
+
+    my $source = LinkedSpec::emit_generated_source(
+        \$spec, source_identity => "conformance81-$name.spec",
+    );
+    eval "package $package; $source; 1" or die $@;
+    my @results;
+    for my $seed (0, 1) {
+        no strict 'refs';
+        local %{$package . '::missing'} = $seed ? (ambient => 'host-value') : ();
+        my $input = 'xhello';
+        push @results, &{$package . '::Execute'}(\$input);
+    }
+    print $json->encode({
+        case => $name, empty_host => $results[0], seeded_host => $results[1],
+    }), "\n";
+    is_deeply(\@results, $name eq 'absent' ? [0, 1] : [0, 0],
+              "$name source-qualified host-slot sensitivity");
+}
+done_testing();
+ABSENT_HASH_HOST_SLOT
 ```

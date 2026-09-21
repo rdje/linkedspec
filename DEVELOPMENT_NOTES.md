@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.81 - finish Phase0 subtests and bound remaining observation repairs
+
+Complete the aggregate assignment through final admitted staged-AST subtests: retained ordinals 1019–1032, 236 direct assertions. Exact block/traversal/restoration and inline-control payload checks remain bounded; the final child wrapper proves its retained exit/143-plan/top-level-failure conditions. All Phase0 subtests are physically read, but discovery and subprocess helpers remain. Split .2.14 into declaration sensitivity, genuine comparisons and description/guidance children before repair; preserve existing scope and acceptance. Four public live-empty/independently-loaded controls reproduce the absent-hash counterpart (0/1 versus explicitly bound 0/0), now owned by startup .17.2. No implementation or canonical rerun.
+
 ## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.80 - read shape and receiver checks and own absent host-slot leakage
 
 Colon/shape tests preserve evaluated key and scalar-held binding semantics; current receiver returns and terminal boundaries match the dated Knowledge updates. A fresh twelve-assertion array-receiver replay passes. Its exact public source contains no missing scalar declaration but reads undeclared @missing, correcting the initial diagnostic hypothesis before any claim. Four live-empty/independently-loaded controls reproduce host-array sensitivity only for the absent receiver (1/0), with explicit empty binding stable (1/1). Extend startup .17.1 with this concrete case and loaded-source regression obligation, preserving implicit rule accumulators. .2.14 separately owns old explicit-selector descriptions. No dropped-declaration mutation controls were run or claimed for this fixture.
