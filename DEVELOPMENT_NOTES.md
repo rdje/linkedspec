@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.68 - read fallback lowering and normalization metadata
+
+Direct lowering plans 2,3,4,5,3 check coalesce, coalesce_nonempty, definedness, aggregate emptiness and scalar normalization. Their exact strings/anchored patterns observe emitted expressions; they do not execute target behavior. Seventeen descriptor pairs contribute 204 further assertions with .2.10 observation limits. Source-span extraction and Unicode casing remain explicit in the expectations. Exact comprehension remains in conformance-perl-consumer-reading.
+
 ## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.67 - read payload branches and captured-call descriptor comparisons
 
 Modulo/clamp and array-drop pairs precede join-values and flat-list branches, direct call capture and action if/elseif call capture. Node requirements distinguish IF/ELIF, SWITCH/CASE/DEFAULT and ASSIGN/CALL/RETURN, but do not execute helper outputs or Leaf return propagation. The action switch call-value predicate remains partial after CALL. Exact comprehension remains in conformance-perl-consumer-reading.

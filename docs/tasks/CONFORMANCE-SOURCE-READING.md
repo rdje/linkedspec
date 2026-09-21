@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `CONFORMANCE-SOURCE-READING`
-- Status: `active` / exact decomposition; physical reading 67/143
+- Status: `active` / exact decomposition; physical reading 68/143
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.8`
 - Created: `2026-09-13`
 - Last updated: `2026-09-21`
@@ -1208,14 +1208,21 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
   Commit: `CONFORMANCE-SOURCE-READING.1.67 - read payload branches and captured-call descriptor comparisons`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.68`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `c69ece0e62701d44d64f101c97305ee59323d820`.
+  Verification tier: `focused`
+  Focused checks: Complete reading and exact coverage/window replay; retained direct/nested TAP proof and canonical observation-gap reconciliation; Knowledge, preservation, memory, histories, book, direct public checks and normal doctrines.
+  Canonical trigger: Ordinary bounded reading and fact reconciliation; no runtime, dependency, public contract, infrastructure or parent-closeout change.
   Goal: Read and understand conformance/test/Unicode group 68.
   Scope: `t/phase0_regression.t` lines 35430-36290
   Baseline evidence: 861 fragments / 65511 decoded bytes; ordered range SHA-256 `d9b5680c28c98724837615ea8b3b918129645c7170e1a4f0f434a213ccf5f38e`.
   Dependencies: .1.67 committed with clean handoff.
   Acceptance: Read every scoped byte in complete bounded windows; retain source identity, exact comprehension, canonical Knowledge reconciliation, concrete finding ownership, focused proof and per-leaf continuity. Unread crossing constructs retain the next range owner.
-  Verification: `pending`
-  Commit: `pending`
+  Reading evidence: 11 complete windows / 861 fragments / 65511 bytes; ordered window SHA-256 `01426c078629e81653e48b56bc551044f7f812cbf5fa75dce094c2a97194a1e7`.
+  Comprehension: Completes action switch and LX call branches, then nested accessor, array normalization and case/filter descriptor pairs. Coalesce/coalesce_nonempty, definedness and aggregate emptiness have both direct lowering checks and action/LX descriptor pairs. Direct expectations distinguish first-defined from defined-nonempty fallback, scalar/array/hash emptiness and RuntimeLogical truthy flow wrappers. Scalar trim/lowercase/uppercase expectations use SourceLocation spans and UnicodeCaseMapping. These seventeen direct textual assertions are meaningful lowering observations but do not execute the resulting target code. Descriptor uppercase-slot comparisons remain .2.10-owned. The next action scalar-normalization descriptor test is partial after its fluent fixture; .1.69 owns the structured fixture and assertions.
+  Verification: Unchanged canonical commit ec10be6b retains PASS for twenty-two completed subtests, ordinals 700–721 with 221 direct assertions and no nested plans. Seventeen descriptor comparisons contribute 204 assertions; five direct-lowering plans of 2,3,4,5,3 contribute seventeen textual assertions. Exact TAP numbering and source identity are verified. Lowering observations distinguish fallback, definedness, aggregate emptiness and scalar normalization; they do not execute generated target code. Descriptor uppercase-slot comparisons remain .2.10-owned. The next action scalar-normalization comparison is partial after its fluent fixture; .1.69 owns the structured fixture and assertions. No independently reproduced new defect, runtime execution, repair, dependency build, canonical run or push is claimed; .2.5–.2.11 and all prerequisites remain.
+  Candidate proof: Exact inventory and .1.68 window replay PASS; cumulative 68/143 independently totals 85,785 fragments / 3,496,045 baseline bytes. Retained TAP identity/numbering PASS. Preservation PASS for 2,850 other files, 514 prior nodes and all 1,039 book headings. Knowledge 1,154 facts / 9,265 keys; memory 60 lines; history bounds, mdBook build, mutation public surface (50 mutations), aggregate selector (11 contrasts / capability 100 matches) and diff whitespace PASS. Normal commit doctrines are the final boundary.
+  Commit: `CONFORMANCE-SOURCE-READING.1.68 - read fallback lowering and normalization metadata`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.69`
   Status: `pending`
@@ -2572,7 +2579,7 @@ additional reading credit from integration delivery.
 
 | Rank | Leaf | Status | Next action |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.68` | `pending` | Read Phase0 lines 35430–36290 (861 fragments / 65,511 baseline bytes), continuing the final node predicate of the action switch call-value comparison. Repairs .2.5–.2.11 and earlier repairs retain required reading prerequisites. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.69` | `pending` | Read Phase0 lines 36291–36947 (657 fragments / 65,437 baseline bytes), continuing the structured fixture and assertions of the action scalar-normalization comparison. Repairs .2.5–.2.11 and earlier repairs retain required reading prerequisites. |
 
 ## Decisions
 
@@ -2584,6 +2591,8 @@ additional reading credit from integration delivery.
 - None at decomposition. Ordinary source repairs retain startup prerequisites; later collection pressure must be measured rather than assumed away.
 
 ## Verification Log
+
+- `2026-09-21` .1.68: Eleven complete windows cover 861 fragments / 65,511 baseline bytes; ordered window SHA-256 01426c078629e81653e48b56bc551044f7f812cbf5fa75dce094c2a97194a1e7. Cumulative reading is 68/143: 85,785 fragments / 3,496,045 baseline bytes and 97 complete files. Phase0 is partial through line 36290. Unchanged canonical commit ec10be6b retains PASS for twenty-two completed subtests, ordinals 700–721 with 221 direct assertions and no nested plans. Seventeen descriptor comparisons contribute 204 assertions; five direct-lowering plans of 2,3,4,5,3 contribute seventeen textual assertions. Exact TAP numbering and source identity are verified. Lowering observations distinguish fallback, definedness, aggregate emptiness and scalar normalization; they do not execute generated target code. Descriptor uppercase-slot comparisons remain .2.10-owned. The next action scalar-normalization comparison is partial after its fluent fixture; .1.69 owns the structured fixture and assertions. No independently reproduced new defect, runtime execution, repair, dependency build, canonical run or push is claimed; .2.5–.2.11 and all prerequisites remain.
 
 - `2026-09-21` .1.67: Eleven complete windows cover 884 fragments / 65,500 baseline bytes; ordered window SHA-256 bb1fc116fa44e396ffb67f08fc017e0f2445fde3899c086284da032f9ceb07ed. Cumulative reading is 67/143: 84,924 fragments / 3,430,534 baseline bytes and 97 complete files. Phase0 is partial through line 35429. Unchanged canonical commit ec10be6b retains PASS for twenty completed subtests, ordinals 680–699 with 240 direct assertions, twelve per subtest and no nested plans. Exact TAP numbering and source identity are verified. Modulo/clamp and drop helpers precede action/LX join-values and flat-list branches, direct call capture and action if/elseif call capture. Existing .2.10 owns meaningful code observation; descriptor checks do not establish helper values, executed branch choices or Leaf call results. The action switch call-value test has eleven complete assertions and a partial final node predicate after CALL; .1.68 owns its suffix. No independently reproduced new defect, runtime execution, repair, dependency build, canonical run or push is claimed; .2.5–.2.11 and all prerequisites remain.
 
@@ -2691,6 +2700,8 @@ additional reading credit from integration delivery.
 
 ## Commit Log
 
+- `2026-09-21` .1.68: `CONFORMANCE-SOURCE-READING.1.68 - read fallback lowering and normalization metadata`; activation c69ece0e6; .1.69 follows clean handoff and empty brief.
+
 - `2026-09-21` .1.67: `CONFORMANCE-SOURCE-READING.1.67 - read payload branches and captured-call descriptor comparisons`; activation b193bfa9d; .1.68 follows clean handoff and empty brief.
 
 - `2026-09-21` .1.66: `CONFORMANCE-SOURCE-READING.1.66 - read scalar and numeric descriptor comparisons`; activation 4c25d22ac; .1.67 follows clean handoff and empty brief.
@@ -2796,6 +2807,8 @@ additional reading credit from integration delivery.
 - `2026-09-13`: Decomposition lands under `SESSION-STARTUP-READING.3.8.0`; Git owns the resulting commit identity.
 
 ## Changelog
+
+- `2026-09-21` .1.68: Read normalization descriptors and direct fallback/definedness/emptiness lowering assertions; preserve the boundary between textual lowering and target execution.
 
 - `2026-09-21` .1.67: Read numeric/drop helpers, payload branches and captured calls; distinguish descriptor coverage from executed branches and values.
 

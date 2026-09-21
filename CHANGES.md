@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.68 - read fallback lowering and normalization metadata
+
+Read Phase0 35430–36290: 68/143 groups, 85,785 fragments / 3,496,045 baseline bytes. Retained twenty-two-subtest proof has 221 assertions: 204 descriptor and seventeen direct-lowering checks. Fallback, definedness, emptiness and normalization textual observations remain distinct from .2.10-owned code-slot comparisons and target execution. No repair closes; .1.69 continues the partial scalar-normalization test.
+
 ## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.67 - read payload branches and captured-call descriptor comparisons
 
 Read Phase0 34546–35429: 67/143 groups, 84,924 fragments / 3,430,534 baseline bytes. Retained twenty-subtest proof has 240 direct assertions and no nested plans. Payload branches and captured calls inspect descriptor metadata; uppercase-slot observations remain .2.10-owned. No new runtime execution or repair; .1.68 continues the action switch call-value comparison.

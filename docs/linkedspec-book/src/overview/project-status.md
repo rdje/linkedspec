@@ -498,27 +498,27 @@ the director's focused-verification grant used for this correction and the separ
 supporting-reading closeout. Reading completion establishes audited comprehension;
 it does not close the six grammar/literal repair roots or establish runtime signoff.
 Conformance, test and Unicode reading has exact ownership for all 160 inputs in
-143 bounded groups covering 8,257,059 baseline decoded bytes. Sixty-seven groups account for
-84,924 fragments and 3,430,534 baseline bytes, including 97 complete files. Phase0 reading
-reaches line 35429. The new range completes lifecycle min/max and reads modulo, clamp,
-array trimming, joined/flat payload branches and captured rule calls. For example, the
-call fixtures assign call(Leaf) to retv and wrap it in a hash or alternate array; Leaf
-contains return("x"). Their assertions inspect CALL and related descriptor nodes, without
-executing the parser to check that returned value or its propagation into the payload.
-Likewise, branch-node checks do not prove which payload executes.
+143 bounded groups covering 8,257,059 baseline decoded bytes. Sixty-eight groups account for
+85,785 fragments and 3,496,045 baseline bytes, including 97 complete files. Phase0 reading
+reaches line 36290. The new range reads nested accessors, array/case normalization,
+fallback, definedness and aggregate emptiness. Seventeen comparisons inspect descriptor
+metadata. Five additional tests inspect actual lowering text: coalesce selects a defined
+value, coalesce_nonempty also checks for a nonempty string, and aggregate emptiness uses
+array/hash-aware checks. Scalar-normalization expectations include source-span extraction
+and Unicode casing calls. These are textual lowering checks, without target execution.
 
 **The earlier generated-code equivalence claim remains withdrawn:** absent uppercase
-code slots cannot establish emitted-code equality. Code-output-labelled comparisons remain
-in .2.10, which owns meaningful code/behavior observations and a changed-payload negative
-control. Repair .2.11 owns invalid scalar dereferences of source chunks; explicit scalar
-capture works.
+code slots cannot establish emitted-code equality. Code-output-labelled descriptor
+comparisons remain in .2.10, which owns meaningful code/behavior observations and a
+changed-payload negative control. The separate direct-lowering tests remain useful.
+Repair .2.11 owns invalid scalar dereferences of source chunks; explicit scalar capture works.
 
-Twenty completed subtests retain canonical proof with 240 direct assertions, twelve per
-subtest and no nested plans. The action switch call-value comparison remains partial in
-its final node predicate; .1.68 continues. MethodExpr .2.5, EmitContext descriptions .2.6,
-mark_copy .2.7, invalid num_min fixture .2.8 and push descriptions .2.9 remain open.
-No independently reproduced new defect or target execution is established. The pinned
-113-byte inventory delta and all prerequisites remain unchanged.
+Twenty-two completed subtests retain canonical proof with 221 direct assertions: 204 from
+descriptor comparisons and seventeen from direct-lowering tests, with no nested plans.
+The next action scalar-normalization comparison has only its fluent fixture read; .1.69
+continues. MethodExpr .2.5, EmitContext descriptions .2.6, mark_copy .2.7, invalid num_min
+fixture .2.8 and push descriptions .2.9 remain open. No independently reproduced new defect
+or target execution is established. The pinned 113-byte delta and all prerequisites remain.
 
 The director approved the finite documentation-capacity proposal under ADR0122.
 Containment `.15` admits exactly fourteen controls for the remaining 93 reading
@@ -545,7 +545,7 @@ The history files keep their 512-line / 65,536-byte caps, mandatory rollover and
 immutable archives. General card/part limits remain unchanged. Admission consumes
 one of the conservative 99 reserve units; the remaining 98 units are forecast
 after actual admission overhead. This capacity does not complete source reading
-or repair tests: reading now reaches 67/143, `.1.68` is next, and the test and recipe
+or repair tests: reading now reaches 68/143, `.1.69` is next, and the test and recipe
 repairs `.2.5`–`.2.11` remain open.
 
 The director has requested integration guides and runnable consumer examples for
