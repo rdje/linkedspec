@@ -11,14 +11,17 @@ answers:
   - why does the exported TestHelpers subprocess helper fail with include paths containing spaces
   - what MCP loader and oracle Perl tests are read in group 37
   - why does the Phase0 source header say 989 when the gate reports 1032
+  - what does Phase0 reading group 38 prove about lazy loading and plugins
 date: 2026-09-21
-status: groups 34–37 physically read; Phase0 partial at lines 1–43; helper path and header repairs remain owned
+status: groups 34–38 physically read; Phase0 partial through line 1110; all repair prerequisites remain
 tags: [conformance, perl, reading, diagnostics, generated-source]
 evidence: "CONFORMANCE-SOURCE-READING.1.34 at activation d10305097eb502c0fe29309ec230437396e26d82; eleven complete windows, 1500 fragments, 56255 bytes, ordered window SHA-256 db04deab6c0365f8bc454e2695d410324a120104a232c213346f2b23ad16aef3. Five managed Perl targets pass43 top-level tests; neutral named marks3, diagnostics20 and duplicate-slot59 mutations pass."
 evidence_update_2026_09_21: "Ten complete windows cover 1,500 fragments / 51,804 baseline bytes; ordered window SHA-256 1164b42887bab92a4ea03d85fcaf4a9dc0c6913fc7607fe21a0d66cb0a424992. Cumulative reading is 35/143, 46,538 fragments / 1,405,327 baseline bytes and 86 complete files; gap tests remain partial through line 1026. Retained exact integration commit 87b35665e proof passes generated-source (6), inspector (2) and gap (124) tests (132 total), with unchanged source identities. The old uniform-identity audit fails on the approved integration delta; its corrected recipe passes all 160 inputs/143 groups/302 ranges and six rejected snapshot mutations. No new runtime execution, native build, full CI or push is claimed for this focused reading leaf."
 evidence_update_2026_09_21_group36: "Eleven complete windows cover 1,500 fragments / 58,957 baseline bytes; ordered window SHA-256 071b58880845a0a7108956fb5110d4cc52fb015640fdb95b9e4d286d3e472f1f. Cumulative reading is 36/143: 48,038 fragments / 1,464,284 baseline bytes and 91 complete files. MCP admission remains partial through line 451. Fresh managed logical/map-leaves tests pass 16 top-level tests. Exact unchanged integration proof retains gap (124) and admission (13), plus the binding target within the earlier three-target MCP group (23 tests). Three bounded helper controls confirm the literal include-path defect and its mechanism; .2.3 owns implementation and independent verification after required prerequisites. No production repair, dependency build, new canonical CI or push is claimed."
 reverify: "bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/cli_conformance_runner.t t/complete_named_mark_contract.t t/diagnostic_output_perl_contract.t t/duplicate_regex_slot_identity_perl_contract.t t/generated_source_contract.t; bash tools/run_python_project_data.sh tools/check_complete_named_mark_contract.py; bash tools/run_python_project_data.sh tools/check_diagnostic_output_contract.py; bash tools/run_python_project_data.sh tools/check_duplicate_regex_slot_identity_contract.py"
 evidence_update_2026_09_21_group37: "Fourteen complete windows cover 1,500 fragments / 63,613 baseline bytes; ordered window SHA-256 98d4de26a6f747975c45fe91277d218c6947936925d1ae233586706bef952d64. Cumulative reading is 37/143: 49,538 fragments / 1,527,897 baseline bytes and 97 complete files. Phase0 remains partial at lines 1–43. Fresh managed metadata/oracle checks pass 9 top-level tests. Unchanged integration commit 87b35665e retains native-loader (5), MCP binding/dispatch/stdio (23), admission (13) and Phase0 1032 proof. Full-target execution grants no reading credit to the unread Phase0 body. Header correction .2.4 is pending after prerequisites; helper repair .2.3 and existing runtime repairs remain open. No dependency build, new canonical run or push is claimed."
+evidence_update_2026_09_21_group38: "Eleven complete windows cover 1,067 fragments / 65,529 baseline bytes; ordered window SHA-256 f57116fee0db80f49969546da5cd033988e06b55191fc88358b7c6d6d334fd3e. Cumulative reading is 38/143: 50,605 fragments / 1,593,426 baseline bytes and 97 complete files. Phase0 is partial through line 1110. Exact unchanged canonical commit 87b35665e supplies PASS for all 38 fully read subtests (ordinals 2–39). The crossing facade error-state test remains partial; its suffix is .1.39-owned. The complete 1032-test gate remains retained historical proof, not new execution or reading credit. No new defect, runtime repair, dependency build, full CI or push is claimed; all existing repairs retain their prerequisites."
+reverify_group38: "Replay .1.38 using conformance-source-reading-coverage and compare its 38 complete subtest names with retained canonical commit 87b35665e; this grants no new source-reading or runtime credit."
 reverify_group37: "bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/noncurrent_helper_metadata.t t/oracle_root_target_regex_semantics.t; retain unchanged dated MCP/native-loader proof separately."
 reverify_group36: "bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/logical_helper_perl_contract.t t/map_leaves_mutation_perl_contract.t; reproduce the helper observation with HELPER_PATH below, and retain the dated gap/MCP proof separately."
 ---
@@ -186,6 +189,28 @@ stale comment after complete reading; no executable assertion changes in this sl
 Fresh metadata/oracle proof passes 9 tests. Retained native-loader (5), MCP group (23) and
 admission (13) remain separate from the historical complete Phase0 proof. No test run
 grants reading credit to the unread Phase0 body.
+
+## Phase0 reading checkpoint
+
+Group 38 reads Phase0 lines 44–1110. Shipped-spec construction and ActionIR readiness
+are separate assertions; tclite additionally executes bracket and empty-quote cases,
+while legacy Lispish lookup checks module-relative discovery with PathSearch unloaded.
+The require/operation snippets assert %INC transitions and result/diagnostic markers
+across facade, compile owners, bootstrap, trace/dumper, scanner, splitter and event owners.
+[[linkedspec-pm-is-thin-facade]] remains the structural owner; the local subprocess helper
+body is outside this read range, so it receives no new reading credit here.
+
+Eight statement-split cases assert exact string partitions using an injected trimmer;
+they are not complete DSL acceptance tests. Plugin probes distinguish registered
+callbacks from a substituted legacy dispatcher, checking forwarding and return values.
+The crossing facade test substitutes owner functions and reads nine successful
+return/error-state pairs through line 1110. Its remaining assertions belong to .1.39.
+
+All 38 completely read subtests (canonical ordinals 2–39) pass in unchanged 87b35665e
+proof. Whole Phase0 execution is retained at 1032 tests; no new execution is claimed.
+Current reading is 38/143, 50,605 fragments / 1,593,426 baseline bytes and 97 complete files.
+Update this checkpoint in place; earlier exact ranges and evidence remain in task nodes
+and Git. Helper .2.3, header .2.4 and all other repair owners remain open.
 
 Related facts: [[perl-callable-codeblock-literal-record]], [[neutral-cli-fixture-runner]],
 [[complete-named-mark-perl-rust-parity]], [[perl-diagnostic-output-events]],

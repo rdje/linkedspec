@@ -2299,7 +2299,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Status: `active`
   Goal: Split and read all 160 entries under capability_conformance, cli_conformance, t, tests, and unicode_case.
   Children: `.3.8.0` owns exact decomposition; `CONFORMANCE-SOURCE-READING.1` owns all143 reading groups; .2 findings and .3 independent closeout stay separate.
-  Reading owner: `docs/tasks/CONFORMANCE-SOURCE-READING.md`; 143 groups/302 baseline ranges over 160 inputs. Physical reading 37/143: 49538 fragments / 1,527,897 baseline bytes and 97 complete files; Phase0 remains partial at lines 1–43. The approved 113-byte cursor-inventory delta stays separately pinned. Helper .2.3 and header .2.4 repairs remain pending; .1.38 continues reading. All earlier repairs/prerequisites remain.
+  Reading owner: `docs/tasks/CONFORMANCE-SOURCE-READING.md`; 143 groups/302 baseline ranges over 160 inputs. Physical reading 38/143: 50,605 fragments / 1,593,426 baseline bytes and 97 complete files; Phase0 remains partial through line 1110. The approved 113-byte cursor-inventory delta stays separately pinned. Exact retained proof covers 38 complete subtests; .1.39 continues reading. All repair prerequisites remain.
   Acceptance: Include phase0, neutral contracts, fixtures, generators, and four explicitly decoded pinned Unicode
     inputs. Keep generated/fixture bytes in scope; count neither a hash nor enumeration as full reading.
   Verification: `pending`
@@ -4673,7 +4673,7 @@ startup implementation prerequisites and the rgx reading exclusion remain intact
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.38` | `pending` | Read Phase0 lines 44–1110 after the clean .1.37 commit. Preserve all historical evidence and repair prerequisites. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.39` | `pending` | Continue the facade error-state test and Phase0 lines 1111–1526 after the clean .1.38 commit. Preserve all historical evidence and repair prerequisites. |
 
 ## Reading Ledger
 

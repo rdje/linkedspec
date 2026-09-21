@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.38 - read Phase0 lazy-loading and plugin contracts
+
+Phase0 module-loading cases observe %INC markers and values through requested snippet calls; the local helper implementation still belongs to later source reading. Splitter checks are exact partition tests with injected dependencies. Plugin/facade routing substitutes owners, preserving forwarding and caller error state without proving each replaced implementation. Retained canonical rows 2–39 bind all 38 completely read subtests; the crossing facade assertions remain .1.39-owned.
+
 ## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.37 - read MCP and loader tests and own header correction
 
 MCP response equality, in-memory wire checks, source exclusions and actual process/timing guarantees are different evidence boundaries. Loader non_regular fixtures are directories; oracle root checks are textual inventory, not corpus execution. The Phase0 header 989 count disagrees with retained exact1032 output; .2.4 owns a stable-header correction after required reading. Native-loader reverify now uses managed storage and the ordinary focused tier.

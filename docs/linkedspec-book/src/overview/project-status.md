@@ -498,21 +498,17 @@ the director's focused-verification grant used for this correction and the separ
 supporting-reading closeout. Reading completion establishes audited comprehension;
 it does not close the six grammar/literal repair roots or establish runtime signoff.
 Conformance, test and Unicode reading has exact ownership for all 160 inputs in
-143 bounded groups covering 8,257,059 baseline decoded bytes. Thirty-seven groups account for
-49,538 fragments and 1,527,897 baseline bytes, including 97 complete files. MCP admission,
-decoded dispatch, stdio, native resolution, helper metadata and oracle source checks are fully
-read; Phase0 reaches line 43. Fresh metadata/oracle checks pass 9 top-level tests. Earlier
-unchanged MCP and native-loader proof remains scoped to its exact consumers.
-MCP tests use in-memory streams and bounded fixtures, with native-result comparisons,
-policy call counts, framing, cancellation and release checks. Their response equality is
-not timing proof, and overlong-input outcomes are not peak-memory measurements. The known
-combined-error ordering issue stays open. The native loader's non-regular fixture is a
-directory; the oracle test scans source shapes without executing its corpus.
-Historical reading ranges remain separate from the pinned 113-byte integration delta.
-The Phase0 header's 989 count is stale: retained canonical output has 1,031 subtests
-and 1,032 top-level tests;
-repair .2.4 owns the comment correction after full reading. Helper path repair .2.3 and all
-existing parser/runtime repairs retain their prerequisites. No production behavior changes.
+143 bounded groups covering 8,257,059 baseline decoded bytes. Thirty-eight groups account for
+50,605 fragments and 1,593,426 baseline bytes, including 97 complete files. Phase0 reading
+reaches line 1110, inside the facade error-state preservation test. The range distinguishes
+shipped-spec construction/readiness from selected tclite execution and legacy Lispish lookup.
+Module-loading snippets check expected load markers and return/diagnostic values. Statement
+splitting tests assert exact string partitions; plugin and facade routing tests substitute
+specific owner functions, so their claims stay separate from complete parser behavior.
+All 38 fully read subtests pass in retained unchanged canonical proof. No new runtime run or
+whole-file reading credit is claimed. The crossing assertions remain next, and the historical
+baseline remains separate from the pinned 113-byte integration delta. Helper .2.3, header .2.4
+and all parser/runtime repairs remain open. No production behavior changes in this slice.
 The director has requested integration guides and runnable consumer examples for
 Perl, Rust, Dart, Julia and Lua, covering recursive checkout, dependency preparation
 and reuse, native APIs, results/errors and packaging. This temporary activity is
