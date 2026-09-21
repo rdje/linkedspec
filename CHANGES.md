@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.51 - read capture boundaries and diagnose mark-copy clearing test gap
+
+Read Phase0 13632–14984:51/143 groups,64,479 fragments/2,443,528 baseline bytes. Retained ec10be6b proof covers40 completed subtests/266 assertions. Four fresh controls confirm the mark_copy clearing observation gap; .2.7 owns repair. Production clears a seeded-zero target. Exact windows, comprehension and reproduction are task/card-owned; .1.52 continues the partial capture-column test. All earlier repairs and prerequisites remain.
+
 ## 2026-09-21 — LIVE-DOCUMENT-PRESSURE-CONTAINMENT.15 - admit approved conformance evidence capacity
 
 Admit exactly fourteen approved remaining-conformance evidence controls under ADR0122 and containment .15. Preserve both governed history rollovers and prior evidence; forecast the remaining 98 allowance units after actual admission overhead. Reading remains 50/143; MethodExpr .2.5 and EmitContext .2.6 remain open. Exact production/preservation proof and ordinary staged canonical CI govern landing; .1.51 resumes after clean commit. The director separately granted exact .15.1 checker-mirror correction after canonical failure;37 self-tests/50 registry cases and actual partition validation pass. Fresh canonical proof remains required.

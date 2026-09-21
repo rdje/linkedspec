@@ -498,17 +498,19 @@ the director's focused-verification grant used for this correction and the separ
 supporting-reading closeout. Reading completion establishes audited comprehension;
 it does not close the six grammar/literal repair roots or establish runtime signoff.
 Conformance, test and Unicode reading has exact ownership for all 160 inputs in
-143 bounded groups covering 8,257,059 baseline decoded bytes. Fifty groups account for
-63,126 fragments and 2,378,009 baseline bytes, including 97 complete files. Phase0 reading
-reaches line 13631. ActionIR tests distinguish bridge setup, lazy owner loading, callback
-execution and generated-text checks. The capture/mark helper test is partial after 73 of
-90 assertions; those comparisons do not independently execute the generated fragments.
-Thirteen completed subtests retain unchanged canonical proof with 118 assertions. Fresh
-six-test/42-assertion probes confirm that six descriptions wrongly attribute EmitContext's
-setup load to a later helper; .2.6 owns correction. The MethodExpr pre-call Deps marker
-blind spot remains separately owned by .2.5. Neither finding establishes a production
-loading failure. No fresh full-gate run or whole-file reading credit is claimed.
-The pinned 113-byte inventory delta stays separate; all prerequisite-gated repairs remain open.
+143 bounded groups covering 8,257,059 baseline decoded bytes. Fifty-one groups account for
+64,479 fragments and 2,443,528 baseline bytes, including97 complete files. Phase0 reading
+reaches line 14984. Capture tests execute whole-input, entry, local-match and live-cursor
+views: ordinary captures end at match start, until_cursor includes the current match,
+and rest reaches input end. Take variants advance stored capture boundaries. Generated
+lowering strings and different-label parent/child marks remain narrower evidence.
+Forty completed subtests retain canonical proof with 266 assertions. Fresh controls expose
+one test gap: mark_copy's clearing assertion starts with an absent target, so a deletion
+no-op passes. Seeding and observing offset 0 rejects that no-op; production clears it
+correctly. Repair .2.7 owns the test change. MethodExpr's post-parse observation .2.5 and
+six EmitContext assertion descriptions .2.6 remain open. These findings do not establish
+production loading or mark-clearing failures. The capture-column test remains partial;
+.1.52 continues it. The 113-byte inventory delta and repair prerequisites remain separate.
 
 The director approved the finite documentation-capacity proposal under ADR0122.
 Containment `.15` admits exactly fourteen controls for the remaining 93 reading
@@ -527,15 +529,16 @@ history and reading evidence; ordinary canonical CI governs the admission.
 The first admission check detected older mirrored limits in the task-partition
 checker. Its agreement guard correctly rejected the mismatch. A separately
 granted `.15.1` correction synchronizes those two limits and their boundary tests;
-all37 self-tests and50 registry cases pass. The ordinary canonical gate must
-verify the corrected complete candidate before admission lands.
+all 37 self-tests and 50 registry cases pass. Commit ec10be6b admits the corrected
+candidate after canonical CI: all nine doctrines, both 66-case CLI environments and
+all 1,032 Phase0 tests pass. Optional matrices skipped by that gate are not refreshed.
 
 The history files keep their 512-line / 65,536-byte caps, mandatory rollover and
 immutable archives. General card/part limits remain unchanged. Admission consumes
 one of the conservative 99 reserve units; the remaining 98 units are forecast
 after actual admission overhead. This capacity does not complete source reading
-or repair tests: reading stays 50/143, `.1.51` follows clean admission, and the
-MethodExpr observation gap `.2.5` and six descriptions `.2.6` remain open.
+or repair tests: reading now reaches 51/143, `.1.52` is next, and the MethodExpr
+observation gap `.2.5`, six descriptions `.2.6` and mark-copy gap `.2.7` remain open.
 
 The director has requested integration guides and runnable consumer examples for
 Perl, Rust, Dart, Julia and Lua, covering recursive checkout, dependency preparation

@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.51 - read capture boundaries and diagnose mark-copy clearing test gap
+
+An absent target cannot prove deletion. Original mark_copy4/4 passes a deletion-no-op; observing a seeded-zero target makes that same mutation fail the intended assertion while pristine behavior passes. .2.7 owns tracked repair after prerequisites; recipe: conformance-perl-consumer-reading. Retained canonical ec10be6b proof and fresh diagnosis remain separate.
+
 ## 2026-09-21 — LIVE-DOCUMENT-PRESSURE-CONTAINMENT.15 - admit approved conformance evidence capacity
 
 Granted authorizes the exact fourteen controls and bounded before-reading implementation, with normal canonical CI. Admission consumes one of the conservative 99 allowance units; its required rollover consumes one of eight archive slots per collection. Model the actual remaining suffix and preserve all prior history, source, questions and repair scopes. Reproduction: docs/knowledge/conformance-evidence-capacity-admission.md. The director separately granted exact .15.1 checker-mirror correction after canonical failure;37 self-tests/50 registry cases and actual partition validation pass. Fresh canonical proof remains required.

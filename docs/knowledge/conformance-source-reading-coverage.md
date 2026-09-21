@@ -11,7 +11,7 @@ answers:
   - "what evidence capacity blocks remaining conformance reading"
   - "what exact fourteen limits are proposed for remaining conformance reading"
 date: 2026-09-21
-status: exact baseline decomposition preserved; physical reading 50/143, 97 files complete and 93 groups remain; one approved current-source delta
+status: exact baseline decomposition preserved; physical reading 51/143, 97 files complete and 92 groups remain; one approved current-source delta
 tags: [reading, conformance, tests, unicode, continuity, CONFORMANCE-SOURCE-READING]
 evidence: "Startup .3.8.0 independently accounts for160 baseline-identical files,5,422,313 stored bytes and8,257,059 decoded bytes in167,606 line fragments/167,604 LF delimiters. Four gzip inputs contribute54,500 decoded lines. All143 groups/302 ranges are contiguous, disjoint and bounded at1500 fragments/65536 bytes. No source, registry or runtime behavior changes; no physical-reading credit from inventory."
 reverify: "Run CONFORMANCE_SOURCE_READING_COVERAGE below through the project-data wrapper; it derives source identity from Git and range ownership from the task-tree rather than a parallel manifest. Use scripts/check_task_tree_metadata.sh for actual task collection limits."
@@ -428,15 +428,15 @@ properties, context rules, fixtures or decoded upstream inputs. All repairs rema
 
 ## Conformance reading checkpoint
 
-`CONFORMANCE-SOURCE-READING.1.50` reads 11 windows, 782 fragments and 65,470 baseline bytes.
-Cumulative reading is 50/143, 63,126 fragments, 2,378,009 baseline bytes and 97 complete files.
-Phase0 is partial through line 13631, after 73 of 90 helper-substitution assertions and the
-opening of assertion 74. [[conformance-perl-consumer-reading]] separates owner loading,
-synthetic callback execution and generated-text checks. Thirteen completed subtests retain
-unchanged PASS at 87b35665e (118 assertions). Fresh six-test/42-assertion extraction and cold
-probes confirm inaccurate EmitContext load descriptions; .2.6 owns repair alongside open .2.5.
+`CONFORMANCE-SOURCE-READING.1.51` reads 11 windows, 1,353 fragments and 65,519 baseline bytes.
+Cumulative reading is 51/143, 64,479 fragments, 2,443,528 baseline bytes and 97 complete files.
+Phase0 is partial through line 14984, inside the second capture_slice_col assertion.
+[[conformance-perl-consumer-reading]] separates generated-text checks from executed capture,
+input/entry/match/cursor views and mark operations. Forty completed subtests retain unchanged
+PASS at ec10be6b (266 assertions). Four fresh controls confirm that the mark_copy fixture
+misses deletion failure; .2.7 owns repair, while production clears a seeded-zero target.
 The pinned 113-byte current cursor-inventory delta stays separate from historical reading;
-the same current ranges total 2,378,122 bytes. Next .1.51 reads Phase0 lines 13632–14984.
+the same current ranges total 2,443,641 bytes. Next .1.52 reads Phase0 lines 14985–16061.
 
 Lowercase table entries and Final Sigma context remain separate. Exact scalar
 sequences, sparse ranges, fullwidth forms and ligature identities are preserved;
@@ -449,13 +449,13 @@ Update this current checkpoint in place; do not append per-leaf reading chronolo
 
 ## Remaining-reading evidence capacity
 
-Source reading remains 50/143. `.4.1` owns the concrete fourteen-scalar proposal at
+At the proposal boundary reading was 50/143. `.4.1` owns the concrete fourteen-scalar proposal at
 `docs/tasks/CONFORMANCE-SOURCE-READING.md`, section Remaining-reading capacity proposal.
 Its five complete replay recipes pin the clean baseline, derive maxima from the first
 fifty reading commits, verify immutable history, compare independent/production
 rollover models and test detached limits with the actual production predicate.
 The director granted the exact proposal and before-reading implementation.
-ADR0122 and containment .15 own ordinary canonical admission; `.1.51` remains unread.
+ADR0122 and containment .15 complete ordinary canonical admission at ec10be6b; reading resumes under those controls.
 Exact current admission proof: [[conformance-evidence-capacity-admission]].
 The 99-unit reserve covers the 93 remaining children and six support allowances,
-not later startup lanes or runtime repairs. Both `.2.5` and `.2.6` remain owned/open.
+not later startup lanes or runtime repairs. Repairs `.2.5`, `.2.6` and `.2.7` remain owned/open.

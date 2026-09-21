@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `CONFORMANCE-SOURCE-READING`
-- Status: `active` / exact decomposition; physical reading 50/143
+- Status: `active` / exact decomposition; physical reading 51/143
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.8`
 - Created: `2026-09-13`
 - Last updated: `2026-09-21`
@@ -919,14 +919,21 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
   Commit: `CONFORMANCE-SOURCE-READING.1.50 - read ActionIR lazy-loading and capture lowering tests`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.51`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `ec10be6b06934ba87c8c41b1f1f8d079714564a7`.
+  Verification tier: `focused`
+  Focused checks: Complete bounded source reading, exact baseline/window and retained canonical proof, fresh Toolbox lowering and four isolated mark-copy controls; Knowledge, preservation, memory, both history checks, book, direct public checks and normal doctrines.
+  Canonical trigger: Ordinary bounded reading and fact reconciliation only; no runtime, dependency, public-contract, infrastructure or parent-closeout change.
   Goal: Read and understand conformance/test/Unicode group 51.
   Scope: `t/phase0_regression.t` lines 13632-14984
   Baseline evidence: 1353 fragments / 65519 decoded bytes; ordered range SHA-256 `cfcddcd8f858ea6f0ddf8f0a3c1ddb2a0dae70684781aef6972b8c4843dc20c7`.
   Dependencies: .1.50 committed with clean handoff.
   Acceptance: Read every scoped byte in complete bounded windows; retain source identity, exact comprehension, canonical Knowledge reconciliation, concrete finding ownership, focused proof and per-leaf continuity. Unread crossing constructs retain the next range owner.
-  Verification: `pending`
-  Commit: `pending`
+  Reading evidence: 11 complete windows / 1353 fragments / 65519 bytes; ordered window SHA-256 `8b0f53760e7cc18be9d701d37d8d7f0c56a1a7a0c93727d97ef64ea4a3f69563`.
+  Comprehension: Typed lowering text versus executing Get parsers; named marks isolate distinct parent/child labels here, not recursive same-label invocations. Whole-input/entry/local-match/live-cursor views remain distinct. Non-cursor captures end at current match start; until_cursor reaches current cursor; rest reaches input end. Take variants advance stored anonymous/named boundaries; two-mark takes move only start mark to supplied end. Split fixture yields alpha,beta,gamma or widths5,4; bridge restores prior anonymous boundary. Missing marks yield undef; exhausted tail yields empty string/zero. Whole-input line/column is one-based. Boundary helper leaves next Annotation and terminal END unconsumed; next Annotation is parsed by outer loop, END stays in rest. Source-shape checks establish referenced typed projection, not complete runtime negative coverage. The mark_copy missing-source fixture never seeds its target; fresh no-op controls establish a test gap under .2.7, not a production deletion defect.
+  Verification: Unchanged canonical commit ec10be6b retains PASS for forty completed subtests, ordinals 407–446 with 266 assertions; sequential TAP numbers and unchanged Phase0/own Perl/spec identities are verified. Fresh four-case mark_copy diagnosis confirms original4/4 and deletion-no-op original4/4 both pass, while a seeded-zero pristine control passes4/4 and its deletion-no-op twin fails exactly assertion2 with target0 instead of undef. New .2.7 owns fixture repair; production clears the seeded target correctly. The final capture_slice_col test has its first assertion read and the second opened through the expected array; .1.52 owns the suffix. Retained whole-gate proof is1032 top-level tests, not fresh execution for this reading leaf. No runtime repair, dependency build, new full gate or push is claimed.
+  Candidate proof: Exact 160-input/143-group/302-range audit and eleven-window replay pass. Preservation verifies 2,848 other files / 50,641,987 bytes, 509 prior task nodes, 53 other book files and all 1,039 headings; historical ranges, recipes, histories and parent Gitlink remain exact. The maintained four-case recipe reproduces the expected PASS/PASS/PASS/rejected outcomes in isolated processes. Memory, both history-pressure checks, mdBook, public mutation (69 files / 50 mutations), public selector (68 files / 11 contrast mutations) and diff checks pass. Hot histories are changes168 lines/31170 bytes and notes164/31647, below rollover. Knowledge is 1,152 facts / 9,238 keys. Normal nine-doctrine hooks govern landing; no new canonical run is required by this focused leaf.
+  Commit: `CONFORMANCE-SOURCE-READING.1.51 - read capture boundaries and diagnose mark-copy clearing test gap`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.52`
   Status: `pending`
@@ -1972,6 +1979,16 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
   Verification: `pending`
   Commit: `pending`
 
+- ID: `CONFORMANCE-SOURCE-READING.2.7`
+  Status: `pending`
+  Goal: Make the mark_copy missing-source regression prove that an existing target is cleared.
+  Evidence: .1.51 reads named_mark_mark_copy_advances_or_clears_explicit_boundary, whose after_end target is never initialized. Toolbox lowering identifies Runtime::mark_delete as the missing-source branch. Four isolated exact-block controls show original4/4 PASS and deletion-no-op original4/4 PASS with one intercepted deletion; seeding and observing target offset0 preserves pristine4/4 PASS but the same no-op fails precisely assertion2, retaining0 instead of undef. Production clears the seeded target correctly; this is a test observation gap. Canonical reproduction: docs/knowledge/conformance-perl-consumer-reading.md#mark-copy-missing-source-clearing-observation-gap.
+  Scope: This Phase0 fixture's pre-existing target observation and isolated deletion-no-op rejection control; preserve successful copying and missing-source return checks.
+  Dependencies: Required source/book/policy reading, including the remaining Phase0 body, before tracked test repair.
+  Acceptance: Seed a zero-valued target, independently observe its pre-state and cleared post-state, retain positive-copy checks, show deletion-no-op fails the intended assertion and pristine production passes in fresh processes without a leaked override, run focused direct-dependent checks, update Knowledge/book continuity and commit. A scratch control is diagnosis, not completed repair.
+  Verification: `pending`
+  Commit: `pending`
+
 - ID: `CONFORMANCE-SOURCE-READING.3`
   Status: `pending`
   Goal: Independently reconcile all source/range/reading-commit/repair evidence and close only the required reading lane with applicable verification.
@@ -2403,7 +2420,7 @@ additional reading credit from integration delivery.
 
 | Rank | Leaf | Status | Next action |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.51` | `pending` | Read Phase0 lines13632–14984 after approved ADR0122/containment .15 canonical admission; preserve 50/143 reading credit and open repairs .2.5/.2.6. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.52` | `pending` | Read Phase0 lines 14985–16061 (1,077 fragments / 65,180 baseline bytes), completing the capture_slice_col assertion and continuing source comprehension. Repairs .2.5/.2.6/.2.7 and earlier repairs retain required-reading prerequisites. |
 
 ## Decisions
 
@@ -2415,6 +2432,8 @@ additional reading credit from integration delivery.
 - None at decomposition. Ordinary source repairs retain startup prerequisites; later collection pressure must be measured rather than assumed away.
 
 ## Verification Log
+
+- `2026-09-21` .1.51: Eleven complete windows cover 1,353 fragments / 65,519 baseline bytes; ordered window SHA-256 8b0f53760e7cc18be9d701d37d8d7f0c56a1a7a0c93727d97ef64ea4a3f69563. Cumulative reading is 51/143: 64,479 fragments / 2,443,528 baseline bytes and 97 complete files. Phase0 is partial through line 14984. Unchanged canonical commit ec10be6b retains PASS for forty completed subtests, ordinals 407–446 with 266 assertions; sequential TAP numbers and unchanged Phase0/own Perl/spec identities are verified. Fresh four-case mark_copy diagnosis confirms original4/4 and deletion-no-op original4/4 both pass, while a seeded-zero pristine control passes4/4 and its deletion-no-op twin fails exactly assertion2 with target0 instead of undef. New .2.7 owns fixture repair; production clears the seeded target correctly. The final capture_slice_col test has its first assertion read and the second opened through the expected array; .1.52 owns the suffix. Retained whole-gate proof is1032 top-level tests, not fresh execution for this reading leaf. No runtime repair, dependency build, new full gate or push is claimed.
 
 - `2026-09-21` .4.1: Clean 7b921a195 has notes241/58910 and changes273/58671 lines/bytes. Both archive file/manifest limits are full; next notes allowance is only72 bytes below mandatory90% rollover. Fifty exact reading commits establish bounded positive-growth maxima. Independent and extracted-production 99-record models agree on eight rollovers per history with exact reconstruction. The actual routing predicate passes187 below/equal/above and old/proposed reserve executions. Full actual-candidate-plus99-unit census is required after all proposal edits; registry, sources, repairs and historical records remain unchanged.
 
@@ -2488,6 +2507,8 @@ additional reading credit from integration delivery.
 
 ## Commit Log
 
+- `2026-09-21` .1.51: `CONFORMANCE-SOURCE-READING.1.51 - read capture boundaries and diagnose mark-copy clearing test gap`; activation ec10be6b0; .1.52 follows clean handoff and empty brief.
+
 - `2026-09-21` .4.1: `CONFORMANCE-SOURCE-READING.4.1 - propose finite remaining-reading evidence capacity`; activation 7b921a195; approval remains pending under .4.2.
 
 - `2026-09-21` .1.50: `CONFORMANCE-SOURCE-READING.1.50 - read ActionIR lazy-loading and capture lowering tests`; activation d70f77f4d; .1.51 follows clean handoff and empty brief.
@@ -2559,6 +2580,8 @@ additional reading credit from integration delivery.
 - `2026-09-13`: Decomposition lands under `SESSION-STARTUP-READING.3.8.0`; Git owns the resulting commit identity.
 
 ## Changelog
+
+- `2026-09-21` .1.51: Read capture and named-mark execution, preserve generated-text evidence boundaries and own the confirmed clearing-observation gap under .2.7; earlier repairs remain open.
 
 - `2026-09-21` .4.1: Own and quantify finite remaining-reading evidence capacity without applying any control or changing source-reading credit.
 
