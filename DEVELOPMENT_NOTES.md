@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.75 - read quote boundaries and shipped grammar migration checks
+
+Quoted/commented/nested semicolons preserve statement boundaries; backtick payloads remain authored source. EBNF, ds_vhistory, regdef, tablegrep and VHDL helper migrations are observed through metadata, canonical nodes and source patterns. Regdef adds a four-assertion parser smoke including the exact CTRL/ENABLE/MODE AST. Zero raw fallback or blocked-rule counts do not independently establish arbitrary EBNF input acceptance or cross-backend runtime parity. The approved dependency grammar snapshot remains unused; canonical fallback and EBNF migration facts retain their own evidence.
+
 ## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.74 - read source boundary projections and legacy classification checks
 
 Cursor, entry, local-match, anonymous, named-mark and whole-input anchors remain distinct. Capture_slice_len has an exact anonymous span expression; take/rest/through-cursor/two-mark checks inspect typed read/write calls and trace labels. These substring checks are bounded lowering observations. Legacy printing, declarations, position tracking, substitution and assignments preserve authored text while avoiding raw fallback; print_each instead uses the parse-scoped diagnostic seam. Canonical source taxonomy and typed-runtime admission remain separate from these metadata checks.

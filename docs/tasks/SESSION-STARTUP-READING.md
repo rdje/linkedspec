@@ -2299,7 +2299,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Status: `active`
   Goal: Split and read all 160 entries under capability_conformance, cli_conformance, t, tests, and unicode_case.
   Children: `.3.8.0` owns exact decomposition; `CONFORMANCE-SOURCE-READING.1` owns all143 reading groups; .2 findings and .3 independent closeout stay separate.
-  Reading owner: `docs/tasks/CONFORMANCE-SOURCE-READING.md`; 143 groups / 302 baseline ranges over 160 inputs. Physical reading 74/143: 90,690 fragments / 3,888,884 baseline bytes and 97 complete files; Phase0 through 41195. Approved 113-byte inventory delta stays separate. Retained twenty-nine-subtest proof has 323 direct assertions and no nested plans. Typed source-projection and legacy classification checks remain distinct from endpoint/runtime proof; .2.5–.2.12 and all prerequisites remain. .1.75 continues split/trim/filter metadata. ADR0122/containment .15 are canonically admitted at ec10be6b.
+  Reading owner: `docs/tasks/CONFORMANCE-SOURCE-READING.md`; 143 groups / 302 baseline ranges over 160 inputs. Physical reading 75/143: 91,582 fragments / 3,954,348 baseline bytes and 97 complete files; Phase0 through 42087. Approved 113-byte inventory delta stays separate. Retained thirty-six-subtest proof has 470 direct assertions and no nested plans. Grammar metadata/source checks remain distinct from the exact regdef runtime result; .2.5–.2.12 and all prerequisites remain. .1.76 completes the VHDL concurrent-assignment source test. ADR0122/containment .15 are canonically admitted at ec10be6b.
   Acceptance: Include phase0, neutral contracts, fixtures, generators, and four explicitly decoded pinned Unicode
     inputs. Keep generated/fixture bytes in scope; count neither a hash nor enumeration as full reading.
   Verification: `pending`
@@ -4673,7 +4673,7 @@ startup implementation prerequisites and the rgx reading exclusion remain intact
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.75` | `pending` | Read Phase0 lines 41196–42087 (892 fragments / 65,464 baseline bytes), continuing split/trim/filter compatibility metadata after descriptor build. Repairs .2.5–.2.12 and earlier repairs retain required source/book/policy reading prerequisites. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.76` | `pending` | Read Phase0 lines 42088–42887 (800 fragments / 65,456 baseline bytes), completing the VHDL concurrent-assignment source test and subsequent grammar migration checks. Repairs .2.5–.2.12 and earlier repairs retain required source/book/policy reading prerequisites. |
 
 ## Reading Ledger
 
