@@ -498,14 +498,14 @@ the director's focused-verification grant used for this correction and the separ
 supporting-reading closeout. Reading completion establishes audited comprehension;
 it does not close the six grammar/literal repair roots or establish runtime signoff.
 Conformance, test and Unicode reading has exact ownership for all 160 inputs in
-143 bounded groups covering 8,257,059 baseline decoded bytes. Sixty-eight groups account for
-85,785 fragments and 3,496,045 baseline bytes, including 97 complete files. Phase0 reading
-reaches line 36290. The new range reads nested accessors, array/case normalization,
-fallback, definedness and aggregate emptiness. Seventeen comparisons inspect descriptor
-metadata. Five additional tests inspect actual lowering text: coalesce selects a defined
-value, coalesce_nonempty also checks for a nonempty string, and aggregate emptiness uses
-array/hash-aware checks. Scalar-normalization expectations include source-span extraction
-and Unicode casing calls. These are textual lowering checks, without target execution.
+143 bounded groups covering 8,257,059 baseline decoded bytes. Sixty-nine groups account for
+86,442 fragments and 3,561,482 baseline bytes, including 97 complete files. Phase0 reading
+reaches line 36947. Direct lowering expectations cover membership, regex/literal search,
+replacement, prefix/suffix removal, concatenation, emptiness, indexes and counts. Examples
+include preserving trailing fields during literal replacement, handling undefined needles,
+and searching for the first index with undefined absence. Concatenation text handles
+JSON booleans and negative zero while rejecting general references. These checks inspect
+the lowered expressions; they do not execute and verify their target results.
 
 **The earlier generated-code equivalence claim remains withdrawn:** absent uppercase
 code slots cannot establish emitted-code equality. Code-output-labelled descriptor
@@ -513,9 +513,9 @@ comparisons remain in .2.10, which owns meaningful code/behavior observations an
 changed-payload negative control. The separate direct-lowering tests remain useful.
 Repair .2.11 owns invalid scalar dereferences of source chunks; explicit scalar capture works.
 
-Twenty-two completed subtests retain canonical proof with 221 direct assertions: 204 from
-descriptor comparisons and seventeen from direct-lowering tests, with no nested plans.
-The next action scalar-normalization comparison has only its fluent fixture read; .1.69
+Nineteen completed subtests retain canonical proof with 150 direct assertions: 108 from
+nine descriptor comparisons and 42 from ten direct-lowering tests, with no nested plans.
+The lifecycle count_keys comparison remains partial after its two build assertions; .1.70
 continues. MethodExpr .2.5, EmitContext descriptions .2.6, mark_copy .2.7, invalid num_min
 fixture .2.8 and push descriptions .2.9 remain open. No independently reproduced new defect
 or target execution is established. The pinned 113-byte delta and all prerequisites remain.
@@ -545,7 +545,7 @@ The history files keep their 512-line / 65,536-byte caps, mandatory rollover and
 immutable archives. General card/part limits remain unchanged. Admission consumes
 one of the conservative 99 reserve units; the remaining 98 units are forecast
 after actual admission overhead. This capacity does not complete source reading
-or repair tests: reading now reaches 68/143, `.1.69` is next, and the test and recipe
+or repair tests: reading now reaches 69/143, `.1.70` is next, and the test and recipe
 repairs `.2.5`–`.2.11` remain open.
 
 The director has requested integration guides and runnable consumer examples for

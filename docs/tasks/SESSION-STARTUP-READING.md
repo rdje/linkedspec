@@ -2299,7 +2299,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Status: `active`
   Goal: Split and read all 160 entries under capability_conformance, cli_conformance, t, tests, and unicode_case.
   Children: `.3.8.0` owns exact decomposition; `CONFORMANCE-SOURCE-READING.1` owns all143 reading groups; .2 findings and .3 independent closeout stay separate.
-  Reading owner: `docs/tasks/CONFORMANCE-SOURCE-READING.md`; 143 groups/302 baseline ranges over160 inputs. Physical reading68/143:85,785 fragments/3,496,045 baseline bytes and97 complete files; Phase0 through36290. Approved113-byte inventory delta stays separate. Retained twenty-two-subtest proof has221 direct assertions and no nested plans. Direct-lowering text is distinct from normalization descriptor nodes; existing .2.10 code-observation limits remain; .2.5–.2.11 and all prerequisites remain. .1.69 continues the action scalar-normalization comparison. ADR0122/containment .15 are canonically admitted at ec10be6b.
+  Reading owner: `docs/tasks/CONFORMANCE-SOURCE-READING.md`; 143 groups/302 baseline ranges over160 inputs. Physical reading69/143:86,442 fragments/3,561,482 baseline bytes and97 complete files; Phase0 through36947. Approved113-byte inventory delta stays separate. Retained nineteen-subtest proof has150 direct assertions and no nested plans. Scalar/reducer lowering text is distinct from descriptor nodes; existing .2.10 code-observation limits remain; .2.5–.2.11 and all prerequisites remain. .1.70 continues the lifecycle count_keys comparison. ADR0122/containment .15 are canonically admitted at ec10be6b.
   Acceptance: Include phase0, neutral contracts, fixtures, generators, and four explicitly decoded pinned Unicode
     inputs. Keep generated/fixture bytes in scope; count neither a hash nor enumeration as full reading.
   Verification: `pending`
@@ -4673,7 +4673,7 @@ startup implementation prerequisites and the rgx reading exclusion remain intact
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.69` | `pending` | Read Phase0 lines 36291–36947 (657 fragments / 65,437 baseline bytes), continuing the structured fixture and assertions of the action scalar-normalization comparison. Repairs .2.5–.2.11 and earlier repairs retain required reading prerequisites. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.70` | `pending` | Read Phase0 lines 36948–37744 (797 fragments / 65,524 baseline bytes), continuing the remaining ten assertions of the lifecycle count_keys comparison. Repairs .2.5–.2.11 and earlier repairs retain required reading prerequisites. |
 
 ## Reading Ledger
 

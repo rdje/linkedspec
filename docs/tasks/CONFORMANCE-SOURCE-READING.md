@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `CONFORMANCE-SOURCE-READING`
-- Status: `active` / exact decomposition; physical reading 68/143
+- Status: `active` / exact decomposition; physical reading 69/143
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.8`
 - Created: `2026-09-13`
 - Last updated: `2026-09-21`
@@ -1225,14 +1225,21 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
   Commit: `CONFORMANCE-SOURCE-READING.1.68 - read fallback lowering and normalization metadata`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.69`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `e057c033665bf16f05ac7d9cd2963be0761a36ea`.
+  Verification tier: `focused`
+  Focused checks: Complete reading and exact coverage/window replay; retained direct/nested TAP proof and canonical observation-gap reconciliation; Knowledge, preservation, memory, histories, book, direct public checks and normal doctrines.
+  Canonical trigger: Ordinary bounded reading and fact reconciliation; no runtime, dependency, public contract, infrastructure or parent-closeout change.
   Goal: Read and understand conformance/test/Unicode group 69.
   Scope: `t/phase0_regression.t` lines 36291-36947
   Baseline evidence: 657 fragments / 65437 decoded bytes; ordered range SHA-256 `1a359611867e9800e2915010b594ad8093c30ae4f37025d02c22f0a5bd1cacef`.
   Dependencies: .1.68 committed with clean handoff.
   Acceptance: Read every scoped byte in complete bounded windows; retain source identity, exact comprehension, canonical Knowledge reconciliation, concrete finding ownership, focused proof and per-leaf continuity. Unread crossing constructs retain the next range owner.
-  Verification: `pending`
-  Commit: `pending`
+  Reading evidence: 11 complete windows / 657 fragments / 65437 bytes; ordered window SHA-256 `69327ea77a1e57cca29663241de96f0d256a4301a3ac06781867c8b6e43a1ec7`.
+  Comprehension: Completes action/LX scalar normalization and count descriptors, then exact lowering for count, contains, matches, contains_substr, replace_substr, rm_prefix/rm_suffix, cat, value-layer emptiness, index_of and count_keys. Text expectations distinguish undefined needles, literal replacement with trailing-field preservation, empty/nonmatching boundary identity, cat JSON booleans/negative-zero normalization and other-reference rejection, first-match index with undef absence, and scalar reducers versus guarded aggregate expressions. Suffix fixture composes replacement/normalization and has no explicit coalesce input. These are textual lowering observations, not evaluated runtime results. Nine complete descriptor comparisons retain .2.10 code-slot limits. Lifecycle count_keys stops after both descriptor-build assertions; .1.70 owns its remaining ten assertions.
+  Verification: Unchanged canonical commit ec10be6b retains PASS for nineteen completed subtests, ordinals 722–740 with 150 direct assertions and no nested plans. Nine descriptor comparisons contribute 108 assertions; ten direct-lowering plans (nine of four and one of six) contribute 42 textual assertions. Exact TAP numbering and source identity are verified. Membership, literal replacement, boundary removal, concatenation, emptiness, index and reducer expectations observe lowering text, not evaluated target results. Descriptor uppercase-slot comparisons remain .2.10-owned. Lifecycle count_keys is partial after its two descriptor-build assertions; .1.70 owns the remaining ten. No independently reproduced new defect, runtime execution, repair, dependency build, canonical run or push is claimed; .2.5–.2.11 and all prerequisites remain.
+  Candidate proof: Exact inventory and .1.69 window replay PASS; cumulative 69/143 independently totals 86,442 fragments / 3,561,482 baseline bytes. Retained TAP identity/numbering PASS. Preservation PASS for 2,850 other files, 514 prior nodes and all 1,039 book headings. Knowledge 1,154 facts / 9,266 keys; memory 60 lines; history bounds, mdBook build, mutation public surface (50 mutations), aggregate selector (11 contrasts / capability 100 matches) and diff whitespace PASS. Normal commit doctrines are the final boundary.
+  Commit: `CONFORMANCE-SOURCE-READING.1.69 - read scalar membership and reducer lowering checks`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.70`
   Status: `pending`
@@ -2579,7 +2586,7 @@ additional reading credit from integration delivery.
 
 | Rank | Leaf | Status | Next action |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.69` | `pending` | Read Phase0 lines 36291–36947 (657 fragments / 65,437 baseline bytes), continuing the structured fixture and assertions of the action scalar-normalization comparison. Repairs .2.5–.2.11 and earlier repairs retain required reading prerequisites. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.70` | `pending` | Read Phase0 lines 36948–37744 (797 fragments / 65,524 baseline bytes), continuing the remaining ten assertions of the lifecycle count_keys comparison. Repairs .2.5–.2.11 and earlier repairs retain required reading prerequisites. |
 
 ## Decisions
 
@@ -2591,6 +2598,8 @@ additional reading credit from integration delivery.
 - None at decomposition. Ordinary source repairs retain startup prerequisites; later collection pressure must be measured rather than assumed away.
 
 ## Verification Log
+
+- `2026-09-21` .1.69: Eleven complete windows cover 657 fragments / 65,437 baseline bytes; ordered window SHA-256 69327ea77a1e57cca29663241de96f0d256a4301a3ac06781867c8b6e43a1ec7. Cumulative reading is 69/143: 86,442 fragments / 3,561,482 baseline bytes and 97 complete files. Phase0 is partial through line 36947. Unchanged canonical commit ec10be6b retains PASS for nineteen completed subtests, ordinals 722–740 with 150 direct assertions and no nested plans. Nine descriptor comparisons contribute 108 assertions; ten direct-lowering plans (nine of four and one of six) contribute 42 textual assertions. Exact TAP numbering and source identity are verified. Membership, literal replacement, boundary removal, concatenation, emptiness, index and reducer expectations observe lowering text, not evaluated target results. Descriptor uppercase-slot comparisons remain .2.10-owned. Lifecycle count_keys is partial after its two descriptor-build assertions; .1.70 owns the remaining ten. No independently reproduced new defect, runtime execution, repair, dependency build, canonical run or push is claimed; .2.5–.2.11 and all prerequisites remain.
 
 - `2026-09-21` .1.68: Eleven complete windows cover 861 fragments / 65,511 baseline bytes; ordered window SHA-256 01426c078629e81653e48b56bc551044f7f812cbf5fa75dce094c2a97194a1e7. Cumulative reading is 68/143: 85,785 fragments / 3,496,045 baseline bytes and 97 complete files. Phase0 is partial through line 36290. Unchanged canonical commit ec10be6b retains PASS for twenty-two completed subtests, ordinals 700–721 with 221 direct assertions and no nested plans. Seventeen descriptor comparisons contribute 204 assertions; five direct-lowering plans of 2,3,4,5,3 contribute seventeen textual assertions. Exact TAP numbering and source identity are verified. Lowering observations distinguish fallback, definedness, aggregate emptiness and scalar normalization; they do not execute generated target code. Descriptor uppercase-slot comparisons remain .2.10-owned. The next action scalar-normalization comparison is partial after its fluent fixture; .1.69 owns the structured fixture and assertions. No independently reproduced new defect, runtime execution, repair, dependency build, canonical run or push is claimed; .2.5–.2.11 and all prerequisites remain.
 
@@ -2700,6 +2709,8 @@ additional reading credit from integration delivery.
 
 ## Commit Log
 
+- `2026-09-21` .1.69: `CONFORMANCE-SOURCE-READING.1.69 - read scalar membership and reducer lowering checks`; activation e057c0336; .1.70 follows clean handoff and empty brief.
+
 - `2026-09-21` .1.68: `CONFORMANCE-SOURCE-READING.1.68 - read fallback lowering and normalization metadata`; activation c69ece0e6; .1.69 follows clean handoff and empty brief.
 
 - `2026-09-21` .1.67: `CONFORMANCE-SOURCE-READING.1.67 - read payload branches and captured-call descriptor comparisons`; activation b193bfa9d; .1.68 follows clean handoff and empty brief.
@@ -2807,6 +2818,8 @@ additional reading credit from integration delivery.
 - `2026-09-13`: Decomposition lands under `SESSION-STARTUP-READING.3.8.0`; Git owns the resulting commit identity.
 
 ## Changelog
+
+- `2026-09-21` .1.69: Read scalar membership, replacement, boundaries, concatenation, index and reducer expectations; distinguish textual lowering from evaluated target results.
 
 - `2026-09-21` .1.68: Read normalization descriptors and direct fallback/definedness/emptiness lowering assertions; preserve the boundary between textual lowering and target execution.
 

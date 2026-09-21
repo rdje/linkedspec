@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.69 - read scalar membership and reducer lowering checks
+
+Ten direct-lowering plans include nine of four assertions and a six-assertion boundary-transform plan. Exact text retains undefined-needle membership, literal replacement trailing fields, empty/nonmatching boundary identity, concatenation boolean/negative-zero handling, first-match indexes and aggregate reducers. Nine descriptor comparisons retain .2.10 limits. Lifecycle count_keys is partial after both builds. Exact comprehension remains in conformance-perl-consumer-reading.
+
 ## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.68 - read fallback lowering and normalization metadata
 
 Direct lowering plans 2,3,4,5,3 check coalesce, coalesce_nonempty, definedness, aggregate emptiness and scalar normalization. Their exact strings/anchored patterns observe emitted expressions; they do not execute target behavior. Seventeen descriptor pairs contribute 204 further assertions with .2.10 observation limits. Source-span extraction and Unicode casing remain explicit in the expectations. Exact comprehension remains in conformance-perl-consumer-reading.
