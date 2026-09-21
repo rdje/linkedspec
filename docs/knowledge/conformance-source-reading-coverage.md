@@ -8,11 +8,14 @@ answers:
   - "does source reading include decompressed pinned Unicode inputs"
   - "how do I verify conformance reading source and range coverage"
   - "which conformance source reading file has the longest line"
+  - "what evidence capacity blocks remaining conformance reading"
+  - "what exact fourteen limits are proposed for remaining conformance reading"
 date: 2026-09-21
 status: exact baseline decomposition preserved; physical reading 50/143, 97 files complete and 93 groups remain; one approved current-source delta
 tags: [reading, conformance, tests, unicode, continuity, CONFORMANCE-SOURCE-READING]
 evidence: "Startup .3.8.0 independently accounts for160 baseline-identical files,5,422,313 stored bytes and8,257,059 decoded bytes in167,606 line fragments/167,604 LF delimiters. Four gzip inputs contribute54,500 decoded lines. All143 groups/302 ranges are contiguous, disjoint and bounded at1500 fragments/65536 bytes. No source, registry or runtime behavior changes; no physical-reading credit from inventory."
 reverify: "Run CONFORMANCE_SOURCE_READING_COVERAGE below through the project-data wrapper; it derives source identity from Git and range ownership from the task-tree rather than a parallel manifest. Use scripts/check_task_tree_metadata.sh for actual task collection limits."
+evidence_capacity_proposal: "CONFORMANCE-SOURCE-READING.4.1 at 7b921a195: notes58,910 bytes leaves72 before required rollover; both history collections/manifests are full. Fifty exact reading commits bound a99-unit reserve. Independent and production models agree on eight rollovers each;187 production threshold/old-proposed checks pass. Fourteen exact scalar changes are proposed only; .4.2 requires explicit disposition and before-reading implementation authority, followed by ordinary canonical admission."
 ---
 
 # Exact scope and decoding
@@ -443,3 +446,15 @@ Earlier checkpoints retain exact task ownership in CONFORMANCE-SOURCE-READING.1.
 Their exact former card wording is available with
 `git show 978ed9f903dee68026a35ce5885035dc9bc0541d:docs/knowledge/conformance-source-reading-coverage.md`.
 Update this current checkpoint in place; do not append per-leaf reading chronology.
+
+## Remaining-reading evidence capacity
+
+Source reading remains 50/143. `.4.1` owns the concrete fourteen-scalar proposal at
+`docs/tasks/CONFORMANCE-SOURCE-READING.md`, section Remaining-reading capacity proposal.
+Its five complete replay recipes pin the clean baseline, derive maxima from the first
+fifty reading commits, verify immutable history, compare independent/production
+rollover models and test detached limits with the actual production predicate.
+No capacity has been admitted. `.4.2` awaits explicit director disposition before
+bounded implementation under the normal canonical tier; `.1.51` remains unread.
+The 99-unit reserve covers the 93 remaining children and six support allowances,
+not later startup lanes or runtime repairs. Both `.2.5` and `.2.6` remain owned/open.

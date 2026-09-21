@@ -11,13 +11,15 @@
 
 ## Latest Completed Slice
 
-- `CONFORMANCE-SOURCE-READING.1.50 - read ActionIR lazy-loading and capture lowering tests` — Eleven complete windows cover 782 fragments / 65,470 baseline bytes; ordered window SHA-256 519c197576d4307f13e2b7fa04bbf2d6b053a89aa3ef03d698cd9c570849a4c8. Cumulative reading is 50/143: 63,126 fragments / 2,378,009 baseline bytes and 97 complete files. Phase0 is partial through line 13631. Unchanged canonical commit 87b35665e retains PASS for thirteen completed subtests, ordinals 394–406 with 118 assertions; sequential TAP numbers and unchanged Phase0/own Perl/spec identities are verified. Fresh TOOLBOX6.2 extraction passes six lazy-load subtests with 42 assertions; exact child probes show EmitContext 0/1/1 before require/after require/after helper while each ActionIR owner goes 0/1. New .2.6 owns inaccurate EmitContext assertion descriptions. The helper-substitution test has 73 of 90 assertions read, followed by the opening of assertion 74; .1.51 owns the suffix. Historical whole-gate proof remains 1032 top-level tests; no fresh full gate, runtime repair, dependency build or push is claimed.
+- `CONFORMANCE-SOURCE-READING.4.1 - propose finite remaining-reading evidence capacity` — Clean 7b921a195 has notes241/58910 and changes273/58671 lines/bytes. Both archive file/manifest limits are full; next notes allowance is only72 bytes below mandatory90% rollover. Fifty exact reading commits establish bounded positive-growth maxima. Independent and extracted-production 99-record models agree on eight rollovers per history with exact reconstruction. The actual routing predicate passes187 below/equal/above and old/proposed reserve executions. Full actual-candidate-plus99-unit census is required after all proposal edits; registry, sources, repairs and historical records remain unchanged.
 
 ## Next Action
 
-- Activate CONFORMANCE-SOURCE-READING.1.51 after the clean commit; preserve all current repair prerequisites.
+- Obtain explicit .4.2 disposition; implement only approved controls under canonical proof before resuming unread .1.51.
 
 ## Recent Completions
+
+- `2026-09-21` — `CONFORMANCE-SOURCE-READING.4.1` commits the finite remaining-reading capacity proposal; 50/143 reading groups stay complete, .4.2 awaits disposition and no controls change.
 
 - `2026-09-21` — `CONFORMANCE-SOURCE-READING.1.50` reads Phase0 through line 13631 with retained proof for thirteen completed subtests; fresh probes own six load-description corrections under .2.6; .1.51 continues assertion74.
 
@@ -48,8 +50,6 @@
 - `2026-09-21` — `CONFORMANCE-SOURCE-READING.1.37` completes six source files, reaches Phase0 line 43 and owns header correction .2.4; .1.38 next.
 
 - `2026-09-21` — `CONFORMANCE-SOURCE-READING.1.36` completes five source files, reaches MCP admission line 451 and owns helper path repair .2.3; .1.37 next.
-
-- `2026-09-21` — `CONFORMANCE-SOURCE-READING.1.35` completes generated/inspector reading, reaches gap line 1026 and reconciles the approved 113-byte integration delta; .1.36 next.
 
 ## History
 

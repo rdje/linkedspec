@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-21
+
+CONFORMANCE-SOURCE-READING.4.1: capacity proposal.
+
 ## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.50 - read ActionIR lazy-loading and capture lowering tests
 
 Six EmitContext labels overstate lazy loading; .2.6 owns correction. Exact probes and partial lowering evidence: conformance-perl-consumer-reading.

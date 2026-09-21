@@ -509,6 +509,30 @@ setup load to a later helper; .2.6 owns correction. The MethodExpr pre-call Deps
 blind spot remains separately owned by .2.5. Neither finding establishes a production
 loading failure. No fresh full-gate run or whole-file reading credit is claimed.
 The pinned 113-byte inventory delta stays separate; all prerequisite-gated repairs remain open.
+
+Remaining conformance reading now needs a documentation-capacity decision. The notes
+file had 72 bytes left at proposal activation; its complete compact proposal record
+leaves five bytes before mandatory rollover. Both archive collections remain at
+their approved membership limits. A 99-unit reserve covers the 93 remaining reading
+children and six support allowances. No limits have changed. The exact proposal,
+calculations and five replay recipes live in `CONFORMANCE-SOURCE-READING.4.1`.
+
+| Proposed capacity | Current | Proposed |
+| --- | ---: | ---: |
+| Changes collection files / manifest lines / manifest bytes | 39 / 38 / 21,647 | 47 / 46 / 26,255 |
+| Notes collection files / manifest lines / manifest bytes | 35 / 34 / 20,514 | 43 / 42 / 25,410 |
+| Notes aggregate lines / bytes | 28,000 / 3,145,728 | 29,000 / 3,407,872 |
+| Knowledge files / aggregate lines / bytes | 1,152 / 93,000 / 7,340,032 | 1,350 / 108,000 / 8,388,608 |
+| Generated Knowledge Map lines | 20,000 | 22,500 |
+| Task aggregate lines / bytes | 92,000 / 10,485,760 | 120,000 / 12,582,912 |
+
+These are fourteen scalar changes. Both live history files keep their 512-line /
+65,536-byte caps; general per-card/part limits and immutable history remain unchanged.
+`.4.2` requires explicit approval, including bounded implementation before required
+reading finishes. Implementation keeps ordinary canonical CI and commit hooks.
+Source reading stays at 50/143 until governed admission permits `.1.51` to resume;
+all test/runtime repairs remain open under their existing prerequisites.
+
 The director has requested integration guides and runnable consumer examples for
 Perl, Rust, Dart, Julia and Lua, covering recursive checkout, dependency preparation
 and reuse, native APIs, results/errors and packaging. This temporary activity is

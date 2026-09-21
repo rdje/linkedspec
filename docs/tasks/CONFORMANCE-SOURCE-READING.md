@@ -36,7 +36,7 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
 - ID: `CONFORMANCE-SOURCE-READING`
   Status: `active`
   Goal: Complete conformance/test/Unicode source reading and preserve every repair obligation.
-  Children: `.1`, `.2`, `.3`
+  Children: `.1`, `.2`, `.3`, `.4`
 
 - ID: `CONFORMANCE-SOURCE-READING.1`
   Status: `active`
@@ -1980,6 +1980,399 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
   Verification: `pending`
   Commit: `pending`
 
+- ID: `CONFORMANCE-SOURCE-READING.4`
+  Status: `active`
+  Goal: Resolve measured evidence capacity before the remaining 93 reading children, without losing history or silently increasing controls.
+  Children: `.4.1`, `.4.2`
+  Dependencies: .1.50 committed clean; .1.51 remains unread and pending.
+  Acceptance: Preserve exact prior content, derive a finite reviewable reserve, obtain explicit disposition before any capacity implementation and restore the source-reading frontier only after governed admission.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `CONFORMANCE-SOURCE-READING.4.1`
+  Status: `done`
+  Activation commit: `7b921a1954b1a8cf4089315491474979c580046b`.
+  Verification tier: `focused`
+  Focused checks: Exact clean history/source census, bounded reserve and production rollover model, prior-content preservation, existing pressure controls, Knowledge/memory/book, direct public-documentation checks and normal doctrines.
+  Canonical trigger: Proposal and continuity only; no registry, infrastructure, source or policy changes. Implementation requires separate explicit before-reading authority and the ordinary canonical tier.
+  Goal: Produce and commit a concrete finite capacity proposal for remaining conformance reading.
+  Scope: Existing history pressure, a finite 99-unit evidence forecast, exact old/proposed controls, unchanged source/range/repair evidence and durable disposition pointers.
+  Acceptance: Reproduce current measurements and required rollover, preserve every prior record, explain why current routing cannot absorb the reserve, bound any proposed increases and retain all implementation/prerequisite controls. Do not apply proposed controls or claim new source-reading credit.
+  Verification: Clean 7b921a195 has notes241/58910 and changes273/58671 lines/bytes. Both archive file/manifest limits are full; next notes allowance is only72 bytes below mandatory90% rollover. Fifty exact reading commits establish bounded positive-growth maxima. Independent and extracted-production 99-record models agree on eight rollovers per history with exact reconstruction. The actual routing predicate passes187 below/equal/above and old/proposed reserve executions. Full actual-candidate-plus99-unit census is required after all proposal edits; registry, sources, repairs and historical records remain unchanged.
+  Candidate proof: All five recipes replay directly from this maintained proposal; fifty exact comparable commits, independent/production eight-rollover models,187 actual-validator cases and full resulting-candidate-plus99-unit reserve pass. Preservation verifies2,845 other files/50,563,139 bytes and506 prior task nodes; every earlier repair, all143 original reading scopes, registry/policy/source bytes and immutable histories remain exact. Existing public-book content and headings remain byte-exact around the inserted proposal. Memory, both history checks, book rendering, public mutation69/50 and public selector68/11 checks pass. Knowledge is1,151 facts/9,228 keys; notes245/58977 and changes277/58911 lines/bytes stay below required rollover. Normal nine-doctrine hooks govern landing; no approval or canonical admission is claimed.
+  Commit: `CONFORMANCE-SOURCE-READING.4.1 - propose finite remaining-reading evidence capacity`
+
+- ID: `CONFORMANCE-SOURCE-READING.4.2`
+  Status: `pending`
+  Goal: Record the director's explicit disposition and route an approved bounded implementation from a clean checkpoint.
+  Dependencies: .4.1 committed; explicit approval of exact proposed controls and implementation before completion of required reading.
+  Acceptance: No elapsed-time or prior-ADR approval inference. After approval, create a bounded LIVE-DOCUMENT-PRESSURE-CONTAINMENT implementation owner, newly accepted indexed ADR and canonical staged proof; independently verify exact changes and preservation before resuming .1.51. Otherwise retain the proposal and select an authorized alternative with the director.
+  Verification: `pending`
+  Commit: `pending`
+
+## Remaining-reading capacity proposal
+
+Owner: `CONFORMANCE-SOURCE-READING.4.1`. **Proposal only; explicit director approval
+is required before implementation.** Source reading remains 50/143; `.1.51` is
+unread. No limit, runtime, test, policy, dependency pin or immutable history changes.
+
+At activation the notes root is 58,910 bytes. Mandatory rollover starts at 58,983 bytes,
+leaving 72 bytes. Changes is 58,671 bytes, leaving 311. Both collections and both
+manifest file/line/byte capacities are already full. ADR0121 explicitly covers
+integration delivery and excludes unlimited later PNT reading. README_POLICY.md
+requires a newly accepted indexed decision for every increase. The current
+startup exception permits reading checkpoints, not this infrastructure admission.
+
+Approve exactly these fourteen scalar changes and one bounded capacity implementation
+before completion of required source/book/policy reading. Implementation will use
+ordinary receipt-bound canonical CI and all normal hooks; no CI exception is requested.
+Keep all hot-file, generic member, archive-size, schema, routing, authority, immutable
+history and unrelated limits unchanged. Existing responsibilities remain unchanged.
+
+| Controlled surface and scalar | Current | Proposed |
+| --- | ---: | ---: |
+| change_history / limits.max_files | 39 | 47 |
+| change_history / docs/history/changes/manifest.jsonl.max_lines | 38 | 46 |
+| change_history / docs/history/changes/manifest.jsonl.max_bytes | 21,647 | 26,255 |
+| engineering_notes / limits.max_files | 35 | 43 |
+| engineering_notes / limits.max_total_lines | 28,000 | 29,000 |
+| engineering_notes / limits.max_total_bytes | 3,145,728 | 3,407,872 |
+| engineering_notes / docs/history/development-notes/manifest.jsonl.max_lines | 34 | 42 |
+| engineering_notes / docs/history/development-notes/manifest.jsonl.max_bytes | 20,514 | 25,410 |
+| knowledge_cards / limits.max_files | 1,152 | 1,350 |
+| knowledge_cards / limits.max_total_lines | 93,000 | 108,000 |
+| knowledge_cards / limits.max_total_bytes | 7,340,032 | 8,388,608 |
+| knowledge_map / limits.max_lines | 20,000 | 22,500 |
+| task_evidence / limits.max_total_lines | 92,000 | 120,000 |
+| task_evidence / limits.max_total_bytes | 10,485,760 | 12,582,912 |
+
+The finite envelope is 99 units: 93 remaining reading children, this proposal,
+capacity admission, independent capacity verification, conformance closeout and
+two contingencies. These support slots do not require extra commits merely to
+consume an allowance. The resulting-candidate check conservatively charges the
+full reserve after this proposal's actual overhead as well. Runtime repairs,
+later startup lanes and unlimited future PNT activities are outside this reserve.
+
+Per-unit maxima come from the exact first fifty conformance-reading commits:
+Knowledge 158 lines / 11,634 bytes / two files; derived map 28 lines / 9,624 bytes;
+tasks 262 lines / 19,416 bytes. The task maximum includes `.1.34`'s integration
+intake, so it conservatively exceeds ordinary reading-node growth. Reading updates
+existing owners; eight additional task members are reserved for governed partitioning
+or bounded intake within the unchanged 128-file and per-member controls. A later
+partition must preserve stable IDs and use the existing task-tree contract; this
+proposal does not admit a new partition format or checker change. One future ADR
+including its index row reserves 192 lines / 16,384 bytes and one file. Existing
+decision limits suffice. Knowledge may need new cards instead of ever-growing ones;
+all per-card limits remain. Every real leaf must remeasure rather than treating
+these empirical bounds as a guarantee about unknown findings.
+
+Each history reserves 99 complete records of at most 14 lines / 2,048 bytes.
+Both independent and extracted production models roll changes after records
+1, 15, 29, 43, 57, 71, 85 and 99; notes after 1, 14, 28, 42, 56, 70, 84 and 98.
+A changes manifest row is bounded at576 bytes; a notes row at612. Eight rows require exactly the proposed file/manifest limits.
+Notes additionally need aggregate line/byte room; changes keep both aggregate caps.
+The complete compact proposal records leave notes at58,977 bytes (five bytes below
+required rollover) and changes at58,911 bytes (71 bytes below). Every prior record
+remains exact, with full proposal details here and one canonical Knowledge pointer.
+
+Deleting unique evidence or rewriting immutable archives is prohibited. Moving
+required evidence elsewhere does not reduce its aggregate size. Splitting files
+cannot solve aggregate pressure. No sufficient removable duplication was established.
+The earlier merged MethodExpr finding preserved its full recipe within current
+limits; that one-file routing repair cannot supply this finite remaining reserve.
+This proposal neither erases records nor raises limits to conceal a defect.
+
+### Exact detached proposal objects
+
+Each object below pairs baseline and proposed limits/member overrides; every other
+registry field remains byte-identical. Implementation must add an accepted indexed
+ADR and change only the fourteen reviewed scalars, then remeasure the actual roots
+and use the existing rollover tool wherever required. Approval alone is not proof
+of admission. `.4.2` owns disposition; a clean, bounded containment implementation
+must complete before `.1.51` resumes. All earlier repairs, including `.2.5/.2.6`,
+retain their prerequisites. No response or an earlier unrelated Granted is approval.
+
+- Surface `change_history`
+  old_limits: `{"max_bytes_per_file":524288,"max_files":39,"max_lines_per_file":4096,"max_total_bytes":4194304,"max_total_lines":55000}`
+  proposed_limits: `{"max_bytes_per_file":524288,"max_files":47,"max_lines_per_file":4096,"max_total_bytes":4194304,"max_total_lines":55000}`
+  old_member_limits: `{"CHANGES.md":{"max_bytes":65536,"max_lines":512},"docs/history/changes/manifest.jsonl":{"max_bytes":21647,"max_lines":38}}`
+  proposed_member_limits: `{"CHANGES.md":{"max_bytes":65536,"max_lines":512},"docs/history/changes/manifest.jsonl":{"max_bytes":26255,"max_lines":46}}`
+- Surface `engineering_notes`
+  old_limits: `{"max_bytes_per_file":524288,"max_files":35,"max_lines_per_file":4096,"max_total_bytes":3145728,"max_total_lines":28000}`
+  proposed_limits: `{"max_bytes_per_file":524288,"max_files":43,"max_lines_per_file":4096,"max_total_bytes":3407872,"max_total_lines":29000}`
+  old_member_limits: `{"DEVELOPMENT_NOTES.md":{"max_bytes":65536,"max_lines":512},"docs/history/development-notes/manifest.jsonl":{"max_bytes":20514,"max_lines":34}}`
+  proposed_member_limits: `{"DEVELOPMENT_NOTES.md":{"max_bytes":65536,"max_lines":512},"docs/history/development-notes/manifest.jsonl":{"max_bytes":25410,"max_lines":42}}`
+- Surface `knowledge_cards`
+  old_limits: `{"max_bytes_per_file":65536,"max_files":1152,"max_lines_per_file":512,"max_total_bytes":7340032,"max_total_lines":93000}`
+  proposed_limits: `{"max_bytes_per_file":65536,"max_files":1350,"max_lines_per_file":512,"max_total_bytes":8388608,"max_total_lines":108000}`
+  old_member_limits: `{}`
+  proposed_member_limits: `{}`
+- Surface `knowledge_map`
+  old_limits: `{"max_bytes":8388608,"max_lines":20000}`
+  proposed_limits: `{"max_bytes":8388608,"max_lines":22500}`
+  old_member_limits: `{}`
+  proposed_member_limits: `{}`
+- Surface `task_evidence`
+  old_limits: `{"max_bytes_per_file":1048576,"max_files":128,"max_lines_per_file":8000,"max_total_bytes":10485760,"max_total_lines":92000}`
+  proposed_limits: `{"max_bytes_per_file":1048576,"max_files":128,"max_lines_per_file":8000,"max_total_bytes":12582912,"max_total_lines":120000}`
+  old_member_limits: `{"docs/tasks/FUTURE-PARITY-BACKLOG.00-08.md":{"max_bytes":786432,"max_lines":5000},"docs/tasks/FUTURE-PARITY-BACKLOG.09.md":{"max_bytes":786432,"max_lines":5000},"docs/tasks/FUTURE-PARITY-BACKLOG.10.0-6.md":{"max_bytes":786432,"max_lines":5000},"docs/tasks/FUTURE-PARITY-BACKLOG.10.7-10.md":{"max_bytes":786432,"max_lines":5000},"docs/tasks/FUTURE-PARITY-BACKLOG.11-13.md":{"max_bytes":786432,"max_lines":5000},"docs/tasks/FUTURE-PARITY-BACKLOG.14.6.5-8.md":{"max_bytes":786432,"max_lines":5000},"docs/tasks/FUTURE-PARITY-BACKLOG.14.md":{"max_bytes":786432,"max_lines":5000},"docs/tasks/FUTURE-PARITY-BACKLOG.15-24.md":{"max_bytes":786432,"max_lines":5000},"docs/tasks/FUTURE-PARITY-BACKLOG.history.md":{"max_bytes":786432,"max_lines":5000},"docs/tasks/FUTURE-PARITY-BACKLOG.index.jsonl":{"max_bytes":16384,"max_lines":10},"docs/tasks/FUTURE-PARITY-BACKLOG.md":{"max_bytes":786432,"max_lines":5000}}`
+  proposed_member_limits: `{"docs/tasks/FUTURE-PARITY-BACKLOG.00-08.md":{"max_bytes":786432,"max_lines":5000},"docs/tasks/FUTURE-PARITY-BACKLOG.09.md":{"max_bytes":786432,"max_lines":5000},"docs/tasks/FUTURE-PARITY-BACKLOG.10.0-6.md":{"max_bytes":786432,"max_lines":5000},"docs/tasks/FUTURE-PARITY-BACKLOG.10.7-10.md":{"max_bytes":786432,"max_lines":5000},"docs/tasks/FUTURE-PARITY-BACKLOG.11-13.md":{"max_bytes":786432,"max_lines":5000},"docs/tasks/FUTURE-PARITY-BACKLOG.14.6.5-8.md":{"max_bytes":786432,"max_lines":5000},"docs/tasks/FUTURE-PARITY-BACKLOG.14.md":{"max_bytes":786432,"max_lines":5000},"docs/tasks/FUTURE-PARITY-BACKLOG.15-24.md":{"max_bytes":786432,"max_lines":5000},"docs/tasks/FUTURE-PARITY-BACKLOG.history.md":{"max_bytes":786432,"max_lines":5000},"docs/tasks/FUTURE-PARITY-BACKLOG.index.jsonl":{"max_bytes":16384,"max_lines":10},"docs/tasks/FUTURE-PARITY-BACKLOG.md":{"max_bytes":786432,"max_lines":5000}}`
+
+### Reproduction
+
+Run these five snippets in order through the stated repository-data wrapper, saving
+them only under `.linkedspec-data/scratch/conformance-capacity/`. The first pins all
+fifty comparable commits and the clean baseline; the next two independently agree
+on exact record movement without publishing an archive. The fourth remeasures the
+current candidate plus full reserve. The fifth tests the actual production predicate
+against detached proposed controls. No recipe changes a maintained source or limit.
+These are proposal checks, not canonical admission or source-reading credit.
+
+```bash
+bash tools/project_data_run.sh python3 - <<'CONFORMANCE_CAPACITY_MEASURE'
+from pathlib import Path
+import subprocess,json,fnmatch,re
+BASE='7b921a1954b1a8cf4089315491474979c580046b';w=Path('.linkedspec-data/scratch/conformance-capacity')
+w.mkdir(parents=True,exist_ok=True)
+def git(*args):return subprocess.check_output(['git',*args])
+def lc(data):return data.count(b'\n')+int(bool(data) and not data.endswith(b'\n'))
+registry=[json.loads(x) for x in git('show',BASE+':doctrine/readme_stability/routes.jsonl').splitlines()];ids=['change_history','engineering_notes','knowledge_cards','knowledge_map','task_evidence','decisions']
+surfaces={r['id']:r for r in registry if r.get('id') in ids}
+paths=git('ls-tree','-r','--name-only',BASE).decode().splitlines();current={}
+for id,r in surfaces.items():
+ selected=[p for p in paths if any(fnmatch.fnmatchcase(p,g) for g in r['members'])];data=[git('show',BASE+':'+p) for p in selected]
+ current[id]={'files':len(data),'lines':sum(map(lc,data)),'bytes':sum(map(len,data)),'limits':r['limits'],'member_limits':r['member_limits']}
+print(json.dumps(current,indent=2));(w/'current.json').write_text(json.dumps(current,indent=2)+'\n')
+commits=[]
+for line in git('log','--format=%H\t%s','--grep','^CONFORMANCE-SOURCE-READING[.]1[.]').decode().splitlines():
+ h,subject=line.split('\t',1);m=re.match(r'CONFORMANCE-SOURCE-READING\.1\.(\d+) - ',subject)
+ if m and int(m[1])<=50:commits.append((int(m[1]),h))
+assert sorted(x[0] for x in commits)==list(range(1,51))
+rows=[]
+for n,h in sorted(commits):
+ changes=git('diff-tree','--no-commit-id','--name-only','-r',h).decode().splitlines();row={'ordinal':n,'commit':h,'deltas':{}}
+ for id,r in surfaces.items():
+  if id in ['change_history','engineering_notes']:continue
+  selected=[p for p in changes if any(fnmatch.fnmatchcase(p,g) for g in r['members'])];delta={'files':0,'lines':0,'bytes':0}
+  for p in selected:
+   pair=[]
+   for rev in [h+'^',h]:
+    result=subprocess.run(['git','show',rev+':'+p],capture_output=True);assert result.returncode in [0,128];pair.append(result.stdout if result.returncode==0 else None)
+   delta['files']+=int(pair[1] is not None)-int(pair[0] is not None);delta['lines']+=lc(pair[1] or b'')-lc(pair[0] or b'');delta['bytes']+=len(pair[1] or b'')-len(pair[0] or b'')
+  row['deltas'][id]=delta
+ rows.append(row)
+maxima={id:{k:max(row['deltas'][id][k] for row in rows) for k in ['files','lines','bytes']} for id in rows[0]['deltas']}
+print('MAXIMA',json.dumps(maxima,indent=2));(w/'comparables.json').write_text(json.dumps({'base':BASE,'commits':rows,'maxima':maxima},indent=2)+'\n')
+CONFORMANCE_CAPACITY_MEASURE
+```
+
+```bash
+bash tools/project_data_run.sh python3 - <<'CONFORMANCE_CAPACITY_HISTORY'
+from pathlib import Path
+import subprocess,re,json,hashlib,math
+BASE='7b921a1954b1a8cf4089315491474979c580046b'
+def enc(x):return (json.dumps(x,sort_keys=True,separators=(',',':'))+'\n').encode()
+def digest(x):return hashlib.sha256(x).hexdigest()
+def lc(x):return x.count(b'\n')+int(bool(x) and not x.endswith(b'\n'))
+def reached(x,pct):return lc(x)*100>=512*pct or len(x)*100>=65536*pct
+def exceeded(x,pct):return lc(x)*100>512*pct or len(x)*100>65536*pct
+def split(x):
+ starts=[m.start() for m in re.finditer(rb'(?m)^## ',x)]
+ assert starts
+ return x[:starts[0]],[x[a:b] for a,b in zip(starts,starts[1:]+[len(x)])]
+def future(i):
+ prefix=('## Projected conformance evidence record '+str(i)+'\n\n').encode()
+ rows=[b'bounded evidence\n']*12
+ extra=2048-len(prefix)-sum(map(len,rows));assert extra>0
+ rows[0]=b'x'*extra+rows[0]
+ raw=prefix+b''.join(rows);assert lc(raw)==14 and len(raw)==2048
+ return raw
+registry=[json.loads(x) for x in subprocess.check_output(['git','show',BASE+':doctrine/readme_stability/routes.jsonl']).decode().splitlines()]
+results=[]
+for id,root,family in [('change_history','CHANGES.md','changes'),('engineering_notes','DEVELOPMENT_NOTES.md','development-notes')]:
+ surface=next(x for x in registry if x.get('id')==id)
+ source=subprocess.check_output(['git','show',BASE+':'+root])
+ preamble,records=split(source);assert b''.join([preamble,*records])==source
+ original_records=list(records)
+ manifest_path='docs/history/'+family+'/manifest.jsonl'
+ manifest=subprocess.check_output(['git','show',BASE+':'+manifest_path]);parsed=[json.loads(x) for x in manifest.splitlines()];metadata,history=parsed[0],parsed[1:]
+ assert b''.join(enc(x) for x in parsed)==manifest
+ for row in history:
+  raw=Path(row['target_path']).read_bytes();assert digest(raw)==row['sha256'] and len(raw)==row['byte_count'] and lc(raw)==row['line_count']
+ query=b''.join(Path(row['target_path']).read_bytes() for row in history)
+ actual_query=subprocess.check_output(['perl','tools/read_document_history.pl','--surface',id,'--all']);assert actual_query.endswith(query)
+ old_paths={Path(root),Path(manifest_path),*(Path(row['target_path']) for row in history)}
+ baseline_bytes=[source,manifest]+[Path(row['target_path']).read_bytes() for row in history]
+ old_total_lines=sum(map(lc,baseline_bytes));old_total_bytes=sum(map(len,baseline_bytes))
+ rollovers=[]
+ current=source;archived_total=b'';all_future=[]
+ for i in range(1,100):
+  added=future(i);all_future.insert(0,added);before=current
+  records.insert(0,added);candidate=preamble+b''.join(records)
+  if reached(candidate,90):
+   keep=len(records)
+   while keep>1 and exceeded(preamble+b''.join(records[:keep]),50):keep-=1
+   retained=preamble+b''.join(records[:keep]);assert keep>=1 and not exceeded(retained,50)
+   archive=b''.join(records[keep:]);assert archive and before.endswith(archive)
+   # Runtime source range points into this simulated prior clean root, never a real commit.
+   start=lc(before[:-len(archive)])+1;end=lc(before)
+   nr=int(history[0]['segment_id'])-1;sid=f'{nr:04d}';sha=digest(archive)
+   row=dict(byte_count=len(archive),current_path=root,immutable=True,line_count=lc(archive),
+    retrieval_command='perl tools/read_document_history.pl --surface '+id+' --segment '+sid,
+    segment_id=sid,sha256=sha,source_blob='0'*40,source_commit='0'*40,
+    source_end_line=end,source_path=root,source_start_line=start,surface=id,
+    target_path='docs/history/'+family+'/segment-'+sid+'-'+sha[:12]+'.md',type='segment')
+   history.insert(0,row);metadata['segment_count']=len(history)
+   rollovers.append(dict(after_record=i,candidate=[lc(candidate),len(candidate)],retained=[lc(retained),len(retained)],archived=[lc(archive),len(archive)],manifest_row_bytes=len(enc(row))))
+   archived_total=archive+archived_total
+   records=records[:keep];current=retained
+  else:current=candidate
+  assert preamble+b''.join(all_future)+b''.join(original_records)==current+archived_total
+ new_manifest=enc(metadata)+b''.join(enc(row) for row in history)
+ # Bound every potential new record by actual schema widths, not favorable model coordinates.
+ template=dict(history[0]);template.update(byte_count=65536,line_count=512,source_start_line=512,source_end_line=512,source_blob='f'*40,source_commit='f'*40,sha256='f'*64)
+ template['target_path']='docs/history/'+family+'/segment-0001-'+'f'*12+'.md';template['segment_id']='0001';template['retrieval_command']='perl tools/read_document_history.pl --surface '+id+' --segment 0001'
+ per_row_bound=len(enc(template))
+ allowance=len(rollovers)
+ new_limits=dict(surface['limits'],max_files=max(surface['limits']['max_files'],len(old_paths)+allowance))
+ if id=='engineering_notes':new_limits.update(max_total_lines=29000,max_total_bytes=3407872)
+ new_member=dict(surface['member_limits'][manifest_path],max_lines=max(surface['member_limits'][manifest_path]['max_lines'],lc(manifest)+allowance),max_bytes=max(surface['member_limits'][manifest_path]['max_bytes'],len(manifest)+allowance*per_row_bound))
+ forecast_lines=old_total_lines+99*14+allowance;forecast_bytes=old_total_bytes+99*2048+allowance*per_row_bound
+ assert forecast_lines<=new_limits['max_total_lines'] and forecast_bytes<=new_limits['max_total_bytes']
+ assert len(new_manifest)<=new_member['max_bytes']
+ result=dict(surface=id,root=root,baseline=BASE,source_blob=subprocess.check_output(['git','rev-parse',BASE+':'+root]).decode().strip(),current=[lc(source),len(source)],collection=[len(old_paths),old_total_lines,old_total_bytes],manifest=[lc(manifest),len(manifest),digest(manifest)],query=[lc(query),len(query),digest(query)],record_budget=[99,14,2048],rollovers=rollovers,new_limits=new_limits,old_limits=surface['limits'],old_manifest_limit=surface['member_limits'][manifest_path],new_manifest_limit=new_member,manifest_row_byte_bound=per_row_bound,forecast=[forecast_lines,forecast_bytes],modeled_final=[lc(current),len(current)])
+ results.append(result)
+ print(json.dumps(result,indent=2))
+Path('.linkedspec-data/scratch/conformance-capacity').mkdir(parents=True,exist_ok=True)
+Path('.linkedspec-data/scratch/conformance-capacity/model.json').write_text(json.dumps(results,indent=2)+'\n')
+print('PASS 99-record dual-axis simulation per surface, all prefix/suffix byte reconstruction, current manifests/archives, full history queries, aggregate forecasts; no history or registry mutation.')
+CONFORMANCE_CAPACITY_HISTORY
+```
+
+```bash
+bash tools/project_data_run.sh perl - <<'CONFORMANCE_CAPACITY_PRODUCTION'
+use strict;use warnings;use JSON::PP;use Digest::SHA qw(sha256_hex);
+my $MAX_LINES=512;my $MAX_BYTES=65536;my $code;
+{open my $fh,'<:raw','tools/roll_document_history.pl' or die $!;local $/;$code=<$fh>}
+my $extracted='';
+for my $bounds (['sub split_current {','sub validate_preamble {'],['sub threshold_reached {','sub read_manifest {'],['sub segment_record {','sub usage {']) {
+ my ($a,$b)=map {index($code,$_)} @$bounds;die 'subroutine source boundary' if $a<0||$b<$a;$extracted.=substr($code,$a,$b-$a)."\n";
+}
+eval $extracted;die $@ if $@;
+my $expected;{open my $fh,'<:raw','.linkedspec-data/scratch/conformance-capacity/model.json' or die $!;local $/;$expected=JSON::PP->new->decode(<$fh>)}
+my $json=JSON::PP->new->canonical->utf8;
+for my $model (@$expected) {
+ my $root=$model->{root};open my $git,'-|','git','show',"$model->{baseline}:$root" or die $!;binmode $git;my $raw=do {local $/;<$git>};close $git or die 'git source';
+ my ($pre,$records)=split_current($raw,{boundary=>($root eq 'CHANGES.md'?qr/^## /m:qr/^(?:- 20[0-9]{2}-[0-9]{2}\b|## )/m),current=>$root});
+ my @rolls;
+ for my $i (1..99) {
+  my $prefix="## Projected conformance evidence record $i\n\n";my @rows=("bounded evidence\n")x12;my $extra=2048-length($prefix)-length(join('',@rows));$rows[0]=('x'x$extra).$rows[0];my $new=$prefix.join('',@rows);
+  die 'synthetic bound' unless line_count($new)==14 && length($new)==2048;
+  unshift @$records,$new;my $candidate=$pre.join_prefix($records,scalar @$records);
+  if(threshold_reached(line_count($candidate),length($candidate),90)) {
+   my $keep=scalar @$records;
+   while($keep>1 && threshold_exceeded(line_count($pre.join_prefix($records,$keep)),length($pre.join_prefix($records,$keep)),50)) {--$keep}
+   my $retained=$pre.join_prefix($records,$keep);my $archived=join('',@$records[$keep..$#$records]);
+   push @rolls,{after_record=>$i,candidate=>[line_count($candidate),length($candidate)],retained=>[line_count($retained),length($retained)],archived=>[line_count($archived),length($archived)]};
+   @$records=@$records[0..$keep-1];
+  }
+ }
+ die 'rollover count' unless @rolls==@{$model->{rollovers}};
+ for my $i (0..$#rolls) {
+  my %expected=%{$model->{rollovers}[$i]};delete $expected{manifest_row_bytes};
+  die 'actual function model mismatch' unless $json->encode($rolls[$i]) eq $json->encode(\%expected);
+ }
+ my $family=$root eq 'CHANGES.md'?'changes':'development-notes';my $id=$model->{surface};
+ my $record=segment_record($id,{current=>$root},'0001',"docs/history/$family/segment-0001-".('f'x12).'.md','f'x64,'f'x40,'f'x40,512,512,512,65536);
+ die 'row byte-bound mismatch' unless length($json->encode($record)."\n")==$model->{manifest_row_byte_bound};
+ print "PASS $id: 99 source-function simulations; ".scalar(@rolls)." exact rollovers; maximal future row $model->{manifest_row_byte_bound} bytes\n";
+}
+CONFORMANCE_CAPACITY_PRODUCTION
+```
+
+```bash
+bash tools/project_data_run.sh python3 - <<'CONFORMANCE_CAPACITY_RESERVE'
+from pathlib import Path
+import json,subprocess
+BASE='7b921a1954b1a8cf4089315491474979c580046b';w=Path('.linkedspec-data/scratch/conformance-capacity');units=99
+cmp=json.loads((w/'comparables.json').read_text());assert cmp['base']==BASE and len(cmp['commits'])==50
+models=json.loads((w/'model.json').read_text());reserve={}
+for name in ['knowledge_cards','task_evidence','knowledge_map']:
+ reserve[name]={k:units*cmp['maxima'][name][k] for k in ['lines','bytes']}
+reserve['knowledge_cards']['files']=units*cmp['maxima']['knowledge_cards']['files']
+# Reading updates existing owners; eight slots cover bounded repartitioning/intake.
+reserve['task_evidence']['files']=8
+reserve['decisions']={'files':1,'lines':192,'bytes':16384}
+for m in models:
+ assert m['baseline']==BASE and m['record_budget']==[99,14,2048] and len(m['rollovers'])==8
+ reserve[m['surface']]={'files':8,'lines':units*14+8,'bytes':units*2048+8*m['manifest_row_byte_bound']}
+p=Path('doctrine/readme_stability/routes.jsonl');assert p.read_bytes()==subprocess.check_output(['git','show',BASE+':'+str(p)])
+report={};changes=[]
+for row in map(json.loads,p.read_text().splitlines()):
+ name=row.get('id')
+ if name not in reserve:continue
+ limits=dict(row['limits']);overrides=json.loads(json.dumps(row['member_limits']))
+ if name=='knowledge_cards':limits.update(max_files=1350,max_total_lines=108000,max_total_bytes=8388608)
+ if name=='knowledge_map':limits['max_lines']=22500
+ if name=='task_evidence':limits.update(max_total_lines=120000,max_total_bytes=12582912)
+ if name in ['change_history','engineering_notes']:
+  m=next(m for m in models if m['surface']==name);limits=m['new_limits'];path='docs/history/'+('changes' if name=='change_history' else 'development-notes')+'/manifest.jsonl';overrides[path]=m['new_manifest_limit'];raw=Path(path).read_bytes()
+  assert raw.count(b'\n')+8<=overrides[path]['max_lines'] and len(raw)+8*m['manifest_row_byte_bound']<=overrides[path]['max_bytes']
+ paths=sorted({q for pattern in row['members'] for q in Path('.').glob(pattern) if q.is_file()});assert all(not q.is_symlink() for q in paths)
+ current={'files':len(paths),'lines':sum(q.read_bytes().count(b'\n') for q in paths),'bytes':sum(q.stat().st_size for q in paths)}
+ projected={key:value+reserve[name].get(key,0) for key,value in current.items()}
+ for key,value in projected.items():
+  cap=limits.get('max_'+key,limits.get('max_total_'+key))
+  if cap is not None:assert value<=cap,(name,key,value,cap)
+ for q in paths:
+  override=overrides.get(str(q),{});raw=q.read_bytes()
+  for key,value in [('lines',raw.count(b'\n')),('bytes',len(raw))]:
+   cap=override.get('max_'+key,limits.get('max_'+key+'_per_file',limits.get('max_'+key)))
+   if cap is not None:assert value<=cap,(str(q),key,value,cap)
+ for key,new in limits.items():
+  old=row['limits'][key]
+  if new!=old:changes.append([name,'limits.'+key,old,new])
+ for path,values in overrides.items():
+  for key,new in values.items():
+   old=row['member_limits'][path][key]
+   if new!=old:changes.append([name,path+'.'+key,old,new])
+ report[name]={'current':current,'reserve':reserve[name],'projected':projected,'old_limits':row['limits'],'proposed_limits':limits,'old_member_limits':row['member_limits'],'proposed_member_limits':overrides}
+assert set(report)==set(reserve) and len(changes)==14
+(w/'reserve.json').write_text(json.dumps(report,indent=2)+'\n');(w/'changes.json').write_text(json.dumps(changes,indent=2)+'\n')
+for name,r in report.items():print(name,json.dumps({'current':r['current'],'reserve':r['reserve'],'projected':r['projected']},sort_keys=True))
+print('EXACT 14 SCALARS',json.dumps(changes));print('PASS current candidate plus full 99-unit reserve; all hot-file and general per-file controls unchanged; registry unchanged.')
+CONFORMANCE_CAPACITY_RESERVE
+```
+
+```bash
+bash tools/project_data_run.sh perl - <<'CONFORMANCE_CAPACITY_BOUNDARIES'
+use strict;use warnings;use JSON::PP;
+sub read_raw {my($p)=@_;open my $f,'<:raw',$p or die $!;local $/;return <$f>}
+my $source=read_raw('scripts/check_readme_routing_pressure.pl');my($fn)=$source=~/(^sub exceeds_limits \{.*?^\})/ms;die 'validator missing' unless $fn;eval($fn."\n1;") or die $@;
+my $json=JSON::PP->new->canonical;my $report=$json->decode(read_raw('.linkedspec-data/scratch/conformance-capacity/reserve.json'));my $n=0;
+for my $name(sort keys %$report){
+ my $r=$report->{$name};my @objects=([$r->{proposed_limits},'collection']);push @objects,map {[$r->{proposed_member_limits}{$_},$_]} sort keys %{$r->{proposed_member_limits}};
+ for my $object(@objects){my($limits,$label)=@$object;
+  for my $key(sort keys %$limits){for my $offset(-1,0,1){
+   my $m={files=>0,lines=>0,bytes=>0,members=>['sample.md'],per_file=>{'sample.md'=>{lines=>0,bytes=>0}}};my $value=$limits->{$key}+$offset;
+   if($key=~/^max_(lines|bytes)_per_file$/){$m->{per_file}{'sample.md'}{$1}=$value}
+   elsif($key=~/^max_(?:total_)?(lines|bytes|files)$/){$m->{$1}=$value}else{die "unhandled $key"}
+   my @errors=exceeds_limits($m,$limits);die "$name $label $key $offset: @errors" unless @errors==($offset==1?1:0);++$n;
+  }}
+ }
+ my $m={%{$r->{projected}},members=>[],per_file=>{}};my @old=exceeds_limits($m,$r->{old_limits});my @new=exceeds_limits($m,$r->{proposed_limits});die "$name proposed reserve rejected: @new" if @new;
+ die "$name unchanged decision reserve unexpectedly fails" if $name eq 'decisions' && @old;
+ die "$name existing controls unexpectedly accept full reserve" if $name ne 'decisions' && !@old;
+ print "$name old-control reserve rejection: ",join('; ',@old)||'none; unchanged decision reserve fits',"\n";$n+=2;
+}
+my $models=$json->decode(read_raw('.linkedspec-data/scratch/conformance-capacity/model.json'));
+for my $m(@$models){my $name=$m->{surface};my $path='docs/history/'.($name eq 'change_history'?'changes':'development-notes').'/manifest.jsonl';my $raw=read_raw($path);my $metrics={lines=>scalar(split /\n/,$raw)+8,bytes=>length($raw)+8*$m->{manifest_row_byte_bound}};
+ my @old=exceeds_limits($metrics,$report->{$name}{old_member_limits}{$path});my @new=exceeds_limits($metrics,$report->{$name}{proposed_member_limits}{$path});die "$name manifest reserve" unless @old==2 && !@new;$n+=2;
+}
+print "PASS $n actual production-validator executions: independent below/equal/above boundaries and old/proposed aggregate reserve controls. No registry edits.\n";
+CONFORMANCE_CAPACITY_BOUNDARIES
+```
+
 ## Current Frontier
 
 Integration .2.1 intentionally updates the already-read cursor contract inventory
@@ -1999,7 +2392,7 @@ additional reading credit from integration delivery.
 
 | Rank | Leaf | Status | Next action |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.51` | `pending` | Read Phase0 lines 13632–14984 (1,353 fragments / 65,519 baseline bytes), continuing helper-substitution assertion 74. Repairs .2.5/.2.6 and earlier repairs retain required-reading prerequisites. |
+| 1 | `CONFORMANCE-SOURCE-READING.4.2` | `pending` | Obtain explicit disposition of the fourteen-scalar remaining-reading capacity proposal and before-reading implementation authority. Registry and source remain unchanged; .1.51 resumes only after governed admission. |
 
 ## Decisions
 
@@ -2011,6 +2404,8 @@ additional reading credit from integration delivery.
 - None at decomposition. Ordinary source repairs retain startup prerequisites; later collection pressure must be measured rather than assumed away.
 
 ## Verification Log
+
+- `2026-09-21` .4.1: Clean 7b921a195 has notes241/58910 and changes273/58671 lines/bytes. Both archive file/manifest limits are full; next notes allowance is only72 bytes below mandatory90% rollover. Fifty exact reading commits establish bounded positive-growth maxima. Independent and extracted-production 99-record models agree on eight rollovers per history with exact reconstruction. The actual routing predicate passes187 below/equal/above and old/proposed reserve executions. Full actual-candidate-plus99-unit census is required after all proposal edits; registry, sources, repairs and historical records remain unchanged.
 
 - `2026-09-21` .1.50: Eleven complete windows cover 782 fragments / 65,470 baseline bytes; ordered window SHA-256 519c197576d4307f13e2b7fa04bbf2d6b053a89aa3ef03d698cd9c570849a4c8. Cumulative reading is 50/143: 63,126 fragments / 2,378,009 baseline bytes and 97 complete files. Phase0 is partial through line 13631. Unchanged canonical commit 87b35665e retains PASS for thirteen completed subtests, ordinals 394–406 with 118 assertions; sequential TAP numbers and unchanged Phase0/own Perl/spec identities are verified. Fresh TOOLBOX6.2 extraction passes six lazy-load subtests with 42 assertions; exact child probes show EmitContext 0/1/1 before require/after require/after helper while each ActionIR owner goes 0/1. New .2.6 owns inaccurate EmitContext assertion descriptions. The helper-substitution test has 73 of 90 assertions read, followed by the opening of assertion 74; .1.51 owns the suffix. Historical whole-gate proof remains 1032 top-level tests; no fresh full gate, runtime repair, dependency build or push is claimed.
 
@@ -2082,6 +2477,8 @@ additional reading credit from integration delivery.
 
 ## Commit Log
 
+- `2026-09-21` .4.1: `CONFORMANCE-SOURCE-READING.4.1 - propose finite remaining-reading evidence capacity`; activation 7b921a195; approval remains pending under .4.2.
+
 - `2026-09-21` .1.50: `CONFORMANCE-SOURCE-READING.1.50 - read ActionIR lazy-loading and capture lowering tests`; activation d70f77f4d; .1.51 follows clean handoff and empty brief.
 
 - `2026-09-21` .1.49: `CONFORMANCE-SOURCE-READING.1.49 - read compiler owner paths and diagnose lazy-load test blind spot`; activation 7a166581c; .1.50 follows clean handoff and empty brief.
@@ -2151,6 +2548,8 @@ additional reading credit from integration delivery.
 - `2026-09-13`: Decomposition lands under `SESSION-STARTUP-READING.3.8.0`; Git owns the resulting commit identity.
 
 ## Changelog
+
+- `2026-09-21` .4.1: Own and quantify finite remaining-reading evidence capacity without applying any control or changing source-reading credit.
 
 - `2026-09-21` .1.50: Read ActionIR owner loading and partial capture/mark lowering checks; own the six inaccurate bridge-load assertion descriptions under .2.6 and preserve .2.5 and all prerequisites.
 

@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.4.1
+
+Propose fourteen finite evidence-capacity controls for remaining reading; exact objects/models in task .4.1. No limits change. Explicit .4.2 approval and canonical admission precede .1.51.
+
 ## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.50 - read ActionIR lazy-loading and capture lowering tests
 
 Read Phase0 12850–13631: 50/143 groups, 63,126 fragments / 2,378,009 baseline bytes. Retained proof covers 13 complete subtests / 118 assertions. Fresh six-test / 42-assertion probes confirm six misleading EmitContext load descriptions, owned by .2.6. The 90-assertion lowering test remains partial after assertion73; .1.51 continues. Exact windows, reproduction and comprehension are in the task-tree and conformance-perl-consumer-reading; all repair prerequisites remain.

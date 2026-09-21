@@ -1,12 +1,12 @@
 # MEMORY
 
-- activation_commit: `d70f77f4d1abf7c4a1297731ee014a369940303c` — clean conformance .1.49 checkpoint; .1.50 activation.
-- latest_completed_leaf: `CONFORMANCE-SOURCE-READING.1.50 - read ActionIR lazy-loading and capture lowering tests`; exact scope, retained proof and focused load diagnostics.
-- active_work_unit: `CONFORMANCE-SOURCE-READING.1.51` — pending required source reading.
-- next_action: Activate conformance .1.51. Read Phase0 lines 13632–14984 (1,353 fragments / 65,519 baseline bytes), continuing helper-substitution assertion 74. Repairs .2.5/.2.6 and earlier repairs retain required-reading prerequisites.
+- activation_commit: `7b921a1954b1a8cf4089315491474979c580046b` — clean conformance .1.50 checkpoint; capacity proposal .4.1 activation.
+- latest_completed_leaf: `CONFORMANCE-SOURCE-READING.4.1 - propose finite remaining-reading evidence capacity`; proposal only, no limit or source changes.
+- active_work_unit: `CONFORMANCE-SOURCE-READING.4.2` — pending explicit director disposition.
+- next_action: Obtain approval of the fourteen exact scalar changes and before-reading capacity implementation in conformance .4.1. Then admit through a bounded containment leaf with canonical proof; resume unread .1.51 only after clean admission.
   Named-argument direction PARSER-AUTHORING-APIS.4 is approved and parked; other authoring proposals and approved formats stay parked.
-- in_flight_uncommitted: none; reading .1.50 is verified and committed before the next leaf.
-- blockers: none for conformance .1.51. Wrapper startup .7 remains open; warned-child group matched, but denied-call cause and original lost PUC stream remain unproved. Recovery/purge stay prohibited.
+- in_flight_uncommitted: none; .4.1 proposal is verified and committed before requesting disposition.
+- blockers: History capacity: next note exceeds mandatory rollover without new archive room; .4.2 owns approval. Wrapper startup .7 remains open; warned-child group matched, but denied-call cause and original lost PUC stream remain unproved. Recovery/purge stay prohibited.
 - current_rust_warning_debt: Repeated carriers report 1,870 pgen plus 26 rgx-core output warnings; RUST-DEPENDENCY-WARNING-ZERO.1-.7 own public RGX reports and result verification without suppression; dependency internals are excluded.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
   active table; the task metadata doctrine inventories all consumers, permits arbitrary frontier-row rewrites,
