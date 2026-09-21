@@ -11,7 +11,7 @@ answers:
   - "what evidence capacity blocks remaining conformance reading"
   - "what exact fourteen limits are proposed for remaining conformance reading"
 date: 2026-09-21
-status: exact baseline decomposition preserved; physical reading 54/143, 97 files complete and 89 groups remain; one approved current-source delta
+status: exact baseline decomposition preserved; physical reading 55/143, 97 files complete and 88 groups remain; one approved current-source delta
 tags: [reading, conformance, tests, unicode, continuity, CONFORMANCE-SOURCE-READING]
 evidence: "Startup .3.8.0 independently accounts for160 baseline-identical files,5,422,313 stored bytes and8,257,059 decoded bytes in167,606 line fragments/167,604 LF delimiters. Four gzip inputs contribute54,500 decoded lines. All143 groups/302 ranges are contiguous, disjoint and bounded at1500 fragments/65536 bytes. No source, registry or runtime behavior changes; no physical-reading credit from inventory."
 reverify: "Run CONFORMANCE_SOURCE_READING_COVERAGE below through the project-data wrapper; it derives source identity from Git and range ownership from the task-tree rather than a parallel manifest. Use scripts/check_task_tree_metadata.sh for actual task collection limits."
@@ -428,15 +428,15 @@ properties, context rules, fixtures or decoded upstream inputs. All repairs rema
 
 ## Conformance reading checkpoint
 
-`CONFORMANCE-SOURCE-READING.1.54` reads 11 windows, 1,178 fragments and 65,522 baseline bytes.
-Cumulative reading is 54/143, 67,552 fragments, 2,639,708 baseline bytes and 97 complete files.
-Phase0 is partial through line 18057, after two build assertions in the seven-tag lifecycle loop.
-[[conformance-perl-consumer-reading]] separates action/LX code and canonical metadata equality
-from runtime execution. Twenty completed subtests retain unchanged PASS at ec10be6b:227 direct
-assertions include12 nested results whose plans separately verify96 inner assertions.
-No new defect or runtime execution is established; existing repairs remain prerequisite-gated.
-The pinned113-byte current inventory delta stays separate; these current ranges total2,639,821
-bytes. Next .1.55 reads Phase0 lines18058–19557.
+`CONFORMANCE-SOURCE-READING.1.55` reads 10 windows, 1,500 fragments and 63,518 baseline bytes.
+Cumulative reading is 55/143, 69,052 fragments, 2,703,226 baseline bytes and 97 complete files.
+Phase0 is partial through line 19557, inside the next lifecycle test's cases list.
+[[conformance-perl-consumer-reading]] distinguishes mixed-carrier metadata checks from exact
+code equality in nested switch fixtures. Sixteen completed subtests retain unchanged PASS at
+ec10be6b:151 direct assertions include56 nested results whose plans separately verify448 inner
+assertions. No new defect or target runtime execution is established; all repair gates remain.
+The pinned113-byte current inventory delta stays separate; these ranges total2,703,339 current
+bytes. Next .1.56 reads Phase0 lines19558–21057.
 
 Lowercase table entries and Final Sigma context remain separate. Exact scalar
 sequences, sparse ranges, fullwidth forms and ligature identities are preserved;

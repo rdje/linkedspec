@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.55 - read mixed branches and nested switch equivalence
+
+Read Phase0 18058–19557:55/143 groups,69,052 fragments/2,703,226 baseline bytes. Retained proof covers16 completed subtests/151 direct assertions, including56 nested results whose inner plans separately pass448 assertions. No new defect or target runtime execution; all repairs remain. Exact windows and comprehension are task/card-owned; .1.56 continues the next lifecycle cases list.
+
 ## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.54 - read structured branch and lifecycle equivalence coverage
 
 Read Phase0 16880–18057:54/143 groups,67,552 fragments/2,639,708 baseline bytes. Retained proof covers20 completed subtests/227 direct assertions, including12 nested results whose inner plans separately pass96 assertions. No new defect or runtime execution; all repairs remain. Exact windows and comprehension are task/card-owned; .1.55 continues the seven-tag lifecycle test.

@@ -498,18 +498,18 @@ the director's focused-verification grant used for this correction and the separ
 supporting-reading closeout. Reading completion establishes audited comprehension;
 it does not close the six grammar/literal repair roots or establish runtime signoff.
 Conformance, test and Unicode reading has exact ownership for all 160 inputs in
-143 bounded groups covering 8,257,059 baseline decoded bytes. Fifty-four groups account for
-67,552 fragments and 2,639,708 baseline bytes, including 97 complete files. Phase0 reading
-reaches line 18057. Multi-step, inline, structured and attached branches compare action/LX
-generated code and canonical metadata. Inline-if comparisons account for the marker-only
-ENDIF node. Two lifecycle loops cover I, LS, LE, E, EX and IT with eight assertions per tag.
-These tests establish lowering equivalence; their target parsers are not executed here.
-Twenty completed subtests retain canonical proof with 227 direct assertions. Twelve of those
-are nested results with 96 independently verified inner assertions. The next loop adds LX
-and is partial after two of eight assertions per tag; .1.55 continues. No new defect is
-established. MethodExpr .2.5, EmitContext descriptions .2.6, mark_copy .2.7, invalid num_min
-fixture .2.8 and push descriptions .2.9 remain open. The pinned 113-byte inventory delta and
-all repair prerequisites remain unchanged.
+143 bounded groups covering 8,257,059 baseline decoded bytes. Fifty-five groups account for
+69,052 fragments and 2,703,226 baseline bytes, including 97 complete files. Phase0 reading
+reaches line 19557. Mixed branch forms compare canonical metadata, while nested marker and
+inline switch fixtures also compare action or lifecycle code fields. Multi-case variants cover
+switch bodies in if, elseif and else. Their descriptor inputs and undef-only branch payloads
+do not prove runtime branch selection; separate runtime tests remain the authority for that.
+Sixteen completed subtests retain canonical proof with 151 direct assertions. Eight seven-tag
+lifecycle loops contribute 56 nested results with 448 independently verified inner assertions.
+The next loop stops inside its cases list; .1.56 continues. No new defect is established.
+MethodExpr .2.5, EmitContext descriptions .2.6, mark_copy .2.7, invalid num_min fixture .2.8
+and push descriptions .2.9 remain open. The pinned 113-byte inventory delta and all repair
+prerequisites remain unchanged.
 
 The director approved the finite documentation-capacity proposal under ADR0122.
 Containment `.15` admits exactly fourteen controls for the remaining 93 reading
@@ -536,7 +536,7 @@ The history files keep their 512-line / 65,536-byte caps, mandatory rollover and
 immutable archives. General card/part limits remain unchanged. Admission consumes
 one of the conservative 99 reserve units; the remaining 98 units are forecast
 after actual admission overhead. This capacity does not complete source reading
-or repair tests: reading now reaches 54/143, `.1.55` is next, and the test repairs
+or repair tests: reading now reaches 55/143, `.1.56` is next, and the test repairs
 `.2.5`–`.2.9` remain open.
 
 The director has requested integration guides and runnable consumer examples for
