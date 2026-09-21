@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.73 - read switch safety and compatibility migration observations
+
+Switch fixtures cover first/later/default branches; attached while covers skip, condition mutation and a captured 10,000-iteration failed-match diagnostic. Remaining-tag semicolonless tests check metadata/hits only despite unused code-key variables; six separate uppercase-slot assertions retain .2.10 limits. Canonical event payloads, raw/unresolved blockers and compatibility summaries preserve distinct readiness and migration axes. Bare return/exit and supported call wrappers remain legacy observations, while exit_now uses typed termination. Readiness does not prove cross-backend execution.
+
 ## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.72 - read reducers and meaningful lifecycle source and result locks
 
 Median validates and numerically sorts terms; range tracks extrema; unary array min/max inspect validated terms. Flat and typed-transform cases distinguish list construction from one-binding mutation. Conditional/lifecycle plans include scalar source capture and real parser-result checks. Seven positive marker checks use AND versus collection fixtures deliberately; three runtime cases distinguish final statement, surrounding-rule return and block-local return. Preserve these bounded observations without closing the broader lifecycle drift or nonexistent uppercase descriptor-slot repair. Canonical Knowledge is reconciled in conformance-perl-consumer-reading.

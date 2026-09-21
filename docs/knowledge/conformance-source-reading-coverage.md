@@ -11,7 +11,7 @@ answers:
   - "what evidence capacity blocks remaining conformance reading"
   - "what exact fourteen limits are proposed for remaining conformance reading"
 date: 2026-09-21
-status: exact baseline decomposition preserved; physical reading 72/143, 97 files complete and 71 groups remain; one approved current-source delta
+status: exact baseline decomposition preserved; physical reading 73/143, 97 files complete and 70 groups remain; one approved current-source delta
 tags: [reading, conformance, tests, unicode, continuity, CONFORMANCE-SOURCE-READING]
 evidence: "Startup .3.8.0 independently accounts for160 baseline-identical files,5,422,313 stored bytes and8,257,059 decoded bytes in167,606 line fragments/167,604 LF delimiters. Four gzip inputs contribute54,500 decoded lines. All143 groups/302 ranges are contiguous, disjoint and bounded at1500 fragments/65536 bytes. No source, registry or runtime behavior changes; no physical-reading credit from inventory."
 reverify: "Run CONFORMANCE_SOURCE_READING_COVERAGE below through the project-data wrapper; it derives source identity from Git and range ownership from the task-tree rather than a parallel manifest. Use scripts/check_task_tree_metadata.sh for actual task collection limits."
@@ -428,15 +428,15 @@ properties, context rules, fixtures or decoded upstream inputs. All repairs rema
 
 ## Conformance reading checkpoint
 
-`CONFORMANCE-SOURCE-READING.1.72` reads 11 windows, 851 fragments and 65,534 baseline bytes.
-Cumulative reading is 72/143, 88,849 fragments, 3,758,044 baseline bytes and 97 complete files.
-Phase0 is partial through line 39354, before the first switch assertion's expected pattern.
-[[conformance-perl-consumer-reading]] distinguishes reducer text checks from meaningful
-conditional/lifecycle source and runtime observations. Existing .2.10 descriptor-slot,
-.2.12 assignment-description and startup .27 lifecycle repairs retain their prerequisites.
-Retained proof covers seventeen subtests with 235 direct assertions and no nested plans.
-No new defect or fresh target execution is claimed. The pinned 113-byte inventory delta
-stays separate; these ranges total 3,758,157 current bytes. Next .1.73 reads 39355–40442.
+`CONFORMANCE-SOURCE-READING.1.73` reads 11 windows, 1,088 fragments and 65,436 baseline bytes.
+Cumulative reading is 73/143, 89,937 fragments, 3,823,480 baseline bytes and 97 complete files.
+Phase0 is partial through line 40442, after the prefix-newline test's descriptor build.
+[[conformance-perl-consumer-reading]] distinguishes switch/while runtime controls, semicolonless
+metadata comparisons and compatibility migration summaries. Existing .2.10 descriptor-slot
+and .2.12 assignment-description repairs retain prerequisites. Retained proof covers 28 subtests
+with 291 direct plan entries, including 5 nested results whose plans add 40 assertions.
+No new defect or fresh target execution is claimed. The pinned 113-byte delta stays separate;
+these ranges total 3,823,593 current bytes. Next .1.74 reads 40443–41195.
 
 Lowercase table entries and Final Sigma context remain separate. Exact scalar
 sequences, sparse ranges, fullwidth forms and ligature identities are preserved;

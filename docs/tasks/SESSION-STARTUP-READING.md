@@ -2299,7 +2299,7 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Status: `active`
   Goal: Split and read all 160 entries under capability_conformance, cli_conformance, t, tests, and unicode_case.
   Children: `.3.8.0` owns exact decomposition; `CONFORMANCE-SOURCE-READING.1` owns all143 reading groups; .2 findings and .3 independent closeout stay separate.
-  Reading owner: `docs/tasks/CONFORMANCE-SOURCE-READING.md`; 143 groups / 302 baseline ranges over 160 inputs. Physical reading 72/143: 88,849 fragments / 3,758,044 baseline bytes and 97 complete files; Phase0 through 39354. Approved 113-byte inventory delta stays separate. Retained seventeen-subtest proof has 235 direct assertions and no nested plans. Meaningful bounded lifecycle source/results remain distinct from .2.10 descriptor-slot and startup .27 handler-shape gaps; .2.5–.2.12 and all prerequisites remain. .1.73 continues fluent switch assertions. ADR0122/containment .15 are canonically admitted at ec10be6b.
+  Reading owner: `docs/tasks/CONFORMANCE-SOURCE-READING.md`; 143 groups / 302 baseline ranges over 160 inputs. Physical reading 73/143: 89,937 fragments / 3,823,480 baseline bytes and 97 complete files; Phase0 through 40442. Approved 113-byte inventory delta stays separate. Retained twenty-eight-subtest proof has 291 direct plan entries including 5 nested results with 40 inner assertions. Switch/loop runtime controls and compatibility metadata remain distinct from .2.10 descriptor-slot gaps; .2.5–.2.12 and all prerequisites remain. .1.74 continues prefix-newline metadata assertions. ADR0122/containment .15 are canonically admitted at ec10be6b.
   Acceptance: Include phase0, neutral contracts, fixtures, generators, and four explicitly decoded pinned Unicode
     inputs. Keep generated/fixture bytes in scope; count neither a hash nor enumeration as full reading.
   Verification: `pending`
@@ -4673,7 +4673,7 @@ startup implementation prerequisites and the rgx reading exclusion remain intact
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.73` | `pending` | Read Phase0 lines 39355–40442 (1,088 fragments / 65,436 baseline bytes), continuing the first fluent switch assertion and its remaining cases. Repairs .2.5–.2.12 and earlier repairs retain required source/book/policy reading prerequisites. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.74` | `pending` | Read Phase0 lines 40443–41195 (753 fragments / 65,404 baseline bytes), continuing prefix-newline linecount metadata assertions. Repairs .2.5–.2.12 and earlier repairs retain required source/book/policy reading prerequisites. |
 
 ## Reading Ledger
 

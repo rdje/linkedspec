@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.73 - read switch safety and compatibility migration observations
+
+Read Phase0 39355–40442: 73/143 groups, 89,937 fragments / 3,823,480 baseline bytes. Retained twenty-eight-subtest proof has 291 direct plan entries including 5 nested results, with 40 inner assertions. Switch/while runtime controls, semicolonless metadata, raw/unresolved blockers and compatibility migration summaries remain distinct observations. Existing .2.10 and other repairs remain; no new defect or fresh execution; .1.74 continues prefix-newline metadata.
+
 ## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.72 - read reducers and meaningful lifecycle source and result locks
 
 Read Phase0 38504–39354: 72/143 groups, 88,849 fragments / 3,758,044 baseline bytes. Retained seventeen-subtest proof has 235 direct assertions across reducers, flat lists, typed transforms and conditionals/lifecycle. Nine runtime results and seven positive marker source checks are meaningful bounded observations; existing .2.10 and startup .27 gaps remain. No new defect, fresh execution or repair closure; .1.73 continues the switch test.
