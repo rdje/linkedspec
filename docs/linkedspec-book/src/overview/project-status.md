@@ -498,22 +498,24 @@ the director's focused-verification grant used for this correction and the separ
 supporting-reading closeout. Reading completion establishes audited comprehension;
 it does not close the six grammar/literal repair roots or establish runtime signoff.
 Conformance, test and Unicode reading has exact ownership for all 160 inputs in
-143 bounded groups covering 8,257,059 baseline decoded bytes. Fifty-six groups account for
-70,552 fragments and 2,767,515 baseline bytes, including 97 complete files. Phase0 reading
-reaches line 21057. Nested switch and lifecycle tests establish descriptor metadata coverage.
-**The earlier claim that their uppercase code-slot comparisons prove generated-code equality
-is withdrawn:** the public descriptors lack those fields. A changed returned payload still
-passes all 48 assertions in the focused six-tag test, although the captured generated handlers
-contain different return values. Repair .2.10 owns meaningful code or execution observations
-and a negative control. This is a test observation gap; no production branch-selection defect
-is established. Repair .2.11 owns the source-capture recipe that incorrectly treats an array
-of chunks as a scalar; explicit scalar capture works.
+143 bounded groups covering 8,257,059 baseline decoded bytes. Fifty-seven groups account for
+71,753 fragments and 2,833,045 baseline bytes, including 97 complete files. Phase0 reading
+reaches line 22258. Snapshot helpers, optional semicolons, bare control-flow markers and
+attached switch forms have descriptor metadata coverage. These fixtures do not execute
+target branches or establish snapshot isolation.
 
-Eighteen completed subtests retain canonical proof with 148 direct assertions, including 74
-nested results whose inner plans verify 557 assertions. The LX flat-list test is read through
-eight of twelve assertions; .1.57 continues. MethodExpr .2.5, EmitContext descriptions .2.6,
-mark_copy .2.7, invalid num_min fixture .2.8 and push descriptions .2.9 remain open. The pinned
-113-byte inventory delta and all repair prerequisites remain unchanged.
+**The earlier generated-code equivalence claim remains withdrawn:** uppercase descriptor
+code slots are absent, so their equality assertions do not observe emitted code. The exact
+changed-payload control still passes its 48 assertions; .2.10 owns meaningful observations
+and mutation-sensitive coverage. Metadata checks remain useful. Repair .2.11 owns the
+source-capture recipe that treats an array of chunks as a scalar; explicit scalar capture works.
+
+Eighteen completed subtests retain canonical proof with 195 direct assertions, including 59
+nested results whose inner plans verify 472 assertions. The fluent outer-switch test is read
+through ten of eleven assertions; .1.58 continues. MethodExpr .2.5, EmitContext descriptions
+.2.6, mark_copy .2.7, invalid num_min fixture .2.8 and push descriptions .2.9 remain open.
+No new defect or target runtime execution is established. The pinned 113-byte inventory delta
+and all repair prerequisites remain unchanged.
 
 The director approved the finite documentation-capacity proposal under ADR0122.
 Containment `.15` admits exactly fourteen controls for the remaining 93 reading
@@ -540,7 +542,7 @@ The history files keep their 512-line / 65,536-byte caps, mandatory rollover and
 immutable archives. General card/part limits remain unchanged. Admission consumes
 one of the conservative 99 reserve units; the remaining 98 units are forecast
 after actual admission overhead. This capacity does not complete source reading
-or repair tests: reading now reaches 56/143, `.1.57` is next, and the test and recipe
+or repair tests: reading now reaches 57/143, `.1.58` is next, and the test and recipe
 repairs `.2.5`–`.2.11` remain open.
 
 The director has requested integration guides and runnable consumer examples for

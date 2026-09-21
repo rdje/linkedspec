@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `CONFORMANCE-SOURCE-READING`
-- Status: `active` / exact decomposition; physical reading 56/143
+- Status: `active` / exact decomposition; physical reading 57/143
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.8`
 - Created: `2026-09-13`
 - Last updated: `2026-09-21`
@@ -1021,14 +1021,21 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
   Commit: `CONFORMANCE-SOURCE-READING.1.56 - read switch coverage and own vacuous code comparisons`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.57`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `1983e2fc4343ef45e70d5ece5ed12f39d9c6e028`.
+  Verification tier: `focused`
+  Focused checks: Complete reading and exact coverage/window replay; retained direct/nested TAP proof and canonical observation-gap reconciliation; Knowledge, preservation, memory, histories, book, direct public checks and normal doctrines.
+  Canonical trigger: Ordinary bounded reading and fact reconciliation; no runtime, dependency, public contract, infrastructure or parent-closeout change.
   Goal: Read and understand conformance/test/Unicode group 57.
   Scope: `t/phase0_regression.t` lines 21058-22258
   Baseline evidence: 1201 fragments / 65530 decoded bytes; ordered range SHA-256 `f6bd4ff7b48da261c1d399dc421744880009011be4b3f3b4e6b692061e965445`.
   Dependencies: .1.56 committed with clean handoff.
   Acceptance: Read every scoped byte in complete bounded windows; retain source identity, exact comprehension, canonical Knowledge reconciliation, concrete finding ownership, focused proof and per-leaf continuity. Unread crossing constructs retain the next range owner.
-  Verification: `pending`
-  Commit: `pending`
+  Reading evidence: 11 complete windows / 1201 fragments / 65530 bytes; ordered window SHA-256 `52807d4d6bde6106e84ccdb9edaf0b565589a4457e5959109722e984b50e87cb`.
+  Comprehension: Completes LX flat-list metadata, then reads action/LX copy snapshots, if/elseif and switch snapshot branches, optional semicolons, and structured/fluent bare else/endif/default/endcase/endswitch markers. Two seven-tag loops each contain paired if/switch subtests; a five-tag optional-semicolon loop covers LS/LE/E/EX/IT and compares explicit expected hit maps without a code-slot assertion. Three more seven-tag loops cover marker-switch attached branches, outer attached switch blocks and plain marker branches inside those blocks. ENDCASE is explicitly present twice in the bare-switch fixture; optional-semicolon fixtures omit it, so hit maps remain fixture-specific. Snapshot fixtures do not execute targets or prove copy isolation. Uppercase ACODE/LXCODE/code_key comparisons retain existing .2.10 observation-gap ownership; they are not generated-code equivalence proof. Metadata, node presence, hit maps, fallback and readiness are the actual observations. The final fluent outer-switch test has ten completed assertions and begins its eleventh ok; .1.58 owns the suffix. No new defect or runtime execution is established; .2.5–.2.11 and all prior repair prerequisites remain.
+  Verification: Unchanged canonical commit ec10be6b retains PASS for 18 completed subtests, ordinals 541–558 with 195 direct assertions, including 59 nested results. Six lifecycle loops separately verify 472 inner assertions with exact tag order, TAP numbering and plans. The last fluent outer-switch test is partial after ten of eleven assertions; .1.58 owns its final ok expression. Existing .2.10 owns uppercase code-slot comparisons; those assertions are not generated-code equivalence proof. Snapshot descriptors do not establish runtime copy isolation. No new defect, runtime execution, source repair, dependency build, canonical run or push is claimed; all prerequisites remain.
+  Candidate proof: Exact 160-input/143-group/302-range audit and eleven-window replay pass. Preservation verifies 2,850 other files / 50,654,378 bytes, 514 prior task nodes, 53 other book files and all 1,039 headings; the .2.10/.2.11 reproduction, all prior repairs, historical ranges, recipes, histories and parent Gitlink remain exact. Direct and nested retained TAP plans reconcile independently. Memory, both history-pressure checks, mdBook, public mutation (69 files / 50 mutations), public selector (68 files / 11 contrast mutations) and diff checks pass. Hot histories are changes192 lines/34295 bytes and notes188/34630, below rollover. Knowledge is1,154 facts/9,254 keys. Normal nine-doctrine hooks govern landing; no new canonical run is required by this focused leaf.
+  Commit: `CONFORMANCE-SOURCE-READING.1.57 - read snapshot and bare-marker descriptor coverage`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.58`
   Status: `pending`
@@ -2495,7 +2502,7 @@ additional reading credit from integration delivery.
 
 | Rank | Leaf | Status | Next action |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.57` | `pending` | Read Phase0 lines 21058–22258 (1,201 fragments / 65,530 baseline bytes), completing the LX flat-list test after assertion8. Repairs .2.5–.2.11 and earlier repairs retain required reading prerequisites. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.58` | `pending` | Read Phase0 lines 22259–23758 (1,500 fragments / 62,624 baseline bytes), completing the fluent outer-switch test’s final ok expression. Repairs .2.5–.2.11 and earlier repairs retain required reading prerequisites. |
 
 ## Decisions
 
@@ -2507,6 +2514,8 @@ additional reading credit from integration delivery.
 - None at decomposition. Ordinary source repairs retain startup prerequisites; later collection pressure must be measured rather than assumed away.
 
 ## Verification Log
+
+- `2026-09-21` .1.57: Eleven complete windows cover 1,201 fragments / 65,530 baseline bytes; ordered window SHA-256 52807d4d6bde6106e84ccdb9edaf0b565589a4457e5959109722e984b50e87cb. Cumulative reading is 57/143: 71,753 fragments / 2,833,045 baseline bytes and 97 complete files. Phase0 is partial through line 22258. Unchanged canonical commit ec10be6b retains PASS for 18 completed subtests, ordinals 541–558 with 195 direct assertions, including 59 nested results. Six lifecycle loops separately verify 472 inner assertions with exact tag order, TAP numbering and plans. The last fluent outer-switch test is partial after ten of eleven assertions; .1.58 owns its final ok expression. Existing .2.10 owns uppercase code-slot comparisons; those assertions are not generated-code equivalence proof. Snapshot descriptors do not establish runtime copy isolation. No new defect, runtime execution, source repair, dependency build, canonical run or push is claimed; all prerequisites remain.
 
 - `2026-09-21` .1.56: Ten complete windows cover 1,500 fragments / 64,289 baseline bytes; ordered window SHA-256 212809d8081a3124d296fa3477c4a77a790ef50ce94329103c5f75a4ccbc8ce1. Cumulative reading is 56/143: 70,552 fragments / 2,767,515 baseline bytes and 97 complete files. Phase0 is partial through line 21057. Unchanged canonical commit ec10be6b retains PASS for 18 completed subtests, ordinals 523–540 with 148 direct assertions, including 74 nested results. Eleven lifecycle loops separately verify 557 inner assertions, with exact tag order, TAP numbering and plans. Fresh original and changed-payload probes each pass all 48 inner assertions while twelve descriptors lack uppercase code slots; captured generated returns distinguish the payloads. Public source capture confirms ARRAY chunks and working explicit scalar capture. New .2.10 and .2.11 own both defects; prior slot-equality claims are superseded. The LX flat-list test is partial after eight of twelve assertions; .1.57 owns its suffix. No production runtime defect, source repair, dependency build, new canonical run or push is claimed.
 
@@ -2592,6 +2601,8 @@ additional reading credit from integration delivery.
 
 ## Commit Log
 
+- `2026-09-21` .1.57: `CONFORMANCE-SOURCE-READING.1.57 - read snapshot and bare-marker descriptor coverage`; activation 1983e2fc4; .1.58 follows clean handoff and empty brief.
+
 - `2026-09-21` .1.56: `CONFORMANCE-SOURCE-READING.1.56 - read switch coverage and own vacuous code comparisons`; activation e258190c8; .1.57 follows clean handoff and empty brief.
 
 - `2026-09-21` .1.55: `CONFORMANCE-SOURCE-READING.1.55 - read mixed branches and nested switch equivalence`; activation bbb20ca7c; .1.56 follows clean handoff and empty brief.
@@ -2675,6 +2686,8 @@ additional reading credit from integration delivery.
 - `2026-09-13`: Decomposition lands under `SESSION-STARTUP-READING.3.8.0`; Git owns the resulting commit identity.
 
 ## Changelog
+
+- `2026-09-21` .1.57: Read snapshots, optional semicolons, bare marker chains and attached switch forms. Preserve .2.10 ownership and the correction that absent-slot equality is not emitted-code proof; no new repair or runtime claim.
 
 - `2026-09-21` .1.56: Read nested switch/lifecycle and flat-list coverage. Own absent-code-slot equality and invalid scalar source-capture recipes; correct current interpretation while preserving historical reading and test results.
 

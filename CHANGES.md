@@ -10,6 +10,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.57 - read snapshot and bare-marker descriptor coverage
+
+Read Phase0 21058–22258: 57/143 groups, 71,753 fragments / 2,833,045 baseline bytes. Retained 18-subtest proof has 195 direct assertions, including 59 nested results / 472 inner assertions. Snapshot helpers, optional semicolons, bare markers and attached switch metadata retain the .2.10 code-slot observation limit. No new defect or target execution; all repairs remain. .1.58 owns the final fluent outer-switch assertion.
+
 ## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.56 - read switch coverage and own vacuous code comparisons
 
 Read Phase0 19558–21057: 56/143 groups, 70,552 fragments / 2,767,515 baseline bytes. Retained 18-subtest proof has 148 direct assertions, including 74 nested results / 557 inner assertions. Fresh controls expose absent-code-slot comparisons and invalid scalar capture recipes; .2.10/.2.11 own repairs. Current generated-code equivalence wording is corrected; historical reads and passes remain. .1.57 completes the LX flat-list test.

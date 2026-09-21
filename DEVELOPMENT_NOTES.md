@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.57 - read snapshot and bare-marker descriptor coverage
+
+Bare-switch fixtures include ENDCASE twice; optional-semicolon fixtures omit it, so expected hit maps remain fixture-specific. Two paired seven-tag loops, one paired five-tag loop and three seven-tag loops separately verify 472 inner assertions. Snapshot descriptors do not prove copy isolation, and absent-slot comparisons do not prove generated-code equality. Canonical comprehension remains in conformance-perl-consumer-reading and the .2.10 observation-gap card.
+
 ## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.56 - read switch coverage and own vacuous code comparisons
 
 The exact six-tag inline-switch test passes 48 assertions after a branch payload changes: both compared uppercase descriptor fields are absent. Captured generated handlers show different return expressions. ARRAY source chunks require a join or explicit parser_source_ref, not scalar dereference. Exact public probes and discarded bootstrap-wrapper setup error are documented in phase0-code-slot-equivalence-observation-gap; .2.10/.2.11 own bounded repairs after prerequisites.
