@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.42 - read Perl resolution errors and rule-family contracts
+
+Resolution, validation, generated-handler errors and top-level parser-input failures have distinct proof boundaries. Descriptor families and loop/bound metadata are separate from runtime repetition checks. Bootstrap selector provenance and grouped expansion do not themselves prove child execution; equality-only AST checks do not require defined values. Retained ordinals 122–162 cover 353 assertions. AND+ comparison outcomes and local test helper bodies retain later reading ownership.
+
 ## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.41 - read Perl plugin compatibility and spec lookup tests
 
 Legacy plugin fixture results remain Perl compatibility evidence. Registered-first dispatch, invalid-name callback counts, sorted discovery and override/error behavior are distinct from portable parser semantics. Real Lispish probes assert parser/AST shapes and tracing, not complete AST equality; backslash spellings are not platform coverage. Retained ordinals 80–121 cover 282 assertions. Local helper implementations and the partial dot-spec diagnostic case keep later reading ownership.

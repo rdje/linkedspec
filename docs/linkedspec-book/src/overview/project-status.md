@@ -498,17 +498,16 @@ the director's focused-verification grant used for this correction and the separ
 supporting-reading closeout. Reading completion establishes audited comprehension;
 it does not close the six grammar/literal repair roots or establish runtime signoff.
 Conformance, test and Unicode reading has exact ownership for all 160 inputs in
-143 bounded groups covering 8,257,059 baseline decoded bytes. Forty-one groups account for
-53,234 fragments and 1,789,223 baseline bytes, including 97 complete files. Phase0 reading
-reaches line 3739. Current coverage includes controlled plugin dispatch and synthetic legacy
-registry fixtures; those remain Perl compatibility behavior, not a portable plugin-runtime
-contract. Real Lispish probes check parser execution, option routing and trace markers while
-retired facade paths are trapped. Name/path cases distinguish invalid values, missing files,
-directories and non-regular OS input; a backslash spelling is not a Windows-platform run.
-Forty-two completed subtests retain unchanged canonical proof with 282 assertions. The
-missing-dot-spec-name test is partially read. No new runtime execution or whole-file reading
-credit is claimed. The pinned 113-byte inventory delta stays separate; helper .2.3, header
-.2.4 and all parser/runtime repairs remain open. No production behavior changes here.
+143 bounded groups covering 8,257,059 baseline decoded bytes. Forty-two groups account for
+54,631 fragments and 1,854,695 baseline bytes, including 97 complete files. Phase0 reading
+reaches line 5136. Resolution failures, handler errors and invalid parser input have distinct
+diagnostic outcomes. Descriptor assertions check rule families and bounds; separate runtime
+cases exercise aliases, bounded repetition, blind calls and zero-progress behavior. Parser
+wrapper construction and equality-only checks have narrower claims than successful execution.
+Forty-one completed subtests retain unchanged canonical proof with 353 assertions; the AND+
+comparison remains partial. No new runtime execution or whole-file reading credit is claimed.
+The pinned 113-byte inventory delta remains separate. Helper .2.3, header .2.4, comment/newline
+repairs and all other parser/runtime repairs remain open. No production behavior changes here.
 The director has requested integration guides and runnable consumer examples for
 Perl, Rust, Dart, Julia and Lua, covering recursive checkout, dependency preparation
 and reuse, native APIs, results/errors and packaging. This temporary activity is
