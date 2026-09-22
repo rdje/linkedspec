@@ -3,10 +3,10 @@
 ## Metadata
 
 - Tree ID: `CONFORMANCE-SOURCE-READING`
-- Status: `active` / exact decomposition; physical reading 83/143
+- Status: `active` / exact decomposition; physical reading 84/143
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.8`
 - Created: `2026-09-13`
-- Last updated: `2026-09-21`
+- Last updated: `2026-09-22`
 - Owner: repo-local workflow
 - Decomposition owner: `SESSION-STARTUP-READING.3.8.0`
 
@@ -1482,14 +1482,22 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
   Commit: `CONFORMANCE-SOURCE-READING.1.83 - read progressive punctuation and recognition observation boundaries`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.84`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `4480cc52b7ca67e54ae02995c02f27aacb5cd45b`.
+  Verification tier: `focused`
+  Focused checks: Exact complete source/window/coverage reading, scoped Perl TAP and four neutral contracts; source-pinned process controls, prior evidence preservation, memory, Knowledge, histories, rendered book, direct public checks and normal doctrines.
+  Canonical trigger: Ordinary bounded reading and existing repair-scope extension; no production, public-contract, dependency or infrastructure change and no parent closeout.
+  Director authorization: September 22 confirms the existing reading-checkpoint documentation exception and resumes PNT; implementation remains gated.
   Goal: Read and understand conformance/test/Unicode group 84.
   Scope: `t/recognition_transaction_perl_contract.t` lines 550-643; `t/recursive_observation_perl_contract.t` lines 1-548; `t/repeated_action_result_perl_contract.t` lines 1-258; `t/root_rule_selection_perl_core.t` lines 1-241; `t/root_rule_selection_perl_routes.t` lines 1-359
   Baseline evidence: 1500 fragments / 54362 decoded bytes; ordered range SHA-256 `e0dd496e8d1e78edb7cfaca2e214efd507107d80ed0c11623e8f6d10eb213167`.
   Dependencies: .1.83 committed with clean handoff.
   Acceptance: Read every scoped byte in complete bounded windows; retain source identity, exact comprehension, canonical Knowledge reconciliation, concrete finding ownership, focused proof and per-leaf continuity. Unread crossing constructs retain the next range owner.
-  Verification: `pending`
-  Commit: `pending`
+  Reading evidence: 10 complete windows / 1500 fragments / 54362 bytes; ordered window SHA-256 `3ca32d29209411869425074b019fa6a21ae019e62e79dc5e15e603573aca37c1`.
+  Comprehension: Recognition completion checks typed direct/mutual zero-progress errors and generated falsey commit results. Recursive observation locks dedicated lowering, static/effect barriers, exact detached nine-field records, falsey/failure outcomes, cursor ownership and recursion identities. Repetition executes eight mode and ten special cases, loaded/descriptor/generated/trace/CLI/corpus roles. Root selection preserves explicit/first-marker/first-rule precedence, authored identity, strict graph independence and generated-role attribution. Generated packages share the host process. Root trace reading ends inside an invocation at 359; only complete constructs through line 324 execute. Strict Get remains intentionally unwired and the neutral strict loop is model arithmetic, with separate real-validator cases.
+  Verification: Fresh focused proof passes 79 top-level and 475 nested TAP results: recognition 51/99, recursive observation 7/78, repeated action results 10/122, root selection core 7/78 and the complete root routes prefix through line 324 at 4/98. Neutral recognition 138/250/58, typed 14/0/231, repetition 8/0/54 and root 7/0/54 pass. Twelve source-extracted repeated-action process controls confirm signal-status loss and sequential-pipe blocking; both timed-out owned children are reaped. Existing .2.16.1/.2.16.2 now also own the repeated-action CLI helper; all previous repairs and required source/book/policy prerequisites remain. No production repair, fresh-process generated proof, dependency build, canonical run or push is claimed. The first prefix-extraction setup asserted line 329; source inspection corrected it to 324 before any prefix execution.
+  Candidate proof: Exact160-input/143-group/302-range audit and ten-window reconstruction PASS; cumulative84 groups/102404 fragments/4504055 baseline bytes/107 complete files independently verified. Four full Perl consumers plus complete route prefix pass79 top-level/475 nested results; all four neutral checks and the source-pinned12-control replay PASS. Preservation checks2855 other files/50693202 bytes,174 conformance/348 startup nodes, all prior recipe blocks, book headings, immutable histories and parent gitlink. Knowledge1160 facts/9309 keys, memory60, both bounded-history checks, mdBook rendering and direct public mutation69/50 and selector68/11 checks pass. Notes are at warning pressure, below mandatory rollover. Normal doctrine hooks govern focused landing; no canonical run or push.
+  Commit: `CONFORMANCE-SOURCE-READING.1.84 - read recognition observation repetition and root selection consumers`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.85`
   Status: `pending`
@@ -2329,30 +2337,33 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
 
 - ID: `CONFORMANCE-SOURCE-READING.2.16`
   Status: `pending`
-  Goal: Make Phase0 subprocess capture preserve child failure and remain live under output on either pipe.
+  Goal: Make Perl conformance subprocess capture preserve child failure and remain live under output on either pipe.
   Scope: run_get_parser_in_subprocess, run_parser_invocation_in_subprocess, run_perl_snippet_in_subprocess and run_perl_test_file_in_subprocess in t/phase0_regression.t. They drain stdout before stderr and interpret only the shifted exit byte. Startup .79 separately owns routing-verifier process status; use its established signal diagnosis without merging unrelated implementation surfaces.
   Dependencies: Required source/book/policy reading; source-extracted .1.82 controls must confirm each claimed failure before repair.
   Children: `.2.16.1`, `.2.16.2`.
   Acceptance: Preserve ordinary success/nonzero exits, reject signal/wait failures, drain both pipes without deadlock, bound and reap controlled children, keep stdout/stderr exact, and run focused consumers plus appropriate broader verification without weakening diagnostics.
   Verification: .1.82 diagnosis: 48 source-extracted controls pass: four helpers times six child outcomes times original/guard variants; all eight timed-out owned children are reaped. Evidence/replay: docs/knowledge/phase0-subprocess-capture-status-and-pipe-gap.md. No tracked implementation repair.
+  Reading .1.84 extension: Include run_primary_command in t/repeated_action_result_perl_contract.t. Twelve unchanged-body/guard controls reproduce SIGTERM-as-zero and stderr-first/interleaved blocking, with both timeout children reaped. Preserve its exact CLI JSON/status/stderr checks; remaining startup prerequisites still apply. Replay REPEATED_PROCESS_CAPTURE in docs/knowledge/phase0-subprocess-capture-status-and-pipe-gap.md.
   Commit: `pending`
 
 - ID: `CONFORMANCE-SOURCE-READING.2.16.1`
   Status: `pending`
-  Goal: Preserve signal termination and wait failure in Phase0 subprocess status.
-  Scope: The four subprocess helpers owned by .2.16; retain public helper tuple compatibility or update all direct consumers coherently.
+  Goal: Preserve signal termination and wait failure in Perl conformance subprocess status.
+  Scope: The five subprocess helpers owned by .2.16; retain public helper tuple compatibility or update all direct consumers coherently.
   Dependencies: Parent .2.16 prerequisites and confirmed status controls.
   Acceptance: Success, exit 7 and owned SIGTERM controls distinguish their outcomes; valid wait and normal termination are required for zero status. Preserve output and direct consumer diagnostics, including the admitted staged-AST wrapper.
   Verification: .1.82 diagnosis: All four original helpers map owned SIGTERM to zero; in-memory guards report 143 while success/exit7 and small output remain correct. Evidence/replay: docs/knowledge/phase0-subprocess-capture-status-and-pipe-gap.md. No tracked implementation repair.
+  Reading .1.84 extension: Include run_primary_command in t/repeated_action_result_perl_contract.t. Twelve unchanged-body/guard controls reproduce SIGTERM-as-zero and stderr-first/interleaved blocking, with both timeout children reaped. Preserve its exact CLI JSON/status/stderr checks; remaining startup prerequisites still apply. Replay REPEATED_PROCESS_CAPTURE in docs/knowledge/phase0-subprocess-capture-status-and-pipe-gap.md.
   Commit: `pending`
 
 - ID: `CONFORMANCE-SOURCE-READING.2.16.2`
   Status: `pending`
-  Goal: Drain Phase0 child output concurrently and reap every bounded test child.
-  Scope: The same four .2.16 helpers and their direct consumers; check shared TestHelpers separately before choosing reuse.
+  Goal: Drain Perl conformance child output concurrently and reap every bounded test child.
+  Scope: The same five .2.16 helpers and their direct consumers; check shared TestHelpers separately before choosing reuse.
   Dependencies: Parent .2.16 prerequisites and .2.16.1 clean handoff.
   Acceptance: Large stderr before stdout, large stdout before stderr and interleaved output complete with exact captures; timeout/failure paths terminate and reap owned children. Preserve ordinary parser-marker and test-plan controls, run focused integration and reconcile both children before parent closeout.
   Verification: .1.82 diagnosis: All four original helpers time out on stderr-first and interleaved large writes; multiplex controls complete with expected byte counts. All eight timeout children are terminated and reaped; exact large-output regression remains repair acceptance. Evidence/replay: docs/knowledge/phase0-subprocess-capture-status-and-pipe-gap.md. No tracked implementation repair.
+  Reading .1.84 extension: Include run_primary_command in t/repeated_action_result_perl_contract.t. Twelve unchanged-body/guard controls reproduce SIGTERM-as-zero and stderr-first/interleaved blocking, with both timeout children reaped. Preserve its exact CLI JSON/status/stderr checks; remaining startup prerequisites still apply. Replay REPEATED_PROCESS_CAPTURE in docs/knowledge/phase0-subprocess-capture-status-and-pipe-gap.md.
   Commit: `pending`
 
 - ID: `CONFORMANCE-SOURCE-READING.2.17`
@@ -2795,9 +2806,11 @@ additional reading credit from integration delivery.
 
 | Rank | Leaf | Status | Next action |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.84` | `pending` | Read the .1.84 scope (1,500 fragments / 54,362 baseline bytes), completing recognition and reading recursive observation, repeated action results, root selection core and the root selection routes prefix. Repairs .2.5–.2.17 and earlier repairs retain required source/book/policy reading prerequisites. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.85` | `pending` | Read the .1.85 scope (1,500 fragments / 52,593 baseline bytes), completing root selection routes and reading rule-local cursor contracts, scalar contracts and semantic-index prefixes. Repairs .2.5–.2.17 and earlier repairs retain required source/book/policy reading prerequisites. |
 
 ## Decisions
+
+- `2026-09-22` .1.84: Director confirms documentation-only reading checkpoints before full reading completion; continue PNT, with implementation prerequisites unchanged.
 
 - `2026-09-13` .1.1: Extend existing startup .41.6/.41.7 with exact guide-current contradictions and checker coverage; preserve historical milestones and keep code repairs behind startup prerequisites. No duplicate repair owner or current runtime failure is invented.
 - `2026-09-13`: All160 inputs remain required by startup .3.8; gzip coordinates describe decoded source. The exact existing1500-fragment/65536-byte budgets yield143 groups; no source or capacity policy changes.
@@ -2807,6 +2820,8 @@ additional reading credit from integration delivery.
 - None at decomposition. Ordinary source repairs retain startup prerequisites; later collection pressure must be measured rather than assumed away.
 
 ## Verification Log
+
+- `2026-09-22` .1.84: 10 complete windows cover 1,500 fragments / 54,362 baseline bytes; ordered window SHA-256 3ca32d29209411869425074b019fa6a21ae019e62e79dc5e15e603573aca37c1. Cumulative reading is 84/143 groups, 102,404 fragments / 4,504,055 baseline bytes and 107 complete files. Recognition, recursive observation, repeated action results and root selection core are complete; root selection routes are partial through line 359. Fresh focused proof passes 79 top-level and 475 nested TAP results: recognition 51/99, recursive observation 7/78, repeated action results 10/122, root selection core 7/78 and the complete root routes prefix through line 324 at 4/98. Neutral recognition 138/250/58, typed 14/0/231, repetition 8/0/54 and root 7/0/54 pass. Twelve source-extracted repeated-action process controls confirm signal-status loss and sequential-pipe blocking; both timed-out owned children are reaped. Existing .2.16.1/.2.16.2 now also own the repeated-action CLI helper; all previous repairs and required source/book/policy prerequisites remain. No production repair, fresh-process generated proof, dependency build, canonical run or push is claimed.
 
 - `2026-09-21` .1.83: 10 complete windows cover 1,500 fragments / 50,515 baseline bytes; ordered window SHA-256 0b712b5eacb78d882ab85d692825d2cdeaf1f99e29c619e97c68a2508e1158c3. Cumulative reading is 83/143 groups, 100,904 fragments / 4,449,693 baseline bytes and 103 complete files. Progressive contract, punctuation contract and recognition authority are complete; recognition contract is partial through line 549. Fresh focused proof passes 195 top-level and 424 nested TAP results: progressive contract129/0, punctuation7/73, recognition authority8/285 and the complete read recognition prefix through535 at51/76; four source-extracted compatibility scope controls also pass. Progressive carrier checks exact payloads, logical generated metadata, failure diagnostics and recognition visibility across live, reconstructed and same-process generated packages, without actual parent-register before/after observations. Punctuation normalizes only admitted zero-argument statement/terminal receiver forms, retains identifiers, rejects excluded AST shapes and executes the neutral fixture live/generated. Recognition authority separates match/payload, restores actual frame snapshots, isolates recursive marks and rejects typed token misuse; its compatibility fixture is disconnected. Four source-extracted scope controls confirm that observation limit without runtime corruption. The read recognition carrier prefix checks canonical nodes, static/effect barriers, eight falsey/miss terminal cases, compatibility behavior, zero-width repetition rejection and legal one-shot zero-width recognition. Reading ends inside the direct-recursive fixture; only the complete prefix through 535 is executed. Later recursive/generated carrier cases remain .1.84-owned. New .2.17 ownership and the .2.15 carrier audit are recorded; no production change, dependency build, canonical run or push is claimed; .2.5–.2.17 and all prerequisites remain.
 
@@ -2946,6 +2961,8 @@ additional reading credit from integration delivery.
 
 ## Commit Log
 
+- `2026-09-22` .1.84: `CONFORMANCE-SOURCE-READING.1.84 - read recognition observation repetition and root selection consumers`; activation 4480cc52; .1.85 follows clean handoff and empty brief.
+
 - `2026-09-21` .1.83: `CONFORMANCE-SOURCE-READING.1.83 - read progressive punctuation and recognition observation boundaries`; activation 1a18d1938; .1.84 follows clean handoff and empty brief.
 
 - `2026-09-21` .1.82: `CONFORMANCE-SOURCE-READING.1.82 - complete Phase0 and own subprocess and parent observation gaps`; activation dc88fc139; .1.83 follows clean handoff and empty brief.
@@ -3083,6 +3100,8 @@ additional reading credit from integration delivery.
 - `2026-09-13`: Decomposition lands under `SESSION-STARTUP-READING.3.8.0`; Git owns the resulting commit identity.
 
 ## Changelog
+
+- `2026-09-22` .1.84: Complete four consumer files, preserve partial root trace scope and extend existing subprocess repairs to the fifth confirmed helper.
 
 - `2026-09-21` .1.83: Three files finish. .2.15 retains the full progressive carrier observation limit; new .2.17 owns disconnected recognition compatibility observations.
 

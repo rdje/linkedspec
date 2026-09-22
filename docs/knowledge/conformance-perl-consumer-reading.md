@@ -65,8 +65,9 @@ answers:
   - which remaining Phase0 block traversal and staged consumer checks are fully read
   - which Phase0 process capture and Perl progressive parent observation gaps are repair owned
   - which Perl progressive punctuation and recognition carrier observations are actually exercised
-date: 2026-09-21
-status: groups 34–83 physically read; Phase0 complete; recognition contract partial through line 549; all observation-gap and runtime repairs retain prerequisites
+  - what recognition observation repetition and root-selection consumers are read in group 84
+date: 2026-09-22
+status: groups 34–84 physically read; four more consumers complete; root selection routes partial through 359; all repairs retain prerequisites
 tags: [conformance, perl, reading, diagnostics, generated-source]
 evidence: "CONFORMANCE-SOURCE-READING.1.34 at activation d10305097eb502c0fe29309ec230437396e26d82; eleven complete windows, 1500 fragments, 56255 bytes, ordered window SHA-256 db04deab6c0365f8bc454e2695d410324a120104a232c213346f2b23ad16aef3. Five managed Perl targets pass43 top-level tests; neutral named marks3, diagnostics20 and duplicate-slot59 mutations pass."
 evidence_update_2026_09_21: "Ten complete windows cover 1,500 fragments / 51,804 baseline bytes; ordered window SHA-256 1164b42887bab92a4ea03d85fcaf4a9dc0c6913fc7607fe21a0d66cb0a424992. Cumulative reading is 35/143, 46,538 fragments / 1,405,327 baseline bytes and 86 complete files; gap tests remain partial through line 1026. Retained exact integration commit 87b35665e proof passes generated-source (6), inspector (2) and gap (124) tests (132 total), with unchanged source identities. The old uniform-identity audit fails on the approved integration delta; its corrected recipe passes all 160 inputs/143 groups/302 ranges and six rejected snapshot mutations. No new runtime execution, native build, full CI or push is claimed for this focused reading leaf."
@@ -74,8 +75,8 @@ evidence_update_2026_09_21_group36: "Eleven complete windows cover 1,500 fragmen
 reverify: "bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/cli_conformance_runner.t t/complete_named_mark_contract.t t/diagnostic_output_perl_contract.t t/duplicate_regex_slot_identity_perl_contract.t t/generated_source_contract.t; bash tools/run_python_project_data.sh tools/check_complete_named_mark_contract.py; bash tools/run_python_project_data.sh tools/check_diagnostic_output_contract.py; bash tools/run_python_project_data.sh tools/check_duplicate_regex_slot_identity_contract.py"
 evidence_update_2026_09_21_group37: "Fourteen complete windows cover 1,500 fragments / 63,613 baseline bytes; ordered window SHA-256 98d4de26a6f747975c45fe91277d218c6947936925d1ae233586706bef952d64. Cumulative reading is 37/143: 49,538 fragments / 1,527,897 baseline bytes and 97 complete files. Phase0 remains partial at lines 1–43. Fresh managed metadata/oracle checks pass 9 top-level tests. Unchanged integration commit 87b35665e retains native-loader (5), MCP binding/dispatch/stdio (23), admission (13) and Phase0 1032 proof. Full-target execution grants no reading credit to the unread Phase0 body. Header correction .2.4 is pending after prerequisites; helper repair .2.3 and existing runtime repairs remain open. No dependency build, new canonical run or push is claimed."
 evidence_update_2026_09_21_group38: "Eleven complete windows cover 1,067 fragments / 65,529 baseline bytes; ordered window SHA-256 f57116fee0db80f49969546da5cd033988e06b55191fc88358b7c6d6d334fd3e. Cumulative reading is 38/143: 50,605 fragments / 1,593,426 baseline bytes and 97 complete files. Phase0 is partial through line 1110. Exact unchanged canonical commit 87b35665e supplies PASS for all 38 fully read subtests (ordinals 2–39). The crossing facade error-state test remains partial; its suffix is .1.39-owned. The complete 1032-test gate remains retained historical proof, not new execution or reading credit. No new defect, runtime repair, dependency build, full CI or push is claimed; all existing repairs retain their prerequisites."
-evidence_phase0_checkpoint: "10 complete windows cover 1,500 fragments / 50,515 baseline bytes; ordered window SHA-256 0b712b5eacb78d882ab85d692825d2cdeaf1f99e29c619e97c68a2508e1158c3. Cumulative reading is 83/143 groups, 100,904 fragments / 4,449,693 baseline bytes and 103 complete files. Progressive contract, punctuation contract and recognition authority are complete; recognition contract is partial through line 549. Fresh focused proof passes 195 top-level and 424 nested TAP results: progressive contract129/0, punctuation7/73, recognition authority8/285 and the complete read recognition prefix through535 at51/76; four source-extracted compatibility scope controls also pass. Progressive carrier checks exact payloads, logical generated metadata, failure diagnostics and recognition visibility across live, reconstructed and same-process generated packages, without actual parent-register before/after observations. Punctuation normalizes only admitted zero-argument statement/terminal receiver forms, retains identifiers, rejects excluded AST shapes and executes the neutral fixture live/generated. Recognition authority separates match/payload, restores actual frame snapshots, isolates recursive marks and rejects typed token misuse; its compatibility fixture is disconnected. Four source-extracted scope controls confirm that observation limit without runtime corruption. The read recognition carrier prefix checks canonical nodes, static/effect barriers, eight falsey/miss terminal cases, compatibility behavior, zero-width repetition rejection and legal one-shot zero-width recognition. Reading ends inside the direct-recursive fixture; only the complete prefix through 535 is executed. Later recursive/generated carrier cases remain .1.84-owned. New .2.17 ownership and the .2.15 carrier audit are recorded; no production change, dependency build, canonical run or push is claimed; .2.5–.2.17 and all prerequisites remain."
-reverify_phase0_checkpoint: "Reconstruct .1.83 windows and source identities; prove -v -Iperl t/progressive_span_dispatch_perl_contract.t t/punctuation_light_zero_arg_contract.t t/recognition_transaction_perl_authority.t; execute recognition contract lines1-535 with repository-rooted setup, close its open subtest and SKIP block, then append done_testing. Replay RECOGNITION_COMPATIBILITY_OBSERVATION in its fact card. No unread recursive or generated recognition suffix is credited."
+evidence_phase0_checkpoint: "10 complete windows cover 1,500 fragments / 54,362 baseline bytes; ordered window SHA-256 3ca32d29209411869425074b019fa6a21ae019e62e79dc5e15e603573aca37c1. Cumulative reading is 84/143 groups, 102,404 fragments / 4,504,055 baseline bytes and 107 complete files. Recognition, recursive observation, repeated action results and root selection core are complete; root selection routes are partial through line 359. Fresh focused proof passes 79 top-level and 475 nested TAP results: recognition 51/99, recursive observation 7/78, repeated action results 10/122, root selection core 7/78 and the complete root routes prefix through line 324 at 4/98. Neutral recognition 138/250/58, typed 14/0/231, repetition 8/0/54 and root 7/0/54 pass. Twelve source-extracted repeated-action process controls confirm signal-status loss and sequential-pipe blocking; both timed-out owned children are reaped. Recognition completion checks typed direct/mutual zero-progress errors and generated falsey commit results. Recursive observation locks dedicated lowering, static/effect barriers, exact detached nine-field records, falsey/failure outcomes, cursor ownership and recursion identities. Repetition executes eight mode and ten special cases, loaded/descriptor/generated/trace/CLI/corpus roles. Root selection preserves explicit/first-marker/first-rule precedence, authored identity, strict graph independence and generated-role attribution. Generated packages share the host process. Root trace reading ends inside an invocation at 359; only complete constructs through line 324 execute. Strict Get remains intentionally unwired and the neutral strict loop is model arithmetic, with separate real-validator cases. Existing .2.16.1/.2.16.2 now also own the repeated-action CLI helper; all previous repairs and required source/book/policy prerequisites remain. No production repair, fresh-process generated proof, dependency build, canonical run or push is claimed."
+reverify_phase0_checkpoint: "Reconstruct .1.84 windows and source identities; run its four complete Perl tests with tools/project_data_run.sh and execute root-rule-selection routes lines1–324 with repository-rooted FindBin replacement and done_testing. Replay REPEATED_PROCESS_CAPTURE below its canonical subprocess fact card. No unread root-trace suffix is credited."
 reverify_group38: "Replay .1.38 using conformance-source-reading-coverage and compare its 38 complete subtest names with retained canonical commit 87b35665e; this grants no new source-reading or runtime credit."
 reverify_group37: "bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/noncurrent_helper_metadata.t t/oracle_root_target_regex_semantics.t; retain unchanged dated MCP/native-loader proof separately."
 reverify_group36: "bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/logical_helper_perl_contract.t t/map_leaves_mutation_perl_contract.t; reproduce the helper observation with HELPER_PATH below, and retain the dated gap/MCP proof separately."
@@ -446,42 +447,20 @@ print JSON::PP->new->canonical->pretty->encode(\@cases);
 PUSH_LABELS
 ```
 
-## Phase0 reading checkpoint
+## Perl consumer reading checkpoint
 
-Group 83 completes the progressive carrier, zero-argument punctuation contract
-and private recognition authority, then reads the recognition carrier through 549.
-The direct-recursive fixture crosses that boundary; only complete constructs
-through 535 are executed in the extracted prefix.
+Recognition completion checks typed direct/mutual zero-progress errors and generated falsey commit results. Recursive observation locks dedicated lowering, static/effect barriers, exact detached nine-field records, falsey/failure outcomes, cursor ownership and recursion identities. Repetition executes eight mode and ten special cases, loaded/descriptor/generated/trace/CLI/corpus roles. Root selection preserves explicit/first-marker/first-rule precedence, authored identity, strict graph independence and generated-role attribution. Generated packages share the host process. Root trace reading ends inside an invocation at 359; only complete constructs through line 324 execute. Strict Get remains intentionally unwired and the neutral strict loop is model arithmetic, with separate real-validator cases.
 
-Progressive dispatch returns the exact child payload live, from reconstructed
-handlers and from generated source loaded into separate packages in the same
-process. Logical metadata excludes compiled/cancellation authority. Missing
-registry, invalid operand and recognition-visibility controls retain exact checks.
-The complete carrier has no before/after parent-register observation, extending
-.2.15 without proving runtime corruption or fresh-process loading.
+Fresh focused proof passes 79 top-level and 475 nested TAP results: recognition 51/99, recursive observation 7/78, repeated action results 10/122, root selection core 7/78 and the complete root routes prefix through line 324 at 4/98. Neutral recognition 138/250/58, typed 14/0/231, repetition 8/0/54 and root 7/0/54 pass. Twelve source-extracted repeated-action process controls confirm signal-status loss and sequential-pipe blocking; both timed-out owned children are reaped.
 
-Punctuation compares semantic AST projections with source fields removed. Bare
-standalone controls and final receiver methods equal parenthesized twins; retained
-identifiers and excluded forms are checked separately. Bare next owns canonical
-NEXT, and the neutral fixture executes with exact values live and generated.
+Existing .2.16.1/.2.16.2 now also own the repeated-action CLI helper; all previous repairs and required source/book/policy prerequisites remain. No production repair, fresh-process generated proof, dependency build, canonical run or push is claimed.
 
-Recognition authority observes actual frame snapshots, recursive marks, staged
-falsey payloads, terminal restoration and portable errors. Its final compatibility
-object is only declared and compared, never supplied to execution. Four independent
-scope controls leave that predicate passing despite changed cursor-stack/mark
-state. [[perl-recognition-compatibility-observation-gap]] and .2.17 own repair;
-startup .38 separately owns obsolete completed-token snapshot restoration.
-The carrier prefix tests dedicated nodes, static/transitive effect barriers,
-eight match/payload terminal cases, ordinary compatibility save/restore,
-zero-width repetition rejection and legal one-shot zero-width recognition.
+The process controls reuse the established Phase0 cause: sequential stdout/stderr reads
+and a shifted exit byte discard signal failure and can deadlock. The exact fifth helper
+is source-pinned in [[phase0-subprocess-capture-status-and-pipe-gap]]. No historical
+false-green run is established.
 
-Fresh focused proof is 195 top-level/424 nested TAP results: progressive 129/0,
-punctuation 7/73, authority 8/285 and extracted recognition prefix 51/76. Nested
-counts include nested subtest results. The scope probe is 8/289. Generated recognition
-and recursive progress controls remain .1.84-owned. .2.5–.2.17 and all prerequisites
-remain; the supplied dependency grammar snapshot is unused.
-
-Reading is 83/143 groups, 100,904 fragments / 4,449,693 baseline bytes and 103 complete files.
+Reading is 84/143 groups, 102,404 fragments / 4,504,055 baseline bytes and 107 complete files.
 
 Related facts: [[perl-callable-codeblock-literal-record]], [[neutral-cli-fixture-runner]],
 [[complete-named-mark-perl-rust-parity]], [[perl-diagnostic-output-events]],

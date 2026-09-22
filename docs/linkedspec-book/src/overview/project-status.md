@@ -498,8 +498,8 @@ the director's focused-verification grant used for this correction and the separ
 supporting-reading closeout. Reading completion establishes audited comprehension;
 it does not close the six grammar/literal repair roots or establish runtime signoff.
 Conformance, test and Unicode reading has exact ownership for all 160 inputs in
-143 bounded groups covering 8,257,059 baseline decoded bytes. Reading now covers 83/143 groups, 100,904 fragments / 4,449,693 baseline bytes and 103 complete files.
-Progressive contract, punctuation contract and recognition authority are complete; recognition contract is partial through line 549.
+143 bounded groups covering 8,257,059 baseline decoded bytes. Reading now covers 84/143 groups, 102,404 fragments / 4,504,055 baseline bytes and 107 complete files.
+Recognition, recursive observation, repeated action results and root selection core are complete; root selection routes are partial through line 359.
 
 The progressive carrier checks exact child payloads in live, reconstructed and
 generated execution, along with typed failures and logical metadata. Generated
@@ -519,13 +519,28 @@ no runtime interference is demonstrated. The repair must observe supported runti
 state and reject a relevant interference mutation while preserving private state
 ownership. The separate completed-token restoration defect remains startup .38.
 
-Fresh focused proof passes 195 top-level and 424 nested TAP results. Recognition
-carrier reading stops inside a recursive fixture at line 549; only complete cases
-through 535 run here, including static effect barriers, falsey/miss terminals and
-zero-width behavior. Remaining recursive/generated cases continue in .1.84.
-MethodExpr .2.5 and every earlier repair retain their prerequisites. Phase0
-child-status loss and sequential pipe draining remain owned by .2.16. The supplied
-dependency grammar snapshot remains unused.
+Fresh focused proof passes 79 top-level and 475 nested TAP results. Recognition
+checks complete typed recursion failures and generated falsey payloads. Recursive
+observation tests compare exact detached records, real cursor transitions, abort
+identity and direct/mutual recursion errors. Repetition covers eight mode cases,
+ten special cases, loaded and generated execution, trace, primary CLI and corpus.
+Root selection preserves explicit-selector, first-marker and first-rule precedence
+across native and generated roles without rewriting authored marker identity.
+Generated packages in these consumers load in the same process.
+
+Root-route reading ends at 359 inside a traced invocation. Only complete cases
+through line 324 execute in this checkpoint; the trace suffix continues in .1.85.
+The direct strict validator is exercised separately; passing Get strict_syntax
+still does not wire that option into validation.
+
+**Subprocess capture repair also covers the repeated-action CLI helper (.2.16).**
+Twelve controlled checks reproduce the Phase0 mechanism in this fifth helper:
+SIGTERM becomes reported status 0, while large stderr-first/interleaved writes
+block sequential capture. Both timed-out owned children are terminated and reaped.
+In-memory status and concurrent-drain controls distinguish those outcomes. This
+establishes harness defects, not a parser failure or a historical false-green CI run.
+MethodExpr .2.5 and all other repairs retain required source/book/policy reading.
+The supplied dependency grammar snapshot remains unused.
 
 The director approved the finite documentation-capacity proposal under ADR0122.
 Containment `.15` admits exactly fourteen controls for the remaining 93 reading
@@ -552,7 +567,7 @@ The history files keep their 512-line / 65,536-byte caps, mandatory rollover and
 immutable archives. General card/part limits remain unchanged. Admission consumes
 one of the conservative 99 reserve units; the remaining 98 units are forecast
 after actual admission overhead. This capacity does not complete source reading
-or repair tests: reading now reaches 83/143, `.1.84` is next, and the test and recipe
+or repair tests: reading now reaches 84/143, `.1.85` is next, and the test and recipe
 repairs `.2.5`–`.2.17` remain open.
 
 The director has requested integration guides and runnable consumer examples for

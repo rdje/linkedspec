@@ -6,11 +6,13 @@ answers:
   - can Phase0 subprocess capture deadlock on large stderr
   - which tasks own Phase0 subprocess status and pipe draining
   - were controlled pipe timeout children reaped during the Phase0 diagnosis
-date: 2026-09-21
+  - does the repeated-action CLI test helper lose signals or block on stderr
+date: 2026-09-22
 status: confirmed harness defects; .2.16.1 and .2.16.2 repairs retain prerequisites
 tags: [perl, phase0, subprocess, signals, pipes, conformance]
 evidence: "CONFORMANCE-SOURCE-READING.1.82 at dc88fc1397b01a6dadb7b2d8a8cbf91b2169e1e0. Forty-eight source-extracted controls cover four helpers, six child outcomes and original/guard variants. Original SIGTERM becomes status zero; stderr-first and interleaved large output time out. All eight timed-out owned children are terminated and reaped. In-memory status/multiplex guards distinguish the outcomes; no tracked implementation is changed."
 reverify: "Run PHASE0_PROCESS_CAPTURE below. Exact helper hash fails closed after source changes; use completed repair evidence rather than expecting the old defects forever."
+evidence_group84: "At 4480cc52, the repeated-action run_primary_command helper reproduces the same two defects in 12 controlled outcomes. Original SIGTERM reports 0, stderr-first/interleaved output time out, both owned children are reaped, and in-memory guards preserve exit7 and output while reporting 143 for SIGTERM. Existing .2.16 children own this fifth helper; no source repair or historical false-green run is claimed."
 ---
 
 ## Mechanism and bounded evidence
@@ -184,3 +186,56 @@ PHASE0_PROCESS_CAPTURE
 
 Related: [[routing-verifier-child-signal-status-gap]],
 [[conformance-perl-consumer-reading]].
+
+## September 22 repeated-action consumer extension
+
+The fully read `t/repeated_action_result_perl_contract.t` uses the same pattern in
+`run_primary_command`. Its ordinary ten roles pass 122 nested assertions, including
+exact CLI JSON and empty stderr, but those small-output successes do not cover
+process failure or pipe saturation. Twelve original/guard controls reproduce the
+same results as above for this fifth helper, with both timeout children reaped.
+Repairs `.2.16.1` and `.2.16.2` now include it; required reading still gates repair.
+
+This replay reuses the unchanged six owned programs, cleanup and output assertions
+from PHASE0_PROCESS_CAPTURE, substituting the exact source-pinned fifth helper and
+its variable names. It executes no parser/CI child and changes no tracked source.
+
+```bash
+bash tools/project_data_run.sh python3 - <<'REPEATED_PROCESS_CAPTURE'
+from pathlib import Path
+import re
+
+card = Path('docs/knowledge/phase0-subprocess-capture-status-and-pipe-gap.md').read_text()
+recipe = card.split("<<'PHASE0_PROCESS_CAPTURE'\n", 1)[1].split('\nPHASE0_PROCESS_CAPTURE', 1)[0]
+start = recipe.index('source = Path(')
+end = recipe.index("prefix = r'''")
+recipe = recipe[:start] + '''source = Path('t/repeated_action_result_perl_contract.t').read_text()
+names = ['run_primary_command']
+original = re.search(r'^sub run_primary_command \\{\\n.*?(?=^sub role_neutral_contract)', source, re.M | re.S)[0]
+assert hashlib.sha256(original.encode()).hexdigest() == '12cf5ab78452ca09866b313e17be72e0c50b7fa7ca9e919a3261d2183cee51c9'
+old_drain = " my $stdout = do { local $/; <$stdout_fh> } // '';\\n my $stderr = do { local $/; <$stderr_fh> } // '';"
+assert original.count(old_drain) == 1
+assert original.count('return ($? >> 8, $stdout, $stderr)') == 1
+''' + recipe[end:]
+recipe = recipe.replace('phase0-process-capture-reverify', 'repeated-process-capture-reverify')
+start = recipe.index('my @helpers = (')
+end = recipe.index('\nfor my $helper', start)
+recipe = recipe[:start] + "my @helpers = (['run_primary_command', sub { run_primary_command('owned-probe') }]);" + recipe[end:]
+start = recipe.index("new_drain = r'''")
+end = recipe.index('\nresults = {}', start)
+drain = recipe[start:end].replace('$out_fh', '$stdout_fh').replace('$err_fh', '$stderr_fh')
+drain = drain.replace('$out .=', '$stdout .=').replace('$err .=', '$stderr .=')
+drain = drain.replace("new_drain = r'''", "new_drain = r''' my ($stdout, $stderr) = ('', '');\n")
+recipe = recipe[:start] + drain + recipe[end:]
+old = "body.replace('my $exit_code = $? >> 8;',\n                            'my $exit_code = ($? & 127) ? 128 + ($? & 127) : ($? >> 8);')"
+new = "body.replace('return ($? >> 8, $stdout, $stderr)',\n                            'return (($? & 127) ? 128 + ($? & 127) : ($? >> 8), $stdout, $stderr)')"
+assert recipe.count(old) == 1
+recipe = recipe.replace(old, new)
+for old, new in [('len(rows) == 24', 'len(rows) == 6'),
+                 ('PASS 24 expected outcome controls', 'PASS 6 expected outcome controls'),
+                 ('controls=48, timeout_children_reaped=8', 'controls=12, timeout_children_reaped=2')]:
+    assert recipe.count(old) == 1
+    recipe = recipe.replace(old, new)
+exec(compile(recipe, 'repeated-process-capture-reverify', 'exec'))
+REPEATED_PROCESS_CAPTURE
+```

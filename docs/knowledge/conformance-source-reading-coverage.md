@@ -10,8 +10,8 @@ answers:
   - "which conformance source reading file has the longest line"
   - "what evidence capacity blocks remaining conformance reading"
   - "what exact fourteen limits are proposed for remaining conformance reading"
-date: 2026-09-21
-status: exact baseline decomposition preserved; physical reading 83/143, 103 files complete and 60 groups remain; one approved current-source delta
+date: 2026-09-22
+status: exact baseline decomposition preserved; physical reading 84/143, 107 files complete and 59 groups remain; one approved current-source delta
 tags: [reading, conformance, tests, unicode, continuity, CONFORMANCE-SOURCE-READING]
 evidence: "Startup .3.8.0 independently accounts for160 baseline-identical files,5,422,313 stored bytes and8,257,059 decoded bytes in167,606 line fragments/167,604 LF delimiters. Four gzip inputs contribute54,500 decoded lines. All143 groups/302 ranges are contiguous, disjoint and bounded at1500 fragments/65536 bytes. No source, registry or runtime behavior changes; no physical-reading credit from inventory."
 reverify: "Run CONFORMANCE_SOURCE_READING_COVERAGE below through the project-data wrapper; it derives source identity from Git and range ownership from the task-tree rather than a parallel manifest. Use scripts/check_task_tree_metadata.sh for actual task collection limits."
@@ -428,15 +428,14 @@ properties, context rules, fixtures or decoded upstream inputs. All repairs rema
 
 ## Conformance reading checkpoint
 
-`CONFORMANCE-SOURCE-READING.1.83` reads 10 windows, 1,500 fragments and 50,515 baseline bytes.
-Cumulative reading is 83/143 groups, 100,904 fragments / 4,449,693 baseline bytes and 103 complete files.
-Progressive contract, punctuation contract and recognition authority are complete; recognition contract is partial through line 549.
-[[conformance-perl-consumer-reading]] records this checkpoint's exact observation boundaries.
-Focused proof: Fresh focused proof passes 195 top-level and 424 nested TAP results: progressive contract129/0, punctuation7/73, recognition authority8/285 and the complete read recognition prefix through535 at51/76; four source-extracted compatibility scope controls also pass.
-New .2.17 owns recognition compatibility observations; .2.15 retains the carrier audit.
-All .2.5–.2.17 and earlier repairs retain prerequisites.
-The pinned 113-byte delta stays separate; these ranges total 4,449,806 current bytes.
-Next .1.84: completing recognition and reading recursive observation, repeated action results, root selection core and the root selection routes prefix.
+`CONFORMANCE-SOURCE-READING.1.84` reads 10 windows, 1500 fragments and 54,362 baseline bytes.
+Cumulative reading is 84/143 groups, 102,404 fragments / 4,504,055 baseline bytes and 107 complete files.
+Recognition, recursive observation, repeated action results and root selection core are complete; root selection routes are partial through line 359.
+[[conformance-perl-consumer-reading]] records exact observation boundaries.
+Fresh focused proof passes 79 top-level and 475 nested TAP results: recognition 51/99, recursive observation 7/78, repeated action results 10/122, root selection core 7/78 and the complete root routes prefix through line 324 at 4/98. Neutral recognition 138/250/58, typed 14/0/231, repetition 8/0/54 and root 7/0/54 pass. Twelve source-extracted repeated-action process controls confirm signal-status loss and sequential-pipe blocking; both timed-out owned children are reaped.
+Existing .2.16.1/.2.16.2 now also own the repeated-action CLI helper; all previous repairs and required source/book/policy prerequisites remain. No production repair, fresh-process generated proof, dependency build, canonical run or push is claimed.
+The pinned 113-byte delta stays separate; these ranges total 4,504,168 current bytes.
+Next .1.85: Read the .1.85 scope (1,500 fragments / 52,593 baseline bytes), completing root selection routes and reading rule-local cursor contracts, scalar contracts and semantic-index prefixes. Repairs .2.5–.2.17 and earlier repairs retain required source/book/policy reading prerequisites.
 
 Lowercase table entries and Final Sigma context remain separate. Exact scalar
 sequences, sparse ranges, fullwidth forms and ligature identities are preserved;
