@@ -1,11 +1,11 @@
 # MEMORY
 
-- activation_commit: `cb47fde46f4ded2a0683f45f6264a4417f1741ff` — clean .1.89 checkpoint; targeted-startup .84 activation.
-- latest_completed_leaf: `SESSION-STARTUP-READING.84 - adopt targeted startup and fast ramp-up`; director-approved operating guidance.
-- active_work_unit: `SESSION-STARTUP-READING.85` — pending; identify the director's three reports.
-- next_action: Identify the director's three bug reports from their IDs/titles, then select their existing repair owners and begin targeted investigation. The report-identification question is pending; do not resume the full-reading queue by default.
+- activation_commit: `8f0cdf6b574c6d18e3af7e60447d70cfe2198739` — clean .84 checkpoint; report recovery .85 activation.
+- latest_completed_leaf: `SESSION-STARTUP-READING.85 - recover SEMULITH reports and repair ownership`; exact report register recovered.
+- active_work_unit: `SESSION-STARTUP-READING.83.2.1` — pending; SEMULITH/LS-001 quoted LF repair.
+- next_action: Repair SEMULITH/LS-001 quoted-newline corruption under SESSION-STARTUP-READING.83.2.1, starting with Toolbox source attribution and regression proof. Then continue the kind-preserving contract under .83.1; LS-003 integration remedies are already verified.
   Named-argument direction PARSER-AUTHORING-APIS.4 is approved and parked; other authoring proposals and approved formats stay parked.
-- in_flight_uncommitted: none; .84 guidance and continuity are committed before report repair selection.
+- in_flight_uncommitted: none; .85 report recovery and repair ownership committed before implementation.
 - blockers: Wrapper startup .7 remains open; warned-child group matched, but denied-call cause and original lost PUC stream remain unproved. Recovery/purge stay prohibited.
 - current_rust_warning_debt: Repeated carriers report 1,870 pgen plus 26 rgx-core output warnings; RUST-DEPENDENCY-WARNING-ZERO.1-.7 own public RGX reports and result verification without suppression; dependency internals are excluded.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
@@ -57,4 +57,4 @@
   Changes segment4973 preserves 117 lines /29044 bytes from clean 5fab5aa6; old archive rows/bytes remain exact.
 - dependency_boundary: September20: LinkedSpec integrates only with RGX via its published integration document/APIs/contracts. RGX owns PGEN; no separate PGEN procedure, internal inspection/analysis, patches or pin changes.
   Normal documented builds remain authorized; retain caches. Startup .80.1-.4 may observe public behavior or track upstream repairs, not investigate dependency internals.
-- latest_bootstrap_read: ADR0123 targets2–5 minute startup plus thorough task-specific reading. Full audit remains incomplete and separate: conformance89/143,109904 fragments/4784266 baseline bytes/133 files; .1.90 is next only when that audit resumes. The director's three bug reports now take priority; identities are awaited.
+- latest_bootstrap_read: ADR0123 targets2–5 minute startup plus thorough task-specific reading. Full audit remains incomplete and separate: conformance89/143,109904 fragments/4784266 baseline bytes/133 files; .1.90 is next only when that audit resumes. SEMULITH/LS-001 and LS-002 repairs take priority under .83; LS-003 integration remedies are verified.

@@ -2,6 +2,8 @@
 id: archogen-rust-lispish-integration
 title: ARCHOGEN can use Rust native loading with explicit Lispish and dependency preparation
 answers:
+  - what are the three SEMULITH bug reports
+  - where are the three bug reports and their repair owners
   - what does ARCHOGEN need besides a LinkedSpec git submodule
   - can a Rust application embed Lispish without Perl or the CLI
   - does a fresh LinkedSpec recursive checkout include generated PGEN parsers
@@ -17,7 +19,7 @@ answers:
   - has the reported Lispish multiline string patch been verified locally
   - how does a host Cargo workspace exclude vendored LinkedSpec
   - does the workspace verifier query dependency internals
-date: 2026-09-21
+date: 2026-09-22
 status: workspace and public integration verified; prerequisite guidance corrected; bootstrap message and strict Lispish reports remain open
 tags: [rust, lispish, embedding, dependencies, discussion]
 evidence: "September13 native Lispish proof; September20 report intake, workspace repair and successful RGX public bootstrap/native consumer proof. Supplied grammar patch remains unverified locally."
@@ -28,6 +30,21 @@ reverify: "Follow the public preparation/workspace sequence in docs/linkedspec-b
 published integration document, public APIs and contracts are the sole authority.
 RGX owns PGEN and all transitive preparation; no separate PGEN procedure or
 internal dependency knowledge belongs in LinkedSpec. Reports go to RGX.
+
+## September 22 report recovery
+
+The director's three reports are **SEMULITH/LS-001** (multiline quoted strings),
+**SEMULITH/LS-002** (kind-preserving atom design), and **SEMULITH/LS-003** (workspace
+and prerequisite guidance). Their exact register is below. Startup .85 corrects
+an erroneous missing-identities blocker: no new director input was needed.
+The same-volume 29-file SEMULITH snapshot still matches its registered manifest hash.
+Fresh native Rust replay at 8f0cdf6b captures full stdout, stderr and real exit status:
+four controls match, four LF cases corrupt the tree, all exit 0 with empty stderr.
+Results and binary/grammar hashes: .linkedspec-data/scratch/report-recovery/ls001-current.json.
+Startup .83.2.1 owns the LF repair; .83.1/.83.2/.83.3 retain kind/strict-path work.
+LS-003's remedies were already independently verified by integration .8.2/.8.4/.8.5
+and final .7; downstream report acceptance has not been claimed. The supplied LF
+patch is still unverified locally at this recovery checkpoint.
 
 ## September 20 public build boundary
 

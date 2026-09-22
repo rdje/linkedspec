@@ -2,17 +2,19 @@
 
 ## Current Activity
 
-Director-approved targeted startup and fast context recovery (ADR0123). The separate full audit remains at conformance89/143; current priority is the three bug reports, whose IDs/titles are awaited under startup .85.
+SEMULITH reports recovered from integration .8.1. LS-001 multiline-string corruption is freshly reproduced; .83.2.1 repairs it next. LS-002 kind preservation remains .83-owned; LS-003 integration remedies are verified. ADR0123 keeps startup targeted.
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.84 - adopt targeted startup and fast ramp-up` — startup targets2–5 minutes, followed by thorough task-specific reading. Preserve prior audit and repair evidence; no source behavior changes.
+- `SESSION-STARTUP-READING.85 - recover SEMULITH reports and repair ownership` — restored exact report identities and removed the false missing-input blocker.
 
 ## Next Action
 
-- Identify the director's three bug reports from their IDs/titles, then select their existing repair owners and begin targeted investigation. The report-identification question is pending; do not resume the full-reading queue by default.
+- Repair SEMULITH/LS-001 quoted-newline corruption under SESSION-STARTUP-READING.83.2.1, starting with Toolbox source attribution and regression proof. Then continue the kind-preserving contract under .83.1; LS-003 integration remedies are already verified.
 
 ## Recent Completions
+
+- `2026-09-22` — `SESSION-STARTUP-READING.85` recovers SEMULITH/LS-001–003; four fresh native LF failures select .83.2.1.
 
 - `2026-09-22` — `SESSION-STARTUP-READING.84` adopts targeted startup under ADR0123; .85 awaits the three report IDs/titles before repair selection.
 
@@ -43,8 +45,6 @@ Director-approved targeted startup and fast context recovery (ADR0123). The sepa
 - `2026-09-21` — `CONFORMANCE-SOURCE-READING.1.77` reads Phase0 through 43916; 35 subtests retain 479 assertions. Trace and runtime cursor observations remain distinct from descriptor equality; new .2.13 owns the reproduced negative-only source check. Repairs remain; .1.78 continues.
 
 - `2026-09-21` — `CONFORMANCE-SOURCE-READING.1.76` reads Phase0 through 42887; 33 subtests retain 650 assertions. Grammar metadata and source checks remain distinct from bounded parser results and legacy Perl adapter execution. Repairs remain; .1.77 continues.
-
-- `2026-09-21` — `CONFORMANCE-SOURCE-READING.1.75` reads Phase0 through 42087; thirty-six subtests retain 470 assertions for quote boundaries and shipped grammar migrations. Repairs remain; .1.76 continues.
 
 ## History
 

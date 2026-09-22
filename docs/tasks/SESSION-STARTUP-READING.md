@@ -4636,10 +4636,10 @@ remain. Reading completion and runtime signoff remain distinct.
   Status: `pending`
   Goal: Resolve the historical Lispish document-validation and malformed-token limitations before claiming strict s-expression parsing.
   Children: `.83.1`, `.83.2`, `.83.3`
-  Dependencies: Startup .3/.4/.5 and a clean integration-documentation handoff; no implementation pivot during BACKEND-INTEGRATION-GUIDES.2.2.
+  Dependencies: Clean integration handoff is complete at 87b35665e. ADR0123 supersedes blanket startup reading; each repair reads its affected contract, code, tests and book.
   Evidence: Integration .2.2 runs34 native Rust cases and independently matches nine complete Perl values. Leading/trailing text and a second form are ignored, an unterminated quote can become an atom, empty square brackets disappear, and a semicolon comment without newline can become content. Get descriptors show seek/default-scan policy, and generated source proves first-child return and no-match null paths. Exact quoted-string codepoints are preserved; no Rust-specific escaping defect was found.
   Historical ownership: PHASE0-BACKHALF-TRIAGE.5.2 fixed the old corpus driver's non-progress loop and described deeper parser/grammar follow-ons without implementing them. This node gives the document/token contract follow-on explicit contract, implementation and verification owners. Its current evidence does not reverify or reopen the dated same-buffer never-undef claim.
-  September20 consumer intake: BACKEND-INTEGRATION-GUIDES.8.1 attaches ARCHOGEN/LS-002 complete-input/all-form requirements, ARCHOGEN/LS-003 and SEMULITH/LS-002 token-kind requirements, and SEMULITH/LS-001 reported multiline-string tree corruption with its unverified candidate patch. Exact source-qualified states, snapshots and local-versus-supplied evidence live in docs/knowledge/archogen-rust-lispish-integration.md. Contract .83.1 must resolve compatibility; .83.2 owns actual fixes and .83.3 their independent proof. No report is closed by a documentation warning or this intake, and startup prerequisites remain.
+  September20 consumer intake: BACKEND-INTEGRATION-GUIDES.8.1 attaches ARCHOGEN/LS-002 complete-input/all-form requirements, ARCHOGEN/LS-003 and SEMULITH/LS-002 token-kind requirements, and SEMULITH/LS-001 reported multiline-string tree corruption with its unverified candidate patch. Exact source-qualified states, snapshots and local-versus-supplied evidence live in docs/knowledge/archogen-rust-lispish-integration.md. Contract .83.1 must resolve compatibility; .83.2 owns actual fixes and .83.3 their independent proof. No report is closed by a documentation warning or this intake. September22 .85 recovers the three SEMULITH identities; the independent quoted-LF repair is .83.2.1. Strict/token design retains .83.1 ownership under ADR0123.
   Acceptance: Establish an explicit complete-document contract, implement the accepted strict path and independently prove it. Preserve existing historical behavior unless a reviewed migration deliberately changes it; a documentation warning alone cannot close this repair.
   Verification: `pending`
   Commit: `pending`
@@ -4655,9 +4655,19 @@ remain. Reading completion and runtime signoff remain distinct.
 
 - ID: `SESSION-STARTUP-READING.83.2`
   Status: `pending`
-  Goal: Implement the accepted strict document and token-validation path with bounded ownership.
-  Dependencies: .83.1 committed; startup prerequisites.
+  Goal: Repair quoted LF compatibility and implement the accepted strict document and token-validation path with bounded ownership.
+  Children: `.83.2.1`; decompose later strict/token implementation after .83.1.
+  Dependencies: .83.1 is required for strict/token changes. Independent .83.2.1 repairs multiline quoted payloads within the historical output shape and may proceed after .85; it must not silently introduce strict validation or atom kinds.
   Acceptance: Decompose concrete grammar, API and any necessary backend work into safe children before edits. Add RED/GREEN proof that omitted text and malformed tokens cannot silently yield an accepted document. Preserve documented historical extraction, native in-process execution, exact strings and agreed head/tail or versioned domain shape; no host-side guess may masquerade as grammar validation.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.83.2.1`
+  Status: `pending`
+  Goal: Fix SEMULITH/LS-001 quoted LF tree corruption in the historical Lispish grammar without changing its output contract.
+  Dependencies: .85 clean handoff; targeted Toolbox attribution, grammar and existing quote-contract review. This compatible payload repair does not require the broader strict/token design .83.1.
+  Scope: Quoted-token newline handling, persistent independent regressions, relevant native consumer compatibility and exact book examples. Review both quote rules and public regex support; no dependency internals or pins.
+  Acceptance: Prove RED/GREEN for the eight supplied cases, exact LF/tab/CR/indentation/siblings/parentheses and quote/escape controls. Preserve historical extraction and string values; distinguish kind-preserving/document-validation follow-ons. Run all affected backend compatibility routes and selected component checks, record actual proof and commit before moving to .83.1.
   Verification: `pending`
   Commit: `pending`
 
@@ -4683,13 +4693,18 @@ remain. Reading completion and runtime signoff remain distinct.
   Commit: `SESSION-STARTUP-READING.84 - adopt targeted startup and fast ramp-up`
 
 - ID: `SESSION-STARTUP-READING.85`
-  Status: `pending`
+  Status: `done`
   Goal: Identify the three director-referenced bug reports and route execution to their existing repair owners.
-  Scope: Report IDs/titles or repository-local report paths supplied by the director; then relevant canonical evidence and task-tree ownership only.
-  Dependencies: .84 clean handoff and the missing report identities. Do not substitute three newly discovered audit findings or an unrelated upstream report.
-  Acceptance: Record the exact three reports, current evidence and each implementation owner; select the first safe repair and use targeted reading. Preserve existing ownership and genuine technical dependencies without reinstating the blanket full-reading gate.
-  Verification: Awaiting report IDs/titles; the question is already pending with the director.
-  Commit: `pending`
+  Activation commit: `8f0cdf6b574c6d18e3af7e60447d70cfe2198739`.
+  Verification tier: `focused`
+  Focused checks: Reconcile the integration .8.1 report register and source snapshots; independently replay all eight SEMULITH/LS-001 Rust cases with full stdout/stderr/status; Knowledge, memory, histories, book, public-document checks, diff and normal doctrine hooks.
+  Canonical trigger: Retrieval and continuity correction only; no source, public contract, gate or dependency changes.
+  Scope: Existing BACKEND-INTEGRATION-GUIDES.8.1 report register and its exact SEMULITH snapshot; correct the false missing-identities blocker without requiring the director to repeat repository evidence.
+  Dependencies: .84 clean handoff. Report identities were already durable; the prior question resulted from failed retrieval, not missing user input.
+  Acceptance: Record the exact three reports, evidence and implementation owners; select the first safe repair using targeted reading, retaining technical dependencies and existing ownership.
+  Reports: SEMULITH/LS-001 multiline quoted-string corruption belongs to .83.2.1; SEMULITH/LS-002 atom-kind design request belongs to .83.1/.83.2/.83.3 alongside ARCHOGEN/LS-003; SEMULITH/LS-003 workspace/prerequisite guidance was repaired and verified by integration .8.2/.8.4/.8.5 and final .7. Preserve source-qualified IDs and do not claim downstream report acceptance.
+  Verification: The 29-file SEMULITH snapshot matches its retained manifest SHA-256 a77e92fedc744643db03edea346d3619c60c1ac3cb20dc97ab444f7cd82ed3af. Fresh native Rust replay confirms four matching controls and four silently corrupted LF cases, all exits 0 and empty stderr; full results/binary/grammar hashes are in .linkedspec-data/scratch/report-recovery/ls001-current.json. The native consumer/runtime/grammar sources are unchanged since integration 87b35665e. Canonical retrieval is docs/knowledge/archogen-rust-lispish-integration.md; no report is repaired by this routing slice.
+  Commit: `SESSION-STARTUP-READING.85 - recover SEMULITH reports and repair ownership`
 
 ## Current Frontier
 
@@ -4699,7 +4714,7 @@ audit range, not the default repair frontier.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.85` | `pending` | Identify the director's three reports, then route to existing repair owners. IDs/titles are awaited; use targeted reading. |
+| 1 | `SESSION-STARTUP-READING.83.2.1` | `pending` | Fix SEMULITH/LS-001 quoted LF corruption; four native failing cases are reproduced. Then .83.1 owns the kind-preserving contract. SEMULITH/LS-003 remedies are already verified. |
 
 ## Reading Ledger
 
@@ -7481,6 +7496,8 @@ All 53 owned scopes are read: HLink delimiter/raw text, Liberty scalar/complex a
 
 ## Verification Log
 
+- 2026-09-22 .85: Exact report register/snapshot recovered; fresh Rust replay confirms four controls and four LF failures, all real exits0/stderr empty. No missing-user-input blocker remains.
+
 - 2026-09-22 .84: Targeted-startup adoption preserves prior reading evidence and source; selected continuity checks govern landing.
 
 - `2026-09-13` .3.7.0: Supporting-source inventory .3.7.0 reconciles all 158 baseline-identical files under conf, tablescript, noncore, specs and ebnf: 25,612 LF delimiters, 25,613 fragments and 964,256 bytes. SUPPORTING-SOURCE-READING owns 21 pending groups/174 disjoint ranges; independent Git, current-delta and published-task reconstruction pass with every group within 1,500 fragments /65,536 bytes. No exact earlier startup Scope coverage is credited; physical reading is 0/21. The resulting decomposition uses existing controls, preserves all repairs and changes no source. Lua reading remains closed under ADR0119; next supporting .1.1 reads configuration. No dependency compilation or canonical gate is run; full codebase/book/policy prerequisites and later verification remain.
@@ -7652,6 +7669,8 @@ Knowledge/book/memory/history/whitespace and all nine doctrines pass. Preceding 
 CLI66x2 and Phase0 1032/1032; 1163 seconds is Phase0 only, with 25 optional gates skipped.
 
 ## Commit Log
+
+- 2026-09-22 .85: `SESSION-STARTUP-READING.85 - recover SEMULITH reports and repair ownership`; activation 8f0cdf6b; .83.2.1 follows clean handoff.
 
 - 2026-09-22 .84: `SESSION-STARTUP-READING.84 - adopt targeted startup and fast ramp-up`; activation cb47fde46; .85 follows clean handoff.
 

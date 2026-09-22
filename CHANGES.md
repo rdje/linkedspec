@@ -10,6 +10,12 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-22 — SESSION-STARTUP-READING.85 - recover SEMULITH reports and repair ownership
+
+Recover the three SEMULITH reports from integration .8.1 and correct the false missing-identities blocker across task, roadmap, memory, Knowledge and book pointers. LS-001 has four fresh native LF failures and four matching controls, with full stdout/stderr/status captured; the 29-file snapshot hash matches intake. Add bounded .83.2.1 ownership for the compatible LF repair; retain .83.1 kind/strict design and verified LS-003 integration remedies. Source and dependency pins are unchanged.
+
+Validation: exact snapshot hash and report/owner reconciliation, native eight-case reproduction, Knowledge/memory/history checks, book rendering, direct public-document checks and normal doctrine hooks. No canonical run or push for this continuity correction.
+
 ## 2026-09-22 — SESSION-STARTUP-READING.84 - adopt targeted startup and fast ramp-up
 
 The director replaces the blanket full-codebase prerequisite with targeted startup: recover context/Git/frontier in2–5 minutes, then read affected requirements/code/contracts/tests/book before a fix. ADR0123 and SESSION_BOOTSTRAP own the direction. Prior audit ranges and defects remain unchanged; .85 awaits the three requested report identities. No runtime, gate or capacity changes.

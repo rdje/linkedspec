@@ -501,7 +501,11 @@ The director has replaced the exhaustive startup prerequisite with targeted read
 (ADR0123). Context, Git state and task selection should normally take 2–5 minutes;
 a fix still requires thorough reading of its affected code, contracts, tests and book
 sections. The complete source audit is preserved separately and remains incomplete.
-Current priority is the director's three bug reports, pending their exact identities.
+Current priority is the three SEMULITH reports: LS-001 multiline quoted strings can
+silently corrupt the tree and are the next repair; LS-002 requests a separate
+kind-preserving representation and remains open. LS-003 workspace and prerequisite
+guidance remedies are already verified in the Rust integration guide. The current
+Lispish grammar retains its historical extraction and untyped string-value contract.
 
 Conformance, test and Unicode reading has exact ownership for all 160 inputs in
 143 bounded groups covering 8,257,059 baseline decoded bytes. Reading now covers 89/143 groups, 109,904 fragments / 4,784,266 baseline bytes and 133 complete files.

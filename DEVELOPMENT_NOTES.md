@@ -10,6 +10,12 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-22 — SESSION-STARTUP-READING.85 - recover SEMULITH reports and repair ownership
+
+Report retrieval must use the source-qualified integration register: ARCHOGEN and SEMULITH reuse LS numbers. SEMULITH/LS-001 is an independently reproducible quoted-LF bug; LS-002 asks for kind-preserving design without silently changing historical Lispish; LS-003 guidance remedies are verified. .85 removes a false missing-input blocker. The compatible LF child can proceed before the broader strict/token contract, preserving historical extraction and output shape. Fresh eight-case Rust replay captures complete output and real statuses, avoiding the supplied pipeline that hides stderr and producer status.
+
+Validation: exact snapshot hash and report/owner reconciliation, native eight-case reproduction, Knowledge/memory/history checks, book rendering, direct public-document checks and normal doctrine hooks. No canonical run or push for this continuity correction.
+
 ## 2026-09-22 — SESSION-STARTUP-READING.84 - adopt targeted startup and fast ramp-up
 
 Exhaustive startup reading displaced bug implementation. The director explicitly approved targeted reading and fast ramp-up. Startup recovery and task investigation now have distinct scopes:2–5 minute recovery is a target, while correctness determines investigation depth. Full reading stays separately tracked at conformance89/143; historical prerequisite language is superseded only as a blanket gate. Missing report IDs/titles are preserved as .85's blocker; do not guess the intended three from recent audit findings.

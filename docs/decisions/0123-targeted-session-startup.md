@@ -32,9 +32,10 @@ in older plans and task prerequisites. Relevant policies must still be read and 
 genuine technical dependencies, unresolved defect causes, quality requirements and
 explicit task-specific prerequisites remain. No repair is closed by this decision.
 
-The current priority is the director's three bug reports. Their identities are missing
-from the current resume context; .85 owns identification and routing to existing repair
-owners. Do not guess that three audit findings or an unrelated upstream report are them.
+The current priority is SEMULITH/LS-001–003, already registered by integration .8.1.
+Startup .85 corrects the adoption-time retrieval failure: .83 owns the quoted-LF and
+kind-preservation repairs; integration .8.2/.8.4/.8.5 already verified the LS-003 remedies.
+The canonical register is docs/knowledge/archogen-rust-lispish-integration.md.
 
 ## Consequences
 
