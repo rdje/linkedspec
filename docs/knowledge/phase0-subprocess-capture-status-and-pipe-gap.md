@@ -8,6 +8,7 @@ answers:
   - were controlled pipe timeout children reaped during the Phase0 diagnosis
   - does the repeated-action CLI test helper lose signals or block on stderr
   - does the rule-local cursor CLI consumer share the subprocess status and pipe defects
+  - do Perl trace test subprocess helpers lose signals and block on stderr
 date: 2026-09-22
 status: confirmed harness defects; .2.16.1 and .2.16.2 repairs retain prerequisites
 tags: [perl, phase0, subprocess, signals, pipes, conformance]
@@ -261,4 +262,91 @@ code = code.replace('^sub role_neutral_contract', '^sub parsed_rule_ir')
 code = code.replace('repeated-process-capture-reverify', 'cursor-process-capture-reverify')
 exec(compile(code, 'cursor-process-capture-reverify', 'exec'))
 CURSOR_PROCESS_CAPTURE
+```
+
+## September 22 trace-consumer extension
+
+Reading .1.88 completes the three ActionIR trace consumers and the CLI prefix
+through its complete _run_cmd helper. Their four helpers reproduce the same
+status and pipe defects in 48 controlled outcomes; all eight timeout children
+are reaped. The three _run_perl_snippet bodies are byte-identical; the recipe
+pins their hash and the separate CLI helper hash. Existing .2.16.1/.2.16.2 now
+own ten helpers. Preserve cold-process marker/status/stderr assertions, retain
+all prerequisites, and read the CLI test suffix before implementing repairs.
+No original parser or CI child is signalled and no historical false-green run
+is inferred. The initial scratch recipe extraction targeted the wrapper rather
+than the base recipe and failed before launching children; the corrected replay
+extracts the base PHASE0_PROCESS_CAPTURE scaffold and passes all controls.
+
+```bash
+bash tools/project_data_run.sh python3 - <<'TRACE_PROCESS_CAPTURE'
+from pathlib import Path
+import hashlib, json, re, subprocess
+
+card = Path('docs/knowledge/phase0-subprocess-capture-status-and-pipe-gap.md').read_text()
+recipe = card.split("<<'PHASE0_PROCESS_CAPTURE'\n", 1)[1].split('\nPHASE0_PROCESS_CAPTURE', 1)[0]
+prefix = recipe.split("prefix = r'''", 1)[1].split("'''", 1)[0]
+prefix += '\nuse File::Spec;\nuse File::Basename qw(dirname);\n'
+suffix_template = recipe.split("suffix = r'''", 1)[1].split("'''", 1)[0]
+sources = [
+ ('t/trace_actionir_compact_lowerers.t', '_run_perl_snippet', 'fced4162bfd99d0d567ae7b83d8acf3a3a0e313c1b4e355e33c838ae3afedccd'),
+ ('t/trace_actionir_method_lowering.t', '_run_perl_snippet', 'fced4162bfd99d0d567ae7b83d8acf3a3a0e313c1b4e355e33c838ae3afedccd'),
+ ('t/trace_actionir_pipeline.t', '_run_perl_snippet', 'fced4162bfd99d0d567ae7b83d8acf3a3a0e313c1b4e355e33c838ae3afedccd'),
+ ('t/trace_cli.t', '_run_cmd', '3ff15df3fd15e2cb6f101a67a73ff79a70dda22877f36a8b23e40929f4be8454'),
+]
+work = Path('.linkedspec-data/scratch/trace-process-capture-reverify')
+work.mkdir(parents=True, exist_ok=True)
+all_results = []
+for source_path, helper, digest in sources:
+ original = re.search(r'^sub '+helper+r' \{\n.*?^}\n', Path(source_path).read_text(), re.M | re.S)[0]
+ assert hashlib.sha256(original.encode()).hexdigest() == digest
+ out_var, out_handle = ('out', 'out_fh') if helper == '_run_perl_snippet' else ('stdout', 'out')
+ old_drain = ' my ($'+out_var+', $stderr);\n {\n  local $/;\n  $'+out_var+' = <$'+out_handle+'>;\n }\n {\n  local $/;\n  $stderr = <$err>;\n }'
+ assert original.count(old_drain) == 1
+ new_drain = ''' my ($OUTPUT, $stderr) = ('', '');
+ my $ready = IO::Select->new($HANDLE, $err);
+ my $out_fd = fileno($HANDLE);
+ while ($ready->count) {
+  for my $fh ($ready->can_read) {
+   my $bytes = sysread($fh, my $buffer, 65536);
+   die "read: $!" unless defined $bytes;
+   if (!$bytes) { $ready->remove($fh); next; }
+   if (fileno($fh) == $out_fd) { $OUTPUT .= $buffer; }
+   else { $stderr .= $buffer; }
+  }
+ }'''.replace('$OUTPUT', '$'+out_var).replace('$HANDLE', '$'+out_handle)
+ helper_start = suffix_template.index('my @helpers = (')
+ helper_end = suffix_template.index('\nfor my $helper', helper_start)
+ suffix = suffix_template[:helper_start]+"my @helpers = (['"+helper+"', sub { "+helper+"('owned-probe') }]);"+suffix_template[helper_end:]
+ for variant in ['original', 'guard_control']:
+  body = original
+  if variant == 'guard_control':
+   body = body.replace(old_drain, new_drain)
+   assert body.count('$? >> 8') == 1
+   body = body.replace('$? >> 8', '(($? & 127) ? 128 + ($? & 127) : ($? >> 8))')
+  name = Path(source_path).stem+'-'+variant
+  probe = work/(name+'.pl');probe.write_text(prefix+body+suffix)
+  result = subprocess.run(['perl',str(probe)],capture_output=True,text=True,timeout=45)
+  (work/(name+'.log')).write_text(result.stdout+result.stderr)
+  assert result.returncode == 0 and result.stderr == '', (name,result.returncode,result.stderr)
+  rows = [json.loads(line) for line in result.stdout.splitlines()];assert len(rows)==6
+  for row in rows:
+   mode=row['mode'];timeout=variant=='original' and mode in ['large_stderr','interleaved']
+   assert row['timed_out']==int(timeout),(name,row)
+   if timeout:
+    assert row['timeout_child_reaped']==1,row
+   else:
+    status=7 if mode=='exit7' else (143 if mode=='signal15' and variant=='guard_control' else 0)
+    assert row['status']==status,(name,row)
+    if mode in ['success','exit7','signal15']:
+     assert (row['stdout'],row['stderr'])==('out\n','err\n'),row
+    else:
+     sizes={'large_stderr':(4,262144),'large_stdout':(262144,4),'interleaved':(262144,262144)}
+     assert (row['stdout_bytes'],row['stderr_bytes'])==sizes[mode],row
+  all_results.append(dict(source=source_path,helper=helper,sha256=digest,variant=variant,results=rows))
+  print(name,'PASS 6 controls',flush=True)
+proof=dict(controls=48,timeout_children_reaped=8,source_helpers=4,results=all_results)
+(work/'proof.json').write_text(json.dumps(proof,indent=2)+'\n')
+print('PASS 48 trace-helper outcome controls; all 8 timed-out owned children reaped.')
+TRACE_PROCESS_CAPTURE
 ```

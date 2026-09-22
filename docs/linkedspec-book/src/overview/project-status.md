@@ -498,8 +498,8 @@ the director's focused-verification grant used for this correction and the separ
 supporting-reading closeout. Reading completion establishes audited comprehension;
 it does not close the six grammar/literal repair roots or establish runtime signoff.
 Conformance, test and Unicode reading has exact ownership for all 160 inputs in
-143 bounded groups covering 8,257,059 baseline decoded bytes. Reading now covers 87/143 groups, 106,904 fragments / 4,673,539 baseline bytes and 120 complete files.
-Staged enrichment is read through line 1504, inside payload identity; complete executable prefix ends at 1461. The suffix and carrier/admission reading remain .1.88-owned.
+143 bounded groups covering 8,257,059 baseline decoded bytes. Reading now covers 88/143 groups, 108,404 fragments / 4,730,719 baseline bytes and 126 complete files.
+Staged enrichment, both standalone lifecycle consumers and three ActionIR trace consumers are complete; trace CLI is partial through line 47, including its complete process helper.
 
 The progressive carrier checks exact child payloads in live, reconstructed and
 generated execution, along with typed failures and logical metadata. Generated
@@ -548,32 +548,37 @@ duplicate-slot checks pass 128 and 59 mutations respectively. Known semantic
 missing-call, failure-normalization and source-correlation repairs remain open;
 these finite fixtures do not close them.
 
-Staged-enrichment reading now reaches line 1504. Its complete prefix through 1461
-passes 135 top-level and 227 nested results. It preserves function-body v1,
-dedicated assignment markers, direct and ordered Unicode provenance, detached
-sidecars and static rejection. Private current-depth checks execute resolution,
-authority narrowing, cache identity, all four result and three failure policies,
-typed path ordering, fresh child state and detachment. Cached plans still execute
-new child results and retry prior failures. One complete recursive test exercises
-breadth-first callbacks, copied lineage, fresh contexts and shared steps. The ten
-neutral chain rows exercise a separate case evaluator; later live payload,
-decrease, resource and carrier assertions await suffix reading. Staged, typed and
-recognition governance pass 123, 231 and 58 base mutations respectively.
+Staged-enrichment reading is complete through line 2108. Its full consumer passes
+143 top-level and 322 nested results. Beyond the preserved declaration/current-depth
+prefix, live tests cover decreasing derived lineage, cycle/depth/call/step rejection,
+entry/child cancellation and deadline checks, cumulative result and diagnostic
+limits, direct/ordered rebasing, transaction denial and expired contexts. Four
+carriers compare complete results with distinct retained snapshots, callbacks,
+tokens and clocks. The normalized route invokes a newly compiled descriptor
+handler; the plan route validates a minimal plan then executes loaded source.
+Generated packages share the process. Explicit result mutation compares the first
+and second outputs. Competing-target repair .73 and identity-lifetime repair .44
+remain open; this finite consumer does not establish their correction.
 
-The existing competing-target repair remains startup .73: individual invalid
-targets reject before callbacks, but a later marker displaced by an earlier
-stitch rejects after one callback. These passing tests preserve that known
-behavior; they do not prove complete destination reservation. The separate
-retired-marker identity-lifetime risk remains startup .44. Both retain their
-existing repair ownership and prerequisites.
+Together with both lifecycle consumers and three ActionIR trace consumers, the
+fresh proof passes 188 top-level and 688 nested results. Lifecycle twins preserve
+exact bootstrap/source/span metadata, four duplicate orders, earlier brace owners
+and malformed diagnostic fields; a mixed generated fixture executes. Self-hosting
+checks explicit/bare I plus seven reserved lifecycle markers. Trace tests compare
+exact lowering and selected decisions; cold child processes observe lazy loading
+before and after owner calls. They do not execute every lowered fragment as a
+user program. Neutral staged and lifecycle checks pass 123/129 and 14 mutations.
+Trace CLI reading stops at line 47 after its complete process helper.
 
 **Cursor-source and CLI harness repairs remain open (.2.13/.2.16).** Both cursor
 source denials accept empty/unrelated output; 24 controls demonstrate the missing
 positive observations while real capture and live seek work. The cursor CLI helper
 is byte-identical to the repeated-action helper. Twelve further controls confirm
 its signal-status/pipe defects and reap both timed-out owned children. These are
-six affected helpers: SIGTERM can become reported status zero, and sequential
-pipe reads can stall on large stderr. Existing exact CLI/admission checks remain.
+ten affected helpers after four trace consumers reproduce the same behavior in
+48 source-pinned controls, with all eight timeout children reaped. SIGTERM can
+become reported status zero, and sequential reads can stall on large stderr.
+Existing exact CLI/admission and cold-process lazy-loading checks remain.
 
 **Semantic copy coverage needs one nested observation (.2.18).** The original test
 mutates definition order and a call return shape, then checks only definition
@@ -608,7 +613,7 @@ The history files keep their 512-line / 65,536-byte caps, mandatory rollover and
 immutable archives. General card/part limits remain unchanged. Admission consumes
 one of the conservative 99 reserve units; the remaining 98 units are forecast
 after actual admission overhead. This capacity does not complete source reading
-or repair tests: reading now reaches 87/143, `.1.88` is next, and the test and recipe
+or repair tests: reading now reaches 88/143, `.1.89` is next, and the test and recipe
 repairs `.2.5`–`.2.18` remain open.
 
 The director has requested integration guides and runnable consumer examples for

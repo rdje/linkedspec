@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `CONFORMANCE-SOURCE-READING`
-- Status: `active` / exact decomposition; physical reading 87/143
+- Status: `active` / exact decomposition; physical reading 88/143
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.8`
 - Created: `2026-09-13`
 - Last updated: `2026-09-22`
@@ -1552,14 +1552,21 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
   Commit: `CONFORMANCE-SOURCE-READING.1.87 - read staged enrichment declaration and scheduling consumers`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.88`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `15b74e10751b4a54b32f5f4e44464d299715a059`.
+  Verification tier: `focused`
+  Focused checks: Exact source/window/range reading; six complete Perl consumers; staged/lifecycle neutral checks; four source-pinned process helpers and cleanup; source/task/history preservation, memory, Knowledge, histories, rendered book, public checks and normal doctrine hooks.
+  Canonical trigger: Ordinary bounded reading and extension of existing diagnostic repair ownership; no production, public-contract, dependency, infrastructure or capacity change or parent closeout.
   Goal: Read and understand conformance/test/Unicode group 88.
   Scope: `t/staged_ast_enrichment_perl_contract.t` lines 1505-2108; `t/standalone_lifecycle_block_perl_contract.t` lines 1-232; `t/standalone_lifecycle_block_self_hosted_contract.t` lines 1-74; `t/trace_actionir_compact_lowerers.t` lines 1-179; `t/trace_actionir_method_lowering.t` lines 1-212; `t/trace_actionir_pipeline.t` lines 1-152; `t/trace_cli.t` lines 1-47
   Baseline evidence: 1500 fragments / 57180 decoded bytes; ordered range SHA-256 `9f90a2d6c294841423ab95265cc01eea6f885a857ef1c92f3797d23bd8479f5f`.
   Dependencies: .1.87 committed with clean handoff.
   Acceptance: Read every scoped byte in complete bounded windows; retain source identity, exact comprehension, canonical Knowledge reconciliation, concrete finding ownership, focused proof and per-leaf continuity. Unread crossing constructs retain the next range owner.
-  Verification: `pending`
-  Commit: `pending`
+  Reading evidence: 13 complete windows / 1500 fragments / 57180 bytes; ordered window SHA-256 `ea8f3aa4f0e21715211a51c8b780c954485ebf408a59ae1363542c1964dfd79d`.
+  Comprehension: The staged suffix executes decreasing derived lineage, exact cycle/depth/call/step rejection, cancellation/deadline safe points, cumulative result and diagnostic limits, direct/ordered rebasing, transaction denial and expired contexts. Four carriers compare complete results with retained distinct snapshots, callbacks, tokens and clocks; one first-to-second result mutation checks isolation. The normalized route directly calls a newly compiled descriptor handler; the plan route validates a minimal plan then executes its loaded source. Generated packages share the process. Lifecycle tests compare exact bootstrap/provenance/ActionIR twins, four duplicate orders, earlier brace owners and structured malformed diagnostics; one generated mixed fixture executes. Self-hosting checks explicit/bare I and seven reserved lifecycle markers. Trace consumers compare exact lowering and selected events, with real cold-process before/after lazy-loading checks; they do not execute the lowered fragments as user programs.
+  Verification: Six complete consumers pass 188 top-level/688 nested TAP results: staged 143/322, lifecycle 7/274, self-hosted 25/0, compact trace 4/24, method trace 4/39 and pipeline trace 5/29. Staged governance passes 9 rollout legs/123 base and public 6/17/10/129 mutations. Lifecycle governance passes 9 placements/4 duplicates/6 owners/3 malformed twins/6 runtime rows/14 mutations. Forty-eight source-pinned trace-process controls reproduce status/pipe defects and reap all eight timed-out owned children. Replay TRACE_PROCESS_CAPTURE in docs/knowledge/phase0-subprocess-capture-status-and-pipe-gap.md. Existing .2.16.1/.2.16.2 now own ten process helpers, retaining their callers and prerequisites. Startup .44/.73 and all prior repairs remain open. No unread CLI test execution, historical false-green run, fresh-process generated proof, production repair, canonical run, dependency build or push is claimed.
+  Candidate proof: Exact 160-input/143-group/302-range source audit and 13-window reconstruction PASS; independent cumulative proof confirms 88 groups/108404 fragments/4730719 baseline bytes/126 complete files. Six consumers pass 188 top-level/688 nested results; neutral staged/lifecycle checks and the durable 48-control trace process recipe pass, with all eight timeout children reaped. Preserve 2857 other files/50729171 bytes, 175 conformance and 348 startup nodes, prior recipe blocks, book headings, immutable histories and parent gitlink. Knowledge 1162 facts/9323 keys, memory60, histories316/55312 and186/34581 lines/bytes, rendered book and direct public mutation69/50 plus selector68/11 pass. Normal doctrine hooks govern focused landing; no canonical run or push.
+  Commit: `CONFORMANCE-SOURCE-READING.1.88 - read staged lifecycle and trace consumers`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.89`
   Status: `pending`
@@ -2368,28 +2375,31 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
   Verification: .1.82 diagnosis: 48 source-extracted controls pass: four helpers times six child outcomes times original/guard variants; all eight timed-out owned children are reaped. Evidence/replay: docs/knowledge/phase0-subprocess-capture-status-and-pipe-gap.md. No tracked implementation repair.
   Reading .1.84 extension: Include run_primary_command in t/repeated_action_result_perl_contract.t. Twelve unchanged-body/guard controls reproduce SIGTERM-as-zero and stderr-first/interleaved blocking, with both timeout children reaped. Preserve its exact CLI JSON/status/stderr checks; remaining startup prerequisites still apply. Replay REPEATED_PROCESS_CAPTURE in docs/knowledge/phase0-subprocess-capture-status-and-pipe-gap.md.
   Reading .1.85 extension: Also include run_primary_command in t/rule_local_cursor_perl_contract.t; its body is byte-identical to the repeated-action helper (SHA-256 12cf5ab78452ca09866b313e17be72e0c50b7fa7ca9e919a3261d2183cee51c9). Twelve fresh controls reproduce the same status/pipe defects with both timeout children reaped. Replay CURSOR_PROCESS_CAPTURE in the existing fact card; retain all 14 admission roles and prerequisite gates.
+  Reading .1.88 extension: Include _run_perl_snippet in t/trace_actionir_compact_lowerers.t, t/trace_actionir_method_lowering.t and t/trace_actionir_pipeline.t, plus the fully read _run_cmd helper in t/trace_cli.t. Forty-eight source-pinned original/guard controls confirm SIGTERM-as-zero and stderr-first/interleaved stalls; all eight timeout children are reaped. The three snippet bodies are byte-identical (fced4162bfd99d0d567ae7b83d8acf3a3a0e313c1b4e355e33c838ae3afedccd); CLI helper hash is 3ff15df3fd15e2cb6f101a67a73ff79a70dda22877f36a8b23e40929f4be8454. Preserve the real cold-process lazy-loading assertions. The unread CLI test body stays .1.89-owned; no historical false-green run or repair is claimed. Replay TRACE_PROCESS_CAPTURE in docs/knowledge/phase0-subprocess-capture-status-and-pipe-gap.md.
   Commit: `pending`
 
 - ID: `CONFORMANCE-SOURCE-READING.2.16.1`
   Status: `pending`
   Goal: Preserve signal termination and wait failure in Perl conformance subprocess status.
-  Scope: The six subprocess helpers owned by .2.16; retain public helper tuple compatibility or update all direct consumers coherently.
+  Scope: The ten subprocess helpers owned by .2.16; retain public helper tuple compatibility or update all direct consumers coherently.
   Dependencies: Parent .2.16 prerequisites and confirmed status controls.
   Acceptance: Success, exit 7 and owned SIGTERM controls distinguish their outcomes; valid wait and normal termination are required for zero status. Preserve output and direct consumer diagnostics, including the admitted staged-AST wrapper.
   Verification: .1.82 diagnosis: All four original helpers map owned SIGTERM to zero; in-memory guards report 143 while success/exit7 and small output remain correct. Evidence/replay: docs/knowledge/phase0-subprocess-capture-status-and-pipe-gap.md. No tracked implementation repair.
   Reading .1.84 extension: Include run_primary_command in t/repeated_action_result_perl_contract.t. Twelve unchanged-body/guard controls reproduce SIGTERM-as-zero and stderr-first/interleaved blocking, with both timeout children reaped. Preserve its exact CLI JSON/status/stderr checks; remaining startup prerequisites still apply. Replay REPEATED_PROCESS_CAPTURE in docs/knowledge/phase0-subprocess-capture-status-and-pipe-gap.md.
   Reading .1.85 extension: Also include run_primary_command in t/rule_local_cursor_perl_contract.t; its body is byte-identical to the repeated-action helper (SHA-256 12cf5ab78452ca09866b313e17be72e0c50b7fa7ca9e919a3261d2183cee51c9). Twelve fresh controls reproduce the same status/pipe defects with both timeout children reaped. Replay CURSOR_PROCESS_CAPTURE in the existing fact card; retain all 14 admission roles and prerequisite gates.
+  Reading .1.88 extension: Include _run_perl_snippet in t/trace_actionir_compact_lowerers.t, t/trace_actionir_method_lowering.t and t/trace_actionir_pipeline.t, plus the fully read _run_cmd helper in t/trace_cli.t. Forty-eight source-pinned original/guard controls confirm SIGTERM-as-zero and stderr-first/interleaved stalls; all eight timeout children are reaped. The three snippet bodies are byte-identical (fced4162bfd99d0d567ae7b83d8acf3a3a0e313c1b4e355e33c838ae3afedccd); CLI helper hash is 3ff15df3fd15e2cb6f101a67a73ff79a70dda22877f36a8b23e40929f4be8454. Preserve the real cold-process lazy-loading assertions. The unread CLI test body stays .1.89-owned; no historical false-green run or repair is claimed. Replay TRACE_PROCESS_CAPTURE in docs/knowledge/phase0-subprocess-capture-status-and-pipe-gap.md.
   Commit: `pending`
 
 - ID: `CONFORMANCE-SOURCE-READING.2.16.2`
   Status: `pending`
   Goal: Drain Perl conformance child output concurrently and reap every bounded test child.
-  Scope: The same six .2.16 helpers and their direct consumers; check shared TestHelpers separately before choosing reuse.
+  Scope: The same ten .2.16 helpers and their direct consumers; check shared TestHelpers separately before choosing reuse.
   Dependencies: Parent .2.16 prerequisites and .2.16.1 clean handoff.
   Acceptance: Large stderr before stdout, large stdout before stderr and interleaved output complete with exact captures; timeout/failure paths terminate and reap owned children. Preserve ordinary parser-marker and test-plan controls, run focused integration and reconcile both children before parent closeout.
   Verification: .1.82 diagnosis: All four original helpers time out on stderr-first and interleaved large writes; multiplex controls complete with expected byte counts. All eight timeout children are terminated and reaped; exact large-output regression remains repair acceptance. Evidence/replay: docs/knowledge/phase0-subprocess-capture-status-and-pipe-gap.md. No tracked implementation repair.
   Reading .1.84 extension: Include run_primary_command in t/repeated_action_result_perl_contract.t. Twelve unchanged-body/guard controls reproduce SIGTERM-as-zero and stderr-first/interleaved blocking, with both timeout children reaped. Preserve its exact CLI JSON/status/stderr checks; remaining startup prerequisites still apply. Replay REPEATED_PROCESS_CAPTURE in docs/knowledge/phase0-subprocess-capture-status-and-pipe-gap.md.
   Reading .1.85 extension: Also include run_primary_command in t/rule_local_cursor_perl_contract.t; its body is byte-identical to the repeated-action helper (SHA-256 12cf5ab78452ca09866b313e17be72e0c50b7fa7ca9e919a3261d2183cee51c9). Twelve fresh controls reproduce the same status/pipe defects with both timeout children reaped. Replay CURSOR_PROCESS_CAPTURE in the existing fact card; retain all 14 admission roles and prerequisite gates.
+  Reading .1.88 extension: Include _run_perl_snippet in t/trace_actionir_compact_lowerers.t, t/trace_actionir_method_lowering.t and t/trace_actionir_pipeline.t, plus the fully read _run_cmd helper in t/trace_cli.t. Forty-eight source-pinned original/guard controls confirm SIGTERM-as-zero and stderr-first/interleaved stalls; all eight timeout children are reaped. The three snippet bodies are byte-identical (fced4162bfd99d0d567ae7b83d8acf3a3a0e313c1b4e355e33c838ae3afedccd); CLI helper hash is 3ff15df3fd15e2cb6f101a67a73ff79a70dda22877f36a8b23e40929f4be8454. Preserve the real cold-process lazy-loading assertions. The unread CLI test body stays .1.89-owned; no historical false-green run or repair is claimed. Replay TRACE_PROCESS_CAPTURE in docs/knowledge/phase0-subprocess-capture-status-and-pipe-gap.md.
   Commit: `pending`
 
 - ID: `CONFORMANCE-SOURCE-READING.2.17`
@@ -2841,7 +2851,7 @@ additional reading credit from integration delivery.
 
 | Rank | Leaf | Status | Next action |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.88` | `pending` | Read .1.88 (1,500 fragments / 57,180 baseline bytes): staged enrichment 1505–2108, standalone lifecycle consumers, trace lowerer/planning consumers and trace CLI through 47. All repair/source/book/policy prerequisites remain. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.89` | `pending` | Read .1.89 (1,500 fragments / 53,547 baseline bytes): complete trace CLI, read trace bridge/generated dispatch/RuleIR consumers, then typed-source contract and values through 226. All repair/source/book/policy prerequisites remain. |
 
 ## Decisions
 
@@ -2855,6 +2865,8 @@ additional reading credit from integration delivery.
 - None at decomposition. Ordinary source repairs retain startup prerequisites; later collection pressure must be measured rather than assumed away.
 
 ## Verification Log
+
+- `2026-09-22` .1.88: 13 complete windows cover 1,500 fragments / 57,180 baseline bytes; ordered window SHA-256 ea8f3aa4f0e21715211a51c8b780c954485ebf408a59ae1363542c1964dfd79d. Cumulative reading is 88/143 groups, 108,404 fragments / 4,730,719 baseline bytes and 126 complete files. Staged enrichment, both standalone lifecycle consumers and three ActionIR trace consumers are complete; trace CLI is partial through line 47, including its complete process helper. Six complete consumers pass 188 top-level/688 nested TAP results: staged 143/322, lifecycle 7/274, self-hosted 25/0, compact trace 4/24, method trace 4/39 and pipeline trace 5/29. Staged governance passes 9 rollout legs/123 base and public 6/17/10/129 mutations. Lifecycle governance passes 9 placements/4 duplicates/6 owners/3 malformed twins/6 runtime rows/14 mutations. Forty-eight source-pinned trace-process controls reproduce status/pipe defects and reap all eight timed-out owned children. Existing .2.16.1/.2.16.2 now own ten process helpers, retaining their callers and prerequisites. Startup .44/.73 and all prior repairs remain open. No unread CLI test execution, historical false-green run, fresh-process generated proof, production repair, canonical run, dependency build or push is claimed.
 
 - `2026-09-22` .1.87: Nine complete windows cover 1,500 fragments / 54,923 baseline bytes; ordered window SHA-256 23a24a42efdacf352b641c0c3001b01cd77ef6a99d7c91b37546e8afd9fbfced. Cumulative reading is 87/143 groups, 106,904 fragments / 4,673,539 baseline bytes and 120 complete files. Staged enrichment is read through line 1504, inside payload identity; complete executable prefix ends at 1461. The suffix and carrier/admission reading remain .1.88-owned. The exact complete prefix through 1461 passes 135 top-level/227 nested TAP results. Staged governance passes 9 rollout legs/123 base mutations and public 6/17/10/129; typed source passes 14/0/231; recognition passes 138 ActionIR rows/250 calls/58 mutations and 9/9 rollout. Existing startup .44 identity-lifetime and .73 competing-target repairs remain open, along with all prior defects and required source/book/policy prerequisites. No suffix execution, new runtime defect, repair closure, production change, canonical run, dependency build or push is claimed.
 
@@ -3002,6 +3014,8 @@ additional reading credit from integration delivery.
 
 ## Commit Log
 
+- `2026-09-22` .1.88: `CONFORMANCE-SOURCE-READING.1.88 - read staged lifecycle and trace consumers`; activation 15b74e107; .1.89 follows clean handoff and empty brief.
+
 - `2026-09-22` .1.87: `CONFORMANCE-SOURCE-READING.1.87 - read staged enrichment declaration and scheduling consumers`; activation d95047136; .1.88 follows clean handoff and empty brief.
 
 - `2026-09-22` .1.86: `CONFORMANCE-SOURCE-READING.1.86 - read semantic index and sparse slot consumers`; activation 7e6a8fbfc; .1.87 follows clean handoff and empty brief.
@@ -3147,6 +3161,8 @@ additional reading credit from integration delivery.
 - `2026-09-13`: Decomposition lands under `SESSION-STARTUP-READING.3.8.0`; Git owns the resulting commit identity.
 
 ## Changelog
+
+- `2026-09-22` .1.88: Complete staged/lifecycle/trace consumers and extend existing process repairs to four source-pinned trace helpers without closing runtime repairs.
 
 - `2026-09-22` .1.87: Read staged declaration/current-depth/initial-recursive proof with an exact executable boundary; preserve known target and lifetime repair ownership.
 

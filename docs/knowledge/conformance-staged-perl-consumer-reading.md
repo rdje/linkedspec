@@ -1,27 +1,46 @@
 ---
 id: conformance-staged-perl-consumer-reading
-title: Perl staged-enrichment reading separates the complete executable prefix from later carrier proof
+title: Perl staged-enrichment consumer evidence preserves exact authority and carrier boundaries
 answers:
   - what staged enrichment declaration and scheduling consumers are read in group 87
   - how do I replay only the completely read staged enrichment test prefix
   - which staged target and identity repairs remain open after prefix reading
 date: 2026-09-22
-status: staged consumer read through 1504; execution through 1461; suffix and repairs remain open
+status: complete staged consumer reading through 2108; fresh 143/322 proof; known repairs remain open
 tags: [conformance, perl, staged-parsing, reading, tests]
 evidence: "CONFORMANCE-SOURCE-READING.1.87 at d95047136 reads nine windows/1500 fragments/54923 bytes. Exact prefix 1–1461 passes 135 top-level/227 nested results; later payload and carrier proof remains .1.88-owned."
-reverify: "Run STAGED_PREFIX_READING below through the project-data wrapper; run tools/check_staged_ast_enrichment_contract.py, tools/check_typed_source_location_contract.py and tools/check_recognition_transaction_contract.py through tools/run_python_project_data.sh."
+evidence_group88: "CONFORMANCE-SOURCE-READING.1.88 completes lines1505–2108; the full consumer passes143 top-level/322 nested results, with unchanged staged123/public129 governance. Generated plan validation and same-process loading remain distinct from executable reconstruction or fresh-process proof."
+reverify: "Run t/staged_ast_enrichment_perl_contract.t with perl -Iperl through tools/project_data_run.sh for current full proof. STAGED_PREFIX_READING below preserves the earlier prefix proof; run tools/check_staged_ast_enrichment_contract.py, tools/check_typed_source_location_contract.py and tools/check_recognition_transaction_contract.py through tools/run_python_project_data.sh."
 ---
 
-The consumer pins neutral inventories separately from execution. Function-body v1 retains its adapter, phases, errors and body_ast target. Dedicated assignment markers carry direct/ordered Unicode-scalar provenance and detached sidecars; malformed/dynamic declarations and recognition reachability reject statically. Resolution, narrowed authority, normalized job/cache identity, frozen callbacks, four stitch policies, three failure policies and detached results execute through private host APIs. Typed index 2 precedes 10; plan-cache hits still execute fresh results and retry failed children. Individual invalid targets reject before callbacks; a displaced later marker rejects after one callback, matching open startup .73. One-depth enrichment leaves new markers inert. Live recursive proof covers breadth-first order, detached lineage, four fresh contexts and shared steps; later payload/decrease/resource/carrier assertions remain unread.
+The complete staged consumer is read through line 2108 under .1.88. Fresh full
+execution passes 143 top-level and 322 nested TAP results; neutral governance
+passes 123 base/129 public mutations. Earlier .1.87 prefix proof below stays exact.
 
-The exact complete prefix through 1461 passes 135 top-level/227 nested TAP results. Staged governance passes 9 rollout legs/123 base mutations and public 6/17/10/129; typed source passes 14/0/231; recognition passes 138 ActionIR rows/250 calls/58 mutations and 9/9 rollout.
+The suffix executes contained decreasing derived lineage and rejects exact cycle,
+non-decrease, depth/call/step overflow before the second callback. Cancellation
+and deadline controls cover entry and child safe points. Cumulative result nodes,
+bounded diagnostic sentinels, narrowed steps, direct/ordered rebasing, transaction
+denial and expired callback contexts each retain explicit observations.
 
-Existing startup .44 identity-lifetime and .73 competing-target repairs remain open, along with all prior defects and required source/book/policy prerequisites. No suffix execution, new runtime defect, repair closure, production change, canonical run, dependency build or push is claimed.
+Four carriers compare full AST, sidecars, diagnostics, cache and resource results.
+Retained inputs prove four distinct snapshots, sixteen compiled callbacks, four
+tokens, four cancellation callbacks and four clocks. Cache counters start at one
+miss, zero hits per route. The explicit output-mutation observation changes the
+first result and checks the second, rather than testing every output pair.
+The normalized route calls a newly compiled descriptor handler inside the runtime
+wrapper. The plan route validates its minimal label/family plan and then executes
+loaded generated source. Both generated packages share the current process.
 
-The competing-target mechanism remains [[staged-target-preparation-gaps]];
-identity lifetime remains [[perl-staged-marker-retired-identity-risk]].
-The ten neutral chain rows exercise their case evaluator, while the completed
-recursive subtest executes actual breadth-first callbacks. Their scopes differ.
+Function-body v1, dedicated marker provenance, all stitch/failure policies,
+frozen resolution, typed queue order, cache retries and first breadth-first proof
+remain the earlier prefix's valid observations. The ten neutral chain rows use a
+case evaluator; the later recursive tests execute actual callbacks.
+Competing destinations remain [[staged-target-preparation-gaps]] / startup .73;
+identity lifetime remains [[perl-staged-marker-retired-identity-risk]] / startup .44.
+Passing finite fixtures close neither repair and grant no new behavior or admission.
+
+## Historical .1.87 complete-prefix replay
 
 The source-pinned prefix replay relocates FindBin for scratch execution and appends
 only done_testing. It grants no reading or execution credit beyond line 1461.
