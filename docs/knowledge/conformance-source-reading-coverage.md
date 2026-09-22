@@ -11,7 +11,7 @@ answers:
   - "what evidence capacity blocks remaining conformance reading"
   - "what exact fourteen limits are proposed for remaining conformance reading"
 date: 2026-09-22
-status: exact baseline decomposition preserved; physical reading 88/143, 126 files complete and 55 groups remain; one approved current-source delta
+status: exact baseline decomposition preserved; physical reading 89/143, 133 files complete and 54 groups remain; one approved current-source delta
 tags: [reading, conformance, tests, unicode, continuity, CONFORMANCE-SOURCE-READING]
 evidence: "Startup .3.8.0 independently accounts for160 baseline-identical files,5,422,313 stored bytes and8,257,059 decoded bytes in167,606 line fragments/167,604 LF delimiters. Four gzip inputs contribute54,500 decoded lines. All143 groups/302 ranges are contiguous, disjoint and bounded at1500 fragments/65536 bytes. No source, registry or runtime behavior changes; no physical-reading credit from inventory."
 reverify: "Run CONFORMANCE_SOURCE_READING_COVERAGE below through the project-data wrapper; it derives source identity from Git and range ownership from the task-tree rather than a parallel manifest. Use scripts/check_task_tree_metadata.sh for actual task collection limits."
@@ -428,14 +428,14 @@ properties, context rules, fixtures or decoded upstream inputs. All repairs rema
 
 ## Conformance reading checkpoint
 
-`CONFORMANCE-SOURCE-READING.1.88` reads 13 windows, 1,500 fragments and 57,180 baseline bytes.
-Cumulative reading is 88/143 groups, 108,404 fragments / 4,730,719 baseline bytes and 126 complete files.
-Staged enrichment, both standalone lifecycle consumers and three ActionIR trace consumers are complete; trace CLI is partial through line 47, including its complete process helper.
+`CONFORMANCE-SOURCE-READING.1.89` reads13 windows,1,500 fragments and53,547 baseline bytes.
+Cumulative reading is 89/143 groups, 109,904 fragments / 4,784,266 baseline bytes and 133 complete files.
+Seven trace/typed-projection consumers are complete; typed immutable values are read through 226, inside reversed-span diagnostic verification. The remaining value tests stay .1.90-owned.
 [[conformance-perl-consumer-reading]] records exact observation boundaries.
-Six complete consumers pass 188 top-level/688 nested TAP results: staged 143/322, lifecycle 7/274, self-hosted 25/0, compact trace 4/24, method trace 4/39 and pipeline trace 5/29. Staged governance passes 9 rollout legs/123 base and public 6/17/10/129 mutations. Lifecycle governance passes 9 placements/4 duplicates/6 owners/3 malformed twins/6 runtime rows/14 mutations. Forty-eight source-pinned trace-process controls reproduce status/pipe defects and reap all eight timed-out owned children.
-Existing .2.16.1/.2.16.2 now own ten process helpers, retaining their callers and prerequisites. Startup .44/.73 and all prior repairs remain open. No unread CLI test execution, historical false-green run, fresh-process generated proof, production repair, canonical run, dependency build or push is claimed.
-The pinned 113-byte delta stays separate; these ranges total 4,730,832 current bytes.
-Next .1.89: Read .1.89 (1,500 fragments / 53,547 baseline bytes): complete trace CLI, read trace bridge/generated dispatch/RuleIR consumers, then typed-source contract and values through 226. All repair/source/book/policy prerequisites remain.
+Seven complete consumers pass 27 top-level/402 nested TAP results: CLI3/17, EmitContext4/29, branch3/16, nonrep4/35, rep4/54, RuleIR5/39 and typed projections4/212. Typed neutral governance passes14 complete/0 pending/231 mutations. Twelve EmitContext process controls reproduce both known defects and reap both timeout children. Four source-observation controls prove original6/6 assertions miss Top-only instrumentation removal; the bounded twin passes pristine and fails only assertion4 after removal.
+Existing .2.16 repairs now own eleven process helpers. New .2.19 owns the cross-handler source assertion; production instrumentation passes the stronger control. Corrected stale EmitContext fallback wording to current rejection. Startup .24 and all prior repair/source/book/policy prerequisites remain. No production change, full immutable-value execution, fresh-process generated proof, canonical run, dependency build or push is claimed.
+The pinned113-byte delta stays separate; these ranges total4,784,379 current bytes.
+Next .1.90: Read .1.90 (1,500 fragments / 51,721 baseline bytes): finish typed values, read Unicode case, uniform binding, variadic and write-vivification consumers, then corpus guides/fixtures through tablegrep input.spec. All repair/source/book/policy prerequisites remain.
 
 Lowercase table entries and Final Sigma context remain separate. Exact scalar
 sequences, sparse ranges, fullwidth forms and ligature identities are preserved;

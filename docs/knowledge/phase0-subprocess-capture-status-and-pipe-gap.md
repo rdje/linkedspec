@@ -9,6 +9,7 @@ answers:
   - does the repeated-action CLI test helper lose signals or block on stderr
   - does the rule-local cursor CLI consumer share the subprocess status and pipe defects
   - do Perl trace test subprocess helpers lose signals and block on stderr
+  - does the EmitContext trace test helper share the signal and pipe defects
 date: 2026-09-22
 status: confirmed harness defects; .2.16.1 and .2.16.2 repairs retain prerequisites
 tags: [perl, phase0, subprocess, signals, pipes, conformance]
@@ -349,4 +350,26 @@ proof=dict(controls=48,timeout_children_reaped=8,source_helpers=4,results=all_re
 (work/'proof.json').write_text(json.dumps(proof,indent=2)+'\n')
 print('PASS 48 trace-helper outcome controls; all 8 timed-out owned children reaped.')
 TRACE_PROCESS_CAPTURE
+```
+
+## EmitContext consumer extension (.1.89)
+
+The `_run_perl_snippet` body in `t/trace_emit_context_bridge.t` is byte-identical
+to the three earlier ActionIR trace helpers. Twelve original/guard controls confirm
+the same signal-status and pipe-order defects, with both timeout children reaped.
+This eleventh helper belongs to the existing `.2.16.1` and `.2.16.2` repairs.
+Its actual cold-process before/after lazy-loading assertions remain required.
+
+```bash
+bash tools/project_data_run.sh env PERL5LIB= python3 - <<'TRACE_EMIT_PROCESS_CAPTURE'
+from pathlib import Path
+import re
+card = Path('docs/knowledge/phase0-subprocess-capture-status-and-pipe-gap.md').read_text()
+recipe = card.split("<<'TRACE_PROCESS_CAPTURE'\n", 1)[1].split('\nTRACE_PROCESS_CAPTURE', 1)[0]
+recipe = re.sub(r'sources = \[.*?\n\]', "sources = [\n ('t/trace_emit_context_bridge.t', '_run_perl_snippet', 'fced4162bfd99d0d567ae7b83d8acf3a3a0e313c1b4e355e33c838ae3afedccd'),\n]", recipe, count=1, flags=re.S)
+recipe = recipe.replace('scratch/trace-process-capture-reverify', 'scratch/emit-trace-process-capture-reverify')
+recipe = recipe.replace('controls=48,timeout_children_reaped=8,source_helpers=4', 'controls=12,timeout_children_reaped=2,source_helpers=1')
+recipe = recipe.replace('PASS 48 trace-helper outcome controls; all 8', 'PASS 12 EmitContext-helper outcome controls; all 2')
+exec(compile(recipe, '<TRACE_EMIT_PROCESS_CAPTURE>', 'exec'), {'__name__': '__main__'})
+TRACE_EMIT_PROCESS_CAPTURE
 ```

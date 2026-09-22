@@ -498,8 +498,8 @@ the director's focused-verification grant used for this correction and the separ
 supporting-reading closeout. Reading completion establishes audited comprehension;
 it does not close the six grammar/literal repair roots or establish runtime signoff.
 Conformance, test and Unicode reading has exact ownership for all 160 inputs in
-143 bounded groups covering 8,257,059 baseline decoded bytes. Reading now covers 88/143 groups, 108,404 fragments / 4,730,719 baseline bytes and 126 complete files.
-Staged enrichment, both standalone lifecycle consumers and three ActionIR trace consumers are complete; trace CLI is partial through line 47, including its complete process helper.
+143 bounded groups covering 8,257,059 baseline decoded bytes. Reading now covers 89/143 groups, 109,904 fragments / 4,784,266 baseline bytes and 133 complete files.
+Seven trace/typed-projection consumers are complete; typed immutable values are read through 226, inside reversed-span diagnostic verification. The remaining value tests stay .1.90-owned.
 
 The progressive carrier checks exact child payloads in live, reconstructed and
 generated execution, along with typed failures and logical metadata. Generated
@@ -568,15 +568,35 @@ checks explicit/bare I plus seven reserved lifecycle markers. Trace tests compar
 exact lowering and selected decisions; cold child processes observe lazy loading
 before and after owner calls. They do not execute every lowered fragment as a
 user program. Neutral staged and lifecycle checks pass 123/129 and 14 mutations.
-Trace CLI reading stops at line 47 after its complete process helper.
+
+Seven trace and typed-projection consumers pass 27 top-level and 402 nested results. Trace
+CLI tests preserve exact JSON and failure channels, routed events and isolation
+from unselected ambient tracing. EmitContext requires removed-selector rejection
+and dependency injection. Generated dispatch executes selected non-repetition and
+repetition outcomes; four repetition templates have separate source checks. The
+branch helper preserves its result when details fail, while incoming exception
+state still needs startup .24 repair. RuleIR checks metadata and compile events.
+
+Typed projection tests pin 92 helper rows and seven aliases, detached catalog
+copies, exact live and same-process generated results, absent-match defaults and
+a present zero-width control. Their neutral checker passes 14 complete rows and
+231 mutations. Immutable-value reading reaches line 226, inside diagnostics; the
+remaining value consumer is still unread and is not executed for this checkpoint.
+
+**Generated wrapper observation needs repair (.2.19).** One source assertion can
+cross from Top into a later Plus handler. Removing only Top's four trace helper
+references still passes all six original assertions. Bounding assertion 4 to Top
+passes pristine production and rejects that removal. The repair owns the test's
+missing observation; current production instrumentation passes the stronger check.
 
 **Cursor-source and CLI harness repairs remain open (.2.13/.2.16).** Both cursor
 source denials accept empty/unrelated output; 24 controls demonstrate the missing
 positive observations while real capture and live seek work. The cursor CLI helper
 is byte-identical to the repeated-action helper. Twelve further controls confirm
 its signal-status/pipe defects and reap both timed-out owned children. These are
-ten affected helpers after four trace consumers reproduce the same behavior in
-48 source-pinned controls, with all eight timeout children reaped. SIGTERM can
+eleven affected helpers after the EmitContext consumer reproduces the same behavior
+in 12 further source-pinned controls, with both timeout children reaped. The earlier
+four trace helpers retain their 48-control/eight-child proof. SIGTERM can
 become reported status zero, and sequential reads can stall on large stderr.
 Existing exact CLI/admission and cold-process lazy-loading checks remain.
 
@@ -613,8 +633,8 @@ The history files keep their 512-line / 65,536-byte caps, mandatory rollover and
 immutable archives. General card/part limits remain unchanged. Admission consumes
 one of the conservative 99 reserve units; the remaining 98 units are forecast
 after actual admission overhead. This capacity does not complete source reading
-or repair tests: reading now reaches 88/143, `.1.89` is next, and the test and recipe
-repairs `.2.5`–`.2.18` remain open.
+or repair tests: reading now reaches 89/143, `.1.90` is next, and the test and recipe
+repairs `.2.5`–`.2.19` remain open.
 
 The director has requested integration guides and runnable consumer examples for
 Perl, Rust, Dart, Julia and Lua, covering recursive checkout, dependency preparation
