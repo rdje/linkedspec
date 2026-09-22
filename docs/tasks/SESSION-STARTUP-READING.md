@@ -3460,7 +3460,7 @@ remain. Reading completion and runtime signoff remain distinct.
     compilation errors; retain valid block behavior and typed diagnostics. Cover all rule-code call sites
     and native/reconstructed/generated routes, census shipped malformed examples, and preserve function-body rejection. Do not broaden accepted syntax or suppress errors to obtain passing tests.
   September22 recurrence: The .83.1 prototype used nonportable infix comparison in an LX block. At the .83.1 activation, Rust exited zero after warning that the block could not parse; compiler.rs:1075-1088 returned Ok(None), and compile_rule:1303-1310 dropped it. The documented num_ne(...) call fixes the prototype spelling, but cannot close compiler rejection. This repair precedes strict-grammar delivery; exact fresh output is .linkedspec-data/scratch/sexpr-contract/compiler-drop-reproduction.json.
-  Verification: .45.1 repairs shared-boundary propagation with full Rust component proof; .45.2/.45.3 remain. Historical eleven-control diagnosis established five malformed rule blocks accepted with
+  Verification: .45.1 repairs shared-boundary propagation with full Rust component proof; .45.2 verifies public source and artifact boundaries; .45.3 remains. Historical eleven-control diagnosis established five malformed rule blocks accepted with
     warning, compile:ok/invoke:ok, and null or fallback 42. Three valid controls and three rejecting
     controls passed their diagnostic assertions. The pre-repair parse_rule_code_block returned Ok(None) outside
     five governed error prefixes, and compile_rule dropped that absent block. Nested-write and mutation
@@ -3493,12 +3493,18 @@ remain. Reading completion and runtime signoff remain distinct.
   Workflow evidence: The first normal commit attempt passed eight doctrines and rejected checklist wording: the angle-bracketed Rust generic looked like an unfilled placeholder, and a reference to other unfinished tasks used the forbidden completion-marker word. Plain-language checklist wording preserves the evidence; no gate or runtime code is changed to satisfy the check.
 
 - ID: `SESSION-STARTUP-READING.45.2`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `10893fb714242c13636b4f453635aa459896825a`.
+  Verification tier: `focused`
+  Focused checks: Fresh source/AST reconstruction, ordinary/traced compilation, public loader and artifact-boundary regressions with valid execution controls; Rust formatting and the changed test target, plus relevant book/Knowledge/memory/history/public/diff checks and normal doctrines. Reuse .45.1's complete Rust compatibility proof only for unchanged production code.
+  Canonical trigger: This leaf adds bounded route verification for the compiler correction at 10893fb71 without changing syntax, schemas or production execution. The designated canonical repair closeout remains .45.3; broaden proof if a newly reproduced production defect requires a repair.
   Goal: Verify malformed-code rejection across supported Rust compilation and artifact creation routes.
   Dependencies: .45.1 committed with clean handoff.
   Acceptance: Identify actual public native, serialized/reconstructed and generated/emitted entry routes and prove the rejection reaches each supported boundary before an artifact or accepted result is produced. Retain valid round trips and independently verify diagnostics; do not infer execution from emitted text or claim unrelated parser-panic repair .46.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Four focused route tests PASS: eight malformed sources yield 32 ordinary/traced source/reconstructed-AST rejections, 16 path/name-loader rejections and eight failed semantic snapshots with no compiled authority or plan. Valid path/name loads, reconstructed compiled state and generated-plan execution return 42; a freshly compiled emitted module verifies direct/traced 42 and compatibility [42]. Production code is unchanged from 10893fb71; its complete Rust compatibility proof remains applicable. Rust formatting, book, Knowledge/memory/history/public/diff checks and normal doctrines govern landing.
+  Commit: `SESSION-STARTUP-READING.45.2 - verify Rust rule-code rejection routes`
+
+  Artifact boundary: Emitters consume CompiledSpec, not raw source. Rebuild older warning/drop artifacts from the original specification; no schema change or recovery of discarded code is claimed. Exact scope and rerun command: docs/knowledge/rust-rule-code-rejection-routes.md.
 
 - ID: `SESSION-STARTUP-READING.45.3`
   Status: `pending`
@@ -4794,7 +4800,7 @@ audit range, not the default repair frontier.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.45.2` | `pending` | Verify native and artifact error propagation after the .45.1 compiler repair; then canonical .45.3 and ADR0124 delivery for ARCHOGEN/LS-002–003 and SEMULITH/LS-002. SEMULITH/LS-001 is repaired; SEMULITH/LS-003 remedies are verified. |
+| 1 | `SESSION-STARTUP-READING.45.3` | `pending` | Canonical closeout after the .45.1 compiler repair and .45.2 carrier proof; then ADR0124 delivery for ARCHOGEN/LS-002–003 and SEMULITH/LS-002. SEMULITH/LS-001 is repaired; SEMULITH/LS-003 remedies are verified. |
 
 ## Reading Ledger
 
@@ -7576,6 +7582,8 @@ All 53 owned scopes are read: HLink delimiter/raw text, Liberty scalar/complex a
 
 ## Verification Log
 
+- 2026-09-22 .45.2: Four focused route tests PASS: eight malformed sources yield 32 ordinary/traced source/reconstructed-AST rejections, 16 path/name-loader rejections and eight failed semantic snapshots with no compiled authority or plan. Valid path/name loads, reconstructed compiled state and generated-plan execution return 42; a freshly compiled emitted module verifies direct/traced 42 and compatibility [42]. Production code is unchanged from 10893fb71; its complete Rust compatibility proof remains applicable. Rust formatting, book, Knowledge/memory/history/public/diff checks and normal doctrines govern landing. Raw log: .linkedspec-data/scratch/compiler-rejection45/routes-green.log.
+
 - 2026-09-22 .45.1: PASS: 12 native invalid cases change from warning/compile:ok/invoke:ok to exit 1/compile:error with no input or invocation phase; three valid controls retain 42 and empty stderr. Four persistent core rejection groups are RED before repair; all five groups GREEN afterward (15 malformed contexts and 11 retained valid blocks). Complete Rust component gate PASS: 228 core and 574 runtime tests, including all 197 end-to-end tests, 21 shipped grammars and 105 oracle cases; primary CLI conformance is 66/66 in each default/POSIX environment, and managed-storage checks pass. The committed quoted-LF manifest passes all three cases on the rebuilt primary binary. Callable contract, book, Knowledge/memory/history/public/diff and registered doctrine checks govern focused landing. Separate carrier proof/canonical closeout and parser-cause repairs remain open.
 
 - 2026-09-22 .83.1: ADR0124/37 independent cases and 136 Perl assertions establish the planned contract; four Rust prototype boundaries pass after canonical comparison spelling. Existing .45 warning/drop reproduces with exit 0/null and receives three bounded repair children before delivery. No production grammar or cross-backend admission claimed.
@@ -7756,6 +7764,8 @@ CLI66x2 and Phase0 1032/1032; 1163 seconds is Phase0 only, with 25 optional gate
 
 ## Commit Log
 
+- 2026-09-22 .45.2: `SESSION-STARTUP-READING.45.2 - verify Rust rule-code rejection routes`; activation 10893fb71; canonical .45.3 follows clean handoff.
+
 - 2026-09-22 .45.1: `SESSION-STARTUP-READING.45.1 - reject malformed Rust rule code`; activation 349bde2b1; .45.2 follows clean handoff.
 
 - 2026-09-22 .83.1: `SESSION-STARTUP-READING.83.1 - define kind-preserving document grammar`; activation 8259719f8; compiler .45.1 follows clean handoff.
@@ -7775,6 +7785,8 @@ CLI66x2 and Phase0 1032/1032; 1163 seconds is Phase0 only, with 25 optional gate
 Each canonical task node owns its exact `Commit` subject and retained completion note. Query landed history with `git log --all --format="%h %s" --fixed-strings --grep="SESSION-STARTUP-READING."`; this replaces the proven duplicate 102-row table.
 
 ## Changelog
+
+- 2026-09-22 .45.2: verify rejection across public source carriers and actual generated execution; retain precise compiled-artifact regeneration limits.
 
 - `2026-09-13` .3.7.0: Decompose all supporting sources into exact bounded reading owners; preserve prior work, unread-source honesty and dependency reuse.
 

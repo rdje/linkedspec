@@ -218,6 +218,18 @@ The low-level `linkedspec_core::compiler::compile` API returns
 with `linkedspec: parser compilation failed`. With `--trace low`, it reports
 `compile:start` then `compile:error`, before input loading or invocation.
 
+The file loader preserves this failure as `compile_spec` / `spec_compile_failed`,
+including the requested and resolved path plus compiler detail. Reconstructing a
+serialized source AST or enabling compilation tracing preserves rejection.
+A semantic snapshot of that source records failed compilation and exposes no
+compiled authority or generated plan.
+
+Rust source emitters take an already compiled specification. They cannot restore
+rule code discarded by an older compiler. Regenerate affected compiled JSON and
+generated modules from their original `.spec` source with the corrected compiler.
+Valid compiled JSON still reconstructs and executes normally; generated modules
+retain their direct-value and compatibility entry points.
+
 One engine processes every command-line input independently. The direct-value
 method returns `serde_json::Value`; printing it writes JSON. This avoids the
 legacy execution method's accumulator wrapper. The application can inspect that

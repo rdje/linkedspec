@@ -1,17 +1,24 @@
 //! RUST-PARITY.8.2/.8.3.1-.8.4 — generated Rust-source compile/run proof.
 
-use linkedspec_core::ast::RuleMode;
-use linkedspec_core::compiler::compile;
+use linkedspec_core::ast::{RuleMode, SpecFile};
+use linkedspec_core::compiler::{compile, compile_with_trace};
+use linkedspec_core::error::LinkedSpecError;
 use linkedspec_core::parser::parse_spec;
 use linkedspec_core::trace::{TraceConfig, TraceLevel};
-use linkedspec_core::types::ParseMode;
+use linkedspec_core::types::{CompiledSpec, ParseMode};
 use linkedspec_core::validation::validate;
 use linkedspec_runtime::engine::{Engine, ExecutionOptions};
+use linkedspec_runtime::semantic_index::{
+    SemanticIndex, SemanticIndexOptions, SemanticSnapshotState, SemanticSourceDetail,
+};
 use linkedspec_runtime::source_emitter::{
     GENERATED_SOURCE_CONTRACT, GeneratedPlanRow, GeneratedSourceCode, GeneratedSourceError,
     GeneratedSourceMetadata, GeneratedSourceStage, classify_generated_rule_family,
     emit_rust_source, emit_rust_source_v2, execute_generated_parser_v2,
     execute_generated_parser_with_trace_v2, validate_generated_parser_plan_v2,
+};
+use linkedspec_runtime::spec_loader::{
+    SpecLoadOptions, SpecPipelineCode, SpecPipelineStage, SpecRequest, load_and_compile_spec,
 };
 use linkedspec_runtime::spec_parser::parse_spec_with_user_functions;
 use serde::Deserialize;
@@ -1163,4 +1170,182 @@ fn generated_rust_source_matches_manifest_backed_corpus_subset() {
         "linkedspec_generated_corpus_subset",
         format!("{generated_modules}\n{generated_tests}"),
     );
+}
+
+// SESSION-STARTUP-READING.45.2: exercise public source carriers before emission.
+// Emitters consume CompiledSpec; they do not accept or reparse raw rule code.
+fn malformed_rule_code_cases() -> Vec<(String, &'static str, &'static str)> {
+    let mut cases = vec![
+        (
+            "Top::\n /x/\n I { return(@invalid) }\n".into(),
+            "I -block",
+            "unexpected character '@'",
+        ),
+        (
+            "Top::\n /x/\n E { return(@invalid) }\n".into(),
+            "E -block",
+            "unexpected character '@'",
+        ),
+        (
+            "Top::\n /x/\n LX { return(@invalid) }\n".into(),
+            "LX -block",
+            "unexpected character '@'",
+        ),
+        (
+            "Top::\n /x/\n LX { if(cursor_pos() != input_end_pos()); exit_now(1); endif() }\n"
+                .into(),
+            "LX -block",
+            "expected ')' after args in attached control 'if'",
+        ),
+    ];
+    for (header, edge, kind) in [
+        ("Top::", "/x/ -> Child", "action"),
+        ("Top::", "=> Child", "blind-call"),
+        ("Top::", "Child", "action"),
+        ("Top::AND", "Child", "blind-call"),
+    ] {
+        cases.push((
+            format!("{header}\n {edge} {{ return(@invalid) }}\n\nChild:\n /x/\n"),
+            kind,
+            "unexpected character '@'",
+        ));
+    }
+    cases
+}
+
+fn assert_rule_code_diagnostic(message: &str, kind: &str, detail: &str) {
+    assert!(
+        message.contains(&format!("rule 'Top': failed to parse {kind} code:")),
+        "{message}"
+    );
+    assert!(message.contains(detail), "{message}");
+}
+
+#[test]
+fn rule_code_source_and_reconstructed_ast_reject_before_emission() {
+    for (source, kind, detail) in malformed_rule_code_cases() {
+        let parsed = parse_spec_with_user_functions(&source).expect("parse outer source");
+        let reconstructed: SpecFile =
+            serde_json::from_str(&serde_json::to_string(&parsed).unwrap()).unwrap();
+        for ast in [&parsed, &reconstructed] {
+            validate(ast).expect("rule structure reaches code compilation");
+            for result in [
+                compile(ast),
+                compile_with_trace(ast, TraceConfig::disabled()),
+            ] {
+                match result {
+                    Err(LinkedSpecError::Compile(message)) => {
+                        assert_rule_code_diagnostic(&message, kind, detail);
+                    }
+                    other => {
+                        panic!("malformed source must not produce an emission input: {other:?}")
+                    }
+                }
+            }
+        }
+    }
+}
+
+#[test]
+fn rule_code_file_loaders_preserve_compilation_failure() {
+    let project = TempProject::new("linkedspec-rule-code-loader");
+    let options = SpecLoadOptions::new(project.path()).with_search_root(project.path());
+    for (index, (source, kind, detail)) in malformed_rule_code_cases().iter().enumerate() {
+        let name = format!("Invalid{index}");
+        let filename = format!("{name}.spec");
+        fs::write(project.path().join(&filename), source).unwrap();
+        for request in [SpecRequest::path(&filename), SpecRequest::named(&name)] {
+            let error =
+                load_and_compile_spec(&request, &options).expect_err("reject malformed code");
+            assert_eq!(error.stage, SpecPipelineStage::CompileSpec);
+            assert_eq!(error.code, SpecPipelineCode::SpecCompileFailed);
+            assert_eq!(error.requested, request.requested());
+            assert_eq!(error.summary, "Spec compilation failed");
+            assert!(error.resolved_path.as_deref().unwrap().ends_with(&filename));
+            assert_rule_code_diagnostic(error.detail.as_deref().unwrap(), kind, detail);
+        }
+    }
+    fs::write(project.path().join("Valid.spec"), VALID_RULE_CODE_ROUTES).unwrap();
+    for request in [SpecRequest::path("Valid.spec"), SpecRequest::named("Valid")] {
+        let loaded = load_and_compile_spec(&request, &options).expect("load valid twin");
+        assert_eq!(
+            loaded
+                .into_engine()
+                .execute_value("x", &ExecutionOptions::new())
+                .unwrap(),
+            json!(42)
+        );
+    }
+}
+
+#[test]
+fn rule_code_semantic_snapshots_have_no_compiled_authority_or_plan() {
+    for (source, kind, detail) in malformed_rule_code_cases() {
+        let index = SemanticIndex::from_source(
+            &source,
+            SemanticIndexOptions::new("rule-code.spec", SemanticSourceDetail::Text),
+        )
+        .expect("construct failed snapshot");
+        assert_eq!(
+            index.snapshot().state,
+            SemanticSnapshotState::FailedCompilation
+        );
+        assert!(!index.snapshot().has_execution);
+        assert!(index.parsed_authority_present());
+        assert!(index.validated_authority_present());
+        assert!(!index.compiled_authority_present());
+        assert_eq!(index.generated_plan().unwrap(), None);
+        let diagnostic = index
+            .compilation_diagnostic()
+            .expect("retained compile failure");
+        assert_eq!(diagnostic.code, "semantic_index_compilation_failed");
+        assert_eq!(diagnostic.stage, "compile_source");
+        assert_rule_code_diagnostic(&diagnostic.message, kind, detail);
+    }
+}
+
+const VALID_RULE_CODE_ROUTES: &str =
+    "Top::\n I { value = 41 }\n /x/\n E { return(add(value, 1)) }\n";
+
+#[test]
+fn rule_code_valid_compiled_roundtrip_and_emitted_module_execute() {
+    let parsed = parse_spec_with_user_functions(VALID_RULE_CODE_ROUTES).unwrap();
+    let compiled = compile(&parsed).unwrap();
+    let compiled_json = serde_json::to_string(&compiled).unwrap();
+    let reconstructed: CompiledSpec = serde_json::from_str(&compiled_json).unwrap();
+    assert_eq!(
+        Engine::new(reconstructed.clone())
+            .execute_value("x", &ExecutionOptions::new())
+            .unwrap(),
+        json!(42)
+    );
+    let plan = [GeneratedPlanRow {
+        label: "Top",
+        family: "default",
+    }];
+    assert_eq!(
+        execute_generated_parser_v2(
+            &compiled_json,
+            &plan,
+            "x",
+            "rule-code.spec",
+            GENERATED_SOURCE_CONTRACT,
+        )
+        .unwrap(),
+        json!(42)
+    );
+    let mut generated = emit_rust_source_v2(&reconstructed, "rule-code.spec").unwrap();
+    generated.push_str(r#"
+#[cfg(test)]
+mod rule_code_execution {
+    use super::*;
+    #[test]
+    fn valid_blocks_survive_generated_compilation_and_execution() {
+        assert_eq!(execute("x").unwrap(), serde_json::json!(42));
+        assert_eq!(execute_with_trace("x", TraceConfig::disabled()).unwrap(), serde_json::json!(42));
+        assert_eq!(parse("x").unwrap(), serde_json::json!([42]));
+    }
+}
+"#);
+    run_generated_crate("linkedspec-generated-rule-code", generated);
 }

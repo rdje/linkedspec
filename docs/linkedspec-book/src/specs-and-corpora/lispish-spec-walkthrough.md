@@ -116,7 +116,7 @@ without numeric conversion, and strings retain escapes without decoding.
 
 The design prototype reproduced Rust's warning/drop compiler defect. The shared
 error-propagation repair is now verified under `SESSION-STARTUP-READING.45.1`;
-carrier verification and canonical closeout remain `.45.2/.45.3`. Grammar,
+carrier verification is complete under `.45.2`, with canonical closeout `.45.3` next. Grammar,
 native file-consumer delivery and final admission then remain `.83.2.2/.83.2.3/.83.3`.
 
 ## How to run it

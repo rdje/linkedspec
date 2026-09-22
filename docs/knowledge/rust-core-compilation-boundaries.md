@@ -37,8 +37,8 @@ authored body with callable candidates. Both function-body errors propagate.
 `parse_rule_code_block` now propagates every reported parse error with rule and
 block attribution under startup `.45.1`; its callers cannot silently discard a
 failed block. The former warning/drop behavior prevented later whole-spec
-validation from inspecting that code. Carrier proof and canonical closeout remain
-`.45.2/.45.3`; see [[rust-action-parser-boundary-defects]].
+validation from inspecting that code. Carrier proof `.45.2` passes; canonical closeout
+remains `.45.3`. See [[rust-rule-code-rejection-routes]] and [[rust-action-parser-boundary-defects]].
 
 The callable visitor recursively processes nested arguments, writes, access
 expressions, mutation callbacks and continuations, shape literals, block bodies,

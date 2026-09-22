@@ -1,11 +1,11 @@
 # MEMORY
 
-- activation_commit: `349bde2b1f349e589c13ac19649147b3dbbc9e9b` — clean document-design checkpoint; compiler repair activation.
-- latest_completed_leaf: `SESSION-STARTUP-READING.45.1 - reject malformed Rust rule code`; reported parse errors now reject compilation with their context.
-- active_work_unit: `SESSION-STARTUP-READING.45.2` — pending; verify public/native and artifact boundaries.
-- next_action: Verify the repaired Rust compiler boundary through native and supported serialized/generated artifact routes under SESSION-STARTUP-READING.45.2, then canonical closeout .45.3 before ARCHOGEN/LS-002 complete-document/all-form and ARCHOGEN/LS-003 atom-kind delivery under ADR0124 .83.2.2/.83.2.3 (also SEMULITH/LS-002).
+- activation_commit: `10893fb714242c13636b4f453635aa459896825a` — clean compiler-repair checkpoint; route-verification activation.
+- latest_completed_leaf: `SESSION-STARTUP-READING.45.2 - verify Rust rule-code rejection routes`; supported source carriers reject and generated execution controls pass.
+- active_work_unit: `SESSION-STARTUP-READING.45.3` — pending; canonical compiler-repair closeout.
+- next_action: Complete designated canonical compiler-repair closeout SESSION-STARTUP-READING.45.3, then deliver ARCHOGEN/LS-002 complete-document/all-form and ARCHOGEN/LS-003 atom-kind grammar/native consumers under ADR0124 .83.2.2/.83.2.3 (also SEMULITH/LS-002).
   Named-argument direction PARSER-AUTHORING-APIS.4 is approved and parked; other authoring proposals and approved formats stay parked.
-- in_flight_uncommitted: none; .45.1 source, regressions and documentation committed before carrier verification.
+- in_flight_uncommitted: none; .45.2 carrier tests and artifact recovery guidance committed before canonical closeout.
 - blockers: Wrapper startup .7 remains open; warned-child group matched, but denied-call cause and original lost PUC stream remain unproved. Recovery/purge stay prohibited.
 - current_rust_warning_debt: Repeated carriers report 1,870 pgen plus 26 rgx-core output warnings; RUST-DEPENDENCY-WARNING-ZERO.1-.7 own public RGX reports and result verification without suppression; dependency internals are excluded.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the

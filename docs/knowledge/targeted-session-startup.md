@@ -25,7 +25,7 @@ policies, quality, verification and commit hygiene remain. No defect is closed b
 reading or workflow checkpoint. The three reports were already registered by integration
 .8.1: SEMULITH/LS-001 quoted LF corruption, LS-002 atom-kind preservation, and LS-003
 integration guidance. Startup .85 corrects the retrieval failure, routes the first repair to .83.2.1, which now fixes quoted LF across six runtime
-routes. .83.1 now records ADR0124; .45.1 fixes compiler rejection; .45.2/.45.3 verify carriers and closeout
+routes. .83.1 now records ADR0124; .45.1 fixes compiler rejection; .45.2 verifies carriers; .45.3 owns canonical closeout
 before the versioned grammar is delivered. LS-003 remedies remain verified. Follow
 [[archogen-rust-lispish-integration]] for the exact register and evidence.
 

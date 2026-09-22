@@ -10,6 +10,12 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-22 — SESSION-STARTUP-READING.45.2 - verify Rust rule-code rejection routes
+
+SpecFile retains authored rule-code strings; CompiledSpec holds parsed blocks. Emitters consume the latter. An old artifact cannot reconstruct source discarded by warning/drop, so regeneration is the recovery path. The new tests reach actual source compilation and independently execute emitted Rust; they do not invent a raw-source decoder or claim arbitrary serialized ActionIR validation.
+
+Four focused route tests PASS: eight malformed sources yield 32 ordinary/traced source/reconstructed-AST rejections, 16 path/name-loader rejections and eight failed semantic snapshots with no compiled authority or plan. Valid path/name loads, reconstructed compiled state and generated-plan execution return 42; a freshly compiled emitted module verifies direct/traced 42 and compatibility [42]. Production code is unchanged from 10893fb71; its complete Rust compatibility proof remains applicable. Rust formatting, book, Knowledge/memory/history/public/diff checks and normal doctrines govern landing.
+
 ## 2026-09-22 — SESSION-STARTUP-READING.45.1 - reject malformed Rust rule code
 
 Validation after compilation cannot recover a block discarded during parsing. Returning Result<CodeBlock> makes all five lowering call sites propagate reported errors while optional edge source remains Option<CodeBlock>. No parser syntax or generated schema changes. Separate Unicode/newline/mutation parser causes retain their owners; carrier verification and canonical closeout remain .45.2/.45.3.

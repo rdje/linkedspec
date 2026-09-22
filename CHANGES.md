@@ -10,6 +10,12 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-22 — SESSION-STARTUP-READING.45.2 - verify Rust rule-code rejection routes
+
+Add bounded public-route regressions for the compiler correction: reconstructed source AST, traced compilation, path/name loading, semantic failure and actual generated-module execution. Document why artifacts produced by an older compiler must be regenerated from authored source.
+
+Four focused route tests PASS: eight malformed sources yield 32 ordinary/traced source/reconstructed-AST rejections, 16 path/name-loader rejections and eight failed semantic snapshots with no compiled authority or plan. Valid path/name loads, reconstructed compiled state and generated-plan execution return 42; a freshly compiled emitted module verifies direct/traced 42 and compatibility [42]. Production code is unchanged from 10893fb71; its complete Rust compatibility proof remains applicable. Rust formatting, book, Knowledge/memory/history/public/diff checks and normal doctrines govern landing.
+
 ## 2026-09-22 — SESSION-STARTUP-READING.45.1 - reject malformed Rust rule code
 
 Make every reported Rust rule-code parse error a compilation failure with its rule/block context. Remove the warning-and-drop fallback and retain optional absent edge code. Add persistent lifecycle/edge/guard/write/mutation and primary phase-boundary regressions; normalize one pre-existing trace-test formatting issue and align diagnostic guidance.

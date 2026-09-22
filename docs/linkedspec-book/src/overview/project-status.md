@@ -506,8 +506,8 @@ preserve LF and surrounding structure, with shared proof across all six runtime
 routes. LS-002 remains open for delivery; ADR0124 now defines a separate versioned
 complete-document grammar with atom kinds and exact lexemes. Its 37 authored cases
 pass bounded Perl/Rust prototype proof. Compiler repair .45.1 now rejects
-reported rule-code parse errors; carrier verification and canonical closeout remain
-before the new grammar is delivered. LS-003 workspace and prerequisite
+reported rule-code parse errors, and .45.2 verifies source carriers and generated execution.
+Canonical closeout remains before the new grammar is delivered. LS-003 workspace and prerequisite
 guidance remedies are already verified in the Rust integration guide. The current
 Lispish grammar retains its historical extraction and untyped string-value contract.
 

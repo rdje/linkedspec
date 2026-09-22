@@ -11,7 +11,7 @@ answers:
 date: 2026-09-22
 status: ADR0124 design accepted; production grammar and cross-backend admission pending
 tags: [s-expression, grammar, token-kind, validation, compatibility]
-evidence: "Startup .83.1 authors 37 independent cases, proves 136 Perl assertions including 21 token-spelling round trips and a skipped-text mutation, and verifies four Rust prototype boundaries. The native probe also reproduced compiler warning/drop defect .45. Task .45.1 now corrects that shared compiler boundary; carrier verification and canonical closeout remain .45.2/.45.3 before grammar delivery."
+evidence: "Startup .83.1 authors 37 independent cases, proves 136 Perl assertions including 21 token-spelling round trips and a skipped-text mutation, and verifies four Rust prototype boundaries. The native probe also reproduced compiler warning/drop defect .45. Task .45.1 now corrects that shared compiler boundary; carrier proof .45.2 passes; canonical closeout .45.3 precedes grammar delivery."
 reverify: "Run SEXPR_DOCUMENT_DESIGN_PROOF below from the repository root through the managed wrapper. Resolve the implementation frontier in SESSION-STARTUP-READING.45/.83; prototype proof is not production admission."
 ---
 
@@ -43,7 +43,7 @@ error propagation is a separate compiler repair: [[rust-action-parser-boundary-d
 and bounded .45.1/.45.2/.45.3 own its correction and verification before delivery. Historical source evidence
 at clean design activation 8259719f8 is compiler.rs:1075-1088 and lifecycle
 omission at 1303-1310. The common-boundary correction is now under .45.1; carrier
-verification and canonical closeout remain required.
+verification passes under .45.2; canonical closeout remains required.
 
 ## Repeat the bounded prototype proof
 
