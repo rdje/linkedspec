@@ -11,7 +11,7 @@ answers:
   - "what evidence capacity blocks remaining conformance reading"
   - "what exact fourteen limits are proposed for remaining conformance reading"
 date: 2026-09-22
-status: exact baseline decomposition preserved; physical reading 86/143, 120 files complete and 57 groups remain; one approved current-source delta
+status: exact baseline decomposition preserved; physical reading 87/143, 120 files complete and 56 groups remain; one approved current-source delta
 tags: [reading, conformance, tests, unicode, continuity, CONFORMANCE-SOURCE-READING]
 evidence: "Startup .3.8.0 independently accounts for160 baseline-identical files,5,422,313 stored bytes and8,257,059 decoded bytes in167,606 line fragments/167,604 LF delimiters. Four gzip inputs contribute54,500 decoded lines. All143 groups/302 ranges are contiguous, disjoint and bounded at1500 fragments/65536 bytes. No source, registry or runtime behavior changes; no physical-reading credit from inventory."
 reverify: "Run CONFORMANCE_SOURCE_READING_COVERAGE below through the project-data wrapper; it derives source identity from Git and range ownership from the task-tree rather than a parallel manifest. Use scripts/check_task_tree_metadata.sh for actual task collection limits."
@@ -428,14 +428,14 @@ properties, context rules, fixtures or decoded upstream inputs. All repairs rema
 
 ## Conformance reading checkpoint
 
-`CONFORMANCE-SOURCE-READING.1.86` reads 13 windows, 1,500 fragments and 61,968 baseline bytes.
-Cumulative reading is 86/143 groups, 105,404 fragments / 4,618,616 baseline bytes and 120 complete files.
-Semantic foundation, query, runtime/static projection, composed admission and sparse action slots are complete; staged enrichment is read only through its four-line header.
+`CONFORMANCE-SOURCE-READING.1.87` reads 9 windows, 1,500 fragments and 54,923 baseline bytes.
+Cumulative reading is 87/143 groups, 106,904 fragments / 4,673,539 baseline bytes and 120 complete files.
+Staged enrichment is read through line 1504, inside payload identity; complete executable prefix ends at 1461. The suffix and carrier/admission reading remain .1.88-owned.
 [[conformance-perl-consumer-reading]] records exact observation boundaries.
-Six complete consumers pass 146 top-level/634 nested TAP results; the direct-dependent duplicate-slot suite adds 12/62, totaling 158/696. Semantic governance passes 6 fixture groups/20 exact queries/128 mutations with rollout 9/0 and admission 6/0. Duplicate-slot governance passes 5 fixtures/2 diagnostics/6 runtime rows/59 mutations with rollout 7/0.
-Known runtime and observation repairs remain open with required source/book/policy prerequisites. No new defect or repair closure, fresh-process generated proof, production change, canonical run, dependency build or push is claimed.
-The pinned 113-byte delta stays separate; these ranges total 4,618,729 current bytes.
-Next .1.87: Read .1.87: t/staged_ast_enrichment_perl_contract.t lines 5–1504 (1,500 fragments / 54,923 baseline bytes). Keep the remaining suffix .1.88-owned and all repair/source/book/policy prerequisites intact.
+The exact complete prefix through 1461 passes 135 top-level/227 nested TAP results. Staged governance passes 9 rollout legs/123 base mutations and public 6/17/10/129; typed source passes 14/0/231; recognition passes 138 ActionIR rows/250 calls/58 mutations and 9/9 rollout.
+Existing startup .44 identity-lifetime and .73 competing-target repairs remain open, along with all prior defects and required source/book/policy prerequisites. No suffix execution, new runtime defect, repair closure, production change, canonical run, dependency build or push is claimed.
+The pinned 113-byte delta stays separate; these ranges total 4,673,652 current bytes.
+Next .1.88: Read .1.88 (1,500 fragments / 57,180 baseline bytes): staged enrichment 1505–2108, standalone lifecycle consumers, trace lowerer/planning consumers and trace CLI through 47. All repair/source/book/policy prerequisites remain.
 
 Lowercase table entries and Final Sigma context remain separate. Exact scalar
 sequences, sparse ranges, fullwidth forms and ligature identities are preserved;

@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `CONFORMANCE-SOURCE-READING`
-- Status: `active` / exact decomposition; physical reading 86/143
+- Status: `active` / exact decomposition; physical reading 87/143
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.8`
 - Created: `2026-09-13`
 - Last updated: `2026-09-22`
@@ -1535,14 +1535,21 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
   Commit: `CONFORMANCE-SOURCE-READING.1.86 - read semantic index and sparse slot consumers`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.87`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `d95047136b8fe75ae3e3ec871ed1eba3bbac28c8`.
+  Verification tier: `focused`
+  Focused checks: Exact source/window/range reading; source-pinned complete Perl prefix; staged/typed/recognition neutral checks; preservation audit; memory, Knowledge, history pressure and any required rollover; rendered book, public checks and normal doctrine hooks.
+  Canonical trigger: Ordinary bounded reading and current-evidence clarification under existing history policy; no production, public-contract, dependency, infrastructure or capacity change or parent closeout.
   Goal: Read and understand conformance/test/Unicode group 87.
   Scope: `t/staged_ast_enrichment_perl_contract.t` lines 5-1504
   Baseline evidence: 1500 fragments / 54923 decoded bytes; ordered range SHA-256 `47ee89082e5c348b1bbd01c463192459de3abaa9f378609b58df70059c75ac1b`.
   Dependencies: .1.86 committed with clean handoff.
   Acceptance: Read every scoped byte in complete bounded windows; retain source identity, exact comprehension, canonical Knowledge reconciliation, concrete finding ownership, focused proof and per-leaf continuity. Unread crossing constructs retain the next range owner.
-  Verification: `pending`
-  Commit: `pending`
+  Reading evidence: 9 complete windows / 1500 fragments / 54923 bytes; ordered window SHA-256 `23a24a42efdacf352b641c0c3001b01cd77ef6a99d7c91b37546e8afd9fbfced`.
+  Comprehension: The consumer pins neutral inventories separately from execution. Function-body v1 retains its adapter, phases, errors and body_ast target. Dedicated assignment markers carry direct/ordered Unicode-scalar provenance and detached sidecars; malformed/dynamic declarations and recognition reachability reject statically. Resolution, narrowed authority, normalized job/cache identity, frozen callbacks, four stitch policies, three failure policies and detached results execute through private host APIs. Typed index 2 precedes 10; plan-cache hits still execute fresh results and retry failed children. Individual invalid targets reject before callbacks; a displaced later marker rejects after one callback, matching open startup .73. One-depth enrichment leaves new markers inert. Live recursive proof covers breadth-first order, detached lineage, four fresh contexts and shared steps; later payload/decrease/resource/carrier assertions remain unread.
+  Verification: The exact complete prefix through 1461 passes 135 top-level/227 nested TAP results. Staged governance passes 9 rollout legs/123 base mutations and public 6/17/10/129; typed source passes 14/0/231; recognition passes 138 ActionIR rows/250 calls/58 mutations and 9/9 rollout. Source prefix SHA-256 65f31903dd786eea22daf006e65e51d070a1e541abd8279c31d671e29720d40e; only repository-rooted FindBin substitution and done_testing adapt the scratch carrier. Replay STAGED_PREFIX_READING in docs/knowledge/conformance-staged-perl-consumer-reading.md. Existing startup .44 identity-lifetime and .73 competing-target repairs remain open, along with all prior defects and required source/book/policy prerequisites. No suffix execution, new runtime defect, repair closure, production change, canonical run, dependency build or push is claimed.
+  Candidate proof: Exact 160-input/143-group/302-range source audit, 9-window reconstruction and durable prefix replay PASS. Cumulative 87 groups/106904 fragments/4673539 baseline bytes/120 complete files independently verified. Preserve 2856 other files/50695050 bytes, 178 conformance and 348 startup nodes, prior recipes, book headings and parent gitlink. Required notes rollover archives clean d95047136 lines179–306 as segment4971: 128 lines/26949 bytes, SHA-256 cca28e89f3a16fd7a69ec5021674328ead902c04cc9a57eaa8aea3496efb3eee; original manifest rows and full notes reconstruct exactly. Notes now182 lines/32665 bytes; collection37/36/21737 remains within unchanged ADR0122 caps. Knowledge1162 facts/9320 keys, memory60, both history checks, rendered book and public mutation69/50 plus selector68/11 pass. A scratch combined-recipe runner initially shared globals; isolated recipe namespaces resolved that runner error and both exact replays pass. First commit hook correctly rejected the old combined card at 513/512 lines. Routed only new staged evidence and its byte-identical replay into conformance-staged-perl-consumer-reading (58 lines); the existing card is 476 lines with all prior committed recipe blocks intact and unchanged caps. Normal doctrine hooks govern focused landing; no canonical run or push.
+  Commit: `CONFORMANCE-SOURCE-READING.1.87 - read staged enrichment declaration and scheduling consumers`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.88`
   Status: `pending`
@@ -2834,7 +2841,7 @@ additional reading credit from integration delivery.
 
 | Rank | Leaf | Status | Next action |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.87` | `pending` | Read .1.87: t/staged_ast_enrichment_perl_contract.t lines 5–1504 (1,500 fragments / 54,923 baseline bytes). Keep the remaining suffix .1.88-owned and all repair/source/book/policy prerequisites intact. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.88` | `pending` | Read .1.88 (1,500 fragments / 57,180 baseline bytes): staged enrichment 1505–2108, standalone lifecycle consumers, trace lowerer/planning consumers and trace CLI through 47. All repair/source/book/policy prerequisites remain. |
 
 ## Decisions
 
@@ -2848,6 +2855,8 @@ additional reading credit from integration delivery.
 - None at decomposition. Ordinary source repairs retain startup prerequisites; later collection pressure must be measured rather than assumed away.
 
 ## Verification Log
+
+- `2026-09-22` .1.87: Nine complete windows cover 1,500 fragments / 54,923 baseline bytes; ordered window SHA-256 23a24a42efdacf352b641c0c3001b01cd77ef6a99d7c91b37546e8afd9fbfced. Cumulative reading is 87/143 groups, 106,904 fragments / 4,673,539 baseline bytes and 120 complete files. Staged enrichment is read through line 1504, inside payload identity; complete executable prefix ends at 1461. The suffix and carrier/admission reading remain .1.88-owned. The exact complete prefix through 1461 passes 135 top-level/227 nested TAP results. Staged governance passes 9 rollout legs/123 base mutations and public 6/17/10/129; typed source passes 14/0/231; recognition passes 138 ActionIR rows/250 calls/58 mutations and 9/9 rollout. Existing startup .44 identity-lifetime and .73 competing-target repairs remain open, along with all prior defects and required source/book/policy prerequisites. No suffix execution, new runtime defect, repair closure, production change, canonical run, dependency build or push is claimed.
 
 - `2026-09-22` .1.86: 13 complete windows cover 1,500 fragments / 61,968 baseline bytes; ordered window SHA-256 4809bc148e5052220956c468ea5fdfdf17cf5a8cfce23351b708e8bcfc36009c. Cumulative reading is 86/143 groups, 105,404 fragments / 4,618,616 baseline bytes and 120 complete files. Semantic foundation, query, runtime/static projection, composed admission and sparse action slots are complete; staged enrichment is read only through its four-line header. Six complete consumers pass 146 top-level/634 nested TAP results; the direct-dependent duplicate-slot suite adds 12/62, totaling 158/696. Semantic governance passes 6 fixture groups/20 exact queries/128 mutations with rollout 9/0 and admission 6/0. Duplicate-slot governance passes 5 fixtures/2 diagnostics/6 runtime rows/59 mutations with rollout 7/0. Known runtime and observation repairs remain open with required source/book/policy prerequisites. No new defect or repair closure, fresh-process generated proof, production change, canonical run, dependency build or push is claimed.
 
@@ -2993,6 +3002,8 @@ additional reading credit from integration delivery.
 
 ## Commit Log
 
+- `2026-09-22` .1.87: `CONFORMANCE-SOURCE-READING.1.87 - read staged enrichment declaration and scheduling consumers`; activation d95047136; .1.88 follows clean handoff and empty brief.
+
 - `2026-09-22` .1.86: `CONFORMANCE-SOURCE-READING.1.86 - read semantic index and sparse slot consumers`; activation 7e6a8fbfc; .1.87 follows clean handoff and empty brief.
 
 - `2026-09-22` .1.85: `CONFORMANCE-SOURCE-READING.1.85 - read cursor scalar and semantic call consumers`; activation 441be2af; .1.86 follows clean handoff and empty brief.
@@ -3136,6 +3147,8 @@ additional reading credit from integration delivery.
 - `2026-09-13`: Decomposition lands under `SESSION-STARTUP-READING.3.8.0`; Git owns the resulting commit identity.
 
 ## Changelog
+
+- `2026-09-22` .1.87: Read staged declaration/current-depth/initial-recursive proof with an exact executable boundary; preserve known target and lifetime repair ownership.
 
 - `2026-09-22` .1.86: Complete six consumers and preserve exact generated-plan validation, same-process loading and known repair boundaries.
 

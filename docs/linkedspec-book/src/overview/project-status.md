@@ -498,8 +498,8 @@ the director's focused-verification grant used for this correction and the separ
 supporting-reading closeout. Reading completion establishes audited comprehension;
 it does not close the six grammar/literal repair roots or establish runtime signoff.
 Conformance, test and Unicode reading has exact ownership for all 160 inputs in
-143 bounded groups covering 8,257,059 baseline decoded bytes. Reading now covers 86/143 groups, 105,404 fragments / 4,618,616 baseline bytes and 120 complete files.
-Semantic foundation, query, runtime/static projection, composed admission and sparse action slots are complete; staged enrichment is read only through its four-line header.
+143 bounded groups covering 8,257,059 baseline decoded bytes. Reading now covers 87/143 groups, 106,904 fragments / 4,673,539 baseline bytes and 120 complete files.
+Staged enrichment is read through line 1504, inside payload identity; complete executable prefix ends at 1461. The suffix and carrier/admission reading remain .1.88-owned.
 
 The progressive carrier checks exact child payloads in live, reconstructed and
 generated execution, along with typed failures and logical metadata. Generated
@@ -530,7 +530,7 @@ records/25 relations, authored ordering, multibyte columns and function masking.
 The direct strict validator remains separate; `Get(strict_syntax => 1)` still
 does not wire that option into validation.
 
-The current semantic/sparse checkpoint completes six consumers: 146 top-level and
+The preceding semantic/sparse checkpoint completes six consumers: 146 top-level and
 634 nested TAP results pass, with duplicate-slot compatibility adding 12/62.
 Foundation checks preserve strict UTF-8 identity, scalar-column coordinates,
 immutable failures and rejection of byte ranges that split a character. Queries
@@ -546,8 +546,26 @@ authored actions, including the single-action repeated case. Both live and
 generated routes retain exact values and final cursors. Neutral semantic and
 duplicate-slot checks pass 128 and 59 mutations respectively. Known semantic
 missing-call, failure-normalization and source-correlation repairs remain open;
-these finite fixtures do not close them. Staged-enrichment reading has reached
-only its four-line header, so its body is the next scope.
+these finite fixtures do not close them.
+
+Staged-enrichment reading now reaches line 1504. Its complete prefix through 1461
+passes 135 top-level and 227 nested results. It preserves function-body v1,
+dedicated assignment markers, direct and ordered Unicode provenance, detached
+sidecars and static rejection. Private current-depth checks execute resolution,
+authority narrowing, cache identity, all four result and three failure policies,
+typed path ordering, fresh child state and detachment. Cached plans still execute
+new child results and retry prior failures. One complete recursive test exercises
+breadth-first callbacks, copied lineage, fresh contexts and shared steps. The ten
+neutral chain rows exercise a separate case evaluator; later live payload,
+decrease, resource and carrier assertions await suffix reading. Staged, typed and
+recognition governance pass 123, 231 and 58 base mutations respectively.
+
+The existing competing-target repair remains startup .73: individual invalid
+targets reject before callbacks, but a later marker displaced by an earlier
+stitch rejects after one callback. These passing tests preserve that known
+behavior; they do not prove complete destination reservation. The separate
+retired-marker identity-lifetime risk remains startup .44. Both retain their
+existing repair ownership and prerequisites.
 
 **Cursor-source and CLI harness repairs remain open (.2.13/.2.16).** Both cursor
 source denials accept empty/unrelated output; 24 controls demonstrate the missing
@@ -590,7 +608,7 @@ The history files keep their 512-line / 65,536-byte caps, mandatory rollover and
 immutable archives. General card/part limits remain unchanged. Admission consumes
 one of the conservative 99 reserve units; the remaining 98 units are forecast
 after actual admission overhead. This capacity does not complete source reading
-or repair tests: reading now reaches 86/143, `.1.87` is next, and the test and recipe
+or repair tests: reading now reaches 87/143, `.1.88` is next, and the test and recipe
 repairs `.2.5`–`.2.18` remain open.
 
 The director has requested integration guides and runnable consumer examples for

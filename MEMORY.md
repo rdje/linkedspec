@@ -1,11 +1,11 @@
 # MEMORY
 
-- activation_commit: `7e6a8fbfc2ce44f5da94d7536cedfaeebc1ad420` — clean .1.85 checkpoint; .1.86 activation.
-- latest_completed_leaf: `CONFORMANCE-SOURCE-READING.1.86 - read semantic index and sparse slot consumers`; exact reading and focused proof.
-- active_work_unit: `CONFORMANCE-SOURCE-READING.1.87` — pending; PNT continues under the reading-checkpoint exception.
-- next_action: Read .1.87: t/staged_ast_enrichment_perl_contract.t lines 5–1504 (1,500 fragments / 54,923 baseline bytes). Keep the remaining suffix .1.88-owned and all repair/source/book/policy prerequisites intact.
+- activation_commit: `d95047136b8fe75ae3e3ec871ed1eba3bbac28c8` — clean .1.86 checkpoint; .1.87 activation.
+- latest_completed_leaf: `CONFORMANCE-SOURCE-READING.1.87 - read staged enrichment declaration and scheduling consumers`; exact reading and focused proof.
+- active_work_unit: `CONFORMANCE-SOURCE-READING.1.88` — pending; PNT continues under the reading-checkpoint exception.
+- next_action: Read .1.88 (1,500 fragments / 57,180 baseline bytes): staged enrichment 1505–2108, standalone lifecycle consumers, trace lowerer/planning consumers and trace CLI through 47. All repair/source/book/policy prerequisites remain.
   Named-argument direction PARSER-AUTHORING-APIS.4 is approved and parked; other authoring proposals and approved formats stay parked.
-- in_flight_uncommitted: none; reading .1.86 is verified and committed before the next leaf.
+- in_flight_uncommitted: none; reading .1.87 is verified and committed before the next leaf.
 - blockers: Wrapper startup .7 remains open; warned-child group matched, but denied-call cause and original lost PUC stream remain unproved. Recovery/purge stay prohibited.
 - current_rust_warning_debt: Repeated carriers report 1,870 pgen plus 26 rgx-core output warnings; RUST-DEPENDENCY-WARNING-ZERO.1-.7 own public RGX reports and result verification without suppression; dependency internals are excluded.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
@@ -51,10 +51,10 @@
 - standing_contracts: all durable paths are repo-relative; all project data stays on the repository filesystem;
   README remains bounded; ordinary leaves use focused proof and designated infrastructure/public/push boundaries
   use exact staged canonical CI; task-tree/index, Knowledge Map, mdBook, and bounded live/history move in lockstep.
-- current_engineering_notes_capacity: ADR0122 admits 43 collection files /42 manifest lines /25410 manifest bytes; current36/35/21125 stay bounded.
-  Notes segment4972 preserves 89 lines /28550 bytes from clean 5fab5aa6; old archive rows/bytes remain exact.
+- current_engineering_notes_capacity: ADR0122 admits 43 collection files /42 manifest lines /25410 manifest bytes; current37/36/21737 stay bounded.
+  Notes segment4971 preserves 128 lines /26949 bytes from clean d95047136; old archive rows/bytes remain exact.
 - current_change_history_capacity: ADR0122 admits 47 collection files /46 manifest lines /26255 manifest bytes; current40/39/22223 stay bounded.
   Changes segment4973 preserves 117 lines /29044 bytes from clean 5fab5aa6; old archive rows/bytes remain exact.
 - dependency_boundary: September20: LinkedSpec integrates only with RGX via its published integration document/APIs/contracts. RGX owns PGEN; no separate PGEN procedure, internal inspection/analysis, patches or pin changes.
   Normal documented builds remain authorized; retain caches. Startup .80.1-.4 may observe public behavior or track upstream repairs, not investigate dependency internals.
-- latest_bootstrap_read: 2026-09-22 — roadmap Yes / full codebase No / physical mdBook Yes; five backend lanes and supporting .3.7 closed. Conformance 86/143 reads 105,404 fragments / 4,618,616 baseline bytes; 57 groups remain. Later .3.9–.3.11, formal book .4 and policy .5 remain; no runtime repair closes.
+- latest_bootstrap_read: 2026-09-22 — roadmap Yes / full codebase No / physical mdBook Yes; five backend lanes and supporting .3.7 closed. Conformance 87/143 reads 106,904 fragments / 4,673,539 baseline bytes; 56 groups remain. Later .3.9–.3.11, formal book .4 and policy .5 remain; no runtime repair closes.
