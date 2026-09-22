@@ -1,11 +1,11 @@
 # MEMORY
 
-- activation_commit: `eda9cd3dd008784bc7f7993fe09ed5d35665e535` — clean canonical compiler-closeout checkpoint; grammar implementation activation.
-- latest_completed_leaf: `SESSION-STARTUP-READING.83.2.2 - implement complete s-expression documents`; 37 authored cases, round trips and post-rejection reuse pass on all six runtimes.
-- active_work_unit: `SESSION-STARTUP-READING.83.2.3` — pending; native Rust document-file consumer.
-- next_action: Deliver the separate native Rust sexpr_file consumer under SESSION-STARTUP-READING.83.2.3, using SExprDocumentV1.spec; verify file/UTF-8/error/multi-file/relocation behavior before final .83.3 admission for ARCHOGEN/LS-002–003 and SEMULITH/LS-002.
+- activation_commit: `77d7b3db1b65a2c83072447a6aec77456ca7aede` — clean grammar/integration-guide checkpoint; native file-consumer activation.
+- latest_completed_leaf: `SEXPR-DOCUMENT-INTEGRATION.1 - deliver native s-expression file consumer`; all 37 authored file cases, 36 process groups and legacy compatibility pass.
+- active_work_unit: `SEXPR-DOCUMENT-INTEGRATION.2` — pending; independent document admission and startup-parent closeout.
+- next_action: Recompose six-runtime/public-loading and native file evidence under SEXPR-DOCUMENT-INTEGRATION.2, reconcile all backend guides and reports, then run exact canonical admission before closing the startup parents.
   Named-argument direction PARSER-AUTHORING-APIS.4 is approved and parked; other authoring proposals and approved formats stay parked.
-- in_flight_uncommitted: none; grammar and recurring contract proof complete, with the exact staged canonical receipt required by this landing.
+- in_flight_uncommitted: none; native file delivery is complete and final independent admission is owned separately.
 - blockers: Wrapper startup .7 remains open; warned-child group matched, but denied-call cause and original lost PUC stream remain unproved. Recovery/purge stay prohibited.
 - current_rust_warning_debt: Repeated carriers report 1,870 pgen plus 26 rgx-core output warnings; RUST-DEPENDENCY-WARNING-ZERO.1-.7 own public RGX reports and result verification without suppression; dependency internals are excluded.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
@@ -57,4 +57,4 @@
   Changes segment4972 preserves 136 lines /27060 bytes from clean 8259719f8; old archive rows/bytes remain exact.
 - dependency_boundary: September20: LinkedSpec integrates only with RGX via its published integration document/APIs/contracts. RGX owns PGEN; no separate PGEN procedure, internal inspection/analysis, patches or pin changes.
   Normal documented builds remain authorized; retain caches. Startup .80.1-.4 may observe public behavior or track upstream repairs, not investigate dependency internals.
-- latest_bootstrap_read: ADR0123 targets2–5 minute startup plus thorough task-specific reading. Full audit remains incomplete and separate: conformance89/143,109904 fragments/4784266 baseline bytes/133 files; .1.90 is next only when that audit resumes. SEMULITH/LS-001 is repaired; LS-002 design is ADR0124; .45 compiler rejection repair is closed; .83.2.2 grammar delivery is verified; .83.2.3 native file delivery is next; LS-003 integration remedies are verified.
+- latest_bootstrap_read: ADR0123 targets2–5 minute startup plus thorough task-specific reading. Separate audit remains89/143 and .1.90; no reading credit added here. Grammar77d7b3db1 and native file delivery are verified; SEXPR-DOCUMENT-INTEGRATION.2 is next. SEMULITH/LS-001 and workspace/prerequisite remedies remain verified; no downstream acceptance claim.

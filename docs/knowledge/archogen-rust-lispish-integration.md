@@ -19,8 +19,8 @@ answers:
   - has the reported Lispish multiline string patch been verified locally
   - how does a host Cargo workspace exclude vendored LinkedSpec
   - does the workspace verifier query dependency internals
-date: 2026-09-22
-status: multiline quotes and workspace/prerequisite guidance repaired; atom-kind/strict document and upstream bootstrap-message work remains
+date: 2026-09-23
+status: quoted LF, workspace guidance, document grammar and native file consumer verified; independent document admission and upstream bootstrap-message work remain
 tags: [rust, lispish, embedding, dependencies, discussion]
 evidence: "September13 native Lispish proof; September20 report intake, workspace repair and successful RGX public bootstrap/native consumer proof. Startup .83.2.1 verifies and applies the two quote-pattern flags with independent six-runtime recurrence."
 reverify: "Follow the public preparation/workspace sequence in docs/linkedspec-book/src/public-api/integration-rust.md, then its native consumer checks. Treat rgx/docs/INTEGRATION.md as the dependency authority; do not inspect implementation."
@@ -31,6 +31,24 @@ published integration document, public APIs and contracts are the sole authority
 RGX owns PGEN and all transitive preparation; no separate PGEN procedure or
 internal dependency knowledge belongs in LinkedSpec. Reports go to RGX.
 
+## September 23 native document-file delivery
+
+`SEXPR-DOCUMENT-INTEGRATION.1` implements startup .83.2.3's separate `sexpr_file`
+consumer using public Rust loading and execution APIs. It selects `Document`,
+returns tagged values directly and preserves typed parse causes with input paths.
+Its verifier passes the unchanged 37 authored cases as real files, the published
+two-form example, UTF-8/argument/source/error boundaries, multiple-file reuse,
+executable-relative assets and moved Unicode bundles. The historical consumer
+still passes 26 file values /18 groups and all three adapter tests.
+
+All five backend guides retain the shared document contract; the Rust guide now
+includes file-consumer source, commands, failures and deployment. Grammar
+implementation `77d7b3db1` already passed canonical proof, both66-case CLI routes
+and Phase0 1032/1032. Native delivery is a focused example/test/doc slice;
+`SEXPR-DOCUMENT-INTEGRATION.2` owns the remaining independent canonical admission
+and formal startup-parent/report closeout. Actual downstream acceptance is not
+claimed. No RGX/PGEN implementation or pin changes are part of these repairs.
+
 ## September 22 document grammar delivery
 
 Startup .83.2.2 now ships `specs/SExprDocumentV1.spec`. All 37 independently authored
@@ -40,8 +58,9 @@ round trips and same-engine recovery after rejection. The shared driver is regis
 in canonical CI. A portable EOF-comment branch fixes three initial Dart failures
 without changing the accepted syntax or expected values.
 
-ARCHOGEN/LS-002–003 and SEMULITH/LS-002 still require the separate native Rust file
-consumer .83.2.3 and final .83.3 admission. This grammar checkpoint does not claim
+At this grammar checkpoint, ARCHOGEN/LS-002–003 and SEMULITH/LS-002 still required
+the native Rust file consumer .83.2.3 and final .83.3 admission. Native delivery is
+now verified above; final admission remains open. This grammar checkpoint does not claim
 downstream acceptance. [[sexpr-document-design]] owns the current recurring proof.
 
 ## September 22 kind-preserving document design

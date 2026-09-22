@@ -507,17 +507,19 @@ a fix still requires thorough reading of its affected code, contracts, tests and
 sections. The complete source audit is preserved separately and remains incomplete.
 SEMULITH/LS-001 multiline quoted-string corruption is repaired: both quote readers
 preserve LF and surrounding structure, with shared proof across all six runtime
-routes. LS-002 remains open for delivery; ADR0124 now defines a separate versioned
+routes. LS-002 awaits independent final admission; ADR0124 defines a separate versioned
 complete-document grammar with atom kinds and exact lexemes. Its 37 authored cases,
 token-spelling round trips and post-rejection reuse pass all six native runtimes. Compiler repair .45 is complete: reported
 rule-code parse errors reject compilation, with source carriers and generated
-execution verified. The new grammar is implemented; its native Rust file-consumer delivery remains open. LS-003 workspace and prerequisite
+execution verified. The new grammar and separate native Rust file consumer are implemented and verified against the authored cases. LS-003 workspace and prerequisite
 guidance remedies are already verified in the Rust integration guide. The current
 Lispish grammar retains its historical extraction and untyped string-value contract.
 
 The document grammar addresses ARCHOGEN/LS-002 (complete input and all top-level
-forms) and ARCHOGEN/LS-003 (atom kinds). Native file integration and final report
-admission remain .83.2.3/.83.3-owned; downstream acceptance is not claimed.
+forms) and ARCHOGEN/LS-003 (atom kinds). Native file integration passes all 37
+authored cases plus UTF-8, typed failure, multiple-file and relocation checks.
+Independent final report admission remains under `SEXPR-DOCUMENT-INTEGRATION.2`
+and startup .83.3; downstream application acceptance is not claimed.
 
 Conformance, test and Unicode reading has exact ownership for all 160 inputs in
 143 bounded groups covering 8,257,059 baseline decoded bytes. Reading now covers 89/143 groups, 109,904 fragments / 4,784,266 baseline bytes and 133 complete files.

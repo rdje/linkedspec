@@ -96,8 +96,10 @@ syntax, failure boundary and token-preserving reconstruction with examples.
 
 All 37 authored document cases, round trips and same-engine reuse after failures
 pass on Perl, Rust, Dart, Julia, PUC Lua and LuaJIT. Historical Lispish behavior
-and the `lispish_file` adapter remain available. A separate native Rust file
-consumer and final report admission are the next delivery steps.
+and the `lispish_file` adapter remain available. The separate
+[Rust document-file consumer](../public-api/integration-rust.md#read-document-files-in-your-application)
+passes the same authored document cases as real files, including UTF-8, failure,
+multiple-file and relocation checks. Independent final report admission remains open.
 
 ## How to run it
 

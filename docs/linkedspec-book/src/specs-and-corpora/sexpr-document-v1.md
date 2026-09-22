@@ -39,8 +39,10 @@ The value is the following JSON object; formatting here is expanded for clarity:
 Use `--input-file` in place of `--input` to read a file through the same command.
 Native hosts load and compile the specification through their normal public APIs
 and inspect the returned direct value. The same grammar is exercised on Perl,
-Rust, Dart, Julia, PUC Lua and LuaJIT. A dedicated Rust file-consumer example is
-the next delivery step; the existing `lispish_file` adapter still consumes Lispish.
+Rust, Dart, Julia, PUC Lua and LuaJIT. The dedicated
+[Rust `sexpr_file` example](../public-api/integration-rust.md#read-document-files-in-your-application)
+reads exact UTF-8 files through one compiled engine and supports a relocatable
+binary/grammar bundle. The existing `lispish_file` adapter still consumes Lispish.
 
 Backend-specific loading, entry selection and focused checks are documented in
 the [Perl](../public-api/integration-perl.md#parse-complete-s-expression-documents),
@@ -151,5 +153,7 @@ bash tools/check_sexpr_document_v1.sh
 The driver checks all six native runtime routes, 21 token-spelling round trips per
 route, and valid independent input after every rejection through the same
 compiled engine. Perl also checks ActionIR readiness and the rejecting-edge
-mutation. The canonical local gate runs this driver. The dedicated native Rust
-file-consumer delivery and downstream report acceptance remain separate steps.
+mutation. The canonical local gate runs this driver. The separate native Rust
+file verifier consumes all 37 cases as real files and checks UTF-8, errors,
+multiple inputs, packaged assets and relocation. Independent final integration
+admission and downstream application acceptance remain separate steps.

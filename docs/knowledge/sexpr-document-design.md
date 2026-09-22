@@ -10,11 +10,13 @@ answers:
   - which compiler defect blocks strict-document delivery
   - why does the document grammar avoid a backslash z EOF anchor
   - how do the backend integration guides select the complete document grammar
-date: 2026-09-22
-status: grammar implemented with six-runtime contract proof; native file delivery and final admission pending
+  - where is the native complete s-expression file consumer
+  - how does sexpr_file report a rejected document and locate its grammar
+date: 2026-09-23
+status: grammar and native Rust file delivery verified; independent final admission pending
 tags: [s-expression, grammar, token-kind, validation, compatibility]
-evidence: "Startup .83.1 authors 37 independent cases and preserves bounded prototype proof. Task .45 closes the compiler warning/drop repair. Production .83.2.2 passes all 37 cases, 21 round trips and 16 same-engine recovery checks on each of six runtimes, with descriptor readiness and an independent skipped-text mutation; its driver recurs in canonical CI."
-reverify: "Run bash tools/check_sexpr_document_v1.sh for the production grammar. The historical SEXPR_DOCUMENT_DESIGN_PROOF below preserves feasibility scope. Follow startup .83.2.3/.83.3 for native file delivery and final admission."
+evidence: "Startup .83.1 authors 37 independent cases and preserves bounded prototype proof. Task .45 closes the compiler warning/drop repair. Production .83.2.2 passes all 37 cases, 21 round trips and 16 same-engine recovery checks on each of six runtimes, with descriptor readiness and an independent skipped-text mutation; its driver recurs in canonical CI. Native delivery .1 passes the unchanged 37 cases as files and 36 process groups; legacy 26-file/18-group and three adapter checks pass."
+reverify: "Run bash tools/check_sexpr_document_v1.sh for the grammar and follow the Rust integration guide's native build plus examples/integration/rust/verify_sexpr.py for file delivery. SEXPR-DOCUMENT-INTEGRATION.2 owns independent final admission. The historical SEXPR_DOCUMENT_DESIGN_PROOF below preserves feasibility scope."
 ---
 
 ADR0124 selects the separate `specs/SExprDocumentV1.spec` with a versioned
@@ -32,7 +34,8 @@ authority and runs in canonical CI. Rust/Dart test discovery and Julia/Lua local
 gate registrations also retain the consumers. The acceptance case array is unchanged
 from ADR0124 (canonical JSON SHA-256
 `75b1012504eba16781f0a92282f915f711d51688d59e2868c7c448ccef39cebe`).
-The native Rust file consumer and final report admission remain .83.2.3/.83.3.
+Native Rust file delivery is implemented under `SEXPR-DOCUMENT-INTEGRATION.1`
+for startup .83.2.3; independent final admission remains .2 under startup .83.3.
 All five backend integration guides and their shared landing page now route to
 the document contract, explain native result/failure handling and publish each
 runtime's focused check command. The maintained Perl/Dart/Julia/Lua word adapters
@@ -43,10 +46,36 @@ therefore selects `Document` without an adapter change. The historical Rust
 tagged result. These are application integration requirements, not backend API
 changes; the shared grammar chapter owns schema and lexical semantics.
 The Rust integration guide command builds and returns the exact documented two-form tagged value through the public loader and generic native consumer. Direct consumer boundary checks also pass empty documents, ordered two-form input and interstitial-junk rejection with empty stdout.
+
+## September 23 native file delivery
+
+`examples/integration/rust/src/bin/sexpr_file.rs` uses the public native loader,
+selects `Document` explicitly, compiles once and reads each input as exact UTF-8.
+It serializes the returned tagged value directly. No kind inference, numeric
+conversion, escape decoding or historical depth-limited adapter is involved.
+The default grammar is executable-relative `specs/SExprDocumentV1.spec`;
+explicit grammar and input paths resolve against the caller's working directory.
+
+Malformed documents produce no value for that file. The example reports
+`document_parse_error` with the supplied `input` and native `cause`, preserving
+typed exit status 1 or the ordinary structured runtime failure. It stops at the
+first error and retains prior result lines. Grammar-loading errors keep the
+public pipeline schema; input I/O and invalid-UTF-8 errors identify their file.
+The example's envelope is not a new runtime error API.
+
+`examples/integration/rust/verify_sexpr.py` consumes the unchanged 37 authored
+cases as files (21 accepted in one engine, 16 rejected) and verifies the published
+example plus error, UTF-8, Unicode/relative path, option, asset and relocation
+boundaries. All accepted cases repeat after moving the two-file bundle. Source
+binary, grammar and contract hashes remain unchanged; owned fixtures are removed.
+The historical adapter fails this verifier at the first document as expected,
+while its own 26-file/18-group verifier remains green. Grammar source and every
+authored expected value remain byte/structure-identical to `77d7b3db1`; only the
+contract's delivery-status metadata changes. Formal admission remains .2.
 The shipped catalog now lists all 22 source files exactly once. Rust
 `integration_test::parse_all_shipped_specs` discovers, parses, validates and compiles
 all22; Perl return_descriptor inventory/readiness proof passes67 assertions. These
-checks also retain all21 unchanged existing grammars. Mutable invariant prose uses
+checks also retain all 21 unchanged existing grammars. Mutable invariant prose uses
 automatic discovery; older dated21-file results retain their historical scope.
 
 A successful final cursor alone does not establish complete recognition. Removing

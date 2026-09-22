@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "status": "grammar-implemented-native-consumer-pending",
+  "status": "native-consumer-delivered-final-admission-pending",
   "format": "linkedspec-sexpr-v1",
   "grammar": "specs/SExprDocumentV1.spec",
   "cases": [

@@ -11,6 +11,16 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
 
+## 2026-09-23 — SEXPR-DOCUMENT-INTEGRATION.1 - deliver native s-expression file consumer
+
+Add the separate Rust sexpr_file example: exact UTF-8 file input, one compiled Document engine, direct tagged values, typed parse causes with input paths and executable-relative grammar assets. The maintained verifier consumes the independent 37-case contract as real files and checks public examples, error order, paths, prior-output retention and relocation. Historical Lispish stays unchanged. Synchronize the Rust/shared integration guides, grammar chapter, public status, roadmap and continuity; other backend guides retain the same canonical document contract.
+
+PASS: 37 unchanged authored cases as real files (21 accepted in one engine and 16 typed rejections), 36 process-check groups including the published example, Unicode/relative paths, strict UTF-8, malformed grammar before input loading, earlier-output retention, default/explicit assets and relocation with all 21 valid cases. Binary/grammar/contract hashes stay exact and owned fixtures are removed. Historical Lispish passes 26 file values/18 groups and all three adapter tests. Native build, Rust formatting and Python syntax pass; the grammar and authored case array remain unchanged. Book/public guards, Knowledge/memory/history/diff and normal doctrines govern the focused landing; .2 owns independent canonical admission and formal parent closeout.
+
+The missing consumer is confirmed against clean 77d7b3db1; the historical adapter fails the new file verifier as expected. The new executable passes 36 process groups, including all 21 accepted files again after relocation. This ordinary delivery changes only contract delivery-status metadata, not authored values or grammar source. Independent canonical admission and formal startup-parent/report closeout remain SEXPR-DOCUMENT-INTEGRATION.2.
+
+The startup task root stays at 8,000 lines with every stable ID retained. A bounded semantic execution tree owns the remaining work without raising a ceiling or changing partition infrastructure. The due metadata-only artifact census observes 3,389 .log/.bin files (9203965937 bytes), retains reusable/current/ambiguous data, and removes only this session's exact obsolete 68-byte wrapper-usage log; an exact-path residue check passes.
+
 ## 2026-09-22 — SESSION-STARTUP-READING.83.2.2 - implement complete s-expression documents
 
 Add specs/SExprDocumentV1.spec: complete parenthesized documents, every top-level form, tagged list/symbol/number/string nodes and exact lexical spelling. Register independent contract consumers in all six native runtime routes and the canonical gate; add the public grammar chapter. Lispish, runtime implementations, dependency pins and expected case values are unchanged.

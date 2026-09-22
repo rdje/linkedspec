@@ -10,7 +10,7 @@ to invoke the LinkedSpec command-line interface.
 | Application | Native dependency | Preparation and deployment guide |
 | --- | --- | --- |
 | Perl | Repository modules through `@INC` | [Perl integration](integration-perl.md): module provenance, native values, diagnostics and a relocatable source launcher. |
-| Rust | Cargo path dependency on `rust/linkedspec-runtime` | [Rust integration](integration-rust.md): workspace setup, RGX public preparation, native builds, Lispish files and binary/grammar packaging. |
+| Rust | Cargo path dependency on `rust/linkedspec-runtime` | [Rust integration](integration-rust.md): workspace setup, RGX public preparation, native builds, complete document files, historical Lispish and binary/grammar packaging. |
 | Dart | Local `linkedspec_dart` package at `dart/` | [Dart integration](integration-dart.md): package resolution, supporting grammar assets, native values and an AOT application bundle. |
 | Julia | Local `LinkedSpecJulia` package at `julia/` | [Julia integration](integration-julia.md): application project/depot, offline reuse, native values and source deployment. |
 | Lua or LuaJIT | Repository Lua modules and matching native modules | [Lua integration](integration-lua.md): explicit module paths, per-runtime native preparation, retained products and source/native packaging. |
@@ -24,9 +24,10 @@ contract check. Follow that backend's setup prerequisites first.
 
 The Rust [Lispish file example](integration-rust.md#parse-lispish-files-in-your-application)
 retains its historical first-form/head-tail contract and documented
-[limits](integration-rust.md#exact-grammar-and-file-consumption-limits). The separate
-Rust document-file consumer is still the next delivery step; changing only that
-old adapter's grammar path does not convert it to the new result format.
+[limits](integration-rust.md#exact-grammar-and-file-consumption-limits). Use the separate
+[Rust document-file consumer](integration-rust.md#read-document-files-in-your-application)
+for the new format; changing only the old adapter's grammar path does not convert
+its result representation.
 
 The guides are the current owners of host-specific setup and deployment. The
 [native loading contract](native-spec-loading.md),
@@ -123,7 +124,7 @@ values, explicit asset selection, failures and deployment boundaries:
 | Backend | Setup and value checks | Deployment and diagnostic checks |
 | --- | --- | --- |
 | Perl | [Checked-in example](integration-perl.md#verify-the-checked-in-example), `examples/integration/perl/verify_words.py` | Same section, `examples/integration/perl/verify_deployment.py` |
-| Rust | [Word consumer](integration-rust.md#compile-once-parse-independent-inputs) and [workspace checks](integration-rust.md#reproduce-the-integration-checks) | [Lispish checks](integration-rust.md#reproduce-the-integration-checks), `examples/integration/rust/verify_lispish.py` |
+| Rust | [Word consumer](integration-rust.md#compile-once-parse-independent-inputs) and [workspace checks](integration-rust.md#reproduce-the-integration-checks) | [File-consumer checks](integration-rust.md#reproduce-the-integration-checks): `examples/integration/rust/verify_sexpr.py` and historical `verify_lispish.py` |
 | Dart | [Maintained example](integration-dart.md#verify-the-maintained-example), `examples/integration/dart/verify_words.py` | Same section, `examples/integration/dart/verify_deployment.py` |
 | Julia | [Maintained checks](integration-julia.md#run-the-maintained-setup-checks), `examples/integration/julia/verify_words.py` | Same section, `examples/integration/julia/verify_deployment.py` |
 | Lua and LuaJIT | [Consumer checks](integration-lua.md#run-the-maintained-consumer-checks), `examples/integration/lua/verify_words.py` for each runtime | Same section, `examples/integration/lua/verify_deployment.py` for each runtime |

@@ -9,8 +9,10 @@ engine through path dependencies. There is no Perl parser process in this route.
 
 This chapter covers a pinned source checkout, initial dependency preparation,
 native API use, real UTF-8 files, application values and deployment. The runnable
-examples live in `examples/integration/rust/`. Use the Lispish file example below
-for an application such as ARCHOGEN.
+examples live in `examples/integration/rust/`. Use the
+[document-file example](#read-document-files-in-your-application) for complete
+documents and token kinds, as required by ARCHOGEN and SEMULITH. The historical
+Lispish file example remains available for its original extraction contract.
 
 **Lispish scope:** the shipped grammar extracts the first parenthesized form.
 It can skip malformed or extra text. A successful value does **not** establish
@@ -295,9 +297,116 @@ bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --of
 ```
 
 That recovery proof is specific to this grammar and does not promise rollback of
-application effects. The separate `sexpr_file` example is still the next delivery
-step. The historical `lispish_file` adapter below expects head/tail values and
-cannot consume the tagged document merely by changing `--grammar`.
+application effects. The separate `sexpr_file` example below handles real files.
+The historical `lispish_file` adapter expects head/tail values and cannot consume
+the tagged document merely by changing `--grammar`.
+
+### Read document files in your application
+
+First complete [source checkout](#add-and-pin-the-source-dependency),
+[workspace setup](#applications-with-a-cargo-workspace), when applicable,
+[application-local storage](#keep-preparation-and-build-products-local), and
+[RGX preparation](#initial-rgx-preparation). These commands run from the
+application root with the `APP_ROOT` and `CARGO_TARGET_DIR` defined there.
+
+Add `serde_json = "1"` alongside the `linkedspec-runtime` path dependency in your
+application's existing dependency table. The new consumer needs no direct `serde`
+dependency. Copy and build its complete source:
+
+```sh
+mkdir -p src/bin
+cp vendor/linkedspec/examples/integration/rust/src/bin/sexpr_file.rs src/bin/
+bash vendor/linkedspec/tools/run_cargo_local.sh build \
+  --manifest-path "$APP_ROOT/Cargo.toml" --bin sexpr_file
+```
+
+Commit the application source and resulting `Cargo.lock`. Subsequent builds can
+use `--locked --offline` with the retained package store. Create a two-form file:
+
+```sh
+cat > document.sexp <<'SEXP'
+(v 1 "1")
+(done)
+SEXP
+bash vendor/linkedspec/tools/project_data_run.sh \
+  "$CARGO_TARGET_DIR/debug/sexpr_file" \
+  --grammar "$APP_ROOT/vendor/linkedspec/specs/SExprDocumentV1.spec" \
+  "$APP_ROOT/document.sexp"
+```
+
+Stdout is one JSON line containing the exact two-form document shown in the
+[grammar chapter](../specs-and-corpora/sexpr-document-v1.md#read-a-document).
+The first form's items have kinds `symbol`, `number`, `string`, with lexemes
+`v`, `1`, and `"1"` respectively; the quotes belong to the string lexeme.
+The second form is retained. No number conversion or escape decoding occurs.
+
+Pass several file paths to reuse one compiled engine. The consumer reads each
+file as exact UTF-8, selects `Document` explicitly, and writes the grammar's
+direct `serde_json::Value`. It does not use the historical adapter or add that
+adapter's 256-list depth limit. An empty file returns
+`{"format":"linkedspec-sexpr-v1","forms":[]}`. Grammar assets and application
+schemas remain separate: a number token's spelling does not establish its
+application range or meaning.
+
+Here is the complete native consumer:
+
+```rust
+{{#include ../../../../examples/integration/rust/src/bin/sexpr_file.rs:consumer}}
+```
+
+### Handle document-file failures
+
+The consumer exits 1 at its first error. Malformed document input emits no value
+for that file. Earlier successful files have already produced their JSON lines;
+later files are not attempted. Collect and validate the whole batch before
+committing application state if your application requires batch atomicity.
+
+For malformed text passed as `broken.sexp`, stderr contains:
+
+```json
+{"type":"document_parse_error","input":"broken.sexp","cause":{"type":"runtime_exit_now","status":1}}
+```
+
+The input field preserves the supplied path. This envelope belongs to the
+example. Its underlying error retains the native
+`RuntimeDiagnosticOutputExecutionError`, including typed `Exit`; ordinary runtime
+failures retain their structured diagnostic in `cause`. The host chooses process
+exit 1; the library does not terminate the application.
+
+Grammar-loading failures retain the standard `spec_pipeline_error` JSON fields.
+Invalid UTF-8 grammar bytes report `decode_spec_content` / `invalid_utf8`;
+malformed action code reports `compile_spec` / `spec_compile_failed` before any
+input file is loaded. Input I/O and invalid-UTF-8 errors are readable stderr
+messages naming the file. Invalid-UTF-8 arguments are rejected, rather than
+silently rewritten. Use `--` before an input file named `--grammar`.
+
+An explicit `--grammar` selects another location of the document grammar; it
+does not convert another grammar's result into the versioned format. In
+particular, Lispish has no `Document` entry and fails this consumer's explicit
+selection. The example installs no diagnostic-output sink, so DSL diagnostic
+helpers remain separate from its JSON value stream.
+
+### Bundle the document consumer
+
+Without `--grammar`, the default is `specs/SExprDocumentV1.spec` beside the running
+executable. Assemble the two-file bundle from the application root:
+
+```sh
+mkdir -p .app-data/document-dist/specs
+cp "$CARGO_TARGET_DIR/debug/sexpr_file" .app-data/document-dist/
+cp vendor/linkedspec/specs/SExprDocumentV1.spec .app-data/document-dist/specs/
+bash vendor/linkedspec/tools/project_data_run.sh \
+  "$APP_ROOT/.app-data/document-dist/sexpr_file" "$APP_ROOT/document.sexp"
+```
+
+Move the complete bundle together. The default asset path is derived at runtime
+from the executable; input paths and explicit grammar paths belong to the
+caller's working directory. A missing bundled grammar fails even if the caller's
+directory contains another copy. The retained binary needs no Perl process,
+LinkedSpec CLI, Python verifier or Cargo registry to parse files. Platform runtime
+libraries still apply. Verification covers a debug binary on macOS arm64,
+including a moved Unicode path and an unrelated working directory; release
+profiles and other deployment targets require their own checks.
 
 ## Parse Lispish files in your application
 
@@ -433,7 +542,8 @@ The file consumer returns `["r",["a","p\n   q) r"],["b","z"]]`, where JSON's
 verifier. The [Lispish walkthrough](../specs-and-corpora/lispish-spec-walkthrough.md#multiline-quoted-text)
 explains exact newline, escape and quote behavior. The separate document grammar
 passes the authored ARCHOGEN complete-input and SEMULITH kind cases on all six
-runtimes; its dedicated native file delivery and final report admission remain open.
+runtimes. The separate document-file consumer passes the same cases as files;
+independent final report admission remains open.
 Both consumers also reported setup difficulties inside an enclosing Cargo
 workspace. The [workspace setup above](#applications-with-a-cargo-workspace)
 addresses the reproduced membership failures without changing dependency pins.
@@ -508,6 +618,8 @@ bash tools/run_cargo_local.sh build --bins --offline --locked \
   --manifest-path examples/integration/rust/Cargo.toml
 bash tools/run_python_project_data.sh examples/integration/rust/verify_lispish.py \
   --binary rust/target/debug/lispish_file
+bash tools/run_python_project_data.sh examples/integration/rust/verify_sexpr.py \
+  --binary rust/target/debug/sexpr_file
 ```
 
 The workspace verifier checks only LinkedSpec and application manifests. It
@@ -522,6 +634,15 @@ adapter depth boundary. The Lispish verifier checks 26 real file values in one
 engine, file/argument/grammar/runtime failures, packaged assets, a different
 working directory and a moved bundle with spaces in its path. Python is only a
 verification dependency; the deployed application remains Rust.
+
+The document-file verifier independently consumes the 37 authored cases: 21 valid
+files in one engine and 16 rejected documents with typed causes and no partial
+value. It also checks the published file example, earlier-output retention,
+strict UTF-8 input/grammar/arguments, source-compilation failure, paths, option
+termination, and default/explicit assets. All valid cases repeat after bundle
+relocation. Binary, grammar and contract hashes remain unchanged, and owned
+temporary fixtures are removed. The historical adapter fails this document
+verifier as expected; its separate Lispish checks continue to pass.
 
 The workspace verifier uses committed native source and dependency pins, with
 the current example manifest, in an isolated local fixture. Nine Cargo metadata
