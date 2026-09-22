@@ -39,6 +39,53 @@ cannot recover skipped text or missing token distinctions. Strict document/token
 parsing is pending under `SESSION-STARTUP-READING.83.1-.83.3`. The walkthrough's
 valid examples below retain their historical head/tail representation.
 
+## Multiline quoted text
+
+Double-quoted strings preserve actual line feeds, carriage returns, indentation,
+and blank lines. Parentheses inside such strings are data and do not close a form:
+
+```text
+(r (a "p
+   q) r") (b "z"))
+```
+
+The historical head/tail result is:
+
+```json
+["r",[["a",["p\n   q) r"]],["b",["z"]]]]
+```
+
+Here `\n` is JSON's representation of an actual line feed. An authored backslash
+followed by `n` remains those two literal characters; Lispish does not decode
+escapes. CRLF remains CR followed by LF. Adjacent fragments still concatenate:
+
+```text
+(adjacent a"x
+y"[z]{w})
+```
+
+This returns `["adjacent",["ax\ny[z]w"]]` in the historical representation.
+
+Both quote readers use the inline `(?s)` regex flag so their content captures
+include newlines. The brace reader uses both readers:
+
+```text
+(brace-single {before 'x
+ }y' after} tail)
+```
+
+The inner `}` stays inside the quoted text. The result is
+`["brace-single",["before 'x\n }y' after","tail"]]`: the outer braces are removed,
+and the single quotes are retained. Single quotes in ordinary parenthesized forms
+remain atom characters: `('x y')` returns the two atoms `'x` and `y'`.
+
+The regression fixture `tests/lispish/quoted-newlines.json` covers multiline
+payloads, both quote readers through matched parent edges, siblings, embedded
+delimiters, escapes, comments, Unicode, empty strings and historical adjacent-fragment behavior. Phase0's
+`lispish_ast_smoke` consumes the same expectations as the native CLI matrix.
+This fixes SEMULITH/LS-001; the document-validation and atom-kind limitations above
+remain separately owned.
+
 ## How to run it
 
 `Lispish.spec` is the backend-neutral contract; any LinkedSpec backend can run it. The
@@ -275,13 +322,13 @@ The token readers are intentionally small.
 Double-quoted strings:
 
 ```text
-dquotes: /"(.*?)(?<!\\)"/     I.return(hash("type", "DQUOTES", "content", entry_group(0)))
+dquotes: /(?s)"(.*?)(?<!\\)"/     I.return(hash("type", "DQUOTES", "content", entry_group(0)))
 ```
 
 Single-quoted strings:
 
 ```text
-squotes: /'(.*?)(?<!\\)'/     I.return(hash("type", "SQUOTES", "content", entry_group(0)))
+squotes: /(?s)'(.*?)(?<!\\)'/     I.return(hash("type", "SQUOTES", "content", entry_group(0)))
 ```
 
 Ordinary atoms:

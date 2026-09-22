@@ -10,6 +10,12 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-22 — SESSION-STARTUP-READING.83.2.1 - preserve multiline Lispish quoted strings
+
+Enable DOTALL in both Lispish quote patterns so actual LF remains data and cannot corrupt following forms. Add shared CLI/Phase0 regressions, retain all eight SEMULITH/LS-001 inputs/expectations in the Rust file verifier, synchronize the shipped corpus copy and update exact book examples/status. Historical extraction, escapes, adjacency and atom-kind behavior remain. LS-002 contract work is next.
+
+Validation: three final fixtures RED on clean-HEAD source; Phase0 smoke 9 and six-runtime/two-environment 36 legs GREEN; Rust 26 file values/18 groups, descriptor 9/9, corpus identity/value, book/public/syntax/memory/history/Knowledge checks and normal doctrine hooks. Focused correction; no canonical run or push.
+
 ## 2026-09-22 — SESSION-STARTUP-READING.85 - recover SEMULITH reports and repair ownership
 
 Recover the three SEMULITH reports from integration .8.1 and correct the false missing-identities blocker across task, roadmap, memory, Knowledge and book pointers. LS-001 has four fresh native LF failures and four matching controls, with full stdout/stderr/status captured; the 29-file snapshot hash matches intake. Add bounded .83.2.1 ownership for the compatible LF repair; retain .83.1 kind/strict design and verified LS-003 integration remedies. Source and dependency pins are unchanged.

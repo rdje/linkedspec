@@ -10,6 +10,12 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-22 — SESSION-STARTUP-READING.83.2.1 - preserve multiline Lispish quoted strings
+
+Toolbox-generated dependency slots trace quoted-LF corruption to Lispish.spec:69/71: dot without DOTALL fails the complete token, letting seek dispatch treat payload as syntax. Both quote readers matter inside braces. Direct root calls to their initial actions have no parent entry captures, even on one-line input; eight root/child controls exposed invalid initial probes, which were replaced by real parent/brace inputs and replayed RED against exact pre-fix source. No runtime change is needed.
+
+Validation: three final fixtures RED on clean-HEAD source; Phase0 smoke 9 and six-runtime/two-environment 36 legs GREEN; Rust 26 file values/18 groups, descriptor 9/9, corpus identity/value, book/public/syntax/memory/history/Knowledge checks and normal doctrine hooks. Focused correction; no canonical run or push.
+
 ## 2026-09-22 — SESSION-STARTUP-READING.85 - recover SEMULITH reports and repair ownership
 
 Report retrieval must use the source-qualified integration register: ARCHOGEN and SEMULITH reuse LS numbers. SEMULITH/LS-001 is an independently reproducible quoted-LF bug; LS-002 asks for kind-preserving design without silently changing historical Lispish; LS-003 guidance remedies are verified. .85 removes a false missing-input blocker. The compatible LF child can proceed before the broader strict/token contract, preserving historical extraction and output shape. Fresh eight-case Rust replay captures complete output and real statuses, avoiding the supplied pipeline that hides stderr and producer status.

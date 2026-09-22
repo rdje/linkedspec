@@ -358,18 +358,26 @@ requiring strict document validation or multiple top-level forms need an explici
 grammar/contract for those requirements. That work is tracked by
 `SESSION-STARTUP-READING.83.1-.83.3`; it is not implemented by this example.
 
-Consumer reports received on September 20 add concrete cases to that work:
-ARCHOGEN requires every top-level form and retained atom kinds; SEMULITH reports
-that a literal LF inside a double-quoted string can change the returned tree,
-including following sibling forms. SEMULITH supplied a candidate pattern change,
-but its result has not yet been independently verified by LinkedSpec. Treat
-multiline quoted strings as an unresolved limitation of this integration path.
+SEMULITH/LS-001's multiline-string corruption is fixed by enabling newline
+matching in both quote readers. Actual LF, indentation and embedded parentheses
+stay inside the string, and following sibling forms retain their structure:
+
+```text
+(r (a "p
+   q) r") (b "z"))
+```
+
+The file consumer returns `["r",["a","p\n   q) r"],["b","z"]]`, where JSON's
+`\n` represents the actual LF. The eight report cases are included in the file
+verifier. The [Lispish walkthrough](../specs-and-corpora/lispish-spec-walkthrough.md#multiline-quoted-text)
+explains exact newline, escape and quote behavior. ARCHOGEN's complete-input and
+atom-kind requirements, shared with SEMULITH/LS-002, remain under startup .83.
 Both consumers also reported setup difficulties inside an enclosing Cargo
 workspace. The [workspace setup above](#applications-with-a-cargo-workspace)
 addresses the reproduced membership failures without changing dependency pins.
-Bootstrap error reporting and prerequisite navigation remain tracked in
-`BACKEND-INTEGRATION-GUIDES.8.3-.8.4`. These setup repairs do not change Lispish's
-input-consumption or token-kind behavior.
+Prerequisite navigation was corrected under integration .8.4. The public RGX
+bootstrap progress-message report remains owned by `RGX-CONSUMER-BUILD-REPORTS.1`.
+These setup repairs do not change Lispish's input-consumption or token-kind behavior.
 
 ### Handle failures and diagnostics
 
@@ -448,13 +456,13 @@ exclusion that must succeed. It neither probes transitive manifests nor replaces
 RGX's documented bootstrap and the native build checks.
 
 The three Rust tests check published result shapes, rejected shapes and the
-adapter depth boundary. The Lispish verifier checks 18 real file values in one
+adapter depth boundary. The Lispish verifier checks 26 real file values in one
 engine, file/argument/grammar/runtime failures, packaged assets, a different
 working directory and a moved bundle with spaces in its path. Python is only a
 verification dependency; the deployed application remains Rust.
 
 The workspace verifier uses committed native source and dependency pins, with
-the current example manifest, in an isolated local fixture. Ten Cargo metadata
+the current example manifest, in an isolated local fixture. Nine Cargo metadata
 checks cover standalone use, enclosing-workspace boundaries and the required
 host exclusion for vendored dependency builds. It performs no dependency build and does not copy local
 dependency edits. This verifier needs Python 3.12 or later for filtered archive

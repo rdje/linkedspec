@@ -71,6 +71,15 @@ def main():
             ("brackets", "([a[b]c] {a{b}c} {})", ["[a[b]c]", "a{b}c", ""]),
             ("adjacent", '(a" b"[c]{d})', ["a b[c]d"]),
             ("single-quotes", "('x y')", ["'x", "y'"]),
+            # SEMULITH/LS-001: exact controls and formerly corrupted LF payloads.
+            ('semulith-01-control-one-line', '(r (a "x y"))\n', ['r', ['a', 'x y']]),
+            ('semulith-02-control-parens', '(r (a "see (2) ok"))\n', ['r', ['a', 'see (2) ok']]),
+            ('semulith-03-control-tab', '(r (a "x\ty"))\n', ['r', ['a', 'x\ty']]),
+            ('semulith-04-control-cr', '(r (a "x\ry"))\n', ['r', ['a', 'x\ry']]),
+            ('semulith-05-lf-data-only', '(r (a "x\ny"))\n', ['r', ['a', 'x\ny']]),
+            ('semulith-06-lf-indented', '(r (a "x\n   y"))\n', ['r', ['a', 'x\n   y']]),
+            ('semulith-07-lf-sibling-follows', '(r (a "x\n   y") (b "z"))\n', ['r', ['a', 'x\n   y'], ['b', 'z']]),
+            ('semulith-08-lf-close-paren', '(r (a "p\n   q) r") (b "z"))\n', ['r', ['a', 'p\n   q) r'], ['b', 'z']]),
             # Characterization of historical limitations, not desired validation.
             ("extra-text", "prefix (a) suffix", ["a"]),
             ("two-forms", "(a)\n(b)", ["a"]),
@@ -82,7 +91,7 @@ def main():
         ]
         files = [fixture(f"{name}.sexp", text) for name, text, _ in cases]
         expected = [value for _, _, value in cases]
-        run("18 file values / one engine", binary, ["--grammar", grammar, *files], expected=expected)
+        run(f"{len(cases)} file values / one engine", binary, ["--grammar", grammar, *files], expected=expected)
         run("published settings file", binary,
             ["--grammar", grammar, root / "examples/integration/rust/settings.sexp"],
             expected=[["application", ["name", "ARCHOGEN"], ["paths", "src", "output"], ["enabled", "true"]]])

@@ -43261,6 +43261,19 @@ subtest 'lispish_ast_smoke' => sub {
     ];
 
     is_deeply($ast, $expected, 'Lispish nested AST matches expected baseline shape');
+
+    # The same authored expectations run through every native primary command.
+    require JSON::PP;
+    my $manifest_path = File::Spec->catfile($Bin, '..', 'tests', 'lispish', 'quoted-newlines.json');
+    my $manifest = JSON::PP->new->decode(slurp($manifest_path));
+    for my $case (@{$manifest->{cases}}) {
+        my %args = @{$case->{args}};
+        my $text = $args{'--input'};
+        my $value = eval { $parser->(\$text) };
+        is($@, '', "$case->{id} executes without exception");
+        my $wanted = JSON::PP->new->decode($case->{expect}{stdout}{text});
+        is_deeply($value, $wanted, "$case->{id} preserves exact quoted content and surrounding structure");
+    }
 };
 
 subtest 'vhdl_invariants_smoke' => sub {

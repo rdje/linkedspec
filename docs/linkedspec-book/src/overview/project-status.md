@@ -501,9 +501,9 @@ The director has replaced the exhaustive startup prerequisite with targeted read
 (ADR0123). Context, Git state and task selection should normally take 2–5 minutes;
 a fix still requires thorough reading of its affected code, contracts, tests and book
 sections. The complete source audit is preserved separately and remains incomplete.
-Current priority is the three SEMULITH reports: LS-001 multiline quoted strings can
-silently corrupt the tree and are the next repair; LS-002 requests a separate
-kind-preserving representation and remains open. LS-003 workspace and prerequisite
+SEMULITH/LS-001 multiline quoted-string corruption is repaired: both quote readers
+preserve LF and surrounding structure, with shared proof across all six runtime
+routes. LS-002 requests a separate kind-preserving representation and remains open. LS-003 workspace and prerequisite
 guidance remedies are already verified in the Rust integration guide. The current
 Lispish grammar retains its historical extraction and untyped string-value contract.
 

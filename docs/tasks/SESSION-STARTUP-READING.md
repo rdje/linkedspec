@@ -4663,13 +4663,25 @@ remain. Reading completion and runtime signoff remain distinct.
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.83.2.1`
-  Status: `pending`
+  Status: `done`
   Goal: Fix SEMULITH/LS-001 quoted LF tree corruption in the historical Lispish grammar without changing its output contract.
   Dependencies: .85 clean handoff; targeted Toolbox attribution, grammar and existing quote-contract review. This compatible payload repair does not require the broader strict/token design .83.1.
-  Scope: Quoted-token newline handling, persistent independent regressions, relevant native consumer compatibility and exact book examples. Review both quote rules and public regex support; no dependency internals or pins.
+  Activation commit: `392bd5335dbcb9f6eddf2642fc0f70d3d15164df`.
+  Verification tier: `focused`
+  Focused checks: RED/GREEN shared quote fixtures through Perl and all native primary commands including LuaJIT; Rust eight-report-case file consumer, existing Lispish compatibility, Phase0 smoke and descriptor readiness; memory, histories, book and normal doctrine hooks.
+  Canonical trigger: Bounded grammar bug correction preserves historical output and public regex contracts; no admission, gate, toolchain, dependency or generated-format movement. Escalate if cross-backend proof exposes unresolved uncertainty.
+  Scope: Quoted-token newline handling, persistent independent regressions, the existing shipped corpus source copy, relevant native consumer compatibility and exact book examples/current verifier counts. Review both quote rules and public regex support; no dependency internals or pins.
   Acceptance: Prove RED/GREEN for the eight supplied cases, exact LF/tab/CR/indentation/siblings/parentheses and quote/escape controls. Preserve historical extraction and string values; distinguish kind-preserving/document-validation follow-ons. Run all affected backend compatibility routes and selected component checks, record actual proof and commit before moving to .83.1.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: PASS: exact clean-HEAD grammar fails all three final shared fixtures; fixed Phase0 smoke passes 9 assertions, and Perl/Rust/Dart/Julia/PUC Lua/LuaJIT pass 3 fixtures in both default and POSIX environments (36 command legs; 19 aggregate forms plus two isolated quote contexts). Rust passes 26 file values through one engine and all 18 existing verification groups, including all eight byte-exact report inputs/expectations. Descriptor readiness remains 9/9 with 0 blockers; corpus copy is exact and retains its x/y value. Eight root/child quote controls explain and correct the initial invalid root-capture probes without a runtime change. Book, direct public checks, syntax, memory/history/Knowledge/diff and normal nine-doctrine hooks govern focused landing; no canonical run or push.
+  Commit: `SESSION-STARTUP-READING.83.2.1 - preserve multiline Lispish quoted strings`
+
+  Acceptance Checklist:
+  - [x] **REPRODUCE / ISSUE** — Original eight-report Rust replay has four silent LF failures; final shared fixtures fail against exact pre-fix grammar through bin/linkedspec.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — LinkedSpec::get_parser return_descriptor/dump_parser_source traces dependency slots to specs/Lispish.spec:69 and :71: dot excludes LF, so seek dispatch reads quoted payload as syntax. Initial-action entry captures require a matched parent edge; eight root/child controls distinguish that contract.
+  - [x] **FIX** — Add (?s) to both quote patterns, synchronize the exact corpus source copy, and add shared authored expectations plus eight unchanged report inputs/values to native file verification.
+  - [x] **ADDRESSED (verified)** — FAIL->PASS for all three shared fixtures; 36 native/reference command legs and Rust 26-file/18-group verification PASS. No source guessing, escape decoding or consumer-side repair.
+  - [x] **NO REGRESSION** — Phase0 smoke 9, descriptor 9/9, exact x/y corpus and original Rust compatibility/error/deployment groups PASS; controls retain CR/LF/CRLF, Unicode, comments, escapes, adjacency, single quotes and braces.
+  - [x] **LOCKSTEP** — Quote source, copied corpus, regression fixture, Rust verifier, book examples and task/Knowledge/live roadmap pointers agree; ordinary focused checks and git diff --check PASS.
 
 - ID: `SESSION-STARTUP-READING.83.3`
   Status: `pending`
@@ -4714,7 +4726,7 @@ audit range, not the default repair frontier.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.83.2.1` | `pending` | Fix SEMULITH/LS-001 quoted LF corruption; four native failing cases are reproduced. Then .83.1 owns the kind-preserving contract. SEMULITH/LS-003 remedies are already verified. |
+| 1 | `SESSION-STARTUP-READING.83.1` | `pending` | Define the compatible kind-preserving/complete-document contract for SEMULITH/LS-002 and ARCHOGEN/LS-002/003. LS-001 is repaired; SEMULITH/LS-003 remedies are verified. |
 
 ## Reading Ledger
 
@@ -7496,6 +7508,8 @@ All 53 owned scopes are read: HLink delimiter/raw text, Liberty scalar/complex a
 
 ## Verification Log
 
+- 2026-09-22 .83.2.1: PASS: exact clean-HEAD grammar fails all three final shared fixtures; fixed Phase0 smoke passes 9 assertions, and Perl/Rust/Dart/Julia/PUC Lua/LuaJIT pass 3 fixtures in both default and POSIX environments (36 command legs; 19 aggregate forms plus two isolated quote contexts). Rust passes 26 file values through one engine and all 18 existing verification groups, including all eight byte-exact report inputs/expectations. Descriptor readiness remains 9/9 with 0 blockers; corpus copy is exact and retains its x/y value. Eight root/child quote controls explain and correct the initial invalid root-capture probes without a runtime change. Book, direct public checks, syntax, memory/history/Knowledge/diff and normal nine-doctrine hooks govern focused landing; no canonical run or push.
+
 - 2026-09-22 .85: Exact report register/snapshot recovered; fresh Rust replay confirms four controls and four LF failures, all real exits0/stderr empty. No missing-user-input blocker remains.
 
 - 2026-09-22 .84: Targeted-startup adoption preserves prior reading evidence and source; selected continuity checks govern landing.
@@ -7669,6 +7683,8 @@ Knowledge/book/memory/history/whitespace and all nine doctrines pass. Preceding 
 CLI66x2 and Phase0 1032/1032; 1163 seconds is Phase0 only, with 25 optional gates skipped.
 
 ## Commit Log
+
+- 2026-09-22 .83.2.1: `SESSION-STARTUP-READING.83.2.1 - preserve multiline Lispish quoted strings`; activation 392bd5335; .83.1 follows clean handoff.
 
 - 2026-09-22 .85: `SESSION-STARTUP-READING.85 - recover SEMULITH reports and repair ownership`; activation 8f0cdf6b; .83.2.1 follows clean handoff.
 

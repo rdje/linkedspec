@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "suite": "lispish-quoted-newlines",
+  "cases": [
+    {
+      "id": "quoted_newlines_and_controls",
+      "family": "lispish-quoted-newline-regression",
+      "args": [
+        "--spec-file",
+        "{{REPO_ROOT}}/specs/Lispish.spec",
+        "--input",
+        "(regression\n(r (a \"x y\"))\n(r (a \"see (2) ok\"))\n(r (a \"x\ty\"))\n(r (a \"x\ry\"))\n(r (a \"x\ny\"))\n(r (a \"x\n   y\"))\n(r (a \"x\n   y\") (b z))\n(r (a \"p\n   q) r\") (b z))\n(crlf \"x\r\ny\")\n(unicode \"\u00e9\n\n\u6771\u4eac\")\n(escaped \"a\\\"b\nc\" \"a\\nb\")\n(empty \"\" \"\n\")\n(comments ; before\n first ; middle\n second\n)\n(brace-double {before \"x\n }y\" after} tail)\n(brace-single {before 'x\n }y' after} tail)\n(single-ordinary 'x\ny')\n(adjacent a\"x\ny\"[z]{w})\n(brackets [x\ny] {x\ny})\n(again)\n)"
+      ],
+      "files": [],
+      "expect": {
+        "exit": 0,
+        "stdout": {
+          "text": "[\"regression\",[[\"r\",[[\"a\",[\"x y\"]]]],[\"r\",[[\"a\",[\"see (2) ok\"]]]],[\"r\",[[\"a\",[\"x\\ty\"]]]],[\"r\",[[\"a\",[\"x\\ry\"]]]],[\"r\",[[\"a\",[\"x\\ny\"]]]],[\"r\",[[\"a\",[\"x\\n   y\"]]]],[\"r\",[[\"a\",[\"x\\n   y\"]],[\"b\",[\"z\"]]]],[\"r\",[[\"a\",[\"p\\n   q) r\"]],[\"b\",[\"z\"]]]],[\"crlf\",[\"x\\r\\ny\"]],[\"unicode\",[\"\u00e9\\n\\n\u6771\u4eac\"]],[\"escaped\",[\"a\\\\\\\"b\\nc\",\"a\\\\nb\"]],[\"empty\",[\"\",\"\\n\"]],[\"comments\",[\"first\",\"second\"]],[\"brace-double\",[\"before \\\"x\\n }y\\\" after\",\"tail\"]],[\"brace-single\",[\"before 'x\\n }y' after\",\"tail\"]],[\"single-ordinary\",[\"'x\",\"y'\"]],[\"adjacent\",[\"ax\\ny[z]w\"]],[\"brackets\",[\"[x\\ny]\",\"x\\ny\"]],[\"again\",null]]]\n"
+        },
+        "stderr": {
+          "text": ""
+        },
+        "files": []
+      }
+    },
+    {
+      "id": "double_quote_form",
+      "family": "lispish-quoted-newline-regression",
+      "args": [
+        "--spec-file",
+        "{{REPO_ROOT}}/specs/Lispish.spec",
+        "--input",
+        "(\"x\n  ) } y\")"
+      ],
+      "files": [],
+      "expect": {
+        "exit": 0,
+        "stdout": {
+          "text": "[\"x\\n  ) } y\",null]\n"
+        },
+        "stderr": {
+          "text": ""
+        },
+        "files": []
+      }
+    },
+    {
+      "id": "single_quote_in_braces",
+      "family": "lispish-quoted-newline-regression",
+      "args": [
+        "--spec-file",
+        "{{REPO_ROOT}}/specs/Lispish.spec",
+        "--input",
+        "({'x\n  ) } y'})"
+      ],
+      "files": [],
+      "expect": {
+        "exit": 0,
+        "stdout": {
+          "text": "[\"'x\\n  ) } y'\",null]\n"
+        },
+        "stderr": {
+          "text": ""
+        },
+        "files": []
+      }
+    }
+  ]
+}

@@ -24,8 +24,8 @@ blanket blocking condition in older plans, while real technical dependencies, re
 policies, quality, verification and commit hygiene remain. No defect is closed by a
 reading or workflow checkpoint. The three reports were already registered by integration
 .8.1: SEMULITH/LS-001 quoted LF corruption, LS-002 atom-kind preservation, and LS-003
-integration guidance. Startup .85 corrects the retrieval failure, selects .83.2.1 for
-the first repair, and retains verified LS-003 remedies. Follow
+integration guidance. Startup .85 corrects the retrieval failure, routes the first repair to .83.2.1, which now fixes quoted LF across six runtime
+routes. .83.1 continues the kind-preserving contract; LS-003 remedies remain verified. Follow
 [[archogen-rust-lispish-integration]] for the exact register and evidence.
 
 Related: [[startup-codebase-reading-inventory]], [[memory-handoff-task-status-consistency]].

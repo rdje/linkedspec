@@ -66,9 +66,9 @@ I {word = []; tail = []; retv = undef; head = undef; has_head = undef}
 
 sbrackets: /(\[(?:[^\[\]]++|(?R))+\])/     I.return(hash("type", "SBRACKETS", "content", entry_text()))
 
-dquotes: /"(.*?)(?<!\\)"/     I.return(hash("type", "DQUOTES", "content", entry_group(0)))
+dquotes: /(?s)"(.*?)(?<!\\)"/     I.return(hash("type", "DQUOTES", "content", entry_group(0)))
 
-squotes: /'(.*?)(?<!\\)'/     I.return(hash("type", "SQUOTES", "content", entry_group(0)))
+squotes: /(?s)'(.*?)(?<!\\)'/     I.return(hash("type", "SQUOTES", "content", entry_group(0)))
 
 curlyb: /(?<!\\)\{/ /(?<!\\)\}/ I {content = undef}
  -> curlyb

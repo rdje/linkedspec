@@ -20,9 +20,9 @@ answers:
   - how does a host Cargo workspace exclude vendored LinkedSpec
   - does the workspace verifier query dependency internals
 date: 2026-09-22
-status: workspace and public integration verified; prerequisite guidance corrected; bootstrap message and strict Lispish reports remain open
+status: multiline quotes and workspace/prerequisite guidance repaired; atom-kind/strict document and upstream bootstrap-message work remains
 tags: [rust, lispish, embedding, dependencies, discussion]
-evidence: "September13 native Lispish proof; September20 report intake, workspace repair and successful RGX public bootstrap/native consumer proof. Supplied grammar patch remains unverified locally."
+evidence: "September13 native Lispish proof; September20 report intake, workspace repair and successful RGX public bootstrap/native consumer proof. Startup .83.2.1 verifies and applies the two quote-pattern flags with independent six-runtime recurrence."
 reverify: "Follow the public preparation/workspace sequence in docs/linkedspec-book/src/public-api/integration-rust.md, then its native consumer checks. Treat rgx/docs/INTEGRATION.md as the dependency authority; do not inspect implementation."
 ---
 
@@ -30,6 +30,18 @@ reverify: "Follow the public preparation/workspace sequence in docs/linkedspec-b
 published integration document, public APIs and contracts are the sole authority.
 RGX owns PGEN and all transitive preparation; no separate PGEN procedure or
 internal dependency knowledge belongs in LinkedSpec. Reports go to RGX.
+
+## September 22 multiline quote repair
+
+Startup .83.2.1 applies the reported inline DOTALL change to both quote readers.
+All eight exact report inputs/expected values now pass in the native Rust file
+consumer, which checks 26 values through one engine and 18 total verification groups.
+The shared regression passes Perl, Rust, Dart, Julia, PUC Lua and LuaJIT in both
+default and POSIX environments (36 command legs); exact pre-fix source fails all
+three final fixtures. [[lispish-multiline-quoted-payload]] owns the mechanism,
+entry-context probe correction, source hashes and repeatable checks. Strict
+consumption and atom kinds remain .83.1/.83.2/.83.3-owned. Historical intake and
+recovery observations below retain their dated scope.
 
 ## September 22 report recovery
 
@@ -142,7 +154,7 @@ and other numbers for different concerns.
 | ARCHOGEN/LS-005 | Open/minor: checkout instructions need an explicit forward pointer to required preparation. | Integration `.8.4` corrects and verifies prerequisite navigation; downstream report state unchanged. |
 | ARCHOGEN/LS-006 | Withdrawn by reporter: the hex underscore remains intact. | Intake retains the correction; no defect repair claimed or requested. |
 | ARCHOGEN/LS-007 | No-action: adjacent fragments join as documented. | Intake retains the measured compatibility case; no behavior change requested. |
-| SEMULITH/LS-001 | Draft/high, blocks SOT-FORMAT.9: LF inside a quoted string reportedly becomes syntax and changes the tree. | Startup `.83.1` newline/compatibility decision, `.83.2` concrete token repair, `.83.3` regression admission. |
+| SEMULITH/LS-001 | Supplied draft/high report; the quoted-LF defect is now repaired and independently verified locally. Downstream acceptance is not claimed. | Startup `.83.2.1` fixes both quote readers and verifies all eight report cases plus six-runtime recurrence; see [[lispish-multiline-quoted-payload]]. |
 | SEMULITH/LS-002 | Draft/medium: documented atom-kind erasure limits source-preserving consumers; explicitly a design request. | Startup `.83.1-.83.3`; no silent change to historical Lispish requested. |
 | SEMULITH/LS-003 | Draft/low: enclosing workspace, file-section prerequisite back-reference, optional recursive checkout cost. | Item1 repaired by `.8.2`; items2-3 corrected by `.8.4` navigation and qualified observation. Downstream report remains draft. |
 
