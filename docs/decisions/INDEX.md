@@ -150,6 +150,8 @@ changed* lives in git (layer D), not here.
 
 | [0123](0123-targeted-session-startup.md) | Targeted session startup with fast context recovery | 2026-09-22 | accepted | continuity, startup, reading |
 
+| [0124](0124-kind-preserving-sexpr-document.md) | Separate versioned s-expression grammar preserves atom kinds and validates complete documents | 2026-09-22 | accepted design; implementation pending | grammar, compatibility, token-kind, document-validation |
+
 ## How to add a record
 1. Copy the shape of an existing record (`Date`, `Status`, `Tags`, then `## Context /
    Decision / Consequences / Links`).

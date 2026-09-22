@@ -1,11 +1,11 @@
 # MEMORY
 
-- activation_commit: `392bd5335dbcb9f6eddf2642fc0f70d3d15164df` — clean .85 checkpoint; quoted LF repair activation.
-- latest_completed_leaf: `SESSION-STARTUP-READING.83.2.1 - preserve multiline Lispish quoted strings`; all six runtime routes verified.
-- active_work_unit: `SESSION-STARTUP-READING.83.1` — pending; kind-preserving and strict document contract.
-- next_action: Define the compatible kind-preserving and complete-document grammar contract under SESSION-STARTUP-READING.83.1 for SEMULITH/LS-002 and ARCHOGEN/LS-002/003; then implement its bounded children. LS-001 is repaired and LS-003 integration remedies remain verified.
+- activation_commit: `8259719f8198a1280c8d91d07a9797ef39e036a8` — clean quoted-LF checkpoint; document contract activation.
+- latest_completed_leaf: `SESSION-STARTUP-READING.83.1 - define kind-preserving document grammar`; accepted design, delivery pending.
+- active_work_unit: `SESSION-STARTUP-READING.45.1` — pending; Rust must reject malformed rule blocks.
+- next_action: Repair Rust warning-and-drop compilation under SESSION-STARTUP-READING.45.1, then verify its carriers and closeout before implementing ADR0124 under .83.2.2/.83.2.3. Preserve the committed Lispish LF fix and historical result contract.
   Named-argument direction PARSER-AUTHORING-APIS.4 is approved and parked; other authoring proposals and approved formats stay parked.
-- in_flight_uncommitted: none; .83.2.1 repair, regressions and documentation committed before contract work.
+- in_flight_uncommitted: none; .83.1 contract, acceptance vectors and compiler repair decomposition committed before implementation.
 - blockers: Wrapper startup .7 remains open; warned-child group matched, but denied-call cause and original lost PUC stream remain unproved. Recovery/purge stay prohibited.
 - current_rust_warning_debt: Repeated carriers report 1,870 pgen plus 26 rgx-core output warnings; RUST-DEPENDENCY-WARNING-ZERO.1-.7 own public RGX reports and result verification without suppression; dependency internals are excluded.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
@@ -53,8 +53,8 @@
   use exact staged canonical CI; task-tree/index, Knowledge Map, mdBook, and bounded live/history move in lockstep.
 - current_engineering_notes_capacity: ADR0122 admits 43 collection files /42 manifest lines /25410 manifest bytes; current37/36/21737 stay bounded.
   Notes segment4971 preserves 128 lines /26949 bytes from clean d95047136; old archive rows/bytes remain exact.
-- current_change_history_capacity: ADR0122 admits 47 collection files /46 manifest lines /26255 manifest bytes; current40/39/22223 stay bounded.
-  Changes segment4973 preserves 117 lines /29044 bytes from clean 5fab5aa6; old archive rows/bytes remain exact.
+- current_change_history_capacity: ADR0122 admits 47 collection files /46 manifest lines /26255 manifest bytes; current41/40/22799 stay bounded.
+  Changes segment4972 preserves 136 lines /27060 bytes from clean 8259719f8; old archive rows/bytes remain exact.
 - dependency_boundary: September20: LinkedSpec integrates only with RGX via its published integration document/APIs/contracts. RGX owns PGEN; no separate PGEN procedure, internal inspection/analysis, patches or pin changes.
   Normal documented builds remain authorized; retain caches. Startup .80.1-.4 may observe public behavior or track upstream repairs, not investigate dependency internals.
-- latest_bootstrap_read: ADR0123 targets2–5 minute startup plus thorough task-specific reading. Full audit remains incomplete and separate: conformance89/143,109904 fragments/4784266 baseline bytes/133 files; .1.90 is next only when that audit resumes. SEMULITH/LS-001 is repaired; LS-002 contract/implementation is next under .83; LS-003 integration remedies are verified.
+- latest_bootstrap_read: ADR0123 targets2–5 minute startup plus thorough task-specific reading. Full audit remains incomplete and separate: conformance89/143,109904 fragments/4784266 baseline bytes/133 files; .1.90 is next only when that audit resumes. SEMULITH/LS-001 is repaired; LS-002 design is ADR0124; .45 compiler rejection precedes its implementation under .83; LS-003 integration remedies are verified.

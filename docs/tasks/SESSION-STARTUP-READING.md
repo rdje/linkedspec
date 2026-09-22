@@ -3454,15 +3454,42 @@ remain. Reading completion and runtime signoff remain distinct.
 - ID: `SESSION-STARTUP-READING.45`
   Status: `pending`
   Goal: Reject malformed Rust rule code instead of accepting a warning and dropping the block.
-  Dependencies: `.3`/`.4`/`.5`.
+  Dependencies: ADR0123 targeted reading supersedes the blanket startup gate; .83.1 contract checkpoint commits first.
+  Children: `.45.1`, `.45.2`, `.45.3`.
   Acceptance: After prerequisite reading, split bounded parser/compiler, carrier-regression, and public alignment leaves before implementation. Make malformed lifecycle/action/blind blocks return precise
     compilation errors; retain valid block behavior and typed diagnostics. Cover all rule-code call sites
     and native/reconstructed/generated routes, census shipped malformed examples, and preserve function-body rejection. Do not broaden accepted syntax or suppress errors to obtain passing tests.
+  September22 recurrence: The .83.1 prototype used nonportable infix comparison in an LX block. Current Rust exits 0 after warning that the block cannot parse; compiler.rs:1075-1088 returns Ok(None), and compile_rule:1303-1310 drops it. The documented num_ne(...) call fixes the prototype spelling, but cannot close compiler rejection. This repair precedes strict-grammar delivery; exact fresh output is .linkedspec-data/scratch/sexpr-contract/compiler-drop-reproduction.json.
   Verification: `pending` — Eleven managed CLI controls establish five malformed rule blocks accepted with
     warning, compile:ok/invoke:ok, and null or fallback 42. Three valid controls and three rejecting
     controls pass their diagnostic assertions. compiler.rs parse_rule_code_block returns Ok(None) outside
     five governed error prefixes, and compile_rule drops that absent block. Nested-write and mutation
     argument errors also take this path.
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.45.1`
+  Status: `pending`
+  Goal: Make Rust rule-code parse errors reject compilation through the shared compiler boundary.
+  Dependencies: .83.1 clean checkpoint; read current parse_rule_code_block, all callers and their tests using the existing Knowledge diagnosis.
+  Scope: Replace warning/drop behavior with attributed compile errors; focused lifecycle/action/blind-call and public CLI regressions. Preserve function-body errors, governed diagnostic detail and all valid code. Do not broaden syntax or suppress warnings to pass.
+  Acceptance: RED/GREEN malformed I/E/LX/action/blind blocks, including the observed invalid comparison, with exact rule/block context; valid twins retain values and clean stderr. Run changed compiler tests and existing shipped/corpus coverage, owning any exposed failures before changing fixtures.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.45.2`
+  Status: `pending`
+  Goal: Verify malformed-code rejection across supported Rust compilation and artifact creation routes.
+  Dependencies: .45.1 committed with clean handoff.
+  Acceptance: Identify actual public native, serialized/reconstructed and generated/emitted entry routes and prove the rejection reaches each supported boundary before an artifact or accepted result is produced. Retain valid round trips and independently verify diagnostics; do not infer execution from emitted text or claim unrelated parser-panic repair .46.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.45.3`
+  Status: `pending`
+  Goal: Close the verified Rust compiler rejection repair and resume strict-document implementation.
+  Dependencies: .45.1/.45.2 clean handoffs.
+  Acceptance: Align public compile-error guidance, Knowledge and all live pointers; distinguish syntax rejection from separately owned Unicode diagnostics and other parser defects. Run the designated canonical closeout gate and close only the verified rule-block error-propagation scope.
+  Verification: `pending`
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.46`
@@ -4645,19 +4672,26 @@ remain. Reading completion and runtime signoff remain distinct.
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.83.1`
-  Status: `pending`
+  Status: `done`
   Goal: Define strict Lispish document consumption, token validity and compatibility boundaries.
-  Dependencies: Parent .83 prerequisites.
+  Dependencies: Parent .83 prerequisites; .83.2.1 completed at 8259719f8 with clean handoff.
+  Activation commit: `8259719f8198a1280c8d91d07a9797ef39e036a8`.
+  Verification tier: `focused`
+  Focused checks: Source-qualified consumer requirements, independent accepted/rejected examples and Toolbox feasibility probes; compatible output/schema decisions and bounded implementation ownership; Knowledge/memory/history/book/diff and normal doctrine hooks.
+  Canonical trigger: Design and unadmitted acceptance planning only; production grammar and public delivery remain implementation/admission-owned. No runtime, gate, dependency or public contract promotion in this leaf.
+  Scope: Separate versioned document grammar retaining atom kinds; preserve historical Lispish. Decide syntax, numeric/text spelling, trivia, complete-input errors and native-consumer integration before implementation. Prototype only under repository-local scratch to verify feasibility; do not present planned behavior as delivered.
   Acceptance: Specify one versus multiple top-level forms, leading/trailing text, empty input, missing/extra delimiters, unterminated quotes, bracket/brace forms, newline and EOF comments, and exact escape/token-kind semantics. Reconcile these with the current first-form extraction grammar and decide whether strict behavior is a separate/versioned grammar or a deliberate migration. Record the decision and independent expected values/errors before implementation.
   Consumer acceptance: Include quoted LF versus tab/CR controls, multiline strings followed by sibling forms, parentheses within such strings, numeric-looking quoted versus bare atoms and the four-form eADL case. Specify how skipped leading/interstitial/trailing text is rejected rather than relying only on a final cursor. Preserve the withdrawn hex-underscore and documented adjacency controls; distinguish grammar validation from consumer domain validation.
-  Verification: `pending`
-  Commit: `pending`
+  Decision: ADR0124 selects SExprDocumentV1.spec, a separate versioned document with all ordered top-level lists and tagged atoms retaining full lexemes. It specifies ASCII trivia/EOF comments, exact numeric classification, literal quoted spelling, malformed-input rejection and no implicit fragment joining. Historical Lispish remains intact. The accepted 37-case authority is tests/sexpr-document-v1/contract.json; it is design evidence, not delivered grammar.
+  Verification: PASS: source-qualified report review; 37 independent cases (21 accept/16 reject), 136 Perl assertions including token-spelling reconstruction and the no-skipped-text mutation; four native Rust prototype boundaries with full stdout/stderr/status. The first nonportable infix expression reproduces .45's warned-and-dropped LX block with exit 0/null; documented num_ne(...) fixes the prototype, while .45.1-.45.3 now own the compiler repair before delivery. The exact durable Knowledge proof replays all 136 assertions. Knowledge/memory/history/book/public/diff and normal doctrine hooks govern focused design landing. No production grammar, runtime source, dependency, promotion, canonical gate or push.
+  Validation ordering: The first aggregate-public check overlapped Knowledge regeneration and reported a missing marker while the generator writes its output directly. The completed map contains the marker; dependent validation is rerun only after generation. This was an orchestration ordering error, not evidence of a missing fact.
+  Commit: `SESSION-STARTUP-READING.83.1 - define kind-preserving document grammar`
 
 - ID: `SESSION-STARTUP-READING.83.2`
   Status: `pending`
   Goal: Repair quoted LF compatibility and implement the accepted strict document and token-validation path with bounded ownership.
-  Children: `.83.2.1`; decompose later strict/token implementation after .83.1.
-  Dependencies: .83.1 is required for strict/token changes. Independent .83.2.1 repairs multiline quoted payloads within the historical output shape and may proceed after .85; it must not silently introduce strict validation or atom kinds.
+  Children: `.83.2.1`, `.83.2.2`, `.83.2.3`.
+  Dependencies: .83.1 and compiler rejection closeout .45.3 are required for strict/token delivery. Independent .83.2.1 repairs multiline quoted payloads within the historical output shape and may proceed after .85; it must not silently introduce strict validation or atom kinds.
   Acceptance: Decompose concrete grammar, API and any necessary backend work into safe children before edits. Add RED/GREEN proof that omitted text and malformed tokens cannot silently yield an accepted document. Preserve documented historical extraction, native in-process execution, exact strings and agreed head/tail or versioned domain shape; no host-side guess may masquerade as grammar validation.
   Verification: `pending`
   Commit: `pending`
@@ -4682,6 +4716,24 @@ remain. Reading completion and runtime signoff remain distinct.
   - [x] **ADDRESSED (verified)** — FAIL->PASS for all three shared fixtures; 36 native/reference command legs and Rust 26-file/18-group verification PASS. No source guessing, escape decoding or consumer-side repair.
   - [x] **NO REGRESSION** — Phase0 smoke 9, descriptor 9/9, exact x/y corpus and original Rust compatibility/error/deployment groups PASS; controls retain CR/LF/CRLF, Unicode, comments, escapes, adjacency, single quotes and braces.
   - [x] **LOCKSTEP** — Quote source, copied corpus, regression fixture, Rust verifier, book examples and task/Knowledge/live roadmap pointers agree; ordinary focused checks and git diff --check PASS.
+
+- ID: `SESSION-STARTUP-READING.83.2.2`
+  Status: `pending`
+  Goal: Implement SExprDocumentV1.spec and persistent consumers of the accepted document contract.
+  Dependencies: .83.1 and .45.3 committed with clean handoffs.
+  Scope: The versioned grammar, exact shared valid/invalid expectations, source/descriptor readiness and relevant native regression integration; preserve Lispish and its corpus/quote proofs.
+  Acceptance: Consume all 37 authored cases without regenerating expected values from the parser. Prove complete recognition, all top-level forms, exact atom kinds/lexemes, both quote/backslash boundaries, EOF comments and atomic rejection. Exercise Perl/Rust/Dart/Julia/PUC Lua/LuaJIT with compiled-engine reuse after failures; retain an independent mutation showing that EOF alone cannot detect skipped text. Add precise further fixtures only when justified by implementation evidence. Run canonical proof for this public grammar implementation boundary before landing.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.83.2.3`
+  Status: `pending`
+  Goal: Deliver a separate native Rust file-consumer path for the tagged complete-document grammar.
+  Dependencies: .83.2.2 clean handoff.
+  Scope: A native sexpr_file example using existing public loader/engine APIs and the versioned result; preserve lispish_file's historical adapter. Share only genuinely common file/loader plumbing when needed; no subprocess parsing or guessed token kinds.
+  Acceptance: Verify every supplied SEMULITH kind case and all four ARCHOGEN forms, valid/invalid UTF-8 and paths, empty documents, errors without partial document output, multiple files through one engine, executable-relative grammar assets and relocation. Document exact kind/lexeme use and current limits in the public book with examples; preserve all historical file-consumer checks and select the warranted delivery tier.
+  Verification: `pending`
+  Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.83.3`
   Status: `pending`
@@ -4726,7 +4778,7 @@ audit range, not the default repair frontier.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.83.1` | `pending` | Define the compatible kind-preserving/complete-document contract for SEMULITH/LS-002 and ARCHOGEN/LS-002/003. LS-001 is repaired; SEMULITH/LS-003 remedies are verified. |
+| 1 | `SESSION-STARTUP-READING.45.1` | `pending` | Fix the freshly reproduced Rust warning/drop compiler boundary before ADR0124 strict-document delivery; then .45.2/.45.3 and .83.2.2/.83.2.3. LS-001 is repaired; SEMULITH/LS-003 remedies are verified. |
 
 ## Reading Ledger
 
@@ -7508,6 +7560,8 @@ All 53 owned scopes are read: HLink delimiter/raw text, Liberty scalar/complex a
 
 ## Verification Log
 
+- 2026-09-22 .83.1: ADR0124/37 independent cases and 136 Perl assertions establish the planned contract; four Rust prototype boundaries pass after canonical comparison spelling. Existing .45 warning/drop reproduces with exit 0/null and receives three bounded repair children before delivery. No production grammar or cross-backend admission claimed.
+
 - 2026-09-22 .83.2.1: PASS: exact clean-HEAD grammar fails all three final shared fixtures; fixed Phase0 smoke passes 9 assertions, and Perl/Rust/Dart/Julia/PUC Lua/LuaJIT pass 3 fixtures in both default and POSIX environments (36 command legs; 19 aggregate forms plus two isolated quote contexts). Rust passes 26 file values through one engine and all 18 existing verification groups, including all eight byte-exact report inputs/expectations. Descriptor readiness remains 9/9 with 0 blockers; corpus copy is exact and retains its x/y value. Eight root/child quote controls explain and correct the initial invalid root-capture probes without a runtime change. Book, direct public checks, syntax, memory/history/Knowledge/diff and normal nine-doctrine hooks govern focused landing; no canonical run or push.
 
 - 2026-09-22 .85: Exact report register/snapshot recovered; fresh Rust replay confirms four controls and four LF failures, all real exits0/stderr empty. No missing-user-input blocker remains.
@@ -7683,6 +7737,8 @@ Knowledge/book/memory/history/whitespace and all nine doctrines pass. Preceding 
 CLI66x2 and Phase0 1032/1032; 1163 seconds is Phase0 only, with 25 optional gates skipped.
 
 ## Commit Log
+
+- 2026-09-22 .83.1: `SESSION-STARTUP-READING.83.1 - define kind-preserving document grammar`; activation 8259719f8; compiler .45.1 follows clean handoff.
 
 - 2026-09-22 .83.2.1: `SESSION-STARTUP-READING.83.2.1 - preserve multiline Lispish quoted strings`; activation 392bd5335; .83.1 follows clean handoff.
 

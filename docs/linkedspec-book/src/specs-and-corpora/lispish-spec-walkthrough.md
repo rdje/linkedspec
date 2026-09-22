@@ -86,6 +86,39 @@ delimiters, escapes, comments, Unicode, empty strings and historical adjacent-fr
 This fixes SEMULITH/LS-001; the document-validation and atom-kind limitations above
 remain separately owned.
 
+## Planned complete-document variant
+
+ADR0124 accepts the design of a separate `SExprDocumentV1.spec`; implementation
+and cross-backend admission are pending. The shipped Lispish behavior above remains
+available with its existing representation.
+
+The planned result has a `format` of `linkedspec-sexpr-v1` and an ordered `forms`
+array. Lists contain tagged `items`. Atoms retain their kind and full source
+`lexeme`, including string quotes and escape spelling. For `(v 1 "1")`, the
+planned result is:
+
+```json
+{
+  "format": "linkedspec-sexpr-v1",
+  "forms": [{"kind": "list", "items": [
+    {"kind": "symbol", "lexeme": "v"},
+    {"kind": "number", "lexeme": "1"},
+    {"kind": "string", "lexeme": "\"1\""}
+  ]}]
+}
+```
+
+The new entry will return every parenthesized top-level form, accept empty and
+comment-only documents, and reject unmatched delimiters and unrecognized leading,
+interstitial or trailing text. Lexemes permit token-preserving reconstruction;
+inter-token whitespace and comments are omitted. Numeric spelling is retained
+without numeric conversion, and strings retain escapes without decoding.
+
+Before delivery, Rust's compiler must reject malformed rule blocks instead of
+warning and dropping them. That existing defect was freshly reproduced by the
+design prototype and is owned by `SESSION-STARTUP-READING.45.1-.45.3`. Grammar,
+native file-consumer delivery and final admission then remain `.83.2.2/.83.2.3/.83.3`.
+
 ## How to run it
 
 `Lispish.spec` is the backend-neutral contract; any LinkedSpec backend can run it. The

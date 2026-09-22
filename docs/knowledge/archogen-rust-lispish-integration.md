@@ -31,6 +31,17 @@ published integration document, public APIs and contracts are the sole authority
 RGX owns PGEN and all transitive preparation; no separate PGEN procedure or
 internal dependency knowledge belongs in LinkedSpec. Reports go to RGX.
 
+## September 22 kind-preserving document design
+
+ADR0124 and startup .83.1 accept a separate versioned grammar retaining full atom
+lexemes and all top-level forms, with explicit complete-input rejection. The
+37 authored acceptance cases include all four SEMULITH kind probes and ARCHOGEN's
+four-form file. Perl prototype 136 assertions and four native Rust boundaries pass;
+this is feasibility evidence, not delivered grammar or downstream report closure.
+The first native probe reproduced compiler warning/drop defect .45. Its three
+bounded repair children precede .83.2.2 grammar and .83.2.3 native-consumer delivery.
+[[sexpr-document-design]] preserves the decision, exact scope and repeatable proof.
+
 ## September 22 multiline quote repair
 
 Startup .83.2.1 applies the reported inline DOTALL change to both quote readers.

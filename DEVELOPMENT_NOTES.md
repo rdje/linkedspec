@@ -10,6 +10,12 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-22 — SESSION-STARTUP-READING.83.1 - define kind-preserving document grammar
+
+Whole-input validation requires recognition of every character, not just a final offset. Removing the prototype rejecting catch-alls accepts interstitial junk while returning both surrounding forms at EOF. Exact token lexemes make kind/spelling reconstruction independent of numeric conversion or escape decoding. Rust rejected the first prototype's nonportable infix expression but warned/dropped LX and returned null/status 0; canonical num_ne(...) fixes the prototype spelling, while .45 remains a separate real compiler defect scheduled for repair before delivery.
+
+Validation: 37 independent cases (21 accept/16 reject), 136 Perl assertions and the exact durable proof, four native Rust prototype controls with complete output/status capture, and precise compiler source attribution. Knowledge/memory/history/book/public/diff and normal doctrine hooks govern this focused design checkpoint; no canonical run or push.
+
 ## 2026-09-22 — SESSION-STARTUP-READING.83.2.1 - preserve multiline Lispish quoted strings
 
 Toolbox-generated dependency slots trace quoted-LF corruption to Lispish.spec:69/71: dot without DOTALL fails the complete token, letting seek dispatch treat payload as syntax. Both quote readers matter inside braces. Direct root calls to their initial actions have no parent entry captures, even on one-line input; eight root/child controls exposed invalid initial probes, which were replaced by real parent/brace inputs and replayed RED against exact pre-fix source. No runtime change is needed.

@@ -503,7 +503,10 @@ a fix still requires thorough reading of its affected code, contracts, tests and
 sections. The complete source audit is preserved separately and remains incomplete.
 SEMULITH/LS-001 multiline quoted-string corruption is repaired: both quote readers
 preserve LF and surrounding structure, with shared proof across all six runtime
-routes. LS-002 requests a separate kind-preserving representation and remains open. LS-003 workspace and prerequisite
+routes. LS-002 remains open for delivery; ADR0124 now defines a separate versioned
+complete-document grammar with atom kinds and exact lexemes. Its 37 authored cases
+pass bounded Perl/Rust prototype proof. Compiler warning/drop defect .45 is freshly
+reproduced and has three bounded repair children before the new grammar is delivered. LS-003 workspace and prerequisite
 guidance remedies are already verified in the Rust integration guide. The current
 Lispish grammar retains its historical extraction and untyped string-value contract.
 

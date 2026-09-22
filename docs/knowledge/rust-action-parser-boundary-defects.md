@@ -11,7 +11,7 @@ answers:
   - did the whole spec Unicode CLI probe demonstrate a panic
   - why does a Rust regex assignment followed by a newline return null
   - why does adding a regex suffix flag change Rust statement parsing
-date: 2026-09-07
+date: 2026-09-22
 status: current
 tags: [rust, parser, compiler, diagnostics, unicode, mutation, startup-reading]
 evidence: "SESSION-STARTUP-READING.3.3.1 preserves forward diagnostics under pending repairs .45–.47 and .49. Eleven managed CLI controls demonstrate five malformed rule blocks accepted with warning/drop; three valid and three rejecting controls bound the observation. A separate isolated core program observes a UTF-8 excerpt panic and space/tab-only mutation arguments accepted by parsing but rejected by compiler validation. Four additional native controls confirm that unflagged regex parsing consumes a following statement identifier after a newline; .49 owns this parser boundary. No runtime source was changed. The whole-spec ASCII timeout occurred before Unicode cases and has no established cause."
@@ -139,3 +139,16 @@ The exact bare-variable copy/newline case in [[rust-bare-variable-newline-consum
 warning/drop fallback: semantic construction reports compiled and CLI returns null despite discarding the I block.
 The semicolon twin avoids that parse failure. New .69 owns the variable-lookahead separator cause; .45 retains
 compiler rejection ownership. This control is not evidence that the intended copied-token body ran.
+
+## September 22 strict-document prototype recurrence
+
+Startup .83.1 independently reproduces the same .45 boundary on a fresh native
+primary binary. Nonportable infix comparison in an LX block produces a parse
+warning, yet the process exits 0 and the block is absent. The supported spelling
+is num_ne(cursor_pos(), input_end_pos()); operator symbols are ordinary calls,
+not an infix authoring grant. Correcting the prototype does not fix the compiler.
+Current compiler.rs:1075-1088 returns Ok(None) for this parse error, and
+compile_rule:1303-1310 discards it. The exact fresh record is
+.linkedspec-data/scratch/sexpr-contract/compiler-drop-reproduction.json.
+Bounded .45.1 owns rejection at the common boundary, .45.2 owns supported carrier
+proof, and .45.3 owns canonical/public closeout before strict grammar delivery.

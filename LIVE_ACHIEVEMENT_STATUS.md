@@ -2,17 +2,19 @@
 
 ## Current Activity
 
-SEMULITH/LS-001 multiline-string corruption is repaired across six runtime routes. LS-002 kind preservation and related ARCHOGEN complete-input requirements continue under .83.1; SEMULITH/LS-003 integration remedies remain verified.
+ADR0124 defines the separate kind-preserving complete-document grammar. Its prototype freshly reproduces Rust warning/drop defect .45; bounded compiler repair precedes delivery. SEMULITH/LS-001 is committed and LS-003 integration remedies remain verified.
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.83.2.1 - preserve multiline Lispish quoted strings` — both quote readers preserve LF; shared regression 36 command legs and Rust 26-file/18-group proof pass.
+- `SESSION-STARTUP-READING.83.1 - define kind-preserving document grammar` — 37 authored cases, 136 Perl assertions and four native Rust prototype boundaries; delivery remains pending.
 
 ## Next Action
 
-- Define the compatible kind-preserving and complete-document grammar contract under SESSION-STARTUP-READING.83.1 for SEMULITH/LS-002 and ARCHOGEN/LS-002/003; then implement its bounded children. LS-001 is repaired and LS-003 integration remedies remain verified.
+- Repair Rust warning-and-drop compilation under SESSION-STARTUP-READING.45.1, then verify its carriers and closeout before implementing ADR0124 under .83.2.2/.83.2.3. Preserve the committed Lispish LF fix and historical result contract.
 
 ## Recent Completions
+
+- `2026-09-22` — `SESSION-STARTUP-READING.83.1` accepts ADR0124/37 cases; .45.1-.45.3 repair the freshly reproduced compiler drop before delivery.
 
 - `2026-09-22` — `SESSION-STARTUP-READING.83.2.1` fixes quoted LF in both readers; six-runtime recurrence and eight original report cases pass.
 
@@ -43,8 +45,6 @@ SEMULITH/LS-001 multiline-string corruption is repaired across six runtime route
 - `2026-09-21` — `CONFORMANCE-SOURCE-READING.1.79` reads Phase0 through 46191; 19 subtests retain 246 assertions. Binding and newline tests preserve concrete runtime and lowering claims; .2.14 now owns the adjacent collapsed comparisons and stale descriptions. Repairs remain; .1.80 continues.
 
 - `2026-09-21` — `CONFORMANCE-SOURCE-READING.1.78` reads Phase0 through 45063; 22 subtests retain 392 assertions. Function staging, runtime values and recursion checks retain bounded claims; new .2.14 owns working-variable observation and description drift. Repairs remain; .1.79 continues.
-
-- `2026-09-21` — `CONFORMANCE-SOURCE-READING.1.77` reads Phase0 through 43916; 35 subtests retain 479 assertions. Trace and runtime cursor observations remain distinct from descriptor equality; new .2.13 owns the reproduced negative-only source check. Repairs remain; .1.78 continues.
 
 ## History
 

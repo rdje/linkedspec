@@ -1,0 +1,1096 @@
+{
+  "schema_version": 1,
+  "status": "accepted-design-implementation-pending",
+  "format": "linkedspec-sexpr-v1",
+  "planned_grammar": "specs/SExprDocumentV1.spec",
+  "cases": [
+    {
+      "id": "empty",
+      "input": "",
+      "outcome": "accept",
+      "expected": {
+        "format": "linkedspec-sexpr-v1",
+        "forms": []
+      }
+    },
+    {
+      "id": "trivia_only",
+      "input": " \t\r\n\f\u000b; comment at EOF",
+      "outcome": "accept",
+      "expected": {
+        "format": "linkedspec-sexpr-v1",
+        "forms": []
+      }
+    },
+    {
+      "id": "empty_lists",
+      "input": "() (())",
+      "outcome": "accept",
+      "expected": {
+        "format": "linkedspec-sexpr-v1",
+        "forms": [
+          {
+            "kind": "list",
+            "items": []
+          },
+          {
+            "kind": "list",
+            "items": [
+              {
+                "kind": "list",
+                "items": []
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "adjacent_forms",
+      "input": "(a)(b)",
+      "outcome": "accept",
+      "expected": {
+        "format": "linkedspec-sexpr-v1",
+        "forms": [
+          {
+            "kind": "list",
+            "items": [
+              {
+                "kind": "symbol",
+                "lexeme": "a"
+              }
+            ]
+          },
+          {
+            "kind": "list",
+            "items": [
+              {
+                "kind": "symbol",
+                "lexeme": "b"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "typed_atoms",
+      "input": "(r symbol \"symbol\" 10 \"10\" 1.0 \"1.0\")",
+      "outcome": "accept",
+      "expected": {
+        "format": "linkedspec-sexpr-v1",
+        "forms": [
+          {
+            "kind": "list",
+            "items": [
+              {
+                "kind": "symbol",
+                "lexeme": "r"
+              },
+              {
+                "kind": "symbol",
+                "lexeme": "symbol"
+              },
+              {
+                "kind": "string",
+                "lexeme": "\"symbol\""
+              },
+              {
+                "kind": "number",
+                "lexeme": "10"
+              },
+              {
+                "kind": "string",
+                "lexeme": "\"10\""
+              },
+              {
+                "kind": "number",
+                "lexeme": "1.0"
+              },
+              {
+                "kind": "string",
+                "lexeme": "\"1.0\""
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "numeric_spelling",
+      "input": "(n 0 -0 +1 01 10_000 1.0 -.5 2e+10 0x4_0000 0XFF 1__0 1.2.3 NaN)",
+      "outcome": "accept",
+      "expected": {
+        "format": "linkedspec-sexpr-v1",
+        "forms": [
+          {
+            "kind": "list",
+            "items": [
+              {
+                "kind": "symbol",
+                "lexeme": "n"
+              },
+              {
+                "kind": "number",
+                "lexeme": "0"
+              },
+              {
+                "kind": "number",
+                "lexeme": "-0"
+              },
+              {
+                "kind": "number",
+                "lexeme": "+1"
+              },
+              {
+                "kind": "number",
+                "lexeme": "01"
+              },
+              {
+                "kind": "number",
+                "lexeme": "10_000"
+              },
+              {
+                "kind": "number",
+                "lexeme": "1.0"
+              },
+              {
+                "kind": "number",
+                "lexeme": "-.5"
+              },
+              {
+                "kind": "number",
+                "lexeme": "2e+10"
+              },
+              {
+                "kind": "number",
+                "lexeme": "0x4_0000"
+              },
+              {
+                "kind": "number",
+                "lexeme": "0XFF"
+              },
+              {
+                "kind": "symbol",
+                "lexeme": "1__0"
+              },
+              {
+                "kind": "symbol",
+                "lexeme": "1.2.3"
+              },
+              {
+                "kind": "symbol",
+                "lexeme": "NaN"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "literal_escapes",
+      "input": "(r \"a\\\"b\" \"a\\nb\" \"path\\\\\" \"\\q\" \"\")",
+      "outcome": "accept",
+      "expected": {
+        "format": "linkedspec-sexpr-v1",
+        "forms": [
+          {
+            "kind": "list",
+            "items": [
+              {
+                "kind": "symbol",
+                "lexeme": "r"
+              },
+              {
+                "kind": "string",
+                "lexeme": "\"a\\\"b\""
+              },
+              {
+                "kind": "string",
+                "lexeme": "\"a\\nb\""
+              },
+              {
+                "kind": "string",
+                "lexeme": "\"path\\\\\""
+              },
+              {
+                "kind": "string",
+                "lexeme": "\"\\q\""
+              },
+              {
+                "kind": "string",
+                "lexeme": "\"\""
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "multiline_siblings",
+      "input": "(r (a \"p\n   q) r\") (b \"z\"))",
+      "outcome": "accept",
+      "expected": {
+        "format": "linkedspec-sexpr-v1",
+        "forms": [
+          {
+            "kind": "list",
+            "items": [
+              {
+                "kind": "symbol",
+                "lexeme": "r"
+              },
+              {
+                "kind": "list",
+                "items": [
+                  {
+                    "kind": "symbol",
+                    "lexeme": "a"
+                  },
+                  {
+                    "kind": "string",
+                    "lexeme": "\"p\n   q) r\""
+                  }
+                ]
+              },
+              {
+                "kind": "list",
+                "items": [
+                  {
+                    "kind": "symbol",
+                    "lexeme": "b"
+                  },
+                  {
+                    "kind": "string",
+                    "lexeme": "\"z\""
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "newline_spelling",
+      "input": "(r \"x\r\ny\" \"x\ty\" \"x\ry\" \"\n\n\")",
+      "outcome": "accept",
+      "expected": {
+        "format": "linkedspec-sexpr-v1",
+        "forms": [
+          {
+            "kind": "list",
+            "items": [
+              {
+                "kind": "symbol",
+                "lexeme": "r"
+              },
+              {
+                "kind": "string",
+                "lexeme": "\"x\r\ny\""
+              },
+              {
+                "kind": "string",
+                "lexeme": "\"x\ty\""
+              },
+              {
+                "kind": "string",
+                "lexeme": "\"x\ry\""
+              },
+              {
+                "kind": "string",
+                "lexeme": "\"\n\n\""
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "unicode",
+      "input": "(\u00e9 \"\u6771\u4eac\" \u03bb)",
+      "outcome": "accept",
+      "expected": {
+        "format": "linkedspec-sexpr-v1",
+        "forms": [
+          {
+            "kind": "list",
+            "items": [
+              {
+                "kind": "symbol",
+                "lexeme": "\u00e9"
+              },
+              {
+                "kind": "string",
+                "lexeme": "\"\u6771\u4eac\""
+              },
+              {
+                "kind": "symbol",
+                "lexeme": "\u03bb"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "ascii_trivia",
+      "input": "(a\f\u000bb)\r; comment\r(c)\n; last",
+      "outcome": "accept",
+      "expected": {
+        "format": "linkedspec-sexpr-v1",
+        "forms": [
+          {
+            "kind": "list",
+            "items": [
+              {
+                "kind": "symbol",
+                "lexeme": "a"
+              },
+              {
+                "kind": "symbol",
+                "lexeme": "b"
+              }
+            ]
+          },
+          {
+            "kind": "list",
+            "items": [
+              {
+                "kind": "symbol",
+                "lexeme": "c"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "unicode_space_is_spelling",
+      "input": "(a\u00a0b)",
+      "outcome": "accept",
+      "expected": {
+        "format": "linkedspec-sexpr-v1",
+        "forms": [
+          {
+            "kind": "list",
+            "items": [
+              {
+                "kind": "symbol",
+                "lexeme": "a\u00a0b"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "separate_adjacent_tokens",
+      "input": "(a\"b\")",
+      "outcome": "accept",
+      "expected": {
+        "format": "linkedspec-sexpr-v1",
+        "forms": [
+          {
+            "kind": "list",
+            "items": [
+              {
+                "kind": "symbol",
+                "lexeme": "a"
+              },
+              {
+                "kind": "string",
+                "lexeme": "\"b\""
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "ordinary_single_quotes",
+      "input": "('x y')",
+      "outcome": "accept",
+      "expected": {
+        "format": "linkedspec-sexpr-v1",
+        "forms": [
+          {
+            "kind": "list",
+            "items": [
+              {
+                "kind": "symbol",
+                "lexeme": "'x"
+              },
+              {
+                "kind": "symbol",
+                "lexeme": "y'"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "comments_with_delimiters",
+      "input": "(r ; ) \" [ ignored\n x) ; ( ignored at EOF",
+      "outcome": "accept",
+      "expected": {
+        "format": "linkedspec-sexpr-v1",
+        "forms": [
+          {
+            "kind": "list",
+            "items": [
+              {
+                "kind": "symbol",
+                "lexeme": "r"
+              },
+              {
+                "kind": "symbol",
+                "lexeme": "x"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "semulith_01_bare_numeric",
+      "input": "(r (v 20260911))\n",
+      "outcome": "accept",
+      "expected": {
+        "format": "linkedspec-sexpr-v1",
+        "forms": [
+          {
+            "kind": "list",
+            "items": [
+              {
+                "kind": "symbol",
+                "lexeme": "r"
+              },
+              {
+                "kind": "list",
+                "items": [
+                  {
+                    "kind": "symbol",
+                    "lexeme": "v"
+                  },
+                  {
+                    "kind": "number",
+                    "lexeme": "20260911"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "semulith_02_quoted_numeric",
+      "input": "(r (v \"20260911\"))\n",
+      "outcome": "accept",
+      "expected": {
+        "format": "linkedspec-sexpr-v1",
+        "forms": [
+          {
+            "kind": "list",
+            "items": [
+              {
+                "kind": "symbol",
+                "lexeme": "r"
+              },
+              {
+                "kind": "list",
+                "items": [
+                  {
+                    "kind": "symbol",
+                    "lexeme": "v"
+                  },
+                  {
+                    "kind": "string",
+                    "lexeme": "\"20260911\""
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "semulith_03_quoted_version",
+      "input": "(r (v \"1.0\"))\n",
+      "outcome": "accept",
+      "expected": {
+        "format": "linkedspec-sexpr-v1",
+        "forms": [
+          {
+            "kind": "list",
+            "items": [
+              {
+                "kind": "symbol",
+                "lexeme": "r"
+              },
+              {
+                "kind": "list",
+                "items": [
+                  {
+                    "kind": "symbol",
+                    "lexeme": "v"
+                  },
+                  {
+                    "kind": "string",
+                    "lexeme": "\"1.0\""
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "semulith_04_bare_version",
+      "input": "(r (v 1.0))\n",
+      "outcome": "accept",
+      "expected": {
+        "format": "linkedspec-sexpr-v1",
+        "forms": [
+          {
+            "kind": "list",
+            "items": [
+              {
+                "kind": "symbol",
+                "lexeme": "r"
+              },
+              {
+                "kind": "list",
+                "items": [
+                  {
+                    "kind": "symbol",
+                    "lexeme": "v"
+                  },
+                  {
+                    "kind": "number",
+                    "lexeme": "1.0"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "archogen_four_forms",
+      "input": "; examples/s0-heartbeat/system.eadl \u2014 the S0 base fixture.\n;\n; ROADMAP.md \u00a712 S0 asks for \"a roughly twenty-line feature-only description\" whose generated\n; hosted executable \"instantiates one simple service and produces a defined event\". This is it:\n; one output device, one service, one platform, two periodic tasks \u2014 sixteen lines of\n; declarations.\n;\n; WHY TWO TASKS AND NOT ONE. The observation horizon is the system's hyperperiod, and with a\n; single task that is one period, so the trace is one event and no parameter change can produce\n; a meaningfully different observation. Two is the smallest task set for which the S0 gate's\n; changed-input case can say anything.\n;\n; WHAT IS DELIBERATELY ABSENT. No execution bound, no entry point, no stack size \u2014 \u00a77.3 puts\n; those in the build manifest and the engine. Also no message text and no run length: the event\n; format and the decision to observe exactly one hyperperiod are the engine's, and writing them\n; here would be \"embedding a prebuilt output without consuming the functional input\", which \u00a712\n; S0 states does not satisfy F28.\n;\n; The expected observation is frozen in expected/system.txt and was written before any emitter\n; existed. The observation contract it rests on is in README.md.\n\n(defblock console.uart\n  (offers (observable-output true)))\n\n(defplatform host.playground\n  (offers (core-count 1 tick))\n  (requires (uses console.uart)))\n\n(defservice console.write\n  (requires (needs observable-output)))\n\n(defsystem heartbeat\n  (task beat\n    (period 10 ms) (deadline 10 ms) (deadline-from release)\n    (priority 1) (uses console.write) (on-overrun fault))\n  (task chime\n    (period 30 ms) (deadline 30 ms) (deadline-from release)\n    (priority 2) (uses console.write) (on-overrun fault))\n  (requires (uses console.write))\n  (platform (uses host.playground)))\n",
+      "outcome": "accept",
+      "expected": {
+        "format": "linkedspec-sexpr-v1",
+        "forms": [
+          {
+            "kind": "list",
+            "items": [
+              {
+                "kind": "symbol",
+                "lexeme": "defblock"
+              },
+              {
+                "kind": "symbol",
+                "lexeme": "console.uart"
+              },
+              {
+                "kind": "list",
+                "items": [
+                  {
+                    "kind": "symbol",
+                    "lexeme": "offers"
+                  },
+                  {
+                    "kind": "list",
+                    "items": [
+                      {
+                        "kind": "symbol",
+                        "lexeme": "observable-output"
+                      },
+                      {
+                        "kind": "symbol",
+                        "lexeme": "true"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "list",
+            "items": [
+              {
+                "kind": "symbol",
+                "lexeme": "defplatform"
+              },
+              {
+                "kind": "symbol",
+                "lexeme": "host.playground"
+              },
+              {
+                "kind": "list",
+                "items": [
+                  {
+                    "kind": "symbol",
+                    "lexeme": "offers"
+                  },
+                  {
+                    "kind": "list",
+                    "items": [
+                      {
+                        "kind": "symbol",
+                        "lexeme": "core-count"
+                      },
+                      {
+                        "kind": "number",
+                        "lexeme": "1"
+                      },
+                      {
+                        "kind": "symbol",
+                        "lexeme": "tick"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "kind": "list",
+                "items": [
+                  {
+                    "kind": "symbol",
+                    "lexeme": "requires"
+                  },
+                  {
+                    "kind": "list",
+                    "items": [
+                      {
+                        "kind": "symbol",
+                        "lexeme": "uses"
+                      },
+                      {
+                        "kind": "symbol",
+                        "lexeme": "console.uart"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "list",
+            "items": [
+              {
+                "kind": "symbol",
+                "lexeme": "defservice"
+              },
+              {
+                "kind": "symbol",
+                "lexeme": "console.write"
+              },
+              {
+                "kind": "list",
+                "items": [
+                  {
+                    "kind": "symbol",
+                    "lexeme": "requires"
+                  },
+                  {
+                    "kind": "list",
+                    "items": [
+                      {
+                        "kind": "symbol",
+                        "lexeme": "needs"
+                      },
+                      {
+                        "kind": "symbol",
+                        "lexeme": "observable-output"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "list",
+            "items": [
+              {
+                "kind": "symbol",
+                "lexeme": "defsystem"
+              },
+              {
+                "kind": "symbol",
+                "lexeme": "heartbeat"
+              },
+              {
+                "kind": "list",
+                "items": [
+                  {
+                    "kind": "symbol",
+                    "lexeme": "task"
+                  },
+                  {
+                    "kind": "symbol",
+                    "lexeme": "beat"
+                  },
+                  {
+                    "kind": "list",
+                    "items": [
+                      {
+                        "kind": "symbol",
+                        "lexeme": "period"
+                      },
+                      {
+                        "kind": "number",
+                        "lexeme": "10"
+                      },
+                      {
+                        "kind": "symbol",
+                        "lexeme": "ms"
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "list",
+                    "items": [
+                      {
+                        "kind": "symbol",
+                        "lexeme": "deadline"
+                      },
+                      {
+                        "kind": "number",
+                        "lexeme": "10"
+                      },
+                      {
+                        "kind": "symbol",
+                        "lexeme": "ms"
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "list",
+                    "items": [
+                      {
+                        "kind": "symbol",
+                        "lexeme": "deadline-from"
+                      },
+                      {
+                        "kind": "symbol",
+                        "lexeme": "release"
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "list",
+                    "items": [
+                      {
+                        "kind": "symbol",
+                        "lexeme": "priority"
+                      },
+                      {
+                        "kind": "number",
+                        "lexeme": "1"
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "list",
+                    "items": [
+                      {
+                        "kind": "symbol",
+                        "lexeme": "uses"
+                      },
+                      {
+                        "kind": "symbol",
+                        "lexeme": "console.write"
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "list",
+                    "items": [
+                      {
+                        "kind": "symbol",
+                        "lexeme": "on-overrun"
+                      },
+                      {
+                        "kind": "symbol",
+                        "lexeme": "fault"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "kind": "list",
+                "items": [
+                  {
+                    "kind": "symbol",
+                    "lexeme": "task"
+                  },
+                  {
+                    "kind": "symbol",
+                    "lexeme": "chime"
+                  },
+                  {
+                    "kind": "list",
+                    "items": [
+                      {
+                        "kind": "symbol",
+                        "lexeme": "period"
+                      },
+                      {
+                        "kind": "number",
+                        "lexeme": "30"
+                      },
+                      {
+                        "kind": "symbol",
+                        "lexeme": "ms"
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "list",
+                    "items": [
+                      {
+                        "kind": "symbol",
+                        "lexeme": "deadline"
+                      },
+                      {
+                        "kind": "number",
+                        "lexeme": "30"
+                      },
+                      {
+                        "kind": "symbol",
+                        "lexeme": "ms"
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "list",
+                    "items": [
+                      {
+                        "kind": "symbol",
+                        "lexeme": "deadline-from"
+                      },
+                      {
+                        "kind": "symbol",
+                        "lexeme": "release"
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "list",
+                    "items": [
+                      {
+                        "kind": "symbol",
+                        "lexeme": "priority"
+                      },
+                      {
+                        "kind": "number",
+                        "lexeme": "2"
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "list",
+                    "items": [
+                      {
+                        "kind": "symbol",
+                        "lexeme": "uses"
+                      },
+                      {
+                        "kind": "symbol",
+                        "lexeme": "console.write"
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "list",
+                    "items": [
+                      {
+                        "kind": "symbol",
+                        "lexeme": "on-overrun"
+                      },
+                      {
+                        "kind": "symbol",
+                        "lexeme": "fault"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "kind": "list",
+                "items": [
+                  {
+                    "kind": "symbol",
+                    "lexeme": "requires"
+                  },
+                  {
+                    "kind": "list",
+                    "items": [
+                      {
+                        "kind": "symbol",
+                        "lexeme": "uses"
+                      },
+                      {
+                        "kind": "symbol",
+                        "lexeme": "console.write"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "kind": "list",
+                "items": [
+                  {
+                    "kind": "symbol",
+                    "lexeme": "platform"
+                  },
+                  {
+                    "kind": "list",
+                    "items": [
+                      {
+                        "kind": "symbol",
+                        "lexeme": "uses"
+                      },
+                      {
+                        "kind": "symbol",
+                        "lexeme": "host.playground"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "leading_junk",
+      "input": "junk (a)",
+      "outcome": "reject",
+      "reason": "Top-level input must contain only lists and trivia."
+    },
+    {
+      "id": "interstitial_junk",
+      "input": "(a) junk (b)",
+      "outcome": "reject",
+      "reason": "Every interstitial character must be valid trivia or a form."
+    },
+    {
+      "id": "trailing_junk",
+      "input": "(a) garbage ((( ",
+      "outcome": "reject",
+      "reason": "A valid prefix does not make a valid document."
+    },
+    {
+      "id": "bare_top_atom",
+      "input": "atom",
+      "outcome": "reject",
+      "reason": "Top-level atoms are not document forms."
+    },
+    {
+      "id": "quoted_top_atom",
+      "input": "\"value\"",
+      "outcome": "reject",
+      "reason": "Top-level strings are not document forms."
+    },
+    {
+      "id": "extra_close",
+      "input": "(a))",
+      "outcome": "reject",
+      "reason": "Unmatched closing parenthesis."
+    },
+    {
+      "id": "leading_close",
+      "input": ") (a)",
+      "outcome": "reject",
+      "reason": "Unmatched closing parenthesis before any form."
+    },
+    {
+      "id": "missing_close",
+      "input": "(a",
+      "outcome": "reject",
+      "reason": "Every opened list must close."
+    },
+    {
+      "id": "nested_missing_close",
+      "input": "(a (b)",
+      "outcome": "reject",
+      "reason": "Outer list remains open."
+    },
+    {
+      "id": "unterminated_quote",
+      "input": "(a \"broken)",
+      "outcome": "reject",
+      "reason": "Unterminated string cannot become an ordinary atom."
+    },
+    {
+      "id": "escaped_final_quote",
+      "input": "(a \"broken\\\")",
+      "outcome": "reject",
+      "reason": "The escaped quote cannot close the string."
+    },
+    {
+      "id": "empty_brackets",
+      "input": "([])",
+      "outcome": "reject",
+      "reason": "Square brackets are outside the document syntax."
+    },
+    {
+      "id": "nonempty_brackets",
+      "input": "([x])",
+      "outcome": "reject",
+      "reason": "Square brackets are outside the document syntax."
+    },
+    {
+      "id": "braces",
+      "input": "({x})",
+      "outcome": "reject",
+      "reason": "Braces are outside the document syntax."
+    },
+    {
+      "id": "bom_prefix",
+      "input": "\ufeff(a)",
+      "outcome": "reject",
+      "reason": "A BOM is not silently stripped or treated as ASCII trivia."
+    },
+    {
+      "id": "nonascii_space_at_top",
+      "input": "\u00a0(a)",
+      "outcome": "reject",
+      "reason": "Non-ASCII whitespace is not document trivia."
+    },
+    {
+      "id": "reuse_after_rejection",
+      "input": "(again)",
+      "outcome": "accept",
+      "expected": {
+        "format": "linkedspec-sexpr-v1",
+        "forms": [
+          {
+            "kind": "list",
+            "items": [
+              {
+                "kind": "symbol",
+                "lexeme": "again"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
