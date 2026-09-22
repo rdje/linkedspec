@@ -1,11 +1,11 @@
 # MEMORY
 
-- activation_commit: `30c1ddeeaf22d04dfc11f875636dd7320392cd23` — clean route-verification checkpoint; canonical closeout activation.
-- latest_completed_leaf: `SESSION-STARTUP-READING.45.3 - close Rust rule-code rejection repair`; .45 closes only verified rule-code error propagation.
-- active_work_unit: `SESSION-STARTUP-READING.83.2.2` — pending; implement the versioned document grammar.
-- next_action: Implement specs/SExprDocumentV1.spec and the 37-case persistent six-runtime contract consumers under SESSION-STARTUP-READING.83.2.2; ARCHOGEN/LS-002 complete-document/all-form and LS-003 atom-kind delivery then continues through native file consumer .83.2.3 (also SEMULITH/LS-002).
+- activation_commit: `eda9cd3dd008784bc7f7993fe09ed5d35665e535` — clean canonical compiler-closeout checkpoint; grammar implementation activation.
+- latest_completed_leaf: `SESSION-STARTUP-READING.83.2.2 - implement complete s-expression documents`; 37 authored cases, round trips and post-rejection reuse pass on all six runtimes.
+- active_work_unit: `SESSION-STARTUP-READING.83.2.3` — pending; native Rust document-file consumer.
+- next_action: Deliver the separate native Rust sexpr_file consumer under SESSION-STARTUP-READING.83.2.3, using SExprDocumentV1.spec; verify file/UTF-8/error/multi-file/relocation behavior before final .83.3 admission for ARCHOGEN/LS-002–003 and SEMULITH/LS-002.
   Named-argument direction PARSER-AUTHORING-APIS.4 is approved and parked; other authoring proposals and approved formats stay parked.
-- in_flight_uncommitted: none; compiler repair and route verification committed, with receipt-bound canonical closeout required by this landing.
+- in_flight_uncommitted: none; grammar and recurring contract proof complete, with the exact staged canonical receipt required by this landing.
 - blockers: Wrapper startup .7 remains open; warned-child group matched, but denied-call cause and original lost PUC stream remain unproved. Recovery/purge stay prohibited.
 - current_rust_warning_debt: Repeated carriers report 1,870 pgen plus 26 rgx-core output warnings; RUST-DEPENDENCY-WARNING-ZERO.1-.7 own public RGX reports and result verification without suppression; dependency internals are excluded.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
@@ -42,7 +42,7 @@
 - current_map_leaves_scope_resolution: option A preserves pure functions. Helper-mediated rejection uses inline
   explicit-target `set(tree, ...)`; post-commit receiver-write proof uses caller-scoped `.with()`. No implicit
   caller capture or arbitrary user-defined bang method is admitted.
-- current_mutation_public_no_drift: `.19.9` closes public no-drift; current inventory is 69 Markdown files / 14 governed documents / eleven
+- current_mutation_public_no_drift: `.19.9` closes public no-drift; current inventory is 70 Markdown files / 14 governed documents / eleven
   authority-bound example classes / ten stale-current denials / 50 isolated public-checker mutations. Capability
   governance independently pins the owner and exact-one CI registration through four mutations.
 - current_core_state: typed source is 14/0/231; recognition 138/250/58; progressive 9/9/116 plus public
@@ -57,4 +57,4 @@
   Changes segment4972 preserves 136 lines /27060 bytes from clean 8259719f8; old archive rows/bytes remain exact.
 - dependency_boundary: September20: LinkedSpec integrates only with RGX via its published integration document/APIs/contracts. RGX owns PGEN; no separate PGEN procedure, internal inspection/analysis, patches or pin changes.
   Normal documented builds remain authorized; retain caches. Startup .80.1-.4 may observe public behavior or track upstream repairs, not investigate dependency internals.
-- latest_bootstrap_read: ADR0123 targets2–5 minute startup plus thorough task-specific reading. Full audit remains incomplete and separate: conformance89/143,109904 fragments/4784266 baseline bytes/133 files; .1.90 is next only when that audit resumes. SEMULITH/LS-001 is repaired; LS-002 design is ADR0124; .45 compiler rejection repair is closed; .83.2.2 grammar delivery is next; LS-003 integration remedies are verified.
+- latest_bootstrap_read: ADR0123 targets2–5 minute startup plus thorough task-specific reading. Full audit remains incomplete and separate: conformance89/143,109904 fragments/4784266 baseline bytes/133 files; .1.90 is next only when that audit resumes. SEMULITH/LS-001 is repaired; LS-002 design is ADR0124; .45 compiler rejection repair is closed; .83.2.2 grammar delivery is verified; .83.2.3 native file delivery is next; LS-003 integration remedies are verified.

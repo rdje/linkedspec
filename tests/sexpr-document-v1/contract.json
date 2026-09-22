@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "status": "accepted-design-implementation-pending",
+  "status": "grammar-implemented-native-consumer-pending",
   "format": "linkedspec-sexpr-v1",
-  "planned_grammar": "specs/SExprDocumentV1.spec",
+  "grammar": "specs/SExprDocumentV1.spec",
   "cases": [
     {
       "id": "empty",

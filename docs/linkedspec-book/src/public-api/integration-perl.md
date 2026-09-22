@@ -154,6 +154,34 @@ loader's complete resolution and error contract is described in
 [Native Spec Loading](native-spec-loading.md). The lower-level inline API remains
 documented in [`Get(...)` and `get_parser(...)`](get-and-get-parser.md).
 
+## Parse complete s-expression documents
+
+Load `specs/SExprDocumentV1.spec` from your pinned checkout when every character
+must belong to a valid document. Select `top_rule => 'Document'` in the loader's
+compilation options. The word example explicitly selects `Top`, so adapting it
+requires changing that option as well as the grammar path.
+
+The parser returns a hash reference with `format => 'linkedspec-sexpr-v1'` and
+an ordered `forms` array reference. Each list has `kind` and `items`; atoms have
+`kind` and a string-valued `lexeme`, including original string quotes and escapes.
+The [document grammar chapter](../specs-and-corpora/sexpr-document-v1.md) gives
+the full schema, numeric classification and worked examples. Empty documents
+succeed with no forms. Invalid documents throw `LinkedSpec::RuntimeExitNow`
+with status 1 and return no accepted partial document; retain the exception and
+context handling below.
+
+From the LinkedSpec root, verify this grammar through the native Perl parser:
+
+```sh
+bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/sexpr_document_v1.t
+```
+
+This checks all 37 authored cases, token-spelling round trips and fresh independent
+input after each rejection on the same compiled parser. That recovery evidence
+is specific to this grammar; it does not promise rollback for arbitrary grammars
+or application side effects. The word consumer's text-argument and deployment
+contracts remain as documented below.
+
 ## Verify the checked-in example
 
 From the LinkedSpec repository root:

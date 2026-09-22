@@ -260,6 +260,45 @@ information; the small example prints their human-readable messages to stderr
 and exits unsuccessfully. See [native loading](native-spec-loading.md) and
 [diagnostics](../compiler/diagnostics.md) for the detailed contracts.
 
+## Parse complete s-expression documents
+
+Select `specs/SExprDocumentV1.spec` for complete input validation, all top-level
+forms and preserved token kinds. It uses the same public loader and native
+engine as the word consumer above. `ExecutionOptions::new()` selects the grammar's
+default `Document` rule. The direct `serde_json::Value` is an object with
+`format: "linkedspec-sexpr-v1"` and an ordered `forms` array; atoms preserve
+`kind` and a string `lexeme`, including original string quotes and escapes.
+See the [document grammar chapter](../specs-and-corpora/sexpr-document-v1.md)
+for the schema, lexical rules and worked examples.
+
+After preparation, the generic text consumer can run it from the LinkedSpec root:
+
+```sh
+bash tools/run_cargo_local.sh run --offline --locked \
+  --manifest-path examples/integration/rust/Cargo.toml -- \
+  specs/SExprDocumentV1.spec '(v 1 "1")(done)'
+```
+
+The result is the two-form tagged document shown in that chapter. Empty input
+succeeds with no forms; malformed input fails without an accepted partial
+document. For callers that need the typed status, use
+`execute_value_with_diagnostic_output`: rejection is
+`RuntimeDiagnosticOutputExecutionError::Exit` with status 1. The generic example
+prints its runtime failure to stderr and exits unsuccessfully.
+
+The native contract test checks all 37 authored cases, token-spelling round trips
+and fresh independent input after every rejection through one compiled engine:
+
+```sh
+bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline \
+  -p linkedspec-runtime --test sexpr_document_v1
+```
+
+That recovery proof is specific to this grammar and does not promise rollback of
+application effects. The separate `sexpr_file` example is still the next delivery
+step. The historical `lispish_file` adapter below expects head/tail values and
+cannot consume the tagged document merely by changing `--grammar`.
+
 ## Parse Lispish files in your application
 
 If you arrived directly at this section, first complete
@@ -376,9 +415,9 @@ content loses its outer braces. Adjacent fragments can join into a single atom:
 
 The adapter cannot recover skipped text, token kinds or consumed offsets. Reading
 an entire file into a string is not proof that the grammar consumed it. Applications
-requiring strict document validation or multiple top-level forms need an explicit
-grammar/contract for those requirements. That work is tracked by
-`SESSION-STARTUP-READING.83.1-.83.3`; it is not implemented by this example.
+requiring strict document validation or multiple top-level forms should select
+[`SExprDocumentV1.spec`](#parse-complete-s-expression-documents) and its tagged
+document contract. The historical file example does not implement that contract.
 
 SEMULITH/LS-001's multiline-string corruption is fixed by enabling newline
 matching in both quote readers. Actual LF, indentation and embedded parentheses
@@ -392,8 +431,9 @@ stay inside the string, and following sibling forms retain their structure:
 The file consumer returns `["r",["a","p\n   q) r"],["b","z"]]`, where JSON's
 `\n` represents the actual LF. The eight report cases are included in the file
 verifier. The [Lispish walkthrough](../specs-and-corpora/lispish-spec-walkthrough.md#multiline-quoted-text)
-explains exact newline, escape and quote behavior. ARCHOGEN's complete-input and
-atom-kind requirements, shared with SEMULITH/LS-002, remain under startup .83.
+explains exact newline, escape and quote behavior. The separate document grammar
+passes the authored ARCHOGEN complete-input and SEMULITH kind cases on all six
+runtimes; its dedicated native file delivery and final report admission remain open.
 Both consumers also reported setup difficulties inside an enclosing Cargo
 workspace. The [workspace setup above](#applications-with-a-cargo-workspace)
 addresses the reproduced membership failures without changing dependency pins.

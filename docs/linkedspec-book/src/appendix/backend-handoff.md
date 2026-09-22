@@ -1236,14 +1236,14 @@ simple/bounded modes, all ten body variants, targets, and fluent calls. Private
 node identities and typed JSON projection prevent arrays, harrays, and
 codeblocks from being inferred from incidental table layout. Representative
 provenance and every body variant round-trip on both runtimes. The public
-`parse_spec(source)` producer now parses rule paragraphs into those nodes: all
-21 shipped specs and 102 rule-only corpus sources pass on PUC Lua and LuaJIT.
+`parse_spec(source)` producer parses rule paragraphs into those nodes. At that
+checkpoint, 21 shipped specs and 102 rule-only corpus sources passed on PUC Lua and LuaJIT.
 The other three corpus sources begin with top-level functions and remain owned
 by spec-returned projection `.2.4`. Source validation is now also public:
 `validate_spec(spec)` checks tops, duplicates, function registry collisions,
 raw syntax, edge families/targets/slots, and regex structure;
-`validate_spec(spec, { strict_syntax = true })` adds unused-rule rejection. All
-21 shipped and 102 rule-only corpus sources validate on both runtimes. The
+`validate_spec(spec, { strict_syntax = true })` adds unused-rule rejection. That
+checkpoint validated 21 shipped and 102 rule-only corpus sources on both runtimes. The
 helper/control reservation inventory is exactly the current 246 public names and is
 checked equal to Dart/Julia. Function-shell projection now consumes explicitly
 typed `function_definition` / `function_definition_error` nodes returned by
@@ -2816,7 +2816,7 @@ It provides:
   brace-less forms, statementful/caller-mutating functions, recursion support,
   closures/lambdas/currying, and namespaces remain deferred.
 - `t/phase0_regression.t` — comprehensive regression tests.
-- Phase 0 baseline showing all 21 shipped specs compile at `language_agnostic_ready_ratio == 1.0000`.
+- Phase 0 descriptor checks require all shipped specs to compile at `language_agnostic_ready_ratio == 1.0000`.
 
 ## What You Must Build
 

@@ -1,7 +1,7 @@
 # ADR 0124: A separate versioned grammar preserves s-expression kinds and validates complete documents
 
 - Date: 2026-09-22
-- Status: accepted design under SESSION-STARTUP-READING.83.1; implementation and admission pending
+- Status: accepted design under SESSION-STARTUP-READING.83.1; grammar implemented under .83.2.2; native file delivery and final admission pending
 - Tags: grammar, s-expressions, compatibility, token-kind, document-validation
 
 ## Context
@@ -23,7 +23,9 @@ break consumers and contradict SEMULITH's request.
 Add **`specs/SExprDocumentV1.spec`** through the implementation leaves below.
 Selecting that separate grammar opts into this document and token contract.
 No new global execution mode, dependency API or token-span side channel is needed.
-The grammar is not shipped by this design checkpoint.
+The design checkpoint did not ship the grammar. Implementation .83.2.2 now ships
+it with 37 authored cases, round trips and post-rejection reuse on six native runtimes;
+.83.2.3 native file delivery and .83.3 final admission remain separate.
 
 ### Result shape
 

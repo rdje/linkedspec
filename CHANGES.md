@@ -10,6 +10,23 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+
+## 2026-09-22 — SESSION-STARTUP-READING.83.2.2 - implement complete s-expression documents
+
+Add specs/SExprDocumentV1.spec: complete parenthesized documents, every top-level form, tagged list/symbol/number/string nodes and exact lexical spelling. Register independent contract consumers in all six native runtime routes and the canonical gate; add the public grammar chapter. Lispish, runtime implementations, dependency pins and expected case values are unchanged.
+
+PASS: all 37 authored cases on six native runtimes (222 case outcomes), 21 token-spelling round trips per route and 16 same-engine post-rejection reuse checks per route. Perl has 44 top-level/168 nested assertions including descriptor readiness and the independent catch-all mutation; Rust one complete contract test, Dart 38 tests, Julia 91 assertions, and both Lua routes pass. Three initial Dart EOF-comment failures become green with a portable grammar branch, without changing authored expectations. Historical Lispish quoted-LF fixtures pass 3/3 on Perl, and the new book command returns its exact documented value. Formatting, Dart analysis, shell syntax, book, Knowledge/memory/history/diff and doctrine checks govern landing. The public grammar/recurring-CI boundary requires the exact staged canonical receipt; native file delivery and final report admission remain separate.
+
+The reviewed new book page advances only the mutation/selector public file counts to70/69. Both gates PASS with unchanged semantic/classification controls (mutation14/11/10/50; selector35/0/5/11).
+
+Canonical preflight rejected the 8,002-line task candidate. Two newly added duplicate evidence fields were removed after confirming their mechanism, proof, ownership and exact census remain in the same task node and linked canonical fact cards. All stable task definitions remain in their original order, with no task or evidence dropped; the task root is 8,000 lines and its original ceiling is unchanged.
+
+A final source-inventory review caught missing catalog rows for the new grammar and the existing function-definition grammar, plus stale fixed counts in current Rust/book/roadmap prose. The public catalog now lists every one of the 22 shipped filenames exactly once; mutable invariant descriptions rely on automatic test discovery, and dated historical counts remain explicit. Canonical CI was stopped before completion to include this documentation correction in the exact candidate.
+
+Complete shipped-inventory proof PASS: Rust auto-discovery parses, validates and compiles all 22 grammars; Perl return_descriptor passes 67 assertions (inventory plus three readiness checks per grammar); the public catalog lists the same 22 filenames exactly once. Current invariant prose no longer embeds a stale fixed count, and the 70/69 public guards retain every semantic mutation check.
+
+All five backend integration guides and the shared integration landing page now describe the document grammar, native values, typed rejection and exact focused check commands. They identify the required Top-to-Document selection in the Perl/Dart/Julia/Lua word adapters and preserve historical Rust lispish_file limits. The document chapter links back to every backend guide; schema and lexical rules keep one canonical owner. The Rust integration guide command builds and returns the exact documented two-form tagged value through the public loader and generic native consumer. Direct consumer boundary checks also pass empty documents, ordered two-form input and interstitial-junk rejection with empty stdout.
+
 ## 2026-09-22 — SESSION-STARTUP-READING.45.3 - close Rust rule-code rejection repair
 
 Close the bounded Rust rule-code error-propagation repair after compiler and carrier verification. Align roadmap, public status, Knowledge and task pointers; select the versioned document grammar as the next leaf. No production source, generated schema, dependency pin or historical Lispish behavior changes.

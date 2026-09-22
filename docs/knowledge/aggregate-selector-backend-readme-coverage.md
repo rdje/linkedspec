@@ -6,7 +6,7 @@ answers:
   - "which backend READMEs taught stale selector forms"
   - "how does the public selector checker discover component READMEs"
   - "how many public files does aggregate selector admission check"
-date: 2026-07-12
+date: 2026-09-22
 status: current
 tags: [language, bindings, retirement, documentation, readme, no-drift, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.12.1.10 found 14 current positive exact selector forms in rust/README.md, dart/README.md, julia/README.md, and lua/README.md after .12.1.9 had reported zero examples across a curated 47-file root/capability/mdBook list. The four READMEs now use bare typed bindings. tools/check_public_aggregate_selector_surface.py discovers every immediate component README, asserts 56 files and 31 classified removed/history references, requires four backend bare-binding anchors, and reports zero current examples."
@@ -32,5 +32,7 @@ already-fixed capability README, and scans those files beside root documents and
 classified-reference counts make inventory growth deliberate; backend-specific bare-binding anchors ensure the
 entry documents teach the replacement, not merely avoid the removed spelling.
 
-The current discovered inventory is 62 files; classified and current example counts are 25 and zero after root
-README history was routed to canonical documentation.
+The current discovered inventory is 69 files with 35 classified references and zero
+current examples. Startup .83.2.2 reviews the complete-document grammar chapter,
+reproduces expected68/observed69, and updates the exact file count without changing
+discovery, classification or backend anchors. Earlier dated results remain historical.

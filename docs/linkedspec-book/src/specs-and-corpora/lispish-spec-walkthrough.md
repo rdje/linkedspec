@@ -86,39 +86,18 @@ delimiters, escapes, comments, Unicode, empty strings and historical adjacent-fr
 This fixes SEMULITH/LS-001; the document-validation and atom-kind limitations above
 remain separately owned.
 
-## Planned complete-document variant
+## Complete-document alternative
 
-ADR0124 accepts the design of a separate `SExprDocumentV1.spec`; implementation
-and cross-backend admission are pending. The shipped Lispish behavior above remains
-available with its existing representation.
+Select the separate `specs/SExprDocumentV1.spec` grammar when you need every
+top-level form, complete recognition and symbol/number/string kinds. Its versioned
+document retains exact token lexemes, including quotes, escapes and numeric
+spelling. The [complete-document chapter](sexpr-document-v1.md) explains the result,
+syntax, failure boundary and token-preserving reconstruction with examples.
 
-The planned result has a `format` of `linkedspec-sexpr-v1` and an ordered `forms`
-array. Lists contain tagged `items`. Atoms retain their kind and full source
-`lexeme`, including string quotes and escape spelling. For `(v 1 "1")`, the
-planned result is:
-
-```json
-{
-  "format": "linkedspec-sexpr-v1",
-  "forms": [{"kind": "list", "items": [
-    {"kind": "symbol", "lexeme": "v"},
-    {"kind": "number", "lexeme": "1"},
-    {"kind": "string", "lexeme": "\"1\""}
-  ]}]
-}
-```
-
-The new entry will return every parenthesized top-level form, accept empty and
-comment-only documents, and reject unmatched delimiters and unrecognized leading,
-interstitial or trailing text. Lexemes permit token-preserving reconstruction;
-inter-token whitespace and comments are omitted. Numeric spelling is retained
-without numeric conversion, and strings retain escapes without decoding.
-
-The design prototype reproduced Rust's warning/drop compiler defect. The shared
-error-propagation repair is complete under `SESSION-STARTUP-READING.45`, with
-source/carrier rejection and actual generated-module execution verified. Grammar
-implementation, native file-consumer delivery and final admission remain
-`.83.2.2/.83.2.3/.83.3`.
+All 37 authored document cases, round trips and same-engine reuse after failures
+pass on Perl, Rust, Dart, Julia, PUC Lua and LuaJIT. Historical Lispish behavior
+and the `lispish_file` adapter remain available. A separate native Rust file
+consumer and final report admission are the next delivery steps.
 
 ## How to run it
 

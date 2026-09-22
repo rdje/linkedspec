@@ -290,6 +290,14 @@ require_tracked_file tools/check_repeated_action_result_contract.py
 require_tracked_file tools/check_repeated_action_result_five_backend.sh
 require_tracked_file tools/check_standalone_lifecycle_block_contract.py
 require_tracked_file tools/check_standalone_lifecycle_block_five_backend.sh
+require_tracked_file tools/check_sexpr_document_v1.sh
+require_tracked_file specs/SExprDocumentV1.spec
+require_tracked_file tests/sexpr-document-v1/contract.json
+require_tracked_file t/sexpr_document_v1.t
+require_tracked_file rust/linkedspec-runtime/tests/sexpr_document_v1.rs
+require_tracked_file dart/test/sexpr_document_v1_test.dart
+require_tracked_file julia/test/sexpr_document_v1_test.jl
+require_tracked_file lua/test/sexpr_document_v1_test.lua
 require_tracked_file tools/check_root_rule_selection_contract.py
 require_tracked_file tools/check_root_rule_selection_five_backend.sh
 require_tracked_file tools/check_rule_local_cursor_contract.py
@@ -621,6 +629,7 @@ bash -n tools/run_ci_local.sh tools/run_rust_local.sh tools/run_dart_local.sh \
  tools/check_diagnostic_output_five_backend.sh tools/check_logical_helper_five_backend.sh \
  tools/check_duplicate_regex_slot_identity_five_backend.sh tools/check_repeated_action_result_five_backend.sh \
  tools/check_standalone_lifecycle_block_five_backend.sh \
+ tools/check_sexpr_document_v1.sh \
  tools/check_root_rule_selection_five_backend.sh \
  tools/check_rule_local_cursor_five_backend.sh \
  tools/check_semantic_introspection_six_runtime.sh \
@@ -948,6 +957,9 @@ bash tools/run_python_project_data.sh tools/check_standalone_lifecycle_block_con
 
 log "running permanent self-hosted standalone lifecycle-block consumer"
 PERL5LIB= prove -Iperl t/standalone_lifecycle_block_self_hosted_contract.t
+
+log "checking the SExprDocumentV1 authored contract across all six runtimes"
+bash tools/check_sexpr_document_v1.sh
 
 log "running focused Perl root-rule selection core consumer"
 PERL5LIB= prove -Iperl t/root_rule_selection_perl_core.t

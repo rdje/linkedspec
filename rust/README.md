@@ -452,7 +452,7 @@ source attribution, compatibility failure, caller sink error, and typed immediat
 
 The Perl reference implementation lives at `perl/LinkedSpec.pm`. The Rust variant:
 
-- Uses the **same** `.spec` file format (parses all 21 shipped specs)
+- Uses the **same** `.spec` file format (parses all shipped specs)
 - Uses the **same** lifecycle model (I/LS/LE/E/EX/IT/LX blocks)
 - Uses the **same** regex dispatch semantics (seek/consume modes)
 - Uses the **same** rule modes (AND, OR, OR+, AND+, bounded, *, +, ?, &, |)
@@ -464,7 +464,7 @@ The Perl reference implementation lives at `perl/LinkedSpec.pm`. The Rust varian
 
 ## Test Corpus
 
-All 21 shipped `.spec` files from the parent `specs/` directory are parsed, validated, and compiled as part of the test suite. The integration test covers:
+All shipped `.spec` files from the parent `specs/` directory are parsed, validated, and compiled as part of the test suite. The integration test discovers them directly, including `SExprDocumentV1.spec`, and covers:
 
 - Full pipeline: parse → validate → compile → execute
 - Recursive grammars (self-referencing rules with multi-entrypoint dispatch)

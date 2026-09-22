@@ -57,6 +57,7 @@
 
 - [Shipped Specs and Corpora](specs-and-corpora/shipped-specs-and-corpora.md)
 - [`Lispish.spec` Walkthrough](specs-and-corpora/lispish-spec-walkthrough.md)
+- [Complete S-Expression Documents](specs-and-corpora/sexpr-document-v1.md)
 - [`ebnf.spec` Walkthrough](specs-and-corpora/ebnf-spec-walkthrough.md)
 - [`tablegrep.spec` Walkthrough](specs-and-corpora/tablegrep-spec-walkthrough.md)
 - [`portmap.spec` Walkthrough](specs-and-corpora/portmap-spec-walkthrough.md)

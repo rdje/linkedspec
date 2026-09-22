@@ -2,17 +2,19 @@
 
 ## Current Activity
 
-Rust rule-code error propagation is repaired and closed under .45. ADR0124 grammar implementation .83.2.2 now owns delivery for ARCHOGEN/LS-002–003 and SEMULITH/LS-002.
+SExprDocumentV1 implements complete-input parsing and tagged exact lexemes across all six runtimes. Native file-consumer delivery .83.2.3 and final .83.3 admission continue ARCHOGEN/LS-002–003 and SEMULITH/LS-002.
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.45.3 - close Rust rule-code rejection repair` — bounded parent closeout; canonical receipt required by the landing hook.
+- `SESSION-STARTUP-READING.83.2.2 - implement complete s-expression documents` — all authored native contract cases, round trips and same-engine reuse pass; canonical receipt required by the landing hook.
 
 ## Next Action
 
-- Implement specs/SExprDocumentV1.spec and the 37-case persistent six-runtime contract consumers under SESSION-STARTUP-READING.83.2.2; ARCHOGEN/LS-002 complete-document/all-form and LS-003 atom-kind delivery then continues through native file consumer .83.2.3 (also SEMULITH/LS-002).
+- Deliver the separate native Rust sexpr_file consumer under SESSION-STARTUP-READING.83.2.3, using SExprDocumentV1.spec; verify file/UTF-8/error/multi-file/relocation behavior before final .83.3 admission for ARCHOGEN/LS-002–003 and SEMULITH/LS-002.
 
 ## Recent Completions
+
+- `2026-09-22` — `SESSION-STARTUP-READING.83.2.2` implements the versioned grammar and six-runtime recurrence; native file delivery follows.
 
 - `2026-09-22` — `SESSION-STARTUP-READING.45.3` closes compiler rejection with exact staged canonical acceptance; grammar .83.2.2 follows.
 
@@ -43,8 +45,6 @@ Rust rule-code error propagation is repaired and closed under .45. ADR0124 gramm
 - `2026-09-21` — `CONFORMANCE-SOURCE-READING.1.83` finishes progressive, punctuation and recognition authority reading; focused proof has 195 top-level and 424 nested TAP results. Three files finish. .2.15 retains the full progressive carrier observation limit; new .2.17 owns disconnected recognition compatibility observations. Repairs remain; .1.84 continues.
 
 - `2026-09-21` — `CONFORMANCE-SOURCE-READING.1.82` finishes Phase0, validation fuzz and progressive authority; focused proof has 94 top-level and 571 nested assertions. Three files finish. New .2.15 owns disconnected parent observations; .2.16 owns signal-status loss and sequential-pipe blocking. Prior .1.81 count wording is corrected. Repairs remain; .1.83 continues.
-
-- `2026-09-21` — `CONFORMANCE-SOURCE-READING.1.81` reads Phase0 through 48409; 14 subtests retain 236 assertions. All Phase0 subtests are read; helpers remain. .2.14 has three bounded repair children, and startup .17.2 owns reproduced absent-hash host-slot leakage. Repairs remain; .1.82 continues.
 
 ## History
 

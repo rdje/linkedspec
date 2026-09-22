@@ -15,11 +15,18 @@ to invoke the LinkedSpec command-line interface.
 | Julia | Local `LinkedSpecJulia` package at `julia/` | [Julia integration](integration-julia.md): application project/depot, offline reuse, native values and source deployment. |
 | Lua or LuaJIT | Repository Lua modules and matching native modules | [Lua integration](integration-lua.md): explicit module paths, per-runtime native preparation, retained products and source/native packaging. |
 
-For a Rust application that needs S-expressions, start with the Rust guide's
-[Lispish file example](integration-rust.md#parse-lispish-files-in-your-application).
-Follow its linked setup prerequisites before running the example. Read the
-[grammar and file-consumption limits](integration-rust.md#exact-grammar-and-file-consumption-limits)
-before treating its result as application configuration.
+For complete s-expression documents on any backend, select
+[`SExprDocumentV1.spec`](../specs-and-corpora/sexpr-document-v1.md). It returns all
+top-level lists and preserves symbol, number and string kinds with exact token
+spelling. Each backend guide's **Parse complete s-expression documents** section
+explains entry-rule selection, native results, failure handling and its focused
+contract check. Follow that backend's setup prerequisites first.
+
+The Rust [Lispish file example](integration-rust.md#parse-lispish-files-in-your-application)
+retains its historical first-form/head-tail contract and documented
+[limits](integration-rust.md#exact-grammar-and-file-consumption-limits). The separate
+Rust document-file consumer is still the next delivery step; changing only that
+old adapter's grammar path does not convert it to the new result format.
 
 The guides are the current owners of host-specific setup and deployment. The
 [native loading contract](native-spec-loading.md),

@@ -24,9 +24,13 @@ contrasts. Every executable `.spec` input and every current authoring example re
 The public no-drift checker now requires that unique bounded section, the exact rejected examples, and five ordered
 non-identity mappings whose old side contains a removed one-identifier selector and whose replacement does not.
 Eleven in-memory mutations cover collapse, omission, wrong replacements, selector retention, and reordering. The
-composed proof reports 67 public files / 35 classified historical references / zero current examples, zero
+checkpoint proof reported 67 public files / 35 classified historical references / zero current examples, zero
 executable positives, five backend rejection routes, and capability 90/0/0. This is documentation/governance only;
 the broader current-status audit and parent closeout remain owned by `.23.2`.
+
+The current selector inventory includes 69 public files after review of the
+complete-document grammar chapter. Its 35 classified historical references, zero
+current examples and migration-contrast checks remain unchanged.
 
 ## Task metadata is globally unambiguous
 
@@ -504,15 +508,16 @@ sections. The complete source audit is preserved separately and remains incomple
 SEMULITH/LS-001 multiline quoted-string corruption is repaired: both quote readers
 preserve LF and surrounding structure, with shared proof across all six runtime
 routes. LS-002 remains open for delivery; ADR0124 now defines a separate versioned
-complete-document grammar with atom kinds and exact lexemes. Its 37 authored cases
-pass bounded Perl/Rust prototype proof. Compiler repair .45 is complete: reported
+complete-document grammar with atom kinds and exact lexemes. Its 37 authored cases,
+token-spelling round trips and post-rejection reuse pass all six native runtimes. Compiler repair .45 is complete: reported
 rule-code parse errors reject compilation, with source carriers and generated
-execution verified. The new grammar remains under implementation. LS-003 workspace and prerequisite
+execution verified. The new grammar is implemented; its native Rust file-consumer delivery remains open. LS-003 workspace and prerequisite
 guidance remedies are already verified in the Rust integration guide. The current
 Lispish grammar retains its historical extraction and untyped string-value contract.
 
-The planned document grammar also owns ARCHOGEN/LS-002 (complete input and all
-top-level forms) and ARCHOGEN/LS-003 (atom kinds). Both remain pending delivery.
+The document grammar addresses ARCHOGEN/LS-002 (complete input and all top-level
+forms) and ARCHOGEN/LS-003 (atom kinds). Native file integration and final report
+admission remain .83.2.3/.83.3-owned; downstream acceptance is not claimed.
 
 Conformance, test and Unicode reading has exact ownership for all 160 inputs in
 143 bounded groups covering 8,257,059 baseline decoded bytes. Reading now covers 89/143 groups, 109,904 fragments / 4,784,266 baseline bytes and 133 complete files.
@@ -3712,7 +3717,7 @@ recurring admission, and public no-drift remain pending.
 
 Phases 0–9 of the modernization roadmap are done:
 
-- **Phase 0**: Regression safety net — `t/phase0_regression.t` covers all 21 shipped specs with a green `1031`-test baseline; every `.spec` compiles at `language_agnostic_ready_ratio == 1.0000` (zero compatibility-surface rules).
+- **Phase 0**: Regression safety net — `t/phase0_regression.t` covers all shipped specs. Its recorded historical baseline passed `1031` tests; current descriptor checks require every `.spec` to compile at `language_agnostic_ready_ratio == 1.0000` (zero compatibility-surface rules).
 - **Phase 1**: Thin facade + owner dispatch — `LinkedSpec.pm` is a lazy public facade over owner modules that route through uniform `OwnerDispatch`; the former `ActionRewriter.pm` forwarding shim was deleted (118 lines).
 - **Phase 1A**: Thin-façade modularization — `LinkedSpec.pm` delegated into focused owner modules (`Trace`, `Validation`, `Resolver`, `Runtime`, `Compiler`, `BootstrapSpec`, `SpecEntry`, `RuleIR`, `EmitContext`); the shared `OwnerDispatch` seam replaced per-owner lazy-loading wrappers.
 - **Phase 2**: DSL frontend hardening — rule-label parsing, inside-block rejection, extra-colon rejection, fluent-continuation recognition, `strict_syntax` mode, construct-recognition alignment with bootstrap grammar.
@@ -3745,7 +3750,7 @@ pass. Bounded structural matchers handle the exact shipped recursive/DEFINE/`\K`
 `push(child, index)` preserves EBNF logging payloads. Dart full-corpus parity is now 105/105 green, and the focused
 Dart local gate is available through `tools/run_dart_local.sh` or opt-in `LINKEDSPEC_RUN_DART=1` local CI.
 
-The Method-like DSL migration track is also complete: all 21 shipped specs are at zero compatibility-surface rules, 100+ helpers across 10 families are regression-locked, current helper names are the only documented helper surface, and fluent/block equivalence is verified. Current setup and read forms use direct assignments, `set(...)`, bare scalar reads, `array(...)`, `hash(...)`, `push(...)`, `copy(...)`, and `return(...)`. Unknown typed calls in return/value positions diagnose through the generic unknown-helper path instead of emitting generated host-language calls, while unregistered standalone function-shaped statements remain explicit raw compatibility debt. Top-level `fn name(args) { ... }` definition shells are parsed by `specs/user_function_definition.spec` and projected through the active user-function registry, with versioned signature data, source/body spans, body source, neutral `body_payload`, neutral `body_parse_job`, and body AST recorded. The legacy parse-job sidecar dispatches through the minimal `actionir-body.spec` / `action_block` provider and stitches the returned `action_block` AST into `body_ast`; the separately governed exact-assignment v2 `parse_job(...)` annotation is also current across all five backends. On Perl, Rust, Dart, Julia, and Lua, registered exact-v1 and final-rest-v2 user-function calls execute in value positions, compatible receiver chains, and standalone discard statements: positional arguments evaluate eagerly in the caller, fixed params and a fresh rest array bind in a fresh function-local scope, and the result is the final expression or `return(expr)` payload. Lua additionally executes declared final contextual codeblock slots in the current isolated function frame with cleanup-safe caller restoration and typed arity/keyword/recursion/staging/callback failures. Recursive and unsupported function-body forms remain fenced as diagnostics. The accepted definition surface is explicit-paren, braced `fn` with optional final `...rest`; alternate spellings, omitted zero-arg parentheses, brace-less bodies, caller-state-mutating functions, recursion support, closures/lambdas/currying, and function namespaces remain deferred extension topics.
+The Method-like DSL migration track is also complete: all shipped specs are at zero compatibility-surface rules, 100+ helpers across 10 families are regression-locked, current helper names are the only documented helper surface, and fluent/block equivalence is verified. Current setup and read forms use direct assignments, `set(...)`, bare scalar reads, `array(...)`, `hash(...)`, `push(...)`, `copy(...)`, and `return(...)`. Unknown typed calls in return/value positions diagnose through the generic unknown-helper path instead of emitting generated host-language calls, while unregistered standalone function-shaped statements remain explicit raw compatibility debt. Top-level `fn name(args) { ... }` definition shells are parsed by `specs/user_function_definition.spec` and projected through the active user-function registry, with versioned signature data, source/body spans, body source, neutral `body_payload`, neutral `body_parse_job`, and body AST recorded. The legacy parse-job sidecar dispatches through the minimal `actionir-body.spec` / `action_block` provider and stitches the returned `action_block` AST into `body_ast`; the separately governed exact-assignment v2 `parse_job(...)` annotation is also current across all five backends. On Perl, Rust, Dart, Julia, and Lua, registered exact-v1 and final-rest-v2 user-function calls execute in value positions, compatible receiver chains, and standalone discard statements: positional arguments evaluate eagerly in the caller, fixed params and a fresh rest array bind in a fresh function-local scope, and the result is the final expression or `return(expr)` payload. Lua additionally executes declared final contextual codeblock slots in the current isolated function frame with cleanup-safe caller restoration and typed arity/keyword/recursion/staging/callback failures. Recursive and unsupported function-body forms remain fenced as diagnostics. The accepted definition surface is explicit-paren, braced `fn` with optional final `...rest`; alternate spellings, omitted zero-arg parentheses, brace-less bodies, caller-state-mutating functions, recursion support, closures/lambdas/currying, and function namespaces remain deferred extension topics.
 
 ## Backbone items
 

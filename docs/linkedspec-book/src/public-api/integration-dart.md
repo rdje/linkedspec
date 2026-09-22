@@ -176,6 +176,35 @@ resolution and pinned source. The Dart SDK may compile or reuse its own generate
 products; this does not build RGX/PGEN. The compiled LinkedSpec engine is an
 in-memory object and this example does not persist it across processes.
 
+## Parse complete s-expression documents
+
+Load `specs/SExprDocumentV1.spec` from your pinned checkout for complete
+s-expression documents, keeping the supporting function grammar described above.
+Change the word adapter's `topRule: 'Top'` to `topRule: 'Document'` when selecting
+this grammar. Read the direct `RuntimeParseResult.value`: it is a map with
+`format: 'linkedspec-sexpr-v1'` and an ordered `forms` list. Atom maps preserve
+`kind` and the string `lexeme`; string quotes and escapes remain in that lexeme.
+The [document grammar chapter](../specs-and-corpora/sexpr-document-v1.md) defines
+the schema and shows exact examples.
+
+Empty documents succeed with no forms. Invalid documents throw `RuntimeExitNow`
+with status 1, without an accepted partial document. Keep the typed failure
+handling below. To verify the contract from the LinkedSpec root:
+
+```sh
+(
+  cd dart
+  bash ../tools/run_dart_project_data.sh test test/sexpr_document_v1_test.dart
+)
+```
+
+The native tests check all 37 authored cases, token-spelling round trips and fresh
+independent input after every rejection through one compiled engine. This is
+grammar-specific recovery proof, not rollback of arbitrary application effects.
+The existing word executable still takes text arguments; it is not a file reader.
+If adapting its AOT bundle, include `SExprDocumentV1.spec` among your application
+assets and retain the required `user_function_definition.spec`.
+
 ## Capture diagnostics and handle failures
 
 The example is quiet by default: grammar calls such as `say(...)` do not write

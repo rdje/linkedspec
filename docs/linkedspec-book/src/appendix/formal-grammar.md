@@ -1265,7 +1265,7 @@ tracking but not recommended for new `.spec` authoring:
 - `capture_rest_length()` — use `capture_rest_len()`
 - Bare `return`, bare `exit` — use `return_undef()`, `exit_now(1)`
 
-All 21 shipped `.spec` files compile with zero compatibility-surface rules.
+All shipped `.spec` files compile with zero compatibility-surface rules.
 New `.spec` files must maintain this invariant.
 
 ## 12. Complete Example

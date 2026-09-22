@@ -26,7 +26,7 @@ reading or workflow checkpoint. The three reports were already registered by int
 .8.1: SEMULITH/LS-001 quoted LF corruption, LS-002 atom-kind preservation, and LS-003
 integration guidance. Startup .85 corrects the retrieval failure, routes the first repair to .83.2.1, which now fixes quoted LF across six runtime
 routes. .83.1 now records ADR0124; .45.1-.45.3 close compiler rejection and its carrier/canonical verification
-before the versioned grammar is delivered. LS-003 remedies remain verified. Follow
+before .83.2.2 delivers the versioned grammar with six-runtime proof; .83.2.3 native file delivery is next. LS-003 remedies remain verified. Follow
 [[archogen-rust-lispish-integration]] for the exact register and evidence.
 
 Related: [[startup-codebase-reading-inventory]], [[memory-handoff-task-status-consistency]].

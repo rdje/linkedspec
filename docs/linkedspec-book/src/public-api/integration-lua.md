@@ -113,6 +113,36 @@ rerun the builder when the pinned native source, interpreter ABI, headers,
 compiler target or PCRE2 inputs change. The builder itself does not perform a
 freshness check: invoking it explicitly rebuilds its three modules.
 
+## Parse complete s-expression documents
+
+Load `specs/SExprDocumentV1.spec` from your pinned checkout for complete
+s-expression documents. Keep the module/supporting-grammar layout and select the
+matching PUC Lua or LuaJIT native products as described above. Change the word
+adapter's `top_rule = "Top"` to `top_rule = "Document"` for this grammar.
+
+Read `result.value` as the native document: `format` is `linkedspec-sexpr-v1`,
+`forms` is an ordered array, lists have `kind`/`items`, and atoms have
+`kind`/`lexeme`. Preserve the JSON codec's array and harray identities, including
+empty arrays. Atom lexemes remain strings with original quotes and escapes;
+the [document grammar chapter](../specs-and-corpora/sexpr-document-v1.md) supplies
+the full schema and examples.
+
+Empty documents succeed with no forms. Invalid documents raise the typed
+`runtime_exit_now` value with status 1; use `pcall` and
+`linkedspec.is_runtime_exit_now` to identify it. No partial document is accepted.
+From the LinkedSpec root, verify each prepared runtime separately:
+
+```sh
+bash tools/run_lua_project_data.sh puc lua/test/sexpr_document_v1_test.lua
+bash tools/run_lua_project_data.sh luajit lua/test/sexpr_document_v1_test.lua
+```
+
+Each route checks all 37 authored cases, token-spelling round trips and fresh
+independent input after every rejection using one compiled engine. This is
+grammar-specific recovery proof, not a rollback promise for application effects.
+The existing word adapter still takes text arguments. Its deployment instructions
+continue to apply; include the selected document grammar in your application assets.
+
 ## Parse native values
 
 The shared grammar is:

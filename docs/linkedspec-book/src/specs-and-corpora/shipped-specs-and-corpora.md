@@ -41,13 +41,14 @@ It also prevents a common parser-project failure mode: a parser can look clean a
 
 `specs/` is the main shipped `.spec` directory.
 
-At the time of this book slice, it contains these public examples and regression inputs:
+It contains these public examples and regression inputs:
 
 | File | Main entry rule | What it demonstrates |
 | --- | --- | --- |
 | `BNF.spec` | `description` | BNF-style token and grouping experiments, with visible debug output. |
 | `DT.spec` | `dtree` | Decision-tree-like syntax, recursive groups, and debug-print token readers. |
-| `Lispish.spec` | `Lispish` | Nested parenthesized AST parsing, recursive structures, strings, comments, and typed payload construction. |
+| `Lispish.spec` | `Lispish` | Historical first-form extraction with head/tail arrays, recursive structures, strings and comments. |
+| `SExprDocumentV1.spec` | `Document` | Complete documents, all top-level forms, tagged atom kinds, exact token lexemes and rejection of unrecognized input. |
 | `ds_vhistory.spec` | `vhistory` | Parsing verbose version-history output with object/branch/version aggregation. |
 | `ebnf.spec` | `grammar_file` | Parsing EBNF-style grammar definitions, includes, annotations, operators, regexes, and rule references. |
 | `hlink_substitution.spec` | `substitute_top` | Substitution syntax, bracket/brace nesting, and word-item accumulation. |
@@ -62,11 +63,17 @@ At the time of this book slice, it contains these public examples and regression
 | `tablegrep.spec` | `grep` | Boolean expression parsing for table filtering, including `AND`, `OR`, grouping, and regex terms. |
 | `tclite.spec` | `tcl_script` | Tcl-like syntax experiment with commands, quotes, comments, substitutions, and braces. |
 | `tkgui.spec` | `sub_gui_list` | Small GUI-subdefinition parser with captured inner bodies. |
+| `user_function_definition.spec` | `user_function_definitions` | Source-ordered function-definition shells with exact body payloads and staged parse-job metadata. |
 | `verilog.spec` | `verilog_file` | Minimal placeholder surface, not a mature shipped parser today. |
 | `vhdl.spec` | `vhdl_file` | The largest shipped `.spec`: VHDL-oriented library/use/entity/architecture/package/configuration/declaration parsing. |
 | `spec.spec` | `spec_file` | Self-hosted grammar: LinkedSpec parsing its own `.spec` language through the DSL itself. Compiles at `language_agnostic_ready_ratio == 1.0000`. |
 
 The important point is not that every file has equal maturity. It does not.
+
+The [complete-document grammar](sexpr-document-v1.md) has a separate authored
+contract covering values, failures, token-spelling round trips and same-engine
+reuse on all six native runtimes. Historical Lispish consumers keep their
+existing extraction representation.
 
 All 15 shipped specs that previously used exact `array(IDENTIFIER)` / `hash(IDENTIFIER)` storage selectors are now migrated to
 bare typed bindings. That migration removed 210 selector occurrences while preserving constructor calls such as
@@ -120,6 +127,7 @@ candidates remain explicit Rust parity follow-up blockers.
 The mature center of gravity is currently:
 
 - `Lispish.spec`
+- `SExprDocumentV1.spec`
 - `ebnf.spec`
 - `vhdl.spec`
 - `ds_vhistory.spec`

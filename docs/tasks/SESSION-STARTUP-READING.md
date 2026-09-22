@@ -4744,13 +4744,25 @@ remain. Reading completion and runtime signoff remain distinct.
   - [x] **LOCKSTEP** — Quote source, copied corpus, regression fixture, Rust verifier, book examples and task/Knowledge/live roadmap pointers agree; ordinary focused checks and git diff --check PASS.
 
 - ID: `SESSION-STARTUP-READING.83.2.2`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `eda9cd3dd008784bc7f7993fe09ed5d35665e535`.
+  Verification tier: `canonical`
+  Focused checks: Consume the independently authored contract in persistent Perl/Rust/Dart/Julia/PUC Lua/LuaJIT tests, with round trips, typed failures and same-engine reuse; prove descriptor readiness and the skipped-text mutation; preserve historical Lispish regressions; run book, Knowledge, memory, history, diff and doctrine checks.
+  Canonical trigger: A new public grammar contract and its recurring cross-runtime test registration require exact staged canonical acceptance before landing.
   Goal: Implement SExprDocumentV1.spec and persistent consumers of the accepted document contract.
   Dependencies: .83.1 and .45.3 committed with clean handoffs.
-  Scope: The versioned grammar, exact shared valid/invalid expectations, source/descriptor readiness and relevant native regression integration; preserve Lispish and its corpus/quote proofs.
+  Scope: The versioned grammar, exact authored expectations, source/descriptor readiness, native regression integration, all five backend integration guides and their shared landing page, and reviewed public chapter inventories (mutation70/selector69); preserve Lispish. Canonical mechanism and inventory evidence: docs/knowledge/sexpr-document-design.md and docs/knowledge/mutation-public-surface-no-drift.md.
   Acceptance: Consume all 37 authored cases without regenerating expected values from the parser. Prove complete recognition, all top-level forms, exact atom kinds/lexemes, both quote/backslash boundaries, EOF comments and atomic rejection. Exercise Perl/Rust/Dart/Julia/PUC Lua/LuaJIT with compiled-engine reuse after failures; retain an independent mutation showing that EOF alone cannot detect skipped text. Add precise further fixtures only when justified by implementation evidence. Run canonical proof for this public grammar implementation boundary before landing.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: PASS: all 37 authored cases on six native runtimes (222 case outcomes), 21 token-spelling round trips per route and 16 same-engine post-rejection reuse checks per route. Perl has 44 top-level/168 nested assertions including descriptor readiness and the independent catch-all mutation; Rust one complete contract test, Dart 38 tests, Julia 91 assertions, and both Lua routes pass. Three initial Dart EOF-comment failures become green with a portable grammar branch, without changing authored expectations. Historical Lispish quoted-LF fixtures pass 3/3 on Perl, and the new book command returns its exact documented value. Formatting, Dart analysis, shell syntax, book, Knowledge/memory/history/diff and doctrine checks govern landing. The public grammar/recurring-CI boundary requires the exact staged canonical receipt; native file delivery and final report admission remain separate. Complete shipped-inventory proof PASS: Rust auto-discovery parses, validates and compiles all 22 grammars; Perl return_descriptor passes 67 assertions (inventory plus three readiness checks per grammar); the public catalog lists the same 22 filenames exactly once. Current invariant prose no longer embeds a stale fixed count, and the 70/69 public guards retain every semantic mutation check. The Rust integration guide command builds and returns the exact documented two-form tagged value through the public loader and generic native consumer. Direct consumer boundary checks also pass empty documents, ordered two-form input and interstitial-junk rejection with empty stdout.
+  Commit: `SESSION-STARTUP-READING.83.2.2 - implement complete s-expression documents`
+
+  Acceptance Checklist:
+  - [x] **REPRODUCE / ISSUE** — The independent 37-case contract fixes the required all-form/kind behavior; native Dart reports three EOF-comment failures before the portable branch.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — LinkedSpec::Get return_descriptor proves canonical ActionIR readiness; Dart public RuntimeRegexAlternation isolates literal-z behavior, with the unchanged-host-pattern mechanism at dart/lib/src/runtime/matching.dart:1384. Default seek can skip interstitial text, as the independent rejecting-edge mutation proves.
+  - [x] **FIX** — Ship a separate Document grammar with ordered forms, exact tagged lexemes, portable EOF comments, explicit rejecting edges and the final cursor guard. Preserve historical Lispish.
+  - [x] **ADDRESSED (verified)** — Six native runtime routes PASS all authored values/rejections, round trips and post-rejection reuse; the three Dart EOF cases are FAIL->PASS with unchanged expectations.
+  - [x] **NO REGRESSION** — Lispish source remains unchanged; all three historical quoted-LF CLI fixtures PASS. Syntax, Rust formatting and Dart analysis pass; the exact staged canonical gate is the required landing authority.
+  - [x] **LOCKSTEP** — The grammar, recurring tests, all five backend integration guides, shared integration landing page, book, roadmap, Knowledge and live pointers describe this grammar delivery; the guides identify Document entry selection and native failure/value handling; the separate native file consumer and final report admission retain their owners.
 
 - ID: `SESSION-STARTUP-READING.83.2.3`
   Status: `pending`
@@ -4804,7 +4816,7 @@ audit range, not the default repair frontier.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.83.2.2` | `pending` | Implement the ADR0124 document grammar and persistent 37-case six-runtime proof after .45 compiler repair closeout. ARCHOGEN/LS-002–003 and SEMULITH/LS-002 remain delivery-owned; historical Lispish is preserved. |
+| 1 | `SESSION-STARTUP-READING.83.2.3` | `pending` | Deliver the separate native Rust file consumer for the verified SExprDocumentV1 grammar; preserve lispish_file and verify UTF-8, errors, multiple files and relocation before .83.3 admission. |
 
 ## Reading Ledger
 
@@ -7586,6 +7598,8 @@ All 53 owned scopes are read: HLink delimiter/raw text, Liberty scalar/complex a
 
 ## Verification Log
 
+- 2026-09-22 .83.2.2: PASS: all 37 authored cases on six native runtimes (222 case outcomes), 21 token-spelling round trips per route and 16 same-engine post-rejection reuse checks per route. Perl has 44 top-level/168 nested assertions including descriptor readiness and the independent catch-all mutation; Rust one complete contract test, Dart 38 tests, Julia 91 assertions, and both Lua routes pass. Three initial Dart EOF-comment failures become green with a portable grammar branch, without changing authored expectations. Historical Lispish quoted-LF fixtures pass 3/3 on Perl, and the new book command returns its exact documented value. Formatting, Dart analysis, shell syntax, book, Knowledge/memory/history/diff and doctrine checks govern landing. The public grammar/recurring-CI boundary requires the exact staged canonical receipt; native file delivery and final report admission remain separate. Logs: .linkedspec-data/scratch/sexpr-document-v1/.
+
 - 2026-09-22 .45.3: Compiler correction 10893fb71 passed all core/native regressions and the complete Rust component gate; carrier checkpoint 30c1ddeea passed all four source/AST/loader/semantic/generated route tests. This documentation-only parent closeout retains those exact proofs. Canonical acceptance requires tools/run_ci_local.sh to finish successfully on the exact staged candidate and produce the receipt checked by the normal commit hook; the resulting commit and promoted receipt are the durable gate evidence. Other parser defects and document grammar delivery remain separately owned.
 
 - 2026-09-22 .45.2: Four focused route tests PASS: eight malformed sources yield 32 ordinary/traced source/reconstructed-AST rejections, 16 path/name-loader rejections and eight failed semantic snapshots with no compiled authority or plan. Valid path/name loads, reconstructed compiled state and generated-plan execution return 42; a freshly compiled emitted module verifies direct/traced 42 and compatibility [42]. Production code is unchanged from 10893fb71; its complete Rust compatibility proof remains applicable. Rust formatting, book, Knowledge/memory/history/public/diff checks and normal doctrines govern landing. Raw log: .linkedspec-data/scratch/compiler-rejection45/routes-green.log.
@@ -7770,6 +7784,8 @@ CLI66x2 and Phase0 1032/1032; 1163 seconds is Phase0 only, with 25 optional gate
 
 ## Commit Log
 
+- 2026-09-22 .83.2.2: `SESSION-STARTUP-READING.83.2.2 - implement complete s-expression documents`; activation eda9cd3dd; .83.2.3 follows clean handoff.
+
 - 2026-09-22 .45.3: `SESSION-STARTUP-READING.45.3 - close Rust rule-code rejection repair`; activation 30c1ddeea; .83.2.2 follows clean handoff.
 
 - 2026-09-22 .45.2: `SESSION-STARTUP-READING.45.2 - verify Rust rule-code rejection routes`; activation 10893fb71; canonical .45.3 follows clean handoff.
@@ -7793,6 +7809,8 @@ CLI66x2 and Phase0 1032/1032; 1163 seconds is Phase0 only, with 25 optional gate
 Each canonical task node owns its exact `Commit` subject and retained completion note. Query landed history with `git log --all --format="%h %s" --fixed-strings --grep="SESSION-STARTUP-READING."`; this replaces the proven duplicate 102-row table.
 
 ## Changelog
+
+- 2026-09-22 .83.2.2: Implement the separate versioned grammar, six-runtime contract recurrence and public examples; preserve historical Lispish and continue native file delivery.
 
 - 2026-09-22 .45.3: Close .45 error propagation only; retain separate parser defect owners and resume ADR0124 grammar delivery.
 

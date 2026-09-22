@@ -8,19 +8,46 @@ answers:
   - how does the strict s-expression design prevent silently skipped text
   - where are the SEMULITH kind and ARCHOGEN complete-document requirements owned
   - which compiler defect blocks strict-document delivery
+  - why does the document grammar avoid a backslash z EOF anchor
+  - how do the backend integration guides select the complete document grammar
 date: 2026-09-22
-status: ADR0124 design accepted; production grammar and cross-backend admission pending
+status: grammar implemented with six-runtime contract proof; native file delivery and final admission pending
 tags: [s-expression, grammar, token-kind, validation, compatibility]
-evidence: "Startup .83.1 authors 37 independent cases, proves 136 Perl assertions including 21 token-spelling round trips and a skipped-text mutation, and verifies four Rust prototype boundaries. The native probe also reproduced compiler warning/drop defect .45. Task .45 closes that shared compiler repair with source/carrier proof and canonical acceptance; grammar delivery remains .83.2.2."
-reverify: "Run SEXPR_DOCUMENT_DESIGN_PROOF below from the repository root through the managed wrapper. Resolve the implementation frontier in SESSION-STARTUP-READING.45/.83; prototype proof is not production admission."
+evidence: "Startup .83.1 authors 37 independent cases and preserves bounded prototype proof. Task .45 closes the compiler warning/drop repair. Production .83.2.2 passes all 37 cases, 21 round trips and 16 same-engine recovery checks on each of six runtimes, with descriptor readiness and an independent skipped-text mutation; its driver recurs in canonical CI."
+reverify: "Run bash tools/check_sexpr_document_v1.sh for the production grammar. The historical SEXPR_DOCUMENT_DESIGN_PROOF below preserves feasibility scope. Follow startup .83.2.3/.83.3 for native file delivery and final admission."
 ---
 
-ADR0124 selects a separate planned `specs/SExprDocumentV1.spec` with a versioned
+ADR0124 selects the separate `specs/SExprDocumentV1.spec` with a versioned
 `format`/`forms` document and tagged list/symbol/number/string nodes. Atom `lexeme`
 fields preserve full source spelling, including string quotes and escapes. The
 37 authored cases in `tests/sexpr-document-v1/contract.json` are the acceptance
 authority, not output regenerated from a parser. Historical Lispish stays intact;
 its multiline quote repair is [[lispish-multiline-quoted-payload]].
+
+Production .83.2.2 consumes all 37 authored cases across Perl/Rust/Dart/Julia/PUC Lua/LuaJIT,
+with 21 token-spelling round trips and 16 same-engine recovery checks per route.
+The Perl test adds descriptor readiness, JSON scalar-kind comparison and the
+independent catch-all mutation. `tools/check_sexpr_document_v1.sh` is the recurring
+authority and runs in canonical CI. Rust/Dart test discovery and Julia/Lua local
+gate registrations also retain the consumers. The acceptance case array is unchanged
+from ADR0124 (canonical JSON SHA-256
+`75b1012504eba16781f0a92282f915f711d51688d59e2868c7c448ccef39cebe`).
+The native Rust file consumer and final report admission remain .83.2.3/.83.3.
+All five backend integration guides and their shared landing page now route to
+the document contract, explain native result/failure handling and publish each
+runtime's focused check command. The maintained Perl/Dart/Julia/Lua word adapters
+explicitly select `Top`; an adaptation must select `Document` as well as the new
+grammar path. Rust's generic text consumer uses default `ExecutionOptions` and
+therefore selects `Document` without an adapter change. The historical Rust
+`lispish_file` decoder still expects head/tail values and cannot decode the new
+tagged result. These are application integration requirements, not backend API
+changes; the shared grammar chapter owns schema and lexical semantics.
+The Rust integration guide command builds and returns the exact documented two-form tagged value through the public loader and generic native consumer. Direct consumer boundary checks also pass empty documents, ordered two-form input and interstitial-junk rejection with empty stdout.
+The shipped catalog now lists all 22 source files exactly once. Rust
+`integration_test::parse_all_shipped_specs` discovers, parses, validates and compiles
+all22; Perl return_descriptor inventory/readiness proof passes67 assertions. These
+checks also retain all21 unchanged existing grammars. Mutable invariant prose uses
+automatic discovery; older dated21-file results retain their historical scope.
 
 A successful final cursor alone does not establish complete recognition. Removing
 both explicit rejecting catch-all edges from this prototype accepts `(a) junk (b)`
@@ -28,7 +55,7 @@ and reaches EOF. The valid implementation must give every character a recognized
 branch or an explicit rejection. This is an authored grammar requirement; default
 seek dispatch itself is unchanged.
 
-The current feasibility evidence is **Perl plus four Rust boundaries only**.
+The original feasibility evidence below was **Perl plus four Rust boundaries only**.
 Perl passes 136 assertions across 21 accepted and 16 rejected documents, exact values,
 token-spelling reconstruction, independent-input reuse and the catch-all mutation.
 Rust verifies the typed atom example, the complete four-form eADL file, interstitial
@@ -46,6 +73,29 @@ omission at 1303-1310. The common-boundary correction is .45.1; carrier verifica
 and .45.3 closes the bounded repair with canonical acceptance.
 
 ## Repeat the bounded prototype proof
+
+### Production portability finding under .83.2.2
+
+The prototype below is historical feasibility source. The production grammar
+uses `;[^\r\n]*(?:\r\n|\r|\n)?` for comments: its greedy body reaches a line
+ending or EOF, and the optional suffix consumes the line ending when present.
+It does not depend on `\z`. Dart's public `RuntimeRegexAlternation.compile`
+leaves that escape with the host regex meaning: it matches literal `z`, not an
+empty end position. `compileRuntimeRegex` and `_normalizePattern` at
+`dart/lib/src/runtime/matching.dart:1384` delegate that unchanged pattern to
+`RegExp`; the bridge does not promise general PCRE equivalence.
+
+The first production contract run isolates three Dart failures: `trivia_only`,
+`ascii_trivia` and `comments_with_delimiters`. Controlled native parser calls
+reject `; eof`, accept `; eof\n` and accept `; eofz` with the prototype pattern.
+The portable comment branch accepts all three as empty documents. This is a
+grammar correction within the accepted EOF-comment contract, owned and fixed
+by .83.2.2; no dependency or regex-engine change is needed. The public matcher
+probe and source substitution are retained in
+`.linkedspec-data/scratch/sexpr-document-v1/dart-portability-proof.log`.
+The unchanged authored comment cases lock recurrence across all six runtimes.
+
+### Historical feasibility recipe
 
 This is a diagnostic model, not the shipped grammar. It uses only project-local
 files and existing public `LinkedSpec::Get` behavior. Its 37 expected outcomes are
@@ -132,4 +182,4 @@ The native check uses the already prepared `rust/target/debug/linkedspec-rust`
 with `--spec-file` and `--input-file`; it does not inspect dependency internals.
 
 Prototype source SHA-256: `cfa6d7a7594488aac0c4f91264050db67974bcd9b93c5d0385a3d98d7c696fef`.
-Acceptance JSON SHA-256: `463d57163499aa71432755e62548bb303740bea120aa2a694d01a8a96af99c51`.
+Historical design-checkpoint acceptance JSON SHA-256: `463d57163499aa71432755e62548bb303740bea120aa2a694d01a8a96af99c51`.

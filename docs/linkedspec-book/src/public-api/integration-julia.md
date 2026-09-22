@@ -196,6 +196,33 @@ or dependency build command. Each new Julia process loads the prepared package
 environment and constructs one in-memory engine. The example does not persist
 that engine across processes or promise a fixed startup time.
 
+## Parse complete s-expression documents
+
+Load `specs/SExprDocumentV1.spec` from your pinned checkout for complete
+s-expression documents. Retain the supporting grammar layout described above
+and change the word adapter's `top_rule = "Top"` to `top_rule = "Document"`.
+The direct `.value` is a dictionary with `format = "linkedspec-sexpr-v1"` and
+an ordered `forms` array. Atom dictionaries retain `kind` and a string `lexeme`,
+including original string quotes and escapes. See the
+[document grammar chapter](../specs-and-corpora/sexpr-document-v1.md) for the
+schema, lexical rules and examples.
+
+Empty documents succeed with no forms. Invalid documents throw `RuntimeExitNow`
+with status 1 and expose no accepted partial document. Keep the typed failure
+handling below. Run the native contract check from the LinkedSpec root:
+
+```sh
+bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no \
+  -e 'using LinkedSpecJulia, JSON3, Test; const REPO_ROOT = pwd(); include("julia/test/sexpr_document_v1_test.jl")'
+```
+
+It checks all 37 authored cases, token-spelling round trips and a fresh independent
+input after every rejection using one compiled engine. This recovery proof is
+specific to the document grammar and does not imply application-effect rollback.
+The word adapter still consumes text arguments. For a deployed adaptation, retain
+the complete pinned checkout and package the selected document grammar with your
+application assets.
+
 ## Capture diagnostic events and handle failures
 
 Diagnostic helpers are quiet unless this adapter receives `--diagnostics`.

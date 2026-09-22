@@ -31,6 +31,19 @@ published integration document, public APIs and contracts are the sole authority
 RGX owns PGEN and all transitive preparation; no separate PGEN procedure or
 internal dependency knowledge belongs in LinkedSpec. Reports go to RGX.
 
+## September 22 document grammar delivery
+
+Startup .83.2.2 now ships `specs/SExprDocumentV1.spec`. All 37 independently authored
+cases pass on Perl, Rust, Dart, Julia, PUC Lua and LuaJIT, including ARCHOGEN's four
+forms and all four SEMULITH kind examples. Every route verifies exact token-spelling
+round trips and same-engine recovery after rejection. The shared driver is registered
+in canonical CI. A portable EOF-comment branch fixes three initial Dart failures
+without changing the accepted syntax or expected values.
+
+ARCHOGEN/LS-002–003 and SEMULITH/LS-002 still require the separate native Rust file
+consumer .83.2.3 and final .83.3 admission. This grammar checkpoint does not claim
+downstream acceptance. [[sexpr-document-design]] owns the current recurring proof.
+
 ## September 22 kind-preserving document design
 
 ARCHOGEN/LS-001's workspace remedy is verified. ARCHOGEN/LS-002 (complete-input
