@@ -498,8 +498,8 @@ the director's focused-verification grant used for this correction and the separ
 supporting-reading closeout. Reading completion establishes audited comprehension;
 it does not close the six grammar/literal repair roots or establish runtime signoff.
 Conformance, test and Unicode reading has exact ownership for all 160 inputs in
-143 bounded groups covering 8,257,059 baseline decoded bytes. Reading now covers 84/143 groups, 102,404 fragments / 4,504,055 baseline bytes and 107 complete files.
-Recognition, recursive observation, repeated action results and root selection core are complete; root selection routes are partial through line 359.
+143 bounded groups covering 8,257,059 baseline decoded bytes. Reading now covers 85/143 groups, 103,904 fragments / 4,556,648 baseline bytes and 114 complete files.
+Root selection routes, all three rule-local cursor consumers, scalar numeric/text and semantic call projection are complete; semantic foundation is partial through line 65.
 
 The progressive carrier checks exact child payloads in live, reconstructed and
 generated execution, along with typed failures and logical metadata. Generated
@@ -519,27 +519,32 @@ no runtime interference is demonstrated. The repair must observe supported runti
 state and reject a relevant interference mutation while preserving private state
 ownership. The separate completed-token restoration defect remains startup .38.
 
-Fresh focused proof passes 79 top-level and 475 nested TAP results. Recognition
-checks complete typed recursion failures and generated falsey payloads. Recursive
-observation tests compare exact detached records, real cursor transitions, abort
-identity and direct/mutual recursion errors. Repetition covers eight mode cases,
-ten special cases, loaded and generated execution, trace, primary CLI and corpus.
-Root selection preserves explicit-selector, first-marker and first-rule precedence
-across native and generated roles without rewriting authored marker identity.
-Generated packages in these consumers load in the same process.
+Fresh focused proof passes 431 top-level and 213 nested TAP results across seven
+completed files. Root traces attribute the effective entry and show that unknown
+selection enters no handler. Cursor consumers exercise family-owned seek/consume,
+mixed parents and recursion, normalized edge provenance, loaded descriptors and
+all 14 admission roles. Generated packages load in the same process; the scalar
+numeric emitter check observes its dependency declaration without executing it.
+Numeric/text fixtures preserve exact admitted values. Semantic calls compare 22
+records/25 relations, authored ordering, multibyte columns and function masking.
+The direct strict validator remains separate; `Get(strict_syntax => 1)` still
+does not wire that option into validation.
+The semantic foundation source remains partial through 65 and is not executed here.
 
-Root-route reading ends at 359 inside a traced invocation. Only complete cases
-through line 324 execute in this checkpoint; the trace suffix continues in .1.85.
-The direct strict validator is exercised separately; passing Get strict_syntax
-still does not wire that option into validation.
+**Cursor-source and CLI harness repairs remain open (.2.13/.2.16).** Both cursor
+source denials accept empty/unrelated output; 24 controls demonstrate the missing
+positive observations while real capture and live seek work. The cursor CLI helper
+is byte-identical to the repeated-action helper. Twelve further controls confirm
+its signal-status/pipe defects and reap both timed-out owned children. These are
+six affected helpers: SIGTERM can become reported status zero, and sequential
+pipe reads can stall on large stderr. Existing exact CLI/admission checks remain.
 
-**Subprocess capture repair also covers the repeated-action CLI helper (.2.16).**
-Twelve controlled checks reproduce the Phase0 mechanism in this fifth helper:
-SIGTERM becomes reported status 0, while large stderr-first/interleaved writes
-block sequential capture. Both timed-out owned children are terminated and reaped.
-In-memory status and concurrent-drain controls distinguish those outcomes. This
-establishes harness defects, not a parser failure or a historical false-green CI run.
-MethodExpr .2.5 and all other repairs retain required source/book/policy reading.
+**Semantic copy coverage needs one nested observation (.2.18).** The original test
+mutates definition order and a call return shape, then checks only definition
+order on the next copy. Four controls show its six assertions still pass when the
+nested shape is shared. A stronger seven-assertion control rejects that sharing
+and passes production. This establishes missing regression coverage; current
+production detachment passes. All repairs retain source/book/policy prerequisites.
 The supplied dependency grammar snapshot remains unused.
 
 The director approved the finite documentation-capacity proposal under ADR0122.
@@ -567,8 +572,8 @@ The history files keep their 512-line / 65,536-byte caps, mandatory rollover and
 immutable archives. General card/part limits remain unchanged. Admission consumes
 one of the conservative 99 reserve units; the remaining 98 units are forecast
 after actual admission overhead. This capacity does not complete source reading
-or repair tests: reading now reaches 84/143, `.1.85` is next, and the test and recipe
-repairs `.2.5`–`.2.17` remain open.
+or repair tests: reading now reaches 85/143, `.1.86` is next, and the test and recipe
+repairs `.2.5`–`.2.18` remain open.
 
 The director has requested integration guides and runnable consumer examples for
 Perl, Rust, Dart, Julia and Lua, covering recursive checkout, dependency preparation

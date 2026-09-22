@@ -6,7 +6,8 @@ answers:
   - which task fixes the negative-only cursor source observation
   - does a passing consume-override denial prove seek source was captured
   - how can the cursor source test reject missing or unrelated output
-date: 2026-09-21
+  - do rule-local cursor consumer source denials detect empty or unrelated capture
+date: 2026-09-22
 status: confirmed observation gap; repair .2.13 pending required reading prerequisites
 tags: [perl, phase0, tests, cursor, generated-source, observation-gap]
 evidence: "CONFORMANCE-SOURCE-READING.1.77 at c57bd928ef7fe1bd385b80a1e029ca3960ae3532. Public dump_parser_source captures 11,417 bytes with the current Top three-argument LinkedRE::or call. The exact twelve authored assertions pass pristine and after emptying the subprocess output observation. A scratch positive source check passes with real capture and rejects empty and unrelated nonempty output at its added assertion 12; the original denial still passes."
@@ -122,3 +123,61 @@ is not an acceptance requirement.
 
 Related: [[phase0-code-slot-equivalence-observation-gap]],
 [[perl-rule-local-cursor-rollout-boundaries]], [[conformance-perl-consumer-reading]].
+
+## September 22 cursor consumer extension
+
+At clean 441be2af, both negative-only source assertions in
+`t/rule_local_cursor_perl_execution.t` reproduce the same observation gap.
+Public capture/emission produce 11,421/11,436 bytes and contain actual seek dispatch;
+live parsing returns hit. Twenty-four controls retain both exact denials while
+substituting empty/unrelated output on each route. Every denial passes; the
+positive dispatch observations reject each changed source. The complete consumer passes all 85 assertions unchanged. Existing `.2.13` owns repair; no runtime failure or
+standalone generated execution follows from these observations.
+
+```bash
+bash tools/project_data_run.sh env PERL5LIB= python3 - <<'CURSOR_CONSUMER_SOURCE_OBSERVATION'
+from pathlib import Path
+import re, subprocess
+
+source=Path('t/rule_local_cursor_perl_execution.t').read_text()
+fixture=re.search(r"my \$or_source = <<'SPEC';\n(.*?)\nSPEC",source,re.S)[1]
+blocks=[]
+for variable in ['or_parser_source','generated_v2']:
+    block=re.search(r'^unlike\(\n \$'+variable+r',\n qr/LinkedRE::or.*?^\);',source,re.M|re.S)[0]
+    blocks.append(block)
+work=Path('.linkedspec-data/scratch/cursor-consumer-source-observation');work.mkdir(parents=True,exist_ok=True)
+prefix=r'''use strict; use warnings; use Test::More; use LinkedSpec;
+my $source = <<'SPEC';
+'''+fixture+'''
+SPEC
+my $or_parser_source = '';
+my $parser = LinkedSpec::Get(\\$source, dump_parser_source => 1, parser_source_ref => \\$or_parser_source);
+ok(ref($parser) eq 'CODE', 'public source-capture parser compiles');
+my $input = 'prefix x';
+is($parser->(\\$input), 'hit', 'public live seek behavior remains positive');
+my $generated_v2 = LinkedSpec::emit_generated_source(\\$source, source_identity => 'cursor-observation.spec');
+'''
+suffix=r'''
+my $positive = qr/LinkedRE::or\(\$STRING, \$\$descr\{dependency_regex_map\}\{Top\}, \$info\)/;
+ok(length($or_parser_source) && $or_parser_source =~ $positive, 'captured source has actual seek dispatch');
+ok(length($generated_v2) && $generated_v2 =~ $positive, 'emitted source has actual seek dispatch');
+diag('actual source bytes=' . length($or_parser_source) . '/' . length($generated_v2));
+my ($captured, $emitted) = ($or_parser_source, $generated_v2);
+for my $case (qw(pristine captured_empty captured_wrong emitted_empty emitted_wrong)) {
+ $or_parser_source = $case eq 'captured_empty' ? '' : $case eq 'captured_wrong' ? 'unrelated source' : $captured;
+ $generated_v2 = $case eq 'emitted_empty' ? '' : $case eq 'emitted_wrong' ? 'unrelated source' : $emitted;
+ __ORIGINAL_DENIALS__
+ is(!!($or_parser_source =~ $positive), !!($case !~ /^captured_/), "$case capture sensitivity");
+ is(!!($generated_v2 =~ $positive), !!($case !~ /^emitted_/), "$case emitter sensitivity");
+}
+done_testing;
+'''.replace('__ORIGINAL_DENIALS__','\n'.join(blocks))
+path=work/'probe.t';path.write_text(prefix+suffix)
+result=subprocess.run(['perl','-Iperl',str(path)],capture_output=True,text=True,timeout=90)
+(work/'probe.tap').write_text(result.stdout+result.stderr)
+assert result.returncode==0 and 'not ok' not in result.stdout,(result.stdout,result.stderr)
+assert re.findall(r'^1\.\.(\d+)$',result.stdout,re.M)==['24']
+print(result.stderr.strip())
+print('PASS 24 controls: both exact negative-only assertions accept empty/unrelated source; positive dispatch observations reject each missing/wrong capture.')
+CURSOR_CONSUMER_SOURCE_OBSERVATION
+```

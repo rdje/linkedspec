@@ -7,6 +7,7 @@ answers:
   - which tasks own Phase0 subprocess status and pipe draining
   - were controlled pipe timeout children reaped during the Phase0 diagnosis
   - does the repeated-action CLI test helper lose signals or block on stderr
+  - does the rule-local cursor CLI consumer share the subprocess status and pipe defects
 date: 2026-09-22
 status: confirmed harness defects; .2.16.1 and .2.16.2 repairs retain prerequisites
 tags: [perl, phase0, subprocess, signals, pipes, conformance]
@@ -238,4 +239,26 @@ for old, new in [('len(rows) == 24', 'len(rows) == 6'),
     recipe = recipe.replace(old, new)
 exec(compile(recipe, 'repeated-process-capture-reverify', 'exec'))
 REPEATED_PROCESS_CAPTURE
+```
+
+## September 22 cursor CLI consumer extension
+
+`t/rule_local_cursor_perl_contract.t::run_primary_command` is the byte-identical
+sixth helper: SHA-256 12cf5ab78452ca09866b313e17be72e0c50b7fa7ca9e919a3261d2183cee51c9.
+Twelve fresh controls reproduce the same defects and guard outcomes; both timeout
+children are reaped. Existing `.2.16.1/.2.16.2` now include this consumer, retaining
+its complete 14-role admission and all required reading prerequisites.
+
+```bash
+bash tools/project_data_run.sh python3 - <<'CURSOR_PROCESS_CAPTURE'
+from pathlib import Path
+card = Path('docs/knowledge/phase0-subprocess-capture-status-and-pipe-gap.md').read_text()
+code = card.split("<<'REPEATED_PROCESS_CAPTURE'\n", 1)[1].split('\nREPEATED_PROCESS_CAPTURE', 1)[0]
+assert code.count('t/repeated_action_result_perl_contract.t') == 1
+assert code.count('^sub role_neutral_contract') == 1
+code = code.replace('t/repeated_action_result_perl_contract.t', 't/rule_local_cursor_perl_contract.t')
+code = code.replace('^sub role_neutral_contract', '^sub parsed_rule_ir')
+code = code.replace('repeated-process-capture-reverify', 'cursor-process-capture-reverify')
+exec(compile(code, 'cursor-process-capture-reverify', 'exec'))
+CURSOR_PROCESS_CAPTURE
 ```

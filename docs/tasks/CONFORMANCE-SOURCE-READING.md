@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `CONFORMANCE-SOURCE-READING`
-- Status: `active` / exact decomposition; physical reading 84/143
+- Status: `active` / exact decomposition; physical reading 85/143
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.8`
 - Created: `2026-09-13`
 - Last updated: `2026-09-22`
@@ -1500,14 +1500,21 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
   Commit: `CONFORMANCE-SOURCE-READING.1.84 - read recognition observation repetition and root selection consumers`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.85`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `441be2af4446bd0d81b09955c440a2311f80ad9f`.
+  Verification tier: `focused`
+  Focused checks: Exact source/window/coverage reading; seven complete Perl consumers, cursor/numeric/semantic neutral checks, source-pinned diagnostic controls, preserved source/task/history, memory, Knowledge, histories, rendered book, public checks and normal doctrine hooks.
+  Canonical trigger: Ordinary bounded reading and test-observation repair ownership; no production, public-contract, dependency or infrastructure change or parent closeout.
   Goal: Read and understand conformance/test/Unicode group 85.
   Scope: `t/root_rule_selection_perl_routes.t` lines 360-419; `t/rule_local_cursor_perl_contract.t` lines 1-463; `t/rule_local_cursor_perl_descriptor.t` lines 1-250; `t/rule_local_cursor_perl_execution.t` lines 1-329; `t/scalar_numeric_contract.t` lines 1-50; `t/scalar_text_contract.t` lines 1-42; `t/semantic_index_perl_calls_projection.t` lines 1-241; `t/semantic_index_perl_foundation.t` lines 1-65
   Baseline evidence: 1500 fragments / 52593 decoded bytes; ordered range SHA-256 `9d4eab6873ee8b3859083ca65c84aee463158a959eb5c69c786a6947e5dffeda`.
   Dependencies: .1.84 committed with clean handoff.
   Acceptance: Read every scoped byte in complete bounded windows; retain source identity, exact comprehension, canonical Knowledge reconciliation, concrete finding ownership, focused proof and per-leaf continuity. Unread crossing constructs retain the next range owner.
-  Verification: `pending`
-  Commit: `pending`
+  Reading evidence: 13 complete windows / 1500 fragments / 52593 bytes; ordered window SHA-256 `c34998ba12ac92b0810836ed81caf87c6dfe93027fe5e9bd33799563de736449`.
+  Comprehension: Root trace completion checks effective entry identity and absence of handler entry on failed selection. Cursor tests distinguish family-derived seek/consume, typed edge normalization and provenance, mixed-parent recursion, loaded descriptors, exact admission roles, generated-v2 metadata and option retirement. Generated packages share the process. Scalar fixtures execute exact admitted values; numeric emitted-source proof checks its dependency declaration only. Semantic calls deep-compare 22 records/25 relations, source preorder, shared family authority, privacy, multibyte columns and interleaved function masking. The nested return-shape mutation is not asserted by the original copy test. Foundation reading ends inside its first expected snapshot, without executing that partial subtest.
+  Verification: Fresh focused proof passes 431 top-level and 213 nested TAP results across seven complete files. Cursor governance passes 36 family spellings / 18 edge cases / 8 parent-child cases / 14 Perl roles / 60 mutations; numeric passes 55 cases / 18 helpers; semantic passes 6 fixture groups / 20 queries / 128 mutations with rollout 9/0 and admission 6/0. Twelve controls reproduce the byte-identical sixth subprocess helper defects and reap both timeout children. Twenty-four source-capture controls reproduce both negative-only cursor observations. Four semantic copy controls pass original 6-assertion tests with shared nested shape, while the 7-assertion guard rejects exactly that mutation. Existing .2.13 owns both cursor-source observations; .2.16 owns the sixth subprocess helper; new .2.18 owns semantic nested-copy test sensitivity. Production copies pass the stronger scratch control. All repair and source/book/policy prerequisites remain; no production change, canonical run, dependency build or push is claimed.
+  Candidate proof: Exact 160-input/143-group/302-range audit and 13-window reconstruction PASS; cumulative 85 groups/103904 fragments/4556648 baseline bytes/114 complete files independently verified. Seven full consumers pass 431 top-level/213 nested TAP results; cursor/numeric/semantic checks and all three durable diagnostic replays pass. Preserve 2854 other files/50686184 bytes, 173 prior conformance and 348 startup nodes, all prior recipe blocks, book headings, immutable histories and parent gitlink; one new repair node and fact card are explicit. Knowledge 1161 facts/9315 keys, memory 60, histories below mandatory rollover, rendered book and direct public mutation69/50 and selector68/11 checks pass. Normal doctrine hooks govern the focused commit; no canonical run or push.
+  Commit: `CONFORMANCE-SOURCE-READING.1.85 - read cursor scalar and semantic call consumers`
 
 - ID: `CONFORMANCE-SOURCE-READING.1.86`
   Status: `pending`
@@ -2280,6 +2287,7 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
   Scope: Correct return_descriptor_and_generated_source_share_rule_local_cursor_contract and audit equivalent negative-only source observations in its bounded cursor-contract test family. Keep descriptor and runtime cursor proofs distinct.
   Dependencies: Required source/book/policy reading, including the remaining Phase0 body, before tracked test edits. Current .1.77 owns diagnosis and current-claim correction only.
   Acceptance: Require nonempty captured source and a positive current rule-specific dispatch observation; retain the consume-override denial, descriptor metadata and seek/consume runtime positives; reject empty and wrong-dispatch observations without changing production to fit stale text. Synchronize Knowledge and the book, then close only after pristine and independent negative controls pass.
+  Reading .1.85 extension: The two negative-only source assertions in t/rule_local_cursor_perl_execution.t also accept empty and unrelated capture/emission. Public capture/emission produce 11421/11436 bytes with actual seek dispatch; 24 controls preserve live seek while demonstrating missing source sensitivity. Add positive observations for both routes without treating the numeric dependency-declaration check as generated execution. Replay CURSOR_CONSUMER_SOURCE_OBSERVATION in the existing fact card.
   Verification: `pending`
   Commit: `pending`
 
@@ -2344,26 +2352,29 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
   Acceptance: Preserve ordinary success/nonzero exits, reject signal/wait failures, drain both pipes without deadlock, bound and reap controlled children, keep stdout/stderr exact, and run focused consumers plus appropriate broader verification without weakening diagnostics.
   Verification: .1.82 diagnosis: 48 source-extracted controls pass: four helpers times six child outcomes times original/guard variants; all eight timed-out owned children are reaped. Evidence/replay: docs/knowledge/phase0-subprocess-capture-status-and-pipe-gap.md. No tracked implementation repair.
   Reading .1.84 extension: Include run_primary_command in t/repeated_action_result_perl_contract.t. Twelve unchanged-body/guard controls reproduce SIGTERM-as-zero and stderr-first/interleaved blocking, with both timeout children reaped. Preserve its exact CLI JSON/status/stderr checks; remaining startup prerequisites still apply. Replay REPEATED_PROCESS_CAPTURE in docs/knowledge/phase0-subprocess-capture-status-and-pipe-gap.md.
+  Reading .1.85 extension: Also include run_primary_command in t/rule_local_cursor_perl_contract.t; its body is byte-identical to the repeated-action helper (SHA-256 12cf5ab78452ca09866b313e17be72e0c50b7fa7ca9e919a3261d2183cee51c9). Twelve fresh controls reproduce the same status/pipe defects with both timeout children reaped. Replay CURSOR_PROCESS_CAPTURE in the existing fact card; retain all 14 admission roles and prerequisite gates.
   Commit: `pending`
 
 - ID: `CONFORMANCE-SOURCE-READING.2.16.1`
   Status: `pending`
   Goal: Preserve signal termination and wait failure in Perl conformance subprocess status.
-  Scope: The five subprocess helpers owned by .2.16; retain public helper tuple compatibility or update all direct consumers coherently.
+  Scope: The six subprocess helpers owned by .2.16; retain public helper tuple compatibility or update all direct consumers coherently.
   Dependencies: Parent .2.16 prerequisites and confirmed status controls.
   Acceptance: Success, exit 7 and owned SIGTERM controls distinguish their outcomes; valid wait and normal termination are required for zero status. Preserve output and direct consumer diagnostics, including the admitted staged-AST wrapper.
   Verification: .1.82 diagnosis: All four original helpers map owned SIGTERM to zero; in-memory guards report 143 while success/exit7 and small output remain correct. Evidence/replay: docs/knowledge/phase0-subprocess-capture-status-and-pipe-gap.md. No tracked implementation repair.
   Reading .1.84 extension: Include run_primary_command in t/repeated_action_result_perl_contract.t. Twelve unchanged-body/guard controls reproduce SIGTERM-as-zero and stderr-first/interleaved blocking, with both timeout children reaped. Preserve its exact CLI JSON/status/stderr checks; remaining startup prerequisites still apply. Replay REPEATED_PROCESS_CAPTURE in docs/knowledge/phase0-subprocess-capture-status-and-pipe-gap.md.
+  Reading .1.85 extension: Also include run_primary_command in t/rule_local_cursor_perl_contract.t; its body is byte-identical to the repeated-action helper (SHA-256 12cf5ab78452ca09866b313e17be72e0c50b7fa7ca9e919a3261d2183cee51c9). Twelve fresh controls reproduce the same status/pipe defects with both timeout children reaped. Replay CURSOR_PROCESS_CAPTURE in the existing fact card; retain all 14 admission roles and prerequisite gates.
   Commit: `pending`
 
 - ID: `CONFORMANCE-SOURCE-READING.2.16.2`
   Status: `pending`
   Goal: Drain Perl conformance child output concurrently and reap every bounded test child.
-  Scope: The same five .2.16 helpers and their direct consumers; check shared TestHelpers separately before choosing reuse.
+  Scope: The same six .2.16 helpers and their direct consumers; check shared TestHelpers separately before choosing reuse.
   Dependencies: Parent .2.16 prerequisites and .2.16.1 clean handoff.
   Acceptance: Large stderr before stdout, large stdout before stderr and interleaved output complete with exact captures; timeout/failure paths terminate and reap owned children. Preserve ordinary parser-marker and test-plan controls, run focused integration and reconcile both children before parent closeout.
   Verification: .1.82 diagnosis: All four original helpers time out on stderr-first and interleaved large writes; multiplex controls complete with expected byte counts. All eight timeout children are terminated and reaped; exact large-output regression remains repair acceptance. Evidence/replay: docs/knowledge/phase0-subprocess-capture-status-and-pipe-gap.md. No tracked implementation repair.
   Reading .1.84 extension: Include run_primary_command in t/repeated_action_result_perl_contract.t. Twelve unchanged-body/guard controls reproduce SIGTERM-as-zero and stderr-first/interleaved blocking, with both timeout children reaped. Preserve its exact CLI JSON/status/stderr checks; remaining startup prerequisites still apply. Replay REPEATED_PROCESS_CAPTURE in docs/knowledge/phase0-subprocess-capture-status-and-pipe-gap.md.
+  Reading .1.85 extension: Also include run_primary_command in t/rule_local_cursor_perl_contract.t; its body is byte-identical to the repeated-action helper (SHA-256 12cf5ab78452ca09866b313e17be72e0c50b7fa7ca9e919a3261d2183cee51c9). Twelve fresh controls reproduce the same status/pipe defects with both timeout children reaped. Replay CURSOR_PROCESS_CAPTURE in the existing fact card; retain all 14 admission roles and prerequisite gates.
   Commit: `pending`
 
 - ID: `CONFORMANCE-SOURCE-READING.2.17`
@@ -2373,6 +2384,15 @@ Keep source comprehension, actual runtime proof and defect repair status distinc
   Dependencies: Required source/book/policy reading, including the recognition carrier suffix in .1.84; startup .38 separately owns completed-token snapshot restoration.
   Acceptance: Observe supported runtime compatibility cursor/mark state across recognition success and rollback where applicable; demonstrate that the same observation rejects a relevant interference mutation. Preserve falsey payload, opaque authority, restoration and portable diagnostic controls; align Knowledge/book claims with the actual covered route.
   Verification: .1.83 source-extracted proof passes the original eight top-level/285 nested authority results plus four scope controls: separately changed cursor-stack/mark states differ while the original predicate passes. The local object has only declaration/comparison references. Exact replay: docs/knowledge/perl-recognition-compatibility-observation-gap.md. No runtime corruption or repair claimed.
+  Commit: `pending`
+
+- ID: `CONFORMANCE-SOURCE-READING.2.18`
+  Status: `pending`
+  Goal: Make semantic call-projection copy tests observe every deliberately mutated nested value.
+  Scope: The projection-copies subtest in t/semantic_index_perl_calls_projection.t; preserve exact fixture, privacy, source-order and generated-family controls.
+  Dependencies: Required source/book/policy reading; .1.85 diagnostic evidence is not an implementation repair.
+  Acceptance: Assert the second projection retains the original nested call return shape after the first copy is changed; retain definition-order isolation. A narrowly shared nested-shape mutation must fail the same test while unmodified production passes. Preserve JSON/privacy and full consumer proof, and align Knowledge/book claims with the exact exercised observations.
+  Verification: Four source-extracted controls pass both original six-assertion variants even when the returned call shape is shared. A seven-assertion guarded twin passes pristine and fails precisely its new nested-shape observation with sharing. The injected seam changes returned scratch copies only; current production detachment is not broken. Exact replay: docs/knowledge/perl-semantic-call-copy-observation-gap.md.
   Commit: `pending`
 
 - ID: `CONFORMANCE-SOURCE-READING.3`
@@ -2806,7 +2826,7 @@ additional reading credit from integration delivery.
 
 | Rank | Leaf | Status | Next action |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.85` | `pending` | Read the .1.85 scope (1,500 fragments / 52,593 baseline bytes), completing root selection routes and reading rule-local cursor contracts, scalar contracts and semantic-index prefixes. Repairs .2.5–.2.17 and earlier repairs retain required source/book/policy reading prerequisites. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.86` | `pending` | Read the .1.86 scope (1,500 fragments / 61,968 baseline bytes), completing semantic foundation and reading query, runtime/static projection, semantic admission, sparse action slots and the staged-enrichment prefix. Repairs .2.5–.2.18 and earlier repairs retain required source/book/policy reading prerequisites. |
 
 ## Decisions
 
@@ -2820,6 +2840,8 @@ additional reading credit from integration delivery.
 - None at decomposition. Ordinary source repairs retain startup prerequisites; later collection pressure must be measured rather than assumed away.
 
 ## Verification Log
+
+- `2026-09-22` .1.85: 13 complete windows cover 1,500 fragments / 52,593 baseline bytes; ordered window SHA-256 c34998ba12ac92b0810836ed81caf87c6dfe93027fe5e9bd33799563de736449. Cumulative reading is 85/143 groups, 103,904 fragments / 4,556,648 baseline bytes and 114 complete files. Root selection routes, all three rule-local cursor consumers, scalar numeric/text and semantic call projection are complete; semantic foundation is partial through line 65. Fresh focused proof passes 431 top-level and 213 nested TAP results across seven complete files. Cursor governance passes 36 family spellings / 18 edge cases / 8 parent-child cases / 14 Perl roles / 60 mutations; numeric passes 55 cases / 18 helpers; semantic passes 6 fixture groups / 20 queries / 128 mutations with rollout 9/0 and admission 6/0. Twelve controls reproduce the byte-identical sixth subprocess helper defects and reap both timeout children. Twenty-four source-capture controls reproduce both negative-only cursor observations. Four semantic copy controls pass original 6-assertion tests with shared nested shape, while the 7-assertion guard rejects exactly that mutation. Existing .2.13 owns both cursor-source observations; .2.16 owns the sixth subprocess helper; new .2.18 owns semantic nested-copy test sensitivity. Production copies pass the stronger scratch control. All repair and source/book/policy prerequisites remain; no production change, canonical run, dependency build or push is claimed.
 
 - `2026-09-22` .1.84: 10 complete windows cover 1,500 fragments / 54,362 baseline bytes; ordered window SHA-256 3ca32d29209411869425074b019fa6a21ae019e62e79dc5e15e603573aca37c1. Cumulative reading is 84/143 groups, 102,404 fragments / 4,504,055 baseline bytes and 107 complete files. Recognition, recursive observation, repeated action results and root selection core are complete; root selection routes are partial through line 359. Fresh focused proof passes 79 top-level and 475 nested TAP results: recognition 51/99, recursive observation 7/78, repeated action results 10/122, root selection core 7/78 and the complete root routes prefix through line 324 at 4/98. Neutral recognition 138/250/58, typed 14/0/231, repetition 8/0/54 and root 7/0/54 pass. Twelve source-extracted repeated-action process controls confirm signal-status loss and sequential-pipe blocking; both timed-out owned children are reaped. Existing .2.16.1/.2.16.2 now also own the repeated-action CLI helper; all previous repairs and required source/book/policy prerequisites remain. No production repair, fresh-process generated proof, dependency build, canonical run or push is claimed.
 
@@ -2961,6 +2983,8 @@ additional reading credit from integration delivery.
 
 ## Commit Log
 
+- `2026-09-22` .1.85: `CONFORMANCE-SOURCE-READING.1.85 - read cursor scalar and semantic call consumers`; activation 441be2af; .1.86 follows clean handoff and empty brief.
+
 - `2026-09-22` .1.84: `CONFORMANCE-SOURCE-READING.1.84 - read recognition observation repetition and root selection consumers`; activation 4480cc52; .1.85 follows clean handoff and empty brief.
 
 - `2026-09-21` .1.83: `CONFORMANCE-SOURCE-READING.1.83 - read progressive punctuation and recognition observation boundaries`; activation 1a18d1938; .1.84 follows clean handoff and empty brief.
@@ -3100,6 +3124,8 @@ additional reading credit from integration delivery.
 - `2026-09-13`: Decomposition lands under `SESSION-STARTUP-READING.3.8.0`; Git owns the resulting commit identity.
 
 ## Changelog
+
+- `2026-09-22` .1.85: Complete seven files; extend cursor-source/subprocess repairs and own the reproduced semantic nested-copy observation gap.
 
 - `2026-09-22` .1.84: Complete four consumer files, preserve partial root trace scope and extend existing subprocess repairs to the fifth confirmed helper.
 
