@@ -1072,29 +1072,12 @@ fn compile_function(function: &crate::ast::FunctionDefinition) -> Result<Compile
     })
 }
 
-fn parse_rule_code_block(
-    rule_label: &str,
-    code_kind: &str,
-    code: &str,
-) -> Result<Option<CodeBlock>> {
-    match CodeBlock::parse_with_callable_candidates(code) {
-        Ok(block) => Ok(Some(block)),
-        Err(err) if is_fail_closed_actionir_error(&err) => Err(LinkedSpecError::Compile(format!(
+fn parse_rule_code_block(rule_label: &str, code_kind: &str, code: &str) -> Result<CodeBlock> {
+    CodeBlock::parse_with_callable_candidates(code).map_err(|err| {
+        LinkedSpecError::Compile(format!(
             "rule '{rule_label}': failed to parse {code_kind} code: {err}"
-        ))),
-        Err(err) => {
-            eprintln!("warning: rule '{rule_label}': failed to parse {code_kind} code: {err}");
-            Ok(None)
-        }
-    }
-}
-
-fn is_fail_closed_actionir_error(error: &str) -> bool {
-    error.contains("LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:")
-        || error.contains("LINKEDSPEC_SOURCE_LOCATION_ERROR:")
-        || error.contains("LINKEDSPEC_RECOGNITION_TRANSACTION_ERROR:")
-        || error.contains("LINKEDSPEC_PROGRESSIVE_SPAN_DISPATCH_ERROR:")
-        || error.contains("LINKEDSPEC_STAGED_AST_ENRICHMENT_ERROR:")
+        ))
+    })
 }
 
 fn append_lifecycle_block(slot: &mut Option<CodeBlock>, mut block: CodeBlock) {
@@ -1160,8 +1143,7 @@ fn compile_rule(rule: &Rule, source_id: &str) -> Result<CompiledRule> {
                 let parsed_code = code
                     .as_deref()
                     .map(|c| parse_rule_code_block(&rule.header.label, "action", c))
-                    .transpose()?
-                    .flatten();
+                    .transpose()?;
                 let fluent: Vec<(String, String)> = fluent_chain
                     .iter()
                     .map(|fc| (fc.method.clone(), fc.args.clone()))
@@ -1212,8 +1194,7 @@ fn compile_rule(rule: &Rule, source_id: &str) -> Result<CompiledRule> {
                 let parsed_code = code
                     .as_deref()
                     .map(|c| parse_rule_code_block(&rule.header.label, "blind-call", c))
-                    .transpose()?
-                    .flatten();
+                    .transpose()?;
 
                 // Preserve fluent chain as structured data (method_name, args_string).
                 let fluent: Vec<(String, String)> = fluent_chain
@@ -1258,8 +1239,7 @@ fn compile_rule(rule: &Rule, source_id: &str) -> Result<CompiledRule> {
                         .map(|source| {
                             parse_rule_code_block(&rule.header.label, "blind-call", source)
                         })
-                        .transpose()?
-                        .flatten();
+                        .transpose()?;
                     bcode_dispatch.push(BcodeEntry {
                         child_label: target.label.clone(),
                         code: parsed_code,
@@ -1269,8 +1249,7 @@ fn compile_rule(rule: &Rule, source_id: &str) -> Result<CompiledRule> {
                     let parsed_code = code
                         .as_deref()
                         .map(|source| parse_rule_code_block(&rule.header.label, "action", source))
-                        .transpose()?
-                        .flatten();
+                        .transpose()?;
                     for target in targets {
                         let (selector_kind, authored_selector, child_regex_idx) =
                             compiled_selector(&target.selector);
@@ -1300,22 +1279,20 @@ fn compile_rule(rule: &Rule, source_id: &str) -> Result<CompiledRule> {
 
             BodyElementKind::CodeBlock { lifecycle, code } => {
                 last_regex_line = None;
-                let parsed = parse_rule_code_block(
+                let block = parse_rule_code_block(
                     &rule.header.label,
                     &format!("{lifecycle} -block"),
                     code,
                 )?;
-                if let Some(block) = parsed {
-                    match lifecycle.as_str() {
-                        "I" => append_lifecycle_block(&mut preamble, block),
-                        "LS" => lscode = Some(block),
-                        "LE" => lecode = Some(block),
-                        "E" => ecode = Some(block),
-                        "EX" => excode = Some(block),
-                        "IT" => itcode = Some(block),
-                        "LX" => lxcode = Some(block),
-                        _ => {}
-                    }
+                match lifecycle.as_str() {
+                    "I" => append_lifecycle_block(&mut preamble, block),
+                    "LS" => lscode = Some(block),
+                    "LE" => lecode = Some(block),
+                    "E" => ecode = Some(block),
+                    "EX" => excode = Some(block),
+                    "IT" => itcode = Some(block),
+                    "LX" => lxcode = Some(block),
+                    _ => {}
                 }
             }
 

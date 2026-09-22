@@ -213,7 +213,9 @@ fn zero_regex_root_selects_only_the_target_rule_regex() {
         "the selected target must be entered after its regex matches:\n{trace}"
     );
     assert_eq!(
-        trace.matches("rust_runtime:engine:regex_match taken=1").count(),
+        trace
+            .matches("rust_runtime:engine:regex_match taken=1")
+            .count(),
         1,
         "entering Done must not test Done's regex a second time:\n{trace}"
     );

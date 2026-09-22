@@ -5,19 +5,20 @@ answers:
   - "why does a Rust bare variable assignment lose its newline separator"
   - "why does copied equals tx need a semicolon before recognition rollback"
   - "which task fixes Rust variable lookahead consuming newline"
-date: 2026-09-07
+date: 2026-09-22
 status: dated native query/CLI parser counterexample; repair pending under SESSION-STARTUP-READING.69
 tags: [rust, parser, newline, lookahead, assignment, startup-reading]
-evidence: "SESSION-STARTUP-READING.3.3.32 compares newline-only and semicolon token-copy sources with exact source mechanism; .69 owns separator repair, .45 owns warning/drop."
+evidence: "September 7 SESSION-STARTUP-READING.3.3.32 compares newline-only and semicolon token-copy sources with exact source mechanism. Task .69 still owns separator repair. September 22 .45.1 propagates reported rule-code parse failures instead of warning/drop; its carrier and canonical closeout remain .45.2/.45.3."
 reverify:
   - "bash tools/project_data_run.sh rust/target/debug/linkedspec-rust --spec-file .linkedspec-data/scratch/startup91-semantic-failure/escape-controls/copy_active_token.spec --input c --trace none"
   - "sed -n '3141,3187p' rust/linkedspec-core/src/expr.rs"
 ---
 
 The newline-only assignment `copied = tx` followed by `recognition_rollback(tx)` triggers
-`expected ';' or newline between statements at byte 84` in an I block. Rust semantic construction still reports
-compiled; the CLI exits0 with null and the parse warning because compiler::parse_rule_code_block drops this
-error class under .45. Adding a semicolon immediately after tx eliminates the parser warning, while the separate
+`expected ';' or newline between statements at byte 84` in an I block. At the dated baseline, Rust semantic construction reported
+compiled and the CLI exited zero with null because compiler::parse_rule_code_block
+dropped this error class. Startup .45.1 now propagates reported rule-code parse
+errors; it does not repair the separate newline-consumption cause under .69. Adding a semicolon immediately after tx avoids the newline parse failure, while the separate
 forbidden token-use acceptance remains .68. Perl rejects both sources for the actual token-use violation.
 
 `rust/linkedspec-core/src/expr.rs` parse_var_or_call at3141–3187 reads a name, calls skip_whitespace,

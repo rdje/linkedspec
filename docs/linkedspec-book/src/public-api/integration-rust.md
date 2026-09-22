@@ -208,6 +208,16 @@ and compilation. `SpecLoadOptions::new` has no ambient search roots. The caller
 supplies a grammar path and the current directory explicitly. The example rejects
 non-UTF-8 arguments rather than replacing bytes in a file name.
 
+Rust rejects compilation when parsing lifecycle, action-edge or blind-call code
+reports an error.
+For a rule named `Top`, `I { return(@invalid) }` produces a compile error
+attributed to that rule and its `I -block`; the invalid block is never dropped to continue
+execution. Valid code and omitted optional edge code retain their behavior.
+The low-level `linkedspec_core::compiler::compile` API returns
+`LinkedSpecError::Compile` with the parser detail. The primary command exits 1
+with `linkedspec: parser compilation failed`. With `--trace low`, it reports
+`compile:start` then `compile:error`, before input loading or invocation.
+
 One engine processes every command-line input independently. The direct-value
 method returns `serde_json::Value`; printing it writes JSON. This avoids the
 legacy execution method's accumulator wrapper. The application can inspect that

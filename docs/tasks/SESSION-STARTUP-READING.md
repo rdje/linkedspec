@@ -3452,29 +3452,45 @@ remain. Reading completion and runtime signoff remain distinct.
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.45`
-  Status: `pending`
+  Status: `active`
   Goal: Reject malformed Rust rule code instead of accepting a warning and dropping the block.
   Dependencies: ADR0123 targeted reading supersedes the blanket startup gate; .83.1 contract checkpoint commits first.
   Children: `.45.1`, `.45.2`, `.45.3`.
   Acceptance: After prerequisite reading, split bounded parser/compiler, carrier-regression, and public alignment leaves before implementation. Make malformed lifecycle/action/blind blocks return precise
     compilation errors; retain valid block behavior and typed diagnostics. Cover all rule-code call sites
     and native/reconstructed/generated routes, census shipped malformed examples, and preserve function-body rejection. Do not broaden accepted syntax or suppress errors to obtain passing tests.
-  September22 recurrence: The .83.1 prototype used nonportable infix comparison in an LX block. Current Rust exits 0 after warning that the block cannot parse; compiler.rs:1075-1088 returns Ok(None), and compile_rule:1303-1310 drops it. The documented num_ne(...) call fixes the prototype spelling, but cannot close compiler rejection. This repair precedes strict-grammar delivery; exact fresh output is .linkedspec-data/scratch/sexpr-contract/compiler-drop-reproduction.json.
-  Verification: `pending` — Eleven managed CLI controls establish five malformed rule blocks accepted with
+  September22 recurrence: The .83.1 prototype used nonportable infix comparison in an LX block. At the .83.1 activation, Rust exited zero after warning that the block could not parse; compiler.rs:1075-1088 returned Ok(None), and compile_rule:1303-1310 dropped it. The documented num_ne(...) call fixes the prototype spelling, but cannot close compiler rejection. This repair precedes strict-grammar delivery; exact fresh output is .linkedspec-data/scratch/sexpr-contract/compiler-drop-reproduction.json.
+  Verification: .45.1 repairs shared-boundary propagation with full Rust component proof; .45.2/.45.3 remain. Historical eleven-control diagnosis established five malformed rule blocks accepted with
     warning, compile:ok/invoke:ok, and null or fallback 42. Three valid controls and three rejecting
-    controls pass their diagnostic assertions. compiler.rs parse_rule_code_block returns Ok(None) outside
-    five governed error prefixes, and compile_rule drops that absent block. Nested-write and mutation
-    argument errors also take this path.
+    controls passed their diagnostic assertions. The pre-repair parse_rule_code_block returned Ok(None) outside
+    five governed error prefixes, and compile_rule dropped that absent block. Nested-write and mutation
+    argument errors also took that path.
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.45.1`
-  Status: `pending`
+  Status: `done`
+  Activation commit: `349bde2b1f349e589c13ac19649147b3dbbc9e9b`.
+  Verification tier: `focused`
+  Focused checks: Malformed/valid lifecycle and edge RED/GREEN tests, exact public CLI failure controls, complete Rust core/runtime component gate and shipped/corpus compatibility, plus the committed quoted-LF manifest on the rebuilt Rust primary command; Knowledge/memory/history/book/diff and registered doctrines.
+  Canonical trigger: Bounded compiler bug correction; no admitted schema or syntax change. Carrier verification .45.2 and designated canonical/public closeout .45.3 remain separate. Escalate if the component gate exposes unresolved cross-cutting uncertainty.
   Goal: Make Rust rule-code parse errors reject compilation through the shared compiler boundary.
   Dependencies: .83.1 clean checkpoint; read current parse_rule_code_block, all callers and their tests using the existing Knowledge diagnosis.
   Scope: Replace warning/drop behavior with attributed compile errors; focused lifecycle/action/blind-call and public CLI regressions. Preserve function-body errors, governed diagnostic detail and all valid code. Do not broaden syntax or suppress warnings to pass.
+  Gate prerequisite: The selected Rust formatting check also exposes one pre-existing unformatted assertion in rust/linkedspec-runtime/tests/trace_controls.rs:213. This leaf owns its rustfmt-only normalization before the component gate; source/test behavior is unchanged. The initial formatter log identifies only this existing assertion and the two newly edited Rust files.
   Acceptance: RED/GREEN malformed I/E/LX/action/blind blocks, including the observed invalid comparison, with exact rule/block context; valid twins retain values and clean stderr. Run changed compiler tests and existing shipped/corpus coverage, owning any exposed failures before changing fixtures.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: PASS: 12 native invalid cases change from warning/compile:ok/invoke:ok to exit 1/compile:error with no input or invocation phase; three valid controls retain 42 and empty stderr. Four persistent core rejection groups are RED before repair; all five groups GREEN afterward (15 malformed contexts and 11 retained valid blocks). Complete Rust component gate PASS: 228 core and 574 runtime tests, including all 197 end-to-end tests, 21 shipped grammars and 105 oracle cases; primary CLI conformance is 66/66 in each default/POSIX environment, and managed-storage checks pass. The committed quoted-LF manifest passes all three cases on the rebuilt primary binary. Callable contract, book, Knowledge/memory/history/public/diff and registered doctrine checks govern focused landing. Separate carrier proof/canonical closeout and parser-cause repairs remain open.
+  Commit: `SESSION-STARTUP-READING.45.1 - reject malformed Rust rule code`
+
+  Acceptance Checklist:
+  - [x] **REPRODUCE / ISSUE** — Native trace proves compile:ok/invoke:ok for 12 invalid blocks; four persistent core groups fail before repair, while valid code survives.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — parse_rule_code_block warned and returned Ok(None); all five compile_rule call sites discarded that missing block before downstream validation. Function-body errors already propagated.
+  - [x] **FIX** — Return the parsed CodeBlock or an attributed error; retain optional absent edge code and existing parser details.
+  - [x] **ADDRESSED (verified)** — All five core groups and 12 native rejection/three valid controls pass after repair; failures stop before input loading or invocation.
+  - [x] **NO REGRESSION** — Complete Rust gate, shipped/corpus values, default/POSIX CLI and three quoted-LF cases pass; valid blocks, function errors and governed diagnostics survive.
+  - [x] **LOCKSTEP** — Public Rust guidance, Knowledge, task/frontier and live roadmap pointers describe the verified boundary and separately owned parser/carrier work; scripts/check_memory_architecture.sh, mdBook rendering, public checks and git diff --check PASS.
+
+  Reverify: `bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-core --test rule_code_rejection`; `bash tools/run_rust_local.sh`; the native/quoted-LF replay and exact final binary identity are recorded in .linkedspec-data/scratch/compiler-rejection45/post-gate-proof.json.
+  Workflow evidence: The first normal commit attempt passed eight doctrines and rejected checklist wording: the angle-bracketed Rust generic looked like an unfilled placeholder, and a reference to other unfinished tasks used the forbidden completion-marker word. Plain-language checklist wording preserves the evidence; no gate or runtime code is changed to satisfy the check.
 
 - ID: `SESSION-STARTUP-READING.45.2`
   Status: `pending`
@@ -4778,7 +4794,7 @@ audit range, not the default repair frontier.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.45.1` | `pending` | Fix the freshly reproduced Rust warning/drop compiler boundary before ADR0124 strict-document delivery; then .45.2/.45.3 and .83.2.2/.83.2.3. LS-001 is repaired; SEMULITH/LS-003 remedies are verified. |
+| 1 | `SESSION-STARTUP-READING.45.2` | `pending` | Verify native and artifact error propagation after the .45.1 compiler repair; then canonical .45.3 and ADR0124 delivery for ARCHOGEN/LS-002–003 and SEMULITH/LS-002. SEMULITH/LS-001 is repaired; SEMULITH/LS-003 remedies are verified. |
 
 ## Reading Ledger
 
@@ -7560,6 +7576,8 @@ All 53 owned scopes are read: HLink delimiter/raw text, Liberty scalar/complex a
 
 ## Verification Log
 
+- 2026-09-22 .45.1: PASS: 12 native invalid cases change from warning/compile:ok/invoke:ok to exit 1/compile:error with no input or invocation phase; three valid controls retain 42 and empty stderr. Four persistent core rejection groups are RED before repair; all five groups GREEN afterward (15 malformed contexts and 11 retained valid blocks). Complete Rust component gate PASS: 228 core and 574 runtime tests, including all 197 end-to-end tests, 21 shipped grammars and 105 oracle cases; primary CLI conformance is 66/66 in each default/POSIX environment, and managed-storage checks pass. The committed quoted-LF manifest passes all three cases on the rebuilt primary binary. Callable contract, book, Knowledge/memory/history/public/diff and registered doctrine checks govern focused landing. Separate carrier proof/canonical closeout and parser-cause repairs remain open.
+
 - 2026-09-22 .83.1: ADR0124/37 independent cases and 136 Perl assertions establish the planned contract; four Rust prototype boundaries pass after canonical comparison spelling. Existing .45 warning/drop reproduces with exit 0/null and receives three bounded repair children before delivery. No production grammar or cross-backend admission claimed.
 
 - 2026-09-22 .83.2.1: PASS: exact clean-HEAD grammar fails all three final shared fixtures; fixed Phase0 smoke passes 9 assertions, and Perl/Rust/Dart/Julia/PUC Lua/LuaJIT pass 3 fixtures in both default and POSIX environments (36 command legs; 19 aggregate forms plus two isolated quote contexts). Rust passes 26 file values through one engine and all 18 existing verification groups, including all eight byte-exact report inputs/expectations. Descriptor readiness remains 9/9 with 0 blockers; corpus copy is exact and retains its x/y value. Eight root/child quote controls explain and correct the initial invalid root-capture probes without a runtime change. Book, direct public checks, syntax, memory/history/Knowledge/diff and normal nine-doctrine hooks govern focused landing; no canonical run or push.
@@ -7737,6 +7755,8 @@ Knowledge/book/memory/history/whitespace and all nine doctrines pass. Preceding 
 CLI66x2 and Phase0 1032/1032; 1163 seconds is Phase0 only, with 25 optional gates skipped.
 
 ## Commit Log
+
+- 2026-09-22 .45.1: `SESSION-STARTUP-READING.45.1 - reject malformed Rust rule code`; activation 349bde2b1; .45.2 follows clean handoff.
 
 - 2026-09-22 .83.1: `SESSION-STARTUP-READING.83.1 - define kind-preserving document grammar`; activation 8259719f8; compiler .45.1 follows clean handoff.
 

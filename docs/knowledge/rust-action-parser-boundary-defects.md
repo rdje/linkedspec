@@ -1,6 +1,6 @@
 ---
 id: rust-action-parser-boundary-defects
-title: Rust rule-block rejection, Unicode diagnostics, mutation whitespace, and regex boundaries need repair
+title: Rust rule-block error propagation and separately owned parser boundary defects
 answers:
   - why can malformed Rust lifecycle code compile successfully
   - why does a Rust rule code block disappear after a warning
@@ -12,19 +12,19 @@ answers:
   - why does a Rust regex assignment followed by a newline return null
   - why does adding a regex suffix flag change Rust statement parsing
 date: 2026-09-22
-status: current
+status: .45.1 compiler correction verified; carrier closeout and .46/.47/.49 parser repairs remain
 tags: [rust, parser, compiler, diagnostics, unicode, mutation, startup-reading]
-evidence: "SESSION-STARTUP-READING.3.3.1 preserves forward diagnostics under pending repairs .45–.47 and .49. Eleven managed CLI controls demonstrate five malformed rule blocks accepted with warning/drop; three valid and three rejecting controls bound the observation. A separate isolated core program observes a UTF-8 excerpt panic and space/tab-only mutation arguments accepted by parsing but rejected by compiler validation. Four additional native controls confirm that unflagged regex parsing consumes a following statement identifier after a newline; .49 owns this parser boundary. No runtime source was changed. The whole-spec ASCII timeout occurred before Unicode cases and has no established cause."
-reverify: "Build current managed Rust with bash tools/run_cargo_local.sh build --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime, then run the bounded commands below and reconcile repairs .45–.47 and .49. Their pre-repair observations are not green repair criteria."
+evidence: "September 7 native diagnostics established warning/drop, Unicode diagnostic, mutation-whitespace and regex-boundary defects under .45/.46/.47/.49. Startup .45.1 now propagates every reported rule-code parse error. Twelve native pre-repair invalid cases wrongly compile; four new core rejection groups fail before repair and all five groups pass after it, covering 15 malformed contexts and 11 retained valid blocks. The complete Rust component gate and rebuilt native/quoted-LF controls pass; this change does not repair the separately owned parser causes."
+reverify: "Run bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-core --test rule_code_rejection and bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --lib primary_cli::tests::malformed_rule_code_stops_before_input_loading_or_invocation. Historical diagnostic commands below intentionally describe incorrect pre-repair behavior, not current acceptance. Reconcile separate .46/.47/.49 parser repairs."
 ---
 
-The first three observations came from forward source reading under the frozen `.3.2.55` canonical candidate; its commit body preserves their original commands and results. The regex CLI comparison completed during `.3.3.1`, using unchanged source after that canonical checkpoint committed. `.3.3.1` makes the pending repair owners and this retrievable record explicit; required reading `.3` and book/policy reconciliation `.4`/`.5` still precede runtime changes.
+The first three observations came from forward source reading under the frozen `.3.2.55` canonical candidate; its commit body preserves their original commands and results. The regex CLI comparison completed during `.3.3.1`, using unchanged source after that canonical checkpoint committed. `.3.3.1` makes the pending repair owners and this retrievable record explicit; ADR0123 now permits targeted reading before repairs while preserving the separate full audit.
 
-## Malformed rule blocks are dropped after a warning — repair .45
+## Rule-block error propagation — repair .45
 
-`rust/linkedspec-core/src/compiler.rs` parses rule code through `parse_rule_code_block`. Errors outside five `is_fail_closed_actionir_error` prefixes print a warning and return `Ok(None)`. `compile_rule` flattens away that missing block. Function-body parsing propagates errors instead.
+At the pre-repair baseline, `rust/linkedspec-core/src/compiler.rs::parse_rule_code_block` warned and returned `Ok(None)` for errors outside five recognized diagnostic prefixes. `compile_rule` discarded that missing block. Function-body parsing already propagated errors. Startup .45.1 changes the shared boundary to `Result<CodeBlock>`: every reported parse error retains its rule/block attribution and parser detail as `LinkedSpecError::Compile`. Optional absent edge code stays absent; authored code can no longer become an absent block after a parse error. Carrier proof and canonical closeout remain .45.2/.45.3; independent parser acceptance defects retain their existing owners.
 
-Eleven CLI controls establish five wrong acceptances: malformed ordinary E and I blocks, an empty nested-write segment, a reserved nested-write root, and nonempty mutation arguments. The process exits zero, emits `compile:ok` and `invoke:ok`, and returns null or the surviving block's 42. Valid E, nested-write, and quoted-key mutation controls return 42, `{"x":1}`, and `{"a":2}`. Malformed function code, removed fat-arrow hash syntax, and duplicate authored rules reject. Do not infer an authored duplicate-rule defect from descriptor map behavior, or a mutation key-loss defect from ordinary unbound expression-key semantics.
+Eleven historical CLI controls established five wrong acceptances: malformed ordinary E and I blocks, an empty nested-write segment, a reserved nested-write root, and nonempty mutation arguments. The process exited zero, emitted `compile:ok` and `invoke:ok`, and returned null or the surviving block's 42. Valid E, nested-write, and quoted-key mutation controls returned 42, `{"x":1}`, and `{"a":2}`. Malformed function code, removed fat-arrow hash syntax, and duplicate authored rules rejected. Do not infer an authored duplicate-rule defect from descriptor map behavior, or a mutation key-loss defect from ordinary unbound expression-key semantics.
 
 ## Unicode diagnostic excerpt can panic — repair .46
 
@@ -135,20 +135,30 @@ Related facts: [[rust-aggregate-selector-compile-rejection]], [[rust-generic-fin
 
 ## September 7 newline-copy recurrence
 
-The exact bare-variable copy/newline case in [[rust-bare-variable-newline-consumption]] again reaches .45's
-warning/drop fallback: semantic construction reports compiled and CLI returns null despite discarding the I block.
-The semicolon twin avoids that parse failure. New .69 owns the variable-lookahead separator cause; .45 retains
+The exact bare-variable copy/newline case in [[rust-bare-variable-newline-consumption]] reached .45's
+pre-repair warning/drop fallback: semantic construction reported compiled and the CLI returned null despite discarding the I block.
+The semicolon twin avoided that parse failure. Task .69 owns the variable-lookahead separator cause; .45 retains
 compiler rejection ownership. This control is not evidence that the intended copied-token body ran.
 
 ## September 22 strict-document prototype recurrence
 
-Startup .83.1 independently reproduces the same .45 boundary on a fresh native
-primary binary. Nonportable infix comparison in an LX block produces a parse
-warning, yet the process exits 0 and the block is absent. The supported spelling
+Startup .83.1 independently reproduced the same .45 boundary on a fresh native
+primary binary. Nonportable infix comparison in an LX block produced a parse
+warning, yet the process exited 0 and the block was absent. The supported spelling
 is num_ne(cursor_pos(), input_end_pos()); operator symbols are ordinary calls,
 not an infix authoring grant. Correcting the prototype does not fix the compiler.
-Current compiler.rs:1075-1088 returns Ok(None) for this parse error, and
-compile_rule:1303-1310 discards it. The exact fresh record is
+At clean design activation 8259719f8, compiler.rs:1075-1088 returned Ok(None)
+for this parse error, and compile_rule:1303-1310 discarded it. The exact fresh record is
 .linkedspec-data/scratch/sexpr-contract/compiler-drop-reproduction.json.
 Bounded .45.1 owns rejection at the common boundary, .45.2 owns supported carrier
 proof, and .45.3 owns canonical/public closeout before strict grammar delivery.
+
+## Shared-boundary correction under startup .45.1
+
+`rust/linkedspec-core/tests/rule_code_rejection.rs` exercises the public compiler:
+all seven lifecycle blocks, explicit and bare action/blind edges, the malformed
+document guard and three invalid write/mutation contexts. Four rejection groups
+fail before the repair; all five groups pass after it, including preservation of
+eleven valid lifecycle/edge blocks. The primary CLI test in `rust/linkedspec-runtime/src/primary_cli.rs`
+checks rejection before both literal-input execution and deferred file loading.
+The complete Rust component gate passes, including 228 core tests, runtime/shipped/corpus tests, CLI conformance in both environments and managed storage. The rebuilt primary command rejects all 12 invalid controls before input/invocation, preserves three valid values and passes all three committed quoted-LF fixtures. Raw logs and binary identity are under `.linkedspec-data/scratch/compiler-rejection45`.

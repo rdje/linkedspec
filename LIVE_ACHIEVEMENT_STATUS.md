@@ -2,17 +2,19 @@
 
 ## Current Activity
 
-ADR0124 defines the separate kind-preserving complete-document grammar. Its prototype freshly reproduces Rust warning/drop defect .45; bounded compiler repair precedes delivery. SEMULITH/LS-001 is committed and LS-003 integration remedies remain verified.
+Rust rule-code parse failures now reject compilation under .45.1. Carrier proof and canonical closeout precede ADR0124 document delivery for ARCHOGEN/LS-002–003 and SEMULITH/LS-002; SEMULITH/LS-001 is committed and SEMULITH/LS-003 integration remedies remain verified.
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.83.1 - define kind-preserving document grammar` — 37 authored cases, 136 Perl assertions and four native Rust prototype boundaries; delivery remains pending.
+- `SESSION-STARTUP-READING.45.1 - reject malformed Rust rule code` — core/native RED/GREEN and complete Rust component proof; no syntax expansion.
 
 ## Next Action
 
-- Repair Rust warning-and-drop compilation under SESSION-STARTUP-READING.45.1, then verify its carriers and closeout before implementing ADR0124 under .83.2.2/.83.2.3. Preserve the committed Lispish LF fix and historical result contract.
+- Verify the repaired Rust compiler boundary through native and supported serialized/generated artifact routes under SESSION-STARTUP-READING.45.2, then canonical closeout .45.3 before ARCHOGEN/LS-002 complete-document/all-form and ARCHOGEN/LS-003 atom-kind delivery under ADR0124 .83.2.2/.83.2.3 (also SEMULITH/LS-002).
 
 ## Recent Completions
+
+- `2026-09-22` — `SESSION-STARTUP-READING.45.1` propagates all reported rule-code parse errors; full Rust gate and quoted-LF regression pass.
 
 - `2026-09-22` — `SESSION-STARTUP-READING.83.1` accepts ADR0124/37 cases; .45.1-.45.3 repair the freshly reproduced compiler drop before delivery.
 
@@ -43,8 +45,6 @@ ADR0124 defines the separate kind-preserving complete-document grammar. Its prot
 - `2026-09-21` — `CONFORMANCE-SOURCE-READING.1.80` reads Phase0 through 47307; 17 subtests retain 244 assertions. Shape/receiver and numeric comparison checks retain exact results; startup .17.1 now owns reproduced absent-receiver host-slot leakage and .2.14 owns remaining obsolete target descriptions. Repairs remain; .1.81 continues.
 
 - `2026-09-21` — `CONFORMANCE-SOURCE-READING.1.79` reads Phase0 through 46191; 19 subtests retain 246 assertions. Binding and newline tests preserve concrete runtime and lowering claims; .2.14 now owns the adjacent collapsed comparisons and stale descriptions. Repairs remain; .1.80 continues.
-
-- `2026-09-21` — `CONFORMANCE-SOURCE-READING.1.78` reads Phase0 through 45063; 22 subtests retain 392 assertions. Function staging, runtime values and recursion checks retain bounded claims; new .2.14 owns working-variable observation and description drift. Repairs remain; .1.79 continues.
 
 ## History
 

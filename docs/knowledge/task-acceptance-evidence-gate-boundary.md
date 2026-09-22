@@ -9,7 +9,8 @@ answers:
   - "where is the diagnosis evidence checklist enforced"
   - "what should I do if TASK-ACCEPTANCE fires unexpectedly"
   - "what are the known limits of the task acceptance evidence gate"
-date: 2026-09-13
+  - "why does a completed checklist containing Result CodeBlock fail acceptance"
+date: 2026-09-22
 status: current
 tags: [doctrine-enforcement, task-trees, evidence, tooling]
 evidence: "scripts/check_diagnosis_evidence.sh; scripts/check_doctrines.sh; DOCTRINE_ENFORCEMENT.md §10; TOOLBOX.md; docs/tasks/DOCTRINE-ENFORCEMENT-ADOPT.md"
@@ -49,3 +50,9 @@ the checked line and its retained open-scope qualification in the following
 paragraph/continuation; do not change the repair's status or imply its completion.
 The Rust landing-page change triggers this rule because all `rust/` paths are
 governed. `scripts/check_diagnosis_evidence.sh` remains unchanged.
+
+September22 startup .45.1 independently confirms that the same placeholder
+predicate also matches a Rust generic such as `Result<CodeBlock>` on a checked
+line. Plain-language wording (the parsed block or an attributed error), with
+other work described as separately owned, passes the unchanged staged checker.
+The compiler/runtime proof is unaffected; this is a checklist-format constraint.

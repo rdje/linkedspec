@@ -1,11 +1,11 @@
 # MEMORY
 
-- activation_commit: `8259719f8198a1280c8d91d07a9797ef39e036a8` — clean quoted-LF checkpoint; document contract activation.
-- latest_completed_leaf: `SESSION-STARTUP-READING.83.1 - define kind-preserving document grammar`; accepted design, delivery pending.
-- active_work_unit: `SESSION-STARTUP-READING.45.1` — pending; Rust must reject malformed rule blocks.
-- next_action: Repair Rust warning-and-drop compilation under SESSION-STARTUP-READING.45.1, then verify its carriers and closeout before implementing ADR0124 under .83.2.2/.83.2.3. Preserve the committed Lispish LF fix and historical result contract.
+- activation_commit: `349bde2b1f349e589c13ac19649147b3dbbc9e9b` — clean document-design checkpoint; compiler repair activation.
+- latest_completed_leaf: `SESSION-STARTUP-READING.45.1 - reject malformed Rust rule code`; reported parse errors now reject compilation with their context.
+- active_work_unit: `SESSION-STARTUP-READING.45.2` — pending; verify public/native and artifact boundaries.
+- next_action: Verify the repaired Rust compiler boundary through native and supported serialized/generated artifact routes under SESSION-STARTUP-READING.45.2, then canonical closeout .45.3 before ARCHOGEN/LS-002 complete-document/all-form and ARCHOGEN/LS-003 atom-kind delivery under ADR0124 .83.2.2/.83.2.3 (also SEMULITH/LS-002).
   Named-argument direction PARSER-AUTHORING-APIS.4 is approved and parked; other authoring proposals and approved formats stay parked.
-- in_flight_uncommitted: none; .83.1 contract, acceptance vectors and compiler repair decomposition committed before implementation.
+- in_flight_uncommitted: none; .45.1 source, regressions and documentation committed before carrier verification.
 - blockers: Wrapper startup .7 remains open; warned-child group matched, but denied-call cause and original lost PUC stream remain unproved. Recovery/purge stay prohibited.
 - current_rust_warning_debt: Repeated carriers report 1,870 pgen plus 26 rgx-core output warnings; RUST-DEPENDENCY-WARNING-ZERO.1-.7 own public RGX reports and result verification without suppression; dependency internals are excluded.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
@@ -57,4 +57,4 @@
   Changes segment4972 preserves 136 lines /27060 bytes from clean 8259719f8; old archive rows/bytes remain exact.
 - dependency_boundary: September20: LinkedSpec integrates only with RGX via its published integration document/APIs/contracts. RGX owns PGEN; no separate PGEN procedure, internal inspection/analysis, patches or pin changes.
   Normal documented builds remain authorized; retain caches. Startup .80.1-.4 may observe public behavior or track upstream repairs, not investigate dependency internals.
-- latest_bootstrap_read: ADR0123 targets2–5 minute startup plus thorough task-specific reading. Full audit remains incomplete and separate: conformance89/143,109904 fragments/4784266 baseline bytes/133 files; .1.90 is next only when that audit resumes. SEMULITH/LS-001 is repaired; LS-002 design is ADR0124; .45 compiler rejection precedes its implementation under .83; LS-003 integration remedies are verified.
+- latest_bootstrap_read: ADR0123 targets2–5 minute startup plus thorough task-specific reading. Full audit remains incomplete and separate: conformance89/143,109904 fragments/4784266 baseline bytes/133 files; .1.90 is next only when that audit resumes. SEMULITH/LS-001 is repaired; LS-002 design is ADR0124; .45.1 fixes compiler rejection; carrier/canonical proof precedes .83 delivery; LS-003 integration remedies are verified.

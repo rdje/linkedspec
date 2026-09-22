@@ -114,9 +114,9 @@ interstitial or trailing text. Lexemes permit token-preserving reconstruction;
 inter-token whitespace and comments are omitted. Numeric spelling is retained
 without numeric conversion, and strings retain escapes without decoding.
 
-Before delivery, Rust's compiler must reject malformed rule blocks instead of
-warning and dropping them. That existing defect was freshly reproduced by the
-design prototype and is owned by `SESSION-STARTUP-READING.45.1-.45.3`. Grammar,
+The design prototype reproduced Rust's warning/drop compiler defect. The shared
+error-propagation repair is now verified under `SESSION-STARTUP-READING.45.1`;
+carrier verification and canonical closeout remain `.45.2/.45.3`. Grammar,
 native file-consumer delivery and final admission then remain `.83.2.2/.83.2.3/.83.3`.
 
 ## How to run it

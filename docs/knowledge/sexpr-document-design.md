@@ -11,7 +11,7 @@ answers:
 date: 2026-09-22
 status: ADR0124 design accepted; production grammar and cross-backend admission pending
 tags: [s-expression, grammar, token-kind, validation, compatibility]
-evidence: "Startup .83.1 authors 37 independent cases, proves 136 Perl assertions including 21 token-spelling round trips and a skipped-text mutation, and verifies four Rust prototype boundaries. The native probe also reproduces existing compiler warning/drop defect .45; correction of its nonportable comparison does not repair that compiler boundary."
+evidence: "Startup .83.1 authors 37 independent cases, proves 136 Perl assertions including 21 token-spelling round trips and a skipped-text mutation, and verifies four Rust prototype boundaries. The native probe also reproduced compiler warning/drop defect .45. Task .45.1 now corrects that shared compiler boundary; carrier verification and canonical closeout remain .45.2/.45.3 before grammar delivery."
 reverify: "Run SEXPR_DOCUMENT_DESIGN_PROOF below from the repository root through the managed wrapper. Resolve the implementation frontier in SESSION-STARTUP-READING.45/.83; prototype proof is not production admission."
 ---
 
@@ -39,9 +39,11 @@ failure heading. No complete six-runtime or generated-artifact admission is clai
 The initial native probe rejected nonportable infix comparison in LX parsing but
 still exited 0 with null after discarding the block. The canonical prototype below
 uses `num_ne(...)`, as required by the existing operator-call contract. Compiler
-error propagation remains a distinct real defect: [[rust-action-parser-boundary-defects]]
-and bounded .45.1/.45.2/.45.3 own its repair before delivery. Current source evidence
-is compiler.rs:1075-1088 and lifecycle omission at 1303-1310.
+error propagation is a separate compiler repair: [[rust-action-parser-boundary-defects]]
+and bounded .45.1/.45.2/.45.3 own its correction and verification before delivery. Historical source evidence
+at clean design activation 8259719f8 is compiler.rs:1075-1088 and lifecycle
+omission at 1303-1310. The common-boundary correction is now under .45.1; carrier
+verification and canonical closeout remain required.
 
 ## Repeat the bounded prototype proof
 

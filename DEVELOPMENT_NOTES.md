@@ -10,6 +10,12 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-22 — SESSION-STARTUP-READING.45.1 - reject malformed Rust rule code
+
+Validation after compilation cannot recover a block discarded during parsing. Returning Result<CodeBlock> makes all five lowering call sites propagate reported errors while optional edge source remains Option<CodeBlock>. No parser syntax or generated schema changes. Separate Unicode/newline/mutation parser causes retain their owners; carrier verification and canonical closeout remain .45.2/.45.3.
+
+PASS: 12 native invalid cases change from warning/compile:ok/invoke:ok to exit 1/compile:error with no input or invocation phase; three valid controls retain 42 and empty stderr. Four persistent core rejection groups are RED before repair; all five groups GREEN afterward (15 malformed contexts and 11 retained valid blocks). Complete Rust component gate PASS: 228 core and 574 runtime tests, including all 197 end-to-end tests, 21 shipped grammars and 105 oracle cases; primary CLI conformance is 66/66 in each default/POSIX environment, and managed-storage checks pass. The committed quoted-LF manifest passes all three cases on the rebuilt primary binary. Callable contract, book, Knowledge/memory/history/public/diff and registered doctrine checks govern focused landing. Separate carrier proof/canonical closeout and parser-cause repairs remain open.
+
 ## 2026-09-22 — SESSION-STARTUP-READING.83.1 - define kind-preserving document grammar
 
 Whole-input validation requires recognition of every character, not just a final offset. Removing the prototype rejecting catch-alls accepts interstitial junk while returning both surrounding forms at EOF. Exact token lexemes make kind/spelling reconstruction independent of numeric conversion or escape decoding. Rust rejected the first prototype's nonportable infix expression but warned/dropped LX and returned null/status 0; canonical num_ne(...) fixes the prototype spelling, while .45 remains a separate real compiler defect scheduled for repair before delivery.

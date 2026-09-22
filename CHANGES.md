@@ -10,6 +10,12 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-22 — SESSION-STARTUP-READING.45.1 - reject malformed Rust rule code
+
+Make every reported Rust rule-code parse error a compilation failure with its rule/block context. Remove the warning-and-drop fallback and retain optional absent edge code. Add persistent lifecycle/edge/guard/write/mutation and primary phase-boundary regressions; normalize one pre-existing trace-test formatting issue and align diagnostic guidance.
+
+PASS: 12 native invalid cases change from warning/compile:ok/invoke:ok to exit 1/compile:error with no input or invocation phase; three valid controls retain 42 and empty stderr. Four persistent core rejection groups are RED before repair; all five groups GREEN afterward (15 malformed contexts and 11 retained valid blocks). Complete Rust component gate PASS: 228 core and 574 runtime tests, including all 197 end-to-end tests, 21 shipped grammars and 105 oracle cases; primary CLI conformance is 66/66 in each default/POSIX environment, and managed-storage checks pass. The committed quoted-LF manifest passes all three cases on the rebuilt primary binary. Callable contract, book, Knowledge/memory/history/public/diff and registered doctrine checks govern focused landing. Separate carrier proof/canonical closeout and parser-cause repairs remain open.
+
 ## 2026-09-22 — SESSION-STARTUP-READING.83.1 - define kind-preserving document grammar
 
 Accept ADR0124: a separate versioned s-expression document with all forms, tagged exact lexemes and rejection of unrecognized input. Author 37 acceptance cases, retain historical Lispish, and decompose grammar/native-consumer delivery. A native prototype re-exposes existing Rust warning/drop defect .45; its three bounded repair children now precede delivery. No production grammar, runtime, dependency or admission changes.

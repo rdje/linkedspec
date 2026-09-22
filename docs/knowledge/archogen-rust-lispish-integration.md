@@ -33,6 +33,12 @@ internal dependency knowledge belongs in LinkedSpec. Reports go to RGX.
 
 ## September 22 kind-preserving document design
 
+ARCHOGEN/LS-001's workspace remedy is verified. ARCHOGEN/LS-002 (complete-input
+validation and all top-level forms) and ARCHOGEN/LS-003 (atom kinds) remain active
+under startup .83. The latter shares the SEMULITH/LS-002 requirement; source names
+are required because the projects reuse report numbers. The director reaffirmed
+the ARCHOGEN reports during the .45.1 prerequisite repair.
+
 ADR0124 and startup .83.1 accept a separate versioned grammar retaining full atom
 lexemes and all top-level forms, with explicit complete-input rejection. The
 37 authored acceptance cases include all four SEMULITH kind probes and ARCHOGEN's
@@ -40,6 +46,8 @@ four-form file. Perl prototype 136 assertions and four native Rust boundaries pa
 this is feasibility evidence, not delivered grammar or downstream report closure.
 The first native probe reproduced compiler warning/drop defect .45. Its three
 bounded repair children precede .83.2.2 grammar and .83.2.3 native-consumer delivery.
+The .45.1 shared compiler correction now passes RED/GREEN and the complete Rust
+component gate; .45.2 carrier proof and .45.3 canonical closeout remain.
 [[sexpr-document-design]] preserves the decision, exact scope and repeatable proof.
 
 ## September 22 multiline quote repair

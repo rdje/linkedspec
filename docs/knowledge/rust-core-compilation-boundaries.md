@@ -11,10 +11,10 @@ answers:
   - can a skipped Rust dependency target still fail complete compilation
   - what is the Rust AST validation pass order
   - do traced Rust AST validation passes match ordinary validation order
-date: 2026-09-07
-status: current source-reading evidence; known parser-boundary repairs remain pending
+date: 2026-09-22
+status: current compilation ordering; .45.1 corrects error propagation while separate parser repairs remain pending
 tags: [rust, compiler, actionir, lifecycle, normalization, validation, SESSION-STARTUP-READING]
-evidence: "SESSION-STARTUP-READING.3.3.3 reconciles compiler.rs 1–1355 and callable_contract.rs 251–394, 1,499 lines / 56,169 bytes, against unchanged baseline files. Fresh neutral callable checks pass 7/11 literal/call cases, 9/7 invalid cases, four invalid declarations, eight contextual forms and 23 mutations; the selector scan reports zero positive and 20 classified occurrences. These checks are not fresh native runtime execution."
+evidence: "SESSION-STARTUP-READING.3.3.3 reconciles compiler.rs 1–1355 and callable_contract.rs 251–394, 1,499 lines / 56,169 bytes, against unchanged baseline files. Fresh neutral callable checks pass 7/11 literal/call cases, 9/7 invalid cases, four invalid declarations, eight contextual forms and 23 mutations; the selector scan reports zero positive and 20 classified occurrences. These September 7 checks are not fresh native runtime execution. September 22 startup .45.1 changes reported rule-code parse errors from warning/drop to attributed compilation errors; its five new core regression groups pass."
 reverify: "Read rust/linkedspec-core/src/compiler.rs 44–238, 422–551, 1013–1355 and 1538–1654 plus rust/linkedspec-core/src/callable_contract.rs 251–394; bash tools/run_python_project_data.sh tools/check_callable_codeblock_contract.py; bash tools/run_python_project_data.sh tools/check_executable_aggregate_selector_sources.py"
 ---
 
@@ -34,11 +34,11 @@ that trace I/O cannot fail or that both routes were freshly executed here.
 
 `compile_function` prefers a supplied serialized body AST, otherwise parsing the
 authored body with callable candidates. Both function-body errors propagate.
-`parse_rule_code_block` instead returns no block after warning for errors outside
-five recognized diagnostic markers. That confirmed defect and its native controls
-are owned by `.45` in `docs/tasks/SESSION-STARTUP-READING.md`; see
-[[rust-action-parser-boundary-defects]]. Whole-spec validation of surviving blocks
-cannot recover an authored block already discarded at this earlier boundary.
+`parse_rule_code_block` now propagates every reported parse error with rule and
+block attribution under startup `.45.1`; its callers cannot silently discard a
+failed block. The former warning/drop behavior prevented later whole-spec
+validation from inspecting that code. Carrier proof and canonical closeout remain
+`.45.2/.45.3`; see [[rust-action-parser-boundary-defects]].
 
 The callable visitor recursively processes nested arguments, writes, access
 expressions, mutation callbacks and continuations, shape literals, block bodies,

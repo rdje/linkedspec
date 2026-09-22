@@ -505,10 +505,14 @@ SEMULITH/LS-001 multiline quoted-string corruption is repaired: both quote reade
 preserve LF and surrounding structure, with shared proof across all six runtime
 routes. LS-002 remains open for delivery; ADR0124 now defines a separate versioned
 complete-document grammar with atom kinds and exact lexemes. Its 37 authored cases
-pass bounded Perl/Rust prototype proof. Compiler warning/drop defect .45 is freshly
-reproduced and has three bounded repair children before the new grammar is delivered. LS-003 workspace and prerequisite
+pass bounded Perl/Rust prototype proof. Compiler repair .45.1 now rejects
+reported rule-code parse errors; carrier verification and canonical closeout remain
+before the new grammar is delivered. LS-003 workspace and prerequisite
 guidance remedies are already verified in the Rust integration guide. The current
 Lispish grammar retains its historical extraction and untyped string-value contract.
+
+The planned document grammar also owns ARCHOGEN/LS-002 (complete input and all
+top-level forms) and ARCHOGEN/LS-003 (atom kinds). Both remain pending delivery.
 
 Conformance, test and Unicode reading has exact ownership for all 160 inputs in
 143 bounded groups covering 8,257,059 baseline decoded bytes. Reading now covers 89/143 groups, 109,904 fragments / 4,784,266 baseline bytes and 133 complete files.

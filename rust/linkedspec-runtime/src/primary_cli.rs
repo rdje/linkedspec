@@ -771,6 +771,38 @@ mod tests {
     }
 
     #[test]
+    fn malformed_rule_code_stops_before_input_loading_or_invocation() {
+        for source in [
+            "Top::\n I { return(@invalid) }\n /x/ E { return(42) }\n",
+            "Top::\n /x/ E { return(@invalid) }\n",
+            "Top::\n /x/ LX { return(@invalid) }\n",
+            "Top::\n /x/ -> Child { return(@invalid) }\nChild:\n /x/\n",
+            "Top::\n => Child { return(@invalid) }\nChild:\n /x/\n",
+        ] {
+            for input in [["--input", "x"], ["--input-file", "missing-input.txt"]] {
+                let output = run_with_context(
+                    strings(&[
+                        "--inline-spec",
+                        source,
+                        input[0],
+                        input[1],
+                        "--trace",
+                        "low",
+                    ]),
+                    Path::new("."),
+                    Path::new("."),
+                );
+                assert_eq!(output.exit_code, 1, "{source}");
+                assert_eq!(output.stderr, b"linkedspec: parser compilation failed\n");
+                assert_eq!(
+                    output.stdout,
+                    b"[linkedspec][low] compile:start\n[linkedspec][low] compile:error\n",
+                );
+            }
+        }
+    }
+
+    #[test]
     fn strict_utf8_input_failure_stays_in_input_phase() {
         let root = std::env::temp_dir().join(format!(
             "linkedspec-rust-primary-cli-{}-{}",
