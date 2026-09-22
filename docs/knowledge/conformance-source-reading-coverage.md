@@ -11,7 +11,7 @@ answers:
   - "what evidence capacity blocks remaining conformance reading"
   - "what exact fourteen limits are proposed for remaining conformance reading"
 date: 2026-09-22
-status: exact baseline decomposition preserved; physical reading 85/143, 114 files complete and 58 groups remain; one approved current-source delta
+status: exact baseline decomposition preserved; physical reading 86/143, 120 files complete and 57 groups remain; one approved current-source delta
 tags: [reading, conformance, tests, unicode, continuity, CONFORMANCE-SOURCE-READING]
 evidence: "Startup .3.8.0 independently accounts for160 baseline-identical files,5,422,313 stored bytes and8,257,059 decoded bytes in167,606 line fragments/167,604 LF delimiters. Four gzip inputs contribute54,500 decoded lines. All143 groups/302 ranges are contiguous, disjoint and bounded at1500 fragments/65536 bytes. No source, registry or runtime behavior changes; no physical-reading credit from inventory."
 reverify: "Run CONFORMANCE_SOURCE_READING_COVERAGE below through the project-data wrapper; it derives source identity from Git and range ownership from the task-tree rather than a parallel manifest. Use scripts/check_task_tree_metadata.sh for actual task collection limits."
@@ -428,14 +428,14 @@ properties, context rules, fixtures or decoded upstream inputs. All repairs rema
 
 ## Conformance reading checkpoint
 
-`CONFORMANCE-SOURCE-READING.1.85` reads 13 windows, 1,500 fragments and 52,593 baseline bytes.
-Cumulative reading is 85/143 groups, 103,904 fragments / 4,556,648 baseline bytes and 114 complete files.
-Root selection routes, all three rule-local cursor consumers, scalar numeric/text and semantic call projection are complete; semantic foundation is partial through line 65.
+`CONFORMANCE-SOURCE-READING.1.86` reads 13 windows, 1,500 fragments and 61,968 baseline bytes.
+Cumulative reading is 86/143 groups, 105,404 fragments / 4,618,616 baseline bytes and 120 complete files.
+Semantic foundation, query, runtime/static projection, composed admission and sparse action slots are complete; staged enrichment is read only through its four-line header.
 [[conformance-perl-consumer-reading]] records exact observation boundaries.
-Fresh focused proof passes 431 top-level and 213 nested TAP results across seven complete files. Cursor governance passes 36 family spellings / 18 edge cases / 8 parent-child cases / 14 Perl roles / 60 mutations; numeric passes 55 cases / 18 helpers; semantic passes 6 fixture groups / 20 queries / 128 mutations with rollout 9/0 and admission 6/0. Twelve controls reproduce the byte-identical sixth subprocess helper defects and reap both timeout children. Twenty-four source-capture controls reproduce both negative-only cursor observations. Four semantic copy controls pass original 6-assertion tests with shared nested shape, while the 7-assertion guard rejects exactly that mutation.
-Existing .2.13 owns both cursor-source observations; .2.16 owns the sixth subprocess helper; new .2.18 owns semantic nested-copy test sensitivity. Production copies pass the stronger scratch control. All repair and source/book/policy prerequisites remain; no production change, canonical run, dependency build or push is claimed.
-The pinned 113-byte delta stays separate; these ranges total 4,556,761 current bytes.
-Next .1.86: Read the .1.86 scope (1,500 fragments / 61,968 baseline bytes), completing semantic foundation and reading query, runtime/static projection, semantic admission, sparse action slots and the staged-enrichment prefix. Repairs .2.5–.2.18 and earlier repairs retain required source/book/policy reading prerequisites.
+Six complete consumers pass 146 top-level/634 nested TAP results; the direct-dependent duplicate-slot suite adds 12/62, totaling 158/696. Semantic governance passes 6 fixture groups/20 exact queries/128 mutations with rollout 9/0 and admission 6/0. Duplicate-slot governance passes 5 fixtures/2 diagnostics/6 runtime rows/59 mutations with rollout 7/0.
+Known runtime and observation repairs remain open with required source/book/policy prerequisites. No new defect or repair closure, fresh-process generated proof, production change, canonical run, dependency build or push is claimed.
+The pinned 113-byte delta stays separate; these ranges total 4,618,729 current bytes.
+Next .1.87: Read .1.87: t/staged_ast_enrichment_perl_contract.t lines 5–1504 (1,500 fragments / 54,923 baseline bytes). Keep the remaining suffix .1.88-owned and all repair/source/book/policy prerequisites intact.
 
 Lowercase table entries and Final Sigma context remain separate. Exact scalar
 sequences, sparse ranges, fullwidth forms and ligature identities are preserved;
