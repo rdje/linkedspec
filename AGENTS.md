@@ -35,6 +35,9 @@ point back here. The system of record is **`README.md`** (the project) +
     via fast `.githooks/pre-commit` (E3) + `tools/run_ci_local.sh` (E4); `.githooks/pre-push` requires or runs
     canonical proof for exact clean `HEAD`. Add a doctrine = a check + one registry line.
 
+Startup uses the targeted-reading and 2–5 minute recovery guidance in `SESSION_BOOTSTRAP.md`
+(ADR `0123`). The full-reading audit remains separate; recover the active task from `MEMORY.md`.
+
 ## Non-negotiable working rules
 
 - **RGX and PGEN are black boxes (director instruction, 2026-09-20).** LinkedSpec

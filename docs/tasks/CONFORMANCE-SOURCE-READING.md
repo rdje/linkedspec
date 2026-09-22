@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `CONFORMANCE-SOURCE-READING`
-- Status: `active` / exact decomposition; physical reading 89/143
+- Status: `active` / deferred separate audit; physical reading 89/143
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.8`
 - Created: `2026-09-13`
 - Last updated: `2026-09-22`
@@ -2854,6 +2854,11 @@ CONFORMANCE_CAPACITY_BOUNDARIES
 
 ## Current Frontier
 
+ADR0123 and director approval defer this exhaustive audit separately from ordinary
+fixes. Its next unread range remains .1.90; current repair selection is startup .85.
+Older blanket source/book/policy-reading prerequisites are superseded by targeted
+reading only; genuine technical dependencies and relevant policy compliance remain.
+
 Integration .2.1 intentionally updates the already-read cursor contract inventory
 from74 to75 for its new public guide, plus current marker mirrors in the checker.
 Original reading windows and counters remain historical and unchanged; the
@@ -2871,7 +2876,7 @@ additional reading credit from integration delivery.
 
 | Rank | Leaf | Status | Next action |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.90` | `pending` | Read .1.90 (1,500 fragments / 51,721 baseline bytes): finish typed values, read Unicode case, uniform binding, variadic and write-vivification consumers, then corpus guides/fixtures through tablegrep input.spec. All repair/source/book/policy prerequisites remain. |
+| 1 | `CONFORMANCE-SOURCE-READING.1.90` | `pending` | Deferred separate audit; when resumed, read .1.90 (1,500 fragments / 51,721 baseline bytes): finish typed values, read Unicode case, uniform binding, variadic and write-vivification consumers, then corpus guides/fixtures through tablegrep input.spec. All repair/source/book/policy prerequisites remain. |
 
 ## Decisions
 

@@ -1,24 +1,26 @@
-# SESSION-STARTUP-READING: Complete the Required Reading Before Implementation
+# SESSION-STARTUP-READING: Targeted Startup and Separate Reading Audit
 
 ## Metadata
 
 - Tree ID: `SESSION-STARTUP-READING`
 - Status: `active`
-- Roadmap lane: `Session continuity prerequisite to RUST-MUTATION-TESTING.1`
+- Roadmap lane: `Targeted session continuity / separately tracked full-reading audit`
 - Created: `2026-09-06`
-- Last updated: `2026-09-13`
+- Last updated: `2026-09-22`
 - Owner: repo-local workflow
 - Reading baseline: `baeb984e36a94a15951cd23d4c52def5064cdaca`
 
 ## Goal
 
-Complete the director-required roadmap, first-party codebase, and mdBook reading with honest, recoverable
-coverage, then resume `RUST-MUTATION-TESTING.1`. Reading supports signoff-quality execution; a saved reading
-checkpoint is continuity work and is not feature completion, a code audit, or fresh runtime verification.
+Use targeted startup to proceed to the director's bug reports under ADR0123. Preserve
+the incomplete full-reading audit separately without making it a blanket prerequisite.
+The September22 approval supersedes that condition wherever older task nodes mention
+required source/book/policy reading; relevant policies and real technical dependencies
+remain. Reading completion and runtime signoff remain distinct.
 
 ## Non-Goals
 
-- Implement features, change behavior, run a mutation campaign, or adopt an unreviewed policy in this checkpoint.
+- Infer bug-report identities or silently close defects through a reading/policy checkpoint.
 - Count file enumeration, truncated output, historical test results, or unread material as completed reading.
 - Include the `rgx` submodule or its nested dependencies in this startup reading pass.
 
@@ -28,15 +30,15 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
 - The exact baseline, exclusions, completed ranges, remaining work, and next action survive in committed state.
 - Any discovered defect or policy gap receives an owning leaf and evidence before remediation.
 - Roadmaps, live continuity, and task index agree; public book changes accompany material public understanding.
-- Each completed reading/checkpoint leaf follows `COMMIT.md`; implementation remains gated until reading closes.
+- Each completed leaf follows `COMMIT.md`; ordinary repairs require task-specific reading under ADR0123.
   Director exception (2026-09-08): containment `.7.2-.7.4` may implement and verify ADR 0108/0109 capacity infrastructure before remaining reading; all parser/repair gates remain in force.
 
 ## Task Tree
 
 - ID: `SESSION-STARTUP-READING`
   Status: `active`
-  Goal: Complete the required reading and restore the implementation frontier.
-  Children: `SESSION-STARTUP-READING.1`, `SESSION-STARTUP-READING.2`, `SESSION-STARTUP-READING.3`, `SESSION-STARTUP-READING.4`, `SESSION-STARTUP-READING.5`, `SESSION-STARTUP-READING.6`, `SESSION-STARTUP-READING.7`, `SESSION-STARTUP-READING.8`, `SESSION-STARTUP-READING.9`, `SESSION-STARTUP-READING.10`, `SESSION-STARTUP-READING.11`, `SESSION-STARTUP-READING.12`, `SESSION-STARTUP-READING.13`, `SESSION-STARTUP-READING.14`, `SESSION-STARTUP-READING.15`, `SESSION-STARTUP-READING.16`, `SESSION-STARTUP-READING.17`, `SESSION-STARTUP-READING.18`, `SESSION-STARTUP-READING.19`, `SESSION-STARTUP-READING.20`, `SESSION-STARTUP-READING.21`, `SESSION-STARTUP-READING.22`, `SESSION-STARTUP-READING.23`, `SESSION-STARTUP-READING.24`, `SESSION-STARTUP-READING.25`, `SESSION-STARTUP-READING.26`, `SESSION-STARTUP-READING.27`, `SESSION-STARTUP-READING.28`, `SESSION-STARTUP-READING.29`, `SESSION-STARTUP-READING.30`, `SESSION-STARTUP-READING.31`, `SESSION-STARTUP-READING.32`, `SESSION-STARTUP-READING.33`, `SESSION-STARTUP-READING.34`, `SESSION-STARTUP-READING.35`, `SESSION-STARTUP-READING.36`, `SESSION-STARTUP-READING.37`, `SESSION-STARTUP-READING.38`, `SESSION-STARTUP-READING.39`, `SESSION-STARTUP-READING.40`, `SESSION-STARTUP-READING.41`, `SESSION-STARTUP-READING.42`, `SESSION-STARTUP-READING.43`, `SESSION-STARTUP-READING.44`, `SESSION-STARTUP-READING.45`, `SESSION-STARTUP-READING.46`, `SESSION-STARTUP-READING.47`, `SESSION-STARTUP-READING.49`, `SESSION-STARTUP-READING.50`, `SESSION-STARTUP-READING.51`, `SESSION-STARTUP-READING.52`, `SESSION-STARTUP-READING.53`, `SESSION-STARTUP-READING.54`, `SESSION-STARTUP-READING.55`, `SESSION-STARTUP-READING.56`, `SESSION-STARTUP-READING.57`, `SESSION-STARTUP-READING.58`, `SESSION-STARTUP-READING.59`, `SESSION-STARTUP-READING.60`, `SESSION-STARTUP-READING.61`, `SESSION-STARTUP-READING.62`, `SESSION-STARTUP-READING.63`, `SESSION-STARTUP-READING.64`, `SESSION-STARTUP-READING.65`, `SESSION-STARTUP-READING.66`, `SESSION-STARTUP-READING.67`, `SESSION-STARTUP-READING.68`, `SESSION-STARTUP-READING.69`, `SESSION-STARTUP-READING.70`, `SESSION-STARTUP-READING.71`, `SESSION-STARTUP-READING.72`, `SESSION-STARTUP-READING.73`, `SESSION-STARTUP-READING.74`, `SESSION-STARTUP-READING.75`, `SESSION-STARTUP-READING.76`, `SESSION-STARTUP-READING.77`, `SESSION-STARTUP-READING.78`, `SESSION-STARTUP-READING.79`, `SESSION-STARTUP-READING.80`, `SESSION-STARTUP-READING.81`, `SESSION-STARTUP-READING.82`, `SESSION-STARTUP-READING.83`
+  Goal: Recover the repair frontier with targeted reading and preserve the separate full-reading audit.
+  Children: `SESSION-STARTUP-READING.1`, `SESSION-STARTUP-READING.2`, `SESSION-STARTUP-READING.3`, `SESSION-STARTUP-READING.4`, `SESSION-STARTUP-READING.5`, `SESSION-STARTUP-READING.6`, `SESSION-STARTUP-READING.7`, `SESSION-STARTUP-READING.8`, `SESSION-STARTUP-READING.9`, `SESSION-STARTUP-READING.10`, `SESSION-STARTUP-READING.11`, `SESSION-STARTUP-READING.12`, `SESSION-STARTUP-READING.13`, `SESSION-STARTUP-READING.14`, `SESSION-STARTUP-READING.15`, `SESSION-STARTUP-READING.16`, `SESSION-STARTUP-READING.17`, `SESSION-STARTUP-READING.18`, `SESSION-STARTUP-READING.19`, `SESSION-STARTUP-READING.20`, `SESSION-STARTUP-READING.21`, `SESSION-STARTUP-READING.22`, `SESSION-STARTUP-READING.23`, `SESSION-STARTUP-READING.24`, `SESSION-STARTUP-READING.25`, `SESSION-STARTUP-READING.26`, `SESSION-STARTUP-READING.27`, `SESSION-STARTUP-READING.28`, `SESSION-STARTUP-READING.29`, `SESSION-STARTUP-READING.30`, `SESSION-STARTUP-READING.31`, `SESSION-STARTUP-READING.32`, `SESSION-STARTUP-READING.33`, `SESSION-STARTUP-READING.34`, `SESSION-STARTUP-READING.35`, `SESSION-STARTUP-READING.36`, `SESSION-STARTUP-READING.37`, `SESSION-STARTUP-READING.38`, `SESSION-STARTUP-READING.39`, `SESSION-STARTUP-READING.40`, `SESSION-STARTUP-READING.41`, `SESSION-STARTUP-READING.42`, `SESSION-STARTUP-READING.43`, `SESSION-STARTUP-READING.44`, `SESSION-STARTUP-READING.45`, `SESSION-STARTUP-READING.46`, `SESSION-STARTUP-READING.47`, `SESSION-STARTUP-READING.49`, `SESSION-STARTUP-READING.50`, `SESSION-STARTUP-READING.51`, `SESSION-STARTUP-READING.52`, `SESSION-STARTUP-READING.53`, `SESSION-STARTUP-READING.54`, `SESSION-STARTUP-READING.55`, `SESSION-STARTUP-READING.56`, `SESSION-STARTUP-READING.57`, `SESSION-STARTUP-READING.58`, `SESSION-STARTUP-READING.59`, `SESSION-STARTUP-READING.60`, `SESSION-STARTUP-READING.61`, `SESSION-STARTUP-READING.62`, `SESSION-STARTUP-READING.63`, `SESSION-STARTUP-READING.64`, `SESSION-STARTUP-READING.65`, `SESSION-STARTUP-READING.66`, `SESSION-STARTUP-READING.67`, `SESSION-STARTUP-READING.68`, `SESSION-STARTUP-READING.69`, `SESSION-STARTUP-READING.70`, `SESSION-STARTUP-READING.71`, `SESSION-STARTUP-READING.72`, `SESSION-STARTUP-READING.73`, `SESSION-STARTUP-READING.74`, `SESSION-STARTUP-READING.75`, `SESSION-STARTUP-READING.76`, `SESSION-STARTUP-READING.77`, `SESSION-STARTUP-READING.78`, `SESSION-STARTUP-READING.79`, `SESSION-STARTUP-READING.80`, `SESSION-STARTUP-READING.81`, `SESSION-STARTUP-READING.82`, `SESSION-STARTUP-READING.83`, `SESSION-STARTUP-READING.84`, `SESSION-STARTUP-READING.85`
 
 - ID: `SESSION-STARTUP-READING.1`
   Status: `done`
@@ -4667,15 +4669,37 @@ checkpoint is continuity work and is not feature completion, a code audit, or fr
   Verification: `pending`
   Commit: `pending`
 
+- ID: `SESSION-STARTUP-READING.84`
+  Status: `done`
+  Goal: Adopt the director-approved targeted startup and fast ramp-up while preserving the separate full-reading audit.
+  Activation commit: `cb47fde46f4ded2a0683f45f6264a4417f1741ff`.
+  Verification tier: `focused`
+  Focused checks: Review authoritative startup instructions, current frontier and preserved reading evidence; memory architecture, Knowledge synchronization, both history checks, book rendering, direct public-document checks, diff check and normal doctrine hooks.
+  Canonical trigger: Director-authorized operating guidance and continuity only; no mechanical doctrine, hook, tool, runtime, public contract, capacity or dependency changes.
+  Authorization: On 2026-09-22 the director answered “Yes—use targeted reading and proceed to the bugs” and explicitly requested a fast ramp-up. This supersedes the original paragraph0 full-codebase prerequisite for ordinary fixes.
+  Scope: SESSION_BOOTSTRAP.md, AGENTS.md discovery, ADR0123, current task/roadmap/live/book pointers and retrieval. Preserve all existing reading ranges, completion evidence and defect ownership; keep broad reading as a separate deferred audit.
+  Acceptance: Startup targets2–5 minutes for context/Git/task recovery; affected requirements/code/contracts/tests/book are read before changes. Only scope-relevant uncertainty expands reading. Existing quality, task ownership, storage, black-box dependency and commit/verification rules remain. Three director-referenced bug reports must be identified before selecting their repair owners.
+  Verification: PASS: scoped startup procedure and ADR0123 agree with current memory/task/roadmap/book pointers. Preserve2858 other tracked files/50770871 bytes,348 prior startup and180 conformance task nodes, prior fenced recipes, all immutable history, book headings and parent gitlink; only .84/.85 and two corresponding decision/Knowledge records are added. Memory60 lines, Knowledge1164 facts/9334 keys, histories324/57285 and194/37282 lines/bytes, rendered book, public mutation69/50 and selector68/11 checks pass. No source, hook, gate, timing enforcement or capacity change. Normal nine-doctrine hooks govern focused landing; no canonical run or push.
+  Commit: `SESSION-STARTUP-READING.84 - adopt targeted startup and fast ramp-up`
+
+- ID: `SESSION-STARTUP-READING.85`
+  Status: `pending`
+  Goal: Identify the three director-referenced bug reports and route execution to their existing repair owners.
+  Scope: Report IDs/titles or repository-local report paths supplied by the director; then relevant canonical evidence and task-tree ownership only.
+  Dependencies: .84 clean handoff and the missing report identities. Do not substitute three newly discovered audit findings or an unrelated upstream report.
+  Acceptance: Record the exact three reports, current evidence and each implementation owner; select the first safe repair and use targeted reading. Preserve existing ownership and genuine technical dependencies without reinstating the blanket full-reading gate.
+  Verification: Awaiting report IDs/titles; the question is already pending with the director.
+  Commit: `pending`
+
 ## Current Frontier
 
-Perl, Rust, Dart and Julia source reading are complete; ADR0117 closes Julia reading
-from the independent .3.1 audit and passing unchanged component proof. All repairs,
-startup implementation prerequisites and the rgx reading exclusion remain intact.
+ADR0123 replaces the blanket full-reading prerequisite with targeted startup. Prior
+reading and repairs remain recorded below; conformance .1.90 is the next separate
+audit range, not the default repair frontier.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `CONFORMANCE-SOURCE-READING.1.90` | `pending` | Read .1.90 (1,500 fragments / 51,721 baseline bytes): finish typed values, read Unicode case, uniform binding, variadic and write-vivification consumers, then corpus guides/fixtures through tablegrep input.spec. All repair/source/book/policy prerequisites remain. |
+| 1 | `SESSION-STARTUP-READING.85` | `pending` | Identify the director's three reports, then route to existing repair owners. IDs/titles are awaited; use targeted reading. |
 
 ## Reading Ledger
 
@@ -7414,6 +7438,8 @@ All 53 owned scopes are read: HLink delimiter/raw text, Liberty scalar/complex a
 
 ## Decisions
 
+- 2026-09-22: Director approves targeted reading and fast ramp-up. ADR0123 supersedes the blanket full-reading prerequisite; .85 identifies the three reports before repair selection. No audit range or defect is closed.
+
 - `2026-09-13` .3.7.0: Freeze 21 complete supporting groups under existing capacity; exact prior startup Scope records grant no supporting-file reading credit. Continue authorized read-only work while reusing compatible dependencies.
 
 - `2026-09-11`: .3.5.0 uses a separate bounded Julia member because the 572-line minimum plan exceeds startup member headroom. All 52 scopes are fixed before reading; no limit increase or source-reading credit. Future history capacity belongs to JULIA-STARTUP-READING.4.
@@ -7454,6 +7480,8 @@ All 53 owned scopes are read: HLink delimiter/raw text, Liberty scalar/complex a
   Both retain startup .3/.4/.5 prerequisites; intake .80.0 authorizes no source repair or OS mitigation.
 
 ## Verification Log
+
+- 2026-09-22 .84: Targeted-startup adoption preserves prior reading evidence and source; selected continuity checks govern landing.
 
 - `2026-09-13` .3.7.0: Supporting-source inventory .3.7.0 reconciles all 158 baseline-identical files under conf, tablescript, noncore, specs and ebnf: 25,612 LF delimiters, 25,613 fragments and 964,256 bytes. SUPPORTING-SOURCE-READING owns 21 pending groups/174 disjoint ranges; independent Git, current-delta and published-task reconstruction pass with every group within 1,500 fragments /65,536 bytes. No exact earlier startup Scope coverage is credited; physical reading is 0/21. The resulting decomposition uses existing controls, preserves all repairs and changes no source. Lua reading remains closed under ADR0119; next supporting .1.1 reads configuration. No dependency compilation or canonical gate is run; full codebase/book/policy prerequisites and later verification remain.
 
@@ -7624,6 +7652,8 @@ Knowledge/book/memory/history/whitespace and all nine doctrines pass. Preceding 
 CLI66x2 and Phase0 1032/1032; 1163 seconds is Phase0 only, with 25 optional gates skipped.
 
 ## Commit Log
+
+- 2026-09-22 .84: `SESSION-STARTUP-READING.84 - adopt targeted startup and fast ramp-up`; activation cb47fde46; .85 follows clean handoff.
 
 - `2026-09-13` .3.7.0: `SESSION-STARTUP-READING.3.7.0 - own exact supporting-source reading ranges`; activation 735f0337883baef5ac4422976879d09725e0e8ea; next supporting .1.1 after clean proof and empty brief.
 

@@ -1,6 +1,6 @@
 ---
 id: startup-codebase-reading-inventory
-title: Startup reading uses an exhaustive Git baseline with bounded source ranges
+title: The separate full-reading audit preserves an exhaustive Git baseline and bounded ranges
 answers:
   - is Rust startup reading fully reconciled and committed
   - how large is the required startup codebase reading
@@ -18,7 +18,11 @@ reverify:
   - "git diff --name-only baeb984e36a94a15951cd23d4c52def5064cdaca HEAD"
 ---
 
-# Recover the reading plan from Git and its task owner
+# Recover the separate reading audit from Git and its task owner
+
+September22 director approval and ADR0123 make this audit separate from ordinary startup.
+Use [[targeted-session-startup]] for the active procedure; the historical blanket reading
+prerequisite below is superseded, while exact reading credit and exclusions remain.
 
 `docs/tasks/SESSION-STARTUP-READING.md` owns the exact ordered, disjoint path selectors, baseline counts,
 completed coverage, and executable frontier. The only director-excluded source tree is the `rgx` gitlink and its

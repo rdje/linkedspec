@@ -148,6 +148,8 @@ changed* lives in git (layer D), not here.
 
 | [0122](0122-approved-conformance-evidence-capacity.md) | Admit fourteen approved finite remaining-conformance evidence controls; preserve ordinary canonical verification | 2026-09-21 | accepted | conformance, reading, history, capacity |
 
+| [0123](0123-targeted-session-startup.md) | Targeted session startup with fast context recovery | 2026-09-22 | accepted | continuity, startup, reading |
+
 ## How to add a record
 1. Copy the shape of an existing record (`Date`, `Status`, `Tags`, then `## Context /
    Decision / Consequences / Links`).

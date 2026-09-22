@@ -497,6 +497,12 @@ checks,50 detached registry cases and actual collection validation. ADR0120 reco
 the director's focused-verification grant used for this correction and the separate
 supporting-reading closeout. Reading completion establishes audited comprehension;
 it does not close the six grammar/literal repair roots or establish runtime signoff.
+The director has replaced the exhaustive startup prerequisite with targeted reading
+(ADR0123). Context, Git state and task selection should normally take 2–5 minutes;
+a fix still requires thorough reading of its affected code, contracts, tests and book
+sections. The complete source audit is preserved separately and remains incomplete.
+Current priority is the director's three bug reports, pending their exact identities.
+
 Conformance, test and Unicode reading has exact ownership for all 160 inputs in
 143 bounded groups covering 8,257,059 baseline decoded bytes. Reading now covers 89/143 groups, 109,904 fragments / 4,784,266 baseline bytes and 133 complete files.
 Seven trace/typed-projection consumers are complete; typed immutable values are read through 226, inside reversed-span diagnostic verification. The remaining value tests stay .1.90-owned.
@@ -633,7 +639,7 @@ The history files keep their 512-line / 65,536-byte caps, mandatory rollover and
 immutable archives. General card/part limits remain unchanged. Admission consumes
 one of the conservative 99 reserve units; the remaining 98 units are forecast
 after actual admission overhead. This capacity does not complete source reading
-or repair tests: reading now reaches 89/143, `.1.90` is next, and the test and recipe
+or repair tests: reading now reaches 89/143, `.1.90` is next for that separate audit, and the test and recipe
 repairs `.2.5`–`.2.19` remain open.
 
 The director has requested integration guides and runnable consumer examples for
