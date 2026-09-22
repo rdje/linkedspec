@@ -47,7 +47,7 @@ this is feasibility evidence, not delivered grammar or downstream report closure
 The first native probe reproduced compiler warning/drop defect .45. Its three
 bounded repair children precede .83.2.2 grammar and .83.2.3 native-consumer delivery.
 The .45.1 shared compiler correction now passes RED/GREEN and the complete Rust
-component gate; .45.2 carrier proof passes, with .45.3 canonical closeout next.
+component gate; .45.2 carrier proof passes and .45.3 closes the bounded compiler repair.
 [[rust-rule-code-rejection-routes]] records the exact carrier and artifact boundaries.
 [[sexpr-document-design]] preserves the decision, exact scope and repeatable proof.
 

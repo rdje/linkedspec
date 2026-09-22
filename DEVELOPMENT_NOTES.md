@@ -10,6 +10,12 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-09-22 — SESSION-STARTUP-READING.45.3 - close Rust rule-code rejection repair
+
+The .45 repair closes propagation of reported rule-code parse errors, not every parser defect. .46 Unicode diagnostic safety, .47 mutation whitespace and .49 regex/newline parsing retain separate owners. Earlier generated artifacts with discarded authored blocks require original-source regeneration. .83 remains the complete-document/kind delivery owner.
+
+Compiler correction 10893fb71 passed all core/native regressions and the complete Rust component gate; carrier checkpoint 30c1ddeea passed all four source/AST/loader/semantic/generated route tests. This documentation-only parent closeout retains those exact proofs. Canonical acceptance requires tools/run_ci_local.sh to finish successfully on the exact staged candidate and produce the receipt checked by the normal commit hook; the resulting commit and promoted receipt are the durable gate evidence. Other parser defects and document grammar delivery remain separately owned.
+
 ## 2026-09-22 — SESSION-STARTUP-READING.45.2 - verify Rust rule-code rejection routes
 
 SpecFile retains authored rule-code strings; CompiledSpec holds parsed blocks. Emitters consume the latter. An old artifact cannot reconstruct source discarded by warning/drop, so regeneration is the recovery path. The new tests reach actual source compilation and independently execute emitted Rust; they do not invent a raw-source decoder or claim arbitrary serialized ActionIR validation.

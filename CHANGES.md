@@ -10,6 +10,12 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface change_history --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
+## 2026-09-22 — SESSION-STARTUP-READING.45.3 - close Rust rule-code rejection repair
+
+Close the bounded Rust rule-code error-propagation repair after compiler and carrier verification. Align roadmap, public status, Knowledge and task pointers; select the versioned document grammar as the next leaf. No production source, generated schema, dependency pin or historical Lispish behavior changes.
+
+Compiler correction 10893fb71 passed all core/native regressions and the complete Rust component gate; carrier checkpoint 30c1ddeea passed all four source/AST/loader/semantic/generated route tests. This documentation-only parent closeout retains those exact proofs. Canonical acceptance requires tools/run_ci_local.sh to finish successfully on the exact staged candidate and produce the receipt checked by the normal commit hook; the resulting commit and promoted receipt are the durable gate evidence. Other parser defects and document grammar delivery remain separately owned.
+
 ## 2026-09-22 — SESSION-STARTUP-READING.45.2 - verify Rust rule-code rejection routes
 
 Add bounded public-route regressions for the compiler correction: reconstructed source AST, traced compilation, path/name loading, semantic failure and actual generated-module execution. Document why artifacts produced by an older compiler must be regenerated from authored source.

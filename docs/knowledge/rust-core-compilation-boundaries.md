@@ -12,7 +12,7 @@ answers:
   - what is the Rust AST validation pass order
   - do traced Rust AST validation passes match ordinary validation order
 date: 2026-09-22
-status: current compilation ordering; .45.1 corrects error propagation while separate parser repairs remain pending
+status: current compilation ordering; .45 error propagation repair closed; separate parser repairs remain pending
 tags: [rust, compiler, actionir, lifecycle, normalization, validation, SESSION-STARTUP-READING]
 evidence: "SESSION-STARTUP-READING.3.3.3 reconciles compiler.rs 1–1355 and callable_contract.rs 251–394, 1,499 lines / 56,169 bytes, against unchanged baseline files. Fresh neutral callable checks pass 7/11 literal/call cases, 9/7 invalid cases, four invalid declarations, eight contextual forms and 23 mutations; the selector scan reports zero positive and 20 classified occurrences. These September 7 checks are not fresh native runtime execution. September 22 startup .45.1 changes reported rule-code parse errors from warning/drop to attributed compilation errors; its five new core regression groups pass."
 reverify: "Read rust/linkedspec-core/src/compiler.rs 44–238, 422–551, 1013–1355 and 1538–1654 plus rust/linkedspec-core/src/callable_contract.rs 251–394; bash tools/run_python_project_data.sh tools/check_callable_codeblock_contract.py; bash tools/run_python_project_data.sh tools/check_executable_aggregate_selector_sources.py"
@@ -37,8 +37,8 @@ authored body with callable candidates. Both function-body errors propagate.
 `parse_rule_code_block` now propagates every reported parse error with rule and
 block attribution under startup `.45.1`; its callers cannot silently discard a
 failed block. The former warning/drop behavior prevented later whole-spec
-validation from inspecting that code. Carrier proof `.45.2` passes; canonical closeout
-remains `.45.3`. See [[rust-rule-code-rejection-routes]] and [[rust-action-parser-boundary-defects]].
+validation from inspecting that code. Carrier proof `.45.2` passes and canonical
+closeout `.45.3` completes this bounded repair. See [[rust-rule-code-rejection-routes]] and [[rust-action-parser-boundary-defects]].
 
 The callable visitor recursively processes nested arguments, writes, access
 expressions, mutation callbacks and continuations, shape literals, block bodies,

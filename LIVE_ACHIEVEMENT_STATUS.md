@@ -2,17 +2,19 @@
 
 ## Current Activity
 
-Rust compiler rejection and supported carrier proof are verified under .45.1/.45.2. Canonical closeout .45.3 precedes ADR0124 delivery for ARCHOGEN/LS-002–003 and SEMULITH/LS-002.
+Rust rule-code error propagation is repaired and closed under .45. ADR0124 grammar implementation .83.2.2 now owns delivery for ARCHOGEN/LS-002–003 and SEMULITH/LS-002.
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.45.2 - verify Rust rule-code rejection routes` — eight malformed sources across compiler/loader/semantic routes; valid emitted module executes.
+- `SESSION-STARTUP-READING.45.3 - close Rust rule-code rejection repair` — bounded parent closeout; canonical receipt required by the landing hook.
 
 ## Next Action
 
-- Complete designated canonical compiler-repair closeout SESSION-STARTUP-READING.45.3, then deliver ARCHOGEN/LS-002 complete-document/all-form and ARCHOGEN/LS-003 atom-kind grammar/native consumers under ADR0124 .83.2.2/.83.2.3 (also SEMULITH/LS-002).
+- Implement specs/SExprDocumentV1.spec and the 37-case persistent six-runtime contract consumers under SESSION-STARTUP-READING.83.2.2; ARCHOGEN/LS-002 complete-document/all-form and LS-003 atom-kind delivery then continues through native file consumer .83.2.3 (also SEMULITH/LS-002).
 
 ## Recent Completions
+
+- `2026-09-22` — `SESSION-STARTUP-READING.45.3` closes compiler rejection with exact staged canonical acceptance; grammar .83.2.2 follows.
 
 - `2026-09-22` — `SESSION-STARTUP-READING.45.2` verifies source/AST/loader/semantic rejection and reconstructed/generated execution.
 
@@ -43,8 +45,6 @@ Rust compiler rejection and supported carrier proof are verified under .45.1/.45
 - `2026-09-21` — `CONFORMANCE-SOURCE-READING.1.82` finishes Phase0, validation fuzz and progressive authority; focused proof has 94 top-level and 571 nested assertions. Three files finish. New .2.15 owns disconnected parent observations; .2.16 owns signal-status loss and sequential-pipe blocking. Prior .1.81 count wording is corrected. Repairs remain; .1.83 continues.
 
 - `2026-09-21` — `CONFORMANCE-SOURCE-READING.1.81` reads Phase0 through 48409; 14 subtests retain 236 assertions. All Phase0 subtests are read; helpers remain. .2.14 has three bounded repair children, and startup .17.2 owns reproduced absent-hash host-slot leakage. Repairs remain; .1.82 continues.
-
-- `2026-09-21` — `CONFORMANCE-SOURCE-READING.1.80` reads Phase0 through 47307; 17 subtests retain 244 assertions. Shape/receiver and numeric comparison checks retain exact results; startup .17.1 now owns reproduced absent-receiver host-slot leakage and .2.14 owns remaining obsolete target descriptions. Repairs remain; .1.81 continues.
 
 ## History
 
