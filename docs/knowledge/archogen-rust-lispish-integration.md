@@ -2,6 +2,11 @@
 id: archogen-rust-lispish-integration
 title: ARCHOGEN can use Rust native loading with explicit Lispish and dependency preparation
 answers:
+  - which commit fixes the consumer workspace build issue
+  - was the bootstrap false-success issue fixed and in which commit
+  - did RGX do anything wrong in ARCHOGEN LS-004
+  - does the bootstrap report establish an RGX code defect
+  - why is a PGEN-attributed consumer report routed through RGX
   - who will relay ARCHOGEN LS-004 to RGX
   - where is the local feedback for the remaining RGX report
   - are the SEMULITH and ARCHOGEN fixes published
@@ -25,7 +30,7 @@ answers:
   - how does a host Cargo workspace exclude vendored LinkedSpec
   - does the workspace verifier query dependency internals
 date: 2026-09-23
-status: seven consumer remedies published at a8d34c845 with exact remote read-back; director relays local RGX report; LS-004 remains open upstream
+status: seven remedies published; LS-004 is ARCHOGEN-reported and PGEN-attributed, observed through RGX with correct failure propagation; no RGX code defect established
 tags: [rust, lispish, embedding, dependencies, discussion]
 evidence: "September13 native Lispish proof; September20 report intake, workspace repair and successful RGX public bootstrap/native consumer proof. Startup .83.2.1 verifies and applies the two quote-pattern flags with independent six-runtime recurrence."
 reverify: "Follow the public preparation/workspace sequence in docs/linkedspec-book/src/public-api/integration-rust.md, then its native consumer checks. Treat rgx/docs/INTEGRATION.md as the dependency authority; do not inspect implementation."
@@ -33,10 +38,40 @@ reverify: "Follow the public preparation/workspace sequence in docs/linkedspec-b
 
 **Direct dependency boundary:** LinkedSpec integrates only with RGX. RGX's
 published integration document, public APIs and contracts are the sole authority.
-RGX owns PGEN and all transitive preparation; no separate PGEN procedure or
-internal dependency knowledge belongs in LinkedSpec. Reports go to RGX.
+RGX defines supported transitive preparation and is the integration contact. Its
+published contract keeps PGEN read-only from RGX. No separate PGEN procedure or
+internal dependency knowledge belongs in LinkedSpec; routing is not fault attribution.
+
+## Attribution correction: contact does not establish fault
+
+`CONSUMER-REPORT-DELIVERY.5` corrects the earlier shorthand "RGX defect" and
+"RGX owns repair". ARCHOGEN is the reporter, LinkedSpec owns tracking and public
+verification, and the original LS-004 identifies PGEN bootstrap as its affected
+component. That is reporter attribution, not a local implementation diagnosis.
+
+The retained public command returns exit2 correctly and no final completion
+message. The deliberately empty offline store explains the expected dependency
+resolution failure. The misleading intermediate seed-success message is the
+observed symptom; this evidence does not establish faulty RGX code. RGX's
+published integration contract additionally keeps PGEN read-only from RGX.
+
+RGX remains the direct integration contact under the black-box boundary, with
+implementation repair belonging to the affected upstream maintainer. Do not ask
+RGX to modify PGEN, infer an internal cause from public output, or close the
+original report merely because the overall failure status is correct. The local
+report retains the original request for fail-fast preparation and accurate text.
+Evidence: original ARCHOGEN LS-004 report; `rgx/docs/INTEGRATION.md`; retained
+`rgx-failure.log` and `rgx-public.json` under
+`.linkedspec-data/scratch/consumer-report-delivery/`. No source or pin changed.
 
 ## Consumer handoff and publication authority
+
+The workspace build remedy is `effe3e7b2544abf79f7786a7aa54e77b1893880e`
+(`BACKEND-INTEGRATION-GUIDES.8.2`), verified as an ancestor of published main.
+It isolates the maintained example workspace and documents the host exclusion
+for ARCHOGEN/LS-001 and SEMULITH/LS-003 item1. LS-004's bootstrap failure-handling
+and misleading-message issue remains unfixed: no implementation fix commit is
+claimed. The delivery and handoff commits below must not be presented as that fix.
 
 Delivery `.1` and `.2` landed at `01b04138a` and `12c6ca9ad`. They verify the
 seven LinkedSpec-owned remedies and reproduce the remaining RGX report. Delivery
@@ -88,7 +123,7 @@ Delivery `.2` reconfirms ARCHOGEN/LS-004 through the published interface on
 macOS27.0: offline empty-store failure exits2 yet prints the misleading seed
 line; the already-prepared control exits0 with an explicit no-op message.
 The refreshed local report records exact output hashes and the corrected no-op
-assertion. RGX owns repair. At that checkpoint permission had been requested; the later
+assertion. RGX is the integration contact; .5 above corrects the earlier repair-owner shorthand. At that checkpoint permission had been requested; the later
 `.4` director-owned relay above supersedes that pending-question state. No
 external issue or upstream fix is claimed. `.3` independently published the
 LinkedSpec remedies.
@@ -102,7 +137,7 @@ passes 37 cases / 36 groups and historical Lispish remains 26 / 18. Every backen
 integration guide now publishes its exact replay command. The admission requires
 exact canonical proof. ARCHOGEN/LS-001 workspace guidance remains independently
 verified. No downstream report file or application is changed, and no downstream
-acceptance is claimed. RGX owns its separate bootstrap progress-message issue.
+acceptance is claimed. The separate PGEN-attributed bootstrap report is tracked through RGX as the integration contact; no RGX implementation defect is established.
 
 The dated delivery checkpoints below retain their original scope.
 

@@ -3,11 +3,11 @@
 ## Metadata
 
 - Tree ID: `CONSUMER-REPORT-DELIVERY`
-- Status: `done` / published delivery and local director handoff; upstream repair remains open
+- Status: `done` / published delivery and corrected local attribution; upstream report remains open
 - Roadmap lane: `SEMULITH / ARCHOGEN consumer blockers and delivery`
 - Created: `2026-09-23`
 - Last updated: `2026-09-23`
-- Owner: repo-local workflow; RGX owns dependency repairs
+- Owner: repo-local workflow; RGX is integration contact; affected upstream maintainers own dependency repairs
 
 ## Goal
 
@@ -29,7 +29,7 @@ blocked SEMULITH/ARCHOGEN consumers over separately discovered validator work.
 - ID: `CONSUMER-REPORT-DELIVERY`
   Status: `done`
   Goal: Deliver local fixes and pursue the remaining consumer report through its proper owner.
-  Children: `CONSUMER-REPORT-DELIVERY.1`, `CONSUMER-REPORT-DELIVERY.2`, `CONSUMER-REPORT-DELIVERY.3`, `CONSUMER-REPORT-DELIVERY.4`
+  Children: `CONSUMER-REPORT-DELIVERY.1`, `CONSUMER-REPORT-DELIVERY.2`, `CONSUMER-REPORT-DELIVERY.3`, `CONSUMER-REPORT-DELIVERY.4`, `CONSUMER-REPORT-DELIVERY.5`
 
 - ID: `CONSUMER-REPORT-DELIVERY.1`
   Status: `done`
@@ -75,11 +75,22 @@ blocked SEMULITH/ARCHOGEN consumers over separately discovered validator work.
   Verification: PASS exact remote main read-back and tested-baseline ancestry at published a8d34c845. Current report/task/KM/resume pointers agree on director-owned relay and pending upstream repair. Memory architecture, Knowledge generation, both bounded-history checks, all nine registered doctrines and diff hygiene govern this focused landing; the commit body records their result. No public behavior or book migration change requires another runtime test run.
   Commit: `CONSUMER-REPORT-DELIVERY.4 - record director-owned RGX handoff` (local follow-up; base a8d34c845).
 
+- ID: `CONSUMER-REPORT-DELIVERY.5`
+  Status: `done`
+  Goal: Correct the conflation of the RGX integration contact with the component blamed by ARCHOGEN/LS-004.
+  Dependencies: Clean dc46151be48cd66f7bd56f5a52b84cef7fe26f4f; director questions the RGX attribution. Original caller-authorized report, retained public-command log and RGX published integration contract supply the evidence.
+  Verification tier: `focused`
+  Focused checks: Compare original report attribution, public failure status/output and published dependency ownership; align report/task/KM/resume/book wording; memory, Knowledge, bounded histories, book rendering, all doctrines and diff hygiene.
+  Canonical trigger: None for this local documentation correction. No implementation, contract or dependency pin changes; a future push still requires exact-HEAD canonical proof.
+  Acceptance: State that no RGX implementation defect has been established, the observed RGX command correctly propagates failure, and ARCHOGEN identifies PGEN bootstrap as the affected component. Keep original reporter provenance and LinkedSpec tracking ownership. Treat RGX as the integration contact; do not demand it modify its read-only PGEN dependency or claim independent internal root-cause proof.
+  Verification: Original report names PGEN bootstrap; retained public output returns exit2 and no final completion; RGX published guide keeps PGEN read-only. Workspace build remedy is effe3e7b2544abf79f7786a7aa54e77b1893880e, verified as an ancestor of published origin/main; it does not fix LS-004. Report/task/KM/resume/book wording now distinguishes these facts. Focused memory/Knowledge/history/book/diff proof and all nine doctrine hooks govern landing, with results recorded in the commit body.
+  Commit: `CONSUMER-REPORT-DELIVERY.5 - distinguish integration contact from defect attribution` (local follow-up; base dc46151be).
+
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `CONSUMER-REPORT-DELIVERY.4` | `done` | Publication and director-owned relay are recorded; RGX-CONSUMER-BUILD-REPORTS.1 retains the open repair and public post-fix verification. |
+| 1 | `CONSUMER-REPORT-DELIVERY.5` | `done` | Attribution and exact workspace-fix commit are recorded; LS-004 remains open with no fix commit. |
 
 ## Decisions and Boundaries
 
@@ -93,6 +104,9 @@ blocked SEMULITH/ARCHOGEN consumers over separately discovered validator work.
   feedback locally in LinkedSpec task tracking; the director will communicate it
   to RGX after the fixes are pushed. No agent posting request remains pending.
   The LinkedSpec fixes are now published; the upstream report remains open.
+- Attribution correction `.5`: ARCHOGEN reports PGEN bootstrap as the affected
+  component. The public RGX command correctly returns failure. RGX is an
+  integration contact; no RGX implementation defect has been established.
 
 ## Evidence Pointers
 

@@ -1,12 +1,12 @@
 # MEMORY
 
-- activation_commit: `a8d34c84595d46c24cd1820d5fc0414261706412` — clean published base for the local director handoff.
-- latest_completed_leaf: `CONSUMER-REPORT-DELIVERY.4 - record director-owned RGX handoff`.
-- active_work_unit: `RGX-CONSUMER-BUILD-REPORTS.1` — upstream LS-004 repair and post-fix verification.
-- next_action: Director relays docs/upstream/rgx/bootstrap-progress-status.md; when RGX publishes a remedy, verify its public failure/success/reuse outcomes under RGX-CONSUMER-BUILD-REPORTS.1. LinkedSpec fixes are published at a8d34c845; unrelated .86.4.3 stays pending.
+- activation_commit: `dc46151be48cd66f7bd56f5a52b84cef7fe26f4f` — clean local handoff base for attribution correction.
+- latest_completed_leaf: `CONSUMER-REPORT-DELIVERY.5 - distinguish integration contact from defect attribution`.
+- active_work_unit: `RGX-CONSUMER-BUILD-REPORTS.1` — ARCHOGEN LS-004 tracking through the RGX integration contact; PGEN-attributed, no RGX code defect established.
+- next_action: Director relays the corrected docs/upstream/rgx/bootstrap-progress-status.md through the RGX integration contact; verify any upstream remedy through the public interface under RGX-CONSUMER-BUILD-REPORTS.1. LinkedSpec fixes are published at a8d34c845; unrelated .86.4.3 stays pending.
   Named-argument direction PARSER-AUTHORING-APIS.4 is approved and parked; other authoring proposals and approved formats stay parked.
 - in_flight_uncommitted: none.
-- blockers: upstream LS-004 remains open; the director owns communication and RGX owns repair. No permission question remains. This local handoff commit follows published canonical delivery; a later push requires fresh exact-HEAD proof.
+- blockers: upstream LS-004 remains open; director owns communication, affected upstream maintainer owns repair. RGX propagates failure correctly and is the integration contact. Local documentation commits follow published a8d34c845; a later push requires exact-HEAD proof.
   Wrapper startup .7 remains open; warned-child group matched, but denied-call cause and original lost PUC stream remain unproved. Recovery/purge stay prohibited.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
   active table; the task metadata doctrine inventories all consumers, permits arbitrary frontier-row rewrites,

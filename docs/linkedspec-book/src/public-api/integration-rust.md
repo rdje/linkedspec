@@ -666,8 +666,10 @@ of the six runtime routes. Downstream application acceptance is separate.
 Both consumers also reported setup difficulties inside an enclosing Cargo
 workspace. The [workspace setup above](#applications-with-a-cargo-workspace)
 addresses the reproduced membership failures without changing dependency pins.
-Prerequisite navigation was corrected under integration .8.4. The public RGX
-bootstrap progress-message report remains owned by `RGX-CONSUMER-BUILD-REPORTS.1`.
+Prerequisite navigation was corrected under integration .8.4. ARCHOGEN's remaining
+PGEN bootstrap report is tracked under `RGX-CONSUMER-BUILD-REPORTS.1` through the
+RGX integration interface. RGX correctly propagates the observed failure; no
+defect in RGX's own implementation has been established.
 These setup repairs do not change Lispish's input-consumption or token-kind behavior.
 
 ### Handle failures and diagnostics
@@ -741,10 +743,15 @@ The reports require different consumer changes:
 | ARCHOGEN LS-002 / LS-003 and SEMULITH LS-002 | Use `specs/SExprDocumentV1.spec`, select `Document`, and consume its tagged result. Use the separate `sexpr_file` example for files. The old `lispish_file` adapter still expects historical head/tail values. |
 | ARCHOGEN LS-001 and SEMULITH LS-003 item 1 | Keep the example's workspace boundary and the enclosing application's `exclude = ["vendor/linkedspec"]` entry. Follow the workspace setup above before preparation/build. |
 | ARCHOGEN LS-005 and SEMULITH LS-003 items 2–3 | Follow the linked preparation steps before either text or file use; optional test repositories need not be initialized for native use. |
-| ARCHOGEN LS-004 | The misleading intermediate bootstrap progress message remains an upstream RGX report. Check the command's final exit status; a progress line is not proof of successful preparation. |
+| ARCHOGEN LS-004 | ARCHOGEN attributes misleading bootstrap progress to PGEN. The symptom is observable through RGX, whose command correctly returns failure; no RGX code defect is established. Check the final exit status. The report remains open through the RGX integration contact. |
 
-The [prepared RGX report](https://github.com/rdje/linkedspec/blob/main/docs/upstream/rgx/bootstrap-progress-status.md)
+The [prepared ARCHOGEN LS-004 handoff](https://github.com/rdje/linkedspec/blob/main/docs/upstream/rgx/bootstrap-progress-status.md)
 records the remaining bootstrap-message reproduction and its unresolved status.
+
+The Cargo workspace remedy was committed in
+`effe3e7b2544abf79f7786a7aa54e77b1893880e`. It addresses ARCHOGEN LS-001 and
+SEMULITH LS-003 item1; LS-004's bootstrap failure handling and misleading message
+remain unfixed. The later publication commit does not constitute an LS-004 fix.
 
 ARCHOGEN LS-006 was withdrawn; LS-007 requests no behavior change. The separate
 document grammar deliberately preserves the historical Lispish contract. Merely

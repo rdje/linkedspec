@@ -11,6 +11,12 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
 
+## 2026-09-23 — CONSUMER-REPORT-DELIVERY.5 - separate provenance, observation and repair authority
+
+A public interface can expose a transitive dependency's symptom while correctly reporting overall failure. The retained bootstrap command returns 2 and never claims final completion. ARCHOGEN's original report names PGEN; reproducing a message through RGX does not independently locate a defect in RGX implementation. The induced offline missing-package error is expected and is not the bug claim. The misleading intermediate progress and the original fail-fast request remain open report concerns.
+
+Earlier local shorthand assigned diagnosis/repair too broadly to RGX. Its published integration guide says PGEN is read-only from RGX. The corrected durable record keeps ARCHOGEN as reporter, LinkedSpec as tracking/verification owner, RGX as direct integration contact, and implementation repair with the affected upstream owner. No dependency implementation was inspected, no new source-level cause was inferred, and no external message was sent. The public book now makes that distinction explicit.
+
 ## 2026-09-23 — CONSUMER-REPORT-DELIVERY.4 - preserve publication and director relay ownership
 
 The exact canonical candidate became `a8d34c84595d46c24cd1820d5fc0414261706412`, and remote read-back confirms publication after a clean receipt-reusing push. The previously unavailable source baseline f60a70df3 is now fetchable. Canonical log SHA-256 is aa127606fb5b4ac9fa6af0c38fad159020b2ca385db9c511f5050c0b5b1f6b58; its commit records the staged fingerprint and completed result.

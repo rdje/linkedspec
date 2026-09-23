@@ -2,17 +2,19 @@
 
 ## Current Activity
 
-LinkedSpec consumer remedies are published at `a8d34c84595d46c24cd1820d5fc0414261706412`, with exact remote read-back and tested-baseline ancestry verified. The director will relay the local ARCHOGEN/LS-004 report to RGX. Upstream repair and public post-fix verification remain pending; there is no external-post permission question or downstream acceptance claim.
+LinkedSpec consumer remedies are published at `a8d34c84595d46c24cd1820d5fc0414261706412`, with exact remote read-back and tested-baseline ancestry verified. The local handoff now distinguishes ARCHOGEN's PGEN attribution from RGX's integration-contact role. RGX correctly propagates failure; no RGX code defect is established. Upstream resolution and public verification remain pending; there is no external-post permission question or downstream acceptance claim.
 
 ## Latest Completed Slice
 
-- `CONSUMER-REPORT-DELIVERY.4 - record director-owned RGX handoff` — records publication, the director's communication ownership and concrete public repair acceptance. This administrative follow-up is committed locally after the canonical delivery push.
+- `CONSUMER-REPORT-DELIVERY.5 - distinguish integration contact from defect attribution` — corrects the earlier RGX-defect shorthand using the original report, retained public output and published integration contract. Book and local handoff now preserve reporter/component/contact distinctions.
 
 ## Next Action
 
-- Director relays `docs/upstream/rgx/bootstrap-progress-status.md`; when an upstream remedy is published, verify it through RGX's supported interface under `RGX-CONSUMER-BUILD-REPORTS.1`. Unrelated startup .86.4.3 remains pending. A later push needs canonical proof for its exact HEAD.
+- Director relays `docs/upstream/rgx/bootstrap-progress-status.md`; preserve the PGEN-reported attribution and RGX integration-contact role, then verify any upstream remedy through RGX's supported interface under `RGX-CONSUMER-BUILD-REPORTS.1`. Unrelated startup .86.4.3 remains pending. A later push needs canonical proof for its exact HEAD.
 
 ## Recent Completions
+
+- `2026-09-23` — `CONSUMER-REPORT-DELIVERY.5` corrects RGX fault attribution while retaining the original ARCHOGEN report and public evidence.
 
 - `2026-09-23` — `CONSUMER-REPORT-DELIVERY.4` records verified publication and the director-owned local RGX handoff.
 
@@ -43,8 +45,6 @@ LinkedSpec consumer remedies are published at `a8d34c84595d46c24cd1820d5fc041426
 - `2026-09-23` — `SESSION-STARTUP-READING.47.1` accepts whitespace-only mutation arguments; core/runtime/carrier/native proof passes; outer source fidelity is owned by immediate .47.2.
 
 - `2026-09-23` — `SESSION-STARTUP-READING.46` fixes the Unicode diagnostic panic; core/public/native proof passes and structured scalar spans remain exact.
-
-- `2026-09-23` — `SEXPR-DOCUMENT-INTEGRATION.2` admits all six public-loader paths, native document files and the local report scope; all backend guides are synchronized.
 
 ## History
 

@@ -1,16 +1,41 @@
-# Misleading progress text during a failed RGX public bootstrap
+# ARCHOGEN LS-004: misleading bootstrap progress observed through RGX
 
 - Status: reproduced locally; upstream resolution pending. The director will relay this local report; this session has not posted it externally.
 - Owner: `RGX-CONSUMER-BUILD-REPORTS.1`; prepared by `BACKEND-INTEGRATION-GUIDES.8.3`.
 - Related consumer report: ARCHOGEN/LS-004.
 - LinkedSpec remedies published at: `a8d34c84595d46c24cd1820d5fc0414261706412`; remote main read-back and tested-baseline ancestry verified September23.
-- Local feedback handoff: `CONSUMER-REPORT-DELIVERY.4`; director-owned communication follows publication.
+- Local feedback handoff: `CONSUMER-REPORT-DELIVERY.4`; attribution corrected by `.5`. The director owns communication.
 - RGX revision: `8763a0e6bea97879f027237439d57725f83ead23`.
 - Original observed environment: macOS26.6.2 arm64, Rust/Cargo1.95.0, system Make3.81.
 - September23 recurrence: macOS27.0 (26A428) arm64, Cargo1.95.0, system Make3.81; same pinned RGX interface.
 - Authority: RGX `docs/INTEGRATION.md`, downstream `make bootstrap` interface.
 
+## Reporter, affected component and integration contact
+
+ARCHOGEN reported LS-004 to LinkedSpec. Its original report identifies the PGEN
+bootstrap as the affected component. LinkedSpec has not independently diagnosed
+that implementation and has not established a defect in RGX's own code.
+
+The public RGX command correctly returns failure (exit2) and emits no final
+completion message. The empty offline package store deliberately induces an
+expected prerequisite failure; failure to resolve an unavailable package is not
+itself a newly discovered RGX defect. The reported concern is continued failed
+preparation followed by a misleading intermediate seed-success message.
+
+RGX is LinkedSpec's direct integration contact. Its published integration guide
+also says PGEN is read-only from RGX. Routing the observation through RGX does not
+assign code-level fault to RGX or ask it to patch PGEN. LinkedSpec retains report
+tracking and public verification; the affected upstream maintainer owns any
+implementation repair. The original caller-authorized source is
+`../archogen/docs/feedback/linkedspec/issues/LS-004-bootstrap-false-success/README.md`.
+
 ## Public reproduction
+
+The separate Cargo workspace build remedy is LinkedSpec commit
+`effe3e7b2544abf79f7786a7aa54e77b1893880e`
+(`BACKEND-INTEGRATION-GUIDES.8.2`). It is included in published history and fixes
+ARCHOGEN/LS-001 and SEMULITH/LS-003 item1. It does not fix LS-004's failure-handling
+and false-success report; no LS-004 implementation fix commit exists here.
 
 Use a fresh checkout of the stated RGX revision, initialized according to its
 published integration document. Existing prepared output can make bootstrap a
@@ -39,9 +64,10 @@ progress line `generated/ebnf.rs seeded.`. There is no final `Bootstrap complete
 message. A reader relying on the intermediate message can mistake partial progress
 for a completed step. LinkedSpec must check the overall command status.
 
-Requested upstream outcome: progress messages should accurately reflect failed
-preparation. RGX's maintainer owns diagnosis and remedy; this report makes no
-claim about internal implementation or a source-level fix.
+Requested upstream outcome: stop dependent preparation after a failed prerequisite
+and make progress messages accurate. RGX is the integration contact for this
+PGEN-attributed report; the affected upstream maintainer owns implementation
+changes. No RGX implementation defect or source-level root cause is established.
 
 ## Independent successful public use
 
@@ -90,8 +116,10 @@ message was sent by this session and no upstream repair has been verified.
 
 Please make progress output accurately describe failed preparation. The overall
 nonzero failure status is already correct and must remain so. A success-sounding
-intermediate line must not imply that a failed preparation step completed. RGX
-owns the diagnosis and implementation; this report prescribes no internal fix.
+intermediate line must not imply that a failed preparation step completed. The
+original report also requests stopping dependent work after a prerequisite fails.
+The affected upstream maintainer owns diagnosis and implementation; this report
+prescribes no internal fix and does not require RGX to modify its PGEN submodule.
 
 LinkedSpec will verify the published remedy through the supported public command:
 repeat the isolated offline failure, check its status and progress text, then

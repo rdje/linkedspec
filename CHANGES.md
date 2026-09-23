@@ -11,6 +11,12 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
 
+## 2026-09-23 — CONSUMER-REPORT-DELIVERY.5 - distinguish integration contact from defect attribution
+
+Correct the overly broad RGX-defect/repair-owner wording. ARCHOGEN's original LS-004 identifies PGEN bootstrap; LinkedSpec's public recurrence establishes a misleading intermediate message but correctly propagated failure (exit 2), not a defect in RGX's own code. The empty offline package store deliberately induces an expected resolution failure. RGX's published integration contract also treats PGEN as read-only from RGX.
+
+Keep LinkedSpec report tracking and the director-owned relay, using RGX as the direct integration contact and leaving implementation repair with the affected upstream maintainer. Preserve the original fail-fast and truthful-progress requests without internal diagnosis. Update the local report, tasks, Knowledge, roadmap/resume pointers and book; runtime, dependency sources/pins and published a8d34c845 remain unchanged. Focused memory/Knowledge/history/book/doctrine/diff checks govern this local commit; any later push requires exact-HEAD canonical proof.
+
 ## 2026-09-23 — CONSUMER-REPORT-DELIVERY.4 - record director-owned RGX handoff
 
 Record completed canonical publication at `a8d34c84595d46c24cd1820d5fc0414261706412`: live remote main and origin/main match, and the tested f60a70df3 baseline is an ancestor. Canonical CI passes both CLI 66/66 environments and Phase 0 1032/1032 in 1113 seconds, with 25 opt-in gates skipped. The push reused the exact promoted receipt; all nine commit doctrines and the post-commit memory boundary passed.
