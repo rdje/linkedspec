@@ -4100,7 +4100,6 @@ remain. Reading completion and runtime signoff remain distinct.
   Dependencies: prerequisite .3/.4/.5; coordinate slot identity, typed source and regex contract owners.
   Children: `.63.1`, `.63.2`, `.63.3`, `.63.4`
   Acceptance: Advancing the cursor must not redefine input-start, line/word boundary or preceding context.
-
 - ID: `SESSION-STARTUP-READING.63.1`
   Status: `pending`
   Goal: Repair Rust combined seek matching without discarding preceding input.
@@ -4111,7 +4110,6 @@ remain. Reading completion and runtime signoff remain distinct.
     discrepancies and plain agreement. helpers.rs seek_match slices input[pos..] before matching;
     Perl LinkedRE matches the original scalar at pos. Exact evidence belongs to the regex-context card.
   Commit: `pending`
-
 - ID: `SESSION-STARTUP-READING.63.2`
   Status: `pending`
   Goal: Reconcile consume and required-slot matching with the same context authority.
@@ -4122,7 +4120,6 @@ remain. Reading completion and runtime signoff remain distinct.
   Verification: `pending` — source shows the same input suffix slicing in consume_match and match_slot;
     the current six behavioral controls exercise ordinary choice seek only. Fresh route proof is required.
   Commit: `pending`
-
 - ID: `SESSION-STARTUP-READING.63.3`
   Status: `pending`
   Goal: Add exact nonzero-cursor assertion recurrence across supported regex carriers and backends.
@@ -4133,7 +4130,6 @@ remain. Reading completion and runtime signoff remain distinct.
   Verification: `pending` — current primary Rust/live Perl results and source inspection are bounded;
     no native/generated independent execution or other-backend signoff is inferred.
   Commit: `pending`
-
 - ID: `SESSION-STARTUP-READING.63.4`
   Status: `pending`
   Goal: Close regex-context public examples and canonical parity after recurrence.
@@ -4142,13 +4138,11 @@ remain. Reading completion and runtime signoff remain distinct.
     reconcile regex/current backend claims, render the book, and pass exact canonical closure.
   Verification: `pending`
   Commit: `pending`
-
 - ID: `SESSION-STARTUP-READING.64`
   Status: `pending`
   Goal: Reconcile Rust MCP caught-panic response and process-output guarantees.
   Dependencies: prerequisite .3/.4/.5; coordinate ADR 0055/0058 and native embedding owners.
   Children: `.64.1`, `.64.2`, `.64.3`, `.64.4`
-
 - ID: `SESSION-STARTUP-READING.64.1`
   Status: `pending`
   Goal: Establish library, host panic-hook and output ownership for caught native failures.
@@ -4160,7 +4154,6 @@ remain. Reading completion and runtime signoff remain distinct.
     .3.3.26 completes the wire source: its catch surrounds dispatch after decoding; Read/Write calls
     are outside it. Ordinary I/O errors and injected panics require distinct proof boundaries.
   Commit: `pending`
-
 - ID: `SESSION-STARTUP-READING.64.2`
   Status: `pending`
   Goal: Repair the owned caught-panic output boundary without changing host-global policy implicitly.
@@ -4170,7 +4163,6 @@ remain. Reading completion and runtime signoff remain distinct.
     Do not install or replace a process-global panic hook merely to make the current unit assertion pass.
   Verification: `pending`
   Commit: `pending`
-
 - ID: `SESSION-STARTUP-READING.64.3`
   Status: `pending`
   Goal: Add isolated-process recurrence that independently checks responses and both output streams.
@@ -4180,7 +4172,6 @@ remain. Reading completion and runtime signoff remain distinct.
     raw fixture text/source locations separately from fixed response values; retain abort exclusions.
   Verification: `pending`
   Commit: `pending`
-
 - ID: `SESSION-STARTUP-READING.64.4`
   Status: `pending`
   Goal: Close Rust MCP panic/logging claims with public examples and canonical proof.
@@ -4189,13 +4180,11 @@ remain. Reading completion and runtime signoff remain distinct.
     host/library boundaries accurately, render the book and pass exact canonical closure.
   Verification: `pending`
   Commit: `pending`
-
 - ID: `SESSION-STARTUP-READING.65`
   Status: `pending`
   Goal: Enforce the MCP payload-byte ceiling equally at EOF, LF and CRLF boundaries.
   Dependencies: prerequisite .3/.4/.5; preserve the current neutral request-limit authority.
   Children: `.65.1`, `.65.2`, `.65.3`
-
 - ID: `SESSION-STARTUP-READING.65.1`
   Status: `pending`
   Goal: Repair Rust final-EOF payload validation before decoding or dispatch.
@@ -4206,7 +4195,6 @@ remain. Reading completion and runtime signoff remain distinct.
     Rust returns discovery success, Perl -32700. All other eleven pairs agree. Rust EOF sends its
     retained maximum+1 buffer directly to a decoder without the Perl decoder's independent length check.
   Commit: `pending`
-
 - ID: `SESSION-STARTUP-READING.65.2`
   Status: `pending`
   Goal: Add exact delimiter/length recurrence and census other MCP runtime boundaries.
@@ -4217,7 +4205,6 @@ remain. Reading completion and runtime signoff remain distinct.
   Verification: `pending` — six existing Rust wire unit tests pass while the exact public EOF
     maximum+1 control differs; ordinary EOF and maximum CRLF controls alone do not prove their combination.
   Commit: `pending`
-
 - ID: `SESSION-STARTUP-READING.65.3`
   Status: `pending`
   Goal: Close MCP size-boundary public teaching and recurring canonical evidence.
@@ -4226,13 +4213,11 @@ remain. Reading completion and runtime signoff remain distinct.
     to match a defect; render the book and run required exact canonical closure.
   Verification: `pending`
   Commit: `pending`
-
 - ID: `SESSION-STARTUP-READING.66`
   Status: `pending`
   Goal: Preserve unique Rust semantic binding occurrences and their exact source references.
   Dependencies: prerequisite .3/.4/.5; coordinate .22 without silently adapting frozen expectations.
   Children: `.66.1`, `.66.2`, `.66.3`
-
 - ID: `SESSION-STARTUP-READING.66.1`
   Status: `pending`
   Goal: Repair repeated binding occurrence allocation and source-reference identity.
@@ -4244,7 +4229,6 @@ remain. Reading completion and runtime signoff remain distinct.
     0/1/1/1 versus 0/1/2/3 for four same-name writes. Rust source references for suffix 1 all show the
     final RHS. Counting keys in a latest-binding map saturates at one; repeated source-ref keys overwrite.
   Commit: `pending`
-
 - ID: `SESSION-STARTUP-READING.66.2`
   Status: `pending`
   Goal: Prove semantic query identity, source correlation and recurrence for repeated writes.
@@ -4256,7 +4240,6 @@ remain. Reading completion and runtime signoff remain distinct.
   Verification: `pending` — frozen semantic 6/20/128 and 9/0 rollout, 6/0 admission remain green
     despite the new native duplicate-ID cases. Paging/get/relations are not yet measured here.
   Commit: `pending`
-
 - ID: `SESSION-STARTUP-READING.66.3`
   Status: `pending`
   Goal: Close supported semantic carriers, MCP projection and public binding-identity teaching.
@@ -4265,13 +4248,11 @@ remain. Reading completion and runtime signoff remain distinct.
     with exact source and occurrence examples, render and complete required canonical closeout.
   Verification: `pending`
   Commit: `pending`
-
 - ID: `SESSION-STARTUP-READING.67`
   Status: `pending`
   Goal: Make semantic call evidence truthful and preserve calls/source through composite expressions.
   Dependencies: prerequisite .3/.4/.5; coordinate .22 and .66 without merging their distinct causes.
   Children: `.67.1`, `.67.2`, `.67.3`, `.67.4`
-
 - ID: `SESSION-STARTUP-READING.67.1`
   Status: `pending`
   Goal: Derive signature-acceptance evidence from actual compiled callable compatibility.
@@ -4284,7 +4265,6 @@ remain. Reading completion and runtime signoff remain distinct.
     unconditionally format acceptance from parameter names/count, independently of compatibility.
   Dart .1.30 control: zero/two arguments fail semantic construction at unresolved typed contracts and separately fail runtime arity checks; exact one argument succeeds. These controls do not reproduce the Perl/Rust false-acceptance response.
   Commit: `pending`
-
 - ID: `SESSION-STARTUP-READING.67.2`
   Status: `pending`
   Goal: Preserve nested call traversal and binding source evidence through supported expression containers.
@@ -4299,7 +4279,6 @@ remain. Reading completion and runtime signoff remain distinct.
   Julia .1.26 recurrence: public query retains trim inside [trim(" x ")] and separate runtime returns ["x"], but the binding source is null. Preserve binding RHS source independently of outer emitted calls. Exact92-assertion controls in docs/knowledge/julia-semantic-regex-call-source-gap.md do not reproduce wrong-arity acceptance or repeated-binding identity; distinct regex miscorrelation belongs to Julia .2.15.
   Commit: `pending`
   Lua .1.19 recurrence: Public raw queries retain trim inside [trim(" x ")] and runtime returns ["x"], but the binding source is null; literal RHS 1 also has null binding source. The direct trim binding retains its exact RHS. call_emit_statement derives source only from an emitted outer call, while container/literal traversal returns no outer call. Own Lua RHS source independently of child-call emission; wrong regex source stays Lua .2.17-owned.
-
 - ID: `SESSION-STARTUP-READING.67.3`
   Status: `pending`
   Goal: Lock independent call-evidence recurrence and census supported backends/carriers.
@@ -4311,7 +4290,6 @@ remain. Reading completion and runtime signoff remain distinct.
   Verification: `pending` — neutral 6/20/128, rollout9/0/admission6/0 pass despite the paired cases.
   Dart .1.30 census: nine public-query/typed-runtime controls add the container recurrence with seven valid/arity-rejection controls. Four same-name assignments retain suffixes 0,1,2,3 and distinct sources, so the Rust .66 identity failure is not reproduced on this Dart route. Other backends/carriers/MCP remain scoped acceptance work.
   Commit: `pending`
-
 - ID: `SESSION-STARTUP-READING.67.4`
   Status: `pending`
   Goal: Close public semantic call teaching and canonical evidence after the corrected projections.
@@ -4320,13 +4298,11 @@ remain. Reading completion and runtime signoff remain distinct.
     and pass required exact canonical proof; retain earlier fixture counts as dated scoped evidence.
   Verification: `pending`
   Commit: `pending`
-
 - ID: `SESSION-STARTUP-READING.68`
   Status: `pending`
   Goal: Reject forbidden authored recognition-token uses through the real Rust execution pipeline.
   Dependencies: .3/.4/.5; coordinate .23 and .45 without conflating their separate failure mechanisms.
   Children: `.68.1`, `.68.2`, `.68.3`
-
 - ID: `SESSION-STARTUP-READING.68.1`
   Status: `pending`
   Goal: Preserve token binding identity and enforce actual authored use restrictions.
@@ -4338,7 +4314,6 @@ remain. Reading completion and runtime signoff remain distinct.
     CLI returns null without stderr; Perl Get rejects recognition_token_escape. Legal return("ok") agrees.
     Rust stores an Undef scalar beside the private token; ordinary reads never invoke reject_escape.
   Commit: `pending`
-
 - ID: `SESSION-STARTUP-READING.68.2`
   Status: `pending`
   Goal: Prove token-use rejection through authored carriers, not only private authority calls.
@@ -4347,7 +4322,6 @@ remain. Reading completion and runtime signoff remain distinct.
     Preserve compile/runtime failure ownership and unchanged linearity, restoration and effect contracts.
   Verification: `pending` — existing Rust negative-token test directly calls the private rejection helper.
   Commit: `pending`
-
 - ID: `SESSION-STARTUP-READING.68.3`
   Status: `pending`
   Goal: Reconcile public token teaching, admission evidence and canonical proof after integration repair.
@@ -4355,7 +4329,6 @@ remain. Reading completion and runtime signoff remain distinct.
   Acceptance: Update book/Knowledge with accurate forbidden-use examples and run exact canonical proof.
   Verification: `pending`
   Commit: `pending`
-
 - ID: `SESSION-STARTUP-READING.69`
   Status: `pending`
   Goal: Preserve newline statement boundaries after Rust bare-variable expression lookahead.
@@ -4367,7 +4340,6 @@ remain. Reading completion and runtime signoff remain distinct.
     its semicolon twin has no warning. parse_var_or_call consumes whitespace before checking suffixes
     and does not restore it on the plain-variable path. No intended-body execution is inferred from null.
   Commit: `pending`
-
 - ID: `SESSION-STARTUP-READING.70`
   Status: `pending`
   Goal: Preserve complete grouped-edge parsing and exact semantic selector/source correlation.
@@ -4765,11 +4737,11 @@ remain. Reading completion and runtime signoff remain distinct.
   Commit: `SESSION-STARTUP-READING.85 - recover SEMULITH reports and repair ownership`
 - ID: `SESSION-STARTUP-READING.86`
   Status: `active`
-  Goal: Reconcile and repair Rust symbol-call statement boundaries without misclassifying regex literals.
-  Children: `SESSION-STARTUP-READING.86.1`, `SESSION-STARTUP-READING.86.2`, `SESSION-STARTUP-READING.86.3`
+  Goal: Reconcile and repair Rust symbol-call statement boundaries and the measured Perl scanner disagreements without misclassifying regex literals.
+  Children: `SESSION-STARTUP-READING.86.1`, `SESSION-STARTUP-READING.86.2`, `SESSION-STARTUP-READING.86.3`, `SESSION-STARTUP-READING.86.4`, `SESSION-STARTUP-READING.86.5`
   Dependencies: Clean .49 at 4f79298f9; ADR0123 targeted reading applies.
   Acceptance: Preserve following statements and exact callees, source and values through supported carriers. Keep Rust's accepted multiline/escaped/quoted regex literals. Investigate the public Perl EOF and regex controls without inferring they share the Rust cause. Canonical parent closeout follows both bounded repairs.
-  Verification: The pre-repair forty-case public comparison and CodeBlock ASTs are recorded in .linkedspec-data/scratch/symbol-boundary86/. All 12 Perl symbol callees accept LF; baseline Rust rejected 11 and silently turned subtraction into an empty-name call returning null. The original slash failure plus seven currently accepted Rust regex controls require separate disambiguation work. Non-slash .86.1 is verified; division .86.2 remains open.
+  Verification: The pre-repair forty-case public comparison and CodeBlock ASTs are recorded in .linkedspec-data/scratch/symbol-boundary86/. All 12 Perl symbol callees accept LF; baseline Rust rejected 11 and silently turned subtraction into an empty-name call returning null. The original slash failure plus seven currently accepted Rust regex controls require separate disambiguation work. Non-slash .86.1 and division .86.2 are verified; immediate Perl .86.4/.86.5 remain open before canonical .86.3.
   Commit: Parent remains open until .86.3.
 - ID: `SESSION-STARTUP-READING.86.1`
   Status: `done`
@@ -4788,24 +4760,52 @@ remain. Reading completion and runtime signoff remain distinct.
   - [x] **NO REGRESSION** — Focused core/runtime, malformed, negative-literal and unchanged slash/regex controls pass.
   - [x] **LOCKSTEP** — Integration book, Knowledge and live task/roadmap pointers match the verified scope.
 - ID: `SESSION-STARTUP-READING.86.2`
-  Status: `pending`
+  Status: `done`
   Goal: Repair division-call newline recognition while retaining accepted multiline regex interpretations.
   Dependencies: Complete .86.1; use the forty-case public/native/core diagnosis and canonical arithmetic ground truth.
-  Planned tier: focused unless reconciliation needs a language-contract decision.
-  Planned focused proof: Slash calls before identifiers/regex/string/other calls, LF/CRLF, nested/quoted/escaped arguments, multiline parenthesized regex, whole-spec source/carriers and exact subsequent values. Classify public Perl EOF/quoted/multiline controls using captured diagnostics and own any distinct repair before implementation.
-  Planned canonical boundary: Parent .86.3; any contract decision must precede implementation and use canonical proof.
+  Verification tier: `focused`
+  Focused checks: Slash calls before identifiers/regex/string/other calls, LF/CRLF, nested/quoted/escaped arguments, multiline parenthesized regex, whole-spec source/carriers and exact subsequent values. Classify public Perl EOF/quoted/multiline controls using captured diagnostics and own any distinct repair before implementation.
+  Canonical trigger: Parent .86.3; any contract decision must precede implementation and use canonical proof.
   Acceptance: Do not blindly classify newline after /(args) as division: current Rust accepts /(x) followed by LF and y/ as a regex. Preserve all seven measured regex controls and fix division followed by another statement. Retain original failures, use public tools first, split any independently established scanner repair, and stop for director input if the language contract is genuinely ambiguous.
   Verification: Original slash LF/CRLF/space/nested/before-regex forms reject Rust compilation; Perl explicit edges return 7. Rust accepts seven regex controls with exact patterns; some Perl quoted/multiline controls return null or no parser. Bare slash-call EOF rejects Perl Get while its semicolon/named twins work. Full raw evidence is retained; no cause or repair equivalence is inferred.
-  Commit: `pending`
+  Current proof: Core RED exits101 with five failures/one pass. Initial GREEN compile failed on a secondary parser initializer, corrected before rerun. PASS: 254 core tests and 404 selected runtime tests. Seven division core groups cover 24 call/separator combinations in both parser modes, exact retained regex patterns, late-statement retries, Unicode write spans, nested controls/callable candidates, and 1500-statement valid/invalid chains. Runtime coverage includes 12 division/separator combinations, nine mixed/nested cases, exact Unicode writes and the ambiguous regex through source-AST/compiled serde and generated plans. All 15 mutation tests pass, including independently compiled emitted division execution. Native 56 passes: 53 exact integer values and 3 malformed rejections; both book examples pass. Binary SHA-256: bbf40b8165ce72764668b7a02e16c84ddabfcf4b1097d690f5b99956ab38e05d. Book/public, Knowledge, memory/history and normal doctrines are required before landing. Perl discrepancies are separately owned by .86.4/.86.5.
+  Commit: This commit; subject `SESSION-STARTUP-READING.86.2 - preserve division newline and regex interpretations`.
+  - [x] **REPRODUCE / ISSUE** — Public CLI/Get retain five division newline failures after verified .86.1.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — symbol_call_paren_has_expression_boundary erases line breaks; slash fallback preserves multiline regex, so its discriminator needs independent reconciliation.
+  - [x] **FIX** — Repair division statement separation while retaining established regex forms and source fidelity.
+  - [x] **ADDRESSED (verified)** — Native, source/compiled serde and generated/emitted outcomes retain exact following statements.
+  - [x] **NO REGRESSION** — Quote/escape/nesting/multiline/negative and non-slash controls retain their contracts.
+  - [x] **LOCKSTEP** — Public examples, Knowledge and live task/roadmap pointers match verified behavior and any separately owned scanner finding.
 - ID: `SESSION-STARTUP-READING.86.3`
   Status: `pending`
   Goal: Close symbol-call repairs with synchronized public guidance and exact canonical acceptance.
-  Dependencies: Verified .86.1/.86.2 and any split prerequisite; no remaining required repair may be hidden by parent closure.
+  Dependencies: Verified .86.1/.86.2/.86.4/.86.5; no remaining required repair may be hidden by parent closure.
   Planned tier: canonical.
   Planned focused proof: Exact core/runtime/carrier/native and public examples, all backend scope qualifications, task/Knowledge/history/memory and normal doctrines.
   Planned canonical boundary: Parent closeout on the exact staged candidate; resume .50 after a clean commit.
   Acceptance: Reconcile every measured failure and compatibility control with its verified repair or explicit continuing owner; retain unresolved independent defects and historical evidence without a broad parity claim.
   Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.86.4`
+  Status: `pending`
+  Goal: Preserve multiline parenthesized regex literals through Perl validation and action lowering.
+  Dependencies: Land Rust .86.2 first; captured public diagnostics in .linkedspec-data/scratch/division-boundary86-2/perl-context.jsonl and reproducible sources in docs/knowledge/rust-symbol-call-newline-boundary.md; coordinate .54.1 without conflating regex-brace bootstrap loss.
+  Planned tier: focused unless a shared language-contract decision is needed.
+  Planned focused proof: Public Get with runtime_ctx_ref, exact lowering and generated source; multiline regex and numeric-division lookalikes, LF/CRLF, following assignments, whole-spec validation and invalid-pattern controls; phase0 plus directly affected scanner tests.
+  Planned canonical boundary: Parent .86.3 after .86.5; any contract decision precedes implementation.
+  Acceptance: Retain protected regex newlines and working division-newline statements. Fix the established valid literal failures at their actual owners, with exact source and runtime errors retained; do not infer unknown backend parity. Synchronize Perl integration/book examples and durable facts.
+  Verification: Public /(x) LF y/, numeric-pattern plus text, numeric-pattern plus next assignment, and CRLF controls fail validation or generated handler compilation; isolated lowering prematurely emits num_div then leaves the regex tail as code. Invalid quoted-pattern control is separately rejected through documented runtime_handler:rule_handler_compile and is not a repair target. Root-cause the splitter/validation disagreement with public descriptors before implementing.
+  Commit: `pending`
+- ID: `SESSION-STARTUP-READING.86.5`
+  Status: `pending`
+  Goal: Reconcile Perl slash-call termination at the end of an outer action block.
+  Dependencies: Land .86.2 and .86.4; retained slash_eof/slash_eof_space plus named and semicolon controls; preserve the explicit closing-brace exclusion in the existing regex discriminator.
+  Planned tier: focused unless reconciliation requires a language-contract decision.
+  Planned focused proof: Public Get/runtime context, isolated lowering, complete outer source and generated execution; bare/spaced slash EOF, semicolon/named twins, escaped and closing-brace regex controls, nested and malformed contexts; phase0 and direct scanner tests.
+  Planned canonical boundary: Parent .86.3; no broadened delimiter precedence without prior contract reconciliation.
+  Acceptance: Fix end-of-block division rejection without stealing regex syntax. Use the established final-statement separator contract, retain source/diagnostics and malformed rejection, and synchronize integration/book guidance. Resolve a genuine contract ambiguity with the director before code.
+  Verification: Both bare and trailing-space I { out = /(14,2) } controls fail public Get with compiler_pipeline:validate_dsl_syntax, Unclosed rule block. Isolated action lowering emits valid num_div; semicolon and named div controls return 7. MethodExpr slash lookahead excludes } by design; classify outer context independently rather than removing that regex safeguard.
   Commit: `pending`
 
 ## Current Frontier
@@ -4816,7 +4816,7 @@ audit range, not the default repair frontier.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.86.2` | `pending` | .86.1 is verified; reconcile division/regex and the retained Perl controls, then close the parent under .86.3 before .50. |
+| 1 | `SESSION-STARTUP-READING.86.4` | `pending` | Rust .86.2 is verified; repair captured Perl multiline regex, then EOF .86.5, canonical parent .86.3 and .50. |
 
 ## Reading Ledger
 

@@ -1,4 +1,4 @@
-//! Non-slash symbol statements preserve values and typed source across carriers.
+//! Symbol statements preserve values and typed source across carriers.
 
 use linkedspec_core::ast::{BodyElementKind, SpecFile};
 use linkedspec_core::compiler::compile;
@@ -128,4 +128,67 @@ fn negative_nested_and_unchanged_slash_regex_controls_execute() {
     ] {
         assert_carriers(action, json!(expected));
     }
+}
+
+#[test]
+fn division_newlines_execute_with_regex_strings_and_nested_controls() {
+    for call in ["/(14,2)", "/ \t(14,2)", "/(+(10,4),2)"] {
+        for separator in ["\n", "\r\n", "\r", " \t\n  "] {
+            assert_carriers(
+                &format!("out = {call}{separator}note = 1; return(out)"),
+                json!(7),
+            );
+        }
+    }
+    for action in [
+        "out = /(14,2)\nrx = /x/; return(out)",
+        "out = /(14,2)\nnote = \"/)\"; return(out)",
+        "out = /(14,2)\nrx = /; @/; return(out)",
+        "out = /(14,2)\nother = /(28,4)\nreturn(out)",
+        "rx = /(x)\ny/; out = /(14,2)\nreturn(out)",
+        "out = 0; if(true) { out = /(14,2)\nnote = 1 }; return(out)",
+        "out = 0; switch(1) { case(1) { out = /(14,2)\nnote = 1 } default { out = 2 } }; return(out)",
+        "out = 14; while(gt(out,7)) { out = /(out,2)\nnote = 1 }; return(out)",
+        "out = { n = /(14,2)\nreturn(n) }; return(out)",
+    ] {
+        assert_carriers(action, json!(7));
+    }
+}
+
+#[test]
+fn division_retains_subsequent_unicode_write_and_ambiguous_regex() {
+    let prefix = "title = \"é🦀\"; out = /(14,2)\r\n";
+    let write = "tree[\"clé\"] = out";
+    let compiled = assert_carriers(&format!("{prefix}{write}; return(tree[\"clé\"])"), json!(7));
+    let block = compiled.rules[0].acode_dispatch[0].code.as_ref().unwrap();
+    let Expr::AssignNestedAccess {
+        source,
+        source_span,
+        ..
+    } = &block.statements[2].expr
+    else {
+        panic!("expected following write");
+    };
+    assert_eq!(source, write);
+    assert_eq!(source_span.start, prefix.chars().count());
+    assert_eq!(
+        source_span.end,
+        prefix.chars().count() + write.chars().count()
+    );
+    let compiled = assert_carriers("rx = /(14,2)\nnext = /; return(7)", json!(7));
+    let Expr::AssignScalar { value, .. } = &compiled.rules[0].acode_dispatch[0]
+        .code
+        .as_ref()
+        .unwrap()
+        .statements[0]
+        .expr
+    else {
+        panic!("expected regex assignment");
+    };
+    assert_eq!(
+        value.as_ref(),
+        &Expr::RegexLiteral {
+            pattern: "(14,2)\nnext = ".into()
+        }
+    );
 }

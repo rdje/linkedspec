@@ -41,6 +41,7 @@
 //! ```
 
 use serde::{Deserialize, Serialize};
+use std::collections::HashSet;
 
 use crate::ast::CallableSignature;
 
@@ -1205,6 +1206,28 @@ struct Parser<'a> {
     pos: usize,
     character_base: usize,
     mode: BlockParseMode,
+    slash_newline_candidates: Vec<usize>,
+    forced_slash_call: Option<usize>,
+}
+
+/// A continuation depends only on its source position, not on earlier AST nodes.
+/// Keep retries on the heap so long sequences do not grow the native call stack.
+struct StatementParseFrame {
+    start: usize,
+    statement_count: usize,
+    candidates: Vec<usize>,
+    next_choice: usize,
+}
+
+impl StatementParseFrame {
+    fn new(start: usize, statement_count: usize) -> Self {
+        Self {
+            start,
+            statement_count,
+            candidates: Vec::new(),
+            next_choice: 0,
+        }
+    }
 }
 
 impl<'a> Parser<'a> {
@@ -1218,6 +1241,8 @@ impl<'a> Parser<'a> {
             pos: 0,
             character_base,
             mode,
+            slash_newline_candidates: Vec::new(),
+            forced_slash_call: None,
         }
     }
 
@@ -1277,46 +1302,96 @@ impl<'a> Parser<'a> {
 
     fn parse_block(&mut self) -> Result<CodeBlock, String> {
         let mut statements = Vec::new();
-        self.skip_whitespace();
-        while self.pos < self.src.len() {
-            // Skip semicolons between statements
-            if self.peek() == Some(';') {
-                self.advance(1);
-                self.skip_whitespace();
+        let mut frames = vec![StatementParseFrame::new(self.pos, 0)];
+        let mut failed_continuations = HashSet::new();
+        let mut original_error = None;
+
+        while let Some(frame) = frames.last_mut() {
+            statements.truncate(frame.statement_count);
+            if frame.next_choice > frame.candidates.len() {
+                failed_continuations.insert(frame.start);
+                frames.pop();
                 continue;
             }
-            // Skip bare 'my' keyword (compatibility: `my $var = ...`)
-            self.skip_whitespace();
-            if self.remaining().starts_with("my ") {
-                self.advance(3);
-                self.skip_whitespace();
+
+            // Always try the established regex interpretation first. A slash
+            // newline becomes division only if that complete continuation fails.
+            self.forced_slash_call = frame
+                .next_choice
+                .checked_sub(1)
+                .map(|index| frame.candidates[index]);
+            frame.next_choice += 1;
+            self.pos = frame.start;
+            self.slash_newline_candidates.clear();
+            let result = self.parse_statement_step();
+            for candidate in self.slash_newline_candidates.drain(..) {
+                if !frame.candidates.contains(&candidate) {
+                    frame.candidates.push(candidate);
+                }
             }
-            if let Some(mut attached_if_statements) = self.try_parse_attached_if_chain()? {
-                statements.append(&mut attached_if_statements);
-            } else if let Some(mut attached_switch_statements) =
-                self.try_parse_attached_switch_block()?
-            {
-                statements.append(&mut attached_switch_statements);
-            } else if let Some(attached_while_statement) = self.try_parse_attached_while_block()? {
-                statements.push(attached_while_statement);
-            } else {
-                let expr = self.parse_statement_expr()?;
-                statements.push(Stmt { expr });
-            }
-            let has_line_break = self.skip_statement_separator_whitespace();
-            if self.peek() == Some(';') {
-                self.advance(1);
-                self.skip_whitespace();
-                continue;
-            }
-            if self.pos < self.src.len() && !has_line_break {
-                return Err(format!(
-                    "expected ';' or newline between statements at byte {}",
-                    self.pos
-                ));
+            self.forced_slash_call = None;
+
+            match result {
+                Ok(mut parsed) => {
+                    statements.append(&mut parsed);
+                    if self.pos == self.src.len() {
+                        return Ok(CodeBlock { statements });
+                    }
+                    // Different regex/division choices can reach the same bad
+                    // suffix. Do not reparse it for every earlier combination.
+                    if !failed_continuations.contains(&self.pos) {
+                        debug_assert!(self.pos > frame.start);
+                        frames.push(StatementParseFrame::new(self.pos, statements.len()));
+                    }
+                }
+                Err(error) => {
+                    original_error.get_or_insert(error);
+                }
             }
         }
-        Ok(CodeBlock { statements })
+
+        // Report the established diagnostic when no interpretation succeeds.
+        Err(original_error.expect("an exhausted parse must have failed a statement"))
+    }
+
+    /// Parse one statement (attached controls may expand to several AST nodes),
+    /// preserving the established whitespace and separator rules on every retry.
+    fn parse_statement_step(&mut self) -> Result<Vec<Stmt>, String> {
+        self.skip_whitespace();
+        while self.peek() == Some(';') {
+            self.advance(1);
+            self.skip_whitespace();
+        }
+        if self.pos == self.src.len() {
+            return Ok(Vec::new());
+        }
+        // Skip bare 'my' keyword (compatibility: `my $var = ...`).
+        if self.remaining().starts_with("my ") {
+            self.advance(3);
+            self.skip_whitespace();
+        }
+        let statements = if let Some(attached) = self.try_parse_attached_if_chain()? {
+            attached
+        } else if let Some(attached) = self.try_parse_attached_switch_block()? {
+            attached
+        } else if let Some(attached) = self.try_parse_attached_while_block()? {
+            vec![attached]
+        } else {
+            vec![Stmt {
+                expr: self.parse_statement_expr()?,
+            }]
+        };
+        let has_line_break = self.skip_statement_separator_whitespace();
+        if self.peek() == Some(';') {
+            self.advance(1);
+            self.skip_whitespace();
+        } else if self.pos < self.src.len() && !has_line_break {
+            return Err(format!(
+                "expected ';' or newline between statements at byte {}",
+                self.pos
+            ));
+        }
+        Ok(statements)
     }
 
     fn parse_statement_expr(&mut self) -> Result<Expr, String> {
@@ -1712,6 +1787,8 @@ impl<'a> Parser<'a> {
             pos: start,
             character_base: self.character_base,
             mode: self.mode,
+            slash_newline_candidates: Vec::new(),
+            forced_slash_call: None,
         })
         .scan_brace_payload_bounds() else {
             return Expr::BlockValue { block };
@@ -2707,11 +2784,11 @@ impl<'a> Parser<'a> {
         )
     }
 
-    fn is_symbol_call_at_current(&self) -> bool {
+    fn is_symbol_call_at_current(&mut self) -> bool {
         self.symbol_call_token_at_current().is_some()
     }
 
-    fn symbol_call_token_at_current(&self) -> Option<&'static str> {
+    fn symbol_call_token_at_current(&mut self) -> Option<&'static str> {
         let token = [
             "==", "!=", ">=", "<=", "=", "+", "-", "*", "/", "%", ">", "<",
         ]
@@ -2725,15 +2802,31 @@ impl<'a> Parser<'a> {
         if self.src.as_bytes().get(cursor) != Some(&b'(') {
             return None;
         }
-        self.symbol_call_paren_has_expression_boundary(cursor, token != "/")
-            .then_some(token)
+        let (after, has_line_break) = self.symbol_call_paren_boundary(cursor)?;
+        let next = self.src.as_bytes().get(after);
+        if next.is_none() || matches!(next, Some(b',' | b';' | b'.' | b')' | b']')) {
+            return Some(token);
+        }
+        if has_line_break {
+            if token != "/" {
+                return Some(token);
+            }
+            // Keep the established closing-brace exclusion for regex patterns.
+            // A newline-only slash boundary is speculative until the remainder
+            // of this block has parsed successfully.
+            if next != Some(&b'}') {
+                if !self.slash_newline_candidates.contains(&self.pos) {
+                    self.slash_newline_candidates.push(self.pos);
+                }
+                return (self.forced_slash_call == Some(self.pos)).then_some(token);
+            }
+        }
+        None
     }
 
-    fn symbol_call_paren_has_expression_boundary(
-        &self,
-        open_idx: usize,
-        allow_newline_boundary: bool,
-    ) -> bool {
+    /// Position after balanced arguments and following whitespace, plus whether
+    /// that whitespace contains an authored statement newline.
+    fn symbol_call_paren_boundary(&self, open_idx: usize) -> Option<(usize, bool)> {
         let bytes = self.src.as_bytes();
         let mut depth = 0usize;
         let mut in_single_quote = false;
@@ -2779,16 +2872,12 @@ impl<'a> Parser<'a> {
                     depth = depth.saturating_sub(1);
                     if depth == 0 {
                         let mut after = pos + 1;
+                        let mut has_line_break = false;
                         while after < bytes.len() && bytes[after].is_ascii_whitespace() {
-                            // Keep slash's existing regex/call distinction: a
-                            // parenthesized regex pattern can span a newline.
-                            if allow_newline_boundary && matches!(bytes[after], b'\n' | b'\r') {
-                                return true;
-                            }
+                            has_line_break |= matches!(bytes[after], b'\n' | b'\r');
                             after += 1;
                         }
-                        return after >= bytes.len()
-                            || matches!(bytes[after], b',' | b';' | b'.' | b')' | b']');
+                        return Some((after, has_line_break));
                     }
                 }
                 _ => {}
@@ -2796,7 +2885,7 @@ impl<'a> Parser<'a> {
             pos += 1;
         }
 
-        false
+        None
     }
 
     fn parse_symbol_call(&mut self) -> Result<Expr, String> {

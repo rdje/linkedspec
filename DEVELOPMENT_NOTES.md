@@ -11,6 +11,14 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
 
+## 2026-09-23 — SESSION-STARTUP-READING.86.2 - preserve division newline and regex interpretations
+
+The old slash lookahead discarded LF/CR after balanced parentheses, then parsed division as a regex. Accepting every such newline would steal existing multiline regex patterns. Preserve the default parse first. parse_statement_step retains the previous attached-control and separator behavior; parse_block keeps source-position retry frames and failed-continuation memoization. Each trial can force one newline-only slash call; nested bodies use their own parser and character base. Regex/division alternatives can finish a misleading first statement and fail later, so retry spans the continuation rather than only the immediate expression. Sequential statements use a heap stack, not recursive continuation calls. Exhausted alternatives retain the first diagnostic.
+
+PASS: 254 core tests and 404 selected runtime tests. Seven division core groups cover 24 call/separator combinations in both parser modes, exact retained regex patterns, late-statement retries, Unicode write spans, nested controls/callable candidates, and 1500-statement valid/invalid chains. Runtime coverage includes 12 division/separator combinations, nine mixed/nested cases, exact Unicode writes and the ambiguous regex through source-AST/compiled serde and generated plans. All 15 mutation tests pass, including independently compiled emitted division execution. Native 56 passes: 53 exact integer values and 3 malformed rejections; both book examples pass. Binary SHA-256: bbf40b8165ce72764668b7a02e16c84ddabfcf4b1097d690f5b99956ab38e05d.
+
+Exact RED, initial initializer failure, corrected GREEN, named/public Perl controls and native replay are retained under .linkedspec-data/scratch/division-boundary86-2/. The quoted regex control is invalid and reports runtime_handler:rule_handler_compile through documented last_error. Multiline and bare outer EOF discrepancies have immediate owners .86.4/.86.5. No dependency implementation/build internals were consulted. Focused component proof does not substitute for parent .86.3 canonical acceptance.
+
 ## 2026-09-23 — SESSION-STARTUP-READING.86.1 - preserve non-slash symbol call boundaries
 
 symbol_call_paren_has_expression_boundary skipped all ASCII whitespace after the matched closing parenthesis, erasing LF/CRLF as possible boundaries. The shared guard rejected eleven non-slash forms differently: ten become compile errors, while subtraction falls through parse_expr's bare-minus arm, advances past '-', and parse_var_or_call builds Call{name:""} from the remaining parentheses. Native subtraction therefore returned null. Public CodeBlock/Get/CLI evidence established the mechanism before implementation.

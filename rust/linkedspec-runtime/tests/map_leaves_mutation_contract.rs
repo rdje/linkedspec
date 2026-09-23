@@ -868,6 +868,25 @@ fn subtraction_newline_retains_values_in_independently_emitted_source() {
 }
 
 #[test]
+fn division_newline_retains_values_in_independently_emitted_source() {
+    let prefix = "note = \"é🦀\"; out = /(14,2)\r\n tree = { \"clé\" : out }; ";
+    let mutation = "tree.map_leaves!() { add(value, 1) }";
+    let action = format!("{prefix}{mutation}; return(copy(tree))");
+    let compiled = compile_source(&spec_for_action(&action));
+    let block = compiled.rules[0].acode_dispatch[0].code.as_ref().unwrap();
+    assert_eq!(block.statements.len(), 5);
+    let Expr::ReceiverMutationChain { source, source_span, .. } = &block.statements[3].expr else {
+        panic!("expected the mutation after division");
+    };
+    assert_eq!(source, mutation);
+    assert_eq!(source_span.start, prefix.chars().count());
+    assert_eq!(source_span.end, prefix.chars().count() + mutation.chars().count());
+    let expected = json!({"clé": 8});
+    assert_eq!(execute_action(&action).unwrap(), expected);
+    assert_independently_compiled_emitted_source(&compiled, &expected);
+}
+
+#[test]
 fn empty_arguments_do_not_admit_corrupted_argument_projections() {
     let original = compile_source(&spec_for_action("tree.map_leaves!( ) { return(value) }"));
     // Equal scalar lengths isolate argument validation from unrelated span mismatches.

@@ -2,17 +2,19 @@
 
 ## Current Activity
 
-Complete-document integration and startup .46/.47/.49/.86.1 repairs are locally committed. The symbol-call parent remains open: non-slash callees are repaired; division/regex reconciliation is next under .86.2. No downstream application acceptance or new push is claimed.
+Document integration and startup .46/.47/.49/.86.1/.86.2 repairs are locally committed. Rust division and non-slash newline calls are verified; captured Perl multiline regex and EOF defects remain under immediate .86.4/.86.5 before canonical parent .86.3. No new push or downstream application acceptance is claimed.
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.86.1 - preserve non-slash symbol call boundaries` — PASS: 247 core tests and 401 selected runtime tests; the new core target covers 110 symbol/separator/parser combinations, 22 following-write source/span cases and retained compatibility. Three new runtime groups cover 33 symbol assignments, a Unicode-source write and five compatibility cases through source-AST/compiled serde and generated plans. All 14 mutation tests pass, including independent emitted execution after subtraction. Native 44 passes: 39 exact numeric values and five unchanged division rejections owned by .86.2. The exact book example returns 7. Binary SHA-256: 80227ab43b9ef73f56c7884d28151f83f2c6562d0c98bdab35a45bd2255129e5.
+- `SESSION-STARTUP-READING.86.2 - preserve division newline and regex interpretations` — PASS: 254 core tests and 404 selected runtime tests. Seven division core groups cover 24 call/separator combinations in both parser modes, exact retained regex patterns, late-statement retries, Unicode write spans, nested controls/callable candidates, and 1500-statement valid/invalid chains. Runtime coverage includes 12 division/separator combinations, nine mixed/nested cases, exact Unicode writes and the ambiguous regex through source-AST/compiled serde and generated plans. All 15 mutation tests pass, including independently compiled emitted division execution. Native 56 passes: 53 exact integer values and 3 malformed rejections; both book examples pass. Binary SHA-256: bbf40b8165ce72764668b7a02e16c84ddabfcf4b1097d690f5b99956ab38e05d.
 
 ## Next Action
 
-- Activate .86.2 from clean HEAD; preserve accepted multiline regex forms while repairing division newline recognition and classifying the retained Perl controls. Parent canonical .86.3 follows, then .50.
+- Stop at the director-requested clean checkpoint. On resume, activate .86.4 for Perl multiline regex, then bare slash EOF .86.5 and canonical parent .86.3 before .50.
 
 ## Recent Completions
+
+- `2026-09-23` — `SESSION-STARTUP-READING.86.2` repairs division newlines and retains regex interpretations; core254/runtime404/native56 pass; Perl .86.4/.86.5 follow.
 
 - `2026-09-23` — `SESSION-STARTUP-READING.86.1` preserves eleven non-slash symbol callees and fixes subtraction returning null; core247/runtime401/native44 pass; .86.2 follows.
 
@@ -43,8 +45,6 @@ Complete-document integration and startup .46/.47/.49/.86.1 repairs are locally 
 - `2026-09-22` — `SESSION-STARTUP-READING.83.2.1` fixes quoted LF in both readers; six-runtime recurrence and eight original report cases pass.
 
 - `2026-09-22` — `SESSION-STARTUP-READING.85` recovers SEMULITH/LS-001–003; four fresh native LF failures select .83.2.1.
-
-- `2026-09-22` — `SESSION-STARTUP-READING.84` adopts targeted startup under ADR0123; .85 awaits the three report IDs/titles before repair selection.
 
 ## History
 

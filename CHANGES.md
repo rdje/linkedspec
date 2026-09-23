@@ -11,6 +11,14 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
 
+## 2026-09-23 — SESSION-STARTUP-READING.86.2 - preserve division newline and regex interpretations
+
+Accept newline-separated Rust slash division while retaining existing successful regex parses. The parser first tries the established interpretation, then retries an ambiguous slash as division only when that block continuation fails. Statement retries use an explicit stack and memoized failed suffixes. EOF/punctuation rules and the closing-brace exclusion remain intact.
+
+PASS: 254 core tests and 404 selected runtime tests. Seven division core groups cover 24 call/separator combinations in both parser modes, exact retained regex patterns, late-statement retries, Unicode write spans, nested controls/callable candidates, and 1500-statement valid/invalid chains. Runtime coverage includes 12 division/separator combinations, nine mixed/nested cases, exact Unicode writes and the ambiguous regex through source-AST/compiled serde and generated plans. All 15 mutation tests pass, including independently compiled emitted division execution. Native 56 passes: 53 exact integer values and 3 malformed rejections; both book examples pass. Binary SHA-256: bbf40b8165ce72764668b7a02e16c84ddabfcf4b1097d690f5b99956ab38e05d.
+
+Core RED reproduced five failures with one compatibility group passing. The first GREEN build exposed a missed secondary parser initializer; it was corrected before the successful rerun. Captured Perl runtime contexts separate documented handler errors from outer validation failures. Immediate .86.4 owns multiline regex validation/lowering and .86.5 owns bare slash EOF before parent canonical .86.3. The invalid quoted regex is a negative control, not a repair target. Rust integration guidance explains newline division, regex precedence and regeneration; no unmeasured backend parity or downstream acceptance is claimed.
+
 ## 2026-09-23 — SESSION-STARTUP-READING.86.1 - preserve non-slash symbol call boundaries
 
 Recognize LF/CRLF/CR after balanced non-slash symbol calls as statement boundaries. Preserve the authored callees for +, -, *, %, = and all six numeric comparisons. This fixes ten measured compile rejects and subtraction's wrong null result: failed lookahead previously consumed '-' and constructed an empty-name call. Slash keeps its existing discriminator until .86.2 reconciles it with accepted multiline regex literals.

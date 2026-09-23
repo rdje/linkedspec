@@ -309,10 +309,27 @@ statements; horizontal whitespace alone does not.
 Rebuild previously generated parsers from the original `.spec` files to pick up
 the corrected call parsing.
 
-Arithmetic slash calls currently need a semicolon before a following statement:
-`out = /(14, 2); note = 1`. The word form `div(14, 2)` also works before a newline.
-A slash call followed directly by a newline and another identifier is a known
-Rust parsing limitation; it is separate from regex-literal statement separation.
+Arithmetic slash calls also accept newline-separated statements. This example
+returns `7` with input `x`, including when the second assignment is a regex:
+
+```text
+Top::
+ -> Done { out = /(14, 2)
+           rx = /x/;
+           return(out) }
+Done:
+ /x/
+```
+
+Slash syntax can also introduce a regex. If the complete action block is valid
+with the regex interpretation, that interpretation takes precedence:
+`rx = /(x)` followed by a newline and `y/; return(7)` retains
+the newline inside the pattern. Even `rx = /(14,2)` followed by a newline and
+`next = /; return(7)` is one regex assignment, with pattern `(14,2)` plus the
+newline and `next = `. Use `div(14, 2)` or an explicit semicolon after
+`/(14, 2);` to make division unambiguous. Regenerate existing Rust parsers to
+pick up the newline repair; serialized or emitted parsers keep their compiled
+interpretation until rebuilt.
 
 One engine processes every command-line input independently. The direct-value
 method returns `serde_json::Value`; printing it writes JSON. This avoids the

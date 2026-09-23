@@ -9,10 +9,10 @@ answers:
   - why does Rust subtraction before a newline return null
   - why does a Rust subtraction call have an empty callee name
 date: 2026-09-23
-status: .86.1 repaired with focused proof; .86.2 owns division/regex reconciliation
+status: Rust .86.1/.86.2 repaired with focused proof; Perl .86.4/.86.5 remain open
 tags: [rust, parser, arithmetic, regex, newline]
-evidence: "Untouched .49 core RED reports unterminated regex literal for a slash call before another statement. Six native controls show EOF/semicolon and named div plus newline return 7; slash LF, CRLF and spaced slash plus newline reject compilation. Exact sources/traces: .linkedspec-data/scratch/regex-boundary49/slash-before.jsonl. Division's newline handling remains unrepaired under .86.2."
-reverify: "Run the public CLI probes below through tools/project_data_run.sh. Non-slash proof: bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-core -p linkedspec-runtime --test symbol_statement_boundaries; Emitted proof: bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test map_leaves_mutation_contract. Division/regex remains .86.2-owned."
+evidence: "Untouched .49 core RED reports unterminated regex literal for a slash call before another statement. Six native controls show EOF/semicolon and named div plus newline return 7; slash LF, CRLF and spaced slash plus newline reject compilation. Exact sources/traces: .linkedspec-data/scratch/regex-boundary49/slash-before.jsonl. Division was still unrepaired at that .49 boundary; .86.2 proof below supersedes that status."
+reverify: "Run the public CLI probes below through tools/project_data_run.sh. Non-slash proof: bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-core -p linkedspec-runtime --test symbol_statement_boundaries; Emitted proof: bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test map_leaves_mutation_contract. Division proof: bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-core --test division_statement_boundaries."
 ---
 
 The first `.49` core regression has five failures: four expose regex suffix
@@ -23,7 +23,7 @@ failure remains in `core-red.log`, with its unchanged required result here:
 
 ```rust
 CodeBlock::parse("out = /(14, 2)\nreturn(out)")
-// Required: two statements. Current: Err("unterminated regex literal").
+// Required: two statements. Before .86.2: Err("unterminated regex literal").
 ```
 
 `rust/linkedspec-core/src/expr.rs::symbol_call_paren_has_expression_boundary`
@@ -37,7 +37,7 @@ with parenthesized content. See [[spec-arithmetic-call-surface-ground-truth]].
 Repair must retain escaped, quoted and multiline regex controls rather than
 blindly classifying every slash plus parenthesis as division.
 
-These current Rust public controls all use input `x`:
+These pre-repair Rust public controls all use input `x`:
 
 ```bash
 bash tools/project_data_run.sh rust/target/debug/linkedspec-rust --inline-spec $'Top::\n I { out = /(14, 2)\nnote = 1 }\n /x/ E { return(out) }\n' --input x --trace low
@@ -45,7 +45,7 @@ bash tools/project_data_run.sh rust/target/debug/linkedspec-rust --inline-spec $
 bash tools/project_data_run.sh rust/target/debug/linkedspec-rust --inline-spec $'Top::\n I { out = div(14, 2)\nnote = 1 }\n /x/ E { return(out) }\n' --input x --trace low
 ```
 
-The first rejects at compilation; the latter two return 7. CRLF and horizontal
+Before .86.2 the first rejects at compilation; the latter two return 7. CRLF and horizontal
 space before the slash-call parentheses retain the failure. The EOF arithmetic
 control returns 7 on Rust, but the equivalent Perl outer block reports unclosed
 rule syntax. That separate Perl scanner boundary remains under investigation in
@@ -130,3 +130,66 @@ unchanged diagnostic evidence. The new 44-case replay repairs only non-slash
 behavior, keeps all seven previously accepted Rust regex forms, and retains all
 five measured division failures for immediate .86.2. The Perl quoted/multiline
 and bare-EOF observations are not declared repaired.
+
+## .86.2 diagnostic classification and repair constraints
+
+The twelve captured public Perl probes in
+`.linkedspec-data/scratch/division-boundary86-2/perl-context.jsonl` include
+`runtime_ctx_ref` and each `last_error`. The invalid quoted regex reports
+`runtime_handler:rule_handler_compile` with `Unmatched ) in regex`; the numeric
+multiline pattern reports the same owner with a generated-handler syntax error.
+These are documented structured failure channels, not silent success. Other
+multiline patterns and bare slash-call EOF fail outer validation. Lowering the
+isolated EOF action succeeds, separating that scanner failure from the numeric
+helper. The retained multiline and EOF discrepancies are owned by immediate
+`.86.4` and `.86.5` before parent `.86.3` closes; the invalid regex is a negative control.
+
+The Rust repair must prefer every currently successful complete-block parse.
+On failure, ambiguous slash calls with a newline after balanced parentheses may
+be retried as division. Retry needs statement-level backtracking: a misleading
+regex can finish one statement before a later statement fails. Use an explicit
+work stack and memoize failed continuation positions, rather than recursing for
+each sequential statement or enumerating every combination of earlier choices.
+Nested blocks retain their own parser and source base. Preserve the existing
+exclusion of `}` from slash call boundaries. Regression proof must cover mixed
+regex/division, quoted slashes, late failures, long statement chains, both parser
+modes, exact Unicode source/spans and generated/emitted carriers.
+
+The Perl follow-ups are reproducible without the ignored diagnostic logs. Use
+input `x` and this explicit-edge source, replacing `ACTION` with each action
+below; `\n` and `\r\n` in the table mean literal line breaks:
+
+```text
+Top::
+ -> Done { ACTION }
+Done:
+ /x/
+```
+
+| Action | Observed Perl result before .86.4 |
+| --- | --- |
+| `out = /(14,2)\nnote = 1; return(out)` | 7, no last_error |
+| `rx = /(x)/; return(7)` | 7, no last_error |
+| `rx = /(\))/; return(7)` | 7, no last_error |
+| `rx = /(")")/; return(7)` | null, rule_handler_compile: unmatched `)` |
+| `rx = /(x)\ny/; return(7)` | no parser, validate_dsl_syntax: rule inside open block |
+| `rx = /(14,2)\ntext/; return(7)` | null, rule_handler_compile: syntax error at EOF |
+| `rx = /(14,2)\nnext = /; return(7)` | no parser, validate_dsl_syntax: rule inside open block |
+| `rx = /(x)\r\ny/; return(7)` | no parser, validate_dsl_syntax: rule inside open block |
+
+For .86.5 use `Top::\n I { ACTION }\n /x/ E { return(out) }\n`.
+Actions `out = /(14,2)` and its trailing-space twin fail validation with
+`Unclosed rule block before end of file`; `out = /(14,2);` and
+`out = div(14,2)` return 7. Call `LinkedSpec::Get(\$source,
+runtime_ctx_ref => \%ctx)`, invoke a returned coderef with `\$input`, and inspect
+`$ctx{last_error}` as well as `$@`. Independently call
+`LinkedSpec::call_spec_handler_subst('Top', $action)` to reproduce the premature
+multiline division lowering and the successful isolated EOF lowering.
+
+## Verified division repair under .86.2
+
+The old slash lookahead discarded LF/CR after balanced parentheses, then parsed division as a regex. Accepting every such newline would steal existing multiline regex patterns. Preserve the default parse first. parse_statement_step retains the previous attached-control and separator behavior; parse_block keeps source-position retry frames and failed-continuation memoization. Each trial can force one newline-only slash call; nested bodies use their own parser and character base. Regex/division alternatives can finish a misleading first statement and fail later, so retry spans the continuation rather than only the immediate expression. Sequential statements use a heap stack, not recursive continuation calls. Exhausted alternatives retain the first diagnostic.
+
+PASS: 254 core tests and 404 selected runtime tests. Seven division core groups cover 24 call/separator combinations in both parser modes, exact retained regex patterns, late-statement retries, Unicode write spans, nested controls/callable candidates, and 1500-statement valid/invalid chains. Runtime coverage includes 12 division/separator combinations, nine mixed/nested cases, exact Unicode writes and the ambiguous regex through source-AST/compiled serde and generated plans. All 15 mutation tests pass, including independently compiled emitted division execution. Native 56 passes: 53 exact integer values and 3 malformed rejections; both book examples pass. Binary SHA-256: bbf40b8165ce72764668b7a02e16c84ddabfcf4b1097d690f5b99956ab38e05d.
+
+Exact RED, initial initializer failure, corrected GREEN, named/public Perl controls and native replay are retained under .linkedspec-data/scratch/division-boundary86-2/. The quoted regex control is invalid and reports runtime_handler:rule_handler_compile through documented last_error. Multiline and bare outer EOF discrepancies have immediate owners .86.4/.86.5. No dependency implementation/build internals were consulted. Focused component proof does not substitute for parent .86.3 canonical acceptance.
