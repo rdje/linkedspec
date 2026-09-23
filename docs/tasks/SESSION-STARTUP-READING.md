@@ -3503,7 +3503,6 @@ remain. Reading completion and runtime signoff remain distinct.
   Acceptance: Identify actual public native, serialized/reconstructed and generated/emitted entry routes and prove the rejection reaches each supported boundary before an artifact or accepted result is produced. Retain valid round trips and independently verify diagnostics; do not infer execution from emitted text or claim unrelated parser-panic repair .46.
   Verification: Four focused route tests PASS: eight malformed sources yield 32 ordinary/traced source/reconstructed-AST rejections, 16 path/name-loader rejections and eight failed semantic snapshots with no compiled authority or plan. Valid path/name loads, reconstructed compiled state and generated-plan execution return 42; a freshly compiled emitted module verifies direct/traced 42 and compatibility [42]. Production code is unchanged from 10893fb71; its complete Rust compatibility proof remains applicable. Rust formatting, book, Knowledge/memory/history/public/diff checks and normal doctrines govern landing.
   Commit: `SESSION-STARTUP-READING.45.2 - verify Rust rule-code rejection routes`
-
   Artifact boundary: Emitters consume CompiledSpec, not raw source. Rebuild older warning/drop artifacts from the original specification; no schema change or recovery of discarded code is claimed. Exact scope and rerun command: docs/knowledge/rust-rule-code-rejection-routes.md.
 - ID: `SESSION-STARTUP-READING.45.3`
   Status: `done`
@@ -3532,20 +3531,47 @@ remain. Reading completion and runtime signoff remain distinct.
   - [x] **ADDRESSED (verified)** — Both CodeBlock modes pass all UTF-8 alignments; the native panic becomes ordinary compilation rejection through source/AST/traced/loader/semantic/CLI routes, before input loading or execution.
   - [x] **NO REGRESSION** — All selected 210 core and 5 runtime tests pass, including valid generated execution; all five native controls pass. Valid text, scalar spans and legacy byte-position text remain exact; no dependency changes.
   - [x] **LOCKSTEP** — Rust integration/book guidance, Knowledge, roadmap and live recovery pointers record the bounded fix and the historical timeout limitation. Book/formatting pass; focused governance governs landing.
-
 - ID: `SESSION-STARTUP-READING.47`
-  Status: `pending`
+  Status: `active`
+  Goal: Align empty mutation arguments and preserve authored source through the Rust parser/compiler pipeline.
+  Children: `SESSION-STARTUP-READING.47.1`, `SESSION-STARTUP-READING.47.2`, `SESSION-STARTUP-READING.47.3`
+  Decision: Split inside this active tree after exact CRLF source-retention failure; commit each bounded repair before starting the next. No dirty tree pivot or normalized expectation.
+- ID: `SESSION-STARTUP-READING.47.1`
+  Status: `done`
   Goal: Align Rust parser and compiled validation for whitespace-only mutation argument lists.
-  Dependencies: `.3`/`.4`/`.5`.
-  Acceptance: Accept the same semantically empty parentheses through parser and compiler validation while
-    preserving exact authored source and character spans. Keep nonempty arguments rejected. Add
-    independent empty/space/tab/multiline and invalid controls across native and supported
-    serialized/reconstructed/generated carriers; reconcile the canonical contract and public examples
-    without silently normalizing away source evidence.
-  Verification: `pending` — The isolated core program parses empty, space-only, and tab-only map_leaves!
-    argument lists. Compilation accepts only (). Space/tab produce
-    receiver_mutation_serialized_state_invalid with reason mutation_call_invalid. The parser uses
-    trim().is_empty(), while compiler source-projection validation requires the exact string ().
+  Dependencies: Clean f7e940254 UTF-8 diagnostic repair; .45 compiler rejection. ADR0123 supersedes the old blanket .3/.4/.5 reading gate.
+  Verification tier: `focused`
+  Focused checks: Public CLI/Core RED/GREEN; exact source/scalar-span retention and nonempty/forged-argument rejection; native/serde/generated-plan/emitted Rust mutation routes; unchanged neutral mutation checker; direct core/runtime regressions, book, Knowledge, memory, histories, doctrines and diff.
+  Canonical trigger: Parent .47.3 runs canonical closeout after .47.1/.47.2; this focused leaf preserves frozen authority and format.
+  Acceptance: Accept semantically empty parentheses with exact supplied ActionIR/source-AST text and scalar spans; outer whole-spec capture belongs to .47.2; retain nonempty-argument rejection and corrupted-carrier validation through native and supported reconstructed/generated routes. Reconcile public teaching without normalization or a contract rewrite.
+  Verification: PASS: 201 core library tests, 4 diagnostic groups, 5 rule-code rejection groups, 179 runtime library tests and 12 mutation contract tests. Seven whitespace spellings retain exact supplied action source/scalar spans; seven nonempty syntax cases and eight forged projections reject. Native, serde, generated-plan and independently compiled emitted execution agree. Six rebuilt-native controls pass; neutral 4/14/5 syntax and 167+592 mutations pass with byte-identical authority. Book, formatting and public no-drift checks pass; normal governance hooks govern landing. Initial corrected RED rejects the frozen whitespace case with mutation_call_invalid. First post-fix whole-spec run had 179 library/11 mutation passes and one CRLF-retention failure; .47.2 retains that evidence and its unweakened expectation. .47.1 isolates compiler fidelity via public caller-supplied SpecFile action code. Logs: .linkedspec-data/scratch/mutation-arguments47/.
+  Commit: `SESSION-STARTUP-READING.47.1 - accept empty mutation argument whitespace`
+  - [x] **REPRODUCE / ISSUE** — Native LinkedSpec CLI --trace low succeeds only for (); three semantically empty spellings wrongly stop at compile:error/exit1. Two nonempty controls correctly reject; all six finish in1.20–1.21seconds.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — Public compile rejects the unchanged neutral insignificant_whitespace case as receiver_mutation_serialized_state_invalid, reason mutation_call_invalid. compiler.rs::validate_receiver_mutation_block compares the projected args span to literal ().
+  - [x] **FIX** — Require opening/closing parentheses and a trim-empty interior through is_empty_argument_list; validate the original span projection without modifying source or coordinates.
+  - [x] **ADDRESSED (verified)** — Native, reconstructed and generated carriers agree on values and source/spans for the whitespace matrix; negative mutation controls reject.
+  - [x] **NO REGRESSION** — Neutral authority remains byte-identical; focused Rust mutation and direct-dependent tests pass, with prior known .58/.59 exceptions remaining separately owned.
+  - [x] **LOCKSTEP** — Rust integration/book, Knowledge and live roadmap/task pointers accurately describe the verified repair and next frontier.
+
+- ID: `SESSION-STARTUP-READING.47.2`
+  Status: `pending`
+  Goal: Preserve accepted multiline Rust action source and coordinates during outer block collection.
+  Dependencies: Clean .47.1 validator repair.
+  Planned tier: `focused`
+  Planned focused proof: Public parse_spec/source-AST LF/CRLF, blank lines, indentation and Unicode; lifecycle/edge/header collection and remainders; Rust component, mutation and source-carrier proof; book, Knowledge, memory, histories, doctrines and diff.
+  Planned canonical boundary: Parent .47.3 closeout; escalate this leaf if repair uncovers broader contract uncertainty.
+  Acceptance: Restore exact accepted block interiors and scalar positions without changing established outer trim or widening multiline-quote/regex-brace syntax; reinstate whole-spec source-fidelity assertions and retain valid execution and rejection controls.
+  Verification: .47.1 whole-spec carrier assertion fails: original CRLF becomes LF. parser.rs uses source.lines(), then consume_block_from_rest trims each physical line and rejoins with LF; direct CodeBlock retains exact CRLF. Quoted-newline native/Perl probes both reject, so no accepted string-value corruption or equivalence claim is made. Logs: .linkedspec-data/scratch/mutation-arguments47/runtime-green.log and source-fidelity-probe.jsonl.
+  Commit: `pending`
+- ID: `SESSION-STARTUP-READING.47.3`
+  Status: `pending`
+  Goal: Close the verified mutation-argument/source-fidelity repair and resume .49.
+  Dependencies: Clean .47.1/.47.2 repairs.
+  Planned tier: `canonical`
+  Planned focused proof: Reconcile exact native/source/carrier proofs and immutable neutral authority; update all live/public pointers, render book and run memory/history/Knowledge/doctrines/diff checks.
+  Planned canonical boundary: Designated parent closeout requires exact staged-candidate tools/run_ci_local.sh receipt before commit.
+  Acceptance: Close only verified argument and source-fidelity scope; preserve .49 and .52-.54/.58-.59 ownership and record canonical receipt evidence.
+  Verification: `pending`
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.49`
@@ -4571,8 +4597,6 @@ remain. Reading completion and runtime signoff remain distinct.
     and deliberate isolation/relocation proof exact. Preserve same-volume storage, ownership and cleanup safety.
     Close not-required only with evidence; do not attribute the main gate's rebuilds to these optional drivers.
   Direction update (2026-09-13): Assess retention as a performance improvement while preserving intentional isolation, preparation and ownership. Normal dependency rebuilds, including recovery from a missing compatible cache, are authorized; no negative compiler guard is required.
-
-
 - ID: `SESSION-STARTUP-READING.80.4`
   Status: `pending`
   Goal: Admit measured dependency-build reuse with unchanged verification coverage.
@@ -4582,8 +4606,6 @@ remain. Reading completion and runtime signoff remain distinct.
     proofs; update book and operational guidance with measured results. Parent .80 closes only after its
     implementation and verification are complete; the independent .81 investigation keeps its own status.
   Direction update (2026-09-13): Report measured cold/warm and valid-invalidation behavior with unchanged correctness coverage. The mandatory proof of zero RGX/PGEN compilation and build-on-update-only enforcement is cancelled. Ordinary Cargo rebuilds are authorized; do not claim reuse when compilation actually occurred.
-
-
 - ID: `SESSION-STARTUP-READING.81`
   Status: `pending`
   Goal: Diagnose prolonged Rust startup on macOS 26.6.2 and resolve any demonstrated repository-controlled cause.
@@ -4591,7 +4613,6 @@ remain. Reading completion and runtime signoff remain distinct.
   Acceptance: Distinguish newer-OS evidence from the controlled macOS 26.5.2 closeout under
     FUTURE-PARITY-BACKLOG.19.3.4. A sampled pre-main location is not an OS/kernel causal diagnosis or a repair.
     Preserve exact tests, project-local storage and operating-system trust.
-
 - ID: `SESSION-STARTUP-READING.81.1`
   Status: `pending`
   Goal: Establish controlled newer-OS launch and compiler/loader evidence independently of build invalidation.
@@ -4602,7 +4623,6 @@ remain. Reading completion and runtime signoff remain distinct.
     Reconcile the recognition and relocation samples plus the failed compiler-sample attempt. Determine
     whether any remaining cause is repository-controlled before selecting a remedy or external limitation.
   Related Lua observation: .1.2 samples both ABI probes on September 12 inside require/dlopen/mapSegments/fcntl while mapping project-local PCRE2 modules. Exact stacks and runtime identities live in docs/knowledge/lua-native-readme-and-action-ast-reading.md. Retain this cross-language comparison in the controlled newer-OS diagnosis; a loader location alone is not a cause or remedy.
-
 - ID: `SESSION-STARTUP-READING.81.2`
   Status: `pending; conditional on causal evidence`
   Goal: Implement and verify only an evidence-backed newer-OS startup remedy when one is required.
@@ -4612,8 +4632,6 @@ remain. Reading completion and runtime signoff remain distinct.
     shared-cache deletion or coverage reduction. If controlled current-OS evidence supports no repository
     repair, record that bounded conclusion explicitly; the older-OS closeout alone cannot close this leaf.
     Any necessary action outside project authority requires a concrete reviewable proposal for the director.
-
-
 - ID: `SESSION-STARTUP-READING.82`
   Status: `pending`
   Goal: Make semantic query budget enforcement and diagnostics agree with the declared logical-cost contract.
@@ -4622,8 +4640,6 @@ remain. Reading completion and runtime signoff remain distinct.
   Children: `.82.1` contract and independent expectations; `.82.2` neutral evaluator repair; `.82.3` bounded backend repair decomposition; `.82.4` transport/carrier/public closeout.
   Acceptance: Resolve the conflict between reported logical costs, request maxima and page-only boundaries explicitly. Keep all source evidence and canonical hashes until an owned contract migration justifies changes. Every confirmed backend gets implementation ownership; no expectation refresh may merely ratify current wrong results.
   Lua reading .1.17 extension: Both installed Lua hosts return the same six complete budget responses as the neutral evaluator and the prior Julia controls. semantic_query.lua page_stream computes budget limitation from the unpaged remaining stream; explain applies only max_records before reporting relation/depth costs. New .82.3.1 owns bounded Lua implementation/proof after the shared contract/neutral decisions.
-
-
 - ID: `SESSION-STARTUP-READING.82.1`
   Status: `pending`
   Goal: Freeze exact applicable budgets and page-versus-budget precedence for every semantic query operation.
@@ -4631,7 +4647,6 @@ remain. Reading completion and runtime signoff remain distinct.
   Acceptance: Reconcile ADR0049, neutral operation/cost/page policies, public teaching and MCP effective ceilings. Define independently checkable explain record/relation/depth bounds, decision reservation, zero-depth behavior and limits reached before/at/after a page boundary. Preserve the six intake responses; document any deliberate contract decision and migration impact before changing expected hashes.
   Verification: `pending`
   Commit: `pending`
-
 - ID: `SESSION-STARTUP-READING.82.2`
   Status: `pending`
   Goal: Repair neutral semantic budget selection and diagnostics under the accepted contract.
@@ -4639,7 +4654,6 @@ remain. Reading completion and runtime signoff remain distinct.
   Acceptance: Add independent RED/GREEN expectations for explain secondary relations/depth, zero remaining step allowance, page smaller/equal/larger than budget, after-id continuation, combined ceilings and actual logical cost. Mutation proof must reject coordinated evaluator/fixture drift. Preserve unrelated exact responses and use canonical contract-change verification.
   Verification: `pending`
   Commit: `pending`
-
 - ID: `SESSION-STARTUP-READING.82.3`
   Status: `pending`
   Goal: Census all five native semantic evaluators and create bounded backend implementation children.
@@ -4649,8 +4663,6 @@ remain. Reading completion and runtime signoff remain distinct.
   Verification: `pending`
   Commit: `pending`
   Lua reading .1.17 extension: Both installed Lua hosts return the same six complete budget responses as the neutral evaluator and the prior Julia controls. semantic_query.lua page_stream computes budget limitation from the unpaged remaining stream; explain applies only max_records before reporting relation/depth costs. New .82.3.1 owns bounded Lua implementation/proof after the shared contract/neutral decisions.
-
-
 - ID: `SESSION-STARTUP-READING.82.3.1`
   Status: `pending`
   Goal: Align Lua semantic budget enforcement and diagnostics with the resolved shared contract.
@@ -4660,7 +4672,6 @@ remain. Reading completion and runtime signoff remain distinct.
   Acceptance: Preserve canonical ordering, source ceilings, paging identity and typed/raw-neutral convergence while implementing the resolved applicable cost/budget boundaries. Keep query-evidence false preservation under LUA-STARTUP-READING.2.15 and all source-correlation repairs distinct.
   Verification: `pending`
   Commit: `pending`
-
 - ID: `SESSION-STARTUP-READING.82.3.1.1`
   Status: `pending`
   Goal: Repair Lua explain limits and page-versus-budget boundary selection.
@@ -4668,7 +4679,6 @@ remain. Reading completion and runtime signoff remain distinct.
   Acceptance: Apply each contract-required record/relation/depth bound to explain and select deterministic budget/page diagnostics from the boundary actually reached. Preserve after_id, decision/step/relation consistency, all unaffected query hashes and agreed logical costs across both supported host routes.
   Verification: `pending`
   Commit: `pending`
-
 - ID: `SESSION-STARTUP-READING.82.3.1.2`
   Status: `pending`
   Goal: Independently verify Lua query budgets through public entrypoints and composed carriers.
@@ -4676,7 +4686,6 @@ remain. Reading completion and runtime signoff remain distinct.
   Acceptance: Cover simultaneous page/record/relation/depth limits, zero-depth explanations, cursor continuations and deterministic complete/incomplete response bodies against independent expectations on supported PUC and LuaJIT. Recompose typed/raw-neutral and applicable MCP proof; preserve source privacy and update book/Knowledge before closing the Lua container.
   Verification: `pending`
   Commit: `pending`
-
 - ID: `SESSION-STARTUP-READING.82.4`
   Status: `pending`
   Goal: Close semantic budget recurrence across supported carriers, MCP and public teaching.
@@ -4684,7 +4693,6 @@ remain. Reading completion and runtime signoff remain distinct.
   Acceptance: Prove typed/raw-neutral and supported reconstructed/generated/observed queries, native and SDK MCP effective ceilings, pages and logical costs with unchanged caller state and no target execution. Update public examples/Knowledge/rollout evidence, run designated canonical admission/public proof and close only the verified scope.
   Verification: `pending`
   Commit: `pending`
-
 - ID: `SESSION-STARTUP-READING.83`
   Status: `done`
   Goal: Resolve the historical Lispish document-validation and malformed-token limitations before claiming strict s-expression parsing.
@@ -4696,7 +4704,6 @@ remain. Reading completion and runtime signoff remain distinct.
   Acceptance: Establish an explicit complete-document contract, implement the accepted strict path and independently prove it. Preserve existing historical behavior unless a reviewed migration deliberately changes it; a documentation warning alone cannot close this repair.
   Verification: PASS: all 37 unchanged authored cases through each of six public-loader routes (222 outcomes), with 21 process groups per route covering exact values, typed rejection or the Rust text adapter Display, prior-output retention, relative Unicode grammar paths, invalid UTF-8 and missing grammar. Native Rust file replay passes 37 cases/36 groups; historical Lispish passes 26 values/18 groups. The recurring grammar driver adds token round trips and same-engine post-rejection reuse; exact staged canonical proof is mandatory for this admission and enforced by the landing hook. Formal closeout is SEXPR-DOCUMENT-INTEGRATION.2.
   Commit: `SEXPR-DOCUMENT-INTEGRATION.2 - admit complete document integration`
-
 - ID: `SESSION-STARTUP-READING.83.1`
   Status: `done`
   Goal: Define strict Lispish document consumption, token validity and compatibility boundaries.
@@ -4712,7 +4719,6 @@ remain. Reading completion and runtime signoff remain distinct.
   Verification: PASS: source-qualified report review; 37 independent cases (21 accept/16 reject), 136 Perl assertions including token-spelling reconstruction and the no-skipped-text mutation; four native Rust prototype boundaries with full stdout/stderr/status. The first nonportable infix expression reproduces .45's warned-and-dropped LX block with exit 0/null; documented num_ne(...) fixes the prototype, while .45.1-.45.3 now own the compiler repair before delivery. The exact durable Knowledge proof replays all 136 assertions. Knowledge/memory/history/book/public/diff and normal doctrine hooks govern focused design landing. No production grammar, runtime source, dependency, promotion, canonical gate or push.
   Validation ordering: The first aggregate-public check overlapped Knowledge regeneration and reported a missing marker while the generator writes its output directly. The completed map contains the marker; dependent validation is rerun only after generation. This was an orchestration ordering error, not evidence of a missing fact.
   Commit: `SESSION-STARTUP-READING.83.1 - define kind-preserving document grammar`
-
 - ID: `SESSION-STARTUP-READING.83.2`
   Status: `done`
   Goal: Repair quoted LF compatibility and implement the accepted strict document and token-validation path with bounded ownership.
@@ -4721,7 +4727,6 @@ remain. Reading completion and runtime signoff remain distinct.
   Acceptance: Decompose concrete grammar, API and any necessary backend work into safe children before edits. Add RED/GREEN proof that omitted text and malformed tokens cannot silently yield an accepted document. Preserve documented historical extraction, native in-process execution, exact strings and agreed head/tail or versioned domain shape; no host-side guess may masquerade as grammar validation.
   Verification: PASS: all 37 unchanged authored cases through each of six public-loader routes (222 outcomes), with 21 process groups per route covering exact values, typed rejection or the Rust text adapter Display, prior-output retention, relative Unicode grammar paths, invalid UTF-8 and missing grammar. Native Rust file replay passes 37 cases/36 groups; historical Lispish passes 26 values/18 groups. The recurring grammar driver adds token round trips and same-engine post-rejection reuse; exact staged canonical proof is mandatory for this admission and enforced by the landing hook. Formal closeout is SEXPR-DOCUMENT-INTEGRATION.2.
   Commit: `SEXPR-DOCUMENT-INTEGRATION.2 - admit complete document integration`
-
 - ID: `SESSION-STARTUP-READING.83.2.1`
   Status: `done`
   Goal: Fix SEMULITH/LS-001 quoted LF tree corruption in the historical Lispish grammar without changing its output contract.
@@ -4742,7 +4747,6 @@ remain. Reading completion and runtime signoff remain distinct.
   - [x] **ADDRESSED (verified)** — FAIL->PASS for all three shared fixtures; 36 native/reference command legs and Rust 26-file/18-group verification PASS. No source guessing, escape decoding or consumer-side repair.
   - [x] **NO REGRESSION** — Phase0 smoke 9, descriptor 9/9, exact x/y corpus and original Rust compatibility/error/deployment groups PASS; controls retain CR/LF/CRLF, Unicode, comments, escapes, adjacency, single quotes and braces.
   - [x] **LOCKSTEP** — Quote source, copied corpus, regression fixture, Rust verifier, book examples and task/Knowledge/live roadmap pointers agree; ordinary focused checks and git diff --check PASS.
-
 - ID: `SESSION-STARTUP-READING.83.2.2`
   Status: `done`
   Activation commit: `eda9cd3dd008784bc7f7993fe09ed5d35665e535`.
@@ -4763,7 +4767,6 @@ remain. Reading completion and runtime signoff remain distinct.
   - [x] **ADDRESSED (verified)** — Six native runtime routes PASS all authored values/rejections, round trips and post-rejection reuse; the three Dart EOF cases are FAIL->PASS with unchanged expectations.
   - [x] **NO REGRESSION** — Lispish source remains unchanged; all three historical quoted-LF CLI fixtures PASS. Syntax, Rust formatting and Dart analysis pass; the exact staged canonical gate is the required landing authority.
   - [x] **LOCKSTEP** — The grammar, recurring tests, all five backend integration guides, shared integration landing page, book, roadmap, Knowledge and live pointers describe this grammar delivery; the guides identify Document entry selection and native failure/value handling; the separate native file consumer and final report admission retain their owners.
-
 - ID: `SESSION-STARTUP-READING.83.2.3`
   Status: `done`
   Goal: Deliver a separate native Rust file-consumer path for the tagged complete-document grammar.
@@ -4772,7 +4775,6 @@ remain. Reading completion and runtime signoff remain distinct.
   Acceptance: Verify every supplied SEMULITH kind case and all four ARCHOGEN forms, valid/invalid UTF-8 and paths, empty documents, errors without partial document output, multiple files through one engine, executable-relative grammar assets and relocation. Document exact kind/lexeme use and current limits in the public book with examples; preserve all historical file-consumer checks and select the warranted delivery tier.
   Verification: PASS: all 37 unchanged authored cases through each of six public-loader routes (222 outcomes), with 21 process groups per route covering exact values, typed rejection or the Rust text adapter Display, prior-output retention, relative Unicode grammar paths, invalid UTF-8 and missing grammar. Native Rust file replay passes 37 cases/36 groups; historical Lispish passes 26 values/18 groups. The recurring grammar driver adds token round trips and same-engine post-rejection reuse; exact staged canonical proof is mandatory for this admission and enforced by the landing hook. Formal closeout is SEXPR-DOCUMENT-INTEGRATION.2.
   Commit: `SEXPR-DOCUMENT-INTEGRATION.2 - admit complete document integration`
-
 - ID: `SESSION-STARTUP-READING.83.3`
   Status: `done`
   Goal: Independently verify and admit the complete document path across supported native backends; execution owner is docs/tasks/SEXPR-DOCUMENT-INTEGRATION.md.
@@ -4780,7 +4782,6 @@ remain. Reading completion and runtime signoff remain distinct.
   Acceptance: Replay exact valid/invalid documents, file/UTF-8/error handling, complete consumption and compiled-engine reuse on Perl, Rust, Dart, Julia, PUC Lua and LuaJIT under their admitted toolchains. Preserve relevant existing corpus coverage without reviving retired applications. Update integration guides, the Lispish walkthrough, Knowledge and task evidence; run canonical admission proof and close only verified scope.
   Verification: PASS: all 37 unchanged authored cases through each of six public-loader routes (222 outcomes), with 21 process groups per route covering exact values, typed rejection or the Rust text adapter Display, prior-output retention, relative Unicode grammar paths, invalid UTF-8 and missing grammar. Native Rust file replay passes 37 cases/36 groups; historical Lispish passes 26 values/18 groups. The recurring grammar driver adds token round trips and same-engine post-rejection reuse; exact staged canonical proof is mandatory for this admission and enforced by the landing hook. Formal closeout is SEXPR-DOCUMENT-INTEGRATION.2.
   Children: `SEXPR-DOCUMENT-INTEGRATION.2`
-
 - ID: `SESSION-STARTUP-READING.84`
   Status: `done`
   Goal: Adopt the director-approved targeted startup and fast ramp-up while preserving the separate full-reading audit.
@@ -4793,7 +4794,6 @@ remain. Reading completion and runtime signoff remain distinct.
   Acceptance: Startup targets2–5 minutes for context/Git/task recovery; affected requirements/code/contracts/tests/book are read before changes. Only scope-relevant uncertainty expands reading. Existing quality, task ownership, storage, black-box dependency and commit/verification rules remain. Three director-referenced bug reports must be identified before selecting their repair owners.
   Verification: PASS: scoped startup procedure and ADR0123 agree with current memory/task/roadmap/book pointers. Preserve2858 other tracked files/50770871 bytes,348 prior startup and180 conformance task nodes, prior fenced recipes, all immutable history, book headings and parent gitlink; only .84/.85 and two corresponding decision/Knowledge records are added. Memory60 lines, Knowledge1164 facts/9334 keys, histories324/57285 and194/37282 lines/bytes, rendered book, public mutation69/50 and selector68/11 checks pass. No source, hook, gate, timing enforcement or capacity change. Normal nine-doctrine hooks govern focused landing; no canonical run or push.
   Commit: `SESSION-STARTUP-READING.84 - adopt targeted startup and fast ramp-up`
-
 - ID: `SESSION-STARTUP-READING.85`
   Status: `done`
   Goal: Identify the three director-referenced bug reports and route execution to their existing repair owners.
@@ -4816,7 +4816,7 @@ audit range, not the default repair frontier.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.47` | `pending` | Align whitespace-only mutation arguments between parsing and compilation; .46 diagnostic repair is verified. |
+| 1 | `SESSION-STARTUP-READING.47.2` | `pending` | Repair measured outer source loss after .47.1; .47.3 provides canonical closeout. |
 
 ## Reading Ledger
 

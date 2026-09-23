@@ -239,6 +239,17 @@ generated modules from their original `.spec` source with the corrected compiler
 Valid compiled JSON still reconstructs and executes normally; generated modules
 retain their direct-value and compatibility entry points.
 
+The empty argument list in `tree.map_leaves!() { add(value, 1) }` may contain
+spaces, tabs or newlines: `tree.map_leaves!( ) { add(value, 1) }` has the same
+meaning. Compilation preserves supplied action-source text and Unicode scalar
+spans through source-AST reconstruction, compiled JSON and generated execution.
+The outer `.spec` parser currently normalizes multiline block line endings and
+indentation before constructing that action source; those coordinates refer to
+the collected action text. Nonempty arguments such as
+`map_leaves!(1)` remain invalid. See the
+[mutation examples](../dsl/values-containers-and-flow-helpers.md#mutating-leaves-on-all-five-backends)
+for receiver initialization, callback values and commit behavior.
+
 One engine processes every command-line input independently. The direct-value
 method returns `serde_json::Value`; printing it writes JSON. This avoids the
 legacy execution method's accumulator wrapper. The application can inspect that

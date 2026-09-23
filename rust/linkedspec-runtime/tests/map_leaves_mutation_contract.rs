@@ -1,6 +1,6 @@
 //! FUTURE-PARITY-BACKLOG.19.3.2 — Rust `map_leaves!` mutation contract.
 
-use linkedspec_core::ast::SpecFile;
+use linkedspec_core::ast::{BodyElementKind, SpecFile};
 use linkedspec_core::compiler::compile;
 use linkedspec_core::expr::{CodeBlock, Expr};
 use linkedspec_core::types::CompiledSpec;
@@ -85,6 +85,8 @@ fn frozen_syntax_and_ast_inventory_is_projected_by_the_rust_parser() {
         let source = case["source"].as_str().unwrap();
         let block = CodeBlock::parse(source)
             .unwrap_or_else(|error| panic!("{} failed to parse: {error}", case["id"]));
+        // Every admitted spelling must also survive compiled carrier validation.
+        compile_source(&spec_for_action(source));
         let Expr::ReceiverMutationChain {
             receiver,
             mutation,
@@ -649,6 +651,189 @@ fn spec_compiled_serialized_and_generated_routes_share_the_typed_carrier() {
         "{generated_error}"
     );
     assert_independently_compiled_emitted_source(&compiled, &expected);
+}
+
+const EMPTY_ARGUMENTS: [&str; 7] = ["", " ", "\t", "\n", "\r\n", " \t\r\n ", "\u{b}\u{c}"];
+
+// Exercise caller-supplied source AST independently of outer .spec block capture.
+// SESSION-STARTUP-READING.47.2 owns that parser's CRLF/indentation normalization.
+fn spec_with_verbatim_action(action: &str) -> SpecFile {
+    let mut spec = parse_spec_with_user_functions(&spec_for_action("return(null)")).unwrap();
+    let BodyElementKind::ActionEdge { code, .. } = &mut spec.rules[0].body[0].kind else {
+        panic!("expected an action edge in the fixture");
+    };
+    *code = Some(action.to_owned());
+    validate(&spec).expect("validate supplied source AST");
+    spec
+}
+
+#[test]
+fn empty_arguments_retain_authored_text_and_scalar_spans() {
+    let prefix = "note = \"é🦀\"; ";
+    for inside in EMPTY_ARGUMENTS {
+        let expression =
+            format!("tree . map_leaves! ({inside}) {{ return(value) }} . count_keys()");
+        let source = format!("{prefix}{expression}");
+        for parse in [CodeBlock::parse, CodeBlock::parse_with_callable_candidates] {
+            let block = parse(&source).expect("parse semantically empty arguments");
+            let Expr::ReceiverMutationChain {
+                source: retained,
+                source_span,
+                mutation,
+                ..
+            } = &block.statements[1].expr
+            else {
+                panic!("expected the typed mutation carrier");
+            };
+            assert_eq!(retained, &expression);
+            assert_eq!(source_span.start, prefix.chars().count());
+            assert_eq!(source_span.end, source.chars().count());
+            let args_start = prefix.chars().count() + "tree . map_leaves! ".chars().count();
+            assert_eq!(mutation.args_span.start, args_start);
+            assert_eq!(
+                mutation.args_span.end,
+                args_start + inside.chars().count() + 2
+            );
+            assert_eq!(
+                mutation.source,
+                format!("map_leaves! ({inside}) {{ return(value) }}"),
+            );
+        }
+        let compiled =
+            compile(&spec_with_verbatim_action(&source)).expect("compile verbatim source AST");
+        let retained = serde_json::to_value(
+            &compiled.rules[0].acode_dispatch[0]
+                .code
+                .as_ref()
+                .expect("the authored action block is present")
+                .statements[1]
+                .expr,
+        )
+        .unwrap();
+        assert_eq!(retained["source"], expression);
+        assert_eq!(
+            retained["source_span"],
+            json!({"start": prefix.chars().count(), "end": source.chars().count()}),
+        );
+        let args_start = prefix.chars().count() + "tree . map_leaves! ".chars().count();
+        assert_eq!(
+            retained["mutation"]["args_span"],
+            json!({"start": args_start, "end": args_start + inside.chars().count() + 2}),
+        );
+    }
+    for inside in ["1", "null", "\" \"", ",", "()", "[]", "\u{200b}"] {
+        let error = CodeBlock::parse(&format!("tree.map_leaves!({inside}) {{ return(value) }}"))
+            .expect_err("nonempty arguments must remain invalid");
+        assert!(
+            error.contains("map_leaves_mutation_arguments_invalid"),
+            "{error}"
+        );
+    }
+}
+
+#[test]
+fn empty_arguments_execute_through_reconstructed_and_emitted_carriers() {
+    let mut action = "note = \"é🦀\"; results = []; ".to_owned();
+    for inside in EMPTY_ARGUMENTS {
+        action.push_str(&format!(
+            "tree = {{ \"clé\" : 1 }}; results += tree.map_leaves!({inside}) {{ add(value, 1) }}; "
+        ));
+    }
+    action.push_str("return(results)");
+    let expected = Value::Array(EMPTY_ARGUMENTS.iter().map(|_| json!({"clé": 2})).collect());
+    let parsed = spec_with_verbatim_action(&action);
+    let reconstructed: SpecFile =
+        serde_json::from_str(&serde_json::to_string(&parsed).unwrap()).unwrap();
+    let compiled = compile(&reconstructed).expect("compile every empty-argument spelling");
+    assert_eq!(execute_action(&action).unwrap(), expected);
+
+    let encoded = serde_json::to_string(&compiled).unwrap();
+    let decoded: CompiledSpec = serde_json::from_str(&encoded).unwrap();
+    assert_eq!(
+        serde_json::to_value(&decoded).unwrap(),
+        serde_json::to_value(&compiled).unwrap()
+    );
+    assert_eq!(
+        Engine::new(decoded)
+            .execute_value("xhello", &ExecutionOptions::new())
+            .unwrap(),
+        expected,
+    );
+    validate_generated_parser_plan_v2(
+        &encoded,
+        TOP_DONE_PLAN,
+        "empty-arguments.spec",
+        GENERATED_SOURCE_CONTRACT,
+    )
+    .unwrap();
+    assert_eq!(
+        execute_generated_parser_v2(
+            &encoded,
+            TOP_DONE_PLAN,
+            "xhello",
+            "empty-arguments.spec",
+            GENERATED_SOURCE_CONTRACT,
+        )
+        .unwrap(),
+        expected,
+    );
+    assert_independently_compiled_emitted_source(&compiled, &expected);
+}
+
+#[test]
+fn empty_arguments_do_not_admit_corrupted_argument_projections() {
+    let original = compile_source(&spec_for_action("tree.map_leaves!( ) { return(value) }"));
+    // Equal scalar lengths isolate argument validation from unrelated span mismatches.
+    for bad in [
+        "(1)",
+        "(x)",
+        "(,)",
+        "(\u{200b})",
+        "[ ]",
+        "   ",
+        "(  ",
+        "  )",
+    ] {
+        let mut corrupted = original.clone();
+        let Expr::ReceiverMutationChain {
+            source, mutation, ..
+        } = &mut corrupted.rules[0].acode_dispatch[0]
+            .code
+            .as_mut()
+            .expect("the authored action block is present")
+            .statements[0]
+            .expr
+        else {
+            panic!("expected a standalone mutation carrier");
+        };
+        *source = source.replacen("( )", bad, 1);
+        mutation.source = mutation.source.replacen("( )", bad, 1);
+        let encoded = serde_json::to_string(&corrupted).unwrap();
+        let restored: CompiledSpec = serde_json::from_str(&encoded).unwrap();
+        let errors = [
+            Engine::new(restored)
+                .execute_value("xhello", &ExecutionOptions::new())
+                .unwrap_err(),
+            validate_generated_parser_plan_v2(
+                &encoded,
+                TOP_DONE_PLAN,
+                "bad-arguments.spec",
+                GENERATED_SOURCE_CONTRACT,
+            )
+            .unwrap_err()
+            .to_string(),
+            emit_rust_source_v2(&corrupted, "bad-arguments.spec")
+                .unwrap_err()
+                .to_string(),
+        ];
+        for error in errors {
+            assert!(
+                error.contains("receiver_mutation_serialized_state_invalid"),
+                "{bad:?}: {error}"
+            );
+            assert!(error.contains("mutation_call_invalid"), "{bad:?}: {error}");
+        }
+    }
 }
 
 struct GeneratedTestProject {

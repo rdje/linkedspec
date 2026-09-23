@@ -11,6 +11,14 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
 
+## 2026-09-23 — SESSION-STARTUP-READING.47.1 - accept empty mutation argument whitespace
+
+The parser used trim-empty argument semantics while validate_receiver_mutation_block required the literal projected text (). Checking both delimiters and a trim-empty interior aligns validation without mutating the carrier or trusting arbitrary whitespace as parentheses. The frozen neutral insignificant_whitespace case previously stopped at parsing; the Rust consumer now compiles all four admitted spellings.
+
+Runtime proof passes all 179 library and 12 mutation contract tests, including seven whitespace spellings, exact supplied source/scalar spans, seven nonempty controls, eight corrupted argument projections, serde, generated-plan and independently compiled emitted execution. All six rebuilt-native controls pass. The unchanged neutral checker passes 4/14/5 syntax and 167+592 mutations; public no-drift and mdBook rendering pass. Core compatibility passes 201 library tests, 4 diagnostic groups and 5 rule-code rejection groups.
+
+Initial runtime proof was 179 library passes plus 11 mutation passes and one CRLF-retention failure. Root cause is upstream of CodeBlock: parser.rs uses source.lines(), per-line trim and LF joining. Public SpecFile action code is independently supplied for exact compiler/serde/generated fidelity; native whole-spec values remain separately tested. Immediate .47.2 retains the original whole-spec expectation and owns capture repair; .47.3 supplies canonical closeout. Actual quoted-newline probes reject on both Rust and Perl; no accepted value-corruption claim is supported. Root task-tree capacity stays at 8000 lines by removing only blank task separators; all 357 prior IDs and pre-.47 nonempty text remain exact. The first commit hook rejected three newly added verification declarations: cadence counts added lines across the staged diff. Future children now record planned proof, reserving the three enforced metadata lines for their own activation commits. No gate is bypassed.
+
 ## 2026-09-23 — SESSION-STARTUP-READING.46 - preserve UTF-8 diagnostic boundaries
 
 The panic was in error formatting, not successful parsing: unexpected_character_error selected src[pos..min(pos+40,len)] with an endpoint inside a scalar. The current native CLI independently reproduced exit 101 at endpoint 47 inside bytes 46..48. A maximal complete-scalar prefix within the existing byte budget repairs the error path without changing parser cursor state, diagnostic offset units or ActionIR scalar spans. No production panic-catching is introduced.

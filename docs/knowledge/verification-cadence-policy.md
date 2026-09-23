@@ -12,7 +12,8 @@ answers:
   - "what does the pre push hook verify"
   - "can a canonical CI receipt be reused before push"
   - "why does canonical CI require staged files"
-date: 2026-08-15
+  - "why does adding verification metadata to pending child tasks fail a focused commit"
+date: 2026-09-23
 status: accepted and implemented under ADR 0073 / VERIFICATION-CADENCE-POLICY.0
 tags: [verification, testing, local-ci, commit-workflow, hooks, doctrine, receipts]
 evidence: "Atomic 234 at 1e6d326d is the clean activation boundary. The director requires proportional verification after that commit: focused changed-surface and direct-dependent proof for ordinary leaves, complete canonical CI for designated high-risk leaves and the final clean push boundary. ADR 0073, COMMIT.md, task-tier metadata, the VERIFICATION-CADENCE doctrine, exact staged-candidate receipts, and pre-push routing are the canonical owners."
@@ -37,3 +38,10 @@ tree. Pre-commit verifies that receipt, post-commit may promote it, and pre-push
 
 ADR `0004` still disables hosted CI and names the local gate as the source of truth. ADR `0073` changes only the
 cadence so a batch runs focused proof per slice and complete proof at its final push boundary.
+
+The cadence checker counts added verification metadata lines across the staged
+task-file diff, not only the commit-subject node. Exactly one `Verification tier`,
+`Focused checks` and `Canonical trigger` must be added for the committing leaf.
+When decomposing future work, keep its proposed proof under planned fields until
+activation. Startup `.47.1` verified this boundary after the first hook rejected
+three declarations; its immediate `.47.2`/`.47.3` proof requirements remain intact.

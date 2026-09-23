@@ -2,17 +2,19 @@
 
 ## Current Activity
 
-Local complete-document integration is committed at 92f58b56c. Startup .46 repairs the Rust UTF-8 diagnostic panic with focused core/public proof; the next bounded repair is startup .47, whitespace-only mutation argument consistency.
+Local complete-document integration is committed at 92f58b56c. Startup .46 fixes UTF-8 diagnostics and .47.1 aligns empty mutation arguments; immediate .47.2 repairs the independently measured outer source-normalization defect, followed by canonical .47.3.
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.46 - preserve UTF-8 diagnostic boundaries` — Core RED: 3 pass/1 split-scalar panic. GREEN: 201 core library tests, 4 diagnostic groups, 5 rule-code rejection groups, the primary CLI rejection test and 4 source/AST/traced/loader/semantic/generated route tests pass. Five rebuilt-native controls pass in 1.16–1.19 seconds; the former Unicode exit 101 becomes ordinary compile:error/exit 1. ASCII, valid Unicode, diagnostic byte offsets and structured scalar spans retain their behavior. Rust formatting and mdBook rendering pass.
+- `SESSION-STARTUP-READING.47.1 - accept empty mutation argument whitespace` — PASS: 201 core library tests, 4 diagnostic groups, 5 rule-code rejection groups, 179 runtime library tests and 12 mutation contract tests. Seven whitespace spellings retain exact supplied action source/scalar spans; seven nonempty syntax cases and eight forged projections reject. Native, serde, generated-plan and independently compiled emitted execution agree. Six rebuilt-native controls pass; neutral 4/14/5 syntax and 167+592 mutations pass with byte-identical authority. Book, formatting and public no-drift checks pass; normal governance hooks govern landing.
 
 ## Next Action
 
-- Reproduce startup .47 through core and public compile routes; align semantically empty mutation arguments while preserving exact source/spans and rejecting nonempty arguments.
+- Activate .47.2 from clean HEAD; retain exact multiline block interiors and scalar positions through whole-spec parsing, then close the parent under .47.3.
 
 ## Recent Completions
+
+- `2026-09-23` — `SESSION-STARTUP-READING.47.1` accepts whitespace-only mutation arguments; core/runtime/carrier/native proof passes; outer source fidelity is owned by immediate .47.2.
 
 - `2026-09-23` — `SESSION-STARTUP-READING.46` fixes the Unicode diagnostic panic; core/public/native proof passes and structured scalar spans remain exact.
 
@@ -43,8 +45,6 @@ Local complete-document integration is committed at 92f58b56c. Startup .46 repai
 - `2026-09-22` — `CONFORMANCE-SOURCE-READING.1.87` reads staged enrichment through 1504; prefix through 1461 passes 135 top-level/227 nested results. Known repairs remain; .1.88 owns the suffix and lifecycle/trace consumers.
 
 - `2026-09-22` — `CONFORMANCE-SOURCE-READING.1.86` completes six semantic/sparse consumers; focused proof including duplicate slots passes 158 top-level/696 nested results. Known repairs remain open; .1.87 continues staged enrichment.
-
-- `2026-09-22` — `CONFORMANCE-SOURCE-READING.1.85` completes seven files; 431 top-level/213 nested results pass. .2.13/.2.16 extend to cursor consumers; .2.18 owns semantic nested-copy observations. .1.86 continues with all prerequisites intact.
 
 ## History
 

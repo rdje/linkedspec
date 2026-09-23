@@ -11,6 +11,14 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
 
+## 2026-09-23 — SESSION-STARTUP-READING.47.1 - accept empty mutation argument whitespace
+
+Rust compiled mutation validation now accepts parentheses whose interior is whitespace-only, matching already admitted parser syntax. Validate the original projected source without rewriting text, spans, schemas or the frozen shared contract. Extend every frozen valid syntax case through compilation.
+
+Runtime proof passes all 179 library and 12 mutation contract tests, including seven whitespace spellings, exact supplied source/scalar spans, seven nonempty controls, eight corrupted argument projections, serde, generated-plan and independently compiled emitted execution. All six rebuilt-native controls pass. The unchanged neutral checker passes 4/14/5 syntax and 167+592 mutations; public no-drift and mdBook rendering pass. Core compatibility passes 201 library tests, 4 diagnostic groups and 5 rule-code rejection groups.
+
+A separate whole-spec CRLF source assertion exposed outer parser normalization. Split the active parent into validator .47.1, immediate source-capture repair .47.2, and canonical closeout .47.3. The failing evidence remains recorded; caller-supplied source-AST tests isolate compiler/carrier fidelity without weakening the original expected source. Rust integration guidance states the current limitation; other backend contracts and dependency pins remain unchanged.
+
 ## 2026-09-23 — SESSION-STARTUP-READING.46 - preserve UTF-8 diagnostic boundaries
 
 Fix Rust unexpected-character diagnostics when their bounded context ends inside a multibyte scalar. Keep the existing 40-byte budget and plain-text byte position while moving the excerpt endpoint to a UTF-8 boundary. Syntax rejection, authored text and structured Unicode-scalar spans are unchanged. Add independent two/three/four-byte alignment coverage for both CodeBlock modes and extend existing public route and CLI rejection fixtures.

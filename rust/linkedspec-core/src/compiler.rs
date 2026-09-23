@@ -727,6 +727,13 @@ fn identifier_is_addressable(name: &str) -> bool {
     identifier_is_valid(name) && !nested_write_root_is_reserved(name)
 }
 
+fn is_empty_argument_list(source: &str) -> bool {
+    source
+        .strip_prefix('(')
+        .and_then(|inner| inner.strip_suffix(')'))
+        .is_some_and(|inner| inner.trim().is_empty())
+}
+
 fn validate_receiver_mutation_block(block: &CodeBlock, context: &str) -> Result<()> {
     for statement in &block.statements {
         visit_expr(&statement.expr, &mut |expr| {
@@ -764,8 +771,9 @@ fn validate_receiver_mutation_block(block: &CodeBlock, context: &str) -> Result<
                     != Some(mutation.source.as_str())
                 || span_projection(source, *source_span, mutation.method_span).as_deref()
                     != Some("map_leaves!")
-                || span_projection(source, *source_span, mutation.args_span).as_deref()
-                    != Some("()")
+                || !span_projection(source, *source_span, mutation.args_span)
+                    .as_deref()
+                    .is_some_and(is_empty_argument_list)
                 || mutation.source_span.start != mutation.method_span.start
             {
                 return Err(receiver_mutation_state_error(

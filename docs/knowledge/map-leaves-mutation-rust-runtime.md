@@ -11,7 +11,8 @@ answers:
   - "does Rust map_leaves bang release its guard after failure"
   - "does Rust map_leaves bang commit before continuation"
   - "do Rust map_leaves bang values share writable aliases"
-date: 2026-09-07
+  - "why did Rust parser-only mutation tests miss whitespace-only compilation failures"
+date: 2026-09-23
 status: implemented under FUTURE-PARITY-BACKLOG.19.3.2; portable capability admitted under .19.7
 tags: [rust, dsl, actionir, map-leaves, mutation, identity, atomicity, generated-source, FUTURE-PARITY-BACKLOG]
 evidence: "Historical implementation and test evidence recorded 2026-09-01; the September reading update below does not rerun those native suites. FUTURE-PARITY-BACKLOG.19.3.2 adds ReceiverMutationChain with typed receiver/callback/continuation carriers and validates it at compiler, direct Engine, source-emitter, and generated-plan decode boundaries. RuntimeContext assigns stable binding identities and guards only the resolved receiver identity. The permanent contract passes 9/9 across 4 valid / 14 invalid / 5 excluded syntax cases, all base/special/composition behavior, serde/native/generated/emitted/independently compiled routes, and corrupt-node rejection; 3/3 private tests prove atomic rollback, guard release, unrelated effects, precedence, and post-commit failure. The unchanged neutral oracle rejects 167 base and 592 composition mutations."
@@ -48,12 +49,12 @@ Complete callback success publishes the rebuilt root once, returns another detac
 before ordinary continuation. A continuation failure therefore preserves the completed receiver commit. Native,
 serialized, generated-plan, emitted-source, and independently compiled emitted Rust execute the same semantics.
 
-The 2026-09-07 reading checkpoint `SESSION-STARTUP-READING.3.3.6` confirms a pending
+The 2026-09-07 reading checkpoint `SESSION-STARTUP-READING.3.3.6` confirmed a
 parser/compiler mismatch beyond the established fixtures: the parser accepts
 space/tab-only empty argument lists, while compiled source projection requires
 exact `()`. Repair `.47` owns that gap; `.45` owns malformed rule-code warning/drop.
 See [[rust-action-parser-boundary-defects]] for the original isolated core and
-native CLI controls. These findings remain open despite the neutral suite passing.
+native CLI controls. That historical neutral-suite pass did not establish native compilation; current repair evidence follows.
 
 The fresh neutral mutation checker passes four valid/fourteen invalid/five excluded
 syntax cases, ten successes, eight pre-commit failures, six callback/one continuation
@@ -129,3 +130,26 @@ Startup `.3.3.55` completes all 732 lines of the mutation consumer. Its guarded 
 controls precede return(value), so final-assignment and substitution exceptions .58/.59 remain
 outside those controls. The emitted workspace uses a relative Cargo dependency and asserts
 child-process success. This source checkpoint does not rerun the nine public or three private tests.
+
+## September 23 empty-argument validation repair
+
+Startup `.47.1` replaces exact `()` comparison with opening/closing-parenthesis
+validation and a whitespace-only interior test. It validates the original scalar
+span projection without rewriting source. The immutable neutral authority already
+admits insignificant whitespace; neither its JSON nor the carrier format changes.
+All four frozen valid spellings now explicitly reach compilation in the Rust test,
+closing the former parser-only test gap.
+
+Seven whitespace spellings cover spaces, tabs, LF, CRLF, mixed whitespace and
+vertical-tab/form-feed. Both direct CodeBlock modes and caller-supplied source ASTs
+check exact text and Unicode-scalar spans; serde/generated/emitted execution checks
+values. Seven nonempty syntax controls and eight forged argument projections
+retain rejection. Whole-spec native controls independently verify values.
+
+Outer `.spec` block capture has a distinct CRLF/indentation normalization defect.
+The initial whole-spec exact-text assertion failed rather than being weakened;
+immediate `.47.2` owns its repair. See [[rust-outer-action-source-fidelity]].
+Fresh runtime verification passes all 179 library and 12 public mutation tests;
+six rebuilt-native controls and unchanged neutral 167+592 mutations pass.
+Core compatibility passes 201 library, 4 diagnostic and 5 rule-code groups.
+The owning leaf records final landing evidence; .47.2 remains an explicit limitation.
