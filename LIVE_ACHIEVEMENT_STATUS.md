@@ -2,17 +2,19 @@
 
 ## Current Activity
 
-The three-slice consumer-delivery batch reaches its canonical publication boundary. Seven original SEMULITH/ARCHOGEN requirements have verified local remedies with an explicit source pin and document migration. ARCHOGEN/LS-004 still reproduces through RGX's public interface and remains upstream-owned; external posting permission is outstanding. Git remote read-back establishes availability; no downstream acceptance is claimed.
+LinkedSpec consumer remedies are published at `a8d34c84595d46c24cd1820d5fc0414261706412`, with exact remote read-back and tested-baseline ancestry verified. The director will relay the local ARCHOGEN/LS-004 report to RGX. Upstream repair and public post-fix verification remain pending; there is no external-post permission question or downstream acceptance claim.
 
 ## Latest Completed Slice
 
-- `CONSUMER-REPORT-DELIVERY.3 - admit and publish consumer remedies` — exact staged canonical acceptance and immediate clean publication are mandatory for this boundary; the receipt, commit body and remote Git record its completion. Focused native/report proof is in .1/.2.
+- `CONSUMER-REPORT-DELIVERY.4 - record director-owned RGX handoff` — records publication, the director's communication ownership and concrete public repair acceptance. This administrative follow-up is committed locally after the canonical delivery push.
 
 ## Next Action
 
-- Confirm published main includes the delivery commit after interruption, then resume RGX-CONSUMER-BUILD-REPORTS.1: post the prepared report only after explicit authorization and verify an upstream remedy through the public interface. Unrelated startup .86.4.3 remains pending.
+- Director relays `docs/upstream/rgx/bootstrap-progress-status.md`; when an upstream remedy is published, verify it through RGX's supported interface under `RGX-CONSUMER-BUILD-REPORTS.1`. Unrelated startup .86.4.3 remains pending. A later push needs canonical proof for its exact HEAD.
 
 ## Recent Completions
+
+- `2026-09-23` — `CONSUMER-REPORT-DELIVERY.4` records verified publication and the director-owned local RGX handoff.
 
 - `2026-09-23` — `CONSUMER-REPORT-DELIVERY.3` binds the consumer handoff to exact canonical landing and clean remote publication.
 
@@ -43,8 +45,6 @@ The three-slice consumer-delivery batch reaches its canonical publication bounda
 - `2026-09-23` — `SESSION-STARTUP-READING.46` fixes the Unicode diagnostic panic; core/public/native proof passes and structured scalar spans remain exact.
 
 - `2026-09-23` — `SEXPR-DOCUMENT-INTEGRATION.2` admits all six public-loader paths, native document files and the local report scope; all backend guides are synchronized.
-
-- `2026-09-23` — `SEXPR-DOCUMENT-INTEGRATION.1` delivers native document files, typed causes, strict UTF-8 and relocatable packaging; all authored cases and legacy compatibility pass.
 
 ## History
 

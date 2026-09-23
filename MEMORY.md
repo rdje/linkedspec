@@ -1,12 +1,12 @@
 # MEMORY
 
-- activation_commit: `12c6ca9ad04acd45c91000be2312026b6790ee72` — clean base for canonical consumer publication.
-- latest_completed_leaf: `CONSUMER-REPORT-DELIVERY.3 - admit and publish consumer remedies`.
+- activation_commit: `a8d34c84595d46c24cd1820d5fc0414261706412` — clean published base for the local director handoff.
+- latest_completed_leaf: `CONSUMER-REPORT-DELIVERY.4 - record director-owned RGX handoff`.
 - active_work_unit: `RGX-CONSUMER-BUILD-REPORTS.1` — upstream LS-004 repair and post-fix verification.
-- next_action: Check remote main includes the delivery commit; post the prepared LS-004 report only after explicit authorization, then verify an upstream remedy through the public interface. Unrelated .86.4.3 stays pending.
+- next_action: Director relays docs/upstream/rgx/bootstrap-progress-status.md; when RGX publishes a remedy, verify its public failure/success/reuse outcomes under RGX-CONSUMER-BUILD-REPORTS.1. LinkedSpec fixes are published at a8d34c845; unrelated .86.4.3 stays pending.
   Named-argument direction PARSER-AUTHORING-APIS.4 is approved and parked; other authoring proposals and approved formats stay parked.
 - in_flight_uncommitted: none.
-- blockers: upstream LS-004 remains open; external report posting awaits explicit authorization. LinkedSpec delivery can proceed; .86.4.3 stays pending.
+- blockers: upstream LS-004 remains open; the director owns communication and RGX owns repair. No permission question remains. This local handoff commit follows published canonical delivery; a later push requires fresh exact-HEAD proof.
   Wrapper startup .7 remains open; warned-child group matched, but denied-call cause and original lost PUC stream remain unproved. Recovery/purge stay prohibited.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
   active table; the task metadata doctrine inventories all consumers, permits arbitrary frontier-row rewrites,

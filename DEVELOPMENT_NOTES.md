@@ -11,6 +11,12 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
 
+## 2026-09-23 — CONSUMER-REPORT-DELIVERY.4 - preserve publication and director relay ownership
+
+The exact canonical candidate became `a8d34c84595d46c24cd1820d5fc0414261706412`, and remote read-back confirms publication after a clean receipt-reusing push. The previously unavailable source baseline f60a70df3 is now fetchable. Canonical log SHA-256 is aa127606fb5b4ac9fa6af0c38fad159020b2ca385db9c511f5050c0b5b1f6b58; its commit records the staged fingerprint and completed result.
+
+The director answered the posting question while the staged gate was frozen: track feedback locally and let the director communicate it to RGX after the fixes are pushed. The unchanged canonical candidate landed first; this focused local follow-up records that decision without reusing the earlier receipt for the new HEAD. RGX-CONSUMER-BUILD-REPORTS.1 remains the repair owner, with an actionable report and public acceptance criteria. No permission question remains, no external message was sent by this session, and report delivery is not upstream repair. The public book's parser migration and source-pin instructions remain valid; no behavior or dependency pin changed.
+
 ## 2026-09-23 — CONSUMER-REPORT-DELIVERY.3 - bind consumer availability to canonical Git publication
 
 The repair baseline remains an immutable ancestor, f60a70df37159c0e42d66ee5f08a959821c7e08d, while the delivery commit carries the current report/migration record. Exact staged full CI must succeed before canonical landing; its promoted receipt governs the immediate clean push. After interruption, read current HEAD and remote main and verify ancestry instead of trusting a task completion label as publication proof.

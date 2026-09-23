@@ -2,6 +2,8 @@
 id: archogen-rust-lispish-integration
 title: ARCHOGEN can use Rust native loading with explicit Lispish and dependency preparation
 answers:
+  - who will relay ARCHOGEN LS-004 to RGX
+  - where is the local feedback for the remaining RGX report
   - are the SEMULITH and ARCHOGEN fixes published
   - which consumer reports remain unresolved
   - how should consumers adopt the fixed document parser
@@ -23,7 +25,7 @@ answers:
   - how does a host Cargo workspace exclude vendored LinkedSpec
   - does the workspace verifier query dependency internals
 date: 2026-09-23
-status: seven consumer remedies verified with canonical publication owned by delivery .3; check remote Git for availability; LS-004 remains open upstream
+status: seven consumer remedies published at a8d34c845 with exact remote read-back; director relays local RGX report; LS-004 remains open upstream
 tags: [rust, lispish, embedding, dependencies, discussion]
 evidence: "September13 native Lispish proof; September20 report intake, workspace repair and successful RGX public bootstrap/native consumer proof. Startup .83.2.1 verifies and applies the two quote-pattern flags with independent six-runtime recurrence."
 reverify: "Follow the public preparation/workspace sequence in docs/linkedspec-book/src/public-api/integration-rust.md, then its native consumer checks. Treat rgx/docs/INTEGRATION.md as the dependency authority; do not inspect implementation."
@@ -38,23 +40,30 @@ internal dependency knowledge belongs in LinkedSpec. Reports go to RGX.
 
 Delivery `.1` and `.2` landed at `01b04138a` and `12c6ca9ad`. They verify the
 seven LinkedSpec-owned remedies and reproduce the remaining RGX report. Delivery
-`.3` requires exact staged canonical acceptance, then immediate clean push and
-remote read-back. Use current Git to establish publication; a completed task or
-local commit alone is not proof that a downstream fetch can reach it.
+`.3` is committed and published at `a8d34c84595d46c24cd1820d5fc0414261706412`.
+Canonical CI passes, including nine doctrines, CLI66/66 in both environments and
+Phase0 1032/1032 (1113s); 25 opt-in gates are skipped. The push reused the promoted
+exact-commit receipt. Live remote main and origin/main both match that full hash.
 
-The tested baseline is `f60a70df37159c0e42d66ee5f08a959821c7e08d`. Refresh the
-remote and verify that baseline is an ancestor of published main before adopting
-the book's source pin. Rebuild the consumer and packaged grammar, and choose
-Document/sexpr_file for strict tagged documents. The remaining original defect
-is ARCHOGEN/LS-004, owned by `RGX-CONSUMER-BUILD-REPORTS.1`; external posting
-permission and upstream repair are outstanding. No downstream acceptance is claimed.
+The tested baseline `f60a70df37159c0e42d66ee5f08a959821c7e08d` is verified as an
+ancestor of published main. Rebuild the consumer and packaged grammar, and choose
+Document/sexpr_file for strict tagged documents. Reverify publication through Git
+after interruption; this is a dated observation, not a perpetual remote-state claim.
+
+Delivery `.4` records the director's instruction to keep feedback locally tracked;
+the director will relay `docs/upstream/rgx/bootstrap-progress-status.md` now that
+the LinkedSpec fixes are pushed. No external-post permission question remains and
+this session sent no external message. `RGX-CONSUMER-BUILD-REPORTS.1` retains the
+open ARCHOGEN/LS-004 repair and public post-fix verification. The focused local
+handoff commit does not inherit the published commit's canonical receipt for a
+future push. No upstream repair or downstream acceptance is claimed.
 
 ## September 23 consumer delivery priority
 
 The director reports that SEMULITH/ARCHOGEN are blocked. `CONSUMER-REPORT-DELIVERY`
-now owns making the existing local remedies available, fresh consumer proof and
-explicit adoption instructions. On resume, live `git ls-remote origin
-refs/heads/main` returns `87b35665e1a8e0de1f03a27e31dbd4d34d8e2d94`, before quote
+owns delivery, fresh consumer proof and explicit adoption instructions. At `.1`'s
+pre-publication checkpoint, live `git ls-remote origin refs/heads/main` returned
+`87b35665e1a8e0de1f03a27e31dbd4d34d8e2d94`, before quote
 repair `8259719f8`, document grammar `77d7b3db1`, file consumer `df845ce61` and
 admission `92f58b56c`. They are ancestors of local `f60a70df3`, but have not yet
 been published at this checkpoint. Local completion did not establish delivery.
@@ -79,9 +88,10 @@ Delivery `.2` reconfirms ARCHOGEN/LS-004 through the published interface on
 macOS27.0: offline empty-store failure exits2 yet prints the misleading seed
 line; the already-prepared control exits0 with an explicit no-op message.
 The refreshed local report records exact output hashes and the corrected no-op
-assertion. RGX owns repair; external posting permission has been requested, and
-no external issue or upstream fix is claimed. Publication of LinkedSpec's local
-remedies proceeds independently under `.3`.
+assertion. RGX owns repair. At that checkpoint permission had been requested; the later
+`.4` director-owned relay above supersedes that pending-question state. No
+external issue or upstream fix is claimed. `.3` independently published the
+LinkedSpec remedies.
 
 ## September 23 independent local admission
 

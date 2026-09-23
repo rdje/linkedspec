@@ -11,6 +11,12 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
 
+## 2026-09-23 — CONSUMER-REPORT-DELIVERY.4 - record director-owned RGX handoff
+
+Record completed canonical publication at `a8d34c84595d46c24cd1820d5fc0414261706412`: live remote main and origin/main match, and the tested f60a70df3 baseline is an ancestor. Canonical CI passes both CLI 66/66 environments and Phase 0 1032/1032 in 1113 seconds, with 25 opt-in gates skipped. The push reused the exact promoted receipt; all nine commit doctrines and the post-commit memory boundary passed.
+
+The director requests local task-tree feedback and will relay the ready report to RGX after the fix publication, now complete. Remove obsolete pending-permission wording from current owners and resume pointers; retain LS-004 as open, with RGX-owned repair and public failure/success/reuse acceptance. No external message, dependency change or downstream acceptance is claimed. This is a focused local administrative commit; a future push requires fresh exact-HEAD canonical proof. Memory/Knowledge/history/diff and all doctrine checks govern landing. Book migration instructions remain accurate and unchanged.
+
 ## 2026-09-23 — CONSUMER-REPORT-DELIVERY.3 - admit and publish consumer remedies
 
 Close the local consumer-delivery batch through exact staged canonical acceptance and immediate clean publication. Focused commits01b04138a and12c6ca9ad verify current native remedies and the remaining public RGX report. The book publishes tested source baselinef60a70df3, rebuild/package instructions, explicit Document/sexpr_file migration and the unresolved upstream report.

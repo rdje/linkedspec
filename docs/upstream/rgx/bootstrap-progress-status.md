@@ -1,8 +1,10 @@
 # Misleading progress text during a failed RGX public bootstrap
 
-- Status: reproduced locally; upstream resolution pending. This report has not been posted externally.
+- Status: reproduced locally; upstream resolution pending. The director will relay this local report; this session has not posted it externally.
 - Owner: `RGX-CONSUMER-BUILD-REPORTS.1`; prepared by `BACKEND-INTEGRATION-GUIDES.8.3`.
 - Related consumer report: ARCHOGEN/LS-004.
+- LinkedSpec remedies published at: `a8d34c84595d46c24cd1820d5fc0414261706412`; remote main read-back and tested-baseline ancestry verified September23.
+- Local feedback handoff: `CONSUMER-REPORT-DELIVERY.4`; director-owned communication follows publication.
 - RGX revision: `8763a0e6bea97879f027237439d57725f83ead23`.
 - Original observed environment: macOS26.6.2 arm64, Rust/Cargo1.95.0, system Make3.81.
 - September23 recurrence: macOS27.0 (26A428) arm64, Cargo1.95.0, system Make3.81; same pinned RGX interface.
@@ -80,5 +82,19 @@ Both successful no-op logs have SHA-256
 `2f710aac340a1502ef3b70ec290c6eacaf57e4559a3a3c14919f7d3b3398c280`.
 This is public failure/no-op recurrence, not another fresh-generation build.
 The unchanged dependency pin and successful current LinkedSpec consumer proof
-are recorded separately. External posting authorization has been requested;
-no issue has been posted and no upstream repair has been verified.
+are recorded separately. The director has requested local tracking and will
+relay this report after LinkedSpec publication, now completed. No external
+message was sent by this session and no upstream repair has been verified.
+
+## Requested repair and public acceptance
+
+Please make progress output accurately describe failed preparation. The overall
+nonzero failure status is already correct and must remain so. A success-sounding
+intermediate line must not imply that a failed preparation step completed. RGX
+owns the diagnosis and implementation; this report prescribes no internal fix.
+
+LinkedSpec will verify the published remedy through the supported public command:
+repeat the isolated offline failure, check its status and progress text, then
+check supported successful preparation and already-prepared reuse. The repair
+task remains open until that evidence exists. The separate LinkedSpec publication
+does not close this upstream report or establish downstream application acceptance.

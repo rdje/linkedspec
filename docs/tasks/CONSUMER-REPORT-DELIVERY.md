@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `CONSUMER-REPORT-DELIVERY`
-- Status: `done` / LinkedSpec delivery; upstream repair remains separately owned
+- Status: `done` / published delivery and local director handoff; upstream repair remains open
 - Roadmap lane: `SEMULITH / ARCHOGEN consumer blockers and delivery`
 - Created: `2026-09-23`
 - Last updated: `2026-09-23`
@@ -21,7 +21,7 @@ blocked SEMULITH/ARCHOGEN consumers over separately discovered validator work.
 - Verify the delivered consumer paths using current source and authored expectations.
 - Publish the fixes after exact canonical proof, leaving a clean durable handoff.
 - Pursue ARCHOGEN/LS-004 only through RGX's published interface; preserve upstream
-  repair ownership and obtain explicit authorization before posting a message.
+  repair ownership and keep feedback local for the director to relay after publication.
 - Do not claim downstream application acceptance or update either consumer's files.
 
 ## Task Tree
@@ -29,7 +29,7 @@ blocked SEMULITH/ARCHOGEN consumers over separately discovered validator work.
 - ID: `CONSUMER-REPORT-DELIVERY`
   Status: `done`
   Goal: Deliver local fixes and pursue the remaining consumer report through its proper owner.
-  Children: `CONSUMER-REPORT-DELIVERY.1`, `CONSUMER-REPORT-DELIVERY.2`, `CONSUMER-REPORT-DELIVERY.3`
+  Children: `CONSUMER-REPORT-DELIVERY.1`, `CONSUMER-REPORT-DELIVERY.2`, `CONSUMER-REPORT-DELIVERY.3`, `CONSUMER-REPORT-DELIVERY.4`
 
 - ID: `CONSUMER-REPORT-DELIVERY.1`
   Status: `done`
@@ -50,7 +50,7 @@ blocked SEMULITH/ARCHOGEN consumers over separately discovered validator work.
   Focused checks: Current published integration instructions and pinned public make bootstrap behavior, exact overall exit/output, isolated repository-local failure fixture, successful supported preparation control and unchanged source/pins. No dependency implementation inspection or internal build reconstruction.
   Canonical trigger: None; .3 owns the final delivery boundary.
   Acceptance: Distinguish the actual preparation failure from misleading progress text, preserve an actionable report, and request explicit external-post authorization only after that report is reviewable. Verification/report preparation does not close the upstream bug.
-  Verification: PASS current pinned public-interface recurrence on macOS27.0/Cargo1.95/Make3.81. Fresh local empty-store failure exits2 with missing-package error and misleading seed line, without final completion. Prepared control and repeat exit0 with the public already-generated no-op message. Correct the diagnostic-only fresh-banner assumption; no implementation change. Dependency pin stays exact. Refreshed report preserves full log hashes and external-post authorization remains pending. Book/memory/Knowledge/history/diff and normal doctrines govern landing.
+  Verification: PASS current pinned public-interface recurrence on macOS27.0/Cargo1.95/Make3.81. Fresh local empty-store failure exits2 with missing-package error and misleading seed line, without final completion. Prepared control and repeat exit0 with the public already-generated no-op message. Correct the diagnostic-only fresh-banner assumption; no implementation change. Dependency pin stays exact. Refreshed report preserves full log hashes. At this checkpoint external-post authorization had been requested; .4 records the subsequent director-owned relay. Book/memory/Knowledge/history/diff and normal doctrines govern landing.
   Commit: `CONSUMER-REPORT-DELIVERY.2 - reverify the public RGX report` (this slice; base01b04138a).
 
 - ID: `CONSUMER-REPORT-DELIVERY.3`
@@ -61,14 +61,25 @@ blocked SEMULITH/ARCHOGEN consumers over separately discovered validator work.
   Focused checks: Consumer handoff commands and report dispositions; clean Git and commit-message hygiene; exact canonical receipt, push and read-back of remote main.
   Canonical trigger: Final three-slice consumer-delivery batch and pre-push boundary.
   Acceptance: Publish a reproducible fixed revision and clear migration instructions; distinguish local public-integration proof from downstream adoption, and retain LS-004 under RGX ownership until a verified upstream remedy exists.
-  Verification: .1 and .2 are committed with all nine doctrines passing. This admission requires successful tools/run_ci_local.sh on the exact staged candidate; the canonical receipt and commit body record the completed gate. Immediate clean push must reuse the promoted receipt, and git ls-remote must match the new HEAD. Git remains publication authority; do not infer remote availability from this task status alone. The public book supplies baseline f60a70df3 and explicit document migration. LS-004 is still open with no external posting authorization or verified upstream remedy.
-  Commit: `CONSUMER-REPORT-DELIVERY.3 - admit and publish consumer remedies` (this slice; base12c6ca9ad).
+  Verification: PASS tools/run_ci_local.sh, exit0; nine doctrines, both CLI66/66 routes and Phase0 1032/1032 in1113s. Twenty-five opt-in gates remain skipped. The exact staged receipt was promoted to a8d34c84595d46c24cd1820d5fc0414261706412; the clean push reused it. Live git ls-remote and origin/main both match that commit, and tested baseline f60a70df37159c0e42d66ee5f08a959821c7e08d is an ancestor. Commit body records the staged fingerprint and canonical log hash. LS-004 remains open; .4 records the director-owned relay.
+  Commit: `a8d34c84595d46c24cd1820d5fc0414261706412` — `CONSUMER-REPORT-DELIVERY.3 - admit and publish consumer remedies`; published to origin/main.
+
+- ID: `CONSUMER-REPORT-DELIVERY.4`
+  Status: `done`
+  Goal: Record successful publication and the director's ownership of relaying the remaining RGX feedback.
+  Dependencies: .3 committed and pushed from a clean tree; remote main read-back equals a8d34c84595d46c24cd1820d5fc0414261706412. The director requests local task-tree tracking and will communicate with RGX after publication.
+  Verification tier: `focused`
+  Focused checks: Exact remote identity and tested-baseline ancestry; report/task/KM/resume consistency; memory architecture, Knowledge generation, bounded histories, all registered doctrines and diff hygiene. Public behavior and book migration instructions remain unchanged.
+  Canonical trigger: None for this local administrative follow-up after completed canonical publication. Any later push requires canonical proof for its exact HEAD.
+  Acceptance: Give the director a concrete local report and open repair owner, record the published fixes, remove the obsolete pending-permission state, and preserve public post-fix acceptance criteria. Do not post externally or claim upstream repair or downstream acceptance.
+  Verification: PASS exact remote main read-back and tested-baseline ancestry at published a8d34c845. Current report/task/KM/resume pointers agree on director-owned relay and pending upstream repair. Memory architecture, Knowledge generation, both bounded-history checks, all nine registered doctrines and diff hygiene govern this focused landing; the commit body records their result. No public behavior or book migration change requires another runtime test run.
+  Commit: `CONSUMER-REPORT-DELIVERY.4 - record director-owned RGX handoff` (local follow-up; base a8d34c845).
 
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `CONSUMER-REPORT-DELIVERY.3` | `done` | Canonical landing and immediate push form the delivery boundary; RGX-CONSUMER-BUILD-REPORTS.1 retains the open upstream repair. |
+| 1 | `CONSUMER-REPORT-DELIVERY.4` | `done` | Publication and director-owned relay are recorded; RGX-CONSUMER-BUILD-REPORTS.1 retains the open repair and public post-fix verification. |
 
 ## Decisions and Boundaries
 
@@ -78,8 +89,10 @@ blocked SEMULITH/ARCHOGEN consumers over separately discovered validator work.
 - ADR0124 delivers strict complete documents and token kinds through a separate
   grammar and consumer. Historical Lispish remains compatible; merely rerunning
   its old adapter does not exercise the new document contract.
-- RGX/PGEN remain black boxes. No external issue or message is posted without
-  explicit authorization; prepared repo-local reports are already authorized.
+- RGX/PGEN remain black boxes. September23 director decision: keep response and
+  feedback locally in LinkedSpec task tracking; the director will communicate it
+  to RGX after the fixes are pushed. No agent posting request remains pending.
+  The LinkedSpec fixes are now published; the upstream report remains open.
 
 ## Evidence Pointers
 
@@ -91,13 +104,19 @@ blocked SEMULITH/ARCHOGEN consumers over separately discovered validator work.
 
 ## Publication and Resume Contract
 
-- `.3` is the final canonical commit of this three-slice delivery batch. Finish
-  its immediate clean push and read back `git ls-remote origin refs/heads/main`
-  before reporting consumer availability. Re-run that read after interruption;
-  the latest commit is always derived from Git, never its own embedded hash.
-- `git merge-base --is-ancestor f60a70df37159c0e42d66ee5f08a959821c7e08d origin/main`
-  checks availability of the tested source baseline after refreshing the remote.
-- The seven local remedies do not close ARCHOGEN/LS-004. The actionable report is
-  `docs/upstream/rgx/bootstrap-progress-status.md`; explicit permission to post is
-  still outstanding. Upstream diagnosis/repair and public post-fix verification
-  stay under `RGX-CONSUMER-BUILD-REPORTS.1`. No downstream application was changed.
+- `.3` completed the canonical three-slice delivery batch. Remote main read-back
+  equals `a8d34c84595d46c24cd1820d5fc0414261706412`; the push advanced it from
+  `87b35665e1a8e0de1f03a27e31dbd4d34d8e2d94`. The tested baseline
+  `f60a70df37159c0e42d66ee5f08a959821c7e08d` is an ancestor of published main.
+- Publication evidence is retained in the commit body and repository-local
+  `.linkedspec-data/scratch/consumer-report-delivery/publication.json`.
+  After interruption, reverify current publication with
+  `git ls-remote origin refs/heads/main`; dated evidence is not a perpetual claim
+  about remote state.
+- `.4` records the later director-owned relay in a focused local commit. It does
+  not claim a new canonical receipt or another push. Any later push must satisfy
+  the exact-HEAD canonical boundary again.
+- The director can relay `docs/upstream/rgx/bootstrap-progress-status.md`, owned
+  by `RGX-CONSUMER-BUILD-REPORTS.1`. That task retains upstream diagnosis/repair
+  and public post-fix verification. No external message was sent by this session,
+  no downstream application was changed, and LS-004 has not been fixed.
