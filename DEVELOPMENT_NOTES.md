@@ -11,6 +11,12 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
 
+## 2026-09-23 — SESSION-STARTUP-READING.86.4.7 - extend the structural view to complete quoted subjects
+
+Skipping a complete quoted token in the whole-source scanner was insufficient: the subsequent line scanner still saw its bytes, restarted quote state at each physical line, and swallowed real open parentheses after a closing quote. Masking complete multiline quoted tokens within an open expression scope gives all three structural passes a consistent view. Preserve each CR/LF and character position, compile the original text, and leave unclosed tokens and bare rule-level strings unmasked so existing rejection remains available.
+
+The exact nine-group RED/GREEN proof covers both quote styles, LF/CRLF, leading/trailing line endings, returned values, inline matching, substitution and both lifecycle placements. Generated execution covers all four quote/line-ending combinations. Escaped quotes and rule/directive-like payloads cannot become structure; a real repeated malformed header retains line7 attribution, and bare strings/unclosed tokens/open blocks reject. Public/lowered diagnostic comparison confirms only the physical_subject validation outcome changes; four escaped-newline routes are byte-for-byte unchanged and retain their separate repair owner. Focused198 and exact book16 pass; complete Phase0 passes1033/1033 in1276 seconds. Normal staged doctrines govern landing; canonical parent acceptance remains .86.3.
+
 ## 2026-09-23 — SESSION-STARTUP-READING.86.4.6 - protect helper tokens before statement splitting
 
 StatementSplit recognized host quote operators but not naked slash operands. Closing /y/ or a multiline pattern ending y opened translation mode and swallowed the next separator/endif. Argument-boundary recognition now enters the existing one-segment slash state, using MethodExpr's numeric-call discriminator. Single-line, LF and CRLF inputs with suffixes y/s/m/q/tr/qr/qq/qx retain mutation, continuation and independent generated results. Numeric slash arguments and both historically rejected assignment-precedence controls remain numeric.

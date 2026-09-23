@@ -267,12 +267,28 @@ The same patterns and subsequent statements survive standalone generated Perl
 parsers. These checks cover supported helper operands, without introducing a
 regex-valued variable type.
 
-Two string-related limitations remain. Physical newlines inside a quoted DSL
-subject can still confuse structural validation (`.86.4.7`). Also, `"\n"`
-currently remains backslash-plus-`n` through ordinary assignment/return lowering,
+Quoted subjects can contain physical line endings too. Both single and double
+quotes preserve LF or CRLF in ordinary return values, helper operands and
+lifecycle assignments. For example, this parser returns `"ok"` on input `x`:
+
+```text
+Top::
+ -> Done { text = "x
+y"; regex_subst(text, /x
+y/, "ok", g); return(text) }
+Done:
+ /x/
+```
+
+Rule-like text inside the quoted value remains string content. A real malformed
+rule after the action still reports its original source line.
+
+An escape-lowering limitation remains: `"\n"` currently stays
+backslash-plus-`n` through ordinary assignment/return lowering,
 while the inline helper example above decodes it as LF
-(`SUPPORTING-SOURCE-READING.2.4`). The substitution example uses `match_text()`
-to obtain exact subject bytes from input. Check both failure channels described
+(`SUPPORTING-SOURCE-READING.2.4`). The input-capture example uses `match_text()`
+to obtain exact subject bytes from input; the last example uses an actual line
+ending in its quoted value. Check both failure channels described
 below; a returned parser alone does not establish successful execution.
 
 For arithmetic division, `div(14, 2)` works at the end of an action block.

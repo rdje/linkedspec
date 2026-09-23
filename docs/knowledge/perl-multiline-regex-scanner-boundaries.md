@@ -12,14 +12,14 @@ answers:
   - why does a slash inside a comment require a Perl precedence decision
   - which task owns the Perl division versus multiline regex precedence choice
 date: 2026-09-23
-status: .86.4.2.4 supersedes precedence premise; validation .86.4.3 and splitting .86.4.6 repaired; quoted subjects .86.4.7 remain open
+status: .86.4.2.4 supersedes precedence premise; validation .86.4.3, splitting .86.4.6 and quoted subjects .86.4.7 repaired
 tags: [perl, regex, actionir, validation, newline]
 evidence: "SESSION-STARTUP-READING.86.4.1 separates validation from action segmentation. Resumed .86.4.2.1 compares exact accepted source and the archived lexical candidate: two public Get and independent lowered-action results change from7 to empty string with no last_error. Both rejected candidates remain evidence only; production/tests are restored."
 reverify: "bash tools/project_data_run.sh env PERL5LIB= perl -Iperl docs/checkpoints/SESSION-STARTUP-READING.86.4.2.1.pl; expected accepted public/action values are7 for both sources. Those task proposals are superseded by .86.4.2.4; use its separate helper-operand diagnostic for the current repair."
 ---
 
 Current repair: [[perl-multiline-helper-pattern-validation]] records .86.4.3's
-validation view, .86.4.6's repaired helper splitting and .86.4.7's quoted-subject owner. The scanner
+validation view, .86.4.6's repaired helper splitting and .86.4.7's quoted-subject repair. The scanner
 observations and rejected patches below retain their historical baseline.
 
 Current authority: `.86.4.2.4` corrects the premise of this investigation.
@@ -27,8 +27,9 @@ Current authority: `.86.4.2.4` corrects the premise of this investigation.
 are documented, but a first-class regex-variable contract is absent. The earlier
 precedence question `.86.4.2.2` and assignment-position splitter expansion
 `.86.4.2.3` are superseded without implementation. No answer to that question is
-required. A multiline `matches` operand lowers correctly and executes to1, but
-whole-spec validation fails; `.86.4.3` owns that supported-use defect.
+required. At the audit baseline a multiline `matches` operand lowered and
+executed to1, but whole-spec validation failed; verified `.86.4.3` repairs that
+supported-use defect.
 
 The observations below remain reproducible historical implementation evidence.
 They do not require accepting standalone regex assignment as a reusable value.

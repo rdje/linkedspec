@@ -47,5 +47,6 @@ lowered execution agree within each route. Run the diagnostic through
 `SUPPORTING-SOURCE-READING.2.4` already owns sigils, backslashes and supported
 escapes across literal/aggregate/generated routes. Reconcile that contract in
 its repair; neither route is silently promoted into a new portable rule here.
-Physical multiline quoted-subject validation has the distinct `.86.4.7` owner
-and mechanism in [[perl-multiline-helper-pattern-validation]].
+Physical multiline quoted-subject validation is repaired separately by
+`.86.4.7`; its public/generated proof and unchanged escape boundary are recorded
+in [[perl-multiline-helper-pattern-validation]].

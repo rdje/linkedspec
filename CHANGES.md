@@ -11,6 +11,12 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
 
+## 2026-09-23 — SESSION-STARTUP-READING.86.4.7 - preserve physical multiline quoted subjects during validation
+
+Protect complete multiline quoted tokens inside expression scopes in the existing structural validation view. Keep original compilation bytes and diagnostic offsets; leave bare rule-level strings and unterminated tokens visible. Both quote styles preserve LF/CRLF through ordinary literals, inline helper subjects, substitution and lifecycle assignments.
+
+Exact committed-source replay fails the new regression groups8/9; the candidate passes all nine. Eight focused files pass198 tests; all three complete mdBook examples are extracted and independently executed live/generated for16 passing assertions, and rendering succeeds. The permanent diagnostic retains identical action/lowered source while public physical_subject changes from structural failure to ok; all four separate escape-route records stay identical. Complete Phase0 passes1033/1033 in1276 seconds, including the exact nine-group consumer. SUPPORTING-SOURCE-READING.2.4 retains escape fidelity; .86.4.4 owns public recomposition before EOF and canonical closeout.
+
 ## 2026-09-23 — SESSION-STARTUP-READING.86.4.6 - preserve regex helper statement boundaries
 
 Recognize slash-pattern operands at parenthesized argument boundaries before a closing y/ can become a translation opener. Reuse the numeric slash-call discriminator; retain assignment-position interpretation, authored bytes and the existing lowering owners. The repair restores substitution, newline continuation and conditional matches without a regex runtime type.

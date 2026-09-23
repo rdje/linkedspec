@@ -2,17 +2,19 @@
 
 ## Current Activity
 
-Perl helper-pattern validation and statement splitting are verified under .86.4.3/.86.4.6. Physical quoted-subject validation is next under .86.4.7 before public recomposition .86.4.4. Escape-route fidelity retains SUPPORTING-SOURCE-READING.2.4; LS-004 remains director-relayed and upstream-owned.
+Perl helper validation, statement splitting and physical quoted-subject validation are verified under .86.4.3/.86.4.6/.86.4.7. Public recomposition .86.4.4 is next. Escape-route fidelity retains SUPPORTING-SOURCE-READING.2.4; LS-004 remains director-relayed and upstream-owned.
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.86.4.6 - preserve regex helper statement boundaries` — focused52, both exact Markdown examples (11 live/generated assertions), rendered book and complete Phase0 1033/1033 in1545 seconds. Baseline replay fails groups5/7; division compatibility remains intact.
+- `SESSION-STARTUP-READING.86.4.7 - preserve multiline quoted subject validation` — focused198, all three exact Markdown examples (16 live/generated assertions), rendered book and complete Phase0 1033/1033 in1276 seconds. Baseline replay fails groups8/9; source bytes and separate escape behavior remain unchanged.
 
 ## Next Action
 
-- Repair .86.4.7 using the tracked .86.4.6 public/lowered quoted-subject diagnostic. Then recompose .86.4.4, repair .86.5 and run .86.3 canonical closeout. Commit each verified slice; final push requires exact-HEAD canonical proof.
+- Recompose .86.4.4 through public loaders and independent generated parsers, with permanent direct book-example proof. Then repair .86.5 and run .86.3 canonical closeout. Commit each verified slice; final push requires exact-HEAD canonical proof.
 
 ## Recent Completions
+
+- `2026-09-23` — `SESSION-STARTUP-READING.86.4.7` repairs physical quoted-subject validation; focused198, exact book16 and Phase0 1033/1033 pass.
 
 - `2026-09-23` — `SESSION-STARTUP-READING.86.4.6` repairs helper statement boundaries; focused52, exact book11 and Phase0 1033/1033 pass.
 
@@ -43,8 +45,6 @@ Perl helper-pattern validation and statement splitting are verified under .86.4.
 - `2026-09-23` — `SESSION-STARTUP-READING.86.1` preserves eleven non-slash symbol callees and fixes subtraction returning null; core247/runtime401/native44 pass; .86.2 follows.
 
 - `2026-09-23` — `SESSION-STARTUP-READING.49` preserves regex suffix adjacency and following statements; core243/runtime397/native22 pass; separately owned .86 follows.
-
-- `2026-09-23` — `SESSION-STARTUP-READING.47.3` closes the verified argument/source parent through receipt-bound canonical acceptance; .49 follows.
 
 ## History
 

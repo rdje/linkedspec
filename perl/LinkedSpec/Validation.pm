@@ -554,10 +554,10 @@ sub _inter_match_gap_execution_shape {
  return 'default_scan_loop'
 }
 
-# Structural validation is line-oriented, but a regex argument can cross a line.
-# Hide only complete multiline argument tokens in a length-preserving view. The
-# compiler and diagnostics continue to use the original source. In particular,
-# assignment-position slash calls keep their existing physical-line decision.
+# Structural validation is line-oriented, but helper patterns and their quoted
+# subjects can cross a line. Hide complete multiline literals within expression
+# scopes in a length-preserving view. Compilation and diagnostics keep original
+# source; assignment-position slash calls keep their physical-line decision.
 sub _helper_pattern_validation_view {
  my ($source) = @_;
  my $view = $source;
@@ -575,10 +575,20 @@ sub _helper_pattern_validation_view {
   my $char = substr($source, $i, 1);
   if ($char eq q{'} || $char eq q{"}) {
    my $quote = $char;
+   my $start = $i;
    while (++$i < $length) {
     my $inner = substr($source, $i, 1);
     if ($inner eq "\\") { ++$i; next }
     last if $inner eq $quote;
+   }
+   # Do not erase a bare string at rule level or an unterminated token. Both
+   # must remain visible to the existing structural/compiler diagnostics.
+   if (@scopes && $i < $length) {
+    my $token = substr($source, $start, $i - $start + 1);
+    if ($token =~ /\n/) {
+     $token =~ s/[^\r\n]/ /g;
+     substr($view, $start, $i - $start + 1, $token);
+    }
    }
    next;
   }

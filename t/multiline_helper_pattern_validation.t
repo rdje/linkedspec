@@ -188,4 +188,78 @@ subtest 'pattern tokens preserve subsequent statements and generated execution' 
  }
 };
 
+subtest 'physical multiline quoted operands retain structure and values' => sub {
+ my $serial = 0;
+ for my $quote (q{'}, q{"}) {
+  for my $separator ("\n", "\r\n") {
+   my $quoted = $quote . "x\ny" . $quote;
+   my $mutation = 'text = ' . $quoted . '; regex_subst(text, /x' . "\n" . 'y/, "ok", g)';
+   my @cases = (
+    ['literal return', source_for('return(' . $quoted . ')'), "x${separator}y"],
+    ['leading newline', source_for('return(' . $quote . "\ny" . $quote . ')'), "${separator}y"],
+    ['trailing newline', source_for('return(' . $quote . "x\n" . $quote . ')'), "x${separator}"],
+    ['inline subject', source_for('return(matches(' . $quoted . ', /x' . "\n" . 'y/))'), 1],
+    ['assigned subject', source_for($mutation . '; return(text)'), 'ok'],
+    ['member lifecycle', "Top::\n I { $mutation }\n -> Done { return(text) }\nDone:\n /x/\n", 'ok'],
+    ['inline lifecycle', "Top:: I { $mutation }\n -> Done { return(text) }\nDone:\n /x/\n", 'ok'],
+   );
+   for my $case (@cases) {
+    my ($name, $source, $expected) = @$case;
+    $source =~ s/\n/$separator/g;
+    my $original = $source;
+    ok(LinkedSpec::Validation::validate_dsl_syntax(\$source, {}), "$name validates with $quote and separator length " . length($separator));
+    is($source, $original, 'authored source is unchanged');
+    my %context;
+    my $parser = LinkedSpec::Get(\$source, runtime_ctx_ref => \%context);
+    my $input = 'x';
+    is_deeply($parser ? $parser->(\$input) : undef, $expected, 'public execution preserves exact quoted value')
+     or diag(explain(\%context));
+    is($context{last_error}, undef, 'no deferred handler error');
+    if ($name eq 'assigned subject') {
+     my $emitted = eval { LinkedSpec::emit_generated_source(\$source, source_identity => 'quoted-subject.spec') };
+     ok(defined($emitted), 'quoted subject emits source') or diag(explain($@));
+     if (defined $emitted) {
+      my $package = 'QuotedSubjectGenerated' . ++$serial;
+      my $loaded = eval "package $package; $emitted; 1";
+      ok($loaded, 'emitted quoted subject loads') or diag($@);
+      my $execute = $package->can('Execute');
+      $input = 'x';
+      is($execute ? $execute->(\$input) : undef, 'ok', 'independent generated execution preserves quoted subject');
+     }
+    }
+   }
+  }
+ }
+};
+
+subtest 'quoted payload cannot masquerade as real rule structure' => sub {
+ for my $quote (q{'}, q{"}) {
+  for my $payload ('Fake:', '@capture_gaps', 'head=/x/', '-> Missing', '=> Missing', '}') {
+   my $source = source_for('text = ' . $quote . "start\n$payload\nend" . $quote . '; return(text)');
+   ok(LinkedSpec::Validation::validate_dsl_syntax(\$source, {}), "$quote protects $payload");
+  }
+  my $escaped = source_for('text = ' . $quote . 'start\\' . $quote . "\nFake:\nend" . $quote . '; return(text)');
+  ok(LinkedSpec::Validation::validate_dsl_syntax(\$escaped, {}), 'escaped quote does not end multiline token');
+  my $source = source_for('text = ' . $quote . "start\nBroken:::\nend" . $quote . '; return(text)')
+   . "Broken:::\n";
+  my %failure;
+  ok(!LinkedSpec::Validation::validate_dsl_syntax(\$source, {
+   on_failure => sub { %failure = @_ },
+  }), 'real malformed header after identical quoted text rejects');
+  is($failure{summary}, 'Malformed rule label syntax', 'real malformed header owns the error');
+  like($failure{detail}, qr/DSL Error at line 7:/, 'diagnostic reports the real occurrence');
+  for my $placement ('', 'Top::' . "\n") {
+   my $outside = $placement . $quote . "start\nend" . $quote . "\nDone:\n /x/\n";
+   ok(!LinkedSpec::Validation::validate_dsl_syntax(\$outside, {}), 'multiline string outside action syntax stays invalid');
+  }
+  for my $action ('text = ' . $quote . "start\nend", 'text = ' . $quote . "start\nend" . $quote . '; return(text)') {
+   my $malformed = "Top::\n I { $action\n";
+   my %context;
+   my $parser = LinkedSpec::Get(\$malformed, runtime_ctx_ref => \%context);
+   if ($parser) { my $input = 'x'; $parser->(\$input) }
+   ok($context{last_error}, 'unclosed string or real action block still rejects');
+  }
+ }
+};
+
 done_testing;

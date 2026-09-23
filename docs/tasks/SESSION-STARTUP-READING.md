@@ -4718,16 +4718,23 @@ remain. Reading completion and runtime signoff remain distinct.
   - [x] **LOCKSTEP** — Both complete mdBook examples pass11 direct public/generated assertions; book renders; task/Knowledge/live/roadmap records retain owned subject defects.
 
 - ID: `SESSION-STARTUP-READING.86.4.7`
-  Status: `pending`
+  Status: `done`
   Goal: Preserve quoted multiline subjects through whole-spec structural validation alongside helper regex operands.
   Intake owner: .86.4.6 public regression expansion; repair before public recomposition .86.4.4.
   Dependencies: Land .86.4.6; keep string escape/value semantics with SUPPORTING-SOURCE-READING.2.4.
-  Planned tier: focused.
-  Planned focused proof: Exact public, validation and lowered execution for both quote styles, LF/CRLF, syntax-looking payloads, following rules and real malformed structure; complete Phase0 and relevant validation/action tests, book examples and doctrines.
-  Planned canonical boundary: Parent .86.3.
+  Verification tier: `focused`
+  Focused checks: Exact public, validation and lowered execution for both quote styles, LF/CRLF, syntax-looking payloads, following rules and real malformed structure; complete Phase0 and relevant validation/action tests, book examples and doctrines.
+  Canonical trigger: Parent .86.3.
   Acceptance: Preserve original quoted bytes, positions and diagnostic ownership without concealing malformed source; prove live and independently emitted execution. No new string escape contract.
   Verification: .86.4.6 expanded public source with physical LF in both assigned subject and regex fails validate_dsl_syntax with Unexpected closing delimiter; isolated lowering executes to ok. Original .86.4.3 helper view skips whole quoted tokens, but downstream rule-edge scans restart quote state on each physical line. Reproduce with the tracked diagnostic before repair; do not count regex-subject fixture substitution as resolving this issue.
-  Commit: `pending`
+  Accepted proof: Exact final nine-group consumer fails groups8/9 on isolated committed36df52e46 and passes9/9 on the candidate. Focused validation/action/gap/slot/binding checks pass198 across eight files; three exact Markdown examples pass16 live/generated assertions and the book renders. The tracked diagnostic retains identical authored/lowered source, returns public ok for physical_subject and preserves all four escape-route records exactly. Complete Phase0 passes1033/1033 in1276 seconds and consumes all nine groups. Memory/Knowledge and both history checks pass (engineering notes below rollover, within warning band); normal staged doctrines govern landing.
+  Commit: This commit; subject `SESSION-STARTUP-READING.86.4.7 - preserve multiline quoted subject validation`.
+  - [x] **REPRODUCE / ISSUE** — Public/lowered tracked diagnostic and exact isolated36df52e46 replay fail groups8/9 while independent physical_subject lowering returns ok.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — Whole-source quote scanning skips token contents, but the physical-line rule-edge scanner still sees those bytes and restarts quote state.
+  - [x] **FIX** — Mask complete multiline quoted tokens only within open expression scopes; retain original line endings/positions and compilation source.
+  - [x] **ADDRESSED (verified)** — Both quote styles, LF/CRLF, leading/trailing newlines, return/helper/substitution/lifecycle values and four independently emitted cases pass.
+  - [x] **NO REGRESSION** — Focused198 and complete Phase0 1033/1033 pass; real malformed source and line7 attribution remain; four escape-route diagnostic records stay byte-identical.
+  - [x] **LOCKSTEP** — All three complete mdBook examples pass16 public/generated assertions, book renders, and Knowledge/task/roadmap/live records select .86.4.4.
 
 - ID: `SESSION-STARTUP-READING.86.5`
   Status: `pending`
@@ -4772,10 +4779,10 @@ audit range, not the default repair frontier.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.86.4.7` | `pending` | Repair physical multiline quoted-subject validation after verified helper splitting .86.4.6. |
+| 1 | `SESSION-STARTUP-READING.86.4.4` | `pending` | Recompose verified helper validation/splitting/quoted-subject repairs through public loaders, independent generated parsers and permanent book-example proof. |
 
 The audit withdraws the unsupported precedence question. Helper validation `.86.4.3` and
-statement splitting `.86.4.6` are verified. Next is quoted-subject validation `.86.4.7`, then public recomposition `.86.4.4`, EOF `.86.5` and canonical `.86.3`.
+statement splitting `.86.4.6` plus quoted-subject validation `.86.4.7` are verified. Next is public recomposition `.86.4.4`, then EOF `.86.5` and canonical `.86.3`.
 Independent helper gaps are owned by `.87.1/.87.2`; no regex-type feature is admitted.
 
 ## Reading Ledger
