@@ -241,14 +241,35 @@ retain their direct-value and compatibility entry points.
 
 The empty argument list in `tree.map_leaves!() { add(value, 1) }` may contain
 spaces, tabs or newlines: `tree.map_leaves!( ) { add(value, 1) }` has the same
-meaning. Compilation preserves supplied action-source text and Unicode scalar
-spans through source-AST reconstruction, compiled JSON and generated execution.
-The outer `.spec` parser currently normalizes multiline block line endings and
-indentation before constructing that action source; those coordinates refer to
-the collected action text. Nonempty arguments such as
+meaning. The typed mutation node preserves its supplied call text and Unicode
+scalar spans through compilation, source-AST reconstruction, compiled JSON and
+generated execution.
+The outer `.spec` parser retains internal LF/CRLF line endings, blank lines and
+indentation in action blocks. It trims only whitespace surrounding the complete
+block interior; action coordinates refer to that trimmed interior. Nonempty arguments such as
 `map_leaves!(1)` remain invalid. See the
 [mutation examples](../dsl/values-containers-and-flow-helpers.md#mutating-leaves-on-all-five-backends)
 for receiver initialization, callback values and commit behavior.
+
+Compact blocks on a rule header preserve quoted whitespace too. For example,
+`Top:: E{return("a  b")} /x/` returns the string with both spaces, just as it does
+when the `E` block starts on the following line. Tabs inside quoted values remain
+tabs. This does not add multiline string literals to `.spec` action blocks.
+
+When one multiline block starts on another block's closing line, its following
+statements are retained too. With input `x`, this specification returns `4`:
+
+```text
+Top::
+ I { note = 0;
+     note = 1 } E { note = 3;
+     note = 4;
+     return(note) } /x/
+```
+
+Rebuild affected source ASTs, compiled JSON and generated modules from the original
+`.spec` files. Later stages cannot recover whitespace or statements that an older
+outer parser already removed.
 
 One engine processes every command-line input independently. The direct-value
 method returns `serde_json::Value`; printing it writes JSON. This avoids the

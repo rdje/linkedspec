@@ -146,10 +146,13 @@ check exact text and Unicode-scalar spans; serde/generated/emitted execution che
 values. Seven nonempty syntax controls and eight forged argument projections
 retain rejection. Whole-spec native controls independently verify values.
 
-Outer `.spec` block capture has a distinct CRLF/indentation normalization defect.
+Outer `.spec` block capture had a distinct CRLF/indentation normalization defect.
 The initial whole-spec exact-text assertion failed rather than being weakened;
-immediate `.47.2` owns its repair. See [[rust-outer-action-source-fidelity]].
+`.47.2` now preserves the original expected text through whole-spec and programmatic
+source ASTs, serde/generated plans and independently compiled emitted consumers.
+See [[rust-outer-action-source-fidelity]] for the complete Rust component/native proof.
 Fresh runtime verification passes all 179 library and 12 public mutation tests;
 six rebuilt-native controls and unchanged neutral 167+592 mutations pass.
 Core compatibility passes 201 library, 4 diagnostic and 5 rule-code groups.
-The owning leaf records final landing evidence; .47.2 remains an explicit limitation.
+The owning leaves record exact evidence; `.47.3` owns canonical parent closeout.
+The separately recorded `.58`/`.59` receiver-guard defects remain open.

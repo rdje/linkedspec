@@ -18,7 +18,8 @@ use rgx_core::Regex;
 
 /// Parse a `.spec` source string into a `SpecFile` AST.
 pub fn parse_spec(source: &str) -> Result<SpecFile> {
-    let lines: Vec<&str> = source.lines().collect();
+    // Retain CR in CRLF lines so block capture can reconstruct authored text.
+    let lines: Vec<&str> = source.split_terminator('\n').collect();
     let len = lines.len();
     let mut rules: Vec<Rule> = Vec::new();
     let mut i = skip_blanks_and_comments(&lines, 0);
@@ -26,7 +27,7 @@ pub fn parse_spec(source: &str) -> Result<SpecFile> {
     while i < len {
         // Try to parse a rule header at the current line
         if let Some((header, next_i)) = parse_rule_header(&lines, i)? {
-            let rest = header.rest.trim().to_string();
+            let rest = header.rest.trim_start().to_string();
             let mut body_start_i = next_i;
             let mut inline_elements = Vec::new();
 
@@ -35,9 +36,7 @@ pub fn parse_spec(source: &str) -> Result<SpecFile> {
             // header rest can consume its continuation lines as one element.
             if !rest.is_empty() {
                 let mut inline_i = header.line.saturating_sub(1);
-                if let Some(parsed_inline) =
-                    parse_inline_body(&rest, header.line, &lines, &mut inline_i)
-                {
+                if let Some(parsed_inline) = parse_inline_body(&rest, &lines, &mut inline_i) {
                     inline_elements = parsed_inline;
                     body_start_i = body_start_i.max(inline_i);
                 }
@@ -134,7 +133,7 @@ fn parse_rule_header(lines: &[&str], i: usize) -> Result<Option<(RuleHeader, usi
         return Ok(None);
     }
     let line = lines[i];
-    let trimmed = line.trim();
+    let trimmed = line.trim_start();
 
     // The mode suffix stops at whitespace or `/`: consuming `/` here would swallow a
     // `/…/` regex written on the rule's header line (e.g. `name : /re/` or a
@@ -145,23 +144,18 @@ fn parse_rule_header(lines: &[&str], i: usize) -> Result<Option<(RuleHeader, usi
     // fall through to `rest`, where `parse_inline_body` registers it.
     // Every real mode suffix (AND, OR+, &, *, ?, AND{2,4}, …) is slash-free, so
     // this is identical to the old tokenization for all non-regex header content.
-    if let Some((label, is_top, mode_raw, rest_raw)) = parse_rule_header_fields(trimmed) {
-        let parsed_mode = parse_mode_suffix_strict(mode_raw);
+    if let Some(fields) = parse_rule_header_fields(trimmed) {
+        let parsed_mode = parse_mode_suffix_strict(fields.mode);
         let (mode, rest) = match parsed_mode {
-            Some(mode) => (mode, rest_raw.to_string()),
-            None => {
-                let restored = if rest_raw.is_empty() {
-                    mode_raw.to_string()
-                } else {
-                    format!("{mode_raw} {rest_raw}")
-                };
-                (RuleMode::Default, restored)
-            }
+            Some(mode) => (mode, fields.rest.to_string()),
+            // An unrecognized candidate belongs to the body. It may end inside
+            // a quoted string in compact code, so never rebuild its whitespace.
+            None => (RuleMode::Default, fields.after_colon.to_string()),
         };
         Ok(Some((
             RuleHeader {
-                label,
-                is_top,
+                label: fields.label,
+                is_top: fields.is_top,
                 mode,
                 rest,
                 line: i + 1,
@@ -173,8 +167,16 @@ fn parse_rule_header(lines: &[&str], i: usize) -> Result<Option<(RuleHeader, usi
     }
 }
 
+struct RuleHeaderFields<'a> {
+    label: String,
+    is_top: bool,
+    mode: &'a str,
+    rest: &'a str,
+    after_colon: &'a str,
+}
+
 /// Split one complete rule-header prefix using the pinned Unicode label class.
-fn parse_rule_header_fields(trimmed: &str) -> Option<(String, bool, &str, &str)> {
+fn parse_rule_header_fields(trimmed: &str) -> Option<RuleHeaderFields<'_>> {
     let (label, after_label) = take_rule_label_prefix(trimmed)?;
     let after_label = after_label.trim_start_matches([' ', '\t']);
     let (is_top, after_colon) = if let Some(rest) = after_label.strip_prefix("::") {
@@ -193,7 +195,13 @@ fn parse_rule_header_fields(trimmed: &str) -> Option<(String, bool, &str, &str)>
         .unwrap_or(after_colon.len());
     let mode = &after_colon[..mode_end];
     let rest = after_colon[mode_end..].trim_start_matches([' ', '\t']);
-    Some((label.to_string(), is_top, mode, rest))
+    Some(RuleHeaderFields {
+        label: label.to_string(),
+        is_top,
+        mode,
+        rest,
+        after_colon,
+    })
 }
 
 /// Parse a mode suffix only when the token is a recognized mode.
@@ -260,30 +268,35 @@ fn parse_bounded(raw: &str) -> Option<(&str, usize, Option<usize>)> {
 ///
 /// Header-rest elements use the same parser as ordinary body lines so compact
 /// and multiline authoring stay structurally equivalent.
-fn parse_inline_body(
-    rest: &str,
-    line_num: usize,
-    lines: &[&str],
-    i: &mut usize,
-) -> Option<Vec<BodyElement>> {
+fn parse_inline_body(rest: &str, lines: &[&str], i: &mut usize) -> Option<Vec<BodyElement>> {
     let mut elements = Vec::new();
-    let mut remaining = rest.trim().to_string();
+    let mut remaining = rest.trim_start().to_string();
+    let mut remaining_origin_i = *i;
 
     while !remaining.is_empty() {
-        let trimmed = remaining.trim().to_string();
+        let trimmed = remaining.trim_start().to_string();
         if trimmed.is_empty() || trimmed.starts_with('#') {
             break;
         }
 
         let before = trimmed.clone();
-        let Some((element, remainder, _advanced)) =
-            parse_single_element(&trimmed, lines, i, line_num, elements.is_empty())
-        else {
+        let mut element_i = remaining_origin_i;
+        let Some((element, remainder, _advanced)) = parse_single_element(
+            &trimmed,
+            lines,
+            &mut element_i,
+            remaining_origin_i + 1,
+            elements.is_empty(),
+        ) else {
             break;
         };
+        // The remainder can start on a consumed block's closing line, while
+        // the caller's cursor must stay beyond every fully consumed line.
+        *i = (*i).max(element_i);
+        remaining_origin_i = block_remainder_origin(remaining_origin_i, element_i, &remainder);
         elements.push(element);
         remaining = remainder;
-        if remaining.trim() == before {
+        if remaining.trim_start() == before {
             break;
         }
     }
@@ -373,30 +386,33 @@ fn collect_action_edge_fluent_continuation_lines(
 fn parse_body_elements(lines: &[&str], i: &mut usize) -> Vec<BodyElement> {
     let mut elements = Vec::new();
     let line = lines[*i];
-    let line_num = *i + 1;
 
     // First, try to split the line by looking for the first recognized element,
     // consume it, then try again with the remainder. Multi-line blocks advance `i`.
-    let mut remaining = line.trim().to_string();
+    let mut remaining = line.trim_start().to_string();
+    let mut remaining_origin_i = *i;
     let mut consumed_line = false;
 
     loop {
-        let trimmed = remaining.trim().to_string();
+        let trimmed = remaining.trim_start().to_string();
         if trimmed.is_empty() || trimmed.starts_with('#') {
             break;
         }
 
-        if let Some((element, rest, advanced)) =
-            parse_single_element(&trimmed, lines, i, line_num, elements.is_empty())
-        {
+        let mut element_i = remaining_origin_i;
+        if let Some((element, rest, advanced)) = parse_single_element(
+            &trimmed,
+            lines,
+            &mut element_i,
+            remaining_origin_i + 1,
+            elements.is_empty(),
+        ) {
+            *i = (*i).max(element_i);
+            remaining_origin_i = block_remainder_origin(remaining_origin_i, element_i, &rest);
             elements.push(element);
             remaining = rest;
             if advanced {
                 consumed_line = true;
-            }
-            if advanced && !consumed_line {
-                // Multi-line block consumed — we're done with this line
-                break;
             }
             if remaining.trim().is_empty() {
                 break;
@@ -414,7 +430,7 @@ fn parse_body_elements(lines: &[&str], i: &mut usize) -> Vec<BodyElement> {
                         text: trimmed.clone(),
                     },
                     &trimmed,
-                    line_num,
+                    remaining_origin_i + 1,
                 ));
             }
             break;
@@ -944,13 +960,13 @@ struct ConsumedBlock {
 
 /// Consume a `{ ... }` block that starts in `rest` and may continue on subsequent lines.
 /// `i` is the CURRENT line index (the line containing the opening `{`).
-/// Returns the normalized interior, same-line remainder, and exact block source.
+/// Returns the interior with only its outer whitespace trimmed, the same-line
+/// remainder, and exact block source. Interior line endings and spacing survive.
 /// Advances `i` past any lines consumed.
 fn consume_block_from_rest(lines: &[&str], i: &mut usize, rest: &str) -> Option<ConsumedBlock> {
     let start_brace = rest.find('{')?;
     let remainder = &rest[start_brace + 1..]; // everything after opening `{`
     let mut depth: i32 = 1;
-    let mut content = String::new();
     let mut source = rest[start_brace..].to_string();
 
     // Scan the remainder of the current line
@@ -965,7 +981,7 @@ fn consume_block_from_rest(lines: &[&str], i: &mut usize, rest: &str) -> Option<
             remainder_scan.trim().to_string()
         };
         // Everything after the closing `}` on the same line
-        let after_block = remainder[remainder_scan.len()..].trim().to_string();
+        let after_block = remainder[remainder_scan.len()..].trim_start().to_string();
         source.truncate(1 + remainder_scan.len());
         return Some(ConsumedBlock {
             code: block_content,
@@ -974,9 +990,7 @@ fn consume_block_from_rest(lines: &[&str], i: &mut usize, rest: &str) -> Option<
         });
     }
     // Block continues past this line — include the remainder
-    if !remainder_scan.trim().is_empty() {
-        content.push_str(remainder_scan.trim());
-    }
+    let mut content = remainder_scan.to_string();
 
     // Consume subsequent lines
     *i += 1; // advance to next line
@@ -992,14 +1006,10 @@ fn consume_block_from_rest(lines: &[&str], i: &mut usize, rest: &str) -> Option<
             } else {
                 line_scan
             };
-            if !strip_close.trim().is_empty() {
-                if !content.is_empty() {
-                    content.push('\n');
-                }
-                content.push_str(strip_close.trim());
-            }
+            content.push('\n');
+            content.push_str(strip_close);
             *i += 1;
-            let after_block = line[line_scan.len()..].trim().to_string();
+            let after_block = line[line_scan.len()..].trim_start().to_string();
             return Some(ConsumedBlock {
                 code: content.trim().to_string(),
                 remainder: after_block,
@@ -1007,10 +1017,8 @@ fn consume_block_from_rest(lines: &[&str], i: &mut usize, rest: &str) -> Option<
             });
         }
         // Include the whole line
-        if !content.is_empty() {
-            content.push('\n');
-        }
-        content.push_str(line.trim());
+        content.push('\n');
+        content.push_str(line);
         *i += 1;
     }
     // Unclosed block (validator catches this)
@@ -1138,7 +1146,13 @@ fn parse_lifecycle_fluent_chain_statement_code(
     }
 
     let (calls, remainder) = parse_fluent_chain_with_remainder(&text);
-    fluent_calls_to_statement_code(&calls).map(|code| (code, remainder, *i > start_i))
+    let code = fluent_calls_to_statement_code(&calls)?;
+    let advanced = *i > start_i;
+    if advanced {
+        // Match the braced-block cursor contract: point past consumed lines.
+        *i += 1;
+    }
+    Some((code, remainder, advanced))
 }
 
 fn fluent_calls_to_statement_code(calls: &[FluentCall]) -> Option<String> {

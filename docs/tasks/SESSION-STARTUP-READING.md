@@ -3554,15 +3554,21 @@ remain. Reading completion and runtime signoff remain distinct.
   - [x] **LOCKSTEP** — Rust integration/book, Knowledge and live roadmap/task pointers accurately describe the verified repair and next frontier.
 
 - ID: `SESSION-STARTUP-READING.47.2`
-  Status: `pending`
+  Status: `done`
   Goal: Preserve accepted multiline Rust action source and coordinates during outer block collection.
   Dependencies: Clean .47.1 validator repair.
-  Planned tier: `focused`
-  Planned focused proof: Public parse_spec/source-AST LF/CRLF, blank lines, indentation and Unicode; lifecycle/edge/header collection and remainders; Rust component, mutation and source-carrier proof; book, Knowledge, memory, histories, doctrines and diff.
-  Planned canonical boundary: Parent .47.3 closeout; escalate this leaf if repair uncovers broader contract uncertainty.
-  Acceptance: Restore exact accepted block interiors and scalar positions without changing established outer trim or widening multiline-quote/regex-brace syntax; reinstate whole-spec source-fidelity assertions and retain valid execution and rejection controls.
-  Verification: .47.1 whole-spec carrier assertion fails: original CRLF becomes LF. parser.rs uses source.lines(), then consume_block_from_rest trims each physical line and rejoins with LF; direct CodeBlock retains exact CRLF. Quoted-newline native/Perl probes both reject, so no accepted string-value corruption or equivalence claim is made. Logs: .linkedspec-data/scratch/mutation-arguments47/runtime-green.log and source-fidelity-probe.jsonl.
-  Commit: `pending`
+  Verification tier: `focused`
+  Focused checks: Public parse_spec/source-AST LF/CRLF, blank lines, indentation and Unicode; lifecycle/edge/header collection and remainders; Rust component, mutation and source-carrier proof; book, Knowledge, memory, histories, doctrines and diff.
+  Canonical trigger: Parent .47.3 closeout; escalate this leaf if repair uncovers broader contract uncertainty.
+  Acceptance: Restore exact accepted block interiors and scalar positions without changing established outer trim or widening multiline-quote/regex-brace syntax; reinstate whole-spec source-fidelity assertions and retain valid execution and rejection controls. Preserve compact-header string values exactly; a native contrast proves two spaces or a tab becomes one space only on the header.
+  Verification: .47.1 whole-spec carrier assertion fails: original CRLF becomes LF. parser.rs uses source.lines(), then consume_block_from_rest trims each physical line and rejoins with LF; direct CodeBlock retains exact CRLF. Quoted-newline native/Perl probes both reject, so they establish no accepted string-value corruption or equivalence. Separate native compact-header probes now establish actual corruption: E{return("a  b")} and an authored tab both return a single space; the body-line twin retains two spaces. parse_rule_header fallback reconstructs mode_raw plus one space plus rest_raw. Exact evidence: .linkedspec-data/scratch/action-source47-2/header-literal-before.jsonl and remainder-value-before.jsonl. First component pass: core201 and four source groups pass, one remainder group fails by dropping a blank line; Corrected line-origin handling passes all six source groups and the complete core package. Rebuilt-native25 passes exact header literals, both assignment controls returning4, and retained malformed/multiline-quote rejection. PASS: complete Rust component gate (238 core tests, runtime library179, all integration targets, storage oracle and CLI66/66 twice); six core source groups cover 88 block combinations plus header/remainder/scalar controls. Two runtime groups cover 15 exact literal values and the skipped-assignment regression. All12 mutation tests pass through whole-spec and programmatic source ASTs, serde, generated plans and independently compiled emitted consumers. Final native25 passes with binary SHA256 2025d1ce7556aaae4b5ef516344ed7054e7620bc51d7f454c778938279464be4. Neutral167+592 mutations retain byte-identical authority; book, formatting and public no-drift pass. Logs: .linkedspec-data/scratch/action-source47-2/rust-gate-origin.log and native-after-final.jsonl. Logs: .linkedspec-data/scratch/mutation-arguments47/runtime-green.log and source-fidelity-probe.jsonl.
+  Commit: `SESSION-STARTUP-READING.47.2 - retain Rust action source through outer parsing`
+  - [x] **REPRODUCE / ISSUE** — Core RED compiles: one compatibility group passes, four exact-source groups fail. Eight native syntax/value controls pass; separate compact-header/body controls prove literal whitespace corruption.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — source.lines drops CR, suffix/block trims remove whitespace, and LF joins normalize text. Header fallback synthesizes one space inside quoted literals. A second block on a closing line starts with the cursor already on the next line, so its collector skips that line; the native assignment control wrongly returns3 rather than4.
+  - [x] **FIX** — Retain CR-bearing physical lines, raw block interiors and suffixes; restore the exact header tail. Track same-line remainder origins separately from the consumed-line cursor, including the multiline fluent cursor contract. Keep whole-interior trim and existing lexical recognition.
+  - [x] **ADDRESSED (verified)** — LF/CRLF/mixed-line, blank/indented, Unicode, lifecycle/edge/header and source/carrier tests pass.
+  - [x] **NO REGRESSION** — Complete Rust component proof, native controls and unchanged shared mutation authority pass; known scanner/guard repairs remain separate.
+  - [x] **LOCKSTEP** — Public integration guidance, Knowledge, task ownership and live roadmap pointers describe the exact repaired boundary.
 - ID: `SESSION-STARTUP-READING.47.3`
   Status: `pending`
   Goal: Close the verified mutation-argument/source-fidelity repair and resume .49.
@@ -4534,7 +4540,6 @@ remain. Reading completion and runtime signoff remain distinct.
     preserving ordinary success/exit7 behavior. Nine document-history sibling controls correctly reject
     nonzero/signal termination. Evidence: docs/knowledge/routing-verifier-child-signal-status-gap.md.
   Commit: `pending`
-
 - ID: `SESSION-STARTUP-READING.80`
   Status: `pending`
   Goal: Reuse compatible PGEN and RGX build artifacts while preserving every real-input invalidation and test.
@@ -4544,8 +4549,6 @@ remain. Reading completion and runtime signoff remain distinct.
     compatible artifacts and ordinary correct builds. Startup latency is separately owned by .81.
   Director boundary (2026-09-20): RGX/PGEN are black boxes; only published interfaces/contracts and observable results may guide this work. No internal inspection, causal reconstruction, patches or pin changes. Older implementation-derived notes are removed and cannot authorize future work.
   Earlier build permission (2026-09-13): The prior September10 build-on-update-only/no-rebuild requirement is cancelled. Resume normal Cargo builds, including RGX/PGEN compilation whenever Cargo requests it. Retain caches, preserve nested source/pin work and measure observable build behavior. This performance repair is no longer an integration-guide prerequisite; .80.1-.4 retain correctness and optimization work without a mandatory zero-build lifecycle.
-
-
 - ID: `SESSION-STARTUP-READING.80.0`
   Status: `done; focused-signoff-complete`
   Goal: Preserve the CI build-reuse and newer-OS launch findings from the preceding capacity verification.
@@ -4571,7 +4574,6 @@ remain. Reading completion and runtime signoff remain distinct.
     consumers, storage/relocation, CLI 66x2 and Phase 0 1,032/1,032 in 1,163 seconds (Phase 0 only);
     its 25 optional gates/matrices remain skipped. This intake grants no startup reading credit.
   Commit: `SESSION-STARTUP-READING.80.0 - own CI build and startup findings` — Evidence and pending repair ownership only; resume Dart .1.37.
-
 - ID: `SESSION-STARTUP-READING.80.1`
   Status: `pending`
   Goal: Measure cold/repeated public builds and supported consumer configurations.
@@ -4579,7 +4581,6 @@ remain. Reading completion and runtime signoff remain distinct.
   Acceptance: Run documented interfaces under managed storage, preserving inputs and caches. Record
     commands, toolchain, pins, exit status and build/test durations separately. Observe outputs without
     inspecting dependency implementation or inferring private freshness mechanisms. No zero-build promise.
-
 - ID: `SESSION-STARTUP-READING.80.2`
   Status: `pending`
   Goal: Track upstream reports and published resolutions for measured dependency build costs.
@@ -4587,7 +4588,6 @@ remain. Reading completion and runtime signoff remain distinct.
   Acceptance: Supply a self-contained public-command reproduction and observable result. The upstream
     maintainer owns diagnosis and repair. Verify a supplied resolution through published interfaces;
     do not inspect internals, patch dependency source, reconstruct build steps or change pins.
-
 - ID: `SESSION-STARTUP-READING.80.3`
   Status: `pending`
   Goal: Assess compatible dependency-target retention in recurring drivers that currently discard fresh targets.
@@ -4816,7 +4816,7 @@ audit range, not the default repair frontier.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.47.2` | `pending` | Repair measured outer source loss after .47.1; .47.3 provides canonical closeout. |
+| 1 | `SESSION-STARTUP-READING.47.3` | `pending` | Canonical closeout after verified .47.1/.47.2; then resume .49. |
 
 ## Reading Ledger
 

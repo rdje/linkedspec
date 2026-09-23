@@ -655,8 +655,8 @@ fn spec_compiled_serialized_and_generated_routes_share_the_typed_carrier() {
 
 const EMPTY_ARGUMENTS: [&str; 7] = ["", " ", "\t", "\n", "\r\n", " \t\r\n ", "\u{b}\u{c}"];
 
-// Exercise caller-supplied source AST independently of outer .spec block capture.
-// SESSION-STARTUP-READING.47.2 owns that parser's CRLF/indentation normalization.
+// Keep the caller-supplied AST route independent of outer .spec block capture.
+// The fidelity tests exercise both source entry paths with identical expectations.
 fn spec_with_verbatim_action(action: &str) -> SpecFile {
     let mut spec = parse_spec_with_user_functions(&spec_for_action("return(null)")).unwrap();
     let BodyElementKind::ActionEdge { code, .. } = &mut spec.rules[0].body[0].kind else {
@@ -699,27 +699,31 @@ fn empty_arguments_retain_authored_text_and_scalar_spans() {
                 format!("map_leaves! ({inside}) {{ return(value) }}"),
             );
         }
-        let compiled =
-            compile(&spec_with_verbatim_action(&source)).expect("compile verbatim source AST");
-        let retained = serde_json::to_value(
-            &compiled.rules[0].acode_dispatch[0]
-                .code
-                .as_ref()
-                .expect("the authored action block is present")
-                .statements[1]
-                .expr,
-        )
-        .unwrap();
-        assert_eq!(retained["source"], expression);
-        assert_eq!(
-            retained["source_span"],
-            json!({"start": prefix.chars().count(), "end": source.chars().count()}),
-        );
-        let args_start = prefix.chars().count() + "tree . map_leaves! ".chars().count();
-        assert_eq!(
-            retained["mutation"]["args_span"],
-            json!({"start": args_start, "end": args_start + inside.chars().count() + 2}),
-        );
+        for parsed in [
+            spec_with_verbatim_action(&source),
+            parse_spec_with_user_functions(&spec_for_action(&source)).unwrap(),
+        ] {
+            let compiled = compile(&parsed).expect("compile retained action source");
+            let retained = serde_json::to_value(
+                &compiled.rules[0].acode_dispatch[0]
+                    .code
+                    .as_ref()
+                    .expect("the authored action block is present")
+                    .statements[1]
+                    .expr,
+            )
+            .unwrap();
+            assert_eq!(retained["source"], expression);
+            assert_eq!(
+                retained["source_span"],
+                json!({"start": prefix.chars().count(), "end": source.chars().count()}),
+            );
+            let args_start = prefix.chars().count() + "tree . map_leaves! ".chars().count();
+            assert_eq!(
+                retained["mutation"]["args_span"],
+                json!({"start": args_start, "end": args_start + inside.chars().count() + 2}),
+            );
+        }
     }
     for inside in ["1", "null", "\" \"", ",", "()", "[]", "\u{200b}"] {
         let error = CodeBlock::parse(&format!("tree.map_leaves!({inside}) {{ return(value) }}"))
@@ -741,43 +745,50 @@ fn empty_arguments_execute_through_reconstructed_and_emitted_carriers() {
     }
     action.push_str("return(results)");
     let expected = Value::Array(EMPTY_ARGUMENTS.iter().map(|_| json!({"clé": 2})).collect());
-    let parsed = spec_with_verbatim_action(&action);
-    let reconstructed: SpecFile =
-        serde_json::from_str(&serde_json::to_string(&parsed).unwrap()).unwrap();
-    let compiled = compile(&reconstructed).expect("compile every empty-argument spelling");
-    assert_eq!(execute_action(&action).unwrap(), expected);
+    let supplied = spec_with_verbatim_action(&action);
+    let whole = parse_spec_with_user_functions(&spec_for_action(&action)).unwrap();
+    for parsed in [supplied, whole] {
+        let BodyElementKind::ActionEdge { code, .. } = &parsed.rules[0].body[0].kind else {
+            panic!("expected the fixture action edge");
+        };
+        assert_eq!(code.as_deref(), Some(action.as_str()));
+        let reconstructed: SpecFile =
+            serde_json::from_str(&serde_json::to_string(&parsed).unwrap()).unwrap();
+        let compiled = compile(&reconstructed).expect("compile every empty-argument spelling");
+        assert_eq!(execute_action(&action).unwrap(), expected);
 
-    let encoded = serde_json::to_string(&compiled).unwrap();
-    let decoded: CompiledSpec = serde_json::from_str(&encoded).unwrap();
-    assert_eq!(
-        serde_json::to_value(&decoded).unwrap(),
-        serde_json::to_value(&compiled).unwrap()
-    );
-    assert_eq!(
-        Engine::new(decoded)
-            .execute_value("xhello", &ExecutionOptions::new())
-            .unwrap(),
-        expected,
-    );
-    validate_generated_parser_plan_v2(
-        &encoded,
-        TOP_DONE_PLAN,
-        "empty-arguments.spec",
-        GENERATED_SOURCE_CONTRACT,
-    )
-    .unwrap();
-    assert_eq!(
-        execute_generated_parser_v2(
+        let encoded = serde_json::to_string(&compiled).unwrap();
+        let decoded: CompiledSpec = serde_json::from_str(&encoded).unwrap();
+        assert_eq!(
+            serde_json::to_value(&decoded).unwrap(),
+            serde_json::to_value(&compiled).unwrap()
+        );
+        assert_eq!(
+            Engine::new(decoded)
+                .execute_value("xhello", &ExecutionOptions::new())
+                .unwrap(),
+            expected,
+        );
+        validate_generated_parser_plan_v2(
             &encoded,
             TOP_DONE_PLAN,
-            "xhello",
             "empty-arguments.spec",
             GENERATED_SOURCE_CONTRACT,
         )
-        .unwrap(),
-        expected,
-    );
-    assert_independently_compiled_emitted_source(&compiled, &expected);
+        .unwrap();
+        assert_eq!(
+            execute_generated_parser_v2(
+                &encoded,
+                TOP_DONE_PLAN,
+                "xhello",
+                "empty-arguments.spec",
+                GENERATED_SOURCE_CONTRACT,
+            )
+            .unwrap(),
+            expected,
+        );
+        assert_independently_compiled_emitted_source(&compiled, &expected);
+    }
 }
 
 #[test]
