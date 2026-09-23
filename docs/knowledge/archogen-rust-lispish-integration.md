@@ -20,7 +20,7 @@ answers:
   - how does a host Cargo workspace exclude vendored LinkedSpec
   - does the workspace verifier query dependency internals
 date: 2026-09-23
-status: quoted LF, workspace guidance, document grammar and native file consumer verified; independent document admission and upstream bootstrap-message work remain
+status: quoted LF, workspace guidance and complete tagged document integration verified locally; downstream acceptance and upstream bootstrap-message work are separate
 tags: [rust, lispish, embedding, dependencies, discussion]
 evidence: "September13 native Lispish proof; September20 report intake, workspace repair and successful RGX public bootstrap/native consumer proof. Startup .83.2.1 verifies and applies the two quote-pattern flags with independent six-runtime recurrence."
 reverify: "Follow the public preparation/workspace sequence in docs/linkedspec-book/src/public-api/integration-rust.md, then its native consumer checks. Treat rgx/docs/INTEGRATION.md as the dependency authority; do not inspect implementation."
@@ -30,6 +30,19 @@ reverify: "Follow the public preparation/workspace sequence in docs/linkedspec-b
 published integration document, public APIs and contracts are the sole authority.
 RGX owns PGEN and all transitive preparation; no separate PGEN procedure or
 internal dependency knowledge belongs in LinkedSpec. Reports go to RGX.
+
+## September 23 independent local admission
+
+`SEXPR-DOCUMENT-INTEGRATION.2` closes startup .83 and the local repair scope for
+ARCHOGEN/LS-002–003 and SEMULITH/LS-002. All 37 authored cases pass through each
+of six public-loader routes, with 21 process groups per route; native file proof
+passes 37 cases / 36 groups and historical Lispish remains 26 / 18. Every backend
+integration guide now publishes its exact replay command. The admission requires
+exact canonical proof. ARCHOGEN/LS-001 workspace guidance remains independently
+verified. No downstream report file or application is changed, and no downstream
+acceptance is claimed. RGX owns its separate bootstrap progress-message issue.
+
+The dated delivery checkpoints below retain their original scope.
 
 ## September 23 native document-file delivery
 
@@ -45,8 +58,8 @@ All five backend guides retain the shared document contract; the Rust guide now
 includes file-consumer source, commands, failures and deployment. Grammar
 implementation `77d7b3db1` already passed canonical proof, both66-case CLI routes
 and Phase0 1032/1032. Native delivery is a focused example/test/doc slice;
-`SEXPR-DOCUMENT-INTEGRATION.2` owns the remaining independent canonical admission
-and formal startup-parent/report closeout. Actual downstream acceptance is not
+At this delivery checkpoint, `SEXPR-DOCUMENT-INTEGRATION.2` retained independent
+canonical admission and parent closeout; the section above records completion. Downstream acceptance is not
 claimed. No RGX/PGEN implementation or pin changes are part of these repairs.
 
 ## September 22 document grammar delivery
@@ -60,7 +73,7 @@ without changing the accepted syntax or expected values.
 
 At this grammar checkpoint, ARCHOGEN/LS-002–003 and SEMULITH/LS-002 still required
 the native Rust file consumer .83.2.3 and final .83.3 admission. Native delivery is
-now verified above; final admission remains open. This grammar checkpoint does not claim
+now verified and independently admitted above. This grammar checkpoint does not claim
 downstream acceptance. [[sexpr-document-design]] owns the current recurring proof.
 
 ## September 22 kind-preserving document design
@@ -92,7 +105,7 @@ The shared regression passes Perl, Rust, Dart, Julia, PUC Lua and LuaJIT in both
 default and POSIX environments (36 command legs); exact pre-fix source fails all
 three final fixtures. [[lispish-multiline-quoted-payload]] owns the mechanism,
 entry-context probe correction, source hashes and repeatable checks. Strict
-consumption and atom kinds remain .83.1/.83.2/.83.3-owned. Historical intake and
+consumption and atom kinds were separately .83.1/.83.2/.83.3-owned and are now delivered above. Historical intake and
 recovery observations below retain their dated scope.
 
 ## September 22 report recovery
@@ -200,14 +213,14 @@ and other numbers for different concerns.
 | Report | Supplied state and concern | LinkedSpec repair owner |
 | --- | --- | --- |
 | ARCHOGEN/LS-001 | Reported open/blocker: example and PGEN manifests encounter an enclosing Cargo workspace. | Integration `.8.2`: reproduced and repaired as above; downstream report state unchanged. |
-| ARCHOGEN/LS-002 | Open/blocker for eADL: first-form extraction ignores additional/trailing input; requests complete validation and all forms. | Startup `.83.1` contract, `.83.2` implementation, `.83.3` independent admission. |
-| ARCHOGEN/LS-003 | Open/major for eADL: symbols, quoted strings and numbers lose their token-kind distinction. | Startup `.83.1-.83.3`; same requirement as SEMULITH/LS-002. |
+| ARCHOGEN/LS-002 | Open/blocker for eADL: first-form extraction ignores additional/trailing input; requests complete validation and all forms. | Delivered by grammar 77d7b3db1 and native consumer df845ce61; local admission `SEXPR-DOCUMENT-INTEGRATION.2` closes startup .83. |
+| ARCHOGEN/LS-003 | Open/major for eADL: symbols, quoted strings and numbers lose their token-kind distinction. | Local grammar/file/public-loader repair admitted by `SEXPR-DOCUMENT-INTEGRATION.2`; same requirement as SEMULITH/LS-002. |
 | ARCHOGEN/LS-004 | Reported open/moderate: failed bootstrap prerequisites are followed by a false seed-success message. | Integration `.8.3`: public-interface report and guidance correction; no upstream fix or downstream state change claimed. |
 | ARCHOGEN/LS-005 | Open/minor: checkout instructions need an explicit forward pointer to required preparation. | Integration `.8.4` corrects and verifies prerequisite navigation; downstream report state unchanged. |
 | ARCHOGEN/LS-006 | Withdrawn by reporter: the hex underscore remains intact. | Intake retains the correction; no defect repair claimed or requested. |
 | ARCHOGEN/LS-007 | No-action: adjacent fragments join as documented. | Intake retains the measured compatibility case; no behavior change requested. |
 | SEMULITH/LS-001 | Supplied draft/high report; the quoted-LF defect is now repaired and independently verified locally. Downstream acceptance is not claimed. | Startup `.83.2.1` fixes both quote readers and verifies all eight report cases plus six-runtime recurrence; see [[lispish-multiline-quoted-payload]]. |
-| SEMULITH/LS-002 | Draft/medium: documented atom-kind erasure limits source-preserving consumers; explicitly a design request. | Startup `.83.1-.83.3`; no silent change to historical Lispish requested. |
+| SEMULITH/LS-002 | Draft/medium: documented atom-kind erasure limits source-preserving consumers; explicitly a design request. | Separate tagged document path admitted by `SEXPR-DOCUMENT-INTEGRATION.2`; historical Lispish remains compatible. |
 | SEMULITH/LS-003 | Draft/low: enclosing workspace, file-section prerequisite back-reference, optional recursive checkout cost. | Item1 repaired by `.8.2`; items2-3 corrected by `.8.4` navigation and qualified observation. Downstream report remains draft. |
 
 These are **supplied observations**, not ten newly reproduced defects. Both

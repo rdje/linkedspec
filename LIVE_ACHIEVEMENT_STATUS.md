@@ -2,17 +2,19 @@
 
 ## Current Activity
 
-The grammar and native Rust document-file consumer are implemented and verified. SEXPR-DOCUMENT-INTEGRATION.2 owns independent final admission and startup-parent closeout for ARCHOGEN/LS-002–003 and SEMULITH/LS-002.
+Local complete-document integration is admitted under SEXPR-DOCUMENT-INTEGRATION.2, closing startup .83. The next bounded repair is startup .46, the observed Rust UTF-8 diagnostic panic.
 
 ## Latest Completed Slice
 
-- `SEXPR-DOCUMENT-INTEGRATION.1 - deliver native s-expression file consumer` — 37 authored file cases / 36 process groups, legacy 26-file/18-group checks and 3 adapter tests PASS; ordinary focused verification governs landing.
+- `SEXPR-DOCUMENT-INTEGRATION.2 - admit complete document integration` — six public-loader routes pass 37 cases/21 groups each; native files 37/36 and legacy 26/18. Exact canonical admission is required by the landing hook.
 
 ## Next Action
 
-- Recompose six-runtime/public-loading and native file evidence under SEXPR-DOCUMENT-INTEGRATION.2, reconcile all backend guides and reports, then run exact canonical admission before closing the startup parents.
+- Reproduce startup .46 through LinkedSpec public/core routes, then own a bounded UTF-8-safe Rust diagnostic repair and independent verification; preserve the separately unresolved whole-spec timeout distinction.
 
 ## Recent Completions
+
+- `2026-09-23` — `SEXPR-DOCUMENT-INTEGRATION.2` admits all six public-loader paths, native document files and the local report scope; all backend guides are synchronized.
 
 - `2026-09-23` — `SEXPR-DOCUMENT-INTEGRATION.1` delivers native document files, typed causes, strict UTF-8 and relocatable packaging; all authored cases and legacy compatibility pass.
 
@@ -43,8 +45,6 @@ The grammar and native Rust document-file consumer are implemented and verified.
 - `2026-09-22` — `CONFORMANCE-SOURCE-READING.1.85` completes seven files; 431 top-level/213 nested results pass. .2.13/.2.16 extend to cursor consumers; .2.18 owns semantic nested-copy observations. .1.86 continues with all prerequisites intact.
 
 - `2026-09-22` — `CONFORMANCE-SOURCE-READING.1.84` completes recognition, recursive observation, repeated action results and root core; 79 top-level/475 nested results pass. Existing .2.16 owns the fifth subprocess helper; all prerequisites remain. .1.85 continues.
-
-- `2026-09-21` — `CONFORMANCE-SOURCE-READING.1.83` finishes progressive, punctuation and recognition authority reading; focused proof has 195 top-level and 424 nested TAP results. Three files finish. .2.15 retains the full progressive carrier observation limit; new .2.17 owns disconnected recognition compatibility observations. Repairs remain; .1.84 continues.
 
 ## History
 

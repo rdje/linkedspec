@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `SEXPR-DOCUMENT-INTEGRATION`
-- Status: `active`
+- Status: `done`
 - Roadmap lane: `Native integration / ARCHOGEN and SEMULITH document reports`
 - Created: `2026-09-23`
 - Last updated: `2026-09-23`
@@ -40,7 +40,7 @@ ARCHOGEN/LS-003 token kinds, and SEMULITH/LS-002 token kinds.
 ## Task Tree
 
 - ID: `SEXPR-DOCUMENT-INTEGRATION`
-  Status: `active`
+  Status: `done`
   Goal: Deliver native file integration and close the verified document-report scope.
   Children: `SEXPR-DOCUMENT-INTEGRATION.1`, `SEXPR-DOCUMENT-INTEGRATION.2`
 
@@ -66,19 +66,31 @@ ARCHOGEN/LS-003 token kinds, and SEMULITH/LS-002 token kinds.
   - [x] **LOCKSTEP** — All backend guides retain one shared grammar contract; Rust file use, error records and packaging are documented and verified. Task, roadmap, Knowledge and live pointers retain separate final-admission ownership.
 
 - ID: `SEXPR-DOCUMENT-INTEGRATION.2`
-  Status: `pending`
+  Status: `done`
   Goal: Independently admit the complete document integration and close startup .83.3 and its completed parents.
-  Dependencies: .1 committed with a clean handoff.
-  Scope: Exact six-runtime grammar replay, public loading and documented failure boundaries, native Rust file/UTF-8/packaging replay, historical Lispish compatibility and all-backend guide reconciliation. Preserve the distinction between library verification and downstream application acceptance.
+  Dependencies: .1 committed at df845ce615df20929ac501b61984fbf9d29225ca; clean tree, post-commit pointer and zero-byte brief verified.
+  Verification tier: `canonical`
+  Focused checks: Six-runtime authored contract and same-engine recovery; maintained public-loader replay of the documented entry-rule adaptations, exact values/rejections and strict grammar UTF-8; native Rust file/relocation and historical Lispish checks; every backend guide, public guards, book, Knowledge/memory/history/diff and doctrines.
+  Canonical trigger: Independent final admission and startup-parent closeout; exact staged canonical receipt required.
+  Review correction: The first Julia replay used the library project. Before landing, select the documented integration example Project/Manifest and its prepared application-local depot, disable user load paths and keep offline mode. The corrected example-project replay passes all 37 cases and 21 groups (admission-julia-example.log). The initial canonical run was cancelled with status 143 before final verification; a revised exact-candidate run is required.
+  Scope: Add a maintained public-loader integration verifier and document its per-backend commands. Exact six-runtime grammar replay, public loading and documented failure boundaries, native Rust file/UTF-8/packaging replay, historical Lispish compatibility and all-backend guide reconciliation. Preserve the distinction between library verification and downstream application acceptance.
   Acceptance: Recompose the unchanged authored values/rejections and same-engine reuse across six runtimes, verify native public loading/integration evidence, and rerun file/UTF-8/error/multi-file/relocation checks. Record exact supported routes and remaining limits, close only verified report scope, and require exact staged canonical CI before the final clean handoff.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: PASS: all 37 unchanged authored cases through each of six public-loader routes (222 outcomes), with 21 process groups per route covering exact values, typed rejection or the Rust text adapter Display, prior-output retention, relative Unicode grammar paths, invalid UTF-8 and missing grammar. Native Rust file replay passes 37 cases/36 groups; historical Lispish passes 26 values/18 groups. The recurring grammar driver adds token round trips and same-engine post-rejection reuse; exact staged canonical proof is mandatory for this admission and enforced by the landing hook.
+  Commit: `SEXPR-DOCUMENT-INTEGRATION.2 - admit complete document integration`
+
+  Acceptance Checklist:
+  - [x] **REPRODUCE / ISSUE** — Historical first-form extraction and atom-kind erasure are captured in the source-qualified report register; the independent 37-case authority predates implementation.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — LinkedSpec Get/return_descriptor and rejecting-edge mutation proof establish seek-skipping behavior; the document grammar supplies explicit rejection and tagged tokens. Public-loader adapters must select Document instead of their historical Top literal.
+  - [x] **FIX** — Recompose the delivered grammar and native consumer through a maintained public-loader verifier; synchronize every backend guide and close only the verified local report scope.
+  - [x] **ADDRESSED (verified)** — Six public-loader routes each pass all 37 cases and 21 process groups; Rust files pass all 37 cases and 36 groups, including relocation.
+  - [x] **NO REGRESSION** — Historical Lispish passes 26 file values and 18 groups; grammar source and authored expectations remain exact. Canonical admission reruns six-runtime recovery and repository recurrence.
+  - [x] **LOCKSTEP** — The five guides, shared book, ADR, report register, roadmap and continuity agree. Downstream application acceptance and upstream RGX work remain separately owned.
 
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SEXPR-DOCUMENT-INTEGRATION.2` | `pending` | Recompose public/native evidence and run canonical final admission after the focused delivery commit. |
+| 1 | `SEXPR-DOCUMENT-INTEGRATION.2` | `done` | Local integration admission is complete; resume startup .46 from the clean landing. |
 
 ## Decisions
 
@@ -100,16 +112,19 @@ ARCHOGEN/LS-003 token kinds, and SEMULITH/LS-002 token kinds.
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
 | `2026-09-23` | `.1` | 37 authored file cases / 36 process groups; legacy 26/18 plus 3 adapter tests; build, formatting and source/expectation preservation | PASS; ordinary documentation/doctrine checks govern landing. |
+| `2026-09-23` | `.2` | Six public-loader routes: 37 cases and 21 groups each; native files 37/36; legacy 26/18 | PASS; exact staged canonical proof governs landing. |
 
 ## Commit Log
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
 | `.1` | `SEXPR-DOCUMENT-INTEGRATION.1 - deliver native s-expression file consumer` | Focused native file delivery from clean 77d7b3db1. |
-| `.2` | `pending` | Independent canonical admission. |
+| `.2` | `SEXPR-DOCUMENT-INTEGRATION.2 - admit complete document integration` | Independent local admission; exact canonical receipt required. |
 
 ## Changelog
 
 - `2026-09-23`: Own remaining native delivery and admission in a bounded semantic tree before changing code.
 
 - `2026-09-23`: .1 delivers the verified native file consumer and updated public guidance; .2 is the independent admission frontier.
+
+- `2026-09-23`: .2 independently admits local document integration and closes startup .83/.83.2/.83.2.3/.83.3; startup .46 is the next repair.

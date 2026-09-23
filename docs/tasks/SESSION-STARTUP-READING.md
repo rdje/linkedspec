@@ -4686,7 +4686,7 @@ remain. Reading completion and runtime signoff remain distinct.
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.83`
-  Status: `pending`
+  Status: `done`
   Goal: Resolve the historical Lispish document-validation and malformed-token limitations before claiming strict s-expression parsing.
   Children: `.83.1`, `.83.2`, `.83.3`
   Dependencies: Clean integration handoff is complete at 87b35665e. ADR0123 supersedes blanket startup reading; each repair reads its affected contract, code, tests and book.
@@ -4694,8 +4694,8 @@ remain. Reading completion and runtime signoff remain distinct.
   Historical ownership: PHASE0-BACKHALF-TRIAGE.5.2 fixed the old corpus driver's non-progress loop and described deeper parser/grammar follow-ons without implementing them. This node gives the document/token contract follow-on explicit contract, implementation and verification owners. Its current evidence does not reverify or reopen the dated same-buffer never-undef claim.
   September20 consumer intake: BACKEND-INTEGRATION-GUIDES.8.1 attaches ARCHOGEN/LS-002 complete-input/all-form requirements, ARCHOGEN/LS-003 and SEMULITH/LS-002 token-kind requirements, and SEMULITH/LS-001 reported multiline-string tree corruption with its unverified candidate patch. Exact source-qualified states, snapshots and local-versus-supplied evidence live in docs/knowledge/archogen-rust-lispish-integration.md. Contract .83.1 must resolve compatibility; .83.2 owns actual fixes and .83.3 their independent proof. No report is closed by a documentation warning or this intake. September22 .85 recovers the three SEMULITH identities; the independent quoted-LF repair is .83.2.1. Strict/token design retains .83.1 ownership under ADR0123.
   Acceptance: Establish an explicit complete-document contract, implement the accepted strict path and independently prove it. Preserve existing historical behavior unless a reviewed migration deliberately changes it; a documentation warning alone cannot close this repair.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: PASS: all 37 unchanged authored cases through each of six public-loader routes (222 outcomes), with 21 process groups per route covering exact values, typed rejection or the Rust text adapter Display, prior-output retention, relative Unicode grammar paths, invalid UTF-8 and missing grammar. Native Rust file replay passes 37 cases/36 groups; historical Lispish passes 26 values/18 groups. The recurring grammar driver adds token round trips and same-engine post-rejection reuse; exact staged canonical proof is mandatory for this admission and enforced by the landing hook. Formal closeout is SEXPR-DOCUMENT-INTEGRATION.2.
+  Commit: `SEXPR-DOCUMENT-INTEGRATION.2 - admit complete document integration`
 
 - ID: `SESSION-STARTUP-READING.83.1`
   Status: `done`
@@ -4714,13 +4714,13 @@ remain. Reading completion and runtime signoff remain distinct.
   Commit: `SESSION-STARTUP-READING.83.1 - define kind-preserving document grammar`
 
 - ID: `SESSION-STARTUP-READING.83.2`
-  Status: `active`
+  Status: `done`
   Goal: Repair quoted LF compatibility and implement the accepted strict document and token-validation path with bounded ownership.
   Children: `.83.2.1`, `.83.2.2`, `.83.2.3`.
   Dependencies: .83.1 and compiler rejection closeout .45.3 are required for strict/token delivery. Independent .83.2.1 repairs multiline quoted payloads within the historical output shape and may proceed after .85; it must not silently introduce strict validation or atom kinds.
   Acceptance: Decompose concrete grammar, API and any necessary backend work into safe children before edits. Add RED/GREEN proof that omitted text and malformed tokens cannot silently yield an accepted document. Preserve documented historical extraction, native in-process execution, exact strings and agreed head/tail or versioned domain shape; no host-side guess may masquerade as grammar validation.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: PASS: all 37 unchanged authored cases through each of six public-loader routes (222 outcomes), with 21 process groups per route covering exact values, typed rejection or the Rust text adapter Display, prior-output retention, relative Unicode grammar paths, invalid UTF-8 and missing grammar. Native Rust file replay passes 37 cases/36 groups; historical Lispish passes 26 values/18 groups. The recurring grammar driver adds token round trips and same-engine post-rejection reuse; exact staged canonical proof is mandatory for this admission and enforced by the landing hook. Formal closeout is SEXPR-DOCUMENT-INTEGRATION.2.
+  Commit: `SEXPR-DOCUMENT-INTEGRATION.2 - admit complete document integration`
 
 - ID: `SESSION-STARTUP-READING.83.2.1`
   Status: `done`
@@ -4765,20 +4765,20 @@ remain. Reading completion and runtime signoff remain distinct.
   - [x] **LOCKSTEP** — The grammar, recurring tests, all five backend integration guides, shared integration landing page, book, roadmap, Knowledge and live pointers describe this grammar delivery; the guides identify Document entry selection and native failure/value handling; the separate native file consumer and final report admission retain their owners.
 
 - ID: `SESSION-STARTUP-READING.83.2.3`
-  Status: `active`
+  Status: `done`
   Goal: Deliver a separate native Rust file-consumer path for the tagged complete-document grammar.
   Children: `SEXPR-DOCUMENT-INTEGRATION.1`; clean .83.2.2 dependency is satisfied by 77d7b3db1.
   Scope: A native sexpr_file example using existing public loader/engine APIs and the versioned result; preserve lispish_file's historical adapter. Share only genuinely common file/loader plumbing when needed; no subprocess parsing or guessed token kinds.
   Acceptance: Verify every supplied SEMULITH kind case and all four ARCHOGEN forms, valid/invalid UTF-8 and paths, empty documents, errors without partial document output, multiple files through one engine, executable-relative grammar assets and relocation. Document exact kind/lexeme use and current limits in the public book with examples; preserve all historical file-consumer checks and select the warranted delivery tier.
-  Verification: PASS: 37 unchanged authored cases as real files (21 accepted in one engine and 16 typed rejections), 36 process-check groups including the published example, Unicode/relative paths, strict UTF-8, malformed grammar before input loading, earlier-output retention, default/explicit assets and relocation with all 21 valid cases. Binary/grammar/contract hashes stay exact and owned fixtures are removed. Historical Lispish passes 26 file values/18 groups and all three adapter tests. Native build, Rust formatting and Python syntax pass; the grammar and authored case array remain unchanged. Book/public guards, Knowledge/memory/history/diff and normal doctrines govern the focused landing; .2 owns independent canonical admission and formal parent closeout. Implementation is verified under SEXPR-DOCUMENT-INTEGRATION.1; formal parent closeout stays with .2.
-  Commit: `SEXPR-DOCUMENT-INTEGRATION.1 - deliver native s-expression file consumer` (implementation; final parent closeout remains .2).
+  Verification: PASS: all 37 unchanged authored cases through each of six public-loader routes (222 outcomes), with 21 process groups per route covering exact values, typed rejection or the Rust text adapter Display, prior-output retention, relative Unicode grammar paths, invalid UTF-8 and missing grammar. Native Rust file replay passes 37 cases/36 groups; historical Lispish passes 26 values/18 groups. The recurring grammar driver adds token round trips and same-engine post-rejection reuse; exact staged canonical proof is mandatory for this admission and enforced by the landing hook. Formal closeout is SEXPR-DOCUMENT-INTEGRATION.2.
+  Commit: `SEXPR-DOCUMENT-INTEGRATION.2 - admit complete document integration`
 
 - ID: `SESSION-STARTUP-READING.83.3`
-  Status: `active`
+  Status: `done`
   Goal: Independently verify and admit the complete document path across supported native backends; execution owner is docs/tasks/SEXPR-DOCUMENT-INTEGRATION.md.
   Dependencies: Every .83.2 implementation must be completed and committed: .83.2.1, .83.2.2 and native delivery SEXPR-DOCUMENT-INTEGRATION.1. SEXPR-DOCUMENT-INTEGRATION.2 owns final admission and formal .83.2/.83.2.3 parent closeout together.
   Acceptance: Replay exact valid/invalid documents, file/UTF-8/error handling, complete consumption and compiled-engine reuse on Perl, Rust, Dart, Julia, PUC Lua and LuaJIT under their admitted toolchains. Preserve relevant existing corpus coverage without reviving retired applications. Update integration guides, the Lispish walkthrough, Knowledge and task evidence; run canonical admission proof and close only verified scope.
-  Verification: `pending`
+  Verification: PASS: all 37 unchanged authored cases through each of six public-loader routes (222 outcomes), with 21 process groups per route covering exact values, typed rejection or the Rust text adapter Display, prior-output retention, relative Unicode grammar paths, invalid UTF-8 and missing grammar. Native Rust file replay passes 37 cases/36 groups; historical Lispish passes 26 values/18 groups. The recurring grammar driver adds token round trips and same-engine post-rejection reuse; exact staged canonical proof is mandatory for this admission and enforced by the landing hook. Formal closeout is SEXPR-DOCUMENT-INTEGRATION.2.
   Children: `SEXPR-DOCUMENT-INTEGRATION.2`
 
 - ID: `SESSION-STARTUP-READING.84`
@@ -4816,7 +4816,7 @@ audit range, not the default repair frontier.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SEXPR-DOCUMENT-INTEGRATION.2` | `pending` | Independently admit the verified grammar/native delivery and close the startup parents after the clean focused .1 commit. |
+| 1 | `SESSION-STARTUP-READING.46` | `pending` | Repair the observed UTF-8 diagnostic panic through bounded implementation and independent proof after document admission. |
 
 ## Reading Ledger
 

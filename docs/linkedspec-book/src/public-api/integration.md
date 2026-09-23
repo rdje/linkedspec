@@ -20,7 +20,7 @@ For complete s-expression documents on any backend, select
 top-level lists and preserves symbol, number and string kinds with exact token
 spelling. Each backend guide's **Parse complete s-expression documents** section
 explains entry-rule selection, native results, failure handling and its focused
-contract check. Follow that backend's setup prerequisites first.
+contract check and public-loader replay. Follow that backend's setup prerequisites first.
 
 The Rust [Lispish file example](integration-rust.md#parse-lispish-files-in-your-application)
 retains its historical first-form/head-tail contract and documented

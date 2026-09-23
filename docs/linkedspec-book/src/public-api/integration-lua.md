@@ -143,6 +143,20 @@ grammar-specific recovery proof, not a rollback promise for application effects.
 The existing word adapter still takes text arguments. Its deployment instructions
 continue to apply; include the selected document grammar in your application assets.
 
+After preparing the repository integration example, replay this guide’s public-loader
+path and exact `Top` → `Document` adaptation with:
+
+```sh
+bash tools/run_python_project_data.sh examples/integration/verify_sexpr.py --runtime puc
+bash tools/run_python_project_data.sh examples/integration/verify_sexpr.py --runtime luajit
+```
+
+The verifier checks all 37 authored cases, earlier-output retention, the documented
+relative grammar path, missing files and invalid UTF-8 grammar bytes. It preserves
+the original examples and expectations. These are text-argument checks; the Rust
+[file-consumer verifier](integration-rust.md#reproduce-the-integration-checks) separately
+covers document-file bytes and relocated bundles.
+
 ## Parse native values
 
 The shared grammar is:

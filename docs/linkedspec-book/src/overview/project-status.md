@@ -507,7 +507,7 @@ a fix still requires thorough reading of its affected code, contracts, tests and
 sections. The complete source audit is preserved separately and remains incomplete.
 SEMULITH/LS-001 multiline quoted-string corruption is repaired: both quote readers
 preserve LF and surrounding structure, with shared proof across all six runtime
-routes. LS-002 awaits independent final admission; ADR0124 defines a separate versioned
+routes. LS-002 is addressed locally by ADR0124’s separate versioned
 complete-document grammar with atom kinds and exact lexemes. Its 37 authored cases,
 token-spelling round trips and post-rejection reuse pass all six native runtimes. Compiler repair .45 is complete: reported
 rule-code parse errors reject compilation, with source carriers and generated
@@ -518,8 +518,10 @@ Lispish grammar retains its historical extraction and untyped string-value contr
 The document grammar addresses ARCHOGEN/LS-002 (complete input and all top-level
 forms) and ARCHOGEN/LS-003 (atom kinds). Native file integration passes all 37
 authored cases plus UTF-8, typed failure, multiple-file and relocation checks.
-Independent final report admission remains under `SEXPR-DOCUMENT-INTEGRATION.2`
-and startup .83.3; downstream application acceptance is not claimed.
+Independent integration admission under `SEXPR-DOCUMENT-INTEGRATION.2` closes
+startup .83: all 37 cases pass through every public-loader route, with exact
+values, typed failures, grammar UTF-8 and relative-path checks. All five backend
+guides publish the repeatable checks. Downstream application acceptance is not claimed.
 
 Conformance, test and Unicode reading has exact ownership for all 160 inputs in
 143 bounded groups covering 8,257,059 baseline decoded bytes. Reading now covers 89/143 groups, 109,904 fragments / 4,784,266 baseline bytes and 133 complete files.

@@ -408,6 +408,19 @@ libraries still apply. Verification covers a debug binary on macOS arm64,
 including a moved Unicode path and an unrelated working directory; release
 profiles and other deployment targets require their own checks.
 
+After preparing the repository integration example, replay this guide’s public-loader
+path and default entry selection with:
+
+```sh
+bash tools/run_python_project_data.sh examples/integration/verify_sexpr.py --runtime rust
+```
+
+The verifier checks all 37 authored cases, earlier-output retention, the documented
+relative grammar path, missing files and invalid UTF-8 grammar bytes. It preserves
+the original examples and expectations. These are text-argument checks; the Rust
+[file-consumer verifier](integration-rust.md#reproduce-the-integration-checks) separately
+covers document-file bytes and relocated bundles.
+
 ## Parse Lispish files in your application
 
 If you arrived directly at this section, first complete
@@ -543,7 +556,8 @@ verifier. The [Lispish walkthrough](../specs-and-corpora/lispish-spec-walkthroug
 explains exact newline, escape and quote behavior. The separate document grammar
 passes the authored ARCHOGEN complete-input and SEMULITH kind cases on all six
 runtimes. The separate document-file consumer passes the same cases as files;
-independent final report admission remains open.
+independent public-loader integration replay also passes all 37 cases on each
+of the six runtime routes. Downstream application acceptance is separate.
 Both consumers also reported setup difficulties inside an enclosing Cargo
 workspace. The [workspace setup above](#applications-with-a-cargo-workspace)
 addresses the reproduced membership failures without changing dependency pins.

@@ -7,7 +7,7 @@ answers:
   - where is the director-approved targeted startup rule
   - why is the full reading audit no longer the active prerequisite
   - which three bug reports should be fixed next
-date: 2026-09-22
+date: 2026-09-23
 status: director-approved targeted startup; SEMULITH report register recovered under startup .85
 tags: [startup, continuity, reading, task-tree]
 evidence: "The director approved targeted reading and fast ramp-up after conformance .1.89, committed cb47fde46. SESSION-STARTUP-READING.84 implements ADR0123 without changing source, gates or prior audit coverage."
@@ -26,7 +26,7 @@ reading or workflow checkpoint. The three reports were already registered by int
 .8.1: SEMULITH/LS-001 quoted LF corruption, LS-002 atom-kind preservation, and LS-003
 integration guidance. Startup .85 corrects the retrieval failure, routes the first repair to .83.2.1, which now fixes quoted LF across six runtime
 routes. .83.1 now records ADR0124; .45.1-.45.3 close compiler rejection and its carrier/canonical verification
-before .83.2.2 delivers the versioned grammar with six-runtime proof. SEXPR-DOCUMENT-INTEGRATION.1 implements .83.2.3's native file delivery; .2 owns independent final admission and parent closeout. LS-003 remedies remain verified. Follow
+before .83.2.2 delivers the versioned grammar with six-runtime proof. SEXPR-DOCUMENT-INTEGRATION.1 implements .83.2.3's native file delivery; .2 independently admits public loading on six runtimes and closes startup .83. LS-003 remedies remain verified. The next repair is startup .46 for the observed UTF-8 diagnostic panic. Follow
 [[archogen-rust-lispish-integration]] for the exact register and evidence.
 
 Related: [[startup-codebase-reading-inventory]], [[memory-handoff-task-status-consistency]].

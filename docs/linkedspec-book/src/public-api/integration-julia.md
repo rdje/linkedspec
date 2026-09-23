@@ -223,6 +223,22 @@ The word adapter still consumes text arguments. For a deployed adaptation, retai
 the complete pinned checkout and package the selected document grammar with your
 application assets.
 
+After preparing the repository integration example, replay this guide’s public-loader
+path and exact `Top` → `Document` adaptation with:
+
+```sh
+bash tools/run_python_project_data.sh examples/integration/verify_sexpr.py --runtime julia
+```
+
+The replay uses the prepared `examples/integration/julia/` project and its
+application-local depot in offline mode, with user load paths disabled.
+
+The verifier checks all 37 authored cases, earlier-output retention, the documented
+relative grammar path, missing files and invalid UTF-8 grammar bytes. It preserves
+the original examples and expectations. These are text-argument checks; the Rust
+[file-consumer verifier](integration-rust.md#reproduce-the-integration-checks) separately
+covers document-file bytes and relocated bundles.
+
 ## Capture diagnostic events and handle failures
 
 Diagnostic helpers are quiet unless this adapter receives `--diagnostics`.

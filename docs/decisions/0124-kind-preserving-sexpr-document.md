@@ -1,7 +1,7 @@
 # ADR 0124: A separate versioned grammar preserves s-expression kinds and validates complete documents
 
 - Date: 2026-09-22
-- Status: accepted design under SESSION-STARTUP-READING.83.1; grammar implemented under .83.2.2; native file delivery implemented under SEXPR-DOCUMENT-INTEGRATION.1; final admission pending
+- Status: accepted design under SESSION-STARTUP-READING.83.1; grammar implemented under .83.2.2; native file delivery implemented under SEXPR-DOCUMENT-INTEGRATION.1; local integration admitted under SEXPR-DOCUMENT-INTEGRATION.2
 - Tags: grammar, s-expressions, compatibility, token-kind, document-validation
 
 ## Context
@@ -27,8 +27,9 @@ The design checkpoint did not ship the grammar. Implementation .83.2.2 now ships
 it with 37 authored cases, round trips and post-rejection reuse on six native runtimes;
 `SEXPR-DOCUMENT-INTEGRATION.1` delivers .83.2.3's native Rust file example and
 verifies all authored cases as files plus I/O/error/relocation boundaries.
-Independent final admission and startup-parent closeout remain
-`SEXPR-DOCUMENT-INTEGRATION.2` under .83.3.
+`SEXPR-DOCUMENT-INTEGRATION.2` independently verifies the public-loader adaptations
+on all six routes and admits the local integration under .83.3. The admission
+requires exact canonical proof; actual downstream application acceptance is separate.
 
 ### Result shape
 

@@ -155,5 +155,8 @@ route, and valid independent input after every rejection through the same
 compiled engine. Perl also checks ActionIR readiness and the rejecting-edge
 mutation. The canonical local gate runs this driver. The separate native Rust
 file verifier consumes all 37 cases as real files and checks UTF-8, errors,
-multiple inputs, packaged assets and relocation. Independent final integration
-admission and downstream application acceptance remain separate steps.
+multiple inputs, packaged assets and relocation. The integration guides also
+provide public-loader replay commands: all 37 cases and 21 process groups pass
+on each of the six runtime routes, including typed rejection, grammar UTF-8 and
+relative paths. These text-argument checks complement the Rust file checks;
+actual downstream application acceptance remains separate.

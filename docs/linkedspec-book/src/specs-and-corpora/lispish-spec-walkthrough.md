@@ -35,8 +35,8 @@ These outcomes were characterized directly on Rust; nine selected Perl values
 agree. They are not an all-backend malformed-input guarantee.
 
 The Rust guide supplies the exact tested cases and an adapter, but that adapter
-cannot recover skipped text or missing token distinctions. Strict document/token
-parsing is pending under `SESSION-STARTUP-READING.83.1-.83.3`. The walkthrough's
+cannot recover skipped text or missing token distinctions. Complete document/token
+parsing is available through the separate `SExprDocumentV1.spec` grammar below. The walkthrough's
 valid examples below retain their historical head/tail representation.
 
 ## Multiline quoted text
@@ -99,7 +99,8 @@ pass on Perl, Rust, Dart, Julia, PUC Lua and LuaJIT. Historical Lispish behavior
 and the `lispish_file` adapter remain available. The separate
 [Rust document-file consumer](../public-api/integration-rust.md#read-document-files-in-your-application)
 passes the same authored document cases as real files, including UTF-8, failure,
-multiple-file and relocation checks. Independent final report admission remains open.
+multiple-file and relocation checks. The documented public-loader adaptations
+also pass all 37 cases on each of the six runtime routes.
 
 ## How to run it
 

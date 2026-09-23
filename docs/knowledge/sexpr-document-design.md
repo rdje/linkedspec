@@ -13,10 +13,10 @@ answers:
   - where is the native complete s-expression file consumer
   - how does sexpr_file report a rejected document and locate its grammar
 date: 2026-09-23
-status: grammar and native Rust file delivery verified; independent final admission pending
+status: grammar, native Rust file consumer and six-runtime public-loader integration admitted
 tags: [s-expression, grammar, token-kind, validation, compatibility]
-evidence: "Startup .83.1 authors 37 independent cases and preserves bounded prototype proof. Task .45 closes the compiler warning/drop repair. Production .83.2.2 passes all 37 cases, 21 round trips and 16 same-engine recovery checks on each of six runtimes, with descriptor readiness and an independent skipped-text mutation; its driver recurs in canonical CI. Native delivery .1 passes the unchanged 37 cases as files and 36 process groups; legacy 26-file/18-group and three adapter checks pass."
-reverify: "Run bash tools/check_sexpr_document_v1.sh for the grammar and follow the Rust integration guide's native build plus examples/integration/rust/verify_sexpr.py for file delivery. SEXPR-DOCUMENT-INTEGRATION.2 owns independent final admission. The historical SEXPR_DOCUMENT_DESIGN_PROOF below preserves feasibility scope."
+evidence: "Startup .83.1 authors 37 independent cases and preserves bounded prototype proof. Task .45 closes the compiler warning/drop repair. Production .83.2.2 passes all 37 cases, 21 round trips and 16 same-engine recovery checks on each of six runtimes, with descriptor readiness and an independent skipped-text mutation; its driver recurs in canonical CI. Native delivery .1 passes the unchanged 37 cases as files and 36 process groups; legacy 26-file/18-group and three adapter checks pass. Admission .2 adds all 37 cases and 21 process groups through each of six public-loader routes."
+reverify: "Run bash tools/check_sexpr_document_v1.sh for the grammar and follow the Rust integration guide's native build plus examples/integration/rust/verify_sexpr.py for file delivery. SEXPR-DOCUMENT-INTEGRATION.2 admits public-loader integration; run examples/integration/verify_sexpr.py once per runtime through the managed Python wrapper. The historical SEXPR_DOCUMENT_DESIGN_PROOF below preserves feasibility scope."
 ---
 
 ADR0124 selects the separate `specs/SExprDocumentV1.spec` with a versioned
@@ -35,7 +35,7 @@ gate registrations also retain the consumers. The acceptance case array is uncha
 from ADR0124 (canonical JSON SHA-256
 `75b1012504eba16781f0a92282f915f711d51688d59e2868c7c448ccef39cebe`).
 Native Rust file delivery is implemented under `SEXPR-DOCUMENT-INTEGRATION.1`
-for startup .83.2.3; independent final admission remains .2 under startup .83.3.
+for startup .83.2.3; .2 independently admits local integration and closes startup .83.
 All five backend integration guides and their shared landing page now route to
 the document contract, explain native result/failure handling and publish each
 runtime's focused check command. The maintained Perl/Dart/Julia/Lua word adapters
@@ -46,6 +46,23 @@ therefore selects `Document` without an adapter change. The historical Rust
 tagged result. These are application integration requirements, not backend API
 changes; the shared grammar chapter owns schema and lexical semantics.
 The Rust integration guide command builds and returns the exact documented two-form tagged value through the public loader and generic native consumer. Direct consumer boundary checks also pass empty documents, ordered two-form input and interstitial-junk rejection with empty stdout.
+
+## September 23 independent integration admission
+
+`SEXPR-DOCUMENT-INTEGRATION.2` verifies all 37 authored cases through each of six
+public-loader routes (222 outcomes / 126 process groups). The maintained
+`examples/integration/verify_sexpr.py` copies the documented word adapters and
+changes only the exact Top entry literal to Document; Rust uses its unchanged
+default-entry text consumer. Checks preserve earlier successful output, reject
+invalid grammar UTF-8, fail missing grammar paths, and verify relative Unicode
+paths (application-root-relative for Julia, caller-relative for the others).
+Julia selects the integration example’s Project/Manifest and prepared local depot
+in offline mode with user load paths disabled; it does not require the library
+project to have been separately prepared for this integration replay.
+Grammar, expected values, original adapters and retained products remain exact.
+Native file replay passes 37 cases / 36 groups; historical Lispish 26 / 18.
+All five backend guides publish replay commands. Exact staged canonical proof
+governs admission; no downstream application acceptance or RGX repair is implied.
 
 ## September 23 native file delivery
 
@@ -71,7 +88,7 @@ binary, grammar and contract hashes remain unchanged; owned fixtures are removed
 The historical adapter fails this verifier at the first document as expected,
 while its own 26-file/18-group verifier remains green. Grammar source and every
 authored expected value remain byte/structure-identical to `77d7b3db1`; only the
-contract's delivery-status metadata changes. Formal admission remains .2.
+contract's delivery-status metadata changes. Formal admission was deferred to .2 and is complete in the section above.
 The shipped catalog now lists all 22 source files exactly once. Rust
 `integration_test::parse_all_shipped_specs` discovers, parses, validates and compiles
 all22; Perl return_descriptor inventory/readiness proof passes67 assertions. These

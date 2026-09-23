@@ -11,6 +11,14 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
 
+## 2026-09-23 — SEXPR-DOCUMENT-INTEGRATION.2 - admit complete document integration
+
+Add a maintained verifier for the documented public-loader adaptations and publish its commands in every backend integration guide. The verifier uses the independent authored values, changes only the entry-rule literal in temporary copies, and preserves original examples and prepared products. Close the local ARCHOGEN complete-input/token-kind and SEMULITH kind scope through the separate versioned grammar; historical Lispish and downstream report states remain unchanged.
+
+PASS: all 37 unchanged authored cases through each of six public-loader routes (222 outcomes), with 21 process groups per route covering exact values, typed rejection or the Rust text adapter Display, prior-output retention, relative Unicode grammar paths, invalid UTF-8 and missing grammar. Native Rust file replay passes 37 cases/36 groups; historical Lispish passes 26 values/18 groups. The recurring grammar driver adds token round trips and same-engine post-rejection reuse; exact staged canonical proof is mandatory for this admission and enforced by the landing hook.
+
+Synchronize the grammar chapter, Lispish walkthrough, public status, ADR0124, source-qualified report register, task-tree parents, roadmap and continuity. No runtime, grammar, dependency implementation, pin or authored expected-value change. Strict input-file UTF-8 and packaging are covered by the native Rust file verifier; other public-loader replay uses text arguments. The generic Rust text adapter reports exact Display messages, while its file adapter retains typed JSON causes. Next: startup .46, with the earlier whole-spec timeout kept distinct from the proven core UTF-8 panic.
+
 ## 2026-09-23 — SEXPR-DOCUMENT-INTEGRATION.1 - deliver native s-expression file consumer
 
 Add the separate Rust sexpr_file example: exact UTF-8 file input, one compiled Document engine, direct tagged values, typed parse causes with input paths and executable-relative grammar assets. The maintained verifier consumes the independent 37-case contract as real files and checks public examples, error order, paths, prior-output retention and relocation. Historical Lispish stays unchanged. Synchronize the Rust/shared integration guides, grammar chapter, public status, roadmap and continuity; other backend guides retain the same canonical document contract.
