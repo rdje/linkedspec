@@ -13,7 +13,7 @@ answers:
   - "why did rustc wait in dlopen during startup canonical CI"
   - "did Rust pre-main waits also occur during permitted canonical CI"
   - "which September 7 startup samples distinguish aborted and accepted CI attempts"
-date: 2026-09-10
+date: 2026-09-23
 status: older controlled artifacts classified; newer-OS causal diagnosis and conditional repair pending under startup .81
 tags: [rust, macos, syspolicyd, gatekeeper, verification, performance, FUTURE-PARITY-BACKLOG]
 evidence: "During FUTURE-PARITY-BACKLOG.19.3.3 signoff, a plain-cargo test with repository-local target but user-home registry reads finished its cold build in 55m44s after prolonged per-crate waits. More than three minutes after Cargo launched trace_controls, it had 112 KiB footprint and no test output. Process census found Cargo/test alive and macOS syspolicyd consuming substantial CPU; a one-second sample contained only _dyld_start, proving Rust test code had not begun. The exact /tmp report created by sample was consumed, deleted, and verified absent. The eventual 12/12 result is diagnostic only until rerun through LinkedSpec's managed Cargo wrapper."
@@ -341,3 +341,20 @@ All nine doctrines, mandatory consumers, storage/relocation, CLI 66x2 and Phase 
 gates/matrices were skipped. Canonical capacity commit `bef5dafd` is clean and receipt-bound.
 No target/cache cleanup, recovery/purge, trust bypass, provenance removal or re-signing
 was performed as a response to these observations.
+
+## September 23 consumer delivery observation
+
+During `CONSUMER-REPORT-DELIVERY.1`, the three Lispish adapter tests passed in
+0.01 test seconds after a separate5m27s shared build. The following sexpr_file
+test executable PID59637, parent Cargo2773, had32KiB RSS and zero CPU time at
+elapsed1m06s. A one-second sample at16:02:32.291+0200 on macOS27.0 (26A428)
+contains all804 frames at `_dyld_start` with96KiB footprint. This locates that
+sampled interval before Rust main; it does not establish its OS/kernel cause.
+Startup .81 retains causal diagnosis and conditional repair ownership.
+
+The complete32-line sample was consumed and is retained at
+`.linkedspec-data/scratch/consumer-report-delivery/adapter-launch.sample.txt`,
+SHA-256 `0b1350fdbabd6275e92ddd8bb49e0aa946948831ff9cb8a58d39a476530f40ed`.
+No target cleanup, trust/signing/provenance change or off-volume output was used.
+Sampling is not established as a remedy; the delivery task records the final
+command result separately from this observation.

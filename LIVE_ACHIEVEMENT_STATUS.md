@@ -2,17 +2,19 @@
 
 ## Current Activity
 
-The director-requested regex contract audit is complete. Regex helper operands are supported; a first-class regex variable type is not governed. The earlier precedence question and assignment-only splitter expansion are superseded. The supported multiline matches operand independently returns1 but fails whole-spec validation; .86.4.3 is next. No runtime implementation changed or new type was admitted.
+The director prioritizes blocked SEMULITH/ARCHOGEN consumers. Seven original report requirements have verified local remedies, but published main87b35665e predates the fixes. CONSUMER-REPORT-DELIVERY owns fresh native proof, the remaining public RGX report and canonical publication. No downstream acceptance is claimed; unrelated validator .86.4.3 remains pending.
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.86.4.2.4 - distinguish regex operands from runtime types` — neutral/book and five first-party evaluator audit, thirteen Perl action controls plus AST, focused45 pass, corrected guidance and explicit .87.1/.87.2 helper repair ownership.
+- `CONSUMER-REPORT-DELIVERY.1 - verify consumer remedies and migration` — unchanged report snapshots, remote ancestry, current native build, adapter3, workspace9, historical26/18, document37/36 and Rust public-loader37/21 pass. Book migration and exact baseline pin are rendered.
 
 ## Next Action
 
-- Fix multiline regex helper-operand validation under .86.4.3, then public recomposition .86.4.4, EOF .86.5 and canonical .86.3. Existing helper gaps remain owned by .87.1/.87.2; no new regex type is planned.
+- Reverify RGX's public bootstrap report under .2, then canonical publication .3. ARCHOGEN/LS-004 remains upstream-owned; posting the prepared report awaits explicit authorization.
 
 ## Recent Completions
+
+- `2026-09-23` — `CONSUMER-REPORT-DELIVERY.1` verifies local remedies and exposes unpublished fixes; explicit document migration is documented.
 
 - `2026-09-23` — `.86.4.2.4` corrects the regex-type premise, withdraws the precedence question and owns measured helper gaps.
 
@@ -43,8 +45,6 @@ The director-requested regex contract audit is complete. Regex helper operands a
 - `2026-09-22` — `SESSION-STARTUP-READING.83.2.2` implements the versioned grammar and six-runtime recurrence; native file delivery follows.
 
 - `2026-09-22` — `SESSION-STARTUP-READING.45.3` closes compiler rejection with exact staged canonical acceptance; grammar .83.2.2 follows.
-
-- `2026-09-22` — `SESSION-STARTUP-READING.45.2` verifies source/AST/loader/semantic rejection and reconstructed/generated execution.
 
 ## History
 

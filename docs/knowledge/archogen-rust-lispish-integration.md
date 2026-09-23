@@ -2,6 +2,9 @@
 id: archogen-rust-lispish-integration
 title: ARCHOGEN can use Rust native loading with explicit Lispish and dependency preparation
 answers:
+  - are the SEMULITH and ARCHOGEN fixes published
+  - which consumer reports remain unresolved
+  - how should consumers adopt the fixed document parser
   - what are the three SEMULITH bug reports
   - where are the three bug reports and their repair owners
   - what does ARCHOGEN need besides a LinkedSpec git submodule
@@ -30,6 +33,32 @@ reverify: "Follow the public preparation/workspace sequence in docs/linkedspec-b
 published integration document, public APIs and contracts are the sole authority.
 RGX owns PGEN and all transitive preparation; no separate PGEN procedure or
 internal dependency knowledge belongs in LinkedSpec. Reports go to RGX.
+
+## September 23 consumer delivery priority
+
+The director reports that SEMULITH/ARCHOGEN are blocked. `CONSUMER-REPORT-DELIVERY`
+now owns making the existing local remedies available, fresh consumer proof and
+explicit adoption instructions. On resume, live `git ls-remote origin
+refs/heads/main` returns `87b35665e1a8e0de1f03a27e31dbd4d34d8e2d94`, before quote
+repair `8259719f8`, document grammar `77d7b3db1`, file consumer `df845ce61` and
+admission `92f58b56c`. They are ancestors of local `f60a70df3`, but have not yet
+been published at this checkpoint. Local completion did not establish delivery.
+
+Both supplied report snapshots remain byte-exact against the manifest hashes
+below. The ten-report disposition is seven locally resolved requirements, one
+unresolved upstream issue (ARCHOGEN/LS-004), one withdrawn and one no-action.
+No downstream application or report state has been changed. The book's
+`public-api/integration-rust.md#update-after-the-semulith-and-archogen-reports`
+explains the fixed source pin, grammar/binary refresh and the separate Document
+consumer needed for complete-input validation and token kinds. Merely updating
+historical Lispish cannot opt into the distinct ADR0124 result contract.
+
+Fresh current-source native proof under delivery `.1` passes26 historical file
+values/18 groups,37 authored document cases/36 file groups and37/21 Rust
+public-loader groups. The standalone/host workspace checks pass9 groups, and
+the revised book renders with its migration links and exact baseline pin.
+Evidence is retained under `.linkedspec-data/scratch/consumer-report-delivery/`;
+this checkpoint does not claim publication or downstream acceptance.
 
 ## September 23 independent local admission
 

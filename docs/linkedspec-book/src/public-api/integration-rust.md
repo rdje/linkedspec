@@ -722,6 +722,44 @@ select Cargo's `--release` profile and the corresponding `release/lispish_file`,
 but release-profile, cross-platform and cross-target deployment need their own
 verification. OS runtime libraries remain platform dependencies.
 
+## Update after the SEMULITH and ARCHOGEN reports
+
+The tested LinkedSpec repair baseline is
+`f60a70df37159c0e42d66ee5f08a959821c7e08d`. Select that revision or a later
+compatible revision in the application's LinkedSpec submodule, rebuild the native
+consumer, and commit the updated application pin. Fetching source alone does not
+replace an already built executable or its packaged grammar files.
+
+The reports require different consumer changes:
+
+| Reports | Remedy and adoption step |
+| --- | --- |
+| SEMULITH LS-001 | Both Lispish quote readers preserve literal line feeds. Update the packaged `specs/Lispish.spec` and rerun the eight supplied examples. |
+| ARCHOGEN LS-002 / LS-003 and SEMULITH LS-002 | Use `specs/SExprDocumentV1.spec`, select `Document`, and consume its tagged result. Use the separate `sexpr_file` example for files. The old `lispish_file` adapter still expects historical head/tail values. |
+| ARCHOGEN LS-001 and SEMULITH LS-003 item 1 | Keep the example's workspace boundary and the enclosing application's `exclude = ["vendor/linkedspec"]` entry. Follow the workspace setup above before preparation/build. |
+| ARCHOGEN LS-005 and SEMULITH LS-003 items 2–3 | Follow the linked preparation steps before either text or file use; optional test repositories need not be initialized for native use. |
+| ARCHOGEN LS-004 | The misleading intermediate bootstrap progress message remains an upstream RGX report. Check the command's final exit status; a progress line is not proof of successful preparation. |
+
+ARCHOGEN LS-006 was withdrawn; LS-007 requests no behavior change. The separate
+document grammar deliberately preserves the historical Lispish contract. Merely
+updating the pin while continuing to use `Lispish.spec` will not enable complete
+document validation or tagged atom kinds.
+
+From the application root, fetch and select the tested source revision:
+
+```sh
+git -C vendor/linkedspec fetch origin
+git -C vendor/linkedspec checkout f60a70df37159c0e42d66ee5f08a959821c7e08d
+```
+
+Then follow [RGX preparation](#initial-rgx-preparation), rebuild using the
+application-local storage configuration above, and refresh both the executable
+and grammar in the deployed bundle. The [document-file instructions](#read-document-files-in-your-application)
+show the complete `sexpr_file` source and invocation; the checks below exercise
+the maintained examples and authored expectations. Passing these checks proves
+the LinkedSpec integration path; each application must also rerun its own tests
+against its updated pin and selected grammar.
+
 ## Reproduce the integration checks
 
 From LinkedSpec's root:

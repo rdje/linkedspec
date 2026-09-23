@@ -1,6 +1,8 @@
 # ROADMAP V2
 Execution-oriented companion to `ROADMAP.md`.
 
+Current consumer priority (September23): CONSUMER-REPORT-DELIVERY verifies and publishes the local SEMULITH/ARCHOGEN remedies; live remote main87b35665e predates the quote/document fixes. LS-004 remains RGX-owned; unrelated validator .86.4.3 is pending.
+
 Current session direction (director-approved September22): use targeted reading and a2–5 minute startup under ADR0123. .85 recovers SEMULITH/LS-001–003 from integration .8.1: quoted LF corruption is fixed under .83.2.1 with six-runtime recurrence; ADR0124 now defines the separate kind-preserving complete-document path; .45 compiler rejection repair is closed through .45.1-.45.3; .83.2.2 now delivers the grammar with all 37 cases on six runtimes; .83 closes with verified grammar/native file delivery and independent SEXPR-DOCUMENT-INTEGRATION.2 public-loader admission; startup .46 fixes UTF-8 diagnostic formatting; .47.1 fixes mutation-argument validation; .47.2 preserves outer action source; .47.3 closes the parent; .49 preserves regex statement boundaries with core/runtime/native proof; non-slash .86.1 fixes symbol boundaries and subtraction values; division/regex .86.2 is verified; Perl .86.4/.86.5 follow before parent .86.3; contract audit .86.4.2.4 withdraws the regex-type/precedence premise and selects supported helper-pattern validation .86.4.3; .87 owns two helper gaps; LS-003 integration remedies are verified. Full-reading prerequisites in the older narrative below are superseded only by this scoped-reading rule. Real technical dependencies and relevant policy compliance remain.
 
 Historical full-reading baseline: [SESSION-STARTUP-READING](docs/tasks/SESSION-STARTUP-READING.md) records the

@@ -1,12 +1,12 @@
 # MEMORY
 
-- activation_commit: `7c318569d6f103416bc5dcc6d0fb825b472a86db` — clean base for director-requested regex contract audit.
-- latest_completed_leaf: `SESSION-STARTUP-READING.86.4.2.4 - distinguish regex operands from runtime types`.
-- active_work_unit: none — the contract audit is complete; no runtime repair is executing.
-- next_action: Activate .86.4.3 to fix whole-spec validation of multiline regex helper operands using matches_multiline in the tracked .86.4.2.4 diagnostic.
+- activation_commit: `f60a70df37159c0e42d66ee5f08a959821c7e08d` — clean base for consumer delivery.
+- latest_completed_leaf: `CONSUMER-REPORT-DELIVERY.1 - verify consumer remedies and migration`.
+- active_work_unit: `CONSUMER-REPORT-DELIVERY.2` — reverify the remaining RGX public-build report.
+- next_action: Recheck supported bootstrap success/failure and preserve the upstream report; .3 then runs canonical CI and publishes the verified local remedies.
   Named-argument direction PARSER-AUTHORING-APIS.4 is approved and parked; other authoring proposals and approved formats stay parked.
-- in_flight_uncommitted: none — audit, corrected book and repair owners committed; all jobs consumed; no runtime change or push.
-- blockers: none for .86.4.3; the earlier precedence question .86.4.2.2 is withdrawn, and assignment-only splitter expansion .86.4.2.3 is superseded.
+- in_flight_uncommitted: none.
+- blockers: upstream LS-004 remains open; external report posting awaits explicit authorization. LinkedSpec delivery can proceed; .86.4.3 stays pending.
   Wrapper startup .7 remains open; warned-child group matched, but denied-call cause and original lost PUC stream remain unproved. Recovery/purge stay prohibited.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
   active table; the task metadata doctrine inventories all consumers, permits arbitrary frontier-row rewrites,
