@@ -12,7 +12,7 @@ answers:
   - why does a slash inside a comment require a Perl precedence decision
   - which task owns the Perl division versus multiline regex precedence choice
 date: 2026-09-23
-status: .86.4.2.4 supersedes precedence premise; measured .86.4.3/.86.4.6/.86.4.7 repairs verified; grouped operands .86.4.8 remain open
+status: .86.4.2.4 supersedes precedence premise; measured .86.4.3/.86.4.6/.86.4.7 repairs verified; grouped operands .86.4.8.2 remain open
 tags: [perl, regex, actionir, validation, newline]
 evidence: "SESSION-STARTUP-READING.86.4.1 separates validation from action segmentation. Resumed .86.4.2.1 compares exact accepted source and the archived lexical candidate: two public Get and independent lowered-action results change from7 to empty string with no last_error. Both rejected candidates remain evidence only; production/tests are restored."
 reverify: "bash tools/project_data_run.sh env PERL5LIB= perl -Iperl docs/checkpoints/SESSION-STARTUP-READING.86.4.2.1.pl; expected accepted public/action values are7 for both sources. Those task proposals are superseded by .86.4.2.4; use its separate helper-operand diagnostic for the current repair."

@@ -11,6 +11,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
 
+## 2026-09-24 — SESSION-STARTUP-READING.86.4.8.1 - preserve numeric compatibility before grouped operand repair
+
+Archive the rejected grouped-operand lookahead and a fixed12-case public/AST/lowered diagnostic. Although it repairs all22 prior grouped-pattern probes, it changes accepted array(/(14,2),14/cos) from [7,14] to [] without an error and hides a numeric runtime failure. Restore production/tests exactly to f3f9fc74; require grammar-aware repair .86.4.8.2 before public recomposition. The book retains the measured limitation and working string alternative. No runtime repair, precedence change, full Phase0 or canonical acceptance is claimed.
+
 ## 2026-09-24 — SESSION-STARTUP-READING.86.4.4.1 - own grouped regex operand failures before public closeout
 
 Public recomposition at verified9e2c26b1c finds four bare grouped-dot/comma failures among22 fixed public/splitter/CSV/lowered probes. The shared numeric slash-call discriminator mistakes regex-body punctuation for an expression boundary; comma becomes a third helper argument and continuation statements remain joined. Eighteen nearby/string/binding controls work. Add the permanent diagnostic and causal Knowledge record; required .86.4.8 repair precedes .86.4.4.2 public closeout.

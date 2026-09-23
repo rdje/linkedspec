@@ -2,17 +2,19 @@
 
 ## Current Activity
 
-Perl .86.4.3/.86.4.6/.86.4.7 repairs remain verified. Public recomposition .86.4.4.1 finds a shared grouped-pattern dot/comma classification defect; .86.4.8 is the required next repair before .86.4.4.2. Escape fidelity remains SUPPORTING-SOURCE-READING.2.4, helper gaps remain .87 and LS-004 remains director-relayed/upstream-owned.
+Perl .86.4.3/.86.4.6/.86.4.7 repairs remain verified. Public recomposition .86.4.4.1 finds a shared grouped-pattern dot/comma classification defect; .86.4.8.1 rejects incompatible token lookahead and restores accepted code; .86.4.8.2 is the required repair before .86.4.4.2. Escape fidelity remains SUPPORTING-SOURCE-READING.2.4, helper gaps remain .87 and LS-004 remains director-relayed/upstream-owned.
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.86.4.4.1 - own grouped regex operand repair` — tracked22-case public/splitter/CSV/lowered diagnostic, four exact failures/eighteen controls, unchanged production/tests and verified book-source identity, rendered book and required repair dependency. No runtime repair or new full Phase0 claimed.
+- `SESSION-STARTUP-READING.86.4.8.1 - preserve grouped operand compatibility evidence` — exact12-case public/AST/lowered comparison rejects lookahead that changes [7,14] to []; source/tests restored, candidate archived and compatible repair .86.4.8.2 remains mandatory. No runtime repair accepted.
 
 ## Next Action
 
-- Repair .86.4.8 through the shared discriminator consumers while preserving accepted numeric interpretations. Then .86.4.4.2 public/loader/generated/book recurrence, .86.5 EOF and .86.3 canonical closeout. Commit each verified slice; final push requires exact-HEAD canonical proof.
+- Repair .86.4.8.2 with both permanent diagnostics, preserving numeric/raw-host outcomes and malformed diagnostics. Then .86.4.4.2 public/loader/generated/book recurrence, .86.5 EOF and .86.3 canonical. Commit each verified slice; final push requires exact-HEAD canonical proof.
 
 ## Recent Completions
+
+- `2026-09-24` — `SESSION-STARTUP-READING.86.4.8.1` rejects numeric-incompatible grouped-pattern lookahead and owns required .86.4.8.2.
 
 - `2026-09-24` — `SESSION-STARTUP-READING.86.4.4.1` owns four grouped-operand failures and eighteen controls; .86.4.8 is required before public closeout.
 
@@ -43,8 +45,6 @@ Perl .86.4.3/.86.4.6/.86.4.7 repairs remain verified. Public recomposition .86.4
 - `2026-09-23` — `.86.4.1` isolates Perl multiline regex failures and owns bounded splitter/validation repairs.
 
 - `2026-09-23` — `SESSION-STARTUP-READING.86.2` repairs division newlines and retains regex interpretations; core254/runtime404/native56 pass; Perl .86.4/.86.5 follow.
-
-- `2026-09-23` — `SESSION-STARTUP-READING.86.1` preserves eleven non-slash symbol callees and fixes subtraction returning null; core247/runtime401/native44 pass; .86.2 follows.
 
 ## History
 

@@ -11,6 +11,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
 
+## 2026-09-24 — SESSION-STARTUP-READING.86.4.8.1 - preserve numeric compatibility before grouped operand repair
+
+A complete slash token plus an argument boundary is insufficient for safe numeric/regex disambiguation even after protecting strings and assignment boundaries. The host-cos fixture is accepted through numeric-call lowering plus a raw_perl AST fallback; the rejected candidate merges it into one regex node. Therefore rejecting raw_perl nodes during a numeric trial parse would also be unsound. Preserve fixed-source baseline/candidate records through the permanent12-case probe, exact rejected patch and hashes in the Knowledge card. A quoted regex payload advances from validation failure only to handler failure, retaining method-call recognition in mandatory .86.4.8.2 scope. No authored code may be executed merely to decide its lexical interpretation.
+
 ## 2026-09-24 — SESSION-STARTUP-READING.86.4.4.1 - distinguish regex-body punctuation from numeric slash boundaries
 
 The next public matrix extends the working /(x) + LF + y/ shape to /(x).*y/ and /(x),y/. All four direct-return/continuation forms fail validate_dsl_syntax; nearby hash/space/ungrouped-dot controls and string/binding twins pass. MethodExpr::_looks_like_slash_symbol_call_at returns numeric-call true after the first balanced group when the next character is dot/comma. Validation, StatementSplit, CSV and AST regex recognition consume that shared decision. The dot direct return independently executes to1; comma becomes three arguments and lowers to the unsupported-matches marker/undef; both continuations remain joined and fail independent compilation.

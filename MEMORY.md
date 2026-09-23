@@ -1,10 +1,10 @@
 # MEMORY
 
-- activation_commit: `9e2c26b1c733393f41cb7f8a6e285ef742ec63d0` — clean base for public multiline helper recomposition.
-- latest_completed_leaf: `SESSION-STARTUP-READING.86.4.4.1 - own grouped regex operand repair`.
-- active_work_unit: `SESSION-STARTUP-READING.86.4.8` — grouped regex operand delimiter repair (pending).
-- next_action: Repair .86.4.8 using docs/checkpoints/SESSION-STARTUP-READING.86.4.4.1.pl and its Knowledge card: grouped dot/comma operands are misclassified as numeric calls. Preserve successful numeric interpretations; then .86.4.4.2 recomposition, .86.5 EOF and .86.3 canonical.
-- in_flight_uncommitted: none.
+- activation_commit: `f3f9fc74db17286b5d5d0913bdb55d5e135fe8ad` — clean base for grouped operand compatibility intake.
+- latest_completed_leaf: `SESSION-STARTUP-READING.86.4.8.1 - preserve grouped operand compatibility evidence`.
+- active_work_unit: `SESSION-STARTUP-READING.86.4.8.2` — compatible grouped regex operand repair (pending).
+- next_action: Repair .86.4.8.2 using both permanent grouped/compatibility diagnostics and docs/knowledge/perl-grouped-regex-operand-boundaries.md. Preserve numeric and raw-host outcomes; raw_perl is not proof of invalid syntax. Then .86.4.4.2 recomposition, .86.5 EOF and .86.3 canonical.
+- in_flight_uncommitted: none; rejected candidate is archived and production/tests are restored exactly to the activation commit.
 - blockers: LS-004 remains upstream-owned; director relays docs/upstream/rgx/bootstrap-progress-status.md. No RGX code defect established. Named-argument and format proposals remain parked.
   Wrapper startup .7 remains open; recovery/purge stay prohibited. No interrupted Phase0 run counts as proof.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
@@ -56,4 +56,4 @@
   Changes segment4971 preserves 168 lines /27426 bytes from clean 7c318569; old archive rows/bytes remain exact.
 - dependency_boundary: September20: LinkedSpec integrates only with RGX via its published integration document/APIs/contracts. RGX owns PGEN; no separate PGEN procedure, internal inspection/analysis, patches or pin changes.
   Normal documented builds remain authorized; retain caches. Startup .80.1-.4 may observe public behavior or track upstream repairs, not investigate dependency internals.
-- latest_bootstrap_read: ADR0123 targets 2–5 minute startup plus thorough task-specific reading. Separate audit remains 89/143 and .1.90. Document integration and .46/.47/.49/.86.1/.86.2 are verified; Perl .86.4.2.4 corrects the regex-type premise; .86.4.3 owns supported helper validation (verified); .86.4.6 verifies helper splitting; .86.4.7 verifies quoted subjects; .86.4.4.1 owns required grouped-operand repair .86.4.8 before .86.4.4.2; .87 owns two helper gaps. No downstream application acceptance claim.
+- latest_bootstrap_read: ADR0123 targets 2–5 minute startup plus thorough task-specific reading. Separate audit remains 89/143 and .1.90. Document integration and .46/.47/.49/.86.1/.86.2 are verified; Perl .86.4.2.4 corrects the regex-type premise; .86.4.3 owns supported helper validation (verified); .86.4.6 verifies helper splitting; .86.4.7 verifies quoted subjects; .86.4.4.1 owns grouped-operand repair .86.4.8; .86.4.8.1 rejects incompatible lookahead before required .86.4.8.2 and .86.4.4.2; .87 owns two helper gaps. No downstream application acceptance claim.

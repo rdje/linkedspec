@@ -286,8 +286,11 @@ rule after the action still reports its original source line.
 One pattern-boundary gap remains: grouped bare operands such as `/(x).*y/` and
 `/(x),y/` are currently rejected during validation. Equivalent string patterns
 work, including `pattern = "(x).*y"; return(matches("xy", pattern))`.
-`SESSION-STARTUP-READING.86.4.8` owns the repair before public closeout of this
-group. The complete examples above use verified pattern shapes.
+`SESSION-STARTUP-READING.86.4.8.2` owns the repair before public closeout of this
+group. The complete examples above use verified pattern shapes. A proposed
+lookahead fix was rejected because it silently changed accepted Perl numeric
+expressions into regex matches; the existing numeric behavior is preserved.
+Use string patterns for these grouped forms until the compatible repair lands.
 
 An escape-lowering limitation remains: `"\n"` currently stays
 backslash-plus-`n` through ordinary assignment/return lowering,

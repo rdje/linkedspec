@@ -1,0 +1,69 @@
+diff --git a/perl/LinkedSpec/ActionIR/MethodExpr.pm b/perl/LinkedSpec/ActionIR/MethodExpr.pm
+index f9e94df1c..7d740e354 100644
+--- a/perl/LinkedSpec/ActionIR/MethodExpr.pm
++++ b/perl/LinkedSpec/ActionIR/MethodExpr.pm
+@@ -22,6 +22,55 @@ sub _normalize_method_name {
+  return $method
+ }
+ 
++# A comma or dot after a balanced group can still belong to a regex operand.
++# Require its closing slash and operand boundary before overriding the numeric
++# spelling. Never borrow a slash from a complete quoted numeric argument or
++# from outside the enclosing argument list. Assignment-position host syntax
++# retains the existing discriminator.
++sub _grouped_regex_operand_closes {
++ my ($text, $idx, $group_end) = @_;
++ my $prefix = substr($text, 0, $idx);
++ return 0 unless $prefix =~ /(?:\A\s*|[\(,]\s*)\z/o;
++
++ my $len = length($text);
++ my $close = $idx + 1;
++ while ($close < $len) {
++  my $char = substr($text, $close, 1);
++  if ($char eq '\\') { $close += 2; next }
++  last if $char eq '/';
++  ++$close;
++ }
++ return 0 if $close >= $len || $close <= $group_end;
++ my $after = $close + 1;
++ ++$after while $after < $len && substr($text, $after, 1) =~ /[A-Za-z]/o;
++ ++$after while $after < $len && substr($text, $after, 1) =~ /\s/o;
++ return 0 if $after < $len && substr($text, $after, 1) !~ /[,\)\]]/o;
++
++ my @delimiters;
++ my %closer = ('(' => ')', '[' => ']', '{' => '}');
++ for (my $pos = $group_end + 1; $pos < $close; ++$pos) {
++  my $char = substr($text, $pos, 1);
++  if ($char eq '\\') { ++$pos; next }
++  if ($char eq "'" || $char eq '"') {
++   my $end = $pos + 1;
++   while ($end < $len) {
++    my $quoted = substr($text, $end, 1);
++    if ($quoted eq '\\') { $end += 2; next }
++    last if $quoted eq $char;
++    ++$end;
++   }
++   return 0 if $end < $len && $end > $close;
++   $pos = $end if $end < $close;
++   next;
++  }
++  if (exists $closer{$char}) { push @delimiters, $closer{$char}; next }
++  if ($char =~ /[\)\]\}]/o) {
++   return 0 unless @delimiters && pop(@delimiters) eq $char;
++  }
++ }
++ return 1;
++}
++
+ sub _looks_like_slash_symbol_call_at {
+  my ($text, $idx) = @_;
+  return 0 unless defined $text;
+@@ -83,6 +132,8 @@ sub _looks_like_slash_symbol_call_at {
+ 
+    my $after = $pos + 1;
+    ++$after while $after < $len && substr($text, $after, 1) =~ /\s/o;
++   return 0 if $after < $len && substr($text, $after, 1) =~ /[,\.]/o
++    && _grouped_regex_operand_closes($text, $idx, $pos);
+    return 1 if $after >= $len || substr($text, $after, 1) =~ /[,;\.\)\]]/o;
+    return 0;
+   }
