@@ -11,6 +11,14 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
 
+## 2026-09-23 — SESSION-STARTUP-READING.49 - preserve regex statement boundaries
+
+Remove whitespace consumption before Rust action-regex suffix scanning. Only adjacent compatibility letters are consumed; LF/CRLF and following identifiers remain available to the statement parser. Preserve the existing pattern-only RegexLiteral representation. A separated suffix such as /x/ i rejects without a statement separator. Subsequent typed writes and mutations retain their exact source and Unicode scalar spans.
+
+Core RED has four regex failures and one independently faulty arithmetic control; scoped RED has four failures and one compatibility pass. All 243 core tests pass after the repair, including five new groups and 144 assignment combinations across both parser modes. PASS: 243 core tests; 397 selected runtime tests (179 library, 197 integration, 2 source-fidelity, 3 regex, 13 mutation, 3 corpus groups covering 105 fixtures). The regex target checks 32 assignments, exact nested-write source, 3 valid and 3 invalid controls across source/compiled serde and generated plans. The new mutation case also passes independently compiled emitted execution. Native: 22 checks pass (16 return 7, 3 malformed inputs reject, 3 symbol-call rejections remain owned by .86); the exact book example returns 7. Binary SHA-256: 2675f2ffb467b123ef6e866b3765c68232a519aac42f6771ed620eef8e0e4e24.
+
+The Rust integration guide includes an executable newline example and the remaining arithmetic slash-call limitation. Newly owned .86 follows immediately and retains the original failing source and public Perl/Rust comparisons. The known no-edge Perl E-result issue remains .27; explicit action edges provide the value oracle. Other backend integration guides retain their verified contracts. Ordinary focused verification applies; canonical .47 closeout at 04534674 remains historical proof, not proof of this changed tree.
+
 ## 2026-09-23 — SESSION-STARTUP-READING.47.3 - close Rust mutation argument and source repairs
 
 Validator repair a6ff64e56 and source repair 01c40fd3f are committed and verified. The latter passes the complete Rust component gate, core238, all runtime targets, storage and CLI66x2; final native25 uses SHA256 2025d1ce7556aaae4b5ef516344ed7054e7620bc51d7f454c778938279464be4. Whole-spec/programmatic, serialized, generated and independently compiled emitted carriers preserve the tested source and values. Neutral authority retains167+592 mutation proof. This documentation-only closeout requires successful canonical tools/run_ci_local.sh on the exact staged candidate and its receipt before landing; the commit body and promoted receipt record the result. Separate .49/.52-.54/.58-.59 defects remain open.

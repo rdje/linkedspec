@@ -271,6 +271,30 @@ Rebuild affected source ASTs, compiled JSON and generated modules from the origi
 `.spec` files. Later stages cannot recover whitespace or statements that an older
 outer parser already removed.
 
+Within an action block, a regex literal can precede another statement on the
+next line. LF and CRLF both separate the statements. This example returns `7`
+with input `x`:
+
+```text
+Top::
+ -> Done { rx = /x/
+           out = 7;
+           return(out) }
+Done:
+ /x/
+```
+
+Compatibility suffix letters must touch the closing slash: `/x/i` is accepted,
+whereas `/x/ i` does not attach a suffix and is invalid without a statement
+separator. The action-expression carrier keeps the regex pattern only; accepting
+these suffix letters does not give them matching semantics. Use an inline flag
+such as `/(?i)x/` when the pattern needs one.
+
+Arithmetic slash calls currently need a semicolon before a following statement:
+`out = /(14, 2); note = 1`. The word form `div(14, 2)` also works before a newline.
+A slash call followed directly by a newline and another identifier is a known
+Rust parsing limitation; it is separate from regex-literal statement separation.
+
 One engine processes every command-line input independently. The direct-value
 method returns `serde_json::Value`; printing it writes JSON. This avoids the
 legacy execution method's accumulator wrapper. The application can inspect that

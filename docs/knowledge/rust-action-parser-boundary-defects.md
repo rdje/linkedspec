@@ -11,11 +11,12 @@ answers:
   - did the whole spec Unicode CLI probe demonstrate a panic
   - why does a Rust regex assignment followed by a newline return null
   - why does adding a regex suffix flag change Rust statement parsing
+  - why does a bare identifier after a Rust regex disappear from the action AST
 date: 2026-09-23
-status: .45/.46/.47 repaired with bounded proof; .49 regex statement-boundary repair remains
+status: .45/.46/.47/.49 repaired with bounded proof; separate symbol-call .86 follows
 tags: [rust, parser, compiler, diagnostics, unicode, mutation, startup-reading]
 evidence: "September 7 native diagnostics established warning/drop, Unicode diagnostic, mutation-whitespace and regex-boundary defects under .45/.46/.47/.49. Startup .45.1 now propagates every reported rule-code parse error. Twelve native pre-repair invalid cases wrongly compile; four new core rejection groups fail before repair and all five groups pass after it, covering 15 malformed contexts and 11 retained valid blocks. The complete Rust component gate and rebuilt native/quoted-LF controls pass; this change does not repair the separately owned parser causes. Startup .46 separately fixes the UTF-8 excerpt boundary, with core RED/GREEN, public-route and native-process proof."
-reverify: "Run bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-core --lib --test expression_diagnostics --test rule_code_rejection and bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --lib --test source_emitter rule_code. Historical diagnostic commands below intentionally describe incorrect pre-repair behavior, not current acceptance. Reconcile separate .47/.49 parser repairs."
+reverify: "Run bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-core --lib --test expression_diagnostics --test rule_code_rejection and bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --lib --test source_emitter rule_code. Historical diagnostic commands below intentionally describe incorrect pre-repair behavior, not current acceptance. For .49 run the complete core package and runtime --lib --test integration_test --test regex_statement_boundaries --test action_source_fidelity --test map_leaves_mutation_contract --test corpus_oracle through the same managed Cargo wrapper. Separate symbol-call .86 remains open."
 ---
 
 The first three observations came from forward source reading under the frozen `.3.2.55` canonical candidate; its commit body preserves their original commands and results. The regex CLI comparison completed during `.3.3.1`, using unchanged source after that canonical checkpoint committed. `.3.3.1` makes the pending repair owners and this retrievable record explicit; ADR0123 now permits targeted reading before repairs while preserving the separate full audit.
@@ -121,7 +122,7 @@ CORE_DIAGNOSTIC
 
 ## Regex suffix scan consumes the following statement — repair .49
 
-The four native controls below compare `rx = /x/; out = 7`, the newline-separated equivalent, an adjacent `i` suffix before the newline, and a string assignment before the newline. Three return seven without warnings; only the unflagged newline form warns that I-block parsing expected a statement separator at byte 13 and returns null, while reporting compile/invoke success. `parse_regex` in `rust/linkedspec-core/src/expr.rs` calls `skip_whitespace` before consuming ASCII alphabetic suffix flags, so it consumes the following `out` identifier. Repair .45 separately owns the warning/drop fallback exposed by this invalidated block.
+The historical, pre-.45 native controls below compare `rx = /x/; out = 7`, the newline-separated equivalent, an adjacent `i` suffix before the newline, and a string assignment before the newline. Three return seven without warnings; only the unflagged newline form warns that I-block parsing expected a statement separator at byte 13 and returns null, while reporting compile/invoke success. `parse_regex` in `rust/linkedspec-core/src/expr.rs` calls `skip_whitespace` before consuming ASCII alphabetic suffix flags, so it consumes the following `out` identifier. Repair .45 separately closes the warning/drop fallback exposed by this invalidated block.
 
 A standalone core reproduction attempted first timed out during `rustc` compilation after 180 seconds and never ran. Its subprocess was reaped; the exact owned scratch directory was confirmed absent. That timeout is not the evidence for the parser defect. The native commands completed in 2.095, 1.230, 1.246, and 1.230 seconds respectively; all exited zero. Group .3.3.7's read range remains baseline-identical (1,497 lines / 56,871 bytes, SHA-256 `83ff42b72d5dd9222751deb14c81e889da99c2c937ceb0b0e388f32e3f180788`).
 
@@ -138,6 +139,55 @@ RUST_REGEX_CLI_BOUNDARY
 ```
 
 Related facts: [[rust-aggregate-selector-compile-rejection]], [[rust-generic-final-codeblock-normalization]], [[map-leaves-mutation-rust-runtime]], [[rust-project-data-ssd-storage]].
+
+### September 23 current reproduction
+
+From clean `04534674ccf604c8e992afca807fda9660530ee0`, the native CLI rejects
+unflagged LF, CRLF and horizontal-whitespace-plus-LF forms at compilation. The
+semicolon, adjacent `i`, and string controls still return 7. All six commands
+complete in 1.206–1.229 seconds against binary SHA256
+`36d36d498368fbff8419be8121f8e70175ad972b94ca4482bf8a2161e95aee08`.
+This is ordinary compile rejection after `.45`, not the old warning/null result.
+Public `Get` accepts the six sources; `call_spec_handler_subst` retains both
+assignments. Explicit action-edge return probes provide the value oracle without
+depending on the known no-edge Perl `.27` lifecycle issue.
+
+The first compiled core RED has five failures: four in the suffix scanner's
+scope and one independently faulty arithmetic control. `/x/` followed by a
+newline and bare `flag` silently becomes only one statement; separated `i` is
+wrongly accepted as a suffix; the assignment and typed-write cases report missing
+separators at bytes 13 and 30. `.49` owns those four groups. The separate
+symbol-call lookahead failure is owned by immediate `.86`, with original failing
+sources/results retained in [[rust-symbol-call-newline-boundary]]. No production
+repair is claimed by this reproduction. The suffix carrier remains the existing
+pattern-only `RegexLiteral`; flag interpretation is outside this repair.
+
+Exact scratch: `.linkedspec-data/scratch/regex-boundary49/`, including
+`native-before.jsonl`, `perl-before.jsonl`, and `core-red.log`.
+
+### Verified suffix-adjacency repair under .49
+
+Remove only the whitespace skip before the existing adjacent ASCII-letter loop.
+The scoped core target changes from four failures/one pass to five passes. Its
+144 assignment combinations cover both parser modes, escaped/Unicode/inline-flag
+patterns, compatibility suffixes and LF/CRLF/CR/semicolon separators. A bare
+identifier remains a second statement; separated suffix letters reject without
+a statement separator. Exact nested-write and mutation source/scalar spans after
+a Unicode prefix survive supported carriers. Adjacent suffix acceptance still
+has no separate flag semantics: the serialized RegexLiteral remains pattern-only.
+
+PASS: 243 core tests; 397 selected runtime tests (179 library, 197 integration, 2 source-fidelity, 3 regex, 13 mutation, 3 corpus groups covering 105 fixtures). The regex target checks 32 assignments, exact nested-write source, 3 valid and 3 invalid controls across source/compiled serde and generated plans. The new mutation case also passes independently compiled emitted execution. Native: 22 checks pass (16 return 7, 3 malformed inputs reject, 3 symbol-call rejections remain owned by .86); the exact book example returns 7. Binary SHA-256: 2675f2ffb467b123ef6e866b3765c68232a519aac42f6771ed620eef8e0e4e24.
+
+The runtime command selects the directly affected library, integration, source,
+regex, mutation and corpus targets; it is not the full repository canonical gate.
+Canonical .47 closeout belongs to 04534674. The current native paired replay
+changes only the three regex-newline rejects to 7 and retains the three .86 symbol
+rejects. The 12 public Perl explicit-edge results remain the independent value oracle.
+Logs: core-green.log, runtime-focused.log, primary-build.log and native-after.jsonl
+under the same scratch root. Permanent regression sources are
+rust/linkedspec-core/tests/regex_statement_boundaries.rs,
+rust/linkedspec-runtime/tests/regex_statement_boundaries.rs and the added emitted
+consumer in rust/linkedspec-runtime/tests/map_leaves_mutation_contract.rs.
 
 ## September 7 newline-copy recurrence
 

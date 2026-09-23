@@ -38,7 +38,7 @@ remain. Reading completion and runtime signoff remain distinct.
 - ID: `SESSION-STARTUP-READING`
   Status: `active`
   Goal: Recover the repair frontier with targeted reading and preserve the separate full-reading audit.
-  Children: `SESSION-STARTUP-READING.1`, `SESSION-STARTUP-READING.2`, `SESSION-STARTUP-READING.3`, `SESSION-STARTUP-READING.4`, `SESSION-STARTUP-READING.5`, `SESSION-STARTUP-READING.6`, `SESSION-STARTUP-READING.7`, `SESSION-STARTUP-READING.8`, `SESSION-STARTUP-READING.9`, `SESSION-STARTUP-READING.10`, `SESSION-STARTUP-READING.11`, `SESSION-STARTUP-READING.12`, `SESSION-STARTUP-READING.13`, `SESSION-STARTUP-READING.14`, `SESSION-STARTUP-READING.15`, `SESSION-STARTUP-READING.16`, `SESSION-STARTUP-READING.17`, `SESSION-STARTUP-READING.18`, `SESSION-STARTUP-READING.19`, `SESSION-STARTUP-READING.20`, `SESSION-STARTUP-READING.21`, `SESSION-STARTUP-READING.22`, `SESSION-STARTUP-READING.23`, `SESSION-STARTUP-READING.24`, `SESSION-STARTUP-READING.25`, `SESSION-STARTUP-READING.26`, `SESSION-STARTUP-READING.27`, `SESSION-STARTUP-READING.28`, `SESSION-STARTUP-READING.29`, `SESSION-STARTUP-READING.30`, `SESSION-STARTUP-READING.31`, `SESSION-STARTUP-READING.32`, `SESSION-STARTUP-READING.33`, `SESSION-STARTUP-READING.34`, `SESSION-STARTUP-READING.35`, `SESSION-STARTUP-READING.36`, `SESSION-STARTUP-READING.37`, `SESSION-STARTUP-READING.38`, `SESSION-STARTUP-READING.39`, `SESSION-STARTUP-READING.40`, `SESSION-STARTUP-READING.41`, `SESSION-STARTUP-READING.42`, `SESSION-STARTUP-READING.43`, `SESSION-STARTUP-READING.44`, `SESSION-STARTUP-READING.45`, `SESSION-STARTUP-READING.46`, `SESSION-STARTUP-READING.47`, `SESSION-STARTUP-READING.49`, `SESSION-STARTUP-READING.50`, `SESSION-STARTUP-READING.51`, `SESSION-STARTUP-READING.52`, `SESSION-STARTUP-READING.53`, `SESSION-STARTUP-READING.54`, `SESSION-STARTUP-READING.55`, `SESSION-STARTUP-READING.56`, `SESSION-STARTUP-READING.57`, `SESSION-STARTUP-READING.58`, `SESSION-STARTUP-READING.59`, `SESSION-STARTUP-READING.60`, `SESSION-STARTUP-READING.61`, `SESSION-STARTUP-READING.62`, `SESSION-STARTUP-READING.63`, `SESSION-STARTUP-READING.64`, `SESSION-STARTUP-READING.65`, `SESSION-STARTUP-READING.66`, `SESSION-STARTUP-READING.67`, `SESSION-STARTUP-READING.68`, `SESSION-STARTUP-READING.69`, `SESSION-STARTUP-READING.70`, `SESSION-STARTUP-READING.71`, `SESSION-STARTUP-READING.72`, `SESSION-STARTUP-READING.73`, `SESSION-STARTUP-READING.74`, `SESSION-STARTUP-READING.75`, `SESSION-STARTUP-READING.76`, `SESSION-STARTUP-READING.77`, `SESSION-STARTUP-READING.78`, `SESSION-STARTUP-READING.79`, `SESSION-STARTUP-READING.80`, `SESSION-STARTUP-READING.81`, `SESSION-STARTUP-READING.82`, `SESSION-STARTUP-READING.83`, `SESSION-STARTUP-READING.84`, `SESSION-STARTUP-READING.85`
+  Children: `SESSION-STARTUP-READING.1`, `SESSION-STARTUP-READING.2`, `SESSION-STARTUP-READING.3`, `SESSION-STARTUP-READING.4`, `SESSION-STARTUP-READING.5`, `SESSION-STARTUP-READING.6`, `SESSION-STARTUP-READING.7`, `SESSION-STARTUP-READING.8`, `SESSION-STARTUP-READING.9`, `SESSION-STARTUP-READING.10`, `SESSION-STARTUP-READING.11`, `SESSION-STARTUP-READING.12`, `SESSION-STARTUP-READING.13`, `SESSION-STARTUP-READING.14`, `SESSION-STARTUP-READING.15`, `SESSION-STARTUP-READING.16`, `SESSION-STARTUP-READING.17`, `SESSION-STARTUP-READING.18`, `SESSION-STARTUP-READING.19`, `SESSION-STARTUP-READING.20`, `SESSION-STARTUP-READING.21`, `SESSION-STARTUP-READING.22`, `SESSION-STARTUP-READING.23`, `SESSION-STARTUP-READING.24`, `SESSION-STARTUP-READING.25`, `SESSION-STARTUP-READING.26`, `SESSION-STARTUP-READING.27`, `SESSION-STARTUP-READING.28`, `SESSION-STARTUP-READING.29`, `SESSION-STARTUP-READING.30`, `SESSION-STARTUP-READING.31`, `SESSION-STARTUP-READING.32`, `SESSION-STARTUP-READING.33`, `SESSION-STARTUP-READING.34`, `SESSION-STARTUP-READING.35`, `SESSION-STARTUP-READING.36`, `SESSION-STARTUP-READING.37`, `SESSION-STARTUP-READING.38`, `SESSION-STARTUP-READING.39`, `SESSION-STARTUP-READING.40`, `SESSION-STARTUP-READING.41`, `SESSION-STARTUP-READING.42`, `SESSION-STARTUP-READING.43`, `SESSION-STARTUP-READING.44`, `SESSION-STARTUP-READING.45`, `SESSION-STARTUP-READING.46`, `SESSION-STARTUP-READING.47`, `SESSION-STARTUP-READING.49`, `SESSION-STARTUP-READING.50`, `SESSION-STARTUP-READING.51`, `SESSION-STARTUP-READING.52`, `SESSION-STARTUP-READING.53`, `SESSION-STARTUP-READING.54`, `SESSION-STARTUP-READING.55`, `SESSION-STARTUP-READING.56`, `SESSION-STARTUP-READING.57`, `SESSION-STARTUP-READING.58`, `SESSION-STARTUP-READING.59`, `SESSION-STARTUP-READING.60`, `SESSION-STARTUP-READING.61`, `SESSION-STARTUP-READING.62`, `SESSION-STARTUP-READING.63`, `SESSION-STARTUP-READING.64`, `SESSION-STARTUP-READING.65`, `SESSION-STARTUP-READING.66`, `SESSION-STARTUP-READING.67`, `SESSION-STARTUP-READING.68`, `SESSION-STARTUP-READING.69`, `SESSION-STARTUP-READING.70`, `SESSION-STARTUP-READING.71`, `SESSION-STARTUP-READING.72`, `SESSION-STARTUP-READING.73`, `SESSION-STARTUP-READING.74`, `SESSION-STARTUP-READING.75`, `SESSION-STARTUP-READING.76`, `SESSION-STARTUP-READING.77`, `SESSION-STARTUP-READING.78`, `SESSION-STARTUP-READING.79`, `SESSION-STARTUP-READING.80`, `SESSION-STARTUP-READING.81`, `SESSION-STARTUP-READING.82`, `SESSION-STARTUP-READING.83`, `SESSION-STARTUP-READING.84`, `SESSION-STARTUP-READING.85`, `SESSION-STARTUP-READING.86`
 
 - ID: `SESSION-STARTUP-READING.1`
   Status: `done`
@@ -3581,9 +3581,12 @@ remain. Reading completion and runtime signoff remain distinct.
   Commit: `SESSION-STARTUP-READING.47.3 - close Rust mutation argument and source repairs`
 
 - ID: `SESSION-STARTUP-READING.49`
-  Status: `pending`
+  Status: `done`
   Goal: Preserve Rust statement boundaries after unflagged regex literals.
-  Dependencies: `.3`/`.4`/`.5`; coordinate error propagation with `.45`.
+  Dependencies: Clean .47 closeout; .45 error propagation is repaired. ADR0123 supersedes the blanket reading prerequisite.
+  Verification tier: `focused`
+  Focused checks: Public CLI/Core RED/GREEN; regex flags, LF/CRLF and statement boundaries; exact source/AST, native/serde/generated/emitted routes; relevant Rust core/runtime compatibility, Perl public oracle, book, Knowledge, memory, histories, doctrines and diff.
+  Canonical trigger: Ordinary bounded parser repair retains existing regex semantics and formats; no new canonical boundary before a milestone or push.
   Acceptance: Keep regex suffix flags adjacent to their closing slash and preserve following
     newline/semicolon statement separators. Compare unflagged and flagged regex assignments, ordinary
     string assignments, CRLF and whitespace boundaries, and arithmetic slash-call controls. Retain
@@ -3591,14 +3594,21 @@ remain. Reading completion and runtime signoff remain distinct.
     routes. Coordinate with .45 so malformed blocks reject, while this valid newline form compiles and
     returns seven. Do not silently expand or redefine regex flag semantics; split wider changes before
     implementation.
-  Verification: `pending` — Four managed native CLI controls all exit zero. Semicolon-separated regex
+  Historical pre-.45 verification: Four managed native CLI controls all exit zero. Semicolon-separated regex
     assignment, adjacent-flag regex plus newline, and string plus newline return seven without warnings.
     Unflagged regex plus newline returns null with a parse-I-block warning at byte 13 and
     compile:ok/invoke:ok. expr.rs parse_regex skips whitespace before scanning ASCII suffix letters,
     consuming the newline and following out identifier; .45's compiler path then drops the invalidated
     block. The separate core harness timed out during rustc compilation and never ran; its exact scratch
     absence was verified.
-  Commit: `pending`
+  Current proof: Scoped core RED has 4 failures/1 pass; GREEN has 5 passes; all 243 core tests pass. PASS: 243 core tests; 397 selected runtime tests (179 library, 197 integration, 2 source-fidelity, 3 regex, 13 mutation, 3 corpus groups covering 105 fixtures). The regex target checks 32 assignments, exact nested-write source, 3 valid and 3 invalid controls across source/compiled serde and generated plans. The new mutation case also passes independently compiled emitted execution. Native: 22 checks pass (16 return 7, 3 malformed inputs reject, 3 symbol-call rejections remain owned by .86); the exact book example returns 7. Binary SHA-256: 2675f2ffb467b123ef6e866b3765c68232a519aac42f6771ed620eef8e0e4e24. All 12 explicit-edge Perl cases return 7. Book/public checks, Knowledge, memory, histories and doctrines are required before landing; exact command logs are under .linkedspec-data/scratch/regex-boundary49/. Original arithmetic failure is retained under immediate .86; no-edge Perl value comparisons remain excluded under .27.
+  Commit: This commit; subject `SESSION-STARTUP-READING.49 - preserve regex statement boundaries`.
+  - [x] **REPRODUCE / ISSUE** — LinkedSpec CLI --trace low and public Get reproduce the three Rust-only newline failures; the untouched core test target reports exact parser errors and a lost identifier statement.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — expr.rs::parse_regex calls skip_whitespace before consuming suffix letters; the following out/flag identifier is consumed. CodeBlock reports the missing separator at byte13, or silently retains only one statement for /x/ followed by flag.
+  - [x] **FIX** — Remove parse_regex whitespace skipping before the unchanged adjacent ASCII suffix loop. Preserve the existing pattern-only carrier; .86 owns the separate symbol-call lookahead.
+  - [x] **ADDRESSED (verified)** — Exact statements/source and native/reconstructed/generated values agree after repair.
+  - [x] **NO REGRESSION** — Focused Rust compatibility and valid/invalid controls pass; separately owned defects remain open.
+  - [x] **LOCKSTEP** — Rust integration/book, Knowledge, roadmap and task/live pointers match the verified boundary.
 
 - ID: `SESSION-STARTUP-READING.50`
   Status: `pending`
@@ -3616,7 +3626,6 @@ remain. Reading completion and runtime signoff remain distinct.
     23/24, despite compile:ok/invoke:ok. Perl lowers all six without an unsupported marker. parse_name
     consumes the colon as an identifier character before parse_hash_literal expects its separator.
   Commit: `pending`
-
 - ID: `SESSION-STARTUP-READING.51`
   Status: `pending`
   Goal: Reconcile and repair Rust cat minimum-arity divergence against the supported helper contract.
@@ -3634,7 +3643,6 @@ remain. Reading completion and runtime signoff remain distinct.
     arguments without an arity guard. The public helper table spells cat(value, value, ...). Earlier no-edge
     E probes returned zero for both Perl cases and are excluded as arity evidence under known .27 debt.
   Commit: `pending`
-
 - ID: `SESSION-STARTUP-READING.52`
   Status: `pending`
   Goal: Preserve compact Rust fluent argument whitespace and literal delimiters.
@@ -3642,7 +3650,6 @@ remain. Reading completion and runtime signoff remain distinct.
   Children: `.52.1`, `.52.2`
   Acceptance: Repair both independently confirmed lexical boundaries without changing helper semantics or
     widening accepted calls. Reconcile supported lifecycle/edge/continuation carriers and public examples.
-
 - ID: `SESSION-STARTUP-READING.52.1`
   Status: `pending`
   Goal: Accept horizontal whitespace before compact Rust fluent argument parentheses.
@@ -3654,7 +3661,6 @@ remain. Reading completion and runtime signoff remain distinct.
     and braced-space calls; Rust rejects compact space/tab while Perl returns "ok". The fluent scanner checks
     starts_with('(') before skipping whitespace; I raw-suffix validation then rejects its leftover arguments.
   Commit: `pending`
-
 - ID: `SESSION-STARTUP-READING.52.2`
   Status: `pending`
   Goal: Keep quoted and regex parentheses out of compact fluent argument depth.
@@ -3667,7 +3673,6 @@ remain. Reading completion and runtime signoff remain distinct.
     parenthesis without quote/regex state, unlike the separate completeness scanner.
   Additional evidence: Julia .1.31 confirms quoted closing-parenthesis truncation and opening-parenthesis empty-call substitution. JULIA-STARTUP-READING.2.20.1/.2 owns its distinct implementation and supported-route proof; exact controls are in docs/knowledge/julia-spec-lexical-boundary-defects.md.
   Commit: `pending`
-
 - ID: `SESSION-STARTUP-READING.53`
   Status: `pending`
   Goal: Preserve unsupported Rust header-rest suffixes for the same validation as body-line twins.
@@ -3683,7 +3688,6 @@ remain. Reading completion and runtime signoff remain distinct.
     form successfully with "ok"; Perl rejects both with Unsupported lifecycle block remainder. Inline parsing
     breaks on None without Raw retention; ordinary body parsing retains an I suffix and validation rejects it.
   Commit: `pending`
-
 - ID: `SESSION-STARTUP-READING.54`
   Status: `pending`
   Goal: Preserve regex-literal braces through Perl and Rust rule-block scanners.
@@ -3692,7 +3696,6 @@ remain. Reading completion and runtime signoff remain distinct.
   Acceptance: Keep regex delimiters lexical while preserving existing regex-versus-division distinctions,
     quoted text, nesting, source provenance and malformed-source diagnostics. Do not infer other backend
     outcomes from the two measured routes.
-
 - ID: `SESSION-STARTUP-READING.54.1`
   Status: `pending`
   Goal: Repair Perl bootstrap rule-block regex-brace truncation.
@@ -3707,7 +3710,6 @@ remain. Reading completion and runtime signoff remain distinct.
     alternatives only; NON_ACTION_CODE_BLOCK stops at its first closing-brace match. Control matches values are
     Perl 1 and Rust true, not a newly investigated boolean representation issue.
   Commit: `pending`
-
 - ID: `SESSION-STARTUP-READING.54.2`
   Status: `pending`
   Goal: Repair Rust rule-block collection and validation for regex-literal braces.
@@ -3720,7 +3722,6 @@ remain. Reading completion and runtime signoff remain distinct.
     while quoted-pattern and ordinary-regex controls execute true. The outer collector and balance validator
     track quotes/braces but no regex state. Complete expression parsing is a separate inner boundary.
   Commit: `pending`
-
 - ID: `SESSION-STARTUP-READING.54.3`
   Status: `pending`
   Goal: Close regex-brace public teaching and recurring parity after the concrete scanner repairs.
@@ -3733,7 +3734,6 @@ remain. Reading completion and runtime signoff remain distinct.
   Commit: `pending`
   Additional evidence: Julia .1.32 isolates three compact regex-brace inputs with full retained action source and identical quiet/traced balance rejection. JULIA-STARTUP-READING.2.21.3 owns downstream Validator437-460 repair; existing .2.21.2 now requires it as well as .2.21.1. Exact evidence: docs/knowledge/julia-function-projection-metadata-gaps.md.
   Additional evidence: Lua .1.22 confirms plain/grouped regex outer truncation and a complete compact regex expression rejected by quote-only lifecycle balancing. LUA-STARTUP-READING.2.24.3/.4 own separate parser/validator repairs and .2.24.6 carrier proof. Compact quoted parentheses/spaces succeed; a quoted string passed as matches pattern correctly returns false under Lua's typed-regex contract. Exact evidence: docs/knowledge/lua-spec-parser-validator-reading-and-lexical-gaps.md.
-
 - ID: `SESSION-STARTUP-READING.55`
   Status: `pending`
   Goal: Preserve large finite numeric values and reconcile their portable text spelling.
@@ -3741,7 +3741,6 @@ remain. Reading completion and runtime signoff remain distinct.
   Children: `.55.1`, `.55.2`, `.55.3`
   Acceptance: Keep numeric value preservation distinct from number-to-text spelling. Do not silently clamp
     finite values at a host integer boundary or declare portable spelling from a small fixture alone.
-
 - ID: `SESSION-STARTUP-READING.55.1`
   Status: `pending`
   Goal: Remove Rust finite integral-number saturation at JSON and related conversion boundaries.
@@ -3766,7 +3765,6 @@ remain. Reading completion and runtime signoff remain distinct.
     representable larger value rejects as an invalid selector. The probe exits 0 with empty stderr;
     existing CLI controls expose only generic invocation failure. Exact artifacts and cause are in the numeric Knowledge card.
   Commit: `pending`
-
 - ID: `SESSION-STARTUP-READING.55.2`
   Status: `pending`
   Goal: Reconcile scalar-text scientific/decimal spelling outside the existing small numeric fixture.
@@ -3780,7 +3778,6 @@ remain. Reading completion and runtime signoff remain distinct.
     Current Rust to_scalar_text formats finite f64 directly, while Perl cat lowering stringifies the host value.
     Julia .1.17 adds decimal-literal cat(100000000000000000000.0, "") as full decimal versus Perl scientific text; exact paired controls remain in docs/knowledge/julia-large-number-and-slice-boundaries.md. Julia .2.9 separately owns numeric value preservation.
   Commit: `pending`
-
 - ID: `SESSION-STARTUP-READING.55.3`
   Status: `pending`
   Goal: Close large-number public guidance and recurring parity after value/spelling repairs.
@@ -3790,8 +3787,6 @@ remain. Reading completion and runtime signoff remain distinct.
     claims. Own any additional gaps, retain dated pre-repair evidence, and run canonical closeout proof.
   Verification: `pending`
   Commit: `pending`
-
-
 - ID: `SESSION-STARTUP-READING.56`
   Status: `pending`
   Goal: Restore complete Rust built-in function-name reservation without accidental helper shadowing.
@@ -3799,7 +3794,6 @@ remain. Reading completion and runtime signoff remain distinct.
   Children: `.56.1`, `.56.2`, `.56.3`
   Acceptance: Reference-owned built-in names must not become user-defined functions through a stale copied list.
     Preserve ordinary custom functions and deliberate callable precedence; do not widen names or hide failures.
-
 - ID: `SESSION-STARTUP-READING.56.1`
   Status: `pending`
   Goal: Freeze current callable-name reservation authority and exact missing-name diagnostics.
@@ -3813,7 +3807,6 @@ remain. Reading completion and runtime signoff remain distinct.
     Rust accepts gap_text/entry_slot definitions and returns "sentinel"; Perl rejects each at function_registry
     with the exact built-in helper/control collision detail. No timeout; completed native subprocesses.
   Commit: `pending`
-
 - ID: `SESSION-STARTUP-READING.56.2`
   Status: `pending`
   Goal: Repair Rust registry validation and prevent recurrence as helper authority evolves.
@@ -3827,7 +3820,6 @@ remain. Reading completion and runtime signoff remain distinct.
     resolves registered functions before ordinary eager-helper fallback, making the admitted name executable.
     Perl UserFunctionRegistry delegates to MethodLowering's current known-value-call resolver.
   Commit: `pending`
-
 - ID: `SESSION-STARTUP-READING.56.3`
   Status: `pending`
   Goal: Close registry-reservation public teaching and recurring supported-route proof.
@@ -3837,8 +3829,6 @@ remain. Reading completion and runtime signoff remain distinct.
     and run the canonical public/cross-backend closeout. No broad registry parity claim before recurrence.
   Verification: `pending`
   Commit: `pending`
-
-
 - ID: `SESSION-STARTUP-READING.57`
   Status: `pending`
   Goal: Reject discarded named and malformed selectors on AND bare edges.
@@ -3846,7 +3836,6 @@ remain. Reading completion and runtime signoff remain distinct.
   Children: `.57.1`, `.57.2`, `.57.3`, `.57.4`
   Acceptance: Blind ownership must not silently discard authored selector syntax. Preserve unselected bare
     calls and valid explicit action selectors; keep this defect separate from existing Perl return-path .27.
-
 - ID: `SESSION-STARTUP-READING.57.1`
   Status: `pending`
   Goal: Freeze complete selector-bearing blind-edge rejection across the two composed contracts.
@@ -4808,6 +4797,17 @@ remain. Reading completion and runtime signoff remain distinct.
   Verification: The 29-file SEMULITH snapshot matches its retained manifest SHA-256 a77e92fedc744643db03edea346d3619c60c1ac3cb20dc97ab444f7cd82ed3af. Fresh native Rust replay confirms four matching controls and four silently corrupted LF cases, all exits 0 and empty stderr; full results/binary/grammar hashes are in .linkedspec-data/scratch/report-recovery/ls001-current.json. The native consumer/runtime/grammar sources are unchanged since integration 87b35665e. Canonical retrieval is docs/knowledge/archogen-rust-lispish-integration.md; no report is repaired by this routing slice.
   Commit: `SESSION-STARTUP-READING.85 - recover SEMULITH reports and repair ownership`
 
+- ID: `SESSION-STARTUP-READING.86`
+  Status: `pending`
+  Goal: Reconcile and repair Rust symbol-call statement boundaries without misclassifying regex literals.
+  Dependencies: Complete .49 regex suffix repair first; immediate next leaf before .50. ADR0123 targeted reading applies.
+  Planned tier: `focused`
+  Planned focused proof: Public CLI/Get and CodeBlock RED/GREEN; arithmetic/comparison callees, LF/CRLF/horizontal whitespace, EOF/semicolon/nested controls, slash-versus-regex ambiguity, native/serde/generated/emitted routes, direct compatibility and book/governance.
+  Planned canonical boundary: Escalate only if measured ambiguity requires a language-contract decision; otherwise bounded parser repair before the next designated milestone/push.
+  Acceptance: Establish reference behavior before repair; preserve real statement separators after balanced symbol-call parentheses while retaining parenthesized, escaped and multiline regex recognition. Do not broaden the regex-versus-division contract silently. Retain exact subsequent AST/source and values through supported carriers.
+  Verification: Found by .49's untouched arithmetic control: CodeBlock reports unterminated regex literal for slash-call plus newline. Native slash EOF/semicolon and named div plus newline return7; slash LF/CRLF and spaced slash plus newline reject compile. symbol_call_paren_has_expression_boundary skips every ASCII whitespace byte after closing parentheses, then accepts only EOF or selected punctuation, losing the line-break boundary. Six explicit-edge Perl Get controls return7; paired native edge replay rejects the three slash-newline forms. No-edge Perl value1 is excluded under existing .27; bare slash-call EOF also rejects Perl outer validation and remains .86 investigation scope. Exact six sources/traces: .linkedspec-data/scratch/regex-boundary49/slash-before.jsonl; original failing core group: core-red.log. No production repair yet.
+  Commit: `pending`
+
 ## Current Frontier
 
 ADR0123 replaces the blanket full-reading prerequisite with targeted startup. Prior
@@ -4816,7 +4816,7 @@ audit range, not the default repair frontier.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.49` | `pending` | Reproduce the unflagged regex newline boundary against the repaired compiler, then preserve adjacent suffix scanning. |
+| 1 | `SESSION-STARTUP-READING.86` | `pending` | .49 is verified and committed; repair the separately reproduced symbol-call newline boundary before .50. |
 
 ## Reading Ledger
 

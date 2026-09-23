@@ -3605,8 +3605,8 @@ impl<'a> Parser<'a> {
             if ch == b'/' {
                 let pattern = self.src[start..self.pos].to_string();
                 self.advance(1); // consume closing '/'
-                // Skip optional regex flags (Perl compatibility: /o, /i, /g, /x, etc.)
-                self.skip_whitespace();
+                // Skip only adjacent compatibility suffixes (/o, /i, /g, /x, etc.).
+                // Whitespace belongs to the surrounding expression or statement.
                 while self.pos < self.src.len() {
                     let c = self.src.as_bytes()[self.pos];
                     if c.is_ascii_alphabetic() {

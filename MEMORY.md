@@ -1,11 +1,11 @@
 # MEMORY
 
-- activation_commit: `01c40fd3f06820c2bacef0363e018c7dfbdbda08` — clean outer source-fidelity repair; parent closeout activation.
-- latest_completed_leaf: `SESSION-STARTUP-READING.47.3 - close Rust mutation argument and source repairs`; canonical receipt is required for landing.
-- active_work_unit: `SESSION-STARTUP-READING.49` — pending; Rust unflagged regex statement boundaries.
-- next_action: Activate .49 from clean HEAD; reverify recorded regex/newline controls through the public CLI, then repair suffix scanning with exact source/carrier proof.
+- activation_commit: `04534674ccf604c8e992afca807fda9660530ee0` — clean canonical .47 closeout; regex statement-boundary activation.
+- latest_completed_leaf: `SESSION-STARTUP-READING.49 - preserve regex statement boundaries`; core243, focused runtime397 and native22 pass; book and exact engineering-notes rollover verified.
+- active_work_unit: `SESSION-STARTUP-READING.86` — pending; separate Rust symbol-call newline boundary.
+- next_action: Activate .86 from clean HEAD; reverify symbol-call/regex ambiguity through public interfaces, then repair newline lookahead with carrier proof.
   Named-argument direction PARSER-AUTHORING-APIS.4 is approved and parked; other authoring proposals and approved formats stay parked.
-- in_flight_uncommitted: none; parent closeout lands only after its exact staged canonical receipt is accepted.
+- in_flight_uncommitted: none; .49 is complete in this commit and .86 has not started.
 - blockers: Wrapper startup .7 remains open; warned-child group matched, but denied-call cause and original lost PUC stream remain unproved. Recovery/purge stay prohibited.
 - current_rust_warning_debt: Repeated carriers report 1,870 pgen plus 26 rgx-core output warnings; RUST-DEPENDENCY-WARNING-ZERO.1-.7 own public RGX reports and result verification without suppression; dependency internals are excluded.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
@@ -51,10 +51,10 @@
 - standing_contracts: all durable paths are repo-relative; all project data stays on the repository filesystem;
   README remains bounded; ordinary leaves use focused proof and designated infrastructure/public/push boundaries
   use exact staged canonical CI; task-tree/index, Knowledge Map, mdBook, and bounded live/history move in lockstep.
-- current_engineering_notes_capacity: ADR0122 admits 43 collection files /42 manifest lines /25410 manifest bytes; current37/36/21737 stay bounded.
-  Notes segment4971 preserves 128 lines /26949 bytes from clean d95047136; old archive rows/bytes remain exact.
+- current_engineering_notes_capacity: ADR0122 admits 43 collection files /42 manifest lines /25410 manifest bytes; current38/37/22349 stay bounded.
+  Notes segment4970 preserves 162 lines /28648 bytes from clean 04534674; old archive rows/bytes remain exact.
 - current_change_history_capacity: ADR0122 admits 47 collection files /46 manifest lines /26255 manifest bytes; current41/40/22799 stay bounded.
   Changes segment4972 preserves 136 lines /27060 bytes from clean 8259719f8; old archive rows/bytes remain exact.
 - dependency_boundary: September20: LinkedSpec integrates only with RGX via its published integration document/APIs/contracts. RGX owns PGEN; no separate PGEN procedure, internal inspection/analysis, patches or pin changes.
   Normal documented builds remain authorized; retain caches. Startup .80.1-.4 may observe public behavior or track upstream repairs, not investigate dependency internals.
-- latest_bootstrap_read: ADR0123 targets 2–5 minute startup plus thorough task-specific reading. Separate audit remains 89/143 and .1.90. Document integration, .46 and .47 are closed at their verified boundaries; .49 is next. No downstream application acceptance claim.
+- latest_bootstrap_read: ADR0123 targets 2–5 minute startup plus thorough task-specific reading. Separate audit remains 89/143 and .1.90. Document integration, .46/.47/.49 are closed at their verified boundaries; .86 is next. No downstream application acceptance claim.

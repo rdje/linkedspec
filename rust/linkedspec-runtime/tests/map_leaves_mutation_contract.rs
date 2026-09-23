@@ -792,6 +792,55 @@ fn empty_arguments_execute_through_reconstructed_and_emitted_carriers() {
 }
 
 #[test]
+fn regex_newline_preserves_following_mutation_through_emitted_source() {
+    let prefix = "note = \"é🦀\"; tree = { \"clé\" : 1 }; rx = /x/\r\n";
+    let mutation = "tree.map_leaves!() { add(value, 1) }";
+    let action = format!("{prefix}{mutation}; return(copy(tree))");
+    let parsed = parse_spec_with_user_functions(&spec_for_action(&action)).unwrap();
+    let reconstructed: SpecFile =
+        serde_json::from_str(&serde_json::to_string(&parsed).unwrap()).unwrap();
+    let compiled = compile(&reconstructed).unwrap();
+    let block = compiled.rules[0].acode_dispatch[0].code.as_ref().unwrap();
+    assert_eq!(block.statements.len(), 5);
+    let Expr::ReceiverMutationChain {
+        source,
+        source_span,
+        ..
+    } = &block.statements[3].expr
+    else {
+        panic!("expected the mutation after the regex assignment");
+    };
+    assert_eq!(source, mutation);
+    assert_eq!(source_span.start, prefix.chars().count());
+    assert_eq!(
+        source_span.end,
+        prefix.chars().count() + mutation.chars().count()
+    );
+    let expected = json!({"clé": 2});
+    assert_eq!(execute_action(&action).unwrap(), expected);
+    let encoded = serde_json::to_string(&compiled).unwrap();
+    let decoded: CompiledSpec = serde_json::from_str(&encoded).unwrap();
+    assert_eq!(
+        Engine::new(decoded)
+            .execute_value("xhello", &ExecutionOptions::new())
+            .unwrap(),
+        expected,
+    );
+    assert_eq!(
+        execute_generated_parser_v2(
+            &encoded,
+            TOP_DONE_PLAN,
+            "xhello",
+            "regex-before-mutation.spec",
+            GENERATED_SOURCE_CONTRACT,
+        )
+        .unwrap(),
+        expected,
+    );
+    assert_independently_compiled_emitted_source(&compiled, &expected);
+}
+
+#[test]
 fn empty_arguments_do_not_admit_corrupted_argument_projections() {
     let original = compile_source(&spec_for_action("tree.map_leaves!( ) { return(value) }"));
     // Equal scalar lengths isolate argument validation from unrelated span mismatches.

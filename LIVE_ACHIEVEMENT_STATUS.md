@@ -2,17 +2,19 @@
 
 ## Current Activity
 
-Local complete-document integration is committed at 92f58b56c. Startup .46 and .47 repair UTF-8 diagnostics, mutation arguments and outer action source. Parent closeout requires exact staged canonical acceptance; the next repair is .49.
+Complete-document integration and startup .46/.47/.49 repairs are locally committed. .47 canonical closeout passed at04534674. The immediate next leaf is .86, owning the separate symbol-call newline failure. No downstream application acceptance or new push is claimed.
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.47.3 - close Rust mutation argument and source repairs` — Validator repair a6ff64e56 and source repair 01c40fd3f are committed and verified. The latter passes the complete Rust component gate, core238, all runtime targets, storage and CLI66x2; final native25 uses SHA256 2025d1ce7556aaae4b5ef516344ed7054e7620bc51d7f454c778938279464be4. Whole-spec/programmatic, serialized, generated and independently compiled emitted carriers preserve the tested source and values. Neutral authority retains167+592 mutation proof. This documentation-only closeout requires successful canonical tools/run_ci_local.sh on the exact staged candidate and its receipt before landing; the commit body and promoted receipt record the result. Separate .49/.52-.54/.58-.59 defects remain open.
+- `SESSION-STARTUP-READING.49 - preserve regex statement boundaries` — PASS: 243 core tests; 397 selected runtime tests (179 library, 197 integration, 2 source-fidelity, 3 regex, 13 mutation, 3 corpus groups covering 105 fixtures). The regex target checks 32 assignments, exact nested-write source, 3 valid and 3 invalid controls across source/compiled serde and generated plans. The new mutation case also passes independently compiled emitted execution. Native: 22 checks pass (16 return 7, 3 malformed inputs reject, 3 symbol-call rejections remain owned by .86); the exact book example returns 7. Binary SHA-256: 2675f2ffb467b123ef6e866b3765c68232a519aac42f6771ed620eef8e0e4e24.
 
 ## Next Action
 
-- Activate .49 from clean HEAD; reproduce unflagged regex/newline parsing through the public CLI, then preserve suffix adjacency and subsequent statements.
+- Activate .86 from clean HEAD; preserve the slash-versus-regex contract while correcting symbol-call statement boundaries. Then resume .50.
 
 ## Recent Completions
+
+- `2026-09-23` — `SESSION-STARTUP-READING.49` preserves regex suffix adjacency and following statements; core243/runtime397/native22 pass; separately owned .86 follows.
 
 - `2026-09-23` — `SESSION-STARTUP-READING.47.3` closes the verified argument/source parent through receipt-bound canonical acceptance; .49 follows.
 
@@ -43,8 +45,6 @@ Local complete-document integration is committed at 92f58b56c. Startup .46 and .
 - `2026-09-22` — `SESSION-STARTUP-READING.84` adopts targeted startup under ADR0123; .85 awaits the three report IDs/titles before repair selection.
 
 - `2026-09-22` — `CONFORMANCE-SOURCE-READING.1.89` completes seven trace/typed-projection consumers with27 top-level/402 nested results. Eleven process helpers retain .2.16 ownership; controlled handler-scope gap gets .2.19. .1.90 continues.
-
-- `2026-09-22` — `CONFORMANCE-SOURCE-READING.1.88` completes six staged/lifecycle/trace consumers with 188 top-level/688 nested results. Four trace helpers extend .2.16 after 48 controlled outcomes; all eight timeout children are reaped. .1.89 continues.
 
 ## History
 
