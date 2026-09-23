@@ -96,15 +96,15 @@ sub _require_method_expr_pkg {
 }
 
 sub _split_top_level_csv {
- my ($payload) = @_;
+ my ($payload, $method) = @_;
  _require_method_expr_pkg();
- return LinkedSpec::ActionIR::MethodExpr::_split_top_level_csv($payload)
+ return LinkedSpec::ActionIR::MethodExpr::_split_top_level_csv($payload, $method)
 }
 
 sub _parse_method_function_expr {
- my ($expr) = @_;
+ my ($expr, $receiver) = @_;
  _require_method_expr_pkg();
- return LinkedSpec::ActionIR::MethodExpr::_parse_method_function_expr($expr)
+ return LinkedSpec::ActionIR::MethodExpr::_parse_method_function_expr($expr, $receiver)
 }
 
 sub _call_semantic_fields {
@@ -332,7 +332,7 @@ sub _parse_call_expr {
  return undef unless ref($call) eq 'HASH' && defined($call->{method});
  my $open_idx = index($trimmed, '(');
  my $payload = substr($trimmed, $open_idx + 1, length($trimmed) - $open_idx - 2);
- my @args = _parse_arg_exprs($payload, $start + $open_idx + 1);
+ my @args = _parse_arg_exprs($payload, $start + $open_idx + 1, $call->{method});
  return _node(
   'call',
   $trimmed,
@@ -359,7 +359,7 @@ sub _parse_trailing_block_call_expr {
  my $open_idx = index($head_trimmed, '(');
  return undef if $open_idx < 0;
  my $payload = substr($head_trimmed, $open_idx + 1, length($head_trimmed) - $open_idx - 2);
- my @args = _parse_arg_exprs($payload, $head_start + $open_idx + 1);
+ my @args = _parse_arg_exprs($payload, $head_start + $open_idx + 1, $call->{method});
 
  my $block_start = $start + $attached->{open_idx};
  my $block_end = $start + $attached->{close_idx} + 1;
@@ -423,7 +423,7 @@ sub _parse_control_flow_head {
  my $open_idx = index($normalized->{head}, '(');
  return undef if $open_idx < 0;
  my $payload = substr($normalized->{head}, $open_idx + 1, length($normalized->{head}) - $open_idx - 2);
- my @args = _parse_arg_exprs($payload, $head_start + $open_idx + 1);
+ my @args = _parse_arg_exprs($payload, $head_start + $open_idx + 1, $call->{method});
 
  my $method = $call->{method};
  my $keyword = $normalized->{keyword};
@@ -611,14 +611,24 @@ sub _skip_switch_branch_separators {
 }
 
 sub _parse_arg_exprs {
- my ($payload, $payload_start) = @_;
- my $parts = _split_top_level_csv($payload);
+ my ($payload, $payload_start, $method) = @_;
+ my $parts = _split_top_level_csv($payload, $method);
+ my %pattern_starts;
+ if (defined($method)) {
+  my $prefix = "$method(";
+  %pattern_starts = map { ($_->[0] - length($prefix)) => 1 }
+   @{LinkedSpec::ActionIR::MethodExpr::_helper_pattern_ranges($prefix . $payload . ')')};
+ }
  my @args;
  my $cursor = 0;
  foreach my $arg (@$parts) {
   my $arg_offset = _find_piece_offset($payload, $arg, $cursor);
   $arg_offset = $cursor unless defined $arg_offset;
-  push @args, parse_action_expr($arg, { base_start => $payload_start + $arg_offset });
+  my $start = $payload_start + $arg_offset;
+  # A recognized pattern owns the argument before fluent-dot parsing begins.
+  my $literal = $pattern_starts{$arg_offset}
+   ? _parse_literal_expr($arg, $start, $start + length($arg)) : undef;
+  push @args, $literal // parse_action_expr($arg, { base_start => $start });
   $cursor = $arg_offset + length($arg);
  }
  return @args
@@ -1397,12 +1407,12 @@ sub _parse_fluent_call_segment {
   }
  }
 
- my $call = _parse_method_function_expr($text);
+ my $call = _parse_method_function_expr($text, 1);
  if (ref($call) eq 'HASH' && defined($call->{method})) {
   my $open_idx = index($text, '(');
   return undef if $open_idx < 0;
   my $payload = substr($text, $open_idx + 1, length($text) - $open_idx - 2);
-  my @args = _parse_arg_exprs($payload, $start + $open_idx + 1);
+  my @args = _parse_arg_exprs($payload, $start + $open_idx + 1, '.' . $call->{method});
   return {
    method => $call->{method},
    source_method => $call->{source_method},
@@ -1417,12 +1427,12 @@ sub _parse_fluent_call_segment {
 
  my ($head_trimmed, $head_start) = _trim_with_offsets($attached->{head}, $start);
  return undef unless length($head_trimmed);
- $call = _parse_method_function_expr($head_trimmed);
+ $call = _parse_method_function_expr($head_trimmed, 1);
  return undef unless ref($call) eq 'HASH' && defined($call->{method});
  my $open_idx = index($head_trimmed, '(');
  return undef if $open_idx < 0;
  my $payload = substr($head_trimmed, $open_idx + 1, length($head_trimmed) - $open_idx - 2);
- my @args = _parse_arg_exprs($payload, $head_start + $open_idx + 1);
+ my @args = _parse_arg_exprs($payload, $head_start + $open_idx + 1, '.' . $call->{method});
 
  my $block_start = $start + $attached->{open_idx};
  my $block_end = $start + $attached->{close_idx} + 1;

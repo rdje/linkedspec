@@ -1,6 +1,6 @@
 ---
 id: perl-grouped-regex-operand-boundaries
-title: A group followed by dot or comma is misclassified as a numeric slash call in Perl regex operands
+title: Perl helper context protects grouped regex operands while preserving numeric calls
 answers:
   - why does Perl reject a grouped regex followed by dot star
   - why does a comma inside a parenthesized regex become another helper argument
@@ -9,12 +9,67 @@ answers:
   - do string patterns avoid the grouped regex boundary failure
   - why cannot a complete slash token override numeric calls
   - is raw_perl AST fallback evidence that numeric syntax is invalid
+  - how does Perl preserve grouped regex operand bytes and source spans
+  - why does receiver filter_match need synthetic helper pattern context
+  - why does a quoted regex payload need the return scanner structural view
+  - can q m or qr variables contain grouped regex helper calls in an index
 date: 2026-09-24
-status: confirmed; lookahead rejected under .86.4.8.1; required repair SESSION-STARTUP-READING.86.4.8.2
+status: .86.4.8.2 repair verified; public recomposition .86.4.4.2 remains
 tags: [perl, regex, scanner, validation, actionir, public-api]
-evidence: "SESSION-STARTUP-READING.86.4.4.1 public recomposition at committed9e2c26b1c measures22 fixed cases: four bare grouped-dot/comma failures and eighteen successful nearby/string/binding controls. All four public failures belong to validate_dsl_syntax. Production/tests remain unchanged. .86.4.8.1 rejects a complete-token lookahead using12 exact compatibility probes: accepted host-cos arithmetic changes [7,14] to [], and a numeric runtime error disappears. Required .86.4.8.2 precedes public closeout .86.4.4.2."
-reverify: "bash tools/project_data_run.sh env PERL5LIB= perl -Iperl docs/checkpoints/SESSION-STARTUP-READING.86.4.4.1.pl; inspect all22 records; also run docs/checkpoints/SESSION-STARTUP-READING.86.4.8.1.pl through the same wrapper and inspect its12 public/AST/lowered records."
+evidence: ".86.4.8.2 passes focused187, exact four-example book21 and complete Phase0 1033/1033. Exact accepted-source replay fails only new group10; nine original numeric/error checkpoint records remain byte-identical. The original22 public cases now succeed; prior intake and rejected-lookahead observations below retain their dated baseline."
+reverify: "bash tools/project_data_run.sh env PERL5LIB= perl -Iperl docs/checkpoints/SESSION-STARTUP-READING.86.4.4.1.pl; expect22 successful public cases; also run docs/checkpoints/SESSION-STARTUP-READING.86.4.8.1.pl through the same wrapper and inspect its12 public/AST/lowered records."
 ---
+
+
+## Current repair (.86.4.8.2)
+
+The accepted repair recognizes pattern positions in `matches`, `split`, `split_each`,
+`filter_match`, and the existing `regex_subst`/`substr` substitution contract.
+Receiver calls retain their argument role. Synthetic `__array_value_split_each`
+and `__array_value_filter_match` calls retain that role during existing receiver
+lowering. A closing slash and flags must satisfy the helper's remaining call
+shape; the substitution route still requires its separate replacement and flags.
+
+Numeric-call boundaries are derived by the unchanged parenthesis/quote scan.
+A candidate pattern cannot borrow a slash beyond the caller or from a complete
+quoted numeric argument. Tested q/qq pipe and brace payloads remain opaque to helper discovery. Square brackets remain DSL indexed reads, including q[index], m[index] and qr[index]; helper calls inside those indexes must remain visible. The parser
+never executes authored text to select its interpretation, and assignment-position
+precedence is unchanged.
+
+`MethodExpr::_helper_pattern_view` preserves character offsets and every CR/LF
+while masking recognized pattern bodies for structural parsing. CSV consumers
+receive the method/receiver context and return slices from the original source.
+AST arguments retain typed regex fields and original source spans rather than
+being split into a numeric call or fluent dot segment. The return scanner uses
+the same structural view; the return contract lowers a complete authored call
+before its legacy text-substitution fallback. That last seam was necessary for
+`return(matches('x,"', /(x),"/))`: a correct AST alone did not make its scanner
+recognize the enclosing return.
+
+Focused proof covers all22 original public cases, the permanent12-case numeric/
+host diagnostic, literal/string/binding twins, LF/CRLF, flags, punctuation and
+quoted payloads, nested helpers/control, substitution, receiver filtering and
+independent generated continuation results. All nine numeric/error controls in
+the12-case checkpoint retain their values and failure stages. The expanded
+consumer has11 groups: exact accepted-source replay fails only group10; the
+repair passes. Seven dependent files add176 passing tests (187 total across
+8 files). All four complete mdBook examples pass21 live/generated assertions.
+The first Phase0 run was stopped for the final indexed-variable correction and does not count. Fresh full Phase0 passes1033/1033 (Files=1, Tests=1033, 1423 wallclock secs ( 0.44 usr  0.10 sys + 1086.49 cusr 125.81 csys = 1212.84 CPU)), with the frozen source/test diff unchanged. Public loader/generated recomposition remains `.86.4.4.2`.
+
+The original22-case checkpoint's `helper_arguments` field intentionally invokes
+context-free CSV splitting. Actual method parsing now supplies the helper role;
+use its public/typed/lowered results to verify the repair, not that isolated
+context-free CSV field. The12-case diagnostic and permanent consumer preserve
+exact numeric and raw-host counterexamples from the rejected lookahead below.
+
+Inline comment text `# pattern/)` exposes a separate pre-existing structural
+validation defect. Its fixed six-case diagnostic is
+`docs/checkpoints/SESSION-STARTUP-READING.86.4.8.2-comments.pl`; existing `.34.1`
+owns the repair with [[perl-comment-newline-lowering-drift]]. All lowered actions
+return1; both inline public cases fail, while both no-comment and standalone
+comment twins return1. This helper repair does not claim that comment gap fixed.
+
+## Intake baseline (9e2c26b1c; retained history)
 
 `return(matches("xy", /(x).*y/))` and its assignment-plus-continuation twin
 fail public validation, as do the corresponding `/(x),y/` cases on `x,y`.

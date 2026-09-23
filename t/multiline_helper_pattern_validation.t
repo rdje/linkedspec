@@ -262,4 +262,108 @@ subtest 'quoted payload cannot masquerade as real rule structure' => sub {
  }
 };
 
+subtest 'grouped regex operands preserve calls, continuations and generated values' => sub {
+ my $serial = 0;
+ for my $separator ("\n", "\r\n") {
+  for my $case (['(x).*y', 'xy'], ['(x),y', 'x,y']) {
+   my ($pattern, $subject) = @$case;
+   for my $spelling ('literal', 'string', 'binding') {
+    my $operand = $spelling eq 'literal' ? "/$pattern/"
+     : $spelling eq 'string' ? qq{"$pattern"} : 'pattern';
+    for my $continuation (0, 1) {
+     my $call = "matches(match_text(), $operand)";
+     my $action = $continuation ? "hit = $call\nnote = 7; return(array(hit, note))" : "return($call)";
+     $action = qq{pattern = "$pattern"; $action} if $spelling eq 'binding';
+     my $source = source_for($action, $separator, '[\s\S]+');
+     my $original = $source;
+     my %context;
+     my $parser = LinkedSpec::Get(\$source, runtime_ctx_ref => \%context);
+     my $input = $subject;
+     my $expected = $continuation ? [1, 7] : 1;
+     is_deeply($parser ? $parser->(\$input) : undef, $expected,
+      "$spelling $pattern, continuation $continuation, separator length " . length($separator));
+     is($context{last_error}, undef, 'no deferred error');
+     is($source, $original, 'authored bytes preserved');
+     if ($spelling eq 'literal' && $continuation) {
+      my $emitted = eval { LinkedSpec::emit_generated_source(\$source, source_identity => 'grouped-helper-pattern.spec') };
+      ok(defined($emitted) && length($emitted), 'generated source emits') or diag($@);
+      my $package = 'GroupedHelperGenerated' . ++$serial;
+      my $loaded = defined($emitted) ? eval("package $package; $emitted; 1") : undef;
+      ok($loaded, 'generated source loads') or diag($@);
+      my $execute = $package->can('Execute');
+      my $generated_input = $subject;
+      is_deeply($execute ? $execute->(\$generated_input) : undef, $expected, 'generated continuation agrees');
+     }
+    }
+   }
+  }
+ }
+ for my $case (
+  ['flags', 'return(matches(match_text(), /(x),y/i))', 'X,Y', 1],
+  ['quoted payload', q{return(matches('x,"', /(x),"/))}, 'x', 1],
+  ['hash payload', 'return(matches(match_text(), /(x),#y/))', 'x,#y', 1],
+  ['class payload', 'return(matches(match_text(), /(x),[;#{}]y/))', 'x,;y', 1],
+  ['escaped closer', 'return(matches(match_text(), /(x),\)y/))', 'x,)y', 1],
+  ['nested array', 'return(array(matches(match_text(), /(x),y/), matches(match_text(), /(x).*y/)))', 'x,y', [1,1]],
+  ['conditional', 'if(true); hit = matches(match_text(), /(x),y/); endif; return(hit)', 'x,y', 1],
+  ['operator-like variable', 's = match_text(); return(matches(s, /(x),y/))', 'x,y', 1],
+  ['index q', 'q = [5,9]; return(q[matches("x,y", /(x),y/)])', 'x', 9],
+  ['index m', 'm = [5,9]; return(m[matches("x,y", /(x),y/)])', 'x', 9],
+  ['index qr', 'qr = [5,9]; return(qr[matches("x,y", /(x),y/)])', 'x', 9],
+  ['split', 'return(split("ax,yb", /(x),y/))', 'x', ['a','x','b']],
+  ['filter', 'return(["x,y", "z"].filter_match(/(x),y/))', 'x', ['x,y']],
+  ['substitution', 'text = match_text(); regex_subst(text, /(x),y/, "ok", g); return(text)', 'x,y', 'ok'],
+  ['quoted substitution', 'text = match_text(); regex_subst(text, /(x),"/, "ok", g); return(text)', 'x,"', 'ok'],
+  ['fake helper in string', q{return('matches("x,y", /(x),y/)')}, 'x', 'matches("x,y", /(x),y/)'],
+ ) {
+  my ($name, $action, $subject, $expected) = @$case;
+  my $source = source_for($action, undef, '[\s\S]+');
+  my %context;
+  my $parser = LinkedSpec::Get(\$source, runtime_ctx_ref => \%context);
+  my $input = $subject;
+  is_deeply($parser ? $parser->(\$input) : undef, $expected, $name) or diag(explain(\%context));
+  is($context{last_error}, undef, "$name has no deferred error");
+  if ($name eq 'index q') {
+   my $emitted = eval { LinkedSpec::emit_generated_source(\$source, source_identity => 'indexed-helper-pattern.spec') };
+   my $loaded = defined($emitted) ? eval("package IndexedHelperGenerated; $emitted; 1") : undef;
+   ok($loaded, 'indexed helper source emits and loads') or diag($@);
+   my $execute = IndexedHelperGenerated->can('Execute');
+   my $generated_input = $subject;
+   is($execute ? $execute->(\$generated_input) : undef, 9, 'generated indexed helper retains the DSL variable');
+  }
+ }
+};
+
+subtest 'grouped pattern recognition preserves numeric and host interpretations' => sub {
+ for my $case (
+  ['host arithmetic', q{return(array(/(14,2), 14/cos))}, [7,14]],
+  ['quoted argument', q{return(array(/(14,2), "a/)"))}, [7,'a/)']],
+  ['receiver', q{return(array(/(14,2).floor(), 1))}, [7,1]],
+  ['receiver and quote', q{return(array(/(14,2).floor().add(1), "a/)"))}, [8,'a/)']],
+  ['outside comment', "value = add(/(14,2),1)\n# pattern/)\nreturn(value)", 8],
+  ['wrong arity and quote', q{return(array(/(14), "a/)"))}, [undef,'a/)']],
+  ['numeric pattern operand', q{return(matches("7", /(14,2)))}, 1],
+  ['extra quoted pattern argument', q{return(matches("7", /(14,2), "a/)"))}, undef],
+  ['host q pipe', q{return(q|matches("x,y", /(x),y/)|)}, undef, 'validate_dsl_syntax'],
+  ['host q numeric', q{return(array(/(14,2), q|matches("xy", /(x).*y/)|))}, undef, 'validate_dsl_syntax'],
+  ['host q brace', q{return(array(/(14,2), q{matches("xy", /(x).*y/)}))}, undef, 'validate_dsl_syntax'],
+  ['host qq pipe', q{return(qq|matches("xy", /(x).*y/)|)}, undef, 'validate_dsl_syntax'],
+  ['host quote rejection', q{return(array(/(14,2), q/)/))}, undef, 'validate_dsl_syntax'],
+  ['inside comment rejection', "return(array(/(14,2),\n# pattern/)\n1))", undef, 'rule_handler_compile'],
+  ['host arithmetic rejection', q{i = 2; return(array(/(14,2), 14/i))}, undef, 'rule_handler_eval'],
+ ) {
+  my ($name, $action, $expected, $stage) = @$case;
+  my $source = source_for($action);
+  my %context;
+  my $parser = LinkedSpec::Get(\$source, runtime_ctx_ref => \%context);
+  my $input = 'x';
+  is_deeply($parser ? $parser->(\$input) : undef, $expected, "$name retains its value");
+  if (defined($stage)) {
+   is(($context{last_error} || {})->{stage}, $stage, "$name retains its failure owner");
+  } else {
+   is($context{last_error}, undef, "$name has no error");
+  }
+ }
+};
+
 done_testing;

@@ -11,6 +11,12 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
 
+## 2026-09-24 — SESSION-STARTUP-READING.86.4.8.2 - preserve grouped regex helper operands
+
+Recognize grouped slash patterns in regex-helper argument positions while retaining numeric calls, raw-host expressions and original source bytes. Carry that context through structural method parsing, CSV, typed AST and synthetic receiver lowering; let the return scanner and contract handle quoted pattern payloads. The expanded consumer covers dot/comma bodies, flags, quoted and bracket payloads, LF/CRLF, continuation, control, substitution, filtering, indexed q/m/qr variables and generated execution.
+
+Exact accepted-source replay fails only the new grouped-pattern group; candidate focused187 and four directly extracted book examples21 pass. Full Phase0 passes1033/1033 (Files=1, Tests=1033, 1423 wallclock secs ( 0.44 usr  0.10 sys + 1086.49 cusr 125.81 csys = 1212.84 CPU)). The book teaches supported grouped forms and preserves remaining escape/callable/EOF limits. A six-case inline-comment intake isolates a separate pre-existing validation-depth defect and adds it to existing .34.1 with a verified standalone-comment alternative. No comment repair or broad helper-family closeout is claimed.
+
 ## 2026-09-24 — SESSION-STARTUP-READING.86.4.8.1 - preserve numeric compatibility before grouped operand repair
 
 Archive the rejected grouped-operand lookahead and a fixed12-case public/AST/lowered diagnostic. Although it repairs all22 prior grouped-pattern probes, it changes accepted array(/(14,2),14/cos) from [7,14] to [] without an error and hides a numeric runtime failure. Restore production/tests exactly to f3f9fc74; require grammar-aware repair .86.4.8.2 before public recomposition. The book retains the measured limitation and working string alternative. No runtime repair, precedence change, full Phase0 or canonical acceptance is claimed.

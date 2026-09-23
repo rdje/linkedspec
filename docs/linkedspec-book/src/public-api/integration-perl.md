@@ -283,20 +283,38 @@ Done:
 Rule-like text inside the quoted value remains string content. A real malformed
 rule after the action still reports its original source line.
 
-One pattern-boundary gap remains: grouped bare operands such as `/(x).*y/` and
-`/(x),y/` are currently rejected during validation. Equivalent string patterns
-work, including `pattern = "(x).*y"; return(matches("xy", pattern))`.
-`SESSION-STARTUP-READING.86.4.8.2` owns the repair before public closeout of this
-group. The complete examples above use verified pattern shapes. A proposed
-lookahead fix was rejected because it silently changed accepted Perl numeric
-expressions into regex matches; the existing numeric behavior is preserved.
-Use string patterns for these grouped forms until the compatible repair lands.
+Grouped patterns such as `/(x).*y/` and `/(x),y/` retain one helper operand.
+A comma, dot or quoted character inside the pattern does not become an outer
+argument or end the following statement. Flags also work, for example
+`return(matches("X,Y", /(x),y/i))`. A literal quoted character needs no string
+escaping inside a slash pattern: `return(matches('x,"', /(x),"/))` returns `1`.
+
+With input `x,y`, this complete parser returns `[1, "ok"]`:
+
+```text
+Top::
+ -> Done {
+  hit = matches(match_text(), /(x),y/)
+  text = match_text(); regex_subst(text, /(x),y/, "ok", g)
+  return(array(hit, text))
+ }
+Done:
+ /[\s\S]+/
+```
+
+The grouped forms also work with `split` and receiver `filter_match`, for
+example `return(["x,y", "z"].filter_match(/(x),y/))` returns `["x,y"]`.
+Equivalent string patterns remain useful for reusable bindings:
+`pattern = "(x).*y"; return(matches("xy", pattern))` returns `1`.
+Recognition uses the helper's pattern position while preserving numeric slash
+calls and existing Perl compatibility expressions. It does not introduce a
+regex-valued variable type.
 
 An escape-lowering limitation remains: `"\n"` currently stays
 backslash-plus-`n` through ordinary assignment/return lowering,
 while the inline helper example above decodes it as LF
 (`SUPPORTING-SOURCE-READING.2.4`). The input-capture example uses `match_text()`
-to obtain exact subject bytes from input; the last example uses an actual line
+to obtain exact subject bytes from input; the quoted-subject example uses an actual line
 ending in its quoted value. Check both failure channels described
 below; a returned parser alone does not establish successful execution.
 

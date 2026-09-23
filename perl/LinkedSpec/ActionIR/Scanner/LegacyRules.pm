@@ -14,6 +14,7 @@ BEGIN {
  my $perl_root = File::Basename::dirname($linked_spec_dir);
  unshift @INC, $perl_root unless grep { defined($_) && $_ eq $perl_root } @INC;
 }
+use LinkedSpec::ActionIR::MethodExpr ();
 
 sub _is_primitive_literal_token {
  my ($expr) = @_;
@@ -207,12 +208,14 @@ while ($code =~ /\bpush\s*\(\s*(?<scope>\w+)\s*,\s*(?<source>\w+)\s*,\s*(?<targe
 sub _scan_contract_return_general {
  my ($code) = @_;
  my @events;
-while ($code =~ /\b(?<expr>return\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/g) {
- my $call = _parse_method_function_expr($+{expr});
+ my $view = LinkedSpec::ActionIR::MethodExpr::_helper_pattern_view($code);
+while ($view =~ /\b(?<expr>return\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/g) {
+ my $expr = substr($code, $-[0], $+[0] - $-[0]);
+ my $call = _parse_method_function_expr($expr);
  next unless $call && $call->{method} eq 'return';
  my $args = $call->{args} || [];
  next unless ref($args) eq 'ARRAY' && @$args == 1;
- push @events, {raw => $+{expr}, args => {payload => _trim_action_ir_value($args->[0])}};
+ push @events, {raw => $expr, args => {payload => _trim_action_ir_value($args->[0])}};
 }
  return \@events
 }

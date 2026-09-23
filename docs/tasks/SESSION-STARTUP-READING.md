@@ -2825,13 +2825,14 @@ remain. Reading completion and runtime signoff remain distinct.
 
 - ID: `SESSION-STARTUP-READING.34.1`
   Status: `pending`
-  Goal: Insert generated statement terminators outside inline comments.
+  Goal: Preserve structural validation and generated separator placement around inline comments.
   Acceptance: Reproduce LF/CRLF assignment-comment-return failure through public Get, ActionIR diagnostics,
     and emitted source; compare no-comment, explicit-semicolon, comment-only, quoted-hash, and nested cases.
     Preserve lexical ownership and source locations when choosing the generated separator position; an inserted
     semicolon must not become comment text. Cover live and generated routes, update separator teaching and
     Knowledge with exact behavior, and run focused direct-dependent proof before required public signoff.
     Measure other backends before claiming cross-runtime impact; keep the oracle correction independently justified.
+  Added acceptance from .86.4.8.2: Inline comment text # pattern/) after an explicit semicolon must not change rule-fragment depth; both direct numeric matches and receiver-call twins lower to1 but public validation rejects. Preserve standalone-comment controls and original diagnostic locations.
   Verification: `pending` — generated $name = "ok" # note; followed by return fails handler compilation for LF/CRLF.
     Public Get returns a wrapper but invocation records an error and no result; see `.3.2.33` evidence.
   Commit: `pending`
@@ -4719,7 +4720,7 @@ remain. Reading completion and runtime signoff remain distinct.
   Goal: Complete public multiline helper recomposition and close .86.4.4/.86.4 after all required repairs.
   Dependencies: .86.4.4.1 and verified .86.4.8, plus .86.4.3/.86.4.6/.86.4.7.
   Planned tier: focused.
-  Planned focused proof: Original helper/division/invalid-regex audit plus grouped punctuation; public SpecLoader and independent generated execution; permanent direct execution of all three book examples; relevant Perl contracts and all documentation/doctrines.
+  Planned focused proof: Original helper/division/invalid-regex audit plus grouped punctuation; public SpecLoader and independent generated execution; permanent direct execution of all four book examples; relevant Perl contracts and all documentation/doctrines.
   Planned canonical boundary: Parent .86.3 after .86.5.
   Acceptance: Preserve exact values, source/descriptor/error channels and numeric compatibility; close only the measured helper scope, retaining .87/.2.4/EOF owners and no regex runtime type.
   Verification: `pending`
@@ -4764,7 +4765,7 @@ remain. Reading completion and runtime signoff remain distinct.
   - [x] **LOCKSTEP** — All three complete mdBook examples pass16 public/generated assertions, book renders, and Knowledge/task/roadmap/live records select .86.4.4.
 
 - ID: `SESSION-STARTUP-READING.86.4.8`
-  Status: `active`
+  Status: `done`
   Goal: Reconcile grouped regex-operand punctuation while preserving accepted numeric/host compatibility.
   Children: `SESSION-STARTUP-READING.86.4.8.1`, `SESSION-STARTUP-READING.86.4.8.2`
   Dependencies: .86.4.4.1; no assignment-position regex precedence or runtime-type expansion.
@@ -4781,15 +4782,23 @@ remain. Reading completion and runtime signoff remain distinct.
   Commit: `SESSION-STARTUP-READING.86.4.8.1 - preserve grouped operand compatibility evidence`
 
 - ID: `SESSION-STARTUP-READING.86.4.8.2`
-  Status: `pending`
+  Status: `done`
   Goal: Repair grouped operands using consistent grammar/context recognition across validation, CSV, AST and splitting.
   Dependencies: .86.4.8.1 exact compatibility checkpoint; .86.4.4.1 punctuation checkpoint and .86.4.3/.6/.7 protections.
-  Planned tier: focused; no language or host-compatibility removal is authorized.
-  Planned focused proof: Both permanent diagnostics; grouped dot/comma and flags/quoted payloads, literal/string/binding twins, LF/CRLF, return/continuation/nested/generated routes; numeric calls followed by quotes, receiver chains, comments and host expressions; accepted values and rejected-source diagnostics; direct-dependent action/validation contracts and full Phase0.
-  Planned canonical boundary: Parent .86.3; .86.4.4.2 waits for this repair.
+  Verification tier: `focused`
+  Scope constraint: No language or host-compatibility removal is authorized.
+  Focused checks: Both permanent diagnostics; grouped dot/comma and flags/quoted payloads, literal/string/binding twins, LF/CRLF, return/continuation/nested/generated routes; numeric calls followed by quotes, receiver chains, comments and host expressions; accepted values and rejected-source diagnostics; direct-dependent action/validation contracts and full Phase0.
+  Canonical trigger: Parent .86.3; .86.4.4.2 waits for this repair.
   Acceptance: Fix the measured operand failures without counting a raw_perl AST fallback as a rejected numeric interpretation. A complete-looking slash token alone is insufficient. Preserve [7,14] in the host-cos counterexample, [7,"a/)"] and [8,"a/)"] quote/chain controls, numeric failures and existing assignment boundaries. Quoted regex payload parsing remains included, not parked.
-  Verification: Public quoted-pattern payload /(x),"/ currently fails validation; the rejected lookahead advances it only to handler failure, so the method-call recognizer must also be considered. No candidate implementation accepted.
-  Commit: `pending`
+  Verification: Exact baseline completes11 groups and fails only new group10; candidate passes11 groups and focused187 across8 files. Both permanent diagnostics verify repaired grouped patterns and byte-identical nine numeric/error records. All four book sources pass21 live/generated assertions; book renders. Complete final Phase0 passes1033/1033 (Files=1, Tests=1033, 1423 wallclock secs ( 0.44 usr  0.10 sys + 1086.49 cusr 125.81 csys = 1212.84 CPU)); frozen source/test diff a60c6c2d is unchanged. Earlier interrupted run is excluded. Six separate comment probes extend existing .34.1 ownership. Memory/history/Knowledge and normal doctrine hooks govern landing.
+  Commit: `SESSION-STARTUP-READING.86.4.8.2 - preserve grouped regex helper operands`
+
+  - [x] **ROOT CAUSE** — Grouped regex punctuation was classified as numeric-call or outer CSV/method syntax.
+  - [x] **ISSUE** — Exact public probes and baseline RED isolate grouped helper failure while preserving numeric/raw-host controls.
+  - [x] **FIX** — Shared helper context preserves operand roles, source spans, receiver lowering and quoted-return recognition.
+  - [x] **ADDRESSED** — Literal/string/binding, LF/CRLF, flags, quoted payload, nested/indexed and generated routes pass.
+  - [x] **NO REGRESSION** — Numeric compatibility records are byte-identical; focused187 and final Phase0 1033/1033 pass.
+  - [x] **LOCKSTEP** — Four exact book examples pass21 assertions; book/current docs and remaining defect owners agree.
 
 - ID: `SESSION-STARTUP-READING.86.5`
   Status: `pending`
@@ -4834,10 +4843,10 @@ audit range, not the default repair frontier.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.86.4.8.2` | `pending` | Repair grouped operands across grammar consumers using both permanent diagnostics; preserve accepted numeric/raw-host behavior and existing rejection. |
+| 1 | `SESSION-STARTUP-READING.86.4.4.2` | `pending` | Recompose public loader/generated routes and permanently execute all four exact book examples after verified grouped repair. |
 
 The audit withdraws the unsupported precedence question. Helper validation `.86.4.3` and
-statement splitting `.86.4.6` plus quoted-subject validation `.86.4.7` are verified. Public recomposition `.86.4.4.1` exposes required punctuation repair `.86.4.8`; `.86.4.8.1` rejects incompatible lookahead and `.86.4.8.2` owns implementation; `.86.4.4.2` then closes the measured scope before EOF `.86.5` and canonical `.86.3`.
+statement splitting `.86.4.6` plus quoted-subject validation `.86.4.7` are verified. Public recomposition `.86.4.4.1` exposed punctuation repair `.86.4.8`; `.86.4.8.1` rejects incompatible lookahead and `.86.4.8.2` now verifies the compatible implementation; `.86.4.4.2` closes the measured scope before EOF `.86.5` and canonical `.86.3`.
 Independent helper gaps are owned by `.87.1/.87.2`; no regex-type feature is admitted.
 
 ## Reading Ledger
@@ -7540,6 +7549,8 @@ All 53 owned scopes are read: HLink delimiter/raw text, Liberty scalar/complex a
 
 ## Verification Log
 
+- 2026-09-24 .86.4.8.2: Focused187, exact book21, baseline RED only group10 and final Phase0 1033/1033 (Files=1, Tests=1033, 1423 wallclock secs ( 0.44 usr  0.10 sys + 1086.49 cusr 125.81 csys = 1212.84 CPU)) pass; frozen diff unchanged. Book/memory/Knowledge/history/doctrines govern landing; scratch .linkedspec-data/scratch/helper-pattern86-4-8-2/.
+
 - 2026-09-24 .86.4.8.1: Exact12-case baseline/candidate source pairs reject lookahead despite prior22-case improvement. Archived patch reconstructs; production/tests and all three complete book sources remain exact to f3f9fc74. Restored consumer9 passes; tracked replay/book render/memory/history and normal doctrine hooks govern intake only. No full Phase0 or canonical claim.
 
 - 2026-09-23 — .86.4.2.1: exact accepted/candidate public and lowering comparison proves two successful-value changes; rejected patch reconstructs four files exactly; restored source/test identity and AST23/23 pass; focused governance/book proof before commit.
@@ -7732,6 +7743,8 @@ CLI66x2 and Phase0 1032/1032; 1163 seconds is Phase0 only, with 25 optional gate
 
 ## Commit Log
 
+- 2026-09-24 .86.4.8.2: `SESSION-STARTUP-READING.86.4.8.2 - preserve grouped regex helper operands`; activation9f0c6ca9e; .86.4.4.2 follows.
+
 - 2026-09-24 .86.4.8.1: `SESSION-STARTUP-READING.86.4.8.1 - preserve grouped operand compatibility evidence`; activation f3f9fc74; required compatible implementation .86.4.8.2 follows.
 
 - .86.4.1 — `SESSION-STARTUP-READING.86.4.1 - isolate Perl multiline regex scanner failures`.
@@ -7761,6 +7774,8 @@ CLI66x2 and Phase0 1032/1032; 1163 seconds is Phase0 only, with 25 optional gate
 Each canonical task node owns its exact `Commit` subject and retained completion note. Query landed history with `git log --all --format="%h %s" --fixed-strings --grep="SESSION-STARTUP-READING."`; this replaces the proven duplicate 102-row table.
 
 ## Changelog
+
+- 2026-09-24 .86.4.8.2: Preserve grouped helper operands and numeric compatibility through context-aware structural parsing; synchronize executable book guidance and extend existing .34.1 comment ownership.
 
 - 2026-09-24 .86.4.8.1: Reject complete-token lookahead that changes accepted numeric/raw-host values; retain exact patch and public/AST/lowered probe, restore accepted implementation and own consistent grammar/context repair under .86.4.8.2. Book limitation and working alternative remain accurate.
 

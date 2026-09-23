@@ -1,16 +1,17 @@
 ---
 id: perl-comment-newline-lowering-drift
-title: "Perl inline comments hide generated separators and CR comments absorb following statements"
+title: "Perl inline comments affect validation and separators; CR comments absorb following statements"
 answers:
   - "why does a newline assignment with an inline comment fail in Perl"
   - "does universal newline support include CR line comments"
   - "why does Get return a wrapper when a generated handler has a syntax error"
   - "where is a generated newline semicolon placed relative to a comment"
   - "which task owns Perl comment and newline statement loss"
-date: 2026-09-06
+  - "why does a closing delimiter inside an inline comment affect Perl validation"
+date: 2026-09-24
 status: confirmed-open
 tags: [perl, actionir, statement-split, comments, newline, lowering, SESSION-STARTUP-READING]
-evidence: "SESSION-STARTUP-READING.3.2.33: twelve distinct public Get/Core/substitution combinations; the three inline-comment cases repeated with dump_parser_source inspection. Source owners: StatementSplit/Mode.pm 21–29, StatementSplit/Core.pm, RewritePipeline.pm 189–203 and 519–527."
+evidence: ".86.4.8.2 adds six exact public/lowered/fragment-depth cases: inline pattern/) comments reduce depth to0 and cause a later unexpected brace; no-comment and standalone-comment twins retain1. Existing .34.1 owns validation as well as separator repair. SESSION-STARTUP-READING.3.2.33: twelve distinct public Get/Core/substitution combinations; the three inline-comment cases repeated with dump_parser_source inspection. Source owners: StatementSplit/Mode.pm 21–29, StatementSplit/Core.pm, RewritePipeline.pm 189–203 and 519–527."
 reverify: "Run the two repository-managed commands under Reverify; inspect result and context_error, not merely wrapper_returned or process exit."
 ---
 
@@ -93,3 +94,29 @@ for my $eol (['LF',"\n"],['CRLF',"\r\n"],['CR',"\r"]){
 }
 PERL
 ```
+
+## Inline comment text and structural validation (2026-09-24)
+
+The grouped-operand repair's numeric controls expose a distinct validation route
+within existing `.34.1` ownership. With an explicit semicolon, the action
+`hit = matches("7", /(14,2)); # pattern/)` followed by `return(hit)` still fails
+whole-spec validation. The `.floor()` receiver twin fails identically. Independent
+lowering compiles and returns1 in both cases, so the existing missing-semicolon
+mechanism does not explain this observation.
+
+`Validation::_scan_rule_edges_in_fragment` counts the comment's `)` as a structural
+closer: the first line's depth becomes0 instead of1, and the next line's real
+`}` is reported as unexpected. Its structural loop has no inline-comment branch.
+Both no-comment and standalone-comment controls return1 publicly and retain the
+expected1-to0 depth transition. No generic comment repair is included in .86.4.8.2.
+
+Reverify all six fixed cases through LinkedSpec's own probes:
+
+```sh
+bash tools/project_data_run.sh env PERL5LIB= perl -Iperl docs/checkpoints/SESSION-STARTUP-READING.86.4.8.2-comments.pl
+```
+
+Inspect `first_line_scan`, `final_line_scan`, `direct`, `public` and `last_error`.
+All direct actions return1; exactly the two inline public cases reject at
+`validate_dsl_syntax`. Keep their future repair with `.34.1`, including whole-spec
+validation, generated separators, comment-only controls and source locations.

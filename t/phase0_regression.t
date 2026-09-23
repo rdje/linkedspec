@@ -48384,7 +48384,7 @@ subtest 'multiline regex helper validation' => sub {
     my $test_path = File::Spec->catfile($Bin, 'multiline_helper_pattern_validation.t');
     my ($exit_code, $out, $err) = run_perl_test_file_in_subprocess($test_path);
     is($exit_code, 0, 'multiline helper validation consumer passes') or diag($err || $out);
-    like($out, qr/^1\.\.9$/m, 'all nine regression groups finish');
+    like($out, qr/^1\.\.11$/m, 'all eleven regression groups finish');
     unlike($out, qr/^not ok\b/m, 'consumer has no failing group');
 };
 

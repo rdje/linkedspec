@@ -217,8 +217,8 @@ These examples describe ordinary rule action blocks. Perl currently rejects
 string patterns; repair is tracked under `SESSION-STARTUP-READING.87.2`.
 The [Perl integration guide](../public-api/integration-perl.md#regex-and-division-in-action-code)
 also gives working multiline match/substitution patterns and quoted subjects,
-generated-parser coverage, and the remaining grouped-pattern boundary and
-string-escape limitations.
+generated-parser coverage, grouped-pattern support, and the remaining
+string-escape limitation.
 
 ### Composite values
 

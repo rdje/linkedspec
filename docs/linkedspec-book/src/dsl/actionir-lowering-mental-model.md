@@ -120,14 +120,21 @@ The separator contract is deliberately narrow: top-level newlines split helper s
 and a semicolon separates adjacent statements on one physical line. It is a separator, not
 a line terminator, so the last statement on that line needs no trailing semicolon. Plain
 spaces do not create a boundary. Nested semicolons inside expression payloads stay inside
-the payload. Executable examples therefore omit line-ending semicolons whenever a newline
-already separates the statements.
+the payload. Executable examples without inline comments therefore omit line-ending semicolons
+when a newline already separates the statements.
 
-The Perl reference applies this rule at every unquoted top-level physical line break, not
-only after function-shaped statements. Assignment, capture, cursor, and marker-control
-sequences therefore lower the same way as equivalent same-line statements separated by
-semicolons. Newlines inside parentheses, brackets, blocks, quoted strings, regex payloads,
-and comments remain protected by the scanner state appropriate to that construct.
+The Perl reference supports newline separation after assignments, captures, cursor
+changes, and marker-control statements as well as helper calls. These sequences
+lower like their equivalents separated by semicolons on one line. Newlines inside parentheses, brackets, blocks, quoted strings, regex payloads,
+and comments use the scanner state appropriate to that construct.
+
+Perl still has comment limitations (`SESSION-STARTUP-READING.34`). An inline
+comment can hide a generated separator; an explicit semicolon before it avoids
+that LF/CRLF lowering failure. However, closing-delimiter text inside an inline
+comment, such as `# pattern/)`, can still affect structural validation even with
+that semicolon. Put such comments on their own line. CR-only comments can absorb
+the following statement; use LF or CRLF for comment-bearing source until that
+repair lands.
 
 The lowering pipeline retains the canonical contract ID while deciding whether a newline
 boundary needs host syntax. This matters for marker-style `switch`: its Perl representation is

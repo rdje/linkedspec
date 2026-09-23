@@ -575,6 +575,10 @@ sub _build_return_contracts {
    lower              => sub {
     my ($code) = @_;
     my $lower = $d->{lower_return_general_statement};
+    # Canonical return events already carry an entire authored call. Let the
+    # shared parser handle regex payloads before the legacy text substitution.
+    my $whole_call = $lower->($code);
+    return $whole_call if defined($whole_call) && length($whole_call);
     $code =~ s/\b(?<expr>return\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/$lower->($+{expr}) || $&/ge;
     return $code
    },
