@@ -4,7 +4,8 @@
 - Owner: `RGX-CONSUMER-BUILD-REPORTS.1`; prepared by `BACKEND-INTEGRATION-GUIDES.8.3`.
 - Related consumer report: ARCHOGEN/LS-004.
 - RGX revision: `8763a0e6bea97879f027237439d57725f83ead23`.
-- Observed environment: macOS26.6.2 arm64, Rust/Cargo1.95.0, system Make3.81.
+- Original observed environment: macOS26.6.2 arm64, Rust/Cargo1.95.0, system Make3.81.
+- September23 recurrence: macOS27.0 (26A428) arm64, Cargo1.95.0, system Make3.81; same pinned RGX interface.
 - Authority: RGX `docs/INTEGRATION.md`, downstream `make bootstrap` interface.
 
 ## Public reproduction
@@ -59,3 +60,25 @@ local Cargo store. Its command/output/status record is retained under
 `state.json`, `consumer-state.json` and the associated logs in that directory.
 No source patch, pin update, internal diagnosis, network installation or actual
 ARCHOGEN application build is claimed. The upstream report remains open.
+
+## September 23 recurrence
+
+`CONSUMER-REPORT-DELIVERY.2` repeats the published command against the retained
+isolated fixtures, with a fresh empty repository-local Cargo store for failure.
+The failure again exits2, reports a missing package, prints the seed-success
+line and omits final completion. The already-prepared control exits0 and prints
+`PGEN parser already generated — nothing to bootstrap.`; a repeat also exits0.
+A no-op need not print the fresh-generation completion banner. The initial
+verification probe incorrectly required that banner; its assertion was corrected
+without changing any dependency behavior.
+
+The record and full public-command logs are under
+`.linkedspec-data/scratch/consumer-report-delivery/` as `rgx-public.json`,
+`rgx-failure.log`, `rgx-success.log` and `rgx-success-repeat.log`.
+Failure-log SHA-256: `1d3c0bf9acc03c5fbe964f2ffbc6601b81213d4ab42e756221572805d6b0d745`.
+Both successful no-op logs have SHA-256
+`2f710aac340a1502ef3b70ec290c6eacaf57e4559a3a3c14919f7d3b3398c280`.
+This is public failure/no-op recurrence, not another fresh-generation build.
+The unchanged dependency pin and successful current LinkedSpec consumer proof
+are recorded separately. External posting authorization has been requested;
+no issue has been posted and no upstream repair has been verified.

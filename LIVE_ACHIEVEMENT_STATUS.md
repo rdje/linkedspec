@@ -6,13 +6,15 @@ The director prioritizes blocked SEMULITH/ARCHOGEN consumers. Seven original rep
 
 ## Latest Completed Slice
 
-- `CONSUMER-REPORT-DELIVERY.1 - verify consumer remedies and migration` — unchanged report snapshots, remote ancestry, current native build, adapter3, workspace9, historical26/18, document37/36 and Rust public-loader37/21 pass. Book migration and exact baseline pin are rendered.
+- `CONSUMER-REPORT-DELIVERY.2 - reverify the public RGX report` — public failure reproduces at exit2 with misleading seed progress; prepared reuse/repeat exit0. Updated report and book retain RGX repair ownership and pending external-post authorization.
 
 ## Next Action
 
-- Reverify RGX's public bootstrap report under .2, then canonical publication .3. ARCHOGEN/LS-004 remains upstream-owned; posting the prepared report awaits explicit authorization.
+- Run exact staged canonical acceptance under .3, commit and publish the verified LinkedSpec consumer remedies. Check remote main after push; keep upstream LS-004 open until an actual upstream remedy is verified.
 
 ## Recent Completions
+
+- `2026-09-23` — `CONSUMER-REPORT-DELIVERY.2` reconfirms LS-004 and successful public bootstrap reuse; canonical publication follows.
 
 - `2026-09-23` — `CONSUMER-REPORT-DELIVERY.1` verifies local remedies and exposes unpublished fixes; explicit document migration is documented.
 
@@ -43,8 +45,6 @@ The director prioritizes blocked SEMULITH/ARCHOGEN consumers. Seven original rep
 - `2026-09-23` — `SEXPR-DOCUMENT-INTEGRATION.1` delivers native document files, typed causes, strict UTF-8 and relocatable packaging; all authored cases and legacy compatibility pass.
 
 - `2026-09-22` — `SESSION-STARTUP-READING.83.2.2` implements the versioned grammar and six-runtime recurrence; native file delivery follows.
-
-- `2026-09-22` — `SESSION-STARTUP-READING.45.3` closes compiler rejection with exact staged canonical acceptance; grammar .83.2.2 follows.
 
 ## History
 

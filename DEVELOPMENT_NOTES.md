@@ -11,6 +11,12 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
 
+## 2026-09-23 — CONSUMER-REPORT-DELIVERY.2 - public bootstrap outcomes and upstream ownership
+
+Public command status is the success authority. The retained failure fixture still emits misleading intermediate seed progress with exit2, while the prepared fixture exits0 with its already-generated message. A test that demands the cold-generation completion banner for a no-op is wrong; the corrected observation preserves both outputs and their hashes in the actionable report. No source-level diagnosis or internal build procedure is inferred.
+
+The report is ready for authorized external posting, but no response or permission has arrived. That does not block publishing the separately verified LinkedSpec quote/document remedies. RGX-CONSUMER-BUILD-REPORTS.1 retains actual repair and post-fix verification; CONSUMER-REPORT-DELIVERY.3 owns exact canonical acceptance and remote availability.
+
 ## 2026-09-23 — CONSUMER-REPORT-DELIVERY.1 - separate local repair from consumer availability
 
 Read-back of GitHub main returns87b35665e1a8e0de1f03a27e31dbd4d34d8e2d94. Quote repair8259719f8, document grammar77d7b3db1, native filesdf845ce61 and admission92f58b56c are ancestors of local f60a70df3 but absent from that published ancestry. Preserve this dated delivery finding in the consumer Knowledge card and own canonical publication under .3. Restore only the unrelated .86.4.3 activation edits before switching trees; no implementation was changed or lost.

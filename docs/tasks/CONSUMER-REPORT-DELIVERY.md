@@ -43,15 +43,15 @@ blocked SEMULITH/ARCHOGEN consumers over separately discovered validator work.
   Commit: `CONSUMER-REPORT-DELIVERY.1 - verify consumer remedies and migration` (this slice; base f60a70df3).
 
 - ID: `CONSUMER-REPORT-DELIVERY.2`
-  Status: `pending`
+  Status: `done`
   Goal: Reverify the remaining RGX public-build report and prepare its concrete upstream handoff.
   Dependencies: .1; existing RGX-CONSUMER-BUILD-REPORTS.1 and docs/upstream/rgx/bootstrap-progress-status.md remain the repair/report owners.
-  Planned tier: focused.
-  Planned focused proof: Current published integration instructions and pinned public make bootstrap behavior, exact overall exit/output, isolated repository-local failure fixture, successful supported preparation control and unchanged source/pins. No dependency implementation inspection or internal build reconstruction.
-  Planned canonical boundary: .3 delivery boundary.
+  Verification tier: `focused`
+  Focused checks: Current published integration instructions and pinned public make bootstrap behavior, exact overall exit/output, isolated repository-local failure fixture, successful supported preparation control and unchanged source/pins. No dependency implementation inspection or internal build reconstruction.
+  Canonical trigger: None; .3 owns the final delivery boundary.
   Acceptance: Distinguish the actual preparation failure from misleading progress text, preserve an actionable report, and request explicit external-post authorization only after that report is reviewable. Verification/report preparation does not close the upstream bug.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: PASS current pinned public-interface recurrence on macOS27.0/Cargo1.95/Make3.81. Fresh local empty-store failure exits2 with missing-package error and misleading seed line, without final completion. Prepared control and repeat exit0 with the public already-generated no-op message. Correct the diagnostic-only fresh-banner assumption; no implementation change. Dependency pin stays exact. Refreshed report preserves full log hashes and external-post authorization remains pending. Book/memory/Knowledge/history/diff and normal doctrines govern landing.
+  Commit: `CONSUMER-REPORT-DELIVERY.2 - reverify the public RGX report` (this slice; base01b04138a).
 
 - ID: `CONSUMER-REPORT-DELIVERY.3`
   Status: `pending`
@@ -68,7 +68,7 @@ blocked SEMULITH/ARCHOGEN consumers over separately discovered validator work.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `CONSUMER-REPORT-DELIVERY.2` | `pending` | Recheck the open RGX public-build report before canonical publication. |
+| 1 | `CONSUMER-REPORT-DELIVERY.3` | `pending` | Run exact canonical acceptance and publish the verified LinkedSpec remedies. |
 
 ## Decisions and Boundaries
 

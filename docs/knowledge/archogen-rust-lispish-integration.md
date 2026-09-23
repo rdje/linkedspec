@@ -60,6 +60,14 @@ the revised book renders with its migration links and exact baseline pin.
 Evidence is retained under `.linkedspec-data/scratch/consumer-report-delivery/`;
 this checkpoint does not claim publication or downstream acceptance.
 
+Delivery `.2` reconfirms ARCHOGEN/LS-004 through the published interface on
+macOS27.0: offline empty-store failure exits2 yet prints the misleading seed
+line; the already-prepared control exits0 with an explicit no-op message.
+The refreshed local report records exact output hashes and the corrected no-op
+assertion. RGX owns repair; external posting permission has been requested, and
+no external issue or upstream fix is claimed. Publication of LinkedSpec's local
+remedies proceeds independently under `.3`.
+
 ## September 23 independent local admission
 
 `SEXPR-DOCUMENT-INTEGRATION.2` closes startup .83 and the local repair scope for

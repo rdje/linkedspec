@@ -175,6 +175,9 @@ bash vendor/linkedspec/tools/run_cargo_local.sh metadata \
 
 Then build the application through the ordinary Cargo commands below. RGX
 documents bootstrap as reusable when already prepared.
+A successful repeat may say that the parser is already generated and there is
+nothing to bootstrap; it need not print the fresh-generation completion banner.
+Use the command exit status to distinguish that no-op from a failed preparation.
 Normal Cargo builds may still compile dependencies; retain caches and measure
 actual results rather than promising zero compilation. A dependency update must
 be checked against that release's published integration contract.

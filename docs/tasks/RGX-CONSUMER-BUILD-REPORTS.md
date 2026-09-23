@@ -11,7 +11,7 @@ internal dependency knowledge belongs in LinkedSpec. Reports go to RGX.
 - Status: `pending` / upstream-owned and non-blocking for integration documentation
 - Roadmap lane: `Rust downstream integration / upstream issue follow-up`
 - Created: `2026-09-20`
-- Last updated: `2026-09-20`
+- Last updated: `2026-09-23`
 - Owner: LinkedSpec public-interface reporting; RGX maintainer owns diagnosis/repair
 
 ## Goal
@@ -33,7 +33,7 @@ inspection, analysis, reconstruction, source edits or pin changes are authorized
   Scope: Public RGX make bootstrap command, command environment, exit status and output only.
   Dependencies: Integration `.8.3` supplies a self-contained public-interface report.
   Acceptance: Preserve exact public reproduction and observed status; receive an upstream response or published resolution; verify through the supported interface and record remaining limitations. Do not claim a fixed issue merely because a downstream guide uses the correct entry point. Posting a message or issue requires explicit director authorization; preparation of the repository-local report is authorized.
-  Verification: `pending`
+  Verification: September23 CONSUMER-REPORT-DELIVERY.2 reproduces the public failure at pinned RGX8763a0e6: exit2, missing package, misleading seed line and no final completion. Prepared public bootstrap exits0 with its documented reusable no-op outcome. Report and log hashes are refreshed; external posting authorization is requested but not yet received. Upstream diagnosis/repair and post-fix verification remain pending.
   Commit: `pending`
 
 ## Current Frontier

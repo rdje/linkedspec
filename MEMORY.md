@@ -1,9 +1,9 @@
 # MEMORY
 
-- activation_commit: `f60a70df37159c0e42d66ee5f08a959821c7e08d` — clean base for consumer delivery.
-- latest_completed_leaf: `CONSUMER-REPORT-DELIVERY.1 - verify consumer remedies and migration`.
-- active_work_unit: `CONSUMER-REPORT-DELIVERY.2` — reverify the remaining RGX public-build report.
-- next_action: Recheck supported bootstrap success/failure and preserve the upstream report; .3 then runs canonical CI and publishes the verified local remedies.
+- activation_commit: `01b04138a89fa432ff22662f2b91744b1d8aa970` — clean base for public RGX report verification.
+- latest_completed_leaf: `CONSUMER-REPORT-DELIVERY.2 - reverify the public RGX report`.
+- active_work_unit: `CONSUMER-REPORT-DELIVERY.3` — canonical acceptance and publication of the consumer remedies.
+- next_action: Stage the exact final delivery candidate, run canonical CI, commit and push clean; verify remote main. Keep RGX LS-004 open pending authorized posting and upstream repair.
   Named-argument direction PARSER-AUTHORING-APIS.4 is approved and parked; other authoring proposals and approved formats stay parked.
 - in_flight_uncommitted: none.
 - blockers: upstream LS-004 remains open; external report posting awaits explicit authorization. LinkedSpec delivery can proceed; .86.4.3 stays pending.

@@ -11,6 +11,12 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
 
+## 2026-09-23 — CONSUMER-REPORT-DELIVERY.2 - reverify the public RGX report
+
+Reproduce ARCHOGEN/LS-004 through the published RGX bootstrap command at the unchanged pin. A fresh empty local Cargo store in offline mode yields exit2, a missing-package error and the misleading seed-success line. Prepared reuse and its repeat exit0 with an explicit already-generated no-op message. Correct the diagnostic probe's unsupported fresh-completion-banner assumption; no dependency implementation is inspected or changed.
+
+Refresh the concrete upstream report with macOS27.0 environment and exact log hashes, preserve RGX repair ownership, and document no-op interpretation in the book. External posting authorization remains pending; no upstream fix is claimed. Focused public-command, book, memory/Knowledge/history/diff and doctrine proof governs landing. Canonical publication of LinkedSpec remedies follows under .3.
+
 ## 2026-09-23 — CONSUMER-REPORT-DELIVERY.1 - verify consumer remedies and migration
 
 Reconcile all ten source-qualified SEMULITH/ARCHOGEN reports against their task, Knowledge and ADR authorities. Seven requirements have local remedies; ARCHOGEN/LS-004 remains upstream-owned, LS-006 is withdrawn and LS-007 requires no change. Both supplied report snapshots remain byte-exact. Live remote main87b35665e predates the quote/document repairs, so local completion did not establish delivery. The new three-slice task owns fresh proof, the public RGX report and canonical publication in that order.
