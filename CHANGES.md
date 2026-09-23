@@ -11,6 +11,12 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
 
+## 2026-09-23 — SESSION-STARTUP-READING.86.4.5 - preserve paused splitter repair and clean handoff
+
+At director request, suspend PNT and save the unfinished .86.4.2 source/test candidate as a tracked patch. Verify byte-for-byte reconstruction of all four files, then restore those files to accepted diagnosis base 69689bb41. The candidate still regresses division followed by Perl quote operators or a slash literal; it is not a delivered fix. The existing integration-book limitations remain accurate.
+
+The Knowledge card preserves the base, patch checksum, reproduction and recovery commands. Both interrupted Phase0 runs are excluded from acceptance. Focused handoff proof covers archive reconstruction, restored source identity/action AST tests, memory, Knowledge, histories, diff and normal commit doctrines. No public behavior change, full-CI claim or push; the next action is to await director direction.
+
 ## 2026-09-23 — SESSION-STARTUP-READING.86.4.1 - isolate Perl multiline regex scanner failures
 
 Separate Perl multiline-regex action segmentation from whole-spec validation under .86.4.2/.3, followed by public recomposition .86.4.4. Public Get/runtime context and lowering reproduce the existing failures. Whole-fragment versus physical-line scanning has opposite outcomes for regex and division controls, so a naive whole-source scanner replacement is excluded. No production behavior changes.

@@ -1,0 +1,223 @@
+diff --git a/perl/LinkedSpec/ActionIR/MethodExpr.pm b/perl/LinkedSpec/ActionIR/MethodExpr.pm
+index f9e94df1ce5e2bcd218c7a03a4da0dc3e4bfcb12..196b81e62c3f5a0c1fec36504bf03635109337ac 100644
+--- a/perl/LinkedSpec/ActionIR/MethodExpr.pm
++++ b/perl/LinkedSpec/ActionIR/MethodExpr.pm
+@@ -22,6 +22,32 @@ sub _normalize_method_name {
+  return $method
+ }
+
++# Return the end of a complete slash literal at an expression boundary. Looking
++# only for another slash would steal the opener of a later regex from division
++# followed by a newline (for example, /(14,2) followed by rx = /x/).
++sub _slash_literal_end_at {
++ my ($text, $idx) = @_;
++ return undef unless defined($text) && defined($idx) && $idx >= 0 && $idx < length($text)
++  && substr($text, $idx, 1) eq '/';
++ my $len = length($text);
++ my $cursor = $idx + 1;
++ while ($cursor < $len) {
++  my $char = substr($text, $cursor, 1);
++  if ($char eq '\\') {
++   $cursor += 2;
++   next;
++  }
++  ++$cursor;
++  next unless $char eq '/';
++  ++$cursor while $cursor < $len && substr($text, $cursor, 1) =~ /[A-Za-z]/o;
++  my $end = $cursor;
++  ++$cursor while $cursor < $len && substr($text, $cursor, 1) =~ /[ \t]/o;
++  return $end if $cursor == $len || substr($text, $cursor, 1) =~ /[\r\n,;\.\)\]\}]/o;
++  return undef;
++ }
++ return undef
++}
++
+ sub _looks_like_slash_symbol_call_at {
+  my ($text, $idx) = @_;
+  return 0 unless defined $text;
+@@ -83,6 +109,16 @@ sub _looks_like_slash_symbol_call_at {
+
+    my $after = $pos + 1;
+    ++$after while $after < $len && substr($text, $after, 1) =~ /\s/o;
++   if (substr($text, $pos + 1, $after - $pos - 1) =~ /[\r\n]/o) {
++    # A complete multiline literal must extend beyond the balanced call
++    # candidate. A slash inside a quoted call argument is not its terminator.
++    my $literal_end = _slash_literal_end_at($text, $idx);
++    return 0 if defined($literal_end) && $literal_end > $pos + 1;
++    # Keep the existing outer-closing-brace exclusion; its reconciliation is
++    # separate from the ordinary newline between two action statements.
++    return 0 if $after < $len && substr($text, $after, 1) eq '}';
++    return 1;
++   }
+    return 1 if $after >= $len || substr($text, $after, 1) =~ /[,;\.\)\]]/o;
+    return 0;
+   }
+diff --git a/perl/LinkedSpec/ActionIR/StatementSplit/Core.pm b/perl/LinkedSpec/ActionIR/StatementSplit/Core.pm
+index c1ce42c6498470cf384c0d5ba663c0dd2db3cf08..30b00f93e21ee1e2bee888d2d9c215bd326726e4 100644
+--- a/perl/LinkedSpec/ActionIR/StatementSplit/Core.pm
++++ b/perl/LinkedSpec/ActionIR/StatementSplit/Core.pm
+@@ -394,7 +394,7 @@ sub split_action_ir_statements {
+   if (LinkedSpec::ActionIR::StatementSplit::Mode::maybe_enter_double_quote($state, $char)) { next; }
+   if (LinkedSpec::ActionIR::StatementSplit::Mode::maybe_enter_backtick_quote($state, $char)) { next; }
+   if (LinkedSpec::ActionIR::StatementSplit::Mode::maybe_enter_line_comment($state, $char)) { next; }
+-  if (LinkedSpec::ActionIR::StatementSplit::Mode::maybe_enter_slash_quote($state, $char)) { next; }
++  if (LinkedSpec::ActionIR::StatementSplit::Mode::maybe_enter_slash_quote($state, $char, $code, $idx)) { next; }
+   if (LinkedSpec::ActionIR::StatementSplit::Mode::maybe_enter_angle_quote($state, $char)) { next; }
+   if (LinkedSpec::ActionIR::StatementSplit::Mode::maybe_enter_pipe_quote($state, $char)) { next; }
+   if (_consume_top_level_line_break($state, $char, \@statements, $trim_action_ir_value)) { next; }
+diff --git a/perl/LinkedSpec/ActionIR/StatementSplit/Mode.pm b/perl/LinkedSpec/ActionIR/StatementSplit/Mode.pm
+index 98d080cfa7a6808efde848b134a87ce8ba855d27..f5707f2706a7f9207bc4aabdb0f27c2f59d6f4da 100644
+--- a/perl/LinkedSpec/ActionIR/StatementSplit/Mode.pm
++++ b/perl/LinkedSpec/ActionIR/StatementSplit/Mode.pm
+@@ -10,6 +10,7 @@ BEGIN {
+  my $perl_root = File::Basename::dirname($linked_spec_dir);
+  unshift @INC, $perl_root unless grep { defined($_) && $_ eq $perl_root } @INC;
+ }
++use LinkedSpec::OwnerDispatch ();
+
+ sub _trim_context_suffix {
+  my ($statement) = @_;
+@@ -153,7 +154,7 @@ sub maybe_enter_line_comment {
+ }
+
+ sub maybe_enter_slash_quote {
+- my ($state, $char) = @_;
++ my ($state, $char, $code, $idx) = @_;
+  return 0 unless $char eq '/';
+  my $slash_context = _trim_context_suffix($state->{statement});
+
+@@ -171,6 +172,20 @@ sub maybe_enter_slash_quote {
+   $state->{statement} .= $char;
+   return 1;
+  }
++ # Naked DSL regexes need the same protection as Perl quote operators. Require
++ # a complete token, so a division call before a newline remains unquoted.
++ if (!length($slash_context) || $slash_context =~ /[\(\[,=>]\z/o) {
++  LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, 'LinkedSpec::ActionIR::MethodExpr');
++  if (defined($code) && defined($idx)
++      && !LinkedSpec::ActionIR::MethodExpr::_looks_like_slash_symbol_call_at($code, $idx)
++      && defined LinkedSpec::ActionIR::MethodExpr::_slash_literal_end_at($code, $idx)) {
++   $state->{in_slash_quote} = 1;
++   $state->{slash_quote_segments_remaining} = 1;
++   $state->{slash_quote_escape_next} = 0;
++   $state->{statement} .= $char;
++   return 1;
++  }
++ }
+  return 0
+ }
+
+diff --git a/t/actionir_ast_parser.t b/t/actionir_ast_parser.t
+index 5757b4b43f70822f00da8f9a1943a2828d9aa6ea..bdb764bc436a5eab0f4b1e3cafddd945f41f7efc 100644
+--- a/t/actionir_ast_parser.t
++++ b/t/actionir_ast_parser.t
+@@ -1,9 +1,11 @@
+ use strict;
+ use warnings;
++use utf8;
+ use Test::More;
+
+ use LinkedSpec ();
+ use LinkedSpec::ActionIR::AST ();
++use LinkedSpec::ActionIR::StatementSplit ();
+
+ sub parse_expr {
+     my ($expr) = @_;
+@@ -1416,4 +1418,97 @@ subtest 'block-value lowering consumes AST action statements' => sub {
+     ok($parse_calls >= 1, 'block-value lowering entered through the AST parser');
+ };
+
++# SESSION-STARTUP-READING.86.4.2: multiline regex lexical boundaries.
++sub split_statements {
++    return LinkedSpec::ActionIR::StatementSplit::_split_action_ir_statements(
++        $_[0], { trim_action_ir_value => sub {
++            my $text = shift;
++            $text =~ s/^\s+|\s+$//g;
++            return $text;
++        } });
++}
++
++subtest 'multiline regex tokens retain complete statements and scalar spans' => sub {
++    my @patterns = (
++        "(x)\ny", "(14,2)\ntext", "(14,2)\nnext = ", "(x)\r\ny",
++        "(x)\n,tail", "(x)\\/\ny", "(x)\ny;z", "(雪)\ny",
++    );
++    for my $pattern (@patterns) {
++        my $assignment = "rx = /$pattern/";
++        my $source = "  $assignment; note = 7\nreturn(note)";
++        is_deeply(split_statements($source),
++            [$assignment, 'note = 7', 'return(note)'],
++            'only authored statement separators split the source');
++        my $ast = LinkedSpec::ActionIR::AST::parse_action_block($source);
++        is_deeply([map { $_->{source} } @{$ast->{statements}}],
++            [$assignment, 'note = 7', 'return(note)'], 'AST retains exact source');
++        my $first = $ast->{statements}[0];
++        is($first->{source_span}{start}, 2, 'statement starts after the original indent');
++        is($first->{source_span}{end}, 2 + length($assignment), 'statement end uses scalar offsets');
++        is($first->{expr}{value}{kind}, 'regex', 'assignment owns a typed regex');
++        is($first->{expr}{value}{pattern}, $pattern, 'AST retains exact pattern text');
++        my $lowered = LinkedSpec::call_spec_handler_subst('Top', $source);
++        cmp_ok(index($lowered, '$rx = /' . $pattern . '/'), '>=', 0,
++            'lowering retains the full literal');
++        unlike($lowered, qr/num_div|UNSUPPORTED_ACTIONIR_HELPER/, 'literal does not become division');
++    }
++};
++
++subtest 'division newlines and mixed regex sequences keep their statements' => sub {
++    for my $separator ("\n", "\r\n", " \n", '; ') {
++        for my $tail ('note = 1', 'rx = /x/', 'other = /(8,2)',
++                      'other = div(8,2)', 'note = matches("x", /x/)') {
++            my $source = "out = /(14,2)$separator$tail; return(out)";
++            is_deeply(split_statements($source),
++                ['out = /(14,2)', $tail, 'return(out)'], 'division retains following source');
++            my $lowered = LinkedSpec::call_spec_handler_subst('Top', $source);
++            my $run = eval "sub { no strict; $lowered }";
++            is($@, '', 'lowered mixed action compiles');
++            local $_ = 'x';
++            is($run ? $run->() : undef, 7, 'division keeps its numeric result');
++        }
++    }
++};
++
++subtest 'regex semantics survive helper arguments and Perl quote controls' => sub {
++    for my $separator ("\n", "\r\n") {
++        my $pattern = "(x)${separator}y";
++        my $source = "note = 7; return(matches(\"x${separator}y\", /$pattern/))";
++        my $lowered = LinkedSpec::call_spec_handler_subst('Top', $source);
++        my $run = eval "sub { no strict; $lowered }";
++        is($@, '', 'lowered matching action compiles');
++        is($run ? $run->() : undef, 1, 'literal newline actually participates in matching');
++    }
++    for my $literal ('qr/a;b/', 'q/a;b/', 'm/a;b/', '/a;b/') {
++        my $source = "rx = $literal; return(7)";
++        is_deeply(split_statements($source), ["rx = $literal", 'return(7)'],
++            'existing Perl quotes and naked regex semicolons stay protected');
++    }
++    is_deeply(split_statements('my $n = 14 / 2; return(7)'),
++        ['my $n = 14 / 2', 'return(7)'], 'raw Perl infix division remains unquoted');
++};
++
++subtest 'flags escaped delimiters and invalid patterns retain their meanings' => sub {
++    my @cases = (
++        ["return(matches(\"XY\", /(x)\ny/ix))", 1],
++        [q{return(matches("x/y", /(x)\/y/))}, 1],
++        ['return(add(/(14,2), 1))', 8],
++        ["out = /(14,2)\nreturn(add(out, /(8,2)))", 11],
++        ["rx = /(14,2)\nnext = /; return(7)", 7],
++        ["out = /(count(array(\"/;\", \"b\")),2)\nreturn(out)", 1],
++        ["out = /(count(array(\"/,\", \"b\")),2)\r\nreturn(out)", 1],
++    );
++    for my $case (@cases) {
++        my $lowered = LinkedSpec::call_spec_handler_subst('Top', $case->[0]);
++        my $run = eval "sub { no strict; $lowered }";
++        is($@, '', 'lowered action compiles');
++        local $_ = 'x';
++        is($run ? $run->() : undef, $case->[1], 'execution preserves the authored meaning');
++    }
++    my $invalid = LinkedSpec::call_spec_handler_subst('Top', q{rx = /(")")/; return(7)});
++    my $run = eval "sub { no strict; $invalid }";
++    ok(!$run, 'invalid quoted regex remains rejected');
++    like($@, qr/Unmatched \)/, 'the regex compiler retains the actual pattern error');
++};
++
+ done_testing();

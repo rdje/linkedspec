@@ -1,11 +1,11 @@
 # MEMORY
 
-- activation_commit: `19ba2e0d51a895e02861ff42775ded13b0259f05` — clean .86.2; Perl diagnostic/decomposition .86.4.1 activation.
-- latest_completed_leaf: `SESSION-STARTUP-READING.86.4.1 - isolate Perl multiline regex scanner failures`; public and owner probes reproduced; no production repair yet.
-- active_work_unit: `SESSION-STARTUP-READING.86.4.2` — pending; preserve Perl multiline regex action segmentation.
-- next_action: PNT continues with .86.4.2 action splitting, .86.4.3 validation, .86.4.4 public recomposition, then .86.5 and canonical .86.3.
+- activation_commit: `69689bb415b79a58cba3ebb15856c4b5434e193b` — accepted diagnosis base for the clean pause checkpoint.
+- latest_completed_leaf: `SESSION-STARTUP-READING.86.4.5 - preserve paused splitter repair and clean handoff`.
+- active_work_unit: none — director-paused; no task is executing.
+- next_action: Await director direction; if repair resumes, review the .86.4.2 archive, exact base and known regression in `docs/knowledge/perl-multiline-regex-scanner-boundaries.md` before implementation.
   Named-argument direction PARSER-AUTHORING-APIS.4 is approved and parked; other authoring proposals and approved formats stay parked.
-- in_flight_uncommitted: none; .86.4.1 diagnosis is complete in this commit; .86.4.2 has not started.
+- in_flight_uncommitted: none — accepted source/tests restored; candidate preserved as a tracked patch; verification jobs stopped and consumed; no push.
 - blockers: Wrapper startup .7 remains open; warned-child group matched, but denied-call cause and original lost PUC stream remain unproved. Recovery/purge stay prohibited.
 - current_rust_warning_debt: Repeated carriers report 1,870 pgen plus 26 rgx-core output warnings; RUST-DEPENDENCY-WARNING-ZERO.1-.7 own public RGX reports and result verification without suppression; dependency internals are excluded.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
@@ -57,4 +57,4 @@
   Changes segment4972 preserves 136 lines /27060 bytes from clean 8259719f8; old archive rows/bytes remain exact.
 - dependency_boundary: September20: LinkedSpec integrates only with RGX via its published integration document/APIs/contracts. RGX owns PGEN; no separate PGEN procedure, internal inspection/analysis, patches or pin changes.
   Normal documented builds remain authorized; retain caches. Startup .80.1-.4 may observe public behavior or track upstream repairs, not investigate dependency internals.
-- latest_bootstrap_read: ADR0123 targets 2–5 minute startup plus thorough task-specific reading. Separate audit remains 89/143 and .1.90. Document integration and .46/.47/.49/.86.1/.86.2 are verified; Perl .86.4.2 is next after scanner diagnosis .86.4.1. No downstream application acceptance claim.
+- latest_bootstrap_read: ADR0123 targets 2–5 minute startup plus thorough task-specific reading. Separate audit remains 89/143 and .1.90. Document integration and .46/.47/.49/.86.1/.86.2 are verified; Perl .86.4.2 is suspended after clean pause checkpoint .86.4.5. No downstream application acceptance claim.

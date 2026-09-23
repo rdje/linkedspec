@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Targeted session continuity / separately tracked full-reading audit`
 - Created: `2026-09-06`
-- Last updated: `2026-09-22`
+- Last updated: `2026-09-23`
 - Owner: repo-local workflow
 - Reading baseline: `baeb984e36a94a15951cd23d4c52def5064cdaca`
 
@@ -4727,7 +4727,7 @@ remain. Reading completion and runtime signoff remain distinct.
   Status: `active`
   Goal: Preserve multiline parenthesized regex literals through Perl validation and action lowering.
   Dependencies: Land Rust .86.2 first; captured public diagnostics in .linkedspec-data/scratch/division-boundary86-2/perl-context.jsonl and reproducible sources in docs/knowledge/rust-symbol-call-newline-boundary.md; coordinate .54.1 without conflating regex-brace bootstrap loss.
-  Children: `SESSION-STARTUP-READING.86.4.1`, `SESSION-STARTUP-READING.86.4.2`, `SESSION-STARTUP-READING.86.4.3`, `SESSION-STARTUP-READING.86.4.4`
+  Children: `SESSION-STARTUP-READING.86.4.1`, `SESSION-STARTUP-READING.86.4.2`, `SESSION-STARTUP-READING.86.4.3`, `SESSION-STARTUP-READING.86.4.4`, `SESSION-STARTUP-READING.86.4.5`
   Planned tier: focused unless a shared language-contract decision is needed.
   Planned focused proof: Public Get with runtime_ctx_ref, exact lowering and generated source; multiline regex and numeric-division lookalikes, LF/CRLF, following assignments, whole-spec validation and invalid-pattern controls; phase0 plus directly affected scanner tests.
   Planned canonical boundary: Parent .86.3 after .86.5; any contract decision precedes implementation.
@@ -4753,7 +4753,18 @@ remain. Reading completion and runtime signoff remain distinct.
   Planned canonical boundary: .86.3 after validation and public recomposition.
   Acceptance: Protect lexical regex newlines and delimiters without swallowing subsequent division statements or modifying raw Perl compatibility. Keep the closing-brace exclusion; public outer validation remains explicitly owned by .86.4.3.
   Verification: `pending`
+  Current probe: Director-paused; .86.4.5 archives the unaccepted candidate in docs/checkpoints/SESSION-STARTUP-READING.86.4.2.patch and restores accepted source/tests. Five candidate focused targets passed, but qr/q/m/slash-literal continuations after division still regress against 69689bb41. The Knowledge card perl-multiline-regex-scanner-boundaries retains exact reproduction/recovery and archive identity. Both incomplete Phase0 runs were stopped and consumed, not accepted; no job remains active. Await director direction before resuming. Do not execute the obsolete scratch finish_splitter.py draft.
   Commit: `pending`
+- ID: `SESSION-STARTUP-READING.86.4.5`
+  Status: `done`
+  Goal: Archive the unaccepted .86.4.2 candidate and restore a clean, paused handoff at director request.
+  Dependencies: Preserve all candidate bytes and reproducible blocker evidence before restoring accepted source/tests.
+  Verification tier: `focused`
+  Focused checks: Exact four-file patch reconstruction and source identity; restored action AST target; memory, Knowledge, both history-pressure checks, all doctrines and diff review.
+  Canonical trigger: None for this recovery-only archive; .86.3 retains runtime acceptance ownership and push requires canonical proof.
+  Acceptance: Commit a recoverable candidate and honest paused pointers; retain .86.4.2 open, no runtime repair or full Phase0 pass claimed, no background job or dirty file left.
+  Verification: Exact four-file patch reconstruction matches the saved candidate byte-for-byte; restored source/test identity matches 69689bb41; restored action AST passes23/23. Memory, Knowledge, both histories, diff and all normal doctrine hooks are required before landing. Both interrupted Phase0 runs remain excluded. Public book limitations remain accurate because runtime behavior is unchanged.
+  Commit: This commit; subject `SESSION-STARTUP-READING.86.4.5 - preserve paused splitter repair and clean handoff`.
 - ID: `SESSION-STARTUP-READING.86.4.3`
   Status: `pending`
   Goal: Preserve multiline regex lexical state through Perl whole-spec validation.
@@ -4794,7 +4805,7 @@ audit range, not the default repair frontier.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.86.4.2` | `pending` | .86.4.1 isolates splitter and validation owners; repair action segmentation, then .86.4.3/.4 validation/recomposition, EOF .86.5 and canonical .86.3. |
+| 1 | `SESSION-STARTUP-READING.86.4.2` | `pending` | Director-paused; .86.4.5 archives the unaccepted candidate and restores accepted source/tests. Await direction; if resumed, repair the recorded continuation regression before .86.4.3/.4, .86.5 and .86.3. |
 
 ## Reading Ledger
 
@@ -7792,6 +7803,7 @@ Each canonical task node owns its exact `Commit` subject and retained completion
 
 ## Changelog
 
+- 2026-09-23 — .86.4.5 preserves the incomplete candidate as a verified reconstructable patch; accepted source/tests restored and PNT director-paused.
 - 2026-09-23 — .86.4.1 diagnoses two independent scanner failures and splits .86.4 before production work; .86.4.2 follows.
 
 - 2026-09-22 .83.2.2: Implement the separate versioned grammar, six-runtime contract recurrence and public examples; preserve historical Lispish and continue native file delivery.

@@ -2,17 +2,19 @@
 
 ## Current Activity
 
-PNT resumes from clean Rust .86.2. Perl .86.4.1 isolates action segmentation and physical-line validation failures; .86.4.2 repairs action splitting next, followed by .86.4.3/.4 validation and public recomposition. No Perl production repair or new push is claimed.
+PNT is paused at director request. Accepted Perl source/tests are restored to diagnosis base 69689bb41; the incomplete .86.4.2 candidate is preserved as a tracked patch with a known continuation regression. No job is running, no Perl repair is accepted, and nothing was pushed.
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.86.4.1 - isolate Perl multiline regex scanner failures` — public Get/runtime errors and action lowering reproduce the recorded failures. Whole-source versus physical-line owner probes distinguish the two scanners and retain working division controls. The supplied policy donor identities are unchanged; local adoption owners remain open.
+- `SESSION-STARTUP-READING.86.4.5 - preserve paused splitter repair and clean handoff` — exact candidate archive and recovery evidence, accepted source/test restoration, clean continuity pointer; .86.4.2 remains pending.
 
 ## Next Action
 
-- Continue PNT with .86.4.2; then .86.4.3/.4, .86.5 and canonical .86.3 before .50.
+- Await director direction. If resumed, inspect the .86.4.2 archive and fix its known division/quote continuation regression before validation/recomposition .86.4.3/.4, EOF .86.5 and canonical .86.3.
 
 ## Recent Completions
+
+- `2026-09-23` — `.86.4.5` archives the unfinished candidate and restores a clean director-paused handoff.
 
 - `2026-09-23` — `.86.4.1` isolates Perl multiline regex failures and owns bounded splitter/validation repairs.
 
@@ -43,8 +45,6 @@ PNT resumes from clean Rust .86.2. Perl .86.4.1 isolates action segmentation and
 - `2026-09-22` — `SESSION-STARTUP-READING.45.1` propagates all reported rule-code parse errors; full Rust gate and quoted-LF regression pass.
 
 - `2026-09-22` — `SESSION-STARTUP-READING.83.1` accepts ADR0124/37 cases; .45.1-.45.3 repair the freshly reproduced compiler drop before delivery.
-
-- `2026-09-22` — `SESSION-STARTUP-READING.83.2.1` fixes quoted LF in both readers; six-runtime recurrence and eight original report cases pass.
 
 ## History
 

@@ -11,6 +11,12 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
 
+## 2026-09-23 — SESSION-STARTUP-READING.86.4.5 - preserve paused splitter repair and clean handoff
+
+Preserve an unaccepted repair without leaving executable changes in the checkout: docs/checkpoints/SESSION-STARTUP-READING.86.4.2.patch reconstructs the exact four candidate files from 69689bb41. The candidate passes its selected five-target suite but fails the subsequently discovered quote-after-division probe; therefore those selected passes cannot justify repair completion. Token-end lookahead alone can mistake a later quote opener for the closing regex slash. The original scanner returns7 for all four retained controls; the candidate emits an unterminated pattern. Exact commands and checksum live in docs/knowledge/perl-multiline-regex-scanner-boundaries.md.
+
+The two interrupted Phase0 logs are partial evidence only. The scratch finish_splitter.py draft was never executed and must not be used to mark completion. Restored source/tests retain their accepted baseline; .86.4.2 remains pending under the explicit director pause. The archive and committed resume pointer are sufficient after session loss; scratch output is optional detail.
+
 ## 2026-09-23 — SESSION-STARTUP-READING.86.4.1 - isolate Perl multiline regex scanner failures
 
 The action StatementSplit mode recognizes Perl quote prefixes and match operators but ignores naked DSL regex literals; it splits the protected newline before AST/lowering can retain the complete pattern. Validation independently scans physical lines without retained slash state. Whole-fragment regex succeeds at depth0 while the same lines leave depth1; division does the reverse. Exact reproducible probes live in docs/knowledge/perl-multiline-regex-scanner-boundaries.md. Supplied policy hashes remain unchanged; existing .5/.29 adoption work is still open.
