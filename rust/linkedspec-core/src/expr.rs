@@ -2694,7 +2694,11 @@ impl<'a> Parser<'a> {
     }
 
     fn unexpected_character_error(&self, ch: char) -> String {
-        let end = (self.pos + 40).min(self.src.len());
+        let mut end = (self.pos + 40).min(self.src.len());
+        // Keep the byte budget without cutting a multibyte scalar in half.
+        while !self.src.is_char_boundary(end) {
+            end -= 1;
+        }
         format!(
             "unexpected character '{}' at position {} near: '{}'",
             ch,

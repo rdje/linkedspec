@@ -220,6 +220,13 @@ The low-level `linkedspec_core::compiler::compile` API returns
 with `linkedspec: parser compilation failed`. With `--trace low`, it reports
 `compile:start` then `compile:error`, before input loading or invocation.
 
+Malformed action text containing multibyte characters follows the same failure
+path. For example, `return(@éééééééééééééééééééé)` rejects compilation without
+panicking while formatting the error. The `near:` excerpt contains complete
+UTF-8 characters within its 40-byte limit. Its plain-text `position` retains the
+byte offset within the parsed action text; structured ActionIR source spans
+continue to use Unicode scalar offsets. Valid Unicode text is preserved exactly.
+
 The file loader preserves this failure as `compile_spec` / `spec_compile_failed`,
 including the requested and resolved path plus compiler detail. Reconstructing a
 serialized source AST or enabling compilation tracing preserves rejection.

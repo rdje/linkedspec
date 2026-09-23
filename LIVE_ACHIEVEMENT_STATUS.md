@@ -2,17 +2,19 @@
 
 ## Current Activity
 
-Local complete-document integration is admitted under SEXPR-DOCUMENT-INTEGRATION.2, closing startup .83. The next bounded repair is startup .46, the observed Rust UTF-8 diagnostic panic.
+Local complete-document integration is committed at 92f58b56c. Startup .46 repairs the Rust UTF-8 diagnostic panic with focused core/public proof; the next bounded repair is startup .47, whitespace-only mutation argument consistency.
 
 ## Latest Completed Slice
 
-- `SEXPR-DOCUMENT-INTEGRATION.2 - admit complete document integration` — six public-loader routes pass 37 cases/21 groups each; native files 37/36 and legacy 26/18. Exact canonical admission is required by the landing hook.
+- `SESSION-STARTUP-READING.46 - preserve UTF-8 diagnostic boundaries` — Core RED: 3 pass/1 split-scalar panic. GREEN: 201 core library tests, 4 diagnostic groups, 5 rule-code rejection groups, the primary CLI rejection test and 4 source/AST/traced/loader/semantic/generated route tests pass. Five rebuilt-native controls pass in 1.16–1.19 seconds; the former Unicode exit 101 becomes ordinary compile:error/exit 1. ASCII, valid Unicode, diagnostic byte offsets and structured scalar spans retain their behavior. Rust formatting and mdBook rendering pass.
 
 ## Next Action
 
-- Reproduce startup .46 through LinkedSpec public/core routes, then own a bounded UTF-8-safe Rust diagnostic repair and independent verification; preserve the separately unresolved whole-spec timeout distinction.
+- Reproduce startup .47 through core and public compile routes; align semantically empty mutation arguments while preserving exact source/spans and rejecting nonempty arguments.
 
 ## Recent Completions
+
+- `2026-09-23` — `SESSION-STARTUP-READING.46` fixes the Unicode diagnostic panic; core/public/native proof passes and structured scalar spans remain exact.
 
 - `2026-09-23` — `SEXPR-DOCUMENT-INTEGRATION.2` admits all six public-loader paths, native document files and the local report scope; all backend guides are synchronized.
 
@@ -43,8 +45,6 @@ Local complete-document integration is admitted under SEXPR-DOCUMENT-INTEGRATION
 - `2026-09-22` — `CONFORMANCE-SOURCE-READING.1.86` completes six semantic/sparse consumers; focused proof including duplicate slots passes 158 top-level/696 nested results. Known repairs remain open; .1.87 continues staged enrichment.
 
 - `2026-09-22` — `CONFORMANCE-SOURCE-READING.1.85` completes seven files; 431 top-level/213 nested results pass. .2.13/.2.16 extend to cursor consumers; .2.18 owns semantic nested-copy observations. .1.86 continues with all prerequisites intact.
-
-- `2026-09-22` — `CONFORMANCE-SOURCE-READING.1.84` completes recognition, recursive observation, repeated action results and root core; 79 top-level/475 nested results pass. Existing .2.16 owns the fifth subprocess helper; all prerequisites remain. .1.85 continues.
 
 ## History
 

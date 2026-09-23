@@ -3505,7 +3505,6 @@ remain. Reading completion and runtime signoff remain distinct.
   Commit: `SESSION-STARTUP-READING.45.2 - verify Rust rule-code rejection routes`
 
   Artifact boundary: Emitters consume CompiledSpec, not raw source. Rebuild older warning/drop artifacts from the original specification; no schema change or recovery of discarded code is claimed. Exact scope and rerun command: docs/knowledge/rust-rule-code-rejection-routes.md.
-
 - ID: `SESSION-STARTUP-READING.45.3`
   Status: `done`
   Activation commit: `30c1ddeeaf22d04dfc11f875636dd7320392cd23`.
@@ -3517,21 +3516,22 @@ remain. Reading completion and runtime signoff remain distinct.
   Acceptance: Align public compile-error guidance, Knowledge and all live pointers; distinguish syntax rejection from separately owned Unicode diagnostics and other parser defects. Run the designated canonical closeout gate and close only the verified rule-block error-propagation scope.
   Verification: Compiler correction 10893fb71 passed all core/native regressions and the complete Rust component gate; carrier checkpoint 30c1ddeea passed all four source/AST/loader/semantic/generated route tests. This documentation-only parent closeout retains those exact proofs. Canonical acceptance requires tools/run_ci_local.sh to finish successfully on the exact staged candidate and produce the receipt checked by the normal commit hook; the resulting commit and promoted receipt are the durable gate evidence. Other parser defects and document grammar delivery remain separately owned.
   Commit: `SESSION-STARTUP-READING.45.3 - close Rust rule-code rejection repair`
-
 - ID: `SESSION-STARTUP-READING.46`
-  Status: `pending`
+  Status: `done`
   Goal: Make Rust malformed-expression diagnostics safe at every UTF-8 boundary.
-  Dependencies: `.3`/`.4`/`.5`.
-  Acceptance: Replace raw byte-window slicing with a UTF-8-safe diagnostic excerpt while preserving scalar
-    source positions and meaningful bounded context. Cover ASCII, multibyte boundaries, valid Unicode, and
-    malformed inputs through direct core and relevant public routes. Separately resolve the earlier whole-spec ASCII timeout before claiming its cause; a caught core panic does not establish a CLI panic.
-    Preserve precise error propagation and update relevant public teaching after prerequisites.
-  Verification: `pending` — An isolated core program observes CodeBlock::parse returning errors for ASCII
-    and aligned Unicode, parsing valid Unicode, but panicking for @ followed by twenty e-acute characters.
-    expr.rs unexpected_character_error slices at pos+40 inside a scalar. Harness catch_unwind only
-    observes the failure. The earlier whole-spec ASCII probe timed out before any Unicode case; its cause
-    remains unresolved.
-  Commit: `pending`
+  Dependencies: Clean 92f58b56c document admission; .45 compiler rejection. ADR0123 supersedes the historical blanket .3/.4/.5 reading prerequisite.
+  Verification tier: `focused`
+  Focused checks: Direct CodeBlock UTF-8 boundary RED/GREEN; core library and rule-code rejection tests; public compiler/traced/loader/semantic routes and native CLI controls; Rust formatting, book, Knowledge, memory, histories, doctrines and diff hygiene.
+  Canonical trigger: none — bounded Rust diagnostic repair; no public contract, dependency, generated format or gate change.
+  Acceptance: Preserve scalar positions and bounded meaningful context for ASCII, multibyte and malformed expressions; retain valid Unicode and precise compiler propagation. Revisit the earlier whole-spec ASCII timeout separately before claiming its cause or a CLI Unicode panic.
+  Verification: Core RED: 3 pass/1 split-scalar panic. GREEN: 201 core library tests, 4 diagnostic groups, 5 rule-code rejection groups, the primary CLI rejection test and 4 source/AST/traced/loader/semantic/generated route tests pass. Five rebuilt-native controls pass in 1.16–1.19 seconds; the former Unicode exit 101 becomes ordinary compile:error/exit 1. ASCII, valid Unicode, diagnostic byte offsets and structured scalar spans retain their behavior. Rust formatting and mdBook rendering pass. Logs: .linkedspec-data/scratch/utf8-diagnostic46/. The historical 30-second ASCII timeout is not reproduced by the current 80-character control; its exact original body/cause remain unknown and no retrospective cause claim is made.
+  Commit: `SESSION-STARTUP-READING.46 - preserve UTF-8 diagnostic boundaries`
+  - [x] **REPRODUCE / ISSUE** — Native LinkedSpec CLI --trace low reproduces exit 101 and the split-scalar panic; ASCII/aligned/valid controls retain expected results. Core CodeBlock RED independently fails at byte 40 within e-acute bytes 39..41.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — CLI panic names expr.rs:2702: endpoint 47 splits scalar bytes 46..48. unexpected_character_error formats src[pos..pos+40]; native ASCII succeeds in 1.35 seconds, leaving the historical timeout cause unknown.
+  - [x] **FIX** — Bound the existing 40-byte excerpt at the preceding scalar boundary; no production catch_unwind, syntax change, byte-position change or structured scalar-span change.
+  - [x] **ADDRESSED (verified)** — Both CodeBlock modes pass all UTF-8 alignments; the native panic becomes ordinary compilation rejection through source/AST/traced/loader/semantic/CLI routes, before input loading or execution.
+  - [x] **NO REGRESSION** — All selected 210 core and 5 runtime tests pass, including valid generated execution; all five native controls pass. Valid text, scalar spans and legacy byte-position text remain exact; no dependency changes.
+  - [x] **LOCKSTEP** — Rust integration/book guidance, Knowledge, roadmap and live recovery pointers record the bounded fix and the historical timeout limitation. Book/formatting pass; focused governance governs landing.
 
 - ID: `SESSION-STARTUP-READING.47`
   Status: `pending`
@@ -4816,7 +4816,7 @@ audit range, not the default repair frontier.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.46` | `pending` | Repair the observed UTF-8 diagnostic panic through bounded implementation and independent proof after document admission. |
+| 1 | `SESSION-STARTUP-READING.47` | `pending` | Align whitespace-only mutation arguments between parsing and compilation; .46 diagnostic repair is verified. |
 
 ## Reading Ledger
 

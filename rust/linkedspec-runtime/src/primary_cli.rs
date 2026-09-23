@@ -778,6 +778,7 @@ mod tests {
             "Top::\n /x/ LX { return(@invalid) }\n",
             "Top::\n /x/ -> Child { return(@invalid) }\nChild:\n /x/\n",
             "Top::\n => Child { return(@invalid) }\nChild:\n /x/\n",
+            "Top::\n /x/ E { return(@éééééééééééééééééééé) }\n",
         ] {
             for input in [["--input", "x"], ["--input-file", "missing-input.txt"]] {
                 let output = run_with_context(

@@ -11,6 +11,15 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
 
+## 2026-09-23 — SESSION-STARTUP-READING.46 - preserve UTF-8 diagnostic boundaries
+
+Fix Rust unexpected-character diagnostics when their bounded context ends inside a multibyte scalar. Keep the existing 40-byte budget and plain-text byte position while moving the excerpt endpoint to a UTF-8 boundary. Syntax rejection, authored text and structured Unicode-scalar spans are unchanged. Add independent two/three/four-byte alignment coverage for both CodeBlock modes and extend existing public route and CLI rejection fixtures.
+
+Core RED: 3 pass/1 split-scalar panic. GREEN: 201 core library tests, 4 diagnostic groups, 5 rule-code rejection groups, the primary CLI rejection test and 4 source/AST/traced/loader/semantic/generated route tests pass. Five rebuilt-native controls pass in 1.16–1.19 seconds; the former Unicode exit 101 becomes ordinary compile:error/exit 1. ASCII, valid Unicode, diagnostic byte offsets and structured scalar spans retain their behavior. Rust formatting and mdBook rendering pass.
+
+Update the Rust integration guide, Knowledge fact, task ownership and live/roadmap pointers. The earlier long-ASCII timeout is not reproduced by current controls; its historical cause remains unknown. No dependency implementation, pin, generated format or cross-backend contract changes. Ordinary focused verification applies; startup .47 is next.
+
+
 ## 2026-09-23 — SEXPR-DOCUMENT-INTEGRATION.2 - admit complete document integration
 
 Add a maintained verifier for the documented public-loader adaptations and publish its commands in every backend integration guide. The verifier uses the independent authored values, changes only the entry-rule literal in temporary copies, and preserves original examples and prepared products. Close the local ARCHOGEN complete-input/token-kind and SEMULITH kind scope through the separate versioned grammar; historical Lispish and downstream report states remain unchanged.

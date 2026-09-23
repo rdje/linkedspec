@@ -11,6 +11,15 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
 
+## 2026-09-23 — SESSION-STARTUP-READING.46 - preserve UTF-8 diagnostic boundaries
+
+The panic was in error formatting, not successful parsing: unexpected_character_error selected src[pos..min(pos+40,len)] with an endpoint inside a scalar. The current native CLI independently reproduced exit 101 at endpoint 47 inside bytes 46..48. A maximal complete-scalar prefix within the existing byte budget repairs the error path without changing parser cursor state, diagnostic offset units or ActionIR scalar spans. No production panic-catching is introduced.
+
+Core RED: 3 pass/1 split-scalar panic. GREEN: 201 core library tests, 4 diagnostic groups, 5 rule-code rejection groups, the primary CLI rejection test and 4 source/AST/traced/loader/semantic/generated route tests pass. Five rebuilt-native controls pass in 1.16–1.19 seconds; the former Unicode exit 101 becomes ordinary compile:error/exit 1. ASCII, valid Unicode, diagnostic byte offsets and structured scalar spans retain their behavior. Rust formatting and mdBook rendering pass.
+
+The contemporaneous 80-character ASCII control rejects normally before and after repair. The retrieved historical record does not establish the exact original timeout body or cause; current success must not be represented as a retrospective root cause. Existing malformed-rule-code tests provide the direct-dependent source/AST/traced/file/name/semantic and generated-valid controls. The startup root remains exactly 8,000 lines; two adjacent blank separators were compacted to admit the existing leaf metadata, preserving all .45 evidence and every stable ID.
+
+
 ## 2026-09-23 — SEXPR-DOCUMENT-INTEGRATION.2 - admit complete document integration
 
 Add a maintained verifier for the documented public-loader adaptations and publish its commands in every backend integration guide. The verifier uses the independent authored values, changes only the entry-rule literal in temporary copies, and preserves original examples and prepared products. Close the local ARCHOGEN complete-input/token-kind and SEMULITH kind scope through the separate versioned grammar; historical Lispish and downstream report states remain unchanged.

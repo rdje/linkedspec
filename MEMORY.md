@@ -1,11 +1,11 @@
 # MEMORY
 
-- activation_commit: `df845ce615df20929ac501b61984fbf9d29225ca` — clean native file-consumer checkpoint; final admission activation.
-- latest_completed_leaf: `SEXPR-DOCUMENT-INTEGRATION.2 - admit complete document integration`; six public-loader routes pass 37 cases/21 groups each, native files 37/36 and legacy 26/18.
-- active_work_unit: `SESSION-STARTUP-READING.46` — pending; bounded Rust UTF-8 diagnostic repair.
-- next_action: Reproduce startup .46 through LinkedSpec public/core routes, then own a bounded UTF-8-safe Rust diagnostic repair and independent verification; preserve the separately unresolved whole-spec timeout distinction.
+- activation_commit: `92f58b56cddf4a104738374104ef5cc4847cf53d` — clean document admission; UTF-8 diagnostic repair activation.
+- latest_completed_leaf: `SESSION-STARTUP-READING.46 - preserve UTF-8 diagnostic boundaries`; core 210, public routes 5 and rebuilt-native controls 5 pass.
+- active_work_unit: `SESSION-STARTUP-READING.47` — pending; source-preserving empty mutation-argument consistency.
+- next_action: Reproduce startup .47 through core and public compile routes; align whitespace-only map_leaves! arguments while preserving source/spans and rejecting nonempty arguments.
   Named-argument direction PARSER-AUTHORING-APIS.4 is approved and parked; other authoring proposals and approved formats stay parked.
-- in_flight_uncommitted: none; local document integration is admitted and startup .83 is closed.
+- in_flight_uncommitted: none; startup .46 is repaired with focused proof; the old ASCII timeout remains an unattributed historical observation.
 - blockers: Wrapper startup .7 remains open; warned-child group matched, but denied-call cause and original lost PUC stream remain unproved. Recovery/purge stay prohibited.
 - current_rust_warning_debt: Repeated carriers report 1,870 pgen plus 26 rgx-core output warnings; RUST-DEPENDENCY-WARNING-ZERO.1-.7 own public RGX reports and result verification without suppression; dependency internals are excluded.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
@@ -57,4 +57,4 @@
   Changes segment4972 preserves 136 lines /27060 bytes from clean 8259719f8; old archive rows/bytes remain exact.
 - dependency_boundary: September20: LinkedSpec integrates only with RGX via its published integration document/APIs/contracts. RGX owns PGEN; no separate PGEN procedure, internal inspection/analysis, patches or pin changes.
   Normal documented builds remain authorized; retain caches. Startup .80.1-.4 may observe public behavior or track upstream repairs, not investigate dependency internals.
-- latest_bootstrap_read: ADR0123 targets 2–5 minute startup plus thorough task-specific reading. Separate audit remains 89/143 and .1.90. Document integration closes under SEXPR-DOCUMENT-INTEGRATION.2; startup .46 is next. SEMULITH/LS-001 and workspace/prerequisite remedies remain verified; no downstream acceptance claim.
+- latest_bootstrap_read: ADR0123 targets 2–5 minute startup plus thorough task-specific reading. Separate audit remains 89/143 and .1.90. Document integration closes under SEXPR-DOCUMENT-INTEGRATION.2; startup .46 is fixed and .47 is next. SEMULITH/LS-001 and workspace/prerequisite remedies remain verified; no downstream acceptance claim.

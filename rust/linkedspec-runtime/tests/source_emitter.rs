@@ -1192,6 +1192,11 @@ fn malformed_rule_code_cases() -> Vec<(String, &'static str, &'static str)> {
             "unexpected character '@'",
         ),
         (
+            format!("Top::\n /x/\n E {{ return(@{}) }}\n", "é".repeat(20)),
+            "E -block",
+            "unexpected character '@' at position 7 near: '@ééééééééééééééééééé'",
+        ),
+        (
             "Top::\n /x/\n LX { if(cursor_pos() != input_end_pos()); exit_now(1); endif() }\n"
                 .into(),
             "LX -block",
