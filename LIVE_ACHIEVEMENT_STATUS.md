@@ -2,17 +2,19 @@
 
 ## Current Activity
 
-Perl multiline helper-pattern validation is verified under .86.4.3. Statement splitting still has three measured helper failures, immediately owned by .86.4.6 before public recomposition .86.4.4. The distinct LS-004 upstream report remains director-relayed; no RGX implementation defect or upstream repair is claimed.
+Perl helper-pattern validation and statement splitting are verified under .86.4.3/.86.4.6. Physical quoted-subject validation is next under .86.4.7 before public recomposition .86.4.4. Escape-route fidelity retains SUPPORTING-SOURCE-READING.2.4; LS-004 remains director-relayed and upstream-owned.
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.86.4.3 - preserve multiline helper pattern validation` — six regression groups, focused173 and complete Phase0 1033/1033 in1211 seconds; book rendered, physical diagnostic positions preserved. The earlier interrupted run is excluded.
+- `SESSION-STARTUP-READING.86.4.6 - preserve regex helper statement boundaries` — focused52, both exact Markdown examples (11 live/generated assertions), rendered book and complete Phase0 1033/1033 in1545 seconds. Baseline replay fails groups5/7; division compatibility remains intact.
 
 ## Next Action
 
-- Repair .86.4.6's multiline regex_subst, matches continuation and conditional matches using the recorded StatementSplit mechanism. Commit each verified slice; final push requires exact-HEAD canonical proof. Director relays the separate ready RGX report.
+- Repair .86.4.7 using the tracked .86.4.6 public/lowered quoted-subject diagnostic. Then recompose .86.4.4, repair .86.5 and run .86.3 canonical closeout. Commit each verified slice; final push requires exact-HEAD canonical proof.
 
 ## Recent Completions
+
+- `2026-09-23` — `SESSION-STARTUP-READING.86.4.6` repairs helper statement boundaries; focused52, exact book11 and Phase0 1033/1033 pass.
 
 - `2026-09-23` — `SESSION-STARTUP-READING.86.4.3` repairs Perl multiline helper validation and physical diagnostic offsets; focused173 and Phase0 1033/1033 pass.
 
@@ -43,8 +45,6 @@ Perl multiline helper-pattern validation is verified under .86.4.3. Statement sp
 - `2026-09-23` — `SESSION-STARTUP-READING.49` preserves regex suffix adjacency and following statements; core243/runtime397/native22 pass; separately owned .86 follows.
 
 - `2026-09-23` — `SESSION-STARTUP-READING.47.3` closes the verified argument/source parent through receipt-bound canonical acceptance; .49 follows.
-
-- `2026-09-23` — `SESSION-STARTUP-READING.47.2` preserves block source, compact-header literal values and closing-line continuation statements; full Rust component and native25 pass.
 
 ## History
 

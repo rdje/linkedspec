@@ -216,7 +216,8 @@ These examples describe ordinary rule action blocks. Perl currently rejects
 `matches` inside an invoked callable `{|text| ... }` body with either literal or
 string patterns; repair is tracked under `SESSION-STARTUP-READING.87.2`.
 The [Perl integration guide](../public-api/integration-perl.md#regex-and-division-in-action-code)
-also gives a working multiline helper pattern and the remaining statement-lowering limitations.
+also gives working multiline match/substitution patterns, generated-parser coverage,
+and the remaining quoted-subject validation and string-escape limitations.
 
 ### Composite values
 

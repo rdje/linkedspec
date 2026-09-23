@@ -394,7 +394,16 @@ sub split_action_ir_statements {
   if (LinkedSpec::ActionIR::StatementSplit::Mode::maybe_enter_double_quote($state, $char)) { next; }
   if (LinkedSpec::ActionIR::StatementSplit::Mode::maybe_enter_backtick_quote($state, $char)) { next; }
   if (LinkedSpec::ActionIR::StatementSplit::Mode::maybe_enter_line_comment($state, $char)) { next; }
-  if (LinkedSpec::ActionIR::StatementSplit::Mode::maybe_enter_slash_quote($state, $char)) { next; }
+  # Naked regex operands belong to argument syntax. Keep assignment-position
+  # slash interpretation unchanged, and let the expression parser distinguish
+  # a numeric slash call from a regex beginning with a parenthesized pattern.
+  my $helper_pattern = 0;
+  if ($char eq '/' && $state->{paren_depth} > 0
+      && $state->{statement} =~ /[(,]\s*$/o) {
+   _require_method_expr_pkg();
+   $helper_pattern = !LinkedSpec::ActionIR::MethodExpr::_looks_like_slash_symbol_call_at($code, $idx);
+  }
+  if (LinkedSpec::ActionIR::StatementSplit::Mode::maybe_enter_slash_quote($state, $char, $helper_pattern)) { next; }
   if (LinkedSpec::ActionIR::StatementSplit::Mode::maybe_enter_angle_quote($state, $char)) { next; }
   if (LinkedSpec::ActionIR::StatementSplit::Mode::maybe_enter_pipe_quote($state, $char)) { next; }
   if (_consume_top_level_line_break($state, $char, \@statements, $trim_action_ir_value)) { next; }

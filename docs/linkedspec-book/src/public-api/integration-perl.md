@@ -249,13 +249,31 @@ For a physical CRLF inside the pattern, use a CRLF subject when that exact
 sequence should match. Validation preserves original source positions and keeps
 rule-like text inside a complete helper pattern from becoming rule metadata.
 
-Some later lowering paths remain incomplete: multiline `regex_subst`, a
-multiline `matches` assignment followed by a newline-separated statement, and
-multiline `matches` inside statement-form `if`. These are owned by
-`SESSION-STARTUP-READING.86.4.6`, before public closeout of the repair group.
-Check both failure channels described below; a returned parser alone does not
-establish successful compilation and execution. None of these repairs adds a
+Substitution also accepts a multiline pattern and preserves the following
+statement. With input containing `x`, a physical LF, then `y`, this parser
+returns `"ok"`:
+
+```text
+Top::
+ -> Done { text = match_text(); regex_subst(text, /x
+y/, "ok", g); return(text) }
+Done:
+ /[\s\S]+/
+```
+
+A `matches` assignment can be followed by a newline-separated statement, and
+multiline patterns also work in statement-form `if` inside an `I` block.
+The same patterns and subsequent statements survive standalone generated Perl
+parsers. These checks cover supported helper operands, without introducing a
 regex-valued variable type.
+
+Two string-related limitations remain. Physical newlines inside a quoted DSL
+subject can still confuse structural validation (`.86.4.7`). Also, `"\n"`
+currently remains backslash-plus-`n` through ordinary assignment/return lowering,
+while the inline helper example above decodes it as LF
+(`SUPPORTING-SOURCE-READING.2.4`). The substitution example uses `match_text()`
+to obtain exact subject bytes from input. Check both failure channels described
+below; a returned parser alone does not establish successful execution.
 
 For arithmetic division, `div(14, 2)` works at the end of an action block.
 The equivalent slash call `/(14, 2)` currently requires a trailing semicolon in

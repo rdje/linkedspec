@@ -11,6 +11,14 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
 
+## 2026-09-23 — SESSION-STARTUP-READING.86.4.6 - protect helper tokens before statement splitting
+
+StatementSplit recognized host quote operators but not naked slash operands. Closing /y/ or a multiline pattern ending y opened translation mode and swallowed the next separator/endif. Argument-boundary recognition now enters the existing one-segment slash state, using MethodExpr's numeric-call discriminator. Single-line, LF and CRLF inputs with suffixes y/s/m/q/tr/qr/qq/qx retain mutation, continuation and independent generated results. Numeric slash arguments and both historically rejected assignment-precedence controls remain numeric.
+
+Test expansion exposed two separate subject issues. Escaped newline text is preserved literally by ordinary assignment/return lowering but decoded by source-preserving inline helper lowering; SUPPORTING-SOURCE-READING.2.4 already owns this fidelity scope. Actual LF in an assigned quoted subject lowers to a correct independent action but is rejected by whole-spec validation: the physical-line scanner treats the closing quote on the second line as an opener, swallowing the helper's opening parenthesis and miscounting its later close. New .86.4.7 owns that structural repair before public recomposition. The tracked .86.4.6 diagnostic records exact public/lowered evidence and scanner depths. The current regex test uses input match_text() to isolate token boundaries without claiming either subject issue fixed.
+
+The mdBook documents measured supported examples and both remaining limitations. Direct execution of both complete Markdown examples passes11 live/generated assertions, and the book renders. Complete Phase0 passes1033/1033 in1545 seconds (1091.50 CPU seconds); normal staged hooks govern landing. The earlier passing .86.4.3 run took1211 wall/1038.92 CPU seconds, so wall time alone is not a performance comparison.
+
 ## 2026-09-23 — SESSION-STARTUP-READING.86.4.3 - separate structural pattern validation from statement lowering
 
 The accepted-source public probe independently lowers multiline matches to a successful action, but physical-line validation interprets the closing y/ as a new translation construct. The repair masks only complete multiline tokens at parenthesized argument boundaries; it shares existing slash-call recognition and keeps assignment-position scans physical-line based. Source bytes and CR/LF stay with compilation. Cumulative line offsets prevent diagnostic attribution to an earlier identical line inside a pattern.

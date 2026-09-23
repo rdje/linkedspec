@@ -6,7 +6,8 @@ answers:
   - can substr regex mutation use a single quoted pattern
   - is single quote syntax Julia specific
   - which quote style should be used around a pattern containing double quotes
-date: 2026-07-10
+  - why does Perl newline escape decoding depend on the helper or assignment route
+date: 2026-09-23
 status: current
 tags: [dsl, strings, quotes, perl, rust, dart, julia, variants]
 evidence: "The mdBook formal grammar defines both \"text\" and 'text' as string literals. Perl ActionIR ValueExpr recognizes single_quoted_literal and double_quoted_literal. JULIA-BACKEND-PARITY.6.2.4.5.2 locks the exact single-quoted pattern containing an embedded double quote and \\s in Perl actionir_ast_parser.t, Rust parse_string_literal_single_quotes, Dart action_ast_parser_test.dart, and Julia's executable statement-mutation test. All four preserve the same pattern value. This is a language contract for every backend, including future variants, not Julia-specific syntax."
@@ -30,3 +31,21 @@ The shared scalar-string contract remains. Exact primary Perl probes now show
 single-quoted twin preserves the literal. [[self-hosted-grammar-ast-drift]] records
 the source/generated mechanism and `SUPPORTING-SOURCE-READING.2.4` repair ownership.
 The earlier pattern fixture does not cover this sigil-bearing case.
+
+## September 23 escape-route qualification
+
+Startup `.86.4.6` records a separate context mismatch in the same repair owner's
+scope. The side-effect-free diagnostic
+`docs/checkpoints/SESSION-STARTUP-READING.86.4.6.pl` shows `return("x\ny")`,
+assignment of that literal, and assignment of `cat("x", "\n", "y")` returning
+literal backslash-plus-`n`. Inline `matches(cat("x", "\n", "y"), /x` + LF +
+`y/)` instead matches the LF pattern and returns1. Generated lowering contains
+`"\\n"` for the former paths and `"\n"` for the latter. Public and independent
+lowered execution agree within each route. Run the diagnostic through
+`bash tools/project_data_run.sh env PERL5LIB= perl -Iperl`.
+
+`SUPPORTING-SOURCE-READING.2.4` already owns sigils, backslashes and supported
+escapes across literal/aggregate/generated routes. Reconcile that contract in
+its repair; neither route is silently promoted into a new portable rule here.
+Physical multiline quoted-subject validation has the distinct `.86.4.7` owner
+and mechanism in [[perl-multiline-helper-pattern-validation]].

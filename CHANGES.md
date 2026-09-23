@@ -11,6 +11,12 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
 
+## 2026-09-23 — SESSION-STARTUP-READING.86.4.6 - preserve regex helper statement boundaries
+
+Recognize slash-pattern operands at parenthesized argument boundaries before a closing y/ can become a translation opener. Reuse the numeric slash-call discriminator; retain assignment-position interpretation, authored bytes and the existing lowering owners. The repair restores substitution, newline continuation and conditional matches without a regex runtime type.
+
+The seven-group consumer fails groups5/7 against isolated committed d2af200325 and passes on the candidate. Four direct-dependent files pass52 top-level tests; retained division controls return7. LF/CRLF, eight host-operator suffixes, punctuation, once-only substitution and independent generated execution are covered. Both complete mdBook examples are read from Markdown and pass11 live/generated assertions; rendering succeeds. Complete Phase0 passes1033/1033 in1545 seconds, including the exact seven-group consumer. Separate physical quoted-subject validation is task-owned by .86.4.7 before public recomposition; observed escape-route differences stay with existing SUPPORTING-SOURCE-READING.2.4. No canonical CI or push is claimed.
+
 ## 2026-09-23 — SESSION-STARTUP-READING.86.4.3 - preserve multiline helper patterns during Perl validation
 
 Use a character-position-preserving structural view for complete multiline regex arguments. All three validator passes consume the same view, while compilation and diagnostics retain original source; physical line offsets distinguish real errors from identical pattern payloads. Assignment-position slash decisions and runtime value kinds are unchanged.

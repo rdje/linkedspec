@@ -153,7 +153,7 @@ sub maybe_enter_line_comment {
 }
 
 sub maybe_enter_slash_quote {
- my ($state, $char) = @_;
+ my ($state, $char, $helper_pattern) = @_;
  return 0 unless $char eq '/';
  my $slash_context = _trim_context_suffix($state->{statement});
 
@@ -164,7 +164,7 @@ sub maybe_enter_slash_quote {
   $state->{slash_quote_escape_next} = 0;
   $state->{statement} .= $char;
   return 1;
- } elsif ($slash_context =~ /(?:=~|!~)\s*$/o) {
+ } elsif ($helper_pattern || $slash_context =~ /(?:=~|!~)\s*$/o) {
   $state->{in_slash_quote} = 1;
   $state->{slash_quote_segments_remaining} = 1;
   $state->{slash_quote_escape_next} = 0;

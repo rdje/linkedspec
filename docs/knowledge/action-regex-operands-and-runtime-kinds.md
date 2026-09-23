@@ -10,7 +10,7 @@ answers:
   - why does Perl matches fail inside a callable codeblock
   - which task owns function position filter_match on Perl
 date: 2026-09-23
-status: current audit; validation repaired under .86.4.3, lowering/helper repairs remain open
+status: current audit; helper validation/splitting repaired under .86.4.3/.86.4.6; quoted subjects and independent helpers remain open
 tags: [regex, actionir, runtime-values, perl, rust, dart, julia, lua]
 evidence: "SESSION-STARTUP-READING.86.4.2.4 reads the neutral binding contract, relevant mdBook sections and first-party AST/evaluator owners. The tracked diagnostic measures thirteen action cases plus an AST probe on accepted production at 7c318569. Source inspection of other backends is not a fresh five-backend execution claim."
 reverify: "bash tools/project_data_run.sh env PERL5LIB= perl -Iperl docs/checkpoints/SESSION-STARTUP-READING.86.4.2.4.pl; inspect values, generated source and both error channels, not process exit alone."
@@ -18,9 +18,10 @@ reverify: "bash tools/project_data_run.sh env PERL5LIB= perl -Iperl docs/checkpo
 
 ## Contract and syntax
 
-Current validation outcome: [[perl-multiline-helper-pattern-validation]] records
-the .86.4.3 repair and its bounded public proof. The observations below retain
-the audit baseline; .86.4.6 owns newly isolated multiline statement lowering.
+Current outcome: [[perl-multiline-helper-pattern-validation]] records the
+.86.4.3 validator and .86.4.6 statement-splitting repairs with bounded public
+proof. The observations below retain the audit baseline; .86.4.7 owns the
+separate physical multiline quoted-subject validator defect.
 
 `capability_conformance/uniform_binding_contract.json` defines one binding holding
 scalar, array, harray or codeblock. The book's value reference and formal grammar
@@ -70,9 +71,9 @@ return(matches(cat("x", "\n", "y"), /(x)
 y/))
 ```
 
-Independent lowering executes to `1`, but public whole-spec validation rejects
-the following `Done:` rule as if the action were still open. This is the concrete
-remaining `.86.4.3` repair. It does not require regex-valued variables or a new
+At the audit baseline, independent lowering executed to `1`, but public validation
+rejected the following `Done:` rule as if the action were still open. Verified
+`.86.4.3` repairs that case. It does not require regex-valued variables or a new
 division-versus-regex precedence decision.
 
 ## First-party backend representations
