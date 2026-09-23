@@ -737,21 +737,27 @@ replace an already built executable or its packaged grammar files.
 
 The reports require different consumer changes:
 
-| Reports | Remedy and adoption step |
-| --- | --- |
-| SEMULITH LS-001 | Both Lispish quote readers preserve literal line feeds. Update the packaged `specs/Lispish.spec` and rerun the eight supplied examples. |
-| ARCHOGEN LS-002 / LS-003 and SEMULITH LS-002 | Use `specs/SExprDocumentV1.spec`, select `Document`, and consume its tagged result. Use the separate `sexpr_file` example for files. The old `lispish_file` adapter still expects historical head/tail values. |
-| ARCHOGEN LS-001 and SEMULITH LS-003 item 1 | Keep the example's workspace boundary and the enclosing application's `exclude = ["vendor/linkedspec"]` entry. Follow the workspace setup above before preparation/build. |
-| ARCHOGEN LS-005 and SEMULITH LS-003 items 2–3 | Follow the linked preparation steps before either text or file use; optional test repositories need not be initialized for native use. |
-| ARCHOGEN LS-004 | ARCHOGEN attributes misleading bootstrap progress to PGEN. The symptom is observable through RGX, whose command correctly returns failure; no RGX code defect is established. Check the final exit status. The report remains open through the RGX integration contact. |
+| Reports | Remedy and adoption step | Repair commit(s) |
+| --- | --- | --- |
+| SEMULITH LS-001 | Both Lispish quote readers preserve literal line feeds. Update the packaged `specs/Lispish.spec` and rerun the eight supplied examples. | `8259719f8` |
+| ARCHOGEN LS-002 / LS-003 and SEMULITH LS-002 | Use `specs/SExprDocumentV1.spec`, select `Document`, and consume its tagged result. Use the separate `sexpr_file` example for files. The old `lispish_file` adapter still expects historical head/tail values. | `77d7b3db1`, `df845ce61` |
+| ARCHOGEN LS-001 and SEMULITH LS-003 item 1 | Keep the example's workspace boundary and the enclosing application's `exclude = ["vendor/linkedspec"]` entry. Follow the workspace setup above before preparation/build. | `effe3e7b2` |
+| ARCHOGEN LS-005 and SEMULITH LS-003 items 2–3 | Follow the linked preparation steps before either text or file use; optional test repositories need not be initialized for native use. | `6e37288f7` |
+| ARCHOGEN LS-004 | ARCHOGEN attributes misleading bootstrap progress to PGEN. The symptom is observable through RGX, whose command correctly returns failure; no RGX code defect is established. Check the final exit status. The report remains open through the RGX integration contact. | None; still open |
 
 The [prepared ARCHOGEN LS-004 handoff](https://github.com/rdje/linkedspec/blob/main/docs/upstream/rgx/bootstrap-progress-status.md)
 records the remaining bootstrap-message reproduction and its unresolved status.
 
-The Cargo workspace remedy was committed in
-`effe3e7b2544abf79f7786a7aa54e77b1893880e`. It addresses ARCHOGEN LS-001 and
-SEMULITH LS-003 item1; LS-004's bootstrap failure handling and misleading message
-remain unfixed. The later publication commit does not constitute an LS-004 fix.
+The document grammar and native file consumer were independently admitted in
+`92f58b56c`. The table names implementation or documentation repairs; admission
+and the later publication commit are separate verification/delivery steps.
+
+An older cold-checkout bootstrap build issue was resolved on June15: LinkedSpec
+`c4926f871131e9a67114425bb3c28108205bc283` adopted RGX
+`8763a0e6bea97879f027237439d57725f83ead23` and verified a successful cold build.
+The September Cargo workspace remedy is
+`effe3e7b2544abf79f7786a7aa54e77b1893880e`. Those fixes address different problems
+from LS-004's still-open failure handling and misleading progress text.
 
 ARCHOGEN LS-006 was withdrawn; LS-007 requests no behavior change. The separate
 document grammar deliberately preserves the historical Lispish contract. Merely

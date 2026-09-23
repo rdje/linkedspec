@@ -29,6 +29,15 @@ tracking and public verification; the affected upstream maintainer owns any
 implementation repair. The original caller-authorized source is
 `../archogen/docs/feedback/linkedspec/issues/LS-004-bootstrap-false-success/README.md`.
 
+## Distinct historical bootstrap build fix
+
+The June15 cold-checkout build issue was resolved upstream at RGX
+`8763a0e6bea97879f027237439d57725f83ead23` and adopted by LinkedSpec commit
+`c4926f871131e9a67114425bb3c28108205bc283`, with successful cold-build evidence
+under `RGX-BUILD-REPRO.1`. This report is the later September ARCHOGEN/LS-004;
+that earlier closeout does not establish its repair. The exact report/commit
+ledger is `docs/knowledge/consumer-report-fix-commits.md`.
+
 ## Public reproduction
 
 The separate Cargo workspace build remedy is LinkedSpec commit

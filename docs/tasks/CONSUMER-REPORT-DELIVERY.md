@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `CONSUMER-REPORT-DELIVERY`
-- Status: `done` / published delivery and corrected local attribution; upstream report remains open
+- Status: `done` / published remedies and audited local fix ledger; LS-004 remains open
 - Roadmap lane: `SEMULITH / ARCHOGEN consumer blockers and delivery`
 - Created: `2026-09-23`
 - Last updated: `2026-09-23`
@@ -29,7 +29,7 @@ blocked SEMULITH/ARCHOGEN consumers over separately discovered validator work.
 - ID: `CONSUMER-REPORT-DELIVERY`
   Status: `done`
   Goal: Deliver local fixes and pursue the remaining consumer report through its proper owner.
-  Children: `CONSUMER-REPORT-DELIVERY.1`, `CONSUMER-REPORT-DELIVERY.2`, `CONSUMER-REPORT-DELIVERY.3`, `CONSUMER-REPORT-DELIVERY.4`, `CONSUMER-REPORT-DELIVERY.5`
+  Children: `CONSUMER-REPORT-DELIVERY.1`, `CONSUMER-REPORT-DELIVERY.2`, `CONSUMER-REPORT-DELIVERY.3`, `CONSUMER-REPORT-DELIVERY.4`, `CONSUMER-REPORT-DELIVERY.5`, `CONSUMER-REPORT-DELIVERY.6`
 
 - ID: `CONSUMER-REPORT-DELIVERY.1`
   Status: `done`
@@ -86,11 +86,22 @@ blocked SEMULITH/ARCHOGEN consumers over separately discovered validator work.
   Verification: Original report names PGEN bootstrap; retained public output returns exit2 and no final completion; RGX published guide keeps PGEN read-only. Workspace build remedy is effe3e7b2544abf79f7786a7aa54e77b1893880e, verified as an ancestor of published origin/main; it does not fix LS-004. Report/task/KM/resume/book wording now distinguishes these facts. Focused memory/Knowledge/history/book/diff proof and all nine doctrine hooks govern landing, with results recorded in the commit body.
   Commit: `CONSUMER-REPORT-DELIVERY.5 - distinguish integration contact from defect attribution` (local follow-up; base dc46151be).
 
+- ID: `CONSUMER-REPORT-DELIVERY.6`
+  Status: `done`
+  Goal: Audit all original consumer report dispositions against exact commits and distinguish the older resolved bootstrap build problem from LS-004.
+  Dependencies: Clean 4e2598d1eed1001be370ccaec089922c1ce622ab; director explicitly requests task-tree, KM, ADR and Git-history evidence plus each bug's fix commit.
+  Verification tier: `focused`
+  Focused checks: Relevant task/KM/ADR records; commit bodies and first-party changed-path scopes; public Gitlink adoption metadata and published-main ancestry; exact ten-report mapping; memory/Knowledge/history/book/doctrines/diff.
+  Canonical trigger: None for this bounded historical evidence and documentation audit. No source, dependency pin, runtime contract or checker changes. Future push requires canonical exact-HEAD proof.
+  Acceptance: Name the June15 cold-build adoption c4926f871 and its upstream public resolution separately from workspace fix effe3e7b2 and September LS-004. Give each original report its actual implementation/documentation commits or explicit no-fix disposition. Distinguish opt-in document delivery, admission and publication from defect fixes, and retain original reporter provenance.
+  Verification: PASS task/KM/ADR0124 and commit-body/changed-path reconciliation. RGX-BUILD-REPRO.1 and Gitlink adoption metadata identify c4926f871 as the June build closeout; a1166ee1d explicitly discards an uncommitted helper and leaves September LS-004 open. All eight relevant LinkedSpec references are ancestors of published a8d34c845. The ten-report mapping and exact hashes are in docs/knowledge/consumer-report-fix-commits.md. Memory/Knowledge/history/book/diff checks and all nine doctrine hooks govern landing; commit body records results. No dependency implementation read or pin change.
+  Commit: `CONSUMER-REPORT-DELIVERY.6 - audit consumer fix commits and bootstrap history` (local follow-up; base4e2598d1e).
+
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `CONSUMER-REPORT-DELIVERY.5` | `done` | Attribution and exact workspace-fix commit are recorded; LS-004 remains open with no fix commit. |
+| 1 | `CONSUMER-REPORT-DELIVERY.6` | `done` | Exact fix ledger and historical build distinction recorded; RGX-CONSUMER-BUILD-REPORTS.1 retains the open September report. |
 
 ## Decisions and Boundaries
 

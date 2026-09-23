@@ -59,6 +59,16 @@ inspection, analysis, reconstruction, source edits or pin changes are authorized
   implementation inspection is authorized by this handoff.
 - No issue URL or upstream reply is recorded yet; the director owns communication.
 
+## Distinct Historical Build Fix
+
+`RGX-BUILD-REPRO.1` closed the June15 cold-checkout build problem. LinkedSpec
+`c4926f871131e9a67114425bb3c28108205bc283` adopted upstream RGX
+`8763a0e6bea97879f027237439d57725f83ead23` and recorded a successful cold build.
+That older issue is distinct from September ARCHOGEN/LS-004. Integration
+`a1166ee1d` explicitly left LS-004 open after adopting the public preparation
+flow and discarding an uncommitted custom helper. The complete report/commit
+ledger is `docs/knowledge/consumer-report-fix-commits.md`.
+
 ## Attribution Evidence
 
 - ARCHOGEN's original LS-004 names PGEN bootstrap, not the RGX engine.

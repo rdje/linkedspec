@@ -11,6 +11,12 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
 
+## 2026-09-23 — CONSUMER-REPORT-DELIVERY.6 - audit consumer fix commits and bootstrap history
+
+Audit the original ten reports against task trees, Knowledge cards, ADR0124 and Git commit evidence. Record June15 cold-build adoption c4926f871 of upstream RGX8763a0e6 separately from September workspace remedy effe3e7b2 and still-open ARCHOGEN/LS-004. Integration a1166ee1d explicitly discarded an uncommitted custom preparation helper and left LS-004 open; it is not a failure-handling repair.
+
+Add the bounded canonical report/commit ledger and exact Git identities, link it from current owners and expose repair commits in the book. Eight relevant commits are verified as ancestors of published a8d34c845. Seven addressed requirements include grammar, integration documentation and a design request; one report is open, one withdrawn and one no-action. Preserve document opt-in/admission/publication and downstream-acceptance distinctions. Focused memory/Knowledge/history/book/doctrine/diff checks govern this local documentation commit; source and dependency pins are unchanged.
+
 ## 2026-09-23 — CONSUMER-REPORT-DELIVERY.5 - distinguish integration contact from defect attribution
 
 Correct the overly broad RGX-defect/repair-owner wording. ARCHOGEN's original LS-004 identifies PGEN bootstrap; LinkedSpec's public recurrence establishes a misleading intermediate message but correctly propagated failure (exit 2), not a defect in RGX's own code. The empty offline package store deliberately induces an expected resolution failure. RGX's published integration contract also treats PGEN as read-only from RGX.

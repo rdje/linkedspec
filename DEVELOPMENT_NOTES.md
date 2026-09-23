@@ -11,6 +11,12 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
 
+## 2026-09-23 — CONSUMER-REPORT-DELIVERY.6 - separate three build histories before answering fix status
+
+The director's history challenge exposed an omitted distinction in the conversational answer: RGX-BUILD-REPRO.1 does record a successful June cold-build remedy, adopted in LinkedSpec c4926f871. It predates the September consumer reports. Cargo workspace repair effe3e7b2 is a second problem; LS-004 failure handling and misleading progress text is a third. The June closeout cannot prove the September report fixed, and the open September report cannot erase the older successful build repair.
+
+The exact report ledger names implementation/documentation commits, with grammar77d7b3db1 and native consumerdf845ce61 separate from admission92f58b56c and publicationa8d34c845. Commit bodies/changed-path scopes, current tasks and ADR0124 agree. Relevant ADR searches show no separate LS-004 closeout; a1166ee1d explicitly withdrew the uncommitted helper and retained that report. This read-only history audit does not inspect dependency implementation or change any pin.
+
 ## 2026-09-23 — CONSUMER-REPORT-DELIVERY.5 - separate provenance, observation and repair authority
 
 A public interface can expose a transitive dependency's symptom while correctly reporting overall failure. The retained bootstrap command returns 2 and never claims final completion. ARCHOGEN's original report names PGEN; reproducing a message through RGX does not independently locate a defect in RGX implementation. The induced offline missing-package error is expected and is not the bug claim. The misleading intermediate progress and the original fail-fast request remain open report concerns.

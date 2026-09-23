@@ -66,6 +66,11 @@ Evidence: original ARCHOGEN LS-004 report; `rgx/docs/INTEGRATION.md`; retained
 
 ## Consumer handoff and publication authority
 
+[[consumer-report-fix-commits]] owns the exact ten-report commit ledger and the
+historical build distinction. June15 cold-build adoption `c4926f871` is complete;
+September workspace repair `effe3e7b2` is complete; LS-004 remains open. The first
+two must not be conflated with the third when answering whether bootstrap was fixed.
+
 The workspace build remedy is `effe3e7b2544abf79f7786a7aa54e77b1893880e`
 (`BACKEND-INTEGRATION-GUIDES.8.2`), verified as an ancestor of published main.
 It isolates the maintained example workspace and documents the host exclusion

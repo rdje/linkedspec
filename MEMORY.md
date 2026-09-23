@@ -1,12 +1,12 @@
 # MEMORY
 
-- activation_commit: `dc46151be48cd66f7bd56f5a52b84cef7fe26f4f` — clean local handoff base for attribution correction.
-- latest_completed_leaf: `CONSUMER-REPORT-DELIVERY.5 - distinguish integration contact from defect attribution`.
+- activation_commit: `4e2598d1eed1001be370ccaec089922c1ce622ab` — clean attribution-correction base for the report/commit audit.
+- latest_completed_leaf: `CONSUMER-REPORT-DELIVERY.6 - audit consumer fix commits and bootstrap history`.
 - active_work_unit: `RGX-CONSUMER-BUILD-REPORTS.1` — ARCHOGEN LS-004 tracking through the RGX integration contact; PGEN-attributed, no RGX code defect established.
 - next_action: Director relays the corrected docs/upstream/rgx/bootstrap-progress-status.md through the RGX integration contact; verify any upstream remedy through the public interface under RGX-CONSUMER-BUILD-REPORTS.1. LinkedSpec fixes are published at a8d34c845; unrelated .86.4.3 stays pending.
   Named-argument direction PARSER-AUTHORING-APIS.4 is approved and parked; other authoring proposals and approved formats stay parked.
 - in_flight_uncommitted: none.
-- blockers: upstream LS-004 remains open; director owns communication, affected upstream maintainer owns repair. RGX propagates failure correctly and is the integration contact. Local documentation commits follow published a8d34c845; a later push requires exact-HEAD proof.
+- blockers: September LS-004 remains open; June cold-build adoption c4926f871 and workspace repair effe3e7b2 are complete. Exact report ledger: docs/knowledge/consumer-report-fix-commits.md. Director owns relay; a later push requires exact-HEAD proof.
   Wrapper startup .7 remains open; warned-child group matched, but denied-call cause and original lost PUC stream remain unproved. Recovery/purge stay prohibited.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
   active table; the task metadata doctrine inventories all consumers, permits arbitrary frontier-row rewrites,

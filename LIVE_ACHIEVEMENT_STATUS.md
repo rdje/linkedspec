@@ -2,17 +2,19 @@
 
 ## Current Activity
 
-LinkedSpec consumer remedies are published at `a8d34c84595d46c24cd1820d5fc0414261706412`, with exact remote read-back and tested-baseline ancestry verified. The local handoff now distinguishes ARCHOGEN's PGEN attribution from RGX's integration-contact role. RGX correctly propagates failure; no RGX code defect is established. Upstream resolution and public verification remain pending; there is no external-post permission question or downstream acceptance claim.
+LinkedSpec consumer remedies are published at `a8d34c84595d46c24cd1820d5fc0414261706412`, with exact remote read-back and tested-baseline ancestry verified. The exact report/commit audit also distinguishes June cold-build adoption c4926f871, September workspace repair effe3e7b2 and still-open LS-004; see docs/knowledge/consumer-report-fix-commits.md. RGX correctly propagates failure; no RGX code defect is established. Upstream resolution and public verification remain pending; there is no external-post permission question or downstream acceptance claim.
 
 ## Latest Completed Slice
 
-- `CONSUMER-REPORT-DELIVERY.5 - distinguish integration contact from defect attribution` — corrects the earlier RGX-defect shorthand using the original report, retained public output and published integration contract. Book and local handoff now preserve reporter/component/contact distinctions.
+- `CONSUMER-REPORT-DELIVERY.6 - audit consumer fix commits and bootstrap history` — reconciles task/KM/ADR/Git evidence, names all original report remedies and verifies eight relevant commits in published ancestry. No LS-004 fix is claimed.
 
 ## Next Action
 
 - Director relays `docs/upstream/rgx/bootstrap-progress-status.md`; preserve the PGEN-reported attribution and RGX integration-contact role, then verify any upstream remedy through RGX's supported interface under `RGX-CONSUMER-BUILD-REPORTS.1`. Unrelated startup .86.4.3 remains pending. A later push needs canonical proof for its exact HEAD.
 
 ## Recent Completions
+
+- `2026-09-23` — `CONSUMER-REPORT-DELIVERY.6` records the ten-report fix ledger and the distinct closed June bootstrap build issue.
 
 - `2026-09-23` — `CONSUMER-REPORT-DELIVERY.5` corrects RGX fault attribution while retaining the original ARCHOGEN report and public evidence.
 
@@ -43,8 +45,6 @@ LinkedSpec consumer remedies are published at `a8d34c84595d46c24cd1820d5fc041426
 - `2026-09-23` — `SESSION-STARTUP-READING.47.2` preserves block source, compact-header literal values and closing-line continuation statements; full Rust component and native25 pass.
 
 - `2026-09-23` — `SESSION-STARTUP-READING.47.1` accepts whitespace-only mutation arguments; core/runtime/carrier/native proof passes; outer source fidelity is owned by immediate .47.2.
-
-- `2026-09-23` — `SESSION-STARTUP-READING.46` fixes the Unicode diagnostic panic; core/public/native proof passes and structured scalar spans remain exact.
 
 ## History
 
