@@ -11,6 +11,12 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
 
+## 2026-09-23 — CONSUMER-REPORT-DELIVERY.3 - admit and publish consumer remedies
+
+Close the local consumer-delivery batch through exact staged canonical acceptance and immediate clean publication. Focused commits01b04138a and12c6ca9ad verify current native remedies and the remaining public RGX report. The book publishes tested source baselinef60a70df3, rebuild/package instructions, explicit Document/sexpr_file migration and the unresolved upstream report.
+
+The canonical receipt and commit body must record successful full local CI before this leaf lands; post-commit promotion and remote read-back complete the publication boundary. Git is the source of truth for remote availability. Seven original requirements have local remedies; ARCHOGEN/LS-004 remains upstream-owned with posting authorization outstanding, LS-006 is withdrawn and LS-007 requires no change. No downstream acceptance or upstream fix is claimed. Resume from MEMORY.md and RGX-CONSUMER-BUILD-REPORTS.1; the separate validator backlog is preserved.
+
 ## 2026-09-23 — CONSUMER-REPORT-DELIVERY.2 - reverify the public RGX report
 
 Reproduce ARCHOGEN/LS-004 through the published RGX bootstrap command at the unchanged pin. A fresh empty local Cargo store in offline mode yields exit2, a missing-package error and the misleading seed-success line. Prepared reuse and its repeat exit0 with an explicit already-generated no-op message. Correct the diagnostic probe's unsupported fresh-completion-banner assumption; no dependency implementation is inspected or changed.

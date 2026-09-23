@@ -2,17 +2,19 @@
 
 ## Current Activity
 
-The director prioritizes blocked SEMULITH/ARCHOGEN consumers. Seven original report requirements have verified local remedies, but published main87b35665e predates the fixes. CONSUMER-REPORT-DELIVERY owns fresh native proof, the remaining public RGX report and canonical publication. No downstream acceptance is claimed; unrelated validator .86.4.3 remains pending.
+The three-slice consumer-delivery batch reaches its canonical publication boundary. Seven original SEMULITH/ARCHOGEN requirements have verified local remedies with an explicit source pin and document migration. ARCHOGEN/LS-004 still reproduces through RGX's public interface and remains upstream-owned; external posting permission is outstanding. Git remote read-back establishes availability; no downstream acceptance is claimed.
 
 ## Latest Completed Slice
 
-- `CONSUMER-REPORT-DELIVERY.2 - reverify the public RGX report` — public failure reproduces at exit2 with misleading seed progress; prepared reuse/repeat exit0. Updated report and book retain RGX repair ownership and pending external-post authorization.
+- `CONSUMER-REPORT-DELIVERY.3 - admit and publish consumer remedies` — exact staged canonical acceptance and immediate clean publication are mandatory for this boundary; the receipt, commit body and remote Git record its completion. Focused native/report proof is in .1/.2.
 
 ## Next Action
 
-- Run exact staged canonical acceptance under .3, commit and publish the verified LinkedSpec consumer remedies. Check remote main after push; keep upstream LS-004 open until an actual upstream remedy is verified.
+- Confirm published main includes the delivery commit after interruption, then resume RGX-CONSUMER-BUILD-REPORTS.1: post the prepared report only after explicit authorization and verify an upstream remedy through the public interface. Unrelated startup .86.4.3 remains pending.
 
 ## Recent Completions
+
+- `2026-09-23` — `CONSUMER-REPORT-DELIVERY.3` binds the consumer handoff to exact canonical landing and clean remote publication.
 
 - `2026-09-23` — `CONSUMER-REPORT-DELIVERY.2` reconfirms LS-004 and successful public bootstrap reuse; canonical publication follows.
 
@@ -43,8 +45,6 @@ The director prioritizes blocked SEMULITH/ARCHOGEN consumers. Seven original rep
 - `2026-09-23` — `SEXPR-DOCUMENT-INTEGRATION.2` admits all six public-loader paths, native document files and the local report scope; all backend guides are synchronized.
 
 - `2026-09-23` — `SEXPR-DOCUMENT-INTEGRATION.1` delivers native document files, typed causes, strict UTF-8 and relocatable packaging; all authored cases and legacy compatibility pass.
-
-- `2026-09-22` — `SESSION-STARTUP-READING.83.2.2` implements the versioned grammar and six-runtime recurrence; native file delivery follows.
 
 ## History
 

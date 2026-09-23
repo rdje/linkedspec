@@ -23,7 +23,7 @@ answers:
   - how does a host Cargo workspace exclude vendored LinkedSpec
   - does the workspace verifier query dependency internals
 date: 2026-09-23
-status: quoted LF, workspace guidance and complete tagged document integration verified locally; downstream acceptance and upstream bootstrap-message work are separate
+status: seven consumer remedies verified with canonical publication owned by delivery .3; check remote Git for availability; LS-004 remains open upstream
 tags: [rust, lispish, embedding, dependencies, discussion]
 evidence: "September13 native Lispish proof; September20 report intake, workspace repair and successful RGX public bootstrap/native consumer proof. Startup .83.2.1 verifies and applies the two quote-pattern flags with independent six-runtime recurrence."
 reverify: "Follow the public preparation/workspace sequence in docs/linkedspec-book/src/public-api/integration-rust.md, then its native consumer checks. Treat rgx/docs/INTEGRATION.md as the dependency authority; do not inspect implementation."
@@ -33,6 +33,21 @@ reverify: "Follow the public preparation/workspace sequence in docs/linkedspec-b
 published integration document, public APIs and contracts are the sole authority.
 RGX owns PGEN and all transitive preparation; no separate PGEN procedure or
 internal dependency knowledge belongs in LinkedSpec. Reports go to RGX.
+
+## Consumer handoff and publication authority
+
+Delivery `.1` and `.2` landed at `01b04138a` and `12c6ca9ad`. They verify the
+seven LinkedSpec-owned remedies and reproduce the remaining RGX report. Delivery
+`.3` requires exact staged canonical acceptance, then immediate clean push and
+remote read-back. Use current Git to establish publication; a completed task or
+local commit alone is not proof that a downstream fetch can reach it.
+
+The tested baseline is `f60a70df37159c0e42d66ee5f08a959821c7e08d`. Refresh the
+remote and verify that baseline is an ancestor of published main before adopting
+the book's source pin. Rebuild the consumer and packaged grammar, and choose
+Document/sexpr_file for strict tagged documents. The remaining original defect
+is ARCHOGEN/LS-004, owned by `RGX-CONSUMER-BUILD-REPORTS.1`; external posting
+permission and upstream repair are outstanding. No downstream acceptance is claimed.
 
 ## September 23 consumer delivery priority
 

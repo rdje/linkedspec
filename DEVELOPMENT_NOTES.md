@@ -11,6 +11,12 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
 
+## 2026-09-23 — CONSUMER-REPORT-DELIVERY.3 - bind consumer availability to canonical Git publication
+
+The repair baseline remains an immutable ancestor, f60a70df37159c0e42d66ee5f08a959821c7e08d, while the delivery commit carries the current report/migration record. Exact staged full CI must succeed before canonical landing; its promoted receipt governs the immediate clean push. After interruption, read current HEAD and remote main and verify ancestry instead of trusting a task completion label as publication proof.
+
+This closes the LinkedSpec delivery batch, not RGX's failure-path progress defect or downstream application adoption. The remaining original report has a concrete public reproduction and an existing repair owner. Posting still needs explicit authorization; dependency implementation, transitive build internals and submodule pins remain outside local repair authority.
+
 ## 2026-09-23 — CONSUMER-REPORT-DELIVERY.2 - public bootstrap outcomes and upstream ownership
 
 Public command status is the success authority. The retained failure fixture still emits misleading intermediate seed progress with exit2, while the prepared fixture exits0 with its already-generated message. A test that demands the cold-generation completion banner for a no-op is wrong; the corrected observation preserves both outputs and their hashes in the actionable report. No source-level diagnosis or internal build procedure is inferred.

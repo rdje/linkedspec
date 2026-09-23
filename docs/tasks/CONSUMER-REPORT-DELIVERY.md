@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `CONSUMER-REPORT-DELIVERY`
-- Status: `active`
+- Status: `done` / LinkedSpec delivery; upstream repair remains separately owned
 - Roadmap lane: `SEMULITH / ARCHOGEN consumer blockers and delivery`
 - Created: `2026-09-23`
 - Last updated: `2026-09-23`
@@ -27,8 +27,8 @@ blocked SEMULITH/ARCHOGEN consumers over separately discovered validator work.
 ## Task Tree
 
 - ID: `CONSUMER-REPORT-DELIVERY`
-  Status: `active`
-  Goal: Deliver local fixes and resolve the remaining consumer report through its proper owner.
+  Status: `done`
+  Goal: Deliver local fixes and pursue the remaining consumer report through its proper owner.
   Children: `CONSUMER-REPORT-DELIVERY.1`, `CONSUMER-REPORT-DELIVERY.2`, `CONSUMER-REPORT-DELIVERY.3`
 
 - ID: `CONSUMER-REPORT-DELIVERY.1`
@@ -54,21 +54,21 @@ blocked SEMULITH/ARCHOGEN consumers over separately discovered validator work.
   Commit: `CONSUMER-REPORT-DELIVERY.2 - reverify the public RGX report` (this slice; base01b04138a).
 
 - ID: `CONSUMER-REPORT-DELIVERY.3`
-  Status: `pending`
+  Status: `done`
   Goal: Run canonical acceptance and publish the completed LinkedSpec consumer fixes.
   Dependencies: .1 and .2 committed clean; unchanged tracked source and exact final staged candidate.
-  Planned tier: canonical.
-  Planned focused proof: Consumer handoff commands and report dispositions; clean Git and commit-message hygiene; exact canonical receipt, push and read-back of remote main.
-  Planned canonical boundary: Final three-slice consumer-delivery batch and pre-push boundary.
+  Verification tier: `canonical`
+  Focused checks: Consumer handoff commands and report dispositions; clean Git and commit-message hygiene; exact canonical receipt, push and read-back of remote main.
+  Canonical trigger: Final three-slice consumer-delivery batch and pre-push boundary.
   Acceptance: Publish a reproducible fixed revision and clear migration instructions; distinguish local public-integration proof from downstream adoption, and retain LS-004 under RGX ownership until a verified upstream remedy exists.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: .1 and .2 are committed with all nine doctrines passing. This admission requires successful tools/run_ci_local.sh on the exact staged candidate; the canonical receipt and commit body record the completed gate. Immediate clean push must reuse the promoted receipt, and git ls-remote must match the new HEAD. Git remains publication authority; do not infer remote availability from this task status alone. The public book supplies baseline f60a70df3 and explicit document migration. LS-004 is still open with no external posting authorization or verified upstream remedy.
+  Commit: `CONSUMER-REPORT-DELIVERY.3 - admit and publish consumer remedies` (this slice; base12c6ca9ad).
 
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `CONSUMER-REPORT-DELIVERY.3` | `pending` | Run exact canonical acceptance and publish the verified LinkedSpec remedies. |
+| 1 | `CONSUMER-REPORT-DELIVERY.3` | `done` | Canonical landing and immediate push form the delivery boundary; RGX-CONSUMER-BUILD-REPORTS.1 retains the open upstream repair. |
 
 ## Decisions and Boundaries
 
@@ -88,3 +88,16 @@ blocked SEMULITH/ARCHOGEN consumers over separately discovered validator work.
 - `docs/tasks/SEXPR-DOCUMENT-INTEGRATION.md`
 - `docs/tasks/BACKEND-INTEGRATION-GUIDES.md` (.8.1-.8.5)
 - `docs/tasks/RGX-CONSUMER-BUILD-REPORTS.md`
+
+## Publication and Resume Contract
+
+- `.3` is the final canonical commit of this three-slice delivery batch. Finish
+  its immediate clean push and read back `git ls-remote origin refs/heads/main`
+  before reporting consumer availability. Re-run that read after interruption;
+  the latest commit is always derived from Git, never its own embedded hash.
+- `git merge-base --is-ancestor f60a70df37159c0e42d66ee5f08a959821c7e08d origin/main`
+  checks availability of the tested source baseline after refreshing the remote.
+- The seven local remedies do not close ARCHOGEN/LS-004. The actionable report is
+  `docs/upstream/rgx/bootstrap-progress-status.md`; explicit permission to post is
+  still outstanding. Upstream diagnosis/repair and public post-fix verification
+  stay under `RGX-CONSUMER-BUILD-REPORTS.1`. No downstream application was changed.

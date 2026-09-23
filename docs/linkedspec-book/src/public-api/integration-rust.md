@@ -743,6 +743,9 @@ The reports require different consumer changes:
 | ARCHOGEN LS-005 and SEMULITH LS-003 items 2–3 | Follow the linked preparation steps before either text or file use; optional test repositories need not be initialized for native use. |
 | ARCHOGEN LS-004 | The misleading intermediate bootstrap progress message remains an upstream RGX report. Check the command's final exit status; a progress line is not proof of successful preparation. |
 
+The [prepared RGX report](https://github.com/rdje/linkedspec/blob/main/docs/upstream/rgx/bootstrap-progress-status.md)
+records the remaining bootstrap-message reproduction and its unresolved status.
+
 ARCHOGEN LS-006 was withdrawn; LS-007 requests no behavior change. The separate
 document grammar deliberately preserves the historical Lispish contract. Merely
 updating the pin while continuing to use `Lispish.spec` will not enable complete
