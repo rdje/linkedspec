@@ -11,6 +11,12 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
 
+## 2026-09-24 — SESSION-STARTUP-READING.86.4.4.1 - distinguish regex-body punctuation from numeric slash boundaries
+
+The next public matrix extends the working /(x) + LF + y/ shape to /(x).*y/ and /(x),y/. All four direct-return/continuation forms fail validate_dsl_syntax; nearby hash/space/ungrouped-dot controls and string/binding twins pass. MethodExpr::_looks_like_slash_symbol_call_at returns numeric-call true after the first balanced group when the next character is dot/comma. Validation, StatementSplit, CSV and AST regex recognition consume that shared decision. The dot direct return independently executes to1; comma becomes three arguments and lowers to the unsupported-matches marker/undef; both continuations remain joined and fail independent compilation.
+
+The repair must address that shared classification rather than only masking validation. Preserve accepted numeric behavior and the previously rejected assignment-precedence boundary; .86.4.8 now blocks final public recomposition .86.4.4.2. The permanent22-case diagnostic and new fact card own the finding and exact working string alternatives. Production/tests and all three complete book examples remain identical to verified9e2c26b1c. The tree stays bounded by removing80 blank separators from its mutable ledger with an exact nonblank/order comparison; no history content or cap changes.
+
 ## 2026-09-23 — SESSION-STARTUP-READING.86.4.7 - extend the structural view to complete quoted subjects
 
 Skipping a complete quoted token in the whole-source scanner was insufficient: the subsequent line scanner still saw its bytes, restarted quote state at each physical line, and swallowed real open parentheses after a closing quote. Masking complete multiline quoted tokens within an open expression scope gives all three structural passes a consistent view. Preserve each CR/LF and character position, compile the original text, and leave unclosed tokens and bare rule-level strings unmasked so existing rejection remains available.

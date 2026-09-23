@@ -10,7 +10,7 @@ answers:
   - why does Perl matches fail inside a callable codeblock
   - which task owns function position filter_match on Perl
 date: 2026-09-23
-status: current audit; helper validation/splitting and quoted subjects repaired under .86.4.3/.86.4.6/.86.4.7; independent helpers remain open
+status: current audit; measured .86.4.3/.86.4.6/.86.4.7 repairs verified; grouped operands .86.4.8 and independent helpers remain open
 tags: [regex, actionir, runtime-values, perl, rust, dart, julia, lua]
 evidence: "SESSION-STARTUP-READING.86.4.2.4 reads the neutral binding contract, relevant mdBook sections and first-party AST/evaluator owners. The tracked diagnostic measures thirteen action cases plus an AST probe on accepted production at 7c318569. Source inspection of other backends is not a fresh five-backend execution claim."
 reverify: "bash tools/project_data_run.sh env PERL5LIB= perl -Iperl docs/checkpoints/SESSION-STARTUP-READING.86.4.2.4.pl; inspect values, generated source and both error channels, not process exit alone."
@@ -22,6 +22,8 @@ Current outcome: [[perl-multiline-helper-pattern-validation]] records the
 .86.4.3 validator and .86.4.6 statement-splitting repairs with bounded public
 proof. The observations below retain the audit baseline; .86.4.7 repairs the
 separate physical multiline quoted-subject validator defect.
+Public recomposition now requires grouped-pattern punctuation repair `.86.4.8`;
+see [[perl-grouped-regex-operand-boundaries]]. The runtime-kind contract remains unchanged.
 
 `capability_conformance/uniform_binding_contract.json` defines one binding holding
 scalar, array, harray or codeblock. The book's value reference and formal grammar

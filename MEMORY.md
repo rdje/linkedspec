@@ -1,9 +1,9 @@
 # MEMORY
 
-- activation_commit: `36df52e46d113812500df4924c457a21f9d5e9b7` — clean base for physical quoted-subject validation.
-- latest_completed_leaf: `SESSION-STARTUP-READING.86.4.7 - preserve multiline quoted subject validation`.
-- active_work_unit: `SESSION-STARTUP-READING.86.4.4` — public multiline helper recomposition (pending).
-- next_action: Recompose .86.4.4 through public Get, SpecLoader and independent generated parsers, with permanent execution of the three book examples. Quoted validation .86.4.7 passes focused198, exact book16 and complete Phase0 1033/1033; .86.5 EOF then .86.3 canonical follow.
+- activation_commit: `9e2c26b1c733393f41cb7f8a6e285ef742ec63d0` — clean base for public multiline helper recomposition.
+- latest_completed_leaf: `SESSION-STARTUP-READING.86.4.4.1 - own grouped regex operand repair`.
+- active_work_unit: `SESSION-STARTUP-READING.86.4.8` — grouped regex operand delimiter repair (pending).
+- next_action: Repair .86.4.8 using docs/checkpoints/SESSION-STARTUP-READING.86.4.4.1.pl and its Knowledge card: grouped dot/comma operands are misclassified as numeric calls. Preserve successful numeric interpretations; then .86.4.4.2 recomposition, .86.5 EOF and .86.3 canonical.
 - in_flight_uncommitted: none.
 - blockers: LS-004 remains upstream-owned; director relays docs/upstream/rgx/bootstrap-progress-status.md. No RGX code defect established. Named-argument and format proposals remain parked.
   Wrapper startup .7 remains open; recovery/purge stay prohibited. No interrupted Phase0 run counts as proof.
@@ -56,4 +56,4 @@
   Changes segment4971 preserves 168 lines /27426 bytes from clean 7c318569; old archive rows/bytes remain exact.
 - dependency_boundary: September20: LinkedSpec integrates only with RGX via its published integration document/APIs/contracts. RGX owns PGEN; no separate PGEN procedure, internal inspection/analysis, patches or pin changes.
   Normal documented builds remain authorized; retain caches. Startup .80.1-.4 may observe public behavior or track upstream repairs, not investigate dependency internals.
-- latest_bootstrap_read: ADR0123 targets 2–5 minute startup plus thorough task-specific reading. Separate audit remains 89/143 and .1.90. Document integration and .46/.47/.49/.86.1/.86.2 are verified; Perl .86.4.2.4 corrects the regex-type premise; .86.4.3 owns supported helper validation (verified); .86.4.6 verifies helper splitting; .86.4.7 verifies quoted subjects; .86.4.4 recomposes publicly and .87 owns two helper gaps. No downstream application acceptance claim.
+- latest_bootstrap_read: ADR0123 targets 2–5 minute startup plus thorough task-specific reading. Separate audit remains 89/143 and .1.90. Document integration and .46/.47/.49/.86.1/.86.2 are verified; Perl .86.4.2.4 corrects the regex-type premise; .86.4.3 owns supported helper validation (verified); .86.4.6 verifies helper splitting; .86.4.7 verifies quoted subjects; .86.4.4.1 owns required grouped-operand repair .86.4.8 before .86.4.4.2; .87 owns two helper gaps. No downstream application acceptance claim.

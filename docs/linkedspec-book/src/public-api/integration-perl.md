@@ -283,6 +283,12 @@ Done:
 Rule-like text inside the quoted value remains string content. A real malformed
 rule after the action still reports its original source line.
 
+One pattern-boundary gap remains: grouped bare operands such as `/(x).*y/` and
+`/(x),y/` are currently rejected during validation. Equivalent string patterns
+work, including `pattern = "(x).*y"; return(matches("xy", pattern))`.
+`SESSION-STARTUP-READING.86.4.8` owns the repair before public closeout of this
+group. The complete examples above use verified pattern shapes.
+
 An escape-lowering limitation remains: `"\n"` currently stays
 backslash-plus-`n` through ordinary assignment/return lowering,
 while the inline helper example above decodes it as LF

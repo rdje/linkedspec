@@ -11,6 +11,12 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
 
+## 2026-09-24 — SESSION-STARTUP-READING.86.4.4.1 - own grouped regex operand failures before public closeout
+
+Public recomposition at verified9e2c26b1c finds four bare grouped-dot/comma failures among22 fixed public/splitter/CSV/lowered probes. The shared numeric slash-call discriminator mistakes regex-body punctuation for an expression boundary; comma becomes a third helper argument and continuation statements remain joined. Eighteen nearby/string/binding controls work. Add the permanent diagnostic and causal Knowledge record; required .86.4.8 repair precedes .86.4.4.2 public closeout.
+
+Production/tests remain unchanged, both retained division controls return7 and the original helper audit retains only its known helper gaps. All three complete book sources match verified9e2c26b1c byte-for-byte; their16 public/generated assertions remain applicable. The rendered book now records the measured limitation and working string-pattern alternative. Remove80 blank separators from the mutable task ledger, proving every prior nonblank line and its order unchanged, to keep the bounded tree within budget. Focused metadata/doc checks and normal hooks govern landing; no new full Phase0, canonical or broad helper acceptance is claimed.
+
 ## 2026-09-23 — SESSION-STARTUP-READING.86.4.7 - preserve physical multiline quoted subjects during validation
 
 Protect complete multiline quoted tokens inside expression scopes in the existing structural validation view. Keep original compilation bytes and diagnostic offsets; leave bare rule-level strings and unterminated tokens visible. Both quote styles preserve LF/CRLF through ordinary literals, inline helper subjects, substitution and lifecycle assignments.

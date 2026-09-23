@@ -12,7 +12,7 @@ answers:
   - can Perl action strings contain physical newlines
   - how does validation distinguish quoted rule labels from real rules
 date: 2026-09-23
-status: helper validation, statement splitting and quoted-subject validation repaired
+status: measured helper and quoted-subject repairs verified; grouped punctuation remains .86.4.8
 tags: [perl, validation, regex, source, diagnostics]
 evidence: "SESSION-STARTUP-READING.86.4.3 passes six regression groups, focused173 and complete Phase0 1033/1033. .86.4.6 expands the consumer to seven groups: isolated committed d2af200325 fails groups5/7; candidate focused action suite passes52 top-level tests across four files. Both retained division controls independently/publicly return7; complete Phase0 passes1033/1033 in1545 seconds with the seven-group consumer. Both complete mdBook examples pass11 directly extracted live/generated assertions and rendering succeeds. .86.4.7 passes the expanded nine-group consumer, focused198, exact book16 and Phase0 1033/1033 in1276 seconds. No cross-backend or whole helper-family closeout follows."
 reverify: "bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/multiline_helper_pattern_validation.t t/phase0_validation_fuzz.t t/inter_match_gap_capture_perl_contract.t t/duplicate_regex_slot_identity_perl_contract.t t/sparse_and_action_slots_perl_regression.t t/actionir_ast_parser.t t/uniform_binding_contract.t t/callable_codeblock_literal_contract.t"
@@ -100,3 +100,9 @@ blocks still reject. Eight focused files pass198 tests; all three complete book 
 Startup rechecked the three director-supplied policy donor files read-only.
 Their SHA-256 values match the September11 record in the startup task; no donor
 update or new policy adoption was inferred. `.5/.29` retain adoption ownership.
+
+Public recomposition `.86.4.4.1` subsequently finds a shared discriminator gap
+for grouped operands followed by dot/comma. [[perl-grouped-regex-operand-boundaries]]
+records four public failures and eighteen successful nearby/string/binding
+controls. `.86.4.8` is required before `.86.4.4.2` closes the measured scope;
+the verified multiline examples above do not imply whole helper-family acceptance.

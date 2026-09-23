@@ -2,17 +2,19 @@
 
 ## Current Activity
 
-Perl helper validation, statement splitting and physical quoted-subject validation are verified under .86.4.3/.86.4.6/.86.4.7. Public recomposition .86.4.4 is next. Escape-route fidelity retains SUPPORTING-SOURCE-READING.2.4; LS-004 remains director-relayed and upstream-owned.
+Perl .86.4.3/.86.4.6/.86.4.7 repairs remain verified. Public recomposition .86.4.4.1 finds a shared grouped-pattern dot/comma classification defect; .86.4.8 is the required next repair before .86.4.4.2. Escape fidelity remains SUPPORTING-SOURCE-READING.2.4, helper gaps remain .87 and LS-004 remains director-relayed/upstream-owned.
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.86.4.7 - preserve multiline quoted subject validation` — focused198, all three exact Markdown examples (16 live/generated assertions), rendered book and complete Phase0 1033/1033 in1276 seconds. Baseline replay fails groups8/9; source bytes and separate escape behavior remain unchanged.
+- `SESSION-STARTUP-READING.86.4.4.1 - own grouped regex operand repair` — tracked22-case public/splitter/CSV/lowered diagnostic, four exact failures/eighteen controls, unchanged production/tests and verified book-source identity, rendered book and required repair dependency. No runtime repair or new full Phase0 claimed.
 
 ## Next Action
 
-- Recompose .86.4.4 through public loaders and independent generated parsers, with permanent direct book-example proof. Then repair .86.5 and run .86.3 canonical closeout. Commit each verified slice; final push requires exact-HEAD canonical proof.
+- Repair .86.4.8 through the shared discriminator consumers while preserving accepted numeric interpretations. Then .86.4.4.2 public/loader/generated/book recurrence, .86.5 EOF and .86.3 canonical closeout. Commit each verified slice; final push requires exact-HEAD canonical proof.
 
 ## Recent Completions
+
+- `2026-09-24` — `SESSION-STARTUP-READING.86.4.4.1` owns four grouped-operand failures and eighteen controls; .86.4.8 is required before public closeout.
 
 - `2026-09-23` — `SESSION-STARTUP-READING.86.4.7` repairs physical quoted-subject validation; focused198, exact book16 and Phase0 1033/1033 pass.
 
@@ -43,8 +45,6 @@ Perl helper validation, statement splitting and physical quoted-subject validati
 - `2026-09-23` — `SESSION-STARTUP-READING.86.2` repairs division newlines and retains regex interpretations; core254/runtime404/native56 pass; Perl .86.4/.86.5 follow.
 
 - `2026-09-23` — `SESSION-STARTUP-READING.86.1` preserves eleven non-slash symbol callees and fixes subtraction returning null; core247/runtime401/native44 pass; .86.2 follows.
-
-- `2026-09-23` — `SESSION-STARTUP-READING.49` preserves regex suffix adjacency and following statements; core243/runtime397/native22 pass; separately owned .86 follows.
 
 ## History
 

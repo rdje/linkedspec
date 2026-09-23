@@ -4599,7 +4599,7 @@ remain. Reading completion and runtime signoff remain distinct.
   Status: `active`
   Goal: Preserve multiline regex pattern operands in documented Perl action helpers through whole-spec validation.
   Dependencies: Land Rust .86.2 first; captured public diagnostics in .linkedspec-data/scratch/division-boundary86-2/perl-context.jsonl and reproducible sources in docs/knowledge/rust-symbol-call-newline-boundary.md; coordinate .54.1 without conflating regex-brace bootstrap loss.
-  Children: `SESSION-STARTUP-READING.86.4.1`, `SESSION-STARTUP-READING.86.4.2`, `SESSION-STARTUP-READING.86.4.3`, `SESSION-STARTUP-READING.86.4.4`, `SESSION-STARTUP-READING.86.4.5`, `SESSION-STARTUP-READING.86.4.6`, `SESSION-STARTUP-READING.86.4.7`
+  Children: `SESSION-STARTUP-READING.86.4.1`, `SESSION-STARTUP-READING.86.4.2`, `SESSION-STARTUP-READING.86.4.3`, `SESSION-STARTUP-READING.86.4.4`, `SESSION-STARTUP-READING.86.4.5`, `SESSION-STARTUP-READING.86.4.6`, `SESSION-STARTUP-READING.86.4.7`, `SESSION-STARTUP-READING.86.4.8`
   Planned tier: focused unless a shared language-contract decision is needed.
   Planned focused proof: Public Get with runtime_ctx_ref, exact lowering and generated source; multiline regex and numeric-division lookalikes, LF/CRLF, following assignments, whole-spec validation and invalid-pattern controls; phase0 plus directly affected scanner tests.
   Planned canonical boundary: Parent .86.3 after .86.5; any contract decision precedes implementation.
@@ -4688,13 +4688,40 @@ remain. Reading completion and runtime signoff remain distinct.
   - [x] **NO REGRESSION** — Complete Phase0 reaches1..1033, all PASS; focused173 and Perl syntax pass. No new failing names; interrupted runs do not count. Normal staged doctrines are required before commit.
   - [x] **LOCKSTEP** — Book renders; Knowledge, task/roadmap/live pointers and bounded histories record the verified validator and immediate .86.4.6 lowering repair. No whole helper-family or cross-backend closeout.
 - ID: `SESSION-STARTUP-READING.86.4.4`
-  Status: `pending`
+  Status: `active`
   Goal: Recompose the Perl multiline regex repair through public live and standalone generated parsers and close .86.4.
-  Dependencies: Verified .86.4.2/.86.4.3/.86.4.6/.86.4.7.
-  Planned tier: focused; canonical parent closure remains .86.3 after .86.5.
+  Children: `.86.4.4.1`, `.86.4.4.2`
+  Dependencies: Verified .86.4.2/.86.4.3/.86.4.6/.86.4.7; .86.4.4.2 also requires .86.4.8.
+  Planned tier: focused.
   Planned focused proof: Full captured public matrix plus exact pattern/runtime results, public loader, descriptors, independent emitted execution, permanent direct execution of integration-book examples, directly affected Perl gates and documentation/doctrine checks.
   Planned canonical boundary: Parent .86.3.
   Acceptance: Close only the measured Perl multiline scope after all required child repairs pass; preserve the invalid regex negative control and open EOF/brace owners with reproducible evidence.
+  Verification: `pending`
+  Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.86.4.4.1`
+  Status: `done`
+  Goal: Intake grouped-pattern punctuation failures exposed by public recomposition and own the required repair.
+  Verification tier: `focused`
+  Focused checks: Tracked 22-case public/splitter/lowered diagnostic, discriminator result, string-pattern twins and retained helper/division audits; unchanged source/test and book-example identities, rendered book, Knowledge/memory/history/doctrine checks.
+  Canonical trigger: Parent .86.3 after the repair and public recomposition; no runtime or shared-contract change in this intake.
+  Acceptance: Preserve exact reproducer and root cause; make .86.4.8 mandatory before .86.4.4.2, qualify public limitations and retain all numeric compatibility boundaries. No helper-family closeout.
+  Verification: Public Get rejects four bare grouped-dot/comma cases at validate_dsl_syntax while eighteen nearby/string/binding controls return exact values. The shared MethodExpr discriminator returns numeric-call true at dot/comma after the first balanced group; validation, statement splitting, CSV and AST regex recognition consume that predicate. Independent checking of the tracked diagnostic verifies all22 unique cases, the four failures/eighteen exact positives, and CSV arity3 only for the bare comma cases. Original helper audit retains its known .87 failures and both division controls return7. Source/tests match9e2c26b1c; all three complete book sources remain byte-identical to its verified16 assertions. Book renders; normal Knowledge/memory/history/doctrine checks govern landing.
+  Commit: This commit; subject `SESSION-STARTUP-READING.86.4.4.1 - own grouped regex operand repair`.
+  - [x] **REPRODUCE / ISSUE** — Tracked22-case public/lowered/splitter/CSV probe establishes four bare grouped-dot/comma failures and eighteen exact controls.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — Shared MethodExpr numeric-call predicate accepts dot/comma after the first balanced group; comma becomes argument3 and continuation statements remain joined.
+  - [x] **FIX** — Required implementation owner .86.4.8 precedes .86.4.4.2; this intake does not claim a production repair.
+  - [x] **ADDRESSED (verified)** — Reproducer, causal record, working string-pattern alternatives and immediate repair dependency are durable.
+  - [x] **NO REGRESSION** — Production/tests match verified9e2c26b1c; helper/division public controls and exact book-source identity are retained. No fresh full Phase0 or canonical claim.
+  - [x] **LOCKSTEP** — Rendered book states the measured limitation and string alternative; all current pointers select .86.4.8.
+- ID: `SESSION-STARTUP-READING.86.4.4.2`
+  Status: `pending`
+  Goal: Complete public multiline helper recomposition and close .86.4.4/.86.4 after all required repairs.
+  Dependencies: .86.4.4.1 and verified .86.4.8, plus .86.4.3/.86.4.6/.86.4.7.
+  Planned tier: focused.
+  Planned focused proof: Original helper/division/invalid-regex audit plus grouped punctuation; public SpecLoader and independent generated execution; permanent direct execution of all three book examples; relevant Perl contracts and all documentation/doctrines.
+  Planned canonical boundary: Parent .86.3 after .86.5.
+  Acceptance: Preserve exact values, source/descriptor/error channels and numeric compatibility; close only the measured helper scope, retaining .87/.2.4/EOF owners and no regex runtime type.
   Verification: `pending`
   Commit: `pending`
 
@@ -4735,6 +4762,18 @@ remain. Reading completion and runtime signoff remain distinct.
   - [x] **ADDRESSED (verified)** — Both quote styles, LF/CRLF, leading/trailing newlines, return/helper/substitution/lifecycle values and four independently emitted cases pass.
   - [x] **NO REGRESSION** — Focused198 and complete Phase0 1033/1033 pass; real malformed source and line7 attribution remain; four escape-route diagnostic records stay byte-identical.
   - [x] **LOCKSTEP** — All three complete mdBook examples pass16 public/generated assertions, book renders, and Knowledge/task/roadmap/live records select .86.4.4.
+
+- ID: `SESSION-STARTUP-READING.86.4.8`
+  Status: `pending`
+  Goal: Reconcile grouped regex-operand punctuation with the shared numeric slash-call discriminator.
+  Intake owner: .86.4.4.1 public recomposition at clean9e2c26b1c; tracked punctuation diagnostic.
+  Dependencies: Land .86.4.4.1; no assignment-position regex precedence or runtime-type expansion.
+  Planned tier: focused unless a genuine language-contract ambiguity requires director resolution.
+  Planned focused proof: Group followed by dot/comma and nearby punctuation, literal/string/binding twins, LF/CRLF, return/continuation/nested/generated routes; successful numeric calls with argument boundaries, comments/quotes, receiver continuations and malformed controls; focused action/validation contracts and full Phase0.
+  Planned canonical boundary: Parent .86.3; .86.4.4.2 requires this repair.
+  Acceptance: Supported patterns such as /(x).*y/ and /(x),y/ retain one operand and execute exactly. Preserve every accepted numeric interpretation and established malformed diagnostics; do not replace numeric-first decisions with an unqualified full-source regex preference.
+  Verification: MethodExpr::_looks_like_slash_symbol_call_at returns true for dot/comma after the first balanced parenthesis, so complete regex operands lose protection in multiple consumers. Public validation fails all four captured bare cases. Dot direct return lowers/executes to1; comma direct return lowers to undef; continuation fragments remain joined and fail independent compilation. Eighteen string/binding and nearby controls pass. Use the tracked diagnostic to drive a bounded repair, not just a validator mask.
+  Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.86.5`
   Status: `pending`
@@ -4779,42 +4818,35 @@ audit range, not the default repair frontier.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.86.4.4` | `pending` | Recompose verified helper validation/splitting/quoted-subject repairs through public loaders, independent generated parsers and permanent book-example proof. |
+| 1 | `SESSION-STARTUP-READING.86.4.8` | `pending` | Repair grouped regex-operand dot/comma classification from the tracked22-case diagnostic before .86.4.4.2 public recomposition. |
 
 The audit withdraws the unsupported precedence question. Helper validation `.86.4.3` and
-statement splitting `.86.4.6` plus quoted-subject validation `.86.4.7` are verified. Next is public recomposition `.86.4.4`, then EOF `.86.5` and canonical `.86.3`.
+statement splitting `.86.4.6` plus quoted-subject validation `.86.4.7` are verified. Public recomposition `.86.4.4.1` exposes required punctuation repair `.86.4.8`; `.86.4.4.2` then closes the measured scope before EOF `.86.5` and canonical `.86.3`.
 Independent helper gaps are owned by `.87.1/.87.2`; no regex-type feature is admitted.
 
 ## Reading Ledger
-
 All line ranges below refer to the **reading baseline**, not later shifted working-file line numbers. Files
 modified by this checkpoint must also be reviewed in the final diff. Unlisted source files and unlisted ranges
 remain unread; running a command that prints a file does not establish comprehension if its output was truncated.
-
 | Required surface | Fully read and understood? | Completed at checkpoint | Remaining |
 | --- | --- | --- | --- |
 | Roadmap | **Yes** | `ROADMAP.md` 1–2564; `ROADMAP_V2.md` 1–1585. `.2` read 1341–1380, 1381–1420, 1421–1470, 1471–1530, and 1531–1585 without truncation and reviewed both current roadmap diffs. | Review later changes as they land; codebase/book alignment remains gated on their reading. |
 | Codebase | **No** | All 89 baseline Perl entries physically read; `.31` preserves forward coverage. Perl reading is complete; Rust reading is complete: all 412 baseline paths / 3,533,382 bytes; `.3.3.67` closes exact coverage, current deltas and durable repair/Knowledge reconciliation. Dart closes under ADR0114; Julia closes 95 entries/75984 lines/2693170 bytes under ADR0117 with 52 committed reading groups and independent audit. | All other first-party inputs not explicitly listed as read; final cross-lane delta reconciliation. |
 | mdBook | **Yes — physical source reading** | All 50 tracked book files / 1,956,582 bytes, including configuration and SUMMARY, are fully read at baseline; .3.2.42 preserves coverage, and c8759242 reviews/renders the approved parked-coverage delta. | Formal roadmap/codebase alignment, current deltas, and rendered review remain .4-owned; .41 owns additional verified repairs. |
-
 The exact tracked file population and object identities are recoverable without an independently maintained
 manifest or an absolute checkout path:
-
 ```bash
 git ls-tree -r --full-tree baeb984e36a94a15951cd23d4c52def5064cdaca
 git ls-tree -r --name-only baeb984e36a94a15951cd23d4c52def5064cdaca -- docs/linkedspec-book/src
 git show baeb984e36a94a15951cd23d4c52def5064cdaca:ROADMAP_V2.md | sed -n '1341,1400p'
 ```
-
 The recursive tree command does not descend into the `rgx` gitlink. During `.3`, classify the whole first-party
 inventory, including files outside the obvious language directories; a language-directory census alone is not
 complete codebase coverage. Generated source and fixtures are not silently excluded by a file-extension filter.
 After a later commit, use `git diff --name-only` against this baseline to identify changed reading inputs; review
 the changed portions as well as remaining baseline text. Immutable historical task parts use their indexed
 retrieval contract rather than an indiscriminate chronology scan.
-
 ### Bootstrap and focused supporting material already read
-
 - `README.md`, `MEMORY_ARCHITECTURE.md`, `MEMORY.md`, `SESSION_BOOTSTRAP.md`, `COMMIT.md`, and local `README_POLICY.md`.
 - The supplied `AGENTS.md` instructions and `docs/TASK_TREE_README.md` in full; task-index purpose, active-frontier
   context, and operating rules at `docs/TASK_TREE.md` 3269–3525. The large embedded historical marker section has
@@ -4842,13 +4874,10 @@ retrieval contract rather than an indiscriminate chronology scan.
 - `.3.1` completed `TOOLBOX.md` in full through baseline EOF 1864, and read `unicode_case/README.md` in full.
   Four gzip payloads were decompressed only for counts; their contents remain unread. Reviewed the existing
   `linkedspec-pm-is-thin-facade` fact card to select the first code-reading boundary without re-deriving its facts.
-
 ### Complete baseline classification at `.3.1`
-
 Baseline is `baeb984e36a94a15951cd23d4c52def5064cdaca`. `git ls-tree -r --full-tree` plus
 `git cat-file --batch` measured the exact stored objects, not changing worktree bytes. Apply these ordered
 path rules; the final complement explicitly owns every otherwise unmatched path.
-
 | Class / path rule | Entries | Stored blob bytes | Reading owner |
 | --- | ---: | ---: | --- |
 | Exact `rgx` gitlink | 1 | 0 | Director-excluded, including nested dependencies |
@@ -4864,59 +4893,47 @@ path rules; the final complement explicitly owns every otherwise unmatched path.
 | Prefix `capability_conformance/`, `cli_conformance/`, `t/`, `tests/`, or `unicode_case/` | 160 | 5,422,313 | `.3.8` |
 | Every remaining baseline path | 143 | 2,381,957 | `.3.9`: `.claude`, `.github`, `.githooks`, five root dotfiles, `bin`, `doctrine`, `knowledge-map`, `scripts`, `tools` |
 | **Total** | **2,547** | **52,084,744** | Every entry accounted for once |
-
 The eight source/tool/fixture lanes contain 1,271 entries / 22,332,523 stored bytes. Of these, 1,267 are text
 with 565,122 newline delimiters. Four pinned Unicode gzip inputs are the only NUL-containing blobs; they add
 54,500 decoded newline delimiters / 3,352,036 decoded bytes and remain explicitly in `.3.8`. This count is an
 inventory, not evidence that any of those lines was understood. Generated Unicode modules, generated MCP
 bindings, corpus JSON, and large phase0/runtime files are not silently excluded.
-
 Each future reading leaf names exact paths and inclusive ranges **before** execution, totals at most 1,500
 decoded text lines and 65,536 bytes, and uses smaller output chunks to avoid truncation. Oversized files split
 at coherent declaration/test boundaries within those limits; a single over-limit line uses explicit byte
 ranges. Record all unread suffixes before advancing. Do not duplicate the full immutable inventory into a new
 manifest; recover membership from baseline plus these disjoint selectors and recover identities from Git.
-
 `.3.2.1` is exactly 1,430 lines / 56,706 bytes across five files. Its `LinkedSpec.pm` reread checks owner
 relationships despite prior facade coverage. Other inputs remain unread unless listed above. At clean
 `03d692c13bbc49590f318dd4c8536008d9f979f5`, the ten changed/new paths since baseline are continuity/Knowledge/task
 records; all source/test/spec/tool inputs and all book files remain unchanged. Every checkpoint's own final diff
 is reviewed separately.
-
 ### Shared Perl-reading acceptance and decomposition at `.3.2.2`
-
 The 52 pending siblings `.3.2.3`–`.3.2.54` own all 84 remaining baseline Perl paths / 2,076,984 bytes exactly
 once. Each Scope uses inclusive, one-based baseline line or byte ranges; byte offsets start at the beginning
 of the named blob. The five `.3.2.1` paths are excluded by exact name. The first group follows the facade's
 resolution/loading dependencies. Large modules split at declarations or blank statement boundaries where
 possible; generated table rows remain complete records. Every suffix is owned, and every leaf fits the
 1,500-line / 65,536-byte limit. Reading uses smaller untruncated output chunks within that scope.
-
 `MCPContract.pm` line 14 is an 82,883-byte generated payload: `.3.2.35`–`.3.2.37` own its three byte fragments.
 The preceding 13 lines and following seven lines remain explicitly owned. These byte fragments intersect the
 same logical line, so summing per-leaf line/fragments is not a distinct-line total. No generated JSON is omitted.
-
 For every reading child: activate its existing task owner first; retrieve the relevant Knowledge owner before
 interpreting code; read every scoped byte without truncation; reconcile comprehension and record exact
 coverage; diagnose surprising behavior with Toolbox probes and own any repair; review baseline/current deltas;
 record focused changed-surface checks and required memory/doctrine/history proof; update continuity and commit
 before advancing. Reading alone is not runtime signoff. Public/book changes remain conditional on material
 public findings and the startup authorization boundary. No code or book reading credit comes from this plan.
-
 Independent verification converts all declared line ranges to baseline byte intervals and requires contiguous,
 non-overlapping coverage from byte 1 through EOF for all 84 paths, no extra path, and each declared leaf budget.
 This plan adds no second manifest: the owned task Scope fields are the reading plan; Git remains the file/object
 inventory. Final `.3.11` still reconciles all first-party lanes and current deltas.
-
-
 ### Shared native-reading acceptance and Rust decomposition at `.3.2.55`
-
 The 66 reading children `.3.3.1`–`.3.3.66` own all 412 baseline Rust paths / 3,533,382 bytes once;
 `.3.3.67` owns parent closeout. Inclusive one-based lines and bytes use the same baseline as Perl.
 Both empty corpus files have explicit zero-byte owners. The oversized MCP binding line is split across
 `.3.3.24`–`.3.3.25`; its six-line header remains with the first payload window. Generated Unicode rows,
 embedded contract JSON, full corpus grammars and expected data, manifests, lockfile, and backend README stay in scope.
-
 Each child fits 1,500 lines/fragments and 65,536 bytes. Boundary inspection distinguishes declaration/test
 boundaries from continuations inside larger methods, fluent expressions, embedded grammars, or generated data.
 A window is not a claim that an enclosing method is complete: reconcile its preceding context and explicitly
@@ -4925,14 +4942,11 @@ Read each window in smaller untruncated chunks. Retrieve Knowledge first, diagno
 create repair ownership before changes, review current deltas, record concise comprehension and exact coverage,
 run focused direct-dependent and continuity proof, and commit before the next implementation/checkpoint.
 Public/runtime/policy repairs remain gated on `.3`/`.4`/`.5`; full codebase reading remains No.
-
 The independent audit converts the task's Scope records to byte intervals and requires exact contiguous,
 disjoint coverage through EOF plus explicit empty-file ownership, per-child budgets, and current Git identity.
 No separate manifest is created. Recheck collection pressure before later evidence or decomposition grows it;
 the 8,000-line general member limit and 80,000-line aggregate remain unchanged.
-
 ### Facade invocation reading at `.3.2.1`
-
 - Completed `perl/LinkedSpec.pm` 1–296, `perl/LinkedSpec/OwnerDispatch.pm` 1–220,
   `perl/LinkedSpec/Runtime.pm` 1–154, `perl/LinkedSpec/ParserFactory.pm` 1–368, and
   `perl/LinkedSpec/RuntimeContext.pm` 1–392, each through EOF without truncation. All five remain byte-identical
@@ -4949,9 +4963,7 @@ the 8,000-line general member limit and 80,000-line aggregate remain unchanged.
   those remaining owners stay in subsequent bounded leaves.
 - Source identity and both managed syntax checks pass. No new causal fact beyond the retrieved owners, no
   production/public change, and no fresh behavioral-conformance claim results from this reading checkpoint.
-
 ### Resolution and bootstrap adapter reading at `.3.2.3`
-
 - Read `Resolver.pm` 1–223, `SpecLoader.pm` 1–352, `EntryRuleSelection.pm` 1–74, `GeneratedSource.pm` 1–319,
   and `BootstrapSpec.pm` 1–135, all under `perl/LinkedSpec/`, through EOF without truncation. The five files
   total 1,103 lines / 36,759 bytes and remain baseline-identical. Ten unique Perl files are now fully read.
@@ -4966,9 +4978,7 @@ the 8,000-line general member limit and 80,000-line aggregate remain unchanged.
   claimed. `docs/knowledge/bootstrap-comparison-stale-result.md` records mechanism/evidence; `.8` owns repair.
 - No additional source-reading credit is inferred from the consumer grep or runtime probes. Remaining reading
   starts at `.3.2.4`; source repairs `.7` then `.8` follow `.3`/`.4`/`.5` and precede Rust mutation setup.
-
 ### Bootstrap grammar core reading at `.3.2.4`
-
 - Read `perl/LinkedSpec/BootstrapSpec/Core.pm` through EOF in exact chunks 1–300, 301–600, 601–900, and
   901–1196: 1,196 lines / 39,291 bytes, baseline-identical. Eleven unique Perl files are now fully read.
 - Reconciled the primary bootstrap/secondary self-hosted boundary with existing Knowledge. The core builds
@@ -4984,9 +4994,7 @@ the 8,000-line general member limit and 80,000-line aggregate remain unchanged.
 - An initial inline probe used the wrong Perl quote delimiter and failed to parse; the corrected `q~...~`
   harness completed successfully. This harness error is not a repository defect. All probe jobs are consumed.
 - No production or book change; remaining reading starts at `.3.2.5`. The source-reading gate remains No.
-
 ### Compiler state and required history rollover at `.3.2.5`
-
 - Read `perl/LinkedSpec/CompilerState.pm` through EOF in 1–300 and 301–590 chunks: 590 lines / 23,054 bytes,
   baseline-identical. Twelve unique Perl files are fully read; 77 baseline Perl files remain unread.
 - Existing `compilerstate-internal-model`, resolved descriptor-model-tag, and outward-versus-semantic-wire cards
@@ -5002,9 +5010,7 @@ the 8,000-line general member limit and 80,000-line aggregate remain unchanged.
   under existing README/history policy, preserving all byte/current-view/aggregate ceilings and authority. This
   required checkpoint-storage maintenance stays within startup continuity; donor-policy adoption and product
   changes remain gated. The registry movement makes this leaf canonical, with an exact staged receipt before commit.
-
 ### Compiler generation/state prefix and preceding canonical evidence at `.3.2.6`
-
 - Activated from clean `6c1234cc0fd3cb194c6d75314d86bfe05da104a0` with the prior canonical receipt promoted,
   all nine commit doctrines PASS, empty message file, and no remaining job. Read Compiler.pm 1–260, 261–520,
   521–780, and 781–1041 without truncation: 1,041 lines / 41,073 bytes, baseline-identical. Its 1042–2002
@@ -5028,9 +5034,7 @@ the 8,000-line general member limit and 80,000-line aggregate remain unchanged.
 - Supporting reading additionally covers tools/verification_receipt.sh 1–150 (EOF) and the two Cargo-child
   call sites in rust/linkedspec-runtime/tests/staged_ast_enrichment_contract.rs 2072–2115 and 2217–2252.
   These bounded supporting reads do not mark the remaining Rust file or tool lane complete.
-
 ### Compiler pipeline suffix at `.3.2.7`
-
 - Activated from clean `f864f881f5210a99d68602166e8720a741f84795`; prior Knowledge/all nine doctrines,
   post-commit pointer, empty brief, and clean status passed. Read Compiler.pm 1042–1280, 1281–1520,
   1521–1760, and 1761–2002 without truncation: 961 lines / 43,851 bytes. The complete module is now read
@@ -5042,9 +5046,7 @@ the 8,000-line general member limit and 80,000-line aggregate remain unchanged.
   boundaries absent from the question map. It links existing state/root/generated/runtime owners and explicitly
   records source-level evidence without a new runtime signoff claim. No new defect or public-book change.
 - Next exact reading is SpecEntry.pm 1–600 under `.3.2.8`. Required codebase/book reading remains incomplete.
-
 ### SpecEntry reading and explicit handoff defect at `.3.2.8`
-
 - Activated from clean `dc7f5f090c078d0d3d05886eec371db89bfae625`; prior Knowledge/all nine doctrines,
   post-commit pointer, zero-byte brief, clean status, and derived-map review passed. Read SpecEntry.pm
   1–200, 201–400, and 401–600 without truncation: complete 600 lines / 23,171 bytes. Baseline identity
@@ -5063,9 +5065,7 @@ the 8,000-line general member limit and 80,000-line aggregate remain unchanged.
   emitter text remains unread under its existing children. Probe processes exited zero; no background job remains.
 - Next reading: Validation.pm 1–1320 under `.3.2.9`; codebase and book answers remain No. Public-book review
   of the diagnosed handoff follows complete reading and repair; no behavioral change is made in this checkpoint.
-
 ### Validation prefix and diagnostic source repairs at `.3.2.9`
-
 - Activated from clean `e4b1f296910e73205f2ea8a2498a14040b1ff381`; prior Knowledge/all nine doctrines,
   post-commit pointer, zero-byte brief, and clean status passed. Read Validation.pm 1–220, 221–440,
   441–660, 661–880, 881–1100, and 1101–1320 without truncation: 1,320 lines / 43,290 bytes,
@@ -5083,9 +5083,7 @@ the 8,000-line general member limit and 80,000-line aggregate remain unchanged.
   passes and reaches the documented line-3 failure. These are retrieval corrections, not a new syntax contract.
 - All diagnostic processes exited zero. Next reading is Validation.pm 1321–1904 under `.3.2.10`; codebase/book
   remain incomplete, product source is unchanged, and public-book changes remain with the owned repairs.
-
 ### Validation suffix at `.3.2.10`
-
 - Activated from clean `96a1c2426ce68cf5f7b9281dbeb3005d3d876fd9`; prior Knowledge/all nine doctrines,
   post-commit pointer, zero-byte brief, clean status, and derived-map review passed. The prior retrieval fixes
   now appear as actual commands/evidence in the derived map. Read Validation.pm 1321–1520, 1521–1720, and
@@ -5099,9 +5097,7 @@ the 8,000-line general member limit and 80,000-line aggregate remain unchanged.
   staging notes to the existing admitted owners. Legacy split-marker divergence remains the explicit
   compatibility boundary in the gap closeout card, not an unowned new finding or a capture_gaps alias.
 - Next exact reading is RuleIR.pm 1–987 under `.3.2.11`; required codebase/book reading remains incomplete.
-
 ### RuleIR reading and authored execution-order defect at `.3.2.11`
-
 - Activated from clean `ff6c228c7804270916b64a7c9332be92a5df1f76`; prior Knowledge/all nine doctrines,
   post-commit pointer, zero-byte brief, and clean status passed. Read RuleIR.pm 1–200, 201–400, 401–600,
   601–800, and 801–987 without truncation: complete 987 lines / 31,462 bytes, including EOF and unchanged
@@ -5118,9 +5114,7 @@ the 8,000-line general member limit and 80,000-line aggregate remain unchanged.
 - These are native/public and direct-owner results; generated/other-backend failure was not measured here.
   All probe processes exited zero. Next reading is RuleIR/EmitContext.pm 1–1489 under `.3.2.12`;
   codebase/book remain incomplete and source remains unchanged until the required-reading boundary closes.
-
 ### EmitContext bridge prefix at `.3.2.12`
-
 - Activated from clean `3ab399d034f34029ac136a31a7b252a7dd8d31cc`; prior Knowledge/all nine doctrines,
   post-commit pointer, zero-byte brief, clean status, and derived-map review passed at 948 facts / 8,018 keys.
   Read EmitContext.pm 1–220, 221–435, 436–680, 681–915, 916–1155, 1156–1375, and 1376–1489
@@ -5134,9 +5128,7 @@ the 8,000-line general member limit and 80,000-line aggregate remain unchanged.
   reverify are corrected, and the adjacent lowering card distinguishes the thirteen-owner subset. No production
   defect or public contract change is established here; existing repairs `.7`–`.12` remain gated on reading.
 - Next exact scope is EmitContext.pm 1490–2583 under `.3.2.13`; codebase/book reading remain incomplete.
-
 ### EmitContext suffix and repeated blind-target identity at `.3.2.13`
-
 - Activated from clean `5e2cf75632f1fd16c3e94fac0f610ee572ea3e26`; prior Knowledge/all nine doctrines,
   post-commit pointer, zero-byte brief, clean status, and complete derived-map review passed (948 facts /
   8,018 keys). Read 1490–1699, 1700–1910, 1911–2110, 2111–2300, 2301–2495, and 2496–2583
@@ -5162,9 +5154,7 @@ the 8,000-line general member limit and 80,000-line aggregate remain unchanged.
 - `perl-repeated-blind-target-code-collision` preserves exact native results and causal boundaries. Emitted
   source was inspected but not independently loaded here; other-backend failures remain unmeasured. Next
   exact reading is HandlerVariantEmitter.pm 1–1403 under `.3.2.14`; codebase/book remain incomplete.
-
 ### HandlerVariantEmitter prefix and I-block corruption at `.3.2.14`
-
 - Activated from clean `a7d17e6fcb4e6deafc8b3b2c46c957fa8f09e8b0`; prior Knowledge/all nine doctrines,
   post-commit pointer, zero-byte brief, clean status, and derived-map review passed (949 facts / 8,022 keys).
   Read 1–215, 216–420, 421–645, 646–840, 841–1035, 1036–1235, and 1236–1403 without truncation:
@@ -5191,9 +5181,7 @@ the 8,000-line general member limit and 80,000-line aggregate remain unchanged.
 - Retained processes all exited zero and no diagnostic job remains. New Knowledge preserves exact result/
   source/seed boundaries. Emitted source was inspected, not independently loaded; no other-backend failure
   is claimed. Next `.3.2.15` reads emitter 1404–1920 plus LinkedRE/ActionIR AST; codebase/book remain incomplete.
-
 ### Emitter suffix, LinkedRE, and AST facade at `.3.2.15`
-
 - Activated from clean `e421887d7c4ccf5a3a7714bd9a9b74b2fc7e40c1`; prior Knowledge/all nine doctrines,
   post-commit pointer, zero-byte brief, clean status, and complete derived-map review passed (950 facts /
   8,026 keys). Read emitter 1404–1585, 1586–1760, 1761–1920, plus LinkedRE.pm 1–148 and
@@ -5215,9 +5203,7 @@ the 8,000-line general member limit and 80,000-line aggregate remain unchanged.
   capture_gaps, and required_slot_count; the HandlerIR card now explicitly describes a selected-field
   diagnostic, not lossless roundtripping. Every retained probe exited zero; no job remains. Next exact reading
   is ActionIR/AST/Parser.pm 1–1498 under `.3.2.16`; required codebase/book reading remains incomplete.
-
 ### AST parser prefix and nested source offsets at `.3.2.16`
-
 - Activation checkpoint is clean `762bef64659f48ccada872ec76ac150a0b6714ed`; prior slice's nine doctrines,
   post-pointer, zero-byte brief, clean status, and full derived-map review passed (950 facts / 8,028 keys).
   Read 1–200, 201–420, 421–640, 641–860, 861–1080, 1081–1300, and 1301–1498 without truncation:
@@ -5240,9 +5226,7 @@ the 8,000-line general member limit and 80,000-line aggregate remain unchanged.
 - Managed `PERL5LIB= prove -q -Iperl t/actionir_ast_parser.t t/punctuation_light_zero_arg_contract.t` passes
   two files / 30 top-level tests in 24 seconds. All retained probe jobs exited zero. Production/book are
   unchanged; codebase/book remain No. Next `.3.2.17` reads the exact parser suffix and adapter group.
-
 ### AST parser completion and pipeline/event adapters at `.3.2.17`
-
 - Activated from clean `9a88116001b7f5c8c550155aedfe7dcd4c55ea71`; prior nine doctrines, post-pointer,
   zero-byte brief, clean status, and full derived-map review passed (951 facts / 8,032 keys). Read parser
   1499–1686, ArrayPipeline 1–165/166–335/336–491, CanonicalEvents 1–150/151–297, and its Core 1–219
@@ -5262,9 +5246,7 @@ the 8,000-line general member limit and 80,000-line aggregate remain unchanged.
 - Production/book remain unchanged. Exact identity, Knowledge reconciliation, memory/doctrine/history, and
   staged review are the focused proof for this reading leaf. Next `.3.2.18` reads Contracts.pm 1–1396;
   required codebase/mdBook reading is still incomplete.
-
 ### Contracts prefix and typed-source catalog at `.3.2.18`
-
 - Activated from clean `34958c8f4d3399bee3b5cf01f72466a8c51df59a`; prior nine doctrines, post-pointer,
   zero-byte brief, clean status, and full derived-map review passed (951 facts / 8,036 keys). Read Contracts
   1–180, 181–385, 386–600, 601–810, 811–1000, 1001–1200, and 1201–1396 without truncation:
@@ -5289,9 +5271,7 @@ the 8,000-line general member limit and 80,000-line aggregate remain unchanged.
   archive edit, or hook bypass. Final resulting-tree checks must pass before landing.
 - Production/book remain unchanged. Focused reading/identity/catalog/Knowledge plus memory/doctrine/history
   and staged review own this checkpoint. No new defect or background job remains; `.3.2.19` reads the suffix.
-
 ### Contracts suffix and ordered builder at `.3.2.19`
-
 - Activated from clean `54e1a487dd797396d8bb5ed847e90380015e3a40`; prior nine doctrines, post-pointer,
   zero-byte brief, and clean status passed. Prior Knowledge body-only edits left the derived map unchanged.
   Read Contracts 1397–1585, 1586–1785, 1786–1985, 1986–2185, 2186–2375, and 2376–2513 without
@@ -5305,9 +5285,7 @@ the 8,000-line general member limit and 80,000-line aggregate remain unchanged.
   retain their dedicated owners. No new runtime, backend admission, or defect claim follows from this reading.
 - Focused identity/source extraction, Knowledge, memory/doctrines/history pressure, and final staged review own
   this checkpoint. Production/book remain unchanged; `.3.2.20` reads ControlFlow.pm 1–1485 next.
-
 ### ControlFlow prefix and candidate isolation at `.3.2.20`
-
 - Activated from clean `8db085f26c288063bc2d52f13d2ad697254fa608`; prior nine doctrines, post-pointer,
   zero-byte brief, clean status, and complete derived-map diff review passed (951 facts / 8,038 keys).
   Read ControlFlow 1–205, 206–415, 416–625, 626–835, 836–1050, 1051–1265, and 1266–1485 without
@@ -5328,9 +5306,7 @@ the 8,000-line general member limit and 80,000-line aggregate remain unchanged.
 - Twenty-five whole Perl files plus this prefix are read. Production/book remain unchanged; focused identity,
   probe/trace, Knowledge, memory/doctrines/history pressure, and final staged review own this checkpoint.
   Next `.3.2.21` finishes ControlFlow and reads DeclareMethod, Diagnostics, and FlowExpr.
-
 ### ControlFlow completion, adapters, emptiness defects, and notes rollover at `.3.2.21`
-
 - Activated from clean `ba9a494caa79fdd6fca7833d5bfc1fbce727fc9d`; prior nine doctrines, post-pointer,
   zero-byte brief, clean status, and complete derived-map review passed (951 facts / 8,040 keys).
   Read ControlFlow 1486–1650 / 1651–1796, DeclareMethod 1–165 / 166–328, Diagnostics 1–145 / 146–269,
@@ -5369,22 +5345,16 @@ the 8,000-line general member limit and 80,000-line aggregate remain unchanged.
   the unchanged full process-locality test passes the relocated six-family driver and containment assertions.
   Existing `project-data-process-locality-proof` now owns this causal requirement. No profile/test is weakened;
   the failed attempt grants no receipt, and the final staged candidate requires a complete permitted rerun.
-
-
 ### Forward reading and confirmed findings preserved by `.31`
-
 The exact `.3.2.21` canonical candidate stayed frozen while read-only preparation continued. This intake
 preserves that preparation before its queued reading checkpoints are committed. It grants no runtime repair,
 policy adoption, public-book change, or codebase-wide signoff. The existing `.3.2.22`–`.3.2.54` owners still
 require their individual comprehension/Knowledge/live-document checkpoints and commits; none is bulk-closed.
-
 #### Exact forward Perl reading
-
 All 89 baseline Perl entries have now been read in full, including generated material. All current Perl bytes
 remain identical to `baeb984e36a94a15951cd23d4c52def5064cdaca`. The committed checkpoint before this intake credits
 29 whole files through `.3.2.21`. The following actual read-only coverage is durable; each named leaf's existing
 Scope remains the exact path/range owner. MCP byte fragments are inclusive, one-based offsets within its blob.
-
 | Queued checkpoint | Untruncated reading chunks within its existing Scope | Scoped lines/fragments; bytes |
 | --- | --- | ---: |
 | `.3.2.22` | MethodExpr 1–150 / 151–298 | 298; 7,800 |
@@ -5420,7 +5390,6 @@ Scope remains the exact path/range owner. MCP byte fragments are inclusive, one-
 | `.3.2.52` | UnicodeXIDContinue 1–855, complete generated range records | 855; 17,340 |
 | `.3.2.53` | UserFunctionRegistry 1–205 / 206–410 / 411–605 / 606–773; PPlugin 1–175 / 176–331; PathSearch 1–47; env.conf 1–51 | 1,202; 45,829 |
 | `.3.2.54` | gdcheck 1–225 / 226–431; htmlcss_driver 1–166; ptchange 1–125 / 126–242 | 839; 22,702 |
-
 The 82,883-byte MCP payload on logical line 14 was also decoded and reconciled with its 35-frame material.
 Its three fragment SHA-256 values are 7846664315f28f00563a9dac88632f47f5c8fbf531ff10215724620764f2df19,
 5b77ebfcc05b4bf50d90ad0891f87665cc3709c45579df37452a5e76e280dc10, and
@@ -5429,9 +5398,7 @@ UnicodeCaseMapping's complete file is 3,835 lines / 82,331 bytes. UnicodeXIDCont
 806 generated ranges; its existing digest is d1b00bda47306e61ee20a7f63db783f98b15d8d15b876c7506bc4b79ecebc0bb.
 The exact-byte encoding audit found only gdcheck comment lines 164/165/167 with raw 0xb5; those bytes were
 read through escaped byte representations. No source conversion or runtime encoding defect is claimed.
-
 #### Confirmed runtime and tooling findings
-
 - `.17`: Six public Get parsers were each compiled once with proper runtime context and run against isolated
   empty/populated host slots. Wrong-kind count/first/last changed from 0/null/null to 2/first/last;
   count_keys/sorted_keys/has_key changed from 0/[]/0 to 1/[k]/1. Context errors stayed null and local seeds
@@ -5493,9 +5460,7 @@ read through escaped byte representations. No source conversion or runtime encod
   bare-child/quoted-child; a shared match_text block returns the corresponding raw text. All contexts are
   error-free. HandlerVariantEmitter's action dispatcher (489–519) emits authored blocks and does not
   synthesize the missing child call. The documentation fix must preserve that semantic boundary.
-
 #### Measured public-checker gaps
-
 - `.28.1`: The full value/container helper reference still calls string zero false, empty aggregates true,
   and the five-backend rollout pending at 1431–1436, with a stale pending heading at 1273. Five public Perl
   truth controls match the admitted contract. The actual logical checker passes 17 truth cases / 10 helpers /
@@ -5526,14 +5491,10 @@ read through escaped byte representations. No source conversion or runtime encod
   constructs, marks, and throws the typed object. The actual diagnostic checker passes 3 helpers / 11
   render rows / 6 scenarios / 8 complete / 20 mutations; its catalog markers and single old-suffix denial
   do not cover the false process-exit paragraph (190–310/639–649).
-
-
 #### Supporting book and tool reading
-
 The following complete book sources are baseline-identical. Existing partial reads inside them are not added
 twice. Full source reading is distinct from a rendered-book inspection, and `.4` still owns formal chapter
 decomposition, remaining reading, and alignment.
-
 | Book path below `docs/linkedspec-book/` | Full lines; bytes |
 | --- | ---: |
 | `.gitignore` | 1; 6 |
@@ -5550,7 +5511,6 @@ decomposition, remaining reading, and alignment.
 | `src/dsl/value-container-flow-helper-reference.md` | 1,831; 87,584 |
 | `src/dsl/values-containers-and-flow-helpers.md` | 662; 32,595 |
 | `src/appendix/helper-contract-catalog.md` | 1,943; 120,603 |
-
 The previous partial `development/local-ci-and-regression.md` ranges 1897–1943 and 1988–2004 remain covered.
 Together these are 16 disjoint completed ranges / 640,041 bytes; all remaining book source is 1,316,541 bytes.
 Independent LF-byte interval and hash accounting covers all 50 baseline paths / 1,956,582 bytes exactly once.
@@ -5558,7 +5518,6 @@ Semantic Introspection's full SHA-256 is 1d7f3db65618c8169f8e49c9532024b95300a0d
 Helper Catalog's is 36874564ee5bc3a2bef85cc05560dedf1d251c3a4052b2c71abb2ecceb6cb1c7.
 All large chapters were consumed in smaller untruncated chunks; preloaded but unreturned tool output was not
 counted until it was emitted and read.
-
 Supporting tooling now also includes complete `tools/project_data_env.sh` 1–288,
 `tools/test_project_data_process_locality.sh` 1–329, and the Dart/Lua/Julia project-data wrappers.
 The diagnostic evidence gate was reread in full. Supporting native source ranges for `.22` were Dart's
