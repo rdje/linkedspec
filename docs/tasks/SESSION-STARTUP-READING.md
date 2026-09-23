@@ -4599,7 +4599,7 @@ remain. Reading completion and runtime signoff remain distinct.
   Status: `active`
   Goal: Preserve multiline regex pattern operands in documented Perl action helpers through whole-spec validation.
   Dependencies: Land Rust .86.2 first; captured public diagnostics in .linkedspec-data/scratch/division-boundary86-2/perl-context.jsonl and reproducible sources in docs/knowledge/rust-symbol-call-newline-boundary.md; coordinate .54.1 without conflating regex-brace bootstrap loss.
-  Children: `SESSION-STARTUP-READING.86.4.1`, `SESSION-STARTUP-READING.86.4.2`, `SESSION-STARTUP-READING.86.4.3`, `SESSION-STARTUP-READING.86.4.4`, `SESSION-STARTUP-READING.86.4.5`
+  Children: `SESSION-STARTUP-READING.86.4.1`, `SESSION-STARTUP-READING.86.4.2`, `SESSION-STARTUP-READING.86.4.3`, `SESSION-STARTUP-READING.86.4.4`, `SESSION-STARTUP-READING.86.4.5`, `SESSION-STARTUP-READING.86.4.6`
   Planned tier: focused unless a shared language-contract decision is needed.
   Planned focused proof: Public Get with runtime_ctx_ref, exact lowering and generated source; multiline regex and numeric-division lookalikes, LF/CRLF, following assignments, whole-spec validation and invalid-pattern controls; phase0 plus directly affected scanner tests.
   Planned canonical boundary: Parent .86.3 after .86.5; any contract decision precedes implementation.
@@ -4672,25 +4672,42 @@ remain. Reading completion and runtime signoff remain distinct.
   Verification: Exact four-file patch reconstruction matches the saved candidate byte-for-byte; restored source/test identity matches 69689bb41; restored action AST passes23/23. Memory, Knowledge, both histories, diff and all normal doctrine hooks are required before landing. Both interrupted Phase0 runs remain excluded. Public book limitations remain accurate because runtime behavior is unchanged.
   Commit: This commit; subject `SESSION-STARTUP-READING.86.4.5 - preserve paused splitter repair and clean handoff`.
 - ID: `SESSION-STARTUP-READING.86.4.3`
-  Status: `pending`
+  Status: `done`
   Goal: Preserve multiline regex helper-operand lexical state through Perl whole-spec validation.
   Dependencies: .86.4.2.4 audit; matches_multiline in its tracked diagnostic lowers/executes to1 but public validation rejects the following Done rule. Reuse supported operand context without adding a runtime regex kind or imposing assignment regex precedence.
-  Planned tier: focused unless a language-contract decision is needed.
-  Planned focused proof: Public Get/runtime_ctx_ref and descriptors/source; all captured literals/division controls, LF/CRLF, rule-like and directive-like regex payloads, real following rules, lifecycle/action nesting and malformed sources; validation fuzz, gap/slot contracts and Phase0.
-  Planned canonical boundary: .86.3 after public recomposition.
+  Verification tier: `focused`
+  Focused checks: Public Get/runtime_ctx_ref and descriptors/source; all captured literals/division controls, LF/CRLF, rule-like and directive-like regex payloads, real following rules, lifecycle/action nesting and malformed sources; validation fuzz, gap/slot contracts and Phase0; book, Knowledge, memory/history and doctrines.
+  Canonical trigger: .86.3 after public recomposition; no shared contract change in this leaf.
   Acceptance: Retain original source positions and diagnostics, validate actual structure and metadata, and preserve division-newline acceptance; do not broadly hide malformed source or conflate .54.1/.9 bootstrap brace defects.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Six-group consumer replay on isolated accepted fd3a2444e Perl/spec sources fails groups1/2/3/5/6; candidate passes6/6. Direct-dependent validation fuzz, gap/duplicate/sparse slots and action AST pass with173 total top-level tests across six files. LF/CRLF, structural-looking payloads, malformed followers, helper/lifecycle values, division and isolated host compatibility, escaped delimiters and exact physical diagnostic attribution are covered. Book renders and memory/Knowledge/history checks pass. Complete Phase0 passes1033/1033 in1211 seconds, including the exact six-group consumer; the earlier interrupted run is excluded. Expanded matrix lowering failures are owned by .86.4.6, required before .86.4.4; no broad helper-family acceptance.
+  Commit: This commit; subject `SESSION-STARTUP-READING.86.4.3 - preserve multiline helper pattern validation`.
+  - [x] **REPRODUCE / ISSUE** — Public Get/runtime_ctx_ref and call_spec_handler_subst replay the multiline matches validator failure; accepted-source six-group consumer fails five groups.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — Validation::_scan_rule_edges_in_fragment loses slash state between lines; y/ consumes closers as translation. A second public validator probe reports line3 instead of real line7 because index finds identical pattern payload first.
+  - [x] **FIX** — Shared character-position-preserving helper-pattern structural view plus cumulative diagnostic line offsets; compilation retains authored source and existing slash-call recognition.
+  - [x] **ADDRESSED (verified)** — Candidate consumer passes6/6 and focused selected suite passes173 top-level tests; actual lowering gaps stay separately owned.
+  - [x] **NO REGRESSION** — Complete Phase0 reaches1..1033, all PASS; focused173 and Perl syntax pass. No new failing names; interrupted runs do not count. Normal staged doctrines are required before commit.
+  - [x] **LOCKSTEP** — Book renders; Knowledge, task/roadmap/live pointers and bounded histories record the verified validator and immediate .86.4.6 lowering repair. No whole helper-family or cross-backend closeout.
 - ID: `SESSION-STARTUP-READING.86.4.4`
   Status: `pending`
   Goal: Recompose the Perl multiline regex repair through public live and standalone generated parsers and close .86.4.
-  Dependencies: Verified .86.4.2/.86.4.3.
+  Dependencies: Verified .86.4.2/.86.4.3/.86.4.6.
   Planned tier: focused; canonical parent closure remains .86.3 after .86.5.
   Planned focused proof: Full captured public matrix plus exact pattern/runtime results, public loader, descriptors, independent emitted execution, integration-book examples, directly affected Perl gates and documentation/doctrine checks.
   Planned canonical boundary: Parent .86.3.
   Acceptance: Close only the measured Perl multiline scope after all required child repairs pass; preserve the invalid regex negative control and open EOF/brace owners with reproducible evidence.
   Verification: `pending`
   Commit: `pending`
+
+- ID: `SESSION-STARTUP-READING.86.4.6`
+  Status: `pending`
+  Goal: Preserve multiline helper operands through statement splitting and lowering after whole-spec validation.
+  Dependencies: Land .86.4.3 first; supported operands only, no assignment-position regex type or global precedence change.
+  Planned tier: focused.
+  Planned focused proof: Public Get/runtime_ctx_ref, call_spec_handler_subst, StatementSplit/AST and generated source for regex_subst, matches assignment followed by a newline statement, and matches inside statement-form if; LF/CRLF, single-line/semicolon controls, malformed patterns and established division compatibility; Phase0 and direct dependent action tests.
+  Planned canonical boundary: Parent .86.3; public recomposition .86.4.4 requires this repair first.
+  Acceptance: Exact returned mutation/continuation/nested-control values and clean runtime error channels; no unlowered host helper calls or lost statement boundaries. Preserve original pattern bytes and once-only execution.
+  Verification: Expanded .86.4.3 public matrix exposes regex_subst as an undefined host call, newline following matches as generated-handler compilation failure, and conditional matches as an undefined host call. Validation is independently accepted for these sources; isolated lowering reproduces the first two. StatementSplit::_split_action_ir_statements joins the following statement/endif into the helper fragment in all three probes. StatementSplit::Mode::maybe_enter_slash_quote recognizes host operators but not naked helper operands; the closing y/ opens a two-segment translation and consumes separators. Repair only argument context, preserving the rejected assignment-precedence boundary and adding permanent runtime regressions before closeout.
+  Commit: pending.
 
 - ID: `SESSION-STARTUP-READING.86.5`
   Status: `pending`
@@ -4735,10 +4752,10 @@ audit range, not the default repair frontier.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.86.4.3` | `pending` | Repair the documented multiline matches operand rejected by whole-spec validation; no regex-variable feature. |
+| 1 | `SESSION-STARTUP-READING.86.4.6` | `pending` | Repair the three measured multiline helper statement-splitting failures after verified validation .86.4.3. |
 
 The audit withdraws the unsupported precedence question. Next is supported helper-operand
-validation `.86.4.3`, then public recomposition `.86.4.4`, EOF `.86.5` and canonical `.86.3`.
+statement lowering `.86.4.6` after verified validation `.86.4.3`, then public recomposition `.86.4.4`, EOF `.86.5` and canonical `.86.3`.
 Independent helper gaps are owned by `.87.1/.87.2`; no regex-type feature is admitted.
 
 ## Reading Ledger

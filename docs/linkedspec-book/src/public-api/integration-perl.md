@@ -234,20 +234,28 @@ lowers that standalone expression to a host match against implicit `$_`, storing
 `1` or the empty string. That compatibility behavior is different from a helper
 matching its explicit subject. See [regex patterns and variable values](../dsl/value-container-flow-helper-reference.md#regex-patterns-and-variable-values).
 
-A known Perl validation failure affects multiline patterns even in documented
-helper positions. This action lowers correctly and independently evaluates to
-`1`, but placing it before another rule can cause whole-spec validation to
-report that the next rule is inside an open block:
+Multiline helper patterns retain their physical line endings. This complete
+example returns `1`, and the following `Done` rule remains a separate rule:
 
 ```text
-return(matches(cat("x", "\n", "y"), /(x)
-y/))
+Top::
+ -> Done { return(matches(cat("x", "\n", "y"), /(x)
+y/)) }
+Done:
+ /x/
 ```
 
-That validator defect is tracked under `SESSION-STARTUP-READING.86.4.3`.
-It does not require adding regex-valued variables or choosing a new global slash
-precedence. Check both failure channels described below; a returned parser alone
-does not establish successful compilation and execution.
+For a physical CRLF inside the pattern, use a CRLF subject when that exact
+sequence should match. Validation preserves original source positions and keeps
+rule-like text inside a complete helper pattern from becoming rule metadata.
+
+Some later lowering paths remain incomplete: multiline `regex_subst`, a
+multiline `matches` assignment followed by a newline-separated statement, and
+multiline `matches` inside statement-form `if`. These are owned by
+`SESSION-STARTUP-READING.86.4.6`, before public closeout of the repair group.
+Check both failure channels described below; a returned parser alone does not
+establish successful compilation and execution. None of these repairs adds a
+regex-valued variable type.
 
 For arithmetic division, `div(14, 2)` works at the end of an action block.
 The equivalent slash call `/(14, 2)` currently requires a trailing semicolon in

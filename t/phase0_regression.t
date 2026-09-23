@@ -48380,6 +48380,14 @@ subtest 'spec_format_terse_2_3_4_2_perl_inline_value_control_lowering' => sub {
     );
 };
 
+subtest 'multiline regex helper validation' => sub {
+    my $test_path = File::Spec->catfile($Bin, 'multiline_helper_pattern_validation.t');
+    my ($exit_code, $out, $err) = run_perl_test_file_in_subprocess($test_path);
+    is($exit_code, 0, 'multiline helper validation consumer passes') or diag($err || $out);
+    like($out, qr/^1\.\.6$/m, 'all six regression groups finish');
+    unlike($out, qr/^not ok\b/m, 'consumer has no failing group');
+};
+
 subtest 'admitted Perl staged-AST enrichment contract' => sub {
     my $relative_test_path = 't/staged_ast_enrichment_perl_contract.t';
     my $test_path = File::Spec->catfile($Bin, basename($relative_test_path));

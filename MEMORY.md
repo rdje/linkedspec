@@ -1,13 +1,12 @@
 # MEMORY
 
-- activation_commit: `4e2598d1eed1001be370ccaec089922c1ce622ab` — clean attribution-correction base for the report/commit audit.
-- latest_completed_leaf: `CONSUMER-REPORT-DELIVERY.6 - audit consumer fix commits and bootstrap history`.
-- active_work_unit: `RGX-CONSUMER-BUILD-REPORTS.1` — ARCHOGEN LS-004 tracking through the RGX integration contact; PGEN-attributed, no RGX code defect established.
-- next_action: Director relays the corrected docs/upstream/rgx/bootstrap-progress-status.md through the RGX integration contact; verify any upstream remedy through the public interface under RGX-CONSUMER-BUILD-REPORTS.1. LinkedSpec fixes are published at a8d34c845; unrelated .86.4.3 stays pending.
-  Named-argument direction PARSER-AUTHORING-APIS.4 is approved and parked; other authoring proposals and approved formats stay parked.
+- activation_commit: `fd3a2444e0f9d773b16964d920db704a831d2fae` — clean base for supported Perl helper-pattern validation.
+- latest_completed_leaf: `SESSION-STARTUP-READING.86.4.3 - preserve multiline helper pattern validation`.
+- active_work_unit: `SESSION-STARTUP-READING.86.4.6` — multiline helper statement-splitting repair (pending).
+- next_action: Repair .86.4.6 using the measured StatementSplit closing-y translation mechanism; verify regex_subst, matches followed by a newline statement and conditional matches before public recomposition .86.4.4. Validation .86.4.3 passes focused173 and Phase0 1033/1033.
 - in_flight_uncommitted: none.
-- blockers: September LS-004 remains open; June cold-build adoption c4926f871 and workspace repair effe3e7b2 are complete. Exact report ledger: docs/knowledge/consumer-report-fix-commits.md. Director owns relay; a later push requires exact-HEAD proof.
-  Wrapper startup .7 remains open; warned-child group matched, but denied-call cause and original lost PUC stream remain unproved. Recovery/purge stay prohibited.
+- blockers: LS-004 remains upstream-owned; director relays docs/upstream/rgx/bootstrap-progress-status.md. No RGX code defect established. Named-argument and format proposals remain parked.
+  Wrapper startup .7 remains open; recovery/purge stay prohibited. No interrupted Phase0 run counts as proof.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
   active table; the task metadata doctrine inventories all consumers, permits arbitrary frontier-row rewrites,
   and requires every exact current task ID to be unique across partitioned and unpartitioned storage.
@@ -57,4 +56,4 @@
   Changes segment4971 preserves 168 lines /27426 bytes from clean 7c318569; old archive rows/bytes remain exact.
 - dependency_boundary: September20: LinkedSpec integrates only with RGX via its published integration document/APIs/contracts. RGX owns PGEN; no separate PGEN procedure, internal inspection/analysis, patches or pin changes.
   Normal documented builds remain authorized; retain caches. Startup .80.1-.4 may observe public behavior or track upstream repairs, not investigate dependency internals.
-- latest_bootstrap_read: ADR0123 targets 2–5 minute startup plus thorough task-specific reading. Separate audit remains 89/143 and .1.90. Document integration and .46/.47/.49/.86.1/.86.2 are verified; Perl .86.4.2.4 corrects the regex-type premise; .86.4.3 owns supported helper validation; .87 owns two helper gaps. No downstream application acceptance claim.
+- latest_bootstrap_read: ADR0123 targets 2–5 minute startup plus thorough task-specific reading. Separate audit remains 89/143 and .1.90. Document integration and .46/.47/.49/.86.1/.86.2 are verified; Perl .86.4.2.4 corrects the regex-type premise; .86.4.3 owns supported helper validation (verified); .86.4.6 owns multiline lowering and .87 owns two helper gaps. No downstream application acceptance claim.

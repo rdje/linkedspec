@@ -2,17 +2,19 @@
 
 ## Current Activity
 
-LinkedSpec consumer remedies are published at `a8d34c84595d46c24cd1820d5fc0414261706412`, with exact remote read-back and tested-baseline ancestry verified. The exact report/commit audit also distinguishes June cold-build adoption c4926f871, September workspace repair effe3e7b2 and still-open LS-004; see docs/knowledge/consumer-report-fix-commits.md. RGX correctly propagates failure; no RGX code defect is established. Upstream resolution and public verification remain pending; there is no external-post permission question or downstream acceptance claim.
+Perl multiline helper-pattern validation is verified under .86.4.3. Statement splitting still has three measured helper failures, immediately owned by .86.4.6 before public recomposition .86.4.4. The distinct LS-004 upstream report remains director-relayed; no RGX implementation defect or upstream repair is claimed.
 
 ## Latest Completed Slice
 
-- `CONSUMER-REPORT-DELIVERY.6 - audit consumer fix commits and bootstrap history` — reconciles task/KM/ADR/Git evidence, names all original report remedies and verifies eight relevant commits in published ancestry. No LS-004 fix is claimed.
+- `SESSION-STARTUP-READING.86.4.3 - preserve multiline helper pattern validation` — six regression groups, focused173 and complete Phase0 1033/1033 in1211 seconds; book rendered, physical diagnostic positions preserved. The earlier interrupted run is excluded.
 
 ## Next Action
 
-- Director relays `docs/upstream/rgx/bootstrap-progress-status.md`; preserve the PGEN-reported attribution and RGX integration-contact role, then verify any upstream remedy through RGX's supported interface under `RGX-CONSUMER-BUILD-REPORTS.1`. Unrelated startup .86.4.3 remains pending. A later push needs canonical proof for its exact HEAD.
+- Repair .86.4.6's multiline regex_subst, matches continuation and conditional matches using the recorded StatementSplit mechanism. Commit each verified slice; final push requires exact-HEAD canonical proof. Director relays the separate ready RGX report.
 
 ## Recent Completions
+
+- `2026-09-23` — `SESSION-STARTUP-READING.86.4.3` repairs Perl multiline helper validation and physical diagnostic offsets; focused173 and Phase0 1033/1033 pass.
 
 - `2026-09-23` — `CONSUMER-REPORT-DELIVERY.6` records the ten-report fix ledger and the distinct closed June bootstrap build issue.
 
@@ -43,8 +45,6 @@ LinkedSpec consumer remedies are published at `a8d34c84595d46c24cd1820d5fc041426
 - `2026-09-23` — `SESSION-STARTUP-READING.47.3` closes the verified argument/source parent through receipt-bound canonical acceptance; .49 follows.
 
 - `2026-09-23` — `SESSION-STARTUP-READING.47.2` preserves block source, compact-header literal values and closing-line continuation statements; full Rust component and native25 pass.
-
-- `2026-09-23` — `SESSION-STARTUP-READING.47.1` accepts whitespace-only mutation arguments; core/runtime/carrier/native proof passes; outer source fidelity is owned by immediate .47.2.
 
 ## History
 

@@ -11,6 +11,14 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
 
+## 2026-09-23 — SESSION-STARTUP-READING.86.4.3 - separate structural pattern validation from statement lowering
+
+The accepted-source public probe independently lowers multiline matches to a successful action, but physical-line validation interprets the closing y/ as a new translation construct. The repair masks only complete multiline tokens at parenthesized argument boundaries; it shares existing slash-call recognition and keeps assignment-position scans physical-line based. Source bytes and CR/LF stay with compilation. Cumulative line offsets prevent diagnostic attribution to an earlier identical line inside a pattern.
+
+The expanded matrix uncovered three later failures: multiline regex_subst, matches followed by a newline statement, and matches inside statement-form if. Their emitted code leaves helpers unlowered or loses statement separation; .86.4.6 owns diagnosis/repair before public closeout. They are validation-only controls in this slice, not accepted runtime failures. Two explicit Perl quote controls were initially misclassified as public positives; the established compatibility proof is isolated action lowering, and the tests preserve that scope. CRLF needs an exact CRLF subject. One Phase0 run was interrupted to finish diagnostic-offset correction and is excluded from acceptance.
+
+Targeted startup recovered clean fd3a2444e, the upstream-only report blocker and the local .86.4.3 frontier. Read-only donor SHA-256 checks match the September11 README, claim and containment policy identities; no donor update or adoption claim. Reusable caches and startup .7 evidence remain retained.
+
 ## 2026-09-23 — CONSUMER-REPORT-DELIVERY.6 - separate three build histories before answering fix status
 
 The director's history challenge exposed an omitted distinction in the conversational answer: RGX-BUILD-REPRO.1 does record a successful June cold-build remedy, adopted in LinkedSpec c4926f871. It predates the September consumer reports. Cargo workspace repair effe3e7b2 is a second problem; LS-004 failure handling and misleading progress text is a third. The June closeout cannot prove the September report fixed, and the open September report cannot erase the older successful build repair.

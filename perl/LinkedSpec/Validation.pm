@@ -554,11 +554,82 @@ sub _inter_match_gap_execution_shape {
  return 'default_scan_loop'
 }
 
+# Structural validation is line-oriented, but a regex argument can cross a line.
+# Hide only complete multiline argument tokens in a length-preserving view. The
+# compiler and diagnostics continue to use the original source. In particular,
+# assignment-position slash calls keep their existing physical-line decision.
+sub _helper_pattern_validation_view {
+ my ($source) = @_;
+ my $view = $source;
+ my @scopes;
+ my $length = length($source);
+ my $line_start = 0;
+ my $line_end = index($source, "\n");
+ $line_end = $length if $line_end < 0;
+ for (my $i = 0; $i < $length; ++$i) {
+  while ($i >= $line_end) {
+   $line_start = $line_end + 1;
+   $line_end = index($source, "\n", $line_start);
+   $line_end = $length if $line_end < 0;
+  }
+  my $char = substr($source, $i, 1);
+  if ($char eq q{'} || $char eq q{"}) {
+   my $quote = $char;
+   while (++$i < $length) {
+    my $inner = substr($source, $i, 1);
+    if ($inner eq "\\") { ++$i; next }
+    last if $inner eq $quote;
+   }
+   next;
+  }
+  if ($char eq '#' && substr($source, $line_start, $i - $line_start) =~ /^\s*$/) {
+   $i = $line_end - 1;
+   next;
+  }
+  if ($char eq '/') {
+   my $previous = $i - 1;
+   --$previous while $previous >= 0 && substr($source, $previous, 1) =~ /\s/;
+   my $argument = @scopes && $scopes[-1] eq '(' && $previous >= 0
+    && substr($source, $previous, 1) =~ /[(,]/;
+   if ($argument) {
+    my $end = _consume_slash_construct($source, $i, $length);
+    my $token_end = _consume_slash_segment($source, $i, $length);
+    my $after = $end // $length;
+    ++$after while $after < $length && substr($source, $after, 1) =~ /\s/;
+    if (defined($end) && $token_end <= $length
+        && substr($source, $token_end - 1, 1) eq '/'
+        && $after < $length && substr($source, $after, 1) =~ /[,\)\]]/) {
+     my $token = substr($source, $i, $end - $i);
+     if ($token =~ /\n/) {
+      $token =~ s/[^\r\n]/ /g;
+      substr($view, $i, $end - $i, $token);
+     }
+     $i = $end - 1;
+     next;
+    }
+   }
+   my $line = substr($source, $line_start, $line_end - $line_start);
+   my $end = _consume_slash_construct($line, $i - $line_start, length($line));
+   if (defined $end) {
+    $i = $line_start + $end - 1;
+    next;
+   }
+  }
+  if ($char =~ /[({\[]/) {
+   push @scopes, $char;
+  } elsif ($char =~ /[)}\]]/) {
+   pop @scopes if @scopes;
+  }
+ }
+ return $view;
+}
+
 sub _validate_inter_match_gap_authored_metadata {
- my ($spec_content, $option) = @_;
+ my ($spec_content, $option, $validation_view) = @_;
  LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, 'LinkedSpec::UnicodeXIDContinue');
 
- my @lines = split(/\n/, $$spec_content, -1);
+ $validation_view //= _helper_pattern_validation_view($$spec_content);
+ my @lines = split(/\n/, $validation_view, -1);
  my @positions;
  my $offset = 0;
  for my $line (@lines) {
@@ -827,16 +898,26 @@ sub validate_dsl_syntax {
  my ($spec_content, $option) = @_;
  $option = {} unless ref($option) eq 'HASH';
 
- return 0 unless _validate_inter_match_gap_authored_metadata($spec_content, $option);
+ my $validation_view = _helper_pattern_validation_view($$spec_content);
+ return 0 unless _validate_inter_match_gap_authored_metadata($spec_content, $option, $validation_view);
 
- my @lines = split(/\n/, $$spec_content);
+ my @lines = split(/\n/, $validation_view);
+ my @source_lines = split(/\n/, $$spec_content);
+ my @line_positions;
+ my $offset = 0;
+ for my $line (@source_lines) {
+  push @line_positions, $offset;
+  $offset += length($line) + 1;
+ }
  my @defined_rules = ();
  my @used_rules = ();
  my %seen_defined_rules;
  my $current_rule;
  my $seen_first_rule = 0;
 
- for my $line (@lines) {
+ for my $line_index (0 .. $#lines) {
+  my $line = $lines[$line_index];
+  my $source_line = $source_lines[$line_index];
  next if $line =~ /^\s*$/;
  next if $line =~ /^\s*#/;
 
@@ -854,7 +935,7 @@ sub validate_dsl_syntax {
 }
 
    if ($rule_label->{invalid_mode}) {
-    my $position = index($$spec_content, $line);
+    my $position = $line_positions[$line_index];
     _report_dsl_validation_failure($spec_content, $position,
      "Malformed rule label syntax",
      "Use a supported rule label like 'RuleName:', 'RuleName::', 'RuleName:AND+', 'RuleName:OR+', or 'RuleName:OR{2,4}'",
@@ -867,7 +948,7 @@ sub validate_dsl_syntax {
   push @defined_rules, $rule_name;
 
   if ($seen_defined_rules{$rule_name}++) {
-    my $position = index($$spec_content, $line);
+    my $position = $line_positions[$line_index];
     _report_dsl_validation_failure($spec_content, $position,
      "Duplicate rule definition: '$rule_name'",
      "Remove the duplicate rule or rename one of them",
@@ -878,13 +959,13 @@ sub validate_dsl_syntax {
     return 0;
    }
 
-   unless (_validate_rule_header_rhs_start($spec_content, $line, $rule_label->{rhs}, $option, $rule_name)) {
+   unless (_validate_rule_header_rhs_start($spec_content, $source_line, $rule_label->{rhs}, $option, $rule_name, $line_positions[$line_index])) {
     return 0;
    }
 
    my $edge_scan = _scan_rule_edges_in_fragment($rule_label->{rhs});
    if ($edge_scan->{error}) {
-    my $position = index($$spec_content, $line);
+    my $position = $line_positions[$line_index];
     return _report_edge_target_syntax_error($spec_content, $position, $edge_scan->{error}, $option, $rule_name);
    }
    my ($acode_count, $bcode_count) = _count_rule_edge_kinds_in_fragment($rule_label->{rhs}, $edge_scan);
@@ -897,10 +978,11 @@ sub validate_dsl_syntax {
          && !_looks_like_supported_rule_paragraph_member_line($remainder)) {
       return _report_unsupported_lifecycle_block_remainder(
        $spec_content,
-       $line,
+       $source_line,
        index($line, $rule_label->{rhs}) + $close_offset,
        $option,
        $rule_name,
+       $line_positions[$line_index],
       );
      }
     } else {
@@ -916,7 +998,7 @@ sub validate_dsl_syntax {
     lifecycle_item_open => $lifecycle_item_open,
    };
   } elsif ($at_rule_top_level && _looks_like_malformed_rule_label_line($line)) {
-   my $position = index($$spec_content, $line);
+   my $position = $line_positions[$line_index];
    _report_dsl_validation_failure($spec_content, $position,
     "Malformed rule label syntax",
     "Use a supported rule label like 'RuleName:', 'RuleName::', 'RuleName:AND+', 'RuleName:OR+', or 'RuleName:OR{2,4}'",
@@ -925,7 +1007,7 @@ sub validate_dsl_syntax {
    );
    return 0;
   } elsif (!$seen_first_rule) {
-   my $position = index($$spec_content, $line);
+   my $position = $line_positions[$line_index];
    _report_dsl_validation_failure($spec_content, $position,
     "Spec file must start with a rule definition",
     "Make the first non-comment line a rule like 'RuleName:' or 'RuleName::'",
@@ -938,7 +1020,7 @@ sub validate_dsl_syntax {
    my $continuing_lifecycle_item = $current_rule->{lifecycle_item_open} ? 1 : 0;
    my $starting_lifecycle_item = $start_depth == 0 && $line =~ /^\s*(?:I\s*)?\{/o ? 1 : 0;
    if ($start_depth > 0 && _parse_rule_label_line($line)) {
-    my $position = index($$spec_content, $line);
+    my $position = $line_positions[$line_index];
     _report_dsl_validation_failure($spec_content, $position,
      "Rule definition not allowed inside open block",
      "Close the preceding block with '}' before starting the next rule",
@@ -949,15 +1031,15 @@ sub validate_dsl_syntax {
     return 0;
    }
    if ($start_depth == 0 && _looks_like_split_marker_prefix($line) && !_looks_like_supported_split_marker_start($line)) {
-    my $position = index($$spec_content, $line);
+    my $position = $line_positions[$line_index];
     return _report_split_marker_syntax_error($spec_content, $position, $option, $current_rule->{label});
    }
    if ($start_depth == 0 && (my $targets = _bare_group_targets_without_block($line))) {
-    my $position = index($$spec_content, $line);
+    my $position = $line_positions[$line_index];
     return _report_bare_group_without_block($spec_content, $position, $option, $current_rule->{label}, $targets);
    }
    if ($start_depth == 0 && !_looks_like_supported_rule_paragraph_member_line($line)) {
-    my $position = index($$spec_content, $line);
+    my $position = $line_positions[$line_index];
     _report_dsl_validation_failure($spec_content, $position,
      "Unsupported top-level rule paragraph content",
      "After a rule start, use regexes, lifecycle/code blocks, action edges, blind calls, split markers, or start the next rule",
@@ -970,7 +1052,7 @@ sub validate_dsl_syntax {
 
    my $edge_scan = _scan_rule_edges_in_fragment($line, $start_depth);
    if ($edge_scan->{error}) {
-    my $position = index($$spec_content, $line);
+    my $position = $line_positions[$line_index];
     return _report_edge_target_syntax_error($spec_content, $position, $edge_scan->{error}, $option, $current_rule->{label});
    }
    my ($acode_count, $bcode_count) = _count_rule_edge_kinds_in_fragment($line, $edge_scan);
@@ -985,10 +1067,11 @@ sub validate_dsl_syntax {
          && !_looks_like_supported_rule_paragraph_member_line($remainder)) {
       return _report_unsupported_lifecycle_block_remainder(
        $spec_content,
-       $line,
+       $source_line,
        $close_offset,
        $option,
        $current_rule->{label},
+       $line_positions[$line_index],
       );
      }
      $current_rule->{lifecycle_item_open} = 0;
@@ -1023,7 +1106,9 @@ if ($current_rule && $current_rule->{acode_count} && $current_rule->{bcode_count
  }
 
 my $regex_depth = 0;
- for my $line (@lines) {
+ for my $line_index (0 .. $#lines) {
+  my $line = $lines[$line_index];
+  my $source_line = $source_lines[$line_index];
   next if $line =~ /^\s*$/;
   next if $line =~ /^\s*#/;
 
@@ -1038,7 +1123,7 @@ my $regex_depth = 0;
    $regex_pattern =~ s{^/|/$}{}g;
 
    eval { qr/$regex_pattern/ } or do {
-    my $position = index($$spec_content, $line);
+    my $position = $line_positions[$line_index];
     _report_dsl_validation_failure($spec_content, $position,
      "Invalid regex pattern: $regex_literal",
      "Check the regex syntax and ensure proper escaping",
@@ -1184,8 +1269,8 @@ sub _lifecycle_block_close_offset {
 }
 
 sub _report_unsupported_lifecycle_block_remainder {
- my ($spec_content, $line, $close_offset, $option, $rule_label) = @_;
- my $position = index($$spec_content, $line);
+ my ($spec_content, $line, $close_offset, $option, $rule_label, $line_position) = @_;
+ my $position = $line_position // index($$spec_content, $line);
  $position += $close_offset + 1 if $position >= 0;
  return _report_dsl_validation_failure(
   $spec_content,
@@ -1266,7 +1351,7 @@ sub _invalid_regex_token_prefix {
 }
 
 sub _validate_rule_header_rhs_start {
- my ($spec_content, $line, $rhs, $option, $rule_label) = @_;
+ my ($spec_content, $line, $rhs, $option, $rule_label, $line_position) = @_;
  return 1 unless defined $rhs;
 
  my $trimmed_rhs = $rhs;
@@ -1276,12 +1361,12 @@ sub _validate_rule_header_rhs_start {
  my $remaining = _trim_leading_rule_header_regex_cluster($trimmed_rhs);
 
  if (length($remaining) && _looks_like_split_marker_prefix($remaining) && !_looks_like_supported_split_marker_start($remaining)) {
-  my $position = index($$spec_content, $line);
+  my $position = $line_position // index($$spec_content, $line);
   return _report_split_marker_syntax_error($spec_content, $position, $option, $rule_label);
  }
 
  if (length($remaining) && $remaining =~ m{\A/}o) {
-  my $position = index($$spec_content, $line);
+  my $position = $line_position // index($$spec_content, $line);
   my $bad_regex = _invalid_regex_token_prefix($remaining);
   _report_dsl_validation_failure($spec_content, $position,
    "Invalid regex pattern: $bad_regex",
@@ -1295,12 +1380,12 @@ sub _validate_rule_header_rhs_start {
 
  return 1 unless length($remaining);
  if (my $targets = _bare_group_targets_without_block($remaining)) {
-  my $position = index($$spec_content, $line);
+  my $position = $line_position // index($$spec_content, $line);
   return _report_bare_group_without_block($spec_content, $position, $option, $rule_label, $targets);
  }
  return 1 if _looks_like_supported_rule_paragraph_member_line($remaining);
 
- my $position = index($$spec_content, $line);
+ my $position = $line_position // index($$spec_content, $line);
  _report_dsl_validation_failure($spec_content, $position,
   "Unsupported same-line rule header content",
   "After a rule start or leading regex cluster, use regexes, lifecycle/code blocks, action edges, blind calls, split markers, or end the line",

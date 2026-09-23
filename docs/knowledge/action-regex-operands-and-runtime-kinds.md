@@ -10,13 +10,17 @@ answers:
   - why does Perl matches fail inside a callable codeblock
   - which task owns function position filter_match on Perl
 date: 2026-09-23
-status: current audit; helper repairs remain open
+status: current audit; validation repaired under .86.4.3, lowering/helper repairs remain open
 tags: [regex, actionir, runtime-values, perl, rust, dart, julia, lua]
 evidence: "SESSION-STARTUP-READING.86.4.2.4 reads the neutral binding contract, relevant mdBook sections and first-party AST/evaluator owners. The tracked diagnostic measures thirteen action cases plus an AST probe on accepted production at 7c318569. Source inspection of other backends is not a fresh five-backend execution claim."
 reverify: "bash tools/project_data_run.sh env PERL5LIB= perl -Iperl docs/checkpoints/SESSION-STARTUP-READING.86.4.2.4.pl; inspect values, generated source and both error channels, not process exit alone."
 ---
 
 ## Contract and syntax
+
+Current validation outcome: [[perl-multiline-helper-pattern-validation]] records
+the .86.4.3 repair and its bounded public proof. The observations below retain
+the audit baseline; .86.4.6 owns newly isolated multiline statement lowering.
 
 `capability_conformance/uniform_binding_contract.json` defines one binding holding
 scalar, array, harray or codeblock. The book's value reference and formal grammar

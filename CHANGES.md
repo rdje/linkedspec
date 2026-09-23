@@ -11,6 +11,12 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
 
+## 2026-09-23 — SESSION-STARTUP-READING.86.4.3 - preserve multiline helper patterns during Perl validation
+
+Use a character-position-preserving structural view for complete multiline regex arguments. All three validator passes consume the same view, while compilation and diagnostics retain original source; physical line offsets distinguish real errors from identical pattern payloads. Assignment-position slash decisions and runtime value kinds are unchanged.
+
+Add a six-group focused consumer and invoke it from Phase0. Accepted-source replay fails groups1/2/3/5/6; candidate focused checks pass. LF/CRLF, rule/directive-like payloads, real malformed structure, helper/lifecycle values, division compatibility and original diagnostic attribution are covered. The expanded matrix owns separate statement-lowering defects under .86.4.6 before .86.4.4 public recomposition. Book rendering succeeds; complete Phase0 passes1033/1033 in1211 seconds. Normal staged doctrines govern landing; no canonical CI or push is claimed.
+
 ## 2026-09-23 — CONSUMER-REPORT-DELIVERY.6 - audit consumer fix commits and bootstrap history
 
 Audit the original ten reports against task trees, Knowledge cards, ADR0124 and Git commit evidence. Record June15 cold-build adoption c4926f871 of upstream RGX8763a0e6 separately from September workspace remedy effe3e7b2 and still-open ARCHOGEN/LS-004. Integration a1166ee1d explicitly discarded an uncommitted custom preparation helper and left LS-004 open; it is not a failure-handling repair.
