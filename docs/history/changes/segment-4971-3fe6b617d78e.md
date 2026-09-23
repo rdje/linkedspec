@@ -1,0 +1,168 @@
+## 2026-09-22 — CONFORMANCE-SOURCE-READING.1.88 - read staged lifecycle and trace consumers
+
+13 complete windows cover 1,500 fragments / 57,180 baseline bytes; ordered window SHA-256 ea8f3aa4f0e21715211a51c8b780c954485ebf408a59ae1363542c1964dfd79d. Cumulative reading is 88/143 groups, 108,404 fragments / 4,730,719 baseline bytes and 126 complete files. Staged enrichment, both standalone lifecycle consumers and three ActionIR trace consumers are complete; trace CLI is partial through line 47, including its complete process helper. Six complete consumers pass 188 top-level/688 nested TAP results: staged 143/322, lifecycle 7/274, self-hosted 25/0, compact trace 4/24, method trace 4/39 and pipeline trace 5/29. Staged governance passes 9 rollout legs/123 base and public 6/17/10/129 mutations. Lifecycle governance passes 9 placements/4 duplicates/6 owners/3 malformed twins/6 runtime rows/14 mutations. Forty-eight source-pinned trace-process controls reproduce status/pipe defects and reap all eight timed-out owned children. Existing .2.16.1/.2.16.2 now own ten process helpers, retaining their callers and prerequisites. Startup .44/.73 and all prior repairs remain open. No unread CLI test execution, historical false-green run, fresh-process generated proof, production repair, canonical run, dependency build or push is claimed.
+
+## 2026-09-22 — CONFORMANCE-SOURCE-READING.1.87 - read staged enrichment declaration and scheduling consumers
+
+Nine complete windows cover 1,500 fragments / 54,923 baseline bytes; ordered window SHA-256 23a24a42efdacf352b641c0c3001b01cd77ef6a99d7c91b37546e8afd9fbfced. Cumulative reading is 87/143 groups, 106,904 fragments / 4,673,539 baseline bytes and 120 complete files. Staged enrichment is read through line 1504, inside payload identity; complete executable prefix ends at 1461. The suffix and carrier/admission reading remain .1.88-owned. The exact complete prefix through 1461 passes 135 top-level/227 nested TAP results. Staged governance passes 9 rollout legs/123 base mutations and public 6/17/10/129; typed source passes 14/0/231; recognition passes 138 ActionIR rows/250 calls/58 mutations and 9/9 rollout. Existing startup .44 identity-lifetime and .73 competing-target repairs remain open, along with all prior defects and required source/book/policy prerequisites. No suffix execution, new runtime defect, repair closure, production change, canonical run, dependency build or push is claimed.
+
+## 2026-09-22 — CONFORMANCE-SOURCE-READING.1.86 - read semantic index and sparse slot consumers
+
+13 complete windows cover 1,500 fragments / 61,968 baseline bytes; ordered window SHA-256 4809bc148e5052220956c468ea5fdfdf17cf5a8cfce23351b708e8bcfc36009c. Cumulative reading is 86/143 groups, 105,404 fragments / 4,618,616 baseline bytes and 120 complete files. Semantic foundation, query, runtime/static projection, composed admission and sparse action slots are complete; staged enrichment is read only through its four-line header. Six complete consumers pass 146 top-level/634 nested TAP results; the direct-dependent duplicate-slot suite adds 12/62, totaling 158/696. Semantic governance passes 6 fixture groups/20 exact queries/128 mutations with rollout 9/0 and admission 6/0. Duplicate-slot governance passes 5 fixtures/2 diagnostics/6 runtime rows/59 mutations with rollout 7/0. Known runtime and observation repairs remain open with required source/book/policy prerequisites. No new defect or repair closure, fresh-process generated proof, production change, canonical run, dependency build or push is claimed.
+
+## 2026-09-22 — CONFORMANCE-SOURCE-READING.1.85 - read cursor scalar and semantic call consumers
+
+13 complete windows cover 1,500 fragments / 52,593 baseline bytes; ordered window SHA-256 c34998ba12ac92b0810836ed81caf87c6dfe93027fe5e9bd33799563de736449. Cumulative reading is 85/143 groups, 103,904 fragments / 4,556,648 baseline bytes and 114 complete files. Root selection routes, all three rule-local cursor consumers, scalar numeric/text and semantic call projection are complete; semantic foundation is partial through line 65. Fresh focused proof passes 431 top-level and 213 nested TAP results across seven complete files. Cursor governance passes 36 family spellings / 18 edge cases / 8 parent-child cases / 14 Perl roles / 60 mutations; numeric passes 55 cases / 18 helpers; semantic passes 6 fixture groups / 20 queries / 128 mutations with rollout 9/0 and admission 6/0. Twelve controls reproduce the byte-identical sixth subprocess helper defects and reap both timeout children. Twenty-four source-capture controls reproduce both negative-only cursor observations. Four semantic copy controls pass original 6-assertion tests with shared nested shape, while the 7-assertion guard rejects exactly that mutation. Existing .2.13 owns both cursor-source observations; .2.16 owns the sixth subprocess helper; new .2.18 owns semantic nested-copy test sensitivity. Production copies pass the stronger scratch control. All repair and source/book/policy prerequisites remain; no production change, canonical run, dependency build or push is claimed.
+
+## 2026-09-22 — CONFORMANCE-SOURCE-READING.1.84 - read recognition observation repetition and root selection consumers
+
+10 complete windows cover 1,500 fragments / 54,362 baseline bytes; ordered window SHA-256 3ca32d29209411869425074b019fa6a21ae019e62e79dc5e15e603573aca37c1. Cumulative reading is 84/143 groups, 102,404 fragments / 4,504,055 baseline bytes and 107 complete files. Recognition, recursive observation, repeated action results and root selection core are complete; root selection routes are partial through line 359. Fresh focused proof passes 79 top-level and 475 nested TAP results: recognition 51/99, recursive observation 7/78, repeated action results 10/122, root selection core 7/78 and the complete root routes prefix through line 324 at 4/98. Neutral recognition 138/250/58, typed 14/0/231, repetition 8/0/54 and root 7/0/54 pass. Twelve source-extracted repeated-action process controls confirm signal-status loss and sequential-pipe blocking; both timed-out owned children are reaped. Existing .2.16.1/.2.16.2 now also own the repeated-action CLI helper; all previous repairs and required source/book/policy prerequisites remain. No production repair, fresh-process generated proof, dependency build, canonical run or push is claimed.
+
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.83 - read progressive punctuation and recognition observation boundaries
+
+Read the .1.83 four-file scope: 83/143 groups, 100,904 fragments / 4,449,693 baseline bytes and 103 complete files. Focused proof: Fresh focused proof passes 195 top-level and 424 nested TAP results: progressive contract129/0, punctuation7/73, recognition authority8/285 and the complete read recognition prefix through535 at51/76; four source-extracted compatibility scope controls also pass. Three files finish. .2.15 retains the full progressive carrier observation limit; new .2.17 owns disconnected recognition compatibility observations. New .2.17 ownership and the .2.15 carrier audit are recorded; all repairs retain prerequisites; .1.84 continues.
+
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.82 - complete Phase0 and own subprocess and parent observation gaps
+
+Read the .1.82 four-file scope: 82/143 groups, 99,404 fragments / 4,399,178 baseline bytes and 100 complete files. Focused proof: Fresh focused proof passes 94 top-level assertions and 571 nested assertions across validation fuzz, private progressive authority and the exact read contract prefix; source-extracted parent controls add eight scope checks, and 48 process controls confirm status/pipe behavior with eight timeout children reaped. Three files finish. New .2.15 owns disconnected parent observations; .2.16 owns signal-status loss and sequential-pipe blocking. Prior .1.81 count wording is corrected. New .2.15/.2.16 owners and the .1.81 count correction are recorded; all repairs retain prerequisites; .1.83 continues.
+
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.81 - finish Phase0 subtests and bound remaining observation repairs
+
+Read Phase0 47308–48409: 81/143 groups, 97,904 fragments / 4,347,276 baseline bytes and 97 complete files. Retained proof covers 14 completed subtests, ordinals 1019–1032 with 236 direct assertions and no nested plans. All Phase0 subtests are read; helpers remain. .2.14 has three bounded repair children, and startup .17.2 owns reproduced absent-hash host-slot leakage. The bounded .2.14 inventory is extended; all repairs retain prerequisites; .1.82 continues.
+
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.80 - read shape and receiver checks and own absent host-slot leakage
+
+Read Phase0 46192–47307: 80/143 groups, 96,802 fragments / 4,281,755 baseline bytes and 97 complete files. Retained proof covers 17 completed subtests, ordinals 1002–1018 with 244 direct assertions and no nested plans. Shape/receiver and numeric comparison checks retain exact results; startup .17.1 now owns reproduced absent-receiver host-slot leakage and .2.14 owns remaining obsolete target descriptions. The bounded .2.14 inventory is extended; all repairs retain prerequisites; .1.81 continues.
+
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.79 - read binding and newline checks and extend observation repair
+
+Read Phase0 45064–46191: 79/143 groups, 95,686 fragments / 4,216,269 baseline bytes and 97 complete files. Retained proof covers 19 completed subtests, ordinals 983–1001 with 246 direct assertions and no nested plans. Binding and newline tests preserve concrete runtime and lowering claims; .2.14 now owns the adjacent collapsed comparisons and stale descriptions. The bounded .2.14 inventory is extended; all repairs retain prerequisites; .1.80 continues.
+
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.78 - read function staging and own working variable observation drift
+
+Read Phase0 43917–45063: 78/143 groups, 94,558 fragments / 4,150,753 baseline bytes and 97 complete files. Retained proof covers 22 completed subtests, ordinals 961–982 with 392 direct assertions and no nested plans. Function staging, runtime values and recursion checks retain bounded claims; new .2.14 owns working-variable observation and description drift. Fresh diagnosis is owned by .2.14; all repairs retain prerequisites; .1.79 continues.
+
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.77 - read trace and cursor tests and own missing source observation
+
+Read Phase0 42888–43916: 77/143 groups, 93,411 fragments / 4,085,281 baseline bytes and 97 complete files. Retained proof covers 35 completed subtests, ordinals 926–960 with 479 direct assertions and no nested plans. Trace and runtime cursor observations remain distinct from descriptor equality; new .2.13 owns the reproduced negative-only source check. Fresh diagnosis is owned by .2.13; all repairs retain prerequisites; .1.78 continues.
+
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.76 - read shipped grammar runtime smokes and adapter boundaries
+
+Read Phase0 42088–42887: 76/143 groups, 92,382 fragments / 4,019,804 baseline bytes and 97 complete files. Retained proof covers 33 completed subtests, ordinals 893–925 with 650 direct assertions and no nested plans. Grammar metadata and source checks remain distinct from bounded parser results and legacy Perl adapter execution. Existing repairs remain; no new defect or fresh execution; .1.77 continues.
+
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.75 - read quote boundaries and shipped grammar migration checks
+
+Read Phase0 41196–42087: 75/143 groups, 91,582 fragments / 3,954,348 baseline bytes. Retained thirty-six-subtest proof has 470 assertions for quote-aware statement boundaries and shipped grammar migration checks. Descriptor/source observations remain distinct from the exact regdef parser result. Existing repairs remain; no new defect or fresh execution; .1.76 completes the VHDL concurrent-assignment source test.
+
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.74 - read source boundary projections and legacy classification checks
+
+Read Phase0 40443–41195: 74/143 groups, 90,690 fragments / 3,888,884 baseline bytes. Retained twenty-nine-subtest proof has 323 assertions for typed source-boundary projections and legacy classification. Runtime-call substrings and metadata do not independently execute endpoint arithmetic or boundary advancement. Existing repairs remain; no new defect or fresh execution; .1.75 continues split/trim/filter metadata.
+
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.73 - read switch safety and compatibility migration observations
+
+Read Phase0 39355–40442: 73/143 groups, 89,937 fragments / 3,823,480 baseline bytes. Retained twenty-eight-subtest proof has 291 direct plan entries including 5 nested results, with 40 inner assertions. Switch/while runtime controls, semicolonless metadata, raw/unresolved blockers and compatibility migration summaries remain distinct observations. Existing .2.10 and other repairs remain; no new defect or fresh execution; .1.74 continues prefix-newline metadata.
+
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.72 - read reducers and meaningful lifecycle source and result locks
+
+Read Phase0 38504–39354: 72/143 groups, 88,849 fragments / 3,758,044 baseline bytes. Retained seventeen-subtest proof has 235 direct assertions across reducers, flat lists, typed transforms and conditionals/lifecycle. Nine runtime results and seven positive marker source checks are meaningful bounded observations; existing .2.10 and startup .27 gaps remain. No new defect, fresh execution or repair closure; .1.73 continues the switch test.
+
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.71 - read array ordering and own assignment description drift
+
+Read Phase0 37745–38503:71/143 groups,87,998 fragments /3,692,510 baseline bytes. Retained twenty-one-subtest proof has 196 assertions; four fresh exact subtests pass 16 assertions and four public assignment executions return expected arrays. Own the four stale list-context-flattening descriptions under .2.12 with durable reproduction; no test/runtime repair closes. .1.72 continues lifecycle num_avg.
+
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.70 - read hash transformations and snapshot lowering checks
+
+Read Phase0 36948–37744: 70/143 groups, 87,239 fragments / 3,627,006 baseline bytes. Retained twenty-one-subtest proof has 196 assertions: 168 descriptor and 28 direct-lowering checks. Hash lookup, merge, snapshot and key-transform expressions remain distinct from executed isolation/mutation behavior and .2.10-owned code-slot comparisons. No repair closes; .1.71 continues lifecycle pick_keys.
+
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.69 - read scalar membership and reducer lowering checks
+
+Read Phase0 36291–36947: 69/143 groups, 86,442 fragments / 3,561,482 baseline bytes. Retained nineteen-subtest proof has 150 assertions: 108 descriptor and 42 direct-lowering checks. Scalar membership, replacement, boundary, concatenation, index and reducer expectations remain distinct from target execution and .2.10-owned code-slot comparisons. No repair closes; .1.70 continues lifecycle count_keys.
+
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.68 - read fallback lowering and normalization metadata
+
+Read Phase0 35430–36290: 68/143 groups, 85,785 fragments / 3,496,045 baseline bytes. Retained twenty-two-subtest proof has 221 assertions: 204 descriptor and seventeen direct-lowering checks. Fallback, definedness, emptiness and normalization textual observations remain distinct from .2.10-owned code-slot comparisons and target execution. No repair closes; .1.69 continues the partial scalar-normalization test.
+
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.67 - read payload branches and captured-call descriptor comparisons
+
+Read Phase0 34546–35429: 67/143 groups, 84,924 fragments / 3,430,534 baseline bytes. Retained twenty-subtest proof has 240 direct assertions and no nested plans. Payload branches and captured calls inspect descriptor metadata; uppercase-slot observations remain .2.10-owned. No new runtime execution or repair; .1.68 continues the action switch call-value comparison.
+
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.66 - read scalar and numeric descriptor comparisons
+
+Read Phase0 33716–34545: 66/143 groups, 84,040 fragments / 3,365,034 baseline bytes. Retained twenty-subtest proof has 240 direct assertions and no nested plans. Scalar and numeric helper pairs inspect descriptor metadata; uppercase-slot observations remain .2.10-owned. No new runtime execution or repair; .1.67 continues the lifecycle min/max comparison.
+
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.65 - read fluent container helper comparisons and observation limits
+
+Read Phase0 32759–33715: 65/143 groups, 83,210 fragments / 3,299,611 baseline bytes. Retained nineteen-subtest proof has 222 direct assertions, including seven nested results / 63 inner assertions. Fluent snapshot branches and container helper pairs inspect descriptor metadata; uppercase-slot observations remain .2.10-owned. No new runtime execution or repair; .1.66 continues the lifecycle slice-array comparison.
+
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.64 - read mutual marker nesting and bounded helper coverage
+
+Read Phase0 31259–32758: 64/143 groups, 82,253 fragments / 3,234,113 baseline bytes. Retained eleven-subtest proof has 95 direct assertions, including 42 nested results / 329 inner assertions. Same-family node/hit comparisons and deep mutual marker helper thresholds retain exact metadata limits; code-output-labelled slot comparisons remain .2.10-owned. No new runtime execution or repair; .1.65 continues the partial action fixture.
+
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.63 - read outer-family selected-node checks and comparison limits
+
+Read Phase0 29759–31258: 63/143 groups, 80,753 fragments / 3,179,902 baseline bytes. Retained ten-subtest proof has 90 direct assertions, including 35 nested results / 252 inner assertions. Selected marker-node checks are distinct from complete node-list or hit-map equality; code-output-labelled slot comparisons remain .2.10-owned. No new runtime execution or repair; .1.64 continues the partial lifecycle fixture.
+
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.62 - read switch outer-family comparisons and exact metadata limits
+
+Read Phase0 28259–29758: 62/143 groups, 79,253 fragments / 3,127,736 baseline bytes. Retained eleven-subtest proof has 111 direct assertions, including 35 nested results / 308 inner assertions. Same-family node/hit comparisons and cross-family node-only comparisons retain exact metadata limits; code-output-labelled slot comparisons remain .2.10-owned. No new runtime execution or repair; .1.63 continues the partial lifecycle case list.
+
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.61 - read structured switch branch comparisons and preserve observation limits
+
+Read Phase0 26759–28258: 61/143 groups, 77,753 fragments / 3,067,280 baseline bytes. Retained eleven-subtest proof has 107 direct assertions, including 42 nested results / 364 inner assertions. Structured switch branch comparisons retain metadata proof; code-output-labelled slot comparisons remain .2.10-owned. No independently reproduced new defect or target execution; all repairs remain. .1.62 continues the partial action pair.
+
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.60 - read multi-case switch composition and metadata coverage
+
+Read Phase0 25259–26758: 60/143 groups, 76,253 fragments / 3,006,852 baseline bytes. Retained twelve-subtest proof has 108 direct assertions, including 42 nested results / 336 inner assertions. Multi-case switch compositions inspect metadata and current slot shape, without code or execution equivalence claims. No new defect or target execution; all repairs remain. .1.61 continues the partial lifecycle fixture.
+
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.59 - read deep switch nesting and descriptor slot shape
+
+Read Phase0 23759–25258: 59/143 groups, 74,753 fragments / 2,951,000 baseline bytes. Retained nine-subtest proof has 93 direct assertions, including 28 nested results / 252 inner assertions. Deep inline/marker and multi-case switch fixtures compare metadata and current slot shape, without code or execution equivalence claims. No new defect or target execution; all repairs remain. .1.60 continues the partial lifecycle fixture.
+
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.58 - read mixed switch and nested marker metadata
+
+Read Phase0 22259–23758: 58/143 groups, 73,253 fragments / 2,895,669 baseline bytes. Retained 18-subtest proof has 160 direct assertions, including 63 nested results / 476 inner assertions. Mixed attached/plain switches and nested marker flow preserve the distinction between explicit slot shape and unsupported code-equivalence claims. No new defect or target execution; all repairs remain. .1.59 continues the next partial fixture.
+
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.57 - read snapshot and bare-marker descriptor coverage
+
+Read Phase0 21058–22258: 57/143 groups, 71,753 fragments / 2,833,045 baseline bytes. Retained 18-subtest proof has 195 direct assertions, including 59 nested results / 472 inner assertions. Snapshot helpers, optional semicolons, bare markers and attached switch metadata retain the .2.10 code-slot observation limit. No new defect or target execution; all repairs remain. .1.58 owns the final fluent outer-switch assertion.
+
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.56 - read switch coverage and own vacuous code comparisons
+
+Read Phase0 19558–21057: 56/143 groups, 70,552 fragments / 2,767,515 baseline bytes. Retained 18-subtest proof has 148 direct assertions, including 74 nested results / 557 inner assertions. Fresh controls expose absent-code-slot comparisons and invalid scalar capture recipes; .2.10/.2.11 own repairs. Current generated-code equivalence wording is corrected; historical reads and passes remain. .1.57 completes the LX flat-list test.
+
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.55 - read mixed branches and nested switch equivalence
+
+Read Phase0 18058–19557:55/143 groups,69,052 fragments/2,703,226 baseline bytes. Retained proof covers16 completed subtests/151 direct assertions, including56 nested results whose inner plans separately pass448 assertions. No new defect or target runtime execution; all repairs remain. Exact windows and comprehension are task/card-owned; .1.56 continues the next lifecycle cases list.
+
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.54 - read structured branch and lifecycle equivalence coverage
+
+Read Phase0 16880–18057:54/143 groups,67,552 fragments/2,639,708 baseline bytes. Retained proof covers20 completed subtests/227 direct assertions, including12 nested results whose inner plans separately pass96 assertions. No new defect or runtime execution; all repairs remain. Exact windows and comprehension are task/card-owned; .1.55 continues the seven-tag lifecycle test.
+
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.53 - read collection and branch lowering contracts
+
+Read Phase0 16062–16879:53/143 groups,66,374 fragments/2,574,186 baseline bytes. Retained proof covers13 completed subtests/224 assertions. Fresh lowering confirms two push descriptions still claim wrapped targets despite bare inputs; .2.9 owns correction. Exact windows, comprehension and recipe are task/card-owned. .1.54 continues the partial lifecycle switch/case test; all prior repairs remain.
+
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.52 - read entry and match helpers and diagnose invalid numeric fixture
+
+Read Phase0 14985–16061:52/143 groups,65,556 fragments/2,508,708 baseline bytes. Retained proof covers27 completed subtests/129 assertions. Exact num_min lowering matches a malformed positive expectation but fails compilation; the balanced twin returns2. .2.8 owns fixture correction and executable proof. Comprehension, exact windows and diagnosis are task/card-owned; .1.53 continues the partial method-contract test. Earlier repairs remain.
+
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.51 - read capture boundaries and diagnose mark-copy clearing test gap
+
+Read Phase0 13632–14984:51/143 groups,64,479 fragments/2,443,528 baseline bytes. Retained ec10be6b proof covers40 completed subtests/266 assertions. Four fresh controls confirm the mark_copy clearing observation gap; .2.7 owns repair. Production clears a seeded-zero target. Exact windows, comprehension and reproduction are task/card-owned; .1.52 continues the partial capture-column test. All earlier repairs and prerequisites remain.
+
+## 2026-09-21 — LIVE-DOCUMENT-PRESSURE-CONTAINMENT.15 - admit approved conformance evidence capacity
+
+Admit exactly fourteen approved remaining-conformance evidence controls under ADR0122 and containment .15. Preserve both governed history rollovers and prior evidence; forecast the remaining 98 allowance units after actual admission overhead. Reading remains 50/143; MethodExpr .2.5 and EmitContext .2.6 remain open. Exact production/preservation proof and ordinary staged canonical CI govern landing; .1.51 resumes after clean commit. The director separately granted exact .15.1 checker-mirror correction after canonical failure;37 self-tests/50 registry cases and actual partition validation pass. Fresh canonical proof remains required.
+
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.4.1
+
+Propose fourteen finite evidence-capacity controls for remaining reading; exact objects/models in task .4.1. No limits change. Explicit .4.2 approval and canonical admission precede .1.51.
+
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.50 - read ActionIR lazy-loading and capture lowering tests
+
+Read Phase0 12850–13631: 50/143 groups, 63,126 fragments / 2,378,009 baseline bytes. Retained proof covers 13 complete subtests / 118 assertions. Fresh six-test / 42-assertion probes confirm six misleading EmitContext load descriptions, owned by .2.6. The 90-assertion lowering test remains partial after assertion73; .1.51 continues. Exact windows, reproduction and comprehension are in the task-tree and conformance-perl-consumer-reading; all repair prerequisites remain.
+
+## 2026-09-21 — CONFORMANCE-SOURCE-READING.1.49 - read compiler owner paths and diagnose lazy-load test blind spot
+
+Eleven complete windows cover 994 fragments / 65,520 baseline bytes; ordered window SHA-256 d73aae559d4b4280080e5d3df87d2300a07cc2f30f85439045cde24f95689a60. Cumulative reading is 49/143: 62,344 fragments / 2,312,539 baseline bytes and 97 complete files. Phase0 is partial through line 12849. Unchanged canonical commit 87b35665e retains PASS for 29 completed subtests, ordinals 365–393 with 202 assertions; sequential TAP numbers and unchanged Phase0/own Perl/spec identities are verified. Fresh TOOLBOX6.2 extraction passes the MethodExpr test with all7 assertions both unchanged and with an inert post-parse Deps fixture load; independent cold probes observe 0/0 versus 0/1. Repair .2.5 owns the wrong-time observation. The Diagnostics lazy-load heredoc remains partial before its assertions; .1.50 owns the suffix. Targeted helper inspection at48608–48631 grants no reading credit outside this scope. Historical whole-gate proof remains 1032 top-level tests; no new full gate, runtime repair, dependency build or push is claimed.
+

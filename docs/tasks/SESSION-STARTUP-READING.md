@@ -37,7 +37,7 @@ remain. Reading completion and runtime signoff remain distinct.
 - ID: `SESSION-STARTUP-READING`
   Status: `active`
   Goal: Recover the repair frontier with targeted reading and preserve the separate full-reading audit.
-  Children: `SESSION-STARTUP-READING.1`, `SESSION-STARTUP-READING.2`, `SESSION-STARTUP-READING.3`, `SESSION-STARTUP-READING.4`, `SESSION-STARTUP-READING.5`, `SESSION-STARTUP-READING.6`, `SESSION-STARTUP-READING.7`, `SESSION-STARTUP-READING.8`, `SESSION-STARTUP-READING.9`, `SESSION-STARTUP-READING.10`, `SESSION-STARTUP-READING.11`, `SESSION-STARTUP-READING.12`, `SESSION-STARTUP-READING.13`, `SESSION-STARTUP-READING.14`, `SESSION-STARTUP-READING.15`, `SESSION-STARTUP-READING.16`, `SESSION-STARTUP-READING.17`, `SESSION-STARTUP-READING.18`, `SESSION-STARTUP-READING.19`, `SESSION-STARTUP-READING.20`, `SESSION-STARTUP-READING.21`, `SESSION-STARTUP-READING.22`, `SESSION-STARTUP-READING.23`, `SESSION-STARTUP-READING.24`, `SESSION-STARTUP-READING.25`, `SESSION-STARTUP-READING.26`, `SESSION-STARTUP-READING.27`, `SESSION-STARTUP-READING.28`, `SESSION-STARTUP-READING.29`, `SESSION-STARTUP-READING.30`, `SESSION-STARTUP-READING.31`, `SESSION-STARTUP-READING.32`, `SESSION-STARTUP-READING.33`, `SESSION-STARTUP-READING.34`, `SESSION-STARTUP-READING.35`, `SESSION-STARTUP-READING.36`, `SESSION-STARTUP-READING.37`, `SESSION-STARTUP-READING.38`, `SESSION-STARTUP-READING.39`, `SESSION-STARTUP-READING.40`, `SESSION-STARTUP-READING.41`, `SESSION-STARTUP-READING.42`, `SESSION-STARTUP-READING.43`, `SESSION-STARTUP-READING.44`, `SESSION-STARTUP-READING.45`, `SESSION-STARTUP-READING.46`, `SESSION-STARTUP-READING.47`, `SESSION-STARTUP-READING.49`, `SESSION-STARTUP-READING.50`, `SESSION-STARTUP-READING.51`, `SESSION-STARTUP-READING.52`, `SESSION-STARTUP-READING.53`, `SESSION-STARTUP-READING.54`, `SESSION-STARTUP-READING.55`, `SESSION-STARTUP-READING.56`, `SESSION-STARTUP-READING.57`, `SESSION-STARTUP-READING.58`, `SESSION-STARTUP-READING.59`, `SESSION-STARTUP-READING.60`, `SESSION-STARTUP-READING.61`, `SESSION-STARTUP-READING.62`, `SESSION-STARTUP-READING.63`, `SESSION-STARTUP-READING.64`, `SESSION-STARTUP-READING.65`, `SESSION-STARTUP-READING.66`, `SESSION-STARTUP-READING.67`, `SESSION-STARTUP-READING.68`, `SESSION-STARTUP-READING.69`, `SESSION-STARTUP-READING.70`, `SESSION-STARTUP-READING.71`, `SESSION-STARTUP-READING.72`, `SESSION-STARTUP-READING.73`, `SESSION-STARTUP-READING.74`, `SESSION-STARTUP-READING.75`, `SESSION-STARTUP-READING.76`, `SESSION-STARTUP-READING.77`, `SESSION-STARTUP-READING.78`, `SESSION-STARTUP-READING.79`, `SESSION-STARTUP-READING.80`, `SESSION-STARTUP-READING.81`, `SESSION-STARTUP-READING.82`, `SESSION-STARTUP-READING.83`, `SESSION-STARTUP-READING.84`, `SESSION-STARTUP-READING.85`, `SESSION-STARTUP-READING.86`
+  Children: `SESSION-STARTUP-READING.1`, `SESSION-STARTUP-READING.2`, `SESSION-STARTUP-READING.3`, `SESSION-STARTUP-READING.4`, `SESSION-STARTUP-READING.5`, `SESSION-STARTUP-READING.6`, `SESSION-STARTUP-READING.7`, `SESSION-STARTUP-READING.8`, `SESSION-STARTUP-READING.9`, `SESSION-STARTUP-READING.10`, `SESSION-STARTUP-READING.11`, `SESSION-STARTUP-READING.12`, `SESSION-STARTUP-READING.13`, `SESSION-STARTUP-READING.14`, `SESSION-STARTUP-READING.15`, `SESSION-STARTUP-READING.16`, `SESSION-STARTUP-READING.17`, `SESSION-STARTUP-READING.18`, `SESSION-STARTUP-READING.19`, `SESSION-STARTUP-READING.20`, `SESSION-STARTUP-READING.21`, `SESSION-STARTUP-READING.22`, `SESSION-STARTUP-READING.23`, `SESSION-STARTUP-READING.24`, `SESSION-STARTUP-READING.25`, `SESSION-STARTUP-READING.26`, `SESSION-STARTUP-READING.27`, `SESSION-STARTUP-READING.28`, `SESSION-STARTUP-READING.29`, `SESSION-STARTUP-READING.30`, `SESSION-STARTUP-READING.31`, `SESSION-STARTUP-READING.32`, `SESSION-STARTUP-READING.33`, `SESSION-STARTUP-READING.34`, `SESSION-STARTUP-READING.35`, `SESSION-STARTUP-READING.36`, `SESSION-STARTUP-READING.37`, `SESSION-STARTUP-READING.38`, `SESSION-STARTUP-READING.39`, `SESSION-STARTUP-READING.40`, `SESSION-STARTUP-READING.41`, `SESSION-STARTUP-READING.42`, `SESSION-STARTUP-READING.43`, `SESSION-STARTUP-READING.44`, `SESSION-STARTUP-READING.45`, `SESSION-STARTUP-READING.46`, `SESSION-STARTUP-READING.47`, `SESSION-STARTUP-READING.49`, `SESSION-STARTUP-READING.50`, `SESSION-STARTUP-READING.51`, `SESSION-STARTUP-READING.52`, `SESSION-STARTUP-READING.53`, `SESSION-STARTUP-READING.54`, `SESSION-STARTUP-READING.55`, `SESSION-STARTUP-READING.56`, `SESSION-STARTUP-READING.57`, `SESSION-STARTUP-READING.58`, `SESSION-STARTUP-READING.59`, `SESSION-STARTUP-READING.60`, `SESSION-STARTUP-READING.61`, `SESSION-STARTUP-READING.62`, `SESSION-STARTUP-READING.63`, `SESSION-STARTUP-READING.64`, `SESSION-STARTUP-READING.65`, `SESSION-STARTUP-READING.66`, `SESSION-STARTUP-READING.67`, `SESSION-STARTUP-READING.68`, `SESSION-STARTUP-READING.69`, `SESSION-STARTUP-READING.70`, `SESSION-STARTUP-READING.71`, `SESSION-STARTUP-READING.72`, `SESSION-STARTUP-READING.73`, `SESSION-STARTUP-READING.74`, `SESSION-STARTUP-READING.75`, `SESSION-STARTUP-READING.76`, `SESSION-STARTUP-READING.77`, `SESSION-STARTUP-READING.78`, `SESSION-STARTUP-READING.79`, `SESSION-STARTUP-READING.80`, `SESSION-STARTUP-READING.81`, `SESSION-STARTUP-READING.82`, `SESSION-STARTUP-READING.83`, `SESSION-STARTUP-READING.84`, `SESSION-STARTUP-READING.85`, `SESSION-STARTUP-READING.86`, `SESSION-STARTUP-READING.87`
 - ID: `SESSION-STARTUP-READING.1`
   Status: `done`
   Goal: Commit the authorized startup-reading checkpoint before continuing the reading pass.
@@ -2066,7 +2066,6 @@ remain. Reading completion and runtime signoff remain distinct.
   Canonical trigger: `none` — bounded reading and factual reconciliation only; no production, public or infrastructure change.
   Verification: Five scopes total 1,500 lines / 51,021 baseline-identical bytes; ordered path/kind/range/byte/SHA audit d20f95e1727063d5d58c526759b549405f6820b8f45f14999c500fbc484f9ce7. Complete lifecycle tests: native/reconstructed duplicate execution, typed placement/provenance and malformed/owner/plain-node controls, generated-plan execution and emitted-text inspection without independent emitted compilation. Trace target has twelve tests; its historical eleven-test record is qualified, and emitted trace proof is also text inspection. Typed consumer covers 3/7/6/3 values, four private errors, exact detached 92+7 catalogs and three native/reconstructed/generated-helper fixtures; catalog equality is not execution of every helper. Casing consumer pins identity and checks direct/helper/receiver/array paths for twelve fixtures; label prefix retains distinct precomposed/decomposed/case identities with .66 owning its suffix. Fresh neutral typed 14/0/231, Unicode five-module byte regeneration/twelve fixtures and lifecycle fourteen mutations pass. Knowledge retains .61's dated typed four-test result and existing .52–.54 boundaries; this checkpoint adds no native target or optional-matrix rerun. Focused continuity proof is retained with the commit.
   Commit: `SESSION-STARTUP-READING.3.3.65 - complete lifecycle trace and typed-source consumer reading`
-
 - ID: `SESSION-STARTUP-READING.3.3.66`
   Status: `done`
   Goal: Read Rust group 66: 1,468 lines/fragments, 48,324 bytes.
@@ -2080,7 +2079,6 @@ remain. Reading completion and runtime signoff remain distinct.
   Canonical trigger: `none` — bounded reading and factual reconciliation only; no production, public or infrastructure change.
   Verification: Four scopes total 1,468 lines / 48,324 baseline-identical bytes; ordered path/kind/range/byte/SHA audit c917155b39652776984df2a0ff341ef71799394032fce55c8f5bcb9e048fe576. Unicode labels: three native/trace/generated-helper and strict-loader tests; emitted identity is text inspection, and loader checks compilation without loaded-parser execution. Uniform binding: sixteen tests cover selector rejection, retained constructors, detached mutations, precedence, wrong-kind fields and native/generated helpers. Variadic: seven tests preserve exact unions, argument order, fresh rest arrays, arity/invalid-definition diagnostics and reconstructed/generated helpers; emitted signatures are inspected, not independently compiled. Write vivification: five parent tests cover frozen syntax/success/failure/local presence and one carrier fixture with an independently compiled emitted child, relative Cargo dependency and checked exit status. Four existing Knowledge cards retain these boundaries and historical runtime counts; no native or child Cargo target is freshly rerun. Fresh neutral Unicode806/9/8/2, binding11/7/6/8, signature3/9/7 and write5/7/11/16/3/3/8/105 pass. Focused continuity proof is retained with the commit.
   Commit: `SESSION-STARTUP-READING.3.3.66 - complete final Rust contract consumer reading`
-
 - ID: `SESSION-STARTUP-READING.3.3.67`
   Status: `done`
   Goal: Close the Rust reading lane after every bounded child and final delta review.
@@ -2092,7 +2090,6 @@ remain. Reading completion and runtime signoff remain distinct.
   Canonical trigger: `milestone` — Rust reading parent closeout; require receipt-bound canonical CI on the exact staged candidate.
   Verification: PASS: the existing scope audit covers all 412 baseline paths / 3,533,382 bytes exactly once, including two empty files and 89,242 per-window lines/fragments across 66 bounded children. All 66 done subjects resolve to unique commits; verification metadata, current mode/blob/byte identity and zero Rust additions/deletions/uncommitted inputs are independently checked. Reading-commit audit 312b1b4c03b2ad3897765e283c9772a7536122b39ee6d5740dff90874b860815; Rust tree-record audit 53e7795d9405342897bd3990e8fd55ee3a8cfdddb6e67dc977fefcb72dd3b68b. All 141 Knowledge paths changed by reading commits remain present. The 34 post-Perl repair owners preserve 90 pending nodes / 73 pending leaves, with exact body digest 3664cc76bff42040631d688fee5fa75bd4410f6588e1fd9eb45a882532ea967b. Existing earlier/cross-cutting repairs remain open. Reading is complete, not defect remediation or exhaustive runtime signoff. Final canonical outcome and exact staged receipt are required before landing and retained in the commit.
   Commit: `SESSION-STARTUP-READING.3.3.67 - close Rust reading with exact coverage and durable repair ownership`
-
 - ID: `SESSION-STARTUP-READING.3.4`
   Status: `done`
   Goal: Split and read all 115 baseline Dart entries, including compiler/runtime, tests, commands, and package inputs.
@@ -2100,7 +2097,6 @@ remain. Reading completion and runtime signoff remain distinct.
   Acceptance: Define bounded file/range children before reading and account for every path plus current deltas. DART-STARTUP-READING.3 may complete this reading node only after exact coverage/comprehension and child-commit proof; pending repairs remain owned separately.
   Verification: Dart physical reading is complete at 55/55 children, 80,297 fragments / 2,471,305 bytes. Dart reading closes under .3.2 / ADR0114, exercising the director's explicit delegated decision for this reading-only boundary. Independent proof covers all 55 commits, 115 baseline-identical files, 80,297 fragments and 2,471,305 bytes. All 25 repair roots / 69 pending nodes remain open. Committed diagnostics pass 461 tests, storage25/47, CLI66 twice and corpus105; the full Dart gate remains failed on formatting and two SDK warnings. No canonical CI or PGEN/RGX build ran. Next is startup .3.5 Julia decomposition. Capacities .4/.5/.6 remain committed under containment .8/.9/.10 and ADR0110/0111/0112. Startup .3/.4/.5 still gate repairs; .7 is approved and implemented by containment .11 / ADR0113 with exact history preservation; the director granted a one-time focused/receipt exception on 2026-09-11; Containment .11 is committed at ad64f76f; Dart .3.2 / ADR0114 now close only this reading prerequisite; next .3.5 Julia decomposition.
   Commit: `DART-STARTUP-READING.3.2 - close verified Dart reading under delegated decision` (cross-tree reading closeout)
-
 - ID: `SESSION-STARTUP-READING.3.5`
   Status: `done`
   Goal: Split and read all 95 baseline Julia entries, including compiler/runtime, tests, commands, and package inputs.
@@ -2109,7 +2105,6 @@ remain. Reading completion and runtime signoff remain distinct.
   Reading owner: `docs/tasks/JULIA-STARTUP-READING.md` retains exact scope/digest, comprehension and repair evidence. This startup node remains the prerequisite owner.
   Verification: Julia .3.2 closes all 52 reading groups under explicit ADR0117 approval. Audit d62999c12 and its fresh replay verify 95 baseline-identical files (75,984 lines / 2,693,170 bytes), 52 committed scopes and activations, 122 fact cards and 80 pending repair nodes. Recorded component proof passes 12,903 assertions, storage checks for 22 owners and five package trees, primary CLI conformance and 105 corpus fixtures. All repairs and later verification requirements remain open. Lua startup .3.6 decomposition is next; full-codebase reading, formal book reconciliation and policy review remain incomplete. Exact plan and all source identities remain frozen in the Julia owner.
   Commit: `JULIA-STARTUP-READING.3.2 - close verified Julia reading under approved exception` (Julia reading prerequisite closure)
-
 - ID: `SESSION-STARTUP-READING.3.5.0`
   Status: `done`
   Goal: Inventory and plan exact bounded Julia source reading within governed evidence capacity.
@@ -2122,7 +2117,6 @@ remain. Reading completion and runtime signoff remain distinct.
   Canonical trigger: `none` — bounded source-reading inventory/decomposition or capacity proposal only; no source, runtime, dependency, infrastructure or control change. A capacity implementation or later milestone retains its own required boundary.
   Verification: All 95 Julia baseline modes/blobs/current bytes remain exact;52 groups /146 inclusive ranges independently reconstruct 75984 lines/2693170 bytes exactly once, with all child bounds/digests. No empty entry or oversized-line split. New 639-line/48991-byte Julia member preserves startup member space and stays within unchanged aggregate/member controls. Compared 55 Dart reading commits forecast 1144 task lines/245095 bytes,5490 Knowledge lines/377493 bytes and 387 map lines/77475 bytes; current resulting controls and history checks pass, but future history rollovers have no free member slots and remain explicitly owned by Julia .4. All prior task/Knowledge/ADR/history evidence and source bytes remain; book and pointers distinguish plan 0/52 from physical reading. No runtime/component gate, canonical CI or dependency build is claimed.
   Commit: `SESSION-STARTUP-READING.3.5.0 - freeze exact bounded Julia reading plan`
-
 - ID: `SESSION-STARTUP-READING.3.6`
   Status: `done`
   Goal: Split and read all 99 baseline Lua entries, including native adapters, both-ABI tests, runtime, and commands.
@@ -2131,7 +2125,6 @@ remain. Reading completion and runtime signoff remain distinct.
   Acceptance: Define bounded file/range children before reading; generated tables and the large test runner stay in scope.
   Verification: Lua reading closes under the director-authorized ADR0119 disposition. Both exact .3.1 recipes pass again: 51 unique reading commits/activations, 149 ranges, 99 baseline-identical files, 71,269 fragments /2,732,450 bytes and 51 unchanged comprehension cards. All 35 repair roots/145 pending nodes remain exact. Known PUC5.5 native120/121 and generated79/80 failures, four native-error exclusions, absent full Lua/PUC5.4 proof and startup .28.7 remain explicit. Close only Lua .1/.3/.3.2 and startup .3.6; no canonical CI/receipt or dependency build. The requirement is reuse of compatible unchanged RGX/PGEN products, not a restriction on reading. Next startup .3.7 inventories and bounds remaining supporting ranges; all repairs, later verification, formal book/policy and parked features remain.
   Commit: `LUA-STARTUP-READING.3.2 - close authorized Lua reading and resume supporting inventory` (Lua reading container)
-
 - ID: `SESSION-STARTUP-READING.3.6.0`
   Status: `done`
   Goal: Inventory all Lua inputs and freeze bounded reading ownership with a measured evidence-capacity plan.
@@ -2144,7 +2137,6 @@ remain. Reading completion and runtime signoff remain distinct.
   Canonical trigger: `none` — source-reading inventory/decomposition and capacity proposal only. Any later infrastructure implementation or reading closeout retains its own required verification boundary.
   Verification: Lua decomposition freezes 51 pending reading children across 99 baseline-identical files: 71,268 physical lines, 71,269 fragments and 2,732,450 bytes. The independent 149-range audit includes two UTF-8-safe byte windows for an oversized generated MCP line. No source comprehension is claimed. The current plan fits unchanged limits; comparable Julia reading growth exceeds remaining Knowledge capacity. LUA-STARTUP-READING.4.1 prepares a coherent capacity disposition before reading. All previous reading, repairs and verification requirements remain intact. Independent replay preserves exact inventory/range/child-summary digests, all bounds, complete EOF coverage and zero reading credit. Comparable 52-commit audit reproduces Knowledge 6615 lines / 402364 bytes / 27 files and complete new history records (364 change lines / 365 note lines), excluding rollover subtraction. Preservation passes 2371 prior task nodes and 2205 source/card/decision/history/control files, exact history suffixes, four current Lua frontiers and all 27 rendered limitations. Knowledge generation (1084 facts / 8729 keys), explicit memory, both histories, book build and diff checks pass. Resulting Knowledge is 1085 files / 73927 lines / 5854640 bytes; tasks 104 files / 85296 lines / 8953769 bytes before this same-line result update. All collection/member limits remain unchanged and pass; normal doctrine hooks govern landing.
   Commit: `SESSION-STARTUP-READING.3.6.0 - freeze exact Lua reading ownership and capacity intake`
-
 - ID: `SESSION-STARTUP-READING.3.7`
   Status: `done`
   Goal: Account for all 158 original supporting entries and read the current language/runtime dependencies required by the director’s clarified scope.
@@ -2154,7 +2146,6 @@ remain. Reading completion and runtime signoff remain distinct.
     use LinkedSpec probes before investigating a spec's behavior, and do not infer defects from historical syntax alone.
   Verification: Supporting .1 closes with exact158-source/174-range baseline and current identity; required629/96781, historical1500/61165 and explicit omissions23484/806310 fragments/bytes. All21 reading nodes, three reading commits/five ranges/nineteen windows and nine pending repair nodes reconcile; focused normal doctrines/book/preservation replace this one full-CI closeout under ADR0120. No remaining reading or runtime signoff is implied.
   Commit: `SUPPORTING-SOURCE-READING.1 - close audited supporting reading under explicit focused grant`
-
 - ID: `SESSION-STARTUP-READING.3.7.0`
   Status: `done`
   Activation commit: `735f0337883baef5ac4422976879d09725e0e8ea`.
@@ -2168,7 +2159,6 @@ remain. Reading completion and runtime signoff remain distinct.
   Verification: Supporting-source inventory .3.7.0 reconciles all 158 baseline-identical files under conf, tablescript, noncore, specs and ebnf: 25,612 LF delimiters, 25,613 fragments and 964,256 bytes. SUPPORTING-SOURCE-READING owns 21 pending groups/174 disjoint ranges; independent Git, current-delta and published-task reconstruction pass with every group within 1,500 fragments /65,536 bytes. No exact earlier startup Scope coverage is credited; physical reading is 0/21. The resulting decomposition uses existing controls, preserves all repairs and changes no source. Lua reading remains closed under ADR0119; next supporting .1.1 reads configuration. No dependency compilation or canonical gate is run; full codebase/book/policy prerequisites and later verification remain. Exact replay and ownership: docs/knowledge/supporting-source-reading-coverage.md; docs/tasks/SUPPORTING-SOURCE-READING.md.
   Candidate verification: All three exact published recipes pass; preservation retains 1589 prior source/card/decision/history files and 2589/2590 prior task nodes, changing only startup .3.7 and adding exactly 26 owned nodes. All 92 Known headings, historical chronology and three published payloads remain exact; no reading credit is added. Knowledge generation is 1139 facts/9091 keys; memory 60 lines; histories 375/305 lines, 68 segments and 34 mutation controls pass without rollover. Book rendering/content and all 20 resulting pressure surfaces/62 routes/32 mutation classes pass; normal doctrine hooks govern landing.
   Commit: `SESSION-STARTUP-READING.3.7.0 - own exact supporting-source reading ranges`.
-
 - ID: `SESSION-STARTUP-READING.3.8`
   Status: `active`
   Goal: Split and read all 160 entries under capability_conformance, cli_conformance, t, tests, and unicode_case.
@@ -2178,7 +2168,6 @@ remain. Reading completion and runtime signoff remain distinct.
     inputs. Keep generated/fixture bytes in scope; count neither a hash nor enumeration as full reading.
   Verification: `pending`
   Commit: `pending`
-
 - ID: `SESSION-STARTUP-READING.3.8.0`
   Status: `done`
   Activation commit: `9833430954c3999769045abbcaa4d20389a7af4c`.
@@ -2191,7 +2180,6 @@ remain. Reading completion and runtime signoff remain distinct.
   Verification: Independent baseline/current Git mode/blob/path and present-byte equality PASS for160 files/5422313 stored bytes; four gzip sources decode to8257059 total bytes/167606 fragments. Exact Scope-driven audit validates143 groups/302 disjoint ranges, all1500/65536 budgets and four decoded hashes. Unicode casing1563/1581 mappings,158/464 property ranges/12 fixtures and rule labels806/9/8/2 PASS. No physical-reading credit, source change or new limit. Canonical evidence and current replay: conformance-source-reading-coverage. Preservation, memory, Knowledge, histories, rendered book and all normal doctrines govern focused planning landing.
   Candidate proof: Preserve2486 prior files byte-exact, all earlier recipe blocks,2627/2628 prior nodes and all94 book limitation headings. Only startup .3.8 changes; new .3.8.0 plus147 conformance-tree nodes own the plan. Metadata PASS at105 files/89554 lines/9507983 bytes before this annotation;2776 current IDs are unique. Memory60; histories439/45244 and369/44107 lines/bytes; rendered book PASS. Normal doctrine hooks govern landing.
   Commit: `SESSION-STARTUP-READING.3.8.0 - own exact conformance test and decoded Unicode reading ranges`
-
 - ID: `SESSION-STARTUP-READING.3.9`
   Status: `pending`
   Goal: Split and read all 143 remaining repository-tooling entries from the exhaustive complement rule below.
@@ -2199,7 +2187,6 @@ remain. Reading completion and runtime signoff remain distinct.
     and the vendored Knowledge Map bundle. Reuse exact completed supporting ranges and read every remaining range.
   Verification: `pending`
   Commit: `pending`
-
 - ID: `SESSION-STARTUP-READING.3.10`
   Status: `pending`
   Goal: Review root guidance and relevant durable owners using their prescribed reading or indexed-query lifecycle.
@@ -2208,7 +2195,6 @@ remain. Reading completion and runtime signoff remain distinct.
     Knowledge Map and immutable chronology instead of loading them wholesale. Memory records are not source-code coverage.
   Verification: `pending`
   Commit: `pending`
-
 - ID: `SESSION-STARTUP-READING.3.11`
   Status: `pending`
   Goal: Reconcile complete source-reading coverage against baseline and final HEAD before closing codebase reading.
@@ -2217,7 +2203,6 @@ remain. Reading completion and runtime signoff remain distinct.
     have exact owners; read coverage is not runtime signoff.
   Verification: `pending`
   Commit: `pending`
-
 - ID: `SESSION-STARTUP-READING.4`
   Status: `pending`
   Goal: Read the complete mdBook and check its explanations against the roadmap and codebase.
@@ -2226,7 +2211,6 @@ remain. Reading completion and runtime signoff remain distinct.
     exact baseline identity and nonoverlapping interval/hash proof. Formal codebase/roadmap reconciliation,
     subsequent deltas, and rendered inspection remain pending; .41 owns the additional verified book drift.
   Commit: `pending`
-
 - ID: `SESSION-STARTUP-READING.5`
   Status: `pending`
   Goal: Complete supplied-policy adoption/update comparisons and the startup alignment review before implementation.
@@ -2238,7 +2222,6 @@ remain. Reading completion and runtime signoff remain distinct.
     embedded policy evidence; preserve historical decision evidence while making its current boundary explicit.
   Verification: `pending`
   Commit: `pending`
-
 - ID: `SESSION-STARTUP-READING.6`
   Status: `done`
   Goal: Reconcile managed-run liveness reporting across restricted and permitted process inspection.
@@ -2254,7 +2237,6 @@ remain. Reading completion and runtime signoff remain distinct.
     No recovery/deletion probe executed; the wrapper exited 0 and permitted census then found zero leftovers.
     Evidence and source locations: `docs/knowledge/project-data-liveness-permission-denial.md`.
   Commit: `SESSION-STARTUP-READING.6 - diagnose denied liveness probes` — Exact causal evidence and owned repair; no production change or deletion test.
-
 - ID: `SESSION-STARTUP-READING.7`
   Status: `pending`
   Goal: Repair permission-denied liveness handling before any managed recovery or mutation workspace workflow.
@@ -2273,7 +2255,6 @@ remain. Reading completion and runtime signoff remain distinct.
   Integration .5.3 recurrence (September20): Exact concurrent consumer replay captures a clean LuaJIT command with correct values/status0 plus the wrapper's child setpgid EPERM diagnostic for child571. A separate1000-command PID/PGID probe captures a warning for child29222 with actual PID=PGID29222 and parent28526; all1000 commands exit0 with expected groups. This is measured successful establishment in a warned invocation, not proof of its kernel/timing cause or all lifecycle paths. The earlier PUC stream was lost and is not retroactively identified. Preserve this actual warned-group control in the eventual repair; do not filter warnings or waive denied/unknown handling. Source and all .3/.4/.5 prerequisites remain unchanged. Canonical evidence: docs/knowledge/project-data-liveness-permission-denial.md; raw evidence: .linkedspec-data/scratch/backend-integration53.
   Verification: `pending`
   Commit: `pending`
-
 - ID: `SESSION-STARTUP-READING.8`
   Status: `pending`
   Goal: Make bootstrap diagnostic comparison state describe the current invocation.
@@ -2285,7 +2266,6 @@ remain. Reading completion and runtime signoff remain distinct.
     update Knowledge and continuity, and commit before returning to Rust mutation setup.
   Verification: `pending` — `.3.2.3` owns the non-destructive diagnostic evidence, not this repair.
   Commit: `pending`
-
 - ID: `SESSION-STARTUP-READING.9`
   Status: `pending`
   Goal: Preserve regex-literal delimiters when reading attached conditional tails.
@@ -2297,7 +2277,6 @@ remain. Reading completion and runtime signoff remain distinct.
     alignment, run focused direct/dependent proof, update book/Knowledge/continuity, and commit before mutation setup.
   Verification: `pending` — `.3.2.4` owns diagnosis; no repair is claimed before mandatory reading.
   Commit: `pending`
-
 - ID: `SESSION-STARTUP-READING.10`
   Status: `pending`
   Goal: Eliminate unbound package-variable inputs from the AND_BCODE variant handoff.
@@ -2311,13 +2290,11 @@ remain. Reading completion and runtime signoff remain distinct.
     setup. Split scope before implementation if cross-backend/public contract work is required.
   Verification: `pending` — `.3.2.8` proves the private handoff defect; no public result defect is yet claimed.
   Commit: `pending`
-
 - ID: `SESSION-STARTUP-READING.11`
   Status: `pending`
   Goal: Correct validation diagnostic source context and rule attribution.
   Dependencies: `.3`, `.4`, `.5` required-reading completion; repair `.10` precedes this activity.
   Children: `.11.1`, `.11.2`, `.11.3`
-
 - ID: `SESSION-STARTUP-READING.11.1`
   Status: `pending`
   Goal: Return the actual next source line and preserve zero-valued text in DSL error context.
@@ -2326,7 +2303,6 @@ remain. Reading completion and runtime signoff remain distinct.
     Cover direct context, callback detail, and public Get runtime context; update book/Knowledge and commit.
   Verification: `pending` — `.3.2.9` proves current-line repetition and loss of literal `0`.
   Commit: `pending`
-
 - ID: `SESSION-STARTUP-READING.11.2`
   Status: `pending`
   Goal: Report the actual physical occurrence of repeated source lines in validation failures.
@@ -2337,7 +2313,6 @@ remain. Reading completion and runtime signoff remain distinct.
     same-line offsets, stable codes, and strict-mode behavior; run direct/public controls, update docs, and commit.
   Verification: `pending` — `.3.2.9` proves a line-4 duplicate reported at line 1.
   Commit: `pending`
-
 - ID: `SESSION-STARTUP-READING.11.3`
   Status: `pending`
   Goal: Attribute invalid regex diagnostics to the containing rule during the regex-validation pass.
@@ -2347,7 +2322,6 @@ remain. Reading completion and runtime signoff remain distinct.
     and public runtime context. Preserve rejection and codes; reconcile book/Knowledge, verify, and commit.
   Verification: `pending` — `.3.2.9` proves Top's invalid regex is attributed to Next.
   Commit: `pending`
-
 - ID: `SESSION-STARTUP-READING.12`
   Status: `pending`
   Goal: Preserve authored execution order when bare and explicit edges share one ownership family.
@@ -2361,7 +2335,6 @@ remain. Reading completion and runtime signoff remain distinct.
     carrier/public work exceeds one safe slice. Do not change the existing authored-order contract.
   Verification: `pending` — `.3.2.11` proves native OR/AND failures and isolates the collection/normalization split.
   Commit: `pending`
-
 - ID: `SESSION-STARTUP-READING.13`
   Status: `pending`
   Goal: Preserve attached code by blind-edge occurrence when a rule calls the same target more than once.
@@ -2375,13 +2348,11 @@ remain. Reading completion and runtime signoff remain distinct.
     public work exceeds one safe slice. Repeated targets must remain accepted with their own attached behavior.
   Verification: `pending` — `.3.2.13` proves native AND/OR failures and isolates hash overwrite plus name dispatch.
   Commit: `pending`
-
 - ID: `SESSION-STARTUP-READING.14`
   Status: `pending`
   Goal: Preserve literal data and invocation-local result state in I-block and repeated-action emission.
   Dependencies: `.3`, `.4`, `.5` required-reading completion; blind occurrence repair `.13` precedes this activity.
   Children: `.14.1`, `.14.2`
-
 - ID: `SESSION-STARTUP-READING.14.1`
   Status: `pending`
   Goal: Rewrite executable I-block/repeated-action returns without modifying literals, identifiers, or nested return scopes.
@@ -2394,7 +2365,6 @@ remain. Reading completion and runtime signoff remain distinct.
     Update book/Knowledge and commit. Split safe children first if the shared lowering change exceeds this slice.
   Verification: `pending` — `.3.2.14` captures I-block literal corruption; `.3.2.15` proves bounded REP corruption too.
   Commit: `pending`
-
 - ID: `SESSION-STARTUP-READING.14.2`
   Status: `pending`
   Goal: Make generated single-acode AND I-block and repeated-acode result storage invocation-local.
@@ -2406,7 +2376,6 @@ remain. Reading completion and runtime signoff remain distinct.
     book/Knowledge, and commit before mutation setup. Preserve recognition/cursor and return-shape contracts.
   Verification: `pending` — `.3.2.14` proves I-block package dependency; `.3.2.15` also proves REP package writes on plain literals.
   Commit: `pending`
-
 - ID: `SESSION-STARTUP-READING.15`
   Status: `pending`
   Goal: Preserve the containing ActionIR coordinate space through every nested block parser call.
@@ -2420,13 +2389,11 @@ remain. Reading completion and runtime signoff remain distinct.
     mutation setup; split safe children before implementation if public/carrier work exceeds one slice.
   Verification: `pending` — `.3.2.16` proves three omitted base_start handoffs and passing adjacent controls.
   Commit: `pending`
-
 - ID: `SESSION-STARTUP-READING.16`
   Status: `pending`
   Goal: Make emptiness depend on the evaluated DSL value and keep literals out of host symbol lookup.
   Dependencies: `.3`, `.4`, `.5` required-reading completion; nested-span repair `.15` precedes this activity.
   Children: `.16.1`, `.16.2`
-
 - ID: `SESSION-STARTUP-READING.16.1`
   Status: `pending`
   Goal: Apply one typed emptiness rule to literals, bindings, nested reads, and computed values.
@@ -2437,7 +2404,6 @@ remain. Reading completion and runtime signoff remain distinct.
     generated/loaded routes plus the direct-dependent backend contract. Update mdBook/Knowledge and commit.
   Verification: `pending` — `.3.2.21` public Get returns empty for literal `"0"`, nonempty for its bound twin.
   Commit: `pending`
-
 - ID: `SESSION-STARTUP-READING.16.2`
   Status: `pending`
   Goal: Prevent numeric and keyword literal tokens from becoming generated host scalar references.
@@ -2448,13 +2414,11 @@ remain. Reading completion and runtime signoff remain distinct.
     generated diagnostics, and supported emitted/loaded behavior; run direct-dependent proof and update book.
   Verification: `pending` — `.3.2.21` lowering emits `$0` for literal 0 through the permissive scalar extractor.
   Commit: `pending`
-
 - ID: `SESSION-STARTUP-READING.17`
   Status: `pending`
   Goal: Make wrong-kind collection helpers independent of same-named Perl host slots.
   Dependencies: Required reading `.3`/`.4` and policy `.5`; emptiness/literal repair `.16`.
   Children: `.17.1`, `.17.2`
-
 - ID: `SESSION-STARTUP-READING.17.1`
   Status: `pending`
   Goal: Guard array helpers by the evaluated DSL value kind before host-slot fallback.
@@ -2464,7 +2428,6 @@ remain. Reading completion and runtime signoff remain distinct.
     supported generated/loaded routes, and update the book and Knowledge with focused direct-dependent proof.
   Verification: `pending` — intake `.31` records six parser/host-seed controls; no repair has landed.
   Commit: `pending`
-
 - ID: `SESSION-STARTUP-READING.17.2`
   Status: `pending`
   Goal: Apply the same evaluated-value boundary to hash counts, key views, and membership.
@@ -2474,13 +2437,11 @@ remain. Reading completion and runtime signoff remain distinct.
     Reconcile the governed wrong-kind contract before changing results; preserve valid aggregate bindings.
   Verification: `pending`
   Commit: `pending`
-
 - ID: `SESSION-STARTUP-READING.18`
   Status: `pending`
   Goal: Preserve quoted source data through primitive rewriting and canonical-event scanning.
   Dependencies: `.3`/`.4`/`.5`.
   Children: `.18.1`, `.18.2`
-
 - ID: `SESSION-STARTUP-READING.18.1`
   Status: `pending`
   Goal: Prevent primitive set rewriting from modifying text inside a quoted value.
@@ -2489,7 +2450,6 @@ remain. Reading completion and runtime signoff remain distinct.
     Use actual lexical/source spans rather than blind substring substitution; preserve downstream source identity.
   Verification: `pending` — PrimitivePipelineRules' unmasked matcher and raw replacement are localized in `.31`.
   Commit: `pending`
-
 - ID: `SESSION-STARTUP-READING.18.2`
   Status: `pending`
   Goal: Emit canonical assignment events only for executable assignment syntax.
@@ -2498,7 +2458,6 @@ remain. Reading completion and runtime signoff remain distinct.
     Cover descriptor, generated, and direct-dependent scanner consumers; synchronize public teaching as needed.
   Verification: `pending` — CanonicalEvents independently scans the unmasked quoted spelling.
   Commit: `pending`
-
 - ID: `SESSION-STARTUP-READING.19`
   Status: `pending`
   Goal: Enforce the active map_leaves! receiver guard for dynamic codeblock assignment.
@@ -2509,13 +2468,11 @@ remain. Reading completion and runtime signoff remain distinct.
     Audit all CodeblockRuntime write paths and supported carriers; run direct-dependent mutation/callable proof.
   Verification: `pending` — `.31` records guarded direct assignment versus unguarded dynamic callback writes.
   Commit: `pending`
-
 - ID: `SESSION-STARTUP-READING.20`
   Status: `pending`
   Goal: Remove Unicode-digit truncation and warning-producing scalar numeric coercion.
   Dependencies: `.3`/`.4`/`.5`.
   Children: `.20.1`, `.20.2`
-
 - ID: `SESSION-STARTUP-READING.20.1`
   Status: `pending`
   Goal: Resolve the numeric-string digit language against the normative grammar and independent model.
@@ -2525,7 +2482,6 @@ remain. Reading completion and runtime signoff remain distinct.
     before changing it. Own the exact bounded implementation and fixture movement before editing consumers.
   Verification: `pending` — Perl and the neutral Python oracle currently disagree on two recorded strings.
   Commit: `pending`
-
 - ID: `SESSION-STARTUP-READING.20.2`
   Status: `pending`
   Goal: Implement the resolved numeric boundary consistently and without host conversion warnings.
@@ -2535,13 +2491,11 @@ remain. Reading completion and runtime signoff remain distinct.
     Include non-ASCII/mixed-digit negative or positive locks, generated execution, and accurate book examples.
   Verification: `pending`
   Commit: `pending`
-
 - ID: `SESSION-STARTUP-READING.21`
   Status: `pending`
   Goal: Make recognition-token escape validation lexical and independent of compilation order.
   Dependencies: `.3`/`.4`/`.5`.
   Children: `.21.1`, `.21.2`
-
 - ID: `SESSION-STARTUP-READING.21.1`
   Status: `pending`
   Goal: Remove first-token-name caching from recognition-token validation.
@@ -2550,7 +2504,6 @@ remain. Reading completion and runtime signoff remain distinct.
     boundaries; a missing compile rejection is not evidence that active authority escaped at runtime.
   Verification: `pending` — the variable-interpolated /o matcher caches the first token name.
   Commit: `pending`
-
 - ID: `SESSION-STARTUP-READING.21.2`
   Status: `pending`
   Goal: Exclude literal/comment occurrences from recognition-token escape detection.
@@ -2559,13 +2512,11 @@ remain. Reading completion and runtime signoff remain distinct.
     Run the recognition contract and direct-dependent lifecycle/error controls; update book and Knowledge.
   Verification: `pending` — quoted token-name text is currently misclassified by the raw search.
   Commit: `pending`
-
 - ID: `SESSION-STARTUP-READING.22`
   Status: `pending`
   Goal: Project rule helpers, bindings, and calls independently of an unrelated user-function definition.
   Dependencies: `.3`/`.4`/`.5`.
   Children: `.22.1`, `.22.2`, `.22.3`
-
 - ID: `SESSION-STARTUP-READING.22.1`
   Status: `pending`
   Goal: Bound the native and frozen-model impact of the empty-function early return.
@@ -2577,7 +2528,6 @@ remain. Reading completion and runtime signoff remain distinct.
   Verification: `pending`
   Commit: `pending`
   Lua .1.19: Fresh public raw queries on both installed hosts reproduce zero helper/binding/call records without a function versus five with an unused function; both independently execute x. The guard still precedes action-owner traversal. Preserve the earlier six-runtime census as dated evidence; these two new host observations do not refresh all backends.
-
 - ID: `SESSION-STARTUP-READING.22.2`
   Status: `pending`
   Goal: Repair the affected projection owners with independently justified shared expectations.
@@ -2588,7 +2538,6 @@ remain. Reading completion and runtime signoff remain distinct.
     Preserve query limits, immutable snapshots, compile failures, and unsupported-source exclusions.
   Verification: `pending`
   Commit: `pending`
-
 - ID: `SESSION-STARTUP-READING.22.3`
   Status: `pending`
   Goal: Close supported semantic carriers, MCP projection, and public teaching for the corrected rule records.
@@ -2597,7 +2546,6 @@ remain. Reading completion and runtime signoff remain distinct.
     Update governed book examples and ownership facts; complete the required canonical closeout.
   Verification: `pending`
   Commit: `pending`
-
 - ID: `SESSION-STARTUP-READING.23`
   Status: `pending`
   Goal: Preserve honest compilation-failure decision and explanation evidence.
@@ -2614,7 +2562,6 @@ remain. Reading completion and runtime signoff remain distinct.
     latter is caught by resolve_selector before slot-failure normalization. Token-use acceptance is .68.
   Julia .1.28 controls: bare Missing preserves native bare_edge_target_undefined and truthful unknown_rule_reference/source/dependency evidence; Child[9] preserves regex_slot_index_out_of_range/resolve_selector and exact authored source without a fabricated decision. The selector guard precedes failure normalization. Exact67-assertion controls live in docs/knowledge/julia-semantic-static-correlation-gaps.md; no Perl repair or full failure-class closure is claimed.
   Commit: `pending`
-
 - ID: `SESSION-STARTUP-READING.24`
   Status: `pending`
   Goal: Preserve the caller's Perl exception state while evaluating lazy trace detail callbacks.
@@ -2628,13 +2575,11 @@ remain. Reading completion and runtime signoff remain distinct.
   Verification: `pending` — direct Trace lazy eval replaces incoming $@ on success/failure/nested detail;
     .3.2.48's 20 controls preserve quiet/plain direct state and all OwnerDispatch-wrapped cases.
   Commit: `pending`
-
 - ID: `SESSION-STARTUP-READING.25`
   Status: `pending`
   Goal: Correct gdcheck tolerance, duplicate-row, and DEFAULT cardinality behavior.
   Dependencies: `.3`/`.4`/`.5`.
   Children: `.25.1`, `.25.2`, `.25.3`
-
 - ID: `SESSION-STARTUP-READING.25.1`
   Status: `pending`
   Goal: Compare signed values using the intended nonnegative tolerance magnitude.
@@ -2643,7 +2588,6 @@ remain. Reading completion and runtime signoff remain distinct.
     Preserve the configured meaning of tolerance and document the resolved signed-value examples.
   Verification: `pending` — signed baseline multiplication reverses the interval for negative values.
   Commit: `pending`
-
 - ID: `SESSION-STARTUP-READING.25.2`
   Status: `pending`
   Goal: Process every duplicate-key row when data is added or removed.
@@ -2652,7 +2596,6 @@ remain. Reading completion and runtime signoff remain distinct.
     semantics rather than dropping all but index zero; add focused utility-level regression examples.
   Verification: `pending` — addition/removal currently uses only each key's first indexed row.
   Commit: `pending`
-
 - ID: `SESSION-STARTUP-READING.25.3`
   Status: `pending`
   Goal: Require exactly one DEFAULT pattern by actual array cardinality.
@@ -2660,7 +2603,6 @@ remain. Reading completion and runtime signoff remain distinct.
     non-DEFAULT entries. Replace the decimal-string length test without broadening the configuration grammar.
   Verification: `pending` — zero and two patterns are accepted because length(@EVAL) tests digit length.
   Commit: `pending`
-
 - ID: `SESSION-STARTUP-READING.26`
   Status: `pending`
   Goal: Make ptchange file IO preserve valid caller filenames and diagnose failed reads/writes.
@@ -2671,13 +2613,11 @@ remain. Reading completion and runtime signoff remain distinct.
     policy. Use exact owned fixtures and prevent silent empty output or unintended clobbering.
   Verification: `pending` — identical plain/spaced inputs produce preserved text versus empty output, both exit 0.
   Commit: `pending`
-
 - ID: `SESSION-STARTUP-READING.27`
   Status: `pending`
   Goal: Resolve and repair the known Perl lifecycle final-value/E-handler divergence.
   Dependencies: `.3`/`.4`/`.5`.
   Children: `.27.1`, `.27.2`, `.27.3`
-
 - ID: `SESSION-STARTUP-READING.27.1`
   Status: `pending`
   Goal: Reconcile lifecycle return and mode execution against ADR 0020 and exact cross-backend evidence.
@@ -2687,7 +2627,6 @@ remain. Reading completion and runtime signoff remain distinct.
     Define the required handler/return cases and bounded implementation children before changing behavior.
   Verification: `pending` — the existing lifecycle drift card records the debt; `.31` reverified it. Julia .1.7 adds the no-edge Child:AND E-only case: generated source has no authored E write/return; exact reference controls live in docs/knowledge/julia-recognition-effect-integration-gap.md.
   Commit: `pending`
-
 - ID: `SESSION-STARTUP-READING.27.2`
   Status: `pending`
   Goal: Preserve the lifecycle handlers and final values required by the resolved contract.
@@ -2697,7 +2636,6 @@ remain. Reading completion and runtime signoff remain distinct.
     emitter/SpecEntry and runtime regression proof; split further if the reviewed repair exceeds a safe slice.
   Verification: `pending`
   Commit: `pending`
-
 - ID: `SESSION-STARTUP-READING.27.3`
   Status: `pending`
   Goal: Close supported lifecycle carriers and make the book's lifecycle claims exact.
@@ -2706,13 +2644,11 @@ remain. Reading completion and runtime signoff remain distinct.
     caveat. Preserve dated evidence and remove a current caveat only when its actual cases pass.
   Verification: `pending`
   Commit: `pending`
-
 - ID: `SESSION-STARTUP-READING.28`
   Status: `pending`
   Goal: Correct demonstrated public teaching drift and cover the real claims in the relevant checkers.
   Dependencies: `.3`/`.4`/`.5`.
   Children: `.28.1`, `.28.2`, `.28.3`, `.28.4`, `.28.5`, `.28.6`, `.28.7`
-
 - ID: `SESSION-STARTUP-READING.28.1`
   Status: `pending`
   Goal: Remove stale logical truthiness/rollout teaching and reject its actual bad paragraphs.
@@ -4661,13 +4597,13 @@ remain. Reading completion and runtime signoff remain distinct.
 
 - ID: `SESSION-STARTUP-READING.86.4`
   Status: `active`
-  Goal: Preserve multiline parenthesized regex literals through Perl validation and action lowering.
+  Goal: Preserve multiline regex pattern operands in documented Perl action helpers through whole-spec validation.
   Dependencies: Land Rust .86.2 first; captured public diagnostics in .linkedspec-data/scratch/division-boundary86-2/perl-context.jsonl and reproducible sources in docs/knowledge/rust-symbol-call-newline-boundary.md; coordinate .54.1 without conflating regex-brace bootstrap loss.
   Children: `SESSION-STARTUP-READING.86.4.1`, `SESSION-STARTUP-READING.86.4.2`, `SESSION-STARTUP-READING.86.4.3`, `SESSION-STARTUP-READING.86.4.4`, `SESSION-STARTUP-READING.86.4.5`
   Planned tier: focused unless a shared language-contract decision is needed.
   Planned focused proof: Public Get with runtime_ctx_ref, exact lowering and generated source; multiline regex and numeric-division lookalikes, LF/CRLF, following assignments, whole-spec validation and invalid-pattern controls; phase0 plus directly affected scanner tests.
   Planned canonical boundary: Parent .86.3 after .86.5; any contract decision precedes implementation.
-  Acceptance: Retain protected regex newlines and working division-newline statements. Fix the established valid literal failures at their actual owners, with exact source and runtime errors retained; do not infer unknown backend parity. Synchronize Perl integration/book examples and durable facts.
+  Acceptance: Retain protected helper-pattern newlines and working division-newline statements. Assignment-position observations are compatibility evidence, not a regex-variable requirement after .86.4.2.4. Fix documented helper operands at their actual owners; do not infer unknown backend parity. Synchronize Perl integration/book examples and durable facts.
   Verification: Public /(x) LF y/, numeric-pattern plus text, numeric-pattern plus next assignment, and CRLF controls fail validation or generated handler compilation; isolated lowering prematurely emits num_div then leaves the regex tail as code. Invalid quoted-pattern control is separately rejected through documented runtime_handler:rule_handler_compile and is not a repair target. Root-cause the splitter/validation disagreement with public descriptors before implementing.
   Commit: `pending`
 - ID: `SESSION-STARTUP-READING.86.4.1`
@@ -4681,15 +4617,14 @@ remain. Reading completion and runtime signoff remain distinct.
   Verification: Public replay reproduces the existing multiline and EOF failures and valid division/regex controls. StatementSplit splits rx = /(x) LF y/ into separate statements; Mode recognizes Perl-prefixed/match-operator slash quoting but not naked DSL literals. Whole-fragment edge scanning ends at depth0 for the literal while physical-line scanning remains at depth1; the numeric division control has the opposite whole/line result. Therefore replacing all line scans with naive whole-source slash scanning would regress division. Fact card perl-multiline-regex-scanner-boundaries retains exact commands. Supplied README/claim/containment donor hashes match the recorded September11 identities; .5/.29 retain adoption ownership. No production fix or new backend acceptance is claimed. The first hook attempt rejected the 8,000-line task limit; remove only 64 blank separators between nodes and prove every nonblank line unchanged before rerunning.
   Commit: This commit; subject `SESSION-STARTUP-READING.86.4.1 - isolate Perl multiline regex scanner failures`.
 - ID: `SESSION-STARTUP-READING.86.4.2`
-  Status: `active`
-  Goal: Preserve naked multiline regex tokens through Perl action statement splitting and lowering.
-  Children: `SESSION-STARTUP-READING.86.4.2.1`, `SESSION-STARTUP-READING.86.4.2.2`, `SESSION-STARTUP-READING.86.4.2.3`
-  Dependencies: .86.4.1; retain whole-source division/regex compatibility before changing the discriminator.
-  Planned tier: focused implementation after an explicit precedence decision; canonical .86.3 remains the composed boundary.
-  Acceptance: Protect lexical regex newlines and delimiters without swallowing subsequent division statements or modifying raw Perl compatibility. Keep the closing-brace exclusion; public outer validation remains explicitly owned by .86.4.3.
-  Verification: `pending`
-  Current probe: Director resumed PNT on September23. Diagnosis .86.4.2.1 proves that lexical continuation checks still regress accepted quotes and that two complete public inputs change from7 to empty string under regex-first selection. Both rejected candidates are archived; accepted source/tests are restored. Decision .86.4.2.2 blocks implementation .86.4.2.3. The Knowledge card perl-multiline-regex-scanner-boundaries owns exact sources/recovery. Earlier partial Phase0 runs remain excluded; no job remains active and the obsolete scratch finish_splitter.py must not be executed.
-  Commit: `pending`
+  Status: `done`
+  Goal: Reconcile the proposed naked-regex splitter repair against the actual action-language contract.
+  Children: `SESSION-STARTUP-READING.86.4.2.1`, `SESSION-STARTUP-READING.86.4.2.2`, `SESSION-STARTUP-READING.86.4.2.3`, `SESSION-STARTUP-READING.86.4.2.4`
+  Dependencies: .86.4.1; director's .86.4.2.4 contract audit supersedes the inferred regex-variable requirement.
+  Acceptance: Preserve supported regex helper operands and division; distinguish host compatibility from portable value kinds. Do not infer a new regex type from parser acceptance.
+  Verification: .86.4.2.4 establishes no portable regex-value contract. Its multiline matches operand lowers and independently executes to1, but public validation fails; .86.4.3 owns that actual defect. The assignment-only splitter expansion and director precedence question are superseded without implementation. Both rejected patches remain evidence, not fixes; earlier partial Phase0 runs remain excluded.
+  Commit: Parent reconciled by .86.4.2.4; no splitter change accepted.
+
 - ID: `SESSION-STARTUP-READING.86.4.2.1`
   Status: `done`
   Goal: Establish complete continuation compatibility and resolve whether multiline regex recognition requires a precedence decision.
@@ -4701,25 +4636,31 @@ remain. Reading completion and runtime signoff remain distinct.
   Verification: Baseline RED fails3/27 groups; the original candidate with expanded quote controls fails36 assertions in1/27 groups; the lexical-continuation candidate passes27/27 but regresses seven expanded compatibility controls. Two public Get and independent action results are7 on accepted source and empty string on the candidate, with no last_error. The new patch reconstructs all four candidate files byte-for-byte; restored source/tests match clean HEAD and action AST passes23/23. Supplied-policy hashes remain unchanged. Memory, Knowledge, histories, rendered book, diff and all normal doctrines are required before landing. No Phase0/full-CI or runtime-repair claim.
   Commit: This commit; subject `SESSION-STARTUP-READING.86.4.2.1 - expose slash precedence conflict before repair`.
 - ID: `SESSION-STARTUP-READING.86.4.2.2`
-  Status: `blocked`
-  Goal: Resolve Perl division-versus-multiline-regex precedence when both complete interpretations compile and execute.
-  Dependencies: Director choice from .86.4.2.1 evidence; preserve existing Perl division behavior or explicitly authorize regex-first compatibility changes. No silence-based choice.
-  Planned tier: focused decision record; any changed language contract is verified canonically in .86.3.
-  Planned focused proof: Replay both complete source interpretations, reconcile Perl raw compatibility, ordinary comment syntax and Rust's documented regex-first behavior; freeze a precise portable contract and named compatibility exclusions before implementation.
-  Planned canonical boundary: .86.3.
-  Acceptance: Durable explicit authority and deterministic selection rule; no unexplained reinterpretation or opportunistic fixture changes.
-  Verification: Pending director response; both q-quote and ordinary-comment sources return7 on accepted public Get and empty string on the rejected regex-first candidate, with no last_error.
-  Commit: `pending`
+  Status: `superseded`
+  Goal: Historical request for a Perl division-versus-regex precedence choice.
+  Dependencies: Replaced by the director-requested contract audit .86.4.2.4.
+  Acceptance: Withdraw the question because successful host parsing does not establish a supported regex-variable feature; preserve measured evidence without imposing an unsupported language decision.
+  Verification: .86.4.2.4 reconciles the four binding kinds and actual helper-operand contract. No precedence authorization is requested or inferred.
+  Commit: none - superseded without implementation by .86.4.2.4.
+
 - ID: `SESSION-STARTUP-READING.86.4.2.3`
-  Status: `pending`
-  Goal: Implement and verify Perl action splitting/lowering under the selected precedence contract.
-  Dependencies: Accepted .86.4.2.2 decision; both rejected checkpoints are evidence, not implementation authority.
-  Planned tier: focused unless the selected contract requires canonical admission at this leaf.
-  Planned focused proof: Exact StatementSplit/AST source and scalar spans; LF/CRLF/numeric/escaped/nested controls; quote/comment continuations and both-valid examples; long valid/invalid chains; independent generated-action execution, direct scanner consumers and complete Phase0.
-  Planned canonical boundary: .86.3 after .86.4.3/.4 and .86.5.
-  Acceptance: All selected compatibility and literal obligations pass without speculative quote heuristics, host compilation during parsing or duplicated lexical policy; no public outer-validation closure before .86.4.3.
-  Verification: `pending`
-  Commit: `pending`
+  Status: `superseded`
+  Goal: Historical splitter expansion for assignment-position multiline regex syntax.
+  Dependencies: Replaced by .86.4.2.4 scope correction and supported-operand validation repair .86.4.3.
+  Acceptance: Do not make assignment to a reusable regex object an acceptance requirement. Preserve source-qualified host compatibility evidence and all existing division behavior.
+  Verification: No accepted production change; the documented multiline matches operand already lowers correctly and returns1 independently. Its public validator failure remains .86.4.3-owned.
+  Commit: none - superseded without implementation by .86.4.2.4.
+
+- ID: `SESSION-STARTUP-READING.86.4.2.4`
+  Status: `done`
+  Goal: Audit whether action regex syntax is a documented pattern operand, a first-class runtime kind, or host compatibility before treating the earlier precedence question as a language decision.
+  Dependencies: Director request to check mdBook and codebase at clean 7c318569d6f103416bc5dcc6d0fb825b472a86db; no new runtime type or precedence authorization is inferred.
+  Verification tier: `focused`
+  Focused checks: Canonical value/binding contract and mdBook helper signatures; LinkedSpec::Get/runtime_ctx_ref, call_spec_handler_subst and typed AST probes; first-party parser/evaluator kinds across backends; managed direct-dependent proof, book, memory, Knowledge, histories and doctrines.
+  Canonical trigger: None for a read-only behavior audit and correction of teaching/task scope; implementation and contract changes remain separately owned.
+  Acceptance: Separate syntax AST tags from runtime value kinds; retain positive helper examples, prove observed scalar/assignment behavior, correct unsupported implications in earlier guidance and own any actual defect.
+  Verification: Thirteen Perl public/independent action cases plus the AST probe distinguish supported helper operands from scalar host assignment. The multiline matches operand lowers/executes to1 but fails public validation; .86.4.3 owns it. Five first-party evaluator representations agree with the absence of a governed regex value kind, without claiming full runtime parity. Focused AST/binding/callable suite passes45 top-level tests; four retained-native Rust controls verify revised book examples and scalar patterns; mdBook renders. Direct filter_match and callable matches gaps are owned by .87.1/.87.2. Normal governance checks apply before landing; no runtime change, full-CI claim or push.
+  Commit: This commit; subject `SESSION-STARTUP-READING.86.4.2.4 - distinguish regex operands from runtime types`.
 - ID: `SESSION-STARTUP-READING.86.4.5`
   Status: `done`
   Goal: Archive the unaccepted .86.4.2 candidate and restore a clean, paused handoff at director request.
@@ -4732,8 +4673,8 @@ remain. Reading completion and runtime signoff remain distinct.
   Commit: This commit; subject `SESSION-STARTUP-READING.86.4.5 - preserve paused splitter repair and clean handoff`.
 - ID: `SESSION-STARTUP-READING.86.4.3`
   Status: `pending`
-  Goal: Preserve multiline regex lexical state through Perl whole-spec validation.
-  Dependencies: .86.4.2; reuse the reconciled token decision without duplicating lexical policy.
+  Goal: Preserve multiline regex helper-operand lexical state through Perl whole-spec validation.
+  Dependencies: .86.4.2.4 audit; matches_multiline in its tracked diagnostic lowers/executes to1 but public validation rejects the following Done rule. Reuse supported operand context without adding a runtime regex kind or imposing assignment regex precedence.
   Planned tier: focused unless a language-contract decision is needed.
   Planned focused proof: Public Get/runtime_ctx_ref and descriptors/source; all captured literals/division controls, LF/CRLF, rule-like and directive-like regex payloads, real following rules, lifecycle/action nesting and malformed sources; validation fuzz, gap/slot contracts and Phase0.
   Planned canonical boundary: .86.3 after public recomposition.
@@ -4762,6 +4703,30 @@ remain. Reading completion and runtime signoff remain distinct.
   Verification: Both bare and trailing-space I { out = /(14,2) } controls fail public Get with compiler_pipeline:validate_dsl_syntax, Unclosed rule block. Isolated action lowering emits valid num_div; semicolon and named div controls return 7. MethodExpr slash lookahead excludes } by design; classify outer context independently rather than removing that regex safeguard.
   Commit: `pending`
 
+- ID: `SESSION-STARTUP-READING.87`
+  Status: `pending`
+  Goal: Repair existing Perl regex-helper execution gaps found during the runtime-kind audit, without adding a regex value type.
+  Children: `SESSION-STARTUP-READING.87.1`, `SESSION-STARTUP-READING.87.2`
+  Dependencies: .86.4.2.4 public/lowered diagnostic and docs/knowledge/action-regex-operands-and-runtime-kinds.md. Separate from scanner .86; keep that current activity first.
+- ID: `SESSION-STARTUP-READING.87.1`
+  Status: `pending`
+  Goal: Make documented function-position filter_match return its transformed array on Perl.
+  Planned tier: focused.
+  Planned focused proof: Public/lowered/emitted direct, nested, receiver and statement forms; named/shape/computed arrays, string/literal patterns, once-only evaluation and nonmutation in value position; direct-dependent pipeline tests and book.
+  Planned canonical boundary: Final repair-group acceptance/push; broaden if shared contract changes.
+  Acceptance: Repair filter_match(["ax","by"], /^a/) falling through as an undefined host function; retain the working receiver form. Reconcile the full affected lowering path before changing it; coordinate FUTURE-PARITY-BACKLOG.5's broader pipeline normalization.
+  Verification: .86.4.2.4 public and independent lowered execution fail; receiver returns ["ax"]. MethodLowering's receiver route synthesizes __array_value_filter_match, while the failing direct form remains an unlowered host call. The book promises pure function composition.
+  Commit: `pending`
+- ID: `SESSION-STARTUP-READING.87.2`
+  Status: `pending`
+  Goal: Execute the existing matches helper in Perl callable codeblock bodies with string and literal pattern operands.
+  Planned tier: focused.
+  Planned focused proof: Direct-action versus callable controls; parameter/caller string patterns, literal operand context, exact booleans, scope restoration and failure diagnostics, independently emitted invocation and callable suite.
+  Planned canonical boundary: Final repair-group acceptance/push; no new value kind or regex transport contract.
+  Acceptance: Repair the missing CodeblockRuntime helper dispatch and operand evaluation together. Preserve static-helper precedence, parameter restoration and typed unsupported-call errors for genuinely unsupported calls.
+  Verification: .86.4.2.4 literal operand fails unsupported_codeblock_actionir; string twin fails unknown_helper. CodeblockRuntime::_eval_expr lacks regex operand handling and _eval_call lacks matches; existing finite callable fixtures do not cover this helper.
+  Commit: `pending`
+
 ## Current Frontier
 
 ADR0123 replaces the blanket full-reading prerequisite with targeted startup. Prior
@@ -4770,10 +4735,11 @@ audit range, not the default repair frontier.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
+| 1 | `SESSION-STARTUP-READING.86.4.3` | `pending` | Repair the documented multiline matches operand rejected by whole-spec validation; no regex-variable feature. |
 
-No executable frontier while director precedence decision `.86.4.2.2` is blocked.
-After the decision is recorded, implementation `.86.4.2.3` precedes outer validation
-`.86.4.3`, public recomposition `.86.4.4`, EOF `.86.5` and canonical `.86.3`.
+The audit withdraws the unsupported precedence question. Next is supported helper-operand
+validation `.86.4.3`, then public recomposition `.86.4.4`, EOF `.86.5` and canonical `.86.3`.
+Independent helper gaps are owned by `.87.1/.87.2`; no regex-type feature is admitted.
 
 ## Reading Ledger
 

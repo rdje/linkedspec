@@ -224,36 +224,36 @@ same-volume storage, and removes its own test fixtures.
 
 ## Regex and division in action code
 
-Perl currently has a known failure for multiline parenthesized regex literals in
-action code, including a numeric-looking first line. Validation can reject the
-whole grammar, or generated-handler compilation can record an error. Check both
-failure channels described below; a returned parser alone does not establish a
-successful compile-and-run result. This limitation is tracked under
-`SESSION-STARTUP-READING.86.4`.
+Regex patterns are supported operands of helpers such as `matches`, `split` and
+`regex_subst`. They are not a separate builtin variable type. For example,
+`return(matches("abc", /b/))` returns `1`; a reusable string pattern also works:
+`pattern = "b"; return(matches("abc", pattern))`.
+
+Do not treat `pattern = /b/` as construction of a regex object. Current Perl
+lowers that standalone expression to a host match against implicit `$_`, storing
+`1` or the empty string. That compatibility behavior is different from a helper
+matching its explicit subject. See [regex patterns and variable values](../dsl/value-container-flow-helper-reference.md#regex-patterns-and-variable-values).
+
+A known Perl validation failure affects multiline patterns even in documented
+helper positions. This action lowers correctly and independently evaluates to
+`1`, but placing it before another rule can cause whole-spec validation to
+report that the next rule is inside an open block:
+
+```text
+return(matches(cat("x", "\n", "y"), /(x)
+y/))
+```
+
+That validator defect is tracked under `SESSION-STARTUP-READING.86.4.3`.
+It does not require adding regex-valued variables or choosing a new global slash
+precedence. Check both failure channels described below; a returned parser alone
+does not establish successful compilation and execution.
 
 For arithmetic division, `div(14, 2)` works at the end of an action block.
 The equivalent slash call `/(14, 2)` currently requires a trailing semicolon in
 that position; its separate repair is tracked under `.86.5`. Newline-separated
-division followed by another assignment already works. These observations are
-specific to the Perl route and do not change the shared numeric-helper contract.
-
-Use the named `div(...)` spelling when a following comment or Perl quote contains
-a slash. Such text can also form a complete multiline regex under another
-interpretation. For example, current Perl returns `7` for this grammar on `x`:
-
-```text
-Top::
- -> Done { out = /(14,2)
-# pattern/;
-return(out) }
-Done:
- /x/
-```
-
-Here Perl reads division followed by a comment. Writing `out = div(14,2)` makes
-that arithmetic intent explicit; writing `out = /(14,2);` also ends the slash
-call before the comment. The multiline-regex repair remains open because silently
-reinterpreting an accepted grammar as a regex would change its result.
+division followed by another assignment already works. Prefer `div(...)` when
+slash syntax would obscure the arithmetic intent.
 
 ## Handle runtime outcomes explicitly
 

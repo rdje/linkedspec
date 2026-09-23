@@ -271,13 +271,13 @@ Rebuild affected source ASTs, compiled JSON and generated modules from the origi
 `.spec` files. Later stages cannot recover whitespace or statements that an older
 outer parser already removed.
 
-Within an action block, a regex literal can precede another statement on the
-next line. LF and CRLF both separate the statements. This example returns `7`
+Within an action block, a call using a regex pattern can precede another
+statement on the next line. LF and CRLF both separate the statements. This example returns `7`
 with input `x`:
 
 ```text
 Top::
- -> Done { rx = /x/
+ -> Done { hit = matches("x", /x/)
            out = 7;
            return(out) }
 Done:
@@ -310,22 +310,25 @@ Rebuild previously generated parsers from the original `.spec` files to pick up
 the corrected call parsing.
 
 Arithmetic slash calls also accept newline-separated statements. This example
-returns `7` with input `x`, including when the second assignment is a regex:
+returns `7` with input `x`, including when the second assignment calls a regex helper:
 
 ```text
 Top::
  -> Done { out = /(14, 2)
-           rx = /x/;
+           hit = matches("x", /x/);
            return(out) }
 Done:
  /x/
 ```
 
-Slash syntax can also introduce a regex. If the complete action block is valid
-with the regex interpretation, that interpretation takes precedence:
+Current Rust parsing also accepts standalone regex syntax in value positions,
+where evaluation produces a pattern string. This is implementation behavior,
+not a portable regex-object type or recommended variable-construction syntax.
+If the complete action block is valid with the regex interpretation, the current
+parser gives that interpretation precedence:
 `rx = /(x)` followed by a newline and `y/; return(7)` retains
 the newline inside the pattern. Even `rx = /(14,2)` followed by a newline and
-`next = /; return(7)` is one regex assignment, with pattern `(14,2)` plus the
+`next = /; return(7)` is parsed as one regex expression on the assignment RHS, with pattern `(14,2)` plus the
 newline and `next = `. Use `div(14, 2)` or an explicit semicolon after
 `/(14, 2);` to make division unambiguous. Regenerate existing Rust parsers to
 pick up the newline repair; serialized or emitted parsers keep their compiled

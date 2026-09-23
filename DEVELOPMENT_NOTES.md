@@ -11,6 +11,12 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
 
+## 2026-09-23 — SESSION-STARTUP-READING.86.4.2.4 - parser acceptance is not runtime-type authority
+
+The director correctly challenged the unsupported step from an AST regex tag to a reusable regex-variable contract. Preserve the actual observations from .86.4.2.1, but supersede its choice and implementation proposals. Its comment counterpart proves host compatibility only; the formal grammar does not admit comments inside rule paragraphs. The new canonical fact action-regex-operands-and-runtime-kinds distinguishes syntax, helper operands, host match results, strings and private helper carriers. No first-class type is admitted or planned by this discussion.
+
+The tracked .86.4.2.4 diagnostic records thirteen public/independently lowered Perl actions and one AST node. A valid multiline matches operand lowers/executes to1, localizing the remaining measured failure to whole-spec validation .86.4.3. Function-position filter_match falls through as an undefined host call while its receiver twin works (.87.1); CodeblockRuntime lacks both regex operand handling and matches dispatch (.87.2). The focused45 tests pass but contain no closure proof for those new controls. Four retained-native Rust controls confirm both revised book examples, assigned pattern string and string-based matches. Remove64 redundant task-node blank separators without changing any nonblank record to preserve the existing8000-line cap. All project output stays repository-local; dependency internals remain untouched.
+
 ## 2026-09-23 — SESSION-STARTUP-READING.86.4.2.1 - complete continuation exposes a precedence choice
 
 A later slash can be a quote opener, part of a quoted value, or comment text. Token-end and lexical-scope lookahead are insufficient: the second rejected candidate passes its immediate27-group AST suite, then fails broader accepted continuations. Checking only whether generated Perl compiles cannot resolve the underlying language choice either: the quote and ordinary-comment examples in docs/checkpoints/SESSION-STARTUP-READING.86.4.2.1.pl have two successful interpretations with different values. Public Get and independently executed lowered actions confirm7 versus empty string with no last_error.

@@ -1,12 +1,12 @@
 # MEMORY
 
-- activation_commit: `4872ff3d56dd3442bd45ea397a6c7719d66b5d05` — clean base for resumed splitter diagnosis.
-- latest_completed_leaf: `SESSION-STARTUP-READING.86.4.2.1 - expose slash precedence conflict before repair`.
-- active_work_unit: none — no task is executing while the director precedence answer is pending.
-- next_action: Obtain the explicit Perl division-versus-regex precedence decision under .86.4.2.2, then activate implementation .86.4.2.3.
+- activation_commit: `7c318569d6f103416bc5dcc6d0fb825b472a86db` — clean base for director-requested regex contract audit.
+- latest_completed_leaf: `SESSION-STARTUP-READING.86.4.2.4 - distinguish regex operands from runtime types`.
+- active_work_unit: none — the contract audit is complete; no runtime repair is executing.
+- next_action: Activate .86.4.3 to fix whole-spec validation of multiline regex helper operands using matches_multiline in the tracked .86.4.2.4 diagnostic.
   Named-argument direction PARSER-AUTHORING-APIS.4 is approved and parked; other authoring proposals and approved formats stay parked.
-- in_flight_uncommitted: none — accepted source/tests restored; rejected candidate/diagnostic tracked; all jobs consumed; no push.
-- blockers: .86.4.2.2 requires director choice: preserve current division behavior (recommended), or authorize regex-first compatibility changes; see docs/knowledge/perl-multiline-regex-scanner-boundaries.md.
+- in_flight_uncommitted: none — audit, corrected book and repair owners committed; all jobs consumed; no runtime change or push.
+- blockers: none for .86.4.3; the earlier precedence question .86.4.2.2 is withdrawn, and assignment-only splitter expansion .86.4.2.3 is superseded.
   Wrapper startup .7 remains open; warned-child group matched, but denied-call cause and original lost PUC stream remain unproved. Recovery/purge stay prohibited.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
   active table; the task metadata doctrine inventories all consumers, permits arbitrary frontier-row rewrites,
@@ -53,8 +53,8 @@
   use exact staged canonical CI; task-tree/index, Knowledge Map, mdBook, and bounded live/history move in lockstep.
 - current_engineering_notes_capacity: ADR0122 admits 43 collection files /42 manifest lines /25410 manifest bytes; current38/37/22349 stay bounded.
   Notes segment4970 preserves 162 lines /28648 bytes from clean 04534674; old archive rows/bytes remain exact.
-- current_change_history_capacity: ADR0122 admits 47 collection files /46 manifest lines /26255 manifest bytes; current41/40/22799 stay bounded.
-  Changes segment4972 preserves 136 lines /27060 bytes from clean 8259719f8; old archive rows/bytes remain exact.
+- current_change_history_capacity: ADR0122 admits 47 collection files /46 manifest lines /26255 manifest bytes; current42/41/23375 stay bounded.
+  Changes segment4971 preserves 168 lines /27426 bytes from clean 7c318569; old archive rows/bytes remain exact.
 - dependency_boundary: September20: LinkedSpec integrates only with RGX via its published integration document/APIs/contracts. RGX owns PGEN; no separate PGEN procedure, internal inspection/analysis, patches or pin changes.
   Normal documented builds remain authorized; retain caches. Startup .80.1-.4 may observe public behavior or track upstream repairs, not investigate dependency internals.
-- latest_bootstrap_read: ADR0123 targets 2–5 minute startup plus thorough task-specific reading. Separate audit remains 89/143 and .1.90. Document integration and .46/.47/.49/.86.1/.86.2 are verified; Perl .86.4.2.1 restores accepted code after resumed diagnosis; .86.4.2.2 awaits precedence authority. No downstream application acceptance claim.
+- latest_bootstrap_read: ADR0123 targets 2–5 minute startup plus thorough task-specific reading. Separate audit remains 89/143 and .1.90. Document integration and .46/.47/.49/.86.1/.86.2 are verified; Perl .86.4.2.4 corrects the regex-type premise; .86.4.3 owns supported helper validation; .87 owns two helper gaps. No downstream application acceptance claim.

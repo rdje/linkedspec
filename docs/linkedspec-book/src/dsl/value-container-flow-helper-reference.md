@@ -188,6 +188,38 @@ meta["enabled"] = true;
 if(false); return("unreachable"); else; return("reachable"); endif
 ```
 
+### Regex patterns and variable values
+
+Regex is not a separate builtin variable type in the shared value model. A
+slash-delimited pattern is supported as an operand of regex-aware helpers:
+
+```text
+return(matches("abc", /b/));
+return(split("a,b", /,/));
+return(["ax", "by"].filter_match(/^a/));
+```
+
+A pattern can also be kept as a string for a helper that accepts a string pattern:
+
+```text
+pattern = "b";
+return(matches("abc", pattern));
+```
+
+The variable holds a string and `matches` returns a scalar truth result. Do not
+use `pattern = /b/` to create a portable reusable regex object: no such value
+contract is defined. Current Perl evaluates that standalone expression as a match
+against its implicit host subject; Rust evaluates it to the pattern string.
+Parser recognition of regex syntax does not make those behaviors equivalent.
+
+These examples describe ordinary rule action blocks. Perl currently rejects
+`matches` inside an invoked callable `{|text| ... }` body with either literal or
+string patterns; repair is tracked under `SESSION-STARTUP-READING.87.2`.
+The [Perl integration guide](../public-api/integration-perl.md#regex-and-division-in-action-code)
+also describes the multiline helper-pattern validation limitation.
+
+### Composite values
+
 > **Shape literals are value expressions on the Perl reference and Rust backend.** Direct array and hash literals are
 > accepted in value positions: `[]`, `[value, cat("a", "b")]`, `{ key : value }`, and nested combinations.
 > Shape members lower through the same scoped DSL value-expression rules as the surrounding site: primitive
@@ -1134,6 +1166,12 @@ Receiver-dot form is equivalent when the source is a named array working variabl
 set(public_fields, fields.uppercase_each().uniq().filter_match(/^[A-Z_]+$/));
 public_csv = fields.uppercase_each().uniq().filter_match(/^[A-Z_]+$/).join_values(",");
 ```
+
+Perl currently has an additional function-position gap: the direct expression
+`return(filter_match(["ax", "by"], /^a/))` falls through to an undefined host
+function. Its receiver equivalent `return(["ax", "by"].filter_match(/^a/))`
+returns `["ax"]`. This direct-return discrepancy from the pure-function contract
+is owned by `SESSION-STARTUP-READING.87.1`.
 
 Use statement style when each step deserves a readable line. Use nested style when the operation is compact and local.
 

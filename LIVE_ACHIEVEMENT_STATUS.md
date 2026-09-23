@@ -2,17 +2,19 @@
 
 ## Current Activity
 
-PNT resumed and reached a language-precedence blocker under .86.4.2.2. Two complete public inputs return7 on accepted Perl and empty string under the rejected regex-first candidate, with no last_error. Both experiments are preserved; accepted production/tests are restored. No job is running, no runtime repair is accepted, and nothing was pushed.
+The director-requested regex contract audit is complete. Regex helper operands are supported; a first-class regex variable type is not governed. The earlier precedence question and assignment-only splitter expansion are superseded. The supported multiline matches operand independently returns1 but fails whole-spec validation; .86.4.3 is next. No runtime implementation changed or new type was admitted.
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.86.4.2.1 - expose slash precedence conflict before repair` — public counterexamples, exact second candidate archive and diagnostic, restored source/tests and AST23/23; explicit decision/implementation ownership.
+- `SESSION-STARTUP-READING.86.4.2.4 - distinguish regex operands from runtime types` — neutral/book and five first-party evaluator audit, thirteen Perl action controls plus AST, focused45 pass, corrected guidance and explicit .87.1/.87.2 helper repair ownership.
 
 ## Next Action
 
-- Obtain the director precedence choice under .86.4.2.2: preserve accepted Perl division behavior (recommended), or authorize regex-first compatibility changes; then implement .86.4.2.3 before .86.4.3/.4, .86.5 and canonical .86.3.
+- Fix multiline regex helper-operand validation under .86.4.3, then public recomposition .86.4.4, EOF .86.5 and canonical .86.3. Existing helper gaps remain owned by .87.1/.87.2; no new regex type is planned.
 
 ## Recent Completions
+
+- `2026-09-23` — `.86.4.2.4` corrects the regex-type premise, withdraws the precedence question and owns measured helper gaps.
 
 - `2026-09-23` — `.86.4.2.1` proves the slash precedence conflict, archives rejected evidence and restores accepted source/tests.
 
@@ -43,8 +45,6 @@ PNT resumed and reached a language-precedence blocker under .86.4.2.2. Two compl
 - `2026-09-22` — `SESSION-STARTUP-READING.45.3` closes compiler rejection with exact staged canonical acceptance; grammar .83.2.2 follows.
 
 - `2026-09-22` — `SESSION-STARTUP-READING.45.2` verifies source/AST/loader/semantic rejection and reconstructed/generated execution.
-
-- `2026-09-22` — `SESSION-STARTUP-READING.45.1` propagates all reported rule-code parse errors; full Rust gate and quoted-LF regression pass.
 
 ## History
 
