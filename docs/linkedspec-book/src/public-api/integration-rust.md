@@ -290,6 +290,25 @@ separator. The action-expression carrier keeps the regex pattern only; accepting
 these suffix letters does not give them matching semantics. Use an inline flag
 such as `/(?i)x/` when the pattern needs one.
 
+Non-slash symbol calls can also precede another statement on the next line.
+This applies to `+`, `-`, `*`, `%`, `=`, `==`, `!=`, `>`, `>=`, `<` and `<=`.
+With input `x`, this example returns `7`:
+
+```text
+Top::
+ -> Done { out = -(10,3)
+           note = 1;
+           return(out) }
+Done:
+ /x/
+```
+
+Negative literals remain ordinary values: `out = -7` followed by a newline and
+another statement keeps `out` equal to `-7`. LF and CRLF both separate these
+statements; horizontal whitespace alone does not.
+Rebuild previously generated parsers from the original `.spec` files to pick up
+the corrected call parsing.
+
 Arithmetic slash calls currently need a semicolon before a following statement:
 `out = /(14, 2); note = 1`. The word form `div(14, 2)` also works before a newline.
 A slash call followed directly by a newline and another identifier is a known

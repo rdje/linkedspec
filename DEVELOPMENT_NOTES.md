@@ -11,6 +11,16 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
 
+## 2026-09-23 — SESSION-STARTUP-READING.86.1 - preserve non-slash symbol call boundaries
+
+symbol_call_paren_has_expression_boundary skipped all ASCII whitespace after the matched closing parenthesis, erasing LF/CRLF as possible boundaries. The shared guard rejected eleven non-slash forms differently: ten become compile errors, while subtraction falls through parse_expr's bare-minus arm, advances past '-', and parse_var_or_call builds Call{name:""} from the remaining parentheses. Native subtraction therefore returned null. Public CodeBlock/Get/CLI evidence established the mechanism before implementation.
+
+Pass an explicit allow_newline_boundary flag from token classification, true only for non-slash symbols. Return at LF/CR before the existing whitespace skip. Preserve the existing EOF/punctuation checks and slash branch. The seven successful Rust parenthesized/escaped/quoted/multiline regex controls stay exact; .86.2 owns the separate division algorithm and public Perl scanner observations. No other parser or representation change is included.
+
+PASS: 247 core tests and 401 selected runtime tests; the new core target covers 110 symbol/separator/parser combinations, 22 following-write source/span cases and retained compatibility. Three new runtime groups cover 33 symbol assignments, a Unicode-source write and five compatibility cases through source-AST/compiled serde and generated plans. All 14 mutation tests pass, including independent emitted execution after subtraction. Native 44 passes: 39 exact numeric values and five unchanged division rejections owned by .86.2. The exact book example returns 7. Binary SHA-256: 80227ab43b9ef73f56c7884d28151f83f2c6562d0c98bdab35a45bd2255129e5.
+
+All Green tests share one managed Cargo invocation selecting both first-party packages' libraries, all core integration targets and the directly affected runtime targets; this is not full canonical CI. The corrected RED harness reused published first-party library artifacts via rustc, with exact identities recorded; no dependency implementation or internal build procedure was inspected. Its original faulty '=' assertion, corrected two-failure result and native records remain under .linkedspec-data/scratch/symbol-boundary86/. Numeric comparison results are 1, correcting the diagnostic harness's provisional boolean annotations without changing runtime expectations.
+
 ## 2026-09-23 — SESSION-STARTUP-READING.49 - preserve regex statement boundaries
 
 The suffix scanner called skip_whitespace after its closing slash, then consumed ASCII letters from the next statement. With a following assignment, the remaining equals sign caused a separator error; with a bare identifier, the statement disappeared without an error. Removing that one whitespace skip preserves separators and the existing adjacent-suffix behavior without adding flag semantics or changing serialized formats.

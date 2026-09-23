@@ -11,6 +11,14 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
 
+## 2026-09-23 — SESSION-STARTUP-READING.86.1 - preserve non-slash symbol call boundaries
+
+Recognize LF/CRLF/CR after balanced non-slash symbol calls as statement boundaries. Preserve the authored callees for +, -, *, %, = and all six numeric comparisons. This fixes ten measured compile rejects and subtraction's wrong null result: failed lookahead previously consumed '-' and constructed an empty-name call. Slash keeps its existing discriminator until .86.2 reconciles it with accepted multiline regex literals.
+
+The initial test run found an incorrect test assumption about '=' normalization; the public AST corrected it before production changed. Corrected RED has two boundary failures and two compatibility passes. PASS: 247 core tests and 401 selected runtime tests; the new core target covers 110 symbol/separator/parser combinations, 22 following-write source/span cases and retained compatibility. Three new runtime groups cover 33 symbol assignments, a Unicode-source write and five compatibility cases through source-AST/compiled serde and generated plans. All 14 mutation tests pass, including independent emitted execution after subtraction. Native 44 passes: 39 exact numeric values and five unchanged division rejections owned by .86.2. The exact book example returns 7. Binary SHA-256: 80227ab43b9ef73f56c7884d28151f83f2c6562d0c98bdab35a45bd2255129e5.
+
+Split parent .86 before implementation into bounded non-slash .86.1, division/regex .86.2 and canonical closeout .86.3. Preserve all forty public Perl/native/core observations, including independently unexplained Perl EOF/quoted/multiline controls under .86.2. The Rust integration guide includes a subtraction/newline example and regeneration guidance. Other backend integration contracts are unchanged; no cross-backend grammar expansion is claimed. Verification tier is focused; the parent remains open.
+
 ## 2026-09-23 — SESSION-STARTUP-READING.49 - preserve regex statement boundaries
 
 Remove whitespace consumption before Rust action-regex suffix scanning. Only adjacent compatibility letters are consumed; LF/CRLF and following identifiers remain available to the statement parser. Preserve the existing pattern-only RegexLiteral representation. A separated suffix such as /x/ i rejects without a statement separator. Subsequent typed writes and mutations retain their exact source and Unicode scalar spans.

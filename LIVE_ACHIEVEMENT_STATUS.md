@@ -2,17 +2,19 @@
 
 ## Current Activity
 
-Complete-document integration and startup .46/.47/.49 repairs are locally committed. .47 canonical closeout passed at04534674. The immediate next leaf is .86, owning the separate symbol-call newline failure. No downstream application acceptance or new push is claimed.
+Complete-document integration and startup .46/.47/.49/.86.1 repairs are locally committed. The symbol-call parent remains open: non-slash callees are repaired; division/regex reconciliation is next under .86.2. No downstream application acceptance or new push is claimed.
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.49 - preserve regex statement boundaries` — PASS: 243 core tests; 397 selected runtime tests (179 library, 197 integration, 2 source-fidelity, 3 regex, 13 mutation, 3 corpus groups covering 105 fixtures). The regex target checks 32 assignments, exact nested-write source, 3 valid and 3 invalid controls across source/compiled serde and generated plans. The new mutation case also passes independently compiled emitted execution. Native: 22 checks pass (16 return 7, 3 malformed inputs reject, 3 symbol-call rejections remain owned by .86); the exact book example returns 7. Binary SHA-256: 2675f2ffb467b123ef6e866b3765c68232a519aac42f6771ed620eef8e0e4e24.
+- `SESSION-STARTUP-READING.86.1 - preserve non-slash symbol call boundaries` — PASS: 247 core tests and 401 selected runtime tests; the new core target covers 110 symbol/separator/parser combinations, 22 following-write source/span cases and retained compatibility. Three new runtime groups cover 33 symbol assignments, a Unicode-source write and five compatibility cases through source-AST/compiled serde and generated plans. All 14 mutation tests pass, including independent emitted execution after subtraction. Native 44 passes: 39 exact numeric values and five unchanged division rejections owned by .86.2. The exact book example returns 7. Binary SHA-256: 80227ab43b9ef73f56c7884d28151f83f2c6562d0c98bdab35a45bd2255129e5.
 
 ## Next Action
 
-- Activate .86 from clean HEAD; preserve the slash-versus-regex contract while correcting symbol-call statement boundaries. Then resume .50.
+- Activate .86.2 from clean HEAD; preserve accepted multiline regex forms while repairing division newline recognition and classifying the retained Perl controls. Parent canonical .86.3 follows, then .50.
 
 ## Recent Completions
+
+- `2026-09-23` — `SESSION-STARTUP-READING.86.1` preserves eleven non-slash symbol callees and fixes subtraction returning null; core247/runtime401/native44 pass; .86.2 follows.
 
 - `2026-09-23` — `SESSION-STARTUP-READING.49` preserves regex suffix adjacency and following statements; core243/runtime397/native22 pass; separately owned .86 follows.
 
@@ -43,8 +45,6 @@ Complete-document integration and startup .46/.47/.49 repairs are locally commit
 - `2026-09-22` — `SESSION-STARTUP-READING.85` recovers SEMULITH/LS-001–003; four fresh native LF failures select .83.2.1.
 
 - `2026-09-22` — `SESSION-STARTUP-READING.84` adopts targeted startup under ADR0123; .85 awaits the three report IDs/titles before repair selection.
-
-- `2026-09-22` — `CONFORMANCE-SOURCE-READING.1.89` completes seven trace/typed-projection consumers with27 top-level/402 nested results. Eleven process helpers retain .2.16 ownership; controlled handler-scope gap gets .2.19. .1.90 continues.
 
 ## History
 

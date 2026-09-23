@@ -2725,11 +2725,15 @@ impl<'a> Parser<'a> {
         if self.src.as_bytes().get(cursor) != Some(&b'(') {
             return None;
         }
-        self.symbol_call_paren_has_expression_boundary(cursor)
+        self.symbol_call_paren_has_expression_boundary(cursor, token != "/")
             .then_some(token)
     }
 
-    fn symbol_call_paren_has_expression_boundary(&self, open_idx: usize) -> bool {
+    fn symbol_call_paren_has_expression_boundary(
+        &self,
+        open_idx: usize,
+        allow_newline_boundary: bool,
+    ) -> bool {
         let bytes = self.src.as_bytes();
         let mut depth = 0usize;
         let mut in_single_quote = false;
@@ -2776,6 +2780,11 @@ impl<'a> Parser<'a> {
                     if depth == 0 {
                         let mut after = pos + 1;
                         while after < bytes.len() && bytes[after].is_ascii_whitespace() {
+                            // Keep slash's existing regex/call distinction: a
+                            // parenthesized regex pattern can span a newline.
+                            if allow_newline_boundary && matches!(bytes[after], b'\n' | b'\r') {
+                                return true;
+                            }
                             after += 1;
                         }
                         return after >= bytes.len()
