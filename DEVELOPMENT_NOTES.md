@@ -11,6 +11,12 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
 
+## 2026-09-23 — SESSION-STARTUP-READING.86.4.2.1 - complete continuation exposes a precedence choice
+
+A later slash can be a quote opener, part of a quoted value, or comment text. Token-end and lexical-scope lookahead are insufficient: the second rejected candidate passes its immediate27-group AST suite, then fails broader accepted continuations. Checking only whether generated Perl compiles cannot resolve the underlying language choice either: the quote and ordinary-comment examples in docs/checkpoints/SESSION-STARTUP-READING.86.4.2.1.pl have two successful interpretations with different values. Public Get and independently executed lowered actions confirm7 versus empty string with no last_error.
+
+Preserve exact accepted behavior until .86.4.2.2 resolves the director's precedence choice. The new four-file patch is recovery evidence, never a delivered fix; .86.4.2.3 must use the chosen contract and expanded compatibility matrix. Accepted source/tests are restored and23 AST groups pass. Isolated comparisons require a complete first-party perl/specs snapshot because module bootstrap paths can override a partial -I overlay. The final archived/accepted diagnostic replay uses those separate complete roots. Remove64 redundant blank node separators without changing any nonblank task record to stay below the existing8,000-line cap; normalized empty patch-context lines preserve the reconstructed candidate bytes. No dependency internals or off-volume project data were accessed; the three explicitly supplied policy files are unchanged read-only inputs.
+
 ## 2026-09-23 — SESSION-STARTUP-READING.86.4.5 - preserve paused splitter repair and clean handoff
 
 Preserve an unaccepted repair without leaving executable changes in the checkout: docs/checkpoints/SESSION-STARTUP-READING.86.4.2.patch reconstructs the exact four candidate files from 69689bb41. The candidate passes its selected five-target suite but fails the subsequently discovered quote-after-division probe; therefore those selected passes cannot justify repair completion. Token-end lookahead alone can mistake a later quote opener for the closing regex slash. The original scanner returns7 for all four retained controls; the candidate emits an unterminated pattern. Exact commands and checksum live in docs/knowledge/perl-multiline-regex-scanner-boundaries.md.

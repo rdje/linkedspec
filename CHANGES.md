@@ -11,6 +11,12 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
 
+## 2026-09-23 — SESSION-STARTUP-READING.86.4.2.1 - expose slash precedence conflict before repair
+
+Resume the splitter investigation and reject both token-only and lexical-continuation approaches. The latter passes27 action AST groups but regresses seven additional accepted quote/comment controls. Two complete public grammars compile without last_error under both interpretations yet change from7 to empty string. An ordinary comment provides the same counterexample without raw Perl arithmetic. Decision .86.4.2.2 now owns precedence authority; implementation .86.4.2.3 follows it.
+
+Archive the second unaccepted four-file candidate and a standalone diagnostic; verify exact reconstruction and restore accepted production/tests. Restored AST23/23 passes. Update the Knowledge card, public Perl guidance, roadmap/task and bounded continuity. Focused governance/book proof applies; no runtime repair, Phase0/full-CI result or push is claimed. All supplied-policy hashes remain unchanged.
+
 ## 2026-09-23 — SESSION-STARTUP-READING.86.4.5 - preserve paused splitter repair and clean handoff
 
 At director request, suspend PNT and save the unfinished .86.4.2 source/test candidate as a tracked patch. Verify byte-for-byte reconstruction of all four files, then restore those files to accepted diagnosis base 69689bb41. The candidate still regresses division followed by Perl quote operators or a slash literal; it is not a delivered fix. The existing integration-book limitations remain accurate.

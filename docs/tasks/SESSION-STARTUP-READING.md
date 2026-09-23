@@ -902,7 +902,6 @@ remain. Reading completion and runtime signoff remain distinct.
   Children: `.3.3.1`, `.3.3.2`, `.3.3.3`, `.3.3.4`, `.3.3.5`, `.3.3.6`, `.3.3.7`, `.3.3.8`, `.3.3.9`, `.3.3.10`, `.3.3.11`, `.3.3.12`, `.3.3.13`, `.3.3.14`, `.3.3.15`, `.3.3.16`, `.3.3.17`, `.3.3.18`, `.3.3.19`, `.3.3.20`, `.3.3.21`, `.3.3.22`, `.3.3.23`, `.3.3.24`, `.3.3.25`, `.3.3.26`, `.3.3.27`, `.3.3.28`, `.3.3.29`, `.3.3.30`, `.3.3.31`, `.3.3.32`, `.3.3.33`, `.3.3.34`, `.3.3.35`, `.3.3.36`, `.3.3.37`, `.3.3.38`, `.3.3.39`, `.3.3.40`, `.3.3.41`, `.3.3.42`, `.3.3.43`, `.3.3.44`, `.3.3.45`, `.3.3.46`, `.3.3.47`, `.3.3.48`, `.3.3.49`, `.3.3.50`, `.3.3.51`, `.3.3.52`, `.3.3.53`, `.3.3.54`, `.3.3.55`, `.3.3.56`, `.3.3.57`, `.3.3.58`, `.3.3.59`, `.3.3.60`, `.3.3.61`, `.3.3.62`, `.3.3.63`, `.3.3.64`, `.3.3.65`, `.3.3.66`, `.3.3.67`
   Verification: All 412 baseline paths / 3,533,382 bytes are physically read and comprehension-reconciled across 66 committed bounded children. .3.3.67 independently verifies exact byte coverage, current mode/blob identity, durable subjects, Knowledge continuity and pending repair ownership; receipt-bound canonical proof is required for parent landing. This status certifies reading completion only. Containment .7 precedes Dart decomposition/reading.
   Commit: `SESSION-STARTUP-READING.3.3.67 - close Rust reading with exact coverage and durable repair ownership`
-
 - ID: `SESSION-STARTUP-READING.3.3.1`
   Status: `done`
   Goal: Read Rust group 1: 1,496 lines/fragments, 37,995 bytes.
@@ -938,7 +937,6 @@ remain. Reading completion and runtime signoff remain distinct.
     README 1.85+; no old-toolchain run or earliest working compiler is claimed. Neutral cursor contract
     passes 36 family/18 edge/8 parent-child cases and 60 drift mutations. Documentation repairs stay pending.
   Commit: `SESSION-STARTUP-READING.3.3.2 - read Rust manifests AST and callable prefix` — Read 1,483 manifest/AST/callable lines; own exact README minimum-version and mode-comment evidence.
-
 - ID: `SESSION-STARTUP-READING.3.3.3`
   Status: `done`
   Goal: Read Rust group 3: 1,499 lines/fragments, 56,169 bytes.
@@ -956,7 +954,6 @@ remain. Reading completion and runtime signoff remain distinct.
     contextual forms and 23 mutations; selector scan reports zero positive / 20 classified occurrences.
     Required continuity checks pass before commit.
   Commit: `SESSION-STARTUP-READING.3.3.3 - read callable normalization and compiler validation prefix` — Read 1,499 callable/compiler lines; preserve validation order and exact pending repair boundaries.
-
 - ID: `SESSION-STARTUP-READING.3.3.4`
   Status: `done`
   Goal: Read Rust group 4: 1,481 lines/fragments, 57,687 bytes.
@@ -975,7 +972,6 @@ remain. Reading completion and runtime signoff remain distinct.
     native duplicate-label rejection evidence. Neutral slot checks pass 5 fixtures / 2 diagnostics / 59 mutations; entry checks pass 8 selection /
     3 failure / 3 strict cases / 54 mutations. Required continuity checks pass before commit.
   Commit: `SESSION-STARTUP-READING.3.3.4 - read Rust regex resolution descriptors and entry diagnostics` — Read 1,481 compiler/descriptor/entry/error lines; separate projection determinism from native validation.
-
 - ID: `SESSION-STARTUP-READING.3.3.5`
   Status: `done`
   Goal: Read Rust group 5: 1,496 lines/fragments, 57,175 bytes.
@@ -991,7 +987,6 @@ remain. Reading completion and runtime signoff remain distinct.
     11 success / 16 structural / 3 evaluation / 3 exclusion / 8 composed cases and 105 mutations.
     Required continuity checks pass before commit; no fresh native-suite execution is claimed.
   Commit: `SESSION-STARTUP-READING.3.3.5 - read Rust expression carriers and statement parser prefix` — Read 1,496 expression/statement lines; separate byte cursors, character spans and debug formatting.
-
 - ID: `SESSION-STARTUP-READING.3.3.6`
   Status: `done`
   Goal: Read Rust group 6: 1,461 lines/fragments, 54,270 bytes.
@@ -1008,7 +1003,6 @@ remain. Reading completion and runtime signoff remain distinct.
     8 pre-commit failures, 6 callback / 1 continuation compositions, and 167 + 592 mutations.
     Required continuity checks pass before commit.
   Commit: `SESSION-STARTUP-READING.3.3.6 - read Rust expression parsing and retain boundary repair evidence` — Read 1,461 expression-parser lines; retain exact Unicode and mutation-whitespace repair evidence.
-
 - ID: `SESSION-STARTUP-READING.3.3.7`
   Status: `done`
   Goal: Read Rust group 7: 1,497 lines/fragments, 56,871 bytes.
@@ -1025,7 +1019,6 @@ remain. Reading completion and runtime signoff remain distinct.
     establish one-argument cat divergence. .50/.51 own repairs before Knowledge. Prior .49 evidence retains
     its limits. Required continuity checks pass before commit; no runtime repair is claimed.
   Commit: `SESSION-STARTUP-READING.3.3.7 - read Rust lexical boundaries and own hash and cat repairs` — Read 1,497 lexical/test lines; own adjacent hash-colon loss and cat arity divergence as .50/.51.
-
 - ID: `SESSION-STARTUP-READING.3.3.8`
   Status: `done`
   Goal: Read Rust group 8: 1,470 lines/fragments, 57,396 bytes.
@@ -1043,7 +1036,6 @@ remain. Reading completion and runtime signoff remain distinct.
     assertion limits are reconciled in Knowledge; .41.6 owns stale test naming. Required continuity
     checks pass before commit. No native suite, runtime repair or complete-codebase claim.
   Commit: `SESSION-STARTUP-READING.3.3.8 - read remaining Rust expression tests and core parser entry` — Complete expr.rs reading and core entry prefix; reconcile test assertion limits and historical binding/rollout prose.
-
 - ID: `SESSION-STARTUP-READING.3.3.9`
   Status: `done`
   Goal: Read Rust group 9: 1,496 lines/fragments, 49,733 bytes.
@@ -1060,7 +1052,6 @@ remain. Reading completion and runtime signoff remain distinct.
     own bounded repairs before Knowledge. All diagnostic processes completed; required continuity proof
     passes before commit. No runtime, public-book, full-native or whole-codebase signoff.
   Commit: `SESSION-STARTUP-READING.3.3.9 - read Rust rule-body parsing and own lexical boundary repairs` — Read rule-body parser; own compact fluent, invalid header suffix and Perl/Rust regex-brace repairs .52-.54.
-
 - ID: `SESSION-STARTUP-READING.3.3.10`
   Status: `done`
   Goal: Read Rust group 10: 1,466 lines/fragments, 47,137 bytes.
@@ -1078,7 +1069,6 @@ remain. Reading completion and runtime signoff remain distinct.
     and distinct text spelling; .55 owns repairs before Knowledge. All jobs completed; focused continuity
     passes before commit. No runtime/public-book change or fresh cross-backend trace signoff.
   Commit: `SESSION-STARTUP-READING.3.3.10 - read core trace and types and own large-number conversion repairs` — Read parser tests/core trace/types; own finite-value saturation and large-number text repairs .55.
-
 - ID: `SESSION-STARTUP-READING.3.3.11`
   Status: `done`
   Goal: Read Rust group 11: 1,499 lines/fragments, 45,494 bytes.
@@ -1096,7 +1086,6 @@ remain. Reading completion and runtime signoff remain distinct.
     boundaries and ordinary/traced AST pass order; .41.2 owns stale validation comments. Focused continuity
     passes before commit. No fresh native matrix, runtime, public-book, or whole-codebase signoff.
   Commit: `SESSION-STARTUP-READING.3.3.11 - read compiled types Unicode labels and validation entrypoints` — Read compiled types and pinned Unicode through EOF plus AST-validation entrypoints; reconcile historical/current claims.
-
 - ID: `SESSION-STARTUP-READING.3.3.12`
   Status: `done`
   Goal: Read Rust group 12: 1,490 lines/fragments, 54,844 bytes.
@@ -1121,7 +1110,6 @@ remain. Reading completion and runtime signoff remain distinct.
     required before this candidate can land; the receipt and commit hooks enforce that boundary.
     No runtime/public-book change or fresh descriptor/generated/backend-wide signoff.
   Commit: `SESSION-STARTUP-READING.3.3.12 - read static validation and preserve bounded engineering history` — Complete validator/descriptor reading; own .56/.57; preserve segment 4983 with finite ADR 0105 capacity and canonical proof.
-
 - ID: `SESSION-STARTUP-READING.3.3.13`
   Status: `done`
   Goal: Read Rust group 13: 1,495 lines/fragments, 52,012 bytes.
@@ -1138,7 +1126,6 @@ remain. Reading completion and runtime signoff remain distinct.
     policy, contract, or infrastructure change.
   Verification: PASS: exact six-range/baseline identity; managed locked/offline core cursor 5/5, types 8/8 and Unicode 5/5; four neutral contract checks; completed prior canonical/sample intake; Knowledge, history, memory, all nine doctrines and diff.
   Commit: `SESSION-STARTUP-READING.3.3.13 - read core tests and bounded child authority` — Read six Rust ranges, preserve exact verification limits and prior canonical evidence, and remove only consumed captures.
-
 - ID: `SESSION-STARTUP-READING.3.3.14`
   Status: `done`
   Goal: Read Rust group 14: 1,494 lines/fragments, 50,413 bytes.
@@ -1153,7 +1140,6 @@ remain. Reading completion and runtime signoff remain distinct.
     policy, contract, or infrastructure change.
   Verification: PASS: four exact baseline-identical ranges; progressive 9/9/116/public60, typed source 14/0/231, diagnostic output 3/11/6/8/20, scalar numeric 55/18; bounded ceiling-constructor/test-source review; Knowledge/history/memory/all nine doctrines and diff.
   Commit: `SESSION-STARTUP-READING.3.3.14 - read child authority diagnostics and engine definitions` — Finish authority and diagnostic-type reading; reconcile current options/diagnostic Knowledge and resource-boundary limits.
-
 - ID: `SESSION-STARTUP-READING.3.3.15`
   Status: `done`
   Goal: Read Rust group 15: 1,500 lines/fragments, 56,911 bytes.
@@ -1165,7 +1151,6 @@ remain. Reading completion and runtime signoff remain distinct.
     policy, contract, or infrastructure change.
   Verification: PASS: exact engine range/baseline identity; seven managed neutral checks; managed CLI build; seven paired Rust/Perl split controls with five differences/two equal controls; .33 ownership and exact evidence; Knowledge/history/explicit memory/staged diff/all nine pre-commit doctrines.
   Commit: `SESSION-STARTUP-READING.3.3.15 - read generated engine loops and audit split boundaries` — Read generated action/blind loops, preserve exact scope, and annotate measured split boundaries under existing .33.
-
 - ID: `SESSION-STARTUP-READING.3.3.16`
   Status: `done`
   Goal: Read Rust group 16: 1,500 lines/fragments, 60,181 bytes.
@@ -1177,7 +1162,6 @@ remain. Reading completion and runtime signoff remain distinct.
     policy, contract, or infrastructure change.
   Verification: PASS: complete range/current-baseline identity; root, semantic, diagnostic-output and staged-AST neutral checks; bounded generated-validation support; Knowledge/history/explicit memory/staged diff/all nine pre-commit doctrines.
   Commit: `SESSION-STARTUP-READING.3.3.16 - read engine invocation routes and entry dispatch` — Reconcile execution projections, diagnostic stages and precedence, generated validation ownership and parent-result ordering.
-
 - ID: `SESSION-STARTUP-READING.3.3.17`
   Status: `done`
   Goal: Read Rust group 17: 1,493 lines/fragments, 60,008 bytes.
@@ -1189,7 +1173,6 @@ remain. Reading completion and runtime signoff remain distinct.
     policy, contract, or infrastructure change.
   Verification: PASS: complete range/current-baseline identity; six managed neutral contracts; four native diagnostic controls and independent result-field assertions; .55.1 repair ownership; Knowledge/history/explicit memory/staged diff/all nine pre-commit doctrines.
   Commit: `SESSION-STARTUP-READING.3.3.17 - read native action loops and nested-write coordination` — Read native loops/control and nested-write evaluation order; preserve exact diagnostic evidence and following traversal scope.
-
 - ID: `SESSION-STARTUP-READING.3.3.18`
   Status: `done`
   Goal: Read Rust group 18: 1,498 lines/fragments, 58,503 bytes.
@@ -1201,7 +1184,6 @@ remain. Reading completion and runtime signoff remain distinct.
     policy, contract, or infrastructure change.
   Verification: PASS: complete range/current-baseline identity; four managed neutral contracts; bounded Knowledge claim review; history/explicit memory/derived Knowledge/staged diff/all nine pre-commit doctrines.
   Commit: `SESSION-STARTUP-READING.3.3.18 - read recursive writes and expression invocation scopes` — Complete recursive-write and expression/callable invocation reading with separate function/codeblock scope boundaries.
-
 - ID: `SESSION-STARTUP-READING.3.3.19`
   Status: `done`
   Goal: Read Rust group 19: 1,493 lines/fragments, 55,743 bytes.
@@ -1213,7 +1195,6 @@ remain. Reading completion and runtime signoff remain distinct.
     policy, contract, or infrastructure change.
   Verification: PASS: complete range/current-baseline identity; four managed neutral contracts; six paired Rust CLI/Perl Get cases plus six direct native diagnostics and independent field/value assertions; .58 repair ownership; compiler sample consumed; history/memory/derived Knowledge/staged diff/all nine pre-commit doctrines.
   Commit: `SESSION-STARTUP-READING.3.3.19 - read receiver traversal and diagnose final-assignment guard` — Complete traversal/value-block reading; own confirmed final-assignment guard gap and preserve exact native/reference evidence.
-
 - ID: `SESSION-STARTUP-READING.3.3.20`
   Status: `done`
   Goal: Read Rust group 20: 1,400 lines/fragments, 65,528 bytes.
@@ -1225,7 +1206,6 @@ remain. Reading completion and runtime signoff remain distinct.
     policy, contract, or infrastructure change.
   Verification: PASS: complete range/current-baseline identity; four managed neutral contracts; ten paired Rust primary/Perl Get cases with exact values/error fields; ten lowerings/generated captures and six callback descriptor controls; .59 repair ownership; history/memory/derived Knowledge/staged diff/all nine pre-commit doctrines.
   Commit: `SESSION-STARTUP-READING.3.3.20 - read helper dispatch and own substitution composition repairs` — Complete helper-prefix reading; own substitution flags, callback lowering and receiver protection with exact paired evidence.
-
 - ID: `SESSION-STARTUP-READING.3.3.21`
   Status: `done`
   Goal: Read Rust group 21: 1,499 lines/fragments, 59,677 bytes.
@@ -1237,7 +1217,6 @@ remain. Reading completion and runtime signoff remain distinct.
     policy, contract, or infrastructure change.
   Verification: PASS: complete range/current-baseline identity; three managed neutral contracts; eleven paired Rust primary/Perl Get cases plus one Rust-only overflow control; twelve ready descriptors/lowered/generated captures; exact values/kinds/panic-site assertions; .60/.61 ownership; history/memory/derived Knowledge/staged diff/all nine pre-commit doctrines.
   Commit: `SESSION-STARTUP-READING.3.3.21 - complete helper reading and own slice and scalar boundary repairs` — Complete helper implementation and test-prefix reading; own array slicing and scalar null/empty repair with bounded exact evidence.
-
 - ID: `SESSION-STARTUP-READING.3.3.22`
   Status: `done`
   Goal: Read Rust group 22: 1,469 lines/fragments, 52,089 bytes.
@@ -1249,7 +1228,6 @@ remain. Reading completion and runtime signoff remain distinct.
     policy, contract, or infrastructure change.
   Verification: PASS: full 1,469-line source read/current-baseline identity; five paired primary Rust/live Perl exact value/effect/JSON-kind controls; five ready descriptors/lowered/generated captures; three managed neutral contracts; .62 ownership and four Knowledge corrections; history/memory/derived Knowledge/staged diff/all nine pre-commit doctrines.
   Commit: `SESSION-STARTUP-READING.3.3.22 - read capture and control tests and own coalesce evaluation repair` — Read capture/control assertions, qualify weak smoke coverage, and own coalesce definedness/laziness with corrected Boolean observations.
-
 - ID: `SESSION-STARTUP-READING.3.3.23`
   Status: `done`
   Goal: Read Rust group 23: 1,364 lines/fragments, 53,265 bytes.
@@ -1263,7 +1241,6 @@ remain. Reading completion and runtime signoff remain distinct.
     policy, contract, or infrastructure change.
   Verification: PASS: complete 1,364-line/53,265-byte source read/current-baseline identity; three managed write/mutation/slot neutral contracts; six informative paired primary Rust/live Perl choice probes plus six retained inconclusive controls; six three-rule descriptors/generated captures; exact sequence/error assertions; .63 ownership; Knowledge/history/memory/staged diff/all nine pre-commit doctrines.
   Commit: `SESSION-STARTUP-READING.3.3.23 - complete engine and regex helper reading and own input-context repair` — Complete engine tests and regex wrappers; own five assertion discrepancies with exact collected-rule controls.
-
 - ID: `SESSION-STARTUP-READING.3.3.24`
   Status: `done`
   Goal: Read Rust group 24: 7 lines/fragments, 65,536 bytes.
@@ -1276,7 +1253,6 @@ remain. Reading completion and runtime signoff remain distinct.
     policy, contract, or infrastructure change.
   Verification: PASS: all 65,536 owned bytes read without truncation and baseline-identical; both managed generated bindings byte-fresh; transport 35/10/10/76 and admission complete 5/5+6/6/141; decoded bundle/frame/schema assertions; shared builder/renderer source identity; Knowledge/history/memory/staged diff/all nine pre-commit doctrines.
   Commit: `SESSION-STARTUP-READING.3.3.24 - read embedded MCP contract prefix and reconcile generated identity` — Preserve exact generated-prefix coverage and identity, update old sizes, distinguish artifact/governance proof from runtime execution.
-
 - ID: `SESSION-STARTUP-READING.3.3.25`
   Status: `done`
   Goal: Read Rust group 25: 1,352 lines/fragments, 65,134 bytes.
@@ -1290,7 +1266,6 @@ remain. Reading completion and runtime signoff remain distinct.
     policy, contract, or infrastructure change.
   Verification: PASS reading/proof: all 1,352 lines/fragments/65,134 bytes baseline-identical; generated binding byte-fresh; transport 35/10/10/76, admission complete/141; existing native test 1/1 and captured-output gap independently confirmed/owned .64; Knowledge/history/memory/staged diff/all nine pre-commit doctrines. Runtime repair remains pending.
   Commit: `SESSION-STARTUP-READING.3.3.25 - read frozen MCP runtime and own caught-panic output repair` — Preserve frozen-runtime/registry coverage and separate response sanitation from captured process output; own .64 repair and qualify native reachability.
-
 - ID: `SESSION-STARTUP-READING.3.3.26`
   Status: `done`
   Goal: Read Rust group 26: 1,500 lines/fragments, 51,296 bytes.
@@ -1304,7 +1279,6 @@ remain. Reading completion and runtime signoff remain distinct.
     policy, contract, or infrastructure change.
   Verification: PASS reading/proof: all 1,500 lines/51,296 bytes baseline-identical; six existing native wire tests; twelve paired public delimiter/size controls and canonical Rust output; EOF maximum+1 defect owned .65; transport 35/10/10/76 and admission complete/141; Knowledge/history/memory/staged diff/all nine pre-commit doctrines.
   Commit: `SESSION-STARTUP-READING.3.3.26 - complete MCP wire reading and own final EOF byte-limit repair` — Complete MCP server/wire coverage, qualify existing unit boundaries, and own the independently reproduced EOF limit repair.
-
 - ID: `SESSION-STARTUP-READING.3.3.27`
   Status: `done`
   Goal: Read Rust group 27: 1,500 lines/fragments, 50,300 bytes.
@@ -1317,7 +1291,6 @@ remain. Reading completion and runtime signoff remain distinct.
     policy, contract, or infrastructure change.
   Verification: PASS: all 1,500 owned lines/50,300 bytes and 68 supporting helper lines baseline-identical; shared Rust CLI 66/66 default with empty stderr; neutral recognition 138/250/58, 9/9 and public/admission guards; .38 source comparison; Knowledge/history/memory/staged diff/all nine pre-commit doctrines.
   Commit: `SESSION-STARTUP-READING.3.3.27 - complete primary CLI and read recognition authority guards` — Complete primary CLI coverage, distinguish current neutral proof from historical native counts, and preserve Rust's early invalidation guard.
-
 - ID: `SESSION-STARTUP-READING.3.3.28`
   Status: `done`
   Goal: Read Rust group 28: 1,496 lines/fragments, 56,822 bytes.
@@ -1330,7 +1303,6 @@ remain. Reading completion and runtime signoff remain distinct.
     policy, contract, or infrastructure change.
   Verification: PASS: all 1,496 lines/56,822 bytes baseline-identical; recognition 138/250/58 at 9/9, gap 9/0/63/public34, typed source 14/0/231; exact 92 helper/seven alias catalogs; Knowledge/history/memory/staged diff/all nine pre-commit doctrines.
   Commit: `SESSION-STARTUP-READING.3.3.28 - complete recognition adapters and read RuntimeContext source connections` — Complete recognition runtime and record source-authority, gap rollback and exact helper/alias boundaries.
-
 - ID: `SESSION-STARTUP-READING.3.3.29`
   Status: `done`
   Goal: Read Rust group 29: 1,497 lines/fragments, 49,031 bytes.
@@ -1342,7 +1314,6 @@ remain. Reading completion and runtime signoff remain distinct.
     policy, contract, or infrastructure change.
   Verification: PASS: 1,497 lines/49,031 bytes baseline-identical; typed source 14/0/231, binding 11/7/6/8, write105, map167/592, diagnostic3/11/6/8/20; Knowledge/history/memory/staged diff/all nine pre-commit doctrines.
   Commit: `SESSION-STARTUP-READING.3.3.29 - read context observations projections and typed binding stores` — Record completion routing, typed projection and stable binding identity with exact remaining restoration scope.
-
 - ID: `SESSION-STARTUP-READING.3.3.30`
   Status: `done`
   Goal: Read Rust group 30: 1,494 lines/fragments, 53,412 bytes.
@@ -1356,7 +1327,6 @@ remain. Reading completion and runtime signoff remain distinct.
     policy, contract, or infrastructure change.
   Verification: PASS reading/diagnosis: 1,494 lines/53,412 bytes baseline-identical; six paired public queries with independent ID/excerpt assertions; semantic6/20/128 at9/0 and6/0, callable23, binding11/7/6/8; .22/.66 ownership; Knowledge/history/memory/staged diff/all nine pre-commit doctrines.
   Commit: `SESSION-STARTUP-READING.3.3.30 - complete context and semantic foundation reading and own binding identity repair` — Complete context/foundation reading and own the independently measured repeated-binding query repair.
-
 - ID: `SESSION-STARTUP-READING.3.3.31`
   Status: `done`
   Goal: Read Rust group 31: 1,494 lines/fragments, 50,420 bytes.
@@ -1369,7 +1339,6 @@ remain. Reading completion and runtime signoff remain distinct.
     policy, contract, or infrastructure change.
   Verification: PASS reading/diagnosis: 1,494 lines/50,420 bytes baseline-identical; six paired public queries, six Perl Get controls and independent signature/source assertions; semantic6/20/128 at9/0 and6/0; .67 ownership; Knowledge/history/memory/staged diff/all nine doctrines.
   Commit: `SESSION-STARTUP-READING.3.3.31 - complete semantic call reading and own signature and container projection repairs` — Complete call projection and distinguish matching query payloads from independently valid semantic evidence.
-
 - ID: `SESSION-STARTUP-READING.3.3.32`
   Status: `done`
   Goal: Read Rust group 32: 1,495 lines/fragments, 50,145 bytes.
@@ -1383,7 +1352,6 @@ remain. Reading completion and runtime signoff remain distinct.
     policy, contract, or infrastructure change.
   Verification: PASS reading/diagnosis: 1,495 lines/50,145 bytes baseline-identical; eight native constructor/query controls, four paired Get/CLI controls, independent assertions; semantic6/20/128, diagnostic3/11/6/8/20, recognition138/250/58; .68/.69 ownership; Knowledge/history/memory/staged diff/all nine doctrines.
   Commit: `SESSION-STARTUP-READING.3.3.32 - complete semantic query reading and own token use and newline repairs` — Complete query/runtime projection and separate actual token-use/parser gaps from a ruled-out failure-mapping concern.
-
 - ID: `SESSION-STARTUP-READING.3.3.33`
   Status: `done`
   Goal: Read Rust group 33: 1,482 lines/fragments, 50,376 bytes.
@@ -1397,7 +1365,6 @@ remain. Reading completion and runtime signoff remain distinct.
     policy, contract, or infrastructure change.
   Verification: PASS reading/diagnosis: 1,482 lines/50,376 bytes baseline-identical; five paired public queries, three paired Get/CLI controls and independent assertions; semantic6/20/128, cursor36/18/8/60, generated10families/strictRust105; .70 ownership; Knowledge/history/memory/staged diff/all nine doctrines.
   Commit: `SESSION-STARTUP-READING.3.3.33 - complete static semantic reading and own grouped edge correlation repairs` — Complete static/event reading and distinguish correct grouped execution from incomplete semantic source/index records.
-
 - ID: `SESSION-STARTUP-READING.3.3.34`
   Status: `done`
   Goal: Read Rust group 34: 1,493 lines/fragments, 53,383 bytes.
@@ -1410,7 +1377,6 @@ remain. Reading completion and runtime signoff remain distinct.
     policy, contract, or infrastructure change.
   Verification: PASS reading/diagnosis: 1,493 lines/53,383 bytes baseline-identical; eight identity emissions/seven module compiles and two executable modules/ten results, independent assertions; generated10/strictRust105, cursor36/18/8/60, typed14/0/231; .71/.72 owned; Knowledge/history/memory/staged diff/all nine doctrines.
   Commit: `SESSION-STARTUP-READING.3.3.34 - complete emitter reading and own literal and recognition adapter repairs` — Complete emitter reading and preserve independently measured generated identity/projection gaps.
-
 - ID: `SESSION-STARTUP-READING.3.3.35`
   Status: `done`
   Goal: Read Rust group 35: 1,497 lines/fragments, 51,223 bytes.
@@ -1424,7 +1390,6 @@ remain. Reading completion and runtime signoff remain distinct.
     policy, contract, or infrastructure change.
   Verification: PASS reading: 1,497 lines/51,223 bytes baseline-identical; ADR0026 and one new/four existing Knowledge owners reconciled; native resolution14/9/4, typed14/0/231, diagnostic3/11/6/8/20, staged9legs/123+129mutations; Knowledge/history/memory/staged diff/all nine doctrines.
   Commit: `SESSION-STARTUP-READING.3.3.35 - complete source authority and loader reading and reconcile function projection` — Complete source authority/loader and retain exact staged function projection and scalar-source boundaries.
-
 - ID: `SESSION-STARTUP-READING.3.3.36`
   Status: `done`
   Goal: Read Rust group 36: 1,453 lines/fragments, 51,063 bytes.
@@ -1437,7 +1402,6 @@ remain. Reading completion and runtime signoff remain distinct.
     policy, contract, or infrastructure change.
   Verification: PASS reading: 1,453 lines/51,063 bytes baseline-identical; five Knowledge owners and .55.1 source inventory reconciled; staged9legs/123+129mutations, typed14/0/231 and scalar55/18; Knowledge/history/memory/staged diff/all nine doctrines.
   Commit: `SESSION-STARTUP-READING.3.3.36 - complete spec parser reading and trace staged registry and invocation authority` — Complete spec parser and preserve frozen registry, fresh seed and queue coordinator boundaries.
-
 - ID: `SESSION-STARTUP-READING.3.3.37`
   Status: `done`
   Goal: Read Rust group 37: 1,499 lines/fragments, 53,102 bytes.
@@ -1449,7 +1413,6 @@ remain. Reading completion and runtime signoff remain distinct.
     policy, contract, or infrastructure change.
   Verification: PASS reading: 1,499 lines/53,102 baseline-identical bytes; 28 paired target, 12 returned-marker and six budget records independently asserted; .73/.74/.75 own measured gaps; staged123+129 and typed14/0/231; Knowledge/history/memory/staged diff/all nine doctrines.
   Commit: `SESSION-STARTUP-READING.3.3.37 - trace staged execution and own target validation and counter repairs` — Preserve exact staged execution evidence and own destination, marker/provenance and call-counter repairs.
-
 - ID: `SESSION-STARTUP-READING.3.3.38`
   Status: `done`
   Goal: Read Rust group 38: 1,500 lines/fragments, 50,788 bytes.
@@ -1465,7 +1428,6 @@ remain. Reading completion and runtime signoff remain distinct.
     receipt-bound canonical verification is required before landing, with runtime/public-book reading gates unchanged.
   Verification: PASS focused reading: 1,500 lines/50,788 baseline-identical bytes across four ranges; six existing Knowledge cards/.55.1 source inventory reconciled; Unicode1563/1581/158/464/12, staged123+129, typed14/0/231; Archive source/blob/hash/prior-manifest proof passes; final exact staged canonical receipt is required before landing.
   Commit: `SESSION-STARTUP-READING.3.3.38 - complete staged source reading and preserve bounded change history` — Complete staged source comprehension and separate declaration authority, returned records and legacy adapter metadata.
-
 - ID: `SESSION-STARTUP-READING.3.3.39`
   Status: `done`
   Goal: Read Rust group 39: 1,500 lines/fragments, 38,103 bytes.
@@ -1477,7 +1439,6 @@ remain. Reading completion and runtime signoff remain distinct.
     policy, contract, or infrastructure change.
   Verification: PASS reading: all 1,500 lines/38,103 baseline-identical bytes; lower map complete, upper prefix reconciled; Unicode1563/1581/158/464/12; prior exact canonical receipt/log and both sample identities consumed; five Knowledge cards, memory/history/diff and required nine-doctrine commit checks.
   Commit: `SESSION-STARTUP-READING.3.3.39 - finish Unicode lower-map reading and preserve canonical evidence` — Preserve completed Unicode lower-map comprehension and exact prior canonical/sample evidence.
-
 - ID: `SESSION-STARTUP-READING.3.3.40`
   Status: `done`
   Goal: Read Rust group 40: 1,450 lines/fragments, 37,746 bytes.
@@ -1489,7 +1450,6 @@ remain. Reading completion and runtime signoff remain distinct.
     policy, contract, or infrastructure change.
   Verification: PASS: all 1,450 lines / 37,746 bytes read untruncated and baseline-identical; complete upper-map comprehension reconciled; unchanged generation inputs preserve .3.3.39 Unicode proof; Knowledge, memory, both histories, diff and required nine-doctrine commit checks.
   Commit: `SESSION-STARTUP-READING.3.3.40 - complete Unicode upper-map reading` — Complete upper-map physical reading with exact range identity and retained generation proof.
-
 - ID: `SESSION-STARTUP-READING.3.3.41`
   Status: `done`
   Goal: Read Rust group 41: 1,494 lines/fragments, 43,943 bytes.
@@ -1502,7 +1462,6 @@ remain. Reading completion and runtime signoff remain distinct.
     must pass before the final leaf commit and clean push.
   Verification: PASS focused: all 1,494 lines / 43,943 baseline-identical bytes; complete Unicode module and bounded callable assertion scope; Unicode 1563/1581/158/464/12 and callable 7/11/9/7/4/8/23; four Knowledge cards; exact 99-commit batch census. Final exact staged canonical receipt is required before landing; its completed result is recorded in the commit body.
   Commit: `SESSION-STARTUP-READING.3.3.41 - complete Unicode reading and checkpoint callable contracts at the batch boundary` — Close the accepted 100-item batch after exact canonical proof; resume required reading at .3.3.42.
-
 - ID: `SESSION-STARTUP-READING.3.3.42`
   Status: `done`
   Goal: Read Rust group 42: 1,500 lines/fragments, 45,529 bytes.
@@ -1570,7 +1529,6 @@ remain. Reading completion and runtime signoff remain distinct.
   Verification: PASS: all 56 scopes / 1,500 lines / 45,529 bytes read untruncated and baseline-identical;
     callable 7/11/9/7/4/8/23 and named-mark 7 helpers/3 mutations pass; focused continuity proof precedes landing.
   Commit: `SESSION-STARTUP-READING.3.3.42 - complete callable and named-mark reading with corpus prefix` — Complete callable/named-mark reading and owned corpus prefix.
-
 - ID: `SESSION-STARTUP-READING.3.3.43`
   Status: `done`
   Goal: Read Rust group 43: 1,106 lines/fragments, 59,355 bytes.
@@ -1636,7 +1594,6 @@ remain. Reading completion and runtime signoff remain distinct.
     18 JSON files decode, manifest has 105 unique cases. Twelve paired Perl probes and exact lowered callee
     confirm .76; PARSER-AUTHORING-APIS preserves three proposed DBINP investigations. Focused continuity governs landing.
   Commit: `SESSION-STARTUP-READING.3.3.43 - reconcile corpus reading and own SimEnv dispatch repair`
-
 - ID: `SESSION-STARTUP-READING.3.3.44`
   Status: `done`
   Goal: Read Rust group 44: 225 lines/fragments, 65,141 bytes.
@@ -1650,7 +1607,6 @@ remain. Reading completion and runtime signoff remain distinct.
   Canonical trigger: `none` — bounded reading checkpoint; grammar and runtime unchanged.
   Verification: All four scopes reconcile with the baseline: 225 lines / 65,141 bytes; ordered audit SHA-256 `e2f195398076abb7f885a1dc307122b7f391aee92d7d04d19c488c6e37353444`. The action-edge grammar is read through EOF; comment-skip grammar is read through paragraph dispatch. Fluent/bare/blind edges retain distinct node fields, complete-line lifecycle precedes bare edges, standalone blocks normalize to I, and variadic functions emit a versioned signature. JSON decodes; all four 83,452-byte / 226-line mirrors equal canonical SHA-256 `03cfb50459984806c806e9ec3f2b072add897c207a2cb93fd267d640a5808004`; Unicode 17.0.0 / 806 ranges / 9 positive / 8 negative / 2 distinct pairs pass. Stored oracle inspection is not a fresh parser execution.
   Commit: `SESSION-STARTUP-READING.3.3.44 - reconcile self-hosted grammar reading and mirror freshness`
-
 - ID: `SESSION-STARTUP-READING.3.3.45`
   Status: `done`
   Goal: Read Rust group 45: 44 lines/fragments, 60,931 bytes.
@@ -1661,7 +1617,6 @@ remain. Reading completion and runtime signoff remain distinct.
   Canonical trigger: `none` — bounded reading checkpoint; grammar and runtime unchanged.
   Verification: All 44 lines / 60,931 bytes match the baseline; range SHA-256 `70dc693993fb724cfca8d8a3394b285210fdb20740f23b605e80da414dcb68d6`. Header labels preserve frozen Unicode membership plus physical-line/colon boundaries; mode and top are separate fields. Named slots preserve slot_name, anonymous anchors preserve pattern, and action/blind/bare block or fluent forms retain their distinct target/code/raw fields. Complete mirror identity remains `03cfb50459984806c806e9ec3f2b072add897c207a2cb93fd267d640a5808004`, so .44 freshness/Unicode proof applies unchanged. Existing self-hosted-rule-label-physical-boundaries Knowledge owns causal interpretation; no new runtime result is claimed.
   Commit: `SESSION-STARTUP-READING.3.3.45 - reconcile self-hosted labels and edge grammar reading`
-
 - ID: `SESSION-STARTUP-READING.3.3.46`
   Status: `done`
   Goal: Read Rust group 46: 231 lines/fragments, 59,566 bytes.
@@ -1675,7 +1630,6 @@ remain. Reading completion and runtime signoff remain distinct.
   Canonical trigger: `none` — bounded reading checkpoint; grammar and runtime unchanged.
   Verification: All four owned scopes match the baseline: 231 lines / 59,566 bytes; ordered audit SHA-256 `f6593863e1e3914a4a4a52b06bd4c99f8e0d7b24d8ddfe7d5a4d57310894c67f`. Comment-skip grammar is complete through EOF; minimal-rule grammar is read through blind-block dispatch. Comment input and decoded minimal-rule oracle preserve Top plus anonymous x-regex nodes; the leading comment is skipped by spec_file dispatch. The suffix preserves bare/lifecycle precedence, standalone-I normalization, variadic signatures and marker/directive nodes. Both complete grammar mirrors retain .44 canonical identity and its Unicode proof. Stored oracle inspection is not a fresh parser execution.
   Commit: `SESSION-STARTUP-READING.3.3.46 - reconcile comment-skip and minimal-rule grammar reading`
-
 - ID: `SESSION-STARTUP-READING.3.3.47`
   Status: `done`
   Goal: Read Rust group 47: 249 lines/fragments, 53,907 bytes.
@@ -1689,7 +1643,6 @@ remain. Reading completion and runtime signoff remain distinct.
   Canonical trigger: `none` — bounded reading checkpoint; grammar and runtime unchanged.
   Verification: All four owned scopes match the baseline: 249 lines / 53,907 bytes; ordered audit SHA-256 `63aa28ce7e9c2e3f4130788a8fb8aeda2d568483fe7efd6059dab3d905d75d21`. Minimal-rule grammar is complete through EOF; user-function grammar is read through anonymous regex-anchor dispatch. The decoded function oracle preserves norm(value) body text before Top in the first paragraph, the action code calling norm, and a separate Done paragraph. This describes syntax capture, not executed function semantics. The suffix preserves bare/lifecycle/fixed/variadic/split/gap/comment forms. Both complete grammar mirrors retain .44 canonical identity and Unicode proof; existing self-hosted grammar Knowledge owns interpretation.
   Commit: `SESSION-STARTUP-READING.3.3.47 - reconcile minimal-rule and user-function grammar reading`
-
 - ID: `SESSION-STARTUP-READING.3.3.48`
   Status: `done`
   Goal: Read Rust group 48: 32 lines/fragments, 60,575 bytes.
@@ -1700,7 +1653,6 @@ remain. Reading completion and runtime signoff remain distinct.
   Canonical trigger: `none` — bounded reading checkpoint; grammar and runtime unchanged.
   Verification: All 32 owned lines / 60,575 bytes match the baseline; range SHA-256 `f2f565823d9c0222fd4e21eab5c58e23b22c418012c79d37de68d6f50d5666ec`. Action block/fluent/bare, blind block/fluent/bare, grouped bare-block and bare-fluent tokens retain explicit target/index/source_form or raw fields and balanced recursive blocks. The complete mirror retains canonical SHA-256 `03cfb50459984806c806e9ec3f2b072add897c207a2cb93fd267d640a5808004` and .44 Unicode proof. The grammar suffix remains .49-owned; no fresh corpus execution is claimed. Existing self-hosted grammar and physical-boundary Knowledge apply unchanged.
   Commit: `SESSION-STARTUP-READING.3.3.48 - reconcile user-function edge grammar reading`
-
 - ID: `SESSION-STARTUP-READING.3.3.49`
   Status: `done`
   Goal: Read Rust group 49: 1,500 lines/fragments, 46,200 bytes.
@@ -1912,7 +1864,6 @@ remain. Reading completion and runtime signoff remain distinct.
   Canonical trigger: `none` — bounded reading checkpoint; fixture and runtime behavior unchanged.
   Verification: All 202 scopes reconcile: 201 nonempty plus explicit empty TkGui input, 1,500 lines / 46,200 baseline-identical bytes. Ordered path/kind/range/byte/SHA audit is `8bc8ce563d4ccfe4a620b0ae6f4d0de28f28351d01678fe0b869491eec800baf`; 67 JSON files decode and all 68 case directories belong to the 105-case manifest. The final user-function grammar suffix completes all four mirror checkpoints with unchanged .44 identity. Reading covers tablegrep TERM fields, tagged Tclite quote/command structures, 59 Terse fixtures for literals/read/copy/assignment/receiver/control/helper/function behavior, empty TkGui, direct versus LX-root recursion and VHDL library/use tags plus grammar through line 335. Legacy-smoke Knowledge retains its historical richer-case limits; stored fixture evidence is not fresh runtime parity.
   Commit: `SESSION-STARTUP-READING.3.3.49 - reconcile Terse and legacy corpus reading`
-
 - ID: `SESSION-STARTUP-READING.3.3.50`
   Status: `done`
   Goal: Read Rust group 50: 1,494 lines/fragments, 55,681 bytes.
@@ -1928,7 +1879,6 @@ remain. Reading completion and runtime signoff remain distinct.
   Canonical trigger: `none` — bounded reading checkpoint; test and runtime behavior unchanged.
   Verification: All six owned scopes match the baseline: 1,494 lines / 55,681 bytes; ordered path/kind/range/byte/SHA audit `ee7b4b1b146504e7eb0f4e2e7c416091c2ea2058ac30fcc53863baf749c319fc`. VHDL grammar is complete through EOF. The corpus runner checks manifest format/count/unique valid names and exact directory sets, then compares compatibility output with the wrapped reference. Diagnostic consumers assert quiet/default, direct/compatibility/generated-v2 events, early arity rejection, concrete sink identity and typed exit. Duplicate-slot consumer covers its 15 declared roles across required versus choice, reconstructed/source/trace/CLI and invalid identity paths. Classifier prefix prepares 105 strict-UTF-8 cases with direct/compatibility oracles and minimal plans for one child Cargo workspace; suffix and process result handling remain .51-owned. Existing Knowledge is reconciled; no native execution or emitted compilation is newly claimed.
   Commit: `SESSION-STARTUP-READING.3.3.50 - reconcile corpus and diagnostic test-consumer reading`
-
 - ID: `SESSION-STARTUP-READING.3.3.51`
   Status: `done`
   Goal: Read Rust group 51: 1,487 lines/fragments, 51,804 bytes.
@@ -1940,7 +1890,6 @@ remain. Reading completion and runtime signoff remain distinct.
   Canonical trigger: `none` — reading and repair intake; verifier implementation remains unchanged.
   Verification: Both scopes match the baseline: 1,487 lines / 51,804 bytes. Classifier source SHA-256 `25f37479a76a3022758cc09aeb4b162d3086d7d069be267ef7cd1f565eaa9dc7` and extracted tail without the test attribute `f1848092d5c6d0b3f6ec9d52627f8f13d39aa189d9da31f28afcefe8afce1261` match retained evidence. Six freshly replayed controls confirm failed child plus all 105 markers incorrectly passes; the in-memory status guard rejects it, while success/all and missing-marker controls behave as recorded. Scratch is removed; .77 owns repair and its Knowledge card preserves the executable probe. Integration prefix covers structural pipeline limits, staged function/parse-job identity, invalid definitions, edge metadata, retv/entry-match and body recursion through line 1382. Existing return-channel Knowledge is qualified against selective rule-variable scope. No real Cargo failure, parser defect or new integration run is inferred.
   Commit: `SESSION-STARTUP-READING.3.3.51 - reconcile classifier reading and own failed-child verification repair`
-
 - ID: `SESSION-STARTUP-READING.3.3.52`
   Status: `done`
   Goal: Read Rust group 52: 1,408 lines/fragments, 65,108 bytes.
@@ -1951,7 +1900,6 @@ remain. Reading completion and runtime signoff remain distinct.
   Canonical trigger: `none` — bounded reading checkpoint; integration tests and runtime unchanged.
   Verification: All 1,408 owned lines / 65,108 bytes match the baseline; SHA-256 `2186798cafd76926b8e4f8a0f8a5d9fecdc80c641b4eb130d38171873a19c378`. Reading covers LX-root nesting, scalar-text policy, per-parse working state, binding/copy/mutation distinctions, colon hashes and retired fat-arrow rejection, nested updated-root writes, local value-block versus rule return, attached/lazy controls, first-case selection, literal bare labels and the 10,000-iteration guard. With/traversal callbacks preserve kind-specific empty/wrong-kind and restoration cases; lifecycle return/drop and fluent child-result containment remain distinct. The range ends at the regex_subst fixture prefix; its suffix remains .53-owned. Historical source comments do not override current assertions or scoped-binding Knowledge. No fresh native execution is claimed.
   Commit: `SESSION-STARTUP-READING.3.3.52 - reconcile integration control and traversal reading`
-
 - ID: `SESSION-STARTUP-READING.3.3.53`
   Status: `done`
   Goal: Read Rust group 53: 1,500 lines/fragments, 55,337 bytes.
@@ -1963,7 +1911,6 @@ remain. Reading completion and runtime signoff remain distinct.
   Canonical trigger: `none` — bounded reading checkpoint; tests and runtime unchanged.
   Verification: Both scopes match the baseline: 1,500 lines / 55,337 bytes; ordered path/kind/range/byte/SHA audit `ead4b09249a3ecba074b27145e5169eaff3944d4f00ca72e803387487e7a0dfc`. Integration is complete through line 3910 across .51–.53. The suffix covers bounded shipped-spec outputs, edge/capture identity, fluent block/lifecycle controls, pure/mutating families, assignment results, closed function scope/arity/recursion and six rich capability fixtures including absent versus zero-width matches. Gap prefix covers role accounting, native/generated adapters, heterogeneous-separator primary proof and emitted Unicode/empty/lifecycle/child-extension/nesting/rollback fixture setup through line 380. Existing gap Knowledge separates historical admission and current behavior; the remaining consumer and emitted execution are not credited here. No fresh integration or emitted run is claimed.
   Commit: `SESSION-STARTUP-READING.3.3.53 - complete integration reading and checkpoint gap-capture consumer`
-
 - ID: `SESSION-STARTUP-READING.3.3.54`
   Status: `done`
   Goal: Read Rust group 54: 1,449 lines/fragments, 54,955 bytes.
@@ -1976,7 +1923,6 @@ remain. Reading completion and runtime signoff remain distinct.
   Canonical trigger: `none` — bounded reading checkpoint; tests and runtime unchanged.
   Verification: Three exact scopes total 1,449 lines / 54,955 baseline-identical bytes; ordered path/kind/range/byte/SHA audit `9a1cbc848d1a482f98d1b4c67a51e45a56cf1a71dae4bf125a1c3d89a8c5ac3f`. Gap consumer completes all nine role paths, fifteen emitted value/error modules, slot metadata/diagnostics, serde defaults, candidate/commit/tail visibility and rollback. Logical consumer covers eager effects versus lazy controls, arity diagnostics, serialized/direct/compatibility routes and four emitted modules. Both emitted harnesses explicitly assert child-process success. Its truth adapter still skips only the codeblock row; later callable proof remains separate. The mutation prefix records zero-regex parent dispatch and typed inventory of 4 valid/14 invalid/5 excluded forms; its suffix remains .55-owned. Source inspection supplies no fresh native/emitted execution.
   Commit: `SESSION-STARTUP-READING.3.3.54 - complete gap and logical consumer reading`
-
 - ID: `SESSION-STARTUP-READING.3.3.55`
   Status: `done`
   Goal: Read Rust group 55: 1,500 lines/fragments, 53,737 bytes.
@@ -1988,7 +1934,6 @@ remain. Reading completion and runtime signoff remain distinct.
   Canonical trigger: `none` — bounded reading checkpoint; runtime, MCP and test behavior unchanged.
   Verification: Two exact scopes total 1,500 lines / 53,737 baseline-identical bytes; ordered path/kind/range/byte/SHA audit `04ef81d60c4c2b92f2cb119c8bf5dee5c4ade65b14a2aa6196b7518b60af06a6`. Mutation consumer completes typed Unicode syntax, original-shape traversal, detached callback/output values, unrelated effects, scoped identities, composition, typed receiver failures and serde/generated/emitted routes. Its protected statements precede return(value); known final-assignment/substitution exceptions .58/.59 remain outside those controls. The emitted workspace uses a relative dependency and checks child status. MCP prefix correlates six native snapshots/twenty query identities, 35 canonical frames, ten raw/lifecycle inventories, private handle states, capacity/expiry, lowering-only policy and prepared-cancellation fences. Hosts build native indexes before registration; no MCP authoring is present. Suffix privacy/shutdown/fences remain .56-owned; no fresh native run is claimed.
   Commit: `SESSION-STARTUP-READING.3.3.55 - complete mutation consumer and checkpoint MCP admission reading`
-
 - ID: `SESSION-STARTUP-READING.3.3.56`
   Status: `done`
   Goal: Read Rust group 56: 1,474 lines/fragments, 50,699 bytes.
@@ -2002,7 +1947,6 @@ remain. Reading completion and runtime signoff remain distinct.
   Canonical trigger: `none` — bounded reading checkpoint; transport and runtime unchanged.
   Verification: Four exact scopes total 1,474 lines / 50,699 baseline-identical bytes; ordered path/kind/range/byte/SHA audit `063139bea5da82cfa8fe131ad67eae9c84d4298652f869456dc6c6a7cca81637`. MCP admission suffix checks prepared-response finality, ordinary I/O sanitization, Arc release, private-owner/source fences and twelve-role order. Public dispatch/stdio consumers cover clone isolation, native/policy identities, authorization/lifetime, canonical raw/ordered streams, EOF, ordinary I/O errors and invalid authority before input consumption. Existing .36/.64/.65 validation-order/panic-output/final-EOF gaps remain separately owned. Progressive prefix is opt-in cfg authority proof for source views, narrowing, cancellation/budget, chain/execution and 26 diagnostic contexts; the admitted four-carrier consumer is separate. Its suffix remains .57-owned. Existing completion records correct stale pending wording in the Rust admission card; no new native run is claimed.
   Commit: `SESSION-STARTUP-READING.3.3.56 - complete MCP tests and reconcile progressive authority reading`
-
 - ID: `SESSION-STARTUP-READING.3.3.57`
   Status: `done`
   Goal: Read Rust group 57: 1,476 lines/fragments, 52,176 bytes.
@@ -2016,7 +1960,6 @@ remain. Reading completion and runtime signoff remain distinct.
   Canonical trigger: `none` — bounded reading checkpoint; tests and runtime unchanged.
   Verification: Four exact scopes total 1,476 lines / 52,176 baseline-identical bytes; ordered path/kind/range/byte/SHA audit `9f55a70cc97d378ab04bc24c0dea43b656a22cefc558517e2d6af1d3f716d882`. Progressive authority completes smaller rebased spans, shared budgets, detached registry/results and bounded diagnostics; its separate carrier consumer covers typed effects, host callback reconstruction and independent emitted child status/results. Punctuation-light tests cover six standalone spellings and final receivers through native/reconstructed/generated-plan/source assertions, explicitly preserving both zero-argument contains spellings returning numeric zero under the existing FUTURE-PARITY-BACKLOG.5 drift owner. Recognition prefix records neutral inventories/admission, monotonic isolated invocation/mark identity, match state independent of falsey payload and commit/rollback frame state. Recognition suffix remains .58-owned. No new native or emitted execution is claimed.
   Commit: `SESSION-STARTUP-READING.3.3.57 - complete progressive and punctuation consumer reading`
-
 - ID: `SESSION-STARTUP-READING.3.3.58`
   Status: `done`
   Goal: Read Rust group 58: 1,471 lines/fragments, 49,296 bytes.
@@ -2029,7 +1972,6 @@ remain. Reading completion and runtime signoff remain distinct.
   Canonical trigger: `none` — reading and repair intake; manifest writers and policy implementation unchanged.
   Verification: Three exact scopes total 1,471 lines / 49,296 baseline-identical bytes; ordered path/kind/range/byte/SHA audit `28a622601f3fe03251870fdfc8448469beab0bca1ac3da3c118e792788bd506e`. Recognition suffix distinguishes private escape rejection from authored .68, preserves terminal/ownership/unwind/drop diagnostics, typed nodes and false payload carriers. Observation covers static non-eager binding, detached Unicode and falsey results, failed/zero-regex/child-edge outcomes, ordinary recursion versus observed nonprogress and original abort diagnostics. Repeated-result prefix covers modes, scalar pipe, bounds, per-hit arrays/null, lifecycle/selected-slot traces and loaded/reconstructed/descriptor/primary/corpus/source-plan consumers; source inspection is not independent compilation. Two exact-source Rust construction probes reproduce absolute emitted Cargo dependencies, same-target relative controls and exact cleanup; nine source-confirmed writers are repair .78-owned with runnable Knowledge evidence. No fresh parser execution is claimed.
   Commit: `SESSION-STARTUP-READING.3.3.58 - complete recognition and observation consumer reading`
-
 - ID: `SESSION-STARTUP-READING.3.3.59`
   Status: `done`
   Goal: Read Rust group 59: 1,487 lines/fragments, 48,937 bytes.
@@ -2044,7 +1986,6 @@ remain. Reading completion and runtime signoff remain distinct.
   Canonical trigger: `none` — reading and factual continuity; source, contract and public behavior unchanged.
   Verification: Five exact scopes total 1,487 lines / 48,937 baseline-identical bytes; ordered path/kind/range/byte/SHA audit `47aa1b4f635ba583721b93b0aebcc06d5e5574686370eea1bc41995f750e7fc6`. Repeated-result suffix pins fifteen exact roles and once-only completion. Relocation source copies the fresh primary into a managed synthetic root, distinguishes conflicting ambient identity and requires failure after the moved marker is removed. Root consumers preserve explicit/first-marker/first-rule selection without authored identity mutation, structure-before-selection-before-user-code, authored-edge strict-unused, direct/compatibility options, loaded/reconstructed/descriptor stability and effective/request trace attribution. Emitted-labelled admission roles inspect source; generated roles invoke generated-plan adapters. Independent compilation remains source_emitter-owned. Fresh root governance passes 8 selections / 3 failures / 3 strict cases / 5 backends / 7 complete / 0 pending / 24 public documents / 18 stale-current denials / 54 mutations. Historical Rust-only/65-case Knowledge claims are qualified and three Cargo reverify commands are managed. No fresh native/CLI/relocated/emitted execution is claimed.
   Commit: `SESSION-STARTUP-READING.3.3.59 - complete Rust root-selection consumer reading`
-
 - ID: `SESSION-STARTUP-READING.3.3.60`
   Status: `done`
   Goal: Read Rust group 60: 1,472 lines/fragments, 49,181 bytes.
@@ -2061,7 +2002,6 @@ remain. Reading completion and runtime signoff remain distinct.
   Canonical trigger: `none` — reading and factual continuity; source, contract and public behavior unchanged.
   Verification: Seven exact scopes total 1,472 lines / 49,181 baseline-identical bytes; ordered path/kind/range/byte/SHA audit `410b4ae6ee1c9a0af971137008c6f0ab6f73122f7fc9fc2ad6c8b743e80e2b28`. Root-route suffix preserves effective failure attribution and authored descriptor identity. Cursor consumers cover 15 exact roles / 8 diagnostic-removal identities, 36 family forms / 8 child-boundary cases / 2 structural replacements, native/serde/loaded traces, minimal generated family plan and retired override absence; existing nonnumeric AND-selector repair .57 remains outside numeric exclusions. Historical normalization test naming is qualified. Runtime diagnostics cover structured/source/deep-child identity, unknown versus zero-rule contexts, omitted absent fields and legacy compatibility. Scalar numeric source pins 55 neutral cases. Semantic-foundation prefix covers source ownership/digest, detached plan, UTF-8/scalar mapping and mid-scalar rejection; suffix .61 remains. Fresh cursor governance passes 8 complete / 0 pending, 6 runtime legs, 74 migration files, 30 public documents, 28 denials and 60 mutations. No fresh native or emitted execution is claimed.
   Commit: `SESSION-STARTUP-READING.3.3.60 - complete Rust cursor and diagnostic consumer reading`
-
 - ID: `SESSION-STARTUP-READING.3.3.61`
   Status: `done`
   Goal: Read Rust group 61: 1,461 lines/fragments, 52,200 bytes.
@@ -2077,7 +2017,6 @@ remain. Reading completion and runtime signoff remain distinct.
   Verification: Four exact scopes total 1,461 lines / 52,200 baseline-identical bytes; ordered path/kind/range/byte/SHA audit `f378dd38e628f46477f1f4fdf2db59ba99fc84863aff46dc383265bfbfa92fe7`. Foundation suffix separates constructor policy from failed-language snapshots, immutable ceilings and cloned diagnostics. Query tests cover 19 static typed/raw-neutral digests, 26 malformed boundaries, privacy and no-execution isolation; .66/.67 remain outside those fixtures. Runtime tests compare eight routes' typed events and separately derive the twentieth query digest, reject malformed/rederived observations, preserve exact panic identity and trace/diagnostic/Unicode neutrality. Independent emitted proof checks value, count, positions and first/last kinds rather than a complete query digest; Knowledge is corrected and its manifest remains .78-owned. Admission prefix freezes 12 roles, six snapshots and exact event/digest helpers. Fresh neutral semantic proof passes 6 groups / 20 queries / 128 mutations / rollout 9/0 / admission 6/0. Mandatory engineering-notes rollover is part of this canonical leaf; exact storage evidence follows below and receipt-bound CI is required before landing.
   Storage proof: Exact clean 165b74dc lines 213–459 become segment 4982 (247 lines / 25,964 bytes; SHA-256 0cca6b887182b2d3abbd731a906726d05df4ab9916262d29dcef754f5d895b16). Prior manifest rows stay byte-identical; root is 215 lines / 32,427 bytes. ADR 0107 admits only files 25→26 and manifest lines 24→25; all other ceilings remain unchanged. Evidence: docs/knowledge/engineering-notes-twenty-sixth-member-capacity.md.
   Commit: `SESSION-STARTUP-READING.3.3.61 - complete semantic consumer reading and roll engineering notes`
-
 - ID: `SESSION-STARTUP-READING.3.3.62`
   Status: `done`
   Goal: Read Rust group 62: 1,483 lines/fragments, 48,632 bytes.
@@ -2090,7 +2029,6 @@ remain. Reading completion and runtime signoff remain distinct.
   Canonical trigger: `none` — reading and factual intake only; no public, runtime or enforcement implementation changes.
   Verification: Three scopes total 1,483 lines / 48,632 baseline-identical bytes; ordered path/kind/range/byte/SHA audit 9300b19ca3a98d513b9e7fdd43a53a35840ad52778cd7ecfc9e726847bbe8537. Admission suffix executes all 12 fixture roles and all 20 query digests; emitted-labelled routes call generated-plan helpers, with text tracing disabled at traced wrappers. Alias compatibility has five tests and four independently compiled modules with checked child status and relative Cargo paths. Emitter prefix covers eight corpus cases, sixteen entry points, typed construction failures and the fourteen-family fixture prefix; .63 owns its suffix. Reconcile historical admission/gate counts and retain the completed .61 native evidence; current neutral semantic proof is 6/20/128, rollout 9/0 and admission 6/0. Source-pinned routing controls reproduce signal-status loss and the guard control rejects it; nine document-history sibling controls reject failures. Actual repair .79 and its executable fact card are owned; public .41.3/.41.7 and repairs .71/.77/.78 remain pending. Record bounded September 8 loader samples without a new OS-cause claim. Focused continuity checks are recorded in the commit evidence.
   Commit: `SESSION-STARTUP-READING.3.3.62 - complete semantic admission and emitter boundary reading`
-
 - ID: `SESSION-STARTUP-READING.3.3.63`
   Status: `done`
   Goal: Read Rust group 63: 1,492 lines/fragments, 58,940 bytes.
@@ -2103,7 +2041,6 @@ remain. Reading completion and runtime signoff remain distinct.
   Canonical trigger: `none` — bounded reading and factual reconciliation only; no production, public or infrastructure change.
   Verification: Three scopes total 1,492 lines / 58,940 baseline-identical bytes; ordered path/kind/range/byte/SHA audit 0fca63d946bf637732e40a6b44d9363dce564e62d131c10facb44072cac2d4ca. Emitter suffix completes fourteen fixtures across ten neutral families, v1 rejection and eight manifest-selected native/emitted oracle cases with checked child success; JSON literal and authored manifest repairs .71/.78 remain pending. Correct the older subset Knowledge card's unqualified all-105 classifier claim against actual repair .77 without invalidating a particular historical result. Loader tests cover 14/9/4 fixture cases plus function execution, identity and parse/validation JSON; directory construction is the non-regular surrogate, not every OS special-file type. Staged prefix covers frozen authority, cache/queue, all four result and three failure policies, sibling isolation, target checks, unpublished failure, resources and callback panic under a replaced hook; recursive suffix remains .64-owned and .73–.75 remain open. Fresh neutral resolution 14/9/4 and staged 9 rollout legs / 123 base / 129 public mutations pass. The earlier .61 canonical native result remains dated, fixture-bound evidence. Required focused continuity proof is retained with the commit.
   Commit: `SESSION-STARTUP-READING.3.3.63 - complete emitter, loader and staged consumer reading`
-
 - ID: `SESSION-STARTUP-READING.3.3.64`
   Status: `done`
   Goal: Read Rust group 64: 1,491 lines/fragments, 55,771 bytes.
@@ -2115,7 +2052,6 @@ remain. Reading completion and runtime signoff remain distinct.
   Canonical trigger: `none` — bounded reading and factual reconciliation only; no production, public or infrastructure change.
   Verification: Two scopes total 1,491 lines / 55,771 baseline-identical bytes; ordered path/kind/range/byte/SHA audit 0d05f033e4e54ee1cb681c12b5f293e91bd98fa415b3afdfef26d0a16b1ab236. Complete staged consumer: breadth-first chain/cycle/decrease, shared resource and callback liveness, cancellation/deadline, detachment and direct/derived diagnostic controls; frozen snapshot pins 37 diagnostics, nine rollout legs and 123 mutations. Native/reconstructed/generated-plan/independently compiled emitted carriers each execute twice through fresh authority; both emitted Cargo children require success before JSON decoding. Existing .73–.75 runtime gaps and .78 authored absolute dependency remain open. Reconcile dated admission history and retain .61's native 1/1 in 802.08 test seconds without claiming another run. Standalone-lifecycle prefix defines native execution and AST/provenance helpers and starts placement twins; .65 owns the suffix. Fresh staged neutral governance passes 9 legs / 123 base / 129 public mutations; exact CI requirement/command registrations remain one each. Focused continuity proof is retained with the commit.
   Commit: `SESSION-STARTUP-READING.3.3.64 - complete staged recursive and carrier consumer reading`
-
 - ID: `SESSION-STARTUP-READING.3.3.65`
   Status: `done`
   Goal: Read Rust group 65: 1,500 lines/fragments, 51,021 bytes.
@@ -4745,15 +4681,44 @@ remain. Reading completion and runtime signoff remain distinct.
   Verification: Public replay reproduces the existing multiline and EOF failures and valid division/regex controls. StatementSplit splits rx = /(x) LF y/ into separate statements; Mode recognizes Perl-prefixed/match-operator slash quoting but not naked DSL literals. Whole-fragment edge scanning ends at depth0 for the literal while physical-line scanning remains at depth1; the numeric division control has the opposite whole/line result. Therefore replacing all line scans with naive whole-source slash scanning would regress division. Fact card perl-multiline-regex-scanner-boundaries retains exact commands. Supplied README/claim/containment donor hashes match the recorded September11 identities; .5/.29 retain adoption ownership. No production fix or new backend acceptance is claimed. The first hook attempt rejected the 8,000-line task limit; remove only 64 blank separators between nodes and prove every nonblank line unchanged before rerunning.
   Commit: This commit; subject `SESSION-STARTUP-READING.86.4.1 - isolate Perl multiline regex scanner failures`.
 - ID: `SESSION-STARTUP-READING.86.4.2`
-  Status: `pending`
+  Status: `active`
   Goal: Preserve naked multiline regex tokens through Perl action statement splitting and lowering.
+  Children: `SESSION-STARTUP-READING.86.4.2.1`, `SESSION-STARTUP-READING.86.4.2.2`, `SESSION-STARTUP-READING.86.4.2.3`
   Dependencies: .86.4.1; retain whole-source division/regex compatibility before changing the discriminator.
-  Planned tier: focused unless a language-contract decision is needed.
-  Planned focused proof: Exact StatementSplit/AST sources and scalar spans, call_spec_handler_subst and independently evaluated generated action code; LF/CRLF, numeric lookalikes, escaped slashes, nested helpers, following assignments, division followed by regex/division and invalid-pattern controls; action AST, Phase0 and direct scanner compatibility.
-  Planned canonical boundary: .86.3 after validation and public recomposition.
+  Planned tier: focused implementation after an explicit precedence decision; canonical .86.3 remains the composed boundary.
   Acceptance: Protect lexical regex newlines and delimiters without swallowing subsequent division statements or modifying raw Perl compatibility. Keep the closing-brace exclusion; public outer validation remains explicitly owned by .86.4.3.
   Verification: `pending`
-  Current probe: Director-paused; .86.4.5 archives the unaccepted candidate in docs/checkpoints/SESSION-STARTUP-READING.86.4.2.patch and restores accepted source/tests. Five candidate focused targets passed, but qr/q/m/slash-literal continuations after division still regress against 69689bb41. The Knowledge card perl-multiline-regex-scanner-boundaries retains exact reproduction/recovery and archive identity. Both incomplete Phase0 runs were stopped and consumed, not accepted; no job remains active. Await director direction before resuming. Do not execute the obsolete scratch finish_splitter.py draft.
+  Current probe: Director resumed PNT on September23. Diagnosis .86.4.2.1 proves that lexical continuation checks still regress accepted quotes and that two complete public inputs change from7 to empty string under regex-first selection. Both rejected candidates are archived; accepted source/tests are restored. Decision .86.4.2.2 blocks implementation .86.4.2.3. The Knowledge card perl-multiline-regex-scanner-boundaries owns exact sources/recovery. Earlier partial Phase0 runs remain excluded; no job remains active and the obsolete scratch finish_splitter.py must not be executed.
+  Commit: `pending`
+- ID: `SESSION-STARTUP-READING.86.4.2.1`
+  Status: `done`
+  Goal: Establish complete continuation compatibility and resolve whether multiline regex recognition requires a precedence decision.
+  Dependencies: Restored clean .86.4.5 checkpoint at 4872ff3d56dd3442bd45ea397a6c7719d66b5d05; resumed director PNT instruction.
+  Verification tier: `focused`
+  Focused checks: Managed call_spec_handler_subst and public LinkedSpec::Get/runtime_ctx_ref against isolated exact accepted source and the candidate; action AST RED/GREEN and expanded compatibility counterexamples; archived candidate reconstruction, restored source identity/action AST, memory, Knowledge, histories and doctrines.
+  Canonical trigger: None for this behavior-free diagnosis and recovery checkpoint; no candidate implementation is accepted.
+  Acceptance: Reproducible source, generated code and public values establish the ambiguity; preserve rejected experiments without landing source/tests, own the decision and repair, and leave no verification job or dirty runtime file.
+  Verification: Baseline RED fails3/27 groups; the original candidate with expanded quote controls fails36 assertions in1/27 groups; the lexical-continuation candidate passes27/27 but regresses seven expanded compatibility controls. Two public Get and independent action results are7 on accepted source and empty string on the candidate, with no last_error. The new patch reconstructs all four candidate files byte-for-byte; restored source/tests match clean HEAD and action AST passes23/23. Supplied-policy hashes remain unchanged. Memory, Knowledge, histories, rendered book, diff and all normal doctrines are required before landing. No Phase0/full-CI or runtime-repair claim.
+  Commit: This commit; subject `SESSION-STARTUP-READING.86.4.2.1 - expose slash precedence conflict before repair`.
+- ID: `SESSION-STARTUP-READING.86.4.2.2`
+  Status: `blocked`
+  Goal: Resolve Perl division-versus-multiline-regex precedence when both complete interpretations compile and execute.
+  Dependencies: Director choice from .86.4.2.1 evidence; preserve existing Perl division behavior or explicitly authorize regex-first compatibility changes. No silence-based choice.
+  Planned tier: focused decision record; any changed language contract is verified canonically in .86.3.
+  Planned focused proof: Replay both complete source interpretations, reconcile Perl raw compatibility, ordinary comment syntax and Rust's documented regex-first behavior; freeze a precise portable contract and named compatibility exclusions before implementation.
+  Planned canonical boundary: .86.3.
+  Acceptance: Durable explicit authority and deterministic selection rule; no unexplained reinterpretation or opportunistic fixture changes.
+  Verification: Pending director response; both q-quote and ordinary-comment sources return7 on accepted public Get and empty string on the rejected regex-first candidate, with no last_error.
+  Commit: `pending`
+- ID: `SESSION-STARTUP-READING.86.4.2.3`
+  Status: `pending`
+  Goal: Implement and verify Perl action splitting/lowering under the selected precedence contract.
+  Dependencies: Accepted .86.4.2.2 decision; both rejected checkpoints are evidence, not implementation authority.
+  Planned tier: focused unless the selected contract requires canonical admission at this leaf.
+  Planned focused proof: Exact StatementSplit/AST source and scalar spans; LF/CRLF/numeric/escaped/nested controls; quote/comment continuations and both-valid examples; long valid/invalid chains; independent generated-action execution, direct scanner consumers and complete Phase0.
+  Planned canonical boundary: .86.3 after .86.4.3/.4 and .86.5.
+  Acceptance: All selected compatibility and literal obligations pass without speculative quote heuristics, host compilation during parsing or duplicated lexical policy; no public outer-validation closure before .86.4.3.
+  Verification: `pending`
   Commit: `pending`
 - ID: `SESSION-STARTUP-READING.86.4.5`
   Status: `done`
@@ -4805,7 +4770,10 @@ audit range, not the default repair frontier.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.86.4.2` | `pending` | Director-paused; .86.4.5 archives the unaccepted candidate and restores accepted source/tests. Await direction; if resumed, repair the recorded continuation regression before .86.4.3/.4, .86.5 and .86.3. |
+
+No executable frontier while director precedence decision `.86.4.2.2` is blocked.
+After the decision is recorded, implementation `.86.4.2.3` precedes outer validation
+`.86.4.3`, public recomposition `.86.4.4`, EOF `.86.5` and canonical `.86.3`.
 
 ## Reading Ledger
 
@@ -7587,6 +7555,8 @@ All 53 owned scopes are read: HLink delimiter/raw text, Liberty scalar/complex a
 
 ## Verification Log
 
+- 2026-09-23 — .86.4.2.1: exact accepted/candidate public and lowering comparison proves two successful-value changes; rejected patch reconstructs four files exactly; restored source/test identity and AST23/23 pass; focused governance/book proof before commit.
+
 - 2026-09-23 — .86.4.1: public Get/lowering and whole-versus-line scanner probes reproduce distinct owners; supplied policy hashes unchanged; focused memory/history/Knowledge/book/doctrine checks before commit.
 
 - 2026-09-22 .83.2.2: PASS: all 37 authored cases on six native runtimes (222 case outcomes), 21 token-spelling round trips per route and 16 same-engine post-rejection reuse checks per route. Perl has 44 top-level/168 nested assertions including descriptor readiness and the independent catch-all mutation; Rust one complete contract test, Dart 38 tests, Julia 91 assertions, and both Lua routes pass. Three initial Dart EOF-comment failures become green with a portable grammar branch, without changing authored expectations. Historical Lispish quoted-LF fixtures pass 3/3 on Perl, and the new book command returns its exact documented value. Formatting, Dart analysis, shell syntax, book, Knowledge/memory/history/diff and doctrine checks govern landing. The public grammar/recurring-CI boundary requires the exact staged canonical receipt; native file delivery and final report admission remain separate. Logs: .linkedspec-data/scratch/sexpr-document-v1/.
@@ -7802,6 +7772,8 @@ CLI66x2 and Phase0 1032/1032; 1163 seconds is Phase0 only, with 25 optional gate
 Each canonical task node owns its exact `Commit` subject and retained completion note. Query landed history with `git log --all --format="%h %s" --fixed-strings --grep="SESSION-STARTUP-READING."`; this replaces the proven duplicate 102-row table.
 
 ## Changelog
+
+- 2026-09-23 — .86.4.2.1 rejects lexical-only repair, preserves a second exact checkpoint and restores accepted source/tests; .86.4.2 splits into diagnosis, director precedence decision and implementation.
 
 - 2026-09-23 — .86.4.5 preserves the incomplete candidate as a verified reconstructable patch; accepted source/tests restored and PNT director-paused.
 - 2026-09-23 — .86.4.1 diagnoses two independent scanner failures and splits .86.4 before production work; .86.4.2 follows.

@@ -2,17 +2,19 @@
 
 ## Current Activity
 
-PNT is paused at director request. Accepted Perl source/tests are restored to diagnosis base 69689bb41; the incomplete .86.4.2 candidate is preserved as a tracked patch with a known continuation regression. No job is running, no Perl repair is accepted, and nothing was pushed.
+PNT resumed and reached a language-precedence blocker under .86.4.2.2. Two complete public inputs return7 on accepted Perl and empty string under the rejected regex-first candidate, with no last_error. Both experiments are preserved; accepted production/tests are restored. No job is running, no runtime repair is accepted, and nothing was pushed.
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.86.4.5 - preserve paused splitter repair and clean handoff` — exact candidate archive and recovery evidence, accepted source/test restoration, clean continuity pointer; .86.4.2 remains pending.
+- `SESSION-STARTUP-READING.86.4.2.1 - expose slash precedence conflict before repair` — public counterexamples, exact second candidate archive and diagnostic, restored source/tests and AST23/23; explicit decision/implementation ownership.
 
 ## Next Action
 
-- Await director direction. If resumed, inspect the .86.4.2 archive and fix its known division/quote continuation regression before validation/recomposition .86.4.3/.4, EOF .86.5 and canonical .86.3.
+- Obtain the director precedence choice under .86.4.2.2: preserve accepted Perl division behavior (recommended), or authorize regex-first compatibility changes; then implement .86.4.2.3 before .86.4.3/.4, .86.5 and canonical .86.3.
 
 ## Recent Completions
+
+- `2026-09-23` — `.86.4.2.1` proves the slash precedence conflict, archives rejected evidence and restores accepted source/tests.
 
 - `2026-09-23` — `.86.4.5` archives the unfinished candidate and restores a clean director-paused handoff.
 
@@ -43,8 +45,6 @@ PNT is paused at director request. Accepted Perl source/tests are restored to di
 - `2026-09-22` — `SESSION-STARTUP-READING.45.2` verifies source/AST/loader/semantic rejection and reconstructed/generated execution.
 
 - `2026-09-22` — `SESSION-STARTUP-READING.45.1` propagates all reported rule-code parse errors; full Rust gate and quoted-LF regression pass.
-
-- `2026-09-22` — `SESSION-STARTUP-READING.83.1` accepts ADR0124/37 cases; .45.1-.45.3 repair the freshly reproduced compiler drop before delivery.
 
 ## History
 

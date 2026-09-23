@@ -8,12 +8,19 @@ answers:
   - can whole-source scanning replace physical-line validation without division regressions
   - where is the paused Perl multiline regex splitter candidate preserved
   - why does the unaccepted Perl splitter candidate regress quote after division
+  - can division and multiline regex interpretations both compile with different values
+  - why does a slash inside a comment require a Perl precedence decision
+  - which task owns the Perl division versus multiline regex precedence choice
 date: 2026-09-23
-status: diagnosed at 19ba2e0d5; repair children .86.4.2 through .86.4.4 remain open
+status: resumed diagnosis .86.4.2.1 complete at base 4872ff3d; precedence .86.4.2.2 blocks implementation
 tags: [perl, regex, actionir, validation, newline]
-evidence: "SESSION-STARTUP-READING.86.4.1 reproduces public Get/runtime-context and lowering failures. Exact whole-fragment versus physical-line probes separate validation from action segmentation; no implementation repair is claimed."
-reverify: "Run the managed Perl probes below; current repair status belongs to SESSION-STARTUP-READING.86.4.2/.3/.4."
+evidence: "SESSION-STARTUP-READING.86.4.1 separates validation from action segmentation. Resumed .86.4.2.1 compares exact accepted source and the archived lexical candidate: two public Get and independent lowered-action results change from7 to empty string with no last_error. Both rejected candidates remain evidence only; production/tests are restored."
+reverify: "bash tools/project_data_run.sh env PERL5LIB= perl -Iperl docs/checkpoints/SESSION-STARTUP-READING.86.4.2.1.pl; expected accepted public/action values are7 for both sources. Decision .86.4.2.2 precedes implementation .86.4.2.3."
 ---
+
+Current authority: the director resumed PNT after `.86.4.5`; `.86.4.2.1` below
+establishes a precedence blocker. Do not apply either rejected candidate as a fix.
+The old pause/recovery description remains historical evidence.
 
 At the stated baseline, `StatementSplit::Mode::maybe_enter_slash_quote` recognizes
 Perl quote operators and match operators, but not an unprefixed DSL regex after
@@ -131,3 +138,70 @@ partial TAP is not a complete pass. Scratch logs remain under
 this checkpoint. The unexecuted scratch `finish_splitter.py` draft is obsolete
 and must not be run to record acceptance. Outer validation `.86.4.3`, public
 recomposition `.86.4.4`, EOF `.86.5` and canonical `.86.3` remain open.
+
+## Resumed diagnosis: complete interpretations can disagree (2026-09-23)
+
+At clean `4872ff3d56dd3442bd45ea397a6c7719d66b5d05`, restoring the expanded
+multiline test source against accepted production fails three of27 groups. The
+first archived candidate, expanded with the four known quote continuations,
+fails36 assertions in one of27 groups. A second experiment checks lexical scope
+completion after a proposed closing slash and passes all27 groups, but the
+independently expanded continuation matrix rejects it: seven accepted controls
+regress. Five quote/operator controls are `rx = q|/;|`, `rx = qr/}/`,
+`rx = q{/;}`, `rx = s/a;b/c;d/`, and `rx = tr/a;b/c;d/`; the other two tails are
+`# slash /` followed by LF and `rx = 1`, and
+`rx = q< / ; >; extra = q< / ; >`. These all
+follow `out = /(14,2)` plus LF and precede `return(out)`. Exact scratch sources
+remain optional diagnostic detail under
+`.linkedspec-data/scratch/perl-regex-resume86-4/continuations.pl`.
+
+The decisive public counterexample needs no raw Perl expression:
+
+```text
+Top::
+ -> Done { out = /(14,2)
+# pattern/;
+return(out) }
+Done:
+ /x/
+```
+
+Accepted Perl treats the first line as division and the next as a comment,
+returning7 on `x`. Regex-first scanning instead retains `(14,2)\n# pattern` as
+the regex and returns the empty match result. Both generated handlers compile
+and both public parsers finish with no `last_error`. Therefore checking that an
+entire interpretation compiles is insufficient to choose compatibility policy.
+
+A raw-quote counterpart has action text:
+
+```text
+out = /(14,2)
+rx = q/; num = 14/ + (2); return(out)
+```
+
+The accepted lowering divides14 by2 and assigns a quoted string plus2 to `rx`;
+the quote's numeric conversion warns, without changing the returned7. The
+alternative assigns the regex match to `out` and performs raw infix division in
+`num`, returning an empty string. The ordinary-comment counterpart avoids that
+warning and proves the ambiguity independently. The tracked diagnostic
+`docs/checkpoints/SESSION-STARTUP-READING.86.4.2.1.pl` prints the authored action,
+exact generated code, action/public values and both error channels for both
+cases. Independent action execution agrees with public Get in each implementation.
+
+The second rejected candidate is archived against exact base
+`4872ff3d56dd3442bd45ea397a6c7719d66b5d05` in
+`docs/checkpoints/SESSION-STARTUP-READING.86.4.2.1.patch`, SHA-256
+`158a2098662eaba3faeeae493e294b241657a605b4c2471c5c9f30f565696210`.
+It reconstructs all four source/test files byte-for-byte in an isolated
+repository-local snapshot. Public replay requires the complete first-party
+`perl/` and `specs/` trees; a partial `-I` overlay is unreliable because module
+bootstrap logic can insert another root first. No dependency sources are needed.
+Select the snapshot's `perl/` with `-I` when running the tracked diagnostic.
+
+Production and tests are restored exactly to accepted HEAD; the restored action
+AST target passes23/23. No complete Phase0 run was started for this rejected
+experiment, and no runtime repair is accepted. `.86.4.2.2` now owns the explicit
+director choice between preserving accepted Perl division behavior (recommended)
+and authorizing regex-first compatibility changes. `.86.4.2.3` owns implementation
+and the expanded compatibility matrix after that decision. Outer validation,
+public recomposition, EOF and canonical parent acceptance retain their owners.

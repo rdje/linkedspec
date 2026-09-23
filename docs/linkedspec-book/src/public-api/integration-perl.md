@@ -237,6 +237,24 @@ that position; its separate repair is tracked under `.86.5`. Newline-separated
 division followed by another assignment already works. These observations are
 specific to the Perl route and do not change the shared numeric-helper contract.
 
+Use the named `div(...)` spelling when a following comment or Perl quote contains
+a slash. Such text can also form a complete multiline regex under another
+interpretation. For example, current Perl returns `7` for this grammar on `x`:
+
+```text
+Top::
+ -> Done { out = /(14,2)
+# pattern/;
+return(out) }
+Done:
+ /x/
+```
+
+Here Perl reads division followed by a comment. Writing `out = div(14,2)` makes
+that arithmetic intent explicit; writing `out = /(14,2);` also ends the slash
+call before the comment. The multiline-regex repair remains open because silently
+reinterpreting an accepted grammar as a regex would change its result.
+
 ## Handle runtime outcomes explicitly
 
 The parser has two failure channels. Catch exceptions with `eval` and immediately
