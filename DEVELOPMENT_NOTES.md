@@ -11,6 +11,12 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
 
+## 2026-09-23 — SESSION-STARTUP-READING.86.4.1 - isolate Perl multiline regex scanner failures
+
+The action StatementSplit mode recognizes Perl quote prefixes and match operators but ignores naked DSL regex literals; it splits the protected newline before AST/lowering can retain the complete pattern. Validation independently scans physical lines without retained slash state. Whole-fragment regex succeeds at depth0 while the same lines leave depth1; division does the reverse. Exact reproducible probes live in docs/knowledge/perl-multiline-regex-scanner-boundaries.md. Supplied policy hashes remain unchanged; existing .5/.29 adoption work is still open.
+
+Focused proof: public Get and action lowering; source-preserving StatementSplit/AST and Validation owner probes; memory, Knowledge, histories, book and normal doctrines. Canonical acceptance remains .86.3.
+
 ## 2026-09-23 — SESSION-STARTUP-READING.86.2 - preserve division newline and regex interpretations
 
 The old slash lookahead discarded LF/CR after balanced parentheses, then parsed division as a regex. Accepting every such newline would steal existing multiline regex patterns. Preserve the default parse first. parse_statement_step retains the previous attached-control and separator behavior; parse_block keeps source-position retry frames and failed-continuation memoization. Each trial can force one newline-only slash call; nested bodies use their own parser and character base. Regex/division alternatives can finish a misleading first statement and fail later, so retry spans the continuation rather than only the immediate expression. Sequential statements use a heap stack, not recursive continuation calls. Exhausted alternatives retain the first diagnostic.

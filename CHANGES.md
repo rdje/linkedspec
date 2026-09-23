@@ -11,6 +11,12 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
 
+## 2026-09-23 — SESSION-STARTUP-READING.86.4.1 - isolate Perl multiline regex scanner failures
+
+Separate Perl multiline-regex action segmentation from whole-spec validation under .86.4.2/.3, followed by public recomposition .86.4.4. Public Get/runtime context and lowering reproduce the existing failures. Whole-fragment versus physical-line scanning has opposite outcomes for regex and division controls, so a naive whole-source scanner replacement is excluded. No production behavior changes.
+
+Focused proof: public Get and action lowering; source-preserving StatementSplit/AST and Validation owner probes; memory, Knowledge, histories, book and normal doctrines. Canonical acceptance remains .86.3.
+
 ## 2026-09-23 — SESSION-STARTUP-READING.86.2 - preserve division newline and regex interpretations
 
 Accept newline-separated Rust slash division while retaining existing successful regex parses. The parser first tries the established interpretation, then retries an ambiguous slash as division only when that block continuation fails. Statement retries use an explicit stack and memoized failed suffixes. EOF/punctuation rules and the closing-brace exclusion remain intact.

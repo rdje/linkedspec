@@ -222,6 +222,21 @@ It packages the runtime sources and launcher, moves the application to a Unicode
 path, executes from outside that directory, checks source/grammar hashes and
 same-volume storage, and removes its own test fixtures.
 
+## Regex and division in action code
+
+Perl currently has a known failure for multiline parenthesized regex literals in
+action code, including a numeric-looking first line. Validation can reject the
+whole grammar, or generated-handler compilation can record an error. Check both
+failure channels described below; a returned parser alone does not establish a
+successful compile-and-run result. This limitation is tracked under
+`SESSION-STARTUP-READING.86.4`.
+
+For arithmetic division, `div(14, 2)` works at the end of an action block.
+The equivalent slash call `/(14, 2)` currently requires a trailing semicolon in
+that position; its separate repair is tracked under `.86.5`. Newline-separated
+division followed by another assignment already works. These observations are
+specific to the Perl route and do not change the shared numeric-helper contract.
+
 ## Handle runtime outcomes explicitly
 
 The parser has two failure channels. Catch exceptions with `eval` and immediately

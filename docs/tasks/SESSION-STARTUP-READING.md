@@ -34,12 +34,10 @@ remain. Reading completion and runtime signoff remain distinct.
   Director exception (2026-09-08): containment `.7.2-.7.4` may implement and verify ADR 0108/0109 capacity infrastructure before remaining reading; all parser/repair gates remain in force.
 
 ## Task Tree
-
 - ID: `SESSION-STARTUP-READING`
   Status: `active`
   Goal: Recover the repair frontier with targeted reading and preserve the separate full-reading audit.
   Children: `SESSION-STARTUP-READING.1`, `SESSION-STARTUP-READING.2`, `SESSION-STARTUP-READING.3`, `SESSION-STARTUP-READING.4`, `SESSION-STARTUP-READING.5`, `SESSION-STARTUP-READING.6`, `SESSION-STARTUP-READING.7`, `SESSION-STARTUP-READING.8`, `SESSION-STARTUP-READING.9`, `SESSION-STARTUP-READING.10`, `SESSION-STARTUP-READING.11`, `SESSION-STARTUP-READING.12`, `SESSION-STARTUP-READING.13`, `SESSION-STARTUP-READING.14`, `SESSION-STARTUP-READING.15`, `SESSION-STARTUP-READING.16`, `SESSION-STARTUP-READING.17`, `SESSION-STARTUP-READING.18`, `SESSION-STARTUP-READING.19`, `SESSION-STARTUP-READING.20`, `SESSION-STARTUP-READING.21`, `SESSION-STARTUP-READING.22`, `SESSION-STARTUP-READING.23`, `SESSION-STARTUP-READING.24`, `SESSION-STARTUP-READING.25`, `SESSION-STARTUP-READING.26`, `SESSION-STARTUP-READING.27`, `SESSION-STARTUP-READING.28`, `SESSION-STARTUP-READING.29`, `SESSION-STARTUP-READING.30`, `SESSION-STARTUP-READING.31`, `SESSION-STARTUP-READING.32`, `SESSION-STARTUP-READING.33`, `SESSION-STARTUP-READING.34`, `SESSION-STARTUP-READING.35`, `SESSION-STARTUP-READING.36`, `SESSION-STARTUP-READING.37`, `SESSION-STARTUP-READING.38`, `SESSION-STARTUP-READING.39`, `SESSION-STARTUP-READING.40`, `SESSION-STARTUP-READING.41`, `SESSION-STARTUP-READING.42`, `SESSION-STARTUP-READING.43`, `SESSION-STARTUP-READING.44`, `SESSION-STARTUP-READING.45`, `SESSION-STARTUP-READING.46`, `SESSION-STARTUP-READING.47`, `SESSION-STARTUP-READING.49`, `SESSION-STARTUP-READING.50`, `SESSION-STARTUP-READING.51`, `SESSION-STARTUP-READING.52`, `SESSION-STARTUP-READING.53`, `SESSION-STARTUP-READING.54`, `SESSION-STARTUP-READING.55`, `SESSION-STARTUP-READING.56`, `SESSION-STARTUP-READING.57`, `SESSION-STARTUP-READING.58`, `SESSION-STARTUP-READING.59`, `SESSION-STARTUP-READING.60`, `SESSION-STARTUP-READING.61`, `SESSION-STARTUP-READING.62`, `SESSION-STARTUP-READING.63`, `SESSION-STARTUP-READING.64`, `SESSION-STARTUP-READING.65`, `SESSION-STARTUP-READING.66`, `SESSION-STARTUP-READING.67`, `SESSION-STARTUP-READING.68`, `SESSION-STARTUP-READING.69`, `SESSION-STARTUP-READING.70`, `SESSION-STARTUP-READING.71`, `SESSION-STARTUP-READING.72`, `SESSION-STARTUP-READING.73`, `SESSION-STARTUP-READING.74`, `SESSION-STARTUP-READING.75`, `SESSION-STARTUP-READING.76`, `SESSION-STARTUP-READING.77`, `SESSION-STARTUP-READING.78`, `SESSION-STARTUP-READING.79`, `SESSION-STARTUP-READING.80`, `SESSION-STARTUP-READING.81`, `SESSION-STARTUP-READING.82`, `SESSION-STARTUP-READING.83`, `SESSION-STARTUP-READING.84`, `SESSION-STARTUP-READING.85`, `SESSION-STARTUP-READING.86`
-
 - ID: `SESSION-STARTUP-READING.1`
   Status: `done`
   Goal: Commit the authorized startup-reading checkpoint before continuing the reading pass.
@@ -49,7 +47,6 @@ remain. Reading completion and runtime signoff remain distinct.
   Canonical trigger: `none` — bounded continuity documentation; no policy, infrastructure, or public contract changes.
   Verification: Activated task-tree-first from the clean reading baseline; memory, nine doctrine checks, both history-pressure checks, and diff/scope review pass. README routing was rerun after refreshing the staged snapshot; pre-commit checks the final candidate again.
   Commit: `SESSION-STARTUP-READING.1 - preserve required reading progress` — Startup-tracking-only exception; reading remains incomplete.
-
 - ID: `SESSION-STARTUP-READING.2`
   Status: `done`
   Goal: Finish ROADMAP_V2.md from baseline line 1341 and reconcile its current direction with the completed ROADMAP.md reading.
@@ -59,12 +56,10 @@ remain. Reading completion and runtime signoff remain distinct.
   Canonical trigger: `none` — startup-reading continuity only; no public, policy, infrastructure, or runtime change.
   Verification: Baseline lines 1341–1585 read in five untruncated ranges; both roadmap diffs since baseline reviewed. Current direction agrees with the task index, mutation-testing tree, ADR 0039, and ADR 0073. Focused commit checks recorded below.
   Commit: `SESSION-STARTUP-READING.2 - complete roadmap reading` — Completed roadmap reading; exact coverage and focused checks, remaining reading and liveness discrepancy owned.
-
 - ID: `SESSION-STARTUP-READING.3`
   Status: `active`
   Goal: Read and understand the remaining first-party codebase, including its tests, specs, and repository tooling.
   Children: `.3.1`, `.3.2`, `.3.3`, `.3.4`, `.3.5`, `.3.6`, `.3.7`, `.3.8`, `.3.9`, `.3.10`, `.3.11`
-
 - ID: `SESSION-STARTUP-READING.3.1`
   Status: `done`
   Goal: Classify the complete baseline tracked inventory and define exact bounded first-party reading children.
@@ -79,7 +74,6 @@ remain. Reading completion and runtime signoff remain distinct.
     Source/test/tool inputs remain byte-identical to baseline. First reading child is exactly five files / 1,430
     lines / 56,706 bytes; inventory and decompression counts do not count as content reading.
   Commit: `SESSION-STARTUP-READING.3.1 - bound the codebase reading inventory` — Complete baseline accounting and bounded next child; source/book reading still incomplete.
-
 - ID: `SESSION-STARTUP-READING.3.2`
   Status: `done`
   Goal: Read all 89 baseline Perl entries and their current deltas, starting with the facade invocation owners.
@@ -89,7 +83,6 @@ remain. Reading completion and runtime signoff remain distinct.
     .3.2.55 independently verifies exact coverage, current identity, durable commits, and canonical closeout.
     Pending repairs are unchanged; this status certifies reading completion only.
   Commit: `SESSION-STARTUP-READING.3.2.55 - close Perl reading and own bounded Rust scopes`
-
 - ID: `SESSION-STARTUP-READING.3.2.1`
   Status: `done`
   Goal: Read the facade invocation and shared-context owners in full.
@@ -104,7 +97,6 @@ remain. Reading completion and runtime signoff remain distinct.
     thin-facade and leading-trivia Knowledge cards reconcile the owner flow and public-wrapper boundary. Managed
     facade/phase0 syntax passes; no production change, new defect, or runtime/audit-completion claim.
   Commit: `SESSION-STARTUP-READING.3.2.1 - read facade invocation owners` — Five unique Perl files complete; remaining 84 Perl entries and other lanes remain unread.
-
 - ID: `SESSION-STARTUP-READING.3.2.2`
   Status: `done`
   Goal: Split the remaining 84 baseline Perl paths into exact bounded reading children before reading them.
@@ -118,7 +110,6 @@ remain. Reading completion and runtime signoff remain distinct.
   Verification: Independent byte-interval audit passes: all 84 exact remaining paths / 2,076,984 bytes
     covered once by 52 bounded leaves; declared budgets match and Perl source remains baseline-identical.
   Commit: `SESSION-STARTUP-READING.3.2.2 - partition remaining Perl reading` — All unread Perl bytes owned before reading; no new reading credit.
-
 - ID: `SESSION-STARTUP-READING.3.2.3`
   Status: `done`
   Goal: Read baseline Perl group 1: 1,103 lines/fragments, 36,759 bytes.
@@ -137,7 +128,6 @@ remain. Reading completion and runtime signoff remain distinct.
     stale diagnostic comparison state; public Get still rejects malformed source. Repair `.8` and Knowledge own
     the defect; no production repair or full-codebase claim.
   Commit: `SESSION-STARTUP-READING.3.2.3 - read resolution and bootstrap adapters` — Ten unique Perl files read; stale diagnostic defect proved and repair `.8` owned.
-
 - ID: `SESSION-STARTUP-READING.3.2.4`
   Status: `done`
   Goal: Read baseline Perl group 2: 1,196 lines/fragments, 39,291 bytes.
@@ -154,7 +144,6 @@ remain. Reading completion and runtime signoff remain distinct.
     Direct scanner and public controls prove regex-delimiter truncation; quoted-pattern execution returns 1,
     regex form returns undef with exact handler-compile error. Knowledge and `.9` own repair after reading.
   Commit: `SESSION-STARTUP-READING.3.2.4 - read bootstrap grammar core` — Eleven unique Perl files read; attached-tail regex defect proved and `.9` owned.
-
 - ID: `SESSION-STARTUP-READING.3.2.5`
   Status: `done`
   Goal: Read baseline Perl group 3: 590 lines/fragments, 23,054 bytes.
@@ -173,7 +162,6 @@ remain. Reading completion and runtime signoff remain distinct.
     ADR 0102 records the exact finite 28-file/27-manifest-line admission. Final staged canonical receipt is required
     before landing; no production change or completed full-codebase claim.
   Commit: `SESSION-STARTUP-READING.3.2.5 - read compiler state and preserve history` — Twelve Perl files read; required complete-record rollover and finite capacity ADR 0102.
-
 - ID: `SESSION-STARTUP-READING.3.2.6`
   Status: `done`
   Goal: Read baseline Perl group 4: 1,041 lines/fragments, 41,073 bytes.
@@ -191,7 +179,6 @@ remain. Reading completion and runtime signoff remain distinct.
     dated samples are preserved in Knowledge and their two consumed files were hash-verified/deleted/checked absent.
     The historical duplicate-slot card links its existing resolution; focused commit checks are recorded below.
   Commit: `SESSION-STARTUP-READING.3.2.6 - read compiler generation and state assembly` — Compiler prefix read; prior canonical/loader evidence and historical duplicate-slot resolution preserved.
-
 - ID: `SESSION-STARTUP-READING.3.2.7`
   Status: `done`
   Goal: Read baseline Perl group 5: 961 lines/fragments, 43,851 bytes.
@@ -206,7 +193,6 @@ remain. Reading completion and runtime signoff remain distinct.
     Compiler.pm at 2,002 lines / 84,924 bytes. Existing architecture/Knowledge owners reconcile; a bounded
     source-level card indexes phase and mode boundaries. No new runtime defect or public change.
   Commit: `SESSION-STARTUP-READING.3.2.7 - complete compiler pipeline reading` — Thirteen whole Perl files read; source-level phase/mode boundaries indexed.
-
 - ID: `SESSION-STARTUP-READING.3.2.8`
   Status: `done`
   Goal: Read baseline Perl group 6: 600 lines/fragments, 23,171 bytes.
@@ -222,7 +208,6 @@ remain. Reading completion and runtime signoff remain distinct.
     Isolated HandlerIR probes confirm unbound AND_BCODE inputs; public descriptor/source control bounds the
     finding without claiming a result failure. Repair `.10` is owned; focused continuity checks precede landing.
   Commit: `SESSION-STARTUP-READING.3.2.8 - read SpecEntry and own unbound input repair` — Fourteen whole Perl files read; historical coupling reconciled; explicit repair `.10` owns the private handoff defect.
-
 - ID: `SESSION-STARTUP-READING.3.2.9`
   Status: `done`
   Goal: Read baseline Perl group 7: 1,320 lines/fragments, 43,290 bytes.
@@ -239,7 +224,6 @@ remain. Reading completion and runtime signoff remain distinct.
     source drift; `.11.1`–`.11.3` own bounded repair. Prior retrieval fields and the removed-option command
     are corrected; focused continuity/Knowledge checks precede landing.
   Commit: `SESSION-STARTUP-READING.3.2.9 - read validation and own diagnostic repairs` — Validation prefix read; diagnostic repair children and retrieval corrections preserved.
-
 - ID: `SESSION-STARTUP-READING.3.2.10`
   Status: `done`
   Goal: Read baseline Perl group 8: 584 lines/fragments, 18,639 bytes.
@@ -254,7 +238,6 @@ remain. Reading completion and runtime signoff remain distinct.
     Validation.pm at 1,904 lines / 61,929 bytes. Existing edge/slash/gap and diagnostic owners reconcile;
     the edge card now links admitted owners and clarifies optional blind-return blocks. No new runtime defect.
   Commit: `SESSION-STARTUP-READING.3.2.10 - complete validation reading` — Fifteen full Perl files read; current edge/capture owners reconciled.
-
 - ID: `SESSION-STARTUP-READING.3.2.11`
   Status: `done`
   Goal: Read baseline Perl group 9: 987 lines/fragments, 31,462 bytes.
@@ -269,7 +252,6 @@ remain. Reading completion and runtime signoff remain distinct.
     direct collect/normalize probes confirm bare/explicit execution-order drift; repair `.12` is owned.
     Focused continuity/Knowledge checks precede landing; no runtime source change.
   Commit: `SESSION-STARTUP-READING.3.2.11 - read RuleIR and own edge-order repair` — Sixteen full Perl files read; native/public order defect and repair `.12` preserved.
-
 - ID: `SESSION-STARTUP-READING.3.2.12`
   Status: `done`
   Goal: Read baseline Perl group 10: 1,489 lines/fragments, 49,396 bytes.
@@ -284,7 +266,6 @@ remain. Reading completion and runtime signoff remain distinct.
     Existing owner/trace contracts reconcile; exact registry extraction confirms fourteen keys, thirteen
     ActionIR owners plus Trace, correcting two existing cards. Focused continuity checks precede landing.
   Commit: `SESSION-STARTUP-READING.3.2.12 - read EmitContext bridge and reconcile registry` — EmitContext prefix read; owner cardinality and retrieval corrected; suffix remains unread.
-
 - ID: `SESSION-STARTUP-READING.3.2.13`
   Status: `done`
   Goal: Read baseline Perl group 11: 1,094 lines/fragments, 46,079 bytes.
@@ -299,7 +280,6 @@ remain. Reading completion and runtime signoff remain distinct.
     Public AND/OR controls, descriptor/source capture, and direct rewrite prove repeated blind targets lose
     attached-code identity. Repair `.13` and Knowledge preserve the causal evidence; focused checks precede landing.
   Commit: `SESSION-STARTUP-READING.3.2.13 - complete EmitContext reading and own blind-edge repair` — Seventeen full Perl files read; blind occurrence-identity defect and repair `.13` preserved.
-
 - ID: `SESSION-STARTUP-READING.3.2.14`
   Status: `done`
   Goal: Read baseline Perl group 12: 1,403 lines/fragments, 53,304 bytes.
@@ -314,7 +294,6 @@ remain. Reading completion and runtime signoff remain distinct.
     Builder/dispatch probes reconcile HandlerIR; indexed return control remains fixed. Public/source/seed
     controls prove per-regex I-block literal and state corruption; `.14.1`/`.14.2` own repair. Focused checks precede landing.
   Commit: `SESSION-STARTUP-READING.3.2.14 - read emitter prefix and own I-block repairs` — Emitter prefix read; literal/scope defects and `.14` repair children preserved; historical contracts reconciled.
-
 - ID: `SESSION-STARTUP-READING.3.2.15`
   Status: `done`
   Goal: Read baseline Perl group 13: 736 lines/fragments, 24,430 bytes.
@@ -329,7 +308,6 @@ remain. Reading completion and runtime signoff remain distinct.
     Native bounded REP controls confirm literal corruption and package writes; `.14.1`/`.14.2` extend to this
     same causal family. JSON subset projection and existing slot/AST owners reconcile; focused checks precede landing.
   Commit: `SESSION-STARTUP-READING.3.2.15 - finish emitter adapters and extend return repairs` — Twenty full Perl files read; existing return/scope repairs extend to repetition; diagnostic projection bounded.
-
 - ID: `SESSION-STARTUP-READING.3.2.16`
   Status: `done`
   Goal: Read baseline Perl group 14: 1,498 lines/fragments, 47,935 bytes.
@@ -344,7 +322,6 @@ remain. Reading completion and runtime signoff remain distinct.
     Seven ASCII and two Unicode AST controls isolate nested offset loss; public Get preserves the typed
     diagnostic in last_error.detail. Two focused suites pass 30 top-level tests; repair `.15` owns the gap.
   Commit: `SESSION-STARTUP-READING.3.2.16 - read AST parser and own nested span repair` — Parser prefix read; nested-offset repair `.15` owns three recursive handoffs and adjacent controls.
-
 - ID: `SESSION-STARTUP-READING.3.2.17`
   Status: `done`
   Goal: Read baseline Perl group 15: 1,195 lines/fragments, 47,612 bytes.
@@ -358,7 +335,6 @@ remain. Reading completion and runtime signoff remain distinct.
     baseline identities pass. Existing AST, binding, mutation, and trace/event Knowledge reconciles; no new
     behavior or defect claim. Twenty-four whole Perl files are read; focused checks precede landing.
   Commit: `SESSION-STARTUP-READING.3.2.17 - finish AST parser and read pipeline adapters` — Twenty-four whole Perl files read; existing pipeline/event owners indexed; Contracts prefix follows.
-
 - ID: `SESSION-STARTUP-READING.3.2.18`
   Status: `done`
   Goal: Read baseline Perl group 16: 1,396 lines/fragments, 65,503 bytes.
@@ -372,7 +348,6 @@ remain. Reading completion and runtime signoff remain distinct.
     passes. Catalog recheck gives 47/30/11/4 detached rows, total 92. Existing ownership and historical status
     reconcile; no new runtime/admission claim. Focused checks precede landing.
   Commit: `SESSION-STARTUP-READING.3.2.18 - read contract prefix and reconcile projection status` — Contracts prefix read; 92-row detached catalog rechecked; stale-current card wording bounded.
-
 - ID: `SESSION-STARTUP-READING.3.2.19`
   Status: `done`
   Goal: Read baseline Perl group 17: 1,117 lines/fragments, 48,433 bytes.
@@ -386,7 +361,6 @@ remain. Reading completion and runtime signoff remain distinct.
     full-file baseline identity passes. Exact source extraction confirms fourteen ordered builder groups.
     Existing Knowledge owns the bounded structural fact; focused continuity checks precede landing.
   Commit: `SESSION-STARTUP-READING.3.2.19 - finish contract catalog reading` — Contracts fully read; ordered builder fact indexed; twenty-five Perl files complete.
-
 - ID: `SESSION-STARTUP-READING.3.2.20`
   Status: `done`
   Goal: Read baseline Perl group 18: 1,485 lines/fragments, 56,984 bytes.
@@ -401,7 +375,6 @@ remain. Reading completion and runtime signoff remain distinct.
     passes. Controlled candidate-context rejection/acceptance passes, and compact-lowerer trace passes four
     top-level tests. Existing AST/trace/caveat owners reconcile; focused continuity checks precede landing.
   Commit: `SESSION-STARTUP-READING.3.2.20 - read control flow prefix and verify candidate isolation` — ControlFlow prefix read; bounded candidate-state isolation verified; existing caveat owners retained.
-
 - ID: `SESSION-STARTUP-READING.3.2.21`
   Status: `done`
   Goal: Read baseline Perl group 19: 1,439 lines/fragments, 59,142 bytes.
@@ -421,7 +394,6 @@ remain. Reading completion and runtime signoff remain distinct.
     restriction, and permitted execution passes the unchanged full process-locality oracle. Knowledge preserves
     this prerequisite; rerun full canonical CI for the final staged receipt. No production repair or full-reading claim.
   Commit: `SESSION-STARTUP-READING.3.2.21 - read flow adapters and preserve required history` — Twenty-nine Perl files read; emptiness repairs owned; exact notes rollover and finite capacity recorded.
-
 - ID: `SESSION-STARTUP-READING.3.2.22`
   Status: `done`
   Goal: Read baseline Perl group 20: 298 lines/fragments, 7,800 bytes.
@@ -436,7 +408,6 @@ remain. Reading completion and runtime signoff remain distinct.
     three authored values in a distinct list, allow explicit legacy/fixed-arity fallback, keep input unchanged,
     and reject missing minimum arity. Existing Knowledge reconciles; focused continuity checks precede landing.
   Commit: `SESSION-STARTUP-READING.3.2.22 - read method expression normalization` — MethodExpr comprehension and scope precedence recorded; next MethodLowering prefix.
-
 - ID: `SESSION-STARTUP-READING.3.2.23`
   Status: `done`
   Goal: Read baseline Perl group 21: 1,495 lines/fragments, 61,967 bytes.
@@ -451,7 +422,6 @@ remain. Reading completion and runtime signoff remain distinct.
     tests pass. Existing AST/block/binding/callable records reconcile; dated later-migration notes are qualified.
     Focused memory/history/diff review and all required commit hooks precede landing.
   Commit: `SESSION-STARTUP-READING.3.2.23 - read method lowering prefix and reconcile milestones` — Prefix comprehension and dated AST/binding/callable milestone ownership reconciled; no source/book change.
-
 - ID: `SESSION-STARTUP-READING.3.2.24`
   Status: `done`
   Goal: Read baseline Perl group 22: 883 lines/fragments, 33,969 bytes.
@@ -466,7 +436,6 @@ remain. Reading completion and runtime signoff remain distinct.
     suite passes 66 tests; a public mixed-path read returns one with no context error. Existing signature and
     retirement records reconcile; focused memory/history/scope checks and required commit hooks precede landing.
   Commit: `SESSION-STARTUP-READING.3.2.24 - read function signatures and statement lowering` — Function signatures and guarded statement bridges read; four historical Knowledge records reconciled.
-
 - ID: `SESSION-STARTUP-READING.3.2.25`
   Status: `done`
   Goal: Read baseline Perl group 23: 1,365 lines/fragments, 65,506 bytes.
@@ -481,7 +450,6 @@ remain. Reading completion and runtime signoff remain distinct.
     controls establish caller-local shadowing in scalar, aggregate, and nested calls with passing controls;
     `.32` owns repair. Memory/history/staged review and required commit hooks precede landing.
   Commit: `SESSION-STARTUP-READING.3.2.25 - read value calls and own caller shadowing repair` — Value and function-call dispatch read; eight controls root-cause caller-local shadowing and own repair .32.
-
 - ID: `SESSION-STARTUP-READING.3.2.26`
   Status: `done`
   Goal: Read baseline Perl group 24: 1,168 lines/fragments, 58,949 bytes.
@@ -495,7 +463,6 @@ remain. Reading completion and runtime signoff remain distinct.
     passes 23 tests; public hash/array/scalar root controls match their documented traversal branches.
     Three existing Knowledge records reconcile; memory/history/review and required commit hooks precede landing.
   Commit: `SESSION-STARTUP-READING.3.2.26 - read receiver chains and reconcile tree dispatch` — Block and receiver dispatch read; three traversal records distinguish original milestones from current shared dispatch.
-
 - ID: `SESSION-STARTUP-READING.3.2.27`
   Status: `done`
   Goal: Read baseline Perl group 25: 1,031 lines/fragments, 64,411 bytes.
@@ -511,7 +478,6 @@ remain. Reading completion and runtime signoff remain distinct.
     with zero raw dependency. Seven Knowledge records reconcile, including `.7` group-establishment evidence;
     required focused checks/hooks precede landing.
   Commit: `SESSION-STARTUP-READING.3.2.27 - read helper fallback and qualify numeric evidence` — Helper fallback and numeric/string/collection prefix read; four AST/numeric Knowledge records qualified.
-
 - ID: `SESSION-STARTUP-READING.3.2.28`
   Status: `done`
   Goal: Read baseline Perl group 26: 1,303 lines/fragments, 64,878 bytes.
@@ -526,7 +492,6 @@ remain. Reading completion and runtime signoff remain distinct.
     collection controls pass; two Perl Get and two fresh PUC Lua controls expose tagged-field and split drift.
     `.33.1`/`.33.2` own review/repair; focused memory/history/scope checks and required hooks precede landing.
   Commit: `SESSION-STARTUP-READING.3.2.28 - read collection helpers and own tagged-record repair` — Collection and constructor paths read; selector history reconciled and paired tagged-record divergence owned by .33.
-
 - ID: `SESSION-STARTUP-READING.3.2.29`
   Status: `done`
   Goal: Read baseline Perl group 27: 977 lines/fragments, 36,165 bytes.
@@ -540,7 +505,6 @@ remain. Reading completion and runtime signoff remain distinct.
     carrier consumer passes 129 assertions; neutral progressive proof passes 9/9/116 plus public 6/12/10/60.
     Three Knowledge records reconcile; focused memory/history/scope checks and required hooks precede landing.
   Commit: `SESSION-STARTUP-READING.3.2.29 - read lowering suffix and reconcile progressive admission` — MethodLowering suffix and ProgressiveSpanDispatch read; three progressive admission records follow completed private closeout.
-
 - ID: `SESSION-STARTUP-READING.3.2.30`
   Status: `done`
   Goal: Read baseline Perl group 28: 1,173 lines/fragments, 41,839 bytes.
@@ -554,7 +518,6 @@ remain. Reading completion and runtime signoff remain distinct.
     trace proof passes five top-level tests; callable registry census confirms seven ordered dispatchers.
     Four Knowledge records reconcile; focused memory/history/scope checks and required hooks precede landing.
   Commit: `SESSION-STARTUP-READING.3.2.30 - read rewrite orchestration and reconcile scanner ownership` — RewritePipeline, Scanner, and FlowRules read; scanner registry and AST migration Knowledge reconciled.
-
 - ID: `SESSION-STARTUP-READING.3.2.31`
   Status: `done`
   Goal: Read baseline Perl group 29: 1,433 lines/fragments, 41,163 bytes.
@@ -568,7 +531,6 @@ remain. Reading completion and runtime signoff remain distinct.
     controls pass, and generated child-push source confirms handler-first dispatch with binding fallback.
     Three Knowledge records reconcile; focused memory/history/scope checks and required hooks precede landing.
   Commit: `SESSION-STARTUP-READING.3.2.31 - read legacy scanners and reconcile bare push precedence` — Legacy/basic scanners read; historical scalar-slot and unconditional child-push claims reconciled with uniform binding.
-
 - ID: `SESSION-STARTUP-READING.3.2.32`
   Status: `done`
   Goal: Read baseline Perl group 30: 1,355 lines/fragments, 48,756 bytes.
@@ -582,7 +544,6 @@ remain. Reading completion and runtime signoff remain distinct.
     consumer passes 143 checks; staged 9/9/123/public 6/17/10/129, recognition 138/250/58, and language
     250/126 proof pass. Two Knowledge records reconcile; required focused continuity checks precede landing.
   Commit: `SESSION-STARTUP-READING.3.2.32 - read staged scanners and reconcile authoring boundaries` — Pipeline, recognition, staged marker, and splitting owners read; two Knowledge records follow current public/neutral boundaries.
-
 - ID: `SESSION-STARTUP-READING.3.2.33`
   Status: `done`
   Goal: Read baseline Perl group 31: 1,423 lines/fragments, 47,678 bytes.
@@ -597,7 +558,6 @@ remain. Reading completion and runtime signoff remain distinct.
     three inline cases repeat with dumped source confirmation. Repairs `.34.1`/`.34.2` own failures;
     one new and three qualified Knowledge records preserve evidence. Required focused gates precede landing.
   Commit: `SESSION-STARTUP-READING.3.2.33 - read separator and value owners and track comment failures` — Splitter/trace/value owners read; comment failures rooted and repair-owned, universal coverage claims qualified.
-
 - ID: `SESSION-STARTUP-READING.3.2.34`
   Status: `done`
   Goal: Read baseline Perl group 32: 1,264 lines/fragments, 39,889 bytes.
@@ -612,7 +572,6 @@ remain. Reading completion and runtime signoff remain distinct.
     emitted-record decoding root boolean-literal kind loss in CodeblockRuntime; `.35` owns repair.
     One new and three qualified Knowledge records preserve evidence; required focused gates precede landing.
   Commit: `SESSION-STARTUP-READING.3.2.34 - read runtime owners and track codeblock boolean drift` — Runtime owners read; dynamic boolean result drift repair-owned and historical gap admission prose qualified.
-
 - ID: `SESSION-STARTUP-READING.3.2.35`
   Status: `done`
   Goal: Read baseline Perl group 33: 1 lines/fragments, 32,768 bytes.
@@ -627,7 +586,6 @@ remain. Reading completion and runtime signoff remain distinct.
     admission 5/5 implementations / 6/6 runtimes / complete / 141 mutations pass. One Knowledge record
     reconciles historical topology and response layers; required focused continuity checks precede landing.
   Commit: `SESSION-STARTUP-READING.3.2.35 - read MCP frame data and reconcile current admission` — MCP frame/schema prefix read; generated binding fresh, response examples and current admission qualified.
-
 - ID: `SESSION-STARTUP-READING.3.2.36`
   Status: `done`
   Goal: Read baseline Perl group 34: 1 lines/fragments, 32,768 bytes.
@@ -642,7 +600,6 @@ remain. Reading completion and runtime signoff remain distinct.
     explicit-component-only policy controls pass. Managed materializer then independent validator pass
     35/10/10/76. Two Knowledge records reconcile; `.5` owns ADR policy clarification; focused gates precede landing.
   Commit: `SESSION-STARTUP-READING.3.2.36 - read MCP contract policy and reconcile historical claims` — MCP policy/corpus/schema fragment read; exact neutral identity and already-repaired component policy documented.
-
 - ID: `SESSION-STARTUP-READING.3.2.37`
   Status: `done`
   Goal: Read baseline Perl group 35: 1 lines/fragments, 17,347 bytes.
@@ -657,7 +614,6 @@ remain. Reading completion and runtime signoff remain distinct.
     hashes match. The complete 83,411-byte binding is byte-fresh. One Knowledge record indexes bounded
     payload/digest ownership; required focused continuity checks precede landing.
   Commit: `SESSION-STARTUP-READING.3.2.37 - read MCP payload suffix and verify embedded digests` — MCP embedded JSON completed; four payload and seven source digests verified without runtime or protocol changes.
-
 - ID: `SESSION-STARTUP-READING.3.2.38`
   Status: `done`
   Goal: Read baseline Perl group 36: 1,484 lines/fragments, 51,303 bytes.
@@ -672,7 +628,6 @@ remain. Reading completion and runtime signoff remain distinct.
     Six competing-error cases agree through decoded/stdio routes and expose ADR ordering drift, owned by
     `.36.1`–`.36.3`. One new and three updated Knowledge records preserve evidence; focused gates precede landing.
   Commit: `SESSION-STARTUP-READING.3.2.38 - read MCP runtime and track validation order drift` — MCP/numeric owners read; validation-order discrepancy repair-owned and projection-field wording corrected.
-
 - ID: `SESSION-STARTUP-READING.3.2.39`
   Status: `done`
   Goal: Read baseline Perl group 37: 1,496 lines/fragments, 52,208 bytes.
@@ -688,7 +643,6 @@ remain. Reading completion and runtime signoff remain distinct.
     ceiling controls root resource/diagnostic gaps under `.37`; one new/four updated Knowledge records preserve
     evidence. Focused continuity gates precede landing.
   Commit: `SESSION-STARTUP-READING.3.2.39 - read progressive authority and own ceiling enforcement gaps` — Plugin and progressive owners read; measured ceiling enforcement gaps repair-owned with exact controls.
-
 - ID: `SESSION-STARTUP-READING.3.2.40`
   Status: `done`
   Goal: Read baseline Perl group 38: 924 lines/fragments, 33,632 bytes.
@@ -704,7 +658,6 @@ remain. Reading completion and runtime signoff remain distinct.
     updated Knowledge records preserve the finite proof boundary. Known lexical defects remain `.21`-owned.
     Focused continuity gates precede landing.
   Commit: `SESSION-STARTUP-READING.3.2.40 - read recognition core and own post-terminal restoration defect` — Recognition core/static owners read; post-terminal cross-owner snapshot restoration repair-owned.
-
 - ID: `SESSION-STARTUP-READING.3.2.41`
   Status: `done`
   Goal: Read baseline Perl group 39: 1,269 lines/fragments, 39,210 bytes.
@@ -723,7 +676,6 @@ remain. Reading completion and runtime signoff remain distinct.
     and independent clean-source/hash/manifest proof accompany the exact finite capacity decision ADR 0104.
     Receipt-bound canonical verification is required for the final staged infrastructure checkpoint before landing.
   Commit: `SESSION-STARTUP-READING.3.2.41 - read runtime observers and preserve bounded change history` — Runtime owners read; boolean/unwind repairs owned; exact change-history suffix and finite routing capacity preserved.
-
 - ID: `SESSION-STARTUP-READING.3.2.42`
   Status: `done`
   Goal: Read baseline Perl group 40: 1,148 lines/fragments, 37,003 bytes.
@@ -745,7 +697,6 @@ remain. Reading completion and runtime signoff remain distinct.
     .41 owns eight book-repair lanes. Four forward inline-lifecycle query controls plus two descriptors
     reproduce .43 source-member loss; no runtime/public-book repair or codebase-wide completion is claimed.
   Commit: `SESSION-STARTUP-READING.3.2.42 - read semantic projection and preserve complete book coverage` — Semantic call/index comprehension, complete book coverage, and measured book/compiler/inline-semantic repair ownership preserved.
-
 - ID: `SESSION-STARTUP-READING.3.2.43`
   Status: `done`
   Goal: Read baseline Perl group 41: 982 lines/fragments, 35,427 bytes.
@@ -762,7 +713,6 @@ remain. Reading completion and runtime signoff remain distinct.
     are retained against unchanged test/source/contract inputs. Four Knowledge owners distinguish dated
     rollout from current evidence. No runtime change or whole-codebase completion is claimed.
   Commit: `SESSION-STARTUP-READING.3.2.43 - read semantic queries and source mapping` — Query/source-map and derived-observation owners read; current versus historical evidence reconciled.
-
 - ID: `SESSION-STARTUP-READING.3.2.44`
   Status: `done`
   Goal: Read baseline Perl group 42: 1,067 lines/fragments, 34,029 bytes.
@@ -780,7 +730,6 @@ remain. Reading completion and runtime signoff remain distinct.
     the same classification gap for other failures. Standalone neutral proof passes 15 public documents /
     seven denials / fourteen mutations while omitting TOOLBOX. Existing .23/.41.6/.43 retain repair ownership.
   Commit: `SESSION-STARTUP-READING.3.2.44 - read static semantics and refine failure evidence` — Static projection read; failure claim narrowed to actual decision/explanation defect; omitted Toolbox guidance is repair-owned.
-
 - ID: `SESSION-STARTUP-READING.3.2.45`
   Status: `done`
   Goal: Read baseline Perl group 43: 700 lines/fragments, 21,209 bytes.
@@ -799,7 +748,6 @@ remain. Reading completion and runtime signoff remain distinct.
     Current source/test/checker/contract inputs remain unchanged. Existing Knowledge preserves authority,
     detached values, and compatibility boundaries in bounded linked cards; no new runtime or public contract is claimed.
   Commit: `SESSION-STARTUP-READING.3.2.45 - read typed source-location authority` — Complete typed source-location owner reading and scoped existing Knowledge reconciliation.
-
 - ID: `SESSION-STARTUP-READING.3.2.46`
   Status: `done`
   Goal: Read baseline Perl group 44: 1,498 lines/fragments, 49,952 bytes.
@@ -817,7 +765,6 @@ remain. Reading completion and runtime signoff remain distinct.
     substitute stops two unretained trials at three calls; two retained controls finish 24. .44 owns this
     latent identity assumption; no native allocator failure or installed runtime repair is claimed.
   Commit: `SESSION-STARTUP-READING.3.2.46 - read staged authority and own marker identity risk` — Staged authority read; native lifetime proof and isolated retired-identity counterexample preserved under .44.
-
 - ID: `SESSION-STARTUP-READING.3.2.47`
   Status: `done`
   Goal: Read baseline Perl group 45: 1,374 lines/fragments, 43,289 bytes.
@@ -832,7 +779,6 @@ remain. Reading completion and runtime signoff remain distinct.
     Perl 143, neutral 9/9/123 and public 6/17/10/129. Knowledge distinguishes legacy cache-key metadata
     from the general scheduler and records fresh invocation/private marker ownership; .44 remains pending.
   Commit: `SESSION-STARTUP-READING.3.2.47 - read staged runtime and legacy registry boundaries` — Staged suffix/runtime/marker/policy/legacy registry read; exact unchanged proof and v1/v2 separation preserved.
-
 - ID: `SESSION-STARTUP-READING.3.2.48`
   Status: `done`
   Goal: Read baseline Perl group 46: 521 lines/fragments, 16,259 bytes.
@@ -847,7 +793,6 @@ remain. Reading completion and runtime signoff remain distinct.
     all OwnerDispatch cases preserve it. Three generated trace suites pass 11 tests in 23 seconds.
     Existing CLI bytes/proof remain unchanged; four Knowledge owners and focused continuity reconcile.
   Commit: `SESSION-STARTUP-READING.3.2.48 - read Trace and qualify lazy exception-state evidence` — Trace read; 20 diagnostic controls and 11 passing tests qualify .24 without claiming repair.
-
 - ID: `SESSION-STARTUP-READING.3.2.49`
   Status: `done`
   Goal: Read baseline Perl group 47: 1,500 lines/fragments, 32,073 bytes.
@@ -862,7 +807,6 @@ remain. Reading completion and runtime signoff remain distinct.
     1,563/1,581 mappings, 158/464 property ranges, 12 fixtures. Managed Perl consumer passes 52 tests
     in 13 seconds. No duplicate reading credit, generated edits, or other-backend execution claim.
   Commit: `SESSION-STARTUP-READING.3.2.49 - reconcile first generated Unicode case range` — First Unicode range reconciled; five-module regeneration and 52 Perl tests preserve pinned authority.
-
 - ID: `SESSION-STARTUP-READING.3.2.50`
   Status: `done`
   Goal: Read baseline Perl group 48: 1,500 lines/fragments, 32,854 bytes.
@@ -877,7 +821,6 @@ remain. Reading completion and runtime signoff remain distinct.
     five-module regeneration, 12 neutral fixtures and 52 Perl tests without rerunning unchanged suites.
     Inventory Knowledge now separates completed physical mdBook reading from pending formal alignment.
   Commit: `SESSION-STARTUP-READING.3.2.50 - reconcile middle Unicode table range and reading status` — Unicode lower/upper table transition reconciled; current reading status and retained proof preserved.
-
 - ID: `SESSION-STARTUP-READING.3.2.51`
   Status: `done`
   Goal: Read baseline Perl group 49: 835 lines/fragments, 17,404 bytes.
@@ -892,7 +835,6 @@ remain. Reading completion and runtime signoff remain distinct.
     Table/generator/contract/checker/consumer bytes remain unchanged from .3.2.49's regeneration/Perl52
     proof. All three case-table checkpoints cover 3,835 lines / 82,331 bytes; codebase remains No.
   Commit: `SESSION-STARTUP-READING.3.2.51 - reconcile Unicode evaluator and contextual casing` — Final case-table range reconciled; contextual evaluator, retained proof and native-planning pressure recorded.
-
 - ID: `SESSION-STARTUP-READING.3.2.52`
   Status: `done`
   Goal: Read baseline Perl group 50: 855 lines/fragments, 17,340 bytes.
@@ -907,7 +849,6 @@ remain. Reading completion and runtime signoff remain distinct.
     Direct Perl classifier: 3,224 endpoint/gap checks, 17 fixtures, 2 identity pairs PASS without warnings.
     Current gap neutral/public proof is 9/0/63 and 8/15/10/34; prior unchanged Perl124 is retained.
   Commit: `SESSION-STARTUP-READING.3.2.52 - reconcile XID classifier and current named-slot admission` — XID range and direct classifier proof recorded; stale gap Knowledge admission corrected without runtime movement.
-
 - ID: `SESSION-STARTUP-READING.3.2.53`
   Status: `done`
   Goal: Read baseline Perl group 51: 1,202 lines/fragments, 45,829 bytes.
@@ -922,7 +863,6 @@ remain. Reading completion and runtime signoff remain distinct.
     codeblock 7/11/9/7/4/8/23 pass. Git census is 13 parked .plg files. Knowledge reconciles spec-owned
     parsing, versioned metadata, and legacy discovery without runtime/grammar or public-book changes.
   Commit: `SESSION-STARTUP-READING.3.2.53 - reconcile function registry and legacy discovery` — Function registry and legacy files read; 76 tests and neutral proof recorded; 13-file corpus count corrected.
-
 - ID: `SESSION-STARTUP-READING.3.2.54`
   Status: `done`
   Goal: Read baseline Perl group 52: 839 lines/fragments, 22,702 bytes.
@@ -937,7 +877,6 @@ remain. Reading completion and runtime signoff remain distinct.
     signed-tolerance, duplicate-row, and DEFAULT defects. Prior ptchange spaced-path evidence is retained.
     No repair or public-book change. .3.2.55 owns canonical parent closeout and complete Rust decomposition.
   Commit: `SESSION-STARTUP-READING.3.2.54 - reconcile legacy utility reading and repair evidence` — 839 utility lines reread; exact diagnostic control retained; .55 owns canonical closeout.
-
 - ID: `SESSION-STARTUP-READING.3.2.55`
   Status: `done`
   Goal: Close the fully read Perl lane and own the complete bounded Rust reading plan.
@@ -956,7 +895,6 @@ remain. Reading completion and runtime signoff remain distinct.
     1,500-line and 65,536-byte maxima. No new Rust reading credit or repair closure. Final staged canonical
     receipt is mandatory before this parent closeout lands; the committed hook/receipt establishes its result.
   Commit: `SESSION-STARTUP-READING.3.2.55 - close Perl reading and own bounded Rust scopes` — Close 89-file Perl reading; own all 412 Rust paths in 66 bounded leaves plus closeout; exact canonical boundary.
-
 - ID: `SESSION-STARTUP-READING.3.3`
   Status: `done`
   Goal: Split and read all 412 baseline Rust entries, including source, tests, corpus, generated files, and manifests.
@@ -964,7 +902,6 @@ remain. Reading completion and runtime signoff remain distinct.
   Children: `.3.3.1`, `.3.3.2`, `.3.3.3`, `.3.3.4`, `.3.3.5`, `.3.3.6`, `.3.3.7`, `.3.3.8`, `.3.3.9`, `.3.3.10`, `.3.3.11`, `.3.3.12`, `.3.3.13`, `.3.3.14`, `.3.3.15`, `.3.3.16`, `.3.3.17`, `.3.3.18`, `.3.3.19`, `.3.3.20`, `.3.3.21`, `.3.3.22`, `.3.3.23`, `.3.3.24`, `.3.3.25`, `.3.3.26`, `.3.3.27`, `.3.3.28`, `.3.3.29`, `.3.3.30`, `.3.3.31`, `.3.3.32`, `.3.3.33`, `.3.3.34`, `.3.3.35`, `.3.3.36`, `.3.3.37`, `.3.3.38`, `.3.3.39`, `.3.3.40`, `.3.3.41`, `.3.3.42`, `.3.3.43`, `.3.3.44`, `.3.3.45`, `.3.3.46`, `.3.3.47`, `.3.3.48`, `.3.3.49`, `.3.3.50`, `.3.3.51`, `.3.3.52`, `.3.3.53`, `.3.3.54`, `.3.3.55`, `.3.3.56`, `.3.3.57`, `.3.3.58`, `.3.3.59`, `.3.3.60`, `.3.3.61`, `.3.3.62`, `.3.3.63`, `.3.3.64`, `.3.3.65`, `.3.3.66`, `.3.3.67`
   Verification: All 412 baseline paths / 3,533,382 bytes are physically read and comprehension-reconciled across 66 committed bounded children. .3.3.67 independently verifies exact byte coverage, current mode/blob identity, durable subjects, Knowledge continuity and pending repair ownership; receipt-bound canonical proof is required for parent landing. This status certifies reading completion only. Containment .7 precedes Dart decomposition/reading.
   Commit: `SESSION-STARTUP-READING.3.3.67 - close Rust reading with exact coverage and durable repair ownership`
-
 
 - ID: `SESSION-STARTUP-READING.3.3.1`
   Status: `done`
@@ -982,7 +919,6 @@ remain. Reading completion and runtime signoff remain distinct.
     Forward evidence is owned by .45–.47 and .49: eleven earlier CLI controls, the isolated core program,
     and four new regex-boundary controls. No repair closes.
   Commit: `SESSION-STARTUP-READING.3.3.1 - read Rust lockfile prefix and own parser boundary repairs` — Read 1,496 lock/ignore lines; own malformed-block, Unicode diagnostic, mutation-argument, and regex-newline repairs; retain prior canonical milestone.
-
 - ID: `SESSION-STARTUP-READING.3.3.2`
   Status: `done`
   Goal: Read Rust group 2: 1,483 lines/fragments, 59,455 bytes.
@@ -4788,15 +4724,57 @@ remain. Reading completion and runtime signoff remain distinct.
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.86.4`
-  Status: `pending`
+  Status: `active`
   Goal: Preserve multiline parenthesized regex literals through Perl validation and action lowering.
   Dependencies: Land Rust .86.2 first; captured public diagnostics in .linkedspec-data/scratch/division-boundary86-2/perl-context.jsonl and reproducible sources in docs/knowledge/rust-symbol-call-newline-boundary.md; coordinate .54.1 without conflating regex-brace bootstrap loss.
+  Children: `SESSION-STARTUP-READING.86.4.1`, `SESSION-STARTUP-READING.86.4.2`, `SESSION-STARTUP-READING.86.4.3`, `SESSION-STARTUP-READING.86.4.4`
   Planned tier: focused unless a shared language-contract decision is needed.
   Planned focused proof: Public Get with runtime_ctx_ref, exact lowering and generated source; multiline regex and numeric-division lookalikes, LF/CRLF, following assignments, whole-spec validation and invalid-pattern controls; phase0 plus directly affected scanner tests.
   Planned canonical boundary: Parent .86.3 after .86.5; any contract decision precedes implementation.
   Acceptance: Retain protected regex newlines and working division-newline statements. Fix the established valid literal failures at their actual owners, with exact source and runtime errors retained; do not infer unknown backend parity. Synchronize Perl integration/book examples and durable facts.
   Verification: Public /(x) LF y/, numeric-pattern plus text, numeric-pattern plus next assignment, and CRLF controls fail validation or generated handler compilation; isolated lowering prematurely emits num_div then leaves the regex tail as code. Invalid quoted-pattern control is separately rejected through documented runtime_handler:rule_handler_compile and is not a repair target. Root-cause the splitter/validation disagreement with public descriptors before implementing.
   Commit: `pending`
+- ID: `SESSION-STARTUP-READING.86.4.1`
+  Status: `done`
+  Goal: Reproduce and separate Perl multiline regex segmentation and validation failures before production changes.
+  Dependencies: Clean .86.2 at 19ba2e0d5; ADR0123 targeted recovery.
+  Verification tier: `focused`
+  Focused checks: Public Get/runtime_ctx_ref and call_spec_handler_subst replay; StatementSplit/AST plus whole-fragment versus physical-line Validation probes; policy donor hashes, memory, histories, Knowledge, book and all doctrines.
+  Canonical trigger: Parent .86.3; this diagnostic/decomposition slice changes no runtime or contract.
+  Acceptance: Preserve reproducible source and independently observed owners; define bounded repairs with compatibility requirements and no false completion of the parent.
+  Verification: Public replay reproduces the existing multiline and EOF failures and valid division/regex controls. StatementSplit splits rx = /(x) LF y/ into separate statements; Mode recognizes Perl-prefixed/match-operator slash quoting but not naked DSL literals. Whole-fragment edge scanning ends at depth0 for the literal while physical-line scanning remains at depth1; the numeric division control has the opposite whole/line result. Therefore replacing all line scans with naive whole-source slash scanning would regress division. Fact card perl-multiline-regex-scanner-boundaries retains exact commands. Supplied README/claim/containment donor hashes match the recorded September11 identities; .5/.29 retain adoption ownership. No production fix or new backend acceptance is claimed. The first hook attempt rejected the 8,000-line task limit; remove only 64 blank separators between nodes and prove every nonblank line unchanged before rerunning.
+  Commit: This commit; subject `SESSION-STARTUP-READING.86.4.1 - isolate Perl multiline regex scanner failures`.
+- ID: `SESSION-STARTUP-READING.86.4.2`
+  Status: `pending`
+  Goal: Preserve naked multiline regex tokens through Perl action statement splitting and lowering.
+  Dependencies: .86.4.1; retain whole-source division/regex compatibility before changing the discriminator.
+  Planned tier: focused unless a language-contract decision is needed.
+  Planned focused proof: Exact StatementSplit/AST sources and scalar spans, call_spec_handler_subst and independently evaluated generated action code; LF/CRLF, numeric lookalikes, escaped slashes, nested helpers, following assignments, division followed by regex/division and invalid-pattern controls; action AST, Phase0 and direct scanner compatibility.
+  Planned canonical boundary: .86.3 after validation and public recomposition.
+  Acceptance: Protect lexical regex newlines and delimiters without swallowing subsequent division statements or modifying raw Perl compatibility. Keep the closing-brace exclusion; public outer validation remains explicitly owned by .86.4.3.
+  Verification: `pending`
+  Commit: `pending`
+- ID: `SESSION-STARTUP-READING.86.4.3`
+  Status: `pending`
+  Goal: Preserve multiline regex lexical state through Perl whole-spec validation.
+  Dependencies: .86.4.2; reuse the reconciled token decision without duplicating lexical policy.
+  Planned tier: focused unless a language-contract decision is needed.
+  Planned focused proof: Public Get/runtime_ctx_ref and descriptors/source; all captured literals/division controls, LF/CRLF, rule-like and directive-like regex payloads, real following rules, lifecycle/action nesting and malformed sources; validation fuzz, gap/slot contracts and Phase0.
+  Planned canonical boundary: .86.3 after public recomposition.
+  Acceptance: Retain original source positions and diagnostics, validate actual structure and metadata, and preserve division-newline acceptance; do not broadly hide malformed source or conflate .54.1/.9 bootstrap brace defects.
+  Verification: `pending`
+  Commit: `pending`
+- ID: `SESSION-STARTUP-READING.86.4.4`
+  Status: `pending`
+  Goal: Recompose the Perl multiline regex repair through public live and standalone generated parsers and close .86.4.
+  Dependencies: Verified .86.4.2/.86.4.3.
+  Planned tier: focused; canonical parent closure remains .86.3 after .86.5.
+  Planned focused proof: Full captured public matrix plus exact pattern/runtime results, public loader, descriptors, independent emitted execution, integration-book examples, directly affected Perl gates and documentation/doctrine checks.
+  Planned canonical boundary: Parent .86.3.
+  Acceptance: Close only the measured Perl multiline scope after all required child repairs pass; preserve the invalid regex negative control and open EOF/brace owners with reproducible evidence.
+  Verification: `pending`
+  Commit: `pending`
+
 - ID: `SESSION-STARTUP-READING.86.5`
   Status: `pending`
   Goal: Reconcile Perl slash-call termination at the end of an outer action block.
@@ -4816,7 +4794,7 @@ audit range, not the default repair frontier.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.86.4` | `pending` | Rust .86.2 is verified; repair captured Perl multiline regex, then EOF .86.5, canonical parent .86.3 and .50. |
+| 1 | `SESSION-STARTUP-READING.86.4.2` | `pending` | .86.4.1 isolates splitter and validation owners; repair action segmentation, then .86.4.3/.4 validation/recomposition, EOF .86.5 and canonical .86.3. |
 
 ## Reading Ledger
 
@@ -7598,6 +7576,8 @@ All 53 owned scopes are read: HLink delimiter/raw text, Liberty scalar/complex a
 
 ## Verification Log
 
+- 2026-09-23 — .86.4.1: public Get/lowering and whole-versus-line scanner probes reproduce distinct owners; supplied policy hashes unchanged; focused memory/history/Knowledge/book/doctrine checks before commit.
+
 - 2026-09-22 .83.2.2: PASS: all 37 authored cases on six native runtimes (222 case outcomes), 21 token-spelling round trips per route and 16 same-engine post-rejection reuse checks per route. Perl has 44 top-level/168 nested assertions including descriptor readiness and the independent catch-all mutation; Rust one complete contract test, Dart 38 tests, Julia 91 assertions, and both Lua routes pass. Three initial Dart EOF-comment failures become green with a portable grammar branch, without changing authored expectations. Historical Lispish quoted-LF fixtures pass 3/3 on Perl, and the new book command returns its exact documented value. Formatting, Dart analysis, shell syntax, book, Knowledge/memory/history/diff and doctrine checks govern landing. The public grammar/recurring-CI boundary requires the exact staged canonical receipt; native file delivery and final report admission remain separate. Logs: .linkedspec-data/scratch/sexpr-document-v1/.
 
 - 2026-09-22 .45.3: Compiler correction 10893fb71 passed all core/native regressions and the complete Rust component gate; carrier checkpoint 30c1ddeea passed all four source/AST/loader/semantic/generated route tests. This documentation-only parent closeout retains those exact proofs. Canonical acceptance requires tools/run_ci_local.sh to finish successfully on the exact staged candidate and produce the receipt checked by the normal commit hook; the resulting commit and promoted receipt are the durable gate evidence. Other parser defects and document grammar delivery remain separately owned.
@@ -7784,6 +7764,8 @@ CLI66x2 and Phase0 1032/1032; 1163 seconds is Phase0 only, with 25 optional gate
 
 ## Commit Log
 
+- .86.4.1 — `SESSION-STARTUP-READING.86.4.1 - isolate Perl multiline regex scanner failures`.
+
 - 2026-09-22 .83.2.2: `SESSION-STARTUP-READING.83.2.2 - implement complete s-expression documents`; activation eda9cd3dd; .83.2.3 follows clean handoff.
 
 - 2026-09-22 .45.3: `SESSION-STARTUP-READING.45.3 - close Rust rule-code rejection repair`; activation 30c1ddeea; .83.2.2 follows clean handoff.
@@ -7809,6 +7791,8 @@ CLI66x2 and Phase0 1032/1032; 1163 seconds is Phase0 only, with 25 optional gate
 Each canonical task node owns its exact `Commit` subject and retained completion note. Query landed history with `git log --all --format="%h %s" --fixed-strings --grep="SESSION-STARTUP-READING."`; this replaces the proven duplicate 102-row table.
 
 ## Changelog
+
+- 2026-09-23 — .86.4.1 diagnoses two independent scanner failures and splits .86.4 before production work; .86.4.2 follows.
 
 - 2026-09-22 .83.2.2: Implement the separate versioned grammar, six-runtime contract recurrence and public examples; preserve historical Lispish and continue native file delivery.
 

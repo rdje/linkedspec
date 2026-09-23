@@ -2,17 +2,19 @@
 
 ## Current Activity
 
-Document integration and startup .46/.47/.49/.86.1/.86.2 repairs are locally committed. Rust division and non-slash newline calls are verified; captured Perl multiline regex and EOF defects remain under immediate .86.4/.86.5 before canonical parent .86.3. No new push or downstream application acceptance is claimed.
+PNT resumes from clean Rust .86.2. Perl .86.4.1 isolates action segmentation and physical-line validation failures; .86.4.2 repairs action splitting next, followed by .86.4.3/.4 validation and public recomposition. No Perl production repair or new push is claimed.
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.86.2 - preserve division newline and regex interpretations` — PASS: 254 core tests and 404 selected runtime tests. Seven division core groups cover 24 call/separator combinations in both parser modes, exact retained regex patterns, late-statement retries, Unicode write spans, nested controls/callable candidates, and 1500-statement valid/invalid chains. Runtime coverage includes 12 division/separator combinations, nine mixed/nested cases, exact Unicode writes and the ambiguous regex through source-AST/compiled serde and generated plans. All 15 mutation tests pass, including independently compiled emitted division execution. Native 56 passes: 53 exact integer values and 3 malformed rejections; both book examples pass. Binary SHA-256: bbf40b8165ce72764668b7a02e16c84ddabfcf4b1097d690f5b99956ab38e05d.
+- `SESSION-STARTUP-READING.86.4.1 - isolate Perl multiline regex scanner failures` — public Get/runtime errors and action lowering reproduce the recorded failures. Whole-source versus physical-line owner probes distinguish the two scanners and retain working division controls. The supplied policy donor identities are unchanged; local adoption owners remain open.
 
 ## Next Action
 
-- Stop at the director-requested clean checkpoint. On resume, activate .86.4 for Perl multiline regex, then bare slash EOF .86.5 and canonical parent .86.3 before .50.
+- Continue PNT with .86.4.2; then .86.4.3/.4, .86.5 and canonical .86.3 before .50.
 
 ## Recent Completions
+
+- `2026-09-23` — `.86.4.1` isolates Perl multiline regex failures and owns bounded splitter/validation repairs.
 
 - `2026-09-23` — `SESSION-STARTUP-READING.86.2` repairs division newlines and retains regex interpretations; core254/runtime404/native56 pass; Perl .86.4/.86.5 follow.
 
@@ -43,8 +45,6 @@ Document integration and startup .46/.47/.49/.86.1/.86.2 repairs are locally com
 - `2026-09-22` — `SESSION-STARTUP-READING.83.1` accepts ADR0124/37 cases; .45.1-.45.3 repair the freshly reproduced compiler drop before delivery.
 
 - `2026-09-22` — `SESSION-STARTUP-READING.83.2.1` fixes quoted LF in both readers; six-runtime recurrence and eight original report cases pass.
-
-- `2026-09-22` — `SESSION-STARTUP-READING.85` recovers SEMULITH/LS-001–003; four fresh native LF failures select .83.2.1.
 
 ## History
 
