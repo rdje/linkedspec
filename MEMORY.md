@@ -1,11 +1,11 @@
 # MEMORY
 
-- activation_commit: `a6ff64e569a040de62a404bea568dda11a8a844c` — clean mutation validator repair; outer source-fidelity leaf activation.
-- latest_completed_leaf: `SESSION-STARTUP-READING.47.2 - retain Rust action source through outer parsing`; full Rust component, exact source/carriers and final native25 pass.
-- active_work_unit: `SESSION-STARTUP-READING.47.3` — pending canonical parent closeout.
-- next_action: Activate .47.3 from clean HEAD; reconcile .47.1/.47.2 and run exact staged canonical acceptance before .49.
+- activation_commit: `01c40fd3f06820c2bacef0363e018c7dfbdbda08` — clean outer source-fidelity repair; parent closeout activation.
+- latest_completed_leaf: `SESSION-STARTUP-READING.47.3 - close Rust mutation argument and source repairs`; canonical receipt is required for landing.
+- active_work_unit: `SESSION-STARTUP-READING.49` — pending; Rust unflagged regex statement boundaries.
+- next_action: Activate .49 from clean HEAD; reverify recorded regex/newline controls through the public CLI, then repair suffix scanning with exact source/carrier proof.
   Named-argument direction PARSER-AUTHORING-APIS.4 is approved and parked; other authoring proposals and approved formats stay parked.
-- in_flight_uncommitted: none; .47.2 verification jobs are consumed and the completed repair is in this commit.
+- in_flight_uncommitted: none; parent closeout lands only after its exact staged canonical receipt is accepted.
 - blockers: Wrapper startup .7 remains open; warned-child group matched, but denied-call cause and original lost PUC stream remain unproved. Recovery/purge stay prohibited.
 - current_rust_warning_debt: Repeated carriers report 1,870 pgen plus 26 rgx-core output warnings; RUST-DEPENDENCY-WARNING-ZERO.1-.7 own public RGX reports and result verification without suppression; dependency internals are excluded.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
@@ -57,4 +57,4 @@
   Changes segment4972 preserves 136 lines /27060 bytes from clean 8259719f8; old archive rows/bytes remain exact.
 - dependency_boundary: September20: LinkedSpec integrates only with RGX via its published integration document/APIs/contracts. RGX owns PGEN; no separate PGEN procedure, internal inspection/analysis, patches or pin changes.
   Normal documented builds remain authorized; retain caches. Startup .80.1-.4 may observe public behavior or track upstream repairs, not investigate dependency internals.
-- latest_bootstrap_read: ADR0123 targets 2–5 minute startup plus thorough task-specific reading. Separate audit remains 89/143 and .1.90. Document integration, .46 and .47.1/.47.2 are verified; .47.3 canonical closeout is next. No downstream application acceptance claim.
+- latest_bootstrap_read: ADR0123 targets 2–5 minute startup plus thorough task-specific reading. Separate audit remains 89/143 and .1.90. Document integration, .46 and .47 are closed at their verified boundaries; .49 is next. No downstream application acceptance claim.

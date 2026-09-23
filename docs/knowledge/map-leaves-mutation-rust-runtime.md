@@ -154,5 +154,6 @@ See [[rust-outer-action-source-fidelity]] for the complete Rust component/native
 Fresh runtime verification passes all 179 library and 12 public mutation tests;
 six rebuilt-native controls and unchanged neutral 167+592 mutations pass.
 Core compatibility passes 201 library, 4 diagnostic and 5 rule-code groups.
-The owning leaves record exact evidence; `.47.3` owns canonical parent closeout.
+The owning leaves record exact evidence; `.47.3` closes the parent only with
+receipt-bound canonical acceptance.
 The separately recorded `.58`/`.59` receiver-guard defects remain open.

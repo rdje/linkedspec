@@ -11,6 +11,12 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
 
+## 2026-09-23 — SESSION-STARTUP-READING.47.3 - close Rust mutation argument and source repairs
+
+Validator repair a6ff64e56 and source repair 01c40fd3f are committed and verified. The latter passes the complete Rust component gate, core238, all runtime targets, storage and CLI66x2; final native25 uses SHA256 2025d1ce7556aaae4b5ef516344ed7054e7620bc51d7f454c778938279464be4. Whole-spec/programmatic, serialized, generated and independently compiled emitted carriers preserve the tested source and values. Neutral authority retains167+592 mutation proof. This documentation-only closeout requires successful canonical tools/run_ci_local.sh on the exact staged candidate and its receipt before landing; the commit body and promoted receipt record the result. Separate .49/.52-.54/.58-.59 defects remain open.
+
+Reconcile the task parent, Knowledge and live roadmap pointers. The Rust integration guide already describes exact internal source, compact-header values, closing-line statements and rebuilding old artifacts; the other backend guides retain their independently verified contracts. Resume .49 after a clean committed handoff.
+
 ## 2026-09-23 — SESSION-STARTUP-READING.47.2 - retain Rust action source through outer parsing
 
 Source was lost at several outer-parser boundaries before CodeBlock could preserve it: source.lines discarded CR, body/header suffix trim discarded trailing line text, block capture trimmed physical lines and joined LF, and unknown header-mode fallback inserted one space. Keep CR-bearing physical lines and raw fragments through collection, then apply the historical whole-interior trim once. RuleHeaderFields retains the original post-colon slice, avoiding reconstruction when its candidate token ends inside a quoted string. No brace/quote scanning algorithm changes.

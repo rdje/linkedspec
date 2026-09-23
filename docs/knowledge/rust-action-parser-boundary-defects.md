@@ -12,7 +12,7 @@ answers:
   - why does a Rust regex assignment followed by a newline return null
   - why does adding a regex suffix flag change Rust statement parsing
 date: 2026-09-23
-status: .45/.46 and .47.1/.47.2 repaired; canonical .47.3 closeout and .49 remain
+status: .45/.46/.47 repaired with bounded proof; .49 regex statement-boundary repair remains
 tags: [rust, parser, compiler, diagnostics, unicode, mutation, startup-reading]
 evidence: "September 7 native diagnostics established warning/drop, Unicode diagnostic, mutation-whitespace and regex-boundary defects under .45/.46/.47/.49. Startup .45.1 now propagates every reported rule-code parse error. Twelve native pre-repair invalid cases wrongly compile; four new core rejection groups fail before repair and all five groups pass after it, covering 15 malformed contexts and 11 retained valid blocks. The complete Rust component gate and rebuilt native/quoted-LF controls pass; this change does not repair the separately owned parser causes. Startup .46 separately fixes the UTF-8 excerpt boundary, with core RED/GREEN, public-route and native-process proof."
 reverify: "Run bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-core --lib --test expression_diagnostics --test rule_code_rejection and bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --lib --test source_emitter rule_code. Historical diagnostic commands below intentionally describe incorrect pre-repair behavior, not current acceptance. Reconcile separate .47/.49 parser repairs."
@@ -40,7 +40,7 @@ The .46 repair keeps the existing 40-byte budget and moves an interior endpoint 
 
 The core parser accepts `tree.map_leaves!() { value }`, `tree.map_leaves!( ) { value }`, and the tab-only equivalent because it uses `trim().is_empty()`. Compilation accepts only the exact `()` projection; the other two produce `receiver_mutation_serialized_state_invalid` with reason `mutation_call_invalid`. Repair must reconcile semantic emptiness while retaining authored source/spans and rejecting nonempty arguments.
 
-Startup `.47.1` aligns validation with already admitted whitespace-only parentheses, preserving supplied source/span projections. Startup `.47.2` preserves internal CRLF/indentation, compact-header literal whitespace and closing-line continuation statements, with complete Rust component and final native proof; canonical parent closeout `.47.3` remains. See [[rust-outer-action-source-fidelity]] and [[map-leaves-mutation-rust-runtime]] for current proof boundaries.
+Startup `.47.1` aligns validation with already admitted whitespace-only parentheses, preserving supplied source/span projections. Startup `.47.2` preserves internal CRLF/indentation, compact-header literal whitespace and closing-line continuation statements, with complete Rust component and final native proof; parent `.47.3` closes only through receipt-bound canonical acceptance. See [[rust-outer-action-source-fidelity]] and [[map-leaves-mutation-rust-runtime]] for current proof boundaries.
 
 ## Reproduce the bounded observations
 

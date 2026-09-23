@@ -9,7 +9,7 @@ answers:
   - why do Rust compact header strings lose spaces or tabs
   - why does a Rust block on a closing line skip its first continuation statement
 date: 2026-09-23
-status: repaired and verified under SESSION-STARTUP-READING.47.2; canonical parent closeout follows
+status: repaired and verified under SESSION-STARTUP-READING.47.2; .47.3 closes the parent with required canonical receipt
 tags: [rust, parser, source, spans, crlf, mutation]
 evidence: "Historical whole-spec CRLF failure, compact-header literal corruption and skipped continuation are independently reproduced. The repaired complete Rust component gate exits0: core238, every runtime target, storage oracle and CLI66x2 pass. Final native25 passes against SHA256 2025d1ce7556aaae4b5ef516344ed7054e7620bc51d7f454c778938279464be4. Exact logs live under .linkedspec-data/scratch/action-source47-2/."
 reverify: "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-core --test action_source_fidelity; bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test action_source_fidelity --test map_leaves_mutation_contract; bash tools/run_rust_local.sh"
@@ -92,4 +92,5 @@ integration-guide example returning 4, compact-header spaces/tabs and retained
 malformed/quoted-newline rejection. The neutral authority remains byte-identical
 with 167 base and 592 composition mutations rejected. Book rendering and public
 no-drift checks pass. This focused leaf does not claim canonical repository CI;
-`.47.3` owns that boundary. `.49`, `.52`–`.54` and `.58`/`.59` remain separate.
+.47.3 closes that boundary only with an exact staged canonical receipt; its commit
+and promoted receipt retain acceptance. `.49`, `.52`–`.54` and `.58`/`.59` remain separate.

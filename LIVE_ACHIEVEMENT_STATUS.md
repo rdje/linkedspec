@@ -2,17 +2,19 @@
 
 ## Current Activity
 
-Local complete-document integration is committed at 92f58b56c. Startup .46 and .47.1/.47.2 repair UTF-8 diagnostics, empty mutation arguments and outer action source fidelity. Canonical parent closeout .47.3 follows.
+Local complete-document integration is committed at 92f58b56c. Startup .46 and .47 repair UTF-8 diagnostics, mutation arguments and outer action source. Parent closeout requires exact staged canonical acceptance; the next repair is .49.
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.47.2 - retain Rust action source through outer parsing` — PASS: complete Rust component gate (238 core tests, runtime library179, all integration targets, storage oracle and CLI66/66 twice); six core source groups cover 88 block combinations plus header/remainder/scalar controls. Two runtime groups cover 15 exact literal values and the skipped-assignment regression. All12 mutation tests pass through whole-spec and programmatic source ASTs, serde, generated plans and independently compiled emitted consumers. Final native25 passes with binary SHA256 2025d1ce7556aaae4b5ef516344ed7054e7620bc51d7f454c778938279464be4. Neutral167+592 mutations retain byte-identical authority; book, formatting and public no-drift pass.
+- `SESSION-STARTUP-READING.47.3 - close Rust mutation argument and source repairs` — Validator repair a6ff64e56 and source repair 01c40fd3f are committed and verified. The latter passes the complete Rust component gate, core238, all runtime targets, storage and CLI66x2; final native25 uses SHA256 2025d1ce7556aaae4b5ef516344ed7054e7620bc51d7f454c778938279464be4. Whole-spec/programmatic, serialized, generated and independently compiled emitted carriers preserve the tested source and values. Neutral authority retains167+592 mutation proof. This documentation-only closeout requires successful canonical tools/run_ci_local.sh on the exact staged candidate and its receipt before landing; the commit body and promoted receipt record the result. Separate .49/.52-.54/.58-.59 defects remain open.
 
 ## Next Action
 
-- Activate .47.3 from clean HEAD; reconcile completed repairs, run exact staged canonical acceptance and close the parent before .49.
+- Activate .49 from clean HEAD; reproduce unflagged regex/newline parsing through the public CLI, then preserve suffix adjacency and subsequent statements.
 
 ## Recent Completions
+
+- `2026-09-23` — `SESSION-STARTUP-READING.47.3` closes the verified argument/source parent through receipt-bound canonical acceptance; .49 follows.
 
 - `2026-09-23` — `SESSION-STARTUP-READING.47.2` preserves block source, compact-header literal values and closing-line continuation statements; full Rust component and native25 pass.
 
@@ -43,8 +45,6 @@ Local complete-document integration is committed at 92f58b56c. Startup .46 and .
 - `2026-09-22` — `CONFORMANCE-SOURCE-READING.1.89` completes seven trace/typed-projection consumers with27 top-level/402 nested results. Eleven process helpers retain .2.16 ownership; controlled handler-scope gap gets .2.19. .1.90 continues.
 
 - `2026-09-22` — `CONFORMANCE-SOURCE-READING.1.88` completes six staged/lifecycle/trace consumers with 188 top-level/688 nested results. Four trace helpers extend .2.16 after 48 controlled outcomes; all eight timeout children are reaped. .1.89 continues.
-
-- `2026-09-22` — `CONFORMANCE-SOURCE-READING.1.87` reads staged enrichment through 1504; prefix through 1461 passes 135 top-level/227 nested results. Known repairs remain; .1.88 owns the suffix and lifecycle/trace consumers.
 
 ## History
 

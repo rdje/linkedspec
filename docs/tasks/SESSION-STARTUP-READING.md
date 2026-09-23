@@ -3532,7 +3532,7 @@ remain. Reading completion and runtime signoff remain distinct.
   - [x] **NO REGRESSION** — All selected 210 core and 5 runtime tests pass, including valid generated execution; all five native controls pass. Valid text, scalar spans and legacy byte-position text remain exact; no dependency changes.
   - [x] **LOCKSTEP** — Rust integration/book guidance, Knowledge, roadmap and live recovery pointers record the bounded fix and the historical timeout limitation. Book/formatting pass; focused governance governs landing.
 - ID: `SESSION-STARTUP-READING.47`
-  Status: `active`
+  Status: `done`
   Goal: Align empty mutation arguments and preserve authored source through the Rust parser/compiler pipeline.
   Children: `SESSION-STARTUP-READING.47.1`, `SESSION-STARTUP-READING.47.2`, `SESSION-STARTUP-READING.47.3`
   Decision: Split inside this active tree after exact CRLF source-retention failure; commit each bounded repair before starting the next. No dirty tree pivot or normalized expectation.
@@ -3570,15 +3570,15 @@ remain. Reading completion and runtime signoff remain distinct.
   - [x] **NO REGRESSION** — Complete Rust component proof, native controls and unchanged shared mutation authority pass; known scanner/guard repairs remain separate.
   - [x] **LOCKSTEP** — Public integration guidance, Knowledge, task ownership and live roadmap pointers describe the exact repaired boundary.
 - ID: `SESSION-STARTUP-READING.47.3`
-  Status: `pending`
+  Status: `done`
   Goal: Close the verified mutation-argument/source-fidelity repair and resume .49.
   Dependencies: Clean .47.1/.47.2 repairs.
-  Planned tier: `canonical`
-  Planned focused proof: Reconcile exact native/source/carrier proofs and immutable neutral authority; update all live/public pointers, render book and run memory/history/Knowledge/doctrines/diff checks.
-  Planned canonical boundary: Designated parent closeout requires exact staged-candidate tools/run_ci_local.sh receipt before commit.
+  Verification tier: `canonical`
+  Focused checks: Reconcile exact native/source/carrier proofs and immutable neutral authority; update all live/public pointers, render book and run memory/history/Knowledge/doctrines/diff checks.
+  Canonical trigger: Designated parent closeout requires exact staged-candidate tools/run_ci_local.sh receipt before commit. Retain preceding Rust component proof; optional backend matrices are not selected for this documentation-only closeout.
   Acceptance: Close only verified argument and source-fidelity scope; preserve .49 and .52-.54/.58-.59 ownership and record canonical receipt evidence.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Validator repair a6ff64e56 and source repair 01c40fd3f are committed and verified. The latter passes the complete Rust component gate, core238, all runtime targets, storage and CLI66x2; final native25 uses SHA256 2025d1ce7556aaae4b5ef516344ed7054e7620bc51d7f454c778938279464be4. Whole-spec/programmatic, serialized, generated and independently compiled emitted carriers preserve the tested source and values. Neutral authority retains167+592 mutation proof. This documentation-only closeout requires successful canonical tools/run_ci_local.sh on the exact staged candidate and its receipt before landing; the commit body and promoted receipt record the result. Separate .49/.52-.54/.58-.59 defects remain open.
+  Commit: `SESSION-STARTUP-READING.47.3 - close Rust mutation argument and source repairs`
 
 - ID: `SESSION-STARTUP-READING.49`
   Status: `pending`
@@ -4816,7 +4816,7 @@ audit range, not the default repair frontier.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.47.3` | `pending` | Canonical closeout after verified .47.1/.47.2; then resume .49. |
+| 1 | `SESSION-STARTUP-READING.49` | `pending` | Reproduce the unflagged regex newline boundary against the repaired compiler, then preserve adjacent suffix scanning. |
 
 ## Reading Ledger
 
