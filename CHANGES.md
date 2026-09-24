@@ -12,6 +12,12 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-09-24 — SESSION-STARTUP-READING.86.4.4.2.2 - verify public helper and book recomposition
+
+Close the measured Perl multiline-helper chain after validation, statement, quoted-subject, grouped-operand and fresh generated Trace repairs. Fifty-nine fixed public controls retain exact expected values/readiness/error stages: helper13, grouped22, numeric12 and original12. The malformed quoted regex retains rule_handler_compile/Unmatched ); both slash EOF forms remain .86.5-owned. The permanent original-source checkpoint makes those distinctions reproducible.
+
+Production/tests and all four exact book sources match verified9f81d3162, retaining its focused173/book66 proof and both mutation checks without repeating unchanged suites. Checkpoint syntax and book rendering pass. Public guidance explicitly limits this acceptance to ordinary rule actions; .87 helper gaps, .2.4 escapes, .34 comments and .54.1/.9 brace scanners remain owned. Select .86.5, then exact canonical parent .86.3.
+
 ## 2026-09-24 — SESSION-STARTUP-READING.86.4.4.2.1 - load tracing in fresh generated parsers
 
 The generated preamble now imports LinkedSpec::Trace explicitly. Fresh plain Execute previously failed at trace_generated_handler_branch; existing same-process tests had already loaded Trace. The new generated-source subtest extracts the four exact integration-book specifications and checks public SpecLoader values, source identity, descriptors, errors and independent child-process values/metadata. The format remains v2.

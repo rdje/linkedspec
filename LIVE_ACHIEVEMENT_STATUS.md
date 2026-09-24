@@ -2,17 +2,19 @@
 
 ## Current Activity
 
-Perl helper and grouped-operand repairs are verified. Fresh generated-process testing exposed and repaired the missing Trace dependency under .86.4.4.2.1. Exact book recurrence passes66 assertions; .86.4.4.2.2 now owns final public helper recomposition before .86.5 EOF and .86.3 canonical. Independent helper, escape, comment and upstream owners remain open.
+Measured Perl helper validation, splitting, quoted-subject, grouped-pattern and generated Trace repairs are verified; .86.4.4.2.2 closes their bounded public recomposition. Immediate .86.5 owns slash-call EOF validation before .86.3 canonical. Independent helper, escape, comment, brace and upstream owners remain open.
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.86.4.4.2.1 - load tracing in fresh generated parsers` — explicit emitted Trace import repairs all four cold-process failures; focused173/book66, two intended-failure mutations, syntax/contract and book rendering pass.
+- `SESSION-STARTUP-READING.86.4.4.2.2 - verify public helper and book recomposition` — all59 fixed public controls reconcile; code/tests/four exact book sources retain9f81d3162 focused173/book66 evidence. Checkpoint syntax and rendered guidance pass.
 
 ## Next Action
 
-- Close .86.4.4.2.2 public helper recomposition with preserved numeric/malformed controls, then .86.5 EOF and .86.3 canonical. Commit each verified slice; final push requires exact-HEAD canonical proof.
+- Repair .86.5 outer end-of-block slash validation while retaining the regex discriminator safeguard; then run exact canonical parent .86.3. Commit each verified slice; final push requires exact-HEAD canonical proof.
 
 ## Recent Completions
+
+- `2026-09-24` — `SESSION-STARTUP-READING.86.4.4.2.2` closes bounded helper recomposition with59 public controls and source-identical book66 proof.
 
 - `2026-09-24` — `SESSION-STARTUP-READING.86.4.4.2.1` repairs fresh generated Trace loading; focused173/book66 and mutation checks pass.
 
@@ -43,8 +45,6 @@ Perl helper and grouped-operand repairs are verified. Fresh generated-process te
 - `2026-09-23` — `.86.4.2.4` corrects the regex-type premise, withdraws the precedence question and owns measured helper gaps.
 
 - `2026-09-23` — `.86.4.2.1` proves the slash precedence conflict, archives rejected evidence and restores accepted source/tests.
-
-- `2026-09-23` — `.86.4.5` archives the unfinished candidate and restores a clean director-paused handoff.
 
 ## History
 

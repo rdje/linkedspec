@@ -4597,7 +4597,7 @@ remain. Reading completion and runtime signoff remain distinct.
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.86.4`
-  Status: `active`
+  Status: `done`
   Goal: Preserve multiline regex pattern operands in documented Perl action helpers through whole-spec validation.
   Dependencies: Land Rust .86.2 first; captured public diagnostics in .linkedspec-data/scratch/division-boundary86-2/perl-context.jsonl and reproducible sources in docs/knowledge/rust-symbol-call-newline-boundary.md; coordinate .54.1 without conflating regex-brace bootstrap loss.
   Children: `SESSION-STARTUP-READING.86.4.1`, `SESSION-STARTUP-READING.86.4.2`, `SESSION-STARTUP-READING.86.4.3`, `SESSION-STARTUP-READING.86.4.4`, `SESSION-STARTUP-READING.86.4.5`, `SESSION-STARTUP-READING.86.4.6`, `SESSION-STARTUP-READING.86.4.7`, `SESSION-STARTUP-READING.86.4.8`
@@ -4605,8 +4605,8 @@ remain. Reading completion and runtime signoff remain distinct.
   Planned focused proof: Public Get with runtime_ctx_ref, exact lowering and generated source; multiline regex and numeric-division lookalikes, LF/CRLF, following assignments, whole-spec validation and invalid-pattern controls; phase0 plus directly affected scanner tests.
   Planned canonical boundary: Parent .86.3 after .86.5; any contract decision precedes implementation.
   Acceptance: Retain protected helper-pattern newlines and working division-newline statements. Assignment-position observations are compatibility evidence, not a regex-variable requirement after .86.4.2.4. Fix documented helper operands at their actual owners; do not infer unknown backend parity. Synchronize Perl integration/book examples and durable facts.
-  Verification: Public /(x) LF y/, numeric-pattern plus text, numeric-pattern plus next assignment, and CRLF controls fail validation or generated handler compilation; isolated lowering prematurely emits num_div then leaves the regex tail as code. Invalid quoted-pattern control is separately rejected through documented runtime_handler:rule_handler_compile and is not a repair target. Root-cause the splitter/validation disagreement with public descriptors before implementing.
-  Commit: `pending`
+  Verification: Verified under .86.4.4.2.2: helper13/grouped22/numeric12/original12 retain all59 exact public outcomes and the syntax record; source bytes and error stages are preserved. Production/tests and four book sources match9f81d3162, retaining focused173/book66 and both mutation proofs. Checkpoint syntax and book render pass. Close only measured ordinary-helper work; .87/.2.4/.34/.54.1/.9 and immediate .86.5 retain their defects. Parent .86.3 remains canonical.
+  Commit: `SESSION-STARTUP-READING.86.4.4.2.2 - verify public helper and book recomposition`
 - ID: `SESSION-STARTUP-READING.86.4.1`
   Status: `done`
   Goal: Reproduce and separate Perl multiline regex segmentation and validation failures before production changes.
@@ -4689,7 +4689,7 @@ remain. Reading completion and runtime signoff remain distinct.
   - [x] **NO REGRESSION** — Complete Phase0 reaches1..1033, all PASS; focused173 and Perl syntax pass. No new failing names; interrupted runs do not count. Normal staged doctrines are required before commit.
   - [x] **LOCKSTEP** — Book renders; Knowledge, task/roadmap/live pointers and bounded histories record the verified validator and immediate .86.4.6 lowering repair. No whole helper-family or cross-backend closeout.
 - ID: `SESSION-STARTUP-READING.86.4.4`
-  Status: `active`
+  Status: `done`
   Goal: Recompose the Perl multiline regex repair through public live and standalone generated parsers and close .86.4.
   Children: `.86.4.4.1`, `.86.4.4.2`
   Dependencies: Verified .86.4.2/.86.4.3/.86.4.6/.86.4.7; .86.4.4.2 also requires .86.4.8.
@@ -4697,8 +4697,8 @@ remain. Reading completion and runtime signoff remain distinct.
   Planned focused proof: Full captured public matrix plus exact pattern/runtime results, public loader, descriptors, independent emitted execution, permanent direct execution of integration-book examples, directly affected Perl gates and documentation/doctrine checks.
   Planned canonical boundary: Parent .86.3.
   Acceptance: Close only the measured Perl multiline scope after all required child repairs pass; preserve the invalid regex negative control and open EOF/brace owners with reproducible evidence.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Verified under .86.4.4.2.2: helper13/grouped22/numeric12/original12 retain all59 exact public outcomes and the syntax record; source bytes and error stages are preserved. Production/tests and four book sources match9f81d3162, retaining focused173/book66 and both mutation proofs. Checkpoint syntax and book render pass. Close only measured ordinary-helper work; .87/.2.4/.34/.54.1/.9 and immediate .86.5 retain their defects. Parent .86.3 remains canonical.
+  Commit: `SESSION-STARTUP-READING.86.4.4.2.2 - verify public helper and book recomposition`
 
 - ID: `SESSION-STARTUP-READING.86.4.4.1`
   Status: `done`
@@ -4716,7 +4716,7 @@ remain. Reading completion and runtime signoff remain distinct.
   - [x] **NO REGRESSION** — Production/tests match verified9e2c26b1c; helper/division public controls and exact book-source identity are retained. No fresh full Phase0 or canonical claim.
   - [x] **LOCKSTEP** — Rendered book states the measured limitation and string alternative; all current pointers select .86.4.8.
 - ID: `SESSION-STARTUP-READING.86.4.4.2`
-  Status: `active`
+  Status: `done`
   Goal: Complete public multiline helper recomposition and close .86.4.4/.86.4 after all required repairs.
   Dependencies: .86.4.4.1 and verified .86.4.8, plus .86.4.3/.86.4.6/.86.4.7.
   Children: `.86.4.4.2.1`, `.86.4.4.2.2`
@@ -4724,8 +4724,8 @@ remain. Reading completion and runtime signoff remain distinct.
   Planned focused proof: Original helper/division/invalid-regex audit plus grouped punctuation; public SpecLoader and independent generated execution; permanent direct execution of all four book examples; relevant Perl contracts and all documentation/doctrines.
   Planned canonical boundary: Parent .86.3 after .86.5.
   Acceptance: Preserve exact values, source/descriptor/error channels and numeric compatibility; close only the measured helper scope, retaining .87/.2.4/EOF owners and no regex runtime type.
-  Verification: Fresh processes expose a missing Trace import: all four book examples fail generated_execution_failed although loader and same-process routes pass. Required .86.4.4.2.1 repairs emitted bootstrap before final .86.4.4.2.2.
-  Commit: `pending`
+  Verification: Verified under .86.4.4.2.2: helper13/grouped22/numeric12/original12 retain all59 exact public outcomes and the syntax record; source bytes and error stages are preserved. Production/tests and four book sources match9f81d3162, retaining focused173/book66 and both mutation proofs. Checkpoint syntax and book render pass. Close only measured ordinary-helper work; .87/.2.4/.34/.54.1/.9 and immediate .86.5 retain their defects. Parent .86.3 remains canonical.
+  Commit: `SESSION-STARTUP-READING.86.4.4.2.2 - verify public helper and book recomposition`
 
 
 - ID: `SESSION-STARTUP-READING.86.4.4.2.1`
@@ -4747,15 +4747,22 @@ remain. Reading completion and runtime signoff remain distinct.
   - [x] **LOCKSTEP** — Book66 recurrence and rendered guidance share authored examples; current records select .86.4.4.2.2.
 
 - ID: `SESSION-STARTUP-READING.86.4.4.2.2`
-  Status: `pending`
+  Status: `done`
   Goal: Finish public helper recomposition after verified cold-process bootstrap and close .86.4.4.2/.86.4.4/.86.4.
   Dependencies: Verified .86.4.4.2.1 plus the .86.4 helper repairs.
-  Planned tier: focused.
-  Planned focused proof: Original helper/grouped/numeric/malformed controls, public loader/descriptors and exact book/fresh-process recurrence; documentation, Knowledge, histories and doctrines.
-  Planned canonical boundary: Parent .86.3 after .86.5; no broad helper-family or cross-backend claim.
+  Verification tier: `focused`
+  Focused checks: Original helper/grouped/numeric/malformed controls, public loader/descriptors and exact book/fresh-process recurrence; documentation, Knowledge, histories and doctrines.
+  Canonical trigger: Parent .86.3 after .86.5; no broad helper-family or cross-backend claim.
   Acceptance: Reconcile the measured helper scope and preserved rejection with explicit .87/.2.4/.34/EOF/brace owners, then select .86.5.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Verified under .86.4.4.2.2: helper13/grouped22/numeric12/original12 retain all59 exact public outcomes and the syntax record; source bytes and error stages are preserved. Production/tests and four book sources match9f81d3162, retaining focused173/book66 and both mutation proofs. Checkpoint syntax and book render pass. Close only measured ordinary-helper work; .87/.2.4/.34/.54.1/.9 and immediate .86.5 retain their defects. Parent .86.3 remains canonical.
+  Commit: `SESSION-STARTUP-READING.86.4.4.2.2 - verify public helper and book recomposition`
+
+  - [x] **ROOT CAUSE** — Prior validation/splitting/grouped/Trace owners are verified by their exact public consumers.
+  - [x] **ISSUE** — Original malformed and EOF cases remain distinguished from supported helper patterns.
+  - [x] **FIX** — All required helper-chain repairs are committed; this leaf closes their bounded recomposition.
+  - [x] **ADDRESSED** — All59 public controls and four unchanged executable book sources reconcile.
+  - [x] **NO REGRESSION** — Numeric values, source bytes and malformed diagnostics remain exact; verified173/book66 evidence is source-identical.
+  - [x] **LOCKSTEP** — Book, Knowledge, roadmaps and live pointers agree on ordinary-helper scope and immediate EOF repair.
 
 - ID: `SESSION-STARTUP-READING.86.4.6`
   Status: `done`
@@ -4874,10 +4881,10 @@ audit range, not the default repair frontier.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.86.4.4.2.2` | `pending` | Close measured public helper recomposition after verified Trace bootstrap and exact book recurrence; preserve all continuing defect owners. |
+| 1 | `SESSION-STARTUP-READING.86.5` | `pending` | Repair end-of-block slash-call validation using the preserved EOF/named/semicolon controls; retain the existing regex closing-brace safeguard. |
 
 The audit withdraws the unsupported precedence question. Helper validation `.86.4.3` and
-statement splitting `.86.4.6` plus quoted-subject validation `.86.4.7` are verified. Public recomposition `.86.4.4.1` exposed punctuation repair `.86.4.8`; `.86.4.8.1` rejects incompatible lookahead and `.86.4.8.2` now verifies the compatible implementation; `.86.4.4.2` closes the measured scope before EOF `.86.5` and canonical `.86.3`.
+statement splitting `.86.4.6` plus quoted-subject validation `.86.4.7` are verified. Public recomposition verifies grouped repair `.86.4.8.2` and fresh generated Trace bootstrap `.86.4.4.2.1`; `.86.4.4.2.2` closes the measured helper scope. EOF `.86.5` is next before canonical `.86.3`.
 Independent helper gaps are owned by `.87.1/.87.2`; no regex-type feature is admitted.
 
 ## Reading Ledger
@@ -7532,6 +7539,8 @@ All 53 owned scopes are read: HLink delimiter/raw text, Liberty scalar/complex a
 
 ## Verification Log
 
+- 2026-09-24 .86.4.4.2.2: All59 fixed public outcomes/readiness/error stages and the complete syntax record reconcile. Exact code/test/four-source identities reuse9f81d3162 focused173/book66 and mutation proof; checkpoint syntax/rendering and normal memory/history/Knowledge/doctrine checks govern landing. Logs: .linkedspec-data/scratch/helper-pattern86-4-4-2-2/. Engineering notes roll exact114 lines/28181 bytes to segment4969; all prior segment rows/bytes remain unchanged. Trim only the resulting mutable-root trailing blank separator.
+
 - 2026-09-24 .86.4.4.2.1: Fresh generated baseline fails four book cases; explicit Trace import passes book66 and focused173 across9 files in163 seconds. Two isolated book mutations reject only intended assertions; syntax/contract, book/memory/Knowledge/history and normal doctrines govern landing. Logs: .linkedspec-data/scratch/helper-pattern86-4-4-2/.
 
 - 2026-09-24 .86.4.8.2: Focused187, exact book21, baseline RED only group10 and final Phase0 1033/1033 (Files=1, Tests=1033, 1423 wallclock secs ( 0.44 usr  0.10 sys + 1086.49 cusr 125.81 csys = 1212.84 CPU)) pass; frozen diff unchanged. Book/memory/Knowledge/history/doctrines govern landing; scratch .linkedspec-data/scratch/helper-pattern86-4-8-2/.
@@ -7728,6 +7737,8 @@ CLI66x2 and Phase0 1032/1032; 1163 seconds is Phase0 only, with 25 optional gate
 
 ## Commit Log
 
+- 2026-09-24 .86.4.4.2.2: `SESSION-STARTUP-READING.86.4.4.2.2 - verify public helper and book recomposition`; activation9f81d3162; .86.5 follows.
+
 - 2026-09-24 .86.4.4.2.1: `SESSION-STARTUP-READING.86.4.4.2.1 - load tracing in fresh generated parsers`; activation af168d2fe; .86.4.4.2.2 follows.
 
 - 2026-09-24 .86.4.8.2: `SESSION-STARTUP-READING.86.4.8.2 - preserve grouped regex helper operands`; activation9f0c6ca9e; .86.4.4.2 follows.
@@ -7761,6 +7772,8 @@ CLI66x2 and Phase0 1032/1032; 1163 seconds is Phase0 only, with 25 optional gate
 Each canonical task node owns its exact `Commit` subject and retained completion note. Query landed history with `git log --all --format="%h %s" --fixed-strings --grep="SESSION-STARTUP-READING."`; this replaces the proven duplicate 102-row table.
 
 ## Changelog
+
+- 2026-09-24 .86.4.4.2.2: Close only the measured Perl helper chain, preserve original public negative/EOF sources and select immediate EOF repair. Code and exact book examples remain unchanged from verified9f81d3162.
 
 - 2026-09-24 .86.4.4.2.1: Repair emitted Trace bootstrap exposed by fresh-process book testing; retain exact Markdown source recurrence and immediate final public recomposition owner.
 

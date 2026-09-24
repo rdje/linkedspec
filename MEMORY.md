@@ -1,10 +1,10 @@
 # MEMORY
 
-- activation_commit: `af168d2fe134071de80976cfd04c727b4144e9f3` — clean base for public loader/generated/book recomposition.
-- latest_completed_leaf: `SESSION-STARTUP-READING.86.4.4.2.1 - load tracing in fresh generated parsers`.
-- active_work_unit: `SESSION-STARTUP-READING.86.4.4.2.2` — final public helper recomposition (pending).
-- next_action: Close .86.4.4.2.2 with the original helper/grouped/numeric/malformed controls and exact book recurrence. Preserve .87/.2.4/.34/EOF/brace owners, then select .86.5 and .86.3 canonical.
-- in_flight_uncommitted: None; explicit generated Trace bootstrap and exact book-source recurrence pass focused173/book66, both intended-failure mutations, syntax/contract and rendering. All verification jobs are consumed.
+- activation_commit: `9f81d31629203396cd609ca7051eaad57b942fbf` — clean base for final public helper recomposition.
+- latest_completed_leaf: `SESSION-STARTUP-READING.86.4.4.2.2 - verify public helper and book recomposition`.
+- active_work_unit: `SESSION-STARTUP-READING.86.5` — Perl slash-call end-of-block validation (pending).
+- next_action: Repair .86.5 using docs/checkpoints/SESSION-STARTUP-READING.86.4.4.2.2.pl and the scanner Knowledge records. Preserve the shared discriminator closing-brace exclusion; fix outer final-statement context. Then .86.3 exact canonical closeout.
+- in_flight_uncommitted: None; bounded helper recomposition verifies59 public controls, unchanged code/tests/four book sources at9f81d3162, checkpoint syntax and rendered guidance. All jobs are consumed.
 - blockers: LS-004 remains upstream-owned; director relays docs/upstream/rgx/bootstrap-progress-status.md. No RGX code defect established. Named-argument and format proposals remain parked.
   Wrapper startup .7 remains open; recovery/purge stay prohibited. No interrupted Phase0 run counts as proof.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
@@ -50,10 +50,10 @@
 - standing_contracts: all durable paths are repo-relative; all project data stays on the repository filesystem;
   README remains bounded; ordinary leaves use focused proof and designated infrastructure/public/push boundaries
   use exact staged canonical CI; task-tree/index, Knowledge Map, mdBook, and bounded live/history move in lockstep.
-- current_engineering_notes_capacity: ADR0122 admits 43 collection files /42 manifest lines /25410 manifest bytes; current38/37/22349 stay bounded.
-  Notes segment4970 preserves 162 lines /28648 bytes from clean 04534674; old archive rows/bytes remain exact.
+- current_engineering_notes_capacity: ADR0122 admits 43 collection files /42 manifest lines /25410 manifest bytes; current39/38/22961 stay bounded.
+  Notes segment4969 preserves 114 lines /28181 bytes from clean9f81d3162; old archive rows/bytes remain exact.
 - current_change_history_capacity: ADR0122 admits 47 collection files /46 manifest lines /26255 manifest bytes; current42/41/23375 stay bounded.
   Changes segment4971 preserves 168 lines /27426 bytes from clean 7c318569; old archive rows/bytes remain exact.
 - dependency_boundary: September20: LinkedSpec integrates only with RGX via its published integration document/APIs/contracts. RGX owns PGEN; no separate PGEN procedure, internal inspection/analysis, patches or pin changes.
   Normal documented builds remain authorized; retain caches. Startup .80.1-.4 may observe public behavior or track upstream repairs, not investigate dependency internals.
-- latest_bootstrap_read: ADR0123 targets 2–5 minute startup plus thorough task-specific reading. Separate audit remains 89/143 and .1.90. Document integration and .46/.47/.49/.86.1/.86.2 are verified; Perl .86.4.2.4 corrects the regex-type premise; .86.4.3 owns supported helper validation (verified); .86.4.6 verifies helper splitting; .86.4.7 verifies quoted subjects; .86.4.4.1 owns grouped-operand repair .86.4.8; .86.4.8.1 rejects incompatible lookahead and .86.4.8.2 verifies grouped repair before .86.4.4.2; .87 owns two helper gaps. No downstream application acceptance claim.
+- latest_bootstrap_read: ADR0123 targets 2–5 minute startup plus thorough task-specific reading. Separate audit remains 89/143 and .1.90. Document integration and .46/.47/.49/.86.1/.86.2 are verified; Perl .86.4.2.4 corrects the regex-type premise; .86.4.3 owns supported helper validation (verified); .86.4.6 verifies helper splitting; .86.4.7 verifies quoted subjects; .86.4.4.1 owns grouped-operand repair .86.4.8; .86.4.8.1 rejects incompatible lookahead and .86.4.8.2 verifies grouped repair; .86.4.4.2.1 fixes generated Trace and .86.4.4.2.2 closes bounded public recomposition; .87 owns two helper gaps. No downstream application acceptance claim.

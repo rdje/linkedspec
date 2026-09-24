@@ -14,7 +14,7 @@ answers:
   - why does a quoted regex payload need the return scanner structural view
   - can q m or qr variables contain grouped regex helper calls in an index
 date: 2026-09-24
-status: .86.4.8.2 repair verified; public recomposition .86.4.4.2 remains
+status: .86.4.8.2 repair and .86.4.4.2.2 bounded public recomposition verified
 tags: [perl, regex, scanner, validation, actionir, public-api]
 evidence: ".86.4.8.2 passes focused187, exact four-example book21 and complete Phase0 1033/1033. Exact accepted-source replay fails only new group10; nine original numeric/error checkpoint records remain byte-identical. The original22 public cases now succeed; prior intake and rejected-lookahead observations below retain their dated baseline."
 reverify: "bash tools/project_data_run.sh env PERL5LIB= perl -Iperl docs/checkpoints/SESSION-STARTUP-READING.86.4.4.1.pl; expect22 successful public cases; also run docs/checkpoints/SESSION-STARTUP-READING.86.4.8.1.pl through the same wrapper and inspect its12 public/AST/lowered records."
@@ -54,7 +54,7 @@ the12-case checkpoint retain their values and failure stages. The expanded
 consumer has11 groups: exact accepted-source replay fails only group10; the
 repair passes. Seven dependent files add176 passing tests (187 total across
 8 files). All four complete mdBook examples pass21 live/generated assertions.
-The first Phase0 run was stopped for the final indexed-variable correction and does not count. Fresh full Phase0 passes1033/1033 (Files=1, Tests=1033, 1423 wallclock secs ( 0.44 usr  0.10 sys + 1086.49 cusr 125.81 csys = 1212.84 CPU)), with the frozen source/test diff unchanged. Public loader/generated recomposition remains `.86.4.4.2`.
+The first Phase0 run was stopped for the final indexed-variable correction and does not count. Fresh full Phase0 passes1033/1033 (Files=1, Tests=1033, 1423 wallclock secs ( 0.44 usr  0.10 sys + 1086.49 cusr 125.81 csys = 1212.84 CPU)), with the frozen source/test diff unchanged. Public loader/generated recomposition is verified under `.86.4.4.2.2`; see [[perl-multiline-helper-pattern-validation]].
 
 The original22-case checkpoint's `helper_arguments` field intentionally invokes
 context-free CSV splitting. Actual method parsing now supplies the helper role;

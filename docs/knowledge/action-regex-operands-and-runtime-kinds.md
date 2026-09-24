@@ -22,7 +22,7 @@ Current outcome: [[perl-multiline-helper-pattern-validation]] records the
 .86.4.3 validator and .86.4.6 statement-splitting repairs with bounded public
 proof. The observations below retain the audit baseline; .86.4.7 repairs the
 separate physical multiline quoted-subject validator defect.
-Grouped-pattern punctuation repair `.86.4.8.2` is verified; public recomposition remains `.86.4.4.2`;
+Grouped-pattern punctuation repair `.86.4.8.2` and bounded public recomposition `.86.4.4.2.2` are verified;
 see [[perl-grouped-regex-operand-boundaries]]. The runtime-kind contract remains unchanged.
 
 `capability_conformance/uniform_binding_contract.json` defines one binding holding

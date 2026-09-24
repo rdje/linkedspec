@@ -335,6 +335,12 @@ public file API, and executes each generated parser in a fresh Perl process.
 It checks the documented values, error channel, rule descriptors and generated
 source identities alongside the existing generated-source contract tests.
 
+These examples cover ordinary rule actions. Perl's separate callable `matches`
+and function-position `filter_match` limitations remain; use the
+[value-helper reference](../dsl/value-container-flow-helper-reference.md#regex-patterns-and-variable-values)
+for their supported forms and restrictions. The arithmetic and escape limitations
+above also remain outside this verified example set.
+
 ## Handle runtime outcomes explicitly
 
 The parser has two failure channels. Catch exceptions with `eval` and immediately

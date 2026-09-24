@@ -12,7 +12,7 @@ answers:
   - can Perl action strings contain physical newlines
   - how does validation distinguish quoted rule labels from real rules
 date: 2026-09-24
-status: measured helper, quoted-subject and grouped punctuation repairs verified; public recomposition remains
+status: measured helper chain and public recomposition verified; EOF and independent defects remain
 tags: [perl, validation, regex, source, diagnostics]
 evidence: "SESSION-STARTUP-READING.86.4.3 passes six regression groups, focused173 and complete Phase0 1033/1033. .86.4.6 expands the consumer to seven groups: isolated committed d2af200325 fails groups5/7; candidate focused action suite passes52 top-level tests across four files. Both retained division controls independently/publicly return7; complete Phase0 passes1033/1033 in1545 seconds with the seven-group consumer. Both complete mdBook examples pass11 directly extracted live/generated assertions and rendering succeeds. .86.4.7 passes the expanded nine-group consumer, focused198, exact book16 and Phase0 1033/1033 in1276 seconds. No cross-backend or whole helper-family closeout follows."
 reverify: "bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/multiline_helper_pattern_validation.t t/phase0_validation_fuzz.t t/inter_match_gap_capture_perl_contract.t t/duplicate_regex_slot_identity_perl_contract.t t/sparse_and_action_slots_perl_regression.t t/actionir_ast_parser.t t/uniform_binding_contract.t t/callable_codeblock_literal_contract.t"
@@ -104,5 +104,23 @@ update or new policy adoption was inferred. `.5/.29` retain adoption ownership.
 Public recomposition `.86.4.4.1` subsequently finds a shared discriminator gap
 for grouped operands followed by dot/comma. [[perl-grouped-regex-operand-boundaries]]
 records four public failures and eighteen successful nearby/string/binding
-controls at its dated baseline. `.86.4.8.2` now repairs those grouped operands with focused187, exact book21 and Phase0 1033/1033; `.86.4.4.2` retains public recomposition;
+controls at its dated baseline. `.86.4.8.2` repairs those grouped operands with focused187, exact book21 and Phase0 1033/1033; `.86.4.4.2.2` verifies final public recomposition;
 the verified multiline examples above do not imply whole helper-family acceptance.
+
+
+## Public recomposition (.86.4.4.2.2)
+
+All59 fixed public controls agree with their expected values and failures:
+helper13, grouped22, numeric12 and the original12. The complete syntax-node
+record is unchanged. The new permanent original-source checkpoint is
+`docs/checkpoints/SESSION-STARTUP-READING.86.4.4.2.2.pl`. The malformed quoted
+regex still reports `rule_handler_compile` with `Unmatched )`; bare/spaced slash
+EOF still fail validation, while named and semicolon controls return7. `.86.5`
+is the immediate repair; the discriminator's closing-brace safeguard stays intact.
+
+Fresh generated bootstrap is verified by [[perl-generated-source-cold-trace-dependency]].
+The exact four Markdown specifications and production/tests match9f81d3162,
+retaining its focused173/book66 and both documentation mutation proofs.
+The book renders with explicit ordinary-rule scope. Callable/direct-filter `.87`,
+escape `.2.4`, comment `.34` and brace `.54.1`/`.9` owners remain open. This closes
+`.86.4`, not the whole helper family or canonical parent `.86.3`.
