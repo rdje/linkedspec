@@ -6,6 +6,7 @@ use FindBin qw($Bin);
 use lib "$Bin/../perl";
 use File::Spec ();
 use JSON::PP ();
+use Scalar::Util ();
 use Test::More;
 
 use LinkedSpec ();
@@ -456,6 +457,26 @@ SPEC
   ok(LinkedSpec::BindingRuntime::is_nested_write_error($error), 'function failure retains the typed diagnostic');
   is($error->{binding}, 'seed', 'function failure retains the parameter binding identity');
   is($error->{actual_kind}, 'null', 'an undef argument is a present null parameter');
+ }
+};
+
+subtest 'all frozen read exclusions preserve binding value, presence and identity' => sub {
+ is(scalar(@{$contract->{read_exclusion_cases}}), 3, 'executes all three neutral read exclusions');
+ for my $case (@{$contract->{read_exclusion_cases}}) {
+  my $initial = $case->{initial_binding};
+  my $document = $initial->{present} ? clone_value($initial->{value}) : undef;
+  my $identity = ref($document) ? Scalar::Util::refaddr($document) : undef;
+  my %__ls_binding_presence = $initial->{present} ? (document => 1) : ();
+  my $before_presence = {%__ls_binding_presence};
+  my $observed;
+  my $access = 'document'.join('', map { '['.$json->encode($_->{value}).']' } @{$case->{segments}});
+  my $lowered = LinkedSpec::call_spec_handler_subst('Top', 'observed = '.$access);
+  my $result = eval $lowered;
+  is("$@", '', "$case->{id} has no host dereference exception");
+  is_deeply($result, $case->{expected_result}, "$case->{id} returns the frozen result");
+  is_deeply(\%__ls_binding_presence, $before_presence, "$case->{id} leaves presence unchanged");
+  is_deeply($document, $case->{expected_binding}{value}, "$case->{id} leaves the complete binding unchanged");
+  is(ref($document) ? Scalar::Util::refaddr($document) : undef, $identity, "$case->{id} keeps root identity");
  }
 };
 

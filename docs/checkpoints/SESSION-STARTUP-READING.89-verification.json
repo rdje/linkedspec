@@ -1,0 +1,266 @@
+{
+  "format": 1,
+  "owner": "SESSION-STARTUP-READING.89",
+  "activation_commit": "5e72c32b0f185783a8b6b597561e1470ce03c8f7",
+  "verification_tier": "focused",
+  "status": "focused acceptance PASS: complete Phase0, native/fresh/public/neutral/storage/book proof and all nine staged doctrines",
+  "scope": "Existing Perl read contract repair; no neutral authority, AST, serialized/generated-source format, gate or storage infrastructure change. Wrong-kind reads return undef instead of a raw host exception; receiver lifetime is retained explicitly. No portable side-effectful selector-order claim.",
+  "checks": [
+    {
+      "log": ".linkedspec-data/scratch/read-purity89/red-final.log",
+      "exit": 1,
+      "result": "Pre-production RED; new direct consumer 15/54 groups fail, added neutral group fails; existing writes pass.",
+      "bytes": 67898,
+      "sha256": "982a979b4c7d13df021fbb2e3d4a80cbe442c0aa23546e3fa45c495a5700a319",
+      "command": "env PERL5LIB= bash tools/project_data_run.sh prove -v -Iperl t/direct_read_purity.t t/write_vivification_perl_contract.t"
+    },
+    {
+      "log": ".linkedspec-data/scratch/read-purity89/green-initial.log",
+      "exit": 1,
+      "result": "ValueExpr-only experiment does not repair public AST calls; rejected incomplete repair.",
+      "bytes": 67898,
+      "sha256": "124e3aeffca7ce04d1f18a669efefe14a2d444b580319b27b436e5cf931eb014",
+      "command": "env PERL5LIB= bash tools/project_data_run.sh prove -v -Iperl t/direct_read_purity.t t/write_vivification_perl_contract.t"
+    },
+    {
+      "log": ".linkedspec-data/scratch/read-purity89/green-shared.log",
+      "exit": 1,
+      "result": "Read cases repaired; independent function constructor .90 still fails and is separately owned.",
+      "bytes": 47939,
+      "sha256": "838786e39dab4382325a007743b5465fe61ecb5b52c4e9b6d21db1533b80cbc9",
+      "command": "env PERL5LIB= bash tools/project_data_run.sh prove -v -Iperl t/direct_read_purity.t t/write_vivification_perl_contract.t"
+    },
+    {
+      "log": ".linkedspec-data/scratch/read-purity89/green-isolated.log",
+      "exit": 0,
+      "result": "Original standalone read consumer and neutral consumer pass66 groups after isolating function return with its working array literal.",
+      "bytes": 45925,
+      "sha256": "cac3c2b9b0f36bd88b0830f358eea6a28f8424c0427f293d66d018db2bc3d0b4",
+      "command": "env PERL5LIB= bash tools/project_data_run.sh prove -v -Iperl t/direct_read_purity.t t/write_vivification_perl_contract.t"
+    },
+    {
+      "log": ".linkedspec-data/scratch/read-purity89/dependents.log",
+      "exit": 1,
+      "result": "Seven files89 groups: only2 AST and1 compact trace stale representation assertions fail; other checks pass.",
+      "bytes": 106053,
+      "sha256": "9f177515be8bf6c2ddfef4b9647c1629cf5e3d1a539cf3b0749c443c94dfc96d",
+      "command": "env PERL5LIB= bash tools/project_data_run.sh prove -v -Iperl t/generated_source_contract.t t/write_vivification_perl_contract.t t/actionir_ast_parser.t t/trace_actionir_compact_lowerers.t t/trace_actionir_method_lowering.t t/uniform_binding_contract.t t/indexed_value_reads_book.t"
+    },
+    {
+      "log": ".linkedspec-data/scratch/read-purity89/representations.log",
+      "exit": 0,
+      "result": "Corrected exact/ordered source representations: 2files27 groups PASS.",
+      "bytes": 24755,
+      "sha256": "a175a582a2adf61285a231bfb07b6144ed516cef985290061f6b74b7ab407ba2",
+      "command": "env PERL5LIB= bash tools/project_data_run.sh prove -v -Iperl t/actionir_ast_parser.t t/trace_actionir_compact_lowerers.t"
+    },
+    {
+      "log": ".linkedspec-data/scratch/read-purity89/final-runtime.log",
+      "exit": 0,
+      "result": "Integrated generated/native read proof and neutral writes/reads:2files20 top-level groups PASS; generated read group55 children includes fresh child142 assertions.",
+      "bytes": 66011,
+      "sha256": "4cfbbcc19b41b8f4976748414f30ab4467be2ca6627587b11d06b3d1d7c97ee5",
+      "command": "env PERL5LIB= bash tools/project_data_run.sh prove -v -Iperl t/generated_source_contract.t t/write_vivification_perl_contract.t"
+    },
+    {
+      "log": ".linkedspec-data/scratch/read-purity89/storage.log",
+      "exit": 0,
+      "result": "Unchanged 24-owner allocator inventory, trace outputs and CLI workspace PASS.",
+      "bytes": 363,
+      "sha256": "44186163f492af3a97698123b58ea2daec30182824adb4722ca22b6143d893bc",
+      "command": "env PERL5LIB= bash tools/test_perl_project_data_storage.sh"
+    },
+    {
+      "log": ".linkedspec-data/scratch/read-purity89/mutation-public.log",
+      "exit": 0,
+      "result": "70 public files,14 governed documents,11 example classes,10 stale claims,50 mutations PASS.",
+      "bytes": 138,
+      "sha256": "b241f94e497a31a9b9b305dfb36e3af6d2f1810a5cc21f4c03a8776585f82124",
+      "command": "env PERL5LIB= bash tools/run_python_project_data.sh tools/check_mutation_public_surface.py"
+    },
+    {
+      "log": ".linkedspec-data/scratch/read-purity89/neutral.log",
+      "exit": 0,
+      "result": "Unchanged frozen write-vivification authority and105 invalid mutations PASS.",
+      "bytes": 251,
+      "sha256": "16d2aa43e47e05faa40c4ece1d82cf55dc2df1e554a5bb98ee40c999c1a4b447",
+      "command": "env PERL5LIB= bash tools/run_python_project_data.sh tools/check_write_vivification_contract.py"
+    },
+    {
+      "log": ".linkedspec-data/scratch/read-purity89/book.log",
+      "exit": 0,
+      "result": "Managed mdBook render PASS; exact included source and expected JSON verified separately.",
+      "bytes": 274,
+      "sha256": "9c60702436b56458a479655736eb884c6cf37ea3be2e4b6b8f5bdbb8b49e8e3b",
+      "command": "env PERL5LIB= bash tools/run_mdbook_local.sh"
+    },
+    {
+      "log": ".linkedspec-data/scratch/read-purity89/phase0.log",
+      "exit": 1,
+      "result": "Stopped after129 completed groups, zero observed failures; no complete regression claim.",
+      "bytes": 113599,
+      "sha256": "3f919415d33a744132e7188fddd4c252ca1cfba3aaa16fb1e4850209046e5dec",
+      "command": "env PERL5LIB= bash tools/project_data_run.sh prove -v -Iperl t/phase0_regression.t"
+    },
+    {
+      "log": ".linkedspec-data/scratch/read-purity89/phase0-final.log",
+      "exit": 1,
+      "result": "Stopped replacement before acceptance after inventory found five more stale operands; no complete proof.",
+      "bytes": 1128,
+      "sha256": "62d3333c4970049a2cfca49a6a7970d8b0914df06092eae68658a0094ea0996f",
+      "command": "env PERL5LIB= bash tools/project_data_run.sh prove -v -Iperl t/phase0_regression.t"
+    },
+    {
+      "log": ".linkedspec-data/scratch/read-purity89/phase0-selected.log",
+      "exit": 1,
+      "result": "Ad-hoc23-group subset omitted prior bootstrap; only first group failed because EmitContext was not loaded. Harness-precondition failure, not a product failure.",
+      "bytes": 19127,
+      "sha256": "fc9a1e173167e92d17fc8b57fd01e03105aad5074792b76b723572bc79e03ddf",
+      "command": "env PERL5LIB= bash tools/project_data_run.sh perl -Iperl -I.linkedspec-data/scratch/read-purity89 -MReadPurityPhase0Selection t/phase0_regression.t"
+    },
+    {
+      "log": ".linkedspec-data/scratch/read-purity89/phase0-selected-ready.log",
+      "exit": 0,
+      "result": "Same23 existing groups plus discovery assertion PASS with explicit EmitContext prerequisite; all nested assertions unchanged; supplemental only.",
+      "bytes": 17498,
+      "sha256": "9cf422432bb92cfc6205b7f57659ed72ecd5a5c71ded141cd86f94da2e86c740",
+      "command": "env PERL5LIB= bash tools/project_data_run.sh perl -Iperl -I.linkedspec-data/scratch/read-purity89 -MLinkedSpec::RuleIR::EmitContext -MReadPurityPhase0Selection t/phase0_regression.t"
+    },
+    {
+      "log": ".linkedspec-data/scratch/read-purity89/book-final.log",
+      "exit": 0,
+      "result": "Final render with exact read source/result and valid reducer-note anchor PASS.",
+      "bytes": 274,
+      "sha256": "c753104615e293ae22850e592f8dd98eedb43652bcd9470509a4d545158d25c1",
+      "command": "env PERL5LIB= bash tools/run_mdbook_local.sh"
+    },
+    {
+      "log": ".linkedspec-data/scratch/read-purity89/mutation-public-final.log",
+      "exit": 0,
+      "result": "Final public mutation checker PASS;70 files/14 governed/50 mutations.",
+      "bytes": 138,
+      "sha256": "b241f94e497a31a9b9b305dfb36e3af6d2f1810a5cc21f4c03a8776585f82124",
+      "command": "env PERL5LIB= bash tools/run_python_project_data.sh tools/check_mutation_public_surface.py"
+    },
+    {
+      "command": "env PERL5LIB= bash tools/project_data_run.sh prove -v -Iperl t/phase0_regression.t",
+      "exit": 0,
+      "result": "Files=1, Tests=1033, 1723 wallclock secs ( 0.44 usr  0.09 sys + 1108.17 cusr 187.53 csys = 1296.23 CPU); Result: PASS",
+      "log": ".linkedspec-data/scratch/read-purity89/phase0-acceptance.log",
+      "bytes": 1791081,
+      "sha256": "f1b7f021f35161371aac0b9c95f55a78dbd8903418497cfa87bb37a6d5a6d57e"
+    },
+    {
+      "command": "env PERL5LIB= bash scripts/check_doctrines.sh",
+      "exit": 0,
+      "result": "ALL9 PASS on the staged candidate; normal hooks verify the final landing tree",
+      "log": ".linkedspec-data/scratch/read-purity89/doctrines.log",
+      "bytes": 1202,
+      "sha256": "17bd8fa352f66e11c437faf35d30aa1880f670236c7602a1a58c925b842d98ad"
+    }
+  ],
+  "source_sha256": {
+    "perl/LinkedSpec/ActionIR/MethodLowering.pm": "f704ee794a178ba2b8d31e1eaa9f48dcae5439ae7fc7f13413829e180dfb366c",
+    "perl/LinkedSpec/ActionIR/ValueExpr.pm": "5da83310d071b2c115496e50686a8510ca829d0e9590b2b244f95fcea8d95459",
+    "t/generated_source_contract.t": "25e72f776e6e06abe439e8813ed3072f0107e5352f19f892e358d8f4ac7f4957",
+    "t/write_vivification_perl_contract.t": "a25b43f8fc88f49ca394685c06809e775e3d18fd6f99f89aba1880a21e187201",
+    "t/actionir_ast_parser.t": "bde6c5c1bc405ba399eff3186b2fa3b39d272510070ef285f6c6dce7b86cf0b5",
+    "t/trace_actionir_compact_lowerers.t": "f2d31adeddb75c6bf8a08d22f9802ea2a540dcf0a7a33b1aa29e83842b628839",
+    "t/phase0_regression.t": "c7b0f2ca26909cf8789e9f028331690ef5cb606b74df5fe5d2d2b7423532bea0",
+    "examples/direct-read-purity.spec": "fcb89a286f02daece5bc45f85644395427b527d04cc57b35803b842b11c1ee67"
+  },
+  "book": {
+    "source": "examples/direct-read-purity.spec",
+    "sha256": "fcb89a286f02daece5bc45f85644395427b527d04cc57b35803b842b11c1ee67",
+    "rendered_source_matches": 1,
+    "rendered_expected_value_matches": 1,
+    "expected": {
+      "tree": {
+        "present": [
+          "kept"
+        ],
+        "null": null
+      },
+      "missing": null,
+      "null_child": null,
+      "wrong_kind": null,
+      "absent": null,
+      "document": {
+        "created": "write"
+      },
+      "null_root": null,
+      "null_read": null,
+      "present": "kept"
+    },
+    "final_render_sha256": "b0cdaa63f31f83f263f9c9cafc6dd12e055d25535e88ad7ef5be8f717493bf26"
+  },
+  "public_replay": "docs/checkpoints/SESSION-STARTUP-READING.89-read-repair.json",
+  "receiver_diagnosis": "docs/checkpoints/SESSION-STARTUP-READING.89-selector-lifetime.json",
+  "next_required_repair": "SESSION-STARTUP-READING.90",
+  "pending": [],
+  "stopped_phase0": [
+    {
+      "job": 43591,
+      "reason": "two stale escaped source pins found during review; stop after129 passing groups, no complete proof",
+      "log": "phase0.log"
+    },
+    {
+      "job": 23580,
+      "reason": "replacement launched before inspecting full pin inventory; five stale meta operands corrected after stopping it; no complete proof",
+      "log": "phase0-final.log"
+    }
+  ],
+  "unchanged_authorities": {
+    "capability_conformance/write_vivification_contract.json": "c6332b7154e557a414121a0f6d49f1fa09ccefd1913f7dd56c7ee95de32adfc2",
+    "perl/LinkedSpec/BindingRuntime.pm": "cb07c2b646e284259b021e206c9349b698b668a1929b5b3afd79c0af1ca09076"
+  },
+  "review": "Both callers retain their existing segment classification/reserved-symbol checks. Shared emission validates internal segment kinds, retains each receiver, evaluates selectors once and chooses locals against identifiers from base and lowered selectors. Existing OwnerDispatch lazy/error semantics remain; selected traces and AST suites pass.",
+  "supplementary_phase0_selection": {
+    "names": [
+      "emit_context_avoids_deps_value_expr_dep_builder",
+      "emit_context_require_avoids_value_expr_load_until_value_helper",
+      "emit_context_lowers_general_return_payloads_with_nested_structures",
+      "emit_context_lowers_coalesce_value_helpers",
+      "emit_context_lowers_coalesce_nonempty_value_helpers",
+      "emit_context_lowers_definedness_flow_helpers",
+      "emit_context_lowers_aggregate_expression_emptiness_flow_helpers",
+      "emit_context_lowers_scalar_normalization_value_helpers",
+      "emit_context_lowers_count_value_helpers",
+      "emit_context_lowers_contains_value_helpers",
+      "emit_context_lowers_matches_value_helpers",
+      "emit_context_lowers_contains_substr_value_helpers",
+      "emit_context_lowers_replace_substr_value_helpers",
+      "emit_context_lowers_concat_value_helpers",
+      "emit_context_lowers_index_of_value_helpers",
+      "emit_context_lowers_count_keys_value_helpers",
+      "emit_context_lowers_has_key_value_helpers",
+      "emit_context_lowers_merge_hash_value_helpers",
+      "spec_format_terse_1_2_3_3_1_scalar_source_slot_bare_reads_auto_exist",
+      "spec_format_terse_1_2_3_3_2_mutation_slot_bare_reads_auto_exist",
+      "spec_format_terse_1_2_3_3_3_direct_access_bare_path_atoms_auto_exist",
+      "spec_format_terse_1_5_5_1_direct_nested_access_explicit_segments",
+      "spec_format_terse_1_2_3_5_1_shape_literal_value_expressions"
+    ],
+    "harness": "package ReadPurityPhase0Selection;\nuse strict;\nuse warnings;\nuse Test::More ();\nour $depth = 0;\nmy $original = \\&Test::More::subtest;\nmy %selected = map { $_ => 1 } qw(\nemit_context_avoids_deps_value_expr_dep_builder\nemit_context_require_avoids_value_expr_load_until_value_helper\nemit_context_lowers_general_return_payloads_with_nested_structures\nemit_context_lowers_coalesce_value_helpers\nemit_context_lowers_coalesce_nonempty_value_helpers\nemit_context_lowers_definedness_flow_helpers\nemit_context_lowers_aggregate_expression_emptiness_flow_helpers\nemit_context_lowers_scalar_normalization_value_helpers\nemit_context_lowers_count_value_helpers\nemit_context_lowers_contains_value_helpers\nemit_context_lowers_matches_value_helpers\nemit_context_lowers_contains_substr_value_helpers\nemit_context_lowers_replace_substr_value_helpers\nemit_context_lowers_concat_value_helpers\nemit_context_lowers_index_of_value_helpers\nemit_context_lowers_count_keys_value_helpers\nemit_context_lowers_has_key_value_helpers\nemit_context_lowers_merge_hash_value_helpers\nspec_format_terse_1_2_3_3_1_scalar_source_slot_bare_reads_auto_exist\nspec_format_terse_1_2_3_3_2_mutation_slot_bare_reads_auto_exist\nspec_format_terse_1_2_3_3_3_direct_access_bare_path_atoms_auto_exist\nspec_format_terse_1_5_5_1_direct_nested_access_explicit_segments\nspec_format_terse_1_2_3_5_1_shape_literal_value_expressions\n);\n{\n no warnings qw(redefine prototype);\n *Test::More::subtest = sub {\n  my ($name, @args) = @_;\n  return 1 unless $depth || $selected{$name};\n  local $depth = $depth + 1;\n  return $original->($name, @args);\n };\n}\n1;\n",
+    "command": "env PERL5LIB= bash tools/project_data_run.sh perl -Iperl -I.linkedspec-data/scratch/read-purity89 -MLinkedSpec::RuleIR::EmitContext -MReadPurityPhase0Selection t/phase0_regression.t",
+    "scope": "Select only existing affected top-level groups; run nested tests unchanged. Does not replace the mandatory full run."
+  },
+  "composition_checkpoint": "docs/checkpoints/SESSION-STARTUP-READING.91-numeric-direct-read.json",
+  "next_required_repairs": [
+    "SESSION-STARTUP-READING.90",
+    "SESSION-STARTUP-READING.91"
+  ],
+  "consumer_lifecycle": "Initial standalone direct_read_purity.t was integrated into the existing generated_source_contract.t allocator owner after RED/GREEN; final recurring native/fresh-process proof stays in that existing owner. The removed development-only filename is historical, not a current test command.",
+  "artifact_cleanup": {
+    "path": "t/tmp_phase1_pathsearch/phase1_pathsearch_fallback_20340.spec",
+    "owner": "aborted Phase0 child20340 in SESSION-STARTUP-READING.89",
+    "bytes": 2364,
+    "sha256": "1aca70b0a5dca6f2d788f07275e4746426964062ccbe6dffcc129594807583ab",
+    "verification": "sole non-symlink file; byte-identical to specs/Lispish.spec; same filesystem; all Phase0 jobs consumed",
+    "residue": "exact file and empty directory absent"
+  },
+  "history_pressure": {
+    "change_history": "182/512 lines;34730/65536 bytes PASS",
+    "engineering_notes": "223/512 lines;48302/65536 bytes PASS"
+  }
+}

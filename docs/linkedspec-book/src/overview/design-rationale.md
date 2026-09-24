@@ -89,9 +89,9 @@ partial path build. Successful binding/result/RHS/initial aggregates are detache
 diagnostics identify the authored segment; structural codes distinguish invalid selector, kind conflict, and
 dense-array gap.
 
-Reads must remain pure and never create a root, child, cache, or other state. The
-[current Perl read limitation](../dsl/value-container-flow-helper-reference.md#read-purity)
-violates this contract and is tracked for repair. Temporary/literal/helper/property roots,
+Reads must remain pure and never create a root, child, cache, or other state. Perl now guards
+each read segment and retains its receiver through selector evaluation; the
+[executed examples](../dsl/value-container-flow-helper-reference.md#read-purity) demonstrate missing/null preservation. Temporary/literal/helper/property roots,
 an invented `vivify(...)` helper, and an invented `:=` operator are excluded. All five backends implement this
 unchanged contract under `.19.2.1`, `.19.3.1`, `.19.4.1`, `.19.5.1`, and `.19.6.1`. Dart preserves the typed path through native, reconstructed, generated-plan,
 emitted-source, independently analyzed/executed caller-package, and primary-CLI routes. Julia preserves it through

@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Targeted session continuity / separately tracked full-reading audit`
 - Created: `2026-09-06`
-- Last updated: `2026-09-24`
+- Last updated: `2026-09-25`
 - Owner: repo-local workflow
 - Reading baseline: `baeb984e36a94a15951cd23d4c52def5064cdaca`
 - Partition authority: `docs/decisions/0125-startup-task-partitions.md`
@@ -22,7 +22,7 @@
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.89` | `pending` | Containment .16.2 restores task headroom; repair confirmed Perl read mutation before .51. |
+| 1 | `SESSION-STARTUP-READING.90` | `pending` | Read-purity .89 is verified; repair function-array constructor values then .91 before .51. |
 
 Indexed-read .88 and compact-key .50 repairs are verified. The bounded scanner/helper
 parent .86 is closed; independent helper/grouping repairs remain under .87.
@@ -53,7 +53,7 @@ This current root is capped at 256 lines / 32768 bytes; each part at 5000 / 7864
 - LS-004 remains upstream-owned through RGX. No RGX code defect is established; the
   director will notify ARCHOGEN only after the fix is verified.
 - Startup .7 still owns the process-liveness repair. Recovery/purge remain prohibited.
-- Keep all confirmed defects task-owned through repair; .89 precedes cat-arity .51.
+- Keep all confirmed defects task-owned through repair; .89 is verified; .90 and .91 precede cat-arity .51.
 - Formal book/codebase reconciliation .4 and the separate reading audit remain open.
   Focused feature repairs keep their affected book sections and executable examples aligned.
 
@@ -62,7 +62,7 @@ This current root is capped at 256 lines / 32768 bytes; each part at 5000 / 7864
 From the repository root, resolve the one bounded owner of a stable child:
 
 ```sh
-perl tools/read_task_tree.pl --tree SESSION-STARTUP-READING --id SESSION-STARTUP-READING.89
+perl tools/read_task_tree.pl --tree SESSION-STARTUP-READING --id SESSION-STARTUP-READING.90
 ```
 
 After editing a mutable owner, refresh its current snapshot in the same slice:

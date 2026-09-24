@@ -12685,7 +12685,7 @@ subtest 'emit_context_avoids_deps_value_expr_dep_builder' => sub {
     ok(defined($key_expr), 'EmitContext still returns lowered scalar access output through the ValueExpr-owned default deps');
     is($key_expr, '$foo', 'EmitContext preserves scalar access key lowering after moving default deps into ValueExpr');
     ok(defined($direct_expr), 'EmitContext still returns lowered direct-access output through the ValueExpr-owned default deps');
-    is($direct_expr, '$retv->{"content"}->[$foo]', 'EmitContext preserves direct nested-access lowering after moving default deps into ValueExpr');
+    is($direct_expr, 'do { my $__ls_read_value = $retv; my $__ls_read_index; $__ls_read_index = "content"; $__ls_read_value = ref($__ls_read_value) eq "HASH" ? $__ls_read_value->{$__ls_read_index} : undef; $__ls_read_index = $foo; $__ls_read_value = ref($__ls_read_value) eq "ARRAY" ? $__ls_read_value->[$__ls_read_index] : undef; $__ls_read_value }', 'EmitContext preserves direct nested-access lowering after moving default deps into ValueExpr');
 };
 subtest 'emit_context_avoids_deps_flow_expr_dep_builder' => sub {
     plan tests => 6;
@@ -13018,7 +13018,7 @@ my $direct_expr = LinkedSpec::RuleIR::EmitContext::_lower_direct_nested_access_v
 print defined($key_expr) && defined($direct_expr) ? "__VALUE_EXPR_RESULT_OK__\n" : "__VALUE_EXPR_RESULT_BAD__\n";
 print exists($INC{"LinkedSpec/RuleIR/EmitContext.pm"}) ? "__EMIT_CONTEXT_AFTER_HELPER__\n" : "__EMIT_CONTEXT_STILL_UNLOADED__\n";
 print exists($INC{"LinkedSpec/ActionIR/ValueExpr.pm"}) ? "__VALUE_EXPR_AFTER_HELPER__\n" : "__VALUE_EXPR_STILL_UNLOADED__\n";
-if (defined($key_expr) && $key_expr eq "\$foo" && defined($direct_expr) && $direct_expr eq "\$retv->{\"content\"}->[\$foo]") {
+if (defined($key_expr) && $key_expr eq "\$foo" && defined($direct_expr) && $direct_expr =~ /\Ado \{ my \$__ls_read_value = \$retv;.* = "content";.*eq "HASH".* = \$foo;.*eq "ARRAY"/s) {
     print "__VALUE_EXPR_PAYLOAD_OK__\n";
 } else {
     print "__VALUE_EXPR_PAYLOAD_BAD__\n";
@@ -16500,12 +16500,12 @@ subtest 'emit_context_lowers_general_return_payloads_with_nested_structures' => 
     );
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'return(myref[A][B]["C"][D])'),
-        'return $myref->[$A]->[$B]->{"C"}->[$D]',
+        'return do { my $__ls_read_value = $myref; my $__ls_read_index; $__ls_read_index = $A; $__ls_read_value = ref($__ls_read_value) eq "ARRAY" ? $__ls_read_value->[$__ls_read_index] : undef; $__ls_read_index = $B; $__ls_read_value = ref($__ls_read_value) eq "ARRAY" ? $__ls_read_value->[$__ls_read_index] : undef; $__ls_read_index = "C"; $__ls_read_value = ref($__ls_read_value) eq "HASH" ? $__ls_read_value->{$__ls_read_index} : undef; $__ls_read_index = $D; $__ls_read_value = ref($__ls_read_value) eq "ARRAY" ? $__ls_read_value->[$__ls_read_index] : undef; $__ls_read_value }',
         'general return(payload) lowers base[...]["..."] with mixed index/key path segments'
     );
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'return({ item : myref["A"][B]["C"][D] })'),
-        'return {$item => $myref->{"A"}->[$B]->{"C"}->[$D]}',
+        'return {$item => do { my $__ls_read_value = $myref; my $__ls_read_index; $__ls_read_index = "A"; $__ls_read_value = ref($__ls_read_value) eq "HASH" ? $__ls_read_value->{$__ls_read_index} : undef; $__ls_read_index = $B; $__ls_read_value = ref($__ls_read_value) eq "ARRAY" ? $__ls_read_value->[$__ls_read_index] : undef; $__ls_read_index = "C"; $__ls_read_value = ref($__ls_read_value) eq "HASH" ? $__ls_read_value->{$__ls_read_index} : undef; $__ls_read_index = $D; $__ls_read_value = ref($__ls_read_value) eq "ARRAY" ? $__ls_read_value->[$__ls_read_index] : undef; $__ls_read_value }}',
         'general return(payload) lowers base["..."][...] with hash-first path segments'
     );
     like(
@@ -35808,12 +35808,12 @@ subtest 'emit_context_lowers_coalesce_value_helpers' => sub {
 
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'set(name, coalesce(retv["content"], entry_text(), "UNKNOWN"))'),
-        q#$name = do { my $__ls_coalesce = $retv->{"content"}; defined($__ls_coalesce) ? $__ls_coalesce : do { my $__ls_coalesce = do { defined($IMATCH) ? LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $IPOS - length($IMATCH), $IPOS, "entry_text") : undef }; defined($__ls_coalesce) ? $__ls_coalesce : "UNKNOWN" } }#,
+        q#$name = do { my $__ls_coalesce = do { my $__ls_read_value = $retv; my $__ls_read_index; $__ls_read_index = "content"; $__ls_read_value = ref($__ls_read_value) eq "HASH" ? $__ls_read_value->{$__ls_read_index} : undef; $__ls_read_value }; defined($__ls_coalesce) ? $__ls_coalesce : do { my $__ls_coalesce = do { defined($IMATCH) ? LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $IPOS - length($IMATCH), $IPOS, "entry_text") : undef }; defined($__ls_coalesce) ? $__ls_coalesce : "UNKNOWN" } }#,
         'coalesce(...) lowers scalar fallback chains into nested first-defined value expressions'
     );
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'return(hash("content", coalesce(retv["content"], entry_text(), "UNKNOWN"), "parts", coalesce(retv["parts"], ["empty"])))'),
-        q#return {"content" => do { my $__ls_coalesce = $retv->{"content"}; defined($__ls_coalesce) ? $__ls_coalesce : do { my $__ls_coalesce = do { defined($IMATCH) ? LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $IPOS - length($IMATCH), $IPOS, "entry_text") : undef }; defined($__ls_coalesce) ? $__ls_coalesce : "UNKNOWN" } }, "parts" => do { my $__ls_coalesce = $retv->{"parts"}; defined($__ls_coalesce) ? $__ls_coalesce : ["empty"] }}#,
+        q#return {"content" => do { my $__ls_coalesce = do { my $__ls_read_value = $retv; my $__ls_read_index; $__ls_read_index = "content"; $__ls_read_value = ref($__ls_read_value) eq "HASH" ? $__ls_read_value->{$__ls_read_index} : undef; $__ls_read_value }; defined($__ls_coalesce) ? $__ls_coalesce : do { my $__ls_coalesce = do { defined($IMATCH) ? LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $IPOS - length($IMATCH), $IPOS, "entry_text") : undef }; defined($__ls_coalesce) ? $__ls_coalesce : "UNKNOWN" } }, "parts" => do { my $__ls_coalesce = do { my $__ls_read_value = $retv; my $__ls_read_index; $__ls_read_index = "parts"; $__ls_read_value = ref($__ls_read_value) eq "HASH" ? $__ls_read_value->{$__ls_read_index} : undef; $__ls_read_value }; defined($__ls_coalesce) ? $__ls_coalesce : ["empty"] }}#,
         'coalesce(...) lowers inside general return payloads for both scalar and aggregate fallback values'
     );
 };
@@ -35822,17 +35822,17 @@ subtest 'emit_context_lowers_coalesce_nonempty_value_helpers' => sub {
 
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'set(name, coalesce_nonempty(trim(retv["content"]), entry_text(), "UNKNOWN"))'),
-        q#$name = do { my $__ls_coalesce_nonempty = do { my $__ls_trim = $retv->{"content"}; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; (defined($__ls_coalesce_nonempty) && $__ls_coalesce_nonempty ne '') ? $__ls_coalesce_nonempty : do { my $__ls_coalesce_nonempty = do { defined($IMATCH) ? LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $IPOS - length($IMATCH), $IPOS, "entry_text") : undef }; (defined($__ls_coalesce_nonempty) && $__ls_coalesce_nonempty ne '') ? $__ls_coalesce_nonempty : "UNKNOWN" } }#,
+        q#$name = do { my $__ls_coalesce_nonempty = do { my $__ls_trim = do { my $__ls_read_value = $retv; my $__ls_read_index; $__ls_read_index = "content"; $__ls_read_value = ref($__ls_read_value) eq "HASH" ? $__ls_read_value->{$__ls_read_index} : undef; $__ls_read_value }; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; (defined($__ls_coalesce_nonempty) && $__ls_coalesce_nonempty ne '') ? $__ls_coalesce_nonempty : do { my $__ls_coalesce_nonempty = do { defined($IMATCH) ? LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $IPOS - length($IMATCH), $IPOS, "entry_text") : undef }; (defined($__ls_coalesce_nonempty) && $__ls_coalesce_nonempty ne '') ? $__ls_coalesce_nonempty : "UNKNOWN" } }#,
         'coalesce_nonempty(...) lowers scalar fallback chains into nested first-defined-nonempty value expressions'
     );
     is(
         LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('str_eq(coalesce_nonempty(trim(retv["type"]), kind, "WORD"), "WORD")'),
-        q{do { my $__ls_str_cmp_lhs = do { my $__ls_coalesce_nonempty = do { my $__ls_trim = $retv->{"type"}; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; (defined($__ls_coalesce_nonempty) && $__ls_coalesce_nonempty ne '') ? $__ls_coalesce_nonempty : do { my $__ls_coalesce_nonempty = $kind; (defined($__ls_coalesce_nonempty) && $__ls_coalesce_nonempty ne '') ? $__ls_coalesce_nonempty : "WORD" } }; my $__ls_str_cmp_rhs = "WORD"; ($__ls_str_cmp_lhs eq $__ls_str_cmp_rhs) ? 1 : 0 }},
+        q{do { my $__ls_str_cmp_lhs = do { my $__ls_coalesce_nonempty = do { my $__ls_trim = do { my $__ls_read_value = $retv; my $__ls_read_index; $__ls_read_index = "type"; $__ls_read_value = ref($__ls_read_value) eq "HASH" ? $__ls_read_value->{$__ls_read_index} : undef; $__ls_read_value }; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; (defined($__ls_coalesce_nonempty) && $__ls_coalesce_nonempty ne '') ? $__ls_coalesce_nonempty : do { my $__ls_coalesce_nonempty = $kind; (defined($__ls_coalesce_nonempty) && $__ls_coalesce_nonempty ne '') ? $__ls_coalesce_nonempty : "WORD" } }; my $__ls_str_cmp_rhs = "WORD"; ($__ls_str_cmp_lhs eq $__ls_str_cmp_rhs) ? 1 : 0 }},
         'coalesce_nonempty(...) composes inside canonical flow comparisons'
     );
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'return(hash("content", coalesce_nonempty(trim(retv["content"]), entry_text(), "UNKNOWN")))'),
-        q#return {"content" => do { my $__ls_coalesce_nonempty = do { my $__ls_trim = $retv->{"content"}; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; (defined($__ls_coalesce_nonempty) && $__ls_coalesce_nonempty ne '') ? $__ls_coalesce_nonempty : do { my $__ls_coalesce_nonempty = do { defined($IMATCH) ? LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $IPOS - length($IMATCH), $IPOS, "entry_text") : undef }; (defined($__ls_coalesce_nonempty) && $__ls_coalesce_nonempty ne '') ? $__ls_coalesce_nonempty : "UNKNOWN" } }}#,
+        q#return {"content" => do { my $__ls_coalesce_nonempty = do { my $__ls_trim = do { my $__ls_read_value = $retv; my $__ls_read_index; $__ls_read_index = "content"; $__ls_read_value = ref($__ls_read_value) eq "HASH" ? $__ls_read_value->{$__ls_read_index} : undef; $__ls_read_value }; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; (defined($__ls_coalesce_nonempty) && $__ls_coalesce_nonempty ne '') ? $__ls_coalesce_nonempty : do { my $__ls_coalesce_nonempty = do { defined($IMATCH) ? LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $IPOS - length($IMATCH), $IPOS, "entry_text") : undef }; (defined($__ls_coalesce_nonempty) && $__ls_coalesce_nonempty ne '') ? $__ls_coalesce_nonempty : "UNKNOWN" } }}#,
         'coalesce_nonempty(...) lowers inside general return payloads'
     );
 };
@@ -36017,12 +36017,12 @@ subtest 'emit_context_lowers_definedness_flow_helpers' => sub {
 
     is(
         LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('is_defined(retv["content"])'),
-        'defined($retv->{"content"})',
+        'defined(do { my $__ls_read_value = $retv; my $__ls_read_index; $__ls_read_index = "content"; $__ls_read_value = ref($__ls_read_value) eq "HASH" ? $__ls_read_value->{$__ls_read_index} : undef; $__ls_read_value })',
         'is_defined(...) lowers nested payload access into a direct defined() check'
     );
     is(
         LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('is_undefined(coalesce(retv["type"], entry_text()))'),
-        '(!defined(do { my $__ls_coalesce = $retv->{"type"}; defined($__ls_coalesce) ? $__ls_coalesce : do { defined($IMATCH) ? LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $IPOS - length($IMATCH), $IPOS, "entry_text") : undef } }))',
+        '(!defined(do { my $__ls_coalesce = do { my $__ls_read_value = $retv; my $__ls_read_index; $__ls_read_index = "type"; $__ls_read_value = ref($__ls_read_value) eq "HASH" ? $__ls_read_value->{$__ls_read_index} : undef; $__ls_read_value }; defined($__ls_coalesce) ? $__ls_coalesce : do { defined($IMATCH) ? LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $IPOS - length($IMATCH), $IPOS, "entry_text") : undef } }))',
         'is_undefined(...) lowers parser-oriented fallback chains into a negated defined() check'
     );
 
@@ -36032,7 +36032,7 @@ subtest 'emit_context_lowers_definedness_flow_helpers' => sub {
     );
     like(
         $defined_if,
-        qr/^if \(do \{ require LinkedSpec::RuntimeLogical; LinkedSpec::RuntimeLogical::truthy\(defined\(\$retv->\{"content"\}\)\) \}\) \{/s,
+        qr/^if \(do \{ require LinkedSpec::RuntimeLogical; LinkedSpec::RuntimeLogical::truthy\(defined\(do \{ my \$__ls_read_value = \$retv;.* = "content";.*eq "HASH".*\$__ls_read_value \}\)\) \}\) \{/s,
         'if(is_defined(...)) lowers through the canonical flow-expression path inside branch conditions'
     );
 
@@ -36042,7 +36042,7 @@ subtest 'emit_context_lowers_definedness_flow_helpers' => sub {
     );
     like(
         $undefined_if,
-        qr/^if \(do \{ require LinkedSpec::RuntimeLogical; LinkedSpec::RuntimeLogical::truthy\(\(!defined\(do \{ my \$__ls_coalesce = \$retv->\{"type"\}; defined\(\$__ls_coalesce\) \? \$__ls_coalesce : do \{ defined\(\$IMATCH\) \? LinkedSpec::SourceLocation::Runtime::span_text\(\$info, \$STRING, \$IPOS - length\(\$IMATCH\), \$IPOS, "entry_text"\) : undef \} \}\)\)\) \}\) \{/s,
+        qr/^if \(do \{ require LinkedSpec::RuntimeLogical; LinkedSpec::RuntimeLogical::truthy\(\(!defined\(do \{ my \$__ls_coalesce = do \{ my \$__ls_read_value = \$retv;.* = "type";.*eq "HASH".*\$__ls_read_value \}; defined\(\$__ls_coalesce\) \? \$__ls_coalesce : do \{ defined\(\$IMATCH\) \? LinkedSpec::SourceLocation::Runtime::span_text\(\$info, \$STRING, \$IPOS - length\(\$IMATCH\), \$IPOS, "entry_text"\) : undef \} \}\)\)\) \}\) \{/s,
         'if(is_undefined(...)) lowers nested coalesce(...) targets inside the same canonical flow-expression path'
     );
 };
@@ -36161,7 +36161,7 @@ subtest 'emit_context_lowers_aggregate_expression_emptiness_flow_helpers' => sub
     );
     like(
         $array_if,
-        qr/^if \(do \{ require LinkedSpec::RuntimeLogical; LinkedSpec::RuntimeLogical::truthy\(do \{ my \$__ls_empty_array = do \{ my \$__ls_coalesce = \$retv->\{"parts"\}; defined\(\$__ls_coalesce\) \? \$__ls_coalesce : \[\] \}; \(!defined\(\$__ls_empty_array\) \|\| !\@\{\$__ls_empty_array\}\) \}\) \}\) \{/s,
+        qr/^if \(do \{ require LinkedSpec::RuntimeLogical; LinkedSpec::RuntimeLogical::truthy\(do \{ my \$__ls_empty_array = do \{ my \$__ls_coalesce = do \{ my \$__ls_read_value = \$retv;.* = "parts";.*eq "HASH".*\$__ls_read_value \}; defined\(\$__ls_coalesce\) \? \$__ls_coalesce : \[\] \}; \(!defined\(\$__ls_empty_array\) \|\| !\@\{\$__ls_empty_array\}\) \}\) \}\) \{/s,
         'if(is_empty(...)) lowers aggregate fallback arrays through the canonical empty-array flow path'
     );
 
@@ -36266,7 +36266,7 @@ subtest 'emit_context_lowers_scalar_normalization_value_helpers' => sub {
 
     is(
         LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('trim(retv["content"])'),
-        'do { my $__ls_trim = $retv->{"content"}; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }',
+        'do { my $__ls_trim = do { my $__ls_read_value = $retv; my $__ls_read_index; $__ls_read_index = "content"; $__ls_read_value = ref($__ls_read_value) eq "HASH" ? $__ls_read_value->{$__ls_read_index} : undef; $__ls_read_value }; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }',
         'trim(...) lowers nested payload access into a whitespace-normalizing scalar expression'
     );
     is(
@@ -36276,7 +36276,7 @@ subtest 'emit_context_lowers_scalar_normalization_value_helpers' => sub {
     );
     is(
         LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('uppercase(coalesce(retv["type"], "word"))'),
-        'do { my $__ls_upper = do { my $__ls_coalesce = $retv->{"type"}; defined($__ls_coalesce) ? $__ls_coalesce : "word" }; defined($__ls_upper) ? LinkedSpec::UnicodeCaseMapping::uppercase($__ls_upper) : $__ls_upper }',
+        'do { my $__ls_upper = do { my $__ls_coalesce = do { my $__ls_read_value = $retv; my $__ls_read_index; $__ls_read_index = "type"; $__ls_read_value = ref($__ls_read_value) eq "HASH" ? $__ls_read_value->{$__ls_read_index} : undef; $__ls_read_value }; defined($__ls_coalesce) ? $__ls_coalesce : "word" }; defined($__ls_upper) ? LinkedSpec::UnicodeCaseMapping::uppercase($__ls_upper) : $__ls_upper }',
         'uppercase(...) composes directly with coalesce(...) inside scalar value lowering'
     );
 };
@@ -36378,7 +36378,7 @@ subtest 'emit_context_lowers_count_value_helpers' => sub {
     );
     is(
         LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('count(coalesce(retv["parts"], ["empty"]))'),
-        'do { my $__ls_count = do { my $__ls_coalesce = $retv->{"parts"}; defined($__ls_coalesce) ? $__ls_coalesce : ["empty"] }; defined($__ls_count) ? scalar(@{$__ls_count}) : 0 }',
+        'do { my $__ls_count = do { my $__ls_coalesce = do { my $__ls_read_value = $retv; my $__ls_read_index; $__ls_read_index = "parts"; $__ls_read_value = ref($__ls_read_value) eq "HASH" ? $__ls_read_value->{$__ls_read_index} : undef; $__ls_read_value }; defined($__ls_coalesce) ? $__ls_coalesce : ["empty"] }; defined($__ls_count) ? scalar(@{$__ls_count}) : 0 }',
         'count(...) lowers array-valued fallback expressions into arrayref-size reducer form'
     );
     is(
@@ -36388,7 +36388,7 @@ subtest 'emit_context_lowers_count_value_helpers' => sub {
     );
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'return(hash("part_count", count(coalesce(retv["parts"], ["empty"]))))'),
-        'return {"part_count" => do { my $__ls_count = do { my $__ls_coalesce = $retv->{"parts"}; defined($__ls_coalesce) ? $__ls_coalesce : ["empty"] }; defined($__ls_count) ? scalar(@{$__ls_count}) : 0 }}',
+        'return {"part_count" => do { my $__ls_count = do { my $__ls_coalesce = do { my $__ls_read_value = $retv; my $__ls_read_index; $__ls_read_index = "parts"; $__ls_read_value = ref($__ls_read_value) eq "HASH" ? $__ls_read_value->{$__ls_read_index} : undef; $__ls_read_value }; defined($__ls_coalesce) ? $__ls_coalesce : ["empty"] }; defined($__ls_count) ? scalar(@{$__ls_count}) : 0 }}',
         'count(...) lowers inside general return payloads'
     );
 };
@@ -36490,7 +36490,7 @@ subtest 'emit_context_lowers_contains_value_helpers' => sub {
     );
     is(
         LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('contains(coalesce(retv["parts"], ["empty"]), entry_text())'),
-        'do { my $__ls_contains_array = do { my $__ls_coalesce = $retv->{"parts"}; defined($__ls_coalesce) ? $__ls_coalesce : ["empty"] }; my $__ls_contains_needle = do { defined($IMATCH) ? LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $IPOS - length($IMATCH), $IPOS, "entry_text") : undef }; defined($__ls_contains_array) ? ((defined($__ls_contains_needle) ? scalar(grep { defined($_) && $_ eq $__ls_contains_needle } @{$__ls_contains_array}) : scalar(grep { !defined($_) } @{$__ls_contains_array})) ? 1 : 0) : 0 }',
+        'do { my $__ls_contains_array = do { my $__ls_coalesce = do { my $__ls_read_value = $retv; my $__ls_read_index; $__ls_read_index = "parts"; $__ls_read_value = ref($__ls_read_value) eq "HASH" ? $__ls_read_value->{$__ls_read_index} : undef; $__ls_read_value }; defined($__ls_coalesce) ? $__ls_coalesce : ["empty"] }; my $__ls_contains_needle = do { defined($IMATCH) ? LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $IPOS - length($IMATCH), $IPOS, "entry_text") : undef }; defined($__ls_contains_array) ? ((defined($__ls_contains_needle) ? scalar(grep { defined($_) && $_ eq $__ls_contains_needle } @{$__ls_contains_array}) : scalar(grep { !defined($_) } @{$__ls_contains_array})) ? 1 : 0) : 0 }',
         'contains(...) lowers array-valued fallback expressions into guarded membership checks'
     );
     is(
@@ -36514,7 +36514,7 @@ subtest 'emit_context_lowers_matches_value_helpers' => sub {
     );
     is(
         LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('matches(coalesce(retv["type"], entry_text()), /^[A-Z_]+$/)'),
-        'do { my $__ls_matches_value = do { my $__ls_coalesce = $retv->{"type"}; defined($__ls_coalesce) ? $__ls_coalesce : do { defined($IMATCH) ? LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $IPOS - length($IMATCH), $IPOS, "entry_text") : undef } }; defined($__ls_matches_value) ? (($__ls_matches_value =~ /^[A-Z_]+$/) ? 1 : 0) : 0 }',
+        'do { my $__ls_matches_value = do { my $__ls_coalesce = do { my $__ls_read_value = $retv; my $__ls_read_index; $__ls_read_index = "type"; $__ls_read_value = ref($__ls_read_value) eq "HASH" ? $__ls_read_value->{$__ls_read_index} : undef; $__ls_read_value }; defined($__ls_coalesce) ? $__ls_coalesce : do { defined($IMATCH) ? LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $IPOS - length($IMATCH), $IPOS, "entry_text") : undef } }; defined($__ls_matches_value) ? (($__ls_matches_value =~ /^[A-Z_]+$/) ? 1 : 0) : 0 }',
         'matches(...) lowers composed fallback expressions into guarded regex-membership checks'
     );
     is(
@@ -36538,7 +36538,7 @@ subtest 'emit_context_lowers_contains_substr_value_helpers' => sub {
     );
     is(
         LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('contains_substr(coalesce(retv["type"], entry_text()), "WORD")'),
-        'do { my $__ls_contains_substr_value = do { my $__ls_coalesce = $retv->{"type"}; defined($__ls_coalesce) ? $__ls_coalesce : do { defined($IMATCH) ? LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $IPOS - length($IMATCH), $IPOS, "entry_text") : undef } }; my $__ls_contains_substr_needle = "WORD"; (defined($__ls_contains_substr_value) && defined($__ls_contains_substr_needle) && index($__ls_contains_substr_value, $__ls_contains_substr_needle) >= 0) ? 1 : 0 }',
+        'do { my $__ls_contains_substr_value = do { my $__ls_coalesce = do { my $__ls_read_value = $retv; my $__ls_read_index; $__ls_read_index = "type"; $__ls_read_value = ref($__ls_read_value) eq "HASH" ? $__ls_read_value->{$__ls_read_index} : undef; $__ls_read_value }; defined($__ls_coalesce) ? $__ls_coalesce : do { defined($IMATCH) ? LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $IPOS - length($IMATCH), $IPOS, "entry_text") : undef } }; my $__ls_contains_substr_needle = "WORD"; (defined($__ls_contains_substr_value) && defined($__ls_contains_substr_needle) && index($__ls_contains_substr_value, $__ls_contains_substr_needle) >= 0) ? 1 : 0 }',
         'contains_substr(...) lowers composed fallback expressions into guarded substring-membership checks'
     );
     is(
@@ -36562,7 +36562,7 @@ subtest 'emit_context_lowers_replace_substr_value_helpers' => sub {
     );
     is(
         LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('replace_substr(coalesce(retv["type"], entry_text()), " ", "_")'),
-        'do { my $__ls_replace_substr_value = do { my $__ls_coalesce = $retv->{"type"}; defined($__ls_coalesce) ? $__ls_coalesce : do { defined($IMATCH) ? LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $IPOS - length($IMATCH), $IPOS, "entry_text") : undef } }; my $__ls_replace_substr_needle = " "; my $__ls_replace_substr_replacement = "_"; if (defined($__ls_replace_substr_value) && defined($__ls_replace_substr_needle) && defined($__ls_replace_substr_replacement)) { length($__ls_replace_substr_needle) ? join($__ls_replace_substr_replacement, split(/\Q$__ls_replace_substr_needle\E/, $__ls_replace_substr_value, -1)) : $__ls_replace_substr_value } else { undef } }',
+        'do { my $__ls_replace_substr_value = do { my $__ls_coalesce = do { my $__ls_read_value = $retv; my $__ls_read_index; $__ls_read_index = "type"; $__ls_read_value = ref($__ls_read_value) eq "HASH" ? $__ls_read_value->{$__ls_read_index} : undef; $__ls_read_value }; defined($__ls_coalesce) ? $__ls_coalesce : do { defined($IMATCH) ? LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $IPOS - length($IMATCH), $IPOS, "entry_text") : undef } }; my $__ls_replace_substr_needle = " "; my $__ls_replace_substr_replacement = "_"; if (defined($__ls_replace_substr_value) && defined($__ls_replace_substr_needle) && defined($__ls_replace_substr_replacement)) { length($__ls_replace_substr_needle) ? join($__ls_replace_substr_replacement, split(/\Q$__ls_replace_substr_needle\E/, $__ls_replace_substr_value, -1)) : $__ls_replace_substr_value } else { undef } }',
         'replace_substr(...) lowers composed fallback expressions into guarded literal substring rewrites'
     );
     is(
@@ -36620,7 +36620,7 @@ subtest 'emit_context_lowers_concat_value_helpers' => sub {
     );
     is(
         LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('cat(coalesce_nonempty(trim(retv["type"]), entry_text(), "word"), "::", uppercase(trim(kind)))'),
-        q{do { my @__ls_cat_parts = (do { my $__ls_coalesce_nonempty = do { my $__ls_trim = $retv->{"type"}; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; (defined($__ls_coalesce_nonempty) && $__ls_coalesce_nonempty ne '') ? $__ls_coalesce_nonempty : do { my $__ls_coalesce_nonempty = do { defined($IMATCH) ? LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $IPOS - length($IMATCH), $IPOS, "entry_text") : undef }; (defined($__ls_coalesce_nonempty) && $__ls_coalesce_nonempty ne '') ? $__ls_coalesce_nonempty : "word" } }, "::", do { my $__ls_upper = do { my $__ls_trim = $kind; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_upper) ? LinkedSpec::UnicodeCaseMapping::uppercase($__ls_upper) : $__ls_upper }); my $__ls_cat_ok = 1; for my $__ls_cat_part (@__ls_cat_parts) { if (!defined($__ls_cat_part)) { $__ls_cat_ok = 0; last; } if (ref($__ls_cat_part)) { if (ref($__ls_cat_part) eq 'JSON::PP::Boolean') { $__ls_cat_part = $__ls_cat_part ? '1' : '0'; } else { $__ls_cat_ok = 0; last; } } else { $__ls_cat_part = "$__ls_cat_part"; $__ls_cat_part = '0' if $__ls_cat_part =~ /\A-0(?:\.0+)?\z/; } } $__ls_cat_ok ? join('', @__ls_cat_parts) : undef }},
+        q{do { my @__ls_cat_parts = (do { my $__ls_coalesce_nonempty = do { my $__ls_trim = do { my $__ls_read_value = $retv; my $__ls_read_index; $__ls_read_index = "type"; $__ls_read_value = ref($__ls_read_value) eq "HASH" ? $__ls_read_value->{$__ls_read_index} : undef; $__ls_read_value }; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; (defined($__ls_coalesce_nonempty) && $__ls_coalesce_nonempty ne '') ? $__ls_coalesce_nonempty : do { my $__ls_coalesce_nonempty = do { defined($IMATCH) ? LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $IPOS - length($IMATCH), $IPOS, "entry_text") : undef }; (defined($__ls_coalesce_nonempty) && $__ls_coalesce_nonempty ne '') ? $__ls_coalesce_nonempty : "word" } }, "::", do { my $__ls_upper = do { my $__ls_trim = $kind; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_upper) ? LinkedSpec::UnicodeCaseMapping::uppercase($__ls_upper) : $__ls_upper }); my $__ls_cat_ok = 1; for my $__ls_cat_part (@__ls_cat_parts) { if (!defined($__ls_cat_part)) { $__ls_cat_ok = 0; last; } if (ref($__ls_cat_part)) { if (ref($__ls_cat_part) eq 'JSON::PP::Boolean') { $__ls_cat_part = $__ls_cat_part ? '1' : '0'; } else { $__ls_cat_ok = 0; last; } } else { $__ls_cat_part = "$__ls_cat_part"; $__ls_cat_part = '0' if $__ls_cat_part =~ /\A-0(?:\.0+)?\z/; } } $__ls_cat_ok ? join('', @__ls_cat_parts) : undef }},
         'cat(...) lowers composed fallback and normalization fragments into one guarded scalar value'
     );
     is(
@@ -36756,7 +36756,7 @@ subtest 'emit_context_lowers_index_of_value_helpers' => sub {
     );
     is(
         LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('index_of(coalesce(retv["parts"], ["empty"]), entry_text())'),
-        q{do { my $__ls_index_of_array = do { my $__ls_coalesce = $retv->{"parts"}; defined($__ls_coalesce) ? $__ls_coalesce : ["empty"] }; my $__ls_index_of_needle = do { defined($IMATCH) ? LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $IPOS - length($IMATCH), $IPOS, "entry_text") : undef }; if (defined($__ls_index_of_array) && ref($__ls_index_of_array) eq 'ARRAY') { my $__ls_index_of_found; for (my $__ls_index_of_i = 0; $__ls_index_of_i < scalar(@{$__ls_index_of_array}); $__ls_index_of_i++) { my $__ls_index_of_item = $__ls_index_of_array->[$__ls_index_of_i]; if (defined($__ls_index_of_needle) ? (defined($__ls_index_of_item) && $__ls_index_of_item eq $__ls_index_of_needle) : !defined($__ls_index_of_item)) { $__ls_index_of_found = $__ls_index_of_i; last; } } $__ls_index_of_found } else { undef } }},
+        q{do { my $__ls_index_of_array = do { my $__ls_coalesce = do { my $__ls_read_value = $retv; my $__ls_read_index; $__ls_read_index = "parts"; $__ls_read_value = ref($__ls_read_value) eq "HASH" ? $__ls_read_value->{$__ls_read_index} : undef; $__ls_read_value }; defined($__ls_coalesce) ? $__ls_coalesce : ["empty"] }; my $__ls_index_of_needle = do { defined($IMATCH) ? LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $IPOS - length($IMATCH), $IPOS, "entry_text") : undef }; if (defined($__ls_index_of_array) && ref($__ls_index_of_array) eq 'ARRAY') { my $__ls_index_of_found; for (my $__ls_index_of_i = 0; $__ls_index_of_i < scalar(@{$__ls_index_of_array}); $__ls_index_of_i++) { my $__ls_index_of_item = $__ls_index_of_array->[$__ls_index_of_i]; if (defined($__ls_index_of_needle) ? (defined($__ls_index_of_item) && $__ls_index_of_item eq $__ls_index_of_needle) : !defined($__ls_index_of_item)) { $__ls_index_of_found = $__ls_index_of_i; last; } } $__ls_index_of_found } else { undef } }},
         'index_of(...) lowers array-valued fallback expressions into guarded first-match index checks'
     );
     is(
@@ -36868,7 +36868,7 @@ subtest 'emit_context_lowers_count_keys_value_helpers' => sub {
     );
     is(
         LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('count_keys(coalesce(retv["meta"], hash("kind", "fallback")))'),
-        'do { my $__ls_count_keys = do { my $__ls_coalesce = $retv->{"meta"}; defined($__ls_coalesce) ? $__ls_coalesce : {"kind" => "fallback"} }; defined($__ls_count_keys) ? scalar(keys %{$__ls_count_keys}) : 0 }',
+        'do { my $__ls_count_keys = do { my $__ls_coalesce = do { my $__ls_read_value = $retv; my $__ls_read_index; $__ls_read_index = "meta"; $__ls_read_value = ref($__ls_read_value) eq "HASH" ? $__ls_read_value->{$__ls_read_index} : undef; $__ls_read_value }; defined($__ls_coalesce) ? $__ls_coalesce : {"kind" => "fallback"} }; defined($__ls_count_keys) ? scalar(keys %{$__ls_count_keys}) : 0 }',
         'count_keys(...) lowers hash-valued fallback expressions into hashref-size reducer form'
     );
     is(
@@ -36878,7 +36878,7 @@ subtest 'emit_context_lowers_count_keys_value_helpers' => sub {
     );
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'return(hash("meta_key_count", count_keys(coalesce(retv["meta"], hash("kind", "fallback")))))'),
-        'return {"meta_key_count" => do { my $__ls_count_keys = do { my $__ls_coalesce = $retv->{"meta"}; defined($__ls_coalesce) ? $__ls_coalesce : {"kind" => "fallback"} }; defined($__ls_count_keys) ? scalar(keys %{$__ls_count_keys}) : 0 }}',
+        'return {"meta_key_count" => do { my $__ls_count_keys = do { my $__ls_coalesce = do { my $__ls_read_value = $retv; my $__ls_read_index; $__ls_read_index = "meta"; $__ls_read_value = ref($__ls_read_value) eq "HASH" ? $__ls_read_value->{$__ls_read_index} : undef; $__ls_read_value }; defined($__ls_coalesce) ? $__ls_coalesce : {"kind" => "fallback"} }; defined($__ls_count_keys) ? scalar(keys %{$__ls_count_keys}) : 0 }}',
         'count_keys(...) lowers inside general return payloads'
     );
 };
@@ -36980,7 +36980,7 @@ subtest 'emit_context_lowers_has_key_value_helpers' => sub {
     );
     is(
         LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('has_key(coalesce(retv["meta"], hash("kind", "fallback")), "kind")'),
-        'do { my $__ls_has_key = do { my $__ls_coalesce = $retv->{"meta"}; defined($__ls_coalesce) ? $__ls_coalesce : {"kind" => "fallback"} }; defined($__ls_has_key) ? ((exists $__ls_has_key->{"kind"}) ? 1 : 0) : 0 }',
+        'do { my $__ls_has_key = do { my $__ls_coalesce = do { my $__ls_read_value = $retv; my $__ls_read_index; $__ls_read_index = "meta"; $__ls_read_value = ref($__ls_read_value) eq "HASH" ? $__ls_read_value->{$__ls_read_index} : undef; $__ls_read_value }; defined($__ls_coalesce) ? $__ls_coalesce : {"kind" => "fallback"} }; defined($__ls_has_key) ? ((exists $__ls_has_key->{"kind"}) ? 1 : 0) : 0 }',
         'has_key(...) lowers hash-valued fallback expressions into guarded key-existence checks'
     );
     is(
@@ -36990,7 +36990,7 @@ subtest 'emit_context_lowers_has_key_value_helpers' => sub {
     );
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'return(hash("has_kind", has_key(coalesce(retv["meta"], hash("kind", "fallback")), "kind")))'),
-        'return {"has_kind" => do { my $__ls_has_key = do { my $__ls_coalesce = $retv->{"meta"}; defined($__ls_coalesce) ? $__ls_coalesce : {"kind" => "fallback"} }; defined($__ls_has_key) ? ((exists $__ls_has_key->{"kind"}) ? 1 : 0) : 0 }}',
+        'return {"has_kind" => do { my $__ls_has_key = do { my $__ls_coalesce = do { my $__ls_read_value = $retv; my $__ls_read_index; $__ls_read_index = "meta"; $__ls_read_value = ref($__ls_read_value) eq "HASH" ? $__ls_read_value->{$__ls_read_index} : undef; $__ls_read_value }; defined($__ls_coalesce) ? $__ls_coalesce : {"kind" => "fallback"} }; defined($__ls_has_key) ? ((exists $__ls_has_key->{"kind"}) ? 1 : 0) : 0 }}',
         'has_key(...) lowers inside general return payloads'
     );
 };
@@ -37087,7 +37087,7 @@ subtest 'emit_context_lowers_merge_hash_value_helpers' => sub {
 
     is(
         LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('merge_hash(meta, hash("kind", "node"), coalesce(retv["meta"], hash("source", "fallback")))'),
-        '{%meta, do { my $__ls_merge_hash = {"kind" => "node"}; defined($__ls_merge_hash) ? %{$__ls_merge_hash} : () }, do { my $__ls_merge_hash = do { my $__ls_coalesce = $retv->{"meta"}; defined($__ls_coalesce) ? $__ls_coalesce : {"source" => "fallback"} }; defined($__ls_merge_hash) ? %{$__ls_merge_hash} : () }}',
+        '{%meta, do { my $__ls_merge_hash = {"kind" => "node"}; defined($__ls_merge_hash) ? %{$__ls_merge_hash} : () }, do { my $__ls_merge_hash = do { my $__ls_coalesce = do { my $__ls_read_value = $retv; my $__ls_read_index; $__ls_read_index = "meta"; $__ls_read_value = ref($__ls_read_value) eq "HASH" ? $__ls_read_value->{$__ls_read_index} : undef; $__ls_read_value }; defined($__ls_coalesce) ? $__ls_coalesce : {"source" => "fallback"} }; defined($__ls_merge_hash) ? %{$__ls_merge_hash} : () }}',
         'merge_hash(...) lowers working hashes, constructor hashes, and fallback hash expressions into one composed hash payload'
     );
     is(
@@ -45234,7 +45234,7 @@ subtest 'spec_format_terse_1_2_3_3_1_scalar_source_slot_bare_reads_auto_exist' =
         'array append bare RHS is handled by the later mutation key/RHS scalar-read leaf');
     like($L->('meta["stage"] = value'), qr/\$__ls_path_segment_0 = "stage";.*\$__ls_path_value = \$value;.*BindingRuntime::nested_write\(\$meta, .*"meta"/s,
         'one-segment nested-write RHS keeps its scalar read');
-    is($L->('return(foo["a"][z])'), 'return $foo->{"a"}->[$z]',
+    is($L->('return(foo["a"][z])'), 'return do { my $__ls_read_value = $foo; my $__ls_read_index; $__ls_read_index = "a"; $__ls_read_value = ref($__ls_read_value) eq "HASH" ? $__ls_read_value->{$__ls_read_index} : undef; $__ls_read_index = $z; $__ls_read_value = ref($__ls_read_value) eq "ARRAY" ? $__ls_read_value->[$__ls_read_index] : undef; $__ls_read_value }',
         'direct-access bare path atom is handled by the later direct path-atom leaf');
     like($L->('push(A,B)'), qr/__ls_push_handler.*BindingRuntime::push_value/s,
         'all-bare push(A,B) keeps static child-call precedence with a binding fallback');
@@ -45311,7 +45311,7 @@ subtest 'spec_format_terse_1_2_3_3_2_mutation_slot_bare_reads_auto_exist' => sub
         'one-segment nested write lowers a bare value with a literal string selector');
     like($L->('meta[key] = "v"'), qr/\$__ls_path_segment_0 = \$key;.*\$__ls_path_value = "v";.*BindingRuntime::nested_write\(\$meta, .*kind_hint => "dynamic"/s,
         'one-segment nested write lowers a dynamic selector with a literal value');
-    is($L->('return(foo["a"][z])'), 'return $foo->{"a"}->[$z]',
+    is($L->('return(foo["a"][z])'), 'return do { my $__ls_read_value = $foo; my $__ls_read_index; $__ls_read_index = "a"; $__ls_read_value = ref($__ls_read_value) eq "HASH" ? $__ls_read_value->{$__ls_read_index} : undef; $__ls_read_index = $z; $__ls_read_value = ref($__ls_read_value) eq "ARRAY" ? $__ls_read_value->[$__ls_read_index] : undef; $__ls_read_value }',
         'direct-access bare path atom is handled by the later direct path-atom leaf');
     like($L->('push(A,B)'), qr/__ls_push_handler.*BindingRuntime::push_value/s,
         'all-bare push(A,B) keeps static child-call precedence with a binding fallback');
@@ -45381,21 +45381,21 @@ subtest 'spec_format_terse_1_2_3_3_3_direct_access_bare_path_atoms_auto_exist' =
         return defined($out) ? $out : ('ERR:' . normalize_error($@));
     };
 
-    is($L->('return(foo["a"][z])'), 'return $foo->{"a"}->[$z]',
+    is($L->('return(foo["a"][z])'), 'return do { my $__ls_read_value = $foo; my $__ls_read_index; $__ls_read_index = "a"; $__ls_read_value = ref($__ls_read_value) eq "HASH" ? $__ls_read_value->{$__ls_read_index} : undef; $__ls_read_index = $z; $__ls_read_value = ref($__ls_read_value) eq "ARRAY" ? $__ls_read_value->[$__ls_read_index] : undef; $__ls_read_value }',
         'direct-access bare path atom lowers as a scalar array index');
     is($L->('return(foo["a"][z])'), $L->('return(foo["a"][z])'),
-        'direct-access bare path atom lowers identically to explicit index');
-    is($L->('set(out, foo["a"][z])'), '$out = $foo->{"a"}->[$z]',
+        'direct-access bare path atom lowers deterministically across repeated calls');
+    is($L->('set(out, foo["a"][z])'), '$out = do { my $__ls_read_value = $foo; my $__ls_read_index; $__ls_read_index = "a"; $__ls_read_value = ref($__ls_read_value) eq "HASH" ? $__ls_read_value->{$__ls_read_index} : undef; $__ls_read_index = $z; $__ls_read_value = ref($__ls_read_value) eq "ARRAY" ? $__ls_read_value->[$__ls_read_index] : undef; $__ls_read_value }',
         'assignment source direct access lowers a bare path atom');
-    like($L->('items += foo["a"][z]'), qr/BindingRuntime::push_value\(\$items, "items", \$foo->\{"a"\}->\[\$z\]\)/,
+    like($L->('items += foo["a"][z]'), qr/BindingRuntime::push_value\(\$items, "items", do \{ my \$__ls_read_value = \$foo;.* = "a";.*eq "HASH".* = \$z;.*eq "ARRAY".*\$__ls_read_value \}\)/,
         'array append RHS direct access lowers a bare path atom');
-    like($L->('meta[key] = foo["a"][z]'), qr/\$__ls_path_value = \$foo->\{"a"\}->\[\$z\];.*BindingRuntime::nested_write\(\$meta,/s,
+    like($L->('meta[key] = foo["a"][z]'), qr/\$__ls_path_value = do \{ my \$__ls_read_value = \$foo;.* = "a";.*eq "HASH".* = \$z;.*eq "ARRAY".*\$__ls_read_value \};.*BindingRuntime::nested_write\(\$meta,/s,
         'nested-write RHS direct access lowers a bare path atom');
     is($L->('return(foo["a"][true])'), 'return foo["a"][true]',
         'reserved primitive literal true is not claimed as a direct-access path scalar read');
     is($L->('return(foo["a"][CAPTURE])'), 'return foo["a"][CAPTURE]',
         'reserved engine local CAPTURE is not claimed as a direct-access path scalar read');
-    is($L->('return(foo["a"][z])'), 'return $foo->{"a"}->[$z]',
+    is($L->('return(foo["a"][z])'), 'return do { my $__ls_read_value = $foo; my $__ls_read_index; $__ls_read_index = "a"; $__ls_read_value = ref($__ls_read_value) eq "HASH" ? $__ls_read_value->{$__ls_read_index} : undef; $__ls_read_index = $z; $__ls_read_value = ref($__ls_read_value) eq "ARRAY" ? $__ls_read_value->[$__ls_read_index] : undef; $__ls_read_value }',
         'direct-access bare path atom keeps scalar-index semantics across repeated lowering');
     like($L->('push(A,B)'), qr/__ls_push_handler.*BindingRuntime::push_value/s,
         'all-bare push(A,B) keeps static child-call precedence with a binding fallback');
@@ -45406,8 +45406,8 @@ subtest 'spec_format_terse_1_2_3_3_3_direct_access_bare_path_atoms_auto_exist' =
         my $n = () = ($src =~ /my $q\b/g);
         is($n, 1, "direct-access bare path atom auto-supplies exactly one `my \$$name`");
     }
-    like($src, qr/\$foo->\{"a"\}->\[\$z\]/,
-        'generated source contains the direct scalar-index dereference chain');
+    like($src, qr/do \{ my \$__ls_read_value = \$foo;.* = "a";.*eq "HASH".* = \$z;.*eq "ARRAY".*\$__ls_read_value \}/,
+        'generated source contains the guarded scalar-index read');
     unlike($src, qr/my \$(?:true|CAPTURE)\b/,
         'reserved direct-access atoms are not auto-declared');
 
@@ -46143,12 +46143,12 @@ subtest 'spec_format_terse_1_5_5_1_direct_nested_access_explicit_segments' => su
 
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'return(foo["a"][9]["b"][z])'),
-        'return $foo->{"a"}->[9]->{"b"}->[$z]',
-        'direct nested access lowers to the Perl dereference chain for explicit segments',
+        'return do { my $__ls_read_value = $foo; my $__ls_read_index; $__ls_read_index = "a"; $__ls_read_value = ref($__ls_read_value) eq "HASH" ? $__ls_read_value->{$__ls_read_index} : undef; $__ls_read_index = 9; $__ls_read_value = ref($__ls_read_value) eq "ARRAY" ? $__ls_read_value->[$__ls_read_index] : undef; $__ls_read_index = "b"; $__ls_read_value = ref($__ls_read_value) eq "HASH" ? $__ls_read_value->{$__ls_read_index} : undef; $__ls_read_index = $z; $__ls_read_value = ref($__ls_read_value) eq "ARRAY" ? $__ls_read_value->[$__ls_read_index] : undef; $__ls_read_value }',
+        'direct nested access guards every explicit segment',
     );
     is(
         LinkedSpec::call_spec_handler_subst('Top', q{return(foo['a'][0])}),
-        q{return $foo->{'a'}->[0]},
+        q{return do { my $__ls_read_value = $foo; my $__ls_read_index; $__ls_read_index = 'a'; $__ls_read_value = ref($__ls_read_value) eq "HASH" ? $__ls_read_value->{$__ls_read_index} : undef; $__ls_read_index = 0; $__ls_read_value = ref($__ls_read_value) eq "ARRAY" ? $__ls_read_value->[$__ls_read_index] : undef; $__ls_read_value }},
         'single-quoted direct access segment is also a hash-key segment',
     );
     is(
@@ -46158,7 +46158,7 @@ subtest 'spec_format_terse_1_5_5_1_direct_nested_access_explicit_segments' => su
     );
     is(
         LinkedSpec::call_spec_handler_subst('Top', 'return(foo["a"][9]["b"][z])'),
-        'return $foo->{"a"}->[9]->{"b"}->[$z]',
+        'return do { my $__ls_read_value = $foo; my $__ls_read_index; $__ls_read_index = "a"; $__ls_read_value = ref($__ls_read_value) eq "HASH" ? $__ls_read_value->{$__ls_read_index} : undef; $__ls_read_index = 9; $__ls_read_value = ref($__ls_read_value) eq "ARRAY" ? $__ls_read_value->[$__ls_read_index] : undef; $__ls_read_index = "b"; $__ls_read_value = ref($__ls_read_value) eq "HASH" ? $__ls_read_value->{$__ls_read_index} : undef; $__ls_read_index = $z; $__ls_read_value = ref($__ls_read_value) eq "ARRAY" ? $__ls_read_value->[$__ls_read_index] : undef; $__ls_read_value }',
         'direct nested access lowers the explicit mixed path',
     );
     like(
@@ -46189,8 +46189,8 @@ subtest 'spec_format_terse_1_5_5_1_direct_nested_access_explicit_segments' => su
     ok(ref($p) eq 'CODE', 'direct nested access spec compiles to a parser')
         or diag(normalize_error($@));
     my $parser_source = join('', @parser_source_chunks);
-    like($parser_source, qr/\$foo->\{"a"\}->\[0\]->\{"b"\}->\[\$z\]/,
-        'generated source contains the direct dereference chain');
+    like($parser_source, qr/do \{ my \$__ls_read_value = \$foo;.* = "a";.*eq "HASH".* = 0;.*eq "ARRAY".* = "b";.*eq "HASH".* = \$z;.*eq "ARRAY"/,
+        'generated source contains the guarded mixed-path read');
     is($run->($p, 'xhello'), '"one"',
         'direct nested access runs through mixed hash and array segments');
 };
@@ -46328,7 +46328,7 @@ subtest 'spec_format_terse_1_2_3_5_1_shape_literal_value_expressions' => sub {
         'nested-write assignment RHS accepts a hash shape literal');
     like($L->('push(items, [value])'), qr/BindingRuntime::push_value\(\$items, "items", \[\$value\]\)/,
         'push(target, shape) is explicit append, not all-bare child-call routing');
-    is($L->('return(foo["a"][z])'), 'return $foo->{"a"}->[$z]',
+    is($L->('return(foo["a"][z])'), 'return do { my $__ls_read_value = $foo; my $__ls_read_index; $__ls_read_index = "a"; $__ls_read_value = ref($__ls_read_value) eq "HASH" ? $__ls_read_value->{$__ls_read_index} : undef; $__ls_read_index = $z; $__ls_read_value = ref($__ls_read_value) eq "ARRAY" ? $__ls_read_value->[$__ls_read_index] : undef; $__ls_read_value }',
         'direct-access brackets still route through direct-access lowering');
     like($L->('meta[key] = [value]'), qr/\$__ls_path_value = \[\$value\];.*BindingRuntime::nested_write\(\$meta,/s,
         'nested-write brackets stay statement syntax while RHS brackets are a value literal');

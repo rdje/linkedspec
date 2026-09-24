@@ -864,7 +864,7 @@ subtest 'non-call value lowering consumes AST nodes' => sub {
         );
         is(
             $shape,
-            q!return [$value, do { require JSON::PP; JSON::PP::true }, $foo->{"a"}->[$i], {$key => $value}]!,
+            q!return [$value, do { require JSON::PP; JSON::PP::true }, do { my $__ls_read_value = $foo; my $__ls_read_index; $__ls_read_index = "a"; $__ls_read_value = ref($__ls_read_value) eq "HASH" ? $__ls_read_value->{$__ls_read_index} : undef; $__ls_read_index = $i; $__ls_read_value = ref($__ls_read_value) eq "ARRAY" ? $__ls_read_value->[$__ls_read_index] : undef; $__ls_read_value }, {$key => $value}]!,
             'AST value lowering preserves shape, scalar-read, literal, and direct-access output',
         );
 
@@ -1316,7 +1316,7 @@ subtest 'return-payload lowering consumes AST nodes before raw fallback' => sub 
         like($payload, qr/\$value/, 'AST return payload lowers bare scalar reads from typed nodes');
         like($payload, qr/JSON::PP::true/, 'AST return payload lowers booleans from typed nodes');
         like($payload, qr/__ls_cat_parts/, 'AST return payload lowers nested helper calls from typed nodes');
-        like($payload, qr/\$foo->\{"a"\}->\[\$i\]/, 'AST return payload lowers nested access from typed nodes');
+        like($payload, qr/do \{ my \$__ls_read_value = \$foo;.* = "a";.*eq "HASH".* = \$i;.*eq "ARRAY"/, 'AST return payload lowers nested access from typed nodes');
         like($payload, qr/\{\$key => \$value\}/, 'AST return payload lowers hash literals from typed nodes');
 
         my $bad_chain = LinkedSpec::call_spec_handler_subst('Top', q{return(["x", "abc".substr()])});

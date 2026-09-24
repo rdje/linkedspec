@@ -73,7 +73,7 @@ subtest 'FlowExpr and ValueExpr trace compact expression decisions' => sub {
  );
  like($flow, qr/scalar\(defined\(\$name\)\)/, 'flow composite preserves the inner defined predicate');
  like($flow_trace, qr/DECISION actionir:flow_expr:lower_flow_composite_expr:expr:typed_logical_and => TAKEN/, 'trace reports the typed logical-and branch');
- is($direct, '$items->[0]->[$idx]->{"name"}', 'direct nested access still lowers array index and literal key segments');
+ is($direct, 'do { my $__ls_read_value = $items; my $__ls_read_index; $__ls_read_index = 0; $__ls_read_value = ref($__ls_read_value) eq "ARRAY" ? $__ls_read_value->[$__ls_read_index] : undef; $__ls_read_index = $idx; $__ls_read_value = ref($__ls_read_value) eq "ARRAY" ? $__ls_read_value->[$__ls_read_index] : undef; $__ls_read_index = "name"; $__ls_read_value = ref($__ls_read_value) eq "HASH" ? $__ls_read_value->{$__ls_read_index} : undef; $__ls_read_value }', 'direct nested access still lowers array index and literal key segments');
  like($direct_trace, qr/DECISION actionir:value_expr:lower_direct_nested_access_value_expr:expr:bare_index_segment => TAKEN/, 'trace reports bare index segment');
  like($direct_trace, qr/DECISION actionir:value_expr:lower_direct_nested_access_value_expr:expr:literal_key_segment => TAKEN/, 'trace reports literal key segment');
  like($direct_trace, qr/DECISION actionir:value_expr:lower_direct_nested_access_value_expr:expr:direct_access_lowered => TAKEN/, 'trace reports direct-access success');

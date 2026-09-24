@@ -1,0 +1,380 @@
+{
+  "format": 1,
+  "owner": "SESSION-STARTUP-READING.91",
+  "intake_owner": "SESSION-STARTUP-READING.89",
+  "baseline_commit": "5e72c32b0f185783a8b6b597561e1470ce03c8f7",
+  "scope": "Three direct sum spellings and a binding assigned from the direct read fail before/after .89. Literal and explicit sorted-chain sums return6; other composition controls remain correct. Only the missing-path fallback changes state by the intended .89 repair. Other reducer methods remain unclassified.",
+  "baseline_method": "Load LinkedSpec first, assert neither changed owner is loaded, prepend repository-local baseline-lib, require both owners, assert exact INC paths. The only two changed production files are those owners; all other source is identical to baseline.",
+  "baseline_owner_sha256": {
+    "perl/LinkedSpec/ActionIR/MethodLowering.pm": "1c6d31d2939086612cf3bbd4920ef12ebc20d27eabc5ee52e116cc415bd4822c",
+    "perl/LinkedSpec/ActionIR/ValueExpr.pm": "50e49435cde1646d1db4fbd61e15d655421586361a45566f01e7a2f4a823995f"
+  },
+  "baseline": [
+    {
+      "compile_error": "",
+      "expected": 3,
+      "id": "count",
+      "invoke_error": "",
+      "last_error": null,
+      "pass": 1,
+      "source": "Top::\n -> Done { document = {\"items\":[3,1,2], \"name\":\" x \", \"meta\":{\"key\":7}}; return(count(document[\"items\"])) }\nDone:\n /x/\n",
+      "value": 3
+    },
+    {
+      "compile_error": "",
+      "expected": 6,
+      "id": "sum",
+      "invoke_error": "",
+      "last_error": null,
+      "pass": 0,
+      "source": "Top::\n -> Done { document = {\"items\":[3,1,2], \"name\":\" x \", \"meta\":{\"key\":7}}; return(sum(document[\"items\"])) }\nDone:\n /x/\n",
+      "value": null
+    },
+    {
+      "compile_error": "",
+      "expected": 6,
+      "id": "sum_literal",
+      "invoke_error": "",
+      "last_error": null,
+      "pass": 1,
+      "source": "Top::\n -> Done { document = {\"items\":[3,1,2], \"name\":\" x \", \"meta\":{\"key\":7}}; return(sum([3,1,2])) }\nDone:\n /x/\n",
+      "value": 6
+    },
+    {
+      "compile_error": "",
+      "expected": 6,
+      "id": "sum_binding",
+      "invoke_error": "",
+      "last_error": null,
+      "pass": 0,
+      "source": "Top::\n -> Done { document = {\"items\":[3,1,2], \"name\":\" x \", \"meta\":{\"key\":7}}; selected = document[\"items\"]; return(sum(selected)) }\nDone:\n /x/\n",
+      "value": null
+    },
+    {
+      "compile_error": "",
+      "expected": 6,
+      "id": "sum_sorted",
+      "invoke_error": "",
+      "last_error": null,
+      "pass": 1,
+      "source": "Top::\n -> Done { document = {\"items\":[3,1,2], \"name\":\" x \", \"meta\":{\"key\":7}}; return(document[\"items\"].sorted().sum()) }\nDone:\n /x/\n",
+      "value": 6
+    },
+    {
+      "compile_error": "",
+      "expected": 6,
+      "id": "num_sum",
+      "invoke_error": "",
+      "last_error": null,
+      "pass": 0,
+      "source": "Top::\n -> Done { document = {\"items\":[3,1,2], \"name\":\" x \", \"meta\":{\"key\":7}}; return(num_sum(document[\"items\"])) }\nDone:\n /x/\n",
+      "value": null
+    },
+    {
+      "compile_error": "",
+      "expected": 6,
+      "id": "sum_chain",
+      "invoke_error": "",
+      "last_error": null,
+      "pass": 0,
+      "source": "Top::\n -> Done { document = {\"items\":[3,1,2], \"name\":\" x \", \"meta\":{\"key\":7}}; return(document[\"items\"].sum()) }\nDone:\n /x/\n",
+      "value": null
+    },
+    {
+      "compile_error": "",
+      "expected": "1,2,3",
+      "id": "array_chain",
+      "invoke_error": "",
+      "last_error": null,
+      "pass": 1,
+      "source": "Top::\n -> Done { document = {\"items\":[3,1,2], \"name\":\" x \", \"meta\":{\"key\":7}}; return(document[\"items\"].sorted().join_values(\",\")) }\nDone:\n /x/\n",
+      "value": "1,2,3"
+    },
+    {
+      "compile_error": "",
+      "expected": "x",
+      "id": "scalar_chain",
+      "invoke_error": "",
+      "last_error": null,
+      "pass": 1,
+      "source": "Top::\n -> Done { document = {\"items\":[3,1,2], \"name\":\" x \", \"meta\":{\"key\":7}}; return(document[\"name\"].trim()) }\nDone:\n /x/\n",
+      "value": "x"
+    },
+    {
+      "compile_error": "",
+      "expected": 1,
+      "id": "hash_count",
+      "invoke_error": "",
+      "last_error": null,
+      "pass": 1,
+      "source": "Top::\n -> Done { document = {\"items\":[3,1,2], \"name\":\" x \", \"meta\":{\"key\":7}}; return(count_keys(document[\"meta\"])) }\nDone:\n /x/\n",
+      "value": 1
+    },
+    {
+      "compile_error": "",
+      "expected": [
+        "fallback",
+        {
+          "items": [
+            3,
+            1,
+            2
+          ],
+          "meta": {
+            "key": 7
+          },
+          "name": " x "
+        }
+      ],
+      "id": "fallback",
+      "invoke_error": "",
+      "last_error": null,
+      "pass": 0,
+      "source": "Top::\n -> Done { document = {\"items\":[3,1,2], \"name\":\" x \", \"meta\":{\"key\":7}}; selected = coalesce(document[\"missing\"][0], \"fallback\"); return([selected, document]) }\nDone:\n /x/\n",
+      "value": [
+        "fallback",
+        {
+          "items": [
+            3,
+            1,
+            2
+          ],
+          "meta": {
+            "key": 7
+          },
+          "missing": [],
+          "name": " x "
+        }
+      ]
+    },
+    {
+      "compile_error": "",
+      "expected": "missing",
+      "id": "branch",
+      "invoke_error": "",
+      "last_error": null,
+      "pass": 1,
+      "source": "Top::\n -> Done { document = {\"items\":[3,1,2], \"name\":\" x \", \"meta\":{\"key\":7}}; if(is_defined(document[\"missing\"][0])); return(\"present\"); else; return(\"missing\"); endif() }\nDone:\n /x/\n",
+      "value": "missing"
+    },
+    {
+      "compile_error": "",
+      "expected": [
+        [
+          3,
+          1,
+          2
+        ]
+      ],
+      "id": "append",
+      "invoke_error": "",
+      "last_error": null,
+      "pass": 1,
+      "source": "Top::\n -> Done { document = {\"items\":[3,1,2], \"name\":\" x \", \"meta\":{\"key\":7}}; items += document[\"items\"]; return(items) }\nDone:\n /x/\n",
+      "value": [
+        [
+          3,
+          1,
+          2
+        ]
+      ]
+    }
+  ],
+  "candidate": [
+    {
+      "compile_error": "",
+      "expected": 3,
+      "id": "count",
+      "invoke_error": "",
+      "last_error": null,
+      "pass": 1,
+      "source": "Top::\n -> Done { document = {\"items\":[3,1,2], \"name\":\" x \", \"meta\":{\"key\":7}}; return(count(document[\"items\"])) }\nDone:\n /x/\n",
+      "value": 3
+    },
+    {
+      "compile_error": "",
+      "expected": 6,
+      "id": "sum",
+      "invoke_error": "",
+      "last_error": null,
+      "pass": 0,
+      "source": "Top::\n -> Done { document = {\"items\":[3,1,2], \"name\":\" x \", \"meta\":{\"key\":7}}; return(sum(document[\"items\"])) }\nDone:\n /x/\n",
+      "value": null
+    },
+    {
+      "compile_error": "",
+      "expected": 6,
+      "id": "sum_literal",
+      "invoke_error": "",
+      "last_error": null,
+      "pass": 1,
+      "source": "Top::\n -> Done { document = {\"items\":[3,1,2], \"name\":\" x \", \"meta\":{\"key\":7}}; return(sum([3,1,2])) }\nDone:\n /x/\n",
+      "value": 6
+    },
+    {
+      "compile_error": "",
+      "expected": 6,
+      "id": "sum_binding",
+      "invoke_error": "",
+      "last_error": null,
+      "pass": 0,
+      "source": "Top::\n -> Done { document = {\"items\":[3,1,2], \"name\":\" x \", \"meta\":{\"key\":7}}; selected = document[\"items\"]; return(sum(selected)) }\nDone:\n /x/\n",
+      "value": null
+    },
+    {
+      "compile_error": "",
+      "expected": 6,
+      "id": "sum_sorted",
+      "invoke_error": "",
+      "last_error": null,
+      "pass": 1,
+      "source": "Top::\n -> Done { document = {\"items\":[3,1,2], \"name\":\" x \", \"meta\":{\"key\":7}}; return(document[\"items\"].sorted().sum()) }\nDone:\n /x/\n",
+      "value": 6
+    },
+    {
+      "compile_error": "",
+      "expected": 6,
+      "id": "num_sum",
+      "invoke_error": "",
+      "last_error": null,
+      "pass": 0,
+      "source": "Top::\n -> Done { document = {\"items\":[3,1,2], \"name\":\" x \", \"meta\":{\"key\":7}}; return(num_sum(document[\"items\"])) }\nDone:\n /x/\n",
+      "value": null
+    },
+    {
+      "compile_error": "",
+      "expected": 6,
+      "id": "sum_chain",
+      "invoke_error": "",
+      "last_error": null,
+      "pass": 0,
+      "source": "Top::\n -> Done { document = {\"items\":[3,1,2], \"name\":\" x \", \"meta\":{\"key\":7}}; return(document[\"items\"].sum()) }\nDone:\n /x/\n",
+      "value": null
+    },
+    {
+      "compile_error": "",
+      "expected": "1,2,3",
+      "id": "array_chain",
+      "invoke_error": "",
+      "last_error": null,
+      "pass": 1,
+      "source": "Top::\n -> Done { document = {\"items\":[3,1,2], \"name\":\" x \", \"meta\":{\"key\":7}}; return(document[\"items\"].sorted().join_values(\",\")) }\nDone:\n /x/\n",
+      "value": "1,2,3"
+    },
+    {
+      "compile_error": "",
+      "expected": "x",
+      "id": "scalar_chain",
+      "invoke_error": "",
+      "last_error": null,
+      "pass": 1,
+      "source": "Top::\n -> Done { document = {\"items\":[3,1,2], \"name\":\" x \", \"meta\":{\"key\":7}}; return(document[\"name\"].trim()) }\nDone:\n /x/\n",
+      "value": "x"
+    },
+    {
+      "compile_error": "",
+      "expected": 1,
+      "id": "hash_count",
+      "invoke_error": "",
+      "last_error": null,
+      "pass": 1,
+      "source": "Top::\n -> Done { document = {\"items\":[3,1,2], \"name\":\" x \", \"meta\":{\"key\":7}}; return(count_keys(document[\"meta\"])) }\nDone:\n /x/\n",
+      "value": 1
+    },
+    {
+      "compile_error": "",
+      "expected": [
+        "fallback",
+        {
+          "items": [
+            3,
+            1,
+            2
+          ],
+          "meta": {
+            "key": 7
+          },
+          "name": " x "
+        }
+      ],
+      "id": "fallback",
+      "invoke_error": "",
+      "last_error": null,
+      "pass": 1,
+      "source": "Top::\n -> Done { document = {\"items\":[3,1,2], \"name\":\" x \", \"meta\":{\"key\":7}}; selected = coalesce(document[\"missing\"][0], \"fallback\"); return([selected, document]) }\nDone:\n /x/\n",
+      "value": [
+        "fallback",
+        {
+          "items": [
+            3,
+            1,
+            2
+          ],
+          "meta": {
+            "key": 7
+          },
+          "name": " x "
+        }
+      ]
+    },
+    {
+      "compile_error": "",
+      "expected": "missing",
+      "id": "branch",
+      "invoke_error": "",
+      "last_error": null,
+      "pass": 1,
+      "source": "Top::\n -> Done { document = {\"items\":[3,1,2], \"name\":\" x \", \"meta\":{\"key\":7}}; if(is_defined(document[\"missing\"][0])); return(\"present\"); else; return(\"missing\"); endif() }\nDone:\n /x/\n",
+      "value": "missing"
+    },
+    {
+      "compile_error": "",
+      "expected": [
+        [
+          3,
+          1,
+          2
+        ]
+      ],
+      "id": "append",
+      "invoke_error": "",
+      "last_error": null,
+      "pass": 1,
+      "source": "Top::\n -> Done { document = {\"items\":[3,1,2], \"name\":\" x \", \"meta\":{\"key\":7}}; items += document[\"items\"]; return(items) }\nDone:\n /x/\n",
+      "value": [
+        [
+          3,
+          1,
+          2
+        ]
+      ]
+    }
+  ],
+  "lowering": [
+    {
+      "lowered": "return do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:num_sum\"; undef }",
+      "source": "return(sum(document[\"items\"]))"
+    },
+    {
+      "lowered": "return do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:num_sum\"; undef }",
+      "source": "return(num_sum(document[\"items\"]))"
+    },
+    {
+      "lowered": "return do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:num_sum\"; undef }",
+      "source": "return(document[\"items\"].sum())"
+    },
+    {
+      "lowered": "return do { my $__ls_num_sum_source = [3, 1, 2]; if (defined($__ls_num_sum_source) && ref($__ls_num_sum_source) eq 'ARRAY') { my $__ls_num_sum_total = 0; my $__ls_num_sum_ok = 1; for my $__ls_num_sum_term (@{$__ls_num_sum_source}) { if (!(defined($__ls_num_sum_term) && $__ls_num_sum_term =~ /\\A-?(?:\\d+(?:\\.\\d+)?|\\.\\d+)\\z/)) { $__ls_num_sum_ok = 0; last; } $__ls_num_sum_total += $__ls_num_sum_term; } $__ls_num_sum_ok ? $__ls_num_sum_total : undef } else { undef } }",
+      "source": "return(sum([3,1,2]))"
+    },
+    {
+      "lowered": "$selected = do { my $__ls_read_value = $document; my $__ls_read_index; $__ls_read_index = \"items\"; $__ls_read_value = ref($__ls_read_value) eq \"HASH\" ? $__ls_read_value->{$__ls_read_index} : undef; $__ls_read_value }; return do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:num_sum\"; undef }",
+      "source": "selected = document[\"items\"]; return(sum(selected))"
+    }
+  ],
+  "rejected_probe_attempts": [
+    "Initial probe exit expression had a grep precedence error after writing complete observations; fixed before pinned reruns.",
+    "Initial -I baseline-lib attempt did not prove selected owners because LinkedSpec prepended its module root; excluded as baseline evidence."
+  ],
+  "next": "Repair after .90 and before .51; frozen read-purity .89 production/tests are unchanged."
+}

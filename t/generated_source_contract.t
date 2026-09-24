@@ -625,4 +625,257 @@ BOOK_RUNNER
  }
 };
 
+subtest 'direct reads preserve state in native and fresh generated parsers' => sub {
+ require Scalar::Util;
+ require Cwd;
+ my $read_repo_root = Cwd::abs_path($repo_root);
+ my $json = JSON::PP->new->canonical->allow_nonref;
+ my $clone_value = sub { $json->decode($json->encode($_[0])) };
+ my @cases = (
+  ['absent_array', '', 'document[0]', undef, undef],
+  ['null_array', 'document = undef;', 'document[0]', undef, undef],
+  ['absent_hash', '', 'document["missing"]', undef, undef],
+  ['empty_hash', 'document = {};', 'document["missing"][0]', {}, undef],
+  ['empty_array', 'document = [];', 'document[0][0]', [], undef],
+  ['null_hash_child', 'document = {"missing":undef};', 'document["missing"][0]', {missing=>undef}, undef],
+  ['null_array_child', 'document = [undef];', 'document[0][0]', [undef], undef],
+  ['wrong_root', 'document = 7;', 'document[0]', 7, undef],
+  ['wrong_array_kind', 'document = {};', 'document[0]', {}, undef],
+  ['wrong_hash_kind', 'document = [];', 'document["missing"]', [], undef],
+  ['wrong_hash_child', 'document = {"key":"scalar"};', 'document["key"]["nested"]', {key=>'scalar'}, undef],
+  ['wrong_array_child', 'document = ["scalar"];', 'document[0][0]', ['scalar'], undef],
+  ['present_mixed', 'document = {"list":["a","b"]};', 'document["list"][1]', {list=>['a','b']}, 'b'],
+  ['existing_null_leaf', 'document = [undef];', 'document[0]', [undef], undef],
+  ['out_of_range', 'document = ["a"];', 'document[9]', ['a'], undef],
+  ['negative_read_index', 'document = ["a","b"];', 'document[-1]', ['a','b'], 'b'],
+  ['fractional_read_index', 'document = ["a","b"];', 'document[1.9]', ['a','b'], 'b'],
+  ['numeric_string_index', 'document = ["a","b"]; index = "1";', 'document[index]', ['a','b'], 'b'],
+  ['single_rebind', 'document = ["old0","old1","old2"];',
+   'document[set(document, ["new0","new1"]).count()]', ['new0','new1'], 'old2'],
+  ['nested_rebind', 'document = [["old0","old1"]];',
+   'document[0][set(document, [["new"]]).count()]', [['new']], 'old1'],
+  ['single_rebind_retained', 'document = ["old0","old1","old2"]; saved = document;',
+   'document[set(document, ["new0","new1"]).count()]', ['new0','new1'], 'old2'],
+  ['nested_rebind_retained', 'document = [["old0","old1"]]; saved = document[0];',
+   'document[0][set(document, [["new"]]).count()]', [['new']], 'old1'],
+  ['temporary_name_value', 'document = ["a","b"]; __ls_read_value = 1;',
+   'document[__ls_read_value]', ['a','b'], 'b'],
+  ['temporary_name_index', 'document = ["a","b"]; __ls_read_index = 1;',
+   'document[__ls_read_index]', ['a','b'], 'b'],
+  ['temporary_name_nested', 'document = [["a","b"]]; __ls_read_value_ = [1];',
+   'document[0][__ls_read_value_[0]]', [['a','b']], 'b'],
+ );
+
+ my $scratch = tempdir(CLEANUP=>1);
+ my @emitted;
+ for my $case (@cases) {
+  my ($id,$setup,$access,$after,$expected_read) = @$case;
+  my $source = "Top::\n -> Done { $setup observed = $access; return(array(document, observed)) }\nDone:\n /x/\n";
+  my $expected = [$after,$expected_read];
+  subtest "native $id preserves the binding" => sub {
+   my %ctx;
+   my $parser = eval { LinkedSpec::Get(\$source, runtime_ctx_ref=>\%ctx) };
+   is("$@", '', 'source compiles');
+   ok(ref($parser) eq 'CODE', 'parser exists');
+   if (ref($parser) eq 'CODE') {
+    for my $run (1,2) {
+     my $input='x';
+     my $value=eval { $parser->(\$input) };
+     is("$@", '', "run $run has no exception");
+     is_deeply($value,$expected,"run $run returns the read and unchanged binding, except authored selector effects");
+     ok(!$ctx{last_error},"run $run has no handler error");
+    }
+   }
+  };
+  my $generated = eval { LinkedSpec::emit_generated_source(\$source, source_identity=>"read-purity:$id") };
+  is("$@", '', "$id emits standalone source");
+  if (defined($generated) && length($generated)) {
+   my $path=File::Spec->catfile($scratch,"$id.pl");
+   open my $fh,'>:encoding(UTF-8)',$path or die $!;
+   print {$fh} $generated;
+   close $fh or die $!;
+   push @emitted,{id=>$id,path=>File::Spec->abs2rel($path,$read_repo_root),expected=>$expected};
+  } else { fail("$id generated source is present") }
+ }
+
+ subtest 'function parameters and absent local bindings remain pure' => sub {
+  my $source = <<'SPEC';
+fn from_parameter(document) {
+ observed = document["missing"][0];
+ return([document, observed])
+}
+fn from_local() {
+ observed = document[0];
+ document["created"] = "write";
+ return([document, observed])
+}
+Top::
+ -> Done { return(array(from_parameter({}), from_parameter(undef), from_local(), from_local())) }
+Done:
+ /x/
+SPEC
+  my $expected=[[{},undef],[undef,undef],[{created=>'write'},undef],[{created=>'write'},undef]];
+  my %ctx;
+  my $parser=eval { LinkedSpec::Get(\$source,runtime_ctx_ref=>\%ctx) };
+  is("$@", '', 'function source compiles');
+  ok(ref($parser) eq 'CODE','function parser exists');
+  if(ref($parser) eq 'CODE') {
+   my $input='x';
+   is_deeply($parser->(\$input),$expected,'parameter state survives reads and later writes create fresh local roots');
+   ok(!$ctx{last_error},'function calls have no handler error');
+  }
+  my $generated=LinkedSpec::emit_generated_source(\$source,source_identity=>'read-purity:functions');
+  my $path=File::Spec->catfile($scratch,'functions.pl');
+  open my $fh,'>:encoding(UTF-8)',$path or die $!;
+  print {$fh} $generated;
+  close $fh or die $!;
+  push @emitted,{id=>'functions',path=>File::Spec->abs2rel($path,$read_repo_root),expected=>$expected};
+ };
+
+ subtest 'the included book example preserves missing and null paths' => sub {
+  my $source = read_text(File::Spec->catfile($read_repo_root, 'examples', 'direct-read-purity.spec'));
+  my $expected = {tree => {present => ['kept'], null => undef}, missing => undef,
+   null_child => undef, wrong_kind => undef, absent => undef, document => {created => 'write'},
+   null_root => undef, null_read => undef, present => 'kept'};
+  for my $ending ('LF', 'CRLF') {
+   my $authored = $source;
+   $authored =~ s/\n/\r\n/g if $ending eq 'CRLF';
+   my %ctx;
+   my $parser = eval { LinkedSpec::Get(\$authored, runtime_ctx_ref => \%ctx) };
+   is("$@", '', "$ending book source compiles");
+   ok(ref($parser) eq 'CODE', "$ending book parser exists");
+   if (ref($parser) eq 'CODE') {
+    for my $run (1, 2) {
+     my $input = 'x';
+     my $value = eval { $parser->(\$input) };
+     is("$@", '', "$ending book run $run has no exception");
+     is_deeply($value, $expected, "$ending book run $run returns its documented state");
+     ok(!$ctx{last_error}, "$ending book run $run has no handler error");
+    }
+   }
+   my $generated = LinkedSpec::emit_generated_source(\$authored,
+    source_identity => 'examples/direct-read-purity.spec');
+   my $path = File::Spec->catfile($scratch, "book-$ending.pl");
+   open my $fh, '>:encoding(UTF-8)', $path or die $!;
+   print {$fh} $generated;
+   close $fh or die $!;
+   push @emitted, {id => "book-$ending", path => File::Spec->abs2rel($path, $read_repo_root), expected => $expected};
+  }
+ };
+
+ {
+  package LinkedSpec::DirectReadObservedScalar;
+  sub TIESCALAR { bless {events=>$_[1],label=>$_[2],get=>$_[3],stores=>0},$_[0] }
+  sub FETCH { my $s=shift; push @{$s->{events}},$s->{label}; $s->{get}->() }
+  sub STORE { ++$_[0]{stores}; push @{$_[0]{events}},'STORE:'.$_[0]{label} }
+ }
+
+ subtest 'selectors run once in order and failures preserve state and identity' => sub {
+  for my $case (['present',[['a']]],['missing',undef],['missing_child',[]],['null_child',[undef]],['wrong_root',7],['wrong_child',[{}]],
+                 ['first_fails',[['a']]],['second_fails',[['a']]]) {
+   my ($id,$initial)=@$case;
+   my $document=$clone_value->($initial);
+   my $identity=ref($document) ? Scalar::Util::refaddr($document) : undef;
+   my ($first,$second,$observed);
+   my %__ls_binding_presence=(sentinel=>1);
+   my @events;
+   tie $first,'LinkedSpec::DirectReadObservedScalar',\@events,'first',sub {die "first failed\n" if $id eq 'first_fails'; 0};
+   tie $second,'LinkedSpec::DirectReadObservedScalar',\@events,'second',sub {die "second failed\n" if $id eq 'second_fails'; 0};
+   my $lowered=LinkedSpec::call_spec_handler_subst('Top',q{observed = document[first][second]});
+   my $value=eval $lowered;
+   my $error="$@";
+   is_deeply(\@events,$id eq 'first_fails' ? ['first'] : ['first','second'],"$id selector count/order");
+   is($error,$id=~/^(first|second)_fails$/ ? "$1 failed\n" : '',"$id preserves selector exception");
+   is_deeply($document,$initial,"$id does not mutate the binding");
+   is(ref($document) ? Scalar::Util::refaddr($document) : undef,$identity,"$id preserves root identity");
+   is_deeply(\%__ls_binding_presence,{sentinel=>1},"$id preserves binding presence");
+   is($value,$id eq 'present' ? 'a' : undef,"$id returns the selected value");
+  }
+ };
+
+ subtest 'root observation never stores or substitutes a reference' => sub {
+  for my $initial (undef,[],{}, {child=>['a']}) {
+   my @events;
+   my $document;
+   my $slot=tie $document,'LinkedSpec::DirectReadObservedScalar',\@events,'root',sub { $initial };
+   my $observed;
+   my $before=$clone_value->($initial);
+   my $lowered=LinkedSpec::call_spec_handler_subst('Top',q{observed = document["child"][0]});
+   my $value=eval $lowered;
+   is("$@",'','tied root read has no exception');
+   is($slot->{stores},0,'no STORE occurs');
+   is_deeply(\@events,['root'],'root is observed once');
+   is_deeply($initial,$before,'referenced container remains unchanged');
+  }
+  my $child=['a'];
+  my $document={child=>$child};
+  my $observed;
+  my $lowered=LinkedSpec::call_spec_handler_subst('Top',q{observed = document["child"]});
+  my $value=eval $lowered;
+  is("$@",'','container-valued leaf read succeeds');
+  is(Scalar::Util::refaddr($value),Scalar::Util::refaddr($child),'read preserves selected reference identity');
+  is(Scalar::Util::refaddr($document->{child}),Scalar::Util::refaddr($child),'root retains the same child');
+ };
+
+ subtest 'fresh process executes standalone generated parsers twice' => sub {
+  my $manifest=File::Spec->catfile($scratch,'manifest.json');
+  open my $fh,'>',$manifest or die $!;
+  print {$fh} $json->encode(\@emitted);
+  close $fh or die $!;
+  my $runner=File::Spec->catfile($scratch,'runner.pl');
+  open my $run_fh,'>',$runner or die $!;
+  print {$run_fh} <<'READ_PURITY_RUNNER';
+use strict;
+use warnings;
+use JSON::PP ();
+use File::Spec ();
+my $json=JSON::PP->new->canonical->allow_nonref;
+open my $fh,'<',$ARGV[0] or die $!;
+my $cases=$json->decode(do {local $/; <$fh>});
+close $fh;
+my @rows;
+for my $index (0..$#$cases) {
+ my $case=$cases->[$index];
+ open my $source_fh,'<:encoding(UTF-8)',File::Spec->catfile($ARGV[2],$case->{path}) or die $!;
+ my $source=do {local $/; <$source_fh>};
+ close $source_fh;
+ my $package="LinkedSpec::DirectReadEmitted::Case$index";
+ my $loaded=eval "package $package; $source; 1";
+ my $row={load_error=>"$@",runs=>[]};
+ if($loaded) {
+  for(1,2) {
+   my $input='x';
+   my $value=eval {no strict 'refs'; &{"${package}::Execute"}(\$input)};
+   push @{$row->{runs}},{value=>$value,error=>"$@"};
+  }
+ }
+ push @rows,$row;
+}
+open my $out,'>',$ARGV[1] or die $!;
+print {$out} $json->encode(\@rows);
+close $out or die $!;
+READ_PURITY_RUNNER
+  close $run_fh or die $!;
+  my $output=File::Spec->catfile($scratch,'results.json');
+  my $status=system($^X,'-I'.File::Spec->catdir($read_repo_root,'perl'),$runner,$manifest,$output,$read_repo_root);
+  is($status,0,'fresh generated-source child exits successfully');
+  if(open my $result,'<',$output) {
+   my $rows=$json->decode(do {local $/; <$result>});
+   close $result;
+   is(scalar(@$rows),scalar(@emitted),'every emitted fixture returned observations');
+   for my $index (0..$#emitted) {
+    my $row=$rows->[$index];
+    my $case=$emitted[$index];
+    is($row->{load_error},'',"$case->{id} loads independently");
+    for my $run (0,1) {
+     is($row->{runs}[$run]{error},'',"$case->{id} emitted run $run has no exception");
+     is_deeply($row->{runs}[$run]{value},$case->{expected},"$case->{id} emitted run $run preserves state");
+    }
+   }
+  } else { fail('fresh child wrote complete observations') }
+ };
+
+ done_testing;
+};
+
 done_testing;

@@ -231,7 +231,7 @@ dispatch rule.
 - **Returns**: read form returns the selected value or `undef`; assignment returns the updated root on success.
   Structural failures throw the typed v1 diagnostic on all five backends.
 - **Behavior**: Reads any-depth mixed hash/array paths directly from a structured payload. The contract forbids
-  creating state; see the [current Perl read limitation](../dsl/value-container-flow-helper-reference.md#read-purity).
+  creating state; see the executed [read-purity examples and Perl evaluation details](../dsl/value-container-flow-helper-reference.md#read-purity).
   Assignment uses the same spelling. On all five backends, each bracket expression is evaluated and its runtime kind selects
   harray (string) or array (nonnegative integer), so dynamic selectors are not classified from their authored
   spelling. A non-reserved bare path atom such as `[i]` reads the scalar working variable. The assignment target
@@ -652,6 +652,8 @@ dispatch rule.
 - **Boundary**: Exact `array(IDENTIFIER)` is a removed selector shape, not a one-element constructor. Use the bare
   identifier to read its typed value or `[identifier]` to construct one element. All five backends reject the
   removed shape before execution.
+- **Current Perl function limitation**: Multi-argument `array(value, value)` inside a user function can emit
+  identifier strings instead of parameter/local values. Use `[value, value]` pending the separately tracked repair.
 
 ### Array receiver-dot value chains
 - **Signature**: `array_expr.method(args...).next(args...)`
@@ -1216,6 +1218,8 @@ The shipped explicit string bridge names are `str_eq`, `str_ne`, `str_gt`,
 - **Example**: over `/(\d+)/`, `num_clamp(entry_group(0), 0, 10)` gives `[10]` on `42` and `[7]` on `7`.
 
 ### `num_sum(arr)`
+- **Current Perl limitation**: Direct-access array arguments, including a binding assigned from such a read,
+  can return null before numeric reduction. See the [measured reducer controls](../dsl/value-container-flow-helper-reference.md#numeric-value-helpers) and current source-shape limitation.
 - **Signature**: `num_sum(arr: array)`
 - **Returns**: numeric
 - **Behavior**: Sum of array elements. Returns `0` for empty array. Returns `undef` for non-array or non-numeric element sources.

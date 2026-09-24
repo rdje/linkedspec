@@ -1,0 +1,36 @@
+{
+  "owner": "SESSION-STARTUP-READING.90",
+  "intake_owner": "SESSION-STARTUP-READING.89",
+  "base": "5e72c32b0f185783a8b6b597561e1470ce03c8f7",
+  "state": "Measured with .89 guarded direct-read changes in progress; the constructor control contains no indexed access. Diagnostic intake, not repair acceptance.",
+  "cases": [
+    {
+      "error": "",
+      "last_error": null,
+      "source": "fn pack(value) { return(array(value,value)) }\nTop::\n -> Done { return(pack(7)) }\nDone:\n /x/\n",
+      "value": [
+        "value",
+        "value"
+      ],
+      "input": "x",
+      "expected": [
+        7,
+        7
+      ]
+    },
+    {
+      "error": "",
+      "last_error": null,
+      "source": "fn pack(value) { return([value,value]) }\nTop::\n -> Done { return(pack(7)) }\nDone:\n /x/\n",
+      "value": [
+        7,
+        7
+      ],
+      "input": "x",
+      "expected": [
+        7,
+        7
+      ]
+    }
+  ]
+}

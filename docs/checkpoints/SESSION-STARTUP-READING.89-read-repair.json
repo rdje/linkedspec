@@ -1,0 +1,435 @@
+{
+  "format": 1,
+  "owner": "SESSION-STARTUP-READING.89",
+  "activation_commit": "5e72c32b0f185783a8b6b597561e1470ce03c8f7",
+  "scope": "Six original public sources now preserve exact expected state. Additional eval controls retain references in case records; sole-owned public parser proof is in generated_source_contract.t and selector-lifetime checkpoint. Wrong-kind paths now yield null instead of a host dereference exception.",
+  "intake": "docs/checkpoints/SESSION-STARTUP-READING.89-read-purity.json",
+  "before": [
+    {
+      "compile_error": "",
+      "id": "unbound_root",
+      "invoke_error": "",
+      "last_error": null,
+      "route": "Get",
+      "value": {
+        "after": [],
+        "read": null
+      }
+    },
+    {
+      "compile_error": "",
+      "id": "null_root",
+      "invoke_error": "",
+      "last_error": null,
+      "route": "Get",
+      "value": {
+        "after": [],
+        "read": null
+      }
+    },
+    {
+      "compile_error": "",
+      "id": "empty_hash",
+      "invoke_error": "",
+      "last_error": null,
+      "route": "Get",
+      "value": {
+        "after": {
+          "missing": []
+        },
+        "read": null
+      }
+    },
+    {
+      "compile_error": "",
+      "id": "empty_array",
+      "invoke_error": "",
+      "last_error": null,
+      "route": "Get",
+      "value": {
+        "after": [
+          []
+        ],
+        "read": null
+      }
+    },
+    {
+      "compile_error": "",
+      "id": "null_child",
+      "invoke_error": "",
+      "last_error": null,
+      "route": "Get",
+      "value": {
+        "after": {
+          "missing": []
+        },
+        "read": null
+      }
+    },
+    {
+      "compile_error": "",
+      "id": "present_control",
+      "invoke_error": "",
+      "last_error": null,
+      "route": "Get",
+      "value": {
+        "after": {
+          "list": [
+            "a"
+          ]
+        },
+        "read": "a"
+      }
+    },
+    {
+      "error": "",
+      "id": "single_rebind",
+      "items": [
+        "new0",
+        "new1"
+      ],
+      "lowered": "$observed = $items->[do { my $__ls_count = do { $items = [\"new0\", \"new1\"]; $items }; defined($__ls_count) ? scalar(@{$__ls_count}) : 0 }]",
+      "route": "lowering",
+      "source": "items[set(items, [\"new0\", \"new1\"]).count()]",
+      "tree": null,
+      "value": "old2"
+    },
+    {
+      "error": "",
+      "id": "nested_rebind",
+      "items": null,
+      "lowered": "$observed = $tree->[0]->[do { my $__ls_count = do { $tree = [[\"new\"]]; $tree }; defined($__ls_count) ? scalar(@{$__ls_count}) : 0 }]",
+      "route": "lowering",
+      "source": "tree[0][set(tree, [[\"new\"]]).count()]",
+      "tree": [
+        [
+          "new"
+        ]
+      ],
+      "value": "old1"
+    },
+    {
+      "after": [
+        [
+          "a"
+        ]
+      ],
+      "error": "",
+      "events": [
+        "first",
+        "second"
+      ],
+      "id": "present",
+      "lowered": "$observed = $document->[$first]->[$second]",
+      "route": "order",
+      "value": "a"
+    },
+    {
+      "after": [
+        []
+      ],
+      "error": "",
+      "events": [
+        "first",
+        "second"
+      ],
+      "id": "missing",
+      "lowered": "$observed = $document->[$first]->[$second]",
+      "route": "order",
+      "value": null
+    },
+    {
+      "after": "scalar",
+      "error": "Can't use string (\"scalar\") as an ARRAY ref while \"strict refs\" in use at (eval 15084) line 1.\n",
+      "events": [],
+      "id": "wrong_root",
+      "lowered": "$observed = $document->[$first]->[$second]",
+      "route": "order",
+      "value": null
+    },
+    {
+      "after": [
+        "scalar"
+      ],
+      "error": "Can't use string (\"scalar\") as an ARRAY ref while \"strict refs\" in use at (eval 15085) line 1.\n",
+      "events": [
+        "first"
+      ],
+      "id": "wrong_intermediate",
+      "lowered": "$observed = $document->[$first]->[$second]",
+      "route": "order",
+      "value": null
+    },
+    {
+      "after": [
+        []
+      ],
+      "error": "",
+      "events": [
+        "first",
+        "second"
+      ],
+      "id": "missing_intermediate",
+      "lowered": "$observed = $document->[$first]->[$second]",
+      "route": "order",
+      "value": null
+    },
+    {
+      "after": [
+        []
+      ],
+      "error": "",
+      "events": [
+        "first",
+        "second"
+      ],
+      "id": "null_intermediate",
+      "lowered": "$observed = $document->[$first]->[$second]",
+      "route": "order",
+      "value": null
+    },
+    {
+      "after": [
+        [
+          "a"
+        ]
+      ],
+      "error": "first failed\n",
+      "events": [
+        "first"
+      ],
+      "id": "first_fails",
+      "lowered": "$observed = $document->[$first]->[$second]",
+      "route": "order",
+      "value": null
+    },
+    {
+      "after": [
+        [
+          "a"
+        ]
+      ],
+      "error": "second failed\n",
+      "events": [
+        "first",
+        "second"
+      ],
+      "id": "second_fails",
+      "lowered": "$observed = $document->[$first]->[$second]",
+      "route": "order",
+      "value": null
+    }
+  ],
+  "after": [
+    {
+      "compile_error": "",
+      "id": "unbound_root",
+      "invoke_error": "",
+      "last_error": null,
+      "route": "Get",
+      "value": {
+        "after": null,
+        "read": null
+      }
+    },
+    {
+      "compile_error": "",
+      "id": "null_root",
+      "invoke_error": "",
+      "last_error": null,
+      "route": "Get",
+      "value": {
+        "after": null,
+        "read": null
+      }
+    },
+    {
+      "compile_error": "",
+      "id": "empty_hash",
+      "invoke_error": "",
+      "last_error": null,
+      "route": "Get",
+      "value": {
+        "after": {},
+        "read": null
+      }
+    },
+    {
+      "compile_error": "",
+      "id": "empty_array",
+      "invoke_error": "",
+      "last_error": null,
+      "route": "Get",
+      "value": {
+        "after": [],
+        "read": null
+      }
+    },
+    {
+      "compile_error": "",
+      "id": "null_child",
+      "invoke_error": "",
+      "last_error": null,
+      "route": "Get",
+      "value": {
+        "after": {
+          "missing": null
+        },
+        "read": null
+      }
+    },
+    {
+      "compile_error": "",
+      "id": "present_control",
+      "invoke_error": "",
+      "last_error": null,
+      "route": "Get",
+      "value": {
+        "after": {
+          "list": [
+            "a"
+          ]
+        },
+        "read": "a"
+      }
+    },
+    {
+      "error": "",
+      "id": "single_rebind",
+      "items": [
+        "new0",
+        "new1"
+      ],
+      "lowered": "$observed = do { my $__ls_read_value = $items; my $__ls_read_index; $__ls_read_index = do { my $__ls_count = do { $items = [\"new0\", \"new1\"]; $items }; defined($__ls_count) ? scalar(@{$__ls_count}) : 0 }; $__ls_read_value = ref($__ls_read_value) eq \"ARRAY\" ? $__ls_read_value->[$__ls_read_index] : undef; $__ls_read_value }",
+      "route": "lowering",
+      "source": "items[set(items, [\"new0\", \"new1\"]).count()]",
+      "tree": null,
+      "value": "old2"
+    },
+    {
+      "error": "",
+      "id": "nested_rebind",
+      "items": null,
+      "lowered": "$observed = do { my $__ls_read_value = $tree; my $__ls_read_index; $__ls_read_index = 0; $__ls_read_value = ref($__ls_read_value) eq \"ARRAY\" ? $__ls_read_value->[$__ls_read_index] : undef; $__ls_read_index = do { my $__ls_count = do { $tree = [[\"new\"]]; $tree }; defined($__ls_count) ? scalar(@{$__ls_count}) : 0 }; $__ls_read_value = ref($__ls_read_value) eq \"ARRAY\" ? $__ls_read_value->[$__ls_read_index] : undef; $__ls_read_value }",
+      "route": "lowering",
+      "source": "tree[0][set(tree, [[\"new\"]]).count()]",
+      "tree": [
+        [
+          "new"
+        ]
+      ],
+      "value": "old1"
+    },
+    {
+      "after": [
+        [
+          "a"
+        ]
+      ],
+      "error": "",
+      "events": [
+        "first",
+        "second"
+      ],
+      "id": "present",
+      "lowered": "$observed = do { my $__ls_read_value = $document; my $__ls_read_index; $__ls_read_index = $first; $__ls_read_value = ref($__ls_read_value) eq \"ARRAY\" ? $__ls_read_value->[$__ls_read_index] : undef; $__ls_read_index = $second; $__ls_read_value = ref($__ls_read_value) eq \"ARRAY\" ? $__ls_read_value->[$__ls_read_index] : undef; $__ls_read_value }",
+      "route": "order",
+      "value": "a"
+    },
+    {
+      "after": null,
+      "error": "",
+      "events": [
+        "first",
+        "second"
+      ],
+      "id": "missing",
+      "lowered": "$observed = do { my $__ls_read_value = $document; my $__ls_read_index; $__ls_read_index = $first; $__ls_read_value = ref($__ls_read_value) eq \"ARRAY\" ? $__ls_read_value->[$__ls_read_index] : undef; $__ls_read_index = $second; $__ls_read_value = ref($__ls_read_value) eq \"ARRAY\" ? $__ls_read_value->[$__ls_read_index] : undef; $__ls_read_value }",
+      "route": "order",
+      "value": null
+    },
+    {
+      "after": "scalar",
+      "error": "",
+      "events": [
+        "first",
+        "second"
+      ],
+      "id": "wrong_root",
+      "lowered": "$observed = do { my $__ls_read_value = $document; my $__ls_read_index; $__ls_read_index = $first; $__ls_read_value = ref($__ls_read_value) eq \"ARRAY\" ? $__ls_read_value->[$__ls_read_index] : undef; $__ls_read_index = $second; $__ls_read_value = ref($__ls_read_value) eq \"ARRAY\" ? $__ls_read_value->[$__ls_read_index] : undef; $__ls_read_value }",
+      "route": "order",
+      "value": null
+    },
+    {
+      "after": [
+        "scalar"
+      ],
+      "error": "",
+      "events": [
+        "first",
+        "second"
+      ],
+      "id": "wrong_intermediate",
+      "lowered": "$observed = do { my $__ls_read_value = $document; my $__ls_read_index; $__ls_read_index = $first; $__ls_read_value = ref($__ls_read_value) eq \"ARRAY\" ? $__ls_read_value->[$__ls_read_index] : undef; $__ls_read_index = $second; $__ls_read_value = ref($__ls_read_value) eq \"ARRAY\" ? $__ls_read_value->[$__ls_read_index] : undef; $__ls_read_value }",
+      "route": "order",
+      "value": null
+    },
+    {
+      "after": [],
+      "error": "",
+      "events": [
+        "first",
+        "second"
+      ],
+      "id": "missing_intermediate",
+      "lowered": "$observed = do { my $__ls_read_value = $document; my $__ls_read_index; $__ls_read_index = $first; $__ls_read_value = ref($__ls_read_value) eq \"ARRAY\" ? $__ls_read_value->[$__ls_read_index] : undef; $__ls_read_index = $second; $__ls_read_value = ref($__ls_read_value) eq \"ARRAY\" ? $__ls_read_value->[$__ls_read_index] : undef; $__ls_read_value }",
+      "route": "order",
+      "value": null
+    },
+    {
+      "after": [
+        null
+      ],
+      "error": "",
+      "events": [
+        "first",
+        "second"
+      ],
+      "id": "null_intermediate",
+      "lowered": "$observed = do { my $__ls_read_value = $document; my $__ls_read_index; $__ls_read_index = $first; $__ls_read_value = ref($__ls_read_value) eq \"ARRAY\" ? $__ls_read_value->[$__ls_read_index] : undef; $__ls_read_index = $second; $__ls_read_value = ref($__ls_read_value) eq \"ARRAY\" ? $__ls_read_value->[$__ls_read_index] : undef; $__ls_read_value }",
+      "route": "order",
+      "value": null
+    },
+    {
+      "after": [
+        [
+          "a"
+        ]
+      ],
+      "error": "first failed\n",
+      "events": [
+        "first"
+      ],
+      "id": "first_fails",
+      "lowered": "$observed = do { my $__ls_read_value = $document; my $__ls_read_index; $__ls_read_index = $first; $__ls_read_value = ref($__ls_read_value) eq \"ARRAY\" ? $__ls_read_value->[$__ls_read_index] : undef; $__ls_read_index = $second; $__ls_read_value = ref($__ls_read_value) eq \"ARRAY\" ? $__ls_read_value->[$__ls_read_index] : undef; $__ls_read_value }",
+      "route": "order",
+      "value": null
+    },
+    {
+      "after": [
+        [
+          "a"
+        ]
+      ],
+      "error": "second failed\n",
+      "events": [
+        "first",
+        "second"
+      ],
+      "id": "second_fails",
+      "lowered": "$observed = do { my $__ls_read_value = $document; my $__ls_read_index; $__ls_read_index = $first; $__ls_read_value = ref($__ls_read_value) eq \"ARRAY\" ? $__ls_read_value->[$__ls_read_index] : undef; $__ls_read_index = $second; $__ls_read_value = ref($__ls_read_value) eq \"ARRAY\" ? $__ls_read_value->[$__ls_read_index] : undef; $__ls_read_value }",
+      "route": "order",
+      "value": null
+    }
+  ]
+}

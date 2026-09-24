@@ -267,13 +267,34 @@ selects an element too. An out-of-range element is `undef` (JSON `null`).
 The read contract forbids creating missing containers; the stricter typed write-path
 rules below govern assignments through brackets.
 
-**Known Perl read limitation:** a direct read can currently create a missing
-container or replace a null intermediate. For example, reading
-`tree["missing"][0]` after `tree = {}` changes the Perl binding to
-`{"missing":[]}` even though the result is null. Reading `items[0]` after
-`items = undef` similarly changes it to `[]`. Rust preserves those bindings.
-This violates the read contract and is tracked for repair. The following example
-initializes its containers and does not encounter that limitation.
+On Perl, direct reads now preserve absent roots, null values, missing children,
+and wrong-kind containers. They return `undef` (JSON `null`) without creating or
+replacing a container, changing binding presence, or copying a selected container.
+The following executable example also checks that a read of an absent binding
+leaves it available for a later write to create the required harray:
+
+```text
+{{#include ../../../../examples/direct-read-purity.spec}}
+```
+
+With input `x`, it returns:
+
+```json
+{"tree":{"present":["kept"],"null":null},"missing":null,"null_child":null,"wrong_kind":null,"absent":null,"document":{"created":"write"},"null_root":null,"null_read":null,"present":"kept"}
+```
+
+Perl native and fresh-process generated parsers execute this exact source with
+LF and CRLF line endings. Regenerate saved Perl parser source to pick up the repair.
+
+Perl evaluates the base once and retains each observed container while evaluating
+its selector. Selectors run once from left to right, including after an earlier
+missing or wrong-kind segment; a selector exception stops the read and propagates.
+Authored selector side effects still occur. For example,
+`document[set(document, ["new0", "new1"]).count()]` over
+`document = ["old0", "old1", "old2"]` selects `"old2"` and leaves the binding
+as `["new0", "new1"]`, whether or not another binding retains the old array.
+This order is Perl-specific. For portable code, evaluate effectful selectors
+before the read and use nonnegative integer array indexes.
 
 This executable example selects elements, saves a detached array value, replaces
 the original binding, and uses an element as a computed hash key:
@@ -313,6 +334,11 @@ the indexed-read repair.
 | `copy(hash_expr)` / `copy(name)` | hash value | snapshot a hash value as one nested payload. A bare name reads the working hash of that name. |
 
 Use bare `name` for typed access and `array(...)` / `hash(...)` only for retained constructor shapes.
+
+**Current Perl function limitation:** inside a user function, multi-argument
+`array(value, value)` can return identifier strings instead of the parameter or
+local values. Use `[value, value]` there. This confirmed constructor defect is
+tracked for immediate repair separately from direct reads.
 
 In scalar value positions, a bare scalar name reads the working variable:
 `return(count)`, `set(out, count)`, `out = count`, `if(count, ...)`,
@@ -462,7 +488,7 @@ replace an existing index or append exactly at `length`. A larger index raises `
 null, scalar, or other wrong-kind intermediate raises `nested_write_kind_conflict`. All segments evaluate once
 left-to-right, then the RHS once, before isolated structural validation. Success publishes once and yields a
 detached updated root. The read contract forbids creating containers; see the
-[current Perl read limitation](#read-purity).
+[read-purity examples and Perl evaluation details](#read-purity).
 
 Canonical child-result pattern:
 
@@ -849,6 +875,13 @@ function form such as `num_sum(scores)` / `sum(scores)` or terminal array receiv
 `scores.sum()` / `scores.avg()`. They are not scalar number receiver links, and reducer terminals do not
 continue through later array receiver methods. A number-yielding expression-valued block can be the receiver,
 for example `{ 3.5 }.floor().add(2)`.
+
+**Current Perl reducer limitation:** with `document = {"items":[3,1,2]}`,
+`sum(document["items"])`, `num_sum(document["items"])` and
+`document["items"].sum()` currently return null. Assigning that read to a binding
+before summing also returns null. The literal `sum([3,1,2])` and explicit
+`document["items"].sorted().sum()` controls return `6`. This source-shape rejection
+predates the direct-read repair and is tracked for repair separately.
 
 Numeric helpers compose with array helpers:
 

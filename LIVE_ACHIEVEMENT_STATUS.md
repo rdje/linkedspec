@@ -2,17 +2,19 @@
 
 ## Current Activity
 
-Startup task evidence is losslessly partitioned with bounded lookup and unchanged collection ceilings. The current frontier is confirmed Perl read-purity .89, before cat-arity .51.
+Perl direct reads preserve missing/null state and receiver lifetime under the existing contract. The current frontier is function-array constructor .90, then numeric reducer .91 before cat-arity .51.
 
 ## Latest Completed Slice
 
-- `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.16.2 - partition startup task evidence without loss` — exact source/all 395 child blocks, public 998 lookups, negative/tool/pressure/cadence controls and rendered book pass; normal canonical acceptance governs landing.
+- `SESSION-STARTUP-READING.89 - preserve state in Perl direct reads` — public6, native/fresh/neutral proof, complete Phase01033, exact executable book source, public mutation50 and storage24 pass.
 
 ## Next Action
 
-- Resolve and activate startup .89 from the clean migration commit; fix confirmed Perl read-induced state creation before .51. The director will notify ARCHOGEN only after LS-004 is verified fixed.
+- Activate startup .90 from the clean read-repair commit and fix function constructors returning identifier strings. The director will notify ARCHOGEN only after LS-004 is verified fixed.
 
 ## Recent Completions
+
+- `2026-09-25` — `SESSION-STARTUP-READING.89` verifies non-creating Perl reads and receiver lifetime with complete Phase01033 and executable native/fresh-source book proof.
 
 - `2026-09-24` — `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.16.2` preserves all task bytes/IDs under unchanged limits, with public 998 and independent source/node proof.
 
@@ -43,8 +45,6 @@ Startup task evidence is losslessly partitioned with bounded lookup and unchange
 - `2026-09-24` — `SESSION-STARTUP-READING.86.4.4.1` owns four grouped-operand failures and eighteen controls; .86.4.8 is required before public closeout.
 
 - `2026-09-23` — `SESSION-STARTUP-READING.86.4.7` repairs physical quoted-subject validation; focused198, exact book16 and Phase0 1033/1033 pass.
-
-- `2026-09-23` — `SESSION-STARTUP-READING.86.4.6` repairs helper statement boundaries; focused52, exact book11 and Phase0 1033/1033 pass.
 
 ## History
 

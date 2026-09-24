@@ -3781,7 +3781,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
   }
   return undef unless @segments;
 
-  my $lowered = '$'.$base;
+  my @read_segments;
   foreach my $segment (@segments) {
    my $segment_kind = $segment->{kind} // '';
    if ($segment_kind eq 'key') {
@@ -3789,7 +3789,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
     return undef unless defined($segment_source) && length($segment_source) >= 2;
     my $key_source = substr($segment_source, 1, length($segment_source) - 2);
     return undef unless defined($key_source) && length($key_source);
-    $lowered .= '->{'.$key_source.'}';
+    push @read_segments, { kind => 'HASH', expr => $key_source };
     next;
    }
    return undef unless $segment_kind eq 'index';
@@ -3803,9 +3803,12 @@ my $lower_numeric_array_reducer_source_expr = sub {
    $index_expr = $legacy_method_value_expr->($segment->{expr}{source})
     unless defined($index_expr) && length($index_expr);
    return undef unless defined($index_expr) && length($index_expr);
-   $lowered .= '->['.$index_expr.']';
+   push @read_segments, { kind => 'ARRAY', expr => $index_expr };
   }
-  return $lowered
+  return LinkedSpec::OwnerDispatch::dispatch_owner_call(
+   __PACKAGE__, 'LinkedSpec::ActionIR::ValueExpr', '_emit_guarded_direct_read_expr',
+   $base, \@read_segments,
+  )
  };
  my $lower_ast_block_value_node;
  $lower_ast_block_value_node = sub {

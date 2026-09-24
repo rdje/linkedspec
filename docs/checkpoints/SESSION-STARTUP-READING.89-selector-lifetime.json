@@ -1,0 +1,93 @@
+{
+  "owner": "SESSION-STARTUP-READING.89",
+  "base": "5e72c32b0f185783a8b6b597561e1470ce03c8f7",
+  "scope": "Pre-repair public Get alias controls and public lowering host-operation observations; no completed repair or portable ordering claim.",
+  "cases": [
+    {
+      "error": "",
+      "id": "single",
+      "last_error": null,
+      "value": [
+        [
+          "new0",
+          "new1"
+        ],
+        null
+      ],
+      "source": "Top::\n -> Done { document = [\"old0\",\"old1\",\"old2\"]; observed = document[set(document, [\"new0\",\"new1\"]).count()]; return(array(document,observed)) }\nDone:\n /x/\n",
+      "input": "x",
+      "generated_sha256": "a67855ce21df7b562f51d6d25c483b23a7fbb8b08f2c7cd8c8a4b54a697d4f77"
+    },
+    {
+      "error": "",
+      "id": "nested",
+      "last_error": null,
+      "value": [
+        [
+          [
+            "new"
+          ]
+        ],
+        null
+      ],
+      "source": "Top::\n -> Done { document = [[\"old0\",\"old1\"]]; observed = document[0][set(document, [[\"new\"]]).count()]; return(array(document,observed)) }\nDone:\n /x/\n",
+      "input": "x",
+      "generated_sha256": "9b3de13a65190ffa966a73f5b6861b88b5369c8d1bcbf95a504f8eb4b5c67def"
+    },
+    {
+      "error": "",
+      "id": "single_kept",
+      "last_error": null,
+      "value": [
+        [
+          "new0",
+          "new1"
+        ],
+        "old2",
+        [
+          "old0",
+          "old1",
+          "old2"
+        ]
+      ],
+      "source": "Top::\n -> Done { document = [\"old0\",\"old1\",\"old2\"]; saved = document; observed = document[set(document, [\"new0\",\"new1\"]).count()]; return(array(document,observed,saved)) }\nDone:\n /x/\n",
+      "input": "x",
+      "generated_sha256": "4fc2d01ad9345d202d8a6ef11e63a823af87c2b86b92c235d03bfd6699a7083d"
+    },
+    {
+      "error": "",
+      "id": "nested_kept",
+      "last_error": null,
+      "value": [
+        [
+          [
+            "new"
+          ]
+        ],
+        "old1",
+        [
+          "old0",
+          "old1"
+        ]
+      ],
+      "source": "Top::\n -> Done { document = [[\"old0\",\"old1\"]]; saved = document[0]; observed = document[0][set(document, [[\"new\"]]).count()]; return(array(document,observed,saved)) }\nDone:\n /x/\n",
+      "input": "x",
+      "generated_sha256": "74a28e92da3389b6440512dfa9a24d5a0a05f74274cc9c28282b6ee49f0c8621"
+    },
+    {
+      "error": "",
+      "id": "wrong",
+      "last_error": null,
+      "value": [
+        {
+          "key": "scalar"
+        },
+        null
+      ],
+      "source": "Top::\n -> Done { document = {\"key\":\"scalar\"}; observed = document[\"key\"][\"nested\"]; return(array(document,observed)) }\nDone:\n /x/\n",
+      "input": "x",
+      "generated_sha256": "6aea7567797374c950fd4326091eac9afeda022bffbdaba45a1fcddf66d758ff"
+    }
+  ],
+  "compiled_lowering_operation_trace": "{\"action\":\"document = [\\\"old0\\\",\\\"old1\\\",\\\"old2\\\"]; observed = document[set(document, [\\\"new0\\\",\\\"new1\\\"]).count()]; return(array(document,observed))\",\"lowered\":\"$document = [\\\"old0\\\", \\\"old1\\\", \\\"old2\\\"]; $observed = $document->[do { my $__ls_count = do { $document = [\\\"new0\\\", \\\"new1\\\"]; $document }; defined($__ls_count) ? scalar(@{$__ls_count}) : 0 }]; return [$document, $observed]\",\"value\":[[\"new0\",\"new1\"],null]}\nB::Concise::compile(CODE(0x78cf009de0))\n1  <;> nextstate(main 13909 (eval 46):1) v:*,&,x*,x&,x$,$\n2  <0> padrange[$document:13909,13917; $observed:13909,13917] vM/LVINTRO,range=2\n3  <;> nextstate(main 13910 (eval 46):1) v:*,&,x*,x&,x$,$\n4  <0> pushmark s\n5  <$> const[PV \"old0\"] s\n6  <$> const[PV \"old1\"] s\n7  <$> const[PV \"old2\"] s\n8  <@> anonlist sK*/1\n9  <0> padsv[$document:13909,13917] sRM*\na  <2> sassign vKS/2\nb  <;> nextstate(main 13910 (eval 46):1) v:*,&,{,x*,x&,x$,$\nc  <0> padsv[$document:13909,13917] sM/DREFAV\nd  <1> rv2av[t5] sKR/STRICT,1\ne  <0> enter s\nf  <;> nextstate(main 13911 (eval 46):1) v:*,&,{,x*,x&,x$,$\ng  <0> enter s\nh  <;> nextstate(main 13912 (eval 46):1) v:*,&,x*,x&,x$,$\ni  <0> pushmark s\nj  <$> const[PV \"new0\"] s\nk  <$> const[PV \"new1\"] s\nl  <@> anonlist sK*/1\nm  <0> padsv[$document:13909,13917] sRM*\nn  <2> sassign vKS/2\no  <;> nextstate(main 13912 (eval 46):1) v:*,&,x*,x&,x$,$\np  <0> padsv[$document:13909,13917] s\nq  <@> leave sKP\nr  <0> padsv[$__ls_count:13913,13916] sRM*/LVINTRO\ns  <2> sassign vKS/2\nt  <;> nextstate(main 13914 (eval 46):1) v:*,&,{,x*,x&,x$,$\nu  <0> padsv[$__ls_count:13913,13916] s\nv  <1> defined sK/1\nw  <|> cond_expr(other->x) sK/1\nx      <0> padsv[$__ls_count:13913,13916] s\ny      <1> rv2av[t4] sK/STRICT,1\n           goto z\n17 <$> const[IV 0] s\nz  <@> leave sKP\n10 <2> aelem sK/2\n11 <0> padsv[$observed:13909,13917] sRM*\n12 <2> sassign vKS/2\n13 <;> nextstate(main 13917 (eval 46):1) v:*,&,{,x*,x&,x$,$\n14 <0> padrange[$document:13909,13917; $observed:13909,13917] /range=2\n15 <@> anonlist sK*/1\n16 <1> leavesub[1 ref] K/REFC,1\n{\"action\":\"document = [[\\\"old0\\\",\\\"old1\\\"]]; observed = document[0][set(document, [[\\\"new\\\"]]).count()]; return(array(document,observed))\",\"lowered\":\"$document = [[\\\"old0\\\", \\\"old1\\\"]]; $observed = $document->[0]->[do { my $__ls_count = do { $document = [[\\\"new\\\"]]; $document }; defined($__ls_count) ? scalar(@{$__ls_count}) : 0 }]; return [$document, $observed]\",\"value\":[[[\"new\"]],null]}\nB::Concise::compile(CODE(0x78cfa7d498))\n18 <;> nextstate(main 13921 (eval 47):1) v:*,&,x*,x&,x$,$\n19 <0> padrange[$document:13921,13929; $observed:13921,13929] vM/LVINTRO,range=2\n1a <;> nextstate(main 13922 (eval 47):1) v:*,&,x*,x&,x$,$\n1b <0> pushmark s\n4  <0> pushmark s\n-  <$> const[PV \"old0\"] s\n6  <$> const[PV \"old1\"] s\n8  <@> anonlist sK*/1\n-  <@> anonlist sK*/1\n-  <0> padsv[$document:13921,13929] sRM*\n-  <2> sassign vKS/2\n-  <;> nextstate(main 13922 (eval 47):1) v:*,&,{,x*,x&,x$,$\n-  <+> multideref($document->[0]->) sK/STRICT\n-  <0> enter s\n-  <;> nextstate(main 13923 (eval 47):1) v:*,&,{,x*,x&,x$,$\n-  <0> enter s\n-  <;> nextstate(main 13924 (eval 47):1) v:*,&,x*,x&,x$,$\n-  <0> pushmark s\n-  <0> pushmark s\nn  <$> const[PV \"new\"] s\n-  <@> anonlist sK*/1\n-  <@> anonlist sK*/1\n-  <0> padsv[$document:13921,13929] sRM*\n-  <2> sassign vKS/2\n-  <;> nextstate(main 13924 (eval 47):1) v:*,&,x*,x&,x$,$\n-  <0> padsv[$document:13921,13929] s\n-  <@> leave sKP\n-  <0> padsv[$__ls_count:13925,13928] sRM*/LVINTRO\n-  <2> sassign vKS/2\n-  <;> nextstate(main 13926 (eval 47):1) v:*,&,{,x*,x&,x$,$\ny  <0> padsv[$__ls_count:13925,13928] s\n-  <1> defined sK/1\n-  <|> cond_expr(other->-) sK/1\n-      <0> padsv[$__ls_count:13925,13928] s\n-      <1> rv2av[t5] sK/STRICT,1\n-  <$> const[IV 0] s\n-  <@> leave sKP\n14 <2> aelem sK/2\n-  <0> padsv[$observed:13921,13929] sRM*\n15 <2> sassign vKS/2\n-  <;> nextstate(main 13929 (eval 47):1) v:*,&,{,x*,x&,x$,$\n-  <0> padrange[$document:13921,13929; $observed:13921,13929] /range=2\n-  <@> anonlist sK*/1\n-  <1> leavesub[1 ref] K/REFC,1\n"
+}

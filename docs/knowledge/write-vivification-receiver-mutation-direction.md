@@ -47,8 +47,8 @@ all five backends:
 1. A nested **write** may create a missing root or intermediate. The frozen neutral contract is
    [[write-vivification-neutral-contract]], now implemented on the Perl reference by
    [[write-vivification-perl-reference]]. The contract requires reads never to create state;
-   September24 public probes establish a current Perl violation, owned for repair by
-   [[perl-direct-read-autovivification-gap]]. The next evaluated
+   September24 public probes found a Perl violation, now repaired with native and fresh emitted
+   recurrence by startup `.89`; [[perl-direct-read-autovivification-gap]] owns the exact evidence. The next evaluated
    segment determines the container: exact nonnegative integer means array, string means harray. Existing
    wrong-kind values are never coerced. Arrays remain dense, so indexes greater than `length` fail instead of
    inventing null filler leaves. Path/RHS evaluation precedes isolated copy-on-write validation and commit.

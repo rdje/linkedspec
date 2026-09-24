@@ -12,6 +12,14 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-09-25 — SESSION-STARTUP-READING.89 - preserve state and receiver lifetime in Perl direct reads
+
+Both typed-AST and compact lowering now share one guarded rvalue read expression. Missing/null roots and children remain unchanged; wrong-kind paths yield undef without a raw host exception. Each observed receiver stays alive across selector effects, so an unrelated retained alias no longer changes the result. Base and selectors evaluate once, generated locals avoid authored/nested names, and explicit selector effects remain visible. The existing write contract and all serialized/generated format authorities are unchanged.
+
+Public replay repairs all five state mutations among the six original controls. Native and fresh-process generated tests cover25 direct cases twice, function parameters/locals, selector order/failures, binding presence/identity and temporary names. The existing neutral Perl consumer now actually executes all three frozen read exclusions. Seven focused suites compose89 passing top-level groups after three stale source assertions are updated; later final runtime20 includes the LF/CRLF shared book source. Frozen neutral105, public mutation50, storage24 and exact rendered source/result checks pass. Complete Phase0 passes1033/1033. Files=1, Tests=1033, 1723 wallclock secs ( 0.44 usr  0.09 sys + 1108.17 cusr 187.53 csys = 1296.23 CPU) Checkpoints .89-read-repair/.89-selector-lifetime/.89-verification retain scope and rejected attempts.
+
+The book removes the repaired read limitation, explains Perl-specific selector timing and links the executed example. It corrects an adjacent historical write-rollout sentence and explicitly qualifies the separate function array-constructor defect. Startup .90 owns that next repair immediately after .89; .91 then repairs the independently confirmed numeric reducer source-shape rejection before .51; LS-004 and downstream notification remain unchanged. No canonical or push claim.
+
 ## 2026-09-24 — LIVE-DOCUMENT-PRESSURE-CONTAINMENT.16.2 - partition startup task evidence without loss
 
 Partitioned the startup tree into three mutable semantic owners, one immutable historical part and a 77-line current root under ADR0125. Every original 7994-line/960362-byte source fragment and all 395 child blocks survive exactly. Shared lookup/refresh and the closed current-ID registry explicitly support both trees; cadence recognizes 166 unchanged historical triplets by task identity while retaining one new owning leaf and ordinary canonical receipts. No old limit, FUTURE source or parser behavior changes.

@@ -409,7 +409,7 @@ sub _lower_nested_access_segment_expr {
 # Function: _lower_direct_nested_access_value_expr
 # Purpose : Lower direct bracket access such as `foo["a"][0][i]`.
 # Args    : ($expr, $deps)
-# Returns : Perl dereference expression string or undef
+# Returns : Non-creating Perl read expression string or undef
 #------------------------------------------------------------------------------
 sub _lower_direct_nested_access_value_expr {
  my ($expr, $deps) = @_;
@@ -452,7 +452,7 @@ sub _lower_direct_nested_access_value_expr {
  return $finish->(undef, 'segment_parse_failed', { base => $base_symbol }) unless $segments && @$segments;
  return $finish->(undef, 'unsupported_segment_kind', { base => $base_symbol }) if grep { ($_->{kind} // '') ne 'index' } @$segments;
 
- my $lowered = '$'.$base_symbol;
+ my @read_segments;
  foreach my $segment (@$segments) {
   my $segment_source = $trim_action_ir_value->($segment->{expr});
   return $finish->(undef, 'empty_segment', { base => $base_symbol }) unless defined($segment_source) && length($segment_source);
@@ -466,7 +466,7 @@ sub _lower_direct_nested_access_value_expr {
     taken => 1,
     context => { base => $base_symbol, segment => $segment_source },
    );
-   $lowered .= '->[$'.$segment_source.']';
+   push @read_segments, { kind => 'ARRAY', expr => '$'.$segment_source };
    next;
   }
 
@@ -482,7 +482,7 @@ sub _lower_direct_nested_access_value_expr {
     taken => 1,
     context => { base => $base_symbol, segment => $segment_source },
    );
-   $lowered .= '->{'.$segment_expr.'}';
+   push @read_segments, { kind => 'HASH', expr => $segment_expr };
   } else {
    _trace_value_decision(
     phase => 'lower_direct_nested_access_value_expr',
@@ -491,11 +491,45 @@ sub _lower_direct_nested_access_value_expr {
     taken => 1,
     context => { base => $base_symbol, segment => $segment_source },
    );
-   $lowered .= '->['.$segment_expr.']';
+   push @read_segments, { kind => 'ARRAY', expr => $segment_expr };
   }
  }
 
+ my $lowered = _emit_guarded_direct_read_expr($base_symbol, \@read_segments);
  return $finish->($lowered, 'direct_access_lowered', { base => $base_symbol, segment_count => scalar(@$segments) })
+}
+
+# Shared by the compact source lowerer and MethodLowering's typed-AST path.
+# Segments already contain lowered Perl expressions and their syntactic kinds.
+sub _emit_guarded_direct_read_expr {
+ my ($base_symbol, $segments) = @_;
+ return undef unless defined($base_symbol) && $base_symbol =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
+ return undef unless ref($segments) eq 'ARRAY' && @$segments;
+ return undef if grep {
+  ref($_) ne 'HASH' || ($_->{kind} // '') !~ /\A(?:ARRAY|HASH)\z/o
+   || !defined($_->{expr}) || ref($_->{expr}) || !length($_->{expr})
+ } @$segments;
+
+ # Retain each receiver across selector evaluation. Raw dereferences both
+ # autovivify missing paths and can lose a sole-owned receiver when a selector
+ # rebinds it. Evaluate selectors once, left-to-right, then use only rvalue reads
+ # from a compatible retained container. Missing and wrong-kind paths stay null.
+ # The generated locals must not shadow authored names or nested lowered locals.
+ my $name_source = join(' ', $base_symbol, map { $_->{expr} } @$segments);
+ my %used_names = map { $_ => 1 } $name_source =~ /([A-Za-z_][A-Za-z0-9_]*)/g;
+ my $prefix = '__ls_read';
+ $prefix .= '_' while $used_names{$prefix.'_value'} || $used_names{$prefix.'_index'};
+ my $cursor = '$'.$prefix.'_value';
+ my $selector = '$'.$prefix.'_index';
+ my @read_steps = ('my '.$cursor.' = $'.$base_symbol.';', 'my '.$selector.';');
+ foreach my $segment (@$segments) {
+  my ($open, $close) = $segment->{kind} eq 'HASH' ? ('{', '}') : ('[', ']');
+  push @read_steps, $selector.' = '.$segment->{expr}.';';
+  push @read_steps, $cursor.' = ref('.$cursor.') eq "'.$segment->{kind}.'" ? '
+   .$cursor.'->'.$open.$selector.$close.' : undef;';
+ }
+ push @read_steps, $cursor;
+ return 'do { '.join(' ', @read_steps).' }'
 }
 
 #------------------------------------------------------------------------------

@@ -1,10 +1,10 @@
 # MEMORY
 
-- activation_commit: `58a5ff936e54f0699da2b33c35641a5e0155ed81` — clean activation base for containment .16.2.
-- latest_completed_leaf: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.16.2 - partition startup task evidence without loss`.
-- active_work_unit: `SESSION-STARTUP-READING.89` — next Perl read-purity repair after atomic containment .16.2.
-- next_action: Resolve .89 with perl tools/read_task_tree.pl --tree SESSION-STARTUP-READING --id SESSION-STARTUP-READING.89; activate from clean HEAD and fix read-induced Perl state creation before .51.
-- in_flight_uncommitted: none after canonical .16.2 landing; source/node preservation, public998 lookups, mutation/pressure/cadence proof and book rendering are retained in docs/checkpoints/LIVE-DOCUMENT-PRESSURE-CONTAINMENT.16.2-verification.json.
+- activation_commit: `5e72c32b0f185783a8b6b597561e1470ce03c8f7` — clean activation base for completed Perl read-purity .89.
+- latest_completed_leaf: `SESSION-STARTUP-READING.89 - preserve state in Perl direct reads`.
+- active_work_unit: `SESSION-STARTUP-READING.90` — pending function-array constructor repair after verified .89.
+- next_action: Activate .90 from the new clean commit; fix multi-argument array constructors reading function parameters/locals as identifier strings, verify and sync the book then .91 before .51.
+- in_flight_uncommitted: none.
 - blockers: LS-004 remains upstream-owned; director will notify ARCHOGEN only after its fix is verified (local report: docs/upstream/rgx/bootstrap-progress-status.md). No RGX code defect established. Named-argument and format proposals remain parked.
   Wrapper startup .7 remains open; recovery/purge stay prohibited. No interrupted Phase0 run counts as proof.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
@@ -13,7 +13,7 @@
 - current_write_vivification: `linkedspec-write-vivification-v1` is implemented on all five backends with one typed expression-segment AST,
   evaluated string/integer harray/array selection, dense atomic creation, post-evaluation snapshots, detached
   results, exact diagnostics/spans and invocation-local absent/null presence. The neutral validator rejects 105 mutations;
-  read exclusions are not Perl runtime proof: confirmed direct-read purity gap .89 remains open. Other runtimes preserve writes through supported serialized/reconstructed/
+  all three frozen read exclusions now run through Perl lowering; .89 verifies non-creating native/fresh generated reads. Other runtimes preserve writes through supported serialized/reconstructed/
   generated/emitted carriers. Portable capability `language.nested_write_vivification` is admitted by `.19.7`;
   exact six-runtime recurrence is complete under `.19.8`, and public teaching/no-drift is closed under `.19.9`.
 - current_map_leaves_mutation: `linkedspec-map-leaves-mutation-v1` is implemented on all five backends with one bang-only mutation AST,
