@@ -3993,8 +3993,9 @@ Three backbone items tracked major structural modernization — all done:
   arrays remain dense. Startup `.89` repairs Perl read-induced container creation and receiver loss during
   selector rebinding; native and fresh generated parsers execute the
   [read-purity example](../dsl/value-container-flow-helper-reference.md#read-purity). The write contract is unchanged.
-  The independent Perl function `array(value,value)` identifier-string defect is owned for immediate repair by `.90`;
-  `[value,value]` is the working literal spelling inside functions.
+  Startup `.90` repairs Perl function `array(value,value)` constructors reading names instead of values;
+  native and fresh generated parsers execute the
+  [function constructor example](../dsl/value-container-flow-helper-reference.md#array-constructors-inside-functions).
   `map_leaves!` is the only v1 bang method and atomically rebinds a bare named receiver after
   successful original-shape/root-kind traversal. Neutral write, bang, and composition contracts `.19.1.1-.3` are
   frozen. Perl `.19.2.1-.2` and Rust `.19.3.1-.2` implement both: evaluated typed nested paths, presence-aware

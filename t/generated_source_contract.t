@@ -878,4 +878,131 @@ READ_PURITY_RUNNER
  done_testing;
 };
 
+subtest 'function array constructors read values in native and fresh generated parsers' => sub {
+ require Cwd;
+ my $root = Cwd::abs_path($repo_root);
+ my $scratch = tempdir(CLEANUP => 1);
+ my $json = JSON::PP->new->canonical->allow_nonref;
+ my $source = <<'SPEC';
+fn pack(value) { return(array(value, value)) }
+fn literal(value) { return([value, value]) }
+fn local_pack(value) { local = value; return(array(local, value)) }
+fn nested(value) { return(array(array(value, undef), [value], pack(value), {"kept":value})) }
+fn mixed(value) { return(array("value", value, 0, true, false, undef, trim(value))) }
+fn collect(prefix, ...items) { return(array(prefix, items)) }
+fn helpers(items, meta) { return([count(items), first(items), count_keys(meta), copy(items), copy(meta)]) }
+fn ordered(value) { return(array(set(value, 1), set(value, 2), value)) }
+fn retained() { return([array(), array("literal"), array(trim(" x "))]) }
+fn final_value(value) { array(value, value) }
+Top::
+ -> Done {
+  value = "caller"
+  local = "outer"
+  return({
+   "parameter":pack(7), "literal":literal(7), "local":local_pack(8),
+   "null":pack(undef), "false":pack(false), "container":pack({"k":[1]}),
+   "nested":nested("x"), "mixed":mixed(" x "),
+   "rest":collect("p", 1, 2), "empty_rest":collect("q"),
+   "helpers":helpers([3,1,2], {"a":1}), "ordered":ordered(0),
+   "retained":retained(), "final":final_value(9),
+   "repeat":array(local_pack("first"), local_pack("second")),
+   "caller":array(value, local)
+  })
+ }
+Done:
+ /x/
+SPEC
+ my $expected = {
+  parameter => [7,7], literal => [7,7], local => [8,8], null => [undef,undef],
+  false => [JSON::PP::false,JSON::PP::false], container => [{k=>[1]},{k=>[1]}],
+  nested => [['x',undef],['x'],['x','x'],{kept=>'x'}],
+  mixed => ['value',' x ',0,JSON::PP::true,JSON::PP::false,undef,'x'],
+  rest => ['p',[1,2]], empty_rest => ['q',[]],
+  helpers => [3,3,1,[3,1,2],{a=>1}], ordered => [1,2,2],
+  retained => [[],['literal'],['x']], final => [9,9],
+  repeat => [['first','first'],['second','second']], caller => ['caller','outer'],
+ };
+ my $book = read_text(File::Spec->catfile($root, 'examples', 'function-array-values.spec'));
+ my $book_expected = [[7,7],['tag','x',['x','x']],[undef,undef]];
+ my @cases = ({id=>'matrix', source=>$source, expected=>$expected});
+ for my $ending ('LF','CRLF') {
+  my $authored = $book;
+  $authored =~ s/\n/\r\n/g if $ending eq 'CRLF';
+  push @cases, {id=>"book-$ending", source=>$authored, expected=>$book_expected};
+ }
+ my @artifacts;
+ for my $case (@cases) {
+  subtest "native $case->{id}" => sub {
+   my %ctx;
+   my $parser = eval { LinkedSpec::Get(\$case->{source}, runtime_ctx_ref=>\%ctx) };
+   is("$@", '', 'Get does not throw');
+   ok(ref($parser) eq 'CODE', 'Get returns a parser');
+   if (ref($parser) eq 'CODE') {
+    for my $run (1,2) {
+     my $input = 'x';
+     my $value = eval { $parser->(\$input) };
+     is("$@", '', "run $run does not throw");
+     is_deeply($value, $case->{expected}, "run $run returns argument values and preserves function scope");
+     ok(!$ctx{last_error}, "run $run has no handler error");
+    }
+   }
+  };
+  my $generated = LinkedSpec::emit_generated_source(\$case->{source},
+   source_identity=>"function-array:$case->{id}");
+  unlike($generated, qr/LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER/, "$case->{id} has no unresolved helper");
+  my $path = File::Spec->catfile($scratch, "$case->{id}.pl");
+  open my $fh, '>:encoding(UTF-8)', $path or die $!;
+  print {$fh} $generated;
+  close $fh or die $!;
+  push @artifacts, File::Spec->abs2rel($path,$root);
+ }
+
+ my $runner = File::Spec->catfile($scratch,'runner.pl');
+ open my $runner_fh, '>', $runner or die $!;
+ print {$runner_fh} <<'FUNCTION_ARRAY_RUNNER';
+use strict;
+use warnings;
+use File::Spec ();
+use JSON::PP ();
+my ($root,$output,@artifacts) = @ARGV;
+my @rows;
+for my $index (0..$#artifacts) {
+ open my $fh, '<:encoding(UTF-8)', File::Spec->catfile($root,$artifacts[$index]) or die $!;
+ my $source = do { local $/; <$fh> };
+ close $fh or die $!;
+ my $package = "LinkedSpec::FunctionArrayEmitted::Case$index";
+ my $loaded = eval "package $package; $source; 1";
+ my $row = {load_error=>"$@", runs=>[]};
+ if ($loaded) {
+  for (1,2) {
+   my $input = 'x';
+   my $value = eval { no strict 'refs'; &{"${package}::Execute"}(\$input) };
+   push @{$row->{runs}}, {value=>$value, error=>"$@"};
+  }
+ }
+ push @rows,$row;
+}
+open my $out,'>',$output or die $!;
+print {$out} JSON::PP->new->canonical->allow_nonref->encode(\@rows);
+close $out or die $!;
+FUNCTION_ARRAY_RUNNER
+ close $runner_fh or die $!;
+ my $output = File::Spec->catfile($scratch,'results.json');
+ is(system($^X,'-I'.File::Spec->catdir($root,'perl'),$runner,$root,$output,@artifacts),
+  0,'fresh generated-source child exits successfully');
+ if (-f $output) {
+  my $rows = $json->decode(read_text($output));
+  is(scalar(@$rows),scalar(@cases),'fresh process returns every case');
+  for my $index (0..$#cases) {
+   my $case = $cases[$index];
+   my $row = $rows->[$index];
+   is($row->{load_error},'',"$case->{id} loads independently");
+   for my $run (0,1) {
+    is($row->{runs}[$run]{error},'',"$case->{id} emitted run $run does not throw");
+    is_deeply($row->{runs}[$run]{value},$case->{expected},"$case->{id} emitted run $run returns argument values");
+   }
+  }
+ } else { fail('fresh process wrote its observations') }
+};
+
 done_testing;

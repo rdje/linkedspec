@@ -12,6 +12,16 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-09-25 — SESSION-STARTUP-READING.90 - read values in Perl function array constructors
+
+Multi-argument array constructors now read function parameters and local bindings through the existing AST value lowerer. The aggregate-helper bridge still receives authored names where it needs typed binding interpretation; one-argument selector retirement and neutral/generated-format authorities are unchanged. Both silently returned identifier strings and host syntax errors for a DSL local named local are repaired.
+
+The exact final generated-source suite fails only its new ninth group against the explicitly loaded clean activation owner and passes 9/9 on the candidate. Six focused suites pass 118 top-level results. The native/fresh matrix covers 16 result fields, each parser runs twice, and the included book fixture executes with LF and CRLF. Existing count/first/count_keys/copy controls and selector retirement pass. The 24-owner storage check, selector source inventory, 50 public mutations, syntax and exact book render checks pass. Complete Phase0 passes1033/1033. Files=1, Tests=1033, 2452 wallclock secs ( 0.45 usr  0.09 sys + 1130.36 cusr 247.93 csys = 1378.83 CPU).
+
+The book removes the repaired constructor limitation, includes the executed example, and explicitly states the director's .spec codeblock rule: a line-ending semicolon is optional and valid; separate same-line statements need a separator. One adjacent stale read-limitation reference is reconciled. Baseline-proved function-parameter sum rejection extends already-owned next repair .91; no numeric fix, global book signoff or push is claimed here. Checkpoint .90-verification.json retains complete evidence and rejected diagnostic setups.
+
+Read-only diagnosis of the slow full regression locates legacy PathSearch enumeration in the build tree. New .92 follows .91 before .51 and owns bounded genuine fallback verification independent of cache size; the full run was left intact and passed, and retained caches were untouched.
+
 ## 2026-09-25 — SESSION-STARTUP-READING.89 - preserve state and receiver lifetime in Perl direct reads
 
 Both typed-AST and compact lowering now share one guarded rvalue read expression. Missing/null roots and children remain unchanged; wrong-kind paths yield undef without a raw host exception. Each observed receiver stays alive across selector effects, so an unrelated retained alias no longer changes the result. Base and selectors evaluate once, generated locals avoid authored/nested names, and explicit selector effects remain visible. The existing write contract and all serialized/generated format authorities are unchanged.

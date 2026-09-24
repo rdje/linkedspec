@@ -5,7 +5,8 @@ answers:
   - "why does sum(document[items]) return null on Perl"
   - "does Perl sum accept a direct-access array receiver"
   - "which task repairs numeric reducer direct-read composition"
-date: 2026-09-24
+  - "why does sum of a Perl function array parameter return null"
+date: 2026-09-25
 status: confirmed defect; required repair SESSION-STARTUP-READING.91 after .90 before .51
 tags: [perl, numeric, arrays, direct-access, lowering, SESSION-STARTUP-READING]
 evidence: "Public Get returns null for sum(document[\"items\"]), num_sum(document[\"items\"]) and direct-read .sum() over [3,1,2]; assigning the read to a binding also fails. Literal and explicit sorted-chain controls return6. Explicitly loaded activation-commit owners reproduce all four failures. Public call_spec_handler_subst emits the num_sum unsupported-helper sentinel. MethodLowering rejects through the array-source spelling classifier before ordinary value lowering. Exact sources/results and baseline identities are in docs/checkpoints/SESSION-STARTUP-READING.91-numeric-direct-read.json."
@@ -31,3 +32,11 @@ Startup `.91` owns the bounded correction after function constructors `.90` and
 before `.51`, including fresh emitted execution and single-evaluation controls.
 Audit other reducer arms at activation instead of assuming the whole family fails.
 No `.91` implementation or full-family acceptance is claimed in `.89`.
+
+On 2026-09-25, `.90` also verifies `fn total(items) { return(sum(items)) }`
+called with `[3,1,2]`: both clean `83ab2ff44` MethodLowering loaded explicitly
+from a repository-local shadow and the constructor candidate return null with
+the same `num_sum` unsupported-helper sentinel and no handler error. This is an
+existing function-parameter case for `.91`, not a constructor regression.
+The exact source, loaded owner identity and observations are retained in
+`docs/checkpoints/SESSION-STARTUP-READING.90-verification.json`.

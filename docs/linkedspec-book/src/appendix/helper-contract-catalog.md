@@ -652,8 +652,8 @@ dispatch rule.
 - **Boundary**: Exact `array(IDENTIFIER)` is a removed selector shape, not a one-element constructor. Use the bare
   identifier to read its typed value or `[identifier]` to construct one element. All five backends reject the
   removed shape before execution.
-- **Current Perl function limitation**: Multi-argument `array(value, value)` inside a user function can emit
-  identifier strings instead of parameter/local values. Use `[value, value]` pending the separately tracked repair.
+- **Function values**: Multi-argument `array(value, value)` reads parameter/local values just like `[value, value]`.
+  See the [executed function example](../dsl/value-container-flow-helper-reference.md#array-constructors-inside-functions).
 
 ### Array receiver-dot value chains
 - **Signature**: `array_expr.method(args...).next(args...)`

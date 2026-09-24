@@ -115,8 +115,9 @@ line:
 -> child { set(name, "field"); return(name) }
 ```
 
-The last statement on the line needs no trailing semicolon: `;` is a separator, not a
-terminator. Plain spaces between same-line helper calls are not statement separators.
+A trailing semicolon at the end of a line in a `.spec` codeblock is optional: both
+including it and omitting it are valid. It is required between separate statements
+on the same line. Plain spaces between same-line helper calls are not statement separators.
 Semicolons inside nested expressions or literal payloads stay inside that expression and
 do not split the outer statement.
 

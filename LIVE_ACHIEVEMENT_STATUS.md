@@ -2,17 +2,19 @@
 
 ## Current Activity
 
-Perl direct reads preserve missing/null state and receiver lifetime under the existing contract. The current frontier is function-array constructor .90, then numeric reducer .91 before cat-arity .51.
+Perl direct reads and function array constructors now preserve their documented value behavior. Numeric reducer composition .91 is next, then legacy fallback verification .92 before cat-arity .51; global book reconciliation remains open.
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.89 - preserve state in Perl direct reads` — public6, native/fresh/neutral proof, complete Phase01033, exact executable book source, public mutation50 and storage24 pass.
+- `SESSION-STARTUP-READING.90 - read function array constructor values` — native/fresh/source RED/GREEN, focused118, complete Phase01033, exact executable book example, selector inventory, public mutation50 and storage24 pass.
 
 ## Next Action
 
-- Activate startup .90 from the clean read-repair commit and fix function constructors returning identifier strings. The director will notify ARCHOGEN only after LS-004 is verified fixed.
+- Activate startup .91 and fix numeric reducers rejecting valid array values from direct reads, derived bindings and function parameters. The director will notify ARCHOGEN only after LS-004 is verified fixed.
 
 ## Recent Completions
+
+- `2026-09-25` — `SESSION-STARTUP-READING.90` repairs function array constructor values with focused118, Phase01033 and exact native/fresh LF/CRLF book proof.
 
 - `2026-09-25` — `SESSION-STARTUP-READING.89` verifies non-creating Perl reads and receiver lifetime with complete Phase01033 and executable native/fresh-source book proof.
 
@@ -43,8 +45,6 @@ Perl direct reads preserve missing/null state and receiver lifetime under the ex
 - `2026-09-24` — `SESSION-STARTUP-READING.86.4.8.1` rejects numeric-incompatible grouped-pattern lookahead and owns required .86.4.8.2.
 
 - `2026-09-24` — `SESSION-STARTUP-READING.86.4.4.1` owns four grouped-operand failures and eighteen controls; .86.4.8 is required before public closeout.
-
-- `2026-09-23` — `SESSION-STARTUP-READING.86.4.7` repairs physical quoted-subject validation; focused198, exact book16 and Phase0 1033/1033 pass.
 
 ## History
 

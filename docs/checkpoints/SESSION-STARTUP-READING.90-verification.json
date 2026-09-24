@@ -1,0 +1,294 @@
+{
+  "format": 1,
+  "owner": "SESSION-STARTUP-READING.90",
+  "activation_commit": "83ab2ff44219379bcf1e2c46d432ba936b750580",
+  "verification_tier": "focused",
+  "status": "Complete focused runtime/book/Phase0 acceptance PASS; staged cadence and memory PASS after metadata correction. Landing requires the unchanged normal all-nine-doctrine commit hooks.",
+  "scope": "One Perl aggregate-name bridge guard; no neutral/AST/generated-format/storage/gate changes. Function parameters/locals in multi-argument arrays are value expressions. Actual aggregate helpers and exact one-identifier retirement are preserved.",
+  "checks": [
+    {
+      "command": "env PERL5LIB= bash tools/project_data_run.sh prove -v -Iperl .linkedspec-data/scratch/function-array90/baseline-suite.pl",
+      "log": ".linkedspec-data/scratch/function-array90/red-final.log",
+      "exit": 1,
+      "result": "Exact final fixture against clean baseline owner: existing8 groups PASS; only new constructor group9 FAIL",
+      "bytes": 67745,
+      "sha256": "35b8ac4f8432f742019e6209266ddc8ed2f9e3d01ff4667c071e24c2ede3e1fc"
+    },
+    {
+      "command": "env PERL5LIB= bash tools/project_data_run.sh prove -v -Iperl t/generated_source_contract.t",
+      "log": ".linkedspec-data/scratch/function-array90/green-final.log",
+      "exit": 0,
+      "result": "9/9 PASS, including native/fresh matrix and exact LF/CRLF book source",
+      "bytes": 47221,
+      "sha256": "98b61995a4cc3cff0acab7d2bbc5ca1a76a50253079b8d933313f72f4adb68f3"
+    },
+    {
+      "command": "env PERL5LIB= bash tools/test_perl_project_data_storage.sh",
+      "log": ".linkedspec-data/scratch/function-array90/storage.log",
+      "exit": 0,
+      "result": "Unchanged24 Perl allocator owners, trace and CLI workspace PASS",
+      "bytes": 363,
+      "sha256": "44186163f492af3a97698123b58ea2daec30182824adb4722ca22b6143d893bc"
+    },
+    {
+      "command": "env PERL5LIB= bash tools/run_python_project_data.sh tools/check_executable_aggregate_selector_sources.py",
+      "log": ".linkedspec-data/scratch/function-array90/selector-sources.log",
+      "exit": 0,
+      "result": "0 positive;20 classified; serialized tracked/untracked discovery self-test PASS",
+      "bytes": 163,
+      "sha256": "3e7265581bd14226c202ee6c37979152abd01cc31016e09e5b323f7607e4c4a2"
+    },
+    {
+      "command": "env PERL5LIB= bash tools/run_python_project_data.sh tools/check_mutation_public_surface.py",
+      "log": ".linkedspec-data/scratch/function-array90/mutation-public.log",
+      "exit": 0,
+      "result": "70 public files /14 governed /11 example classes /10 stale claims /50 mutations PASS",
+      "bytes": 138,
+      "sha256": "b241f94e497a31a9b9b305dfb36e3af6d2f1810a5cc21f4c03a8776585f82124"
+    },
+    {
+      "command": "env PERL5LIB= bash tools/run_mdbook_local.sh",
+      "log": ".linkedspec-data/scratch/function-array90/book-final.log",
+      "exit": 0,
+      "result": "Managed render PASS; existing large search-index warning retained",
+      "bytes": 274,
+      "sha256": "9f8269b48c35971ba0dfea07d46615930919d9b28c820599d7b1e46affdabfee"
+    },
+    {
+      "command": "env PERL5LIB= bash tools/project_data_run.sh env PYTHONDONTWRITEBYTECODE=1 python3 .linkedspec-data/scratch/function-array90/verify-book.py",
+      "log": ".linkedspec-data/scratch/function-array90/book-exact.log",
+      "exit": 0,
+      "result": "Exact included source/result, links and optional-semicolon wording PASS",
+      "bytes": 121,
+      "sha256": "a74286588dad1cf2b1b3cc7d5c94be2728c261758794e8f39f7c0a189755df42"
+    },
+    {
+      "command": "env PERL5LIB= bash tools/project_data_run.sh prove -v -Iperl t/generated_source_contract.t t/uniform_binding_contract.t t/variadic_user_function_contract.t t/actionir_ast_parser.t t/trace_actionir_method_lowering.t t/trace_emit_context_bridge.t",
+      "log": ".linkedspec-data/scratch/function-array90/focused-final.log",
+      "exit": 0,
+      "result": "Files=6, Tests=118, 82 wallclock secs ( 0.04 usr  0.02 sys + 78.04 cusr  2.10 csys = 80.20 CPU); PASS",
+      "bytes": 90226,
+      "sha256": "d877b3dae3a5c4e2061e4fecc2141f42c5c23d33f90f01e48051101206ea9c3b"
+    },
+    {
+      "command": "env PERL5LIB= bash scripts/check_readme_stability.sh",
+      "log": ".linkedspec-data/scratch/function-array90/readme-pressure.log",
+      "exit": 0,
+      "result": "20 surfaces/62 routes/32 mutation classes; unchanged README limits PASS",
+      "bytes": 325,
+      "sha256": "b278ca85e92fc826d91a4c606a779ca0ef783f32d35a7eb7a968484e982d4cc5",
+      "scope": "pre-staging; final staged doctrines still required"
+    },
+    {
+      "command": "env PERL5LIB= bash scripts/check_document_history.sh",
+      "log": ".linkedspec-data/scratch/function-array90/history.log",
+      "exit": 0,
+      "result": "34 mutations;3 surfaces/82 segments; exact reconstruction/current bounds PASS",
+      "bytes": 152,
+      "sha256": "f54e98ede22834b718aab9156a57e8ab1eee478de767b0c84920972d78ccc28c",
+      "scope": "pre-staging; final staged doctrines still required"
+    },
+    {
+      "command": "env PERL5LIB= bash scripts/check_memory_architecture.sh",
+      "log": ".linkedspec-data/scratch/function-array90/memory.log",
+      "exit": 0,
+      "result": "Active .90 pointer and clean activation identity PASS",
+      "bytes": 774,
+      "sha256": "256554c589b0c61ef20e3bf9a863bad6a00da8fd361fc3771ee2806a8dc91604",
+      "scope": "pre-staging; final staged doctrines still required"
+    },
+    {
+      "command": "env PERL5LIB= bash scripts/check_task_tree_metadata.sh",
+      "log": ".linkedspec-data/scratch/function-array90/task-metadata.log",
+      "exit": 0,
+      "result": "Both partition registries/current snapshots;2906 unique current IDs and closed markers PASS",
+      "bytes": 841,
+      "sha256": "30845c4ae18d84842d5dbcdd4635bf8dbeced1ecb94d786895c68a5890db13fe",
+      "scope": "pre-staging; final staged doctrines still required"
+    },
+    {
+      "command": "env PERL5LIB= bash tools/project_data_run.sh prove -v -Iperl t/phase0_regression.t",
+      "log": ".linkedspec-data/scratch/function-array90/phase0.log",
+      "exit": 0,
+      "result": "Files=1, Tests=1033, 2452 wallclock secs ( 0.45 usr  0.09 sys + 1130.36 cusr 247.93 csys = 1378.83 CPU); PASS",
+      "bytes": 1791081,
+      "sha256": "cd81dd6fb7d2cc5188b47c49eee347504184f4a63678cab3c555248e4d3eaac1"
+    },
+    {
+      "command": "env PERL5LIB= bash scripts/check_doctrines.sh",
+      "log": ".linkedspec-data/scratch/function-array90/doctrines-staged.log",
+      "exit": 1,
+      "result": "8/9 PASS; cadence rejects missing backticks around the declared focused tier. Correct the owning declaration, refresh index and rerun cadence; normal commit hooks must pass all9.",
+      "sha256": "cb3e73e071288ebf117748358cbc0d8364126714e933f5138c70e83e7959d0c7",
+      "bytes": 1426
+    },
+    {
+      "command": "env PERL5LIB= bash scripts/check_verification_cadence.sh",
+      "log": ".linkedspec-data/scratch/function-array90/cadence-final.log",
+      "exit": 0,
+      "result": "PASS: staged focused tier; canonical-path requirement0",
+      "bytes": 77,
+      "sha256": "6e32a14d106e6fb00fd6c636d1420a46939880a1fc583bf5324612742a512eab"
+    },
+    {
+      "command": "env PERL5LIB= bash scripts/check_memory_architecture.sh",
+      "log": ".linkedspec-data/scratch/function-array90/memory-final.log",
+      "exit": 0,
+      "result": "PASS: staged completed .90, pending .91 and activation83ab handoff state",
+      "bytes": 771,
+      "sha256": "5b6caad4bb1756e895a6d2d4cf04762fc85d12e10ca9d0d1b00755cee0a1554b"
+    }
+  ],
+  "baseline": {
+    "owner": "perl/LinkedSpec/ActionIR/MethodLowering.pm",
+    "sha256": "f704ee794a178ba2b8d31e1eaa9f48dcae5439ae7fc7f13413829e180dfb366c",
+    "procedure": "git show activation_commit:owner to repository-local shadow; load LinkedSpec first, assert owner not loaded, prepend shadow, require owner and assert exact loaded path before executing final suite. Fresh child executes artifacts emitted by that baseline."
+  },
+  "book_public_before": {
+    "exception": "",
+    "last_error": {
+      "detail": "syntax error at LinkedSpec::generated_handler:Top:_default line 57, near \"local,\"\nCan't redeclare \"my\" in \"my\" at LinkedSpec::generated_handler:Top:_default line 57, near \"; my\"\nsyntax error at LinkedSpec::generated_handler:Top:_default line 57, near \"},\"\nCan't redeclare \"my\" in \"my\" at LinkedSpec::generated_handler:Top:_default line 57, near \"; my\"\nsyntax error at LinkedSpec::generated_handler:Top:_default line 57, near \"}]\"\nsyntax error at LinkedSpec::generated_handler:Top:_default line 66, near \"}\n\n  \n\n  \n\n  \n\n }\"\n",
+      "handler_source_label": "LinkedSpec::generated_handler:Top:_default",
+      "handler_variant": "_default",
+      "owner_stage": "runtime_handler:rule_handler_compile",
+      "rule_label": "Top",
+      "spec_name": "",
+      "spec_path": "",
+      "stage": "rule_handler_compile",
+      "summary": "Rule handler compilation failed",
+      "top_rule": "Top",
+      "type": "runtime_handler"
+    },
+    "lowered_arrays": [
+      "     return [do { my $__ls_user_fn_arg_0 = 7; my $value = $__ls_user_fn_arg_0; [value, value] }, do { my $local; my $__ls_user_fn_arg_0 = \" x \"; my $value = $__ls_user_fn_arg_0; $local = do { my $__ls_trim = $value; if (defined($__ls_trim)) { $__ls_trim =~ s/^\\s+|\\s+$//g; } $__ls_trim }; [\"tag\", local, do { my $__ls_user_fn_arg_0 = $local; my $value = $__ls_user_fn_arg_0; [value, value] }] }, do { my $__ls_user_fn_arg_0 = undef; my $value = $__ls_user_fn_arg_0; [value, value] }] "
+    ],
+    "source": "fn pair(value) { return(array(value, value)) }\nfn tagged(value) {\n  local = trim(value);\n  return(array(\"tag\", local, pair(local)))\n}\nTop::\n -> Done { return(array(pair(7), tagged(\" x \"), pair(undef))) }\nDone:\n /x/\n",
+    "value": null
+  },
+  "book_public_after": {
+    "exception": "",
+    "last_error": null,
+    "lowered_arrays": [
+      "     return [do { my $__ls_user_fn_arg_0 = 7; my $value = $__ls_user_fn_arg_0; [$value, $value] }, do { my $local; my $__ls_user_fn_arg_0 = \" x \"; my $value = $__ls_user_fn_arg_0; $local = do { my $__ls_trim = $value; if (defined($__ls_trim)) { $__ls_trim =~ s/^\\s+|\\s+$//g; } $__ls_trim }; [\"tag\", $local, do { my $__ls_user_fn_arg_0 = $local; my $value = $__ls_user_fn_arg_0; [$value, $value] }] }, do { my $__ls_user_fn_arg_0 = undef; my $value = $__ls_user_fn_arg_0; [$value, $value] }] "
+    ],
+    "source": "fn pair(value) { return(array(value, value)) }\nfn tagged(value) {\n  local = trim(value);\n  return(array(\"tag\", local, pair(local)))\n}\nTop::\n -> Done { return(array(pair(7), tagged(\" x \"), pair(undef))) }\nDone:\n /x/\n",
+    "value": [
+      [
+        7,
+        7
+      ],
+      [
+        "tag",
+        "x",
+        [
+          "x",
+          "x"
+        ]
+      ],
+      [
+        null,
+        null
+      ]
+    ]
+  },
+  "book_public_probe_scope": "These paired source dumps retain optional line-ending semicolons. The final permanent fixture omits them and is executed through native/fresh LF/CRLF routes.",
+  "compat_rule_control": {
+    "error": "",
+    "lowered": "return [$value, $local]",
+    "source": "return(array(value, local))",
+    "value": [
+      7,
+      "outer"
+    ]
+  },
+  "additional_91_intake": {
+    "baseline": {
+      "error": null,
+      "input": "x",
+      "lowered": [
+        "     return do { my $__ls_user_fn_arg_0 = [3, 1, 2]; my $items = $__ls_user_fn_arg_0; do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:num_sum\"; undef } } "
+      ],
+      "owner": ".linkedspec-data/scratch/function-array90/baseline-lib/LinkedSpec/ActionIR/MethodLowering.pm",
+      "source": "fn total(items) { return(sum(items)) }\nTop::\n -> Done { return(total([3,1,2])) }\nDone:\n /x/\n",
+      "value": null
+    },
+    "candidate": {
+      "error": null,
+      "input": "x",
+      "lowered": [
+        "     return do { my $__ls_user_fn_arg_0 = [3, 1, 2]; my $items = $__ls_user_fn_arg_0; do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:num_sum\"; undef } } "
+      ],
+      "owner": "perl/LinkedSpec/ActionIR/MethodLowering.pm",
+      "source": "fn total(items) { return(sum(items)) }\nTop::\n -> Done { return(total([3,1,2])) }\nDone:\n /x/\n",
+      "value": null
+    },
+    "disposition": "Existing function-parameter num_sum spelling-classifier rejection; repair owned by next .91. Not weakened to an expected null in constructor tests."
+  },
+  "initial_runs": [
+    {
+      "log": ".linkedspec-data/scratch/function-array90/red.log",
+      "exit": 1,
+      "disposition": "Original constructor matrix fails on unmodified source; bare host names and local keyword syntax failures."
+    },
+    {
+      "log": ".linkedspec-data/scratch/function-array90/green.log",
+      "exit": 1,
+      "disposition": "Constructor and book repaired; function-parameter numeric control exposes existing .91 failure. All five other suites pass. Final constructor matrix keeps count/first/count_keys/copy; sum intake retained separately."
+    },
+    {
+      "log": ".linkedspec-data/scratch/function-array90/compat.json",
+      "disposition": "Rejected diagnostic setup: public call_spec_handler_subst has no function-registry argument; outward descriptor is not a compiled-body registry. Unsupported pack from this manual injection is not production evidence. Correct rule compatibility control is separate; functions are proved through Get/dumped/fresh emitted source."
+    }
+  ],
+  "source_sha256": {
+    "perl/LinkedSpec/ActionIR/MethodLowering.pm": "1aa56f76e923f4a3969a7d3e88a634042185ba5f657a5d50593e16a0a6df1c1c",
+    "t/generated_source_contract.t": "1e5818e8ead6a97aa6367e8df7bac348fd8aa5f138ad934dd9b82cab2a9e853c",
+    "examples/function-array-values.spec": "839d8d04d313e482a497fc009b23990437a22519e37df5da76d064f9cccca360",
+    "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md": "46578f0f21ffaa283eabe8133ddda5004e462335cb89a9206d4c4e6e2f5b144f",
+    "docs/linkedspec-book/src/dsl/values-containers-and-flow-helpers.md": "0b5a349a83cf5ca4f92bc3e88b7412e41adbd56bbc2c5736fc7fee516ef961b5",
+    "docs/linkedspec-book/src/dsl/fluent-and-block-forms.md": "de4f274f37eabbb632ca9767246a744e6468520ad5b8f703eb68c3b636f61daf",
+    "docs/linkedspec-book/src/appendix/helper-contract-catalog.md": "f03706881c6e9147eea70709409c9a882ddc6db78f074edd46e87088269a01fb",
+    "docs/linkedspec-book/src/overview/project-status.md": "7ec7e992a895f683adebbcf5365248a135a0790f4cd088325ccc503f83d016de"
+  },
+  "pending": [],
+  "failure_group_delta": {
+    "baseline": [
+      "function array constructors read values in native and fresh generated parsers"
+    ],
+    "candidate": [],
+    "cleared": [
+      "function array constructors read values in native and fresh generated parsers"
+    ],
+    "new_failures": []
+  },
+  "workflow_corrections": [
+    "First chronology insertion selected an inline ## token in the CHANGES preamble; history check rejected it. Restored the exact clean preamble/history and inserted at an anchored heading. Both bounded-history checks then passed; no old record changed.",
+    "Verification tier originally lacked the checker-required backticks. The staged cadence check correctly rejected it; add exact backticked focused syntax, refresh index, recheck and retain normal all-nine commit hooks."
+  ],
+  "verification_latency_intake": {
+    "owner": "SESSION-STARTUP-READING.92",
+    "sequence": "after .91 before .51",
+    "sample_command": "sample 37696 1 10 -file .linkedspec-data/scratch/function-array90/phase0-sample.txt",
+    "sample_log": ".linkedspec-data/scratch/function-array90/phase0-sample.txt",
+    "sample_sha256": "1ceaf2e421c5a994db18d5c1924100dfdd43b3402c8361aeb800082799d8cdff",
+    "sample_bytes": 16587,
+    "sample_time": "2026-09-25T00:45:52+02:00",
+    "process_start": "2026-09-25T00:23:11+02:00",
+    "main_thread_observations": {
+      "total": 83,
+      "lstat": 78,
+      "stat": 5
+    },
+    "cwd_command": "lsof -a -p 37696 -d cwd -Fn",
+    "observed_repo_relative_cwd": "rust/target/debug/deps",
+    "active_fixture": "t/tmp_phase1_pathsearch/phase1_pathsearch_fallback_37696.spec",
+    "source_owners": [
+      "t/phase0_regression.t:get_parser_pathsearch_fallback",
+      "perl/PathSearch.pm:go"
+    ],
+    "conclusion": "The real legacy fallback test initializes an unpruned recursive repository directory cache; generated build trees contribute discovery cost. The short sample establishes that interval only. No constructor or portable loader regression is established.",
+    "boundary": "Read-only own-process/toolchain observation. No dependency implementation read, cache deletion, live fixture removal or gate interruption. Historical PID must never be reused for a new diagnostic."
+  },
+  "artifact_cleanup": "Completed Phase0 removed its own PID37696 fallback file. After consuming exit0, verified its directory was non-symlink, same-volume and empty, removed only that empty directory and confirmed absence.",
+  "landing_contract": "Normal git commit hooks must pass all nine doctrines and the activation-boundary checks. After commit, clear the brief, consume the commit result and verify clean Git before .91; no push in this slice."
+}

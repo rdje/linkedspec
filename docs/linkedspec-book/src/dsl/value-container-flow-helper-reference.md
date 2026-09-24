@@ -335,10 +335,28 @@ the indexed-read repair.
 
 Use bare `name` for typed access and `array(...)` / `hash(...)` only for retained constructor shapes.
 
-**Current Perl function limitation:** inside a user function, multi-argument
-`array(value, value)` can return identifier strings instead of the parameter or
-local values. Use `[value, value]` there. This confirmed constructor defect is
-tracked for immediate repair separately from direct reads.
+### Array constructors inside functions
+
+`array(value, value)` reads the current parameter or local value twice, just as
+`[value, value]` does. Strings stay strings, `undef` stays null, and container
+arguments remain nested values. Quotes make an identifier spelling literal:
+`array("value", value)` contains the word `"value"` followed by the bound value.
+
+This complete example runs on the Perl reference and its fresh generated parsers:
+
+```text
+{{#include ../../../../examples/function-array-values.spec}}
+```
+
+On input `x`, the result is:
+
+```json
+[[7,7],["tag","x",["x","x"]],[null,null]]
+```
+
+The function-local assignment is separated from `return(...)` by its newline;
+a line-ending `;` is optional and valid. See [statement separators](fluent-and-block-forms.md#statement-separators).
+For one bare value, use `[value]`: exact `array(value)` remains removed selector syntax.
 
 In scalar value positions, a bare scalar name reads the working variable:
 `return(count)`, `set(out, count)`, `out = count`, `if(count, ...)`,
@@ -362,7 +380,7 @@ labels and a value expression such as `case(cat(foo, ""), body)` when the case v
 > chooses harray, while a nonnegative integer chooses array. `meta[key] = value` reads working values `key` and
 > `value`, and in value positions yields the updated root snapshot.
 > Direct nested access `payload["children"][0]["name"]` is accepted for mixed path segments.
-> Reads retain their existing direct-access interpretation; the contract requires them never to create state, with the current Perl limitation described above. For assignment on all five backends, every
+> Reads retain their existing direct-access interpretation and never create state; see [read purity](#read-purity). For assignment on all five backends, every
 > bracket is an ordinary expression whose evaluated value selects the path kind: string means harray and
 > nonnegative integer means array. Non-reserved bare path atoms such as `[i]` read scalar working variables.
 > The same path can be an assignment target: `payload["children"][0]["name"] = value` mutates the
@@ -879,7 +897,8 @@ for example `{ 3.5 }.floor().add(2)`.
 **Current Perl reducer limitation:** with `document = {"items":[3,1,2]}`,
 `sum(document["items"])`, `num_sum(document["items"])` and
 `document["items"].sum()` currently return null. Assigning that read to a binding
-before summing also returns null. The literal `sum([3,1,2])` and explicit
+before summing also returns null, as does `sum(items)` inside a function with an
+array-valued `items` parameter. The literal `sum([3,1,2])` and explicit
 `document["items"].sorted().sum()` controls return `6`. This source-shape rejection
 predates the direct-read repair and is tracked for repair separately.
 

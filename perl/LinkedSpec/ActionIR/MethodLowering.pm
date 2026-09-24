@@ -4149,12 +4149,14 @@ my $lower_numeric_array_reducer_source_expr = sub {
    my $arg_expr = $lower_ast_scalar_assignment_value_node->($arg);
    my $internal_array_pipeline_arg_expr;
    if (!(defined($arg_expr) && length($arg_expr))
+       && !($method eq 'array' && @$args != 1)
        && ref($arg) eq 'HASH'
        && ($arg->{kind} // '') eq 'variable'
        && _user_function_scalar_value_name($deps, $arg->{name})) {
     # Aggregate helpers own the runtime typed-value interpretation of a bare
     # binding. Preserve its spec-level name here instead of exposing the Perl
-    # scalar spelling to the compatibility lowerer.
+    # scalar spelling to the compatibility lowerer. Multi-argument array
+    # constructors emit values directly; let their value lowerer handle names.
     $arg_expr = $arg->{name};
    }
    if (!(defined($arg_expr) && length($arg_expr))

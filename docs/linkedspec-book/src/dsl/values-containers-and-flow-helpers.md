@@ -23,6 +23,11 @@ payload containing the string `"items"`, and `hash("key", value)` constructs a k
 shape literals (`["literal"]`, `{ "key" : value }`, `[]`, `{}`) as the terse constructor spellings in new
 examples.
 
+Multi-argument constructors read values inside user functions too: `array(value, value)`
+and `[value, value]` produce the same pair. See the
+[complete function example](value-container-flow-helper-reference.md#array-constructors-inside-functions),
+including a local assignment separated from its return by a newline.
+
 ## Per-rule default accumulator
 
 Every generated rule handler has a local array named after the rule. In a rule named `Parent`, the conventional accumulator is `@Parent`; in a rule named `sub_gui_list`, it is `@sub_gui_list`.
