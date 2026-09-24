@@ -82,3 +82,17 @@ The five exact book sources pass 82 public/fresh-generated assertions; the book
 renders. Final source/test diff SHA-256:
 `91821cd09b9991ce975862b4c83a62b0c899badb8c02fd62a8ed9dd8f89188d5`.
 Full Phase0 passes 1033/1033. Same-line members remain `.86.5.2`-owned.
+
+
+## Return-carrier qualification (.86.5.2.1)
+
+The validation repair above remains verified. Its original numeric `7` checks
+with I/regex/E did not independently prove the E path: [[perl-lifecycle-final-value-e-drift]]
+records the existing `.27` omission and I value leakage. The corrected final-call
+consumer and fifth exact book example use an explicit action edge, return `8`
+after division assigns `7`, and reject mismatching input with `undef`. Focused
+five files/31 and exact book/84 pass; the isolated old-example mutation fails
+only book group7. Production matches `917b4a42a`; no new full Phase0 is claimed.
+The permanent 30-case same-line intake is
+`docs/checkpoints/SESSION-STARTUP-READING.86.5.2.pl`; interpret its no-edge values
+with `.27` in mind. Same-line repair proceeds under `.86.5.2.2`.

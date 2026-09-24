@@ -12,6 +12,12 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-09-24 — SESSION-STARTUP-READING.86.5.2.1 - avoid false return-path proof from lifecycle leakage
+
+A numeric result alone did not prove the fifth book example's authored E return. The same-line intake's E{return("/")} twin still produced7, leading directly to the existing lifecycle Knowledge owner and .27. Public Get with E{return(42)} returns7 for both matching and mismatching input; dump_parser_source contains num_div but no E constant or matching path. The explicit-edge carrier instead emits num_add in the action, returns8 for x and undef for y. Its different values and negative input distinguish actual execution from the known lifecycle leak.
+
+Keep .86.5.1's verified validation repair, but correct its weak teaching/test carrier now. The 13-group consumer now uses explicit edges for the final-call matrix. Exact Markdown coverage is84 assertions; five direct-dependent files pass31 tests. The isolated old-fixture mutation fails only group7, proving the new recurrence catches this mistake. Runtime implementation and lifecycle semantics remain unchanged; .27 owns their repair. The permanent return-path checkpoint records both controls and their generated sources under repository-local scratch.
+
 ## 2026-09-24 — SESSION-STARTUP-READING.86.5.1 - use outer context without changing slash precedence
 
 The shared MethodExpr slash predicate intentionally excludes a closing brace to preserve regex interpretations. Before this repair, both validation fragment scans consumed the final /(14,2) and the real outer closer as an unterminated regex. Supplying structural depth identifies a bounded outer-context candidate: strip only physical-line-ending block closers in a temporary copy, then require the existing balanced-call parser to consume the whole remaining call. The first physical-line-only candidate regressed two complete multiline-regex controls and was withdrawn; its interrupted Phase0 is excluded. Full-source validation now prefers the existing regex interpretation and retries final-call classification only if that fails with a recorded candidate. Buffered failure/trace events publish only for the selected interpretation; both-failed attempts retain the original diagnostic. Reentrant callbacks run after trial state is restored. Complete regex suffixes and explicit host operators retain their previous path; source bytes and diagnostic coordinates remain intact.

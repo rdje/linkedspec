@@ -518,13 +518,13 @@ subtest 'integration book regex examples execute through loader and fresh genera
   ['captured subject substitution', "x\ny", 'ok'],
   ['quoted multiline subject', 'x', 'ok'],
   ['grouped pattern continuation', 'x,y', [1, 'ok']],
-  ['final numeric slash call', 'x', 7, ['Top']],
+  ['final numeric slash call', 'x', 8, ['Top', 'Done'], 'y'],
  );
  is(scalar(@sources), scalar(@cases), 'every complete published regex example is covered');
  return unless @sources == @cases;
  my $scratch = tempdir('linkedspec-book-regex-XXXXXX', TMPDIR => 1, CLEANUP => 1);
  for my $index (0 .. $#cases) {
-  my ($label, $input, $expected, $labels) = @{$cases[$index]};
+  my ($label, $input, $expected, $labels, $rejected_input) = @{$cases[$index]};
   $labels //= ['Top', 'Done'];
   my $source = $sources[$index];
   my $name = 'BookRegex' . ($index + 1);
@@ -547,6 +547,11 @@ subtest 'integration book regex examples execute through loader and fresh genera
   my $live_input = $input;
   is_deeply($loaded->compiled->(\$live_input), $expected, "$label returns its documented value");
   is($loaded->runtime_ctx->{last_error}, undef, "$label has no deferred runtime error");
+  if (defined $rejected_input) {
+   my $unmatched = $rejected_input;
+   is($loaded->compiled->(\$unmatched), undef, "$label does not leak I's value when the edge does not match");
+   is($loaded->runtime_ctx->{last_error}, undef, "$label unmatched input is ordinary recognition failure");
+  }
   my %descriptor_context;
   my $descriptor = LinkedSpec::Get(
    \$source, return_descriptor => 1, runtime_ctx_ref => \%descriptor_context,
@@ -566,22 +571,27 @@ subtest 'integration book regex examples execute through loader and fresh genera
 
 {
  require JSON::PP;
- my $book_input = $ARGV[0];
- my $book_result = eval { Execute(\$book_input) };
- my $book_error = $@;
- if ($book_error) {
-  print STDERR JSON::PP->new->canonical->encode($book_error), "\n";
-  exit 1;
+ my @book_results;
+ for my $book_text (@ARGV) {
+  my $book_input = $book_text;
+  my $book_result = eval { Execute(\$book_input) };
+  my $book_error = $@;
+  if ($book_error) {
+   print STDERR JSON::PP->new->canonical->encode($book_error), "\n";
+   exit 1;
+  }
+  push @book_results, $book_result;
  }
  print JSON::PP->new->canonical->encode({
-  value => $book_result, metadata => LinkedSpecGeneratedMetadata(),
+  values => \@book_results, metadata => LinkedSpecGeneratedMetadata(),
  });
 }
 BOOK_RUNNER
   close $program or die "cannot close $program_path: $!";
   # One captured pipe avoids stderr backpressure. Check the full wait status,
   # including signals; the child alarm also covers generated-source loading.
-  open my $child, '-|', $^X, '-I' . File::Spec->catdir($repo_root, 'perl'), $program_path, $input
+  my @inputs = ($input, defined($rejected_input) ? ($rejected_input) : ());
+  open my $child, '-|', $^X, '-I' . File::Spec->catdir($repo_root, 'perl'), $program_path, @inputs
    or die "cannot execute $program_path: $!";
   my $output = do { local $/; <$child> };
   my $closed = close $child;
@@ -595,7 +605,8 @@ BOOK_RUNNER
   };
   is($@, '', "$label fresh process returns JSON");
   next unless ref($result) eq 'HASH';
-  is_deeply($result->{value}, $expected, "$label fresh process returns its documented value");
+  my @expected_results = ($expected, defined($rejected_input) ? (undef) : ());
+  is_deeply($result->{values}, \@expected_results, "$label fresh process returns its documented outcomes");
   is($result->{metadata}{contract_id}, 'linkedspec-generated-source-v2', "$label retains the v2 contract");
   is($result->{metadata}{format_version}, 2, "$label retains format version 2");
   is($result->{metadata}{source_identity}, $identity, "$label generated identity is exact");

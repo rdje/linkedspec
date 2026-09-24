@@ -384,14 +384,16 @@ subtest 'final slash calls before physical-line-ending block closers' => sub {
  for my $separator ("\n", "\r\n") {
   for my $case (@cases) {
    my ($name, $initial) = @$case;
-   my $source = join($separator, 'Top::', " $initial", ' /x/ E { return(out) }', '');
+   my $source = join($separator, 'Top::', " $initial", ' -> Done { return(add(out,1)) }', 'Done:', ' /x/', '');
    my $original = $source;
    my %context;
    my $parser = LinkedSpec::Get(\$source, runtime_ctx_ref => \%context);
    ok($parser, "$name final call validates and compiles");
    my $input = 'x';
-   is($parser ? $parser->(\$input) : undef, 7, "$name final call returns seven");
+   is($parser ? $parser->(\$input) : undef, 8, "$name explicit edge returns eight after division");
    is($context{last_error}, undef, "$name has no deferred error");
+   $input = 'y';
+   is($parser ? $parser->(\$input) : undef, undef, "$name unmatched edge does not leak the lifecycle value");
    is($source, $original, "$name retains exact authored bytes");
    my $emitted = eval { LinkedSpec::emit_generated_source(\$source) };
    my $emit_error = $@;
@@ -402,7 +404,9 @@ subtest 'final slash calls before physical-line-ending block closers' => sub {
    ok($loaded, "$name emitted source loads") or diag($@);
    my $execute = $package->can('Execute');
    $input = 'x';
-   is($execute ? $execute->(\$input) : undef, 7, "$name emitted result is exact");
+   is($execute ? $execute->(\$input) : undef, 8, "$name emitted result comes from the explicit edge");
+   $input = 'y';
+   is($execute ? $execute->(\$input) : undef, undef, "$name emitted unmatched edge does not leak the lifecycle value");
   }
  }
  for my $action (

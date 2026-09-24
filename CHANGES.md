@@ -12,6 +12,12 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-09-24 — SESSION-STARTUP-READING.86.5.2.1 - prove explicit book example returns
+
+Correct the final-division example and regression carriers after a distinct E return exposed the known Perl .27 omission/value leakage. The old I/regex/E shape returns7 on both x and y even with E returning42; the generated handler contains only I. The corrected zero-regex parent uses an explicit edge to Done, computes out=7, and returns8 from the edge only on x; y returns undef without an error. Production is unchanged.
+
+Five focused files pass31 tests; the five exact book sources pass84 public/fresh-generated assertions. LF/CRLF final-call fixtures also distinguish the explicit edge value and mismatching input in live/emitted execution. Restoring the old book fixture in an isolated snapshot fails only book group7, including value, mismatch, descriptor and generated-plan assertions. The first four book sources remain unchanged. Public/generated checkpoint and book rendering pass; .27 retains the lifecycle repair, .86.5.2.2 resumes same-line validation. No new full Phase0 or canonical result is claimed.
+
 ## 2026-09-24 — SESSION-STARTUP-READING.86.5.1 - validate final line-ending slash calls
 
 Recognize a final bare arithmetic slash call before physical-line-ending block closers in Perl's outer validation scans. Use the existing balanced-call parser on a temporary classification copy. Preserve accepted full-source regex interpretations first; retry the final-call form only after failure, buffering callbacks/trace so rejected attempts publish no errors. The shared regex discriminator, explicit host quote routes and authored bytes remain unchanged. LF/CRLF, compact/spaced/nested/value/lifecycle blocks, variable/nested/quoted operands and live/emitted execution are covered.

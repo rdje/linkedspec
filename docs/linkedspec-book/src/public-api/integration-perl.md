@@ -320,14 +320,21 @@ below; a returned parser alone does not establish successful execution.
 
 For arithmetic division, `div(14, 2)` works at the end of an action block.
 The equivalent slash call `/(14, 2)` also works before closing braces that
-finish the physical line, with LF or CRLF line endings. This complete parser
-returns `7` on input `x`:
+finish the physical line, with LF or CRLF line endings. This parser stores `7`
+in `out`, then its explicit action adds one and returns `8` on input `x`:
 
 ```text
 Top::
  I { out = /(14, 2) }
- /x/ E { return(out) }
+ -> Done { return(add(out, 1)) }
+Done:
+ /x/
 ```
+
+The edge matches `Done`'s regex; input `y` returns `undef` without a runtime
+error. The different assignment and return values also prove that the action
+ran. This avoids Perl's known direct-rule `I`/`E` omission and value-leakage
+problem; see [action and lifecycle placement](../dsl/action-and-lifecycle-placement.md).
 
 Additional rule content after that closing brace on the same line still exposes
 a validation gap (`SESSION-STARTUP-READING.86.5.2`). Keep the closing brace at

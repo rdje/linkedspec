@@ -1,10 +1,10 @@
 # MEMORY
 
-- activation_commit: `fe516141b974c1869cfa6ba8867907de402a3da2` — clean base for slash-call end-of-block validation.
-- latest_completed_leaf: `SESSION-STARTUP-READING.86.5.1 - validate final line-ending slash calls`.
-- active_work_unit: `SESSION-STARTUP-READING.86.5.2` — same-line following-member slash validation (pending).
-- next_action: Repair .86.5.2 from docs/checkpoints/SESSION-STARTUP-READING.86.5-contexts.pl: reconcile named/semicolon controls and actual outer-member boundaries without changing shared slash precedence. Then .86.3 exact canonical closeout.
-- in_flight_uncommitted: None; .86.5.1 focused206/book82 and full Phase0 1033/1033 pass. Original/context replays change only intended EOF results; helper/grouped/numeric records remain exact. All jobs are consumed.
+- activation_commit: `917b4a42abc1f47fc7f54793a1fc55829c6751cd` — clean base for same-line slash-call member validation.
+- latest_completed_leaf: `SESSION-STARTUP-READING.86.5.2.1 - prove explicit book example returns`.
+- active_work_unit: `SESSION-STARTUP-READING.86.5.2.2` — same-line slash/member validation (pending).
+- next_action: Repair .86.5.2.2 from the same-line30-case intake and explicit-edge return checkpoint. Reconcile named-slot grammar, preserve full-source regex precedence, then recompose .86.5 before .86.3 canonical.
+- in_flight_uncommitted: None; carrier correction passes focused31/book84, isolated old-fixture mutation and rendered book. Production is unchanged from917b4a42a. All jobs are consumed; .27 retains lifecycle repair.
 - blockers: LS-004 remains upstream-owned; director relays docs/upstream/rgx/bootstrap-progress-status.md. No RGX code defect established. Named-argument and format proposals remain parked.
   Wrapper startup .7 remains open; recovery/purge stay prohibited. No interrupted Phase0 run counts as proof.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the

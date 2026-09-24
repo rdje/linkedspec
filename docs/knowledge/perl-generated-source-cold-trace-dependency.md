@@ -32,3 +32,11 @@ helper recomposition. `.86.5.1` extends the recurrence to five complete Markdown
 sources and82 assertions with final line-ending division. Sources are extracted directly from
 the integration guide so their loader and generated results cannot drift behind
 duplicate fixture strings. No generated-format version change is intended.
+
+
+`.86.5.2.1` strengthens the fifth example's execution path: an explicit edge
+returns `8` after I assigns `7`, and mismatching input returns `undef`. The prior
+I/E shape could leak `7` while omitting E; see [[perl-lifecycle-final-value-e-drift]].
+All five exact examples now pass 84 assertions, and an isolated restoration of
+the old fifth example fails only book group7. The first four sources and runtime
+implementation remain unchanged; this is a proof/teaching correction.

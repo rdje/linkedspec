@@ -9,7 +9,8 @@ answers:
   - "can Perl lifecycle blocks leak the final statement value"
   - "is Perl lifecycle final-value drift a docs caveat or implementation task"
   - "which startup repair owns Perl direct default E finalization"
-date: 2026-07-08
+  - "why did the book division example need a distinct action return"
+date: 2026-09-24
 status: current
 tags: [perl-reference, lifecycle, generated-handlers, mdbook, SPEC-LANG-REFERENCE]
 evidence: "SPEC-LANG-REFERENCE.10.5.9 used the LinkedSpec TOOLBOX while fixing `docs/linkedspec-book/src/dsl/action-and-lifecycle-placement.md`. Runtime probes showed `Top:: I { set(out,\"from_i\"); set(ignored,\"not_a_return\") } /x/ E { return(hash(...)) }` returns `\"not_a_return\"` on the Perl reference. `dump_parser_source` for that shape emitted only the `I` block body; the `/x/` regex and `E` finalization path were absent from the generated default handler. A dispatched `Example: /x/ I { set(...); set(...) }` with no explicit return likewise surfaced `[\"not_a_return\"]`, while the same child with explicit `return(hash(...))` surfaced the intended hash. The mdBook page now warns that public lifecycle examples must use explicit `return(...)` and must not depend on host final-statement leakage or direct `E` finalization in handler-sensitive shapes."
@@ -49,3 +50,22 @@ The generated Child retains its preamble and declaration but omits the authored 
 `SpecEntry.pm:198` requires action code or an I body for the single-regex AND variant. This extends
 the concrete mode matrix of existing startup `.27.1-.27.3`, without a new repair root or parity claim.
 Exact reference and generated-source controls: [[julia-recognition-effect-integration-gap]].
+
+
+## Division-example carrier correction (September 24)
+
+`SESSION-STARTUP-READING.86.5.2.1` rechecks the omission at clean `917b4a42a`.
+The permanent `docs/checkpoints/SESSION-STARTUP-READING.86.5.2.1.pl` uses public
+Get and generated-source dumps: I assigns division result `7`, E explicitly
+returns `42`, yet both `x` and `y` return `7` without an error. The generated
+handler contains the division assignment and omits E. The earlier fifth book
+example's observed `7` therefore did not establish its authored E return path.
+
+The corrected book and final-call tests use a zero-regex parent with an explicit
+edge to `Done`. Division assigns `7`; the edge returns `add(out,1)` = `8` when
+Done matches `x`, while `y` returns `undef` without an error. This distinguishes
+real action execution from lifecycle leakage. Exact book coverage passes 84
+assertions through the public loader and fresh generated processes; restoring
+the old example in isolation fails only the expected book group. `.27.1-.3`
+still own lifecycle reconciliation/repair; the carrier correction changes no
+production implementation or lifecycle contract.

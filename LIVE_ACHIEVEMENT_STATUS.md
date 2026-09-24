@@ -2,17 +2,19 @@
 
 ## Current Activity
 
-Perl helper recomposition is verified. Physical-line-ending slash validation .86.5.1 now passes focused206/book82 and full Phase0 1033/1033; .86.5.2 owns same-line following members before .86.3 canonical. Independent helper, grouping, escape, comment, brace and upstream owners remain open.
+Line-ending slash validation .86.5.1 is verified. Immediate .86.5.2.1 corrects its division example to prove an explicit edge return: focused31/book84 pass, including mismatching input and old-fixture mutation. Same-line scanner repair .86.5.2.2 follows; .27 retains the separate lifecycle defect.
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.86.5.1 - validate final line-ending slash calls` — bounded outer-context repair preserves shared slash precedence, source bytes and exact compatibility records; five executable book examples stay synchronized.
+- `SESSION-STARTUP-READING.86.5.2.1 - prove explicit book example returns` — explicit action returns8 after division stores7; mismatching input returns undef. Production is unchanged, and all five exact book examples remain executable.
 
 ## Next Action
 
-- Repair .86.5.2 same-line following-member boundaries, recompose .86.5, then run exact canonical parent .86.3. Commit each verified slice; final push requires exact-HEAD canonical proof.
+- Repair .86.5.2.2 same-line slash/member boundaries and reconcile named-slot controls, then exact canonical parent .86.3. Commit every verified slice.
 
 ## Recent Completions
+
+- `2026-09-24` — `SESSION-STARTUP-READING.86.5.2.1` verifies explicit division return carriers with focused31/book84 and an isolated old-fixture mutation.
 
 - `2026-09-24` — `SESSION-STARTUP-READING.86.5.1` verifies line-ending slash calls with focused206/book82 and Phase0 1033/1033.
 
@@ -43,8 +45,6 @@ Perl helper recomposition is verified. Physical-line-ending slash validation .86
 - `2026-09-23` — `CONSUMER-REPORT-DELIVERY.2` reconfirms LS-004 and successful public bootstrap reuse; canonical publication follows.
 
 - `2026-09-23` — `CONSUMER-REPORT-DELIVERY.1` verifies local remedies and exposes unpublished fixes; explicit document migration is documented.
-
-- `2026-09-23` — `.86.4.2.4` corrects the regex-type premise, withdraws the precedence question and owns measured helper gaps.
 
 ## History
 
