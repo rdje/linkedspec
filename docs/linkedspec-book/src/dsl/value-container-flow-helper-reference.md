@@ -731,8 +731,9 @@ form; write grouping explicitly with nested calls such as `+(*(a, b), c)` or
 `add(mul(a, b), c)`.
 
 On the current Perl backend, ordinary rule actions support the arithmetic calls
-above, including a final `/(14, 2)` before block-closing braces at the end of a
-physical line. See the [complete division example](../public-api/integration-perl.md#regex-and-division-in-action-code).
+above, including a final `/(14, 2)` before a block-closing brace. The
+[complete division example](../public-api/integration-perl.md#regex-and-division-in-action-code)
+also shows an action edge on the same line and explains current parsing limits.
 Two separately tracked boundaries remain:
 
 - A callable body such as `{|| return(div(14, 2)) }` or

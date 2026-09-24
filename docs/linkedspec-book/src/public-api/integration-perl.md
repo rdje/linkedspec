@@ -319,14 +319,13 @@ ending in its quoted value. Check both failure channels described
 below; a returned parser alone does not establish successful execution.
 
 For arithmetic division, `div(14, 2)` works at the end of an action block.
-The equivalent slash call `/(14, 2)` also works before closing braces that
-finish the physical line, with LF or CRLF line endings. This parser stores `7`
+The equivalent slash call `/(14, 2)` also works before a block's closing brace,
+including an action edge following on the same line, with LF or CRLF line endings. This parser stores `7`
 in `out`, then its explicit action adds one and returns `8` on input `x`:
 
 ```text
 Top::
- I { out = /(14, 2) }
- -> Done { return(add(out, 1)) }
+ I { out = /(14, 2) } -> Done { return(add(out, 1)) }
 Done:
  /x/
 ```
@@ -336,11 +335,16 @@ error. The different assignment and return values also prove that the action
 ran. This avoids Perl's known direct-rule `I`/`E` omission and value-leakage
 problem; see [action and lifecycle placement](../dsl/action-and-lifecycle-placement.md).
 
-Additional rule content after that closing brace on the same line still exposes
-a validation gap (`SESSION-STARTUP-READING.86.5.2`). Keep the closing brace at
-line end for this slash form. Newline-separated division followed by another
+Newline-separated division followed by another
 assignment also works. Prefer `div(...)` when slash syntax would obscure the
 arithmetic intent.
+
+Regex-slot identity has a separate same-line limitation on Perl: a named
+declaration sharing a line with lifecycle content, or an anonymous regex after
+a lifecycle block, can disappear from selector resolution. Keep declarations
+on separate lines, as `Done` does above. The named-slot standalone control
+retains its identity; repair of the combined forms is owned by
+`SESSION-STARTUP-READING.86.5.3`.
 
 Unescaped `}` inside an action's regex remains a separate Perl parsing defect:
 structural validation can accept the source while execution returns no result
@@ -364,7 +368,7 @@ These examples cover ordinary rule actions. Perl's separate callable `matches`
 and arithmetic-helper gaps, plus function-position `filter_match`, remain; use the
 [value-helper reference](../dsl/value-container-flow-helper-reference.md#regex-patterns-and-variable-values)
 and its [numeric helper restrictions](../dsl/value-container-flow-helper-reference.md#numeric-value-helpers)
-for their current supported forms. The same-line member and escape limitations
+for their current supported forms. The regex-slot and escape limitations
 above remain outside this verified example set.
 
 ## Handle runtime outcomes explicitly

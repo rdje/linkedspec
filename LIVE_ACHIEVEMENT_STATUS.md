@@ -2,17 +2,19 @@
 
 ## Current Activity
 
-Line-ending slash validation .86.5.1 is verified. Immediate .86.5.2.1 corrects its division example to prove an explicit edge return: focused31/book84 pass, including mismatching input and old-fixture mutation. Same-line scanner repair .86.5.2.2 follows; .27 retains the separate lifecycle defect.
+Same-line slash validation .86.5.2 is verified with focused207/book84 and full Phase0 1033/1033. Required .86.5.3 now repairs independent same-line regex-slot metadata; .27 retains lifecycle execution.
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.86.5.2.1 - prove explicit book example returns` — explicit action returns8 after division stores7; mismatching input returns undef. Production is unchanged, and all five exact book examples remain executable.
+- `SESSION-STARTUP-READING.86.5.2.2 - validate same-line slash call members` — bare division accepts following members while preserving regex precedence; exact book sources execute live and in fresh generated processes.
 
 ## Next Action
 
-- Repair .86.5.2.2 same-line slash/member boundaries and reconcile named-slot controls, then exact canonical parent .86.3. Commit every verified slice.
+- Repair .86.5.3 named/anonymous slot identity across same-line members, then recompose .86.5 and exact canonical .86.3. Commit every verified slice.
 
 ## Recent Completions
+
+- `2026-09-24` — `SESSION-STARTUP-READING.86.5.2.2` verifies same-line slash calls with focused207/book84 and Phase0 1033/1033.
 
 - `2026-09-24` — `SESSION-STARTUP-READING.86.5.2.1` verifies explicit division return carriers with focused31/book84 and an isolated old-fixture mutation.
 
@@ -43,8 +45,6 @@ Line-ending slash validation .86.5.1 is verified. Immediate .86.5.2.1 corrects i
 - `2026-09-23` — `CONSUMER-REPORT-DELIVERY.3` binds the consumer handoff to exact canonical landing and clean remote publication.
 
 - `2026-09-23` — `CONSUMER-REPORT-DELIVERY.2` reconfirms LS-004 and successful public bootstrap reuse; canonical publication follows.
-
-- `2026-09-23` — `CONSUMER-REPORT-DELIVERY.1` verifies local remedies and exposes unpublished fixes; explicit document migration is documented.
 
 ## History
 

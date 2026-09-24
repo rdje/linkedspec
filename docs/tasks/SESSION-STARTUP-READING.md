@@ -4843,7 +4843,7 @@ remain. Reading completion and runtime signoff remain distinct.
   Status: `active`
   Goal: Reconcile Perl slash-call termination at the end of an outer action block.
   Dependencies: Land .86.2 and .86.4; retained slash_eof/slash_eof_space plus named and semicolon controls; preserve the explicit closing-brace exclusion in the existing regex discriminator.
-  Children: `SESSION-STARTUP-READING.86.5.1`, `SESSION-STARTUP-READING.86.5.2`
+  Children: `SESSION-STARTUP-READING.86.5.1`, `SESSION-STARTUP-READING.86.5.2`, `SESSION-STARTUP-READING.86.5.3`
   Planned tier: focused.
   Planned focused proof: Public Get/runtime context, isolated lowering, complete outer source and generated execution; bare/spaced slash EOF, semicolon/named twins, escaped and closing-brace regex controls, nested and malformed contexts; phase0 and direct scanner tests.
   Planned canonical boundary: Parent .86.3; no broadened delimiter precedence without prior contract reconciliation.
@@ -4872,16 +4872,16 @@ remain. Reading completion and runtime signoff remain distinct.
   - [x] **LOCKSTEP** — Executable book example, accurate restrictions, Knowledge, roadmaps and live owners agree; .86.5.2 is next.
 
 - ID: `SESSION-STARTUP-READING.86.5.2`
-  Status: `active`
-  Goal: Repair final slash calls followed by same-line rule members, then recompose and close .86.5.
+  Status: `done`
+  Goal: Repair final slash calls followed by same-line rule members, then continue required slot metadata repair .86.5.3 before .86.5 closes.
   Dependencies: Verified .86.5.1; .86.5-contexts next_member/quoted-slash controls and existing accepted regex interpretations.
   Children: `SESSION-STARTUP-READING.86.5.2.1`, `SESSION-STARTUP-READING.86.5.2.2`
   Planned tier: focused.
   Planned focused proof: Lifecycle/action boundaries followed by regexes/lifecycle blocks, original complete-regex compatibility and malformed diagnostics; full affected scanner/validation/generated proof, book and final parent reconciliation.
   Planned canonical boundary: .86.3 after complete .86.5; retain accepted interpretations and do not infer raw-host invalidity.
   Acceptance: Identify actual outer member boundaries without borrowing their slash delimiters into the final arithmetic call or stealing complete regex syntax. Keep independent .87/.54/.34 owners distinct.
-  Verification: Same-line /x/ and E{return("/")} tails reproduce unclosed-block validation; original slash scanning consumes their later delimiter. Named/semicolon counterparts must establish supported outer grammar before implementation.
-  Commit: `pending`
+  Verification: .86.5.2.1 proves explicit return carriers; .86.5.2.2 verifies same-line slash recognition with focused207/book84 and Phase0 1033. Required independent slot metadata .86.5.3 follows before parent/canonical closure.
+  Commit: Children .86.5.2.1 and .86.5.2.2 preserve the complete bounded repair.
 
 - ID: `SESSION-STARTUP-READING.86.5.2.1`
   Status: `done`
@@ -4901,14 +4901,33 @@ remain. Reading completion and runtime signoff remain distinct.
   - [x] **LOCKSTEP** — Book, recurring tests, Knowledge, .27 ownership and live pointers agree; scanner repair resumes under .86.5.2.2.
 
 - ID: `SESSION-STARTUP-READING.86.5.2.2`
-  Status: `pending`
-  Goal: Repair same-line slash-call member boundaries and recompose .86.5 using explicit return carriers.
+  Status: `done`
+  Goal: Repair same-line slash-call member boundaries using explicit return carriers; .86.5.3 must follow before .86.5 closes.
   Dependencies: Verified .86.5.2.1, original same-line controls, complete regex compatibility and named-slot contract reconciliation.
-  Planned tier: focused.
-  Planned focused proof: Named/semicolon/bare same-line twins, explicit action results and errors, accepted regex/multiline precedence, emitted execution, direct validator/diagnostic dependents and full Phase0.
-  Planned canonical boundary: Parent .86.3 after completed .86.5; any contract ambiguity precedes implementation.
+  Verification tier: `focused`
+  Focused checks: Named/semicolon/bare same-line twins, explicit action results and errors, accepted regex/multiline precedence, emitted execution, direct validator/diagnostic dependents and full Phase0.
+  Canonical trigger: Parent .86.3 after completed .86.5; any contract ambiguity precedes implementation.
   Acceptance: Recognize final arithmetic calls before subsequent admitted members without changing established regex precedence; retain independent .27/.54/.34 and named-slot owners.
-  Verification: `pending`
+  Verification: Recognize the balanced slash-call end before an outer brace and following members, retaining full-source regex-first trial selection. Focused9 files/207, exact book84 and rendering pass. Clean fb955602e finishes14 groups and fails only new group14. Exactly8 bare-slash rows in the30-case intake now match named controls; other22 are exact. Original12/helper13+syntax/grouped22/numeric12/multiline5 stay exact. Context15 changes only intended next_member/quoted-slash public outcomes; private fragment scans do not select the full-source interpretation. Slot5 stays exact and required .86.5.3-owned. Full Phase0 passes1033/1033 at frozen diff86881406bf815024ee8c7cf00482ce547ebae315a6165fd350cfe9d258b05a92. No canonical or push claim.
+  Commit: `SESSION-STARTUP-READING.86.5.2.2 - validate same-line slash call members`
+
+  - [x] **ROOT CAUSE** — Final slash classification borrowed a later member delimiter and hid the real block closer.
+  - [x] **ISSUE** — Bare slash same-line forms failed while named/semicolon twins were accepted.
+  - [x] **FIX** — Recognize the balanced call before its closer within the existing regex-first trial.
+  - [x] **ADDRESSED** — LF/CRLF live/emitted explicit returns, exact book84 and Phase0 1033 pass.
+  - [x] **NO REGRESSION** — Established helper/numeric/multiline outcomes and diagnostic owners remain exact.
+  - [x] **LOCKSTEP** — Book, Knowledge and live pointers reflect repaired slash calls and required slot repair .86.5.3.
+
+- ID: `SESSION-STARTUP-READING.86.5.3`
+  Status: `pending`
+  Goal: Preserve regex-slot declarations and identities across same-line rule-body members on Perl.
+  Dependencies: Verified .86.5.2.2; permanent .86.5.3 public selector/descriptor controls; ADR0045 and the governed named/anonymous slot contract.
+  Scope: Reconcile validation, permanent specs/spec.spec named-declaration grammar and its BootstrapSpec bridge before claiming parsed slot identity; both grammar patterns currently anchor to the entire physical line.
+  Planned tier: focused.
+  Planned focused proof: Separate/same-line named and anonymous slots before/after lifecycle items, explicit numeric/named selectors, authored order and descriptor identity, malformed/duplicate/source-position controls, actual live/emitted results, metadata dependents and full Phase0.
+  Planned canonical boundary: Required before .86.5 and canonical .86.3 closure; no new declaration or selector grammar.
+  Acceptance: Recognize admitted regex members outside code across a physical line without counting action/helper patterns. Preserve exact names/order, numeric/name provenance and diagnostics. Keep lifecycle execution .27 and regex-brace .54.1 separate.
+  Verification: At fb955602e, separate I and named-slot lines expose slot_id=slot and return8/undef through Done[slot]. Putting the named slot after I, before E or between them fails resolve_selector/regex_slot_unknown_name; an anonymous slot after I fails regex_slot_index_out_of_range. Validation's metadata prepass recognizes only whole-line named declarations or leading anonymous regexes, so it omits later members. No slash call is needed to reproduce.
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.87`
@@ -4965,10 +4984,10 @@ audit range, not the default repair frontier.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.86.5.2.2` | `pending` | Repair same-line slash/member boundaries using verified explicit return carriers; retain .27 lifecycle ownership. |
+| 1 | `SESSION-STARTUP-READING.86.5.3` | `pending` | Repair same-line regex-slot metadata before .86.5 and canonical .86.3 close; retain .27 lifecycle ownership. |
 
 The audit withdraws the unsupported precedence question. Helper validation `.86.4.3` and
-statement splitting `.86.4.6` plus quoted-subject validation `.86.4.7` are verified. Public recomposition verifies grouped repair `.86.4.8.2` and fresh generated Trace bootstrap `.86.4.4.2.1`; `.86.4.4.2.2` closes the measured helper scope. Line-ending `.86.5.1` is verified; same-line `.86.5.2` follows before canonical `.86.3`.
+statement splitting `.86.4.6` plus quoted-subject validation `.86.4.7` are verified. Public recomposition verifies grouped repair `.86.4.8.2` and fresh generated Trace bootstrap `.86.4.4.2.1`; `.86.4.4.2.2` closes the measured helper scope. Line-ending `.86.5.1` and same-line `.86.5.2` are verified; required regex-slot metadata `.86.5.3` follows before canonical `.86.3`.
 Independent helper gaps are owned by `.87.1/.87.2`; no regex-type feature is admitted.
 
 ## Reading Ledger
@@ -7504,6 +7523,8 @@ All 53 owned scopes are read: HLink delimiter/raw text, Liberty scalar/complex a
 
 ## Verification Log
 
+- 2026-09-24 .86.5.2.2: Recognize the balanced slash-call end before an outer brace and following members, retaining full-source regex-first trial selection. Focused9 files/207, exact book84 and rendering pass. Clean fb955602e finishes14 groups and fails only new group14. Exactly8 bare-slash rows in the30-case intake now match named controls; other22 are exact. Original12/helper13+syntax/grouped22/numeric12/multiline5 stay exact. Context15 changes only intended next_member/quoted-slash public outcomes; private fragment scans do not select the full-source interpretation. Slot5 stays exact and required .86.5.3-owned. Full Phase0 passes1033/1033 at frozen diff86881406bf815024ee8c7cf00482ce547ebae315a6165fd350cfe9d258b05a92. No canonical or push claim. Files=1, Tests=1033, 1394 wallclock secs ( 0.42 usr  0.09 sys + 1081.47 cusr 110.13 csys = 1192.11 CPU) Logs: .linkedspec-data/scratch/slash-members86-5-2/.
+
 - 2026-09-24 .86.5.2.1: Public/Get and emitted-source diagnosis proves omitted E: old I/regex/E returns7 for x and y despite E{return(42)}; generated source contains only I. Corrected explicit edge returns8 for x and undef/no-error for y. Focused5 files/31 pass; five exact book sources/84 pass. Isolated old-fixture mutation finishes7 groups and fails only book group7. First four sources are unchanged; production matches917b4a42a. Book render and permanent checkpoint pass. .27 retains lifecycle repair; .86.5.2.2 is next; no new Phase0/canonical claim. Logs: .linkedspec-data/scratch/slash-members86-5-2/.
 
 - 2026-09-24 .86.5.1: Outer structural depth recognizes only a complete bare slash call followed by line-ending braces; shared MethodExpr precedence and source bytes stay unchanged. Accepted full-source regex interpretations win; only a failed source with a final-call candidate retries. Only the selected attempt publishes diagnostics. Focused9 files/206 and five exact book sources/82 assertions pass. Clean fe516141b baseline completes13 groups and fails only new groups12/13. Fixed15 contexts and original12 change only their bare/spaced EOF outcomes to7; helper13+syntax/grouped22/numeric12 remain exact. Full Phase0 passes1033/1033; frozen source/test diff SHA25691821cd09b9991ce975862b4c83a62b0c899badb8c02fd62a8ed9dd8f89188d5. Syntax and final book render pass. Same-line members stay .86.5.2; numeric callable/grouping are .87.3/.87.4-owned. Phase0: Files=1, Tests=1033, 1528 wallclock secs ( 0.51 usr  0.11 sys + 1129.24 cusr 129.84 csys = 1259.70 CPU). Logs: .linkedspec-data/scratch/slash-eof86-5/.
@@ -7706,6 +7727,8 @@ CLI66x2 and Phase0 1032/1032; 1163 seconds is Phase0 only, with 25 optional gate
 
 ## Commit Log
 
+- 2026-09-24 .86.5.2.2: `SESSION-STARTUP-READING.86.5.2.2 - validate same-line slash call members`; activationfb955602e; required .86.5.3 follows.
+
 - 2026-09-24 .86.5.2.1: `SESSION-STARTUP-READING.86.5.2.1 - prove explicit book example returns`; activation917b4a42a; .86.5.2.2 follows.
 
 - 2026-09-24 .86.5.1: `SESSION-STARTUP-READING.86.5.1 - validate final line-ending slash calls`; activationfe516141b; .86.5.2 follows.
@@ -7745,6 +7768,8 @@ CLI66x2 and Phase0 1032/1032; 1163 seconds is Phase0 only, with 25 optional gate
 Each canonical task node owns its exact `Commit` subject and retained completion note. Query landed history with `git log --all --format="%h %s" --fixed-strings --grep="SESSION-STARTUP-READING."`; this replaces the proven duplicate 102-row table.
 
 ## Changelog
+
+- 2026-09-24 .86.5.2.2: Repair same-line slash-call validation, teach the verified edge form and require independent regex-slot metadata repair .86.5.3 before closure.
 
 - 2026-09-24 .86.5.2.1: Correct the weak I/E division teaching/test carrier, retain .27 ownership and select same-line repair .86.5.2.2. Compact55 mutable-ledger blank separators with every nonblank line/order preserved; no content or budget is removed.
 

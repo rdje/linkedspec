@@ -12,6 +12,12 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-09-24 — SESSION-STARTUP-READING.86.5.2.2 - validate same-line slash call members
+
+Recognize a complete final slash call before an outer closing brace even when another admitted member follows on the same line. Preserve full-source regex-first trial selection, explicit host operators, authored bytes and the shared closing-brace safeguard. Eleven explicit-edge forms under LF/CRLF verify live/emitted results and unmatched input; the fifth exact mdBook example now puts its edge on the same line.
+
+Recognize the balanced slash-call end before an outer brace and following members, retaining full-source regex-first trial selection. Focused9 files/207, exact book84 and rendering pass. Clean fb955602e finishes14 groups and fails only new group14. Exactly8 bare-slash rows in the30-case intake now match named controls; other22 are exact. Original12/helper13+syntax/grouped22/numeric12/multiline5 stay exact. Context15 changes only intended next_member/quoted-slash public outcomes; private fragment scans do not select the full-source interpretation. Slot5 stays exact and required .86.5.3-owned. Full Phase0 passes1033/1033 at frozen diff86881406bf815024ee8c7cf00482ce547ebae315a6165fd350cfe9d258b05a92. No canonical or push claim. Files=1, Tests=1033, 1394 wallclock secs ( 0.42 usr  0.09 sys + 1081.47 cusr 110.13 csys = 1192.11 CPU)
+
 ## 2026-09-24 — SESSION-STARTUP-READING.86.5.2.1 - prove explicit book example returns
 
 Correct the final-division example and regression carriers after a distinct E return exposed the known Perl .27 omission/value leakage. The old I/regex/E shape returns7 on both x and y even with E returning42; the generated handler contains only I. The corrected zero-regex parent uses an explicit edge to Done, computes out=7, and returns8 from the edge only on x; y returns undef without an error. Production is unchanged.

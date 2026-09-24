@@ -9,7 +9,7 @@ answers:
   - do Perl callable bodies support numeric helpers
   - why does parenthesized Perl arithmetic reach a host function
 date: 2026-09-24
-status: .86.5.1 verified; .86.5.2 and .87.3/.87.4 remain
+status: .86.5.1/.86.5.2 verified; required .86.5.3 and .87.3/.87.4 remain
 tags: [perl, validation, arithmetic, scanner, callable, source]
 evidence: "At fe516141b, the fixed15-case .86.5-contexts checkpoint measures public Get/errors plus fragment slash classification, consumed offset, edge depth and lifecycle close. Bare/spaced EOF division consumes to fragment length, leaving depth1 and no lifecycle closer; semicolon/named/receiver controls return7 with depth0. Same-line following regex/quoted-slash cases also fail validation."
 reverify: "bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/multiline_helper_pattern_validation.t t/generated_source_contract.t; bash tools/project_data_run.sh env PERL5LIB= perl -Iperl docs/checkpoints/SESSION-STARTUP-READING.86.5-contexts.pl; compare values/error owners and structural scans, not diagnostic exit status alone."
@@ -96,3 +96,33 @@ only book group7. Production matches `917b4a42a`; no new full Phase0 is claimed.
 The permanent 30-case same-line intake is
 `docs/checkpoints/SESSION-STARTUP-READING.86.5.2.pl`; interpret its no-edge values
 with `.27` in mind. Same-line repair proceeds under `.86.5.2.2`.
+
+## Same-line member repair (.86.5.2.2)
+
+The candidate now uses the balanced-call end offset in the original fragment
+and requires optional horizontal space followed by a closing brace. Other
+members may follow that brace. Full-source regex-first trial selection and
+explicit host quote exclusions remain unchanged; the shared MethodExpr
+closing-brace safeguard is still intact.
+
+The 30-case intake changes exactly eight bare-slash rows to their named-control
+outcomes. The other 22 records are exact. Eleven explicit-edge shapes under
+LF/CRLF prove live/emitted results, mismatching-input rejection and source
+identity; consumer group14 passes and fails alone against clean `fb955602e`.
+Nine focused files pass207 tests; five exact book examples pass84 assertions
+and the rendered book uses a same-line edge for the fifth example.
+
+Original12, helper13 plus syntax, grouped22, numeric12 and multiline-closer5
+records remain exact against `.86.5.1`. In context15, only `next_member` and
+`slash_in_quote` change their public outcome to successful division. Private
+fragment-only fields also change for `next_named_slot` and two complete brace
+patterns: without a full-source trial these probes apply the final-call
+candidate directly. Those fields do not represent the selected full-source
+interpretation. All production callers of these scans run inside the validation
+trial; public regex outcomes and their error owners remain unchanged.
+
+The named-div slot5 replay is unchanged and exposes independent metadata loss,
+owned by required `.86.5.3`; see [[perl-same-line-regex-slot-metadata]]. This
+repair does not claim lifecycle `.27`, bootstrap-brace `.54.1`, grouping or
+callable support. Full Phase0 passes1033/1033 for frozen source/test diff
+`86881406bf815024ee8c7cf00482ce547ebae315a6165fd350cfe9d258b05a92`.

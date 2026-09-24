@@ -12,6 +12,14 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-09-24 — SESSION-STARTUP-READING.86.5.2.2 - validate same-line slash call members
+
+The final-call recognizer now reads the existing balanced-call end offset and checks for horizontal space plus a closing brace; it no longer requires every remaining character to be a line-ending closer. The existing two-trial validator still gives every accepted full-source regex interpretation precedence. Standalone private fragment probes lack that trial context, so some brace-pattern offsets change even though their public values/errors remain identical. All production scan callers run within the validator.
+
+The named-div slot controls expose a separate metadata omission: whole-fragment named declarations and leading-only anonymous extraction lose members sharing a line with lifecycle blocks. Named selectors report regex_slot_unknown_name; the anonymous selector reports regex_slot_index_out_of_range. The formal body grammar and ADR0045 admit these members. Required .86.5.3 owns repair before .86.5/.86.3 can close; the book records the tested standalone-line workaround. Lifecycle .27 remains independent.
+
+Recognize the balanced slash-call end before an outer brace and following members, retaining full-source regex-first trial selection. Focused9 files/207, exact book84 and rendering pass. Clean fb955602e finishes14 groups and fails only new group14. Exactly8 bare-slash rows in the30-case intake now match named controls; other22 are exact. Original12/helper13+syntax/grouped22/numeric12/multiline5 stay exact. Context15 changes only intended next_member/quoted-slash public outcomes; private fragment scans do not select the full-source interpretation. Slot5 stays exact and required .86.5.3-owned. Full Phase0 passes1033/1033 at frozen diff86881406bf815024ee8c7cf00482ce547ebae315a6165fd350cfe9d258b05a92. No canonical or push claim.
+
 ## 2026-09-24 — SESSION-STARTUP-READING.86.5.2.1 - avoid false return-path proof from lifecycle leakage
 
 A numeric result alone did not prove the fifth book example's authored E return. The same-line intake's E{return("/")} twin still produced7, leading directly to the existing lifecycle Knowledge owner and .27. Public Get with E{return(42)} returns7 for both matching and mismatching input; dump_parser_source contains num_div but no E constant or matching path. The explicit-edge carrier instead emits num_add in the action, returns8 for x and undef for y. Its different values and negative input distinguish actual execution from the known lifecycle leak.

@@ -486,6 +486,12 @@ and LuaJIT. All routes preserve authored/static/compiled metadata, invocation-lo
 reconstruction, compatible descriptor projections, generated-v2 execution, and independently loaded emitted
 source. Outward facade and schema surfaces remain intentionally unchanged.
 
+Current Perl limitation: keep regex declarations on their own lines. Named
+declarations beside lifecycle content, and anonymous regexes after a lifecycle
+block on the same line, can lose their slot identity during validation. This is
+an implementation gap in the paragraph contract; see the
+[Perl integration limits](../public-api/integration-perl.md#regex-and-division-in-action-code).
+
 **Capture groups**: A `(...)` group is a **numbered** capture; a `(?<name>...)`
 group is a **named** capture. Action code reads them with `entry_group(N)` /
 `match_group(N)` (numbered) and `entry_named(name)` / `match_named(name)` (named).

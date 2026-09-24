@@ -40,3 +40,8 @@ I/E shape could leak `7` while omitting E; see [[perl-lifecycle-final-value-e-dr
 All five exact examples now pass 84 assertions, and an isolated restoration of
 the old fifth example fails only book group7. The first four sources and runtime
 implementation remain unchanged; this is a proof/teaching correction.
+
+The `.86.5.2.2` fifth source places its division initializer and action edge on
+the same line. All five extracted sources still pass84 live/descriptor/fresh
+generated assertions; full Phase0 passes1033/1033. The first four sources remain
+unchanged, and the independent regex-slot limitation is explicit in the book.

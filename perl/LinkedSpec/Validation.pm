@@ -1702,19 +1702,19 @@ sub _scan_rule_edges_in_fragment {
 }
 
 # A final action statement needs no semicolon. Keep the shared slash predicate's
-# closing-brace exclusion, but let outer structural scans count line-ending
-# block closers after an otherwise complete numeric call. A complete regex or
-# explicit host quote operator must keep its existing lexical interpretation.
+# closing-brace exclusion, but let the alternative outer structural scan count
+# a block closer after a complete numeric call, even before another member on
+# that line. Full-source validation preserves the existing regex interpretation
+# first; explicit host quote operators never take this alternative.
 sub _slash_call_before_final_block_closers {
  my ($fragment, $i, $len, $depth) = @_;
  return 0 unless $depth;
- my $call = substr($fragment, $i, $len - $i);
- return 0 unless $call =~ s/[ \t]*\}(?:[ \t]*\})*[ \t]*\r?\z//o;
  my $end = LinkedSpec::OwnerDispatch::call_preserving_err(sub {
   LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, 'LinkedSpec::ActionIR::MethodExpr');
-  return LinkedSpec::ActionIR::MethodExpr::_slash_symbol_call_end_at($call, 0)
+  return LinkedSpec::ActionIR::MethodExpr::_slash_symbol_call_end_at($fragment, $i)
  });
- return defined($end) && substr($call, $end) =~ /\A[ \t]*\z/o;
+ return defined($end) && $end < $len
+  && substr($fragment, $end, $len - $end) =~ /\A[ \t]*\}/o;
 }
 
 sub _consume_slash_construct {

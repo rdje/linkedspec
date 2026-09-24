@@ -482,4 +482,49 @@ subtest 'full-source slash retry preserves regexes and publishes only selected d
  ok($nested_valid, 'failure callback can reenter validation after trial state is restored');
 };
 
+subtest 'final slash calls before following same-line members' => sub {
+ my @cases = (
+  ['compact edge', 'I {out=/(14,2)}-> Done {return(add(out,1))}', 8],
+  ['spaced edge', 'I { out=/(14,2)   } -> Done { return(add(out,1)) }', 8],
+  ['bare lifecycle', '{ out=/(14,2) } -> Done { return(add(out,1)) }', 8],
+  ['nested closers', 'I { if(1) { out=/(14,2) } } -> Done { return(add(out,1)) }', 8],
+  ['value block', 'I { out={ /(14,2) } } -> Done { return(add(out,1)) }', 8],
+  ['following initialization', 'I { out=/(14,2) } I { out=add(out,1) } -> Done { return(add(out,1)) }', 9],
+  ['quoted slash in following member', 'I { out=/(14,2) } E { return("/") } -> Done { return(add(out,1)) }', 8],
+  ['following anonymous member', 'I { out=/(14,2) } /unused/ -> Done { return(add(out,1)) }', 8],
+  ['header members', 'I { out=/(14,2) } -> Done { return(add(out,1)) }', 8, 1],
+  ['named control', 'I { out=div(14,2) } -> Done { return(add(out,1)) }', 8],
+  ['semicolon control', 'I { out=/(14,2); } -> Done { return(add(out,1)) }', 8],
+ );
+ my $number = 0;
+ for my $separator ("\n", "\r\n") {
+  for my $case (@cases) {
+   my ($name, $body, $expected, $header) = @$case;
+   my $source = join($separator, $header ? ("Top:: $body") : ('Top::', " $body"), 'Done:', ' /x/', '');
+   my $original = $source;
+   my %context;
+   my $parser = LinkedSpec::Get(\$source, runtime_ctx_ref => \%context);
+   ok($parser, "$name validates and compiles");
+   my $input = 'x';
+   is($parser ? $parser->(\$input) : undef, $expected, "$name reaches the explicit action return");
+   is($context{last_error}, undef, "$name has no deferred runtime error");
+   $input = 'y';
+   is($parser ? $parser->(\$input) : undef, undef, "$name unmatched edge does not leak I's value");
+   is($source, $original, "$name preserves authored source");
+   my $emitted = eval { LinkedSpec::emit_generated_source(\$source) };
+   my $emit_error = $@;
+   ok(defined($emitted), "$name emits independently executable source") or diag(explain($emit_error));
+   next unless defined $emitted;
+   my $package = 'FollowingSlashMember' . ++$number;
+   my $loaded = eval "package $package; $emitted; 1";
+   ok($loaded, "$name generated source loads") or diag($@);
+   my $execute = $package->can('Execute');
+   $input = 'x';
+   is($execute ? $execute->(\$input) : undef, $expected, "$name generated action result is exact");
+   $input = 'y';
+   is($execute ? $execute->(\$input) : undef, undef, "$name generated unmatched result is exact");
+  }
+ }
+};
+
 done_testing;
