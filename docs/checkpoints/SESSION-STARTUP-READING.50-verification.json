@@ -1,0 +1,133 @@
+{
+  "format": 1,
+  "owner": "SESSION-STARTUP-READING.50",
+  "date": "2026-09-24",
+  "activation_commit": "aa057b107c37fb947950d6c57db1892338fe7e94",
+  "verification_tier": "focused",
+  "scope": "Existing Rust isolated hash-key separator contract; no neutral-contract or generated-format change. No complete runtime-package or repository canonical run is claimed.",
+  "source_identity_scope": "Final authored inputs. compact-final repeats both modified runtime tests after unnecessary-mut cleanup; production is unchanged across accepted GREEN runs.",
+  "sources": {
+    "rust/linkedspec-core/src/expr.rs": "45f3b40a548c76ba4a11f0cedd8ee6dc988bf711da30e78ba2bc28f8ffd3e706",
+    "rust/linkedspec-core/tests/hash_key_separator.rs": "5d10ada0958eb94bbc889f674a86da929f70031968d5b1570a053b783f4e7629",
+    "rust/linkedspec-runtime/tests/hash_key_separator.rs": "fbc113282c428516339daa20587c817f5d23829398d1a0cf92fe0777326b9df3",
+    "rust/linkedspec-runtime/tests/source_emitter.rs": "1a70fecb7b498be5989274dd4c67d6f3420131a56aa321452ec9cf4bd91a294e",
+    "rust/linkedspec-runtime/src/engine.rs": "98e9e53afe02cc4c150ab09c7b477e741273cd95cac21072545ff517509e588f",
+    "rust/linkedspec-runtime/src/runtime.rs": "b8140cc4bac2d75f3bbb070f19924b505f36899b06dcf3196efa8595c6a8d609",
+    "examples/compact-hash-keys.spec": "fc12ee11b384f06572e690882328c9266229ea5a573ab493adde623c789075a1",
+    "t/compact_hash_keys_book.t": "f40b7b583d01c85217d54a05dbbd1cfe7d93e398987adda7045a9ddad3f8d520",
+    "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md": "fb50fb3231fb37b32ed57ed48ce873b4d54c3484b1fdfd974688d52008d95548"
+  },
+  "checks": [
+    {
+      "command": "env PERL5LIB= bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-core --test hash_key_separator",
+      "exit": 101,
+      "result": "RED: all four new regression groups fail before parser repair",
+      "log": ".linkedspec-data/scratch/hash-colon50/core-before.log",
+      "log_bytes": 800534,
+      "log_sha256": "2fbfe11762e6b01e2b04e4c71bceedcd5db25354ee275bc53da38962037b150f"
+    },
+    {
+      "command": "env PERL5LIB= bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-core",
+      "exit": 0,
+      "result": "258 tests pass; doc-tests complete with zero cases",
+      "log": ".linkedspec-data/scratch/hash-colon50/core-after.log",
+      "log_bytes": 818568,
+      "log_sha256": "3cedc5c89b716d69be0ba10de4e02fb89aa8de7ce9333ce73e76732d2df303ad"
+    },
+    {
+      "command": "env PERL5LIB= bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test hash_key_separator --test integration_test --test symbol_statement_boundaries --test action_source_fidelity --test uniform_binding_contract --test punctuation_light_zero_arg_contract",
+      "exit": 0,
+      "result": "226 tests pass; initial hash-key test predates removal of unnecessary mutability",
+      "log": ".linkedspec-data/scratch/hash-colon50/runtime-after.log",
+      "log_bytes": 815494,
+      "log_sha256": "25d497ca1fb9cb9fe09b571d65f362fceca6e1ae90b01a6a727330ef8030e776"
+    },
+    {
+      "command": "env PERL5LIB= bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test callable_codeblock_literal_contract colon_keyword_syntax_does_not_bypass_registered_function_policy",
+      "exit": 0,
+      "result": "1 passes; 17 intentionally filtered",
+      "log": ".linkedspec-data/scratch/hash-colon50/keyword-policy.log",
+      "log_bytes": 798780,
+      "log_sha256": "b2784189ac3e2359bf618c84508267f7400860e7d382552479b904287550ccf2"
+    },
+    {
+      "command": "env PERL5LIB= bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test source_emitter emitted_compact_hash_key_book_example_preserves_evaluated_keys",
+      "exit": 0,
+      "result": "Initial emitted example passes before unnecessary-mut cleanup",
+      "log": ".linkedspec-data/scratch/hash-colon50/emitted-book.log",
+      "log_bytes": 799226,
+      "log_sha256": "96927c370b905d99adb7b2e2114ea94824043f2e89661534a6a8d341d6c1b651"
+    },
+    {
+      "command": "env PERL5LIB= bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test hash_key_separator --test source_emitter compact",
+      "exit": 0,
+      "result": "Final carrier and emitted example pass: 1+1; 10 unrelated emitter tests filtered; no first-party warning",
+      "log": ".linkedspec-data/scratch/hash-colon50/compact-final.log",
+      "log_bytes": 799035,
+      "log_sha256": "37e095012a42aedd57dfcca850240862a096ee4298b31196935d9a26154af6f4"
+    },
+    {
+      "command": "env PERL5LIB= bash tools/project_data_run.sh prove -Iperl t/compact_hash_keys_book.t",
+      "exit": 0,
+      "result": "26 assertions pass, LF/CRLF and native/emitted",
+      "log": ".linkedspec-data/scratch/hash-colon50/perl-book.log",
+      "log_bytes": 163,
+      "log_sha256": "bdb7845045db48d6bac0d2d0a1ed7dcf8de4365306fa72b4e6c949e6a793f027"
+    },
+    {
+      "command": "env PERL5LIB= bash tools/run_mdbook_local.sh",
+      "exit": 0,
+      "result": "Book renders; HTML code blocks independently equal shared spec and published JSON",
+      "log": ".linkedspec-data/scratch/hash-colon50/book-final.log",
+      "log_bytes": 274,
+      "log_sha256": "b6fd7a36364b2949082a3f98354a32a3638657ef35f460cbf3b753f6e3622887"
+    },
+    {
+      "command": "env PERL5LIB= bash tools/run_python_project_data.sh tools/check_rule_local_cursor_contract.py",
+      "exit": 0,
+      "result": "77 migration files and 60 drift mutations pass",
+      "log": ".linkedspec-data/scratch/hash-colon50/cursor.log",
+      "log_bytes": 355,
+      "log_sha256": "2ab722ead46c46d940c62b8a5266be5103c5d06f5beef264564a464ab460364d"
+    },
+    {
+      "command": "env PERL5LIB= bash tools/run_python_project_data.sh tools/check_uniform_binding_contract.py",
+      "exit": 0,
+      "result": "11 migrations, 7 executions, 6 invalid selectors, 8 constructors pass",
+      "log": ".linkedspec-data/scratch/hash-colon50/binding.log",
+      "log_bytes": 96,
+      "log_sha256": "5dceaadbc3ebd719926b545d2fa448e92b4c4296bed06870b4c38e41880193d8"
+    },
+    {
+      "command": "env PERL5LIB= bash tools/project_data_run.sh rustfmt --edition 2024 --check rust/linkedspec-runtime/tests/hash_key_separator.rs rust/linkedspec-runtime/tests/source_emitter.rs",
+      "exit": 0,
+      "result": "Both cleaned-up test files format cleanly; core source/test formatting passed earlier",
+      "log": ".linkedspec-data/scratch/hash-colon50/format-final.log",
+      "log_bytes": 0,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "public_checkpoint": "docs/checkpoints/SESSION-STARTUP-READING.50-hash-separator.json",
+  "public_replay": {
+    "input": "x",
+    "rust_argv": [
+      "rust/target/debug/linkedspec-rust",
+      "--inline-spec",
+      "<case.source>",
+      "--input",
+      "x",
+      "--trace",
+      "low"
+    ],
+    "perl": "LinkedSpec::Get(\\$source, runtime_ctx_ref => \\%ctx), paired with LinkedSpec::call_spec_handler_subst(\"Top\", $action); execute with input x",
+    "result": "Thirteen exact expected values pass at both recorded post-fix binary identities; all Perl controls have no context error. Five baseline Rust compile rejections become correct values."
+  },
+  "remaining_defects": {
+    "indexed_read": "SESSION-STARTUP-READING.88",
+    "Perl_grouped_postfix": "SESSION-STARTUP-READING.87.4",
+    "cat_arity": "SESSION-STARTUP-READING.51",
+    "host_startup": "SESSION-STARTUP-READING.81"
+  },
+  "continuity_pressure_owner": "LIVE-DOCUMENT-PRESSURE-CONTAINMENT.16",
+  "landing_checks": "Memory, Knowledge generation, both bounded histories, normal nine-doctrine hooks and diff checks govern the final commit; canonical proof belongs to designated boundaries/push."
+}

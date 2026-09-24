@@ -8,7 +8,7 @@ answers:
   - "can a computed helper call be a hash literal key"
   - "what did SPEC-FORMAT-TERSE.10 decide"
   - "does SPEC-FORMAT-TERSE.10 require new parser behavior"
-date: 2026-07-08
+date: 2026-09-24
 status: current
 tags: [spec-format-terse, hash-literal, dynamic-key, perl, rust, mdbook, SPEC-FORMAT-TERSE]
 evidence: "SPEC-FORMAT-TERSE.10.1 ratified existing behavior from the colon hash-literal and bare-read work instead of adding new parser/runtime code. Direct hash literals use `{ key_expr : value_expr }`; the key expression is evaluated and stringified at runtime. A bare key such as `{ key : value }` reads scalar `key`, so fixed object fields must be quoted as `{ \"kind\" : value }`. Computed helper expressions such as `{ cat(prefix,suffix) : value }` are valid keys. Perl lowering probes produce `$key => $value` and computed `cat(...) => $value`; a direct runtime probe returns dynamic `stage` keys. Rust parses hash-literal keys with `parse_expr()` before the top-level `:` and evaluates them with `to_str()`."
@@ -49,3 +49,9 @@ return({ "kind" : "token" });
 ```
 
 Old direct hash-literal fat arrows remain retired; use `:` in current `.spec` source.
+
+September24 update: the executable compact-key example in `examples/compact-hash-keys.spec` is shared
+by the book, Perl native/emitted tests, and the Rust emitted-source test. Startup
+`.50` repairs Rust tokenization when a bare key touches the colon; this preserves
+the existing evaluated-key contract. See [[hash-literal-colon-rust-parity]] for
+its focused recurrence and the separately owned indexed-read limitation.

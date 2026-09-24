@@ -10,7 +10,7 @@ answers:
   - "does colon hash literal support preserve blind call => on Rust"
   - "does Rust colon hash literal support receiver chains"
   - "are bare Rust hash literal keys strings or expressions"
-date: 2026-09-07
+date: 2026-09-24
 status: current
 tags: [spec-format-terse, hash-literal, colon-association, rust, actionir, retired-syntax, SPEC-FORMAT-TERSE]
 evidence: "Historical implementation and test evidence recorded 2026-07-07; the September reading update below does not rerun those native suites. SPEC-FORMAT-TERSE.9.3 added Rust parser/runtime parity for direct `{ key : value }` hash literals, and SPEC-FORMAT-TERSE.9.5 hard-retired old direct hash-literal `=>` source. `rust/linkedspec-core/src/expr.rs::hash_pair_separator_at` now accepts only `:`, while `parse_hash_literal` detects `=>` only to return `LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:hash_literal_use_colon` with a `use ':'` diagnostic. Brace classification still detects top-level `=>` so old source routes to that diagnostic rather than falling through as an expression-valued block. Runtime `Expr::HashLiteral` evaluation remains separator-agnostic once a valid AST exists. Locks: parser tests for colon hashes, retired fat-arrow diagnostics, assignment/mutation slots, scanner edge cases, runtime test `terse_9_3_colon_hash_literals_parse_and_run`, and compile-failure test `terse_9_5_hash_literal_fat_arrow_is_retired`."
@@ -49,3 +49,11 @@ converted into the literal string `"key"`. Use `{ "key" : value }` when literal
 identity is intended. A surprising result from an unbound key is not, by itself,
 evidence that the parser lost the key. This is source-reading evidence; the earlier
 native parser/runtime locks above retain their original dates.
+
+The September24 `.50` repair also permits an isolated colon directly after a
+bare dynamic key or bare zero-argument receiver method: `{key:value}` and
+`{key.trim:7}` preserve the same evaluated keys as their spaced forms. Namespace
+colon runs retain their earlier role. The executable book example is
+`examples/compact-hash-keys.spec`; the core/runtime `hash_key_separator` tests and
+Perl `t/compact_hash_keys_book.t` own recurrence. The distinct single-index read
+limitation is tracked by [[rust-single-index-read-bypasses-typed-binding]].

@@ -12,14 +12,24 @@ answers:
   - why does a Rust regex assignment followed by a newline return null
   - why does adding a regex suffix flag change Rust statement parsing
   - why does a bare identifier after a Rust regex disappear from the action AST
-date: 2026-09-23
-status: .45/.46/.47/.49 repaired with bounded proof; separate symbol-call .86 follows
+date: 2026-09-24
+status: .45/.46/.47/.49 and bounded symbol-call .86 verified; compact hash-key .50 and independent owners retain their own proof
 tags: [rust, parser, compiler, diagnostics, unicode, mutation, startup-reading]
 evidence: "September 7 native diagnostics established warning/drop, Unicode diagnostic, mutation-whitespace and regex-boundary defects under .45/.46/.47/.49. Startup .45.1 now propagates every reported rule-code parse error. Twelve native pre-repair invalid cases wrongly compile; four new core rejection groups fail before repair and all five groups pass after it, covering 15 malformed contexts and 11 retained valid blocks. The complete Rust component gate and rebuilt native/quoted-LF controls pass; this change does not repair the separately owned parser causes. Startup .46 separately fixes the UTF-8 excerpt boundary, with core RED/GREEN, public-route and native-process proof."
-reverify: "Run bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-core --lib --test expression_diagnostics --test rule_code_rejection and bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --lib --test source_emitter rule_code. Historical diagnostic commands below intentionally describe incorrect pre-repair behavior, not current acceptance. For .49 run the complete core package and runtime --lib --test integration_test --test regex_statement_boundaries --test action_source_fidelity --test map_leaves_mutation_contract --test corpus_oracle through the same managed Cargo wrapper. Separate symbol-call .86 remains open."
+reverify: "Run bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-core --lib --test expression_diagnostics --test rule_code_rejection and bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --lib --test source_emitter rule_code. Historical diagnostic commands below intentionally describe incorrect pre-repair behavior, not current acceptance. For .49 run the complete core package and runtime --lib --test integration_test --test regex_statement_boundaries --test action_source_fidelity --test map_leaves_mutation_contract --test corpus_oracle through the same managed Cargo wrapper. The bounded symbol-call .86 parent is verified at aa057b107; follow rust-symbol-call-newline-boundary for its exact scope."
 ---
 
 The first three observations came from forward source reading under the frozen `.3.2.55` canonical candidate; its commit body preserves their original commands and results. The regex CLI comparison completed during `.3.3.1`, using unchanged source after that canonical checkpoint committed. `.3.3.1` makes the pending repair owners and this retrievable record explicit; ADR0123 now permits targeted reading before repairs while preserving the separate full audit.
+
+## September24 status
+
+Canonical parent `.86.3` is committed at `aa057b107` after receipt-bound acceptance;
+its bounded Rust/Perl scanner repairs are verified. See
+[[rust-symbol-call-newline-boundary]] for the exact boundaries. The dated `.49`
+replay below preserves its then-failing symbol controls, not a current open-status
+claim. Compact dynamic hash-key tokenization is owned by `.50`, with exact current
+RED/GREEN sources in [[rust-hash-separator-and-cat-arity-defects]]. Independent
+runtime read and helper defects remain separately owned.
 
 ## Rule-block error propagation — repair .45
 

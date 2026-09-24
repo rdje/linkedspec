@@ -235,6 +235,32 @@ string-escape limitation.
 > `meta = { key : value }` / `set(meta, {})` bind hash values. In value positions, direct-shape assignments yield
 > the stored typed value.
 
+On Perl and Rust, whitespace around the hash-pair colon is optional:
+`{key:value}` and `{ key : value }` evaluate the same key and value expressions.
+An adjacent colon does not turn a bare key into a fixed field name; quote fixed
+names. Portable binding names use ASCII letters, digits and underscores, with a
+letter or underscore first. Key values may contain Unicode text.
+
+This shared example returns a dynamic field, a quoted field, and a nested computed
+key when given input `x`:
+
+```text
+{{#include ../../../../examples/compact-hash-keys.spec}}
+```
+
+```json
+{"stage":7,"fixed":"stage","é🦀":{"stage_nested":7}}
+```
+
+The example source is exercised directly by the Perl native/generated tests and
+the Rust emitted-source test. Recompile saved or generated parsers after updating
+the Rust compiler to pick up parser fixes.
+
+Rust currently has a separate indexed-read defect: after `items = ["a"]`,
+`items[0]` returns `null`, while `items.first()` returns `"a"`. A hash key derived
+from that single indexed read can consequently become an empty string. This
+limitation is tracked for repair; it does not affect the example above.
+
 > **Expression-valued blocks are receiver-capable value expressions.** A non-empty block without a top-level
 > hash-pair delimiter can feed a compatible receiver-dot helper chain. The yielded value enters the normal helper family
 > selected by the method being called: `{ [3, 1, 2] }.sorted().join_values(",")` uses the array family,

@@ -8,8 +8,8 @@ answers:
   - why were arithmetic newline controls separated from regex suffix repair
   - why does Rust subtraction before a newline return null
   - why does a Rust subtraction call have an empty callee name
-date: 2026-09-23
-status: Rust .86.1/.86.2 and bounded Perl .86.4/.86.5 verified; canonical .86.3 receipt governs closeout
+date: 2026-09-24
+status: bounded Rust/Perl scanner parent .86 verified and committed at aa057b107 after canonical .86.3 acceptance
 tags: [rust, parser, arithmetic, regex, newline]
 evidence: "Untouched .49 core RED reports unterminated regex literal for a slash call before another statement. Six native controls show EOF/semicolon and named div plus newline return 7; slash LF, CRLF and spaced slash plus newline reject compilation. Exact sources/traces: .linkedspec-data/scratch/regex-boundary49/slash-before.jsonl. Division was still unrepaired at that .49 boundary; .86.2 proof below supersedes that status."
 reverify: "Run the public CLI probes below through tools/project_data_run.sh. Non-slash proof: bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-core -p linkedspec-runtime --test symbol_statement_boundaries; Emitted proof: bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test map_leaves_mutation_contract. Division proof: bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-core --test division_statement_boundaries."
@@ -199,3 +199,9 @@ executable book fences. A fresh56-case Rust public replay passes; all runtime
 sources remain unchanged from their verified child commits. The exact staged
 canonical receipt is required before parent landing. Independent repair owners
 and the known optional Dart component-gate failures remain open.
+
+September24 landing update: `.86.3` is committed at `aa057b107` after exact
+canonical acceptance and receipt promotion. The earlier conditional closeout
+statements retain their dated implementation/proof boundaries; this closes only
+the bounded scanner parent. Compact hash-key `.50` and independent `.87` helpers
+are separate repairs.

@@ -1,66 +1,64 @@
 ---
 id: rust-hash-separator-and-cat-arity-defects
-title: Rust hash separator tokenization and cat minimum arity diverge from their reference boundaries
+title: Rust compact hash-key repair and separately owned cat arity boundary
 answers:
   - why does Rust return null for a compact dynamic hash key
   - why does adding a space before a Rust hash colon change execution
   - does Rust cat accept one argument while Perl requires two
   - which tasks own the Rust hash separator and cat arity repairs
   - why were no-edge Perl E probes excluded from cat arity evidence
-date: 2026-09-07
-status: confirmed bounded defects; repairs pending under SESSION-STARTUP-READING.50 and .51
+date: 2026-09-24
+status: compact hash separator verified under SESSION-STARTUP-READING.50; cat arity remains .51-owned
 tags: [rust, perl, parser, hash, cat, arity, diagnostics, SESSION-STARTUP-READING]
-evidence: "SESSION-STARTUP-READING.3.3.7 runs six asserted Rust CLI/Perl Toolbox lowering controls for dynamic hash separators, plus three paired explicit-edge Rust CLI/Perl public Get controls for cat arity. Both source mechanisms are inspected; no implementation or complete-backend signoff is claimed."
-reverify: "Run the two repository-managed diagnostic commands below; their observed pre-repair differences are not green repair acceptance criteria."
+evidence: "September7 .3.3.7 established the hash separator and cat arity mechanisms. September24 .50 reverifies thirteen public hash controls: Perl accepts all, baseline Rust accepts eight and rejects five at compile time; rebuilt Rust now returns all thirteen exact expected values. The parser repair, exact AST/source tests, native/reconstructed/generated recurrence and shared emitted book example are owned by .50. Cat observations retain their September7 date and .51 repair owner; single-index reads are independently owned by .88."
+reverify: "Run the hash-key tests below for current acceptance. The separately dated cat diagnostic remains an observation, not a repair acceptance criterion."
 ---
 
 ## Dynamic hash-key separator
 
-The current dynamic-key contract evaluates keys; it does not autoquote bare names.
-With `key = "a"`, the following initialization expressions were tested through the
-Rust CLI. All invocations exit zero and report compile:ok/invoke:ok:
+The dynamic-key contract evaluates keys; it does not autoquote bare names.
+On September7, `{key:7}` and `{key: 7}` returned null after a parser warning.
+Malformed-block propagation repair `.45` subsequently made those failures reject
+compilation. The September24 `.50` RED controls establish five compile failures
+among thirteen public sources: compact/right-space bare keys, nested pairs,
+Unicode-valued dynamic keys, and a bare `.trim` receiver key. Eight spaced,
+parenthesized, computed, quoted, and parenthesized-receiver controls already pass.
+All thirteen sources return their expected values through Perl public `Get` with
+no handler errors. After the fix, the rebuilt Rust CLI also returns all thirteen
+expected values with compile:ok/invoke:ok and empty stderr. Exact before/after
+sources, results and binary identities are retained in
+`docs/checkpoints/SESSION-STARTUP-READING.50-hash-separator.json`.
 
-| Expression | Rust result | Rust stderr |
-| --- | --- | --- |
-| `{ key : 7 }` | `{"a":7}` | empty |
-| `{ key :7 }` | `{"a":7}` | empty |
-| `{ key: 7 }` | `null` | expected colon at position 24 |
-| `{key:7}` | `null` | expected colon at position 23 |
-| `{"a":7}` | `{"a":7}` | empty |
-| `{cat(key,""):7}` | `{"a":7}` | empty |
+`parse_name` in `rust/linkedspec-core/src/expr.rs` previously consumed every colon.
+The `.50` repair stops at an isolated colon while preserving existing namespace
+colon runs, matching brace classification. Keys still parse as expressions and
+values retain their exact authored source and scalar spans. Keyword arguments,
+namespace names, and retired hash `=>` rejection remain separate boundaries.
 
-`LinkedSpec::call_spec_handler_subst` successfully lowers all six; the first four
-produce the same `$key => 7` association. This is Perl lowering evidence, not six
-fresh Perl runtime executions. The two failing Rust forms let `parse_name`
-(`rust/linkedspec-core/src/expr.rs` 3556–3568) consume a single colon as part of the
-name. `parse_hash_literal` then cannot find its separator; the separate `.45`
-malformed-block fallback drops the initializer after warning. `.50` owns lexical
-correction, preserved dynamic/quoted key semantics, and recurrence across supported
-carriers, with namespace/keyword negative controls.
-
-An initial computed-key control used one-argument `cat(key)`. Perl lowered that to
-an unsupported-helper marker, so it was excluded and replaced with the valid
-`cat(key, "")` control above. That observation led to the separate arity probe.
+Current recurrence is `rust/linkedspec-core/tests/hash_key_separator.rs` and
+`rust/linkedspec-runtime/tests/hash_key_separator.rs`. The public book includes
+`examples/compact-hash-keys.spec` verbatim; Perl native/emitted tests and the Rust
+emitted-source test execute that same file. Focused verification passes full core258, selected runtime226, keyword policy1,
+final compact/emitted2 and Perl book26. Exact commands and source/log identities
+are in `docs/checkpoints/SESSION-STARTUP-READING.50-verification.json`.
+Correct expectations cover dynamic,
+quoted, nested, computed and Unicode-valued keys rather than accepting the former
+null results. Single indexed reads exposed an independent typed-binding defect,
+owned for immediate repair by `.88`; see [[rust-single-index-read-bypasses-typed-binding]].
+Unicode binding identifiers are not admitted by this repair.
 
 ```bash
-bash tools/project_data_run.sh env PYTHONDONTWRITEBYTECODE=1 python3 - <<'HASH_COLON_BOUNDARY'
-import subprocess,json
-forms=[('bare_spaced','{ key : 7 }'),('bare_left_space','{ key :7 }'),('bare_right_space','{ key: 7 }'),('bare_compact','{key:7}'),('quoted_compact','{"a":7}'),('computed_compact','{cat(key,""):7}')]
-for name,form in forms:
- action='key = "a"; out = '+form
- source='Top::\n I { '+action+' }\n /x/ E { return(out) }\n'
- rust=subprocess.run(['rust/target/debug/linkedspec-rust','--inline-spec',source,'--input','x','--trace','low'],capture_output=True,text=True,timeout=30)
- perl=subprocess.run(['perl','-Iperl','-MLinkedSpec','-e','my $s=$ARGV[0]; my $r=eval { LinkedSpec::call_spec_handler_subst("Top",$s) }; if($@){print STDERR $@;exit 1} print $r;',action],capture_output=True,text=True,timeout=30)
- bad=name in ('bare_right_space','bare_compact')
- assert rust.returncode==0 and '[linkedspec][low] compile:ok\n' in rust.stdout and '[linkedspec][low] invoke:ok\n' in rust.stdout,(name,rust)
- assert json.loads(rust.stdout.splitlines()[-1])==(None if bad else {'a':7}),(name,rust.stdout)
- assert ('expected \':\' in hash literal' in rust.stderr) if bad else not rust.stderr,(name,rust.stderr)
- assert perl.returncode==0 and not perl.stderr and 'UNSUPPORTED' not in perl.stdout,(name,perl.stdout,perl.stderr)
- print(json.dumps({'case':name,'source':source,'rust_exit':rust.returncode,'rust_stdout':rust.stdout,'rust_stderr':rust.stderr,'perl_lowering_exit':perl.returncode,'perl_lowering':perl.stdout,'perl_stderr':perl.stderr}))
-HASH_COLON_BOUNDARY
+env PERL5LIB= bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-core --test hash_key_separator
+env PERL5LIB= bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test hash_key_separator
+env PERL5LIB= bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test source_emitter emitted_compact_hash_key_book_example_preserves_evaluated_keys
+env PERL5LIB= bash tools/project_data_run.sh prove -Iperl t/compact_hash_keys_book.t
 ```
 
-## Cat minimum arity
+An initial September7 computed-key control used one-argument `cat(key)`. Perl
+lowered that to an unsupported-helper marker, so it was excluded and replaced
+with valid `cat(key, "")`. That observation led to the separate arity probe.
+
+## Cat minimum arity — September7 evidence
 
 A constant and two-argument control prove that the explicit action-edge body runs
 on both routes. Rust CLI and Perl public `Get` exit zero, have empty stderr, and
@@ -100,8 +98,8 @@ CAT_ARITY_BOUNDARY
 ```
 
 The bounded Rust engine and Perl lowering source reads are diagnostic coverage,
-not completion credit for their broader queued source-reading leaves. The earlier
-`.49` regex-newline defect remains independent and pending.
+not completion credit for their broader queued source-reading leaves. The independent
+`.49` regex-newline repair and scanner parent `.86` are now verified; `.51` remains open.
 
 Related: [[hash-literal-dynamic-key-contract]], [[hash-literal-colon-rust-parity]],
 [[rust-action-parser-boundary-defects]], [[startup-public-teaching-checker-blind-spots]].

@@ -1,11 +1,11 @@
 # MEMORY
 
-- activation_commit: `52408086a6da61ceb60250cf40734ae001f6010c` — clean base for canonical scanner parent closeout.
-- latest_completed_leaf: `SESSION-STARTUP-READING.86.3 - close verified scanner repairs in lockstep`.
-- active_work_unit: `SESSION-STARTUP-READING.86.3` — bounded scanner parent verified; exact canonical receipt governs landing.
-- next_action: Activate .50 from clean HEAD and repair adjacent colon separators after dynamic bare Rust hash keys using its public/AST controls; preserve all independent owners.
-- in_flight_uncommitted: none at landing — parent acceptance requires its exact successful canonical receipt; Rust56 and exact book/source continuity pass; cursor77/60, markers4 and repeated-action54 pass after the first gate exposed missing test registration. Logs: .linkedspec-data/scratch/scanner-parent86-3/.
-- blockers: LS-004 remains upstream-owned; director relays docs/upstream/rgx/bootstrap-progress-status.md. No RGX code defect established. Named-argument and format proposals remain parked.
+- activation_commit: `aa057b107c37fb947950d6c57db1892338fe7e94` — clean activation base of completed compact Rust hash-key repair .50.
+- latest_completed_leaf: `SESSION-STARTUP-READING.50 - preserve compact hash-key separators`.
+- active_work_unit: `SESSION-STARTUP-READING.88` — pending clean activation for the confirmed Rust single-index typed-binding read defect.
+- next_action: Activate .88 from the clean .50 commit, reconcile the admitted indexed-read contract and repair it with carrier/book proof; then containment .16 restores startup-task headroom before .51.
+- in_flight_uncommitted: none; all .50 verification jobs are consumed. Core258, selected runtime226, keyword1, final compact/emitted2, Perl book26 and exact public13 pass; .50 checkpoints preserve sources, binaries and verification scope.
+- blockers: LS-004 remains upstream-owned; director will notify ARCHOGEN only after its fix is verified (local report: docs/upstream/rgx/bootstrap-progress-status.md). No RGX code defect established. Named-argument and format proposals remain parked.
   Wrapper startup .7 remains open; recovery/purge stay prohibited. No interrupted Phase0 run counts as proof.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
   active table; the task metadata doctrine inventories all consumers, permits arbitrary frontier-row rewrites,

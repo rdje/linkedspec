@@ -1,0 +1,193 @@
+{
+  "format": 1,
+  "owner": "SESSION-STARTUP-READING.88",
+  "status": "diagnostic before repair; observed failures are not acceptance expectations",
+  "date": "2026-09-24",
+  "base_head": "aa057b107c37fb947950d6c57db1892338fe7e94",
+  "input": "x",
+  "cases": [
+    {
+      "name": "indexed",
+      "action": "keys = [\"a\"]; out = {keys[0]:7}; return(out)",
+      "source": "Top::\n -> Done { keys = [\"a\"]; out = {keys[0]:7}; return(out) }\nDone:\n /x/\n",
+      "expected": {
+        "a": 7
+      },
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "$keys = [\"a\"]; $out = {$keys->[0] => 7}; return $out",
+        "lowering_error": "",
+        "name": "indexed",
+        "value": {
+          "a": 7
+        }
+      },
+      "perl_stderr": "",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\n{\"\":7}\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "27e1a5bf8e0906d98a0792b8e7c946c45cceb0021501ccbd097ffc2b294f30f6"
+    },
+    {
+      "name": "indexed_spaced",
+      "action": "keys = [\"a\"]; out = {keys[0] : 7}; return(out)",
+      "source": "Top::\n -> Done { keys = [\"a\"]; out = {keys[0] : 7}; return(out) }\nDone:\n /x/\n",
+      "expected": {
+        "a": 7
+      },
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "$keys = [\"a\"]; $out = {$keys->[0] => 7}; return $out",
+        "lowering_error": "",
+        "name": "indexed_spaced",
+        "value": {
+          "a": 7
+        }
+      },
+      "perl_stderr": "",
+      "perl_extra_stdout": "[2026-09-24 11:46:29][NONE][SpecEntry.pm][trace_decision:63] DECISION rule_handler_compile:Top => SKIPPED\n[2026-09-24 11:46:29][NONE][SpecEntry.pm][trace_decision:63]   Context: Not enough arguments for keys at LinkedSpec::generated_handler:Top:_default line 59, near \"keys)\"\n[2026-09-24 11:46:29][NONE][SpecEntry.pm][trace_decision:63]   Context: ",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\n{\"\":7}\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "27e1a5bf8e0906d98a0792b8e7c946c45cceb0021501ccbd097ffc2b294f30f6"
+    },
+    {
+      "name": "indexed_items",
+      "action": "items = [\"a\"]; out = {items[0]:7}; return(out)",
+      "source": "Top::\n -> Done { items = [\"a\"]; out = {items[0]:7}; return(out) }\nDone:\n /x/\n",
+      "expected": {
+        "a": 7
+      },
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "$items = [\"a\"]; $out = {$items->[0] => 7}; return $out",
+        "lowering_error": "",
+        "name": "indexed_items",
+        "value": {
+          "a": 7
+        }
+      },
+      "perl_stderr": "",
+      "perl_extra_stdout": "[2026-09-24 11:46:29][NONE][SpecEntry.pm][trace_decision:63] DECISION rule_handler_compile:Top => SKIPPED\n[2026-09-24 11:46:29][NONE][SpecEntry.pm][trace_decision:63]   Context: Not enough arguments for keys at LinkedSpec::generated_handler:Top:_default line 59, near \"keys)\"\n[2026-09-24 11:46:29][NONE][SpecEntry.pm][trace_decision:63]   Context: ",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\n{\"\":7}\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "27e1a5bf8e0906d98a0792b8e7c946c45cceb0021501ccbd097ffc2b294f30f6"
+    },
+    {
+      "name": "indexed_grouped",
+      "action": "keys = [\"a\"]; out = {(keys)[0]:7}; return(out)",
+      "source": "Top::\n -> Done { keys = [\"a\"]; out = {(keys)[0]:7}; return(out) }\nDone:\n /x/\n",
+      "expected": {
+        "a": 7
+      },
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": {
+          "detail": "Not enough arguments for keys at LinkedSpec::generated_handler:Top:_default line 59, near \"keys)\"\n",
+          "handler_source_label": "LinkedSpec::generated_handler:Top:_default",
+          "handler_variant": "_default",
+          "owner_stage": "runtime_handler:rule_handler_compile",
+          "rule_label": "Top",
+          "spec_name": "",
+          "spec_path": "",
+          "stage": "rule_handler_compile",
+          "summary": "Rule handler compilation failed",
+          "top_rule": "Top",
+          "type": "runtime_handler"
+        },
+        "lowering": "$keys = [\"a\"]; $out = {(keys)[0] => 7}; return $out",
+        "lowering_error": "",
+        "name": "indexed_grouped",
+        "value": null
+      },
+      "perl_stderr": "",
+      "perl_extra_stdout": "[2026-09-24 11:46:29][NONE][SpecEntry.pm][trace_decision:63] DECISION rule_handler_compile:Top => SKIPPED\n[2026-09-24 11:46:29][NONE][SpecEntry.pm][trace_decision:63]   Context: Not enough arguments for keys at LinkedSpec::generated_handler:Top:_default line 59, near \"keys)\"\n[2026-09-24 11:46:29][NONE][SpecEntry.pm][trace_decision:63]   Context: ",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\n{\"a\":7}\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "27e1a5bf8e0906d98a0792b8e7c946c45cceb0021501ccbd097ffc2b294f30f6"
+    },
+    {
+      "name": "indexed_read",
+      "action": "keys = [\"a\"]; out = keys[0]; return(out)",
+      "source": "Top::\n -> Done { keys = [\"a\"]; out = keys[0]; return(out) }\nDone:\n /x/\n",
+      "expected": "a",
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "$keys = [\"a\"]; $out = $keys->[0]; return $out",
+        "lowering_error": "",
+        "name": "indexed_read",
+        "value": "a"
+      },
+      "perl_stderr": "",
+      "perl_extra_stdout": "[2026-09-24 11:46:29][NONE][SpecEntry.pm][trace_decision:63] DECISION rule_handler_compile:Top => SKIPPED\n[2026-09-24 11:46:29][NONE][SpecEntry.pm][trace_decision:63]   Context: Not enough arguments for keys at LinkedSpec::generated_handler:Top:_default line 59, near \"keys)\"\n[2026-09-24 11:46:29][NONE][SpecEntry.pm][trace_decision:63]   Context: ",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\nnull\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "27e1a5bf8e0906d98a0792b8e7c946c45cceb0021501ccbd097ffc2b294f30f6"
+    },
+    {
+      "name": "indexed_binding",
+      "action": "keys = [\"a\"]; out = keys; return(out)",
+      "source": "Top::\n -> Done { keys = [\"a\"]; out = keys; return(out) }\nDone:\n /x/\n",
+      "expected": [
+        "a"
+      ],
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "$keys = [\"a\"]; $out = $keys; return $out",
+        "lowering_error": "",
+        "name": "indexed_binding",
+        "value": [
+          "a"
+        ]
+      },
+      "perl_stderr": "",
+      "perl_extra_stdout": "[2026-09-24 11:46:29][NONE][SpecEntry.pm][trace_decision:63] DECISION rule_handler_compile:Top => SKIPPED\n[2026-09-24 11:46:29][NONE][SpecEntry.pm][trace_decision:63]   Context: Not enough arguments for keys at LinkedSpec::generated_handler:Top:_default line 59, near \"keys)\"\n[2026-09-24 11:46:29][NONE][SpecEntry.pm][trace_decision:63]   Context: ",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\n[\"a\"]\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "27e1a5bf8e0906d98a0792b8e7c946c45cceb0021501ccbd097ffc2b294f30f6"
+    },
+    {
+      "name": "indexed_receiver",
+      "action": "keys = [\"a\"]; out = keys.first(); return(out)",
+      "source": "Top::\n -> Done { keys = [\"a\"]; out = keys.first(); return(out) }\nDone:\n /x/\n",
+      "expected": "a",
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "$keys = [\"a\"]; $out = do { my $__ls_first = do { my $__ls_array_value = $keys; (defined($__ls_array_value) && ref($__ls_array_value) eq 'ARRAY') ? [@{$__ls_array_value}] : [] }; defined($__ls_first) && @{$__ls_first} ? $__ls_first->[0] : undef }; return $out",
+        "lowering_error": "",
+        "name": "indexed_receiver",
+        "value": "a"
+      },
+      "perl_stderr": "",
+      "perl_extra_stdout": "[2026-09-24 11:46:29][NONE][SpecEntry.pm][trace_decision:63] DECISION rule_handler_compile:Top => SKIPPED\n[2026-09-24 11:46:29][NONE][SpecEntry.pm][trace_decision:63]   Context: Not enough arguments for keys at LinkedSpec::generated_handler:Top:_default line 59, near \"keys)\"\n[2026-09-24 11:46:29][NONE][SpecEntry.pm][trace_decision:63]   Context: ",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\n\"a\"\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "27e1a5bf8e0906d98a0792b8e7c946c45cceb0021501ccbd097ffc2b294f30f6"
+    }
+  ]
+}

@@ -3,10 +3,10 @@
 ## Metadata
 
 - Tree ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT`
-- Status: `done` / .15 admission including explicitly granted .15.1 checker mirror
+- Status: `pending` / .16 startup-task headroom; .0-.15 remain complete
 - Roadmap lane: `Repository architecture / documentation sustainability`
 - Created: `2026-08-09`
-- Last updated: `2026-09-21` (.15 approved implementation; prior leaves remain complete)
+- Last updated: `2026-09-24` (.16 measured intake; no migration or limit change)
 - Owner: repo-local workflow
 
 ## Goal
@@ -58,10 +58,10 @@ or the README `.4` adoption/closeout that installs the guard.
 ## Task Tree
 
 - ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT`
-  Status: `done` (.0-.15 complete; conformance source reading remains 50/143)
+  Status: `pending` (.0-.15 complete; .16 owns newly measured startup-task pressure)
   Goal: Replace measured oversized routed destinations with bounded views over durable stores.
   Depends on: `README-STABILITY-POLICY.4.2`
-  Children: `.0-.15`
+  Children: `.0-.16`
 
 - ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.0`
   Status: `done` (2026-08-09; committed atomically at `dc8dd896` as 176/300; brief cleared; clean proof passed;
@@ -510,7 +510,21 @@ or the README `.4` adoption/closeout that installs the guard.
   Failed canonical evidence: Candidate c8f6695f16fee2296f64b76952fc8c4d2ed44da474a91741e5f93d12db6ab575 exits1; seven doctrines pass, TASK-TREE-METADATA and README-STABILITY fail. Four registry/checker disagreements are primary; the later README report also notices the diagnosis task edit made after those failures. No receipt. Log .linkedspec-data/scratch/conformance-capacity-admission/canonical-mirror-failure.log SHA-256 22760a6cd522684e9ec9656268842efe06af2397aa44868376852120e3f6c748. Earlier superseded formatting run exits143 and supplies no proof.
   Commit: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.15 - admit approved conformance evidence capacity`
 
+- ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.16`
+  Status: `pending`
+  Goal: Restore bounded startup-task headroom without raising limits or losing evidence.
+  Dependencies: Commit startup .50 and .88 cleanly before this migration; execute before .51 or earlier if .88 cannot fit safely.
+  Intake: During .50, startup task evidence measures7970 lines/956164 bytes against8000/1048576; only30 lines remain. Registry task collection still fits109 files/92605 lines/10313335 bytes. These are September24 pre-closeout measurements, not permanently fixed counts.
+  Planned tier: canonical for task retrieval/partition infrastructure; focused only if a proven duplicate-only consolidation needs no infrastructure change.
+  Planned focused proof: Exact clean-source preservation of every node/ID/status/acceptance/verification/commit, indexed retrieval and current frontier, dependency consumers, unchanged limits, task/route/memory/Knowledge/history checks and book workflow guidance if changed.
+  Planned canonical boundary: Any partition registration or retrieval infrastructure change and final clean push.
+  Acceptance: Remeasure at activation, choose an existing supported partition or exact duplicate-only consolidation, preserve all unique evidence and immutable history, and leave sufficient measured room for remaining owned repairs. Do not pack unrelated prose onto long lines or silently raise ceilings. Decompose implementation/proof if needed before modifying storage.
+  Verification: Intake only; .50 task metadata and README routing gates pass within current limits. No migration or capacity increase is implemented here.
+  Commit: `pending`
+
 ## Current Frontier
+
+Next containment leaf is `.16`, after startup `.88` and before `.51`. Startup `.50` remains the active implementation until its clean commit; `.88` remains the immediate defect repair. The following .15-era directions are historical.
 
 Director steering during .15 (2026-09-21): `rgx/subs/pgen/grammars/*.ebnf` are explicitly offered as optional inputs for training/validating `ebnf.spec`. Retain this input authorization for an appropriate future EBNF task-tree leaf after the current clean boundary; no grammar reading or training occurs in .15. This narrow caller-authorized input use does not authorize dependency implementation analysis or pin changes.
 

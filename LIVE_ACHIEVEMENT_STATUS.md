@@ -2,19 +2,21 @@
 
 ## Current Activity
 
-Bounded symbol-call/scanner parent .86 closes through exact staged canonical acceptance after verified Rust .86.1/.86.2 and Perl .86.4/.86.5. Independent defects and Dart optional-gate blockers remain owned.
+Compact Rust hash-key separators are repaired without changing evaluated-key semantics. The book shares its source with Perl/Rust tests. Independent indexed-read .88 is next; containment .16 restores task headroom before .51.
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.86.3 - close verified scanner repairs in lockstep` — fresh Rust56, unchanged runtime/carrier sources and executable book fences, retained scoped child proofs; exact canonical receipt required before landing.
+- `SESSION-STARTUP-READING.50 - preserve compact hash-key separators` — core258, selected runtime226, keyword1, final compact/emitted2, Perl book26 and exact public13 pass. Correct indexed-read expectations remain owned by .88.
 
 ## Next Action
 
-- Activate .50 and repair adjacent Rust hash-key colon separators; preserve .27/.34/.54.1/.63/.87 and Dart .2.24/.2.25.
+- Activate .88 from the clean .50 commit; preserve independent helper, upstream and optional Dart owners. The director will notify ARCHOGEN only after LS-004 is verified fixed.
 
 ## Recent Completions
 
-- `2026-09-24` — `SESSION-STARTUP-READING.86.3` recomposes the bounded parent with Rust56 and exact book/source continuity; canonical receipt governs landing.
+- `2026-09-24` — `SESSION-STARTUP-READING.50` verifies compact hash keys with core258/runtime226/public13 and one executable Perl/Rust book source.
+
+- `2026-09-24` — `SESSION-STARTUP-READING.86.3` closes the bounded scanner parent at aa057b107 with Rust56, exact book/source continuity and canonical PASS.
 
 - `2026-09-24` — `SESSION-STARTUP-READING.86.5.3` verifies same-line slot identity with focused240/book103, six-runtime grammar72 and Phase0 1033.
 
@@ -43,8 +45,6 @@ Bounded symbol-call/scanner parent .86 closes through exact staged canonical acc
 - `2026-09-23` — `CONSUMER-REPORT-DELIVERY.6` records the ten-report fix ledger and the distinct closed June bootstrap build issue.
 
 - `2026-09-23` — `CONSUMER-REPORT-DELIVERY.5` corrects RGX fault attribution while retaining the original ARCHOGEN report and public evidence.
-
-- `2026-09-23` — `CONSUMER-REPORT-DELIVERY.4` records verified publication and the director-owned local RGX handoff.
 
 ## History
 

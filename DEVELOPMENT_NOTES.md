@@ -12,6 +12,14 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-09-24 — SESSION-STARTUP-READING.50 - preserve compact hash-key separators
+
+The brace classifier already distinguishes an isolated pair colon from namespace colon runs; parse_name did not. Stop only the isolated colon, preserving both CodeBlock modes, namespace and keyword roles, dynamic-key evaluation, retired fat-arrow rejection and scalar source spans. The zero-argument receiver terminator already accepts a colon, so the same lexical correction fixes key.trim:7. Full core258, selected runtime226, keyword policy1, emitted book1, Perl book26 and exact public13 establish the bounded repair. The book includes the exact fixture used by both languages rather than maintaining a separate prose copy.
+
+An indexed-key counterexample survives added whitespace and an alternate binding name: Rust stores ordinary typed arrays through set_scalar but evaluates IndexedVar through the separate get_array store. Variable, grouped ValueAccess and nested access instead honor the typed binding. .88 owns immediate contract reconciliation and repair; the correct expected value stays intact in its checkpoint. The Perl grouped-postfix spelling is unlowered and excluded, with .87.4 retaining its grammar boundary. ASCII binding names and Unicode key values remain distinct; unsupported Unicode binding probes do not enlarge the contract.
+
+Normal later Cargo builds refresh the primary CLI from e8690ef3 to a2058123 without another production edit; final public13 are replayed and both successful observations are retained. A sampled core harness waits at _dyld_start before eventually passing; existing .81 owns host causal diagnosis. Remove two unnecessary test mut declarations and rerun exactly the two affected tests. Startup task pressure has a concrete .16 owner after .88; preserve all evidence and current limits. The director alone will notify ARCHOGEN after LS-004 is verified fixed.
+
 ## 2026-09-24 — SESSION-STARTUP-READING.86.3 - close verified scanner repairs in lockstep
 
 Parent recomposition compares current artifacts with their final owning commits rather than inferring success from task status. The56-case Rust public replay remains exact on binary43612dca64317b9212133f0d9e9e75d72c7ff339d15ccb066c36dd44a44051a0; core/runtime/carrier source bytes match19ba2e0d5. Perl/spec/Dart and all executable guide fences match52408086a. Reciprocal action-guide links connect each backend’s actual interpretation rules and limitations. Retain the original rejected candidates, invalid control classification and all independent repair owners. The exact staged canonical receipt governs acceptance; its result/log identity belongs in the commit body without changing the receipt-bound candidate afterward.

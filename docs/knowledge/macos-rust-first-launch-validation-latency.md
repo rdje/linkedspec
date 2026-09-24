@@ -13,7 +13,7 @@ answers:
   - "why did rustc wait in dlopen during startup canonical CI"
   - "did Rust pre-main waits also occur during permitted canonical CI"
   - "which September 7 startup samples distinguish aborted and accepted CI attempts"
-date: 2026-09-23
+date: 2026-09-24
 status: older controlled artifacts classified; newer-OS causal diagnosis and conditional repair pending under startup .81
 tags: [rust, macos, syspolicyd, gatekeeper, verification, performance, FUTURE-PARITY-BACKLOG]
 evidence: "During FUTURE-PARITY-BACKLOG.19.3.3 signoff, a plain-cargo test with repository-local target but user-home registry reads finished its cold build in 55m44s after prolonged per-crate waits. More than three minutes after Cargo launched trace_controls, it had 112 KiB footprint and no test output. Process census found Cargo/test alive and macOS syspolicyd consuming substantial CPU; a one-second sample contained only _dyld_start, proving Rust test code had not begun. The exact /tmp report created by sample was consumed, deleted, and verified absent. The eventual 12/12 result is diagnostic only until rerun through LinkedSpec's managed Cargo wrapper."
@@ -358,3 +358,19 @@ SHA-256 `0b1350fdbabd6275e92ddd8bb49e0aa946948831ff9cb8a58d39a476530f40ed`.
 No target cleanup, trust/signing/provenance change or off-volume output was used.
 Sampling is not established as a remedy; the delivery task records the final
 command result separately from this observation.
+
+## September24 compact-key verification observation
+
+During startup `.50`, the core cursor harness PID96835 had32KiB RSS and zero
+CPU at elapsed9m06s. Its one-second sample at12:16:41.168+0200 on macOS27.0
+(26A428) contains894 frames at `_dyld_start`, with112KiB footprint. This
+locates the sampled interval before Rust main; it does not identify the OS
+cause. Existing `.81` retains causal diagnosis and conditional repair ownership.
+The core cursor harness subsequently passes5/5 in1.38 test seconds. The
+independently delayed runtime source-fidelity harness passes2/2 in18.46 test seconds. Neither a Cargo launch line nor this sample supplies
+acceptance credit for an unfinished suite.
+
+The complete sample was consumed and retained at
+`.linkedspec-data/scratch/hash-colon50/core-cursor-launch.sample`, SHA-256
+`c9761c1d0cd95f3cc5ee47228b61b2146d49bc97f2772bd71d5592417f4d9baa`.
+No artifact purge, re-signing, trust change or off-volume scratch was used.

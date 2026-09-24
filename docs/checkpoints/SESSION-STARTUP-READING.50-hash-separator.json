@@ -1,0 +1,1032 @@
+{
+  "format": 1,
+  "owner": "SESSION-STARTUP-READING.50",
+  "date": "2026-09-24",
+  "activation_commit": "aa057b107c37fb947950d6c57db1892338fe7e94",
+  "input": "x",
+  "before": [
+    {
+      "name": "spaced",
+      "action": "key = \"a\"; out = { key : 7 }; return(out)",
+      "source": "Top::\n -> Done { key = \"a\"; out = { key : 7 }; return(out) }\nDone:\n /x/\n",
+      "expected": {
+        "a": 7
+      },
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "$key = \"a\"; $out = {$key => 7}; return $out",
+        "lowering_error": "",
+        "name": "spaced",
+        "value": {
+          "a": 7
+        }
+      },
+      "perl_stderr": "",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\n{\"a\":7}\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "27e1a5bf8e0906d98a0792b8e7c946c45cceb0021501ccbd097ffc2b294f30f6"
+    },
+    {
+      "name": "left_space",
+      "action": "key = \"a\"; out = { key :7 }; return(out)",
+      "source": "Top::\n -> Done { key = \"a\"; out = { key :7 }; return(out) }\nDone:\n /x/\n",
+      "expected": {
+        "a": 7
+      },
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "$key = \"a\"; $out = {$key => 7}; return $out",
+        "lowering_error": "",
+        "name": "left_space",
+        "value": {
+          "a": 7
+        }
+      },
+      "perl_stderr": "",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\n{\"a\":7}\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "27e1a5bf8e0906d98a0792b8e7c946c45cceb0021501ccbd097ffc2b294f30f6"
+    },
+    {
+      "name": "right_space",
+      "action": "key = \"a\"; out = { key: 7 }; return(out)",
+      "source": "Top::\n -> Done { key = \"a\"; out = { key: 7 }; return(out) }\nDone:\n /x/\n",
+      "expected": {
+        "a": 7
+      },
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "$key = \"a\"; $out = {$key => 7}; return $out",
+        "lowering_error": "",
+        "name": "right_space",
+        "value": {
+          "a": 7
+        }
+      },
+      "perl_stderr": "",
+      "rust_exit": 1,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:error\n",
+      "rust_stderr": "linkedspec: parser compilation failed\n",
+      "rust_binary_sha256": "27e1a5bf8e0906d98a0792b8e7c946c45cceb0021501ccbd097ffc2b294f30f6"
+    },
+    {
+      "name": "compact",
+      "action": "key = \"a\"; out = {key:7}; return(out)",
+      "source": "Top::\n -> Done { key = \"a\"; out = {key:7}; return(out) }\nDone:\n /x/\n",
+      "expected": {
+        "a": 7
+      },
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "$key = \"a\"; $out = {$key => 7}; return $out",
+        "lowering_error": "",
+        "name": "compact",
+        "value": {
+          "a": 7
+        }
+      },
+      "perl_stderr": "",
+      "rust_exit": 1,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:error\n",
+      "rust_stderr": "linkedspec: parser compilation failed\n",
+      "rust_binary_sha256": "27e1a5bf8e0906d98a0792b8e7c946c45cceb0021501ccbd097ffc2b294f30f6"
+    },
+    {
+      "name": "parenthesized",
+      "action": "key = \"a\"; out = {(key):7}; return(out)",
+      "source": "Top::\n -> Done { key = \"a\"; out = {(key):7}; return(out) }\nDone:\n /x/\n",
+      "expected": {
+        "a": 7
+      },
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "$key = \"a\"; $out = {$key => 7}; return $out",
+        "lowering_error": "",
+        "name": "parenthesized",
+        "value": {
+          "a": 7
+        }
+      },
+      "perl_stderr": "",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\n{\"a\":7}\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "27e1a5bf8e0906d98a0792b8e7c946c45cceb0021501ccbd097ffc2b294f30f6"
+    },
+    {
+      "name": "computed",
+      "action": "key = \"a\"; out = {cat(key,\"\"):7}; return(out)",
+      "source": "Top::\n -> Done { key = \"a\"; out = {cat(key,\"\"):7}; return(out) }\nDone:\n /x/\n",
+      "expected": {
+        "a": 7
+      },
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "$key = \"a\"; $out = {do { my @__ls_cat_parts = ($key, \"\"); my $__ls_cat_ok = 1; for my $__ls_cat_part (@__ls_cat_parts) { if (!defined($__ls_cat_part)) { $__ls_cat_ok = 0; last; } if (ref($__ls_cat_part)) { if (ref($__ls_cat_part) eq 'JSON::PP::Boolean') { $__ls_cat_part = $__ls_cat_part ? '1' : '0'; } else { $__ls_cat_ok = 0; last; } } else { $__ls_cat_part = \"$__ls_cat_part\"; $__ls_cat_part = '0' if $__ls_cat_part =~ /\\A-0(?:\\.0+)?\\z/; } } $__ls_cat_ok ? join('', @__ls_cat_parts) : undef } => 7}; return $out",
+        "lowering_error": "",
+        "name": "computed",
+        "value": {
+          "a": 7
+        }
+      },
+      "perl_stderr": "",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\n{\"a\":7}\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "27e1a5bf8e0906d98a0792b8e7c946c45cceb0021501ccbd097ffc2b294f30f6"
+    },
+    {
+      "name": "quoted",
+      "action": "key = \"a\"; out = {\"a\":7}; return(out)",
+      "source": "Top::\n -> Done { key = \"a\"; out = {\"a\":7}; return(out) }\nDone:\n /x/\n",
+      "expected": {
+        "a": 7
+      },
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "$key = \"a\"; $out = {\"a\" => 7}; return $out",
+        "lowering_error": "",
+        "name": "quoted",
+        "value": {
+          "a": 7
+        }
+      },
+      "perl_stderr": "",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\n{\"a\":7}\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "27e1a5bf8e0906d98a0792b8e7c946c45cceb0021501ccbd097ffc2b294f30f6"
+    },
+    {
+      "name": "nested",
+      "action": "key = \"a\"; out = {key:{key:7},\"fixed\":key}; return(out)",
+      "source": "Top::\n -> Done { key = \"a\"; out = {key:{key:7},\"fixed\":key}; return(out) }\nDone:\n /x/\n",
+      "expected": {
+        "a": {
+          "a": 7
+        },
+        "fixed": "a"
+      },
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "$key = \"a\"; $out = {$key => {$key => 7}, \"fixed\" => $key}; return $out",
+        "lowering_error": "",
+        "name": "nested",
+        "value": {
+          "a": {
+            "a": 7
+          },
+          "fixed": "a"
+        }
+      },
+      "perl_stderr": "",
+      "rust_exit": 1,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:error\n",
+      "rust_stderr": "linkedspec: parser compilation failed\n",
+      "rust_binary_sha256": "27e1a5bf8e0906d98a0792b8e7c946c45cceb0021501ccbd097ffc2b294f30f6"
+    },
+    {
+      "name": "unicode_dynamic",
+      "action": "key = \"é🦀\"; out = {key:7}; return(out)",
+      "source": "Top::\n -> Done { key = \"é🦀\"; out = {key:7}; return(out) }\nDone:\n /x/\n",
+      "expected": {
+        "é🦀": 7
+      },
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "$key = \"é🦀\"; $out = {$key => 7}; return $out",
+        "lowering_error": "",
+        "name": "unicode_dynamic",
+        "value": {
+          "é🦀": 7
+        }
+      },
+      "perl_stderr": "",
+      "rust_exit": 1,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:error\n",
+      "rust_stderr": "linkedspec: parser compilation failed\n",
+      "rust_binary_sha256": "27e1a5bf8e0906d98a0792b8e7c946c45cceb0021501ccbd097ffc2b294f30f6"
+    },
+    {
+      "name": "unicode_quoted",
+      "action": "key = \"a\"; out = {\"é🦀\":7}; return(out)",
+      "source": "Top::\n -> Done { key = \"a\"; out = {\"é🦀\":7}; return(out) }\nDone:\n /x/\n",
+      "expected": {
+        "é🦀": 7
+      },
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "$key = \"a\"; $out = {\"é🦀\" => 7}; return $out",
+        "lowering_error": "",
+        "name": "unicode_quoted",
+        "value": {
+          "é🦀": 7
+        }
+      },
+      "perl_stderr": "",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\n{\"é🦀\":7}\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "27e1a5bf8e0906d98a0792b8e7c946c45cceb0021501ccbd097ffc2b294f30f6"
+    },
+    {
+      "name": "unicode_computed",
+      "action": "key = \"é\"; out = {cat(key,\"🦀\"):7}; return(out)",
+      "source": "Top::\n -> Done { key = \"é\"; out = {cat(key,\"🦀\"):7}; return(out) }\nDone:\n /x/\n",
+      "expected": {
+        "é🦀": 7
+      },
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "$key = \"é\"; $out = {do { my @__ls_cat_parts = ($key, \"🦀\"); my $__ls_cat_ok = 1; for my $__ls_cat_part (@__ls_cat_parts) { if (!defined($__ls_cat_part)) { $__ls_cat_ok = 0; last; } if (ref($__ls_cat_part)) { if (ref($__ls_cat_part) eq 'JSON::PP::Boolean') { $__ls_cat_part = $__ls_cat_part ? '1' : '0'; } else { $__ls_cat_ok = 0; last; } } else { $__ls_cat_part = \"$__ls_cat_part\"; $__ls_cat_part = '0' if $__ls_cat_part =~ /\\A-0(?:\\.0+)?\\z/; } } $__ls_cat_ok ? join('', @__ls_cat_parts) : undef } => 7}; return $out",
+        "lowering_error": "",
+        "name": "unicode_computed",
+        "value": {
+          "é🦀": 7
+        }
+      },
+      "perl_stderr": "",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\n{\"é🦀\":7}\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "27e1a5bf8e0906d98a0792b8e7c946c45cceb0021501ccbd097ffc2b294f30f6"
+    },
+    {
+      "name": "receiver_bare",
+      "action": "key = \" a \"; out = {key.trim:7}; return(out)",
+      "source": "Top::\n -> Done { key = \" a \"; out = {key.trim:7}; return(out) }\nDone:\n /x/\n",
+      "expected": {
+        "a": 7
+      },
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "$key = \" a \"; $out = {do { my $__ls_trim = $key; if (defined($__ls_trim)) { $__ls_trim =~ s/^\\s+|\\s+$//g; } $__ls_trim } => 7}; return $out",
+        "lowering_error": "",
+        "name": "receiver_bare",
+        "value": {
+          "a": 7
+        }
+      },
+      "perl_stderr": "",
+      "rust_exit": 1,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:error\n",
+      "rust_stderr": "linkedspec: parser compilation failed\n",
+      "rust_binary_sha256": "27e1a5bf8e0906d98a0792b8e7c946c45cceb0021501ccbd097ffc2b294f30f6"
+    },
+    {
+      "name": "receiver_call",
+      "action": "key = \" a \"; out = {key.trim():7}; return(out)",
+      "source": "Top::\n -> Done { key = \" a \"; out = {key.trim():7}; return(out) }\nDone:\n /x/\n",
+      "expected": {
+        "a": 7
+      },
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "$key = \" a \"; $out = {do { my $__ls_trim = $key; if (defined($__ls_trim)) { $__ls_trim =~ s/^\\s+|\\s+$//g; } $__ls_trim } => 7}; return $out",
+        "lowering_error": "",
+        "name": "receiver_call",
+        "value": {
+          "a": 7
+        }
+      },
+      "perl_stderr": "",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\n{\"a\":7}\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "27e1a5bf8e0906d98a0792b8e7c946c45cceb0021501ccbd097ffc2b294f30f6"
+    }
+  ],
+  "after": [
+    {
+      "name": "spaced",
+      "action": "key = \"a\"; out = { key : 7 }; return(out)",
+      "source": "Top::\n -> Done { key = \"a\"; out = { key : 7 }; return(out) }\nDone:\n /x/\n",
+      "expected": {
+        "a": 7
+      },
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "$key = \"a\"; $out = {$key => 7}; return $out",
+        "lowering_error": "",
+        "name": "spaced",
+        "value": {
+          "a": 7
+        }
+      },
+      "perl_stderr": "",
+      "perl_extra_stdout": "",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\n{\"a\":7}\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "a2058123372bb4b76fec03165575fa17dbc243f8c80340d4c2529fda01d2a466"
+    },
+    {
+      "name": "left_space",
+      "action": "key = \"a\"; out = { key :7 }; return(out)",
+      "source": "Top::\n -> Done { key = \"a\"; out = { key :7 }; return(out) }\nDone:\n /x/\n",
+      "expected": {
+        "a": 7
+      },
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "$key = \"a\"; $out = {$key => 7}; return $out",
+        "lowering_error": "",
+        "name": "left_space",
+        "value": {
+          "a": 7
+        }
+      },
+      "perl_stderr": "",
+      "perl_extra_stdout": "",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\n{\"a\":7}\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "a2058123372bb4b76fec03165575fa17dbc243f8c80340d4c2529fda01d2a466"
+    },
+    {
+      "name": "right_space",
+      "action": "key = \"a\"; out = { key: 7 }; return(out)",
+      "source": "Top::\n -> Done { key = \"a\"; out = { key: 7 }; return(out) }\nDone:\n /x/\n",
+      "expected": {
+        "a": 7
+      },
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "$key = \"a\"; $out = {$key => 7}; return $out",
+        "lowering_error": "",
+        "name": "right_space",
+        "value": {
+          "a": 7
+        }
+      },
+      "perl_stderr": "",
+      "perl_extra_stdout": "",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\n{\"a\":7}\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "a2058123372bb4b76fec03165575fa17dbc243f8c80340d4c2529fda01d2a466"
+    },
+    {
+      "name": "compact",
+      "action": "key = \"a\"; out = {key:7}; return(out)",
+      "source": "Top::\n -> Done { key = \"a\"; out = {key:7}; return(out) }\nDone:\n /x/\n",
+      "expected": {
+        "a": 7
+      },
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "$key = \"a\"; $out = {$key => 7}; return $out",
+        "lowering_error": "",
+        "name": "compact",
+        "value": {
+          "a": 7
+        }
+      },
+      "perl_stderr": "",
+      "perl_extra_stdout": "",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\n{\"a\":7}\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "a2058123372bb4b76fec03165575fa17dbc243f8c80340d4c2529fda01d2a466"
+    },
+    {
+      "name": "parenthesized",
+      "action": "key = \"a\"; out = {(key):7}; return(out)",
+      "source": "Top::\n -> Done { key = \"a\"; out = {(key):7}; return(out) }\nDone:\n /x/\n",
+      "expected": {
+        "a": 7
+      },
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "$key = \"a\"; $out = {$key => 7}; return $out",
+        "lowering_error": "",
+        "name": "parenthesized",
+        "value": {
+          "a": 7
+        }
+      },
+      "perl_stderr": "",
+      "perl_extra_stdout": "",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\n{\"a\":7}\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "a2058123372bb4b76fec03165575fa17dbc243f8c80340d4c2529fda01d2a466"
+    },
+    {
+      "name": "computed",
+      "action": "key = \"a\"; out = {cat(key,\"\"):7}; return(out)",
+      "source": "Top::\n -> Done { key = \"a\"; out = {cat(key,\"\"):7}; return(out) }\nDone:\n /x/\n",
+      "expected": {
+        "a": 7
+      },
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "$key = \"a\"; $out = {do { my @__ls_cat_parts = ($key, \"\"); my $__ls_cat_ok = 1; for my $__ls_cat_part (@__ls_cat_parts) { if (!defined($__ls_cat_part)) { $__ls_cat_ok = 0; last; } if (ref($__ls_cat_part)) { if (ref($__ls_cat_part) eq 'JSON::PP::Boolean') { $__ls_cat_part = $__ls_cat_part ? '1' : '0'; } else { $__ls_cat_ok = 0; last; } } else { $__ls_cat_part = \"$__ls_cat_part\"; $__ls_cat_part = '0' if $__ls_cat_part =~ /\\A-0(?:\\.0+)?\\z/; } } $__ls_cat_ok ? join('', @__ls_cat_parts) : undef } => 7}; return $out",
+        "lowering_error": "",
+        "name": "computed",
+        "value": {
+          "a": 7
+        }
+      },
+      "perl_stderr": "",
+      "perl_extra_stdout": "",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\n{\"a\":7}\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "a2058123372bb4b76fec03165575fa17dbc243f8c80340d4c2529fda01d2a466"
+    },
+    {
+      "name": "quoted",
+      "action": "key = \"a\"; out = {\"a\":7}; return(out)",
+      "source": "Top::\n -> Done { key = \"a\"; out = {\"a\":7}; return(out) }\nDone:\n /x/\n",
+      "expected": {
+        "a": 7
+      },
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "$key = \"a\"; $out = {\"a\" => 7}; return $out",
+        "lowering_error": "",
+        "name": "quoted",
+        "value": {
+          "a": 7
+        }
+      },
+      "perl_stderr": "",
+      "perl_extra_stdout": "",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\n{\"a\":7}\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "a2058123372bb4b76fec03165575fa17dbc243f8c80340d4c2529fda01d2a466"
+    },
+    {
+      "name": "nested",
+      "action": "key = \"a\"; out = {key:{key:7},\"fixed\":key}; return(out)",
+      "source": "Top::\n -> Done { key = \"a\"; out = {key:{key:7},\"fixed\":key}; return(out) }\nDone:\n /x/\n",
+      "expected": {
+        "a": {
+          "a": 7
+        },
+        "fixed": "a"
+      },
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "$key = \"a\"; $out = {$key => {$key => 7}, \"fixed\" => $key}; return $out",
+        "lowering_error": "",
+        "name": "nested",
+        "value": {
+          "a": {
+            "a": 7
+          },
+          "fixed": "a"
+        }
+      },
+      "perl_stderr": "",
+      "perl_extra_stdout": "",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\n{\"a\":{\"a\":7},\"fixed\":\"a\"}\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "a2058123372bb4b76fec03165575fa17dbc243f8c80340d4c2529fda01d2a466"
+    },
+    {
+      "name": "unicode_dynamic",
+      "action": "key = \"é🦀\"; out = {key:7}; return(out)",
+      "source": "Top::\n -> Done { key = \"é🦀\"; out = {key:7}; return(out) }\nDone:\n /x/\n",
+      "expected": {
+        "é🦀": 7
+      },
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "$key = \"é🦀\"; $out = {$key => 7}; return $out",
+        "lowering_error": "",
+        "name": "unicode_dynamic",
+        "value": {
+          "é🦀": 7
+        }
+      },
+      "perl_stderr": "",
+      "perl_extra_stdout": "",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\n{\"é🦀\":7}\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "a2058123372bb4b76fec03165575fa17dbc243f8c80340d4c2529fda01d2a466"
+    },
+    {
+      "name": "unicode_quoted",
+      "action": "key = \"a\"; out = {\"é🦀\":7}; return(out)",
+      "source": "Top::\n -> Done { key = \"a\"; out = {\"é🦀\":7}; return(out) }\nDone:\n /x/\n",
+      "expected": {
+        "é🦀": 7
+      },
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "$key = \"a\"; $out = {\"é🦀\" => 7}; return $out",
+        "lowering_error": "",
+        "name": "unicode_quoted",
+        "value": {
+          "é🦀": 7
+        }
+      },
+      "perl_stderr": "",
+      "perl_extra_stdout": "",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\n{\"é🦀\":7}\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "a2058123372bb4b76fec03165575fa17dbc243f8c80340d4c2529fda01d2a466"
+    },
+    {
+      "name": "unicode_computed",
+      "action": "key = \"é\"; out = {cat(key,\"🦀\"):7}; return(out)",
+      "source": "Top::\n -> Done { key = \"é\"; out = {cat(key,\"🦀\"):7}; return(out) }\nDone:\n /x/\n",
+      "expected": {
+        "é🦀": 7
+      },
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "$key = \"é\"; $out = {do { my @__ls_cat_parts = ($key, \"🦀\"); my $__ls_cat_ok = 1; for my $__ls_cat_part (@__ls_cat_parts) { if (!defined($__ls_cat_part)) { $__ls_cat_ok = 0; last; } if (ref($__ls_cat_part)) { if (ref($__ls_cat_part) eq 'JSON::PP::Boolean') { $__ls_cat_part = $__ls_cat_part ? '1' : '0'; } else { $__ls_cat_ok = 0; last; } } else { $__ls_cat_part = \"$__ls_cat_part\"; $__ls_cat_part = '0' if $__ls_cat_part =~ /\\A-0(?:\\.0+)?\\z/; } } $__ls_cat_ok ? join('', @__ls_cat_parts) : undef } => 7}; return $out",
+        "lowering_error": "",
+        "name": "unicode_computed",
+        "value": {
+          "é🦀": 7
+        }
+      },
+      "perl_stderr": "",
+      "perl_extra_stdout": "",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\n{\"é🦀\":7}\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "a2058123372bb4b76fec03165575fa17dbc243f8c80340d4c2529fda01d2a466"
+    },
+    {
+      "name": "receiver_bare",
+      "action": "key = \" a \"; out = {key.trim:7}; return(out)",
+      "source": "Top::\n -> Done { key = \" a \"; out = {key.trim:7}; return(out) }\nDone:\n /x/\n",
+      "expected": {
+        "a": 7
+      },
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "$key = \" a \"; $out = {do { my $__ls_trim = $key; if (defined($__ls_trim)) { $__ls_trim =~ s/^\\s+|\\s+$//g; } $__ls_trim } => 7}; return $out",
+        "lowering_error": "",
+        "name": "receiver_bare",
+        "value": {
+          "a": 7
+        }
+      },
+      "perl_stderr": "",
+      "perl_extra_stdout": "",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\n{\"a\":7}\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "a2058123372bb4b76fec03165575fa17dbc243f8c80340d4c2529fda01d2a466"
+    },
+    {
+      "name": "receiver_call",
+      "action": "key = \" a \"; out = {key.trim():7}; return(out)",
+      "source": "Top::\n -> Done { key = \" a \"; out = {key.trim():7}; return(out) }\nDone:\n /x/\n",
+      "expected": {
+        "a": 7
+      },
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "$key = \" a \"; $out = {do { my $__ls_trim = $key; if (defined($__ls_trim)) { $__ls_trim =~ s/^\\s+|\\s+$//g; } $__ls_trim } => 7}; return $out",
+        "lowering_error": "",
+        "name": "receiver_call",
+        "value": {
+          "a": 7
+        }
+      },
+      "perl_stderr": "",
+      "perl_extra_stdout": "",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\n{\"a\":7}\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "a2058123372bb4b76fec03165575fa17dbc243f8c80340d4c2529fda01d2a466"
+    }
+  ],
+  "after_first_build": [
+    {
+      "name": "spaced",
+      "action": "key = \"a\"; out = { key : 7 }; return(out)",
+      "source": "Top::\n -> Done { key = \"a\"; out = { key : 7 }; return(out) }\nDone:\n /x/\n",
+      "expected": {
+        "a": 7
+      },
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "$key = \"a\"; $out = {$key => 7}; return $out",
+        "lowering_error": "",
+        "name": "spaced",
+        "value": {
+          "a": 7
+        }
+      },
+      "perl_stderr": "",
+      "perl_extra_stdout": "",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\n{\"a\":7}\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "e8690ef34900165b246ff4f69d54ad2494d4cf38300bd896017169c17488dc64"
+    },
+    {
+      "name": "left_space",
+      "action": "key = \"a\"; out = { key :7 }; return(out)",
+      "source": "Top::\n -> Done { key = \"a\"; out = { key :7 }; return(out) }\nDone:\n /x/\n",
+      "expected": {
+        "a": 7
+      },
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "$key = \"a\"; $out = {$key => 7}; return $out",
+        "lowering_error": "",
+        "name": "left_space",
+        "value": {
+          "a": 7
+        }
+      },
+      "perl_stderr": "",
+      "perl_extra_stdout": "",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\n{\"a\":7}\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "e8690ef34900165b246ff4f69d54ad2494d4cf38300bd896017169c17488dc64"
+    },
+    {
+      "name": "right_space",
+      "action": "key = \"a\"; out = { key: 7 }; return(out)",
+      "source": "Top::\n -> Done { key = \"a\"; out = { key: 7 }; return(out) }\nDone:\n /x/\n",
+      "expected": {
+        "a": 7
+      },
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "$key = \"a\"; $out = {$key => 7}; return $out",
+        "lowering_error": "",
+        "name": "right_space",
+        "value": {
+          "a": 7
+        }
+      },
+      "perl_stderr": "",
+      "perl_extra_stdout": "",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\n{\"a\":7}\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "e8690ef34900165b246ff4f69d54ad2494d4cf38300bd896017169c17488dc64"
+    },
+    {
+      "name": "compact",
+      "action": "key = \"a\"; out = {key:7}; return(out)",
+      "source": "Top::\n -> Done { key = \"a\"; out = {key:7}; return(out) }\nDone:\n /x/\n",
+      "expected": {
+        "a": 7
+      },
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "$key = \"a\"; $out = {$key => 7}; return $out",
+        "lowering_error": "",
+        "name": "compact",
+        "value": {
+          "a": 7
+        }
+      },
+      "perl_stderr": "",
+      "perl_extra_stdout": "",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\n{\"a\":7}\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "e8690ef34900165b246ff4f69d54ad2494d4cf38300bd896017169c17488dc64"
+    },
+    {
+      "name": "parenthesized",
+      "action": "key = \"a\"; out = {(key):7}; return(out)",
+      "source": "Top::\n -> Done { key = \"a\"; out = {(key):7}; return(out) }\nDone:\n /x/\n",
+      "expected": {
+        "a": 7
+      },
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "$key = \"a\"; $out = {$key => 7}; return $out",
+        "lowering_error": "",
+        "name": "parenthesized",
+        "value": {
+          "a": 7
+        }
+      },
+      "perl_stderr": "",
+      "perl_extra_stdout": "",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\n{\"a\":7}\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "e8690ef34900165b246ff4f69d54ad2494d4cf38300bd896017169c17488dc64"
+    },
+    {
+      "name": "computed",
+      "action": "key = \"a\"; out = {cat(key,\"\"):7}; return(out)",
+      "source": "Top::\n -> Done { key = \"a\"; out = {cat(key,\"\"):7}; return(out) }\nDone:\n /x/\n",
+      "expected": {
+        "a": 7
+      },
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "$key = \"a\"; $out = {do { my @__ls_cat_parts = ($key, \"\"); my $__ls_cat_ok = 1; for my $__ls_cat_part (@__ls_cat_parts) { if (!defined($__ls_cat_part)) { $__ls_cat_ok = 0; last; } if (ref($__ls_cat_part)) { if (ref($__ls_cat_part) eq 'JSON::PP::Boolean') { $__ls_cat_part = $__ls_cat_part ? '1' : '0'; } else { $__ls_cat_ok = 0; last; } } else { $__ls_cat_part = \"$__ls_cat_part\"; $__ls_cat_part = '0' if $__ls_cat_part =~ /\\A-0(?:\\.0+)?\\z/; } } $__ls_cat_ok ? join('', @__ls_cat_parts) : undef } => 7}; return $out",
+        "lowering_error": "",
+        "name": "computed",
+        "value": {
+          "a": 7
+        }
+      },
+      "perl_stderr": "",
+      "perl_extra_stdout": "",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\n{\"a\":7}\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "e8690ef34900165b246ff4f69d54ad2494d4cf38300bd896017169c17488dc64"
+    },
+    {
+      "name": "quoted",
+      "action": "key = \"a\"; out = {\"a\":7}; return(out)",
+      "source": "Top::\n -> Done { key = \"a\"; out = {\"a\":7}; return(out) }\nDone:\n /x/\n",
+      "expected": {
+        "a": 7
+      },
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "$key = \"a\"; $out = {\"a\" => 7}; return $out",
+        "lowering_error": "",
+        "name": "quoted",
+        "value": {
+          "a": 7
+        }
+      },
+      "perl_stderr": "",
+      "perl_extra_stdout": "",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\n{\"a\":7}\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "e8690ef34900165b246ff4f69d54ad2494d4cf38300bd896017169c17488dc64"
+    },
+    {
+      "name": "nested",
+      "action": "key = \"a\"; out = {key:{key:7},\"fixed\":key}; return(out)",
+      "source": "Top::\n -> Done { key = \"a\"; out = {key:{key:7},\"fixed\":key}; return(out) }\nDone:\n /x/\n",
+      "expected": {
+        "a": {
+          "a": 7
+        },
+        "fixed": "a"
+      },
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "$key = \"a\"; $out = {$key => {$key => 7}, \"fixed\" => $key}; return $out",
+        "lowering_error": "",
+        "name": "nested",
+        "value": {
+          "a": {
+            "a": 7
+          },
+          "fixed": "a"
+        }
+      },
+      "perl_stderr": "",
+      "perl_extra_stdout": "",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\n{\"a\":{\"a\":7},\"fixed\":\"a\"}\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "e8690ef34900165b246ff4f69d54ad2494d4cf38300bd896017169c17488dc64"
+    },
+    {
+      "name": "unicode_dynamic",
+      "action": "key = \"é🦀\"; out = {key:7}; return(out)",
+      "source": "Top::\n -> Done { key = \"é🦀\"; out = {key:7}; return(out) }\nDone:\n /x/\n",
+      "expected": {
+        "é🦀": 7
+      },
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "$key = \"é🦀\"; $out = {$key => 7}; return $out",
+        "lowering_error": "",
+        "name": "unicode_dynamic",
+        "value": {
+          "é🦀": 7
+        }
+      },
+      "perl_stderr": "",
+      "perl_extra_stdout": "",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\n{\"é🦀\":7}\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "e8690ef34900165b246ff4f69d54ad2494d4cf38300bd896017169c17488dc64"
+    },
+    {
+      "name": "unicode_quoted",
+      "action": "key = \"a\"; out = {\"é🦀\":7}; return(out)",
+      "source": "Top::\n -> Done { key = \"a\"; out = {\"é🦀\":7}; return(out) }\nDone:\n /x/\n",
+      "expected": {
+        "é🦀": 7
+      },
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "$key = \"a\"; $out = {\"é🦀\" => 7}; return $out",
+        "lowering_error": "",
+        "name": "unicode_quoted",
+        "value": {
+          "é🦀": 7
+        }
+      },
+      "perl_stderr": "",
+      "perl_extra_stdout": "",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\n{\"é🦀\":7}\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "e8690ef34900165b246ff4f69d54ad2494d4cf38300bd896017169c17488dc64"
+    },
+    {
+      "name": "unicode_computed",
+      "action": "key = \"é\"; out = {cat(key,\"🦀\"):7}; return(out)",
+      "source": "Top::\n -> Done { key = \"é\"; out = {cat(key,\"🦀\"):7}; return(out) }\nDone:\n /x/\n",
+      "expected": {
+        "é🦀": 7
+      },
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "$key = \"é\"; $out = {do { my @__ls_cat_parts = ($key, \"🦀\"); my $__ls_cat_ok = 1; for my $__ls_cat_part (@__ls_cat_parts) { if (!defined($__ls_cat_part)) { $__ls_cat_ok = 0; last; } if (ref($__ls_cat_part)) { if (ref($__ls_cat_part) eq 'JSON::PP::Boolean') { $__ls_cat_part = $__ls_cat_part ? '1' : '0'; } else { $__ls_cat_ok = 0; last; } } else { $__ls_cat_part = \"$__ls_cat_part\"; $__ls_cat_part = '0' if $__ls_cat_part =~ /\\A-0(?:\\.0+)?\\z/; } } $__ls_cat_ok ? join('', @__ls_cat_parts) : undef } => 7}; return $out",
+        "lowering_error": "",
+        "name": "unicode_computed",
+        "value": {
+          "é🦀": 7
+        }
+      },
+      "perl_stderr": "",
+      "perl_extra_stdout": "",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\n{\"é🦀\":7}\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "e8690ef34900165b246ff4f69d54ad2494d4cf38300bd896017169c17488dc64"
+    },
+    {
+      "name": "receiver_bare",
+      "action": "key = \" a \"; out = {key.trim:7}; return(out)",
+      "source": "Top::\n -> Done { key = \" a \"; out = {key.trim:7}; return(out) }\nDone:\n /x/\n",
+      "expected": {
+        "a": 7
+      },
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "$key = \" a \"; $out = {do { my $__ls_trim = $key; if (defined($__ls_trim)) { $__ls_trim =~ s/^\\s+|\\s+$//g; } $__ls_trim } => 7}; return $out",
+        "lowering_error": "",
+        "name": "receiver_bare",
+        "value": {
+          "a": 7
+        }
+      },
+      "perl_stderr": "",
+      "perl_extra_stdout": "",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\n{\"a\":7}\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "e8690ef34900165b246ff4f69d54ad2494d4cf38300bd896017169c17488dc64"
+    },
+    {
+      "name": "receiver_call",
+      "action": "key = \" a \"; out = {key.trim():7}; return(out)",
+      "source": "Top::\n -> Done { key = \" a \"; out = {key.trim():7}; return(out) }\nDone:\n /x/\n",
+      "expected": {
+        "a": 7
+      },
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "$key = \" a \"; $out = {do { my $__ls_trim = $key; if (defined($__ls_trim)) { $__ls_trim =~ s/^\\s+|\\s+$//g; } $__ls_trim } => 7}; return $out",
+        "lowering_error": "",
+        "name": "receiver_call",
+        "value": {
+          "a": 7
+        }
+      },
+      "perl_stderr": "",
+      "perl_extra_stdout": "",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\n{\"a\":7}\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "e8690ef34900165b246ff4f69d54ad2494d4cf38300bd896017169c17488dc64"
+    }
+  ]
+}

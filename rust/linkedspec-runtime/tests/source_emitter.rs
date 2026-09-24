@@ -323,6 +323,44 @@ fn rust_module_name_for_case(case_name: &str) -> String {
 }
 
 #[test]
+fn emitted_compact_hash_key_book_example_preserves_evaluated_keys() {
+    let source = include_str!("../../../examples/compact-hash-keys.spec");
+    let parsed = parse_spec_with_user_functions(source).expect("parse compact-key book example");
+    validate(&parsed).expect("validate compact-key book example");
+    let compiled = compile(&parsed).expect("compile compact-key book example");
+    let expected = json!({"stage": 7, "fixed": "stage", "é🦀": {"stage_nested": 7}});
+    let engine = Engine::new(compiled.clone());
+    for (input, value) in [("x", expected.clone()), ("y", Value::Null), ("x", expected)] {
+        assert_eq!(
+            engine
+                .execute_value(input, &ExecutionOptions::new())
+                .unwrap(),
+            value
+        );
+    }
+    let generated = emit_rust_source_v2(&compiled, "examples/compact-hash-keys.spec")
+        .expect("emit compact-key book example");
+    run_generated_crate(
+        "linkedspec_compact_hash_keys",
+        format!(
+            r#"
+{generated}
+#[cfg(test)]
+mod book_example {{
+    #[test]
+    fn compact_keys_match_reject_and_match_again() {{
+        let expected = serde_json::json!({{"stage": 7, "fixed": "stage", "é🦀": {{"stage_nested": 7}}}});
+        assert_eq!(crate::execute("x").unwrap(), expected);
+        assert_eq!(crate::execute("y").unwrap(), serde_json::Value::Null);
+        assert_eq!(crate::execute("x").unwrap(), expected);
+    }}
+}}
+"#
+        ),
+    );
+}
+
+#[test]
 fn generated_source_v2_metadata_and_structured_errors_are_exact() {
     let parsed = parse_spec(SIMPLE_SOURCE_EMITTER_SPEC).expect("parse v2 metadata spec");
     validate(&parsed).expect("validate v2 metadata spec");

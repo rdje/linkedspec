@@ -3658,9 +3658,16 @@ impl<'a> Parser<'a> {
     fn parse_name(&mut self) -> String {
         self.skip_whitespace();
         let rem = self.remaining();
+        let bytes = rem.as_bytes();
         let end = rem
             .char_indices()
-            .find(|(_, c)| !c.is_alphanumeric() && *c != '_' && *c != ':')
+            .find(|&(i, c)| {
+                // An isolated colon is a pair separator. Retain namespace-style
+                // colon runs, matching the brace classifier's existing boundary.
+                let namespace_colon =
+                    c == ':' && (bytes.get(i + 1) == Some(&b':') || i > 0 && bytes[i - 1] == b':');
+                !c.is_alphanumeric() && c != '_' && !namespace_colon
+            })
             .map(|(i, _)| i)
             .unwrap_or(rem.len());
         let name = rem[..end].to_string();
