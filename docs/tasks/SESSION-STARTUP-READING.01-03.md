@@ -1,0 +1,4359 @@
+# SESSION-STARTUP-READING: semantic part 01-03
+
+Current task evidence; navigation and frontier: docs/tasks/SESSION-STARTUP-READING.md.
+After an owned edit run: perl tools/update_task_tree_index.pl --tree SESSION-STARTUP-READING
+
+- ID: `SESSION-STARTUP-READING.1`
+  Status: `done`
+  Goal: Commit the authorized startup-reading checkpoint before continuing the reading pass.
+  Acceptance: Baseline and coverage are explicit, required-reading answers remain honest, and continuity points to `.2`.
+  Verification tier: `focused`
+  Focused checks: `bash scripts/check_memory_architecture.sh`; `bash scripts/check_doctrines.sh`; `perl tools/roll_document_history.pl --surface change_history --check`; `perl tools/roll_document_history.pl --surface engineering_notes --check`; `git diff --check`; staged-path and coverage review.
+  Canonical trigger: `none` — bounded continuity documentation; no policy, infrastructure, or public contract changes.
+  Verification: Activated task-tree-first from the clean reading baseline; memory, nine doctrine checks, both history-pressure checks, and diff/scope review pass. README routing was rerun after refreshing the staged snapshot; pre-commit checks the final candidate again.
+  Commit: `SESSION-STARTUP-READING.1 - preserve required reading progress` — Startup-tracking-only exception; reading remains incomplete.
+- ID: `SESSION-STARTUP-READING.2`
+  Status: `done`
+  Goal: Finish ROADMAP_V2.md from baseline line 1341 and reconcile its current direction with the completed ROADMAP.md reading.
+  Acceptance: Baseline lines 1341–1585 are read without truncation; roadmap understanding and any real alignment issue are recorded.
+  Verification tier: `focused`
+  Focused checks: `bash scripts/check_memory_architecture.sh`; `bash scripts/check_doctrines.sh`; `bash knowledge-map/scripts/check_knowledge_map.sh`; `perl tools/roll_document_history.pl --surface change_history --check`; `perl tools/roll_document_history.pl --surface engineering_notes --check`; `git diff --check`; staged-scope and exact reading-range review.
+  Canonical trigger: `none` — startup-reading continuity only; no public, policy, infrastructure, or runtime change.
+  Verification: Baseline lines 1341–1585 read in five untruncated ranges; both roadmap diffs since baseline reviewed. Current direction agrees with the task index, mutation-testing tree, ADR 0039, and ADR 0073. Focused commit checks recorded below.
+  Commit: `SESSION-STARTUP-READING.2 - complete roadmap reading` — Completed roadmap reading; exact coverage and focused checks, remaining reading and liveness discrepancy owned.
+- ID: `SESSION-STARTUP-READING.3`
+  Status: `active`
+  Goal: Read and understand the remaining first-party codebase, including its tests, specs, and repository tooling.
+  Children: `.3.1`, `.3.2`, `.3.3`, `.3.4`, `.3.5`, `.3.6`, `.3.7`, `.3.8`, `.3.9`, `.3.10`, `.3.11`
+- ID: `SESSION-STARTUP-READING.3.1`
+  Status: `done`
+  Goal: Classify the complete baseline tracked inventory and define exact bounded first-party reading children.
+  Acceptance: Every baseline path has an explicit category/owner or the director's rgx exclusion; account for
+    source, tests, specs, generated inputs, fixtures, tooling, and files outside language directories. Define
+    deterministic file/range boundaries and review baseline-to-current changes before claiming any coverage.
+  Verification tier: `focused`
+  Focused checks: Git baseline/object and current-delta census; disjoint complete reading-category review; exact bounded next-child scope; managed `perl -Iperl -c perl/LinkedSpec.pm` and `perl -Iperl -c t/phase0_regression.t`; `bash scripts/check_memory_architecture.sh`; `bash scripts/check_doctrines.sh`; both `tools/roll_document_history.pl --check` surfaces; `git diff --check`.
+  Canonical trigger: `none` — reading inventory and tracking only, with no source/tool/policy/public behavior change.
+  Verification: Exact baseline Git object census accounts for 2,547 entries / 52,084,744 blob bytes with one
+    excluded gitlink. The disjoint path rules below account for all entries; only four gzip blobs contain NULs.
+    Source/test/tool inputs remain byte-identical to baseline. First reading child is exactly five files / 1,430
+    lines / 56,706 bytes; inventory and decompression counts do not count as content reading.
+  Commit: `SESSION-STARTUP-READING.3.1 - bound the codebase reading inventory` — Complete baseline accounting and bounded next child; source/book reading still incomplete.
+- ID: `SESSION-STARTUP-READING.3.2`
+  Status: `done`
+  Goal: Read all 89 baseline Perl entries and their current deltas, starting with the facade invocation owners.
+  Children: `.3.2.1`, `.3.2.2`, `.3.2.3`, `.3.2.4`, `.3.2.5`, `.3.2.6`, `.3.2.7`, `.3.2.8`, `.3.2.9`, `.3.2.10`, `.3.2.11`, `.3.2.12`, `.3.2.13`, `.3.2.14`, `.3.2.15`, `.3.2.16`, `.3.2.17`, `.3.2.18`, `.3.2.19`, `.3.2.20`, `.3.2.21`, `.3.2.22`, `.3.2.23`, `.3.2.24`, `.3.2.25`, `.3.2.26`, `.3.2.27`, `.3.2.28`, `.3.2.29`, `.3.2.30`, `.3.2.31`, `.3.2.32`, `.3.2.33`, `.3.2.34`, `.3.2.35`, `.3.2.36`, `.3.2.37`, `.3.2.38`, `.3.2.39`, `.3.2.40`, `.3.2.41`, `.3.2.42`, `.3.2.43`, `.3.2.44`, `.3.2.45`, `.3.2.46`, `.3.2.47`, `.3.2.48`, `.3.2.49`, `.3.2.50`, `.3.2.51`, `.3.2.52`, `.3.2.53`, `.3.2.54`, `.3.2.55`
+
+  Verification: All 89 baseline files / 2,133,690 bytes are physically read and comprehension-reconciled;
+    .3.2.55 independently verifies exact coverage, current identity, durable commits, and canonical closeout.
+    Pending repairs are unchanged; this status certifies reading completion only.
+  Commit: `SESSION-STARTUP-READING.3.2.55 - close Perl reading and own bounded Rust scopes`
+- ID: `SESSION-STARTUP-READING.3.2.1`
+  Status: `done`
+  Goal: Read the facade invocation and shared-context owners in full.
+  Acceptance: Read `perl/LinkedSpec.pm` 1–296, `perl/LinkedSpec/OwnerDispatch.pm` 1–220,
+    `perl/LinkedSpec/Runtime.pm` 1–154, `perl/LinkedSpec/ParserFactory.pm` 1–368, and
+    `perl/LinkedSpec/RuntimeContext.pm` 1–392. Reconcile against the existing thin-facade Knowledge card;
+    record exact comprehension and any tool-confirmed issue. No runtime-change or full-codebase claim.
+  Verification tier: `focused`
+  Focused checks: Full untruncated five-file reading and baseline identity/delta review; existing Knowledge-owner comparison; managed Perl facade/phase0 syntax; `bash scripts/check_memory_architecture.sh`; required pre-commit `bash scripts/check_doctrines.sh`; both `tools/roll_document_history.pl --check` surfaces; `git diff --check`.
+  Canonical trigger: `none` — bounded source-reading checkpoint, with no production or public behavior change.
+  Verification: All five exact files read through EOF without truncation; Git proves baseline identity. Existing
+    thin-facade and leading-trivia Knowledge cards reconcile the owner flow and public-wrapper boundary. Managed
+    facade/phase0 syntax passes; no production change, new defect, or runtime/audit-completion claim.
+  Commit: `SESSION-STARTUP-READING.3.2.1 - read facade invocation owners` — Five unique Perl files complete; remaining 84 Perl entries and other lanes remain unread.
+- ID: `SESSION-STARTUP-READING.3.2.2`
+  Status: `done`
+  Goal: Split the remaining 84 baseline Perl paths into exact bounded reading children before reading them.
+  Acceptance: Subtract `.3.2.1` by exact path; use the inventory's byte/line boundary rule and retain every file.
+    Prior supporting read coverage remains explicit and cannot silently remove an unread interval.
+  Verification tier: `focused`
+  Focused checks: Exact baseline path/range coverage and byte/line budgets; baseline-to-current Perl delta;
+    `bash scripts/check_memory_architecture.sh`; required pre-commit `bash scripts/check_doctrines.sh`;
+    both `tools/roll_document_history.pl --check` surfaces; `git diff --check`.
+  Canonical trigger: `none` — reading decomposition and continuity only; no source or policy change.
+  Verification: Independent byte-interval audit passes: all 84 exact remaining paths / 2,076,984 bytes
+    covered once by 52 bounded leaves; declared budgets match and Perl source remains baseline-identical.
+  Commit: `SESSION-STARTUP-READING.3.2.2 - partition remaining Perl reading` — All unread Perl bytes owned before reading; no new reading credit.
+- ID: `SESSION-STARTUP-READING.3.2.3`
+  Status: `done`
+  Goal: Read baseline Perl group 1: 1,103 lines/fragments, 36,759 bytes.
+  Scope: `perl/LinkedSpec/Resolver.pm` lines 1–223; `perl/LinkedSpec/SpecLoader.pm` lines 1–352; `perl/LinkedSpec/EntryRuleSelection.pm` lines 1–74; `perl/LinkedSpec/GeneratedSource.pm` lines 1–319; `perl/LinkedSpec/BootstrapSpec.pm` lines 1–135.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+    Investigate whether cached `spec_spec_result` survives a later unsuccessful diagnostic parse before
+    interpreting it as current-invocation metadata; use Get/descriptor and bootstrap probes before source tracing.
+  Verification tier: `focused`
+  Focused checks: Exact scoped reading and baseline identity; existing Knowledge-owner reconciliation;
+    managed Get/descriptor plus cached-bootstrap empty/positive comparison probes and consumer/source trace;
+    `bash scripts/check_memory_architecture.sh`; required pre-commit `bash scripts/check_doctrines.sh`;
+    both `tools/roll_document_history.pl --check` surfaces; `git diff --check`.
+  Canonical trigger: `none` — source-reading continuity only; no production or public behavior change.
+  Verification: Five complete files / 1,103 lines / 36,759 bytes read without truncation; baseline identity
+    preserved. Existing resolution/root-selection/generated-source/bootstrap contracts reconciled. Probes confirm
+    stale diagnostic comparison state; public Get still rejects malformed source. Repair `.8` and Knowledge own
+    the defect; no production repair or full-codebase claim.
+  Commit: `SESSION-STARTUP-READING.3.2.3 - read resolution and bootstrap adapters` — Ten unique Perl files read; stale diagnostic defect proved and repair `.8` owned.
+- ID: `SESSION-STARTUP-READING.3.2.4`
+  Status: `done`
+  Goal: Read baseline Perl group 2: 1,196 lines/fragments, 39,291 bytes.
+  Scope: `perl/LinkedSpec/BootstrapSpec/Core.pm` lines 1–1196.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+    Probe quoted-versus-regex delimiters in attached conditional tails before classifying the balanced scanner.
+  Verification tier: `focused`
+  Focused checks: Full untruncated core reading and baseline identity; existing bootstrap/grammar Knowledge;
+    managed attached-tail, call_spec_handler_subst, descriptor, and public execution controls; exact source trace;
+    `bash scripts/check_memory_architecture.sh`; required pre-commit `bash scripts/check_doctrines.sh`;
+    both `tools/roll_document_history.pl --check` surfaces; `git diff --check`.
+  Canonical trigger: `none` — source-reading continuity only; no production or public behavior change.
+  Verification: All 1,196 lines / 39,291 bytes read in four untruncated chunks; baseline identity passes.
+    Direct scanner and public controls prove regex-delimiter truncation; quoted-pattern execution returns 1,
+    regex form returns undef with exact handler-compile error. Knowledge and `.9` own repair after reading.
+  Commit: `SESSION-STARTUP-READING.3.2.4 - read bootstrap grammar core` — Eleven unique Perl files read; attached-tail regex defect proved and `.9` owned.
+- ID: `SESSION-STARTUP-READING.3.2.5`
+  Status: `done`
+  Goal: Read baseline Perl group 3: 590 lines/fragments, 23,054 bytes.
+  Scope: `perl/LinkedSpec/CompilerState.pm` lines 1–590.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+    Apply the mandatory changelog rollover if this checkpoint crosses 90%; verify complete-record preservation.
+    Any required finite history-member capacity admission follows README_POLICY and exact indexed-ADR proof,
+    without changing product code, current-view ceilings, archive identity, or the required-reading boundary.
+  Verification tier: `canonical`
+  Focused checks: Two exact reading chunks and baseline identity; existing CompilerState/descriptor Knowledge;
+    required rollover plus independent clean-source suffix/hash/count proof; document-history and README routing;
+    `bash scripts/check_memory_architecture.sh`; both history-pressure checks; `git diff --check`.
+  Canonical trigger: `infrastructure` — ADR 0102 admits one required history member and manifest line in the route registry.
+  Verification: CompilerState fully read in 1–300 / 301–590 chunks, 590 lines / 23,054 bytes, baseline-identical.
+    Required rollover archives exact source lines 242–459 as segment 4985; independent byte/hash proof passes.
+    ADR 0102 records the exact finite 28-file/27-manifest-line admission. Final staged canonical receipt is required
+    before landing; no production change or completed full-codebase claim.
+  Commit: `SESSION-STARTUP-READING.3.2.5 - read compiler state and preserve history` — Twelve Perl files read; required complete-record rollover and finite capacity ADR 0102.
+- ID: `SESSION-STARTUP-READING.3.2.6`
+  Status: `done`
+  Goal: Read baseline Perl group 4: 1,041 lines/fragments, 41,073 bytes.
+  Scope: `perl/LinkedSpec/Compiler.pm` lines 1–1041.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+    Preserve the preceding canonical result and dated loader observations in the existing Knowledge owner.
+    Link the historical duplicate-slot risk card to its already-admitted resolution without rewriting its evidence.
+  Verification tier: `focused`
+  Focused checks: Exact scoped reading and baseline identity; existing compiler ownership reconciliation;
+    prior canonical receipt and measured loader evidence; memory/doctrine/Knowledge/history checks;
+    `git diff --check` and final staged review.
+  Canonical trigger: `none` — source-reading and measured startup continuity only; no infrastructure or public change.
+  Verification: Four untruncated chunks cover baseline-identical lines 1–1041 / 41,073 bytes. Existing state,
+    generated-v2, function-registry, and duplicate-slot owners reconcile. Prior exact canonical proof passed;
+    dated samples are preserved in Knowledge and their two consumed files were hash-verified/deleted/checked absent.
+    The historical duplicate-slot card links its existing resolution; focused commit checks are recorded below.
+  Commit: `SESSION-STARTUP-READING.3.2.6 - read compiler generation and state assembly` — Compiler prefix read; prior canonical/loader evidence and historical duplicate-slot resolution preserved.
+- ID: `SESSION-STARTUP-READING.3.2.7`
+  Status: `done`
+  Goal: Read baseline Perl group 5: 961 lines/fragments, 43,851 bytes.
+  Scope: `perl/LinkedSpec/Compiler.pm` lines 1042–2002.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+    Index source-level pipeline phase/return-mode boundaries without duplicating the existing state/root owners.
+  Verification tier: `focused`
+  Focused checks: Four exact reading chunks and baseline identity; existing pipeline/context/diagnostic Knowledge;
+    memory/doctrine/Knowledge/history checks; `git diff --check` and final staged review.
+  Canonical trigger: `none` — source-reading continuity only; no production, infrastructure, or public change.
+  Verification: Four untruncated chunks cover baseline-identical lines 1042–2002 / 43,851 bytes, completing
+    Compiler.pm at 2,002 lines / 84,924 bytes. Existing architecture/Knowledge owners reconcile; a bounded
+    source-level card indexes phase and mode boundaries. No new runtime defect or public change.
+  Commit: `SESSION-STARTUP-READING.3.2.7 - complete compiler pipeline reading` — Thirteen whole Perl files read; source-level phase/mode boundaries indexed.
+- ID: `SESSION-STARTUP-READING.3.2.8`
+  Status: `done`
+  Goal: Read baseline Perl group 6: 600 lines/fragments, 23,171 bytes.
+  Scope: `perl/LinkedSpec/SpecEntry.pm` lines 1–600.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+    Reconcile the older SpecEntry coupling cards against current owners; preserve historical evidence explicitly.
+  Verification tier: `focused`
+  Focused checks: Exact reading chunks and baseline identity; Knowledge owner reconciliation and isolated handoff probes;
+    memory/doctrine/Knowledge/history checks; `git diff --check` and final staged review.
+  Canonical trigger: `none` — source-reading continuity only; no production, infrastructure, or public change.
+  Verification: Three untruncated chunks cover all 600 lines / 23,171 bytes, including EOF; baseline identity
+    passes. Existing owners reconcile and two older coupling cards now explicitly preserve historical scope.
+    Isolated HandlerIR probes confirm unbound AND_BCODE inputs; public descriptor/source control bounds the
+    finding without claiming a result failure. Repair `.10` is owned; focused continuity checks precede landing.
+  Commit: `SESSION-STARTUP-READING.3.2.8 - read SpecEntry and own unbound input repair` — Fourteen whole Perl files read; historical coupling reconciled; explicit repair `.10` owns the private handoff defect.
+- ID: `SESSION-STARTUP-READING.3.2.9`
+  Status: `done`
+  Goal: Read baseline Perl group 7: 1,320 lines/fragments, 43,290 bytes.
+  Scope: `perl/LinkedSpec/Validation.pm` lines 1–1320.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+    Normalize the prior coupling card's multiline retrieval fields observed as literal pipes in the derived map;
+    reconcile the open-block card's retired-option reverify command against the current validator boundary.
+  Verification tier: `focused`
+  Focused checks: Exact reading chunks and baseline identity; existing validation/root Knowledge and focused
+    diagnostic reverify; memory/doctrine/Knowledge/history checks; `git diff --check` and final staged review.
+  Canonical trigger: `none` — source-reading continuity and retrieval repair only; no production or public change.
+  Verification: Six untruncated chunks cover baseline-identical lines 1–1320 / 43,290 bytes. Existing
+    envelope/root/open-block/gap owners reconcile. Context, callback, and public Get probes confirm diagnostic
+    source drift; `.11.1`–`.11.3` own bounded repair. Prior retrieval fields and the removed-option command
+    are corrected; focused continuity/Knowledge checks precede landing.
+  Commit: `SESSION-STARTUP-READING.3.2.9 - read validation and own diagnostic repairs` — Validation prefix read; diagnostic repair children and retrieval corrections preserved.
+- ID: `SESSION-STARTUP-READING.3.2.10`
+  Status: `done`
+  Goal: Read baseline Perl group 8: 584 lines/fragments, 18,639 bytes.
+  Scope: `perl/LinkedSpec/Validation.pm` lines 1321–1904.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+    Reconcile the relevant historical edge card with already-admitted bare-edge and gap owners.
+  Verification tier: `focused`
+  Focused checks: Exact suffix chunks/full-file baseline identity; existing edge/slash/diagnostic Knowledge;
+    memory/doctrine/Knowledge/history checks; `git diff --check` and final staged review.
+  Canonical trigger: `none` — source-reading continuity only; no production, infrastructure, or public change.
+  Verification: Three untruncated chunks cover 584 lines / 18,639 bytes, completing baseline-identical
+    Validation.pm at 1,904 lines / 61,929 bytes. Existing edge/slash/gap and diagnostic owners reconcile;
+    the edge card now links admitted owners and clarifies optional blind-return blocks. No new runtime defect.
+  Commit: `SESSION-STARTUP-READING.3.2.10 - complete validation reading` — Fifteen full Perl files read; current edge/capture owners reconciled.
+- ID: `SESSION-STARTUP-READING.3.2.11`
+  Status: `done`
+  Goal: Read baseline Perl group 9: 987 lines/fragments, 31,462 bytes.
+  Scope: `perl/LinkedSpec/RuleIR.pm` lines 1–987.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+  Verification tier: `focused`
+  Focused checks: Exact reading chunks/baseline identity; current rule-local/root/slot/trace Knowledge and direct/public ordering probes;
+    memory/doctrine/Knowledge/history checks; `git diff --check` and final staged review.
+  Canonical trigger: `none` — source-reading continuity only; no production, infrastructure, or public change.
+  Verification: Five untruncated chunks cover all 987 lines / 31,462 bytes; baseline identity passes.
+    Existing collection/normalization/planning owners reconcile. Public OR/AND and spelling controls plus
+    direct collect/normalize probes confirm bare/explicit execution-order drift; repair `.12` is owned.
+    Focused continuity/Knowledge checks precede landing; no runtime source change.
+  Commit: `SESSION-STARTUP-READING.3.2.11 - read RuleIR and own edge-order repair` — Sixteen full Perl files read; native/public order defect and repair `.12` preserved.
+- ID: `SESSION-STARTUP-READING.3.2.12`
+  Status: `done`
+  Goal: Read baseline Perl group 10: 1,489 lines/fragments, 49,396 bytes.
+  Scope: `perl/LinkedSpec/RuleIR/EmitContext.pm` lines 1–1489.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+    Reconcile the owner-registry card's stated cardinality and keys with the current explicit registry.
+  Verification tier: `focused`
+  Focused checks: Exact reading chunks/baseline identity; existing EmitContext/ActionIR owner and trace Knowledge;
+    exact registry-key extraction; memory/doctrine/Knowledge/history checks; `git diff --check` and final staged review.
+  Canonical trigger: `none` — source-reading continuity only; no production, infrastructure, or public change.
+  Verification: Seven untruncated ranges cover lines 1–1489 / 49,396 bytes; baseline identity passes.
+    Existing owner/trace contracts reconcile; exact registry extraction confirms fourteen keys, thirteen
+    ActionIR owners plus Trace, correcting two existing cards. Focused continuity checks precede landing.
+  Commit: `SESSION-STARTUP-READING.3.2.12 - read EmitContext bridge and reconcile registry` — EmitContext prefix read; owner cardinality and retrieval corrected; suffix remains unread.
+- ID: `SESSION-STARTUP-READING.3.2.13`
+  Status: `done`
+  Goal: Read baseline Perl group 11: 1,094 lines/fragments, 46,079 bytes.
+  Scope: `perl/LinkedSpec/RuleIR/EmitContext.pm` lines 1490–2583.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+    Probe repeated blind-target attached-code identity through public Get/descriptor/source controls before classification.
+  Verification tier: `focused`
+  Focused checks: Exact suffix reading/full-file baseline identity; existing EmitContext/type-memory/working-variable Knowledge;
+    public repeated-target controls and source/owner probes; memory/doctrine/Knowledge/history checks; `git diff --check` and final staged review.
+  Canonical trigger: `none` — source-reading continuity only; no production, infrastructure, or public change.
+  Verification: Six untruncated ranges complete 1490–2583 / 46,079 bytes; full-file baseline identity passes.
+    Public AND/OR controls, descriptor/source capture, and direct rewrite prove repeated blind targets lose
+    attached-code identity. Repair `.13` and Knowledge preserve the causal evidence; focused checks precede landing.
+  Commit: `SESSION-STARTUP-READING.3.2.13 - complete EmitContext reading and own blind-edge repair` — Seventeen full Perl files read; blind occurrence-identity defect and repair `.13` preserved.
+- ID: `SESSION-STARTUP-READING.3.2.14`
+  Status: `done`
+  Goal: Read baseline Perl group 12: 1,403 lines/fragments, 53,304 bytes.
+  Scope: `perl/LinkedSpec/HandlerVariantEmitter.pm` lines 1–1403.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+    Reconcile the dated HandlerIR card and probe literal preservation in per-regex I-block return rewriting.
+  Verification tier: `focused`
+  Focused checks: Exact prefix reading/full-file baseline identity; existing HandlerIR/emitter/trace/slot Knowledge;
+    direct builder/emitter, public literal/package-state controls, and historical return reverify; memory/doctrine/Knowledge/history checks; `git diff --check` and final staged review.
+  Canonical trigger: `none` — source-reading continuity only; no production, infrastructure, or public change.
+  Verification: Seven untruncated ranges cover 1–1403 / 53,304 bytes; full-file baseline identity passes.
+    Builder/dispatch probes reconcile HandlerIR; indexed return control remains fixed. Public/source/seed
+    controls prove per-regex I-block literal and state corruption; `.14.1`/`.14.2` own repair. Focused checks precede landing.
+  Commit: `SESSION-STARTUP-READING.3.2.14 - read emitter prefix and own I-block repairs` — Emitter prefix read; literal/scope defects and `.14` repair children preserved; historical contracts reconciled.
+- ID: `SESSION-STARTUP-READING.3.2.15`
+  Status: `done`
+  Goal: Read baseline Perl group 13: 736 lines/fragments, 24,430 bytes.
+  Scope: `perl/LinkedSpec/HandlerVariantEmitter.pm` lines 1404–1920; `perl/LinkedRE.pm` lines 1–148; `perl/LinkedSpec/ActionIR/AST.pm` lines 1–71.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+    Reconcile the remaining repetition return rewrite with the owned literal-preservation repair before classification.
+  Verification tier: `focused`
+  Focused checks: Exact scoped reading/baseline identity; existing emitter/repetition/LinkedRE/AST Knowledge and relevant return controls;
+    bounded REP literal/source/package controls and JSON projection; memory/doctrine/Knowledge/history checks; `git diff --check` and final staged review.
+  Canonical trigger: `none` — source-reading continuity only; no production, infrastructure, or public change.
+  Verification: Three emitter suffix ranges plus complete LinkedRE/AST cover 736 lines / 24,430 bytes; baseline identity passes.
+    Native bounded REP controls confirm literal corruption and package writes; `.14.1`/`.14.2` extend to this
+    same causal family. JSON subset projection and existing slot/AST owners reconcile; focused checks precede landing.
+  Commit: `SESSION-STARTUP-READING.3.2.15 - finish emitter adapters and extend return repairs` — Twenty full Perl files read; existing return/scope repairs extend to repetition; diagnostic projection bounded.
+- ID: `SESSION-STARTUP-READING.3.2.16`
+  Status: `done`
+  Goal: Read baseline Perl group 14: 1,498 lines/fragments, 47,935 bytes.
+  Scope: `perl/LinkedSpec/ActionIR/AST/Parser.pm` lines 1–1498.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+  Verification tier: `focused`
+  Focused checks: Exact scoped reading and baseline identity; existing AST/parser Knowledge reconciliation;
+    ASCII/Unicode AST and public Get controls; `t/actionir_ast_parser.t` and `t/punctuation_light_zero_arg_contract.t`;
+    memory/doctrine/Knowledge/history checks and final staged review.
+  Canonical trigger: `none` — bounded source-reading continuity; no production or public change.
+  Verification: Seven untruncated ranges cover 1,498 lines / 47,935 bytes; full-file baseline identity passes.
+    Seven ASCII and two Unicode AST controls isolate nested offset loss; public Get preserves the typed
+    diagnostic in last_error.detail. Two focused suites pass 30 top-level tests; repair `.15` owns the gap.
+  Commit: `SESSION-STARTUP-READING.3.2.16 - read AST parser and own nested span repair` — Parser prefix read; nested-offset repair `.15` owns three recursive handoffs and adjacent controls.
+- ID: `SESSION-STARTUP-READING.3.2.17`
+  Status: `done`
+  Goal: Read baseline Perl group 15: 1,195 lines/fragments, 47,612 bytes.
+  Scope: `perl/LinkedSpec/ActionIR/AST/Parser.pm` lines 1499–1686; `perl/LinkedSpec/ActionIR/ArrayPipeline.pm` lines 1–491; `perl/LinkedSpec/ActionIR/CanonicalEvents.pm` lines 1–297; `perl/LinkedSpec/ActionIR/CanonicalEvents/Core.pm` lines 1–219.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+  Verification tier: `focused`
+  Focused checks: Exact scoped reading and baseline identity; existing AST, pipeline, and canonical-event
+    Knowledge reconciliation; memory/doctrine/Knowledge/history checks and final staged review.
+  Canonical trigger: `none` — bounded source-reading continuity; no production or public change.
+  Verification: Parser suffix and three complete adapters cover 1,195 lines / 47,612 bytes; all four full-file
+    baseline identities pass. Existing AST, binding, mutation, and trace/event Knowledge reconciles; no new
+    behavior or defect claim. Twenty-four whole Perl files are read; focused checks precede landing.
+  Commit: `SESSION-STARTUP-READING.3.2.17 - finish AST parser and read pipeline adapters` — Twenty-four whole Perl files read; existing pipeline/event owners indexed; Contracts prefix follows.
+- ID: `SESSION-STARTUP-READING.3.2.18`
+  Status: `done`
+  Goal: Read baseline Perl group 16: 1,396 lines/fragments, 65,503 bytes.
+  Scope: `perl/LinkedSpec/ActionIR/Contracts.pm` lines 1–1396.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+  Verification tier: `focused`
+  Focused checks: Exact prefix reading and baseline identity; existing lowering, binding, transaction, and
+    typed-source Knowledge reconciliation; direct catalog count/detachment probe; memory/doctrine/Knowledge/history checks and final staged review.
+  Canonical trigger: `none` — bounded source-reading continuity; no production or public change.
+  Verification: Seven untruncated prefix ranges cover 1,396 lines / 65,503 bytes; full-file baseline identity
+    passes. Catalog recheck gives 47/30/11/4 detached rows, total 92. Existing ownership and historical status
+    reconcile; no new runtime/admission claim. Focused checks precede landing.
+  Commit: `SESSION-STARTUP-READING.3.2.18 - read contract prefix and reconcile projection status` — Contracts prefix read; 92-row detached catalog rechecked; stale-current card wording bounded.
+- ID: `SESSION-STARTUP-READING.3.2.19`
+  Status: `done`
+  Goal: Read baseline Perl group 17: 1,117 lines/fragments, 48,433 bytes.
+  Scope: `perl/LinkedSpec/ActionIR/Contracts.pm` lines 1397–2513.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+  Verification tier: `focused`
+  Focused checks: Exact suffix reading and baseline identity; existing lowering Knowledge reconciliation;
+    ordered contract-builder source extraction; memory/doctrine/Knowledge/history checks and staged review.
+  Canonical trigger: `none` — source-reading continuity only; no production or public change.
+  Verification: Six untruncated suffix ranges cover 1,117 lines / 48,433 bytes and complete Contracts.pm;
+    full-file baseline identity passes. Exact source extraction confirms fourteen ordered builder groups.
+    Existing Knowledge owns the bounded structural fact; focused continuity checks precede landing.
+  Commit: `SESSION-STARTUP-READING.3.2.19 - finish contract catalog reading` — Contracts fully read; ordered builder fact indexed; twenty-five Perl files complete.
+- ID: `SESSION-STARTUP-READING.3.2.20`
+  Status: `done`
+  Goal: Read baseline Perl group 18: 1,485 lines/fragments, 56,984 bytes.
+  Scope: `perl/LinkedSpec/ActionIR/ControlFlow.pm` lines 1–1485.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+  Verification tier: `focused`
+  Focused checks: Exact prefix reading and baseline identity; control AST/trace Knowledge reconciliation;
+    managed branch-context isolation probe and compact-lowerer trace suite; memory/doctrine/Knowledge/history
+    checks and final staged review.
+  Canonical trigger: `none` — source-reading continuity only; no production or public change.
+  Verification: Seven untruncated prefix ranges cover 1,485 lines / 56,984 bytes; full-file baseline identity
+    passes. Controlled candidate-context rejection/acceptance passes, and compact-lowerer trace passes four
+    top-level tests. Existing AST/trace/caveat owners reconcile; focused continuity checks precede landing.
+  Commit: `SESSION-STARTUP-READING.3.2.20 - read control flow prefix and verify candidate isolation` — ControlFlow prefix read; bounded candidate-state isolation verified; existing caveat owners retained.
+- ID: `SESSION-STARTUP-READING.3.2.21`
+  Status: `done`
+  Goal: Read baseline Perl group 19: 1,439 lines/fragments, 59,142 bytes.
+  Scope: `perl/LinkedSpec/ActionIR/ControlFlow.pm` lines 1486–1796; `perl/LinkedSpec/ActionIR/DeclareMethod.pm` lines 1–328; `perl/LinkedSpec/ActionIR/Diagnostics.pm` lines 1–269; `perl/LinkedSpec/ActionIR/FlowExpr.pm` lines 1–531.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+    Perform the required engineering-notes rollover and admit only the exact finite history capacity it needs,
+    with indexed ADR evidence; preserve every immutable byte and current-view/aggregate ceiling.
+  Verification tier: `canonical`
+  Focused checks: Exact four-file reading/identity; existing diagnostics/flow/declaration Knowledge;
+    focused diagnostic/flow controls; required rollover and independent clean-source byte/hash proof;
+    memory/Knowledge/history/routing checks, final staged review, and exact staged canonical receipt.
+  Canonical trigger: `infrastructure` — required finite engineering-notes history capacity in the route registry.
+  Verification: Nine exact ranges cover 1,439 lines / 59,142 bytes; four full-file identities pass.
+    Pipeline trace passes five top-level tests. Public/generated/host-seed controls prove emptiness defects,
+    owned by `.16.1`/`.16.2`. Exact required rollover and ADR 0103 admit one member/manifest record;
+    the first canonical attempt encounters denied nested sandbox initialization. A no-op control isolates the
+    restriction, and permitted execution passes the unchanged full process-locality oracle. Knowledge preserves
+    this prerequisite; rerun full canonical CI for the final staged receipt. No production repair or full-reading claim.
+  Commit: `SESSION-STARTUP-READING.3.2.21 - read flow adapters and preserve required history` — Twenty-nine Perl files read; emptiness repairs owned; exact notes rollover and finite capacity recorded.
+- ID: `SESSION-STARTUP-READING.3.2.22`
+  Status: `done`
+  Goal: Read baseline Perl group 20: 298 lines/fragments, 7,800 bytes.
+  Scope: `perl/LinkedSpec/ActionIR/MethodExpr.pm` lines 1–298.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+    Reconcile authored-value versus legacy scope ownership using the forward coverage preserved in `.31`.
+  Verification tier: `focused`
+  Focused checks: Exact full-file reading and baseline identity; existing optional-scope and migration Knowledge;
+    bounded normalizer controls; memory/doctrine/Knowledge/history checks; final diff and staged-scope review.
+  Canonical trigger: `none` — reading continuity only; no runtime, public, or infrastructure change.
+  Verification: Full 298-line / 7,800-byte source reading and baseline identity pass. Bounded controls preserve
+    three authored values in a distinct list, allow explicit legacy/fixed-arity fallback, keep input unchanged,
+    and reject missing minimum arity. Existing Knowledge reconciles; focused continuity checks precede landing.
+  Commit: `SESSION-STARTUP-READING.3.2.22 - read method expression normalization` — MethodExpr comprehension and scope precedence recorded; next MethodLowering prefix.
+- ID: `SESSION-STARTUP-READING.3.2.23`
+  Status: `done`
+  Goal: Read baseline Perl group 21: 1,495 lines/fragments, 61,967 bytes.
+  Scope: `perl/LinkedSpec/ActionIR/MethodLowering.pm` lines 1–1495.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+    Reconcile the older value-dispatcher record with its completed statement/block migration successors.
+  Verification tier: `focused`
+  Focused checks: Exact prefix/full-file identity and reading; existing AST, block, binding, and trace owners;
+    managed `prove -Iperl t/trace_actionir_method_lowering.t`; memory/doctrine/Knowledge/history and staged review.
+  Canonical trigger: `none` — bounded source-reading and Knowledge continuity only.
+  Verification: Full-file baseline identity and 1–1495 / 61,967-byte prefix coverage pass. Four MethodLowering trace
+    tests pass. Existing AST/block/binding/callable records reconcile; dated later-migration notes are qualified.
+    Focused memory/history/diff review and all required commit hooks precede landing.
+  Commit: `SESSION-STARTUP-READING.3.2.23 - read method lowering prefix and reconcile milestones` — Prefix comprehension and dated AST/binding/callable milestone ownership reconciled; no source/book change.
+- ID: `SESSION-STARTUP-READING.3.2.24`
+  Status: `done`
+  Goal: Read baseline Perl group 22: 883 lines/fragments, 33,969 bytes.
+  Scope: `perl/LinkedSpec/ActionIR/MethodLowering.pm` lines 1496–2378.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+    Reconcile related fixed/variadic signature chronology and retired direct-read/aggregate-selector wording.
+  Verification tier: `focused`
+  Focused checks: Exact range/full-file baseline identity; function signature, binding, statement, and retirement
+    Knowledge; managed `prove -Iperl t/variadic_user_function_contract.t`; memory/doctrine/Knowledge/history and staged review.
+  Canonical trigger: `none` — source-reading and existing Knowledge continuity only.
+  Verification: Full-file baseline identity and exact 883-line / 33,969-byte range pass. The variadic function
+    suite passes 66 tests; a public mixed-path read returns one with no context error. Existing signature and
+    retirement records reconcile; focused memory/history/scope checks and required commit hooks precede landing.
+  Commit: `SESSION-STARTUP-READING.3.2.24 - read function signatures and statement lowering` — Function signatures and guarded statement bridges read; four historical Knowledge records reconciled.
+- ID: `SESSION-STARTUP-READING.3.2.25`
+  Status: `done`
+  Goal: Read baseline Perl group 23: 1,365 lines/fragments, 65,506 bytes.
+  Scope: `perl/LinkedSpec/ActionIR/MethodLowering.pm` lines 2379–3743.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+    Verify caller argument scope against the existing function-execution contract with public engine probes.
+  Verification tier: `focused`
+  Focused checks: Exact range/full-file baseline identity; value/callable/function Knowledge;
+    public Get and generated-source caller-scope controls; memory/Knowledge/history and staged review.
+  Canonical trigger: `none` — source-reading and diagnostic continuity only; repairs remain separately owned.
+  Verification: Exact baseline identity and 1,365-line / 65,506-byte coverage pass. Eight public Get/source/descriptor
+    controls establish caller-local shadowing in scalar, aggregate, and nested calls with passing controls;
+    `.32` owns repair. Memory/history/staged review and required commit hooks precede landing.
+  Commit: `SESSION-STARTUP-READING.3.2.25 - read value calls and own caller shadowing repair` — Value and function-call dispatch read; eight controls root-cause caller-local shadowing and own repair .32.
+- ID: `SESSION-STARTUP-READING.3.2.26`
+  Status: `done`
+  Goal: Read baseline Perl group 24: 1,168 lines/fragments, 58,949 bytes.
+  Scope: `perl/LinkedSpec/ActionIR/MethodLowering.pm` lines 3744–4911.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+  Verification tier: `focused`
+  Focused checks: Exact range/full-file identity; AST fluent/block and hash/array traversal Knowledge;
+    managed AST parser suite and public traversal controls; memory/Knowledge/history and staged review.
+  Canonical trigger: `none` — source-reading and existing Knowledge chronology only.
+  Verification: Exact full-file baseline identity and 1,168-line / 58,949-byte coverage pass. The AST parser suite
+    passes 23 tests; public hash/array/scalar root controls match their documented traversal branches.
+    Three existing Knowledge records reconcile; memory/history/review and required commit hooks precede landing.
+  Commit: `SESSION-STARTUP-READING.3.2.26 - read receiver chains and reconcile tree dispatch` — Block and receiver dispatch read; three traversal records distinguish original milestones from current shared dispatch.
+- ID: `SESSION-STARTUP-READING.3.2.27`
+  Status: `done`
+  Goal: Read baseline Perl group 25: 1,031 lines/fragments, 64,411 bytes.
+  Scope: `perl/LinkedSpec/ActionIR/MethodLowering.pm` lines 4912–5942.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+  Verification tier: `focused`
+  Focused checks: Exact range/full-file identity; existing AST/fallback/retirement and numeric Knowledge;
+    managed scalar numeric suite and public descriptor controls; observed group-setup warning/source and
+    child PID/PGID control; memory/Knowledge/history and staged review.
+  Canonical trigger: `none` — source-reading and existing Knowledge reconciliation only.
+  Verification: Exact baseline identity and 1,031-line / 64,411-byte coverage pass. The scalar numeric suite
+    passes nine top-level tests; four public descriptors distinguish malformed/unknown and registered calls
+    with zero raw dependency. Seven Knowledge records reconcile, including `.7` group-establishment evidence;
+    required focused checks/hooks precede landing.
+  Commit: `SESSION-STARTUP-READING.3.2.27 - read helper fallback and qualify numeric evidence` — Helper fallback and numeric/string/collection prefix read; four AST/numeric Knowledge records qualified.
+- ID: `SESSION-STARTUP-READING.3.2.28`
+  Status: `done`
+  Goal: Read baseline Perl group 26: 1,303 lines/fragments, 64,878 bytes.
+  Scope: `perl/LinkedSpec/ActionIR/MethodLowering.pm` lines 5943–7245.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+  Verification tier: `focused`
+  Focused checks: Exact range/full-file identity; collection/hash/constructor and mutation Knowledge;
+    selected public value controls plus paired Perl Get/source and PUC Lua tagged-record controls;
+    memory/Knowledge/history and staged review.
+  Canonical trigger: `none` — source-reading and Knowledge continuity only.
+  Verification: Exact baseline identity and 1,303-line / 64,878-byte coverage pass. Three public constructor/copy/
+    collection controls pass; two Perl Get and two fresh PUC Lua controls expose tagged-field and split drift.
+    `.33.1`/`.33.2` own review/repair; focused memory/history/scope checks and required hooks precede landing.
+  Commit: `SESSION-STARTUP-READING.3.2.28 - read collection helpers and own tagged-record repair` — Collection and constructor paths read; selector history reconciled and paired tagged-record divergence owned by .33.
+- ID: `SESSION-STARTUP-READING.3.2.29`
+  Status: `done`
+  Goal: Read baseline Perl group 27: 977 lines/fragments, 36,165 bytes.
+  Scope: `perl/LinkedSpec/ActionIR/MethodLowering.pm` lines 7246–8057; `perl/LinkedSpec/ActionIR/ProgressiveSpanDispatch.pm` lines 1–165.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+  Verification tier: `focused`
+  Focused checks: Exact range/full-file identity; receiver normalization and progressive carrier Knowledge;
+    selected managed progressive dispatch proof; memory/Knowledge/history and staged review.
+  Canonical trigger: `none` — source reading and Knowledge continuity only.
+  Verification: Exact full-file baseline identity and 977-line / 36,165-byte coverage pass. Managed Perl progressive
+    carrier consumer passes 129 assertions; neutral progressive proof passes 9/9/116 plus public 6/12/10/60.
+    Three Knowledge records reconcile; focused memory/history/scope checks and required hooks precede landing.
+  Commit: `SESSION-STARTUP-READING.3.2.29 - read lowering suffix and reconcile progressive admission` — MethodLowering suffix and ProgressiveSpanDispatch read; three progressive admission records follow completed private closeout.
+- ID: `SESSION-STARTUP-READING.3.2.30`
+  Status: `done`
+  Goal: Read baseline Perl group 28: 1,173 lines/fragments, 41,839 bytes.
+  Scope: `perl/LinkedSpec/ActionIR/RewritePipeline.pm` lines 1–745; `perl/LinkedSpec/ActionIR/Scanner.pm` lines 1–90; `perl/LinkedSpec/ActionIR/Scanner/FlowRules.pm` lines 1–338.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+  Verification tier: `focused`
+  Focused checks: Exact range/full-file identity; AST migration, scanner registry, and trace Knowledge;
+    managed pipeline trace suite and registry census; memory/Knowledge/history and staged review.
+  Canonical trigger: `none` — source reading and Knowledge continuity only.
+  Verification: Exact full-file baseline identity and 1,173-line / 41,839-byte coverage pass. Managed pipeline
+    trace proof passes five top-level tests; callable registry census confirms seven ordered dispatchers.
+    Four Knowledge records reconcile; focused memory/history/scope checks and required hooks precede landing.
+  Commit: `SESSION-STARTUP-READING.3.2.30 - read rewrite orchestration and reconcile scanner ownership` — RewritePipeline, Scanner, and FlowRules read; scanner registry and AST migration Knowledge reconciled.
+- ID: `SESSION-STARTUP-READING.3.2.31`
+  Status: `done`
+  Goal: Read baseline Perl group 29: 1,433 lines/fragments, 41,163 bytes.
+  Scope: `perl/LinkedSpec/ActionIR/Scanner/LegacyRules.pm` lines 1–1179; `perl/LinkedSpec/ActionIR/Scanner/PrimitiveBasicRules.pm` lines 1–254.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+  Verification tier: `focused`
+  Focused checks: Exact range/full-file identity; legacy/scanner and bare-read Knowledge;
+    public Get value controls and child-push lowering probe; memory/Knowledge/history and staged review.
+  Canonical trigger: `none` — source reading and Knowledge continuity only.
+  Verification: Exact full-file baseline identity and 1,433-line / 41,163-byte coverage pass. Five public Get
+    controls pass, and generated child-push source confirms handler-first dispatch with binding fallback.
+    Three Knowledge records reconcile; focused memory/history/scope checks and required hooks precede landing.
+  Commit: `SESSION-STARTUP-READING.3.2.31 - read legacy scanners and reconcile bare push precedence` — Legacy/basic scanners read; historical scalar-slot and unconditional child-push claims reconciled with uniform binding.
+- ID: `SESSION-STARTUP-READING.3.2.32`
+  Status: `done`
+  Goal: Read baseline Perl group 30: 1,355 lines/fragments, 48,756 bytes.
+  Scope: `perl/LinkedSpec/ActionIR/Scanner/PrimitivePipelineRules.pm` lines 1–571; `perl/LinkedSpec/ActionIR/Scanner/RecognitionTransactionRules.pm` lines 1–124; `perl/LinkedSpec/ActionIR/ScannerCore.pm` lines 1–223; `perl/LinkedSpec/ActionIR/StagedParseJob.pm` lines 1–393; `perl/LinkedSpec/ActionIR/StatementSplit.pm` lines 1–44.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+  Verification tier: `focused`
+  Focused checks: Exact range/full-file identity; staged/recognition and pipeline Knowledge;
+    managed staged Perl consumer, neutral staged/recognition and language checks; memory/Knowledge/history and review.
+  Canonical trigger: `none` — source reading and Knowledge continuity only.
+  Verification: Exact full-file baseline identity and 1,355-line / 48,756-byte coverage pass. Managed staged Perl
+    consumer passes 143 checks; staged 9/9/123/public 6/17/10/129, recognition 138/250/58, and language
+    250/126 proof pass. Two Knowledge records reconcile; required focused continuity checks precede landing.
+  Commit: `SESSION-STARTUP-READING.3.2.32 - read staged scanners and reconcile authoring boundaries` — Pipeline, recognition, staged marker, and splitting owners read; two Knowledge records follow current public/neutral boundaries.
+- ID: `SESSION-STARTUP-READING.3.2.33`
+  Status: `done`
+  Goal: Read baseline Perl group 31: 1,423 lines/fragments, 47,678 bytes.
+  Scope: `perl/LinkedSpec/ActionIR/StatementSplit/Core.pm` lines 1–419; `perl/LinkedSpec/ActionIR/StatementSplit/Mode.pm` lines 1–214; `perl/LinkedSpec/ActionIR/Trace.pm` lines 1–124; `perl/LinkedSpec/ActionIR/ValueExpr.pm` lines 1–666.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+  Verification tier: `focused`
+  Focused checks: Exact range/full-file identity; separator/trace/value-access Knowledge;
+    public splitter and parser controls, focused compact trace suite; memory/Knowledge/history and review.
+  Canonical trigger: `none` — source reading and Knowledge continuity only.
+  Verification: Exact full-file baseline identity and 1,423-line / 47,678-byte coverage pass; four compact trace tests pass.
+    Twelve distinct public comment/newline combinations isolate LF/CRLF terminator loss and CR comment loss;
+    three inline cases repeat with dumped source confirmation. Repairs `.34.1`/`.34.2` own failures;
+    one new and three qualified Knowledge records preserve evidence. Required focused gates precede landing.
+  Commit: `SESSION-STARTUP-READING.3.2.33 - read separator and value owners and track comment failures` — Splitter/trace/value owners read; comment failures rooted and repair-owned, universal coverage claims qualified.
+- ID: `SESSION-STARTUP-READING.3.2.34`
+  Status: `done`
+  Goal: Read baseline Perl group 32: 1,264 lines/fragments, 39,889 bytes.
+  Scope: `perl/LinkedSpec/BindingRuntime.pm` lines 1–422; `perl/LinkedSpec/CallableContract.pm` lines 1–135; `perl/LinkedSpec/CodeblockRuntime.pm` lines 1–403; `perl/LinkedSpec/InterMatchGapRuntime.pm` lines 1–291; `perl/LinkedSpec/MCPContract.pm` lines 1–12; `perl/LinkedSpec/MCPContract.pm` lines 13–13.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+  Verification tier: `focused`
+  Focused checks: Exact baseline ranges; binding/callable/codeblock/gap Knowledge; managed callable
+    and gap contracts, neutral gap proof; memory/Knowledge/history and diff review.
+  Canonical trigger: `none` — source reading and Knowledge continuity only.
+  Verification: Exact baseline identity and 1,264-line / 39,889-byte coverage pass. Managed callable/gap suites
+    pass 134 top-level tests; neutral gap passes 9/0/63 plus public 8/15/10/34. Six public controls and
+    emitted-record decoding root boolean-literal kind loss in CodeblockRuntime; `.35` owns repair.
+    One new and three qualified Knowledge records preserve evidence; required focused gates precede landing.
+  Commit: `SESSION-STARTUP-READING.3.2.34 - read runtime owners and track codeblock boolean drift` — Runtime owners read; dynamic boolean result drift repair-owned and historical gap admission prose qualified.
+- ID: `SESSION-STARTUP-READING.3.2.35`
+  Status: `done`
+  Goal: Read baseline Perl group 33: 1 lines/fragments, 32,768 bytes.
+  Scope: `perl/LinkedSpec/MCPContract.pm` bytes 391–33158.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+  Verification tier: `focused`
+  Focused checks: Exact embedded-data byte range and baseline identity; MCP generated-binding and
+    admission Knowledge; managed binding freshness/test and admission checker; focused continuity review.
+  Canonical trigger: `none` — source reading and Knowledge continuity only.
+  Verification: Exact full-file baseline identity and bytes 391–33158 (32,768 bytes) pass. Managed generator
+    reports the 83,411-byte Perl binding fresh; five binding tests, six artifact frame controls, and
+    admission 5/5 implementations / 6/6 runtimes / complete / 141 mutations pass. One Knowledge record
+    reconciles historical topology and response layers; required focused continuity checks precede landing.
+  Commit: `SESSION-STARTUP-READING.3.2.35 - read MCP frame data and reconcile current admission` — MCP frame/schema prefix read; generated binding fresh, response examples and current admission qualified.
+- ID: `SESSION-STARTUP-READING.3.2.36`
+  Status: `done`
+  Goal: Read baseline Perl group 34: 1 lines/fragments, 32,768 bytes.
+  Scope: `perl/LinkedSpec/MCPContract.pm` bytes 33159–65926.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+  Verification tier: `focused`
+  Focused checks: Exact embedded-data range/baseline identity; MCP contract and repaired-boundary
+    Knowledge; managed materializer/independent validator and artifact controls; focused continuity review.
+  Canonical trigger: `none` — source reading and Knowledge continuity only.
+  Verification: Exact full-file baseline identity and bytes 33159–65926 (32,768 bytes) pass. Embedded contract,
+    schema, and corpus equal their neutral owners; 72 fact keys, bounded query-contract strings, and
+    explicit-component-only policy controls pass. Managed materializer then independent validator pass
+    35/10/10/76. Two Knowledge records reconcile; `.5` owns ADR policy clarification; focused gates precede landing.
+  Commit: `SESSION-STARTUP-READING.3.2.36 - read MCP contract policy and reconcile historical claims` — MCP policy/corpus/schema fragment read; exact neutral identity and already-repaired component policy documented.
+- ID: `SESSION-STARTUP-READING.3.2.37`
+  Status: `done`
+  Goal: Read baseline Perl group 35: 1 lines/fragments, 17,347 bytes.
+  Scope: `perl/LinkedSpec/MCPContract.pm` bytes 65927–83273.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+  Verification tier: `focused`
+  Focused checks: Exact embedded-data suffix/baseline identity; MCP payload and binding Knowledge;
+    neutral payload equality, canonical bundle digest, and byte-fresh binding proof; focused continuity.
+  Canonical trigger: `none` — source reading and Knowledge continuity only.
+  Verification: Exact baseline identity and bytes 65927–83273 (17,347 bytes) pass. Embedded canonical JSON
+    matches its header digest and neutral payload collection; all four response and seven source-artifact
+    hashes match. The complete 83,411-byte binding is byte-fresh. One Knowledge record indexes bounded
+    payload/digest ownership; required focused continuity checks precede landing.
+  Commit: `SESSION-STARTUP-READING.3.2.37 - read MCP payload suffix and verify embedded digests` — MCP embedded JSON completed; four payload and seven source digests verified without runtime or protocol changes.
+- ID: `SESSION-STARTUP-READING.3.2.38`
+  Status: `done`
+  Goal: Read baseline Perl group 36: 1,484 lines/fragments, 51,303 bytes.
+  Scope: `perl/LinkedSpec/MCPContract.pm` lines 15–21; `perl/LinkedSpec/MCPContractRuntime.pm` lines 1–300; `perl/LinkedSpec/MCPServer.pm` lines 1–648; `perl/LinkedSpec/MCPWire.pm` lines 1–419; `perl/LinkedSpec/Numeric.pm` lines 1–110.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+  Verification tier: `focused`
+  Focused checks: Exact baseline ranges; MCP runtime/wire and numeric Knowledge; managed Perl MCP
+    dispatch/stdio/admission and scalar-numeric proof; focused continuity and diff review.
+  Canonical trigger: `none` — source reading and Knowledge continuity only.
+  Verification: Exact baseline identity and 1,484-line / 51,303-byte coverage pass. Managed MCP dispatch/
+    stdio/admission suites pass 31 top-level tests; Perl numeric passes nine and neutral numeric 55/18.
+    Six competing-error cases agree through decoded/stdio routes and expose ADR ordering drift, owned by
+    `.36.1`–`.36.3`. One new and three updated Knowledge records preserve evidence; focused gates precede landing.
+  Commit: `SESSION-STARTUP-READING.3.2.38 - read MCP runtime and track validation order drift` — MCP/numeric owners read; validation-order discrepancy repair-owned and projection-field wording corrected.
+- ID: `SESSION-STARTUP-READING.3.2.39`
+  Status: `done`
+  Goal: Read baseline Perl group 37: 1,496 lines/fragments, 52,208 bytes.
+  Scope: `perl/LinkedSpec/PluginBridge.pm` lines 1–199; `perl/LinkedSpec/PluginRegistry.pm` lines 1–130; `perl/LinkedSpec/ProgressiveSpanDispatch.pm` lines 1–937; `perl/LinkedSpec/ProgressiveSpanDispatchPolicy.pm` lines 1–58; `perl/LinkedSpec/ProgressiveSpanDispatchRuntime.pm` lines 1–172.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+  Verification tier: `focused`
+  Focused checks: Exact baseline ranges; plugin and progressive Knowledge; managed progressive authority/
+    carrier tests and neutral contract; focused plugin boundary controls; continuity and diff review.
+  Canonical trigger: `none` — source reading and Knowledge continuity only.
+  Verification: Exact baseline identity and 1,496-line / 52,208-byte coverage pass. Managed progressive authority/
+    carrier suites pass 138 tests; neutral proof is 9/9/116 plus public 6/12/10/60. Public plugin controls
+    preserve registration/dispatch/lookup/replacement/clear/error-state and avoid legacy loading. Six progressive
+    ceiling controls root resource/diagnostic gaps under `.37`; one new/four updated Knowledge records preserve
+    evidence. Focused continuity gates precede landing.
+  Commit: `SESSION-STARTUP-READING.3.2.39 - read progressive authority and own ceiling enforcement gaps` — Plugin and progressive owners read; measured ceiling enforcement gaps repair-owned with exact controls.
+- ID: `SESSION-STARTUP-READING.3.2.40`
+  Status: `done`
+  Goal: Read baseline Perl group 38: 924 lines/fragments, 33,632 bytes.
+  Scope: `perl/LinkedSpec/RecognitionTransaction.pm` lines 1–655; `perl/LinkedSpec/RecognitionTransactionPolicy.pm` lines 1–269.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+  Verification tier: `focused`
+  Focused checks: Exact baseline ranges; recognition authority/integration and known lexical defect Knowledge;
+    managed authority/carrier and neutral proof; terminal-state controls; continuity and diff review.
+  Canonical trigger: `none` — source reading and Knowledge continuity only.
+  Verification: Exact baseline identity and 924-line / 33,632-byte coverage pass. Managed recognition authority/
+    carrier suites pass 59 top-level tests; neutral proof passes 138/250/58 at 9/9 with public and admission
+    guards. Six post-terminal private controls root obsolete snapshot restoration under `.38`; one new/three
+    updated Knowledge records preserve the finite proof boundary. Known lexical defects remain `.21`-owned.
+    Focused continuity gates precede landing.
+  Commit: `SESSION-STARTUP-READING.3.2.40 - read recognition core and own post-terminal restoration defect` — Recognition core/static owners read; post-terminal cross-owner snapshot restoration repair-owned.
+- ID: `SESSION-STARTUP-READING.3.2.41`
+  Status: `done`
+  Goal: Read baseline Perl group 39: 1,269 lines/fragments, 39,210 bytes.
+  Scope: `perl/LinkedSpec/RecognitionTransactionRuntime.pm` lines 1–681; `perl/LinkedSpec/RecursiveObservationPolicy.pm` lines 1–71; `perl/LinkedSpec/RuntimeDiagnosticOutput.pm` lines 1–247; `perl/LinkedSpec/RuntimeLogical.pm` lines 1–96; `perl/LinkedSpec/RuntimeSemanticObservation.pm` lines 1–174.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+    Apply the mandatory change-history rollover at this checkpoint and independently verify exact clean-source
+    suffix bytes, counts, hashes, and prior manifest preservation. Review only the finite member/manifest
+    capacity needed through README_POLICY and a newly indexed exact-limit ADR; retain all other ceilings.
+  Verification tier: `canonical`
+  Focused checks: Exact source baseline; relevant runtime Knowledge and managed tests/neutral proof;
+    complete-record history rollover with independent source/blob/hash proof; memory/history/routing review.
+  Canonical trigger: `infrastructure` — required finite change-history capacity in the route registry.
+  Verification: Exact baseline identity and 1,269-line / 39,210-byte coverage pass. Four managed Perl runtime suites
+    pass 137 tests; typed, semantic, diagnostic, and logical neutral checks pass their current inventories.
+    Eight value and four exit controls root `.39`/`.40` repairs. Required complete-record change-history rollover
+    and independent clean-source/hash/manifest proof accompany the exact finite capacity decision ADR 0104.
+    Receipt-bound canonical verification is required for the final staged infrastructure checkpoint before landing.
+  Commit: `SESSION-STARTUP-READING.3.2.41 - read runtime observers and preserve bounded change history` — Runtime owners read; boolean/unwind repairs owned; exact change-history suffix and finite routing capacity preserved.
+- ID: `SESSION-STARTUP-READING.3.2.42`
+  Status: `done`
+  Goal: Read baseline Perl group 40: 1,148 lines/fragments, 37,003 bytes.
+  Scope: `perl/LinkedSpec/SemanticCallProjection.pm` lines 1–753; `perl/LinkedSpec/SemanticIndex.pm` lines 1–395.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+    Preserve complete forward mdBook coverage and exact current-baseline verification; own confirmed
+    book drift, combined compiler-mode validation, and forward inline-lifecycle findings before Knowledge.
+  Verification tier: `focused`
+  Focused checks: Exact source/book baseline identity; complete forward reading evidence; managed semantic
+    foundation/calls/query tests; neutral semantic/generated-source proof; public input/direct and complete
+    compiler/factory mode controls; Knowledge/memory/doctrines/history pressure and final staged diff review.
+  Canonical trigger: `none` — reading evidence and repair ownership only; no runtime, public-book,
+    policy, contract, or infrastructure change.
+  Verification: Exact source identity and 1,148-line / 37,003-byte scoped reading pass. Three managed semantic
+    suites pass 20 tests; current neutral semantic/generated-source proof is reused from the unchanged
+    preceding canonical inputs. All 50 book files / 1,956,582 bytes are physically read and baseline-identical,
+    with complete nonoverlapping interval/digest proof. Four public/direct input controls, nine public compiler
+    controls, and eight isolated factory controls establish bounded teaching and .42 validator findings.
+    .41 owns eight book-repair lanes. Four forward inline-lifecycle query controls plus two descriptors
+    reproduce .43 source-member loss; no runtime/public-book repair or codebase-wide completion is claimed.
+  Commit: `SESSION-STARTUP-READING.3.2.42 - read semantic projection and preserve complete book coverage` — Semantic call/index comprehension, complete book coverage, and measured book/compiler/inline-semantic repair ownership preserved.
+- ID: `SESSION-STARTUP-READING.3.2.43`
+  Status: `done`
+  Goal: Read baseline Perl group 41: 982 lines/fragments, 35,427 bytes.
+  Scope: `perl/LinkedSpec/SemanticQuery.pm` lines 1–596; `perl/LinkedSpec/SemanticRuntimeProjection.pm` lines 1–214; `perl/LinkedSpec/SemanticSourceMap.pm` lines 1–172.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+  Verification tier: `focused`
+  Focused checks: Exact source/test/neutral baseline identity; prior passing query/runtime/foundation and neutral proof;
+    full owner comprehension and existing Knowledge reconciliation; memory/doctrines/Knowledge, both history
+    pressure checks, exact cleanup evidence, and staged diff review.
+  Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
+    policy, contract, or infrastructure change.
+  Verification: Complete 982-line / 35,427-byte reading and exact baseline identity pass. Prior canonical query (9),
+    runtime-observation (106), and foundation (5) tests plus neutral 6/20/128 at 9/9 rollout and 6/6 admission
+    are retained against unchanged test/source/contract inputs. Four Knowledge owners distinguish dated
+    rollout from current evidence. No runtime change or whole-codebase completion is claimed.
+  Commit: `SESSION-STARTUP-READING.3.2.43 - read semantic queries and source mapping` — Query/source-map and derived-observation owners read; current versus historical evidence reconciled.
+- ID: `SESSION-STARTUP-READING.3.2.44`
+  Status: `done`
+  Goal: Read baseline Perl group 42: 1,067 lines/fragments, 34,029 bytes.
+  Scope: `perl/LinkedSpec/SemanticStaticProjection.pm` lines 1–1067.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+  Verification tier: `focused`
+  Focused checks: Exact source/static-test identity and retained canonical static proof; public Get/semantic failure controls;
+    existing inline-lifecycle evidence and standalone public-checker census; precise Knowledge/repair ownership;
+    memory/Knowledge/doctrines, both history pressure checks, and staged diff review.
+  Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
+    policy, contract, or infrastructure change.
+  Verification: Complete 1,067-line / 34,029-byte source reading and baseline identity pass; the 155-line static test
+    is fully read and unchanged from the preceding five-test canonical PASS. Two exact public Get/query
+    controls distinguish retained diagnostics from fabricated dependency evidence; initial controls expose
+    the same classification gap for other failures. Standalone neutral proof passes 15 public documents /
+    seven denials / fourteen mutations while omitting TOOLBOX. Existing .23/.41.6/.43 retain repair ownership.
+  Commit: `SESSION-STARTUP-READING.3.2.44 - read static semantics and refine failure evidence` — Static projection read; failure claim narrowed to actual decision/explanation defect; omitted Toolbox guidance is repair-owned.
+- ID: `SESSION-STARTUP-READING.3.2.45`
+  Status: `done`
+  Goal: Read baseline Perl group 43: 700 lines/fragments, 21,209 bytes.
+  Scope: `perl/LinkedSpec/SourceLocation.pm` lines 1–700.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+    Keep the existing near-capacity Knowledge home bounded; route scoped compatibility detail to a
+    focused linked card before edits. Preserve existing limits and record the rejected oversized candidate.
+  Verification tier: `focused`
+  Focused checks: Exact source/test/neutral baseline identity; retained typed-value/projection/recursive tests and neutral
+    proof; full owner reading and relevant Knowledge reconciliation; memory/Knowledge/doctrines, both history
+    pressure checks, and staged diff review.
+  Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
+    policy, contract, or infrastructure change.
+  Verification: Complete 700-line / 21,209-byte source reading and exact baseline identity pass. Prior canonical
+    value/projection/recursive suites pass 18 tests across three files; typed neutral proof is 14/0/231.
+    Current source/test/checker/contract inputs remain unchanged. Existing Knowledge preserves authority,
+    detached values, and compatibility boundaries in bounded linked cards; no new runtime or public contract is claimed.
+  Commit: `SESSION-STARTUP-READING.3.2.45 - read typed source-location authority` — Complete typed source-location owner reading and scoped existing Knowledge reconciliation.
+- ID: `SESSION-STARTUP-READING.3.2.46`
+  Status: `done`
+  Goal: Read baseline Perl group 44: 1,498 lines/fragments, 49,952 bytes.
+  Scope: `perl/LinkedSpec/StagedASTEnrichment.pm` lines 1–1498.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+  Verification tier: `focused`
+  Focused checks: Exact bounded source and retained staged-consumer/neutral proof identities; Knowledge/contract
+    reconciliation and controlled recursive-marker lifetime probes; memory/Knowledge/doctrines, both history
+    pressure checks, and staged diff review.
+  Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
+    policy, contract, or infrastructure change.
+  Verification: Complete first-fragment reading and exact baseline identity pass: 1,498 lines / 49,952 bytes.
+    Retained unchanged Perl staged proof is 143 tests; neutral/public proof is 9/9/123 and 6/17/10/129.
+    All 24 native ordinary/weak/pool trials complete 24 calls without address reuse. The isolated recycling
+    substitute stops two unretained trials at three calls; two retained controls finish 24. .44 owns this
+    latent identity assumption; no native allocator failure or installed runtime repair is claimed.
+  Commit: `SESSION-STARTUP-READING.3.2.46 - read staged authority and own marker identity risk` — Staged authority read; native lifetime proof and isolated retired-identity counterexample preserved under .44.
+- ID: `SESSION-STARTUP-READING.3.2.47`
+  Status: `done`
+  Goal: Read baseline Perl group 45: 1,374 lines/fragments, 43,289 bytes.
+  Scope: `perl/LinkedSpec/StagedASTEnrichment.pm` lines 1499–2013; `perl/LinkedSpec/StagedASTEnrichmentRuntime.pm` lines 1–120; `perl/LinkedSpec/StagedParseJob.pm` lines 1–352; `perl/LinkedSpec/StagedParseJobPolicy.pm` lines 1–59; `perl/LinkedSpec/StagedParserRegistry.pm` lines 1–328.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+  Verification tier: `focused`
+  Focused checks: Complete owned staged suffix/runtime/job/policy/registry reading; exact baseline and unchanged consumer/checker/contract identity; reconcile canonical Knowledge owners and existing .44 risk; memory, history, derived Knowledge and fast commit doctrines.
+  Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
+    policy, contract, or infrastructure change.
+  Verification: All five owned ranges read completely: 1,374 lines / 43,289 bytes; exact baseline identity passes.
+    Source, Perl consumers, neutral checker and contract remain identical to the consumed canonical proof:
+    Perl 143, neutral 9/9/123 and public 6/17/10/129. Knowledge distinguishes legacy cache-key metadata
+    from the general scheduler and records fresh invocation/private marker ownership; .44 remains pending.
+  Commit: `SESSION-STARTUP-READING.3.2.47 - read staged runtime and legacy registry boundaries` — Staged suffix/runtime/marker/policy/legacy registry read; exact unchanged proof and v1/v2 separation preserved.
+- ID: `SESSION-STARTUP-READING.3.2.48`
+  Status: `done`
+  Goal: Read baseline Perl group 46: 521 lines/fragments, 16,259 bytes.
+  Scope: `perl/LinkedSpec/Trace.pm` lines 1–521.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+  Verification tier: `focused`
+  Focused checks: Full Trace reading and exact baseline identity; direct/OwnerDispatch string-and-object lazy-detail controls; retained unchanged trace/CLI proof; reconcile .24 repair and trace Knowledge; memory, history and fast doctrine checks.
+  Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
+    policy, contract, or infrastructure change.
+  Verification: Full 521-line / 16,259-byte Trace reading and exact baseline identity pass. Twenty direct/wrapped
+    string/object controls isolate .24: direct quiet/plain preserve state, direct lazy cases overwrite it,
+    all OwnerDispatch cases preserve it. Three generated trace suites pass 11 tests in 23 seconds.
+    Existing CLI bytes/proof remain unchanged; four Knowledge owners and focused continuity reconcile.
+  Commit: `SESSION-STARTUP-READING.3.2.48 - read Trace and qualify lazy exception-state evidence` — Trace read; 20 diagnostic controls and 11 passing tests qualify .24 without claiming repair.
+- ID: `SESSION-STARTUP-READING.3.2.49`
+  Status: `done`
+  Goal: Read baseline Perl group 47: 1,500 lines/fragments, 32,073 bytes.
+  Scope: `perl/LinkedSpec/UnicodeCaseMapping.pm` lines 1–1500.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+  Verification tier: `focused`
+  Focused checks: Reconcile complete .31-owned first 1,500 Unicode table lines with exact baseline; read canonical data/checker/consumer authority; managed offline Unicode regeneration and Perl casing consumer; Knowledge/live continuity, memory and fast doctrines.
+  Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
+    policy, contract, or infrastructure change.
+  Verification: Complete prior .31 physical reading reconciled for 1,500 lines / 32,073 bytes; exact baseline
+    fragment identity passes. Current offline checker regenerates all five modules and neutral JSON:
+    1,563/1,581 mappings, 158/464 property ranges, 12 fixtures. Managed Perl consumer passes 52 tests
+    in 13 seconds. No duplicate reading credit, generated edits, or other-backend execution claim.
+  Commit: `SESSION-STARTUP-READING.3.2.49 - reconcile first generated Unicode case range` — First Unicode range reconciled; five-module regeneration and 52 Perl tests preserve pinned authority.
+- ID: `SESSION-STARTUP-READING.3.2.50`
+  Status: `done`
+  Goal: Read baseline Perl group 48: 1,500 lines/fragments, 32,854 bytes.
+  Scope: `perl/LinkedSpec/UnicodeCaseMapping.pm` lines 1501–3000.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+  Verification tier: `focused`
+  Focused checks: Reconcile .31's complete 1,500-line Unicode middle-range reading and current exact baseline; retain just-consumed unchanged five-module regeneration and Perl52 proof; canonical Knowledge and reading-status consistency; memory/history/fast doctrines.
+  Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
+    policy, contract, or infrastructure change.
+  Verification: Complete .31-owned reading of 1,500 lines / 32,854 bytes reconciled; exact baseline fragment
+    SHA-256 and unchanged table/generator/contract/checker/consumer identity pass. Retain .3.2.49's
+    five-module regeneration, 12 neutral fixtures and 52 Perl tests without rerunning unchanged suites.
+    Inventory Knowledge now separates completed physical mdBook reading from pending formal alignment.
+  Commit: `SESSION-STARTUP-READING.3.2.50 - reconcile middle Unicode table range and reading status` — Unicode lower/upper table transition reconciled; current reading status and retained proof preserved.
+- ID: `SESSION-STARTUP-READING.3.2.51`
+  Status: `done`
+  Goal: Read baseline Perl group 49: 835 lines/fragments, 17,404 bytes.
+  Scope: `perl/LinkedSpec/UnicodeCaseMapping.pm` lines 3001–3835.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+  Verification tier: `focused`
+  Focused checks: Reconcile complete .31 final Unicode range and exact baseline; contextual-property/evaluator and all 12 fixture semantics; retain unchanged regeneration/Perl52 proof; reading-capacity census and Knowledge; memory/history/fast doctrines.
+  Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
+    policy, contract, or infrastructure change.
+  Verification: Complete .31-owned final 835 lines / 17,404 bytes reconciled with exact baseline identity.
+    All 12 fixture records match the understood evaluator, including six sigma-context controls.
+    Table/generator/contract/checker/consumer bytes remain unchanged from .3.2.49's regeneration/Perl52
+    proof. All three case-table checkpoints cover 3,835 lines / 82,331 bytes; codebase remains No.
+  Commit: `SESSION-STARTUP-READING.3.2.51 - reconcile Unicode evaluator and contextual casing` — Final case-table range reconciled; contextual evaluator, retained proof and native-planning pressure recorded.
+- ID: `SESSION-STARTUP-READING.3.2.52`
+  Status: `done`
+  Goal: Read baseline Perl group 50: 855 lines/fragments, 17,340 bytes.
+  Scope: `perl/LinkedSpec/UnicodeXIDContinue.pm` lines 1–855.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+  Verification tier: `focused`
+  Focused checks: Reconcile complete .31 XID table reading with exact baseline; ADR0051 and direct named-slot consumers; managed Unicode rule-label regeneration and direct classifier fixture/range controls; retain prior gap/CLI proof; Knowledge, memory/history and fast doctrines.
+  Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
+    policy, contract, or infrastructure change.
+  Verification: Complete .31-owned 855 lines / 17,340 bytes reconciled; exact baseline identity passes.
+    Current Unicode regeneration: 806 ranges, 9 positive/8 negative fixtures, 2 distinct pairs.
+    Direct Perl classifier: 3,224 endpoint/gap checks, 17 fixtures, 2 identity pairs PASS without warnings.
+    Current gap neutral/public proof is 9/0/63 and 8/15/10/34; prior unchanged Perl124 is retained.
+  Commit: `SESSION-STARTUP-READING.3.2.52 - reconcile XID classifier and current named-slot admission` — XID range and direct classifier proof recorded; stale gap Knowledge admission corrected without runtime movement.
+- ID: `SESSION-STARTUP-READING.3.2.53`
+  Status: `done`
+  Goal: Read baseline Perl group 51: 1,202 lines/fragments, 45,829 bytes.
+  Scope: `perl/LinkedSpec/UserFunctionRegistry.pm` lines 1–773; `perl/PPlugin.pm` lines 1–331; `perl/PathSearch.pm` lines 1–47; `perl/env.conf` lines 1–51.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+  Verification tier: `focused`
+  Focused checks: Full prior/current function registry and legacy plugin/path/config reading; exact baseline identity; canonical spec-owned function/signature Knowledge and registered plugin controls; bounded current proof with no legacy recursive discovery; memory/history/fast doctrines.
+  Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
+    policy, contract, or infrastructure change.
+  Verification: All four owned files reread completely: 1,202 lines / 45,829 bytes; exact baseline identity passes.
+    Two managed callable suites pass 76 top-level tests in 29 seconds. Neutral signature 3/9/7 and
+    codeblock 7/11/9/7/4/8/23 pass. Git census is 13 parked .plg files. Knowledge reconciles spec-owned
+    parsing, versioned metadata, and legacy discovery without runtime/grammar or public-book changes.
+  Commit: `SESSION-STARTUP-READING.3.2.53 - reconcile function registry and legacy discovery` — Function registry and legacy files read; 76 tests and neutral proof recorded; 13-file corpus count corrected.
+- ID: `SESSION-STARTUP-READING.3.2.54`
+  Status: `done`
+  Goal: Read baseline Perl group 52: 839 lines/fragments, 22,702 bytes.
+  Scope: `perl/gdcheck.pl` lines 1–431; `perl/htmlcss_driver.pl` lines 1–166; `perl/ptchange.pl` lines 1–242.
+  Acceptance: Read every owned byte and apply the shared Perl-reading acceptance below.
+  Verification tier: `focused`
+  Focused checks: Complete utility source reading and exact baseline identities; existing .25/.26 diagnostic Knowledge; managed syntax checks without executing legacy driver outputs; memory, bounded history, and all fast doctrines.
+  Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
+    policy, contract, or infrastructure change.
+  Verification: All three utility files reread through EOF: 839 lines / 22,702 bytes, baseline-identical.
+    Managed syntax checks pass for each file; nine targeted gdcheck assertions reproduce the already owned
+    signed-tolerance, duplicate-row, and DEFAULT defects. Prior ptchange spaced-path evidence is retained.
+    No repair or public-book change. .3.2.55 owns canonical parent closeout and complete Rust decomposition.
+  Commit: `SESSION-STARTUP-READING.3.2.54 - reconcile legacy utility reading and repair evidence` — 839 utility lines reread; exact diagnostic control retained; .55 owns canonical closeout.
+- ID: `SESSION-STARTUP-READING.3.2.55`
+  Status: `done`
+  Goal: Close the fully read Perl lane and own the complete bounded Rust reading plan.
+  Acceptance: Independently reconcile all 89 baseline Perl paths and current deltas with the 53 completed
+    reading leaves plus their decomposition checkpoint and .31's physical ledger. Preserve every pending repair and distinguish reading
+    completion from runtime signoff. Verify exact disjoint Rust scope/budgets for all 412 baseline entries,
+    review semantic boundaries and current deltas, and create reading children before reading new Rust code.
+    Measure resulting task-collection pressure and reserve room for evidence; no capacity change is implied.
+    Update canonical Knowledge and bounded continuity; run exact staged canonical CI for the parent closeout.
+  Verification tier: `canonical`
+  Focused checks: Independent Perl interval/commit/delta proof; complete bounded Rust range/corpus and empty-file coverage; resulting task pressure; Knowledge, memory, both history checks, exact staged diff and canonical tools/run_ci_local.sh.
+  Canonical trigger: `parent closeout` — formal Perl reading parent closeout; exact staged canonical receipt required.
+  Verification: Independent byte-interval and commit audit passes: all 89 Perl files / 2,133,690 bytes,
+    53 reading leaves plus one decomposition checkpoint, exact EOF coverage and no source delta.
+    Rust plan and task Scope round-trip pass: 66 groups / 412 paths / 3,533,382 bytes, two empty inputs,
+    1,500-line and 65,536-byte maxima. No new Rust reading credit or repair closure. Final staged canonical
+    receipt is mandatory before this parent closeout lands; the committed hook/receipt establishes its result.
+  Commit: `SESSION-STARTUP-READING.3.2.55 - close Perl reading and own bounded Rust scopes` — Close 89-file Perl reading; own all 412 Rust paths in 66 bounded leaves plus closeout; exact canonical boundary.
+- ID: `SESSION-STARTUP-READING.3.3`
+  Status: `done`
+  Goal: Split and read all 412 baseline Rust entries, including source, tests, corpus, generated files, and manifests.
+  Acceptance: Define bounded file/range children before reading; `rgx` is excluded but first-party Rust is not.
+  Children: `.3.3.1`, `.3.3.2`, `.3.3.3`, `.3.3.4`, `.3.3.5`, `.3.3.6`, `.3.3.7`, `.3.3.8`, `.3.3.9`, `.3.3.10`, `.3.3.11`, `.3.3.12`, `.3.3.13`, `.3.3.14`, `.3.3.15`, `.3.3.16`, `.3.3.17`, `.3.3.18`, `.3.3.19`, `.3.3.20`, `.3.3.21`, `.3.3.22`, `.3.3.23`, `.3.3.24`, `.3.3.25`, `.3.3.26`, `.3.3.27`, `.3.3.28`, `.3.3.29`, `.3.3.30`, `.3.3.31`, `.3.3.32`, `.3.3.33`, `.3.3.34`, `.3.3.35`, `.3.3.36`, `.3.3.37`, `.3.3.38`, `.3.3.39`, `.3.3.40`, `.3.3.41`, `.3.3.42`, `.3.3.43`, `.3.3.44`, `.3.3.45`, `.3.3.46`, `.3.3.47`, `.3.3.48`, `.3.3.49`, `.3.3.50`, `.3.3.51`, `.3.3.52`, `.3.3.53`, `.3.3.54`, `.3.3.55`, `.3.3.56`, `.3.3.57`, `.3.3.58`, `.3.3.59`, `.3.3.60`, `.3.3.61`, `.3.3.62`, `.3.3.63`, `.3.3.64`, `.3.3.65`, `.3.3.66`, `.3.3.67`
+  Verification: All 412 baseline paths / 3,533,382 bytes are physically read and comprehension-reconciled across 66 committed bounded children. .3.3.67 independently verifies exact byte coverage, current mode/blob identity, durable subjects, Knowledge continuity and pending repair ownership; receipt-bound canonical proof is required for parent landing. This status certifies reading completion only. Containment .7 precedes Dart decomposition/reading.
+  Commit: `SESSION-STARTUP-READING.3.3.67 - close Rust reading with exact coverage and durable repair ownership`
+- ID: `SESSION-STARTUP-READING.3.3.1`
+  Status: `done`
+  Goal: Read Rust group 1: 1,496 lines/fragments, 37,995 bytes.
+  Scope: `rust/.gitignore` lines 1–3;
+    `rust/Cargo.lock` lines 1–1493.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification tier: `focused`
+  Focused checks: Exact ignore/lockfile-range identity and 199-package TOML census; retained CLI/core and four regex-boundary controls; task-first .45–.47 and .49 ownership; Knowledge/memory/all doctrines/history and final scope/diff.
+  Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
+    policy, contract, or infrastructure change.
+  Verification: Complete ignore file and lockfile prefix read: 1,496 lines / 37,995 bytes, baseline-identical.
+    Locked TOML census: v4, 199 unique package identities, 195 registry checksums, four local records.
+    Retain preceding exact canonical parent closeout; ordinary checkpoint needs focused proof only.
+    Forward evidence is owned by .45–.47 and .49: eleven earlier CLI controls, the isolated core program,
+    and four new regex-boundary controls. No repair closes.
+  Commit: `SESSION-STARTUP-READING.3.3.1 - read Rust lockfile prefix and own parser boundary repairs` — Read 1,496 lock/ignore lines; own malformed-block, Unicode diagnostic, mutation-argument, and regex-newline repairs; retain prior canonical milestone.
+- ID: `SESSION-STARTUP-READING.3.3.2`
+  Status: `done`
+  Goal: Read Rust group 2: 1,483 lines/fragments, 59,455 bytes.
+  Scope: `rust/Cargo.lock` lines 1494–1850;
+    `rust/Cargo.toml` lines 1–18;
+    `rust/README.md` lines 1–484;
+    `rust/linkedspec-core/Cargo.toml` lines 1–14;
+    `rust/linkedspec-core/src/ast.rs` lines 1–360;
+    `rust/linkedspec-core/src/callable_contract.rs` lines 1–250.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification tier: `focused`
+  Focused checks: Exact six-scope baseline/budget proof; locked offline Cargo metadata and manifest comparison; neutral cursor contract; existing cursor/callable Knowledge; scoped README/comment repair ownership; Knowledge/memory/all doctrines/history and final scope/diff.
+  Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
+    policy, contract, or infrastructure change.
+  Verification: All six scopes read: 1,483 lines / 59,455 bytes; exact range hashes and complete current files match baseline.
+    Locked offline metadata resolves 199 packages and declares Rust 1.95 for rgx-core/pgen, contradicting
+    README 1.85+; no old-toolchain run or earliest working compiler is claimed. Neutral cursor contract
+    passes 36 family/18 edge/8 parent-child cases and 60 drift mutations. Documentation repairs stay pending.
+  Commit: `SESSION-STARTUP-READING.3.3.2 - read Rust manifests AST and callable prefix` — Read 1,483 manifest/AST/callable lines; own exact README minimum-version and mode-comment evidence.
+- ID: `SESSION-STARTUP-READING.3.3.3`
+  Status: `done`
+  Goal: Read Rust group 3: 1,499 lines/fragments, 56,169 bytes.
+  Scope: `rust/linkedspec-core/src/callable_contract.rs` lines 251–394;
+    `rust/linkedspec-core/src/compiler.rs` lines 1–1355.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification tier: `focused`
+  Focused checks: Two exact reading ranges/current-baseline proof; existing callable/compiler Knowledge; neutral callable and aggregate-selector checks; pending .45/.47 boundary evidence; Knowledge/memory/all doctrines/history and final scope/diff.
+  Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
+    policy, contract, or infrastructure change.
+  Verification: Both scopes read: 1,499 lines / 56,169 bytes; exact range hashes and complete current files match baseline.
+    Reconcile callable normalization, validation order, recognition effects, typed write/mutation checks, and
+    lifecycle/edge lowering against existing Knowledge. Prior .45/.47 observations remain diagnostic evidence,
+    not completed repairs. Neutral callable checks pass 7/11 literals/calls, 9/7 invalid cases, four invalid declarations, eight
+    contextual forms and 23 mutations; selector scan reports zero positive / 20 classified occurrences.
+    Required continuity checks pass before commit.
+  Commit: `SESSION-STARTUP-READING.3.3.3 - read callable normalization and compiler validation prefix` — Read 1,499 callable/compiler lines; preserve validation order and exact pending repair boundaries.
+- ID: `SESSION-STARTUP-READING.3.3.4`
+  Status: `done`
+  Goal: Read Rust group 4: 1,481 lines/fragments, 57,687 bytes.
+  Scope: `rust/linkedspec-core/src/compiler.rs` lines 1356–2153;
+    `rust/linkedspec-core/src/descriptor.rs` lines 1–465;
+    `rust/linkedspec-core/src/entry_rule.rs` lines 1–113;
+    `rust/linkedspec-core/src/error.rs` lines 1–105.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification tier: `focused`
+  Focused checks: Four exact reading ranges/current-baseline proof; existing descriptor/entry/slot Knowledge; neutral slot identity and entry-selection contracts; .41.2 source-comment ownership and retained native duplicate-label rejection; Knowledge/memory/all doctrines/history and final scope/diff.
+  Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
+    policy, contract, or infrastructure change.
+  Verification: All four scopes read: 1,481 lines / 57,687 bytes; exact range hashes and complete current files match baseline.
+    Reconcile selector resolution, self-edge slot reuse, pure descriptor projection, entry precedence, and
+    sorted portable diagnostics with existing Knowledge. Confirm source-comment repair ownership and retain
+    native duplicate-label rejection evidence. Neutral slot checks pass 5 fixtures / 2 diagnostics / 59 mutations; entry checks pass 8 selection /
+    3 failure / 3 strict cases / 54 mutations. Required continuity checks pass before commit.
+  Commit: `SESSION-STARTUP-READING.3.3.4 - read Rust regex resolution descriptors and entry diagnostics` — Read 1,481 compiler/descriptor/entry/error lines; separate projection determinism from native validation.
+- ID: `SESSION-STARTUP-READING.3.3.5`
+  Status: `done`
+  Goal: Read Rust group 5: 1,496 lines/fragments, 57,175 bytes.
+  Scope: `rust/linkedspec-core/src/expr.rs` lines 1–1496.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification tier: `focused`
+  Focused checks: Exact expression prefix/current-baseline proof; existing callable/staged/write/control-flow Knowledge; neutral staged-enrichment and write-vivification contracts; retained .45–.47/.49 repair ownership; Knowledge/memory/all doctrines/history and final scope/diff.
+  Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
+    policy, contract, or infrastructure change.
+  Verification: Owned expr.rs lines 1–1496 fully read: 1,496 lines / 57,175 bytes; exact range hash and complete
+    current file match baseline. Reconcile typed callable/write/mutation/staged carriers, source coordinates,
+    recursive scans, literal options and statement normalization with existing Knowledge. Neutral staged checks pass 123 core / 129 public mutations; write checks pass 5 valid / 7 invalid /
+    11 success / 16 structural / 3 evaluation / 3 exclusion / 8 composed cases and 105 mutations.
+    Required continuity checks pass before commit; no fresh native-suite execution is claimed.
+  Commit: `SESSION-STARTUP-READING.3.3.5 - read Rust expression carriers and statement parser prefix` — Read 1,496 expression/statement lines; separate byte cursors, character spans and debug formatting.
+- ID: `SESSION-STARTUP-READING.3.3.6`
+  Status: `done`
+  Goal: Read Rust group 6: 1,461 lines/fragments, 54,270 bytes.
+  Scope: `rust/linkedspec-core/src/expr.rs` lines 1497–2957.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification tier: `focused`
+  Focused checks: Exact expression continuation/current-baseline proof; existing callable/write/mutation/hash Knowledge; neutral map-leaves mutation contract; unchanged bounded .45/.46/.47 diagnostics; Knowledge/memory/all doctrines/history and final scope/diff.
+  Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
+    policy, contract, or infrastructure change.
+  Verification: Owned expr.rs lines 1497–2957 fully read: 1,461 lines / 54,270 bytes; exact range hash and complete
+    current file match baseline. Reconcile attached controls, source-preserving nested writes/mutations,
+    scalar staged intrinsics, expression dispatch and brace classification. Existing .45/.46/.47 diagnostic
+    controls retain their exact limits. Neutral mutation checks pass 4 valid / 14 invalid / 5 excluded syntax cases, 10 successes,
+    8 pre-commit failures, 6 callback / 1 continuation compositions, and 167 + 592 mutations.
+    Required continuity checks pass before commit.
+  Commit: `SESSION-STARTUP-READING.3.3.6 - read Rust expression parsing and retain boundary repair evidence` — Read 1,461 expression-parser lines; retain exact Unicode and mutation-whitespace repair evidence.
+- ID: `SESSION-STARTUP-READING.3.3.7`
+  Status: `done`
+  Goal: Read Rust group 7: 1,497 lines/fragments, 56,871 bytes.
+  Scope: `rust/linkedspec-core/src/expr.rs` lines 2958–4454.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification tier: `focused`
+  Focused checks: Exact lexical/test range/current-baseline proof; existing arithmetic/hash/callable and .49 Knowledge; neutral callable contract; historical assignment-closure pointer; six asserted Rust CLI/Perl lowering hash controls; three paired native cat controls; task-first .50/.51 ownership; Knowledge/memory/all doctrines/history and final scope/diff.
+  Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
+    policy, contract, or infrastructure change.
+  Verification: Owned expr.rs lines 2958–4454 fully read: 1,497 lines / 56,871 bytes; exact range hash and complete
+    current file match baseline. Neutral callable checks pass 7/11 literals/calls, 9/7 invalid cases,
+    four invalid declarations, eight contextual forms and 23 mutations. Six asserted Rust CLI/Perl lowering
+    hash controls establish adjacent-colon loss; three paired explicit-edge Rust CLI/Perl Get controls
+    establish one-argument cat divergence. .50/.51 own repairs before Knowledge. Prior .49 evidence retains
+    its limits. Required continuity checks pass before commit; no runtime repair is claimed.
+  Commit: `SESSION-STARTUP-READING.3.3.7 - read Rust lexical boundaries and own hash and cat repairs` — Read 1,497 lexical/test lines; own adjacent hash-colon loss and cat arity divergence as .50/.51.
+- ID: `SESSION-STARTUP-READING.3.3.8`
+  Status: `done`
+  Goal: Read Rust group 8: 1,470 lines/fragments, 57,396 bytes.
+  Scope: `rust/linkedspec-core/src/expr.rs` lines 4455–5819;
+    `rust/linkedspec-core/src/lib.rs` lines 1–27;
+    `rust/linkedspec-core/src/parser.rs` lines 1–78.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification tier: `focused`
+  Focused checks: Read all three exact ranges without truncation; current-baseline and range-digest proof; existing AST/expression/entry Knowledge reconciliation; selected neutral write/callable/uniform-binding contracts; historical assignment/rollout Knowledge correction; .41.6 stale test-name ownership; Knowledge/memory/all doctrines/history and scope/diff.
+  Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
+    policy, contract, or infrastructure change.
+  Verification: All three exact ranges read without truncation: 1,470 lines / 57,396 bytes; current files and
+    range digests match baseline. Fresh neutral write checks pass 5/7/11/16/3/3/8/105; callable checks
+    pass 7/11/9/7/4/8/23; uniform binding passes 11/7/6/8. Historical rollout/storage guidance and test
+    assertion limits are reconciled in Knowledge; .41.6 owns stale test naming. Required continuity
+    checks pass before commit. No native suite, runtime repair or complete-codebase claim.
+  Commit: `SESSION-STARTUP-READING.3.3.8 - read remaining Rust expression tests and core parser entry` — Complete expr.rs reading and core entry prefix; reconcile test assertion limits and historical binding/rollout prose.
+- ID: `SESSION-STARTUP-READING.3.3.9`
+  Status: `done`
+  Goal: Read Rust group 9: 1,496 lines/fragments, 49,733 bytes.
+  Scope: `rust/linkedspec-core/src/parser.rs` lines 79–1574.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification tier: `focused`
+  Focused checks: Read the exact parser continuation without truncation; current-baseline and range-digest proof; existing rule-header/grouped-edge/body-parser Knowledge reconciliation and Toolbox-first controls for surprises; neutral standalone/cursor/Unicode contracts; ten paired native body controls, three paired matches controls, direct Perl lowering/bootstrap controls; .52-.54 task-first ownership; Knowledge/memory/all doctrines/history and scope/diff.
+  Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
+    policy, contract, or infrastructure change.
+  Verification: Read parser.rs 79–1574 completely: 1,496 lines / 49,733 bytes; range digest and complete file
+    match baseline. Neutral standalone 9/4/6/3/6/15/7/14, cursor 36/18/8/60 and Unicode 806/9/8/2
+    checks pass. Ten paired native body cases, three paired matches cases, four Perl lowering controls and
+    three direct bootstrap dumps isolate compact fluent, header suffix and regex-brace defects. .52-.54
+    own bounded repairs before Knowledge. All diagnostic processes completed; required continuity proof
+    passes before commit. No runtime, public-book, full-native or whole-codebase signoff.
+  Commit: `SESSION-STARTUP-READING.3.3.9 - read Rust rule-body parsing and own lexical boundary repairs` — Read rule-body parser; own compact fluent, invalid header suffix and Perl/Rust regex-brace repairs .52-.54.
+- ID: `SESSION-STARTUP-READING.3.3.10`
+  Status: `done`
+  Goal: Read Rust group 10: 1,466 lines/fragments, 47,137 bytes.
+  Scope: `rust/linkedspec-core/src/parser.rs` lines 1575–2084;
+    `rust/linkedspec-core/src/trace.rs` lines 1–715;
+    `rust/linkedspec-core/src/types.rs` lines 1–241.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification tier: `focused`
+  Focused checks: Read every scoped parser/trace/type byte without truncation; range/current-baseline proof; existing trace/cursor/compiled-state Knowledge reconciliation; managed seven-test core trace target; neutral cursor/numeric contracts; four paired native large-number controls and source projection path; .55 task-first ownership; Knowledge/memory/all doctrines/history and scope/diff.
+  Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
+    policy, contract, or infrastructure change.
+  Verification: Read parser.rs 1575–2084, trace.rs 1–715 and types.rs 1–241 completely: 1,466 lines / 47,137
+    bytes; exact ranges and complete files match baseline. Managed core trace 7/7; neutral numeric
+    55/18 and cursor 36/18/8/60 pass. Four paired native number controls prove signed large-value saturation
+    and distinct text spelling; .55 owns repairs before Knowledge. All jobs completed; focused continuity
+    passes before commit. No runtime/public-book change or fresh cross-backend trace signoff.
+  Commit: `SESSION-STARTUP-READING.3.3.10 - read core trace and types and own large-number conversion repairs` — Read parser tests/core trace/types; own finite-value saturation and large-number text repairs .55.
+- ID: `SESSION-STARTUP-READING.3.3.11`
+  Status: `done`
+  Goal: Read Rust group 11: 1,499 lines/fragments, 45,494 bytes.
+  Scope: `rust/linkedspec-core/src/types.rs` lines 242–538;
+    `rust/linkedspec-core/src/unicode_rule_label.rs` lines 1–850;
+    `rust/linkedspec-core/src/validation.rs` lines 1–352.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification tier: `focused`
+  Focused checks: Read every scoped compiled-type, Unicode table/function and validation byte without truncation; exact range/current-baseline proof; retrieve compiled-slot/cursor/Unicode Knowledge first; neutral Unicode label, rule-local cursor and duplicate-slot contracts; reconcile source-only limits and any task-owned findings; Knowledge/memory/all doctrines/history and scope/diff.
+  Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
+    policy, contract, or infrastructure change.
+  Verification: Read types.rs 242–538, unicode_rule_label.rs 1–850 and validation.rs 1–352 completely:
+    1,499 lines / 45,494 bytes; exact ranges and complete files match baseline. Neutral Unicode 806/9/8/2,
+    cursor 36/18/8/60 and duplicate-slot 5/2/59 pass. Reconcile derived cursor/serde state, UTF-8 prefix
+    boundaries and ordinary/traced AST pass order; .41.2 owns stale validation comments. Focused continuity
+    passes before commit. No fresh native matrix, runtime, public-book, or whole-codebase signoff.
+  Commit: `SESSION-STARTUP-READING.3.3.11 - read compiled types Unicode labels and validation entrypoints` — Read compiled types and pinned Unicode through EOF plus AST-validation entrypoints; reconcile historical/current claims.
+- ID: `SESSION-STARTUP-READING.3.3.12`
+  Status: `done`
+  Goal: Read Rust group 12: 1,490 lines/fragments, 54,844 bytes.
+  Scope: `rust/linkedspec-core/src/validation.rs` lines 353–1541;
+    `rust/linkedspec-core/tests/descriptor_test.rs` lines 1–286;
+    `rust/linkedspec-core/tests/rule_local_cursor_normalization_test.rs` lines 1–15.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+    Complete the required engineering-notes rollover from exact clean HEAD records; independently verify
+    source/blob/hash and unchanged prior manifest. Measure resulting root/collection pressure and own one
+    finite member/manifest slot through indexed ADR 0105 before changing route limits. Preserve all other
+    ceilings and immutable history. Run exact staged canonical CI for the necessary routing-infrastructure step.
+  Verification tier: `canonical`
+  Focused checks: Read every remaining validator, descriptor-test and cursor-test-prefix byte; exact range/current-baseline proof; retrieve strict/slot/named-selector/gap/root/cursor Knowledge before diagnosis; managed locked/offline core validation tests and neutral named-slot/root/cursor contracts; four paired registry controls, five paired AND selector controls and four Perl descriptor projections; .56/.57 ownership; task-own any confirmed gaps before Knowledge; independent lossless rollover/pressure proof, ADR 0105 exact-count authorization, memory/all doctrines/history, exact staged canonical receipt and scope/diff.
+  Canonical trigger: `routing capacity infrastructure` — required engineering-notes rollover crosses
+    the existing finite member/manifest counts; exact indexed limit authorization and staged canonical receipt.
+  Verification: Read validation.rs 353–1541, descriptor_test.rs 1–286 and cursor test 1–15 completely:
+    1,490 lines / 54,844 bytes; exact ranges and complete files match baseline. Managed core validation
+    passes 21/21 (180 filtered); neutral gap 9/0/63 plus public34, root 8/3/3/54 and cursor 36/18/8/60
+    pass. Four paired registry controls, five paired AND selector controls and four Perl descriptor
+    projections prove .56/.57 repairs. Lossless segment 4983 proof passes for 206 lines / 17,316 bytes;
+    indexed ADR 0105 admits only files 24→25 and manifest lines 23→24. Exact staged canonical proof is
+    required before this candidate can land; the receipt and commit hooks enforce that boundary.
+    No runtime/public-book change or fresh descriptor/generated/backend-wide signoff.
+  Commit: `SESSION-STARTUP-READING.3.3.12 - read static validation and preserve bounded engineering history` — Complete validator/descriptor reading; own .56/.57; preserve segment 4983 with finite ADR 0105 capacity and canonical proof.
+- ID: `SESSION-STARTUP-READING.3.3.13`
+  Status: `done`
+  Goal: Read Rust group 13: 1,495 lines/fragments, 52,012 bytes.
+  Scope: `rust/linkedspec-core/tests/rule_local_cursor_normalization_test.rs` lines 16–314;
+    `rust/linkedspec-core/tests/types_test.rs` lines 1–222;
+    `rust/linkedspec-core/tests/unicode_rule_label_contract.rs` lines 1–155;
+    `rust/linkedspec-runtime/Cargo.toml` lines 1–20;
+    `rust/linkedspec-runtime/src/bin/linkedspec-rust.rs` lines 1–21;
+    `rust/linkedspec-runtime/src/bounded_child_parse_authority.rs` lines 1–778.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification tier: `focused`
+  Focused checks: Read every owned cursor/value/Unicode-test, runtime-manifest/CLI entry, and bounded-child-authority byte; exact range/current-baseline proof; retrieve cursor, scalar/value, Unicode and bounded-child/transaction authority Knowledge first; select managed locked/offline core integration tests and neutral directly dependent contracts; preserve finalized slice71 canonical and dated diagnostic evidence, remove only consumed exact sample reports after durable intake, and annotate existing .41.7 current-count debt; memory/all doctrines/history and scope/diff. No runtime or public-book repair before startup prerequisites.
+  Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
+    policy, contract, or infrastructure change.
+  Verification: PASS: exact six-range/baseline identity; managed locked/offline core cursor 5/5, types 8/8 and Unicode 5/5; four neutral contract checks; completed prior canonical/sample intake; Knowledge, history, memory, all nine doctrines and diff.
+  Commit: `SESSION-STARTUP-READING.3.3.13 - read core tests and bounded child authority` — Read six Rust ranges, preserve exact verification limits and prior canonical evidence, and remove only consumed captures.
+- ID: `SESSION-STARTUP-READING.3.3.14`
+  Status: `done`
+  Goal: Read Rust group 14: 1,494 lines/fragments, 50,413 bytes.
+  Scope: `rust/linkedspec-runtime/src/bounded_child_parse_authority.rs` lines 779–1639;
+    `rust/linkedspec-runtime/src/diagnostic.rs` lines 1–127;
+    `rust/linkedspec-runtime/src/diagnostic_output.rs` lines 1–112;
+    `rust/linkedspec-runtime/src/engine.rs` lines 1–394.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification tier: `focused`
+  Focused checks: Read all four owned ranges and reconcile boundary context; exact range/current-baseline identity; retrieve bounded-child, runtime diagnostic and engine authority Knowledge first; focused progressive/source/diagnostic contract checks and dated unchanged-source canonical consumer evidence; diagnose any newly observed mismatch with LinkedSpec tools before owning repair; Knowledge, both history pressure checks, memory/all doctrines and scope/diff. No runtime or public-book repair before startup prerequisites.
+  Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
+    policy, contract, or infrastructure change.
+  Verification: PASS: four exact baseline-identical ranges; progressive 9/9/116/public60, typed source 14/0/231, diagnostic output 3/11/6/8/20, scalar numeric 55/18; bounded ceiling-constructor/test-source review; Knowledge/history/memory/all nine doctrines and diff.
+  Commit: `SESSION-STARTUP-READING.3.3.14 - read child authority diagnostics and engine definitions` — Finish authority and diagnostic-type reading; reconcile current options/diagnostic Knowledge and resource-boundary limits.
+- ID: `SESSION-STARTUP-READING.3.3.15`
+  Status: `done`
+  Goal: Read Rust group 15: 1,500 lines/fragments, 56,911 bytes.
+  Scope: `rust/linkedspec-runtime/src/engine.rs` lines 395–1894.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification tier: `focused`
+  Focused checks: Read engine lines 395–1894 in untruncated chunks with preceding context and exact suffix ownership; current/full-file baseline and range identity; Knowledge-first nested-write, receiver-mutation and invocation/diagnostic authorities; selected managed direct-dependent neutral contracts, bounded source/claim review, paired managed Rust/Perl pure-split boundary controls under existing .33, and dated native evidence; both history checks, explicit memory, derived Knowledge, staged diff and all nine pre-commit doctrines. No runtime/public/policy repair before startup prerequisites.
+  Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
+    policy, contract, or infrastructure change.
+  Verification: PASS: exact engine range/baseline identity; seven managed neutral checks; managed CLI build; seven paired Rust/Perl split controls with five differences/two equal controls; .33 ownership and exact evidence; Knowledge/history/explicit memory/staged diff/all nine pre-commit doctrines.
+  Commit: `SESSION-STARTUP-READING.3.3.15 - read generated engine loops and audit split boundaries` — Read generated action/blind loops, preserve exact scope, and annotate measured split boundaries under existing .33.
+- ID: `SESSION-STARTUP-READING.3.3.16`
+  Status: `done`
+  Goal: Read Rust group 16: 1,500 lines/fragments, 60,181 bytes.
+  Scope: `rust/linkedspec-runtime/src/engine.rs` lines 1895–3394.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification tier: `focused`
+  Focused checks: Read engine lines 1895–3394 completely with exact current/baseline range identity; retrieve existing Knowledge authorities before analyzing invocation and entry dispatch; selected direct-dependent neutral checks and bounded claim reconciliation; both history checks, explicit memory, derived Knowledge, staged diff and all nine pre-commit doctrines. Preserve dated native evidence and later runtime/public/policy repair ownership.
+  Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
+    policy, contract, or infrastructure change.
+  Verification: PASS: complete range/current-baseline identity; root, semantic, diagnostic-output and staged-AST neutral checks; bounded generated-validation support; Knowledge/history/explicit memory/staged diff/all nine pre-commit doctrines.
+  Commit: `SESSION-STARTUP-READING.3.3.16 - read engine invocation routes and entry dispatch` — Reconcile execution projections, diagnostic stages and precedence, generated validation ownership and parent-result ordering.
+- ID: `SESSION-STARTUP-READING.3.3.17`
+  Status: `done`
+  Goal: Read Rust group 17: 1,493 lines/fragments, 60,008 bytes.
+  Scope: `rust/linkedspec-runtime/src/engine.rs` lines 3395–4887.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification tier: `focused`
+  Focused checks: Read engine lines 3395–4887 fully with preceding context, exact current/baseline identity and suffix ownership; retrieve Knowledge before analyzing native regex loops and action handling; run selected direct-dependent neutral contracts, both history checks, explicit memory, derived Knowledge, staged diff and all nine pre-commit doctrines. Preserve dated native evidence and startup repair prerequisites.
+  Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
+    policy, contract, or infrastructure change.
+  Verification: PASS: complete range/current-baseline identity; six managed neutral contracts; four native diagnostic controls and independent result-field assertions; .55.1 repair ownership; Knowledge/history/explicit memory/staged diff/all nine pre-commit doctrines.
+  Commit: `SESSION-STARTUP-READING.3.3.17 - read native action loops and nested-write coordination` — Read native loops/control and nested-write evaluation order; preserve exact diagnostic evidence and following traversal scope.
+- ID: `SESSION-STARTUP-READING.3.3.18`
+  Status: `done`
+  Goal: Read Rust group 18: 1,498 lines/fragments, 58,503 bytes.
+  Scope: `rust/linkedspec-runtime/src/engine.rs` lines 4888–6385.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification tier: `focused`
+  Focused checks: Read engine lines 4888–6385 completely with prior coordinator context, current/baseline identity and suffix ownership; retrieve Knowledge for nested writes, receiver mutation and expression execution; selected managed direct-dependent neutral contracts and bounded claim verification; both history checks, explicit memory, derived Knowledge, staged diff and all nine pre-commit doctrines. No runtime/public/policy repairs before startup prerequisites.
+  Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
+    policy, contract, or infrastructure change.
+  Verification: PASS: complete range/current-baseline identity; four managed neutral contracts; bounded Knowledge claim review; history/explicit memory/derived Knowledge/staged diff/all nine pre-commit doctrines.
+  Commit: `SESSION-STARTUP-READING.3.3.18 - read recursive writes and expression invocation scopes` — Complete recursive-write and expression/callable invocation reading with separate function/codeblock scope boundaries.
+- ID: `SESSION-STARTUP-READING.3.3.19`
+  Status: `done`
+  Goal: Read Rust group 19: 1,493 lines/fragments, 55,743 bytes.
+  Scope: `rust/linkedspec-runtime/src/engine.rs` lines 6386–7878.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification tier: `focused`
+  Focused checks: Read engine lines 6386–7878 completely with preceding trailing-block context and exact suffix ownership; current/baseline identity; Knowledge-first traversal, receiver mutation and value-chain reconciliation; selected managed direct-dependent neutral contracts; both history checks, explicit memory, derived Knowledge, staged diff and all nine pre-commit doctrines. No runtime/public/policy repairs before startup prerequisites.
+  Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
+    policy, contract, or infrastructure change.
+  Verification: PASS: complete range/current-baseline identity; four managed neutral contracts; six paired Rust CLI/Perl Get cases plus six direct native diagnostics and independent field/value assertions; .58 repair ownership; compiler sample consumed; history/memory/derived Knowledge/staged diff/all nine pre-commit doctrines.
+  Commit: `SESSION-STARTUP-READING.3.3.19 - read receiver traversal and diagnose final-assignment guard` — Complete traversal/value-block reading; own confirmed final-assignment guard gap and preserve exact native/reference evidence.
+- ID: `SESSION-STARTUP-READING.3.3.20`
+  Status: `done`
+  Goal: Read Rust group 20: 1,400 lines/fragments, 65,528 bytes.
+  Scope: `rust/linkedspec-runtime/src/engine.rs` lines 7879–9278.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification tier: `focused`
+  Focused checks: Read engine lines 7879–9278 completely with preceding scalar-target context and precise helper suffix ownership; current/baseline identity; Knowledge-first target/binding/helper reconciliation; selected managed direct-dependent neutral contracts and bounded diagnosis if needed; both history checks, explicit memory, derived Knowledge, staged diff and all nine pre-commit doctrines. No runtime/public/policy repairs before startup prerequisites.
+  Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
+    policy, contract, or infrastructure change.
+  Verification: PASS: complete range/current-baseline identity; four managed neutral contracts; ten paired Rust primary/Perl Get cases with exact values/error fields; ten lowerings/generated captures and six callback descriptor controls; .59 repair ownership; history/memory/derived Knowledge/staged diff/all nine pre-commit doctrines.
+  Commit: `SESSION-STARTUP-READING.3.3.20 - read helper dispatch and own substitution composition repairs` — Complete helper-prefix reading; own substitution flags, callback lowering and receiver protection with exact paired evidence.
+- ID: `SESSION-STARTUP-READING.3.3.21`
+  Status: `done`
+  Goal: Read Rust group 21: 1,499 lines/fragments, 59,677 bytes.
+  Scope: `rust/linkedspec-runtime/src/engine.rs` lines 9279–10777.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification tier: `focused`
+  Focused checks: Read engine lines 9279–10777 completely with match_end_line prefix context and exact suffix ownership; current/baseline identity; Knowledge-first helper/capture/collection/logical reconciliation; selected managed direct-dependent neutral contracts and bounded diagnosis when needed; history/memory/derived Knowledge/staged diff and all nine pre-commit doctrines. No runtime/public/policy repairs before startup prerequisites.
+  Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
+    policy, contract, or infrastructure change.
+  Verification: PASS: complete range/current-baseline identity; three managed neutral contracts; eleven paired Rust primary/Perl Get cases plus one Rust-only overflow control; twelve ready descriptors/lowered/generated captures; exact values/kinds/panic-site assertions; .60/.61 ownership; history/memory/derived Knowledge/staged diff/all nine pre-commit doctrines.
+  Commit: `SESSION-STARTUP-READING.3.3.21 - complete helper reading and own slice and scalar boundary repairs` — Complete helper implementation and test-prefix reading; own array slicing and scalar null/empty repair with bounded exact evidence.
+- ID: `SESSION-STARTUP-READING.3.3.22`
+  Status: `done`
+  Goal: Read Rust group 22: 1,469 lines/fragments, 52,089 bytes.
+  Scope: `rust/linkedspec-runtime/src/engine.rs` lines 10778–12246.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification tier: `focused`
+  Focused checks: Read engine test lines 10778–12246 completely and distinguish exact assertions from names/comments; current/baseline identity; Knowledge-first helper/capture/control/guard reconciliation; selected managed direct-dependent neutral checks and bounded diagnostics only where new evidence requires them; history/memory/derived Knowledge/staged diff and all nine pre-commit doctrines. No runtime/public/policy repairs before startup prerequisites.
+  Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
+    policy, contract, or infrastructure change.
+  Verification: PASS: full 1,469-line source read/current-baseline identity; five paired primary Rust/live Perl exact value/effect/JSON-kind controls; five ready descriptors/lowered/generated captures; three managed neutral contracts; .62 ownership and four Knowledge corrections; history/memory/derived Knowledge/staged diff/all nine pre-commit doctrines.
+  Commit: `SESSION-STARTUP-READING.3.3.22 - read capture and control tests and own coalesce evaluation repair` — Read capture/control assertions, qualify weak smoke coverage, and own coalesce definedness/laziness with corrected Boolean observations.
+- ID: `SESSION-STARTUP-READING.3.3.23`
+  Status: `done`
+  Goal: Read Rust group 23: 1,364 lines/fragments, 53,265 bytes.
+  Scope: `rust/linkedspec-runtime/src/engine.rs` lines 12247–12694;
+    `rust/linkedspec-runtime/src/helpers.rs` lines 1–850;
+    `rust/linkedspec-runtime/src/lib.rs` lines 1–66.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification tier: `focused`
+  Focused checks: Read the complete engine test suffix, regex helpers and runtime export surface; exact baseline identity and Knowledge-first reconciliation; selected managed write/capture/regex direct-dependent checks and bounded probes only for newly established gaps; history/memory/derived Knowledge/staged diff/all nine pre-commit doctrines. No runtime/public/policy repairs before prerequisites.
+  Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
+    policy, contract, or infrastructure change.
+  Verification: PASS: complete 1,364-line/53,265-byte source read/current-baseline identity; three managed write/mutation/slot neutral contracts; six informative paired primary Rust/live Perl choice probes plus six retained inconclusive controls; six three-rule descriptors/generated captures; exact sequence/error assertions; .63 ownership; Knowledge/history/memory/staged diff/all nine pre-commit doctrines.
+  Commit: `SESSION-STARTUP-READING.3.3.23 - complete engine and regex helper reading and own input-context repair` — Complete engine tests and regex wrappers; own five assertion discrepancies with exact collected-rule controls.
+- ID: `SESSION-STARTUP-READING.3.3.24`
+  Status: `done`
+  Goal: Read Rust group 24: 7 lines/fragments, 65,536 bytes.
+  Scope: `rust/linkedspec-runtime/src/mcp_contract.rs` lines 1–6;
+    `rust/linkedspec-runtime/src/mcp_contract.rs` bytes 298–65536.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification tier: `focused`
+  Focused checks: Read every owned byte of the embedded MCP contract prefix, using untruncated raw segments and decoded structural cross-checks; exact baseline/authority identity; Knowledge-first contract/provider/generated snapshot reconciliation; selected managed MCP direct-dependent checks; history/memory/derived Knowledge/staged diff/all nine pre-commit doctrines. No runtime/public/policy repairs before startup prerequisites.
+  Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
+    policy, contract, or infrastructure change.
+  Verification: PASS: all 65,536 owned bytes read without truncation and baseline-identical; both managed generated bindings byte-fresh; transport 35/10/10/76 and admission complete 5/5+6/6/141; decoded bundle/frame/schema assertions; shared builder/renderer source identity; Knowledge/history/memory/staged diff/all nine pre-commit doctrines.
+  Commit: `SESSION-STARTUP-READING.3.3.24 - read embedded MCP contract prefix and reconcile generated identity` — Preserve exact generated-prefix coverage and identity, update old sizes, distinguish artifact/governance proof from runtime execution.
+- ID: `SESSION-STARTUP-READING.3.3.25`
+  Status: `done`
+  Goal: Read Rust group 25: 1,352 lines/fragments, 65,134 bytes.
+  Scope: `rust/linkedspec-runtime/src/mcp_contract.rs` bytes 65537–83225;
+    `rust/linkedspec-runtime/src/mcp_contract_runtime.rs` lines 1–582;
+    `rust/linkedspec-runtime/src/mcp_server.rs` lines 1–769.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification tier: `focused`
+  Focused checks: Read all remaining embedded contract bytes, the complete frozen MCP runtime and server lines 1–769; exact baseline/authority identity; Knowledge-first schema/dispatch/registry/policy reconciliation; selected managed MCP direct-dependent checks and bounded diagnostic probes where evidence requires; history/memory/derived Knowledge/staged diff/all nine pre-commit doctrines. No runtime/public/policy repairs before startup prerequisites.
+  Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
+    policy, contract, or infrastructure change.
+  Verification: PASS reading/proof: all 1,352 lines/fragments/65,134 bytes baseline-identical; generated binding byte-fresh; transport 35/10/10/76, admission complete/141; existing native test 1/1 and captured-output gap independently confirmed/owned .64; Knowledge/history/memory/staged diff/all nine pre-commit doctrines. Runtime repair remains pending.
+  Commit: `SESSION-STARTUP-READING.3.3.25 - read frozen MCP runtime and own caught-panic output repair` — Preserve frozen-runtime/registry coverage and separate response sanitation from captured process output; own .64 repair and qualify native reachability.
+- ID: `SESSION-STARTUP-READING.3.3.26`
+  Status: `done`
+  Goal: Read Rust group 26: 1,500 lines/fragments, 51,296 bytes.
+  Scope: `rust/linkedspec-runtime/src/mcp_server.rs` lines 770–1342;
+    `rust/linkedspec-runtime/src/mcp_wire.rs` lines 1–759;
+    `rust/linkedspec-runtime/src/primary_cli.rs` lines 1–168.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification tier: `focused`
+  Focused checks: Read server 770–1342, all strict MCP wire code and primary CLI 1–168; exact baseline identity; Knowledge-first policy/wire/CLI reconciliation; selected managed MCP wire tests and neutral/direct-dependent checks; history/memory/derived Knowledge/staged diff/all nine pre-commit doctrines. No runtime/public/policy repairs before startup prerequisites.
+  Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
+    policy, contract, or infrastructure change.
+  Verification: PASS reading/proof: all 1,500 lines/51,296 bytes baseline-identical; six existing native wire tests; twelve paired public delimiter/size controls and canonical Rust output; EOF maximum+1 defect owned .65; transport 35/10/10/76 and admission complete/141; Knowledge/history/memory/staged diff/all nine pre-commit doctrines.
+  Commit: `SESSION-STARTUP-READING.3.3.26 - complete MCP wire reading and own final EOF byte-limit repair` — Complete MCP server/wire coverage, qualify existing unit boundaries, and own the independently reproduced EOF limit repair.
+- ID: `SESSION-STARTUP-READING.3.3.27`
+  Status: `done`
+  Goal: Read Rust group 27: 1,500 lines/fragments, 50,300 bytes.
+  Scope: `rust/linkedspec-runtime/src/primary_cli.rs` lines 169–796;
+    `rust/linkedspec-runtime/src/recognition_transaction.rs` lines 1–872.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification tier: `focused`
+  Focused checks: Read primary CLI 169–796 and recognition transaction 1–872; exact baseline identity; Knowledge-first CLI/recognition authority reconciliation; selected neutral recognition/CLI direct-dependent proof and bounded diagnostics when evidence requires; history/memory/derived Knowledge/staged diff/all nine pre-commit doctrines. No runtime/public/policy repairs before startup prerequisites.
+  Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
+    policy, contract, or infrastructure change.
+  Verification: PASS: all 1,500 owned lines/50,300 bytes and 68 supporting helper lines baseline-identical; shared Rust CLI 66/66 default with empty stderr; neutral recognition 138/250/58, 9/9 and public/admission guards; .38 source comparison; Knowledge/history/memory/staged diff/all nine pre-commit doctrines.
+  Commit: `SESSION-STARTUP-READING.3.3.27 - complete primary CLI and read recognition authority guards` — Complete primary CLI coverage, distinguish current neutral proof from historical native counts, and preserve Rust's early invalidation guard.
+- ID: `SESSION-STARTUP-READING.3.3.28`
+  Status: `done`
+  Goal: Read Rust group 28: 1,496 lines/fragments, 56,822 bytes.
+  Scope: `rust/linkedspec-runtime/src/recognition_transaction.rs` lines 873–1547;
+    `rust/linkedspec-runtime/src/runtime.rs` lines 1–821.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification tier: `focused`
+  Focused checks: Read recognition_transaction 873–1547 and runtime 1–821; exact baseline identity; Knowledge-first recognition/gap/value representation and copy semantics reconciliation; selected neutral direct-dependent checks and bounded diagnostic controls where evidence requires; history/memory/derived Knowledge/staged diff/all nine pre-commit doctrines. No runtime/public/policy repairs before startup prerequisites.
+  Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
+    policy, contract, or infrastructure change.
+  Verification: PASS: all 1,496 lines/56,822 bytes baseline-identical; recognition 138/250/58 at 9/9, gap 9/0/63/public34, typed source 14/0/231; exact 92 helper/seven alias catalogs; Knowledge/history/memory/staged diff/all nine pre-commit doctrines.
+  Commit: `SESSION-STARTUP-READING.3.3.28 - complete recognition adapters and read RuntimeContext source connections` — Complete recognition runtime and record source-authority, gap rollback and exact helper/alias boundaries.
+- ID: `SESSION-STARTUP-READING.3.3.29`
+  Status: `done`
+  Goal: Read Rust group 29: 1,497 lines/fragments, 49,031 bytes.
+  Scope: `rust/linkedspec-runtime/src/runtime.rs` lines 822–2318.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification tier: `focused`
+  Focused checks: Read runtime.rs 822–2318 with exact baseline identity; Knowledge-first binding identity, scope restoration, mutation guard and typed projection reconciliation; selected write/map/typed neutral checks and bounded diagnostic controls where required; Knowledge/history/memory/staged diff/all nine pre-commit doctrines.
+  Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
+    policy, contract, or infrastructure change.
+  Verification: PASS: 1,497 lines/49,031 bytes baseline-identical; typed source 14/0/231, binding 11/7/6/8, write105, map167/592, diagnostic3/11/6/8/20; Knowledge/history/memory/staged diff/all nine pre-commit doctrines.
+  Commit: `SESSION-STARTUP-READING.3.3.29 - read context observations projections and typed binding stores` — Record completion routing, typed projection and stable binding identity with exact remaining restoration scope.
+- ID: `SESSION-STARTUP-READING.3.3.30`
+  Status: `done`
+  Goal: Read Rust group 30: 1,494 lines/fragments, 53,412 bytes.
+  Scope: `rust/linkedspec-runtime/src/runtime.rs` lines 2319–2737;
+    `rust/linkedspec-runtime/src/semantic_index.rs` lines 1–692;
+    `rust/linkedspec-runtime/src/semantic_index/call_projection.rs` lines 1–383.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification tier: `focused`
+  Focused checks: Read runtime.rs 2319–2737, semantic_index.rs 1–692 and call_projection.rs 1–383 with exact baseline identity; Knowledge-first store restoration, semantic source/index and call projection reconciliation; selected binding/callable/semantic neutral checks and bounded source controls; Knowledge/history/memory/staged diff/all nine pre-commit doctrines.
+  Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
+    policy, contract, or infrastructure change.
+  Verification: PASS reading/diagnosis: 1,494 lines/53,412 bytes baseline-identical; six paired public queries with independent ID/excerpt assertions; semantic6/20/128 at9/0 and6/0, callable23, binding11/7/6/8; .22/.66 ownership; Knowledge/history/memory/staged diff/all nine pre-commit doctrines.
+  Commit: `SESSION-STARTUP-READING.3.3.30 - complete context and semantic foundation reading and own binding identity repair` — Complete context/foundation reading and own the independently measured repeated-binding query repair.
+- ID: `SESSION-STARTUP-READING.3.3.31`
+  Status: `done`
+  Goal: Read Rust group 31: 1,494 lines/fragments, 50,420 bytes.
+  Scope: `rust/linkedspec-runtime/src/semantic_index/call_projection.rs` lines 384–1288;
+    `rust/linkedspec-runtime/src/semantic_index/query.rs` lines 1–589.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification tier: `focused`
+  Focused checks: Read call_projection.rs 384–1288 and query.rs 1–589 with exact baseline identity; Knowledge-first semantic call/shape/source/query validation reconciliation and existing .22/.66 boundary checks; selected semantic neutral proof plus bounded native controls if required; Knowledge/history/memory/staged diff/all nine pre-commit doctrines.
+  Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
+    policy, contract, or infrastructure change.
+  Verification: PASS reading/diagnosis: 1,494 lines/50,420 bytes baseline-identical; six paired public queries, six Perl Get controls and independent signature/source assertions; semantic6/20/128 at9/0 and6/0; .67 ownership; Knowledge/history/memory/staged diff/all nine doctrines.
+  Commit: `SESSION-STARTUP-READING.3.3.31 - complete semantic call reading and own signature and container projection repairs` — Complete call projection and distinguish matching query payloads from independently valid semantic evidence.
+- ID: `SESSION-STARTUP-READING.3.3.32`
+  Status: `done`
+  Goal: Read Rust group 32: 1,495 lines/fragments, 50,145 bytes.
+  Scope: `rust/linkedspec-runtime/src/semantic_index/query.rs` lines 590–1003;
+    `rust/linkedspec-runtime/src/semantic_index/runtime_projection.rs` lines 1–273;
+    `rust/linkedspec-runtime/src/semantic_index/static_projection.rs` lines 1–808.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification tier: `focused`
+  Focused checks: Read query.rs 590–1003, runtime_projection.rs 1–273 and static_projection.rs 1–808 with exact baseline identity; Knowledge-first query validation/budgets, observation topology, static/failure source correlation and existing repair reconciliation; selected semantic neutral proof and bounded diagnostic controls where required; Knowledge/history/memory/staged diff/all nine doctrines.
+  Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
+    policy, contract, or infrastructure change.
+  Verification: PASS reading/diagnosis: 1,495 lines/50,145 bytes baseline-identical; eight native constructor/query controls, four paired Get/CLI controls, independent assertions; semantic6/20/128, diagnostic3/11/6/8/20, recognition138/250/58; .68/.69 ownership; Knowledge/history/memory/staged diff/all nine doctrines.
+  Commit: `SESSION-STARTUP-READING.3.3.32 - complete semantic query reading and own token use and newline repairs` — Complete query/runtime projection and separate actual token-use/parser gaps from a ruled-out failure-mapping concern.
+- ID: `SESSION-STARTUP-READING.3.3.33`
+  Status: `done`
+  Goal: Read Rust group 33: 1,482 lines/fragments, 50,376 bytes.
+  Scope: `rust/linkedspec-runtime/src/semantic_index/static_projection.rs` lines 809–1720;
+    `rust/linkedspec-runtime/src/semantic_observation.rs` lines 1–133;
+    `rust/linkedspec-runtime/src/source_emitter.rs` lines 1–437.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification tier: `focused`
+  Focused checks: Read static_projection.rs 809–1720, semantic_observation.rs 1–133 and source_emitter.rs 1–437 with exact baseline identity; Knowledge-first static scanning/shapes, typed observation and generated family/header authority reconciliation; selected semantic and generated-source neutral proof, bounded native controls only for unresolved evidence; Knowledge/history/memory/staged diff/all nine doctrines.
+  Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
+    policy, contract, or infrastructure change.
+  Verification: PASS reading/diagnosis: 1,482 lines/50,376 bytes baseline-identical; five paired public queries, three paired Get/CLI controls and independent assertions; semantic6/20/128, cursor36/18/8/60, generated10families/strictRust105; .70 ownership; Knowledge/history/memory/staged diff/all nine doctrines.
+  Commit: `SESSION-STARTUP-READING.3.3.33 - complete static semantic reading and own grouped edge correlation repairs` — Complete static/event reading and distinguish correct grouped execution from incomplete semantic source/index records.
+- ID: `SESSION-STARTUP-READING.3.3.34`
+  Status: `done`
+  Goal: Read Rust group 34: 1,493 lines/fragments, 53,383 bytes.
+  Scope: `rust/linkedspec-runtime/src/source_emitter.rs` lines 438–1466;
+    `rust/linkedspec-runtime/src/source_location.rs` lines 1–464.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification tier: `focused`
+  Focused checks: Read source_emitter.rs 438–1466 and source_location.rs 1–464 with exact baseline identity; Knowledge-first generated module roles, reconstruction/plan validation and typed source coordinate/error/projection authority; selected generated/cursor/typed-source neutral proof and bounded controls only for unresolved evidence; Knowledge/history/memory/staged diff/all nine doctrines.
+  Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
+    policy, contract, or infrastructure change.
+  Verification: PASS reading/diagnosis: 1,493 lines/53,383 bytes baseline-identical; eight identity emissions/seven module compiles and two executable modules/ten results, independent assertions; generated10/strictRust105, cursor36/18/8/60, typed14/0/231; .71/.72 owned; Knowledge/history/memory/staged diff/all nine doctrines.
+  Commit: `SESSION-STARTUP-READING.3.3.34 - complete emitter reading and own literal and recognition adapter repairs` — Complete emitter reading and preserve independently measured generated identity/projection gaps.
+- ID: `SESSION-STARTUP-READING.3.3.35`
+  Status: `done`
+  Goal: Read Rust group 35: 1,497 lines/fragments, 51,223 bytes.
+  Scope: `rust/linkedspec-runtime/src/source_location.rs` lines 465–561;
+    `rust/linkedspec-runtime/src/spec_loader.rs` lines 1–564;
+    `rust/linkedspec-runtime/src/spec_parser.rs` lines 1–836.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification tier: `focused`
+  Focused checks: Read source_location.rs 465–561, spec_loader.rs 1–564 and spec_parser.rs 1–836 with exact baseline identity; Knowledge-first materialization, load/search/validation and staged spec-parser rules; selected typed-source, diagnostic and staged neutral checks; bounded tool controls for unresolved evidence; Knowledge/history/memory/staged diff/all nine doctrines.
+  Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
+    policy, contract, or infrastructure change.
+  Verification: PASS reading: 1,497 lines/51,223 bytes baseline-identical; ADR0026 and one new/four existing Knowledge owners reconciled; native resolution14/9/4, typed14/0/231, diagnostic3/11/6/8/20, staged9legs/123+129mutations; Knowledge/history/memory/staged diff/all nine doctrines.
+  Commit: `SESSION-STARTUP-READING.3.3.35 - complete source authority and loader reading and reconcile function projection` — Complete source authority/loader and retain exact staged function projection and scalar-source boundaries.
+- ID: `SESSION-STARTUP-READING.3.3.36`
+  Status: `done`
+  Goal: Read Rust group 36: 1,453 lines/fragments, 51,063 bytes.
+  Scope: `rust/linkedspec-runtime/src/spec_parser.rs` lines 837–1022;
+    `rust/linkedspec-runtime/src/staged_ast_enrichment.rs` lines 1–1267.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification tier: `focused`
+  Focused checks: Read spec_parser.rs 837–1022 and staged_ast_enrichment.rs 1–1267 with exact baseline identity; Knowledge-first signature/span/error helpers and staged provenance/registry/cache/dispatch validation; selected staged and typed-source neutral proof, bounded tools for unresolved mechanisms; Knowledge/history/memory/staged diff/all nine doctrines.
+  Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
+    policy, contract, or infrastructure change.
+  Verification: PASS reading: 1,453 lines/51,063 bytes baseline-identical; five Knowledge owners and .55.1 source inventory reconciled; staged9legs/123+129mutations, typed14/0/231 and scalar55/18; Knowledge/history/memory/staged diff/all nine doctrines.
+  Commit: `SESSION-STARTUP-READING.3.3.36 - complete spec parser reading and trace staged registry and invocation authority` — Complete spec parser and preserve frozen registry, fresh seed and queue coordinator boundaries.
+- ID: `SESSION-STARTUP-READING.3.3.37`
+  Status: `done`
+  Goal: Read Rust group 37: 1,499 lines/fragments, 53,102 bytes.
+  Scope: `rust/linkedspec-runtime/src/staged_ast_enrichment.rs` lines 1268–2766.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification tier: `focused`
+  Focused checks: Read staged_ast_enrichment.rs 1268–2766 with exact baseline identity; Knowledge-first recursive execution, safe points, source rebasing, marker/plan validation and result settlement; selected staged/typed-source neutral proof and bounded tools for unresolved evidence; Knowledge/history/memory/staged diff/all nine doctrines.
+  Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
+    policy, contract, or infrastructure change.
+  Verification: PASS reading: 1,499 lines/53,102 baseline-identical bytes; 28 paired target, 12 returned-marker and six budget records independently asserted; .73/.74/.75 own measured gaps; staged123+129 and typed14/0/231; Knowledge/history/memory/staged diff/all nine doctrines.
+  Commit: `SESSION-STARTUP-READING.3.3.37 - trace staged execution and own target validation and counter repairs` — Preserve exact staged execution evidence and own destination, marker/provenance and call-counter repairs.
+- ID: `SESSION-STARTUP-READING.3.3.38`
+  Status: `done`
+  Goal: Read Rust group 38: 1,500 lines/fragments, 50,788 bytes.
+  Scope: `rust/linkedspec-runtime/src/staged_ast_enrichment.rs` lines 2767–3058;
+    `rust/linkedspec-runtime/src/staged_parse_job.rs` lines 1–290;
+    `rust/linkedspec-runtime/src/staged_parser_registry.rs` lines 1–712;
+    `rust/linkedspec-runtime/src/unicode_case_mapping.rs` lines 1–206.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+    Own mandatory change-history rollover and its exact finite capacity admission under README_POLICY; verify source/blob/hash/prior-manifest preservation and indexed ADR 0106 before the exact staged canonical gate.
+  Verification tier: `canonical`
+  Focused checks: Read all four owned staged-enrichment/job/registry and Unicode-prefix ranges with exact baseline identity; Knowledge-first source reconciliation; staged, typed-source and Unicode generation/fixture checks; Knowledge/history/memory/staged diff/all nine doctrines; independent archive preservation and exact routing proof.
+  Canonical trigger: `infrastructure` — mandatory change-history rollover requires exact ADR 0106 file/manifest capacity admission;
+    receipt-bound canonical verification is required before landing, with runtime/public-book reading gates unchanged.
+  Verification: PASS focused reading: 1,500 lines/50,788 baseline-identical bytes across four ranges; six existing Knowledge cards/.55.1 source inventory reconciled; Unicode1563/1581/158/464/12, staged123+129, typed14/0/231; Archive source/blob/hash/prior-manifest proof passes; final exact staged canonical receipt is required before landing.
+  Commit: `SESSION-STARTUP-READING.3.3.38 - complete staged source reading and preserve bounded change history` — Complete staged source comprehension and separate declaration authority, returned records and legacy adapter metadata.
+- ID: `SESSION-STARTUP-READING.3.3.39`
+  Status: `done`
+  Goal: Read Rust group 39: 1,500 lines/fragments, 38,103 bytes.
+  Scope: `rust/linkedspec-runtime/src/unicode_case_mapping.rs` lines 207–1706.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification tier: `focused`
+  Focused checks: Exact scoped Unicode reading/baseline identity; existing Knowledge reconciliation; completed .3.3.38 canonical receipt/log and two consumed sample identities; Unicode regeneration/neutral fixtures; memory, both history-pressure checks, staged diff and all nine doctrines.
+  Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
+    policy, contract, or infrastructure change.
+  Verification: PASS reading: all 1,500 lines/38,103 baseline-identical bytes; lower map complete, upper prefix reconciled; Unicode1563/1581/158/464/12; prior exact canonical receipt/log and both sample identities consumed; five Knowledge cards, memory/history/diff and required nine-doctrine commit checks.
+  Commit: `SESSION-STARTUP-READING.3.3.39 - finish Unicode lower-map reading and preserve canonical evidence` — Preserve completed Unicode lower-map comprehension and exact prior canonical/sample evidence.
+- ID: `SESSION-STARTUP-READING.3.3.40`
+  Status: `done`
+  Goal: Read Rust group 40: 1,450 lines/fragments, 37,746 bytes.
+  Scope: `rust/linkedspec-runtime/src/unicode_case_mapping.rs` lines 1707–3156.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification tier: `focused`
+  Focused checks: All owned Unicode upper-table bytes read without truncation and full-file/range baseline identity; reconcile pinned generation authority and retained .3.3.39 proof; memory, both history-pressure checks, Knowledge synchronization, staged diff and all nine doctrines.
+  Canonical trigger: `none` — bounded reading/Knowledge/continuity only; no runtime, public-book,
+    policy, contract, or infrastructure change.
+  Verification: PASS: all 1,450 lines / 37,746 bytes read untruncated and baseline-identical; complete upper-map comprehension reconciled; unchanged generation inputs preserve .3.3.39 Unicode proof; Knowledge, memory, both histories, diff and required nine-doctrine commit checks.
+  Commit: `SESSION-STARTUP-READING.3.3.40 - complete Unicode upper-map reading` — Complete upper-map physical reading with exact range identity and retained generation proof.
+- ID: `SESSION-STARTUP-READING.3.3.41`
+  Status: `done`
+  Goal: Read Rust group 41: 1,494 lines/fragments, 43,943 bytes.
+  Scope: `rust/linkedspec-runtime/src/unicode_case_mapping.rs` lines 3157–3859;
+    `rust/linkedspec-runtime/tests/callable_codeblock_literal_contract.rs` lines 1–791.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification tier: `canonical`
+  Focused checks: Exact Unicode suffix and callable contract prefix reading/baseline identity; Knowledge-first reconciliation; Unicode and callable neutral checks; memory, both history-pressure checks, Knowledge synchronization and staged diff; exact staged canonical local CI before final batch commit/push.
+  Canonical trigger: `batch/push` — item 100 closes the accepted default batch; exact staged canonical CI
+    must pass before the final leaf commit and clean push.
+  Verification: PASS focused: all 1,494 lines / 43,943 baseline-identical bytes; complete Unicode module and bounded callable assertion scope; Unicode 1563/1581/158/464/12 and callable 7/11/9/7/4/8/23; four Knowledge cards; exact 99-commit batch census. Final exact staged canonical receipt is required before landing; its completed result is recorded in the commit body.
+  Commit: `SESSION-STARTUP-READING.3.3.41 - complete Unicode reading and checkpoint callable contracts at the batch boundary` — Close the accepted 100-item batch after exact canonical proof; resume required reading at .3.3.42.
+- ID: `SESSION-STARTUP-READING.3.3.42`
+  Status: `done`
+  Goal: Read Rust group 42: 1,500 lines/fragments, 45,529 bytes.
+  Scope: `rust/linkedspec-runtime/tests/callable_codeblock_literal_contract.rs` lines 792–958;
+    `rust/linkedspec-runtime/tests/complete_named_mark_contract.rs` lines 1–90;
+    `rust/linkedspec-runtime/tests/corpus/README.md` lines 1–116;
+    `rust/linkedspec-runtime/tests/corpus/autoexist_array_bare_arg/expected.json` lines 1–4;
+    `rust/linkedspec-runtime/tests/corpus/autoexist_array_bare_arg/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/autoexist_array_bare_arg/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/autoexist_array_declare/expected.json` lines 1–4;
+    `rust/linkedspec-runtime/tests/corpus/autoexist_array_declare/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/autoexist_array_declare/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/autoexist_array_no_declare/expected.json` lines 1–4;
+    `rust/linkedspec-runtime/tests/corpus/autoexist_array_no_declare/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/autoexist_array_no_declare/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/autoexist_scalar_bare_arg/expected.json` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/autoexist_scalar_bare_arg/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/autoexist_scalar_bare_arg/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/autoexist_scalar_declare/expected.json` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/autoexist_scalar_declare/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/autoexist_scalar_declare/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/autoexist_scalar_no_declare/expected.json` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/autoexist_scalar_no_declare/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/autoexist_scalar_no_declare/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/autoexist_undef_literal/expected.json` lines 1–3;
+    `rust/linkedspec-runtime/tests/corpus/autoexist_undef_literal/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/autoexist_undef_literal/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/capability_capture_anonymous_surface/expected.json` lines 1–19;
+    `rust/linkedspec-runtime/tests/corpus/capability_capture_anonymous_surface/input.spec` lines 1–51;
+    `rust/linkedspec-runtime/tests/corpus/capability_capture_anonymous_surface/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/capability_capture_named_surface/expected.json` lines 1–23;
+    `rust/linkedspec-runtime/tests/corpus/capability_capture_named_surface/input.spec` lines 1–61;
+    `rust/linkedspec-runtime/tests/corpus/capability_capture_named_surface/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/capability_control_marker_surface/expected.json` lines 1–4;
+    `rust/linkedspec-runtime/tests/corpus/capability_control_marker_surface/input.spec` lines 1–26;
+    `rust/linkedspec-runtime/tests/corpus/capability_control_marker_surface/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/capability_cursor_control_surface/expected.json` lines 1–7;
+    `rust/linkedspec-runtime/tests/corpus/capability_cursor_control_surface/input.spec` lines 1–24;
+    `rust/linkedspec-runtime/tests/corpus/capability_cursor_control_surface/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/capability_position_helper_surface/expected.json` lines 1–37;
+    `rust/linkedspec-runtime/tests/corpus/capability_position_helper_surface/input.spec` lines 1–41;
+    `rust/linkedspec-runtime/tests/corpus/capability_position_helper_surface/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/capability_pure_helper_surface/expected.json` lines 1–47;
+    `rust/linkedspec-runtime/tests/corpus/capability_pure_helper_surface/input.spec` lines 1–38;
+    `rust/linkedspec-runtime/tests/corpus/capability_pure_helper_surface/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/ds_vhistory_version_entry/expected.json` lines 1–24;
+    `rust/linkedspec-runtime/tests/corpus/ds_vhistory_version_entry/input.spec` lines 1–95;
+    `rust/linkedspec-runtime/tests/corpus/ds_vhistory_version_entry/input.txt` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/ebnf_expression_rules/expected.json` lines 1–42;
+    `rust/linkedspec-runtime/tests/corpus/ebnf_expression_rules/input.spec` lines 1–214;
+    `rust/linkedspec-runtime/tests/corpus/ebnf_expression_rules/input.txt` lines 1–2;
+    `rust/linkedspec-runtime/tests/corpus/ebnf_logging_annotation/expected.json` lines 1–22;
+    `rust/linkedspec-runtime/tests/corpus/ebnf_logging_annotation/input.spec` lines 1–214;
+    `rust/linkedspec-runtime/tests/corpus/ebnf_logging_annotation/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/hlink_bracket_body/expected.json` lines 1–3;
+    `rust/linkedspec-runtime/tests/corpus/hlink_bracket_body/input.spec` lines 1–29;
+    `rust/linkedspec-runtime/tests/corpus/hlink_bracket_body/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/hlink_curly_brace/expected.json` lines 1–3;
+    `rust/linkedspec-runtime/tests/corpus/hlink_curly_brace/input.spec` lines 1–28.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification tier: `focused`
+  Focused checks: Exact scoped reading and baseline byte identity; callable and named-mark neutral checks;
+    Knowledge reconciliation; task pressure census; memory, doctrines, Knowledge, both histories and staged diff.
+  Canonical trigger: `none` — reading and continuity only; no runtime, public contract or infrastructure change.
+  Verification: PASS: all 56 scopes / 1,500 lines / 45,529 bytes read untruncated and baseline-identical;
+    callable 7/11/9/7/4/8/23 and named-mark 7 helpers/3 mutations pass; focused continuity proof precedes landing.
+  Commit: `SESSION-STARTUP-READING.3.3.42 - complete callable and named-mark reading with corpus prefix` — Complete callable/named-mark reading and owned corpus prefix.
+- ID: `SESSION-STARTUP-READING.3.3.43`
+  Status: `done`
+  Goal: Read Rust group 43: 1,106 lines/fragments, 59,355 bytes.
+  Scope: `rust/linkedspec-runtime/tests/corpus/hlink_curly_brace/input.spec` lines 29–29;
+    `rust/linkedspec-runtime/tests/corpus/hlink_curly_brace/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/hlink_mixed_bracket_brace/expected.json` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/hlink_mixed_bracket_brace/input.spec` lines 1–29;
+    `rust/linkedspec-runtime/tests/corpus/hlink_mixed_bracket_brace/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/hlink_raw_escaped_brackets/expected.json` lines 1–3;
+    `rust/linkedspec-runtime/tests/corpus/hlink_raw_escaped_brackets/input.spec` lines 1–29;
+    `rust/linkedspec-runtime/tests/corpus/hlink_raw_escaped_brackets/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/hlink_raw_string/expected.json` lines 1–3;
+    `rust/linkedspec-runtime/tests/corpus/hlink_raw_string/input.spec` lines 1–29;
+    `rust/linkedspec-runtime/tests/corpus/hlink_raw_string/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/lib_reader_cattribute/expected.json` lines 1–17;
+    `rust/linkedspec-runtime/tests/corpus/lib_reader_cattribute/input.spec` lines 1–15;
+    `rust/linkedspec-runtime/tests/corpus/lib_reader_cattribute/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/lib_reader_sattribute/expected.json` lines 1–14;
+    `rust/linkedspec-runtime/tests/corpus/lib_reader_sattribute/input.spec` lines 1–15;
+    `rust/linkedspec-runtime/tests/corpus/lib_reader_sattribute/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/lispish_x_y/expected.json` lines 1–6;
+    `rust/linkedspec-runtime/tests/corpus/lispish_x_y/input.spec` lines 1–86;
+    `rust/linkedspec-runtime/tests/corpus/lispish_x_y/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/manifest.json` lines 1–112;
+    `rust/linkedspec-runtime/tests/corpus/portmap_bare/expected.json` lines 1–6;
+    `rust/linkedspec-runtime/tests/corpus/portmap_bare/input.spec` lines 1–33;
+    `rust/linkedspec-runtime/tests/corpus/portmap_bare/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/portmap_bit/expected.json` lines 1–7;
+    `rust/linkedspec-runtime/tests/corpus/portmap_bit/input.spec` lines 1–33;
+    `rust/linkedspec-runtime/tests/corpus/portmap_bit/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/portmap_concatenation/expected.json` lines 1–18;
+    `rust/linkedspec-runtime/tests/corpus/portmap_concatenation/input.spec` lines 1–33;
+    `rust/linkedspec-runtime/tests/corpus/portmap_concatenation/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/portmap_constant/expected.json` lines 1–6;
+    `rust/linkedspec-runtime/tests/corpus/portmap_constant/input.spec` lines 1–33;
+    `rust/linkedspec-runtime/tests/corpus/portmap_constant/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/portmap_slice/expected.json` lines 1–8;
+    `rust/linkedspec-runtime/tests/corpus/portmap_slice/input.spec` lines 1–33;
+    `rust/linkedspec-runtime/tests/corpus/portmap_slice/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/pplugin_empty/expected.json` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/pplugin_empty/input.spec` lines 1–33;
+    `rust/linkedspec-runtime/tests/corpus/pplugin_empty/input.txt` empty file (0 bytes);
+    `rust/linkedspec-runtime/tests/corpus/proof_edge_array_literal/expected.json` lines 1–4;
+    `rust/linkedspec-runtime/tests/corpus/proof_edge_array_literal/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/proof_edge_array_literal/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/proof_edge_scalar_literal/expected.json` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/proof_edge_scalar_literal/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/proof_edge_scalar_literal/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/regdef_nested_register_fields/expected.json` lines 1–21;
+    `rust/linkedspec-runtime/tests/corpus/regdef_nested_register_fields/input.spec` lines 1–23;
+    `rust/linkedspec-runtime/tests/corpus/regdef_nested_register_fields/input.txt` lines 1–4;
+    `rust/linkedspec-runtime/tests/corpus/simenv_multiline_value/expected.json` lines 1–17;
+    `rust/linkedspec-runtime/tests/corpus/simenv_multiline_value/input.spec` lines 1–225;
+    `rust/linkedspec-runtime/tests/corpus/simenv_multiline_value/input.txt` lines 1–3;
+    `rust/linkedspec-runtime/tests/corpus/spec_spec_action_edge/expected.json` lines 1–31;
+    `rust/linkedspec-runtime/tests/corpus/spec_spec_action_edge/input.spec` lines 1–145.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification tier: `focused`
+  Focused checks: Exact owned-range/baseline and corpus-manifest/JSON checks; preserve the completed Toolbox
+    SimEnv dispatch probe and repair ownership; Knowledge, memory, all doctrines, both histories and diff.
+  Canonical trigger: `none` — bounded reading and proposed/repair intake; no production or public contract change.
+  Verification: All 53 scopes (52 nonempty), 1,106 lines / 59,355 bytes read and baseline-identical;
+    18 JSON files decode, manifest has 105 unique cases. Twelve paired Perl probes and exact lowered callee
+    confirm .76; PARSER-AUTHORING-APIS preserves three proposed DBINP investigations. Focused continuity governs landing.
+  Commit: `SESSION-STARTUP-READING.3.3.43 - reconcile corpus reading and own SimEnv dispatch repair`
+- ID: `SESSION-STARTUP-READING.3.3.44`
+  Status: `done`
+  Goal: Read Rust group 44: 225 lines/fragments, 65,141 bytes.
+  Scope: `rust/linkedspec-runtime/tests/corpus/spec_spec_action_edge/input.spec` lines 146–226;
+    `rust/linkedspec-runtime/tests/corpus/spec_spec_action_edge/input.txt` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/spec_spec_comment_skip/expected.json` lines 1–14;
+    `rust/linkedspec-runtime/tests/corpus/spec_spec_comment_skip/input.spec` lines 1–125.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification tier: `focused`
+  Focused checks: Exact owned-range/baseline audit; four grammar-mirror identities and Unicode rule-label contract; Knowledge, memory, all doctrines, histories and diff.
+  Canonical trigger: `none` — bounded reading checkpoint; grammar and runtime unchanged.
+  Verification: All four scopes reconcile with the baseline: 225 lines / 65,141 bytes; ordered audit SHA-256 `e2f195398076abb7f885a1dc307122b7f391aee92d7d04d19c488c6e37353444`. The action-edge grammar is read through EOF; comment-skip grammar is read through paragraph dispatch. Fluent/bare/blind edges retain distinct node fields, complete-line lifecycle precedes bare edges, standalone blocks normalize to I, and variadic functions emit a versioned signature. JSON decodes; all four 83,452-byte / 226-line mirrors equal canonical SHA-256 `03cfb50459984806c806e9ec3f2b072add897c207a2cb93fd267d640a5808004`; Unicode 17.0.0 / 806 ranges / 9 positive / 8 negative / 2 distinct pairs pass. Stored oracle inspection is not a fresh parser execution.
+  Commit: `SESSION-STARTUP-READING.3.3.44 - reconcile self-hosted grammar reading and mirror freshness`
+- ID: `SESSION-STARTUP-READING.3.3.45`
+  Status: `done`
+  Goal: Read Rust group 45: 44 lines/fragments, 60,931 bytes.
+  Scope: `rust/linkedspec-runtime/tests/corpus/spec_spec_comment_skip/input.spec` lines 126–169.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification tier: `focused`
+  Focused checks: Exact owned-range/baseline audit and current mirror identity against the .44 Unicode freshness proof; Knowledge, memory, all doctrines, histories and diff.
+  Canonical trigger: `none` — bounded reading checkpoint; grammar and runtime unchanged.
+  Verification: All 44 lines / 60,931 bytes match the baseline; range SHA-256 `70dc693993fb724cfca8d8a3394b285210fdb20740f23b605e80da414dcb68d6`. Header labels preserve frozen Unicode membership plus physical-line/colon boundaries; mode and top are separate fields. Named slots preserve slot_name, anonymous anchors preserve pattern, and action/blind/bare block or fluent forms retain their distinct target/code/raw fields. Complete mirror identity remains `03cfb50459984806c806e9ec3f2b072add897c207a2cb93fd267d640a5808004`, so .44 freshness/Unicode proof applies unchanged. Existing self-hosted-rule-label-physical-boundaries Knowledge owns causal interpretation; no new runtime result is claimed.
+  Commit: `SESSION-STARTUP-READING.3.3.45 - reconcile self-hosted labels and edge grammar reading`
+- ID: `SESSION-STARTUP-READING.3.3.46`
+  Status: `done`
+  Goal: Read Rust group 46: 231 lines/fragments, 59,566 bytes.
+  Scope: `rust/linkedspec-runtime/tests/corpus/spec_spec_comment_skip/input.spec` lines 170–226;
+    `rust/linkedspec-runtime/tests/corpus/spec_spec_comment_skip/input.txt` lines 1–3;
+    `rust/linkedspec-runtime/tests/corpus/spec_spec_minimal_rule/expected.json` lines 1–14;
+    `rust/linkedspec-runtime/tests/corpus/spec_spec_minimal_rule/input.spec` lines 1–157.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification tier: `focused`
+  Focused checks: Four exact owned-range/baseline identities, fixture JSON and unchanged canonical mirrors; Knowledge, memory, all doctrines, histories and diff.
+  Canonical trigger: `none` — bounded reading checkpoint; grammar and runtime unchanged.
+  Verification: All four owned scopes match the baseline: 231 lines / 59,566 bytes; ordered audit SHA-256 `f6593863e1e3914a4a4a52b06bd4c99f8e0d7b24d8ddfe7d5a4d57310894c67f`. Comment-skip grammar is complete through EOF; minimal-rule grammar is read through blind-block dispatch. Comment input and decoded minimal-rule oracle preserve Top plus anonymous x-regex nodes; the leading comment is skipped by spec_file dispatch. The suffix preserves bare/lifecycle precedence, standalone-I normalization, variadic signatures and marker/directive nodes. Both complete grammar mirrors retain .44 canonical identity and its Unicode proof. Stored oracle inspection is not a fresh parser execution.
+  Commit: `SESSION-STARTUP-READING.3.3.46 - reconcile comment-skip and minimal-rule grammar reading`
+- ID: `SESSION-STARTUP-READING.3.3.47`
+  Status: `done`
+  Goal: Read Rust group 47: 249 lines/fragments, 53,907 bytes.
+  Scope: `rust/linkedspec-runtime/tests/corpus/spec_spec_minimal_rule/input.spec` lines 158–226;
+    `rust/linkedspec-runtime/tests/corpus/spec_spec_minimal_rule/input.txt` lines 1–2;
+    `rust/linkedspec-runtime/tests/corpus/spec_spec_user_function_definition/expected.json` lines 1–37;
+    `rust/linkedspec-runtime/tests/corpus/spec_spec_user_function_definition/input.spec` lines 1–141.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification tier: `focused`
+  Focused checks: Four exact owned-range/baseline identities, fixture JSON and unchanged canonical mirrors; Knowledge, memory, all doctrines, histories and diff.
+  Canonical trigger: `none` — bounded reading checkpoint; grammar and runtime unchanged.
+  Verification: All four owned scopes match the baseline: 249 lines / 53,907 bytes; ordered audit SHA-256 `63aa28ce7e9c2e3f4130788a8fb8aeda2d568483fe7efd6059dab3d905d75d21`. Minimal-rule grammar is complete through EOF; user-function grammar is read through anonymous regex-anchor dispatch. The decoded function oracle preserves norm(value) body text before Top in the first paragraph, the action code calling norm, and a separate Done paragraph. This describes syntax capture, not executed function semantics. The suffix preserves bare/lifecycle/fixed/variadic/split/gap/comment forms. Both complete grammar mirrors retain .44 canonical identity and Unicode proof; existing self-hosted grammar Knowledge owns interpretation.
+  Commit: `SESSION-STARTUP-READING.3.3.47 - reconcile minimal-rule and user-function grammar reading`
+- ID: `SESSION-STARTUP-READING.3.3.48`
+  Status: `done`
+  Goal: Read Rust group 48: 32 lines/fragments, 60,575 bytes.
+  Scope: `rust/linkedspec-runtime/tests/corpus/spec_spec_user_function_definition/input.spec` lines 142–173.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification tier: `focused`
+  Focused checks: Exact owned-range/baseline and complete mirror identities against unchanged .44 Unicode proof; Knowledge, memory, all doctrines, histories and diff.
+  Canonical trigger: `none` — bounded reading checkpoint; grammar and runtime unchanged.
+  Verification: All 32 owned lines / 60,575 bytes match the baseline; range SHA-256 `f2f565823d9c0222fd4e21eab5c58e23b22c418012c79d37de68d6f50d5666ec`. Action block/fluent/bare, blind block/fluent/bare, grouped bare-block and bare-fluent tokens retain explicit target/index/source_form or raw fields and balanced recursive blocks. The complete mirror retains canonical SHA-256 `03cfb50459984806c806e9ec3f2b072add897c207a2cb93fd267d640a5808004` and .44 Unicode proof. The grammar suffix remains .49-owned; no fresh corpus execution is claimed. Existing self-hosted grammar and physical-boundary Knowledge apply unchanged.
+  Commit: `SESSION-STARTUP-READING.3.3.48 - reconcile user-function edge grammar reading`
+- ID: `SESSION-STARTUP-READING.3.3.49`
+  Status: `done`
+  Goal: Read Rust group 49: 1,500 lines/fragments, 46,200 bytes.
+  Scope: `rust/linkedspec-runtime/tests/corpus/spec_spec_user_function_definition/input.spec` lines 174–226;
+    `rust/linkedspec-runtime/tests/corpus/spec_spec_user_function_definition/input.txt` lines 1–6;
+    `rust/linkedspec-runtime/tests/corpus/tablegrep_simple_term/expected.json` lines 1–8;
+    `rust/linkedspec-runtime/tests/corpus/tablegrep_simple_term/input.spec` lines 1–86;
+    `rust/linkedspec-runtime/tests/corpus/tablegrep_simple_term/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/tclite_command_subst/expected.json` lines 1–9;
+    `rust/linkedspec-runtime/tests/corpus/tclite_command_subst/input.spec` lines 1–35;
+    `rust/linkedspec-runtime/tests/corpus/tclite_command_subst/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/tclite_double_quote/expected.json` lines 1–9;
+    `rust/linkedspec-runtime/tests/corpus/tclite_double_quote/input.spec` lines 1–35;
+    `rust/linkedspec-runtime/tests/corpus/tclite_double_quote/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_11_3_assignment_replacement_and_explicit_targets/expected.json` lines 1–18;
+    `rust/linkedspec-runtime/tests/corpus/terse_11_3_assignment_replacement_and_explicit_targets/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_11_3_assignment_replacement_and_explicit_targets/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_11_3_shape_assignment_value_binding/expected.json` lines 1–24;
+    `rust/linkedspec-runtime/tests/corpus/terse_11_3_shape_assignment_value_binding/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_11_3_shape_assignment_value_binding/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_11_4_nested_mixed_value_path_assignment/expected.json` lines 1–38;
+    `rust/linkedspec-runtime/tests/corpus/terse_11_4_nested_mixed_value_path_assignment/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_11_4_nested_mixed_value_path_assignment/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_12_3_hash_tree_traversal_receiver_blocks/expected.json` lines 1–17;
+    `rust/linkedspec-runtime/tests/corpus/terse_12_3_hash_tree_traversal_receiver_blocks/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_12_3_hash_tree_traversal_receiver_blocks/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_13_3_array_tree_traversal_receiver_blocks/expected.json` lines 1–19;
+    `rust/linkedspec-runtime/tests/corpus/terse_13_3_array_tree_traversal_receiver_blocks/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_13_3_array_tree_traversal_receiver_blocks/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_14_3_with_helper_trailing_block/expected.json` lines 1–8;
+    `rust/linkedspec-runtime/tests/corpus/terse_14_3_with_helper_trailing_block/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_14_3_with_helper_trailing_block/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_14_4_receiver_with_trailing_block/expected.json` lines 1–7;
+    `rust/linkedspec-runtime/tests/corpus/terse_14_4_receiver_with_trailing_block/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_14_4_receiver_with_trailing_block/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_15_2_3_bare_value_reads_and_case_labels/expected.json` lines 1–6;
+    `rust/linkedspec-runtime/tests/corpus/terse_15_2_3_bare_value_reads_and_case_labels/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_15_2_3_bare_value_reads_and_case_labels/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_15_4_bare_scalar_payload_readback/expected.json` lines 1–12;
+    `rust/linkedspec-runtime/tests/corpus/terse_15_4_bare_scalar_payload_readback/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_15_4_bare_scalar_payload_readback/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_2_3_2_array_copy_bare_read/expected.json` lines 1–4;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_2_3_2_array_copy_bare_read/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_2_3_2_array_copy_bare_read/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_2_3_2_copy_bare_array_first/expected.json` lines 1–3;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_2_3_2_copy_bare_array_first/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_2_3_2_copy_bare_array_first/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_2_3_2_copy_bare_hash/expected.json` lines 1–3;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_2_3_2_copy_bare_hash/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_2_3_2_copy_bare_hash/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_2_3_2_hash_copy_bare_read/expected.json` lines 1–3;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_2_3_2_hash_copy_bare_read/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_2_3_2_hash_copy_bare_read/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_2_3_4_assignment_source_bare_reads/expected.json` lines 1–4;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_2_3_4_assignment_source_bare_reads/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_2_3_4_assignment_source_bare_reads/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_2_3_4_mutation_direct_bare_reads/expected.json` lines 1–9;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_2_3_4_mutation_direct_bare_reads/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_2_3_4_mutation_direct_bare_reads/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_2_3_4_return_bare_scalar/expected.json` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_2_3_4_return_bare_scalar/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_2_3_4_return_bare_scalar/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_2_3_5_3_shape_literal_mutation_rhs/expected.json` lines 1–12;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_2_3_5_3_shape_literal_mutation_rhs/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_2_3_5_3_shape_literal_mutation_rhs/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_2_3_5_3_shape_literal_return_values/expected.json` lines 1–14;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_2_3_5_3_shape_literal_return_values/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_2_3_5_3_shape_literal_return_values/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_3_2_push_alias_array/expected.json` lines 1–4;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_3_2_push_alias_array/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_3_2_push_alias_array/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_3_3_set_key_statement_hash/expected.json` lines 1–3;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_3_3_set_key_statement_hash/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_3_3_set_key_statement_hash/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_3_4_1_scalar_assignment_operator/expected.json` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_3_4_1_scalar_assignment_operator/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_3_4_1_scalar_assignment_operator/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_3_4_2_array_append_operator/expected.json` lines 1–4;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_3_4_2_array_append_operator/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_3_4_2_array_append_operator/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_3_4_3_hash_index_assignment_operator/expected.json` lines 1–3;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_3_4_3_hash_index_assignment_operator/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_3_4_3_hash_index_assignment_operator/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_4_2_copy_hash_symbol_empty/expected.json` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_4_2_copy_hash_symbol_empty/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_4_2_copy_hash_symbol_empty/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_4_2_set_cat_copy_array/expected.json` lines 1–3;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_4_2_set_cat_copy_array/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_4_2_set_cat_copy_array/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_5_2_boolean_mutation_flow/expected.json` lines 1–10;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_5_2_boolean_mutation_flow/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_5_2_boolean_mutation_flow/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_5_2_primitive_literals/expected.json` lines 1–8;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_5_2_primitive_literals/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_5_2_primitive_literals/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_5_3_call_spacing/expected.json` lines 1–9;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_5_3_call_spacing/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_5_3_call_spacing/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_5_4_newline_statements/expected.json` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_5_4_newline_statements/input.spec` lines 1–6;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_5_4_newline_statements/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_5_5_1_direct_nested_access/expected.json` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_5_5_1_direct_nested_access/input.spec` lines 1–7;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_5_5_1_direct_nested_access/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_6_array_end_mutation_methods/expected.json` lines 1–3;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_6_array_end_mutation_methods/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_1_6_array_end_mutation_methods/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_1_3_expression_valued_blocks/expected.json` lines 1–7;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_1_3_expression_valued_blocks/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_1_3_expression_valued_blocks/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_1_4_expression_valued_block_early_return/expected.json` lines 1–6;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_1_4_expression_valued_block_early_return/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_1_4_expression_valued_block_early_return/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_2_3_attached_if_blocks/expected.json` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_2_3_attached_if_blocks/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_2_3_attached_if_blocks/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_2_4_when_otherwise_aliases/expected.json` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_2_4_when_otherwise_aliases/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_2_4_when_otherwise_aliases/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_2_5_2_attached_switch_blocks/expected.json` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_2_5_2_attached_switch_blocks/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_2_5_2_attached_switch_blocks/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_2_6_2_attached_while_blocks/expected.json` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_2_6_2_attached_while_blocks/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_2_6_2_attached_while_blocks/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_3_4_1_bare_array_helper_arg_composition/expected.json` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_3_4_1_bare_array_helper_arg_composition/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_3_4_1_bare_array_helper_arg_composition/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_3_4_1_bare_hash_helper_arg_composition/expected.json` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_3_4_1_bare_hash_helper_arg_composition/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_3_4_1_bare_hash_helper_arg_composition/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_3_4_2_inline_if_value_control/expected.json` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_3_4_2_inline_if_value_control/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_3_4_2_inline_if_value_control/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_3_4_2_inline_switch_value_control/expected.json` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_3_4_2_inline_switch_value_control/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_3_4_2_inline_switch_value_control/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_3_4_deep_pure_helper_composition/expected.json` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_3_4_deep_pure_helper_composition/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_3_4_deep_pure_helper_composition/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_3_5_1_array_receiver_value_chains/expected.json` lines 1–9;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_3_5_1_array_receiver_value_chains/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_3_5_1_array_receiver_value_chains/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_3_5_2_hash_receiver_value_chains/expected.json` lines 1–9;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_3_5_2_hash_receiver_value_chains/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_3_5_2_hash_receiver_value_chains/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_3_5_3_string_receiver_value_chains/expected.json` lines 1–8;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_3_5_3_string_receiver_value_chains/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_3_5_3_string_receiver_value_chains/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_3_5_4_number_receiver_value_chains/expected.json` lines 1–6;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_3_5_4_number_receiver_value_chains/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_3_5_4_number_receiver_value_chains/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_3_5_5_block_valued_receiver_chains/expected.json` lines 1–7;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_3_5_5_block_valued_receiver_chains/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_3_5_5_block_valued_receiver_chains/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_3_5_6_typed_wrapper_quoted_names/expected.json` lines 1–15;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_3_5_6_typed_wrapper_quoted_names/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_2_3_5_6_typed_wrapper_quoted_names/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_3_2_1_numeric_word_aliases/expected.json` lines 1–18;
+    `rust/linkedspec-runtime/tests/corpus/terse_3_2_1_numeric_word_aliases/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_3_2_1_numeric_word_aliases/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_3_2_2_arithmetic_symbol_callees/expected.json` lines 1–8;
+    `rust/linkedspec-runtime/tests/corpus/terse_3_2_2_arithmetic_symbol_callees/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_3_2_2_arithmetic_symbol_callees/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_3_2_3_2_string_comparison_helpers/expected.json` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_3_2_3_2_string_comparison_helpers/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_3_2_3_2_string_comparison_helpers/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_3_2_3_3_numeric_comparison_word_aliases/expected.json` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_3_2_3_3_numeric_comparison_word_aliases/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_3_2_3_3_numeric_comparison_word_aliases/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_3_2_3_4_numeric_comparison_symbol_callees/expected.json` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_3_2_3_4_numeric_comparison_symbol_callees/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_3_2_3_4_numeric_comparison_symbol_callees/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_3_3_1_scalar_assignment_expressions/expected.json` lines 1–10;
+    `rust/linkedspec-runtime/tests/corpus/terse_3_3_1_scalar_assignment_expressions/input.spec` lines 1–6;
+    `rust/linkedspec-runtime/tests/corpus/terse_3_3_1_scalar_assignment_expressions/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_3_3_2_aggregate_assignment_expressions/expected.json` lines 1–21;
+    `rust/linkedspec-runtime/tests/corpus/terse_3_3_2_aggregate_assignment_expressions/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_3_3_2_aggregate_assignment_expressions/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_3_3_3_mutation_assignment_expressions/expected.json` lines 1–16;
+    `rust/linkedspec-runtime/tests/corpus/terse_3_3_3_mutation_assignment_expressions/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_3_3_3_mutation_assignment_expressions/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_3_3_4_assignment_expression_closure/expected.json` lines 1–46;
+    `rust/linkedspec-runtime/tests/corpus/terse_3_3_4_assignment_expression_closure/input.spec` lines 1–6;
+    `rust/linkedspec-runtime/tests/corpus/terse_3_3_4_assignment_expression_closure/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_4_3_2_user_function_runtime/expected.json` lines 1–6;
+    `rust/linkedspec-runtime/tests/corpus/terse_4_3_2_user_function_runtime/input.spec` lines 1–7;
+    `rust/linkedspec-runtime/tests/corpus/terse_4_3_2_user_function_runtime/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/terse_7_3_array_numeric_reducer_receiver_methods/expected.json` lines 1–14;
+    `rust/linkedspec-runtime/tests/corpus/terse_7_3_array_numeric_reducer_receiver_methods/input.spec` lines 1–5;
+    `rust/linkedspec-runtime/tests/corpus/terse_7_3_array_numeric_reducer_receiver_methods/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/tkgui_empty/expected.json` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/tkgui_empty/input.spec` lines 1–22;
+    `rust/linkedspec-runtime/tests/corpus/tkgui_empty/input.txt` empty file (0 bytes);
+    `rust/linkedspec-runtime/tests/corpus/top_rule_body_recursion_sexpr/expected.json` lines 1–7;
+    `rust/linkedspec-runtime/tests/corpus/top_rule_body_recursion_sexpr/input.spec` lines 1–9;
+    `rust/linkedspec-runtime/tests/corpus/top_rule_body_recursion_sexpr/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/top_rule_lx_recursion_nested/expected.json` lines 1–9;
+    `rust/linkedspec-runtime/tests/corpus/top_rule_lx_recursion_nested/input.spec` lines 1–7;
+    `rust/linkedspec-runtime/tests/corpus/top_rule_lx_recursion_nested/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/top_rule_lx_recursion_sequence/expected.json` lines 1–8;
+    `rust/linkedspec-runtime/tests/corpus/top_rule_lx_recursion_sequence/input.spec` lines 1–7;
+    `rust/linkedspec-runtime/tests/corpus/top_rule_lx_recursion_sequence/input.txt` lines 1–1;
+    `rust/linkedspec-runtime/tests/corpus/vhdl_library_use/expected.json` lines 1–12;
+    `rust/linkedspec-runtime/tests/corpus/vhdl_library_use/input.spec` lines 1–335.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification tier: `focused`
+  Focused checks: Exact owned-range/baseline audit, JSON decoding, manifest membership and unchanged grammar mirror; Knowledge, memory, all doctrines, histories and diff.
+  Canonical trigger: `none` — bounded reading checkpoint; fixture and runtime behavior unchanged.
+  Verification: All 202 scopes reconcile: 201 nonempty plus explicit empty TkGui input, 1,500 lines / 46,200 baseline-identical bytes. Ordered path/kind/range/byte/SHA audit is `8bc8ce563d4ccfe4a620b0ae6f4d0de28f28351d01678fe0b869491eec800baf`; 67 JSON files decode and all 68 case directories belong to the 105-case manifest. The final user-function grammar suffix completes all four mirror checkpoints with unchanged .44 identity. Reading covers tablegrep TERM fields, tagged Tclite quote/command structures, 59 Terse fixtures for literals/read/copy/assignment/receiver/control/helper/function behavior, empty TkGui, direct versus LX-root recursion and VHDL library/use tags plus grammar through line 335. Legacy-smoke Knowledge retains its historical richer-case limits; stored fixture evidence is not fresh runtime parity.
+  Commit: `SESSION-STARTUP-READING.3.3.49 - reconcile Terse and legacy corpus reading`
+- ID: `SESSION-STARTUP-READING.3.3.50`
+  Status: `done`
+  Goal: Read Rust group 50: 1,494 lines/fragments, 55,681 bytes.
+  Scope: `rust/linkedspec-runtime/tests/corpus/vhdl_library_use/input.spec` lines 336–384;
+    `rust/linkedspec-runtime/tests/corpus/vhdl_library_use/input.txt` lines 1–2;
+    `rust/linkedspec-runtime/tests/corpus_oracle.rs` lines 1–234;
+    `rust/linkedspec-runtime/tests/diagnostic_output_contract.rs` lines 1–483;
+    `rust/linkedspec-runtime/tests/duplicate_regex_slot_identity_contract.rs` lines 1–473;
+    `rust/linkedspec-runtime/tests/generated_source_full_manifest_classifier.rs` lines 1–253.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification tier: `focused`
+  Focused checks: Six exact owned-range/baseline identities and canonical Knowledge/test-boundary reconciliation; memory, all doctrines, histories and diff.
+  Canonical trigger: `none` — bounded reading checkpoint; test and runtime behavior unchanged.
+  Verification: All six owned scopes match the baseline: 1,494 lines / 55,681 bytes; ordered path/kind/range/byte/SHA audit `ee7b4b1b146504e7eb0f4e2e7c416091c2ea2058ac30fcc53863baf749c319fc`. VHDL grammar is complete through EOF. The corpus runner checks manifest format/count/unique valid names and exact directory sets, then compares compatibility output with the wrapped reference. Diagnostic consumers assert quiet/default, direct/compatibility/generated-v2 events, early arity rejection, concrete sink identity and typed exit. Duplicate-slot consumer covers its 15 declared roles across required versus choice, reconstructed/source/trace/CLI and invalid identity paths. Classifier prefix prepares 105 strict-UTF-8 cases with direct/compatibility oracles and minimal plans for one child Cargo workspace; suffix and process result handling remain .51-owned. Existing Knowledge is reconciled; no native execution or emitted compilation is newly claimed.
+  Commit: `SESSION-STARTUP-READING.3.3.50 - reconcile corpus and diagnostic test-consumer reading`
+- ID: `SESSION-STARTUP-READING.3.3.51`
+  Status: `done`
+  Goal: Read Rust group 51: 1,487 lines/fragments, 51,804 bytes.
+  Scope: `rust/linkedspec-runtime/tests/generated_source_full_manifest_classifier.rs` lines 254–358;
+    `rust/linkedspec-runtime/tests/integration_test.rs` lines 1–1382.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification tier: `focused`
+  Focused checks: Exact scope/source identities, retained classifier counterexample and causal evidence, Knowledge reconciliation, memory, all doctrines, histories and diff.
+  Canonical trigger: `none` — reading and repair intake; verifier implementation remains unchanged.
+  Verification: Both scopes match the baseline: 1,487 lines / 51,804 bytes. Classifier source SHA-256 `25f37479a76a3022758cc09aeb4b162d3086d7d069be267ef7cd1f565eaa9dc7` and extracted tail without the test attribute `f1848092d5c6d0b3f6ec9d52627f8f13d39aa189d9da31f28afcefe8afce1261` match retained evidence. Six freshly replayed controls confirm failed child plus all 105 markers incorrectly passes; the in-memory status guard rejects it, while success/all and missing-marker controls behave as recorded. Scratch is removed; .77 owns repair and its Knowledge card preserves the executable probe. Integration prefix covers structural pipeline limits, staged function/parse-job identity, invalid definitions, edge metadata, retv/entry-match and body recursion through line 1382. Existing return-channel Knowledge is qualified against selective rule-variable scope. No real Cargo failure, parser defect or new integration run is inferred.
+  Commit: `SESSION-STARTUP-READING.3.3.51 - reconcile classifier reading and own failed-child verification repair`
+- ID: `SESSION-STARTUP-READING.3.3.52`
+  Status: `done`
+  Goal: Read Rust group 52: 1,408 lines/fragments, 65,108 bytes.
+  Scope: `rust/linkedspec-runtime/tests/integration_test.rs` lines 1383–2790.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification tier: `focused`
+  Focused checks: Exact owned-range/baseline identity and retained test-boundary comprehension; Knowledge, memory, all doctrines, histories and diff.
+  Canonical trigger: `none` — bounded reading checkpoint; integration tests and runtime unchanged.
+  Verification: All 1,408 owned lines / 65,108 bytes match the baseline; SHA-256 `2186798cafd76926b8e4f8a0f8a5d9fecdc80c641b4eb130d38171873a19c378`. Reading covers LX-root nesting, scalar-text policy, per-parse working state, binding/copy/mutation distinctions, colon hashes and retired fat-arrow rejection, nested updated-root writes, local value-block versus rule return, attached/lazy controls, first-case selection, literal bare labels and the 10,000-iteration guard. With/traversal callbacks preserve kind-specific empty/wrong-kind and restoration cases; lifecycle return/drop and fluent child-result containment remain distinct. The range ends at the regex_subst fixture prefix; its suffix remains .53-owned. Historical source comments do not override current assertions or scoped-binding Knowledge. No fresh native execution is claimed.
+  Commit: `SESSION-STARTUP-READING.3.3.52 - reconcile integration control and traversal reading`
+- ID: `SESSION-STARTUP-READING.3.3.53`
+  Status: `done`
+  Goal: Read Rust group 53: 1,500 lines/fragments, 55,337 bytes.
+  Scope: `rust/linkedspec-runtime/tests/integration_test.rs` lines 2791–3910;
+    `rust/linkedspec-runtime/tests/inter_match_gap_capture_contract.rs` lines 1–380.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification tier: `focused`
+  Focused checks: Exact owned-range/baseline identities and test-route/Knowledge reconciliation; memory, all doctrines, histories and diff.
+  Canonical trigger: `none` — bounded reading checkpoint; tests and runtime unchanged.
+  Verification: Both scopes match the baseline: 1,500 lines / 55,337 bytes; ordered path/kind/range/byte/SHA audit `ead4b09249a3ecba074b27145e5169eaff3944d4f00ca72e803387487e7a0dfc`. Integration is complete through line 3910 across .51–.53. The suffix covers bounded shipped-spec outputs, edge/capture identity, fluent block/lifecycle controls, pure/mutating families, assignment results, closed function scope/arity/recursion and six rich capability fixtures including absent versus zero-width matches. Gap prefix covers role accounting, native/generated adapters, heterogeneous-separator primary proof and emitted Unicode/empty/lifecycle/child-extension/nesting/rollback fixture setup through line 380. Existing gap Knowledge separates historical admission and current behavior; the remaining consumer and emitted execution are not credited here. No fresh integration or emitted run is claimed.
+  Commit: `SESSION-STARTUP-READING.3.3.53 - complete integration reading and checkpoint gap-capture consumer`
+- ID: `SESSION-STARTUP-READING.3.3.54`
+  Status: `done`
+  Goal: Read Rust group 54: 1,449 lines/fragments, 54,955 bytes.
+  Scope: `rust/linkedspec-runtime/tests/inter_match_gap_capture_contract.rs` lines 381–1225;
+    `rust/linkedspec-runtime/tests/logical_helper_contract.rs` lines 1–496;
+    `rust/linkedspec-runtime/tests/map_leaves_mutation_contract.rs` lines 1–108.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification tier: `focused`
+  Focused checks: Three exact owned-range/baseline identities, emitted status-guard and logical-row evidence; Knowledge, memory, all doctrines, histories and diff.
+  Canonical trigger: `none` — bounded reading checkpoint; tests and runtime unchanged.
+  Verification: Three exact scopes total 1,449 lines / 54,955 baseline-identical bytes; ordered path/kind/range/byte/SHA audit `9a1cbc848d1a482f98d1b4c67a51e45a56cf1a71dae4bf125a1c3d89a8c5ac3f`. Gap consumer completes all nine role paths, fifteen emitted value/error modules, slot metadata/diagnostics, serde defaults, candidate/commit/tail visibility and rollback. Logical consumer covers eager effects versus lazy controls, arity diagnostics, serialized/direct/compatibility routes and four emitted modules. Both emitted harnesses explicitly assert child-process success. Its truth adapter still skips only the codeblock row; later callable proof remains separate. The mutation prefix records zero-regex parent dispatch and typed inventory of 4 valid/14 invalid/5 excluded forms; its suffix remains .55-owned. Source inspection supplies no fresh native/emitted execution.
+  Commit: `SESSION-STARTUP-READING.3.3.54 - complete gap and logical consumer reading`
+- ID: `SESSION-STARTUP-READING.3.3.55`
+  Status: `done`
+  Goal: Read Rust group 55: 1,500 lines/fragments, 53,737 bytes.
+  Scope: `rust/linkedspec-runtime/tests/map_leaves_mutation_contract.rs` lines 109–732;
+    `rust/linkedspec-runtime/tests/mcp_server_rust_admission.rs` lines 1–876.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification tier: `focused`
+  Focused checks: Exact two-scope/baseline audit, mutation/MCP assertion-boundary and Knowledge reconciliation; memory, all doctrines, histories and diff.
+  Canonical trigger: `none` — bounded reading checkpoint; runtime, MCP and test behavior unchanged.
+  Verification: Two exact scopes total 1,500 lines / 53,737 baseline-identical bytes; ordered path/kind/range/byte/SHA audit `04ef81d60c4c2b92f2cb119c8bf5dee5c4ade65b14a2aa6196b7518b60af06a6`. Mutation consumer completes typed Unicode syntax, original-shape traversal, detached callback/output values, unrelated effects, scoped identities, composition, typed receiver failures and serde/generated/emitted routes. Its protected statements precede return(value); known final-assignment/substitution exceptions .58/.59 remain outside those controls. The emitted workspace uses a relative dependency and checks child status. MCP prefix correlates six native snapshots/twenty query identities, 35 canonical frames, ten raw/lifecycle inventories, private handle states, capacity/expiry, lowering-only policy and prepared-cancellation fences. Hosts build native indexes before registration; no MCP authoring is present. Suffix privacy/shutdown/fences remain .56-owned; no fresh native run is claimed.
+  Commit: `SESSION-STARTUP-READING.3.3.55 - complete mutation consumer and checkpoint MCP admission reading`
+- ID: `SESSION-STARTUP-READING.3.3.56`
+  Status: `done`
+  Goal: Read Rust group 56: 1,474 lines/fragments, 50,699 bytes.
+  Scope: `rust/linkedspec-runtime/tests/mcp_server_rust_admission.rs` lines 877–1058;
+    `rust/linkedspec-runtime/tests/mcp_server_rust_dispatch.rs` lines 1–326;
+    `rust/linkedspec-runtime/tests/mcp_server_rust_stdio.rs` lines 1–411;
+    `rust/linkedspec-runtime/tests/progressive_span_dispatch_authority.rs` lines 1–555.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification tier: `focused`
+  Focused checks: Four exact owned-range/baseline identities, MCP/progressive test-boundary reconciliation; Knowledge, memory, all doctrines, histories and diff.
+  Canonical trigger: `none` — bounded reading checkpoint; transport and runtime unchanged.
+  Verification: Four exact scopes total 1,474 lines / 50,699 baseline-identical bytes; ordered path/kind/range/byte/SHA audit `063139bea5da82cfa8fe131ad67eae9c84d4298652f869456dc6c6a7cca81637`. MCP admission suffix checks prepared-response finality, ordinary I/O sanitization, Arc release, private-owner/source fences and twelve-role order. Public dispatch/stdio consumers cover clone isolation, native/policy identities, authorization/lifetime, canonical raw/ordered streams, EOF, ordinary I/O errors and invalid authority before input consumption. Existing .36/.64/.65 validation-order/panic-output/final-EOF gaps remain separately owned. Progressive prefix is opt-in cfg authority proof for source views, narrowing, cancellation/budget, chain/execution and 26 diagnostic contexts; the admitted four-carrier consumer is separate. Its suffix remains .57-owned. Existing completion records correct stale pending wording in the Rust admission card; no new native run is claimed.
+  Commit: `SESSION-STARTUP-READING.3.3.56 - complete MCP tests and reconcile progressive authority reading`
+- ID: `SESSION-STARTUP-READING.3.3.57`
+  Status: `done`
+  Goal: Read Rust group 57: 1,476 lines/fragments, 52,176 bytes.
+  Scope: `rust/linkedspec-runtime/tests/progressive_span_dispatch_authority.rs` lines 556–818;
+    `rust/linkedspec-runtime/tests/progressive_span_dispatch_contract.rs` lines 1–610;
+    `rust/linkedspec-runtime/tests/punctuation_light_zero_arg_contract.rs` lines 1–226;
+    `rust/linkedspec-runtime/tests/recognition_transaction_contract.rs` lines 1–377.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification tier: `focused`
+  Focused checks: Four exact owned-range/baseline identities, carrier/arity/recognition proof-boundary reconciliation; Knowledge, memory, all doctrines, histories and diff.
+  Canonical trigger: `none` — bounded reading checkpoint; tests and runtime unchanged.
+  Verification: Four exact scopes total 1,476 lines / 52,176 baseline-identical bytes; ordered path/kind/range/byte/SHA audit `9f55a70cc97d378ab04bc24c0dea43b656a22cefc558517e2d6af1d3f716d882`. Progressive authority completes smaller rebased spans, shared budgets, detached registry/results and bounded diagnostics; its separate carrier consumer covers typed effects, host callback reconstruction and independent emitted child status/results. Punctuation-light tests cover six standalone spellings and final receivers through native/reconstructed/generated-plan/source assertions, explicitly preserving both zero-argument contains spellings returning numeric zero under the existing FUTURE-PARITY-BACKLOG.5 drift owner. Recognition prefix records neutral inventories/admission, monotonic isolated invocation/mark identity, match state independent of falsey payload and commit/rollback frame state. Recognition suffix remains .58-owned. No new native or emitted execution is claimed.
+  Commit: `SESSION-STARTUP-READING.3.3.57 - complete progressive and punctuation consumer reading`
+- ID: `SESSION-STARTUP-READING.3.3.58`
+  Status: `done`
+  Goal: Read Rust group 58: 1,471 lines/fragments, 49,296 bytes.
+  Scope: `rust/linkedspec-runtime/tests/recognition_transaction_contract.rs` lines 378–932;
+    `rust/linkedspec-runtime/tests/recursive_observation_contract.rs` lines 1–444;
+    `rust/linkedspec-runtime/tests/repeated_action_result_contract.rs` lines 1–472.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification tier: `focused`
+  Focused checks: Exact reading/source identities, emitted-manifest construction controls and existing policy boundary; Knowledge, memory, all doctrines, histories and diff.
+  Canonical trigger: `none` — reading and repair intake; manifest writers and policy implementation unchanged.
+  Verification: Three exact scopes total 1,471 lines / 49,296 baseline-identical bytes; ordered path/kind/range/byte/SHA audit `28a622601f3fe03251870fdfc8448469beab0bca1ac3da3c118e792788bd506e`. Recognition suffix distinguishes private escape rejection from authored .68, preserves terminal/ownership/unwind/drop diagnostics, typed nodes and false payload carriers. Observation covers static non-eager binding, detached Unicode and falsey results, failed/zero-regex/child-edge outcomes, ordinary recursion versus observed nonprogress and original abort diagnostics. Repeated-result prefix covers modes, scalar pipe, bounds, per-hit arrays/null, lifecycle/selected-slot traces and loaded/reconstructed/descriptor/primary/corpus/source-plan consumers; source inspection is not independent compilation. Two exact-source Rust construction probes reproduce absolute emitted Cargo dependencies, same-target relative controls and exact cleanup; nine source-confirmed writers are repair .78-owned with runnable Knowledge evidence. No fresh parser execution is claimed.
+  Commit: `SESSION-STARTUP-READING.3.3.58 - complete recognition and observation consumer reading`
+- ID: `SESSION-STARTUP-READING.3.3.59`
+  Status: `done`
+  Goal: Read Rust group 59: 1,487 lines/fragments, 48,937 bytes.
+  Scope: `rust/linkedspec-runtime/tests/repeated_action_result_contract.rs` lines 473–516;
+    `rust/linkedspec-runtime/tests/repository_root_relocation.rs` lines 1–95;
+    `rust/linkedspec-runtime/tests/root_rule_selection_admission.rs` lines 1–610;
+    `rust/linkedspec-runtime/tests/root_rule_selection_core.rs` lines 1–301;
+    `rust/linkedspec-runtime/tests/root_rule_selection_routes.rs` lines 1–437.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification tier: `focused`
+  Focused checks: Exact baseline/scope identities, root-selection governance and historical/current proof reconciliation; Knowledge, memory, all doctrines, histories and diff.
+  Canonical trigger: `none` — reading and factual continuity; source, contract and public behavior unchanged.
+  Verification: Five exact scopes total 1,487 lines / 48,937 baseline-identical bytes; ordered path/kind/range/byte/SHA audit `47aa1b4f635ba583721b93b0aebcc06d5e5574686370eea1bc41995f750e7fc6`. Repeated-result suffix pins fifteen exact roles and once-only completion. Relocation source copies the fresh primary into a managed synthetic root, distinguishes conflicting ambient identity and requires failure after the moved marker is removed. Root consumers preserve explicit/first-marker/first-rule selection without authored identity mutation, structure-before-selection-before-user-code, authored-edge strict-unused, direct/compatibility options, loaded/reconstructed/descriptor stability and effective/request trace attribution. Emitted-labelled admission roles inspect source; generated roles invoke generated-plan adapters. Independent compilation remains source_emitter-owned. Fresh root governance passes 8 selections / 3 failures / 3 strict cases / 5 backends / 7 complete / 0 pending / 24 public documents / 18 stale-current denials / 54 mutations. Historical Rust-only/65-case Knowledge claims are qualified and three Cargo reverify commands are managed. No fresh native/CLI/relocated/emitted execution is claimed.
+  Commit: `SESSION-STARTUP-READING.3.3.59 - complete Rust root-selection consumer reading`
+- ID: `SESSION-STARTUP-READING.3.3.60`
+  Status: `done`
+  Goal: Read Rust group 60: 1,472 lines/fragments, 49,181 bytes.
+  Scope: `rust/linkedspec-runtime/tests/root_rule_selection_routes.rs` lines 438–472;
+    `rust/linkedspec-runtime/tests/rule_local_cursor_contract.rs` lines 1–572;
+    `rust/linkedspec-runtime/tests/rule_local_cursor_execution.rs` lines 1–465;
+    `rust/linkedspec-runtime/tests/rule_local_cursor_normalization.rs` lines 1–50;
+    `rust/linkedspec-runtime/tests/runtime_diagnostics.rs` lines 1–176;
+    `rust/linkedspec-runtime/tests/scalar_numeric_contract.rs` lines 1–32;
+    `rust/linkedspec-runtime/tests/semantic_index_foundation.rs` lines 1–142.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification tier: `focused`
+  Focused checks: Exact baseline/scope identities, cursor governance and consumer proof-boundary reconciliation; Knowledge, memory, all doctrines, histories and diff.
+  Canonical trigger: `none` — reading and factual continuity; source, contract and public behavior unchanged.
+  Verification: Seven exact scopes total 1,472 lines / 49,181 baseline-identical bytes; ordered path/kind/range/byte/SHA audit `410b4ae6ee1c9a0af971137008c6f0ab6f73122f7fc9fc2ad6c8b743e80e2b28`. Root-route suffix preserves effective failure attribution and authored descriptor identity. Cursor consumers cover 15 exact roles / 8 diagnostic-removal identities, 36 family forms / 8 child-boundary cases / 2 structural replacements, native/serde/loaded traces, minimal generated family plan and retired override absence; existing nonnumeric AND-selector repair .57 remains outside numeric exclusions. Historical normalization test naming is qualified. Runtime diagnostics cover structured/source/deep-child identity, unknown versus zero-rule contexts, omitted absent fields and legacy compatibility. Scalar numeric source pins 55 neutral cases. Semantic-foundation prefix covers source ownership/digest, detached plan, UTF-8/scalar mapping and mid-scalar rejection; suffix .61 remains. Fresh cursor governance passes 8 complete / 0 pending, 6 runtime legs, 74 migration files, 30 public documents, 28 denials and 60 mutations. No fresh native or emitted execution is claimed.
+  Commit: `SESSION-STARTUP-READING.3.3.60 - complete Rust cursor and diagnostic consumer reading`
+- ID: `SESSION-STARTUP-READING.3.3.61`
+  Status: `done`
+  Goal: Read Rust group 61: 1,461 lines/fragments, 52,200 bytes.
+  Scope: `rust/linkedspec-runtime/tests/semantic_index_foundation.rs` lines 143–269;
+    `rust/linkedspec-runtime/tests/semantic_index_query.rs` lines 1–478;
+    `rust/linkedspec-runtime/tests/semantic_index_runtime_observation.rs` lines 1–636;
+    `rust/linkedspec-runtime/tests/semantic_introspection_rust_admission.rs` lines 1–220.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Continuity work: Own the next required engineering-notes rollover, projected at this checkpoint from .55 at 439 lines plus six ordinary four-line records = 463 lines. Recheck actual pressure; preserve exact clean-source history and prior manifest rows. ADR 0105 current capacity is 25 collection files / 24 manifest lines, so any required count admission needs a new indexed exact-limit ADR and canonical staged proof; preserve other ceilings. Follow COMMIT.md if actual pressure triggers earlier.
+  Verification tier: `canonical`
+  Focused checks: Exact reading identities and semantic proof boundaries; immutable rollover/source/manifest reconstruction, exact routing-limit admission, Knowledge, memory, all doctrines, histories and diff.
+  Canonical trigger: Required engineering-notes rollover and finite routing-registry capacity admission; exact staged-candidate receipt before landing.
+  Verification: Four exact scopes total 1,461 lines / 52,200 baseline-identical bytes; ordered path/kind/range/byte/SHA audit `f378dd38e628f46477f1f4fdf2db59ba99fc84863aff46dc383265bfbfa92fe7`. Foundation suffix separates constructor policy from failed-language snapshots, immutable ceilings and cloned diagnostics. Query tests cover 19 static typed/raw-neutral digests, 26 malformed boundaries, privacy and no-execution isolation; .66/.67 remain outside those fixtures. Runtime tests compare eight routes' typed events and separately derive the twentieth query digest, reject malformed/rederived observations, preserve exact panic identity and trace/diagnostic/Unicode neutrality. Independent emitted proof checks value, count, positions and first/last kinds rather than a complete query digest; Knowledge is corrected and its manifest remains .78-owned. Admission prefix freezes 12 roles, six snapshots and exact event/digest helpers. Fresh neutral semantic proof passes 6 groups / 20 queries / 128 mutations / rollout 9/0 / admission 6/0. Mandatory engineering-notes rollover is part of this canonical leaf; exact storage evidence follows below and receipt-bound CI is required before landing.
+  Storage proof: Exact clean 165b74dc lines 213–459 become segment 4982 (247 lines / 25,964 bytes; SHA-256 0cca6b887182b2d3abbd731a906726d05df4ab9916262d29dcef754f5d895b16). Prior manifest rows stay byte-identical; root is 215 lines / 32,427 bytes. ADR 0107 admits only files 25→26 and manifest lines 24→25; all other ceilings remain unchanged. Evidence: docs/knowledge/engineering-notes-twenty-sixth-member-capacity.md.
+  Commit: `SESSION-STARTUP-READING.3.3.61 - complete semantic consumer reading and roll engineering notes`
+- ID: `SESSION-STARTUP-READING.3.3.62`
+  Status: `done`
+  Goal: Read Rust group 62: 1,483 lines/fragments, 48,632 bytes.
+  Scope: `rust/linkedspec-runtime/tests/semantic_introspection_rust_admission.rs` lines 221–629;
+    `rust/linkedspec-runtime/tests/source_boundary_compatibility_aliases.rs` lines 1–216;
+    `rust/linkedspec-runtime/tests/source_emitter.rs` lines 1–858.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification tier: `focused`
+  Focused checks: Exact source-range identities; semantic neutral contract; pinned routing and history child-status controls; Knowledge, memory, doctrines, history pressure and diff/scope review.
+  Canonical trigger: `none` — reading and factual intake only; no public, runtime or enforcement implementation changes.
+  Verification: Three scopes total 1,483 lines / 48,632 baseline-identical bytes; ordered path/kind/range/byte/SHA audit 9300b19ca3a98d513b9e7fdd43a53a35840ad52778cd7ecfc9e726847bbe8537. Admission suffix executes all 12 fixture roles and all 20 query digests; emitted-labelled routes call generated-plan helpers, with text tracing disabled at traced wrappers. Alias compatibility has five tests and four independently compiled modules with checked child status and relative Cargo paths. Emitter prefix covers eight corpus cases, sixteen entry points, typed construction failures and the fourteen-family fixture prefix; .63 owns its suffix. Reconcile historical admission/gate counts and retain the completed .61 native evidence; current neutral semantic proof is 6/20/128, rollout 9/0 and admission 6/0. Source-pinned routing controls reproduce signal-status loss and the guard control rejects it; nine document-history sibling controls reject failures. Actual repair .79 and its executable fact card are owned; public .41.3/.41.7 and repairs .71/.77/.78 remain pending. Record bounded September 8 loader samples without a new OS-cause claim. Focused continuity checks are recorded in the commit evidence.
+  Commit: `SESSION-STARTUP-READING.3.3.62 - complete semantic admission and emitter boundary reading`
+- ID: `SESSION-STARTUP-READING.3.3.63`
+  Status: `done`
+  Goal: Read Rust group 63: 1,492 lines/fragments, 58,940 bytes.
+  Scope: `rust/linkedspec-runtime/tests/source_emitter.rs` lines 859–1166;
+    `rust/linkedspec-runtime/tests/spec_loader.rs` lines 1–264;
+    `rust/linkedspec-runtime/tests/staged_ast_enrichment_contract.rs` lines 1–920.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification tier: `focused`
+  Focused checks: Exact source-range identities; native resolution and staged-AST neutral contracts; source-to-Knowledge proof boundaries; memory, Knowledge, doctrines, histories and diff/scope review.
+  Canonical trigger: `none` — bounded reading and factual reconciliation only; no production, public or infrastructure change.
+  Verification: Three scopes total 1,492 lines / 58,940 baseline-identical bytes; ordered path/kind/range/byte/SHA audit 0fca63d946bf637732e40a6b44d9363dce564e62d131c10facb44072cac2d4ca. Emitter suffix completes fourteen fixtures across ten neutral families, v1 rejection and eight manifest-selected native/emitted oracle cases with checked child success; JSON literal and authored manifest repairs .71/.78 remain pending. Correct the older subset Knowledge card's unqualified all-105 classifier claim against actual repair .77 without invalidating a particular historical result. Loader tests cover 14/9/4 fixture cases plus function execution, identity and parse/validation JSON; directory construction is the non-regular surrogate, not every OS special-file type. Staged prefix covers frozen authority, cache/queue, all four result and three failure policies, sibling isolation, target checks, unpublished failure, resources and callback panic under a replaced hook; recursive suffix remains .64-owned and .73–.75 remain open. Fresh neutral resolution 14/9/4 and staged 9 rollout legs / 123 base / 129 public mutations pass. The earlier .61 canonical native result remains dated, fixture-bound evidence. Required focused continuity proof is retained with the commit.
+  Commit: `SESSION-STARTUP-READING.3.3.63 - complete emitter, loader and staged consumer reading`
+- ID: `SESSION-STARTUP-READING.3.3.64`
+  Status: `done`
+  Goal: Read Rust group 64: 1,491 lines/fragments, 55,771 bytes.
+  Scope: `rust/linkedspec-runtime/tests/staged_ast_enrichment_contract.rs` lines 921–2268;
+    `rust/linkedspec-runtime/tests/standalone_lifecycle_block_contract.rs` lines 1–143.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification tier: `focused`
+  Focused checks: Exact source-range identities; staged-AST neutral contract and source-backed carrier/recursive proof boundaries; Knowledge, memory, doctrines, bounded histories and diff/scope review.
+  Canonical trigger: `none` — bounded reading and factual reconciliation only; no production, public or infrastructure change.
+  Verification: Two scopes total 1,491 lines / 55,771 baseline-identical bytes; ordered path/kind/range/byte/SHA audit 0d05f033e4e54ee1cb681c12b5f293e91bd98fa415b3afdfef26d0a16b1ab236. Complete staged consumer: breadth-first chain/cycle/decrease, shared resource and callback liveness, cancellation/deadline, detachment and direct/derived diagnostic controls; frozen snapshot pins 37 diagnostics, nine rollout legs and 123 mutations. Native/reconstructed/generated-plan/independently compiled emitted carriers each execute twice through fresh authority; both emitted Cargo children require success before JSON decoding. Existing .73–.75 runtime gaps and .78 authored absolute dependency remain open. Reconcile dated admission history and retain .61's native 1/1 in 802.08 test seconds without claiming another run. Standalone-lifecycle prefix defines native execution and AST/provenance helpers and starts placement twins; .65 owns the suffix. Fresh staged neutral governance passes 9 legs / 123 base / 129 public mutations; exact CI requirement/command registrations remain one each. Focused continuity proof is retained with the commit.
+  Commit: `SESSION-STARTUP-READING.3.3.64 - complete staged recursive and carrier consumer reading`
+- ID: `SESSION-STARTUP-READING.3.3.65`
+  Status: `done`
+  Goal: Read Rust group 65: 1,500 lines/fragments, 51,021 bytes.
+  Scope: `rust/linkedspec-runtime/tests/standalone_lifecycle_block_contract.rs` lines 144–470;
+    `rust/linkedspec-runtime/tests/trace_controls.rs` lines 1–477;
+    `rust/linkedspec-runtime/tests/typed_source_location_contract.rs` lines 1–546;
+    `rust/linkedspec-runtime/tests/unicode_case_mapping.rs` lines 1–91;
+    `rust/linkedspec-runtime/tests/unicode_rule_label_routes.rs` lines 1–59.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification tier: `focused`
+  Focused checks: Exact source-range identities; typed-source, Unicode-case and standalone neutral contracts; native/generated/emitted proof boundaries; Knowledge, memory, doctrines, histories and diff/scope review.
+  Canonical trigger: `none` — bounded reading and factual reconciliation only; no production, public or infrastructure change.
+  Verification: Five scopes total 1,500 lines / 51,021 baseline-identical bytes; ordered path/kind/range/byte/SHA audit d20f95e1727063d5d58c526759b549405f6820b8f45f14999c500fbc484f9ce7. Complete lifecycle tests: native/reconstructed duplicate execution, typed placement/provenance and malformed/owner/plain-node controls, generated-plan execution and emitted-text inspection without independent emitted compilation. Trace target has twelve tests; its historical eleven-test record is qualified, and emitted trace proof is also text inspection. Typed consumer covers 3/7/6/3 values, four private errors, exact detached 92+7 catalogs and three native/reconstructed/generated-helper fixtures; catalog equality is not execution of every helper. Casing consumer pins identity and checks direct/helper/receiver/array paths for twelve fixtures; label prefix retains distinct precomposed/decomposed/case identities with .66 owning its suffix. Fresh neutral typed 14/0/231, Unicode five-module byte regeneration/twelve fixtures and lifecycle fourteen mutations pass. Knowledge retains .61's dated typed four-test result and existing .52–.54 boundaries; this checkpoint adds no native target or optional-matrix rerun. Focused continuity proof is retained with the commit.
+  Commit: `SESSION-STARTUP-READING.3.3.65 - complete lifecycle trace and typed-source consumer reading`
+- ID: `SESSION-STARTUP-READING.3.3.66`
+  Status: `done`
+  Goal: Read Rust group 66: 1,468 lines/fragments, 48,324 bytes.
+  Scope: `rust/linkedspec-runtime/tests/unicode_rule_label_routes.rs` lines 60–196;
+    `rust/linkedspec-runtime/tests/uniform_binding_contract.rs` lines 1–525;
+    `rust/linkedspec-runtime/tests/variadic_user_function_contract.rs` lines 1–214;
+    `rust/linkedspec-runtime/tests/write_vivification_contract.rs` lines 1–592.
+  Acceptance: Read every owned byte and apply the shared native-reading acceptance below.
+  Verification tier: `focused`
+  Focused checks: Exact four-scope baseline identities; Unicode-label, uniform-binding, callable-signature and write-vivification neutral contracts; precise native/generated/emitted consumer boundaries; Knowledge, memory, doctrines, histories and diff/scope review.
+  Canonical trigger: `none` — bounded reading and factual reconciliation only; no production, public or infrastructure change.
+  Verification: Four scopes total 1,468 lines / 48,324 baseline-identical bytes; ordered path/kind/range/byte/SHA audit c917155b39652776984df2a0ff341ef71799394032fce55c8f5bcb9e048fe576. Unicode labels: three native/trace/generated-helper and strict-loader tests; emitted identity is text inspection, and loader checks compilation without loaded-parser execution. Uniform binding: sixteen tests cover selector rejection, retained constructors, detached mutations, precedence, wrong-kind fields and native/generated helpers. Variadic: seven tests preserve exact unions, argument order, fresh rest arrays, arity/invalid-definition diagnostics and reconstructed/generated helpers; emitted signatures are inspected, not independently compiled. Write vivification: five parent tests cover frozen syntax/success/failure/local presence and one carrier fixture with an independently compiled emitted child, relative Cargo dependency and checked exit status. Four existing Knowledge cards retain these boundaries and historical runtime counts; no native or child Cargo target is freshly rerun. Fresh neutral Unicode806/9/8/2, binding11/7/6/8, signature3/9/7 and write5/7/11/16/3/3/8/105 pass. Focused continuity proof is retained with the commit.
+  Commit: `SESSION-STARTUP-READING.3.3.66 - complete final Rust contract consumer reading`
+- ID: `SESSION-STARTUP-READING.3.3.67`
+  Status: `done`
+  Goal: Close the Rust reading lane after every bounded child and final delta review.
+  Acceptance: Verify all 412 baseline paths, current additions/deltas, complete comprehension, exact
+    repair ownership, and Knowledge reconciliation. Reading is not runtime signoff. Require canonical
+    proof for parent closeout and own the next language decomposition before new source reading.
+  Verification tier: `canonical`
+  Focused checks: Existing exact Rust scope reverify; independent committed-child, mode/blob/current-delta and pending-repair ownership audits; Knowledge reconciliation; memory, histories, staged diff/scope and all doctrines.
+  Canonical trigger: `milestone` — Rust reading parent closeout; require receipt-bound canonical CI on the exact staged candidate.
+  Verification: PASS: the existing scope audit covers all 412 baseline paths / 3,533,382 bytes exactly once, including two empty files and 89,242 per-window lines/fragments across 66 bounded children. All 66 done subjects resolve to unique commits; verification metadata, current mode/blob/byte identity and zero Rust additions/deletions/uncommitted inputs are independently checked. Reading-commit audit 312b1b4c03b2ad3897765e283c9772a7536122b39ee6d5740dff90874b860815; Rust tree-record audit 53e7795d9405342897bd3990e8fd55ee3a8cfdddb6e67dc977fefcb72dd3b68b. All 141 Knowledge paths changed by reading commits remain present. The 34 post-Perl repair owners preserve 90 pending nodes / 73 pending leaves, with exact body digest 3664cc76bff42040631d688fee5fa75bd4410f6588e1fd9eb45a882532ea967b. Existing earlier/cross-cutting repairs remain open. Reading is complete, not defect remediation or exhaustive runtime signoff. Final canonical outcome and exact staged receipt are required before landing and retained in the commit.
+  Commit: `SESSION-STARTUP-READING.3.3.67 - close Rust reading with exact coverage and durable repair ownership`
+- ID: `SESSION-STARTUP-READING.3.4`
+  Status: `done`
+  Goal: Split and read all 115 baseline Dart entries, including compiler/runtime, tests, commands, and package inputs.
+  Reading owner: `docs/tasks/DART-STARTUP-READING.md` owns .0 decomposition, .1 reading, .2 new repair intake and .3 reading closeout; this startup node remains the prerequisite/closeout owner.
+  Acceptance: Define bounded file/range children before reading and account for every path plus current deltas. DART-STARTUP-READING.3 may complete this reading node only after exact coverage/comprehension and child-commit proof; pending repairs remain owned separately.
+  Verification: Dart physical reading is complete at 55/55 children, 80,297 fragments / 2,471,305 bytes. Dart reading closes under .3.2 / ADR0114, exercising the director's explicit delegated decision for this reading-only boundary. Independent proof covers all 55 commits, 115 baseline-identical files, 80,297 fragments and 2,471,305 bytes. All 25 repair roots / 69 pending nodes remain open. Committed diagnostics pass 461 tests, storage25/47, CLI66 twice and corpus105; the full Dart gate remains failed on formatting and two SDK warnings. No canonical CI or PGEN/RGX build ran. Next is startup .3.5 Julia decomposition. Capacities .4/.5/.6 remain committed under containment .8/.9/.10 and ADR0110/0111/0112. Startup .3/.4/.5 still gate repairs; .7 is approved and implemented by containment .11 / ADR0113 with exact history preservation; the director granted a one-time focused/receipt exception on 2026-09-11; Containment .11 is committed at ad64f76f; Dart .3.2 / ADR0114 now close only this reading prerequisite; next .3.5 Julia decomposition.
+  Commit: `DART-STARTUP-READING.3.2 - close verified Dart reading under delegated decision` (cross-tree reading closeout)
+- ID: `SESSION-STARTUP-READING.3.5`
+  Status: `done`
+  Goal: Split and read all 95 baseline Julia entries, including compiler/runtime, tests, commands, and package inputs.
+  Acceptance: Define bounded file/range children before reading and account for every path plus current deltas.
+  Children: `.3.5.0` owns decomposition; JULIA-STARTUP-READING.1 owns 52 reading children and .3 owns closeout.
+  Reading owner: `docs/tasks/JULIA-STARTUP-READING.md` retains exact scope/digest, comprehension and repair evidence. This startup node remains the prerequisite owner.
+  Verification: Julia .3.2 closes all 52 reading groups under explicit ADR0117 approval. Audit d62999c12 and its fresh replay verify 95 baseline-identical files (75,984 lines / 2,693,170 bytes), 52 committed scopes and activations, 122 fact cards and 80 pending repair nodes. Recorded component proof passes 12,903 assertions, storage checks for 22 owners and five package trees, primary CLI conformance and 105 corpus fixtures. All repairs and later verification requirements remain open. Lua startup .3.6 decomposition is next; full-codebase reading, formal book reconciliation and policy review remain incomplete. Exact plan and all source identities remain frozen in the Julia owner.
+  Commit: `JULIA-STARTUP-READING.3.2 - close verified Julia reading under approved exception` (Julia reading prerequisite closure)
+- ID: `SESSION-STARTUP-READING.3.5.0`
+  Status: `done`
+  Goal: Inventory and plan exact bounded Julia source reading within governed evidence capacity.
+  Dependencies: Dart reading .3.2 committed under ADR0114; root clean, empty brief and all jobs consumed.
+  Activation: Clean `a2788b95369964880534d4d7b1d0e31b106bc023`.
+  Scope: The 95 Git-baseline Julia entries at baeb984e36a94a15951cd23d4c52def5064cdaca, every current membership/mode/blob delta, and task/Knowledge/history capacity needed for bounded reading.
+  Acceptance: Reconstruct exact inventory and a disjoint complete range plan under1500 fragments/65536 bytes per child, with UTF-8-safe oversized-line handling. Measure current and projected evidence limits before adding reading children. Freeze navigable ownership if the plan fits; otherwise preserve a concrete bounded capacity proposal and its unblock conditions without raising limits or discarding evidence. Grant no physical source-reading credit; preserve all prior startup/Dart repairs and parked activities.
+  Verification tier: `focused`
+  Focused checks: Independent Git inventory/mode/blob/current-delta and range-coverage/digest audits; actual routing-pressure and projection census; both histories, all doctrines, Knowledge, rendered book and prior-evidence preservation.
+  Canonical trigger: `none` — bounded source-reading inventory/decomposition or capacity proposal only; no source, runtime, dependency, infrastructure or control change. A capacity implementation or later milestone retains its own required boundary.
+  Verification: All 95 Julia baseline modes/blobs/current bytes remain exact;52 groups /146 inclusive ranges independently reconstruct 75984 lines/2693170 bytes exactly once, with all child bounds/digests. No empty entry or oversized-line split. New 639-line/48991-byte Julia member preserves startup member space and stays within unchanged aggregate/member controls. Compared 55 Dart reading commits forecast 1144 task lines/245095 bytes,5490 Knowledge lines/377493 bytes and 387 map lines/77475 bytes; current resulting controls and history checks pass, but future history rollovers have no free member slots and remain explicitly owned by Julia .4. All prior task/Knowledge/ADR/history evidence and source bytes remain; book and pointers distinguish plan 0/52 from physical reading. No runtime/component gate, canonical CI or dependency build is claimed.
+  Commit: `SESSION-STARTUP-READING.3.5.0 - freeze exact bounded Julia reading plan`
+- ID: `SESSION-STARTUP-READING.3.6`
+  Status: `done`
+  Goal: Split and read all 99 baseline Lua entries, including native adapters, both-ABI tests, runtime, and commands.
+  Children: `.3.6.0` owns decomposition; LUA-STARTUP-READING.1 owns 51 reading children and .3 owns independent closeout.
+  Reading owner: `docs/tasks/LUA-STARTUP-READING.md`; .4/.4.2 close under ADR0118 and containment .14; exact reading is 51/51; .3.1 audit and .3.2 closeout are complete under ADR0119; .2.1-.2.35 own thirty-five concrete repair roots, with installed5.5 nil-error failures under .2.2 and shared Lua budget repair under .82.3.1; .28.7 owns the baseline public-check failure.
+  Acceptance: Define bounded file/range children before reading; generated tables and the large test runner stay in scope.
+  Verification: Lua reading closes under the director-authorized ADR0119 disposition. Both exact .3.1 recipes pass again: 51 unique reading commits/activations, 149 ranges, 99 baseline-identical files, 71,269 fragments /2,732,450 bytes and 51 unchanged comprehension cards. All 35 repair roots/145 pending nodes remain exact. Known PUC5.5 native120/121 and generated79/80 failures, four native-error exclusions, absent full Lua/PUC5.4 proof and startup .28.7 remain explicit. Close only Lua .1/.3/.3.2 and startup .3.6; no canonical CI/receipt or dependency build. The requirement is reuse of compatible unchanged RGX/PGEN products, not a restriction on reading. Next startup .3.7 inventories and bounds remaining supporting ranges; all repairs, later verification, formal book/policy and parked features remain.
+  Commit: `LUA-STARTUP-READING.3.2 - close authorized Lua reading and resume supporting inventory` (Lua reading container)
+- ID: `SESSION-STARTUP-READING.3.6.0`
+  Status: `done`
+  Goal: Inventory all Lua inputs and freeze bounded reading ownership with a measured evidence-capacity plan.
+  Activation commit: `9824c097148235268964acbdf47984d9933753a8`.
+  Dependencies: Julia reading closeout committed under ADR0117; clean tree, zero-byte brief and no unconsumed jobs.
+  Scope: All 99 Lua entries at baseline baeb984e36a94a15951cd23d4c52def5064cdaca, current membership/mode/blob deltas and required task/Knowledge/history capacity.
+  Acceptance: Independently reconstruct every baseline byte through disjoint ranges bounded by 1500 fragments and 65536 bytes per child. Preserve generated data and UTF-8 boundaries. Freeze concrete children if the resulting plan fits; otherwise retain exact inventory, a concrete proposal and unblock conditions. Measure future evidence using actual comparable commits. Grant no physical reading credit, repair closure, capacity increase or later verification exception.
+  Verification tier: `focused`
+  Focused checks: Exact inventory/current-delta and independent range/digest audits; current and forecast routing capacity; old task/card/source/history preservation; Knowledge, memory, both histories, book rendering and all normal doctrines.
+  Canonical trigger: `none` — source-reading inventory/decomposition and capacity proposal only. Any later infrastructure implementation or reading closeout retains its own required verification boundary.
+  Verification: Lua decomposition freezes 51 pending reading children across 99 baseline-identical files: 71,268 physical lines, 71,269 fragments and 2,732,450 bytes. The independent 149-range audit includes two UTF-8-safe byte windows for an oversized generated MCP line. No source comprehension is claimed. The current plan fits unchanged limits; comparable Julia reading growth exceeds remaining Knowledge capacity. LUA-STARTUP-READING.4.1 prepares a coherent capacity disposition before reading. All previous reading, repairs and verification requirements remain intact. Independent replay preserves exact inventory/range/child-summary digests, all bounds, complete EOF coverage and zero reading credit. Comparable 52-commit audit reproduces Knowledge 6615 lines / 402364 bytes / 27 files and complete new history records (364 change lines / 365 note lines), excluding rollover subtraction. Preservation passes 2371 prior task nodes and 2205 source/card/decision/history/control files, exact history suffixes, four current Lua frontiers and all 27 rendered limitations. Knowledge generation (1084 facts / 8729 keys), explicit memory, both histories, book build and diff checks pass. Resulting Knowledge is 1085 files / 73927 lines / 5854640 bytes; tasks 104 files / 85296 lines / 8953769 bytes before this same-line result update. All collection/member limits remain unchanged and pass; normal doctrine hooks govern landing.
+  Commit: `SESSION-STARTUP-READING.3.6.0 - freeze exact Lua reading ownership and capacity intake`
+- ID: `SESSION-STARTUP-READING.3.7`
+  Status: `done`
+  Goal: Account for all 158 original supporting entries and read the current language/runtime dependencies required by the director’s clarified scope.
+  Children: `.3.7.0` completes decomposition; SUPPORTING-SOURCE-READING.1 owns 21 reading groups, .2 new repair intake, .3 independent closeout.
+  Reading owner: `docs/tasks/SUPPORTING-SOURCE-READING.md`; required .1 reading and independent .3 audit close under explicit ADR0120 grant after checker .2.6 commits clean. Six grammar/literal repair roots and all historical exclusions remain separate.
+  Acceptance: Account for legacy adapters, plugins, authored grammars, configuration, and non-TypeScript `.ts` data;
+    use LinkedSpec probes before investigating a spec's behavior, and do not infer defects from historical syntax alone.
+  Verification: Supporting .1 closes with exact158-source/174-range baseline and current identity; required629/96781, historical1500/61165 and explicit omissions23484/806310 fragments/bytes. All21 reading nodes, three reading commits/five ranges/nineteen windows and nine pending repair nodes reconcile; focused normal doctrines/book/preservation replace this one full-CI closeout under ADR0120. No remaining reading or runtime signoff is implied.
+  Commit: `SUPPORTING-SOURCE-READING.1 - close audited supporting reading under explicit focused grant`
+- ID: `SESSION-STARTUP-READING.3.7.0`
+  Status: `done`
+  Activation commit: `735f0337883baef5ac4422976879d09725e0e8ea`.
+  Goal: Inventory supporting sources, reconcile exact prior reading and own every unread range before execution.
+  Scope: All 158 baseline entries under specs, ebnf, noncore, conf and tablescript; current mode/blob/membership deltas; explicit prior coverage; bounded reading and evidence capacity within existing limits.
+  Dependencies: Lua reading closeout .3.2 committed under ADR0119; clean handoff, empty brief, all jobs consumed.
+  Acceptance: Account for every baseline/current byte without reading credit from enumeration. Preserve proven earlier ranges and all repairs; define coherent children within 1500 fragments/65536 bytes before source reading. Measure the actual decomposition against current controls without unapproved increases. Keep book, roadmaps and continuity aligned; no parser, runtime, dependency or gate change.
+  Verification tier: `focused`
+  Focused checks: Independent Git/current-delta inventory, disjoint full-range reconstruction and prior-evidence reconciliation; actual capacity, task/source/Knowledge/history preservation, memory, both histories, book and normal doctrines.
+  Canonical trigger: None for this read-only inventory and documentation decomposition; no milestone closeout or infrastructure implementation. ADR0119 and the director authorize continuing reading; preserve later verification and compatible dependency reuse.
+  Verification: Supporting-source inventory .3.7.0 reconciles all 158 baseline-identical files under conf, tablescript, noncore, specs and ebnf: 25,612 LF delimiters, 25,613 fragments and 964,256 bytes. SUPPORTING-SOURCE-READING owns 21 pending groups/174 disjoint ranges; independent Git, current-delta and published-task reconstruction pass with every group within 1,500 fragments /65,536 bytes. No exact earlier startup Scope coverage is credited; physical reading is 0/21. The resulting decomposition uses existing controls, preserves all repairs and changes no source. Lua reading remains closed under ADR0119; next supporting .1.1 reads configuration. No dependency compilation or canonical gate is run; full codebase/book/policy prerequisites and later verification remain. Exact replay and ownership: docs/knowledge/supporting-source-reading-coverage.md; docs/tasks/SUPPORTING-SOURCE-READING.md.
+  Candidate verification: All three exact published recipes pass; preservation retains 1589 prior source/card/decision/history files and 2589/2590 prior task nodes, changing only startup .3.7 and adding exactly 26 owned nodes. All 92 Known headings, historical chronology and three published payloads remain exact; no reading credit is added. Knowledge generation is 1139 facts/9091 keys; memory 60 lines; histories 375/305 lines, 68 segments and 34 mutation controls pass without rollover. Book rendering/content and all 20 resulting pressure surfaces/62 routes/32 mutation classes pass; normal doctrine hooks govern landing.
+  Commit: `SESSION-STARTUP-READING.3.7.0 - own exact supporting-source reading ranges`.
+- ID: `SESSION-STARTUP-READING.3.8`
+  Status: `active`
+  Goal: Split and read all 160 entries under capability_conformance, cli_conformance, t, tests, and unicode_case.
+  Children: `.3.8.0` owns exact decomposition; `CONFORMANCE-SOURCE-READING.1` owns all143 reading groups; .2 findings and .3 independent closeout stay separate.
+  Reading owner: `docs/tasks/CONFORMANCE-SOURCE-READING.md`; 143 groups /302 baseline ranges over160 inputs. Physical reading 89/143 groups, 109,904 fragments / 4,784,266 baseline bytes and 133 complete files. Seven trace/typed-projection consumers are complete; typed immutable values are read through 226, inside reversed-span diagnostic verification. The remaining value tests stay .1.90-owned. Approved113-byte delta stays separate. Seven complete consumers pass 27 top-level/402 nested TAP results: CLI3/17, EmitContext4/29, branch3/16, nonrep4/35, rep4/54, RuleIR5/39 and typed projections4/212. Typed neutral governance passes14 complete/0 pending/231 mutations. Twelve EmitContext process controls reproduce both known defects and reap both timeout children. Four source-observation controls prove original6/6 assertions miss Top-only instrumentation removal; the bounded twin passes pristine and fails only assertion4 after removal. Existing .2.16 repairs now own eleven process helpers. New .2.19 owns the cross-handler source assertion; production instrumentation passes the stronger control. Corrected stale EmitContext fallback wording to current rejection. Startup .24 and all prior repair/source/book/policy prerequisites remain. No production change, full immutable-value execution, fresh-process generated proof, canonical run, dependency build or push is claimed. Next .1.90. ADR0122/containment .15 remain admitted at ec10be6b.
+  Acceptance: Include phase0, neutral contracts, fixtures, generators, and four explicitly decoded pinned Unicode
+    inputs. Keep generated/fixture bytes in scope; count neither a hash nor enumeration as full reading.
+  Verification: `pending`
+  Commit: `pending`
+- ID: `SESSION-STARTUP-READING.3.8.0`
+  Status: `done`
+  Activation commit: `9833430954c3999769045abbcaa4d20389a7af4c`.
+  Verification tier: `focused`
+  Focused checks: Exact baseline/current Git mode/blob/path and decoded-source inventory; all143 groups/302 disjoint ranges and per-group budgets; four pinned Unicode inputs; source/task/history preservation, memory, Knowledge, histories, rendered book and normal doctrine hooks.
+  Canonical trigger: Ordinary source-reading decomposition; no source/runtime/dependency/registry change or parent closeout. Earlier ADR0120 exceptions are consumed and are not extended.
+  Goal: Own every conformance/test/Unicode reading range before reading, preserving exact baseline identity and continuity.
+  Dependencies: Supporting reading .1/startup .3.7 close at983343095 with all doctrines, zero-byte brief and clean handoff.
+  Acceptance: Account for all160 baseline paths and current deltas, including four explicitly decoded pinned Unicode inputs; create exact bounded reading tasks and reproducible independent coverage proof. Preserve generated fixtures, original sources, existing repairs and capacity limits; inventory/decompression/hashes receive no physical-reading credit.
+  Verification: Independent baseline/current Git mode/blob/path and present-byte equality PASS for160 files/5422313 stored bytes; four gzip sources decode to8257059 total bytes/167606 fragments. Exact Scope-driven audit validates143 groups/302 disjoint ranges, all1500/65536 budgets and four decoded hashes. Unicode casing1563/1581 mappings,158/464 property ranges/12 fixtures and rule labels806/9/8/2 PASS. No physical-reading credit, source change or new limit. Canonical evidence and current replay: conformance-source-reading-coverage. Preservation, memory, Knowledge, histories, rendered book and all normal doctrines govern focused planning landing.
+  Candidate proof: Preserve2486 prior files byte-exact, all earlier recipe blocks,2627/2628 prior nodes and all94 book limitation headings. Only startup .3.8 changes; new .3.8.0 plus147 conformance-tree nodes own the plan. Metadata PASS at105 files/89554 lines/9507983 bytes before this annotation;2776 current IDs are unique. Memory60; histories439/45244 and369/44107 lines/bytes; rendered book PASS. Normal doctrine hooks govern landing.
+  Commit: `SESSION-STARTUP-READING.3.8.0 - own exact conformance test and decoded Unicode reading ranges`
+- ID: `SESSION-STARTUP-READING.3.9`
+  Status: `pending`
+  Goal: Split and read all 143 remaining repository-tooling entries from the exhaustive complement rule below.
+  Acceptance: Include hooks, shell/Python/Perl tools, root configuration, command entrypoint, doctrine registry data,
+    and the vendored Knowledge Map bundle. Reuse exact completed supporting ranges and read every remaining range.
+  Verification: `pending`
+  Commit: `pending`
+- ID: `SESSION-STARTUP-READING.3.10`
+  Status: `pending`
+  Goal: Review root guidance and relevant durable owners using their prescribed reading or indexed-query lifecycle.
+  Acceptance: Bind all 28 baseline root Markdown paths to their owners: complete remaining maintained architecture/
+    user-guide text in bounded children; retain completed roadmap/bootstrap/Toolbox coverage; query generated
+    Knowledge Map and immutable chronology instead of loading them wholesale. Memory records are not source-code coverage.
+  Verification: `pending`
+  Commit: `pending`
+- ID: `SESSION-STARTUP-READING.3.11`
+  Status: `pending`
+  Goal: Reconcile complete source-reading coverage against baseline and final HEAD before closing codebase reading.
+  Acceptance: Lanes `.3.2` through `.3.10` are complete; review all changed/new paths since baseline and resolve every unexplained
+    omission or overlapping credit. The book's configuration/source remains `.4`-owned. All unverified findings
+    have exact owners; read coverage is not runtime signoff.
+  Verification: `pending`
+  Commit: `pending`
+### Bootstrap and focused supporting material already read
+- `README.md`, `MEMORY_ARCHITECTURE.md`, `MEMORY.md`, `SESSION_BOOTSTRAP.md`, `COMMIT.md`, and local `README_POLICY.md`.
+- The supplied `AGENTS.md` instructions and `docs/TASK_TREE_README.md` in full; task-index purpose, active-frontier
+  context, and operating rules at `docs/TASK_TREE.md` 3269–3525. The large embedded historical marker section has
+  not been read in full.
+- `docs/tasks/TEMPLATE.md`, `docs/tasks/RUST-MUTATION-TESTING.md`, and `docs/decisions/0039-rust-mutation-testing-cadence.md`.
+- Knowledge cards `rust-mutation-testing-policy`, `bounded-live-document-store-contract`, and
+  `verification-cadence-policy` in `docs/knowledge/`. Knowledge Map searches are retrieval, not a full-map read.
+- `.githooks/pre-commit`, `.githooks/post-commit`, `.githooks/commit-msg`, `scripts/check_memory_architecture.sh`,
+  `scripts/check_verification_cadence.sh`, `scripts/check_task_tree_metadata.sh`,
+  `scripts/check_doctrines.sh`, `scripts/check_diagnosis_evidence.sh`, and `tools/check_memory_handoff_state.py`.
+- Current `LIVE_ACHIEVEMENT_STATUS.md` in full; `CHANGES.md` and `DEVELOPMENT_NOTES.md` baseline lines 1–100.
+  Their older chronology is not fully read; use the indexed history query when historical evidence is needed.
+- The director-supplied fsmgen README policy, pgen claim-verification policy, and fsmgen live-document containment
+  adoption guide were read in full through explicitly authorized read-only access. Their local adoption/update
+  comparisons remain `.5`; reading a donor document does not establish local compliance.
+- `TOOLBOX.md`, `ARCHITECTURE_STATE.md`, remaining owner modules, and the full book have not been read in full.
+- `.2` additionally read `TOOLBOX.md` 1–125, 605–682, and 1703–1792; `tools/project_data_env.sh` 1–100;
+  `tools/project_data_run.sh` 1–190; ADRs `0001`/`0073`; and knowledge card `project-data-descendant-liveness-gap`.
+- During the `.2` commit and `.6` diagnosis, additional reading completed `TOOLBOX.md` 126–604 and 683–825,
+  plus `tools/project_data_run.sh` 191–355 (EOF). Thus Toolbox coverage is 1–825 and 1703–1792, and the
+  managed-run wrapper is fully read. Its new causal finding is recorded separately; other code remains unread.
+- `.6` also read `tools/test_project_data_lifecycle.sh` 1–441 (EOF): existing live/dead/recovery/marker tests
+  run with ordinary permitted liveness and do not inject denied PID/group inspection. This is source review,
+  not a fresh run of that destructive fixture suite.
+- `.3.1` completed `TOOLBOX.md` in full through baseline EOF 1864, and read `unicode_case/README.md` in full.
+  Four gzip payloads were decompressed only for counts; their contents remain unread. Reviewed the existing
+  `linkedspec-pm-is-thin-facade` fact card to select the first code-reading boundary without re-deriving its facts.
+### Complete baseline classification at `.3.1`
+Baseline is `baeb984e36a94a15951cd23d4c52def5064cdaca`. `git ls-tree -r --full-tree` plus
+`git cat-file --batch` measured the exact stored objects, not changing worktree bytes. Apply these ordered
+path rules; the final complement explicitly owns every otherwise unmatched path.
+| Class / path rule | Entries | Stored blob bytes | Reading owner |
+| --- | ---: | ---: | --- |
+| Exact `rgx` gitlink | 1 | 0 | Director-excluded, including nested dependencies |
+| Prefix `docs/linkedspec-book/` | 50 | 1,956,582 | `.4`, including book configuration and all chapter text |
+| Remaining prefix `docs/` | 1,197 | 20,123,040 | Durable memory; retrieve relevant owners and indexed history, not codebase reading |
+| Root `*.md` (no slash) | 28 | 7,672,599 | `.3.10`, roadmap `.2`, and prescribed memory lifecycles |
+| Prefix `perl/` | 89 | 2,133,690 | `.3.2` |
+| Prefix `rust/` | 412 | 3,533,382 | `.3.3` |
+| Prefix `dart/` | 115 | 2,471,305 | `.3.4` |
+| Prefix `julia/` | 95 | 2,693,170 | `.3.5` |
+| Prefix `lua/` | 99 | 2,732,450 | `.3.6` |
+| Prefix `specs/`, `ebnf/`, `noncore/`, `conf/`, or `tablescript/` | 158 | 964,256 | `.3.7` |
+| Prefix `capability_conformance/`, `cli_conformance/`, `t/`, `tests/`, or `unicode_case/` | 160 | 5,422,313 | `.3.8` |
+| Every remaining baseline path | 143 | 2,381,957 | `.3.9`: `.claude`, `.github`, `.githooks`, five root dotfiles, `bin`, `doctrine`, `knowledge-map`, `scripts`, `tools` |
+| **Total** | **2,547** | **52,084,744** | Every entry accounted for once |
+The eight source/tool/fixture lanes contain 1,271 entries / 22,332,523 stored bytes. Of these, 1,267 are text
+with 565,122 newline delimiters. Four pinned Unicode gzip inputs are the only NUL-containing blobs; they add
+54,500 decoded newline delimiters / 3,352,036 decoded bytes and remain explicitly in `.3.8`. This count is an
+inventory, not evidence that any of those lines was understood. Generated Unicode modules, generated MCP
+bindings, corpus JSON, and large phase0/runtime files are not silently excluded.
+Each future reading leaf names exact paths and inclusive ranges **before** execution, totals at most 1,500
+decoded text lines and 65,536 bytes, and uses smaller output chunks to avoid truncation. Oversized files split
+at coherent declaration/test boundaries within those limits; a single over-limit line uses explicit byte
+ranges. Record all unread suffixes before advancing. Do not duplicate the full immutable inventory into a new
+manifest; recover membership from baseline plus these disjoint selectors and recover identities from Git.
+`.3.2.1` is exactly 1,430 lines / 56,706 bytes across five files. Its `LinkedSpec.pm` reread checks owner
+relationships despite prior facade coverage. Other inputs remain unread unless listed above. At clean
+`03d692c13bbc49590f318dd4c8536008d9f979f5`, the ten changed/new paths since baseline are continuity/Knowledge/task
+records; all source/test/spec/tool inputs and all book files remain unchanged. Every checkpoint's own final diff
+is reviewed separately.
+### Shared Perl-reading acceptance and decomposition at `.3.2.2`
+The 52 pending siblings `.3.2.3`–`.3.2.54` own all 84 remaining baseline Perl paths / 2,076,984 bytes exactly
+once. Each Scope uses inclusive, one-based baseline line or byte ranges; byte offsets start at the beginning
+of the named blob. The five `.3.2.1` paths are excluded by exact name. The first group follows the facade's
+resolution/loading dependencies. Large modules split at declarations or blank statement boundaries where
+possible; generated table rows remain complete records. Every suffix is owned, and every leaf fits the
+1,500-line / 65,536-byte limit. Reading uses smaller untruncated output chunks within that scope.
+`MCPContract.pm` line 14 is an 82,883-byte generated payload: `.3.2.35`–`.3.2.37` own its three byte fragments.
+The preceding 13 lines and following seven lines remain explicitly owned. These byte fragments intersect the
+same logical line, so summing per-leaf line/fragments is not a distinct-line total. No generated JSON is omitted.
+For every reading child: activate its existing task owner first; retrieve the relevant Knowledge owner before
+interpreting code; read every scoped byte without truncation; reconcile comprehension and record exact
+coverage; diagnose surprising behavior with Toolbox probes and own any repair; review baseline/current deltas;
+record focused changed-surface checks and required memory/doctrine/history proof; update continuity and commit
+before advancing. Reading alone is not runtime signoff. Public/book changes remain conditional on material
+public findings and the startup authorization boundary. No code or book reading credit comes from this plan.
+Independent verification converts all declared line ranges to baseline byte intervals and requires contiguous,
+non-overlapping coverage from byte 1 through EOF for all 84 paths, no extra path, and each declared leaf budget.
+This plan adds no second manifest: the owned task Scope fields are the reading plan; Git remains the file/object
+inventory. Final `.3.11` still reconciles all first-party lanes and current deltas.
+### Shared native-reading acceptance and Rust decomposition at `.3.2.55`
+The 66 reading children `.3.3.1`–`.3.3.66` own all 412 baseline Rust paths / 3,533,382 bytes once;
+`.3.3.67` owns parent closeout. Inclusive one-based lines and bytes use the same baseline as Perl.
+Both empty corpus files have explicit zero-byte owners. The oversized MCP binding line is split across
+`.3.3.24`–`.3.3.25`; its six-line header remains with the first payload window. Generated Unicode rows,
+embedded contract JSON, full corpus grammars and expected data, manifests, lockfile, and backend README stay in scope.
+Each child fits 1,500 lines/fragments and 65,536 bytes. Boundary inspection distinguishes declaration/test
+boundaries from continuations inside larger methods, fluent expressions, embedded grammars, or generated data.
+A window is not a claim that an enclosing method is complete: reconcile its preceding context and explicitly
+retain its suffix owner. Planning inspected boundary context only; no whole Rust file is credited by this plan.
+Read each window in smaller untruncated chunks. Retrieve Knowledge first, diagnose surprises with Toolbox,
+create repair ownership before changes, review current deltas, record concise comprehension and exact coverage,
+run focused direct-dependent and continuity proof, and commit before the next implementation/checkpoint.
+Public/runtime/policy repairs remain gated on `.3`/`.4`/`.5`; full codebase reading remains No.
+The independent audit converts the task's Scope records to byte intervals and requires exact contiguous,
+disjoint coverage through EOF plus explicit empty-file ownership, per-child budgets, and current Git identity.
+No separate manifest is created. Recheck collection pressure before later evidence or decomposition grows it;
+the 8,000-line general member limit and 80,000-line aggregate remain unchanged.
+### Facade invocation reading at `.3.2.1`
+- Completed `perl/LinkedSpec.pm` 1–296, `perl/LinkedSpec/OwnerDispatch.pm` 1–220,
+  `perl/LinkedSpec/Runtime.pm` 1–154, `perl/LinkedSpec/ParserFactory.pm` 1–368, and
+  `perl/LinkedSpec/RuntimeContext.pm` 1–392, each through EOF without truncation. All five remain byte-identical
+  to the baseline; this is five unique Perl files, not five newly unread files plus the earlier facade credit.
+- Understanding agrees with `docs/knowledge/linkedspec-pm-is-thin-facade.md`: public wrappers normalize and
+  delegate; `OwnerDispatch` resolves lazy callbacks/bundles and preserves successful caller error/context;
+  `ParserFactory` resolves/loads named source through injected owners; `Runtime` delegates compiler work;
+  `RuntimeContext` owns identity, source capture, and structured diagnostics/fallback precedence.
+- The public runtime wrapper resets the input position and skips leading blank/comment lines. Retrieved
+  `docs/knowledge/ds-vhistory-leading-newline-oracle-boundary.md` before interpreting that behavior: it is an
+  already-owned cross-backend public-versus-direct-handler boundary, not a new defect from this reading.
+- Descriptor, parser, and mode-only return shapes are deliberately distinct; early factory errors and deeper
+  compiler errors retain their intended attribution. This reading does not validate every dependency's behavior;
+  those remaining owners stay in subsequent bounded leaves.
+- Source identity and both managed syntax checks pass. No new causal fact beyond the retrieved owners, no
+  production/public change, and no fresh behavioral-conformance claim results from this reading checkpoint.
+### Resolution and bootstrap adapter reading at `.3.2.3`
+- Read `Resolver.pm` 1–223, `SpecLoader.pm` 1–352, `EntryRuleSelection.pm` 1–74, `GeneratedSource.pm` 1–319,
+  and `BootstrapSpec.pm` 1–135, all under `perl/LinkedSpec/`, through EOF without truncation. The five files
+  total 1,103 lines / 36,759 bytes and remain baseline-identical. Ten unique Perl files are now fully read.
+- Retrieved the existing portable/legacy resolution, root selection, generated-v2, self-hosted grammar, and
+  dual-path bootstrap cards before interpreting those boundaries. Resolver retains legacy local/PathSearch
+  discovery; SpecLoader uses explicit ordered candidates, strict preserved UTF-8, typed results/errors, and
+  compiler identity. Entry selection preserves authored order/markers. GeneratedSource derives cursor policy
+  from ten families and validates contract then rows. Bootstrap primary output remains authoritative.
+- The shared bootstrap comparison result survives an empty later comparison. Exact managed probes establish
+  one initial row, zero negative rows, retained old array identity, and replacement on a later positive control.
+  Public Get separately rejects malformed source at validation. No primary parser or public exposure defect is
+  claimed. `docs/knowledge/bootstrap-comparison-stale-result.md` records mechanism/evidence; `.8` owns repair.
+- No additional source-reading credit is inferred from the consumer grep or runtime probes. Remaining reading
+  starts at `.3.2.4`; source repairs `.7` then `.8` follow `.3`/`.4`/`.5` and precede Rust mutation setup.
+### Bootstrap grammar core reading at `.3.2.4`
+- Read `perl/LinkedSpec/BootstrapSpec/Core.pm` through EOF in exact chunks 1–300, 301–600, 601–900, and
+  901–1196: 1,196 lines / 39,291 bytes, baseline-identical. Eleven unique Perl files are now fully read.
+- Reconciled the primary bootstrap/secondary self-hosted boundary with existing Knowledge. The core builds
+  ordered token handlers, rule/brace dispatch, authored selectors, mode bounds, lifecycle/action/blind/bare-edge
+  payloads, and method-chain rendering. It does not replace the permanent self-hosted language owner.
+- Investigated the suspect slash-quote branch instead of classifying it without tools. Direct attached-tail
+  probes show quoted braces preserved and regex closing braces/parentheses truncated; helper lowering confirms
+  the regex match expression itself is supported. Public descriptor creation succeeds for both pattern forms,
+  but execution returns 1 for the quoted twin and undef with `rule_handler_compile` for `/}/`.
+- The prefix includes the opening delimiter, making the empty-prefix slash-quote condition unreachable. Exact
+  offsets, source locations, public control, and limited scope are in
+  `docs/knowledge/bootstrap-conditional-regex-delimiters.md`; `.9` owns repair after `.7`/`.8` and required reading.
+- An initial inline probe used the wrong Perl quote delimiter and failed to parse; the corrected `q~...~`
+  harness completed successfully. This harness error is not a repository defect. All probe jobs are consumed.
+- No production or book change; remaining reading starts at `.3.2.5`. The source-reading gate remains No.
+### Compiler state and required history rollover at `.3.2.5`
+- Read `perl/LinkedSpec/CompilerState.pm` through EOF in 1–300 and 301–590 chunks: 590 lines / 23,054 bytes,
+  baseline-identical. Twelve unique Perl files are fully read; 77 baseline Perl files remain unread.
+- Existing `compilerstate-internal-model`, resolved descriptor-model-tag, and outward-versus-semantic-wire cards
+  reconcile state construction, definition/compiled ordering, function projection, migration-summary shaping,
+  dependency maps, validation views, and the four-key outward projection. Host regex/callable values remain an
+  intentional native boundary. This reading establishes no additional defect or runtime-completion claim.
+- The complete six-line changelog record takes the root to 465/512 lines; the required rollover archives 218
+  clean-HEAD suffix lines / 20,348 bytes as segment `4985` and leaves 247 lines / 21,550 bytes. Independent
+  byte comparison and SHA-256 prove exact activation source lines 242–459 with no prior segment edits.
+- Normalized the current view's trailing blank line for `git diff --check`; the candidate root is 246 lines /
+  21,549 bytes. The immutable suffix remains byte-identical; only current-view EOF whitespace changed afterward.
+- The resulting history needs 28 files and 27 manifest lines. ADR `0102` admits exactly those two finite counts
+  under existing README/history policy, preserving all byte/current-view/aggregate ceilings and authority. This
+  required checkpoint-storage maintenance stays within startup continuity; donor-policy adoption and product
+  changes remain gated. The registry movement makes this leaf canonical, with an exact staged receipt before commit.
+### Compiler generation/state prefix and preceding canonical evidence at `.3.2.6`
+- Activated from clean `6c1234cc0fd3cb194c6d75314d86bfe05da104a0` with the prior canonical receipt promoted,
+  all nine commit doctrines PASS, empty message file, and no remaining job. Read Compiler.pm 1–260, 261–520,
+  521–780, and 781–1041 without truncation: 1,041 lines / 41,073 bytes, baseline-identical. Its 1042–2002
+  suffix remains `.3.2.7`; twelve whole Perl files and this partial thirteenth file are covered.
+- Reconciled generated-v2 plan/entry serialization, execution-only dependency-slot rows, invocation-local sinks,
+  enrichment and typed error forwarding, callback/parsed-entry diagnostics, CompilerState assembly/projection,
+  dependency validation, and parsed label/slot/root metadata with existing Knowledge. No new runtime defect.
+- The older identical-regex risk card still described an open finding despite its linked family's 2026-07-20
+  Perl admission and complete portable rollout. Its title/status and explicit resolution pointer now mark the
+  retained diagnosis as historical; the original evidence remains intact. The prior canonical run freshly
+  passed the 12-role Perl duplicate-slot consumer. Public semantics and book teaching did not change.
+- Preceding `.3.2.5` default canonical CI passed, including the mandatory backend admission consumers,
+  relocation/process containment, primary CLI 66/66 in both option environments, and Phase 0 1,032/1,032 in
+  1,121 wall seconds. Separately opt-in local gates and recurring matrices were not enabled. The staged receipt
+  bound base `4f311a9e` to SHA-256 `775ebdf60905a47393731db24c50de74c1037d77fe32d6eca8abc3e8b5d9a12a`
+  and was promoted to `6c1234cc`. No tracked candidate changed while that run was active.
+- Existing macOS launch-latency Knowledge now preserves the 2026-09-06 / macOS 26.6.2 compiler `dlopen`/`fcntl`
+  and test `_dyld_start` samples, eventual passing execution, and the older controlled conclusion's OS-specific
+  boundary. Exact sample hashes were verified before deleting only the two consumed reports; both paths are
+  absent. No recovery/purge, target cleanup, re-signing, or trust bypass was used.
+- Supporting reading additionally covers tools/verification_receipt.sh 1–150 (EOF) and the two Cargo-child
+  call sites in rust/linkedspec-runtime/tests/staged_ast_enrichment_contract.rs 2072–2115 and 2217–2252.
+  These bounded supporting reads do not mark the remaining Rust file or tool lane complete.
+### Compiler pipeline suffix at `.3.2.7`
+- Activated from clean `f864f881f5210a99d68602166e8720a741f84795`; prior Knowledge/all nine doctrines,
+  post-commit pointer, empty brief, and clean status passed. Read Compiler.pm 1042–1280, 1281–1520,
+  1521–1760, and 1761–2002 without truncation: 961 lines / 43,851 bytes. The complete module is now read
+  at 2,002 lines / 84,924 bytes; thirteen whole Perl files are covered and 76 remain.
+- Reconciled runtime-context preparation, function stripping/registry attachment, envelope/DSL/bootstrap stages,
+  descriptor-state/reference validation, policy passes, source flush, return-mode precedence, root attribution,
+  and invocation error preservation with existing Knowledge and ARCHITECTURE_STATE.md 4571–4623.
+- The new `perl-compiler-pipeline-stage-and-mode-boundaries` card indexes the precise phase/stop/return
+  boundaries absent from the question map. It links existing state/root/generated/runtime owners and explicitly
+  records source-level evidence without a new runtime signoff claim. No new defect or public-book change.
+- Next exact reading is SpecEntry.pm 1–600 under `.3.2.8`. Required codebase/book reading remains incomplete.
+### SpecEntry reading and explicit handoff defect at `.3.2.8`
+- Activated from clean `dc7f5f090c078d0d3d05886eec371db89bfae625`; prior Knowledge/all nine doctrines,
+  post-commit pointer, zero-byte brief, clean status, and derived-map review passed. Read SpecEntry.pm
+  1–200, 201–400, and 401–600 without truncation: complete 600 lines / 23,171 bytes. Baseline identity
+  passes; fourteen whole Perl files are covered and 75 remain. No product source changed.
+- Reconciled RuleIR/EmitContext orchestration, HandlerIR selection/emission, preamble authority/recognition/gaps,
+  lexical working variables, labeled compile/runtime diagnostics, balanced recursion keys, and typed/control
+  exception routes. The two older SpecEntry coupling cards explicitly retain their original evidence as history
+  and point to current owners. This does not reopen already completed native backend rollout.
+- Isolated emitter interception proves the AND_BCODE branch reads package `REs`/`and_icode`, not caller lexicals
+  or explicit arguments. With normal package state both optional fields are absent; localized package state
+  injects both. The single-acode node retains its supplied argument. A public descriptor/source control selects
+  AND_BCODE and emits the blind child loop without the legacy match section. No public result failure is claimed.
+  `specentry-and-bcode-unbound-inputs` preserves exact controls and causal locations; `.10` owns repair after
+  reading and `.7`–`.9`, with entry-without-self-match and blind-call semantics required to remain correct.
+- Supporting HandlerVariantEmitter.pm reads are exactly 100–176 and 804–880 (baseline-identical); all other
+  emitter text remains unread under its existing children. Probe processes exited zero; no background job remains.
+- Next reading: Validation.pm 1–1320 under `.3.2.9`; codebase and book answers remain No. Public-book review
+  of the diagnosed handoff follows complete reading and repair; no behavioral change is made in this checkpoint.
+### Validation prefix and diagnostic source repairs at `.3.2.9`
+- Activated from clean `e4b1f296910e73205f2ea8a2498a14040b1ff381`; prior Knowledge/all nine doctrines,
+  post-commit pointer, zero-byte brief, and clean status passed. Read Validation.pm 1–220, 221–440,
+  441–660, 661–880, 881–1100, and 1101–1320 without truncation: 1,320 lines / 43,290 bytes,
+  baseline-identical. Fourteen full Perl files plus this prefix are covered; suffix 1321–1904 remains unread.
+- Reconciled envelope/markerless acceptance, rule-definition/dependency validation views, named-slot and gap
+  metadata checks, paragraph/block/edge validation, regex pass, strict authored-edge graph, and lifecycle/header
+  scanners with existing compiler-state, root, open-block, and gap owners. Reading is not broader runtime signoff.
+- Direct context/formatter probes show current-line repetition as Next and literal `0` erased as current text.
+  Validator callbacks and public Get context show a line-4 duplicate attributed to line 1 and Top's invalid regex
+  attributed to Next. Invalid inputs still reject. The causal card `perl-validation-diagnostic-source-drift`
+  and `.11.1`–`.11.3` own separate context/occurrence/regex-owner repairs after reading and `.7`–`.10`.
+- The preceding derived-map review exposed literal block-scalar pipes in the old coupling card's evidence and
+  reverify fields. Scalar metadata now exposes the actual current owner command while preserving historical body
+  evidence. The open-block card's reverify no longer supplies removed parse_mode; its direct-validator command
+  passes and reaches the documented line-3 failure. These are retrieval corrections, not a new syntax contract.
+- All diagnostic processes exited zero. Next reading is Validation.pm 1321–1904 under `.3.2.10`; codebase/book
+  remain incomplete, product source is unchanged, and public-book changes remain with the owned repairs.
+### Validation suffix at `.3.2.10`
+- Activated from clean `96a1c2426ce68cf5f7b9281dbeb3005d3d876fd9`; prior Knowledge/all nine doctrines,
+  post-commit pointer, zero-byte brief, clean status, and derived-map review passed. The prior retrieval fixes
+  now appear as actual commands/evidence in the derived map. Read Validation.pm 1321–1520, 1521–1720, and
+  1721–1904 without truncation: 584 lines / 18,639 bytes. The full baseline-identical module is now read
+  at 1,904 lines / 61,929 bytes; fifteen whole Perl files covered and 74 remain.
+- Reconciled quote/slash skipping, cross-line depth, static edge/selector/group/fluent parsing, slash-call
+  delegation, substitute/translate segments, and targeted diagnostic payloads with existing edge, arithmetic,
+  rule-local, and gap owners. The earlier diagnostic defects remain owned under `.11`; no new runtime defect
+  is established by this suffix. This source reading does not claim fresh backend or parser signoff.
+- The edge Knowledge card clarifies the already-supported blind-return block and points its dated bare-edge/gap
+  staging notes to the existing admitted owners. Legacy split-marker divergence remains the explicit
+  compatibility boundary in the gap closeout card, not an unowned new finding or a capture_gaps alias.
+- Next exact reading is RuleIR.pm 1–987 under `.3.2.11`; required codebase/book reading remains incomplete.
+### RuleIR reading and authored execution-order defect at `.3.2.11`
+- Activated from clean `ff6c228c7804270916b64a7c9332be92a5df1f76`; prior Knowledge/all nine doctrines,
+  post-commit pointer, zero-byte brief, and clean status passed. Read RuleIR.pm 1–200, 201–400, 401–600,
+  601–800, and 801–987 without truncation: complete 987 lines / 31,462 bytes, including EOF and unchanged
+  from baseline. Sixteen whole Perl files are covered and 73 remain.
+- Reconciled handler-family selection, trace decisions, authored top/regex/slot/lifecycle collection, legacy
+  marks, bare normalization, selector authority, resolved metadata, gap eligibility, and mixed-ownership
+  rejection with existing root, rule-local, gap, SpecEntry, and trace owners.
+- Public OR spelling controls prove that bare First before explicit Second reverses dependency order and
+  returns second, while explicit/bare, all-bare, and all-explicit return first. Every metadata edge sequence
+  still says First, Second. AND bare First before explicit Second returns second, first. A direct RuleIR
+  probe isolates explicit collection followed by bare append during normalization, independent of later
+  emission. `perl-bare-explicit-edge-order-drift` preserves exact probes and causal boundaries; `.12` owns
+  repair after reading and `.7`–`.11`, preserving authored order, lifecycle actions, and native/carrier parity.
+- These are native/public and direct-owner results; generated/other-backend failure was not measured here.
+  All probe processes exited zero. Next reading is RuleIR/EmitContext.pm 1–1489 under `.3.2.12`;
+  codebase/book remain incomplete and source remains unchanged until the required-reading boundary closes.
+### EmitContext bridge prefix at `.3.2.12`
+- Activated from clean `3ab399d034f34029ac136a31a7b252a7dd8d31cc`; prior Knowledge/all nine doctrines,
+  post-commit pointer, zero-byte brief, clean status, and derived-map review passed at 948 facts / 8,018 keys.
+  Read EmitContext.pm 1–220, 221–435, 436–680, 681–915, 916–1155, 1156–1375, and 1376–1489
+  without truncation: 1,489 lines / 49,396 bytes. Full-file baseline identity passes; sixteen whole Perl
+  files remain covered, with EmitContext's 1,094-line suffix still owned by `.3.2.13`.
+- Reconciled lazy owner/callback loading, caller-context dispatch, dependency injection, type-memory and
+  write-target collection, lowering wrappers, trace decisions, compatibility fallback, and code-chunk joining
+  against existing EmitContext/ActionIR cards. Source comprehension is not fresh runtime signoff.
+- Exact bounded registry extraction returns fourteen keys: thirteen ActionIR packages plus Trace. The original
+  registry card already listed fourteen names but said thirteen; its count and ineffective mention-counting
+  reverify are corrected, and the adjacent lowering card distinguishes the thirteen-owner subset. No production
+  defect or public contract change is established here; existing repairs `.7`–`.12` remain gated on reading.
+- Next exact scope is EmitContext.pm 1490–2583 under `.3.2.13`; codebase/book reading remain incomplete.
+### EmitContext suffix and repeated blind-target identity at `.3.2.13`
+- Activated from clean `5e2cf75632f1fd16c3e94fac0f610ee572ea3e26`; prior Knowledge/all nine doctrines,
+  post-commit pointer, zero-byte brief, clean status, and complete derived-map review passed (948 facts /
+  8,018 keys). Read 1490–1699, 1700–1910, 1911–2110, 2111–2300, 2301–2495, and 2496–2583
+  without truncation: 1,094 lines / 46,079 bytes. EmitContext is fully read at 2,583 lines / 95,475 bytes;
+  seventeen whole Perl files are covered and 72 remain. Full EmitContext/emitter baseline identity passes.
+- Reconciled action/dependency projection, lifecycle rewriting, readiness/compatibility telemetry, literal
+  masking, AST/text working-variable discovery, declaration deduplication, child-push binding harmonization,
+  write-presence state, and final context assembly with existing owner/AST/non-strict-scope cards. Historical
+  declaration examples are not treated as current syntax or a fresh audit of unread ActionIR modules.
+- Repeated-target probes confirm a distinct occurrence-identity defect: regex-consuming OR Child/Child yields
+  [second], while equivalent Child/Other yields [first]. Immediate-return AND controls yield scalar second
+  versus first. The descriptor keeps both explicit blind edges; emitted source repeats the last code in both
+  name-based branches. Direct `_rewrite_bcode_entries` returns two Child calls but one final code value.
+- Supporting HandlerVariantEmitter.pm 515–590 was read without truncation; prior 100–176 and 804–880 coverage
+  remains valid, while other emitter ranges remain unread. `_build_bcodes_dispatch_block` independently keys
+  retrieval and branch conditions by target name. Repair `.13` therefore owns storage and occurrence dispatch,
+  native/carrier/direct-dependent/backend proof, and book reconciliation after reading and `.12`.
+- Initial diagnostic outputs were not retained to completion and are excluded from evidence. A permitted
+  process census found no remaining task-owned probes before the retained rerun; all retained direct/public
+  probes subsequently completed with exit zero. OR with I-only children returned null in both variants, so it
+  was replaced by a regex-consuming positive control rather than counted as an OR identity result. No liveness
+  recovery or purge was used, and no background job remains at this checkpoint.
+- `perl-repeated-blind-target-code-collision` preserves exact native results and causal boundaries. Emitted
+  source was inspected but not independently loaded here; other-backend failures remain unmeasured. Next
+  exact reading is HandlerVariantEmitter.pm 1–1403 under `.3.2.14`; codebase/book remain incomplete.
+### HandlerVariantEmitter prefix and I-block corruption at `.3.2.14`
+- Activated from clean `a7d17e6fcb4e6deafc8b3b2c46c957fa8f09e8b0`; prior Knowledge/all nine doctrines,
+  post-commit pointer, zero-byte brief, clean status, and derived-map review passed (949 facts / 8,022 keys).
+  Read 1–215, 216–420, 421–645, 646–840, 841–1035, 1036–1235, and 1236–1403 without truncation:
+  1,403 lines / 53,304 bytes. A truncated combined initial output was replaced by the exact 1–215 reread;
+  full emitter baseline identity passes. Seventeen whole Perl files remain covered; the suffix is `.3.2.15`.
+- Reconciled ten variant builders, bounds, slot identity/observation, acode/bcode dispatch, trace helpers,
+  backend/kind dispatch, default/AND/OR templates, and repeated-blind choice with existing HandlerIR, root,
+  slot, trace, and earlier defect owners. Direct builder proof retains Perl strings and cursor_policy;
+  unknown private backend/kind returns undef. The old HandlerIR card now distinguishes its historical catalog
+  from current field/dispatch/payload boundaries. Source header/comment reconciliation follows the final read
+  alignment in `.5`; no new backend route or changed public contract is claimed.
+- Public selected I-block source `Top::AND /x/ I { value = "return"; return(value) }` followed by an explicit
+  `-> Top { return(value) }` edge corrupts literal data. Plain/return/returning cases in one process yield
+  plain, `plain = `, and `plain =  = ing`. Source capture shows `$value = "$Top = "; $Top = $value`.
+  Both textual I-block return-rewrite sites ignore literal and trailing token boundaries.
+- A retained same-parser/input seed control localizes only `LinkedSpec::SpecEntry::Top`: seed_one and seed_two
+  produce and overwrite the package slot with `seed_one = ` and `seed_two = `. Captured source has one
+  array Top declaration and zero scalar Top declarations. The single-acode internal I-result is a package
+  variable; `.14.1` owns literal-safe lowering and `.14.2` owns invocation-local state with independent proof.
+- I-only probes had no outgoing selector, selected no executable handler, and returned zero; they do not
+  activate the per-regex match path and are excluded from literal-preservation evidence. This agrees with
+  the existing no-self-match entry invariant. The explicit-edge literal control returns return unchanged.
+  The old indexed two-edge AND reverify returns 1 after removing retired parse_mode, so that fix stays closed.
+- Retained processes all exited zero and no diagnostic job remains. New Knowledge preserves exact result/
+  source/seed boundaries. Emitted source was inspected, not independently loaded; no other-backend failure
+  is claimed. Next `.3.2.15` reads emitter 1404–1920 plus LinkedRE/ActionIR AST; codebase/book remain incomplete.
+### Emitter suffix, LinkedRE, and AST facade at `.3.2.15`
+- Activated from clean `e421887d7c4ccf5a3a7714bd9a9b74b2fc7e40c1`; prior Knowledge/all nine doctrines,
+  post-commit pointer, zero-byte brief, clean status, and complete derived-map review passed (950 facts /
+  8,026 keys). Read emitter 1404–1585, 1586–1760, 1761–1920, plus LinkedRE.pm 1–148 and
+  ActionIR/AST.pm 1–71 without truncation: 736 lines / 24,430 bytes. All three full-file identities match
+  baseline. Twenty whole Perl files are now read and 69 remain.
+- Reconciled repeated AND/blind/action loops, bounds/progress/recognition/capture-gap placement, JSON field
+  projection, seek/consume matching, capture snapshots, ordered-slot validation, alternation, source-span/node
+  constructors, and lazy AST-parser dispatch with existing emitter, duplicate-slot, and AST owners. The old
+  identical-regex defect stays resolved through match_slot; AST implementation remains unread after its facade.
+- Bounded `Top::OR{2,2} /x/ -> Top { return("return value") }` on xx confirms the same literal/state
+  mechanisms as `.14`. With package Top seeded to seed_one, results are [seed_one = value, seed_one = value
+  = value]; seed_two analogously changes both outputs. Source captures `$Top = "$Top = value"` with no scalar
+  lexical. Plain and unspaced return controls preserve both data items but overwrite package Top, independently
+  proving ambient writes. All six result cases complete two matches; no unbounded-loop claim is made.
+- Existing `.14.1`/`.14.2` and the same fact card now cover repetition as well as selected I-blocks. The REP
+  substitution requires trailing whitespace; unlike the I-block substitution, an unspaced return literal is
+  not changed. Native/source/seed evidence does not claim independent generated loading or backend failure.
+- Direct diagnostic JSON projection keeps kind/label/cursor_policy/acodes but omits supplied and_icode,
+  capture_gaps, and required_slot_count; the HandlerIR card now explicitly describes a selected-field
+  diagnostic, not lossless roundtripping. Every retained probe exited zero; no job remains. Next exact reading
+  is ActionIR/AST/Parser.pm 1–1498 under `.3.2.16`; required codebase/book reading remains incomplete.
+### AST parser prefix and nested source offsets at `.3.2.16`
+- Activation checkpoint is clean `762bef64659f48ccada872ec76ac150a0b6714ed`; prior slice's nine doctrines,
+  post-pointer, zero-byte brief, clean status, and full derived-map review passed (950 facts / 8,028 keys).
+  Read 1–200, 201–420, 421–640, 641–860, 861–1080, 1081–1300, and 1301–1498 without truncation:
+  1,498 lines / 47,935 bytes. Full-file baseline identity passes. Early read-only ranges were consumed while
+  the prior commit finished; no next-leaf mutation occurred until its clean boundary. Twenty whole Perl files
+  remain complete; AST parser suffix 1499–1686 belongs to `.3.2.17` with three further adapter files.
+- Existing AST, newline-split, callable-literal, source-map, and nested-write cards precede reconciliation.
+  Read node/raw fallback, trimming, statement offsets, literals, calls/attached controls, shape/codeblock forms,
+  signature validation, access, unified writes, bang mutation, fluent chains, and opening-brace scan ownership.
+  Historical migration aliases do not establish current admission. No full-codebase or mdBook completion claim.
+- Seven ASCII direct AST controls with base_start 100 isolate eager braces, attached controls, and attached
+  function calls resetting nested offsets, while root/callable/receiver/bang controls retain them. Two Unicode
+  controls preserve scalar units but show the same missing outer offset. Exact values and source sites are in
+  `docs/knowledge/perl-actionir-nested-block-span-loss.md`; `.15` owns repair after reading and `.14`.
+- Public Get rejects the malformed write and logs the same local-body span. Correct HASH context capture
+  retains the blessed typed diagnostic in last_error.detail. A preliminary scalar-context invocation was
+  invalid for the API, and allow_blessed JSON rendered the retained object as null; explicit field projection
+  proves retention. Do not infer erased diagnostics. Compiler 710–750/1415–1473 and RuntimeContext 337–377
+  source traces reuse already-read files. No generated loading or other-backend failure is claimed.
+- Managed `PERL5LIB= prove -q -Iperl t/actionir_ast_parser.t t/punctuation_light_zero_arg_contract.t` passes
+  two files / 30 top-level tests in 24 seconds. All retained probe jobs exited zero. Production/book are
+  unchanged; codebase/book remain No. Next `.3.2.17` reads the exact parser suffix and adapter group.
+### AST parser completion and pipeline/event adapters at `.3.2.17`
+- Activated from clean `9a88116001b7f5c8c550155aedfe7dcd4c55ea71`; prior nine doctrines, post-pointer,
+  zero-byte brief, clean status, and full derived-map review passed (951 facts / 8,032 keys). Read parser
+  1499–1686, ArrayPipeline 1–165/166–335/336–491, CanonicalEvents 1–150/151–297, and its Core 1–219
+  without truncation: 1,195 lines / 47,612 bytes; every full-file baseline identity passes. These read-only
+  ranges were consumed while the prior hook finished; no checkpoint edit preceded that clean boundary.
+  Twenty-four whole Perl files are complete and 65 remain.
+- Parser suffix completes delimiter, quote/escape/slash-symbol, hash-pair, assignment-token, and scan-depth
+  ownership plus Diagnostic stringification. Existing nested-offset repair `.15` remains pending; this suffix
+  does not change or close it. ArrayPipeline uses recursive ordered plans, typed scalar-held binding updates,
+  guarded active-receiver writes, and a separate internal-array path. CanonicalEvents consumes helper queues
+  in statement order, supports typed value drops, records RAW_PERL and unmatched scan fallbacks, and delegates
+  contract-kind/argument normalization to Core. No stable hash-key order is claimed for unmatched leftovers.
+- Read existing compact-lowerer/pipeline trace, Perl uniform-binding, and map-leaves neutral/implementation
+  records before reconciling these paths. Added question keys and dated owner notes to the two existing trace
+  cards instead of duplicating facts. Internal contract IDs are not public authoring admission. This is source
+  evidence only; no new behavioral test, defect, generated-carrier, or backend signoff claim.
+- Production/book remain unchanged. Exact identity, Knowledge reconciliation, memory/doctrine/history, and
+  staged review are the focused proof for this reading leaf. Next `.3.2.18` reads Contracts.pm 1–1396;
+  required codebase/mdBook reading is still incomplete.
+### Contracts prefix and typed-source catalog at `.3.2.18`
+- Activated from clean `34958c8f4d3399bee3b5cf01f72466a8c51df59a`; prior nine doctrines, post-pointer,
+  zero-byte brief, clean status, and full derived-map review passed (951 facts / 8,036 keys). Read Contracts
+  1–180, 181–385, 386–600, 601–810, 811–1000, 1001–1200, and 1201–1396 without truncation:
+  1,396 lines / 65,503 bytes; full-file baseline identity passes. Read-only ranges preceded activation while
+  the prior commit hooks completed; checkpoint edits followed its clean boundary. Twenty-four whole Perl files
+  remain read; suffix 1397–2513 belongs to `.3.2.19`.
+- Read primitive/push target classification, static observation/transaction lowering, required dependency
+  callbacks and dropped-value fallback, mark trace construction, typed source projection families, dispatch,
+  returns, capture/cursor boundaries, named-mark capture/take, and mark-copy construction. Unread suffix still
+  owns final catalog assembly; no complete registry-order claim is made from this prefix.
+- Existing uniform-binding, transaction integration, typed-source rollout, and final authoring closeout records
+  precede reconciliation. Typed-source record's relevant Perl/current sections 161–225 and 276–290 were read
+  untruncated; an earlier combined 1–130 output was truncated and supplies no full-card coverage claim.
+  Direct `typed_source_projection_rows` gives capture_mark 47, entry_match 30, input_cursor 11, cursor_control 4;
+  modifying the returned nested row does not change a fresh call. Total 92 and detachment pass.
+- Existing projection and transaction cards now label their old pending-status passages as historical and
+  point to the already-closed final authoring model. This ledger records the bounded catalog recheck;
+  no new admission, result-shape, generated-source, or other-backend test claim. Private compatibility IDs and
+  canonical authored helper names remain distinct; no retired syntax is restored.
+- First pre-commit attempt passed eight doctrines but rejected the typed-source card at 65,952/65,536 bytes.
+  Shortened its historical-status correction and kept detailed catalog recheck evidence here; no cap increase,
+  archive edit, or hook bypass. Final resulting-tree checks must pass before landing.
+- Production/book remain unchanged. Focused reading/identity/catalog/Knowledge plus memory/doctrine/history
+  and staged review own this checkpoint. No new defect or background job remains; `.3.2.19` reads the suffix.
+### Contracts suffix and ordered builder at `.3.2.19`
+- Activated from clean `54e1a487dd797396d8bb5ed847e90380015e3a40`; prior nine doctrines, post-pointer,
+  zero-byte brief, and clean status passed. Prior Knowledge body-only edits left the derived map unchanged.
+  Read Contracts 1397–1585, 1586–1785, 1786–1985, 1986–2185, 2186–2375, and 2376–2513 without
+  truncation: 1,117 lines / 48,433 bytes. Read-only ranges preceded activation during prior commit hooks;
+  checkpoint edits followed the clean boundary. Full-file baseline identity passes; twenty-five Perl files read.
+- Read mark operations/positions, entry/match/input projection lowering, cursor save/restore/rewind,
+  compatibility passthrough contracts, assignments and mutations, array pipelines, dropped values, flow control,
+  output/declarations, and final assembly. Contracts.pm is complete at 2,513 lines / 113,936 bytes.
+- Exact final-builder extraction returns fourteen groups in source order, after required dependency resolution.
+  Existing `actionir-lowering-stack` now owns that dated fact and two retrieval keys; staged/progressive groups
+  retain their dedicated owners. No new runtime, backend admission, or defect claim follows from this reading.
+- Focused identity/source extraction, Knowledge, memory/doctrines/history pressure, and final staged review own
+  this checkpoint. Production/book remain unchanged; `.3.2.20` reads ControlFlow.pm 1–1485 next.
+### ControlFlow prefix and candidate isolation at `.3.2.20`
+- Activated from clean `8db085f26c288063bc2d52f13d2ad697254fa608`; prior nine doctrines, post-pointer,
+  zero-byte brief, clean status, and complete derived-map diff review passed (951 facts / 8,038 keys).
+  Read ControlFlow 1–205, 206–415, 416–625, 626–835, 836–1050, 1051–1265, and 1266–1485 without
+  truncation: 1,485 lines / 56,984 bytes. Read-only ranges preceded activation during prior hooks; checkpoint
+  edits followed the clean boundary. Full-file baseline identity passes; suffix 1486–1796 remains unread.
+- Read typed truth/diagnostic generation, AST reconstruction and source-method retention, branch-context
+  construction/copying, attached/inline/marker if handling, implicit closures, candidate rewrite selection,
+  switch assembly and case lowering, and attached-while condition/guard emission.
+- Existing AST if/switch/while, source-method preservation, compact trace, marker-switch caveat, and while
+  boundary cards were read and reconciled. Indexed stable `FUTURE-PARITY-BACKLOG.5` remains active and explicitly
+  owns marker-switch outside-branch placement and while limit/next normalization. No duplicate repair or new
+  other-backend verification claim; the first unbounded partition output was truncated and does not count as
+  full-part reading. A subsequent bounded exact-node extraction supplied the owning acceptance.
+- Controlled branch-rule probe: rejected candidate changes switch_counter 3 to 99 and pushes a stack entry;
+  the next candidate still sees 3/empty stack. Accepted candidate changes while_counter 5 to 6 and commits.
+  Existing trace card owns this bounded state-isolation fact; it does not promise general deep-copy rollback.
+  Managed `PERL5LIB= prove -q -Iperl t/trace_actionir_compact_lowerers.t` passes one file/four top-level tests.
+- Twenty-five whole Perl files plus this prefix are read. Production/book remain unchanged; focused identity,
+  probe/trace, Knowledge, memory/doctrines/history pressure, and final staged review own this checkpoint.
+  Next `.3.2.21` finishes ControlFlow and reads DeclareMethod, Diagnostics, and FlowExpr.
+### ControlFlow completion, adapters, emptiness defects, and notes rollover at `.3.2.21`
+- Activated from clean `ba9a494caa79fdd6fca7833d5bfc1fbce727fc9d`; prior nine doctrines, post-pointer,
+  zero-byte brief, clean status, and complete derived-map review passed (951 facts / 8,040 keys).
+  Read ControlFlow 1486–1650 / 1651–1796, DeclareMethod 1–165 / 166–328, Diagnostics 1–145 / 146–269,
+  and FlowExpr 1–180 / 181–360 / 361–531 without truncation. FlowExpr's final range was repeated separately
+  after an oversized combined query; only the complete final output counts. Scoped total is 1,439 lines /
+  59,142 bytes: respectively 311/12,965, 328/14,185, 269/8,970, and 531/23,022. All four full-file
+  baseline identities pass; twenty-nine whole Perl files are read. Read-only ranges preceded activation while
+  prior hooks completed; checkpoint edits followed its clean boundary.
+- Read switch closure/default/output/termination, declaration initializer shapes and AST-set fallback,
+  unresolved-helper/node/canonical diagnostic aggregation, value-family inference, emptiness/definedness,
+  composite logical/comparison lowering, and raw fallback boundaries. Existing AST/trace/readiness facts reconcile.
+  Managed pipeline trace passes one file/five top-level tests; prior compact trace remains recorded at `.3.2.20`.
+- Fishy emptiness fallback received public tooling before source diagnosis. On input x, otherwise identical
+  Get parsers return empty for is_empty("0"), nonempty for a binding holding "0", and empty for empty string;
+  all construct and run without last_error. Generated literal zero reads $0. The same compiled parser returns
+  empty with process-local program name '' and nonempty with 'program'. Additional generated-source-only
+  controls map 1/true/undef to $1/$true/$undef and invert the faulty quoted-zero result for is_nonempty.
+- Root cause: FlowExpr's general expression fallback uses host falsehood; its scalar fast path instead checks
+  explicit emptiness. ValueExpr's scalar extractor accepts any word token before literal classification.
+  Supporting ValueExpr 115–175 was read after the tooling. Existing public reference explicitly preserves "0";
+  read value-container-flow-helper-reference.md 489–511 and 1034–1063, plus helper-contract-catalog.md 770–787.
+  These bounded supporting ranges do not complete either chapter. Repair `.16.1` owns value equivalence and
+  `.16.2` literal/host-slot isolation, after required reading; Knowledge stores reproducer and proof boundaries.
+- Engineering notes reached 468 lines / 42,587 bytes and required rollover. Governed tool archives clean source
+  lines 238–460 into segment 4984: 223 lines / 22,371 bytes, SHA-256
+  dd7eba212246efd893dbff32143a2c821576c7a704e1a697265213dc728d1f9a. Independent source/blob/hash and
+  unchanged prior-manifest checks pass. Current root is 245 lines / 20,216 bytes; manifest 23 lines / 13,782 bytes.
+  Collection is 24 files / 25,194 lines / 2,691,497 bytes. ADR 0103 admits exactly max_files 23→24 and manifest
+  max_lines 22→23; all current-root, byte, segment, aggregate, ownership, and immutable contracts remain fixed.
+- Production/book remain unchanged. Exact reading/probes, Knowledge/history/routing/memory, staged diff review,
+  and receipt-bound canonical CI own this infrastructure checkpoint. No push at this intermediate boundary;
+  `.3.2.22` reads MethodExpr.pm 1–298 after the canonical checkpoint lands.
+- The first canonical attempt passes the preceding contracts/runtime consumers, Perl storage, and Python/tool
+  storage, then stops at the process-locality driver: sandbox_apply is denied and the driver exits 71. A no-op
+  sandbox-exec control reproduces 71 inside the restricted harness and passes outside it. Approved execution of
+  the unchanged full process-locality test passes the relocated six-family driver and containment assertions.
+  Existing `project-data-process-locality-proof` now owns this causal requirement. No profile/test is weakened;
+  the failed attempt grants no receipt, and the final staged candidate requires a complete permitted rerun.
+### Method expression parsing and scope precedence at `.3.2.22`
+- Activated from clean `3e8b05cd343dafa0b67c536bfe0c9e6b52f074c7` after intake `.31` committed, its post-commit pointer passed,
+  and the brief/status cleanup completed. The preceding canonical result remains recorded in that intake.
+- MethodExpr.pm was fully consumed at 1–150 and 151–298 during forward reading, then reviewed in full for
+  this checkpoint: 298 lines / 7,800 bytes, baseline-identical. This closes the next individual checkpoint;
+  all 89 Perl files remain physically read, with later comprehension/Knowledge checkpoints still pending.
+- The module preserves method names, distinguishes slash-symbol calls from regex quoting, splits CSV values
+  with nesting/quote/escape state, parses nested function calls, and normalizes optional scope against arity.
+  Opt-in authored-value precedence clones an already-valid argument list before any legacy scope removal.
+  Fixed-arity compatibility can remove a leading scope only when the remaining arity is valid.
+- Existing `hash-tree-callback-append-scope-collision` and
+  `terse-source-migration-runtime-boundaries` cards were read in full and reconciled with the retirement
+  closeout. Older spellings remain historical evidence; two new retrieval questions point to the normalizer.
+- The bounded normalizer control preserves key / quoted-at / depth as three values with precedence, returns
+  two values through legacy and fixed-arity fallback, keeps a distinct authored list and unchanged input,
+  and rejects an empty list below minimum arity. This checks the source-owner boundary, not full runtime parity.
+- Source/book remain unchanged; codebase/book are No. Next `.3.2.23` covers MethodLowering 1–1495.
+### MethodLowering prefix and dated migration ownership at `.3.2.23`
+- Activated from clean `27ff841afdfb276f520d4988a5807df5e364e7f5` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- The prefix was read in eight untruncated forward ranges preserved by `.31`; checkpoint review additionally
+  consumed 1–405, 406–815, 816–1210, and 1211–1495. Full-file baseline identity and the 61,967-byte prefix agree.
+- Read trace/family adapters, typed logical evaluation, dependency assembly, direct-container inference,
+  inline if/switch values, AST-first block side effects/returns, and the guarded compatibility block path.
+  Source reconstruction, typed spans, nested-write evaluation/presence updates, binding mutation adapters,
+  helper classification, and contextual/dynamic codeblock binding setup complete this prefix.
+- Existing AST value/operator/call/block/fallback, trace, uniform-binding, write-vivification, and callable
+  Knowledge records were read and reconciled. The early value-dispatcher card now points to completed
+  `.4.1`–`.4.3`; intermediate write/callable rollout notes identify their historical milestone scope.
+- Managed `PERL5LIB= prove -Iperl t/trace_actionir_method_lowering.t` passes one file / four top-level tests.
+  No runtime repair or whole-helper audit is claimed. Existing `.19` still owns the dynamic receiver-guard gap.
+- All Perl source remains physically read; subsequent comprehension checkpoints remain pending. Codebase/book
+  stay No, and the next owned range is MethodLowering 1496–2378.
+### Function signatures, local bindings, and statement lowering at `.3.2.24`
+- Activated from clean `2c398b922192172310bfd733bdcecaef0ee6750a` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Forward reading consumed 1496–1700, 1701–1905, 1906–2110, 2111–2290, and 2291–2378; this checkpoint
+  reviewed 1496–1910 and 1911–2378 in full. The 883 lines / 33,969 bytes and full baseline identity agree.
+- Read version-1 fixed and version-2 rest-signature validation, copied call-stack state, local declaration
+  discovery, nested-write presence and receiver-target inventories, and unknown-call traversal. The remainder
+  covers VALUE_DROP, typed return/set/push/array-end dispatch, and guarded assignment operators.
+  Actual user-function body/value dispatch follows in the next range; it is not attributed to this prefix.
+- Existing function execution, variadic implementation/signature, scalar retirement, direct access, selector
+  rejection, and RHS-shape chronology cards were read in full. Four existing records now distinguish the
+  initial fixed-function and rollout milestones from current signatures and retired authored syntax.
+- Managed `PERL5LIB= prove -Iperl t/variadic_user_function_contract.t` passes 66 top-level tests. A public Get
+  control builds a mixed hash/array value and reads it with a bare index; it returns `one` and no context error.
+  The exact successful control follows. Source/book remain unchanged; no whole-backend signoff is claimed.
+```bash
+bash tools/project_data_run.sh env PERL5LIB= perl -Iperl -MLinkedSpec -MJSON::PP - <<'PERL'
+use strict; use warnings;
+my $spec=qq{Top::\n /x/ -> Top { foo = hash("a", array(hash("b", array("zero", "one")))); z = 1; return(foo["a"][0]["b"][z]) }\n};
+my %ctx;my $parser=LinkedSpec::Get(\$spec,runtime_ctx_ref=>\%ctx);die 'compile failed' unless ref($parser) eq 'CODE';
+my $input='x';my $result=$parser->(\$input);die 'unexpected result' unless defined($result) && $result eq 'one' && !defined($ctx{last_error});
+print JSON::PP->new->canonical->encode({result=>$result,context_error=>undef}),"\n";
+PERL
+```
+- Later checkpoints remain pending; codebase/book stay No. `.3.2.25` owns MethodLowering 2379–3743.
+### Value dispatch and function caller-scope evidence at `.3.2.25`
+- Activated from clean `d392ad2bee69a7fa2b5090c40589ca5f77d011f9` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- This checkpoint re-reviewed 2379–2795, 2796–3210, 3211–3500, and 3501–3743 in full, following `.31`'s
+  physical forward reading. Exact whole-file baseline identity and 1,365 lines / 65,506 bytes agree.
+- Read authored collection normalization, scalar/container ownership, quote-aware shape construction,
+  array pipeline/reducer dispatch, AST/source compatibility, eager logical calls, fixed/rest user-function
+  execution, dynamic codeblock invocation, source reconstruction, and the receiver-aware assignment bridge.
+  Previously recorded wrong-kind, numeric, and dynamic-receiver gaps remain with `.17`, `.20`, and `.19`.
+- Existing function/callable/AST Knowledge was checked before diagnosis. Public Get, captured generated source,
+  and descriptors show body locals shadowing caller arguments: scalar, array-valued, and nested-call cases
+  return null, while literal/distinct-name/parameter-only controls preserve their inputs. All eight compile
+  and report no context error, raw dependency, or unresolved helper. MethodLowering 3293 emits local
+  declarations before argument temporaries at 3294–3295; this explains the observed lexical capture.
+- The first aggregate probe expected an empty host array and stopped when the actual result was null.
+  The dump shows a uniform scalar binding; the final eight-case observation records null accurately.
+  No test fixture was re-blessed. The exact successful command and result table are committed in
+  `docs/knowledge/perl-user-function-caller-shadowing.md`; the older execution card now qualifies its claim.
+- New repair `.32` owns caller-scope separation and scalar/aggregate/nested/rest/order/temporary-name
+  regression controls after required reading and policy review. Other backends remain unprobed; no
+  implementation, public-book change, or standalone generated-parser execution is claimed.
+- Global codebase/book answers remain No. `.3.2.26` continues the same source at 3744–4911.
+### Block values, receiver chains, and root-dependent traversal at `.3.2.26`
+- Activated from clean `85167df3ae9883636ec00ea5c8259aa581b238b5` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Re-reviewed 3744–4025, 4026–4330, 4331–4630, and 4631–4911 in full after `.31`'s physical forward pass.
+  Exact whole-file baseline identity and 1,168 lines / 58,949 bytes agree.
+- Read the assignment-bridge tail, direct path reads, block-local early/final returns, contextual `with`,
+  typed value/helper/aggregate dispatch, receiver-family continuation, immediate hash/array traversal
+  callback frames, array-end value mutation, and guarded `map_leaves!` continuation construction.
+- Existing fluent-chain, block-value, hash/array traversal, array contract, and uniform-binding mutation
+  records were read. The original hash-only non-hash rejection statement now links to the later shared
+  hash/array dispatcher; the array contract preserves hash-root behavior, and its initial phase0 count
+  is explicitly historical. The exact current public control replaces the older hash-card probe string.
+- Managed `PERL5LIB= prove -Iperl t/actionir_ast_parser.t` passes 23 top-level tests. Three public Get
+  controls return hash depths `{a:1,arr:1,b:{y:2}}`, array depths `[[2],1,1]`, and scalar `[null,0]`
+  (no callback effect), all without a context error. Opposite-family containers are leaves within the
+  selected traversal. Exact command: `docs/knowledge/perl-hash-tree-traversal-callback-frame.md`.
+- No runtime/book edits or new runtime defect are claimed. Codebase/book remain No, and `.3.2.27`
+  continues the source at 4912–5942; previously owned repairs retain their prerequisite sequence.
+### Helper fallback, numeric dispatch, and bounded contract evidence at `.3.2.27`
+- Activated from clean `a32cf42245dc97ec31d4e8f6b89d10c658bf2718` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Re-reviewed 4912–5140, 5141–5390, 5391–5625, 5626–5810, and 5811–5942 without truncation.
+  Whole-file baseline identity and 1,031 lines / 64,411 bytes agree with `.31`'s forward reading.
+- Read AST-versus-compatibility entry dispatch and trace decisions, rule/gap/source/capture helpers, string
+  transforms and concatenation, scalar Numeric calls versus inline aggregate reducers, string predicates,
+  emptiness/read/collection paths, and the slice prefix. The slice body continues in `.3.2.28`.
+- Existing AST value/call/aggregate/fallback, helper-retirement, scalar-numeric admission, and Unicode-digit
+  evidence were read. Four existing cards now distinguish completed function/statement migrations from
+  earlier milestones, retired spellings from current constructors/bindings, and the 55-case numeric
+  admission from the later `.20` disagreement outside that fixture. Previously owned `.16`/`.17` gaps
+  remain open; no broad helper correctness or resolved Unicode-digit defect is claimed.
+- Managed `PERL5LIB= prove -Iperl t/scalar_numeric_contract.t` passes nine top-level tests. Public descriptors
+  for malformed substr/count and an unknown value call each report one unresolved helper with zero raw
+  dependency; the registered value call reports zero of both. The exact successful command follows.
+```bash
+bash tools/project_data_run.sh env PERL5LIB= perl -Iperl -MLinkedSpec -MJSON::PP - <<'PERL'
+use strict;use warnings;
+for my $c(
+ ['substr_arity','return(substr("abc"))',1],
+ ['count_arity','return(count(1,2))',1],
+ ['unknown_value','return(unregistered_probe("x"))',1],
+ ['registered_value','return(normalize(" x "))',0]
+){
+ my $spec="fn normalize(value) { return(trim(value)) }\nTop::\n /x/ -> Top { $c->[1] }\n";
+ my %ctx;my $d=LinkedSpec::Get(\$spec,return_descriptor=>1,runtime_ctx_ref=>\%ctx);
+ die "$c->[0] descriptor" unless ref($d) eq 'HASH';
+ my $m=$d->{spec}{Top}{meta}{action_rewriter};my $raw=$m->{raw_perl_dependency_count}//0;my $unresolved=$m->{unresolved_helper_count}//0;
+ print JSON::PP->new->canonical->encode({case=>$c->[0],raw=>$raw,unresolved=>$unresolved}),"\n";
+ die "$c->[0] metadata mismatch" unless $raw==0 && $unresolved==$c->[2];
+}
+PERL
+```
+- Managed map generation emitted child setpgid EPERM, then completed successfully. A subsequent child
+  PID/PGID control matches; the original final group is unobserved. Wrapper 308–314 assumes group identity
+  from the child PID. Existing `.7` now owns establishment verification; its Knowledge card preserves exact
+  warning/control and unresolved timing, with the two older lifecycle records linked to the limitation.
+- Source and public book remain unchanged. Codebase/book remain No; `.3.2.28` owns 5943–7245.
+### Collection helpers, constructors, and tagged-record divergence at `.3.2.28`
+- Activated from clean `e4716fcf55042846646e654190a68cca11ee57d2` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Re-reviewed 5943–6230, 6231–6530, 6531–6810, 6811–7070, and 7071–7245 without truncation.
+  Whole-file baseline identity and 1,303 lines / 64,878 bytes agree with `.31`'s forward pass.
+- Read array bounds/concat/split/tagged/sort/membership helpers, hash views/transforms, coalesce/copy,
+  constructors and source-slot reads, mutation/return payload lowering, assignment bridges, receiver
+  splitting/family registries, and the legacy array-chain normalizer. Later family normalizers follow next.
+- Existing constructor/retirement, alias-history, uniform-binding, tagged-record, and split Knowledge was
+  read. Historical bare-name selector teaching now points to structural retirement; alias implementation
+  instructions and next-frontier wording are explicitly historical. A new question indexes why an outer
+  copy remains unchanged after the tested nested write rebinds its original through BindingRuntime.
+- Three public controls pass: literal constructors, copy followed by nested mutation, and combined array/
+  hash helper results. The exact successful control and captured-source filter follow.
+```bash
+bash tools/project_data_run.sh env PERL5LIB= perl -Iperl -MLinkedSpec -MJSON::PP - <<'PERL'
+use strict;use warnings;
+my $json=JSON::PP->new->canonical->allow_nonref;
+for my $case (
+ ['constructors','value = 7; return([array("foo"), hash("foo",value)])',[['foo'],{foo=>7}]],
+ ['copy_independence','original = {"nested":{"x":1}}; snapshot = copy(original); original["nested"]["x"] = 2; return([original,snapshot])',[{nested=>{x=>2}},{nested=>{x=>1}}]],
+ ['collection_hash','items=[1,2,3,4]; meta={"b":2,"a":1}; return([items.slice(1,2),items.take_last(2),meta.sorted_keys(),meta.pick_keys("b")])',[[2,3],[3,4],['a','b'],{b=>2}]]
+){
+ my $spec="Top::\n /x/ -> Top { $case->[1] }\n";my %ctx;my $src='';
+ my $p=LinkedSpec::Get(\$spec,runtime_ctx_ref=>\%ctx,dump_parser_source=>1,parser_source_ref=>\$src);
+ die "$case->[0] compile" unless ref($p) eq 'CODE';my $input='x';my $got=$p->(\$input);
+ print $json->encode({case=>$case->[0],result=>$got,context_error=>defined($ctx{last_error})?1:0}),"\n";
+ if($case->[0] eq 'copy_independence'){for my $line(split /\n/,$src){print "$line\n" if $line =~ /__ls_copy_value/}}
+ die "$case->[0] mismatch" unless $json->encode($got) eq $json->encode($case->[2]) && !defined($ctx{last_error});
+}
+PERL
+```
+- Tagged-record diagnosis uses two Perl Get/source controls and the same specs through fresh PUC Lua CLI.
+  For `a,b,`, Perl makes two records, with carried increments 1/2 and final counter 2; PUC makes three
+  records with field 1 and counter 1. Ordinary split retains the trailing empty item on both.
+  For empty input, Perl yields no records, counter 0, and no ordinary split items; PUC yields one empty
+  record, counter 1, and one ordinary empty item. All controls succeed without a Perl context error.
+- Generated Perl and MethodLowering 6068–6075 put fields inside map and omit the split trailing-empty
+  limit. Lua interpreter 1093–1106 appends the suffix; 1897–1907 and 1926–1940 split already-evaluated
+  arguments and copy fields. Diagnostic source reads covered Lua 1082–1145 and 1840–1970; they do not
+  complete Lua reading. Helper-reference 1163–1166 confirms the current once-only public claim.
+- New `.33.1` owns all-runtime/native/generated impact and authoritative contract review; `.33.2` owns
+  the resulting fix and regression/public coverage. Fresh evidence is only Perl and PUC Lua here;
+  LuaJIT and the other backends remain unprobed. Exact paired commands/results live in
+  `docs/knowledge/tagged-record-evaluation-and-split-drift.md`; the two Lua records link that limitation.
+- No runtime or public-book edit was made. Codebase/book remain No; `.3.2.29` reads the suffix and
+  ProgressiveSpanDispatch next, before the remaining prerequisite checkpoints and owned repairs.
+### Receiver normalization suffix and private progressive ActionIR at `.3.2.29`
+- Activated from clean `86673c75a56b869e80c7613345f9c0963c013e8b` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Re-reviewed MethodLowering 7246–7505, 7506–7775, and 7776–8057 and all 165 ProgressiveSpanDispatch
+  lines without truncation. Exact whole-file baseline identity passes; owned ranges total 977 lines /
+  36,165 bytes, agreeing with `.31`'s forward coverage. This adds no duplicate physical-reading credit.
+- The suffix covers number/string/hash receiver family normalization, terminal and arity branches,
+  AST-first array-end and hash/nested assignment mutation bridges, set_key/push fallback precedence,
+  regex substitution, and return_undef. Uniform-binding branches precede retained host-slot fallbacks.
+- ProgressiveSpanDispatch exclusively owns its assignment statement. Static validation decodes literal
+  parser/top identities, checks normalized spelling and a bare span binding, and lowers valid operands
+  to the invocation-owned runtime. Invalid static operands remain available for diagnostic ownership.
+- Read existing progressive authority/carrier/admission and recurring/public-closeout Knowledge plus
+  optional-scope collision Knowledge before source diagnosis. Three older progressive cards now point
+  to the completed private six-runtime boundary, while their dated admission evidence remains historical.
+- `bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/progressive_span_dispatch_perl_contract.t`
+  passes 129 assertions. `bash tools/run_python_project_data.sh tools/check_progressive_span_dispatch_contract.py`
+  passes rollout 9/9/116 and public 6/12/10/60. Other runtime routes are not rerun by this reading checkpoint.
+- No runtime, public-book, or policy behavior changes. Codebase/book remain No; `.3.2.30` follows.
+### Source-span rewrite orchestration and scanner ownership at `.3.2.30`
+- Activated from clean `3c1a955a1669469697dd3325c1dcde74c684e76f` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Re-reviewed RewritePipeline 1–245, 246–485, and 486–745, Scanner 1–90, and FlowRules 1–175 /
+  176–338 without truncation. Exact whole-file baseline identity passes for all three files: 1,173 lines /
+  41,839 bytes. This checkpoint adds no duplicate physical-reading credit to `.31`.
+- RewritePipeline rejects removed aggregate selectors structurally, inserts implicit-if closures and
+  newline terminators, guards ambiguous unmatched event rewrites, and applies contract lowering by
+  source-span replacement. Original-source lookup tracks separators; replacement searches the current
+  rewritten text from zero. Unbalanced if/switch stacks return the original code after tracing.
+- Scanner lazily obtains ScannerCore and preserves the caller error state. FlowRules scans if/elseif/
+  else/while/switch families, nested case/default branches, printing/exit/return helpers, and exact
+  standalone bare or parenthesized next. Internal scanner IDs do not establish public helper admission.
+- Checked existing AST seam/inventory/fallback, scanner-family, pipeline-trace, function execution,
+  and quoted-rewrite Knowledge first. ScannerCore 1–223 was additionally re-read to reconcile its registry:
+  staged, progressive, recognition, basic, pipeline, flow, legacy. Five dynamically scoped callbacks are
+  shared; the first defined response, including an empty array, owns the contract and stops dispatch.
+- `bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/trace_actionir_pipeline.t` passes five
+  top-level tests. A managed ScannerCore callable registry/JSON census reports all seven owners in order;
+  `rg --files perl/LinkedSpec/ActionIR/Scanner` finds the five actual family modules. The scanner Knowledge
+  record preserves a direct callable reverify command; the old four-family/six-file census is superseded.
+- Four existing records reconcile the seven-owner architecture, registered function/value-drop support,
+  retired alias/selector history, completed fallback audit, and the known `.18` lexical rewrite limitation.
+  No fresh all-backend or complete defect-free claim follows from this bounded trace proof.
+- No source, public-book, or policy changes. Codebase/book remain No; `.3.2.31` follows.
+### Legacy and primitive scanner coverage with current push precedence at `.3.2.31`
+- Activated from clean `6f113221546d579cae647069e19b9bfa3a8c4f81` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Re-reviewed LegacyRules 1–310, 311–610, 611–905, and 906–1179 plus PrimitiveBasicRules 1–254
+  without truncation. Exact whole-file baseline identity passes: 1,433 lines / 41,163 bytes, with no
+  duplicate physical-reading credit beyond `.31`.
+- LegacyRules owns call/child-push/return scanning, capture slices and marks, cursor/input projections,
+  entry/match groups and positions, and cursor controls. Call scanning avoids the specific recognition/
+  observation child positions. PrimitiveBasicRules owns host-shaped assignment/call/push/return patterns,
+  statement-based bare return/exit/declaration/destructuring/substitution/position controls, and gap helpers.
+- Read current scanner architecture, fallback audit, uniform-binding, mutation-slot, scalar-seam, and
+  historical bare-variable gap Knowledge before interpretation. Three old records needed current storage
+  and child-push qualification; their dated milestone evidence remains historical.
+- Three public Get controls pass scalar source assignment, harray values carried through array append /
+  keyed mutation, and typed array return. Generated `push(Child,items)` checks for a compiled Child handler;
+  absent one, it appends the value of items to binding Child. Exact successful controls follow.
+```bash
+bash tools/project_data_run.sh env PERL5LIB= perl -Iperl -MLinkedSpec -MJSON::PP - <<'PERL'
+use strict;use warnings;
+my $json=JSON::PP->new->canonical->allow_nonref;
+for my $case (
+ ['scalar_source','name="ok";out=name;return(out)','ok'],
+ ['typed_mutation','items=[];value={"n":1};key="k";meta={};items += value;meta[key]=value;return([items,meta])',[[{n=>1}],{k=>{n=>1}}]],
+ ['return_forms','value=[1,2];return(value)',[1,2]]
+){
+ my $spec="Top::\n /x/ -> Top { $case->[1] }\n";my %ctx;
+ my $p=LinkedSpec::Get(\$spec,runtime_ctx_ref=>\%ctx);
+ die "$case->[0] compile" unless ref($p) eq 'CODE';my $input='x';my $got=$p->(\$input);
+ print $json->encode({case=>$case->[0],result=>$got,context_error=>defined($ctx{last_error})?1:0}),"\n";
+ die "$case->[0] mismatch" unless $json->encode($got) eq $json->encode($case->[2]) && !defined($ctx{last_error});
+}
+print LinkedSpec::call_spec_handler_subst('Top','push(Child,items)'),"\n";
+PERL
+```
+- Existing `perl-uniform-binding-runtime` already records the handler-first contract. The generated branch
+  agrees with MethodLowering 1253–1265 and the existing static-rule precedence fixture at
+  `t/uniform_binding_contract.t` 231–248. Two public controls independently pass both branches:
+```bash
+bash tools/project_data_run.sh env PERL5LIB= perl -Iperl -MLinkedSpec -MJSON::PP - <<'PERL'
+use strict;use warnings;
+my $json=JSON::PP->new->canonical;
+my @cases=(
+ ['binding_only',"Top::\n /x/ -> Top { items=[];value=\"v\";push(items,value);return(items) }\n",'x',['v']],
+ ['registered_rule',"Top::\n I { items=[\"unchanged\"];outputs=[] }\n /x/ -> Done { push(items,outputs);return([items,outputs]) }\nitems::\n /x/ I { return(\"child-result\") }\nDone::\n /x/\n",'xx',[['unchanged'],['child-result']]]
+);
+for my $case (@cases){
+ my %ctx;my $p=LinkedSpec::Get(\$case->[1],runtime_ctx_ref=>\%ctx);
+ die "$case->[0] compile" unless ref($p) eq 'CODE';my $input=$case->[2];my $got=$p->(\$input);
+ print $json->encode({case=>$case->[0],result=>$got,context_error=>defined($ctx{last_error})?1:0}),"\n";
+ die "$case->[0] mismatch" unless $json->encode($got) eq $json->encode($case->[3]) && !defined($ctx{last_error});
+}
+PERL
+```
+- Binding-only result is `["v"]`; registered rule result is `[["unchanged"],["child-result"]]`.
+  All five Get controls leave context error clear. This is an existing documented precedence rule, not a
+  new runtime defect or repair; Rust and the other backends are not reverified by this checkpoint.
+- Mutation-slot and scalar-seam cards now distinguish their historical separate storage from current
+  uniform typed values and retired selector syntax. The fallback audit links the same handler-first
+  choice, removing its unconditional child-call claim. Codebase/book remain No; `.3.2.32` follows.
+### Pipeline, recognition, staged marker, and splitting ownership at `.3.2.32`
+- Activated from clean `b1108cbb18c5cd347912a4ce44f86b289958abef` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Re-reviewed PrimitivePipelineRules 1–285 / 286–571, RecognitionTransactionRules 1–124,
+  StagedParseJob 1–220 / 221–393, and StatementSplit 1–44 without truncation. ScannerCore 1–223 was
+  re-read during `.3.2.30` registry diagnosis in this same reading run. Exact baseline identity for all
+  five files passes: 1,355 lines / 48,756 bytes, with no duplicated physical-reading credit over `.31`.
+- Pipeline scanning combines raw helper patterns with statement-based mutation/value-drop recognition,
+  balanced receiver/index parsing, nested-access AST fallback, and array pipeline-plan extraction.
+  Recognition scanning preserves exact result/token/operand fields for observation and transaction forms;
+  the generic assignment scanner excludes their assignment spellings.
+- StagedParseJob owns one exclusive scalar assignment, validates literal option keys/policies/capabilities,
+  builds direct entry/match or ordered cat text plans, and lowers inert marker construction with only
+  the needed private match information. Parser resolution and scheduling remain separate runtime owners.
+- StatementSplit validates its trim dependency and lazily delegates to Core under OwnerDispatch error
+  preservation. ScannerCore's seven-owner/five-dependency registry is already indexed under `.3.2.30`.
+- Read marker/provenance, carrier/admission, public parse-job, recognition integration, and known token
+  validation Knowledge before reconciliation. The marker card's non-public authoring claim was stale
+  after `.14.7.9`; exact assignment authoring is public while its carrier/authority stays private and the
+  generic helper inventory excludes parse_job. Recognition inventory prose now uses the current census
+  and links `.21`'s separately reproduced lexical/order defects.
+- `bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/staged_ast_enrichment_perl_contract.t`
+  passes 143 top-level checks. `bash tools/run_python_project_data.sh tools/check_staged_ast_enrichment_contract.py`
+  passes nine rollout legs / 123 neutral mutations plus public 6/17/10/129.
+- `bash tools/run_python_project_data.sh tools/check_recognition_transaction_contract.py` passes
+  138 ActionIR rows (134 current + four dedicated), 250 calls, 58 rejected mutations, and 9/9 rollout.
+  `bash tools/project_data_run.sh env PERL5LIB= perl tools/check_language_capability_coverage.pl` passes
+  250 current calls and 126 independently covered public Perl contracts. Other runtime routes are not rerun.
+- No runtime, public-book, or policy changes. The finite proofs do not close known `.18`/`.21` repairs;
+  codebase/book remain No and `.3.2.33` follows.
+### Statement splitting, lazy trace, and value-expression ownership at `.3.2.33`
+- Activated from clean `9be547af99c2a9c99757eb0986d3292ad64b3a50` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Re-reviewed StatementSplit/Core 1–235 / 236–419, StatementSplit/Mode 1–214, Trace 1–124,
+  and ValueExpr 1–240 / 241–460 / 461–666 without truncation. Exact baseline identity passes for
+  all four files: 1,423 lines / 47,678 bytes; this adds no duplicate physical-reading credit over `.31`.
+- Core owns top-level separator detection, nested quote/regex/delimiter state, attached control tails,
+  and trailing statement emission. Mode's line-comment state clears on LF alone. RewritePipeline's
+  pending newline insertion uses the previous rewritten endpoint, including any trailing inline comment.
+- Twelve distinct public Get/Core/substitution combinations cover no comment, inline comment, an explicit
+  semicolon before a comment, and a standalone comment under LF/CRLF/CR. No-comment controls return ok
+  for all three. Inline LF/CRLF produces no result with a context error; explicit/standalone LF/CRLF pass.
+  Every commented CR form loses the return without a context error. Process exit zero and Get returning a
+  CODE wrapper do not establish handler compilation; invocation result, error, and emitted source are checked.
+- Repeated the three inline cases with dump_parser_source. LF/CRLF emits `$name = "ok" # note;`
+  followed by `return $name`: the generated separator is hidden in comment text and handler compilation fails.
+  CR leaves the comment and return in one split statement and emitted host comment. `.34.1` owns lexical
+  separator placement; `.34.2` owns comment state plus emitted newline handling. Other runtimes were not probed.
+  Exact commands and observations live in `docs/knowledge/perl-comment-newline-lowering-drift.md`.
+- Read prior separator, attached-control, lazy-trace exception-state, and compact-lowerer Knowledge first.
+  Qualified both universal separator claims and the trace/value owner record. ActionIR::Trace wraps calls in
+  OwnerDispatch error preservation and stays lazy; that wrapper fact does not close direct callback defect `.24`.
+  ValueExpr retains legacy access/selector heuristics beside scalar binding reads and method/flow delegation;
+  legacy private branches do not redefine the current typed-AST access contract.
+- `bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/trace_actionir_compact_lowerers.t`
+  passes four top-level tests. Required memory, Knowledge, history, and review checks precede landing.
+- No runtime, public-book, or policy edits. Reading codebase/book remains No; `.3.2.34` follows.
+### Binding, callable, codeblock, and gap runtime boundaries at `.3.2.34`
+- Activated from clean `ab4b1f1e5fbe33a0df4d3c643375e5e22ca6b98f` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Re-reviewed BindingRuntime 1–225 / 226–422, CallableContract 1–135, CodeblockRuntime 1–210 /
+  211–403, InterMatchGapRuntime 1–291, and MCPContract 1–13 without truncation. Exact baseline identity
+  passes: 1,264 lines / 39,889 bytes across four whole files and the 390-byte MCP header. No duplicate
+  physical-reading credit is added over `.31`; the embedded MCP data begins at byte 391 in `.3.2.35`.
+- BindingRuntime owns runtime selector kinds, atomic copied nested writes with dense array creation,
+  identity-based active receiver guards, root-kind map traversal, and scalar-held array/hash operations.
+  Existing `.19`/`.20`/`.33` defects remain owned; no broader deep-clone or host-object safety claim is made.
+- CallableContract exposes copied builtin acceptance metadata and typed final-user-parameter validation;
+  contextual arguments preserve typed body/source spans, and runtime projection yields a codeblock literal.
+  CodeblockRuntime interprets its supported AST, invokes explicit dynamic bindings, copies arguments, restores
+  prior parameter values after body execution, and diagnoses recursion/arity/callability. Nonparameter writes
+  still use the direct slot path already implicated by `.19` receiver-guard evidence.
+- Six public Get controls show direct true/false are JSON booleans while literals evaluated in cb() become
+  numeric 1/0 and a dynamic literal array becomes [1,0]. A passed-in true remains typed. All contexts report
+  no error. call_spec_handler_subst plus decoded embedded record preserves boolean AST kind/source; only
+  CodeblockRuntime's boolean evaluation branch converts it to numeric values. `.35` owns focused repair.
+  Exact commands are in `docs/knowledge/perl-codeblock-boolean-literal-kind-drift.md`; other runtimes and
+  independently loaded generated-parser executions were not measured for these controls.
+- InterMatchGapRuntime attaches candidate/tail/cursor state to the existing recognition guard, checks
+  post-child cursor monotonicity, qualifies entry-slot provenance against the active parent, and returns
+  detached gap spans through the source-location owner. The old Perl implementation card's pending rollout
+  prose is now explicitly historical; current public language and six-runtime rollout belong to recurrence.
+- Read binding, callable/variadic/final-block, primitive/logical, gap plan/recurrence, and MCP generated-binding
+  Knowledge before reconciliation. One new boolean fact and three qualified records preserve the boundaries.
+- `bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/callable_codeblock_literal_contract.t
+  t/inter_match_gap_capture_perl_contract.t` passes 134 top-level tests across two files.
+  `bash tools/run_python_project_data.sh tools/check_inter_match_gap_capture_contract.py` passes 9/0/63
+  and public 8/15/10/34, plus Rust/Dart/Julia/Lua admission mutations 10/10/10/16. This finite proof does
+  not close the separate `.19` receiver or `.35` literal defect.
+- No runtime, public-book, or policy edits. Codebase/book remains No; `.3.2.35` follows.
+### Embedded MCP canonical frame and tool-schema prefix at `.3.2.35`
+- Activated from clean `19b0a7c4d3f02f875b015bbb46816d8e6313886b` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Re-reviewed MCPContract.pm bytes 391–8582 / 8583–16774 / 16775–24966 / 24967–33158 without
+  truncation, exactly 32,768 bytes. Full-file identity matches the reading baseline; the fragment SHA-256 is
+  `7846664315f28f00563a9dac88632f47f5c8fbf531ff10215724620764f2df19`. No duplicate physical-reading
+  credit is added over `.31`; the remaining embedded fragments and executable suffix have their own leaves.
+- Read the data-only binding format, canonical cancellation/capability/query/discovery and error frames,
+  five native discovery identities, restricted capability projection, semantic rejection, and the two
+  tool-schema prefix. Request metadata, opaque handle syntax, paging/budget/source fields, typed response
+  records/relations, and native semantic diagnostics remain embedded contract data, not new server behavior.
+- Read generated-binding, implementation-admission, recurring all-twenty, and stdio-contract Knowledge first.
+  Qualified the Perl card's obsolete current 1/5 implementation and 1/6 runtime claim as historical;
+  the current ledger remains 5/5 + 6/6, shared rollout complete, 141 mutations, with no status movement.
+- Six artifact controls compare the canonical capability/query/restricted/semantic-rejection text with
+  structuredContent and confirm isError=false, including native ok=false. Handle-unavailable and policy-denied
+  tool failures have isError=true and no structuredContent. The exact managed probe is preserved in
+  `docs/knowledge/perl-mcp-decoded-server.md`; it does not claim fresh dispatch or six-runtime execution.
+- `bash tools/run_python_project_data.sh tools/generate_perl_mcp_contract.py` reports the full 83,411-byte
+  binding byte-fresh. `bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl
+  t/mcp_contract_perl_binding.t` passes five top-level tests. `bash tools/run_python_project_data.sh
+  tools/check_mcp_implementation_admission.py` passes current 5/5 + 6/6 complete/141 governance.
+- One Knowledge record reconciles topology and response-layer ownership. No runtime, public-book, policy,
+  protocol, or admission changes; codebase/book remains No and `.3.2.36` follows.
+### Embedded MCP policy, corpus, and schema authority at `.3.2.36`
+- Activated from clean `4b9036222f16892a29de29d9ef01660048d0b918` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Re-reviewed MCPContract.pm bytes 33159–41350 / 41351–49542 / 49543–57734 / 57735–65926
+  without truncation, exactly 32,768 bytes. Full-file baseline identity passes; fragment SHA-256 is
+  `5b77ebfcc05b4bf50d90ad0891f87665cc3709c45579df37452a5e76e280dc10`. This adds no duplicate
+  physical-reading credit over `.31`; the embedded suffix begins at byte 65927 under `.3.2.37`.
+- Read the end of canonical tool/error frames, digest-pinned neutral artifact references, authority fences,
+  canonical JSON, component-wise lowering policy, handle/authorization/expiry rules, protocol/request metadata,
+  native identities, shutdown, and fixed tools. Corpus data includes exact frame order, four unavailable-handle
+  states, ten lifecycle cases, four policy cases, ten raw-byte cases, and the closed schema through the query
+  request prefix. These are generated data owners; fresh native transport execution is not claimed.
+- Read ADR 0055 and the existing all-twenty blocker/repair Knowledge before reconciliation. The embedded
+  deployment policy explicitly limits pre-dispatch denial to supplied overlay components; unsupplied components
+  remain native dispatch and native portable response. This is the already-implemented all-twenty correction,
+  not a new contract decision. `.5` startup alignment now explicitly owns qualifying the earlier ADR section 5
+  wording without erasing its historical evidence or changing the accepted runtime boundary.
+- A managed Python comparison decodes MCPContract line 14 and checks its `contract`, `schema`, and `corpus`
+  against their three neutral JSON owners; all values match. Direct assertions confirm the 72-key recordFacts
+  enum, query contract `{minLength:1,maxLength:128,type:string,x-linkedspec-maxUtf8Bytes:128}`, explicit overlay
+  enforcement, native handling of unsupplied components, and current validation count 76.
+- `bash tools/run_python_project_data.sh tools/materialize_mcp_semantic_transport_contract.py` passes
+  35 canonical frames / 10 raw inputs / 10 lifecycle cases and exact artifact digests. The subsequent
+  `bash tools/run_python_project_data.sh tools/check_mcp_semantic_transport_contract.py` passes 35/10/10/76.
+  No materialization --write, runtime consumer, protocol modification, or new oracle is introduced.
+- Reconciled the stdio card's stale current 68 count to 76 and the all-twenty card's old public-closeout
+  chronology, with current embedded evidence and ADR-alignment ownership. No runtime, public-book, or
+  policy edit; codebase/book remains No and `.3.2.37` follows.
+### Embedded MCP schema suffix, semantic payloads, and digests at `.3.2.37`
+- Activated from clean `c3dadd4b6321902d8f64ad9f50adab6978e73b92` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Re-reviewed MCPContract.pm bytes 65927–74118 / 74119–83273 without truncation, exactly
+  17,347 bytes. Full-file baseline identity passes; suffix SHA-256 is
+  `0c3751e106207329bacee0b2b0dfde9916242054364fcac63f493df47670c616`. Together with `.3.2.35`/
+  `.3.2.36` this completes the 82,883-byte embedded JSON line. The 138-byte executable/accessor suffix at
+  lines 15–21 remains in `.3.2.38`. No duplicate physical-reading credit is added over `.31`.
+- Read query/record/relation/snapshot/schema suffix, typed shape and signature structures, source references,
+  exact native identities, tool definitions, error/success shells, fixed-order tool list, and root schema union.
+  The payload suffix holds default/restricted capabilities, graph-list rules, and invalid-operation results,
+  their exact source query/projection provenance, and response/source SHA-256 values.
+- Read MCP plan/contract/recurring Knowledge before reconciliation. The four transport payload examples
+  preserve three native responses (including ok=false) and one declared restricted capability projection;
+  they do not substitute for the separate all-twenty native/MCP consumers. Added that boundary and exact
+  managed digest reverify command to `docs/knowledge/perl-native-mcp-server-plan.md`.
+- The managed Python probe verifies canonical encoded embedded JSON equals the stored line and hashes to
+  header `a1d2857c57ef93ea0e62403977105fdf6380f6fcb4d7a89ed5749c1bfdd64001`. The payload collection
+  equals its neutral JSON owner; all four canonical response hashes and all seven referenced source-artifact
+  hashes match. `bash tools/run_python_project_data.sh tools/generate_perl_mcp_contract.py` independently
+  reports the complete 83,411-byte generated binding byte-fresh.
+- This is source/data comprehension and identity proof; native queries, server dispatch, and the already
+  passing five-test binding suite from `.3.2.35` are not rerun. No runtime, public-book, policy, protocol,
+  or admission changes. Codebase/book remains No and `.3.2.38` follows.
+### MCP schema, registry, wire, and numeric runtime ownership at `.3.2.38`
+- Activated from clean `c38afa72b3390e408c55ed849225c42ad9e70eae` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Re-reviewed MCPContract 15–21, MCPContractRuntime 1–165 / 166–300, MCPServer 1–225 / 226–435 /
+  436–648, MCPWire 1–215 / 216–419, and Numeric 1–110 without truncation. Exact baseline identity passes:
+  1,484 lines / 51,303 bytes. The 138-byte MCPContract suffix completes that module's per-leaf reading;
+  this adds no duplicate physical-reading credit over `.31`.
+- MCPContractRuntime checks the embedded digest, lazily decodes the data, clones outputs through canonical
+  JSON, validates the closed schema profile, and builds response shells. Server state lives behind object
+  identity, registers preexisting native indexes, extracts policy/default/source-availability fields,
+  validates authorization digests and monotonic expiry, tracks explicit policy-component presence, and
+  holds prepared response identity through wire flush/cancellation cleanup. Corrected earlier five-scalar
+  wording in both MCP ownership cards: the extracted projection data also includes defaults/availability.
+- MCPWire owns bounded LF/CRLF framing, EOF/overlong drainage, strict UTF-8, duplicate decoded-key preflight,
+  raw numeric-id syntax/range, schema-checked canonical output, and fixed optional I/O diagnostics. It delegates
+  dispatch to the same server path. No formal constant-time or arbitrary-host-object guarantee is inferred.
+- Six initial decoded controls, then the same six repeated on decoded and in-memory stdio routes, show exact
+  response identity. Unknown method plus missing metadata yields -32601; old version plus missing required
+  clientCapabilities yields -32022. Known current/missing-metadata controls yield -32602. Source checks method
+  first, protocol next, and full request schema later, unlike ADR 0055 section 6's earlier metadata step.
+  The current static suite consumes separate canonical failures; that does not prove combined precedence.
+  `.36.1` owns authority/six-runtime census, `.36.2` bounded repair decomposition, and `.36.3` public closeout.
+  Exact public probe and table live in `docs/knowledge/perl-mcp-validation-error-order-drift.md`.
+- Read current MCP plan/decoded/contract/ADR/repair and numeric/Unicode Knowledge first. Numeric owns helper
+  arity, scalar conversion, finite arithmetic, half-away rounding, signed modulo, and normalized results;
+  `.20` still owns the recorded Unicode-digit/coercion mismatch. No new authority choice or numeric fix.
+- `bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/mcp_server_perl_dispatch.t
+  t/mcp_server_perl_stdio.t t/mcp_server_perl_admission.t` passes 31 top-level tests across three files.
+  `bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/scalar_numeric_contract.t` passes nine.
+  `bash tools/run_python_project_data.sh tools/check_scalar_numeric_contract.py` passes 55 cases / 18 helpers.
+  Other runtime consumers are not rerun; passing existing suites closes neither `.20` nor `.36`.
+- One new and three updated Knowledge records preserve findings and ownership. No runtime, public-book,
+  policy, protocol, or admission edits. Codebase/book remains No; `.3.2.39` follows.
+### Legacy plugin and progressive invocation authority ownership at `.3.2.39`
+- Activated from clean `34af111fcd5be5f5e09fd89b516a0782a20c20f8` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Read PluginBridge 1–199, PluginRegistry 1–130, ProgressiveSpanDispatch 1–230 / 231–460 / 461–700 /
+  701–937, Policy 1–58, and Runtime 1–172 without truncation while the preceding checkpoint hooks completed.
+  Activation then verified the clean boundary and exact unchanged baseline: 1,496 lines / 52,208 bytes.
+  This checkpoint adds no duplicate physical-reading credit over intake `.31`.
+- Retrieved plugin transition and progressive authority/carrier/recurrence/public Knowledge before source
+  work; then completed the large audit-plan card in two bounded reads after a combined output truncated. Read
+  ADR 0080 in full and the relevant neutral policy/fixture/checker and test ranges for the ceiling question.
+- PluginBridge validates explicit names, normalizes AUTOLOAD suffixes, resolves registered callbacks first,
+  and lazy-loads legacy fallback through OwnerDispatch. PluginRegistry owns process-local registration,
+  replacement, sorted bulk iteration, lookup/presence, and clearing; no transactional bulk claim is inferred.
+  An isolated public facade control verifies two registrations, argument-preserving dispatch, callback lookup,
+  replacement, clear count two, invalid-name rejection, caller error-state preservation, and no PPlugin load.
+- Progressive core owns exact immutable entry metadata and copied source state behind opaque object identity;
+  source views use scalar coordinates, bounded same-source spans, rebasing, and callback expiry. It checks
+  registry/top-rule authority, capability/policy intersections, shared cancellation/deadline/remaining steps,
+  decreasing-span/depth/call limits, and transaction exclusion. Result copying preserves booleans and rejects
+  cycles/live-looking fields/unsupported references. Policy validates canonical nodes after rule-table creation;
+  Runtime requires exact host options, fresh invocation state and localized descriptors, and defers live
+  recognition-transaction lookup until dispatch. Scalar/list/void callback context is preserved.
+- Six small private-authority controls show computed ceilings are weaker than enforced limits. With ten
+  remaining steps and effective max_steps/max_result_nodes one, cost two and [1,2,3] both succeed; cost eleven
+  still rejects against remaining budget. A callback can read its source view with detail none, and a thrown
+  57-byte diagnostic retains source text with diagnostic ceiling eight. Exact callback effective metadata
+  agrees with the supplied minima. Source roots are the remaining-only cost check, uncounted result copier,
+  and raw child-error text copy; the effective fields are calculated but not used at those boundaries.
+  Callback input visibility needs authority review distinct from outward diagnostic containment.
+- `.37.1` owns resource census and bounded repair decomposition, `.37.2` diagnostic/source-detail repair,
+  and `.37.3` decision/book/Knowledge plus recurring closeout. One new and four updated Knowledge records
+  preserve the controls, qualify universal claims, and keep historical admission evidence dated.
+- Managed `prove -q -Iperl t/progressive_span_dispatch_perl_authority.t
+  t/progressive_span_dispatch_perl_contract.t` passes 138 top-level tests. The managed neutral checker passes
+  9/9/116 and public 6/12/10/60. These finite fixtures do not close `.37`. Other runtime consumers, legacy
+  fallback execution, and full Phase 0 are not rerun. No runtime, public-book, protocol, policy, or admission
+  edits. Codebase/book remains No; `.3.2.40` follows.
+### Recognition snapshots, token lifecycle, and static effect closure at `.3.2.40`
+- Activated from clean `800fc5a4598de78b235dffaf1cdbde9e28e13c27` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Read RecognitionTransaction 1–230 / 231–460 / 461–655 and Policy 1–140 / 141–269 without truncation
+  while the preceding checkpoint hooks completed. Activation then verified clean HEAD and exact unchanged
+  baseline identity: 924 lines / 33,632 bytes. No duplicate physical-reading credit over intake `.31`.
+- Retrieved private authority, integration, known lexical/compilation-order defect, and public-closeout
+  Knowledge before source reading; then read the neutral Knowledge owner and relevant token/fixture ranges.
+  The core keeps source/invocation/generation/token records behind opaque handles, stages acceptance separately
+  from payload, copies cursor/boundary/mark snapshots, and cleans active transactions on leave/destruction.
+  Rejected recursive-observation identities reserve monotonic ids without entering another frame.
+- Static Policy checks transaction shape and IF-family terminal path counts before recursive effect closure.
+  Canonical CALL/RECOGNIZE_ONCE and dependency references feed a fixed point over closed effects; missing
+  callees, fallback/unresolved helpers, and unknown nodes contribute unknown effects. Current progressive/
+  staged dispatch nodes remain forbidden. The raw token scan and interpolated /o expression remain known
+  `.21` defects; this checkpoint reads their exact mechanism and does not claim repair.
+- Six private-authority controls complete commit or rollback, advance owner state to cursor six/boundary
+  five/mark m four, then reuse the terminal token. Same-frame cases reject and preserve new state. Both
+  cross-frame and cross-source routes reject but restore the obsolete zero/zero/empty-mark checkpoint,
+  for four destructive restoration cases across the two terminal kinds.
+- Source roots the discrepancy: source/invocation checks precede invalidated-state rejection and call
+  `_restore_and_invalidate`; that helper assigns an active owner's snapshot before `_invalidate` notices
+  the token was already invalidated. Existing cross-owner tests cover live tokens that should restore.
+  These new controls do not prove authored reachability or other-runtime behavior.
+  `.38.1` owns all-operation/ownership census and bounded repair; `.38.2` owns neutral/runtime/book/
+  Knowledge and recurring closeout. One new and three updated Knowledge records retain exact controls.
+- `bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl
+  t/recognition_transaction_perl_authority.t t/recognition_transaction_perl_contract.t` passes 59 top-level
+  tests across two files. The managed neutral checker passes 138 node rows / 250 calls / 58 mutations,
+  9/9 rollout, public 3/26/45, guide 1/14/18, and current backend admission guards. Other runtime consumers
+  are not rerun; existing proof closes neither `.21` nor `.38`. No runtime, public-book, protocol, policy,
+  or admission edits. Codebase/book remains No; `.3.2.41` follows.
+### Recognition integration, runtime observers, and required history rollover at `.3.2.41`
+- Activated from clean `e548ce4be5d3164ab8be54dc3d63dece2dda0ffb` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Read RecognitionTransactionRuntime 1–230 / 231–460 / 461–681, RecursiveObservationPolicy 1–71,
+  RuntimeLogical 1–96, RuntimeDiagnosticOutput 1–247, and RuntimeSemanticObservation 1–174 without truncation.
+  The first three owners were read while prior hooks completed; remaining source followed clean activation.
+  Exact baseline identity passes: 1,269 lines / 39,210 bytes. No duplicate physical-reading credit over `.31`.
+- Retrieved recognition integration, diagnostic/logical/recursive/semantic observation Knowledge before source
+  reading; later checked current recursive/typed public closeout and semantic admission. Runtime integrates
+  private source-local authority with real cursor/boundary/marks, weak invocation guards, recognition and
+  observation scopes, gap snapshots, selected matches, and ephemeral completion records. Static observation
+  policy validates a bare target and existing named callee. Nine-field observations separate outcome from payload.
+- Eight public Get controls compare direct and recognized true/false/one/zero. Direct booleans retain JSON
+  boolean kind, while recognition commit converts them to numeric one/zero; numeric controls agree and all
+  contexts have zero errors. `finish_commit` explicitly performs the conversion, and the existing final-path
+  consumer expects numeric zero for commit_false. `.39` owns typed-contract review, census, bounded repairs,
+  and public/recurring closeout separately from the dynamic-codeblock defect `.35`.
+- Four public typed-exit controls retain exact status seven and zero context errors. Exit before the attempt
+  and after explicit rollback leaves cursor zero; exit after a successful uncommitted attempt leaves cursor
+  two, as does exit after commit. `_finish_guard` lets private leave restore then discards context without
+  applying that restored snapshot to actual registers. `.40.1` owns synchronization repair and all-state/
+  all-abort census; `.40.2` owns documentation and recurrence. Other register/carrier/runtime outcomes remain
+  unmeasured here. This public unwind defect is separate from private post-terminal restoration under `.38`.
+- Diagnostic delivery owns typed events, rendering, synchronous sinks, and exact control-error identity.
+  Logical truth owns reference/boolean/host-flag distinctions and returns typed booleans; argument laziness
+  belongs to lowering. Semantic observation uses separate sink/error slots, decoded-UTF8 versus raw-byte
+  input hashing, early no-sink return, and typed event construction; derived-index validation owns trust.
+  Reconciled dated recursive-public and semantic-admission pending claims against current neutral evidence.
+- Managed Perl recursive-observation, diagnostic-output, logical-helper, and semantic-runtime-observation
+  suites pass 137 top-level tests across four files. Typed governance passes 14/0/231 with recursive public
+  6/6/10 and combined 8/8/6/10; semantic passes six fixture groups/twenty queries/128 mutations/9 rollout/6
+  admission; diagnostic passes 3 helpers/11 render/6 scenarios/8 complete/20 mutations; logical passes
+  17 truthiness/10 helper/3 effect/8 complete/19 public documents/14 forbidden claims/26 mutations.
+- Required CHANGES rollover follows ADR 0069 at this checkpoint's 90% boundary. The owned capacity review
+  uses only the finite file/manifest slots needed, a newly indexed ADR 0104, independent exact clean-source
+  preservation, and unchanged byte/root/segment/aggregate limits. Exact measurements follow below before
+  staging. This infrastructure boundary requires receipt-bound canonical CI; ordinary prior leaves did not.
+  The root reaches 464/512 lines. Segment 4984 preserves clean e548ce4b source lines 248–459: 212 lines /
+  19,054 bytes, SHA-256 d720d564937dc8d5f5d14a2942335ec874a481dda01e8824b2956a0742e9c69f, source blob
+  daf0f6f1a571377da88009f340a844ff627ff10f. Independent source/blob/hash/count and prior segment-record
+  comparisons pass; the header segment count alone increases. An initial ad hoc verifier wrongly treated
+  the manifest header as a segment; the corrected schema-aware comparison proves exact preservation.
+  After root-only EOF blank-line normalization, current root is 251 lines / 18,276 bytes and manifest
+  28 lines / 15,887 bytes. Collection totals 29 files / 48,131 lines / 3,467,471 bytes. ADR 0104 changes
+  only max_files 28 to 29 and manifest max_lines 27 to 28; every other pressure control stays unchanged.
+- Two runtime defect cards and six updated ownership/status records preserve the focused conclusions.
+  History capacity has its separate Knowledge record. No runtime, public-book, protocol, or admission edits;
+  codebase/book remains No. The next checkpoint is `.3.2.42`.
+### Semantic call/index ownership and complete physical book coverage at `.3.2.42`
+- Activated from clean `da8185b94972441b07034eece644cc7efd14dc97` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Read SemanticCallProjection 1–240 / 241–500 / 501–753 and SemanticIndex 1–220 / 221–395
+  completely during the preceding frozen canonical run. Exact source identity passes: 1,148 lines /
+  37,003 bytes. This comprehension checkpoint does not duplicate .31's physical Perl-reading credit.
+- Reconciled authored definition ordering, bounded function-shape propagation, typed call traversal,
+  function-before-helper resolution, separate staged payload/job/result provenance, shared generated-v2
+  identity, and detached private projections. The opaque index retains copied source/outcome/projection,
+  delegates queries without parser execution, and derives independent observation snapshots.
+  Existing .22 still owns the empty-function early return; no passing snapshot closes that defect.
+- Managed foundation/call/query tests pass three files / twenty top-level tests in 39 wall seconds.
+  Current neutral semantic proof passes 6 fixture groups / 20 exact queries / 128 mutations / 9 complete
+  rollout rows / 6 complete admission rows. The preceding canonical generated-source proof is retained
+  against unchanged inputs; no extra full gate is run for this ordinary evidence checkpoint.
+- Complete physical mdBook coverage is recorded separately below. Verified current paragraphs were
+  compared with existing Knowledge, public controls, exact contract reader/marker/denial loops, and the
+  current neutral proof. .41.1–.41.8 own bounded book reconciliation; .28/.29/.30 keep their prior scopes.
+  Historical snapshots remain dated. Other lifecycle/helper/representation questions remain assessment
+  candidates until exact tools and authority establish their behavior.
+- An initial public mode control's error-free assumption failed, triggering complete diagnosis. Nine
+  final Get cases cover all eight mode/descriptor combinations plus invalid generate-only source. The
+  three descriptor-plus-mode combinations return the compiler's successful undef but acquire a false
+  runtime_owner/run_get_pipeline error. parse_only produces no generated source; the other generated
+  paths capture 8,806 bytes for the exact small fixture. Invalid source keeps compiler validation
+  attribution. Forced parse-only bootstrap output was captured in memory.
+- Eight isolated ParserFactory callback controls reproduce the same three false errors at its own
+  compile_spec validator and failed trace decision, independently of Runtime. Full Runtime history
+  86d6511c7 introduces descriptor-first validation; April 9 c5ba9fe57 renames the checked key from return_descr to return_descriptor without changing priority.
+  Compiler checks parse_only, generate_only, then descriptor. .42 owns both validator repairs and full
+  public named-source coverage, with exact matrices in its Knowledge card.
+- Four input/direct controls return cursor zero for empty input, ordinary non-spec text, and ordinary
+  leading space; leading blank/comment input returns eight publicly and zero through the descriptor
+  handler. All contexts are error-free. Runtime's one public-entry skip loop and Compiler's scalar-ref
+  guard explain why the book's every-handler skip and document-as-spec restrictions are false.
+- Forward .3.2.44 diagnosis uses four public Get/query twins: every parser returns seven without
+  errors, but explicit header-inline I has zero lifecycle records and following-line I has one.
+  Both bare-body controls have no explicit I record. Two outward descriptors have identical public
+  metadata and expose no lifecycle body fields. _scan_source recognizes a header and skips its tail;
+  lifecycle projection uses only captured members. Source 460–505 / 568–710 and the complete
+  155-line static test were read after the public tools. .43 owns exact member/span authority,
+  all-six-runtime census, bounded repair and regressions; other runtimes were not measured here.
+- The previously consumed macOS progressive-launch sample and eventual passing test are preserved in
+  their existing Knowledge owner, with exact sample SHA and exact-path cleanup evidence. It proves the
+  sampled pre-main loader boundary, not a newly controlled kernel/policy cause.
+- Additional supporting source reads include ParserFactory 1–85 / 275–368, Compiler 1780–1938,
+  Runtime 115–154, phase0 9865–9975, .githooks/pre-commit 1–27 (EOF), and
+  knowledge-map/scripts/check_knowledge_map.sh 1–90. These are bounded supporting ranges, not full
+  verification/tooling lane completion.
+- During the preceding long gate, prepared evidence was saved at
+  .linkedspec-data/scratch/startup46-preparation-20260906.json: 148,121 bytes, SHA-256
+  9617f5c29d41c552f020997afc82083b0c17b8107a8f9d2bb48e2dcc9414dc99, with exact readback.
+  It is temporary recovery data, not a substitute for these task/Knowledge/Git records. After this
+  checkpoint commits, verify that exact size/hash and delete only that file, then prove its absence.
+- No runtime, public-book, policy, protocol, or infrastructure edit occurs. Roadmap and physical mdBook
+  reading are Yes; codebase reading is No and formal .4 alignment remains pending. Next .3.2.43 reads
+  the query, runtime-projection, and source-map owners.
+- The preceding exact staged canonical gate passed at base e548ce4be5d3164ab8be54dc3d63dece2dda0ffb,
+  candidate SHA-256 494bab842b8b16dc553c8de43ff97ca5d2e0fa3a147f103d6bf8d3fdc624f0e4.
+  Both primary CLI environments pass 66/66; Phase 0 passes 1,032 tests in 1,051 wall seconds.
+  The default gate exited zero; optional local gates and recurring matrices were not enabled.
+  Commit da8185b94972441b07034eece644cc7efd14dc97 exists after the configured pre-commit gate;
+  the repeated post-commit pointer and exact promoted HEAD receipt pass, and the brief is zero bytes.
+  The final commit-command output was lost across context compaction, so its stdout is not claimed.
+### Complete physical mdBook reading preserved at `.3.2.42`
+The `.3.2.41` staged canonical candidate remained frozen while read-only preparation completed every
+remaining book range. The fourteen complete files and two partial ranges of one local-CI file recorded
+under `.31` account for 640,041 bytes; this pass adds exactly 1,316,541 disjoint bytes. All 50 tracked
+book files, including configuration and SUMMARY, are fully read: 1,956,582 bytes. These are file counts,
+not fifty prose chapters. The earlier two partial ranges do not mean two partial files.
+Every chapter was consumed in bounded untruncated outputs. Final independent verification reconciles all
+64 interval records, their SHA-256 digests, contiguous complete line coverage without overlaps or holes,
+the exact 50-path set, and current bytes against reading baseline
+`baeb984e36a94a15951cd23d4c52def5064cdaca`. All checks pass. Git plus this complete path/range ledger
+remains the inventory; no duplicate manifest is introduced. Previously truncated outputs received no
+credit until their exact ranges were reread.
+The following thirty-six files now join the fourteen complete files listed under `.31`. Every range is
+1 through the stated EOF. The local-CI row includes its two earlier partial ranges exactly once.
+| Book path below `docs/linkedspec-book/` | Full lines; bytes |
+| --- | ---: |
+| `src/overview/design-rationale.md` | 259; 16,310 |
+| `src/overview/project-status.md` | 1,641; 182,688 |
+| `src/user-model/spec-files-and-rule-paragraphs.md` | 318; 13,457 |
+| `src/user-model/worked-spec-walkthrough.md` | 342; 12,718 |
+| `src/user-model/rule-modes-and-parse-modes.md` | 896; 39,736 |
+| `src/user-model/regex-in-spec.md` | 290; 13,692 |
+| `src/user-model/blind-calls-and-parser-orchestration.md` | 469; 13,945 |
+| `src/user-model/runtime-context-and-tracing.md` | 625; 25,247 |
+| `src/public-api/get-and-get-parser.md` | 682; 31,740 |
+| `src/public-api/descriptor-introspection.md` | 642; 31,584 |
+| `src/dsl/action-model-and-helper-surface.md` | 228; 11,189 |
+| `src/dsl/actionir-lowering-mental-model.md` | 193; 9,901 |
+| `src/dsl/declaration-helper-reference.md` | 93; 2,612 |
+| `src/dsl/fluent-and-block-forms.md` | 541; 17,474 |
+| `src/dsl/capture-marks-and-source-locations.md` | 1,431; 93,808 |
+| `src/dsl/source-boundary-helper-reference.md` | 648; 34,135 |
+| `src/compiler/pipeline-overview.md` | 637; 43,440 |
+| `src/compiler/staged-ast-enrichment.md` | 958; 57,285 |
+| `src/compiler/compiled-state-model.md` | 289; 15,178 |
+| `src/compiler/generated-handlers-and-dispatch.md` | 525; 31,655 |
+| `src/compiler/diagnostics.md` | 267; 12,299 |
+| `src/specs-and-corpora/shipped-specs-and-corpora.md` | 334; 16,423 |
+| `src/specs-and-corpora/lispish-spec-walkthrough.md` | 425; 9,522 |
+| `src/specs-and-corpora/ebnf-spec-walkthrough.md` | 786; 23,758 |
+| `src/specs-and-corpora/tablegrep-spec-walkthrough.md` | 96; 4,959 |
+| `src/specs-and-corpora/portmap-spec-walkthrough.md` | 118; 4,746 |
+| `src/specs-and-corpora/pplugin-spec-walkthrough.md` | 101; 5,894 |
+| `src/architecture/owner-tree.md` | 625; 45,849 |
+| `src/architecture/structured-format-program.md` | 178; 11,906 |
+| `src/appendix/formal-grammar.md` | 1,308; 71,322 |
+| `src/appendix/runtime-semantics.md` | 759; 37,484 |
+| `src/appendix/backend-handoff.md` | 2,923; 217,400 |
+| `src/development/local-ci-and-regression.md` | 2,048; 146,113 |
+| `src/development/macos-rust-launch-latency.md` | 26; 1,686 |
+| `src/development/codegen-inspector.md` | 53; 2,518 |
+| `src/development/documentation-workflow.md` | 232; 10,360 |
+Physical reading is Yes; `.4` remains pending formal alignment with the unread codebase and review of
+subsequent changes. `.41.1`–`.41.8` own the additional book repair lanes, coordinated with existing
+`.28`/`.29`/`.30`; `.42` owns the independently reproduced combined-mode validator defect.
+Verified paragraph/checker mechanisms and exact public controls live in
+`docs/knowledge/startup-public-teaching-checker-blind-spots.md` and
+`docs/knowledge/perl-get-mode-result-validation-precedence-drift.md`.
+Other lifecycle/helper/representation assertions remain explicitly bounded assessment candidates,
+not unmeasured runtime defect claims. No public-book, runtime, or policy changes occurred.
+### Semantic query, observation, and source-map boundaries at `.3.2.43`
+- Activated from clean `dde05b657eea91fd03b6ae14dfc2366156942583` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Read SemanticQuery 1–230 / 231–440 / 441–596, SemanticRuntimeProjection 1–214, and
+  SemanticSourceMap 1–172 completely during the preceding frozen canonical run; the two smaller
+  owners were reread while the preceding checkpoint's hooks ran. Current exact baseline identity
+  passes for all three owners: 982 lines / 35,427 bytes. This does not duplicate .31 physical credit.
+- Query validation receives cloned plain data, canonicalizes operation-specific paging/traversal and
+  evidence selection, and applies source/digest ceilings at the outward boundary. Source mapping
+  validates strict UTF-8 text/byte equivalence, exact character boundaries, LF-based coordinates,
+  and ASCII integer ranges. It keeps source authority private rather than deleting it at construction.
+- Derived runtime projection validates exact native event shape, one final successful entry result,
+  and selecting-rule/regex-slot topology before cloning static state and appending ordered records.
+  It uses static shapes; existing .20 owns Unicode-digit validation concerns.
+- Compared explain accounting with neutral evaluator 1158–1245: both reserve the decision record
+  and use the remaining record budget for evidence, then derive explained_by relations and depth-one
+  cost. This resolves a proposed Perl-only discrepancy; it does not establish an unmeasured broad
+  request contract or a new defect. Relation traversal retains separate multi-budget accounting.
+- The prior exact canonical gate at da8185b9 passes query 9, runtime observation 106, foundation 5,
+  and neutral 6 fixtures / 20 queries / 128 mutations, with 9/9 rollout and 6/6 admission. Source,
+  those three test files, the neutral checker, and model are byte-identical to that candidate. Existing
+  proof is retained; no unnecessary new full gate or unchanged runtime test repetition occurs.
+- Four Knowledge owners now record source-map/derived-projection comprehension and qualify July
+  rollout, capability, Phase 0, and four-backend privacy milestones as dated history. Current counts
+  are explicitly tied to the consumed September 6 canonical evidence.
+- After .3.2.42 committed as dde05b657eea91fd03b6ae14dfc2366156942583 with nine passing doctrines
+  and a passing post-commit pointer, its brief was cleared and Git was clean. The exact 148,121-byte
+  preparation spool matched SHA-256 9617f5c29d41c552f020997afc82083b0c17b8107a8f9d2bb48e2dcc9414dc99
+  and expected owners before deletion. Only that file was removed; absence was rechecked here.
+- Roadmap and physical book reading remain Yes; codebase reading remains No and formal .4 alignment
+  stays pending. This checkpoint changes only task/Knowledge/live continuity; .3.2.44 is next.
+### Static semantic evidence and precise failure classification at `.3.2.44`
+- Activated from clean `7a97647c9317bdd60b8aa7de0986ecf837bccdfb` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Read SemanticStaticProjection 1–235 / 236–460 / 461–700 / 701–880 / 881–1067 completely
+  during the frozen canonical run. Exact current baseline identity passes: 1,067 lines / 34,029 bytes.
+  The complete 155-line static test was read; its five top-level tests passed in the preceding canonical
+  candidate and the current source/test bytes are unchanged. This does not duplicate .31 physical credit.
+- Reconciled descriptor-authoritative compiled topology, source-authoritative authored forms and spans,
+  independent duplicate/indexed regex identities, private source retention, function masking, canonical
+  record/relation ordering, and call-projector delegation. Existing .22 and .43 retain their known gaps.
+- Reverified .23 through public Get and public list queries. The first minimal fixtures selected
+  recognition_attempt_count and explicit-arrow final descriptor failure, not the original intended escape
+  and bare missing-rule cases; both nevertheless show the same false dependency classification. The
+  corrected two-case matrix reaches recognition_token_escape and bare_edge_target_undefined exactly.
+- For the escape, the semantic diagnostic retains recognition_token_escape and the original message.
+  A separate dependency_resolution decision and dependency_target_missing explanation invent a blank
+  target and emit the line-418 uninitialized warning. The bare missing-rule control correctly maps to
+  unknown_rule_reference, preserves Missing source bytes 6–13, and emits no warning. Forced compile
+  logs were captured in memory. The original whole-diagnostic-replacement wording was too broad;
+  this measured correction refines .31 and the existing .23 acceptance without claiming a repair.
+- After public tools, reread failed-projection 294–436 and compiled components 437–508. The code
+  retains supplied diagnostic code/summary with one intentional bare-edge mapping, then unconditionally
+  creates dependency decision/explanation rows. Exact matrix, warning, and source evidence are in the
+  existing compile-failure Knowledge card. No generated/MCP/backend behavior was remeasured here.
+- The earlier four explicit/bare inline/multiline controls and two outward descriptors remain valid:
+  every parser returns seven, but only explicit multiline I yields its lifecycle record. .43 owns the
+  header-tail scanner repair; bare controls do not justify inventing an explicit marker.
+- TOOLBOX section 1 still directs rejection of the already-supported bare block. The current lifecycle
+  Knowledge/ADR contract and earlier public controls establish the stale instruction. The standalone
+  checker passes 9 placements / 4 duplicate forms / 6 ownership cases / 3 malformed twins / 6 routes /
+  15 public documents / 7 denials / 14 mutations; its exact 15-path reader omits TOOLBOX. Reader 1–90
+  and contract-validation 144–164 were read; public-contract JSON was fully inspected. .41.6 now owns
+  correction and claim/path coverage. Other lifecycle assessment candidates remain unverified.
+- Three existing Knowledge records preserve these boundaries. Supporting test reads include recognition
+  authority 252–292, contract 295–318, and the small semantic failed.spec fixture after public controls.
+  Required roadmap/physical-book reading remain Yes, codebase No; formal .4 and all repairs stay pending.
+  No runtime, public-book, TOOLBOX, checker, policy, or protocol edits occur. Next .3.2.45.
+### Typed source authority and compatibility projections at `.3.2.45`
+- Activated from clean `78e0ee6b1d719a1113bf6ad0e351d890fb88ea52` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Read SourceLocation 1–240 / 241–475 / 476–700 completely during the frozen canonical run,
+  then reread all 1–215 / 216–475 / 476–700 while the preceding checkpoint's hooks ran. Exact
+  baseline identity passes: 700 lines / 21,209 bytes; .31 physical credit is not counted again.
+- The authority snapshots decoded source and scalar-boundary line/column/strict-UTF-8 byte evidence.
+  Separate inside-out value stores retain monotonic authority identity and detached position/span/derived
+  records without live authority or text references. The authority validates and materializes, copies
+  ordered provenance, and preserves four structured value errors with privacy-filtered context.
+- Runtime helpers reuse match-info authority while preserving scalar cursor/mark storage, primitive
+  results, absence values, and existing shallow capture-container copies. Nonnegative in-bounds slices
+  materialize typed spans; other starts/widths deliberately retain host substr compatibility. This is
+  existing behavior, not an expanded typed authoring or deep-copy contract.
+- Retrieved the canonical typed-source Knowledge home before reading, then reconciled its relevant
+  160–245 Perl/boundary and 275–290 final-closeout sections plus metadata. A prior truncated whole-card
+  output is not credited as complete reading of unrelated backend history. The existing near-capacity
+  home now links to a focused compatibility card; its general authority record remains canonical.
+- The prior exact canonical gate at da8185b9 passes typed values/projections/recursive observation:
+  three files / eighteen tests / twenty-eight wall seconds, plus neutral 14 complete / 0 pending /
+  231 mutations. Current source, all three test files, checker, and contract are byte-identical;
+  retained proof suffices for this unchanged-source reading checkpoint. CI registration 810–820
+  was read to confirm the exact three-suite boundary, without claiming a complete tooling-lane read.
+- Pre-commit correctly rejected a 67,175-byte Knowledge card against its unchanged 65,536-byte cap;
+  its clean-HEAD size was already 65,511. Routed new compatibility detail to
+  docs/knowledge/perl-source-location-slice-compatibility.md, kept a direct parent link, and replaced
+  the duplicated long reverify recipe with the existing six-authority composition command. The complete
+  33-line driver was read; this is documentation routing, not a newly run combined gate or limit change.
+- No new defect or behavior change is established. Roadmap and physical mdBook remain Yes; codebase
+  remains No and formal .4 alignment/repairs stay pending. Next .3.2.46 reads staged AST authority.
+### Staged authority and bounded marker-lifetime investigation at `.3.2.46`
+- Activated from clean `cd0a1babed392001c5d372a39e84a96d0b979bc0` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Read StagedASTEnrichment 1–225 / 226–455 / 456–690 / 691–925 / 926–1165 /
+  1166–1375 / 1376–1498 completely during the frozen canonical run. Exact baseline identity passes:
+  1,498 lines / 49,952 bytes. The suffix remains .3.2.47-owned; no duplicate .31 physical credit.
+- Retrieved and fully read marker/provenance, current-depth, recursive, and carrier Knowledge owners.
+  Reconciled pure pre-registered resolution, normalized top/job/cache identity, policy narrowing, complete
+  target preparation, typed ordering, fresh callback state, bounded detached results, all stitch/failure
+  modes, breadth-first recursion, active-chain decrease checks, shared resources, and source rebasing.
+  Corrected the recursive card's stale deliberately-unrouted phrase to its admitted carrier boundary.
+- A typed-path numeric-string concern was resolved by the already-read suffix's JSON-kind-aware integer
+  predicate; string keys and integer indices remain distinct. No corresponding defect is claimed.
+- Investigated whether retired marker addresses could be confused with new markers. The public Get
+  parent uses the exact admitted assignment carrier; callbacks create decreasing payload markers with
+  enough limits for 24 calls. Sixteen ordinary allocation trials, four weak-reference trials, and four
+  trials allocating up to 128 candidate markers each step all complete 24 calls, return done, and retain
+  no error. Actual address reuse was not observed. Unretained weak references show only the current
+  child alive during each later callback and zero remaining after completion; held controls retain 23.
+- An isolated local substitute for only the scheduler's imported marker refaddr preserves distinct live
+  identities and reuses a numeric slot only after its weak reference clears. Two unretained trials stop
+  at three calls with an unprocessed Marker and no error; two retained-marker controls finish 24.
+  This is a controlled identity-lifetime counterexample, not observed native allocator reuse. The
+  intentional local symbol replacement produces Perl's used-once compile notice in the harness only.
+- After public controls, reread scheduler 151–225 / 324–570 / 785–815: processed/lineage scalar keys
+  outlive released marker objects and skip a returned identity already marked processed. Supporting
+  suffix reads 1645–1738 / 1770–1858 and StagedParseJob 80–130 / 314–352 clarify detachment and
+  actual private destructor ownership. .44 owns stable-identity repair, independent regressions, and
+  other-backend census; no installed runtime, test, protocol, book, or contract was modified.
+- One new risk card preserves all four exact commands and result boundaries; three existing staged
+  Knowledge owners link current semantics and unchanged proof. The prior canonical staged Perl consumer
+  passes 143 tests and neutral proof is 9/9/123 plus public 6/17/10/129. Current source, consumer,
+  checker, and contract bytes match the measured candidate; no new full gate was run.
+- Supporting consumer reads cover 1–241 / 245–279 / 1393–1522 / 1875–2020, with the exact
+  resolution snapshot fully inspected. The complete Runtime seam 1–120 was read; its formal checkpoint
+  remains next. These supporting reads do not close the overall test/tooling/native reading lanes.
+- The preceding Knowledge containment correction committed as cd0a1babed392001c5d372a39e84a96d0b979bc0
+  after all nine doctrines and the post-commit pointer passed; its brief is empty and activation was clean.
+  Roadmap/physical mdBook remain Yes; codebase No and formal .4/repairs remain pending. Next .3.2.47.
+### Staged suffix, runtime, marker policy, and legacy registry at `.3.2.47`
+- Activated from clean `7c2d6ee0d54350667b5cf15c4d634bb9d3efe9d2` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Completely reread StagedASTEnrichment 1499–1760 / 1761–2013, Runtime 1–120,
+  StagedParseJob 1–352, StagedParseJobPolicy 1–59, and StagedParserRegistry 1–328. All five
+  ranges retain exact baseline identity: 1,374 lines / 43,289 bytes. This closes the queued
+  comprehension checkpoint; the physical bytes were already credited in .31.
+- Retrieved and fully read the registry/dispatch, function-body-v1, marker/provenance, and general-v2
+  boundary Knowledge owners before reconciling mechanisms. The legacy registry normalizes and sorts
+  one collected depth, invokes resolve/load/compile/execute for every job, and records a cache key;
+  it contains no memoized compiled-plan cache. Its policy strings are transport metadata until the
+  separate trusted function-body stitch. General v2 remains a separate caller-frozen authority.
+- Read exact runtime configuration keys, fresh per-invocation authority, preserved cancellation/clock
+  identities, cloned ordinary configuration, input-reference identity, transaction-active lookup,
+  and post-parent enrich_recursively. Marker state is detached into a private side table and deleted
+  on destruction; materialized source data retains no source authority. Static policy validates only
+  dedicated marker events and reports the first declaration diagnostic.
+- Read target identity checks, typed paths, all stitch modes, child diagnostic sanitization/rebasing,
+  bounded plain-result detachment with allowed opaque markers, cycle rejection, exact job digests,
+  JSON-kind-aware integer checks, expiring execution context, and private error/authority cleanup.
+  Existing .44 owns retired marker identity risk; no additional failure or native reuse is claimed.
+- Exact current Perl source, staged/phase0 consumers, staged checker, and neutral contract match the
+  consumed da8185b9 canonical checkpoint. Retain its Perl 143, neutral 9/9/123, public 6/17/10/129
+  and Phase 0 1,032 results without rerunning unchanged runtime suites or treating them as new proof.
+- The prior leaf committed as 7c2d6ee0d54350667b5cf15c4d634bb9d3efe9d2 after all nine doctrines and
+  post-commit pointer passed; brief was cleared and clean status verified before activation.
+  Roadmap/physical book remain Yes, codebase No, formal .4 and tracked repairs pending. Next .3.2.48.
+### Trace owner and exact lazy exception-state boundary at `.3.2.48`
+- Activated from clean `6654c0dfd057112c3942f06635926c4dd4625985` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Read Trace 1–260 / 261–521 completely: 521 lines / 16,259 bytes, SHA-256
+  f8041e80c7f8342a0497710b130a14085c3dddd0d1ee67eeb04f51dd196ffe22, exact baseline equality.
+  This is comprehension reconciliation of physical reading already preserved in .31.
+- Retrieve Trace formatting/control, generated branch helper, lazy exception-state, OwnerDispatch,
+  and facade Knowledge before tracing the seam. Read TOOLBOX trace guidance, the complete 130-line
+  branch-helper test, OwnerDispatch 1–115 / 195–225, and HandlerVariantEmitter 580–625 as support.
+- Twenty managed in-memory controls cross direct/OwnerDispatch calls, incoming string/object errors,
+  and quiet/plain/success/throw/nested detail. Direct quiet/plain preserve state; direct success/nested
+  clear it, throwing detail replaces it. Every wrapped call preserves the incoming value/object identity.
+  All branch results remain true, quiet emits nothing and calls zero callbacks, active callbacks run once,
+  and throwing/nested details are present. Exact command/results live in the existing .24 Knowledge card.
+- The helper test's outer eval proves non-escape and branch-result retention, not preservation of an
+  incoming exception. Narrow the existing broad parser-behavior claim and make .24's acceptance distinguish
+  protected wrappers from direct generated-owner calls. Do not infer unmeasured parser-context failure.
+- Current focused proof: three generated helper/nonrep/rep suites pass 11 top-level tests in 23 seconds.
+  Trace/Perl dependencies, primary CLI and conformance consumer bytes are unchanged from da8185b9.
+  Its two 66-case CLI environments remain retained prior proof; qualify the CLI card's old July 61-case
+  and Rust-next wording as historical rather than rerunning unchanged canonical CI.
+- Confirm configuration/environment precedence, scope indentation, escaped mark excerpts, sink routing,
+  lazy Data::Dumper through the preserving seam, and log_dump's explicit enforce_level distinction.
+  No runtime, tests, public book, protocol, sink policy, or contract changes. .24 remains pending.
+- Prior commit 6654c0dfd057112c3942f06635926c4dd4625985 passed all nine doctrines/post-pointer;
+  brief was cleared and clean status verified before activation. Roadmap/physical book Yes; codebase No,
+  formal .4 and repair prerequisites remain pending. Next .3.2.49.
+### First generated Unicode table range and authoritative regeneration at `.3.2.49`
+- Activated from clean `69e221bf67d8a3289dd3f0ade35e52ff8d1b9f25` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Intake .31 already physically consumed every byte of UnicodeCaseMapping 1–1500 in smaller
+  complete ranges. Reconcile that durable reading without duplicate physical credit. Current range is
+  1,500 lines / 32,073 bytes, SHA-256 a75e182640627d042dd282ef7257d5ae1ec20431abad1a7fb316498b6abd02a1;
+  entire source remains baseline-identical. The suffix checkpoints remain separately pending.
+- Retrieve the Unicode data, Perl/Rust, Dart/Julia, and six-runtime parity Knowledge owners plus ADR
+  0027. Read the entire current 287-line checker and 88-line Perl consumer; revisit generated header
+  1–110, the 1490–1505 seam, and evaluator 3790–3835 as supporting comprehension of pinned data.
+  This does not credit unread upstream/generator/native files or close their future reading lanes.
+- Current managed offline checker regenerates JSON plus Perl/Rust/Dart/Julia/Lua source in an owned
+  temporary directory and byte-compares all six files; its independent evaluator passes 12 fixtures.
+  Counts remain 1,563 lower / 1,581 upper mappings, 158 Cased / 464 Case_Ignorable ranges. Update
+  two Knowledge bodies that still described only the earlier Perl/Rust generated-file coverage.
+- Current managed Perl consumer passes 52 tests in 13 seconds across direct conversions, compiled
+  helper/receiver/array forms for all fixtures, three pinned metadata fields, and emitted dependency text.
+  The dependency assertion is not fresh-process generated execution. Other backend native consumers
+  are not rerun. No table/generator/data/version/locale/normalization or public-book changes occur.
+- Record that first-fragment lower mappings include full dotted-I combining output and intentional
+  identity mappings; tables are generated authority, not hand-maintained edits. Hash checks establish
+  current identity; prior complete reading establishes coverage. No new defect is claimed.
+- The prior leaf committed as 69e221bf67d8a3289dd3f0ade35e52ff8d1b9f25 with nine doctrines/post-pointer
+  passing, brief cleared, and clean status before activation. Roadmap/physical mdBook Yes; codebase No,
+  formal .4 and repairs pending. Next .3.2.50.
+### Middle generated Unicode range and precise reading status at `.3.2.50`
+- Activated from clean `a32114213ec20ab003551fc428566b345c3cc8dd` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- The complete 1501–3000 physical reading is already durable under .31. Reconcile its 1,500 lines /
+  32,854 bytes with exact baseline SHA-256 02b460974dd06064b0af0ea3ac7ff1164ffc53e2ee71c1721dd5a4f652c68f1f.
+  Revisit the 1501–1625 lower/upper seam and 2988–3005 boundary; no duplicate coverage credit.
+- This range finishes lower mappings and opens the upper table. Full sharp-s expansion is intentional
+  under ADR 0027. Contextual property ranges and evaluator remain the next checkpoint, with earlier
+  supporting reading retained. No data, generator, normalization, locale, or behavior change occurs.
+- Exact table, generator/upstream, neutral contract, checker and consumer bytes match a3211421.
+  Retain its consumed five-module regeneration/12 neutral fixtures and 52 Perl tests; no fresh peer
+  execution or unchanged-suite rerun. Update the canonical Perl/Rust Knowledge with the precise range.
+- Retrieve startup inventory Knowledge and clarify its stale book-reading status: physical mdBook
+  reading is complete across 50 files under .31/.3.2.42; formal .4 alignment is still pending.
+  Codebase reading remains No and no unread first-party input receives credit.
+- Prior a32114213ec20ab003551fc428566b345c3cc8dd passed all nine doctrines/post-pointer;
+  brief cleared and clean status verified before activation. Next .3.2.51.
+### Final Unicode properties and scalar casing evaluator at `.3.2.51`
+- Activated from clean `78b272ec9e307092bee162dfdae87abbef778c18` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Reconcile .31's complete physical reading of UnicodeCaseMapping 3001–3835: 835 lines /
+  17,404 bytes; exact baseline SHA-256 319a14861db1ff096bb78caecd6bc307fd1a0e38c2bd86680adefc64d8e8b31f.
+  The three checkpoints now account for the complete 3,835-line / 82,331-byte file without gaps or
+  duplicate physical credit. Revisit 3150–3180 / 3310–3342 / 3770–3835 to reconcile property seams.
+- Canonical Unicode Knowledge and ADR 0027 bind full mappings, original-input Final Sigma context,
+  binary-searched Cased/Case_Ignorable ranges, scalar iteration, identity fallback, and no normalization.
+  Decode and read the exact algorithm/context records and all 12 neutral fixtures, including six
+  sigma controls. This is not full reading credit for the large neutral JSON or generator.
+- Current table/generator/upstream/contract/checker/consumer bytes remain unchanged from a3211421;
+  retain its five-module byte regeneration, 12 neutral fixtures, and 52 Perl tests. No fresh native
+  peer, generated-process, input-kind, locale, or normalization claim is added.
+- Read-only preflight of the preceding .3.2.50 candidate measures task storage at 100 files /
+  76,699 lines / 7,789,885 bytes against 128 / 80,000 / 8,388,608. General task-member limits
+  are 8,000 lines / 1,048,576 bytes; special 5,000-line caps are future-parity-only. Record the
+  dated census in inventory Knowledge; remeasure resulting storage before the native ownership split.
+- Prior 78b272ec9e307092bee162dfdae87abbef778c18 passed nine doctrines/post-pointer; brief cleared
+  and clean status verified before activation. Roadmap/physical mdBook Yes; codebase No and formal
+  alignment/repairs remain pending. Next .3.2.52.
+### Generated XID classifier and named-slot identity at `.3.2.52`
+- Activated from clean `bea31562b2548eb2d1faf896edace1c3e918f00c` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Reconcile .31's complete 855-line / 17,340-byte UnicodeXIDContinue reading. Exact baseline
+  SHA-256 is db2185e0a2366849c126d76b27ad5591eee9463ea5e825e815e9feabe97b8947. Revisit
+  header/ranges 1–80 and predicate tail 815–855 without duplicate physical credit.
+- Retrieve Unicode rule-label and self-hosted-boundary Knowledge, ADR 0051, gap origin/executable-plan
+  and closed recurring/public Knowledge. Read direct consumers Validation 550–610 / 695–722 and
+  RuleIR 548–585. They use complete-string XID membership, then independently reserve ASCII digit-only
+  slot names. The production point predicate receives unpacked scalars; arbitrary numeric-string
+  internal-point input is not admitted by this evidence. .20 retains its separate numeric review.
+- Read checker support 1–99 / 157–242 / 285–316 and decode the actual policy plus positive,
+  negative, and distinct fixture fields. This does not close the remaining 992-line checker, large
+  neutral JSON, generator, self-hosted grammar, or native reading lanes.
+- Managed current Unicode checker passes 806 ranges, nine positive/eight negative fixtures, two
+  distinct pairs. A separate direct Perl control executes 3,224 range endpoints/adjacent gaps,
+  all 17 fixtures, and both exact-identity pairs without warnings. Exact command is durable in
+  Unicode Knowledge. Classifier execution is distinct from checker byte/topology assertions.
+- Correct three canonical Knowledge owners: the Perl classifier's named-slot reuse; stale gap-origin
+  pending-public status; and executable-plan future entry_slot/admission wording. Preserve dated
+  implementation chronology explicitly. Fresh gap governance passes 9/0/63 plus public 8/15/10/34;
+  source, consumers, checker and contract match da8185b9, retaining its Perl124 rather than rerunning it.
+- No runtime, tests, generated tables, language policy, or public-book changes. Prior
+  bea31562b2548eb2d1faf896edace1c3e918f00c passed nine doctrines/post-pointer; brief cleared and
+  clean status verified before activation. Roadmap/physical book Yes; codebase No and .4/repairs pending.
+  Next .3.2.53.
+### Function metadata and legacy plugin/path configuration at `.3.2.53`
+- Activated from clean `bdf491a56b9ce6461a6e3ed2c924de6e0af9e2eb` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Completely reread UserFunctionRegistry 1–200 / 201–390 / 391–580 / 581–773, PPlugin 1–331,
+  PathSearch 1–47 and env.conf 1–51. All four baseline identities pass: 1,202 lines / 45,829 bytes.
+  Physical coverage was already credited under .31; this closes its queued comprehension checkpoint.
+- Retrieve registry, spec-owned parser, variadic, final-codeblock, and plugin boundary Knowledge.
+  Reconcile cached spec-owned definition parsing and restored loading guard; exact fixed/v2 signatures
+  and typed final metadata across body records; deterministic ordinal job identity; narrow staged body
+  dispatch; collisions/parameters; and newline-preserving stripping. Outward typed codeblock v3 is
+  separate from internal fixed-v1 metadata and the version-1 registry container.
+- Read all 174 lines of the variadic consumer plus codeblock metadata subtest 346–397. Current
+  managed suites pass 76 top-level tests in 29 seconds; neutral signature 3 definitions/9 calls/7
+  invalid definitions and codeblock 7/11/9/7/4/8/23 pass. No full codeblock-test reading credit or
+  new generated-process claim is inferred from the variadic emitted-text assertions.
+- Git counts 13 tracked .plg files, all parked under noncore/plugin; correct the older 19-file
+  current claim. Default legacy discovery uses cwd and root plugin/, ordered files, and a cached
+  registry. PathSearch caches recursive directories and hash-deduplicates matches without a stable
+  precedence guarantee. env.conf retains legacy program/system-tool settings. Neither broad legacy
+  discovery nor configured callbacks/services/cleanup are executed. Prior registered bridge proof
+  remains supported by unchanged bridge/registry/facade bytes.
+- No runtime, grammar, descriptor, configuration, or public-book changes. Prior
+  bdf491a56b9ce6461a6e3ed2c924de6e0af9e2eb passed nine doctrines/post-pointer, then brief/clean checks.
+  Roadmap/physical book Yes; codebase No and formal alignment/repairs remain pending. Next .3.2.54.
+### Legacy comparison, HTML rendering, and constraint conversion at `.3.2.54`
+- Activated from clean `bd0573533e45fdd903255fb959e3c1f7e5971a27` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Completely reread gdcheck 1–225 / 226–431, htmlcss_driver 1–166, and ptchange 1–242:
+  839 lines / 22,702 bytes. Exact baseline identities pass; the three raw 0xb5 comment bytes are escaped
+  in the reading output without source conversion. Physical coverage was already preserved by .31.
+- Retrieve .25/.26's canonical diagnostic cards before interpretation. Three managed syntax checks pass;
+  nine fresh assertions reproduce four signed-tolerance twins, duplicate removal/addition, and DEFAULT
+  cardinalities zero/one/two. These assert observed defects, not desired behavior. Persist the exact command
+  in the existing gdcheck card. Retain prior argv-list ptchange evidence after exact source identity.
+- Reconcile key/column masks and config readers; HTML class/custom-color emission, sorted scripted cells,
+  added/removed script dispatch, and table-order output; false-path mixed pin/port Cartesian expansion,
+  untouched-span reinsertion, and conditional clock-script output. No HTML callbacks or ptchange output
+  workflow is executed by syntax checks. Existing repairs .25/.26 remain pending.
+- Own .3.2.55 before writing the next pointer: independently close Perl coverage and decompose all Rust
+  bytes with pressure proof and canonical CI. No new Rust reading credit is claimed. The Perl parent stays
+  active until that closeout; all other codebase lanes and .4/.5 remain incomplete.
+- Prior bd0573533e45fdd903255fb959e3c1f7e5971a27 passed all nine doctrines and post-pointer verification;
+  brief was zero and tree clean before activation. No runtime, configuration, or public-book changes.
+### Perl parent closeout and exhaustive Rust reading ownership at `.3.2.55`
+- Activated from clean `888d8ca20983667ef427446e8fddf03f6eb5c8a2` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Activated from the completed utility checkpoint; independent source-interval verification covers all
+  89 Perl files / 2,133,690 bytes through EOF once, with no missing path or current delta. All 54 preceding
+  checkpoint subjects exist in Git: 53 source-reading leaves and one decomposition checkpoint. Their
+  largest budgets are 1,500 lines/fragments and 65,506 bytes. .31's physical ledger and each comprehension
+  checkpoint remain the evidence; enumeration alone is not substituted for reading.
+- Close only the Perl reading parent. Existing repair owners .7–.30 and .32–.44 remain pending; no
+  runtime, public-book, policy, or whole-codebase completion is claimed. Roadmap and physical mdBook are
+  Yes; other source lanes and formal .4/.5 reconciliation remain incomplete.
+- Own all 412 baseline Rust paths / 3,533,382 bytes in .3.3.1–.3.3.66, with .3.3.67 parent closeout.
+  Independent candidate and rendered Scope audits require exact contiguous/disjoint coverage, current
+  baseline identity, both empty corpus inputs, and each hard budget. Total 89,242 lines/fragments includes
+  the split MCP logical line; it is not a distinct-line count. Remove the draft's standalone header-only
+  group by keeping all six header lines with the first MCP payload window; the final plan has 66 groups.
+- Inspect split context, distinguishing declaration/test boundaries from method/data/embedded-grammar
+  continuations. Prefix-only display of oversized Unicode lines is planning context, not source credit.
+  Shared native acceptance requires surrounding context, exact suffix ownership, Knowledge-first tools,
+  untruncated physical reading, defect ownership and per-checkpoint commits. Persist both independent
+  audit commands in the existing inventory card; no second manifest or new runtime tool is installed.
+- Final resulting task pressure is recorded below. All existing member and collection limits remain;
+  later slices must remeasure evidence growth. No partition or policy-cap increase is implied.
+- The exact staged candidate requires canonical tools/run_ci_local.sh for this parent closeout. Keep it
+  frozen during the gate, consume the final status, verify its receipt, then commit and clear the brief.
+  Prior 888d8ca20983667ef427446e8fddf03f6eb5c8a2 passed all nine doctrines/post-pointer and clean/brief checks.
+- Resulting .3.2.55 candidate pressure: 100 files / 77,867 lines / 7,874,864 bytes;
+  2,133 lines and 513,744 bytes remain within the existing aggregate caps.
+### Rust lockfile reading and durable forward diagnostic intake at `.3.3.1`
+- Activated from clean `611d7b5c1a53fa8c38fb8fcc17e2304dc21ca63a` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Physically read rust/.gitignore 1–3 and Cargo.lock 1–1493 in six untruncated windows while the
+  preceding canonical candidate was frozen; its commit body preserves that preparation. Reconcile only
+  this owned group now: 1,496 lines / 37,995 bytes, exact baseline identity and budget proof.
+- Ignore-file SHA-256: 3c190dc8bc9f793ca5c8d1e5f01b329ea63b2853bc9e8a3e18da63f7fb10c5b5;
+  lock prefix: 387c9d18efd9f56bbbbcb63aee878314a8c86ad772a717366becfbc925e1cbd6.
+- Retrieve dependency/local-storage Knowledge first. Lock v4 pins 199 unique package identities:
+  195 registry checksums and four local records. rgx/pgen source remains excluded; Git owns the relative
+  dependency pin. Cargo.lock remains tracked despite its ignore pattern. No fetch, upgrade, or cache move.
+- Append the exact lock census to existing storage Knowledge. Qualify its older cache byte/file/hash
+  values as July 26 evidence, not a fresh cache census. Suffix 1494–1850 stays assigned to .3.3.2.
+- Intake the forward .3.3.3 diagnosis into new repair .45 before other durable edits: malformed I/E
+  blocks warn, disappear, and report successful compile/invoke, including typed nested-write/bang errors.
+  Eleven managed CLI controls plus the exact compiler branch establish the cause. Store the reproducer in
+  its Knowledge card; fix all relevant block routes and public teaching after .3/.4/.5. No repair closes.
+- Activate the Rust parent and advance one checkpoint only. Later physical preparation in the preceding
+  commit body still needs its own comprehension/delta checkpoint. Roadmap Yes; codebase No; physical
+  mdBook Yes with formal alignment pending. Prior canonical receipt and post-commit proof are retained.
+- Preserve completed core diagnostics from forward .3.3.6 in repairs .46/.47: UTF-8 clipping can panic,
+  and compiler validation rejects space/tab-only bang arguments accepted by its parser. The exact
+  isolated core program, linked artifact hash, and removed scratch are in the preceding commit body;
+  the earlier whole-spec timeout is not proof of either defect's public CLI behavior.
+- Preceding canonical gate and receipt pass: both primary CLI environments 66/66, Phase 0 1,032/1,032
+  in 1,066 seconds; optional whole-backend/matrix routes remain explicitly skipped. Commit 611d7b5c
+  passes all nine doctrines/post-pointer and promotes the exact receipt. The brief was cleared and Git clean.
+- The separate forward .3.3.7 regex-boundary harness timed out while compiling after 180 seconds;
+  its source never ran. The subprocess was reaped and exact owned scratch absence verified. This does not
+  establish a parser defect or a canonical-gate failure; the bounded native CLI comparison is separate.
+- Four direct native CLI controls now establish the separate regex-newline defect: unflagged regex plus
+  newline warns and returns null, while semicolon, adjacent-flag/newline, and string/newline return seven.
+  parse_regex consumes whitespace then the following identifier as suffix flags; .45's fallback drops
+  the invalidated I block. Create .49 before adding its exact evidence to the shared Knowledge card.
+  The failed core-harness compilation is not credited as a running test. All diagnostic jobs are consumed.
+- The director put reporting aside. No report artifact or .48 leaf was created; preceding commit body
+  preserves the returned app reference and corrected guidance. Continue the original LinkedSpec batch.
+### Rust manifest, AST, callable prefix and requirement evidence at `.3.3.2`
+- Activated from clean `08149577237224e96053ee3116fb8bb8164be5a5` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Reconcile the six fully read forward scopes preserved in 611d7b5c's commit body. Cargo.lock now has
+  both prefix and suffix checkpoints through EOF; a whole-file metadata census alone never supplied reading
+  credit. This group is 1,483 lines / 59,455 bytes and all six current files remain baseline-identical.
+- rust/Cargo.lock 1494–1850: 9236 bytes; SHA-256 2e25e0908f0af692ab4aa61f9dbea230096c8688f5d8a5e41c79a9aa61a6a549.
+- rust/Cargo.toml 1–18: 427 bytes; SHA-256 4f85f31df8b2228a18e44f22e9a9e276f6ca91943becea7f7025b70d564cbe81.
+- rust/README.md 1–484: 27733 bytes; SHA-256 6da3d72eca80a4caef1de6063523f8c95f7a8c86dc60b4434ca7aba9858e9f3e.
+- rust/linkedspec-core/Cargo.toml 1–14: 363 bytes; SHA-256 4e1b8f9d81bc30eaee3c2243bf5142fb3b26a51f60f9c99e91fd5e10dda709ed.
+- rust/linkedspec-core/src/ast.rs 1–360: 12809 bytes; SHA-256 1bc180bef4445edfd797c69ea1064639ce53df7407b1629b914f8bce73b4d9d8.
+- rust/linkedspec-core/src/callable_contract.rs 1–250: 8887 bytes; SHA-256 e8e989a4b9cb754b3f20a092d9de903150ec83411c9f08ac33d72548c89b7feb.
+- The two-crate workspace shares version 0.1.0, edition 2024, and a relative local rgx dependency.
+  AST defaults include empty function metadata and inline source identity; line SourceSpan remains distinct
+  from callable character spans. Typed signatures, final parameter kinds, staged payload/job/body AST,
+  edge selectors/provenance, and legacy serializable body kinds remain explicit rather than inferred.
+- Callable contracts cover builtin helper/receiver forms and declared final codeblock parameters. Prefix
+  normalization checks the registry and processes functions plus lifecycle/action/blind blocks, retaining
+  staged statement-extension metadata and rejecting statement-count changes. Candidate arity/placement and
+  eager-block restoration are distinct; recursive visitor/restoration suffix 251–394 remains .3.3.3-owned.
+- Locked offline Cargo metadata again resolves 199 packages: required local rgx-core/pgen declare 1.95,
+  while README line 472 claims 1.85+. Registry rows above 1.85 include platform-specific packages and must
+  not be collapsed into an experimentally proven universal minimum. No excluded dependency source read,
+  fetch, upgrade, old compiler run, or supported-minimum promotion is claimed. .41.7 owns correction.
+- Extend .41.2/.41.7 before Knowledge changes. README current subset/63-case wording needs reconciliation
+  against the unconditional 105-case generated classifier and 66-case primary authority; direct Cargo
+  examples need managed root routing. The generated classifier is not claimed as a fresh default-canonical
+  execution here. AST comments misdescribe Default as OR+ and & as choice; current getters and neutral
+  authority retain default minimum 0 versus OR+ 1 and Single's AND family. Source repairs stay gated.
+- Keep cache measurements explicitly dated; record complete lock reading separately from the static
+  metadata fact. Refresh relevant Knowledge source paths/reverify routing without changing executable
+  tools. All prior compiler repairs .45–.47/.49 remain pending. No runtime or public-book change.
+### Rust callable traversal and compiler validation reading at `.3.3.3`
+- Activated from clean `9e6550871739a2d9942267db93fab47fa8f3088e` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Reconcile the two complete forward reading ranges retained in 611d7b5c's commit body: 1,499 lines /
+  56,169 bytes. Both complete current files remain identical to the reading baseline.
+- rust/linkedspec-core/src/callable_contract.rs 251–394: 5081 bytes; SHA-256
+  67524f185979b05c6b96535aab95ef7dff11985b08d6a27b26c6986b9df6c58f.
+- rust/linkedspec-core/src/compiler.rs 1–1355: 51088 bytes; SHA-256
+  cda6903239dd6fd23727c0338e300d727c3268e561f6e4ccad751bc9b01fae0a.
+- Callable traversal restores parenthesized ordinary block values and visits nested calls, assignments,
+  access paths, mutation callbacks, arrays, blocks/codeblocks, and fluent arguments. Dedicated recognition,
+  progressive, and staged nodes retain their own validators rather than being reparsed by this visitor.
+- Compilation constructs functions/rules, normalizes callable contracts, rejects removed selectors and
+  malformed typed write/mutation carriers, then resolves dispatch selectors/dependencies before later
+  recognition, progressive/staged, and slot-identity validation. Traced compilation mirrors these phases.
+- Recognition validation collects rule/function reachability and examines recognize_once attempts for
+  recognition-observation binding-write effects and progressive/staged effects. The shared expression walker covers functions and every
+  lifecycle/action/blind code slot. Aggregate-selector validation also reparses deferred edge-fluent arguments;
+  unrelated legacy parse failures on that path are not asserted as new selector failures.
+- Nested-write validation checks addressable roots, character spans, typed segments and source projections;
+  mutation validation checks callback and continuation order. The established whitespace-only empty-call
+  mismatch remains .47-owned. Function parse errors propagate; rule code still warns/drops other failures
+  outside five governed diagnostic markers. The exact .45 controls remain diagnostic evidence, not a repair claim.
+- Only repeated I blocks append statements during lowering; the other six lifecycle fields are single slots.
+  Regex action adjacency is physical-line dependent, and nonregex members reset it. AND bare edges lower
+  into blind dispatch and OR/default bare edges into action dispatch; explicit selectors retain provenance.
+  Conditional/split/raw/plain forms are not compiled by these match arms.
+- Existing callable, cursor, selector, typed-write, progressive, descriptor and parser-boundary Knowledge
+  supplies canonical homes. Record the clarified phase order and lifecycle lowering in rust-core-compilation-boundaries; no runtime/public
+  book changes and no fresh native-suite execution are claimed by the neutral checks.
+### Rust regex resolution and outward projection reading at `.3.3.4`
+- Activated from clean `87065401fab5eeb076ff6795d2aa0af957a4b63b` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Reconcile four fully read forward scopes preserved in 611d7b5c's commit body: 1,481 lines /
+  57,687 bytes. Compiler reading now reaches EOF; all four complete current files match the baseline.
+- rust/linkedspec-core/src/compiler.rs 1356–2153: 33416 bytes; SHA-256
+  32d23a302261057a3b07cb25eb6aeeeb49c1d55c3b5fc43291b3b434e8e0343e.
+- rust/linkedspec-core/src/descriptor.rs 1–465: 16895 bytes; SHA-256
+  d0a089263e72be9c359bce09abfb5b0602d5e5774c159097faa252ff8bb245c8.
+- rust/linkedspec-core/src/entry_rule.rs 1–113: 4101 bytes; SHA-256
+  0de08149c4b3f73a8d41443151764aad6e1474e4aee4c8166eb85e890c560c22.
+- rust/linkedspec-core/src/error.rs 1–105: 3275 bytes; SHA-256
+  a25c2a569810a215cfcf79d0053f38d94e99e6930164709670f8d3c858b52519.
+- Named selectors resolve before dependency expansion and retain authored selector/slot provenance.
+  External edge-only targets append child patterns; self-targets reuse parent slots. Later compiled slot
+  validation rejects missing/out-of-range action targets despite earlier warning/skip branches. Existing
+  .41.2 owns stale comments that say self-edges duplicate patterns or imply skipped targets are accepted.
+- Inline compiler tests cover association, named/numeric selectors, self references, function versus rule
+  parse errors, family bounds, fluent/action/blind/lifecycle lowering, and the shipped JSON example. Reading
+  these tests is not a fresh test run. Existing .45 continues to own the malformed-rule fallback.
+- Descriptor projection uses pure BTree-backed maps and four root fields, source/dependency order, normalized
+  cursor metadata, exactly five semantic edge keys and separate selector metadata. Legacy missing-ref
+  fallback orders action refs before blind refs. Typed functions use version 3 for parameter kinds, 2 for
+  signatures, and 1 for legacy metadata. Source paths and staged payloads remain authored projections.
+- A descriptor's deterministic last-definition handling of supplied compiled state is distinct from the
+  supported native source pipeline: the earlier asserted CLI control rejects duplicate authored labels.
+  Do not infer duplicate-source acceptance from a projection helper's map policy.
+- Entry resolution borrows ordered immutable state: structural emptiness precedes explicit lookup, then
+  the first authored marker and first authored rule provide defaults. PortableDiagnostic stores sorted
+  fields and LinkedSpecError::diagnostic retains its typed payload. Neither selection nor projection changes
+  authored is_top. Existing descriptor, entry, and slot-identity Knowledge owns these boundaries.
+- Neutral slot/entry checks reverify their contract surfaces without claiming fresh native, generated,
+  emitted, or full optional Rust gate execution. No runtime or public-book change.
+### Rust expression carrier and statement parser reading at `.3.3.5`
+- Activated from clean `cd0e4ff4b74f2a815d9574964c5a29894a8b89ff` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Reconcile the fully read forward expr.rs prefix preserved in 611d7b5c's commit body: lines 1–1496,
+  1,496 lines / 57,175 bytes; SHA-256 51b266fcd7e51daa7b34d67ce1ff7c806e745ec3efdf4e27d3218c1ba615191e.
+  The complete current file remains baseline-identical; suffix reading is separately owned.
+- Typed Expr state distinguishes eager values, inert callable/contextual blocks, expression-segment
+  nested writes, structured mutation callbacks/continuations, recognition nodes, and staged parse-job
+  declarations. Authored source and half-open character spans remain separate from the parser's byte cursor.
+  Display is debug formatting and does not provide source round-trip or serialization guarantees.
+- Recursive selector and recognition scans walk typed nested values, blocks and callbacks. Callable
+  signatures enforce ASCII parameter identity, reserved/duplicate checks and final-rest placement.
+- Staged declarations require literal pair-hash options with closed keys and policies; capability IDs
+  are unique/sorted. Direct capture indices are finite nonnegative integral usize values, while nested
+  nonempty cat plans flatten in authored order. These are inert declaration/AST boundaries, not live
+  parser authority; existing staged-provenance Knowledge owns the accepted runtime consumption paths.
+- The statement parser retains line/semicolon separation and six bare control markers. Attached if/switch
+  forms normalize toward existing statement markers, and while retains a body block. The switch parser
+  continues beyond this range; no suffix credit or fresh native execution is inferred from contract checks.
+- Existing callable, staged, write/mutation, block, hash, and control-flow Knowledge supplies canonical
+  homes. Clarify source-coordinate/debug-display evidence and completed generic callable normalization
+  without reopening historical runtime implementation. All .45–.47/.49 repairs stay pending.
+- Focused neutral staged/write checks plus exact coverage and continuity proof own this documentation
+  checkpoint. No runtime, generated-format, public-book or policy change.
+- The managed metadata wording update repeated the known child-setpgid EPERM warning (PID 19381), then
+  exited 0 with the intended file edit. Consulted project-data-liveness-permission-denial; .7 already owns
+  group-establishment verification. That child's actual PGID was not captured, so no group-failure or
+  lifecycle-correctness inference is made. No recovery/purge was run.
+### Rust expression continuation and existing boundary repairs at `.3.3.6`
+- Activated from clean `2af9c32143a084c1a8296321c3babe1d4a5b3e1f` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Reconcile the fully read forward expr.rs continuation retained in 611d7b5c's commit body: lines
+  1497–2957, 1,461 lines / 54,270 bytes; SHA-256
+  a1cfca66a53c6f8d5704e137213d8605d1c08e4826f72872376f2d1d5461e440.
+  The complete current file remains baseline-identical. Remaining suffix begins at line 2958.
+- Attached controls and nested callable candidates retain their containing character base. Parenthesized
+  block candidates fall back to ordinary eager blocks where callable metadata does not claim them.
+- Nested-write scanning retains expression segments, addressable ASCII roots, authored source and spans,
+  and statement separators. Mutation parsing requires the immediate bang and empty trimmed parentheses,
+  captures the typed callback and continuation in authored order, and rejects bang continuation.
+- Scalar assignment specializes dispatch_span and parse_job into typed declaration nodes. Expression
+  dispatch distinguishes symbolic helpers, regexes, assignments, literals, accesses and typed forms.
+  Hash keys are parsed as expressions; quoted keys establish literal identity. No key-loss defect is
+  inferred from the value of an unbound bare-key expression. Brace classification prioritizes exact {|,
+  then empty/hash-pair payloads, then ordinary eager blocks.
+- Read the exact UTF-8 diagnostic slice at pos+40 and mutation source-boundary checks against the
+  previously measured controls in rust-action-parser-boundary-defects. .46 owns the confirmed isolated
+  core panic; its earlier whole-spec timeout still has no established shared cause. .47 owns whitespace
+  accepted by parsing but rejected by compiled source projection. .45 owns warning/drop of malformed
+  rule blocks, including these typed parse failures. No fix, new panic route, or fresh native run is claimed.
+- Refresh the existing mutation and hash Knowledge with these precise boundaries and managed reverify
+  routing. Neutral mutation checks verify their declared contract only; they do not close the observed
+  acceptance gaps or rerun all native/generated consumers. No runtime or public-book change.
+### Rust lexical boundaries and expression test reading at `.3.3.7`
+- Activated from clean `cbd871c6a6ae53dd91e5eddbd4c73b8fefda0cd7` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Reconcile the fully read forward expr.rs range preserved in 611d7b5c's commit body: lines 2958–4454,
+  1,497 lines / 56,871 bytes; SHA-256
+  83ff42b72d5dd9222751deb14c81e889da99c2c937ceb0b0e388f32e3f180788.
+  The complete current file remains baseline-identical; remaining expression tests begin at line 4455.
+- Callable literals preserve authored body/source and containing character-base spans. Brace scanning
+  skips quoted/regex literals; top-level hash classification excludes namespace and nested colons while
+  retaining retired fat-arrow recognition solely to route source to the rejection diagnostic.
+- Dedicated recognition intrinsics require static bare operands and exact call(rule) shape. Established
+  helper/receiver trailing blocks use the builtin callable forms and exact arities; candidate mode instead
+  defers complete-registry normalization. Postfix literal-string keys remain distinct from expression indexes.
+- Keyword-name recognition is ASCII; ordinary names permit Unicode alphanumeric characters and colons.
+  Strings retain authored escaped content. Numeric parsing accepts signed integer/decimal prefixes without
+  swallowing following fluent chains. These are lexical/source facts, not new cross-backend promises.
+- Regex literal parsing consumes suffix letters after skipping whitespace. The already measured .49
+  defect loses a newline before a following identifier; the .45 rule-block fallback then hides the parse
+  failure. Preserve the four native CLI controls recorded at .3.3.1, and the separate preliminary core
+  build timeout which never ran its source. No failed-build success, fresh .49 native run or repair is claimed.
+- Inline tests cover keyword AST, call-result access, statement versus value marker forms, attached
+  if/switch/while separators, trailing-block contexts, scalar/append/nested-write nodes, and expression
+  hash keys. Reading test definitions does not execute them.
+- Reconcile existing arithmetic/hash/callable Knowledge and the completed assignment-closure pointer;
+  preserve historical roadmap chronology as historical. Record lexical distinctions without duplicating
+  the canonical .49 defect evidence. No runtime, public-book, generated-format or policy change.
+- A new six-control managed Rust CLI/Perl Toolbox lowering matrix isolates adjacent-colon loss after bare
+  hash keys. Four controls return {"a":7}; key:7/key: 7 return null with expected-colon warnings. Perl
+  lowers all six valid forms. parse_name consumes the separator before parse_hash_literal expects it;
+  .45 then drops the initializer. Add repair .50 before Knowledge.
+- The first computed-key control used invalid-on-Perl cat(key), so replace it with cat(key, "").
+  Root-cause the arity difference separately: on a valid explicit-edge fixture, a constant and two-argument
+  cat agree on both runtimes, while cat("a") returns "a" on Rust and null on Perl. Perl lowering requires
+  two arguments; Rust engine.rs 8213–8222 has no arity guard. Add .51 before Knowledge, coordinated with .28.5.
+- The earlier no-edge Perl E cases both returned zero and cannot establish cat behavior; .27 already
+  owns that handler divergence. No zero-argument or other-backend outcome is inferred. Additional diagnostic
+  source coverage is engine.rs 8198–8245 and MethodLowering.pm 5315–5340, without broader reading credit.
+- Preserve exact commands and observed values in rust-hash-separator-and-cat-arity-defects. Public helper
+  spelling and dynamic-key authority are checked; both new repairs remain gated on .3/.4/.5.
+### Rust expression-test completion and core parser entry reading at `.3.3.8`
+- Activated from clean `d3fd3c404cfaa6d6813a26641b0cd0d12e5c9ac7` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Physically read expr.rs 4455–5819 in five untruncated ranges, lib.rs 1–27, and parser.rs 1–78.
+  Total 1,470 lines / 57,396 bytes; all three complete current files equal the reading baseline.
+- Range SHA-256 values, respectively: abc37154ddf9e2c55f6f5ed53e08d988a95a57c770e037ed19d4813f5606ca9f;
+  89a45085bb23b29b06a3b367a9e220b9f5e05605675935b6d4a98d0b15d0d4ab;
+  c230bb65e4318fab648fd36fb033e4a2e5d23cdea0d76d677a4b041744d77d19.
+- Remaining expression tests cover colon migration diagnostics, expression-valued and shape blocks,
+  literal boundaries, typed nested writes, fluent receiver forms, numeric/symbol callees, assignment values,
+  parser errors/separators, and selected Display/serde reconstruction. The expression file is now fully read.
+- The nested-write test asserts exact non-ASCII source/character spans and complete serde equality;
+  older trailing serde tests instead check decode success or statement count, and fluent Display tests
+  inspect selected structure. Preserve these assertion limits in the existing callable-state Knowledge card.
+- Core lib.rs exposes its component modules and derives VERSION from CARGO_PKG_VERSION. The parser prefix
+  collects rule headers/body elements and returns an empty function registry; the existing user-function
+  registry card identifies the runtime spec-defined adapter that populates functions. No missing-feature
+  inference or new adapter execution follows from reading the rule-only parser.
+- Reconcile the current write rollout against its dated neutral updates: all five backend implementations,
+  six-runtime recurrence and public closeout have completed. Clarify the stale pre-implementation path prose
+  and the Rust card's former pending paragraph, retaining original native-test dates and managed reverify commands.
+- Qualify the older duck-typed assignment card's explicit aggregate-selector/storage teaching as historical,
+  linking current uniform-binding retirement. Own the misleading until_target_inference_leaf test name under
+  .41.6 before Knowledge; its valid AssignScalar assertion does not reopen completed implementation.
+- Fresh neutral write/callable/uniform checks validate their authorities only. Known .45–.47 and .49–.51
+  runtime repairs remain pending; no runtime, public-book, policy or generated-format change.
+### Rust body-parser reading and bounded lexical diagnosis at `.3.3.9`
+- Activated from clean `2bdea14f8b54abd7e79b2d66f023b8fdb89fbaa1` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Read parser.rs 79–1574 in six untruncated ranges: 1,496 lines / 49,733 bytes;
+  SHA-256 77358d16bbbad32395002c3109196e91f13fb5d58ad8c492ca5fbe5be80ced9f.
+  The complete current file equals baseline. The remaining parser tests begin at line 1575.
+- Trace wrapping calls the ordinary parser. Headers use pinned Unicode labels, stop modes at whitespace
+  or slash and restore unknown tokens. Inline/body parsing share element classification but differ in
+  unsupported-suffix retention. Action grouped selectors are shared/final-label-adjacent; bare selectors
+  are per-target with optional space; blind edges retain their separate numeric-index grammar.
+- Body classification orders named/anonymous regexes, action/blind edges, lifecycle, gap/split directives,
+  conditional/fluent syntax, standalone I and complete-line bare edges. Block extraction retains authored
+  source separately from normalized interior. Attached branch and multiline fluent helpers have distinct
+  quote/regex/completeness boundaries, so their shared names do not prove equivalent lexical behavior.
+- After Knowledge/Toolbox review, ten paired Rust CLI/Perl Get controls isolate compact space/tab rejection,
+  quoted-parenthesis truncation and invalid header-suffix loss. Compact no-space and braced controls execute
+  the intended I return on both runtimes. Own .52.1/.52.2 and .53 before Knowledge; .53 also owns reviewing
+  the unreachable advanced && !consumed_line branch without claiming a separately observed runtime failure.
+- The raw-regex brace control fails on both runtimes, so do not classify it as a Rust-only issue. Three
+  accepted matches controls show quoted-pattern and /x/ success (Rust true / Perl 1), but /}/ fails Rust
+  compilation and returns Perl null with rule_handler_compile for Top/_default. No boolean parity claim.
+- Three direct primary-bootstrap dumps independently show full control ICODE payloads but the /}/ payload
+  truncated to return(matches("}", / with source ending inside the regex. All report ok=1 and position 67.
+  Perl CURLY_BRACE offers only brace/quoted-string alternatives; Rust outer collection and validation
+  similarly omit regex state. Own .54.1/.54.2 plus later cross-backend/public .54.3, coordinated with the
+  distinct existing attached-tail repair .9. Other backends and generated execution remain unmeasured here.
+- Four direct Perl lowering controls preserve raw regex assignments and quoted/spaced return text. The
+  attempted parser_source_ref capture produced no snippets and establishes no emitted-source evidence.
+  The direct bootstrap owner and native results provide the causal proof. Exact commands live in
+  rust-body-parser-lexical-boundary-defects; all subprocesses completed without timeout.
+- Additional diagnostic source reads cover validation.rs 1056–1079/1080–1190 and Perl BootstrapSpec/Core.pm
+  734–821/1079–1106/1130–1211 plus the BootstrapSpec.pm facade. They do not replace queued validation reading.
+- Fresh neutral standalone/cursor/Unicode proof remains green while these concrete controls fail. Preserve
+  the uncovered boundaries and source mechanisms, update existing standalone/header/attached-tail Knowledge,
+  and retain the earlier .45–.47/.49–.51 repairs. No implementation, policy or public-book change.
+### Rust parser-test, trace and numeric-conversion reading at `.3.3.10`
+- Activated from clean `236aa4d7a3ebd29a669bf653aacd204abfbb3a5b` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Read parser.rs 1575–2084 (510 lines / 17,297 bytes),
+  trace.rs 1–715 (715 / 21,960) and types.rs 1–241 (241 / 7,880): 1,466 lines / 47,137 bytes total.
+  Respective SHA-256 values are 038cb36896049a23e531552924551bacf062f37df3ef2633fd5fe1d5fd6a3498,
+  bc18a16e2b4ab8a12663d93824ce80868237f2365f4d8ff797ea2b30ae8ca421 and
+  752211002be552941faeb1ed9ae8eda839183db633eaa047d5fb72f133615680. Complete current files equal baseline.
+  The parser is now read through EOF; types continues at line 242 in the next leaf.
+- Remaining parser tests cover header-rest compact edges, multiline fluent/control blocks, attached
+  branches, compact I calls, quoted braces/operators, mode/blind-edge and regex-slot order. Those selected
+  assertions do not close .52-.54 lexical cases discovered in the preceding checkpoint.
+- Core trace uses positive integer thresholds, injectable environment lookup and quiet defaults.
+  File routing, mirror fallback and construction-time append/reset are separate from event gating.
+  Fallible emission methods return I/O errors, while trace_decision discards its emission result and
+  preserves the boolean. No new normative sink policy is inferred; typed diagnostic-output sinks differ.
+- Managed locked/offline single-thread core trace target: 7/7. The build retains normal dependency
+  warnings without suppression. Read-only inspection of known project PIDs proves the run remained live
+  despite the unprivileged run listing saying abandoned, matching existing .7. No recovery, purge,
+  signing or cache manipulation; toolchain executables are required read-only host dependencies.
+- Compilation finishes in 17m10s. At 03:41:27.472 +0200, the test binary launched at 03:39:55.031
+  has 112 KiB footprint and all 800 one-second samples at _dyld_start. This locates the sampled interval
+  before Rust main without proving an OS cause. The earlier compiler sample failed after its PID exited.
+  Both exact paths are absent after fully consuming/hash-verifying/removing the 32-line / 1,015-byte
+  test report. macos-rust-first-launch-validation-latency preserves the command, hash and dated bounds.
+- RuntimeValue keeps f64 numbers, ordered hash entries and inert typed codeblocks. Raw serde and to_json
+  are distinct conversions. Generic as_number/as_bool/nonempty/len are not proof of strict helper policy.
+  Four paired Rust CLI/Perl Get cases all exit zero with empty stderr, Rust compile/invoke success and
+  no Perl exceptions/last_error: 42 agrees; signed 1e20 saturates to signed i64 limits only on Rust;
+  two-argument cat of positive 1e20 returns full decimal text on Rust versus "1e+20" on Perl.
+- Engine execute_value_with_context calls RuntimeValue::to_json before the primary CLI serializes JSON.
+  The finite integral branch casts directly to i64. Own .55.1 value-preserving conversion plus related
+  to_str/len/Display consumer audit; only direct numeric output is freshly measured. The full scalar-text
+  authority contains only -0.0, 1.0 and 1.25 numeric examples, so .55.2 must reconcile reference spelling
+  before frozen authority changes; .55.3 owns later public/cross-backend/generated closeout.
+- Additional causal source reads include engine 1930–1952/2656–2686 and primary_cli 318–347. Reading
+  types 242–538 for the Display audit does not replace the next activated range's coverage proof.
+  Exact four-case command/results and proof limits live in rust-large-number-conversion-defect.
+- Fresh neutral scalar-numeric 55 cases / 18 helpers and cursor 36 spellings / 18 edges / 8 parent-child
+  cases / 60 mutations pass. These fixtures do not cover the newly measured magnitude boundary.
+  Existing cat arity .51 and strict helper input .20 remain separate repairs.
+- Trace Knowledge now points to completed August .5.2/.5.4 repairs instead of stale pending state;
+  historical native and canonical results are dated, reverify commands are managed and unsuppressed,
+  and scalar-text fixture claims are bounded. The separate primary CLI trace adapter's 61-case milestone
+  is dated, with later canonical 66-case evidence retained separately from this reading leaf. No runtime, policy, contract or public-book edit.
+### Rust compiled-type, Unicode and validation-entry reading at `.3.3.11`
+- Activated from clean `90321cca4c5f7d460ef66a3e19df871d3a85abbb` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Read types.rs 242–538 (297 lines / 12,071 bytes), unicode_rule_label.rs 1–850 (850 / 20,086)
+  and validation.rs 1–352 (352 / 13,337): 1,499 lines / 45,494 bytes total. Respective SHA-256 values:
+  095766545512956f67d3545377f236184c3b461457fed63d1b548faafe374ffd,
+  28f1a8ffefd324a9191e8cd1bc26dad85ffa7eb6d97edf58106156311d3d114c and
+  1522eab988b4919cda627dbdddbfb86480a5f5897d79ee9d3b0a9c66bc72dc36. Complete files equal baseline.
+  Types and Unicode are now read through EOF; validation continues at 353 in the next leaf.
+- RuntimeValue Display's integral cast remains in .55.1's existing audit, with no additional native
+  failure claimed. Compiled action/dependency records retain numeric/named/unindexed selector provenance,
+  resolved target slot, authored source identity and line defaults; blind entries retain their distinct
+  child/code/fluent carrier. Serde defaults preserve omitted legacy fields without establishing validity.
+- CompiledRule retains authored family, regex rows, gap directives, dependencies and lifecycle ASTs;
+  cursor_policy is derived solely from mode.is_and, never an independently mutable cursor field.
+  Compiled user functions retain typed body plus authored source and optional staged/signature carriers.
+  CompiledSpec's vector lookup and authored top marker do not perform effective entry resolution.
+- Read all 806 inclusive Unicode ranges and all classifier functions. Binary search uses the pinned
+  Unicode 17 scalar intervals; complete labels reject empty, and char_indices plus len_utf8 makes
+  longest-prefix slicing boundary-safe. No host property lookup, normalization or folding is introduced.
+  Fresh managed regeneration checks the JSON/five classifiers/portable regex class at 806/9/8/2.
+- Ordinary and traced AST validators list the same thirteen non-strict passes in the same order,
+  followed conditionally by unused-rule checking. This does not make trace I/O infallible. These AST
+  passes are separate from compiled callable/regex validation documented in the compiler card.
+  Labels are rechecked across declaration/action/blind/bare roles; function registry checks name
+  collisions, variadic signature shape and parameter validity/uniqueness/reservations separately.
+- Existing .41.2 now explicitly owns the stale numbered module-doc reference and incomplete pass
+  inventory. Strict Knowledge's six-check and 237-test counts are dated June evidence, not current
+  inventory. Cursor admission's 3/5, 68-file and 34-mutation counts are likewise dated; its broad
+  entry-selection-only options sentence is narrowed to the actual global-cursor removal.
+- Neutral cursor proof passes 36 spellings / 18 edge / 8 parent-child cases, 74 migration files,
+  8 complete / 0 pending and 60 mutations. Duplicate-slot proof passes 5 fixtures / 2 diagnostics /
+  6 runtime rows / 7 complete + 0 pending / 59 mutations. No native admission matrix is rerun.
+  Update existing Knowledge and continuity; no implementation, policy, public-book or contract change.
+### Rust static-validation and descriptor-test reading at `.3.3.12`
+- Activated from clean `75ce8db839888a5091d25ee4e5e1c3c501daf3b8` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Read validation.rs 353–1541 (1,189 lines / 43,751 bytes), descriptor_test.rs 1–286 (286 / 10,574)
+  and rule_local_cursor_normalization_test.rs 1–15 (15 / 519): 1,490 lines / 54,844 bytes.
+  Respective SHA-256 values: ae31b86aacae09d160e6b95b4717697f108cf7a53fc2ad7c3ad3158b464b030d,
+  3beeedc86c3066001aff5d441bb259d472c4dee9ff7123e40c074d4b6e223da8 and
+  c2fc5cb2e8ec50e0852aef1365eea1cb27cb798a32a1af677bb3dd374ffaf78c. Whole files equal baseline.
+  Validator and descriptor consumer are now read through EOF; cursor test continues at line 16.
+- Function names/params use separate ASCII identifier rules. The registry checks helper/control/lifecycle/
+  runtime collisions and variadic signatures, but its helper list is manual. After Knowledge/Toolbox
+  retrieval, four paired native controls use identical definitions and real explicit-edge execution:
+  custom_value returns sentinel on both; trim definitions fail on both; gap_text and entry_slot execute
+  their user bodies on Rust but fail Perl function_registry with exact built-in collision details.
+- Own .56 before Knowledge: reference-authority/diagnostic inventory, Rust validation repair and governed
+  recurrence, then public/backend/carrier closeout. The Rust validator omits both helper names; engine
+  eval_expr resolves registered functions before ordinary eager-helper fallback. Perl's registry delegates
+  to MethodLowering's known-value-call resolver. Other helper names and generated routes are unmeasured.
+  Exact command and outcomes live in rust-user-function-helper-reservation-gap.
+- Slot metadata validates declaration names/duplicates, skips nonexistent target rules to preserve their
+  established undefined-reference stage, and resolves numeric/named/malformed action selectors. Capture-gap
+  checks reject duplicates and legacy markers and require seek/repetition/action ownership without local
+  parent-regex adjacency. Their frozen neutral checks pass at 9 complete / 0 pending, 63 semantic mutations,
+  34 public mutations, with the existing admission mutation populations unchanged.
+- A second bounded diagnosis finds AND bare validation tests only the old numeric index. Five paired native
+  cases reject Child[0] but accept Child, Child[word], Child[missing] and Child[!]. Accepted Rust cases
+  return ["selected"]; Perl returns null even for plain Child, so do not classify a new return-path defect.
+  Four independent Perl public descriptors erase each accepted selector into the same blind Child row,
+  null regex_index and no resolved_slot_edges.
+- Own .57 before Knowledge: complete-selector diagnostic authority, separate Rust/Perl normalization
+  repairs and later supported-route/public closeout. Rust parsing retains Named/Invalid but sets index
+  only for Numeric; slot validation skips AND bare edges, edge-shape validation checks index only, and
+  compilation emits an unindexed dependency/child call. Perl RuleIR likewise tests defined(index) then
+  drops selector provenance from blind and normalized records. ADR 0044 keeps selection action-owned.
+  Exact native and descriptor commands live in and-bare-nonnumeric-selector-loss; .27 remains separate.
+- Other validation passes derive mixed ownership after bare normalization, reject the retained Raw member
+  only for the same-line I remainder, and balance lifecycle authored outer source or legacy interior.
+  The brace scanner's missing regex state is already .54-owned. Regex literals compile through rgx as
+  a required read-only dependency; no rgx source reading or compatibility expansion is claimed.
+- Strict unused references include action/blind/bare targets, preserve declaration order and add no entry
+  exemption. Managed locked/offline single-thread core validation passes all 21 tests with 180 filtered,
+  after a 1m38s build and 0.82s test execution. No sample was taken for this run's silent interval; do not
+  infer its exact cause from the earlier trace run. Every native/probe process is consumed.
+- The four descriptor test functions assert selected models/orders/staged fields and exact schemas,
+  compiled-state round-trip equality, all 36 cursor families and positive edge rows, and deterministic
+  last-definition projection. Existing descriptor Knowledge already separates that direct projection
+  test from public duplicate-source rejection; no descriptor runtime rerun or new duplicate-rule claim.
+- Root neutral proof passes 8 selection / 3 failure / 3 strict cases and 54 mutations; cursor proof passes
+  36/18/8 at 74 files, 8 complete / 0 pending and 60 mutations. Update registry, bare-edge, strict and gap
+  Knowledge with dated limits. No source implementation, public book, policy or authority contract changes.
+- Required `COMMIT.md` rollover archives exact clean activation lines 253–458: segment 4983,
+  206 lines / 17,316 bytes, SHA-256 274cdb2ddc2b6672965d365d2cb98b0f7800db1e84f491bb2ec4436c2d98a6d1.
+  Independent source-blob/hash/prefix proof passes; all prior manifest rows are byte-identical. After the
+  current record update and one-newline mutable-root EOF normalization, root 255 lines / 26,100 bytes,
+  manifest 24 lines / 14,394 bytes,
+  collection 25 files / 25,411 lines / 2,715,309 bytes. Prior pressure fails only files 25/24
+  and manifest lines 24/23. Indexed ADR 0105 admits those two finite slots before the route mutation;
+  every other ceiling, pattern, authority, lifecycle and immutable segment is unchanged. This necessary
+  storage-infrastructure step selects canonical tier; exact staged receipt, all doctrines and memory
+  checks must pass before commit. Public-book/runtime semantics remain unchanged.
+### Core integration tests and bounded-child authority prefix at `.3.3.13`
+- Activated from clean `1d3715fc70e36e97a8c3be1b114edf9f2e706a11` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Read all six owned ranges without truncation: 1,495 lines / 52,012 bytes. Every complete file and owned range remains identical to baseline `baeb984e36a94a15951cd23d4c52def5064cdaca`. The five initial files reach EOF; bounded-child authority ends after invocation fields at 778, with constructor/dispatch/helpers owned by `.3.3.14`.
+| Repository-root source | Inclusive lines | Bytes | Range SHA-256 |
+| --- | --- | --- | --- |
+| `rust/linkedspec-core/tests/rule_local_cursor_normalization_test.rs` | 16–314 | 11,666 | `38bbb0759cda553948675c376dafc180f34e1b4c3baa92a132a142c58394fe3e` |
+| `rust/linkedspec-core/tests/types_test.rs` | 1–222 | 7,203 | `4f038028a41a9984e64515e74672882f7ed3710a63f3c12de97ab0c2edb5bda7` |
+| `rust/linkedspec-core/tests/unicode_rule_label_contract.rs` | 1–155 | 5,721 | `87c3c10bf41315945a00cf0bd48fa39b4de10228a6d8468d1f9c75305cc8ca13` |
+| `rust/linkedspec-runtime/Cargo.toml` | 1–20 | 533 | `84f14febdd52e5f482f99e8c8724025f09e544e586e44a9f27c4afc62ae04c35` |
+| `rust/linkedspec-runtime/src/bin/linkedspec-rust.rs` | 1–21 | 648 | `2bccab116d4fc9a90fb22f23b1f3af9ba482a1c079525584d457166d44089fba` |
+| `rust/linkedspec-runtime/src/bounded_child_parse_authority.rs` | 1–778 | 26,241 | `d62af837c6ad5d0833c9aefc8ea7abaae3f0fdd14a4a006f023f13aeb9b4fa15` |
+- Cursor tests consume governed families, edge cases and ownership sets, compare selected portable diagnostic fields and dispatch ownership, and preserve physical-line bare recognition. Compiled serde checks are selected projections, not universal equality. Existing `.57` nonnumeric AND bare-selector loss remains outside those fixtures.
+- Type tests cover ParseMode serde, selected compiled identity/policy fields, small-number JSON, typed truth, numeric parsing, nonempty and length examples. Their eight tests do not prove every value variant or complete compiled equality; `.55` large-number loss remains owned. The older logical Knowledge card's no-codeblock claim is qualified against the already current inert Codeblock owner.
+- Unicode tests pin the contract/version/hash and selected positive/negative/prefix cases, exact action/blind/bare identities, and distinct-label compilation. The shared action selector example is parse-only. Invalid-source proof rejects only an invalid full declaration identity, not every malformed source; programmatic negatives cover declaration and action roles. Existing `.53` source-acceptance ownership remains separate.
+- Runtime manifest dependencies remain unchanged. The primary binary delegates OS arguments, writes stdout before stderr, exits one on either write failure, and otherwise preserves the delegated status.
+- The bounded-child prefix owns immutable logical registry records, typed register/load denials, Arc-identity cancellation, the caller clock, opaque execution seeds and shared invocation state. Callback-view clones share expiry and rebase bounded local positions/spans through the original source authority; diagnostic cloning enforces its serialized-byte ceiling. Invocation construction, dispatch ordering, authority narrowing and result/helper validation remain in the unread suffix. Existing `.41.2` owns the stale pre-carrier argument comment.
+- Managed native command `bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline --jobs 1 -p linkedspec-core --test rule_local_cursor_normalization_test --test types_test --test unicode_rule_label_contract` exits zero: cursor 5/5 in 1.13s, types 8/8 in 0.00s, Unicode 5/5 in 0.20s, all with zero failures, ignored or filtered tests. Separate compilation is 21m16s. The retained log `.linkedspec-data/scratch/startup72-core-integration.log` is 800043 bytes / 14132 lines, SHA-256 `8aeb382fabebd30d7763513615b2bfbe25be5ee7219bdc95f201641e2236ff16`.
+- Managed neutral checks pass cursor 36/18/8/60, Unicode 806/9/8/2, logical 17 truth/10 helper/3 effect/26 mutations, and progressive 9/9 with 116 contract/60 public mutations. These do not rerun the separate private cfg-enabled authority consumer or every backend route.
+- Consume `.3.3.12`'s completed exact canonical proof: base `75ce8db839888a5091d25ee4e5e1c3c501daf3b8`, staged SHA-256 `ac76420b0965d071cb2318925d1f4088e427ec2d594869517be16fbb7209f4c6`, receipt promoted to `1d3715fc70e36e97a8c3be1b114edf9f2e706a11`. All nine doctrines, six-family process locality, five relocation anchors, CLI 66/66 twice and Phase 0 1,032/1,032 in 1,142 seconds pass. Twenty-five optional gates/matrices were skipped.
+- The aborted restricted attempt supplies no receipt; existing host-execution guidance is made visible in MEMORY. Eight fully consumed pre-main samples distinguish six aborted-attempt observations from two permitted-run observations without a new OS-cause claim. After identity/count/hash verification and the tracked Knowledge intake, only those eight reports (8,636 bytes / 256 lines) were removed and all ten expected-absence paths verified. Full accepted log identity and sample tables are in `docs/knowledge/macos-rust-first-launch-validation-latency.md`.
+- The same canonical checker reports 76 MCP transport mutations while TOOLBOX section 4.10 twice claims 68. Existing `.41.7` owns those current-count corrections; historical milestones and optional-matrix limits remain explicit. No new runtime defect, source/public repair, policy change, target/cache cleanup, or recovery/purge occurs. Codebase remains No; physical book Yes, formal alignment pending.
+### Child invocation, diagnostic types and engine definitions at `.3.3.14`
+- Activated from clean `9922602583033684ec22466d0b1f3b4669ba497d` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Read all four owned ranges without truncation: 1,494 lines / 50,413 bytes; full files and ranges match baseline `baeb984e36a94a15951cd23d4c52def5064cdaca`. The authority suffix and both diagnostic files reach EOF. Engine stops after `NestedWriteFailure` variants; its implementation and subsequent constructors/entrypoints remain `.3.3.15` and later.
+| Repository-root source | Inclusive lines | Bytes | Range SHA-256 |
+| --- | --- | --- | --- |
+| `rust/linkedspec-runtime/src/bounded_child_parse_authority.rs` | 779–1639 | 28,104 | `f9f29a44a58ea963e422a3e1077cacc2b216c8cb74d55bef36ad368262e3c722` |
+| `rust/linkedspec-runtime/src/diagnostic.rs` | 1–127 | 5,269 | `091f341e9dba870072723ec1f0509be93645cd42b533fe4a1d39796f7228e2ef` |
+| `rust/linkedspec-runtime/src/diagnostic_output.rs` | 1–112 | 3,792 | `8df1c9b681bb15f30e535931249face6308575c17671b17aa0edf5af3056e7d3` |
+| `rust/linkedspec-runtime/src/engine.rs` | 1–394 | 13,248 | `7a274b862455ad5ada9fc1711bae20372c7dc7cd51d6f675168970ae5950b061` |
+- Invocation construction validates decoded source identity, positive depth/call limits and active-chain spans. Dispatch validates literal identities, exact span/source, transaction state, registry/top/capability/policy/resource limits, decreasing-span chain and token/budget/time before charging shared state. Callback return/unwind pops the chain and invalidates every view clone. Successful non-null results recheck cancellation/deadline and detach under node limits; false remains data.
+- Resolved the zero-diagnostic-ceiling concern against private fields and the mandatory positive `ProgressiveCeilings::new` constructor. The existing private test explicitly asserts `éé` becomes `?` under one byte. Supporting constructor and test context is read, not a new native execution. Existing `.37.1`/`.37.2` retain nested resource and source-detail interpretation/census; no new runtime defect is established here.
+- Diagnostic definitions preserve boxed structured context alongside the compatibility message. The current optional inventory includes code, entry, helper/arity, regex-slot and callable/cycle fields; every absent Option omits serialization. Sink clones share Rc/RefCell callback state, concrete sink errors retain identity, and Runtime/Sink/Exit delegate Display/source. Delivery and deepest-rule capture callsites retain later reading/native owners.
+- Engine prefix defines ordered target/slot identity, explicit-action collection families, strict ASCII decimal finite numeric conversion, diagnostic/logical/gap arity, four-field ExecutionOptions and evaluated nested-write segments/failures. The current options card now includes semantic observation plus two doc-hidden execution seeds and qualifies old CLI milestones. Definitions do not prove full invocation isolation or all helper ordering callsites.
+- Fresh managed neutral commands `tools/check_progressive_span_dispatch_contract.py`, `tools/check_typed_source_location_contract.py`, `tools/check_diagnostic_output_contract.py` and `tools/check_scalar_numeric_contract.py` all pass through `bash tools/run_python_project_data.sh`: progressive 9/9 with 116 contract/60 public mutations; typed source 14/0 with 231 mutations; diagnostics 3 helpers/11 render rows/6 scenarios/8 complete/20 mutations; numeric 55 cases/18 helpers.
+- The unchanged-source four-carrier canonical result at `1d3715fc` remains dated native evidence. No private cfg-enabled authority, diagnostic delivery or complete engine native suite is freshly claimed by this documentation leaf. Four existing Knowledge owners are reconciled; runtime, public book and policy remain unchanged. Codebase No; physical book Yes, formal alignment pending.
+### Generated engine loops and split boundaries at `.3.3.15`
+- Activated from clean `7d6c9f8b52f7417175725950a62afa8310c647d5` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Read engine lines 395–1894 in five complete 300-line chunks: 1,500 lines / 56,911 bytes; full-file and range identity match baseline `baeb984e36a94a15951cd23d4c52def5064cdaca`. Range SHA-256 is `3dcd4d3eb399242762e8cdf4a70a554ee200066cc9d8c665d69bc99cc747b6c6`. This completes `GeneratedPlanExecutor` and starts `Engine` construction through `spec_name`; `.3.3.16` owns line 1895 onward.
+- Nested-write/receiver diagnostic formatters retain typed failure fields, evaluated path and authored Unicode-scalar spans. SavedMatchState covers entry/local groups, spans, presence and capture offsets. Byte-to-char and next-boundary helpers require valid internal boundaries; scalar substring helpers iterate characters. Literal/regex and mutation-target adapters remain distinct.
+- Generated families route to action/blind loops with source/family/rule traces, ordered target/slot identity, semantic match observations, child accumulator truncation and entry-slot propagation. Wrappers manage recursion, variable scopes and recognition frames around Result return. Action execution keeps flagged candidate-before-LS/commit-after-LE/tail timing and unflagged LS-before-selection, explicit collection, AND sequence and repetition/progress guards.
+- Blind execution distinguishes repeated AND sequence completion from repeated OR choice and ordinary AND accumulation from OR first-match behavior; recognition outcome is separate from trace truth text. Saved return/match data restores on normal and explicit-return paths. This source checkpoint does not assert universal error-recovery restoration, native emitter freshness or completion of later engine bodies.
+- Managed locked/offline CLI build passes in 16m27s. Seven identical Rust/Perl pure-split specs produce five empty-source/empty-delimiter differences and two equal controls; all fourteen compared commands exit zero without stderr. Rust literal splitting uses host string behavior; its regex loop emits the initial empty slice before a zero-width match. Perl dumped handlers use split with -1 and omit that initial field. The separate public helper arm at 8415–8444 confirms delegation. Existing .33.1 owns contract census and .33.2 explicitly owns pure-split repair/recurrence. Full cases, hashes and commands are in `docs/knowledge/tagged-record-evaluation-and-split-drift.md`; other runtimes/carriers remain unmeasured here. An initial collector's optional-trace JSON assumption was corrected after a raw protocol control; only its empty output file was removed.
+- Seven managed neutral checks pass: write 5/7 syntax, 11 successes, 16 structural failures and 105 mutations; receiver mutation 4/14/5 syntax, 10 successes, eight pre-commit failures and 167 + 592 mutations; cursor 36/18/8/60; gap 9/0/63/public34; duplicate slots 5/2/59; recognition 138/250/58; generated metadata ten families, strict Rust 105/105 and census 100/0/0. The neutral v1 checker label does not change Rust artifact format 2.
+- Updated existing Knowledge owners and kept historical native evidence dated. Public/runtime/policy repairs remain gated on startup prerequisites. Codebase No; physical book Yes, formal alignment pending.
+### Engine invocation routes and native entry dispatch at `.3.3.16`
+- Activated from clean `69dacfc66475fe2458ab9ba35dc67e1d3d2d0a23` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Read engine lines 1895–3394 in five complete 300-line chunks: 1,500 lines / 60,181 bytes; full-file and range identity match baseline `baeb984e36a94a15951cd23d4c52def5064cdaca`. Range SHA-256 `ef31712d5bd310e7ed44778a3821dc484891cc9ea0086693374d1fdd9aaeb3ee`. The native blind loop is complete; `.3.3.17` owns the regex loop from 3395 onward.
+- Fresh contexts preserve accumulator/direct projections and optional trace, diagnostic, semantic and authority channels. Root errors use validate_spec/no_rules_defined or select_entry_rule/entry_rule_not_found; later child lookup stays separate. The diagnostic finish adapter prioritizes retained Sink, then Exit, then Runtime; generated trace replay preserves Sink/Exit outcomes.
+- Native direct entry starts staged authority and installs observation/child authority before typed-write/slot checks and root resolution. Generated contexts expect caller-validated input; supporting source-emitter 355–420 and 997–1030 confirm typed-write/receiver validation before emission and after decode. Parent semantic result precedes staged completion, so it does not certify enrichment or trace success. No combined failure is freshly measured here.
+- Native dispatch balances recursion, recognition and variable frames around Result; body errors capture attribution before unwind, child accumulator additions are truncated, and passive action terminals are skipped. Selected matches retain ordered slot identity, entry/local captures and scalar observation positions. Blind repeated AND/OR, ordinary AND value collection, lifecycle order and progress checks remain distinct. Existing .41.2 owns stale own-regex comments; no blanket error-restoration guarantee is inferred.
+- Four fresh managed neutral checks pass: root 8 selections/3 failures/3 strict/7 complete/54 mutations; semantic 6 groups/20 queries/128 mutations/9 complete/6 admitted; diagnostics 3 helpers/11 render rows/6 scenarios/8 complete/20 mutations; staged 9 rollout/123 mutations plus public6/17/10/129. Native results remain dated; five existing Knowledge cards are reconciled. Codebase No; physical book Yes, formal alignment and runtime/public/policy repairs stay pending.
+### Native action loops and nested-write coordination at `.3.3.17`
+- Activated from clean `b06b27cfef0b30487b32de29b5e2b8dbe8801d6e` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Read engine lines 3395–4887 in four 300-line chunks and one 293-line chunk: 1,493 lines / 60,008 bytes; full-file and range identity match baseline `baeb984e36a94a15951cd23d4c52def5064cdaca`. Range SHA-256 `10bef263c4791d83770e194ef19fc0fa8c5c9894e075433f0109d06a201c018c`. The native loop, dependency scanners, fluent action execution, statement controls and nested-write coordinator/classifier are complete; `.3.3.18` owns the recursive container-write body from 4888.
+- Native regex execution derives cursor policy per iteration; flagged candidate-before-LS, commit-after-LE/before-IT and successful terminal tails preserve unflagged ordering. Repeated AND tracks slot sequence separately from complete repetitions. Explicit action values collect per hit, lifecycle returns retain whole-rule control, and minimum/progress/normal-return paths remain distinct.
+- Eager child-call/retv scans traverse current typed arguments and callbacks but ignore inert literal construction. Direct observation/self-edge branches avoid implicit pre-dispatch; other blocks either scope the prior child result or run before child dispatch. Fluent push preserves matching child slot identity; statement gating, symbolic switch cases, condition-before-limit while, I-phase direct-binding tracking and typed array transforms retain their separate boundaries.
+- Nested writes evaluate segments left-to-right then RHS before classification and binding snapshot. Classification retains authored spans and evaluated path prefixes; the coordinator publishes only after recursive construction succeeds. Recursive helper internals and full guard/evaluator bodies remain later reading. Four native diagnostic controls confirm dense append/gap behavior and a saturated write index: exact 2^64 is reported as usize::MAX, while the next representable larger value is an invalid selector. Existing .55.1 owns repair; hashes, retained harness and precise limits are in the numeric Knowledge card. Three prior CLI controls expose only generic invocation failure.
+- Six managed neutral checks pass: gap 9 complete/63 semantic/34 public mutations; repeated result 8 modes/10 specials/8 complete/54 mutations; write 5/7 syntax/11 successes/16 structural failures/105 mutations; binding 11 migrations/7 executions/6 invalid selectors/8 constructors; callable 7 literals/11 calls/23 mutations; logical 17 truthiness/10 helpers/3 effects/26 mutations. Historical native/carrier counts remain dated. Codebase No; physical book Yes, formal alignment and runtime/public/policy repairs remain pending.
+### Recursive writes and expression invocation scopes at `.3.3.18`
+- Activated from clean `1f38a1eae9fda6c487d32e0fad783f15f6f67d9e` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Read engine lines 4888–6385 in four 300-line chunks and one 298-line chunk: 1,498 lines / 58,503 bytes; full-file and range identity match baseline `baeb984e36a94a15951cd23d4c52def5064cdaca`. Range SHA-256 `ccca6acdfb4fd3c40a827d0fc600effd2d6d446ce76224504e4cc0919ed8e0e0`. Recursive writer, array-end/child-push helpers, guard/site scanner, full expression dispatch, user-function/codeblock invocation and method classifiers are complete. `.3.3.19` owns the trailing-block chain continuation from 6386; bang traversal and context identity internals remain unread.
+- Recursive writes build missing intermediates from the following selector, reject kind conflicts and array gaps with exact path/span context, and publish only through the preceding coordinator on success. Read access keeps its separate numeric-coercion/undef behavior. Array-end mutations start only on bare receivers and pass their updated array to subsequent value calls; child-push resolves compiled-rule dispatch before its destination and may reuse the scoped child result.
+- Expression guards precede evaluation and delegate active target identity to RuntimeContext. Source scanning supplies first-per-attempt diagnostic sites with Unicode-scalar conversion, not identity authority. Expression dispatch keeps lazy controls, typed progressive/staged/recognition nodes, eager user-function arguments, inert codeblock construction and receiver families separate. Recognize-once cancels its scope on child error; observation finishes and stores its descriptor before returning the child Result.
+- Named functions take/restore all caller stores around fresh fixed/rest bindings; callable values install/restore parameters individually around the caller's other stores. Both clean up after body Result. Complete body evaluation, helper fallback, context identity and traversal internals retain later owners. Five Knowledge owners distinguish current source observations from dated native/carrier evidence; the user-function corpus count is historical and the codeblock card points to the subsequently completed generic normalization.
+- Four managed neutral checks pass: write 5/7 syntax/11 successes/16 structural failures/105 mutations; bang 4/14/5 syntax, 10 successes/8 pre-commit failures/167 base + 592 composition mutations; callable 7 literals/11 calls/23 mutations; binding 11 migrations/7 executions/6 invalid selectors/8 constructors. No fresh native run, runtime change or new defect claim; codebase No, physical book Yes and formal alignment/repairs remain pending.
+### Receiver traversal and final-assignment guard diagnosis at `.3.3.19`
+- Activated from clean `acbadc0fce4abdc03585c0fd26c9a1f7545958e2` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Read engine lines 6386–7878 in four 300-line chunks and one 293-line chunk: 1,493 lines / 55,743 bytes; full-file and range identity match baseline `baeb984e36a94a15951cd23d4c52def5064cdaca`. Range SHA-256 `f6072a21e05fe62ac2e290ec8815226d99ed0dddb2f9153dec25b0ea14cf073e`. Complete trailing-block routing, pure/bang traversal and callback frames, all receiver value-chain bodies, value-block/while/final-expression evaluation, helper with and scalar-target resolution; `.3.3.20` starts the next target/helper window at 7879.
+- Pure hash traversal is sorted-key DFS through hashes only; arrays recurse by index through arrays only. Cross-kind aggregates are leaves. Walk returns the snapshot, map rebuilds without revisiting replacements, reduce threads its accumulator. Callback/initial-value expressions evaluate before root-kind dispatch; contextual callbacks take zero positional arguments, explicit callables take the leaf/receiver, and temporary frames restore after Result.
+- Bang traversal activates resolved identity, rebuilds the original shape, releases its guard on callback failure, publishes after complete success, then releases before continuation. Dynamic receiver calls retain family/terminal checks, numeric arity gates and join_values argument placement. Value blocks skip inactive branches, handle local returns before final-value evaluation, and propagate loop returns separately from ordinary continuation.
+- Six paired Rust primary CLI/Perl Get cases plus six direct native diagnostic cases confirm final scalar/nested same-receiver assignments bypass Rust's guard; nonfinal/explicit-return controls reject and an unrelated final assignment agrees. eval_block_final_expr dispatches these assignments directly, omitting eval_expr's guard; nonfinal statements keep their own guard. New .58.1-.3 own repair, carrier recurrence and public closeout after prerequisites. Exact sources/values/diagnostics/spans/artifact hashes live in rust-final-value-assignment-receiver-guard-gap; no generated or other-backend result is inferred.
+- Four managed neutral checks pass: bang 167 base/592 composition mutations; write 5/7 syntax/11 successes/16 structural failures/105 mutations; callable 7 literals/11 calls/23 mutations; logical 17 truthiness/10 helpers/3 effects/26 mutations. Manifest census is 105, not a fresh corpus execution. Six Knowledge owners retain dated native proof and qualified claims. A one-second compiler sample locates all 798 worker frames in procedural-macro dlopen/fcntl; compilation and six probes later complete without intervention. Sample/image inventory retained, exact observation in existing latency card. Codebase No, physical book Yes, formal alignment and runtime/public/policy repairs pending.
+### Helper dispatch and substitution composition diagnosis at `.3.3.20`
+- Activated from clean `14a66b821d3ebb64eb91781ebd44e0b80e1f2030` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Read engine 7879–9278 in five 250-line chunks and one 150-line chunk: 1,400 lines / 65,528 bytes, full-file and range identity equal to baseline `baeb984e36a94a15951cd23d4c52def5064cdaca`; range SHA-256 `efaac6843678440f2636d90bcaa523911a2e43f37a4e4eeb5d7f5d6ae57248fb`. Complete target/aggregate argument and raw-name resolvers plus the helper prefix. The range ends inside match_end_line; .3.3.21 owns its suffix and later helper arms.
+- Bare target admission is explicit; aggregate consumers use private snapshots or scalar-held aggregates according to binding kind. Only explicit flat forms splice list/hash contexts. Raw rule/mark/capture identifiers retain symbolic identity. The central helper validates numeric arity, snapshots trace context, and dispatches assignment, return, constructors, copies, child calls, gap/capture, substitution, splitting, string transforms and diagnostic output.
+- Entry/match/anonymous/named capture helpers route through typed span/position authority; successful take operations advance boundary state only after valid reads. Noncursor readers stop at local match start, cursor forms at cursor, rest forms at input end. Rule-local mark copy deletes the destination when its source is unavailable. capture_until_boundary compiles valid named-rule patterns, selects the earliest next boundary, and advances only after a valid typed span; no valid boundary rule yields undef.
+- Ten paired Rust primary/Perl Get cases separate four ordinary flag controls, four active-receiver calls and two unrelated callback writes. Bare-g ordinary substitutions agree. Quoted flags diverge in Perl; all six callback calls become unsupported-helper sentinels with unresolved=1/ready=0, while Rust executes substitution and omits active-receiver protection. Lowered/generated text pins the Perl statement/value dispatch gap, and Rust receiver_write_attempt plus direct set_scalar pins the guard omission. .59.1-.59.4 own flags/lowering, target guard, carrier recurrence and public closure; .58 remains the separate final-assignment repair. Exact sources, results, error type/stage and hashes live in regex-substitution-callback-and-flag-discrepancies.
+- Four managed neutral checks pass: typed source 14/0/231 with 92 helpers/7 aliases; gap 9/0/63 plus public 8/15/10/34; diagnostic output 3 helpers/11 render cases/6 scenarios/8 complete/20 mutations; binding 11 migrations/7 executions/6 invalid selectors/8 constructors. Five existing Knowledge cards are reconciled and one added; .41.2 owns stale target/rule-label comments. No compiler or unconsumed job remains. Native generated/other-backend coverage is not inferred. Roadmap Yes, codebase No, physical book Yes; formal alignment and repairs remain pending.
+### Helper completion and slice/scalar boundary diagnosis at `.3.3.21`
+- Activated from clean `19e943a4b7cbe68a5f538ff3f0ef17c54fc549f3` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Read engine 9279–10777 in five 250-line chunks and one 249-line chunk: 1,499 lines / 59,677 bytes. Full-file/range identity equals baseline `baeb984e36a94a15951cd23d4c52def5064cdaca`; range SHA-256 `5fddd27a6b96bc622094a58f78d0fe597a9d721d2388d6b43992f58a523e7f3d`. Complete match_end_line suffix, remaining helper implementation, and test-module prefix through the unknown-helper table; `.3.3.22` starts the scalar/capture test group at 10778.
+- Local match presence gates match length/offset/group results; optional coordinate inputs use typed authority independently. String length preserves array cardinality but string transforms coerce through to_str. Scalar arithmetic uses strict numeric conversion and finite-result normalization; min/max reject any invalid array item, while sum/avg/median/range filter generic numeric conversions. Array selection returns copies, equality/search use text, explicit flat forms retain contextual splicing, merge_hash updates existing keys, and hash view helpers preserve their specific order/default policies.
+- Cursor control delegates to typed context. and/or consume already-evaluated operands; if/elseif/while evaluate raw conditions and selected bodies. Switch compares its coerced subject with case labels rather than using truthiness. While checks its condition before the iteration ceiling. Unknown helper fallback tries bound codeblocks, uses typed failure inside an active codeblock, and otherwise warns/returns undef. Knowledge corrects an overbroad switch-truthiness sentence.
+- Six paired array-slice controls show valid/exact-end agreement and four Rust panics where Perl returns []; a seventh Rust-only large-count case overflows start+n. Eleven total paired cases include five scalar vectors: literal undef and unbound identifier null both reveal seven transform discrepancies and false-input predicate/empty-old replacement drift; empty-string transforms agree. Twelve descriptors are ready/unresolved=0; exact lowerings/generated source show Perl bounds/defined/empty-needle guards. .60.1-.60.3 and .61.1-.61.3 own repairs, carrier proof and public closure. New slice/scalar cards retain 72 artifacts/360,400 bytes plus manifest identity. No generated execution or other-backend result is inferred.
+- Test reading distinguishes value versus wrapper assertions, entry selection, recursive observation binding before error propagation, lifecycle/REP, blind calls, declarations and unknown fallback. Some legacy smoke tests assert only shape or marker membership; reading them does not prove exact order, repetition count or accumulator content. Three managed neutral checks pass: logical 17 truthiness/10 helpers/3 effects/26 mutations; scalar numeric 55 cases/18 helpers; typed source 14/0/231 with 92 helpers/7 aliases. Four existing Knowledge owners reconcile and two are added. All jobs are consumed; no compiler ran. Roadmap Yes, codebase No, physical book Yes; formal alignment and runtime/public/policy repairs remain pending.
+### Capture/control test reading and default-selection diagnosis at `.3.3.22`
+- Activated from clean `bcc2b2abd9d59ab76b3796227bee0102c5472fae` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Read engine 10778–12246 in five 250-line chunks and one 219-line chunk: 1,469 lines / 52,089 bytes. Full-file/range identity equals baseline `baeb984e36a94a15951cd23d4c52def5064cdaca`; range SHA-256 `d74f74006d1009d4732dcde8aa1795e334541f22cb9c3207c2c3920b55de3ee8`. All owned source bytes are read; next begins nested-write tests at 12247.
+- Exact assertions distinguish whole-match text, captures-only compacted indexing, absent null, named reads/maps and numeric presence. Control tests check branch values and skipped exit_now bodies; some save/restore retry tests only check success, and return_undef-after-return only checks outer shape. Those weaker assertions do not prove the behavior suggested by their names. Extend .41.2 to stale entry/local identity comments.
+- Unicode tests check character substring/slice/position/column/length values. Input-end line/column, named marks, deletion/reversal, and anonymous span/take families pin their individual endpoints and post-read cursor advances. Explicit OR{1,1} fixtures isolate a single seek. Boundary capture checks both annotations and the first cursor/rest; callable failure restores the previous parameter and active identity. No fresh native unit run is inferred from reading.
+- Five paired Rust primary/live Perl Get controls confirm coalesce skips defined empty text/aggregates and both coalesce variants execute later assignment operands. Perl keeps the selected defined value and skips later assignments. Source shows omitted lazy dispatch, the coalesce nonempty test, and recursive Perl conditional lowering. Five descriptors are ready/unresolved=0; actual generated/lowered captures retain conditionals. .62.1-.62.4 own definedness/laziness, receiver routes, permanent carrier/backend recurrence and public canonical closure. Aggregate contract admission remains explicitly pending.
+- The ephemeral original Perl collector stringified JSON booleans; a Boolean-preserving rerun proves this was an observer artifact, not Perl false-kind drift. Retain both versions and use only typed results for product claims. New coalesce Knowledge plus four reconciled owners retain exact limits and a 40-file/158,215-byte artifact manifest. Three managed neutral contracts pass: logical 26 mutations, typed source 14/0/231, rule-local cursor 36 spellings/60 mutations. All jobs are consumed; no compiler ran. Roadmap Yes, codebase No, physical book Yes; formal alignment and runtime/public/policy repairs remain pending.
+### Engine suffix, regex wrappers and nonzero-cursor context at `.3.3.23`
+- Activated from clean `fe3cabf1934eaf7181745091f7a5d423c991b895` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Read engine 12247–12694 (448 lines/17,318 bytes; SHA-256 `24430ed2a65031d349f6a20d0e8f521d9f8d49da1bc6ccd5666ac6499c192716`), complete helpers.rs (850/33,507; `850047e85f82e0ab3799e02960c245c49077ab3e7bde593c83887b187bffeb3e`) and runtime lib.rs (66/2,440; `3f69d8e02549bf76d3f3495935403b6f87b65f0e9a14c74885f4412b2f64112c`). All 1,364 lines/53,265 bytes and full files equal baseline `baeb984e36a94a15951cd23d4c52def5064cdaca`. Engine comprehension is complete; next reads embedded MCP contract bytes.
+- Nested-write tests assert exact segment/RHS order, structural error fields and preservation of RHS effects without partial publication. Detachment tests mutate all four value carriers independently; expression failures assert the completed prefix and read exclusions retain original state. Receiver tests assert callback rollback with unrelated effects, release via a successful second invocation, post-commit continuation failure and selected guard-before-evaluation routes. Those tests do not cover .58/.59 final-assignment/substitution exceptions.
+- Regex wrappers normalize ASCII named captures, lower-unbounded quantifiers and one leading positive flag toggle, retain individual compiled slots and wrap each branch for combined choice. Extraction separates internal groups from compact participating captures/absolute spans and named values. Tests check ties, duplicate required slots, optional/empty captures and normalization; reading does not imply fresh native execution. Public lib exports include source_emitter and hidden staged generated-consumer authority; .41.2 already owns its stale no-generation sentence. Reconcile the old emitter card's 8/91 milestone with admitted 105 coverage.
+- Six informative collected-rule pairs on xhello show plain agreement and five Rust discrepancies for ^, input-start, positive/negative fixed lookbehind and word boundary after consuming x. helpers.rs slices input[pos..] in all three matching implementations; Perl LinkedRE retains the original scalar/pos. Six generated/descriptor captures preserve both dispatch slots and three ready/unresolved=0 rule records. .63.1-.63.4 own whole-input seek repair, consume/required slots, carrier/backend recurrence and public closure. Only ordinary choice seek is freshly exercised. The initial six null-only chain probes are retained as inconclusive observation scaffolds, not parity proof.
+- New regex-context Knowledge plus six reconciled owners retain exact source/limits and 37-file/618,941-byte evidence manifest. Three managed neutral contracts pass: writes 105 mutations; receiver mutation 167/592; slot identity five fixtures/two diagnostics/59 mutations. Exact result/error and source/descriptor assertions pass. No compiler ran and all jobs are consumed. Roadmap Yes, codebase No, physical book Yes; formal alignment and runtime/public/policy repairs remain pending.
+### Embedded MCP contract prefix and generator identity at `.3.3.24`
+- Activated from clean `71e6df55437e017af6719de0d5dab3ff42330ae7` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Read module lines 1–6 (297 bytes; SHA-256 `15bd59bda5fca3d501c833233048c1c469b1a9e763203ad6cf74d588240c43f2`) and file bytes 298–65536 of line 7 (65,239 bytes; `265dc365798d2970032cfe024b9fa0fc014d7fefbff6c6c16f4d2c2ab83f0ce0`) in eight 8,000-byte segments plus one 1,239-byte segment. All 65,536 owned bytes/full module equal baseline `baeb984e36a94a15951cd23d4c52def5064cdaca`. The final fragment ends inside semanticQueryRequest.additionalProperties; .3.3.25 begins at file byte 65537. Full-module machine identity does not claim suffix physical reading.
+- Read all canonical frames, contract manifest, corpus and schema prefix: server discovery and two read-only tools; canonical semantic text plus structured content; semantic ok=false separate from transport isError; fixed error envelopes; lowering-only explicit policy overlays; opaque host-registered handles; metadata/transport ceilings and EOF lifecycle. Corpus retains 35 ordered canonical frames, ten raw cases, ten lifecycle cases, four handle states and four policy cases. The visible tool schemas retain 72 fact keys, 128-character/UTF-8-byte contract strings, exact budget/page ceilings and read-only annotations.
+- Supporting complete reads: tools/generate_rust_mcp_contract.py 52 lines/1,822 bytes SHA-256 `081e231298aad254499681fbfc04a5be0e343358896770d865a39b7a5c49f7ca`; tools/mcp_contract_binding.py 138/5,192 SHA-256 `c1290d629cb471f5bc27cbc1ed9b745128a8bed95ecfa31a5ad1ca84018dad36`; both baseline-identical. The builder verifies exact seven-path/digest inventory, root containment, object decoding and canonical frame order/encoding. The renderer hashes canonical JSON and selects safe Rust raw delimiters. Default generator mode checks bytes; only --write rewrites.
+- Fresh managed generators confirm Rust 83,225 bytes and Perl 83,411. Exact decoded reproduction verifies Rust module hash `7473a113474d090a1304ffc0d419de18b6b97c10639e7a484e5625abc83e7ece`, embedded JSON 82,882 bytes/hash `a1d2857c57ef93ea0e62403977105fdf6380f6fcb4d7a89ed5749c1bfdd64001`, and manifest hash `e068519994a7d4fb8e4c8ece0e277a470f48204d4c670f915ba49052a52630b3`. Four success-frame text/structured pairs are exactly equal; two Knowledge owners qualify old sizes and retain current scope. Neutral transport 35/10/10/76 and admission 5/5+6/6 complete/141 pass. No native server or six-runtime execution is rerun, no compiler ran, and all jobs are consumed. Roadmap Yes, codebase No, physical book Yes; startup alignment and repairs remain pending.
+### MCP bundle suffix, frozen schema runtime and registry dispatch at `.3.3.25`
+- Activated from clean `83b9bfe3435d5c8a71303dc1a48081a0bca61aed` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Read mcp_contract.rs file bytes 65537–83225 (17,689 bytes; SHA-256 `107aa4596c942253f445b4969bbf0d1d2bdbf86e2c8a964820ba15b4c9456c2e`), complete mcp_contract_runtime.rs 1–582 (19,931 bytes; `a048e41cac8a701a90c0189688576f24dabe6e19e490bef6eb8e957886a59a21`), and mcp_server.rs 1–769 (27,514 bytes; `190dc4430715ea23174db46f150bbef5978e79c417ca2f4492f6799a6667fa01`). All 1,352 lines/fragments and 65,134 bytes/full files equal baseline `baeb984e36a94a15951cd23d4c52def5064cdaca`; every range was read without truncation. The complete generated MCP module is now physically read.
+- The bundle suffix completes semantic schemas, recursive shapes, tool/error shells, four semantic payloads and seven hashes. OnceLock verifies the frozen binding once; callers receive clones. The bounded validator implements exact local refs, recursion 256, object/array/composition rules, character/byte limits and two specific patterns rather than general JSON Schema. Server registration validates host index capabilities, authorization/clock/capacity/expiry and lowering-only explicit policy, then creates a unique handle in at most sixteen attempts. Prepared dispatch, cancellation and shutdown retain/clear ownership deliberately; direct dispatch clears after response creation.
+- Rust source confirms the already-owned `.36` order discrepancy: unknown method, then unsupported version, then complete named schema. ADR 0058 still references ADR 0055 metadata-first ordering. Existing Knowledge and `.36.1` now include this bounded source evidence; the dated six Perl paired controls remain distinct from unexecuted mixed-failure Rust controls.
+- The exact existing native entropy/clock/panic test passes 1/1 (177 filtered; 2.43 test seconds, 524.920 total, reported build 6m10s) with --exact --nocapture. Its private synthetic panic returns fixed -32603 while captured stderr prints the fixture text and source location; the server source installs no panic hook. The assertion covers returned JSON only. New Knowledge `rust-mcp-caught-panic-stderr-gap` and `.64.1`–`.64.4` own host/library output scope, bounded repair, isolated-process recurrence and public/canonical closure. This does not demonstrate external panic reachability, real-data disclosure, or other-runtime behavior. Captured stderr 798,784 bytes SHA-256 `7faf686c80974299e418a53af61d8034329ba65317c706d13992218010bf1bc2`; stdout 192 bytes `4f4ab0684f4f3998ded7103755a7cb0020b1d8f3fc1e97d2454daa364f7d4b11`; exact command/status and hashes are durable in the fact card.
+- Managed Rust binding is byte-fresh (83,225); neutral transport 35/10/10/76 and admission 5/5+6/6 complete/141 pass. Dependency build warnings remain separately owned (1,870 pgen/26 rgx-core). All native/neutral jobs and results are consumed; no artifact recovery/purge or runtime/public/policy repair occurs. Roadmap Yes, codebase No, physical book Yes; startup alignment and queued repairs remain pending.
+### MCP server suffix, strict wire and EOF byte boundary at `.3.3.26`
+- Activated from clean `d495001609729b0a753a2a1a1551aacbd6089ffa` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Read mcp_server.rs 770–1342 (573 lines; 20,152 bytes; SHA-256 `38ff83e81b71e22e93697d11b2691d52d0985e87edbee813c2ca24a6ed5f67ee`), complete mcp_wire.rs 1–759 (25,848 bytes; `261136a3af1acde8135152d60a6947cecceddc574fa1d4167f7ed60927c83c15`), and primary_cli.rs 1–168 (5,296 bytes; `af9a39d488ba049ef264ad31f8ced17e7a8e283880379c9dc985eb1b1cf88fdc`). All 1,500 lines/51,296 bytes and full files equal baseline `baeb984e36a94a15951cd23d4c52def5064cdaca`; every range read without truncation. Server and wire are now physically complete.
+- Server suffix projects lowering-only capabilities, checks explicit source/digest/page/budget components and preserves omitted native diagnostics. Tests use dispatch counters for six denied changes, plus registry and cancellation ownership. Wire retains bounded fixed chunks, decoded duplicate-key/depth/escape/number/id evidence, canonical LF output and prepared lifetime through flush; ordinary I/O failure clears ownership and emits only optional fixed text. Its dispatch-only catch extends `.64.1` source scope, without claiming arbitrary Read/Write panic coverage. CLI prefix separates output bytes/status and implements trace routing/reset/append/flush; remaining event/parser source stays next.
+- Six existing native wire tests pass (172 filtered; 0.03 test seconds; 280.452 total, reported 2m42s build), including ordinary EOF and maximum CRLF separately. Twelve independently valid padded discovery frames around 1,048,576 bytes across EOF/LF/CRLF isolate a missing combined boundary: Rust accepts 1,048,577 bytes at EOF, Perl rejects -32700; all other eleven pairs agree. All calls reach normal EOF with one response and no optional log; Rust responses are exact canonical LF, compiler/program stderr empty. The root cause is retained maximum+1 CR allowance going directly through Rust EOF/decode without a final length check; Perl decode independently checks length. Supporting Perl MCPWire.pm 1–175 and MCPServer.pm 274–340 are baseline-identical; the initial unsupported log_handle diagnostic was corrected to log before any accepted cases ran.
+- New Knowledge `rust-mcp-final-eof-byte-limit-gap` and `.65.1`–`.65.3` own Rust repair, delimiter/chunk/size recurrence plus six-runtime census, and public/canonical closure. Exact paired results 2,250 bytes SHA-256 `6df59fc3c3c5c61aed49f5acb976539c00035a7093333f0d38b1c68bd34fb23b`; scratch retains 44 files/3,996,953 bytes plus 6,144-byte manifest `315fbebf2999b26bd528703cc3c338613f5c4b3536b5b28604e4160abc29ace4`. Probe uses verified existing runtime rlib `7cbddb91b8c3043adaf709ae4344f94cf0b17f80e25569456445285648f8c972`, managed compilation 35.867 seconds after the unit job, public execution 0.468. No other-runtime or unbounded acceptance is inferred.
+- Neutral transport 35/10/10/76 and implementation/admission complete 5/5+6/6/141 pass. Existing pgen/rgx-core build warnings remain independently owned. Rust MCP, panic-output and trace Knowledge owners now reflect precise source/proof limits. All jobs and results are consumed; no artifact recovery/purge or runtime/public/policy repair occurs. Roadmap Yes, codebase No, physical book Yes; startup alignment and repairs remain pending.
+### Primary CLI completion and recognition authority prefix at `.3.3.27`
+- Activated from clean `03f4577ae239c2e7015f03554b77b0eb95d523d1` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Read primary_cli.rs 169–796 (628 lines; 20,657 bytes; SHA-256 `71eda498bf259b4a1e8417e6f4053b55a9fdde9c91711da6761d5cb8ad063b66`) and recognition_transaction.rs 1–872 (29,643 bytes; `dfedf17926e9398947f808724f52fcbfc3ea244d30f26c371ff632117ab396b1`). All 1,500 lines/50,300 bytes/full files equal baseline `baeb984e36a94a15951cd23d4c52def5064cdaca`; every range read without truncation. Primary CLI is now physically complete. Supporting recognition helpers 1387–1454 add 68 lines/2,030 bytes (`fc0d0cb1df36fd724a62147b3f353aef026883fb85ef26372aad22d0b85723dc`) without claiming the intervening runtime adapter read.
+- CLI preserves exact manual option/error policy, removed parse-mode rejection, strict UTF-8, native named/file compilation versus inline parse/validate/compile, deferred input load, direct result execution and LF JSON. Medium trace includes source/input/top rule only; thresholds, UTF-8 byte escaping, trace sinks and executable-before-cwd repository discovery stay adapter-owned. The verified existing primary binary `ad45555750489b78f7835457a09ecfa174d56b7ebf6242a4db5850570797c81a` passes 66/66 shared default cases in 60.311 seconds with empty runner stderr. POSIX and broader Rust gates are not rerun; no Cargo/rustc build occurs.
+- Recognition authority owns checked monotonic generations, Arc source identity, Rc invocation state with weak token/frame links, detached cursor/boundary/mark snapshots, separate matched/payload-presence state, one attempt and explicit terminal transitions. Its nine allowed/eleven rejected effect vocabulary propagates through recursive fixed points; progress depends on cursor advancement. Unlike the measured Perl .38 defect, supporting restore_and_invalidate returns on Invalidated before modifying saved frame state. Existing `.38.1` and Knowledge now record this source boundary; no fresh Rust six-case post-terminal or authored/carrier execution is claimed.
+- Fresh neutral recognition passes 138 node rows/250 calls/58 mutations, token 8/17, effects 6, marks 6, progress 8, rollout 9/9, public 3/26/45, guide 1/14/18, and current admission guards. Knowledge updates qualify historical 61-case CLI/3-of-9 recognition milestones and route Rust reverify through managed Cargo. CLI log `.linkedspec-data/scratch/startup86-cli-recognition/cli-stdout.log` 3,386 bytes SHA-256 `ec285ccb6f3db8052e02a29c46a978f51923f85bbb2fb16e156d31deae44160e`; command/status records retain exact invocation and exit evidence.
+- The known process-group setup warning recurred during the prior slice's successful managed documentation correction; intended bytes were verified and actual PGID was not captured. The existing `.7` fact now preserves that bounded recurrence without a new causal claim or cleanup authorization. All current jobs/results are consumed; no artifact recovery/purge or runtime/public/policy repair occurs. Roadmap Yes, codebase No, physical book Yes; startup alignment and repair prerequisites remain pending.
+### Recognition runtime completion and RuntimeContext source connections at `.3.3.28`
+- Activated from clean `faa0aaee322dfbcb645e65200a8df292923ce5fe` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Read recognition_transaction.rs 873–1547 (675 lines; 22,527 bytes; SHA-256 `a34a9b01b664ba66bbeb14ce6ca6a04e37614f30e860000985babbdf665660cd`) and runtime.rs 1–821 (34,295 bytes; `01b045dc00443ce00d8844e53105a27c21db69e95f08b26eab5f2e27eeb3fb92`). All 1,496 lines/56,822 bytes and full files equal baseline `baeb984e36a94a15951cd23d4c52def5064cdaca`; each range read without truncation. Recognition transaction source is now complete.
+- Live frames preserve cursor/boundary/marks plus private gap cursor, edge ordinal and candidate snapshots; rollback restores both. Entry-slot lineage checks parent invocation, active candidate and target rule. Commit rejects cursor regression; tail spans reach input end. RuntimeContext uses immutable Arc source and Rc parse authority with byte cursor registers, private marks, binding stores and explicit match-presence state. Entry/leave manage prior same-label mark buckets; public gap helpers project through typed source authority. Three gap unit tests were read, not freshly executed.
+- Independently decoded catalogs contain exactly 92 unique helpers (47 capture/mark, 30 entry/match, 11 input/cursor, four cursor-control) and seven aliases with canonical targets. Fresh neutral recognition passes 138/250/58 at complete 9/9, gap nine complete/zero pending/63 semantic mutations with public 8/15/10/34, and typed source 14 complete/zero pending/231 mutations. No fresh Cargo/rustc/native recognition or alias proof is claimed.
+- The recursive incoming JSON bridge and progressive/typed-record consumers join the existing `.55.1` conversion inventory without a new measured failure or reachable fallback-to-zero claim. Four canonical Knowledge owners distinguish source inventory/current neutral proof from historical native milestones. All jobs/results consumed; no runtime/public/policy repair, artifact recovery or purge. Roadmap Yes, codebase No, physical book Yes; startup alignment and policy prerequisites remain pending.
+### Context observations, projections and typed binding stores at `.3.3.29`
+- Activated from clean `de52680260dc660195cbfcf479e53c94b14bda3e` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Read runtime.rs 822–2318 (1,497 lines; 49,031 bytes; SHA-256 `1cca319df4eaba99b77293203301ab0e55b341366c1cffdd357699d694dbec42`) in six untruncated ranges. Full file and owned range equal baseline `baeb984e36a94a15951cd23d4c52def5064cdaca`.
+- Recognition/observation adapters use local completion bases and the last matching callee; pending entry disarms after entry and pre-entry rejection reserves attempted-child identity. Detached nine-field observations distinguish rejected/aborted/accepted/failed, projecting accepted exit only on success. Source position/span adapters validate byte boundaries, clamp optional scalar coordinates/slices, sort detached capture maps and preserve absent invalid spans. Structured diagnostic capture is first-wins; output, semantic observation and buffered trace channels remain separate.
+- Scalar/array/hash writes ensure binding identity and current bare kind. Declaration/scoped entry replace identity; scoped entry saves prior state and removes competing stores/descriptor overrides. Restoration internals remain the next window. Receiver guards resolve current identity rather than spelling, without closing .58/.59 dispatch gaps. Absent/Undef differs from bound Undef for aggregate mutation; bare pop returns the updated detached array while private pop returns the removed element. The saturating u64 identity allocator is source inventory only, with no measured exhaustion claim.
+- Fresh focused neutral checks pass typed source 14 complete/zero pending/231 mutations, binding 11/7/6/8, write105, map167/592 and diagnostic3/11/6/8/20. Six Knowledge owners now qualify historical rollout/no-codegen wording and preserve exact source-versus-native scope. All jobs consumed; no fresh native runtime run, repair, public/policy change, recovery or purge. Roadmap Yes, codebase No, physical mdBook Yes; formal alignment and prerequisites remain pending.
+### Context and semantic foundation completion with binding identity diagnosis at `.3.3.30`
+- Activated from clean `98be3c19a761c81d0875d5e16a5bdada7eca1b10` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Read runtime.rs 2319–2737 (419 lines/14,862 bytes; SHA-256 `8bf7a1de8c3d51e1769ef76a0d9d9717ad2fdff162f27f25d14cf05a7aa3621f`), semantic_index.rs 1–692 (25,946 bytes; `586f8a3804a1d68670453d508aa6400be8670196dbfb8fed4a78828cc31c5824`) and call_projection.rs 1–383 (12,604 bytes; `2699a196570566f1fbf6660cbf86d7b8ec22a970f0948eb61b7e0276f5d02286`). All 1,494 lines/53,412 bytes and full files equal baseline `baeb984e36a94a15951cd23d4c52def5064cdaca`; all ranges untruncated. RuntimeContext and the semantic-index foundation are physically complete; bounded supporting source hashes remain in the retained manifest.
+- Context restoration preserves/removes all scalar/array/hash, bare-kind, identity and descriptor-read surfaces; user functions move their store bundle while scoped bindings restore snapshots. Return values, action-edge results and recursion/cursor controls retain separate channels. SemanticIndex validates options, copies strict UTF-8, maps exact scalar/byte boundaries, captures compiled-or-failed source authority and offers ceiling-checked cloned projections without executing the target parser. Call projection merges source-ordered definitions and begins typed call/binding traversal; its remaining body is next.
+- Six paired public SemanticIndex queries independently assert compiled snapshots, empty diagnostics, binding IDs and source excerpts. Rust/Perl agree for no function (zero records), unused function with one assignment (five records), two repeated writes and three distinct names. Three/four same-name writes expose Rust suffixes 0/1/1 and 0/1/1/1 versus Perl 0/1/2 and 0/1/2/3; all repeated suffix-1 records materialize the final RHS excerpt/span. Rust counts keys in a latest-binding map, which stays at one, then overwrites the repeated source-ref key. Perl uses a separate occurrence counter. New `.66.1`–`.66.3` own repair, query/carrier census and public/canonical closure; existing `.22` now includes Rust's separately measured empty-function gate.
+- Probe compilation 335.326 seconds and execution 7.702 seconds exit 0; Perl 11.203 seconds exits 0; all stderr files empty. Verified runtime rlib remains `7cbddb91b8c3043adaf709ae4344f94cf0b17f80e25569456445285648f8c972`. Scratch `.linkedspec-data/scratch/startup89-semantic-bindings/` retains 37 files/35,637,599 bytes plus 7,182-byte manifest SHA-256 `d165a6e0a96f69406d61b51b5c9f274b34d396d0ae02f418364715bf89b4ff07`; paired assertions 3,110 bytes `14a227c09c40083cc5cff1a00dce688ed7ac566cc9296a0ac28a9d0cfa08f956`. No paging/get/relations, function-local repeat or other-runtime repetition result is inferred.
+- Fresh neutral semantic6/20/128 with rollout9/0/admission6/0, callable7/11/23 and binding11/7/6/8 pass despite the new native query cases. One new/five updated Knowledge owners preserve source/current/historical scope; parent children now link existing .64/.65 as well as .66. Existing .41.2 owns stale semantic-index API comments. All jobs consumed; no runtime/public/policy repair, recovery or purge. Roadmap Yes, codebase No, physical mdBook Yes; formal alignment and startup prerequisites remain pending.
+### Semantic call completion and independent signature/container evidence at `.3.3.31`
+- Activated from clean `c7134e4dc3f0baa484f30b7b6019a36944da56c8` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Read call_projection.rs 384–1288 (905 lines/29,888 bytes; SHA-256 `e971382f829d5e0c7fdcf3c9fcc9b5cb8c383066a0982447f04bf35379efe683`) and query.rs 1–589 (20,532 bytes; `a4cab55f188f209aa89c75d21b5828e2be4ddc63ba2907dceb09abe745866d62`). All 1,494 lines/50,420 bytes and full files equal baseline `baeb984e36a94a15951cd23d4c52def5064cdaca`; every range untruncated. Call projection is physically complete. Read all 435 lines of ADR 0049 and bounded Perl call/explanation sources to reconcile normative evidence and source mechanisms.
+- Call projection retains source-ordered definitions, bounded function-shape propagation, exact scalar-to-byte staged body checks, shell matching, explicit staged relations and shared generated-plan family. Its call scanner handles ASCII names, quoted strings and balanced parentheses. Query prefix defines typed shapes/defaults, projection-only operation dispatch, logical costs and exact validation through source ceilings; operation constraints and helper bodies remain the next window. Existing .22/.66 causes remain distinct.
+- Six paired public Rust/Perl queries compile and succeed with no diagnostics. Both emit call_signature_accepts for zero/two arguments while the same response declares fixed arity one. Both omit trim inside an array RHS, although direct/nested trim controls appear. Five complete responses equal; the sixth differs only because Rust's array binding source is null while Perl retains its exact RHS. Independent signature/count checks and six Perl Get controls establish the bounded counterexamples: arity0/2 return null, arity1/direct/nested return x, array returns [x], all without exceptions/stderr. No Rust target-execution or other-runtime behavior is inferred.
+- Both explanation builders format acceptance without checking compatibility; both typed call walkers stop on non-call containers. Rust additionally obtains binding source only from an emitted RHS call. New `.67.1`–`.67.4` own signature evidence, composite traversal/source, independent carrier/backend recurrence and public/canonical closeout. Source/query proof uses the verified .89 probe without a new compiler run; Rust queries 7.057 seconds, Perl queries 11.115, Perl Get 11.056, each exit0 with empty stderr.
+- Scratch `.linkedspec-data/scratch/startup90-semantic-call-evidence/` retains 36 files/210,609 bytes plus 7,246-byte manifest SHA-256 `ace19ad5c4d9d7868b413017894086e7ff62eac3ca9badc12b27a44cf0cfc2d1`; independent assertions 2,084 bytes `01ffb7cbe877993595a1ebfef98c232070e3d73b92bcb99b123a91ffbbab71f4`. Neutral semantics pass six groups/20 queries/128 mutations, rollout9/0/admission6/0. One new/three existing Knowledge cards preserve precise limits. All jobs consumed; no runtime/public/policy repair, recovery or purge. Roadmap Yes, codebase No, physical mdBook Yes; formal alignment/prerequisites remain pending.
+### Query and runtime projection completion with independent failure controls at `.3.3.32`
+- Activated from clean `cc23abb97f54388e3aad505f32c636cdd5bfb740` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Read query.rs 590–1003 (414 lines/13,758 bytes; SHA-256 `7713323eb7c6f02e57c40eee59a6b8dc4179eec1ef8ece5f1468aaeec6eb1781`), runtime_projection.rs 1–273 (9,816 bytes; `f6c771e25c969001b700655ef983f84333b7cb28fa6eca16ba4b259a2267c79d`) and static_projection.rs 1–808 (26,571 bytes; `1ec4cbd6eadf2f98fcb12cbfadc74e1b6963b993d1b97cd6860a681a32d2dba9`). All 1,495 lines/50,145 bytes and full files equal baseline `baeb984e36a94a15951cd23d4c52def5064cdaca`; every range read untruncated. Query/runtime projection are physically complete.
+- Query helpers enforce operation/filter combinations, primary-stream after-id pages, direction/kind breadth-first traversal, logical prefix budgets and structural source/fact projection. Runtime derivation validates typed event combinations, exactly one final succeeded entry result, stable identity format and existing selecting rule/slot topology; it clones/canonicalizes retained records and cannot replay input. Static prefix cross-correlates parsed/scanned/compiled owners and gates dependency explanations specifically on unknown_rule_reference; suffix scanners/shapes remain next.
+- Four native constructor/query controls preserve correct missing-rule and invalid-slot failure evidence. Child[5] is caught by resolve_selector before the broad compiled-slot mapping, retaining regex_slot_index_out_of_range, exact arrow source and no false dependency decision. Child[0] compiles. The source-only suspected wrong missing-rule normalization is ruled out for this ordinary route; .23 records that limit.
+- The token-return control unexpectedly compiles. Four follow-up query and paired Get/CLI cases establish two clean forbidden-use counterexamples: return(tx) and active copied=tx; both Rust CLI results are null with exit0/empty stderr, while Perl rejects recognition_token_escape. Legal return("ok") agrees. Rust stores Undef alongside a separately held token and ordinary variable reads never call reject_escape; the existing negative test invokes that private authority directly. New .68 owns authored rejection/carrier recurrence/public proof, not an observed token-object leak.
+- A newline-only copy separately triggers a separator error at byte84 and the known .45 warning/drop; its semicolon twin isolates token handling. parse_var_or_call consumes whitespace before suffix lookahead without restoring the plain-variable newline. New .69 owns source-preserving separator repair and ordinary non-token/carrier controls; intended-body execution is not inferred from the warned case.
+- Scratch `.linkedspec-data/scratch/startup91-semantic-failure/` covers 71 files/35,587,020 bytes plus 11,923-byte manifest SHA-256 `771a5f9bc682e9875a4bdb128ae1c39e292579d77f6c2204df5cedba544f4467`; independent assertions 455 bytes `975c9bb37c2bf1b42814974c73a4d0452ab298c8b923cf48838f5d1e36a67b5b`. Native probe compilation42.778s/initial run5.313s, exit0/empty stderr; all subsequent jobs consumed. Neutral semantic6/20/128 at9/0,6/0, diagnostic3/11/6/8/20 and recognition138/250/58 at9/9 pass. Two new/five existing Knowledge cards retain exact evidence and limits; no runtime/public/policy repair or recovery/purge. Roadmap Yes, codebase No, physical mdBook Yes; formal alignment pending.
+### Static projection and event types completion with grouped-edge evidence at `.3.3.33`
+- Activated from clean `c7c62c967091910dbb5fb8ea7d7c3df48ed37b41` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Read static_projection.rs 809–1720 (912 lines/29,634 bytes; SHA-256 `e52ac33b7531021b1f7210cf8a6a9caf576a3b1afd92d88072b220431dd7343b`), semantic_observation.rs 1–133 (4,751 bytes; `5f570ff4a9d33aebe0c525afea6a6ae226e885e483e34ca486202e717a3c5e16`) and source_emitter.rs 1–437 (15,991 bytes; `61b041c8b26ff0ff793d31c24f3b3aff5b6b2b81dabc35880b259a27094cb9dc`). All 1,482 lines/50,376 bytes and full files equal baseline `baeb984e36a94a15951cd23d4c52def5064cdaca`; every range read untruncated. Static projector and event/sink types are physically complete.
+- Static scanning groups parsed members by line, tracks leading regex/quotes and bracket depth, resolves captured byte/scalar spans, derives explicit repetition and first known return/edge shapes, then sorts records by kind/order/id and relations by endpoint ranks/kind/id. Nine current internal tests were read, not freshly run. Event constructors separate slot/result fields, hash exact UTF-8 bytes and directly invoke a shared Rc/RefCell synchronous callback. Emitter prefix defines typed metadata/errors, ten families/five seek/five consume, two decode aliases, and pre-serialization identity/typed-write/slot validation; module bodies and later plan validation remain next.
+- Five paired public queries isolate grouped projection errors. With -> ChildLong | Child[1], Rust marks both edges direct; renaming only ChildLong to Other restores Child's indexed form. Its helper searches the first label substring. Perl loses the second expanded edge's source/index because it joins flattened descriptor edges to one physical scanned member and extracts only that member's first target. Separate indexed members retain correct source/index facts on both. Three paired Get/CLI controls on b return "b" normally without warnings, proving the grouped block still executes.
+- Two initial per-target-index groups compile as one blockless Rust edge versus two Perl edges. Rust parses labels before one final selector, then discards the unrecognized action remainder; this is construction/projection evidence, not target execution. New .70.1-.3 own exact grouped correlation, complete accepted grammar/remainder handling, and independent backend/carrier/public recurrence. No new selector syntax is adopted. Source-based selects_regex incompleteness is a source consequence; no fresh relations/observation derivation is claimed.
+- Scratch startup92-semantic-target-index retains 17 files/51,409 bytes plus 2,609-byte manifest SHA-256 `3fb86ddcf0e1d0b09c35bb7b3b2cdd459b4b9f05ad401ce5594a7d18959a1955`; startup92-semantic-group-selector retains 39 files/90,984 bytes plus 6,124-byte manifest `252da991f555c3d798d6f88e79b638ce3efaacf6c91507f6794e824921c42ef7`, both beneath `.linkedspec-data/scratch/`. Independent assertions455bytes `dc3f6d9fc5697af6d32d499d73315857dc34a87c02ec251f814f323a2f00b5f4`. Verified existing probes/CLI reused with distinct recorded logical names; no full-response equality or new compilation claim.
+- Semantic6/20/128 at9/0,6/0, cursor36/18/8/60 and generated metadata10families/strictRust105 pass. Query runtimes Rust2.551/3.824s, Perl10.897/12.078s; Get11.180s and CLI1.279/1.233/1.246s. All jobs consumed. One new/four existing Knowledge cards preserve exact limits; no runtime/public/policy repair, recovery or purge. Roadmap Yes, codebase No, physical mdBook Yes; formal alignment remains pending.
+### Emitter completion, source authority prefix and native generated boundaries at `.3.3.34`
+- Activated from clean `d3fd048f37bfa90fe371ef78e174a85ae008aff8` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Read source_emitter.rs 438–1466 (1,029 lines/38,547 bytes; SHA-256 `777590070ae77d55f68f0dc673423a1af9dcb8e4b7f99f289219131d27ad785e`) and source_location.rs 1–464 (14,836 bytes; `3d0c9ca29b41093bb9eacf2b79e0f8aa37d6e8eb299f5e454e31267d752eb5a9`). All 1,493 lines/53,383 bytes and full files equal baseline `baeb984e36a94a15951cd23d4c52def5064cdaca`; every owned range read untruncated. Emitter physically complete; source materialization remains next.
+- Adapters preserve contract-before-decode, typed write/slot/plan validation, selected-entry context and distinct sink/exit errors. Plan checks count/ordered labels/known matching family; two aliases are accepted only for matching families. Typed source values are private and authority-bound with checked unique IDs and exact UTF-8 scalar/LF coordinate tables. Three existing Knowledge cards record these bounds; selected Rust sections of the large rollout card were read after its whole output truncated, not falsely counted as full-card reading.
+- Eight native identity controls emit seven modules and reject empty identity; three ASCII/quoted-whitespace/Unicode modules compile, four control-character modules fail because JSON escapes are emitted as Rust literals. Two actual executable modules/five roles each show ordinary parse siblings all return ["ok"], but recognition plain parse returns "ok" while default-options/disabled-trace/no-sink siblings return ["ok"]. .71/.72 own literal encoding, adapter coherence and the rewrite's unused import; 34 other dead-code warnings belong to uncalled roles in private probe modules. New cards retain exact causes and repair acceptance; no runtime/public repair is claimed.
+- Scratch startup93-generated-boundaries holds 66 files/68,030,768 bytes plus a 13,446-byte manifest SHA-256 `efca34731a315b8f34dbd92d02d9be4ffd00f172fb3b40ef91abda228f795580`; independent assertions: 689 bytes `33d25d8edb7bb7c799465e949ab0c5c94e722a55c10da99fee5609df1e585f64`. Probe compile/run: 283.710/10.529s, runner: 110.168/1.373s; all outcomes consumed, libraries rehashed. Generated10families/strictRust105, cursor36/18/8/60, typed14/0/231 pass. No compiler delay cause, recovery, purge or fresh full gate claimed. Roadmap Yes/codebase No/physical mdBook Yes; formal alignment pending.
+### Source materialization and loader completion with function projection at `.3.3.35`
+- Activated from clean `39cdef6598a5cea1702bb13b2c794c9fbbfb2b47` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Read source_location.rs 465–561 (97 lines/2,951 bytes; SHA-256 `38c645f896c1583e22a1b0767d1cb44e6c8c4a772b7dd8a66fcb678a1c2ebb5a`), spec_loader.rs 1–564 (17,279 bytes; `849dc6ae9775c693f7c112b6ed9bcbf5370e22f7f3d9bb3e07e3307ace9e2131`) and spec_parser.rs 1–836 (30,993 bytes; `084d6e35ed31dc11f3b6800daf6354c27b54a28a5129b4ab5a708f8cf7eaac60`). All 1,497 lines/51,223 bytes and full files equal baseline `baeb984e36a94a15951cd23d4c52def5064cdaca`; every range read untruncated. Source authority and loader physically complete.
+- Sealed materialization accepts Span/DerivedText, rechecks authority/source/range and emits provenance-indexed errors before detached text. Loader retains explicit roots, stable lexical candidate order, first regular file, Unicode path checks, strict UTF-8 and distinct pipeline stages. Full ADR0026 and native resolution cards reconcile historical Julia fallback wording; no resolution-policy change or new native loader execution is claimed. Current relative root paths are joined as supplied; cwd explicitly anchors cwd/exact relative candidates.
+- Definition projection executes the embedded grammar, validates fixed/signature/final-codeblock forms and exact scalar body/source correspondence, normalizes function parent paths/job IDs, then dispatches actionir-body.spec jobs with fixed policies. Stripping preserves scalar positions and CR/LF, not multibyte byte length; signature/error helper suffix remains next. One new/four existing Knowledge cards record source facts and bounded dated claims; the rollout card hit 66,112/65,536 bytes, so its exact new Rust authority sections move to a focused card with a retained pointer. Fresh resolution14/9/4, typed14/0/231, diagnostic3/11/6/8/20 and staged9legs/123base+129public mutations pass; all jobs complete. No new repair, native/full gate, runtime/public/policy change, recovery or purge. Roadmap Yes/codebase No/physical mdBook Yes; formal alignment pending.
+### Spec parser completion and staged authority prefix at `.3.3.36`
+- Activated from clean `b6f6085c50a7a7ee8bf2b33a3e861e6d3c86b83c` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Read spec_parser.rs 837–1022 (186 lines/6,357 bytes; SHA-256 `b94ca8b8ea63aebd258b5567b897429be974edd0f7c121a6846206487986e309`) and staged_ast_enrichment.rs 1–1267 (44,706 bytes; `7a479df9743d8e66ee2ceca7abde2a04dd3bb96d067e7330ff4d40194297fc2d`). All 1,453 lines/51,063 bytes and full files equal baseline `baeb984e36a94a15951cd23d4c52def5064cdaca`; every range read untruncated. Spec parser physically complete.
+- Signature helpers enforce exact six-field/version/arity/rest shape and typed scalar fields; definition-error presentation selects codeblock-specific messages and source-line/node context. Existing .55.1 adds private usize_field's checked-u64 versus finite-integral-f64 cast boundary and actual AST producers to its inventory; no new reachable function/numeric failure is measured. Frozen staged registry validates prepared entries/callback bindings, hashes opaque logical snapshot data, resolves only prepared candidates and narrows versions/top/capabilities/policies/detail/ceilings. Cache lookup stores only immutable compiled plans; key construction and lower helpers remain later.
+- Context views separate detached local state from live invocation/job budgets and expiry; seed starts fresh registry/authority and rejects active recognition at completion. Current-depth execution prepares/sorts/validates before callbacks on an unpublished AST. Recursive coordinator creates counters once, validates each complete depth and schedules settled children next; detailed execution, safe points, cycle/decrease, detachment and rebasing helpers remain next. Five Knowledge cards retain exact scope. Fresh staged9legs/123base+129public mutations, typed14/0/231 and scalar55cases/18helpers pass; all jobs complete. No new runtime/public/policy repair, native/full gate, recovery or purge. Roadmap Yes/codebase No/physical mdBook Yes; formal alignment pending.
+### Staged execution and bounded native counterexamples at `.3.3.37`
+- Activated from clean `90ae57bb9814118c3fe041c0723d841d7feabb44` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Read staged_ast_enrichment.rs 1268–2766 completely: 1,499 lines/53,102 bytes, SHA-256 `cb7d7f15fa8178e78ebcbc994486ea7c60df4ec30370736ebd42ee444eccd990`; range/full file equal baseline `baeb984e36a94a15951cd23d4c52def5064cdaca`. Identity/cache fields, typed queue order, dispatch/safe-point authority, callback expiry, detachment, failure settlement, cycle/decrease, diagnostic rebasing and stitching are reconciled in bounded Knowledge cards; final validators remain next.
+- Independent public host API probes assert 28 paired Perl/Rust target records: duplicate sibling targets reject after one callback, duplicate replacement succeeds and overwrites after two, queued-marker overlap rejects after one; distinct destinations and shared appends preserve both results. Root-only markers reject before callbacks without adopting root replacement as a feature. New .73 owns complete target reservation and corrects prior complete-depth wording.
+- Twelve Rust returned-marker/control records isolate deep-key bypass and an invalid two-MAX-segment provenance panic. Backtrace identifies strictly_decreases:2121; ordinary forbidden-key records reject and valid recursive markers succeed. New .74 owns validation and checked provenance arithmetic. Six budget records show ordinary exhaustion rejects, one remaining succeeds, but MAX/MAX runs once with unchanged total; .75 owns saturating admission. No external data, release/backend extrapolation or runtime repair claim. Local manifest 48files/2,885,337bytes, SHA-256 `b87f41e3f3c796ff80a6a10df8cd2d6c8372eb866e3764323c1b88ee5cd6c218`; independent assertions `459cbd58c047336e9036c5e87eebc371fbfa6406ae692740438f8a5f67dddb42`. All jobs consumed, three new/three existing Knowledge owners reconciled. Fresh staged123base+129public and typed14/0/231 pass; no full gate/recovery/purge. Roadmap Yes/codebase No/physical mdBook Yes; formal alignment pending.
+### Staged source completion and generated Unicode prefix at `.3.3.38`
+- Activated from clean `77cad4543e72ab304ce2a66b26a876b02cd6d3c4` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Read staged_ast_enrichment.rs 2767–3058 (9,634 bytes; SHA-256 `834cfb562377519aee92c2868e90e5ad564ba78eb0295cb289964bc5ca5265b5`), staged_parse_job.rs 1–290 (11,273; `5f5aad25051a97d03d93008b214ba1652e7e6cf7243b884668ae18f8460fd61d`), staged_parser_registry.rs 1–712 (24,568; `5509da5b6729544894f7158b9e5a8540f76191cca8620c71518e91eb5571f023`) and unicode_case_mapping.rs 1–206 (5,313; `00c0ec0fcd97c4d6208ab8fe99957565274fa5e0056af7f120be27b869055e57`). All 1,500 lines/50,788 bytes and full files equal baseline `baeb984e36a94a15951cd23d4c52def5064cdaca`; all ranges read untruncated. Three staged source files physically complete.
+- Final v2 candidate/string/numeric/digest validators and recursive canonical hashing are reconciled. Declaration provenance uses exact direct/derived shapes and live source-authorized positions/materialization, distinct from .74's returned JSON boundary. Legacy v1 normalizes/sorts the full queue, invokes the same four built-in phases with optional trace, constructs cache-key records without a plan store and leaves policy enforcement to function integration. Existing .55.1 inventories its floating usize conversion without a new measured failure. Six existing Knowledge cards retain exact scope.
+- The generated Unicode prefix pins contract/version/digest and opens sorted lower mappings, including dotted-I expansion and identity entries. Fresh offline regeneration byte-compares neutral JSON and all five backend modules and verifies 1,563 lower/1,581 upper, 158/464 properties and twelve fixtures; staged123base+129public and typed14/0/231 also pass. No new native/carrier/full-gate result, runtime/public/policy repair, recovery or purge. Roadmap Yes/codebase No/physical mdBook Yes; formal alignment pending.
+- Mandatory rollover and capacity: exact segment 4983 source/blob/hash/count and unchanged-prior-manifest proof passes. ADR0106 changes only 29→30 collection files, 28→29 manifest lines and 16,384→16,463 manifest bytes; final staged canonical receipt is required before landing. The current book links the governed store and contains no stale numeric manifest limit.
+### Unicode lower-map completion and canonical evidence at `.3.3.39`
+- Activated from clean `eba1a0edb14463e737003025a8d66ffa4f853801` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Read unicode_case_mapping.rs 207–1706 completely in five untruncated ranges: 1,500 lines / 38,103 bytes, SHA-256 `285db242fb8cd77506627568d96f91fd09a5ae4fefad69426331f730f4ea928d`; full file/range equal baseline. Lower table complete through supplementary entries; upper prefix includes non-invertible full expansions. The contextual evaluator remains unread. Fresh Unicode generation and twelve neutral fixtures pass with counts1563/1581/158/464.
+- Consumed .3.3.38 canonical exit0 and exact receipt promoted to `eba1a0edb14463e737003025a8d66ffa4f853801`: all nine doctrines, mandatory consumers/locality/five relocated anchors, CLI66/66 twice, Phase0 1032/1032 in1100s; 25 optional gates skipped. The existing macOS launch Knowledge card records the full log hash/size and both fully consumed, retained 32-line samples; their pre-main frames do not establish an OS cause or sampling workaround.
+- Five existing Knowledge cards preserve mapping semantics, exact completed verification and static-probe evidence scope. Rerunning the .3.3.37 statically linked probe cannot prove a later runtime repair without rebuilding and verifying library identities. No new defect, runtime/public-book/policy repair, recovery or purge; roadmap Yes/codebase No/physical mdBook Yes, formal .4 alignment pending.
+### Unicode upper-map completion at `.3.3.40`
+- Activated from clean `fe6d2638c8aa5cecebc214ce33c07c8b1a770278` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Read unicode_case_mapping.rs 1707–3156 completely in five untruncated ranges: 1,450 lines / 37,746 bytes; SHA-256 `53e3bf1abba654fbab0a398f277c467e627fdc5b2d57388616d48504ffbd1f01`. Full file and range equal baseline. The upper map is now complete through U+1E943; ordered combining expansions, ligatures and many-to-one casing preserve the pinned contract, with no normalization or inverse-conversion promise.
+- Existing Unicode Knowledge reconciled. Git confirms generation/runtime inputs unchanged since .3.3.39; its five-module regeneration and twelve neutral fixtures remain retained proof. Property ranges/contextual evaluator await .3.3.41. No new runtime test, defect, public-book/policy repair, recovery or purge; roadmap Yes/codebase No/physical mdBook Yes, formal .4 pending.
+### Complete Unicode reading and final batch checkpoint at `.3.3.41`
+- Activated from clean `f3a26cd55982e9b5285349b38bc9b96eb8b9666e` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
+- Read unicode_case_mapping.rs 3157–3859 completely (703 lines / 16,474 bytes; SHA-256 `d87280ba0efce3ba229fbf2f064a6c82f549d808d9b04fdebe583912d2a74f8d`) and callable_codeblock_literal_contract.rs 1–791 (791 lines / 27,469 bytes; SHA-256 `7b867d0449c8b168d28d85b994ceb97ba2c075130d63c455d76fdbd7b1d54e21`). All six chunks are untruncated; full files/ranges equal baseline. All 3,859 Unicode lines / 97,636 bytes are now read. Binary-searched properties, original-scalar Final Sigma context and full mappings agree with the completed Perl evaluator.
+- Callable prefix reading distinguishes exact native/reconstructed records from generated error-code substring assertions, inert state from invocation, and source inspection from emitted execution. The contextual suite prefix covers descriptor/body/job metadata and eleven route results; the eager-block test only starts at the boundary. Four existing Knowledge cards preserve these limits. Fresh Unicode regeneration/12 fixtures and callable 7/11/9/7/4/8/23 checks pass; no new native callable execution is claimed by reading.
+- Independent Git census verifies all 99 preceding first-parent batch commits after `a5d5dcd2955aaaa41166bd87de6bdc39a4502bc4`, with each recorded leaf/hash in order. Item 100 requires exact staged canonical CI before landing; the completed gate summary/log identity belongs in its commit body, and the promoted exact-HEAD receipt governs final clean push. No new defect, runtime/public-book/policy repair, recovery or purge; codebase reading remains No and formal .4 alignment is pending.
+### Callable completion, named marks and corpus prefix at `.3.3.42`
+- Clean activation `fb307dae35d0ecfdcbb4b29e65bec36855d6971b`; all 56 owned scopes read in four untruncated groups, 1,500 lines / 45,529 baseline-identical bytes. Callable suffix SHA-256 `d3a518d533d0a4b28dd118a1ff36c39725213304586f1633ef22f7da8d1ec894`; named-mark consumer `00750f546668f63acd29ddcf732f869262f6ea9833ae503ae9b82e5a9d6dccce`.
+- Callable suffix completes eager-block preservation, typed-final-value diagnostic fields, standalone contextual execution and semantic signatures. Named-mark assertions cover native/reconstructed/validated generated-plan values plus emitted source inspection; this consumer does not independently compile its emitted source. Existing Knowledge owns these exact limits.
+- Corpus prefix includes autoexist, six capability families, vhistory, two EBNF fixtures and hlink; hlink_curly_brace source line 29 and its input remain `.3.3.43`. Corpus values remain frozen evidence, not fresh runtime results. Callable and named-mark neutral checks pass; no production/public repair is claimed.
+- Exact routed task census at activation is 100 files / 79,955 lines / 8,146,914 bytes; the 80,000-line limit requires duplicate-chronology compaction under `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.5` before continued reading. All limits remain unchanged.
+- Director requests assessment of parameterized/generic rules: preserve a proposed investigation after the clean containment pivot, covering grammar-rule parameters and separate runtime value parameters; no language implementation is authorized by that question.
+### Roadmap reconciliation at `.2`
+- Activation: clean `a5d5dcd2955aaaa41166bd87de6bdc39a4502bc4`; `.githooks` is configured and no background job remained.
+- Both roadmaps changed since the reading baseline only by the same four-line startup-prerequisite pointer.
+  Those additions were read, and this checkpoint's final diff is part of review.
+- The final roadmap sections explain compiler-state/error ownership, completed helper/control-flow migration,
+  deferred frontend/validation work, and label-driven rule execution. Dated earlier migration spellings are
+  historical evidence, not authority to restore retired helpers or restart closed work.
+- Current direction remains startup reading, then `RUST-MUTATION-TESTING.1` under backlog `.20`. Its configuration
+  precedes the separately owned pilot. ADR `0039` forbids per-commit mutation execution; ADR `0073` selects focused
+  ordinary proof and canonical designated/push proof. No competing executable roadmap direction was found.
+- No runtime behavior was verified by reading. No new public explanation is warranted by this checkpoint;
+  substantive codebase/book drift, if found during `.3`/`.4`, must receive an owning leaf before remediation.
+- The completed 100-item batch is derived from Git: `git log --reverse --first-parent --format="%h %s" a5d5dcd2955aaaa41166bd87de6bdc39a4502bc4..fb307dae35d0ecfdcbb4b29e65bec36855d6971b`. Leaf `.1` belongs to the preceding checkpoint.
+- `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.5` verified all 100 ordinal/leaf/hash identities before removing the duplicate enumeration; exact comparison provenance is in `docs/knowledge/startup-task-chronology-compaction.md`.
+### Corpus continuation at `.3.3.43`
+All 53 owned scopes are read: HLink delimiter/raw text, Liberty scalar/complex attributes, Lispish aggregation, portmap shape variants, explicit empty plugin input, literals, register fields, SimEnv and the spec.spec prefix through line 145. Stored JSON is an oracle, not fresh runtime proof. The scoped audit digest is `d7cd64ee375d24d370de3831e140c9aae425f1b75657b292d1daf178394e4c13`; forward reading through `.66` remains in d6f37492 until individually reconciled.

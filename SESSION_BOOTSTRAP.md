@@ -41,11 +41,12 @@ prepending complete current records, run the matching `perl tools/roll_document_
 --check`; if it requires rollover, use `--apply`, inspect the atomic archive/manifest/root update, and recheck.
 Never edit an immutable history segment.
 
-`docs/tasks/FUTURE-PARITY-BACKLOG.md` is a bounded current index. Resolve a stable leaf with
-`perl tools/read_task_tree.pl --tree FUTURE-PARITY-BACKLOG --id <stable-id>`; after editing the returned mutable
-semantic part, refresh its current index snapshot with
-`perl tools/update_task_tree_index.pl --tree FUTURE-PARITY-BACKLOG`. Never append new evidence to its immutable
-history part. `scripts/check_task_tree_metadata.sh` enforces the complete partition contract.
+`docs/tasks/FUTURE-PARITY-BACKLOG.md` and `docs/tasks/SESSION-STARTUP-READING.md` are bounded current indexes.
+Resolve a stable leaf with `perl tools/read_task_tree.pl --tree <tree> --id <stable-id>`; for example,
+`perl tools/read_task_tree.pl --tree SESSION-STARTUP-READING --id SESSION-STARTUP-READING.89`.
+After editing the returned mutable semantic part, refresh its same-commit snapshot with
+`perl tools/update_task_tree_index.pl --tree <tree>`. Never append new evidence to an immutable history part.
+`scripts/check_task_tree_metadata.sh` enforces both registered partition contracts and current-ID uniqueness.
 
 Analyze `LinkedSpec.pm` or its import paths only as needed for the selected task.
 

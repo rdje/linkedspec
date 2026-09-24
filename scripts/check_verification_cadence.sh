@@ -21,6 +21,9 @@ require_literal() {
 
 is_canonical_path() {
   case "$1" in
+    scripts/check_verification_cadence.sh|tools/check_task_verification_fields.pl|scripts/check_startup_task_partitions.pl|scripts/check_task_tree_current_ids.pl|tools/read_task_tree.pl|tools/update_task_tree_index.pl)
+      return 0
+      ;;
     .github/workflows/*|.githooks/*|COMMIT.md|DOCTRINE_ENFORCEMENT.md|tools/run_ci_local.sh|tools/run_*_local.sh|scripts/check_doctrines.sh|scripts/check_memory_architecture.sh|scripts/check_task_tree_metadata.sh|scripts/check_diagnosis_evidence.sh|scripts/check_repo_root_path_portability.sh|scripts/check_project_data_storage_locality.sh|scripts/check_document_history.sh|scripts/check_readme_stability.sh|*/Cargo.lock|*/pubspec.lock|*/Manifest.toml|*/Project.toml)
       return 0
       ;;
@@ -54,6 +57,12 @@ self_test() {
     'COMMIT.md'
     'rust/Cargo.lock'
     'julia/Project.toml'
+    'scripts/check_verification_cadence.sh'
+    'tools/check_task_verification_fields.pl'
+    'scripts/check_startup_task_partitions.pl'
+    'scripts/check_task_tree_current_ids.pl'
+    'tools/read_task_tree.pl'
+    'tools/update_task_tree_index.pl'
   )
   local -a focused=(
     'dart/lib/src/parser/spec_parser.dart'
@@ -119,25 +128,11 @@ for path in "${staged_paths[@]}"; do
 done
 [[ ${#task_files[@]} -gt 0 ]] || fail 'every staged slice requires its owning docs/tasks/*.md update'
 
-tier_lines=()
-focused_lines=0
-trigger_lines=0
-for path in "${task_files[@]}"; do
-  while IFS= read -r tier; do
-    [[ -n "$tier" ]] && tier_lines+=("$tier")
-  done < <(git diff --cached --unified=0 -- "$path" |
-    sed -n 's/^+[^+].*Verification tier: `\([^`]*\)`.*/\1/p')
-  focused_lines=$((focused_lines + $(git diff --cached --unified=0 -- "$path" |
-    grep -Ec '^\+[^+].*Focused checks:' || true)))
-  trigger_lines=$((trigger_lines + $(git diff --cached --unified=0 -- "$path" |
-    grep -Ec '^\+[^+].*Canonical trigger:' || true)))
-done
-
-[[ ${#tier_lines[@]} == 1 ]] || fail 'the staged owning leaf must add exactly one Verification tier: `focused` or `canonical` line'
-tier=${tier_lines[0]}
+# Compare exact fields by stable task ID: moving a historical node adds no slice.
+if ! tier=$(perl tools/check_task_verification_fields.pl); then
+  fail 'the staged owning leaf must declare one tier, focused selection and canonical trigger'
+fi
 [[ "$tier" == focused || "$tier" == canonical ]] || fail "unsupported verification tier: $tier"
-[[ $focused_lines == 1 ]] || fail 'the staged owning leaf must add exactly one non-empty Focused checks: line'
-[[ $trigger_lines == 1 ]] || fail 'the staged owning leaf must add exactly one Canonical trigger: line'
 
 if ! action=$(tier_action "$tier" "$canonical_required" "${LINKEDSPEC_CANONICAL_GATE_IN_PROGRESS:-0}"); then
   fail 'the staged paths include CI/hook/doctrine/dependency infrastructure and require Verification tier: `canonical`'

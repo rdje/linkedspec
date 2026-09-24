@@ -66,4 +66,4 @@ followed by `original["nested"]["x"] = 2`. Public Get returns original x=2 and s
 copy creates an outer hash snapshot; the later write calls `BindingRuntime::nested_write` and rebinds
 `original` to its updated value. This control establishes independence for that DSL mutation sequence,
 not a promise that the copy expression recursively clones arbitrary host objects. The exact control lives
-in `docs/tasks/SESSION-STARTUP-READING.md` under `.3.2.28`.
+in `docs/tasks/SESSION-STARTUP-READING.01-03.md` under `.3.2.28`.

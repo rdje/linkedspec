@@ -8,11 +8,25 @@ answers:
   - "does moving historical task verification metadata require another receipt"
   - "which consumers must change for startup task partitioning"
 date: 2026-09-24
-status: measured plan; implementation and canonical verification owned by containment .16.2
+status: implemented under containment .16.2; exact staged canonical acceptance required before landing
 tags: [task-tree, continuity, containment, retrieval, verification]
 evidence: "LIVE-DOCUMENT-PRESSURE-CONTAINMENT.16.1; docs/checkpoints/LIVE-DOCUMENT-PRESSURE-CONTAINMENT.16.1-plan.json; clean 567b583f7535c6fac643b27d44e24ba5b729f5a8"
-reverify: "Run the independent source/range replay below; current registration is still FUTURE-only until .16.2 lands."
+reverify: "Run perl scripts/check_startup_task_partitions.pl and perl tools/check_task_verification_fields.pl --self-test, then the independent pinned source/range replay below."
 ---
+
+## Applied migration
+
+Containment .16.2 implements the plan below from clean `58a5ff936`, whose startup blob
+is identical to the planned source. The current root has 77 lines; part sizes are
+4359 / 1467 / 1629 / 559 lines, and the index has five records. The independent startup
+validator rejects 60 mutated inputs and passes nine pressure controls; cadence uses
+stable task identity with 14 relocation/declaration controls. The exact migration proof
+is `docs/checkpoints/LIVE-DOCUMENT-PRESSURE-CONTAINMENT.16.2-verification.json`.
+Ordinary exact staged canonical acceptance and normal hooks govern atomic landing.
+
+The following sections preserve the measured planning decision and its implementation
+obligations; statements about the old FUTURE-only registration and diff-line cadence
+refer to the .16.1 planning baseline.
 
 ## Measured need and scope
 

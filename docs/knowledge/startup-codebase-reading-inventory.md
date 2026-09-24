@@ -24,8 +24,10 @@ September22 director approval and ADR0123 make this audit separate from ordinary
 Use [[targeted-session-startup]] for the active procedure; the historical blanket reading
 prerequisite below is superseded, while exact reading credit and exclusions remain.
 
-`docs/tasks/SESSION-STARTUP-READING.md` owns the exact ordered, disjoint path selectors, baseline counts,
-completed coverage, and executable frontier. The only director-excluded source tree is the `rgx` gitlink and its
+`docs/tasks/SESSION-STARTUP-READING.md` is the bounded current index. Its `.01-03.md` semantic part owns
+the exact ordered, disjoint reading selectors, baseline counts and completed coverage; repair ownership
+continues in `.04-49.md` and `.50-99.md`. Resolve any existing child with
+`perl tools/read_task_tree.pl --tree SESSION-STARTUP-READING --id <stable-id>`. The only director-excluded source tree is the `rgx` gitlink and its
 nested dependencies. First-party Rust, generated modules, corpus JSON, legacy `noncore`, authored `.spec`,
 `conf`, `ebnf`, `tablescript`, test suites, repository tooling, and pinned reference data remain accounted for.
 
@@ -44,6 +46,16 @@ Do not copy this inventory into an unbounded parallel manifest. Git stores the e
 identities; the task-tree stores the selectors, ownership, range progress, and completion evidence.
 
 Related: [[linkedspec-pm-is-thin-facade]], [[project-data-liveness-permission-denial]].
+
+## Scope of the dated replay recipes
+
+The September6/8 recipes below preserve their admission-time assumptions: unchanged
+source trees, then-pending repairs and the original monolithic task root. They are
+historical reconstruction recipes, not current smoke checks; later repairs deliberately
+invalidate those equalities. Run them only against their original clean checkout state.
+For current task ownership use the registered lookup above; containment .16.2 independently
+proves all original node fields survive in their semantic owners. No historical source
+path inside a `git show` command is rewritten by the migration.
 
 ## September 6 planning pressure census
 
@@ -183,9 +195,9 @@ reading completion. Receipt-bound canonical CI is required for this parent
 closeout, with the actual run outcome retained in its commit and local receipt.
 
 The next action is `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7`, before Dart child
-decomposition or source reading. The full-codebase answer stays No. The required
-PGEN → RGX → LinkedSpec Rust build chain and its expected nested generated state
-are unchanged and are not a blocker.
+decomposition or source reading. The full-codebase answer stays No. Current integration uses RGX
+only through its published contract; RGX owns all transitive preparation. This dated
+reading record grants no separate PGEN build procedure or dependency-internal access.
 
 Run the existing Rust scope audit above, then independently verify durable
 checkpoint, mode/delta, repair and Knowledge-path continuity:

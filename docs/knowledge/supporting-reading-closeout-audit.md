@@ -12,10 +12,14 @@ date: 2026-09-13
 status: required supporting reading closed under ADR0120; six grammar/literal repair roots remain open
 tags: [startup, reading, audit, continuity, verification, capacity, SUPPORTING-SOURCE-READING]
 evidence: "SUPPORTING-SOURCE-READING.3 independently reconstructs all 174 original ranges/158 unchanged sources, five required ranges/nineteen complete windows/three clean reading commits and seven open repair roots. Physical required coverage is 629 fragments/96781 bytes; historical reading 1500/61165, explicit omissions 23484/806310. No additional physical reading, runtime signoff, defect closure, gate change or new ceiling is claimed."
-reverify: "Run SUPPORTING_READING_PARENT_CLOSEOUT below for original committed coverage plus current source/repair/parent reconciliation. The original SUPPORTING_READING_CLOSEOUT_AUDIT retains its audit-time assumptions and pending-node counts. No canonical receipt or runtime signoff is claimed."
+reverify: "Use perl tools/read_task_tree.pl --tree SESSION-STARTUP-READING --id SESSION-STARTUP-READING.3.7 for current ownership. The recipes below are September13 reconstruction evidence with dated source/checker/registry identities and the original task layout, not current smoke checks. No fresh canonical receipt or runtime signoff is claimed."
 ---
 
-# Current disposition
+# Dated closeout disposition — September13
+
+Containment .16.2 preserves every original startup node in semantic parts. The recipes below retain their
+original monolithic paths and source/checker equality assumptions for replay against that clean historical
+checkout; they must not be interpreted as an assertion that later task-owned repairs changed nothing.
 
 The director grants both actions proposed at
 `693e11e48168aba753b179b88cdb6800d4b06513`; ADR0120 records the exact scope.

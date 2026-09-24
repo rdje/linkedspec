@@ -30,8 +30,9 @@ reverify:
 
 # Exact retained owners
 
-Canonical leaf nodes in `docs/tasks/SESSION-STARTUP-READING.md` retain the exact commit subjects and
-all 102 completion notes. Their other fields, stable IDs, and source-reading scope remain unchanged.
+Canonical leaf nodes in the startup `.01-03.md` and `.04-49.md` semantic owners retain the exact commit
+subjects and all 102 completion notes. Resolve a leaf with `perl tools/read_task_tree.pl --tree
+SESSION-STARTUP-READING --id <stable-id>`; the stable `.md` path is now the current index. Their other fields, stable IDs, and source-reading scope remain unchanged.
 Git is the complete immutable commit authority; the removed table duplicated subjects already in those nodes.
 The 100-item enumeration is exactly reproducible through the command above. The earlier `.1` checkpoint
 is outside that batch. Current execution state remains in `MEMORY.md` and each task's frontier.

@@ -9,7 +9,7 @@ answers:
   - "which script checks stale Current Frontier rows"
   - "can a pending task node claim task tree first activation"
   - "can a pending task node name another leaf as its commit"
-date: 2026-07-08
+date: 2026-09-24
 status: current
 tags: [task-trees, doctrine-enforcement, metadata-hygiene]
 evidence: "TASK-TREE-METADATA-HYGIENE.3 originally adopted the completed-tree Current Frontier invariant. FUTURE-PARITY-BACKLOG.24.0.1 later proves two cross-slice patches contaminated pending .2 with an activation claim and a foreign same-tree commit id. scripts/check_task_tree_metadata.sh now retains the original invariant and adds only those two pending-node contradictions, with four in-memory self-test fixtures. scripts/check_doctrines.sh and DOCTRINE_ENFORCEMENT.md §10 remain the registry and human mirror."
@@ -43,3 +43,8 @@ pass while each exact contradiction fails.
 task ID is repository-wide unique across partitioned and unpartitioned storage. Only history paths registered by a
 tracked task-tree index as immutable parts are outside the current census; unregistered history-named files remain
 current. See [[current-task-id-uniqueness]] for the Git-proven duplicate root cause and mutation boundary.
+
+September24 containment .16.2 composes the independent startup partition validator beside the unchanged
+FUTURE validator. The closed current-ID registry includes both indexes and their exact immutable histories;
+all semantic parts and unpartitioned files still participate in the global census. The historical August
+census above remains dated evidence, not the current population.

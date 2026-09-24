@@ -152,6 +152,8 @@ changed* lives in git (layer D), not here.
 
 | [0124](0124-kind-preserving-sexpr-document.md) | Separate versioned s-expression grammar preserves atom kinds and validates complete documents | 2026-09-22 | accepted design; implementation pending | grammar, compatibility, token-kind, document-validation |
 
+| [0125](0125-startup-task-partitions.md) | Lossless startup semantic partitions under unchanged limits and task-identity verification cadence | 2026-09-24 | accepted; canonical migration acceptance required | task-tree, continuity, retrieval, containment |
+
 ## How to add a record
 1. Copy the shape of an existing record (`Date`, `Status`, `Tags`, then `## Context /
    Decision / Consequences / Links`).

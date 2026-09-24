@@ -188,6 +188,21 @@ is explicitly immutable, then run one global current-definition census through t
 
 Remove project-specific sections that do not apply to the new project.
 
+## Registered Partitioned Trees
+
+`FUTURE-PARITY-BACKLOG` and `SESSION-STARTUP-READING` use bounded current roots plus
+mutable semantic parts and registered immutable history. Resolve an exact existing
+child with `perl tools/read_task_tree.pl --tree <tree> --id <stable-id>`; a numeric
+range does not create missing tasks. After editing its owning part, run
+`perl tools/update_task_tree_index.pl --tree <tree>` in the same slice. Keep current
+frontiers in the root and historical source identities unchanged in the strict index.
+
+The verification-cadence gate compares declarations by task ID and exact value across
+HEAD and the index. Moving unchanged historical nodes adds no new slice. A slice
+still has exactly one changed owning leaf with one tier, focused selection and
+canonical trigger; missing, duplicate or split-owner declarations fail. Infrastructure
+changes retain ordinary canonical receipt requirements.
+
 ## Creating The First Task Tree
 
 Create one file per top-level task. The file name should be stable and

@@ -10,7 +10,9 @@ use JSON::PP ();
 my $ROOT = "$RealBin/..";
 my %INDEX = (
     'FUTURE-PARITY-BACKLOG' => 'docs/tasks/FUTURE-PARITY-BACKLOG.index.jsonl',
+    'SESSION-STARTUP-READING' => 'docs/tasks/SESSION-STARTUP-READING.index.jsonl',
 );
+my %RECORD_COUNT = ('FUTURE-PARITY-BACKLOG' => 10, 'SESSION-STARTUP-READING' => 5);
 my $JSON = JSON::PP->new->canonical(1)->utf8(1);
 my $tree;
 GetOptions('tree=s' => \$tree) or die usage();
@@ -55,7 +57,7 @@ sub read_index {
         push @records, $record;
     }
     close $fh or die "cannot close $path: $!\n";
-    die "task-tree index must contain metadata plus nine parts\n" if @records != 10;
+    die "task-tree index record count mismatch for $tree\n" if @records != $RECORD_COUNT{$tree};
     return \@records;
 }
 

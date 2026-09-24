@@ -8,7 +8,10 @@ use JSON::PP ();
 my $ROOT = "$RealBin/..";
 my $TASK_DIR = 'docs/tasks';
 my $JSON = JSON::PP->new->utf8(1);
-my @INDEX_REGISTRY = ('docs/tasks/FUTURE-PARITY-BACKLOG.index.jsonl');
+my @INDEX_REGISTRY = (
+    'docs/tasks/FUTURE-PARITY-BACKLOG.index.jsonl',
+    'docs/tasks/SESSION-STARTUP-READING.index.jsonl',
+);
 
 chdir $ROOT or die "cannot enter repository root: $!\n";
 
@@ -247,8 +250,9 @@ sub run_self_tests {
                 && !safe_task_path('docs/tasks/FUTURE.md');
         }],
         ['index_registry_is_closed', sub {
-            return @INDEX_REGISTRY == 1
-                && $INDEX_REGISTRY[0] eq 'docs/tasks/FUTURE-PARITY-BACKLOG.index.jsonl';
+            return @INDEX_REGISTRY == 2
+                && $INDEX_REGISTRY[0] eq 'docs/tasks/FUTURE-PARITY-BACKLOG.index.jsonl'
+                && $INDEX_REGISTRY[1] eq 'docs/tasks/SESSION-STARTUP-READING.index.jsonl';
         }],
     );
 

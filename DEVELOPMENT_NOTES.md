@@ -12,6 +12,12 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-09-24 — Keep task identity independent of storage topology
+
+Containment .16.2 moves the startup tree's 166 historical verification triplets without declaring 166 new slices. The cadence checker compares complete declarations by stable task ID across HEAD and the index, then validates exactly one changed owning leaf. Duplicate, missing, unowned, split-owner or altered moved declarations fail; infrastructure paths remain canonical and receipt logic is unchanged. Original source intervals reconstruct independently, and all 395 complete child blocks match their clean source.
+
+The startup index has empty root provenance because every original byte belongs to a semantic or immutable historical part; the current root is an independently bounded projection. The separate startup validator preserves FUTURE's checker and data, rejects 60 corrupt-input cases and enforces exact stricter member controls. Maintained lookup pointers move; historical reconstruction recipes retain their original layout/source assumptions with explicit dated qualifications. The book now describes both current partition topologies, including FUTURE's existing eighth semantic part. Source/consumer proof is in docs/checkpoints/LIVE-DOCUMENT-PRESSURE-CONTAINMENT.16.2-verification.json.
+
 ## 2026-09-24 — Preserve task identity when moving verification evidence
 
 Containment .16.1 finds no exact multiline duplicate paragraphs in the 7994-line startup tree. Keep 395 children in three semantic owners and preserve the original root/frontier/global chronology in registered immutable history. All source bytes reconstruct; the replacement root owns current navigation. The cadence gate currently counts added lines, so 166 unchanged historical verification triplets would appear new after relocation. .16.2 must compare exact declarations by task ID while rejecting changed/duplicate/missing/foreign declarations and retaining normal canonical receipts. The plan and checkpoint in docs/knowledge/startup-task-partition-plan.md freeze ranges, consumer dispositions and unchanged-limit headroom; implementation remains pending.

@@ -10,7 +10,9 @@ use JSON::PP ();
 my $ROOT = "$RealBin/..";
 my %INDEX = (
     'FUTURE-PARITY-BACKLOG' => 'docs/tasks/FUTURE-PARITY-BACKLOG.index.jsonl',
+    'SESSION-STARTUP-READING' => 'docs/tasks/SESSION-STARTUP-READING.index.jsonl',
 );
+my %RECORD_COUNT = ('FUTURE-PARITY-BACKLOG' => 10, 'SESSION-STARTUP-READING' => 5);
 my ($tree, $id);
 GetOptions('tree=s' => \$tree, 'id=s' => \$id) or die usage();
 die usage() if !defined($tree) || !exists($INDEX{$tree}) || !defined($id);
@@ -45,6 +47,12 @@ sub owns_id {
     my @numbers = map { 0 + $_ } split /\./, $suffix;
     my $top = $numbers[0];
     my $partition = $record->{partition_id} // '';
+    if ($tree eq 'SESSION-STARTUP-READING') {
+        return $top >= 1 && $top <= 3 if $partition eq '01-03';
+        return $top >= 4 && $top <= 49 if $partition eq '04-49';
+        return $top >= 50 && $top <= 99 if $partition eq '50-99';
+        return 0;
+    }
     return $top <= 8 if $partition eq '00-08';
     return $top == 9 if $partition eq '09';
     return $top == 10 && (!defined($numbers[1]) || $numbers[1] <= 6) if $partition eq '10.0-6';
@@ -76,7 +84,9 @@ sub read_index {
         push @records, $record;
     }
     close $fh or die "cannot close $path: $!\n";
-    die "task-tree index must contain metadata plus nine parts\n" if @records != 10;
+    die "task-tree index record count mismatch for $tree\n" if @records != $RECORD_COUNT{$tree};
+    die "task-tree index metadata mismatch for $tree\n"
+        if ($records[0]{type} // '') ne 'task_tree_index' || ($records[0]{tree} // '') ne $tree;
     return \@records;
 }
 

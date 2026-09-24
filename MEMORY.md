@@ -1,10 +1,10 @@
 # MEMORY
 
-- activation_commit: `567b583f7535c6fac643b27d44e24ba5b729f5a8` — clean activation base for containment .16.1.
-- latest_completed_leaf: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.16.1 - freeze lossless startup task partition plan`.
-- active_work_unit: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.16.2` — next atomic migration after verified .16.1 plan; not yet activated.
-- next_action: Activate .16.2 from the clean plan commit; implement the pinned startup partition/consumer transfer, independently recompose and run exact staged canonical proof before Perl read-purity .89 and cat-arity .51.
-- in_flight_uncommitted: none after this focused plan landing; no migration, tool/registry/startup-source change or background job. Exact source/topology/consumer proof: docs/knowledge/startup-task-partition-plan.md.
+- activation_commit: `58a5ff936e54f0699da2b33c35641a5e0155ed81` — clean activation base for containment .16.2.
+- latest_completed_leaf: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.16.2 - partition startup task evidence without loss`.
+- active_work_unit: `SESSION-STARTUP-READING.89` — next Perl read-purity repair after atomic containment .16.2.
+- next_action: Resolve .89 with perl tools/read_task_tree.pl --tree SESSION-STARTUP-READING --id SESSION-STARTUP-READING.89; activate from clean HEAD and fix read-induced Perl state creation before .51.
+- in_flight_uncommitted: none after canonical .16.2 landing; source/node preservation, public998 lookups, mutation/pressure/cadence proof and book rendering are retained in docs/checkpoints/LIVE-DOCUMENT-PRESSURE-CONTAINMENT.16.2-verification.json.
 - blockers: LS-004 remains upstream-owned; director will notify ARCHOGEN only after its fix is verified (local report: docs/upstream/rgx/bootstrap-progress-status.md). No RGX code defect established. Named-argument and format proposals remain parked.
   Wrapper startup .7 remains open; recovery/purge stay prohibited. No interrupted Phase0 run counts as proof.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
@@ -12,8 +12,8 @@
   and requires every exact current task ID to be unique across partitioned and unpartitioned storage.
 - current_write_vivification: `linkedspec-write-vivification-v1` is implemented on all five backends with one typed expression-segment AST,
   evaluated string/integer harray/array selection, dense atomic creation, post-evaluation snapshots, detached
-  results, exact diagnostics/spans, invocation-local absent/null presence, and read exclusions at 105 rejected
-  mutations. Rust, Dart, Julia, PUC Lua, and LuaJIT preserve it through supported serialized/reconstructed/
+  results, exact diagnostics/spans and invocation-local absent/null presence. The neutral validator rejects 105 mutations;
+  read exclusions are not Perl runtime proof: confirmed direct-read purity gap .89 remains open. Other runtimes preserve writes through supported serialized/reconstructed/
   generated/emitted carriers. Portable capability `language.nested_write_vivification` is admitted by `.19.7`;
   exact six-runtime recurrence is complete under `.19.8`, and public teaching/no-drift is closed under `.19.9`.
 - current_map_leaves_mutation: `linkedspec-map-leaves-mutation-v1` is implemented on all five backends with one bang-only mutation AST,
@@ -52,8 +52,8 @@
   use exact staged canonical CI; task-tree/index, Knowledge Map, mdBook, and bounded live/history move in lockstep.
 - current_engineering_notes_capacity: ADR0122 admits 43 collection files /42 manifest lines /25410 manifest bytes; current39/38/22961 stay bounded.
   Notes segment4969 preserves 114 lines /28181 bytes from clean9f81d3162; old archive rows/bytes remain exact.
-- current_change_history_capacity: ADR0122 admits 47 collection files /46 manifest lines /26255 manifest bytes; current42/41/23375 stay bounded.
-  Changes segment4971 preserves 168 lines /27426 bytes from clean 7c318569; old archive rows/bytes remain exact.
+- current_change_history_capacity: ADR0122 admits47 collection files /46 manifest lines /26255 bytes; current43/42/23951 stay bounded.
+  Changes segment4970 preserves132 lines /27272 bytes from clean58a5ff936; prior history remains byte-exact.
 - dependency_boundary: September20: LinkedSpec integrates only with RGX via its published integration document/APIs/contracts. RGX owns PGEN; no separate PGEN procedure, internal inspection/analysis, patches or pin changes.
   Normal documented builds remain authorized; retain caches. Startup .80.1-.4 may observe public behavior or track upstream repairs, not investigate dependency internals.
 - latest_bootstrap_read: ADR0123 targets 2–5 minute startup plus thorough task-specific reading. Separate audit remains 89/143 and .1.90. Document integration and .46/.47/.49/.86.1/.86.2 are verified; Perl .86.4.2.4 corrects the regex-type premise; .86.4.3 owns supported helper validation (verified); .86.4.6 verifies helper splitting; .86.4.7 verifies quoted subjects; .86.4.4.1 owns grouped-operand repair .86.4.8; .86.4.8.1 rejects incompatible lookahead and .86.4.8.2 verifies grouped repair; .86.4.4.2.1 fixes generated Trace and .86.4.4.2.2 closes bounded public recomposition; .87 owns four helper/grouping follow-ups. No downstream application acceptance claim.

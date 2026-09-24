@@ -1,0 +1,233 @@
+{
+  "task": "LIVE-DOCUMENT-PRESSURE-CONTAINMENT.16.2",
+  "activation": "58a5ff936e54f0699da2b33c35641a5e0155ed81",
+  "source_sha256": "e5a1199d0a15fbbd29ada47fb9a262dbeeefd831e971bc08cb084a7e8a7b6209",
+  "independent_source_reconstruction": "PASS7994 lines/960362 bytes",
+  "exact_child_blocks": 395,
+  "lookup_counts": {
+    "SESSION-STARTUP-READING": 395,
+    "FUTURE-PARITY-BACKLOG": 603
+  },
+  "negative_lookups": [
+    {
+      "tree": "SESSION-STARTUP-READING",
+      "id": "SESSION-STARTUP-READING.0",
+      "returncode": 255,
+      "stderr": "no semantic partition owns task id SESSION-STARTUP-READING.0"
+    },
+    {
+      "tree": "SESSION-STARTUP-READING",
+      "id": "SESSION-STARTUP-READING.48",
+      "returncode": 255,
+      "stderr": "task id is absent from its owning partition: SESSION-STARTUP-READING.48"
+    },
+    {
+      "tree": "SESSION-STARTUP-READING",
+      "id": "SESSION-STARTUP-READING.99",
+      "returncode": 255,
+      "stderr": "task id is absent from its owning partition: SESSION-STARTUP-READING.99"
+    },
+    {
+      "tree": "SESSION-STARTUP-READING",
+      "id": "SESSION-STARTUP-READING.100",
+      "returncode": 255,
+      "stderr": "no semantic partition owns task id SESSION-STARTUP-READING.100"
+    },
+    {
+      "tree": "SESSION-STARTUP-READING",
+      "id": "SESSION-STARTUP-READING.3.999999",
+      "returncode": 255,
+      "stderr": "task id is absent from its owning partition: SESSION-STARTUP-READING.3.999999"
+    },
+    {
+      "tree": "SESSION-STARTUP-READING",
+      "id": "SESSION-STARTUP-READING.89.404",
+      "returncode": 255,
+      "stderr": "task id is absent from its owning partition: SESSION-STARTUP-READING.89.404"
+    },
+    {
+      "tree": "SESSION-STARTUP-READING",
+      "id": "FUTURE-PARITY-BACKLOG.1",
+      "returncode": 255,
+      "stderr": "task id is not a stable child of SESSION-STARTUP-READING"
+    },
+    {
+      "tree": "UNKNOWN",
+      "id": "UNKNOWN.1",
+      "returncode": 255,
+      "stderr": "usage: perl tools/read_task_tree.pl --tree TREE --id STABLE-ID"
+    }
+  ],
+  "outside_cwd": "both tools PASS",
+  "idempotence": "startup twice and FUTURE once PASS; history unchanged",
+  "unchanged_future_files": [
+    "docs/tasks/FUTURE-PARITY-BACKLOG.00-08.md",
+    "docs/tasks/FUTURE-PARITY-BACKLOG.09.md",
+    "docs/tasks/FUTURE-PARITY-BACKLOG.10.0-6.md",
+    "docs/tasks/FUTURE-PARITY-BACKLOG.10.7-10.md",
+    "docs/tasks/FUTURE-PARITY-BACKLOG.11-13.md",
+    "docs/tasks/FUTURE-PARITY-BACKLOG.14.6.5-8.md",
+    "docs/tasks/FUTURE-PARITY-BACKLOG.14.md",
+    "docs/tasks/FUTURE-PARITY-BACKLOG.15-24.md",
+    "docs/tasks/FUTURE-PARITY-BACKLOG.history.md",
+    "docs/tasks/FUTURE-PARITY-BACKLOG.index.jsonl",
+    "docs/tasks/FUTURE-PARITY-BACKLOG.md",
+    "tools/build_task_tree_partitions.pl",
+    "scripts/check_task_tree_partitions.pl"
+  ],
+  "public_tool_mutations": [
+    {
+      "name": "stale",
+      "returncode": 255,
+      "stderr": "task-tree partition digest is stale: docs/tasks/SESSION-STARTUP-READING.01-03.md"
+    },
+    {
+      "name": "missing",
+      "returncode": 2,
+      "stderr": "cannot read docs/tasks/SESSION-STARTUP-READING.01-03.md: No such file or directory"
+    },
+    {
+      "name": "symbolic",
+      "returncode": 255,
+      "stderr": "unsafe or symbolic task-tree partition: docs/tasks/SESSION-STARTUP-READING.01-03.md"
+    },
+    {
+      "name": "absolute",
+      "returncode": 255,
+      "stderr": "unsafe or symbolic task-tree partition: <repository-root>/.linkedspec-data/scratch/startup-partition16/tool-fixture/docs/tasks/SESSION-STARTUP-READING.01-03.md"
+    },
+    {
+      "name": "traversal",
+      "returncode": 255,
+      "stderr": "unsafe or symbolic task-tree partition: docs/tasks/../tasks/SESSION-STARTUP-READING.01-03.md"
+    },
+    {
+      "name": "duplicate-owner",
+      "returncode": 255,
+      "stderr": "multiple semantic partitions own task id SESSION-STARTUP-READING.1"
+    },
+    {
+      "name": "malformed",
+      "returncode": 25,
+      "stderr": "invalid task-tree index record at docs/tasks/SESSION-STARTUP-READING.index.jsonl:1"
+    },
+    {
+      "name": "metadata-tree",
+      "returncode": 255,
+      "stderr": "task-tree index metadata mismatch for SESSION-STARTUP-READING"
+    },
+    {
+      "name": "absent-id",
+      "returncode": 255,
+      "stderr": "task id is absent from its owning partition: SESSION-STARTUP-READING.1"
+    },
+    {
+      "name": "line-overflow",
+      "returncode": 255,
+      "stderr": "docs/tasks/SESSION-STARTUP-READING.01-03.md exceeds 5,000 lines"
+    },
+    {
+      "name": "byte-overflow",
+      "returncode": 255,
+      "stderr": "docs/tasks/SESSION-STARTUP-READING.01-03.md exceeds 786,432 bytes"
+    }
+  ],
+  "owned_refresh": "PASS stale read rejected, mutable snapshot refreshed, exact read restored, history unchanged",
+  "book": {
+    "render": "PASS final repository-managed mdBook build after pressure repair",
+    "html": "PASS exact command block, five topology/limit assertions and two routed historical owner references",
+    "source": "docs/linkedspec-book/src/development/local-ci-and-regression.md",
+    "rendered": "docs/linkedspec-book/book/development/local-ci-and-regression.html",
+    "pressure_repair": {
+      "before_lines": 2065,
+      "after_lines": 2047,
+      "unchanged_limit": 2048,
+      "routed_historical_owners": [
+        "docs/knowledge/readme-stability-policy.md",
+        "docs/tasks/README-STABILITY-POLICY.md",
+        "docs/knowledge/bounded-live-document-store-contract.md",
+        "docs/decisions/0069-bounded-change-and-notes-history.md",
+        "docs/decisions/0083-engineering-notes-sixteenth-member-capacity.md"
+      ],
+      "scope": "Duplicated historical admission/count details route to pre-existing canonical owners; current workflow and complete command block retained."
+    },
+    "source_sha256": "50da401dbb9604a89def1911031e8544e14e69286c2473a2aaa26a8906846898"
+  },
+  "validator": {
+    "input_mutations": 60,
+    "independent_pressure_controls": 9,
+    "result": "PASS"
+  },
+  "cadence": {
+    "identity_relocation_controls": 14,
+    "path_classifications": 16,
+    "tier_cases": 5,
+    "result": "PASS focused self-tests; actual staged comparison and canonical receipt proof remain required",
+    "actual_staged_owner": "PASS canonical;166 historical triplets remain unchanged by task identity",
+    "missing_receipt_negative": "PASS exit1 rejects candidate without matching canonical receipt; no in-progress flag or bypass used",
+    "knowledge_alignment": "Current verification-cadence-policy card now describes per-ID exact-field comparison; former added-line behavior is explicitly historical. Fourteen production self-test controls retain the one-leaf requirement."
+  },
+  "route_preservation": "PASS one exact task_evidence contract extension, six stricter startup controls; every existing limit and unrelated route unchanged",
+  "history_rollover": {
+    "byte_count": 27272,
+    "current_path": "CHANGES.md",
+    "immutable": true,
+    "line_count": 132,
+    "retrieval_command": "perl tools/read_document_history.pl --surface change_history --segment 4970",
+    "segment_id": "4970",
+    "sha256": "298de6f4214e71bc734bfd8fce2f8c060b980a3a0f2bd82ca00a91fab189c4e9",
+    "source_blob": "5cb84db7097134e0dff78d45b7faccf136ae3ba8",
+    "source_commit": "58a5ff936e54f0699da2b33c35641a5e0155ed81",
+    "source_end_line": 300,
+    "source_path": "CHANGES.md",
+    "source_start_line": 169,
+    "surface": "change_history",
+    "target_path": "docs/history/changes/segment-4970-298de6f4214e.md",
+    "type": "segment"
+  },
+  "history_preservation": "PASS prior manifest records and archive bytes unchanged; added132-line segment equals exact clean58a5ff936 CHANGES range",
+  "current_routed_collection": {
+    "files": 115,
+    "lines": 92791,
+    "bytes": 10341765
+  },
+  "diff_hygiene": {
+    "ordinary_result": "Only two copied blank EOF separators reported",
+    "preserved_source_lines": {
+      "CHANGES.md": 168,
+      "docs/tasks/SESSION-STARTUP-READING.md": 5040
+    },
+    "source_commit": "58a5ff936e54f0699da2b33c35641a5e0155ed81",
+    "scoped_result": "PASS ordinary check on all other paths; command-local core.whitespace=-blank-at-eof only for CHANGES.md and new SESSION-STARTUP-READING.50-99.md. No repository configuration or byte loss."
+  },
+  "focused_task_metadata": "PASS37 FUTURE/60 startup mutations,9 startup pressure,10 current-ID mutations;2904 unique current definitions,111 current files,two registered histories",
+  "memory": "PASS59/60 lines, activation58a5ff936, semantic handoff cases/mutations",
+  "superseded_canonical": {
+    "candidate_sha256": "3c832b2c2b8a577a85f342994a0707cf28c885ea2f50e05293aef4bf977eb5a8",
+    "result": "Deliberately cancelled by SIGTERM during Rust admission to correct stale current-tense cadence Knowledge wording; exit101 consumed; no canonical proof or receipt claimed.",
+    "log": ".linkedspec-data/scratch/startup-partition16/canonical-superseded.log"
+  },
+  "history_capacity": {
+    "changes": {
+      "segments": 41,
+      "collection_files": 43,
+      "manifest_lines": 42,
+      "manifest_bytes": 23951
+    },
+    "engineering_notes": {
+      "segments": 37,
+      "collection_files": 39,
+      "manifest_lines": 38,
+      "manifest_bytes": 22961
+    },
+    "count_rule": "Collection includes the live root, immutable segment files and manifest; its first metadata record is a manifest line, not a segment."
+  },
+  "handoff_review": "Corrected MEMORY change-history count43; aligned current task-index/roadmap frontier and qualified known Perl read-exclusion gap .89 without claiming repair.",
+  "superseded_pointer_candidate": {
+    "candidate_sha256": "f6192f62d4ad74c92e5beaa00f6dac69d5667b98a233697bb181740e12da15df",
+    "result": "Deliberately cancelled during POSIX CLI conformance to correct handoff metadata; exit143 consumed and group72534 fully drained. No canonical proof or receipt.",
+    "partial_scope": "Default CLI66/66; all preceding default-gate runtime, contract, storage and relocation checks passed. POSIX CLI and Phase0 not completed.",
+    "log": ".linkedspec-data/scratch/startup-partition16/canonical-pointer-superseded.log",
+    "log_sha256": "d2d479abeef0a5cf5e3544542e16408bd2b31dc8821d71c3a364e606f97433b9"
+  }
+}

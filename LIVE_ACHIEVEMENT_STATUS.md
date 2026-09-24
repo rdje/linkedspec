@@ -2,17 +2,19 @@
 
 ## Current Activity
 
-Startup-task partition planning is verified; the atomic .16.2 migration is next. All original bytes/IDs and current limits remain preserved. Confirmed Perl read-purity .89 follows containment before .51.
+Startup task evidence is losslessly partitioned with bounded lookup and unchanged collection ceilings. The current frontier is confirmed Perl read-purity .89, before cat-arity .51.
 
 ## Latest Completed Slice
 
-- `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.16.1 - freeze lossless startup task partition plan` — independent whole-source reconstruction and four payload hashes pass; source 396 IDs and conservative routed projection 115/93554/10456687 are pinned.
+- `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.16.2 - partition startup task evidence without loss` — exact source/all 395 child blocks, public 998 lookups, negative/tool/pressure/cadence controls and rendered book pass; normal canonical acceptance governs landing.
 
 ## Next Action
 
-- Activate .16.2 from the clean plan commit, implement the frozen migration and verify the exact staged candidate canonically; then repair startup .89 before .51. The director will notify ARCHOGEN only after LS-004 is verified fixed.
+- Resolve and activate startup .89 from the clean migration commit; fix confirmed Perl read-induced state creation before .51. The director will notify ARCHOGEN only after LS-004 is verified fixed.
 
 ## Recent Completions
+
+- `2026-09-24` — `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.16.2` preserves all task bytes/IDs under unchanged limits, with public 998 and independent source/node proof.
 
 - `2026-09-24` — `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.16.1` freezes lossless task partitioning and consumer transfer without implementation or higher limits.
 
@@ -43,8 +45,6 @@ Startup-task partition planning is verified; the atomic .16.2 migration is next.
 - `2026-09-23` — `SESSION-STARTUP-READING.86.4.7` repairs physical quoted-subject validation; focused198, exact book16 and Phase0 1033/1033 pass.
 
 - `2026-09-23` — `SESSION-STARTUP-READING.86.4.6` repairs helper statement boundaries; focused52, exact book11 and Phase0 1033/1033 pass.
-
-- `2026-09-23` — `SESSION-STARTUP-READING.86.4.3` repairs Perl multiline helper validation and physical diagnostic offsets; focused173 and Phase0 1033/1033 pass.
 
 ## History
 

@@ -62,60 +62,55 @@ were immutable measured debt. All four are now current bounded collections: live
 evidence under ADR `0068`, and change history plus engineering notes under ADR `0069`. Their former debt ceilings
 remain historical facts rather than reusable growth allowances.
 
-`README-STABILITY-POLICY.4.1` canonical admission passes that unconditional doctrine together with the other six
-registered doctrines, repository containment and moved-root execution, primary CLI 66/66 in both option
-environments, RAM 32%, and Phase 0 1,031/1,031 in 694 seconds. No language/runtime surface moves in that proof.
-
-Unchanged closeout `.4.2` proves the SHA-256/Git identity of README, policy, registry, routing checker, Bash
-wrapper, doctrine registry, and canonical driver from commit `5c570719`. It independently repeats 20 surfaces,
-62 routes, 32/32 mutations, seven doctrines, semantic/MCP/cursor admission, containment/moved-root execution,
-primary CLI 66/66 twice, RAM 52%, and Phase 0 1,031/1,031 in 673 seconds. The revision closes without a new oracle.
+Historical admission and unchanged-closeout evidence, including exact commits and runtime results,
+lives in `docs/knowledge/readme-stability-policy.md` and `docs/tasks/README-STABILITY-POLICY.md`.
 
 #### Bounded views over exact history
 
-ADR `0066` defines the migration contract for the four measured debt families. Live status, future task evidence,
-change history, and engineering notes are implemented and independently recomposed unchanged.
+ADR `0066` defines bounded views over verified stores for live status, task evidence and the two author histories.
 
-The audit found two important machine interfaces. Seven capability/public-closeout families previously required
-historical markers from `LIVE_ACHIEVEMENT_STATUS.md`; six JSON projections and seven executable checkers now use
-indexed ADR `0067` as current decision authority instead. Nine executable checkers and two contract projections
-previously read exact task nodes, statuses, and evidence from `docs/tasks/FUTURE-PARITY-BACKLOG.md`; all eleven now
-read their bounded semantic owners. Both migrations preserve those machine interfaces before shrinking the stable
-roots, proving why neither file could be safely truncated or split by byte count alone.
+A storage migration must first preserve its content consumers. Current assertions read governed records or
+semantic owners; the FUTURE checker rejects old-monolith coupling in all eleven transferred scopes.
+The complete consumer census and migration evidence live in `docs/knowledge/bounded-live-document-store-contract.md`.
 
 The chronology protocol uses a tracked JSONL manifest per family. Every immutable segment records its
 repository-relative path, clean source commit and Git blob, exact source line range, line/byte counts, SHA-256,
 current replacement, and root-derived retrieval command. The checker must concatenate segments and reproduce
-`git show <commit>:<path>` byte-for-byte. `LIVE_ACHIEVEMENT_STATUS.md` remains the stable path as a five-section
-overwrite view capped at 256 lines / 32 KiB. Its first manifest describes four segments that reconstruct clean
-commit `dc8dd896` exactly. `CHANGES.md` and `DEVELOPMENT_NOTES.md` are stable bounded hot shards capped at 512
-lines / 64 KiB. Eleven change segments and six engineering-note segments reconstruct their clean `61a52dbd`
-sources exactly: 44,270 lines / 3,104,131 bytes and 21,308 lines / 2,291,424 bytes, respectively.
+`git show <commit>:<path>` byte-for-byte. `LIVE_ACHIEVEMENT_STATUS.md` is a five-section overwrite view
+capped at 256 lines / 32 KiB. `CHANGES.md` and `DEVELOPMENT_NOTES.md` are bounded hot shards capped at
+512 lines / 64 KiB. Original snapshot counts, source identities and independent reconstruction results
+remain in the canonical bounded-store record and ADR `0069`.
 
-The future task root is now a 381-line navigable live index. All 510 stable IDs route unchanged into seven semantic
-parts: `.0-.8`, `.9`, `.10.0-.6`, `.10.7-.10`, `.11-.13`, `.14`, and `.15-.24`. One immutable 3,340-line part
-preserves superseded frontier and legacy global logs. The split at real `.10` child boundaries keeps every part
-below 5,000 lines. A strict nine-record JSONL index binds the clean source identity/ranges and same-commit current
-counts/digests; strengthened task metadata rejects duplicate/missing nodes, wrong ranges, stale snapshots,
-consumer recoupling, mutable history, or a frontier without one canonical node.
+Two task trees use stable semantic partitions. `FUTURE-PARITY-BACKLOG` has eight mutable
+parts and one immutable history part, described by a ten-record schema-v1 index. Its
+later `.14.6.5` split preserves existing IDs; the current root supplies navigation.
+
+`SESSION-STARTUP-READING` has three mutable owners (`.1–.3`, `.4–.49`, `.50–.99`) and one
+immutable historical part. Its five-record index preserves the original 7,994 lines /
+960,362 bytes, including all 395 child definitions and the historical root. ID-scoped
+reading evidence stays with its semantic owner. The new current root is capped at
+256 lines / 32 KiB; each part at 5,000 lines / 768 KiB. Existing collection ceilings stay
+unchanged. A reserved numeric range does not imply that every ID exists.
+
+Both strict indexes bind clean Git source identities/ranges and same-commit current
+counts/digests. The task metadata doctrine rejects missing, duplicate or misplaced nodes,
+stale snapshots, changed immutable history, broken root/frontier references and pressure
+overflow. Preserved historical instructions do not supersede current startup or dependency
+boundaries. Verification declarations move with their stable task IDs: relocation alone
+adds no new slice, while each new slice still requires exactly one complete owning-leaf
+triplet and its selected verification tier.
 
 Change and note authors prepend complete records to the bounded roots. The rollover tool warns at 80% of either
 root limit, requires action at 90%, and archives the oldest complete clean-HEAD records until at most 50% remains.
 It refuses to archive uncommitted records or rewritten/reordered HEAD content. Change boundaries are `## `
 headings; engineering-note boundaries are dated entries or `## ` headings. New content-addressed segments use IDs
 below the initial `5000` reserve, so manifest order remains newest-to-oldest without renaming immutable files.
-Engineering-notes segment 4992 advances only the finite collection capacity to sixteen files and fifteen
-manifest lines under ADR `0083`; all aggregate, per-file, byte, lifecycle, owner, and verifier controls remain
-unchanged. ADR `0081` remains the exact prior fifteen-member step.
+Current collection ceilings are in `doctrine/readme_stability/routes.jsonl`; earlier capacity steps,
+including engineering-notes segment 4992, remain recorded in ADRs `0081` and `0083`.
 Publication is recoverable: segment first, manifest second, bounded root last; rerun reuses an exact orphan segment
 or completes an exact pending manifest generation, while any conflict fails closed. `COMMIT.md` requires both
 pressure checks on every accepted slice. Unchanged registry recomposition passes 20 surfaces / 62 routes / 32/32
 with all four stores current and empty debt metadata; every migration starts and lands at a clean Git boundary.
-
-Consumer inventory is executable evidence. The initial planning audit found four checkers plus two JSON
-projections; the first canonical run exposed an omitted logical-helper task read. A complete executable-scope scan
-then found diagnostic-output, duplicate-slot-identity, generated-source, and native-resolution reads too. All
-eleven now have focused passing contracts, and the partition checker rejects the old monolith path in every scope.
 
 Use the bounded query that matches the question:
 
@@ -129,14 +124,18 @@ perl tools/roll_document_history.pl --surface change_history --check
 perl tools/roll_document_history.pl --surface engineering_notes --check
 perl tools/read_task_tree.pl --tree FUTURE-PARITY-BACKLOG --id FUTURE-PARITY-BACKLOG.14.3.1.1
 perl tools/update_task_tree_index.pl --tree FUTURE-PARITY-BACKLOG
+perl tools/read_task_tree.pl --tree SESSION-STARTUP-READING --id SESSION-STARTUP-READING.89
+perl tools/update_task_tree_index.pl --tree SESSION-STARTUP-READING
 ```
 
 The first form is the normal historical lookup, the second returns one raw immutable segment, and the third
 reconstructs every pre-migration byte. The next four commands query the two author histories and check their
 rollover pressure. The task commands resolve one stable task ID to its bounded owner and refresh its current index
 snapshot after an edit. `scripts/check_document_history.sh` is the fixed chronology verifier; the existing task
-metadata doctrine composes the 26/26 partition mutation oracle. Archives and task history are positive historical
-evidence, never current-state denials or append targets.
+metadata doctrine composes both registered partition validators and the repository-wide current-ID census.
+The tools derive the repository root from their script location, so their behavior is independent of the
+caller's working directory. Archives and task history are positive historical evidence, never current-state
+denials or append targets.
 
 ### Neutral typed source-location contract
 

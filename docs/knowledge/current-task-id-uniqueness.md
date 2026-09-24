@@ -8,7 +8,7 @@ answers:
   - "which checker rejects duplicate current task ids"
   - "does a history filename bypass the current task id census"
   - "which task history files are excluded from current id uniqueness"
-date: 2026-08-30
+date: 2026-09-24
 status: current
 tags: [task-tree, metadata, doctrine, partitions, continuity, mutation-testing]
 evidence: "FUTURE-PARITY-BACKLOG.22.2; scripts/check_task_tree_current_ids.pl; scripts/check_task_tree_metadata.sh; git show 0e43f4ae -- docs/tasks/RUST-FUNCTIONAL-PARITY.md"
@@ -19,6 +19,10 @@ Every exact current task definition under `docs/tasks/*.md` participates in one 
 regardless of whether its tree uses one file or bounded semantic partitions. The only exclusions are history paths
 named by tracked task-tree indexes whose matching part records are explicitly immutable. A filename ending in
 `.history.md` does not exclude itself.
+
+The closed index registry now contains FUTURE-PARITY-BACKLOG and SESSION-STARTUP-READING.
+Each names exactly one immutable history owner; arbitrary history-named files remain current.
+Containment .16.2 adds startup registration without relaxing the global uniqueness rule.
 
 The first global census found one defect: `RUST-FUNCTIONAL-PARITY.7` appeared as `active` and `done` in the same
 legacy file. Git assigns the second block to finalization commit `0e43f4ae`, which inserted a completed parent
