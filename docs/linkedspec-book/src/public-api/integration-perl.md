@@ -319,12 +319,30 @@ ending in its quoted value. Check both failure channels described
 below; a returned parser alone does not establish successful execution.
 
 For arithmetic division, `div(14, 2)` works at the end of an action block.
-The equivalent slash call `/(14, 2)` currently requires a trailing semicolon in
-that position; its separate repair is tracked under `.86.5`. Newline-separated
-division followed by another assignment already works. Prefer `div(...)` when
-slash syntax would obscure the arithmetic intent.
+The equivalent slash call `/(14, 2)` also works before closing braces that
+finish the physical line, with LF or CRLF line endings. This complete parser
+returns `7` on input `x`:
 
-To verify these four complete examples against your checkout, run:
+```text
+Top::
+ I { out = /(14, 2) }
+ /x/ E { return(out) }
+```
+
+Additional rule content after that closing brace on the same line still exposes
+a validation gap (`SESSION-STARTUP-READING.86.5.2`). Keep the closing brace at
+line end for this slash form. Newline-separated division followed by another
+assignment also works. Prefer `div(...)` when slash syntax would obscure the
+arithmetic intent.
+
+Unescaped `}` inside an action's regex remains a separate Perl parsing defect:
+structural validation can accept the source while execution returns no result
+or reports a handler-compilation error (`SESSION-STARTUP-READING.54.1`). Escape
+a literal closing brace as `\}` in the pattern; the assigned multiline control
+with that escape retains its following `return(7)`. The final-division repair
+does not close this regex-brace issue.
+
+To verify these five complete examples against your checkout, run:
 
 ```bash
 bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/generated_source_contract.t
@@ -336,10 +354,11 @@ It checks the documented values, error channel, rule descriptors and generated
 source identities alongside the existing generated-source contract tests.
 
 These examples cover ordinary rule actions. Perl's separate callable `matches`
-and function-position `filter_match` limitations remain; use the
+and arithmetic-helper gaps, plus function-position `filter_match`, remain; use the
 [value-helper reference](../dsl/value-container-flow-helper-reference.md#regex-patterns-and-variable-values)
-for their supported forms and restrictions. The arithmetic and escape limitations
-above also remain outside this verified example set.
+and its [numeric helper restrictions](../dsl/value-container-flow-helper-reference.md#numeric-value-helpers)
+for their current supported forms. The same-line member and escape limitations
+above remain outside this verified example set.
 
 ## Handle runtime outcomes explicitly
 

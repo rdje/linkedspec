@@ -12,6 +12,12 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-09-24 — SESSION-STARTUP-READING.86.5.1 - use outer context without changing slash precedence
+
+The shared MethodExpr slash predicate intentionally excludes a closing brace to preserve regex interpretations. Before this repair, both validation fragment scans consumed the final /(14,2) and the real outer closer as an unterminated regex. Supplying structural depth identifies a bounded outer-context candidate: strip only physical-line-ending block closers in a temporary copy, then require the existing balanced-call parser to consume the whole remaining call. The first physical-line-only candidate regressed two complete multiline-regex controls and was withdrawn; its interrupted Phase0 is excluded. Full-source validation now prefers the existing regex interpretation and retries final-call classification only if that fails with a recorded candidate. Buffered failure/trace events publish only for the selected interpretation; both-failed attempts retain the original diagnostic. Reentrant callbacks run after trial state is restored. Complete regex suffixes and explicit host operators retain their previous path; source bytes and diagnostic coordinates remain intact.
+
+The accepted candidate's source/test diff SHA-256 is91821cd09b9991ce975862b4c83a62b0c899badb8c02fd62a8ed9dd8f89188d5. Focused206, executable book82, baseline RED only groups12/13, exact compatibility replay and complete Phase0 1033/1033 establish this bounded repair. Same-line following members require .86.5.2 before parent closeout. The15-case permanent checkpoint also isolates callable div/symbol unknown_helper (.87.3), extra-parenthesis host fallthrough (.87.4) and previously owned bootstrap regex-brace loss (.54.1); none is conflated with outer EOF validation. The book exposes those limits with direct-call alternatives only where measured.
+
 ## 2026-09-24 — SESSION-STARTUP-READING.86.4.4.2.2 - bound public helper acceptance by exact sources
 
 The final public recomposition joins four fixed diagnostic sets, not an inferred whole-language claim. All59 expected outcomes agree: the original assignment forms remain host compatibility, the deliberately malformed quoted regex retains its compile-stage error, and bare/spaced slash EOF still fail validation while named/semicolon controls return7. The complete syntax-node record also remains exact.

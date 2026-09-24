@@ -730,6 +730,21 @@ and `%(a, b)` -> `num_mod(a, b)`. There is no operator precedence in either
 form; write grouping explicitly with nested calls such as `+(*(a, b), c)` or
 `add(mul(a, b), c)`.
 
+On the current Perl backend, ordinary rule actions support the arithmetic calls
+above, including a final `/(14, 2)` before block-closing braces at the end of a
+physical line. See the [complete division example](../public-api/integration-perl.md#regex-and-division-in-action-code).
+Two separately tracked boundaries remain:
+
+- A callable body such as `{|| return(div(14, 2)) }` or
+  `{|| return(/(14, 2)) }` fails with `unknown_helper` at runtime. Numeric callable
+  dispatch is tracked for repair under `SESSION-STARTUP-READING.87.3`.
+- Wrapping the entire call in extra parentheses, as in `out = (div(14, 2))`
+  or `out = (/(14, 2))`, currently reaches a host-function or regex error.
+  Use the direct call `out = div(14, 2)` in ordinary actions. The supported
+  grouping boundary and its diagnostics are tracked under
+  `SESSION-STARTUP-READING.87.4`; these failing probes do not establish an
+  additional grouping syntax.
+
 Comparison symbols are accepted as the equivalent call names for the numeric
 comparison family: `==(a, b)` -> `num_eq(a, b)`, `!=(a, b)` -> `num_ne(a, b)`,
 `>(a, b)` -> `num_gt(a, b)`, `>=(a, b)` -> `num_ge(a, b)`, `<(a, b)` ->

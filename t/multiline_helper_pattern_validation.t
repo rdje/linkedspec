@@ -366,4 +366,116 @@ subtest 'grouped pattern recognition preserves numeric and host interpretations'
  }
 };
 
+subtest 'final slash calls before physical-line-ending block closers' => sub {
+ my @cases = (
+  ['compact', 'I {out=/(14,2)}'],
+  ['spaces', 'I { out = /(14,2)   }'],
+  ['bare lifecycle', '{ out=/(14,2) }'],
+  ['nested if', 'I { if(1) { out=/(14,2) } }'],
+  ['value block', 'I { out={ /(14,2) } }'],
+  ['variables', 'I { a=14; b=2; out=/(a,b) }'],
+  ['nested arguments', 'I { out=/(add(12,2),2) }'],
+  ['quoted arguments', 'I { out=/("14","2") }'],
+  ['semicolon control', 'I { out=/(14,2); }'],
+  ['named control', 'I { out=div(14,2) }'],
+  ['receiver control', 'I { out=/(14,2).floor() }'],
+ );
+ my $number = 0;
+ for my $separator ("\n", "\r\n") {
+  for my $case (@cases) {
+   my ($name, $initial) = @$case;
+   my $source = join($separator, 'Top::', " $initial", ' /x/ E { return(out) }', '');
+   my $original = $source;
+   my %context;
+   my $parser = LinkedSpec::Get(\$source, runtime_ctx_ref => \%context);
+   ok($parser, "$name final call validates and compiles");
+   my $input = 'x';
+   is($parser ? $parser->(\$input) : undef, 7, "$name final call returns seven");
+   is($context{last_error}, undef, "$name has no deferred error");
+   is($source, $original, "$name retains exact authored bytes");
+   my $emitted = eval { LinkedSpec::emit_generated_source(\$source) };
+   my $emit_error = $@;
+   ok(defined($emitted), "$name emits independently executable source") or diag(explain($emit_error));
+   next unless defined($emitted);
+   my $package = 'FinalSlashCall' . ++$number;
+   my $loaded = eval "package $package; $emitted; 1";
+   ok($loaded, "$name emitted source loads") or diag($@);
+   my $execute = $package->can('Execute');
+   $input = 'x';
+   is($execute ? $execute->(\$input) : undef, 7, "$name emitted result is exact");
+  }
+ }
+ for my $action (
+  'out=/(14,2)',
+  'out=/(14,2 }',
+  'out=/(14,2) }}',
+  'rx=qr/(14,2) }',
+  'rx=m/(14,2) }',
+ ) {
+  my $source = "Top::\n I { $action\n /x/ E { return(out) }\n";
+  my %context;
+  my $parser = LinkedSpec::Get(\$source, runtime_ctx_ref => \%context);
+  ok(!$parser, 'malformed structure or explicit unclosed host quote rejects');
+  is(($context{last_error} || {})->{stage}, 'validate_dsl_syntax', 'failure remains structural validation');
+ }
+};
+
+subtest 'full-source slash retry preserves regexes and publishes only selected diagnostics' => sub {
+ for my $separator ("\n", "\r\n") {
+  for my $case (
+   ['assigned brace', "rx = /(14,2) }\ntext/; return(7)", undef, undef],
+   ['assigned brace and spaces', "rx = /(14,2) }  \ntext/; return(7)", undef, undef],
+   ['escaped brace', "rx = /(14,2) \\}\ntext/; return(7)", 7, undef],
+   ['helper brace', "return(matches(\"14,2 }\\ntext\", /(14,2) }\ntext/))", undef, 'rule_handler_compile'],
+   ['explicit host brace', "rx = qr/(14,2) }\ntext/; return(7)", undef, 'rule_handler_compile'],
+  ) {
+   my ($name, $action, $expected, $stage) = @$case;
+   my $source = source_for($action, $separator);
+   my $original = $source;
+   my @failures;
+   ok(LinkedSpec::Validation::validate_dsl_syntax(\$source, {
+    on_failure => sub { push @failures, { @_ } },
+   }), "$name keeps its accepted full-source regex structure");
+   is_deeply(\@failures, [], "$name publishes no spurious structural failure");
+   my %context;
+   my $parser = LinkedSpec::Get(\$source, runtime_ctx_ref => \%context);
+   ok($parser, "$name retains its public build boundary");
+   my $input = 'x';
+   # The unescaped brace forms still have the independently owned .54.1
+   # bootstrap defect. This repair must not move it to structural validation.
+   is($parser ? $parser->(\$input) : undef, $expected, "$name retains its measured value");
+   is(($context{last_error} || {})->{stage}, $stage, "$name retains its error owner");
+   is($source, $original, "$name retains authored bytes");
+  }
+ }
+
+ require LinkedSpec::Trace;
+ my @events;
+ no warnings 'redefine';
+ local *LinkedSpec::Trace::log_output = sub { push @events, ['trace', @_]; return };
+ my $valid = "Top::\n I { out=/(14,2) }\n /x/ E { return(out) }\n";
+ ok(LinkedSpec::Validation::validate_dsl_syntax(\$valid, {
+  on_failure => sub { push @events, ['failure', { @_ }] },
+ }), 'successful final-call retry validates');
+ is(scalar(grep { $_->[0] eq 'failure' } @events), 0, 'discarded regex attempt never notifies the caller');
+ is(scalar(grep { $_->[0] eq 'trace' && ($_->[3] // '') eq 'DSL validation failed' } @events),
+  0, 'discarded regex attempt never writes a validation error trace');
+
+ @events = ();
+ my $invalid = "Top::\n I { out=/(14,2) }\n stray=1\n";
+ my $nested_valid;
+ ok(!LinkedSpec::Validation::validate_dsl_syntax(\$invalid, {
+  on_failure => sub {
+   push @events, ['failure', { @_ }];
+   $nested_valid = LinkedSpec::Validation::validate_dsl_syntax(\$valid, {});
+  },
+ }), 'both invalid interpretations reject');
+ my @failures = grep { $_->[0] eq 'failure' } @events;
+ is(scalar(@failures), 1, 'only the original failure reaches the callback');
+ like($failures[0][1]{summary}, qr/Unclosed rule block/, 'both-failed retry retains the original diagnostic');
+ is(scalar(grep { $_->[0] eq 'trace' && ($_->[3] // '') eq 'DSL validation failed' } @events),
+  1, 'only one validation error reaches tracing');
+ ok($nested_valid, 'failure callback can reenter validation after trial state is restored');
+};
+
 done_testing;

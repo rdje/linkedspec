@@ -518,12 +518,14 @@ subtest 'integration book regex examples execute through loader and fresh genera
   ['captured subject substitution', "x\ny", 'ok'],
   ['quoted multiline subject', 'x', 'ok'],
   ['grouped pattern continuation', 'x,y', [1, 'ok']],
+  ['final numeric slash call', 'x', 7, ['Top']],
  );
  is(scalar(@sources), scalar(@cases), 'every complete published regex example is covered');
  return unless @sources == @cases;
  my $scratch = tempdir('linkedspec-book-regex-XXXXXX', TMPDIR => 1, CLEANUP => 1);
  for my $index (0 .. $#cases) {
-  my ($label, $input, $expected) = @{$cases[$index]};
+  my ($label, $input, $expected, $labels) = @{$cases[$index]};
+  $labels //= ['Top', 'Done'];
   my $source = $sources[$index];
   my $name = 'BookRegex' . ($index + 1);
   my $path = File::Spec->catfile($scratch, "$name.spec");
@@ -550,8 +552,8 @@ subtest 'integration book regex examples execute through loader and fresh genera
    \$source, return_descriptor => 1, runtime_ctx_ref => \%descriptor_context,
   );
   is_deeply(
-   [sort keys %{$descriptor->{spec} || {}}], ['Done', 'Top'],
-   "$label retains both authored rules in its public descriptor",
+   [sort keys %{$descriptor->{spec} || {}}], [sort @$labels],
+   "$label retains its authored rules in the public descriptor",
   );
   is($descriptor_context{last_error}, undef, "$label descriptor has no compile error");
 
@@ -599,8 +601,8 @@ BOOK_RUNNER
   is($result->{metadata}{source_identity}, $identity, "$label generated identity is exact");
   is_deeply(
    $result->{metadata}{plan},
-   [{label => 'Top', family => 'default'}, {label => 'Done', family => 'default'}],
-   "$label generated plan retains both authored rules",
+   [map { +{label => $_, family => 'default'} } @$labels],
+   "$label generated plan retains its authored rules",
   );
  }
 };

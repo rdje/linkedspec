@@ -14,6 +14,10 @@ BEGIN {
 }
 use LinkedSpec::OwnerDispatch ();
 
+# Each full-source syntax attempt owns its diagnostics. A rejected lexical
+# alternative must not notify callers or write misleading trace errors.
+our $syntax_trial;
+
 use constant {
  DUMP_NONE => 0,
  DUMP_LOW  => 100,
@@ -26,6 +30,10 @@ sub _call_compiler_state {
 
 sub _trace_log_output {
  my @args = @_;
+ if ($syntax_trial) {
+  push @{$syntax_trial->{events}}, ['trace', \@args];
+  return;
+ }
  return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
   LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, 'LinkedSpec::Trace');
   return LinkedSpec::Trace::log_output(@args)
@@ -619,7 +627,7 @@ sub _helper_pattern_validation_view {
     }
    }
    my $line = substr($source, $line_start, $line_end - $line_start);
-   my $end = _consume_slash_construct($line, $i - $line_start, length($line));
+   my $end = _consume_slash_construct($line, $i - $line_start, length($line), scalar(@scopes));
    if (defined $end) {
     $i = $line_start + $end - 1;
     next;
@@ -907,6 +915,36 @@ sub _validate_inter_match_gap_authored_metadata {
 sub validate_dsl_syntax {
  my ($spec_content, $option) = @_;
  $option = {} unless ref($option) eq 'HASH';
+
+ # Preserve every source accepted by the established regex interpretation.
+ # Only a failed full-source parse with a final-call candidate may retry.
+ my $selected = _dsl_syntax_trial($spec_content, $option, 0);
+ if (!$selected->{valid} && $selected->{has_final_slash}) {
+  my $alternative = _dsl_syntax_trial($spec_content, $option, 1);
+  $selected = $alternative if $alternative->{valid};
+ }
+ for my $event (@{$selected->{events}}) {
+  if ($event->[0] eq 'trace') {
+   _trace_log_output(@{$event->[1]});
+  } else {
+   _notify_dsl_validation_failure($option, %{$event->[1]});
+  }
+ }
+ return $selected->{valid};
+}
+
+sub _dsl_syntax_trial {
+ my ($spec_content, $option, $allow_final_slash) = @_;
+ local $syntax_trial = { allow_final_slash => $allow_final_slash, events => [] };
+ my %trial_option = (%$option, on_failure => sub {
+  push @{$syntax_trial->{events}}, ['failure', { @_ }];
+ });
+ $syntax_trial->{valid} = _validate_dsl_syntax_body($spec_content, \%trial_option);
+ return $syntax_trial;
+}
+
+sub _validate_dsl_syntax_body {
+ my ($spec_content, $option) = @_;
 
  my $validation_view = _helper_pattern_validation_view($$spec_content);
  return 0 unless _validate_inter_match_gap_authored_metadata($spec_content, $option, $validation_view);
@@ -1253,7 +1291,7 @@ sub _lifecycle_block_close_offset {
   }
 
   if ($char eq q{/}) {
-   my $slash_cursor = _consume_slash_construct($fragment, $cursor, $length);
+   my $slash_cursor = _consume_slash_construct($fragment, $cursor, $length, $depth);
    if (defined $slash_cursor) {
     $cursor = $slash_cursor;
     next;
@@ -1454,7 +1492,7 @@ sub _scan_rule_edges_in_fragment {
   }
 
   if ($ch eq q{/}) {
-   my $slash_cursor = _consume_slash_construct($fragment, $i, $len);
+   my $slash_cursor = _consume_slash_construct($fragment, $i, $len, $depth);
    if (defined $slash_cursor) {
     $i = $slash_cursor;
     next;
@@ -1663,8 +1701,24 @@ sub _scan_rule_edges_in_fragment {
  return { edges => \@edges, depth => $depth };
 }
 
+# A final action statement needs no semicolon. Keep the shared slash predicate's
+# closing-brace exclusion, but let outer structural scans count line-ending
+# block closers after an otherwise complete numeric call. A complete regex or
+# explicit host quote operator must keep its existing lexical interpretation.
+sub _slash_call_before_final_block_closers {
+ my ($fragment, $i, $len, $depth) = @_;
+ return 0 unless $depth;
+ my $call = substr($fragment, $i, $len - $i);
+ return 0 unless $call =~ s/[ \t]*\}(?:[ \t]*\})*[ \t]*\r?\z//o;
+ my $end = LinkedSpec::OwnerDispatch::call_preserving_err(sub {
+  LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, 'LinkedSpec::ActionIR::MethodExpr');
+  return LinkedSpec::ActionIR::MethodExpr::_slash_symbol_call_end_at($call, 0)
+ });
+ return defined($end) && substr($call, $end) =~ /\A[ \t]*\z/o;
+}
+
 sub _consume_slash_construct {
- my ($fragment, $i, $len) = @_;
+ my ($fragment, $i, $len, $depth) = @_;
  return undef unless defined $fragment;
  $len = length($fragment) unless defined $len;
  return undef if $i >= $len || substr($fragment, $i, 1) ne q{/};
@@ -1676,6 +1730,7 @@ sub _consume_slash_construct {
  my $prev_nonspace = $prev_nonspace_idx >= 0 ? substr($fragment, $prev_nonspace_idx, 1) : '';
 
  my $mode = '';
+ my $bare = 0;
  if ($prev_nonspace eq 's' && ($prev_nonspace_idx == 0 || substr($fragment, $prev_nonspace_idx - 1, 1) !~ /[\w\$]/o)) {
   $mode = 'substitute';
  } elsif ($prev_nonspace eq 'y' && ($prev_nonspace_idx == 0 || substr($fragment, $prev_nonspace_idx - 1, 1) !~ /[\w\$]/o)) {
@@ -1694,8 +1749,15 @@ sub _consume_slash_construct {
   $mode = 'regex';
  } elsif ($i == 0 || $prev_immediate =~ /\s/o || $prev_nonspace =~ /[=~!,;:\(\[\{]/o) {
   $mode = 'regex';
+  $bare = 1;
  } else {
   return undef;
+ }
+
+ if ($bare && _slash_call_before_final_block_closers($fragment, $i, $len, $depth)) {
+  return undef unless $syntax_trial;
+  $syntax_trial->{has_final_slash} = 1;
+  return undef if $syntax_trial->{allow_final_slash};
  }
 
  my $cursor = _consume_slash_segment($fragment, $i, $len);

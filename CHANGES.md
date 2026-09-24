@@ -12,6 +12,12 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-09-24 — SESSION-STARTUP-READING.86.5.1 - validate final line-ending slash calls
+
+Recognize a final bare arithmetic slash call before physical-line-ending block closers in Perl's outer validation scans. Use the existing balanced-call parser on a temporary classification copy. Preserve accepted full-source regex interpretations first; retry the final-call form only after failure, buffering callbacks/trace so rejected attempts publish no errors. The shared regex discriminator, explicit host quote routes and authored bytes remain unchanged. LF/CRLF, compact/spaced/nested/value/lifecycle blocks, variable/nested/quoted operands and live/emitted execution are covered.
+
+Clean-baseline replay fails only new consumer groups12/13; candidate focused proof passes206 tests in9 files. The five exact integration-book sources pass82 public/fresh-generated assertions. Five multiline-regex records remain exact, including two that exposed and rejected the earlier physical-line-only candidate; its interrupted Phase0 is excluded. The original12 and context15 replays change only bare/spaced division to7; helper13 plus its syntax record, grouped22 and numeric12 remain exact. Full Phase0 passes: Files=1, Tests=1033, 1528 wallclock secs ( 0.51 usr  0.11 sys + 1129.24 cusr 129.84 csys = 1259.70 CPU). Final book rendering and syntax pass. The book documents repaired division and preserves same-line member repair .86.5.2 plus independently discovered numeric-callable .87.3 and grouping .87.4 boundaries. Parent .86.3 canonical remains pending.
+
 ## 2026-09-24 — SESSION-STARTUP-READING.86.4.4.2.2 - verify public helper and book recomposition
 
 Close the measured Perl multiline-helper chain after validation, statement, quoted-subject, grouped-operand and fresh generated Trace repairs. Fifty-nine fixed public controls retain exact expected values/readiness/error stages: helper13, grouped22, numeric12 and original12. The malformed quoted regex retains rule_handler_compile/Unmatched ); both slash EOF forms remain .86.5-owned. The permanent original-source checkpoint makes those distinctions reproducible.

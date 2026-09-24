@@ -4839,20 +4839,52 @@ remain. Reading completion and runtime signoff remain distinct.
   - [x] **LOCKSTEP** — Four exact book examples pass21 assertions; book/current docs and remaining defect owners agree.
 
 - ID: `SESSION-STARTUP-READING.86.5`
-  Status: `pending`
+  Status: `active`
   Goal: Reconcile Perl slash-call termination at the end of an outer action block.
   Dependencies: Land .86.2 and .86.4; retained slash_eof/slash_eof_space plus named and semicolon controls; preserve the explicit closing-brace exclusion in the existing regex discriminator.
-  Planned tier: focused unless reconciliation requires a language-contract decision.
+  Children: `SESSION-STARTUP-READING.86.5.1`, `SESSION-STARTUP-READING.86.5.2`
+  Planned tier: focused.
   Planned focused proof: Public Get/runtime context, isolated lowering, complete outer source and generated execution; bare/spaced slash EOF, semicolon/named twins, escaped and closing-brace regex controls, nested and malformed contexts; phase0 and direct scanner tests.
   Planned canonical boundary: Parent .86.3; no broadened delimiter precedence without prior contract reconciliation.
   Acceptance: Fix end-of-block division rejection without stealing regex syntax. Use the established final-statement separator contract, retain source/diagnostics and malformed rejection, and synchronize integration/book guidance. Resolve a genuine contract ambiguity with the director before code.
-  Verification: Both bare and trailing-space I { out = /(14,2) } controls fail public Get with compiler_pipeline:validate_dsl_syntax, Unclosed rule block. Isolated action lowering emits valid num_div; semicolon and named div controls return 7. MethodExpr slash lookahead excludes } by design; classify outer context independently rather than removing that regex safeguard.
+  Verification: At clean fe516141b, both bare and trailing-space I { out = /(14,2) } controls fail public Get with compiler_pipeline:validate_dsl_syntax, Unclosed rule block. Isolated action lowering emits valid num_div; semicolon and named div controls return 7. MethodExpr slash lookahead excludes } by design; classify outer context independently rather than removing that regex safeguard.
+  Commit: `pending`
+
+
+- ID: `SESSION-STARTUP-READING.86.5.1`
+  Status: `done`
+  Goal: Recognize a bare final slash call before only physical-line-ending block closers.
+  Dependencies: .86.5 fixed context diagnosis and verified helper chain; preserve shared MethodExpr precedence.
+  Verification tier: `focused`
+  Focused checks: Bare/spaced/compact EOF plus named/semicolon/receiver twins, lifecycle/edge/nested and LF/CRLF, complete/escaped/host regex and malformed controls, original public diagnostics, emitted execution, action/validation dependents and full Phase0.
+  Canonical trigger: Parent .86.3; .86.5.2 retains same-line following-member repair before parent closure.
+  Acceptance: Let outer validation count the true closing braces without changing authored bytes or shared regex-vs-division classification. Complete helper literals and explicit host quote operators remain protected. Do not claim following-member or bootstrap-brace repair.
+  Verification: Outer structural depth recognizes only a complete bare slash call followed by line-ending braces; shared MethodExpr precedence and source bytes stay unchanged. Accepted full-source regex interpretations win; only a failed source with a final-call candidate retries. Only the selected attempt publishes diagnostics. Focused9 files/206 and five exact book sources/82 assertions pass. Clean fe516141b baseline completes13 groups and fails only new groups12/13. Fixed15 contexts and original12 change only their bare/spaced EOF outcomes to7; helper13+syntax/grouped22/numeric12 remain exact. Full Phase0 passes1033/1033; frozen source/test diff SHA25691821cd09b9991ce975862b4c83a62b0c899badb8c02fd62a8ed9dd8f89188d5. Syntax and final book render pass. Same-line members stay .86.5.2; numeric callable/grouping are .87.3/.87.4-owned.
+  Commit: `SESSION-STARTUP-READING.86.5.1 - validate final line-ending slash calls`
+  Artifact hygiene: Removed only the consumed baseline snapshot after112 files/2326149 bytes matched clean fe516141b Git blobs plus the frozen consumer; no symlinks/unknown files and no residue. Rust release/deps have no .bin/.log hits; incremental retains859 .bin/3161569687 bytes as reusable cache, with no .log hits. Removed the interrupted PID88109 PathSearch fixture only after its bytes matched specs/Lispish.spec; no residue. Retain proof logs; final Phase0 is verified and consumed.
+
+  - [x] **ROOT CAUSE** — Both outer scanners consume the real closer after a numeric slash call because the shared regex guard excludes braces.
+  - [x] **ISSUE** — Bare/spaced EOF sources fail Get while named/semicolon/receiver controls work.
+  - [x] **FIX** — Recognize bounded final-call candidates after full-source regex validation fails; preserve accepted regexes and publish only selected diagnostics.
+  - [x] **ADDRESSED** — Live/emitted LF/CRLF and nested forms return7; exact book82 and full Phase0 1033/1033 pass.
+  - [x] **NO REGRESSION** — Helper/grouped/numeric records and malformed diagnostics remain exact; complete/host regex routes stay protected.
+  - [x] **LOCKSTEP** — Executable book example, accurate restrictions, Knowledge, roadmaps and live owners agree; .86.5.2 is next.
+
+- ID: `SESSION-STARTUP-READING.86.5.2`
+  Status: `pending`
+  Goal: Repair final slash calls followed by same-line rule members, then recompose and close .86.5.
+  Dependencies: Verified .86.5.1; .86.5-contexts next_member/quoted-slash controls and existing accepted regex interpretations.
+  Planned tier: focused unless a genuine language-contract decision is required.
+  Planned focused proof: Lifecycle/action boundaries followed by regexes/lifecycle blocks, original complete-regex compatibility and malformed diagnostics; full affected scanner/validation/generated proof, book and final parent reconciliation.
+  Planned canonical boundary: .86.3 after complete .86.5; retain accepted interpretations and do not infer raw-host invalidity.
+  Acceptance: Identify actual outer member boundaries without borrowing their slash delimiters into the final arithmetic call or stealing complete regex syntax. Keep independent .87/.54/.34 owners distinct.
+  Verification: Same-line /x/ and E{return("/")} tails reproduce unclosed-block validation; original slash scanning consumes their later delimiter. Named/semicolon counterparts must establish supported outer grammar before implementation.
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.87`
   Status: `pending`
-  Goal: Repair existing Perl regex-helper execution gaps found during the runtime-kind audit, without adding a regex value type.
-  Children: `SESSION-STARTUP-READING.87.1`, `SESSION-STARTUP-READING.87.2`
+  Goal: Repair existing Perl helper-execution gaps and reconcile grouped-expression lowering, without adding a regex value type.
+  Children: `SESSION-STARTUP-READING.87.1`, `SESSION-STARTUP-READING.87.2`, `SESSION-STARTUP-READING.87.3`, `SESSION-STARTUP-READING.87.4`
   Dependencies: .86.4.2.4 public/lowered diagnostic and docs/knowledge/action-regex-operands-and-runtime-kinds.md. Separate from scanner .86; keep that current activity first.
 - ID: `SESSION-STARTUP-READING.87.1`
   Status: `pending`
@@ -4873,6 +4905,28 @@ remain. Reading completion and runtime signoff remain distinct.
   Verification: .86.4.2.4 literal operand fails unsupported_codeblock_actionir; string twin fails unknown_helper. CodeblockRuntime::_eval_expr lacks regex operand handling and _eval_call lacks matches; existing finite callable fixtures do not cover this helper.
   Commit: `pending`
 
+
+- ID: `SESSION-STARTUP-READING.87.3`
+  Status: `pending`
+  Goal: Execute admitted numeric helpers and symbol aliases inside Perl callable bodies.
+  Dependencies: .86.5 public context checkpoint; scalar-numeric and callable contracts; keep current scanner .86 first.
+  Planned tier: focused.
+  Planned focused proof: Ordinary/callable named/symbol arithmetic, parameter restoration and static precedence, exact numeric/error behavior, fresh emitted invocation and callable/numeric consumers.
+  Planned canonical boundary: Repair-group acceptance/push; no new arithmetic or callable contract.
+  Acceptance: Repair div(14,2) and /(14,2) callable bodies rejecting unknown_helper; preserve the numeric contract and genuine unknown-call diagnostics.
+  Verification: .86.5-contexts nested_named_callable and nested_callable both fail rule_handler_eval with unknown_helper while direct named/receiver arithmetic returns7. CodeblockRuntime::_eval_call has no numeric route and falls through to the caller binding lookup.
+  Commit: `pending`
+- ID: `SESSION-STARTUP-READING.87.4`
+  Status: `pending`
+  Goal: Reconcile Perl parenthesized arithmetic expression handling with the authored-expression contract.
+  Dependencies: .86.5-contexts parenthesized/named controls; formal action grammar, AST and value-lowering contracts before implementation.
+  Planned tier: focused unless a new grouping contract is required.
+  Planned focused proof: Grouped versus direct named/symbol expressions, public AST/lowered/error probes and malformed controls; fix admitted shapes and add direct/generated recurrence.
+  Planned canonical boundary: Any contract expansion requires prior decision; routine supported-shape repair uses final repair-group acceptance.
+  Acceptance: Determine grouping's supported boundary from canonical records, then repair admitted composition or provide accurate explicit syntax diagnostics. Do not mistake raw-host fallback for validated DSL support or widen grammar from a failing probe alone.
+  Verification: out=(/(14,2)) reaches rule_handler_compile/Search pattern not terminated; out=(div(14,2)) reaches rule_handler_eval/undefined host div. Both validate structurally; direct named and receiver controls return7. These are distinct from .86.5 outer validation and remain owned for contract reconciliation and repair.
+  Commit: `pending`
+
 ## Current Frontier
 
 ADR0123 replaces the blanket full-reading prerequisite with targeted startup. Prior
@@ -4881,10 +4935,10 @@ audit range, not the default repair frontier.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.86.5` | `pending` | Repair end-of-block slash-call validation using the preserved EOF/named/semicolon controls; retain the existing regex closing-brace safeguard. |
+| 1 | `SESSION-STARTUP-READING.86.5.2` | `pending` | Repair same-line members after verified physical-line-ending slash calls; retain regex precedence before canonical .86.3. |
 
 The audit withdraws the unsupported precedence question. Helper validation `.86.4.3` and
-statement splitting `.86.4.6` plus quoted-subject validation `.86.4.7` are verified. Public recomposition verifies grouped repair `.86.4.8.2` and fresh generated Trace bootstrap `.86.4.4.2.1`; `.86.4.4.2.2` closes the measured helper scope. EOF `.86.5` is next before canonical `.86.3`.
+statement splitting `.86.4.6` plus quoted-subject validation `.86.4.7` are verified. Public recomposition verifies grouped repair `.86.4.8.2` and fresh generated Trace bootstrap `.86.4.4.2.1`; `.86.4.4.2.2` closes the measured helper scope. Line-ending `.86.5.1` is verified; same-line `.86.5.2` follows before canonical `.86.3`.
 Independent helper gaps are owned by `.87.1/.87.2`; no regex-type feature is admitted.
 
 ## Reading Ledger
@@ -5993,7 +6047,6 @@ PERL
   passes four top-level tests. Required memory, Knowledge, history, and review checks precede landing.
 - No runtime, public-book, or policy edits. Reading codebase/book remains No; `.3.2.34` follows.
 ### Binding, callable, codeblock, and gap runtime boundaries at `.3.2.34`
-
 - Activated from clean `ab4b1f1e5fbe33a0df4d3c643375e5e22ca6b98f` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
 - Re-reviewed BindingRuntime 1–225 / 226–422, CallableContract 1–135, CodeblockRuntime 1–210 /
   211–403, InterMatchGapRuntime 1–291, and MCPContract 1–13 without truncation. Exact baseline identity
@@ -6025,9 +6078,7 @@ PERL
   and public 8/15/10/34, plus Rust/Dart/Julia/Lua admission mutations 10/10/10/16. This finite proof does
   not close the separate `.19` receiver or `.35` literal defect.
 - No runtime, public-book, or policy edits. Codebase/book remains No; `.3.2.35` follows.
-
 ### Embedded MCP canonical frame and tool-schema prefix at `.3.2.35`
-
 - Activated from clean `19b0a7c4d3f02f875b015bbb46816d8e6313886b` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
 - Re-reviewed MCPContract.pm bytes 391–8582 / 8583–16774 / 16775–24966 / 24967–33158 without
   truncation, exactly 32,768 bytes. Full-file identity matches the reading baseline; the fragment SHA-256 is
@@ -6050,9 +6101,7 @@ PERL
   tools/check_mcp_implementation_admission.py` passes current 5/5 + 6/6 complete/141 governance.
 - One Knowledge record reconciles topology and response-layer ownership. No runtime, public-book, policy,
   protocol, or admission changes; codebase/book remains No and `.3.2.36` follows.
-
 ### Embedded MCP policy, corpus, and schema authority at `.3.2.36`
-
 - Activated from clean `4b9036222f16892a29de29d9ef01660048d0b918` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
 - Re-reviewed MCPContract.pm bytes 33159–41350 / 41351–49542 / 49543–57734 / 57735–65926
   without truncation, exactly 32,768 bytes. Full-file baseline identity passes; fragment SHA-256 is
@@ -6079,9 +6128,7 @@ PERL
 - Reconciled the stdio card's stale current 68 count to 76 and the all-twenty card's old public-closeout
   chronology, with current embedded evidence and ADR-alignment ownership. No runtime, public-book, or
   policy edit; codebase/book remains No and `.3.2.37` follows.
-
 ### Embedded MCP schema suffix, semantic payloads, and digests at `.3.2.37`
-
 - Activated from clean `c3dadd4b6321902d8f64ad9f50adab6978e73b92` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
 - Re-reviewed MCPContract.pm bytes 65927–74118 / 74119–83273 without truncation, exactly
   17,347 bytes. Full-file baseline identity passes; suffix SHA-256 is
@@ -6104,9 +6151,7 @@ PERL
 - This is source/data comprehension and identity proof; native queries, server dispatch, and the already
   passing five-test binding suite from `.3.2.35` are not rerun. No runtime, public-book, policy, protocol,
   or admission changes. Codebase/book remains No and `.3.2.38` follows.
-
 ### MCP schema, registry, wire, and numeric runtime ownership at `.3.2.38`
-
 - Activated from clean `c38afa72b3390e408c55ed849225c42ad9e70eae` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
 - Re-reviewed MCPContract 15–21, MCPContractRuntime 1–165 / 166–300, MCPServer 1–225 / 226–435 /
   436–648, MCPWire 1–215 / 216–419, and Numeric 1–110 without truncation. Exact baseline identity passes:
@@ -6138,9 +6183,7 @@ PERL
   Other runtime consumers are not rerun; passing existing suites closes neither `.20` nor `.36`.
 - One new and three updated Knowledge records preserve findings and ownership. No runtime, public-book,
   policy, protocol, or admission edits. Codebase/book remains No; `.3.2.39` follows.
-
 ### Legacy plugin and progressive invocation authority ownership at `.3.2.39`
-
 - Activated from clean `34af111fcd5be5f5e09fd89b516a0782a20c20f8` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
 - Read PluginBridge 1–199, PluginRegistry 1–130, ProgressiveSpanDispatch 1–230 / 231–460 / 461–700 /
   701–937, Policy 1–58, and Runtime 1–172 without truncation while the preceding checkpoint hooks completed.
@@ -6176,9 +6219,7 @@ PERL
   9/9/116 and public 6/12/10/60. These finite fixtures do not close `.37`. Other runtime consumers, legacy
   fallback execution, and full Phase 0 are not rerun. No runtime, public-book, protocol, policy, or admission
   edits. Codebase/book remains No; `.3.2.40` follows.
-
 ### Recognition snapshots, token lifecycle, and static effect closure at `.3.2.40`
-
 - Activated from clean `800fc5a4598de78b235dffaf1cdbde9e28e13c27` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
 - Read RecognitionTransaction 1–230 / 231–460 / 461–655 and Policy 1–140 / 141–269 without truncation
   while the preceding checkpoint hooks completed. Activation then verified clean HEAD and exact unchanged
@@ -6209,9 +6250,7 @@ PERL
   9/9 rollout, public 3/26/45, guide 1/14/18, and current backend admission guards. Other runtime consumers
   are not rerun; existing proof closes neither `.21` nor `.38`. No runtime, public-book, protocol, policy,
   or admission edits. Codebase/book remains No; `.3.2.41` follows.
-
 ### Recognition integration, runtime observers, and required history rollover at `.3.2.41`
-
 - Activated from clean `e548ce4be5d3164ab8be54dc3d63dece2dda0ffb` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
 - Read RecognitionTransactionRuntime 1–230 / 231–460 / 461–681, RecursiveObservationPolicy 1–71,
   RuntimeLogical 1–96, RuntimeDiagnosticOutput 1–247, and RuntimeSemanticObservation 1–174 without truncation.
@@ -6258,9 +6297,7 @@ PERL
 - Two runtime defect cards and six updated ownership/status records preserve the focused conclusions.
   History capacity has its separate Knowledge record. No runtime, public-book, protocol, or admission edits;
   codebase/book remains No. The next checkpoint is `.3.2.42`.
-
 ### Semantic call/index ownership and complete physical book coverage at `.3.2.42`
-
 - Activated from clean `da8185b94972441b07034eece644cc7efd14dc97` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
 - Read SemanticCallProjection 1–240 / 241–500 / 501–753 and SemanticIndex 1–220 / 221–395
   completely during the preceding frozen canonical run. Exact source identity passes: 1,148 lines /
@@ -6323,25 +6360,20 @@ PERL
   Commit da8185b94972441b07034eece644cc7efd14dc97 exists after the configured pre-commit gate;
   the repeated post-commit pointer and exact promoted HEAD receipt pass, and the brief is zero bytes.
   The final commit-command output was lost across context compaction, so its stdout is not claimed.
-
 ### Complete physical mdBook reading preserved at `.3.2.42`
-
 The `.3.2.41` staged canonical candidate remained frozen while read-only preparation completed every
 remaining book range. The fourteen complete files and two partial ranges of one local-CI file recorded
 under `.31` account for 640,041 bytes; this pass adds exactly 1,316,541 disjoint bytes. All 50 tracked
 book files, including configuration and SUMMARY, are fully read: 1,956,582 bytes. These are file counts,
 not fifty prose chapters. The earlier two partial ranges do not mean two partial files.
-
 Every chapter was consumed in bounded untruncated outputs. Final independent verification reconciles all
 64 interval records, their SHA-256 digests, contiguous complete line coverage without overlaps or holes,
 the exact 50-path set, and current bytes against reading baseline
 `baeb984e36a94a15951cd23d4c52def5064cdaca`. All checks pass. Git plus this complete path/range ledger
 remains the inventory; no duplicate manifest is introduced. Previously truncated outputs received no
 credit until their exact ranges were reread.
-
 The following thirty-six files now join the fourteen complete files listed under `.31`. Every range is
 1 through the stated EOF. The local-CI row includes its two earlier partial ranges exactly once.
-
 | Book path below `docs/linkedspec-book/` | Full lines; bytes |
 | --- | ---: |
 | `src/overview/design-rationale.md` | 259; 16,310 |
@@ -6380,7 +6412,6 @@ The following thirty-six files now join the fourteen complete files listed under
 | `src/development/macos-rust-launch-latency.md` | 26; 1,686 |
 | `src/development/codegen-inspector.md` | 53; 2,518 |
 | `src/development/documentation-workflow.md` | 232; 10,360 |
-
 Physical reading is Yes; `.4` remains pending formal alignment with the unread codebase and review of
 subsequent changes. `.41.1`–`.41.8` own the additional book repair lanes, coordinated with existing
 `.28`/`.29`/`.30`; `.42` owns the independently reproduced combined-mode validator defect.
@@ -6389,9 +6420,7 @@ Verified paragraph/checker mechanisms and exact public controls live in
 `docs/knowledge/perl-get-mode-result-validation-precedence-drift.md`.
 Other lifecycle/helper/representation assertions remain explicitly bounded assessment candidates,
 not unmeasured runtime defect claims. No public-book, runtime, or policy changes occurred.
-
 ### Semantic query, observation, and source-map boundaries at `.3.2.43`
-
 - Activated from clean `dde05b657eea91fd03b6ae14dfc2366156942583` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
 - Read SemanticQuery 1–230 / 231–440 / 441–596, SemanticRuntimeProjection 1–214, and
   SemanticSourceMap 1–172 completely during the preceding frozen canonical run; the two smaller
@@ -6421,9 +6450,7 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
   and expected owners before deletion. Only that file was removed; absence was rechecked here.
 - Roadmap and physical book reading remain Yes; codebase reading remains No and formal .4 alignment
   stays pending. This checkpoint changes only task/Knowledge/live continuity; .3.2.44 is next.
-
 ### Static semantic evidence and precise failure classification at `.3.2.44`
-
 - Activated from clean `7a97647c9317bdd60b8aa7de0986ecf837bccdfb` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
 - Read SemanticStaticProjection 1–235 / 236–460 / 461–700 / 701–880 / 881–1067 completely
   during the frozen canonical run. Exact current baseline identity passes: 1,067 lines / 34,029 bytes.
@@ -6459,9 +6486,7 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
   authority 252–292, contract 295–318, and the small semantic failed.spec fixture after public controls.
   Required roadmap/physical-book reading remain Yes, codebase No; formal .4 and all repairs stay pending.
   No runtime, public-book, TOOLBOX, checker, policy, or protocol edits occur. Next .3.2.45.
-
 ### Typed source authority and compatibility projections at `.3.2.45`
-
 - Activated from clean `78e0ee6b1d719a1113bf6ad0e351d890fb88ea52` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
 - Read SourceLocation 1–240 / 241–475 / 476–700 completely during the frozen canonical run,
   then reread all 1–215 / 216–475 / 476–700 while the preceding checkpoint's hooks ran. Exact
@@ -6490,9 +6515,7 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
   33-line driver was read; this is documentation routing, not a newly run combined gate or limit change.
 - No new defect or behavior change is established. Roadmap and physical mdBook remain Yes; codebase
   remains No and formal .4 alignment/repairs stay pending. Next .3.2.46 reads staged AST authority.
-
 ### Staged authority and bounded marker-lifetime investigation at `.3.2.46`
-
 - Activated from clean `cd0a1babed392001c5d372a39e84a96d0b979bc0` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
 - Read StagedASTEnrichment 1–225 / 226–455 / 456–690 / 691–925 / 926–1165 /
   1166–1375 / 1376–1498 completely during the frozen canonical run. Exact baseline identity passes:
@@ -6530,9 +6553,7 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 - The preceding Knowledge containment correction committed as cd0a1babed392001c5d372a39e84a96d0b979bc0
   after all nine doctrines and the post-commit pointer passed; its brief is empty and activation was clean.
   Roadmap/physical mdBook remain Yes; codebase No and formal .4/repairs remain pending. Next .3.2.47.
-
 ### Staged suffix, runtime, marker policy, and legacy registry at `.3.2.47`
-
 - Activated from clean `7c2d6ee0d54350667b5cf15c4d634bb9d3efe9d2` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
 - Completely reread StagedASTEnrichment 1499–1760 / 1761–2013, Runtime 1–120,
   StagedParseJob 1–352, StagedParseJobPolicy 1–59, and StagedParserRegistry 1–328. All five
@@ -6558,9 +6579,7 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 - The prior leaf committed as 7c2d6ee0d54350667b5cf15c4d634bb9d3efe9d2 after all nine doctrines and
   post-commit pointer passed; brief was cleared and clean status verified before activation.
   Roadmap/physical book remain Yes, codebase No, formal .4 and tracked repairs pending. Next .3.2.48.
-
 ### Trace owner and exact lazy exception-state boundary at `.3.2.48`
-
 - Activated from clean `6654c0dfd057112c3942f06635926c4dd4625985` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
 - Read Trace 1–260 / 261–521 completely: 521 lines / 16,259 bytes, SHA-256
   f8041e80c7f8342a0497710b130a14085c3dddd0d1ee67eeb04f51dd196ffe22, exact baseline equality.
@@ -6586,9 +6605,7 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 - Prior commit 6654c0dfd057112c3942f06635926c4dd4625985 passed all nine doctrines/post-pointer;
   brief was cleared and clean status verified before activation. Roadmap/physical book Yes; codebase No,
   formal .4 and repair prerequisites remain pending. Next .3.2.49.
-
 ### First generated Unicode table range and authoritative regeneration at `.3.2.49`
-
 - Activated from clean `69e221bf67d8a3289dd3f0ade35e52ff8d1b9f25` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
 - Intake .31 already physically consumed every byte of UnicodeCaseMapping 1–1500 in smaller
   complete ranges. Reconcile that durable reading without duplicate physical credit. Current range is
@@ -6612,9 +6629,7 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 - The prior leaf committed as 69e221bf67d8a3289dd3f0ade35e52ff8d1b9f25 with nine doctrines/post-pointer
   passing, brief cleared, and clean status before activation. Roadmap/physical mdBook Yes; codebase No,
   formal .4 and repairs pending. Next .3.2.50.
-
 ### Middle generated Unicode range and precise reading status at `.3.2.50`
-
 - Activated from clean `a32114213ec20ab003551fc428566b345c3cc8dd` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
 - The complete 1501–3000 physical reading is already durable under .31. Reconcile its 1,500 lines /
   32,854 bytes with exact baseline SHA-256 02b460974dd06064b0af0ea3ac7ff1164ffc53e2ee71c1721dd5a4f652c68f1f.
@@ -6630,9 +6645,7 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
   Codebase reading remains No and no unread first-party input receives credit.
 - Prior a32114213ec20ab003551fc428566b345c3cc8dd passed all nine doctrines/post-pointer;
   brief cleared and clean status verified before activation. Next .3.2.51.
-
 ### Final Unicode properties and scalar casing evaluator at `.3.2.51`
-
 - Activated from clean `78b272ec9e307092bee162dfdae87abbef778c18` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
 - Reconcile .31's complete physical reading of UnicodeCaseMapping 3001–3835: 835 lines /
   17,404 bytes; exact baseline SHA-256 319a14861db1ff096bb78caecd6bc307fd1a0e38c2bd86680adefc64d8e8b31f.
@@ -6652,9 +6665,7 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 - Prior 78b272ec9e307092bee162dfdae87abbef778c18 passed nine doctrines/post-pointer; brief cleared
   and clean status verified before activation. Roadmap/physical mdBook Yes; codebase No and formal
   alignment/repairs remain pending. Next .3.2.52.
-
 ### Generated XID classifier and named-slot identity at `.3.2.52`
-
 - Activated from clean `bea31562b2548eb2d1faf896edace1c3e918f00c` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
 - Reconcile .31's complete 855-line / 17,340-byte UnicodeXIDContinue reading. Exact baseline
   SHA-256 is db2185e0a2366849c126d76b27ad5591eee9463ea5e825e815e9feabe97b8947. Revisit
@@ -6679,9 +6690,7 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
   bea31562b2548eb2d1faf896edace1c3e918f00c passed nine doctrines/post-pointer; brief cleared and
   clean status verified before activation. Roadmap/physical book Yes; codebase No and .4/repairs pending.
   Next .3.2.53.
-
 ### Function metadata and legacy plugin/path configuration at `.3.2.53`
-
 - Activated from clean `bdf491a56b9ce6461a6e3ed2c924de6e0af9e2eb` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
 - Completely reread UserFunctionRegistry 1–200 / 201–390 / 391–580 / 581–773, PPlugin 1–331,
   PathSearch 1–47 and env.conf 1–51. All four baseline identities pass: 1,202 lines / 45,829 bytes.
@@ -6704,9 +6713,7 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 - No runtime, grammar, descriptor, configuration, or public-book changes. Prior
   bdf491a56b9ce6461a6e3ed2c924de6e0af9e2eb passed nine doctrines/post-pointer, then brief/clean checks.
   Roadmap/physical book Yes; codebase No and formal alignment/repairs remain pending. Next .3.2.54.
-
 ### Legacy comparison, HTML rendering, and constraint conversion at `.3.2.54`
-
 - Activated from clean `bd0573533e45fdd903255fb959e3c1f7e5971a27` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
 - Completely reread gdcheck 1–225 / 226–431, htmlcss_driver 1–166, and ptchange 1–242:
   839 lines / 22,702 bytes. Exact baseline identities pass; the three raw 0xb5 comment bytes are escaped
@@ -6724,9 +6731,7 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
   active until that closeout; all other codebase lanes and .4/.5 remain incomplete.
 - Prior bd0573533e45fdd903255fb959e3c1f7e5971a27 passed all nine doctrines and post-pointer verification;
   brief was zero and tree clean before activation. No runtime, configuration, or public-book changes.
-
 ### Perl parent closeout and exhaustive Rust reading ownership at `.3.2.55`
-
 - Activated from clean `888d8ca20983667ef427446e8fddf03f6eb5c8a2` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
 - Activated from the completed utility checkpoint; independent source-interval verification covers all
   89 Perl files / 2,133,690 bytes through EOF once, with no missing path or current delta. All 54 preceding
@@ -6751,12 +6756,9 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 - The exact staged candidate requires canonical tools/run_ci_local.sh for this parent closeout. Keep it
   frozen during the gate, consume the final status, verify its receipt, then commit and clear the brief.
   Prior 888d8ca20983667ef427446e8fddf03f6eb5c8a2 passed all nine doctrines/post-pointer and clean/brief checks.
-
 - Resulting .3.2.55 candidate pressure: 100 files / 77,867 lines / 7,874,864 bytes;
   2,133 lines and 513,744 bytes remain within the existing aggregate caps.
-
 ### Rust lockfile reading and durable forward diagnostic intake at `.3.3.1`
-
 - Activated from clean `611d7b5c1a53fa8c38fb8fcc17e2304dc21ca63a` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
 - Physically read rust/.gitignore 1–3 and Cargo.lock 1–1493 in six untruncated windows while the
   preceding canonical candidate was frozen; its commit body preserves that preparation. Reconcile only
@@ -6792,9 +6794,7 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
   The failed core-harness compilation is not credited as a running test. All diagnostic jobs are consumed.
 - The director put reporting aside. No report artifact or .48 leaf was created; preceding commit body
   preserves the returned app reference and corrected guidance. Continue the original LinkedSpec batch.
-
 ### Rust manifest, AST, callable prefix and requirement evidence at `.3.3.2`
-
 - Activated from clean `08149577237224e96053ee3116fb8bb8164be5a5` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
 - Reconcile the six fully read forward scopes preserved in 611d7b5c's commit body. Cargo.lock now has
   both prefix and suffix checkpoints through EOF; a whole-file metadata census alone never supplied reading
@@ -6825,9 +6825,7 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 - Keep cache measurements explicitly dated; record complete lock reading separately from the static
   metadata fact. Refresh relevant Knowledge source paths/reverify routing without changing executable
   tools. All prior compiler repairs .45–.47/.49 remain pending. No runtime or public-book change.
-
 ### Rust callable traversal and compiler validation reading at `.3.3.3`
-
 - Activated from clean `9e6550871739a2d9942267db93fab47fa8f3088e` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
 - Reconcile the two complete forward reading ranges retained in 611d7b5c's commit body: 1,499 lines /
   56,169 bytes. Both complete current files remain identical to the reading baseline.
@@ -6856,9 +6854,7 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 - Existing callable, cursor, selector, typed-write, progressive, descriptor and parser-boundary Knowledge
   supplies canonical homes. Record the clarified phase order and lifecycle lowering in rust-core-compilation-boundaries; no runtime/public
   book changes and no fresh native-suite execution are claimed by the neutral checks.
-
 ### Rust regex resolution and outward projection reading at `.3.3.4`
-
 - Activated from clean `87065401fab5eeb076ff6795d2aa0af957a4b63b` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
 - Reconcile four fully read forward scopes preserved in 611d7b5c's commit body: 1,481 lines /
   57,687 bytes. Compiler reading now reaches EOF; all four complete current files match the baseline.
@@ -6890,9 +6886,7 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
   authored is_top. Existing descriptor, entry, and slot-identity Knowledge owns these boundaries.
 - Neutral slot/entry checks reverify their contract surfaces without claiming fresh native, generated,
   emitted, or full optional Rust gate execution. No runtime or public-book change.
-
 ### Rust expression carrier and statement parser reading at `.3.3.5`
-
 - Activated from clean `cd0e4ff4b74f2a815d9574964c5a29894a8b89ff` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
 - Reconcile the fully read forward expr.rs prefix preserved in 611d7b5c's commit body: lines 1–1496,
   1,496 lines / 57,175 bytes; SHA-256 51b266fcd7e51daa7b34d67ce1ff7c806e745ec3efdf4e27d3218c1ba615191e.
@@ -6919,9 +6913,7 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
   exited 0 with the intended file edit. Consulted project-data-liveness-permission-denial; .7 already owns
   group-establishment verification. That child's actual PGID was not captured, so no group-failure or
   lifecycle-correctness inference is made. No recovery/purge was run.
-
 ### Rust expression continuation and existing boundary repairs at `.3.3.6`
-
 - Activated from clean `2af9c32143a084c1a8296321c3babe1d4a5b3e1f` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
 - Reconcile the fully read forward expr.rs continuation retained in 611d7b5c's commit body: lines
   1497–2957, 1,461 lines / 54,270 bytes; SHA-256
@@ -6945,9 +6937,7 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 - Refresh the existing mutation and hash Knowledge with these precise boundaries and managed reverify
   routing. Neutral mutation checks verify their declared contract only; they do not close the observed
   acceptance gaps or rerun all native/generated consumers. No runtime or public-book change.
-
 ### Rust lexical boundaries and expression test reading at `.3.3.7`
-
 - Activated from clean `cbd871c6a6ae53dd91e5eddbd4c73b8fefda0cd7` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
 - Reconcile the fully read forward expr.rs range preserved in 611d7b5c's commit body: lines 2958–4454,
   1,497 lines / 56,871 bytes; SHA-256
@@ -7539,6 +7529,8 @@ All 53 owned scopes are read: HLink delimiter/raw text, Liberty scalar/complex a
 
 ## Verification Log
 
+- 2026-09-24 .86.5.1: Outer structural depth recognizes only a complete bare slash call followed by line-ending braces; shared MethodExpr precedence and source bytes stay unchanged. Accepted full-source regex interpretations win; only a failed source with a final-call candidate retries. Only the selected attempt publishes diagnostics. Focused9 files/206 and five exact book sources/82 assertions pass. Clean fe516141b baseline completes13 groups and fails only new groups12/13. Fixed15 contexts and original12 change only their bare/spaced EOF outcomes to7; helper13+syntax/grouped22/numeric12 remain exact. Full Phase0 passes1033/1033; frozen source/test diff SHA25691821cd09b9991ce975862b4c83a62b0c899badb8c02fd62a8ed9dd8f89188d5. Syntax and final book render pass. Same-line members stay .86.5.2; numeric callable/grouping are .87.3/.87.4-owned. Phase0: Files=1, Tests=1033, 1528 wallclock secs ( 0.51 usr  0.11 sys + 1129.24 cusr 129.84 csys = 1259.70 CPU). Logs: .linkedspec-data/scratch/slash-eof86-5/.
+
 - 2026-09-24 .86.4.4.2.2: All59 fixed public outcomes/readiness/error stages and the complete syntax record reconcile. Exact code/test/four-source identities reuse9f81d3162 focused173/book66 and mutation proof; checkpoint syntax/rendering and normal memory/history/Knowledge/doctrine checks govern landing. Logs: .linkedspec-data/scratch/helper-pattern86-4-4-2-2/. Engineering notes roll exact114 lines/28181 bytes to segment4969; all prior segment rows/bytes remain unchanged. Trim only the resulting mutable-root trailing blank separator.
 
 - 2026-09-24 .86.4.4.2.1: Fresh generated baseline fails four book cases; explicit Trace import passes book66 and focused173 across9 files in163 seconds. Two isolated book mutations reject only intended assertions; syntax/contract, book/memory/Knowledge/history and normal doctrines govern landing. Logs: .linkedspec-data/scratch/helper-pattern86-4-4-2/.
@@ -7737,6 +7729,8 @@ CLI66x2 and Phase0 1032/1032; 1163 seconds is Phase0 only, with 25 optional gate
 
 ## Commit Log
 
+- 2026-09-24 .86.5.1: `SESSION-STARTUP-READING.86.5.1 - validate final line-ending slash calls`; activationfe516141b; .86.5.2 follows.
+
 - 2026-09-24 .86.4.4.2.2: `SESSION-STARTUP-READING.86.4.4.2.2 - verify public helper and book recomposition`; activation9f81d3162; .86.5 follows.
 
 - 2026-09-24 .86.4.4.2.1: `SESSION-STARTUP-READING.86.4.4.2.1 - load tracing in fresh generated parsers`; activation af168d2fe; .86.4.4.2.2 follows.
@@ -7772,6 +7766,8 @@ CLI66x2 and Phase0 1032/1032; 1163 seconds is Phase0 only, with 25 optional gate
 Each canonical task node owns its exact `Commit` subject and retained completion note. Query landed history with `git log --all --format="%h %s" --fixed-strings --grep="SESSION-STARTUP-READING."`; this replaces the proven duplicate 102-row table.
 
 ## Changelog
+
+- 2026-09-24 .86.5.1: Repair line-ending slash-call outer validation, add fifth executable book example and own separate callable arithmetic/grouping findings. Shared slash precedence is unchanged.
 
 - 2026-09-24 .86.4.4.2.2: Close only the measured Perl helper chain, preserve original public negative/EOF sources and select immediate EOF repair. Code and exact book examples remain unchanged from verified9f81d3162.
 

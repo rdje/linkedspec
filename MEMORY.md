@@ -1,10 +1,10 @@
 # MEMORY
 
-- activation_commit: `9f81d31629203396cd609ca7051eaad57b942fbf` — clean base for final public helper recomposition.
-- latest_completed_leaf: `SESSION-STARTUP-READING.86.4.4.2.2 - verify public helper and book recomposition`.
-- active_work_unit: `SESSION-STARTUP-READING.86.5` — Perl slash-call end-of-block validation (pending).
-- next_action: Repair .86.5 using docs/checkpoints/SESSION-STARTUP-READING.86.4.4.2.2.pl and the scanner Knowledge records. Preserve the shared discriminator closing-brace exclusion; fix outer final-statement context. Then .86.3 exact canonical closeout.
-- in_flight_uncommitted: None; bounded helper recomposition verifies59 public controls, unchanged code/tests/four book sources at9f81d3162, checkpoint syntax and rendered guidance. All jobs are consumed.
+- activation_commit: `fe516141b974c1869cfa6ba8867907de402a3da2` — clean base for slash-call end-of-block validation.
+- latest_completed_leaf: `SESSION-STARTUP-READING.86.5.1 - validate final line-ending slash calls`.
+- active_work_unit: `SESSION-STARTUP-READING.86.5.2` — same-line following-member slash validation (pending).
+- next_action: Repair .86.5.2 from docs/checkpoints/SESSION-STARTUP-READING.86.5-contexts.pl: reconcile named/semicolon controls and actual outer-member boundaries without changing shared slash precedence. Then .86.3 exact canonical closeout.
+- in_flight_uncommitted: None; .86.5.1 focused206/book82 and full Phase0 1033/1033 pass. Original/context replays change only intended EOF results; helper/grouped/numeric records remain exact. All jobs are consumed.
 - blockers: LS-004 remains upstream-owned; director relays docs/upstream/rgx/bootstrap-progress-status.md. No RGX code defect established. Named-argument and format proposals remain parked.
   Wrapper startup .7 remains open; recovery/purge stay prohibited. No interrupted Phase0 run counts as proof.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
@@ -56,4 +56,4 @@
   Changes segment4971 preserves 168 lines /27426 bytes from clean 7c318569; old archive rows/bytes remain exact.
 - dependency_boundary: September20: LinkedSpec integrates only with RGX via its published integration document/APIs/contracts. RGX owns PGEN; no separate PGEN procedure, internal inspection/analysis, patches or pin changes.
   Normal documented builds remain authorized; retain caches. Startup .80.1-.4 may observe public behavior or track upstream repairs, not investigate dependency internals.
-- latest_bootstrap_read: ADR0123 targets 2–5 minute startup plus thorough task-specific reading. Separate audit remains 89/143 and .1.90. Document integration and .46/.47/.49/.86.1/.86.2 are verified; Perl .86.4.2.4 corrects the regex-type premise; .86.4.3 owns supported helper validation (verified); .86.4.6 verifies helper splitting; .86.4.7 verifies quoted subjects; .86.4.4.1 owns grouped-operand repair .86.4.8; .86.4.8.1 rejects incompatible lookahead and .86.4.8.2 verifies grouped repair; .86.4.4.2.1 fixes generated Trace and .86.4.4.2.2 closes bounded public recomposition; .87 owns two helper gaps. No downstream application acceptance claim.
+- latest_bootstrap_read: ADR0123 targets 2–5 minute startup plus thorough task-specific reading. Separate audit remains 89/143 and .1.90. Document integration and .46/.47/.49/.86.1/.86.2 are verified; Perl .86.4.2.4 corrects the regex-type premise; .86.4.3 owns supported helper validation (verified); .86.4.6 verifies helper splitting; .86.4.7 verifies quoted subjects; .86.4.4.1 owns grouped-operand repair .86.4.8; .86.4.8.1 rejects incompatible lookahead and .86.4.8.2 verifies grouped repair; .86.4.4.2.1 fixes generated Trace and .86.4.4.2.2 closes bounded public recomposition; .87 owns four helper/grouping follow-ups. No downstream application acceptance claim.

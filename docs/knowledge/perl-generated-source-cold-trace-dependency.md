@@ -13,8 +13,8 @@ evidence: "At af168d2fe, all four exact book examples pass public SpecLoader and
 reverify: "bash tools/project_data_run.sh env PERL5LIB= prove -v -Iperl t/generated_source_contract.t; inspect the book-example subtest's public results and fresh-process status, not only source presence."
 ---
 
-The repaired preamble explicitly imports Trace. The four-example recurring
-subtest passes66 assertions; the nine-file generated/loader/AST/trace/cursor
+The repaired preamble explicitly imports Trace. At `.86.4.4.2.1`, the four-example
+recurring subtest passes66 assertions; the nine-file generated/loader/AST/trace/cursor
 suite passes173 tests. Syntax, the unchanged generated-source contract and
 book rendering pass. An isolated changed result fails only its live/generated
 value assertions; removing a complete example fails the coverage count.
@@ -28,6 +28,7 @@ The earlier generated tests load the artifact into another package in a process
 that already imported both LinkedSpec and Trace. Those are useful package and
 value checks, but do not establish fresh-process bootstrap completeness.
 `.86.4.4.2.1` verifies the explicit emitted import; `.86.4.4.2.2` closes bounded
-helper recomposition. The four complete Markdown sources are extracted directly from
+helper recomposition. `.86.5.1` extends the recurrence to five complete Markdown
+sources and82 assertions with final line-ending division. Sources are extracted directly from
 the integration guide so their loader and generated results cannot drift behind
 duplicate fixture strings. No generated-format version change is intended.
