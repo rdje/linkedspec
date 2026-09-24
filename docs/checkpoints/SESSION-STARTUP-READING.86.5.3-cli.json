@@ -1,0 +1,132 @@
+{
+  "schema_version": 1,
+  "suite": "same-line-regex-slot-permanent-grammar",
+  "cases": [
+    {
+      "id": "separate_control",
+      "family": "success",
+      "args": [
+        "--spec-file",
+        "{{REPO_ROOT}}/specs/spec.spec",
+        "--input",
+        "Part:\n first=/a/\n second=/b/\n /c/\n"
+      ],
+      "files": [],
+      "expect": {
+        "exit": 0,
+        "stdout": {
+          "text": "[[{\"label\":\"Part\",\"mode\":\"\",\"top\":0,\"type\":\"rule\"},{\"pattern\":\"a\",\"slot_name\":\"first\",\"type\":\"regex\"},{\"pattern\":\"b\",\"slot_name\":\"second\",\"type\":\"regex\"},{\"pattern\":\"c\",\"type\":\"regex\"}]]\n"
+        },
+        "stderr": {
+          "text": ""
+        },
+        "files": []
+      }
+    },
+    {
+      "id": "header_members",
+      "family": "success",
+      "args": [
+        "--spec-file",
+        "{{REPO_ROOT}}/specs/spec.spec",
+        "--input",
+        "Part: first=/a/ second=/b/ /c/\n"
+      ],
+      "files": [],
+      "expect": {
+        "exit": 0,
+        "stdout": {
+          "text": "[[{\"label\":\"Part\",\"mode\":\"\",\"top\":0,\"type\":\"rule\"},{\"pattern\":\"a\",\"slot_name\":\"first\",\"type\":\"regex\"},{\"pattern\":\"b\",\"slot_name\":\"second\",\"type\":\"regex\"},{\"pattern\":\"c\",\"type\":\"regex\"}]]\n"
+        },
+        "stderr": {
+          "text": ""
+        },
+        "files": []
+      }
+    },
+    {
+      "id": "lifecycle_members",
+      "family": "success",
+      "args": [
+        "--spec-file",
+        "{{REPO_ROOT}}/specs/spec.spec",
+        "--input",
+        "Part:\n I { ignored=0 } first=/a/ E { ignored=1 } second=/b/ /c/\n"
+      ],
+      "files": [],
+      "expect": {
+        "exit": 0,
+        "stdout": {
+          "text": "[[{\"label\":\"Part\",\"mode\":\"\",\"top\":0,\"type\":\"rule\"},{\"code\":\"{ ignored=0 }\",\"marker\":\"I\",\"type\":\"lifecycle\"},{\"pattern\":\"a\",\"slot_name\":\"first\",\"type\":\"regex\"},{\"code\":\"{ ignored=1 }\",\"marker\":\"E\",\"type\":\"lifecycle\"},{\"pattern\":\"b\",\"slot_name\":\"second\",\"type\":\"regex\"},{\"pattern\":\"c\",\"type\":\"regex\"}]]\n"
+        },
+        "stderr": {
+          "text": ""
+        },
+        "files": []
+      }
+    },
+    {
+      "id": "compact_members",
+      "family": "success",
+      "args": [
+        "--spec-file",
+        "{{REPO_ROOT}}/specs/spec.spec",
+        "--input",
+        "Part:\n I{ignored=0}first=/a/second=/b//c/\n"
+      ],
+      "files": [],
+      "expect": {
+        "exit": 0,
+        "stdout": {
+          "text": "[[{\"label\":\"Part\",\"mode\":\"\",\"top\":0,\"type\":\"rule\"},{\"code\":\"{ignored=0}\",\"marker\":\"I\",\"type\":\"lifecycle\"},{\"pattern\":\"a\",\"slot_name\":\"first\",\"type\":\"regex\"},{\"pattern\":\"b\",\"slot_name\":\"second\",\"type\":\"regex\"},{\"pattern\":\"c\",\"type\":\"regex\"}]]\n"
+        },
+        "stderr": {
+          "text": ""
+        },
+        "files": []
+      }
+    },
+    {
+      "id": "bare_members",
+      "family": "success",
+      "args": [
+        "--spec-file",
+        "{{REPO_ROOT}}/specs/spec.spec",
+        "--input",
+        "Part:\n {fake=/x/}first=/a/second=/b//c/\n"
+      ],
+      "files": [],
+      "expect": {
+        "exit": 0,
+        "stdout": {
+          "text": "[[{\"label\":\"Part\",\"mode\":\"\",\"top\":0,\"type\":\"rule\"},{\"code\":\"{fake=/x/}\",\"marker\":\"I\",\"source_form\":\"bare\",\"type\":\"lifecycle\"},{\"pattern\":\"a\",\"slot_name\":\"first\",\"type\":\"regex\"},{\"pattern\":\"b\",\"slot_name\":\"second\",\"type\":\"regex\"},{\"pattern\":\"c\",\"type\":\"regex\"}]]\n"
+        },
+        "stderr": {
+          "text": ""
+        },
+        "files": []
+      }
+    },
+    {
+      "id": "header_bare_members",
+      "family": "success",
+      "args": [
+        "--spec-file",
+        "{{REPO_ROOT}}/specs/spec.spec",
+        "--input",
+        "Part:  {fake=/x/}first=/a/second=/b//c/\n"
+      ],
+      "files": [],
+      "expect": {
+        "exit": 0,
+        "stdout": {
+          "text": "[[{\"label\":\"Part\",\"mode\":\"\",\"top\":0,\"type\":\"rule\"},{\"code\":\"{fake=/x/}\",\"marker\":\"I\",\"source_form\":\"bare\",\"type\":\"lifecycle\"},{\"pattern\":\"a\",\"slot_name\":\"first\",\"type\":\"regex\"},{\"pattern\":\"b\",\"slot_name\":\"second\",\"type\":\"regex\"},{\"pattern\":\"c\",\"type\":\"regex\"}]]\n"
+        },
+        "stderr": {
+          "text": ""
+        },
+        "files": []
+      }
+    }
+  ]
+}

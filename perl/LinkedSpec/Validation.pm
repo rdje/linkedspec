@@ -684,10 +684,55 @@ sub _validate_inter_match_gap_authored_metadata {
   next unless $current;
   next if $depth == 0 && $fragment =~ /^\s*(?:#.*)?$/o;
 
+  my @slot_tokens;
+  my $standalone_named = 0;
+  # Preserve the established diagnostics for whole-line invalid names, even
+  # when a name contains a structural delimiter that cannot start a member.
   if ($depth == 0
       && $fragment =~ /^\s*(?<NAME>[^\s=]+)\s*=\s*\/(?<PATTERN>(?:\\.|[^\/\\])*?)(?<!\\)\/\s*$/o) {
-   my $name = $+{NAME};
-   my $pattern = $+{PATTERN};
+   push @slot_tokens, { name => $+{NAME}, pattern => $+{PATTERN} };
+   $standalone_named = 1;
+  }
+
+  if ($depth == 0 && $fragment =~ /^\s*\@capture_gaps\s*$/o) {
+   if (@{$current->{directives}}) {
+    return _inter_match_gap_line_failure(
+     $spec_content,
+     $position,
+     $option,
+     code => 'capture_gaps_duplicate_directive',
+     stage => 'parse_directive',
+     summary => 'Duplicate capture-gaps directive',
+     suggestion => 'Keep exactly one capture-gaps directive in the owning rule',
+     rule_label => $current->{label},
+     line => $line_number,
+     first_line => $current->{directives}[0]{line},
+    );
+   }
+   push @{$current->{directives}}, { line => $line_number, position => $position };
+   next;
+  }
+
+  if ($depth == 0
+      && $fragment =~ /^\s*\@\s*(capture_slice|capture_from_here|move_pos)\b/o) {
+   push @{$current->{legacy_markers}}, {
+    marker => '@' . $1,
+    line => $line_number,
+   };
+  }
+
+  my $edge_scan = $standalone_named
+   ? { edges => [], depth => 0 }
+   : _scan_rule_edges_in_fragment($fragment, $depth, \@slot_tokens);
+  for my $slot (@slot_tokens) {
+   my ($name, $pattern) = @{$slot}{qw(name pattern)};
+   unless (defined $name) {
+    push @{$current->{slots}}, {
+     regex_index => scalar(@{$current->{slots}}),
+     slot_id => undef,
+    };
+    next;
+   }
    unless (LinkedSpec::UnicodeXIDContinue::is_xid_continue_string($name)
        && $name !~ /\A[0-9]+\z/o) {
     return _inter_match_gap_line_failure(
@@ -732,47 +777,7 @@ sub _validate_inter_match_gap_authored_metadata {
     regex_index => scalar(@{$current->{slots}}),
     slot_id => $name,
    };
-   next;
   }
-
-  if ($depth == 0 && $fragment =~ /^\s*\@capture_gaps\s*$/o) {
-   if (@{$current->{directives}}) {
-    return _inter_match_gap_line_failure(
-     $spec_content,
-     $position,
-     $option,
-     code => 'capture_gaps_duplicate_directive',
-     stage => 'parse_directive',
-     summary => 'Duplicate capture-gaps directive',
-     suggestion => 'Keep exactly one capture-gaps directive in the owning rule',
-     rule_label => $current->{label},
-     line => $line_number,
-     first_line => $current->{directives}[0]{line},
-    );
-   }
-   push @{$current->{directives}}, { line => $line_number, position => $position };
-   next;
-  }
-
-  if ($depth == 0
-      && $fragment =~ /^\s*\@\s*(capture_slice|capture_from_here|move_pos)\b/o) {
-   push @{$current->{legacy_markers}}, {
-    marker => '@' . $1,
-    line => $line_number,
-   };
-  }
-
-  if ($depth == 0) {
-   my @anonymous = _extract_leading_regex_literals_from_fragment($fragment);
-   for (@anonymous) {
-    push @{$current->{slots}}, {
-     regex_index => scalar(@{$current->{slots}}),
-     slot_id => undef,
-    };
-   }
-  }
-
-  my $edge_scan = _scan_rule_edges_in_fragment($fragment, $depth);
   if (!$edge_scan->{error}) {
    for my $edge (@{$edge_scan->{edges} || []}) {
     if (($edge->{kind} // '') eq 'action') {
@@ -1231,11 +1236,18 @@ my $regex_depth = 0;
 sub _looks_like_supported_rule_paragraph_member_line {
  my ($line) = @_;
  return 0 unless defined $line;
- return 1 if $line =~ /^\s*$/o;
- return 1 if $line =~ /^\s*#/o;
- return 1 if _parse_rule_label_line($line);
+ while (1) {
+  return 1 if $line =~ /^\s*$/o;
+  return 1 if $line =~ /^\s*#/o;
+  return 1 if _parse_rule_label_line($line);
+  $line =~ /\A\s*/o;
+  my $slot = _rule_regex_slot_at($line, $+[0]);
+  last unless $slot && defined($slot->{name});
+  # A complete declaration does not authorize arbitrary trailing text. Check
+  # its next member just as a lifecycle block checks its own remainder.
+  $line = substr($line, $slot->{end});
+ }
  return 1 if $line =~ /^\s*\/(?:\\.|[^\/])*?(?<!\\)\//o;
- return 1 if $line =~ /^\s*[^\s=]+\s*=\s*\/(?:\\.|[^\/])*?(?<!\\)\/\s*$/o;
  return 1 if $line =~ /^\s*->/o;
  return 1 if $line =~ /^\s*=>/o;
  return 1 if $line =~ /^\s*@\s*(?:(?:capture_gaps|capture_slice|capture_from_here|move_pos)\b|mark\s*\(\s*\w+\s*\))/o;
@@ -1444,15 +1456,26 @@ sub _validate_rule_header_rhs_start {
  return 0;
 }
 
+# One rule-level regex member, never an expression's regex operand. Structural
+# delimiters cannot be part of its name: otherwise I{rx=/x/} could be mistaken
+# for a declaration before the scanner enters the code block. Invalid complete
+# names still reach the pinned identifier validator, not a host \w classifier.
+sub _rule_regex_slot_at {
+ my ($fragment, $offset) = @_;
+ pos($fragment) = $offset;
+ return undef unless $fragment =~ /\G(?:(?<NAME>[^ \t=\r\n{}()\[\]\/"']+)[ \t]*=[ \t]*)?\/(?<PATTERN>(?:\\.|[^\/\\])*?)(?<!\\)\//gc;
+ return { name => $+{NAME}, pattern => $+{PATTERN}, end => pos($fragment) };
+}
+
 #------------------------------------------------------------------------------
 # Function: _scan_rule_edges_in_fragment
 # Purpose : Scan one rule fragment for action/blind-call edges while tracking
 #           cross-line block depth and reporting malformed target/balance state.
-# Args    : ($fragment, $start_depth)
+# Args    : ($fragment, $start_depth, optional slot-token arrayref)
 # Returns : hashref with `edges`, `depth`, and optional `error`
 #------------------------------------------------------------------------------
 sub _scan_rule_edges_in_fragment {
- my ($fragment, $start_depth) = @_;
+ my ($fragment, $start_depth, $slot_tokens) = @_;
  my @edges;
  return { edges => \@edges } unless defined $fragment;
 
@@ -1462,6 +1485,19 @@ sub _scan_rule_edges_in_fragment {
 
  while ($i < $len) {
   my $ch = substr($fragment, $i, 1);
+
+  # A rule-level comment cannot declare slots. Keep the existing structural
+  # scan independent; disabling this optional observer lasts only this line.
+  $slot_tokens = undef if $depth == 0 && $ch eq '#';
+  if ($depth == 0 && $slot_tokens
+      && ($ch eq '/' || $i == 0 || substr($fragment, $i - 1, 1) =~ /[\s}\)\]\/]/o)) {
+   my $slot = _rule_regex_slot_at($fragment, $i);
+   if ($slot) {
+    push @$slot_tokens, $slot;
+    $i = $slot->{end};
+    next;
+   }
+  }
 
   if ($ch eq q{'}) {
    ++$i;

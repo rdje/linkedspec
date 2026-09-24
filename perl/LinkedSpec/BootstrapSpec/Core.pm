@@ -576,7 +576,7 @@ sub _build_named_re_pattern_rule {
  return {
   id => 'NAMED_RE_PATTERN',
   tags => { start_token => 1 },
-  re => [qr/(?m:^[ \t]*(?<NAME>[^ \t=\r\n]+)[ \t]*=[ \t]*\/(?<PATTERN>(?:\\.|[^\/\\])*?)(?<!\\)\/[ \t]*(?=\r?$))/o],
+  re => [qr/(?<NAME>[^ \t=\r\n{}()\[\]\/"']+)[ \t]*=[ \t]*\/(?<PATTERN>(?:\\.|[^\/\\])*?)(?<!\\)\//o],
   handler => sub {
    my ($info, undef, $string) = @_;
    return ['RE_SLOT', {

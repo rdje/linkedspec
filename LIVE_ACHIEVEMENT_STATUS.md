@@ -2,17 +2,19 @@
 
 ## Current Activity
 
-Same-line slash validation .86.5.2 is verified with focused207/book84 and full Phase0 1033/1033. Required .86.5.3 now repairs independent same-line regex-slot metadata; .27 retains lifecycle execution.
+Same-line regex-slot repair .86.5.3 and bounded .86.5 implementation are verified with focused240/book103, six-runtime grammar72 and Phase0 1033. Canonical parent .86.3 is next; independent defects retain their owners.
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.86.5.2.2 - validate same-line slash call members` — bare division accepts following members while preserving regex precedence; exact book sources execute live and in fresh generated processes.
+- `SESSION-STARTUP-READING.86.5.3 - preserve same-line regex slot identity` — preserve authored names/order and selectors across lifecycle members; permanent grammar protects bare code, and six exact book sources execute live and in fresh generated processes.
 
 ## Next Action
 
-- Repair .86.5.3 named/anonymous slot identity across same-line members, then recompose .86.5 and exact canonical .86.3. Commit every verified slice.
+- Run exact staged canonical .86.3, commit cleanly, then resume .50. Preserve separate lifecycle, brace, comment and helper repairs.
 
 ## Recent Completions
+
+- `2026-09-24` — `SESSION-STARTUP-READING.86.5.3` verifies same-line slot identity with focused240/book103, six-runtime grammar72 and Phase0 1033.
 
 - `2026-09-24` — `SESSION-STARTUP-READING.86.5.2.2` verifies same-line slash calls with focused207/book84 and Phase0 1033/1033.
 
@@ -43,8 +45,6 @@ Same-line slash validation .86.5.2 is verified with focused207/book84 and full P
 - `2026-09-23` — `CONSUMER-REPORT-DELIVERY.4` records verified publication and the director-owned local RGX handoff.
 
 - `2026-09-23` — `CONSUMER-REPORT-DELIVERY.3` binds the consumer handoff to exact canonical landing and clean remote publication.
-
-- `2026-09-23` — `CONSUMER-REPORT-DELIVERY.2` reconfirms LS-004 and successful public bootstrap reuse; canonical publication follows.
 
 ## History
 

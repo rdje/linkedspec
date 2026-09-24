@@ -12,6 +12,16 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-09-24 — SESSION-STARTUP-READING.86.5.3 - preserve same-line regex slot identity
+
+Whole-line declaration matching was insufficient for the existing paragraph contract. Reuse structural depth to observe slot tokens outside code, share member-token recognition with remainder validation, and retain the old standalone invalid-name diagnostic route. Comments disable only slot observation; this does not repair the independent comment-depth scanner. A broad name matcher could consume I{fake=/x/}; excluding structural delimiters and shielding bare lifecycle blocks in the permanent grammar prevents that false identity.
+
+Rejected drafts exposed comment-only fake names, duplicate comment text, unsupported declaration tails and two bare-payload grammar failures. The final authored-validation callbacks and exact permanent AST assertions catch those mechanisms. The exact baseline finishes111 groups and fails only the new group; final focused240/book103, grammar72 and Phase0 1033 pass. Preserve lifecycle .27, regex-brace .54.1, comments .34 and helper .87 owners. Sixty blank-only mutable-ledger separators were compacted with prior nonblank content/order unchanged.
+
+Dart current-grammar loading failed with Invalid group because its exact shipped-pattern bridge recognized only the old whole-line blkSLB spelling. The bounded member matcher retains the old form and adds exact cursor/physical-line alternatives, captures and spans without arbitrary search-cursor drift. Three carriers and LF/CRLF pass focused20; independent package502/storage25owners47packages/CLI66x2/corpus105 pass. Complete gate attempts still fail at the known .2.24 formatter and .2.25 deprecated interface implementations. Six unrelated format edits were proved AST/literal-identical and restored; strict warnings remain unsuppressed. Grammar72 is composed from unchanged Perl/Rust legs and fresh other-runtime legs, not a green full-driver run.
+
+The first native matrix failed only the Rust final-E AST field: current and clean-baseline grammar both select lifecycle_block_line after suffix slicing, so a non-line-start E gains source_form=explicit. Existing .63.1 owns the exact permanent failing checkpoint. Put E between named members in the common slot matrix, retain full AST equality, and qualify this independent context limitation in the regex chapter. The original failed run remains evidence; no dependency implementation was consulted.
+
 ## 2026-09-24 — SESSION-STARTUP-READING.86.5.2.2 - validate same-line slash call members
 
 The final-call recognizer now reads the existing balanced-call end offset and checks for horizontal space plus a closing brace; it no longer requires every remaining character to be a line-ending closer. The existing two-trial validator still gives every accepted full-source regex interpretation precedence. Standalone private fragment probes lack that trial context, so some brace-pattern offsets change even though their public values/errors remain identical. All production scan callers run within the validator.

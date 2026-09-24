@@ -3919,6 +3919,7 @@ remain. Reading completion and runtime signoff remain distinct.
   Verification: `pending` repair — .3.3.23 six paired collected-rule probes on xhello show five assertion
     discrepancies and plain agreement. helpers.rs seek_match slices input[pos..] before matching;
     Perl LinkedRE matches the original scalar at pos. Exact evidence belongs to the regex-context card.
+  Required regression: docs/checkpoints/SESSION-STARTUP-READING.63-lifecycle-cli.json preserves .86.5.3's same-line final-E self-hosted AST failure. Current and clean4ca4f745e grammar both add source_form=explicit on Rust because lifecycle_block_line wins at a suffix boundary. Slot metadata repair leaves this independent defect unchanged; .63.1 must restore the expected physical-line projection.
   Commit: `pending`
 - ID: `SESSION-STARTUP-READING.63.2`
   Status: `pending`
@@ -4551,7 +4552,7 @@ remain. Reading completion and runtime signoff remain distinct.
   Children: `SESSION-STARTUP-READING.86.1`, `SESSION-STARTUP-READING.86.2`, `SESSION-STARTUP-READING.86.3`, `SESSION-STARTUP-READING.86.4`, `SESSION-STARTUP-READING.86.5`
   Dependencies: Clean .49 at 4f79298f9; ADR0123 targeted reading applies.
   Acceptance: Preserve following statements and exact callees, source and values through supported carriers. Keep Rust's accepted multiline/escaped/quoted regex literals. Investigate the public Perl EOF and regex controls without inferring they share the Rust cause. Canonical parent closeout follows both bounded repairs.
-  Verification: The pre-repair forty-case public comparison and CodeBlock ASTs are recorded in .linkedspec-data/scratch/symbol-boundary86/. All 12 Perl symbol callees accept LF; baseline Rust rejected 11 and silently turned subtraction into an empty-name call returning null. The original slash failure plus seven currently accepted Rust regex controls require separate disambiguation work. Non-slash .86.1 and division .86.2 are verified; immediate Perl .86.4/.86.5 remain open before canonical .86.3.
+  Verification: The pre-repair forty-case public comparison and CodeBlock ASTs are recorded in .linkedspec-data/scratch/symbol-boundary86/. All 12 Perl symbol callees accept LF; baseline Rust rejected 11 and silently turned subtraction into an empty-name call returning null. The original slash failure plus seven currently accepted Rust regex controls require separate disambiguation work. Rust .86.1/.86.2 and bounded Perl .86.4/.86.5 are verified; exact canonical parent .86.3 remains open.
   Commit: Parent remains open until .86.3.
 - ID: `SESSION-STARTUP-READING.86.1`
   Status: `done`
@@ -4840,7 +4841,7 @@ remain. Reading completion and runtime signoff remain distinct.
   - [x] **LOCKSTEP** — Four exact book examples pass21 assertions; book/current docs and remaining defect owners agree.
 
 - ID: `SESSION-STARTUP-READING.86.5`
-  Status: `active`
+  Status: `done`
   Goal: Reconcile Perl slash-call termination at the end of an outer action block.
   Dependencies: Land .86.2 and .86.4; retained slash_eof/slash_eof_space plus named and semicolon controls; preserve the explicit closing-brace exclusion in the existing regex discriminator.
   Children: `SESSION-STARTUP-READING.86.5.1`, `SESSION-STARTUP-READING.86.5.2`, `SESSION-STARTUP-READING.86.5.3`
@@ -4848,8 +4849,8 @@ remain. Reading completion and runtime signoff remain distinct.
   Planned focused proof: Public Get/runtime context, isolated lowering, complete outer source and generated execution; bare/spaced slash EOF, semicolon/named twins, escaped and closing-brace regex controls, nested and malformed contexts; phase0 and direct scanner tests.
   Planned canonical boundary: Parent .86.3; no broadened delimiter precedence without prior contract reconciliation.
   Acceptance: Fix end-of-block division rejection without stealing regex syntax. Use the established final-statement separator contract, retain source/diagnostics and malformed rejection, and synchronize integration/book guidance. Resolve a genuine contract ambiguity with the director before code.
-  Verification: At clean fe516141b, both bare and trailing-space I { out = /(14,2) } controls fail public Get with compiler_pipeline:validate_dsl_syntax, Unclosed rule block. Isolated action lowering emits valid num_div; semicolon and named div controls return 7. MethodExpr slash lookahead excludes } by design; classify outer context independently rather than removing that regex safeguard.
-  Commit: `pending`
+  Verification: Children .86.5.1/.86.5.2/.86.5.3 verify line-ending and same-line slash calls plus required slot metadata. Final focused240/book103, six-runtime grammar72 and Phase0 1033 pass. Full-source regex-first precedence remains; .27/.54.1/.34/.87 retain independent repairs. Exact canonical parent .86.3 follows.
+  Commit: Verified children .86.5.1, .86.5.2.1, .86.5.2.2 and .86.5.3; canonical closure remains .86.3.
 
 
 - ID: `SESSION-STARTUP-READING.86.5.1`
@@ -4919,16 +4920,27 @@ remain. Reading completion and runtime signoff remain distinct.
   - [x] **LOCKSTEP** — Book, Knowledge and live pointers reflect repaired slash calls and required slot repair .86.5.3.
 
 - ID: `SESSION-STARTUP-READING.86.5.3`
-  Status: `pending`
+  Status: `done`
   Goal: Preserve regex-slot declarations and identities across same-line rule-body members on Perl.
   Dependencies: Verified .86.5.2.2; permanent .86.5.3 public selector/descriptor controls; ADR0045 and the governed named/anonymous slot contract.
-  Scope: Reconcile validation, permanent specs/spec.spec named-declaration grammar and its BootstrapSpec bridge before claiming parsed slot identity; both grammar patterns currently anchor to the entire physical line.
-  Planned tier: focused.
-  Planned focused proof: Separate/same-line named and anonymous slots before/after lifecycle items, explicit numeric/named selectors, authored order and descriptor identity, malformed/duplicate/source-position controls, actual live/emitted results, metadata dependents and full Phase0.
-  Planned canonical boundary: Required before .86.5 and canonical .86.3 closure; no new declaration or selector grammar.
+  Scope: Reconcile validation, permanent specs/spec.spec named-declaration grammar and its BootstrapSpec bridge before claiming parsed slot identity; both baseline grammar patterns anchored to the entire physical line.
+    Required shield: same-line bare lifecycle blocks are admitted by ADR0094, but the baseline permanent grammar recognized only whole-line bare blocks. The compact bare-assignment control exposes its payload as a false named slot; repair this grammar boundary in the same slice before accepting relaxed declarations.
+  Verification tier: `focused`
+  Focused checks: Separate/same-line named and anonymous slots before/after lifecycle items, explicit numeric/named selectors, authored order and descriptor identity, malformed/duplicate/source-position controls, actual live/emitted results, metadata dependents, permanent/bridge grammar recurrence, exact corpus mirrors and full Phase0.
+  Canonical trigger: Required before .86.5 and canonical .86.3 closure; no new declaration or selector grammar.
+  Matrix boundary: The first native grammar run preserves all slot identities but Rust adds source_form=explicit to a same-line final E. Six public current/baseline controls establish the pre-existing .63 input-suffix anchor defect; the lifecycle_block_line branch wins after the cursor despite no physical line start. Preserve that exact failing source under .63, and put E between named members for the common slot-focused matrix rather than normalizing away its extra field. No .63 repair or broad AST parity is claimed here.
+  Required portability repair: The revised matrix passes Perl/Rust6x2, then all Dart cases fail. Public loader/engine diagnosis succeeds on the clean grammar and throws FormatException/Invalid group on the candidate bare-block pattern. Dart's exact shipped-pattern bridge recognizes only the old whole-line spelling. Synchronize that first-party bridge with the unchanged permanent grammar, preserving old matching and exact cursor/physical-line alternatives, captures and spans; add current-grammar recurrence and attempt Dart's local gate. The frozen Perl/spec/test hash retains its Phase0 proof only while those files stay exact; any change to them requires final Phase0 again.
+  Dart gate boundary: The two attempted complete runs reach exactly the already recorded .2.24 formatter and .2.25 SDK-interface blockers in docs/knowledge/dart-component-gate-sdk-compatibility.md. The formatter's six unrelated edits have identical canonical AST/literal source and are restored to clean HEAD. Run the original remaining test/storage/CLI/corpus stages independently; preserve strict analyzer severity and both repair owners, with no full Dart-gate or SDK-migration claim for this bounded existing-pattern repair.
   Acceptance: Recognize admitted regex members outside code across a physical line without counting action/helper patterns. Preserve exact names/order, numeric/name provenance and diagnostics. Keep lifecycle execution .27 and regex-brace .54.1 separate.
-  Verification: At fb955602e, separate I and named-slot lines expose slot_id=slot and return8/undef through Done[slot]. Putting the named slot after I, before E or between them fails resolve_selector/regex_slot_unknown_name; an anonymous slot after I fails regex_slot_index_out_of_range. Validation's metadata prepass recognizes only whole-line named declarations or leading anonymous regexes, so it omits later members. No slash call is needed to reproduce.
-  Commit: `pending`
+  Verification: Focused checks pass 240 tests across 11 files; six exact book sources pass 103 assertions. Clean4ca4f745e finishes 111 metadata groups and fails only new group4. Fourteen LF/CRLF layouts preserve names/order, selectors, source, live/generated values and permanent grammar nodes; bare payloads remain exact. Typed/Unicode/comment/code/unsupported-tail controls and gap/slot/bare neutral checks pass; four grammar mirrors remain exact. Six slot-focused CLI grammar cases pass on Perl, Rust, Dart, Julia, PUC Lua and LuaJIT in both environments (72 case legs). The unchanged final-E projection defect has a permanent .63 regression and public qualification. Dart exact shipped-pattern recognition now preserves cursor/physical-line semantics, captures, suffixes and three carriers. Focused Dart20 and independent remaining stages pass502 tests/storage25owners47packages/CLI66x2/corpus105. Complete Dart gate attempts remain failed at existing .2.24/.2.25 formatter/SDK blockers; six unrelated formatter edits are restored exactly, without suppression. The72 grammar legs compose retained Perl/Rust passes and fresh Dart/Julia/PUC/LuaJIT passes; neither stopped full-driver attempt is reported green. All 120 final checkpoint records match the preceding candidate after the last bare-block shield; the first five book sources are unchanged. Full Phase0 passes 1033/1033 at frozen diff a80c914626100ac1fbe7c7448a42547574d7adfbc7ec0de8da4aadef88394a32. Book rendering and syntax pass. .86.5 closes its bounded implementation; .86.3 canonical remains pending.
+  Commit: `SESSION-STARTUP-READING.86.5.3 - preserve same-line regex slot identity`
+
+  - [x] **ROOT CAUSE** — Whole-line/leading-only metadata and grammar anchors omit adjacent members.
+  - [x] **ISSUE** — Public named/numeric selectors reject valid same-line declarations; relaxed grammar also requires bare-code shielding.
+  - [x] **FIX** — Observe rule-level slots in the structural scan, preserve typed validation, align permanent/bootstrap member recognition and synchronize Dart exact-pattern recognition.
+  - [x] **ADDRESSED** — Live/generated selection, exact metadata, six-runtime grammar72 and Phase0 1033 pass.
+  - [x] **NO REGRESSION** — Existing controls, diagnostics, Unicode identity and code/comment exclusions remain covered.
+  - [x] **LOCKSTEP** — Six executable Markdown sources, formal grammar, Knowledge and current roadmap/task pointers agree.
 
 - ID: `SESSION-STARTUP-READING.87`
   Status: `pending`
@@ -4984,14 +4996,13 @@ audit range, not the default repair frontier.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.86.5.3` | `pending` | Repair same-line regex-slot metadata before .86.5 and canonical .86.3 close; retain .27 lifecycle ownership. |
+| 1 | `SESSION-STARTUP-READING.86.3` | `pending` | Run exact staged canonical parent closeout after verified .86.5.3; retain all independent defect owners. |
 
 The audit withdraws the unsupported precedence question. Helper validation `.86.4.3` and
-statement splitting `.86.4.6` plus quoted-subject validation `.86.4.7` are verified. Public recomposition verifies grouped repair `.86.4.8.2` and fresh generated Trace bootstrap `.86.4.4.2.1`; `.86.4.4.2.2` closes the measured helper scope. Line-ending `.86.5.1` and same-line `.86.5.2` are verified; required regex-slot metadata `.86.5.3` follows before canonical `.86.3`.
+statement splitting `.86.4.6` plus quoted-subject validation `.86.4.7` are verified. Public recomposition verifies grouped repair `.86.4.8.2` and fresh generated Trace bootstrap `.86.4.4.2.1`; `.86.4.4.2.2` closes the measured helper scope. Line-ending `.86.5.1`, same-line `.86.5.2` and regex-slot metadata `.86.5.3` are verified; canonical `.86.3` is next.
 Independent helper gaps are owned by `.87.1/.87.2`; no regex-type feature is admitted.
 
-## Reading Ledger
-All line ranges below refer to the **reading baseline**, not later shifted working-file line numbers. Files
+## Reading LedgerAll line ranges below refer to the **reading baseline**, not later shifted working-file line numbers. Files
 modified by this checkpoint must also be reviewed in the final diff. Unlisted source files and unlisted ranges
 remain unread; running a command that prints a file does not establish comprehension if its output was truncated.
 | Required surface | Fully read and understood? | Completed at checkpoint | Remaining |
@@ -7381,9 +7392,7 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 - The token-return control unexpectedly compiles. Four follow-up query and paired Get/CLI cases establish two clean forbidden-use counterexamples: return(tx) and active copied=tx; both Rust CLI results are null with exit0/empty stderr, while Perl rejects recognition_token_escape. Legal return("ok") agrees. Rust stores Undef alongside a separately held token and ordinary variable reads never call reject_escape; the existing negative test invokes that private authority directly. New .68 owns authored rejection/carrier recurrence/public proof, not an observed token-object leak.
 - A newline-only copy separately triggers a separator error at byte84 and the known .45 warning/drop; its semicolon twin isolates token handling. parse_var_or_call consumes whitespace before suffix lookahead without restoring the plain-variable newline. New .69 owns source-preserving separator repair and ordinary non-token/carrier controls; intended-body execution is not inferred from the warned case.
 - Scratch `.linkedspec-data/scratch/startup91-semantic-failure/` covers 71 files/35,587,020 bytes plus 11,923-byte manifest SHA-256 `771a5f9bc682e9875a4bdb128ae1c39e292579d77f6c2204df5cedba544f4467`; independent assertions 455 bytes `975c9bb37c2bf1b42814974c73a4d0452ab298c8b923cf48838f5d1e36a67b5b`. Native probe compilation42.778s/initial run5.313s, exit0/empty stderr; all subsequent jobs consumed. Neutral semantic6/20/128 at9/0,6/0, diagnostic3/11/6/8/20 and recognition138/250/58 at9/9 pass. Two new/five existing Knowledge cards retain exact evidence and limits; no runtime/public/policy repair or recovery/purge. Roadmap Yes, codebase No, physical mdBook Yes; formal alignment pending.
-
 ### Static projection and event types completion with grouped-edge evidence at `.3.3.33`
-
 - Activated from clean `c7c62c967091910dbb5fb8ea7d7c3df48ed37b41` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
 - Read static_projection.rs 809–1720 (912 lines/29,634 bytes; SHA-256 `e52ac33b7531021b1f7210cf8a6a9caf576a3b1afd92d88072b220431dd7343b`), semantic_observation.rs 1–133 (4,751 bytes; `5f570ff4a9d33aebe0c525afea6a6ae226e885e483e34ca486202e717a3c5e16`) and source_emitter.rs 1–437 (15,991 bytes; `61b041c8b26ff0ff793d31c24f3b3aff5b6b2b81dabc35880b259a27094cb9dc`). All 1,482 lines/50,376 bytes and full files equal baseline `baeb984e36a94a15951cd23d4c52def5064cdaca`; every range read untruncated. Static projector and event/sink types are physically complete.
 - Static scanning groups parsed members by line, tracks leading regex/quotes and bracket depth, resolves captured byte/scalar spans, derives explicit repetition and first known return/edge shapes, then sorts records by kind/order/id and relations by endpoint ranks/kind/id. Nine current internal tests were read, not freshly run. Event constructors separate slot/result fields, hash exact UTF-8 bytes and directly invoke a shared Rc/RefCell synchronous callback. Emitter prefix defines typed metadata/errors, ten families/five seek/five consume, two decode aliases, and pre-serialization identity/typed-write/slot validation; module bodies and later plan validation remain next.
@@ -7391,75 +7400,54 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
 - Two initial per-target-index groups compile as one blockless Rust edge versus two Perl edges. Rust parses labels before one final selector, then discards the unrecognized action remainder; this is construction/projection evidence, not target execution. New .70.1-.3 own exact grouped correlation, complete accepted grammar/remainder handling, and independent backend/carrier/public recurrence. No new selector syntax is adopted. Source-based selects_regex incompleteness is a source consequence; no fresh relations/observation derivation is claimed.
 - Scratch startup92-semantic-target-index retains 17 files/51,409 bytes plus 2,609-byte manifest SHA-256 `3fb86ddcf0e1d0b09c35bb7b3b2cdd459b4b9f05ad401ce5594a7d18959a1955`; startup92-semantic-group-selector retains 39 files/90,984 bytes plus 6,124-byte manifest `252da991f555c3d798d6f88e79b638ce3efaacf6c91507f6794e824921c42ef7`, both beneath `.linkedspec-data/scratch/`. Independent assertions455bytes `dc3f6d9fc5697af6d32d499d73315857dc34a87c02ec251f814f323a2f00b5f4`. Verified existing probes/CLI reused with distinct recorded logical names; no full-response equality or new compilation claim.
 - Semantic6/20/128 at9/0,6/0, cursor36/18/8/60 and generated metadata10families/strictRust105 pass. Query runtimes Rust2.551/3.824s, Perl10.897/12.078s; Get11.180s and CLI1.279/1.233/1.246s. All jobs consumed. One new/four existing Knowledge cards preserve exact limits; no runtime/public/policy repair, recovery or purge. Roadmap Yes, codebase No, physical mdBook Yes; formal alignment remains pending.
-
 ### Emitter completion, source authority prefix and native generated boundaries at `.3.3.34`
-
 - Activated from clean `d3fd048f37bfa90fe371ef78e174a85ae008aff8` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
 - Read source_emitter.rs 438–1466 (1,029 lines/38,547 bytes; SHA-256 `777590070ae77d55f68f0dc673423a1af9dcb8e4b7f99f289219131d27ad785e`) and source_location.rs 1–464 (14,836 bytes; `3d0c9ca29b41093bb9eacf2b79e0f8aa37d6e8eb299f5e454e31267d752eb5a9`). All 1,493 lines/53,383 bytes and full files equal baseline `baeb984e36a94a15951cd23d4c52def5064cdaca`; every owned range read untruncated. Emitter physically complete; source materialization remains next.
 - Adapters preserve contract-before-decode, typed write/slot/plan validation, selected-entry context and distinct sink/exit errors. Plan checks count/ordered labels/known matching family; two aliases are accepted only for matching families. Typed source values are private and authority-bound with checked unique IDs and exact UTF-8 scalar/LF coordinate tables. Three existing Knowledge cards record these bounds; selected Rust sections of the large rollout card were read after its whole output truncated, not falsely counted as full-card reading.
 - Eight native identity controls emit seven modules and reject empty identity; three ASCII/quoted-whitespace/Unicode modules compile, four control-character modules fail because JSON escapes are emitted as Rust literals. Two actual executable modules/five roles each show ordinary parse siblings all return ["ok"], but recognition plain parse returns "ok" while default-options/disabled-trace/no-sink siblings return ["ok"]. .71/.72 own literal encoding, adapter coherence and the rewrite's unused import; 34 other dead-code warnings belong to uncalled roles in private probe modules. New cards retain exact causes and repair acceptance; no runtime/public repair is claimed.
 - Scratch startup93-generated-boundaries holds 66 files/68,030,768 bytes plus a 13,446-byte manifest SHA-256 `efca34731a315b8f34dbd92d02d9be4ffd00f172fb3b40ef91abda228f795580`; independent assertions: 689 bytes `33d25d8edb7bb7c799465e949ab0c5c94e722a55c10da99fee5609df1e585f64`. Probe compile/run: 283.710/10.529s, runner: 110.168/1.373s; all outcomes consumed, libraries rehashed. Generated10families/strictRust105, cursor36/18/8/60, typed14/0/231 pass. No compiler delay cause, recovery, purge or fresh full gate claimed. Roadmap Yes/codebase No/physical mdBook Yes; formal alignment pending.
-
 ### Source materialization and loader completion with function projection at `.3.3.35`
-
 - Activated from clean `39cdef6598a5cea1702bb13b2c794c9fbbfb2b47` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
 - Read source_location.rs 465–561 (97 lines/2,951 bytes; SHA-256 `38c645f896c1583e22a1b0767d1cb44e6c8c4a772b7dd8a66fcb678a1c2ebb5a`), spec_loader.rs 1–564 (17,279 bytes; `849dc6ae9775c693f7c112b6ed9bcbf5370e22f7f3d9bb3e07e3307ace9e2131`) and spec_parser.rs 1–836 (30,993 bytes; `084d6e35ed31dc11f3b6800daf6354c27b54a28a5129b4ab5a708f8cf7eaac60`). All 1,497 lines/51,223 bytes and full files equal baseline `baeb984e36a94a15951cd23d4c52def5064cdaca`; every range read untruncated. Source authority and loader physically complete.
 - Sealed materialization accepts Span/DerivedText, rechecks authority/source/range and emits provenance-indexed errors before detached text. Loader retains explicit roots, stable lexical candidate order, first regular file, Unicode path checks, strict UTF-8 and distinct pipeline stages. Full ADR0026 and native resolution cards reconcile historical Julia fallback wording; no resolution-policy change or new native loader execution is claimed. Current relative root paths are joined as supplied; cwd explicitly anchors cwd/exact relative candidates.
 - Definition projection executes the embedded grammar, validates fixed/signature/final-codeblock forms and exact scalar body/source correspondence, normalizes function parent paths/job IDs, then dispatches actionir-body.spec jobs with fixed policies. Stripping preserves scalar positions and CR/LF, not multibyte byte length; signature/error helper suffix remains next. One new/four existing Knowledge cards record source facts and bounded dated claims; the rollout card hit 66,112/65,536 bytes, so its exact new Rust authority sections move to a focused card with a retained pointer. Fresh resolution14/9/4, typed14/0/231, diagnostic3/11/6/8/20 and staged9legs/123base+129public mutations pass; all jobs complete. No new repair, native/full gate, runtime/public/policy change, recovery or purge. Roadmap Yes/codebase No/physical mdBook Yes; formal alignment pending.
-
 ### Spec parser completion and staged authority prefix at `.3.3.36`
-
 - Activated from clean `b6f6085c50a7a7ee8bf2b33a3e861e6d3c86b83c` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
 - Read spec_parser.rs 837–1022 (186 lines/6,357 bytes; SHA-256 `b94ca8b8ea63aebd258b5567b897429be974edd0f7c121a6846206487986e309`) and staged_ast_enrichment.rs 1–1267 (44,706 bytes; `7a479df9743d8e66ee2ceca7abde2a04dd3bb96d067e7330ff4d40194297fc2d`). All 1,453 lines/51,063 bytes and full files equal baseline `baeb984e36a94a15951cd23d4c52def5064cdaca`; every range read untruncated. Spec parser physically complete.
 - Signature helpers enforce exact six-field/version/arity/rest shape and typed scalar fields; definition-error presentation selects codeblock-specific messages and source-line/node context. Existing .55.1 adds private usize_field's checked-u64 versus finite-integral-f64 cast boundary and actual AST producers to its inventory; no new reachable function/numeric failure is measured. Frozen staged registry validates prepared entries/callback bindings, hashes opaque logical snapshot data, resolves only prepared candidates and narrows versions/top/capabilities/policies/detail/ceilings. Cache lookup stores only immutable compiled plans; key construction and lower helpers remain later.
 - Context views separate detached local state from live invocation/job budgets and expiry; seed starts fresh registry/authority and rejects active recognition at completion. Current-depth execution prepares/sorts/validates before callbacks on an unpublished AST. Recursive coordinator creates counters once, validates each complete depth and schedules settled children next; detailed execution, safe points, cycle/decrease, detachment and rebasing helpers remain next. Five Knowledge cards retain exact scope. Fresh staged9legs/123base+129public mutations, typed14/0/231 and scalar55cases/18helpers pass; all jobs complete. No new runtime/public/policy repair, native/full gate, recovery or purge. Roadmap Yes/codebase No/physical mdBook Yes; formal alignment pending.
-
 ### Staged execution and bounded native counterexamples at `.3.3.37`
-
 - Activated from clean `90ae57bb9814118c3fe041c0723d841d7feabb44` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
 - Read staged_ast_enrichment.rs 1268–2766 completely: 1,499 lines/53,102 bytes, SHA-256 `cb7d7f15fa8178e78ebcbc994486ea7c60df4ec30370736ebd42ee444eccd990`; range/full file equal baseline `baeb984e36a94a15951cd23d4c52def5064cdaca`. Identity/cache fields, typed queue order, dispatch/safe-point authority, callback expiry, detachment, failure settlement, cycle/decrease, diagnostic rebasing and stitching are reconciled in bounded Knowledge cards; final validators remain next.
 - Independent public host API probes assert 28 paired Perl/Rust target records: duplicate sibling targets reject after one callback, duplicate replacement succeeds and overwrites after two, queued-marker overlap rejects after one; distinct destinations and shared appends preserve both results. Root-only markers reject before callbacks without adopting root replacement as a feature. New .73 owns complete target reservation and corrects prior complete-depth wording.
 - Twelve Rust returned-marker/control records isolate deep-key bypass and an invalid two-MAX-segment provenance panic. Backtrace identifies strictly_decreases:2121; ordinary forbidden-key records reject and valid recursive markers succeed. New .74 owns validation and checked provenance arithmetic. Six budget records show ordinary exhaustion rejects, one remaining succeeds, but MAX/MAX runs once with unchanged total; .75 owns saturating admission. No external data, release/backend extrapolation or runtime repair claim. Local manifest 48files/2,885,337bytes, SHA-256 `b87f41e3f3c796ff80a6a10df8cd2d6c8372eb866e3764323c1b88ee5cd6c218`; independent assertions `459cbd58c047336e9036c5e87eebc371fbfa6406ae692740438f8a5f67dddb42`. All jobs consumed, three new/three existing Knowledge owners reconciled. Fresh staged123base+129public and typed14/0/231 pass; no full gate/recovery/purge. Roadmap Yes/codebase No/physical mdBook Yes; formal alignment pending.
-
 ### Staged source completion and generated Unicode prefix at `.3.3.38`
-
 - Activated from clean `77cad4543e72ab304ce2a66b26a876b02cd6d3c4` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
 - Read staged_ast_enrichment.rs 2767–3058 (9,634 bytes; SHA-256 `834cfb562377519aee92c2868e90e5ad564ba78eb0295cb289964bc5ca5265b5`), staged_parse_job.rs 1–290 (11,273; `5f5aad25051a97d03d93008b214ba1652e7e6cf7243b884668ae18f8460fd61d`), staged_parser_registry.rs 1–712 (24,568; `5509da5b6729544894f7158b9e5a8540f76191cca8620c71518e91eb5571f023`) and unicode_case_mapping.rs 1–206 (5,313; `00c0ec0fcd97c4d6208ab8fe99957565274fa5e0056af7f120be27b869055e57`). All 1,500 lines/50,788 bytes and full files equal baseline `baeb984e36a94a15951cd23d4c52def5064cdaca`; all ranges read untruncated. Three staged source files physically complete.
 - Final v2 candidate/string/numeric/digest validators and recursive canonical hashing are reconciled. Declaration provenance uses exact direct/derived shapes and live source-authorized positions/materialization, distinct from .74's returned JSON boundary. Legacy v1 normalizes/sorts the full queue, invokes the same four built-in phases with optional trace, constructs cache-key records without a plan store and leaves policy enforcement to function integration. Existing .55.1 inventories its floating usize conversion without a new measured failure. Six existing Knowledge cards retain exact scope.
 - The generated Unicode prefix pins contract/version/digest and opens sorted lower mappings, including dotted-I expansion and identity entries. Fresh offline regeneration byte-compares neutral JSON and all five backend modules and verifies 1,563 lower/1,581 upper, 158/464 properties and twelve fixtures; staged123base+129public and typed14/0/231 also pass. No new native/carrier/full-gate result, runtime/public/policy repair, recovery or purge. Roadmap Yes/codebase No/physical mdBook Yes; formal alignment pending.
-
 - Mandatory rollover and capacity: exact segment 4983 source/blob/hash/count and unchanged-prior-manifest proof passes. ADR0106 changes only 29→30 collection files, 28→29 manifest lines and 16,384→16,463 manifest bytes; final staged canonical receipt is required before landing. The current book links the governed store and contains no stale numeric manifest limit.
-
 ### Unicode lower-map completion and canonical evidence at `.3.3.39`
-
 - Activated from clean `eba1a0edb14463e737003025a8d66ffa4f853801` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
 - Read unicode_case_mapping.rs 207–1706 completely in five untruncated ranges: 1,500 lines / 38,103 bytes, SHA-256 `285db242fb8cd77506627568d96f91fd09a5ae4fefad69426331f730f4ea928d`; full file/range equal baseline. Lower table complete through supplementary entries; upper prefix includes non-invertible full expansions. The contextual evaluator remains unread. Fresh Unicode generation and twelve neutral fixtures pass with counts1563/1581/158/464.
 - Consumed .3.3.38 canonical exit0 and exact receipt promoted to `eba1a0edb14463e737003025a8d66ffa4f853801`: all nine doctrines, mandatory consumers/locality/five relocated anchors, CLI66/66 twice, Phase0 1032/1032 in1100s; 25 optional gates skipped. The existing macOS launch Knowledge card records the full log hash/size and both fully consumed, retained 32-line samples; their pre-main frames do not establish an OS cause or sampling workaround.
 - Five existing Knowledge cards preserve mapping semantics, exact completed verification and static-probe evidence scope. Rerunning the .3.3.37 statically linked probe cannot prove a later runtime repair without rebuilding and verifying library identities. No new defect, runtime/public-book/policy repair, recovery or purge; roadmap Yes/codebase No/physical mdBook Yes, formal .4 alignment pending.
-
 ### Unicode upper-map completion at `.3.3.40`
-
 - Activated from clean `fe6d2638c8aa5cecebc214ce33c07c8b1a770278` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
 - Read unicode_case_mapping.rs 1707–3156 completely in five untruncated ranges: 1,450 lines / 37,746 bytes; SHA-256 `53e3bf1abba654fbab0a398f277c467e627fdc5b2d57388616d48504ffbd1f01`. Full file and range equal baseline. The upper map is now complete through U+1E943; ordered combining expansions, ligatures and many-to-one casing preserve the pinned contract, with no normalization or inverse-conversion promise.
 - Existing Unicode Knowledge reconciled. Git confirms generation/runtime inputs unchanged since .3.3.39; its five-module regeneration and twelve neutral fixtures remain retained proof. Property ranges/contextual evaluator await .3.3.41. No new runtime test, defect, public-book/policy repair, recovery or purge; roadmap Yes/codebase No/physical mdBook Yes, formal .4 pending.
-
 ### Complete Unicode reading and final batch checkpoint at `.3.3.41`
-
 - Activated from clean `f3a26cd55982e9b5285349b38bc9b96eb8b9666e` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
 - Read unicode_case_mapping.rs 3157–3859 completely (703 lines / 16,474 bytes; SHA-256 `d87280ba0efce3ba229fbf2f064a6c82f549d808d9b04fdebe583912d2a74f8d`) and callable_codeblock_literal_contract.rs 1–791 (791 lines / 27,469 bytes; SHA-256 `7b867d0449c8b168d28d85b994ceb97ba2c075130d63c455d76fdbd7b1d54e21`). All six chunks are untruncated; full files/ranges equal baseline. All 3,859 Unicode lines / 97,636 bytes are now read. Binary-searched properties, original-scalar Final Sigma context and full mappings agree with the completed Perl evaluator.
 - Callable prefix reading distinguishes exact native/reconstructed records from generated error-code substring assertions, inert state from invocation, and source inspection from emitted execution. The contextual suite prefix covers descriptor/body/job metadata and eleven route results; the eager-block test only starts at the boundary. Four existing Knowledge cards preserve these limits. Fresh Unicode regeneration/12 fixtures and callable 7/11/9/7/4/8/23 checks pass; no new native callable execution is claimed by reading.
 - Independent Git census verifies all 99 preceding first-parent batch commits after `a5d5dcd2955aaaa41166bd87de6bdc39a4502bc4`, with each recorded leaf/hash in order. Item 100 requires exact staged canonical CI before landing; the completed gate summary/log identity belongs in its commit body, and the promoted exact-HEAD receipt governs final clean push. No new defect, runtime/public-book/policy repair, recovery or purge; codebase reading remains No and formal .4 alignment is pending.
-
 ### Callable completion, named marks and corpus prefix at `.3.3.42`
-
 - Clean activation `fb307dae35d0ecfdcbb4b29e65bec36855d6971b`; all 56 owned scopes read in four untruncated groups, 1,500 lines / 45,529 baseline-identical bytes. Callable suffix SHA-256 `d3a518d533d0a4b28dd118a1ff36c39725213304586f1633ef22f7da8d1ec894`; named-mark consumer `00750f546668f63acd29ddcf732f869262f6ea9833ae503ae9b82e5a9d6dccce`.
 - Callable suffix completes eager-block preservation, typed-final-value diagnostic fields, standalone contextual execution and semantic signatures. Named-mark assertions cover native/reconstructed/validated generated-plan values plus emitted source inspection; this consumer does not independently compile its emitted source. Existing Knowledge owns these exact limits.
 - Corpus prefix includes autoexist, six capability families, vhistory, two EBNF fixtures and hlink; hlink_curly_brace source line 29 and its input remain `.3.3.43`. Corpus values remain frozen evidence, not fresh runtime results. Callable and named-mark neutral checks pass; no production/public repair is claimed.
 - Exact routed task census at activation is 100 files / 79,955 lines / 8,146,914 bytes; the 80,000-line limit requires duplicate-chronology compaction under `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.5` before continued reading. All limits remain unchanged.
 - Director requests assessment of parameterized/generic rules: preserve a proposed investigation after the clean containment pivot, covering grammar-rule parameters and separate runtime value parameters; no language implementation is authorized by that question.
-
 ### Roadmap reconciliation at `.2`
-
 - Activation: clean `a5d5dcd2955aaaa41166bd87de6bdc39a4502bc4`; `.githooks` is configured and no background job remained.
 - Both roadmaps changed since the reading baseline only by the same four-line startup-prerequisite pointer.
   Those additions were read, and this checkpoint's final diff is part of review.
@@ -7473,19 +7461,12 @@ not unmeasured runtime defect claims. No public-book, runtime, or policy changes
   substantive codebase/book drift, if found during `.3`/`.4`, must receive an owning leaf before remediation.
 - The completed 100-item batch is derived from Git: `git log --reverse --first-parent --format="%h %s" a5d5dcd2955aaaa41166bd87de6bdc39a4502bc4..fb307dae35d0ecfdcbb4b29e65bec36855d6971b`. Leaf `.1` belongs to the preceding checkpoint.
 - `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.5` verified all 100 ordinal/leaf/hash identities before removing the duplicate enumeration; exact comparison provenance is in `docs/knowledge/startup-task-chronology-compaction.md`.
-
 ### Corpus continuation at `.3.3.43`
-
 All 53 owned scopes are read: HLink delimiter/raw text, Liberty scalar/complex attributes, Lispish aggregation, portmap shape variants, explicit empty plugin input, literals, register fields, SimEnv and the spec.spec prefix through line 145. Stored JSON is an oracle, not fresh runtime proof. The scoped audit digest is `d7cd64ee375d24d370de3831e140c9aae425f1b75657b292d1daf178394e4c13`; forward reading through `.66` remains in d6f37492 until individually reconciled.
-
 ## Decisions
-
 - 2026-09-22: Director approves targeted reading and fast ramp-up. ADR0123 supersedes the blanket full-reading prerequisite; .85 identifies the three reports before repair selection. No audit range or defect is closed.
-
 - `2026-09-13` .3.7.0: Freeze 21 complete supporting groups under existing capacity; exact prior startup Scope records grant no supporting-file reading credit. Continue authorized read-only work while reusing compatible dependencies.
-
 - `2026-09-11`: .3.5.0 uses a separate bounded Julia member because the 572-line minimum plan exceeds startup member headroom. All 52 scopes are fixed before reading; no limit increase or source-reading credit. Future history capacity belongs to JULIA-STARTUP-READING.4.
-
 - `2026-09-06`: The director explicitly excluded `rgx` from this reading pass; the exclusion includes its nested
   dependencies and does not remove first-party Rust code or tests from scope.
 - `2026-09-06`: After being asked to choose between a reading checkpoint and keeping every file unchanged, the
@@ -7494,16 +7475,11 @@ All 53 owned scopes are read: HLink delimiter/raw text, Liberty scalar/complex a
   Implementation and unrelated documentation changes remain gated.
 - `2026-09-06`: Keep detailed progress here and a short pointer in layer A; preserve the existing implementation
   destination. The checkpoint does not alter repository doctrine or make reading a substitute for production work.
-
 - `2026-09-08`: DBINP authoring discussion is proposed under `PARSER-AUTHORING-APIS`; approved format coverage remains parked under its existing tree. Preserve the required LinkedSpec/RGX/PGEN dependency build chain; generated dependency state alone is not a blocker.
-
 ## Open Questions
-
 - None requiring director input. `.6` resolved the liveness discrepancy as a real false-dead defect; `.7` owns
   repair after required reading. Do not use `--recover` or `--purge-failed` while that boundary remains unfixed.
-
 ## Blockers
-
 - None. At activation, Git was clean and no background job was pending. Required reading is unfinished work,
   not a test failure or an external blocker.
 - `.7` blocks managed recovery/purge and later mutation-workspace setup until denied/unknown liveness is safe.
@@ -7514,55 +7490,32 @@ All 53 owned scopes are read: HLink delimiter/raw text, Liberty scalar/complex a
 - `.11.1`–`.11.3` own diagnostic context/occurrence/rule-attribution repairs after `.10`; invalid inputs still reject.
 - `.12` owns confirmed native bare/explicit edge-order drift after `.11`; metadata and execution currently disagree.
 - `.16.1`/`.16.2` own confirmed emptiness expression drift and literal/host-slot leakage after `.15`.
-
 - `.17`–`.30` own the additional confirmed runtime/tool/public/evidence gaps preserved in intake `.31`;
   existing lifecycle debt remains under its original card and gains `.27` implementation ownership.
-
 - `.80.1-.4` own correct dependency build reuse; `.81.1/.81.2` own newer-OS startup diagnosis and conditional repair.
   Both retain startup .3/.4/.5 prerequisites; intake .80.0 authorizes no source repair or OS mitigation.
-
 ## Verification Log
-
+- 2026-09-24 .86.5.3: Focused checks pass 240 tests across 11 files; six exact book sources pass 103 assertions. Clean4ca4f745e finishes 111 metadata groups and fails only new group4. Fourteen LF/CRLF layouts preserve names/order, selectors, source, live/generated values and permanent grammar nodes; bare payloads remain exact. Typed/Unicode/comment/code/unsupported-tail controls and gap/slot/bare neutral checks pass; four grammar mirrors remain exact. Six slot-focused CLI grammar cases pass on Perl, Rust, Dart, Julia, PUC Lua and LuaJIT in both environments (72 case legs). The unchanged final-E projection defect has a permanent .63 regression and public qualification. Dart exact shipped-pattern recognition now preserves cursor/physical-line semantics, captures, suffixes and three carriers. Focused Dart20 and independent remaining stages pass502 tests/storage25owners47packages/CLI66x2/corpus105. Complete Dart gate attempts remain failed at existing .2.24/.2.25 formatter/SDK blockers; six unrelated formatter edits are restored exactly, without suppression. The72 grammar legs compose retained Perl/Rust passes and fresh Dart/Julia/PUC/LuaJIT passes; neither stopped full-driver attempt is reported green. All 120 final checkpoint records match the preceding candidate after the last bare-block shield; the first five book sources are unchanged. Full Phase0 passes 1033/1033 at frozen diff a80c914626100ac1fbe7c7448a42547574d7adfbc7ec0de8da4aadef88394a32. Book rendering and syntax pass. .86.5 closes its bounded implementation; .86.3 canonical remains pending. Files=1, Tests=1033, 2099 wallclock secs ( 0.41 usr  0.08 sys + 1043.99 cusr 137.50 csys = 1181.98 CPU) Logs: .linkedspec-data/scratch/regex-slots86-5-3/.
 - 2026-09-24 .86.5.2.2: Recognize the balanced slash-call end before an outer brace and following members, retaining full-source regex-first trial selection. Focused9 files/207, exact book84 and rendering pass. Clean fb955602e finishes14 groups and fails only new group14. Exactly8 bare-slash rows in the30-case intake now match named controls; other22 are exact. Original12/helper13+syntax/grouped22/numeric12/multiline5 stay exact. Context15 changes only intended next_member/quoted-slash public outcomes; private fragment scans do not select the full-source interpretation. Slot5 stays exact and required .86.5.3-owned. Full Phase0 passes1033/1033 at frozen diff86881406bf815024ee8c7cf00482ce547ebae315a6165fd350cfe9d258b05a92. No canonical or push claim. Files=1, Tests=1033, 1394 wallclock secs ( 0.42 usr  0.09 sys + 1081.47 cusr 110.13 csys = 1192.11 CPU) Logs: .linkedspec-data/scratch/slash-members86-5-2/.
-
 - 2026-09-24 .86.5.2.1: Public/Get and emitted-source diagnosis proves omitted E: old I/regex/E returns7 for x and y despite E{return(42)}; generated source contains only I. Corrected explicit edge returns8 for x and undef/no-error for y. Focused5 files/31 pass; five exact book sources/84 pass. Isolated old-fixture mutation finishes7 groups and fails only book group7. First four sources are unchanged; production matches917b4a42a. Book render and permanent checkpoint pass. .27 retains lifecycle repair; .86.5.2.2 is next; no new Phase0/canonical claim. Logs: .linkedspec-data/scratch/slash-members86-5-2/.
-
 - 2026-09-24 .86.5.1: Outer structural depth recognizes only a complete bare slash call followed by line-ending braces; shared MethodExpr precedence and source bytes stay unchanged. Accepted full-source regex interpretations win; only a failed source with a final-call candidate retries. Only the selected attempt publishes diagnostics. Focused9 files/206 and five exact book sources/82 assertions pass. Clean fe516141b baseline completes13 groups and fails only new groups12/13. Fixed15 contexts and original12 change only their bare/spaced EOF outcomes to7; helper13+syntax/grouped22/numeric12 remain exact. Full Phase0 passes1033/1033; frozen source/test diff SHA25691821cd09b9991ce975862b4c83a62b0c899badb8c02fd62a8ed9dd8f89188d5. Syntax and final book render pass. Same-line members stay .86.5.2; numeric callable/grouping are .87.3/.87.4-owned. Phase0: Files=1, Tests=1033, 1528 wallclock secs ( 0.51 usr  0.11 sys + 1129.24 cusr 129.84 csys = 1259.70 CPU). Logs: .linkedspec-data/scratch/slash-eof86-5/.
-
 - 2026-09-24 .86.4.4.2.2: All59 fixed public outcomes/readiness/error stages and the complete syntax record reconcile. Exact code/test/four-source identities reuse9f81d3162 focused173/book66 and mutation proof; checkpoint syntax/rendering and normal memory/history/Knowledge/doctrine checks govern landing. Logs: .linkedspec-data/scratch/helper-pattern86-4-4-2-2/. Engineering notes roll exact114 lines/28181 bytes to segment4969; all prior segment rows/bytes remain unchanged. Trim only the resulting mutable-root trailing blank separator.
-
 - 2026-09-24 .86.4.4.2.1: Fresh generated baseline fails four book cases; explicit Trace import passes book66 and focused173 across9 files in163 seconds. Two isolated book mutations reject only intended assertions; syntax/contract, book/memory/Knowledge/history and normal doctrines govern landing. Logs: .linkedspec-data/scratch/helper-pattern86-4-4-2/.
-
 - 2026-09-24 .86.4.8.2: Focused187, exact book21, baseline RED only group10 and final Phase0 1033/1033 (Files=1, Tests=1033, 1423 wallclock secs ( 0.44 usr  0.10 sys + 1086.49 cusr 125.81 csys = 1212.84 CPU)) pass; frozen diff unchanged. Book/memory/Knowledge/history/doctrines govern landing; scratch .linkedspec-data/scratch/helper-pattern86-4-8-2/.
-
 - 2026-09-24 .86.4.8.1: Exact12-case baseline/candidate source pairs reject lookahead despite prior22-case improvement. Archived patch reconstructs; production/tests and all three complete book sources remain exact to f3f9fc74. Restored consumer9 passes; tracked replay/book render/memory/history and normal doctrine hooks govern intake only. No full Phase0 or canonical claim.
-
 - 2026-09-23 — .86.4.2.1: exact accepted/candidate public and lowering comparison proves two successful-value changes; rejected patch reconstructs four files exactly; restored source/test identity and AST23/23 pass; focused governance/book proof before commit.
-
 - 2026-09-23 — .86.4.1: public Get/lowering and whole-versus-line scanner probes reproduce distinct owners; supplied policy hashes unchanged; focused memory/history/Knowledge/book/doctrine checks before commit.
-
 - 2026-09-22 .83.2.2: PASS: all 37 authored cases on six native runtimes (222 case outcomes), 21 token-spelling round trips per route and 16 same-engine post-rejection reuse checks per route. Perl has 44 top-level/168 nested assertions including descriptor readiness and the independent catch-all mutation; Rust one complete contract test, Dart 38 tests, Julia 91 assertions, and both Lua routes pass. Three initial Dart EOF-comment failures become green with a portable grammar branch, without changing authored expectations. Historical Lispish quoted-LF fixtures pass 3/3 on Perl, and the new book command returns its exact documented value. Formatting, Dart analysis, shell syntax, book, Knowledge/memory/history/diff and doctrine checks govern landing. The public grammar/recurring-CI boundary requires the exact staged canonical receipt; native file delivery and final report admission remain separate. Logs: .linkedspec-data/scratch/sexpr-document-v1/.
-
 - 2026-09-22 .45.3: Compiler correction 10893fb71 passed all core/native regressions and the complete Rust component gate; carrier checkpoint 30c1ddeea passed all four source/AST/loader/semantic/generated route tests. This documentation-only parent closeout retains those exact proofs. Canonical acceptance requires tools/run_ci_local.sh to finish successfully on the exact staged candidate and produce the receipt checked by the normal commit hook; the resulting commit and promoted receipt are the durable gate evidence. Other parser defects and document grammar delivery remain separately owned.
-
 - 2026-09-22 .45.2: Four focused route tests PASS: eight malformed sources yield 32 ordinary/traced source/reconstructed-AST rejections, 16 path/name-loader rejections and eight failed semantic snapshots with no compiled authority or plan. Valid path/name loads, reconstructed compiled state and generated-plan execution return 42; a freshly compiled emitted module verifies direct/traced 42 and compatibility [42]. Production code is unchanged from 10893fb71; its complete Rust compatibility proof remains applicable. Rust formatting, book, Knowledge/memory/history/public/diff checks and normal doctrines govern landing. Raw log: .linkedspec-data/scratch/compiler-rejection45/routes-green.log.
-
 - 2026-09-22 .45.1: PASS: 12 native invalid cases change from warning/compile:ok/invoke:ok to exit 1/compile:error with no input or invocation phase; three valid controls retain 42 and empty stderr. Four persistent core rejection groups are RED before repair; all five groups GREEN afterward (15 malformed contexts and 11 retained valid blocks). Complete Rust component gate PASS: 228 core and 574 runtime tests, including all 197 end-to-end tests, 21 shipped grammars and 105 oracle cases; primary CLI conformance is 66/66 in each default/POSIX environment, and managed-storage checks pass. The committed quoted-LF manifest passes all three cases on the rebuilt primary binary. Callable contract, book, Knowledge/memory/history/public/diff and registered doctrine checks govern focused landing. Separate carrier proof/canonical closeout and parser-cause repairs remain open.
-
 - 2026-09-22 .83.1: ADR0124/37 independent cases and 136 Perl assertions establish the planned contract; four Rust prototype boundaries pass after canonical comparison spelling. Existing .45 warning/drop reproduces with exit 0/null and receives three bounded repair children before delivery. No production grammar or cross-backend admission claimed.
-
 - 2026-09-22 .83.2.1: PASS: exact clean-HEAD grammar fails all three final shared fixtures; fixed Phase0 smoke passes 9 assertions, and Perl/Rust/Dart/Julia/PUC Lua/LuaJIT pass 3 fixtures in both default and POSIX environments (36 command legs; 19 aggregate forms plus two isolated quote contexts). Rust passes 26 file values through one engine and all 18 existing verification groups, including all eight byte-exact report inputs/expectations. Descriptor readiness remains 9/9 with 0 blockers; corpus copy is exact and retains its x/y value. Eight root/child quote controls explain and correct the initial invalid root-capture probes without a runtime change. Book, direct public checks, syntax, memory/history/Knowledge/diff and normal nine-doctrine hooks govern focused landing; no canonical run or push.
-
 - 2026-09-22 .85: Exact report register/snapshot recovered; fresh Rust replay confirms four controls and four LF failures, all real exits0/stderr empty. No missing-user-input blocker remains.
-
 - 2026-09-22 .84: Targeted-startup adoption preserves prior reading evidence and source; selected continuity checks govern landing.
-
 - `2026-09-13` .3.7.0: Supporting-source inventory .3.7.0 reconciles all 158 baseline-identical files under conf, tablescript, noncore, specs and ebnf: 25,612 LF delimiters, 25,613 fragments and 964,256 bytes. SUPPORTING-SOURCE-READING owns 21 pending groups/174 disjoint ranges; independent Git, current-delta and published-task reconstruction pass with every group within 1,500 fragments /65,536 bytes. No exact earlier startup Scope coverage is credited; physical reading is 0/21. The resulting decomposition uses existing controls, preserves all repairs and changes no source. Lua reading remains closed under ADR0119; next supporting .1.1 reads configuration. No dependency compilation or canonical gate is run; full codebase/book/policy prerequisites and later verification remain.
-
 - `2026-09-12` .3.6.0: Lua decomposition freezes 51 pending reading children across 99 baseline-identical files: 71,268 physical lines, 71,269 fragments and 2,732,450 bytes. The independent 149-range audit includes two UTF-8-safe byte windows for an oversized generated MCP line. No source comprehension is claimed. The current plan fits unchanged limits; comparable Julia reading growth exceeds remaining Knowledge capacity. LUA-STARTUP-READING.4.1 prepares a coherent capacity disposition before reading. All previous reading, repairs and verification requirements remain intact.
-
 - `2026-09-11` .3.5.0: Startup .3.5.0 freezes Julia reading into 52 owned children / 146 ranges across all 95 baseline-identical files: 75,984 lines / 2,693,170 bytes. Independent reconstruction verifies every byte and range digest; physical Julia reading remains 0/52. A separate bounded JULIA-STARTUP-READING member fits existing controls; .4 owns future history/capacity pressure. Dart reading is closed under ADR0114, with all 69 repairs and its failed gate retained. Next Julia .1.1 reads the manifests and first README range.
-
 - `2026-09-08` `.3.3.67`: Exact scope and independent committed-child/mode/delta/repair/Knowledge continuity audits PASS. All 66 reading children and 141 touched fact paths are durable; 34 post-Perl repair owners retain 90 pending nodes / 73 pending leaves. Final receipt-bound canonical CI governs parent landing; outcome and exact log identity are retained in the commit. Next containment .7 precedes Dart ownership/reading.
 
 - `2026-09-08` `.3.3.66`: Four exact scope/baseline identities PASS. Managed neutral Unicode806/9/8/2, binding11/7/6/8, callable-signature3/9/7 and write5/7/11/16/3/3/8/105 PASS. Existing cards distinguish native/generated-helper execution, strict-loader compilation, emitted-text inspection and the one independently compiled write fixture; no new native run is inferred. Knowledge, memory, histories, diff and doctrine hooks govern focused landing.
@@ -7727,6 +7680,8 @@ CLI66x2 and Phase0 1032/1032; 1163 seconds is Phase0 only, with 25 optional gate
 
 ## Commit Log
 
+- 2026-09-24 .86.5.3: `SESSION-STARTUP-READING.86.5.3 - preserve same-line regex slot identity`; activation4ca4f745e; canonical .86.3 follows.
+
 - 2026-09-24 .86.5.2.2: `SESSION-STARTUP-READING.86.5.2.2 - validate same-line slash call members`; activationfb955602e; required .86.5.3 follows.
 
 - 2026-09-24 .86.5.2.1: `SESSION-STARTUP-READING.86.5.2.1 - prove explicit book example returns`; activation917b4a42a; .86.5.2.2 follows.
@@ -7768,6 +7723,8 @@ CLI66x2 and Phase0 1032/1032; 1163 seconds is Phase0 only, with 25 optional gate
 Each canonical task node owns its exact `Commit` subject and retained completion note. Query landed history with `git log --all --format="%h %s" --fixed-strings --grep="SESSION-STARTUP-READING."`; this replaces the proven duplicate 102-row table.
 
 ## Changelog
+
+- 2026-09-24 .86.5.3: Repair same-line slot identity, shield bare code in the permanent grammar and add sixth executable book example. Compact60 blank-only mutable-ledger separators, preserving every prior nonblank line and its order.
 
 - 2026-09-24 .86.5.2.2: Repair same-line slash-call validation, teach the verified edge form and require independent regex-slot metadata repair .86.5.3 before closure.
 

@@ -272,6 +272,15 @@ same observable behavior (the Rust runtime, for example, builds these on the `rg
    through ECMAScript `RegExp`, and current Rust through RGX rather than Rust's
    default basic `regex` crate.
 
+**Current Rust context limitation:** matching after the cursor advances searches
+an input suffix. An input/line-start anchor can therefore match at that suffix's
+start, and lookbehind or word boundaries can lose preceding input context. The
+cursor must not be treated as a new input boundary; this remains an open runtime
+repair. It also affects self-hosted grammar projection: a same-line final `E`
+block can be classified as a complete-line block and acquire an extra
+`source_form: "explicit"` field. Named-slot identity support does not imply that
+this separate projection difference is fixed.
+
 Determinism is required throughout: first-match-wins for alternation, and no reliance on
 engine-specific group-iteration order. The [Backend Handoff](../appendix/backend-handoff.md)
 chapter collects this alongside the other backend obligations.

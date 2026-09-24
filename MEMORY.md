@@ -1,10 +1,10 @@
 # MEMORY
 
-- activation_commit: `fb955602eda6323c3935289ed5085ea5981ac4a9` — clean base for same-line slash-call member validation.
-- latest_completed_leaf: `SESSION-STARTUP-READING.86.5.2.2 - validate same-line slash call members`.
-- active_work_unit: `SESSION-STARTUP-READING.86.5.3` — same-line regex-slot metadata (pending).
-- next_action: Repair .86.5.3 named/anonymous slot metadata across same-line body members using the permanent five-case selector/descriptor intake and ADR0045; then recompose .86.5 and run canonical .86.3.
-- in_flight_uncommitted: none; .86.5.2.2 focused207/book84 and full Phase0 1033 pass; all jobs/results are consumed. Required .86.5.3 remains before parent closure.
+- activation_commit: `4ca4f745e80a5dfccbfdca322a4b95193954f0d7` — clean base for same-line regex-slot repair.
+- latest_completed_leaf: `SESSION-STARTUP-READING.86.5.3 - preserve same-line regex slot identity`.
+- active_work_unit: `SESSION-STARTUP-READING.86.5.3` — verified; .86.5 bounded implementation complete.
+- next_action: Activate .86.3 and run exact staged canonical parent closeout; preserve all independent owners, then resume .50 after its clean commit.
+- in_flight_uncommitted: none — focused240/book103/Phase0 1033; composed grammar72; Dart20 and independent502/storage/CLI132/corpus105 pass. Complete Dart gate retains known .2.24/.2.25 failures. Logs: .linkedspec-data/scratch/regex-slots86-5-3/.
 - blockers: LS-004 remains upstream-owned; director relays docs/upstream/rgx/bootstrap-progress-status.md. No RGX code defect established. Named-argument and format proposals remain parked.
   Wrapper startup .7 remains open; recovery/purge stay prohibited. No interrupted Phase0 run counts as proof.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the

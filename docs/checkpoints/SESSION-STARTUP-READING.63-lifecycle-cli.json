@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "suite": "whole-input-lifecycle-line-boundary",
+  "cases": [
+    {
+      "id": "lifecycle_members",
+      "family": "success",
+      "args": [
+        "--spec-file",
+        "{{REPO_ROOT}}/specs/spec.spec",
+        "--input",
+        "Part:\n I { ignored=0 } first=/a/ second=/b/ /c/ E { ignored=1 }\n"
+      ],
+      "files": [],
+      "expect": {
+        "exit": 0,
+        "stdout": {
+          "text": "[[{\"label\":\"Part\",\"mode\":\"\",\"top\":0,\"type\":\"rule\"},{\"code\":\"{ ignored=0 }\",\"marker\":\"I\",\"type\":\"lifecycle\"},{\"pattern\":\"a\",\"slot_name\":\"first\",\"type\":\"regex\"},{\"pattern\":\"b\",\"slot_name\":\"second\",\"type\":\"regex\"},{\"pattern\":\"c\",\"type\":\"regex\"},{\"code\":\"{ ignored=1 }\",\"marker\":\"E\",\"type\":\"lifecycle\"}]]\n"
+        },
+        "stderr": {
+          "text": ""
+        },
+        "files": []
+      }
+    }
+  ]
+}

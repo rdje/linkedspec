@@ -519,12 +519,15 @@ subtest 'integration book regex examples execute through loader and fresh genera
   ['quoted multiline subject', 'x', 'ok'],
   ['grouped pattern continuation', 'x,y', [1, 'ok']],
   ['final numeric slash call', 'x', 8, ['Top', 'Done'], 'y'],
+  ['same-line named slot', 'b', 'b', ['Top', 'Token'], 'a', {
+   Token => [{regex_index=>0,slot_id=>'first'}, {regex_index=>1,slot_id=>'second'}, {regex_index=>2,slot_id=>undef}],
+  }],
  );
  is(scalar(@sources), scalar(@cases), 'every complete published regex example is covered');
  return unless @sources == @cases;
  my $scratch = tempdir('linkedspec-book-regex-XXXXXX', TMPDIR => 1, CLEANUP => 1);
  for my $index (0 .. $#cases) {
-  my ($label, $input, $expected, $labels, $rejected_input) = @{$cases[$index]};
+  my ($label, $input, $expected, $labels, $rejected_input, $expected_slots) = @{$cases[$index]};
   $labels //= ['Top', 'Done'];
   my $source = $sources[$index];
   my $name = 'BookRegex' . ($index + 1);
@@ -561,6 +564,10 @@ subtest 'integration book regex examples execute through loader and fresh genera
    "$label retains its authored rules in the public descriptor",
   );
   is($descriptor_context{last_error}, undef, "$label descriptor has no compile error");
+  for my $rule (sort keys %{$expected_slots || {}}) {
+   is_deeply($descriptor->{spec}{$rule}{meta}{regex_slots}, $expected_slots->{$rule},
+    "$label retains exact named and anonymous slot identities");
+  }
 
   my $identity = 'book/regex-example-' . ($index + 1) . '.spec';
   my $generated = capture_source($source, source_identity => $identity);

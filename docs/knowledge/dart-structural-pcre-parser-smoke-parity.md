@@ -14,10 +14,12 @@ answers:
   - "can Dart execute current specs/spec.spec directly"
   - "how does the Dart structural bridge consume the self-hosted Unicode label class"
   - "how does Dart handle self-hosted blkLBL and blkSLB recursive blocks"
-date: 2026-07-09
+  - "why did same-line standalone lifecycle grammar fail with Invalid group on Dart"
+  - "how does Dart preserve cursor anchors for same-line bare lifecycle members"
+date: 2026-09-24
 status: current
 tags: [dart, regex, parser-smoke, action-edge, ebnf, DART-BACKEND-PARITY]
-evidence: "DART-BACKEND-PARITY.6.2.4.6 updates dart/lib/src/runtime/matching.dart so compileRuntimeRegex(...) recognizes exact shipped structural pattern families before Dart RegExp compilation: Lispish recursive square brackets, EBNF return scalar/array/object patterns using \\K, recursive named subpatterns, and spec.spec recursive action/blind/lifecycle/function block forms. FUTURE-PARITY-BACKLOG.12.1.8.3.2 extends that bounded function family from fixed blkFN to the later exact variadic blkVFN pattern, preserving name/fixed/rest/body captures and named-block identity. FUTURE-PARITY-BACKLOG.10.5.0.1.1 derives the generated rule-label atom from canonical structural patterns and enables Unicode mode for supplementary literals. FUTURE-PARITY-BACKLOG.19.3.3 closes the later standalone-lifecycle grammar delta by adding exact physical-line matchers for explicit blkLBL and shorthand blkSLB, preserving positional/named captures and rejecting suffix text. Focused parser/matcher tests pass 19 and the unchanged corpus passes 105/105."
+evidence: "DART-BACKEND-PARITY.6.2.4.6 updates dart/lib/src/runtime/matching.dart so compileRuntimeRegex(...) recognizes exact shipped structural pattern families before Dart RegExp compilation: Lispish recursive square brackets, EBNF return scalar/array/object patterns using \\K, recursive named subpatterns, and spec.spec recursive action/blind/lifecycle/function block forms. FUTURE-PARITY-BACKLOG.12.1.8.3.2 extends that bounded function family from fixed blkFN to the later exact variadic blkVFN pattern, preserving name/fixed/rest/body captures and named-block identity. FUTURE-PARITY-BACKLOG.10.5.0.1.1 derives the generated rule-label atom from canonical structural patterns and enables Unicode mode for supplementary literals. FUTURE-PARITY-BACKLOG.19.3.3 closes the later standalone-lifecycle grammar delta by adding exact physical-line matchers for explicit blkLBL and shorthand blkSLB, preserving positional/named captures and rejecting suffix text. Focused parser/matcher tests pass 19 and the unchanged corpus passes 105/105. SESSION-STARTUP-READING.86.5.3 extends only the exact standalone member spelling: cursor-whitespace or physical-line prefix, balanced block and retained suffix. Focused20, package502, grammar6x2 on three Dart carriers, CLI66x2 and corpus105 pass; complete gate remains blocked by separately owned formatter/SDK diagnostics."
 reverify: "cd dart && bash ../tools/run_dart_project_data.sh test test/runtime_matching_test[.]dart test/runtime_interpreter_test[.]dart test/corpus_manifest_test.dart && bash ../tools/run_dart_project_data.sh run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute --offset 68 --limit 31"
 ---
 
@@ -33,7 +35,9 @@ the current specs and routes them through bounded scanners:
   `function_definition` block patterns. Fixed `blkFN` and variadic `blkVFN`
   use separate prefixes and preserve their respective capture shapes.
 - The complete-line explicit lifecycle `blkLBL` and standalone lifecycle
-  `blkSLB` families use physical-line bounded scanners. They are exact shipped
+  `blkSLB` legacy families use physical-line bounded scanners. The current standalone
+  member spelling also accepts the requested search cursor and retains suffix
+  members. They are exact shipped
   families, not general recursive-PCRE admission.
 
 The matchers preserve the surfaces the existing runtime consumes: group 0,
@@ -60,3 +64,23 @@ accepted until their separate `.10.5.0.1.2` regeneration/freshness closeout.
 Related facts: [[dart-regex-dialect-bridge]], [[dart-shipped-corpus-smoke-split]],
 [[dart-residual-parser-smoke-split]], [[rust-action-edge-child-return-dispatch]],
 [[rust-perl-output-oracle]].
+
+## Same-line standalone members
+
+Startup `.86.5.3` adds an exact bridge for the shipped `blkSLB` member pattern
+`(?:\G\s*|(?m:^[ \t]*))` plus its existing recursive block. The clean grammar
+loaded successfully, while this new spelling initially fell through to ordinary
+Dart RegExp and raised `FormatException: Invalid group`. The bounded matcher now
+tries the cursor alternative only at the requested start or after a successful
+match; a failed attempt cannot slide to a later brace on the same line. Its
+physical-line alternative remains available, and the legacy complete-line
+pattern keeps its old matching and suffix rejection.
+
+`dart/test/same_line_regex_slot_grammar_test.dart` reads the current permanent
+pattern directly. It covers exact captures/spans, nested and quoted braces,
+whitespace, unknown prefixes, physical-line fallback and repeated cursor anchors,
+plus all six permanent CLI AST cases under LF/CRLF through native, reconstructed
+and generated-plan execution. Focused20 and package502 pass; storage25/47,
+primary CLI66 twice and corpus105 pass independently. The complete gate still
+fails at the existing formatter/SDK owners; see
+[[dart-component-gate-sdk-compatibility]]. No general PCRE or SDK migration claim.

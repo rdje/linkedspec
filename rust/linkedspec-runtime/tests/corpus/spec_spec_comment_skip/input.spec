@@ -132,7 +132,7 @@ rule_header: /(?m:^[ \t]*([0-9A-Z_a-zªµ·ºÀ-ÖØ-öø-ˁˆ-ˑˠ-ˤˬˮ̀-ʹ�
  }
 
 # ---- named regex slot: `name=/pattern/` (horizontal spacing is insignificant) -
-regex_slot_declaration: /(?m:^[ \t]*([^ \t=\r\n]+)[ \t]*=[ \t]*\/((?:\\.|[^\/\\])*?)(?<!\\)\/[ \t]*(?=\r?$))/
+regex_slot_declaration: /([^ \t=\r\n{}()\[\]\/"']+)[ \t]*=[ \t]*\/((?:\\.|[^\/\\])*?)(?<!\\)\//
  I.return(hash("type", "regex", "pattern", entry_group(1), "slot_name", entry_group(0)))
 
 # ---- anonymous regex literal (outer slashes stripped, inner pattern kept) ------
@@ -188,7 +188,7 @@ lifecycle_fluent: /(I|LS|LE|LX|E|EX|IT)(?<chLF>(?:\s*\.\s*\w++(?<prnLF>\s*\((?:[
  I.return(hash("type", "lifecycle", "marker", entry_group(0), "fluent", "1", "raw", entry_text()))
 
 # ---- standalone rule block: `{ code }`, normalized to lifecycle `I` ---------
-standalone_lifecycle_block: /(?m:^[ \t]*(?<blkSLB>\{(?:[^{}"']++|"(?:\\.|[^"])*+"|'(?:\\.|[^'])*+'|(?&blkSLB))*+\})[ \t]*(?=\r?$))/
+standalone_lifecycle_block: /(?:\G\s*|(?m:^[ \t]*))(?<blkSLB>\{(?:[^{}"']++|"(?:\\.|[^"])*+"|'(?:\\.|[^'])*+'|(?&blkSLB))*+\})/
  I.return(hash("type", "lifecycle", "marker", "I", "code", entry_group(0), "source_form", "bare"))
 
 # ---- user function definition: `fn name(args) { body }` ----------------------

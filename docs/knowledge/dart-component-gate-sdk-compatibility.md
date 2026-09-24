@@ -7,7 +7,7 @@ answers:
   - why does strict Dart analysis report deprecated_implement
   - are the Dart component gate failures fixed or task owned
   - did the complete Dart gate pass at reading closeout
-date: 2026-09-11
+date: 2026-09-24
 status: confirmed failures; repairs pending under DART-STARTUP-READING.2.24 and .2.25
 tags: [dart, ci, sdk, formatter, regex, startup, defect]
 evidence: "At physical reading checkpoint 1f8f226f, Dart 3.13.3/dart_style 3.1.13 reports six changed test files and exits 1. Strict analysis separately exits 2 at matching.dart:725:42 and 1173:47 because SDK RegExp/RegExpMatch implementation is deprecated. Remaining stages independently pass 461 tests,25-owner / 47-package storage,CLI 66 twice and corpus 105. Source bytes are restored exactly; full gate remains failed."
@@ -102,3 +102,15 @@ ran. All jobs finished and source hashes match the physical reading checkpoint.
 [[dart-reading-commit-closeout-audit]] records the passing source/commit audit and
 the unresolved, separately owned reading-closeout decision. Existing runtime defects
 remain pending even where these regression suites pass.
+
+## Same-line grammar bridge recheck, September 24
+
+Startup `.86.5.3` attempted the complete component gate after synchronizing one
+exact shipped structural pattern. It reproduced the same six formatting changes
+and two `deprecated_implement` warnings (now at matching.dart:732/1203). All six
+formatter edits have identical canonical AST/literal source and were restored to
+HEAD; the two intended bridge/test files remain formatted. Independent remaining
+stages pass502 package tests, storage25 owners/47 packages, primary CLI66 twice
+and corpus105. Focused structural/current-grammar tests pass20. These results
+verify the bounded repair; they do not close `.2.24/.2.25` or make the complete
+component gate green. See [[dart-structural-pcre-parser-smoke-parity]].

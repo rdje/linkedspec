@@ -15,6 +15,7 @@ use LinkedSpec ();
 # Admitted by INTER-MATCH-GAP-CAPTURE.2.4; the default executes every Perl role.
 # prove -Iperl t/inter_match_gap_capture_perl_contract.t
 my $CONTRACT_ID = 'linkedspec-inter-match-gap-capture-v1';
+my $UNKNOWN_SLOT_NAME_CODE = 'regex_slot_unknown_name';
 my $MODE = $ENV{LINKEDSPEC_PERL_INTER_MATCH_GAP_MODE} // 'all';
 my $JSON = JSON::PP->new->allow_nonref(1)->canonical(1);
 my $GENERATED_PACKAGE_COUNTER = 0;
@@ -180,6 +181,115 @@ SPEC
   ],
   'permanent grammar owns named declarations, named selectors, and capture-gaps syntax without widening anonymous nodes',
  );
+
+ subtest 'same-line members retain named and anonymous regex slots' => sub {
+  my @cases = (
+   ['separate control', " I { ignored=0 }\n first=/a/\n second=/b/\n /c/\n"],
+   ['after initialization', " I { ignored=0 } first=/a/ second=/b/ /c/\n"],
+   ['before exit', " first=/a/ second=/b/ /c/ E { ignored=1 }\n"],
+   ['between lifecycle blocks', " I { ignored=0 } first=/a/ second=/b/ /c/ E { ignored=1 }\n"],
+   ['compact members', " I{ignored=0}first=/a/second=/b//c/\n"],
+   ['multiline initialization', " I {\n ignored=0\n } first=/a/ second=/b/ /c/\n"],
+   ['code patterns excluded', " I { ignored=matches(\"a\", /a/); text=\"fake=/z/\" } first=/a/ second=/b/ /c/\n"],
+   ['nested code excluded', " I { if(1) { ignored=matches(\"a\", /a/) } } first=/a/ second=/b/ /c/\n"],
+   ['compact assigned pattern excluded', " I{fake=/x/}first=/a/second=/b//c/\n"],
+   ['bare assigned pattern excluded', " {fake=/x/}first=/a/second=/b//c/\n"],
+   ['header bare assigned pattern excluded', " {fake=/x/}first=/a/second=/b//c/\n", 1],
+   ['compact code patterns excluded', " I{ignored=matches(\"a\",/a/);text=\"fake=/z/\"}first=/a/second=/b//c/\n"],
+   ['comment text excluded', " I { ignored=0 } first=/a/ second=/b/ /c/ # first=/z/\n"],
+   ['header members', " I { ignored=0 } first=/a/ second=/b/ /c/\n", 1],
+  );
+  my $expected_slots = [
+   { regex_index => 0, slot_id => 'first' },
+   { regex_index => 1, slot_id => 'second' },
+   { regex_index => 2, slot_id => undef },
+  ];
+  for my $separator ("\n", "\r\n") {
+   for my $case (@cases) {
+    my ($name, $body, $header) = @$case;
+    for my $selector ('second', '1', '2') {
+     my $source = "Top::\n -> Part[$selector] { return(match_text()) }\nPart:" . ($header ? '' : "\n") . $body;
+     $source =~ s/\n/$separator/g;
+     my $original = $source;
+     my $id = "same-line-$name-$selector.spec";
+     my ($descriptor, $context) = compile_descriptor($source, $id);
+     ok($descriptor, "$name/$selector compiles") or diag($JSON->encode($context->{last_error}));
+     next unless $descriptor;
+     is_deeply($descriptor->{spec}{Part}{meta}{regex_slots}, $expected_slots, "$name preserves authored slot order and names");
+     is_deeply(semantic_edge($descriptor->{spec}{Top}{meta}{resolved_slot_edges}[0]), {
+      selector_kind => $selector eq 'second' ? 'named' : 'numeric',
+      authored_selector => $selector eq 'second' ? 'second' : 0+$selector,
+      target_rule => 'Part', regex_index => $selector eq '2' ? 2 : 1,
+      target_slot_id => $selector eq '2' ? undef : 'second',
+     }, "$name retains exact selector provenance");
+     is($source, $original, "$name preserves authored source");
+     my ($live, $generated) = compile_execution_roles($source, $id);
+     next unless $live && $generated;
+     my $input = $selector eq '2' ? 'c' : 'b';
+     assert_success_parity(live=>$live, generated=>$generated, input=>$input, expected=>$input, label=>"$name/$selector");
+     assert_success_parity(live=>$live, generated=>$generated, input=>'z', expected=>undef, label=>"$name/$selector unmatched");
+    }
+    my $grammar_input = 'Part:' . ($header ? '' : "\n") . $body;
+    $grammar_input =~ s/\n/$separator/g;
+    my $ast = $self_hosted_parser->(\$grammar_input);
+    my @regex = map { +{ pattern=>$_->{pattern}, slot_name=>$_->{slot_name} } }
+     grep { ($_->{type} // '') eq 'regex' } @{ref($ast) eq 'ARRAY' && ref($ast->[0]) eq 'ARRAY' ? $ast->[0] : []};
+    is_deeply(\@regex, [
+     { pattern=>'a', slot_name=>'first' }, { pattern=>'b', slot_name=>'second' }, { pattern=>'c', slot_name=>undef },
+    ], "$name permanent grammar preserves the same regex identities");
+    if ($name =~ /bare assigned pattern/) {
+     my @lifecycle = grep { ($_->{type} // '') eq 'lifecycle' } @{$ast->[0]};
+     is_deeply(\@lifecycle, [{type=>'lifecycle',marker=>'I',source_form=>'bare',code=>'{fake=/x/}'}],
+      "$name permanent grammar preserves the complete bare code payload");
+    }
+   }
+  }
+
+  for my $body ('slot=/x/ =unexpected', 'I { value=0 } slot=/x/ stray=1') {
+   my $source="Top::\n $body\n";
+   my $error=compile_rejection($source,'same-line-unsupported-tail.spec');
+   is($error->{stage},'validate_dsl_syntax','unsupported text after a named member remains a structural rejection');
+  }
+
+  my @unicode_names = ("\x{e9}", "e\x{301}", "\x{301}x");
+  my @unicode_slots = map { +{regex_index=>$_,slot_id=>$unicode_names[$_]} } 0..2;
+  my $unicode_body = " I { ignored=0 } $unicode_names[0]=/a/ $unicode_names[1]=/b/ $unicode_names[2]=/c/\n";
+  for my $index (0..2) {
+   my $source = "Top::\n -> Part[$unicode_names[$index]] { return(match_text()) }\nPart:\n$unicode_body";
+   my ($descriptor,$context)=compile_descriptor($source,'same-line-unicode.spec');
+   ok($descriptor,'same-line pinned Unicode name compiles') or diag($JSON->encode($context->{last_error}));
+   next unless $descriptor;
+   is_deeply($descriptor->{spec}{Part}{meta}{regex_slots},\@unicode_slots,'same-line Unicode identity is exact and normalization-sensitive');
+   my ($live,$generated)=compile_execution_roles($source,'same-line-unicode.spec');
+   next unless $live && $generated;
+   my $input=(qw(a b c))[$index];
+   assert_success_parity(live=>$live,generated=>$generated,input=>$input,expected=>$input,label=>'same-line Unicode selector');
+  }
+
+  for my $case (
+   ['invalid-name', 'I { ignored=0 } -bad=/a/', 'regex_slot_name_invalid', 'parse_declaration', {slot_name=>'-bad'}],
+   ['numeric-name', 'I { ignored=0 } 123=/a/', 'regex_slot_name_invalid', 'parse_declaration', {slot_name=>'123'}],
+   ['duplicate-name', 'first=/a/ I { ignored=0 } first=/b/', 'regex_slot_duplicate_name', 'resolve_declaration', {slot_name=>'first',first_line=>2}],
+   ['code-only-name', 'I { fake=/a/ } /b/', $UNKNOWN_SLOT_NAME_CODE, 'resolve_selector', {target_rule=>'Part',authored_selector=>'fake'}],
+   ['comment-only-name', '/b/ # fake=/a/', $UNKNOWN_SLOT_NAME_CODE, 'resolve_selector', {target_rule=>'Part',authored_selector=>'fake'}],
+  ) {
+   my ($id,$body,$code,$stage,$fields)=@$case;
+   my $source = $id =~ /-only-name\z/
+    ? "Top::\n -> Part[fake] { return(1) }\nPart:\n $body\n"
+    : "Top::\n $body\n";
+   my @failures;
+   ok(!LinkedSpec::Validation::validate_dsl_syntax(\$source, {
+    source_id=>"same-line-$id.spec", on_failure=>sub { push @failures, { @_ } },
+   }), "same-line $id rejects in authored validation");
+   is($failures[0]{code},$code,"same-line $id authored validation reports the exact code");
+   my $error=compile_rejection($source,"same-line-$id.spec");
+   is($error->{code},$code,"same-line $id retains typed rejection");
+   is($error->{stage},$stage,"same-line $id retains error phase");
+   is($error->{line},2,"same-line $id retains authored line");
+   is($error->{source_id},"same-line-$id.spec","same-line $id retains source identity");
+   is_deeply($error->{$_},$fields->{$_},"same-line $id retains $_") for sort keys %$fields;
+  }
+ };
 
  for my $spacing ('header=/H/', 'header =/H/', 'header= /H/', 'header = /H/') {
   my $source = "Top::\n -> Part[header] { return(\"hit\") }\nPart:\n $spacing\n";
@@ -365,7 +475,7 @@ SPEC
   },
   {
    id => 'unknown-name', source => "Top::\n -> Part[missing] { return(\"x\") }\nPart:\n head=/H/\n",
-   code => 'regex_slot_unknown_name', stage => 'resolve_selector', line => 2,
+   code => $UNKNOWN_SLOT_NAME_CODE, stage => 'resolve_selector', line => 2,
    fields => { target_rule => 'Part', authored_selector => 'missing' },
   },
   {

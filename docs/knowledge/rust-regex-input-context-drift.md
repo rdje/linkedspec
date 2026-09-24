@@ -8,14 +8,17 @@ answers:
   - "why does Rust word boundary disagree with Perl after cursor advancement"
   - "where do Rust regex wrappers slice the input before matching"
   - "how does Rust normalize named captures inline flags and lower unbounded quantifiers"
-date: 2026-09-07
+  - "why does Rust self-hosted AST add source_form explicit to a same-line E block"
+  - "why does lifecycle_block_line win after other members on Rust"
+date: 2026-09-24
 status: confirmed ordinary-choice discrepancy; repair pending
 tags: [rust, perl, regex, cursor, startup-reading]
-evidence: "SESSION-STARTUP-READING.3.3.23: complete helpers.rs source read, six collected-rule primary Rust/live Perl pairs, six three-rule descriptors/generated-source captures; .63.1-.63.4 own repair and carrier/public closure."
+evidence: "SESSION-STARTUP-READING.3.3.23: complete helpers.rs source read, six collected-rule primary Rust/live Perl pairs, six three-rule descriptors/generated-source captures; .63.1-.63.4 own repair and carrier/public closure. September24 .86.5.3 adds six public current/baseline grammar observations and an exact permanent .63.1 CLI regression: the same-line final E incorrectly wins lifecycle_block_line because the first-party seek wrapper still slices the input."
 reverify:
   - "git diff baeb984e36a94a15951cd23d4c52def5064cdaca -- rust/linkedspec-runtime/src/helpers.rs perl/LinkedRE.pm"
   - "sed -n '138,259p' rust/linkedspec-runtime/src/helpers.rs"
   - "sed -n '54,110p' perl/LinkedRE.pm"
+  - "bash tools/project_data_run.sh env PERL5LIB= perl tools/run_cli_conformance.pl --manifest docs/checkpoints/SESSION-STARTUP-READING.63-lifecycle-cli.json --display-command linkedspec-rust -- '{{REPO_ROOT}}/rust/target/debug/linkedspec-rust'"
 ---
 
 # A cursor offset does not redefine the input
@@ -92,6 +95,31 @@ suffix operation structurally; .63.2 requires independent route proof. Those low
 methods also assume a valid in-range UTF-8 byte cursor before slicing. No malformed-cursor
 public crash is reproduced or claimed here. Multiline, Unicode, zero-width progress, capture
 span alignment and other backends remain explicit repair acceptance work.
+
+## Same-line lifecycle projection recurrence, 2026-09-24
+
+The `.86.5.3` grammar matrix exposes the same first-party wrapper defect through
+`docs/checkpoints/SESSION-STARTUP-READING.63-lifecycle-cli.json`. With
+`I { ignored=0 } first=/a/ second=/b/ /c/ E { ignored=1 }` on one body line,
+Rust selects `lifecycle_block_line` for the final E and adds
+`source_form: explicit`. Perl and LuaJIT select `lifecycle_block`, whose output
+has no source-form field for that non-line-start member. This is a projection
+disagreement, not a slot-identity failure or an RGX implementation finding.
+
+Six public CLI observations compare the current permanent grammar with the exact
+clean4ca4f745e grammar: the mixed line, separate explicit I/E lines, and a named
+slot followed by E. Both grammar versions retain the same extra-field behavior.
+Current `helpers.rs::seek_match` still sends `input[pos..]` to the public provider,
+so `^` can recognize a suffix boundary as a physical line start. The complete-line
+production alone emits `source_form: explicit`; its selected output and the
+unchanged separate-line control identify the mechanism without dependency access.
+
+`.63.1` owns the exact required AST regression. The `.86.5.3` common slot matrix
+places E between named members, where the complete-line production cannot win,
+and keeps full AST equality rather than stripping fields. The original failed
+matrix and six observations remain under
+`.linkedspec-data/scratch/regex-slots86-5-3/`. The slot repair does not close `.63`
+or claim general self-hosted AST parity.
 
 ## Evidence and repair ownership
 

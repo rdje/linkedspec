@@ -339,12 +339,21 @@ Newline-separated division followed by another
 assignment also works. Prefer `div(...)` when slash syntax would obscure the
 arithmetic intent.
 
-Regex-slot identity has a separate same-line limitation on Perl: a named
-declaration sharing a line with lifecycle content, or an anonymous regex after
-a lifecycle block, can disappear from selector resolution. Keep declarations
-on separate lines, as `Done` does above. The named-slot standalone control
-retains its identity; repair of the combined forms is owned by
-`SESSION-STARTUP-READING.86.5.3`.
+Named and anonymous regex members may also share a line with lifecycle blocks.
+Their written order defines their indices, and a named selector keeps the
+selected member's identity. This example returns `"b"` for input `b`:
+
+```text
+Top::
+ -> Token[second] { return(match_text()) }
+Token: I { ignored=0 } first=/a/ second=/b/ /c/
+```
+
+`first` has index `0`, `second` has index `1`, and the anonymous `/c/` has index
+`2`. `Token[1]` selects the same regex as `Token[second]`. Input `a` returns
+`undef`: the edge selects `second`, even though another member matches `a`.
+Patterns inside code, quoted text or comments do not declare regex slots.
+Names remain case-sensitive, exact Unicode identities and unique within a rule.
 
 Unescaped `}` inside an action's regex remains a separate Perl parsing defect:
 structural validation can accept the source while execution returns no result
@@ -368,7 +377,7 @@ These examples cover ordinary rule actions. Perl's separate callable `matches`
 and arithmetic-helper gaps, plus function-position `filter_match`, remain; use the
 [value-helper reference](../dsl/value-container-flow-helper-reference.md#regex-patterns-and-variable-values)
 and its [numeric helper restrictions](../dsl/value-container-flow-helper-reference.md#numeric-value-helpers)
-for their current supported forms. The regex-slot and escape limitations
+for their current supported forms. The regex-brace and escape limitations
 above remain outside this verified example set.
 
 ## Handle runtime outcomes explicitly

@@ -568,6 +568,8 @@ const _specLifecycleLineBlockPattern =
     r'''(?m:^[ \t]*(I|LS|LE|LX|E|EX|IT)[ \t]*(?<blkLBL>\{(?:[^{}"']++|"(?:\\.|[^"])*+"|'(?:\\.|[^'])*+'|(?&blkLBL))*+\})[ \t]*(?=\r?$))''';
 const _specStandaloneLifecycleBlockPattern =
     r'''(?m:^[ \t]*(?<blkSLB>\{(?:[^{}"']++|"(?:\\.|[^"])*+"|'(?:\\.|[^'])*+'|(?&blkSLB))*+\})[ \t]*(?=\r?$))''';
+const _specStandaloneLifecycleMemberPattern =
+    r'''(?:\G\s*|(?m:^[ \t]*))(?<blkSLB>\{(?:[^{}"']++|"(?:\\.|[^"])*+"|'(?:\\.|[^'])*+'|(?&blkSLB))*+\})''';
 
 enum _StructuralRegexKind {
   squareBrackets,
@@ -582,6 +584,7 @@ enum _StructuralRegexKind {
   specBareFluent,
   specLifecycleLineBlock,
   specStandaloneLifecycleBlock,
+  specStandaloneLifecycleMember,
   specLifecycleBlock,
   specLifecycleFluent,
   specFunctionDefinition;
@@ -626,6 +629,9 @@ enum _StructuralRegexKind {
     }
     if (pattern == _specStandaloneLifecycleBlockPattern) {
       return _StructuralRegexKind.specStandaloneLifecycleBlock;
+    }
+    if (pattern == _specStandaloneLifecycleMemberPattern) {
+      return _StructuralRegexKind.specStandaloneLifecycleMember;
     }
     if (pattern.startsWith(r'(I|LS|LE|LX|E|EX|IT)[ \t]*(?<blkLB>') ||
         pattern.startsWith(r'(\w++)[ \t]*(?<blkLB>')) {
@@ -684,6 +690,7 @@ RegExp? _compileSpecStructuralPrefix(
     case _StructuralRegexKind.specLifecycleLineBlock:
       return RegExp(r'^[ \t]*(I|LS|LE|LX|E|EX|IT)[ \t]*', multiLine: true);
     case _StructuralRegexKind.specStandaloneLifecycleBlock:
+    case _StructuralRegexKind.specStandaloneLifecycleMember:
       return RegExp(r'^[ \t]*', multiLine: true);
     case _StructuralRegexKind.specLifecycleBlock:
       return RegExp(
@@ -751,6 +758,7 @@ final class _StructuralRegExp implements RegExp {
   final bool _isUnicode;
   final bool _isDotAll;
   late final RegExp? _specPrefix;
+  static final _cursorWhitespacePrefix = RegExp(r'\s*');
 
   @override
   bool get isCaseSensitive => _isCaseSensitive;
@@ -767,11 +775,13 @@ final class _StructuralRegExp implements RegExp {
   @override
   Iterable<RegExpMatch> allMatches(String input, [int start = 0]) sync* {
     var cursor = _clampCodeUnitOffset(input, start);
+    var cursorAnchor = cursor;
     while (cursor <= input.length) {
-      final match = _matchAt(input, cursor);
+      final match = _matchAt(input, cursor, cursorAnchor: cursorAnchor);
       if (match != null) {
         yield match;
         cursor = match.end > cursor ? match.end : cursor + 1;
+        cursorAnchor = cursor;
         continue;
       }
       cursor += 1;
@@ -798,7 +808,11 @@ final class _StructuralRegExp implements RegExp {
     return firstMatch(input)?.group(0);
   }
 
-  _StructuralRegExpMatch? _matchAt(String input, int start) {
+  _StructuralRegExpMatch? _matchAt(
+    String input,
+    int start, {
+    int? cursorAnchor,
+  }) {
     return switch (kind) {
       _StructuralRegexKind.squareBrackets => _matchSquareBrackets(input, start),
       _StructuralRegexKind.ebnfReturnScalar => _matchEbnfReturnScalar(
@@ -852,6 +866,13 @@ final class _StructuralRegExp implements RegExp {
       ),
       _StructuralRegexKind.specStandaloneLifecycleBlock =>
         _matchSpecStandaloneLifecycleBlock(input, start),
+      _StructuralRegexKind.specStandaloneLifecycleMember =>
+        _matchSpecStandaloneLifecycleBlock(
+          input,
+          start,
+          atCursorStart: cursorAnchor == null || cursorAnchor == start,
+          completeLine: false,
+        ),
       _StructuralRegexKind.specLifecycleBlock => _matchSpecBlock(
         input,
         start,
@@ -1053,9 +1074,16 @@ final class _StructuralRegExp implements RegExp {
 
   _StructuralRegExpMatch? _matchSpecStandaloneLifecycleBlock(
     String input,
-    int start,
-  ) {
-    final prefixMatch = _specPrefix!.matchAsPrefix(input, start);
+    int start, {
+    bool atCursorStart = false,
+    bool completeLine = true,
+  }) {
+    // The current shipped spelling admits a member at the search cursor or at
+    // a physical line start. A failed cursor attempt must not slide to an
+    // arbitrary brace later on the same line. The old spelling stays line-only.
+    final prefixMatch = atCursorStart
+        ? _cursorWhitespacePrefix.matchAsPrefix(input, start)
+        : _specPrefix!.matchAsPrefix(input, start);
     if (prefixMatch == null) {
       return null;
     }
@@ -1064,7 +1092,9 @@ final class _StructuralRegExp implements RegExp {
     if (blockEnd == null) {
       return null;
     }
-    final end = _physicalLineMatchEnd(input, blockEnd);
+    final end = completeLine
+        ? _physicalLineMatchEnd(input, blockEnd)
+        : blockEnd;
     if (end == null) {
       return null;
     }
