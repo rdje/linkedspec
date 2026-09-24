@@ -2,17 +2,19 @@
 
 ## Current Activity
 
-Rust indexed reads now follow the current typed binding; the book includes the shared tested source. Containment .16 restores task headroom; confirmed Perl read-purity .89 follows before .51.
+Startup-task partition planning is verified; the atomic .16.2 migration is next. All original bytes/IDs and current limits remain preserved. Confirmed Perl read-purity .89 follows containment before .51.
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.88 - read indexed values from current typed bindings` — runtime397, independently emitted book1, Perl book26 and exact public17 pass; all12 public Rust failures are repaired.
+- `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.16.1 - freeze lossless startup task partition plan` — independent whole-source reconstruction and four payload hashes pass; source 396 IDs and conservative routed projection 115/93554/10456687 are pinned.
 
 ## Next Action
 
-- Activate containment .16 from the clean .88 commit, then repair confirmed Perl read-purity .89 before .51. Preserve independent helper, upstream and optional Dart owners. The director will notify ARCHOGEN only after LS-004 is verified fixed.
+- Activate .16.2 from the clean plan commit, implement the frozen migration and verify the exact staged candidate canonically; then repair startup .89 before .51. The director will notify ARCHOGEN only after LS-004 is verified fixed.
 
 ## Recent Completions
+
+- `2026-09-24` — `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.16.1` freezes lossless task partitioning and consumer transfer without implementation or higher limits.
 
 - `2026-09-24` — `SESSION-STARTUP-READING.88` verifies typed indexed reads with runtime397/public17 and one executable Perl/Rust book source.
 
@@ -43,8 +45,6 @@ Rust indexed reads now follow the current typed binding; the book includes the s
 - `2026-09-23` — `SESSION-STARTUP-READING.86.4.6` repairs helper statement boundaries; focused52, exact book11 and Phase0 1033/1033 pass.
 
 - `2026-09-23` — `SESSION-STARTUP-READING.86.4.3` repairs Perl multiline helper validation and physical diagnostic offsets; focused173 and Phase0 1033/1033 pass.
-
-- `2026-09-23` — `CONSUMER-REPORT-DELIVERY.6` records the ten-report fix ledger and the distinct closed June bootstrap build issue.
 
 ## History
 

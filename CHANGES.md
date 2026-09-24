@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-09-24 — LIVE-DOCUMENT-PRESSURE-CONTAINMENT.16.1 - freeze lossless startup task partition plan
+
+Pinned the startup tree at 7994 lines/960362 bytes and 396 unique IDs. Three semantic parts plus immutable history preserve all nine source intervals; independent Python/Perl reconstruction and all four payload hashes pass. The conservative routed projection 115 files/93554 lines/10456687 bytes fits unchanged ceilings. The plan owns consumer transfer, 166 relocated verification triplets, strict negative proof and an execution-time ADR under canonical .16.2. No parser, tool, registry, startup-source or book bytes change; Perl read-purity .89 follows migration before .51. Focused task/route/memory/Knowledge/history checks, all nine doctrines, staged cadence and diff hygiene PASS.
+
 ## 2026-09-24 — SESSION-STARTUP-READING.88 - read indexed values from current typed bindings
 
 Rust `items[0]` now resolves the current typed binding through the existing array-element helper. It no longer loses assigned/appended/split arrays or reads stale private array storage after rebinding. Index evaluation order and numeric conversion are unchanged; absent elements return undef without creating state.

@@ -3,10 +3,10 @@
 ## Metadata
 
 - Tree ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT`
-- Status: `pending` / .16 startup-task headroom; .0-.15 remain complete
+- Status: `active` / .16.1 plan complete; .16.2 migration next; .0-.15 remain complete
 - Roadmap lane: `Repository architecture / documentation sustainability`
 - Created: `2026-08-09`
-- Last updated: `2026-09-24` (.16 measured intake; no migration or limit change)
+- Last updated: `2026-09-24` (.16.1 plan verified; no migration or limit change)
 - Owner: repo-local workflow
 
 ## Goal
@@ -58,7 +58,7 @@ or the README `.4` adoption/closeout that installs the guard.
 ## Task Tree
 
 - ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT`
-  Status: `pending` (.0-.15 complete; .16 owns newly measured startup-task pressure)
+  Status: `active` (.0-.15 complete; .16 owns startup-task partitioning)
   Goal: Replace measured oversized routed destinations with bounded views over durable stores.
   Depends on: `README-STABILITY-POLICY.4.2`
   Children: `.0-.16`
@@ -511,20 +511,43 @@ or the README `.4` adoption/closeout that installs the guard.
   Commit: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.15 - admit approved conformance evidence capacity`
 
 - ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.16`
-  Status: `pending`
+  Status: `active`
   Goal: Restore bounded startup-task headroom without raising limits or losing evidence.
-  Dependencies: Commit startup .50 and .88 cleanly before this migration; execute before .51 or earlier if .88 cannot fit safely.
+  Dependencies: Startup .50/.88 are cleanly committed; complete containment before required Perl read-purity .89, then .51.
   Intake: During .50, startup task evidence measures7970 lines/956164 bytes against8000/1048576; only30 lines remain. Registry task collection still fits109 files/92605 lines/10313335 bytes. These are September24 pre-closeout measurements, not permanently fixed counts.
   Planned tier: canonical for task retrieval/partition infrastructure; focused only if a proven duplicate-only consolidation needs no infrastructure change.
   Planned focused proof: Exact clean-source preservation of every node/ID/status/acceptance/verification/commit, indexed retrieval and current frontier, dependency consumers, unchanged limits, task/route/memory/Knowledge/history checks and book workflow guidance if changed.
   Planned canonical boundary: Any partition registration or retrieval infrastructure change and final clean push.
   Acceptance: Remeasure at activation, choose an existing supported partition or exact duplicate-only consolidation, preserve all unique evidence and immutable history, and leave sufficient measured room for remaining owned repairs. Do not pack unrelated prose onto long lines or silently raise ceilings. Decompose implementation/proof if needed before modifying storage.
-  Verification: Intake only; .50 task metadata and README routing gates pass within current limits. No migration or capacity increase is implemented here.
+  Children: `.16.1` freezes exact source/topology/consumer proof; `.16.2` implements, independently recomposes and canonically closes the atomic migration.
+  Verification: Clean 567b583f7 has startup 7994 lines/960362 bytes; exact multiline-paragraph duplicate census finds none. Current partition tools register only FUTURE-PARITY-BACKLOG, requiring a bounded explicit registration extension; all infrastructure work belongs to .16.2. No migration or limit increase yet.
+  Commit: `pending`
+
+- ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.16.1`
+  Status: `done`
+  Goal: Freeze lossless startup-task partition topology, consumer transfer and verification before storage changes.
+  Activation: Clean 567b583f7535c6fac643b27d44e24ba5b729f5a8; startup .88 committed, all nine doctrines/post-pointer PASS, brief0 and no background job.
+  Verification tier: `focused`
+  Focused checks: Read-only exact source/ID/range/consumer/route census; independent whole-source reconstruction of the proposed ranges and unchanged-limit projection; current task/routing/memory/Knowledge/history gates. Review current book retrieval guidance without claiming new tools work yet.
+  Canonical trigger: .16.2 changes registered storage/retrieval infrastructure and closes the parent through exact staged canonical proof; final clean push remains canonical.
+  Acceptance: Preserve every ID-scoped evidence block with its semantic owner; distinguish current root state from immutable historical prose; freeze exact relative paths, source identities, target limits, consumer changes, failure mutations and rollback. Planning changes no production tool, registry, startup-source byte or active parser behavior.
+  Verification: Pinned clean source 7994 lines/960362 bytes/396 IDs; nine source ranges reconstruct exactly in independent Python and core-Perl models. All four payload hashes and semantic ID ownership pass. No exact multiline duplicate paragraphs; three bounded semantic parts plus immutable history and current index fit unchanged limits at projected 115 files/93554 lines/10456687 bytes including conservative growth. Generic consumer audit includes 166 historical cadence triplets; .16.2 owns identity-preserving declaration comparison. Exact plan/checkpoint and Knowledge card startup-task-partition-plan retain consumers, negative proof, rollback and honest unimplemented status. Current task, route, memory, Knowledge, both history-pressure checks and all nine doctrines PASS; staged focused cadence and diff hygiene PASS.
+  Commit: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.16.1 - freeze lossless startup task partition plan`
+
+- ID: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.16.2`
+  Status: `pending`
+  Goal: Implement and independently verify the frozen startup-task partition migration as one atomic infrastructure slice.
+  Dependencies: Clean .16.1; reread exact affected tools/checkers and verify pinned startup source before changes.
+  Planned tier: canonical.
+  Planned focused proof: Source reconstruction, movement-aware per-ID cadence declarations (166 historical triplets remain exact), exact node fields/IDs and semantic evidence ownership, all boundary/unknown/outside-CWD lookups, idempotent update, immutable history, missing/stale/unsafe/schema/range/duplicate/consumer/pressure mutations, unchanged FUTURE data/behavior, root/current frontier and book workflow.
+  Planned canonical boundary: Exact staged migration and parent closeout; no limit increase, hook bypass or stale receipt.
+  Acceptance: Add only the explicit startup registration and necessary enforcement; preserve all old task bytes in source-accounted parts, keep current root bounded, transfer actual consumers and route controls with a new execution-time ADR, and leave measured repair headroom. Commit and verify clean before .89.
+  Verification: `pending`
   Commit: `pending`
 
 ## Current Frontier
 
-Next containment leaf is `.16`, after startup `.88` and before `.51`. Startup `.50` remains the active implementation until its clean commit; `.88` remains the immediate defect repair. The following .15-era directions are historical.
+Planning `.16.1` is complete from clean startup `.88`; `.16.2` performs the atomic migration, then required Perl read-purity `.89` precedes `.51`. The exact plan is docs/knowledge/startup-task-partition-plan.md and checkpoint LIVE-DOCUMENT-PRESSURE-CONTAINMENT.16.1-plan.json. The following .15-era directions are historical.
 
 Director steering during .15 (2026-09-21): `rgx/subs/pgen/grammars/*.ebnf` are explicitly offered as optional inputs for training/validating `ebnf.spec`. Retain this input authorization for an appropriate future EBNF task-tree leaf after the current clean boundary; no grammar reading or training occurs in .15. This narrow caller-authorized input use does not authorize dependency implementation analysis or pin changes.
 
@@ -546,6 +569,8 @@ resume `JULIA-STARTUP-READING.1.4` in its separate active reading tree.
 Historical .11 handoff (preserved): This tree closes through .11 under the director’s explicit one-time focused-verification exception. After the commit, empty brief and clean proof, resume `DART-STARTUP-READING.1.47`. Dart reading remains 46/55; all remaining reading, repair and future canonical gates remain in force.
 
 ## Decisions
+
+- `2026-09-24` .16.1: Freeze semantic ranges and full original-byte preservation under current ceilings; do not delete unique chronology or treat relocated historical verification declarations as new slices. New infrastructure and exact execution-time route authorization belong to .16.2; the planning commit does not activate the new lookup.
 
 - `2026-09-12` .14: The director answers Granted to all eleven limits and the .14-only focused/receipt exception including before-reading execution. ADR0118 records exact new authority.
 
@@ -688,6 +713,8 @@ All files and transient proof stay on the repository filesystem; no off-volume c
 - None. `.4` activated task-tree-first from verified clean `921f0507`.
 
 ## Verification Log
+
+- `2026-09-24` .16.1: Source 7994/960362 and 396 exact IDs map to three semantic parts/history with all nine intervals covered once; independent Perl/Python reconstruction passes. The projected routed collection115/93554/10456687 fits unchanged controls. Plan-only landing preserves startup source, all tools/registry, current runtime and book bytes; .16.2 owns registration, declaration relocation, execution ADR and canonical migration proof.
 
 - `2026-09-12` .14: Explicit ADR0118 approval admits exactly eleven finite Lua evidence controls and the .14-only focused/receipt exception. The complete actual-plus-57-unit reserve fits; independent and production history models agree on four rollovers per collection. Actual routing functions pass 125 threshold and 54 authorization cases. Previous source, cards, decisions, task evidence and immutable history remain exact. Lua .4/.4.2 close; source reading remains 0/51 and .1.1 follows the clean commit. Later verification and startup repair prerequisites remain unchanged.
 

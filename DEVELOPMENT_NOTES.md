@@ -12,6 +12,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-09-24 — Preserve task identity when moving verification evidence
+
+Containment .16.1 finds no exact multiline duplicate paragraphs in the 7994-line startup tree. Keep 395 children in three semantic owners and preserve the original root/frontier/global chronology in registered immutable history. All source bytes reconstruct; the replacement root owns current navigation. The cadence gate currently counts added lines, so 166 unchanged historical verification triplets would appear new after relocation. .16.2 must compare exact declarations by task ID while rejecting changed/duplicate/missing/foreign declarations and retaining normal canonical receipts. The plan and checkpoint in docs/knowledge/startup-task-partition-plan.md freeze ranges, consumer dispositions and unchanged-limit headroom; implementation remains pending.
+
 ## 2026-09-24 — Indexed reads must resolve the current typed binding
 
 `Expr::IndexedVar` retained a private `get_array` lookup even after assignment began storing typed arrays through `set_scalar`. This made one bracket behave differently from a bare binding or nested access and could expose an obsolete array map entry. Startup .88 uses `array_index_value(&ctx.get_bare_value(name), idx)` after evaluating the index, preserving the prior numeric read conversion and side-effect timing. It does not alter parser nodes, serialization, generated format, or strict write selectors.
