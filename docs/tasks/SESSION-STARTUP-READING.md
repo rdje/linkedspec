@@ -4716,13 +4716,44 @@ remain. Reading completion and runtime signoff remain distinct.
   - [x] **NO REGRESSION** — Production/tests match verified9e2c26b1c; helper/division public controls and exact book-source identity are retained. No fresh full Phase0 or canonical claim.
   - [x] **LOCKSTEP** — Rendered book states the measured limitation and string alternative; all current pointers select .86.4.8.
 - ID: `SESSION-STARTUP-READING.86.4.4.2`
-  Status: `pending`
+  Status: `active`
   Goal: Complete public multiline helper recomposition and close .86.4.4/.86.4 after all required repairs.
   Dependencies: .86.4.4.1 and verified .86.4.8, plus .86.4.3/.86.4.6/.86.4.7.
+  Children: `.86.4.4.2.1`, `.86.4.4.2.2`
   Planned tier: focused.
   Planned focused proof: Original helper/division/invalid-regex audit plus grouped punctuation; public SpecLoader and independent generated execution; permanent direct execution of all four book examples; relevant Perl contracts and all documentation/doctrines.
   Planned canonical boundary: Parent .86.3 after .86.5.
   Acceptance: Preserve exact values, source/descriptor/error channels and numeric compatibility; close only the measured helper scope, retaining .87/.2.4/EOF owners and no regex runtime type.
+  Verification: Fresh processes expose a missing Trace import: all four book examples fail generated_execution_failed although loader and same-process routes pass. Required .86.4.4.2.1 repairs emitted bootstrap before final .86.4.4.2.2.
+  Commit: `pending`
+
+
+- ID: `SESSION-STARTUP-READING.86.4.4.2.1`
+  Status: `done`
+  Goal: Load the emitted parser's tracing dependency explicitly and execute the exact book examples in fresh processes.
+  Dependencies: Verified .86.4.8.2 at af168d2fe; .86.4.4.2 fresh-process diagnosis.
+  Verification tier: `focused`
+  Focused checks: Public generated-source structured errors, four exact Markdown examples through SpecLoader/descriptors/fresh processes, generated contracts and trace consumers, isolated changed-value/missing-example mutations, syntax, book, memory/Knowledge/history/doctrines.
+  Canonical trigger: Parent .86.3 remains the exact public acceptance boundary; no generated-format or runtime contract change.
+  Acceptance: Generated plain Execute loads its own required Trace module without caller preloading; retain v2 metadata, authored identities, exact values and trace behavior. Missing or changed examples must fail recurrence.
+  Verification: All four cold-process baseline probes fail execute_generated/generated_execution_failed at trace_generated_handler_branch. Adding the explicit emitted Trace import repairs all four; exact book subtest66 and focused9-file/173 tests pass (163 seconds). The changed-result mutation fails only live/generated value assertions; missing-example mutation fails the source count. Final result-object guard replay passes generated7/book66 and the same two mutations. Syntax, unchanged generated contract and both rendered book chapters pass. Forty-eight mutable-ledger blank separators were removed with exact nonblank/order preservation. No new full Phase0 or canonical result is claimed.
+  Commit: `SESSION-STARTUP-READING.86.4.4.2.1 - load tracing in fresh generated parsers`
+
+  - [x] **ROOT CAUSE** — Plain emitted handlers require Trace; only the traced entrypoint loaded it.
+  - [x] **ISSUE** — Four fresh processes expose the structured failure hidden by prior same-process imports.
+  - [x] **FIX** — The generated preamble loads its own Trace dependency explicitly.
+  - [x] **ADDRESSED** — Exact Markdown sources pass public loader/descriptors and fresh generated values/metadata.
+  - [x] **NO REGRESSION** — Focused173, generated-contract/syntax and both intended-failure mutations pass.
+  - [x] **LOCKSTEP** — Book66 recurrence and rendered guidance share authored examples; current records select .86.4.4.2.2.
+
+- ID: `SESSION-STARTUP-READING.86.4.4.2.2`
+  Status: `pending`
+  Goal: Finish public helper recomposition after verified cold-process bootstrap and close .86.4.4.2/.86.4.4/.86.4.
+  Dependencies: Verified .86.4.4.2.1 plus the .86.4 helper repairs.
+  Planned tier: focused.
+  Planned focused proof: Original helper/grouped/numeric/malformed controls, public loader/descriptors and exact book/fresh-process recurrence; documentation, Knowledge, histories and doctrines.
+  Planned canonical boundary: Parent .86.3 after .86.5; no broad helper-family or cross-backend claim.
+  Acceptance: Reconcile the measured helper scope and preserved rejection with explicit .87/.2.4/.34/EOF/brace owners, then select .86.5.
   Verification: `pending`
   Commit: `pending`
 
@@ -4843,7 +4874,7 @@ audit range, not the default repair frontier.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.86.4.4.2` | `pending` | Recompose public loader/generated routes and permanently execute all four exact book examples after verified grouped repair. |
+| 1 | `SESSION-STARTUP-READING.86.4.4.2.2` | `pending` | Close measured public helper recomposition after verified Trace bootstrap and exact book recurrence; preserve all continuing defect owners. |
 
 The audit withdraws the unsupported precedence question. Helper validation `.86.4.3` and
 statement splitting `.86.4.6` plus quoted-subject validation `.86.4.7` are verified. Public recomposition `.86.4.4.1` exposed punctuation repair `.86.4.8`; `.86.4.8.1` rejects incompatible lookahead and `.86.4.8.2` now verifies the compatible implementation; `.86.4.4.2` closes the measured scope before EOF `.86.5` and canonical `.86.3`.
@@ -5548,9 +5579,7 @@ Supporting tooling now also includes complete `tools/project_data_env.sh` 1–28
 The diagnostic evidence gate was reread in full. Supporting native source ranges for `.22` were Dart's
 semantic call projection 92–180, Julia's call projection 73–155 and action-owner helper 1009–1078,
 and Lua's static projection 1820–1935; these do not complete the native files or their reading lanes.
-
 #### Resolved questions and remaining ownership
-
 - `array.length` in the variadic-function example is already supported; the existing variadic-function fact
   resolves the question. Semantic explain budgets are operation-specific under ADR 0049. Neither becomes a defect.
 - Managed startup-only Julia controls for ordinary, one-interior-empty, and two-interior-empty depot fields
@@ -5563,14 +5592,10 @@ and Lua's static projection 1820–1935; these do not complete the native files 
   speculative Julia failure, or new implicit grouped-edge child-call behavior is claimed.
 - MethodExpr's focused control independently confirms three authored values in a distinct returned array,
   two values through legacy/fixed-arity fallback, an unchanged original list, and rejection below minimum arity.
-
-
 #### Supplied-policy comparison evidence
-
 All donor reads were explicitly authorized, read-only, and scoped to the supplied files. Each donor's scoped
 Git status was clean when compared. These records preserve provenance; `.5` still owns adoption decisions,
 mechanical changes, and final alignment after required reading.
-
 - fsmgen `README_POLICY.md`: 187 lines / 9,849 bytes; SHA-256
   882682fa1ace703ae68726b8532a4ad24fe2c8a271bae4e07b859bd197a621c9.
   Latest file change is `1f0443b3a4e654f8460ba6eda272c53e1d8b642d` (August 20).
@@ -5594,17 +5619,13 @@ mechanical changes, and final alignment after required reading.
   with durable inputs and bidirectional history coverage. No explicit local adoption filename/phrase was found;
   that does not imply all principles are absent. Existing TASK-ACCEPTANCE checks evidence shape and deliberately
   do not execute Markdown commands. `.29` owns its measured path gap and runs before `.5` adoption closeout.
-
 September 11 group .1.6 recheck: all three supplied files were fully reread, read-only; their
 SHA-256 identities above are unchanged. No donor revision or local adoption is claimed by this check.
-
 #### Remaining reading preparation
-
 Read-only decomposition drafts are preparation and carry no source-reading credit. Git plus the existing
 disjoint class selectors remain the inventory authority; no additional tracked manifest was introduced.
 Independent validators checked object identities, LF/decoded-byte intervals, exact-once coverage, empty files,
 and the 1,500-line / 65,536-byte budgets. Formal child creation and manual boundary review still precede reading.
-
 | Pending lane | Baseline paths | Stored bytes | Draft reading groups |
 | --- | ---: | ---: | ---: |
 | Rust | 412 | 3,533,382 | 67 |
@@ -5614,7 +5635,6 @@ and the 1,500-line / 65,536-byte budgets. Formal child creation and manual bound
 | Specs/configuration/noncore | 158 | 964,256 | 19 |
 | Shared verification/Unicode inputs | 160 | 5,422,313 | 144 |
 | Repository tools | 143 | 2,381,957 | 38 |
-
 The native drafts preserve two empty Rust fixtures and two oversized generated-line fragments each for
 Rust/Dart/Lua. Shared verification includes all four pinned gzip objects and their 3,352,036 decoded bytes;
 its total reading representation is 8,257,059 bytes. The sole current tooling delta is the owned
@@ -5623,9 +5643,7 @@ The book draft follows SUMMARY order and leaves 48 pending ranges; one project-s
 manual review. Root guidance classifies all 28 paths: nine recorded full reads, five prescribed memory/history
 retrieval surfaces, and fourteen pending maintained documents (1,354,206 bytes). Pending root text is
 baseline-identical. These draft counts do not imply that their content was read or that their future leaves exist.
-
 #### Preceding canonical completion
-
 The unchanged staged candidate for `.3.2.21` completed canonical CI with exit 0 at 2026-09-06 13:58:18 UTC.
 The receipt binds base `ba9a494caa79fdd6fca7833d5bfc1fbce727fc9d` and candidate SHA-256
 `d3dd218a7cbce4742b9bb857f67a54bdaba85ef6c01510ffeb9f1725e83064af`.
@@ -5634,9 +5652,7 @@ process-locality oracle. Optional environment-selected matrices were unset and s
 optional-coverage claim follows. The commit hooks passed all nine doctrines, the post-commit activation pointer
 passed, and the receipt was promoted to `17d3e919118430d4fad0e31d6c1a4a8e2d9dc333`. The brief was cleared to
 zero bytes and Git was clean before activating `.31`; no background job remains.
-
 ### Method expression parsing and scope precedence at `.3.2.22`
-
 - Activated from clean `3e8b05cd343dafa0b67c536bfe0c9e6b52f074c7` after intake `.31` committed, its post-commit pointer passed,
   and the brief/status cleanup completed. The preceding canonical result remains recorded in that intake.
 - MethodExpr.pm was fully consumed at 1–150 and 151–298 during forward reading, then reviewed in full for
@@ -5653,9 +5669,7 @@ zero bytes and Git was clean before activating `.31`; no background job remains.
   two values through legacy and fixed-arity fallback, keeps a distinct authored list and unchanged input,
   and rejects an empty list below minimum arity. This checks the source-owner boundary, not full runtime parity.
 - Source/book remain unchanged; codebase/book are No. Next `.3.2.23` covers MethodLowering 1–1495.
-
 ### MethodLowering prefix and dated migration ownership at `.3.2.23`
-
 - Activated from clean `27ff841afdfb276f520d4988a5807df5e364e7f5` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
 - The prefix was read in eight untruncated forward ranges preserved by `.31`; checkpoint review additionally
   consumed 1–405, 406–815, 816–1210, and 1211–1495. Full-file baseline identity and the 61,967-byte prefix agree.
@@ -5670,9 +5684,7 @@ zero bytes and Git was clean before activating `.31`; no background job remains.
   No runtime repair or whole-helper audit is claimed. Existing `.19` still owns the dynamic receiver-guard gap.
 - All Perl source remains physically read; subsequent comprehension checkpoints remain pending. Codebase/book
   stay No, and the next owned range is MethodLowering 1496–2378.
-
 ### Function signatures, local bindings, and statement lowering at `.3.2.24`
-
 - Activated from clean `2c398b922192172310bfd733bdcecaef0ee6750a` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
 - Forward reading consumed 1496–1700, 1701–1905, 1906–2110, 2111–2290, and 2291–2378; this checkpoint
   reviewed 1496–1910 and 1911–2378 in full. The 883 lines / 33,969 bytes and full baseline identity agree.
@@ -5686,7 +5698,6 @@ zero bytes and Git was clean before activating `.31`; no background job remains.
 - Managed `PERL5LIB= prove -Iperl t/variadic_user_function_contract.t` passes 66 top-level tests. A public Get
   control builds a mixed hash/array value and reads it with a bare index; it returns `one` and no context error.
   The exact successful control follows. Source/book remain unchanged; no whole-backend signoff is claimed.
-
 ```bash
 bash tools/project_data_run.sh env PERL5LIB= perl -Iperl -MLinkedSpec -MJSON::PP - <<'PERL'
 use strict; use warnings;
@@ -5696,11 +5707,8 @@ my $input='x';my $result=$parser->(\$input);die 'unexpected result' unless defin
 print JSON::PP->new->canonical->encode({result=>$result,context_error=>undef}),"\n";
 PERL
 ```
-
 - Later checkpoints remain pending; codebase/book stay No. `.3.2.25` owns MethodLowering 2379–3743.
-
 ### Value dispatch and function caller-scope evidence at `.3.2.25`
-
 - Activated from clean `d392ad2bee69a7fa2b5090c40589ca5f77d011f9` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
 - This checkpoint re-reviewed 2379–2795, 2796–3210, 3211–3500, and 3501–3743 in full, following `.31`'s
   physical forward reading. Exact whole-file baseline identity and 1,365 lines / 65,506 bytes agree.
@@ -5721,9 +5729,7 @@ PERL
   regression controls after required reading and policy review. Other backends remain unprobed; no
   implementation, public-book change, or standalone generated-parser execution is claimed.
 - Global codebase/book answers remain No. `.3.2.26` continues the same source at 3744–4911.
-
 ### Block values, receiver chains, and root-dependent traversal at `.3.2.26`
-
 - Activated from clean `85167df3ae9883636ec00ea5c8259aa581b238b5` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
 - Re-reviewed 3744–4025, 4026–4330, 4331–4630, and 4631–4911 in full after `.31`'s physical forward pass.
   Exact whole-file baseline identity and 1,168 lines / 58,949 bytes agree.
@@ -5740,9 +5746,7 @@ PERL
   selected traversal. Exact command: `docs/knowledge/perl-hash-tree-traversal-callback-frame.md`.
 - No runtime/book edits or new runtime defect are claimed. Codebase/book remain No, and `.3.2.27`
   continues the source at 4912–5942; previously owned repairs retain their prerequisite sequence.
-
 ### Helper fallback, numeric dispatch, and bounded contract evidence at `.3.2.27`
-
 - Activated from clean `a32cf42245dc97ec31d4e8f6b89d10c658bf2718` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
 - Re-reviewed 4912–5140, 5141–5390, 5391–5625, 5626–5810, and 5811–5942 without truncation.
   Whole-file baseline identity and 1,031 lines / 64,411 bytes agree with `.31`'s forward reading.
@@ -5757,7 +5761,6 @@ PERL
 - Managed `PERL5LIB= prove -Iperl t/scalar_numeric_contract.t` passes nine top-level tests. Public descriptors
   for malformed substr/count and an unknown value call each report one unresolved helper with zero raw
   dependency; the registered value call reports zero of both. The exact successful command follows.
-
 ```bash
 bash tools/project_data_run.sh env PERL5LIB= perl -Iperl -MLinkedSpec -MJSON::PP - <<'PERL'
 use strict;use warnings;
@@ -5776,15 +5779,12 @@ for my $c(
 }
 PERL
 ```
-
 - Managed map generation emitted child setpgid EPERM, then completed successfully. A subsequent child
   PID/PGID control matches; the original final group is unobserved. Wrapper 308–314 assumes group identity
   from the child PID. Existing `.7` now owns establishment verification; its Knowledge card preserves exact
   warning/control and unresolved timing, with the two older lifecycle records linked to the limitation.
 - Source and public book remain unchanged. Codebase/book remain No; `.3.2.28` owns 5943–7245.
-
 ### Collection helpers, constructors, and tagged-record divergence at `.3.2.28`
-
 - Activated from clean `e4716fcf55042846646e654190a68cca11ee57d2` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
 - Re-reviewed 5943–6230, 6231–6530, 6531–6810, 6811–7070, and 7071–7245 without truncation.
   Whole-file baseline identity and 1,303 lines / 64,878 bytes agree with `.31`'s forward pass.
@@ -5797,7 +5797,6 @@ PERL
   copy remains unchanged after the tested nested write rebinds its original through BindingRuntime.
 - Three public controls pass: literal constructors, copy followed by nested mutation, and combined array/
   hash helper results. The exact successful control and captured-source filter follow.
-
 ```bash
 bash tools/project_data_run.sh env PERL5LIB= perl -Iperl -MLinkedSpec -MJSON::PP - <<'PERL'
 use strict;use warnings;
@@ -5816,7 +5815,6 @@ for my $case (
 }
 PERL
 ```
-
 - Tagged-record diagnosis uses two Perl Get/source controls and the same specs through fresh PUC Lua CLI.
   For `a,b,`, Perl makes two records, with carried increments 1/2 and final counter 2; PUC makes three
   records with field 1 and counter 1. Ordinary split retains the trailing empty item on both.
@@ -5832,9 +5830,7 @@ PERL
   `docs/knowledge/tagged-record-evaluation-and-split-drift.md`; the two Lua records link that limitation.
 - No runtime or public-book edit was made. Codebase/book remain No; `.3.2.29` reads the suffix and
   ProgressiveSpanDispatch next, before the remaining prerequisite checkpoints and owned repairs.
-
 ### Receiver normalization suffix and private progressive ActionIR at `.3.2.29`
-
 - Activated from clean `86673c75a56b869e80c7613345f9c0963c013e8b` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
 - Re-reviewed MethodLowering 7246–7505, 7506–7775, and 7776–8057 and all 165 ProgressiveSpanDispatch
   lines without truncation. Exact whole-file baseline identity passes; owned ranges total 977 lines /
@@ -5852,9 +5848,7 @@ PERL
   passes 129 assertions. `bash tools/run_python_project_data.sh tools/check_progressive_span_dispatch_contract.py`
   passes rollout 9/9/116 and public 6/12/10/60. Other runtime routes are not rerun by this reading checkpoint.
 - No runtime, public-book, or policy behavior changes. Codebase/book remain No; `.3.2.30` follows.
-
 ### Source-span rewrite orchestration and scanner ownership at `.3.2.30`
-
 - Activated from clean `3c1a955a1669469697dd3325c1dcde74c684e76f` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
 - Re-reviewed RewritePipeline 1–245, 246–485, and 486–745, Scanner 1–90, and FlowRules 1–175 /
   176–338 without truncation. Exact whole-file baseline identity passes for all three files: 1,173 lines /
@@ -5878,9 +5872,7 @@ PERL
   retired alias/selector history, completed fallback audit, and the known `.18` lexical rewrite limitation.
   No fresh all-backend or complete defect-free claim follows from this bounded trace proof.
 - No source, public-book, or policy changes. Codebase/book remain No; `.3.2.31` follows.
-
 ### Legacy and primitive scanner coverage with current push precedence at `.3.2.31`
-
 - Activated from clean `6f113221546d579cae647069e19b9bfa3a8c4f81` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
 - Re-reviewed LegacyRules 1–310, 311–610, 611–905, and 906–1179 plus PrimitiveBasicRules 1–254
   without truncation. Exact whole-file baseline identity passes: 1,433 lines / 41,163 bytes, with no
@@ -5895,7 +5887,6 @@ PERL
 - Three public Get controls pass scalar source assignment, harray values carried through array append /
   keyed mutation, and typed array return. Generated `push(Child,items)` checks for a compiled Child handler;
   absent one, it appends the value of items to binding Child. Exact successful controls follow.
-
 ```bash
 bash tools/project_data_run.sh env PERL5LIB= perl -Iperl -MLinkedSpec -MJSON::PP - <<'PERL'
 use strict;use warnings;
@@ -5914,11 +5905,9 @@ for my $case (
 print LinkedSpec::call_spec_handler_subst('Top','push(Child,items)'),"\n";
 PERL
 ```
-
 - Existing `perl-uniform-binding-runtime` already records the handler-first contract. The generated branch
   agrees with MethodLowering 1253–1265 and the existing static-rule precedence fixture at
   `t/uniform_binding_contract.t` 231–248. Two public controls independently pass both branches:
-
 ```bash
 bash tools/project_data_run.sh env PERL5LIB= perl -Iperl -MLinkedSpec -MJSON::PP - <<'PERL'
 use strict;use warnings;
@@ -5935,16 +5924,13 @@ for my $case (@cases){
 }
 PERL
 ```
-
 - Binding-only result is `["v"]`; registered rule result is `[["unchanged"],["child-result"]]`.
   All five Get controls leave context error clear. This is an existing documented precedence rule, not a
   new runtime defect or repair; Rust and the other backends are not reverified by this checkpoint.
 - Mutation-slot and scalar-seam cards now distinguish their historical separate storage from current
   uniform typed values and retired selector syntax. The fallback audit links the same handler-first
   choice, removing its unconditional child-call claim. Codebase/book remain No; `.3.2.32` follows.
-
 ### Pipeline, recognition, staged marker, and splitting ownership at `.3.2.32`
-
 - Activated from clean `b1108cbb18c5cd347912a4ce44f86b289958abef` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
 - Re-reviewed PrimitivePipelineRules 1–285 / 286–571, RecognitionTransactionRules 1–124,
   StagedParseJob 1–220 / 221–393, and StatementSplit 1–44 without truncation. ScannerCore 1–223 was
@@ -5973,9 +5959,7 @@ PERL
   250 current calls and 126 independently covered public Perl contracts. Other runtime routes are not rerun.
 - No runtime, public-book, or policy changes. The finite proofs do not close known `.18`/`.21` repairs;
   codebase/book remain No and `.3.2.33` follows.
-
 ### Statement splitting, lazy trace, and value-expression ownership at `.3.2.33`
-
 - Activated from clean `9be547af99c2a9c99757eb0986d3292ad64b3a50` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
 - Re-reviewed StatementSplit/Core 1–235 / 236–419, StatementSplit/Mode 1–214, Trace 1–124,
   and ValueExpr 1–240 / 241–460 / 461–666 without truncation. Exact baseline identity passes for
@@ -6001,7 +5985,6 @@ PERL
 - `bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/trace_actionir_compact_lowerers.t`
   passes four top-level tests. Required memory, Knowledge, history, and review checks precede landing.
 - No runtime, public-book, or policy edits. Reading codebase/book remains No; `.3.2.34` follows.
-
 ### Binding, callable, codeblock, and gap runtime boundaries at `.3.2.34`
 
 - Activated from clean `ab4b1f1e5fbe33a0df4d3c643375e5e22ca6b98f` after the prior commit, passing post-commit pointer, and empty-brief/clean-status verification.
@@ -7549,6 +7532,8 @@ All 53 owned scopes are read: HLink delimiter/raw text, Liberty scalar/complex a
 
 ## Verification Log
 
+- 2026-09-24 .86.4.4.2.1: Fresh generated baseline fails four book cases; explicit Trace import passes book66 and focused173 across9 files in163 seconds. Two isolated book mutations reject only intended assertions; syntax/contract, book/memory/Knowledge/history and normal doctrines govern landing. Logs: .linkedspec-data/scratch/helper-pattern86-4-4-2/.
+
 - 2026-09-24 .86.4.8.2: Focused187, exact book21, baseline RED only group10 and final Phase0 1033/1033 (Files=1, Tests=1033, 1423 wallclock secs ( 0.44 usr  0.10 sys + 1086.49 cusr 125.81 csys = 1212.84 CPU)) pass; frozen diff unchanged. Book/memory/Knowledge/history/doctrines govern landing; scratch .linkedspec-data/scratch/helper-pattern86-4-8-2/.
 
 - 2026-09-24 .86.4.8.1: Exact12-case baseline/candidate source pairs reject lookahead despite prior22-case improvement. Archived patch reconstructs; production/tests and all three complete book sources remain exact to f3f9fc74. Restored consumer9 passes; tracked replay/book render/memory/history and normal doctrine hooks govern intake only. No full Phase0 or canonical claim.
@@ -7743,6 +7728,8 @@ CLI66x2 and Phase0 1032/1032; 1163 seconds is Phase0 only, with 25 optional gate
 
 ## Commit Log
 
+- 2026-09-24 .86.4.4.2.1: `SESSION-STARTUP-READING.86.4.4.2.1 - load tracing in fresh generated parsers`; activation af168d2fe; .86.4.4.2.2 follows.
+
 - 2026-09-24 .86.4.8.2: `SESSION-STARTUP-READING.86.4.8.2 - preserve grouped regex helper operands`; activation9f0c6ca9e; .86.4.4.2 follows.
 
 - 2026-09-24 .86.4.8.1: `SESSION-STARTUP-READING.86.4.8.1 - preserve grouped operand compatibility evidence`; activation f3f9fc74; required compatible implementation .86.4.8.2 follows.
@@ -7774,6 +7761,8 @@ CLI66x2 and Phase0 1032/1032; 1163 seconds is Phase0 only, with 25 optional gate
 Each canonical task node owns its exact `Commit` subject and retained completion note. Query landed history with `git log --all --format="%h %s" --fixed-strings --grep="SESSION-STARTUP-READING."`; this replaces the proven duplicate 102-row table.
 
 ## Changelog
+
+- 2026-09-24 .86.4.4.2.1: Repair emitted Trace bootstrap exposed by fresh-process book testing; retain exact Markdown source recurrence and immediate final public recomposition owner.
 
 - 2026-09-24 .86.4.8.2: Preserve grouped helper operands and numeric compatibility through context-aware structural parsing; synchronize executable book guidance and extend existing .34.1 comment ownership.
 

@@ -156,6 +156,7 @@ sub _generated_source_preamble {
   . "no warnings 'void';\n"
   . "use re 'eval';\n"
   . "use LinkedSpec::GeneratedSource ();\n"
+  . "use LinkedSpec::Trace ();\n"
   . "use LinkedSpec::EntryRuleSelection ();\n"
   . "use LinkedSpec::RuntimeDiagnosticOutput ();\n"
   . "use LinkedSpec::RuntimeSemanticObservation ();\n"

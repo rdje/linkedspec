@@ -11,7 +11,7 @@ answers:
   - "does parse_mode change Perl generated source bytes"
   - "what happens if emit_generated_source receives parse_mode"
   - "what functions does generated Perl source expose"
-date: 2026-07-17
+date: 2026-09-24
 status: current
 supersedes: perl-generated-source-contract-v1
 tags: [perl, generated-source, cursor, public-api, trace, diagnostics, FUTURE-PARITY-BACKLOG]
@@ -39,6 +39,9 @@ emitter fails before source parsing at `prepare_options` with
 caller's source identity.
 Loaded v2 packages expose `Execute`, `ExecuteWithTrace`, metadata/plan readers,
 and `ValidateGeneratedPlan`. Plan row/label/family checks remain unchanged.
+Fresh-process bootstrap also requires the emitted Trace import; see
+[[perl-generated-source-cold-trace-dependency]] for the four exact book-example
+regressions and the distinction from earlier same-process package loading.
 
 A v1 contract presented to the v2 validator fails before row validation with
 `generated_source_contract_version_mismatch` at `validate_generated_plan`.

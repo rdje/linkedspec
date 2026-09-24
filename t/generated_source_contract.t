@@ -17,6 +17,7 @@ BEGIN {
 
 use LinkedSpec;
 use LinkedSpec::GeneratedSource;
+use LinkedSpec::SpecLoader ();
 use LinkedSpec::Trace;
 
 my $repo_root = File::Spec->rel2abs(File::Spec->catdir(dirname(__FILE__), '..'));
@@ -500,6 +501,107 @@ SPEC
   my $generated = $module->{execute}->(\$generated_input);
   is_deeply($normal, $expected, "$label normal result is exact");
   is_deeply($generated, $expected, "$label generated result is exact");
+ }
+};
+
+subtest 'integration book regex examples execute through loader and fresh generated processes' => sub {
+ my $book_path = File::Spec->catfile(
+  $repo_root, qw(docs linkedspec-book src public-api integration-perl.md),
+ );
+ my $book = read_text($book_path);
+ my ($section) = $book =~ /^## Regex and division in action code\n(.*?)(?=^## |\z)/ms;
+ ok(defined($section), 'published regex section exists');
+ return unless defined($section);
+ my @sources = $section =~ /^```text\n(.*?)^```\s*$/msg;
+ my @cases = (
+  ['multiline pattern', 'x', 1],
+  ['captured subject substitution', "x\ny", 'ok'],
+  ['quoted multiline subject', 'x', 'ok'],
+  ['grouped pattern continuation', 'x,y', [1, 'ok']],
+ );
+ is(scalar(@sources), scalar(@cases), 'every complete published regex example is covered');
+ return unless @sources == @cases;
+ my $scratch = tempdir('linkedspec-book-regex-XXXXXX', TMPDIR => 1, CLEANUP => 1);
+ for my $index (0 .. $#cases) {
+  my ($label, $input, $expected) = @{$cases[$index]};
+  my $source = $sources[$index];
+  my $name = 'BookRegex' . ($index + 1);
+  my $path = File::Spec->catfile($scratch, "$name.spec");
+  open my $spec_fh, '>:encoding(UTF-8)', $path or die "cannot write $path: $!";
+  print {$spec_fh} $source;
+  close $spec_fh or die "cannot close $path: $!";
+  my $loaded = eval {
+   LinkedSpec::SpecLoader::load_and_compile_spec(
+    LinkedSpec::SpecLoader::name_request($name),
+    LinkedSpec::SpecLoader::load_options(cwd => $scratch, search_roots => [$scratch]),
+   );
+  };
+  my $load_error = $@;
+  ok($loaded, "$label loads through the public file API") or diag($load_error);
+  next unless $loaded;
+  is($loaded->loaded->source_text, $source, "$label retains the exact Markdown source");
+  is($loaded->loaded->resolved->path, $path, "$label retains the resolved path");
+  is($loaded->runtime_ctx->{spec_path}, $path, "$label retains runtime source identity");
+  my $live_input = $input;
+  is_deeply($loaded->compiled->(\$live_input), $expected, "$label returns its documented value");
+  is($loaded->runtime_ctx->{last_error}, undef, "$label has no deferred runtime error");
+  my %descriptor_context;
+  my $descriptor = LinkedSpec::Get(
+   \$source, return_descriptor => 1, runtime_ctx_ref => \%descriptor_context,
+  );
+  is_deeply(
+   [sort keys %{$descriptor->{spec} || {}}], ['Done', 'Top'],
+   "$label retains both authored rules in its public descriptor",
+  );
+  is($descriptor_context{last_error}, undef, "$label descriptor has no compile error");
+
+  my $identity = 'book/regex-example-' . ($index + 1) . '.spec';
+  my $generated = capture_source($source, source_identity => $identity);
+  next unless defined($generated) && length($generated);
+  my $program_path = File::Spec->catfile($scratch, "$name.pl");
+  open my $program, '>:encoding(UTF-8)', $program_path or die "cannot write $program_path: $!";
+  print {$program} "BEGIN { alarm 60 }\n", $generated, <<'BOOK_RUNNER';
+
+{
+ require JSON::PP;
+ my $book_input = $ARGV[0];
+ my $book_result = eval { Execute(\$book_input) };
+ my $book_error = $@;
+ if ($book_error) {
+  print STDERR JSON::PP->new->canonical->encode($book_error), "\n";
+  exit 1;
+ }
+ print JSON::PP->new->canonical->encode({
+  value => $book_result, metadata => LinkedSpecGeneratedMetadata(),
+ });
+}
+BOOK_RUNNER
+  close $program or die "cannot close $program_path: $!";
+  # One captured pipe avoids stderr backpressure. Check the full wait status,
+  # including signals; the child alarm also covers generated-source loading.
+  open my $child, '-|', $^X, '-I' . File::Spec->catdir($repo_root, 'perl'), $program_path, $input
+   or die "cannot execute $program_path: $!";
+  my $output = do { local $/; <$child> };
+  my $closed = close $child;
+  my $status = $?;
+  ok($closed && $status == 0, "$label fresh generated process exits successfully")
+   or diag("wait status=$status; output=" . ($output // ''));
+  my $result = eval {
+   my $decoded = decode_json($output // '');
+   die "expected a generated result object\n" unless ref($decoded) eq 'HASH';
+   $decoded;
+  };
+  is($@, '', "$label fresh process returns JSON");
+  next unless ref($result) eq 'HASH';
+  is_deeply($result->{value}, $expected, "$label fresh process returns its documented value");
+  is($result->{metadata}{contract_id}, 'linkedspec-generated-source-v2', "$label retains the v2 contract");
+  is($result->{metadata}{format_version}, 2, "$label retains format version 2");
+  is($result->{metadata}{source_identity}, $identity, "$label generated identity is exact");
+  is_deeply(
+   $result->{metadata}{plan},
+   [{label => 'Top', family => 'default'}, {label => 'Done', family => 'default'}],
+   "$label generated plan retains both authored rules",
+  );
  }
 };
 

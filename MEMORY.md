@@ -1,10 +1,10 @@
 # MEMORY
 
-- activation_commit: `9f0c6ca9ea7219dd00fca14f9e8fe6e38bcbf059` — clean base for compatible grouped operand repair.
-- latest_completed_leaf: `SESSION-STARTUP-READING.86.4.8.2 - preserve grouped regex helper operands`.
-- active_work_unit: `SESSION-STARTUP-READING.86.4.4.2` — public loader/generated/book recomposition (pending).
-- next_action: Complete .86.4.4.2 using the verified grouped repair and four exact book examples. Add recurring public loader/generated proof, retain numeric/malformed controls and .87/.2.4/.34 owners. Then .86.5 EOF and .86.3 canonical.
-- in_flight_uncommitted: None; .86.4.8.2 passes focused187, exact book21 and final Phase0 1033/1033 with unchanged source/test freeze. All accepted work and comment intake are committed together.
+- activation_commit: `af168d2fe134071de80976cfd04c727b4144e9f3` — clean base for public loader/generated/book recomposition.
+- latest_completed_leaf: `SESSION-STARTUP-READING.86.4.4.2.1 - load tracing in fresh generated parsers`.
+- active_work_unit: `SESSION-STARTUP-READING.86.4.4.2.2` — final public helper recomposition (pending).
+- next_action: Close .86.4.4.2.2 with the original helper/grouped/numeric/malformed controls and exact book recurrence. Preserve .87/.2.4/.34/EOF/brace owners, then select .86.5 and .86.3 canonical.
+- in_flight_uncommitted: None; explicit generated Trace bootstrap and exact book-source recurrence pass focused173/book66, both intended-failure mutations, syntax/contract and rendering. All verification jobs are consumed.
 - blockers: LS-004 remains upstream-owned; director relays docs/upstream/rgx/bootstrap-progress-status.md. No RGX code defect established. Named-argument and format proposals remain parked.
   Wrapper startup .7 remains open; recovery/purge stay prohibited. No interrupted Phase0 run counts as proof.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the

@@ -324,6 +324,17 @@ that position; its separate repair is tracked under `.86.5`. Newline-separated
 division followed by another assignment already works. Prefer `div(...)` when
 slash syntax would obscure the arithmetic intent.
 
+To verify these four complete examples against your checkout, run:
+
+```bash
+bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/generated_source_contract.t
+```
+
+The test reads their source directly from this chapter, loads each through the
+public file API, and executes each generated parser in a fresh Perl process.
+It checks the documented values, error channel, rule descriptors and generated
+source identities alongside the existing generated-source contract tests.
+
 ## Handle runtime outcomes explicitly
 
 The parser has two failure channels. Catch exceptions with `eval` and immediately

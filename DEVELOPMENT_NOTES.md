@@ -11,6 +11,13 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
 
+
+## 2026-09-24 — SESSION-STARTUP-READING.86.4.4.2.1 - distinguish package isolation from fresh-process bootstrap
+
+Generated handlers call Trace::trace_generated_handler_branch even through plain Execute. Compiler::_generated_source_preamble loaded the other emitted runtime owners but omitted Trace; only ExecuteWithTrace required it. An arbitrary eval package inside the already-loaded test process cannot detect that missing dependency. A fresh child now runs the emitted artifact without preloading LinkedSpec or Trace, uses a single captured stdout pipe with inherited stderr, checks the full wait status including signals, and bounds itself with an alarm.
+
+The book is the actual specification fixture: four fenced sources are extracted from the named integration section. Loader source bytes/path/context, both rule descriptors, exact values and emitted identity/plan/version are checked. Controlled book changes reject on the intended assertions; no copied specification fixture can silently diverge. Forty-eight blank separators were removed from the mutable task ledger to fit the mandatory immediate repair children; exact nonblank content/order was verified unchanged. Focused9-file proof passes173 tests in163 seconds; book66, both intended-failure mutations, syntax/contract and rendering pass. A final result-object guard retains generated7/book66 and both exact mutation failures.
+
 ## 2026-09-24 — SESSION-STARTUP-READING.86.4.8.2 - preserve grouped regex helper operands
 
 The rejected complete-token lookahead was unsafe because /(14,2),14/cos can be two accepted numeric/raw-host arguments. The replacement recognizes the helper's pattern slot and remaining call shape, retains real numeric caller boundaries and complete quoted arguments, and excludes tested host quote payloads. Its offset-preserving structural view drives method parsing and return scanning; CSV returns original source slices and AST arguments consume typed regex fields with authored spans. Receiver filter lowering also needs the existing __array_value_filter_match role. A correct AST alone did not fix quoted payloads until the legacy return scanner and whole-call lowering seam used the same recognition.

@@ -11,6 +11,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 - Apply required rollover: `perl tools/roll_document_history.pl --surface change_history --apply`
 
 
+
+## 2026-09-24 — SESSION-STARTUP-READING.86.4.4.2.1 - load tracing in fresh generated parsers
+
+The generated preamble now imports LinkedSpec::Trace explicitly. Fresh plain Execute previously failed at trace_generated_handler_branch; existing same-process tests had already loaded Trace. The new generated-source subtest extracts the four exact integration-book specifications and checks public SpecLoader values, source identity, descriptors, errors and independent child-process values/metadata. The format remains v2.
+
+All four cold-process failures become green and the book subtest passes66 assertions. Isolated mutations fail only the intended book group: a changed result fails both live/generated values, and a missing example fails the coverage count. Focused generated/loader/AST/trace/cursor proof passes173 tests across9 files; syntax and generated-source contract checks pass. Both book chapters explain the bootstrap and the runnable recurring check. Final public recomposition remains .86.4.4.2.2; existing helper, escape, comment and EOF owners remain open.
+
 ## 2026-09-24 — SESSION-STARTUP-READING.86.4.8.2 - preserve grouped regex helper operands
 
 Recognize grouped slash patterns in regex-helper argument positions while retaining numeric calls, raw-host expressions and original source bytes. Carry that context through structural method parsing, CSV, typed AST and synthetic receiver lowering; let the return scanner and contract handle quoted pattern payloads. The expanded consumer covers dot/comma bodies, flags, quoted and bracket payloads, LF/CRLF, continuation, control, substitution, filtering, indexed q/m/qr variables and generated execution.

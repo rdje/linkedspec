@@ -495,6 +495,9 @@ Repetition bounds are resolved by `_resolve_rep_bounds`, which maps node types (
 REP variants (rep_bcode, rep_and_bcode, rep_and_acode) compose inner handlers as anonymous coderefs (`$or_code`, `$and_code`) with progress-detection guards that check whether `pos($$STRING)` advanced between iterations.
 
 Generated Perl templates also route branch decisions through `LinkedSpec::Trace::trace_generated_handler_branch(...)`.
+The emitted preamble loads `LinkedSpec::Trace` itself, so plain `Execute` works
+in a fresh Perl process without the caller preloading tracing. `ExecuteWithTrace`
+additionally accepts trace configuration; both routes use the same handlers.
 At `debug` trace level, non-repetition templates report match/no-match, acode/bcode dispatch, AND sequence, `LX`,
 and child-result decisions. Repetition templates report loop entry, per-iteration success/failure, min-satisfied
 stops, max-bound continuation/cutoff, and the bcode REP zero-progress cutoff. These trace calls return the original

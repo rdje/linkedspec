@@ -2,17 +2,19 @@
 
 ## Current Activity
 
-Perl multiline helper, statement, quoted-subject and grouped-operand repairs are verified. .86.4.4.2 now owns final public loader/generated/book recomposition before .86.5 EOF and .86.3 canonical closeout. Independent helper, escape and comment defects retain .87, SUPPORTING-SOURCE-READING.2.4 and .34 ownership; LS-004 remains director-relayed/upstream-owned.
+Perl helper and grouped-operand repairs are verified. Fresh generated-process testing exposed and repaired the missing Trace dependency under .86.4.4.2.1. Exact book recurrence passes66 assertions; .86.4.4.2.2 now owns final public helper recomposition before .86.5 EOF and .86.3 canonical. Independent helper, escape, comment and upstream owners remain open.
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.86.4.8.2 - preserve grouped regex helper operands` — focused187, exact book21 and complete Phase0 1033/1033 pass; numeric/error compatibility remains byte-identical.
+- `SESSION-STARTUP-READING.86.4.4.2.1 - load tracing in fresh generated parsers` — explicit emitted Trace import repairs all four cold-process failures; focused173/book66, two intended-failure mutations, syntax/contract and book rendering pass.
 
 ## Next Action
 
-- Complete .86.4.4.2 public loader/generated recomposition and permanent execution of the four exact book examples. Then .86.5 EOF and .86.3 canonical. Commit each verified slice; final push requires exact-HEAD canonical proof.
+- Close .86.4.4.2.2 public helper recomposition with preserved numeric/malformed controls, then .86.5 EOF and .86.3 canonical. Commit each verified slice; final push requires exact-HEAD canonical proof.
 
 ## Recent Completions
+
+- `2026-09-24` — `SESSION-STARTUP-READING.86.4.4.2.1` repairs fresh generated Trace loading; focused173/book66 and mutation checks pass.
 
 - `2026-09-24` — `SESSION-STARTUP-READING.86.4.8.2` repairs grouped operands; focused187/book21 and Phase0 1033/1033 pass.
 
@@ -43,8 +45,6 @@ Perl multiline helper, statement, quoted-subject and grouped-operand repairs are
 - `2026-09-23` — `.86.4.2.1` proves the slash precedence conflict, archives rejected evidence and restores accepted source/tests.
 
 - `2026-09-23` — `.86.4.5` archives the unfinished candidate and restores a clean director-paused handoff.
-
-- `2026-09-23` — `.86.4.1` isolates Perl multiline regex failures and owns bounded splitter/validation repairs.
 
 ## History
 
