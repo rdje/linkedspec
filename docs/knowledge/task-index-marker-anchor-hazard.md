@@ -11,7 +11,7 @@ answers:
   - "why did Dart calls canonical CI fail on repeated-action governance"
   - "does repeated-action still require a historical handoff in bounded MEMORY"
   - "why did Julia recursive observation canonical CI fail on repeated-action governance"
-date: 2026-09-20
+date: 2026-09-24
 status: current
 tags: [task-tree, doctrine, governance, repeated-action, local-ci, no-drift]
 evidence: docs/TASK_TREE.md; tools/check_task_tree_closed_capability_markers.py; tools/check_repeated_action_result_contract.py; capability_conformance/repeated_action_result_contract.json; docs/tasks/FUTURE-PARITY-BACKLOG.09.md; docs/tasks/FUTURE-PARITY-BACKLOG.15-24.md leaf .22
@@ -57,3 +57,7 @@ README routing freshness through the same stale validator constant. Its one
 literal changes with the stable marker; direct marker proof must precede another
 canonical run. All8 families/12 markers/15 consumers/4 mutations remain. The
 first two failed gates grant no receipts; no guard is removed or weakened.
+
+September24 scanner parent `.86.3` registers one mode-aware Dart grammar test,
+advancing the current census from76 to77. The stable marker and checker mirror
+move together; all8 families/12 markers/15 consumers/4 mutations remain exact.

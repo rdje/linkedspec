@@ -7,7 +7,7 @@ answers:
   - why does an anonymous regex after I report slot index out of range
   - which repair owns Perl same-line regex slot metadata
 date: 2026-09-24
-status: .86.5.3 verified; .86.3 canonical parent remains pending
+status: .86.5.3 verified; .86.3 canonical receipt governs parent closeout
 tags: [perl, validation, regex-slots, metadata, source, lifecycle]
 evidence: "At fb955602e and clean4ca4f745e, the five-case public checkpoint retains the separate-line control but loses three same-line named declarations and one anonymous declaration. The final metadata consumer completes111 baseline groups and fails only added group4. Candidate focused11files240 and six exact Markdown examples103 pass; slot observation uses the depth-aware structural scan, and permanent/bootstrap declarations accept adjacent members. Bare lifecycle payloads remain shielded in the permanent grammar."
 reverify: "bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/inter_match_gap_capture_perl_contract.t t/generated_source_contract.t t/standalone_lifecycle_block_self_hosted_contract.t; bash tools/run_primary_cli_matrix.sh --manifest docs/checkpoints/SESSION-STARTUP-READING.86.5.3-cli.json"
@@ -102,3 +102,9 @@ Dart needed the corresponding exact shipped-pattern bridge update; see
 native, reconstructed and generated-plan execution. Focused20 and independent
 package502/storage25owners47packages/CLI66x2/corpus105 pass; known complete-gate
 formatter/SDK blockers remain separately owned and unsuppressed.
+
+Canonical parent `.86.3` reconciles the committed scoped proofs and unchanged
+executable book fences. A fresh56-case Rust public replay passes; all runtime
+sources remain unchanged from their verified child commits. The exact staged
+canonical receipt is required before parent landing. Independent repair owners
+and the known optional Dart component-gate failures remain open.

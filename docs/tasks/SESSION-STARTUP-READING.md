@@ -4547,13 +4547,13 @@ remain. Reading completion and runtime signoff remain distinct.
   Verification: The 29-file SEMULITH snapshot matches its retained manifest SHA-256 a77e92fedc744643db03edea346d3619c60c1ac3cb20dc97ab444f7cd82ed3af. Fresh native Rust replay confirms four matching controls and four silently corrupted LF cases, all exits 0 and empty stderr; full results/binary/grammar hashes are in .linkedspec-data/scratch/report-recovery/ls001-current.json. The native consumer/runtime/grammar sources are unchanged since integration 87b35665e. Canonical retrieval is docs/knowledge/archogen-rust-lispish-integration.md; no report is repaired by this routing slice.
   Commit: `SESSION-STARTUP-READING.85 - recover SEMULITH reports and repair ownership`
 - ID: `SESSION-STARTUP-READING.86`
-  Status: `active`
+  Status: `done`
   Goal: Reconcile and repair Rust symbol-call statement boundaries and the measured Perl scanner disagreements without misclassifying regex literals.
   Children: `SESSION-STARTUP-READING.86.1`, `SESSION-STARTUP-READING.86.2`, `SESSION-STARTUP-READING.86.3`, `SESSION-STARTUP-READING.86.4`, `SESSION-STARTUP-READING.86.5`
   Dependencies: Clean .49 at 4f79298f9; ADR0123 targeted reading applies.
   Acceptance: Preserve following statements and exact callees, source and values through supported carriers. Keep Rust's accepted multiline/escaped/quoted regex literals. Investigate the public Perl EOF and regex controls without inferring they share the Rust cause. Canonical parent closeout follows both bounded repairs.
-  Verification: The pre-repair forty-case public comparison and CodeBlock ASTs are recorded in .linkedspec-data/scratch/symbol-boundary86/. All 12 Perl symbol callees accept LF; baseline Rust rejected 11 and silently turned subtraction into an empty-name call returning null. The original slash failure plus seven currently accepted Rust regex controls require separate disambiguation work. Rust .86.1/.86.2 and bounded Perl .86.4/.86.5 are verified; exact canonical parent .86.3 remains open.
-  Commit: Parent remains open until .86.3.
+  Verification: The pre-repair forty-case public comparison and CodeBlock ASTs are recorded in .linkedspec-data/scratch/symbol-boundary86/. All 12 Perl symbol callees accept LF; baseline Rust rejected 11 and silently turned subtraction into an empty-name call returning null. The original slash failure plus seven currently accepted Rust regex controls require separate disambiguation work. Rust .86.1/.86.2 and bounded Perl .86.4/.86.5 are verified; canonical parent .86.3 binds final acceptance through the required staged receipt.
+  Commit: Closed by `SESSION-STARTUP-READING.86.3 - close verified scanner repairs in lockstep`; independent defect owners remain open.
 - ID: `SESSION-STARTUP-READING.86.1`
   Status: `done`
   Goal: Preserve line-break boundaries and exact callee identity for the eleven non-slash Rust symbol calls.
@@ -4588,15 +4588,21 @@ remain. Reading completion and runtime signoff remain distinct.
   - [x] **NO REGRESSION** — Quote/escape/nesting/multiline/negative and non-slash controls retain their contracts.
   - [x] **LOCKSTEP** — Public examples, Knowledge and live task/roadmap pointers match verified behavior and any separately owned scanner finding.
 - ID: `SESSION-STARTUP-READING.86.3`
-  Status: `pending`
+  Status: `done`
   Goal: Close symbol-call repairs with synchronized public guidance and exact canonical acceptance.
   Dependencies: Verified .86.1/.86.2/.86.4/.86.5; no remaining required repair may be hidden by parent closure.
-  Planned tier: canonical.
-  Planned focused proof: Exact core/runtime/carrier/native and public examples, all backend scope qualifications, task/Knowledge/history/memory and normal doctrines.
-  Planned canonical boundary: Parent closeout on the exact staged candidate; resume .50 after a clean commit.
+  Verification tier: `canonical`
+  Focused checks: Exact core/runtime/carrier/native and public examples, cursor inventory60 mutations, stable markers4 mutations, repeated-action54 mutations, all backend scope qualifications, task/Knowledge/history/memory and normal doctrines.
+  Canonical trigger: Parent closeout on the exact staged candidate; resume .50 after a clean commit.
+  Gate reconciliation: The first canonical run passes all nine doctrines then fails the cursor contract migration inventory: dart/test/same_line_regex_slot_grammar_test.dart is an unowned matching consumer. The first canonical attempt stopped at an unowned mode-aware Dart grammar test. Register that exact consumer under the existing Dart group and advance only the current census from76 to77, including contract/checker/stable-marker/book mirrors. Independent JSON comparison preserves every non-census semantic field, fixture, rollout and forbidden claim. Focused cursor proof passes36 families/18 edges/8 parent-child/77 files/60 mutations; stable markers pass8 families/12 markers/15 consumers/4 mutations, and repeated-action passes54 mutations. Earlier dated counts remain unchanged; the failed gate has no receipt.
   Acceptance: Reconcile every measured failure and compatibility control with its verified repair or explicit continuing owner; retain unresolved independent defects and historical evidence without a broad parity claim.
-  Verification: `pending`
-  Commit: `pending`
+  Verification: Fresh public Rust replay passes56 cases:53 exact integer results and3 malformed rejections, including both published symbol/division examples. Rust production and carrier tests are byte-identical to19ba2e0d5, retaining254 core/404 selected runtime/15 emitted-mutation proof. Perl/spec/Dart sources match verified52408086a, retaining focused240/book103/Phase0 1033,120 exact checkpoint records, composed grammar72 and Dart20/package502/storage25owners47packages/CLI66x2/corpus105. All Perl/Rust book fences remain exact; only reciprocal guide links change and the book renders. All .86 implementation children are done or explicitly superseded. Independent .27/.34/.54.1/.63/.87 and Dart .2.24/.2.25 remain owned; no full optional Dart gate or global defect-free claim. Landing requires successful tools/run_ci_local.sh on the exact staged candidate; its receipt and commit body record the final canonical result.
+  Commit: `SESSION-STARTUP-READING.86.3 - close verified scanner repairs in lockstep`
+
+  - [x] **RECOMPOSITION** — Current public controls and unchanged child sources preserve scoped evidence.
+  - [x] **OWNERSHIP** — Every measured independent failure retains its existing repair owner.
+  - [x] **LOCKSTEP** — Executed book fences, backend qualifications and current task/roadmap/Knowledge pointers agree.
+  - [x] **CANONICAL BOUNDARY** — Normal commit hook must validate the successful exact staged receipt before this closeout lands.
 
 - ID: `SESSION-STARTUP-READING.86.4`
   Status: `done`
@@ -4996,10 +5002,10 @@ audit range, not the default repair frontier.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.86.3` | `pending` | Run exact staged canonical parent closeout after verified .86.5.3; retain all independent defect owners. |
+| 1 | `SESSION-STARTUP-READING.50` | `pending` | Repair adjacent colon separators after dynamic bare Rust hash keys; retain independent scanner/helper owners. |
 
 The audit withdraws the unsupported precedence question. Helper validation `.86.4.3` and
-statement splitting `.86.4.6` plus quoted-subject validation `.86.4.7` are verified. Public recomposition verifies grouped repair `.86.4.8.2` and fresh generated Trace bootstrap `.86.4.4.2.1`; `.86.4.4.2.2` closes the measured helper scope. Line-ending `.86.5.1`, same-line `.86.5.2` and regex-slot metadata `.86.5.3` are verified; canonical `.86.3` is next.
+statement splitting `.86.4.6` plus quoted-subject validation `.86.4.7` are verified. Public recomposition verifies grouped repair `.86.4.8.2` and fresh generated Trace bootstrap `.86.4.4.2.1`; `.86.4.4.2.2` closes the measured helper scope. Line-ending `.86.5.1`, same-line `.86.5.2` and regex-slot metadata `.86.5.3` are verified; canonical `.86.3` closes the bounded parent; dynamic hash-key `.50` is next.
 Independent helper gaps are owned by `.87.1/.87.2`; no regex-type feature is admitted.
 
 ## Reading LedgerAll line ranges below refer to the **reading baseline**, not later shifted working-file line numbers. Files
@@ -7495,6 +7501,7 @@ All 53 owned scopes are read: HLink delimiter/raw text, Liberty scalar/complex a
 - `.80.1-.4` own correct dependency build reuse; `.81.1/.81.2` own newer-OS startup diagnosis and conditional repair.
   Both retain startup .3/.4/.5 prerequisites; intake .80.0 authorizes no source repair or OS mitigation.
 ## Verification Log
+- 2026-09-24 .86.3: Fresh public Rust replay passes56 cases:53 exact integer results and3 malformed rejections, including both published symbol/division examples. Rust production and carrier tests are byte-identical to19ba2e0d5, retaining254 core/404 selected runtime/15 emitted-mutation proof. Perl/spec/Dart sources match verified52408086a, retaining focused240/book103/Phase0 1033,120 exact checkpoint records, composed grammar72 and Dart20/package502/storage25owners47packages/CLI66x2/corpus105. All Perl/Rust book fences remain exact; only reciprocal guide links change and the book renders. All .86 implementation children are done or explicitly superseded. Independent .27/.34/.54.1/.63/.87 and Dart .2.24/.2.25 remain owned; no full optional Dart gate or global defect-free claim. Landing requires successful tools/run_ci_local.sh on the exact staged candidate; its receipt and commit body record the final canonical result. Logs: .linkedspec-data/scratch/scanner-parent86-3/.
 - 2026-09-24 .86.5.3: Focused checks pass 240 tests across 11 files; six exact book sources pass 103 assertions. Clean4ca4f745e finishes 111 metadata groups and fails only new group4. Fourteen LF/CRLF layouts preserve names/order, selectors, source, live/generated values and permanent grammar nodes; bare payloads remain exact. Typed/Unicode/comment/code/unsupported-tail controls and gap/slot/bare neutral checks pass; four grammar mirrors remain exact. Six slot-focused CLI grammar cases pass on Perl, Rust, Dart, Julia, PUC Lua and LuaJIT in both environments (72 case legs). The unchanged final-E projection defect has a permanent .63 regression and public qualification. Dart exact shipped-pattern recognition now preserves cursor/physical-line semantics, captures, suffixes and three carriers. Focused Dart20 and independent remaining stages pass502 tests/storage25owners47packages/CLI66x2/corpus105. Complete Dart gate attempts remain failed at existing .2.24/.2.25 formatter/SDK blockers; six unrelated formatter edits are restored exactly, without suppression. The72 grammar legs compose retained Perl/Rust passes and fresh Dart/Julia/PUC/LuaJIT passes; neither stopped full-driver attempt is reported green. All 120 final checkpoint records match the preceding candidate after the last bare-block shield; the first five book sources are unchanged. Full Phase0 passes 1033/1033 at frozen diff a80c914626100ac1fbe7c7448a42547574d7adfbc7ec0de8da4aadef88394a32. Book rendering and syntax pass. .86.5 closes its bounded implementation; .86.3 canonical remains pending. Files=1, Tests=1033, 2099 wallclock secs ( 0.41 usr  0.08 sys + 1043.99 cusr 137.50 csys = 1181.98 CPU) Logs: .linkedspec-data/scratch/regex-slots86-5-3/.
 - 2026-09-24 .86.5.2.2: Recognize the balanced slash-call end before an outer brace and following members, retaining full-source regex-first trial selection. Focused9 files/207, exact book84 and rendering pass. Clean fb955602e finishes14 groups and fails only new group14. Exactly8 bare-slash rows in the30-case intake now match named controls; other22 are exact. Original12/helper13+syntax/grouped22/numeric12/multiline5 stay exact. Context15 changes only intended next_member/quoted-slash public outcomes; private fragment scans do not select the full-source interpretation. Slot5 stays exact and required .86.5.3-owned. Full Phase0 passes1033/1033 at frozen diff86881406bf815024ee8c7cf00482ce547ebae315a6165fd350cfe9d258b05a92. No canonical or push claim. Files=1, Tests=1033, 1394 wallclock secs ( 0.42 usr  0.09 sys + 1081.47 cusr 110.13 csys = 1192.11 CPU) Logs: .linkedspec-data/scratch/slash-members86-5-2/.
 - 2026-09-24 .86.5.2.1: Public/Get and emitted-source diagnosis proves omitted E: old I/regex/E returns7 for x and y despite E{return(42)}; generated source contains only I. Corrected explicit edge returns8 for x and undef/no-error for y. Focused5 files/31 pass; five exact book sources/84 pass. Isolated old-fixture mutation finishes7 groups and fails only book group7. First four sources are unchanged; production matches917b4a42a. Book render and permanent checkpoint pass. .27 retains lifecycle repair; .86.5.2.2 is next; no new Phase0/canonical claim. Logs: .linkedspec-data/scratch/slash-members86-5-2/.
@@ -7680,6 +7687,8 @@ CLI66x2 and Phase0 1032/1032; 1163 seconds is Phase0 only, with 25 optional gate
 
 ## Commit Log
 
+- 2026-09-24 .86.3: `SESSION-STARTUP-READING.86.3 - close verified scanner repairs in lockstep`; activation52408086a; next .50.
+
 - 2026-09-24 .86.5.3: `SESSION-STARTUP-READING.86.5.3 - preserve same-line regex slot identity`; activation4ca4f745e; canonical .86.3 follows.
 
 - 2026-09-24 .86.5.2.2: `SESSION-STARTUP-READING.86.5.2.2 - validate same-line slash call members`; activationfb955602e; required .86.5.3 follows.
@@ -7723,6 +7732,8 @@ CLI66x2 and Phase0 1032/1032; 1163 seconds is Phase0 only, with 25 optional gate
 Each canonical task node owns its exact `Commit` subject and retained completion note. Query landed history with `git log --all --format="%h %s" --fixed-strings --grep="SESSION-STARTUP-READING."`; this replaces the proven duplicate 102-row table.
 
 ## Changelog
+
+- 2026-09-24 .86.3: Recompose verified symbol/scanner repairs and unchanged executable book sources; require exact canonical receipt before parent landing, then resume .50.
 
 - 2026-09-24 .86.5.3: Repair same-line slot identity, shield bare code in the permanent grammar and add sixth executable book example. Compact60 blank-only mutable-ledger separators, preserving every prior nonblank line and its order.
 

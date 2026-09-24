@@ -1,10 +1,10 @@
 # MEMORY
 
-- activation_commit: `4ca4f745e80a5dfccbfdca322a4b95193954f0d7` — clean base for same-line regex-slot repair.
-- latest_completed_leaf: `SESSION-STARTUP-READING.86.5.3 - preserve same-line regex slot identity`.
-- active_work_unit: `SESSION-STARTUP-READING.86.5.3` — verified; .86.5 bounded implementation complete.
-- next_action: Activate .86.3 and run exact staged canonical parent closeout; preserve all independent owners, then resume .50 after its clean commit.
-- in_flight_uncommitted: none — focused240/book103/Phase0 1033; composed grammar72; Dart20 and independent502/storage/CLI132/corpus105 pass. Complete Dart gate retains known .2.24/.2.25 failures. Logs: .linkedspec-data/scratch/regex-slots86-5-3/.
+- activation_commit: `52408086a6da61ceb60250cf40734ae001f6010c` — clean base for canonical scanner parent closeout.
+- latest_completed_leaf: `SESSION-STARTUP-READING.86.3 - close verified scanner repairs in lockstep`.
+- active_work_unit: `SESSION-STARTUP-READING.86.3` — bounded scanner parent verified; exact canonical receipt governs landing.
+- next_action: Activate .50 from clean HEAD and repair adjacent colon separators after dynamic bare Rust hash keys using its public/AST controls; preserve all independent owners.
+- in_flight_uncommitted: none at landing — parent acceptance requires its exact successful canonical receipt; Rust56 and exact book/source continuity pass; cursor77/60, markers4 and repeated-action54 pass after the first gate exposed missing test registration. Logs: .linkedspec-data/scratch/scanner-parent86-3/.
 - blockers: LS-004 remains upstream-owned; director relays docs/upstream/rgx/bootstrap-progress-status.md. No RGX code defect established. Named-argument and format proposals remain parked.
   Wrapper startup .7 remains open; recovery/purge stay prohibited. No interrupted Phase0 run counts as proof.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the

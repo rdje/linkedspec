@@ -29,7 +29,7 @@ answers:
   - "what is the rule local cursor rollout after Dart admission"
   - "how many Julia cursor admission roles exist"
   - "what is the rule local cursor rollout after Julia admission"
-date: 2026-09-20
+date: 2026-09-24
 status: accepted neutral contract; backend, recurring, and public rollout admitted at 8 complete / 0 pending
 tags: [dsl, cursor, parse-mode, bare-edge, contract, migration, descriptor, generated-source, parity]
 evidence: "FUTURE-PARITY-BACKLOG.9.1.2 adds linkedspec-rule-local-cursor-v1 plus an independent offline checker over 36 family spellings, 18 edges, six ownership sets, eight parent/child mechanisms, two structural replacements, removal, descriptors, generated v2, and eight diagnostics. Perl .9.1.3.6 adds a 14-role contract-declared consumer and canonical registration. Rust .9.1.4.7 adds a 15-role consumer and advances only rust_parity. Dart .9.1.5.6 adds a governed 15-role consumer and reaches 67 files, 4 complete / 4 pending, and 39 mutations. Julia .9.1.6.6 adds its governed 15-role consumer, advances only julia_backend, retains 67 files, and reaches 5 complete / 3 pending with 44 effective mutations."
@@ -44,6 +44,19 @@ evidence_update_2026_07_20_cursor_public_no_drift: "Public no-drift .9.1.9 locks
 evidence_update_2026_07_29_readme_routing: "README-STABILITY-POLICY.1 routes volatile capability status out of root README. README.md no longer contains a parse_mode migration token and leaves the cursor public_no_drift inventory, reducing the exact current census from 75 to 74 files while rollout stays 8 complete / 0 pending and all 60 mutations remain. The dated 75-file admission evidence is historical, not rewritten."
 reverify: "bash tools/run_python_project_data.sh tools/check_rule_local_cursor_contract.py; perl tools/check_capability_conformance.pl; perl tools/check_generated_source_contract.pl"
 ---
+
+## Current inventory update — September24
+
+Scanner parent `SESSION-STARTUP-READING.86.3` registers the new
+`dart/test/same_line_regex_slot_grammar_test.dart` consumer under the existing
+Dart backend group. Its explicit matching-mode probe contains the scanner’s
+`parseMode` token; the first canonical attempt correctly reports it unowned.
+The current ledger is 77 migration files / 8 complete + 0 pending / 60 mutations.
+Only the new path, file count and mirrored current census markers change;
+semantic fixtures, rollout, recurring consumers and forbidden claims stay exact.
+The stopped canonical run has no receipt; focused inventory/marker proof and
+fresh exact staged canonical acceptance govern landing. Earlier dated census
+records retain their original counts.
 
 ## Current inventory update — September20
 

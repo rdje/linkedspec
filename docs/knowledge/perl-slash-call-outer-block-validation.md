@@ -9,7 +9,7 @@ answers:
   - do Perl callable bodies support numeric helpers
   - why does parenthesized Perl arithmetic reach a host function
 date: 2026-09-24
-status: .86.5 verified including slot metadata; .86.3 canonical and .87.3/.87.4 remain
+status: .86.5 verified including slot metadata; .86.3 canonical receipt governs closeout; .87.3/.87.4 remain
 tags: [perl, validation, arithmetic, scanner, callable, source]
 evidence: "At fe516141b, the fixed15-case .86.5-contexts checkpoint measures public Get/errors plus fragment slash classification, consumed offset, edge depth and lifecycle close. Bare/spaced EOF division consumes to fragment length, leaving depth1 and no lifecycle closer; semicolon/named/receiver controls return7 with depth0. Same-line following regex/quoted-slash cases also fail validation."
 reverify: "bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/multiline_helper_pattern_validation.t t/generated_source_contract.t; bash tools/project_data_run.sh env PERL5LIB= perl -Iperl docs/checkpoints/SESSION-STARTUP-READING.86.5-contexts.pl; compare values/error owners and structural scans, not diagnostic exit status alone."
@@ -133,3 +133,9 @@ known failures to ready/value8 with correct identities; the separate-line contro
 is exact. The30 same-line replay changes only the three named-slot spellings,
 and context15 changes only `next_named_slot` publicly. The earlier original,
 helper, grouped, numeric and multiline-closer records remain exact.
+
+Canonical parent `.86.3` reconciles the committed scoped proofs and unchanged
+executable book fences. A fresh56-case Rust public replay passes; all runtime
+sources remain unchanged from their verified child commits. The exact staged
+canonical receipt is required before parent landing. Independent repair owners
+and the known optional Dart component-gate failures remain open.

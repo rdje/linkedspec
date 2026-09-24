@@ -9,7 +9,7 @@ answers:
   - why does Rust subtraction before a newline return null
   - why does a Rust subtraction call have an empty callee name
 date: 2026-09-23
-status: Rust .86.1/.86.2 and bounded Perl .86.4/.86.5 verified; canonical .86.3 pending
+status: Rust .86.1/.86.2 and bounded Perl .86.4/.86.5 verified; canonical .86.3 receipt governs closeout
 tags: [rust, parser, arithmetic, regex, newline]
 evidence: "Untouched .49 core RED reports unterminated regex literal for a slash call before another statement. Six native controls show EOF/semicolon and named div plus newline return 7; slash LF, CRLF and spaced slash plus newline reject compilation. Exact sources/traces: .linkedspec-data/scratch/regex-boundary49/slash-before.jsonl. Division was still unrepaired at that .49 boundary; .86.2 proof below supersedes that status."
 reverify: "Run the public CLI probes below through tools/project_data_run.sh. Non-slash proof: bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-core -p linkedspec-runtime --test symbol_statement_boundaries; Emitted proof: bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test map_leaves_mutation_contract. Division proof: bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-core --test division_statement_boundaries."
@@ -193,3 +193,9 @@ The old slash lookahead discarded LF/CR after balanced parentheses, then parsed 
 PASS: 254 core tests and 404 selected runtime tests. Seven division core groups cover 24 call/separator combinations in both parser modes, exact retained regex patterns, late-statement retries, Unicode write spans, nested controls/callable candidates, and 1500-statement valid/invalid chains. Runtime coverage includes 12 division/separator combinations, nine mixed/nested cases, exact Unicode writes and the ambiguous regex through source-AST/compiled serde and generated plans. All 15 mutation tests pass, including independently compiled emitted division execution. Native 56 passes: 53 exact integer values and 3 malformed rejections; both book examples pass. Binary SHA-256: bbf40b8165ce72764668b7a02e16c84ddabfcf4b1097d690f5b99956ab38e05d.
 
 Exact RED, initial initializer failure, corrected GREEN, named/public Perl controls and native replay are retained under .linkedspec-data/scratch/division-boundary86-2/. The quoted regex control is invalid and reports runtime_handler:rule_handler_compile through documented last_error. Multiline and bare outer EOF discrepancies have immediate owners .86.4/.86.5. No dependency implementation/build internals were consulted. Focused component proof does not substitute for parent .86.3 canonical acceptance.
+
+Canonical parent `.86.3` reconciles the committed scoped proofs and unchanged
+executable book fences. A fresh56-case Rust public replay passes; all runtime
+sources remain unchanged from their verified child commits. The exact staged
+canonical receipt is required before parent landing. Independent repair owners
+and the known optional Dart component-gate failures remain open.

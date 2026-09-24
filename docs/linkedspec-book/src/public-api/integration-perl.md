@@ -380,6 +380,9 @@ and its [numeric helper restrictions](../dsl/value-container-flow-helper-referen
 for their current supported forms. The regex-brace and escape limitations
 above remain outside this verified example set.
 
+For Rust’s statement boundaries and regex interpretation rules, see the
+[Rust action examples](integration-rust.md#compile-once-parse-independent-inputs).
+
 ## Handle runtime outcomes explicitly
 
 The parser has two failure channels. Catch exceptions with `eval` and immediately

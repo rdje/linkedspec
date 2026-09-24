@@ -1,8 +1,9 @@
 # ARCHITECTURE STATE
 
-Current cursor inventory, September20: the common integration entry adds one public
-documentation path after the Rust guide. The ledger is now 76 migration files / 8 complete + 0 pending / 60 mutations;
-runtime behavior and earlier dated admission evidence below remain unchanged.
+Current cursor inventory, September24: the same-line Dart grammar test adds one
+matching-mode consumer under the existing Dart backend owner. The ledger is now
+77 migration files / 8 complete + 0 pending / 60 mutations; runtime behavior and
+earlier dated admission evidence below remain unchanged.
 
 ## Nested-write and receiver-mutation capabilities are portable
 

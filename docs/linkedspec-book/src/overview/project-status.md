@@ -918,7 +918,7 @@ the remaining descriptor bytes with inline compilation. It does not claim raw
 loaded and inline descriptors are identical.
 
 Current cursor governance reports all eight rollout rows complete, 60 rejected
-mutations, 30 public documents, 28 current-claim denials and 76 migration files.
+mutations, 30 public documents, 28 current-claim denials and 77 migration files.
 The prior root-neutral proof retains byte-identical inputs. Older count, source
 identity and staged-guidance statements remain owned for correction. Exact source
 scope, proof limits and reproduction: `docs/knowledge/lua-root-cursor-consumer-reading.md`.
@@ -3583,7 +3583,7 @@ entered. Complete Julia is 3,428, shared primary is 65/65 twice, corpus is 105/1
 67/5+3/44 at Julia admission. Lua/LuaJIT public-option removal and composed cursor admission are implemented. The
 cursor consumer passes 119/119 per ABI at its 69/6+2/49 admission boundary. Recurring cursor admission and public
 no-drift now compose Perl, Rust, Dart, Julia, PUC Lua, LuaJIT, selected 5x2x5 primary cases, support ledgers, and
-the current public surface at 76 migration files / 8 complete + 0 pending / 60 rejected mutations, including the Rust
+the current public surface at 77 migration files / 8 complete + 0 pending / 60 rejected mutations, including the Rust
 guide and common integration entry. Run
 `bash tools/check_rule_local_cursor_five_backend.sh` for the exact recurring proof. A separate shared-source root consumer
 executes its exact 15 roles on each ABI: topology RED 3/3x2 becomes 139/139x2, package 177/177x2, primary

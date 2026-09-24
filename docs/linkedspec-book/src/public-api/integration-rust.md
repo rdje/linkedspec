@@ -337,6 +337,9 @@ newline and `next = `. Use `div(14, 2)` or an explicit semicolon after
 pick up the newline repair; serialized or emitted parsers keep their compiled
 interpretation until rebuilt.
 
+For Perl’s verified action forms and current limitations, see
+[regex and division in Perl](integration-perl.md#regex-and-division-in-action-code).
+
 One engine processes every command-line input independently. The direct-value
 method returns `serde_json::Value`; printing it writes JSON. This avoids the
 legacy execution method's accumulator wrapper. The application can inspect that

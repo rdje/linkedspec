@@ -2,17 +2,19 @@
 
 ## Current Activity
 
-Same-line regex-slot repair .86.5.3 and bounded .86.5 implementation are verified with focused240/book103, six-runtime grammar72 and Phase0 1033. Canonical parent .86.3 is next; independent defects retain their owners.
+Bounded symbol-call/scanner parent .86 closes through exact staged canonical acceptance after verified Rust .86.1/.86.2 and Perl .86.4/.86.5. Independent defects and Dart optional-gate blockers remain owned.
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.86.5.3 - preserve same-line regex slot identity` — preserve authored names/order and selectors across lifecycle members; permanent grammar protects bare code, and six exact book sources execute live and in fresh generated processes.
+- `SESSION-STARTUP-READING.86.3 - close verified scanner repairs in lockstep` — fresh Rust56, unchanged runtime/carrier sources and executable book fences, retained scoped child proofs; exact canonical receipt required before landing.
 
 ## Next Action
 
-- Run exact staged canonical .86.3, commit cleanly, then resume .50. Preserve separate lifecycle, brace, comment and helper repairs.
+- Activate .50 and repair adjacent Rust hash-key colon separators; preserve .27/.34/.54.1/.63/.87 and Dart .2.24/.2.25.
 
 ## Recent Completions
+
+- `2026-09-24` — `SESSION-STARTUP-READING.86.3` recomposes the bounded parent with Rust56 and exact book/source continuity; canonical receipt governs landing.
 
 - `2026-09-24` — `SESSION-STARTUP-READING.86.5.3` verifies same-line slot identity with focused240/book103, six-runtime grammar72 and Phase0 1033.
 
@@ -43,8 +45,6 @@ Same-line regex-slot repair .86.5.3 and bounded .86.5 implementation are verifie
 - `2026-09-23` — `CONSUMER-REPORT-DELIVERY.5` corrects RGX fault attribution while retaining the original ARCHOGEN report and public evidence.
 
 - `2026-09-23` — `CONSUMER-REPORT-DELIVERY.4` records verified publication and the director-owned local RGX handoff.
-
-- `2026-09-23` — `CONSUMER-REPORT-DELIVERY.3` binds the consumer handoff to exact canonical landing and clean remote publication.
 
 ## History
 

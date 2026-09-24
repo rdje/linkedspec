@@ -12,6 +12,12 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-09-24 — SESSION-STARTUP-READING.86.3 - close verified scanner repairs in lockstep
+
+Parent recomposition compares current artifacts with their final owning commits rather than inferring success from task status. The56-case Rust public replay remains exact on binary43612dca64317b9212133f0d9e9e75d72c7ff339d15ccb066c36dd44a44051a0; core/runtime/carrier source bytes match19ba2e0d5. Perl/spec/Dart and all executable guide fences match52408086a. Reciprocal action-guide links connect each backend’s actual interpretation rules and limitations. Retain the original rejected candidates, invalid control classification and all independent repair owners. The exact staged canonical receipt governs acceptance; its result/log identity belongs in the commit body without changing the receipt-bound candidate afterward.
+
+The first canonical attempt stopped at an unowned mode-aware Dart grammar test. Register that exact consumer under the existing Dart group and advance only the current census from76 to77, including contract/checker/stable-marker/book mirrors. Independent JSON comparison preserves every non-census semantic field, fixture, rollout and forbidden claim. Focused cursor proof passes36 families/18 edges/8 parent-child/77 files/60 mutations; stable markers pass8 families/12 markers/15 consumers/4 mutations, and repeated-action passes54 mutations. Earlier dated counts remain unchanged; the failed gate has no receipt.
+
 ## 2026-09-24 — SESSION-STARTUP-READING.86.5.3 - preserve same-line regex slot identity
 
 Whole-line declaration matching was insufficient for the existing paragraph contract. Reuse structural depth to observe slot tokens outside code, share member-token recognition with remainder validation, and retain the old standalone invalid-name diagnostic route. Comments disable only slot observation; this does not repair the independent comment-depth scanner. A broad name matcher could consume I{fake=/x/}; excluding structural delimiters and shielding bare lifecycle blocks in the permanent grammar prevents that false identity.

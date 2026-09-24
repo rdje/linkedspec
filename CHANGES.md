@@ -12,6 +12,12 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-09-24 — SESSION-STARTUP-READING.86.3 - close verified scanner repairs in lockstep
+
+Fresh public Rust replay passes56 cases:53 exact integer results and3 malformed rejections, including both published symbol/division examples. Rust production and carrier tests are byte-identical to19ba2e0d5, retaining254 core/404 selected runtime/15 emitted-mutation proof. Perl/spec/Dart sources match verified52408086a, retaining focused240/book103/Phase0 1033,120 exact checkpoint records, composed grammar72 and Dart20/package502/storage25owners47packages/CLI66x2/corpus105. All Perl/Rust book fences remain exact; only reciprocal guide links change and the book renders. All .86 implementation children are done or explicitly superseded. Independent .27/.34/.54.1/.63/.87 and Dart .2.24/.2.25 remain owned; no full optional Dart gate or global defect-free claim. Landing requires successful tools/run_ci_local.sh on the exact staged candidate; its receipt and commit body record the final canonical result.
+
+The first canonical attempt stopped at an unowned mode-aware Dart grammar test. Register that exact consumer under the existing Dart group and advance only the current census from76 to77, including contract/checker/stable-marker/book mirrors. Independent JSON comparison preserves every non-census semantic field, fixture, rollout and forbidden claim. Focused cursor proof passes36 families/18 edges/8 parent-child/77 files/60 mutations; stable markers pass8 families/12 markers/15 consumers/4 mutations, and repeated-action passes54 mutations. Earlier dated counts remain unchanged; the failed gate has no receipt.
+
 ## 2026-09-24 — SESSION-STARTUP-READING.86.5.3 - preserve same-line regex slot identity
 
 Preserve Perl named and anonymous regex members beside lifecycle blocks, including header rest and compact forms. The existing structural scan now observes only rule-level members; exact Unicode names, order, selector provenance and typed errors remain intact. Align the permanent grammar and BootstrapSpec bridge, shield complete bare lifecycle payloads, and update all four exact grammar mirrors. The sixth complete mdBook example proves second-slot selection with a mismatch control.
