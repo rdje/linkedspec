@@ -1,0 +1,194 @@
+{
+  "format": 1,
+  "owner": "SESSION-STARTUP-READING.89",
+  "intake_owner": "SESSION-STARTUP-READING.88",
+  "input": "x",
+  "authority": "ADR0036 and capability_conformance/write_vivification_contract.json policy.write_only/read_exclusion_cases",
+  "scope": "Five confirmed Perl mutations through reads, one present-container control; all six Rust results preserve expected binding state. Diagnostic intake, not repair acceptance.",
+  "cases": [
+    {
+      "name": "unbound_root",
+      "action": "selected = items[0]; out = {\"read\":selected,\"after\":items}; return(out)",
+      "source": "Top::\n -> Done { selected = items[0]; out = {\"read\":selected,\"after\":items}; return(out) }\nDone:\n /x/\n",
+      "expected": {
+        "read": null,
+        "after": null
+      },
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "$selected = $items->[0]; $out = {\"read\" => $selected, \"after\" => $items}; return $out",
+        "lowering_error": "",
+        "name": "unbound_root",
+        "value": {
+          "after": [],
+          "read": null
+        }
+      },
+      "perl_stderr": "",
+      "perl_extra_stdout": "",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\n{\"after\":null,\"read\":null}\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "a507bc2cb9af4a031d7e9e538489f189b04249fb5c89fdc74acccd29237d155f"
+    },
+    {
+      "name": "null_root",
+      "action": "items = undef; selected = items[0]; out = {\"read\":selected,\"after\":items}; return(out)",
+      "source": "Top::\n -> Done { items = undef; selected = items[0]; out = {\"read\":selected,\"after\":items}; return(out) }\nDone:\n /x/\n",
+      "expected": {
+        "read": null,
+        "after": null
+      },
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "$items = undef; $selected = $items->[0]; $out = {\"read\" => $selected, \"after\" => $items}; return $out",
+        "lowering_error": "",
+        "name": "null_root",
+        "value": {
+          "after": [],
+          "read": null
+        }
+      },
+      "perl_stderr": "",
+      "perl_extra_stdout": "",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\n{\"after\":null,\"read\":null}\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "a507bc2cb9af4a031d7e9e538489f189b04249fb5c89fdc74acccd29237d155f"
+    },
+    {
+      "name": "empty_hash",
+      "action": "tree = {}; selected = tree[\"missing\"][0]; out = {\"read\":selected,\"after\":tree}; return(out)",
+      "source": "Top::\n -> Done { tree = {}; selected = tree[\"missing\"][0]; out = {\"read\":selected,\"after\":tree}; return(out) }\nDone:\n /x/\n",
+      "expected": {
+        "read": null,
+        "after": {}
+      },
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "$tree = {}; $selected = $tree->{\"missing\"}->[0]; $out = {\"read\" => $selected, \"after\" => $tree}; return $out",
+        "lowering_error": "",
+        "name": "empty_hash",
+        "value": {
+          "after": {
+            "missing": []
+          },
+          "read": null
+        }
+      },
+      "perl_stderr": "",
+      "perl_extra_stdout": "",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\n{\"after\":{},\"read\":null}\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "a507bc2cb9af4a031d7e9e538489f189b04249fb5c89fdc74acccd29237d155f"
+    },
+    {
+      "name": "empty_array",
+      "action": "tree = []; selected = tree[0][0]; out = {\"read\":selected,\"after\":tree}; return(out)",
+      "source": "Top::\n -> Done { tree = []; selected = tree[0][0]; out = {\"read\":selected,\"after\":tree}; return(out) }\nDone:\n /x/\n",
+      "expected": {
+        "read": null,
+        "after": []
+      },
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "$tree = []; $selected = $tree->[0]->[0]; $out = {\"read\" => $selected, \"after\" => $tree}; return $out",
+        "lowering_error": "",
+        "name": "empty_array",
+        "value": {
+          "after": [
+            []
+          ],
+          "read": null
+        }
+      },
+      "perl_stderr": "",
+      "perl_extra_stdout": "",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\n{\"after\":[],\"read\":null}\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "a507bc2cb9af4a031d7e9e538489f189b04249fb5c89fdc74acccd29237d155f"
+    },
+    {
+      "name": "null_child",
+      "action": "tree = {\"missing\":undef}; selected = tree[\"missing\"][0]; out = {\"read\":selected,\"after\":tree}; return(out)",
+      "source": "Top::\n -> Done { tree = {\"missing\":undef}; selected = tree[\"missing\"][0]; out = {\"read\":selected,\"after\":tree}; return(out) }\nDone:\n /x/\n",
+      "expected": {
+        "read": null,
+        "after": {
+          "missing": null
+        }
+      },
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "$tree = {\"missing\" => undef}; $selected = $tree->{\"missing\"}->[0]; $out = {\"read\" => $selected, \"after\" => $tree}; return $out",
+        "lowering_error": "",
+        "name": "null_child",
+        "value": {
+          "after": {
+            "missing": []
+          },
+          "read": null
+        }
+      },
+      "perl_stderr": "",
+      "perl_extra_stdout": "",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\n{\"after\":{\"missing\":null},\"read\":null}\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "a507bc2cb9af4a031d7e9e538489f189b04249fb5c89fdc74acccd29237d155f"
+    },
+    {
+      "name": "present_control",
+      "action": "tree = {\"list\":[\"a\"]}; selected = tree[\"list\"][0]; out = {\"read\":selected,\"after\":tree}; return(out)",
+      "source": "Top::\n -> Done { tree = {\"list\":[\"a\"]}; selected = tree[\"list\"][0]; out = {\"read\":selected,\"after\":tree}; return(out) }\nDone:\n /x/\n",
+      "expected": {
+        "read": "a",
+        "after": {
+          "list": [
+            "a"
+          ]
+        }
+      },
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "$tree = {\"list\" => [\"a\"]}; $selected = $tree->{\"list\"}->[0]; $out = {\"read\" => $selected, \"after\" => $tree}; return $out",
+        "lowering_error": "",
+        "name": "present_control",
+        "value": {
+          "after": {
+            "list": [
+              "a"
+            ]
+          },
+          "read": "a"
+        }
+      },
+      "perl_stderr": "",
+      "perl_extra_stdout": "",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\n{\"after\":{\"list\":[\"a\"]},\"read\":\"a\"}\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "a507bc2cb9af4a031d7e9e538489f189b04249fb5c89fdc74acccd29237d155f"
+    }
+  ]
+}

@@ -44,7 +44,7 @@ are in `docs/checkpoints/SESSION-STARTUP-READING.50-verification.json`.
 Correct expectations cover dynamic,
 quoted, nested, computed and Unicode-valued keys rather than accepting the former
 null results. Single indexed reads exposed an independent typed-binding defect,
-owned for immediate repair by `.88`; see [[rust-single-index-read-bypasses-typed-binding]].
+repaired separately under `.88`; see [[rust-single-index-read-bypasses-typed-binding]].
 Unicode binding identifiers are not admitted by this repair.
 
 ```bash

@@ -1,10 +1,10 @@
 # MEMORY
 
-- activation_commit: `aa057b107c37fb947950d6c57db1892338fe7e94` — clean activation base of completed compact Rust hash-key repair .50.
-- latest_completed_leaf: `SESSION-STARTUP-READING.50 - preserve compact hash-key separators`.
-- active_work_unit: `SESSION-STARTUP-READING.88` — pending clean activation for the confirmed Rust single-index typed-binding read defect.
-- next_action: Activate .88 from the clean .50 commit, reconcile the admitted indexed-read contract and repair it with carrier/book proof; then containment .16 restores startup-task headroom before .51.
-- in_flight_uncommitted: none; all .50 verification jobs are consumed. Core258, selected runtime226, keyword1, final compact/emitted2, Perl book26 and exact public13 pass; .50 checkpoints preserve sources, binaries and verification scope.
+- activation_commit: `4631568ab596943ffb2a1a685f7e84b0cbe0afc2` — clean activation base of completed indexed-read repair .88.
+- latest_completed_leaf: `SESSION-STARTUP-READING.88 - read indexed values from current typed bindings`.
+- active_work_unit: `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.16` — pending clean activation to restore startup-task headroom before required Perl read-purity .89, then .51.
+- next_action: Activate containment .16 from the clean .88 commit; preserve all task IDs/evidence and restore bounded headroom without raising limits, then repair the confirmed Perl read-purity defect .89 before .51 cat arity.
+- in_flight_uncommitted: none; all .88 verification jobs are consumed. Runtime397, emitted1, Perl book26 and exact public17 pass; checkpoints preserve the RED/GREEN sources, identities and focused scope.
 - blockers: LS-004 remains upstream-owned; director will notify ARCHOGEN only after its fix is verified (local report: docs/upstream/rgx/bootstrap-progress-status.md). No RGX code defect established. Named-argument and format proposals remain parked.
   Wrapper startup .7 remains open; recovery/purge stay prohibited. No interrupted Phase0 run counts as proof.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the

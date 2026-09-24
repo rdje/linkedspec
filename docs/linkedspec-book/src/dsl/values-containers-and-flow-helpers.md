@@ -93,7 +93,9 @@ the next selector. Existing null or another wrong kind is never coerced. Arrays 
 may be replaced and index `length` may append, while a larger gap fails. Segments evaluate once left-to-right,
 then the RHS once; isolated structural building begins afterward. Success commits and returns a detached updated
 root. Invalid selectors, kind conflicts, and gaps throw typed nested-write diagnostics without a partial path
-commit. Reads remain pure and never create containers.
+commit. The read contract requires pure reads without container creation; the
+[current Perl read limitation](value-container-flow-helper-reference.md#read-purity)
+violates that requirement and remains under repair.
 
 This behavior is implemented on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT. Lua carries the same typed path
 through native, reconstructed, generated-plan, emitted-module, and primary-CLI routes. `.19.7` admits its exact

@@ -2,17 +2,19 @@
 
 ## Current Activity
 
-Compact Rust hash-key separators are repaired without changing evaluated-key semantics. The book shares its source with Perl/Rust tests. Independent indexed-read .88 is next; containment .16 restores task headroom before .51.
+Rust indexed reads now follow the current typed binding; the book includes the shared tested source. Containment .16 restores task headroom; confirmed Perl read-purity .89 follows before .51.
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.50 - preserve compact hash-key separators` — core258, selected runtime226, keyword1, final compact/emitted2, Perl book26 and exact public13 pass. Correct indexed-read expectations remain owned by .88.
+- `SESSION-STARTUP-READING.88 - read indexed values from current typed bindings` — runtime397, independently emitted book1, Perl book26 and exact public17 pass; all12 public Rust failures are repaired.
 
 ## Next Action
 
-- Activate .88 from the clean .50 commit; preserve independent helper, upstream and optional Dart owners. The director will notify ARCHOGEN only after LS-004 is verified fixed.
+- Activate containment .16 from the clean .88 commit, then repair confirmed Perl read-purity .89 before .51. Preserve independent helper, upstream and optional Dart owners. The director will notify ARCHOGEN only after LS-004 is verified fixed.
 
 ## Recent Completions
+
+- `2026-09-24` — `SESSION-STARTUP-READING.88` verifies typed indexed reads with runtime397/public17 and one executable Perl/Rust book source.
 
 - `2026-09-24` — `SESSION-STARTUP-READING.50` verifies compact hash keys with core258/runtime226/public13 and one executable Perl/Rust book source.
 
@@ -43,8 +45,6 @@ Compact Rust hash-key separators are repaired without changing evaluated-key sem
 - `2026-09-23` — `SESSION-STARTUP-READING.86.4.3` repairs Perl multiline helper validation and physical diagnostic offsets; focused173 and Phase0 1033/1033 pass.
 
 - `2026-09-23` — `CONSUMER-REPORT-DELIVERY.6` records the ten-report fix ledger and the distinct closed June bootstrap build issue.
-
-- `2026-09-23` — `CONSUMER-REPORT-DELIVERY.5` corrects RGX fault attribution while retaining the original ARCHOGEN report and public evidence.
 
 ## History
 

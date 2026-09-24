@@ -361,6 +361,44 @@ mod book_example {{
 }
 
 #[test]
+fn emitted_indexed_read_book_example_preserves_current_bindings() {
+    let source = include_str!("../../../examples/indexed-value-reads.spec");
+    let parsed = parse_spec_with_user_functions(source).expect("parse indexed-read book example");
+    validate(&parsed).expect("validate indexed-read book example");
+    let compiled = compile(&parsed).expect("compile indexed-read book example");
+    let expected = json!({"first":"first", "selected":"second", "snapshot":["saved"], "current":"rebound", "missing":null, "rebound":7});
+    let engine = Engine::new(compiled.clone());
+    for (input, value) in [("x", expected.clone()), ("y", Value::Null), ("x", expected)] {
+        assert_eq!(
+            engine
+                .execute_value(input, &ExecutionOptions::new())
+                .unwrap(),
+            value
+        );
+    }
+    let generated = emit_rust_source_v2(&compiled, "examples/indexed-value-reads.spec")
+        .expect("emit indexed-read book example");
+    run_generated_crate(
+        "linkedspec_indexed_value_reads",
+        format!(
+            r#"
+{generated}
+#[cfg(test)]
+mod book_example {{
+    #[test]
+    fn indexed_reads_match_reject_and_match_again() {{
+        let expected = serde_json::json!({{"first":"first", "selected":"second", "snapshot":["saved"], "current":"rebound", "missing":null, "rebound":7}});
+        assert_eq!(crate::execute("x").unwrap(), expected);
+        assert_eq!(crate::execute("y").unwrap(), serde_json::Value::Null);
+        assert_eq!(crate::execute("x").unwrap(), expected);
+    }}
+}}
+"#
+        ),
+    );
+}
+
+#[test]
 fn generated_source_v2_metadata_and_structured_errors_are_exact() {
     let parsed = parse_spec(SIMPLE_SOURCE_EMITTER_SPEC).expect("parse v2 metadata spec");
     validate(&parsed).expect("validate v2 metadata spec");

@@ -304,7 +304,9 @@ intermediate. Bound null and other wrong kinds are not coerced; arrays replace o
 reject gaps. Segments evaluate once left-to-right, then the RHS once, before isolated structural validation.
 Success commits and yields a detached updated root. Invalid selectors, kind conflicts, and gaps throw typed
 diagnostic objects and commit no partial path; already completed expression effects retain ordinary semantics.
-Reads never create state. `.19.7` admits the exact portable capability row, `.19.8` completes exact six-runtime
+The contract requires reads never to create state; the
+[current Perl read limitation](../dsl/value-container-flow-helper-reference.md#read-purity)
+is a verified implementation defect. `.19.7` admits the exact portable capability row, `.19.8` completes exact six-runtime
 recurrence, and `.19.9` closes the current public semantics without changing this behavior.
 
 Array end mutations are also statement-level operations on a named working array:

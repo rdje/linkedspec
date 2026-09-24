@@ -5728,8 +5728,7 @@ impl Engine {
             Expr::IndexedVar { name, index } => {
                 let idx_val = self.eval_expr(index, ctx, rule_label)?;
                 let idx: usize = idx_val.as_number().unwrap_or(0.0) as usize;
-                let arr = ctx.get_array(name);
-                Ok(arr.get(idx).cloned().unwrap_or(RuntimeValue::Undef))
+                Ok(Self::array_index_value(&ctx.get_bare_value(name), idx))
             }
             Expr::NestedAccess { base, segments } => {
                 self.eval_access_value(ctx.get_bare_value(base), segments, ctx, rule_label)
@@ -10229,6 +10228,119 @@ mod tests {
     use linkedspec_core::compiler::compile;
     use linkedspec_core::parser::parse_spec;
     use linkedspec_core::validation::validate;
+
+    #[test]
+    fn indexed_var_observes_current_binding_instead_of_stale_private_array() {
+        let engine = Engine::new(compile(&parse_spec("Top:\n").unwrap()).unwrap());
+        let mut ctx = RuntimeContext::new("");
+        let read = Expr::IndexedVar {
+            name: "items".into(),
+            index: Box::new(Expr::NumberLiteral { value: 0.0 }),
+        };
+        ctx.set_array("items", vec![RuntimeValue::Scalar("old".into())]);
+        assert_eq!(
+            engine.eval_expr(&read, &mut ctx, "Top").unwrap().to_json(),
+            serde_json::json!("old")
+        );
+        for (value, expected) in [
+            (
+                RuntimeValue::Array(vec![RuntimeValue::Scalar("new".into())]),
+                serde_json::json!("new"),
+            ),
+            (RuntimeValue::Array(vec![]), Value::Null),
+            (RuntimeValue::Scalar("text".into()), Value::Null),
+            (
+                RuntimeValue::Hash(vec![("0".into(), RuntimeValue::Number(7.0))]),
+                Value::Null,
+            ),
+            (RuntimeValue::Undef, Value::Null),
+        ] {
+            ctx.set_scalar("items", value);
+            assert_eq!(
+                engine.eval_expr(&read, &mut ctx, "Top").unwrap().to_json(),
+                expected
+            );
+        }
+        let mut absent = RuntimeContext::new("");
+        assert_eq!(
+            engine
+                .eval_expr(&read, &mut absent, "Top")
+                .unwrap()
+                .to_json(),
+            Value::Null
+        );
+        assert!(
+            !absent.has_bare_binding("items"),
+            "reads do not create bindings"
+        );
+    }
+
+    #[test]
+    fn indexed_var_preserves_existing_read_index_coercion() {
+        let engine = Engine::new(compile(&parse_spec("Top:\n").unwrap()).unwrap());
+        // These are the existing Rust read rules, not the stricter write selectors.
+        for (index, expected) in [
+            (RuntimeValue::Number(0.0), serde_json::json!("a")),
+            (RuntimeValue::Number(1.0), serde_json::json!("b")),
+            (RuntimeValue::Number(9.0), Value::Null),
+            (RuntimeValue::Number(-1.0), serde_json::json!("a")),
+            (RuntimeValue::Number(1.9), serde_json::json!("b")),
+            (RuntimeValue::Scalar("1".into()), serde_json::json!("b")),
+            (RuntimeValue::Scalar("bad".into()), serde_json::json!("a")),
+            (RuntimeValue::Undef, serde_json::json!("a")),
+        ] {
+            for scalar_storage in [false, true] {
+                let mut ctx = RuntimeContext::new("");
+                let items = vec![
+                    RuntimeValue::Scalar("a".into()),
+                    RuntimeValue::Scalar("b".into()),
+                ];
+                if scalar_storage {
+                    ctx.set_scalar("items", RuntimeValue::Array(items));
+                } else {
+                    ctx.set_array("items", items);
+                }
+                ctx.set_scalar("index", index.clone());
+                let read = Expr::IndexedVar {
+                    name: "items".into(),
+                    index: Box::new(Expr::Variable {
+                        name: "index".into(),
+                    }),
+                };
+                assert_eq!(
+                    engine.eval_expr(&read, &mut ctx, "Top").unwrap().to_json(),
+                    expected,
+                    "{index:?}, scalar storage {scalar_storage}"
+                );
+            }
+        }
+    }
+
+    #[test]
+    fn indexed_var_resolves_binding_after_index_expression_effects() {
+        let engine = Engine::new(compile(&parse_spec("Top:\n").unwrap()).unwrap());
+        let mut ctx = RuntimeContext::new("");
+        ctx.set_array("items", vec![RuntimeValue::Scalar("old".into())]);
+        let read = Expr::IndexedVar {
+            name: "items".into(),
+            index: Box::new(Expr::AssignScalar {
+                name: "items".into(),
+                value: Box::new(Expr::ArrayLiteral {
+                    items: vec![Expr::StringLiteral {
+                        value: "new".into(),
+                    }],
+                }),
+            }),
+        };
+        assert_eq!(
+            engine.eval_expr(&read, &mut ctx, "Top").unwrap().to_json(),
+            serde_json::json!("new")
+        );
+        assert_eq!(
+            ctx.get_bare_value("items").to_json(),
+            serde_json::json!(["new"])
+        );
+    }
 
     const SIMPLE_GRAMMAR: &str = r#"DemoParser::
  /pattern1/ -> Child

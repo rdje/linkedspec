@@ -56,4 +56,4 @@ bare dynamic key or bare zero-argument receiver method: `{key:value}` and
 colon runs retain their earlier role. The executable book example is
 `examples/compact-hash-keys.spec`; the core/runtime `hash_key_separator` tests and
 Perl `t/compact_hash_keys_book.t` own recurrence. The distinct single-index read
-limitation is tracked by [[rust-single-index-read-bypasses-typed-binding]].
+repair and indexed-key proof are tracked by [[rust-single-index-read-bypasses-typed-binding]].

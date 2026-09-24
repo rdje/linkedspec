@@ -374,3 +374,15 @@ The complete sample was consumed and retained at
 `.linkedspec-data/scratch/hash-colon50/core-cursor-launch.sample`, SHA-256
 `c9761c1d0cd95f3cc5ee47228b61b2146d49bc97f2772bd71d5592417f4d9baa`.
 No artifact purge, re-signing, trust change or off-volume scratch was used.
+
+September24 `.88` samples the fixed runtime unit harness PID93276 / Cargo35088 at
+13:40:36.499 +0200, six minutes after launch on macOS27.0 (26A428). All892 sampled
+frames are `_dyld_start`; physical footprint is112KiB, while preceding process
+metadata reports32KiB RSS and zero CPU. Sample:
+`.linkedspec-data/scratch/indexed-read88/runtime-unit-launch.sample`, SHA-256
+`4a5b506b895fc31b5f1647f6dbe3c8496a2744e15e6395ae3c8440568ba12778`.
+This identifies a pre-main wait, not a test-body loop or a host-policy cause.
+The separately rebuilt public CLI has already passed all17 indexed-read controls.
+`.81` retains causal ownership; no artifact purge, signing change, or dependency
+implementation inspection is part of `.88`. The delayed harness subsequently
+passes all182 runtime unit tests in16.89 test seconds.

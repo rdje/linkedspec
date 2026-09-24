@@ -1,0 +1,1183 @@
+{
+  "format": 1,
+  "owner": "SESSION-STARTUP-READING.88",
+  "activation_commit": "4631568ab596943ffb2a1a685f7e84b0cbe0afc2",
+  "input": "x",
+  "scope": "17 public controls; baseline 12 wrong Rust values, five successful controls; all 17 Perl values correct. No grouped-postfix or negative-index parity claim.",
+  "before": [
+    {
+      "name": "direct",
+      "action": "items = [\"a\",\"b\"]; out = items[0]; return(out)",
+      "source": "Top::\n -> Done { items = [\"a\",\"b\"]; out = items[0]; return(out) }\nDone:\n /x/\n",
+      "expected": "a",
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "$items = [\"a\", \"b\"]; $out = $items->[0]; return $out",
+        "lowering_error": "",
+        "name": "direct",
+        "value": "a"
+      },
+      "perl_stderr": "",
+      "perl_extra_stdout": "",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\nnull\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "a2058123372bb4b76fec03165575fa17dbc243f8c80340d4c2529fda01d2a466"
+    },
+    {
+      "name": "compact",
+      "action": "keys = [\"a\"]; out = {keys[0]:7}; return(out)",
+      "source": "Top::\n -> Done { keys = [\"a\"]; out = {keys[0]:7}; return(out) }\nDone:\n /x/\n",
+      "expected": {
+        "a": 7
+      },
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "$keys = [\"a\"]; $out = {$keys->[0] => 7}; return $out",
+        "lowering_error": "",
+        "name": "compact",
+        "value": {
+          "a": 7
+        }
+      },
+      "perl_stderr": "",
+      "perl_extra_stdout": "",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\n{\"\":7}\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "a2058123372bb4b76fec03165575fa17dbc243f8c80340d4c2529fda01d2a466"
+    },
+    {
+      "name": "spaced",
+      "action": "keys = [\"a\"]; out = {keys[0] : 7}; return(out)",
+      "source": "Top::\n -> Done { keys = [\"a\"]; out = {keys[0] : 7}; return(out) }\nDone:\n /x/\n",
+      "expected": {
+        "a": 7
+      },
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "$keys = [\"a\"]; $out = {$keys->[0] => 7}; return $out",
+        "lowering_error": "",
+        "name": "spaced",
+        "value": {
+          "a": 7
+        }
+      },
+      "perl_stderr": "",
+      "perl_extra_stdout": "",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\n{\"\":7}\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "a2058123372bb4b76fec03165575fa17dbc243f8c80340d4c2529fda01d2a466"
+    },
+    {
+      "name": "set",
+      "action": "set(items,[\"a\",\"b\"]); out = items[1]; return(out)",
+      "source": "Top::\n -> Done { set(items,[\"a\",\"b\"]); out = items[1]; return(out) }\nDone:\n /x/\n",
+      "expected": "b",
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "$items = [\"a\", \"b\"]; $out = $items->[1]; return $out",
+        "lowering_error": "",
+        "name": "set",
+        "value": "b"
+      },
+      "perl_stderr": "",
+      "perl_extra_stdout": "",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\nnull\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "a2058123372bb4b76fec03165575fa17dbc243f8c80340d4c2529fda01d2a466"
+    },
+    {
+      "name": "push",
+      "action": "push(items,\"a\"); out = items[0]; return(out)",
+      "source": "Top::\n -> Done { push(items,\"a\"); out = items[0]; return(out) }\nDone:\n /x/\n",
+      "expected": "a",
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "do { require LinkedSpec::BindingRuntime; $items = LinkedSpec::BindingRuntime::push_value($items, \"items\", \"a\") }; $out = $items->[0]; return $out",
+        "lowering_error": "",
+        "name": "push",
+        "value": "a"
+      },
+      "perl_stderr": "",
+      "perl_extra_stdout": "",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\nnull\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "a2058123372bb4b76fec03165575fa17dbc243f8c80340d4c2529fda01d2a466"
+    },
+    {
+      "name": "append",
+      "action": "items = []; items += \"a\"; out = items[0]; return(out)",
+      "source": "Top::\n -> Done { items = []; items += \"a\"; out = items[0]; return(out) }\nDone:\n /x/\n",
+      "expected": "a",
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "$items = []; do { require LinkedSpec::BindingRuntime; $items = LinkedSpec::BindingRuntime::push_value($items, \"items\", \"a\") }; $out = $items->[0]; return $out",
+        "lowering_error": "",
+        "name": "append",
+        "value": "a"
+      },
+      "perl_stderr": "",
+      "perl_extra_stdout": "",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\nnull\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "a2058123372bb4b76fec03165575fa17dbc243f8c80340d4c2529fda01d2a466"
+    },
+    {
+      "name": "split_pure",
+      "action": "items = split(\"a,b\",\",\"); out = items[1]; return(out)",
+      "source": "Top::\n -> Done { items = split(\"a,b\",\",\"); out = items[1]; return(out) }\nDone:\n /x/\n",
+      "expected": "b",
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "$items = do { my $__ls_split_value = \"a,b\"; my $__ls_split_delimiter = \",\"; (defined($__ls_split_value) && defined($__ls_split_delimiter)) ? [split /\\Q$__ls_split_delimiter\\E/, $__ls_split_value, -1] : [] }; $out = $items->[1]; return $out",
+        "lowering_error": "",
+        "name": "split_pure",
+        "value": "b"
+      },
+      "perl_stderr": "",
+      "perl_extra_stdout": "",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\nnull\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "a2058123372bb4b76fec03165575fa17dbc243f8c80340d4c2529fda01d2a466"
+    },
+    {
+      "name": "split_target",
+      "action": "split(items,\"a,b\",\",\"); out = items[1]; return(out)",
+      "source": "Top::\n -> Done { split(items,\"a,b\",\",\"); out = items[1]; return(out) }\nDone:\n /x/\n",
+      "expected": "b",
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "do { require LinkedSpec::BindingRuntime; $items = LinkedSpec::BindingRuntime::split_value($items, \"items\", \"a,b\", qr/\\,/); $items }; $out = $items->[1]; return $out",
+        "lowering_error": "",
+        "name": "split_target",
+        "value": "b"
+      },
+      "perl_stderr": "",
+      "perl_extra_stdout": "",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\nnull\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "a2058123372bb4b76fec03165575fa17dbc243f8c80340d4c2529fda01d2a466"
+    },
+    {
+      "name": "bare_index",
+      "action": "items = [\"a\",\"b\"]; i = 1; out = items[i]; return(out)",
+      "source": "Top::\n -> Done { items = [\"a\",\"b\"]; i = 1; out = items[i]; return(out) }\nDone:\n /x/\n",
+      "expected": "b",
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "$items = [\"a\", \"b\"]; $i = 1; $out = $items->[$i]; return $out",
+        "lowering_error": "",
+        "name": "bare_index",
+        "value": "b"
+      },
+      "perl_stderr": "",
+      "perl_extra_stdout": "",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\nnull\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "a2058123372bb4b76fec03165575fa17dbc243f8c80340d4c2529fda01d2a466"
+    },
+    {
+      "name": "computed_index",
+      "action": "items = [\"a\",\"b\"]; out = items[add(0,1)]; return(out)",
+      "source": "Top::\n -> Done { items = [\"a\",\"b\"]; out = items[add(0,1)]; return(out) }\nDone:\n /x/\n",
+      "expected": "b",
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "$items = [\"a\", \"b\"]; $out = $items->[do { my @__ls_num_add_terms = (0, 1); LinkedSpec::Numeric::evaluate('num_add', @__ls_num_add_terms) }]; return $out",
+        "lowering_error": "",
+        "name": "computed_index",
+        "value": "b"
+      },
+      "perl_stderr": "",
+      "perl_extra_stdout": "",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\nnull\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "a2058123372bb4b76fec03165575fa17dbc243f8c80340d4c2529fda01d2a466"
+    },
+    {
+      "name": "nested",
+      "action": "items = [[\"a\"]]; out = items[0][0]; return(out)",
+      "source": "Top::\n -> Done { items = [[\"a\"]]; out = items[0][0]; return(out) }\nDone:\n /x/\n",
+      "expected": "a",
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "$items = [[\"a\"]]; $out = $items->[0]->[0]; return $out",
+        "lowering_error": "",
+        "name": "nested",
+        "value": "a"
+      },
+      "perl_stderr": "",
+      "perl_extra_stdout": "",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\n\"a\"\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "a2058123372bb4b76fec03165575fa17dbc243f8c80340d4c2529fda01d2a466"
+    },
+    {
+      "name": "mixed",
+      "action": "items = {\"list\":[\"a\"]}; out = items[\"list\"][0]; return(out)",
+      "source": "Top::\n -> Done { items = {\"list\":[\"a\"]}; out = items[\"list\"][0]; return(out) }\nDone:\n /x/\n",
+      "expected": "a",
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "$items = {\"list\" => [\"a\"]}; $out = $items->{\"list\"}->[0]; return $out",
+        "lowering_error": "",
+        "name": "mixed",
+        "value": "a"
+      },
+      "perl_stderr": "",
+      "perl_extra_stdout": "",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\n\"a\"\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "a2058123372bb4b76fec03165575fa17dbc243f8c80340d4c2529fda01d2a466"
+    },
+    {
+      "name": "rebound",
+      "action": "push(items,\"old\"); items = [\"new\"]; out = items[0]; return(out)",
+      "source": "Top::\n -> Done { push(items,\"old\"); items = [\"new\"]; out = items[0]; return(out) }\nDone:\n /x/\n",
+      "expected": "new",
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "do { require LinkedSpec::BindingRuntime; $items = LinkedSpec::BindingRuntime::push_value($items, \"items\", \"old\") }; $items = [\"new\"]; $out = $items->[0]; return $out",
+        "lowering_error": "",
+        "name": "rebound",
+        "value": "new"
+      },
+      "perl_stderr": "",
+      "perl_extra_stdout": "",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\nnull\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "a2058123372bb4b76fec03165575fa17dbc243f8c80340d4c2529fda01d2a466"
+    },
+    {
+      "name": "detached",
+      "action": "items = [[\"a\"]]; saved = items[0]; items[0][0] = \"b\"; out = saved; return(out)",
+      "source": "Top::\n -> Done { items = [[\"a\"]]; saved = items[0]; items[0][0] = \"b\"; out = saved; return(out) }\nDone:\n /x/\n",
+      "expected": [
+        "a"
+      ],
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "do { $items = [[\"a\"]]; $__ls_binding_presence{\"items\"} = 1 }; $saved = $items->[0]; do { my $__ls_path_segment_0 = 0; my $__ls_path_segment_1 = 0; my $__ls_path_value = \"b\"; my $__ls_path_present = (defined($items) || $__ls_binding_presence{\"items\"}) ? 1 : 0; require LinkedSpec::BindingRuntime; my ($__ls_path_updated, $__ls_path_result) = LinkedSpec::BindingRuntime::nested_write($items, $__ls_path_present, \"items\", [{ value => $__ls_path_segment_0, kind_hint => \"integer\", source_span => { source_id => \"action:Top\", start => 6, end => 7, unit => \"unicode_scalar\", provenance => \"authored\" } }, { value => $__ls_path_segment_1, kind_hint => \"integer\", source_span => { source_id => \"action:Top\", start => 9, end => 10, unit => \"unicode_scalar\", provenance => \"authored\" } }], $__ls_path_value); $items = $__ls_path_updated; $__ls_binding_presence{\"items\"} = 1; $__ls_path_result }; $out = $saved; return $out",
+        "lowering_error": "",
+        "name": "detached",
+        "value": [
+          "a"
+        ]
+      },
+      "perl_stderr": "",
+      "perl_extra_stdout": "",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\nnull\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "a2058123372bb4b76fec03165575fa17dbc243f8c80340d4c2529fda01d2a466"
+    },
+    {
+      "name": "missing_index",
+      "action": "items = [\"a\"]; out = items[9]; return(out)",
+      "source": "Top::\n -> Done { items = [\"a\"]; out = items[9]; return(out) }\nDone:\n /x/\n",
+      "expected": null,
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "$items = [\"a\"]; $out = $items->[9]; return $out",
+        "lowering_error": "",
+        "name": "missing_index",
+        "value": null
+      },
+      "perl_stderr": "",
+      "perl_extra_stdout": "",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\nnull\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "a2058123372bb4b76fec03165575fa17dbc243f8c80340d4c2529fda01d2a466"
+    },
+    {
+      "name": "binding_control",
+      "action": "items = [\"a\"]; out = items; return(out)",
+      "source": "Top::\n -> Done { items = [\"a\"]; out = items; return(out) }\nDone:\n /x/\n",
+      "expected": [
+        "a"
+      ],
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "$items = [\"a\"]; $out = $items; return $out",
+        "lowering_error": "",
+        "name": "binding_control",
+        "value": [
+          "a"
+        ]
+      },
+      "perl_stderr": "",
+      "perl_extra_stdout": "",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\n[\"a\"]\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "a2058123372bb4b76fec03165575fa17dbc243f8c80340d4c2529fda01d2a466"
+    },
+    {
+      "name": "receiver_control",
+      "action": "items = [\"a\"]; out = items.first(); return(out)",
+      "source": "Top::\n -> Done { items = [\"a\"]; out = items.first(); return(out) }\nDone:\n /x/\n",
+      "expected": "a",
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "$items = [\"a\"]; $out = do { my $__ls_first = do { my $__ls_array_value = $items; (defined($__ls_array_value) && ref($__ls_array_value) eq 'ARRAY') ? [@{$__ls_array_value}] : [] }; defined($__ls_first) && @{$__ls_first} ? $__ls_first->[0] : undef }; return $out",
+        "lowering_error": "",
+        "name": "receiver_control",
+        "value": "a"
+      },
+      "perl_stderr": "",
+      "perl_extra_stdout": "",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\n\"a\"\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "a2058123372bb4b76fec03165575fa17dbc243f8c80340d4c2529fda01d2a466"
+    }
+  ],
+  "after_first_build": [
+    {
+      "name": "direct",
+      "action": "items = [\"a\",\"b\"]; out = items[0]; return(out)",
+      "source": "Top::\n -> Done { items = [\"a\",\"b\"]; out = items[0]; return(out) }\nDone:\n /x/\n",
+      "expected": "a",
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "$items = [\"a\", \"b\"]; $out = $items->[0]; return $out",
+        "lowering_error": "",
+        "name": "direct",
+        "value": "a"
+      },
+      "perl_stderr": "",
+      "perl_extra_stdout": "",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\n\"a\"\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "a507bc2cb9af4a031d7e9e538489f189b04249fb5c89fdc74acccd29237d155f"
+    },
+    {
+      "name": "compact",
+      "action": "keys = [\"a\"]; out = {keys[0]:7}; return(out)",
+      "source": "Top::\n -> Done { keys = [\"a\"]; out = {keys[0]:7}; return(out) }\nDone:\n /x/\n",
+      "expected": {
+        "a": 7
+      },
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "$keys = [\"a\"]; $out = {$keys->[0] => 7}; return $out",
+        "lowering_error": "",
+        "name": "compact",
+        "value": {
+          "a": 7
+        }
+      },
+      "perl_stderr": "",
+      "perl_extra_stdout": "",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\n{\"a\":7}\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "a507bc2cb9af4a031d7e9e538489f189b04249fb5c89fdc74acccd29237d155f"
+    },
+    {
+      "name": "spaced",
+      "action": "keys = [\"a\"]; out = {keys[0] : 7}; return(out)",
+      "source": "Top::\n -> Done { keys = [\"a\"]; out = {keys[0] : 7}; return(out) }\nDone:\n /x/\n",
+      "expected": {
+        "a": 7
+      },
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "$keys = [\"a\"]; $out = {$keys->[0] => 7}; return $out",
+        "lowering_error": "",
+        "name": "spaced",
+        "value": {
+          "a": 7
+        }
+      },
+      "perl_stderr": "",
+      "perl_extra_stdout": "",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\n{\"a\":7}\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "a507bc2cb9af4a031d7e9e538489f189b04249fb5c89fdc74acccd29237d155f"
+    },
+    {
+      "name": "set",
+      "action": "set(items,[\"a\",\"b\"]); out = items[1]; return(out)",
+      "source": "Top::\n -> Done { set(items,[\"a\",\"b\"]); out = items[1]; return(out) }\nDone:\n /x/\n",
+      "expected": "b",
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "$items = [\"a\", \"b\"]; $out = $items->[1]; return $out",
+        "lowering_error": "",
+        "name": "set",
+        "value": "b"
+      },
+      "perl_stderr": "",
+      "perl_extra_stdout": "",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\n\"b\"\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "a507bc2cb9af4a031d7e9e538489f189b04249fb5c89fdc74acccd29237d155f"
+    },
+    {
+      "name": "push",
+      "action": "push(items,\"a\"); out = items[0]; return(out)",
+      "source": "Top::\n -> Done { push(items,\"a\"); out = items[0]; return(out) }\nDone:\n /x/\n",
+      "expected": "a",
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "do { require LinkedSpec::BindingRuntime; $items = LinkedSpec::BindingRuntime::push_value($items, \"items\", \"a\") }; $out = $items->[0]; return $out",
+        "lowering_error": "",
+        "name": "push",
+        "value": "a"
+      },
+      "perl_stderr": "",
+      "perl_extra_stdout": "",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\n\"a\"\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "a507bc2cb9af4a031d7e9e538489f189b04249fb5c89fdc74acccd29237d155f"
+    },
+    {
+      "name": "append",
+      "action": "items = []; items += \"a\"; out = items[0]; return(out)",
+      "source": "Top::\n -> Done { items = []; items += \"a\"; out = items[0]; return(out) }\nDone:\n /x/\n",
+      "expected": "a",
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "$items = []; do { require LinkedSpec::BindingRuntime; $items = LinkedSpec::BindingRuntime::push_value($items, \"items\", \"a\") }; $out = $items->[0]; return $out",
+        "lowering_error": "",
+        "name": "append",
+        "value": "a"
+      },
+      "perl_stderr": "",
+      "perl_extra_stdout": "",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\n\"a\"\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "a507bc2cb9af4a031d7e9e538489f189b04249fb5c89fdc74acccd29237d155f"
+    },
+    {
+      "name": "split_pure",
+      "action": "items = split(\"a,b\",\",\"); out = items[1]; return(out)",
+      "source": "Top::\n -> Done { items = split(\"a,b\",\",\"); out = items[1]; return(out) }\nDone:\n /x/\n",
+      "expected": "b",
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "$items = do { my $__ls_split_value = \"a,b\"; my $__ls_split_delimiter = \",\"; (defined($__ls_split_value) && defined($__ls_split_delimiter)) ? [split /\\Q$__ls_split_delimiter\\E/, $__ls_split_value, -1] : [] }; $out = $items->[1]; return $out",
+        "lowering_error": "",
+        "name": "split_pure",
+        "value": "b"
+      },
+      "perl_stderr": "",
+      "perl_extra_stdout": "",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\n\"b\"\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "a507bc2cb9af4a031d7e9e538489f189b04249fb5c89fdc74acccd29237d155f"
+    },
+    {
+      "name": "split_target",
+      "action": "split(items,\"a,b\",\",\"); out = items[1]; return(out)",
+      "source": "Top::\n -> Done { split(items,\"a,b\",\",\"); out = items[1]; return(out) }\nDone:\n /x/\n",
+      "expected": "b",
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "do { require LinkedSpec::BindingRuntime; $items = LinkedSpec::BindingRuntime::split_value($items, \"items\", \"a,b\", qr/\\,/); $items }; $out = $items->[1]; return $out",
+        "lowering_error": "",
+        "name": "split_target",
+        "value": "b"
+      },
+      "perl_stderr": "",
+      "perl_extra_stdout": "",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\n\"b\"\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "a507bc2cb9af4a031d7e9e538489f189b04249fb5c89fdc74acccd29237d155f"
+    },
+    {
+      "name": "bare_index",
+      "action": "items = [\"a\",\"b\"]; i = 1; out = items[i]; return(out)",
+      "source": "Top::\n -> Done { items = [\"a\",\"b\"]; i = 1; out = items[i]; return(out) }\nDone:\n /x/\n",
+      "expected": "b",
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "$items = [\"a\", \"b\"]; $i = 1; $out = $items->[$i]; return $out",
+        "lowering_error": "",
+        "name": "bare_index",
+        "value": "b"
+      },
+      "perl_stderr": "",
+      "perl_extra_stdout": "",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\n\"b\"\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "a507bc2cb9af4a031d7e9e538489f189b04249fb5c89fdc74acccd29237d155f"
+    },
+    {
+      "name": "computed_index",
+      "action": "items = [\"a\",\"b\"]; out = items[add(0,1)]; return(out)",
+      "source": "Top::\n -> Done { items = [\"a\",\"b\"]; out = items[add(0,1)]; return(out) }\nDone:\n /x/\n",
+      "expected": "b",
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "$items = [\"a\", \"b\"]; $out = $items->[do { my @__ls_num_add_terms = (0, 1); LinkedSpec::Numeric::evaluate('num_add', @__ls_num_add_terms) }]; return $out",
+        "lowering_error": "",
+        "name": "computed_index",
+        "value": "b"
+      },
+      "perl_stderr": "",
+      "perl_extra_stdout": "",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\n\"b\"\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "a507bc2cb9af4a031d7e9e538489f189b04249fb5c89fdc74acccd29237d155f"
+    },
+    {
+      "name": "nested",
+      "action": "items = [[\"a\"]]; out = items[0][0]; return(out)",
+      "source": "Top::\n -> Done { items = [[\"a\"]]; out = items[0][0]; return(out) }\nDone:\n /x/\n",
+      "expected": "a",
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "$items = [[\"a\"]]; $out = $items->[0]->[0]; return $out",
+        "lowering_error": "",
+        "name": "nested",
+        "value": "a"
+      },
+      "perl_stderr": "",
+      "perl_extra_stdout": "",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\n\"a\"\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "a507bc2cb9af4a031d7e9e538489f189b04249fb5c89fdc74acccd29237d155f"
+    },
+    {
+      "name": "mixed",
+      "action": "items = {\"list\":[\"a\"]}; out = items[\"list\"][0]; return(out)",
+      "source": "Top::\n -> Done { items = {\"list\":[\"a\"]}; out = items[\"list\"][0]; return(out) }\nDone:\n /x/\n",
+      "expected": "a",
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "$items = {\"list\" => [\"a\"]}; $out = $items->{\"list\"}->[0]; return $out",
+        "lowering_error": "",
+        "name": "mixed",
+        "value": "a"
+      },
+      "perl_stderr": "",
+      "perl_extra_stdout": "",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\n\"a\"\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "a507bc2cb9af4a031d7e9e538489f189b04249fb5c89fdc74acccd29237d155f"
+    },
+    {
+      "name": "rebound",
+      "action": "push(items,\"old\"); items = [\"new\"]; out = items[0]; return(out)",
+      "source": "Top::\n -> Done { push(items,\"old\"); items = [\"new\"]; out = items[0]; return(out) }\nDone:\n /x/\n",
+      "expected": "new",
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "do { require LinkedSpec::BindingRuntime; $items = LinkedSpec::BindingRuntime::push_value($items, \"items\", \"old\") }; $items = [\"new\"]; $out = $items->[0]; return $out",
+        "lowering_error": "",
+        "name": "rebound",
+        "value": "new"
+      },
+      "perl_stderr": "",
+      "perl_extra_stdout": "",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\n\"new\"\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "a507bc2cb9af4a031d7e9e538489f189b04249fb5c89fdc74acccd29237d155f"
+    },
+    {
+      "name": "detached",
+      "action": "items = [[\"a\"]]; saved = items[0]; items[0][0] = \"b\"; out = saved; return(out)",
+      "source": "Top::\n -> Done { items = [[\"a\"]]; saved = items[0]; items[0][0] = \"b\"; out = saved; return(out) }\nDone:\n /x/\n",
+      "expected": [
+        "a"
+      ],
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "do { $items = [[\"a\"]]; $__ls_binding_presence{\"items\"} = 1 }; $saved = $items->[0]; do { my $__ls_path_segment_0 = 0; my $__ls_path_segment_1 = 0; my $__ls_path_value = \"b\"; my $__ls_path_present = (defined($items) || $__ls_binding_presence{\"items\"}) ? 1 : 0; require LinkedSpec::BindingRuntime; my ($__ls_path_updated, $__ls_path_result) = LinkedSpec::BindingRuntime::nested_write($items, $__ls_path_present, \"items\", [{ value => $__ls_path_segment_0, kind_hint => \"integer\", source_span => { source_id => \"action:Top\", start => 6, end => 7, unit => \"unicode_scalar\", provenance => \"authored\" } }, { value => $__ls_path_segment_1, kind_hint => \"integer\", source_span => { source_id => \"action:Top\", start => 9, end => 10, unit => \"unicode_scalar\", provenance => \"authored\" } }], $__ls_path_value); $items = $__ls_path_updated; $__ls_binding_presence{\"items\"} = 1; $__ls_path_result }; $out = $saved; return $out",
+        "lowering_error": "",
+        "name": "detached",
+        "value": [
+          "a"
+        ]
+      },
+      "perl_stderr": "",
+      "perl_extra_stdout": "",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\n[\"a\"]\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "a507bc2cb9af4a031d7e9e538489f189b04249fb5c89fdc74acccd29237d155f"
+    },
+    {
+      "name": "missing_index",
+      "action": "items = [\"a\"]; out = items[9]; return(out)",
+      "source": "Top::\n -> Done { items = [\"a\"]; out = items[9]; return(out) }\nDone:\n /x/\n",
+      "expected": null,
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "$items = [\"a\"]; $out = $items->[9]; return $out",
+        "lowering_error": "",
+        "name": "missing_index",
+        "value": null
+      },
+      "perl_stderr": "",
+      "perl_extra_stdout": "",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\nnull\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "a507bc2cb9af4a031d7e9e538489f189b04249fb5c89fdc74acccd29237d155f"
+    },
+    {
+      "name": "binding_control",
+      "action": "items = [\"a\"]; out = items; return(out)",
+      "source": "Top::\n -> Done { items = [\"a\"]; out = items; return(out) }\nDone:\n /x/\n",
+      "expected": [
+        "a"
+      ],
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "$items = [\"a\"]; $out = $items; return $out",
+        "lowering_error": "",
+        "name": "binding_control",
+        "value": [
+          "a"
+        ]
+      },
+      "perl_stderr": "",
+      "perl_extra_stdout": "",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\n[\"a\"]\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "a507bc2cb9af4a031d7e9e538489f189b04249fb5c89fdc74acccd29237d155f"
+    },
+    {
+      "name": "receiver_control",
+      "action": "items = [\"a\"]; out = items.first(); return(out)",
+      "source": "Top::\n -> Done { items = [\"a\"]; out = items.first(); return(out) }\nDone:\n /x/\n",
+      "expected": "a",
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "$items = [\"a\"]; $out = do { my $__ls_first = do { my $__ls_array_value = $items; (defined($__ls_array_value) && ref($__ls_array_value) eq 'ARRAY') ? [@{$__ls_array_value}] : [] }; defined($__ls_first) && @{$__ls_first} ? $__ls_first->[0] : undef }; return $out",
+        "lowering_error": "",
+        "name": "receiver_control",
+        "value": "a"
+      },
+      "perl_stderr": "",
+      "perl_extra_stdout": "",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\n\"a\"\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "a507bc2cb9af4a031d7e9e538489f189b04249fb5c89fdc74acccd29237d155f"
+    }
+  ],
+  "after": [
+    {
+      "name": "direct",
+      "action": "items = [\"a\",\"b\"]; out = items[0]; return(out)",
+      "source": "Top::\n -> Done { items = [\"a\",\"b\"]; out = items[0]; return(out) }\nDone:\n /x/\n",
+      "expected": "a",
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "$items = [\"a\", \"b\"]; $out = $items->[0]; return $out",
+        "lowering_error": "",
+        "name": "direct",
+        "value": "a"
+      },
+      "perl_stderr": "",
+      "perl_extra_stdout": "",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\n\"a\"\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "8c0829ae4a8f2f4c60dcf70897bac4e564d40b59ab48344f011e38626e782331"
+    },
+    {
+      "name": "compact",
+      "action": "keys = [\"a\"]; out = {keys[0]:7}; return(out)",
+      "source": "Top::\n -> Done { keys = [\"a\"]; out = {keys[0]:7}; return(out) }\nDone:\n /x/\n",
+      "expected": {
+        "a": 7
+      },
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "$keys = [\"a\"]; $out = {$keys->[0] => 7}; return $out",
+        "lowering_error": "",
+        "name": "compact",
+        "value": {
+          "a": 7
+        }
+      },
+      "perl_stderr": "",
+      "perl_extra_stdout": "",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\n{\"a\":7}\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "8c0829ae4a8f2f4c60dcf70897bac4e564d40b59ab48344f011e38626e782331"
+    },
+    {
+      "name": "spaced",
+      "action": "keys = [\"a\"]; out = {keys[0] : 7}; return(out)",
+      "source": "Top::\n -> Done { keys = [\"a\"]; out = {keys[0] : 7}; return(out) }\nDone:\n /x/\n",
+      "expected": {
+        "a": 7
+      },
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "$keys = [\"a\"]; $out = {$keys->[0] => 7}; return $out",
+        "lowering_error": "",
+        "name": "spaced",
+        "value": {
+          "a": 7
+        }
+      },
+      "perl_stderr": "",
+      "perl_extra_stdout": "",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\n{\"a\":7}\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "8c0829ae4a8f2f4c60dcf70897bac4e564d40b59ab48344f011e38626e782331"
+    },
+    {
+      "name": "set",
+      "action": "set(items,[\"a\",\"b\"]); out = items[1]; return(out)",
+      "source": "Top::\n -> Done { set(items,[\"a\",\"b\"]); out = items[1]; return(out) }\nDone:\n /x/\n",
+      "expected": "b",
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "$items = [\"a\", \"b\"]; $out = $items->[1]; return $out",
+        "lowering_error": "",
+        "name": "set",
+        "value": "b"
+      },
+      "perl_stderr": "",
+      "perl_extra_stdout": "",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\n\"b\"\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "8c0829ae4a8f2f4c60dcf70897bac4e564d40b59ab48344f011e38626e782331"
+    },
+    {
+      "name": "push",
+      "action": "push(items,\"a\"); out = items[0]; return(out)",
+      "source": "Top::\n -> Done { push(items,\"a\"); out = items[0]; return(out) }\nDone:\n /x/\n",
+      "expected": "a",
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "do { require LinkedSpec::BindingRuntime; $items = LinkedSpec::BindingRuntime::push_value($items, \"items\", \"a\") }; $out = $items->[0]; return $out",
+        "lowering_error": "",
+        "name": "push",
+        "value": "a"
+      },
+      "perl_stderr": "",
+      "perl_extra_stdout": "",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\n\"a\"\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "8c0829ae4a8f2f4c60dcf70897bac4e564d40b59ab48344f011e38626e782331"
+    },
+    {
+      "name": "append",
+      "action": "items = []; items += \"a\"; out = items[0]; return(out)",
+      "source": "Top::\n -> Done { items = []; items += \"a\"; out = items[0]; return(out) }\nDone:\n /x/\n",
+      "expected": "a",
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "$items = []; do { require LinkedSpec::BindingRuntime; $items = LinkedSpec::BindingRuntime::push_value($items, \"items\", \"a\") }; $out = $items->[0]; return $out",
+        "lowering_error": "",
+        "name": "append",
+        "value": "a"
+      },
+      "perl_stderr": "",
+      "perl_extra_stdout": "",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\n\"a\"\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "8c0829ae4a8f2f4c60dcf70897bac4e564d40b59ab48344f011e38626e782331"
+    },
+    {
+      "name": "split_pure",
+      "action": "items = split(\"a,b\",\",\"); out = items[1]; return(out)",
+      "source": "Top::\n -> Done { items = split(\"a,b\",\",\"); out = items[1]; return(out) }\nDone:\n /x/\n",
+      "expected": "b",
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "$items = do { my $__ls_split_value = \"a,b\"; my $__ls_split_delimiter = \",\"; (defined($__ls_split_value) && defined($__ls_split_delimiter)) ? [split /\\Q$__ls_split_delimiter\\E/, $__ls_split_value, -1] : [] }; $out = $items->[1]; return $out",
+        "lowering_error": "",
+        "name": "split_pure",
+        "value": "b"
+      },
+      "perl_stderr": "",
+      "perl_extra_stdout": "",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\n\"b\"\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "8c0829ae4a8f2f4c60dcf70897bac4e564d40b59ab48344f011e38626e782331"
+    },
+    {
+      "name": "split_target",
+      "action": "split(items,\"a,b\",\",\"); out = items[1]; return(out)",
+      "source": "Top::\n -> Done { split(items,\"a,b\",\",\"); out = items[1]; return(out) }\nDone:\n /x/\n",
+      "expected": "b",
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "do { require LinkedSpec::BindingRuntime; $items = LinkedSpec::BindingRuntime::split_value($items, \"items\", \"a,b\", qr/\\,/); $items }; $out = $items->[1]; return $out",
+        "lowering_error": "",
+        "name": "split_target",
+        "value": "b"
+      },
+      "perl_stderr": "",
+      "perl_extra_stdout": "",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\n\"b\"\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "8c0829ae4a8f2f4c60dcf70897bac4e564d40b59ab48344f011e38626e782331"
+    },
+    {
+      "name": "bare_index",
+      "action": "items = [\"a\",\"b\"]; i = 1; out = items[i]; return(out)",
+      "source": "Top::\n -> Done { items = [\"a\",\"b\"]; i = 1; out = items[i]; return(out) }\nDone:\n /x/\n",
+      "expected": "b",
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "$items = [\"a\", \"b\"]; $i = 1; $out = $items->[$i]; return $out",
+        "lowering_error": "",
+        "name": "bare_index",
+        "value": "b"
+      },
+      "perl_stderr": "",
+      "perl_extra_stdout": "",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\n\"b\"\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "8c0829ae4a8f2f4c60dcf70897bac4e564d40b59ab48344f011e38626e782331"
+    },
+    {
+      "name": "computed_index",
+      "action": "items = [\"a\",\"b\"]; out = items[add(0,1)]; return(out)",
+      "source": "Top::\n -> Done { items = [\"a\",\"b\"]; out = items[add(0,1)]; return(out) }\nDone:\n /x/\n",
+      "expected": "b",
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "$items = [\"a\", \"b\"]; $out = $items->[do { my @__ls_num_add_terms = (0, 1); LinkedSpec::Numeric::evaluate('num_add', @__ls_num_add_terms) }]; return $out",
+        "lowering_error": "",
+        "name": "computed_index",
+        "value": "b"
+      },
+      "perl_stderr": "",
+      "perl_extra_stdout": "",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\n\"b\"\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "8c0829ae4a8f2f4c60dcf70897bac4e564d40b59ab48344f011e38626e782331"
+    },
+    {
+      "name": "nested",
+      "action": "items = [[\"a\"]]; out = items[0][0]; return(out)",
+      "source": "Top::\n -> Done { items = [[\"a\"]]; out = items[0][0]; return(out) }\nDone:\n /x/\n",
+      "expected": "a",
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "$items = [[\"a\"]]; $out = $items->[0]->[0]; return $out",
+        "lowering_error": "",
+        "name": "nested",
+        "value": "a"
+      },
+      "perl_stderr": "",
+      "perl_extra_stdout": "",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\n\"a\"\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "8c0829ae4a8f2f4c60dcf70897bac4e564d40b59ab48344f011e38626e782331"
+    },
+    {
+      "name": "mixed",
+      "action": "items = {\"list\":[\"a\"]}; out = items[\"list\"][0]; return(out)",
+      "source": "Top::\n -> Done { items = {\"list\":[\"a\"]}; out = items[\"list\"][0]; return(out) }\nDone:\n /x/\n",
+      "expected": "a",
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "$items = {\"list\" => [\"a\"]}; $out = $items->{\"list\"}->[0]; return $out",
+        "lowering_error": "",
+        "name": "mixed",
+        "value": "a"
+      },
+      "perl_stderr": "",
+      "perl_extra_stdout": "",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\n\"a\"\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "8c0829ae4a8f2f4c60dcf70897bac4e564d40b59ab48344f011e38626e782331"
+    },
+    {
+      "name": "rebound",
+      "action": "push(items,\"old\"); items = [\"new\"]; out = items[0]; return(out)",
+      "source": "Top::\n -> Done { push(items,\"old\"); items = [\"new\"]; out = items[0]; return(out) }\nDone:\n /x/\n",
+      "expected": "new",
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "do { require LinkedSpec::BindingRuntime; $items = LinkedSpec::BindingRuntime::push_value($items, \"items\", \"old\") }; $items = [\"new\"]; $out = $items->[0]; return $out",
+        "lowering_error": "",
+        "name": "rebound",
+        "value": "new"
+      },
+      "perl_stderr": "",
+      "perl_extra_stdout": "",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\n\"new\"\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "8c0829ae4a8f2f4c60dcf70897bac4e564d40b59ab48344f011e38626e782331"
+    },
+    {
+      "name": "detached",
+      "action": "items = [[\"a\"]]; saved = items[0]; items[0][0] = \"b\"; out = saved; return(out)",
+      "source": "Top::\n -> Done { items = [[\"a\"]]; saved = items[0]; items[0][0] = \"b\"; out = saved; return(out) }\nDone:\n /x/\n",
+      "expected": [
+        "a"
+      ],
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "do { $items = [[\"a\"]]; $__ls_binding_presence{\"items\"} = 1 }; $saved = $items->[0]; do { my $__ls_path_segment_0 = 0; my $__ls_path_segment_1 = 0; my $__ls_path_value = \"b\"; my $__ls_path_present = (defined($items) || $__ls_binding_presence{\"items\"}) ? 1 : 0; require LinkedSpec::BindingRuntime; my ($__ls_path_updated, $__ls_path_result) = LinkedSpec::BindingRuntime::nested_write($items, $__ls_path_present, \"items\", [{ value => $__ls_path_segment_0, kind_hint => \"integer\", source_span => { source_id => \"action:Top\", start => 6, end => 7, unit => \"unicode_scalar\", provenance => \"authored\" } }, { value => $__ls_path_segment_1, kind_hint => \"integer\", source_span => { source_id => \"action:Top\", start => 9, end => 10, unit => \"unicode_scalar\", provenance => \"authored\" } }], $__ls_path_value); $items = $__ls_path_updated; $__ls_binding_presence{\"items\"} = 1; $__ls_path_result }; $out = $saved; return $out",
+        "lowering_error": "",
+        "name": "detached",
+        "value": [
+          "a"
+        ]
+      },
+      "perl_stderr": "",
+      "perl_extra_stdout": "",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\n[\"a\"]\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "8c0829ae4a8f2f4c60dcf70897bac4e564d40b59ab48344f011e38626e782331"
+    },
+    {
+      "name": "missing_index",
+      "action": "items = [\"a\"]; out = items[9]; return(out)",
+      "source": "Top::\n -> Done { items = [\"a\"]; out = items[9]; return(out) }\nDone:\n /x/\n",
+      "expected": null,
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "$items = [\"a\"]; $out = $items->[9]; return $out",
+        "lowering_error": "",
+        "name": "missing_index",
+        "value": null
+      },
+      "perl_stderr": "",
+      "perl_extra_stdout": "",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\nnull\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "8c0829ae4a8f2f4c60dcf70897bac4e564d40b59ab48344f011e38626e782331"
+    },
+    {
+      "name": "binding_control",
+      "action": "items = [\"a\"]; out = items; return(out)",
+      "source": "Top::\n -> Done { items = [\"a\"]; out = items; return(out) }\nDone:\n /x/\n",
+      "expected": [
+        "a"
+      ],
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "$items = [\"a\"]; $out = $items; return $out",
+        "lowering_error": "",
+        "name": "binding_control",
+        "value": [
+          "a"
+        ]
+      },
+      "perl_stderr": "",
+      "perl_extra_stdout": "",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\n[\"a\"]\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "8c0829ae4a8f2f4c60dcf70897bac4e564d40b59ab48344f011e38626e782331"
+    },
+    {
+      "name": "receiver_control",
+      "action": "items = [\"a\"]; out = items.first(); return(out)",
+      "source": "Top::\n -> Done { items = [\"a\"]; out = items.first(); return(out) }\nDone:\n /x/\n",
+      "expected": "a",
+      "perl": {
+        "compile_error": "",
+        "compiled": 1,
+        "invoke_error": "",
+        "last_error": null,
+        "lowering": "$items = [\"a\"]; $out = do { my $__ls_first = do { my $__ls_array_value = $items; (defined($__ls_array_value) && ref($__ls_array_value) eq 'ARRAY') ? [@{$__ls_array_value}] : [] }; defined($__ls_first) && @{$__ls_first} ? $__ls_first->[0] : undef }; return $out",
+        "lowering_error": "",
+        "name": "receiver_control",
+        "value": "a"
+      },
+      "perl_stderr": "",
+      "perl_extra_stdout": "",
+      "rust_exit": 0,
+      "rust_stdout": "[linkedspec][low] compile:start\n[linkedspec][low] compile:ok\n[linkedspec][low] input:start\n[linkedspec][low] input:ok\n[linkedspec][low] invoke:start\n[linkedspec][low] invoke:ok\n\"a\"\n",
+      "rust_stderr": "",
+      "rust_binary_sha256": "8c0829ae4a8f2f4c60dcf70897bac4e564d40b59ab48344f011e38626e782331"
+    }
+  ]
+}

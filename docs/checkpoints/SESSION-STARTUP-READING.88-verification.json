@@ -1,0 +1,96 @@
+{
+  "format": 1,
+  "owner": "SESSION-STARTUP-READING.88",
+  "activation_commit": "4631568ab596943ffb2a1a685f7e84b0cbe0afc2",
+  "verification_tier": "focused",
+  "scope": "Existing typed-binding read repair; no parser/serialized/generated-format or public cross-backend contract change. Complete runtime unit suite plus selected integration targets; no full runtime-package/canonical claim.",
+  "source_sha256": {
+    "rust/linkedspec-runtime/src/engine.rs": "7f1cf5ed8dca4f1d1f52fa1f03a6a0ab56e86e885c6917db61e09c0a16f1831a",
+    "rust/linkedspec-runtime/tests/indexed_value_reads.rs": "54830bc8031c500417b0c818c25149094bca6cfd5892afc408a53c6a09a8c3a3",
+    "rust/linkedspec-runtime/tests/source_emitter.rs": "f1e4572b135fe0253644da44ad5d4b27d0dd9376d1933a6d0b07296517521d72",
+    "examples/indexed-value-reads.spec": "f3d00d0c87916737ab9ceda89168801300313781f6a2e28c2e5555b88ba77ef9",
+    "t/indexed_value_reads_book.t": "29bee0cd464bd1c8a20216d40d45c04a4f63698f9ca20e010fba910958ecc1d8",
+    "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md": "4e23e63a1bde5e3203b36d0b9b3f6a8abe34db0903d778a2af5f45c333e5baca",
+    "docs/linkedspec-book/src/dsl/values-containers-and-flow-helpers.md": "15085ba3fae516a4549058d52fb2347437bbcb338772fda84095dcb939f1a591",
+    "docs/linkedspec-book/src/appendix/helper-contract-catalog.md": "2d2a79931cda677efacc0820f2ff242ebb38350a601074f8d5f65ee0f6f56cf4",
+    "docs/linkedspec-book/src/appendix/runtime-semantics.md": "6246a74906fddec31d7caefa484b7c10a5841dcc510468a368ad66e40ce52fd3",
+    "docs/linkedspec-book/src/overview/design-rationale.md": "1e26d7ae6059312b782df776ac5591c6580c09e2c6c7226d562dead3f14d86e0",
+    "docs/linkedspec-book/src/overview/project-status.md": "1bbbf88d7f3c17df27b90fd825224514efe9dc4990bcdf777554acebf5d79d96"
+  },
+  "checks": [
+    {
+      "command": "env PERL5LIB= bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --lib indexed_var_",
+      "exit": 101,
+      "result": "RED: 0 pass, 3 intended regression groups fail, 179 filtered",
+      "log": ".linkedspec-data/scratch/indexed-read88/unit-before.log",
+      "log_bytes": 800324,
+      "log_sha256": "bef5fb2b36d92e7ecc6054abb61077b3d9d4275fcf6f708b8fff76fbb337e281"
+    },
+    {
+      "command": "env PERL5LIB= bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --lib --test indexed_value_reads --test integration_test --test uniform_binding_contract --test hash_key_separator",
+      "exit": 0,
+      "result": "397 pass: full runtime unit182; hash-key1; indexed carrier1 with18 cases times2 line endings; integration197; uniform-binding16",
+      "log": ".linkedspec-data/scratch/indexed-read88/runtime-after.log",
+      "log_bytes": 827917,
+      "log_sha256": "71901b6c58b5dcd607865bd97af99f989fc8e858f047bce9d806dc87ad42cc6e"
+    },
+    {
+      "command": "env PERL5LIB= bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test source_emitter emitted_indexed_read_book_example_preserves_current_bindings",
+      "exit": 0,
+      "result": "1 pass, 11 unrelated cases filtered; native and independently compiled emitted book parser, x/y/x",
+      "log": ".linkedspec-data/scratch/indexed-read88/emitted-book.log",
+      "log_bytes": 798736,
+      "log_sha256": "6d7a937c6ecd36531cff272ac8c546ecbe336c17deac74063dcda60c85b36af4"
+    },
+    {
+      "command": "env PERL5LIB= bash tools/project_data_run.sh prove -Iperl t/indexed_value_reads_book.t",
+      "exit": 0,
+      "result": "26 pass; exact book source, native/generated, LF/CRLF",
+      "log": ".linkedspec-data/scratch/indexed-read88/perl-book.log",
+      "log_bytes": 165,
+      "log_sha256": "03e313985ffa8392185eb95705f3c9a52abdbbba65a0839c3ed1968641acfa52"
+    },
+    {
+      "command": "env PERL5LIB= bash tools/run_mdbook_local.sh",
+      "exit": 0,
+      "result": "render PASS; independent HTMLParser verifies exact shared source and published JSON code blocks",
+      "log": ".linkedspec-data/scratch/indexed-read88/book.log",
+      "log_bytes": 274,
+      "log_sha256": "961ba4b45eb58a567e5013fe8bedbb180432bbff79e11ae988b909800e9032e7"
+    },
+    {
+      "command": "env PERL5LIB= bash tools/run_python_project_data.sh tools/check_uniform_binding_contract.py",
+      "exit": 0,
+      "result": "11 migrations /7 executions /6 invalid selectors /8 constructors PASS",
+      "log": ".linkedspec-data/scratch/indexed-read88/binding.log",
+      "log_bytes": 96,
+      "log_sha256": "5dceaadbc3ebd719926b545d2fa448e92b4c4296bed06870b4c38e41880193d8"
+    },
+    {
+      "command": "env PERL5LIB= bash tools/run_python_project_data.sh tools/check_mutation_public_surface.py",
+      "exit": 0,
+      "result": "70 public files /14 governed documents /11 example classes /10 stale claims /50 mutations PASS",
+      "log": ".linkedspec-data/scratch/indexed-read88/mutation-public.log",
+      "log_bytes": 138,
+      "log_sha256": "b241f94e497a31a9b9b305dfb36e3af6d2f1810a5cc21f4c03a8776585f82124"
+    },
+    {
+      "command": "env PERL5LIB= bash tools/project_data_run.sh rustfmt --edition 2024 --check rust/linkedspec-runtime/src/engine.rs rust/linkedspec-runtime/tests/indexed_value_reads.rs rust/linkedspec-runtime/tests/source_emitter.rs",
+      "exit": 0,
+      "result": "PASS",
+      "log": ".linkedspec-data/scratch/indexed-read88/format.log",
+      "log_bytes": 0,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "public_checkpoint": "docs/checkpoints/SESSION-STARTUP-READING.88-indexed-read-repair.json",
+  "read_purity_intake": "docs/checkpoints/SESSION-STARTUP-READING.89-read-purity.json",
+  "red_binary_identity": "0db828af27384b2f10309dc65544585f34f648cf9941a7b0f9ddd7d61ae7e2d1  rust/target/debug/deps/linkedspec_runtime-017e6b73bdd57060\necd8bd47bd9c5be4635f2947773519d958c015f405d51d8d78fb42a45ebaf7b8  rust/linkedspec-runtime/src/engine.rs\n",
+  "red_timing": "Public RED completed before fix. Unit RED binary was fully built and identified before source repair; its delayed execution completed with three intended failures before the GREEN build began.",
+  "boundaries": [
+    "Existing Rust numeric read coercion preserved; no new negative/fractional/nonnumeric parity claim",
+    "Perl grouped-postfix remains .87.4-owned",
+    "Final canonical boundary remains repair-group acceptance/push",
+    "Containment .16 precedes required Perl read-purity repair .89, then .51 after this clean commit"
+  ]
+}

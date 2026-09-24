@@ -12,6 +12,12 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-09-24 — Indexed reads must resolve the current typed binding
+
+`Expr::IndexedVar` retained a private `get_array` lookup even after assignment began storing typed arrays through `set_scalar`. This made one bracket behave differently from a bare binding or nested access and could expose an obsolete array map entry. Startup .88 uses `array_index_value(&ctx.get_bare_value(name), idx)` after evaluating the index, preserving the prior numeric read conversion and side-effect timing. It does not alter parser nodes, serialization, generated format, or strict write selectors.
+
+The public 17-case oracle separates12 genuine failures from five successful controls. Runtime unit regression groups independently exercise stale storage, wrong kinds/absence, unchanged Rust coercion, and index effects. The book shares `examples/indexed-value-reads.spec` with Perl native/generated and Rust emitted-source tests. Grouped Perl postfix remains .87.4-owned; nonstandard index coercion is not newly claimed as portable. The delayed unit harness was sampled at `_dyld_start` and later completed182 tests; host-policy cause remains .81-owned. The book review also exposes raw Perl dereference autovivification in five of six public controls, contrary to ADR0036. Its precise lowering owner and complete binding-after values are preserved in the .89 checkpoint/card; .89 repairs this existing contract immediately after containment .16, before .51. Exact focused evidence lives in the .88 checkpoints and Knowledge card.
+
 ## 2026-09-24 — SESSION-STARTUP-READING.50 - preserve compact hash-key separators
 
 The brace classifier already distinguishes an isolated pair colon from namespace colon runs; parse_name did not. Stop only the isolated colon, preserving both CodeBlock modes, namespace and keyword roles, dynamic-key evaluation, retired fat-arrow rejection and scalar source spans. The zero-argument receiver terminator already accepts a colon, so the same lexical correction fixes key.trim:7. Full core258, selected runtime226, keyword policy1, emitted book1, Perl book26 and exact public13 establish the bounded repair. The book includes the exact fixture used by both languages rather than maintaining a separate prose copy.

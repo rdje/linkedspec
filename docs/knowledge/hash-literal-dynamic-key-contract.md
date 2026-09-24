@@ -54,4 +54,5 @@ September24 update: the executable compact-key example in `examples/compact-hash
 by the book, Perl native/emitted tests, and the Rust emitted-source test. Startup
 `.50` repairs Rust tokenization when a bare key touches the colon; this preserves
 the existing evaluated-key contract. See [[hash-literal-colon-rust-parity]] for
-its focused recurrence and the separately owned indexed-read limitation.
+its focused recurrence; [[rust-single-index-read-bypasses-typed-binding]] owns
+the separate `.88` typed-binding repair and indexed-key proof.

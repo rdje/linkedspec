@@ -3989,8 +3989,11 @@ Three backbone items tracked major structural modernization — all done:
   for current backend parity and no companion scaffold exists yet.
 - **Write-vivification and explicit receiver mutation rollout** - ADR `0036` and `FUTURE-PARITY-BACKLOG.19`
   govern a post-current-parity extension. Nested assignments may create only missing containers whose kind is
-  unambiguous from the next evaluated segment; reads remain pure, existing wrong-kind values are not coerced, and
-  arrays remain dense. `map_leaves!` is the only v1 bang method and atomically rebinds a bare named receiver after
+  unambiguous from the next evaluated segment; reads are required to remain pure, existing wrong-kind values are not coerced, and
+  arrays remain dense. September24 public checks expose a
+  [Perl read-purity violation](../dsl/value-container-flow-helper-reference.md#read-purity), owned for immediate
+  repair by startup `.89` after task-tree containment; the write contract is unchanged.
+  `map_leaves!` is the only v1 bang method and atomically rebinds a bare named receiver after
   successful original-shape/root-kind traversal. Neutral write, bang, and composition contracts `.19.1.1-.3` are
   frozen. Perl `.19.2.1-.2` and Rust `.19.3.1-.2` implement both: evaluated typed nested paths, presence-aware
   dense isolated creation, dedicated typed bang ASTs, copied callback bindings, identity-keyed receiver guards

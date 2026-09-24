@@ -230,7 +230,8 @@ dispatch rule.
 - **Signature**: `base[path_segment...]`, where `base` is a working scalar containing an array/hash payload.
 - **Returns**: read form returns the selected value or `undef`; assignment returns the updated root on success.
   Structural failures throw the typed v1 diagnostic on all five backends.
-- **Behavior**: Reads any-depth mixed hash/array paths directly from a structured payload without creating state.
+- **Behavior**: Reads any-depth mixed hash/array paths directly from a structured payload. The contract forbids
+  creating state; see the [current Perl read limitation](../dsl/value-container-flow-helper-reference.md#read-purity).
   Assignment uses the same spelling. On all five backends, each bracket expression is evaluated and its runtime kind selects
   harray (string) or array (nonnegative integer), so dynamic selectors are not classified from their authored
   spelling. A non-reserved bare path atom such as `[i]` reads the scalar working variable. The assignment target

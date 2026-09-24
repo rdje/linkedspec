@@ -256,10 +256,41 @@ The example source is exercised directly by the Perl native/generated tests and
 the Rust emitted-source test. Recompile saved or generated parsers after updating
 the Rust compiler to pick up parser fixes.
 
-Rust currently has a separate indexed-read defect: after `items = ["a"]`,
-`items[0]` returns `null`, while `items.first()` returns `"a"`. A hash key derived
-from that single indexed read can consequently become an empty string. This
-limitation is tracked for repair; it does not affect the example above.
+Single-level reads such as `items[0]` use the current typed array binding on Perl
+and Rust. This applies after assignment, `set`, append, and split, including a
+later replacement of the binding. Use nonnegative integer indexes for portable
+array reads; a bare index variable or an expression such as `items[add(0,1)]`
+selects an element too. An out-of-range element is `undef` (JSON `null`).
+
+<a id="read-purity"></a>
+
+The read contract forbids creating missing containers; the stricter typed write-path
+rules below govern assignments through brackets.
+
+**Known Perl read limitation:** a direct read can currently create a missing
+container or replace a null intermediate. For example, reading
+`tree["missing"][0]` after `tree = {}` changes the Perl binding to
+`{"missing":[]}` even though the result is null. Reading `items[0]` after
+`items = undef` similarly changes it to `[]`. Rust preserves those bindings.
+This violates the read contract and is tracked for repair. The following example
+initializes its containers and does not encounter that limitation.
+
+This executable example selects elements, saves a detached array value, replaces
+the original binding, and uses an element as a computed hash key:
+
+```text
+{{#include ../../../../examples/indexed-value-reads.spec}}
+```
+
+With input `x`, it returns:
+
+```json
+{"first":"first","selected":"second","snapshot":["saved"],"current":"rebound","missing":null,"rebound":7}
+```
+
+Perl native/generated and Rust native/emitted tests execute this exact source.
+Regenerate and rebuild emitted Rust parsers with the updated runtime to pick up
+the indexed-read repair.
 
 > **Expression-valued blocks are receiver-capable value expressions.** A non-empty block without a top-level
 > hash-pair delimiter can feed a compatible receiver-dot helper chain. The yielded value enters the normal helper family
@@ -305,7 +336,7 @@ labels and a value expression such as `case(cat(foo, ""), body)` when the case v
 > chooses harray, while a nonnegative integer chooses array. `meta[key] = value` reads working values `key` and
 > `value`, and in value positions yields the updated root snapshot.
 > Direct nested access `payload["children"][0]["name"]` is accepted for mixed path segments.
-> Reads retain their existing direct-access interpretation and never create state. For assignment on all five backends, every
+> Reads retain their existing direct-access interpretation; the contract requires them never to create state, with the current Perl limitation described above. For assignment on all five backends, every
 > bracket is an ordinary expression whose evaluated value selects the path kind: string means harray and
 > nonnegative integer means array. Non-reserved bare path atoms such as `[i]` read scalar working variables.
 > The same path can be an assignment target: `payload["children"][0]["name"] = value` mutates the
@@ -430,7 +461,8 @@ Nested lvalue paths use the same assignment surface on every backend. For exampl
 replace an existing index or append exactly at `length`. A larger index raises `nested_write_array_gap`; a bound
 null, scalar, or other wrong-kind intermediate raises `nested_write_kind_conflict`. All segments evaluate once
 left-to-right, then the RHS once, before isolated structural validation. Success publishes once and yields a
-detached updated root; reads never create containers.
+detached updated root. The read contract forbids creating containers; see the
+[current Perl read limitation](#read-purity).
 
 Canonical child-result pattern:
 

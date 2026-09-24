@@ -12,6 +12,12 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-09-24 — SESSION-STARTUP-READING.88 - read indexed values from current typed bindings
+
+Rust `items[0]` now resolves the current typed binding through the existing array-element helper. It no longer loses assigned/appended/split arrays or reads stale private array storage after rebinding. Index evaluation order and numeric conversion are unchanged; absent elements return undef without creating state.
+
+Three regression groups are RED before repair; full runtime unit182 plus selected integration215 are GREEN. Public Perl/Rust17 proof repairs exactly12 wrong Rust values and preserves five controls. Parsed/compiled roundtrips and native/reconstructed/generated18x2 pass. One included book fixture passes Perl26 and independently compiled emitted Rust1, with exact rendered source/result checks. Checkpoints `.88-indexed-read-repair.json` and `.88-verification.json` preserve sources, binary/log identities and focused scope. Existing pre-main delay remains .81-owned; containment .16 precedes .51. The independent read-purity audit exposes five Perl mutations in six public controls; checkpoint .89-read-purity.json, the Knowledge card and corrected book qualify the former unconditional purity claim. Required repair .89 follows containment .16 before .51. No new push or LS-004 closure is claimed.
+
 ## 2026-09-24 — SESSION-STARTUP-READING.50 - preserve compact hash-key separators
 
 Rust parse_name now stops at an isolated hash-pair colon while retaining existing namespace colon runs. Compact dynamic, nested, computed, Unicode-valued and bare receiver keys keep evaluated-key semantics and exact source/scalar spans. One shared examples/compact-hash-keys.spec is included by the book and executed by Perl native/emitted and Rust emitted tests; the book also states the independently confirmed indexed-read limitation.

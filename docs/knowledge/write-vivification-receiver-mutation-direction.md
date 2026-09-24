@@ -15,7 +15,7 @@ answers:
   - is callback path absolute or relative
   - does map_leaves bang traverse replacement subtrees immediately
   - when will write vivification and map_leaves bang be implemented
-date: 2026-07-15
+date: 2026-09-24
 status: accepted direction; implementation, admission, recurrence, and public closeout complete
 tags: [dsl, mutation, autovivification, receiver-methods, traversal, paths, portability, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.19.0; ADR 0036; Knowledge Map cards for nested writes/uniform binding/five-backend traversal; source audit of Perl MethodExpr/AST Parser, Rust expr parser, Dart/Julia/Lua ActionIR parsers; Perl direct nested-write probe, Rust terse_11_4 (3/3), Dart exact no-autovivification test, Julia complete local tests with a writable depot stacked before installed packages, and Lua 121/121 on PUC Lua/LuaJIT. The first Julia empty-depot-only attempt failed on blocked registry resolution; the stacked-depot rerun passed. No behavior changed."
@@ -46,7 +46,9 @@ all five backends:
 
 1. A nested **write** may create a missing root or intermediate. The frozen neutral contract is
    [[write-vivification-neutral-contract]], now implemented on the Perl reference by
-   [[write-vivification-perl-reference]]. Reads never create state. The next evaluated
+   [[write-vivification-perl-reference]]. The contract requires reads never to create state;
+   September24 public probes establish a current Perl violation, owned for repair by
+   [[perl-direct-read-autovivification-gap]]. The next evaluated
    segment determines the container: exact nonnegative integer means array, string means harray. Existing
    wrong-kind values are never coerced. Arrays remain dense, so indexes greater than `length` fail instead of
    inventing null filler leaves. Path/RHS evaluation precedes isolated copy-on-write validation and commit.
