@@ -5396,11 +5396,13 @@ if ($method_call && $method_call->{method} eq 'num_sum') {
  my $pipeline_target = $lower_array_pipeline_value_expr->($target_call);
  $pipeline_target = $lower_internal_array_pipeline_target_expr->($target_expr)
   unless defined($pipeline_target) && length($pipeline_target);
- return undef unless $looks_like_array_value_expr->($target_expr)
-                  || (defined($pipeline_target) && length($pipeline_target));
+ # Accept the lowered value; the reducer below checks its runtime array kind.
+ # Source spelling cannot determine direct reads or function parameter values.
 
  my $array_symbol = $extract_array_symbol_name->($target_expr);
- if (defined($array_symbol) && length($array_symbol) && $target_expr =~ $array_symbol_expr_re) {
+ if (defined($array_symbol)
+  && $array_symbol =~ /^[A-Za-z_][A-Za-z0-9_]*$/o
+  && $target_expr =~ $array_symbol_expr_re) {
   return 'do { my $__ls_num_sum_total = 0; my $__ls_num_sum_ok = 1; for my $__ls_num_sum_term (@'.$array_symbol.') { if (!(defined($__ls_num_sum_term) && $__ls_num_sum_term =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/)) { $__ls_num_sum_ok = 0; last; } $__ls_num_sum_total += $__ls_num_sum_term; } $__ls_num_sum_ok ? $__ls_num_sum_total : undef }';
  }
 
@@ -5421,11 +5423,13 @@ if ($method_call && $method_call->{method} eq 'num_avg') {
  my $pipeline_target = $lower_array_pipeline_value_expr->($target_call);
  $pipeline_target = $lower_internal_array_pipeline_target_expr->($target_expr)
   unless defined($pipeline_target) && length($pipeline_target);
- return undef unless $looks_like_array_value_expr->($target_expr)
-                  || (defined($pipeline_target) && length($pipeline_target));
+ # Accept the lowered value; the reducer below checks its runtime array kind.
+ # Source spelling cannot determine direct reads or function parameter values.
 
  my $array_symbol = $extract_array_symbol_name->($target_expr);
- if (defined($array_symbol) && length($array_symbol) && $target_expr =~ $array_symbol_expr_re) {
+ if (defined($array_symbol)
+  && $array_symbol =~ /^[A-Za-z_][A-Za-z0-9_]*$/o
+  && $target_expr =~ $array_symbol_expr_re) {
   return 'do { my $__ls_num_avg_total = 0; my $__ls_num_avg_count = 0; my $__ls_num_avg_ok = 1; for my $__ls_num_avg_term (@'.$array_symbol.') { if (!(defined($__ls_num_avg_term) && $__ls_num_avg_term =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/)) { $__ls_num_avg_ok = 0; last; } $__ls_num_avg_total += $__ls_num_avg_term; $__ls_num_avg_count++; } $__ls_num_avg_ok ? ($__ls_num_avg_count ? ($__ls_num_avg_total / $__ls_num_avg_count) : undef) : undef }';
  }
 
@@ -5444,7 +5448,9 @@ if ($method_call && $method_call->{method} eq 'num_median') {
  return undef unless defined($target_expr) && length($target_expr);
 
  my $array_symbol = $extract_array_symbol_name->($target_expr);
- if (defined($array_symbol) && length($array_symbol) && $target_expr =~ $array_symbol_expr_re) {
+ if (defined($array_symbol)
+  && $array_symbol =~ /^[A-Za-z_][A-Za-z0-9_]*$/o
+  && $target_expr =~ $array_symbol_expr_re) {
   return 'do { my @__ls_num_median_terms = @'.$array_symbol.'; my $__ls_num_median_ok = 1; for my $__ls_num_median_term (@__ls_num_median_terms) { if (!(defined($__ls_num_median_term) && $__ls_num_median_term =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/)) { $__ls_num_median_ok = 0; last; } } if ($__ls_num_median_ok && @__ls_num_median_terms) { @__ls_num_median_terms = sort { $a <=> $b } @__ls_num_median_terms; my $__ls_num_median_count = scalar(@__ls_num_median_terms); my $__ls_num_median_mid = int($__ls_num_median_count / 2); ($__ls_num_median_count % 2) ? $__ls_num_median_terms[$__ls_num_median_mid] : (($__ls_num_median_terms[$__ls_num_median_mid - 1] + $__ls_num_median_terms[$__ls_num_median_mid]) / 2) } else { undef } }';
  }
 
@@ -5466,7 +5472,9 @@ if ($method_call && $method_call->{method} eq 'num_range') {
  return undef unless defined($target_expr) && length($target_expr);
 
  my $array_symbol = $extract_array_symbol_name->($target_expr);
- if (defined($array_symbol) && length($array_symbol) && $target_expr =~ $array_symbol_expr_re) {
+ if (defined($array_symbol)
+  && $array_symbol =~ /^[A-Za-z_][A-Za-z0-9_]*$/o
+  && $target_expr =~ $array_symbol_expr_re) {
   return 'do { my $__ls_num_range_min; my $__ls_num_range_max; my $__ls_num_range_seen = 0; my $__ls_num_range_ok = 1; for my $__ls_num_range_term (@'.$array_symbol.') { if (!(defined($__ls_num_range_term) && $__ls_num_range_term =~ /\A-?(?:\d+(?:\.\d+)?|\.\d+)\z/)) { $__ls_num_range_ok = 0; last; } if ($__ls_num_range_seen) { $__ls_num_range_min = $__ls_num_range_term if $__ls_num_range_term < $__ls_num_range_min; $__ls_num_range_max = $__ls_num_range_term if $__ls_num_range_term > $__ls_num_range_max; } else { $__ls_num_range_min = $__ls_num_range_term; $__ls_num_range_max = $__ls_num_range_term; $__ls_num_range_seen = 1; } } $__ls_num_range_ok ? ($__ls_num_range_seen ? ($__ls_num_range_max - $__ls_num_range_min) : undef) : undef }';
  }
 
@@ -5604,6 +5612,7 @@ if ($method_call && $method_call->{method} eq 'num_add') {
 
    my $array_symbol = $extract_array_symbol_name->($target_expr);
    if (defined($array_symbol)
+    && $array_symbol =~ /^[A-Za-z_][A-Za-z0-9_]*$/o
     && length($array_symbol)
     && $target_expr =~ $array_symbol_expr_re
     && (($bare_symbol_kind->($array_symbol) // '') ne 'scalar')) {
@@ -5641,6 +5650,7 @@ if ($method_call && $method_call->{method} eq 'num_add') {
 
    my $array_symbol = $extract_array_symbol_name->($target_expr);
    if (defined($array_symbol)
+    && $array_symbol =~ /^[A-Za-z_][A-Za-z0-9_]*$/o
     && length($array_symbol)
     && $target_expr =~ $array_symbol_expr_re
     && (($bare_symbol_kind->($array_symbol) // '') ne 'scalar')) {

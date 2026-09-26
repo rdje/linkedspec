@@ -2,17 +2,19 @@
 
 ## Current Activity
 
-Perl direct reads and function array constructors now preserve their documented value behavior. Numeric reducer composition .91 is next, then legacy fallback verification .92 before cat-arity .51; global book reconciliation remains open.
+Perl numeric reducers now accept array values from bindings, direct reads and functions. Director-requested LS-004 public recheck is next; resume due artifact census .93, then verification-cost repair .92, single numeric constructor .94, numeric result kinds .95 and cat-arity .51. Global book reconciliation remains open.
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.90 - read function array constructor values` — native/fresh/source RED/GREEN, focused118, complete Phase01033, exact executable book example, selector inventory, public mutation50 and storage24 pass.
+- `SESSION-STARTUP-READING.91 - reduce array values through numeric helpers` — exact baseline RED/GREEN, focused128, complete Phase01033,152 native/fresh cases, public selectors, exact executable book example, storage24 and public mutation50 pass.
 
 ## Next Action
 
-- Activate startup .91 and fix numeric reducers rejecting valid array values from direct reads, derived bindings and function parameters. The director will notify ARCHOGEN only after LS-004 is verified fixed.
+- Recheck open consumer LS-004 through the published RGX interface from the clean boundary; then resume startup .93/.92/.94/.95 before .51. The director will notify ARCHOGEN only after LS-004 is verified fixed.
 
 ## Recent Completions
+
+- `2026-09-26` — `SESSION-STARTUP-READING.91` fixes numeric array-value composition with focused128, Phase01033,152 native/fresh cases and exact book proof.
 
 - `2026-09-25` — `SESSION-STARTUP-READING.90` repairs function array constructor values with focused118, Phase01033 and exact native/fresh LF/CRLF book proof.
 
@@ -43,8 +45,6 @@ Perl direct reads and function array constructors now preserve their documented 
 - `2026-09-24` — `SESSION-STARTUP-READING.86.4.8.2` repairs grouped operands; focused187/book21 and Phase0 1033/1033 pass.
 
 - `2026-09-24` — `SESSION-STARTUP-READING.86.4.8.1` rejects numeric-incompatible grouped-pattern lookahead and owns required .86.4.8.2.
-
-- `2026-09-24` — `SESSION-STARTUP-READING.86.4.4.1` owns four grouped-operand failures and eighteen controls; .86.4.8 is required before public closeout.
 
 ## History
 

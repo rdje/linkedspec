@@ -1,0 +1,220 @@
+{
+  "owner": "SESSION-STARTUP-READING.95",
+  "status": "confirmed current Perl result-kind defect; no algorithm repair in91",
+  "source": "docs/linkedspec-book/src/appendix/helper-contract-catalog.md at clean49678, reconstructed scaffold except exact sum fence",
+  "observations": [
+    {
+      "error": "",
+      "expected": [
+        3
+      ],
+      "handler_error": null,
+      "input": "8,3",
+      "matches": true,
+      "source": "demo::  -> value  .push\nLX { return(copy(demo)) }\n\nvalue : /(\\d+),(\\d+)/  I.return( num_min(entry_group(0), entry_group(1)) )\n",
+      "value": [
+        3
+      ]
+    },
+    {
+      "error": "",
+      "expected": [
+        1
+      ],
+      "handler_error": null,
+      "input": "8,3,5,1",
+      "matches": false,
+      "source": "demo::  -> value  .push\nLX { return(copy(demo)) }\n\nvalue : /(\\d+),(\\d+),(\\d+),(\\d+)/  I.return( num_min(array(entry_group(0), entry_group(1), entry_group(2), entry_group(3))) )\n",
+      "value": [
+        "1"
+      ]
+    },
+    {
+      "error": "",
+      "expected": [
+        8
+      ],
+      "handler_error": null,
+      "input": "8,3",
+      "matches": true,
+      "source": "demo::  -> value  .push\nLX { return(copy(demo)) }\n\nvalue : /(\\d+),(\\d+)/  I.return( num_max(entry_group(0), entry_group(1)) )\n",
+      "value": [
+        8
+      ]
+    },
+    {
+      "error": "",
+      "expected": [
+        8
+      ],
+      "handler_error": null,
+      "input": "8,3,5,1",
+      "matches": false,
+      "source": "demo::  -> value  .push\nLX { return(copy(demo)) }\n\nvalue : /(\\d+),(\\d+),(\\d+),(\\d+)/  I.return( num_max(array(entry_group(0), entry_group(1), entry_group(2), entry_group(3))) )\n",
+      "value": [
+        "8"
+      ]
+    },
+    {
+      "error": "",
+      "expected": [
+        4
+      ],
+      "handler_error": null,
+      "input": "2,4,6",
+      "matches": true,
+      "source": "demo::  -> value  .push\nLX { return(copy(demo)) }\n\nvalue : /(\\d+),(\\d+),(\\d+)/  I.return( num_avg(array(entry_group(0), entry_group(1), entry_group(2))) )\n",
+      "value": [
+        4
+      ]
+    },
+    {
+      "error": "",
+      "expected": [
+        3
+      ],
+      "handler_error": null,
+      "input": "5,1,3,2,4",
+      "matches": false,
+      "source": "demo::  -> value  .push\nLX { return(copy(demo)) }\n\nvalue : /(\\d+),(\\d+),(\\d+),(\\d+),(\\d+)/  I.return( num_median(array(entry_group(0), entry_group(1), entry_group(2), entry_group(3), entry_group(4))) )\n",
+      "value": [
+        "3"
+      ]
+    },
+    {
+      "error": "",
+      "expected": [
+        8
+      ],
+      "handler_error": null,
+      "input": "3,9,1,7",
+      "matches": true,
+      "source": "demo::  -> value  .push\nLX { return(copy(demo)) }\n\nvalue : /(\\d+),(\\d+),(\\d+),(\\d+)/  I.return( num_range(array(entry_group(0), entry_group(1), entry_group(2), entry_group(3))) )\n",
+      "value": [
+        8
+      ]
+    },
+    {
+      "error": "",
+      "expected": [
+        10
+      ],
+      "handler_error": null,
+      "input": "1,2,3,4",
+      "matches": true,
+      "source": "demo::  -> value  .push\nLX { return(copy(demo)) }\n\nvalue : /(\\d+),(\\d+),(\\d+),(\\d+)/  I.return( num_sum(array(entry_group(0), entry_group(1), entry_group(2), entry_group(3))) )\n",
+      "value": [
+        10
+      ]
+    }
+  ],
+  "proof_limit": "Test::More scalar equality does not prove JSON scalar kinds. These rows use canonical JSON serialization comparison.",
+  "mechanism": "MethodLowering array min/max and odd median select and return an existing source element; numeric-looking checks/comparisons do not replace its original string kind. Arithmetic sum/avg/range and even median coerce through arithmetic.",
+  "baseline_and_candidate_replay": "Explicitly loaded clean49678 owner and candidate91 both match all8 corrected current-Perl catalog outputs; no numeric algorithm fix claimed.",
+  "corrected_catalog_sources": [
+    {
+      "error": "",
+      "expected": [
+        3
+      ],
+      "handler_error": null,
+      "input": "8,3",
+      "matches": true,
+      "source": "demo::  -> value  .push\nLX { return(copy(demo)) }\n\nvalue : /(\\d+),(\\d+)/  I.return( num_min(entry_group(0), entry_group(1)) )\n",
+      "value": [
+        3
+      ]
+    },
+    {
+      "error": "",
+      "expected": [
+        "1"
+      ],
+      "handler_error": null,
+      "input": "8,3,5,1",
+      "matches": true,
+      "source": "demo::  -> value  .push\nLX { return(copy(demo)) }\n\nvalue : /(\\d+),(\\d+),(\\d+),(\\d+)/  I.return( num_min(array(entry_group(0), entry_group(1), entry_group(2), entry_group(3))) )\n",
+      "value": [
+        "1"
+      ]
+    },
+    {
+      "error": "",
+      "expected": [
+        8
+      ],
+      "handler_error": null,
+      "input": "8,3",
+      "matches": true,
+      "source": "demo::  -> value  .push\nLX { return(copy(demo)) }\n\nvalue : /(\\d+),(\\d+)/  I.return( num_max(entry_group(0), entry_group(1)) )\n",
+      "value": [
+        8
+      ]
+    },
+    {
+      "error": "",
+      "expected": [
+        "8"
+      ],
+      "handler_error": null,
+      "input": "8,3,5,1",
+      "matches": true,
+      "source": "demo::  -> value  .push\nLX { return(copy(demo)) }\n\nvalue : /(\\d+),(\\d+),(\\d+),(\\d+)/  I.return( num_max(array(entry_group(0), entry_group(1), entry_group(2), entry_group(3))) )\n",
+      "value": [
+        "8"
+      ]
+    },
+    {
+      "error": "",
+      "expected": [
+        4
+      ],
+      "handler_error": null,
+      "input": "2,4,6",
+      "matches": true,
+      "source": "demo::  -> value  .push\nLX { return(copy(demo)) }\n\nvalue : /(\\d+),(\\d+),(\\d+)/  I.return( num_avg(array(entry_group(0), entry_group(1), entry_group(2))) )\n",
+      "value": [
+        4
+      ]
+    },
+    {
+      "error": "",
+      "expected": [
+        "3"
+      ],
+      "handler_error": null,
+      "input": "5,1,3,2,4",
+      "matches": true,
+      "source": "demo::  -> value  .push\nLX { return(copy(demo)) }\n\nvalue : /(\\d+),(\\d+),(\\d+),(\\d+),(\\d+)/  I.return( num_median(array(entry_group(0), entry_group(1), entry_group(2), entry_group(3), entry_group(4))) )\n",
+      "value": [
+        "3"
+      ]
+    },
+    {
+      "error": "",
+      "expected": [
+        8
+      ],
+      "handler_error": null,
+      "input": "3,9,1,7",
+      "matches": true,
+      "source": "demo::  -> value  .push\nLX { return(copy(demo)) }\n\nvalue : /(\\d+),(\\d+),(\\d+),(\\d+)/  I.return( num_range(array(entry_group(0), entry_group(1), entry_group(2), entry_group(3))) )\n",
+      "value": [
+        8
+      ]
+    },
+    {
+      "error": "",
+      "expected": [
+        10
+      ],
+      "handler_error": null,
+      "input": "1,2,3,4",
+      "matches": true,
+      "source": "demo::  -> value  .push\nLX { return(copy(demo)) }\n\nvalue : /(\\d+),(\\d+),(\\d+),(\\d+)/  I.return( num_sum(array(entry_group(0), entry_group(1), entry_group(2), entry_group(3))) )\n",
+      "value": [
+        10
+      ]
+    }
+  ]
+}

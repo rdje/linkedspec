@@ -1203,13 +1203,13 @@ The shipped explicit string bridge names are `str_eq`, `str_ne`, `str_gt`,
 - **Signature**: `num_min(a: numeric, b: numeric)` or `num_min(arr: array)`
 - **Returns**: numeric
 - **Behavior**: Two-argument form: returns the smaller of two numbers. Array form: returns the minimum element. Returns `undef` for empty array, non-array, or non-numeric elements.
-- **Example**: 2-arg — over `/(\d+),(\d+)/`, `num_min(entry_group(0), entry_group(1))` on `8,3` → `[3]`. Array — over `/(\d+),(\d+),(\d+),(\d+)/`, `num_min(array(entry_group(0), entry_group(1), entry_group(2), entry_group(3)))` on `8,3,5,1` → `[1]`.
+- **Example**: 2-arg — over `/(\d+),(\d+)/`, `num_min(entry_group(0), entry_group(1))` on `8,3` → `[3]`. Array — over `/(\d+),(\d+),(\d+),(\d+)/`, `num_min(array(entry_group(0), entry_group(1), entry_group(2), entry_group(3)))` on `8,3,5,1` → `["1"]` on current Perl (numeric-string result; see below).
 
 ### `num_max(a, b)` / `num_max(arr)`
 - **Signature**: `num_max(a: numeric, b: numeric)` or `num_max(arr: array)`
 - **Returns**: numeric
 - **Behavior**: Two-argument form: returns the larger. Array form: returns the maximum element.
-- **Example**: 2-arg — over `/(\d+),(\d+)/`, `num_max(entry_group(0), entry_group(1))` on `8,3` → `[8]`. Array — over `/(\d+),(\d+),(\d+),(\d+)/`, `num_max(array(entry_group(0), entry_group(1), entry_group(2), entry_group(3)))` on `8,3,5,1` → `[8]`.
+- **Example**: 2-arg — over `/(\d+),(\d+)/`, `num_max(entry_group(0), entry_group(1))` on `8,3` → `[8]`. Array — over `/(\d+),(\d+),(\d+),(\d+)/`, `num_max(array(entry_group(0), entry_group(1), entry_group(2), entry_group(3)))` on `8,3,5,1` → `["8"]` on current Perl (numeric-string result; see below).
 
 ### `num_clamp(x, lo, hi)`
 - **Signature**: `num_clamp(x: numeric, lo: numeric, hi: numeric)`
@@ -1218,8 +1218,8 @@ The shipped explicit string bridge names are `str_eq`, `str_ne`, `str_gt`,
 - **Example**: over `/(\d+)/`, `num_clamp(entry_group(0), 0, 10)` gives `[10]` on `42` and `[7]` on `7`.
 
 ### `num_sum(arr)`
-- **Current Perl limitation**: Direct-access array arguments, including a binding assigned from such a read,
-  can return null before numeric reduction. See the [measured reducer controls](../dsl/value-container-flow-helper-reference.md#numeric-value-helpers) and current source-shape limitation.
+- **Array value sources (Perl)**: Literals, bindings, direct reads and function arguments/results are accepted.
+  See the [complete six-reducer example](../dsl/value-container-flow-helper-reference.md#numeric-reducers-consume-array-values), including empty arrays and receiver form.
 - **Signature**: `num_sum(arr: array)`
 - **Returns**: numeric
 - **Behavior**: Sum of array elements. Returns `0` for empty array. Returns `undef` for non-array or non-numeric element sources.
@@ -1242,7 +1242,13 @@ The shipped explicit string bridge names are `str_eq`, `str_ne`, `str_gt`,
 - **Signature**: `num_median(arr: array)`
 - **Returns**: numeric
 - **Behavior**: Median of array elements after numeric sort. For even-length arrays, returns the average of the two middle elements. Returns `undef` for empty array, non-array, or non-numeric elements.
-- **Example**: over `/(\d+),(\d+),(\d+),(\d+),(\d+)/`, `num_median(array(entry_group(0), entry_group(1), entry_group(2), entry_group(3), entry_group(4)))` on `5,1,3,2,4` → `[3]` (sorted `1,2,3,4,5`; middle element).
+- **Example**: over `/(\d+),(\d+),(\d+),(\d+),(\d+)/`, `num_median(array(entry_group(0), entry_group(1), entry_group(2), entry_group(3), entry_group(4)))` on `5,1,3,2,4` → `["3"]` on current Perl (sorted `1,2,3,4,5`; middle element).
+
+Current Perl type limitation: array-form `num_min`/`num_max` and odd-length
+`num_median` preserve the selected element's string kind when the array contains
+numeric text, including capture groups. Even-length median, sum, average and range
+perform arithmetic and return numbers. `SESSION-STARTUP-READING.95` owns correction
+of these numeric result kinds; the scalar two-argument min/max forms return numbers.
 
 ### `num_range(arr)`
 - **Signature**: `num_range(arr: array)`

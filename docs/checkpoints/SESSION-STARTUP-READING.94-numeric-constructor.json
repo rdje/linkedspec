@@ -1,0 +1,100 @@
+{
+  "owner": "SESSION-STARTUP-READING.94",
+  "status": "confirmed baseline defect; no constructor repair in91",
+  "activation_commit": "49678a8c136ea2f824f6f0ed2ac0b1170f52087a",
+  "command": "env PERL5LIB= bash tools/project_data_run.sh perl -Iperl .linkedspec-data/scratch/numeric91/constructor-intake.pl [baseline]",
+  "baseline": {
+    "owner": ".linkedspec-data/scratch/numeric91/baseline-lib/LinkedSpec/ActionIR/MethodLowering.pm",
+    "rows": [
+      {
+        "error": "",
+        "expression": "array(3)",
+        "handler_error": null,
+        "lowered": "return [@3]",
+        "source": "Top::\n -> Done { return(array(3)) }\nDone:\n /x/\n",
+        "value": []
+      },
+      {
+        "error": "",
+        "expression": "[3]",
+        "handler_error": null,
+        "lowered": "return [3]",
+        "source": "Top::\n -> Done { return([3]) }\nDone:\n /x/\n",
+        "value": [
+          3
+        ]
+      },
+      {
+        "error": "",
+        "expression": "sum(array(3))",
+        "handler_error": null,
+        "lowered": "return do { my $__ls_num_sum_total = 0; my $__ls_num_sum_ok = 1; for my $__ls_num_sum_term (@3) { if (!(defined($__ls_num_sum_term) && $__ls_num_sum_term =~ /\\A-?(?:\\d+(?:\\.\\d+)?|\\.\\d+)\\z/)) { $__ls_num_sum_ok = 0; last; } $__ls_num_sum_total += $__ls_num_sum_term; } $__ls_num_sum_ok ? $__ls_num_sum_total : undef }",
+        "source": "Top::\n -> Done { return(sum(array(3))) }\nDone:\n /x/\n",
+        "value": 0
+      },
+      {
+        "error": "",
+        "expression": "sum([3])",
+        "handler_error": null,
+        "lowered": "return do { my $__ls_num_sum_source = [3]; if (defined($__ls_num_sum_source) && ref($__ls_num_sum_source) eq 'ARRAY') { my $__ls_num_sum_total = 0; my $__ls_num_sum_ok = 1; for my $__ls_num_sum_term (@{$__ls_num_sum_source}) { if (!(defined($__ls_num_sum_term) && $__ls_num_sum_term =~ /\\A-?(?:\\d+(?:\\.\\d+)?|\\.\\d+)\\z/)) { $__ls_num_sum_ok = 0; last; } $__ls_num_sum_total += $__ls_num_sum_term; } $__ls_num_sum_ok ? $__ls_num_sum_total : undef } else { undef } }",
+        "source": "Top::\n -> Done { return(sum([3])) }\nDone:\n /x/\n",
+        "value": 3
+      },
+      {
+        "error": "",
+        "expression": "sum(3)",
+        "handler_error": null,
+        "lowered": "return do { my $__ls_num_sum_total = 0; my $__ls_num_sum_ok = 1; for my $__ls_num_sum_term (@3) { if (!(defined($__ls_num_sum_term) && $__ls_num_sum_term =~ /\\A-?(?:\\d+(?:\\.\\d+)?|\\.\\d+)\\z/)) { $__ls_num_sum_ok = 0; last; } $__ls_num_sum_total += $__ls_num_sum_term; } $__ls_num_sum_ok ? $__ls_num_sum_total : undef }",
+        "source": "Top::\n -> Done { return(sum(3)) }\nDone:\n /x/\n",
+        "value": 0
+      }
+    ]
+  },
+  "candidate91": {
+    "owner": "perl/LinkedSpec/ActionIR/MethodLowering.pm",
+    "rows": [
+      {
+        "error": "",
+        "expression": "array(3)",
+        "handler_error": null,
+        "lowered": "return [@3]",
+        "source": "Top::\n -> Done { return(array(3)) }\nDone:\n /x/\n",
+        "value": []
+      },
+      {
+        "error": "",
+        "expression": "[3]",
+        "handler_error": null,
+        "lowered": "return [3]",
+        "source": "Top::\n -> Done { return([3]) }\nDone:\n /x/\n",
+        "value": [
+          3
+        ]
+      },
+      {
+        "error": "",
+        "expression": "sum(array(3))",
+        "handler_error": null,
+        "lowered": "return do { my $__ls_num_sum_source = [@3]; if (defined($__ls_num_sum_source) && ref($__ls_num_sum_source) eq 'ARRAY') { my $__ls_num_sum_total = 0; my $__ls_num_sum_ok = 1; for my $__ls_num_sum_term (@{$__ls_num_sum_source}) { if (!(defined($__ls_num_sum_term) && $__ls_num_sum_term =~ /\\A-?(?:\\d+(?:\\.\\d+)?|\\.\\d+)\\z/)) { $__ls_num_sum_ok = 0; last; } $__ls_num_sum_total += $__ls_num_sum_term; } $__ls_num_sum_ok ? $__ls_num_sum_total : undef } else { undef } }",
+        "source": "Top::\n -> Done { return(sum(array(3))) }\nDone:\n /x/\n",
+        "value": 0
+      },
+      {
+        "error": "",
+        "expression": "sum([3])",
+        "handler_error": null,
+        "lowered": "return do { my $__ls_num_sum_source = [3]; if (defined($__ls_num_sum_source) && ref($__ls_num_sum_source) eq 'ARRAY') { my $__ls_num_sum_total = 0; my $__ls_num_sum_ok = 1; for my $__ls_num_sum_term (@{$__ls_num_sum_source}) { if (!(defined($__ls_num_sum_term) && $__ls_num_sum_term =~ /\\A-?(?:\\d+(?:\\.\\d+)?|\\.\\d+)\\z/)) { $__ls_num_sum_ok = 0; last; } $__ls_num_sum_total += $__ls_num_sum_term; } $__ls_num_sum_ok ? $__ls_num_sum_total : undef } else { undef } }",
+        "source": "Top::\n -> Done { return(sum([3])) }\nDone:\n /x/\n",
+        "value": 3
+      },
+      {
+        "error": "",
+        "expression": "sum(3)",
+        "handler_error": null,
+        "lowered": "return do { my $__ls_num_sum_source = 3; if (defined($__ls_num_sum_source) && ref($__ls_num_sum_source) eq 'ARRAY') { my $__ls_num_sum_total = 0; my $__ls_num_sum_ok = 1; for my $__ls_num_sum_term (@{$__ls_num_sum_source}) { if (!(defined($__ls_num_sum_term) && $__ls_num_sum_term =~ /\\A-?(?:\\d+(?:\\.\\d+)?|\\.\\d+)\\z/)) { $__ls_num_sum_ok = 0; last; } $__ls_num_sum_total += $__ls_num_sum_term; } $__ls_num_sum_ok ? $__ls_num_sum_total : undef } else { undef } }",
+        "source": "Top::\n -> Done { return(sum(3)) }\nDone:\n /x/\n",
+        "value": null
+      }
+    ]
+  }
+}

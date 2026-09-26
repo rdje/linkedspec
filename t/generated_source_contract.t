@@ -1005,4 +1005,164 @@ FUNCTION_ARRAY_RUNNER
  } else { fail('fresh process wrote its observations') }
 };
 
+subtest 'numeric reducers consume values in native and fresh generated parsers' => sub {
+ require Cwd;
+ my $root = Cwd::abs_path($repo_root);
+ my $scratch = tempdir(CLEANUP => 1);
+ my $json = JSON::PP->new->canonical->allow_nonref;
+ my @methods = qw(sum avg median range min max);
+ my @expected = (6,2,2,2,1,3);
+ my @cases;
+ for my $index (0..$#methods) {
+  my $method = $methods[$index];
+  my $expected = $expected[$index];
+  my @forms = (
+   ['literal', '', "$method([3,1,2])", $expected],
+   ['constructor', '', "$method(array(3,1,2))", $expected],
+   ['direct', 'document = {"items":[3,1,2]};', "$method(document[\"items\"])", $expected],
+   ['canonical', 'document = {"items":[3,1,2]};', "num_$method(document[\"items\"])", $expected],
+   ['receiver', 'document = {"items":[3,1,2]};', "document[\"items\"].$method()", $expected],
+   ['bound_literal', 'items = [3,1,2];', "$method(items)", $expected],
+   ['bound_read', 'document = {"items":[3,1,2]}; items = document["items"];', "$method(items)", $expected],
+   ['function_parameter', '', 'reduce([3,1,2])', $expected,
+    "fn reduce(items) { return($method(items)) }\n"],
+   ['function_local', '', 'reduce([3,1,2])', $expected,
+    "fn reduce(items) { local = items; return($method(local)) }\n"],
+   ['function_return', '', "$method(values())", $expected,
+    "fn values() { return([3,1,2]) }\n"],
+   ['pipeline', 'document = {"items":[3,1,2]};', "document[\"items\"].sorted().$method()", $expected],
+   ['composition', 'document = {"items":[3,1,2]};', "add($method(document[\"items\"]), 10)", $expected+10],
+   ['empty', '', "$method([])", $method eq 'sum' ? 0 : undef],
+   ['missing', 'document = {};', "$method(document[\"items\"])", undef],
+   ['null', '', "$method(undef)", undef],
+   ['wrong_kind', '', "$method({})", undef],
+   ['scalar', '', "$method(3)", undef],
+   ['boolean', '', "$method(true)", undef],
+   ['single_literal', '', "$method([3])", $method eq 'range' ? 0 : 3],
+   ['nonnumeric', '', "$method([3,\"no\",2])", undef],
+   ['null_member', '', "$method([3,undef,2])", undef],
+   ['numeric_strings', '', "$method([\"3\",\"1\",\"2\"])", $expected],
+   ['selector_once', 'document = [[3,1,2],[7,8,9]]; key = -1;',
+    "observed = $method(document[set(key, add(key, 1))]); return([observed, key, document])",
+    [$expected,0,[[3,1,2],[7,8,9]]]],
+  );
+  for my $form (@forms) {
+   my ($id,$setup,$expr,$value,$prefix) = @$form;
+   my $action = $id eq 'selector_once' ? $expr : "return($expr)";
+   push @cases, {id=>"$method-$id", expected=>$value,
+    source=>($prefix//'')."Top::\n -> Done { $setup $action }\nDone:\n /x/\n"};
+  }
+  for my $capture (['public','entry_groups()'],['internal','IMATCH_LIST']) {
+   push @cases, {id=>"$method-capture-$capture->[0]",input=>'3,1,2',expected=>[$expected],
+    source=>"Top:: -> Done .push\nLX { return(copy(Top)) }\nDone:\n "
+     . '/(\d),(\d),(\d)/ I { return('.$method.'('.$capture->[1].')) }' . "\n"};
+  }
+ }
+ my $book = read_text(File::Spec->catfile($root,'examples','numeric-array-values.spec'));
+ for my $ending ('LF','CRLF') {
+  my $source = $book;
+  $source =~ s/\n/\r\n/g if $ending eq 'CRLF';
+  push @cases, {id=>"book-$ending",source=>$source,
+   expected=>[[6,2,2,2,1,3],[0,undef,undef,undef,undef,undef],6,6]};
+ }
+ my @artifacts;
+ for my $case (@cases) {
+  subtest "native $case->{id}" => sub {
+   my %ctx;
+   my $parser = eval { LinkedSpec::Get(\$case->{source},runtime_ctx_ref=>\%ctx) };
+   is("$@",'','Get does not throw');
+   ok(ref($parser) eq 'CODE','Get returns a parser');
+   if (ref($parser) eq 'CODE') {
+    for my $run (1,2) {
+     my $input = $case->{input} // 'x';
+     my $value = eval { $parser->(\$input) };
+     is("$@",'',"run $run does not throw");
+     is_deeply($value,$case->{expected},"run $run returns the numeric result and preserves selector effects");
+     ok(!$ctx{last_error},"run $run has no handler error");
+    }
+   }
+  };
+  my $generated = LinkedSpec::emit_generated_source(\$case->{source},source_identity=>"numeric-array:$case->{id}");
+  unlike($generated,qr/LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER/,"$case->{id} lowers its value source");
+  my $path = File::Spec->catfile($scratch,"$case->{id}.pl");
+  open my $fh,'>:encoding(UTF-8)',$path or die $!;
+  print {$fh} $generated;
+  close $fh or die $!;
+  push @artifacts,File::Spec->abs2rel($path,$root);
+ }
+ my $runner = File::Spec->catfile($scratch,'runner.pl');
+ open my $fh,'>',$runner or die $!;
+ print {$fh} <<'NUMERIC_RUNNER';
+use strict;
+use warnings;
+use File::Spec ();
+use JSON::PP ();
+my ($root,$output,$input_json,@artifacts) = @ARGV;
+my $inputs = JSON::PP::decode_json($input_json);
+my @rows;
+for my $index (0..$#artifacts) {
+ open my $fh,'<:encoding(UTF-8)',File::Spec->catfile($root,$artifacts[$index]) or die $!;
+ my $source = do { local $/; <$fh> };
+ close $fh or die $!;
+ my $package = "LinkedSpec::NumericArrayEmitted::Case$index";
+ my $loaded = eval "package $package; $source; 1";
+ my $row = {load_error=>"$@",runs=>[]};
+ if ($loaded) {
+  for (1,2) {
+   my $input = $inputs->[$index];
+   my $value = eval { no strict 'refs'; &{"${package}::Execute"}(\$input) };
+   push @{$row->{runs}},{value=>$value,error=>"$@"};
+  }
+ }
+ push @rows,$row;
+}
+open my $out,'>',$output or die $!;
+print {$out} JSON::PP->new->canonical->allow_nonref->encode(\@rows);
+close $out or die $!;
+NUMERIC_RUNNER
+ close $fh or die $!;
+ my $output = File::Spec->catfile($scratch,'results.json');
+ is(system($^X,'-I'.File::Spec->catdir($root,'perl'),$runner,$root,$output,$json->encode([map { $_->{input} // 'x' } @cases]),@artifacts),
+  0,'fresh generated-source child exits successfully');
+ if (-f $output) {
+  my $rows = $json->decode(read_text($output));
+  is(scalar(@$rows),scalar(@cases),'fresh process returns every case');
+  for my $index (0..$#cases) {
+   my $case = $cases[$index];
+   my $row = $rows->[$index];
+   is($row->{load_error},'',"$case->{id} loads independently");
+   for my $run (0,1) {
+    is($row->{runs}[$run]{error},'',"$case->{id} emitted run $run does not throw");
+    is_deeply($row->{runs}[$run]{value},$case->{expected},"$case->{id} emitted run $run returns the numeric result");
+   }
+  }
+ } else { fail('fresh process wrote its observations') }
+
+ subtest 'public substitution evaluates each selector once' => sub {
+  for my $index (0..$#methods) {
+   my $method = $methods[$index];
+   my $document = [[3,1,2]];
+   my ($key,$observed);
+   my %__ls_binding_presence;
+   my @events;
+   tie $key,'LinkedSpec::DirectReadObservedScalar',\@events,'key',sub { 0 };
+   my $lowered = LinkedSpec::call_spec_handler_subst('Top',"observed = $method(document[key])");
+   eval $lowered;
+   is("$@",'',"$method substitution executes");
+   is($observed,$expected[$index],"$method substitutes the same reducer");
+   is_deeply(\@events,['key'],"$method fetches the selector exactly once");
+   is_deeply($document,[[3,1,2]],"$method preserves the source container");
+   untie $key;
+   my @IMATCH_LIST = (3,1,2);
+   my @LMATCH_LIST = (3,1,2);
+   for my $binding ('IMATCH_LIST','LMATCH_LIST') {
+    my $capture_lowered = LinkedSpec::call_spec_handler_subst('Done',"observed = $method($binding)");
+    eval $capture_lowered;
+    is("$@",'',"$method reads the existing $binding array");
+    is($observed,$expected[$index],"$method preserves $binding compatibility");
+   }
+  }
+ };
+};
+
 done_testing;

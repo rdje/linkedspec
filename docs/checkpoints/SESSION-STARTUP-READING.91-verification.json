@@ -1,0 +1,900 @@
+{
+  "format": 1,
+  "owner": "SESSION-STARTUP-READING.91",
+  "activation_commit": "49678a8c136ea2f824f6f0ed2ac0b1170f52087a",
+  "verification_tier": "focused",
+  "status": "Complete focused runtime/book/Phase0 acceptance PASS; final normal doctrine hooks govern landing",
+  "scope": "Perl sum/avg spelling gates removed; six numeric binding fast paths require ASCII identifier grammar. Existing array-name extractor owns reserved-name exceptions, including IMATCH_LIST/LMATCH_LIST. No FlowExpr/arithmetic policy/format/storage/gate movement.",
+  "checks": [
+    {
+      "command": "env PERL5LIB= bash tools/project_data_run.sh prove -v -Iperl .linkedspec-data/scratch/numeric91/baseline-suite.pl",
+      "exit": 1,
+      "result": "Exact final152-case fixture with explicit clean49678 owner: prior9 groups PASS; only new group10 fails",
+      "path": ".linkedspec-data/scratch/numeric91/red-capture-final.log",
+      "bytes": 630031,
+      "sha256": "0b777151851052bd29aa6214a6ec32c774013c99904aab964452febdb54f970d"
+    },
+    {
+      "command": "env PERL5LIB= bash tools/project_data_run.sh prove -v -Iperl t/generated_source_contract.t t/scalar_numeric_contract.t t/uniform_binding_contract.t t/variadic_user_function_contract.t t/actionir_ast_parser.t t/trace_actionir_method_lowering.t t/trace_emit_context_bridge.t",
+      "exit": 0,
+      "result": "7 files/128 results PASS;118s;152 native/fresh cases twice and48 public selector/capture assertions",
+      "path": ".linkedspec-data/scratch/numeric91/focused-capture-final.log",
+      "bytes": 219950,
+      "sha256": "2db58943bd3c33ef4ec3501dc28dd4bfdcf45b34d544d93396b9bf966d08208e"
+    },
+    {
+      "command": "env PERL5LIB= bash tools/test_perl_project_data_storage.sh",
+      "exit": 0,
+      "result": "24 existing Perl allocator owners, CLI and trace locality PASS",
+      "path": ".linkedspec-data/scratch/numeric91/storage.log",
+      "bytes": 363,
+      "sha256": "44186163f492af3a97698123b58ea2daec30182824adb4722ca22b6143d893bc"
+    },
+    {
+      "command": "env PERL5LIB= bash tools/run_python_project_data.sh tools/check_executable_aggregate_selector_sources.py",
+      "exit": 0,
+      "result": "0 positive/20 classified, discovery self-test PASS",
+      "path": ".linkedspec-data/scratch/numeric91/selectors.log",
+      "bytes": 163,
+      "sha256": "3e7265581bd14226c202ee6c37979152abd01cc31016e09e5b323f7607e4c4a2"
+    },
+    {
+      "command": "env PERL5LIB= bash tools/run_python_project_data.sh tools/check_mutation_public_surface.py",
+      "exit": 0,
+      "result": "70 public files/14 governed/11 classes/10 stale claims/50 mutations PASS",
+      "path": ".linkedspec-data/scratch/numeric91/mutation-public.log",
+      "bytes": 138,
+      "sha256": "b241f94e497a31a9b9b305dfb36e3af6d2f1810a5cc21f4c03a8776585f82124"
+    },
+    {
+      "command": "env PERL5LIB= bash tools/run_mdbook_local.sh",
+      "exit": 0,
+      "result": "Managed mdBook render PASS; existing large search-index warning",
+      "path": ".linkedspec-data/scratch/numeric91/book-accepted.log",
+      "bytes": 274,
+      "sha256": "05d57cea9c4b160991461e8e3c640ab1682e86752363d886e221522c85646984"
+    },
+    {
+      "command": "env PERL5LIB= bash tools/project_data_run.sh env PYTHONDONTWRITEBYTECODE=1 python3 .linkedspec-data/scratch/numeric91/verify-book.py",
+      "exit": 0,
+      "result": "Exact included source, documented JSON, anchor/link and optional-semicolon text PASS",
+      "path": ".linkedspec-data/scratch/numeric91/book-exact.log",
+      "bytes": 113,
+      "sha256": "b416a359cff82ed6d1010a70236c4c737a2c8468e4c162490604e90355f3fe14"
+    },
+    {
+      "command": "env PERL5LIB= bash scripts/check_doctrines.sh",
+      "exit": 0,
+      "result": "PASS during active preparation; final staged checks still required",
+      "path": ".linkedspec-data/scratch/numeric91/doctrines-active.log",
+      "bytes": 1202,
+      "sha256": "17bd8fa352f66e11c437faf35d30aa1880f670236c7602a1a58c925b842d98ad"
+    },
+    {
+      "command": "env PERL5LIB= bash scripts/check_memory_architecture.sh",
+      "exit": 0,
+      "result": "PASS during active preparation; final staged checks still required",
+      "path": ".linkedspec-data/scratch/numeric91/memory-active.log",
+      "bytes": 774,
+      "sha256": "5454e5a0b6b51d07cc1a0f688ba5ef8a724f8b3d643695aa8ab9368fa8be2478"
+    },
+    {
+      "command": "env PERL5LIB= bash scripts/check_doctrines.sh",
+      "exit": 0,
+      "result": "All9 PASS after capture-compatible final candidate; final staged normal hooks required",
+      "path": ".linkedspec-data/scratch/numeric91/doctrines-capture-active.log",
+      "bytes": 1202,
+      "sha256": "17bd8fa352f66e11c437faf35d30aa1880f670236c7602a1a58c925b842d98ad"
+    },
+    {
+      "command": "env PERL5LIB= bash tools/project_data_run.sh prove -v -Iperl t/phase0_regression.t",
+      "exit": 0,
+      "result": "Files=1, Tests=1033, 1668 wallclock secs ( 0.40 usr  0.07 sys + 1046.67 cusr 200.55 csys = 1247.69 CPU)",
+      "path": ".linkedspec-data/scratch/numeric91/phase0-capture-final.log",
+      "bytes": 1791081,
+      "sha256": "be324435163d913a70a0111add11f5f4a1bd96f275b5f40136b4267a912eb3e1"
+    }
+  ],
+  "syntax": "LinkedSpec.pm, MethodLowering.pm, phase0_regression.t and generated_source_contract.t PASS",
+  "family_audit": [
+    {
+      "method": "sum",
+      "case": "literal",
+      "source": "Top::\n -> Done {  return(sum([3,1,2])) }\nDone:\n /x/\n",
+      "baseline": 6,
+      "candidate": 6,
+      "baseline_unsupported": false,
+      "candidate_unsupported": false
+    },
+    {
+      "method": "sum",
+      "case": "direct",
+      "source": "Top::\n -> Done { document = {\"items\":[3,1,2]}; return(sum(document[\"items\"])) }\nDone:\n /x/\n",
+      "baseline": null,
+      "candidate": 6,
+      "baseline_unsupported": true,
+      "candidate_unsupported": false
+    },
+    {
+      "method": "sum",
+      "case": "receiver",
+      "source": "Top::\n -> Done { document = {\"items\":[3,1,2]}; return(document[\"items\"].sum()) }\nDone:\n /x/\n",
+      "baseline": null,
+      "candidate": 6,
+      "baseline_unsupported": true,
+      "candidate_unsupported": false
+    },
+    {
+      "method": "sum",
+      "case": "bound_literal",
+      "source": "Top::\n -> Done { items = [3,1,2]; return(sum(items)) }\nDone:\n /x/\n",
+      "baseline": null,
+      "candidate": 6,
+      "baseline_unsupported": true,
+      "candidate_unsupported": false
+    },
+    {
+      "method": "sum",
+      "case": "bound_read",
+      "source": "Top::\n -> Done { document = {\"items\":[3,1,2]}; items = document[\"items\"]; return(sum(items)) }\nDone:\n /x/\n",
+      "baseline": null,
+      "candidate": 6,
+      "baseline_unsupported": true,
+      "candidate_unsupported": false
+    },
+    {
+      "method": "sum",
+      "case": "function",
+      "source": "fn reduce(items) { return(sum(items)) }\nTop::\n -> Done {  return(reduce([3,1,2])) }\nDone:\n /x/\n",
+      "baseline": null,
+      "candidate": 6,
+      "baseline_unsupported": true,
+      "candidate_unsupported": false
+    },
+    {
+      "method": "sum",
+      "case": "function_return",
+      "source": "fn values() { return([3,1,2]) }\nTop::\n -> Done {  return(sum(values())) }\nDone:\n /x/\n",
+      "baseline": null,
+      "candidate": 6,
+      "baseline_unsupported": true,
+      "candidate_unsupported": false
+    },
+    {
+      "method": "sum",
+      "case": "empty",
+      "source": "Top::\n -> Done {  return(sum([])) }\nDone:\n /x/\n",
+      "baseline": 0,
+      "candidate": 0,
+      "baseline_unsupported": false,
+      "candidate_unsupported": false
+    },
+    {
+      "method": "sum",
+      "case": "invalid",
+      "source": "Top::\n -> Done {  return(sum([3,undef,2])) }\nDone:\n /x/\n",
+      "baseline": null,
+      "candidate": null,
+      "baseline_unsupported": false,
+      "candidate_unsupported": false
+    },
+    {
+      "method": "sum",
+      "case": "wrong_kind",
+      "source": "Top::\n -> Done {  return(sum({})) }\nDone:\n /x/\n",
+      "baseline": null,
+      "candidate": null,
+      "baseline_unsupported": true,
+      "candidate_unsupported": false
+    },
+    {
+      "method": "avg",
+      "case": "literal",
+      "source": "Top::\n -> Done {  return(avg([3,1,2])) }\nDone:\n /x/\n",
+      "baseline": 2,
+      "candidate": 2,
+      "baseline_unsupported": false,
+      "candidate_unsupported": false
+    },
+    {
+      "method": "avg",
+      "case": "direct",
+      "source": "Top::\n -> Done { document = {\"items\":[3,1,2]}; return(avg(document[\"items\"])) }\nDone:\n /x/\n",
+      "baseline": null,
+      "candidate": 2,
+      "baseline_unsupported": true,
+      "candidate_unsupported": false
+    },
+    {
+      "method": "avg",
+      "case": "receiver",
+      "source": "Top::\n -> Done { document = {\"items\":[3,1,2]}; return(document[\"items\"].avg()) }\nDone:\n /x/\n",
+      "baseline": null,
+      "candidate": 2,
+      "baseline_unsupported": true,
+      "candidate_unsupported": false
+    },
+    {
+      "method": "avg",
+      "case": "bound_literal",
+      "source": "Top::\n -> Done { items = [3,1,2]; return(avg(items)) }\nDone:\n /x/\n",
+      "baseline": null,
+      "candidate": 2,
+      "baseline_unsupported": true,
+      "candidate_unsupported": false
+    },
+    {
+      "method": "avg",
+      "case": "bound_read",
+      "source": "Top::\n -> Done { document = {\"items\":[3,1,2]}; items = document[\"items\"]; return(avg(items)) }\nDone:\n /x/\n",
+      "baseline": null,
+      "candidate": 2,
+      "baseline_unsupported": true,
+      "candidate_unsupported": false
+    },
+    {
+      "method": "avg",
+      "case": "function",
+      "source": "fn reduce(items) { return(avg(items)) }\nTop::\n -> Done {  return(reduce([3,1,2])) }\nDone:\n /x/\n",
+      "baseline": null,
+      "candidate": 2,
+      "baseline_unsupported": true,
+      "candidate_unsupported": false
+    },
+    {
+      "method": "avg",
+      "case": "function_return",
+      "source": "fn values() { return([3,1,2]) }\nTop::\n -> Done {  return(avg(values())) }\nDone:\n /x/\n",
+      "baseline": null,
+      "candidate": 2,
+      "baseline_unsupported": true,
+      "candidate_unsupported": false
+    },
+    {
+      "method": "avg",
+      "case": "empty",
+      "source": "Top::\n -> Done {  return(avg([])) }\nDone:\n /x/\n",
+      "baseline": null,
+      "candidate": null,
+      "baseline_unsupported": false,
+      "candidate_unsupported": false
+    },
+    {
+      "method": "avg",
+      "case": "invalid",
+      "source": "Top::\n -> Done {  return(avg([3,undef,2])) }\nDone:\n /x/\n",
+      "baseline": null,
+      "candidate": null,
+      "baseline_unsupported": false,
+      "candidate_unsupported": false
+    },
+    {
+      "method": "avg",
+      "case": "wrong_kind",
+      "source": "Top::\n -> Done {  return(avg({})) }\nDone:\n /x/\n",
+      "baseline": null,
+      "candidate": null,
+      "baseline_unsupported": true,
+      "candidate_unsupported": false
+    },
+    {
+      "method": "median",
+      "case": "literal",
+      "source": "Top::\n -> Done {  return(median([3,1,2])) }\nDone:\n /x/\n",
+      "baseline": 2,
+      "candidate": 2,
+      "baseline_unsupported": false,
+      "candidate_unsupported": false
+    },
+    {
+      "method": "median",
+      "case": "direct",
+      "source": "Top::\n -> Done { document = {\"items\":[3,1,2]}; return(median(document[\"items\"])) }\nDone:\n /x/\n",
+      "baseline": 2,
+      "candidate": 2,
+      "baseline_unsupported": false,
+      "candidate_unsupported": false
+    },
+    {
+      "method": "median",
+      "case": "receiver",
+      "source": "Top::\n -> Done { document = {\"items\":[3,1,2]}; return(document[\"items\"].median()) }\nDone:\n /x/\n",
+      "baseline": 2,
+      "candidate": 2,
+      "baseline_unsupported": false,
+      "candidate_unsupported": false
+    },
+    {
+      "method": "median",
+      "case": "bound_literal",
+      "source": "Top::\n -> Done { items = [3,1,2]; return(median(items)) }\nDone:\n /x/\n",
+      "baseline": 2,
+      "candidate": 2,
+      "baseline_unsupported": false,
+      "candidate_unsupported": false
+    },
+    {
+      "method": "median",
+      "case": "bound_read",
+      "source": "Top::\n -> Done { document = {\"items\":[3,1,2]}; items = document[\"items\"]; return(median(items)) }\nDone:\n /x/\n",
+      "baseline": 2,
+      "candidate": 2,
+      "baseline_unsupported": false,
+      "candidate_unsupported": false
+    },
+    {
+      "method": "median",
+      "case": "function",
+      "source": "fn reduce(items) { return(median(items)) }\nTop::\n -> Done {  return(reduce([3,1,2])) }\nDone:\n /x/\n",
+      "baseline": 2,
+      "candidate": 2,
+      "baseline_unsupported": false,
+      "candidate_unsupported": false
+    },
+    {
+      "method": "median",
+      "case": "function_return",
+      "source": "fn values() { return([3,1,2]) }\nTop::\n -> Done {  return(median(values())) }\nDone:\n /x/\n",
+      "baseline": 2,
+      "candidate": 2,
+      "baseline_unsupported": false,
+      "candidate_unsupported": false
+    },
+    {
+      "method": "median",
+      "case": "empty",
+      "source": "Top::\n -> Done {  return(median([])) }\nDone:\n /x/\n",
+      "baseline": null,
+      "candidate": null,
+      "baseline_unsupported": false,
+      "candidate_unsupported": false
+    },
+    {
+      "method": "median",
+      "case": "invalid",
+      "source": "Top::\n -> Done {  return(median([3,undef,2])) }\nDone:\n /x/\n",
+      "baseline": null,
+      "candidate": null,
+      "baseline_unsupported": false,
+      "candidate_unsupported": false
+    },
+    {
+      "method": "median",
+      "case": "wrong_kind",
+      "source": "Top::\n -> Done {  return(median({})) }\nDone:\n /x/\n",
+      "baseline": null,
+      "candidate": null,
+      "baseline_unsupported": false,
+      "candidate_unsupported": false
+    },
+    {
+      "method": "range",
+      "case": "literal",
+      "source": "Top::\n -> Done {  return(range([3,1,2])) }\nDone:\n /x/\n",
+      "baseline": 2,
+      "candidate": 2,
+      "baseline_unsupported": false,
+      "candidate_unsupported": false
+    },
+    {
+      "method": "range",
+      "case": "direct",
+      "source": "Top::\n -> Done { document = {\"items\":[3,1,2]}; return(range(document[\"items\"])) }\nDone:\n /x/\n",
+      "baseline": 2,
+      "candidate": 2,
+      "baseline_unsupported": false,
+      "candidate_unsupported": false
+    },
+    {
+      "method": "range",
+      "case": "receiver",
+      "source": "Top::\n -> Done { document = {\"items\":[3,1,2]}; return(document[\"items\"].range()) }\nDone:\n /x/\n",
+      "baseline": 2,
+      "candidate": 2,
+      "baseline_unsupported": false,
+      "candidate_unsupported": false
+    },
+    {
+      "method": "range",
+      "case": "bound_literal",
+      "source": "Top::\n -> Done { items = [3,1,2]; return(range(items)) }\nDone:\n /x/\n",
+      "baseline": 2,
+      "candidate": 2,
+      "baseline_unsupported": false,
+      "candidate_unsupported": false
+    },
+    {
+      "method": "range",
+      "case": "bound_read",
+      "source": "Top::\n -> Done { document = {\"items\":[3,1,2]}; items = document[\"items\"]; return(range(items)) }\nDone:\n /x/\n",
+      "baseline": 2,
+      "candidate": 2,
+      "baseline_unsupported": false,
+      "candidate_unsupported": false
+    },
+    {
+      "method": "range",
+      "case": "function",
+      "source": "fn reduce(items) { return(range(items)) }\nTop::\n -> Done {  return(reduce([3,1,2])) }\nDone:\n /x/\n",
+      "baseline": 2,
+      "candidate": 2,
+      "baseline_unsupported": false,
+      "candidate_unsupported": false
+    },
+    {
+      "method": "range",
+      "case": "function_return",
+      "source": "fn values() { return([3,1,2]) }\nTop::\n -> Done {  return(range(values())) }\nDone:\n /x/\n",
+      "baseline": 2,
+      "candidate": 2,
+      "baseline_unsupported": false,
+      "candidate_unsupported": false
+    },
+    {
+      "method": "range",
+      "case": "empty",
+      "source": "Top::\n -> Done {  return(range([])) }\nDone:\n /x/\n",
+      "baseline": null,
+      "candidate": null,
+      "baseline_unsupported": false,
+      "candidate_unsupported": false
+    },
+    {
+      "method": "range",
+      "case": "invalid",
+      "source": "Top::\n -> Done {  return(range([3,undef,2])) }\nDone:\n /x/\n",
+      "baseline": null,
+      "candidate": null,
+      "baseline_unsupported": false,
+      "candidate_unsupported": false
+    },
+    {
+      "method": "range",
+      "case": "wrong_kind",
+      "source": "Top::\n -> Done {  return(range({})) }\nDone:\n /x/\n",
+      "baseline": null,
+      "candidate": null,
+      "baseline_unsupported": false,
+      "candidate_unsupported": false
+    },
+    {
+      "method": "min",
+      "case": "literal",
+      "source": "Top::\n -> Done {  return(min([3,1,2])) }\nDone:\n /x/\n",
+      "baseline": 1,
+      "candidate": 1,
+      "baseline_unsupported": false,
+      "candidate_unsupported": false
+    },
+    {
+      "method": "min",
+      "case": "direct",
+      "source": "Top::\n -> Done { document = {\"items\":[3,1,2]}; return(min(document[\"items\"])) }\nDone:\n /x/\n",
+      "baseline": 1,
+      "candidate": 1,
+      "baseline_unsupported": false,
+      "candidate_unsupported": false
+    },
+    {
+      "method": "min",
+      "case": "receiver",
+      "source": "Top::\n -> Done { document = {\"items\":[3,1,2]}; return(document[\"items\"].min()) }\nDone:\n /x/\n",
+      "baseline": 1,
+      "candidate": 1,
+      "baseline_unsupported": false,
+      "candidate_unsupported": false
+    },
+    {
+      "method": "min",
+      "case": "bound_literal",
+      "source": "Top::\n -> Done { items = [3,1,2]; return(min(items)) }\nDone:\n /x/\n",
+      "baseline": 1,
+      "candidate": 1,
+      "baseline_unsupported": false,
+      "candidate_unsupported": false
+    },
+    {
+      "method": "min",
+      "case": "bound_read",
+      "source": "Top::\n -> Done { document = {\"items\":[3,1,2]}; items = document[\"items\"]; return(min(items)) }\nDone:\n /x/\n",
+      "baseline": 1,
+      "candidate": 1,
+      "baseline_unsupported": false,
+      "candidate_unsupported": false
+    },
+    {
+      "method": "min",
+      "case": "function",
+      "source": "fn reduce(items) { return(min(items)) }\nTop::\n -> Done {  return(reduce([3,1,2])) }\nDone:\n /x/\n",
+      "baseline": 1,
+      "candidate": 1,
+      "baseline_unsupported": false,
+      "candidate_unsupported": false
+    },
+    {
+      "method": "min",
+      "case": "function_return",
+      "source": "fn values() { return([3,1,2]) }\nTop::\n -> Done {  return(min(values())) }\nDone:\n /x/\n",
+      "baseline": 1,
+      "candidate": 1,
+      "baseline_unsupported": false,
+      "candidate_unsupported": false
+    },
+    {
+      "method": "min",
+      "case": "empty",
+      "source": "Top::\n -> Done {  return(min([])) }\nDone:\n /x/\n",
+      "baseline": null,
+      "candidate": null,
+      "baseline_unsupported": false,
+      "candidate_unsupported": false
+    },
+    {
+      "method": "min",
+      "case": "invalid",
+      "source": "Top::\n -> Done {  return(min([3,undef,2])) }\nDone:\n /x/\n",
+      "baseline": null,
+      "candidate": null,
+      "baseline_unsupported": false,
+      "candidate_unsupported": false
+    },
+    {
+      "method": "min",
+      "case": "wrong_kind",
+      "source": "Top::\n -> Done {  return(min({})) }\nDone:\n /x/\n",
+      "baseline": null,
+      "candidate": null,
+      "baseline_unsupported": false,
+      "candidate_unsupported": false
+    },
+    {
+      "method": "max",
+      "case": "literal",
+      "source": "Top::\n -> Done {  return(max([3,1,2])) }\nDone:\n /x/\n",
+      "baseline": 3,
+      "candidate": 3,
+      "baseline_unsupported": false,
+      "candidate_unsupported": false
+    },
+    {
+      "method": "max",
+      "case": "direct",
+      "source": "Top::\n -> Done { document = {\"items\":[3,1,2]}; return(max(document[\"items\"])) }\nDone:\n /x/\n",
+      "baseline": 3,
+      "candidate": 3,
+      "baseline_unsupported": false,
+      "candidate_unsupported": false
+    },
+    {
+      "method": "max",
+      "case": "receiver",
+      "source": "Top::\n -> Done { document = {\"items\":[3,1,2]}; return(document[\"items\"].max()) }\nDone:\n /x/\n",
+      "baseline": 3,
+      "candidate": 3,
+      "baseline_unsupported": false,
+      "candidate_unsupported": false
+    },
+    {
+      "method": "max",
+      "case": "bound_literal",
+      "source": "Top::\n -> Done { items = [3,1,2]; return(max(items)) }\nDone:\n /x/\n",
+      "baseline": 3,
+      "candidate": 3,
+      "baseline_unsupported": false,
+      "candidate_unsupported": false
+    },
+    {
+      "method": "max",
+      "case": "bound_read",
+      "source": "Top::\n -> Done { document = {\"items\":[3,1,2]}; items = document[\"items\"]; return(max(items)) }\nDone:\n /x/\n",
+      "baseline": 3,
+      "candidate": 3,
+      "baseline_unsupported": false,
+      "candidate_unsupported": false
+    },
+    {
+      "method": "max",
+      "case": "function",
+      "source": "fn reduce(items) { return(max(items)) }\nTop::\n -> Done {  return(reduce([3,1,2])) }\nDone:\n /x/\n",
+      "baseline": 3,
+      "candidate": 3,
+      "baseline_unsupported": false,
+      "candidate_unsupported": false
+    },
+    {
+      "method": "max",
+      "case": "function_return",
+      "source": "fn values() { return([3,1,2]) }\nTop::\n -> Done {  return(max(values())) }\nDone:\n /x/\n",
+      "baseline": 3,
+      "candidate": 3,
+      "baseline_unsupported": false,
+      "candidate_unsupported": false
+    },
+    {
+      "method": "max",
+      "case": "empty",
+      "source": "Top::\n -> Done {  return(max([])) }\nDone:\n /x/\n",
+      "baseline": null,
+      "candidate": null,
+      "baseline_unsupported": false,
+      "candidate_unsupported": false
+    },
+    {
+      "method": "max",
+      "case": "invalid",
+      "source": "Top::\n -> Done {  return(max([3,undef,2])) }\nDone:\n /x/\n",
+      "baseline": null,
+      "candidate": null,
+      "baseline_unsupported": false,
+      "candidate_unsupported": false
+    },
+    {
+      "method": "max",
+      "case": "wrong_kind",
+      "source": "Top::\n -> Done {  return(max({})) }\nDone:\n /x/\n",
+      "baseline": null,
+      "candidate": null,
+      "baseline_unsupported": false,
+      "candidate_unsupported": false
+    }
+  ],
+  "baseline_loading": "baseline-suite.pl loads LinkedSpec facade, rejects an already loaded MethodLowering, prepends repository-local shadow, explicitly requires MethodLowering, asserts the exact shadow path, then executes the final suite. Shadow bytes are exact git show49678 MethodLowering.",
+  "baseline_owner": {
+    "path": ".linkedspec-data/scratch/numeric91/baseline-lib/LinkedSpec/ActionIR/MethodLowering.pm",
+    "bytes": 380837,
+    "sha256": "1aa56f76e923f4a3969a7d3e88a634042185ba5f657a5d50593e16a0a6df1c1c"
+  },
+  "source_hashes": [
+    {
+      "path": "perl/LinkedSpec/ActionIR/MethodLowering.pm",
+      "bytes": 381075,
+      "sha256": "d8483a123000e26a55057ed3ab477b006a3bf313f35012c8e1868d55f7e5baf3"
+    },
+    {
+      "path": "t/generated_source_contract.t",
+      "bytes": 48676,
+      "sha256": "b088be1b2b37d29f6fb60263e4891903b62bdbfbdbc58cac1632bb68d8c8a43a"
+    },
+    {
+      "path": "examples/numeric-array-values.spec",
+      "bytes": 294,
+      "sha256": "5211bca340372b75724ab728c55b7f119db4b3f7af90dc05572409ac90f9ef58"
+    },
+    {
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "bytes": 96257,
+      "sha256": "af1ebd56c900797bbeff751b48e4dff0506fc88da5bf0ab90d243ce6b4415bec"
+    },
+    {
+      "path": "docs/linkedspec-book/src/appendix/helper-contract-catalog.md",
+      "bytes": 121807,
+      "sha256": "11214e8d0a123fa30352a0686d8438f645708a607b956f800d35ec0a2a885f4c"
+    },
+    {
+      "path": "docs/linkedspec-book/src/overview/project-status.md",
+      "bytes": 379915,
+      "sha256": "1647da6d4d1565b399797be8a1e109f9812d5b48d190dc02cce1489bcac0b121"
+    }
+  ],
+  "rejected_attempts": [
+    {
+      "log": "red.log",
+      "result": "Initial baseline rejects new group10; hash receiver/numeric-index selector fixture later corrected from public substituted ARRAY guard."
+    },
+    {
+      "log": "focused.log",
+      "result": "First candidate still exposes digit-only @3 fast path; changed all six numeric fast paths to legal nonreserved identifiers."
+    },
+    {
+      "log": "focused-final.log",
+      "result": "Pre-boolean/single-literal fixture PASS128; final extra constructor control intentionally added afterward."
+    },
+    {
+      "log": "green-final.log",
+      "result": "Only array(3) composition controls fail on both clean baseline and candidate; independent constructor defect task94/checkpoint retains exact source and values. Accepted reducer fixture uses single literal[3], not the failing constructor."
+    },
+    {
+      "log": "phase0-reserved-guard.log",
+      "result": "Full Phase0 PASS1033/1791s on an earlier candidate; later public capture-array probes expose a regression despite that pass. Not final acceptance. Corrected candidate must run the full gate again.",
+      "rejected_source_sha256": "d27411ea533ff59d6325d758f5d3358249443c74451e7015bbc354c365ea7b80"
+    }
+  ],
+  "next": "Commit91; recheck LS-004 under RGX-CONSUMER-BUILD-REPORTS.1 through public interface, then startup93/92/94/95/51.",
+  "catalog_proof": {
+    "command": "env PERL5LIB= bash tools/project_data_run.sh perl -CS -Iperl .linkedspec-data/scratch/numeric91/catalog.pl [baseline]",
+    "exit": 0,
+    "result": "8/8 exact current-Perl documented outputs on both explicit baseline and candidate; initial5/8 exposes separately95-owned result-kind defect",
+    "evidence": "docs/checkpoints/SESSION-STARTUP-READING.95-numeric-result-kinds.json"
+  },
+  "scalar_equality_limit": "The numeric-string is_deeply checks establish scalar value equality, not strict JSON number/string kind. Independent canonical JSON catalog comparisons expose the existing95 defect, whose current outputs are now documented.",
+  "capture_compatibility": {
+    "baseline": [
+      {
+        "error": "",
+        "handler_error": null,
+        "lowered": "return do { my $__ls_num_sum_total = 0; my $__ls_num_sum_ok = 1; for my $__ls_num_sum_term (@IMATCH_LIST) { if (!(defined($__ls_num_sum_term) && $__ls_num_sum_term =~ /\\A-?(?:\\d+(?:\\.\\d+)?|\\.\\d+)\\z/)) { $__ls_num_sum_ok = 0; last; } $__ls_num_sum_total += $__ls_num_sum_term; } $__ls_num_sum_ok ? $__ls_num_sum_total : undef }",
+        "method": "sum",
+        "source": "Top:: -> Done .push\nLX { return(copy(Top)) }\nDone:\n /(\\d),(\\d),(\\d)/ I { return(sum(IMATCH_LIST)) }\n",
+        "value": [
+          6
+        ]
+      },
+      {
+        "error": "",
+        "handler_error": null,
+        "lowered": "return do { my $__ls_num_avg_total = 0; my $__ls_num_avg_count = 0; my $__ls_num_avg_ok = 1; for my $__ls_num_avg_term (@IMATCH_LIST) { if (!(defined($__ls_num_avg_term) && $__ls_num_avg_term =~ /\\A-?(?:\\d+(?:\\.\\d+)?|\\.\\d+)\\z/)) { $__ls_num_avg_ok = 0; last; } $__ls_num_avg_total += $__ls_num_avg_term; $__ls_num_avg_count++; } $__ls_num_avg_ok ? ($__ls_num_avg_count ? ($__ls_num_avg_total / $__ls_num_avg_count) : undef) : undef }",
+        "method": "avg",
+        "source": "Top:: -> Done .push\nLX { return(copy(Top)) }\nDone:\n /(\\d),(\\d),(\\d)/ I { return(avg(IMATCH_LIST)) }\n",
+        "value": [
+          2
+        ]
+      },
+      {
+        "error": "",
+        "handler_error": null,
+        "lowered": "return do { my @__ls_num_median_terms = @IMATCH_LIST; my $__ls_num_median_ok = 1; for my $__ls_num_median_term (@__ls_num_median_terms) { if (!(defined($__ls_num_median_term) && $__ls_num_median_term =~ /\\A-?(?:\\d+(?:\\.\\d+)?|\\.\\d+)\\z/)) { $__ls_num_median_ok = 0; last; } } if ($__ls_num_median_ok && @__ls_num_median_terms) { @__ls_num_median_terms = sort { $a <=> $b } @__ls_num_median_terms; my $__ls_num_median_count = scalar(@__ls_num_median_terms); my $__ls_num_median_mid = int($__ls_num_median_count / 2); ($__ls_num_median_count % 2) ? $__ls_num_median_terms[$__ls_num_median_mid] : (($__ls_num_median_terms[$__ls_num_median_mid - 1] + $__ls_num_median_terms[$__ls_num_median_mid]) / 2) } else { undef } }",
+        "method": "median",
+        "source": "Top:: -> Done .push\nLX { return(copy(Top)) }\nDone:\n /(\\d),(\\d),(\\d)/ I { return(median(IMATCH_LIST)) }\n",
+        "value": [
+          2
+        ]
+      },
+      {
+        "error": "",
+        "handler_error": null,
+        "lowered": "return do { my $__ls_num_range_min; my $__ls_num_range_max; my $__ls_num_range_seen = 0; my $__ls_num_range_ok = 1; for my $__ls_num_range_term (@IMATCH_LIST) { if (!(defined($__ls_num_range_term) && $__ls_num_range_term =~ /\\A-?(?:\\d+(?:\\.\\d+)?|\\.\\d+)\\z/)) { $__ls_num_range_ok = 0; last; } if ($__ls_num_range_seen) { $__ls_num_range_min = $__ls_num_range_term if $__ls_num_range_term < $__ls_num_range_min; $__ls_num_range_max = $__ls_num_range_term if $__ls_num_range_term > $__ls_num_range_max; } else { $__ls_num_range_min = $__ls_num_range_term; $__ls_num_range_max = $__ls_num_range_term; $__ls_num_range_seen = 1; } } $__ls_num_range_ok ? ($__ls_num_range_seen ? ($__ls_num_range_max - $__ls_num_range_min) : undef) : undef }",
+        "method": "range",
+        "source": "Top:: -> Done .push\nLX { return(copy(Top)) }\nDone:\n /(\\d),(\\d),(\\d)/ I { return(range(IMATCH_LIST)) }\n",
+        "value": [
+          2
+        ]
+      },
+      {
+        "error": "",
+        "handler_error": null,
+        "lowered": "return do { my $__ls_num_min_value; my $__ls_num_min_ok = 1; for my $__ls_num_min_term (@IMATCH_LIST) { if (!(defined($__ls_num_min_term) && $__ls_num_min_term =~ /\\A-?(?:\\d+(?:\\.\\d+)?|\\.\\d+)\\z/)) { $__ls_num_min_ok = 0; last; } $__ls_num_min_value = defined($__ls_num_min_value) ? ($__ls_num_min_term < $__ls_num_min_value ? $__ls_num_min_term : $__ls_num_min_value) : $__ls_num_min_term; } $__ls_num_min_ok ? $__ls_num_min_value : undef }",
+        "method": "min",
+        "source": "Top:: -> Done .push\nLX { return(copy(Top)) }\nDone:\n /(\\d),(\\d),(\\d)/ I { return(min(IMATCH_LIST)) }\n",
+        "value": [
+          1
+        ]
+      },
+      {
+        "error": "",
+        "handler_error": null,
+        "lowered": "return do { my $__ls_num_max_value; my $__ls_num_max_ok = 1; for my $__ls_num_max_term (@IMATCH_LIST) { if (!(defined($__ls_num_max_term) && $__ls_num_max_term =~ /\\A-?(?:\\d+(?:\\.\\d+)?|\\.\\d+)\\z/)) { $__ls_num_max_ok = 0; last; } $__ls_num_max_value = defined($__ls_num_max_value) ? ($__ls_num_max_term > $__ls_num_max_value ? $__ls_num_max_term : $__ls_num_max_value) : $__ls_num_max_term; } $__ls_num_max_ok ? $__ls_num_max_value : undef }",
+        "method": "max",
+        "source": "Top:: -> Done .push\nLX { return(copy(Top)) }\nDone:\n /(\\d),(\\d),(\\d)/ I { return(max(IMATCH_LIST)) }\n",
+        "value": [
+          3
+        ]
+      }
+    ],
+    "rejected_candidate": [
+      {
+        "error": "",
+        "handler_error": null,
+        "lowered": "return do { my $__ls_num_sum_source = IMATCH_LIST; if (defined($__ls_num_sum_source) && ref($__ls_num_sum_source) eq 'ARRAY') { my $__ls_num_sum_total = 0; my $__ls_num_sum_ok = 1; for my $__ls_num_sum_term (@{$__ls_num_sum_source}) { if (!(defined($__ls_num_sum_term) && $__ls_num_sum_term =~ /\\A-?(?:\\d+(?:\\.\\d+)?|\\.\\d+)\\z/)) { $__ls_num_sum_ok = 0; last; } $__ls_num_sum_total += $__ls_num_sum_term; } $__ls_num_sum_ok ? $__ls_num_sum_total : undef } else { undef } }",
+        "method": "sum",
+        "source": "Top:: -> Done .push\nLX { return(copy(Top)) }\nDone:\n /(\\d),(\\d),(\\d)/ I { return(sum(IMATCH_LIST)) }\n",
+        "value": [
+          null
+        ]
+      },
+      {
+        "error": "",
+        "handler_error": null,
+        "lowered": "return do { my $__ls_num_avg_source = IMATCH_LIST; if (defined($__ls_num_avg_source) && ref($__ls_num_avg_source) eq 'ARRAY') { my $__ls_num_avg_total = 0; my $__ls_num_avg_count = 0; my $__ls_num_avg_ok = 1; for my $__ls_num_avg_term (@{$__ls_num_avg_source}) { if (!(defined($__ls_num_avg_term) && $__ls_num_avg_term =~ /\\A-?(?:\\d+(?:\\.\\d+)?|\\.\\d+)\\z/)) { $__ls_num_avg_ok = 0; last; } $__ls_num_avg_total += $__ls_num_avg_term; $__ls_num_avg_count++; } $__ls_num_avg_ok ? ($__ls_num_avg_count ? ($__ls_num_avg_total / $__ls_num_avg_count) : undef) : undef } else { undef } }",
+        "method": "avg",
+        "source": "Top:: -> Done .push\nLX { return(copy(Top)) }\nDone:\n /(\\d),(\\d),(\\d)/ I { return(avg(IMATCH_LIST)) }\n",
+        "value": [
+          null
+        ]
+      },
+      {
+        "error": "",
+        "handler_error": null,
+        "lowered": "return do { my $__ls_num_median_source = IMATCH_LIST; if (defined($__ls_num_median_source) && ref($__ls_num_median_source) eq 'ARRAY') { my @__ls_num_median_terms = @{$__ls_num_median_source}; my $__ls_num_median_ok = 1; for my $__ls_num_median_term (@__ls_num_median_terms) { if (!(defined($__ls_num_median_term) && $__ls_num_median_term =~ /\\A-?(?:\\d+(?:\\.\\d+)?|\\.\\d+)\\z/)) { $__ls_num_median_ok = 0; last; } } if ($__ls_num_median_ok && @__ls_num_median_terms) { @__ls_num_median_terms = sort { $a <=> $b } @__ls_num_median_terms; my $__ls_num_median_count = scalar(@__ls_num_median_terms); my $__ls_num_median_mid = int($__ls_num_median_count / 2); ($__ls_num_median_count % 2) ? $__ls_num_median_terms[$__ls_num_median_mid] : (($__ls_num_median_terms[$__ls_num_median_mid - 1] + $__ls_num_median_terms[$__ls_num_median_mid]) / 2) } else { undef } } else { undef } }",
+        "method": "median",
+        "source": "Top:: -> Done .push\nLX { return(copy(Top)) }\nDone:\n /(\\d),(\\d),(\\d)/ I { return(median(IMATCH_LIST)) }\n",
+        "value": [
+          null
+        ]
+      },
+      {
+        "error": "",
+        "handler_error": null,
+        "lowered": "return do { my $__ls_num_range_source = IMATCH_LIST; if (defined($__ls_num_range_source) && ref($__ls_num_range_source) eq 'ARRAY') { my $__ls_num_range_min; my $__ls_num_range_max; my $__ls_num_range_seen = 0; my $__ls_num_range_ok = 1; for my $__ls_num_range_term (@{$__ls_num_range_source}) { if (!(defined($__ls_num_range_term) && $__ls_num_range_term =~ /\\A-?(?:\\d+(?:\\.\\d+)?|\\.\\d+)\\z/)) { $__ls_num_range_ok = 0; last; } if ($__ls_num_range_seen) { $__ls_num_range_min = $__ls_num_range_term if $__ls_num_range_term < $__ls_num_range_min; $__ls_num_range_max = $__ls_num_range_term if $__ls_num_range_term > $__ls_num_range_max; } else { $__ls_num_range_min = $__ls_num_range_term; $__ls_num_range_max = $__ls_num_range_term; $__ls_num_range_seen = 1; } } $__ls_num_range_ok ? ($__ls_num_range_seen ? ($__ls_num_range_max - $__ls_num_range_min) : undef) : undef } else { undef } }",
+        "method": "range",
+        "source": "Top:: -> Done .push\nLX { return(copy(Top)) }\nDone:\n /(\\d),(\\d),(\\d)/ I { return(range(IMATCH_LIST)) }\n",
+        "value": [
+          null
+        ]
+      },
+      {
+        "error": "",
+        "handler_error": null,
+        "lowered": "return do { my $__ls_num_min_source = IMATCH_LIST; if (defined($__ls_num_min_source) && ref($__ls_num_min_source) eq 'ARRAY') { my $__ls_num_min_value; my $__ls_num_min_ok = 1; for my $__ls_num_min_term (@{$__ls_num_min_source}) { if (!(defined($__ls_num_min_term) && $__ls_num_min_term =~ /\\A-?(?:\\d+(?:\\.\\d+)?|\\.\\d+)\\z/)) { $__ls_num_min_ok = 0; last; } $__ls_num_min_value = defined($__ls_num_min_value) ? ($__ls_num_min_term < $__ls_num_min_value ? $__ls_num_min_term : $__ls_num_min_value) : $__ls_num_min_term; } $__ls_num_min_ok ? $__ls_num_min_value : undef } else { undef } }",
+        "method": "min",
+        "source": "Top:: -> Done .push\nLX { return(copy(Top)) }\nDone:\n /(\\d),(\\d),(\\d)/ I { return(min(IMATCH_LIST)) }\n",
+        "value": [
+          null
+        ]
+      },
+      {
+        "error": "",
+        "handler_error": null,
+        "lowered": "return do { my $__ls_num_max_source = IMATCH_LIST; if (defined($__ls_num_max_source) && ref($__ls_num_max_source) eq 'ARRAY') { my $__ls_num_max_value; my $__ls_num_max_ok = 1; for my $__ls_num_max_term (@{$__ls_num_max_source}) { if (!(defined($__ls_num_max_term) && $__ls_num_max_term =~ /\\A-?(?:\\d+(?:\\.\\d+)?|\\.\\d+)\\z/)) { $__ls_num_max_ok = 0; last; } $__ls_num_max_value = defined($__ls_num_max_value) ? ($__ls_num_max_term > $__ls_num_max_value ? $__ls_num_max_term : $__ls_num_max_value) : $__ls_num_max_term; } $__ls_num_max_ok ? $__ls_num_max_value : undef } else { undef } }",
+        "method": "max",
+        "source": "Top:: -> Done .push\nLX { return(copy(Top)) }\nDone:\n /(\\d),(\\d),(\\d)/ I { return(max(IMATCH_LIST)) }\n",
+        "value": [
+          null
+        ]
+      }
+    ],
+    "accepted_candidate": [
+      {
+        "error": "",
+        "handler_error": null,
+        "lowered": "return do { my $__ls_num_sum_total = 0; my $__ls_num_sum_ok = 1; for my $__ls_num_sum_term (@IMATCH_LIST) { if (!(defined($__ls_num_sum_term) && $__ls_num_sum_term =~ /\\A-?(?:\\d+(?:\\.\\d+)?|\\.\\d+)\\z/)) { $__ls_num_sum_ok = 0; last; } $__ls_num_sum_total += $__ls_num_sum_term; } $__ls_num_sum_ok ? $__ls_num_sum_total : undef }",
+        "method": "sum",
+        "source": "Top:: -> Done .push\nLX { return(copy(Top)) }\nDone:\n /(\\d),(\\d),(\\d)/ I { return(sum(IMATCH_LIST)) }\n",
+        "value": [
+          6
+        ]
+      },
+      {
+        "error": "",
+        "handler_error": null,
+        "lowered": "return do { my $__ls_num_avg_total = 0; my $__ls_num_avg_count = 0; my $__ls_num_avg_ok = 1; for my $__ls_num_avg_term (@IMATCH_LIST) { if (!(defined($__ls_num_avg_term) && $__ls_num_avg_term =~ /\\A-?(?:\\d+(?:\\.\\d+)?|\\.\\d+)\\z/)) { $__ls_num_avg_ok = 0; last; } $__ls_num_avg_total += $__ls_num_avg_term; $__ls_num_avg_count++; } $__ls_num_avg_ok ? ($__ls_num_avg_count ? ($__ls_num_avg_total / $__ls_num_avg_count) : undef) : undef }",
+        "method": "avg",
+        "source": "Top:: -> Done .push\nLX { return(copy(Top)) }\nDone:\n /(\\d),(\\d),(\\d)/ I { return(avg(IMATCH_LIST)) }\n",
+        "value": [
+          2
+        ]
+      },
+      {
+        "error": "",
+        "handler_error": null,
+        "lowered": "return do { my @__ls_num_median_terms = @IMATCH_LIST; my $__ls_num_median_ok = 1; for my $__ls_num_median_term (@__ls_num_median_terms) { if (!(defined($__ls_num_median_term) && $__ls_num_median_term =~ /\\A-?(?:\\d+(?:\\.\\d+)?|\\.\\d+)\\z/)) { $__ls_num_median_ok = 0; last; } } if ($__ls_num_median_ok && @__ls_num_median_terms) { @__ls_num_median_terms = sort { $a <=> $b } @__ls_num_median_terms; my $__ls_num_median_count = scalar(@__ls_num_median_terms); my $__ls_num_median_mid = int($__ls_num_median_count / 2); ($__ls_num_median_count % 2) ? $__ls_num_median_terms[$__ls_num_median_mid] : (($__ls_num_median_terms[$__ls_num_median_mid - 1] + $__ls_num_median_terms[$__ls_num_median_mid]) / 2) } else { undef } }",
+        "method": "median",
+        "source": "Top:: -> Done .push\nLX { return(copy(Top)) }\nDone:\n /(\\d),(\\d),(\\d)/ I { return(median(IMATCH_LIST)) }\n",
+        "value": [
+          2
+        ]
+      },
+      {
+        "error": "",
+        "handler_error": null,
+        "lowered": "return do { my $__ls_num_range_min; my $__ls_num_range_max; my $__ls_num_range_seen = 0; my $__ls_num_range_ok = 1; for my $__ls_num_range_term (@IMATCH_LIST) { if (!(defined($__ls_num_range_term) && $__ls_num_range_term =~ /\\A-?(?:\\d+(?:\\.\\d+)?|\\.\\d+)\\z/)) { $__ls_num_range_ok = 0; last; } if ($__ls_num_range_seen) { $__ls_num_range_min = $__ls_num_range_term if $__ls_num_range_term < $__ls_num_range_min; $__ls_num_range_max = $__ls_num_range_term if $__ls_num_range_term > $__ls_num_range_max; } else { $__ls_num_range_min = $__ls_num_range_term; $__ls_num_range_max = $__ls_num_range_term; $__ls_num_range_seen = 1; } } $__ls_num_range_ok ? ($__ls_num_range_seen ? ($__ls_num_range_max - $__ls_num_range_min) : undef) : undef }",
+        "method": "range",
+        "source": "Top:: -> Done .push\nLX { return(copy(Top)) }\nDone:\n /(\\d),(\\d),(\\d)/ I { return(range(IMATCH_LIST)) }\n",
+        "value": [
+          2
+        ]
+      },
+      {
+        "error": "",
+        "handler_error": null,
+        "lowered": "return do { my $__ls_num_min_value; my $__ls_num_min_ok = 1; for my $__ls_num_min_term (@IMATCH_LIST) { if (!(defined($__ls_num_min_term) && $__ls_num_min_term =~ /\\A-?(?:\\d+(?:\\.\\d+)?|\\.\\d+)\\z/)) { $__ls_num_min_ok = 0; last; } $__ls_num_min_value = defined($__ls_num_min_value) ? ($__ls_num_min_term < $__ls_num_min_value ? $__ls_num_min_term : $__ls_num_min_value) : $__ls_num_min_term; } $__ls_num_min_ok ? $__ls_num_min_value : undef }",
+        "method": "min",
+        "source": "Top:: -> Done .push\nLX { return(copy(Top)) }\nDone:\n /(\\d),(\\d),(\\d)/ I { return(min(IMATCH_LIST)) }\n",
+        "value": [
+          1
+        ]
+      },
+      {
+        "error": "",
+        "handler_error": null,
+        "lowered": "return do { my $__ls_num_max_value; my $__ls_num_max_ok = 1; for my $__ls_num_max_term (@IMATCH_LIST) { if (!(defined($__ls_num_max_term) && $__ls_num_max_term =~ /\\A-?(?:\\d+(?:\\.\\d+)?|\\.\\d+)\\z/)) { $__ls_num_max_ok = 0; last; } $__ls_num_max_value = defined($__ls_num_max_value) ? ($__ls_num_max_term > $__ls_num_max_value ? $__ls_num_max_term : $__ls_num_max_value) : $__ls_num_max_term; } $__ls_num_max_ok ? $__ls_num_max_value : undef }",
+        "method": "max",
+        "source": "Top:: -> Done .push\nLX { return(copy(Top)) }\nDone:\n /(\\d),(\\d),(\\d)/ I { return(max(IMATCH_LIST)) }\n",
+        "value": [
+          3
+        ]
+      }
+    ],
+    "mechanism": "ValueExpr RESERVED_ARRAY_SYMBOL_NAMES intentionally excludes IMATCH_LIST and LMATCH_LIST. The rejected general reserved-value guard blocked them; the final numeric guard checks only identifier grammar and leaves reserved-name authority to the existing extractor."
+  },
+  "family_audit_scope": "The60-row family audit predates the capture exception correction and contains no reserved capture operands; the final152-case matrix independently executes these value forms and adds capture compatibility. Only corrected-candidate full Phase0 can establish final acceptance."
+}

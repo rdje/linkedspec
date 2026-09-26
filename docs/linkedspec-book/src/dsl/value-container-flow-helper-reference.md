@@ -356,7 +356,10 @@ On input `x`, the result is:
 
 The function-local assignment is separated from `return(...)` by its newline;
 a line-ending `;` is optional and valid. See [statement separators](fluent-and-block-forms.md#statement-separators).
-For one bare value, use `[value]`: exact `array(value)` remains removed selector syntax.
+For one bare value, use `[value]`: exact `array(value)` remains removed selector syntax. A separate current
+Perl constructor defect makes `array(3)` return `[]`; use `[3]` for a single numeric
+literal. The constructor repair is tracked under `SESSION-STARTUP-READING.94`;
+multiple numeric arguments such as `array(3,1,2)` work.
 
 In scalar value positions, a bare scalar name reads the working variable:
 `return(count)`, `set(out, count)`, `out = count`, `if(count, ...)`,
@@ -894,13 +897,35 @@ function form such as `num_sum(scores)` / `sum(scores)` or terminal array receiv
 continue through later array receiver methods. A number-yielding expression-valued block can be the receiver,
 for example `{ 3.5 }.floor().add(2)`.
 
-**Current Perl reducer limitation:** with `document = {"items":[3,1,2]}`,
-`sum(document["items"])`, `num_sum(document["items"])` and
-`document["items"].sum()` currently return null. Assigning that read to a binding
-before summing also returns null, as does `sum(items)` inside a function with an
-array-valued `items` parameter. The literal `sum([3,1,2])` and explicit
-`document["items"].sorted().sum()` controls return `6`. This source-shape rejection
-predates the direct-read repair and is tracked for repair separately.
+### Numeric reducers consume array values
+
+On Perl, `sum` and `avg` accept the same array-valued sources as `median`,
+`range`, `min` and `max`: literals, bindings, direct reads, function arguments
+and function results. Their `num_*` spellings are equivalent. A selector is
+evaluated once, and reduction leaves the source array unchanged.
+
+This complete example uses line breaks as statement separators; trailing
+semicolons are optional and valid:
+
+```text
+{{#include ../../../../examples/numeric-array-values.spec}}
+```
+
+Input `x` returns:
+
+```json
+[[6,2,2,2,1,3],[0,null,null,null,null,null],6,6]
+```
+
+The first row contains sum, average, median, range, minimum and maximum.
+The second row shows the empty-array results: sum is `0`; the other five
+reducers return `undef` (JSON `null`). A missing direct-read result, a non-array source,
+or an array containing `undef` or nonnumeric text also returns `undef`.
+Decimal strings such as `"3"` are accepted as numeric elements. Current Perl
+`min`/`max` and odd-length `median` preserve a selected numeric string as a string;
+for example, `min(["3","1","2"])` returns `"1"`. This numeric-result defect is
+tracked under `SESSION-STARTUP-READING.95`. The scalar numeric contract is separate;
+this example does not change numeric coercion.
 
 Numeric helpers compose with array helpers:
 

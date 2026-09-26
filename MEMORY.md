@@ -1,9 +1,9 @@
 # MEMORY
 
-- activation_commit: `83ab2ff44219379bcf1e2c46d432ba936b750580` — clean activation base for completed Perl function-array constructor .90.
-- latest_completed_leaf: `SESSION-STARTUP-READING.90 - read function array constructor values`.
-- active_work_unit: `SESSION-STARTUP-READING.91` — pending numeric reducer value-composition repair after verified .90.
-- next_action: Activate .91 from the new clean commit; repair Perl reducers rejecting array values from direct reads, derived bindings and function parameters, verify and sync the book then .92 before .51.
+- activation_commit: `49678a8c136ea2f824f6f0ed2ac0b1170f52087a` — clean activation base for numeric reducer .91.
+- latest_completed_leaf: `SESSION-STARTUP-READING.91 - reduce array values through numeric helpers`.
+- active_work_unit: `RGX-CONSUMER-BUILD-REPORTS.1` — pending public LS-004 recheck requested at the next clean boundary.
+- next_action: Activate an owned public LS-004 recheck under RGX-CONSUMER-BUILD-REPORTS.1 from clean HEAD; verify any published remedy before closure, then resume startup .93/.92/.94/.95/.51.
 - in_flight_uncommitted: none.
 - blockers: LS-004 remains upstream-owned; director will notify ARCHOGEN only after its fix is verified (local report: docs/upstream/rgx/bootstrap-progress-status.md). No RGX code defect established. Named-argument and format proposals remain parked.
   Wrapper startup .7 remains open; recovery/purge stay prohibited. No interrupted Phase0 run counts as proof.

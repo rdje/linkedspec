@@ -3993,6 +3993,9 @@ Three backbone items tracked major structural modernization — all done:
   arrays remain dense. Startup `.89` repairs Perl read-induced container creation and receiver loss during
   selector rebinding; native and fresh generated parsers execute the
   [read-purity example](../dsl/value-container-flow-helper-reference.md#read-purity). The write contract is unchanged.
+  Startup `.91` repairs Perl `sum`/`avg` source-shape rejection of array values from bindings,
+  direct reads and functions; the [six-reducer example](../dsl/value-container-flow-helper-reference.md#numeric-reducers-consume-array-values)
+  covers value composition and empty arrays. Numeric coercion and the other reducer algorithms are unchanged.
   Startup `.90` repairs Perl function `array(value,value)` constructors reading names instead of values;
   native and fresh generated parsers execute the
   [function constructor example](../dsl/value-container-flow-helper-reference.md#array-constructors-inside-functions).

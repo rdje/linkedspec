@@ -12,6 +12,14 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-09-26 — SESSION-STARTUP-READING.91 - consume array values in numeric reducers
+
+Perl `sum`/`avg` now lower their argument value before the runtime array-kind check, admitting direct reads, bindings and function parameters/results. All six reducer binding fast paths require legal identifiers, preventing `sum(3)` from reading host `@3` and returning0. Numeric algorithms, FlowExpr and neutral/generated formats are unchanged.
+
+The new152-case native/fresh emitted matrix executes twice, including LF/CRLF book source, six-family composition, empty/invalid values and selector effects; public substitution observes each tied selector once. Exact clean49678 lowering fails only new test group10; final seven-suite focused128 and complete Phase01033 pass. Managed book source/JSON/link, storage24, executable selector0/20, public mutation50 and syntax pass. Proof: `docs/checkpoints/SESSION-STARTUP-READING.91-verification.json`.
+
+Independent `array(3)` ->[] is confirmed before/after, explicitly documented and required under .94 after due artifact census .93 and verification-cost repair .92, before .51. Exact catalog execution also finds numeric-string result-kind drift in array min/max and odd median; .95 owns repair, while current Perl outputs are explicitly corrected in the book. No downstream acceptance or full-book reconciliation claim.
+
 ## 2026-09-25 — SESSION-STARTUP-READING.90 - read values in Perl function array constructors
 
 Multi-argument array constructors now read function parameters and local bindings through the existing AST value lowerer. The aggregate-helper bridge still receives authored names where it needs typed binding interpretation; one-argument selector retirement and neutral/generated-format authorities are unchanged. Both silently returned identifier strings and host syntax errors for a DSL local named local are repaired.
