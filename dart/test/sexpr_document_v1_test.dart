@@ -14,7 +14,16 @@ void main() {
             File('../tests/sexpr-document-v1/contract.json').readAsStringSync(),
           )
           as Map<String, dynamic>;
-  final cases = (contract['cases'] as List).cast<Map<String, dynamic>>();
+  final prefix =
+      jsonDecode(
+            File(
+              '../tests/sexpr-document-v1/entry-prefix.json',
+            ).readAsStringSync(),
+          )
+          as Map<String, dynamic>;
+  final baseCases = (contract['cases'] as List).cast<Map<String, dynamic>>();
+  final prefixCases = (prefix['cases'] as List).cast<Map<String, dynamic>>();
+  final cases = [...baseCases, ...prefixCases];
   final reuse = cases.singleWhere(
     (row) => row['id'] == 'reuse_after_rejection',
   );
@@ -26,7 +35,10 @@ void main() {
     validateSpec(parsed);
     engine = LinkedSpecRuntimeEngine(compileSpec(parsed));
   });
-  test('authored case inventory', () => expect(cases, hasLength(37)));
+  test('authored case inventory', () {
+    expect(baseCases, hasLength(37));
+    expect(prefixCases, hasLength(14));
+  });
   for (final row in cases) {
     test(row['id'] as String, () {
       final input = row['input'] as String;

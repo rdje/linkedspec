@@ -29,6 +29,11 @@ proof included 149 unit tests, the 105-fixture interpreter oracle,
 197 integration tests, the 105-case generated-source classifier, and emitted/trace/contract suites.
 These dated totals are not a fresh run of the optional complete gate.
 
+September26 LS-004 adoption restricts the formatter to the explicitly named
+`linkedspec-core` and `linkedspec-runtime` packages. `cargo fmt --all` traversed
+dependency source; [[rust-format-owned-packages]] records the corrected boundary
+and actual selected-target proof. The gate still tests both entire owned packages.
+
 `FUTURE-PARITY-BACKLOG.9.1.4.1` closes the preflight's verification-topology gap. Immediately after formatting,
 the script runs unfiltered `cargo test -p linkedspec-core`, then unfiltered `cargo test -p linkedspec-runtime`.
 The core package owns the Rust `.spec` parser, compiler, validation, descriptor, and compiled serialization types;

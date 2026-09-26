@@ -26,6 +26,12 @@ fields preserve full source spelling, including string quotes and escapes. The
 authority, not output regenerated from a parser. Historical Lispish stays intact;
 its multiline quote repair is [[lispish-multiline-quoted-payload]].
 
+September26 correction: [[sexpr-document-entry-prefix-validation]] adds an entry
+guard and14 independent controls without changing the37-case authority. Current
+native and maintained file/public-loader checks consume51 cases (27 accept/24
+reject), including text skipped by the public wrapper before the grammar runs.
+The dated implementation and admission results below retain their original scope.
+
 Production .83.2.2 consumes all 37 authored cases across Perl/Rust/Dart/Julia/PUC Lua/LuaJIT,
 with 21 token-spelling round trips and 16 same-engine recovery checks per route.
 The Perl test adds descriptor readiness, JSON scalar-kind comparison and the

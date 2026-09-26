@@ -107,6 +107,15 @@ that removes the two rejecting edges accepts `(a) junk (b)` with both forms and 
 final cursor at EOF: checking only the final offset cannot prove full recognition.
 The implementation must retain an equivalent no-skipped-character invariant.
 
+September26 acceptance correction under `RGX-CONSUMER-BUILD-REPORTS.1.2`:
+the public wrapper may skip leading hash-comment lines before `Document` runs.
+The shipped grammar now validates the original source prefix before its entry
+cursor, allowing only the six ASCII whitespace characters there. This preserves
+the decision above and the general public-entry contract. Fourteen independent
+entry-prefix controls supplement the unchanged37-case authority on every native
+runtime and maintained document consumer; a separate guard-removal mutation
+demonstrates why rejecting edges alone cannot cover wrapper-skipped source.
+
 ## Acceptance authority and evidence
 
 `tests/sexpr-document-v1/contract.json` contains 37 independently authored examples:

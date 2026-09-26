@@ -1,7 +1,13 @@
 # ADR0124: complete documents with exact token kinds and source spelling.
 # Select this grammar explicitly; Lispish retains its extraction contract.
+# Validate any original prefix skipped by public parser entry before reading forms.
 Document::
-I { forms = [] }
+I {
+ if(matches(input_slice(0, cursor_pos()), /[^ \t\r\n\f\x0B]/));
+  exit_now(1);
+ endif();
+ forms = []
+}
  -> Trivia
  -> List { push(forms, call(List)) }
  -> Invalid { exit_now(1) }

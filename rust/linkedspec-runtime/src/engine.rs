@@ -650,6 +650,29 @@ fn byte_to_char_offset(input: &str, byte_off: usize) -> usize {
     input[..clamped].chars().count()
 }
 
+// Mirror the Perl public parser wrapper. Keep the full source and absolute byte
+// coordinates; this boundary applies once per invocation, never on child entry.
+fn public_input_start(input: &str) -> usize {
+    let bytes = input.as_bytes();
+    let mut start = 0;
+    loop {
+        let mut next = start;
+        while matches!(bytes.get(next), Some(b' ' | b'\t')) {
+            next += 1;
+        }
+        match bytes.get(next) {
+            Some(b'\n') => start = next + 1,
+            Some(b'#') => {
+                while next < bytes.len() && bytes[next] != b'\n' {
+                    next += 1;
+                }
+                start = if next < bytes.len() { next + 1 } else { next };
+            }
+            _ => return start,
+        }
+    }
+}
+
 /// `len` characters of `s` starting at character index `start` (Perl `substr`
 /// semantics — char-based, never panics on a multibyte boundary).
 fn char_substr(s: &str, start: usize, len: usize) -> String {
@@ -2640,6 +2663,7 @@ impl Engine {
         self.validate_typed_write_state()?;
         self.validate_compiled_slot_identities(ctx)?;
         let (label, basis) = self.resolve_entry_rule_label(ctx, None)?;
+        ctx.set_pos(public_input_start(&ctx.input));
         ctx.trace_decision(
             "rust_runtime:engine:top_rule",
             true,
@@ -2668,6 +2692,7 @@ impl Engine {
         self.validate_typed_write_state()?;
         self.validate_compiled_slot_identities(ctx)?;
         let (label, basis) = self.resolve_entry_rule_label(ctx, options.entry_rule())?;
+        ctx.set_pos(public_input_start(&ctx.input));
         ctx.trace_decision(
             "rust_runtime:engine:entry_rule",
             true,
@@ -2700,6 +2725,7 @@ impl Engine {
         ctx.install_bounded_child_parse_authority(options.bounded_child_parse_authority())?;
         self.validate_compiled_slot_identities(ctx)?;
         let (label, basis) = self.resolve_entry_rule_label(ctx, options.entry_rule())?;
+        ctx.set_pos(public_input_start(&ctx.input));
         ctx.trace_decision(
             "rust_runtime:generated_plan:top_rule",
             true,
@@ -2742,6 +2768,7 @@ impl Engine {
         ctx.install_bounded_child_parse_authority(options.bounded_child_parse_authority())?;
         self.validate_compiled_slot_identities(ctx)?;
         let (label, basis) = self.resolve_entry_rule_label(ctx, options.entry_rule())?;
+        ctx.set_pos(public_input_start(&ctx.input));
         ctx.trace_decision(
             "rust_runtime:generated_plan:top_rule",
             true,

@@ -42,12 +42,19 @@ RGX defines supported transitive preparation and is the integration contact. Its
 published contract keeps PGEN read-only from RGX. No separate PGEN procedure or
 internal dependency knowledge belongs in LinkedSpec; routing is not fault attribution.
 
-## September26 published remedy verification
+## September26 published remedy adoption
 
 [[rgx-bootstrap-published-remedy]] records correct public failure, fresh success and
-reuse at published f6e5acdc. Retained8763 still reproduces; required
-`RGX-CONSUMER-BUILD-REPORTS.1.2` owns adoption after an explicit pin-freeze exception.
-All supplied reports remain byte-exact and all three SEMULITH remedies are published.
+reuse at f6e5acdc. The director's fixing instruction authorizes that specific pin
+adoption under `RGX-CONSUMER-BUILD-REPORTS.1.2`; `.1.3` owns publication and the
+requested completion notice to the director and ARCHOGEN. Fresh native word,
+Lispish/document files, workspace controls and the complete Rust gate pass; exact
+staged canonical acceptance is mandatory for landing. The original report snapshots
+remain dated evidence. SEMULITH has since added independent verification notes and
+closed all three reports at published a8d34c845; [[consumer-report-fix-commits]]
+records that receipt. The document prefix guard and14 new controls under .1.2 close
+an additional complete-input gap; see [[sexpr-document-entry-prefix-validation]].
+The dated checkpoints below retain their scope.
 
 ## Attribution correction: contact does not establish fault
 
@@ -82,8 +89,8 @@ The workspace build remedy is `effe3e7b2544abf79f7786a7aa54e77b1893880e`
 (`BACKEND-INTEGRATION-GUIDES.8.2`), verified as an ancestor of published main.
 It isolates the maintained example workspace and documents the host exclusion
 for ARCHOGEN/LS-001 and SEMULITH/LS-003 item1. LS-004's bootstrap failure-handling
-and misleading-message issue remains unfixed at the retained8763 pin. The public
-f6e5acdc remedy above is verified; no LinkedSpec adoption commit is claimed. The delivery and handoff commits below must not be presented as that fix.
+and misleading-message issue remained unfixed at8763. The September26 section above owns
+adoption of the verified f6e5acdc remedy. The delivery and handoff commits below must not be presented as that fix.
 
 Delivery `.1` and `.2` landed at `01b04138a` and `12c6ca9ad`. They verify the
 seven LinkedSpec-owned remedies and reproduce the remaining RGX report. Delivery

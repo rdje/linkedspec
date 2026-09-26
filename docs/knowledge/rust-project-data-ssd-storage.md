@@ -57,13 +57,19 @@ registry packages with hexadecimal SHA-256 checksums, and four local records: `l
 `rust/.gitignore` listing Cargo.lock; an ignore rule does not remove an existing tracked file. Distinct
 versions in dependency references are intentional lockfile disambiguation, not duplicate package identities.
 
-The Git gitlink pins `rgx` at `8763a0e6bea97879f027237439d57725f83ead23`; Cargo.lock itself does not pin
+At that reading checkpoint, the Git gitlink pinned `rgx` at `8763a0e6bea97879f027237439d57725f83ead23`; Cargo.lock itself does not pin
 the local dependency source revision. Inspecting this required build metadata did not read excluded dependency
 source. Checkpoint `.3.3.1` reads lock lines 1–1493 and `.3.3.2` reads lines 1494–1850 through EOF;
 both exact reading ranges match the baseline. The complete-file metadata census alone supplied no suffix
 reading credit. Earlier cache file counts, byte sizes, residue, and gate counts
 above remain dated July 26 evidence rather than a new September cache census. No dependency fetch or upgrade
 was needed for this reading checkpoint.
+
+September26 LS-004 adoption updates RGX to f6e5acdc and adds typed-arena2.0.2 to
+both consumer lockfiles through ordinary Cargo resolution. The earlier195-package
+counts and lock hash above remain dated evidence. [[rgx-bootstrap-published-remedy]]
+owns the adopted public contract and fresh-build verification; dependency source
+revision remains the Git gitlink's responsibility.
 
 Related facts: [[project-data-ssd-storage-locality]], [[project-data-workflow-routing]],
 [[repository-root-path-portability]], [[rust-local-verification-gate]].

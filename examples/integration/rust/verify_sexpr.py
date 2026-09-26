@@ -23,19 +23,23 @@ def main():
     binary = args.binary.resolve(strict=True)
     grammar = root / "specs/SExprDocumentV1.spec"
     contract_path = root / "tests/sexpr-document-v1/contract.json"
+    prefix_path = root / "tests/sexpr-document-v1/entry-prefix.json"
     scratch = Path(os.environ.get("LINKEDSPEC_SCRATCH_ROOT", root / ".linkedspec-data/scratch"))
     scratch.mkdir(parents=True, exist_ok=True)
-    for path in (binary, grammar, contract_path, scratch):
+    for path in (binary, grammar, contract_path, prefix_path, scratch):
         if path.stat().st_dev != root.stat().st_dev:
             parser.error(f"verification inputs and workspace must share the repository volume: {path}")
     contract = json.loads(contract_path.read_text(encoding="utf-8"))
     cases = contract["cases"]
     assert len(cases) == 37
+    prefix_cases = json.loads(prefix_path.read_text(encoding="utf-8"))["cases"]
+    assert len(prefix_cases) == 14
+    cases = cases + prefix_cases
     accepted = [case for case in cases if case["outcome"] == "accept"]
     rejected = [case for case in cases if case["outcome"] == "reject"]
-    assert (len(accepted), len(rejected)) == (21, 16)
+    assert (len(accepted), len(rejected)) == (27, 24)
     original_hashes = {path: hashlib.sha256(path.read_bytes()).hexdigest()
-                       for path in (binary, grammar, contract_path)}
+                       for path in (binary, grammar, contract_path, prefix_path)}
     checks = []
     with tempfile.TemporaryDirectory(prefix="rust-sexpr-", dir=scratch) as temporary:
         workspace = Path(temporary)
@@ -70,7 +74,7 @@ def main():
             checks.append(label)
 
         files = {case["id"]: fixture(case["id"] + ".sexp", case["input"]) for case in cases}
-        run("21 authored documents / one engine", binary,
+        run("27 authored documents / one engine", binary,
             ["--grammar", grammar, *(files[case["id"]] for case in accepted)],
             expected=[case["expected"] for case in accepted])
         published = fixture("published-document.sexp", '(v 1 "1")\n(done)\n')
@@ -164,6 +168,7 @@ def main():
     for path, expected_hash in original_hashes.items():
         assert hashlib.sha256(path.read_bytes()).hexdigest() == expected_hash, path
     print(json.dumps({"status": "PASS", "authored_cases": len(cases),
+                      "base_cases": len(contract["cases"]), "prefix_cases": len(prefix_cases),
                       "accepted_files": len(accepted), "rejected_files": len(rejected),
                       "checks": checks}, ensure_ascii=False))
 

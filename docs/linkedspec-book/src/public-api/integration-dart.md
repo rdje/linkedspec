@@ -198,7 +198,7 @@ handling below. To verify the contract from the LinkedSpec root:
 )
 ```
 
-The native tests check all 37 authored cases, token-spelling round trips and fresh
+The native tests check all 37 base and 14 entry-prefix cases, token-spelling round trips and fresh
 independent input after every rejection through one compiled engine. This is
 grammar-specific recovery proof, not rollback of arbitrary application effects.
 The existing word executable still takes text arguments; it is not a file reader.
@@ -212,7 +212,7 @@ path and exact `Top` → `Document` adaptation with:
 bash tools/run_python_project_data.sh examples/integration/verify_sexpr.py --runtime dart
 ```
 
-The verifier checks all 37 authored cases, earlier-output retention, the documented
+The verifier checks all 37 base and 14 entry-prefix cases, earlier-output retention, the documented
 relative grammar path, missing files and invalid UTF-8 grammar bytes. It preserves
 the original examples and expectations. These are text-argument checks; the Rust
 [file-consumer verifier](integration-rust.md#reproduce-the-integration-checks) separately

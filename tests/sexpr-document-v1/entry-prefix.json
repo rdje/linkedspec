@@ -1,0 +1,38 @@
+{
+  "format": "linkedspec-sexpr-v1",
+  "purpose": "Independent public-entry prefix controls; the original 37-case authority stays unchanged.",
+  "cases": [
+    {"id": "prefix_hash_line", "input": "# comment\n(a)\n", "outcome": "reject"},
+    {"id": "prefix_indented_hash_line", "input": " \t# comment\n(a)", "outcome": "reject"},
+    {"id": "prefix_blank_then_hash", "input": "\n \t# comment\n(a)", "outcome": "reject"},
+    {"id": "prefix_hash_crlf", "input": "# comment\r\n(a)", "outcome": "reject"},
+    {"id": "prefix_hash_eof", "input": "# comment", "outcome": "reject"},
+    {"id": "prefix_unicode_hash", "input": " \t# 雪🦀\n(a)", "outcome": "reject"},
+    {"id": "prefix_two_hash_lines", "input": "# one\n# two\n(a)", "outcome": "reject"},
+    {"id": "prefix_hash_only_line", "input": "# comment\n", "outcome": "reject"},
+    {
+      "id": "prefix_lf_blank", "input": "\n(a)", "outcome": "accept",
+      "expected": {"format": "linkedspec-sexpr-v1", "forms": [{"kind": "list", "items": [{"kind": "symbol", "lexeme": "a"}]}]}
+    },
+    {
+      "id": "prefix_indented_blanks", "input": " \t\n\t\n(a)", "outcome": "accept",
+      "expected": {"format": "linkedspec-sexpr-v1", "forms": [{"kind": "list", "items": [{"kind": "symbol", "lexeme": "a"}]}]}
+    },
+    {
+      "id": "prefix_crlf_blank", "input": "\r\n(a)", "outcome": "accept",
+      "expected": {"format": "linkedspec-sexpr-v1", "forms": [{"kind": "list", "items": [{"kind": "symbol", "lexeme": "a"}]}]}
+    },
+    {
+      "id": "prefix_semicolon_hash", "input": "; # is comment content\n(a)", "outcome": "accept",
+      "expected": {"format": "linkedspec-sexpr-v1", "forms": [{"kind": "list", "items": [{"kind": "symbol", "lexeme": "a"}]}]}
+    },
+    {
+      "id": "prefix_hash_symbol", "input": "(#tag)", "outcome": "accept",
+      "expected": {"format": "linkedspec-sexpr-v1", "forms": [{"kind": "list", "items": [{"kind": "symbol", "lexeme": "#tag"}]}]}
+    },
+    {
+      "id": "prefix_hash_string", "input": "(\"# comment\")", "outcome": "accept",
+      "expected": {"format": "linkedspec-sexpr-v1", "forms": [{"kind": "list", "items": [{"kind": "string", "lexeme": "\"# comment\""}]}]}
+    }
+  ]
+}

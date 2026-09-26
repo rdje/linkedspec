@@ -137,7 +137,7 @@ bash tools/run_lua_project_data.sh puc lua/test/sexpr_document_v1_test.lua
 bash tools/run_lua_project_data.sh luajit lua/test/sexpr_document_v1_test.lua
 ```
 
-Each route checks all 37 authored cases, token-spelling round trips and fresh
+Each route checks all 37 base and 14 entry-prefix cases, token-spelling round trips and fresh
 independent input after every rejection using one compiled engine. This is
 grammar-specific recovery proof, not a rollback promise for application effects.
 The existing word adapter still takes text arguments. Its deployment instructions
@@ -151,7 +151,7 @@ bash tools/run_python_project_data.sh examples/integration/verify_sexpr.py --run
 bash tools/run_python_project_data.sh examples/integration/verify_sexpr.py --runtime luajit
 ```
 
-The verifier checks all 37 authored cases, earlier-output retention, the documented
+The verifier checks all 37 base and 14 entry-prefix cases, earlier-output retention, the documented
 relative grammar path, missing files and invalid UTF-8 grammar bytes. It preserves
 the original examples and expectations. These are text-argument checks; the Rust
 [file-consumer verifier](integration-rust.md#reproduce-the-integration-checks) separately

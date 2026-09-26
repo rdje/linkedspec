@@ -138,7 +138,7 @@ the exact nested checkout are also required.
 
 Use RGX's published downstream build interface. Its integration contract is
 `rgx/docs/INTEGRATION.md` inside LinkedSpec, also available in the
-[pinned RGX integration guide](https://github.com/rdje/rgx/blob/8763a0e6bea97879f027237439d57725f83ead23/docs/INTEGRATION.md).
+[pinned RGX integration guide](https://github.com/rdje/rgx/blob/f6e5acdc99720349d1e3ecef9f821f365c4db19c/docs/INTEGRATION.md).
 RGX owns preparation of its dependencies. Applications should not reproduce
 PGEN's internal generation steps or modify either submodule.
 
@@ -163,13 +163,18 @@ stop before building the application and preserve its exit status and full log.
 An intermediate progress message is not the overall command result. Report a
 failure against RGX's published interface with the exact dependency revision;
 do not repair it by editing submodule code or inventing another bootstrap recipe.
-ARCHOGEN's reported misleading progress message still reproduces at LinkedSpec's
-retained RGX revision `8763a0e6`. On 2026-09-26, the public bootstrap at published
-RGX revision `f6e5acdc` instead stopped at the first failed prerequisite without
-false success text. Fresh successful preparation and prepared reuse also passed.
-That published remedy has **not** been adopted into LinkedSpec's dependency pin;
-native consumer compatibility and the dependency update remain to be verified.
-A successful normal build at the old pin does not establish that its failure path is fixed.
+LinkedSpec now pins RGX `f6e5acdc99720349d1e3ecef9f821f365c4db19c`, which
+corrects ARCHOGEN LS-004's observed bootstrap behavior: a missing prerequisite
+stops preparation with failure before later steps or misleading seed-success text.
+Two isolated failure checks, fresh successful preparation and two prepared reuse
+checks verified the published interface. Native word, historical Lispish and
+strict document consumers are checked separately after rebuilding LinkedSpec.
+
+When updating from the older `8763a0e6` revision, follow the pinned integration
+guide's regeneration instructions and rebuild from fresh outputs. Existing
+generated files can make bootstrap a no-op even after a revision change. A fresh
+checkout and a new application-local target directory preserve the older build
+while ensuring the new one uses the selected revision's generated parser.
 
 After successful preparation, confirm the application graph with its explicit
 manifest:
@@ -402,7 +407,7 @@ document. For callers that need the typed status, use
 `RuntimeDiagnosticOutputExecutionError::Exit` with status 1. The generic example
 prints its runtime failure to stderr and exits unsuccessfully.
 
-The native contract test checks all 37 authored cases, token-spelling round trips
+The native contract test checks all 37 base and 14 entry-prefix cases, token-spelling round trips
 and fresh independent input after every rejection through one compiled engine:
 
 ```sh
@@ -529,7 +534,7 @@ path and default entry selection with:
 bash tools/run_python_project_data.sh examples/integration/verify_sexpr.py --runtime rust
 ```
 
-The verifier checks all 37 authored cases, earlier-output retention, the documented
+The verifier checks all 37 base and 14 entry-prefix cases, earlier-output retention, the documented
 relative grammar path, missing files and invalid UTF-8 grammar bytes. It preserves
 the original examples and expectations. These are text-argument checks; the Rust
 [file-consumer verifier](integration-rust.md#reproduce-the-integration-checks) separately
@@ -670,15 +675,18 @@ verifier. The [Lispish walkthrough](../specs-and-corpora/lispish-spec-walkthroug
 explains exact newline, escape and quote behavior. The separate document grammar
 passes the authored ARCHOGEN complete-input and SEMULITH kind cases on all six
 runtimes. The separate document-file consumer passes the same cases as files;
-independent public-loader integration replay also passes all 37 cases on each
-of the six runtime routes. Downstream application acceptance is separate.
+independent public-loader integration replay covers all 37 base and 14 entry-prefix
+cases on each of the six runtime routes. SEMULITH independently verified and
+closed all three of its reports at published LinkedSpec `a8d34c845`; its atom-kind
+verification used `sexpr_file` with `SExprDocumentV1.spec`. ARCHOGEN's application
+acceptance remains separate.
 Both consumers also reported setup difficulties inside an enclosing Cargo
 workspace. The [workspace setup above](#applications-with-a-cargo-workspace)
 addresses the reproduced membership failures without changing dependency pins.
-Prerequisite navigation was corrected under integration .8.4. ARCHOGEN's remaining
-PGEN bootstrap report is tracked under `RGX-CONSUMER-BUILD-REPORTS.1` through the
-RGX integration interface. RGX correctly propagates the observed failure; no
-defect in RGX's own implementation has been established.
+Prerequisite navigation was corrected under integration .8.4. ARCHOGEN's PGEN
+bootstrap report, LS-004, is addressed by the RGX revision documented above.
+Verification uses RGX's public integration interface; no dependency implementation
+diagnosis or downstream application acceptance is claimed.
 These setup repairs do not change Lispish's input-consumption or token-kind behavior.
 
 ### Handle failures and diagnostics
@@ -738,10 +746,11 @@ verification. OS runtime libraries remain platform dependencies.
 
 ## Update after the SEMULITH and ARCHOGEN reports
 
-The tested LinkedSpec repair baseline is
-`f60a70df37159c0e42d66ee5f08a959821c7e08d`. Select that revision or a later
-compatible revision in the application's LinkedSpec submodule, rebuild the native
-consumer, and commit the updated application pin. Fetching source alone does not
+The earlier grammar/workspace repair baseline is
+`f60a70df37159c0e42d66ee5f08a959821c7e08d`. LS-004 additionally requires the
+`RGX-CONSUMER-BUILD-REPORTS.1.2 - adopt verified LS-004 remedy` commit or a
+compatible descendant. Select that revision in the application's LinkedSpec
+submodule, rebuild the native consumer, and commit the updated application pin. Fetching source alone does not
 replace an already built executable or its packaged grammar files.
 
 The reports require different consumer changes:
@@ -752,10 +761,10 @@ The reports require different consumer changes:
 | ARCHOGEN LS-002 / LS-003 and SEMULITH LS-002 | Use `specs/SExprDocumentV1.spec`, select `Document`, and consume its tagged result. Use the separate `sexpr_file` example for files. The old `lispish_file` adapter still expects historical head/tail values. | `77d7b3db1`, `df845ce61` |
 | ARCHOGEN LS-001 and SEMULITH LS-003 item 1 | Keep the example's workspace boundary and the enclosing application's `exclude = ["vendor/linkedspec"]` entry. Follow the workspace setup above before preparation/build. | `effe3e7b2` |
 | ARCHOGEN LS-005 and SEMULITH LS-003 items 2–3 | Follow the linked preparation steps before either text or file use; optional test repositories need not be initialized for native use. | `6e37288f7` |
-| ARCHOGEN LS-004 | ARCHOGEN attributes misleading bootstrap progress to PGEN. The symptom is observable through RGX, whose command correctly returns failure; no RGX code defect is established. Check the final exit status. The report remains open through the RGX integration contact. | None; still open |
+| ARCHOGEN LS-004 | Update LinkedSpec to the adoption commit below, initialize its RGX pin, regenerate through the published bootstrap and rebuild from fresh outputs. Failed prerequisites now stop preparation without false seed-success text. | `RGX-CONSUMER-BUILD-REPORTS.1.2`; adopted RGX `f6e5acdc99720349d1e3ecef9f821f365c4db19c` |
 
-The [prepared ARCHOGEN LS-004 handoff](https://github.com/rdje/linkedspec/blob/main/docs/upstream/rgx/bootstrap-progress-status.md)
-records the remaining bootstrap-message reproduction and its unresolved status.
+The [ARCHOGEN LS-004 verification record](https://github.com/rdje/linkedspec/blob/main/docs/upstream/rgx/bootstrap-progress-status.md)
+preserves the original reproduction and the published remedy's failure/success/reuse evidence.
 
 The document grammar and native file consumer were independently admitted in
 `92f58b56c`. The table names implementation or documentation repairs; admission
@@ -766,7 +775,7 @@ An older cold-checkout bootstrap build issue was resolved on June15: LinkedSpec
 `8763a0e6bea97879f027237439d57725f83ead23` and verified a successful cold build.
 The September Cargo workspace remedy is
 `effe3e7b2544abf79f7786a7aa54e77b1893880e`. Those fixes address different problems
-from LS-004's still-open failure handling and misleading progress text.
+from LS-004's failure handling and misleading progress text.
 
 ARCHOGEN LS-006 was withdrawn; LS-007 requests no behavior change. The separate
 document grammar deliberately preserves the historical Lispish contract. Merely
@@ -777,7 +786,11 @@ From the application root, fetch and select the tested source revision:
 
 ```sh
 git -C vendor/linkedspec fetch origin
-git -C vendor/linkedspec checkout f60a70df37159c0e42d66ee5f08a959821c7e08d
+LINKEDSPEC_REV=$(git -C vendor/linkedspec log origin/main --format=%H -1 \
+  --fixed-strings --grep='RGX-CONSUMER-BUILD-REPORTS.1.2 - adopt verified LS-004 remedy')
+test -n "$LINKEDSPEC_REV" || exit 1
+git -C vendor/linkedspec checkout "$LINKEDSPEC_REV"
+git -C vendor/linkedspec submodule update --init rgx
 ```
 
 Then follow [RGX preparation](#initial-rgx-preparation), rebuild using the
@@ -817,8 +830,8 @@ engine, file/argument/grammar/runtime failures, packaged assets, a different
 working directory and a moved bundle with spaces in its path. Python is only a
 verification dependency; the deployed application remains Rust.
 
-The document-file verifier independently consumes the 37 authored cases: 21 valid
-files in one engine and 16 rejected documents with typed causes and no partial
+The document-file verifier independently consumes 37 base and 14 entry-prefix cases: 27 valid
+files in one engine and 24 rejected documents with typed causes and no partial
 value. It also checks the published file example, earlier-output retention,
 strict UTF-8 input/grammar/arguments, source-compilation failure, paths, option
 termination, and default/explicit assets. All valid cases repeat after bundle

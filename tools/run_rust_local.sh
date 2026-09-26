@@ -22,7 +22,9 @@ command -v perl >/dev/null 2>&1 || fail "required command not found: perl"
 cd "$REPO_ROOT"
 
 log "checking Rust formatting"
-"$CARGO_CMD" fmt --manifest-path rust/Cargo.toml --all -- --check
+# Select our packages explicitly: --all also traverses path dependencies.
+"$CARGO_CMD" fmt --manifest-path rust/Cargo.toml \
+ -p linkedspec-core -p linkedspec-runtime -- --check
 
 log "running Rust core package tests"
 "$CARGO_CMD" test --manifest-path rust/Cargo.toml -p linkedspec-core

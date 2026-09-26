@@ -2,17 +2,19 @@
 
 ## Current Activity
 
-LS-004 has a verified public upstream remedy at RGX f6e5acdc, but retained8763 remains affected. Required .1.2 owns authorized adoption. Independent startup .93/.92/.94/.95/.51 remains queued; global book reconciliation is open.
+LS-004's verified public remedy is adopted at RGX f6e5acdc. Native acceptance includes the strict-document prefix repair and the adoption commit requires exact canonical proof. SEMULITH independently verified and closed all three reports. .1.3 owns publication and the requested director/ARCHOGEN notice. Independent startup .93/.92/.94/.95/.51 remains queued; global book reconciliation is open.
 
 ## Latest Completed Slice
 
-- `RGX-CONSUMER-BUILD-REPORTS.1.1 - verify published bootstrap remedy` — report snapshots and remote ancestry match; published failure/repeat, fresh success and two reuse controls pass. No pin changed or consumer acceptance claimed.
+- `RGX-CONSUMER-BUILD-REPORTS.1.2 - adopt verified LS-004 remedy` — public failure/success/reuse, fresh consumers, complete owned Rust packages, emitted source, storage and CLI controls pass. Old local edits and outputs remain preserved. ARCHOGEN's downstream acceptance remains separate.
 
 ## Next Action
 
-- Obtain the director's explicit pin-freeze exception before .1.2; independent startup .93 remains available. Do not notify ARCHOGEN that retained LinkedSpec is fixed yet.
+- Publish the clean adoption commit using its canonical receipt, verify remote identity, then notify the director and ARCHOGEN under .1.3.
 
 ## Recent Completions
+
+- `2026-09-27` — `RGX-CONSUMER-BUILD-REPORTS.1.2` adopts verified f6e5acdc, preserves prior data, restores Rust public leading trivia and strict prefix validation, and requires receipt-bound canonical admission.
 
 - `2026-09-26` — `RGX-CONSUMER-BUILD-REPORTS.1.1` verifies the published LS-004 remedy; retained-pin adoption requires explicit authorization and native/canonical proof.
 
@@ -43,8 +45,6 @@ LS-004 has a verified public upstream remedy at RGX f6e5acdc, but retained8763 r
 - `2026-09-24` — `SESSION-STARTUP-READING.86.4.4.2.2` closes bounded helper recomposition with59 public controls and source-identical book66 proof.
 
 - `2026-09-24` — `SESSION-STARTUP-READING.86.4.4.2.1` repairs fresh generated Trace loading; focused173/book66 and mutation checks pass.
-
-- `2026-09-24` — `SESSION-STARTUP-READING.86.4.8.2` repairs grouped operands; focused187/book21 and Phase0 1033/1033 pass.
 
 ## History
 

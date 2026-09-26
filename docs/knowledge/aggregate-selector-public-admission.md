@@ -6,7 +6,7 @@ answers:
   - "can public docs still show array name or hash name as current syntax"
   - "which checker prevents aggregate selector documentation drift"
   - "why are removed selector spellings still visible in some documentation"
-date: 2026-09-20
+date: 2026-09-27
 status: current
 tags: [language, bindings, retirement, documentation, capability, no-drift]
 evidence: "FUTURE-PARITY-BACKLOG.12.1.9 adds tools/check_public_aggregate_selector_surface.py and registers it in canonical local CI. The checker scans 47 root/capability/mdBook public files, requires every exact selector-shaped mention to carry explicit removed/rejected/migrated historical context, forbids stale future/remaining-backend status, requires current bare set/push/copy examples, removes future.uniform_binding_selector_retirement from capability_conformance/manifest.json, and composes the five-backend runtime/source checker plus the 60/0/0 capability checker. On 2026-07-12 it classifies 31 removed/history references, reports zero current public examples, and passes canonical CLI 61x2 plus Phase 0 1031/1031 in 626 seconds."
@@ -30,8 +30,8 @@ Public documentation may retain the removed spelling only to state a boundary, e
 clearly historical milestone. It may not present the spelling as an accepted example, a remaining compatibility
 surface, or future work. `tools/check_public_aggregate_selector_surface.py` enforces that distinction across the
 root README/roadmaps/architecture state, capability guide, and every mdBook source page. Its exact current inventory
-is 67 public files. It composes the runtime/source retirement checker so public and executable admission cannot
-diverge. Its current inventory is 35 classified retired/history references and zero current examples. Seven concrete
+is 69 public files. It composes the runtime/source retirement checker so public and executable admission cannot
+diverge. Its current inventory is 36 classified retired/history references and zero current examples. Seven concrete
 retired spellings are confined to one uniquely bounded migration section: two rejected examples and five ordered
 old-to-new contrasts guarded by eleven in-memory mutations. Four earlier counted occurrences were prose false
 positives and two later duplicate root-README history mentions were routed to canonical owners.
@@ -100,3 +100,16 @@ Only the two expected file counts and current census references advance. Classif
 logic, frozen authorities,35 selector references,zero current examples,11 contrast
 mutations and mutation14/11/10/50 checks remain unchanged. Earlier evidence stays
 intact; reverify with the existing command.
+
+## September27 admission census correction
+
+`RGX-CONSUMER-BUILD-REPORTS.1.2` canonical admission exposes a stale count, not new
+selector syntax. The maintained checker's matching rules find36 references in
+both clean `7c2acb51` and the adoption candidate, versus35 at published `a8d34c845`.
+The only addition is the explicitly rejected `array(value)` spelling in the
+constructor guide, added by `49678a8c136ea2f824f6f0ed2ac0b1170f52087a` (startup
+`.90`). Every earlier occurrence remains; the document-prefix repair adds none.
+The correction advances only the expected classified count to36 and synchronizes
+the current census prose. Classifier rules, negative-context requirements, five
+ordered migration contrasts, eleven mutations, runtime rejection and executable
+source checks remain unchanged. The earlier dated evidence retains its scope.

@@ -864,9 +864,9 @@ results offline with `bash tools/run_python_project_data.sh tools/check_uniform_
 are migrated. Perl `.12.1.8.1`, Rust `.12.1.8.2`, Dart `.12.1.8.3`, Julia `.12.1.8.4`, and Lua `.12.1.8.5`
 hard-reject the removed exact selectors before execution. Cross-variant `.12.1.8.6` locks their shared contract,
 boundaries, and zero runtime compatibility. The uniform-binding selector retirement is admitted by `.12.1.9`.
-Follow-up `.12.1.10` extends its recurring public checker to all immediate component READMEs. The current 59-file
-inventory is locked at 25 genuine classified removed/history references and zero current examples after the
-bounded root README removed its two duplicate historical selector mentions. Explicit bare-binding anchors remain
+Follow-up `.12.1.10` extends its recurring public checker to all immediate component READMEs. The current 69-file
+inventory is locked at 36 classified removed/history references and zero current examples. The constructor
+guide's explicit single-bare-value rejection is included in that inventory. Explicit bare-binding anchors remain
 required in the Rust, Dart, Julia, and Lua READMEs.
 Closed follow-up `.12.1.11` reconciles older statement-only array-end result prose and Perl value-position lowering
 with the already-admitted updated-value contract. `bash tools/run_python_project_data.sh tools/check_uniform_binding_mutation_result_surface.py`

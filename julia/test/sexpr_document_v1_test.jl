@@ -10,6 +10,12 @@ end
     )
     cases = contract["cases"]
     @test length(cases) == 37
+    prefix = JSON3.read(
+        read(joinpath(REPO_ROOT, "tests", "sexpr-document-v1", "entry-prefix.json"), String),
+        Dict{String,Any},
+    )
+    @test length(prefix["cases"]) == 14
+    cases = vcat(cases, prefix["cases"])
     reuse = only(filter(row -> row["id"] == "reuse_after_rejection", cases))
     source = read(joinpath(REPO_ROOT, "specs", "SExprDocumentV1.spec"), String)
     parsed = parse_spec_with_staged_user_function_definitions(source)

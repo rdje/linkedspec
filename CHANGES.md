@@ -12,6 +12,41 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-09-27 — RGX-CONSUMER-BUILD-REPORTS.1.2 - adopt verified LS-004 remedy
+
+The authorized RGX gitlink advances from8763a0e6 to f6e5acdc99720349d1e3ecef9f821f365c4db19c,
+whose public bootstrap stops after a missing prerequisite without false seed-success text. The independently
+verified failure/success/reuse proof is retained in .1.1; the exact prepared clean checkout is adopted here.
+Both LinkedSpec Cargo lockfiles add the required typed-arena2.0.2 record and two dependency edges. The old opaque
+checkout/local edits and Git metadata remain byte/status-verified and recoverable; the old Rust target is retained,
+and native consumers rebuild from fresh outputs.
+
+Native acceptance exposed two LinkedSpec-owned prerequisites: the formatter's --all traversed dependency source,
+and Rust's missing public leading-trivia boundary was masked by the old indexed-read defect. Formatting now
+selects only the two owned packages. The four public native/generated value/accumulator seams skip the same
+leading LF blank/#comment lines as Perl exactly once, retaining full source and absolute coordinates. New tests
+cover reference starts, Unicode/EOF/ordinary-content exclusions, both generated projections, child entry and a
+separately compiled emitted module. The unchanged105-case oracle passes. The public book corrects its former
+per-handler skip description and supplies the exact adoption lookup/regeneration steps.
+
+Strict document acceptance also exposed a wrapper-skipped prefix gap: leading hash-comment lines could
+bypass SExprDocumentV1's rejecting edges. Its entry block now checks the retained original prefix and rejects
+non-whitespace there. Fourteen independent controls supplement the unchanged37-case authority on all six
+native routes and both file/public-loader verifiers; the prefix-guard removal mutation restores the old failure.
+The book explains the distinction between semicolon comments and ordinary hash tokens. SEMULITH independently
+verified all three of its reports at published a8d34c845; its notes and director confirmation close those cases.
+
+Canonical admission also finds a pre-existing stale public-selector census: startup .90 added one explicitly
+rejected constructor spelling. Exact comparison shows36 references in both clean HEAD and this candidate,
+versus35 at the published baseline. The expected count and current census prose now agree at69 files/36
+classified references/zero current examples; all classifier, migration and runtime rejection checks remain intact.
+
+Verification: native Lispish26/18 PASS; original document37/36 and Rust public-loader37/21 pass before the prefix supplement. Final document51/44 and all six public-loader51/29 routes PASS;
+word4, workspace9, adapter3 and owned formatter65/0-dependency PASS. Perl14 leading-boundary controls and
+focused Rust oracle/entry checks PASS. The full Rust component gate passes all core/runtime packages,
+105-case oracle/classifier, emitted source, managed storage and CLI66x2. Exact staged canonical acceptance is
+mandatory for landing; its receipt binds this complete candidate. Checkpoint: docs/checkpoints/RGX-CONSUMER-BUILD-REPORTS.1.2.json. Publication/notification is .1.3.
+
 ## 2026-09-26 — RGX-CONSUMER-BUILD-REPORTS.1.1 - verify a published LS-004 remedy
 
 Public RGX f6e5acdc stops correctly after a failed prerequisite, while LinkedSpec's retained8763 still prints false seed success. Two failure controls, fresh normal preparation and two prepared controls verify the published remedy without inspecting implementation or changing pins. Required .1.2 owns adoption after an explicit director exception to the pin freeze, then native/canonical verification. The book and local report distinguish upstream availability from the still-affected retained checkout.
@@ -203,4 +238,3 @@ The Knowledge card preserves the base, patch checksum, reproduction and recovery
 Separate Perl multiline-regex action segmentation from whole-spec validation under .86.4.2/.3, followed by public recomposition .86.4.4. Public Get/runtime context and lowering reproduce the existing failures. Whole-fragment versus physical-line scanning has opposite outcomes for regex and division controls, so a naive whole-source scanner replacement is excluded. No production behavior changes.
 
 Focused proof: public Get and action lowering; source-preserving StatementSplit/AST and Validation owner probes; memory, Knowledge, histories, book and normal doctrines. Canonical acceptance remains .86.3.
-

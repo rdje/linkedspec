@@ -28,11 +28,16 @@ def main():
     grammar = root / "specs/SExprDocumentV1.spec"
     authority = root / "tests/sexpr-document-v1/contract.json"
     cases = json.loads(authority.read_text(encoding="utf-8"))["cases"]
+    assert len(cases) == 37
+    prefix_authority = root / "tests/sexpr-document-v1/entry-prefix.json"
+    prefix_cases = json.loads(prefix_authority.read_text(encoding="utf-8"))["cases"]
+    assert len(prefix_cases) == 14
+    cases = cases + prefix_cases
     accepted = [case for case in cases if case["outcome"] == "accept"]
     rejected = [case for case in cases if case["outcome"] == "reject"]
-    assert (len(cases), len(accepted), len(rejected)) == (37, 21, 16)
+    assert (len(cases), len(accepted), len(rejected)) == (51, 27, 24)
     environment = dict(os.environ, PERL5LIB="", PERL5OPT="", PERL_UNICODE="0")
-    protected = [grammar, authority]
+    protected = [grammar, authority, prefix_authority]
     checks = []
 
     with tempfile.TemporaryDirectory(prefix="sexpr-public-", dir=scratch) as temporary:
@@ -124,7 +129,7 @@ def main():
                 assert all(record.get(key) == value for key, value in expected_error.items()), (label, record)
             checks.append(label)
 
-        run("all 21 authored values through one public-loaded engine", grammar,
+        run("all 27 authored values through one public-loaded engine", grammar,
             [case["input"] for case in accepted], expected=[case["expected"] for case in accepted])
         for case in rejected:
             run(case["id"], grammar, [case["input"]], failure="document")
@@ -148,6 +153,7 @@ def main():
 
     assert not work.exists(), "owned temporary adapters and fixtures must be removed"
     print(json.dumps({"status": "PASS", "runtime": args.runtime, "authored_cases": len(cases),
+                      "base_cases": 37, "prefix_cases": len(prefix_cases),
                       "accepted": len(accepted), "rejected": len(rejected), "checks": checks}))
 
 

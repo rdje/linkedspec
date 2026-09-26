@@ -24,6 +24,9 @@ my $contract = $json->decode(read_text("$Bin/../tests/sexpr-document-v1/contract
 my $source = read_text("$Bin/../specs/SExprDocumentV1.spec");
 my @cases = @{$contract->{cases}};
 is(scalar(@cases), 37, 'all independently authored contract cases are present');
+my $prefix = $json->decode(read_text("$Bin/../tests/sexpr-document-v1/entry-prefix.json"));
+is(scalar(@{$prefix->{cases}}), 14, 'all independently authored prefix cases are present');
+push @cases, @{$prefix->{cases}};
 my ($reuse) = grep { $_->{id} eq 'reuse_after_rejection' } @cases;
 ok($reuse, 'contract supplies an independent reuse expectation');
 
@@ -70,6 +73,22 @@ subtest 'EOF alone cannot establish full recognition' => sub {
     is($@, '', 'mutated grammar wrongly accepts interstitial junk');
     is(pos($input), length($input), 'wrongly accepted parse reaches EOF');
     is(scalar(@{$value->{forms}}), 2, 'wrongly accepted parse retains both surrounding forms');
+};
+
+subtest 'entry guard validates text skipped by the public wrapper' => sub {
+    my $unsafe = $source;
+    my $guard = <<'GUARD';
+ if(matches(input_slice(0, cursor_pos()), /[^ \t\r\n\f\x0B]/));
+  exit_now(1);
+ endif();
+GUARD
+    is(($unsafe =~ s/\Q$guard\E//), 1, 'mutation removes exactly the entry-prefix guard');
+    my $parser = LinkedSpec::Get(\$unsafe);
+    my $input = "# invalid document prefix\n(a)";
+    my $value = eval { $parser->(\$input) };
+    is($@, '', 'catch-all edges alone wrongly accept wrapper-skipped text');
+    is(pos($input), length($input), 'wrongly accepted parse reaches EOF');
+    is(scalar(@{$value->{forms}}), 1, 'wrongly accepted parse retains the valid form');
 };
 
 done_testing;

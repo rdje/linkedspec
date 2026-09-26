@@ -1,0 +1,1440 @@
+{
+  "format": 1,
+  "owner": "RGX-CONSUMER-BUILD-REPORTS.1.2",
+  "date": "2026-09-27",
+  "activation_commit": "7c2acb5102bd54cb21c325193f5368b806d4cb08",
+  "status": "All focused acceptance and the exact diagnosed selector census correction pass; a new exact staged canonical receipt is mandatory before landing.",
+  "adoption": {
+    "owner": "RGX-CONSUMER-BUILD-REPORTS.1.2",
+    "activation_commit": "7c2acb5102bd54cb21c325193f5368b806d4cb08",
+    "adopted_revision": "f6e5acdc99720349d1e3ecef9f821f365c4db19c",
+    "retained_checkout": ".linkedspec-data/scratch/ls004-adoption26/retained-rgx",
+    "retained_files": 4200,
+    "retained_regular_bytes": 251037999,
+    "retained_manifest_sha256": "d20cd84b7f2edfa7e075cc4a7d63583a140968b812d3d7f9d91882c26d5e3301",
+    "worktree_bytes_equal": true,
+    "git_recovery_statuses_equal": true,
+    "adopted_git_status": "",
+    "native_target_preserved": ".linkedspec-data/scratch/ls004-adoption26/pre-adoption-rust-target",
+    "native_rebuild_target": "rust/target",
+    "preparation_evidence": "docs/checkpoints/RGX-CONSUMER-BUILD-REPORTS.1.1.json"
+  },
+  "upstream_public_authority": "docs/checkpoints/RGX-CONSUMER-BUILD-REPORTS.1.1.json",
+  "initial_native_checks": {
+    "lispish": {
+      "status": "PASS",
+      "checks": [
+        "26 file values / one engine",
+        "published settings file",
+        "caller-relative paths / option terminator",
+        "empty-file",
+        "bare-atom",
+        "missing-close",
+        "leading unmatched close",
+        "earlier output retained on later runtime failure",
+        "missing grammar",
+        "missing input",
+        "invalid UTF-8 input",
+        "no arguments",
+        "missing grammar argument",
+        "missing input argument",
+        "invalid UTF-8 argument",
+        "packaged / outside cwd",
+        "relocated / outside cwd",
+        "missing packaged grammar"
+      ],
+      "file_values": 26
+    },
+    "sexpr": {
+      "status": "PASS",
+      "authored_cases": 37,
+      "accepted_files": 21,
+      "rejected_files": 16,
+      "checks": [
+        "21 authored documents / one engine",
+        "published file example",
+        "leading_junk",
+        "interstitial_junk",
+        "trailing_junk",
+        "bare_top_atom",
+        "quoted_top_atom",
+        "extra_close",
+        "leading_close",
+        "missing_close",
+        "nested_missing_close",
+        "unterminated_quote",
+        "escaped_final_quote",
+        "empty_brackets",
+        "nonempty_brackets",
+        "braces",
+        "bom_prefix",
+        "nonascii_space_at_top",
+        "earlier value retained / stop at rejected document",
+        "caller-relative Unicode grammar / option-like file",
+        "missing explicit grammar",
+        "invalid UTF-8 grammar",
+        "grammar compilation fails before input loading",
+        "historical Lispish is not a Document grammar",
+        "missing input",
+        "directory is not an input file",
+        "invalid UTF-8 input / no prefix output",
+        "no arguments",
+        "missing grammar argument",
+        "missing file argument",
+        "empty file list",
+        "invalid UTF-8 argument",
+        "packaged / outside cwd",
+        "relocated / all authored valid files",
+        "missing owned grammar / no cwd fallback",
+        "explicit grammar overrides absent packaged copy"
+      ]
+    },
+    "workspace": {
+      "status": "PASS",
+      "checks": [
+        "standalone example",
+        "standalone library",
+        "example isolates itself in a host",
+        "library isolates itself in a host",
+        "missing example boundary rejects enclosing workspace",
+        "host exclusion isolates boundary-less example",
+        "host keeps only application members",
+        "excluded example",
+        "excluded library"
+      ]
+    },
+    "word_and_format": {
+      "word": {
+        "inputs": [
+          "alpha 42 beta",
+          "",
+          "one-two",
+          "red red"
+        ],
+        "expected": [
+          [
+            "alpha",
+            "beta"
+          ],
+          [],
+          [
+            "one",
+            "two"
+          ],
+          [
+            "red",
+            "red"
+          ]
+        ],
+        "actual": [
+          [
+            "alpha",
+            "beta"
+          ],
+          [],
+          [
+            "one",
+            "two"
+          ],
+          [
+            "red",
+            "red"
+          ]
+        ],
+        "exit_code": 0,
+        "outside_source_cwd": true,
+        "binary_sha256": "6f65f64b0ce77af7d6b43e1bfce97b907f356709c1cf822cc1e34abf1128e7b2"
+      },
+      "format": {
+        "owned_targets": 64,
+        "dependency_targets": 0,
+        "log_sha256": "72b760c0a9ceed8a023c06b5302d16c3522ae8b8dab21d1412740b300eaf3aa8"
+      }
+    }
+  },
+  "leading_trivia_reference": {
+    "cases": [
+      {
+        "actual": 0,
+        "expected": 0,
+        "input": ""
+      },
+      {
+        "actual": 0,
+        "expected": 0,
+        "input": "word"
+      },
+      {
+        "actual": 0,
+        "expected": 0,
+        "input": " \tword"
+      },
+      {
+        "actual": 0,
+        "expected": 0,
+        "input": " \t"
+      },
+      {
+        "actual": 1,
+        "expected": 1,
+        "input": "\nword"
+      },
+      {
+        "actual": 3,
+        "expected": 3,
+        "input": " \t\nword"
+      },
+      {
+        "actual": 10,
+        "expected": 10,
+        "input": "# comment\nword"
+      },
+      {
+        "actual": 8,
+        "expected": 8,
+        "input": " \t# 雪🦀\n\nword"
+      },
+      {
+        "actual": 16,
+        "expected": 16,
+        "input": "# comment at EOF"
+      },
+      {
+        "actual": 11,
+        "expected": 11,
+        "input": "\n# 雪 at EOF"
+      },
+      {
+        "actual": 0,
+        "expected": 0,
+        "input": "\r\nword"
+      },
+      {
+        "actual": 0,
+        "expected": 0,
+        "input": " \nword"
+      },
+      {
+        "actual": 0,
+        "expected": 0,
+        "input": "word\n# later"
+      },
+      {
+        "actual": 1,
+        "expected": 1,
+        "input": "\n  word"
+      }
+    ],
+    "status": "PASS"
+  },
+  "leading_trivia_diagnosis": {
+    "current_perl": {
+      "result": [
+        "?ds_vhistory:",
+        [
+          [
+            "?object:",
+            null,
+            [
+              [
+                "?version_entry:",
+                [
+                  [
+                    "?version:",
+                    "1"
+                  ],
+                  [
+                    "?date:",
+                    "today"
+                  ]
+                ]
+              ]
+            ]
+          ]
+        ]
+      ]
+    },
+    "retained_binary": [
+      "?ds_vhistory:",
+      [
+        [
+          "?object:",
+          "/proj/foo",
+          [
+            [
+              "?version_entry:",
+              [
+                [
+                  "?version:",
+                  "1"
+                ],
+                [
+                  "?date:",
+                  "today"
+                ]
+              ]
+            ]
+          ]
+        ]
+      ]
+    ],
+    "fresh_binary": [
+      "?ds_vhistory:",
+      [
+        [
+          "?object:",
+          "/proj/foo",
+          [
+            [
+              "?version_entry:",
+              [
+                [
+                  "?version:",
+                  "1"
+                ],
+                [
+                  "?date:",
+                  "today"
+                ]
+              ]
+            ]
+          ]
+        ]
+      ]
+    ],
+    "conclusion": "Missing Rust public leading-trivia boundary predates adoption. Correct typed indexing exposes object value. Frozen oracle remains unchanged."
+  },
+  "completed_logs": [
+    {
+      "path": ".linkedspec-data/scratch/ls004-adoption26/consumer-build-locked.log",
+      "sha256": "62f431af8c72d5b41b7e01bdb773c789cb9a1ac9c670f931a56288a2b8468636",
+      "bytes": 893
+    },
+    {
+      "path": ".linkedspec-data/scratch/ls004-adoption26/consumer-build.log",
+      "sha256": "775190cc3781fab3a2dc2f12d87ce212fd43b2534708a035c9ae165bcc795139",
+      "bytes": 3385251
+    },
+    {
+      "path": ".linkedspec-data/scratch/ls004-adoption26/consumer-tests.log",
+      "sha256": "014e9d43faac1b137978e480076a59bd7b1e657869403ff592e4911bc36e74a1",
+      "bytes": 3381667
+    },
+    {
+      "path": ".linkedspec-data/scratch/ls004-adoption26/adopted-bootstrap.log",
+      "sha256": "2f710aac340a1502ef3b70ec290c6eacaf57e4559a3a3c14919f7d3b3398c280",
+      "bytes": 62
+    },
+    {
+      "path": ".linkedspec-data/scratch/ls004-adoption26/rust-gate.log",
+      "sha256": "d2eba04a6eaeef4c31ef1763cba7d6e7c22c41fa37d8be7df3eef3c028d06740",
+      "bytes": 754713
+    },
+    {
+      "path": ".linkedspec-data/scratch/ls004-adoption26/owned-format-red.log",
+      "sha256": "3ff7aadcfe8a9fe3346f472add5e8a1584d0df9788e32925c3eedf1f3bf247c1",
+      "bytes": 1314
+    },
+    {
+      "path": ".linkedspec-data/scratch/ls004-adoption26/owned-format-green.log",
+      "sha256": "72b760c0a9ceed8a023c06b5302d16c3522ae8b8dab21d1412740b300eaf3aa8",
+      "bytes": 13762
+    },
+    {
+      "path": ".linkedspec-data/scratch/ls004-adoption26/rust-gate-final.log",
+      "sha256": "4d8c2d22f5386f68a5dcfa0e9649f1ee6ea1f2fa3c9d68680f91206d4c59fbeb",
+      "bytes": 6804196
+    },
+    {
+      "path": ".linkedspec-data/scratch/ls004-adoption26/leading-trivia-red.log",
+      "sha256": "43da935e98a0bfc7c1ec07c5d92545071e1667b967e35901df62c85ffa943c14",
+      "bytes": 3381715
+    },
+    {
+      "path": ".linkedspec-data/scratch/ls004-adoption26/leading-trivia-green.log",
+      "sha256": "f86d0f00378ccfb27c886d089cb1f23af1eb24b6570e1240375765fd0cb9bc30",
+      "bytes": 3381516
+    },
+    {
+      "path": ".linkedspec-data/scratch/ls004-adoption26/book.log",
+      "sha256": "138c31944f7383e9034e9c556598213220d6d4d116f8bf0df216e7fc8ebc94d7",
+      "bytes": 274
+    },
+    {
+      "path": ".linkedspec-data/scratch/ls004-adoption26/rust-gate-repaired.log",
+      "bytes": 10228296,
+      "sha256": "b64f2cf25b4ffd258681dbac0dbb71d261258bb2416f2417c9562e6d63993bef"
+    },
+    {
+      "path": ".linkedspec-data/scratch/ls004-adoption26/consumer-rebuild.log",
+      "bytes": 3380828,
+      "sha256": "a8cc8eba311ebabda25d20388587acd0c403d05f594f40f7ab04d021c48c7edc"
+    },
+    {
+      "path": ".linkedspec-data/scratch/ls004-adoption26/lispish-final.log",
+      "bytes": 512,
+      "sha256": "1e5314ae74515bf16992f5be88e0104a92be2bba9641bf1979d3f7bf5146b26e"
+    },
+    {
+      "path": ".linkedspec-data/scratch/ls004-adoption26/sexpr-final.log",
+      "bytes": 1083,
+      "sha256": "a811d137089274b069abfdcc428c0266c9d0b9ad7ae130bbb3eb3f4a0387c548"
+    },
+    {
+      "path": ".linkedspec-data/scratch/ls004-adoption26/public-loader-final.log",
+      "bytes": 611,
+      "sha256": "59be5c1a4d35c0efa369020b9950973804d4d12a401c372dda6705c8348216c2"
+    },
+    {
+      "path": ".linkedspec-data/scratch/ls004-adoption26/workspace.log",
+      "bytes": 333,
+      "sha256": "d0818333ab0053716dbde0b148017ffcdec3f51d545bc20a3cceac0157e01821"
+    },
+    {
+      "path": ".linkedspec-data/scratch/ls004-adoption26/owned-format-final.log",
+      "bytes": 13968,
+      "sha256": "60fc73a468ee54905396ff36fc802ea9f34b68893d2d25a0e7ac69218134893b"
+    },
+    {
+      "path": ".linkedspec-data/scratch/ls004-adoption26/prefix-red.log",
+      "bytes": 4373,
+      "sha256": "cbf8c9e007645ce74734b0d29a4b74eb99638a081ffc1df1257e6a16a156727a"
+    },
+    {
+      "path": ".linkedspec-data/scratch/ls004-adoption26/prefix-six-runtime.log",
+      "bytes": 3383738,
+      "sha256": "35441c37474a1c7d91fc07a7b40536bbfc55b3d3645fd0c93c3ff89893234c2a"
+    },
+    {
+      "path": ".linkedspec-data/scratch/ls004-adoption26/prefix-file.log",
+      "bytes": 1308,
+      "sha256": "283da4677f4ab5334226761874e0a5711e0375ddf4e19a323056a274fad345b6"
+    },
+    {
+      "path": ".linkedspec-data/scratch/ls004-adoption26/prefix-rust-format.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": ".linkedspec-data/scratch/ls004-adoption26/prefix-dart-format.log",
+      "bytes": 92,
+      "sha256": "bf664de1bad7cae77de82c6d83aaa09beb4dc680cf51aaf364a72143d4d93d3e"
+    },
+    {
+      "path": ".linkedspec-data/scratch/ls004-adoption26/prefix-dart-format-fixed.log",
+      "bytes": 94,
+      "sha256": "b91c7fd1bc73315893ee45095a29b87bae25d757362201d3ae26449b224ed8ac"
+    },
+    {
+      "path": ".linkedspec-data/scratch/ls004-adoption26/prefix-public-perl-source-changed.log",
+      "bytes": 501,
+      "sha256": "ecea64d50df84788b60c991ae0c93f2d6522aab2ee632136b3631f8c76d524a9"
+    },
+    {
+      "path": ".linkedspec-data/scratch/ls004-adoption26/prefix-book-final.log",
+      "bytes": 274,
+      "sha256": "6c72806c94dce0115de7426bceaed8d1a19fb56da97e8d4b743d0dd3917469e0"
+    },
+    {
+      "path": ".linkedspec-data/scratch/ls004-adoption26/prefix-dart-format-final.log",
+      "bytes": 46,
+      "sha256": "1685974b88bd671112e17334bdc2abb8ef350e01ae026547459ec7a8307375ec"
+    },
+    {
+      "path": ".linkedspec-data/scratch/ls004-adoption26/prefix-public-perl.log",
+      "bytes": 836,
+      "sha256": "adec56eed117d493698744afcab0e2de1802a52144da2123683974667f1b01fe"
+    },
+    {
+      "path": ".linkedspec-data/scratch/ls004-adoption26/prefix-public-rust.log",
+      "bytes": 836,
+      "sha256": "ef9a8bf15adf6365b9dfe26b58111967978f104541328ae96042751cb3e6a4f1"
+    },
+    {
+      "path": ".linkedspec-data/scratch/ls004-adoption26/prefix-public-dart.log",
+      "bytes": 836,
+      "sha256": "de40fb3ed04cd03b06c803521610167545ad8c77e95964a9953bd71d0ff70296"
+    },
+    {
+      "path": ".linkedspec-data/scratch/ls004-adoption26/prefix-public-julia.log",
+      "bytes": 837,
+      "sha256": "16d4b4fcaf0befd1f181be0419197588b765ac4f46ec2934bf87e7b8587a877e"
+    },
+    {
+      "path": ".linkedspec-data/scratch/ls004-adoption26/prefix-public-puc.log",
+      "bytes": 835,
+      "sha256": "4e63f493d1d31cfdca24af1cfdfc255e7a8129cecdfa56b271ad852d05edc893"
+    },
+    {
+      "path": ".linkedspec-data/scratch/ls004-adoption26/prefix-public-luajit.log",
+      "bytes": 838,
+      "sha256": "e55d018b31a75636c670b33d4c2a6cd690187098a956bb14548e59bd27ee6bb6"
+    },
+    {
+      "path": ".linkedspec-data/scratch/ls004-adoption26/canonical-prefix.log",
+      "bytes": 37224562,
+      "sha256": "85eabd4a733ec7daa8fd3b645106b0f42fef1f7d2e7ee16e920305dce6dfda88"
+    },
+    {
+      "path": ".linkedspec-data/scratch/ls004-adoption26/selector-inventory.json",
+      "bytes": 38810,
+      "sha256": "e9439bc5b888881e72c5c8e0c6d01763d94fe9d658ed2b992486d05adf5b40b8"
+    },
+    {
+      "path": ".linkedspec-data/scratch/ls004-adoption26/selector-correction.log",
+      "bytes": 917,
+      "sha256": "882df9added5b71264df4fa89e1d8490f1b5d1c843715919fab795dbfa164992"
+    },
+    {
+      "path": ".linkedspec-data/scratch/ls004-adoption26/selector-book.log",
+      "bytes": 274,
+      "sha256": "c510ebe99ff6eec1ba57f4de8228440b7697f511d889f9618c9ca7cf03150469"
+    },
+    {
+      "path": ".linkedspec-data/scratch/ls004-adoption26/selector-knowledge.log",
+      "bytes": 71,
+      "sha256": "b41656dc40667fa1dfafe1c67720f88c5d7d99b1a6a1b811070740ad51af1b72"
+    }
+  ],
+  "prestage_checks": {
+    "book_render_and_exact_content": "PASS",
+    "knowledge_map": "Regenerated: 1190 facts / 9500 question keys; exact synchronization is checked by canonical CI.",
+    "memory_architecture": "PASS, 59 lines, activation matches HEAD, handoff semantics verified",
+    "change_history": "PASS: 240 lines / 42243 bytes, below rollover threshold.",
+    "engineering_notes": "PASS with capacity warning: 286 lines / 58138 bytes, below the 90-percent rollover threshold.",
+    "diff_check": "PASS"
+  },
+  "limits": [
+    "No dependency implementation inspection or source edits.",
+    "No ARCHOGEN downstream application acceptance; SEMULITH independently verified and closed all three reports as recorded in consumer_verification_intake.",
+    "Publication and notification remain .1.3-owned."
+  ],
+  "final_consumer_checks": {
+    "lispish": {
+      "status": "PASS",
+      "checks": [
+        "26 file values / one engine",
+        "published settings file",
+        "caller-relative paths / option terminator",
+        "empty-file",
+        "bare-atom",
+        "missing-close",
+        "leading unmatched close",
+        "earlier output retained on later runtime failure",
+        "missing grammar",
+        "missing input",
+        "invalid UTF-8 input",
+        "no arguments",
+        "missing grammar argument",
+        "missing input argument",
+        "invalid UTF-8 argument",
+        "packaged / outside cwd",
+        "relocated / outside cwd",
+        "missing packaged grammar"
+      ],
+      "file_values": 26
+    },
+    "sexpr": {
+      "status": "PASS",
+      "authored_cases": 37,
+      "accepted_files": 21,
+      "rejected_files": 16,
+      "checks": [
+        "21 authored documents / one engine",
+        "published file example",
+        "leading_junk",
+        "interstitial_junk",
+        "trailing_junk",
+        "bare_top_atom",
+        "quoted_top_atom",
+        "extra_close",
+        "leading_close",
+        "missing_close",
+        "nested_missing_close",
+        "unterminated_quote",
+        "escaped_final_quote",
+        "empty_brackets",
+        "nonempty_brackets",
+        "braces",
+        "bom_prefix",
+        "nonascii_space_at_top",
+        "earlier value retained / stop at rejected document",
+        "caller-relative Unicode grammar / option-like file",
+        "missing explicit grammar",
+        "invalid UTF-8 grammar",
+        "grammar compilation fails before input loading",
+        "historical Lispish is not a Document grammar",
+        "missing input",
+        "directory is not an input file",
+        "invalid UTF-8 input / no prefix output",
+        "no arguments",
+        "missing grammar argument",
+        "missing file argument",
+        "empty file list",
+        "invalid UTF-8 argument",
+        "packaged / outside cwd",
+        "relocated / all authored valid files",
+        "missing owned grammar / no cwd fallback",
+        "explicit grammar overrides absent packaged copy"
+      ]
+    },
+    "public_loader": {
+      "status": "PASS",
+      "runtime": "rust",
+      "authored_cases": 37,
+      "accepted": 21,
+      "rejected": 16,
+      "checks": [
+        "all 21 authored values through one public-loaded engine",
+        "leading_junk",
+        "interstitial_junk",
+        "trailing_junk",
+        "bare_top_atom",
+        "quoted_top_atom",
+        "extra_close",
+        "leading_close",
+        "missing_close",
+        "nested_missing_close",
+        "unterminated_quote",
+        "escaped_final_quote",
+        "empty_brackets",
+        "nonempty_brackets",
+        "braces",
+        "bom_prefix",
+        "nonascii_space_at_top",
+        "prior successful output retained / no rejected or later value",
+        "documented relative Unicode grammar path",
+        "strict UTF-8 grammar",
+        "missing grammar"
+      ]
+    }
+  },
+  "final_format": {
+    "owned_targets": 65,
+    "dependency_targets": 0,
+    "sha256": "60fc73a468ee54905396ff36fc802ea9f34b68893d2d25a0e7ac69218134893b"
+  },
+  "book": {
+    "render": "PASS",
+    "integration_revision_and_upgrade_lookup": "PASS",
+    "once_per_invocation_boundary": "PASS"
+  },
+  "final_word": {
+    "inputs": [
+      "alpha 42 beta",
+      "",
+      "one-two",
+      "red red"
+    ],
+    "expected": [
+      [
+        "alpha",
+        "beta"
+      ],
+      [],
+      [
+        "one",
+        "two"
+      ],
+      [
+        "red",
+        "red"
+      ]
+    ],
+    "exit_code": 0,
+    "binary_sha256": "fa6fbba1e0edfc870d1038266e04d5ea8521c84cf0deee6cde66cc8a69ddc6af"
+  },
+  "full_rust_gate": {
+    "command": "env PERL5LIB= CARGO_NET_OFFLINE=true bash tools/run_rust_local.sh",
+    "status": "PASS",
+    "summaries": [
+      "test result: ok. 201 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 23.47s",
+      "test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 2.81s",
+      "test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.66s",
+      "test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.05s",
+      "test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s",
+      "test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s",
+      "test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.12s",
+      "test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.34s",
+      "test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.68s",
+      "test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s",
+      "test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s",
+      "test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.10s",
+      "test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s",
+      "test result: ok. 182 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 9.54s",
+      "test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s",
+      "test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 9.58s",
+      "test result: ok. 18 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 82.57s",
+      "test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.69s",
+      "test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 84.24s",
+      "test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.40s",
+      "test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 10.12s",
+      "test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 176.53s",
+      "test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 16.26s",
+      "test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 22.49s",
+      "test result: ok. 197 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 37.79s",
+      "test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 77.71s",
+      "test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.79s",
+      "test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 71.14s",
+      "test result: ok. 15 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 228.15s",
+      "test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 9.33s",
+      "test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.35s",
+      "test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 2.68s",
+      "test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s",
+      "test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s",
+      "test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.88s",
+      "test result: ok. 12 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 61.22s",
+      "test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 63.27s",
+      "test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 21.45s",
+      "test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 32.75s",
+      "test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.19s",
+      "test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 6.64s",
+      "test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.64s",
+      "test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.83s",
+      "test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 8.91s",
+      "test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 22.59s",
+      "test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.16s",
+      "test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.09s",
+      "test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.04s",
+      "test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.83s",
+      "test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 12.21s",
+      "test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 60.51s",
+      "test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 46.21s",
+      "test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 2.41s",
+      "test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 61.20s",
+      "test result: ok. 13 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 171.73s",
+      "test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.25s",
+      "test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 57.82s",
+      "test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 11.89s",
+      "test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 20.11s",
+      "test result: ok. 12 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.34s",
+      "test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.96s",
+      "test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.22s",
+      "test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.74s",
+      "test result: ok. 16 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 4.41s",
+      "test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 4.24s",
+      "test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 60.49s",
+      "test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s"
+    ],
+    "storage_and_cli": [
+      "[rust-project-data-test] offline Cargo cache covers 196 locked registry packages",
+      "[rust-project-data-test] PASS: 17 Rust owners, Cargo cache, generated workspaces, traces, and relocation stay on repository storage",
+      "[cli-conformance] PASS help",
+      "[cli-conformance] PASS help_short",
+      "[cli-conformance] PASS usage_no_arguments",
+      "[cli-conformance] PASS usage_status_subcommand",
+      "[cli-conformance] PASS usage_corpus_subcommand",
+      "[cli-conformance] PASS usage_trailing_positional",
+      "[cli-conformance] PASS usage_double_dash",
+      "[cli-conformance] PASS usage_unknown_option",
+      "[cli-conformance] PASS usage_uppercase_option",
+      "[cli-conformance] PASS usage_abbreviated_option",
+      "[cli-conformance] PASS usage_negated_trace_reset",
+      "[cli-conformance] PASS usage_negated_trace_emoji",
+      "[cli-conformance] PASS usage_missing_value",
+      "[cli-conformance] PASS usage_help_value",
+      "[cli-conformance] PASS usage_flag_value",
+      "[cli-conformance] PASS usage_missing_input_selector",
+      "[cli-conformance] PASS usage_source_selector_conflict",
+      "[cli-conformance] PASS usage_input_selector_conflict",
+      "[cli-conformance] PASS usage_removed_parse_mode",
+      "[cli-conformance] PASS usage_invalid_trace_level",
+      "[cli-conformance] PASS usage_invalid_trace_mode",
+      "[cli-conformance] PASS usage_multiple_errors",
+      "[cli-conformance] PASS success_named_source_literal_input",
+      "[cli-conformance] PASS success_file_source_file_input_nested_json",
+      "[cli-conformance] PASS success_inline_source_literal_input",
+      "[cli-conformance] PASS success_diagnostic_helpers_quiet",
+      "[cli-conformance] PASS success_logical_helpers_eager",
+      "[cli-conformance] PASS success_explicit_top_rule",
+      "[cli-conformance] PASS success_default_first_authored_marker",
+      "[cli-conformance] PASS success_markerless_first_authored_rule",
+      "[cli-conformance] PASS success_default_rule_seeks",
+      "[cli-conformance] PASS success_and_rule_consumes",
+      "[cli-conformance] PASS success_explicit_repeated_action_results",
+      "[cli-conformance] PASS success_input_file_exact_bytes",
+      "[cli-conformance] PASS success_inline_source_unicode",
+      "[cli-conformance] PASS success_literal_input_unicode_no_normalization",
+      "[cli-conformance] PASS success_spec_file_unicode",
+      "[cli-conformance] PASS success_input_file_unicode_bom_newlines",
+      "[cli-conformance] PASS failure_invalid_utf8_spec_file",
+      "[cli-conformance] PASS failure_spec_file_utf8_bom_preserved",
+      "[cli-conformance] PASS failure_invalid_utf8_input_file",
+      "[cli-conformance] PASS trace_stdout_full_unicode_json_bytes",
+      "[cli-conformance] PASS failure_compile_precedes_input_load",
+      "[cli-conformance] PASS failure_missing_spec_file",
+      "[cli-conformance] PASS failure_input_load",
+      "[cli-conformance] PASS failure_invocation_missing_top_rule",
+      "[cli-conformance] PASS trace_stdout_low",
+      "[cli-conformance] PASS trace_route_low_reset_emoji",
+      "[cli-conformance] PASS trace_mirror_low_reset",
+      "[cli-conformance] PASS trace_stdout_file_without_reset",
+      "[cli-conformance] PASS trace_none_resets_file",
+      "[cli-conformance] PASS trace_quiet_stdout_is_silent",
+      "[cli-conformance] PASS trace_failure_route_low",
+      "[cli-conformance] PASS trace_stdout_medium",
+      "[cli-conformance] PASS trace_stdout_med_alias",
+      "[cli-conformance] PASS trace_stdout_high",
+      "[cli-conformance] PASS trace_stdout_numeric_250",
+      "[cli-conformance] PASS trace_stdout_full",
+      "[cli-conformance] PASS trace_default_route_full_reset",
+      "[cli-conformance] PASS trace_stdout_debug_emoji",
+      "[cli-conformance] PASS trace_stdout_verbose_alias_emoji",
+      "[cli-conformance] PASS trace_route_low_append",
+      "[cli-conformance] PASS trace_failure_input_route_low",
+      "[cli-conformance] PASS trace_failure_invoke_route_low",
+      "[cli-conformance] PASS trace_stdout_high_utf8_bytes",
+      "[cli-conformance] PASS trace_failure_invoke_escaped_field",
+      "[cli-conformance] 66/66 case(s) passed for linkedspec-rust",
+      "[cli-conformance] PASS help",
+      "[cli-conformance] PASS help_short",
+      "[cli-conformance] PASS usage_no_arguments",
+      "[cli-conformance] PASS usage_status_subcommand",
+      "[cli-conformance] PASS usage_corpus_subcommand",
+      "[cli-conformance] PASS usage_trailing_positional",
+      "[cli-conformance] PASS usage_double_dash",
+      "[cli-conformance] PASS usage_unknown_option",
+      "[cli-conformance] PASS usage_uppercase_option",
+      "[cli-conformance] PASS usage_abbreviated_option",
+      "[cli-conformance] PASS usage_negated_trace_reset",
+      "[cli-conformance] PASS usage_negated_trace_emoji",
+      "[cli-conformance] PASS usage_missing_value",
+      "[cli-conformance] PASS usage_help_value",
+      "[cli-conformance] PASS usage_flag_value",
+      "[cli-conformance] PASS usage_missing_input_selector",
+      "[cli-conformance] PASS usage_source_selector_conflict",
+      "[cli-conformance] PASS usage_input_selector_conflict",
+      "[cli-conformance] PASS usage_removed_parse_mode",
+      "[cli-conformance] PASS usage_invalid_trace_level",
+      "[cli-conformance] PASS usage_invalid_trace_mode",
+      "[cli-conformance] PASS usage_multiple_errors",
+      "[cli-conformance] PASS success_named_source_literal_input",
+      "[cli-conformance] PASS success_file_source_file_input_nested_json",
+      "[cli-conformance] PASS success_inline_source_literal_input",
+      "[cli-conformance] PASS success_diagnostic_helpers_quiet",
+      "[cli-conformance] PASS success_logical_helpers_eager",
+      "[cli-conformance] PASS success_explicit_top_rule",
+      "[cli-conformance] PASS success_default_first_authored_marker",
+      "[cli-conformance] PASS success_markerless_first_authored_rule",
+      "[cli-conformance] PASS success_default_rule_seeks",
+      "[cli-conformance] PASS success_and_rule_consumes",
+      "[cli-conformance] PASS success_explicit_repeated_action_results",
+      "[cli-conformance] PASS success_input_file_exact_bytes",
+      "[cli-conformance] PASS success_inline_source_unicode",
+      "[cli-conformance] PASS success_literal_input_unicode_no_normalization",
+      "[cli-conformance] PASS success_spec_file_unicode",
+      "[cli-conformance] PASS success_input_file_unicode_bom_newlines",
+      "[cli-conformance] PASS failure_invalid_utf8_spec_file",
+      "[cli-conformance] PASS failure_spec_file_utf8_bom_preserved",
+      "[cli-conformance] PASS failure_invalid_utf8_input_file",
+      "[cli-conformance] PASS trace_stdout_full_unicode_json_bytes",
+      "[cli-conformance] PASS failure_compile_precedes_input_load",
+      "[cli-conformance] PASS failure_missing_spec_file",
+      "[cli-conformance] PASS failure_input_load",
+      "[cli-conformance] PASS failure_invocation_missing_top_rule",
+      "[cli-conformance] PASS trace_stdout_low",
+      "[cli-conformance] PASS trace_route_low_reset_emoji",
+      "[cli-conformance] PASS trace_mirror_low_reset",
+      "[cli-conformance] PASS trace_stdout_file_without_reset",
+      "[cli-conformance] PASS trace_none_resets_file",
+      "[cli-conformance] PASS trace_quiet_stdout_is_silent",
+      "[cli-conformance] PASS trace_failure_route_low",
+      "[cli-conformance] PASS trace_stdout_medium",
+      "[cli-conformance] PASS trace_stdout_med_alias",
+      "[cli-conformance] PASS trace_stdout_high",
+      "[cli-conformance] PASS trace_stdout_numeric_250",
+      "[cli-conformance] PASS trace_stdout_full",
+      "[cli-conformance] PASS trace_default_route_full_reset",
+      "[cli-conformance] PASS trace_stdout_debug_emoji",
+      "[cli-conformance] PASS trace_stdout_verbose_alias_emoji",
+      "[cli-conformance] PASS trace_route_low_append",
+      "[cli-conformance] PASS trace_failure_input_route_low",
+      "[cli-conformance] PASS trace_failure_invoke_route_low",
+      "[cli-conformance] PASS trace_stdout_high_utf8_bytes",
+      "[cli-conformance] PASS trace_failure_invoke_escaped_field",
+      "[cli-conformance] 66/66 case(s) passed for linkedspec-rust"
+    ]
+  },
+  "lockfiles": [
+    {
+      "path": "rust/Cargo.lock",
+      "packages": 200,
+      "registry_packages": 196,
+      "sha256": "f225ab48d91b1c2eb3bec063f961d255d9e97b340d0ce300e749ca58ec155428"
+    },
+    {
+      "path": "examples/integration/rust/Cargo.lock",
+      "packages": 201,
+      "registry_packages": 196,
+      "sha256": "9637c198ce466db2aa5e74eabdf64a537ed09537461600e224f5a57e7c38c8f3"
+    }
+  ],
+  "owned_source_sha256": {
+    "rust/linkedspec-runtime/src/engine.rs": "5d1c572c2c310f5dd0aa4f62bb07020cf5c416a8483799cd1c85f13ffeb68009",
+    "rust/linkedspec-runtime/tests/leading_input_trivia.rs": "f7a4d3ae5fee24fa368e22dff47d1bbb15e50635c3f60d843bfcf30044dc89e8",
+    "rust/linkedspec-runtime/tests/source_emitter.rs": "1d4b6938e7817dfda5b638a8c8f0a4833d6b9f09cff96df2046779ae31ae72fa",
+    "tools/run_rust_local.sh": "5e408349072de57237ceee0b880cb573ea69536ee6bb5e89728b34e7fc095578",
+    "tests/sexpr-document-v1/contract.json": "e5b9a3a87c68ee978a54e54e7aebbe91e39b26b745068c870914242202616eae",
+    "tests/sexpr-document-v1/entry-prefix.json": "7b7f713b7df19882d9a5b2b39261aa8f7b46ca8124846019be39b2eaa02f1369",
+    "specs/SExprDocumentV1.spec": "01a781078d4282f832bdbff37d8194aef9ef688bdeffe874e159cfe4b26ca3c9",
+    "t/sexpr_document_v1.t": "a7c6b06b89b38ddfdf5710ad441c33d64277081f30c5f12d90fe6a1557b489d0",
+    "rust/linkedspec-runtime/tests/sexpr_document_v1.rs": "630adb072687f5447ee9214a4c00ee68209b9b24099ed223c48d25be1a1e24ba",
+    "dart/test/sexpr_document_v1_test.dart": "d9f894bb807afbe04d22bd5bdcfe6e8c7e240cda6d03bb865b6e87ae1ee74fed",
+    "julia/test/sexpr_document_v1_test.jl": "5cc6236377eaea944d5e5466c80e651c917a5272754d770400fd26ed766eec32",
+    "lua/test/sexpr_document_v1_test.lua": "2ebd290a9ddb7f10c1ead3177f7b6eecc3e259e903ddd9ff9b3d84df7ffb79ab",
+    "examples/integration/verify_sexpr.py": "5d34f0a72ce4db7fbc2edadcae507fbe10ca20266bb67f1e0b273f9cec029f1c",
+    "examples/integration/rust/verify_sexpr.py": "af53b9240a0d00a4a688e9c207b71d139601fe8dfe3c2a84a19e8d9bf2c7d381",
+    "tools/check_public_aggregate_selector_surface.py": "e005477e20947f05aeb341bb9af4cb8ac6cfc3f860693976de15ffc90fa00bdd"
+  },
+  "canonical_acceptance": {
+    "command": "env PERL5LIB= bash tools/run_ci_local.sh",
+    "requirement": "Run after exact candidate staging. Pre-commit must validate its staged receipt; post-commit promotes it. Record final outcome and publication identity in .1.3 without changing the accepted candidate."
+  },
+  "admission_preparation": {
+    "first_canonical_exit": 1,
+    "scope": "Doctrine preflight; no runtime gate or canonical acceptance claimed.",
+    "causes": [
+      "Owning task lacked literal Acceptance Checklist heading and exact LinkedSpec tool spelling.",
+      "Change-history heading placed date last instead of first; routing freshness checks inherited this failure."
+    ],
+    "correction": "Record formatting corrected. No source, tests or doctrine policy changed. Rerun exact staged canonical CI.",
+    "log": ".linkedspec-data/scratch/ls004-adoption26/canonical.log",
+    "sha256": "f664fa964f42202dc15a19de15c4a1264f79b59891e10b3cca4e09d614f63af0"
+  },
+  "prefix_book_proof": {
+    "status": "PASS",
+    "rendered_pages": [
+      {
+        "path": "docs/linkedspec-book/book/specs-and-corpora/sexpr-document-v1.html",
+        "sha256": "00ad3a74895ea986a60cff35cf0288ab6ea225e4ae9f7b4eb4962d8e38170f21",
+        "checks": [
+          "A line starting with # is not a document comment",
+          "checks the original source before its entry cursor",
+          "all 51 cases on six native runtime routes",
+          "entry-prefix guard mutation",
+          "29 process groups"
+        ]
+      },
+      {
+        "path": "docs/linkedspec-book/book/compiler/pipeline-overview.html",
+        "sha256": "b1fb3ee9d90c4222ce37b853b631ed816cac956a3b42871815303cfaa9ac033b",
+        "checks": [
+          "It runs once before entering the selected top rule",
+          "checks the original text before its entry cursor and rejects hash comments"
+        ]
+      },
+      {
+        "path": "docs/linkedspec-book/book/overview/project-status.html",
+        "sha256": "2b21e6bf5ea0e2bb2a102f7d15a05c176b18e5bf077a07071a0fb77ffdc8c413",
+        "checks": [
+          "SEMULITH independently verified and closed all three reports",
+          "the checker covers 69 public files and 36 explicitly classified removed/history references",
+          "its current inventory covers all 69 root/component/mdBook files"
+        ]
+      },
+      {
+        "path": "docs/linkedspec-book/book/public-api/integration-perl.html",
+        "sha256": "1e4b72e2dd3bb6616c0eecacf092c59cd244265445ed6926ad6e1fa3c0a6f55a",
+        "checks": [
+          "37 base and 14 entry-prefix cases"
+        ]
+      },
+      {
+        "path": "docs/linkedspec-book/book/public-api/integration-rust.html",
+        "sha256": "e6950da7728d7385247fd93ca1afc1f1cefe0189e12a325ac0f9d0b226c73624",
+        "checks": [
+          "37 base and 14 entry-prefix cases",
+          "f6e5acdc99720349d1e3ecef9f821f365c4db19c",
+          "RGX-CONSUMER-BUILD-REPORTS.1.2 - adopt verified LS-004 remedy",
+          "SEMULITH independently verified and closed all three of its reports"
+        ]
+      },
+      {
+        "path": "docs/linkedspec-book/book/public-api/integration-dart.html",
+        "sha256": "3679981cdc4c4cfddc75adbb66351115d7bb224188bc11f2b73c619f440127fb",
+        "checks": [
+          "37 base and 14 entry-prefix cases"
+        ]
+      },
+      {
+        "path": "docs/linkedspec-book/book/public-api/integration-julia.html",
+        "sha256": "cbd3d9c427bfb5c76f692afa2b12ad07aa1dda9e0b5e0738d289c426c412324d",
+        "checks": [
+          "37 base and 14 entry-prefix cases"
+        ]
+      },
+      {
+        "path": "docs/linkedspec-book/book/public-api/integration-lua.html",
+        "sha256": "edb08ff20dae3ed95dec89a671d85fd9100a7ea6694e1cb80d07a262c51324e5",
+        "checks": [
+          "37 base and 14 entry-prefix cases"
+        ]
+      }
+    ],
+    "runtime_to_document_link": "../specs-and-corpora/sexpr-document-v1.html#syntax-and-complete-recognition"
+  },
+  "strict_document_prefix": {
+    "cause": "The established public wrapper skips leading hash-comment lines before Document dispatch; rejecting edges and EOF cannot validate that original prefix.",
+    "repair": "Document I validates input_slice(0, cursor_pos()) contains only the six allowed ASCII whitespace characters, otherwise typed exit_now(1). General wrapper behavior is preserved.",
+    "red": {
+      "perl_failed_subtests": 8,
+      "failed_tests": "45-52",
+      "base_and_positive_controls_pass": true
+    },
+    "green": {
+      "base_cases": 37,
+      "prefix_cases": 14,
+      "accepted": 27,
+      "rejected": 24,
+      "native_routes": [
+        "perl",
+        "rust",
+        "dart",
+        "julia",
+        "puc",
+        "luajit"
+      ],
+      "perl_top_level_tests": 60,
+      "dart_tests": 52,
+      "julia_assertions": 128,
+      "mutations": [
+        "remove rejecting edges",
+        "remove entry-prefix guard"
+      ]
+    },
+    "original_authority_unchanged": true,
+    "original_authority_sha256": "e5b9a3a87c68ee978a54e54e7aebbe91e39b26b745068c870914242202616eae",
+    "public_loader_results": {
+      "perl": {
+        "status": "PASS",
+        "runtime": "perl",
+        "authored_cases": 51,
+        "base_cases": 37,
+        "prefix_cases": 14,
+        "accepted": 27,
+        "rejected": 24,
+        "checks": [
+          "all 27 authored values through one public-loaded engine",
+          "leading_junk",
+          "interstitial_junk",
+          "trailing_junk",
+          "bare_top_atom",
+          "quoted_top_atom",
+          "extra_close",
+          "leading_close",
+          "missing_close",
+          "nested_missing_close",
+          "unterminated_quote",
+          "escaped_final_quote",
+          "empty_brackets",
+          "nonempty_brackets",
+          "braces",
+          "bom_prefix",
+          "nonascii_space_at_top",
+          "prefix_hash_line",
+          "prefix_indented_hash_line",
+          "prefix_blank_then_hash",
+          "prefix_hash_crlf",
+          "prefix_hash_eof",
+          "prefix_unicode_hash",
+          "prefix_two_hash_lines",
+          "prefix_hash_only_line",
+          "prior successful output retained / no rejected or later value",
+          "documented relative Unicode grammar path",
+          "strict UTF-8 grammar",
+          "missing grammar"
+        ]
+      },
+      "rust": {
+        "status": "PASS",
+        "runtime": "rust",
+        "authored_cases": 51,
+        "base_cases": 37,
+        "prefix_cases": 14,
+        "accepted": 27,
+        "rejected": 24,
+        "checks": [
+          "all 27 authored values through one public-loaded engine",
+          "leading_junk",
+          "interstitial_junk",
+          "trailing_junk",
+          "bare_top_atom",
+          "quoted_top_atom",
+          "extra_close",
+          "leading_close",
+          "missing_close",
+          "nested_missing_close",
+          "unterminated_quote",
+          "escaped_final_quote",
+          "empty_brackets",
+          "nonempty_brackets",
+          "braces",
+          "bom_prefix",
+          "nonascii_space_at_top",
+          "prefix_hash_line",
+          "prefix_indented_hash_line",
+          "prefix_blank_then_hash",
+          "prefix_hash_crlf",
+          "prefix_hash_eof",
+          "prefix_unicode_hash",
+          "prefix_two_hash_lines",
+          "prefix_hash_only_line",
+          "prior successful output retained / no rejected or later value",
+          "documented relative Unicode grammar path",
+          "strict UTF-8 grammar",
+          "missing grammar"
+        ]
+      },
+      "dart": {
+        "status": "PASS",
+        "runtime": "dart",
+        "authored_cases": 51,
+        "base_cases": 37,
+        "prefix_cases": 14,
+        "accepted": 27,
+        "rejected": 24,
+        "checks": [
+          "all 27 authored values through one public-loaded engine",
+          "leading_junk",
+          "interstitial_junk",
+          "trailing_junk",
+          "bare_top_atom",
+          "quoted_top_atom",
+          "extra_close",
+          "leading_close",
+          "missing_close",
+          "nested_missing_close",
+          "unterminated_quote",
+          "escaped_final_quote",
+          "empty_brackets",
+          "nonempty_brackets",
+          "braces",
+          "bom_prefix",
+          "nonascii_space_at_top",
+          "prefix_hash_line",
+          "prefix_indented_hash_line",
+          "prefix_blank_then_hash",
+          "prefix_hash_crlf",
+          "prefix_hash_eof",
+          "prefix_unicode_hash",
+          "prefix_two_hash_lines",
+          "prefix_hash_only_line",
+          "prior successful output retained / no rejected or later value",
+          "documented relative Unicode grammar path",
+          "strict UTF-8 grammar",
+          "missing grammar"
+        ]
+      },
+      "julia": {
+        "status": "PASS",
+        "runtime": "julia",
+        "authored_cases": 51,
+        "base_cases": 37,
+        "prefix_cases": 14,
+        "accepted": 27,
+        "rejected": 24,
+        "checks": [
+          "all 27 authored values through one public-loaded engine",
+          "leading_junk",
+          "interstitial_junk",
+          "trailing_junk",
+          "bare_top_atom",
+          "quoted_top_atom",
+          "extra_close",
+          "leading_close",
+          "missing_close",
+          "nested_missing_close",
+          "unterminated_quote",
+          "escaped_final_quote",
+          "empty_brackets",
+          "nonempty_brackets",
+          "braces",
+          "bom_prefix",
+          "nonascii_space_at_top",
+          "prefix_hash_line",
+          "prefix_indented_hash_line",
+          "prefix_blank_then_hash",
+          "prefix_hash_crlf",
+          "prefix_hash_eof",
+          "prefix_unicode_hash",
+          "prefix_two_hash_lines",
+          "prefix_hash_only_line",
+          "prior successful output retained / no rejected or later value",
+          "documented relative Unicode grammar path",
+          "strict UTF-8 grammar",
+          "missing grammar"
+        ]
+      },
+      "puc": {
+        "status": "PASS",
+        "runtime": "puc",
+        "authored_cases": 51,
+        "base_cases": 37,
+        "prefix_cases": 14,
+        "accepted": 27,
+        "rejected": 24,
+        "checks": [
+          "all 27 authored values through one public-loaded engine",
+          "leading_junk",
+          "interstitial_junk",
+          "trailing_junk",
+          "bare_top_atom",
+          "quoted_top_atom",
+          "extra_close",
+          "leading_close",
+          "missing_close",
+          "nested_missing_close",
+          "unterminated_quote",
+          "escaped_final_quote",
+          "empty_brackets",
+          "nonempty_brackets",
+          "braces",
+          "bom_prefix",
+          "nonascii_space_at_top",
+          "prefix_hash_line",
+          "prefix_indented_hash_line",
+          "prefix_blank_then_hash",
+          "prefix_hash_crlf",
+          "prefix_hash_eof",
+          "prefix_unicode_hash",
+          "prefix_two_hash_lines",
+          "prefix_hash_only_line",
+          "prior successful output retained / no rejected or later value",
+          "documented relative Unicode grammar path",
+          "strict UTF-8 grammar",
+          "missing grammar"
+        ]
+      },
+      "luajit": {
+        "status": "PASS",
+        "runtime": "luajit",
+        "authored_cases": 51,
+        "base_cases": 37,
+        "prefix_cases": 14,
+        "accepted": 27,
+        "rejected": 24,
+        "checks": [
+          "all 27 authored values through one public-loaded engine",
+          "leading_junk",
+          "interstitial_junk",
+          "trailing_junk",
+          "bare_top_atom",
+          "quoted_top_atom",
+          "extra_close",
+          "leading_close",
+          "missing_close",
+          "nested_missing_close",
+          "unterminated_quote",
+          "escaped_final_quote",
+          "empty_brackets",
+          "nonempty_brackets",
+          "braces",
+          "bom_prefix",
+          "nonascii_space_at_top",
+          "prefix_hash_line",
+          "prefix_indented_hash_line",
+          "prefix_blank_then_hash",
+          "prefix_hash_crlf",
+          "prefix_hash_eof",
+          "prefix_unicode_hash",
+          "prefix_two_hash_lines",
+          "prefix_hash_only_line",
+          "prior successful output retained / no rejected or later value",
+          "documented relative Unicode grammar path",
+          "strict UTF-8 grammar",
+          "missing grammar"
+        ]
+      }
+    },
+    "native_file_result": {
+      "status": "PASS",
+      "authored_cases": 51,
+      "base_cases": 37,
+      "prefix_cases": 14,
+      "accepted_files": 27,
+      "rejected_files": 24,
+      "checks": [
+        "27 authored documents / one engine",
+        "published file example",
+        "leading_junk",
+        "interstitial_junk",
+        "trailing_junk",
+        "bare_top_atom",
+        "quoted_top_atom",
+        "extra_close",
+        "leading_close",
+        "missing_close",
+        "nested_missing_close",
+        "unterminated_quote",
+        "escaped_final_quote",
+        "empty_brackets",
+        "nonempty_brackets",
+        "braces",
+        "bom_prefix",
+        "nonascii_space_at_top",
+        "prefix_hash_line",
+        "prefix_indented_hash_line",
+        "prefix_blank_then_hash",
+        "prefix_hash_crlf",
+        "prefix_hash_eof",
+        "prefix_unicode_hash",
+        "prefix_two_hash_lines",
+        "prefix_hash_only_line",
+        "earlier value retained / stop at rejected document",
+        "caller-relative Unicode grammar / option-like file",
+        "missing explicit grammar",
+        "invalid UTF-8 grammar",
+        "grammar compilation fails before input loading",
+        "historical Lispish is not a Document grammar",
+        "missing input",
+        "directory is not an input file",
+        "invalid UTF-8 input / no prefix output",
+        "no arguments",
+        "missing grammar argument",
+        "missing file argument",
+        "empty file list",
+        "invalid UTF-8 argument",
+        "packaged / outside cwd",
+        "relocated / all authored valid files",
+        "missing owned grammar / no cwd fallback",
+        "explicit grammar overrides absent packaged copy"
+      ]
+    },
+    "commands": [
+      "env PERL5LIB= bash tools/check_sexpr_document_v1.sh",
+      "env PERL5LIB= bash tools/run_python_project_data.sh examples/integration/verify_sexpr.py --runtime <runtime>",
+      "env PERL5LIB= bash tools/run_python_project_data.sh examples/integration/rust/verify_sexpr.py --binary rust/target/debug/sexpr_file"
+    ]
+  },
+  "interrupted_canonical_retry": {
+    "session": 41001,
+    "exit_code": 143,
+    "reason": "Intentionally stopped via the exact managed wrapper after confirming the strict-document prefix gap.",
+    "scope": "All nine doctrines and completed admissions passed; partial progress is not canonical acceptance and supplies no receipt.",
+    "log": ".linkedspec-data/scratch/ls004-adoption26/canonical-corrected.log",
+    "sha256": "039f8a6b266bd4f0c9bb61ea5949c41d9996b4bef46a4cb0051e782002891ff9"
+  },
+  "rejected_public_attempt": {
+    "session": 84000,
+    "exit_code": 1,
+    "reason": "An explanatory grammar comment was added while the verifier ran. Its final source-integrity assertion rejected the changed input; no acceptance claimed.",
+    "resolution": "Freeze source and authorities; rerun all six public-loader routes and native files with source-integrity checks intact.",
+    "log": ".linkedspec-data/scratch/ls004-adoption26/prefix-public-perl-source-changed.log"
+  },
+  "consumer_verification_intake": {
+    "semulith": {
+      "source_head": "d6986c67a38a33a4bbd2fe806c0a8f9319161948",
+      "access": "caller-authorized read-only; same repository volume",
+      "subtree_clean": true,
+      "files": [
+        {
+          "path": "../semulith/docs/upstream/linkedspec/LS-001-multiline-string/VERIFIED.md",
+          "sha256": "016ab960b882dc5297fb4b7f5bfb6d9bf4f81b3ef8b40f46d32c43a8dfb3255f",
+          "bytes": 1876
+        },
+        {
+          "path": "../semulith/docs/upstream/linkedspec/LS-002-atom-typing/VERIFIED.md",
+          "sha256": "496b0e17f2c12e6cd4a19814bc31f796db439006ab62029d1aedce787f75d41c",
+          "bytes": 2283
+        },
+        {
+          "path": "../semulith/docs/upstream/linkedspec/LS-003-guide-papercuts/VERIFIED.md",
+          "sha256": "7253c5994ad7323813cf6eaf658d9196377c593a0763b07aebd65cf0803d871d",
+          "bytes": 1944
+        },
+        {
+          "path": "../semulith/docs/upstream/linkedspec/LS-001-multiline-string/evidence/verified-a8d34c845.txt",
+          "sha256": "b48627a06be025586d692fc571a931d771cdbbe75235947ed563def67a9d445a",
+          "bytes": 1035
+        },
+        {
+          "path": "../semulith/docs/upstream/linkedspec/LS-002-atom-typing/evidence/verified-a8d34c845.txt",
+          "sha256": "56b888c47a99d4e7eea9b1f6dd833af5754f6f25ff8708b0a08b0b76bb33274e",
+          "bytes": 1832
+        },
+        {
+          "path": "../semulith/docs/upstream/linkedspec/LS-003-guide-papercuts/evidence/verified-a8d34c845.txt",
+          "sha256": "f1b90cbf250aa6f2abde1c85cf107b96ad785d41c7e33f433cd24b8d8cb596da",
+          "bytes": 2500
+        }
+      ],
+      "conclusion": "All three reports independently verified at published a8d34c845; director confirms cases closed."
+    },
+    "archogen": {
+      "source_head": "82af67a331f9e0472d0ed28741c931463386f8a8",
+      "access": "caller-authorized read-only; same repository volume",
+      "subtree_clean": true,
+      "files": [
+        {
+          "path": "../archogen/docs/feedback/linkedspec/issues/LS-001-cargo-workspace-collision/README.md",
+          "sha256": "3e364b7c49c894cda40387978dcf7224e63a8b595d522be00fc2584a695d961a",
+          "bytes": 4936
+        },
+        {
+          "path": "../archogen/docs/feedback/linkedspec/issues/LS-002-multi-form-truncation/README.md",
+          "sha256": "9d2d60dd6a67933bd8cd197d79e3388f09188c5748c66fb1cdb489ee0116e774",
+          "bytes": 5369
+        },
+        {
+          "path": "../archogen/docs/feedback/linkedspec/issues/LS-003-token-kind-erasure/README.md",
+          "sha256": "a72fdd2ec7f5ef77a40a56fd07f9c9feebbdccf57a036125a0387362632f4dd9",
+          "bytes": 3307
+        },
+        {
+          "path": "../archogen/docs/feedback/linkedspec/issues/LS-004-bootstrap-false-success/README.md",
+          "sha256": "898446c361465963aec0a5b1d06123960c62bbd14616e836b0292aea5851c97f",
+          "bytes": 3220
+        },
+        {
+          "path": "../archogen/docs/feedback/linkedspec/issues/LS-005-guide-ordering/README.md",
+          "sha256": "c6d7480eaa9681064c7dc145d2a47a5e7f2cfee9c4418028ea1a4561e1e2b54e",
+          "bytes": 2903
+        },
+        {
+          "path": "../archogen/docs/feedback/linkedspec/issues/LS-006-hex-underscore-withdrawn/README.md",
+          "sha256": "4c9cd3c729fde06a5dabd2ad9bad9115d58b57ba6c830308fb51201f56009793",
+          "bytes": 2867
+        },
+        {
+          "path": "../archogen/docs/feedback/linkedspec/issues/LS-007-adjacent-fragment-join/README.md",
+          "sha256": "ea48a7b8081c1fb8e12e72c0da4dd77bf99a4d27dedae93d592dd03179b106ea",
+          "bytes": 2875
+        }
+      ],
+      "conclusion": "All seven READMEs reviewed; LS001 workspace, LS002 complete document, LS003 kind preservation, LS004 bootstrap, LS005 guide; LS006 withdrawn and LS007 no-action preserved. Downstream verification remains ARCHOGEN-owned."
+    }
+  },
+  "selector_census_correction": {
+    "canonical_session": 36797,
+    "canonical_exit": 1,
+    "failure": "Classified public references36 versus expected35; no complete canonical receipt.",
+    "independent_inventory": {
+      "totals": {
+        "worktree": 36,
+        "HEAD": 36,
+        "a8d34c845": 35
+      },
+      "candidate_equals_clean_head_occurrence_multiset": true,
+      "all_35_published_occurrences_preserved_with_multiplicity": true,
+      "only_addition": {
+        "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+        "spelling": "array(value)",
+        "occurrences": 1,
+        "context": "For one bare value, use [value]: exact one-identifier constructor spelling remains removed selector syntax."
+      },
+      "full_inventory_log": ".linkedspec-data/scratch/ls004-adoption26/selector-inventory.json",
+      "full_inventory_sha256": "e9439bc5b888881e72c5c8e0c6d01763d94fe9d658ed2b992486d05adf5b40b8"
+    },
+    "introduced_by": "49678a8c136ea2f824f6f0ed2ac0b1170f52087a",
+    "cause": "Earlier constructor documentation correctly adds one explicitly rejected spelling; expected census did not advance.",
+    "checker_diff": "Exactly EXPECTED_CLASSIFIED_REFERENCE_COUNT 35 to36; classifier and mutation code unchanged.",
+    "result": [
+      "executable-aggregate-selector-concurrency: OK (3 staggered concurrent scans serialized; repository-root probes cleaned)",
+      "executable-aggregate-selector-scan: OK (0 positive; 20 classified implementation/recognition occurrences; serialized tracked+untracked discovery self-test passed)",
+      "aggregate-selector-retirement: OK (5 backends; 6 invalid selectors; 8 retained classes; runtime compatibility 0)",
+      "capability-conformance: OK (schema v2; 20 capabilities; backend states pass=100 partial=0 gap=0; 1 exclusions; 19 governance mutations; 2 mutation capabilities; 16 mutation-admission mutations; 17 mutation-recurring mutations; 4 mutation-public-gate mutations; 12 governed projections; 6 public mutations; 4 language-surface mutations)",
+      "public-aggregate-selector-surface: OK (69 public files; 36 classified removed/history references; 0 current examples; 5 migration contrasts; 11 contrast mutations; capability admitted)"
+    ],
+    "runtime_or_authoring_examples_changed": false
+  }
+}

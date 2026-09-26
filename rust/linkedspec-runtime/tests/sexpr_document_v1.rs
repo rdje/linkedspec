@@ -8,6 +8,7 @@ use serde_json::Value;
 
 const SOURCE: &str = include_str!("../../../specs/SExprDocumentV1.spec");
 const CONTRACT: &str = include_str!("../../../tests/sexpr-document-v1/contract.json");
+const ENTRY_PREFIX: &str = include_str!("../../../tests/sexpr-document-v1/entry-prefix.json");
 
 fn render_node(node: &Value) -> String {
     if node["kind"] == "list" {
@@ -31,6 +32,9 @@ fn authored_document_contract_roundtrips_and_reuses_one_engine_after_rejection()
     let contract: Value = serde_json::from_str(CONTRACT).unwrap();
     let cases = contract["cases"].as_array().unwrap();
     assert_eq!(cases.len(), 37);
+    let prefix: Value = serde_json::from_str(ENTRY_PREFIX).unwrap();
+    let prefix_cases = prefix["cases"].as_array().unwrap();
+    assert_eq!(prefix_cases.len(), 14);
     let reuse = cases
         .iter()
         .find(|case| case["id"] == "reuse_after_rejection")
@@ -40,7 +44,7 @@ fn authored_document_contract_roundtrips_and_reuses_one_engine_after_rejection()
     let engine = Engine::new(compile(&parsed).expect("compile shipped grammar"));
     let options = ExecutionOptions::new();
 
-    for case in cases {
+    for case in cases.iter().chain(prefix_cases) {
         let id = case["id"].as_str().unwrap();
         let result = engine.execute_value_with_diagnostic_output(
             case["input"].as_str().unwrap(),

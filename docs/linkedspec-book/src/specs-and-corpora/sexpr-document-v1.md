@@ -3,7 +3,7 @@
 Select `specs/SExprDocumentV1.spec` when a file must be recognized completely and
 the consumer needs to distinguish symbols, numbers and quoted strings. Its
 default entry rule is `Document`. It returns every parenthesized top-level form
-in order, including empty lists. Empty input and comment-only input are valid
+in order, including empty lists. Empty input and semicolon-comment-only input are valid
 documents with no forms.
 
 The separate `Lispish.spec` grammar keeps its historical extraction behavior and
@@ -105,6 +105,11 @@ semicolon comments ending at CRLF, CR, LF or EOF. Comments and inter-token trivi
 are omitted from the result. A non-ASCII space is part of a bare token; it is not
 implicit trivia. No BOM is stripped.
 
+A line starting with `#` is not a document comment: `# comment` followed by
+`(a)` fails, as does a hash-comment-only file. Use `; comment` instead. A hash
+inside a list remains an ordinary token character: `(#tag "# text")` contains
+one symbol and one string. A semicolon comment may itself contain `#`.
+
 Bare tokens are maximal nonempty runs excluding those six whitespace characters
 and `(`, `)`, `[`, `]`, `{`, `}`, `"`, `;`. Brackets and braces outside strings
 are rejected. Missing closing parentheses or string quotes, dangling string
@@ -130,6 +135,13 @@ would be insufficient: ordinary seek dispatch can skip text and still reach EOF.
 The regression suite removes the rejecting edges and independently demonstrates
 that `(a) junk (b)` would then be wrongly accepted.
 
+Public parser entry can skip initial blank and hash-comment lines before the
+selected rule runs. `Document` therefore also checks the original source before
+its entry cursor, allowing only the six ASCII whitespace characters there.
+This prevents the public wrapper from hiding an invalid leading hash comment.
+A separate regression removes that guard and demonstrates the otherwise accepted
+prefix. The general public-entry behavior remains available to other grammars.
+
 ## Write the tokens back
 
 To serialize a parsed document, emit each atom's `lexeme` unchanged. For a list,
@@ -144,19 +156,21 @@ format-preservation layer if those are needed.
 
 `tests/sexpr-document-v1/contract.json` contains 37 independently authored cases:
 21 accepted documents and 16 rejections, including the four-form ARCHOGEN input
-and all four SEMULITH kind examples. Run:
+and all four SEMULITH kind examples. `entry-prefix.json` adds 14 independent
+controls: six accepted prefixes/token cases and eight invalid hash-comment
+prefixes. The original 37 cases remain unchanged. Run:
 
 ```sh
 bash tools/check_sexpr_document_v1.sh
 ```
 
-The driver checks all six native runtime routes, 21 token-spelling round trips per
+The driver checks all 51 cases on six native runtime routes, 27 token-spelling round trips per
 route, and valid independent input after every rejection through the same
-compiled engine. Perl also checks ActionIR readiness and the rejecting-edge
-mutation. The canonical local gate runs this driver. The separate native Rust
-file verifier consumes all 37 cases as real files and checks UTF-8, errors,
+compiled engine. Perl also checks ActionIR readiness, the rejecting-edge mutation
+and the entry-prefix guard mutation. The canonical local gate runs this driver. The separate native Rust
+file verifier consumes all 51 cases as real files and checks UTF-8, errors,
 multiple inputs, packaged assets and relocation. The integration guides also
-provide public-loader replay commands: all 37 cases and 21 process groups pass
+provide public-loader replay commands: all 51 cases and 29 process groups run
 on each of the six runtime routes, including typed rejection, grammar UTF-8 and
 relative paths. These text-argument checks complement the Rust file checks;
 actual downstream application acceptance remains separate.

@@ -12,6 +12,45 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-09-27 — LS-004 adoption keeps public dependency proof separate from LinkedSpec entry semantics
+
+The director's fixing instruction after the verified8763/f6 finding authorizes that narrow RGX gitlink update;
+the instruction to notify both the director and ARCHOGEN supersedes the earlier director-only relay for this notice.
+All dependency implementation inspection/patching and unrelated pin changes remain prohibited. Adopt the exact
+Git-clean source already prepared through RGX's published make bootstrap, preserving its source/preparation identity.
+The older4200-file/251037999-byte opaque checkout and recoverable Git metadata are retained under
+.linkedspec-data/scratch/ls004-adoption26/retained-rgx, with equal before/after hashes and statuses. The old native
+target is retained at pre-adoption-rust-target in the same scratch owner; the new rust/target starts empty.
+
+The native gate identified two first-party problems before admission. Cargo fmt --all traverses local path
+dependencies; explicit package selection proves65 owned targets and no dependency target, with two owned formatting
+hunks corrected. No emitted dependency formatting diff was analyzed. The history corpus then exposed a latent
+public boundary gap: both old and new executables returned the object path, while Perl's wrapper starts after the
+leading newline and returns the frozen null. The old incorrect indexed lookup had masked that missing Rust skip.
+The repair remains in LinkedSpec's four public entry seams; it does not weaken typed indexing, rewrite the oracle,
+trim the source or reset child entry. Fourteen independent Perl cases establish its exact LF/space/tab/#/EOF behavior.
+
+Knowledge owners are docs/knowledge/rust-format-owned-packages.md and
+ docs/knowledge/rust-leading-input-trivia-boundary.md. The book's old every-handler/every-match statement was wrong;
+its runtime-wrapper section now teaches once per public invocation with absolute-coordinate examples. Bootstrap
+failure/success/reuse, native consumer proof and canonical admission remain distinct evidence. The full component
+gate passes; exact staged canonical proof is mandatory before adoption lands; .1.3 then proves publication and sends the authorized notice.
+
+The strict document acceptance probe then found that the established public wrapper can skip leading hash
+comments before grammar dispatch. Both Perl and the repaired Rust route accepted such invalid prefixes despite
+ADR0124. The bounded repair validates input_slice(0, cursor_pos()) in Document's entry block; it preserves the
+public wrapper, original source coordinates, existing rejecting edges and the frozen37 cases. Fourteen new
+independent expectations and a guard-removal mutation cover this distinct hole. Canonical retry41001 was stopped
+with status143 and supplies no acceptance receipt. The new exact candidate requires a full canonical rerun.
+Durable cause and recurring proof: docs/knowledge/sexpr-document-entry-prefix-validation.md. SEMULITH's incoming
+independent verification closes all three source-qualified reports; it does not imply ARCHOGEN acceptance.
+
+Canonical36797 then stops on the public-selector count, after the repaired document driver passes again. The
+maintained scanner finds36 at both clean HEAD and candidate, versus35 at publisheda8d34c845; .90's explicit
+single-bare-value rejection is the sole addition. Only the expected count changes, with current census prose
+aligned to69/36/0 and obsolete failed-baseline prose removed. The composed check retains eleven contrast
+mutations, five backend rejection routes, zero executable positives and capability100/0/0. No selector semantics change.
+
 ## 2026-09-26 — RGX-CONSUMER-BUILD-REPORTS.1.1 - distinguish published remedy from retained adoption
 
 The retained public bootstrap still continues through later named steps and false seed success after the first missing package; published f6e5acdc instead exits2 after one error with neither symptom. Repeat failure agrees in0.088s, fresh supported bootstrap succeeds in110.778s and prepared controls succeed in0.029s/0.013s. The first current-version failure took5044.794s including public transitive checkout initialization; it is not a parser-runtime measurement. All data stays on the repository volume;15360 public registry files/380075770bytes were copied and verified for the fresh successful route, without reusing old compiled outputs.

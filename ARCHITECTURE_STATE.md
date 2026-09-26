@@ -33,13 +33,15 @@ byte and aggregate ceiling.
 ## Canonical Rust dependency warning debt is durably owned
 
 `RUST-DEPENDENCY-WARNING-ZERO.0` records the director-requested cleanup of the warning stream reproduced by
-multiple clean canonical Rust carriers: `pgen` reports 1,870 build warnings and 1,360 automated suggestions, while
-`rgx-core` reports 26 warnings. These are output counts, not yet unique causal counts; authored `pgen`, generator-
-owned parser output, `rgx-core`, and direct LinkedSpec warnings must be classified separately before repair.
+multiple clean canonical Rust carriers: `pgen` reported 1,870 build warnings and 1,360 automated suggestions, while
+`rgx-core` reported 26 warnings. These are dated public-output counts, not unique causal counts. Upstream owns
+dependency diagnosis and repair; LinkedSpec owns its own warnings and public integration verification.
 
-The boundary crosses repositories: LinkedSpec pins `rgx` as gitlink `8763a0e6bea97879f027237439d57725f83ead23`,
-and `pgen` is nested beneath it. Future leaves own a machine-readable census, causal upstream fixes, deterministic
-regeneration, explicit pin integration, and warning-denying recurrence. Global allowances, warning filtering,
+LinkedSpec now pins `rgx` at `f6e5acdc99720349d1e3ecef9f821f365c4db19c` under the narrowly authorized
+LS-004 adoption. RGX owns transitive preparation through its published integration interface. The warning
+counts above are historical build-output observations; dependency implementation diagnosis and repairs remain
+upstream-owned. LinkedSpec's Rust formatter explicitly selects its two packages and does not traverse dependency
+source. Local follow-up may capture public build output and verify upstream remedies. Global allowances, warning filtering,
 `RUSTFLAGS=-Awarnings`, and blind `cargo fix` do not satisfy the task. Intake changes no build or runtime behavior
 and remains non-blocking after public mutation closeout `.19.9`.
 
@@ -355,8 +357,8 @@ authoring examples elsewhere remain correctly selector-free.
 `tools/check_public_aggregate_selector_surface.py` now validates a uniquely bounded migration section, its exact
 two rejected examples, and five ordered non-identity mappings whose old side contains a removed one-identifier
 selector and whose replacement does not. Eleven in-memory mutations prove collapse, omission, wrong replacement,
-selector retention, and reordering fail independently of the public occurrence census. Current proof is 61 public
-files / 32 classified historical references / zero current examples, with zero executable selector positives.
+selector retention, and reordering fail independently of the public occurrence census. That checkpoint proved 61 public
+files / 32 classified historical references / zero current examples. The current census is 69/36/0, with zero executable selector positives.
 No parser, compiler, runtime, `.spec`, generated format, capability, or public API behavior changes; `.23.2` owns
 the remaining current-status reconciliation and parent closeout.
 

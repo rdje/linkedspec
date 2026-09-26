@@ -50,3 +50,9 @@ the exact advanced window reaches 59/59 on both Lua ABIs.
 Related facts: [[dart-residual-parser-smoke-split]],
 [[dart-legacy-structural-accumulator-parity]], [[dart-structural-pcre-parser-smoke-parity]],
 [[rust-perl-output-oracle]], [[lua-advanced-corpus-residual-split]].
+
+September26: [[rust-leading-input-trivia-boundary]] supersedes the earlier inference
+that a passing Rust null alone proved this boundary. The old indexed lookup could
+mask the absent public skip. The adoption gate exposes the mismatch in both old
+and fresh executables; Rust now applies the public boundary directly and preserves
+ordinary typed indexing. The unchanged corpus remains the acceptance authority.

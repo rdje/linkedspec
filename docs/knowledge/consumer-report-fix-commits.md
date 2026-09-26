@@ -8,8 +8,10 @@ answers:
   - was a custom bootstrap helper committed or withdrawn
   - which commit adopted the successful cold-checkout RGX build
   - which commits implement versus admit the document parsing remedy
+  - has SEMULITH independently verified and closed all three reports
+  - is SEMULITH LS-002 atom typing fixed and pushed
 date: 2026-09-26
-status: eight relevant commits reverified in published main; seven requirements addressed; LS-004 upstream remedy verified but retained adoption pending; one withdrawn and one no-action
+status: SEMULITH independently verified all three reports; seven prior remedies published; LS-004 adoption and strict-document prefix acceptance owned by .1.2; ARCHOGEN verification separate
 tags: [consumer-reports, commits, bootstrap, integration, attribution]
 evidence: "CONSUMER-REPORT-DELIVERY.6 reconciles RGX-BUILD-REPRO.1, integration .8.1-.8.5, startup .83.2.1-.2, SEXPR-DOCUMENT-INTEGRATION.1-.2, ADR0124, original report provenance and Git commit bodies/changed-path scopes. All eight references below are ancestors of published a8d34c845."
 reverify: "Read the named tasks and ADR0124; use git show --stat on the full commit identities below and git merge-base --is-ancestor <commit> origin/main after refreshing publication identity. Inspect no dependency implementation."
@@ -21,7 +23,7 @@ reverify: "Read the named tasks and ADR0124; use git show --stat on the full com
 | --- | --- | --- |
 | June15 cold-checkout RGX build | Resolved upstream via the published build flow, then adopted and verified by LinkedSpec. | LinkedSpec `c4926f871`; upstream public resolution `8763a0e6b`. |
 | September consumer Cargo workspace collision, ARCHOGEN/LS-001 and SEMULITH/LS-003 item1 | Fixed example workspace boundary plus documented host exclusion; native consumer builds verified. | `effe3e7b2`. |
-| ARCHOGEN/LS-004 bootstrap failure handling and false seed-success text | Still open at the retained pin. Published RGX f6e5acdc now passes public failure/success/reuse; no LinkedSpec pin adoption is recorded/applied here. | `a1166ee1d` adopts public preparation and explicitly leaves this report open; `12c6ca9ad` reverifies its recurrence. Neither is an LS-004 fix. |
+| ARCHOGEN/LS-004 bootstrap failure handling and false seed-success text | Published RGX f6e5acdc passes public failure/success/reuse and is adopted under .1.2; .1.3 owns publication/notification. | `a1166ee1d` adopts public preparation and explicitly leaves this report open; `12c6ca9ad` reverifies its recurrence. Neither is an LS-004 fix. |
 
 The June issue predates ARCHOGEN's September report. Its closed task cannot close
 LS-004. Conversely, saying LS-004 is unfixed must not imply that the earlier
@@ -38,7 +40,7 @@ the current failure-path observation; ARCHOGEN attributes LS-004 to PGEN bootstr
 | ARCHOGEN/LS-001 | Enclosing Cargo workspace collision remedied. | `effe3e7b2` |
 | ARCHOGEN/LS-002 | All top-level forms and complete-document rejection through the separate document grammar. | `77d7b3db1`; `df845ce61` |
 | ARCHOGEN/LS-003 | Symbols, strings and numbers retain tagged kinds and token spelling. | `77d7b3db1`; `df845ce61` |
-| ARCHOGEN/LS-004 | Public upstream remedy verified at RGX f6e5acdc; retained8763 still affected. Required .1.2 owns authorized adoption. | No LinkedSpec adoption commit yet |
+| ARCHOGEN/LS-004 | RGX f6e5acdc remedy adopted; fresh native consumers pass, canonical acceptance required before landing. | `RGX-CONSUMER-BUILD-REPORTS.1.2 - adopt verified LS-004 remedy` (derive landed hash from Git) |
 | ARCHOGEN/LS-005 | Checkout/file-entry prerequisite navigation corrected. | `6e37288f7` |
 | ARCHOGEN/LS-006 | Withdrawn by reporter: hex underscore was preserved. | No fix required |
 | ARCHOGEN/LS-007 | No-action: adjacent-fragment joining matches the documented contract. | No fix requested |
@@ -48,7 +50,7 @@ contract, not an implementation fix. Consumers must select `SExprDocumentV1.spec
 and `Document` (or the native `sexpr_file` example). Historical `Lispish.spec`
 retains its extraction behavior. Publication `a8d34c845` makes the remedies
 available; it is not their original implementation commit. Downstream application
-acceptance has not been claimed. Seven addressed report requirements are not
+acceptance was separate at that publication; SEMULITH's later verification is recorded below. Seven addressed report requirements are not
 seven newly fixed runtime bugs: the set includes documentation and a design request.
 
 ## Exact Git identities
@@ -81,5 +83,29 @@ Dated publication ancestry evidence is retained at
 `RGX-CONSUMER-BUILD-REPORTS.1.1` rechecks both supplied report snapshots, live remote
 main a8d34c845 and all eight ancestry references. [[rgx-bootstrap-published-remedy]]
 records the independently verified public remedy at f6e5acdc and required `.1.2`
-adoption. The retained8763 failure still reproduces; an explicit director exception
-to the pin freeze, native compatibility and canonical verification are required.
+adoption. At the .1.1 checkpoint the old8763 failure still reproduced. The subsequent
+director instruction authorizes fixing that identified issue and notifying the
+director and ARCHOGEN after publication. .1.2 adopts only the reviewed RGX pin;
+.1.3 owns the completion notice. Dependency implementation remains upstream-owned.
+
+## SEMULITH independently closes all three reports
+
+On September26 the director supplied SEMULITH's three `VERIFIED.md` notes and
+confirmed all three cases closed. The clean feedback subtree at SEMULITH commit
+`7f4d2cde61a82184cf06a7870c87a19b3aa744b3` marks LS-001, LS-002 and LS-003 verified
+against published LinkedSpec `a8d34c84595d46c24cd1820d5fc0414261706412`.
+The caller-authorized source is `../semulith/docs/upstream/linkedspec/`.
+
+- LS-001: unchanged reproduction passes 8/8; both readers agree across all five
+  then-tracked files, including the 43-form catalogue.
+- LS-002: original four numeric/quoted-numeric files pass through `sexpr_file`
+  with `SExprDocumentV1.spec`. Number and string kinds remain distinct. SEMULITH
+  additionally reports six-file document-layer agreement with no classified residue.
+- LS-003: SEMULITH exercised all three guide remedies while adopting that pin.
+
+The LS-002 note SHA-256 is
+`496b0e17f2c12e6cd4a19814bc31f796db439006ab62029d1aedce787f75d41c`;
+its adjacent `evidence/verified-a8d34c845.txt` transcript SHA-256 is
+`56b888c47a99d4e7eea9b1f6dd833af5754f6f25ff8708b0a08b0b76bb33274e`.
+All three notes were read in full. This is consumer verification, not an inferred
+closure from upstream tests. ARCHOGEN's separate IDs and acceptance remain distinct.

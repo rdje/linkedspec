@@ -1,11 +1,11 @@
 # MEMORY
 
-- activation_commit: `35c00924cf0add082e94213da3d01394cb5993df` — clean activation base for public LS-004 recheck.
-- latest_completed_leaf: `RGX-CONSUMER-BUILD-REPORTS.1.1 - verify published bootstrap remedy`.
-- active_work_unit: `RGX-CONSUMER-BUILD-REPORTS.1.2` — pending explicit pin-update authorization and native/canonical adoption.
-- next_action: Obtain the explicit pin-freeze exception for verified RGX f6e5acdc before .1.2; independent startup .93/.92/.94/.95/.51 remains queued.
-- in_flight_uncommitted: none.
-- blockers: LS-004 is verified fixed upstream at RGX f6e5acdc but retained8763 still reproduces; .1.2 requires director authorization to change the pin, then native/canonical proof. No external notification yet. Named-argument and format proposals remain parked.
+- activation_commit: `7c2acb5102bd54cb21c325193f5368b806d4cb08` — clean activation base for LS-004 adoption.
+- latest_completed_leaf: `RGX-CONSUMER-BUILD-REPORTS.1.2 - adopt verified LS-004 remedy`.
+- active_work_unit: `RGX-CONSUMER-BUILD-REPORTS.1.3` — next pending leaf: publish the accepted LS-004 remedy and notify the director and ARCHOGEN.
+- next_action: Push the exact clean adoption commit using its canonical receipt, verify remote identity, then deliver the authorized ARCHOGEN feedback notice under .1.3.
+- in_flight_uncommitted: none — intended clean post-landing handoff; derive adoption identity from Git. SEMULITH independently verified all three reports; cases closed.
+- blockers: None requiring director input. Retained transitive local edits must be preserved intact. No completion notice yet. Named-argument and format proposals remain parked.
   Wrapper startup .7 remains open; recovery/purge stay prohibited. No interrupted Phase0 run counts as proof.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
   active table; the task metadata doctrine inventories all consumers, permits arbitrary frontier-row rewrites,
@@ -54,6 +54,6 @@
   Notes segment4969 preserves 114 lines /28181 bytes from clean9f81d3162; old archive rows/bytes remain exact.
 - current_change_history_capacity: ADR0122 admits47 collection files /46 manifest lines /26255 bytes; current43/42/23951 stay bounded.
   Changes segment4970 preserves132 lines /27272 bytes from clean58a5ff936; prior history remains byte-exact.
-- dependency_boundary: September20: LinkedSpec integrates only with RGX via its published integration document/APIs/contracts. RGX owns PGEN; no separate PGEN procedure, internal inspection/analysis, patches or pin changes.
+- dependency_boundary: RGX public integration only; it owns PGEN. No internal inspection/analysis, patches, separate PGEN procedure or unrelated pin changes. September26 authorizes only reviewed f6e5acdc for LS-004.
   Normal documented builds remain authorized; retain caches. Startup .80.1-.4 may observe public behavior or track upstream repairs, not investigate dependency internals.
 - latest_bootstrap_read: ADR0123 targets 2–5 minute startup plus thorough task-specific reading. Separate audit remains 89/143 and .1.90. Document integration and .46/.47/.49/.86.1/.86.2 are verified; Perl .86.4.2.4 corrects the regex-type premise; .86.4.3 owns supported helper validation (verified); .86.4.6 verifies helper splitting; .86.4.7 verifies quoted subjects; .86.4.4.1 owns grouped-operand repair .86.4.8; .86.4.8.1 rejects incompatible lookahead and .86.4.8.2 verifies grouped repair; .86.4.4.2.1 fixes generated Trace and .86.4.4.2.2 closes bounded public recomposition; .87 owns four helper/grouping follow-ups. No downstream application acceptance claim.

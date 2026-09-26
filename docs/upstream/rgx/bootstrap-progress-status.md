@@ -1,11 +1,12 @@
 # ARCHOGEN LS-004: misleading bootstrap progress observed through RGX
 
-- Status: public upstream remedy verified at RGX f6e5acdc99720349d1e3ecef9f821f365c4db19c; retained LinkedSpec pin8763 still affected. Required adoption is RGX-CONSUMER-BUILD-REPORTS.1.2 and needs an explicit pin-freeze exception. The director owns relay; no external message was sent.
+- Status: public remedy verified and adopted at RGX f6e5acdc99720349d1e3ecef9f821f365c4db19c under RGX-CONSUMER-BUILD-REPORTS.1.2. Fresh native consumers and the full Rust component gate pass; exact canonical admission is mandatory for landing. .1.3 owns publication/notification.
 - Owner: `RGX-CONSUMER-BUILD-REPORTS.1`; prepared by `BACKEND-INTEGRATION-GUIDES.8.3`.
 - Related consumer report: ARCHOGEN/LS-004.
 - LinkedSpec remedies published at: `a8d34c84595d46c24cd1820d5fc0414261706412`; remote main read-back and tested-baseline ancestry verified September23.
-- Local feedback handoff: `CONSUMER-REPORT-DELIVERY.4`; attribution corrected by `.5`. The director owns communication.
-- RGX revision: `8763a0e6bea97879f027237439d57725f83ead23`.
+- Local feedback handoff: `CONSUMER-REPORT-DELIVERY.4`; attribution corrected by `.5`. September26 director instruction now requests a completion notice to both the director and ARCHOGEN, after verified publication.
+- Original affected RGX revision: `8763a0e6bea97879f027237439d57725f83ead23`.
+- Adopted remedy: `f6e5acdc99720349d1e3ecef9f821f365c4db19c`.
 - Original observed environment: macOS26.6.2 arm64, Rust/Cargo1.95.0, system Make3.81.
 - September23 recurrence: macOS27.0 (26A428) arm64, Cargo1.95.0, system Make3.81; same pinned RGX interface.
 - Authority: RGX `docs/INTEGRATION.md`, downstream `make bootstrap` interface.
@@ -44,7 +45,7 @@ The separate Cargo workspace build remedy is LinkedSpec commit
 `effe3e7b2544abf79f7786a7aa54e77b1893880e`
 (`BACKEND-INTEGRATION-GUIDES.8.2`). It is included in published history and fixes
 ARCHOGEN/LS-001 and SEMULITH/LS-003 item1. It does not fix LS-004's failure-handling
-and false-success report; no LS-004 implementation fix commit exists here.
+and false-success report. The separate September26 adoption below carries that remedy.
 
 Use a fresh checkout of the stated RGX revision, initialized according to its
 published integration document. Existing prepared output can make bootstrap a
@@ -96,7 +97,7 @@ local Cargo store. Its command/output/status record is retained under
 `offline-failure.json` and `offline-failure.log`. Normal-route evidence is in
 `state.json`, `consumer-state.json` and the associated logs in that directory.
 Those original observations claimed no source patch, pin update, internal diagnosis, network installation or actual
-ARCHOGEN application build. The September26 verification below supersedes the earlier upstream-resolution status; retained-pin adoption remains open.
+ARCHOGEN application build. The September26 verification and adoption below supersede that earlier upstream-resolution status.
 
 ## September 23 recurrence
 
@@ -121,10 +122,10 @@ are recorded separately. The director has requested local tracking and will
 relay this report after LinkedSpec publication, now completed. No external
 message was sent by this session; no upstream repair had been verified at that September23 checkpoint.
 
-## September 26: verified published remedy, retained adoption pending
+## September26 .1.1 checkpoint: published remedy before adoption
 
-The original report inputs are unchanged byte-for-byte. Live LinkedSpec remote
-main remains `a8d34c84595d46c24cd1820d5fc0414261706412`; all eight recorded related
+The original report inputs are unchanged byte-for-byte. At this checkpoint, LinkedSpec remote
+main was `a8d34c84595d46c24cd1820d5fc0414261706412`; all eight recorded related
 fix/admission commits are ancestors. All three SEMULITH remedies remain published.
 
 RGX's published main was `f6e5acdc99720349d1e3ecef9f821f365c4db19c`. Its
@@ -146,16 +147,35 @@ registry files/380075770bytes copied to a new repository-local store, with norma
 package resolution allowed and no stale compiled products reused. The published
 checkout remained Git-clean after all commands.
 
-This verifies an upstream remedy for the observed LS-004 behavior at the named
-published revision. It does **not** fix LinkedSpec's retained gitlink or establish
-native LinkedSpec/ARCHOGEN compatibility with the newer dependency. The retained
-8763 failure still reproduces. Required `RGX-CONSUMER-BUILD-REPORTS.1.2` owns pin
-adoption, native consumer proof and canonical verification. The director's
-section20/AGENTS prohibition on pin changes requires an explicit exception first.
-Do not notify ARCHOGEN that this LinkedSpec checkout is fixed before that adoption.
+This checkpoint verified an upstream remedy for the observed LS-004 behavior at
+the named published revision. It changed no LinkedSpec gitlink and established no
+native LinkedSpec/ARCHOGEN compatibility. The then-retained8763 still reproduced.
+Required `RGX-CONSUMER-BUILD-REPORTS.1.2` owned authorized pin adoption, native
+consumer proof and canonical verification; the following section records that work.
 
 Exact commands, revisions, report/cache hashes and every public-output hash are
 in `docs/checkpoints/RGX-CONSUMER-BUILD-REPORTS.1.1.json`. Full logs are retained
 under `.linkedspec-data/scratch/ls004-recheck26/`. No dependency implementation
-was inspected and no source-level repair attribution is asserted. The director
-continues to own all external communication.
+was inspected and no source-level repair attribution is asserted. External
+communication remained director-owned at that checkpoint; the subsequent
+instruction authorizes the completion notice below.
+
+## September26 authorized LinkedSpec adoption
+
+After the public finding, the director requested fixing the identified issue and
+notifying both the director and ARCHOGEN when done. `RGX-CONSUMER-BUILD-REPORTS.1.2`
+adopts only the verified RGX revision. The new Git-clean checkout is the exact
+publicly prepared f6e5acdc source; the previous checkout, its local edits and Git
+metadata are retained with byte/status verification. The old native target is
+preserved separately and LinkedSpec is rebuilt into a fresh target directory.
+
+Native proof passes four word examples, nine workspace controls, three adapter
+tests, 26 Lispish file values/18 groups and 37 document cases/36 groups. Public
+bootstrap remains a successful prepared no-op after relocation. The Rust gate
+now formats only LinkedSpec's own packages; the first run exposed `--all` traversing
+dependency source. No dependency formatting diffs were analyzed or source changed.
+The complete Rust component gate passes, including unchanged105-case oracle/classifier,
+all core/runtime tests, emitted source, managed storage and both66-case CLI environments.
+Exact staged canonical acceptance is mandatory for landing; `.1.3` owns
+publication and the requested completion notice. No ARCHOGEN application acceptance
+or `verified` state is claimed by LinkedSpec.

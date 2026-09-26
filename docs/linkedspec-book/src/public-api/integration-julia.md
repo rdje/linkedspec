@@ -216,7 +216,7 @@ bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history
   -e 'using LinkedSpecJulia, JSON3, Test; const REPO_ROOT = pwd(); include("julia/test/sexpr_document_v1_test.jl")'
 ```
 
-It checks all 37 authored cases, token-spelling round trips and a fresh independent
+It checks all 37 base and 14 entry-prefix cases, token-spelling round trips and a fresh independent
 input after every rejection using one compiled engine. This recovery proof is
 specific to the document grammar and does not imply application-effect rollback.
 The word adapter still consumes text arguments. For a deployed adaptation, retain
@@ -233,7 +233,7 @@ bash tools/run_python_project_data.sh examples/integration/verify_sexpr.py --run
 The replay uses the prepared `examples/integration/julia/` project and its
 application-local depot in offline mode, with user load paths disabled.
 
-The verifier checks all 37 authored cases, earlier-output retention, the documented
+The verifier checks all 37 base and 14 entry-prefix cases, earlier-output retention, the documented
 relative grammar path, missing files and invalid UTF-8 grammar bytes. It preserves
 the original examples and expectations. These are text-argument checks; the Rust
 [file-consumer verifier](integration-rust.md#reproduce-the-integration-checks) separately

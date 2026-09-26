@@ -1,6 +1,6 @@
 # ROADMAP
 
-September26 consumer recheck: published RGX f6e5acdc passes LS-004 public failure/success/reuse; retained8763 remains affected. Required RGX-CONSUMER-BUILD-REPORTS.1.2 owns adoption after the director explicitly permits the pin change, with native and canonical verification. SEMULITH report snapshots and published remedy ancestry are reverified.
+September26 LS-004 adoption: authorized RGX f6e5acdc replaces affected8763 under RGX-CONSUMER-BUILD-REPORTS.1.2. Public failure/success/reuse and fresh native word/Lispish/document/workspace checks pass; full Rust component acceptance passes; exact staged canonical proof is required by the commit gate. .1.3 owns publication and notification to the director and ARCHOGEN. All three SEMULITH reports are independently verified and closed. Strict-document prefix acceptance adds14 controls to the unchanged37 cases; all six native/public-loader routes and native files pass.
 
 LinkedSpec is being positioned as a progressive extraction parser DSL: fast, recursive, regex-anchored, and intentionally different from strict EBNF-centric tooling.
 

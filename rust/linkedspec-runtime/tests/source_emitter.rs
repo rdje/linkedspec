@@ -399,6 +399,39 @@ mod book_example {{
 }
 
 #[test]
+fn emitted_public_entry_preserves_leading_trivia_positions_and_source() {
+    let source = "Top:: I { return(array(cursor_pos(), input_slice(0, 3))) }\n";
+    let parsed = parse_spec_with_user_functions(source).unwrap();
+    validate(&parsed).unwrap();
+    let compiled = compile(&parsed).unwrap();
+    let generated = emit_rust_source_v2(&compiled, "leading-input.spec").unwrap();
+    run_generated_crate(
+        "linkedspec_leading_input_trivia",
+        format!(
+            r##"
+{generated}
+#[cfg(test)]
+mod public_entry {{
+    #[test]
+    fn absolute_positions_keep_the_original_source() {{
+        for (input, position, prefix) in [
+            ("\nword", 1, "\nwo"),
+            (" \t# 雪🦀\n\nword", 8, " \t#"),
+            ("#雪", 2, "#雪"),
+            ("  word", 0, "  w"),
+            ("\r\nword", 0, "\r\nw"),
+            ("word\n# later", 0, "wor"),
+        ] {{
+            assert_eq!(crate::execute(input).unwrap(), serde_json::json!([position, prefix]));
+        }}
+    }}
+}}
+"##
+        ),
+    );
+}
+
+#[test]
 fn generated_source_v2_metadata_and_structured_errors_are_exact() {
     let parsed = parse_spec(SIMPLE_SOURCE_EMITTER_SPEC).expect("parse v2 metadata spec");
     validate(&parsed).expect("validate v2 metadata spec");

@@ -1,13 +1,13 @@
 ---
 id: rgx-bootstrap-published-remedy
-title: "Published RGX f6e5acdc passes LS-004 public failure and bootstrap controls; retained adoption is pending"
+title: "RGX f6e5acdc supplies the publicly verified LS-004 bootstrap remedy"
 answers:
   - "which published RGX revision passed LS-004 failure success and reuse on September26"
   - "can LS-004 be called fixed at LinkedSpec retained RGX pin"
   - "why does adopting the LS-004 remedy require director authorization"
   - "what remains after public bootstrap remedy verification"
 date: 2026-09-26
-status: upstream public remedy verified; retained pin adoption required under RGX-CONSUMER-BUILD-REPORTS.1.2
+status: upstream public remedy verified; authorized adoption under RGX-CONSUMER-BUILD-REPORTS.1.2
 tags: [consumer-reports, rgx, bootstrap, public-interface, adoption]
 evidence: "RGX-CONSUMER-BUILD-REPORTS.1.1: retained failure/reuse; published f6e5acdc two accurate prerequisite failures, fresh bootstrap success and two reuse controls; exact public logs and source/report/cache hashes in docs/checkpoints/RGX-CONSUMER-BUILD-REPORTS.1.1.json. No implementation inspection or pin change."
 reverify: "Read docs/upstream/rgx/bootstrap-progress-status.md and the named checkpoint; use only the chosen revision's published docs/INTEGRATION.md and make bootstrap on isolated repository-local storage. Keep fresh failure separate from already-prepared reuse."
@@ -20,15 +20,24 @@ exits0 with completion; two prepared offline controls exit0 with the documented
 no-op. The checkout remains Git-clean. This is public behavioral verification,
 not a source-level diagnosis or identification of the individual upstream fix commit.
 
-LinkedSpec still pins `8763a0e6bea97879f027237439d57725f83ead23`, where the same
-failure prints misleading success. The director's section20 and AGENTS forbid
-pin changes without an explicit exception. Required `.1.2` owns authorized
-adoption, native consumer compatibility and exact canonical proof. No pin update,
-downstream application acceptance or new publication is claimed by `.1.1`.
-The director will notify ARCHOGEN only after the retained checkout is fixed.
+The older `8763a0e6bea97879f027237439d57725f83ead23` prints misleading success.
+After this finding, the director instructed fixing that identified issue and
+notifying both the director and ARCHOGEN when done. `.1.2` owns that narrow
+RGX pin exception, adoption, native compatibility and exact canonical proof;
+`.1.3` owns publication and notification. No dependency source inspection or
+patches are authorized. `.1.1` itself changed no pin and claimed no consumer acceptance.
 
-The supplied ARCHOGEN/SEMULITH snapshots remain byte-exact. Live remote main is
-still `a8d34c845`, containing all eight recorded related fix/admission references.
+The adopted checkout is the exact Git-clean f6e5acdc source already prepared by
+the public command above. The older opaque checkout, all4200 files/251037999 bytes,
+its local edits and usable Git metadata are preserved under
+`.linkedspec-data/scratch/ls004-adoption26/retained-rgx`; before/after file hashes
+and Git statuses agree. The old Rust target is retained separately; the native
+build starts with a fresh `rust/target`. Both consumer lockfiles add only the
+required typed-arena2.0.2 record and two transitive dependency edges. Source and
+target preservation is not a dependency implementation audit.
+
+The supplied ARCHOGEN/SEMULITH snapshots remain byte-exact. At the .1.1 checkpoint,
+remote main was `a8d34c845`, containing all eight recorded related fix/admission references.
 All three SEMULITH remedies are published; their opt-in document-parser adoption
 requirements remain unchanged. [[consumer-report-fix-commits]] owns that ledger.
 

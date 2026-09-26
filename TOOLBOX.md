@@ -505,7 +505,7 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
 ### 4.3.3 `tools/test_rust_project_data_storage.sh` — Rust SSD-local storage oracle
 
 - **WHAT:** lock the exact 17 tracked Rust temporary owners; verify temp/Cargo/target roots share the repository
-  device; require all 195 locked registry packages offline; exercise traces, generated child Cargo workspaces, and
+  device; require every registry package in the current Cargo lockfile offline; exercise traces, generated child Cargo workspaces, and
   actual copied-binary relocation.
 - **WHEN:** changing Rust temp allocation, generated-source compilation, traces, Cargo caching, target selection,
   repository discovery, or the Rust local gate.

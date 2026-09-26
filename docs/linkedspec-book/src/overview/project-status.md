@@ -29,8 +29,9 @@ executable positives, five backend rejection routes, and capability 90/0/0. This
 the broader current-status audit and parent closeout remain owned by `.23.2`.
 
 The current selector inventory includes 69 public files after review of the
-complete-document grammar chapter. Its 35 classified historical references, zero
-current examples and migration-contrast checks remain unchanged.
+complete-document grammar chapter. Its 36 classified historical references include
+the constructor guide's explicit single-bare-value rejection. Zero current examples
+and all migration-contrast checks remain unchanged.
 
 ## Task metadata is globally unambiguous
 
@@ -732,6 +733,19 @@ published 1.95 requirement and root-managed commands. Integration `.8.6` replace
 the Lua test's private grammar input with a LinkedSpec-authored inline marker. The
 existing timing/Unicode/reconstruction/error test passes on both installed runtimes
 with dependency-file access denied; retained native products are unchanged.
+The subsequent LS-004 repair adopts RGX `f6e5acdc99720349d1e3ecef9f821f365c4db19c`.
+Its public bootstrap stops after a failed prerequisite without false seed-success
+text; fresh successful preparation and prepared reuse also pass. LinkedSpec's
+native word, historical Lispish and strict document consumers are rebuilt and
+checked against this revision. Follow the [Rust upgrade instructions](../public-api/integration-rust.md#update-after-the-semulith-and-archogen-reports)
+to select the adoption commit, regenerate and rebuild. Application acceptance
+remains the consumer's own verification step. SEMULITH independently verified and
+closed all three reports at published LinkedSpec `a8d34c845`, including the
+document path's atom kinds. ARCHOGEN's verification is separate. The adoption
+acceptance also adds a strict-document entry guard: invalid leading hash comments
+are rejected even when the public wrapper would skip them. The unchanged37-case
+document authority is supplemented by14 prefix controls on all six native routes
+and maintained document consumers.
 Integration `.8.3` uses RGX's published build interface
 and removes dependency-internal procedures and assumptions. LinkedSpec integrates
 with RGX only; transitive preparation belongs to RGX. Bootstrap progress reporting
@@ -1905,13 +1919,12 @@ and `.2.9.2` independent supported-route proof. Corrected helper controls pass
 on installed PUC5.5.1 and LuaJIT; declared PUC5.4 remains separately owned.
 Exact proof: `docs/knowledge/lua-interpreter-helper-reading-and-false-delimiter-gap.md`.
 
-**Known public verification limitation — selector example context and census:**
-the public selector checker fails on existing committed book inputs. It finds 35
-references against its pinned32 and treats one documented rejected Julia example
-as unclassified because a blank line separates the fence from its context.
-Startup `.28.7.1/.28.7.2` own the example/census repair and independent proof;
-this is a failed baseline check, not renewed public admission. The example and
-its separately owned Julia runtime defect remain documented below.
+**Public selector context and census:**
+the checker covers 69 public files and 36 explicitly classified removed/history
+references, with zero current examples. The rejected Julia example carries its
+classification inside the fence. The constructor guide's later rejected spelling
+is included in the current census. These documentation checks do not close the
+separately owned Julia runtime defect described below.
 
 **Known Lua option limitation — false iteration setting becomes the default:**
 `runtime_engine(compiled, {max_iterations=false})` silently chooses 10,000.
@@ -4057,7 +4070,7 @@ Three backbone items tracked major structural modernization — all done:
   ABIs. Rust/Dart/Julia/Lua pre-existing `.contains()` missing-argument outcomes are owned by helper backlog `.5`.
   Lua generated-source preservation remains `.8.1-.8.4`; `.16.7` admits and closes the current syntax. Parenthesis-free `if`/`while`
   condition headers are explicitly outside this lane.
-- **Uniform-binding selector retirement is complete** - every construct yields scalar, array, harray, or codeblock; unused expression values are silently discarded; callable signatures govern trailing codeblocks; runtime value type drives dispatch. `FUTURE-PARITY-BACKLOG.12.1` removed spec-facing `array(IDENTIFIER)` / `hash(IDENTIFIER)` namespace, typed-read, and mutation semantics. A boundary-correct inventory found 600 exact forms in 82 tracked specs; neutral contract `.12.1.1` fixes bare mutation, precedence, results, diagnostics, and constructor classification. All five backends execute that contract; migration removed all 600 file-backed occurrences and all 1,356 positive embedded-source occurrences. Perl, Rust, Dart, Julia, and Lua reject exact selectors before execution with the portable diagnostic. Cross-variant `.12.1.8.6` locks those five boundaries and zero runtime selector compatibility in canonical CI. Public admission `.12.1.9` plus backend-README follow-up `.12.1.10` established the discovered guard; its current inventory covers all 67 root/component/mdBook files at zero current examples.
+- **Uniform-binding selector retirement is complete** - every construct yields scalar, array, harray, or codeblock; unused expression values are silently discarded; callable signatures govern trailing codeblocks; runtime value type drives dispatch. `FUTURE-PARITY-BACKLOG.12.1` removed spec-facing `array(IDENTIFIER)` / `hash(IDENTIFIER)` namespace, typed-read, and mutation semantics. A boundary-correct inventory found 600 exact forms in 82 tracked specs; neutral contract `.12.1.1` fixes bare mutation, precedence, results, diagnostics, and constructor classification. All five backends execute that contract; migration removed all 600 file-backed occurrences and all 1,356 positive embedded-source occurrences. Perl, Rust, Dart, Julia, and Lua reject exact selectors before execution with the portable diagnostic. Cross-variant `.12.1.8.6` locks those five boundaries and zero runtime selector compatibility in canonical CI. Public admission `.12.1.9` plus backend-README follow-up `.12.1.10` established the discovered guard; its current inventory covers all 69 root/component/mdBook files at zero current examples.
 - **Structural, progressive, and staged authoring clarification** - typical `.spec` authoring uses small readable
   zero/one/two-regex rules for coordination, leaves, and entry/exit boundaries; deep recursion belongs in linked
   action-edge OR and blind-call AND structure rather than recursive regexes. Progressive parsing means invoking

@@ -22,8 +22,13 @@ end
 
 local contract = json.decode(read_file("tests/sexpr-document-v1/contract.json"))
 assert(#contract.cases == 37, "consume all authored cases")
+local prefix = json.decode(read_file("tests/sexpr-document-v1/entry-prefix.json"))
+assert(#prefix.cases == 14, "consume all authored prefix cases")
+local cases = {}
+for _, row in ipairs(contract.cases) do cases[#cases + 1] = row end
+for _, row in ipairs(prefix.cases) do cases[#cases + 1] = row end
 local reuse
-for _, row in ipairs(contract.cases) do
+for _, row in ipairs(cases) do
   if row.id == "reuse_after_rejection" then reuse = row end
 end
 assert(reuse, "authored reuse case exists")
@@ -31,7 +36,7 @@ local source = read_file("specs/SExprDocumentV1.spec")
 local parsed = linkedspec.parse_spec_with_staged_user_function_definitions(source)
 local engine = linkedspec.runtime_engine(linkedspec.compile_spec(parsed))
 
-for _, row in ipairs(contract.cases) do
+for _, row in ipairs(cases) do
   if row.outcome == "accept" then
     same_json(linkedspec.runtime_parse(engine, row.input).value, row.expected, row.id .. ": authored tree")
     local forms = {}
@@ -44,4 +49,4 @@ for _, row in ipairs(contract.cases) do
     same_json(linkedspec.runtime_parse(engine, reuse.input).value, reuse.expected, row.id .. ": independent input after rejection")
   end
 end
-print("SExprDocumentV1: 37 cases, 21 round trips and 16 post-rejection reuse checks PASS")
+print("SExprDocumentV1: 37 base + 14 prefix cases, 27 round trips and 24 post-rejection reuse checks PASS")

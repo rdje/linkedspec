@@ -634,4 +634,21 @@ The outward descriptor is not the compiler’s only internal truth. It is a publ
 
 ## Runtime wrapper
 
-Parser invocation is wrapped with a comment and blank-line skip loop. Before each match attempt the wrapper advances the cursor past any leading whitespace-only lines or `#`-to-end-of-line comment lines, so grammar rules do not need to handle these themselves. This skip wrapper is applied at runtime on every generated handler invocation, keeping the grammar surface clean. (In the Perl reference backend this is `Runtime::run_get` advancing `pos($$input_ref)`.)
+At the start of each public parser invocation, the cursor advances past complete
+leading blank lines (spaces/tabs followed by LF) and leading comment lines
+(spaces/tabs, `#`, then text through LF or end of input). The Perl reference applies
+this boundary in `Runtime::run_get`; Rust applies it to native and generated entry
+routes. It runs once before entering the selected top rule. Child entry and later
+match attempts retain the cursor left by the grammar.
+
+The full input remains available and coordinates remain absolute. For example,
+`"\nword"` starts parsing at character1, while `"  word"` starts at0 because its
+initial spaces are not a complete blank line. A blank CRLF line is not an LF blank
+line under this rule. `input_slice(0, 1)` still sees the original first character,
+including a skipped newline. These rules do not strip comments appearing later
+inside the input.
+
+A grammar that promises complete recognition must also validate any skipped
+prefix. [SExprDocumentV1](../specs-and-corpora/sexpr-document-v1.md#syntax-and-complete-recognition)
+checks the original text before its entry cursor and rejects hash comments,
+because its document contract allows semicolon comments instead.

@@ -176,7 +176,7 @@ From the LinkedSpec root, verify this grammar through the native Perl parser:
 bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/sexpr_document_v1.t
 ```
 
-This checks all 37 authored cases, token-spelling round trips and fresh independent
+This checks all 37 base and 14 entry-prefix cases, token-spelling round trips and fresh independent
 input after each rejection on the same compiled parser. That recovery evidence
 is specific to this grammar; it does not promise rollback for arbitrary grammars
 or application side effects. The word consumer's text-argument and deployment
@@ -189,7 +189,7 @@ path and exact `Top` → `Document` adaptation with:
 bash tools/run_python_project_data.sh examples/integration/verify_sexpr.py --runtime perl
 ```
 
-The verifier checks all 37 authored cases, earlier-output retention, the documented
+The verifier checks all 37 base and 14 entry-prefix cases, earlier-output retention, the documented
 relative grammar path, missing files and invalid UTF-8 grammar bytes. It preserves
 the original examples and expectations. These are text-argument checks; the Rust
 [file-consumer verifier](integration-rust.md#reproduce-the-integration-checks) separately
