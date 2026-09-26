@@ -163,7 +163,13 @@ stop before building the application and preserve its exit status and full log.
 An intermediate progress message is not the overall command result. Report a
 failure against RGX's published interface with the exact dependency revision;
 do not repair it by editing submodule code or inventing another bootstrap recipe.
-ARCHOGEN's reported misleading bootstrap progress message remains upstream-owned.
+ARCHOGEN's reported misleading progress message still reproduces at LinkedSpec's
+retained RGX revision `8763a0e6`. On 2026-09-26, the public bootstrap at published
+RGX revision `f6e5acdc` instead stopped at the first failed prerequisite without
+false success text. Fresh successful preparation and prepared reuse also passed.
+That published remedy has **not** been adopted into LinkedSpec's dependency pin;
+native consumer compatibility and the dependency update remain to be verified.
+A successful normal build at the old pin does not establish that its failure path is fixed.
 
 After successful preparation, confirm the application graph with its explicit
 manifest:

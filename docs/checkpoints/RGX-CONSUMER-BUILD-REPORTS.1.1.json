@@ -1,0 +1,291 @@
+{
+  "format": 1,
+  "owner": "RGX-CONSUMER-BUILD-REPORTS.1.1",
+  "date": "2026-09-26",
+  "activation_commit": "35c00924cf0add082e94213da3d01394cb5993df",
+  "verification_tier": "focused",
+  "status": "Public upstream remedy verified at f6e5acdc: two accurate failures, fresh success, two prepared reuse controls. LinkedSpec retained pin remains affected; explicit authorization and native/canonical adoption proof required under .1.2.",
+  "retained_pin": "8763a0e6bea97879f027237439d57725f83ead23",
+  "published_rgx": "f6e5acdc99720349d1e3ecef9f821f365c4db19c",
+  "published_rgx_source": "git ls-remote --symref https://github.com/rdje/rgx.git HEAD",
+  "published_integration_url": "https://raw.githubusercontent.com/rdje/rgx/f6e5acdc99720349d1e3ecef9f821f365c4db19c/docs/INTEGRATION.md",
+  "retained_public_replay": [
+    {
+      "case": "retained-failure",
+      "command": "env -u CARGO_TARGET_DIR make -C .linkedspec-data/scratch/backend-integration83/public-interface/failure/rgx bootstrap",
+      "cargo_home": ".linkedspec-data/scratch/ls004-recheck26/empty-retained",
+      "exit_code": 2,
+      "seconds": 0.363,
+      "seed_message_present": true,
+      "overall_success_message_present": false,
+      "missing_package_error": true,
+      "prepared_noop": false,
+      "log": ".linkedspec-data/scratch/ls004-recheck26/retained-failure.log",
+      "log_sha256": "1d3c0bf9acc03c5fbe964f2ffbc6601b81213d4ab42e756221572805d6b0d745"
+    },
+    {
+      "case": "prepared",
+      "command": "env -u CARGO_TARGET_DIR make -C .linkedspec-data/scratch/backend-integration83/public-interface/consumer/vendor/linkedspec/rgx bootstrap",
+      "cargo_home": ".linkedspec-data/scratch/backend-integration83/public-interface/consumer/.app-data/cargo-home",
+      "exit_code": 0,
+      "seconds": 0.021,
+      "seed_message_present": false,
+      "overall_success_message_present": false,
+      "missing_package_error": false,
+      "prepared_noop": true,
+      "log": ".linkedspec-data/scratch/ls004-recheck26/prepared.log",
+      "log_sha256": "2f710aac340a1502ef3b70ec290c6eacaf57e4559a3a3c14919f7d3b3398c280"
+    },
+    {
+      "case": "prepared-repeat",
+      "command": "env -u CARGO_TARGET_DIR make -C .linkedspec-data/scratch/backend-integration83/public-interface/consumer/vendor/linkedspec/rgx bootstrap",
+      "cargo_home": ".linkedspec-data/scratch/backend-integration83/public-interface/consumer/.app-data/cargo-home",
+      "exit_code": 0,
+      "seconds": 0.015,
+      "seed_message_present": false,
+      "overall_success_message_present": false,
+      "missing_package_error": false,
+      "prepared_noop": true,
+      "log": ".linkedspec-data/scratch/ls004-recheck26/prepared-repeat.log",
+      "log_sha256": "2f710aac340a1502ef3b70ec290c6eacaf57e4559a3a3c14919f7d3b3398c280"
+    }
+  ],
+  "provenance": {
+    "files": [
+      {
+        "path": "rgx/docs/INTEGRATION.md",
+        "bytes": 8667,
+        "sha256": "a7ce5a6a05ec7e0bf8b2a875f7b041288f1790c7a6fd1c15295532e725712f4e",
+        "same_volume": true,
+        "access": "read-only"
+      },
+      {
+        "path": ".linkedspec-data/scratch/ls004-recheck26/published-integration.md",
+        "bytes": 9064,
+        "sha256": "c424e873b6f9e976c5b2954fc618c45eb2d667798f32060dc867df0898ef38c6",
+        "same_volume": true,
+        "access": "read-only"
+      },
+      {
+        "path": "../archogen/docs/feedback/linkedspec/issues/LS-004-bootstrap-false-success/README.md",
+        "bytes": 3220,
+        "sha256": "898446c361465963aec0a5b1d06123960c62bbd14616e836b0292aea5851c97f",
+        "same_volume": true,
+        "access": "read-only"
+      }
+    ],
+    "environment": {
+      "os": "ProductName:\t\tmacOS\nProductVersion:\t\t27.0\nBuildVersion:\t\t26A428\n",
+      "cargo": "cargo 1.95.0 (f2d3ce0bd 2026-03-21)",
+      "make": "GNU Make 3.81"
+    },
+    "dependency_implementation_inspected": false,
+    "retained_pin_changed": false,
+    "scope": "Published integration documents and public command output only; original caller-authorized report read-only"
+  },
+  "report_inventory": [
+    {
+      "source": "ARCHOGEN",
+      "path": "../archogen/docs/feedback/linkedspec",
+      "files": 43,
+      "bytes": 75512,
+      "manifest_sha256": "7d791417288694ec44c969e7bd683dbbd71f0eaac6b1740496a70dba7b719df5",
+      "matches_supplied_snapshot": true,
+      "access": "read-only; caller-authorized report input; same filesystem volume"
+    },
+    {
+      "source": "SEMULITH",
+      "path": "../semulith/docs/upstream/linkedspec",
+      "files": 29,
+      "bytes": 26871,
+      "manifest_sha256": "a77e92fedc744643db03edea346d3619c60c1ac3cb20dc97ab444f7cd82ed3af",
+      "matches_supplied_snapshot": true,
+      "access": "read-only; caller-authorized report input; same filesystem volume"
+    }
+  ],
+  "publication": {
+    "published": "a8d34c84595d46c24cd1820d5fc0414261706412",
+    "checks": [
+      {
+        "commit": "c4926f871131e9a67114425bb3c28108205bc283",
+        "ancestor_of_published": true
+      },
+      {
+        "commit": "effe3e7b2544abf79f7786a7aa54e77b1893880e",
+        "ancestor_of_published": true
+      },
+      {
+        "commit": "a1166ee1d9ce8fce0dfc8f75903d0734ab41c975",
+        "ancestor_of_published": true
+      },
+      {
+        "commit": "6e37288f7564d99480f1353231b226a678a9568f",
+        "ancestor_of_published": true
+      },
+      {
+        "commit": "8259719f8198a1280c8d91d07a9797ef39e036a8",
+        "ancestor_of_published": true
+      },
+      {
+        "commit": "77d7b3db1b65a2c83072447a6aec77456ca7aede",
+        "ancestor_of_published": true
+      },
+      {
+        "commit": "df845ce615df20929ac501b61984fbf9d29225ca",
+        "ancestor_of_published": true
+      },
+      {
+        "commit": "92f58b56cddf4a104738374104ef5cc4847cf53d",
+        "ancestor_of_published": true
+      }
+    ],
+    "date": "2026-09-26",
+    "remote_command": "git ls-remote origin refs/heads/main",
+    "remote_exit": 0,
+    "remote_main": "a8d34c84595d46c24cd1820d5fc0414261706412"
+  },
+  "scope": [
+    "Published RGX integration instructions and public make bootstrap output only.",
+    "Original caller-authorized consumer report directories accessed read-only on the repository volume.",
+    "No dependency implementation read, patch or retained pin change; no external message sent.",
+    "Prepared controls establish reuse, not a fresh successful generation or downstream application acceptance."
+  ],
+  "resource_observation": {
+    "isolated_checkout_kib": 4217812,
+    "volume_available_kib": 3196000000,
+    "same_repository_volume": true,
+    "scope": "Transient metadata observation during checkout initialization; not a final size promise."
+  },
+  "book": {
+    "command": "env PERL5LIB= bash tools/run_mdbook_local.sh",
+    "exit": 0,
+    "exact_rendered_status": true,
+    "pinned_integration_link": true,
+    "source": "docs/linkedspec-book/src/public-api/integration-rust.md",
+    "source_sha256": "f6e6aa6bb83d8873b162549f89abe146d4426c042a47dfdd75bc1f8e7dcb1267",
+    "log": ".linkedspec-data/scratch/ls004-recheck26/book-final.log",
+    "log_sha256": "e61dfb3894ff8dfee585cc55fdcd26758c451c3e121ead0dc3e99fae970130a0",
+    "warning": "Existing large search index"
+  },
+  "latest_preparation_observation": {
+    "elapsed": "57:01",
+    "isolated_checkout_kib": 12050444,
+    "public_transfer": "LLVM Git transfer/index-pack active",
+    "scope": "Transient live process/storage observation only; no implementation inspection or bootstrap verdict"
+  },
+  "published_public_replay": {
+    "revision": "f6e5acdc99720349d1e3ecef9f821f365c4db19c",
+    "command": "env -u CARGO_TARGET_DIR make -C .linkedspec-data/scratch/ls004-recheck26/published-rgx bootstrap",
+    "cargo_home": ".linkedspec-data/scratch/ls004-recheck26/empty-published",
+    "exit_code": 2,
+    "seconds": 5044.794,
+    "seed_message_present": false,
+    "overall_success_message_present": false,
+    "missing_package_error": true,
+    "log": ".linkedspec-data/scratch/ls004-recheck26/published-failure.log",
+    "log_sha256": "4fa8107461ddec741b09bd1f819ef808df34f97c1b2c96f046c8725b51e37ce0",
+    "integration_sha256": "c424e873b6f9e976c5b2954fc618c45eb2d667798f32060dc867df0898ef38c6",
+    "source_status_after": ""
+  },
+  "published_failure_observation": {
+    "missing_package_errors": 1,
+    "later_step_B_or_C": false,
+    "false_seed_success": false,
+    "classification": "Observed fail-fast remedy is confirmed by repeated failure, fresh successful preparation and two prepared controls; retained-pin adoption remains pending."
+  },
+  "published_failure_repeat": {
+    "case": "failure-repeat",
+    "revision": "f6e5acdc99720349d1e3ecef9f821f365c4db19c",
+    "command": "env -u CARGO_TARGET_DIR make -C .linkedspec-data/scratch/ls004-recheck26/published-rgx bootstrap",
+    "cargo_home": ".linkedspec-data/scratch/ls004-recheck26/empty-published-repeat",
+    "cargo_net_offline": "true",
+    "exit_code": 2,
+    "seconds": 0.088,
+    "seed_message_present": false,
+    "overall_success_message_present": false,
+    "missing_package_errors": 1,
+    "later_step_B_or_C": false,
+    "prepared_noop": false,
+    "log": ".linkedspec-data/scratch/ls004-recheck26/current-failure-repeat.log",
+    "log_sha256": "66366aea6a267a42c378a1d3f2026c1f36a0914761a122e42cf31b3b2da53791",
+    "source_status_after": ""
+  },
+  "cache_seed": {
+    "source": ".linkedspec-data/scratch/backend-integration83/public-interface/consumer/.app-data/cargo-home/registry",
+    "destination": ".linkedspec-data/scratch/ls004-recheck26/current-cargo-home/registry",
+    "files": 15360,
+    "bytes": 380075770,
+    "manifest_sha256": "2999d47964edbcb0c07ba7d5662b1e2a7bfb0b50f65b7387bcaedd502c09135e",
+    "copy_verified": true,
+    "same_volume": true,
+    "scope": "Public Cargo registry package/index data only; source cache retained; no old compiled build outputs or dependency procedures copied."
+  },
+  "published_success_and_reuse": [
+    {
+      "case": "success",
+      "revision": "f6e5acdc99720349d1e3ecef9f821f365c4db19c",
+      "command": "env -u CARGO_TARGET_DIR make -C .linkedspec-data/scratch/ls004-recheck26/published-rgx bootstrap",
+      "cargo_home": ".linkedspec-data/scratch/ls004-recheck26/current-cargo-home",
+      "cargo_net_offline": "false",
+      "exit_code": 0,
+      "seconds": 110.778,
+      "seed_message_present": true,
+      "overall_success_message_present": true,
+      "missing_package_errors": 0,
+      "later_step_B_or_C": true,
+      "prepared_noop": false,
+      "log": ".linkedspec-data/scratch/ls004-recheck26/current-success.log",
+      "log_sha256": "035f8bcd83ea3809595cf946faa7c46ad817250e83ae6bf291acee6e086d02b9",
+      "source_status_after": ""
+    },
+    {
+      "case": "reuse",
+      "revision": "f6e5acdc99720349d1e3ecef9f821f365c4db19c",
+      "command": "env -u CARGO_TARGET_DIR make -C .linkedspec-data/scratch/ls004-recheck26/published-rgx bootstrap",
+      "cargo_home": ".linkedspec-data/scratch/ls004-recheck26/current-cargo-home",
+      "cargo_net_offline": "true",
+      "exit_code": 0,
+      "seconds": 0.029,
+      "seed_message_present": false,
+      "overall_success_message_present": false,
+      "missing_package_errors": 0,
+      "later_step_B_or_C": false,
+      "prepared_noop": true,
+      "log": ".linkedspec-data/scratch/ls004-recheck26/current-reuse.log",
+      "log_sha256": "2f710aac340a1502ef3b70ec290c6eacaf57e4559a3a3c14919f7d3b3398c280",
+      "source_status_after": ""
+    },
+    {
+      "case": "reuse-repeat",
+      "revision": "f6e5acdc99720349d1e3ecef9f821f365c4db19c",
+      "command": "env -u CARGO_TARGET_DIR make -C .linkedspec-data/scratch/ls004-recheck26/published-rgx bootstrap",
+      "cargo_home": ".linkedspec-data/scratch/ls004-recheck26/current-cargo-home",
+      "cargo_net_offline": "true",
+      "exit_code": 0,
+      "seconds": 0.013,
+      "seed_message_present": false,
+      "overall_success_message_present": false,
+      "missing_package_errors": 0,
+      "later_step_B_or_C": false,
+      "prepared_noop": true,
+      "log": ".linkedspec-data/scratch/ls004-recheck26/current-reuse-repeat.log",
+      "log_sha256": "2f710aac340a1502ef3b70ec290c6eacaf57e4559a3a3c14919f7d3b3398c280",
+      "source_status_after": ""
+    }
+  ],
+  "book_initial": {
+    "command": "env PERL5LIB= bash tools/run_mdbook_local.sh",
+    "exit": 0,
+    "exact_rendered_status": true,
+    "pinned_integration_link": true,
+    "source": "docs/linkedspec-book/src/public-api/integration-rust.md",
+    "source_sha256": "ceb7fbdd08378564b5b262054e218eefd6c375e03f0aa3023c2c334f2e9c7c98",
+    "log": ".linkedspec-data/scratch/ls004-recheck26/book.log",
+    "log_sha256": "c301019df300bc23dddb06a5e314e06a391a0ac65d0d0a8e23f382eb3710cd04",
+    "warning": "Existing large search index",
+    "scope": "Superseded interim paragraph; final accepted source proof is book."
+  },
+  "retained_pin_after": "160000 commit 8763a0e6bea97879f027237439d57725f83ead23\trgx",
+  "in_flight": null,
+  "next": "Commit .1.1; obtain explicit director pin-freeze exception for mandatory .1.2, then native/canonical adoption. Independent startup93 remains queued."
+}

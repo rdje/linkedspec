@@ -42,6 +42,13 @@ RGX defines supported transitive preparation and is the integration contact. Its
 published contract keeps PGEN read-only from RGX. No separate PGEN procedure or
 internal dependency knowledge belongs in LinkedSpec; routing is not fault attribution.
 
+## September26 published remedy verification
+
+[[rgx-bootstrap-published-remedy]] records correct public failure, fresh success and
+reuse at published f6e5acdc. Retained8763 still reproduces; required
+`RGX-CONSUMER-BUILD-REPORTS.1.2` owns adoption after an explicit pin-freeze exception.
+All supplied reports remain byte-exact and all three SEMULITH remedies are published.
+
 ## Attribution correction: contact does not establish fault
 
 `CONSUMER-REPORT-DELIVERY.5` corrects the earlier shorthand "RGX defect" and
@@ -75,8 +82,8 @@ The workspace build remedy is `effe3e7b2544abf79f7786a7aa54e77b1893880e`
 (`BACKEND-INTEGRATION-GUIDES.8.2`), verified as an ancestor of published main.
 It isolates the maintained example workspace and documents the host exclusion
 for ARCHOGEN/LS-001 and SEMULITH/LS-003 item1. LS-004's bootstrap failure-handling
-and misleading-message issue remains unfixed: no implementation fix commit is
-claimed. The delivery and handoff commits below must not be presented as that fix.
+and misleading-message issue remains unfixed at the retained8763 pin. The public
+f6e5acdc remedy above is verified; no LinkedSpec adoption commit is claimed. The delivery and handoff commits below must not be presented as that fix.
 
 Delivery `.1` and `.2` landed at `01b04138a` and `12c6ca9ad`. They verify the
 seven LinkedSpec-owned remedies and reproduce the remaining RGX report. Delivery
@@ -96,7 +103,7 @@ the LinkedSpec fixes are pushed. No external-post permission question remains an
 this session sent no external message. `RGX-CONSUMER-BUILD-REPORTS.1` retains the
 open ARCHOGEN/LS-004 repair and public post-fix verification. The focused local
 handoff commit does not inherit the published commit's canonical receipt for a
-future push. No upstream repair or downstream acceptance is claimed.
+future push. At that September23 checkpoint, no upstream repair or downstream acceptance was claimed.
 
 ## September 23 consumer delivery priority
 

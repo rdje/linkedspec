@@ -8,8 +8,8 @@ answers:
   - was a custom bootstrap helper committed or withdrawn
   - which commit adopted the successful cold-checkout RGX build
   - which commits implement versus admit the document parsing remedy
-date: 2026-09-23
-status: eight relevant commits verified in published main ancestry; seven report requirements addressed, LS-004 open, one withdrawn and one no-action
+date: 2026-09-26
+status: eight relevant commits reverified in published main; seven requirements addressed; LS-004 upstream remedy verified but retained adoption pending; one withdrawn and one no-action
 tags: [consumer-reports, commits, bootstrap, integration, attribution]
 evidence: "CONSUMER-REPORT-DELIVERY.6 reconciles RGX-BUILD-REPRO.1, integration .8.1-.8.5, startup .83.2.1-.2, SEXPR-DOCUMENT-INTEGRATION.1-.2, ADR0124, original report provenance and Git commit bodies/changed-path scopes. All eight references below are ancestors of published a8d34c845."
 reverify: "Read the named tasks and ADR0124; use git show --stat on the full commit identities below and git merge-base --is-ancestor <commit> origin/main after refreshing publication identity. Inspect no dependency implementation."
@@ -21,7 +21,7 @@ reverify: "Read the named tasks and ADR0124; use git show --stat on the full com
 | --- | --- | --- |
 | June15 cold-checkout RGX build | Resolved upstream via the published build flow, then adopted and verified by LinkedSpec. | LinkedSpec `c4926f871`; upstream public resolution `8763a0e6b`. |
 | September consumer Cargo workspace collision, ARCHOGEN/LS-001 and SEMULITH/LS-003 item1 | Fixed example workspace boundary plus documented host exclusion; native consumer builds verified. | `effe3e7b2`. |
-| ARCHOGEN/LS-004 bootstrap failure handling and false seed-success text | Still open at the retained pin. Public command returns failure correctly; the misleading intermediate message recurs. No implementation fix is recorded/applied here. | `a1166ee1d` adopts public preparation and explicitly leaves this report open; `12c6ca9ad` reverifies its recurrence. Neither is an LS-004 fix. |
+| ARCHOGEN/LS-004 bootstrap failure handling and false seed-success text | Still open at the retained pin. Published RGX f6e5acdc now passes public failure/success/reuse; no LinkedSpec pin adoption is recorded/applied here. | `a1166ee1d` adopts public preparation and explicitly leaves this report open; `12c6ca9ad` reverifies its recurrence. Neither is an LS-004 fix. |
 
 The June issue predates ARCHOGEN's September report. Its closed task cannot close
 LS-004. Conversely, saying LS-004 is unfixed must not imply that the earlier
@@ -38,7 +38,7 @@ the current failure-path observation; ARCHOGEN attributes LS-004 to PGEN bootstr
 | ARCHOGEN/LS-001 | Enclosing Cargo workspace collision remedied. | `effe3e7b2` |
 | ARCHOGEN/LS-002 | All top-level forms and complete-document rejection through the separate document grammar. | `77d7b3db1`; `df845ce61` |
 | ARCHOGEN/LS-003 | Symbols, strings and numbers retain tagged kinds and token spelling. | `77d7b3db1`; `df845ce61` |
-| ARCHOGEN/LS-004 | Open failure-handling/progress-message report; no fix commit recorded here. | None |
+| ARCHOGEN/LS-004 | Public upstream remedy verified at RGX f6e5acdc; retained8763 still affected. Required .1.2 owns authorized adoption. | No LinkedSpec adoption commit yet |
 | ARCHOGEN/LS-005 | Checkout/file-entry prerequisite navigation corrected. | `6e37288f7` |
 | ARCHOGEN/LS-006 | Withdrawn by reporter: hex underscore was preserved. | No fix required |
 | ARCHOGEN/LS-007 | No-action: adjacent-fragment joining matches the documented contract. | No fix requested |
@@ -75,3 +75,11 @@ Canonical source-qualified intake and current attribution:
 [[sexpr-document-design]]. Quote repair: [[lispish-multiline-quoted-payload]].
 Dated publication ancestry evidence is retained at
 `.linkedspec-data/scratch/consumer-report-delivery/fix-commit-audit.json`.
+
+## September26 public remedy recheck
+
+`RGX-CONSUMER-BUILD-REPORTS.1.1` rechecks both supplied report snapshots, live remote
+main a8d34c845 and all eight ancestry references. [[rgx-bootstrap-published-remedy]]
+records the independently verified public remedy at f6e5acdc and required `.1.2`
+adoption. The retained8763 failure still reproduces; an explicit director exception
+to the pin freeze, native compatibility and canonical verification are required.

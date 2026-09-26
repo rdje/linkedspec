@@ -1,11 +1,11 @@
 # MEMORY
 
-- activation_commit: `49678a8c136ea2f824f6f0ed2ac0b1170f52087a` — clean activation base for numeric reducer .91.
-- latest_completed_leaf: `SESSION-STARTUP-READING.91 - reduce array values through numeric helpers`.
-- active_work_unit: `RGX-CONSUMER-BUILD-REPORTS.1` — pending public LS-004 recheck requested at the next clean boundary.
-- next_action: Activate an owned public LS-004 recheck under RGX-CONSUMER-BUILD-REPORTS.1 from clean HEAD; verify any published remedy before closure, then resume startup .93/.92/.94/.95/.51.
+- activation_commit: `35c00924cf0add082e94213da3d01394cb5993df` — clean activation base for public LS-004 recheck.
+- latest_completed_leaf: `RGX-CONSUMER-BUILD-REPORTS.1.1 - verify published bootstrap remedy`.
+- active_work_unit: `RGX-CONSUMER-BUILD-REPORTS.1.2` — pending explicit pin-update authorization and native/canonical adoption.
+- next_action: Obtain the explicit pin-freeze exception for verified RGX f6e5acdc before .1.2; independent startup .93/.92/.94/.95/.51 remains queued.
 - in_flight_uncommitted: none.
-- blockers: LS-004 remains upstream-owned; director will notify ARCHOGEN only after its fix is verified (local report: docs/upstream/rgx/bootstrap-progress-status.md). No RGX code defect established. Named-argument and format proposals remain parked.
+- blockers: LS-004 is verified fixed upstream at RGX f6e5acdc but retained8763 still reproduces; .1.2 requires director authorization to change the pin, then native/canonical proof. No external notification yet. Named-argument and format proposals remain parked.
   Wrapper startup .7 remains open; recovery/purge stay prohibited. No interrupted Phase0 run counts as proof.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
   active table; the task metadata doctrine inventories all consumers, permits arbitrary frontier-row rewrites,

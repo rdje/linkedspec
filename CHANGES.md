@@ -12,6 +12,12 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-09-26 — RGX-CONSUMER-BUILD-REPORTS.1.1 - verify a published LS-004 remedy
+
+Public RGX f6e5acdc stops correctly after a failed prerequisite, while LinkedSpec's retained8763 still prints false seed success. Two failure controls, fresh normal preparation and two prepared controls verify the published remedy without inspecting implementation or changing pins. Required .1.2 owns adoption after an explicit director exception to the pin freeze, then native/canonical verification. The book and local report distinguish upstream availability from the still-affected retained checkout.
+
+Both consumer report sets remain byte-exact; live remote main remains a8d34c845 with all eight related fix/admission references. All three SEMULITH remedies remain published. Exact public commands, revisions, output/report/cache hashes and scope are in docs/checkpoints/RGX-CONSUMER-BUILD-REPORTS.1.1.json. No external message or downstream acceptance is claimed.
+
 ## 2026-09-26 — SESSION-STARTUP-READING.91 - consume array values in numeric reducers
 
 Perl `sum`/`avg` now lower their argument value before the runtime array-kind check, admitting direct reads, bindings and function parameters/results. All six reducer binding fast paths require legal identifiers, preventing `sum(3)` from reading host `@3` and returning0. Numeric algorithms, FlowExpr and neutral/generated formats are unchanged.

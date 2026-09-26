@@ -1,4 +1,7 @@
 # ROADMAP
+
+September26 consumer recheck: published RGX f6e5acdc passes LS-004 public failure/success/reuse; retained8763 remains affected. Required RGX-CONSUMER-BUILD-REPORTS.1.2 owns adoption after the director explicitly permits the pin change, with native and canonical verification. SEMULITH report snapshots and published remedy ancestry are reverified.
+
 LinkedSpec is being positioned as a progressive extraction parser DSL: fast, recursive, regex-anchored, and intentionally different from strict EBNF-centric tooling.
 
 Execution-oriented companion: `ROADMAP_V2.md` keeps the same live tracker and policy contracts in a shorter operational form. Keep both roadmap files aligned when a slice changes active status or execution policy.

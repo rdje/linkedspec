@@ -12,6 +12,12 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-09-26 — RGX-CONSUMER-BUILD-REPORTS.1.1 - distinguish published remedy from retained adoption
+
+The retained public bootstrap still continues through later named steps and false seed success after the first missing package; published f6e5acdc instead exits2 after one error with neither symptom. Repeat failure agrees in0.088s, fresh supported bootstrap succeeds in110.778s and prepared controls succeed in0.029s/0.013s. The first current-version failure took5044.794s including public transitive checkout initialization; it is not a parser-runtime measurement. All data stays on the repository volume;15360 public registry files/380075770bytes were copied and verified for the fresh successful route, without reusing old compiled outputs.
+
+Only published integration instructions and public command observations establish this result. No dependency internals, patches or pin changes are involved. RGX .1.2 must obtain an explicit director exception to the pin freeze before adoption, then prove native consumer compatibility and exact canonical acceptance. Historical successful builds and the June repair do not establish LS-004 adoption. The source-qualified report snapshots and publication ancestry are independently reverified; downstream report state remains untouched.
+
 ## 2026-09-26 — SESSION-STARTUP-READING.91 - separate numeric value consumption from source spelling
 
 The clean49678 sixty-case public Get/dump audit isolates source rejection to sum/avg; median/range/min/max already consume the same direct, bound and function values. Removing two spelling gates reuses the existing runtime ARRAY and numeric-element checks. The wrong-kind matrix also proves `sum(3)` ->0: public substitution emits @3 because the legacy aggregate-name regex accepts digit-only text. Restrict only the six numeric binding fast paths to identifiers; leave FlowExpr and constructor policy untouched.

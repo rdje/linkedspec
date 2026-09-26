@@ -1,6 +1,6 @@
 # ARCHOGEN LS-004: misleading bootstrap progress observed through RGX
 
-- Status: reproduced locally; upstream resolution pending. The director will relay this local report; this session has not posted it externally.
+- Status: public upstream remedy verified at RGX f6e5acdc99720349d1e3ecef9f821f365c4db19c; retained LinkedSpec pin8763 still affected. Required adoption is RGX-CONSUMER-BUILD-REPORTS.1.2 and needs an explicit pin-freeze exception. The director owns relay; no external message was sent.
 - Owner: `RGX-CONSUMER-BUILD-REPORTS.1`; prepared by `BACKEND-INTEGRATION-GUIDES.8.3`.
 - Related consumer report: ARCHOGEN/LS-004.
 - LinkedSpec remedies published at: `a8d34c84595d46c24cd1820d5fc0414261706412`; remote main read-back and tested-baseline ancestry verified September23.
@@ -95,8 +95,8 @@ local Cargo store. Its command/output/status record is retained under
 `.linkedspec-data/scratch/backend-integration83/public-interface/` as
 `offline-failure.json` and `offline-failure.log`. Normal-route evidence is in
 `state.json`, `consumer-state.json` and the associated logs in that directory.
-No source patch, pin update, internal diagnosis, network installation or actual
-ARCHOGEN application build is claimed. The upstream report remains open.
+Those original observations claimed no source patch, pin update, internal diagnosis, network installation or actual
+ARCHOGEN application build. The September26 verification below supersedes the earlier upstream-resolution status; retained-pin adoption remains open.
 
 ## September 23 recurrence
 
@@ -119,19 +119,43 @@ This is public failure/no-op recurrence, not another fresh-generation build.
 The unchanged dependency pin and successful current LinkedSpec consumer proof
 are recorded separately. The director has requested local tracking and will
 relay this report after LinkedSpec publication, now completed. No external
-message was sent by this session and no upstream repair has been verified.
+message was sent by this session; no upstream repair had been verified at that September23 checkpoint.
 
-## Requested repair and public acceptance
+## September 26: verified published remedy, retained adoption pending
 
-Please make progress output accurately describe failed preparation. The overall
-nonzero failure status is already correct and must remain so. A success-sounding
-intermediate line must not imply that a failed preparation step completed. The
-original report also requests stopping dependent work after a prerequisite fails.
-The affected upstream maintainer owns diagnosis and implementation; this report
-prescribes no internal fix and does not require RGX to modify its PGEN submodule.
+The original report inputs are unchanged byte-for-byte. Live LinkedSpec remote
+main remains `a8d34c84595d46c24cd1820d5fc0414261706412`; all eight recorded related
+fix/admission commits are ancestors. All three SEMULITH remedies remain published.
 
-LinkedSpec will verify the published remedy through the supported public command:
-repeat the isolated offline failure, check its status and progress text, then
-check supported successful preparation and already-prepared reuse. The repair
-task remains open until that evidence exists. The separate LinkedSpec publication
-does not close this upstream report or establish downstream application acceptance.
+RGX's published main was `f6e5acdc99720349d1e3ecef9f821f365c4db19c`. Its
+[published integration guide](https://github.com/rdje/rgx/blob/f6e5acdc99720349d1e3ecef9f821f365c4db19c/docs/INTEGRATION.md)
+still specifies `make bootstrap`. A separate same-volume checkout used exactly
+that interface, with no source overlays, internal inspection or retained pin change.
+
+| Public check | Retained8763 | Published f6e5acdc |
+| --- | --- | --- |
+| Empty offline package store | Exit2; two package errors, later named steps and false seed success | Exit2 immediately after the first package error; no later named steps or false seed success |
+| Independent repeated failure | Prior recurrence retained | Same accurate failure in0.088s |
+| Fresh supported preparation | Earlier dated successful proof retained | Exit0 with completion in110.778s |
+| Prepared reuse | Two exit0 no-op controls | Two exit0 no-op controls in0.029s and0.013s |
+
+The initial published failure took5044.794s including the public command's large
+transitive Git checkout initialization. It is not a parser-runtime measurement or
+future duration promise. Fresh preparation used15360 byte-verified public Cargo
+registry files/380075770bytes copied to a new repository-local store, with normal
+package resolution allowed and no stale compiled products reused. The published
+checkout remained Git-clean after all commands.
+
+This verifies an upstream remedy for the observed LS-004 behavior at the named
+published revision. It does **not** fix LinkedSpec's retained gitlink or establish
+native LinkedSpec/ARCHOGEN compatibility with the newer dependency. The retained
+8763 failure still reproduces. Required `RGX-CONSUMER-BUILD-REPORTS.1.2` owns pin
+adoption, native consumer proof and canonical verification. The director's
+section20/AGENTS prohibition on pin changes requires an explicit exception first.
+Do not notify ARCHOGEN that this LinkedSpec checkout is fixed before that adoption.
+
+Exact commands, revisions, report/cache hashes and every public-output hash are
+in `docs/checkpoints/RGX-CONSUMER-BUILD-REPORTS.1.1.json`. Full logs are retained
+under `.linkedspec-data/scratch/ls004-recheck26/`. No dependency implementation
+was inspected and no source-level repair attribution is asserted. The director
+continues to own all external communication.
