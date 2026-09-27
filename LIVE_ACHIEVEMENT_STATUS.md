@@ -2,17 +2,19 @@
 
 ## Current Activity
 
-LS-004 is verified and published at fd3e328d5. The agent's ARCHOGEN documentation commit82ee99a05 was unauthorized; .1.3.1 records the incident and permanent read-only boundary inside LinkedSpec. ARCHOGEN owns its repository disposition and verification. .1.3.2 retains canonical local closeout before startup .93/.92/.94/.95/.51; global book reconciliation remains open.
+September27 report closeout: all seven ARCHOGEN reports are accounted for: LS-001–005 have published remedies at fd3e328d5; LS-006 is withdrawn and LS-007 needs no behavior change. SEMULITH independently closed its three reports. Correction8b5b5ffd8 records the unauthorized ARCHOGEN write and makes every other repository read-only. RGX-CONSUMER-BUILD-REPORTS.1.3.2 closes LinkedSpec’s bounded report work through canonical acceptance; ARCHOGEN owns its adoption, verification and any reversal. Startup .93/.92/.94/.95/.51 resumes; unrelated defects and global book reconciliation remain open.
 
 ## Latest Completed Slice
 
-- `RGX-CONSUMER-BUILD-REPORTS.1.3.1 - record publication and repository-boundary violation` — accurate publication and incident evidence, local unapplied recovery material and strict external-repository read-only boundary; no parent closeout or consumer acceptance claimed.
+- `RGX-CONSUMER-BUILD-REPORTS.1.3.2 - close published consumer-report work locally` — bounded upstream report work closed; five ARCHOGEN remedies published, two explicit no-fix dispositions, three SEMULITH closures, local ownership correction committed.
 
 ## Next Action
 
-- Complete .1.3.2 through LinkedSpec-only canonical closeout and clean push. Do not modify any other repository, including for reversal or artifact cleanup.
+- Resume startup .93 artifact census, then .92/.94/.95/.51. Other repositories stay read-only; ARCHOGEN owns any reversal and consumer verification.
 
 ## Recent Completions
+
+- `2026-09-27` — `RGX-CONSUMER-BUILD-REPORTS.1.3.2` closes bounded published report work locally; exact canonical receipt governs landing and final push.
 
 - `2026-09-27` — `RGX-CONSUMER-BUILD-REPORTS.1.3.1` records the unauthorized ARCHOGEN write, accurate fix publication and strict other-repository read-only boundary.
 
@@ -43,8 +45,6 @@ LS-004 is verified and published at fd3e328d5. The agent's ARCHOGEN documentatio
 - `2026-09-24` — `SESSION-STARTUP-READING.86.5.2.1` verifies explicit division return carriers with focused31/book84 and an isolated old-fixture mutation.
 
 - `2026-09-24` — `SESSION-STARTUP-READING.86.5.1` verifies line-ending slash calls with focused206/book82 and Phase0 1033/1033.
-
-- `2026-09-24` — `SESSION-STARTUP-READING.86.4.4.2.2` closes bounded helper recomposition with59 public controls and source-identical book66 proof.
 
 ## History
 

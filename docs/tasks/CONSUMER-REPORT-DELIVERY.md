@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `CONSUMER-REPORT-DELIVERY`
-- Status: `done` / published remedies and audited local fix ledger; LS-004 remains open
+- Status: `done` / published remedies and audited local fix ledger; subsequent LS-004 remedy published at fd3e328d5 and locally closed by RGX-CONSUMER-BUILD-REPORTS.1.3.2
 - Roadmap lane: `SEMULITH / ARCHOGEN consumer blockers and delivery`
 - Created: `2026-09-23`
 - Last updated: `2026-09-23`
@@ -101,7 +101,7 @@ blocked SEMULITH/ARCHOGEN consumers over separately discovered validator work.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `CONSUMER-REPORT-DELIVERY.6` | `done` | Exact fix ledger and historical build distinction recorded; the September remedy is published at fd3e328d5. RGX-CONSUMER-BUILD-REPORTS.1.3.1 records the unauthorized recipient write; final local closeout is .1.3.2. |
+| 1 | `CONSUMER-REPORT-DELIVERY.6` | `done` | Exact fix ledger and historical build distinction recorded; the September remedy is published at fd3e328d5. RGX-CONSUMER-BUILD-REPORTS.1.3.1 records the unauthorized recipient write at8b5b5ffd8; .1.3.2 closes local work while ARCHOGEN retains verification and repository ownership. |
 
 ## Decisions and Boundaries
 

@@ -1,0 +1,43 @@
+{
+  "owner": "RGX-CONSUMER-BUILD-REPORTS.1.3.2",
+  "date": "2026-09-27",
+  "activation_commit": "8b5b5ffd8ea415b9b6d97387da8289e8f18606f3",
+  "published_fix": "fd3e328d5dd5c80981a1c3b8496a27270291f7b8",
+  "correction_commit": "8b5b5ffd8ea415b9b6d97387da8289e8f18606f3",
+  "archogen": {
+    "LS-001": "fixed and published: workspace boundary",
+    "LS-002": "fixed and published: opt-in complete document",
+    "LS-003": "fixed and published: opt-in tagged atom kinds",
+    "LS-004": "fixed and published: public bootstrap failure handling",
+    "LS-005": "fixed and published: prerequisite navigation",
+    "LS-006": "withdrawn",
+    "LS-007": "no behavior change requested",
+    "consumer_acceptance": "pending, ARCHOGEN-owned"
+  },
+  "semulith": "three independently verified closures; prior evidence retained",
+  "external_repository_writes": "none in this leaf; ARCHOGEN owns disposition of the earlier unauthorized commit",
+  "preserved_evidence": [
+    "docs/checkpoints/RGX-CONSUMER-BUILD-REPORTS.1.1.json",
+    "docs/checkpoints/RGX-CONSUMER-BUILD-REPORTS.1.2.json",
+    "docs/checkpoints/RGX-CONSUMER-BUILD-REPORTS.1.3.1.json",
+    "docs/incidents/2026-09-27-archogen-write.md"
+  ],
+  "canonical_requirement": {
+    "entrypoint": "tools/run_ci_local.sh",
+    "log": ".linkedspec-data/scratch/ls004-notice27/canonical-local-closeout.log",
+    "receipt": ".linkedspec-data/verification/canonical-v1.receipt",
+    "before_commit": "Exact staged receipt required by canonical-tier hook; final exit, Phase0 total and log digest in commit body",
+    "before_push": "Clean committed HEAD and matching promoted receipt; read back remote main"
+  },
+  "next": "SESSION-STARTUP-READING.93, then .92/.94/.95/.51; preserve all unrelated owners",
+  "focused_proof": {
+    "result": "PASS",
+    "source_qualified_archogen_rows": 7,
+    "fix_ancestry_checks": 4,
+    "semulith_independent_closures": 3,
+    "unchanged_rendered_pages": 2,
+    "book_source_diff_from_correction": "none",
+    "reverse_patch_sha256": "874eb11e4e822b4f338e1b6f9e593b999ef07b3483a66d4f97f4fccdcc4ac504",
+    "scope": "Technical remedy availability and local ownership records; no external application verification or write"
+  }
+}

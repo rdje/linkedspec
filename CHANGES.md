@@ -12,6 +12,12 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-09-27 — RGX-CONSUMER-BUILD-REPORTS.1.3.2 - close published consumer-report work locally
+
+Close the bounded consumer-report activity after publication of LS-004 at fd3e328d5 and the local ownership correction8b5b5ffd8. ARCHOGEN LS-001–005 have published remedies; LS-006 was withdrawn and LS-007 requires no behavior change. SEMULITH independently closed its three reports. ARCHOGEN alone owns adoption, verification and any reversal of the unauthorized recipient commit.
+
+Reconcile current task/status projections and retain the documented SExprDocumentV1/sexpr_file migration requirement. Runtime code, pins, the rendered adoption instructions and original evidence are unchanged. Focused ledger/book/history/memory checks and exact staged canonical acceptance govern landing; the commit body records the final gate result and log hash. Resume startup .93/.92/.94/.95/.51; unrelated defect owners and the global book audit remain open.
+
 ## 2026-09-27 — RGX-CONSUMER-BUILD-REPORTS.1.3.1 records publication and the repository-boundary violation
 
 - LS-004 adoption `fd3e328d5dd5c80981a1c3b8496a27270291f7b8` is canonically verified and published with exact

@@ -54,4 +54,4 @@ with matching remote read-back. The subsequent ARCHOGEN documentation commit was
 unauthorized; [[external-repositories-read-only]] records the binding boundary and
 [[consumer-report-fix-commits]] separates the technical fixes from that incident.
 ARCHOGEN alone owns its repository disposition and downstream verification. Final
-LinkedSpec-only parent closeout remains .1.3.2.
+LinkedSpec-only parent closeout is .1.3.2, after the committed ownership correction8b5b5ffd8; its exact canonical proof is required before landing.

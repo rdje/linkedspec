@@ -1,11 +1,11 @@
 # MEMORY
 
-- activation_commit: `fd3e328d5dd5c80981a1c3b8496a27270291f7b8` — clean activation base for local publication and ownership correction.
-- latest_completed_leaf: `RGX-CONSUMER-BUILD-REPORTS.1.3.1 - record publication and repository-boundary violation`.
-- active_work_unit: `RGX-CONSUMER-BUILD-REPORTS.1.3.2` — pending LinkedSpec-only canonical closeout; other repositories are strictly read-only.
-- next_action: Complete the corrected local report closeout and canonical final push under .1.3.2, then .93/.92/.94/.95/.51. Never modify another repository, including reverting the unauthorized ARCHOGEN commit.
-- in_flight_uncommitted: none — intended clean post-landing handoff. Published fixfd3e328d5 remains valid. ARCHOGEN82ee99a05 was unauthorized; incident/recovery material lives only in LinkedSpec.
-- blockers: No external write is authorized or requested. ARCHOGEN owns its repository disposition and acceptance. Preserve retained transitive edits/evidence; named-argument and format proposals stay parked.
+- activation_commit: `8b5b5ffd8ea415b9b6d97387da8289e8f18606f3` — clean activation base for local report closeout.
+- latest_completed_leaf: `RGX-CONSUMER-BUILD-REPORTS.1.3.2 - close published consumer-report work locally`.
+- active_work_unit: `SESSION-STARTUP-READING.93` — pending repository-owned artifact census; other repositories remain strictly read-only.
+- next_action: Run the bounded .93 artifact census, retaining dependency data, caches and referenced evidence; then .92/.94/.95/.51. Never modify another repository, including reversing ARCHOGEN82ee99a05.
+- in_flight_uncommitted: none — intended clean post-landing handoff. Published fixfd3e328d5 remains valid; local correction8b5b5ffd8 records the unauthorized ARCHOGEN write.
+- blockers: ARCHOGEN owns its repository disposition and acceptance. Preserve retained transitive edits/evidence; named-argument and format proposals stay parked.
   Wrapper startup .7 remains open; recovery/purge stay prohibited. No interrupted Phase0 run counts as proof.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
   active table; the task metadata doctrine inventories all consumers, permits arbitrary frontier-row rewrites,

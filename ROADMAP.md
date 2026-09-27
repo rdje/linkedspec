@@ -1,6 +1,6 @@
 # ROADMAP
 
-September27 report status: LS-004 is fixed and published at LinkedSpec fd3e328d5 after exact canonical acceptance; SEMULITH independently closed all three reports and five ARCHOGEN requirements are addressed upstream, pending its own verification. The agent's ARCHOGEN documentation commit82ee99a05 was unauthorized. Other repositories are strictly read-only; local correction .1.3.1 and final closeout .1.3.2 precede startup .93/.92/.94/.95/.51. Global book reconciliation remains open.
+September27 report closeout: all seven ARCHOGEN reports are accounted for: LS-001–005 have published remedies at fd3e328d5; LS-006 is withdrawn and LS-007 needs no behavior change. SEMULITH independently closed its three reports. Correction8b5b5ffd8 records the unauthorized ARCHOGEN write and makes every other repository read-only. RGX-CONSUMER-BUILD-REPORTS.1.3.2 closes LinkedSpec’s bounded report work through canonical acceptance; ARCHOGEN owns its adoption, verification and any reversal. Startup .93/.92/.94/.95/.51 resumes; unrelated defects and global book reconciliation remain open.
 
 LinkedSpec is being positioned as a progressive extraction parser DSL: fast, recursive, regex-anchored, and intentionally different from strict EBNF-centric tooling.
 

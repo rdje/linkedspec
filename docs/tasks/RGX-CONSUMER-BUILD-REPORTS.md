@@ -9,7 +9,7 @@ internal dependency knowledge belongs in LinkedSpec; routing is not fault attrib
 ## Metadata
 
 - Tree ID: `RGX-CONSUMER-BUILD-REPORTS`
-- Status: `active` / LS-004 remedy published; director forbids all writes to other repositories; unauthorized ARCHOGEN documentation commit requires incident handling
+- Status: `done` / bounded upstream report work closed; fix published, local incident correction committed; ARCHOGEN owns consumer verification and any repository reversal
 - Roadmap lane: `Rust downstream integration / upstream issue follow-up`
 - Created: `2026-09-20`
 - Last updated: `2026-09-27`
@@ -26,21 +26,21 @@ September26 fixing instruction permits only the verified RGX gitlink adoption in
 ## Task Tree
 
 - ID: `RGX-CONSUMER-BUILD-REPORTS`
-  Status: `active`
+  Status: `done`
   Goal: Resolve public build reports through upstream-published fixes.
   Children: `.1`
-  Verification: Published fd3e328d5 fixes the technical report; .1.3.1 records the unauthorized recipient write and .1.3.2 retains final local closeout. No recipient acceptance or write permission is inferred.
+  Verification: Published fd3e328d5 fixes the technical report; committed 8b5b5ffd8 records the unauthorized recipient write and permanent read-only boundary. .1.3.2 closes this bounded local activity through receipt-bound canonical acceptance. No recipient acceptance or write permission is inferred.
 
 - ID: `RGX-CONSUMER-BUILD-REPORTS.1`
-  Status: `active`
+  Status: `done`
   Goal: Resolve the misleading bootstrap progress message reported as ARCHOGEN/LS-004.
   Scope: Public RGX bootstrap verification and separately authorized dependency adoption; no dependency implementation inspection or patches.
   Children: `.1.1`, `.1.2`, `.1.3`
   Dependencies: Integration `.8.3` supplies the report; CONSUMER-REPORT-DELIVERY.2 reverifies it, .3 publishes the LinkedSpec fixes and .4 records the director-owned relay.
   Acceptance: Preserve exact public reproduction and observed status; receive an upstream response or published resolution; verify through the supported interface and record remaining limitations. Do not claim a fixed issue merely because a downstream guide uses the correct entry point. The director will relay the local report via RGX as the integration contact. Preserve ARCHOGEN's PGEN component attribution as reported, not independently proven; RGX correctly propagates the observed failure and no RGX implementation defect is established. This session must not post an external issue; there is no pending external-post permission request. A response alone does not establish repair: retain the failure exit status, verify accurate failure-path progress text, and preserve supported successful and already-prepared public bootstrap behavior.
   Verification: September23 CONSUMER-REPORT-DELIVERY.2 reproduces the public failure at pinned RGX8763a0e6: exit2, missing package, misleading seed line and no final completion. Prepared public bootstrap exits0 with its documented reusable no-op outcome. Report and log hashes are refreshed. Delivery .3 is published at a8d34c84595d46c24cd1820d5fc0414261706412 (exact remote read-back and source-baseline ancestry PASS). September23 director instruction assigns external communication to the director and local feedback tracking to LinkedSpec under delivery .4. Delivery .5 corrects the contact-versus-component conflation against the original report, retained public output and published integration contract. No external message was sent by this session. Upstream diagnosis/repair and post-fix verification remain pending.
-  September26 continuation (historical): .1.1 verifies public failure/success/reuse at f6e5acdc. The adopted remedy is canonically published at fd3e328d5. September27 correction: the notification request did not authorize modifying ARCHOGEN; its documentation commit82ee99a05 is an incident owned by .1.3.1. Other repositories are strictly read-only; final LinkedSpec-only closeout remains .1.3.2.
-  Commit: `pending` (final local closeout .1.3.2).
+  September26 continuation (historical): .1.1 verifies public failure/success/reuse at f6e5acdc. The adopted remedy is canonically published at fd3e328d5. September27 correction: the notification request did not authorize modifying ARCHOGEN; its documentation commit82ee99a05 is an incident owned by .1.3.1. Other repositories are strictly read-only; .1.3.2 completes the LinkedSpec-only parent closeout after the committed correction8b5b5ffd8.
+  Commit: `RGX-CONSUMER-BUILD-REPORTS.1.3.2 - close published consumer-report work locally`; derive landed identity from Git.
 
 - ID: `RGX-CONSUMER-BUILD-REPORTS.1.1`
   Status: `done`
@@ -94,13 +94,14 @@ September26 fixing instruction permits only the verified RGX gitlink adoption in
   Commit: `RGX-CONSUMER-BUILD-REPORTS.1.2 - adopt verified LS-004 remedy`; derive landed identity from Git.
 
 - ID: `RGX-CONSUMER-BUILD-REPORTS.1.3`
-  Status: `active`
+  Status: `done`
   Goal: Record the published LS-004 remedy and provide a handoff inside LinkedSpec, correcting the unauthorized ARCHOGEN write.
   Children: `.1.3.1`, `.1.3.2`
   Director correction: All other repositories are strictly read-only. The request to notify ARCHOGEN and its feedback protocol did not authorize editing or committing there. The director reiterated this after the incident and assigned changes there exclusively to ARCHOGEN; no revert or further write will be attempted by LinkedSpec.
   Incident: The agent created ARCHOGEN commit82ee99a05ee55babdf6ea49fb719707a030b8700 in twelve documentation files, plus ignored verification scratch/logs, and used/cleared its brief. It did not amend prior commits, alter application code/vendor pins or push ARCHOGEN. The original canonical closeout8638 was stopped via its exact managed wrapper and consumed exit143; it supplies no receipt. Published fixfd3e328d5 and its complete canonical acceptance remain valid.
   Acceptance: Commit an accurate local incident record and permanent read-only boundary; preserve the published remedy and original evidence; let ARCHOGEN control disposition of its repository. Complete the remaining LinkedSpec-only parent closeout through exact canonical proof.
-  Commit: `pending`
+  Verification: Correction8b5b5ffd8 is committed and focused-verified; .1.3.2 requires exact canonical receipt before landing. Final results are recorded in its commit body and local gate log.
+  Commit: `RGX-CONSUMER-BUILD-REPORTS.1.3.2 - close published consumer-report work locally`; derive landed identity from Git.
 
 - ID: `RGX-CONSUMER-BUILD-REPORTS.1.3.1`
   Status: `done`
@@ -115,17 +116,23 @@ September26 fixing instruction permits only the verified RGX gitlink adoption in
   Commit: `RGX-CONSUMER-BUILD-REPORTS.1.3.1 - record publication and repository-boundary violation`; derive landed identity from Git.
 
 - ID: `RGX-CONSUMER-BUILD-REPORTS.1.3.2`
-  Status: `pending`
+  Status: `done`
   Goal: Complete the corrected LinkedSpec-only consumer-report closeout after .1.3.1 is cleanly committed.
+  Activation: Clean 8b5b5ffd8ea415b9b6d97387da8289e8f18606f3; all nine correction doctrines and post-commit activation pass, brief0, no background job outstanding.
+  Verification tier: `canonical`
+  Focused checks: Reconcile all seven ARCHOGEN dispositions with the published commit ledger, retain SEMULITH's three independent closures, check the local-only handoff and read-only incident disposition, unchanged rendered adoption instructions, memory/Knowledge/history and diff.
+  Canonical trigger: Parent closeout and final clean LinkedSpec push require exact staged canonical acceptance, normal commit hooks, receipt promotion and remote read-back.
+  Ownership: Update this bounded report tree's parents, local current-status projections, handoff and checkpoint. No source/runtime/pin change or other-repository mutation. Consumer verification and ARCHOGEN's incident disposition remain external-owner work.
   Planned checks: Accurate local handoff/incident boundary, no new recipient writes, exact canonical acceptance and clean final publication. ARCHOGEN's own repository disposition and downstream verification remain its owner's responsibility.
   Acceptance: Close only LinkedSpec's bounded report work, preserve all unrelated defect owners, and resume startup .93/.92/.94/.95/.51. Never claim the unauthorized recipient commit as authorized delivery or consumer acceptance.
-  Commit: `pending`
+  Verification: Seven ARCHOGEN reports resolve to five published remedies plus withdrawn LS-006 and no-action LS-007. Earlier fixes are ancestors of remote fd3e328d5; LS-002/003 require the opt-in document path. SEMULITH independently closed its three reports. Book adoption text, local incident/patch and immutable history remain as verified in 8b5b5ffd8. Exact staged canonical acceptance is mandatory before this intended closeout lands; the commit body records final exit, Phase0 total and log digest. See docs/checkpoints/RGX-CONSUMER-BUILD-REPORTS.1.3.2.json.
+  Commit: `RGX-CONSUMER-BUILD-REPORTS.1.3.2 - close published consumer-report work locally`; derive landed identity from Git.
 
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `RGX-CONSUMER-BUILD-REPORTS.1.3.2` | `pending` | Canonical LinkedSpec-only closeout after the committed local correction, then startup .93. |
+| 1 | `RGX-CONSUMER-BUILD-REPORTS.1.3.2` | `done` | Bounded local work closed through exact canonical acceptance; resume startup .93. ARCHOGEN owns its verification and repository disposition. |
 
 ## Original director handoff and September26 continuation
 

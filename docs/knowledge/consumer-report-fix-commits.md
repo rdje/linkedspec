@@ -124,5 +124,6 @@ documents and auxiliary writes, plus an unapplied local reverse patch. All other
 repositories are strictly read-only; ARCHOGEN owns disposition of its commit and its
 independent verification. SEMULITH's three independent closures remain valid.
 
-The corrected local record is owned by .1.3.1; .1.3.2 retains final LinkedSpec-only
-closeout. See [[external-repositories-read-only]].
+The corrected local record is committed at8b5b5ffd8 under .1.3.1; .1.3.2 closes
+LinkedSpec-only report work through canonical acceptance. ARCHOGEN verification and
+any incident reversal remain its owner’s responsibility. See [[external-repositories-read-only]].

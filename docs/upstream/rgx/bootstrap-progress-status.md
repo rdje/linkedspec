@@ -191,4 +191,4 @@ The agent's subsequent ARCHOGEN documentation commit82ee99a05 was unauthorized.
 The director has forbidden all writes to other repositories, including corrections
 or reverts. The exact incident and unapplied recovery material are retained inside
 LinkedSpec at `docs/incidents/2026-09-27-archogen-write.md`. No consumer acceptance
-is inferred from that commit. .1.3.1 records the correction; .1.3.2 owns final local closeout.
+is inferred from that commit. .1.3.1 commits the correction at8b5b5ffd8; .1.3.2 closes the bounded local activity through exact canonical acceptance. ARCHOGEN’s verification and any reversal remain its owner’s work.

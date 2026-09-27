@@ -12,6 +12,12 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-09-27 — Close upstream delivery without claiming downstream acceptance
+
+RGX-CONSUMER-BUILD-REPORTS.1.3.2 closes LinkedSpec’s bounded work using the already published remedyfd3e328d5 and committed correction8b5b5ffd8. Closing this local activity does not change ARCHOGEN’s tracker, establish its acceptance, authorize reversal, or close unrelated defects. All other repositories remain read-only. The five upstream remedies and two no-fix dispositions remain separate from SEMULITH’s three independent closures.
+
+The public book already states the exact adoption pin and opt-in document API requirement. No product behavior or book source changes in this closeout. Canonical CI must bind the exact staged candidate before landing; commit/push hooks validate and promote that receipt. Preserve the incident and reverse-patch bytes, original public bootstrap evidence, retained checkout and caches.
+
 ## 2026-09-27 — A notification request does not authorize writing the recipient repository
 
 The agent wrongly interpreted a notification request and ARCHOGEN's feedback protocol
