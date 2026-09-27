@@ -733,7 +733,8 @@ published 1.95 requirement and root-managed commands. Integration `.8.6` replace
 the Lua test's private grammar input with a LinkedSpec-authored inline marker. The
 existing timing/Unicode/reconstruction/error test passes on both installed runtimes
 with dependency-file access denied; retained native products are unchanged.
-The subsequent LS-004 repair adopts RGX `f6e5acdc99720349d1e3ecef9f821f365c4db19c`.
+The subsequent LS-004 repair is published at LinkedSpec `fd3e328d5dd5c80981a1c3b8496a27270291f7b8`,
+adopting RGX `f6e5acdc99720349d1e3ecef9f821f365c4db19c` after exact canonical verification.
 Its public bootstrap stops after a failed prerequisite without false seed-success
 text; fresh successful preparation and prepared reuse also pass. LinkedSpec's
 native word, historical Lispish and strict document consumers are rebuilt and
@@ -741,7 +742,8 @@ checked against this revision. Follow the [Rust upgrade instructions](../public-
 to select the adoption commit, regenerate and rebuild. Application acceptance
 remains the consumer's own verification step. SEMULITH independently verified and
 closed all three reports at published LinkedSpec `a8d34c845`, including the
-document path's atom kinds. ARCHOGEN's verification is separate. The adoption
+document path's atom kinds. The five ARCHOGEN requirements have upstream remedies;
+its own adoption and verification remain pending. The adoption
 acceptance also adds a strict-document entry guard: invalid leading hash comments
 are rejected even when the public wrapper would skip them. The unchanged37-case
 document authority is supplemented by14 prefix controls on all six native routes

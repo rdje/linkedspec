@@ -10,8 +10,9 @@ answers:
   - which commits implement versus admit the document parsing remedy
   - has SEMULITH independently verified and closed all three reports
   - is SEMULITH LS-002 atom typing fixed and pushed
-date: 2026-09-26
-status: SEMULITH independently verified all three reports; seven prior remedies published; LS-004 adoption and strict-document prefix acceptance owned by .1.2; ARCHOGEN verification separate
+  - was ARCHOGEN notified of the published LS-004 fix
+date: 2026-09-27
+status: eight report requirements addressed upstream including LS-004 at fd3e328d5; SEMULITH three verified and closed; ARCHOGEN acceptance pending; recipient write was unauthorized
 tags: [consumer-reports, commits, bootstrap, integration, attribution]
 evidence: "CONSUMER-REPORT-DELIVERY.6 reconciles RGX-BUILD-REPRO.1, integration .8.1-.8.5, startup .83.2.1-.2, SEXPR-DOCUMENT-INTEGRATION.1-.2, ADR0124, original report provenance and Git commit bodies/changed-path scopes. All eight references below are ancestors of published a8d34c845."
 reverify: "Read the named tasks and ADR0124; use git show --stat on the full commit identities below and git merge-base --is-ancestor <commit> origin/main after refreshing publication identity. Inspect no dependency implementation."
@@ -23,7 +24,7 @@ reverify: "Read the named tasks and ADR0124; use git show --stat on the full com
 | --- | --- | --- |
 | June15 cold-checkout RGX build | Resolved upstream via the published build flow, then adopted and verified by LinkedSpec. | LinkedSpec `c4926f871`; upstream public resolution `8763a0e6b`. |
 | September consumer Cargo workspace collision, ARCHOGEN/LS-001 and SEMULITH/LS-003 item1 | Fixed example workspace boundary plus documented host exclusion; native consumer builds verified. | `effe3e7b2`. |
-| ARCHOGEN/LS-004 bootstrap failure handling and false seed-success text | Published RGX f6e5acdc passes public failure/success/reuse and is adopted under .1.2; .1.3 owns publication/notification. | `a1166ee1d` adopts public preparation and explicitly leaves this report open; `12c6ca9ad` reverifies its recurrence. Neither is an LS-004 fix. |
+| ARCHOGEN/LS-004 bootstrap failure handling and false seed-success text | Published LinkedSpec fd3e328d5 adopts the publicly verified RGX f6e5acdc remedy. The recipient write is an incident, not authorized delivery or acceptance. | `a1166ee1d` adopts public preparation and explicitly leaves this report open; `12c6ca9ad` reverifies its recurrence. Neither is an LS-004 fix. |
 
 The June issue predates ARCHOGEN's September report. Its closed task cannot close
 LS-004. Conversely, saying LS-004 is unfixed must not imply that the earlier
@@ -40,7 +41,7 @@ the current failure-path observation; ARCHOGEN attributes LS-004 to PGEN bootstr
 | ARCHOGEN/LS-001 | Enclosing Cargo workspace collision remedied. | `effe3e7b2` |
 | ARCHOGEN/LS-002 | All top-level forms and complete-document rejection through the separate document grammar. | `77d7b3db1`; `df845ce61` |
 | ARCHOGEN/LS-003 | Symbols, strings and numbers retain tagged kinds and token spelling. | `77d7b3db1`; `df845ce61` |
-| ARCHOGEN/LS-004 | RGX f6e5acdc remedy adopted; fresh native consumers pass, canonical acceptance required before landing. | `RGX-CONSUMER-BUILD-REPORTS.1.2 - adopt verified LS-004 remedy` (derive landed hash from Git) |
+| ARCHOGEN/LS-004 | RGX f6e5acdc remedy adopted and published after exact canonical PASS; ARCHOGEN verification pending. | `fd3e328d5dd5c80981a1c3b8496a27270291f7b8` |
 | ARCHOGEN/LS-005 | Checkout/file-entry prerequisite navigation corrected. | `6e37288f7` |
 | ARCHOGEN/LS-006 | Withdrawn by reporter: hex underscore was preserved. | No fix required |
 | ARCHOGEN/LS-007 | No-action: adjacent-fragment joining matches the documented contract. | No fix requested |
@@ -109,3 +110,19 @@ its adjacent `evidence/verified-a8d34c845.txt` transcript SHA-256 is
 `56b888c47a99d4e7eea9b1f6dd833af5754f6f25ff8708b0a08b0b76bb33274e`.
 All three notes were read in full. This is consumer verification, not an inferred
 closure from upstream tests. ARCHOGEN's separate IDs and acceptance remain distinct.
+
+## September27 publication and unauthorized recipient-write correction
+
+LinkedSpec `fd3e328d5dd5c80981a1c3b8496a27270291f7b8` publishes the adopted remedy and strict-document prefix
+repair after exact canonical PASS, clean push and matching remote read-back. The eight
+addressed requirements have upstream remedies; LS-006 remains withdrawn and LS-007 no-action.
+
+The agent then wrongly treated a notification request as permission to modify ARCHOGEN.
+Its commit `82ee99a05ee55babdf6ea49fb719707a030b8700` is **unauthorized**, not consumer acknowledgment or
+acceptance. `docs/incidents/2026-09-27-archogen-write.md` records the twelve changed
+documents and auxiliary writes, plus an unapplied local reverse patch. All other
+repositories are strictly read-only; ARCHOGEN owns disposition of its commit and its
+independent verification. SEMULITH's three independent closures remain valid.
+
+The corrected local record is owned by .1.3.1; .1.3.2 retains final LinkedSpec-only
+closeout. See [[external-repositories-read-only]].

@@ -40,6 +40,7 @@ Startup uses the targeted-reading and 2–5 minute recovery guidance in `SESSION
 
 ## Non-negotiable working rules
 
+- **Other Git repositories are strictly read-only (director instruction, 2026-09-27).** This agent owns LinkedSpec only. Do not edit, stage, commit, amend, revert, push, or create scratch data in another repository. A notification request or a recipient's feedback protocol does not authorize repository writes. Prepare notices and recovery material inside LinkedSpec; the other repository's owner applies its changes. The unauthorized ARCHOGEN documentation commit is recorded in `docs/incidents/2026-09-27-archogen-write.md`.
 - **RGX and PGEN are black boxes (director instruction, 2026-09-20).** LinkedSpec
   integrates with RGX only: use RGX's published integration document, public APIs
   and contracts. RGX owns all transitive dependency preparation; LinkedSpec must

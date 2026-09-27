@@ -1,11 +1,11 @@
 # MEMORY
 
-- activation_commit: `7c2acb5102bd54cb21c325193f5368b806d4cb08` — clean activation base for LS-004 adoption.
-- latest_completed_leaf: `RGX-CONSUMER-BUILD-REPORTS.1.2 - adopt verified LS-004 remedy`.
-- active_work_unit: `RGX-CONSUMER-BUILD-REPORTS.1.3` — next pending leaf: publish the accepted LS-004 remedy and notify the director and ARCHOGEN.
-- next_action: Push the exact clean adoption commit using its canonical receipt, verify remote identity, then deliver the authorized ARCHOGEN feedback notice under .1.3.
-- in_flight_uncommitted: none — intended clean post-landing handoff; derive adoption identity from Git. SEMULITH independently verified all three reports; cases closed.
-- blockers: None requiring director input. Retained transitive local edits must be preserved intact. No completion notice yet. Named-argument and format proposals remain parked.
+- activation_commit: `fd3e328d5dd5c80981a1c3b8496a27270291f7b8` — clean activation base for local publication and ownership correction.
+- latest_completed_leaf: `RGX-CONSUMER-BUILD-REPORTS.1.3.1 - record publication and repository-boundary violation`.
+- active_work_unit: `RGX-CONSUMER-BUILD-REPORTS.1.3.2` — pending LinkedSpec-only canonical closeout; other repositories are strictly read-only.
+- next_action: Complete the corrected local report closeout and canonical final push under .1.3.2, then .93/.92/.94/.95/.51. Never modify another repository, including reverting the unauthorized ARCHOGEN commit.
+- in_flight_uncommitted: none — intended clean post-landing handoff. Published fixfd3e328d5 remains valid. ARCHOGEN82ee99a05 was unauthorized; incident/recovery material lives only in LinkedSpec.
+- blockers: No external write is authorized or requested. ARCHOGEN owns its repository disposition and acceptance. Preserve retained transitive edits/evidence; named-argument and format proposals stay parked.
   Wrapper startup .7 remains open; recovery/purge stay prohibited. No interrupted Phase0 run counts as proof.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
   active table; the task metadata doctrine inventories all consumers, permits arbitrary frontier-row rewrites,
@@ -47,11 +47,11 @@
 - current_core_state: typed source is 14/0/231; recognition 138/250/58; progressive 9/9/116 plus public
   6/12/10/60; gap 9/0/63 plus public 8/15/10/34; staged 9/9/123 plus public 6/17/10/129; capability 100/0/0;
   semantic introspection 9/0/128.
-- standing_contracts: all durable paths are repo-relative; all project data stays on the repository filesystem;
+- standing_contracts: all durable paths are repo-relative; all project data stays on the repository filesystem; Only LinkedSpec is writable; every other Git repository is read-only (director September27; see AGENTS and the incident record).
   README remains bounded; ordinary leaves use focused proof and designated infrastructure/public/push boundaries
   use exact staged canonical CI; task-tree/index, Knowledge Map, mdBook, and bounded live/history move in lockstep.
-- current_engineering_notes_capacity: ADR0122 admits 43 collection files /42 manifest lines /25410 manifest bytes; current39/38/22961 stay bounded.
-  Notes segment4969 preserves 114 lines /28181 bytes from clean9f81d3162; old archive rows/bytes remain exact.
+- current_engineering_notes_capacity: ADR0122 admits 43 collection files /42 manifest lines /25410 manifest bytes; current40/39/23573 stay bounded.
+  Notes segment4968 preserves123 lines/26553 bytes from cleanfd3e328d5; old archive rows/bytes remain exact.
 - current_change_history_capacity: ADR0122 admits47 collection files /46 manifest lines /26255 bytes; current43/42/23951 stay bounded.
   Changes segment4970 preserves132 lines /27272 bytes from clean58a5ff936; prior history remains byte-exact.
 - dependency_boundary: RGX public integration only; it owns PGEN. No internal inspection/analysis, patches, separate PGEN procedure or unrelated pin changes. September26 authorizes only reviewed f6e5acdc for LS-004.

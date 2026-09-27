@@ -2,17 +2,19 @@
 
 ## Current Activity
 
-LS-004's verified public remedy is adopted at RGX f6e5acdc. Native acceptance includes the strict-document prefix repair and the adoption commit requires exact canonical proof. SEMULITH independently verified and closed all three reports. .1.3 owns publication and the requested director/ARCHOGEN notice. Independent startup .93/.92/.94/.95/.51 remains queued; global book reconciliation is open.
+LS-004 is verified and published at fd3e328d5. The agent's ARCHOGEN documentation commit82ee99a05 was unauthorized; .1.3.1 records the incident and permanent read-only boundary inside LinkedSpec. ARCHOGEN owns its repository disposition and verification. .1.3.2 retains canonical local closeout before startup .93/.92/.94/.95/.51; global book reconciliation remains open.
 
 ## Latest Completed Slice
 
-- `RGX-CONSUMER-BUILD-REPORTS.1.2 - adopt verified LS-004 remedy` — public failure/success/reuse, fresh consumers, complete owned Rust packages, emitted source, storage and CLI controls pass. Old local edits and outputs remain preserved. ARCHOGEN's downstream acceptance remains separate.
+- `RGX-CONSUMER-BUILD-REPORTS.1.3.1 - record publication and repository-boundary violation` — accurate publication and incident evidence, local unapplied recovery material and strict external-repository read-only boundary; no parent closeout or consumer acceptance claimed.
 
 ## Next Action
 
-- Publish the clean adoption commit using its canonical receipt, verify remote identity, then notify the director and ARCHOGEN under .1.3.
+- Complete .1.3.2 through LinkedSpec-only canonical closeout and clean push. Do not modify any other repository, including for reversal or artifact cleanup.
 
 ## Recent Completions
+
+- `2026-09-27` — `RGX-CONSUMER-BUILD-REPORTS.1.3.1` records the unauthorized ARCHOGEN write, accurate fix publication and strict other-repository read-only boundary.
 
 - `2026-09-27` — `RGX-CONSUMER-BUILD-REPORTS.1.2` adopts verified f6e5acdc, preserves prior data, restores Rust public leading trivia and strict prefix validation, and requires receipt-bound canonical admission.
 
@@ -43,8 +45,6 @@ LS-004's verified public remedy is adopted at RGX f6e5acdc. Native acceptance in
 - `2026-09-24` — `SESSION-STARTUP-READING.86.5.1` verifies line-ending slash calls with focused206/book82 and Phase0 1033/1033.
 
 - `2026-09-24` — `SESSION-STARTUP-READING.86.4.4.2.2` closes bounded helper recomposition with59 public controls and source-identical book66 proof.
-
-- `2026-09-24` — `SESSION-STARTUP-READING.86.4.4.2.1` repairs fresh generated Trace loading; focused173/book66 and mutation checks pass.
 
 ## History
 

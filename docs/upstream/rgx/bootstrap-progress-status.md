@@ -1,6 +1,6 @@
 # ARCHOGEN LS-004: misleading bootstrap progress observed through RGX
 
-- Status: public remedy verified and adopted at RGX f6e5acdc99720349d1e3ecef9f821f365c4db19c under RGX-CONSUMER-BUILD-REPORTS.1.2. Fresh native consumers and the full Rust component gate pass; exact canonical admission is mandatory for landing. .1.3 owns publication/notification.
+- Status: fixed upstream and published at LinkedSpec `fd3e328d5dd5c80981a1c3b8496a27270291f7b8`. ARCHOGEN verification remains pending. The agent's recipient-repository write was unauthorized and is recorded in docs/incidents/2026-09-27-archogen-write.md; all future handoff work stays in LinkedSpec.
 - Owner: `RGX-CONSUMER-BUILD-REPORTS.1`; prepared by `BACKEND-INTEGRATION-GUIDES.8.3`.
 - Related consumer report: ARCHOGEN/LS-004.
 - LinkedSpec remedies published at: `a8d34c84595d46c24cd1820d5fc0414261706412`; remote main read-back and tested-baseline ancestry verified September23.
@@ -179,3 +179,16 @@ all core/runtime tests, emitted source, managed storage and both66-case CLI envi
 Exact staged canonical acceptance is mandatory for landing; `.1.3` owns
 publication and the requested completion notice. No ARCHOGEN application acceptance
 or `verified` state is claimed by LinkedSpec.
+
+## September27 publication and local handoff
+
+The reviewed adoption is published at LinkedSpec `fd3e328d5dd5c80981a1c3b8496a27270291f7b8` after exact
+canonical PASS, clean push and matching remote read-back. This document is the
+LinkedSpec-owned handoff for the director and ARCHOGEN; they control any downstream
+repository change. SEMULITH independently verified and closed all three separate reports.
+
+The agent's subsequent ARCHOGEN documentation commit82ee99a05 was unauthorized.
+The director has forbidden all writes to other repositories, including corrections
+or reverts. The exact incident and unapplied recovery material are retained inside
+LinkedSpec at `docs/incidents/2026-09-27-archogen-write.md`. No consumer acceptance
+is inferred from that commit. .1.3.1 records the correction; .1.3.2 owns final local closeout.

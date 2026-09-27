@@ -1,0 +1,179 @@
+{
+  "owner": "RGX-CONSUMER-BUILD-REPORTS.1.3.1",
+  "date": "2026-09-27",
+  "activation_commit": "fd3e328d5dd5c80981a1c3b8496a27270291f7b8",
+  "published_adoption": {
+    "commit": "fd3e328d5dd5c80981a1c3b8496a27270291f7b8",
+    "rgx": "f6e5acdc99720349d1e3ecef9f821f365c4db19c",
+    "remote_readback": "fd3e328d5dd5c80981a1c3b8496a27270291f7b8\trefs/heads/main",
+    "push_exit": 0,
+    "remote_readback_exit": 0,
+    "canonical_exit": 0,
+    "canonical_session": 70262,
+    "canonical_log": ".linkedspec-data/scratch/ls004-adoption26/canonical-selector.log",
+    "canonical_log_sha256": "16bc9c39056560ff640495911751373313ba008a2aeeac8644af0cedb5929429",
+    "receipt": [
+      "version=1",
+      "state=committed",
+      "head=fd3e328d5dd5c80981a1c3b8496a27270291f7b8",
+      "content=ecb7e2bd519188760aba852da3adadbda4fccf85",
+      "gate=tools/run_ci_local.sh"
+    ],
+    "phase0": {
+      "tests": 1033,
+      "failed": 0,
+      "complete_plan": "1..1033",
+      "wall_seconds": 1286
+    },
+    "cli_environments": {
+      "default": 66,
+      "POSIX": 66
+    },
+    "doctrines": 9,
+    "scope": "Configured canonical gate; optional matrices not enabled are not claimed.",
+    "details": [
+      "docs/checkpoints/RGX-CONSUMER-BUILD-REPORTS.1.1.json",
+      "docs/checkpoints/RGX-CONSUMER-BUILD-REPORTS.1.2.json"
+    ]
+  },
+  "semulith": {
+    "reports": 3,
+    "state": "independently verified and closed",
+    "consumer_commit": "7f4d2cde61a82184cf06a7870c87a19b3aa744b3",
+    "verified_linkedspec": "a8d34c84595d46c24cd1820d5fc0414261706412",
+    "ledger": "docs/knowledge/consumer-report-fix-commits.md",
+    "recipient_writes": false
+  },
+  "closeout_checks": {
+    "tier": "focused",
+    "requirement": "This incident/documentation leaf does not close a parent. .1.3.2 owns canonical final closeout and clean push.",
+    "focused": "Published identity/ancestry; issue and input proof; rendered book; Knowledge/history/memory/doctrines; diff.",
+    "engineering_notes_rollover": {
+      "segment": "4968",
+      "source_commit": "fd3e328d5dd5c80981a1c3b8496a27270291f7b8",
+      "source_lines": 123,
+      "source_bytes": 26553,
+      "sha256": "f62a72418c776bdbe31e4dab43c7a16194dc751a0df5826a975a0dd8c41e4e1b",
+      "collection_files": 40,
+      "manifest_lines": 39,
+      "manifest_bytes": 23573,
+      "limits": "unchanged"
+    },
+    "corrected_book": {
+      "build_exit": 0,
+      "pages": [
+        {
+          "page": "docs/linkedspec-book/book/public-api/integration-rust.html",
+          "exact_text_checks": 6,
+          "sha256": "e86072ede5081582995e829d63c488d4d3c2d569855f6a69d8fb60937fe4d334"
+        },
+        {
+          "page": "docs/linkedspec-book/book/overview/project-status.html",
+          "exact_text_checks": 4,
+          "sha256": "6dd081133df73293626f716c3fedb2b5cd0790e59e7c3953275b508345e8d697"
+        }
+      ],
+      "upgrade_anchor_and_link": true,
+      "literal_source_pin": "fd3e328d5dd5c80981a1c3b8496a27270291f7b8"
+    },
+    "local_incident_inventory": {
+      "reverse_patch_paths": 12,
+      "digest": "matches retained evidence",
+      "applied": false,
+      "removed_writer_helpers": 3,
+      "repository_writes": "LinkedSpec only"
+    },
+    "publication_recheck": {
+      "remote_main": "fd3e328d5dd5c80981a1c3b8496a27270291f7b8",
+      "read_only_ls_remote_exit": 0,
+      "ancestry": [
+        "effe3e7b2544abf79f7786a7aa54e77b1893880e",
+        "77d7b3db1b65a2c83072447a6aec77456ca7aede",
+        "df845ce615df20929ac501b61984fbf9d29225ca",
+        "6e37288f7564d99480f1353231b226a678a9568f"
+      ],
+      "all_are_ancestors": true
+    }
+  },
+  "next": ".1.3.2 LinkedSpec-only canonical closeout; then startup .93/.92/.94/.95/.51. No other repository writes.",
+  "unauthorized_archogen_write": {
+    "states": {
+      "LS-001": "fixed-upstream",
+      "LS-002": "fixed-upstream",
+      "LS-003": "fixed-upstream",
+      "LS-004": "fixed-upstream",
+      "LS-005": "fixed-upstream",
+      "LS-006": "withdrawn",
+      "LS-007": "no-action"
+    },
+    "unchanged_original_files": 36,
+    "notice_sha256": "661e8fdec916d5215e99f139c6eee092b95a0ca18ddb383a0aec98a2b881e561",
+    "original_feedback_files": 43,
+    "recipient_base": "82af67a331f9e0472d0ed28741c931463386f8a8",
+    "published_fix": "fd3e328d5dd5c80981a1c3b8496a27270291f7b8",
+    "application_code_vendor_pins_and_live_milestones": "unchanged",
+    "memory_lines": 43,
+    "prior_fix_ancestry_checks": 4,
+    "commit": "82ee99a05ee55babdf6ea49fb719707a030b8700",
+    "commit_subject": "ARCHOGEN-LINKEDSPEC-0045 (leaf M1.18): record published upstream fixes",
+    "recipient_source": "../archogen",
+    "notice_path": "docs/feedback/linkedspec/issues/LS-004-bootstrap-false-success/UPSTREAM.md",
+    "changed_files": [
+      "CHANGELOG.md",
+      "DEV_NOTES.md",
+      "MEMORY.md",
+      "docs/feedback/linkedspec/INDEX.md",
+      "docs/feedback/linkedspec/README.md",
+      "docs/feedback/linkedspec/issues/LS-001-cargo-workspace-collision/README.md",
+      "docs/feedback/linkedspec/issues/LS-002-multi-form-truncation/README.md",
+      "docs/feedback/linkedspec/issues/LS-003-token-kind-erasure/README.md",
+      "docs/feedback/linkedspec/issues/LS-004-bootstrap-false-success/README.md",
+      "docs/feedback/linkedspec/issues/LS-004-bootstrap-false-success/UPSTREAM.md",
+      "docs/feedback/linkedspec/issues/LS-005-guide-ordering/README.md",
+      "docs/tasks/M1.md"
+    ],
+    "commit_exit": 0,
+    "doctrines": 13,
+    "post_commit_status": "clean",
+    "brief_bytes": 0,
+    "background_check": "handoff: OK",
+    "external_push": "not performed; notice is committed and available in the director-supplied local recipient repository",
+    "independent_consumer_acceptance": "pending; no ARCHOGEN application test run claimed",
+    "authorization": "Not authorized. The agent wrongly inferred write permission from a notification request and the recipient protocol. The director explicitly forbids all writes to other repositories.",
+    "disposition": "ARCHOGEN owns any correction or revert. No further recipient writes or push will be performed.",
+    "auxiliary_writes": [
+      ".app-data/upstream-notice27/commit.log and local temporary directory",
+      "git_message_brief.txt used and cleared",
+      "Git commit/index metadata and hook-regenerated Knowledge Map (no content change in the latter)"
+    ],
+    "last_read_only_observation": "Clean at the incident commit after the director objected; no new writes followed."
+  },
+  "stopped_closeout": {
+    "session": 8638,
+    "exit": 143,
+    "method": "TERM to exact LinkedSpec managed wrapper77076, then consume session result",
+    "receipt": "none; interrupted run is not acceptance",
+    "log": ".linkedspec-data/scratch/ls004-notice27/canonical.log"
+  },
+  "recovery_material": {
+    "path": "docs/incidents/2026-09-27-archogen-82ee99a-reverse.patch",
+    "sha256": "874eb11e4e822b4f338e1b6f9e593b999ef07b3483a66d4f97f4fccdcc4ac504",
+    "read_only_git_apply_check_exit": 0,
+    "applied": false,
+    "owner": "ARCHOGEN; the director reaffirmed read-only ownership, so no permission question remains pending."
+  },
+  "removed_local_writer_helpers": [
+    {
+      "path": ".linkedspec-data/scratch/ls004-notice27/own_archogen_notice.py",
+      "sha256": "e76455867f785f13ddf983db1f74577c86c1e53fb645d02656bc3aa4e688c464"
+    },
+    {
+      "path": ".linkedspec-data/scratch/ls004-notice27/write_archogen_notice.py",
+      "sha256": "942f09eadb023311a0b126dfc676ab3acc4e358c37478d5b2b22caa456701a9e"
+    },
+    {
+      "path": ".linkedspec-data/scratch/ls004-notice27/finalize_archogen_notice.py",
+      "sha256": "ac8c1e8c74c5f863de1fafce060a9bcd0d88bfc6149495285a1c576098f56a6c"
+    }
+  ]
+}

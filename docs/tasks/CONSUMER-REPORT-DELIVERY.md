@@ -101,7 +101,7 @@ blocked SEMULITH/ARCHOGEN consumers over separately discovered validator work.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `CONSUMER-REPORT-DELIVERY.6` | `done` | Exact fix ledger and historical build distinction recorded; RGX-CONSUMER-BUILD-REPORTS.1 retains the open September report. |
+| 1 | `CONSUMER-REPORT-DELIVERY.6` | `done` | Exact fix ledger and historical build distinction recorded; the September remedy is published at fd3e328d5. RGX-CONSUMER-BUILD-REPORTS.1.3.1 records the unauthorized recipient write; final local closeout is .1.3.2. |
 
 ## Decisions and Boundaries
 

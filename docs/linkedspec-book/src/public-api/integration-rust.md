@@ -748,8 +748,7 @@ verification. OS runtime libraries remain platform dependencies.
 
 The earlier grammar/workspace repair baseline is
 `f60a70df37159c0e42d66ee5f08a959821c7e08d`. LS-004 additionally requires the
-`RGX-CONSUMER-BUILD-REPORTS.1.2 - adopt verified LS-004 remedy` commit or a
-compatible descendant. Select that revision in the application's LinkedSpec
+published `fd3e328d5dd5c80981a1c3b8496a27270291f7b8` commit or a compatible descendant. Select that revision in the application's LinkedSpec
 submodule, rebuild the native consumer, and commit the updated application pin. Fetching source alone does not
 replace an already built executable or its packaged grammar files.
 
@@ -761,10 +760,13 @@ The reports require different consumer changes:
 | ARCHOGEN LS-002 / LS-003 and SEMULITH LS-002 | Use `specs/SExprDocumentV1.spec`, select `Document`, and consume its tagged result. Use the separate `sexpr_file` example for files. The old `lispish_file` adapter still expects historical head/tail values. | `77d7b3db1`, `df845ce61` |
 | ARCHOGEN LS-001 and SEMULITH LS-003 item 1 | Keep the example's workspace boundary and the enclosing application's `exclude = ["vendor/linkedspec"]` entry. Follow the workspace setup above before preparation/build. | `effe3e7b2` |
 | ARCHOGEN LS-005 and SEMULITH LS-003 items 2–3 | Follow the linked preparation steps before either text or file use; optional test repositories need not be initialized for native use. | `6e37288f7` |
-| ARCHOGEN LS-004 | Update LinkedSpec to the adoption commit below, initialize its RGX pin, regenerate through the published bootstrap and rebuild from fresh outputs. Failed prerequisites now stop preparation without false seed-success text. | `RGX-CONSUMER-BUILD-REPORTS.1.2`; adopted RGX `f6e5acdc99720349d1e3ecef9f821f365c4db19c` |
+| ARCHOGEN LS-004 | Update LinkedSpec to the adoption commit below, initialize its RGX pin, regenerate through the published bootstrap and rebuild from fresh outputs. Failed prerequisites now stop preparation without false seed-success text. | `fd3e328d5`; adopted RGX `f6e5acdc99720349d1e3ecef9f821f365c4db19c` |
 
 The [ARCHOGEN LS-004 verification record](https://github.com/rdje/linkedspec/blob/main/docs/upstream/rgx/bootstrap-progress-status.md)
 preserves the original reproduction and the published remedy's failure/success/reuse evidence.
+The fix was published on September27 after canonical verification. The five
+ARCHOGEN requirements have upstream remedies; its own adoption and verification
+remain pending. SEMULITH independently verified and closed all three of its reports.
 
 The document grammar and native file consumer were independently admitted in
 `92f58b56c`. The table names implementation or documentation repairs; admission
@@ -786,9 +788,7 @@ From the application root, fetch and select the tested source revision:
 
 ```sh
 git -C vendor/linkedspec fetch origin
-LINKEDSPEC_REV=$(git -C vendor/linkedspec log origin/main --format=%H -1 \
-  --fixed-strings --grep='RGX-CONSUMER-BUILD-REPORTS.1.2 - adopt verified LS-004 remedy')
-test -n "$LINKEDSPEC_REV" || exit 1
+LINKEDSPEC_REV=fd3e328d5dd5c80981a1c3b8496a27270291f7b8
 git -C vendor/linkedspec checkout "$LINKEDSPEC_REV"
 git -C vendor/linkedspec submodule update --init rgx
 ```

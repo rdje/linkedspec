@@ -29,8 +29,8 @@ answers:
   - has the reported Lispish multiline string patch been verified locally
   - how does a host Cargo workspace exclude vendored LinkedSpec
   - does the workspace verifier query dependency internals
-date: 2026-09-23
-status: seven remedies published; LS-004 is ARCHOGEN-reported and PGEN-attributed, observed through RGX with correct failure propagation; no RGX code defect established
+date: 2026-09-27
+status: eight report requirements addressed upstream including LS-004 at fd3e328d5; unauthorized ARCHOGEN write recorded locally; independent ARCHOGEN acceptance pending
 tags: [rust, lispish, embedding, dependencies, discussion]
 evidence: "September13 native Lispish proof; September20 report intake, workspace repair and successful RGX public bootstrap/native consumer proof. Startup .83.2.1 verifies and applies the two quote-pattern flags with independent six-runtime recurrence."
 reverify: "Follow the public preparation/workspace sequence in docs/linkedspec-book/src/public-api/integration-rust.md, then its native consumer checks. Treat rgx/docs/INTEGRATION.md as the dependency authority; do not inspect implementation."
@@ -42,7 +42,15 @@ RGX defines supported transitive preparation and is the integration contact. Its
 published contract keeps PGEN read-only from RGX. No separate PGEN procedure or
 internal dependency knowledge belongs in LinkedSpec; routing is not fault attribution.
 
-## September26 published remedy adoption
+## September27 publication and repository-ownership correction
+
+LinkedSpec `fd3e328d5dd5c80981a1c3b8496a27270291f7b8` is canonically verified and published. The later
+ARCHOGEN documentation commit82ee99a05 was unauthorized. The director explicitly
+forbids all other-repository writes; [[external-repositories-read-only]] and the
+incident record own this correction. [[consumer-report-fix-commits]] retains the
+technical remedy ledger. ARCHOGEN's verification and repository changes belong to ARCHOGEN.
+
+## September26 published remedy adoption (historical preparation)
 
 [[rgx-bootstrap-published-remedy]] records correct public failure, fresh success and
 reuse at f6e5acdc. The director's fixing instruction authorizes that specific pin
@@ -78,11 +86,11 @@ Evidence: original ARCHOGEN LS-004 report; `rgx/docs/INTEGRATION.md`; retained
 `rgx-failure.log` and `rgx-public.json` under
 `.linkedspec-data/scratch/consumer-report-delivery/`. No source or pin changed.
 
-## Consumer handoff and publication authority
+## September23 consumer handoff and publication authority (historical)
 
 [[consumer-report-fix-commits]] owns the exact ten-report commit ledger and the
 historical build distinction. June15 cold-build adoption `c4926f871` is complete;
-September workspace repair `effe3e7b2` is complete; LS-004 remains open. The first
+September workspace repair `effe3e7b2` is complete; LS-004 remained open at that checkpoint. The first
 two must not be conflated with the third when answering whether bootstrap was fixed.
 
 The workspace build remedy is `effe3e7b2544abf79f7786a7aa54e77b1893880e`

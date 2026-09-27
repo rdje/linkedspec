@@ -6,8 +6,8 @@ answers:
   - "can LS-004 be called fixed at LinkedSpec retained RGX pin"
   - "why does adopting the LS-004 remedy require director authorization"
   - "what remains after public bootstrap remedy verification"
-date: 2026-09-26
-status: upstream public remedy verified; authorized adoption under RGX-CONSUMER-BUILD-REPORTS.1.2
+date: 2026-09-27
+status: remedy adopted and canonically published at fd3e328d5; unauthorized recipient write recorded under .1.3.1; ARCHOGEN verification pending
 tags: [consumer-reports, rgx, bootstrap, public-interface, adoption]
 evidence: "RGX-CONSUMER-BUILD-REPORTS.1.1: retained failure/reuse; published f6e5acdc two accurate prerequisite failures, fresh bootstrap success and two reuse controls; exact public logs and source/report/cache hashes in docs/checkpoints/RGX-CONSUMER-BUILD-REPORTS.1.1.json. No implementation inspection or pin change."
 reverify: "Read docs/upstream/rgx/bootstrap-progress-status.md and the named checkpoint; use only the chosen revision's published docs/INTEGRATION.md and make bootstrap on isolated repository-local storage. Keep fresh failure separate from already-prepared reuse."
@@ -46,3 +46,12 @@ checkout initialization, including a large LLVM transfer visible in public outpu
 This is a dated preparation observation, not an implementation-derived dependency
 procedure or future timing guarantee. All storage was repository-local; public
 Cargo cache copy was verified byte-for-byte and no old compiled outputs were reused.
+
+## September27 delivery
+
+Adoption `fd3e328d5dd5c80981a1c3b8496a27270291f7b8` passes exact canonical acceptance and is published
+with matching remote read-back. The subsequent ARCHOGEN documentation commit was
+unauthorized; [[external-repositories-read-only]] records the binding boundary and
+[[consumer-report-fix-commits]] separates the technical fixes from that incident.
+ARCHOGEN alone owns its repository disposition and downstream verification. Final
+LinkedSpec-only parent closeout remains .1.3.2.

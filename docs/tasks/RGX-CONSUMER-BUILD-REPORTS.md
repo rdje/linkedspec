@@ -9,11 +9,11 @@ internal dependency knowledge belongs in LinkedSpec; routing is not fault attrib
 ## Metadata
 
 - Tree ID: `RGX-CONSUMER-BUILD-REPORTS`
-- Status: `active` / verified adoption complete; exact canonical admission and publication pending
+- Status: `active` / LS-004 remedy published; director forbids all writes to other repositories; unauthorized ARCHOGEN documentation commit requires incident handling
 - Roadmap lane: `Rust downstream integration / upstream issue follow-up`
 - Created: `2026-09-20`
 - Last updated: `2026-09-27`
-- Owner: LinkedSpec adoption/public verification and authorized completion notice; RGX is integration contact; affected upstream maintainer owns implementation repair
+- Owner: LinkedSpec adoption, public verification and local handoff/incident records; RGX is integration contact; affected upstream maintainer owns implementation repair. Every other repository is read-only.
 
 ## Goal
 
@@ -29,6 +29,7 @@ September26 fixing instruction permits only the verified RGX gitlink adoption in
   Status: `active`
   Goal: Resolve public build reports through upstream-published fixes.
   Children: `.1`
+  Verification: Published fd3e328d5 fixes the technical report; .1.3.1 records the unauthorized recipient write and .1.3.2 retains final local closeout. No recipient acceptance or write permission is inferred.
 
 - ID: `RGX-CONSUMER-BUILD-REPORTS.1`
   Status: `active`
@@ -38,8 +39,8 @@ September26 fixing instruction permits only the verified RGX gitlink adoption in
   Dependencies: Integration `.8.3` supplies the report; CONSUMER-REPORT-DELIVERY.2 reverifies it, .3 publishes the LinkedSpec fixes and .4 records the director-owned relay.
   Acceptance: Preserve exact public reproduction and observed status; receive an upstream response or published resolution; verify through the supported interface and record remaining limitations. Do not claim a fixed issue merely because a downstream guide uses the correct entry point. The director will relay the local report via RGX as the integration contact. Preserve ARCHOGEN's PGEN component attribution as reported, not independently proven; RGX correctly propagates the observed failure and no RGX implementation defect is established. This session must not post an external issue; there is no pending external-post permission request. A response alone does not establish repair: retain the failure exit status, verify accurate failure-path progress text, and preserve supported successful and already-prepared public bootstrap behavior.
   Verification: September23 CONSUMER-REPORT-DELIVERY.2 reproduces the public failure at pinned RGX8763a0e6: exit2, missing package, misleading seed line and no final completion. Prepared public bootstrap exits0 with its documented reusable no-op outcome. Report and log hashes are refreshed. Delivery .3 is published at a8d34c84595d46c24cd1820d5fc0414261706412 (exact remote read-back and source-baseline ancestry PASS). September23 director instruction assigns external communication to the director and local feedback tracking to LinkedSpec under delivery .4. Delivery .5 corrects the contact-versus-component conflation against the original report, retained public output and published integration contract. No external message was sent by this session. Upstream diagnosis/repair and post-fix verification remain pending.
-  September26 continuation: .1.1 verifies the published remedy through failure/success/reuse at f6e5acdc. Retained8763 is still affected; .1.2 now owns authorized pin adoption, native consumer proof and canonical verification. The parent remains open until that retained-checkout repair is admitted.
-  Commit: `pending`
+  September26 continuation (historical): .1.1 verifies public failure/success/reuse at f6e5acdc. The adopted remedy is canonically published at fd3e328d5. September27 correction: the notification request did not authorize modifying ARCHOGEN; its documentation commit82ee99a05 is an incident owned by .1.3.1. Other repositories are strictly read-only; final LinkedSpec-only closeout remains .1.3.2.
+  Commit: `pending` (final local closeout .1.3.2).
 
 - ID: `RGX-CONSUMER-BUILD-REPORTS.1.1`
   Status: `done`
@@ -65,7 +66,7 @@ September26 fixing instruction permits only the verified RGX gitlink adoption in
   Status: `done`
   Goal: Make the verified LS-004 remedy available in LinkedSpec through an explicitly authorized RGX pin update and complete consumer verification.
   Activation: Clean 7c2acb5102bd54cb21c325193f5368b806d4cb08, brief0 and no jobs. Public remedy evidence, integration contract, affected consumer checks and scoped book/roadmap owners recovered.
-  Authorization: After the retained8763/published-remedy finding, the director instructed "just focus on fixing that issue" and then "Just let me and ARCHOGEN know whenever you are done solving this bug." This authorizes adoption of the specifically identified, verified RGX f6e5acdc remedy and notification after verified publication. The exception is limited to this RGX gitlink; dependency implementation inspection/patches and unrelated pin changes remain prohibited. The latest notification instruction supersedes the earlier director-only relay for this completion notice.
+  Authorization: After the retained8763/published-remedy finding, the director instructed "just focus on fixing that issue" and then "Just let me and ARCHOGEN know whenever you are done solving this bug." This authorizes adoption of the specifically identified, verified RGX f6e5acdc remedy and notification after verified publication. The exception is limited to this RGX gitlink; dependency implementation inspection/patches and unrelated pin changes remain prohibited. The notification request does not authorize modifying another repository; the director explicitly clarified this on September27. The unauthorized ARCHOGEN documentation write is recorded under .1.3.1.
   Dependencies: .1.1 verifies public bootstrap at f6e5acdc99720349d1e3ecef9f821f365c4db19c.
   Verification tier: `canonical`
   Focused checks: Public bootstrap failure/success/reuse evidence; clean exact RGX revision; rebuilt native Rust and maintained word/Lispish/document consumers; workspace and public-loader compatibility; mdBook and synchronized current status; normal doctrines/history/memory/diff.
@@ -93,18 +94,38 @@ September26 fixing instruction permits only the verified RGX gitlink adoption in
   Commit: `RGX-CONSUMER-BUILD-REPORTS.1.2 - adopt verified LS-004 remedy`; derive landed identity from Git.
 
 - ID: `RGX-CONSUMER-BUILD-REPORTS.1.3`
+  Status: `active`
+  Goal: Record the published LS-004 remedy and provide a handoff inside LinkedSpec, correcting the unauthorized ARCHOGEN write.
+  Children: `.1.3.1`, `.1.3.2`
+  Director correction: All other repositories are strictly read-only. The request to notify ARCHOGEN and its feedback protocol did not authorize editing or committing there. The director reiterated this after the incident and assigned changes there exclusively to ARCHOGEN; no revert or further write will be attempted by LinkedSpec.
+  Incident: The agent created ARCHOGEN commit82ee99a05ee55babdf6ea49fb719707a030b8700 in twelve documentation files, plus ignored verification scratch/logs, and used/cleared its brief. It did not amend prior commits, alter application code/vendor pins or push ARCHOGEN. The original canonical closeout8638 was stopped via its exact managed wrapper and consumed exit143; it supplies no receipt. Published fixfd3e328d5 and its complete canonical acceptance remain valid.
+  Acceptance: Commit an accurate local incident record and permanent read-only boundary; preserve the published remedy and original evidence; let ARCHOGEN control disposition of its repository. Complete the remaining LinkedSpec-only parent closeout through exact canonical proof.
+  Commit: `pending`
+
+- ID: `RGX-CONSUMER-BUILD-REPORTS.1.3.1`
+  Status: `done`
+  Goal: Correct the authorization record, account for every known ARCHOGEN write and preserve reviewable recovery material in LinkedSpec only.
+  Activation: fd3e328d5dd5c80981a1c3b8496a27270291f7b8; the earlier nineteen-file documentation candidate was uncommitted when the director objected. No completed fix is rolled back or republished.
+  Verification tier: `focused`
+  Focused checks: Exact incident commit/file inventory, local reverse-patch digest and already-completed read-only applicability check; corrected rendered book and current consumer claims; Knowledge/history/memory, all doctrines and diff; no further writes outside LinkedSpec.
+  Canonical trigger: Final clean push and the separate .1.3.2 parent closeout; this leaf records the incident and existing publication without closing a parent or moving runtime contracts/infrastructure.
+  Ownership: This leaf owns all pending local delivery/status edits, the required lossless notes rollover, AGENTS/MEMORY read-only boundary, an incident fact/record and local reverse patch. The exact patch path alone receives a whitespace attribute because unified-diff blank context lines require their literal space marker; preserve its recorded digest. Remove unsafe external-write helper scripts from LinkedSpec scratch. Do not touch ARCHOGEN, including its ignored artifacts or commit history.
+  Acceptance: The records identify the write as unauthorized, distinguish actual upstream fixes from consumer acceptance, and leave ARCHOGEN in control of recovery. The director has reaffirmed read-only ownership; no authorization question remains pending and no external revert is authorized.
+  Verification: Corrected mdBook build exits0; two rendered pages pass ten exact text checks, the upgrade fragment/link and literal published source pin. Local reverse patch SHA-256 and all twelve paths match the retained incident inventory; patch remains unapplied. Three unsafe local writer helpers are absent. Read-only remote main still equals fd3e328d5; all four earlier implementation/documentation fix commits are ancestors. Knowledge synchronization, both history-pressure checks, memory, all nine doctrines and diff are required at landing. No further other-repository write occurred. Exact evidence: docs/checkpoints/RGX-CONSUMER-BUILD-REPORTS.1.3.1.json.
+  Commit: `RGX-CONSUMER-BUILD-REPORTS.1.3.1 - record publication and repository-boundary violation`; derive landed identity from Git.
+
+- ID: `RGX-CONSUMER-BUILD-REPORTS.1.3.2`
   Status: `pending`
-  Goal: Publish the verified LS-004 adoption and notify the director and ARCHOGEN with the exact available revision and consumer adoption steps.
-  Dependencies: .1.2 must land with native and exact canonical acceptance. Publication must be verified by remote read-back before any completion notice is sent.
-  Planned checks: Exact clean Git/receipt state, push and remote ancestry; book adoption lookup; original ARCHOGEN feedback protocol and recipient repository state; durable completion notice; no downstream acceptance claim.
-  Acceptance: Notify through the supplied ARCHOGEN feedback protocol or an available identified communication channel. Preserve ARCHOGEN's active work. Use `fixed-upstream`, not `verified`, unless ARCHOGEN independently accepts its own rerun. Commit local delivery evidence and close the bounded report tree; independent startup repairs remain open.
+  Goal: Complete the corrected LinkedSpec-only consumer-report closeout after .1.3.1 is cleanly committed.
+  Planned checks: Accurate local handoff/incident boundary, no new recipient writes, exact canonical acceptance and clean final publication. ARCHOGEN's own repository disposition and downstream verification remain its owner's responsibility.
+  Acceptance: Close only LinkedSpec's bounded report work, preserve all unrelated defect owners, and resume startup .93/.92/.94/.95/.51. Never claim the unauthorized recipient commit as authorized delivery or consumer acceptance.
   Commit: `pending`
 
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `RGX-CONSUMER-BUILD-REPORTS.1.3` | `pending` | Publish the accepted fix and send the authorized ARCHOGEN completion notice; SEMULITH verification is reconciled and all three cases are closed. |
+| 1 | `RGX-CONSUMER-BUILD-REPORTS.1.3.2` | `pending` | Canonical LinkedSpec-only closeout after the committed local correction, then startup .93. |
 
 ## Original director handoff and September26 continuation
 

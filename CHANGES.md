@@ -12,6 +12,24 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-09-27 — RGX-CONSUMER-BUILD-REPORTS.1.3.1 records publication and the repository-boundary violation
+
+- LS-004 adoption `fd3e328d5dd5c80981a1c3b8496a27270291f7b8` is canonically verified and published with exact
+  remote read-back. The book now pins the published revision and preserves consumer
+  adoption requirements. SEMULITH's three independent closures remain recorded.
+- The agent's ARCHOGEN commit `82ee99a05ee55babdf6ea49fb719707a030b8700` was unauthorized. Record its twelve
+  changed documents, auxiliary scratch/log/Git writes and an exact unapplied reverse
+  patch inside LinkedSpec. The director reaffirmed that ARCHOGEN alone owns changes
+  there; no further external write, revert, cleanup or push is authorized.
+- Persist the read-only boundary in AGENTS, the Knowledge Map and MEMORY. Correct
+  authorization/notification claims throughout current local records. The interrupted
+  closeout8638 exited143 and supplies no receipt; final parent closure remains .1.3.2.
+- Focused proof: original publication/receipt, exact incident inventory and local patch
+  hash; corrected book render/content; Knowledge/history/memory, all doctrines and diff.
+  No runtime change or downstream application acceptance is claimed.
+- Required notes rollover preserves123 clean-source lines/26553 bytes in immutable
+  segment4968 under unchanged limits. Evidence: docs/checkpoints/RGX-CONSUMER-BUILD-REPORTS.1.3.1.json.
+
 ## 2026-09-27 — RGX-CONSUMER-BUILD-REPORTS.1.2 - adopt verified LS-004 remedy
 
 The authorized RGX gitlink advances from8763a0e6 to f6e5acdc99720349d1e3ecef9f821f365c4db19c,
