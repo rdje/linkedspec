@@ -12,6 +12,17 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-09-27 — Typed Rust context outcomes and concurrent emitted test ownership
+
+Use Result<Value,i32> in the context checker: only public Exit variants supply a rejection status, so successful
+null stays distinguishable. Exact authored statuses1/2/3 survive all six carriers; four retained engines recover
+136 times, while serialized/emitted entries prove per-call isolation. Actual child status and exactly four
+executed tests prevent successful builds from masquerading as execution proof. Original nesting remains exact.
+Adding the second emitted fixture exposed PID-plus-clock allocation collisions between test threads. A process-
+local atomic sequence makes those names distinct; exclusive create_dir still refuses pre-existing paths.
+The final concurrent combined run passes both children and all eight outer/direct-dependent tests. Shared
+stores, runtime code, original fixtures, root lockfile and generated contract do not change.
+
 ## 2026-09-27 — Native adapter exit policy is separate from grammar diagnosis
 
 The published integration consumers choose process exit1 on failure even when the context grammar exits2 or3.

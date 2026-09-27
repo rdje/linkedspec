@@ -39,8 +39,8 @@ For example, a grammar that tentatively builds an AST must separate recognition 
 establish a different, explicitly accepted mechanism. Merely adding alternate syntax would not solve that requirement.
 
 The owning task is `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1`; its first inventory records existing contracts and exact
-backend consumers. The state/control/result inventory is also recorded. Bounded nesting is reconciled; context-name Perl proof
-is described below, with other context carriers and lossless extraction still pending before gap selection.
+backend consumers. The state/control/result inventory is also recorded. Bounded nesting is reconciled; context-name Perl and Rust proof
+is described below, with remaining context carriers and lossless extraction still pending before gap selection.
 The format program's `.1` readiness gate remains pending. The original catalog and parked language extension retain
 all their conformance, Unicode, diagnostics, performance and backend obligations.
 
@@ -269,8 +269,19 @@ bash tools/run_python_project_data.sh tests/language-readiness/nested-tree/verif
 Replace `rust` with `perl`, `dart`, `julia`, `puc` or `luajit`. Omitting `--fixture` retains the original
 nesting trial. Both fixtures pass on all six routes after this verifier extension.
 
-Other backends' context-name reconstructed/generated/emitted and retained-engine rejection-recovery proofs
-remain separate work. These native results establish bounded composition of captures, lexical comparison and
+Rust additionally verifies six typed routes: native and JSON-reconstructed engines, both engines with generated
+plans, the public serialized v2 entry, and an independently compiled emitted module. Each runs the same 90 calls
+and three mutations. The four retained-engine routes each recover immediately after 34 typed rejections, for
+136 transitions. Serialized/emitted entry functions create an engine per call and establish call isolation.
+Every rejected input must carry its exact typed status; a successful null value cannot count as rejection.
+Both nesting and context emitted modules must compile and execute in real fresh Cargo children.
+
+```sh
+bash tools/run_cargo_local.sh test --locked --offline --manifest-path rust/Cargo.toml \
+  -p linkedspec-runtime --test nested_tree_readiness -- --nocapture
+```
+
+Dart, Julia and both Lua context-name carriers and retained-engine recovery remain separate work. These native results establish bounded composition of captures, lexical comparison and
 recursive state; they do not establish a general format campaign, indentation handling, arbitrary-depth safety
 or speculative rollback.
 

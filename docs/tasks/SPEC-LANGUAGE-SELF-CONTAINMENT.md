@@ -486,10 +486,29 @@ used by ordinary `.spec` syntax on every backend.
 
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.3`
-  Status: `pending`
+  Status: `done`
   Goal: Verify Rust context-name reconstructed/generated/v2/emitted routes, exact typed rejection/recovery and grammar mutations.
   Dependencies: `.1.1.3.2.2`
   Acceptance: Use unchanged shared oracles and distinguish retained-engine restoration from per-call isolation; require fresh child exit success and exact completion.
+  Activation: Cleanc4e1534da918ace02cc03aba28c021e581df54f0; all-six native context/default proof committed, all nine hooks/post-pointer pass, brief0 and no pending jobs.
+  Scope: Extend existing Rust readiness consumer and emitted-crate harness; add a shared context checker using typed Result values/statuses. Reuse repository-local scratch/target/dependencies and unchanged context/nesting fixtures. No runtime, schema, lockfile or storage policy change planned.
+  Verification tier: `focused`
+  Focused checks: Six context routes with90 original calls/three mutants each and136 retained-engine recovery transitions; original Rust nesting carrier tests; fresh child actual success/four executed modules per fixture; leading-trivia and strict-document dependents; changed-file formatting, book, Knowledge, memory, histories, doctrines and diff hygiene.
+  Canonical trigger: None for bounded test/carrier proof of existing semantics; .1.1.3.2.7 owns canonical reconciliation. Split and escalate if production contract or infrastructure repair is required.
+  Owned test defect (immediate priority): The first four-test Rust run fails one emitted test with AlreadyExists at LocalCrate::new while its parallel peer passes. PID plus SystemTime nanoseconds is not a unique name within one process; adding the second emitted fixture makes the existing test helper race observable. Repair within this leaf with a process-local atomic sequence, retain exclusive create_dir and rerun both children concurrently. No shared storage policy or production change.
+
+  Verification: Final combined Rust run exits0: readiness4, leading-trivia3 and strict-document1; both fresh emitted children exit0 and execute exactly four tests. Six context routes each pass90 calls/three mutants; four retained routes total136 recovery transitions. Original nesting routes remain40/three mutants. Changed-file formatting passes; fixtures, old checker and root lockfile are unchanged.
+  Evidence: docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.3-verification.json and docs/knowledge/context-names-rust-carrier-readiness.md distinguish the initial allocation failure from final GREEN.
+  Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.3 - verify Rust closing-name carriers`.
+
+### `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.3` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Rust context carriers lacked typed authored-status proof. The first combined four-test run also reproduces AlreadyExists in one emitted child allocator while its parallel peer succeeds.
+- [x] **ROOT CAUSE (WHY + WHERE)** — The public six-route harness can share independent oracles but needs Result values/statuses rather than null-like rejection. LocalCrate::new used only PID and clock time, allowing same-process thread collisions.
+- [x] **FIX** — Add exact typed context checks and comparison/state/span variants to the existing carrier and fresh emitted harness; add an atomic allocation sequence while retaining exclusive directory creation and local roots.
+- [x] **ADDRESSED (verified)** — Final readiness4 tests pass, with two real children each executing four checks and exiting0. Every context route verifies90 original calls and three mutants; four retained engines verify136 immediate recoveries. No result counts as rejection unless its public typed Exit status matches.
+- [x] **NO REGRESSION** — Original nesting40-call/three-mutant routes pass unchanged; leading-trivia3 and strict-document1 pass. Original fixture pairs, old Rust checker and root lockfile remain byte-exact. Changed-file format and book checks pass; ordinary landing doctrines apply.
+- [x] **LOCKSTEP** — Context ledger, public book, Knowledge, checkpoint, task frontier, roadmap leads, MEMORY and live/bounded histories agree. Dart .1.1.3.2.4 follows; canonical context parent .7 and format admission remain separate.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.4`
   Status: `pending`
@@ -734,7 +753,7 @@ used by ordinary `.spec` syntax on every backend.
 | 14 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.3` | `done` | Bounded nesting evidence/authoring limits reconciled; exact canonical receipt governs closeout. |
 | 15 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.1` | `done` | Perl native/fresh emitted context-name proof:11/17 cases,90 calls and34 recoveries per route. |
 | 16 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.2` | `done` | Context11/17/22 and original-default6/7/12 pass all six native routes. |
-| 17 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.3` | `pending` | Next: Rust context-name reconstructed/generated/v2/emitted and typed recovery proof. |
+| 17 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.4` | `pending` | Dart context-name reconstructed/generated/v2/emitted and typed recovery proof. |
 
 ## Decisions
 

@@ -1,11 +1,11 @@
 # MEMORY
 
-- activation_commit: `8b11f40705b31e9c83037602e67758c81a676bd7` — clean activation base for all-six context-name native proof.
-- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.2 - verify native closing-name parity`.
-- active_work_unit: none — all-six context-name public native proof complete.
-- next_action: Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.3 for Rust context-name reconstructed/generated/v2/emitted routes and typed recovery/mutations.
+- activation_commit: `c4e1534da918ace02cc03aba28c021e581df54f0` — clean activation base for Rust context-name carriers.
+- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.3 - verify Rust closing-name carriers`.
+- active_work_unit: none — Rust context-name carrier proof complete.
+- next_action: Activate Dart context-name carrier proof using the unchanged shared oracles and existing managed emitted-package harness.
 - in_flight_uncommitted: none.
-- blockers: all-six context-name native and Perl carrier proof complete; other carriers and lossless probes remain; .1.1.5 owns stale capability prose and startup .38/.40 recognition defects remain queued. ARCHOGEN owns downstream acceptance; named-argument and format proposals stay parked.
+- blockers: all-six context-name native and Perl/Rust carrier proof complete; other carriers and lossless probes remain; .1.1.5 owns stale capability prose and startup .38/.40 recognition defects remain queued. ARCHOGEN owns downstream acceptance; named-argument and format proposals stay parked.
   Wrapper startup .7 remains open; recovery/purge stay prohibited. No interrupted Phase0 run counts as proof.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
   active table; the task metadata doctrine inventories all consumers, permits arbitrary frontier-row rewrites,

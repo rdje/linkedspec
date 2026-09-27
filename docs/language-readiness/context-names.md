@@ -71,9 +71,9 @@ The three-level control is not arbitrary-depth/resource proof; recognition rollb
 or AST rollback. Do not generalize to indentation, XML or other standards.
 
 Perl native/fresh emitted proof above is supplemented by the all-six public-native result below.
-`.1.1.3.2.3-.6` own the other backend carriers, and `.7` owns canonical evidence/authoring reconciliation. The overall
+Rust carrier proof is recorded below; `.1.1.3.2.4-.6` own the remaining backend carriers, and `.7` owns canonical evidence/authoring reconciliation. The overall
 context objective and structured-format campaign remain open. No comparison or recursive-state primitive is
-selected for implementation on the strength of this single backend result.
+selected for implementation on the strength of these bounded results.
 
 ## Public native adapter proof
 
@@ -108,5 +108,43 @@ integration command; the existing project-local Dart/Julia/Lua stores are reused
 dependency pins and both grammar/oracle pairs stay unchanged. Both fixtures are verified on all six routes;
 exact reports, product/source/log hashes and option controls are in this leaf's checkpoint.
 
-Perl's separate fresh emitted/recovery/mutation proof is unchanged. Other backend carriers and typed recovery
-remain .1.1.3.2.3-.6, followed by canonical reconciliation under .7. No XML or broader format admission follows.
+Perl's separate fresh emitted/recovery/mutation proof is unchanged. Dart/Julia/Lua carriers and typed recovery
+remain .1.1.3.2.4-.6, followed by canonical reconciliation under .7. No XML or broader format admission follows.
+
+## Rust typed carriers and retained recovery
+
+Owner: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.3`, from clean `c4e1534da918ace02cc03aba28c021e581df54f0`.
+The existing Rust readiness harness adds the unchanged context fixture and a shared typed checker. All six
+routes execute 90 original calls and three comparison/state/span mutations, with exact authored JSON values,
+Unicode spans and rejection statuses 1, 2 and 3:
+
+| Route | Lifetime | Immediate rejection-to-success transitions |
+| --- | --- | ---: |
+| Compiled native engine | Retained | 34 |
+| JSON-reconstructed native engine | Retained | 34 |
+| Compiled engine with generated plan | Retained | 34 |
+| JSON-reconstructed engine with generated plan | Retained | 34 |
+| Public serialized v2 entry | Engine created per call | Isolation only |
+| Independently compiled emitted v2 module | Engine created per call | Isolation only |
+
+The checker matches only the public typed Exit variants and compares their exact status. Successful null
+remains an Ok value and cannot satisfy a rejection. Four retained routes establish 136 recovery transitions;
+per-call entries establish isolation. Five authored rule labels, generated plan validity and every fresh
+module's v2 metadata/source identity are checked. Both original nesting and context fixtures run through real
+child Cargo processes, each requiring exit success and exactly four executed tests. The original nesting
+oracles/checker remain unchanged, with 40 calls and three original mutations per route.
+
+The first combined run exposed a test-only naming race: PID plus clock nanoseconds can collide between threads.
+The existing exclusively owned scratch helper now adds a process-local atomic sequence, without reusing or
+removing another directory. Both fixtures keep the same local dependency store and emitted target. No runtime,
+fixture, root lockfile, generated contract or storage policy changes.
+
+```sh
+bash tools/run_cargo_local.sh test --locked --offline --manifest-path rust/Cargo.toml \
+  -p linkedspec-runtime --test nested_tree_readiness --test leading_input_trivia \
+  --test sexpr_document_v1 -- --nocapture
+```
+
+The checkpoint records the initial failure and final combined verification separately. Bounded direct-dependent
+checks cover leading trivia and the strict S-expression document. Dart, Julia and both Lua carrier proofs
+remain separate leaves; canonical context reconciliation remains .7.

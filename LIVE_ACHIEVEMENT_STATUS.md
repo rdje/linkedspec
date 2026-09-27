@@ -6,13 +6,15 @@ Ordinary .spec language readiness under SPEC-LANGUAGE-SELF-CONTAINMENT.1.1. The 
 
 ## Latest Completed Slice
 
-- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.2 - verify native closing-name parity` — context11/17/22 and original-default6/7/12 pass all six native routes. Exact values/kinds/spans/statuses and protected hashes verified; adapters exit on rejection, and Rust exposes Display text.
+- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.3 - verify Rust closing-name carriers` — six routes pass90 calls/three mutants; four retained engines verify136 recoveries. Both emitted children pass four tests; original nesting and direct dependents remain green. Test-only allocation collision repaired.
 
 ## Next Action
 
-- Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.3 for Rust context-name reconstructed/generated/v2/emitted carriers, typed recovery and mutations.
+- Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.4 for Dart context-name carriers, exact typed status/recovery and mutations.
 
 ## Recent Completions
+
+- `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.3` verifies six Rust context-name carriers and repairs parallel test allocation.
 
 - `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.2` verifies all-six native context-name parity and original-default compatibility.
 
@@ -43,8 +45,6 @@ Ordinary .spec language readiness under SPEC-LANGUAGE-SELF-CONTAINMENT.1.1. The 
 - `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.2` inventories state/computation evidence and scoping limits.
 
 - `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.1` inventories grammar/cursor/capture readiness and owns stale capability prose.
-
-- `2026-09-27` — `SESSION-STARTUP-READING.92` isolates real fallback verification and passes full Phase0.
 
 ## History
 

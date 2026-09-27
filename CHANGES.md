@@ -12,6 +12,16 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-09-27 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.3: Rust closing-name carriers
+
+Extend the existing Rust harness with exact typed context-name outcomes across six routes, each90 original
+calls and three mutations. Four retained engines verify136 immediate recoveries; public serialized/emitted
+entries prove per-call isolation. Both fresh emitted children execute four tests and exit0. Final outer tests
+pass4 readiness +3 leading-trivia +1 strict-document. Original fixtures/checker and root lockfile stay exact.
+The first combined run exposed a test allocator collision; an atomic sequence fixes same-process clock-name
+collisions while retaining exclusive creation. Formatting, book and ordinary documentation gates pass.
+Dart follows under .1.1.3.2.4; no production/schema change or broader format admission.
+
 ## 2026-09-27 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.2: native closing-name parity
 
 The unchanged context-name source/oracles pass all six public native adapters:11 accepted/17 rejected cases and
