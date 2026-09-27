@@ -71,7 +71,7 @@ The three-level control is not arbitrary-depth/resource proof; recognition rollb
 or AST rollback. Do not generalize to indentation, XML or other standards.
 
 Perl native/fresh emitted proof above is supplemented by the all-six public-native result below.
-Rust/Dart/Julia carrier proof is recorded below; `.1.1.3.2.6` owns the remaining Lua carriers, and `.7` owns canonical evidence/authoring reconciliation. The overall
+All backend carrier proofs are recorded below; `.7` owns canonical evidence/authoring reconciliation. The overall
 context objective and structured-format campaign remain open. No comparison or recursive-state primitive is
 selected for implementation on the strength of these bounded results.
 
@@ -108,8 +108,7 @@ integration command; the existing project-local Dart/Julia/Lua stores are reused
 dependency pins and both grammar/oracle pairs stay unchanged. Both fixtures are verified on all six routes;
 exact reports, product/source/log hashes and option controls are in this leaf's checkpoint.
 
-Perl's separate fresh emitted/recovery/mutation proof is unchanged. Lua carriers and typed recovery
-remain .1.1.3.2.6, followed by canonical reconciliation under .7. No XML or broader format admission follows.
+Perl's separate fresh emitted/recovery/mutation proof is unchanged. All backend carrier proofs are now recorded below; canonical reconciliation remains .7. No XML or broader format admission follows.
 
 ## Rust typed carriers and retained recovery
 
@@ -146,8 +145,7 @@ bash tools/run_cargo_local.sh test --locked --offline --manifest-path rust/Cargo
 ```
 
 The checkpoint records the initial failure and final combined verification separately. Bounded direct-dependent
-checks cover leading trivia and the strict S-expression document. Both Lua carrier proofs
-remain a separate leaf; canonical context reconciliation remains .7.
+checks cover leading trivia and the strict S-expression document. Both Lua carrier proofs are recorded below; canonical context reconciliation remains .7.
 
 ## Dart typed carriers and emitted package
 
@@ -177,7 +175,7 @@ formatting and package-context analysis pass. Directly analyzing the shared help
 cannot resolve its package import; both real emitted packages analyze the copied helper with fatal diagnostics
 and pass. This invocation limitation is recorded separately from runtime proof. No whole-package gate claim:
 the known SDK deprecations remain owned by DART-STARTUP-READING.2.25. Existing managed temporary-package cleanup,
-local stores, root lockfile and production code are unchanged. Lua proof and canonical .7 follow.
+local stores, root lockfile and production code are unchanged. Lua proof is recorded below; canonical .7 follows.
 
 ## Julia typed carriers and fresh emitted host
 
@@ -201,4 +199,32 @@ bash tools/run_julia_project_data.sh --project=julia -e 'using LinkedSpecJulia, 
 
 All 253 assertions pass: 30 context, 30 nesting, 65 existing emitter and 128 strict-document. The storage check
 still passes 22 temporary owners/five locked package trees. No private generated-family keyword, runtime,
-dependency or schema change is introduced. Both Lua ABIs and canonical context reconciliation remain open.
+dependency or schema change is introduced. Both Lua ABIs are verified below; canonical context reconciliation remains open.
+
+## PUC Lua and LuaJIT typed carriers
+
+Owner: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.6`, from clean `2a5b9c859d725c2cc6ece83c50d16ab69cc36766`.
+Each ABI independently passes five routes with 90 original calls and three context mutations per route.
+Native and SpecFile-JSON reconstructed engines each retain their instance across 34 typed rejection/immediate-
+success pairs (68 transitions per ABI). Public v2 on both compiled forms and the independently loaded emitted
+module create an engine per invocation. Only those two native routes establish retained recovery.
+
+The shared checker requires failed pcall plus the public RuntimeExitNow predicate and exact authored status.
+Successful nil cannot pass as rejection. Canonical JSON checks preserve array/harray tags, empty containers,
+scalar kinds, exact values and Unicode spans. Explicit fixture options preserve nesting defaults and original
+40-call/three-mutant proof. The unchanged context and nesting source/oracle pairs remain independent authority.
+
+Each fixture's four emitted modules run in a fresh process using the explicitly selected ABI and current
+source/native module paths. Metadata, identity and plan checks precede execution. The parent requires actual
+process success, empty stderr, an exact completion report and removal of the owned workspace. No process
+output is normalized to hide warnings or failures.
+
+```sh
+bash tools/run_lua_project_data.sh puc -e 'dofile("lua/test/rule_local_cursor_generated_source_test.lua"); dofile("lua/test/sexpr_document_v1_test.lua")'
+bash tools/run_lua_project_data.sh luajit -e 'dofile("lua/test/rule_local_cursor_generated_source_test.lua"); dofile("lua/test/sexpr_document_v1_test.lua")'
+```
+
+Both final runs pass 160 generated-v2 assertions plus 51 strict-document cases, 27 round trips and 24 retained
+recovery checks. The real storage gate passes 19 owners, three dual-ABI modules and all 30 census controls.
+No runtime, dependency, fixture, schema or storage-policy change. Known malformed-regex handling remains
+separately owned; this is no unfiltered full Lua gate or format admission. Canonical context .7 follows.

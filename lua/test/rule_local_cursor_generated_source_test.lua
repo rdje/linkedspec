@@ -430,12 +430,14 @@ io.write(json.encode(result), "\n")
   check_equal(observed.corrupt_failure.code, "generated_source_compile_failed", "fresh corrupt v2 code")
 end)
 
--- Bounded nesting uses unchanged authored data and the existing isolated-host owner.
-do
-  local fixture = "tests/language-readiness/nested-tree/"
-  local nesting = dofile(fixture .. "lua_checks.lua")
+-- Both bounded fixtures use unchanged authored data and the existing isolated-host owner.
+local function verify_readiness(config)
+  local fixture = "tests/language-readiness/" .. config.name .. "/"
+  local checks_path = "tests/language-readiness/nested-tree/lua_checks.lua"
+  local checks = dofile(checks_path)
+  local executions = 2 * (config.options.accepted_count + 2 * config.options.rejected_count)
   local original = read_file(fixture .. "grammar.spec")
-  local nesting_cases = json.decode(read_file(fixture .. "cases.json"))
+  local cases = json.decode(read_file(fixture .. "cases.json"))
   local function replace_exact(source, needle, replacement, expected_count)
     local pieces, cursor, count = {}, 1, 0
     while true do
@@ -449,15 +451,29 @@ do
     assert(count == expected_count, "exact mutation target count")
     return table.concat(pieces)
   end
-  local prefix = " if(matches(input_slice(0, cursor_pos()), /[^ \\t\\r\\n\\f\\x0B]/));\n" ..
-    "  exit_now(1);\n endif();\n"
-  local variants = {
-    { id = "original", source = original },
-    { id = "prefix", source = replace_exact(original, prefix, "", 1) },
-    { id = "gap", source = replace_exact(original, " -> Invalid { exit_now(1) }\n", "", 2) },
-    { id = "span", source = replace_exact(original,
-      "[start, cursor_pos()]", "[cursor_pos(), cursor_pos()]", 1) },
-  }
+  local variants
+  if config.context_names then
+    local comparison = "  if(str_ne(match_group(0), name));\n   exit_now(2);\n  endif();\n"
+    local recursive_edge = " -> Element { push(children, call(Element)) }\n"
+    local corrupt_edge = ' -> Element { push(children, call(Element)); name = "lost" }\n'
+    variants = {
+      { id = "original", source = original },
+      { id = "comparison", source = replace_exact(original, comparison, "", 1) },
+      { id = "state", source = replace_exact(original, recursive_edge, corrupt_edge, 1) },
+      { id = "span", source = replace_exact(original,
+        "[start, cursor_pos()]", "[cursor_pos(), cursor_pos()]", 1) },
+    }
+  else
+    local prefix = " if(matches(input_slice(0, cursor_pos()), /[^ \\t\\r\\n\\f\\x0B]/));\n" ..
+      "  exit_now(1);\n endif();\n"
+    variants = {
+      { id = "original", source = original },
+      { id = "prefix", source = replace_exact(original, prefix, "", 1) },
+      { id = "gap", source = replace_exact(original, " -> Invalid { exit_now(1) }\n", "", 2) },
+      { id = "span", source = replace_exact(original,
+        "[start, cursor_pos()]", "[cursor_pos(), cursor_pos()]", 1) },
+    }
+  end
   local modules = {}
   for _, variant in ipairs(variants) do
     local parsed = linkedspec.parse_spec_with_staged_user_function_definitions(variant.source)
@@ -471,26 +487,31 @@ do
       linkedspec.validate_generated_rule_plan_v2(carrier, carrier_plan, variant.id)
       local labels = json.array()
       for index, row in ipairs(carrier_plan) do labels[index] = row.label end
-      check_same_json(labels, json.array({ "Top", "List", "Atom", "Space", "Invalid" }),
-        variant.id .. " nesting plan")
+      check_same_json(labels, config.labels,
+        variant.id .. " " .. config.name .. " plan")
       local engine = linkedspec.runtime_engine(carrier)
       -- These two native routes retain the engine throughout each rejection/recovery sequence.
-      check(nesting.variant(variant.id, nesting_cases, function(input)
+      check(checks.variant(variant.id, cases, function(input)
         return linkedspec.runtime_parse(engine, input).value
-      end), variant.id .. " nesting native")
+      end, config.options), variant.id .. " " .. config.name .. " native")
       -- Public generated entry constructs an engine on every call.
-      check(nesting.variant(variant.id, nesting_cases, function(input)
+      check(checks.variant(variant.id, cases, function(input)
         return linkedspec.execute_generated_parser_v2(carrier, carrier_plan, input, variant.id)
-      end), variant.id .. " nesting generated")
+      end, config.options), variant.id .. " " .. config.name .. " generated")
     end
     modules[variant.id] = linkedspec.emit_lua_source_v2(
-      linkedspec.compile_spec(parsed), "nested-tree/" .. variant.id)
+      linkedspec.compile_spec(parsed), config.name .. "/" .. variant.id)
   end
 
   local owned_root
   with_temp_directory(function(root)
     owned_root = root
-    write_file(root .. "/checks.lua", read_file(fixture .. "lua_checks.lua"))
+    write_file(root .. "/checks.lua", read_file(checks_path))
+    local ids = json.array()
+    for index, variant in ipairs(variants) do ids[index] = variant.id end
+    write_file(root .. "/config.json", json.encode(json.harray({
+      name = config.name, ids = ids, options = config.options, executions = executions,
+    })))
     write_file(root .. "/cases.json", read_file(fixture .. "cases.json"))
     for id, module_source in pairs(modules) do write_file(root .. "/" .. id .. ".lua", module_source) end
     write_file(root .. "/runner.lua", [[
@@ -501,19 +522,22 @@ local checks = dofile(root .. "/checks.lua")
 local handle = assert(io.open(root .. "/cases.json", "rb"))
 local cases = json.decode(assert(handle:read("*a")))
 assert(handle:close())
+handle = assert(io.open(root .. "/config.json", "rb"))
+local config = json.decode(assert(handle:read("*a")))
+assert(handle:close())
 local modules = 0
-for _, id in ipairs({ "original", "prefix", "gap", "span" }) do
+for _, id in ipairs(config.ids) do
   local parser = assert(loadfile(root .. "/" .. id .. ".lua"))()
   checks.exact_json(linkedspec.generated_source_metadata_to_json(parser.metadata()), json.harray({
     contract_id = "linkedspec-generated-source-v2",
     format_version = 2,
-    source_identity = "nested-tree/" .. id,
+    source_identity = config.name .. "/" .. id,
   }), id .. " metadata")
   parser.validate_plan(parser.plan())
-  assert(checks.variant(id, cases, parser.execute))
+  assert(checks.variant(id, cases, parser.execute, config.options))
   modules = modules + 1
 end
-io.write(json.encode(json.harray({ modules = modules, original_executions = 40, mutations = 3 })), "\n")
+io.write(json.encode(json.harray({ modules = modules, original_executions = config.executions, mutations = 3 })), "\n")
 ]])
     local runtime = assert(os.getenv("LINKEDSPEC_LUA_TEST_RUNTIME"), "selected ABI runtime required")
     local stdout_path, stderr_path = root .. "/stdout.json", root .. "/stderr.txt"
@@ -525,14 +549,26 @@ io.write(json.encode(json.harray({ modules = modules, original_executions = 40, 
     }, " ")
     local succeeded = command_succeeded(command)
     local stdout, stderr = read_file(stdout_path), read_file(stderr_path)
-    assert(succeeded, "nesting child failed:\n" .. stdout .. stderr)
-    check_equal(stderr, "", "nesting child stderr")
+    assert(succeeded, config.name .. " child failed:\n" .. stdout .. stderr)
+    check_equal(stderr, "", config.name .. " child stderr")
     check_same_json(json.decode(stdout),
-      json.harray({ modules = 4, original_executions = 40, mutations = 3 }),
-      "nesting child completion")
+      json.harray({ modules = 4, original_executions = executions, mutations = 3 }),
+      config.name .. " child completion")
   end)
-  check(command_succeeded("test ! -e " .. shell_quote(owned_root)), "nesting child cleanup")
+  check(command_succeeded("test ! -e " .. shell_quote(owned_root)), config.name .. " child cleanup")
 end
+
+verify_readiness({
+  name = "nested-tree", labels = json.array({ "Top", "List", "Atom", "Space", "Invalid" }),
+  options = json.harray({ accepted_count = 6, rejected_count = 7, recovery_id = "nested_state",
+    span_case = "nested_state", span_end = 9 }),
+})
+verify_readiness({
+  name = "context-names", context_names = true,
+  labels = json.array({ "Top", "Element", "Text", "Space", "Invalid" }),
+  options = json.harray({ accepted_count = 11, rejected_count = 17,
+    recovery_id = "siblings_restore_parent", span_case = "nested_distinct", span_end = 17 }),
+})
 
 if #failures == 0 then
   io.stdout:write("rule-local cursor generated source: ", assertions, " assertions passed\n")

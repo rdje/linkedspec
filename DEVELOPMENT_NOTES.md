@@ -12,6 +12,15 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-09-27 — Lua context-name proof retains typed failures and selected-ABI child isolation
+
+Failed pcall plus the public RuntimeExitNow predicate and exact authored1/2/3 distinguish rejection from nil.
+Canonical JSON preserves tags/kinds, values and Unicode spans. Five routes per ABI run90 calls/three mutants;
+two native engines prove68 recoveries while generated v2/emitted entries prove per-call isolation. Explicit
+fixture options preserve the original nesting proof. Both fresh children use the selected ABI and require
+success, empty stderr, exact report and cleanup. Final PUC/LuaJIT160 plus51/27/24 document checks and real
+storage19/trio/30 controls pass. No production, oracle, malformed-regex path or generated-format change.
+
 ## 2026-09-27 — Julia context-name carriers preserve typed outcomes and fresh-world loading
 
 Explicit fixture options extend the existing checker without weakening nesting defaults. Only RuntimeExitNow

@@ -6,13 +6,15 @@ Ordinary .spec language readiness under SPEC-LANGUAGE-SELF-CONTAINMENT.1.1. The 
 
 ## Latest Completed Slice
 
-- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.5 - verify Julia closing-name carriers` — five routes90 calls/three mutants and68 retained recoveries;253 assertions pass. Both fresh emitted hosts verify actual success, exact reports and cleanup; storage remains22 owners.
+- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.6 - verify Lua closing-name carriers` — both ABIs pass five routes90 calls/three mutants and68 retained recoveries. Each passes160 v2 assertions plus strict-document proof; real storage19/trio/30 census controls passes.
 
 ## Next Action
 
-- Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.6 for Lua/LuaJIT context-name carriers, typed recovery and mutations.
+- Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.7 for canonical context-name reconciliation and bounded parent closeout.
 
 ## Recent Completions
+
+- `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.6` verifies five context-name routes on both Lua ABIs.
 
 - `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.5` verifies five Julia context-name carriers and fresh emitted hosts.
 
@@ -43,8 +45,6 @@ Ordinary .spec language readiness under SPEC-LANGUAGE-SELF-CONTAINMENT.1.1. The 
 - `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.1` verifies exact native nesting on all six runtimes.
 
 - `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.6` repairs generic bound/computed container splicing.
-
-- `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.1` repairs nested constructor values and preserves the original nesting oracles.
 
 ## History
 

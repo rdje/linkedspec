@@ -7,7 +7,7 @@ answers:
   - how many retained Rust context-name recovery transitions are verified
   - why did parallel emitted readiness crates collide despite nanosecond names
 date: 2026-09-27
-status: bounded six-route Rust proof verified; other carriers and canonical reconciliation remain
+status: bounded rust carrier proof verified; canonical context reconciliation remains
 tags: [language-readiness, context, rust, generated-source, recovery]
 evidence: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.3 verifies six routes with90 calls and three mutants each, including136 recovery transitions on four retained engines. Four outer readiness tests and four direct-dependent tests pass; two fresh emitted children each actually execute four tests and exit0. The first combined run exposed a timestamp-only scratch-name race, repaired by adding an atomic process-local sequence."
 reverify: "bash tools/run_cargo_local.sh test --locked --offline --manifest-path rust/Cargo.toml -p linkedspec-runtime --test nested_tree_readiness --test leading_input_trivia --test sexpr_document_v1 -- --nocapture"

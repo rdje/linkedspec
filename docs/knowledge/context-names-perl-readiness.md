@@ -8,7 +8,7 @@ answers:
   - what statuses distinguish invalid syntax mismatched names and missing closes
   - does the context-name probe implement XML
 date: 2026-09-27
-status: bounded Perl carrier proof verified; all-six native evidence is recorded separately
+status: bounded perl carrier proof verified; canonical context reconciliation remains
 tags: [language-readiness, context, recursion, captures, perl, generated-source]
 evidence: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.1 uses an authored37-line/five-rule grammar and28 independent cases. Both Perl routes pass90 original calls,34 immediate typed rejection recoveries and three grammar mutations. Expanded nesting suite410, direct dependents89 and unchanged managed storage27 pass. Public Get/return_descriptor and call_spec_handler_subst locate five ready rules and lexical comparison of closing capture with saved name."
 reverify: "bash tools/project_data_run.sh prove -v -Iperl t/nested_tree_readiness.t"

@@ -12,6 +12,15 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-09-27 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.6: Lua closing-name carriers
+
+Both PUC Lua and LuaJIT verify five context routes, each90 calls/three mutants and68 recoveries on two retained
+engines. Existing shared checks take explicit options and exact authored statuses while retaining nesting
+defaults. Final runs pass160 v2 assertions per ABI plus51 document cases/27 round trips/24 recoveries. Both
+fixture children require actual success, empty stderr, exact metadata/plans/report and cleanup. Storage passes
+19 owners/three dual-ABI modules/30 census controls. Original fixture pairs stay exact; no production or schema
+change. Book and durable records agree; canonical context reconciliation follows under .1.1.3.2.7.
+
 ## 2026-09-27 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.5: Julia closing-name carriers
 
 Parameterize the existing Julia readiness harness/checker for exact context statuses and comparison/state/span

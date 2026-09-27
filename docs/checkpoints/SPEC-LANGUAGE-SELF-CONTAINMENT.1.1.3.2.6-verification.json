@@ -1,0 +1,56 @@
+{
+  "owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.6",
+  "activation_commit": "2a5b9c859d725c2cc6ece83c50d16ab69cc36766",
+  "date": "2026-09-27",
+  "evidence": [
+    {
+      "command": "bash tools/run_lua_project_data.sh puc -e 'dofile(\"lua/test/rule_local_cursor_generated_source_test.lua\"); dofile(\"lua/test/sexpr_document_v1_test.lua\")'",
+      "result": "PASS160 v2 assertions +51 document cases/27 round trips/24 recoveries; five context routes90 calls/three mutants, retained68; both child status/stderr/report/cleanup pass",
+      "exit_status": 0,
+      "log": ".linkedspec-data/scratch/context-lua-puc-final.log",
+      "sha256": "6bc77fefe2ed759afe1eef1b5d83d4a38b6fd6fe09d493b63e4db7029c69068c"
+    },
+    {
+      "command": "bash tools/run_lua_project_data.sh luajit -e 'dofile(\"lua/test/rule_local_cursor_generated_source_test.lua\"); dofile(\"lua/test/sexpr_document_v1_test.lua\")'",
+      "result": "PASS160 v2 assertions +51 document cases/27 round trips/24 recoveries; five context routes90 calls/three mutants, retained68; both child status/stderr/report/cleanup pass",
+      "exit_status": 0,
+      "log": ".linkedspec-data/scratch/context-lua-luajit-final.log",
+      "sha256": "6bc77fefe2ed759afe1eef1b5d83d4a38b6fd6fe09d493b63e4db7029c69068c"
+    },
+    {
+      "command": "bash tools/test_lua_project_data_storage.sh",
+      "result": "PASS19 owners/three dual-ABI modules/30 census controls; real complete census",
+      "exit_status": 0,
+      "log": ".linkedspec-data/scratch/context-lua-storage.log",
+      "sha256": "faaa7e8f92b9d705c09bab39d193b93fa8094abbde035522a578ec635168493b"
+    },
+    {
+      "command": "bash tools/run_mdbook_local.sh",
+      "result": "PASS rendered book",
+      "exit_status": 0,
+      "log": ".linkedspec-data/scratch/context-lua-book.log",
+      "sha256": "7ef7da0a418175013819d8ebb13a9281557a67bbc66df53a5f69b5183cbca596"
+    }
+  ],
+  "source_sha256": {
+    "tests/language-readiness/nested-tree/grammar.spec": "498ffda35b05222388c64d99b0acb132a56996e97de3ffa9312f7dda6ee0ed72",
+    "tests/language-readiness/nested-tree/cases.json": "7a36a4b32d8a5ac8a1d2f17d6d000a68c707bfc15a4b3a1e93e3e4ddaf4147c7",
+    "tests/language-readiness/context-names/grammar.spec": "8f408e81e2871b3b76c1a7fc7f99e059dad1c19dd03e91449a05fc9b88fff4b0",
+    "tests/language-readiness/context-names/cases.json": "3e7f25083e791db8048bed844523e85fbc53763eeaabd1253001a2b2650575ef",
+    "lua/test/rule_local_cursor_generated_source_test.lua": "62e71693f6ee32a436caee596af149088060e4ee2979a0bbb8a256b28e30e1b4",
+    "tests/language-readiness/nested-tree/lua_checks.lua": "0cf52abd24227574f5e93389836176452332f75c1d751b823f1c70d2c31af435",
+    "tools/test_lua_project_data_storage.sh": "8e5fbcae1498a5bb864907e5a6c9d55fab8f2b760bf334fbdc96ff0a839d48d8"
+  },
+  "unchanged_from_activation": [
+    "tests/language-readiness/nested-tree/grammar.spec",
+    "tests/language-readiness/nested-tree/cases.json",
+    "tests/language-readiness/context-names/grammar.spec",
+    "tests/language-readiness/context-names/cases.json"
+  ],
+  "initial_and_final": "Initial both ABI runs also passed160/51/27/24; final runs repeat after local variable naming/indentation cleanup. Final source hashes bind the final runs.",
+  "limits": [
+    "Only two native routes retain an engine per ABI; v2 on both compiled forms and emitted entry create engines per call",
+    "No production, dependency, oracle, schema, storage-policy or malformed-regex-path change",
+    "No unfiltered Lua gate or broad format admission; canonical context .7 follows"
+  ]
+}

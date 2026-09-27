@@ -39,8 +39,8 @@ For example, a grammar that tentatively builds an AST must separate recognition 
 establish a different, explicitly accepted mechanism. Merely adding alternate syntax would not solve that requirement.
 
 The owning task is `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1`; its first inventory records existing contracts and exact
-backend consumers. The state/control/result inventory is also recorded. Bounded nesting is reconciled; context-name Perl, Rust, Dart and Julia proof
-is described below, with remaining context carriers and lossless extraction still pending before gap selection.
+backend consumers. The state/control/result inventory is also recorded. Bounded nesting is reconciled; context-name carrier proof
+is described below, with canonical context reconciliation and lossless extraction still pending before gap selection.
 The format program's `.1` readiness gate remains pending. The original catalog and parked language extension retain
 all their conformance, Unicode, diagnostics, performance and backend obligations.
 
@@ -300,7 +300,17 @@ return the exact report with successful exit status, validated metadata/plans an
 bash tools/run_julia_project_data.sh --project=julia -e 'using LinkedSpecJulia, JSON3, Test; const REPO_ROOT=pwd(); include("julia/test/source_emitter_test.jl")'
 ```
 
-Both Lua context-name carriers and retained-engine recovery remain separate work. These native results establish bounded composition of captures, lexical comparison and
+PUC Lua and LuaJIT independently pass five routes each: native and SpecFile-JSON reconstructed engines,
+public v2 on both compiled forms, and a fresh emitted module. Each route runs 90 calls and three mutations.
+The two retained native engines prove 68 immediate recoveries per ABI; the other entries prove isolation.
+Fresh children require actual success, empty stderr, exact four-module reports and verified workspace cleanup.
+
+```sh
+bash tools/run_lua_project_data.sh puc lua/test/rule_local_cursor_generated_source_test.lua
+bash tools/run_lua_project_data.sh luajit lua/test/rule_local_cursor_generated_source_test.lua
+```
+
+All six runtime carrier proofs are now recorded; canonical context reconciliation remains separate work. These native results establish bounded composition of captures, lexical comparison and
 recursive state; they do not establish a general format campaign, indentation handling, arbitrary-depth safety
 or speculative rollback.
 

@@ -7,7 +7,7 @@ answers:
   - how is the shared Dart readiness helper analyzed in package context
   - does Dart context-name proof close the whole-package SDK gate
 date: 2026-09-27
-status: bounded six-route proof verified; known SDK gate and remaining backends separately owned
+status: bounded dart carrier proof verified; canonical context reconciliation remains
 tags: [language-readiness, context, dart, generated-source, recovery]
 evidence: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.4 passes62 tests: four readiness and58 existing emitter/document checks. Six routes each execute90 context calls and three mutants, with136 retained recoveries. Both emitted packages pass offline preparation, fatal analysis and actual execution; strict metadata/plan/report checks preserve exact completion. Original nesting defaults and both fixture pairs remain unchanged."
 reverify: "cd dart && bash ../tools/run_dart_project_data.sh test --reporter expanded test/nested_tree_readiness_test.dart test/source_emitter_test.dart test/sexpr_document_v1_test.dart && bash ../tools/run_dart_project_data.sh analyze --fatal-infos --fatal-warnings test/nested_tree_readiness_test.dart"

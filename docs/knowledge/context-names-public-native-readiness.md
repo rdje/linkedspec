@@ -22,7 +22,7 @@ in this grammar. Rust reports Display text; the other five runtimes project type
 
 Exit-on-error adapters do not prove same-engine recovery after failure. [[context-names-perl-readiness]] supplies
 that separate native/fresh emitted Perl proof. [[context-names-rust-carrier-readiness]] and [[context-names-dart-carrier-readiness]] supply typed proof;
-[[context-names-julia-carrier-readiness]] adds Julia proof; remaining Lua carriers retain .1.1.3.2.6; parent .7 requires canonical reconciliation. No runtime, adapter,
+[[context-names-julia-carrier-readiness]] and [[context-names-lua-carrier-readiness]] add the remaining typed proof; parent .7 requires canonical reconciliation. No runtime, adapter,
 fixture, dependency or contract change is made by this native evidence slice.
 
 The existing verifier accepts only nested-tree or context-names and keeps nested-tree as its default.

@@ -562,10 +562,29 @@ used by ordinary `.spec` syntax on every backend.
 - [x] **LOCKSTEP** — Book, context ledger, Knowledge, checkpoint, task frontier, roadmaps, MEMORY and bounded live/history records agree. Lua .1.1.3.2.6 follows; canonical parent .7 remains separate.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.6`
-  Status: `pending`
+  Status: `done`
   Goal: Verify context-name carriers independently under PUC Lua and LuaJIT with exact typed statuses and state restoration.
   Dependencies: `.1.1.3.2.5`
   Acceptance: Exact original and mutant checks on native/reconstructed/v2/emitted routes; existing managed owner, real child status/empty stderr/exact report and cleanup. No malformed-regex-path claim.
+
+  Activation: Clean2a5b9c859d725c2cc6ece83c50d16ab69cc36766 after Julia carrier commit; all nine doctrines/post-pointer pass, brief0 and clean tree.
+  Scope: Extend the existing dual-ABI generated-v2 readiness harness and strict shared checker using explicit context options and unchanged fixtures. Reuse the managed workspace and selected-ABI fresh child, preserving actual status/empty-stderr/exact report/cleanup. No production or malformed-regex-path change.
+  Verification tier: `focused`
+  Focused checks: Five context routes per ABI, each90 calls/three mutants with68 recoveries on two retained engines; original v2/nesting and strict-document proof under PUC Lua and LuaJIT; real storage19 census, book, Knowledge, memory, histories, doctrines and diff hygiene.
+  Canonical trigger: None for bounded test/carrier proof. Parent .1.1.3.2.7 owns canonical closeout; known malformed-regex .2.3 remains outside this slice.
+
+  Verification: Both final ABI runs PASS160 v2 assertions plus51 document cases/27 round trips/24 recoveries. Five context routes per ABI each execute90 calls/three mutants; two retained engines prove68 recoveries. Both fixture children require actual success, empty stderr, exact report and cleanup. Real storage19/trio/30 census controls passes; both fixture pairs remain exact.
+  Evidence: docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.6-verification.json and the context ledger/dual-ABI Knowledge card preserve route and gate limits.
+  Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.6 - verify Lua closing-name carriers`.
+
+### `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.6` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Both Lua public-native context proofs lacked reconstructed/generated/fresh emitted typed rejection and recovery evidence. Existing v2 readiness coverage selected only nesting.
+- [x] **ROOT CAUSE (WHY + WHERE)** — lua/test/rule_local_cursor_generated_source_test.lua and its shared checker hardcoded nesting inventory, status1, recovery control and span. Existing public runtime APIs already express the context grammar; no production defect is observed.
+- [x] **FIX** — Add explicit fixture options and comparison/state/span mutations while retaining nesting defaults, typed errors, strict JSON kinds and the existing managed selected-ABI fresh child.
+- [x] **ADDRESSED (verified)** — Both final ABI runs pass160 v2 assertions; every one of five context routes runs90 original calls and three mutants. Two retained engines per ABI prove68 immediate recoveries; both fixture children pass status/stderr/report/cleanup checks.
+- [x] **NO REGRESSION** — Original nesting proof and51 document cases/27 round trips/24 recoveries pass per ABI. Both source/oracle pairs stay byte-exact. Real storage19/trio/30 census controls passes; no production or malformed-regex-path change.
+- [x] **LOCKSTEP** — Book, context ledger, Knowledge, checkpoint, task frontier, roadmaps, MEMORY and bounded live/history records agree. Canonical context reconciliation .1.1.3.2.7 follows before lossless extraction; no broad format admission.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.7`
   Status: `pending`
@@ -792,7 +811,7 @@ used by ordinary `.spec` syntax on every backend.
 | 14 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.3` | `done` | Bounded nesting evidence/authoring limits reconciled; exact canonical receipt governs closeout. |
 | 15 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.1` | `done` | Perl native/fresh emitted context-name proof:11/17 cases,90 calls and34 recoveries per route. |
 | 16 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.2` | `done` | Context11/17/22 and original-default6/7/12 pass all six native routes. |
-| 17 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.6` | `pending` | Lua/LuaJIT context-name reconstructed/v2/emitted and typed recovery proof. |
+| 17 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.7` | `pending` | Canonical context-name reconciliation and bounded parent closeout. |
 
 ## Decisions
 
