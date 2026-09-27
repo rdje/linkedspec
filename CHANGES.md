@@ -12,6 +12,18 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-09-27 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.1: scoped closing-name comparison
+
+Add a bounded context-name grammar and independent11-positive/17-negative AST/span/status oracles. Existing
+Perl native/fresh emitted execution preserves parent state across distinct/repeated names, siblings and three
+levels. Each route passes90 original calls,34 immediate typed rejection recoveries and comparison/state/span
+mutants. No runtime change or XML claim. The expanded regression passes410 tests in25s; exact test-name audit
+retains all192 original assertions and adds218 context checks. Four direct-dependent suites pass89, managed
+storage retains27 owners, syntax and book pass. Public-tool probes establish five ActionIR-ready rules and
+lexical closing-capture comparison. Other runtimes remain pending under .1.1.3.2.2-.6; parent .7 owns canonical
+reconciliation. This ordinary fixture/test slice uses focused proof; the previous exact canonical boundary is
+8ea0c1107 and is not relabeled as proof of this changed candidate.
+
 ## 2026-09-27 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.3: bounded nesting reconciliation
 
 Reconcile all six native/carrier records without expanding their claims. The ledger/book distinguish retained

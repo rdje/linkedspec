@@ -68,6 +68,65 @@ push @variants, {id => 'span', source => $span, inputs => [
     {%$recovery, label => 'bound start must affect the authored span', mutation => 'changes_span'},
 ]};
 
+my $context_fixture = File::Spec->catdir($root, qw(tests language-readiness context-names));
+my $context_source = read_text(File::Spec->catfile($context_fixture, 'grammar.spec'));
+my $context_cases = $json->decode(read_text(File::Spec->catfile($context_fixture, 'cases.json')));
+my %context_by_id = map { $_->{id} => $_ }
+    (@{$context_cases->{accept}}, @{$context_cases->{reject}});
+my $context_recovery = $context_by_id{siblings_restore_parent};
+my @context_sequence;
+for my $round (1, 2) {
+    push @context_sequence, map { +{%$_, label => "$_->{id} round $round"} }
+        @{$context_cases->{accept}};
+    for my $case (@{$context_cases->{reject}}) {
+        push @context_sequence, {%$case, reject => 1, label => "$case->{id} round $round"};
+        push @context_sequence, {%$context_recovery,
+            label => "recovery after $case->{id} round $round"};
+    }
+}
+is(scalar(@context_sequence), 90, 'context names: two sequences with 34 immediate recoveries');
+my $context_descriptor = LinkedSpec::Get(\$context_source, return_descriptor => 1);
+my $context_summary = $context_descriptor->{meta}{action_rewriter_migration};
+is($context_summary->{language_agnostic_ready_ratio}, '1.0000', 'context names: entirely ActionIR ready');
+is($context_summary->{language_agnostic_ready_rule_count}, 5, 'context names: all five rules ready');
+is($context_summary->{language_agnostic_blocked_rule_count}, 0, 'context names: no blocked rules');
+is($context_summary->{compatibility_surface_rule_count}, 0, 'context names: no compatibility-only rules');
+
+my @context_variants = ({id => 'original', source => $context_source, inputs => \@context_sequence});
+my $comparison = $context_source;
+my $comparison_guard = <<'GUARD';
+  if(str_ne(match_group(0), name));
+   exit_now(2);
+  endif();
+GUARD
+is(($comparison =~ s/\Q$comparison_guard\E//), 1,
+   'context names: comparison mutation removes exactly the name guard');
+push @context_variants, {id => 'comparison', source => $comparison, inputs => [
+    {input => $context_by_id{mismatch}{input}, expected => $context_by_id{empty_element}{expected},
+     label => 'missing comparison wrongly accepts a mismatched closing name'},
+]};
+my $state = $context_source;
+my $recursive_edge = " -> Element { push(children, call(Element)) }\n";
+my $corrupt_edge = " -> Element { push(children, call(Element)); name = \"lost\" }\n";
+is(($state =~ s/\Q$recursive_edge\E/$corrupt_edge/), 1,
+   'context names: state mutation corrupts the parent name after one recursive edge');
+push @context_variants, {id => 'state', source => $state, inputs => [
+    {%$context_recovery, reject => 1, status => 2,
+     label => 'corrupted parent state wrongly rejects valid nested siblings'},
+]};
+my $context_span = $context_source;
+is(($context_span =~ s/\[start, cursor_pos\(\)\]/[cursor_pos(), cursor_pos()]/), 1,
+   'context names: span mutation changes only the element start expression');
+push @context_variants, {id => 'span', source => $context_span, inputs => [
+    {%{$context_by_id{nested_distinct}}, mutation => 'changes_span', mutant_span => [17, 17],
+     label => 'saved element start must affect the independent span'},
+]};
+for my $variant (@context_variants) {
+    $variant->{source_identity} = "context-names/$variant->{id}";
+    $variant->{id} = "context_$variant->{id}";
+    push @variants, $variant;
+}
+
 my $entry_source = <<'SPEC';
 Top::
 I.return(hash("start", cursor_pos(), "end", input_end_pos(), "source", input_slice(0, input_end_pos())))
@@ -115,7 +174,7 @@ sub check_observation {
     subtest "$route $case->{label}" => sub {
         if ($case->{reject}) {
             is($result->{error}, 'LinkedSpec::RuntimeExitNow', 'typed rejection');
-            is($result->{status}, 1, 'grammar rejection status is exact');
+            is($result->{status}, $case->{status} // 1, 'grammar rejection status is exact');
             ok(!defined($result->{value}), 'no partial value escapes');
         } else {
             is($result->{error}, '', 'execution succeeds');
@@ -124,7 +183,7 @@ sub check_observation {
                 ok(@{$result->{value} || []} > 0, 'valid surrounding forms survive the wrong acceptance');
             } elsif (($case->{mutation} // '') eq 'changes_span') {
                 is(ref($result->{value}), 'ARRAY', 'span mutant still returns a document');
-                is_deeply($result->{value}[0]{span}, [9, 9],
+                is_deeply($result->{value}[0]{span}, $case->{mutant_span} // [9, 9],
                           'the controlled mutation replaces the original start with the end');
                 isnt($json->encode($result->{value}), $json->encode($case->{expected}),
                      'unchanged authored oracle detects the span mutation');
@@ -148,7 +207,8 @@ for my $variant (@variants) {
             for @{$variant->{inputs}};
     }
     my $generated = LinkedSpec::emit_generated_source(
-        \$variant->{source}, source_identity => "nested-tree/$variant->{id}");
+        \$variant->{source},
+        source_identity => $variant->{source_identity} // "nested-tree/$variant->{id}");
     my $path = File::Spec->catfile($scratch, "$variant->{id}.pl");
     write_text($path, $generated);
     push @artifacts, {path => File::Spec->abs2rel($path, $root),
@@ -212,7 +272,8 @@ if (-f $output) {
         my ($variant, $row) = ($variants[$index], $rows->[$index]);
         is($row->{load_error}, '', "$variant->{id} emitted source loads independently");
         is($row->{contract_id}, 'linkedspec-generated-source-v2', "$variant->{id} retains v2 contract");
-        is($row->{source_identity}, "nested-tree/$variant->{id}", "$variant->{id} identity is exact");
+        is($row->{source_identity}, $variant->{source_identity} // "nested-tree/$variant->{id}",
+           "$variant->{id} identity is exact");
         is($row->{plan_valid}, 1, "$variant->{id} generated plan validates");
         is(scalar(@{$row->{observations}}), scalar(@{$variant->{inputs}}),
            "$variant->{id} emitted execution sequence is complete");

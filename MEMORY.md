@@ -1,11 +1,11 @@
 # MEMORY
 
-- activation_commit: `b044542bc47894f69954fcbdda451ed2548c3bb3` — clean activation base for canonical nesting reconciliation.
-- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.3 - reconcile bounded nesting readiness`.
-- active_work_unit: none — bounded nesting milestone is complete.
-- next_action: Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2 for a scoped context-dependent matching/restoration probe using ordinary .spec.
+- activation_commit: `8ea0c1107889b02e68eeb874970ecdbb4bb41ab2` — clean activation base for context-name Perl proof.
+- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.1 - verify scoped closing-name comparison`.
+- active_work_unit: none — Perl context-name fixture and carrier proof complete.
+- next_action: Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.2 to verify the unchanged context-name fixture on all six public native adapters.
 - in_flight_uncommitted: none.
-- blockers: bounded nesting is reconciled; context/lossless probes remain; .1.1.5 owns stale capability prose and startup .38/.40 recognition defects remain queued. ARCHOGEN owns downstream acceptance; named-argument and format proposals stay parked.
+- blockers: Perl context-name proof complete; other runtime/carrier and lossless probes remain; .1.1.5 owns stale capability prose and startup .38/.40 recognition defects remain queued. ARCHOGEN owns downstream acceptance; named-argument and format proposals stay parked.
   Wrapper startup .7 remains open; recovery/purge stay prohibited. No interrupted Phase0 run counts as proof.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
   active table; the task metadata doctrine inventories all consumers, permits arbitrary frontier-row rewrites,

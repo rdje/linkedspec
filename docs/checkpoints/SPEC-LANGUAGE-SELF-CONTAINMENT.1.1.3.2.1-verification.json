@@ -1,0 +1,94 @@
+{
+  "owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.1",
+  "activation_commit": "8ea0c1107889b02e68eeb874970ecdbb4bb41ab2",
+  "date": "2026-09-27",
+  "evidence": [
+    {
+      "command": "bash tools/project_data_run.sh perl -Iperl .linkedspec-data/scratch/context-names-probe.pl",
+      "result": "PASS initial10 accepted/17 typed rejections; five ready rules and lexical saved-name comparison; before independently authored three-level case",
+      "exit_status": 0,
+      "log": ".linkedspec-data/scratch/context-names-probe.log",
+      "sha256": "5147769c4ac557402bdeb110a6412cfd7674faff569d94745d1f8e7fb4e23e80"
+    },
+    {
+      "command": "bash tools/project_data_run.sh prove -v -Iperl t/nested_tree_readiness.t",
+      "result": "PASS406 initial tests in24s; before three-level control",
+      "exit_status": 0,
+      "log": ".linkedspec-data/scratch/context-names-perl.log",
+      "sha256": "3230c160a0d66563b1d522f59a749614cf6b4a27d908ba9b11a71581448b8d82"
+    },
+    {
+      "command": "bash tools/project_data_run.sh prove -v -Iperl t/nested_tree_readiness.t",
+      "result": "PASS410 final tests in25s; all192 old and218 new checks",
+      "exit_status": 0,
+      "log": ".linkedspec-data/scratch/context-names-perl-final.log",
+      "sha256": "21e720118826c84119177c7220c9d40a1b289fce8d79c73acfddab6442c59759"
+    },
+    {
+      "command": "bash tools/project_data_run.sh prove -v -Iperl t/generated_source_contract.t t/typed_source_location_values.t t/typed_source_location_perl_contract.t t/variadic_user_function_contract.t",
+      "result": "PASS4 files/89 tests in83s",
+      "exit_status": 0,
+      "log": ".linkedspec-data/scratch/context-names-dependents.log",
+      "sha256": "0063350af5949233500927be5174d3b987efb779aa7cb8756c25064c6daf72e6"
+    },
+    {
+      "command": "bash tools/test_perl_project_data_storage.sh",
+      "result": "PASS27 unchanged owners; real allocation/trace/CLI workspace and cleanup",
+      "exit_status": 0,
+      "log": ".linkedspec-data/scratch/context-names-storage.log",
+      "sha256": "883cd60c441ae54bfe14f7c48bec67e17d1e66ed9ad84c360a7b925820f243e4"
+    },
+    {
+      "command": "Python Counter of exact top-level test names from prior .7 focused log versus final regression",
+      "result": "PASS192 original names retained; exactly218 additional names all prefixed context; no missing original",
+      "exit_status": 0,
+      "log": ".linkedspec-data/scratch/context-names-test-name-audit.json",
+      "sha256": "df2ab66a479a3eb54d85502c174428aee119c46663487d09e8424e308ca02700"
+    },
+    {
+      "command": "bash tools/run_mdbook_local.sh",
+      "result": "PASS",
+      "exit_status": 0,
+      "log": ".linkedspec-data/scratch/context-names-book.log",
+      "sha256": "d1378a0d1c890250121eb6d577ce2a1b743691aa79d205c055d725440b22d245"
+    },
+    {
+      "command": "bash tools/run_mdbook_local.sh plus HTMLParser comparison of included grammar and worked JSON AST",
+      "result": "PASS final book; exact rendered source and independent nested AST",
+      "exit_status": 0,
+      "log": ".linkedspec-data/scratch/context-names-book-final.log",
+      "sha256": "51a6f846fd1c6a2ed0cd6b045251be2a73a803430b2a1d0c93a7fa78bbac723a"
+    }
+  ],
+  "source_hashes": {
+    "tests/language-readiness/context-names/grammar.spec": "8f408e81e2871b3b76c1a7fc7f99e059dad1c19dd03e91449a05fc9b88fff4b0",
+    "tests/language-readiness/context-names/cases.json": "3e7f25083e791db8048bed844523e85fbc53763eeaabd1253001a2b2650575ef",
+    "t/nested_tree_readiness.t": "14244f66afccbcdea102f4b66231d142c0b44c9afeb9b992b838e98d452253af"
+  },
+  "unchanged_fixture_hashes": {
+    "tests/language-readiness/nested-tree/grammar.spec": "498ffda35b05222388c64d99b0acb132a56996e97de3ffa9312f7dda6ee0ed72",
+    "tests/language-readiness/nested-tree/cases.json": "7a36a4b32d8a5ac8a1d2f17d6d000a68c707bfc15a4b3a1e93e3e4ddaf4147c7"
+  },
+  "counts": {
+    "accepted": 11,
+    "rejected": 17,
+    "rules": 5,
+    "grammar_lines": 37,
+    "routes": 2,
+    "original_calls_per_route": 90,
+    "rejection_recoveries_per_route": 34,
+    "mutations_per_route": 3,
+    "original_test_names_retained": 192,
+    "new_context_tests": 218,
+    "expanded_tests": 410,
+    "direct_dependent_tests": 89,
+    "managed_perl_owners": 27
+  },
+  "statuses": {
+    "1": "invalid syntax or document text",
+    "2": "mismatched closing name",
+    "3": "missing close at end of input"
+  },
+  "syntax": "t/nested_tree_readiness.t syntax OK; final source executes through410 tests",
+  "limits": "Perl native/fresh emitted context fixture only. No runtime/schema/dependency changes, no new primitive, XML/indentation/diagnostic-message/span/in-document-recovery/arbitrary-depth/resource or broad format claim. Other runtimes and canonical parent reconciliation remain pending. Previous canonical receipt is not reused for this focused candidate."
+}

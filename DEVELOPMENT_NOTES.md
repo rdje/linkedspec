@@ -12,6 +12,20 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-09-27 — Explicit name context composes without a new primitive in Perl
+
+The37-line context grammar saves entry_group(0) and compares match_group(0) in its closing edge through str_ne.
+The public lowering probe confirms lexical comparison to the saved binding; bare ne is numeric. Exact ASTs
+show enclosing name/start/children restoration through siblings, equal/different names and three levels.
+Grammar-authored statuses distinguish invalid syntax1, mismatched names2 and missing closes3, without claiming
+error spans/messages or in-document recovery. Prefix/gap/end guards remain explicit authoring work.
+The existing nested-tree harness now executes both fixtures using its one managed scratch owner and fresh
+emitted runner. Four context modules add218 tests while all192 original names remain present;410 total pass.
+The initial10-positive/17-negative probe and406-test run remain evidence; a separately authored three-level
+case extends final positives to11 without changing any existing oracle. Dependencies89 and storage27 pass.
+Only Perl's two retained routes are proved here. Native adapters and other carriers follow before canonical
+context reconciliation, lossless objectives and general language-gap selection. No XML or campaign admission.
+
 ## 2026-09-27 — Nesting proof and authoring costs at milestone closeout
 
 The native adapter result6/7/12 remains distinct from typed carrier proof. Perl/Rust/Dart/Julia/PUC/LuaJIT have

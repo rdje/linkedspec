@@ -1,0 +1,385 @@
+{
+  "scope": "Bounded context-name readiness, not XML; scalar-coordinate spans and literal text; statuses1 invalid syntax,2 mismatched name,3 missing close.",
+  "accept": [
+    {
+      "id": "empty",
+      "input": "",
+      "expected": []
+    },
+    {
+      "id": "empty_element",
+      "input": "<a></a>",
+      "expected": [
+        {
+          "kind": "element",
+          "name": "a",
+          "span": [
+            0,
+            7
+          ],
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "unicode_text",
+      "input": "<item>β🙂</item>",
+      "expected": [
+        {
+          "kind": "element",
+          "name": "item",
+          "span": [
+            0,
+            15
+          ],
+          "children": [
+            {
+              "kind": "text",
+              "text": "β🙂",
+              "span": [
+                6,
+                8
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "nested_distinct",
+      "input": "<a>x<b>β</b>y</a>",
+      "expected": [
+        {
+          "kind": "element",
+          "name": "a",
+          "span": [
+            0,
+            17
+          ],
+          "children": [
+            {
+              "kind": "text",
+              "text": "x",
+              "span": [
+                3,
+                4
+              ]
+            },
+            {
+              "kind": "element",
+              "name": "b",
+              "span": [
+                4,
+                12
+              ],
+              "children": [
+                {
+                  "kind": "text",
+                  "text": "β",
+                  "span": [
+                    7,
+                    8
+                  ]
+                }
+              ]
+            },
+            {
+              "kind": "text",
+              "text": "y",
+              "span": [
+                12,
+                13
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "siblings_restore_parent",
+      "input": "<a><b></b><c></c></a>",
+      "expected": [
+        {
+          "kind": "element",
+          "name": "a",
+          "span": [
+            0,
+            21
+          ],
+          "children": [
+            {
+              "kind": "element",
+              "name": "b",
+              "span": [
+                3,
+                10
+              ],
+              "children": []
+            },
+            {
+              "kind": "element",
+              "name": "c",
+              "span": [
+                10,
+                17
+              ],
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "repeated_names",
+      "input": "<a><a>z</a></a>",
+      "expected": [
+        {
+          "kind": "element",
+          "name": "a",
+          "span": [
+            0,
+            15
+          ],
+          "children": [
+            {
+              "kind": "element",
+              "name": "a",
+              "span": [
+                3,
+                11
+              ],
+              "children": [
+                {
+                  "kind": "text",
+                  "text": "z",
+                  "span": [
+                    6,
+                    7
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "multiple_forms",
+      "input": "<a></a>\t<b></b>",
+      "expected": [
+        {
+          "kind": "element",
+          "name": "a",
+          "span": [
+            0,
+            7
+          ],
+          "children": []
+        },
+        {
+          "kind": "element",
+          "name": "b",
+          "span": [
+            8,
+            15
+          ],
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "leading_crlf",
+      "input": "\r\n<a>\nβ\n</a>",
+      "expected": [
+        {
+          "kind": "element",
+          "name": "a",
+          "span": [
+            2,
+            12
+          ],
+          "children": [
+            {
+              "kind": "text",
+              "text": "\nβ\n",
+              "span": [
+                5,
+                8
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "uppercase_exact",
+      "input": "<A></A>",
+      "expected": [
+        {
+          "kind": "element",
+          "name": "A",
+          "span": [
+            0,
+            7
+          ],
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "entity_is_literal",
+      "input": "<a>&amp;</a>",
+      "expected": [
+        {
+          "kind": "element",
+          "name": "a",
+          "span": [
+            0,
+            12
+          ],
+          "children": [
+            {
+              "kind": "text",
+              "text": "&amp;",
+              "span": [
+                3,
+                8
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "three_levels",
+      "input": "<a><b><c>🙂</c></b></a>",
+      "expected": [
+        {
+          "kind": "element",
+          "name": "a",
+          "span": [
+            0,
+            22
+          ],
+          "children": [
+            {
+              "kind": "element",
+              "name": "b",
+              "span": [
+                3,
+                18
+              ],
+              "children": [
+                {
+                  "kind": "element",
+                  "name": "c",
+                  "span": [
+                    6,
+                    14
+                  ],
+                  "children": [
+                    {
+                      "kind": "text",
+                      "text": "🙂",
+                      "span": [
+                        9,
+                        10
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "reject": [
+    {
+      "id": "mismatch",
+      "input": "<a></b>",
+      "status": 2
+    },
+    {
+      "id": "nested_mismatch",
+      "input": "<a><b></c></a>",
+      "status": 2
+    },
+    {
+      "id": "crossed_names",
+      "input": "<a><b></a></b>",
+      "status": 2
+    },
+    {
+      "id": "case_mismatch",
+      "input": "<A></a>",
+      "status": 2
+    },
+    {
+      "id": "missing_outer",
+      "input": "<a><b></b>",
+      "status": 3
+    },
+    {
+      "id": "missing_inner",
+      "input": "<a><b>",
+      "status": 3
+    },
+    {
+      "id": "bare_text",
+      "input": "outside",
+      "status": 1
+    },
+    {
+      "id": "trailing_text",
+      "input": "<a></a>tail",
+      "status": 1
+    },
+    {
+      "id": "interstitial_text",
+      "input": "<a></a>x<b></b>",
+      "status": 1
+    },
+    {
+      "id": "unmatched_close",
+      "input": "</a>",
+      "status": 1
+    },
+    {
+      "id": "attribute_syntax",
+      "input": "<a x></a>",
+      "status": 1
+    },
+    {
+      "id": "self_closing",
+      "input": "<a/>",
+      "status": 1
+    },
+    {
+      "id": "malformed_close",
+      "input": "<a></a x>",
+      "status": 1
+    },
+    {
+      "id": "hidden_prefix",
+      "input": "#skip\n<a></a>",
+      "status": 1
+    },
+    {
+      "id": "empty_name",
+      "input": "<></>",
+      "status": 1
+    },
+    {
+      "id": "markup_inside",
+      "input": "<a><!x></a>",
+      "status": 1
+    },
+    {
+      "id": "non_ascii_name",
+      "input": "<β></β>",
+      "status": 1
+    }
+  ]
+}

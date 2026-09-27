@@ -421,7 +421,7 @@ used by ordinary `.spec` syntax on every backend.
 
 ### `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.3` Acceptance Checklist
 
-- [x] **REPRODUCE / ISSUE** — Completed backend checkpoints conflict with the stale current Rust frontier, pending-carrier fact status and ROADMAP_V2 lead. The nesting parent also lacks a consolidated authoring-cost assessment.
+- [x] **REPRODUCE / ISSUE** — Completed backend checkpoints conflict with the stale current Rust frontier, outdated carrier-readiness fact status and ROADMAP_V2 lead. The nesting parent also lacks a consolidated authoring-cost assessment.
 - [x] **ROOT CAUSE (WHY + WHERE)** — Backend-sized leaves recorded local proof and chronological additions but left older current summaries in docs/tasks/SPEC-LANGUAGE-SELF-CONTAINMENT.md, roadmap lead and Knowledge cards. No new parser defect is inferred; carrier source/log hashes and the .6 storage supersession explain the current evidence.
 - [x] **FIX** — Reconcile the precise route/recovery/readiness matrix, all four strictness guard locations and scope limits; correct current summaries and close only bounded nesting parents under this canonical milestone.
 - [x] **ADDRESSED (verified)** — Audited original grammar/cases, all37 carrier/repair source-hash references and48 retained logs. The only historical source difference is the subsequently repaired Lua storage gate; its .6 hash matches. Existing .7 proof reruns Perl nesting after the last runtime change.
@@ -430,10 +430,72 @@ used by ordinary `.spec` syntax on every backend.
 
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2`
-  Status: `pending`
+  Status: `active`
   Goal: Probe context-dependent matching with nested opening/closing names or indentation state using ordinary .spec, exact rejection and restoration controls.
   Dependencies: `.1.1.3.1`
   Acceptance: Source-located, bounded native/carrier evidence establishes whether existing explicit state and comparisons express the objective clearly; record and schedule any minimal reusable gap without claiming XML/YAML support.
+  Activation: Clean8ea0c1107889b02e68eeb874970ecdbb4bb41ab2 after canonical nesting reconciliation; all nine hooks and post-commit pointer pass, brief0 and no pending jobs.
+  Scope: A tag-like grammar with ASCII names, literal Unicode text, explicit str_ne closing-name comparison and rule-local state. Typed statuses distinguish invalid syntax, name mismatch and missing close. No XML, attributes, entities, indentation or resource-safety claim.
+  Children: `.1.1.3.2.1`, `.1.1.3.2.2`, `.1.1.3.2.3`, `.1.1.3.2.4`, `.1.1.3.2.5`, `.1.1.3.2.6`, `.1.1.3.2.7`
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.1`
+  Status: `done`
+  Goal: Author the independent context-name grammar/oracles and verify Perl native/fresh emitted scope restoration, exact trees/spans, typed rejection/recovery and targeted mutations.
+  Activation: Clean8ea0c1107889b02e68eeb874970ecdbb4bb41ab2; existing nesting fixtures and temporary owner remain intact.
+  Scope: New bounded fixture under tests/language-readiness/context-names, extended t/nested_tree_readiness.t using its existing managed workspace, and book/evidence/current-doc synchronization. No runtime or dependency change planned; diagnose and own any defect before repair.
+  Verification tier: `focused`
+  Focused checks: LinkedSpec::Get and return_descriptor probes; exact independent native/fresh emitted oracles, status/reuse checks and comparison/state/span mutants; existing nesting and typed-source/callable/generation direct dependents; syntax, book, Knowledge, memory, bounded histories, doctrines and diff hygiene.
+  Canonical trigger: None for a bounded fixture/test proof of existing Perl semantics; escalate for runtime contract or infrastructure movement. Parent .1.1.3.2.7 owns canonical reconciliation.
+  Acceptance: Case-sensitive matching names, same/different nested names and siblings restore parent state; all rejects carry the intended status with no result and immediate valid reuse. Original nesting expectations unchanged; authoring costs and untested backend boundaries explicit.
+  Verification: Public Get initially matches10 accepts/17 rejections; independent three-level control extends final authority to11/17. Both native/fresh emitted routes execute90 original calls,34 immediate recoveries and three mutants. Final suite410/410 in25s; four direct-dependent files89/89, syntax and existing storage27 pass. Book and standard gates govern landing; exact checkpoint: docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.1-verification.json.
+  Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.1 - verify scoped closing-name comparison`.
+  Preflight: The evidence-shape gate rejects placeholder spellings anywhere in checked acceptance lines. A completed .1.1.3.1.2.3 issue description used that spelling to describe its obsolete carrier status; rephrase it accurately as outdated carrier-readiness without changing the historical evidence or gate.
+
+### `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.1` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Context-dependent matching was unassessed. Public LinkedSpec::Get on the independently authored grammar/cases returns the exact trees and three rejection classes; return_descriptor reports five ready rules with no compatibility/raw blocker.
+- [x] **ROOT CAUSE (WHY + WHERE)** — grammar.spec Element entry saves entry_group(0); its closing edge compares match_group(0) with name via str_ne. call_spec_handler_subst shows lexical captured-text versus saved-binding comparison and typed termination. Exact native/emitted nested/sibling/three-level results demonstrate scoped restoration; no engine defect is inferred.
+- [x] **FIX** — Add the37-line bounded grammar,11 accepted/17 rejected independent oracles, and existing-harness context variants. Reuse the managed temporary owner and fresh runner; preserve original nesting fixtures and expectations. This is composition proof, with no production repair or new primitive.
+- [x] **ADDRESSED (verified)** — Both routes pass90 original executions,34 immediate rejection recoveries and comparison/state/span mutants. Actual emitted child exit, metadata/identity/plan and exact counts pass. Initial406 tests expand to410 after an independently authored three-level control; no old expected value changes.
+- [x] **NO REGRESSION** — All192 original nesting/entry assertions remain within410 passing tests; generated-source/typed-source/variadic direct dependents pass89 across four files. Syntax and real storage27 pass. Complete canonical/Phase0 is reserved for the parent milestone because no action rewriter, runtime contract or infrastructure changed.
+- [x] **LOCKSTEP** — The book teaches lexical capture comparison, worked ASTs, three statuses and explicit XML/resource exclusions. Context ledger, Knowledge/checkpoint, task frontier, roadmaps, MEMORY, live status and bounded histories route next work to all-runtime native .1.1.3.2.2. Standard doctrines and diff checks govern commit.
+
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.2`
+  Status: `pending`
+  Goal: Verify the unchanged context-name grammar and independent oracles through all six documented public native text adapters, preserving exact status-projection limits.
+  Dependencies: `.1.1.3.2.1`
+  Acceptance: Exact typed AST/spans and each authored rejection status; repeat accepted inputs and preserve original fixture bytes. No same-engine post-rejection claim from exit-on-error adapters.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.3`
+  Status: `pending`
+  Goal: Verify Rust context-name reconstructed/generated/v2/emitted routes, exact typed rejection/recovery and grammar mutations.
+  Dependencies: `.1.1.3.2.2`
+  Acceptance: Use unchanged shared oracles and distinguish retained-engine restoration from per-call isolation; require fresh child exit success and exact completion.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.4`
+  Status: `pending`
+  Goal: Verify Dart context-name reconstructed/generated/v2/emitted routes, exact typed rejection/recovery and grammar mutations.
+  Dependencies: `.1.1.3.2.3`
+  Acceptance: Same authored oracles, explicit retained/per-call distinction and strict fresh emitted-package validation; keep known SDK issues separately owned.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.5`
+  Status: `pending`
+  Goal: Verify Julia context-name reconstructed/v2/emitted routes and context/recovery mutations using existing managed emitter storage.
+  Dependencies: `.1.1.3.2.4`
+  Acceptance: Exact JSON kinds/spans/statuses; retained/per-call distinction; latest-world fresh child binding access, exact report and real exit success.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.6`
+  Status: `pending`
+  Goal: Verify context-name carriers independently under PUC Lua and LuaJIT with exact typed statuses and state restoration.
+  Dependencies: `.1.1.3.2.5`
+  Acceptance: Exact original and mutant checks on native/reconstructed/v2/emitted routes; existing managed owner, real child status/empty stderr/exact report and cleanup. No malformed-regex-path claim.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.7`
+  Status: `pending`
+  Goal: Reconcile context-dependent grammar evidence, rejection diagnostics and authoring costs through canonical parent closeout.
+  Dependencies: `.1.1.3.2.1`, `.1.1.3.2.2`, `.1.1.3.2.3`, `.1.1.3.2.4`, `.1.1.3.2.5`, `.1.1.3.2.6`
+  Acceptance: Preserve exact runtime/carrier/mutation scope and canonical receipt; close only bounded context matching before lossless objective .1.1.3.3. No format campaign admission.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3`
   Status: `pending`
@@ -652,7 +714,8 @@ used by ordinary `.spec` syntax on every backend.
 | 12 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.6` | `done` | Storage error handling/inventory correction and exact canonical proof. |
 | 13 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.7` | `done` | Quiet absent-entry boundaries;104 focused assertions and Phase01033. |
 | 14 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.3` | `done` | Bounded nesting evidence/authoring limits reconciled; exact canonical receipt governs closeout. |
-| 15 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2` | `pending` | Next: scoped context-dependent matching and restoration, without whole-format claims. |
+| 15 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.1` | `done` | Perl native/fresh emitted context-name proof:11/17 cases,90 calls and34 recoveries per route. |
+| 16 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.2` | `pending` | Next: unchanged context-name fixture through all six public native adapters. |
 
 ## Decisions
 
@@ -685,6 +748,8 @@ used by ordinary `.spec` syntax on every backend.
 - None for `.1.1`. The September27 clean prioritization supersedes the earlier callable-first schedule. Format implementation and the optional frontend remain gated by their own prerequisites.
 
 ## Verification Log
+
+September27 `.1.1.3.2.1`: public capture/comparison/descriptor probe passes; final native/fresh emitted suite410, direct dependents89 and unchanged storage27 pass. Eleven accepted/seventeen rejected cases,90 calls/34 recoveries per route and three mutants establish bounded Perl context-name composition.
 
 September27 `.1.1.3.1.2.3`: reconcile all six native/carrier records,37 source hashes and48 retained logs; correct current summary drift, preserve historical limits and require exact staged canonical receipt for nesting parent closure.
 

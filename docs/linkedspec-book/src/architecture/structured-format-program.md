@@ -30,7 +30,7 @@ Readiness work uses small representative objectives before committing to entire 
 | Context-dependent syntax | Clearly scoped delimiter or indentation state, correct nested restoration, and useful rejection diagnostics. |
 | Lossless extraction and child parsing | Exact prefix/interstitial/tail reconstruction, bounded child inputs, retained provenance and explicit dispatch authority. |
 
-These are planned composition probes, not newly supported formats or confirmed missing primitives. If a probe
+These bounded composition probes do not establish supported formats or confirmed missing primitives. If a probe
 fails, its tools and minimized input must distinguish grammar mistakes, engine defects, missing general mechanisms,
 and awkward authoring. The result then selects a bounded implementation slice with portable semantics and tests.
 
@@ -39,8 +39,8 @@ For example, a grammar that tentatively builds an AST must separate recognition 
 establish a different, explicitly accepted mechanism. Merely adding alternate syntax would not solve that requirement.
 
 The owning task is `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1`; its first inventory records existing contracts and exact
-backend consumers. The state/control/result inventory is also recorded; representative objective execution
-follows before selecting new primitives.
+backend consumers. The state/control/result inventory is also recorded. Bounded nesting is reconciled; context-name Perl proof
+is described below, with other context carriers and lossless extraction still pending before gap selection.
 The format program's `.1` readiness gate remains pending. The original catalog and parked language extension retain
 all their conformance, Unicode, diagnostics, performance and backend obligations.
 
@@ -186,6 +186,75 @@ cleanup. The storage census now rejects enumeration errors and passes its contro
 The bounded nesting milestone reconciles these routes and their limits through canonical verification. It does
 not establish the separately tracked malformed-regex native error path.
 This example does not open the structured-format campaign or establish arbitrary-depth resource safety.
+
+
+### Bounded context-name trial
+
+This second readiness grammar tests names whose validity depends on an enclosing rule invocation. It accepts
+zero or more elements such as `<a>x<b>β</b>y</a>`, stores each opening name, and compares the closing name with
+that saved value. Names start with an ASCII letter and continue with ASCII letters, digits, `_` or `-`.
+Text preserves its Unicode content and whitespace. ASCII whitespace between top-level elements is ignored.
+
+This is a small authored language, not XML: there are no attributes, self-closing elements, comments, entity
+expansion or Unicode tag names. For example, `<a>&amp;</a>` returns the literal text `&amp;`.
+
+```text
+{{#include ../../../../tests/language-readiness/context-names/grammar.spec}}
+```
+
+`entry_group(0)` reads the opening name when `Element` is called. `match_group(0)` in the closing edge reads
+the current closing name. These are captures-only indices; group 0 means the first parenthesized capture.
+`str_ne` performs the case-sensitive string comparison. Bare `ne` is a numeric comparison and is unsuitable here.
+The saved `name`, `start` and `children` bindings must survive calls to nested elements.
+
+For `<a>x<b>β</b>y</a>`, the exact result is:
+
+```json
+[{"kind":"element","name":"a","span":[0,17],"children":[
+  {"kind":"text","span":[3,4],"text":"x"},
+  {"kind":"element","name":"b","span":[4,12],"children":[
+    {"kind":"text","span":[7,8],"text":"β"}
+  ]},
+  {"kind":"text","span":[12,13],"text":"y"}
+]}]
+```
+
+Further controls make the context requirement visible:
+
+| Input | Expected behavior |
+| --- | --- |
+| `<a></a>` | One empty element, name `a`, span `[0,7]`. |
+| `<item>β🙂</item>` | Text span `[6,8]` and element span `[0,15]`, measured in Unicode scalars. |
+| `<a><b></b><c></c></a>` | Child names `b` and `c`; closing the parent still compares against `a`. |
+| `<a><b><c>🙂</c></b></a>` | Restore `b`, then `a`, across two successive returns; outer span `[0,22]`. |
+| `<a><a>z</a></a>` | Equal nested names remain separate scoped elements. |
+| `<A></A>` / `<A></a>` | The first succeeds; the second is a case-sensitive mismatch. |
+
+This grammar assigns its own diagnostic statuses:
+
+| Status | Meaning in this grammar | Examples |
+| --- | --- | --- |
+| 1 | Invalid syntax or text outside an element | `<a/>`, `<a x></a>`, `outside`, `<a></a>tail` |
+| 2 | Closing name differs from the saved opening name | `<a></b>`, `<a><b></a></b>` |
+| 3 | End of input before a required close | `<a><b></b>`, `<a><b>` |
+
+These are typed exits, not successful partial ASTs. They distinguish three reasons but do not themselves provide
+an expected-name message, an error span or in-document recovery. Prefix/gap/final-cursor guards retain the strict
+acceptance discipline from the nesting trial; checking the closing name alone would not make a complete parser.
+
+The current proof covers Perl native and independently loaded emitted parsers. Each runs 90 original calls over
+11 accepted and 17 rejected cases, including 34 immediate rejection-to-success transitions on the same parser.
+Three deliberate grammar changes remove the name comparison, overwrite parent state after a child returns, or
+replace the saved start coordinate. The unchanged oracles detect the intended wrong acceptance, rejection or span.
+All five rules are ActionIR-ready. Repeat the proof with:
+
+```sh
+bash tools/project_data_run.sh prove -v -Iperl t/nested_tree_readiness.t
+```
+
+The other runtimes' context-name native/carrier proofs remain pending. This Perl result establishes the bounded
+composition of captures, lexical comparison and recursive state; it does not establish a general format campaign,
+indentation handling, arbitrary-depth safety or speculative rollback.
 
 
 ## Approved and parked: language coverage and authoring difficulty
