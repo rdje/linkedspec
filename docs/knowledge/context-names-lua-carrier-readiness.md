@@ -6,7 +6,7 @@ answers:
   - how many retained Lua context-name recovery transitions are verified
   - how are fresh Lua context-name emitted children validated
 date: 2026-09-27
-status: bounded dual-ABI carrier proof verified; canonical context reconciliation remains
+status: bounded proof verified; cross-runtime milestone recorded separately
 tags: [language-readiness, context, lua, luajit, generated-source, recovery]
 evidence: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.6 passes160 v2 assertions per ABI plus51 document cases/27 round trips/24 recoveries. Each ABI verifies five routes with90 calls/three mutants each and68 recoveries on two retained engines. Both fixture children require actual success, empty stderr, exact metadata/plans/report and cleanup. Storage passes19 owners/three dual-ABI modules/30 census controls."
 reverify: "bash tools/run_lua_project_data.sh puc lua/test/rule_local_cursor_generated_source_test.lua && bash tools/run_lua_project_data.sh luajit lua/test/rule_local_cursor_generated_source_test.lua"
@@ -26,3 +26,5 @@ generated-format or storage-policy change. The known malformed-regex path remain
 unfiltered full Lua gate or broader format admission is claimed.
 Related: [[nested-tree-lua-carrier-readiness]], [[context-names-public-native-readiness]],
 [[lua-storage-census-failure-status]].
+
+[[context-names-readiness-reconciliation]] records the complete bounded matrix, authoring costs and canonical milestone.

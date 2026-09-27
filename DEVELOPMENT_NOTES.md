@@ -12,6 +12,17 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-09-27 — Context readiness closes a bounded composition objective, not a format campaign
+
+The37-line context grammar composes opening captures, lexical closing comparison and recursive local state on
+all six runtimes. Ninety calls repeat28 independently authored cases; three mutants expose wrong acceptance,
+state corruption and spans. Retained parsers contribute34 recoveries each; generated per-call entries establish
+isolation. All40 source references and39 logs match; the Rust harness allocation repair and package-scoped Dart
+analysis stay visible. Strict prefix/gap/final-cursor/missing-close guards remain necessary. The three grammar
+statuses do not establish expected-name messages, error spans, in-document repair or resource bounds. No new
+comparison/state primitive is selected; lossless child/provenance work precedes .1.1.4 gap selection. Canonical
+milestone signoff binds the exact staged candidate, with actual result in the commit body and promoted receipt.
+
 ## 2026-09-27 — Lua context-name proof retains typed failures and selected-ABI child isolation
 
 Failed pcall plus the public RuntimeExitNow predicate and exact authored1/2/3 distinguish rejection from nil.

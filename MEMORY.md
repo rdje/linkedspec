@@ -1,11 +1,11 @@
 # MEMORY
 
-- activation_commit: `2a5b9c859d725c2cc6ece83c50d16ab69cc36766` — clean activation base for Lua/LuaJIT context-name carriers.
-- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.6 - verify Lua closing-name carriers`.
-- active_work_unit: none — Lua/LuaJIT context-name carrier proof complete.
-- next_action: Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.7 for canonical context-name reconciliation before lossless objective .1.1.3.3.
+- activation_commit: `c20c123dd0573b1d831a0b4910a67091fa5572f2` — clean activation base for canonical context-name reconciliation.
+- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.7 - reconcile bounded context-name readiness`.
+- active_work_unit: none — bounded context-name milestone complete.
+- next_action: Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3 for lossless segmentation and bounded child parsing, using canonical capability/authority records before selecting its first slice.
 - in_flight_uncommitted: none.
-- blockers: all-six context-name native/carrier proof complete; canonical reconciliation and lossless probes remain; .1.1.5 owns stale capability prose and startup .38/.40 recognition defects remain queued. ARCHOGEN owns downstream acceptance; named-argument and format proposals stay parked.
+- blockers: bounded nesting/context proof reconciled; lossless probes and core-gap selection remain; .1.1.5 owns stale capability prose and startup .38/.40 recognition defects remain queued. ARCHOGEN owns downstream acceptance; named-argument and format proposals stay parked.
   Wrapper startup .7 remains open; recovery/purge stay prohibited. No interrupted Phase0 run counts as proof.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
   active table; the task metadata doctrine inventories all consumers, permits arbitrary frontier-row rewrites,

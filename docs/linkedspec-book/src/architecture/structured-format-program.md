@@ -40,7 +40,7 @@ establish a different, explicitly accepted mechanism. Merely adding alternate sy
 
 The owning task is `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1`; its first inventory records existing contracts and exact
 backend consumers. The state/control/result inventory is also recorded. Bounded nesting is reconciled; context-name carrier proof
-is described below, with canonical context reconciliation and lossless extraction still pending before gap selection.
+is described below, with lossless extraction still pending before gap selection.
 The format program's `.1` readiness gate remains pending. The original catalog and parked language extension retain
 all their conformance, Unicode, diagnostics, performance and backend obligations.
 
@@ -242,7 +242,7 @@ These are typed exits, not successful partial ASTs. They distinguish three reaso
 an expected-name message, an error span or in-document recovery. Prefix/gap/final-cursor guards retain the strict
 acceptance discipline from the nesting trial; checking the closing name alone would not make a complete parser.
 
-The current proof covers Perl native and independently loaded emitted parsers. Each runs 90 original calls over
+The Perl proof covers native and independently loaded emitted parsers. Each runs 90 original calls over
 11 accepted and 17 rejected cases, including 34 immediate rejection-to-success transitions on the same parser.
 Three deliberate grammar changes remove the name comparison, overwrite parent state after a child returns, or
 replace the saved start coordinate. The unchanged oracles detect the intended wrong acceptance, rejection or span.
@@ -310,9 +310,28 @@ bash tools/run_lua_project_data.sh puc lua/test/rule_local_cursor_generated_sour
 bash tools/run_lua_project_data.sh luajit lua/test/rule_local_cursor_generated_source_test.lua
 ```
 
-All six runtime carrier proofs are now recorded; canonical context reconciliation remains separate work. These native results establish bounded composition of captures, lexical comparison and
-recursive state; they do not establish a general format campaign, indentation handling, arbitrary-depth safety
-or speculative rollback.
+The reconciled typed-carrier evidence is:
+
+| Runtime | Typed routes | Retained parsers | Immediate recovery transitions |
+| --- | ---: | ---: | ---: |
+| Perl | 2 | 2 | 68 |
+| Rust | 6 | 4 | 136 |
+| Dart | 6 | 4 | 136 |
+| Julia | 5 | 2 | 68 |
+| PUC Lua | 5 | 2 | 68 |
+| LuaJIT | 5 | 2 | 68 |
+
+Each route runs the same 11 accepted and 17 rejected authored cases for 90 calls, plus three grammar mutations.
+Those repeated calls are not additional corpus cases. Every retained parser contributes 34 immediate
+rejection-to-success transitions; per-call entries establish isolation. Public native adapter results remain
+separate from typed recovery proof.
+
+This bounded objective demonstrates composition of captures, lexical comparison and recursive state across all
+six runtimes. The 37-line grammar still needs explicit prefix/gap/final-cursor/missing-close guards. Its three
+statuses distinguish causes, while expected-name messages, precise error spans and in-document repair remain
+unassessed. No new comparison or state primitive is selected from this result. Lossless segmentation and
+bounded child parsing are the next readiness objective before broader language-gap selection. The format
+campaign, indentation handling, arbitrary-depth/resource safety and speculative rollback remain outside this proof.
 
 
 ## Approved and parked: language coverage and authoring difficulty

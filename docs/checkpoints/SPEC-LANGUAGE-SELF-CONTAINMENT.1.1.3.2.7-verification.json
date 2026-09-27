@@ -1,0 +1,581 @@
+{
+  "owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.7",
+  "activation_commit": "c20c123dd0573b1d831a0b4910a67091fa5572f2",
+  "date": "2026-09-27",
+  "checkpoint_hashes": [
+    {
+      "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.1-verification.json",
+      "sha256": "1e190b9d960684120834ac13a09307471f65aeb89fa84c1d4d0d64bdecd42077"
+    },
+    {
+      "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.2-verification.json",
+      "sha256": "4da5202dcdd47ce10c1bc1f94a0298d7d0de8efc1250feaaeba249b9c752957f"
+    },
+    {
+      "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.3-verification.json",
+      "sha256": "714e00e0d191387a5dbaa7f96281c9a7a4004904f81eafad53c3369bfa2efa15"
+    },
+    {
+      "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.4-verification.json",
+      "sha256": "2570af5a8d131019e18f9beeadc267095b08c2aff99927ad7c392a521195c6f4"
+    },
+    {
+      "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.5-verification.json",
+      "sha256": "7729e2b76ad5f5622df8974421acaa187b8af49e8a6d376408073181a070dae9"
+    },
+    {
+      "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.6-verification.json",
+      "sha256": "fe5bf56c26341c4337ba44435e0d8e023aabe37efe11546abad4a886586fcc9b"
+    }
+  ],
+  "source_hash_comparisons": [
+    {
+      "checkpoint": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.1-verification.json",
+      "path": "tests/language-readiness/context-names/grammar.spec",
+      "recorded": "8f408e81e2871b3b76c1a7fc7f99e059dad1c19dd03e91449a05fc9b88fff4b0",
+      "current": "8f408e81e2871b3b76c1a7fc7f99e059dad1c19dd03e91449a05fc9b88fff4b0"
+    },
+    {
+      "checkpoint": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.1-verification.json",
+      "path": "tests/language-readiness/context-names/cases.json",
+      "recorded": "3e7f25083e791db8048bed844523e85fbc53763eeaabd1253001a2b2650575ef",
+      "current": "3e7f25083e791db8048bed844523e85fbc53763eeaabd1253001a2b2650575ef"
+    },
+    {
+      "checkpoint": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.1-verification.json",
+      "path": "t/nested_tree_readiness.t",
+      "recorded": "14244f66afccbcdea102f4b66231d142c0b44c9afeb9b992b838e98d452253af",
+      "current": "14244f66afccbcdea102f4b66231d142c0b44c9afeb9b992b838e98d452253af"
+    },
+    {
+      "checkpoint": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.1-verification.json",
+      "path": "tests/language-readiness/nested-tree/grammar.spec",
+      "recorded": "498ffda35b05222388c64d99b0acb132a56996e97de3ffa9312f7dda6ee0ed72",
+      "current": "498ffda35b05222388c64d99b0acb132a56996e97de3ffa9312f7dda6ee0ed72"
+    },
+    {
+      "checkpoint": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.1-verification.json",
+      "path": "tests/language-readiness/nested-tree/cases.json",
+      "recorded": "7a36a4b32d8a5ac8a1d2f17d6d000a68c707bfc15a4b3a1e93e3e4ddaf4147c7",
+      "current": "7a36a4b32d8a5ac8a1d2f17d6d000a68c707bfc15a4b3a1e93e3e4ddaf4147c7"
+    },
+    {
+      "checkpoint": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.2-verification.json",
+      "path": "tests/language-readiness/nested-tree/verify_native.py",
+      "recorded": "a177b58c22777cdcbd128e2d6147fd63da95c33654f6baaf8c5d28d0080deb6c",
+      "current": "a177b58c22777cdcbd128e2d6147fd63da95c33654f6baaf8c5d28d0080deb6c"
+    },
+    {
+      "checkpoint": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.2-verification.json",
+      "path": "tests/language-readiness/nested-tree/grammar.spec",
+      "recorded": "498ffda35b05222388c64d99b0acb132a56996e97de3ffa9312f7dda6ee0ed72",
+      "current": "498ffda35b05222388c64d99b0acb132a56996e97de3ffa9312f7dda6ee0ed72"
+    },
+    {
+      "checkpoint": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.2-verification.json",
+      "path": "tests/language-readiness/nested-tree/cases.json",
+      "recorded": "7a36a4b32d8a5ac8a1d2f17d6d000a68c707bfc15a4b3a1e93e3e4ddaf4147c7",
+      "current": "7a36a4b32d8a5ac8a1d2f17d6d000a68c707bfc15a4b3a1e93e3e4ddaf4147c7"
+    },
+    {
+      "checkpoint": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.2-verification.json",
+      "path": "tests/language-readiness/context-names/grammar.spec",
+      "recorded": "8f408e81e2871b3b76c1a7fc7f99e059dad1c19dd03e91449a05fc9b88fff4b0",
+      "current": "8f408e81e2871b3b76c1a7fc7f99e059dad1c19dd03e91449a05fc9b88fff4b0"
+    },
+    {
+      "checkpoint": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.2-verification.json",
+      "path": "tests/language-readiness/context-names/cases.json",
+      "recorded": "3e7f25083e791db8048bed844523e85fbc53763eeaabd1253001a2b2650575ef",
+      "current": "3e7f25083e791db8048bed844523e85fbc53763eeaabd1253001a2b2650575ef"
+    },
+    {
+      "checkpoint": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.3-verification.json",
+      "path": "tests/language-readiness/nested-tree/grammar.spec",
+      "recorded": "498ffda35b05222388c64d99b0acb132a56996e97de3ffa9312f7dda6ee0ed72",
+      "current": "498ffda35b05222388c64d99b0acb132a56996e97de3ffa9312f7dda6ee0ed72"
+    },
+    {
+      "checkpoint": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.3-verification.json",
+      "path": "tests/language-readiness/nested-tree/cases.json",
+      "recorded": "7a36a4b32d8a5ac8a1d2f17d6d000a68c707bfc15a4b3a1e93e3e4ddaf4147c7",
+      "current": "7a36a4b32d8a5ac8a1d2f17d6d000a68c707bfc15a4b3a1e93e3e4ddaf4147c7"
+    },
+    {
+      "checkpoint": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.3-verification.json",
+      "path": "tests/language-readiness/nested-tree/rust_checks.rs",
+      "recorded": "9d805a415bc2f63e057910af0d1e679e46fd84533bfe2c6c126d912b8ec16b68",
+      "current": "9d805a415bc2f63e057910af0d1e679e46fd84533bfe2c6c126d912b8ec16b68"
+    },
+    {
+      "checkpoint": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.3-verification.json",
+      "path": "tests/language-readiness/context-names/grammar.spec",
+      "recorded": "8f408e81e2871b3b76c1a7fc7f99e059dad1c19dd03e91449a05fc9b88fff4b0",
+      "current": "8f408e81e2871b3b76c1a7fc7f99e059dad1c19dd03e91449a05fc9b88fff4b0"
+    },
+    {
+      "checkpoint": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.3-verification.json",
+      "path": "tests/language-readiness/context-names/cases.json",
+      "recorded": "3e7f25083e791db8048bed844523e85fbc53763eeaabd1253001a2b2650575ef",
+      "current": "3e7f25083e791db8048bed844523e85fbc53763eeaabd1253001a2b2650575ef"
+    },
+    {
+      "checkpoint": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.3-verification.json",
+      "path": "rust/Cargo.lock",
+      "recorded": "f225ab48d91b1c2eb3bec063f961d255d9e97b340d0ce300e749ca58ec155428",
+      "current": "f225ab48d91b1c2eb3bec063f961d255d9e97b340d0ce300e749ca58ec155428"
+    },
+    {
+      "checkpoint": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.3-verification.json",
+      "path": "rust/linkedspec-runtime/tests/nested_tree_readiness.rs",
+      "recorded": "31e59ea50d949ee31fac1a5d1587587be3911bba14d066e0f36a6d1b7c343889",
+      "current": "31e59ea50d949ee31fac1a5d1587587be3911bba14d066e0f36a6d1b7c343889"
+    },
+    {
+      "checkpoint": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.3-verification.json",
+      "path": "tests/language-readiness/context-names/rust_checks.rs",
+      "recorded": "e7a01a4fc4465c4a1e7933b54b5dc599249a000c356532168d8cbe6093246b43",
+      "current": "e7a01a4fc4465c4a1e7933b54b5dc599249a000c356532168d8cbe6093246b43"
+    },
+    {
+      "checkpoint": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.4-verification.json",
+      "path": "tests/language-readiness/nested-tree/grammar.spec",
+      "recorded": "498ffda35b05222388c64d99b0acb132a56996e97de3ffa9312f7dda6ee0ed72",
+      "current": "498ffda35b05222388c64d99b0acb132a56996e97de3ffa9312f7dda6ee0ed72"
+    },
+    {
+      "checkpoint": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.4-verification.json",
+      "path": "tests/language-readiness/nested-tree/cases.json",
+      "recorded": "7a36a4b32d8a5ac8a1d2f17d6d000a68c707bfc15a4b3a1e93e3e4ddaf4147c7",
+      "current": "7a36a4b32d8a5ac8a1d2f17d6d000a68c707bfc15a4b3a1e93e3e4ddaf4147c7"
+    },
+    {
+      "checkpoint": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.4-verification.json",
+      "path": "tests/language-readiness/context-names/grammar.spec",
+      "recorded": "8f408e81e2871b3b76c1a7fc7f99e059dad1c19dd03e91449a05fc9b88fff4b0",
+      "current": "8f408e81e2871b3b76c1a7fc7f99e059dad1c19dd03e91449a05fc9b88fff4b0"
+    },
+    {
+      "checkpoint": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.4-verification.json",
+      "path": "tests/language-readiness/context-names/cases.json",
+      "recorded": "3e7f25083e791db8048bed844523e85fbc53763eeaabd1253001a2b2650575ef",
+      "current": "3e7f25083e791db8048bed844523e85fbc53763eeaabd1253001a2b2650575ef"
+    },
+    {
+      "checkpoint": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.4-verification.json",
+      "path": "dart/pubspec.lock",
+      "recorded": "601c36466d20513d930c291c44143a801846349fda9ba13a8c6f63b15671a0c0",
+      "current": "601c36466d20513d930c291c44143a801846349fda9ba13a8c6f63b15671a0c0"
+    },
+    {
+      "checkpoint": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.4-verification.json",
+      "path": "dart/test/nested_tree_readiness_test.dart",
+      "recorded": "4f482641413b3289b01d3d770c905a08060bba116a7d209c537f440da44560ec",
+      "current": "4f482641413b3289b01d3d770c905a08060bba116a7d209c537f440da44560ec"
+    },
+    {
+      "checkpoint": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.4-verification.json",
+      "path": "tests/language-readiness/nested-tree/dart_checks.dart",
+      "recorded": "5ae819cccaf0dc2cfb2a1753f5351148307cebc8797ff605fc4ba8c65c15df4a",
+      "current": "5ae819cccaf0dc2cfb2a1753f5351148307cebc8797ff605fc4ba8c65c15df4a"
+    },
+    {
+      "checkpoint": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.5-verification.json",
+      "path": "tests/language-readiness/nested-tree/grammar.spec",
+      "recorded": "498ffda35b05222388c64d99b0acb132a56996e97de3ffa9312f7dda6ee0ed72",
+      "current": "498ffda35b05222388c64d99b0acb132a56996e97de3ffa9312f7dda6ee0ed72"
+    },
+    {
+      "checkpoint": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.5-verification.json",
+      "path": "tests/language-readiness/nested-tree/cases.json",
+      "recorded": "7a36a4b32d8a5ac8a1d2f17d6d000a68c707bfc15a4b3a1e93e3e4ddaf4147c7",
+      "current": "7a36a4b32d8a5ac8a1d2f17d6d000a68c707bfc15a4b3a1e93e3e4ddaf4147c7"
+    },
+    {
+      "checkpoint": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.5-verification.json",
+      "path": "tests/language-readiness/context-names/grammar.spec",
+      "recorded": "8f408e81e2871b3b76c1a7fc7f99e059dad1c19dd03e91449a05fc9b88fff4b0",
+      "current": "8f408e81e2871b3b76c1a7fc7f99e059dad1c19dd03e91449a05fc9b88fff4b0"
+    },
+    {
+      "checkpoint": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.5-verification.json",
+      "path": "tests/language-readiness/context-names/cases.json",
+      "recorded": "3e7f25083e791db8048bed844523e85fbc53763eeaabd1253001a2b2650575ef",
+      "current": "3e7f25083e791db8048bed844523e85fbc53763eeaabd1253001a2b2650575ef"
+    },
+    {
+      "checkpoint": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.5-verification.json",
+      "path": "julia/Manifest.toml",
+      "recorded": "2b4e4039b6d3bb76dd8bd9844f90f8083747982737572504198abd2cb64e48e4",
+      "current": "2b4e4039b6d3bb76dd8bd9844f90f8083747982737572504198abd2cb64e48e4"
+    },
+    {
+      "checkpoint": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.5-verification.json",
+      "path": "julia/Project.toml",
+      "recorded": "45bff88352b342d6a3970b3ad2c5cf853a3ff5261034210025d1b8ffc2dd9fa1",
+      "current": "45bff88352b342d6a3970b3ad2c5cf853a3ff5261034210025d1b8ffc2dd9fa1"
+    },
+    {
+      "checkpoint": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.5-verification.json",
+      "path": "julia/test/source_emitter_test.jl",
+      "recorded": "b158a29426e898c659848003173919529f2f241e73116693428ecea78dd1a39e",
+      "current": "b158a29426e898c659848003173919529f2f241e73116693428ecea78dd1a39e"
+    },
+    {
+      "checkpoint": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.5-verification.json",
+      "path": "tests/language-readiness/nested-tree/julia_checks.jl",
+      "recorded": "a0511244a5ae78c39e6d68c116a03ab1dcb08610ff8f01f75079551eb3825c62",
+      "current": "a0511244a5ae78c39e6d68c116a03ab1dcb08610ff8f01f75079551eb3825c62"
+    },
+    {
+      "checkpoint": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.6-verification.json",
+      "path": "tests/language-readiness/nested-tree/grammar.spec",
+      "recorded": "498ffda35b05222388c64d99b0acb132a56996e97de3ffa9312f7dda6ee0ed72",
+      "current": "498ffda35b05222388c64d99b0acb132a56996e97de3ffa9312f7dda6ee0ed72"
+    },
+    {
+      "checkpoint": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.6-verification.json",
+      "path": "tests/language-readiness/nested-tree/cases.json",
+      "recorded": "7a36a4b32d8a5ac8a1d2f17d6d000a68c707bfc15a4b3a1e93e3e4ddaf4147c7",
+      "current": "7a36a4b32d8a5ac8a1d2f17d6d000a68c707bfc15a4b3a1e93e3e4ddaf4147c7"
+    },
+    {
+      "checkpoint": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.6-verification.json",
+      "path": "tests/language-readiness/context-names/grammar.spec",
+      "recorded": "8f408e81e2871b3b76c1a7fc7f99e059dad1c19dd03e91449a05fc9b88fff4b0",
+      "current": "8f408e81e2871b3b76c1a7fc7f99e059dad1c19dd03e91449a05fc9b88fff4b0"
+    },
+    {
+      "checkpoint": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.6-verification.json",
+      "path": "tests/language-readiness/context-names/cases.json",
+      "recorded": "3e7f25083e791db8048bed844523e85fbc53763eeaabd1253001a2b2650575ef",
+      "current": "3e7f25083e791db8048bed844523e85fbc53763eeaabd1253001a2b2650575ef"
+    },
+    {
+      "checkpoint": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.6-verification.json",
+      "path": "lua/test/rule_local_cursor_generated_source_test.lua",
+      "recorded": "62e71693f6ee32a436caee596af149088060e4ee2979a0bbb8a256b28e30e1b4",
+      "current": "62e71693f6ee32a436caee596af149088060e4ee2979a0bbb8a256b28e30e1b4"
+    },
+    {
+      "checkpoint": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.6-verification.json",
+      "path": "tests/language-readiness/nested-tree/lua_checks.lua",
+      "recorded": "0cf52abd24227574f5e93389836176452332f75c1d751b823f1c70d2c31af435",
+      "current": "0cf52abd24227574f5e93389836176452332f75c1d751b823f1c70d2c31af435"
+    },
+    {
+      "checkpoint": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.6-verification.json",
+      "path": "tools/test_lua_project_data_storage.sh",
+      "recorded": "8e5fbcae1498a5bb864907e5a6c9d55fab8f2b760bf334fbdc96ff0a839d48d8",
+      "current": "8e5fbcae1498a5bb864907e5a6c9d55fab8f2b760bf334fbdc96ff0a839d48d8"
+    }
+  ],
+  "log_hashes": [
+    {
+      "checkpoint": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.1-verification.json",
+      "path": ".linkedspec-data/scratch/context-names-probe.log",
+      "recorded": "5147769c4ac557402bdeb110a6412cfd7674faff569d94745d1f8e7fb4e23e80",
+      "current": "5147769c4ac557402bdeb110a6412cfd7674faff569d94745d1f8e7fb4e23e80"
+    },
+    {
+      "checkpoint": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.1-verification.json",
+      "path": ".linkedspec-data/scratch/context-names-perl.log",
+      "recorded": "3230c160a0d66563b1d522f59a749614cf6b4a27d908ba9b11a71581448b8d82",
+      "current": "3230c160a0d66563b1d522f59a749614cf6b4a27d908ba9b11a71581448b8d82"
+    },
+    {
+      "checkpoint": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.1-verification.json",
+      "path": ".linkedspec-data/scratch/context-names-perl-final.log",
+      "recorded": "21e720118826c84119177c7220c9d40a1b289fce8d79c73acfddab6442c59759",
+      "current": "21e720118826c84119177c7220c9d40a1b289fce8d79c73acfddab6442c59759"
+    },
+    {
+      "checkpoint": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.1-verification.json",
+      "path": ".linkedspec-data/scratch/context-names-dependents.log",
+      "recorded": "0063350af5949233500927be5174d3b987efb779aa7cb8756c25064c6daf72e6",
+      "current": "0063350af5949233500927be5174d3b987efb779aa7cb8756c25064c6daf72e6"
+    },
+    {
+      "checkpoint": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.1-verification.json",
+      "path": ".linkedspec-data/scratch/context-names-storage.log",
+      "recorded": "883cd60c441ae54bfe14f7c48bec67e17d1e66ed9ad84c360a7b925820f243e4",
+      "current": "883cd60c441ae54bfe14f7c48bec67e17d1e66ed9ad84c360a7b925820f243e4"
+    },
+    {
+      "checkpoint": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.1-verification.json",
+      "path": ".linkedspec-data/scratch/context-names-test-name-audit.json",
+      "recorded": "df2ab66a479a3eb54d85502c174428aee119c46663487d09e8424e308ca02700",
+      "current": "df2ab66a479a3eb54d85502c174428aee119c46663487d09e8424e308ca02700"
+    },
+    {
+      "checkpoint": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.1-verification.json",
+      "path": ".linkedspec-data/scratch/context-names-book.log",
+      "recorded": "d1378a0d1c890250121eb6d577ce2a1b743691aa79d205c055d725440b22d245",
+      "current": "d1378a0d1c890250121eb6d577ce2a1b743691aa79d205c055d725440b22d245"
+    },
+    {
+      "checkpoint": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.1-verification.json",
+      "path": ".linkedspec-data/scratch/context-names-book-final.log",
+      "recorded": "51a6f846fd1c6a2ed0cd6b045251be2a73a803430b2a1d0c93a7fa78bbac723a",
+      "current": "51a6f846fd1c6a2ed0cd6b045251be2a73a803430b2a1d0c93a7fa78bbac723a"
+    },
+    {
+      "checkpoint": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.2-verification.json",
+      "path": ".linkedspec-data/scratch/context-native-perl.log",
+      "recorded": "4c9dd341bdfd805ce75036f3b6afd869bfc81990d13f2bd965794857af93f529",
+      "current": "4c9dd341bdfd805ce75036f3b6afd869bfc81990d13f2bd965794857af93f529"
+    },
+    {
+      "checkpoint": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.2-verification.json",
+      "path": ".linkedspec-data/scratch/context-default-perl.log",
+      "recorded": "8914691dc77a67782f361cc3df9e17a24f67f3fc720f10efda21890a997d5db8",
+      "current": "8914691dc77a67782f361cc3df9e17a24f67f3fc720f10efda21890a997d5db8"
+    },
+    {
+      "checkpoint": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.2-verification.json",
+      "path": ".linkedspec-data/scratch/context-native-rust.log",
+      "recorded": "09fc964c3e8b7358f90607af7813d34e7f1fe3036c0b6f0a9255a2bd6fb9be18",
+      "current": "09fc964c3e8b7358f90607af7813d34e7f1fe3036c0b6f0a9255a2bd6fb9be18"
+    },
+    {
+      "checkpoint": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.2-verification.json",
+      "path": ".linkedspec-data/scratch/context-default-rust.log",
+      "recorded": "7a491c9cf058cf953f7b0756ab26321a2df924c282a69c8f122fe466e8609110",
+      "current": "7a491c9cf058cf953f7b0756ab26321a2df924c282a69c8f122fe466e8609110"
+    },
+    {
+      "checkpoint": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.2-verification.json",
+      "path": ".linkedspec-data/scratch/context-native-dart.log",
+      "recorded": "46992525e3086b70e6a6d6fb92373adb2a1538560797debdbf6876b433b9714b",
+      "current": "46992525e3086b70e6a6d6fb92373adb2a1538560797debdbf6876b433b9714b"
+    },
+    {
+      "checkpoint": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.2-verification.json",
+      "path": ".linkedspec-data/scratch/context-default-dart.log",
+      "recorded": "d19f4a85e23e9cdc21340bd80dbc738f9f284d415d8ae186093e6bc402c2f80f",
+      "current": "d19f4a85e23e9cdc21340bd80dbc738f9f284d415d8ae186093e6bc402c2f80f"
+    },
+    {
+      "checkpoint": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.2-verification.json",
+      "path": ".linkedspec-data/scratch/context-native-julia.log",
+      "recorded": "34ab9ca8eaf7470dcd3a63ceae6855473ff03727b16bded7a3665631ddeda566",
+      "current": "34ab9ca8eaf7470dcd3a63ceae6855473ff03727b16bded7a3665631ddeda566"
+    },
+    {
+      "checkpoint": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.2-verification.json",
+      "path": ".linkedspec-data/scratch/context-default-julia.log",
+      "recorded": "e2c168026fc7cc314f702127c6c85aefc97aa6d041f6d7dc51eeb063a40081d5",
+      "current": "e2c168026fc7cc314f702127c6c85aefc97aa6d041f6d7dc51eeb063a40081d5"
+    },
+    {
+      "checkpoint": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.2-verification.json",
+      "path": ".linkedspec-data/scratch/context-native-puc.log",
+      "recorded": "f6ae6ea3bfb0ce63acf73dec6e860008c8fcced98705793fdca00e62c510c079",
+      "current": "f6ae6ea3bfb0ce63acf73dec6e860008c8fcced98705793fdca00e62c510c079"
+    },
+    {
+      "checkpoint": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.2-verification.json",
+      "path": ".linkedspec-data/scratch/context-default-puc.log",
+      "recorded": "81a4e78c418f8dc0192c094ea87ee4157e322527790a6d0201b0c6db6447b9b3",
+      "current": "81a4e78c418f8dc0192c094ea87ee4157e322527790a6d0201b0c6db6447b9b3"
+    },
+    {
+      "checkpoint": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.2-verification.json",
+      "path": ".linkedspec-data/scratch/context-native-luajit.log",
+      "recorded": "a3b393b41fcbe35986e7aebd097a055b8a9d4d1092cb5c302cc23f71c71d2ab3",
+      "current": "a3b393b41fcbe35986e7aebd097a055b8a9d4d1092cb5c302cc23f71c71d2ab3"
+    },
+    {
+      "checkpoint": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.2-verification.json",
+      "path": ".linkedspec-data/scratch/context-default-luajit.log",
+      "recorded": "0bd164cf2c0e3ae7959363596bde5445a42799c7c0adc30e53b27c4fa9aef8a7",
+      "current": "0bd164cf2c0e3ae7959363596bde5445a42799c7c0adc30e53b27c4fa9aef8a7"
+    },
+    {
+      "checkpoint": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.2-verification.json",
+      "path": ".linkedspec-data/scratch/context-native-rust-build.log",
+      "recorded": "89458aaff79baf6ca4dc8ae69398cc8a541297585bb6f5b9a73a7c888f2dd7a7",
+      "current": "89458aaff79baf6ca4dc8ae69398cc8a541297585bb6f5b9a73a7c888f2dd7a7"
+    },
+    {
+      "checkpoint": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.2-verification.json",
+      "path": ".linkedspec-data/scratch/context-native-option-controls.json",
+      "recorded": "0a38ba31296d44c88291db1173fb35ca4401ff10f2bb1c0666418a13439d7dcd",
+      "current": "0a38ba31296d44c88291db1173fb35ca4401ff10f2bb1c0666418a13439d7dcd"
+    },
+    {
+      "checkpoint": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.2-verification.json",
+      "path": ".linkedspec-data/scratch/context-native-book.log",
+      "recorded": "d61890f8c87cabc78fd932fda465e7050a87ba8f84d7cbc56dd6d1bdaee5b3c3",
+      "current": "d61890f8c87cabc78fd932fda465e7050a87ba8f84d7cbc56dd6d1bdaee5b3c3"
+    },
+    {
+      "checkpoint": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.3-verification.json",
+      "path": ".linkedspec-data/scratch/context-rust-carriers.log",
+      "recorded": "c74d03d024672f03805c75123e2da874370b0977e38dcf51b4a730b875846d1a",
+      "current": "c74d03d024672f03805c75123e2da874370b0977e38dcf51b4a730b875846d1a"
+    },
+    {
+      "checkpoint": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.3-verification.json",
+      "path": ".linkedspec-data/scratch/context-rust-final.log",
+      "recorded": "0e8e397b7ddd30450b991542d0693983db10566b96ab5fd8b2b4c3f1c97cedac",
+      "current": "0e8e397b7ddd30450b991542d0693983db10566b96ab5fd8b2b4c3f1c97cedac"
+    },
+    {
+      "checkpoint": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.3-verification.json",
+      "path": ".linkedspec-data/scratch/context-rust-format.log",
+      "recorded": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "current": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "checkpoint": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.3-verification.json",
+      "path": ".linkedspec-data/scratch/context-rust-book.log",
+      "recorded": "cbdda8dcad46318a1b4e15f9240ef7f4441ab72d8513b00a7a7933b92caac2b6",
+      "current": "cbdda8dcad46318a1b4e15f9240ef7f4441ab72d8513b00a7a7933b92caac2b6"
+    },
+    {
+      "checkpoint": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.4-verification.json",
+      "path": ".linkedspec-data/scratch/context-dart-final.log",
+      "recorded": "5b33c93e99d8cf1a9d6df23e286d134f250aa3e0dbd591a542d6c79f05cb54e1",
+      "current": "5b33c93e99d8cf1a9d6df23e286d134f250aa3e0dbd591a542d6c79f05cb54e1"
+    },
+    {
+      "checkpoint": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.4-verification.json",
+      "path": ".linkedspec-data/scratch/context-dart-analysis.log",
+      "recorded": "32a60e803c119756235cd122e22de94b99a937d850a128f0ccdfc369345fd773",
+      "current": "32a60e803c119756235cd122e22de94b99a937d850a128f0ccdfc369345fd773"
+    },
+    {
+      "checkpoint": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.4-verification.json",
+      "path": ".linkedspec-data/scratch/context-dart-analysis-final.log",
+      "recorded": "b8dd74b535dfea31f86c81e69876a7f3ca8787c07fc6e2c8d14b2277b996bfb3",
+      "current": "b8dd74b535dfea31f86c81e69876a7f3ca8787c07fc6e2c8d14b2277b996bfb3"
+    },
+    {
+      "checkpoint": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.4-verification.json",
+      "path": ".linkedspec-data/scratch/context-dart-format.log",
+      "recorded": "43a0060b01f8d00290502db016cbde393b149f5a0971989771a4fe3fddc181e7",
+      "current": "43a0060b01f8d00290502db016cbde393b149f5a0971989771a4fe3fddc181e7"
+    },
+    {
+      "checkpoint": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.4-verification.json",
+      "path": ".linkedspec-data/scratch/context-dart-book.log",
+      "recorded": "67f199a3140fffeb9d3144d113f5b6c7906964221fc8f784a8b49507ad9325d3",
+      "current": "67f199a3140fffeb9d3144d113f5b6c7906964221fc8f784a8b49507ad9325d3"
+    },
+    {
+      "checkpoint": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.5-verification.json",
+      "path": ".linkedspec-data/scratch/context-julia-final.log",
+      "recorded": "62c3b0e7544e84ff7be3a1a7267818043fe5e479938e1e745becec468357698a",
+      "current": "62c3b0e7544e84ff7be3a1a7267818043fe5e479938e1e745becec468357698a"
+    },
+    {
+      "checkpoint": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.5-verification.json",
+      "path": ".linkedspec-data/scratch/context-julia-storage.log",
+      "recorded": "03dcabcf60256cb82d68bdef11aba65253694e55fb96815c6e9b6333dd185a57",
+      "current": "03dcabcf60256cb82d68bdef11aba65253694e55fb96815c6e9b6333dd185a57"
+    },
+    {
+      "checkpoint": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.5-verification.json",
+      "path": ".linkedspec-data/scratch/context-julia-book.log",
+      "recorded": "e746c7bd3a348d2c2d69d62b877efdb0114e31ead8ea8f5b3e6895885ab69c05",
+      "current": "e746c7bd3a348d2c2d69d62b877efdb0114e31ead8ea8f5b3e6895885ab69c05"
+    },
+    {
+      "checkpoint": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.6-verification.json",
+      "path": ".linkedspec-data/scratch/context-lua-puc-final.log",
+      "recorded": "6bc77fefe2ed759afe1eef1b5d83d4a38b6fd6fe09d493b63e4db7029c69068c",
+      "current": "6bc77fefe2ed759afe1eef1b5d83d4a38b6fd6fe09d493b63e4db7029c69068c"
+    },
+    {
+      "checkpoint": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.6-verification.json",
+      "path": ".linkedspec-data/scratch/context-lua-luajit-final.log",
+      "recorded": "6bc77fefe2ed759afe1eef1b5d83d4a38b6fd6fe09d493b63e4db7029c69068c",
+      "current": "6bc77fefe2ed759afe1eef1b5d83d4a38b6fd6fe09d493b63e4db7029c69068c"
+    },
+    {
+      "checkpoint": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.6-verification.json",
+      "path": ".linkedspec-data/scratch/context-lua-storage.log",
+      "recorded": "faaa7e8f92b9d705c09bab39d193b93fa8094abbde035522a578ec635168493b",
+      "current": "faaa7e8f92b9d705c09bab39d193b93fa8094abbde035522a578ec635168493b"
+    },
+    {
+      "checkpoint": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.6-verification.json",
+      "path": ".linkedspec-data/scratch/context-lua-book.log",
+      "recorded": "7ef7da0a418175013819d8ebb13a9281557a67bbc66df53a5f69b5183cbca596",
+      "current": "7ef7da0a418175013819d8ebb13a9281557a67bbc66df53a5f69b5183cbca596"
+    }
+  ],
+  "audit_result": "PASS all40 source references across20 unique files and39 retained logs; all match",
+  "fixture_hashes": {
+    "tests/language-readiness/nested-tree/grammar.spec": "498ffda35b05222388c64d99b0acb132a56996e97de3ffa9312f7dda6ee0ed72",
+    "tests/language-readiness/nested-tree/cases.json": "7a36a4b32d8a5ac8a1d2f17d6d000a68c707bfc15a4b3a1e93e3e4ddaf4147c7",
+    "tests/language-readiness/context-names/grammar.spec": "8f408e81e2871b3b76c1a7fc7f99e059dad1c19dd03e91449a05fc9b88fff4b0",
+    "tests/language-readiness/context-names/cases.json": "3e7f25083e791db8048bed844523e85fbc53763eeaabd1253001a2b2650575ef"
+  },
+  "grammar": {
+    "physical_lines": 37,
+    "rules": 5,
+    "accepted_cases": 11,
+    "rejected_cases": 17
+  },
+  "native_each": {
+    "accepted": 11,
+    "rejected": 17,
+    "accepted_reuse_calls": 22,
+    "limits": "exit-on-error adapters; Rust Display-only projection, process exit1 separate from grammar1/2/3"
+  },
+  "typed_routes": {
+    "perl": {
+      "routes": 2,
+      "retained": 2,
+      "recoveries": 68
+    },
+    "rust": {
+      "routes": 6,
+      "retained": 4,
+      "recoveries": 136
+    },
+    "dart": {
+      "routes": 6,
+      "retained": 4,
+      "recoveries": 136
+    },
+    "julia": {
+      "routes": 5,
+      "retained": 2,
+      "recoveries": 68
+    },
+    "puc": {
+      "routes": 5,
+      "retained": 2,
+      "recoveries": 68
+    },
+    "luajit": {
+      "routes": 5,
+      "retained": 2,
+      "recoveries": 68
+    }
+  },
+  "typed_per_route": {
+    "original_calls": 90,
+    "grammar_mutants": 3,
+    "retained_recoveries_if_applicable": 34
+  },
+  "canonical": "Exact staged candidate must pass tools/run_ci_local.sh; receipt governs landing and is promoted to committed HEAD by the hook. Actual run result/log hash belong in the commit body.",
+  "focused_checks": [
+    {
+      "command": "bash tools/run_mdbook_local.sh",
+      "result": "PASS book render",
+      "log": ".linkedspec-data/scratch/context-reconciliation-book.log",
+      "sha256": "f97b4de0bb7387552e4f93eef0648e05df5dacb85b777ef6a8f18713bfeb9872"
+    },
+    {
+      "command": "Project-routed Python HTMLParser reads rendered code blocks, compares included grammar and worked JSON AST to authored source/cases",
+      "result": "PASS source and worked nested_distinct oracle",
+      "log": ".linkedspec-data/scratch/context-reconciliation-book-check.log",
+      "sha256": "2a3e03a2b11343ca5c22c964fa1528d4cb0cef6adaa21648ea2fd1d687fb3ec2"
+    }
+  ],
+  "limits": "Bounded context-name matching only. Same28 authored cases are reused; per-call isolation is distinct from retained recovery. No unfiltered optional backend gate, arbitrary-depth/resource/rollback/indentation/XML/campaign admission. Lossless .1.1.3.3 precedes core-gap selection."
+}

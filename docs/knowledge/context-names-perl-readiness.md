@@ -8,7 +8,7 @@ answers:
   - what statuses distinguish invalid syntax mismatched names and missing closes
   - does the context-name probe implement XML
 date: 2026-09-27
-status: bounded perl carrier proof verified; canonical context reconciliation remains
+status: bounded proof verified; cross-runtime milestone recorded separately
 tags: [language-readiness, context, recursion, captures, perl, generated-source]
 evidence: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.1 uses an authored37-line/five-rule grammar and28 independent cases. Both Perl routes pass90 original calls,34 immediate typed rejection recoveries and three grammar mutations. Expanded nesting suite410, direct dependents89 and unchanged managed storage27 pass. Public Get/return_descriptor and call_spec_handler_subst locate five ready rules and lexical comparison of closing capture with saved name."
 reverify: "bash tools/project_data_run.sh prove -v -Iperl t/nested_tree_readiness.t"
@@ -34,7 +34,9 @@ The Perl storage oracle still has27 owners. No runtime, schema, dependency or or
 `docs/language-readiness/context-names.md` owns evidence and authoring costs; the book's structured-format chapter
 teaches the grammar and examples. ASCII names, literal text and three statuses are a bounded language: no XML,
 entities, attributes, self-closing syntax, indentation, in-document recovery or arbitrary-depth/resource claim.
-[[context-names-public-native-readiness]] records the separate all-six native result. Other backend carriers remain .1.1.3.2.3-.6; canonical reconciliation is .7. The format
+[[context-names-public-native-readiness]] records the separate all-six native result. The backend carrier leaves .1.1.3.2.3-.6 are verified; milestone .7 reconciles the bounded result. The format
 campaign remains gated. Exact commands/source/log hashes are in the leaf checkpoint.
 Related: [[spec-regex-feature-contract]], [[terse-string-comparison-bridge-contract]],
 [[nested-tree-readiness-reconciliation]], [[perl-emitted-public-entry-trivia]].
+
+[[context-names-readiness-reconciliation]] records the complete bounded matrix, authoring costs and canonical milestone.

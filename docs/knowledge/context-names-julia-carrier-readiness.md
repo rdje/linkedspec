@@ -6,7 +6,7 @@ answers:
   - do Julia generated parsers preserve exact closing-name statuses and Unicode spans
   - how are fresh Julia context-name modules loaded and verified
 date: 2026-09-27
-status: bounded julia carrier proof verified; canonical context reconciliation remains
+status: bounded proof verified; cross-runtime milestone recorded separately
 tags: [language-readiness, context, julia, generated-source, recovery]
 evidence: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.5 passes253 assertions: context30, original nesting30, existing emitter65 and strict-document128. Five context routes each execute90 calls/three mutants, with68 recoveries on two retained engines. Both emitted hosts require actual success, exact report and cleanup. Storage remains22 owners/five locked package trees."
 reverify: "bash tools/run_julia_project_data.sh --project=julia -e 'using LinkedSpecJulia, JSON3, Test; const REPO_ROOT=pwd(); include("julia/test/source_emitter_test.jl"); include("julia/test/sexpr_document_v1_test.jl")'"
@@ -25,3 +25,5 @@ remain unchanged, as do strict merged-output JSON parsing and success status. Bo
 verified absent after their scopes. No private generated-family invocation, runtime, manifest or format change.
 Related: [[nested-tree-julia-carrier-readiness]], [[context-names-public-native-readiness]],
 [[context-names-dart-carrier-readiness]].
+
+[[context-names-readiness-reconciliation]] records the complete bounded matrix, authoring costs and canonical milestone.

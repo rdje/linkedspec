@@ -12,6 +12,15 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-09-27 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.7: bounded context-name reconciliation
+
+Reconcile unchanged11/17 authored context cases across six native runtimes and2/6/6/5/5/5 typed routes. Each
+route runs90 calls/three mutants; retained recoveries are68/136/136/68/68/68, with per-call isolation separate.
+Audit matches all40 source references/20 files and39 retained logs. The37-line grammar needs no new comparison
+or state primitive, while strictness guards and richer diagnostics remain authoring work. Current ledger/book/
+Knowledge/roadmap/frontier agree. Exact staged canonical CI is required for parent closure; its receipt and
+actual commit-body result preserve signoff. Lossless .1.1.3.3 follows; no broad format or resource-safety claim.
+
 ## 2026-09-27 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.6: Lua closing-name carriers
 
 Both PUC Lua and LuaJIT verify five context routes, each90 calls/three mutants and68 recoveries on two retained

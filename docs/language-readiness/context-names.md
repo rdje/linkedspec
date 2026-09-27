@@ -70,10 +70,10 @@ Three statuses improve rejection classification but richer grammar-specific diag
 The three-level control is not arbitrary-depth/resource proof; recognition rollback does not imply user-variable
 or AST rollback. Do not generalize to indentation, XML or other standards.
 
-Perl native/fresh emitted proof above is supplemented by the all-six public-native result below.
-All backend carrier proofs are recorded below; `.7` owns canonical evidence/authoring reconciliation. The overall
-context objective and structured-format campaign remain open. No comparison or recursive-state primitive is
-selected for implementation on the strength of these bounded results.
+All native and typed-carrier evidence is reconciled under `.1.1.3.2.7`. The bounded context-name objective
+closes through that exact staged canonical milestone. Lossless segmentation/child parsing `.1.1.3.3` precedes
+language-gap selection `.1.1.4`; the structured-format campaign remains gated. No new comparison or recursive-
+state primitive is selected on the strength of this bounded result.
 
 ## Public native adapter proof
 
@@ -108,7 +108,7 @@ integration command; the existing project-local Dart/Julia/Lua stores are reused
 dependency pins and both grammar/oracle pairs stay unchanged. Both fixtures are verified on all six routes;
 exact reports, product/source/log hashes and option controls are in this leaf's checkpoint.
 
-Perl's separate fresh emitted/recovery/mutation proof is unchanged. All backend carrier proofs are now recorded below; canonical reconciliation remains .7. No XML or broader format admission follows.
+Perl's separate fresh emitted/recovery/mutation proof is unchanged. All backend carrier proofs below reconcile under milestone .7. No XML or broader format admission follows.
 
 ## Rust typed carriers and retained recovery
 
@@ -145,7 +145,7 @@ bash tools/run_cargo_local.sh test --locked --offline --manifest-path rust/Cargo
 ```
 
 The checkpoint records the initial failure and final combined verification separately. Bounded direct-dependent
-checks cover leading trivia and the strict S-expression document. Both Lua carrier proofs are recorded below; canonical context reconciliation remains .7.
+checks cover leading trivia and the strict S-expression document. Both Lua carrier proofs are recorded below; milestone .7 reconciles the complete bounded result.
 
 ## Dart typed carriers and emitted package
 
@@ -175,7 +175,7 @@ formatting and package-context analysis pass. Directly analyzing the shared help
 cannot resolve its package import; both real emitted packages analyze the copied helper with fatal diagnostics
 and pass. This invocation limitation is recorded separately from runtime proof. No whole-package gate claim:
 the known SDK deprecations remain owned by DART-STARTUP-READING.2.25. Existing managed temporary-package cleanup,
-local stores, root lockfile and production code are unchanged. Lua proof is recorded below; canonical .7 follows.
+local stores, root lockfile and production code are unchanged. Lua proof is recorded below; milestone .7 reconciles the complete bounded result.
 
 ## Julia typed carriers and fresh emitted host
 
@@ -199,7 +199,7 @@ bash tools/run_julia_project_data.sh --project=julia -e 'using LinkedSpecJulia, 
 
 All 253 assertions pass: 30 context, 30 nesting, 65 existing emitter and 128 strict-document. The storage check
 still passes 22 temporary owners/five locked package trees. No private generated-family keyword, runtime,
-dependency or schema change is introduced. Both Lua ABIs are verified below; canonical context reconciliation remains open.
+dependency or schema change is introduced. Both Lua ABIs are verified below; milestone .7 reconciles the complete bounded result.
 
 ## PUC Lua and LuaJIT typed carriers
 
@@ -227,4 +227,38 @@ bash tools/run_lua_project_data.sh luajit -e 'dofile("lua/test/rule_local_cursor
 Both final runs pass 160 generated-v2 assertions plus 51 strict-document cases, 27 round trips and 24 retained
 recovery checks. The real storage gate passes 19 owners, three dual-ABI modules and all 30 census controls.
 No runtime, dependency, fixture, schema or storage-policy change. Known malformed-regex handling remains
-separately owned; this is no unfiltered full Lua gate or format admission. Canonical context .7 follows.
+separately owned; this is no unfiltered full Lua gate or format admission. Canonical context .7 closes only this bounded objective.
+
+## Reconciled bounded result
+
+Owner: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.7`, from clean `c20c123dd0573b1d831a0b4910a67091fa5572f2`.
+The six public native text adapters each pass 11 accepted/17 rejected cases and 22 forward/reverse accepted
+parses. Their process-exit behavior remains distinct from the typed carrier evidence:
+
+| Runtime | Typed routes | Retained parsers | Immediate recovery transitions |
+| --- | ---: | ---: | ---: |
+| Perl | 2 | 2 | 68 |
+| Rust | 6 | 4 | 136 |
+| Dart | 6 | 4 | 136 |
+| Julia | 5 | 2 | 68 |
+| PUC Lua | 5 | 2 | 68 |
+| LuaJIT | 5 | 2 | 68 |
+
+Each typed route runs 90 original calls and three grammar mutations. These are repeated executions of the same
+28 independently authored cases, not 90 different cases or a format corpus. Each retained parser performs
+34 immediate rejection-to-success transitions. Per-call generated entries prove isolation; they do not add
+retained-parser transitions. No routes are inferred beyond each backend's explicitly exercised public APIs.
+
+The 37-line/five-rule source uses opening capture state, lexical closing comparison and recursive rule-local
+restoration without a new primitive or host parsing escape. Authoring still includes four strictness guard
+locations: initial prefix, invalid gaps, final cursor and missing close. Grammar-specific statuses improve
+failure classification; expected-name messages, precise error locations, in-document repair and resource
+bounds remain unassessed. Names, Unicode text and three nested levels do not establish XML, indentation,
+arbitrary-depth behavior or speculative user-variable/AST rollback.
+
+The evidence audit matches all 40 source references (20 distinct files) and 39 retained logs from the six
+checkpoint leaves. Rust's observed test allocator collision is repaired and its combined child proof is green;
+Dart's shared helper is analyzed in real package context. Known unrelated SDK and malformed-regex owners remain
+separate. Ordinary focused proof is retained exactly; milestone landing additionally requires canonical CI on
+the exact staged candidate. The promoted receipt and commit body carry its actual result without changing the
+candidate after verification. Optional unfiltered backend suites are not inferred from canonical admission.

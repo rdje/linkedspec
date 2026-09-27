@@ -430,7 +430,7 @@ used by ordinary `.spec` syntax on every backend.
 
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2`
-  Status: `active`
+  Status: `done`
   Goal: Probe context-dependent matching with nested opening/closing names or indentation state using ordinary .spec, exact rejection and restoration controls.
   Dependencies: `.1.1.3.1`
   Acceptance: Source-located, bounded native/carrier evidence establishes whether existing explicit state and comparisons express the objective clearly; record and schedule any minimal reusable gap without claiming XML/YAML support.
@@ -587,10 +587,30 @@ used by ordinary `.spec` syntax on every backend.
 - [x] **LOCKSTEP** — Book, context ledger, Knowledge, checkpoint, task frontier, roadmaps, MEMORY and bounded live/history records agree. Canonical context reconciliation .1.1.3.2.7 follows before lossless extraction; no broad format admission.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.7`
-  Status: `pending`
+  Status: `done`
   Goal: Reconcile context-dependent grammar evidence, rejection diagnostics and authoring costs through canonical parent closeout.
   Dependencies: `.1.1.3.2.1`, `.1.1.3.2.2`, `.1.1.3.2.3`, `.1.1.3.2.4`, `.1.1.3.2.5`, `.1.1.3.2.6`
   Acceptance: Preserve exact runtime/carrier/mutation scope and canonical receipt; close only bounded context matching before lossless objective .1.1.3.3. No format campaign admission.
+
+  Activation: Cleanc20c123dd0573b1d831a0b4910a67091fa5572f2 after all-six carrier proof; all nine doctrines/post-pointer pass, brief0 and clean tree.
+  Scope: Reconcile all six context checkpoints and exact fixture/source/log hashes, native versus typed carrier limits, guard/diagnostic authoring costs and current documentation. Close only bounded context parent .1.1.3.2; lossless .1.1.3.3 follows. No runtime, fixture or generated-contract change.
+  Verification tier: `canonical`
+  Focused checks: Audit original source/oracles, all context source-hash references and retained logs; reconcile route/recovery/mutation table and prior harness repair; book, Knowledge, memory, histories, doctrines and diff hygiene.
+  Canonical trigger: Milestone and bounded parent closeout requires tools/run_ci_local.sh on the exact staged candidate; landing receipt and commit body preserve actual result.
+
+  Result: Six public-native11/17/22 trials remain distinct from typed carriers. Perl/Rust/Dart/Julia/PUC/LuaJIT prove2/6/6/5/5/5 routes,2/4/4/2/2/2 retained parsers and68/136/136/68/68/68 immediate recoveries. Every route runs90 original calls/three mutants against28 authored cases; all40 source references and39 logs match.
+  Authoring assessment: Existing capture values, lexical comparison and recursive local state compose this bounded grammar. Prefix/gap/final-cursor/missing-close guards remain explicit; richer diagnostic messages/spans, in-document recovery and resource safety are not established. No comparison/state primitive selected; lossless .1.1.3.3 precedes .1.1.4 gap selection.
+  Verification: Audit and book checks pass before staging; exact tools/run_ci_local.sh receipt is mandatory for landing and actual result/log hash belong in the commit body. Checkpoint: docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.7-verification.json.
+  Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.7 - reconcile bounded context-name readiness`.
+
+### `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.7` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Six completed backend checkpoints need one bounded route/recovery/authoring assessment and canonical parent closeout. Current summaries still describe the backend sequence rather than the completed matrix.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Backend leaves preserve precise local evidence but do not close the context objective. The public native exit-on-error adapters, retained typed engines and per-call generated entries have different proof boundaries and must stay distinct.
+- [x] **FIX** — Reconcile the exact six-runtime matrix, authored case counts, three mutation controls, explicit guard costs and unassessed diagnostic/resource limits; close only bounded context parent .1.1.3.2 under this canonical milestone.
+- [x] **ADDRESSED (verified)** — All40 source-hash references across20 files and39 retained logs match their six checkpoints. Original fixtures stay exact; Rust allocation repair and Dart package-context analysis remain explicit. Every typed route proves90 calls/three mutants with recovery only on retained parsers.
+- [x] **NO REGRESSION** — No runtime, fixture, test, generated-schema or dependency change. Book and focused evidence checks precede exact staged canonical CI; landing requires its receipt. Known optional full-backend gate issues are not claimed closed.
+- [x] **LOCKSTEP** — Ledger, public book, Knowledge, checkpoint, roadmaps, task frontier, MEMORY and bounded live/history records agree. Lossless segmentation/child parsing .1.1.3.3 follows; no XML, indentation or format-campaign admission.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3`
   Status: `pending`
@@ -811,7 +831,7 @@ used by ordinary `.spec` syntax on every backend.
 | 14 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.3` | `done` | Bounded nesting evidence/authoring limits reconciled; exact canonical receipt governs closeout. |
 | 15 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.1` | `done` | Perl native/fresh emitted context-name proof:11/17 cases,90 calls and34 recoveries per route. |
 | 16 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.2` | `done` | Context11/17/22 and original-default6/7/12 pass all six native routes. |
-| 17 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.7` | `pending` | Canonical context-name reconciliation and bounded parent closeout. |
+| 17 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3` | `pending` | Lossless segmentation and bounded child parsing readiness. |
 
 ## Decisions
 

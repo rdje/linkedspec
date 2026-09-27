@@ -8,7 +8,7 @@ answers:
   - how do I run the context-name public native verifier
   - does native context-name proof establish typed recovery after rejection
 date: 2026-09-27
-status: bounded public-native proof verified on six runtimes; other carriers remain separate
+status: bounded proof verified; cross-runtime milestone recorded separately
 tags: [language-readiness, context, native, unicode, public-loader]
 evidence: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.2 verifies unchanged11 accepted/17 rejected cases and22 accepted executions on Perl/Rust/Dart/Julia/PUC/LuaJIT. The existing verifier adds a fixed context-names choice and reads authored rejection statuses; its original nested-tree6/7/12 default also passes all six routes. Protected grammar/oracle/adapter/product hashes remain exact."
 reverify: "bash tools/run_python_project_data.sh tests/language-readiness/nested-tree/verify_native.py --fixture context-names --runtime RUNTIME, for perl/rust/dart/julia/puc/luajit after published integration preparation; omit --fixture to check the original nesting default."
@@ -22,7 +22,7 @@ in this grammar. Rust reports Display text; the other five runtimes project type
 
 Exit-on-error adapters do not prove same-engine recovery after failure. [[context-names-perl-readiness]] supplies
 that separate native/fresh emitted Perl proof. [[context-names-rust-carrier-readiness]] and [[context-names-dart-carrier-readiness]] supply typed proof;
-[[context-names-julia-carrier-readiness]] and [[context-names-lua-carrier-readiness]] add the remaining typed proof; parent .7 requires canonical reconciliation. No runtime, adapter,
+[[context-names-julia-carrier-readiness]] and [[context-names-lua-carrier-readiness]] add the remaining typed proof; milestone .7 reconciles the bounded result. No runtime, adapter,
 fixture, dependency or contract change is made by this native evidence slice.
 
 The existing verifier accepts only nested-tree or context-names and keeps nested-tree as its default.
@@ -31,3 +31,5 @@ build and retained local Dart/Julia/Lua products are used through public APIs, w
 pin changes. This is bounded tag-like syntax, not XML, indentation, arbitrary-depth/resource or campaign proof.
 Related: [[nested-tree-public-native-readiness]], [[context-names-perl-readiness]],
 [[nested-tree-readiness-reconciliation]].
+
+[[context-names-readiness-reconciliation]] records the complete bounded matrix, authoring costs and canonical milestone.

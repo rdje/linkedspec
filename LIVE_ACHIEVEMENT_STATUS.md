@@ -6,13 +6,15 @@ Ordinary .spec language readiness under SPEC-LANGUAGE-SELF-CONTAINMENT.1.1. The 
 
 ## Latest Completed Slice
 
-- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.6 - verify Lua closing-name carriers` — both ABIs pass five routes90 calls/three mutants and68 retained recoveries. Each passes160 v2 assertions plus strict-document proof; real storage19/trio/30 census controls passes.
+- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.7 - reconcile bounded context-name readiness` — all-six native/carrier matrix,40 source references and39 retained logs reconcile. Exact staged canonical receipt governs milestone closure; lossless extraction follows.
 
 ## Next Action
 
-- Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.7 for canonical context-name reconciliation and bounded parent closeout.
+- Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3 for lossless segmentation and bounded child parsing; resolve capability and authority contracts before the first probe.
 
 ## Recent Completions
+
+- `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.7` reconciles bounded context-name proof through canonical closure.
 
 - `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.6` verifies five context-name routes on both Lua ABIs.
 
@@ -43,8 +45,6 @@ Ordinary .spec language readiness under SPEC-LANGUAGE-SELF-CONTAINMENT.1.1. The 
 - `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.1.1` repairs emitted Perl entry and verifies nesting carriers.
 
 - `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.1` verifies exact native nesting on all six runtimes.
-
-- `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.6` repairs generic bound/computed container splicing.
 
 ## History
 
