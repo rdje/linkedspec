@@ -3,10 +3,10 @@
 ## Metadata
 
 - Tree ID: `SPEC-LANGUAGE-SELF-CONTAINMENT`
-- Status: `proposed` / director-approved direction; `.1+` awaiting future scheduling
+- Status: `active` / capability inventory selected from clean 30b2cc3a0
 - Roadmap lane: `.spec language evolution / expressive self-containment and alternate authoring profiles`
 - Created: `2026-07-30`
-- Last updated: `2026-07-30`
+- Last updated: `2026-09-27`
 - Owner: repo-local workflow
 
 ## Goal
@@ -66,7 +66,7 @@ used by ordinary `.spec` syntax on every backend.
 ## Task Tree
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT`
-  Status: `proposed` / director-approved direction; `.1+` awaiting future scheduling
+  Status: `active` / capability inventory selected from clean 30b2cc3a0
   Goal: Deliver expressive problem-domain closure plus an optional lossless EBNF-like authoring profile on one
     portable semantic core.
   Children: `.0`, `.1`, `.2`, `.3`, `.4`, `.5`, `.6`
@@ -82,17 +82,68 @@ used by ordinary `.spec` syntax on every backend.
   Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.0 - ratify expressive spec self-containment`
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1`
-  Status: `pending`
+  Status: `active`
   Goal: Specify the neutral expressive-self-containment contract and capability vocabulary.
   Children: `.1.1`, `.1.2`, `.1.3`, `.1.4`
   Dependencies: `.0`
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1`
-  Status: `pending`
+  Status: `active`
   Goal: Inventory current portable grammar/recursion/cursor/capture/state/callable/control/transformation/result
     powers and every routine host-language escape or expressiveness gap using LinkedSpec tools first.
+  Children: `.1.1.1`, `.1.1.2`, `.1.1.3`, `.1.1.4`, `.1.1.5`
   Acceptance: A source-located five-backend ledger separates implemented, partial, missing, compatibility-only,
-    backend-host, and deliberately forbidden environmental authority.
+    backend-host, and deliberately forbidden environmental authority; unassessed objectives are not missing-capability claims.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.1`
+  Status: `done`
+  Goal: Inventory the grammar, recursion, cursor and capture foundations against campaign needs using existing canonical contracts and bounded fresh tools.
+  Activation: Clean 30b2cc3a0d4ecca2a207d46b658287fd6bbb4c7a; .92 committed with all nine doctrines, empty brief, no background job. September27 director steering selects ordinary .spec expressiveness before the broad structured-format campaign; optional alternate syntax remains later.
+  Scope: A source-located five-backend evidence ledger, current contract/checker observations, known defect owners, and representative follow-up probes. No runtime, neutral contract, capability admission or format support changes.
+  Acceptance: Distinguish contract/admission from fresh runtime proof; cover rule entry/matching, recursion/progress, cursor transactions, source spans and gaps. Keep untested objectives unassessed and schedule their probes. Explain the maturity gate in the book without claiming EBNF equivalence or campaign activation.
+  Verification tier: `focused`
+  Focused checks: Existing capability/language and relevant neutral grammar/cursor/capture checkers; ledger source-path and exact evidence review; mdBook; memory; history pressure; Knowledge map; all doctrines; git diff --check.
+  Canonical trigger: none for an ordinary evidence inventory and scheduling clarification; public semantic contract movement, admission or infrastructure changes require a separate canonical leaf.
+  Verification: PASS seven existing neutral/structural checks: capability20/100/0/0; language250/105+1/126; root7/0/54; cursor8/0/60; recognition138/250/58; typed14/0/231; gaps9/0/63. Independent ledger review verifies34 source paths, exact consumer bindings, all referenced completed rollout metadata and the actual stale manifest description. Book rendering and git diff --check pass. Runtime and full-format execution are not claimed; standard memory/history/Knowledge/doctrines govern landing.
+  Evidence: docs/language-readiness/grammar-cursor-capture.md is the durable ledger with exact commands and limits. The seven scratch logs below are optional retained transcripts; re-execution does not require them.
+  Log: .linkedspec-data/scratch/selfcontain111-capability.log SHA256 6ba5a51e91a3bc49d627b0c4b2c56798b94b899f8755cdf97b9dfd3b4197171b
+  Log: .linkedspec-data/scratch/selfcontain111-inter_match_gap_capture.log SHA256 9479cae2bb2b5c57d5f5faf06d182ca4cfa5716d3e9b972341a71ee1e4cdf305
+  Log: .linkedspec-data/scratch/selfcontain111-language.log SHA256 d55efe19068d9c2ea9533bb26dbe0469e46e2041881ddd035b547fd3997f44aa
+  Log: .linkedspec-data/scratch/selfcontain111-recognition_transaction.log SHA256 21c6046da646342ac46653c4d6d70901b1d0915944a14373fc5976508e3a7688
+  Log: .linkedspec-data/scratch/selfcontain111-root_rule_selection.log SHA256 876b2f31e254845ad6c742c1eb5a0694cfdb4714b801136458ac699a9219e792
+  Log: .linkedspec-data/scratch/selfcontain111-rule_local_cursor.log SHA256 2ab722ead46c46d940c62b8a5266be5103c5d06f5beef264564a464ab460364d
+  Log: .linkedspec-data/scratch/selfcontain111-typed_source_location.log SHA256 1e7b9e4f5674c8c3400e9b7dc8b3d007adb9c08b06a5092cf1346e899495c087
+  Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.1 - inventory grammar readiness foundations`
+
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.2`
+  Status: `pending`
+  Goal: Extend the same ledger through scoped state, callable composition, control, transformation and typed result construction, separating host compatibility and approved missing features from defects.
+  Dependencies: `.1.1.1`
+  Acceptance: Each of these five dimensions has current canonical owners, five-backend evidence boundaries, source-located limitations and an executable follow-up where objective composition remains unassessed.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3`
+  Status: `pending`
+  Goal: Execute bounded representative grammar objectives against the inventory before selecting new primitives.
+  Dependencies: `.1.1.2`
+  Acceptance: Natural nesting, context-sensitive delimiter/indentation state, and lossless staged extraction have exact authored sources, positive/negative inputs, AST/span oracles and runtime/provenance evidence. Reuse existing document grammar and neutral fixtures where suitable; these are readiness probes, not whole-format conformance claims. Split each objective into its own commit before execution if needed.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.4`
+  Status: `pending`
+  Goal: Reconcile the finite inventory and representative evidence into an owned gap list for `.1.2` and `.1.4`.
+  Dependencies: `.1.1.3`
+  Acceptance: Every observed gap is implemented, partial, missing, compatibility-only, backend-host or deliberately forbidden; untested objectives remain separately unassessed. New capability proposals identify reusable semantics and portable proof, and existing defects retain their original repair owners and priority. Do not imply an exhaustive proof of every possible grammar.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.5`
+  Status: `pending`
+  Goal: Repair the stale general capability description of removed global parse-mode controls and guard recurrence.
+  Priority: P2; after representative inventory reconciliation `.1.1.4`, before `.1.2` uses that manifest as closure authority. Coordinate startup `.41.2` without duplicating its broad guide repair.
+  Reproduce: Run perl tools/check_capability_conformance.pl (passes 20/100/0/0), then compare manifest capability runtime.top_rule_and_parse_mode_controls.contract with rule_local_cursor_contract.json policy.global_override. The former says native execution accepts seek/consume parse-mode controls; the latter removes public overrides, and the public rule-mode guide documents targeted rejection.
+  Root cause: tools/check_capability_conformance.pl validate_manifest requires a nonempty contract string for general rows (line797 at activation), while exact text checks at line606 apply only to the two mutation capabilities. No current semantic assertion binds this general row to the rule-local-cursor authority.
+  Impact: Inventory readers can infer a removed option is supported from a green census. No runtime regression is asserted.
+  Acceptance: Preserve stable capability identity where required, reconcile its description to explicit entry selection and intrinsic family cursor policy, and add a reason-sensitive regression that rejects the stale claim. Verify dependent capability/generated-source consumers and public teaching; use canonical tier for checker/contract admission movement.
+  Verification: .1.1.1 freshly passes the capability checker and the specific cursor checker against the contradictory unchanged source. Exact source/read-only reproduction is retained in docs/language-readiness/grammar-cursor-capture.md.
+  Commit: pending.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.2`
   Status: `pending`
@@ -237,9 +288,12 @@ used by ordinary `.spec` syntax on every backend.
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
 | 1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.0` | `done` | ADR `0064`, the complete decomposition, public/continuity alignment, and full documentation/canonical signoff durably route the direction without behavior change. |
-| 2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1` | `pending` / awaiting future scheduling | Begin only after a clean explicit scheduling decision; current callable-codeblock backend parity remains next. |
+| 2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.1` | `done` | Four capability areas mapped to current contracts and five-backend evidence; seven neutral/structural checks pass. |
+| 3 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.2` | `pending` | Extend the ledger through state/callables/control/transformation/results, then execute bounded representative objectives. |
 
 ## Decisions
+
+- `2026-09-27`: The director returns to feature implementation and names mature .spec parsing power as the north star, with the structured-format campaign as the long-term destination. Activate the bounded .1.1 inventory after verified clean .92. Language readiness and backend parity gate the campaign; optional EBNF-like syntax is not the immediate objective. Older callable-first scheduling below records its historical decision.
 
 - `2026-07-30`: The director approved expressive problem-domain self-containment: `.spec` authors should not feel
   limited when expressing LinkedSpec objectives, but this does not grant arbitrary outside-world interaction.
@@ -261,10 +315,11 @@ used by ordinary `.spec` syntax on every backend.
 ## Blockers
 
 - None for `.0`.
-- `.1+` is intentionally unscheduled behind the current callable-codeblock parity program until a later clean
-  prioritization decision.
+- None for `.1.1`. The September27 clean prioritization supersedes the earlier callable-first schedule. Format implementation and the optional frontend remain gated by their own prerequisites.
 
 ## Verification Log
+
+September27 `.1.1.1`: seven neutral/structural checks, 34 ledger source-path/consumer checks and rendered book pass; no runtime/format-support promotion. Normal doctrine gates run at landing.
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
@@ -277,6 +332,8 @@ used by ordinary `.spec` syntax on every backend.
 | `.0` | `SPEC-LANGUAGE-SELF-CONTAINMENT.0 - ratify expressive spec self-containment` | Direction capture only; no parser/runtime behavior. |
 
 ## Changelog
+
+- `2026-09-27`: Clean feature return activates `.1.1`, splits five bounded children and completes the first grammar/cursor/capture inventory. The campaign remains gated on language readiness and parity; `.1.1.5` owns confirmed stale general capability prose.
 
 - `2026-07-30`: Created the task tree first from clean Rust closeout commit `4aebf906`; no other file changed
   before ownership existed.

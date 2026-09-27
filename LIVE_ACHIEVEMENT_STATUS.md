@@ -2,17 +2,19 @@
 
 ## Current Activity
 
-Director-selected return to feature implementation: mature .spec parsing expressiveness comparable to EBNF through LinkedSpec’s cursor-aware, linked-rule approach. Finish the clean .92 handoff, then activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.1. Optional EBNF-like syntax remains later; remaining repairs stay owned.
+Ordinary .spec language readiness under SPEC-LANGUAGE-SELF-CONTAINMENT.1.1. The long-term structured-format campaign requires demonstrated language strength and backend parity; the optional EBNF-like frontend remains later.
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.92 - isolate real legacy fallback verification` — real fallback 27 assertions, portable loader composition 32 top-level results, safe root mutation and complete Phase0 1033/1033 pass. Production discovery is unchanged and tracked under .96.
+- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.1 - inventory grammar readiness foundations` — seven existing neutral/structural checks and 34 source-path/consumer checks pass; book explains the maturity gate. No new runtime or format support claim.
 
 ## Next Action
 
-- Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.1 from clean HEAD; inventory concrete grammar/expressiveness gaps before implementing missing general language capabilities.
+- Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.2 from clean HEAD; extend the evidence ledger through state/callables/control/transformation/results before representative grammar probes.
 
 ## Recent Completions
+
+- `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.1` inventories grammar/cursor/capture readiness and owns stale capability prose.
 
 - `2026-09-27` — `SESSION-STARTUP-READING.92` isolates real fallback verification and passes full Phase0.
 
@@ -43,10 +45,6 @@ Director-selected return to feature implementation: mature .spec parsing express
 - `2026-09-24` — `SESSION-STARTUP-READING.86.3` closes the bounded scanner parent at aa057b107 with Rust56, exact book/source continuity and canonical PASS.
 
 - `2026-09-24` — `SESSION-STARTUP-READING.86.5.3` verifies same-line slot identity with focused240/book103, six-runtime grammar72 and Phase0 1033.
-
-- `2026-09-24` — `SESSION-STARTUP-READING.86.5.2.2` verifies same-line slash calls with focused207/book84 and Phase0 1033/1033.
-
-
 
 ## History
 

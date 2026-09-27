@@ -12,6 +12,15 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-09-27 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.1: grammar readiness foundations
+
+Activate ordinary .spec expressiveness after clean30b2cc3a0. The source-located readiness ledger maps grammar,
+recursion, cursor and capture contracts to five-backend consumers and keeps admitted metadata separate from fresh
+execution. Seven neutral/structural checks and34 path/consumer checks pass; book rendering passes. No runtime,
+format support or EBNF equivalence is claimed. State/control/results and representative grammar objectives follow.
+The structured-format campaign remains gated on language strength and parity. New .1.1.5 owns stale capability
+parse-mode prose; existing recognition defects retain startup .38/.40 ownership. Standard doctrines govern landing.
+
 ## 2026-09-27 — Bound real legacy fallback verification
 
 SESSION-STARTUP-READING.92 replaces checkout-wide discovery in the Phase0 fallback test with a fresh-process consumer using a byte-identical PathSearch module and the actual public resolver/compiler. The isolated suite verifies exact results, real misses, call/cache counts, seven filesystem visits, an excluded decoy tree and cleanup. The separate unresolved-name unit test stubs discovery only; real missing-name coverage stays in the isolated suite. Production resolution is unchanged and its cost remains owned by .96. Focused proof, the safe original-module mutation and complete Phase0 1033/1033 pass; commands and hashes are recorded in the owning task leaf. The director selects .spec expressive-self-containment work next, strengthening the language before the long-term structured-format campaign.

@@ -12,6 +12,15 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-09-27 — language readiness evidence boundary (.1.1.1)
+
+The capability100/0/0 census and250-name coverage do not certify composed parser objectives or zero defects.
+Specific root/cursor/recognition/typed/gap authorities pass fresh neutral checks; docs/language-readiness/grammar-cursor-capture.md
+retains the exact five-backend consumers and known limitations. The general manifest's parse-mode row still
+advertises removed controls because its checker validates a contract string, while exact semantic text binding
+covers only mutation rows. .1.1.5 owns correction/recurrence before closure-definition use. Prefer the specific
+cursor authority now. No new runtime matrix or format conformance was executed by this evidence-only slice.
+
 ## 2026-09-27 — Separate legacy discovery proof from checkout size
 
 The legacy module derives its discovery root from its loaded module location and caches directories in lexical process state. Copying the unchanged module into a bounded consumer and invoking it in a fresh subprocess exercises that real mechanism without inheriting Phase0 state or traversing retained build outputs. Delegating observers record calls and filesystem visits; an unexpected root fails before traversal. Cold filesystem time is reported separately from compilation and is not used as a flaky timing threshold. A sibling tree and matching decoy independently expose accidental search expansion. Production compatibility and cold-discovery cost remain a separately scheduled .96 obligation. The director’s clean-boundary handoff returns to .spec expressiveness work under SPEC-LANGUAGE-SELF-CONTAINMENT.1.1, guided by the existing structured-format campaign requirements. Broad format parsing stays gated on language readiness and parity; the optional EBNF-like frontend remains later.

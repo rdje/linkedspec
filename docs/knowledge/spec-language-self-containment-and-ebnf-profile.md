@@ -13,7 +13,7 @@ answers:
   - "how will diagnostics map from canonical IR to EBNF authored source"
   - "does every backend implement the same authoring profile semantics"
   - "when will the self containment and EBNF direction be implemented"
-date: 2026-07-30
+date: 2026-09-27
 status: current
 tags: [architecture, dsl, self-containment, ebnf, frontend, source-map, actionir, handlerir, parity]
 evidence: "ADR 0064 and SPEC-LANGUAGE-SELF-CONTAINMENT.0 accept problem-domain expressive closure without ambient effects, plus an optional honest EBNF-like frontend that lowers losslessly into one canonical semantic model across five backends; no syntax or behavior is implemented by the direction leaf."
@@ -38,9 +38,15 @@ matching, seek/consume, cursor movement, capture/state/actions, progress, failur
 through explicit extensions. Lowering preserves profile identity, original source, Unicode-scalar spans, canonical
 node correspondence, and diagnostic remapping, so users debug the source they authored.
 
-No new syntax or behavior is current yet. `docs/tasks/SPEC-LANGUAGE-SELF-CONTAINMENT.md` first inventories portable
+This program has not yet added syntax or runtime behavior. The director selected ordinary .spec expressiveness
+on September27, after clean fallback-verification commit 30b2cc3a0. The active .1.1 inventory starts with the
+source-located grammar/cursor/capture ledger in docs/language-readiness/grammar-cursor-capture.md; state/control
+inventory and representative objectives follow. The structured-format campaign remains gated on language readiness
+and parity; an optional EBNF-like frontend is later work.
+
+ `docs/tasks/SPEC-LANGUAGE-SELF-CONTAINMENT.md` first inventories portable
 capabilities and real gaps, defines mutation-sensitive neutral objectives, closes missing core semantics, proves the
 profile on realistic recursive/progressive formats, then implements five-backend frontend parity and no-drift.
 
-Related facts: [[language-agnostic-backend-vision]], [[typed-source-location-cursor-algebra-direction]],
+Related facts: [[spec-language-readiness-grammar-foundations]], [[language-agnostic-backend-vision]], [[typed-source-location-cursor-algebra-direction]],
 [[spec-format-brainstorm-rounds-1-3]], [[post-parity-structured-text-program]].

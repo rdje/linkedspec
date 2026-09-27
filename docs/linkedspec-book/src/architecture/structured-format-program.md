@@ -5,9 +5,43 @@ Unicode-aware text-to-AST parsers. The initial scope is the 91 eligible rows in 
 catalog: general configuration formats, documents and markup, RDF/graph syntaxes, schema and interface languages,
 feeds and messaging text, geospatial text, and domain-specific JSON/XML/YAML serializations.
 
-This work has a strict dependency: it does not begin until Perl, Rust, Dart, Julia, and Lua have full feature and
-behavior parity. Planning the program does not make any format currently supported and does not relax an open
-backend obligation.
+This work has two readiness requirements: `.spec` must express the selected parsing objectives clearly without
+routine host-language escape hatches, and Perl, Rust, Dart, Julia, and Lua must have the required feature and
+behavior parity. The broad campaign is not active. Planning it does not make any format currently supported or
+relax an open backend obligation.
+
+## Strengthen `.spec` before the campaign
+
+The September 2026 priority is ordinary `.spec` expressiveness. The long-term ambition is parsing power comparable
+to grammar-oriented tools through LinkedSpec's linked rules, explicit cursor control, captures and transformations.
+That is a design goal, not a current equivalence claim. An optional EBNF-like frontend remains a separate later step.
+
+The language already has admitted foundations for selecting and linking rules, composing seek/consume policies,
+recognition-only transactions, Unicode source spans and lossless gap capture. Their neutral checks pass, but a
+green feature inventory does not prove a difficult grammar is correct or pleasant to author. Known defects remain
+tracked, including Perl's unfinished-recognition abort restoring private state without restoring the caller's
+input cursor. That limitation must be resolved before relying on abort-safe speculative parsing.
+
+Readiness work uses small representative objectives before committing to entire standards:
+
+| Objective | What the evidence must show |
+| --- | --- |
+| Nested document grammar | Exact ASTs and source spans, malformed-input and trailing-text rejection, and advancing recursion. |
+| Context-dependent syntax | Clearly scoped delimiter or indentation state, correct nested restoration, and useful rejection diagnostics. |
+| Lossless extraction and child parsing | Exact prefix/interstitial/tail reconstruction, bounded child inputs, retained provenance and explicit dispatch authority. |
+
+These are planned composition probes, not newly supported formats or confirmed missing primitives. If a probe
+fails, its tools and minimized input must distinguish grammar mistakes, engine defects, missing general mechanisms,
+and awkward authoring. The result then selects a bounded implementation slice with portable semantics and tests.
+
+Recognition rollback covers cursor, boundaries and marks; it does not undo arbitrary AST or user-variable writes.
+For example, a grammar that tentatively builds an AST must separate recognition from committed construction or
+establish a different, explicitly accepted mechanism. Merely adding alternate syntax would not solve that requirement.
+
+The owning task is `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1`; its first inventory records existing contracts and exact
+backend consumers, while later slices assess state/control/results and execute the representative objectives.
+The format program's `.1` readiness gate remains pending. The original catalog and parked language extension retain
+all their conformance, Unicode, diagnostics, performance and backend obligations.
 
 ## Approved and parked: language coverage and authoring difficulty
 
@@ -55,7 +89,8 @@ result, so recording a problem leads to accountable follow-through.
 
 The durable routes are `STRUCTURED-TEXT-FORMAT-PROGRAM.2.8` for the matrix and rubric and `.12` for language
 coverage; `.0.1` records this approval. ADR `0034` carries the dated planning addendum. Readiness `.1` remains the
-activation gate, and the current startup reading and repair work retains its place in the roadmap.
+activation gate. The September language-readiness work above is now the immediate feature direction; separately
+owned startup defects remain queued and must be resolved when they block a selected objective.
 
 ## One dynamic parser source
 

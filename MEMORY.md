@@ -1,11 +1,11 @@
 # MEMORY
 
-- activation_commit: `27a2168d186cd606d0831e8fffc4d6196e159c07` — clean activation base for fallback verification .92.
-- latest_completed_leaf: `SESSION-STARTUP-READING.92 - isolate real legacy fallback verification`.
-- active_work_unit: none — .92 is complete; the director selected expressive .spec feature work for the next clean activation.
-- next_action: Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.1 from clean HEAD: identify .spec expressiveness gaps against the long-term structured-format campaign, then implement general capabilities; campaign activation requires language readiness and backend parity. Optional EBNF-like syntax remains later.
-- in_flight_uncommitted: none — intended clean post-landing handoff; .92 passes full Phase0 1033/1033. Startup repairs .94/.95/.51/.96 remain owned and queued behind feature work.
-- blockers: none for feature activation; ARCHOGEN owns downstream acceptance. Preserve retained transitive edits/evidence; named-argument and format proposals stay parked.
+- activation_commit: `30b2cc3a0d4ecca2a207d46b658287fd6bbb4c7a` — clean activation base for expressive-language inventory .1.1.1.
+- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.1 - inventory grammar readiness foundations`.
+- active_work_unit: none — .1.1.1 is complete; .1.1.2 is the next clean activation.
+- next_action: Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.2: extend the readiness ledger through state, callables, control, transformation and results; then .1.1.3 executes representative grammar objectives. Campaign and optional frontend remain gated.
+- in_flight_uncommitted: none — intended clean post-landing handoff; seven neutral checks, 34 ledger source-path checks and book render pass. No new backend execution or format support is claimed.
+- blockers: none for .1.1.2; .1.1.5 owns stale capability parse-mode prose, and startup .38/.40 recognition defects remain queued. ARCHOGEN owns downstream acceptance; named-argument and format proposals stay parked.
   Wrapper startup .7 remains open; recovery/purge stay prohibited. No interrupted Phase0 run counts as proof.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
   active table; the task metadata doctrine inventories all consumers, permits arbitrary frontier-row rewrites,
