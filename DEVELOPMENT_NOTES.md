@@ -12,6 +12,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-09-27 — Separate legacy discovery proof from checkout size
+
+The legacy module derives its discovery root from its loaded module location and caches directories in lexical process state. Copying the unchanged module into a bounded consumer and invoking it in a fresh subprocess exercises that real mechanism without inheriting Phase0 state or traversing retained build outputs. Delegating observers record calls and filesystem visits; an unexpected root fails before traversal. Cold filesystem time is reported separately from compilation and is not used as a flaky timing threshold. A sibling tree and matching decoy independently expose accidental search expansion. Production compatibility and cold-discovery cost remain a separately scheduled .96 obligation. The director’s clean-boundary handoff returns to .spec expressiveness work under SPEC-LANGUAGE-SELF-CONTAINMENT.1.1, guided by the existing structured-format campaign requirements. Broad format parsing stays gated on language readiness and parity; the optional EBNF-like frontend remains later.
+
 ## 2026-09-27 — Retain artifacts when obsolescence is unproven
 
 SESSION-STARTUP-READING.93 inventories repository-owned generated output without deleting reusable caches, dependency data or verification evidence. Restore the overwrite-only cleanup date in `docs/ARTIFACT_CLEANUP.md`; exact scope and measured results belong to the task leaf. Other repositories and submodule internals remain excluded. No runtime or storage policy changes. Focused memory, Knowledge, history, task/doctrine and book checks govern this documentation slice; continue with .92 fallback verification.

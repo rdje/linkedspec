@@ -1,11 +1,11 @@
 # MEMORY
 
-- activation_commit: `2ac834913d85c32f532be9b0aab63644838a577a` — clean activation base for artifact census .93.
-- latest_completed_leaf: `SESSION-STARTUP-READING.93 - record retained artifact census`.
-- active_work_unit: `SESSION-STARTUP-READING.92` — pending bounded legacy fallback verification; other repositories remain strictly read-only.
-- next_action: Repair .92 fallback verification using an isolated fixture and real public resolver; then .94/.95/.51. Never modify another repository, including reversing ARCHOGEN82ee99a05.
-- in_flight_uncommitted: none — intended clean post-landing handoff. Published fixfd3e328d5 remains valid; local correction8b5b5ffd8 records the unauthorized ARCHOGEN write.
-- blockers: ARCHOGEN owns its repository disposition and acceptance. Preserve retained transitive edits/evidence; named-argument and format proposals stay parked.
+- activation_commit: `27a2168d186cd606d0831e8fffc4d6196e159c07` — clean activation base for fallback verification .92.
+- latest_completed_leaf: `SESSION-STARTUP-READING.92 - isolate real legacy fallback verification`.
+- active_work_unit: none — .92 is complete; the director selected expressive .spec feature work for the next clean activation.
+- next_action: Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.1 from clean HEAD: identify .spec expressiveness gaps against the long-term structured-format campaign, then implement general capabilities; campaign activation requires language readiness and backend parity. Optional EBNF-like syntax remains later.
+- in_flight_uncommitted: none — intended clean post-landing handoff; .92 passes full Phase0 1033/1033. Startup repairs .94/.95/.51/.96 remain owned and queued behind feature work.
+- blockers: none for feature activation; ARCHOGEN owns downstream acceptance. Preserve retained transitive edits/evidence; named-argument and format proposals stay parked.
   Wrapper startup .7 remains open; recovery/purge stay prohibited. No interrupted Phase0 run counts as proof.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
   active table; the task metadata doctrine inventories all consumers, permits arbitrary frontier-row rewrites,

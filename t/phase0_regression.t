@@ -3962,39 +3962,34 @@ subtest 'get_parser_pathsearch_fallback_calls_go_once' => sub {
 };
 
 subtest 'get_parser_pathsearch_fallback' => sub {
-    plan tests => 5;
+    plan tests => 2;
 
-    my $tmp_name = 'phase1_pathsearch_fallback_' . $$;
-    my $tmp_dir = File::Spec->catdir($Bin, 'tmp_phase1_pathsearch');
-    my $tmp_spec = File::Spec->catfile($tmp_dir, "$tmp_name.spec");
-    my $module_relative_candidate = File::Spec->catfile($spec_dir, "$tmp_name.spec");
-    my $source_spec = File::Spec->catfile($spec_dir, 'Lispish.spec');
-    my $source_content = slurp($source_spec);
-
-    mkdir($tmp_dir) or die "Cannot create directory '$tmp_dir': $!" unless -d $tmp_dir;
-    open(my $fh, '>', $tmp_spec) or die "Cannot create fallback spec '$tmp_spec': $!";
-    print {$fh} $source_content;
-    close($fh);
-
-    ok(-f $tmp_spec, 'temporary fallback spec created');
-    ok(!-f $module_relative_candidate, 'module-relative candidate does not exist for fallback case');
-
-    my $parser = LinkedSpec::get_parser($tmp_name);
-    ok(defined($parser) && ref($parser) eq 'CODE', 'fallback parser created through get_parser');
-    ok(exists $INC{'PathSearch.pm'}, 'PathSearch loaded when fallback resolution is needed');
-
-    my $input = '(u v)';
-    my $ast = eval { $parser->(\$input) };
-    ok(!$@ && defined($ast) && ref($ast) eq 'ARRAY', 'fallback parser executes and returns AST')
-        or diag(normalize_error($@));
-
-    unlink($tmp_spec) or die "Cannot remove temporary fallback spec '$tmp_spec': $!";
+    # PathSearch caches its discovery root for the process. Exercise its real
+    # implementation in a fresh bounded consumer, not this checkout's build trees.
+    my $test_path = File::Spec->catfile($Bin, 'legacy_pathsearch_fallback.t');
+    my ($exit_code, $out, $err);
+    {
+        no warnings 'redefine';
+        local *PathSearch::go = sub { die "Parent discovery state leaked into child\n" };
+        ($exit_code, $out, $err) = run_perl_test_file_in_subprocess($test_path);
+    }
+    is($exit_code, 0, 'isolated real-fallback suite passes') or diag($out . $err);
+    like($out, qr/ok \d+ - owned fixture and excluded-tree decoy are removed/,
+        'isolated fallback reaches cleanup');
 };
 subtest 'get_parser_unresolved_spec_reports_error' => sub {
     plan tests => 8;
 
     my $missing_name = 'phase1_missing_spec_' . $$;
-    my ($ok_name, $parser_name, $err_name, $out_name, $warn_name) = run_get_parser_with_captured_io($missing_name);
+    my ($ok_name, $parser_name, $err_name, $out_name, $warn_name);
+    {
+        # Diagnostic unit coverage; the real discovery miss and its warning are
+        # exercised in the isolated subprocess above.
+        no warnings 'redefine';
+        local *PathSearch::go = sub { return undef };
+        ($ok_name, $parser_name, $err_name, $out_name, $warn_name) =
+            run_get_parser_with_captured_io($missing_name);
+    }
 
     ok($ok_name, 'missing-name get_parser call returns without die') or diag(normalize_error($err_name));
     ok(!defined($parser_name), 'missing-name get_parser returns undef');

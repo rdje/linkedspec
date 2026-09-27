@@ -1,5 +1,7 @@
 # ROADMAP V2
 
+September27 feature return: startup .93 retains artifacts and .92 now verifies real legacy fallback in an isolated consumer (Phase0 1033/1033). After the clean .92 commit, activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.1: assess concrete .spec grammar/expressiveness gaps toward the director’s EBNF-comparable parsing north star. The structured-format campaign is the long-term destination, gated on demonstrated .spec readiness and backend parity. Optional EBNF-like syntax remains later; cargo-mutants is a separate on-demand verification lane. Startup .94/.95/.51/.96 and the other defects remain owned and queued. This scheduling statement supersedes older immediate repair/mutation frontiers below.
+
 September27 report closeout: all seven ARCHOGEN reports are accounted for: LS-001–005 have published remedies at fd3e328d5; LS-006 is withdrawn and LS-007 needs no behavior change. SEMULITH independently closed its three reports. Correction8b5b5ffd8 records the unauthorized ARCHOGEN write and makes every other repository read-only. RGX-CONSUMER-BUILD-REPORTS.1.3.2 closes LinkedSpec’s bounded report work through canonical acceptance; ARCHOGEN owns its adoption, verification and any reversal. Artifact census .93 is complete with zero deletions; startup .92/.94/.95/.51 resumes; unrelated defects and global book reconciliation remain open.
 Execution-oriented companion to `ROADMAP.md`.
 

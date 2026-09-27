@@ -1,18 +1,19 @@
 ---
 id: phase0-legacy-pathsearch-generated-tree-scan
-title: "Phase0 legacy fallback verification recursively visits generated build trees"
+title: "Isolated real legacy fallback verification avoids generated build trees"
 answers:
   - "why can complete Perl Phase0 spend minutes in filesystem metadata calls"
   - "why is the Phase0 process traversing rust target debug deps"
   - "which task isolates legacy PathSearch verification from build cache size"
-date: 2026-09-25
-status: confirmed verification-cost defect; required repair SESSION-STARTUP-READING.92 after .91 before .51
+  - "does isolated Phase0 fallback verification change production PathSearch discovery"
+date: 2026-09-27
+status: verification repair .92 passes full Phase0; unchanged production cost owned by .96
 tags: [perl, phase0, verification, pathsearch, storage, SESSION-STARTUP-READING]
 evidence: "During .90 verification, the live PID37696 fallback fixture identifies get_parser_pathsearch_fallback. A one-second read-only sample at22m40s puts all83 main-thread observations in stat/lstat, and lsof reports cwd rust/target/debug/deps. The unchanged fallback consumer calls real get_parser; PathSearch initializes its process-wide directory list by File::Find over the repository without pruning build/cache trees. .92 owns bounded real-fallback verification; no live fixture, cache or dependency source was changed."
-reverify: "Read t/phase0_regression.t subtest get_parser_pathsearch_fallback and perl/PathSearch.pm; run complete Phase0 under tools/project_data_run.sh and, only if diagnosing a delay, sample its actual live PID into repository-local scratch. Never reuse the historical PID below."
+reverify: "env PERL5LIB= bash tools/project_data_run.sh prove -v -Iperl t/legacy_pathsearch_fallback.t t/native_spec_resolution.t; env PERL5LIB= bash tools/project_data_run.sh prove -v -Iperl t/phase0_regression.t"
 ---
 
-The complete `.90` regression command is unchanged:
+The historical `.90` regression command is unchanged:
 
 ```sh
 env PERL5LIB= bash tools/project_data_run.sh prove -v -Iperl t/phase0_regression.t
@@ -37,3 +38,29 @@ It must preserve the legacy behavior under test and separately own any productio
 policy decision. Deleting build caches, skipping the complete suite or declaring
 an unfinished run successful are not remedies. Evidence hashes and diagnostic
 commands are retained in `docs/checkpoints/SESSION-STARTUP-READING.90-verification.json`.
+
+## September 27: isolated real fallback
+
+`t/legacy_pathsearch_fallback.t` runs in a fresh process from Phase0 and copies the
+unchanged legacy module into a small consumer. The actual checkout resolver and
+compiler still handle public `LinkedSpec::get_parser` calls. Delegating observers
+record real fallback calls, the real File::Find root and seven visited entries;
+they reject an unexpected root before traversal. Cold discovery is timed separately
+from parser compilation, without an unstable wall-clock acceptance threshold.
+
+The 27 assertions cover the exact Lispish value, warm missing-name diagnostics and
+cache reuse, explicit-path bypass, exclusion of a 1,024-directory sibling with a
+matching decoy, and complete fixture cleanup. The parent process deliberately has
+a failing fallback override while starting the child, proving process isolation.
+Its separate unresolved-name unit test stubs only the discovery miss; real miss
+coverage remains in the isolated suite. A mutation that loads the original checkout
+module fails and is stopped before scanning that checkout.
+
+This changes verification, not production resolution. Startup `.96`, scheduled
+after `.94/.95/.51`, owns the remaining cold-discovery cost and its compatibility
+requirements. No production pruning, dependency scanning or cache deletion is
+implied by this repair.
+
+Full Phase0 acceptance passes 1,033/1,033 in 1,042 seconds. The separate portable
+loader plus isolated fallback run passes 32 top-level results. Exact commands and
+log hashes live in the `.92` task record; production discovery remains unchanged.

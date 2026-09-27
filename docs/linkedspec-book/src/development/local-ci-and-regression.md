@@ -1937,52 +1937,17 @@ The task-tree workflow (`docs/TASK_TREE.md`) and per-phase tree files (`docs/tas
 
 Task-tree ownership improves code quality by ensuring every change traces back to a documented intent with acceptance criteria. It enables interruption-safe recovery from task-tree state, prevents orphan changes that drift from the roadmap, and gives `git log --grep` on leaf IDs a complete ordered history of every leaf.
 
-This requirement applies to all implementation, refactoring, bug-fix, and migration work. Documentation-only changes that do not touch code may reference a documentation-phase leaf but are not required to create a new leaf for small fixes.
+This requirement applies to every change, including documentation. An existing leaf may own a small correction when it fits that leaf's scope; otherwise create an owning leaf before editing.
 
 When in doubt, create the leaf first.
 
 ## Important test surface
 
-The main regression spine is:
-
-```text
-t/phase0_regression.t
-```
-
-That file is large because it is doing real work: protecting runtime behavior, compiler contracts, shipped specs, and migration slices.
-
-The test file includes several kinds of checks:
-
-- direct unit-style checks for helper/lowering seams,
-- descriptor introspection checks for metadata and migration summaries,
-- source-level checks that shipped specs use preferred helper DSL forms,
-- smoke checks for selected shipped parsers,
-- corpus regression checks over `conf/`, `tablescript/`, and `ebnf/`; the former root `plugin/` corpus was relocated
-  to `noncore/` and no longer participates in the core gate,
-- trace and runtime-context checks.
+See [Regression Fixtures](regression-fixtures.md) for the Phase 0 regression spine and real legacy discovery isolation.
 
 ### Validation fuzzing harness
 
-A dedicated validation fuzzing harness exists at:
-
-```text
-t/phase0_validation_fuzz.t
-```
-
-This test uses systematic edge-case generation (combinatorial, boundary, and
-malformed-input patterns) across the main Validation.pm surfaces:
-
-- `_parse_rule_label_line` — rule label parsing (~60+ edge cases)
-- `_scan_rule_edges_in_fragment` — edge scanning with depth tracking (~20+ cases)
-- `validate_spec_content` — envelope validation (15 cases)
-- `validate_dsl_syntax` — full DSL syntax validation (~10+ cases)
-- combinatorial rule label fuzzing (168 generated combinations)
-
-Run it with:
-
-```bash
-prove -v -Iperl t/phase0_validation_fuzz.t
-```
+The [validation fuzzing harness](regression-fixtures.md#validation-fuzzing-harness) protects rule labels, edges, envelopes and DSL syntax.
 
 ## Documentation-only changes
 
@@ -2003,7 +1968,7 @@ If a documentation slice touches examples that depend on behavior, inspect the r
 
 ## Code or spec changes
 
-For implementation, `.spec`, or regression changes, prefer the shared local CI gate:
+Run focused changed-surface and direct-dependent checks for ordinary implementation, `.spec`, or regression commits. At designated admission/milestone boundaries and before every push, run the canonical gate:
 
 ```bash
 bash tools/run_ci_local.sh
@@ -2016,7 +1981,7 @@ perl -c perl/LinkedSpec.pm
 perl -c -Iperl t/phase0_regression.t
 ```
 
-But before committing a real behavior change, run the full local gate unless there is a clear reason not to and the limitation is recorded.
+Record the selected tier and proof in the owning leaf; use the [verification tiers](#verification-tiers) above to decide whether canonical admission is required.
 
 ## How to interpret failures
 
@@ -2040,7 +2005,10 @@ docs-only change:
   git diff --check
   bash tools/run_mdbook_local.sh
 
-code/spec/runtime change:
+ordinary code/spec/runtime change:
+  focused changed-surface and direct-dependent checks
+
+canonical milestone or push:
   bash tools/run_ci_local.sh
 ```
 

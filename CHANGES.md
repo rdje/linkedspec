@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-09-27 — Bound real legacy fallback verification
+
+SESSION-STARTUP-READING.92 replaces checkout-wide discovery in the Phase0 fallback test with a fresh-process consumer using a byte-identical PathSearch module and the actual public resolver/compiler. The isolated suite verifies exact results, real misses, call/cache counts, seven filesystem visits, an excluded decoy tree and cleanup. The separate unresolved-name unit test stubs discovery only; real missing-name coverage stays in the isolated suite. Production resolution is unchanged and its cost remains owned by .96. Focused proof, the safe original-module mutation and complete Phase0 1033/1033 pass; commands and hashes are recorded in the owning task leaf. The director selects .spec expressive-self-containment work next, strengthening the language before the long-term structured-format campaign.
+
 ## 2026-09-27 — Record the retained artifact census
 
 SESSION-STARTUP-READING.93 inventories repository-owned generated output without deleting reusable caches, dependency data or verification evidence. Restore the overwrite-only cleanup date in `docs/ARTIFACT_CLEANUP.md`; exact scope and measured results belong to the task leaf. Other repositories and submodule internals remain excluded. No runtime or storage policy changes. Focused memory, Knowledge, history, task/doctrine and book checks govern this documentation slice; continue with .92 fallback verification.

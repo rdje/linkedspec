@@ -20,9 +20,18 @@
 
 ## Current Frontier
 
+No startup repair is selected at this handoff. The director’s September27 return to
+feature implementation selects `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1` after the clean
+.92 commit. Repair order .94/.95/.51/.96 remains queued; every existing defect and
+the separate reading audit retain their owners. .93 census and .92 isolated fallback
+verification are complete.
+
+The stable repair frontier below applies when this lane resumes; the current global
+priority is the feature work above.
+
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.92` | `pending` | Artifact census .93 retained all outputs; isolate real legacy fallback verification from build-tree size, then .94/.95 before .51. |
+| 1 | `SESSION-STARTUP-READING.94` | `pending` | First repair when this lane resumes after the selected feature work; then .95/.51/.96. |
 
 Indexed-read .88 and compact-key .50 repairs are verified. The bounded scanner/helper
 parent .86 is closed; independent helper/grouping repairs remain under .87.
@@ -50,10 +59,10 @@ This current root is capped at 256 lines / 32768 bytes; each part at 5000 / 7864
   credit remain in the semantic owners; historical instructions grant no new credit.
 - RGX and its transitive dependencies are black boxes. Follow current AGENTS.md and
   published RGX integration contracts; older dependency-reading/build assumptions are historical.
-- LS-004 remains upstream-owned through RGX. No RGX code defect is established; the
-  director will notify ARCHOGEN only after the fix is verified.
+- LS-004 is verified and published at fd3e328d5; the bounded local report activity is closed.
+  ARCHOGEN owns downstream acceptance and any changes in its read-only repository.
 - Startup .7 still owns the process-liveness repair. Recovery/purge remain prohibited.
-- Keep all confirmed defects task-owned through repair; .89/.90/.91 and census .93 are verified; .92, .94 and .95 precede cat-arity .51.
+- Keep all confirmed defects task-owned through repair; .89/.90/.91, census .93 and fallback verification .92 are verified; .94/.95/.51/.96 remain queued behind the director-selected feature work.
 - Formal book/codebase reconciliation .4 and the separate reading audit remain open.
   Focused feature repairs keep their affected book sections and executable examples aligned.
 

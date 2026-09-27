@@ -2,17 +2,19 @@
 
 ## Current Activity
 
-Startup PNT resumes after local consumer-report closeout. Artifact census .93 is complete with zero deletions; caches, generated outputs and evidence remain retained. Other repositories are strictly read-only.
+Director-selected return to feature implementation: mature .spec parsing expressiveness comparable to EBNF through LinkedSpec’s cursor-aware, linked-rule approach. Finish the clean .92 handoff, then activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.1. Optional EBNF-like syntax remains later; remaining repairs stay owned.
 
 ## Latest Completed Slice
 
-- `SESSION-STARTUP-READING.93 - record retained artifact census` — completed the bounded output census and restored the latest cleanup record; no runtime or storage-policy change.
+- `SESSION-STARTUP-READING.92 - isolate real legacy fallback verification` — real fallback 27 assertions, portable loader composition 32 top-level results, safe root mutation and complete Phase0 1033/1033 pass. Production discovery is unchanged and tracked under .96.
 
 ## Next Action
 
-- Repair .92 legacy fallback verification, then .94/.95/.51. ARCHOGEN owns its repository and consumer acceptance; policy reconciliation .5 and the separate reading audit remain open.
+- Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.1 from clean HEAD; inventory concrete grammar/expressiveness gaps before implementing missing general language capabilities.
 
 ## Recent Completions
+
+- `2026-09-27` — `SESSION-STARTUP-READING.92` isolates real fallback verification and passes full Phase0.
 
 - `2026-09-27` — `SESSION-STARTUP-READING.93` retains all artifacts after the bounded census.
 
@@ -44,7 +46,6 @@ Startup PNT resumes after local consumer-report closeout. Artifact census .93 is
 
 - `2026-09-24` — `SESSION-STARTUP-READING.86.5.2.2` verifies same-line slash calls with focused207/book84 and Phase0 1033/1033.
 
-- `2026-09-24` — `SESSION-STARTUP-READING.86.5.2.1` verifies explicit division return carriers with focused31/book84 and an isolated old-fixture mutation.
 
 
 ## History
