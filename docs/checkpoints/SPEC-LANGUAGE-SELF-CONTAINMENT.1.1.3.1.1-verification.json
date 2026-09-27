@@ -1,0 +1,75 @@
+{
+  "owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.1",
+  "activation_commit": "57d8b702200ed62107f447c0b8e05b7b19fe577f",
+  "date": "2026-09-27",
+  "scope": "Perl hash constructor value lowering; no neutral contract, format or backend admission",
+  "runtime_fixture": {
+    "grammar": "tests/language-readiness/nested-tree/grammar.spec",
+    "cases": "tests/language-readiness/nested-tree/cases.json",
+    "accept": 6,
+    "reject": 7,
+    "routes": [
+      "Perl Get",
+      "fresh emitted Perl source in separate process"
+    ],
+    "reuse_runs": 2
+  },
+  "evidence": [
+    {
+      "command": "env PERL5LIB= bash tools/project_data_run.sh prove -v -Iperl t/generated_source_contract.t t/uniform_binding_contract.t t/variadic_user_function_contract.t t/actionir_ast_parser.t t/trace_actionir_method_lowering.t t/trace_emit_context_bridge.t",
+      "result": "PASS: 6 files, 120 top-level tests, 94 seconds; constructor subtest 96 assertions",
+      "log": ".linkedspec-data/scratch/selfcontain11311-focused-v2.log",
+      "sha256": "a9132100469ea750a56f25d1a9e287ae77cec6a1ebe40259eb0e1c97e6bd6f3f"
+    },
+    {
+      "command": "env PERL5LIB= bash tools/project_data_run.sh prove -v -Iperl t/typed_source_location_values.t t/typed_source_location_perl_contract.t t/recursive_observation_perl_contract.t",
+      "result": "PASS: 3 files, 18 top-level tests, 35 seconds",
+      "log": ".linkedspec-data/scratch/selfcontain11311-spans.log",
+      "sha256": "d4c784a8f4a6d390e9ef52f4e70147a0345bdeffbf9ddad1394429d369f1176f"
+    },
+    {
+      "command": "bash tools/run_mdbook_local.sh",
+      "result": "PASS",
+      "log": ".linkedspec-data/scratch/selfcontain11311-book.log",
+      "sha256": "242f7f8c8a9659ffce01fa994d18760fef42edacd38908fd1ff2e9e62188ecc3"
+    },
+    {
+      "command": "env PERL5LIB= bash tools/project_data_run.sh perl -Iperl .linkedspec-data/scratch/selfcontain11311-flat.pl",
+      "result": "Generic flat(meta) fails; explicit flat_hash(meta) passes; separate repair owner .1.1.6",
+      "log": ".linkedspec-data/scratch/selfcontain11311-flat.log",
+      "sha256": "d9222f3b548735c14db25492ee2fc20bd5b4e20d3454a8450459073069b5dc9b"
+    },
+    {
+      "command": "bash scripts/check_doctrines.sh",
+      "result": "PASS: all 9 registered doctrines; final exact staged pre-commit check also required",
+      "log": ".linkedspec-data/scratch/selfcontain11311-doctrines.log",
+      "sha256": "17bd8fa352f66e11c437faf35d30aa1880f670236c7602a1a58c925b842d98ad"
+    },
+    {
+      "command": "env PERL5LIB= bash tools/project_data_run.sh perl -Iperl .linkedspec-data/scratch/selfcontain11311-book-proof.pl",
+      "result": "PASS: exact constructor book snippet; separate rendered-text comparison matches full nested grammar and authored AST",
+      "log": ".linkedspec-data/scratch/selfcontain11311-book-proof.log",
+      "sha256": "c80db24edc94d452334b1aedd24ae9d492b90bf920ad65ff1d5efc73b78e0c22"
+    }
+  ],
+  "baseline_control": {
+    "status": "RED: exit 1; only new constructor subtest fails (28/96 assertions), numeric regression still passes",
+    "method": "Preload a byte-identical clean HEAD MethodLowering module from repository-local scratch with -M before the test bootstrap prepends its absolute project library path. A plain -I overlay was not selected by that bootstrap and is not RED evidence.",
+    "command": "env PERL5LIB= bash tools/project_data_run.sh perl -I.linkedspec-data/scratch/selfcontain11311-baseline/perl -Iperl -MLinkedSpec::ActionIR::MethodLowering t/generated_source_contract.t",
+    "baseline_module_sha256": "d8483a123000e26a55057ed3ab477b006a3bf313f35012c8e1868d55f7e5baf3",
+    "log": ".linkedspec-data/scratch/selfcontain11311-final-red-preloaded.log",
+    "sha256": "ecad14f4c0563b13a383c7343305ab34b85e11d9516588a8b29bcd825645051e"
+  },
+  "phase0": {
+    "command": "env PERL5LIB= bash tools/project_data_run.sh prove -v -Iperl t/phase0_regression.t",
+    "result": "PASS: 1033/1033 top-level tests, 1043 seconds",
+    "log": ".linkedspec-data/scratch/selfcontain11311-phase0.log",
+    "sha256": "5dc291b4ef7de85cfc908053fd90e0a00f5a521b664e8ed8e20feb22a3cceeaf"
+  },
+  "remaining": "Cross-backend/mutation readiness is .1.1.3.1.2; generic flat is .1.1.6.",
+  "required_syntax": [
+    "perl/LinkedSpec.pm: syntax OK",
+    "t/phase0_regression.t: syntax OK"
+  ],
+  "implementation_sha256": "6ba6ab7dd7e16c754fcad41945d9994fd05ec2f7e5202498fa9ede6a6b221187"
+}

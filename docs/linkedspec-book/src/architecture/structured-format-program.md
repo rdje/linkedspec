@@ -62,6 +62,36 @@ Named user-function arguments remain an approved, parked direction. Recording th
 that syntax current or prove it is the next feature the format campaign needs.
 
 
+### Bounded nesting trial
+
+This readiness grammar parses zero or more parenthesized lists containing bare atoms or other lists. It accepts
+ASCII whitespace between forms and records half-open Unicode scalar spans. It has no quoted-string syntax,
+escape processing, comments or standard-format conformance claim; quote characters are ordinary atom characters.
+A bare atom at document level, an unmatched parenthesis, or other text outside the lists is rejected with
+`exit_now(1)`. The explicit prefix guard also rejects text that entry preprocessing might otherwise skip.
+
+```text
+{{#include ../../../../tests/language-readiness/nested-tree/grammar.spec}}
+```
+
+For `(a (β) c)`, the result is:
+
+```json
+[{"kind":"list","span":[0,9],"items":[
+  {"kind":"atom","span":[1,2],"text":"a"},
+  {"kind":"list","span":[3,6],"items":[{"kind":"atom","span":[4,5],"text":"β"}]},
+  {"kind":"atom","span":[7,8],"text":"c"}
+]}]
+```
+
+Recursive rule calls restore the enclosing list's `start` and `items` bindings. The two constructor forms
+`hash("span", [start, cursor_pos()])` and `{"span":[start, cursor_pos()]}` must preserve the same bound values.
+The trial exposed and repairs a Perl constructor lowering defect; the original expected spans remain unchanged.
+The bounded Perl proof covers six accepted and seven rejected inputs through native and fresh emitted parsers,
+including CRLF and a supplementary Unicode character. Remaining backend and mutation proof is a separate next
+step; this example does not open the structured-format campaign or establish arbitrary-depth resource safety.
+
+
 ## Approved and parked: language coverage and authoring difficulty
 
 On 8 September 2026, the director approved an extension of this program: an explicit programming-language

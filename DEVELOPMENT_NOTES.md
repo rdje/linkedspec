@@ -12,6 +12,15 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-09-27 — preserve constructor value ASTs (.1.1.3.1.1)
+
+Reconstructing a DSL container while lowering nested calls can produce mixed DSL/host syntax. Re-parsing that
+shape loses bare bindings, while re-parsing an already-lowered harray treats host => as retired authored syntax.
+Perl hash constructors now lower values from their typed ASTs and construct pairs once. The fake-source AST
+check and exact native/fresh emitted JSON matrix cover the actual boundary; the original nesting spans remain
+independent oracles. The generic flat(meta) typed-binding defect is separately scheduled under .1.1.6, with
+flat_hash(meta) as its verified control. See docs/knowledge/perl-hash-constructor-nested-values.md.
+
 ## 2026-09-27 — callable and state boundaries in readiness (.1.1.2)
 
 Fresh neutral proof must not erase known composition defects. docs/language-readiness/state-control-results.md

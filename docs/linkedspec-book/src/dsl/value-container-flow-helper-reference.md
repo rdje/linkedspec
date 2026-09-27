@@ -361,6 +361,23 @@ Perl constructor defect makes `array(3)` return `[]`; use `[3]` for a single num
 literal. The constructor repair is tracked under `SESSION-STARTUP-READING.94`;
 multiple numeric arguments such as `array(3,1,2)` work.
 
+### Nested values in hash constructors
+
+A value argument to `hash(...)` can combine bindings, shape literals and helper results:
+
+```text
+value = 7
+return(hash("items", [value, trim(" x ")], "detail", {"kept":value}))
+```
+
+This returns `{"items":[7,"x"],"detail":{"kept":7}}`. The unquoted `value` reads its
+binding even beside a helper call; `"value"` would be literal text. The same rule
+applies to function parameters and locals, preserving nulls, booleans and nested containers.
+Perl native and fresh emitted parser regressions cover this composition and recursive source spans.
+The [bounded nesting example](../architecture/structured-format-program.md#bounded-nesting-trial)
+uses this form to record each list's opening and closing positions.
+
+
 In scalar value positions, a bare scalar name reads the working variable:
 `return(count)`, `set(out, count)`, `out = count`, `if(count, ...)`,
 `num_lt(count, 5)`, and `switch(kind, ...)` read the current working scalar. Mutation slots use the
@@ -448,6 +465,10 @@ The most important collection distinction is snapshot versus flatten.
 | `flat_array(items)` | splice array items into the surrounding constructor. |
 | `flat_hash(meta)` | splice hash key/value pairs into the surrounding constructor. |
 | `flat(expr)` | generic flatten/splice helper for array or hash expressions, including inside direct `[...]` literals. |
+
+Current Perl limitation: `hash(flat(meta), "added", value)` fails when `meta` is a scalar-held harray.
+The explicit `flat_hash(meta)` form works for this case. Repair is scheduled under
+`SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.6`; other generic flattening contexts remain separately assessed.
 
 Snapshot example:
 

@@ -965,6 +965,12 @@ subtest 'aggregate helper-call lowering consumes AST call nodes' => sub {
         local *LinkedSpec::ActionIR::AST::parse_action_expr = sub {
             my ($expr, @rest) = @_;
             ++$parse_calls;
+            if ($expr eq 'hash("span",[start,trim(" x ")])') {
+                return $call->('hash', '__bad_hash_constructor__()', $str->('span'), {
+                    kind => 'array_literal', source => '__bad_array_shape__()',
+                    items => [$var->('start'), $call->('trim', '__bad_trim__()', $str->(' x '))],
+                });
+            }
             if ($expr eq 'count(array("items"))') {
                 return $call->(
                     'count',
@@ -1038,11 +1044,15 @@ subtest 'aggregate helper-call lowering consumes AST call nodes' => sub {
         like($has_key, qr/\$__ls_pick_source/, 'AST aggregate lowering preserves nested pick_keys hash helper output');
         like($has_key, qr/\$__ls_has_key/, 'AST aggregate lowering preserves has_key terminal output');
 
-        my $all = join("\n", $quoted_count, $sum, $take, $merge, $has_key);
+        my $constructed = LinkedSpec::call_spec_handler_subst('Top', q{return(hash("span",[start,trim(" x ")]))});
+        like($constructed, qr/"span" => \[\$start,/, 'hash constructor reads the typed shape variable');
+        like($constructed, qr/\$__ls_trim/, 'hash constructor preserves its nested helper');
+
+        my $all = join("\n", $quoted_count, $sum, $take, $merge, $has_key, $constructed);
         unlike($all, qr/__bad_/, 'AST aggregate lowering does not reuse fake source text for supported calls');
     }
 
-    ok($parse_calls >= 5, 'aggregate helper calls entered through the AST parser');
+    ok($parse_calls >= 6, 'aggregate helper calls entered through the AST parser');
 };
 
 subtest 'covered helper-call diagnostics retire AST host-call leakage' => sub {

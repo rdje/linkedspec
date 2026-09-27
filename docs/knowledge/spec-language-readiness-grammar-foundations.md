@@ -10,7 +10,7 @@ answers:
   - "how does language readiness distinguish functions callbacks and grammar rules"
   - "where are state control and typed result readiness limits recorded"
 date: 2026-09-27
-status: all nine capability dimensions inventoried; composed objectives remain unassessed
+status: all nine capability dimensions inventoried; first nesting trial exposes a constructor repair
 tags: [dsl, readiness, grammar, recursion, cursor, capture, conformance]
 evidence: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.1 from clean30b2cc3a0 runs seven existing neutral/structural checks: capability100/0/0, language250/105+1/126, root7/0/54, cursor8/0/60, recognition138/250/58, typed14/0/231 and gaps9/0/63. No new backend execution or format support is claimed. The manifest parse-mode description contradicts the specific cursor policy and passes a checker that only requires a general contract string; .1.1.5 owns repair before closure authority."
 reverify: "env PERL5LIB= bash tools/project_data_run.sh perl tools/check_capability_conformance.pl && bash tools/run_python_project_data.sh tools/check_rule_local_cursor_contract.py"
@@ -46,3 +46,11 @@ This is no new runtime admission. Pure functions use fresh local state, callable
 caller nonparameters, and advancing grammar recursion is distinct from rejected function/callback recursion.
 Known startup .17/.58/.59/.94/.95 and Dart .2.9 defects retain their exact owners. Named arguments remain parked.
 The next `.1.1.3` probes concrete nesting, context and lossless extraction objectives before choosing new primitives.
+
+## First composed objective
+
+The bounded nested-tree trial exposed a Perl hash-constructor value-lowering defect, owned by
+`.1.1.3.1.1`; [[perl-hash-constructor-nested-values]] records the public-tool diagnosis and exact
+native/emitted regression. Complete cross-backend/mutation readiness remains `.1.1.3.1.2`.
+The original expected spans are unchanged. Generic flat on a scalar-held harray is a separate
+confirmed limitation scheduled under `.1.1.6`; it does not occur in this grammar.

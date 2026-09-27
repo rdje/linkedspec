@@ -1005,6 +1005,148 @@ FUNCTION_ARRAY_RUNNER
  } else { fail('fresh process wrote its observations') }
 };
 
+subtest 'hash constructor shapes preserve values beside nested helpers' => sub {
+ require Cwd;
+ my $root = Cwd::abs_path($repo_root);
+ my $scratch = tempdir(CLEANUP => 1);
+ my $json = JSON::PP->new->canonical->allow_nonref;
+ my $matrix = <<'SPEC';
+fn pack(value) {
+ local = value
+ return(hash("array", [local, trim(" x ")], "object", {"kept":local, "helper":trim(" y ")}))
+}
+Top::
+ -> Done {
+  start = entry_start_pos()
+  value = 7
+  meta = {"existing":1}
+  return(hash(
+   "span", [start, cursor_pos()],
+   "nested", [value, {"deep":[value, trim(" z ")]}],
+   "direct", value,
+   "function", pack(8),
+   "null", pack(undef),
+   "false", pack(false),
+   "container", pack({"k":[1]}),
+   "empty", hash(),
+   "flattened", hash(flat_hash(meta), "added", [value, trim(" z ")]),
+   "control", {"span":[start, cursor_pos()]}
+  ))
+ }
+Done:
+ /x/
+SPEC
+ my $pack = sub { +{array=>[$_[0],'x'],object=>{kept=>$_[0],helper=>'y'}} };
+ my $expected = {
+  span=>[0,1], nested=>[7,{deep=>[7,'z']}], direct=>7,
+  function=>$pack->(8), null=>$pack->(undef), false=>$pack->(JSON::PP::false),
+  container=>$pack->({k=>[1]}), empty=>{}, flattened=>{existing=>1,added=>[7,'z']},
+  control=>{span=>[0,1]},
+ };
+ my $fixture = File::Spec->catdir($root,qw(tests language-readiness nested-tree));
+ my $grammar = read_text(File::Spec->catfile($fixture,'grammar.spec'));
+ my $oracle = $json->decode(read_text(File::Spec->catfile($fixture,'cases.json')));
+ my @cases = (
+  {id=>'constructor-matrix',source=>$matrix, inputs=>[{id=>'values',input=>'x',expected=>$expected}]},
+  {id=>'nested-tree',source=>$grammar, inputs=>[
+   @{$oracle->{accept}}, map { +{%$_,reject=>1} } @{$oracle->{reject}}
+  ]},
+ );
+ my @artifacts;
+ for my $case (@cases) {
+  my %ctx;
+  my $parser = eval { LinkedSpec::Get(\$case->{source},runtime_ctx_ref=>\%ctx) };
+  is("$@",'',"$case->{id} compiles without exception");
+  ok(ref($parser) eq 'CODE',"$case->{id} returns native parser") or diag($json->encode(\%ctx));
+  if (ref($parser) eq 'CODE') {
+   for my $run (1,2) {
+    for my $input_case (@{$case->{inputs}}) {
+     my $input = $input_case->{input};
+     my $value = eval { $parser->(\$input) };
+     my $error = $@;
+     my $label = "$case->{id} $input_case->{id} native run $run";
+     if ($input_case->{reject}) {
+      isa_ok($error,'LinkedSpec::RuntimeExitNow',$label);
+     } else {
+      is("$error",'',"$label succeeds");
+      is($json->encode($value),$json->encode($input_case->{expected}),"$label exact typed result");
+     }
+    }
+   }
+  }
+  my $generated = LinkedSpec::emit_generated_source(\$case->{source},source_identity=>$case->{id});
+  unlike($generated,qr/LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER/,"$case->{id} has no unresolved helper");
+  my $path = File::Spec->catfile($scratch,"$case->{id}.pl");
+  open my $fh,'>:encoding(UTF-8)',$path or die $!;
+  print {$fh} $generated;
+  close $fh or die $!;
+  push @artifacts,{path=>File::Spec->abs2rel($path,$root),inputs=>$case->{inputs}};
+ }
+ my $request = File::Spec->catfile($scratch,'request.json');
+ open my $request_fh,'>',$request or die $!;
+ print {$request_fh} $json->ascii->encode(\@artifacts);
+ close $request_fh or die $!;
+ my $runner = File::Spec->catfile($scratch,'runner.pl');
+ open my $runner_fh,'>',$runner or die $!;
+ print {$runner_fh} <<'HASH_SHAPE_RUNNER';
+use strict;
+use warnings;
+use JSON::PP ();
+use File::Spec ();
+my ($root,$request,$output) = @ARGV;
+open my $request_fh,'<',$request or die $!;
+my $artifacts = JSON::PP->new->decode(do { local $/; <$request_fh> });
+close $request_fh or die $!;
+my @rows;
+for my $index (0..$#$artifacts) {
+ my $artifact = $artifacts->[$index];
+ open my $fh,'<:encoding(UTF-8)',File::Spec->catfile($root,$artifact->{path}) or die $!;
+ my $source = do { local $/; <$fh> };
+ close $fh or die $!;
+ my $package = "LinkedSpec::HashShapeEmitted::Case$index";
+ my $loaded = eval "package $package; $source; 1";
+ my $row = {load_error=>"$@",runs=>[]};
+ if ($loaded) {
+  for (1,2) {
+   for my $case (@{$artifact->{inputs}}) {
+    my $input = $case->{input};
+    my $value = eval { no strict 'refs'; &{"${package}::Execute"}(\$input) };
+    my $error = $@;
+    push @{$row->{runs}},{value=>$value,error=>ref($error)||"$error"};
+   }
+  }
+ }
+ push @rows,$row;
+}
+open my $out,'>',$output or die $!;
+print {$out} JSON::PP->new->canonical->ascii->allow_nonref->encode(\@rows);
+close $out or die $!;
+HASH_SHAPE_RUNNER
+ close $runner_fh or die $!;
+ my $output = File::Spec->catfile($scratch,'results.json');
+ is(system($^X,'-I'.File::Spec->catdir($root,'perl'),$runner,$root,$request,$output),
+  0,'fresh emitted constructor child exits successfully');
+ if (-f $output) {
+  my $rows = $json->decode(read_text($output));
+  is(scalar(@$rows),scalar(@cases),'fresh child returns both grammars');
+  for my $index (0..$#cases) {
+   my $case = $cases[$index];
+   my $row = $rows->[$index];
+   is($row->{load_error},'',"$case->{id} emitted loads independently");
+   my @inputs = (@{$case->{inputs}},@{$case->{inputs}});
+   is(scalar(@{$row->{runs}}),scalar(@inputs),"$case->{id} emitted complete repeated executions");
+   for my $input_index (0..$#inputs) {
+    my $input_case = $inputs[$input_index];
+    my $result = $row->{runs}[$input_index];
+    my $label = "$case->{id} $input_case->{id} emitted execution $input_index";
+    is($result->{error},$input_case->{reject} ? 'LinkedSpec::RuntimeExitNow' : '',"$label outcome");
+    is($json->encode($result->{value}),$json->encode($input_case->{expected}),"$label exact typed result")
+     unless $input_case->{reject};
+   }
+  }
+ } else { fail('fresh emitted child wrote observations') }
+};
+
 subtest 'numeric reducers consume values in native and fresh generated parsers' => sub {
  require Cwd;
  my $root = Cwd::abs_path($repo_root);

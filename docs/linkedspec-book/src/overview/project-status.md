@@ -3450,8 +3450,9 @@ ordinary syntax, state every EBNF/LinkedSpec semantic difference visibly, preser
 reach Perl, Rust, Dart, Julia, and Lua together. The September27 feature return activates the bounded `.1.1`
 capability inventory; core capability work precedes the broad [structured-format campaign](../architecture/structured-format-program.md#strengthen-spec-before-the-campaign).
 Its first grammar/cursor/capture inventory passes neutral checks without changing runtime behavior or claiming campaign readiness.
-State/control/result inventory is also complete as bounded contract evidence; representative objective probes
-follow before new primitives are selected. `.2-.6` remain later work.
+State/control/result inventory is also complete as bounded contract evidence. The first nested-tree trial
+exposed a Perl hash-constructor value defect; native/fresh emitted regression accompanies its repair. Remaining
+backend/mutation proof and contextual/lossless objectives precede new primitive selection. `.2-.6` remain later work.
 
 The root README is a stable 105-line / 5,072-byte landing page governed by `README_POLICY.md`, ADR `0063`,
 and the registered `README-STABILITY` doctrine. Hard ceilings are 128 lines and 6,144 bytes; changing status,

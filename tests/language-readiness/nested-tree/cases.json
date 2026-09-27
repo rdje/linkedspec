@@ -1,0 +1,19 @@
+{
+  "accept": [
+    {"id": "empty", "input": "", "expected": []},
+    {"id": "empty_list", "input": "()", "expected": [{"kind":"list","span":[0,2],"items":[]}]},
+    {"id": "nested_state", "input": "(a (β) c)", "expected": [{"kind":"list","span":[0,9],"items":[{"kind":"atom","span":[1,2],"text":"a"},{"kind":"list","span":[3,6],"items":[{"kind":"atom","span":[4,5],"text":"β"}]},{"kind":"atom","span":[7,8],"text":"c"}]}]},
+    {"id": "supplementary_scalar", "input": "(🙂)", "expected": [{"kind":"list","span":[0,3],"items":[{"kind":"atom","span":[1,2],"text":"🙂"}]}]},
+    {"id": "multiple_forms", "input": "(a)()", "expected": [{"kind":"list","span":[0,3],"items":[{"kind":"atom","span":[1,2],"text":"a"}]},{"kind":"list","span":[3,5],"items":[]}]},
+    {"id": "leading_crlf", "input": " \r\n(a)", "expected": [{"kind":"list","span":[3,6],"items":[{"kind":"atom","span":[4,5],"text":"a"}]}]}
+  ],
+  "reject": [
+    {"id":"trailing_junk","input":"(a)junk"},
+    {"id":"missing_close","input":"(a"},
+    {"id":"bare_document_atom","input":"a"},
+    {"id":"unmatched_close","input":"(a))"},
+    {"id":"hidden_prefix","input":"#skip\n(a)"},
+    {"id":"missing_outer_close","input":"(a (b)"},
+    {"id":"interstitial_junk","input":"(a) junk (b)"}
+  ]
+}

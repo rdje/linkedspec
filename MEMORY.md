@@ -1,11 +1,11 @@
 # MEMORY
 
-- activation_commit: `e9c2eb2ad1c6aa799e50c879c0549a9ccd1f36e3` — clean activation base for state/computation inventory .1.1.2.
-- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.2 - inventory state and computation readiness`.
-- active_work_unit: none — .1.1.2 is complete; representative grammar probes .1.1.3 are next.
-- next_action: Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3 from clean HEAD; split nesting, context-dependent state and lossless extraction into bounded executable probe leaves, then run the first. Campaign and optional frontend remain gated.
-- in_flight_uncommitted: none — intended clean post-landing handoff; seven neutral tools, 44 source-path/consumer checks and book rendering pass. No new backend execution or format support is claimed.
-- blockers: none for probe decomposition; .1.1.5 owns stale capability parse-mode prose, and startup .38/.40 recognition defects remain queued. ARCHOGEN owns downstream acceptance; named-argument and format proposals stay parked.
+- activation_commit: `57d8b702200ed62107f447c0b8e05b7b19fe577f` — clean activation base for constructor repair .1.1.3.1.1.
+- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.1 - preserve nested hash values`.
+- active_work_unit: none — .1.1.3.1.1 is verified and complete; generic flat repair .1.1.6 is next.
+- next_action: Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.6 from clean HEAD; reproduce and repair generic flat on typed bindings with native/fresh emitted proof and full Phase0, as requested by the director. Resume remaining nesting proof afterward.
+- in_flight_uncommitted: none — intended clean post-landing handoff; constructor96, focused120, span18, Phase01033, exact book and nine doctrines pass. No background job remains.
+- blockers: none for nested-tree proof; .1.1.5 owns stale capability prose, .1.1.6 generic flat, and startup .38/.40 recognition defects remain queued. ARCHOGEN owns downstream acceptance; named-argument and format proposals stay parked.
   Wrapper startup .7 remains open; recovery/purge stay prohibited. No interrupted Phase0 run counts as proof.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
   active table; the task metadata doctrine inventories all consumers, permits arbitrary frontier-row rewrites,

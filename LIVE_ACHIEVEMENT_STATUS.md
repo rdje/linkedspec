@@ -6,13 +6,15 @@ Ordinary .spec language readiness under SPEC-LANGUAGE-SELF-CONTAINMENT.1.1. The 
 
 ## Latest Completed Slice
 
-- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.2 - inventory state and computation readiness` — seven neutral tools and 44 source-path/consumer checks pass; book distinguishes functions, callbacks and rules. All nine capability areas now have bounded evidence; no new runtime or format support claim.
+- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.1 - preserve nested hash values` — exact native/fresh emitted typed values and recursive Unicode spans; focused120, span18, old-module RED28 and complete Phase01033 pass. Book and nine doctrines pass; no new syntax or format support claim.
 
 ## Next Action
 
-- Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3 from clean HEAD; split representative nesting, contextual-state and lossless-extraction objectives, then execute the first bounded probe.
+- Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.6 from clean HEAD and repair generic flat on typed bindings, as the director requests. Resume remaining nested-tree proof afterward.
 
 ## Recent Completions
+
+- `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.1` repairs nested constructor values and preserves the original nesting oracles.
 
 - `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.2` inventories state/computation evidence and scoping limits.
 
@@ -43,8 +45,6 @@ Ordinary .spec language readiness under SPEC-LANGUAGE-SELF-CONTAINMENT.1.1. The 
 - `2026-09-24` — `SESSION-STARTUP-READING.88` verifies typed indexed reads with runtime397/public17 and one executable Perl/Rust book source.
 
 - `2026-09-24` — `SESSION-STARTUP-READING.50` verifies compact hash keys with core258/runtime226/public13 and one executable Perl/Rust book source.
-
-- `2026-09-24` — `SESSION-STARTUP-READING.86.3` closes the bounded scanner parent at aa057b107 with Rust56, exact book/source continuity and canonical PASS.
 
 ## History
 

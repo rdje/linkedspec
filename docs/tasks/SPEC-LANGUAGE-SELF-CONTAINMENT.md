@@ -91,7 +91,7 @@ used by ordinary `.spec` syntax on every backend.
   Status: `active`
   Goal: Inventory current portable grammar/recursion/cursor/capture/state/callable/control/transformation/result
     powers and every routine host-language escape or expressiveness gap using LinkedSpec tools first.
-  Children: `.1.1.1`, `.1.1.2`, `.1.1.3`, `.1.1.4`, `.1.1.5`
+  Children: `.1.1.1`, `.1.1.2`, `.1.1.3`, `.1.1.4`, `.1.1.5`, `.1.1.6`
   Acceptance: A source-located five-backend ledger separates implemented, partial, missing, compatibility-only,
     backend-host, and deliberately forbidden environmental authority; unassessed objectives are not missing-capability claims.
 
@@ -137,10 +137,68 @@ used by ordinary `.spec` syntax on every backend.
   Acceptance: Each of these five dimensions has current canonical owners, five-backend evidence boundaries, source-located limitations and an executable follow-up where objective composition remains unassessed.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3`
-  Status: `pending`
+  Status: `active`
   Goal: Execute bounded representative grammar objectives against the inventory before selecting new primitives.
   Dependencies: `.1.1.2`
+  Children: `.1.1.3.1`, `.1.1.3.2`, `.1.1.3.3`, `.1.1.3.4`
   Acceptance: Natural nesting, context-sensitive delimiter/indentation state, and lossless staged extraction have exact authored sources, positive/negative inputs, AST/span oracles and runtime/provenance evidence. Reuse existing document grammar and neutral fixtures where suitable; these are readiness probes, not whole-format conformance claims. Split each objective into its own commit before execution if needed.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1`
+  Status: `active`
+  Goal: Prove a bounded ordinary .spec nested-tree grammar with exact Unicode source spans, recursive state, complete recognition and typed rejection.
+  Activation: Clean 57d8b702200ed62107f447c0b8e05b7b19fe577f after .1.1.2, all nine doctrines passed and brief empty. Retrieved strict-document design, public grammar chapter and source-boundary reference before authoring.
+  Children: `.1.1.3.1.1`, `.1.1.3.1.2`
+  Acceptance: Exact authored spans and strict rejection across the supported routes; no broad campaign readiness claim. The first trial found a Perl constructor defect; repair it in a bounded child before completing the runtime trial.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.1`
+  Status: `done`
+  Goal: Repair Perl hash-constructor nested shape values without losing bare binding reads when a sibling helper is lowered.
+  Priority: P1; blocks the source-aware nesting trial, repair now before .1.1.3.1.2.
+  Activation: Same clean 57d8b702200ed62107f447c0b8e05b7b19fe577f; the uncommitted trial decomposes within its existing tree before any runtime edit.
+  Reproduce: Assign start = entry_start_pos(), then return(hash("span", [start, cursor_pos()])); public call_spec_handler_subst emits [start, do {...}] and Get returns literal "start". Direct return([start, cursor_pos()]) and the equivalent harray literal correctly read $start. The original six positive / seven negative trial oracles remain unchanged.
+  Impact: Silent incorrect nested result values and host syntax failure for nested harray literals in valid .spec hash constructors; this is an implementation defect, not a missing grammar primitive.
+  Root cause: MethodLowering.pm lower_ast_aggregate_call_node sends shape arguments through ast_expr_source_node, which keeps ordinary variables in DSL spelling but recursively lowers calls to host Perl. The legacy hash bridge cannot reparse that mixed shape; its raw-expression fallback leaves bare variables unchanged. Direct shape and multi-value array constructors instead consume typed value AST nodes.
+  Scope: Bounded Perl lowering repair, exact native/fresh emitted constructor regression and the original nesting fixture; no neutral contract, carrier schema, dependency or format admission change. Keep actual aggregate selectors and flat hash-pair compatibility intact.
+  Verification tier: `focused`
+  Focused checks: RED/GREEN constructor and nesting results, native/fresh generated reuse and mutation controls; generated-source, uniform-binding, variadic-function, AST and lowering-trace direct dependents; Perl syntax and complete Phase0; book, Knowledge, memory, bounded history, all doctrines and diff hygiene.
+  Canonical trigger: none for this backend-local correction to existing value semantics; escalate if public contract, generated format or cross-backend semantics must change.
+  Acceptance: Authored numeric/string/null/false/container values, nested helper results and recursive starts are exact; no oracle workaround or host escape hatch. Commit repair before broadening the trial.
+  Diagnostic evidence: .linkedspec-data/scratch/selfcontain1131-probe.log and selfcontain1131-lowering.log; original source controls distinguish shape lowering from helper construction.
+  Verification: RED old-module preload fails 28/96 new assertions; final candidate passes constructor 96, focused six suites 120 top-level tests, span consumers 18 and complete Phase0 1033/1033 in 1043 seconds. Exact book snippet and rendered grammar/oracle, all nine doctrines, memory and bounded history pass. Commands and SHA256 logs: docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.1-verification.json.
+  Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.1 - preserve nested hash values`
+
+### `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.1` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Public `LinkedSpec::Get` and `call_spec_handler_subst` in the recorded probe show list span starts as the string "start", versus the unchanged authored numeric oracle; direct-shape controls read the binding correctly. Native and `emit_generated_source` old-module regression fails 28/96 assertions in the one new constructor subtest.
+- [x] **ROOT CAUSE (WHY + WHERE)** — WHY: `ast_expr_source_node` reconstructs a mixed DSL/host shape, and the hash compatibility bridge cannot reparse it. WHERE: `perl/LinkedSpec/ActionIR/MethodLowering.pm`, `lower_ast_aggregate_call_node` and its legacy hash bridge; public lowering and fresh generated source expose the bareword and leaked colon syntax. This is a real engine defect; no expected value is re-blessed.
+- [x] **FIX** — Construct hash pairs from typed value AST nodes directly, preserving key normalization and explicit flat-list compatibility. Nested helpers, bound values and emitted harrays no longer cross a DSL reparse boundary. Scope is the director-authorized defect repair within the selected readiness objective.
+- [x] **ADDRESSED (verified)** — `prove -v -Iperl t/generated_source_contract.t` passes the new 96-assertion subtest; the old-module preload fails it. `comm -23` clears exactly `hash constructor shapes preserve values beside nested helpers`; `comm -13` is empty. Native and fresh emitted engines execute each original input sequence twice; fake-source AST checks preserve typed fields.
+- [x] **NO REGRESSION** — `prove -v -Iperl t/phase0_regression.t` reaches its true `1..1033` stop and PASS in 1043 seconds, with an empty failure-name set. Six focused suites pass 120 top-level tests; source-span consumers pass 18. `perl -c perl/LinkedSpec.pm` and `perl -c -Iperl t/phase0_regression.t` pass. Exact commands/log hashes are in this leaf's verification checkpoint.
+- [x] **LOCKSTEP** — Book reference/example/status, CHANGES, DEVELOPMENT_NOTES, MEMORY, live status, roadmaps, task tree and Knowledge Map reflect this repair. Exact rendered grammar/AST and executable book snippet pass. USER_GUIDE is unchanged because the relevant constructor explanation is owned by the book. History limits and `git diff --check` pass; final staged doctrines govern landing.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2`
+  Status: `pending`
+  Goal: Complete nested-tree readiness proof across supported public native/carrier routes after the Perl repair.
+  Dependencies: `.1.1.3.1.1`
+  Acceptance: Exact positive/negative values and Unicode spans, prefix/gap/span mutation sensitivity, same-engine reuse and ActionIR readiness; record exact routes and limitations without arbitrary resource or whole-format claims.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2`
+  Status: `pending`
+  Goal: Probe context-dependent matching with nested opening/closing names or indentation state using ordinary .spec, exact rejection and restoration controls.
+  Dependencies: `.1.1.3.1`
+  Acceptance: Source-located, bounded native/carrier evidence establishes whether existing explicit state and comparisons express the objective clearly; record and schedule any minimal reusable gap without claiming XML/YAML support.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3`
+  Status: `pending`
+  Goal: Probe lossless segmentation and bounded child parsing with exact source provenance and caller-authorized dispatch.
+  Dependencies: `.1.1.3.2`
+  Acceptance: Every original scalar belongs to a tested segment; child bounds and composed spans are exact; no host parsing escape or ambient loading is introduced. Keep private carrier and public authoring boundaries explicit.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.4`
+  Status: `pending`
+  Goal: Reconcile the three bounded objective results and authoring costs for gap selection under `.1.1.4`.
+  Dependencies: `.1.1.3.1`, `.1.1.3.2`, `.1.1.3.3`
+  Acceptance: Preserve exact runtime/carrier coverage, limitations, mutations and repair owners; require fresh proof before promoting any objective and keep whole-format campaign readiness pending.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.4`
   Status: `pending`
@@ -158,6 +216,16 @@ used by ordinary `.spec` syntax on every backend.
   Acceptance: Preserve stable capability identity where required, reconcile its description to explicit entry selection and intrinsic family cursor policy, and add a reason-sensitive regression that rejects the stale claim. Verify dependent capability/generated-source consumers and public teaching; use canonical tier for checker/contract admission movement.
   Verification: .1.1.1 freshly passes the capability checker and the specific cursor checker against the contradictory unchanged source. Exact source/read-only reproduction is retained in docs/language-readiness/grammar-cursor-capture.md.
   Commit: pending.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.6`
+  Status: `pending`
+  Goal: Repair generic flat(meta) constructor splicing for a scalar-held harray in Perl; coordinate broad typed aggregate owner SESSION-STARTUP-READING.17.
+  Priority: P1 next; the director explicitly requests immediate repair after the current constructor commit, before remaining nesting proof. The grammar does not splice flattened values, but the defect is now the selected next slice.
+  Reproduce: Top assigns meta = {"existing":1}; value = 7; return(hash(flat(meta), "added", value)) returns null, whereas changing only flat to flat_hash returns {"existing":1,"added":7} through public Get.
+  Impact: Documented generic flat composition fails for a typed binding; explicit flat_hash is the bounded current control, not a fix.
+  Diagnosis: Public call_spec_handler_subst reports unsupported hash for generic flat. MethodLowering lower_flat_list_value_expr's generic flat path recognizes legacy aggregate containers/value shapes but lacks the scalar-held harray branch present in flat_hash. Capture baseline, neutral semantics and all affected argument contexts before repair; do not infer all flattening routes from this one case.
+  Evidence: .linkedspec-data/scratch/selfcontain11311-flat.log; discovered while expanding .1.1.3.1.1 regression. That repair's flattening compatibility control explicitly uses flat_hash.
+  Acceptance: Source-located RED/GREEN native/fresh emitted proof with exact result kinds and affected scalar-held array/harray contexts; preserve task .17's broader obligation.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.2`
   Status: `pending`
@@ -304,9 +372,13 @@ used by ordinary `.spec` syntax on every backend.
 | 1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.0` | `done` | ADR `0064`, the complete decomposition, public/continuity alignment, and full documentation/canonical signoff durably route the direction without behavior change. |
 | 2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.1` | `done` | Four capability areas mapped to current contracts and five-backend evidence; seven neutral/structural checks pass. |
 | 3 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.2` | `done` | Other five areas mapped; seven neutral tools and 44 path/consumer checks pass. |
-| 4 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3` | `pending` | Split and execute bounded nesting, contextual-state and lossless-extraction grammar probes. |
+| 4 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.1` | `done` | Typed constructor values and native/fresh emitted spans verified; complete Phase0 1033/1033. |
+| 5 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.6` | `pending` | Director-selected immediate generic flat typed-binding repair, after clean constructor commit. |
+| 6 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2` | `pending` | Resume remaining nesting routes and mutations after .1.1.6. |
 
 ## Decisions
+
+- `2026-09-27`: The director asks why generic flat was deferred and selects its immediate repair. Finish the verified constructor commit, then activate `.1.1.6` before remaining nesting proof.
 
 - `2026-09-27`: The director returns to feature implementation and names mature .spec parsing power as the north star, with the structured-format campaign as the long-term destination. Activate the bounded .1.1 inventory after verified clean .92. Language readiness and backend parity gate the campaign; optional EBNF-like syntax is not the immediate objective. Older callable-first scheduling below records its historical decision.
 
@@ -334,6 +406,8 @@ used by ordinary `.spec` syntax on every backend.
 
 ## Verification Log
 
+September27 `.1.1.3.1.1`: old-module RED 28/96; candidate constructor96, focused120, span18, Phase01033; exact book and nine doctrines pass. Source/test/diagnostic hashes are in its checkpoint. No broad campaign admission.
+
 September27 `.1.1.2`: seven unchanged neutral tools, 44 source-path/consumer checks and book rendering pass; no runtime or contract movement. Standard memory/history/Knowledge and pre-commit doctrines govern landing.
 
 September27 `.1.1.1`: seven neutral/structural checks, 34 ledger source-path/consumer checks and rendered book pass; no runtime/format-support promotion. Normal doctrine gates run at landing.
@@ -349,6 +423,8 @@ September27 `.1.1.1`: seven neutral/structural checks, 34 ledger source-path/con
 | `.0` | `SPEC-LANGUAGE-SELF-CONTAINMENT.0 - ratify expressive spec self-containment` | Direction capture only; no parser/runtime behavior. |
 
 ## Changelog
+
+- `2026-09-27`: `.1.1.3.1.1` repairs constructor value lowering exposed by the first grammar objective; `.1.1.6` owns separate generic flat composition. Remaining nesting routes and mutations follow from clean commit.
 
 - `2026-09-27`: `.1.1.2` completes the state/callable/control/transformation/result evidence inventory. Known defects and intentionally absent features remain distinct; bounded grammar objectives `.1.1.3` follow.
 

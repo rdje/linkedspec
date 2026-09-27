@@ -12,6 +12,16 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-09-27 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.1: nested hash constructor values
+
+Perl hash constructors now lower nested values directly from typed AST nodes. This prevents bare bindings from
+becoming host strings beside helper calls and avoids reparsing emitted harray syntax as authored DSL. Exact
+native/fresh emitted tests cover typed values, function locals, flattening compatibility and the unchanged
+six-positive/seven-negative nested-tree span oracles. Six focused suites pass 120 top-level tests; source-span
+compatibility passes 18; the final regression fails 28 assertions with the old module. Full Phase0 passes
+1033/1033 in 1043 seconds. The book includes the bounded grammar and AST. Generic flat(meta) is separately owned by
+.1.1.6; remaining backend/mutation trial .1.1.3.1.2 follows. No broad campaign or optional frontend is activated.
+
 ## 2026-09-27 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.2: state and computation readiness
 
 Extend the readiness inventory through typed state, pure functions, dynamic callable blocks, lazy controls,

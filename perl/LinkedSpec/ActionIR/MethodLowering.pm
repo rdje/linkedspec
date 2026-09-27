@@ -4143,6 +4143,42 @@ my $lower_numeric_array_reducer_source_expr = sub {
    }
   }
 
+  if ($method eq 'hash'
+      && !(@$args == 1 && ref($args->[0]) eq 'HASH' && ($args->[0]{kind} // '') eq 'variable')) {
+   # Constructor values must stay on the typed AST path. Reconstructing DSL
+   # shapes while lowering their calls mixes bare names with host code; sending
+   # a fully lowered shape back through the DSL parser also misreads Perl's =>.
+   my @pairs;
+   for (my $index = 0; $index < @$args; ) {
+    my $key = $args->[$index];
+    if (($key->{kind} // '') eq 'call' && ($key->{name} // '') =~ /\Aflat(?:_array|_hash)?\z/o) {
+     my @flat_args;
+     foreach my $arg (@{$key->{args} || []}) {
+      my $source = $ast_expr_source_node->($arg);
+      return undef unless defined($source) && length($source);
+      push @flat_args, $source;
+     }
+     my $flat = $lower_flat_list_value_expr->($key->{name}.'('.join(', ', @flat_args).')');
+     return undef unless defined($flat) && length($flat);
+     push @pairs, $flat;
+     ++$index;
+     next;
+    }
+    return undef unless $index + 1 < @$args;
+    my $key_source = $ast_expr_source_node->($key);
+    my $key_expr = _normalize_method_tag_expr($key_source, $deps);
+    my $value = $args->[$index + 1];
+    my $value_expr = $lower_ast_value_node->($value, { bare_scalar_read => 1 });
+    $value_expr = $legacy_method_value_expr->($value->{source})
+     unless defined($value_expr) && length($value_expr);
+    return undef unless defined($key_expr) && length($key_expr);
+    return undef unless defined($value_expr) && length($value_expr);
+    push @pairs, $key_expr.' => '.$value_expr;
+    $index += 2;
+   }
+   return '{'.join(', ', @pairs).'}';
+  }
+
   my @arg_exprs;
   my @internal_array_pipeline_arg_exprs;
   foreach my $arg (@$args) {
