@@ -1,0 +1,81 @@
+{
+  "owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.3",
+  "activation_commit": "624aa1995d52426a69d7debfdaa2afd6ae578d5f",
+  "scope": "Bounded five matched Julia carriers with actual child grammar, actual-result isolation and deliberately aliased control; no runtime, generated format, storage owner or dependency change.",
+  "source_hashes": {
+    "julia/test/source_emitter_test.jl": "2c7ea5074d60ca80074756645b8fbda3b9aa26214bd10956f6654ae9f988d38a",
+    "tests/language-readiness/lossless-child/julia_carriers.jl": "9b308b17b62cac150df88b5d256ea379db697fd393fb3237f1d2f65caa6ea317",
+    "tests/language-readiness/lossless-child/julia_checks.jl": "3ca60f296b06cf0c07132fbe117dda155729cf12a599ff53b97b233e6c4c26cb",
+    "tests/language-readiness/nested-tree/julia_checks.jl": "a0511244a5ae78c39e6d68c116a03ab1dcb08610ff8f01f75079551eb3825c62",
+    "tests/language-readiness/lossless-child/parent.spec": "8b19299a5d3715cba7f44dac266954e8b34497920a308f956f6e35b286ae6435",
+    "tests/language-readiness/lossless-child/child.spec": "34c5f109d401f83fa600a225682599fe924957fdbf45ad2136f55450248badd9",
+    "tests/language-readiness/lossless-child/cases.json": "2589ef997c978ea9fa1e80f886106df7235839d6a89439b88ece328d58e3b3c7",
+    "tests/language-readiness/lossless-segments/grammar.spec": "8f20d242b0f2ea0eee1d70b6f289cf96362cdf3b64ef4cbcc77f5631ffe3eb36",
+    "tests/language-readiness/lossless-segments/cases.json": "fd4fe58d6bb0efa7bcb609b863c3d9a2238bb5c62fa9a1814a143e04416bd89c",
+    "julia/test/staged_ast_enrichment_contract_test.jl": "0caa4731f7507dcedc177598204fba70d6c81a17aef323539dcc3388da140fc0",
+    "julia/test/inter_match_gap_capture_contract_test.jl": "79426ada8ed54a82f431a1b45c2a32ca5cf547ce6c2da5a9ad37154755cbbf0e",
+    "julia/test/sexpr_document_v1_test.jl": "5cc6236377eaea944d5e5466c80e651c917a5272754d770400fd26ed766eec32",
+    "julia/src/runtime/StagedAstEnrichment.jl": "679b231e6db72135ac624cb4cc7aa3298d8b7dcccbe30399069178d68f8cecd3",
+    "julia/Project.toml": "45bff88352b342d6a3970b3ad2c5cf853a3ff5261034210025d1b8ffc2dd9fa1",
+    "julia/Manifest.toml": "2b4e4039b6d3bb76dd8bd9844f90f8083747982737572504198abd2cb64e48e4",
+    "tools/test_julia_project_data_storage.sh": "919f3d62c9b9097cc6586f402d050823ce759ffff50452f775ba4363eb486ec4",
+    "capability_conformance/staged_ast_enrichment_contract.json": "578cd031fed01bb8d968a2b536e0d67430317c617a8296edb6c1beb5031bd882",
+    "docs/linkedspec-book/src/architecture/structured-format-program.md": "f60b32add397f82c2405793f5b96395a5eeaf5529def5546d19c5149f485d027"
+  },
+  "checks": [
+    {
+      "command": "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'using LinkedSpecJulia, JSON3, Test; const REPO_ROOT=pwd(); include(\"julia/test/source_emitter_test.jl\")'",
+      "result": "PASS 194 assertions: new69/existing125; fresh host exact report and scratch absence"
+    },
+    {
+      "command": "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'using LinkedSpecJulia, JSON3, Test; const REPO_ROOT=pwd(); include(\"julia/test/staged_ast_enrichment_contract_test.jl\"); include(\"julia/test/inter_match_gap_capture_contract_test.jl\"); include(\"julia/test/sexpr_document_v1_test.jl\")'",
+      "result": "PASS 938 assertions:491 staged/319 gap/128 document"
+    },
+    {
+      "command": "bash tools/test_julia_project_data_storage.sh",
+      "result": "PASS22 Julia owners/five locked package trees; repository-local generated outputs/traces"
+    },
+    {
+      "command": "bash tools/run_python_project_data.sh tools/check_staged_ast_enrichment_contract.py",
+      "result": "PASS9 rollout legs;123 contract/129 public mutations"
+    },
+    {
+      "command": "bash tools/run_mdbook_local.sh",
+      "result": "PASS; exact parent/child blocks each once; Julia scope claims render"
+    }
+  ],
+  "logs": {
+    ".linkedspec-data/scratch/lossless3343/initial.log": {
+      "sha256": "e5763b69222c9d9b2e9add788e9e4e6b2a4be664252931c25400c68e4f715f4f"
+    },
+    ".linkedspec-data/scratch/lossless3343/dependents.log": {
+      "sha256": "e404dcac68fc1a6c552109210272e425fa0acb8e226d226231bfd2046d88f0a3"
+    },
+    ".linkedspec-data/scratch/lossless3343/storage.log": {
+      "sha256": "03dcabcf60256cb82d68bdef11aba65253694e55fb96815c6e9b6333dd185a57"
+    },
+    ".linkedspec-data/scratch/lossless3343/staged-neutral.log": {
+      "sha256": "1a7f7a1b01c6865f08350276c188460f729f1dc6f30b05d25ddf904b25bbdf21"
+    },
+    ".linkedspec-data/scratch/lossless3343/mdbook.log": {
+      "sha256": "d6ff7d5f8b5b0a225278307b213e74cc6619b6e489ab5a4167ff533d29135bf4"
+    },
+    ".linkedspec-data/scratch/lossless3343/book-source.log": {
+      "sha256": "5ea4d25de1b7cde12e6fd478870d3e7b516ec69fd5d826f6f33719854c44ff28"
+    }
+  },
+  "limits": [
+    "Two retained pairs and three per-call routes remain distinct.",
+    "Four in-process complete outcomes agree; fresh pair executes the same oracle without cross-process full-response equality.",
+    "JULIA-STARTUP-READING.2.13/.2.14/.2.26 remain open.",
+    "Ordinary selected call/step denials do not cover all diagnostic/result/recursive bounds.",
+    "No standard-format admission, new public helper or arbitrary gap/span dispatch."
+  ],
+  "history_rollover": {
+    "segment": "docs/history/development-notes/segment-4967-f52d344f119c.md",
+    "source_commit": "624aa1995d52426a69d7debfdaa2afd6ae578d5f",
+    "lines": 190,
+    "bytes": 35403,
+    "verification": "Exact clean-HEAD suffix and prior manifest rows unchanged; preamble insertion corrected before rollover and final checks."
+  }
+}

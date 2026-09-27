@@ -40,8 +40,8 @@ establish a different, explicitly accepted mechanism. Merely adding alternate sy
 
 The owning task is `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1`; its first inventory records existing contracts and exact
 backend consumers. The state/control/result inventory is also recorded. Bounded nesting is reconciled; context-name carrier proof
-is described below. Perl, Rust and Dart lossless segmentation and public staged child composition are also verified
-below; Julia and Lua carrier proof remains pending before gap selection.
+is described below. Perl, Rust, Dart and Julia lossless segmentation and public staged child composition are also
+verified below; Lua carrier proof remains pending before gap selection.
 The format program's `.1` readiness gate remains pending. The original catalog and parked language extension retain
 all their conformance, Unicode, diagnostics, performance and backend obligations.
 
@@ -55,7 +55,7 @@ The caller supplies an already-compiled child grammar and frozen authority; the 
 The annotation cannot use `gap_text()`, copied strings or an arbitrary span as its text operand. The private
 `dispatch_span(...)` intrinsic has a separate authority contract and is not a public helper. The Perl proof below
 retains original item text beside child results and tests child rejection, source provenance and unauthorized
-identity selection. Rust and Dart's equivalent proof is also described below; further backends remain separate work.
+identity selection. Rust, Dart and Julia's equivalent proof is also described below; Lua remains separate work.
 
 The state inventory distinguishes three existing forms that a grammar author can compose:
 
@@ -473,7 +473,28 @@ bash ../tools/run_dart_project_data.sh test --reporter expanded \
 ```
 
 This does not close Dart's known malformed-provenance, diagnostic-byte or extreme-counter defects, nor its
-separate whole-package SDK compatibility gate. Julia, PUC Lua and LuaJIT remain the next carrier checks.
+separate whole-package SDK compatibility gate.
+
+Julia verifies five matched parent/child routes with the same source and JSON oracles. Native compiled and
+`SpecFile`-JSON reconstructed engines retain their instances. Generated v2 execution of each compiled form and a
+fresh emitted host provide three routes that construct engines per call. Each runs the original and enriched
+thirteen-case sequences twice, child4/15 controls, all seven grammar mutations, exact typed staged failures and
+typed status1 child rejection.
+
+The Julia isolation check mutates two fields of an actual returned child, then verifies that a second returned
+result and the next parse remain exact. A deliberately aliased pair must fail that same check. Mutating a detached
+copy would not establish this property. The fresh host loads ten emitted modules, validates metadata/plans and must
+exit successfully with the exact corpus, mutation and alias-control report; its scratch directory is then verified
+absent. All four in-process pairs also agree on complete successful enriched records.
+
+```sh
+bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no \
+  -e 'using LinkedSpecJulia, JSON3, Test; const REPO_ROOT=pwd(); include("julia/test/source_emitter_test.jl")'
+```
+
+This bounded direct-result check does not repair the separately tracked general staged-consumer isolation test.
+Registry-pattern validation and diagnostic-byte containment remain separate Julia obligations. PUC Lua and LuaJIT
+are the remaining carrier checks before reconciling the complete bounded objective.
 
 
 ## Approved and parked: language coverage and authoring difficulty

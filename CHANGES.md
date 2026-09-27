@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-09-28 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.3: five Julia lossless/child carriers
+
+Verify the unchanged segmentation/child grammars and JSON oracles across five Julia pairs. Two retain engines; three rebuild per call. Actual returned-child mutation and a deliberately aliased negative control prove bounded isolation. A fresh private-depot host checks ten emitted modules and exact completion. New69/emitter194, staged/gap/document938, storage22 owners/five package trees, neutral123/129 and exact book proof pass. No runtime or dependency changes; shared Lua follows.
+
 ## 2026-09-28 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.2: six Dart lossless/child carriers
 
 Verify unchanged lossless/child grammars and JSON oracles on six matched Dart routes. Compare returned ASTs and detached outcome records, exact source/request bounds, provenance, failures, selected accounting and seven mutants. Four pairs retain engines; public v2/emitted pairs prove per-call isolation. Reuse the same allocation owner, strictly analyze the checker/producer and ten emitted modules in a fresh package, then require exact execution completion. Focused2/selected88, fatal analysis, storage25 owners/47 packages, neutral123/129 and book proof pass. No production or dependency changes; Julia follows.

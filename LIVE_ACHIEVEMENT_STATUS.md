@@ -6,13 +6,15 @@ Ordinary .spec language readiness under SPEC-LANGUAGE-SELF-CONTAINMENT.1.1. The 
 
 ## Latest Completed Slice
 
-- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.2 - verify Dart lossless child carriers` — six matched routes preserve exact AST/outcome records and seven mutants. Focused2/selected88, fatal main/fresh analysis, storage25/47, neutral123/129 and book proof pass.
+- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.3 - verify Julia lossless child carriers` — five matched routes, original/enriched13, child4/15 and seven mutants pass. Actual-result mutation rejects a deliberately aliased control. Emitter194, dependents938, storage22/5, neutral123/129 and book proof pass.
 
 ## Next Action
 
-- Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.3: equivalent Julia lossless/actual-child proof after reviewing staged registry, diagnostic-byte and result-isolation obligations.
+- Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.4: shared Lua lossless/actual-child proof on both ABIs, with exact provenance and resource boundaries.
 
 ## Recent Completions
+
+- `2026-09-28` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.3` verifies Julia lossless/child routes with an actual-result alias control.
 
 - `2026-09-28` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.2` verifies Dart lossless/actual-child carriers and detached outcome records.
 
@@ -43,8 +45,6 @@ Ordinary .spec language readiness under SPEC-LANGUAGE-SELF-CONTAINMENT.1.1. The 
 - `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.7` removes absent-entry arithmetic warnings with104 focused assertions and full Phase01033.
 
 - `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.6` repairs census failure handling and exact Perl allocator registration.
-
-- `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.5` verifies five Lua/LuaJIT nesting routes and owns immediate storage-census repair.
 
 ## History
 

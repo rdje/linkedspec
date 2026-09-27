@@ -6,7 +6,7 @@
 - Status: `active` / bounded language objective proof
 - Roadmap lane: `.spec language evolution / expressive self-containment and alternate authoring profiles`
 - Created: `2026-07-30`
-- Last updated: `2026-09-27`
+- Last updated: `2026-09-28`
 - Owner: repo-local workflow
 
 ## Goal
@@ -726,10 +726,28 @@ used by ordinary `.spec` syntax on every backend.
 - [x] **LOCKSTEP** — Ledger, book, Knowledge, checkpoint, task/frontier, roadmaps, bounded live/history and MEMORY preserve exact scope. Julia/shared Lua remain owned; Dart .2.17/.2.18/.2.19/.2.25 remain open. No general resource or standard-format admission is claimed.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.3`
-  Status: `pending`
+  Status: `done`
   Goal: Prove the same lossless and actual-child corpus through Julia native and supported reconstructed/generated/emitted carriers.
   Dependencies: `.1.1.3.3.4.2`
+  Activation: Clean 624aa1995d52426a69d7debfdaa2afd6ae578d5f; Dart leaf and nine doctrines committed, brief empty, no outstanding job.
+  Verification tier: `focused`
+  Focused checks: Julia public parser/compiler validation and five supported matched native/reconstructed/generated/emitted parent-child routes; unchanged original13 and child4/15, seven mutants, scalar slicing/provenance, exact typed staged failures, selected budgets and retained/per-call distinction; actual returned-object mutation plus deliberately aliased control; emitter/readiness/staged/gap/document dependents, existing storage owner/cleanup, neutral staged, book source/render, Knowledge/memory/history/doctrines and git diff --check.
+  Canonical trigger: none for bounded authored test consumers reusing current allocation and host launcher. Any runtime/storage/contract repair is split before change; .3.5 remains canonical.
+  Existing obligations: JULIA-STARTUP-READING.2.13 registry patterns, .2.14 diagnostic byte containment and .2.26 general staged result-isolation assertion repair are read and stay open. This fixture uses valid ordinary identities, direct spans, plain child ASTs and small counters; its direct-result proof does not repair the existing consumer.
   Acceptance: Preserve exact oracles, mutants, authority denials and retained/per-call distinction. Review Julia staged registry/diagnostic/result-isolation cards, verify fresh emitted hosts, and split any repair dependencies.
+
+  Verification: PASS source-emitter194 (new69, existing125); staged491/gap319/document128 (938); storage22 owners/five locked package trees; neutral staged123/129; exact rendered source and Julia claims. Original grammars/cases/manifests unchanged.
+  Evidence: docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.3-verification.json and docs/knowledge/julia-lossless-child-carrier-readiness.md.
+  Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.3 - verify Julia lossless child carriers`.
+
+### `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.3` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Existing Julia readiness consumers cover nesting/context but no composed gap/actual-child grammar. Public parse_spec_with_staged_user_function_definitions, validate_spec, compile_spec and generated v2 entries now consume the unchanged sources.
+- [x] **ROOT CAUSE (WHY + WHERE)** — WHY: bounded grammar composition and returned-object isolation require independent behavioral proof. WHERE: the source-emitter consumer and new shared lossless checker/carrier producer; no runtime defect is inferred from missing coverage. Existing staged-consumer copy-mutation debt stays separately owned.
+- [x] **FIX** — Add five matched routes, exact scalar preservation/provenance/selected accounting and typed failures; retain two pairs, distinguish three per-call entries, and challenge actual returned objects plus a deliberately aliased pair. Reuse the existing allocation owner and latest-world fresh host.
+- [x] **ADDRESSED (verified)** — New69 assertions and full emitter194 pass. Four in-process pairs agree on26 complete enriched records; the fresh host validates ten modules and exact13/4/15/seven-mutant/alias report, process success and scratch absence. Each pair preserves original segmentation, strict child recognition, selected authority denials and failure recovery or per-call isolation.
+- [x] **NO REGRESSION** — Existing emitter/nesting/context125, staged491/gap319/document128, storage22/five locked packages and neutral123/129 pass. Original source/oracle/manifest bytes remain exact; no production, generated format or dependency change.
+- [x] **LOCKSTEP** — Book and exact included sources, ledger, Knowledge, checkpoint, task/frontier, roadmaps, bounded live/history and MEMORY agree. Shared Lua .3.4.4 follows; canonical .3.5 alone closes the parent. Julia .2.13/.2.14/.2.26 remain open.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.4`
   Status: `pending`
@@ -956,7 +974,7 @@ used by ordinary `.spec` syntax on every backend.
 | 14 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.3` | `done` | Bounded nesting evidence/authoring limits reconciled; exact canonical receipt governs closeout. |
 | 15 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.1` | `done` | Perl native/fresh emitted context-name proof:11/17 cases,90 calls and34 recoveries per route. |
 | 16 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.2` | `done` | Context11/17/22 and original-default6/7/12 pass all six native routes. |
-| 17 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.3` | `pending` | Review Julia staged obligations, then preserve unchanged lossless/child oracles on its supported carriers. |
+| 17 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.4` | `pending` | Shared Lua lossless/actual-child proof on PUC Lua and LuaJIT. |
 
 ## Decisions
 
@@ -989,6 +1007,8 @@ used by ordinary `.spec` syntax on every backend.
 - None for `.1.1`. The September27 clean prioritization supersedes the earlier callable-first schedule. Format implementation and the optional frontend remain gated by their own prerequisites.
 
 ## Verification Log
+
+September28 `.1.1.3.3.4.3`: Julia emitter194/new69, staged/gap/document938, storage22/5, neutral123/129 and exact book PASS. Five routes preserve original13/child4/15/seven mutants; direct returned-object mutation and a deliberately aliased pair establish bounded isolation.
 
 September28 `.1.1.3.3.4.2`: Dart focused2/selected88, fatal main/fresh analysis, storage25 owners/47 packages, neutral123/129 and exact book PASS. Four retained/two per-call pairs preserve original13 and child4/15 with seven mutants, exact staged codes and detached AST/outcome assertions.
 
@@ -1024,6 +1044,8 @@ September27 `.1.1.1`: seven neutral/structural checks, 34 ledger source-path/con
 
 ## Commit Log
 
+- `.1.1.3.3.4.3`: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.3 - verify Julia lossless child carriers`.
+
 - `.1.1.3.3.4.2`: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.2 - verify Dart lossless child carriers`.
 
 - `.1.1.3.3.4.1`: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.1 - verify Rust lossless child carriers`.
@@ -1039,6 +1061,8 @@ September27 `.1.1.1`: seven neutral/structural checks, 34 ledger source-path/con
 | `.0` | `SPEC-LANGUAGE-SELF-CONTAINMENT.0 - ratify expressive spec self-containment` | Direction capture only; no parser/runtime behavior. |
 
 ## Changelog
+
+- `2026-09-28`: Complete five Julia lossless/actual-child routes and actual-result isolation; shared Lua .3.4.4 follows.
 
 - `2026-09-28`: Complete six matched Dart lossless/actual-child carriers with strict package-context analysis; Julia .3.4.3 follows.
 

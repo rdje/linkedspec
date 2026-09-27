@@ -734,3 +734,18 @@ end
         (accepted_count = 11, rejected_count = 17, recovery_id = "siblings_restore_parent",
             span_case = "nested_distinct", span_end = 17))
 end
+
+include(joinpath(REPO_ROOT, "tests", "language-readiness", "lossless-child", "julia_carriers.jl"))
+
+function _with_lossless_readiness_workspace(action::Function)
+    scratch_path = Ref("")
+    mktempdir() do scratch
+        scratch_path[] = scratch
+        action(scratch)
+    end
+    @test !ispath(scratch_path[])
+end
+
+@testset "Bounded lossless and actual child Julia carriers" begin
+    LosslessChildCarriers.verify(REPO_ROOT, _with_lossless_readiness_workspace, _generated_source_host_process)
+end

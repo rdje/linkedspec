@@ -2,8 +2,8 @@
 
 Owner: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3`. Authority review on 2026-09-27 from
 clean `ca197a38c269cfeb89341505db83e395ebf6f308`. Perl segmentation is verified under `.3.2` and
-public staged child composition under `.3.3`; Rust matched carriers are verified under `.3.4.1` and Dart under `.3.4.2`.
-Julia and shared Lua routes remain pending.
+public staged child composition under `.3.3`; Rust matched carriers are verified under `.3.4.1`, Dart under `.3.4.2`
+and Julia under `.3.4.3`. Shared Lua routes remain pending.
 
 ## What this objective must establish
 
@@ -217,3 +217,34 @@ fresh-package analysis/execution, unchanged-oracle verification and book renderi
 storage/neutral results and all source/log hashes. No runtime, generated format, authority or dependency changes.
 DART-STARTUP-READING `.2.17` diagnostic-byte, `.2.18` extreme arithmetic, `.2.19` malformed provenance and `.2.25`
 whole-package SDK obligations stay open. Authored direct spans and ordinary counters do not exercise those defects.
+
+## Julia matched carriers — .3.4.3
+
+The existing `julia/test/source_emitter_test.jl` includes shared `julia_carriers.jl` and `julia_checks.jl` under the
+lossless-child fixture. Its managed allocation owner and fresh-host launcher remain the storage/launch boundary.
+Native compiled and `SpecFile`-JSON reconstructed parent/child engines retain their instances. The public generated
+v2 API on each compiled form and the fresh emitted host supply three per-call pairs, for five supported pairs total.
+No private generated-family entry is treated as another supported carrier.
+
+All five execute original/enriched13 twice, child4/15, seven mutations, scalar slicing/classification/reconstruction,
+bounded requests, exact local/rebased spans, sidecars, fresh accounting and selected authority denials. Typed staged
+exceptions preserve exact codes and standalone child rejections retain typed status1. Complete successful records match across
+the four in-process pairs; the emitted pair executes the same independent oracle and exact completion report.
+
+Result detachment is tested on the actual returned child text and source span, with a second already-returned
+result compared to its before-snapshot and a subsequent parse checked against the original oracle. An intentionally
+aliased pair must fail the identical assertion with the expected error. This separate bounded proof does not claim
+to repair JULIA-STARTUP-READING `.2.26`'s older copy-mutating general-consumer assertion.
+
+```sh
+bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no \
+  -e 'using LinkedSpecJulia, JSON3, Test; const REPO_ROOT=pwd(); include("julia/test/source_emitter_test.jl")'
+```
+
+The new69 assertions pass alongside original emitter65/nesting30/context30, totaling194. The fresh child validates
+and executes ten modules and must exit successfully with exact modules/corpus/mutation/alias-control fields.
+Both the original shared JSON utility and new checker are copied unchanged into matching relative directories;
+latest-world bindings and execution, strict merged-output JSON parsing, private depot and scratch cleanup remain
+explicit. `.3.4.3` records direct-dependent/storage/neutral results and exact source/log hashes. No runtime, manifest,
+dependency or public authority changes. Existing registry `.2.13`, diagnostic `.2.14` and isolation `.2.26` obligations
+stay open before shared Lua proof and canonical parent reconciliation.

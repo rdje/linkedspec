@@ -1,10 +1,10 @@
 # MEMORY
 
-- activation_commit: `a05b336a33ce5643376ea3020ee93880c82b3943` — clean activation base for Dart lossless child proof.
-- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.2 - verify Dart lossless child carriers`.
-- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.3` (pending) — Julia lossless and child carriers.
-- next_action: Activate .1.1.3.3.4.3 from clean HEAD, review Julia staged registry/diagnostic/isolation obligations, and verify unchanged lossless/actual-child oracles.
-- in_flight_uncommitted: none.
+- activation_commit: `624aa1995d52426a69d7debfdaa2afd6ae578d5f` — clean activation base for Julia lossless child proof.
+- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.3 - verify Julia lossless child carriers`.
+- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.4` (pending) — shared Lua lossless and child carriers.
+- next_action: Activate .3.4.4 and verify shared Lua lossless/actual-child carriers on PUC Lua and LuaJIT after reviewing staged resource/provenance obligations.
+- in_flight_uncommitted: none; Julia .3.4.3 verified and recorded for clean handoff.
 - blockers: bounded nesting/context proof reconciled; lossless probes and core-gap selection remain; .1.1.5 owns stale capability prose and startup .38/.40 recognition defects remain queued. ARCHOGEN owns downstream acceptance; named-argument and format proposals stay parked.
   Wrapper startup .7 remains open; recovery/purge stay prohibited. No interrupted Phase0 run counts as proof.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
@@ -50,8 +50,8 @@
 - standing_contracts: all durable paths are repo-relative; all project data stays on the repository filesystem; Only LinkedSpec is writable; every other Git repository is read-only (director September27; see AGENTS and the incident record).
   README remains bounded; ordinary leaves use focused proof and designated infrastructure/public/push boundaries
   use exact staged canonical CI; task-tree/index, Knowledge Map, mdBook, and bounded live/history move in lockstep.
-- current_engineering_notes_capacity: ADR0122 admits 43 collection files /42 manifest lines /25410 manifest bytes; current40/39/23573 stay bounded.
-  Notes segment4968 preserves123 lines/26553 bytes from cleanfd3e328d5; old archive rows/bytes remain exact.
+- current_engineering_notes_capacity: ADR0122 admits 43 collection files /42 manifest lines /25410 manifest bytes; current41/40/24185 stay bounded.
+  Notes segment4967 preserves190 lines/35403 bytes from clean624aa1995; old archive rows/bytes remain exact.
 - current_change_history_capacity: ADR0122 admits47 collection files /46 manifest lines /26255 bytes; current44/43/24527 stay bounded.
   Changes segment4969 preserves177 lines /35913 bytes from clean2cf465ae7; prior history remains byte-exact.
 - dependency_boundary: RGX public integration only; it owns PGEN. No internal inspection/analysis, patches, separate PGEN procedure or unrelated pin changes. September26 authorizes only reviewed f6e5acdc for LS-004.
