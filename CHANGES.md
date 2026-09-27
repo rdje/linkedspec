@@ -12,6 +12,16 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-09-27 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.6: generic flat bound container values
+
+Perl generic flat now consumes its typed argument once and dispatches on the runtime array/harray kind.
+Hash constructors use the same path; scalar-held containers, function parameters, nested reads, computed
+containers and empty values no longer leak host calls or fail construction. Existing explicit helpers and
+legacy capture slots retain their compatibility routes. The old module fails 31/164 assertions in the expanded
+native/fresh emitted regression; the candidate passes all 164 and six focused suites pass 120 top-level tests.
+Complete Phase0 passes 1033/1033 in 1040 seconds. The shared LF/CRLF book example and rendered output match.
+Remaining nested-tree readiness routes resume under .1.1.3.1.2; no new helper or format support is admitted.
+
 ## 2026-09-27 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.1: nested hash constructor values
 
 Perl hash constructors now lower nested values directly from typed AST nodes. This prevents bare bindings from

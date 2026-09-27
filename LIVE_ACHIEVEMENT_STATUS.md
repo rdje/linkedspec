@@ -6,13 +6,15 @@ Ordinary .spec language readiness under SPEC-LANGUAGE-SELF-CONTAINMENT.1.1. The 
 
 ## Latest Completed Slice
 
-- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.1 - preserve nested hash values` — exact native/fresh emitted typed values and recursive Unicode spans; focused120, span18, old-module RED28 and complete Phase01033 pass. Book and nine doctrines pass; no new syntax or format support claim.
+- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.6 - flatten bound container values` — exact native/fresh emitted container values, single evaluation, LF/CRLF book examples and capture compatibility; old-module RED31/164, focused120 and complete Phase01033 pass.
 
 ## Next Action
 
-- Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.6 from clean HEAD and repair generic flat on typed bindings, as the director requests. Resume remaining nested-tree proof afterward.
+- Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2 from clean HEAD; finish remaining nested-tree routes and mutations before contextual/lossless objectives.
 
 ## Recent Completions
+
+- `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.6` repairs generic bound/computed container splicing.
 
 - `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.1` repairs nested constructor values and preserves the original nesting oracles.
 
@@ -43,8 +45,6 @@ Ordinary .spec language readiness under SPEC-LANGUAGE-SELF-CONTAINMENT.1.1. The 
 - `2026-09-24` — `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.16.1` freezes lossless task partitioning and consumer transfer without implementation or higher limits.
 
 - `2026-09-24` — `SESSION-STARTUP-READING.88` verifies typed indexed reads with runtime397/public17 and one executable Perl/Rust book source.
-
-- `2026-09-24` — `SESSION-STARTUP-READING.50` verifies compact hash keys with core258/runtime226/public13 and one executable Perl/Rust book source.
 
 ## History
 

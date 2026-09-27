@@ -466,9 +466,9 @@ The most important collection distinction is snapshot versus flatten.
 | `flat_hash(meta)` | splice hash key/value pairs into the surrounding constructor. |
 | `flat(expr)` | generic flatten/splice helper for array or hash expressions, including inside direct `[...]` literals. |
 
-Current Perl limitation: `hash(flat(meta), "added", value)` fails when `meta` is a scalar-held harray.
-The explicit `flat_hash(meta)` form works for this case. Repair is scheduled under
-`SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.6`; other generic flattening contexts remain separately assessed.
+`flat(...)` also accepts bound or computed containers, including function parameters and nested reads.
+See the [complete flattening example](values-containers-and-flow-helpers.md#flattening-bound-and-computed-values)
+for splicing, ordinary nesting, and empty-container behavior.
 
 Snapshot example:
 

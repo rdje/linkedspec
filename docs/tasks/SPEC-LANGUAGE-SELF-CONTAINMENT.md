@@ -218,7 +218,7 @@ used by ordinary `.spec` syntax on every backend.
   Commit: pending.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.6`
-  Status: `pending`
+  Status: `done`
   Goal: Repair generic flat(meta) constructor splicing for a scalar-held harray in Perl; coordinate broad typed aggregate owner SESSION-STARTUP-READING.17.
   Priority: P1 next; the director explicitly requests immediate repair after the current constructor commit, before remaining nesting proof. The grammar does not splice flattened values, but the defect is now the selected next slice.
   Reproduce: Top assigns meta = {"existing":1}; value = 7; return(hash(flat(meta), "added", value)) returns null, whereas changing only flat to flat_hash returns {"existing":1,"added":7} through public Get.
@@ -226,6 +226,28 @@ used by ordinary `.spec` syntax on every backend.
   Diagnosis: Public call_spec_handler_subst reports unsupported hash for generic flat. MethodLowering lower_flat_list_value_expr's generic flat path recognizes legacy aggregate containers/value shapes but lacks the scalar-held harray branch present in flat_hash. Capture baseline, neutral semantics and all affected argument contexts before repair; do not infer all flattening routes from this one case.
   Evidence: .linkedspec-data/scratch/selfcontain11311-flat.log; discovered while expanding .1.1.3.1.1 regression. That repair's flattening compatibility control explicitly uses flat_hash.
   Acceptance: Source-located RED/GREEN native/fresh emitted proof with exact result kinds and affected scalar-held array/harray contexts; preserve task .17's broader obligation.
+
+  Activation: Clean 0b0cccf52781a03c5d7a1418212a42d180e03697 after constructor .1.1.3.1.1; all nine staged doctrines and post-commit pointer pass, brief empty. Director-selected immediate repair.
+  Scope: Perl generic flat on scalar-held and computed array/harray values in existing constructor contexts, including direct reads, parameter/local state and empty-container controls. The public preflight confirms these share static-only generic flattening selection; preserve legacy accumulator and explicit-helper compatibility. No unrelated helper contract change.
+  Verification tier: `focused`
+  Focused checks: Public Get/substitution RED/GREEN against explicit helper controls; exact native/fresh emitted result kinds, reuse, ordinary nested-value and snapshot controls; generated-source, uniform-binding, variadic, AST and lowering-trace suites; Perl syntax and complete Phase0; exact book example/rendering, Knowledge, history, memory, doctrines and diff hygiene.
+  Canonical trigger: none for a backend-local correction to existing scalar-held container semantics; escalate for neutral contract, generated-format or cross-backend semantic movement.
+  Expanded diagnosis: Public Get/substitution in .linkedspec-data/scratch/selfcontain116-probe.log confirms typed hash/array/empty bindings, copied containers and nested reads fail (unsupported hash, unresolved host flat/copy call, or leaked DSL indexing). Literal-container and explicit flat_array/flat_hash controls pass. Generic selection statically recognizes container shapes but cannot dispatch on runtime container values; use the typed argument AST and one runtime kind check without reparsing lowered host source.
+  Compatibility finding: Public substitution of [flat(IMATCH_LIST)] and [flat(LMATCH_LIST)] leaks host barewords, whereas flat_array reads the actual arrays. The clean 0b0cccf52 module produces byte-identical failing observations (cmp of selfcontain116-legacy.log and selfcontain116-legacy-baseline.log). Generic static inference classifies these as arrays but the scalar source reader deliberately excludes reserved engine locals. Own their matching capture-array/harray compatibility repair here via the existing explicit helpers; do not teach private names as new .spec syntax.
+  Gate lifecycle: The first Phase0 run was stopped after this additional compatibility finding so the final source can receive one complete run. selfcontain116-phase0.log is incomplete and is not proof; final gate uses selfcontain116-phase0-final.log.
+  Fixture correction: The added public-capture test initially read entry_groups/entry_named_map in the regex-free parent's edge action. Public Get controls without flat prove parent entry values are []/{} while the matched child's I action has ["a","b"] and its named map (selfcontain116-entry-control.log). Move that test action into the matched child, retaining its exact original capture oracle; this was test placement, not another engine defect.
+  Focused evidence: Final six-suite run selfcontain116-focused-final-v2.log passes120 top-level tests and164 assertions in the expanded constructor/flat subtest. Clean-module preload selfcontain116-final-red-v2.log fails31/164, exclusively that subtest. Required syntax, exact rendered shared example/output and all nine doctrines pass. The final complete Phase0 result below supersedes this pending-run observation.
+  Verification: Old-module preload fails 31/164 assertions, only the expanded constructor/flat subtest. Candidate passes all164; six focused suites120, syntax and complete Phase01033/1033 in 1040s. Shared LF/CRLF book source and exact rendered output pass. Commands and hashes: docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.6-verification.json.
+  Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.6 - flatten bound container values`.
+
+### `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.6` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Public `LinkedSpec::Get` and `call_spec_handler_subst` show generic flat(meta) failing while flat_hash(meta) succeeds. Bound arrays, copies and nested reads leak host calls/indexing. Clean-module preload fails 31/164 regression assertions; all failures belong to the expanded constructor/flat subtest.
+- [x] **ROOT CAUSE (WHY + WHERE)** — WHY: generic flattening infers kind from source shape instead of the runtime value, and reparsing an emitted argument loses typed DSL structure. WHERE: `perl/LinkedSpec/ActionIR/MethodLowering.pm`, `lower_flat_list_value_expr` and `lower_ast_aggregate_call_node`. Private capture names additionally require their existing aggregate storage rather than scalar reads. Public lowering and baseline controls locate both mechanisms.
+- [x] **FIX** — Lower supported bound/computed arguments from their typed AST, evaluate once, and splice runtime array elements or harray pairs. Hash constructors reuse that path. Known legacy aggregate and private capture slots use existing compatibility helpers; explicit helpers remain unchanged.
+- [x] **ADDRESSED (verified)** — Native Get and independently loaded emitted parsers pass all164 assertions, including repeated execution, typed members, function scope, empty containers, capture values, a side-effect counter and mutation independence. Baseline/current failure-name comparison removes exactly the constructor/flat subtest and introduces none. Fake-source AST controls prove the typed argument is consumed.
+- [x] **NO REGRESSION** — Six focused suites pass120 top-level tests; complete `prove -v -Iperl t/phase0_regression.t` reaches `1..1033` and PASS in 1040s with no failing names. Both required Perl syntax checks pass. The interrupted earlier Phase0 run is explicitly excluded from evidence.
+- [x] **LOCKSTEP** — The shared executable book example passes natively and freshly emitted with LF/CRLF; rendered source/output match. Book reference/status, CHANGES, DEVELOPMENT_NOTES, MEMORY, live status, roadmaps, task tree and Knowledge Map describe the repair. USER_GUIDE's canonical book delegation remains unchanged. Bounded history, memory, doctrines and diff hygiene govern landing.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.2`
   Status: `pending`
@@ -373,10 +395,12 @@ used by ordinary `.spec` syntax on every backend.
 | 2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.1` | `done` | Four capability areas mapped to current contracts and five-backend evidence; seven neutral/structural checks pass. |
 | 3 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.2` | `done` | Other five areas mapped; seven neutral tools and 44 path/consumer checks pass. |
 | 4 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.1` | `done` | Typed constructor values and native/fresh emitted spans verified; complete Phase0 1033/1033. |
-| 5 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.6` | `pending` | Director-selected immediate generic flat typed-binding repair, after clean constructor commit. |
+| 5 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.6` | `done` | Generic flat bound/computed values, capture compatibility, native/emitted164 and complete Phase01033 verified. |
 | 6 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2` | `pending` | Resume remaining nesting routes and mutations after .1.1.6. |
 
 ## Decisions
+
+- `2026-09-27`: The director confirms that container kind belongs to the value internally, not its binding name. Generic flat dispatch uses the evaluated runtime value; name-based legacy storage routing is compatibility plumbing only. The .1.1.6 native/emitted matrix covers bindings, parameters, nested reads and computed containers.
 
 - `2026-09-27`: The director asks why generic flat was deferred and selects its immediate repair. Finish the verified constructor commit, then activate `.1.1.6` before remaining nesting proof.
 
@@ -406,6 +430,8 @@ used by ordinary `.spec` syntax on every backend.
 
 ## Verification Log
 
+September27 `.1.1.6`: baseline RED31/164; candidate native/emitted164, focused120, Phase01033 and exact rendered LF/CRLF example pass. Its checkpoint preserves commands, source/log hashes and excluded interrupted evidence.
+
 September27 `.1.1.3.1.1`: old-module RED 28/96; candidate constructor96, focused120, span18, Phase01033; exact book and nine doctrines pass. Source/test/diagnostic hashes are in its checkpoint. No broad campaign admission.
 
 September27 `.1.1.2`: seven unchanged neutral tools, 44 source-path/consumer checks and book rendering pass; no runtime or contract movement. Standard memory/history/Knowledge and pre-commit doctrines govern landing.
@@ -423,6 +449,8 @@ September27 `.1.1.1`: seven neutral/structural checks, 34 ledger source-path/con
 | `.0` | `SPEC-LANGUAGE-SELF-CONTAINMENT.0 - ratify expressive spec self-containment` | Direction capture only; no parser/runtime behavior. |
 
 ## Changelog
+
+- `2026-09-27`: `.1.1.6` fixes generic flat immediately as requested, including baseline-confirmed private capture compatibility. Remaining nesting route proof resumes from its clean commit.
 
 - `2026-09-27`: `.1.1.3.1.1` repairs constructor value lowering exposed by the first grammar objective; `.1.1.6` owns separate generic flat composition. Remaining nesting routes and mutations follow from clean commit.
 

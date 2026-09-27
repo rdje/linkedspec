@@ -1,0 +1,56 @@
+{
+  "owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.6",
+  "activation_commit": "0b0cccf52781a03c5d7a1418212a42d180e03697",
+  "date": "2026-09-27",
+  "scope": "Perl existing generic flat correctness; no neutral contract or generated format movement",
+  "evidence": [
+    {
+      "command": "env PERL5LIB= bash tools/project_data_run.sh prove -v -Iperl t/generated_source_contract.t t/uniform_binding_contract.t t/variadic_user_function_contract.t t/actionir_ast_parser.t t/trace_actionir_method_lowering.t t/trace_emit_context_bridge.t",
+      "result": "PASS six files/120 top tests in95s; expanded native/fresh emitted subtest164 assertions",
+      "log": ".linkedspec-data/scratch/selfcontain116-focused-final-v2.log",
+      "sha256": "fbbd173b2538ebd95c9dd94439338a8f4a6fb878c6099ed6db420346682784f7"
+    },
+    {
+      "command": "env PERL5LIB= bash tools/project_data_run.sh prove -v -Iperl t/phase0_regression.t",
+      "result": "PASS1033/1033 in1040s",
+      "log": ".linkedspec-data/scratch/selfcontain116-phase0-final.log",
+      "sha256": "e10a9fd16bad1aa1c37b49decbf4e9f7ef6c208946254fe2e863112d95b5f39b"
+    },
+    {
+      "command": "bash tools/run_mdbook_local.sh",
+      "result": "PASS; rendered shared source and output independently match",
+      "log": ".linkedspec-data/scratch/selfcontain116-book-final.log",
+      "sha256": "5647d65f1e0d7e41ba44f11f9d75aa2a4f6b55d231ab8c1835bf43b95e4e599c"
+    },
+    {
+      "command": "env PERL5LIB= bash tools/project_data_run.sh perl -I.linkedspec-data/scratch/selfcontain116-baseline/perl -Iperl -MLinkedSpec::ActionIR::MethodLowering t/generated_source_contract.t",
+      "result": "RED31/164 only constructor/flat subtest; all other top tests pass",
+      "log": ".linkedspec-data/scratch/selfcontain116-final-red-v2.log",
+      "sha256": "c8c5bba6494a9d5e0db3099252c6dfe3ecc6b8ba8bf96f5bc9e04f9abeccc537"
+    }
+  ],
+  "implementation_sha256": "357f22d931decb839ae38d3f641b774876faa44b66423003443b6158a435bb80",
+  "baseline_module_sha256": "6ba6ab7dd7e16c754fcad41945d9994fd05ec2f7e5202498fa9ede6a6b221187",
+  "baseline_method": "Byte-identical clean activation module preloaded with -M before test bootstrap adjusts library paths",
+  "required_syntax": [
+    "perl -c perl/LinkedSpec.pm: syntax OK",
+    "perl -c -Iperl t/phase0_regression.t: syntax OK"
+  ],
+  "fixture": "examples/flat-bound-values.spec",
+  "fixture_sha256": "b0d4cc3fd2dd3651f98711c76df296d5db4dcd37b2d37c6b81dca4c6a1a30dff",
+  "routes": [
+    "native Get, repeated runs",
+    "fresh emitted parser in independent child, repeated runs",
+    "LF and CRLF book source",
+    "public substitution of private capture compatibility slots"
+  ],
+  "failure_names_removed": [
+    "hash constructor shapes preserve values beside nested helpers"
+  ],
+  "failure_names_added": [],
+  "excluded_evidence": {
+    "selfcontain116-phase0.log": "Interrupted before completion; not verification proof",
+    "selfcontain116-focused-final.log": "Authored public capture test initially placed in regex-free parent; independent control proves matched child owns captures. Corrected test placement retains original oracle; final-v2 is authoritative."
+  },
+  "remaining": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2 remaining nested-tree routes and mutation proof; broad startup .17 unchanged"
+}

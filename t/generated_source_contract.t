@@ -1046,12 +1046,90 @@ SPEC
  my $fixture = File::Spec->catdir($root,qw(tests language-readiness nested-tree));
  my $grammar = read_text(File::Spec->catfile($fixture,'grammar.spec'));
  my $oracle = $json->decode(read_text(File::Spec->catfile($fixture,'cases.json')));
+ my $flat_matrix = <<'SPEC';
+fn spread(value) { return([flat(value)]) }
+fn fields(value) { return(hash(flat(value), "added", 7)) }
+fn from_local(document) { local = document["items"]; return(array(0, flat(local), 3)) }
+fn independent(value) {
+ saved = hash(flat(value))
+ value["nested"]["x"] = 2
+ return([saved, value])
+}
+Top::
+ -> Done {
+  meta = {"existing":1}
+  items = [1,2]
+  empty_meta = {}
+  empty_items = []
+  pairs = ["a",1,"b",2]
+  document = {"items":[1,2],"meta":{"a":1}}
+  typed = [undef,false,true,{"k":[3]}]
+  counter = 0
+  once = [flat(set(items, [set(counter, num_add(counter, 1))])), counter]
+  items = [1,2]
+  return({
+   "reported":hash(flat(meta), "added", 7),
+   "explicit":hash(flat_hash(meta), "added", 7),
+   "array":array(0, flat(items), 3), "literal":[0, flat(items), 3],
+   "empty_hash":hash(flat(empty_meta), "added", 7),
+   "empty_array":array(0, flat(empty_items), 3),
+   "tokens":hash(flat(pairs), "added", 7),
+   "literal_source":array(0, flat([1,2]), 3),
+   "hash_source":hash(flat({"a":1}), "added", 7),
+   "computed":array(0, flat(copy(items)), 3),
+   "path":array(0, flat(document["items"]), 3),
+   "hash_path":hash(flat(document["meta"]), "added", 7),
+   "parameter":spread(items), "function_hash":fields(meta),
+   "local":from_local(document), "typed":spread(typed),
+   "returned":array(0, flat(spread(items)), 3),
+   "repeat":[fields({"first":1}),fields({"second":2})],
+   "snapshot":independent({"nested":{"x":1}}),
+   "nested_control":[items,copy(items),meta,copy(meta)],
+   "empty_parameters":[spread([]),fields({})],
+   "once":once
+  })
+ }
+Done:
+ /x/
+SPEC
+ my $flat_expected = {
+  reported=>{existing=>1,added=>7}, explicit=>{existing=>1,added=>7},
+  array=>[0,1,2,3], literal=>[0,1,2,3], empty_hash=>{added=>7}, empty_array=>[0,3],
+  tokens=>{a=>1,b=>2,added=>7}, literal_source=>[0,1,2,3], hash_source=>{a=>1,added=>7},
+  computed=>[0,1,2,3], path=>[0,1,2,3], hash_path=>{a=>1,added=>7},
+  parameter=>[1,2], function_hash=>{existing=>1,added=>7}, local=>[0,1,2,3],
+  typed=>[undef,JSON::PP::false,JSON::PP::true,{k=>[3]}], returned=>[0,1,2,3],
+  repeat=>[{first=>1,added=>7},{second=>2,added=>7}],
+  snapshot=>[{nested=>{x=>1}},{nested=>{x=>2}}],
+  nested_control=>[[1,2],[1,2],{existing=>1},{existing=>1}],
+  empty_parameters=>[[],{added=>7}], once=>[1,1],
+ };
  my @cases = (
   {id=>'constructor-matrix',source=>$matrix, inputs=>[{id=>'values',input=>'x',expected=>$expected}]},
+  {id=>'generic-flat',source=>$flat_matrix, inputs=>[{id=>'typed-bindings',input=>'x',expected=>$flat_expected}]},
   {id=>'nested-tree',source=>$grammar, inputs=>[
    @{$oracle->{accept}}, map { +{%$_,reject=>1} } @{$oracle->{reject}}
   ]},
  );
+ my $flat_book = read_text(File::Spec->catfile($root,'examples','flat-bound-values.spec'));
+ for my $ending ('LF','CRLF') {
+  my $source = $flat_book;
+  $source =~ s/\n/\r\n/g if $ending eq 'CRLF';
+  push @cases,{id=>"flat-book-$ending",source=>$source,inputs=>[{
+   id=>'documented-values',input=>'x',expected=>{
+    fields=>{existing=>1,added=>7},items=>[0,1,2,3],kept=>[[1,2]],empty=>[0,3],
+   },
+  }]};
+ }
+ my $capture_source = <<'SPEC';
+Top::
+ -> Done { return(call(Done)) }
+Done: /(?<left>a)(?<right>b)/
+I { return(hash(flat(entry_named_map()), "groups", [flat(entry_groups())])) }
+SPEC
+ push @cases,{id=>'flat-public-captures',source=>$capture_source,inputs=>[{
+  id=>'capture-containers',input=>'ab',expected=>{left=>'a',right=>'b',groups=>['a','b']},
+ }]};
  my @artifacts;
  for my $case (@cases) {
   my %ctx;
@@ -1128,7 +1206,7 @@ HASH_SHAPE_RUNNER
   0,'fresh emitted constructor child exits successfully');
  if (-f $output) {
   my $rows = $json->decode(read_text($output));
-  is(scalar(@$rows),scalar(@cases),'fresh child returns both grammars');
+  is(scalar(@$rows),scalar(@cases),'fresh child returns every grammar');
   for my $index (0..$#cases) {
    my $case = $cases[$index];
    my $row = $rows->[$index];
@@ -1145,6 +1223,24 @@ HASH_SHAPE_RUNNER
    }
   }
  } else { fail('fresh emitted child wrote observations') }
+
+ my @IMATCH_LIST = (3,1,2);
+ my @LMATCH_LIST = (3,1,2);
+ my %IMATCH_HASH = (kept=>7);
+ my %LMATCH_HASH = (kept=>7);
+ for my $slot ('IMATCH_LIST','LMATCH_LIST','IMATCH_HASH','LMATCH_HASH') {
+  my $is_array = $slot =~ /_LIST$/;
+  my $explicit = $is_array ? 'flat_array' : 'flat_hash';
+  my $expected_capture = $is_array ? [3,1,2] : {kept=>7};
+  for my $method ('flat',$explicit) {
+   my $value = "$method($slot)";
+   my $statement = $is_array ? "return([$value])" : "return(hash($value))";
+   my $lowered = LinkedSpec::call_spec_handler_subst('Top',$statement);
+   my $observed = eval 'sub {'.$lowered.'}->()';
+   is("$@",'',"$method preserves the existing $slot storage");
+   is_deeply($observed,$expected_capture,"$method reads exact $slot members");
+  }
+ }
 };
 
 subtest 'numeric reducers consume values in native and fresh generated parsers' => sub {

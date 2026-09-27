@@ -4127,6 +4127,31 @@ my $lower_numeric_array_reducer_source_expr = sub {
   my $method = $ast_aggregate_call_method->($node->{name}, scalar(@$args));
   return undef unless defined($method) && length($method);
 
+  if ($method eq 'flat' && @$args == 1 && ref($args->[0]) eq 'HASH') {
+   my $value = $args->[0];
+   my $kind = $value->{kind} // '';
+   if ($kind eq 'variable' && ($value->{name} // '') =~ /\A[IL]MATCH_(LIST|HASH)\z/o) {
+    # Reserved capture storage is not an ordinary scalar binding. Reuse the
+    # explicit helpers' existing sigil-aware compatibility lowering.
+    my $helper = $1 eq 'LIST' ? 'flat_array' : 'flat_hash';
+    return $lower_flat_list_value_expr->($helper.'('.$value->{name}.')');
+   }
+   my $binding_kind = $kind eq 'variable' ? $bare_symbol_kind->($value->{name}) : undef;
+   # Legacy rule accumulators still use their aggregate slots. Ordinary bound
+   # and computed values need runtime dispatch: their container kind cannot be
+   # inferred from the source spelling. Evaluate the argument once in scalar
+   # context, then expose its elements to the enclosing list context.
+   if ((!defined($binding_kind) || $binding_kind eq 'scalar')
+       && $kind =~ /\A(?:variable|array_literal|hash_literal|indexed_var|nested_access|call|fluent_chain|block_value|assign_scalar|assign_array_append|assign_hash_index|assign_nested_access)\z/o) {
+    my $value_expr = $lower_ast_value_node->($value, { bare_scalar_read => 1 });
+    if (defined($value_expr) && length($value_expr)) {
+     return 'do { my $__ls_flat_value = '.$value_expr.'; '
+      .'(defined($__ls_flat_value) && ref($__ls_flat_value) eq \'ARRAY\') ? @{$__ls_flat_value} : '
+      .'(defined($__ls_flat_value) && ref($__ls_flat_value) eq \'HASH\') ? %{$__ls_flat_value} : () }';
+    }
+   }
+  }
+
   if ($method eq 'copy' && @$args == 1 && ref($args->[0]) eq 'HASH'
    && ($args->[0]{kind} // '') eq 'call') {
    my $container = $args->[0];
@@ -4152,6 +4177,13 @@ my $lower_numeric_array_reducer_source_expr = sub {
    for (my $index = 0; $index < @$args; ) {
     my $key = $args->[$index];
     if (($key->{kind} // '') eq 'call' && ($key->{name} // '') =~ /\Aflat(?:_array|_hash)?\z/o) {
+     if ($key->{name} eq 'flat') {
+      my $flat = $lower_ast_value_node->($key, { bare_scalar_read => 1 });
+      return undef unless defined($flat) && length($flat);
+      push @pairs, $flat;
+      ++$index;
+      next;
+     }
      my @flat_args;
      foreach my $arg (@{$key->{args} || []}) {
       my $source = $ast_expr_source_node->($arg);

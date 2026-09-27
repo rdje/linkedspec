@@ -8,9 +8,9 @@ answers:
   - "which test covers native and emitted nested grammar span values"
   - "why does flat meta fail while flat_hash meta works"
 date: 2026-09-27
-status: constructor repair verified; generic flat typed-binding repair scheduled separately
+status: constructor verified; generic flat separately repaired by .1.1.6
 tags: [perl, actionir, constructor, hash, shape, source-span, readiness]
-evidence: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.1 owns the constructor correction. Public Get and call_spec_handler_subst reproduce bare start in generated host source; direct shapes preserve its value. Final native/fresh emitted regression has 96 assertions across a typed constructor matrix and six accepted/seven rejected nesting cases, with repeated execution. Six focused suites pass 120 top-level tests; complete Phase0 passes 1033/1033 in 1043 seconds. Exact evidence is in docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.1-verification.json. Generic flat(meta) returns null while flat_hash(meta) returns exact fields; .1.1.6 is the director-selected immediate next repair."
+evidence: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.1 owns the constructor correction. Public Get and call_spec_handler_subst reproduce bare start in generated host source; direct shapes preserve its value. Final native/fresh emitted regression has 96 assertions across a typed constructor matrix and six accepted/seven rejected nesting cases, with repeated execution. Six focused suites pass 120 top-level tests; complete Phase0 passes 1033/1033 in 1043 seconds. Exact evidence is in docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.1-verification.json. At this constructor baseline generic flat(meta) returned null while flat_hash(meta) returned exact fields; the separately verified .1.1.6 repair now restores generic flat."
 reverify: "env PERL5LIB= bash tools/project_data_run.sh prove -v -Iperl t/generated_source_contract.t t/actionir_ast_parser.t; env PERL5LIB= bash tools/project_data_run.sh prove -v -Iperl t/phase0_regression.t"
 ---
 
@@ -43,13 +43,16 @@ not S-expression standard support. Its independent cases retain the original
 Unicode scalar span expectations. Remaining backend/mutation assessment belongs
 to `.1.1.3.1.2`; neither a green Perl trial nor this repair activates the campaign.
 
-## Separate generic flattening defect
+## Separate generic flattening repair
 
-For `meta = {"existing":1}; value = 7`, public Get returns null from
+At the constructor baseline, for `meta = {"existing":1}; value = 7`, public Get returned null from
 `hash(flat(meta), "added", value)`, and public lowering reports unsupported
 `hash`. Changing only `flat` to `flat_hash` returns `{"existing":1,"added":7}`.
-The generic flat branch in `lower_flat_list_value_expr` lacks the scalar-held
-harray handling present in `flat_hash`. `.1.1.6` owns source-located baseline and
-repair proof immediately after the constructor commit, coordinated with startup `.17`'s broader
-typed aggregate obligation. This is a scheduled defect, not a claim that the
-explicit-helper control fixes generic flattening.
+The generic flat branch in `lower_flat_list_value_expr` lacked the scalar-held
+harray handling present in `flat_hash`. `.1.1.6` repairs this with typed AST lowering
+and runtime-kind dispatch, coordinated with startup `.17`'s broader typed aggregate
+obligation. Its native/fresh emitted regression passes164 and complete Phase0 passes1033.
+
+The director selected `.1.1.6` immediately after clean constructor commit `0b0cccf52`.
+[[perl-generic-flat-runtime-values]] records its expanded diagnosis and repair proof;
+this earlier constructor leaf did not itself fix generic flattening.

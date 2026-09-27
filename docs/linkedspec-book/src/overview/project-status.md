@@ -3452,7 +3452,9 @@ capability inventory; core capability work precedes the broad [structured-format
 Its first grammar/cursor/capture inventory passes neutral checks without changing runtime behavior or claiming campaign readiness.
 State/control/result inventory is also complete as bounded contract evidence. The first nested-tree trial
 exposed a Perl hash-constructor value defect; native/fresh emitted regression accompanies its repair. Remaining
-backend/mutation proof and contextual/lossless objectives precede new primitive selection. `.2-.6` remain later work.
+backend/mutation proof and contextual/lossless objectives precede new primitive selection. The associated Perl
+generic-flat repair also restores bound and computed container splicing, with native/fresh emitted examples.
+`.2-.6` remain later work.
 
 The root README is a stable 105-line / 5,072-byte landing page governed by `README_POLICY.md`, ADR `0063`,
 and the registered `README-STABILITY` doctrine. Hard ceilings are 128 lines and 6,144 bytes; changing status,

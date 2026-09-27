@@ -965,6 +965,9 @@ subtest 'aggregate helper-call lowering consumes AST call nodes' => sub {
         local *LinkedSpec::ActionIR::AST::parse_action_expr = sub {
             my ($expr, @rest) = @_;
             ++$parse_calls;
+            if ($expr eq 'flat(meta)') {
+                return $call->('flat', '__bad_flat_source__()', $var->('meta'));
+            }
             if ($expr eq 'hash("span",[start,trim(" x ")])') {
                 return $call->('hash', '__bad_hash_constructor__()', $str->('span'), {
                     kind => 'array_literal', source => '__bad_array_shape__()',
@@ -1048,11 +1051,15 @@ subtest 'aggregate helper-call lowering consumes AST call nodes' => sub {
         like($constructed, qr/"span" => \[\$start,/, 'hash constructor reads the typed shape variable');
         like($constructed, qr/\$__ls_trim/, 'hash constructor preserves its nested helper');
 
-        my $all = join("\n", $quoted_count, $sum, $take, $merge, $has_key, $constructed);
+        my $flattened = LinkedSpec::call_spec_handler_subst('Top', q{return(flat(meta))});
+        like($flattened, qr/\$__ls_flat_value = \$meta;/, 'generic flat evaluates its typed binding once');
+        like($flattened, qr/ref\(\$__ls_flat_value\) eq 'HASH'/, 'generic flat retains runtime harray dispatch');
+
+        my $all = join("\n", $quoted_count, $sum, $take, $merge, $has_key, $constructed, $flattened);
         unlike($all, qr/__bad_/, 'AST aggregate lowering does not reuse fake source text for supported calls');
     }
 
-    ok($parse_calls >= 6, 'aggregate helper calls entered through the AST parser');
+    ok($parse_calls >= 7, 'aggregate helper calls entered through the AST parser');
 };
 
 subtest 'covered helper-call diagnostics retire AST host-call leakage' => sub {

@@ -12,6 +12,15 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-09-27 — generic flattening requires runtime kind dispatch (.1.1.6)
+
+Literal-shape inference cannot decide the kind of a uniform binding, function result or indexed read. Generic
+flat now consumes the typed argument AST once and dispatches on its runtime array/harray value; hash constructor
+splices use that same path. Existing aggregate slots and explicit-helper lowering remain separate compatibility
+routes. Public probes distinguish host-call/index leakage from grammar authoring mistakes; exact native/emitted
+matrices cover single evaluation, empty containers, pure-function scope and copy-on-write independence.
+The book example is one shared source executed under LF/CRLF. See docs/knowledge/perl-generic-flat-runtime-values.md.
+
 ## 2026-09-27 — preserve constructor value ASTs (.1.1.3.1.1)
 
 Reconstructing a DSL container while lowering nested calls can produce mixed DSL/host syntax. Re-parsing that

@@ -600,6 +600,32 @@ continue into later number methods.
 Expression-valued block receivers do not add a separate dispatch rule: the block evaluates first, then the
 selected helper family consumes the yielded value.
 
+### Flattening bound and computed values
+
+`flat(container)` opens one array or harray into its surrounding constructor. The argument can be a working
+binding, function parameter, nested read, or container-valued expression such as `copy(items)`. It is evaluated
+once. Arrays contribute their elements; harrays contribute key/value pairs. An empty container contributes nothing.
+
+This complete example runs on input `x` through the Perl native and fresh emitted parser tests, with both LF and
+CRLF source files:
+
+```text
+{{#include ../../../../examples/flat-bound-values.spec}}
+```
+
+The result is:
+
+```json
+{"fields":{"existing":1,"added":7},"items":[0,1,2,3],"kept":[[1,2]],"empty":[0,3]}
+```
+
+`padded` splices the parameter's elements between `0` and `3`. The `kept` field has no flattening helper, so the
+array remains one nested value. `copy(items)` likewise remains nested unless it is explicitly wrapped in `flat`.
+Use `hash(flat(pairs))` with an array such as `["a",1,"b",2]` when its elements are key/value tokens; this produces
+`{"a":1,"b":2}`. The explicit `flat_array` and `flat_hash` forms remain available when the intended kind is clear.
+Harray field order is not a sequence-order promise; use ordered array values when sequence order matters.
+
+
 ## Hash shaping
 
 Hash helpers make metadata shaping explicit:
