@@ -6,13 +6,15 @@ Ordinary .spec language readiness under SPEC-LANGUAGE-SELF-CONTAINMENT.1.1. The 
 
 ## Latest Completed Slice
 
-- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.6 - reject incomplete storage censuses` — census regression30, real Lua19/dual-ABI and Perl27 storage checks pass; exact canonical receipt governs landing.
+- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.7 - preserve quiet entry boundaries` — final104 warning-sensitive assertions, focused218, generated12, storage27 and full Phase01033 pass; values and null/empty/zero distinctions are unchanged.
 
 ## Next Action
 
 - Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.3 for canonical nesting evidence and authoring-cost reconciliation.
 
 ## Recent Completions
+
+- `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.7` removes absent-entry arithmetic warnings with104 focused assertions and full Phase01033.
 
 - `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.6` repairs census failure handling and exact Perl allocator registration.
 
@@ -43,8 +45,6 @@ Ordinary .spec language readiness under SPEC-LANGUAGE-SELF-CONTAINMENT.1.1. The 
 - `2026-09-27` — `RGX-CONSUMER-BUILD-REPORTS.1.3.2` closes bounded published report work locally; exact canonical receipt governs landing and final push.
 
 - `2026-09-27` — `RGX-CONSUMER-BUILD-REPORTS.1.3.1` records the unauthorized ARCHOGEN write, accurate fix publication and strict other-repository read-only boundary.
-
-- `2026-09-27` — `RGX-CONSUMER-BUILD-REPORTS.1.2` adopts verified f6e5acdc, preserves prior data, restores Rust public leading trivia and strict prefix validation, and requires receipt-bound canonical admission.
 
 ## History
 

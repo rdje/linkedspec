@@ -1,11 +1,11 @@
 # MEMORY
 
-- activation_commit: `feb5a06fefe19f8744f9b178a1f930203292fec0` — clean activation base for Lua legacy census repair.
-- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.6 - reject incomplete storage censuses`.
-- active_work_unit: none — storage verification repair is complete.
+- activation_commit: `f80b4693b86f7b5ece02fabb5510e1a4ca5dda55` — clean activation base for emitted entry-position warning repair.
+- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.7 - preserve quiet entry boundaries`.
+- active_work_unit: none — Perl entry-boundary warning repair is complete.
 - next_action: Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.3 to reconcile nesting evidence/authoring costs and close bounded parents through canonical milestone proof.
 - in_flight_uncommitted: none.
-- blockers: carrier proof and storage census repair complete; canonical parent reconciliation remains; .1.1.5 owns stale capability prose and startup .38/.40 recognition defects remain queued. ARCHOGEN owns downstream acceptance; named-argument and format proposals stay parked.
+- blockers: carrier proof, storage repair and emitted entry warning repair complete; canonical reconciliation remains; .1.1.5 owns stale capability prose and startup .38/.40 recognition defects remain queued. ARCHOGEN owns downstream acceptance; named-argument and format proposals stay parked.
   Wrapper startup .7 remains open; recovery/purge stay prohibited. No interrupted Phase0 run counts as proof.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
   active table; the task metadata doctrine inventories all consumers, permits arbitrary frontier-row rewrites,

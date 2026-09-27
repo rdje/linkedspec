@@ -12,6 +12,14 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-09-27 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.7: warning-free Perl entry boundaries
+
+Seven Perl entry-start calculations now use zero width for an absent entry match without changing capture values.
+Native and fresh emitted root/trivia/Unicode/zero-width cases preserve exact text, nulls, positions, marks and
+rewinds. The initial87-assertion regression fails six emitted warning checks, then passes; a matched zero-string control
+extends the final proof to104 assertions. Five focused suites pass218 top-level tests; final generated12 also pass. No warning suppression, runtime contract or generated-format change. Four existing
+Phase0 source-expression expectations follow the correction; complete Phase0 passes1033/1033 in1040s.
+
 ## 2026-09-27 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.6: reject incomplete storage censuses
 
 Lua storage verification now distinguishes a clear census from residue or enumeration failure. A read-only

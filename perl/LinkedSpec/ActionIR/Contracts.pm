@@ -1323,7 +1323,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bmark_entry_start\s*\(\s*(?<mark>\w+)\s*\)
     }{
-     'do { my $__ls_mark = LinkedSpec::SourceLocation::Runtime::mark_write_position($info, $STRING, \''.$label.'\', \''.$+{mark}.'\', $IPOS - length($IMATCH), "mark_entry_start"); '. _build_mark_trace_call(operation => 'mark_entry_start', label => $label, mark_name => $+{mark}, mark_pos_expr => '$__ls_mark') .'; $__ls_mark }'
+     'do { my $__ls_mark = LinkedSpec::SourceLocation::Runtime::mark_write_position($info, $STRING, \''.$label.'\', \''.$+{mark}.'\', $IPOS - length($IMATCH // ""), "mark_entry_start"); '. _build_mark_trace_call(operation => 'mark_entry_start', label => $label, mark_name => $+{mark}, mark_pos_expr => '$__ls_mark') .'; $__ls_mark }'
     }gex;
     return $code
    },
@@ -1705,7 +1705,7 @@ sub _build_capture_and_cursor_contracts {
    unresolved_pattern => qr/\bentry_line\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\bentry_line\s*\(\s*\)/do { LinkedSpec::SourceLocation::Runtime::span_start_line(\$info, \$STRING, \$IPOS - length(\$IMATCH), \$IPOS, "entry_line") }/g;
+    $code =~ s/\bentry_line\s*\(\s*\)/do { LinkedSpec::SourceLocation::Runtime::span_start_line(\$info, \$STRING, \$IPOS - length(\$IMATCH \/\/ ""), \$IPOS, "entry_line") }/g;
     return $code
    },
   },
@@ -1716,7 +1716,7 @@ sub _build_capture_and_cursor_contracts {
    unresolved_pattern => qr/\bentry_start_line\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\bentry_start_line\s*\(\s*\)/do { LinkedSpec::SourceLocation::Runtime::span_start_line(\$info, \$STRING, \$IPOS - length(\$IMATCH), \$IPOS, "entry_start_line") }/g;
+    $code =~ s/\bentry_start_line\s*\(\s*\)/do { LinkedSpec::SourceLocation::Runtime::span_start_line(\$info, \$STRING, \$IPOS - length(\$IMATCH \/\/ ""), \$IPOS, "entry_start_line") }/g;
     return $code
    },
   },
@@ -1727,7 +1727,7 @@ sub _build_capture_and_cursor_contracts {
    unresolved_pattern => qr/\bentry_col\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\bentry_col\s*\(\s*\)/do { LinkedSpec::SourceLocation::Runtime::span_start_column(\$info, \$STRING, \$IPOS - length(\$IMATCH), \$IPOS, "entry_col") }/g;
+    $code =~ s/\bentry_col\s*\(\s*\)/do { LinkedSpec::SourceLocation::Runtime::span_start_column(\$info, \$STRING, \$IPOS - length(\$IMATCH \/\/ ""), \$IPOS, "entry_col") }/g;
     return $code
    },
   },
@@ -1738,7 +1738,7 @@ sub _build_capture_and_cursor_contracts {
    unresolved_pattern => qr/\bentry_start_col\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\bentry_start_col\s*\(\s*\)/do { LinkedSpec::SourceLocation::Runtime::span_start_column(\$info, \$STRING, \$IPOS - length(\$IMATCH), \$IPOS, "entry_start_col") }/g;
+    $code =~ s/\bentry_start_col\s*\(\s*\)/do { LinkedSpec::SourceLocation::Runtime::span_start_column(\$info, \$STRING, \$IPOS - length(\$IMATCH \/\/ ""), \$IPOS, "entry_start_col") }/g;
     return $code
    },
   },
@@ -1760,7 +1760,7 @@ sub _build_capture_and_cursor_contracts {
    unresolved_pattern => qr/\bentry_start_pos\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\bentry_start_pos\s*\(\s*\)/do { LinkedSpec::SourceLocation::Runtime::span_start_offset(\$info, \$STRING, \$IPOS - length(\$IMATCH), \$IPOS, "entry_start_pos") }/g;
+    $code =~ s/\bentry_start_pos\s*\(\s*\)/do { LinkedSpec::SourceLocation::Runtime::span_start_offset(\$info, \$STRING, \$IPOS - length(\$IMATCH \/\/ ""), \$IPOS, "entry_start_pos") }/g;
     return $code
    },
   },
@@ -2014,7 +2014,7 @@ sub _build_capture_and_cursor_contracts {
    unresolved_pattern => qr/\brewind_entry_start\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\brewind_entry_start\s*\(\s*\)/LinkedSpec::SourceLocation::Runtime::cursor_state_write_compatibility(\$info, \$STRING, \$IPOS - length(\$IMATCH), "rewind_entry_start")/g;
+    $code =~ s/\brewind_entry_start\s*\(\s*\)/LinkedSpec::SourceLocation::Runtime::cursor_state_write_compatibility(\$info, \$STRING, \$IPOS - length(\$IMATCH \/\/ ""), "rewind_entry_start")/g;
     return $code
    },
   },

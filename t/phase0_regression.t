@@ -13475,7 +13475,7 @@ subtest 'emit_context_pipeline_helper_substitutions' => sub {
     );
     is(
         LinkedSpec::call_spec_handler_subst($label, 'mark_entry_start(entry_start)'),
-        q#do { my $__ls_mark = LinkedSpec::SourceLocation::Runtime::mark_write_position($info, $STRING, 'Top', 'entry_start', $IPOS - length($IMATCH), "mark_entry_start"); _trace_runtime_mark_event(operation => 'mark_entry_start', rule_label => 'Top', mark_name => 'entry_start', string_ref => $STRING, mark_pos => $__ls_mark, left_edge => (defined($LSPOS) && defined($LMATCH) ? $LSPOS - length $LMATCH : pos $$STRING), parser_pos => pos $$STRING); $__ls_mark }#,
+        q#do { my $__ls_mark = LinkedSpec::SourceLocation::Runtime::mark_write_position($info, $STRING, 'Top', 'entry_start', $IPOS - length($IMATCH // ""), "mark_entry_start"); _trace_runtime_mark_event(operation => 'mark_entry_start', rule_label => 'Top', mark_name => 'entry_start', string_ref => $STRING, mark_pos => $__ls_mark, left_edge => (defined($LSPOS) && defined($LMATCH) ? $LSPOS - length $LMATCH : pos $$STRING), parser_pos => pos $$STRING); $__ls_mark }#,
         'mark_entry_start(name) helper rewrite preserves explicit immediate-entry left-edge semantics'
     );
     is(
@@ -13600,7 +13600,7 @@ subtest 'emit_context_pipeline_helper_substitutions' => sub {
     );
     is(
         LinkedSpec::call_spec_handler_subst($label, 'entry_start_pos()'),
-        q#do { LinkedSpec::SourceLocation::Runtime::span_start_offset($info, $STRING, $IPOS - length($IMATCH), $IPOS, "entry_start_pos") }#,
+        q#do { LinkedSpec::SourceLocation::Runtime::span_start_offset($info, $STRING, $IPOS - length($IMATCH // ""), $IPOS, "entry_start_pos") }#,
         'entry_start_pos() helper rewrite preserves explicit current-immediate-match left-edge position semantics'
     );
     is(
@@ -13685,7 +13685,7 @@ subtest 'emit_context_pipeline_helper_substitutions' => sub {
     );
     is(
         LinkedSpec::call_spec_handler_subst($label, 'rewind_entry_start()'),
-        q#LinkedSpec::SourceLocation::Runtime::cursor_state_write_compatibility($info, $STRING, $IPOS - length($IMATCH), "rewind_entry_start")#,
+        q#LinkedSpec::SourceLocation::Runtime::cursor_state_write_compatibility($info, $STRING, $IPOS - length($IMATCH // ""), "rewind_entry_start")#,
         'rewind_entry_start() helper rewrite preserves entry-anchor rewind semantics'
     );
     is(
@@ -15681,7 +15681,7 @@ SPEC
     ok(!defined($runtime_ctx{last_error}), 'entry/match boundary mark parse leaves runtime_ctx last_error clear on success');
 
     my $entry_start_rewrite = LinkedSpec::call_spec_handler_subst('Child', 'mark_entry_start(entry_start)');
-    like($entry_start_rewrite, qr/mark_write_position\([^\n]*\$IPOS - length\(\$IMATCH\)/, 'mark_entry_start(name) lowers the immediate-entry left edge through a typed mark projection');
+    like($entry_start_rewrite, qr{mark_write_position\([^\n]*\$IPOS - length\(\$IMATCH // ""\)}, 'mark_entry_start(name) lowers the immediate-entry left edge with an explicit absent width through a typed mark projection');
 
     my $entry_end_rewrite = LinkedSpec::call_spec_handler_subst('Child', 'mark_entry_end(entry_end)');
     like($entry_end_rewrite, qr/mark_write_position\(\$info, \$STRING, 'Child', 'entry_end', \$IPOS/, 'mark_entry_end(name) lowers the immediate-entry right edge through a typed mark projection');

@@ -498,6 +498,33 @@ Prefer the explicit `entry_start_*` names when the surrounding code also talks a
 
 `entry_group(index)` (and the `match_group(index)` counterpart below) index the **captured groups** 0-based: index `0` is the *first* capture group, not the whole match — read the whole match with `entry_text()` / `match_text()`. The numbered list is **compacted**, so a group that did not participate in the match is dropped and shifts the indices after it; prefer named groups (`entry_named(name)` / `match_named(name)`) when a pattern has optional captures. See [Regex in `.spec`](../user-model/regex-in-spec.md#capture-groups).
 
+### Perl entry boundaries without an incoming match
+
+Selecting the root rule directly does not give it an entry match. In Perl, `entry_text()` and `entry_len()`
+therefore remain `undef`, while its entry start/end coordinates identify the cursor at rule entry. A later outgoing
+match can advance the live cursor without replacing that root entry. `mark_entry_start(saved)` records the entry
+boundary, and `rewind_entry_start()` moves back to it.
+
+These examples are checked through native and freshly emitted Perl parsers, with repeated executions and warnings
+enabled in the emitted host. Positions count Unicode scalars; lines and columns are one-based.
+
+| Context and input | Entry text / width | Entry start / end | Cursor before / after entry rewind |
+| --- | --- | --- | --- |
+| Root `I`, empty input | `undef` / `undef` | `0` / `0` | `0` / `0` |
+| Root edge matches `x` | `undef` / `undef` | `0` / `0` | `1` / `0` |
+| Root edge matches `x` after input `\n# β\nx` | `undef` / `undef` | `5` / `5` | `6` / `5` |
+| Child entered by a match of `🙂\nβ` | `"🙂\nβ"` / `3` | `0` / `3` | `3` / `0` |
+| Child entered by a named empty capture | `""` / `0` | `0` / `0` | `0` / `0` |
+| Child entered by a named capture of `0` | `"0"` / `1` | `0` / `1` | `1` / `0` |
+
+The leading-trivia root entry is at line3, column1. The Unicode child spans line1, column1 through line2, column2.
+An absent entry and a present empty match retain distinct text, width and capture values. A matched `"0"` string
+is present and keeps its one-scalar width; false-looking text must not trigger the absent-entry fallback. All five entry-start
+position/line/column helpers, entry marks and entry rewinds preserve these results without uninitialized-value
+warnings. Previously emitted Perl artifacts must be regenerated to receive this lowering correction; the generated
+format and typed source-location contract are unchanged. This repair is bounded to Perl and does not claim a new
+cross-backend absence contract.
+
 ## Match helpers
 
 Match helpers read the current local match being processed. Use them when the action wants the local slot's match, not the broader entry match.

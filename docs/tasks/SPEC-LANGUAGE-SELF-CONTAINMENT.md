@@ -210,7 +210,7 @@ used by ordinary `.spec` syntax on every backend.
   Dependencies: `.1.1.3.1.2.1`
   Acceptance: Split backend-sized children before implementation; retain the same authored oracles and honest carrier coverage. No blanket proof from native results.
 
-  Children: `.1.1.3.1.2.2.1`, `.1.1.3.1.2.2.2`, `.1.1.3.1.2.2.3`, `.1.1.3.1.2.2.4`, `.1.1.3.1.2.2.5`, `.1.1.3.1.2.2.6`
+  Children: `.1.1.3.1.2.2.1`, `.1.1.3.1.2.2.2`, `.1.1.3.1.2.2.3`, `.1.1.3.1.2.2.4`, `.1.1.3.1.2.2.5`, `.1.1.3.1.2.2.6`, `.1.1.3.1.2.2.7`
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.1`
   Status: `active`
@@ -371,6 +371,33 @@ used by ordinary `.spec` syntax on every backend.
 - [x] **ADDRESSED (verified)** — Thirty assertions prove exact child status/stdout/stderr across ten controls. Real Lua storage passes19 owners/two ABI trios; staged Perl storage passes27 and real trace/CLI scratch cleanup. Mutation71/14/11/10/50 and selector70/36/0/5/11 public controls pass after exact one-page registration. Exact canonical receipt is required before commit.
 - [x] **NO REGRESSION** — Shell/Perl syntax and git diff --check pass; existing builder cross-volume rejection, same-device allocation and owned cleanup remain exercised. No runtime/grammar/native-builder changes or external deletion. Historical failed census remains identified as incomplete.
 - [x] **LOCKSTEP** — Current storage book/counts, readiness ledger, Knowledge facts, checkpoint, live/roadmap pointers and bounded histories agree. The two creating leaves retain audit links; scripts/check_memory_architecture.sh and canonical doctrines govern landing.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.7`
+  Status: `done`
+  Goal: Eliminate uninitialized entry-position warnings in Perl emitted parsers while preserving existing no-entry and matched-entry values.
+  Priority: P1 generated-parser diagnostic integrity; execute after the clean storage repair and before canonical nesting reconciliation.
+  Activation: Clean f80b4693b86f7b5ece02fabb5510e1a4ca5dda55; canonical Phase01033/CLI66x2, all nine doctrines/post-commit pointer pass, brief0 and no job remains.
+  Reproduction: Canonical generated_source_contract.t passes11 top-level tests but emits two uninitialized subtraction warnings. Isolated warning-enabled fresh source generated through emit_generated_source identifies the constructor-matrix entry_start_pos call; native values and emitted values remain exact. Logs: .linkedspec-data/scratch/lua-census-warning-matrices-probe.log and lua-census-generated-warning-diagnosis.log.
+  Root cause: Public generated source line87 computes $IPOS - length($IMATCH) for entry_start_pos. The selected root has no entry match, so $IMATCH is undefined; Perl coerces length(undef) during subtraction and warns. ActionIR/Contracts.pm owns this lowering and related entry-start projections. This is independent of generic flat kind dispatch and storage verification.
+  Acceptance: Review the entry helper contracts and all related lowering sites; preserve existing absent/null/empty distinctions, root/trivia offsets, Unicode spans, nested matched entries and typed source errors. Add meaningful warning-sensitive native/fresh emitted regression and RED/GREEN proof; no blanket warning suppression, expected-value workaround or public contract expansion. Reuse an existing managed test owner. Commit before parent reconciliation.
+  Dependencies: `.1.1.3.1.2.2.6`
+  Verification tier: `focused`
+  Focused checks: Public lowering/emitted-source diagnosis, warning-sensitive entry-boundary RED/GREEN, typed source/capture/mark direct dependents, generated-source and nesting regressions, complete Phase0 for action rewriting, syntax, book/Knowledge/memory/history/doctrines/diff checks.
+  Canonical trigger: none for a bounded Perl lowering correction preserving existing values and contracts; escalate if review requires a contract, schema or infrastructure change. Parent reconciliation remains canonical.
+  Verification: RED6/87 new assertions (emitted absent-root warnings only); all values and matched controls pass. Initial GREEN87/87 and five focused suites218/218 pass; the final zero-string control expands the new regression to104/104 and generated12/12 pass, without uninitialized warnings. Book render, Perl/module/test syntax and storage27 pass. Final complete Phase0 passes1033/1033 in1040s.
+  Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.7 - preserve quiet entry boundaries`.
+
+  Scope audit: Exactly seven previously unguarded sites change; guarded entry_text/entry_len, end projections, local-match handling and MethodLowering's guarded entry_text remain byte-identical. Four existing Phase0 exact-source expectations update to the new arithmetic; behavioral expected values do not change.
+  Phase0 preflight correction: The first full run exposes the fourth stale expression pin, a mark_entry_start regex assertion at t/phase0_regression.t:15684. It completes1033 tests with only that one failed subtest in1059s; runtime boundary assertions pass. The corrected pattern requires explicit absent width; the failed run is retained and the final complete rerun passes.
+
+### `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.7` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — LinkedSpec::emit_generated_source and a warning-enabled fresh child locate the constructor root's uninitialized subtraction at generated line87. The initial new regression fails exactly six emitted no-warning assertions out of87; all native/emitted values and matched-entry controls pass.
+- [x] **ROOT CAUSE (WHY + WHERE)** — WHY: a selected root has a valid entry cursor but absent match text; length(undef) is coerced by subtraction and warns. WHERE: seven unguarded entry-start lowerings in perl/LinkedSpec/ActionIR/Contracts.pm; public emitted source and Carp attribution identify the exact mechanism.
+- [x] **FIX** — Normalize absent text only for width arithmetic with defined-or empty string. Preserve guarded null text/length, typed projection calls, end positions, capture kinds and local-match semantics. Extend the existing managed test owner; no warning suppression or generated-format change.
+- [x] **ADDRESSED (verified)** — Final104 assertions cover six fixtures, repeated native and fresh-process emitted calls, root/trivia/Unicode/empty/zero-text cases, exact values and empty warning lists. Five focused files pass218 top-level tests; final generated12 passes and storage remains27 owners.
+- [x] **NO REGRESSION** — Full Phase0 first run completes1033 with one stale source-pattern pin; its runtime assertions pass. Four source-expression expectations are aligned. Final full rerun PASS1033/1033 in1040s; module/test syntax, six-example book render, unchanged frozen contracts/fixtures and git diff --check pass.
+- [x] **LOCKSTEP** — The source-boundary book teaches six worked contexts and regeneration requirements without a new cross-backend absence claim. Task/live/roadmap pointers, bounded history, Knowledge fact/checkpoint and memory identify this repair before canonical nesting reconciliation; scripts/check_memory_architecture.sh and final doctrines govern landing.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.3`
   Status: `pending`

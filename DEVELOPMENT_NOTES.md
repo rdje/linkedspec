@@ -12,6 +12,23 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-09-27 — Absent entry text and entry boundary arithmetic
+
+A selected root has a valid entry cursor but no incoming match. The old entry-start lowering subtracts
+length(undef); numeric coercion preserves the expected position but a warning-enabled emitted host reports an
+uninitialized subtraction. Public generated source and an isolated Carp-enabled child identify the constructor
+matrix at generated line87. The full canonical f80b4693b run passes values while exposing two warnings.
+
+Seven unguarded calculations in ActionIR/Contracts.pm normalize only width arithmetic: five entry-start
+position/line/column projections, mark_entry_start and rewind_entry_start. Existing guarded text/length remain
+null for absence; present empty capture text/length remain empty/zero. Six independent fixtures run twice on both
+native and fresh emitted routes, including false-looking zero text. The initial five-fixture proof fails only six
+warning assertions out of87; final expanded104 all pass,
+alongside typed source/capture/mark/nesting compatibility. The existing managed test owner keeps storage at27.
+Full Phase0 first exposes one additional stale regex pin; after that fourth source-expression expectation is
+aligned, the final entire suite passes1033/1033 in1040s. No behavioral expected value changes.
+
+
 ## 2026-09-27 — Storage census exit status and allocator registration
 
 A find-to-rg pipeline inside if bypasses errexit even with pipefail: a missing root reproduces exit0 and false

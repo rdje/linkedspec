@@ -1,0 +1,93 @@
+{
+  "owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.7",
+  "activation_commit": "f80b4693b86f7b5ece02fabb5510e1a4ca5dda55",
+  "date": "2026-09-27",
+  "evidence": [
+    {
+      "command": "bash tools/project_data_run.sh prove -v -Iperl t/generated_source_contract.t (new regression, old production)",
+      "result": "RED6/87 warning assertions; all values and matched controls pass; one failed top-level subtest of12",
+      "exit_status": 1,
+      "log": ".linkedspec-data/scratch/entry-boundary-red-with-regression.log",
+      "sha256": "83b3b2a2a153174dbcd32753dd0a5a35d1eeda732a5f6074d63f88193e2dc2cd"
+    },
+    {
+      "command": "bash tools/project_data_run.sh prove -v -Iperl t/generated_source_contract.t t/typed_source_location_perl_contract.t t/typed_source_location_values.t t/complete_named_mark_contract.t t/nested_tree_readiness.t",
+      "result": "PASS218 top-level tests across5 files; new87/87; no uninitialized warning",
+      "exit_status": 0,
+      "log": ".linkedspec-data/scratch/entry-boundary-focused-green.log",
+      "sha256": "cf192a667ece54d9d1179f3b6adc277c912206db2599ad899ff6ecc06ed5302d"
+    },
+    {
+      "command": "bash tools/run_mdbook_local.sh",
+      "result": "PASS",
+      "exit_status": 0,
+      "log": ".linkedspec-data/scratch/entry-boundary-book.log",
+      "sha256": "1771f4b67c71e9470f0d8015b58cdd98634d0b73a20669d00591347b1baa17be"
+    },
+    {
+      "command": "bash tools/test_perl_project_data_storage.sh",
+      "result": "PASS27 existing owners; real trace/CLI workspace cleanup",
+      "exit_status": 0,
+      "log": ".linkedspec-data/scratch/entry-boundary-storage.log",
+      "sha256": "883cd60c441ae54bfe14f7c48bec67e17d1e66ed9ad84c360a7b925820f243e4"
+    },
+    {
+      "command": "bash tools/project_data_run.sh prove -v -Iperl t/phase0_regression.t (before fourth pin correction)",
+      "result": "FAIL1/1033: only named_mark_entry_and_match_end_helpers_snapshot_stable_boundaries source-pattern assertion; runtime assertions pass;1059s",
+      "exit_status": 1,
+      "log": ".linkedspec-data/scratch/entry-boundary-phase0.log",
+      "sha256": "fcdc85e90e8b64c07ed06ace39684f120489c662d4a2e67a8cc38a2c0fcf9a16"
+    },
+    {
+      "command": "bash tools/project_data_run.sh prove -v -Iperl t/generated_source_contract.t (final zero-string control)",
+      "result": "PASS12 top-level tests; new104/104 across six fixtures and24 native/fresh emitted calls; no uninitialized warning",
+      "exit_status": 0,
+      "log": ".linkedspec-data/scratch/entry-boundary-generated-final.log",
+      "sha256": "e9ad807c547aac12e3bc88f4bc75cfa2526b8e8e18c445dbc502eaafbad80892"
+    },
+    {
+      "command": "bash tools/project_data_run.sh prove -v -Iperl t/phase0_regression.t (final)",
+      "result": "PASS1033/1033 in1040s; no failing top-level test",
+      "exit_status": 0,
+      "log": ".linkedspec-data/scratch/entry-boundary-phase0-final.log",
+      "sha256": "46525c518175526e30692e5d1d3f54a1d16c8ba4644173f81781025666846543"
+    },
+    {
+      "command": "bash tools/run_mdbook_local.sh (final six-example book)",
+      "result": "PASS",
+      "exit_status": 0,
+      "log": ".linkedspec-data/scratch/entry-boundary-book-final.log",
+      "sha256": "6aa87f841c6348cb557866f9a9ec619b46aa4e2339b4777cb30ba3ce8bfd4683"
+    }
+  ],
+  "source_hashes": {
+    "perl/LinkedSpec/ActionIR/Contracts.pm": "f062292c073f37817484fd77e54d763f9595618ecd7d05a5d592a4eca621c361",
+    "t/generated_source_contract.t": "4f4620c2d605d62ff3f6afd65930452a0e6fb74dc5f7e634d2aaa6da2ef6168a",
+    "t/phase0_regression.t": "5804c7dd003972469d85d2baf3ba0555d05356f9411c1f3fdcae63db00db0c41"
+  },
+  "scope": {
+    "changed_lowerings": [
+      "entry_line",
+      "entry_start_line",
+      "entry_col",
+      "entry_start_col",
+      "entry_start_pos",
+      "mark_entry_start",
+      "rewind_entry_start"
+    ],
+    "fixtures": 6,
+    "calls_per_route": 12,
+    "routes": [
+      "native Get",
+      "warning-enabled fresh emitted process"
+    ],
+    "new_assertions": 104,
+    "red_failed_warning_assertions": 6,
+    "phase0_exact_source_expectations_updated": 4,
+    "initial_red_assertions": 87
+  },
+  "phase0": "PASS1033/1033 in1040s after four exact-source pins follow the seven-site lowering correction; all behavioral expected values unchanged.",
+  "limits": "Perl warning correction only; existing returned values, null/empty distinctions, typed projections, generated format and frozen contracts remain unchanged. This is not a new cross-backend absence contract; previously emitted artifacts require regeneration.",
+  "initial_phase0_test_sha256": "65924e7f3acf2ce572d9c6157bf76ed68e0bef8a3caa8ef5032d647748c8343d",
+  "unchanged": "Frozen typed source-location and named-mark JSON authorities, nesting grammar/cases and guarded MethodLowering entry_text implementation are byte-identical to activation HEAD."
+}

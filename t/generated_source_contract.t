@@ -1403,4 +1403,132 @@ NUMERIC_RUNNER
  };
 };
 
+subtest 'absent entry boundaries preserve values without warnings in fresh emitted parsers' => sub {
+ require Cwd;
+ my $root = Cwd::abs_path($repo_root);
+ my $scratch = tempdir(CLEANUP => 1);
+ my $json = JSON::PP->new->canonical->ascii->allow_nonref;
+ my $action = <<'ACTION';
+ before = cursor_pos()
+ mark_entry_start(saved)
+ rewind_entry_start()
+ return({
+  "start":entry_start_pos(), "line":entry_line(), "start_line":entry_start_line(),
+  "col":entry_col(), "start_col":entry_start_col(), "end":entry_end_pos(),
+  "end_line":entry_end_line(), "end_col":entry_end_col(), "len":entry_len(),
+  "text":entry_text(), "groups":entry_groups(), "named":entry_map(),
+  "mark":mark_pos(saved), "before":before, "after":cursor_pos()
+ })
+ACTION
+ my $root_initial = "Top::\nI {\n$action}\n";
+ my $root_edge = "Top::\n -> Token {\n$action}\nToken: /x/\n";
+ my $child_prefix = "Top::\n -> Token { return(call(Token)) }\n";
+ my $empty_entry = {
+  start=>0, line=>1, start_line=>1, col=>1, start_col=>1, end=>0,
+  end_line=>1, end_col=>1, len=>undef, text=>undef, groups=>[], named=>{},
+  mark=>0, before=>0, after=>0,
+ };
+ my @cases = (
+  {id=>'root-initial', source=>$root_initial, input=>'', expected=>{%$empty_entry}},
+  {id=>'root-edge', source=>$root_edge, input=>'x', expected=>{%$empty_entry,before=>1}},
+  {id=>'root-leading-trivia', source=>$root_edge, input=>"\n# β\nx", expected=>{
+   %$empty_entry,start=>5,end=>5,line=>3,start_line=>3,end_line=>3,mark=>5,before=>6,after=>5,
+  }},
+  {id=>'matched-unicode', source=>$child_prefix."Token: /(?<word>🙂\\nβ)/\nI {\n$action}\n",
+   input=>"🙂\nβ", expected=>{
+    %$empty_entry,end=>3,end_line=>2,end_col=>2,len=>3,text=>"🙂\nβ",
+    groups=>["🙂\nβ"],named=>{word=>"🙂\nβ"},before=>3,
+   }},
+  {id=>'matched-empty', source=>$child_prefix."Token: /(?<empty>)/\nI {\n$action}\n",
+   input=>'', expected=>{%$empty_entry,len=>0,text=>'',groups=>[''],named=>{empty=>''}}},
+  {id=>'matched-zero-text', source=>$child_prefix."Token: /(?<zero>0)/\nI {\n$action}\n",
+   input=>'0', expected=>{
+    %$empty_entry,end=>1,end_col=>2,len=>1,text=>'0',groups=>['0'],named=>{zero=>'0'},before=>1,
+   }},
+ );
+ my @artifacts;
+ for my $case (@cases) {
+  my $parser = eval { LinkedSpec::Get(\$case->{source}) };
+  is("$@", '', "$case->{id} native compiles without exception");
+  ok(ref($parser) eq 'CODE', "$case->{id} native parser exists");
+  if (ref($parser) eq 'CODE') {
+   for my $run (1,2) {
+    my @warnings;
+    local $SIG{__WARN__} = sub { push @warnings, @_ };
+    my $input = $case->{input};
+    my $value = eval { $parser->(\$input) };
+    is("$@", '', "$case->{id} native run $run succeeds");
+    is($json->encode($value), $json->encode($case->{expected}), "$case->{id} native run $run exact values");
+    is_deeply(\@warnings, [], "$case->{id} native run $run emits no warning");
+   }
+  }
+  my $source = LinkedSpec::emit_generated_source(\$case->{source},source_identity=>"entry-boundary:$case->{id}");
+  unlike($source, qr/LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER/, "$case->{id} has no unresolved helper");
+  my $path = File::Spec->catfile($scratch,"$case->{id}.pl");
+  open my $fh, '>:encoding(UTF-8)', $path or die $!;
+  print {$fh} $source;
+  close $fh or die $!;
+  push @artifacts, {path=>File::Spec->abs2rel($path,$root),input=>$case->{input}};
+ }
+ my $request = File::Spec->catfile($scratch,'request.json');
+ open my $request_fh, '>', $request or die $!;
+ print {$request_fh} $json->encode(\@artifacts);
+ close $request_fh or die $!;
+ my $runner = File::Spec->catfile($scratch,'runner.pl');
+ open my $runner_fh, '>', $runner or die $!;
+ print {$runner_fh} <<'ENTRY_BOUNDARY_RUNNER';
+use strict;
+use warnings;
+use File::Spec ();
+use JSON::PP ();
+my ($root,$request,$output) = @ARGV;
+open my $request_fh,'<',$request or die $!;
+my $artifacts = JSON::PP->new->decode(do { local $/; <$request_fh> });
+close $request_fh or die $!;
+my @rows;
+for my $index (0..$#$artifacts) {
+ my $artifact = $artifacts->[$index];
+ open my $fh,'<:encoding(UTF-8)',File::Spec->catfile($root,$artifact->{path}) or die $!;
+ my $source = do { local $/; <$fh> };
+ close $fh or die $!;
+ my $package = "LinkedSpec::EntryBoundaryEmitted::Case$index";
+ my $loaded = eval "package $package; $source; 1";
+ my $row = {load_error=>"$@",runs=>[]};
+ if ($loaded) {
+  for (1,2) {
+   my @warnings;
+   local $SIG{__WARN__} = sub { push @warnings, @_ };
+   my $input = $artifact->{input};
+   my $value = eval { no strict 'refs'; &{"${package}::Execute"}(\$input) };
+   push @{$row->{runs}}, {value=>$value,error=>"$@",warnings=>\@warnings};
+  }
+ }
+ push @rows, $row;
+}
+open my $out,'>',$output or die $!;
+print {$out} JSON::PP->new->canonical->ascii->allow_nonref->encode(\@rows);
+close $out or die $!;
+ENTRY_BOUNDARY_RUNNER
+ close $runner_fh or die $!;
+ my $output = File::Spec->catfile($scratch,'results.json');
+ is(system($^X,'-I'.File::Spec->catdir($root,'perl'),$runner,$root,$request,$output),
+  0,'warning-enabled fresh entry-boundary child exits successfully');
+ if (-f $output) {
+  my $rows = $json->decode(read_text($output));
+  is(scalar(@$rows),scalar(@cases),'fresh child returns every entry-boundary case');
+  for my $index (0..$#cases) {
+   my $case = $cases[$index];
+   my $row = $rows->[$index];
+   is($row->{load_error},'',"$case->{id} emitted loads independently");
+   is(scalar(@{$row->{runs}}),2,"$case->{id} emitted repeats both calls");
+   for my $run (0,1) {
+    is($row->{runs}[$run]{error},'',"$case->{id} emitted run $run succeeds");
+    is($json->encode($row->{runs}[$run]{value}),$json->encode($case->{expected}),
+     "$case->{id} emitted run $run exact values");
+    is_deeply($row->{runs}[$run]{warnings},[],"$case->{id} emitted run $run emits no warning");
+   }
+  }
+ } else { fail('fresh entry-boundary child wrote observations') }
+};
+
 done_testing;
