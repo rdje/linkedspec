@@ -12,6 +12,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-09-27 — Lossless extraction needs classification and provenance oracles
+
+Input reconstruction alone can preserve all bytes while classifying items incorrectly. The planned corpus therefore compares authored item/gap records, scalar input slices and ordered reconstruction separately. Public parse_job accepts only admitted source-bound entry/match expressions; gap_text and arbitrary spans are not staged operands. Real child recognition stays in a precompiled .spec. The canonical ledger records authority negatives and existing resource/stitch repair owners; neutral success is not runtime composition proof.
+
 ## 2026-09-27 — Context readiness closes a bounded composition objective, not a format campaign
 
 The37-line context grammar composes opening captures, lexical closing comparison and recursive local state on

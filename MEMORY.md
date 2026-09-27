@@ -1,9 +1,9 @@
 # MEMORY
 
-- activation_commit: `c20c123dd0573b1d831a0b4910a67091fa5572f2` — clean activation base for canonical context-name reconciliation.
-- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.7 - reconcile bounded context-name readiness`.
-- active_work_unit: none — bounded context-name milestone complete.
-- next_action: Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3 for lossless segmentation and bounded child parsing, using canonical capability/authority records before selecting its first slice.
+- activation_commit: `ca197a38c269cfeb89341505db83e395ebf6f308` — clean activation base for lossless child authority review.
+- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.1 - scope lossless child readiness proof`.
+- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.2` (pending) — exact lossless segmentation.
+- next_action: Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.2 and prove exact public lossless segmentation through Perl native/fresh emitted execution using docs/language-readiness/lossless-child-parsing.md.
 - in_flight_uncommitted: none.
 - blockers: bounded nesting/context proof reconciled; lossless probes and core-gap selection remain; .1.1.5 owns stale capability prose and startup .38/.40 recognition defects remain queued. ARCHOGEN owns downstream acceptance; named-argument and format proposals stay parked.
   Wrapper startup .7 remains open; recovery/purge stay prohibited. No interrupted Phase0 run counts as proof.

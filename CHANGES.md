@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-09-27 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.1: lossless child proof scope
+
+Lossless child authority review selects public gap capture and exact staged parse_job assignment, keeps private dispatch_span separate, and defines segmentation, real-child composition, backend carrier and canonical closeout slices. Four existing neutral checkers, 83 contract/checker/consumer paths, eight ledger references and rendered scope assertions pass. No new runtime composition is claimed; .1.1.3.3.2 is next.
+
 ## 2026-09-27 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.7: bounded context-name reconciliation
 
 Reconcile unchanged11/17 authored context cases across six native runtimes and2/6/6/5/5/5 typed routes. Each

@@ -44,6 +44,18 @@ is described below, with lossless extraction still pending before gap selection.
 The format program's `.1` readiness gate remains pending. The original catalog and parked language extension retain
 all their conformance, Unicode, diagnostics, performance and backend obligations.
 
+For the lossless objective, the parent must retain both recognized items and the exact text between them. An
+extraction grammar can preserve malformed candidates as gap text; preserving all input does not by itself mean
+the input is a valid document. Readiness proof therefore compares item/gap classification, scalar spans and exact
+reconstruction separately.
+
+Child composition will use the existing public exact `parse_job(...)` assignment on source-bound item text.
+The caller supplies an already-compiled child grammar and frozen authority; the child grammar performs recognition.
+The annotation cannot use `gap_text()`, copied strings or an arbitrary span as its text operand. The private
+`dispatch_span(...)` intrinsic has a separate authority contract and is not a public helper. The planned proof
+must retain original item text beside child results and test child rejection, source provenance and unauthorized
+identity selection. Executable composition is still pending; current neutral checks alone do not establish it.
+
 The state inventory distinguishes three existing forms that a grammar author can compose:
 
 | Form | State and execution boundary |

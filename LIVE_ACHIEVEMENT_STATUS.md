@@ -6,13 +6,15 @@ Ordinary .spec language readiness under SPEC-LANGUAGE-SELF-CONTAINMENT.1.1. The 
 
 ## Latest Completed Slice
 
-- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.7 - reconcile bounded context-name readiness` — all-six native/carrier matrix,40 source references and39 retained logs reconcile. Exact staged canonical receipt governs milestone closure; lossless extraction follows.
+- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.1 - scope lossless child readiness proof` — authority plan and independent proof requirements recorded; four neutral checkers and exact path/render audit pass.
 
 ## Next Action
 
-- Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3 for lossless segmentation and bounded child parsing; resolve capability and authority contracts before the first probe.
+- Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.2: Perl native/fresh emitted exact lossless segmentation, before public staged child composition.
 
 ## Recent Completions
+
+- `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.1` scopes lossless segmentation and public staged child proof.
 
 - `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.7` reconciles bounded context-name proof through canonical closure.
 
@@ -43,8 +45,6 @@ Ordinary .spec language readiness under SPEC-LANGUAGE-SELF-CONTAINMENT.1.1. The 
 - `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.2` verifies six Rust nesting routes and typed recovery.
 
 - `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.1.1` repairs emitted Perl entry and verifies nesting carriers.
-
-- `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.1` verifies exact native nesting on all six runtimes.
 
 ## History
 
