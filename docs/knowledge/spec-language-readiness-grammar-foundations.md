@@ -1,14 +1,16 @@
 ---
 id: spec-language-readiness-grammar-foundations
-title: Grammar readiness separates admitted foundations from composed format objectives
+title: Language readiness separates admitted foundations from composed format objectives
 answers:
   - "what must spec gain before the structured format parsing campaign"
   - "where is the source located language readiness inventory"
   - "does a green capability census prove structured format readiness"
   - "why does the capability manifest still advertise parse mode controls"
   - "which task repairs the stale parse mode capability description"
+  - "how does language readiness distinguish functions callbacks and grammar rules"
+  - "where are state control and typed result readiness limits recorded"
 date: 2026-09-27
-status: first four capability dimensions inventoried; composed objectives remain unassessed
+status: all nine capability dimensions inventoried; composed objectives remain unassessed
 tags: [dsl, readiness, grammar, recursion, cursor, capture, conformance]
 evidence: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.1 from clean30b2cc3a0 runs seven existing neutral/structural checks: capability100/0/0, language250/105+1/126, root7/0/54, cursor8/0/60, recognition138/250/58, typed14/0/231 and gaps9/0/63. No new backend execution or format support is claimed. The manifest parse-mode description contradicts the specific cursor policy and passes a checker that only requires a general contract string; .1.1.5 owns repair before closure authority."
 reverify: "env PERL5LIB= bash tools/project_data_run.sh perl tools/check_capability_conformance.pl && bash tools/run_python_project_data.sh tools/check_rule_local_cursor_contract.py"
@@ -33,3 +35,14 @@ and canonical admission required. The specific cursor contract remains authorita
 
 Related: [[spec-language-self-containment-and-ebnf-profile]], [[post-parity-structured-text-program]],
 [[perl-recognition-unwind-actual-state-gap]], [[current-call-name-inventory-does-not-prove-runtime-semantics]].
+
+## State/computation extension
+
+`.1.1.2` adds `docs/language-readiness/state-control-results.md` with exact consumers for uniform binding,
+fixed/rest calls, callable values, logical/control contrast, nested writes and receiver transformations.
+Seven unchanged neutral tools pass: binding11/7/6/8, signature3/9/7, callable7/11/9/7/4/8/23,
+logical17/10/3/8/0/26, scalar55/18, writes105 mutations and map-leaves167+592 mutations.
+This is no new runtime admission. Pure functions use fresh local state, callable blocks use invocation-time
+caller nonparameters, and advancing grammar recursion is distinct from rejected function/callback recursion.
+Known startup .17/.58/.59/.94/.95 and Dart .2.9 defects retain their exact owners. Named arguments remain parked.
+The next `.1.1.3` probes concrete nesting, context and lossless extraction objectives before choosing new primitives.

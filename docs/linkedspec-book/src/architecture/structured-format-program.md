@@ -39,9 +39,28 @@ For example, a grammar that tentatively builds an AST must separate recognition 
 establish a different, explicitly accepted mechanism. Merely adding alternate syntax would not solve that requirement.
 
 The owning task is `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1`; its first inventory records existing contracts and exact
-backend consumers, while later slices assess state/control/results and execute the representative objectives.
+backend consumers. The state/control/result inventory is also recorded; representative objective execution
+follows before selecting new primitives.
 The format program's `.1` readiness gate remains pending. The original catalog and parked language extension retain
 all their conformance, Unicode, diagnostics, performance and backend obligations.
+
+The state inventory distinguishes three existing forms that a grammar author can compose:
+
+| Form | State and execution boundary |
+| --- | --- |
+| User function | Explicit positional/final-rest arguments and fresh function-local state; ordinary typed return values. No implicit caller capture or recursive function calls. |
+| Callable block | Deferred construction, temporary copied parameters and invocation-time caller state for other bindings; block-local return. No lexical environment is captured. |
+| Linked grammar rule | Recognition, cursor, capture and lifecycle behavior; advancing rule recursion is separate from function recursion. |
+
+Typed bindings, lazy controls, structural writes and leaf transformations supply further building blocks. They
+need composition proof: a logical helper's eager operands differ from a selected control branch, and a receiver
+mutation's atomic publication does not roll back effects on other bindings. Known mixed-control and mutation-guard
+defects remain repair obligations. Numeric AST tests must also distinguish JSON numbers from numeric-looking
+strings; value equality alone can hide an incorrect result kind.
+
+Named user-function arguments remain an approved, parked direction. Recording this limitation does not make
+that syntax current or prove it is the next feature the format campaign needs.
+
 
 ## Approved and parked: language coverage and authoring difficulty
 

@@ -7,7 +7,8 @@ Owner: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.1`. Measured 2026-09-27 from clean ac
 
 The structured-format campaign remains parked until `.spec` is strong enough and required backend parity is
 proved. Its existing catalog supplies requirements. This inventory covers four of the nine self-containment
-areas; `.1.1.2` owns state, callables, control, transformation and results, and `.1.1.3` owns composed objectives.
+areas; the [state/control/result inventory](state-control-results.md) covers the other five under `.1.1.2`,
+and `.1.1.3` owns composed objectives.
 An EBNF-like authoring profile is a later frontend option, separate from the language's parsing power.
 
 **Implemented/admitted** below means the canonical contract records completed runtime admission. Fresh checks

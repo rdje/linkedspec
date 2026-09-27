@@ -12,6 +12,14 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-09-27 — callable and state boundaries in readiness (.1.1.2)
+
+Fresh neutral proof must not erase known composition defects. docs/language-readiness/state-control-results.md
+maps exact five-backend consumers, existing repair owners and current exclusions. Pure functions use fresh local
+stores; deferred codeblocks use invocation-time caller nonparameters; grammar recursion has separate recognition
+semantics. Frozen write/map authority strings remain historical by design, with current admission in the manifest.
+Next probes must measure actual nested state, control placement and JSON result kinds before proposing primitives.
+
 ## 2026-09-27 — language readiness evidence boundary (.1.1.1)
 
 The capability100/0/0 census and250-name coverage do not certify composed parser objectives or zero defects.

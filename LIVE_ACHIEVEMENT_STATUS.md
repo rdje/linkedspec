@@ -6,13 +6,15 @@ Ordinary .spec language readiness under SPEC-LANGUAGE-SELF-CONTAINMENT.1.1. The 
 
 ## Latest Completed Slice
 
-- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.1 - inventory grammar readiness foundations` — seven existing neutral/structural checks and 34 source-path/consumer checks pass; book explains the maturity gate. No new runtime or format support claim.
+- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.2 - inventory state and computation readiness` — seven neutral tools and 44 source-path/consumer checks pass; book distinguishes functions, callbacks and rules. All nine capability areas now have bounded evidence; no new runtime or format support claim.
 
 ## Next Action
 
-- Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.2 from clean HEAD; extend the evidence ledger through state/callables/control/transformation/results before representative grammar probes.
+- Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3 from clean HEAD; split representative nesting, contextual-state and lossless-extraction objectives, then execute the first bounded probe.
 
 ## Recent Completions
+
+- `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.2` inventories state/computation evidence and scoping limits.
 
 - `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.1` inventories grammar/cursor/capture readiness and owns stale capability prose.
 
@@ -43,8 +45,6 @@ Ordinary .spec language readiness under SPEC-LANGUAGE-SELF-CONTAINMENT.1.1. The 
 - `2026-09-24` — `SESSION-STARTUP-READING.50` verifies compact hash keys with core258/runtime226/public13 and one executable Perl/Rust book source.
 
 - `2026-09-24` — `SESSION-STARTUP-READING.86.3` closes the bounded scanner parent at aa057b107 with Rust56, exact book/source continuity and canonical PASS.
-
-- `2026-09-24` — `SESSION-STARTUP-READING.86.5.3` verifies same-line slot identity with focused240/book103, six-runtime grammar72 and Phase0 1033.
 
 ## History
 

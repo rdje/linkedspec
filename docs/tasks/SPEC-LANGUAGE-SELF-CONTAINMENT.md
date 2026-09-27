@@ -117,9 +117,23 @@ used by ordinary `.spec` syntax on every backend.
 
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.2`
-  Status: `pending`
+  Status: `done`
   Goal: Extend the same ledger through scoped state, callable composition, control, transformation and typed result construction, separating host compatibility and approved missing features from defects.
   Dependencies: `.1.1.1`
+  Activation: Clean e9c2eb2ad1c6aa799e50c879c0549a9ccd1f36e3, empty brief, nine doctrines passed; no runtime jobs remain.
+  Verification tier: `focused`
+  Focused checks: Existing uniform-binding, callable-signature/codeblock, logical, scalar-numeric, nested-write and map-leaves neutral tools; source-located consumer/ownership review; book render; memory; Knowledge synchronization; bounded history; all doctrines; git diff --check.
+  Canonical trigger: none for a bounded evidence inventory with no runtime, public semantic contract, admission or infrastructure changes.
+  Verification: PASS seven unchanged neutral tools: uniform11/7/6/8; signature3/9/7; callable7/11/9/7/4/8/23; logical17/10/3/8/0/26; scalar55/18; writes105 mutations; map-leaves167+592 mutations. Independent review verifies44 source paths, exact logical consumer matrix, mutation admission/source bindings and shared Lua anchors. Book rendering and diff hygiene pass. No runtime or format support claim is added.
+  Evidence: docs/language-readiness/state-control-results.md records exact commands, sources, scoping distinctions and pending repair owners. The original immutable mutation contracts retain their status strings; later admission remains external and unchanged.
+  Log: .linkedspec-data/scratch/selfcontain112-callable_codeblock.log SHA256 00374dc3966f70d83b0b8bc16056172b0c1a557829a7b73c2d347d32d5d863de
+  Log: .linkedspec-data/scratch/selfcontain112-callable_signature.log SHA256 8c05680272db8b7098ece2f93dbc91f936b42cd51fd1330d8e82547b17af884d
+  Log: .linkedspec-data/scratch/selfcontain112-logical_helper.log SHA256 2e1ef3f00c07cebb68df6c7fceb219ef3d34debb7c4c670b58461e2129a30b46
+  Log: .linkedspec-data/scratch/selfcontain112-map_leaves_mutation.log SHA256 4609559c068ef9eb36d69f63912cd78cd7171d5874aefbacd203c23aacc28874
+  Log: .linkedspec-data/scratch/selfcontain112-scalar_numeric.log SHA256 f13ce5475bccd481fb611d852fb630cc4f68ae8d1cba1f90420935904120583c
+  Log: .linkedspec-data/scratch/selfcontain112-uniform_binding.log SHA256 5dceaadbc3ebd719926b545d2fa448e92b4c4296bed06870b4c38e41880193d8
+  Log: .linkedspec-data/scratch/selfcontain112-write_vivification.log SHA256 16d2aa43e47e05faa40c4ece1d82cf55dc2df1e554a5bb98ee40c999c1a4b447
+  Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.2 - inventory state and computation readiness`
   Acceptance: Each of these five dimensions has current canonical owners, five-backend evidence boundaries, source-located limitations and an executable follow-up where objective composition remains unassessed.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3`
@@ -289,7 +303,8 @@ used by ordinary `.spec` syntax on every backend.
 | --- | --- | --- | --- |
 | 1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.0` | `done` | ADR `0064`, the complete decomposition, public/continuity alignment, and full documentation/canonical signoff durably route the direction without behavior change. |
 | 2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.1` | `done` | Four capability areas mapped to current contracts and five-backend evidence; seven neutral/structural checks pass. |
-| 3 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.2` | `pending` | Extend the ledger through state/callables/control/transformation/results, then execute bounded representative objectives. |
+| 3 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.2` | `done` | Other five areas mapped; seven neutral tools and 44 path/consumer checks pass. |
+| 4 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3` | `pending` | Split and execute bounded nesting, contextual-state and lossless-extraction grammar probes. |
 
 ## Decisions
 
@@ -319,6 +334,8 @@ used by ordinary `.spec` syntax on every backend.
 
 ## Verification Log
 
+September27 `.1.1.2`: seven unchanged neutral tools, 44 source-path/consumer checks and book rendering pass; no runtime or contract movement. Standard memory/history/Knowledge and pre-commit doctrines govern landing.
+
 September27 `.1.1.1`: seven neutral/structural checks, 34 ledger source-path/consumer checks and rendered book pass; no runtime/format-support promotion. Normal doctrine gates run at landing.
 
 | Date | Leaf | Checks | Result |
@@ -332,6 +349,8 @@ September27 `.1.1.1`: seven neutral/structural checks, 34 ledger source-path/con
 | `.0` | `SPEC-LANGUAGE-SELF-CONTAINMENT.0 - ratify expressive spec self-containment` | Direction capture only; no parser/runtime behavior. |
 
 ## Changelog
+
+- `2026-09-27`: `.1.1.2` completes the state/callable/control/transformation/result evidence inventory. Known defects and intentionally absent features remain distinct; bounded grammar objectives `.1.1.3` follow.
 
 - `2026-09-27`: Clean feature return activates `.1.1`, splits five bounded children and completes the first grammar/cursor/capture inventory. The campaign remains gated on language readiness and parity; `.1.1.5` owns confirmed stale general capability prose.
 

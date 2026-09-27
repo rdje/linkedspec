@@ -40,8 +40,8 @@ node correspondence, and diagnostic remapping, so users debug the source they au
 
 This program has not yet added syntax or runtime behavior. The director selected ordinary .spec expressiveness
 on September27, after clean fallback-verification commit 30b2cc3a0. The active .1.1 inventory starts with the
-source-located grammar/cursor/capture ledger in docs/language-readiness/grammar-cursor-capture.md; state/control
-inventory and representative objectives follow. The structured-format campaign remains gated on language readiness
+source-located grammar/cursor/capture ledger in docs/language-readiness/grammar-cursor-capture.md and the
+state/control/result ledger in docs/language-readiness/state-control-results.md. Representative objectives follow. The structured-format campaign remains gated on language readiness
 and parity; an optional EBNF-like frontend is later work.
 
  `docs/tasks/SPEC-LANGUAGE-SELF-CONTAINMENT.md` first inventories portable

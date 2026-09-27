@@ -12,6 +12,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-09-27 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.2: state and computation readiness
+
+Extend the readiness inventory through typed state, pure functions, dynamic callable blocks, lazy controls,
+structural transformation and result kinds. Seven existing neutral tools and 44 source/consumer checks pass;
+book rendering passes. Existing defects retain original owners, and named arguments remain parked. No runtime,
+contract or format-support promotion occurs. Next: bounded representative grammar objectives under .1.1.3.
+
 ## 2026-09-27 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.1: grammar readiness foundations
 
 Activate ordinary .spec expressiveness after clean30b2cc3a0. The source-located readiness ledger maps grammar,
