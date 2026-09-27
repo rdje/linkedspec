@@ -6,13 +6,15 @@ Ordinary .spec language readiness under SPEC-LANGUAGE-SELF-CONTAINMENT.1.1. The 
 
 ## Latest Completed Slice
 
-- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.3 - verify Dart nesting carriers` — six routes preserve values/spans, typed rejection and mutations; four retained-engine routes prove 56 recoveries. New2/existing58 tests pass; package analysis retains two separately owned SDK deprecations.
+- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.4 - verify Julia nesting carriers` — five public routes preserve exact values/spans and typed rejection; two retained-engine routes prove28 recoveries. New30/emitter65/document128 assertions and storage22/five packages pass.
 
 ## Next Action
 
-- Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.4 for Julia carriers, typed recovery and mutations; canonical parent reconciliation follows all backends.
+- Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.5 for PUC Lua/LuaJIT carriers, typed recovery and mutations; canonical parent reconciliation follows.
 
 ## Recent Completions
+
+- `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.4` verifies five Julia nesting routes and typed recovery.
 
 - `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.3` verifies six Dart nesting routes and typed recovery.
 
@@ -43,8 +45,6 @@ Ordinary .spec language readiness under SPEC-LANGUAGE-SELF-CONTAINMENT.1.1. The 
 - `2026-09-26` — `RGX-CONSUMER-BUILD-REPORTS.1.1` verifies the published LS-004 remedy; retained-pin adoption requires explicit authorization and native/canonical proof.
 
 - `2026-09-26` — `SESSION-STARTUP-READING.91` fixes numeric array-value composition with focused128, Phase01033,152 native/fresh cases and exact book proof.
-
-- `2026-09-25` — `SESSION-STARTUP-READING.90` repairs function array constructor values with focused118, Phase01033 and exact native/fresh LF/CRLF book proof.
 
 ## History
 

@@ -299,10 +299,27 @@ used by ordinary `.spec` syntax on every backend.
 - [x] **LOCKSTEP** — Book, ledger, Knowledge, checkpoint, roadmaps and live/history records name exact carrier coverage and analyzer limitation; Julia/Lua and canonical parent closure remain separately owned.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.4`
-  Status: `pending`
+  Status: `done`
   Goal: Prove Julia nested-tree carrier semantics using native, reconstructed/generated-plan and emitted supported routes, typed rejection/recovery and prefix/gap/span mutation controls.
   Acceptance: Original grammar/cases remain unchanged; exact value kinds and Unicode spans, no partial rejection values, explicit recovery after every rejection and honest carrier/readiness coverage.
   Dependencies: `.1.1.3.1.2.2.3`
+
+  Activation: Clean e0173014f71d49a13c4f82daf6926965360fa3c2 after Dart carrier proof; nine doctrines and post-commit pointer pass, brief0 and no pending job.
+  Verification tier: `focused`
+  Focused checks: Extend existing Julia source-emitter tests with nesting carriers/mutations, unchanged strict-document compatibility, exact child status/report and storage oracle; unchanged fixture/manifest, book, Knowledge, memory/history, doctrines and diff hygiene.
+  Canonical trigger: none for bounded backend evidence without runtime/schema/contract/admission or storage mechanism changes; parent closure remains canonical.
+  Scope: Public native and SpecFile-reconstructed retained engines, public generated entry for both compiled forms and fresh emitted host: five routes. Only two routes retain an engine. Reuse the existing emitter test owner and offline private-depot host helper; do not use private generated-family runtime keywords.
+  Harness issue resolved: First new suite29/30 errored on a successful child report polluted by world-age warnings. Full warning capture locates new-module binding access; use invokelatest for binding lookup as well as invocation. Final child report is exact, with no warning stripping.
+  Verification: PASS 30 new nesting assertions,65 existing emitter and128 strict-document assertions (223 total); exact child exit/report, five routes with40 original calls/three mutations each,28 retained-engine recovery transitions. Storage22 owners/five package trees passes; original fixtures/runtime/manifests unchanged.
+  Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.4 - verify Julia nesting carriers`.
+
+
+- [x] **REPRODUCE / ISSUE** — Public native text-adapter proof omits retained-engine rejection recovery and generated carriers. The first new host29/30 also exposes Julia world-age warnings before its otherwise successful JSON report.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Generated v2 entry reconstructs an engine per call; public runtime_parse retains an engine. In the new child runner, direct getfield reads bindings created by Base.include from an older function world; wrapping only later calls in invokelatest is insufficient. Full captured warnings identify each access.
+- [x] **FIX** — Extend the existing emitter test owner with native/reconstructed/v2/emitted cases and shared exact JSON-kind/span oracles. Resolve new-module bindings through invokelatest, matching the established emitter host pattern; preserve actual child status and exact report checks.
+- [x] **ADDRESSED (verified)** — Five routes each pass40 original calls and three mutations; two retained-engine routes prove14 recoveries each. RuntimeExitNow status1 is mandatory; null success cannot pass rejection. Four emitted modules validate v2 metadata/plans and execute in a fresh offline child with exact report and recursive cleanup.
+- [x] **NO REGRESSION** — New30/existing emitter65/strict-document128 assertions pass. Storage oracle retains22 owners/five locked package trees. Runtime, manifests, original grammar/cases and adapters are unchanged; no private generated-family keyword or full component-gate claim.
+- [x] **LOCKSTEP** — Book, native ledger, Knowledge fact, checkpoint, task/live pointers, roadmaps and technical history report five routes and28 retained-engine recoveries; Lua and canonical reconciliation remain separate.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.5`
   Status: `pending`

@@ -12,6 +12,19 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-09-27 — Julia nesting proof respects public routes and binding worlds
+
+Julia exposes native engine reuse and a public generated convenience function that constructs its engine per call.
+The nesting probe therefore has five routes and28 genuine retained-engine recoveries, rather than importing the
+six-route Rust/Dart count through private generated-family keywords. JSON-kind checking distinguishes Bool from
+Number despite Julia's subtype relation, and a returned nothing cannot stand in for RuntimeExitNow status1.
+
+The fresh child includes four modules inside a running function. Its first harness directly read newly defined
+module bindings, causing Julia1.12 world-age warnings even though calls used invokelatest. Captured output names
+the parser/metadata/plan/validate_plan/execute bindings; latest-world lookup plus invocation removes the warnings.
+The existing subset host already uses this pattern. The final test requires actual process success and exact JSON,
+without stripping diagnostics. The existing temporary owner/private-depot helper preserves storage boundaries.
+
 ## 2026-09-27 — Dart nesting carriers preserve typed outcomes and source data
 
 The shared Dart checker compares JSON kinds recursively and requires actual RuntimeExitNow status1 on every

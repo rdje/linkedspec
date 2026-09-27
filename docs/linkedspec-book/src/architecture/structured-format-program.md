@@ -128,8 +128,20 @@ bash ../tools/run_dart_project_data.sh test test/nested_tree_readiness_test.dart
 ```
 
 These are bounded nesting results. Package-wide Dart analysis still reports two separately owned SDK deprecations
-in its regex adapters; the new test and emitted package pass strict analysis. Julia and Lua carrier proof remains
-a separate next step.
+in its regex adapters; the new test and emitted package pass strict analysis.
+
+Julia's proof covers five public routes: native and JSON-reconstructed `SpecFile` engines, generated v2 entry for
+each compiled form, and fresh emitted modules. Only the two native routes retain an engine, proving 28 immediate
+rejection-to-success transitions. All five preserve exact JSON kinds and Unicode spans and detect the three
+grammar mutations. The existing emitter suite includes this proof:
+
+```sh
+bash tools/run_julia_project_data.sh --project=julia -e \
+  'using LinkedSpecJulia, JSON3, Test; const REPO_ROOT=pwd(); include("julia/test/source_emitter_test.jl")'
+```
+
+The child process loads four emitted modules using the retained offline dependencies and checks their metadata,
+plans and results. Lua carrier proof remains a separate next step.
 This example does not open the structured-format campaign or establish arbitrary-depth resource safety.
 
 

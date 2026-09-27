@@ -90,3 +90,20 @@ fresh process. All three commands require exit0; its exact completion report fol
 analysis and zero-change formatting pass. Whole-package analysis exits2 with only the known two deprecated_implement
 warnings at matching.dart:732/1203, owned by DART-STARTUP-READING.2.25. Runtime, lockfile and fixture are unchanged;
 no complete component-gate success is claimed. Julia and Lua carrier proof follows.
+
+## Subsequent Julia carrier proof
+
+`SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.4` extends `julia/test/source_emitter_test.jl` and adds shared
+`tests/language-readiness/nested-tree/julia_checks.jl`. Native and SpecFile-JSON reconstructed engines provide two
+retained routes. Generated v2 for each compiled form and fresh emitted modules provide three per-call routes.
+All five pass40 original executions and three mutations; the two retained engines prove28 immediate recoveries.
+The checker distinguishes JSON boolean and number kinds despite Julia's Bool subtype, preserves exact spans and
+requires RuntimeExitNow status1; successful nothing does not count as rejection. No private runtime keyword is used.
+
+Four fresh emitted modules validate metadata/plans and execute under the existing offline private-depot host.
+The first new host failed29/30 because world-age warnings preceded its successful JSON report. Captured warnings
+identified direct reads of newly included bindings; latest-world binding lookup and invocation fix the harness.
+Final report parsing remains exact, with no warning filtering. The child exits successfully and scratch cleanup
+is verified. Focused proof passes new30, existing emitter65 and strict-document128 assertions (223 total).
+Storage retains22 existing temporary owners and five package trees; original grammar/cases/runtime/manifests are
+unchanged. Lua and canonical parent reconciliation remain.

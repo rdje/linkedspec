@@ -592,3 +592,101 @@ print("generated-failure-ok")
         @test failure_output == "generated-failure-ok"
     end
 end
+
+# The shared source-aware nesting fixture has independent value/kind/span oracles.
+include(joinpath(REPO_ROOT, "tests", "language-readiness", "nested-tree", "julia_checks.jl"))
+
+function _nested_tree_variants(source)
+    prefix = " if(matches(input_slice(0, cursor_pos()), /[^ \\t\\r\\n\\f\\x0B]/));\n" *
+        "  exit_now(1);\n endif();\n"
+    gap = " -> Invalid { exit_now(1) }\n"
+    span = "[start, cursor_pos()]"
+    @test length(findall(prefix, source)) == 1
+    @test length(findall(gap, source)) == 2
+    @test length(findall(span, source)) == 1
+    return [
+        "original" => source,
+        "prefix" => replace(source, prefix => ""),
+        "gap" => replace(source, gap => ""),
+        "span" => replace(source, span => "[cursor_pos(), cursor_pos()]"),
+    ]
+end
+
+@testset "Bounded nesting across public Julia carriers" begin
+    fixture = joinpath(REPO_ROOT, "tests", "language-readiness", "nested-tree")
+    source = read(joinpath(fixture, "grammar.spec"), String)
+    cases = JSON3.read(read(joinpath(fixture, "cases.json"), String), Dict{String,Any})
+    variants = _nested_tree_variants(source)
+    emitted = Dict{String,String}()
+    for (id, variant_source) in variants
+        parsed = parse_spec_with_staged_user_function_definitions(variant_source)
+        validate_spec(parsed)
+        reconstructed = from_json(SpecFile, JSON3.read(JSON3.write(to_json(parsed)), Dict{String,Any}))
+        validate_spec(reconstructed)
+        for spec in (parsed, reconstructed)
+            compiled = compile_spec(spec)
+            plan = build_generated_rule_plan(compiled)
+            validate_generated_rule_plan_v2(compiled, plan, id)
+            @test [row.label for row in plan] == ["Top", "List", "Atom", "Space", "Invalid"]
+            engine = LinkedSpecRuntimeEngine(compiled)
+            # Only these two native routes retain an engine across the sequence.
+            @test NestedTreeChecks.variant(id, cases, input -> runtime_parse(engine, input).value)
+            # The supported generated API constructs an engine for each invocation.
+            @test NestedTreeChecks.variant(id, cases,
+                input -> execute_generated_parser_v2(compiled, plan, input, id))
+        end
+        emitted[id] = emit_julia_source_v2(compile_spec(parsed), "nested-tree/$id")
+    end
+
+    scratch_path = Ref("")
+    mktempdir() do scratch
+        scratch_path[] = scratch
+        private_depot = joinpath(scratch, "depot")
+        mkpath(private_depot)
+        write(joinpath(scratch, "Project.toml"),
+            "name = \"NestedTreeGeneratedHost\"\nuuid = \"d80d8a84-f81a-4c4a-9d45-823368f38fe6\"\nversion = \"0.1.0\"\n")
+        cp(joinpath(fixture, "cases.json"), joinpath(scratch, "cases.json"))
+        cp(joinpath(fixture, "julia_checks.jl"), joinpath(scratch, "checks.jl"))
+        for (id, generated) in emitted
+            write(joinpath(scratch, "$id.jl"), generated)
+        end
+        runner = joinpath(scratch, "runner.jl")
+        write(runner, raw"""
+using LinkedSpecJulia, JSON3
+include(joinpath(ARGS[1], "checks.jl"))
+latest_binding(owner::Module, name::Symbol) =
+    Base.invokelatest(() -> Core.getglobal(owner, name))
+function main()
+    cases = JSON3.read(read(joinpath(ARGS[1], "cases.json"), String), Dict{String,Any})
+    modules = 0
+    for id in ("original", "prefix", "gap", "span")
+        host = Module(gensym(:NestedTreeGenerated))
+        Base.include(host, joinpath(ARGS[1], "$id.jl"))
+        parser = latest_binding(host, :LinkedSpecGeneratedParser)
+        metadata = Base.invokelatest(latest_binding(parser, :metadata))
+        NestedTreeChecks.exact_json(to_json(metadata), Dict(
+            "contract_id" => "linkedspec-generated-source-v2",
+            "format_version" => 2,
+            "source_identity" => "nested-tree/$id",
+        ))
+        plan = Base.invokelatest(latest_binding(parser, :plan))
+        Base.invokelatest(latest_binding(parser, :validate_plan), plan)
+        execute = latest_binding(parser, :execute)
+        @assert NestedTreeChecks.variant(id, cases, input -> Base.invokelatest(execute, input))
+        modules += 1
+    end
+    print(JSON3.write(Dict("modules" => modules, "original_executions" => 40, "mutations" => 3)))
+end
+main()
+""")
+        passed, output = _generated_source_host_process(scratch, runner, scratch, private_depot)
+        @test passed
+        if passed
+            @test NestedTreeChecks.exact_json(JSON3.read(output, Dict{String,Any}),
+                Dict("modules" => 4, "original_executions" => 40, "mutations" => 3))
+        else
+            @error "nested-tree emitted child failed" output
+        end
+    end
+    @test !ispath(scratch_path[])
+end

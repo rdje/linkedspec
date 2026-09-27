@@ -1,0 +1,65 @@
+{
+  "owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.4",
+  "activation_commit": "e0173014f71d49a13c4f82daf6926965360fa3c2",
+  "date": "2026-09-27",
+  "evidence": [
+    {
+      "command": "bash tools/run_julia_project_data.sh --project=julia -e 'using LinkedSpecJulia, JSON3, Test; const REPO_ROOT=pwd(); include(\"julia/test/source_emitter_test.jl\"); include(\"julia/test/sexpr_document_v1_test.jl\")'",
+      "result": "Initial run: existing65 PASS, new29 PASS/1 ERROR due warning-prefixed child JSON; strict-document did not execute",
+      "exit_status": 1,
+      "log": ".linkedspec-data/scratch/nested-julia-carriers.log",
+      "sha256": "b14d5417fec68fbedd3a3643922788f321a556c352480ab5f3721d1dcf40ca2a"
+    },
+    {
+      "command": "bash tools/run_julia_project_data.sh --project=julia .linkedspec-data/scratch/nested-julia-diagnose.jl",
+      "result": "Pre-fix targeted diagnostic prints child warnings naming newer-world parser/metadata/plan/validate_plan/execute bindings; same29/30 error",
+      "exit_status": 1,
+      "log": ".linkedspec-data/scratch/nested-julia-diagnose.log",
+      "sha256": "933220fe4f6516d57d42b93cd596a25859c96ec87d1a5f010a33949a1b85a478"
+    },
+    {
+      "command": "bash tools/run_julia_project_data.sh --project=julia -e 'using LinkedSpecJulia, JSON3, Test; const REPO_ROOT=pwd(); include(\"julia/test/source_emitter_test.jl\"); include(\"julia/test/sexpr_document_v1_test.jl\")'",
+      "result": "PASS new30 + existing emitter65 + strict-document128 =223 assertions; exact child report without warnings",
+      "exit_status": 0,
+      "log": ".linkedspec-data/scratch/nested-julia-carriers-green.log",
+      "sha256": "3df75933bbfa9d37c2e7fef3f4a287fafdd6b314e4fd30d1ad2c0c7ef55f138d"
+    },
+    {
+      "command": "bash tools/test_julia_project_data_storage.sh",
+      "result": "PASS22 temporary owners/five locked package trees",
+      "exit_status": 0,
+      "log": ".linkedspec-data/scratch/nested-julia-storage.log",
+      "sha256": "03dcabcf60256cb82d68bdef11aba65253694e55fb96815c6e9b6333dd185a57"
+    },
+    {
+      "command": "bash tools/run_mdbook_local.sh",
+      "result": "PASS",
+      "exit_status": 0,
+      "log": ".linkedspec-data/scratch/nested-julia-book.log",
+      "sha256": "cd352b0d2faa508b585029234778586c9605e2b6ea64bc3e084a5b3e0f9f411f"
+    }
+  ],
+  "source_hashes": {
+    "julia/test/source_emitter_test.jl": "9b88051f2d289cc15259ab84accd22f80d222c499a369008ab552583843f7548",
+    "tests/language-readiness/nested-tree/julia_checks.jl": "c6851abf0944b7e5912b84481c3e40d1e9ec924dd1985c785207733973255ac2",
+    "tests/language-readiness/nested-tree/grammar.spec": "498ffda35b05222388c64d99b0acb132a56996e97de3ffa9312f7dda6ee0ed72",
+    "tests/language-readiness/nested-tree/cases.json": "7a36a4b32d8a5ac8a1d2f17d6d000a68c707bfc15a4b3a1e93e3e4ddaf4147c7",
+    "julia/Manifest.toml": "2b4e4039b6d3bb76dd8bd9844f90f8083747982737572504198abd2cb64e48e4",
+    "julia/Project.toml": "45bff88352b342d6a3970b3ad2c5cf853a3ff5261034210025d1b8ffc2dd9fa1"
+  },
+  "counts": {
+    "routes": 5,
+    "original_calls_per_route": 40,
+    "typed_rejections_per_route": 14,
+    "mutants_per_route": 3,
+    "retained_engine_routes": 2,
+    "same_engine_recovery_transitions": 28,
+    "fresh_emitted_modules": 4,
+    "new_assertions": 30,
+    "existing_emitter_assertions": 65,
+    "strict_document_assertions": 128
+  },
+  "diagnostic_timing": "The diagnostic ran against the pre-fix working-tree test: invokelatest calls still read bindings through direct getfield. It printed the full merged child output before the exact JSON assertion. Final code changes binding lookup to latest-world access and preserves exact report parsing.",
+  "unchanged": "git diff --exit-code HEAD -- julia/src julia/Manifest.toml julia/Project.toml tests/language-readiness/nested-tree/grammar.spec tests/language-readiness/nested-tree/cases.json examples/integration: PASS",
+  "limits": "SpecFile JSON reconstruction, not compiled-state serialization. Generated v2 and emitted APIs create an engine per call. No private generated-family keywords, full component-gate, format admission or arbitrary-depth claim. Lua and canonical parent reconciliation remain."
+}

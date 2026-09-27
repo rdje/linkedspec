@@ -12,6 +12,14 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-09-27 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.4: Julia nesting carriers
+
+The existing emitter harness now proves five public nesting routes: native and SpecFile-reconstructed engines,
+generated v2 for both compiled forms, and fresh emitted modules. Each passes40 original calls and three grammar
+mutations; two retained engines prove28 recoveries. New30/existing emitter65/strict-document128 assertions pass.
+The new host's first world-age warning is repaired at binding lookup, preserving exact child-output validation.
+Storage remains22 owners/five locked package trees. No runtime, fixture, manifest or contract change; Lua is next.
+
 ## 2026-09-27 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.3: Dart nesting carriers
 
 The unchanged grammar/oracles pass six Dart routes: native and SpecFile-JSON reconstructed engines, their generated
