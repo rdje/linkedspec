@@ -7,7 +7,7 @@ answers:
   - does native nesting proof include emitted carriers or recovery after rejection
   - how can the public nested tree readiness probe be repeated
 date: 2026-09-27
-status: native public-loader trial verified; carrier and mutation proof remains pending
+status: native proof verified; separate carrier proof reconciled by canonical nesting milestone
 tags: [language-readiness, recursion, unicode, spans, public-loader]
 evidence: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.1 passes unchanged six accepted/seven rejected cases on Perl, Rust, Dart, Julia, PUC Lua and LuaJIT, with12 exact accepted executions through one engine per route. Typed JSON rejection is verified except Rust's published Display adapter. Grammar/oracle/adapter/product hashes remain unchanged during execution."
 reverify: "Run bash tools/run_python_project_data.sh tests/language-readiness/nested-tree/verify_native.py --runtime RUNTIME for perl, rust, dart, julia, puc and luajit after the documented integration preparation."
@@ -19,7 +19,7 @@ accepted cases in reverse order and requires exact rejection status with no emit
 fixture preserves half-open Unicode scalar spans, including supplementary characters and leading CRLF.
 
 The adapters terminate on rejected input; this is not same-engine rejection-recovery evidence. Rust reports
-Display text, not a typed error envelope. [[perl-emitted-public-entry-trivia]] now proves Perl fresh emitted execution, recovery, readiness and three mutations. [[nested-tree-rust-carrier-readiness]] now supplies Rust typed/carrier proof. [[nested-tree-dart-carrier-readiness]] supplies Dart proof; [[nested-tree-julia-carrier-readiness]] supplies Julia proof; [[nested-tree-lua-carrier-readiness]] supplies both Lua ABIs; storage-census repair is verified; canonical reconciliation remains. The earlier Perl fixture separately proves native
+Display text, not a typed error envelope. [[perl-emitted-public-entry-trivia]] now proves Perl fresh emitted execution, recovery, readiness and three mutations. [[nested-tree-rust-carrier-readiness]] now supplies Rust typed/carrier proof. [[nested-tree-dart-carrier-readiness]] supplies Dart proof; [[nested-tree-julia-carrier-readiness]] supplies Julia proof; [[nested-tree-lua-carrier-readiness]] supplies both Lua ABIs; storage-census and entry-warning repairs are verified; [[nested-tree-readiness-reconciliation]] records the canonical milestone and current limits. The earlier Perl fixture separately proves native
 and fresh emitted behavior under [[perl-hash-constructor-nested-values]].
 
 This grammar has bare atoms and parenthesized lists, with no string or comment syntax and no standard-format

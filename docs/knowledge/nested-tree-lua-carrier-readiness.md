@@ -23,5 +23,5 @@ ABI using current source/native paths. Actual success, empty stderr, exact compl
 required. No runtime, fixture, contract, storage mechanism or malformed-regex behavior changes in this leaf.
 
 The original storage oracle's failed legacy census remains incomplete evidence; its subsequent repair passes30
-controls and the real dual-ABI storage check: see [[lua-storage-census-failure-status]]. Canonical reconciliation remains. No unfiltered Lua gate or format admission is claimed.
+controls and the real dual-ABI storage check: see [[lua-storage-census-failure-status]]. [[nested-tree-readiness-reconciliation]] records the completed cross-runtime evidence and bounded milestone. No unfiltered Lua gate or format admission is claimed.
 Related: [[nested-tree-public-native-readiness]], [[lua-generated-source-fresh-process-isolation]].

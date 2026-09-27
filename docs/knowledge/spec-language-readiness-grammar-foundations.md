@@ -10,7 +10,7 @@ answers:
   - "how does language readiness distinguish functions callbacks and grammar rules"
   - "where are state control and typed result readiness limits recorded"
 date: 2026-09-27
-status: all nine capability dimensions inventoried; first nesting trial exposes a constructor repair
+status: nine dimensions inventoried; bounded nesting reconciled; context and lossless objectives remain
 tags: [dsl, readiness, grammar, recursion, cursor, capture, conformance]
 evidence: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.1 from clean30b2cc3a0 runs seven existing neutral/structural checks: capability100/0/0, language250/105+1/126, root7/0/54, cursor8/0/60, recognition138/250/58, typed14/0/231 and gaps9/0/63. No new backend execution or format support is claimed. The manifest parse-mode description contradicts the specific cursor policy and passes a checker that only requires a general contract string; .1.1.5 owns repair before closure authority."
 reverify: "env PERL5LIB= bash tools/project_data_run.sh perl tools/check_capability_conformance.pl && bash tools/run_python_project_data.sh tools/check_rule_local_cursor_contract.py"
@@ -51,6 +51,6 @@ The next `.1.1.3` probes concrete nesting, context and lossless extraction objec
 
 The bounded nested-tree trial exposed a Perl hash-constructor value-lowering defect, owned by
 `.1.1.3.1.1`; [[perl-hash-constructor-nested-values]] records the public-tool diagnosis and exact
-native/emitted regression. [[nested-tree-public-native-readiness]] now verifies6/7/12 through all six public native loaders; carrier/recovery/mutation readiness remains `.1.1.3.1.2.2`.
+native/emitted regression. [[nested-tree-public-native-readiness]] now verifies6/7/12 through all six public native loaders; [[nested-tree-readiness-reconciliation]] consolidates the separate carrier/recovery/mutation proof under canonical milestone .1.1.3.1.2.3.
 The original expected spans are unchanged. Generic flat on a scalar-held harray is a separate
 defect repaired under `.1.1.6` at the director's request; native/fresh emitted164 and Phase01033 pass. It does not occur in this grammar.

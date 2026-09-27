@@ -28,5 +28,5 @@ The final30/30 child report is exact; no warning stripping or relaxed status che
 
 The existing emitter test file owns scratch and reuses its offline private-depot host; all four emitted modules
 execute in a fresh process with validated v2 metadata/plans and verified cleanup. Runtime, manifests and authored
-fixture bytes are unchanged. Lua and canonical reconciliation remain separate.
+fixture bytes are unchanged. [[nested-tree-readiness-reconciliation]] records the completed cross-runtime evidence and bounded milestone.
 Related: [[nested-tree-public-native-readiness]], [[julia-generated-source-scaffold]], [[julia-project-data-ssd-storage]].

@@ -6,13 +6,15 @@ Ordinary .spec language readiness under SPEC-LANGUAGE-SELF-CONTAINMENT.1.1. The 
 
 ## Latest Completed Slice
 
-- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.7 - preserve quiet entry boundaries` — final104 warning-sensitive assertions, focused218, generated12, storage27 and full Phase01033 pass; values and null/empty/zero distinctions are unchanged.
+- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.3 - reconcile bounded nesting readiness` — six-runtime carrier evidence and authoring costs agree; exact staged canonical receipt governs bounded parent closure. Context/lossless objectives and the format gate remain open.
 
 ## Next Action
 
-- Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.3 for canonical nesting evidence and authoring-cost reconciliation.
+- Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2 for explicit scoped context-dependent matching and restoration proof.
 
 ## Recent Completions
+
+- `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.3` reconciles bounded nesting routes, authoring costs and canonical parent closure.
 
 - `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.7` removes absent-entry arithmetic warnings with104 focused assertions and full Phase01033.
 
@@ -43,8 +45,6 @@ Ordinary .spec language readiness under SPEC-LANGUAGE-SELF-CONTAINMENT.1.1. The 
 - `2026-09-27` — `SESSION-STARTUP-READING.93` retains all artifacts after the bounded census.
 
 - `2026-09-27` — `RGX-CONSUMER-BUILD-REPORTS.1.3.2` closes bounded published report work locally; exact canonical receipt governs landing and final push.
-
-- `2026-09-27` — `RGX-CONSUMER-BUILD-REPORTS.1.3.1` records the unauthorized ARCHOGEN write, accurate fix publication and strict other-repository read-only boundary.
 
 ## History
 

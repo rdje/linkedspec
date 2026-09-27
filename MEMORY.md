@@ -1,11 +1,11 @@
 # MEMORY
 
-- activation_commit: `f80b4693b86f7b5ece02fabb5510e1a4ca5dda55` — clean activation base for emitted entry-position warning repair.
-- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.7 - preserve quiet entry boundaries`.
-- active_work_unit: none — Perl entry-boundary warning repair is complete.
-- next_action: Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.3 to reconcile nesting evidence/authoring costs and close bounded parents through canonical milestone proof.
+- activation_commit: `b044542bc47894f69954fcbdda451ed2548c3bb3` — clean activation base for canonical nesting reconciliation.
+- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.3 - reconcile bounded nesting readiness`.
+- active_work_unit: none — bounded nesting milestone is complete.
+- next_action: Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2 for a scoped context-dependent matching/restoration probe using ordinary .spec.
 - in_flight_uncommitted: none.
-- blockers: carrier proof, storage repair and emitted entry warning repair complete; canonical reconciliation remains; .1.1.5 owns stale capability prose and startup .38/.40 recognition defects remain queued. ARCHOGEN owns downstream acceptance; named-argument and format proposals stay parked.
+- blockers: bounded nesting is reconciled; context/lossless probes remain; .1.1.5 owns stale capability prose and startup .38/.40 recognition defects remain queued. ARCHOGEN owns downstream acceptance; named-argument and format proposals stay parked.
   Wrapper startup .7 remains open; recovery/purge stay prohibited. No interrupted Phase0 run counts as proof.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
   active table; the task metadata doctrine inventories all consumers, permits arbitrary frontier-row rewrites,

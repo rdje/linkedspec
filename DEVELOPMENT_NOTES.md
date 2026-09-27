@@ -12,6 +12,18 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-09-27 — Nesting proof and authoring costs at milestone closeout
+
+The native adapter result6/7/12 remains distinct from typed carrier proof. Perl/Rust/Dart/Julia/PUC/LuaJIT have
+2/6/6/5/5/5 routes, but only2/4/4/2/2/2 retain a parser across14 rejection/recovery pairs each. Per-call v2/emitted
+success cannot establish engine restoration. The13 authored inputs,40 calls/route and three targeted mutations
+bound confidence; no corpus-size inflation, arbitrary-depth safety or whole-format claim follows.
+The five-rule/eight-edge grammar expresses recursion and typed ASTs directly, while strictness needs prefix,
+gap, final-cursor and missing-close guards. Status1 gives rejection without grammar-specific reasons. These are
+concrete authoring observations for .1.1.4 after context/lossless probes, not evidence demanding a new primitive.
+The source/log audit preserves old failures and supersessions, including the repaired Lua census and later Perl
+entry-warning regression. Exact staged canonical proof closes only nesting parents under .1.1.3.1.2.3.
+
 ## 2026-09-27 — Absent entry text and entry boundary arithmetic
 
 A selected root has a valid entry cursor but no incoming match. The old entry-start lowering subtracts

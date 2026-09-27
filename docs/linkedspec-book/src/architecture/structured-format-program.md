@@ -91,6 +91,34 @@ The bounded native proof passes the same six accepted and seven rejected inputs 
 Lua and LuaJIT, including CRLF and a supplementary Unicode character. Each public-loaded engine returns exact
 ASTs and spans for twelve accepted parses. The Perl proof also covers fresh-process emitted parsers, five-rule ActionIR readiness and immediate recovery after each typed rejection. Prefix/gap/span mutations demonstrate sensitivity to each claimed boundary.
 
+The bounded nesting objective now has carrier evidence on all six runtimes:
+
+| Runtime | Carrier routes | Retained parsers | Rejection-to-success transitions on retained parsers |
+| --- | ---: | ---: | ---: |
+| Perl | 2 | 2 | 28 |
+| Rust | 6 | 4 | 56 |
+| Dart | 6 | 4 | 56 |
+| Julia | 5 | 2 | 28 |
+| PUC Lua | 5 | 2 | 28 |
+| LuaJIT | 5 | 2 | 28 |
+
+Each route runs the same 13 authored cases in a 40-call sequence and detects three deliberate grammar mutations.
+These counts show repeated use and coverage of particular boundaries, not a large conformance corpus. Every
+carrier rejection must have typed status1; a successful null-like return cannot count as rejection.
+
+The 33-line grammar illustrates both expressive power and authoring cost. Recursion and rule-local bindings
+express the tree directly, and explicit constructors make its AST and spans visible. Strict document acceptance
+needs several guards: reject skipped prefix text, reject gaps through both `Invalid` edges, check the final
+cursor, and reject an unfinished list at its end. For example, removing the prefix guard admits `#skip\n(a)`;
+removing the two catch-all edges admits interstitial junk. Replacing a list's saved start with the final cursor
+changes its span to `[9,9]` for `(a (β) c)`, which the original `[0,9]` oracle detects.
+
+This grammar reports typed rejection but does not explain a missing close versus stray text with distinct
+messages. Starting another parse after rejection is also different from recovering inside the same document.
+Neither this trial nor its line count establishes arbitrary-depth safety, performance, speculative AST rollback,
+or format conformance. No new primitive was needed for this bounded objective; the next probes concern scoped
+context-dependent matching and lossless child parsing before choosing general language improvements.
+
 To repeat a prepared runtime's public-loader check, run from the repository root:
 
 ```sh
@@ -105,7 +133,7 @@ text, while the others preserve typed JSON.
 A separate Rust regression covers native and JSON-reconstructed engines, generated-plan execution, serialized
 v2 execution and freshly compiled emitted modules. All six routes preserve the same values, JSON kinds and
 Unicode spans, reject malformed inputs with typed status1 exits, and detect prefix/gap/span grammar mutations.
-Four routes retain their engine across14 rejection-to-success transitions each; the serialized and emitted entry
+Four routes retain their engine across 14 rejection-to-success transitions each; the serialized and emitted entry
 functions construct an engine per call, so their subsequent successful calls do not prove retained-engine recovery.
 Run this proof with:
 
@@ -155,8 +183,8 @@ bash tools/run_lua_project_data.sh luajit lua/test/rule_local_cursor_generated_s
 
 Both pass133 assertions and independently load four emitted modules with checked child status, exact output and
 cleanup. The storage census now rejects enumeration errors and passes its controlled and real-root checks.
-Canonical nesting reconciliation remains open. This bounded proof does not establish the
-separately tracked malformed-regex native error path.
+The bounded nesting milestone reconciles these routes and their limits through canonical verification. It does
+not establish the separately tracked malformed-regex native error path.
 This example does not open the structured-format campaign or establish arbitrary-depth resource safety.
 
 

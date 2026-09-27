@@ -144,7 +144,8 @@ used by ordinary `.spec` syntax on every backend.
   Acceptance: Natural nesting, context-sensitive delimiter/indentation state, and lossless staged extraction have exact authored sources, positive/negative inputs, AST/span oracles and runtime/provenance evidence. Reuse existing document grammar and neutral fixtures where suitable; these are readiness probes, not whole-format conformance claims. Split each objective into its own commit before execution if needed.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1`
-  Status: `active`
+  Status: `done`
+  Closure: Bounded child evidence reconciled by .1.1.3.1.2.3; exact staged canonical receipt governs this parent closeout.
   Goal: Prove a bounded ordinary .spec nested-tree grammar with exact Unicode source spans, recursive state, complete recognition and typed rejection.
   Activation: Clean 57d8b702200ed62107f447c0b8e05b7b19fe577f after .1.1.2, all nine doctrines passed and brief empty. Retrieved strict-document design, public grammar chapter and source-boundary reference before authoring.
   Children: `.1.1.3.1.1`, `.1.1.3.1.2`
@@ -177,7 +178,8 @@ used by ordinary `.spec` syntax on every backend.
 - [x] **LOCKSTEP** — Book reference/example/status, CHANGES, DEVELOPMENT_NOTES, MEMORY, live status, roadmaps, task tree and Knowledge Map reflect this repair. Exact rendered grammar/AST and executable book snippet pass. USER_GUIDE is unchanged because the relevant constructor explanation is owned by the book. History limits and `git diff --check` pass; final staged doctrines govern landing.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2`
-  Status: `active`
+  Status: `done`
+  Closure: Bounded child evidence reconciled by .1.1.3.1.2.3; exact staged canonical receipt governs this parent closeout.
   Goal: Complete nested-tree readiness proof across supported public native/carrier routes after the Perl repair.
   Dependencies: `.1.1.3.1.1`, `.1.1.6`
   Acceptance: Exact positive/negative values and Unicode spans, prefix/gap/span mutation sensitivity, same-engine reuse and ActionIR readiness; record exact routes and limitations without arbitrary resource or whole-format claims.
@@ -205,7 +207,8 @@ used by ordinary `.spec` syntax on every backend.
 - [x] **LOCKSTEP** — The book's bounded grammar section reports exact six-runtime native coverage and honest carrier/recovery limits, with repeatable commands. CHANGES, DEVELOPMENT_NOTES, MEMORY, live status, roadmaps, task frontier, ledger and Knowledge Map route remaining work to .1.1.3.1.2.2. No standard-format support or broad campaign admission is claimed.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2`
-  Status: `active`
+  Status: `done`
+  Closure: Bounded child evidence reconciled by .1.1.3.1.2.3; exact staged canonical receipt governs this parent closeout.
   Goal: Verify supported serialized/reconstructed/generated/emitted nested-tree routes, same-engine recovery after typed rejection, readiness descriptors and prefix/gap/span mutation sensitivity.
   Dependencies: `.1.1.3.1.2.1`
   Acceptance: Split backend-sized children before implementation; retain the same authored oracles and honest carrier coverage. No blanket proof from native results.
@@ -213,7 +216,8 @@ used by ordinary `.spec` syntax on every backend.
   Children: `.1.1.3.1.2.2.1`, `.1.1.3.1.2.2.2`, `.1.1.3.1.2.2.3`, `.1.1.3.1.2.2.4`, `.1.1.3.1.2.2.5`, `.1.1.3.1.2.2.6`, `.1.1.3.1.2.2.7`
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.1`
-  Status: `active`
+  Status: `done`
+  Closure: Bounded child evidence reconciled by .1.1.3.1.2.3; exact staged canonical receipt governs this parent closeout.
   Goal: Prove Perl nested-tree carrier semantics using native Get and fresh emitted subprocess, typed rejection/recovery and prefix/gap/span mutation controls.
   Acceptance: Original grammar/cases remain unchanged; exact value kinds and Unicode spans, no partial rejection values, explicit recovery after every rejection and honest carrier/readiness coverage.
   Activation: Clean425153473d7a795c6a61ca5c1e2d4602cd1fc851; native proof committed, all nine hooks and post-commit pointer pass, brief0 and no pending job.
@@ -400,10 +404,30 @@ used by ordinary `.spec` syntax on every backend.
 - [x] **LOCKSTEP** — The source-boundary book teaches six worked contexts and regeneration requirements without a new cross-backend absence claim. Task/live/roadmap pointers, bounded history, Knowledge fact/checkpoint and memory identify this repair before canonical nesting reconciliation; scripts/check_memory_architecture.sh and final doctrines govern landing.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.3`
-  Status: `pending`
+  Status: `done`
   Goal: Reconcile nested-tree readiness evidence, authoring costs and limitations, and close its parents through canonical milestone proof.
   Dependencies: `.1.1.3.1.2.2`
   Acceptance: Source-located native/carrier/mutation ledger and book agree; canonical receipt governs closure before context-dependent objective .1.1.3.2.
+  Activation: Clean b044542bc47894f69954fcbdda451ed2548c3bb3; all carrier children and discovered storage/entry-warning repairs committed, brief empty and no pending jobs.
+  Scope: Reconcile existing bounded proof, authored strictness costs and route-specific limits; close nesting parents only after exact staged canonical success. No format admission or runtime change.
+  Verification tier: `canonical`
+  Focused checks: Original fixture and committed evidence audit; source-located route/readiness/mutation/recovery matrix; book render, Knowledge synchronization, bounded history, memory, diagnosis, cadence and all doctrines.
+  Canonical trigger: Milestone and parent closeout requires tools/run_ci_local.sh on the exact staged candidate.
+  Documentation defect: The current frontier still names the completed Rust leaf active, and the native fact status still says carrier proof pending. This leaf owns reconciliation of these reproducible stale summaries and remaining backend follow-up sentences; chronology remains dated evidence.
+  Result: Six-runtime native6/7/12 remains distinct from typed carriers. Perl/Rust/Dart/Julia/PUC/LuaJIT respectively prove2/6/6/5/5/5 routes,2/4/4/2/2/2 retained parsers and28/56/56/28/28/28 recovery transitions. Each route executes40 original calls and three mutants. Existing proof, source hashes and48 retained logs reconcile; .6 explains the sole superseded source hash.
+  Authoring assessment: The unchanged33-line/five-rule/eight-edge grammar composes recursion/state/typed ASTs directly but requires explicit prefix/gap/end/missing-close guards. Typed status1 gives no reason-specific diagnostics. No new primitive selected; context/lossless probes precede .1.1.4 gap selection.
+  Verification: Source/log audit and book validation precede exact staged tools/run_ci_local.sh; the receipt is mandatory for landing. Checkpoint: docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.3-verification.json.
+  Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.3 - reconcile bounded nesting readiness`.
+
+### `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.3` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Completed backend checkpoints conflict with the stale current Rust frontier, pending-carrier fact status and ROADMAP_V2 lead. The nesting parent also lacks a consolidated authoring-cost assessment.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Backend-sized leaves recorded local proof and chronological additions but left older current summaries in docs/tasks/SPEC-LANGUAGE-SELF-CONTAINMENT.md, roadmap lead and Knowledge cards. No new parser defect is inferred; carrier source/log hashes and the .6 storage supersession explain the current evidence.
+- [x] **FIX** — Reconcile the precise route/recovery/readiness matrix, all four strictness guard locations and scope limits; correct current summaries and close only bounded nesting parents under this canonical milestone.
+- [x] **ADDRESSED (verified)** — Audited original grammar/cases, all37 carrier/repair source-hash references and48 retained logs. The only historical source difference is the subsequently repaired Lua storage gate; its .6 hash matches. Existing .7 proof reruns Perl nesting after the last runtime change.
+- [x] **NO REGRESSION** — No runtime, test oracle, generated schema or dependency change. Book and focused evidence checks pass before staging; exact staged canonical proof is required by the landing hook. Optional unfiltered backend gates and known separate defects are not claimed closed.
+- [x] **LOCKSTEP** — Ledger, book, roadmap leads/current rows, Knowledge, task frontier, MEMORY, live status and bounded histories agree. Next is context-dependent objective .1.1.3.2; the broad format campaign remains gated.
+
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2`
   Status: `pending`
@@ -619,9 +643,16 @@ used by ordinary `.spec` syntax on every backend.
 | 3 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.2` | `done` | Other five areas mapped; seven neutral tools and 44 path/consumer checks pass. |
 | 4 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.1` | `done` | Typed constructor values and native/fresh emitted spans verified; complete Phase0 1033/1033. |
 | 5 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.6` | `done` | Generic flat bound/computed values, capture compatibility, native/emitted164 and complete Phase01033 verified. |
-| 6 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.1` | `done` | Exact native public-loader6/7/12 on six runtimes; carrier/mutation .1.1.3.1.2.2 follows. |
-| 7 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.1.1` | `done` | Emitted-entry repair and Perl carriers verified192/focused274/Phase01033; Rust is next. |
-| 8 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.2` | `active` | Rust carriers, typed recovery and mutations from clean bb76f4437. |
+| 6 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.1` | `done` | Exact native public-loader6/7/12 on six runtimes; separate carrier proof follows in the completed rows below. |
+| 7 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.1.1` | `done` | Perl native/emitted carrier, recovery and mutation proof plus public-entry repair. |
+| 8 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.2` | `done` | Six Rust carrier routes and56 retained-engine recovery transitions. |
+| 9 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.3` | `done` | Six Dart routes and56 retained-engine recovery transitions. |
+| 10 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.4` | `done` | Five Julia routes and28 retained-engine recovery transitions. |
+| 11 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.5` | `done` | Five routes and28 retained-engine recoveries per Lua ABI. |
+| 12 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.6` | `done` | Storage error handling/inventory correction and exact canonical proof. |
+| 13 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.7` | `done` | Quiet absent-entry boundaries;104 focused assertions and Phase01033. |
+| 14 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.3` | `done` | Bounded nesting evidence/authoring limits reconciled; exact canonical receipt governs closeout. |
+| 15 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2` | `pending` | Next: scoped context-dependent matching and restoration, without whole-format claims. |
 
 ## Decisions
 
@@ -654,6 +685,8 @@ used by ordinary `.spec` syntax on every backend.
 - None for `.1.1`. The September27 clean prioritization supersedes the earlier callable-first schedule. Format implementation and the optional frontend remain gated by their own prerequisites.
 
 ## Verification Log
+
+September27 `.1.1.3.1.2.3`: reconcile all six native/carrier records,37 source hashes and48 retained logs; correct current summary drift, preserve historical limits and require exact staged canonical receipt for nesting parent closure.
 
 September27 `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.1.1`: baseline RED15/192; new regression192, focused274, Phase01033 and exact entry/child/mutation/recovery proof pass. Perl carrier evidence is complete; remaining backends precede canonical parent closure.
 

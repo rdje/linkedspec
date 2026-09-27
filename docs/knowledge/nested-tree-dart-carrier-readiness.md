@@ -26,5 +26,5 @@ are checked. Runtime code, dependency lockfiles and fixture bytes are unchanged.
 
 Whole-package analysis still exits2 at matching.dart:732/1203 with deprecated_implement; this matches the existing
 [[dart-component-gate-sdk-compatibility]] owner DART-STARTUP-READING.2.25. Changed-file and emitted analysis pass.
-No complete component-gate or standard-format admission is claimed. Julia/Lua and canonical reconciliation remain.
+No complete component-gate or standard-format admission is claimed. [[nested-tree-readiness-reconciliation]] records the completed cross-runtime evidence and bounded milestone.
 Related: [[nested-tree-public-native-readiness]], [[nested-tree-rust-carrier-readiness]].

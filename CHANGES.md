@@ -12,6 +12,16 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-09-27 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.3: bounded nesting reconciliation
+
+Reconcile all six native/carrier records without expanding their claims. The ledger/book distinguish retained
+parser recovery from per-call generated isolation and explain the33-line grammar's explicit strictness guards.
+Correct stale Rust/current-carrier summaries in the frontier, roadmap and Knowledge cards. Only bounded nesting
+parents close; scoped context-dependent matching is next and the structured-format campaign remains gated.
+Audit37 source-hash references and48 retained logs: the sole historical source difference is the independently
+verified .6 Lua storage repair. No runtime, fixture, schema or dependency changes. Book/focused evidence checks
+precede exact staged canonical CI; the receipt governs landing and the commit body records its actual result.
+
 ## 2026-09-27 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.7: warning-free Perl entry boundaries
 
 Seven Perl entry-start calculations now use zero width for an absent entry match without changing capture values.
