@@ -51,6 +51,6 @@ The next `.1.1.3` probes concrete nesting, context and lossless extraction objec
 
 The bounded nested-tree trial exposed a Perl hash-constructor value-lowering defect, owned by
 `.1.1.3.1.1`; [[perl-hash-constructor-nested-values]] records the public-tool diagnosis and exact
-native/emitted regression. Complete cross-backend/mutation readiness remains `.1.1.3.1.2`.
+native/emitted regression. [[nested-tree-public-native-readiness]] now verifies6/7/12 through all six public native loaders; carrier/recovery/mutation readiness remains `.1.1.3.1.2.2`.
 The original expected spans are unchanged. Generic flat on a scalar-held harray is a separate
 defect repaired under `.1.1.6` at the director's request; native/fresh emitted164 and Phase01033 pass. It does not occur in this grammar.

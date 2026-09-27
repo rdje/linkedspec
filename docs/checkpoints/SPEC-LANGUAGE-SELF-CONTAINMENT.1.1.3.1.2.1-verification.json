@@ -1,0 +1,128 @@
+{
+  "owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.1",
+  "activation_commit": "fa8b0e8af019b3ded4c17f423a122f9b1decfa9b",
+  "date": "2026-09-27",
+  "command": "bash tools/run_python_project_data.sh tests/language-readiness/nested-tree/verify_native.py --runtime RUNTIME",
+  "preparation": "Published locked offline integration build: bash tools/run_cargo_local.sh build --bins --offline --locked --manifest-path examples/integration/rust/Cargo.toml; existing prepared project-local Dart/Julia/Lua stores reused",
+  "runtime_reports": {
+    "perl": {
+      "accepted": 6,
+      "limits": "Native text consumer only; no carrier or same-engine rejection-recovery claim",
+      "protected_sha256": {
+        "examples/integration/perl/parse_words.pl": "b5633caef97418e84fa8eb0b901abb9e38f990d920870cb0c54e42763e6ac079",
+        "tests/language-readiness/nested-tree/cases.json": "7a36a4b32d8a5ac8a1d2f17d6d000a68c707bfc15a4b3a1e93e3e4ddaf4147c7",
+        "tests/language-readiness/nested-tree/grammar.spec": "498ffda35b05222388c64d99b0acb132a56996e97de3ffa9312f7dda6ee0ed72"
+      },
+      "rejected": 7,
+      "rejection_projection": "typed JSON",
+      "runtime": "perl",
+      "same_engine_accepted_executions": 12,
+      "status": "PASS"
+    },
+    "rust": {
+      "accepted": 6,
+      "limits": "Native text consumer only; no carrier or same-engine rejection-recovery claim",
+      "protected_sha256": {
+        "examples/integration/rust/src/main.rs": "21c660d5e1fe5c453a85e0130c5428ff91ba4c26f6cef79a651e4ed8074ef1ae",
+        "rust/target/debug/linkedspec-integration-example": "e597d9d1c577cb61f64a0e20415f5cde742af9f8175ce5c5cbd6068b89e741fe",
+        "tests/language-readiness/nested-tree/cases.json": "7a36a4b32d8a5ac8a1d2f17d6d000a68c707bfc15a4b3a1e93e3e4ddaf4147c7",
+        "tests/language-readiness/nested-tree/grammar.spec": "498ffda35b05222388c64d99b0acb132a56996e97de3ffa9312f7dda6ee0ed72"
+      },
+      "rejected": 7,
+      "rejection_projection": "Display",
+      "runtime": "rust",
+      "same_engine_accepted_executions": 12,
+      "status": "PASS"
+    },
+    "dart": {
+      "accepted": 6,
+      "limits": "Native text consumer only; no carrier or same-engine rejection-recovery claim",
+      "protected_sha256": {
+        "examples/integration/dart/.dart_tool/package_config.json": "7490db096e6e36c467126c0eec097abca1ee8110484159d04431cdb21ee52ab6",
+        "examples/integration/dart/bin/parse_words.dart": "e81b396835629b8586b307d3aae8df403cc11aa2e5b940ff88c7f77e473da02c",
+        "tests/language-readiness/nested-tree/cases.json": "7a36a4b32d8a5ac8a1d2f17d6d000a68c707bfc15a4b3a1e93e3e4ddaf4147c7",
+        "tests/language-readiness/nested-tree/grammar.spec": "498ffda35b05222388c64d99b0acb132a56996e97de3ffa9312f7dda6ee0ed72"
+      },
+      "rejected": 7,
+      "rejection_projection": "typed JSON",
+      "runtime": "dart",
+      "same_engine_accepted_executions": 12,
+      "status": "PASS"
+    },
+    "julia": {
+      "accepted": 6,
+      "limits": "Native text consumer only; no carrier or same-engine rejection-recovery claim",
+      "protected_sha256": {
+        "examples/integration/julia/Manifest.toml": "d2e7376273e2ff01a7e46db45c9170944dc16a514387e0584fc253f3a91cf665",
+        "examples/integration/julia/Project.toml": "fe90eb0290bb2eba29a1c0887744d1a0959a4e09885ed74912bbf36d44c3f815",
+        "examples/integration/julia/bin/parse_words.jl": "39af949d1835f43177fbd395fbe84c29e2843a9581ab6440ff2970e4537d02e0",
+        "tests/language-readiness/nested-tree/cases.json": "7a36a4b32d8a5ac8a1d2f17d6d000a68c707bfc15a4b3a1e93e3e4ddaf4147c7",
+        "tests/language-readiness/nested-tree/grammar.spec": "498ffda35b05222388c64d99b0acb132a56996e97de3ffa9312f7dda6ee0ed72"
+      },
+      "rejected": 7,
+      "rejection_projection": "typed JSON",
+      "runtime": "julia",
+      "same_engine_accepted_executions": 12,
+      "status": "PASS"
+    },
+    "puc": {
+      "accepted": 6,
+      "limits": "Native text consumer only; no carrier or same-engine rejection-recovery claim",
+      "protected_sha256": {
+        "examples/integration/lua/bin/parse_words.lua": "c6d4f186f10fc2064b75c74e5e6982409936678200c89cc0e1d692792ed3907b",
+        "examples/integration/lua/build/native/puc/linkedspec_filesystem_native.so": "56404baa6be2133382f496b7f212ac3f4894397b857d1cea8b646ca0509ad792",
+        "examples/integration/lua/build/native/puc/linkedspec_regex_pcre2.so": "215d1de207637bd726b3cd6c4c7ead90b180cd4933d325356c11923d53e129f3",
+        "tests/language-readiness/nested-tree/cases.json": "7a36a4b32d8a5ac8a1d2f17d6d000a68c707bfc15a4b3a1e93e3e4ddaf4147c7",
+        "tests/language-readiness/nested-tree/grammar.spec": "498ffda35b05222388c64d99b0acb132a56996e97de3ffa9312f7dda6ee0ed72"
+      },
+      "rejected": 7,
+      "rejection_projection": "typed JSON",
+      "runtime": "puc",
+      "same_engine_accepted_executions": 12,
+      "status": "PASS"
+    },
+    "luajit": {
+      "accepted": 6,
+      "limits": "Native text consumer only; no carrier or same-engine rejection-recovery claim",
+      "protected_sha256": {
+        "examples/integration/lua/bin/parse_words.lua": "c6d4f186f10fc2064b75c74e5e6982409936678200c89cc0e1d692792ed3907b",
+        "examples/integration/lua/build/native/luajit/linkedspec_filesystem_native.so": "56404baa6be2133382f496b7f212ac3f4894397b857d1cea8b646ca0509ad792",
+        "examples/integration/lua/build/native/luajit/linkedspec_regex_pcre2.so": "c3842d076cab5f6dc23f59f53c5f84ce79e75c229142adb6b7e9d7fcb54ec29d",
+        "tests/language-readiness/nested-tree/cases.json": "7a36a4b32d8a5ac8a1d2f17d6d000a68c707bfc15a4b3a1e93e3e4ddaf4147c7",
+        "tests/language-readiness/nested-tree/grammar.spec": "498ffda35b05222388c64d99b0acb132a56996e97de3ffa9312f7dda6ee0ed72"
+      },
+      "rejected": 7,
+      "rejection_projection": "typed JSON",
+      "runtime": "luajit",
+      "same_engine_accepted_executions": 12,
+      "status": "PASS"
+    }
+  },
+  "logs": {
+    "perl": {
+      "path": ".linkedspec-data/scratch/nested-native-perl.log",
+      "sha256": "dc062e7c172b824349cca911aef3c96fc217da0e2591b149395b58798dab2353"
+    },
+    "rust": {
+      "path": ".linkedspec-data/scratch/nested-native-rust.log",
+      "sha256": "3b6467d71ca050c259aa3d2456a855cd6d47002b75420ad5b017aff3c4657431"
+    },
+    "dart": {
+      "path": ".linkedspec-data/scratch/nested-native-dart.log",
+      "sha256": "337a16cca05b53758a813dfedb29754835f1adcd8da3bb01bcde2b71d351d2c6"
+    },
+    "julia": {
+      "path": ".linkedspec-data/scratch/nested-native-julia.log",
+      "sha256": "f03d18322e4938a3a2c5882ef4f8124e2a5a10fe43f013766d5a3ca67e77f007"
+    },
+    "puc": {
+      "path": ".linkedspec-data/scratch/nested-native-puc.log",
+      "sha256": "e2380ed987dddc84e967b440d5fd4fb2cbac1ef0dc4da51b8220caf5665435f8"
+    },
+    "luajit": {
+      "path": ".linkedspec-data/scratch/nested-native-luajit.log",
+      "sha256": "2d64442808ee0af755df0d9cd93459ea57085d87a84778f2a23d7e312d504f96"
+    }
+  },
+  "scope": "Bounded native public-loader trial; carriers, typed Rust diagnostics, rejection recovery and mutations remain .1.1.3.1.2.2. No format support or arbitrary-depth claim."
+}

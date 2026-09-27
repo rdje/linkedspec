@@ -1,9 +1,9 @@
 # MEMORY
 
-- activation_commit: `0b0cccf52781a03c5d7a1418212a42d180e03697` — clean activation base for generic flat repair .1.1.6.
-- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.6 - flatten bound container values`.
-- active_work_unit: none — .1.1.6 completed; activate remaining nesting proof from clean HEAD.
-- next_action: Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2 and complete remaining nested-tree runtime/carrier routes and mutation proof.
+- activation_commit: `fa8b0e8af019b3ded4c17f423a122f9b1decfa9b` — clean activation base for public native nesting proof.
+- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.1 - verify native nesting readiness`.
+- active_work_unit: none — native nesting proof completed; carriers and mutations are next.
+- next_action: Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2 from clean HEAD; split backend-sized carrier, typed recovery, descriptor and mutation proof leaves, starting with Perl.
 - in_flight_uncommitted: none.
 - blockers: none for nested-tree proof; .1.1.5 owns stale capability prose and startup .38/.40 recognition defects remain queued. ARCHOGEN owns downstream acceptance; named-argument and format proposals stay parked.
   Wrapper startup .7 remains open; recovery/purge stay prohibited. No interrupted Phase0 run counts as proof.

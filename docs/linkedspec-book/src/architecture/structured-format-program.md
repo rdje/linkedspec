@@ -87,9 +87,21 @@ For `(a (β) c)`, the result is:
 Recursive rule calls restore the enclosing list's `start` and `items` bindings. The two constructor forms
 `hash("span", [start, cursor_pos()])` and `{"span":[start, cursor_pos()]}` must preserve the same bound values.
 The trial exposed and repairs a Perl constructor lowering defect; the original expected spans remain unchanged.
-The bounded Perl proof covers six accepted and seven rejected inputs through native and fresh emitted parsers,
-including CRLF and a supplementary Unicode character. Remaining backend and mutation proof is a separate next
-step; this example does not open the structured-format campaign or establish arbitrary-depth resource safety.
+The bounded native proof passes the same six accepted and seven rejected inputs on Perl, Rust, Dart, Julia,
+Lua and LuaJIT, including CRLF and a supplementary Unicode character. Each public-loaded engine returns exact
+ASTs and spans for twelve accepted parses. The earlier Perl test also covers fresh emitted parsers.
+
+To repeat a prepared runtime's public-loader check, run from the repository root:
+
+```sh
+bash tools/run_python_project_data.sh tests/language-readiness/nested-tree/verify_native.py --runtime rust
+```
+
+Replace `rust` with `perl`, `dart`, `julia`, `puc` or `luajit` for the other routes. Prepare the selected example
+using its [public integration guide](../public-api/integration.md). The text adapters stop at the first rejected
+input; this check does not establish same-engine recovery after rejection. Rust's adapter prints its error as
+text, while the others preserve typed JSON. Remaining carrier and mutation proof is a separate next step.
+This example does not open the structured-format campaign or establish arbitrary-depth resource safety.
 
 
 ## Approved and parked: language coverage and authoring difficulty

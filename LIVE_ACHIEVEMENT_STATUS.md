@@ -6,13 +6,15 @@ Ordinary .spec language readiness under SPEC-LANGUAGE-SELF-CONTAINMENT.1.1. The 
 
 ## Latest Completed Slice
 
-- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.6 - flatten bound container values` — exact native/fresh emitted container values, single evaluation, LF/CRLF book examples and capture compatibility; old-module RED31/164, focused120 and complete Phase01033 pass.
+- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.1 - verify native nesting readiness` — unchanged nesting fixture passes all six native public loaders:6 accepted,7 rejected,12 exact accepted parses per engine. Carrier/recovery/mutation limits remain explicit.
 
 ## Next Action
 
-- Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2 from clean HEAD; finish remaining nested-tree routes and mutations before contextual/lossless objectives.
+- Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2; split and verify backend-sized carrier, typed recovery, descriptor and mutation proof, starting with Perl.
 
 ## Recent Completions
+
+- `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.1` verifies exact native nesting on all six runtimes.
 
 - `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.6` repairs generic bound/computed container splicing.
 
@@ -43,8 +45,6 @@ Ordinary .spec language readiness under SPEC-LANGUAGE-SELF-CONTAINMENT.1.1. The 
 - `2026-09-24` — `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.16.2` preserves all task bytes/IDs under unchanged limits, with public 998 and independent source/node proof.
 
 - `2026-09-24` — `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.16.1` freezes lossless task partitioning and consumer transfer without implementation or higher limits.
-
-- `2026-09-24` — `SESSION-STARTUP-READING.88` verifies typed indexed reads with runtime397/public17 and one executable Perl/Rust book source.
 
 ## History
 

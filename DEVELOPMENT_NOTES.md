@@ -12,6 +12,14 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-09-27 — native nesting readiness is a route-specific claim
+
+The first shared nested-tree objective now passes Perl/Rust/Dart/Julia/PUC Lua/LuaJIT through unchanged public
+text adapters. Forward then reverse input order verifies accepted-state reuse; it cannot establish recovery
+because those adapters terminate on rejection. Rust's adapter exposes Display, while other adapters project
+typed runtime_exit_now JSON. Keep these limits separate from earlier Perl emitted evidence and future carriers.
+The bounded verifier and docs/language-readiness/nested-tree-native.md preserve the exact repeatable proof.
+
 ## 2026-09-27 — generic flattening requires runtime kind dispatch (.1.1.6)
 
 Literal-shape inference cannot decide the kind of a uniform binding, function result or indexed read. Generic

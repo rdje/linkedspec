@@ -12,6 +12,14 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-09-27 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.1: native nested-tree readiness
+
+The unchanged six-positive/seven-negative nesting fixture passes all six public native text adapters.
+Each engine executes12 exact accepted values in forward/reverse order; Unicode spans and malformed-input
+rejection remain exact. A bounded verifier records source/product hashes and follows documented local storage
+and integration preparation. Rust rejection evidence is Display-only; adapters do not test recovery after
+rejection. No runtime or grammar changes are made. Carrier/descriptor/mutation proof follows in .1.1.3.1.2.2.
+
 ## 2026-09-27 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.6: generic flat bound container values
 
 Perl generic flat now consumes its typed argument once and dispatches on the runtime array/harray kind.

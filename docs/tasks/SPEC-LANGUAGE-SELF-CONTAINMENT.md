@@ -177,10 +177,44 @@ used by ordinary `.spec` syntax on every backend.
 - [x] **LOCKSTEP** — Book reference/example/status, CHANGES, DEVELOPMENT_NOTES, MEMORY, live status, roadmaps, task tree and Knowledge Map reflect this repair. Exact rendered grammar/AST and executable book snippet pass. USER_GUIDE is unchanged because the relevant constructor explanation is owned by the book. History limits and `git diff --check` pass; final staged doctrines govern landing.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2`
-  Status: `pending`
+  Status: `active`
   Goal: Complete nested-tree readiness proof across supported public native/carrier routes after the Perl repair.
-  Dependencies: `.1.1.3.1.1`
+  Dependencies: `.1.1.3.1.1`, `.1.1.6`
   Acceptance: Exact positive/negative values and Unicode spans, prefix/gap/span mutation sensitivity, same-engine reuse and ActionIR readiness; record exact routes and limitations without arbitrary resource or whole-format claims.
+  Children: `.1.1.3.1.2.1`, `.1.1.3.1.2.2`, `.1.1.3.1.2.3`
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.1`
+  Status: `done`
+  Goal: Run the unchanged nested-tree grammar and independent six-positive/seven-negative oracles through all six public native text consumers.
+  Activation: Clean fa8b0e8af019b3ded4c17f423a122f9b1decfa9b after generic flat repair; all nine hooks and post-commit pointer pass, brief0, no pending job.
+  Scope: Bounded public-loader readiness observations and a repeatable repository-local verifier. Reuse documented integration adapters, prepared local stores and supported builds. Do not alter grammar, oracle or dependency pins to obtain a pass. Only the next child owns carrier/typed-recovery/mutation proof.
+  Verification tier: `focused`
+  Focused checks: All six runtime adapter executions against exact authored values/spans and rejection outcomes; repeated accepted inputs through one engine; unchanged grammar/oracle/adapters; book render; Knowledge, memory, bounded history, doctrines and diff hygiene.
+  Canonical trigger: none for a bounded readiness probe without runtime, neutral contract, admission or infrastructure change; parent closeout remains canonical.
+  Acceptance: Preserve original input/expected bytes. Report exact native routes and whether each error is typed or Display-only. Any failure gets tool-first minimized diagnosis and an owned repair before wider readiness claims.
+  Verification: PASS all six public native adapters:6 accepts,7 rejects,12 exact same-engine accepted parses each. Original grammar/oracle/adapters unchanged; JSON kinds and Unicode scalar spans exact. Published locked offline Rust build passes. Ledger and checkpoint retain typed/Display and recovery limitations.
+  Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.1 - verify native nesting readiness`.
+
+### `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.1` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Existing Perl `LinkedSpec::Get`/fresh emitted proof covers the nesting fixture, but a cross-backend claim requires running the same authored oracle through public loaders. This leaf fills that evidence gap without changing runtime behavior.
+- [x] **ROOT CAUSE (WHY + WHERE)** — WHY: neutral feature inventories do not establish composed grammar correctness across implementations. WHERE: the six public text adapters under `examples/integration/` expose compile-once/native execution and their documented error projections; `tests/language-readiness/nested-tree/verify_native.py` now checks the exact fixture through them.
+- [x] **FIX** — Add a bounded repeatable native verifier with exact JSON-kind/span comparison, forward/reverse accepted execution, exact rejected outcomes and unchanged source/product hashes. The grammar and all original expectations remain intact.
+- [x] **ADDRESSED (verified)** — All six runtime invocations PASS: six accepted cases, seven rejected cases and twelve accepted parses per engine. No rejected value is emitted. The ledger and checkpoint identify each public route, command and protected source/product hash.
+- [x] **NO REGRESSION** — Published locked offline Rust integration build succeeds; all six existing adapters execute unmodified. `git diff --exit-code HEAD -- tests/language-readiness/nested-tree/grammar.spec tests/language-readiness/nested-tree/cases.json examples/integration` passes. No runtime changes require Phase0 in this evidence-only leaf; book, memory/history/Knowledge, doctrines and diff hygiene govern landing.
+- [x] **LOCKSTEP** — The book's bounded grammar section reports exact six-runtime native coverage and honest carrier/recovery limits, with repeatable commands. CHANGES, DEVELOPMENT_NOTES, MEMORY, live status, roadmaps, task frontier, ledger and Knowledge Map route remaining work to .1.1.3.1.2.2. No standard-format support or broad campaign admission is claimed.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2`
+  Status: `pending`
+  Goal: Verify supported serialized/reconstructed/generated/emitted nested-tree routes, same-engine recovery after typed rejection, readiness descriptors and prefix/gap/span mutation sensitivity.
+  Dependencies: `.1.1.3.1.2.1`
+  Acceptance: Split backend-sized children before implementation; retain the same authored oracles and honest carrier coverage. No blanket proof from native results.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.3`
+  Status: `pending`
+  Goal: Reconcile nested-tree readiness evidence, authoring costs and limitations, and close its parents through canonical milestone proof.
+  Dependencies: `.1.1.3.1.2.2`
+  Acceptance: Source-located native/carrier/mutation ledger and book agree; canonical receipt governs closure before context-dependent objective .1.1.3.2.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2`
   Status: `pending`
@@ -396,7 +430,7 @@ used by ordinary `.spec` syntax on every backend.
 | 3 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.2` | `done` | Other five areas mapped; seven neutral tools and 44 path/consumer checks pass. |
 | 4 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.1` | `done` | Typed constructor values and native/fresh emitted spans verified; complete Phase0 1033/1033. |
 | 5 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.6` | `done` | Generic flat bound/computed values, capture compatibility, native/emitted164 and complete Phase01033 verified. |
-| 6 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2` | `pending` | Resume remaining nesting routes and mutations after .1.1.6. |
+| 6 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.1` | `done` | Exact native public-loader6/7/12 on six runtimes; carrier/mutation .1.1.3.1.2.2 follows. |
 
 ## Decisions
 
@@ -429,6 +463,8 @@ used by ordinary `.spec` syntax on every backend.
 - None for `.1.1`. The September27 clean prioritization supersedes the earlier callable-first schedule. Format implementation and the optional frontend remain gated by their own prerequisites.
 
 ## Verification Log
+
+September27 `.1.1.3.1.2.1`: native public-loader6/7/12 passes on all six runtimes; unchanged authored source/oracles, exact JSON kinds/spans and protected hashes verified. See its checkpoint and nested-tree-native ledger.
 
 September27 `.1.1.6`: baseline RED31/164; candidate native/emitted164, focused120, Phase01033 and exact rendered LF/CRLF example pass. Its checkpoint preserves commands, source/log hashes and excluded interrupted evidence.
 
