@@ -1,10 +1,10 @@
 # MEMORY
 
-- activation_commit: `cdae1d2d0a5fd16afc97fad90619cc05b6c18c2a` — clean activation base for exact lossless segmentation.
-- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.2 - verify lossless Perl segmentation`.
-- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.3` (pending) — public staged child composition.
-- next_action: Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.3 to compose the verified lossless parent with a precompiled child .spec under caller-frozen staged authority.
-- in_flight_uncommitted: none.
+- activation_commit: `81ee666f6e03422338d0b002bebe6e6bed94787c` — clean activation base for public staged child composition.
+- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.3 - verify actual Perl child composition`.
+- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4` (pending) — equivalent backend composition proof.
+- next_action: Split .1.1.3.3.4 into backend-sized leaves, review their existing staged defect owners, and activate Rust proof from the clean commit.
+- in_flight_uncommitted: none; this committed pointer is the intended clean handoff.
 - blockers: bounded nesting/context proof reconciled; lossless probes and core-gap selection remain; .1.1.5 owns stale capability prose and startup .38/.40 recognition defects remain queued. ARCHOGEN owns downstream acceptance; named-argument and format proposals stay parked.
   Wrapper startup .7 remains open; recovery/purge stay prohibited. No interrupted Phase0 run counts as proof.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the

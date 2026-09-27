@@ -12,6 +12,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-09-27 — Actual child grammars preserve recognition and source authority separately
+
+The staged parent supplies entry_group(0), not reconstructed text. A frozen registry invokes a precompiled child .spec and rebases the child's own span; all recognition and semantic construction stay in that grammar. For α[12]🙂, the child sees12 at local[0,2), mapping to original[2,4), while the parent's item stays[1,5). Strict entry/end guards reject skipped prefixes and trailing junk. Four carrier pairs agree on complete normalized results, sidecars and accounting. Three mutants separately falsify child recognition, span correctness and request bounds. These small resource controls do not close recursive ceilings or conflicting stitch-target preparation.
+
 ## 2026-09-27 — Lossless extraction composes entry preservation and loop gaps
 
 The public wrapper keeps original input but may advance past initial blank/comment lines. The grammar explicitly retains that entry_prefix before its invocation-owned gaps. Exact classification complements independent source slicing and reconstruction: excluding zero from the token regex still reconstructs [0] while misclassifying it. Generated-source diagnosis exposes a separate book error: explicit OR terminates through EX, so an LX finalizer does not publish the intended array. The corrected default-loop fence is now executed from book source on both carriers, with its former spelling kept as a falsification control.

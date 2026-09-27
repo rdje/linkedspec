@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-09-27 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.3: real child composition in Perl
+
+Preserve the original lossless oracle through four native/emitted parent-child pairs with an actual precompiled child grammar. Exact child inputs, local/rebased spans, typed rejection recovery, authority denials, fresh accounting and inert no-seed markers pass. Four strict accepted child ASTs, fifteen rejections and three mutations distinguish recognition from authority plumbing. Readiness252, direct-dependent817, neutral staged123/129 and both exact rendered grammar includes pass. No production runtime changed; backend-sized proof follows under .3.4.
+
 ## 2026-09-27 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.2: exact lossless Perl segmentation
 
 Thirteen authored cases preserve every scalar through native/fresh emitted Perl, including Unicode, CRLF, empty/adjacent gaps and public-entry-skipped prefixes. Four extraction mutants separate selection, retention and spans. Fix the published List::OR/LX example to default List:: and lock its exact fence plus old-mode control. Readiness537, direct-dependent137, neutral gap/staged and exact rendered source pass. No runtime implementation changed; actual staged children remain next.

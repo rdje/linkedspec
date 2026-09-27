@@ -40,8 +40,8 @@ establish a different, explicitly accepted mechanism. Merely adding alternate sy
 
 The owning task is `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1`; its first inventory records existing contracts and exact
 backend consumers. The state/control/result inventory is also recorded. Bounded nesting is reconciled; context-name carrier proof
-is described below. Perl lossless segmentation is also verified below; child composition and its other backend
-routes remain pending before gap selection.
+is described below. Perl lossless segmentation and public staged child composition are also verified below;
+their other backend routes remain pending before gap selection.
 The format program's `.1` readiness gate remains pending. The original catalog and parked language extension retain
 all their conformance, Unicode, diagnostics, performance and backend obligations.
 
@@ -50,12 +50,12 @@ extraction grammar can preserve malformed candidates as gap text; preserving all
 the input is a valid document. Readiness proof therefore compares item/gap classification, scalar spans and exact
 reconstruction separately.
 
-Child composition will use the existing public exact `parse_job(...)` assignment on source-bound item text.
+Child composition uses the existing public exact `parse_job(...)` assignment on source-bound item text.
 The caller supplies an already-compiled child grammar and frozen authority; the child grammar performs recognition.
 The annotation cannot use `gap_text()`, copied strings or an arbitrary span as its text operand. The private
-`dispatch_span(...)` intrinsic has a separate authority contract and is not a public helper. The planned proof
-must retain original item text beside child results and test child rejection, source provenance and unauthorized
-identity selection. Executable composition is still pending; current neutral checks alone do not establish it.
+`dispatch_span(...)` intrinsic has a separate authority contract and is not a public helper. The Perl proof below
+retains original item text beside child results and tests child rejection, source provenance and unauthorized
+identity selection. Equivalent backend composition remains separate work.
 
 The state inventory distinguishes three existing forms that a grammar author can compose:
 
@@ -379,8 +379,53 @@ does not preserve this program's result construction.
 The thirteen authored cases pass through native Perl and independently loaded emitted Perl source. They compare
 exact records and scalar slices, reconstruct the original input, repeat calls on retained parsers and mutate returned
 gap data before another call. Deliberate changes to item selection, tail retention, item spans and entry-prefix
-retention are detected. This is a bounded Perl segmentation result; child parsing and equivalent backend carrier
-proof are still separate work.
+retention are detected. Equivalent backend carrier proof remains separate work.
+
+### An actual bounded child grammar
+
+The staged parent keeps the same segmentation rules and annotates each recognized item. Its source-bound
+`entry_group(0)` supplies only the digits inside the brackets:
+
+```text
+{{#include ../../../../tests/language-readiness/lossless-child/parent.spec}}
+```
+
+The caller prepares a frozen registry entry named `integer` with an already-compiled `Number` parser. The child
+accepts canonical unsigned decimal text, so `0` and `12` succeed while `00`, whitespace and trailing text fail:
+
+```text
+{{#include ../../../../tests/language-readiness/lossless-child/child.spec}}
+```
+
+The explicit start/end guards make the bounded child strict, including when public entry would skip a leading
+blank or comment line. Its result preserves a textual lexeme; it does not convert that lexeme to a numeric value.
+The registry adapter passes the authorized text to this parser and rebases the returned local span through the
+dispatch context. Recognition and semantic result construction stay in the child `.spec`.
+
+For `α[12]🙂`, the child receives exactly `12`. Its local span is `[0, 2)`; rebasing gives `[2, 4)` in the original
+decoded input with `entry_group` provenance. The parent's item still has text `[12]` and span `[1, 5)`. The consumed
+`child` field retains `12`, and the `parsed` sibling contains the child AST, its local span and rebased `source_span`.
+Prefix and tail are unchanged, so concatenating every original segment's `text` still gives `α[12]🙂`.
+
+The same retained parent rejects `[12][00][7]` after calling children `12` and `00`; the third child does not run,
+and no partial parent AST is returned. A subsequent `[8]` succeeds with fresh invocation accounting. An invocation
+without a staged seed returns an inert marker. Missing identity, unapproved top rule and exhausted steps fail
+before the first child call; a one-call limit rejects the second job after one completed call.
+
+Repeat the proof with:
+
+```sh
+bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/lossless_child_readiness.t
+```
+
+It covers native/native, both native/emitted combinations, and emitted/emitted in a fresh interpreter that never
+loads the compiler. Every route preserves the thirteen original segmentation cases twice, exact child requests,
+sidecars, result detachment and rejection recovery. Independent child cases and three grammar mutations detect
+permissive leading-zero recognition, wrong local/rebased spans and delimiter-inclusive child requests.
+
+This finite composition proves selected step/call denials, not recursive resource safety, every diagnostic/result
+ceiling or conflicting stitch-target preparation. Distinct item objects avoid the separately tracked Perl/Rust
+destination-conflict defect. Other backend carriers and whole-format conformance remain outside this result.
 
 
 ## Approved and parked: language coverage and authoring difficulty

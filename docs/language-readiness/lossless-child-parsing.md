@@ -1,8 +1,8 @@
 # Lossless segmentation and bounded child parsing
 
 Owner: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3`. Authority review on 2026-09-27 from
-clean `ca197a38c269cfeb89341505db83e395ebf6f308`. Perl segmentation is now verified under `.3.2`;
-staged child composition and other backend routes remain pending.
+clean `ca197a38c269cfeb89341505db83e395ebf6f308`. Perl segmentation is verified under `.3.2` and
+public staged child composition under `.3.3`; other backend routes remain pending.
 
 ## What this objective must establish
 
@@ -119,3 +119,36 @@ bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/inter_match_gap_c
 The readiness run passes 537 top-level tests, including all pre-existing nesting/context/entry controls. Exact
 commands, source identities and log digests belong to the `.3.2` checkpoint. `parse_job`, child recognition,
 cross-backend segmentation, resource ceilings and whole-format validation are not proved by this result.
+
+## Perl actual-child composition evidence — .3.3
+
+The 27-line parent and 21-line child under `tests/language-readiness/lossless-child/` compose the existing
+segmentation grammar with exact `parse_job(entry_group(0), hash(...))` assignment. `return_descriptor` confirms
+one dedicated portable staged node without raw-host or unresolved-helper dependencies. The child constructs an
+integer-lexeme AST and local span itself. The registry callback only invokes that precompiled parser and uses
+the authorized context to rebase its span; it does not recognize digits or manufacture a semantic answer.
+
+`t/lossless_child_readiness.t` runs four carrier pairs: native/native, native parent/emitted child, emitted
+parent/native child, and emitted/emitted in a fresh process with no compiler loaded. Each pair repeats the original
+thirteen cases twice and compares exact original segment records after removing the child annotation. Separate
+assertions check reconstruction, ordered bounded requests, local/global spans, resolved identity, sidecar paths,
+fresh invocation caches, selected call accounting and detached returned results. Complete normalized observations
+are equal across all four pairs, including typed failures and resource records.
+
+The child corpus pins four exact accepted ASTs and fifteen typed status1 rejections. All four routes detect three
+mutations: accepting `[00]` through an overly broad child regex, shifting local/rebased spans while preserving
+recognition, and passing `[12]` rather than `12`. `[12][00][7]` calls two children and publishes no partial parent;
+the same parser/options then accept `[8]`. Missing identity, forbidden top and exhausted steps execute zero children;
+the one-call control executes one. No seed produces an inert marker. These are individual controls, not a claim
+about all authority or resource boundaries.
+
+```sh
+bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/lossless_child_readiness.t
+bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/nested_tree_readiness.t t/staged_ast_enrichment_perl_contract.t t/inter_match_gap_capture_perl_contract.t t/generated_source_contract.t
+```
+
+The new readiness consumer and `.3.3` checkpoint own the measured results and exact source/log hashes. The book
+includes both complete grammars from their tested sources. No runtime implementation or public authority changes.
+The explicit child guards, immutable caller registry and host span projection are current authoring costs. This
+finite composition neither tests arbitrary recursion nor closes startup `.37`, `.73` or `.75`; `.3.4` must check
+each backend's existing defect cards before claiming equivalent readiness.

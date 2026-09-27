@@ -1,0 +1,72 @@
+{
+  "owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.3",
+  "activation_commit": "81ee666f6e03422338d0b002bebe6e6bed94787c",
+  "scope": "Bounded Perl public staged actual-child composition; no production behavior, other-runtime or whole-format claim.",
+  "source_hashes": {
+    "tests/language-readiness/lossless-child/parent.spec": "8b19299a5d3715cba7f44dac266954e8b34497920a308f956f6e35b286ae6435",
+    "tests/language-readiness/lossless-child/child.spec": "34c5f109d401f83fa600a225682599fe924957fdbf45ad2136f55450248badd9",
+    "tests/language-readiness/lossless-child/cases.json": "2589ef997c978ea9fa1e80f886106df7235839d6a89439b88ece328d58e3b3c7",
+    "tests/language-readiness/lossless-segments/cases.json": "fd4fe58d6bb0efa7bcb609b863c3d9a2238bb5c62fa9a1814a143e04416bd89c",
+    "t/lossless_child_readiness.t": "3185033387def9d5d968ed45dfcec22d5fd9d2b9171347bd7575cb7f9cbc649f",
+    "t/nested_tree_readiness.t": "07b90b1b5d2c9b70073a4842b381c5798d785e421949c93a52b6b48b6c72d6ce",
+    "t/staged_ast_enrichment_perl_contract.t": "1d86d958fbe159411b8e744522a58bebea66f299f253e2e013e989ba889360e5",
+    "t/inter_match_gap_capture_perl_contract.t": "4604ccc0cf68949146a3778ea5627d4a470fdb3925f4b5f1114a2cbe5eb90e52",
+    "t/generated_source_contract.t": "4f4620c2d605d62ff3f6afd65930452a0e6fb74dc5f7e634d2aaa6da2ef6168a",
+    "docs/linkedspec-book/src/architecture/structured-format-program.md": "bd8006a936fa2c947be625fb2c581e69c2e49792272a61f6990b0136546b7fd7",
+    "capability_conformance/staged_ast_enrichment_contract.json": "578cd031fed01bb8d968a2b536e0d67430317c617a8296edb6c1beb5031bd882",
+    "perl/LinkedSpec/StagedASTEnrichment.pm": "6a69d39e1d9de7b849ea429e532232d61f112755cf9b87ba2d16e1291e603f53",
+    "perl/LinkedSpec/StagedASTEnrichmentRuntime.pm": "7d01e18c88ef9de45bf9049a2f3607800a4014aba8a1b4e8ad3fbc99cfac27b3",
+    "perl/LinkedSpec/StagedParseJob.pm": "c9ecca71a9e4a79c48ca94d3569be2ff4560443363cf594d70269f060daf2407"
+  },
+  "checks": [
+    {
+      "command": "bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/lossless_child_readiness.t",
+      "result": "PASS 252 top-level tests; four carrier pairs; original thirteen cases twice; child four exact accepts/fifteen typed rejects; three grammar mutants; exact requests, local/rebased spans, sidecars, detachment, authority denials, recovery and selected accounting"
+    },
+    {
+      "command": "bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/nested_tree_readiness.t t/staged_ast_enrichment_perl_contract.t t/inter_match_gap_capture_perl_contract.t t/generated_source_contract.t",
+      "result": "PASS 817 tests"
+    },
+    {
+      "command": "bash tools/run_python_project_data.sh tools/check_staged_ast_enrichment_contract.py",
+      "result": "PASS 9 rollout legs;123 contract/129 public mutations"
+    },
+    {
+      "command": "perl -c -Iperl t/lossless_child_readiness.t",
+      "result": "syntax OK"
+    },
+    {
+      "command": "bash tools/run_mdbook_local.sh",
+      "result": "PASS; both rendered grammar blocks equal their tested source exactly, once each"
+    }
+  ],
+  "book_source_assertion": {
+    "html": "docs/linkedspec-book/book/architecture/structured-format-program.html",
+    "method": "Python html.parser.HTMLParser collects the decoded text in each pre element; require blocks.count(Path(source).read_text()) == 1 for each source.",
+    "sources": [
+      "tests/language-readiness/lossless-child/parent.spec",
+      "tests/language-readiness/lossless-child/child.spec"
+    ]
+  },
+  "logs": {
+    ".linkedspec-data/scratch/lossless333/readiness-final.log": {
+      "sha256": "9ffb9f6b2127b2a50868aa02ff3d6c9ce482595ebe48fc80c9e5e28c2d7f802b"
+    },
+    ".linkedspec-data/scratch/lossless333/dependents.log": {
+      "sha256": "6fa3774767fcc080598e5b5d2e1ec3b18dfb73ee4da8f0ad0ac46d8405be39b9"
+    },
+    ".linkedspec-data/scratch/lossless333/staged-neutral.log": {
+      "sha256": "1a7f7a1b01c6865f08350276c188460f729f1dc6f30b05d25ddf904b25bbdf21"
+    },
+    ".linkedspec-data/scratch/lossless333/mdbook.log": {
+      "sha256": "411ebed740c447e36de82f71f6c24d4bd305c1986b3b40d0bf90f95c5dfbb78b"
+    }
+  },
+  "limits": [
+    "Other backend carrier proof belongs to .3.4; canonical reconciliation to .3.5.",
+    "Step exhaustion and max_calls1 are selected finite controls, not all result/diagnostic ceilings or recursive safety.",
+    "Distinct item objects do not close the known Perl/Rust destination conflict under startup .73.",
+    "Child returns textual integer lexemes, not numeric conversion.",
+    "No-seed behavior is an inert declaration, not automatic registry loading."
+  ]
+}

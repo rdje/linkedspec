@@ -654,10 +654,25 @@ used by ordinary `.spec` syntax on every backend.
 - [x] **LOCKSTEP** — Canonical fixture, lossless ledger, book include/example correction, Knowledge, checkpoints, roadmap/current pointers, cleanup and bounded history carry the same scope. Staged children and other backend routes remain separately owned future work under .3.3/.3.4.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.3`
-  Status: `pending`
+  Status: `done`
   Goal: Compose public parse_job markers with the lossless parent and an actual precompiled child .spec in Perl.
   Dependencies: `.1.1.3.3.2`
+  Activation: Clean 81ee666f6e03422338d0b002bebe6e6bed94787c; segmentation leaf committed, all nine doctrines and pointer hook pass, brief empty and no outstanding job.
+  Verification tier: `focused`
+  Focused checks: LinkedSpec::Get/return_descriptor and emitted source for parent/actual child; original thirteen-case segmentation oracle after enrichment; exact child requests and local/global spans, no-seed and authority denials, typed child rejection/recovery and bounded-call controls; native/fresh emitted parents and children; staged/gap/readiness direct dependents, exact book source/render, Knowledge/memory/history/doctrines and git diff --check.
+  Canonical trigger: none for a bounded composition fixture and consumer. Any implementation/authority-contract defect receives a separately owned repair; final .3.5 remains canonical.
   Acceptance: The host supplies only precompiled authority and bounded request plumbing; child .spec owns recognition and result construction. Prove exact selected child text, Unicode local/global provenance, parent reconstruction after enrichment, child rejection and recovery, missing/unapproved authority, and no implicit loading. Cover native and independently emitted parent/child routes. Determine whether any known staged/progressive defect is on the selected path before claiming bounds; split necessary repairs under their existing owners. Source-bound parse_job operands remain exactly the admitted forms, with no invented gap_text/Span public operand.
+  Verification: Readiness252 and direct-dependent817 PASS; neutral staged123/129 PASS; both rendered grammar includes equal tested source; syntax, Knowledge/memory/history and registered doctrines govern landing. Exact inputs/logs are bound in docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.3-verification.json.
+  Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.3 - verify actual Perl child composition`.
+
+### `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.3` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — The segmentation-only Get result preserves text but supplies no real child recognition. Native Get and fresh emitted parent/child runs now consume the original thirteen-case oracle twice and compare exact child requests/results; three controlled grammar mutations establish independent failing boundaries.
+- [x] **ROOT CAUSE (WHY + WHERE)** — LinkedSpec::Get return_descriptor for Item records one STAGED_PARSE_JOB_MARKER with portable ActionIR and no raw/unresolved dependency. The child Number/Digits rules own recognition and AST construction; caller authority alone invokes that parser and rebases its returned local span. Parent source-bound group selection excludes neighboring delimiters.
+- [x] **FIX** — Add portable parent/child fixtures and four strict accepted/fifteen rejected child controls; compare native/native, both mixed pairs and fresh emitted/emitted without a loaded compiler. Preserve exact original segment records after annotation and pin local/global spans, sidecars, authority denials, inert no-seed behavior, bounded call accounting, rejection recovery and detachment.
+- [x] **ADDRESSED (verified)** — Readiness252 PASS includes three falsification controls per pair: overly broad child acceptance of00, wrong local/rebased span and delimiter-inclusive request. Four carrier observations match completely. Child failure executes12 then00, never7, publishes no partial AST and recovers on8. Missing identity/top/steps execute zero callbacks; one-call exhaustion executes one.
+- [x] **NO REGRESSION** — All original nesting/context/entry/segmentation controls and staged/gap/generated-source direct dependents PASS817; neutral staged check PASS123 contract/129 public mutations; Perl syntax clean. No production runtime or authority contract changes; ADR0073 focused scope does not claim new whole-backend or full Phase0 execution.
+- [x] **LOCKSTEP** — Actual tested grammars are exact rendered book includes. Canonical lossless ledger, Knowledge, checkpoint, task/frontier, roadmaps, bounded live/history and MEMORY agree. Other backend carriers and canonical reconciliation remain separately owned under .3.4/.3.5; existing startup resource/stitch owners stay open.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4`
   Status: `pending`
@@ -884,7 +899,7 @@ used by ordinary `.spec` syntax on every backend.
 | 14 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.3` | `done` | Bounded nesting evidence/authoring limits reconciled; exact canonical receipt governs closeout. |
 | 15 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.1` | `done` | Perl native/fresh emitted context-name proof:11/17 cases,90 calls and34 recoveries per route. |
 | 16 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.2` | `done` | Context11/17/22 and original-default6/7/12 pass all six native routes. |
-| 17 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.3` | `pending` | Compose an actual precompiled child grammar under public staged authority. |
+| 17 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4` | `pending` | Split equivalent backend carrier proof and activate Rust after existing defect review. |
 
 ## Decisions
 
@@ -918,6 +933,8 @@ used by ordinary `.spec` syntax on every backend.
 
 ## Verification Log
 
+September27 `.1.1.3.3.3`: four parent/child carrier pairs, strict child cases and three mutants pass252; direct-dependent817, neutral staged123/129 and exact rendered source pass. Actual child recognition stays in .spec; selected call/step bounds do not close recursive or conflicting-target defects.
+
 September27 `.1.1.3.3.2`: native/fresh emitted readiness537, direct-dependent137, neutral gap/staged, exact book source and independent13-case/39-segment scalar reconstruction pass. Published OR/LX defect is corrected and permanently reproduced by an exact old-mode mutant. Child composition remains next.
 
 September27 `.1.1.3.3.1`: Lossless child authority review selects public gap capture and exact staged parse_job assignment, keeps private dispatch_span separate, and defines segmentation, real-child composition, backend carrier and canonical closeout slices. Four existing neutral checkers, 83 contract/checker/consumer paths, eight ledger references and rendered scope assertions pass. No new runtime composition is claimed; .1.1.3.3.2 is next.
@@ -946,6 +963,8 @@ September27 `.1.1.1`: seven neutral/structural checks, 34 ledger source-path/con
 
 ## Commit Log
 
+- `.1.1.3.3.3`: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.3 - verify actual Perl child composition`.
+
 - `.1.1.3.3.2`: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.2 - verify lossless Perl segmentation`.
 
 - `.1.1.3.3.1`: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.1 - scope lossless child readiness proof`.
@@ -955,6 +974,8 @@ September27 `.1.1.1`: seven neutral/structural checks, 34 ledger source-path/con
 | `.0` | `SPEC-LANGUAGE-SELF-CONTAINMENT.0 - ratify expressive spec self-containment` | Direction capture only; no parser/runtime behavior. |
 
 ## Changelog
+
+- `2026-09-27`: Complete actual Perl child composition under .3.3; backend-sized equivalent proof .3.4 follows.
 
 - `2026-09-27`: Complete Perl lossless segmentation and published default-loop correction under .3.2; child composition .3.3 follows.
 
