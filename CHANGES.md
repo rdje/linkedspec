@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-09-28 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.2: six Dart lossless/child carriers
+
+Verify unchanged lossless/child grammars and JSON oracles on six matched Dart routes. Compare returned ASTs and detached outcome records, exact source/request bounds, provenance, failures, selected accounting and seven mutants. Four pairs retain engines; public v2/emitted pairs prove per-call isolation. Reuse the same allocation owner, strictly analyze the checker/producer and ten emitted modules in a fresh package, then require exact execution completion. Focused2/selected88, fatal analysis, storage25 owners/47 packages, neutral123/129 and book proof pass. No production or dependency changes; Julia follows.
+
 ## 2026-09-27 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.1: six Rust lossless/child carriers
 
 Extend the existing Rust readiness harness with exact segmentation and actual precompiled child checks through six matched native/reconstructed/generated/serialized/emitted pairs. Reuse the original .spec/JSON oracles and existing scratch allocator/cache. Four retained pairs prove rejection recovery; serialized/emitted pairs prove per-call isolation. Child4/15 and seven mutants cover recognition, preservation, coordinates and bounded inputs. Focused2 outer/3 emitted and full readiness6 plus gap1/staged1 pass; no production or dependency changes. Storage/neutral/book evidence and final doctrine checks belong to the leaf checkpoint; Dart follows.

@@ -12,6 +12,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-09-28 — Dart staged AST and outcome sink need independent assertions
+
+Dart returns the enriched AST directly while its seed outcome sink receives detached AST/sidecars/diagnostics/cache/resources. The new readiness checker verifies both outputs, mutates a returned child and the raw sink-exposed source span, then repeats the original oracle on the retained parser. Five in-process pairs agree on complete successful records; a sixth emitted pair runs the same independent checks. Shared checker and carrier producer are analyzed from unchanged copies inside the fresh package, alongside ten emitted modules, so physical paths outside the main package do not cause false unresolved-import errors. The existing test dependency is available offline. This establishes bounded composition, not malformed-provenance validation, diagnostic-byte safety, extreme arithmetic or the whole-package SDK gate.
+
 ## 2026-09-27 — Rust actual-child carriers retain the same authoring oracle
 
 A shared checker now verifies original segment records, independent scalar slices and reconstruction before and after child enrichment. Each precompiled child carrier constructs its own textual integer AST; the host only prepares frozen authority and rebases the returned span. Native/reconstructed engines each supply native and generated execution, with serialized and fresh emitted entries completing six pairs. Only the first four retain engines. Complete successful records match across the five in-process pairs; the emitted pair runs the same oracle in three child tests. Existing allocation/cache owners remain unchanged and all three readiness emitted jobs run together. Staged wrapper codes remain exact without claiming Perl/Rust error-object identity or closing extreme-counter/returned-marker/target-conflict defects.

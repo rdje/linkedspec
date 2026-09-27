@@ -5,6 +5,14 @@ import 'package:linkedspec_dart/linkedspec_dart.dart';
 import 'package:test/test.dart';
 
 import '../../tests/language-readiness/nested-tree/dart_checks.dart' as checks;
+import '../../tests/language-readiness/lossless-child/dart_carriers.dart'
+    as lossless;
+
+Directory createReadinessWorkspace(Directory root) {
+  final scratch = Directory('${root.path}/.linkedspec-data/scratch')
+    ..createSync(recursive: true);
+  return scratch.createTempSync('nested-tree-dart-');
+}
 
 Map<String, String> variants(String source) {
   const prefix =
@@ -82,6 +90,7 @@ class ReadinessFixture {
 
 void main() {
   final root = Directory(Platform.environment['LINKEDSPEC_REPO_ROOT']!);
+  lossless.register(root, () => createReadinessWorkspace(root));
   for (final fixture in const [
     ReadinessFixture(
       name: 'nested-tree',
@@ -155,9 +164,7 @@ void registerFixture(Directory root, ReadinessFixture config) {
   );
 
   test('${config.name}: fresh emitted modules preserve mutation sensitivity', () async {
-    final scratch = Directory('${root.path}/.linkedspec-data/scratch')
-      ..createSync(recursive: true);
-    final child = scratch.createTempSync('nested-tree-dart-');
+    final child = createReadinessWorkspace(root);
     try {
       Directory('${child.path}/lib').createSync();
       Directory('${child.path}/bin').createSync();

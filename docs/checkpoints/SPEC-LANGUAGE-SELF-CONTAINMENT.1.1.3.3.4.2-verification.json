@@ -1,0 +1,84 @@
+{
+  "owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.2",
+  "activation_commit": "a05b336a33ce5643376ea3020ee93880c82b3943",
+  "scope": "Bounded six matched Dart carriers with actual child grammar and separate AST/outcome proof; no runtime, public contract or main dependency change.",
+  "source_hashes": {
+    "dart/test/nested_tree_readiness_test.dart": "97c1f5a58038840f8ae12e0dcd1c543db6a999f2a1e992868b980fef0bd4bb3c",
+    "tests/language-readiness/lossless-child/dart_carriers.dart": "e6a8b4d502aeb7b9152cb5bc22aade234772fba558bab15b25e3e0e65e40a7dd",
+    "tests/language-readiness/lossless-child/dart_checks.dart": "708d3c8d5ca9683185e26e099525df6198d2c775e5679dd221393edef7228f63",
+    "tests/language-readiness/nested-tree/dart_checks.dart": "5ae819cccaf0dc2cfb2a1753f5351148307cebc8797ff605fc4ba8c65c15df4a",
+    "tests/language-readiness/lossless-child/parent.spec": "8b19299a5d3715cba7f44dac266954e8b34497920a308f956f6e35b286ae6435",
+    "tests/language-readiness/lossless-child/child.spec": "34c5f109d401f83fa600a225682599fe924957fdbf45ad2136f55450248badd9",
+    "tests/language-readiness/lossless-child/cases.json": "2589ef997c978ea9fa1e80f886106df7235839d6a89439b88ece328d58e3b3c7",
+    "tests/language-readiness/lossless-segments/grammar.spec": "8f20d242b0f2ea0eee1d70b6f289cf96362cdf3b64ef4cbcc77f5631ffe3eb36",
+    "tests/language-readiness/lossless-segments/cases.json": "fd4fe58d6bb0efa7bcb609b863c3d9a2238bb5c62fa9a1814a143e04416bd89c",
+    "dart/test/staged_ast_enrichment_contract_test.dart": "b790a8b329d2f3b95607f2e26138202151575df5e02e837f998433e8da495f00",
+    "dart/test/inter_match_gap_capture_contract_test.dart": "b2b49d1abad130045ec8449bc8cd1c2a8d6012fddc1b7d45c4f29d7757636a94",
+    "dart/test/source_emitter_test.dart": "ebfa150e20c7767b056a5bfa12a8e76bbef7ba97958f709e8b2657ddbd22bdad",
+    "dart/test/sexpr_document_v1_test.dart": "d9f894bb807afbe04d22bd5bdcfe6e8c7e240cda6d03bb865b6e87ae1ee74fed",
+    "dart/lib/src/runtime/staged_ast_enrichment.dart": "d1c8de14ec76eacab1f237435e8f6e0c807e5849ed5a4dba10a79af0514d2f48",
+    "dart/lib/src/semantic/sha256.dart": "dbff7065039118bdf7b6d323a38b8377436742d1a5940aef18a908a863987c70",
+    "dart/pubspec.yaml": "5a116416db5b997aac698762cf57b4dba299f504ecc4ddf36ce416b75a0923b6",
+    "dart/pubspec.lock": "601c36466d20513d930c291c44143a801846349fda9ba13a8c6f63b15671a0c0",
+    "tools/test_dart_project_data_storage.sh": "a0366a7749aae0ca0154e39c3c8f1108053c1bd3a1ebc8a7f986bbbc2058ceff",
+    "capability_conformance/staged_ast_enrichment_contract.json": "578cd031fed01bb8d968a2b536e0d67430317c617a8296edb6c1beb5031bd882",
+    "docs/linkedspec-book/src/architecture/structured-format-program.md": "1c6de533ee391c2e897294bccf8eab8530b772cca49540fd82b814aee933634a"
+  },
+  "checks": [
+    {
+      "command": "cd dart && bash ../tools/run_dart_project_data.sh test --reporter expanded test/nested_tree_readiness_test.dart --name lossless",
+      "result": "PASS 2 tests; fresh package resolves existing dependencies offline, fatally analyzes unchanged producer/checker/utility copies plus ten emitted modules, and returns exact completion report"
+    },
+    {
+      "command": "cd dart && bash ../tools/run_dart_project_data.sh test --reporter expanded test/nested_tree_readiness_test.dart test/staged_ast_enrichment_contract_test.dart test/inter_match_gap_capture_contract_test.dart test/source_emitter_test.dart test/sexpr_document_v1_test.dart",
+      "result": "PASS 88 tests including all prior nesting/context/emitter/document controls"
+    },
+    {
+      "command": "cd dart && bash ../tools/run_dart_project_data.sh analyze --fatal-infos --fatal-warnings test/nested_tree_readiness_test.dart",
+      "result": "PASS no issues"
+    },
+    {
+      "command": "bash tools/test_dart_project_data_storage.sh",
+      "result": "PASS 25 owners,47 locked packages; generated workspaces and traces repository-local; focused storage tests17 pass"
+    },
+    {
+      "command": "bash tools/run_python_project_data.sh tools/check_staged_ast_enrichment_contract.py",
+      "result": "PASS 9 rollout legs;123 contract/129 public mutations"
+    },
+    {
+      "command": "bash tools/run_mdbook_local.sh",
+      "result": "PASS; parent and child grammar blocks match tested source exactly once each; Dart AST/outcome/reuse boundaries render"
+    }
+  ],
+  "logs": {
+    ".linkedspec-data/scratch/lossless3342/final.log": {
+      "sha256": "2c25e19e94904f18126cb148861510286a4968914717fda975b0c82351951988"
+    },
+    ".linkedspec-data/scratch/lossless3342/dependents-final.log": {
+      "sha256": "e2037c9d7a34923d78746ffd2093caaf2023d36924bf5518519df0cd6cee280a"
+    },
+    ".linkedspec-data/scratch/lossless3342/analyze-final.log": {
+      "sha256": "b8dd74b535dfea31f86c81e69876a7f3ca8787c07fc6e2c8d14b2277b996bfb3"
+    },
+    ".linkedspec-data/scratch/lossless3342/storage-final.log": {
+      "sha256": "cf475f6510fe07a06d49c439a210548f7621143fbd5058c4163f22fb114a1a81"
+    },
+    ".linkedspec-data/scratch/lossless3342/staged-neutral.log": {
+      "sha256": "1a7f7a1b01c6865f08350276c188460f729f1dc6f30b05d25ddf904b25bbdf21"
+    },
+    ".linkedspec-data/scratch/lossless3342/mdbook.log": {
+      "sha256": "397d80d6d1d185e1ead29af59e440162c717dccb5aa767a90ffb32cf83f3fe06"
+    },
+    ".linkedspec-data/scratch/lossless3342/book-source.log": {
+      "sha256": "7dd55848457fb529a8ba6ef5402b6f7c1cde92ccf6f03292ce2dbf00d3393571"
+    }
+  },
+  "limits": [
+    "Four retained pairs and two per-call pairs are distinct; no retained recovery claim for v2/emitted convenience entries.",
+    "Five in-process complete outcomes agree; fresh pair executes the same independent oracle without cross-process full-response equality.",
+    "DART-STARTUP-READING.2.17/.2.18/.2.19/.2.25 remain open.",
+    "Selected ordinary step/call denials are not all diagnostic/result ceilings or recursive safety.",
+    "No standard-format admission, new public helper or arbitrary gap/span dispatch."
+  ],
+  "analysis_context": "The fresh fixture includes the already-used test dev dependency so the carrier producer itself, copied unchanged, is analyzed alongside the checker, original JSON utility and ten emitted modules. Main project manifests and lockfiles are unchanged."
+}

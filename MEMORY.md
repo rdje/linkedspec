@@ -1,9 +1,9 @@
 # MEMORY
 
-- activation_commit: `e31c24c7f3c807a640337534c7019fb75908d216` — clean activation base for Rust lossless child proof.
-- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.1 - verify Rust lossless child carriers`.
-- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.2` (pending) — Dart lossless and child carriers.
-- next_action: Activate .1.1.3.3.4.2 from clean HEAD, review Dart staged provenance/resource obligations, and verify the unchanged lossless/actual-child oracles.
+- activation_commit: `a05b336a33ce5643376ea3020ee93880c82b3943` — clean activation base for Dart lossless child proof.
+- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.2 - verify Dart lossless child carriers`.
+- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.3` (pending) — Julia lossless and child carriers.
+- next_action: Activate .1.1.3.3.4.3 from clean HEAD, review Julia staged registry/diagnostic/isolation obligations, and verify unchanged lossless/actual-child oracles.
 - in_flight_uncommitted: none.
 - blockers: bounded nesting/context proof reconciled; lossless probes and core-gap selection remain; .1.1.5 owns stale capability prose and startup .38/.40 recognition defects remain queued. ARCHOGEN owns downstream acceptance; named-argument and format proposals stay parked.
   Wrapper startup .7 remains open; recovery/purge stay prohibited. No interrupted Phase0 run counts as proof.

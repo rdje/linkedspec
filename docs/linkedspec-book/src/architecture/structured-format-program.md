@@ -40,8 +40,8 @@ establish a different, explicitly accepted mechanism. Merely adding alternate sy
 
 The owning task is `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1`; its first inventory records existing contracts and exact
 backend consumers. The state/control/result inventory is also recorded. Bounded nesting is reconciled; context-name carrier proof
-is described below. Perl and Rust lossless segmentation and public staged child composition are also verified
-below; Dart, Julia and Lua carrier proof remains pending before gap selection.
+is described below. Perl, Rust and Dart lossless segmentation and public staged child composition are also verified
+below; Julia and Lua carrier proof remains pending before gap selection.
 The format program's `.1` readiness gate remains pending. The original catalog and parked language extension retain
 all their conformance, Unicode, diagnostics, performance and backend obligations.
 
@@ -55,7 +55,7 @@ The caller supplies an already-compiled child grammar and frozen authority; the 
 The annotation cannot use `gap_text()`, copied strings or an arbitrary span as its text operand. The private
 `dispatch_span(...)` intrinsic has a separate authority contract and is not a public helper. The Perl proof below
 retains original item text beside child results and tests child rejection, source provenance and unauthorized
-identity selection. Rust's equivalent proof is also described below; further backends remain separate work.
+identity selection. Rust and Dart's equivalent proof is also described below; further backends remain separate work.
 
 The state inventory distinguishes three existing forms that a grammar author can compose:
 
@@ -452,8 +452,28 @@ bash tools/run_cargo_local.sh test --locked --offline --manifest-path rust/Cargo
 
 Rust preserves exact staged failure codes through its execution error wrappers and typed status1 exits for the
 standalone child. This proof does not claim identical error objects across languages. It also leaves returned-marker
-validation, maximum-counter exhaustion and competing stitch targets with their existing repair owners. Dart, Julia,
-PUC Lua and LuaJIT remain the next carrier checks.
+validation, maximum-counter exhaustion and competing stitch targets with their existing repair owners.
+
+Dart verifies the same six matched routes using a `SpecFile` JSON roundtrip before recompilation for its
+reconstructed engines. Its staged entry returns the enriched AST directly; a caller-supplied outcome callback
+receives the detached AST, sidecars, diagnostics, cache and resource records. The readiness checks compare both
+outputs, including mutation of returned child data and exposed outcome data before another invocation. Failed
+children and authority denials publish no successful outcome.
+
+The original segment and child cases, seven mutations, exact staged codes and typed child exits all pass.
+The first four Dart pairs retain engines; v2 and emitted entries construct them per call. Five in-process pairs
+agree on complete successful outcome records. A fresh package contains all ten emitted modules, passes offline
+dependency preparation and fatal analysis, then must return the exact completion report after executing the same
+oracles. The shared checks run under that package's analysis context.
+
+```sh
+cd dart
+bash ../tools/run_dart_project_data.sh test --reporter expanded \
+  test/nested_tree_readiness_test.dart --name lossless
+```
+
+This does not close Dart's known malformed-provenance, diagnostic-byte or extreme-counter defects, nor its
+separate whole-package SDK compatibility gate. Julia, PUC Lua and LuaJIT remain the next carrier checks.
 
 
 ## Approved and parked: language coverage and authoring difficulty

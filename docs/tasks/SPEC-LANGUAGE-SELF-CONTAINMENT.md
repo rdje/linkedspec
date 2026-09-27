@@ -703,10 +703,27 @@ used by ordinary `.spec` syntax on every backend.
 - [x] **LOCKSTEP** — Shared test sources, ledger, book carrier/reuse table, Knowledge, checkpoint, task/frontier, roadmaps, MEMORY and bounded live/history agree. Dart, Julia and shared Lua retain explicit children. Startup .73/.74/.75/.78 obligations remain open; small direct plain-child controls do not close them.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.2`
-  Status: `pending`
+  Status: `done`
   Goal: Prove the same lossless and actual-child corpus through Dart native and supported reconstructed/generated/emitted carriers.
   Dependencies: `.1.1.3.3.4.1`
+  Activation: Clean a05b336a33ce5643376ea3020ee93880c82b3943; Rust leaf and all nine doctrines committed, brief empty, no outstanding job.
+  Verification tier: `focused`
+  Focused checks: Public Dart parser/compiler validation; six matched native/SpecFile reconstructed/generated/v2/fresh emitted parent-child carriers, unchanged original13 and child4/15 corpora, seven mutants, source slices/provenance, exact failure codes, selected budgets and retained/per-call distinction; detached outcome sink records; direct-dependent readiness/staged/gap/emitter tests; fatal main/fresh-package analysis, storage, neutral staged, exact book/render, Knowledge/memory/history/doctrines and git diff --check.
+  Canonical trigger: none for bounded fixture consumers reusing existing allocation. Split any required runtime/storage/contract repair before changing it; .3.5 remains canonical.
+  Existing obligations: DART-STARTUP-READING.2.17 diagnostic byte containment, .2.18 extreme call arithmetic and .2.19 malformed provenance types are read and remain open. Authored direct groups/plain child ASTs/small counters do not establish those adversarial boundaries; whole-package SDK gate .2.25 remains separate.
   Acceptance: Preserve the authored oracle, recognition/provenance/bounds mutants, exact denials and retained/per-call distinction. Review Dart staged provenance/resource defect cards before activation, use strict package analysis and existing storage owners, and split necessary repairs.
+
+  Verification: Focused2/selected88 PASS; fatal main/fresh-package analysis and exact ten-module completion PASS; storage25 owners/47 packages PASS; neutral staged123/129 and rendered original source/reuse limits PASS. Original .spec/JSON and production/dependency state stay unchanged. Checkpoint: docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.2-verification.json; registered doctrines govern landing.
+  Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.2 - verify Dart lossless child carriers`.
+
+### `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.2` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Perl Get/Rust proof did not establish Dart actual-child composition. Public parseSpecWithStagedUserFunctionDefinitions, validateSpec, compileSpec and fresh emitted modules now execute the unchanged thirteen-case segmentation/enrichment and child4/15 oracles across six matched pairs.
+- [x] **ROOT CAUSE (WHY + WHERE)** — The existing portable DSL and staged authority already support this bounded grammar. Dart returns an AST and exposes a separate detached outcome through StagedAstEnrichmentSeed.outcomeSink. Shared dart_checks.dart verifies both, while the actual Number/Digits child owns recognition/AST construction and host glue only supplies authority and rebaseSpan.
+- [x] **FIX** — Add shared six-pair checks, seven falsification controls, exact staged codes/typed exits, source slices and local/global spans, authority denials, selected budgets, no-seed markers and result/outcome mutation controls. Reuse the existing allocator through one same-file function; analyze unchanged checker/producer copies and ten emitted modules in valid package context.
+- [x] **ADDRESSED (verified)** — Focused2 and selected88 PASS; five in-process pairs agree on complete successful outcomes. The fresh package resolves offline, passes fatal analysis and returns the exact ten-module/13-case/child4/15/seven-mutation report. Four pairs retain engines and two use per-call engines; rejected parses expose no completed outcome.
+- [x] **NO REGRESSION** — Prior nesting/context, staged/gap, emitter and document tests PASS in selected88; fatal main-test analysis and storage25 owners/47 packages PASS; neutral123/129, original source/case equality, exact rendered book and whitespace PASS. No production/generated-format/authority or dependency change; whole-package SDK obligations stay separate.
+- [x] **LOCKSTEP** — Ledger, book, Knowledge, checkpoint, task/frontier, roadmaps, bounded live/history and MEMORY preserve exact scope. Julia/shared Lua remain owned; Dart .2.17/.2.18/.2.19/.2.25 remain open. No general resource or standard-format admission is claimed.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.3`
   Status: `pending`
@@ -939,7 +956,7 @@ used by ordinary `.spec` syntax on every backend.
 | 14 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.3` | `done` | Bounded nesting evidence/authoring limits reconciled; exact canonical receipt governs closeout. |
 | 15 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.1` | `done` | Perl native/fresh emitted context-name proof:11/17 cases,90 calls and34 recoveries per route. |
 | 16 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.2` | `done` | Context11/17/22 and original-default6/7/12 pass all six native routes. |
-| 17 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.2` | `pending` | Review Dart staged obligations, then run unchanged lossless and actual-child carrier oracles. |
+| 17 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.3` | `pending` | Review Julia staged obligations, then preserve unchanged lossless/child oracles on its supported carriers. |
 
 ## Decisions
 
@@ -973,6 +990,8 @@ used by ordinary `.spec` syntax on every backend.
 
 ## Verification Log
 
+September28 `.1.1.3.3.4.2`: Dart focused2/selected88, fatal main/fresh analysis, storage25 owners/47 packages, neutral123/129 and exact book PASS. Four retained/two per-call pairs preserve original13 and child4/15 with seven mutants, exact staged codes and detached AST/outcome assertions.
+
 September27 `.1.1.3.3.4.1`: Rust focused2 outer/3 emitted and combined readiness6/gap1/staged1 PASS; unchanged oracles, seven mutants, storage17/relocation, neutral123/129 and exact book PASS. Four retained pairs and two per-call pairs stay distinct; no production repair or broader resource claim.
 
 September27 `.1.1.3.3.3`: four parent/child carrier pairs, strict child cases and three mutants pass252; direct-dependent817, neutral staged123/129 and exact rendered source pass. Actual child recognition stays in .spec; selected call/step bounds do not close recursive or conflicting-target defects.
@@ -1005,6 +1024,8 @@ September27 `.1.1.1`: seven neutral/structural checks, 34 ledger source-path/con
 
 ## Commit Log
 
+- `.1.1.3.3.4.2`: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.2 - verify Dart lossless child carriers`.
+
 - `.1.1.3.3.4.1`: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.1 - verify Rust lossless child carriers`.
 
 - `.1.1.3.3.3`: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.3 - verify actual Perl child composition`.
@@ -1018,6 +1039,8 @@ September27 `.1.1.1`: seven neutral/structural checks, 34 ledger source-path/con
 | `.0` | `SPEC-LANGUAGE-SELF-CONTAINMENT.0 - ratify expressive spec self-containment` | Direction capture only; no parser/runtime behavior. |
 
 ## Changelog
+
+- `2026-09-28`: Complete six matched Dart lossless/actual-child carriers with strict package-context analysis; Julia .3.4.3 follows.
 
 - `2026-09-27`: Split .3.4 into Rust/Dart/Julia/shared Lua leaves and complete six matched Rust lossless/actual-child carriers; Dart .3.4.2 follows.
 

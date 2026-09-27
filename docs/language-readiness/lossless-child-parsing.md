@@ -2,8 +2,8 @@
 
 Owner: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3`. Authority review on 2026-09-27 from
 clean `ca197a38c269cfeb89341505db83e395ebf6f308`. Perl segmentation is verified under `.3.2` and
-public staged child composition under `.3.3`; Rust matched carriers are verified under `.3.4.1`.
-Dart, Julia and shared Lua routes remain pending.
+public staged child composition under `.3.3`; Rust matched carriers are verified under `.3.4.1` and Dart under `.3.4.2`.
+Julia and shared Lua routes remain pending.
 
 ## What this objective must establish
 
@@ -184,3 +184,36 @@ authority changed. Existing startup `.73` target reservation, `.74` returned-mar
 counter and `.78` older consumer path portability obligations remain separate; this corpus uses distinct targets,
 plain child ASTs and small counters. Dart `.3.4.2`, Julia `.3.4.3` and both Lua ABIs `.3.4.4` follow before canonical
 parent reconciliation `.3.5`.
+
+## Dart matched carriers — .3.4.2
+
+`dart/test/nested_tree_readiness_test.dart` registers the shared `dart_carriers.dart` consumer under the existing
+lossless-child fixture directory. The original `.spec` and JSON files remain exact. Compiled and `SpecFile`-JSON
+reconstructed engines each execute natively and through generated plans, followed by public v2 and fresh emitted
+entries. Four pairs retain engines; two create per-call engines. All run the thirteen original/enriched cases twice,
+child4/15, four segmentation mutants and three child mutants.
+
+Dart's public staged entry returns an AST; its outcome sink separately exposes the complete detached execution
+record. The consumer independently compares both, exact callback requests, scalar slices, local/global spans,
+sidecar identities/paths, fresh caches and selected resource counters. Returned child data and sink-exposed source
+spans are mutated before a subsequent exact success. A failure publishes neither an AST result nor a completed
+outcome. Exact staged codes survive the supported wrapper types; strict child rejection uses typed status1.
+
+Five in-process pairs compare complete successful outcome records. The fresh package copies the exact shared
+checker, carrier producer and original independent JSON utility into matching relative directories, analyzes them
+and all ten emitted modules
+with fatal infos/warnings, then must return the exact modules/corpus/mutation completion report. It resolves existing
+dependencies offline and reuses the current test allocator. The source helper outside the Dart package is analyzed
+through its main test import and the fresh package, respecting the known package-context requirement.
+
+```sh
+cd dart
+bash ../tools/run_dart_project_data.sh test --reporter expanded \
+  test/nested_tree_readiness_test.dart --name lossless
+```
+
+Focused2 and the full selected88-test readiness/staged/gap/emitter/document set pass. Main-test fatal analysis,
+fresh-package analysis/execution, unchanged-oracle verification and book rendering pass; `.3.4.2` binds the exact
+storage/neutral results and all source/log hashes. No runtime, generated format, authority or dependency changes.
+DART-STARTUP-READING `.2.17` diagnostic-byte, `.2.18` extreme arithmetic, `.2.19` malformed provenance and `.2.25`
+whole-package SDK obligations stay open. Authored direct spans and ordinary counters do not exercise those defects.
