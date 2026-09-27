@@ -12,6 +12,16 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-09-27 — Dart context proof uses explicit fixture settings and package-context analysis
+
+Parameterizing inventory, recovery case and span retains original nesting defaults while verifying exact
+context statuses1/2/3. RuntimeExitNow is mandatory; a returned null or unrelated exception cannot pass.
+Six routes each run90 calls/three mutants, with136 recoveries on four retained engines. Fresh emitted entry
+functions prove per-call isolation. Both real packages require offline resolution, fatal analysis, execution
+success and exact four-module reports; all62 readiness/emitter/document tests pass. Directly analyzing the
+shared helper outside a Dart package cannot resolve its package import. The copied helper passes fatal analysis
+inside both emitted packages, and the main test passes in its own package. No suppression or parser repair.
+
 ## 2026-09-27 — Typed Rust context outcomes and concurrent emitted test ownership
 
 Use Result<Value,i32> in the context checker: only public Exit variants supply a rejection status, so successful

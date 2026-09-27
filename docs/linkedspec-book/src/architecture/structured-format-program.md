@@ -39,7 +39,7 @@ For example, a grammar that tentatively builds an AST must separate recognition 
 establish a different, explicitly accepted mechanism. Merely adding alternate syntax would not solve that requirement.
 
 The owning task is `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1`; its first inventory records existing contracts and exact
-backend consumers. The state/control/result inventory is also recorded. Bounded nesting is reconciled; context-name Perl and Rust proof
+backend consumers. The state/control/result inventory is also recorded. Bounded nesting is reconciled; context-name Perl, Rust and Dart proof
 is described below, with remaining context carriers and lossless extraction still pending before gap selection.
 The format program's `.1` readiness gate remains pending. The original catalog and parked language extension retain
 all their conformance, Unicode, diagnostics, performance and backend obligations.
@@ -281,7 +281,17 @@ bash tools/run_cargo_local.sh test --locked --offline --manifest-path rust/Cargo
   -p linkedspec-runtime --test nested_tree_readiness -- --nocapture
 ```
 
-Dart, Julia and both Lua context-name carriers and retained-engine recovery remain separate work. These native results establish bounded composition of captures, lexical comparison and
+Dart also passes six routes: native and SpecFile-JSON reconstructed engines, both generated-plan variants,
+the public v2 entry and a fresh emitted module. Its four retained routes prove 136 immediate recoveries;
+per-call entries prove isolation. Each route runs the same 90 calls and three mutations. Fresh emitted
+packages must pass offline preparation, fatal analysis and actual execution with an exact four-module report.
+
+```sh
+cd dart
+bash ../tools/run_dart_project_data.sh test test/nested_tree_readiness_test.dart
+```
+
+Julia and both Lua context-name carriers and retained-engine recovery remain separate work. These native results establish bounded composition of captures, lexical comparison and
 recursive state; they do not establish a general format campaign, indentation handling, arbitrary-depth safety
 or speculative rollback.
 

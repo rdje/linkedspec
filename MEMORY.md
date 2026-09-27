@@ -1,11 +1,11 @@
 # MEMORY
 
-- activation_commit: `c4e1534da918ace02cc03aba28c021e581df54f0` — clean activation base for Rust context-name carriers.
-- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.3 - verify Rust closing-name carriers`.
-- active_work_unit: none — Rust context-name carrier proof complete.
-- next_action: Activate Dart context-name carrier proof using the unchanged shared oracles and existing managed emitted-package harness.
+- activation_commit: `2cf465ae780013af4153e4129b31ad9db227b7d1` — clean activation base for Dart context-name carriers.
+- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.4 - verify Dart closing-name carriers`.
+- active_work_unit: none — Dart context-name carrier proof complete.
+- next_action: Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.5 for Julia context-name carriers using unchanged oracles and the existing managed emitted harness.
 - in_flight_uncommitted: none.
-- blockers: all-six context-name native and Perl/Rust carrier proof complete; other carriers and lossless probes remain; .1.1.5 owns stale capability prose and startup .38/.40 recognition defects remain queued. ARCHOGEN owns downstream acceptance; named-argument and format proposals stay parked.
+- blockers: all-six context-name native and Perl/Rust/Dart carrier proof complete; other carriers and lossless probes remain; .1.1.5 owns stale capability prose and startup .38/.40 recognition defects remain queued. ARCHOGEN owns downstream acceptance; named-argument and format proposals stay parked.
   Wrapper startup .7 remains open; recovery/purge stay prohibited. No interrupted Phase0 run counts as proof.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
   active table; the task metadata doctrine inventories all consumers, permits arbitrary frontier-row rewrites,
@@ -52,8 +52,8 @@
   use exact staged canonical CI; task-tree/index, Knowledge Map, mdBook, and bounded live/history move in lockstep.
 - current_engineering_notes_capacity: ADR0122 admits 43 collection files /42 manifest lines /25410 manifest bytes; current40/39/23573 stay bounded.
   Notes segment4968 preserves123 lines/26553 bytes from cleanfd3e328d5; old archive rows/bytes remain exact.
-- current_change_history_capacity: ADR0122 admits47 collection files /46 manifest lines /26255 bytes; current43/42/23951 stay bounded.
-  Changes segment4970 preserves132 lines /27272 bytes from clean58a5ff936; prior history remains byte-exact.
+- current_change_history_capacity: ADR0122 admits47 collection files /46 manifest lines /26255 bytes; current44/43/24527 stay bounded.
+  Changes segment4969 preserves177 lines /35913 bytes from clean2cf465ae7; prior history remains byte-exact.
 - dependency_boundary: RGX public integration only; it owns PGEN. No internal inspection/analysis, patches, separate PGEN procedure or unrelated pin changes. September26 authorizes only reviewed f6e5acdc for LS-004.
   Normal documented builds remain authorized; retain caches. Startup .80.1-.4 may observe public behavior or track upstream repairs, not investigate dependency internals.
 - latest_bootstrap_read: ADR0123 targets 2–5 minute startup plus thorough task-specific reading. Separate audit remains 89/143 and .1.90. Document integration and .46/.47/.49/.86.1/.86.2 are verified; Perl .86.4.2.4 corrects the regex-type premise; .86.4.3 owns supported helper validation (verified); .86.4.6 verifies helper splitting; .86.4.7 verifies quoted subjects; .86.4.4.1 owns grouped-operand repair .86.4.8; .86.4.8.1 rejects incompatible lookahead and .86.4.8.2 verifies grouped repair; .86.4.4.2.1 fixes generated Trace and .86.4.4.2.2 closes bounded public recomposition; .87 owns four helper/grouping follow-ups. No downstream application acceptance claim.

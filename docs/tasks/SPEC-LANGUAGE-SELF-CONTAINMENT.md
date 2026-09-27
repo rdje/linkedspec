@@ -511,10 +511,30 @@ used by ordinary `.spec` syntax on every backend.
 - [x] **LOCKSTEP** — Context ledger, public book, Knowledge, checkpoint, task frontier, roadmap leads, MEMORY and live/bounded histories agree. Dart .1.1.3.2.4 follows; canonical context parent .7 and format admission remain separate.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.4`
-  Status: `pending`
+  Status: `done`
   Goal: Verify Dart context-name reconstructed/generated/v2/emitted routes, exact typed rejection/recovery and grammar mutations.
   Dependencies: `.1.1.3.2.3`
   Acceptance: Same authored oracles, explicit retained/per-call distinction and strict fresh emitted-package validation; keep known SDK issues separately owned.
+
+  Activation: Clean2cf465ae780013af4153e4129b31ad9db227b7d1 after Rust carrier commit; all nine doctrines/post-pointer pass, brief0 and clean tree.
+  Scope: Parameterize the existing Dart fixture/carrier harness and shared strict checker for context inventory, authored status and mutations; preserve nesting defaults and both original fixture pairs. Reuse the existing managed emitted package and stores. No production, lockfile, generated format or storage-policy change.
+  Verification tier: `focused`
+  Focused checks: Six context routes with90 calls/three mutations each and136 retained recoveries; original nesting routes; actual offline preparation/fatal analysis/fresh emitted execution and exact reports; emitter/document dependents; changed-file analysis/format, book, Knowledge, memory, histories, doctrines and diff hygiene.
+  Canonical trigger: None for bounded test/carrier proof; parent .1.1.3.2.7 owns canonical reconciliation. Known whole-package SDK deprecations remain separately owned by DART-STARTUP-READING.2.25.
+
+  Verification: PASS62 combined tests (four readiness plus58 emitter/document), including both real emitted packages with successful offline preparation/fatal analysis/execution and exact reports. Context90 calls/three mutants on six routes;136 retained recoveries. Original nesting40-call/default controls remain GREEN. Main-test fatal analysis and two-file formatting pass.
+  Analysis scope: Initial direct analysis of the shared helper outside a package cannot resolve its package import. The same copied helper passes fatal analysis in both fresh emitted packages; main-test analysis passes in its own package. No diagnostic suppression or production repair. Exact checkpoint: docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.4-verification.json.
+  History containment: Required CHANGES rollover at427 lines/59130 bytes archives177 clean-HEAD lines/35913 bytes as4969; reconstruction and all prior manifest rows remain exact. Current249 lines/23216 bytes after removing one live EOF blank separator for diff hygiene; reconstruction explicitly restores that separator. Immutable bytes and budgets unchanged.
+  Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.4 - verify Dart closing-name carriers`.
+
+### `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.4` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Dart public-native context proof lacked reconstructed/generated/fresh emitted typed status and rejection-recovery evidence. Existing readiness harness carried only the original nesting fixture.
+- [x] **ROOT CAUSE (WHY + WHERE)** — dart/test/nested_tree_readiness_test.dart and its shared strict checker hardcoded nesting inventory, status1, recovery case and span. Existing public engines already compose the context grammar; no production defect is observed.
+- [x] **FIX** — Parameterize authored fixture settings while preserving nesting defaults; add comparison/state/span context variants and exact authored statuses. Reuse managed emitted packages, strict metadata/plan checks and actual child completion.
+- [x] **ADDRESSED (verified)** — All62 combined tests pass. Each of six context routes executes90 calls and three mutants; four retained engines prove136 immediate recoveries. Both emitted packages pass offline setup, fatal analysis and execution with exact four-module reports.
+- [x] **NO REGRESSION** — Original nesting and58 emitter/document checks pass. Both grammar/oracle pairs and root lockfile stay exact; two-file format and package-context analysis pass. Helper analysis is verified in both real emitted packages; known whole-package SDK issues stay separately owned.
+- [x] **LOCKSTEP** — Book, context ledger, Knowledge, checkpoint, roadmap, task frontier, MEMORY, live status and bounded histories agree. Julia .1.1.3.2.5 follows; canonical parent .7 and broad format admission remain separate.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.5`
   Status: `pending`
@@ -753,7 +773,7 @@ used by ordinary `.spec` syntax on every backend.
 | 14 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.3` | `done` | Bounded nesting evidence/authoring limits reconciled; exact canonical receipt governs closeout. |
 | 15 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.1` | `done` | Perl native/fresh emitted context-name proof:11/17 cases,90 calls and34 recoveries per route. |
 | 16 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.2` | `done` | Context11/17/22 and original-default6/7/12 pass all six native routes. |
-| 17 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.4` | `pending` | Dart context-name reconstructed/generated/v2/emitted and typed recovery proof. |
+| 17 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.5` | `pending` | Julia context-name reconstructed/v2/emitted and typed recovery proof. |
 
 ## Decisions
 

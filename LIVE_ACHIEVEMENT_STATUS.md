@@ -6,13 +6,15 @@ Ordinary .spec language readiness under SPEC-LANGUAGE-SELF-CONTAINMENT.1.1. The 
 
 ## Latest Completed Slice
 
-- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.3 - verify Rust closing-name carriers` — six routes pass90 calls/three mutants; four retained engines verify136 recoveries. Both emitted children pass four tests; original nesting and direct dependents remain green. Test-only allocation collision repaired.
+- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.4 - verify Dart closing-name carriers` — six routes90 calls/three mutants and136 retained recoveries;62 tests pass, including both strict emitted packages. Main-test analysis and format pass; known package-wide SDK issues remain separate.
 
 ## Next Action
 
-- Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.4 for Dart context-name carriers, exact typed status/recovery and mutations.
+- Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.5 for Julia context-name carriers, typed recovery and mutations.
 
 ## Recent Completions
+
+- `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.4` verifies six Dart context-name carriers and strict fresh packages.
 
 - `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.3` verifies six Rust context-name carriers and repairs parallel test allocation.
 
@@ -43,8 +45,6 @@ Ordinary .spec language readiness under SPEC-LANGUAGE-SELF-CONTAINMENT.1.1. The 
 - `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.1` repairs nested constructor values and preserves the original nesting oracles.
 
 - `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.2` inventories state/computation evidence and scoping limits.
-
-- `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.1` inventories grammar/cursor/capture readiness and owns stale capability prose.
 
 ## History
 

@@ -1,0 +1,88 @@
+{
+  "owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.4",
+  "activation_commit": "2cf465ae780013af4153e4129b31ad9db227b7d1",
+  "date": "2026-09-27",
+  "evidence": [
+    {
+      "command": "cd dart && bash ../tools/run_dart_project_data.sh test --reporter expanded test/nested_tree_readiness_test.dart test/source_emitter_test.dart test/sexpr_document_v1_test.dart",
+      "result": "PASS62; four readiness plus58 existing; each of two emitted packages requires setup/analysis/run exit0 and exact report",
+      "exit_status": 0,
+      "log": ".linkedspec-data/scratch/context-dart-final.log",
+      "sha256": "5b33c93e99d8cf1a9d6df23e286d134f250aa3e0dbd591a542d6c79f05cb54e1"
+    },
+    {
+      "command": "cd dart && bash ../tools/run_dart_project_data.sh analyze --fatal-infos --fatal-warnings test/nested_tree_readiness_test.dart ../tests/language-readiness/nested-tree/dart_checks.dart",
+      "result": "FAIL command context: shared physical path outside package cannot resolve package import; analyze copied helper in actual emitted packages",
+      "exit_status": 3,
+      "log": ".linkedspec-data/scratch/context-dart-analysis.log",
+      "sha256": "32a60e803c119756235cd122e22de94b99a937d850a128f0ccdfc369345fd773"
+    },
+    {
+      "command": "cd dart && bash ../tools/run_dart_project_data.sh analyze --fatal-infos --fatal-warnings test/nested_tree_readiness_test.dart",
+      "result": "PASS no issues; helper independently analyzed in both emitted packages",
+      "exit_status": 0,
+      "log": ".linkedspec-data/scratch/context-dart-analysis-final.log",
+      "sha256": "b8dd74b535dfea31f86c81e69876a7f3ca8787c07fc6e2c8d14b2277b996bfb3"
+    },
+    {
+      "command": "cd dart && bash ../tools/run_dart_project_data.sh format --output=none --set-exit-if-changed test/nested_tree_readiness_test.dart ../tests/language-readiness/nested-tree/dart_checks.dart",
+      "result": "PASS2 files/0 changes",
+      "exit_status": 0,
+      "log": ".linkedspec-data/scratch/context-dart-format.log",
+      "sha256": "43a0060b01f8d00290502db016cbde393b149f5a0971989771a4fe3fddc181e7"
+    },
+    {
+      "command": "bash tools/run_mdbook_local.sh",
+      "result": "PASS rendered book",
+      "exit_status": 0,
+      "log": ".linkedspec-data/scratch/context-dart-book.log",
+      "sha256": "67f199a3140fffeb9d3144d113f5b6c7906964221fc8f784a8b49507ad9325d3"
+    }
+  ],
+  "source_sha256": {
+    "tests/language-readiness/nested-tree/grammar.spec": "498ffda35b05222388c64d99b0acb132a56996e97de3ffa9312f7dda6ee0ed72",
+    "tests/language-readiness/nested-tree/cases.json": "7a36a4b32d8a5ac8a1d2f17d6d000a68c707bfc15a4b3a1e93e3e4ddaf4147c7",
+    "tests/language-readiness/context-names/grammar.spec": "8f408e81e2871b3b76c1a7fc7f99e059dad1c19dd03e91449a05fc9b88fff4b0",
+    "tests/language-readiness/context-names/cases.json": "3e7f25083e791db8048bed844523e85fbc53763eeaabd1253001a2b2650575ef",
+    "dart/pubspec.lock": "601c36466d20513d930c291c44143a801846349fda9ba13a8c6f63b15671a0c0",
+    "dart/test/nested_tree_readiness_test.dart": "4f482641413b3289b01d3d770c905a08060bba116a7d209c537f440da44560ec",
+    "tests/language-readiness/nested-tree/dart_checks.dart": "5ae819cccaf0dc2cfb2a1753f5351148307cebc8797ff605fc4ba8c65c15df4a"
+  },
+  "unchanged_from_activation": [
+    "tests/language-readiness/nested-tree/grammar.spec",
+    "tests/language-readiness/nested-tree/cases.json",
+    "tests/language-readiness/context-names/grammar.spec",
+    "tests/language-readiness/context-names/cases.json",
+    "dart/pubspec.lock"
+  ],
+  "history_rollover": {
+    "segment": {
+      "byte_count": 35913,
+      "current_path": "CHANGES.md",
+      "immutable": true,
+      "line_count": 177,
+      "retrieval_command": "perl tools/read_document_history.pl --surface change_history --segment 4969",
+      "segment_id": "4969",
+      "sha256": "b3bd23d1465d5feecd69d00771d4940ad36e2ae0579b24ebff64ccec0598da71",
+      "source_blob": "8eef186484303cbd51d3218c726476a43e47ad62",
+      "source_commit": "2cf465ae780013af4153e4129b31ad9db227b7d1",
+      "source_end_line": 418,
+      "source_path": "CHANGES.md",
+      "source_start_line": 242,
+      "surface": "change_history",
+      "target_path": "docs/history/changes/segment-4969-b3bd23d1465d.md",
+      "type": "segment"
+    },
+    "prior_manifest_rows_unchanged": true,
+    "reconstructed_activation_root_exact": true,
+    "collection_files": 44,
+    "manifest_lines": 43,
+    "manifest_bytes": 24527,
+    "live_eof_separator_normalization": "One trailing blank line removed for git diff --check; insert one LF before the new segment when reconstructing activation bytes."
+  },
+  "limits": [
+    "Only four retained routes establish136 immediate recoveries; public v2/emitted entries create engines per call",
+    "Known SDK-wide deprecations DART-STARTUP-READING.2.25 remain separate; no whole-package gate claim",
+    "No canonical candidate claim; parent .1.1.3.2.7 owns closeout"
+  ]
+}

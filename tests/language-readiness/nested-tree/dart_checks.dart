@@ -38,11 +38,20 @@ void exactJson(Object? actual, Object? expected, [String path = r'$']) {
   }
 }
 
-int sequence(Map<String, dynamic> cases, Parse parse) {
+int sequence(
+  Map<String, dynamic> cases,
+  Parse parse, {
+  int acceptedCount = 6,
+  int rejectedCount = 7,
+  String recoveryId = 'nested_state',
+}) {
   final accepted = (cases['accept'] as List).cast<Map<String, dynamic>>();
   final rejected = (cases['reject'] as List).cast<Map<String, dynamic>>();
-  require(accepted.length == 6 && rejected.length == 7, 'authored inventory');
-  final recovery = accepted.singleWhere((row) => row['id'] == 'nested_state');
+  require(
+    accepted.length == acceptedCount && rejected.length == rejectedCount,
+    'authored inventory',
+  );
+  final recovery = accepted.singleWhere((row) => row['id'] == recoveryId);
   var executions = 0;
   for (var round = 0; round < 2; round++) {
     for (final row in accepted) {
@@ -58,7 +67,10 @@ int sequence(Map<String, dynamic> cases, Parse parse) {
       try {
         parse(row['input'] as String);
       } on RuntimeExitNow catch (error) {
-        require(error.status == 1, '${row['id']} exact exit status');
+        require(
+          error.status == (row['status'] ?? 1),
+          '${row['id']} exact exit status',
+        );
         rejectedWithTypedExit = true;
       }
       require(
@@ -73,15 +85,50 @@ int sequence(Map<String, dynamic> cases, Parse parse) {
       executions += 2;
     }
   }
-  require(executions == 40, 'complete execution sequence');
+  require(
+    executions == 2 * (acceptedCount + 2 * rejectedCount),
+    'complete execution sequence',
+  );
   return executions;
 }
 
-void mutation(String id, Map<String, dynamic> cases, Parse parse) {
+void mutation(
+  String id,
+  Map<String, dynamic> cases,
+  Parse parse, {
+  int spanEnd = 9,
+  String spanCase = 'nested_state',
+}) {
+  Map<String, dynamic> find(String group, String caseId) =>
+      (cases[group] as List).cast<Map<String, dynamic>>().singleWhere(
+        (row) => row['id'] == caseId,
+      );
+  if (id == 'comparison') {
+    exactJson(
+      parse(find('reject', 'mismatch')['input'] as String),
+      find('accept', 'empty_element')['expected'],
+      'comparison mutant wrongly accepts a mismatched close',
+    );
+    return;
+  }
+  if (id == 'state') {
+    var rejectedWithTypedExit = false;
+    try {
+      parse(find('accept', 'siblings_restore_parent')['input'] as String);
+    } on RuntimeExitNow catch (error) {
+      require(error.status == 2, 'state mutant exact mismatch status');
+      rejectedWithTypedExit = true;
+    }
+    require(
+      rejectedWithTypedExit,
+      'state mutant wrongly rejects valid siblings',
+    );
+    return;
+  }
   final (group, caseId) = switch (id) {
     'prefix' => ('reject', 'hidden_prefix'),
     'gap' => ('reject', 'interstitial_junk'),
-    'span' => ('accept', 'nested_state'),
+    'span' => ('accept', spanCase),
     _ => throw StateError('unknown mutation $id'),
   };
   final row = (cases[group] as List).cast<Map<String, dynamic>>().singleWhere(
@@ -91,9 +138,9 @@ void mutation(String id, Map<String, dynamic> cases, Parse parse) {
   require(value is List, '$id mutant must execute and return a document');
   final forms = value as List;
   if (id == 'span') {
-    exactJson((forms.first as Map)['span'], [9, 9]);
+    exactJson((forms.first as Map)['span'], [spanEnd, spanEnd]);
     final expected = row['expected'] as List;
-    exactJson((expected.first as Map)['span'], [0, 9]);
+    exactJson((expected.first as Map)['span'], [0, spanEnd]);
   } else {
     require(
       forms.length == (id == 'prefix' ? 1 : 2),

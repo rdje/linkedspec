@@ -71,7 +71,7 @@ The three-level control is not arbitrary-depth/resource proof; recognition rollb
 or AST rollback. Do not generalize to indentation, XML or other standards.
 
 Perl native/fresh emitted proof above is supplemented by the all-six public-native result below.
-Rust carrier proof is recorded below; `.1.1.3.2.4-.6` own the remaining backend carriers, and `.7` owns canonical evidence/authoring reconciliation. The overall
+Rust/Dart carrier proof is recorded below; `.1.1.3.2.5-.6` own the remaining backend carriers, and `.7` owns canonical evidence/authoring reconciliation. The overall
 context objective and structured-format campaign remain open. No comparison or recursive-state primitive is
 selected for implementation on the strength of these bounded results.
 
@@ -108,8 +108,8 @@ integration command; the existing project-local Dart/Julia/Lua stores are reused
 dependency pins and both grammar/oracle pairs stay unchanged. Both fixtures are verified on all six routes;
 exact reports, product/source/log hashes and option controls are in this leaf's checkpoint.
 
-Perl's separate fresh emitted/recovery/mutation proof is unchanged. Dart/Julia/Lua carriers and typed recovery
-remain .1.1.3.2.4-.6, followed by canonical reconciliation under .7. No XML or broader format admission follows.
+Perl's separate fresh emitted/recovery/mutation proof is unchanged. Julia/Lua carriers and typed recovery
+remain .1.1.3.2.5-.6, followed by canonical reconciliation under .7. No XML or broader format admission follows.
 
 ## Rust typed carriers and retained recovery
 
@@ -146,5 +146,35 @@ bash tools/run_cargo_local.sh test --locked --offline --manifest-path rust/Cargo
 ```
 
 The checkpoint records the initial failure and final combined verification separately. Bounded direct-dependent
-checks cover leading trivia and the strict S-expression document. Dart, Julia and both Lua carrier proofs
+checks cover leading trivia and the strict S-expression document. Julia and both Lua carrier proofs
 remain separate leaves; canonical context reconciliation remains .7.
+
+## Dart typed carriers and emitted package
+
+Owner: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.4`, from clean `2cf465ae780013af4153e4129b31ad9db227b7d1`.
+Six Dart routes pass the same 90 original calls and comparison/state/span mutations: native and SpecFile-JSON
+reconstructed engines, each with native and generated-plan execution; the public v2 entry; and a fresh emitted
+module. The first four retain an engine for 34 rejection/immediate-success pairs each (136 transitions). The
+last two create an engine per call and prove isolation. Only RuntimeExitNow with the authored status satisfies
+a rejected case; returned null, a different exception or a wrong status fails. Exact JSON comparison preserves
+container/scalar kinds as well as values and spans.
+
+The existing harness now takes explicit fixture inventory, recovery-case and span settings. Its original
+nesting defaults remain 6/7 cases, 40 calls and the original three mutants. Both grammar/oracle pairs stay
+unchanged. Each emitted package contains four modules and must complete offline resolution, fatal analysis
+and actual execution successfully; its JSON report must say exactly four modules, the configured original
+execution count and three mutations. V2 metadata, source identity and plan checks remain mandatory.
+
+```sh
+cd dart
+bash ../tools/run_dart_project_data.sh test --reporter expanded \
+  test/nested_tree_readiness_test.dart test/source_emitter_test.dart test/sexpr_document_v1_test.dart
+bash ../tools/run_dart_project_data.sh analyze --fatal-infos --fatal-warnings test/nested_tree_readiness_test.dart
+```
+
+The combined suite passes 62 tests (four readiness plus 58 existing emitter/document checks). Changed-file
+formatting and package-context analysis pass. Directly analyzing the shared helper outside a Dart package
+cannot resolve its package import; both real emitted packages analyze the copied helper with fatal diagnostics
+and pass. This invocation limitation is recorded separately from runtime proof. No whole-package gate claim:
+the known SDK deprecations remain owned by DART-STARTUP-READING.2.25. Existing managed temporary-package cleanup,
+local stores, root lockfile and production code are unchanged. Julia/Lua proof and canonical .7 follow.
