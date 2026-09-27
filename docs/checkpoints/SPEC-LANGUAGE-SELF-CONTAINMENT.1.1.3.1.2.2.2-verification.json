@@ -1,0 +1,47 @@
+{
+  "owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.2",
+  "activation_commit": "bb76f4437b36216cdd2a609ec70b8570ffaa12d8",
+  "date": "2026-09-27",
+  "evidence": [
+    {
+      "command": "bash tools/run_cargo_local.sh test --locked --offline --manifest-path rust/Cargo.toml -p linkedspec-runtime --test nested_tree_readiness -- --nocapture",
+      "result": "PASS2 outer tests; child exit0/four tests; 66.78s",
+      "log": ".linkedspec-data/scratch/nested-rust-carriers.log",
+      "sha256": "10d2de2416fcc6d383139fb1926190b19b62bd1f154f0db03b821b3fa37a8a28"
+    },
+    {
+      "command": "bash tools/run_cargo_local.sh test --locked --offline --manifest-path rust/Cargo.toml -p linkedspec-runtime --test leading_input_trivia --test sexpr_document_v1 -- --nocapture",
+      "result": "PASS leading-input3 and strict-document1",
+      "log": ".linkedspec-data/scratch/nested-rust-compatibility.log",
+      "sha256": "6647cd5063ce51fb7b955d24f970efe092c138e893a2ceb7d08e444662ba73dc"
+    },
+    {
+      "command": "bash tools/run_mdbook_local.sh",
+      "result": "PASS",
+      "log": ".linkedspec-data/scratch/nested-rust-book.log",
+      "sha256": "36c1b4863dcb344de354361bc8ae97ff9abec715c57e80bec396898525996171"
+    }
+  ],
+  "source_hashes": {
+    "rust/linkedspec-runtime/tests/nested_tree_readiness.rs": "9f5ec43df0e46191cc34ee6a1d23854c02a5cf6d087f97574bd0a00bf11fcbdc",
+    "tests/language-readiness/nested-tree/rust_checks.rs": "9d805a415bc2f63e057910af0d1e679e46fd84533bfe2c6c126d912b8ec16b68",
+    "tests/language-readiness/nested-tree/grammar.spec": "498ffda35b05222388c64d99b0acb132a56996e97de3ffa9312f7dda6ee0ed72",
+    "tests/language-readiness/nested-tree/cases.json": "7a36a4b32d8a5ac8a1d2f17d6d000a68c707bfc15a4b3a1e93e3e4ddaf4147c7",
+    "rust/Cargo.lock": "f225ab48d91b1c2eb3bec063f961d255d9e97b340d0ce300e749ca58ec155428"
+  },
+  "counts": {
+    "routes": 6,
+    "original_calls_per_route": 40,
+    "typed_rejections_per_route": 14,
+    "mutants_per_route": 3,
+    "retained_engine_routes": 4,
+    "same_engine_recovery_transitions": 56,
+    "emitted_child_tests": 4
+  },
+  "limits": "Serialized v2 and emitted entries create an engine per call; no retained-engine recovery claim for those routes. No runtime/schema/admission change; Dart/Julia/Lua and canonical parent reconciliation remain.",
+  "checks": [
+    "rustfmt --check --edition 2024 on both new Rust files: PASS",
+    "git diff --exit-code HEAD -- rust/Cargo.lock tests/language-readiness/nested-tree/grammar.spec tests/language-readiness/nested-tree/cases.json examples/integration: PASS",
+    "memory architecture, both history pressure checks and git diff --check: PASS"
+  ]
+}

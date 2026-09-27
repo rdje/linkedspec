@@ -57,3 +57,20 @@ mutation. The separate `t/nested_tree_readiness.t` passes192 tests and verifies 
 executions per native/fresh emitted route,14 immediate typed-rejection recoveries per route, three controlled
 mutants,14 repeated entry cases and two child-entry controls. Focused274 and complete Phase01033 pass. Other
 backends' carriers and canonical parent reconciliation remain separate; the native adapter table above is unchanged.
+
+## Subsequent Rust carrier proof
+
+`SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.2` adds `rust/linkedspec-runtime/tests/nested_tree_readiness.rs`
+and shared `tests/language-readiness/nested-tree/rust_checks.rs`. Native and JSON-reconstructed engines each run
+native and generated-plan execution: four retained-engine routes. Serialized v2 and freshly compiled emitted
+modules add two routes that construct an engine per call. Each passes40 original executions (two rounds of six
+accepts and seven reject/recovery pairs) and three controlled prefix/gap/span grammar mutations. Typed errors
+require Exit with status1. Exact JSON values/kinds and Unicode spans match unchanged independent oracles.
+Only the four retained-engine routes establish same-engine recovery:14 transitions each,56 total.
+
+The emitted crate verifies four modules in four actual tests, v2 metadata/source identity and plan validation.
+Its child process must exit successfully; a passing-test marker alone cannot establish success. Scratch data and
+its separate target cache stay on the repository volume; its authored runtime dependency is relative. Two outer
+Rust tests pass, together with three leading-trivia and one strict-document compatibility tests. Runtime code,
+lockfile and original fixture are unchanged. Exact commands/hashes are in the leaf checkpoint; the native adapter
+counts above are not relabeled as typed evidence. Dart, Julia and Lua carriers remain separate work.

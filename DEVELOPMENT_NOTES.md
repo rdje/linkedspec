@@ -12,6 +12,16 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-09-27 — Rust nesting evidence follows actual engine lifetime
+
+The typed native/generated Engine methods retain the engine across each rejection and recovery; serialized v2
+and emitted entry functions construct an engine per call. Shared independent JSON oracles lock numeric kinds
+and Unicode spans on all six routes without overstating recovery. Three source mutations remove the prefix guard,
+remove gap rejection, or corrupt the list start coordinate; every route exposes the intended wrong behavior.
+The fresh emitted crate uses a relative runtime dependency and a separate repository-local target cache. Child
+success requires both a successful process status and exactly four executed tests; source data is copied as files,
+not interpolated as host literals. See docs/knowledge/nested-tree-rust-carrier-readiness.md.
+
 ## 2026-09-27 — emitted entry must use the public wrapper boundary
 
 The original strict nesting grammar masked native/emitted drift because its prefix guard and catch-all both

@@ -12,6 +12,14 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-09-27 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.2: Rust nesting carriers
+
+Two Rust tests prove the unchanged nesting grammar across native/reconstructed engines, their generated plans,
+serialized v2 execution and fresh emitted modules. Each route passes40 original executions and three controlled
+grammar mutations; four retained-engine routes prove56 typed rejection recoveries. The emitted child exits0
+with four tests. Existing leading-input3 and strict-document1 tests pass; runtime/schema/lockfiles are unchanged.
+The public book distinguishes engine reuse from per-call reconstruction. Dart, Julia and Lua proof follows.
+
 ## 2026-09-27 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.1.1: emitted Perl public entry
 
 Fresh emitted Execute now shares native Runtime cursor preparation: reset once, skip complete leading LF blank

@@ -100,7 +100,22 @@ bash tools/run_python_project_data.sh tests/language-readiness/nested-tree/verif
 Replace `rust` with `perl`, `dart`, `julia`, `puc` or `luajit` for the other routes. Prepare the selected example
 using its [public integration guide](../public-api/integration.md). The text adapters stop at the first rejected
 input; this check does not establish same-engine recovery after rejection. Rust's adapter prints its error as
-text, while the others preserve typed JSON. Remaining carrier and mutation proof is a separate next step.
+text, while the others preserve typed JSON.
+
+A separate Rust regression covers native and JSON-reconstructed engines, generated-plan execution, serialized
+v2 execution and freshly compiled emitted modules. All six routes preserve the same values, JSON kinds and
+Unicode spans, reject malformed inputs with typed status1 exits, and detect prefix/gap/span grammar mutations.
+Four routes retain their engine across14 rejection-to-success transitions each; the serialized and emitted entry
+functions construct an engine per call, so their subsequent successful calls do not prove retained-engine recovery.
+Run this proof with:
+
+```sh
+bash tools/run_cargo_local.sh test --locked --offline --manifest-path rust/Cargo.toml \
+  -p linkedspec-runtime --test nested_tree_readiness
+```
+
+The emitted test builds four independent modules in repository-local storage and requires their process to exit
+successfully with all four tests executed. Dart, Julia and Lua carrier proof remains a separate next step.
 This example does not open the structured-format campaign or establish arbitrary-depth resource safety.
 
 

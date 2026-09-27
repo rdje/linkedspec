@@ -6,13 +6,15 @@ Ordinary .spec language readiness under SPEC-LANGUAGE-SELF-CONTAINMENT.1.1. The 
 
 ## Latest Completed Slice
 
-- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.1.1 - align emitted public entry` — native/fresh emitted entry positions agree; Perl nesting readiness/recovery/mutations pass192, focused274 and complete Phase01033. Original grammar/cases unchanged.
+- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.2 - verify Rust nesting carriers` — six routes preserve values/spans and typed rejection; four retained-engine routes prove56 recoveries. Fresh emitted child4/4; compatibility4/4; original fixture unchanged.
 
 ## Next Action
 
-- Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.2 for Rust carriers, typed recovery and mutations; canonical parent reconciliation follows all backends.
+- Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.3 for Dart carriers, typed recovery and mutations; canonical parent reconciliation follows all backends.
 
 ## Recent Completions
+
+- `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.2` verifies six Rust nesting routes and typed recovery.
 
 - `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.1.1` repairs emitted Perl entry and verifies nesting carriers.
 
@@ -43,8 +45,6 @@ Ordinary .spec language readiness under SPEC-LANGUAGE-SELF-CONTAINMENT.1.1. The 
 - `2026-09-25` — `SESSION-STARTUP-READING.90` repairs function array constructor values with focused118, Phase01033 and exact native/fresh LF/CRLF book proof.
 
 - `2026-09-25` — `SESSION-STARTUP-READING.89` verifies non-creating Perl reads and receiver lifetime with complete Phase01033 and executable native/fresh-source book proof.
-
-- `2026-09-24` — `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.16.2` preserves all task bytes/IDs under unchanged limits, with public 998 and independent source/node proof.
 
 ## History
 

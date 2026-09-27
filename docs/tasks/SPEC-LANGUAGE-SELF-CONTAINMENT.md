@@ -255,10 +255,26 @@ used by ordinary `.spec` syntax on every backend.
 - [x] **LOCKSTEP** — Public API examples, pipeline/appendix explanations, bounded nesting coverage, Knowledge Map, task tree, ledger, CHANGES, DEVELOPMENT_NOTES, MEMORY, live status and roadmaps agree. Exact book rendering, history limits, memory and diff hygiene pass; final staged doctrines govern landing. Parent milestone closure remains separate from this bounded repair.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.2`
-  Status: `pending`
+  Status: `done`
   Goal: Prove Rust nested-tree carrier semantics using native, reconstructed and generated supported routes, typed rejection/recovery and prefix/gap/span mutation controls.
   Acceptance: Original grammar/cases remain unchanged; exact value kinds and Unicode spans, no partial rejection values, explicit recovery after every rejection and honest carrier/readiness coverage.
   Dependencies: `.1.1.3.1.2.2.1.1` (verified Perl proof; parent status closes at canonical reconciliation).
+
+  Activation: Clean bb76f4437b36216cdd2a609ec70b8570ffaa12d8 after verified Perl repair; all nine hooks/post-commit pointer pass, brief0 and no pending job.
+  Verification tier: `focused`
+  Focused checks: New Rust native/reconstructed/generated-plan/emitted nesting regression; strict-document and leading-trivia consumers; published locked offline Cargo preparation, actual emitted-child exit status and counts, unchanged grammar/cases; book, Knowledge, memory/history, doctrines and diff hygiene.
+  Canonical trigger: none for a bounded backend regression without runtime, schema, contract or admission change; parent closure remains canonical.
+  Scope: Reuse typed public parser/compiler/engine and generated-source APIs. Keep native/reconstructed retained-engine recovery distinct from APIs that construct an engine per call. Fresh emitted module must compile/run in repository-local storage with a relative dependency path and real child-status checking; do not reuse known .71/.77/.78 test-harness defects.
+  Verification: Two new Rust tests pass; emitted child exit0/four tests. Six routes each execute40 original cases plus three mutations; four retained-engine routes prove56 typed rejection recoveries. Leading-trivia3 and strict-document1 pass; rustfmt and unchanged fixture checks pass.
+  Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.2 - verify Rust nesting carriers`.
+
+
+- [x] **REPRODUCE / ISSUE** — Native text-adapter proof lacks typed errors, retained-engine rejection recovery and carrier equivalence; the unchanged six accepts/seven rejects are the independent oracle.
+- [x] **ROOT CAUSE (WHY + WHERE)** — This is an evidence gap: the public adapter exits on rejection. Typed Engine, serialized v2 and emitted-module APIs expose the missing routes without runtime changes.
+- [x] **FIX** — Add a shared value/kind/span oracle and separate retained-engine versus per-call routes; compile four fresh emitted modules in owned local storage with relative dependencies and actual child-status checks.
+- [x] **ADDRESSED (verified)** — All six routes pass40 original calls and three prefix/gap/span mutants each. Four retained-engine routes pass14 immediate recoveries each; other routes prove independent subsequent calls only. Generated plans validate; emitted metadata identifies v2 and exact source.
+- [x] **NO REGRESSION** — New Rust tests2/2, child4/4, leading-input3/3 and strict-document1/1 pass offline. Runtime, lockfile, original grammar/cases and public adapters are unchanged. Rustfmt and diff hygiene pass.
+- [x] **LOCKSTEP** — Book, native ledger, dedicated Knowledge fact, checkpoint, live pointers, roadmaps and change/engineering notes state exact coverage and remaining Dart/Julia/Lua work; no format admission or parent closure.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.3`
   Status: `pending`
@@ -500,7 +516,7 @@ used by ordinary `.spec` syntax on every backend.
 | 5 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.6` | `done` | Generic flat bound/computed values, capture compatibility, native/emitted164 and complete Phase01033 verified. |
 | 6 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.1` | `done` | Exact native public-loader6/7/12 on six runtimes; carrier/mutation .1.1.3.1.2.2 follows. |
 | 7 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.1.1` | `done` | Emitted-entry repair and Perl carriers verified192/focused274/Phase01033; Rust is next. |
-| 8 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.2` | `pending` | Rust carriers, typed recovery and mutations after the Perl repair commit. |
+| 8 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.2` | `active` | Rust carriers, typed recovery and mutations from clean bb76f4437. |
 
 ## Decisions
 
