@@ -12,6 +12,17 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-09-27 — Dart nesting carriers preserve typed outcomes and source data
+
+The shared Dart checker compares JSON kinds recursively and requires actual RuntimeExitNow status1 on every
+rejection; a successful null return cannot masquerade as failure. SpecFile roundtrip is named explicitly rather
+than claiming compiled-state reconstruction. Retained native/generated engines prove recovery; public v2 and
+emitted execute rebuild an engine per invocation. The emitted child loads four freshly produced modules, validates
+metadata/plans and reports completion only after all original cases/mutations run. Offline pub resolution, fatal
+analysis and execution must each exit0. Its dependency path is relative and all storage is repository-local.
+Whole-package fatal analysis still exits2 on the two existing RegExp/RegExpMatch implementation deprecations
+at matching.dart:732/1203; DART-STARTUP-READING.2.25 owns that migration. Changed-file and child analysis pass.
+
 ## 2026-09-27 — Rust nesting evidence follows actual engine lifetime
 
 The typed native/generated Engine methods retain the engine across each rejection and recovery; serialized v2

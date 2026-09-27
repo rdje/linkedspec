@@ -1,9 +1,9 @@
 # MEMORY
 
-- activation_commit: `bb76f4437b36216cdd2a609ec70b8570ffaa12d8` — clean activation base for verified Rust nesting carriers.
-- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.2 - verify Rust nesting carriers`.
-- active_work_unit: none; Rust carrier leaf is complete.
-- next_action: Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.3 for Dart nesting carriers, typed rejection/recovery and mutations; commit before Julia.
+- activation_commit: `1a5296777bb4a6e390bebfc010f9fc41db13cce0` — clean activation base for Dart nesting carriers.
+- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.3 - verify Dart nesting carriers`.
+- active_work_unit: none; Dart carrier leaf is complete.
+- next_action: Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.4 for Julia nesting carriers, typed recovery and mutations; Dart SDK deprecations remain owned by DART-STARTUP-READING.2.25.
 - in_flight_uncommitted: none.
 - blockers: none for nested-tree proof; .1.1.5 owns stale capability prose and startup .38/.40 recognition defects remain queued. ARCHOGEN owns downstream acceptance; named-argument and format proposals stay parked.
   Wrapper startup .7 remains open; recovery/purge stay prohibited. No interrupted Phase0 run counts as proof.

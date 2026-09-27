@@ -12,6 +12,14 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-09-27 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.3: Dart nesting carriers
+
+The unchanged grammar/oracles pass six Dart routes: native and SpecFile-JSON reconstructed engines, their generated
+plans, public v2 and a fresh emitted package. Each executes 40 original calls and three grammar mutations; four
+retained-engine routes prove 56 typed rejection recoveries. New tests2 and existing emitter/document tests58 pass.
+New-file and emitted-package fatal analysis pass; whole-package analysis reproduces the two known .2.25 SDK
+regex-adapter deprecations. No runtime, lockfile, schema or admission change; Julia carrier proof is next.
+
 ## 2026-09-27 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.2: Rust nesting carriers
 
 Two Rust tests prove the unchanged nesting grammar across native/reconstructed engines, their generated plans,

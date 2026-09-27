@@ -115,7 +115,21 @@ bash tools/run_cargo_local.sh test --locked --offline --manifest-path rust/Cargo
 ```
 
 The emitted test builds four independent modules in repository-local storage and requires their process to exit
-successfully with all four tests executed. Dart, Julia and Lua carrier proof remains a separate next step.
+successfully with all four tests executed.
+
+Dart now has the same six-route nesting proof, using a JSON roundtrip of `SpecFile` before recompilation for its
+reconstructed routes. Its retained native/generated engines also prove 56 rejection-to-success transitions.
+Public v2 and emitted entry functions create an engine per call. A separate emitted package validates and runs
+four modules after offline dependency resolution and strict analysis. Repeat the two regression tests with:
+
+```sh
+cd dart
+bash ../tools/run_dart_project_data.sh test test/nested_tree_readiness_test.dart
+```
+
+These are bounded nesting results. Package-wide Dart analysis still reports two separately owned SDK deprecations
+in its regex adapters; the new test and emitted package pass strict analysis. Julia and Lua carrier proof remains
+a separate next step.
 This example does not open the structured-format campaign or establish arbitrary-depth resource safety.
 
 

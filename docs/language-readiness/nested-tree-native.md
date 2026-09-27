@@ -74,3 +74,19 @@ its separate target cache stay on the repository volume; its authored runtime de
 Rust tests pass, together with three leading-trivia and one strict-document compatibility tests. Runtime code,
 lockfile and original fixture are unchanged. Exact commands/hashes are in the leaf checkpoint; the native adapter
 counts above are not relabeled as typed evidence. Dart, Julia and Lua carriers remain separate work.
+
+## Subsequent Dart carrier proof
+
+`SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.3` adds `dart/test/nested_tree_readiness_test.dart` and shared
+`tests/language-readiness/nested-tree/dart_checks.dart`. Native and SpecFile-JSON reconstructed engines each run
+native and generated-plan execution: four retained-engine routes. Public v2 and independently loaded emitted
+modules construct an engine per call. All six pass 40 original executions and three grammar mutations. Every
+rejection requires RuntimeExitNow status1; a returned value, including null, fails. Exact recursive JSON-kind,
+value and Unicode-span checks use the unchanged authored oracles. Retained engines prove 56 recovery transitions.
+
+The repository-local emitted package uses a relative Dart dependency, offline resolution, fatal analysis and a
+fresh process. All three commands require exit0; its exact completion report follows execution of four modules,
+40 original calls and three mutations. New tests2 and existing emitter/document tests58 pass. Changed-file fatal
+analysis and zero-change formatting pass. Whole-package analysis exits2 with only the known two deprecated_implement
+warnings at matching.dart:732/1203, owned by DART-STARTUP-READING.2.25. Runtime, lockfile and fixture are unchanged;
+no complete component-gate success is claimed. Julia and Lua carrier proof follows.

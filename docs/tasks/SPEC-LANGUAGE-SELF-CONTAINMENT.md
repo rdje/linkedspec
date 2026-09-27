@@ -277,10 +277,26 @@ used by ordinary `.spec` syntax on every backend.
 - [x] **LOCKSTEP** — Book, native ledger, dedicated Knowledge fact, checkpoint, live pointers, roadmaps and change/engineering notes state exact coverage and remaining Dart/Julia/Lua work; no format admission or parent closure.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.3`
-  Status: `pending`
+  Status: `done`
   Goal: Prove Dart nested-tree carrier semantics using native, reconstructed and independently emitted supported routes, typed rejection/recovery and prefix/gap/span mutation controls.
   Acceptance: Original grammar/cases remain unchanged; exact value kinds and Unicode spans, no partial rejection values, explicit recovery after every rejection and honest carrier/readiness coverage.
   Dependencies: `.1.1.3.1.2.2.2`
+
+  Activation: Clean 1a5296777bb4a6e390bebfc010f9fc41db13cce0 after Rust carrier proof; nine doctrines/post-commit pointer pass, brief0 and no job remains.
+  Verification tier: `focused`
+  Focused checks: New Dart native/reconstructed/generated-plan/emitted nesting regression, strict-document and source-emitter direct dependents, strict changed-file/child analysis plus package-wide diagnostic census, exact child status/report, unchanged fixtures, book, Knowledge, memory/history, doctrines and diff hygiene.
+  Canonical trigger: none for bounded backend evidence without runtime/schema/contract/admission change; parent closure remains canonical.
+  Scope: Typed public parser/compiler/engine and generated APIs; distinguish four retained-engine routes from per-call v2/emitted entry functions. Child uses an owned repository-local package with relative dependency and offline preparation.
+  Verification: New tests 2/2 and existing emitter/document tests 58/58 pass. Six routes each execute 40 original calls and three mutations; four retained-engine routes prove 56 recoveries. Child offline preparation, strict analysis and run exit0 with exact four-module report. Changed-file strict analysis/format pass; whole-package analysis retains only the two known .2.25 deprecations.
+  Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.3 - verify Dart nesting carriers`.
+
+
+- [x] **REPRODUCE / ISSUE** — The native text adapter stops at rejection and does not prove carriers or recovery. Consume the unchanged six accepts/seven rejects through typed public Dart APIs.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Missing evidence belongs to the public execution boundary: Engine retains state across calls; executeGeneratedParserV2 and emitted execute construct an engine per call. SpecFile JSON reconstruction is distinct from compiled-state serialization.
+- [x] **FIX** — Add explicit recursive JSON-kind/value/span checks, typed status1 exits and recovery pairs; independent emitted package loads four source variants with relative dependencies and checked process statuses.
+- [x] **ADDRESSED (verified)** — All six routes pass 40 original calls and three grammar mutations; four retained-engine routes prove 14 recovery transitions each. Plans validate; emitted metadata/source identity and four-module completion report are exact.
+- [x] **NO REGRESSION** — New2/existing58 tests pass; new-file and child fatal analysis pass, formatter changes0. Package analyzer exit2 reproduces only existing matching.dart:732/1203 deprecated_implement warnings owned by DART-STARTUP-READING.2.25; runtime/lock/oracles/adapters are unchanged. No complete component-gate success is claimed.
+- [x] **LOCKSTEP** — Book, ledger, Knowledge, checkpoint, roadmaps and live/history records name exact carrier coverage and analyzer limitation; Julia/Lua and canonical parent closure remain separately owned.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.4`
   Status: `pending`

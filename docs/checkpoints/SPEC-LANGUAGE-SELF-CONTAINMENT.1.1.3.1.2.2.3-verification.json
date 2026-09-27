@@ -1,0 +1,68 @@
+{
+  "owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.3",
+  "activation_commit": "1a5296777bb4a6e390bebfc010f9fc41db13cce0",
+  "date": "2026-09-27",
+  "evidence": [
+    {
+      "command": "cd dart && bash ../tools/run_dart_project_data.sh test --reporter expanded test/nested_tree_readiness_test.dart",
+      "result": "PASS2 tests; child offline resolution, fatal analysis and execution each exit0; exact four-module completion report",
+      "exit_status": 0,
+      "log": ".linkedspec-data/scratch/nested-dart-carriers.log",
+      "sha256": "3b11823c102b901b03031c1c8786443a09bac62bde8bb22b23b2a1a011b14f96"
+    },
+    {
+      "command": "cd dart && bash ../tools/run_dart_project_data.sh test --reporter expanded test/source_emitter_test.dart test/sexpr_document_v1_test.dart",
+      "result": "PASS58 tests",
+      "exit_status": 0,
+      "log": ".linkedspec-data/scratch/nested-dart-compatibility.log",
+      "sha256": "77d2ad13d56d4e90697f6b4cbd46d8c3ff02d34ff4e37067a6e74be224e41a67"
+    },
+    {
+      "command": "cd dart && bash ../tools/run_dart_project_data.sh analyze --fatal-infos --fatal-warnings",
+      "result": "FAIL exactly two known deprecated_implement warnings at matching.dart:732/1203; existing owner DART-STARTUP-READING.2.25",
+      "exit_status": 2,
+      "log": ".linkedspec-data/scratch/nested-dart-analysis.log",
+      "sha256": "57de3ba1c48b3686f79fc459f54347beadf8e97e4ef7f28b8148daa5e18bce3a"
+    },
+    {
+      "command": "cd dart && bash ../tools/run_dart_project_data.sh analyze --fatal-infos --fatal-warnings test/nested_tree_readiness_test.dart",
+      "result": "PASS no issues",
+      "exit_status": 0,
+      "log": ".linkedspec-data/scratch/nested-dart-focused-analysis.log",
+      "sha256": "b8dd74b535dfea31f86c81e69876a7f3ca8787c07fc6e2c8d14b2277b996bfb3"
+    },
+    {
+      "command": "cd dart && bash ../tools/run_dart_project_data.sh format --output=none --set-exit-if-changed test/nested_tree_readiness_test.dart ../tests/language-readiness/nested-tree/dart_checks.dart",
+      "result": "PASS2 files/0 changes",
+      "exit_status": 0,
+      "log": ".linkedspec-data/scratch/nested-dart-format.log",
+      "sha256": "49e1d7c17e381c4cf29c50278d30c5bbb0615c2e84748ed46e37b61bb09bb48c"
+    },
+    {
+      "command": "bash tools/run_mdbook_local.sh",
+      "result": "PASS",
+      "exit_status": 0,
+      "log": ".linkedspec-data/scratch/nested-dart-book.log",
+      "sha256": "9ba104990c745fdecb8fbfaa94168a017f623caf6bf3946354686fcc8798c4ca"
+    }
+  ],
+  "source_hashes": {
+    "dart/test/nested_tree_readiness_test.dart": "d4911f49c83077cf4c428a3680293c449e874873c4ebb5b0ed9c6a3da5f97003",
+    "tests/language-readiness/nested-tree/dart_checks.dart": "81d20ea2e3c913338515013b8654c7a7bc368d222268adcc734167863c7ba410",
+    "tests/language-readiness/nested-tree/grammar.spec": "498ffda35b05222388c64d99b0acb132a56996e97de3ffa9312f7dda6ee0ed72",
+    "tests/language-readiness/nested-tree/cases.json": "7a36a4b32d8a5ac8a1d2f17d6d000a68c707bfc15a4b3a1e93e3e4ddaf4147c7",
+    "dart/pubspec.lock": "601c36466d20513d930c291c44143a801846349fda9ba13a8c6f63b15671a0c0",
+    "dart/lib/src/runtime/matching.dart": "4a8ae6e9367ab29817e18feb9df25e92a15171fa2456d4a7e18bacd455d12c57"
+  },
+  "counts": {
+    "routes": 6,
+    "original_calls_per_route": 40,
+    "typed_rejections_per_route": 14,
+    "mutants_per_route": 3,
+    "retained_engine_routes": 4,
+    "same_engine_recovery_transitions": 56,
+    "fresh_emitted_modules": 4
+  },
+  "unchanged": "git diff --exit-code HEAD -- dart/lib dart/pubspec.lock tests/language-readiness/nested-tree/grammar.spec tests/language-readiness/nested-tree/cases.json examples/integration: PASS",
+  "limits": "Reconstructed means SpecFile JSON then recompilation. Public v2/emitted entries construct an engine per call. Package-wide analysis still fails with the two known deprecations; no full component-gate or format admission claim. Julia/Lua and canonical reconciliation remain."
+}
