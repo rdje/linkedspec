@@ -570,6 +570,12 @@ verify_readiness({
     recovery_id = "siblings_restore_parent", span_case = "nested_distinct", span_end = 17 }),
 })
 
+dofile("tests/language-readiness/lossless-child/lua_carriers.lua").verify({
+  check = check, check_equal = check_equal, check_same_json = check_same_json,
+  read_file = read_file, write_file = write_file, with_temp_directory = with_temp_directory,
+  shell_quote = shell_quote, command_succeeded = command_succeeded,
+})
+
 if #failures == 0 then
   io.stdout:write("rule-local cursor generated source: ", assertions, " assertions passed\n")
 else

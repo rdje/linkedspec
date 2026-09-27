@@ -3,7 +3,7 @@
 Owner: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3`. Authority review on 2026-09-27 from
 clean `ca197a38c269cfeb89341505db83e395ebf6f308`. Perl segmentation is verified under `.3.2` and
 public staged child composition under `.3.3`; Rust matched carriers are verified under `.3.4.1`, Dart under `.3.4.2`
-and Julia under `.3.4.3`. Shared Lua routes remain pending.
+and Julia under `.3.4.3`. Both shared Lua ABI routes are verified under `.3.4.4`; canonical reconciliation remains `.3.5`.
 
 ## What this objective must establish
 
@@ -248,3 +248,37 @@ latest-world bindings and execution, strict merged-output JSON parsing, private 
 explicit. `.3.4.3` records direct-dependent/storage/neutral results and exact source/log hashes. No runtime, manifest,
 dependency or public authority changes. Existing registry `.2.13`, diagnostic `.2.14` and isolation `.2.26` obligations
 stay open before shared Lua proof and canonical parent reconciliation.
+
+
+## Shared Lua matched carriers — .3.4.4
+
+The existing `lua/test/rule_local_cursor_generated_source_test.lua` consumes shared `lua_carriers.lua` and
+`lua_checks.lua` under the lossless-child fixture. The same unchanged producer/checker source executes on PUC Lua
+and LuaJIT. Each ABI covers five matched parent/child routes: retained native and SpecFile-JSON reconstructed
+engines, public generated v2 on both compiled forms, and a fresh emitted process on the selected ABI. The latter
+three construct engines per call. Existing allocation and cleanup owners remain unchanged.
+
+All five routes preserve original/enriched13 twice, standalone child4/15, seven grammar mutants, exact typed staged
+codes and child status1. Independent UTF-8 scalar slicing verifies ordered spans, complete coverage and exact text
+reconstruction beside the authored classification oracle. The child grammar performs recognition and AST construction;
+host glue only invokes it and rebases its returned span. Exact callback order, source bounds, sidecars and selected
+accounting are checked. Four in-process pairs agree on26 complete successful enriched records.
+
+The actual first returned child's text/span are mutated while the second result and the next parse stay exact.
+Passing one object twice must fail the same isolation oracle with the exact alias error. The fresh process loads
+ten modules, validates metadata/plans, executes the same corpus/mutants/alias control and must return the exact
+completion report with successful status and empty stderr. The unchanged shared JSON utility and checker are
+copied into its owned workspace; verified removal follows execution.
+
+```sh
+bash tools/run_lua_project_data.sh puc lua/test/rule_local_cursor_generated_source_test.lua
+bash tools/run_lua_project_data.sh luajit lua/test/rule_local_cursor_generated_source_test.lua
+```
+
+Each ABI passes222 v2 assertions (new62/existing160), staged890, gap392, and document51 cases/27 round trips/24
+recoveries. Real storage passes19 owners/three dual-ABI native modules and30 census controls; neutral staged123/129
+and exact book proof pass. The checkpoint binds successful logs and source hashes. No runtime, contract, native
+module, fixture or dependency changes. Malformed arrays `.2.25`, diagnostic bytes `.2.26`, marker cycles/null
+`.2.27`, private capture ranges `.2.28`, malformed provenance `.2.29` and seeded-count defaults `.2.8.15/.16` remain
+owned by LUA-STARTUP-READING, alongside the installed-PUC baseline `.2.2` and stale guidance `.2.1`. Plain child
+values, dense valid snapshots/direct spans and small counters do not close those obligations.

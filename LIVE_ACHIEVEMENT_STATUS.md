@@ -6,13 +6,15 @@ Ordinary .spec language readiness under SPEC-LANGUAGE-SELF-CONTAINMENT.1.1. The 
 
 ## Latest Completed Slice
 
-- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.3 - verify Julia lossless child carriers` — five matched routes, original/enriched13, child4/15 and seven mutants pass. Actual-result mutation rejects a deliberately aliased control. Emitter194, dependents938, storage22/5, neutral123/129 and book proof pass.
+- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.4 - verify dual-ABI Lua lossless child carriers` — five routes per ABI preserve original/enriched13, child4/15 and seven mutants with actual-result/alias controls. Each passes v2:222, staged890/gap392 and document51/27/24; storage19/3/30, neutral123/129 and book proof pass.
 
 ## Next Action
 
-- Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.4: shared Lua lossless/actual-child proof on both ABIs, with exact provenance and resource boundaries.
+- Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.5: reconcile complete bounded lossless/child evidence, authoring costs and remaining owners, then require exact staged canonical CI for parent closure.
 
 ## Recent Completions
+
+- `2026-09-28` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.4` verifies five lossless/child routes on each Lua ABI.
 
 - `2026-09-28` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.3` verifies Julia lossless/child routes with an actual-result alias control.
 
@@ -43,8 +45,6 @@ Ordinary .spec language readiness under SPEC-LANGUAGE-SELF-CONTAINMENT.1.1. The 
 - `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.3` reconciles bounded nesting routes, authoring costs and canonical parent closure.
 
 - `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.7` removes absent-entry arithmetic warnings with104 focused assertions and full Phase01033.
-
-- `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.6` repairs census failure handling and exact Perl allocator registration.
 
 ## History
 

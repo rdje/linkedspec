@@ -750,10 +750,28 @@ used by ordinary `.spec` syntax on every backend.
 - [x] **LOCKSTEP** — Book and exact included sources, ledger, Knowledge, checkpoint, task/frontier, roadmaps, bounded live/history and MEMORY agree. Shared Lua .3.4.4 follows; canonical .3.5 alone closes the parent. Julia .2.13/.2.14/.2.26 remain open.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.4`
-  Status: `pending`
+  Status: `done`
   Goal: Prove the same lossless and actual-child corpus through shared Lua carriers on PUC Lua and LuaJIT.
   Dependencies: `.1.1.3.3.4.3`
   Acceptance: Run both ABIs with exact original oracles, mutants, authority controls, provenance and supported fresh carriers. Review current shared staged resource/provenance cards and keep both runtime rows explicit. Parent .3.4 closes only during canonical reconciliation .3.5.
+
+  Activation: Clean d903f0719823c001144ec346cd32a10fc292f7c6 after Julia proof; nine doctrines and post-commit pointer pass, brief0 and no outstanding job.
+  Verification tier: `focused`
+  Focused checks: Shared Lua five matched public native/reconstructed/generated/emitted routes on each ABI, unchanged original13 and child4/15, seven mutants, exact scalar/provenance/selected accounting/authority controls, actual-returned isolation plus aliased control; existing v2/nesting/context/staged/gap/document tests, real storage, neutral staged and exact book source; Knowledge/memory/history/doctrines and diff checks.
+  Canonical trigger: none for bounded consumer-only proof reusing the existing allocation owner; canonical .3.5 owns parent closure. Split runtime, infrastructure or public-contract repairs before change.
+  Existing obligations: Lua .2.25 malformed snapshot arrays, .2.26 diagnostic bytes, .2.27 marker cycles/null, .2.28 private capture bounds, .2.29 malformed provenance and .2.8.15/.16 seeded-counter defaulting remain open. Plain child values, dense valid snapshots/direct spans and small counters avoid those adversarial boundaries. Installed-PUC baseline .2.2 and guidance .2.1 remain separate.
+  Verification: PASS222 v2 assertions (new62/existing160) per ABI; staged890/gap392/document51 cases/27 round trips/24 recoveries per ABI. Storage19 owners/three dual-ABI modules/30 census controls; neutral123/129 and exact rendered source/scope pass. No runtime/fixture/native/dependency change.
+  Evidence: docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.4-verification.json and docs/knowledge/lua-lossless-child-carrier-readiness.md.
+  Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.4 - verify dual-ABI Lua lossless child carriers`.
+
+### `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.4` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Shared Lua v2 readiness lacked the actual lossless/child objective. Public parse_spec_with_staged_user_function_definitions, validate_spec, compile_spec and generated v2 consume unchanged grammars on both ABIs.
+- [x] **ROOT CAUSE (WHY + WHERE)** — WHY: gap preservation, actual child execution and result isolation need composed evidence beyond separate contract consumers. WHERE: the existing v2 consumer and new shared lossless checker/producer. No runtime repair is inferred; earlier staged boundary defects remain separately owned.
+- [x] **FIX** — Add five matched routes per ABI, independent UTF-8 scalar slicing, exact authored records and source rebasing, typed failures, selected denials/accounting and seven mutants. Mutate actual returned objects and reject a deliberately aliased pair; reuse existing workspace ownership.
+- [x] **ADDRESSED (verified)** — Both hosts pass222 including new62. Four in-process pairs agree on26 complete enriched records; all five execute original/enriched13 twice and child4/15. Fresh selected-ABI children validate ten modules and exact completion, successful status, empty stderr and cleanup. Two retained pairs remain distinct from three per-call routes.
+- [x] **NO REGRESSION** — Existing160 v2/nesting/context, staged890/gap392 and document51/27/24 pass per ABI. Real storage19/three modules/30 census controls and neutral123/129 pass. Shared grammar/oracle bytes, production/native modules and dependency configuration stay unchanged; unfiltered Lua baseline is not claimed.
+- [x] **LOCKSTEP** — Book, exact source includes, ledger, Knowledge, checkpoint, task/frontier, roadmaps, bounded live/history and MEMORY agree. Canonical .3.5 follows; all listed Lua array/resource/marker/provenance and baseline obligations remain open.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.5`
   Status: `pending`
@@ -974,7 +992,7 @@ used by ordinary `.spec` syntax on every backend.
 | 14 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.3` | `done` | Bounded nesting evidence/authoring limits reconciled; exact canonical receipt governs closeout. |
 | 15 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.1` | `done` | Perl native/fresh emitted context-name proof:11/17 cases,90 calls and34 recoveries per route. |
 | 16 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.2` | `done` | Context11/17/22 and original-default6/7/12 pass all six native routes. |
-| 17 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.4` | `pending` | Shared Lua lossless/actual-child proof on PUC Lua and LuaJIT. |
+| 17 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.5` | `pending` | Canonical reconciliation of all bounded lossless/actual-child routes. |
 
 ## Decisions
 
@@ -1007,6 +1025,8 @@ used by ordinary `.spec` syntax on every backend.
 - None for `.1.1`. The September27 clean prioritization supersedes the earlier callable-first schedule. Format implementation and the optional frontend remain gated by their own prerequisites.
 
 ## Verification Log
+
+September28 `.1.1.3.3.4.4`: Both Lua ABIs pass222 v2/new62, staged890/gap392 and document51/27/24. Five routes preserve original13/child4/15/seven mutants; actual-result/alias controls and fresh ten-module process status/stderr/report/cleanup pass. Storage19/3/30, neutral123/129 and exact book pass.
 
 September28 `.1.1.3.3.4.3`: Julia emitter194/new69, staged/gap/document938, storage22/5, neutral123/129 and exact book PASS. Five routes preserve original13/child4/15/seven mutants; direct returned-object mutation and a deliberately aliased pair establish bounded isolation.
 
@@ -1044,6 +1064,8 @@ September27 `.1.1.1`: seven neutral/structural checks, 34 ledger source-path/con
 
 ## Commit Log
 
+- `.1.1.3.3.4.4`: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.4 - verify dual-ABI Lua lossless child carriers`.
+
 - `.1.1.3.3.4.3`: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.3 - verify Julia lossless child carriers`.
 
 - `.1.1.3.3.4.2`: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.2 - verify Dart lossless child carriers`.
@@ -1061,6 +1083,8 @@ September27 `.1.1.1`: seven neutral/structural checks, 34 ledger source-path/con
 | `.0` | `SPEC-LANGUAGE-SELF-CONTAINMENT.0 - ratify expressive spec self-containment` | Direction capture only; no parser/runtime behavior. |
 
 ## Changelog
+
+- `2026-09-28`: Complete five shared Lua lossless/actual-child routes per ABI; canonical .3.5 reconciliation follows.
 
 - `2026-09-28`: Complete five Julia lossless/actual-child routes and actual-result isolation; shared Lua .3.4.4 follows.
 

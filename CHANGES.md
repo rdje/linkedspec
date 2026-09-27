@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-09-28 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.4: shared Lua lossless/child carriers
+
+One shared checker/producer verifies five matched routes on each of PUC Lua and LuaJIT using unchanged source/oracles. Exact scalar reconstruction, child4/15, seven mutants, selected authority/accounting, actual-result mutation and deliberate alias rejection pass. Each fresh child validates ten modules and exact report/status/stderr/cleanup. Per ABI v2:222 (new62), staged890/gap392 and document51/27/24 pass. Storage19/three modules/30 census controls, neutral123/129 and book proof pass; canonical parent reconciliation follows.
+
 ## 2026-09-28 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.3: five Julia lossless/child carriers
 
 Verify the unchanged segmentation/child grammars and JSON oracles across five Julia pairs. Two retain engines; three rebuild per call. Actual returned-child mutation and a deliberately aliased negative control prove bounded isolation. A fresh private-depot host checks ten emitted modules and exact completion. New69/emitter194, staged/gap/document938, storage22 owners/five package trees, neutral123/129 and exact book proof pass. No runtime or dependency changes; shared Lua follows.

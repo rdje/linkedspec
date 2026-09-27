@@ -1,0 +1,116 @@
+{
+  "owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.4",
+  "activation_commit": "d903f0719823c001144ec346cd32a10fc292f7c6",
+  "scope": "One shared Lua source/checker verifies five matched carriers on each ABI with original oracles, actual child grammar, independent scalar reconstruction and actual-result alias controls.",
+  "source_hashes": {
+    "lua/test/rule_local_cursor_generated_source_test.lua": "596a393f0be6e010d6be717c58656dcfc56a26c0acb27ff25db8f7296abd014f",
+    "tests/language-readiness/lossless-child/lua_carriers.lua": "1cd379ca959bcd4d92eec68ebe8f3e20e02d80e7b356adbc5d67db0785697456",
+    "tests/language-readiness/lossless-child/lua_checks.lua": "67a59f580f1daf5ad0c6d0f9a425ab1d8e8445e6d748dffa0a14ad0a63fa4367",
+    "tests/language-readiness/nested-tree/lua_checks.lua": "0cf52abd24227574f5e93389836176452332f75c1d751b823f1c70d2c31af435",
+    "tests/language-readiness/lossless-child/parent.spec": "8b19299a5d3715cba7f44dac266954e8b34497920a308f956f6e35b286ae6435",
+    "tests/language-readiness/lossless-child/child.spec": "34c5f109d401f83fa600a225682599fe924957fdbf45ad2136f55450248badd9",
+    "tests/language-readiness/lossless-child/cases.json": "2589ef997c978ea9fa1e80f886106df7235839d6a89439b88ece328d58e3b3c7",
+    "tests/language-readiness/lossless-segments/grammar.spec": "8f20d242b0f2ea0eee1d70b6f289cf96362cdf3b64ef4cbcc77f5631ffe3eb36",
+    "tests/language-readiness/lossless-segments/cases.json": "fd4fe58d6bb0efa7bcb609b863c3d9a2238bb5c62fa9a1814a143e04416bd89c",
+    "lua/test/staged_ast_enrichment_contract_test.lua": "44dc32b99b50e051fb45fced11f3ede32afcc7d84a1124b90d10883485e03fee",
+    "lua/test/inter_match_gap_capture_contract_test.lua": "323a3fca5c7d3e1a85af8f387b0efec3bff779feb5478974d195a5da930f05ce",
+    "lua/test/sexpr_document_v1_test.lua": "2ebd290a9ddb7f10c1ead3177f7b6eecc3e259e903ddd9ff9b3d84df7ffb79ab",
+    "lua/src/linkedspec/staged_ast_enrichment.lua": "28d2eea9da801a4d84054e718110e53611df6bdcea8d62217103d85e711b76ed",
+    "lua/src/linkedspec/sha256.lua": "9e102cb81ce541d6765ef9f41a102e22797f2bc23a246f19efa0124ee1e7db8e",
+    "tools/test_lua_project_data_storage.sh": "8e5fbcae1498a5bb864907e5a6c9d55fab8f2b760bf334fbdc96ff0a839d48d8",
+    "tools/run_lua_project_data.sh": "e073a655dae2be873f465fd6b7a0ad6266e8edb1f4faf7c75fc7817cd958b84b",
+    "capability_conformance/staged_ast_enrichment_contract.json": "578cd031fed01bb8d968a2b536e0d67430317c617a8296edb6c1beb5031bd882",
+    "docs/linkedspec-book/src/architecture/structured-format-program.md": "f6ff26da6903e2d36fd7afff07399be0640992ca8f0dc5c534303c6c67b1bff6"
+  },
+  "checks": [
+    {
+      "command": "bash tools/run_lua_project_data.sh puc lua/test/rule_local_cursor_generated_source_test.lua",
+      "result": "PASS222 assertions/new62; five pairs with original/enriched13 twice, strict child4/15, seven mutants, deliberate alias control and fresh exact ten-module report/status/stderr/cleanup"
+    },
+    {
+      "command": "bash tools/run_lua_project_data.sh puc lua/test/staged_ast_enrichment_contract_test.lua",
+      "result": "PASS890 assertions"
+    },
+    {
+      "command": "bash tools/run_lua_project_data.sh puc lua/test/inter_match_gap_capture_contract_test.lua",
+      "result": "PASS392 assertions"
+    },
+    {
+      "command": "bash tools/run_lua_project_data.sh puc lua/test/sexpr_document_v1_test.lua",
+      "result": "PASS51 cases/27 round trips/24 retained recoveries"
+    },
+    {
+      "command": "bash tools/run_lua_project_data.sh luajit lua/test/rule_local_cursor_generated_source_test.lua",
+      "result": "PASS222 assertions/new62; five pairs with original/enriched13 twice, strict child4/15, seven mutants, deliberate alias control and fresh exact ten-module report/status/stderr/cleanup"
+    },
+    {
+      "command": "bash tools/run_lua_project_data.sh luajit lua/test/staged_ast_enrichment_contract_test.lua",
+      "result": "PASS890 assertions"
+    },
+    {
+      "command": "bash tools/run_lua_project_data.sh luajit lua/test/inter_match_gap_capture_contract_test.lua",
+      "result": "PASS392 assertions"
+    },
+    {
+      "command": "bash tools/run_lua_project_data.sh luajit lua/test/sexpr_document_v1_test.lua",
+      "result": "PASS51 cases/27 round trips/24 retained recoveries"
+    },
+    {
+      "command": "bash tools/test_lua_project_data_storage.sh",
+      "result": "PASS19 owners/three dual-ABI native modules/30 census controls; generated outputs/traces repository-local"
+    },
+    {
+      "command": "bash tools/run_python_project_data.sh tools/check_staged_ast_enrichment_contract.py",
+      "result": "PASS9 rollout legs;123 contract/129 public mutations"
+    },
+    {
+      "command": "bash tools/run_mdbook_local.sh",
+      "result": "PASS exact parent/child source blocks once each; dual-ABI scope renders"
+    }
+  ],
+  "logs": {
+    ".linkedspec-data/scratch/lossless3344/puc-initial.log": {
+      "sha256": "0d6f99f182abe616d475baeac4f04136b7b6a59ed30813f7b41f0b2ccb75ce2f"
+    },
+    ".linkedspec-data/scratch/lossless3344/staged_ast_enrichment_contract_test-puc.log": {
+      "sha256": "b9115fd6ca2041bb5e1b0e8b4dfa9a8f982f711eb9f94fa98cfc8912c613d1d7"
+    },
+    ".linkedspec-data/scratch/lossless3344/inter_match_gap_capture_contract_test-puc.log": {
+      "sha256": "e864b86375b06d86487d36e9b92ad2e77c28252329bcdfebc21e8222e4679e26"
+    },
+    ".linkedspec-data/scratch/lossless3344/sexpr_document_v1_test-puc.log": {
+      "sha256": "9e9297435c1094d3a1faed88a489377f8fcebec06ee1e90475d1174339c20d6a"
+    },
+    ".linkedspec-data/scratch/lossless3344/luajit-initial.log": {
+      "sha256": "0d6f99f182abe616d475baeac4f04136b7b6a59ed30813f7b41f0b2ccb75ce2f"
+    },
+    ".linkedspec-data/scratch/lossless3344/staged_ast_enrichment_contract_test-luajit.log": {
+      "sha256": "e19cd589ab9570ae6ea451601e7ff32aa3e209e2fff3a884077feef5a606c928"
+    },
+    ".linkedspec-data/scratch/lossless3344/inter_match_gap_capture_contract_test-luajit.log": {
+      "sha256": "32f522f778f27fbf488190bf033511a5e72a43ebb6958ecd3d0a9c6a63dc8bce"
+    },
+    ".linkedspec-data/scratch/lossless3344/sexpr_document_v1_test-luajit.log": {
+      "sha256": "9e9297435c1094d3a1faed88a489377f8fcebec06ee1e90475d1174339c20d6a"
+    },
+    ".linkedspec-data/scratch/lossless3344/storage.log": {
+      "sha256": "1b9b2f663323bdfe50eae3729304e811cb904ecce2210a6b2272afe77ef56f8f"
+    },
+    ".linkedspec-data/scratch/lossless3344/staged-neutral.log": {
+      "sha256": "1a7f7a1b01c6865f08350276c188460f729f1dc6f30b05d25ddf904b25bbdf21"
+    },
+    ".linkedspec-data/scratch/lossless3344/mdbook.log": {
+      "sha256": "dc2266cbe3057a4e870a9237a021dd2e9aad9ff8871cdbbd6746879a7b87b0c5"
+    },
+    ".linkedspec-data/scratch/lossless3344/book-source.log": {
+      "sha256": "2e8a71a548ea371f5a55384923f554e0dce8c9a7bb60292f22f30145f5b8c4fc"
+    }
+  },
+  "limits": [
+    "Two retained pairs and three per-call routes on each ABI remain distinct.",
+    "Four in-process complete outcomes agree within each ABI; fresh hosts run the same independent oracle without cross-process full-response equality.",
+    "Lua startup .2.25/.2.26/.2.27/.2.28/.2.29/.2.8.15/.2.8.16 and baseline .2.2/guidance .2.1 remain open.",
+    "Ordinary direct spans/plain results/small counter controls do not establish general recursive resources or malformed-host authority safety.",
+    "No runtime, generated format, native module, dependency or original fixture movement; no standard-format or arbitrary gap/span admission."
+  ]
+}

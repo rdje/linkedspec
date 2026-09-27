@@ -1,10 +1,10 @@
 # MEMORY
 
-- activation_commit: `624aa1995d52426a69d7debfdaa2afd6ae578d5f` — clean activation base for Julia lossless child proof.
-- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.3 - verify Julia lossless child carriers`.
-- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.4` (pending) — shared Lua lossless and child carriers.
-- next_action: Activate .3.4.4 and verify shared Lua lossless/actual-child carriers on PUC Lua and LuaJIT after reviewing staged resource/provenance obligations.
-- in_flight_uncommitted: none; Julia .3.4.3 verified and recorded for clean handoff.
+- activation_commit: `d903f0719823c001144ec346cd32a10fc292f7c6` — clean activation base for shared Lua lossless child proof.
+- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.4 - verify dual-ABI Lua lossless child carriers`.
+- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.5` (pending) — canonical lossless/child reconciliation.
+- next_action: Activate .3.5, reconcile all lossless/actual-child carrier evidence and authoring costs, then close the bounded parent through exact staged canonical CI.
+- in_flight_uncommitted: none; shared Lua .3.4.4 verified and recorded for clean handoff.
 - blockers: bounded nesting/context proof reconciled; lossless probes and core-gap selection remain; .1.1.5 owns stale capability prose and startup .38/.40 recognition defects remain queued. ARCHOGEN owns downstream acceptance; named-argument and format proposals stay parked.
   Wrapper startup .7 remains open; recovery/purge stay prohibited. No interrupted Phase0 run counts as proof.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the

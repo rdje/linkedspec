@@ -40,8 +40,8 @@ establish a different, explicitly accepted mechanism. Merely adding alternate sy
 
 The owning task is `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1`; its first inventory records existing contracts and exact
 backend consumers. The state/control/result inventory is also recorded. Bounded nesting is reconciled; context-name carrier proof
-is described below. Perl, Rust, Dart and Julia lossless segmentation and public staged child composition are also
-verified below; Lua carrier proof remains pending before gap selection.
+is described below. Perl, Rust, Dart, Julia and both Lua ABIs verify the bounded lossless segmentation and public staged child
+composition below. Canonical reconciliation precedes gap selection.
 The format program's `.1` readiness gate remains pending. The original catalog and parked language extension retain
 all their conformance, Unicode, diagnostics, performance and backend obligations.
 
@@ -55,7 +55,7 @@ The caller supplies an already-compiled child grammar and frozen authority; the 
 The annotation cannot use `gap_text()`, copied strings or an arbitrary span as its text operand. The private
 `dispatch_span(...)` intrinsic has a separate authority contract and is not a public helper. The Perl proof below
 retains original item text beside child results and tests child rejection, source provenance and unauthorized
-identity selection. Rust, Dart and Julia's equivalent proof is also described below; Lua remains separate work.
+identity selection. Equivalent Rust, Dart, Julia, PUC Lua and LuaJIT proof is described below.
 
 The state inventory distinguishes three existing forms that a grammar author can compose:
 
@@ -493,8 +493,28 @@ bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history
 ```
 
 This bounded direct-result check does not repair the separately tracked general staged-consumer isolation test.
-Registry-pattern validation and diagnostic-byte containment remain separate Julia obligations. PUC Lua and LuaJIT
-are the remaining carrier checks before reconciling the complete bounded objective.
+Registry-pattern validation and diagnostic-byte containment remain separate Julia obligations.
+
+PUC Lua and LuaJIT each verify five matched routes using one shared consumer: retained native and SpecFile-JSON
+reconstructed engines, generated v2 on both compiled forms, and a fresh emitted process on the selected ABI.
+All five run the same original/enriched thirteen-case sequences twice, strict child4/15, seven grammar mutations
+and exact staged failures. The three generated/emitted routes construct engines per call.
+
+The Lua checker independently slices UTF-8 scalars and verifies exact item/gap classification, spans, adjacency
+and reconstruction. It invokes the actual child grammar, compares local/rebased spans and callback order, and
+checks selected authority and accounting fields. Four in-process pairs agree on complete successful records.
+As in Julia, an actual returned child is mutated and a deliberately aliased pair must fail the isolation oracle.
+A fresh selected-ABI process validates ten emitted modules and must exit successfully with empty stderr and the
+exact corpus/mutation/alias-control report. The existing test owner removes and verifies its temporary workspace.
+
+```sh
+bash tools/run_lua_project_data.sh puc lua/test/rule_local_cursor_generated_source_test.lua
+bash tools/run_lua_project_data.sh luajit lua/test/rule_local_cursor_generated_source_test.lua
+```
+
+This bounded Lua proof leaves malformed host snapshots/provenance, marker cycles, diagnostic-byte containment
+and extreme or malformed resource seeds as separately tracked obligations. It does not admit a standard format,
+arbitrary gap dispatch or recursive resource safety. Canonical reconciliation remains the next milestone.
 
 
 ## Approved and parked: language coverage and authoring difficulty

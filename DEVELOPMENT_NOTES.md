@@ -12,6 +12,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-09-28 — One Lua lossless checker preserves exact evidence on both ABIs
+
+The shared checker uses canonical tagged JSON to distinguish arrays, objects and scalar kinds. Independent UTF-8 scalar splitting checks source slices and full reconstruction alongside authored segment classifications; child recognition remains in the unchanged child grammar. Two retained pairs and three per-call pairs are explicit. Actual-result mutation is challenged by an intentionally aliased pair, and four in-process pairs agree on complete successful records. A fresh process on the selected ABI loads ten emitted modules and unchanged helper copies, validates metadata/plans and must return exact completion with empty stderr. Existing managed allocation and native modules are reused. This finite proof leaves malformed snapshot/provenance, marker cycle/null, diagnostic-byte and seeded-counter defects with their current repair owners.
+
 ## 2026-09-28 — Julia lossless proof challenges actual returned objects
 
 The Julia readiness checker mutates child text and source-span start on the actual first returned result, then compares a second result and a later parse to independent expectations. Passing the same result twice deliberately fails the identical isolation oracle. Four in-process pairs agree on complete successful enriched records; the fresh emitted pair runs the same corpus and controls with latest-world bindings and the existing private-depot launcher. Native and reconstructed engines retain instances; three generated/emitted routes rebuild per call. This bounded proof does not repair the older general staged consumer that mutates a deepcopy, nor registry-pattern and diagnostic-byte defects. Original fixtures, manifests, runtime and storage owners stay unchanged.
