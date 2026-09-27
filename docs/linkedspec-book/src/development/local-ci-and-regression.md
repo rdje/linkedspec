@@ -1510,12 +1510,15 @@ bash tools/test_perl_project_data_storage.sh
 ```
 
 The oracle may be launched from any working directory. It enters one managed run, checks that both its run and
-`TMPDIR` share the repository device, then exercises the same allocation shapes used by the 24 tracked Perl
+`TMPDIR` share the repository device, then exercises the same allocation shapes used by the 27 tracked Perl
 owners: default and named `File::Temp` directories/files, explicit `TMPDIR => 1`, a routed LinkedSpec trace file,
 and a real `tools/run_cli_conformance.pl` subprocess workspace. The CLI child verifies its actual cwd is the
 current run's `tmp/linkedspec-cli-*` directory, writes an expected trace artifact, and exits through normal
 workspace cleanup. The proof also locks the two oracle-capture tempfiles and preserves inert `/tmp` values used by
-semantic privacy tests. `tools/run_ci_local.sh` runs this oracle before its two 66-case primary legs.
+semantic privacy tests. The September27 inventory preserves all24 migration-era owners and adds the legacy
+path-search fallback, nesting readiness and Lua legacy-census regression tests. Exact membership checks name these
+three additions; each uses managed repository-local scratch. `tools/run_ci_local.sh` runs this oracle before its
+two 66-case primary legs.
 
 The pre-migration internal temporary root held 65 exact directories created by the CLI runner's manifest-owned
 workspace template. They were copied to repository-relative
@@ -1665,7 +1668,7 @@ The recurring process oracle is:
 $ bash tools/test_lua_project_data_storage.sh
 ```
 
-It freezes the exact 18 Lua-family allocation owners, requires every Lua owner to read routed `TMPDIR`, rejects
+It freezes the exact 19 Lua-family allocation owners, requires every Lua owner to read routed `TMPDIR`, rejects
 hard-coded operating-system temporary templates and anonymous `io.tmpfile()`, and builds both three-module ABI sets
 below a managed path containing a space. It checks actual filesystem identity and non-symlink module files, runs a
 real native parse, writes generated-source v2 and trace output, rejects an other-filesystem builder destination,
@@ -1674,13 +1677,19 @@ after the standalone MCP 111 + 210 proofs and both 177-test suites per ABI, prim
 105/105. Three new self-rooted boundaries raise the
 hostile outside-cwd routing proof from 30 to 33.
 
-Behavior-free gap planning `.6.0` leaves that oracle at 18 owners and the three dual-ABI native modules unchanged.
-The frozen emitted-proof leaf `.6.4` will add one permanent consumer-owned workspace, execute ten value and two
-typed-error modules in fresh PUC-Lua and LuaJIT children below routed `TMPDIR`, prove cleanup, and advance only the
-exact owner count to 19. No operating-system temporary or user-home cache is permitted.
+The emitted-proof consumer added the nineteenth workspace owner; its fresh PUC-Lua and LuaJIT children run below
+routed `TMPDIR` and prove cleanup. No operating-system temporary or user-home cache is permitted.
 
-Both initial old-root censuses contained zero exact `linkedspec-lua-*` directories, and the complete proof leaves
-them at zero. There was therefore no retained Lua payload to copy or delete. The installed Lua interpreters,
+The legacy-residue census is read-only and inspects immediate names in the old temporary root. It checks metadata
+only for `linkedspec-lua-*` names, rejects directories, and does not follow symlinks or enter unrelated directories.
+A clear scan returns0, residue returns1, and an open/read/metadata/close error returns2. The storage oracle requires
+success: an inaccessible or missing root cannot be interpreted as an empty root. For example, an unrelated protected
+child is ignored, whereas a matching directory containing a space is still rejected. Thirty regression assertions
+exercise these boundaries before the real-root scan. This corrects the former conditional pipeline that could print
+PASS after find failed; that earlier failed census is not accepted as evidence.
+
+Both initial migration censuses contained zero exact `linkedspec-lua-*` directories. The repaired September27
+read-only census also finds zero. There was therefore no retained Lua payload to copy or delete. The installed Lua interpreters,
 compiler, `pkg-config`, ABI/PCRE2 headers and library, and operating-system libraries are strictly necessary read-
 only toolchain inputs, not project storage. One composite Knowledge Map command whose remaining scratch belongs to
 Python/Rust is explicitly deferred to tool-family `.2.6`; all five Lua-owned stale commands now use managed

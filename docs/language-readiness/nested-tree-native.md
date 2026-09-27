@@ -126,3 +126,11 @@ Storage verification completes19-owner/three-module dual-ABI/device/owned-cleanu
 census reports a permission error while the script still returns0/PASS. New P1 .1.1.3.1.2.2.6 owns immediate repair
 and controlled failure proof before canonical reconciliation. This is not successful legacy-census evidence or
 an unfiltered full Lua gate; LUA-STARTUP-READING.2.3 still owns the malformed-regex native path separately.
+
+## Subsequent storage verification repair
+
+SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.6 preserves the earlier incomplete census as failed evidence and repairs
+its conditional error handling. Thirty exact process/output assertions and the real dual-ABI19-owner oracle pass.
+An adjacent audit preserves24 original Perl allocators and registers the two later managed tests plus this new
+regression, producing a verified27. Exact staged canonical proof governs infrastructure landing; this adds no
+parser or format capability. Canonical nesting evidence/authoring-cost reconciliation remains .1.1.3.1.2.3.

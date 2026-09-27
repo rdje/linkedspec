@@ -242,6 +242,7 @@ used by ordinary `.spec` syntax on every backend.
   Knowledge: docs/knowledge/perl-emitted-public-entry-trivia.md records exact mechanism, routes, source boundaries and related book correction.
   Gate transcript: .linkedspec-data/scratch/nested-entry-phase0.log is the complete-run target; only a true1..1033 and PASS closes it. Final focused log is nested-entry-focused.log; authoritative retained-owner RED is nested-entry-final-red-forced.log. Naive preload nested-entry-final-red.log selected current Compiler and is explicitly not RED evidence.
   Landing correction: The first pre-commit attempt rejected duplicate tier declarations on the newly decomposed parent and repair child. Remove the parent's leaf declarations and retain the child as the sole verification owner; no source/test change or bypass.
+  Allocator-registration audit: .1.1.3.1.2.2.6 traces t/nested_tree_readiness.t to this leaf's bb76f4437 commit. Its managed allocation was omitted from the separate Perl storage count; .6 owns exact registration/canonical proof without changing the verified parser behavior.
   Verification: Forced clean-owner RED15/192; candidate new regression192, focused274, full Phase01033/1033 in1026s. Original fixture unchanged; five ready rules,40 original native/emitted executions each,14 typed recoveries each, three mutants,14 entry controls repeated twice and two child controls. Book and standard gates pass; exact checkpoint: docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.1.1-verification.json.
   Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.1.1 - align emitted public entry`.
 
@@ -345,16 +346,31 @@ used by ordinary `.spec` syntax on every backend.
 - [x] **LOCKSTEP** — Book, ledger, Knowledge, checkpoint, roadmaps and live/history records state exact proof and limits. P1 .6 is the immediate next slice, followed by canonical parent reconciliation; the discovery is surfaced and owned, not deferred without scheduling.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.6`
-  Status: `pending`
+  Status: `done`
   Goal: Repair Lua storage verification so a failed legacy-residue census cannot print PASS.
   Priority: P1 verification integrity; execute immediately after .1.1.3.1.2.2.5 is committed, before canonical parent reconciliation.
   Reproduction: bash tools/test_lua_project_data_storage.sh returns0 and PASS19 while find reports Operation not permitted for an unrelated protected child of the old OS temp root; exact log is .linkedspec-data/scratch/nested-lua-storage.log.
   Root cause: The final find-to-rg pipeline is the condition of an if. An enumeration failure with no matches makes the condition false, bypassing both set-e and the residue failure body. Failed enumeration is therefore indistinguishable from a successful empty census.
   Acceptance: Enumerate only the relevant root entries without entering unrelated directories; preserve exact Lua-owned-prefix residue rejection and other-volume builder rejection. Propagate actual census failures. Prove empty/matching/error cases with repository-local controlled fixtures and real dual-ABI storage proof, preserve all existing boundaries, and use canonical infrastructure verification. No deletion or permission changes in other repositories or shared data.
   Dependencies: `.1.1.3.1.2.2.5` clean handoff.
-  Verification: pending.
-  Commit: pending.
+  Verification: Controlled old missing-root census returns false success; new regression PASS30. Real Lua storage PASS19 with both native ABI trios and no census error; staged Perl storage PASS27 with exact24-plus3 audit. Syntax and diff checks pass. Exact staged canonical receipt governs landing; parent readiness reconciliation remains separate.
+  Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.6 - reject incomplete storage censuses`.
 
+
+  Activation: Clean feb5a06fefe19f8744f9b178a1f930203292fec0 after Lua carrier proof; nine doctrines/post-commit pointer pass, brief0 and no job remains.
+  Verification tier: `canonical`
+  Focused checks: Controlled empty/residue/enumeration-error/symlink/prefix/permission-boundary cases, old conditional RED, new scanner GREEN, exact real dual-ABI storage proof and unchanged builder rejection; exact24-plus3 Perl allocator audit and staged storage proof; reviewed mutation71/selector70 public inventories and unchanged semantic controls; syntax, book, Knowledge, memory/history/doctrines/diff checks.
+  Canonical trigger: Storage verification mechanism changes; stage the exact candidate and require tools/run_ci_local.sh receipt before landing.
+  Direct-dependent defect owned here: Perl storage gate reproduces a24-to26 allocator failure. Exact audit from clean27a2168d preserves all24 original owners and finds only t/legacy_pathsearch_fallback.t (30b2cc3a0/startup .92) and t/nested_tree_readiness.t (bb76f4437/.1.1.3.1.2.2.1.1). The new census regression is the27th owner. Register these exact paths and update current cardinality; verify the staged manifest and real Perl storage gate before canonical admission.
+  Canonical preflight defect owned here: First full gate stops at mutation public expected70/observed71. Git audit identifies exactly one new public page since clean27a2168d: docs/linkedspec-book/src/development/regression-fixtures.md, created by30b2cc3a0/startup .92. Review its complete contents and register it in both public inventories (mutation70-to71; selector69-to70), preserve classifiers/frozen authorities/semantic mutation controls, synchronize current prose, and rerun focused checks plus exact canonical CI. No prior partial gate counts as success.
+  Implementation: Small read-only Perl scanner enumerates only immediate names, lstat-checks exact Lua-prefix entries without following links or entering unrelated directories, and distinguishes clear/residue/error status. Add meaningful repository-local regression controls and invoke them from the existing storage oracle before replacing its final conditional pipeline.
+
+- [x] **REPRODUCE / ISSUE** — Old missing-root conditional returns0 after find fails, reproducing the real protected-entry false PASS. Separate Perl storage gate fails24-to26; Git creation history identifies the two omitted owners exactly.
+- [x] **ROOT CAUSE (WHY + WHERE)** — tools/test_lua_project_data_storage.sh conditions find-to-rg on if, so failed enumeration and no matches take the same branch. tools/test_perl_project_data_storage.sh retained24 after two managed tests landed. Tool-backed shell/process diagnosis applies; parser probes are not relevant to these gates.
+- [x] **FIX** — Read-only immediate-name scanner checks open/read/lstat/close errors, filters before metadata, never follows links, and returns0/1/2 for clear/residue/error. The storage oracle requires success and runs the new regression. Register exactly the two omitted Perl tests plus the new census test; preserve existing boundaries.
+- [x] **ADDRESSED (verified)** — Thirty assertions prove exact child status/stdout/stderr across ten controls. Real Lua storage passes19 owners/two ABI trios; staged Perl storage passes27 and real trace/CLI scratch cleanup. Mutation71/14/11/10/50 and selector70/36/0/5/11 public controls pass after exact one-page registration. Exact canonical receipt is required before commit.
+- [x] **NO REGRESSION** — Shell/Perl syntax and git diff --check pass; existing builder cross-volume rejection, same-device allocation and owned cleanup remain exercised. No runtime/grammar/native-builder changes or external deletion. Historical failed census remains identified as incomplete.
+- [x] **LOCKSTEP** — Current storage book/counts, readiness ledger, Knowledge facts, checkpoint, live/roadmap pointers and bounded histories agree. The two creating leaves retain audit links; scripts/check_memory_architecture.sh and canonical doctrines govern landing.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.3`
   Status: `pending`

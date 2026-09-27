@@ -12,7 +12,7 @@ from typing import Any
 
 
 ROOT = Path(__file__).resolve().parents[1]
-EXPECTED_PUBLIC_FILE_COUNT = 70
+EXPECTED_PUBLIC_FILE_COUNT = 71
 PRIMARY_GUIDE = "docs/linkedspec-book/src/dsl/values-containers-and-flow-helpers.md"
 
 AUTHORITY_PATHS = {

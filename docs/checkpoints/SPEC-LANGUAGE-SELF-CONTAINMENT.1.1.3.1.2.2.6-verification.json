@@ -1,0 +1,169 @@
+{
+  "owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.6",
+  "activation_commit": "feb5a06fefe19f8744f9b178a1f930203292fec0",
+  "date": "2026-09-27",
+  "evidence": [
+    {
+      "command": "Controlled former find-to-rg conditional with repository-local nonexistent root",
+      "result": "RED: find error followed by false success",
+      "exit_status": 0,
+      "log": ".linkedspec-data/scratch/lua-census-baseline.log",
+      "sha256": "7bc501574fca4f4123c2b07a754a8249c96425e201c374e609865e49cf6ebc26"
+    },
+    {
+      "command": "bash tools/project_data_run.sh prove -v t/lua_legacy_temp_residue.t",
+      "result": "PASS30 exact status/stdout/stderr assertions across10 cases",
+      "exit_status": 0,
+      "log": ".linkedspec-data/scratch/lua-census-focused-final.log",
+      "sha256": "39ffa9527a9b8e26d41e1aa78ce2d10e20d23589d3027e99883b996a40f9e680"
+    },
+    {
+      "command": "bash tools/test_lua_project_data_storage.sh",
+      "result": "PASS19 owners, both ABI module trios, builder boundary, complete legacy census and owned cleanup",
+      "exit_status": 0,
+      "log": ".linkedspec-data/scratch/lua-census-storage-final.log",
+      "sha256": "1b9b2f663323bdfe50eae3729304e811cb904ecce2210a6b2272afe77ef56f8f"
+    },
+    {
+      "command": "bash tools/test_perl_project_data_storage.sh before inventory correction",
+      "result": "RED: inventory24-to26 drift after real allocation/trace/CLI checks",
+      "exit_status": 1,
+      "log": ".linkedspec-data/scratch/lua-census-perl-inventory-red.log",
+      "sha256": "7722801561ec6f4290594194e7cdd336b7e8cafb673bd36c8069867910f42a06"
+    },
+    {
+      "command": "bash tools/test_perl_project_data_storage.sh with staged new test",
+      "result": "PASS27 owners, real allocation/trace/CLI workspace and cleanup",
+      "exit_status": 0,
+      "log": ".linkedspec-data/scratch/lua-census-perl-storage-green.log",
+      "sha256": "883cd60c441ae54bfe14f7c48bec67e17d1e66ed9ad84c360a7b925820f243e4"
+    },
+    {
+      "command": "bash tools/run_ci_local.sh (first staged candidate)",
+      "result": "FAIL: mutation public expected70/observed71; preceding partial results are not canonical acceptance",
+      "exit_status": 1,
+      "log": ".linkedspec-data/scratch/lua-census-canonical-first-failed.log",
+      "sha256": "2207dcadf55f954760af8d96895e6600b89f43c49c4aa791dedeba448b7b4dc8"
+    },
+    {
+      "command": "bash tools/run_python_project_data.sh tools/check_public_aggregate_selector_surface.py (old count)",
+      "result": "RED: expected69/observed70",
+      "exit_status": 1,
+      "log": ".linkedspec-data/scratch/lua-census-selector-red.log",
+      "sha256": "38a3834e4698f92df375c621c9e39bb6e4144be57a92705b6e69b5e32245c1a1"
+    },
+    {
+      "command": "bash tools/run_python_project_data.sh tools/check_mutation_public_surface.py",
+      "result": "PASS71 public files/14 governed/11 classes/10 denials/50 mutations",
+      "exit_status": 0,
+      "log": ".linkedspec-data/scratch/lua-census-mutation-green.log",
+      "sha256": "f55415aacdf95ae079c433091d44d710a84274e53677cdd1e59af39ce0294e90"
+    },
+    {
+      "command": "bash tools/run_python_project_data.sh tools/check_public_aggregate_selector_surface.py",
+      "result": "PASS70 files/36 historical references/0 current examples/5 contrasts/11 mutations; composed retirement and capability checks pass",
+      "exit_status": 0,
+      "log": ".linkedspec-data/scratch/lua-census-selector-green.log",
+      "sha256": "df68ce9554e52e973567b9ae9607672e32292ae2e05b040e7aab32fb918df61e"
+    }
+  ],
+  "source_hashes": {
+    "tools/check_lua_legacy_temp_residue.pl": "5a453c58fe970d7ea2823f700d6875d34aeb9b989325bb1577cf319550fe0d44",
+    "t/lua_legacy_temp_residue.t": "03ac99abc020e6df8df0501a055df874994eb6891910b60b3bed973d59dae221",
+    "tools/test_lua_project_data_storage.sh": "8e5fbcae1498a5bb864907e5a6c9d55fab8f2b760bf334fbdc96ff0a839d48d8",
+    "tools/test_perl_project_data_storage.sh": "b76865efed9fd63d38b42b4e3a2c0ab6aa912a8cc5d22b7f9b98b7318a4c454f",
+    "tools/check_mutation_public_surface.py": "6dce83e027486c5ea2f4e81027dce9b6cae97ad54e53b1e86c4daf3f05696194",
+    "tools/check_public_aggregate_selector_surface.py": "a5991e8dbdfd6bdfd3226c8368ba9e341e741904280f21ee3fe870f26bad5808",
+    "docs/linkedspec-book/src/development/regression-fixtures.md": "ed58cbd9b48c87c15456a4e47e8a7a81a4ed1bf7f9da67679681883819110b5d"
+  },
+  "perl_inventory": {
+    "base": "27a2168d186cd606d0831e8fffc4d6196e159c07",
+    "base_owners": [
+      "t/cli_conformance_runner.t",
+      "t/duplicate_regex_slot_identity_perl_contract.t",
+      "t/generated_source_contract.t",
+      "t/lib/TestHelpers.pm",
+      "t/native_spec_resolution.t",
+      "t/phase0_regression.t",
+      "t/repeated_action_result_perl_contract.t",
+      "t/root_rule_selection_perl_routes.t",
+      "t/rule_local_cursor_perl_contract.t",
+      "t/rule_local_cursor_perl_descriptor.t",
+      "t/rule_local_cursor_perl_execution.t",
+      "t/semantic_index_perl_runtime_observation.t",
+      "t/semantic_introspection_perl_admission.t",
+      "t/trace_actionir_compact_lowerers.t",
+      "t/trace_actionir_method_lowering.t",
+      "t/trace_actionir_pipeline.t",
+      "t/trace_cli.t",
+      "t/trace_emit_context_bridge.t",
+      "t/trace_generated_handler_branch.t",
+      "t/trace_generated_nonrep_dispatch.t",
+      "t/trace_generated_rep_dispatch.t",
+      "t/trace_ruleir_planning.t",
+      "tools/gen_oracle_corpus.pl",
+      "tools/run_cli_conformance.pl"
+    ],
+    "current_owners": [
+      "t/cli_conformance_runner.t",
+      "t/duplicate_regex_slot_identity_perl_contract.t",
+      "t/generated_source_contract.t",
+      "t/legacy_pathsearch_fallback.t",
+      "t/lib/TestHelpers.pm",
+      "t/lua_legacy_temp_residue.t",
+      "t/native_spec_resolution.t",
+      "t/nested_tree_readiness.t",
+      "t/phase0_regression.t",
+      "t/repeated_action_result_perl_contract.t",
+      "t/root_rule_selection_perl_routes.t",
+      "t/rule_local_cursor_perl_contract.t",
+      "t/rule_local_cursor_perl_descriptor.t",
+      "t/rule_local_cursor_perl_execution.t",
+      "t/semantic_index_perl_runtime_observation.t",
+      "t/semantic_introspection_perl_admission.t",
+      "t/trace_actionir_compact_lowerers.t",
+      "t/trace_actionir_method_lowering.t",
+      "t/trace_actionir_pipeline.t",
+      "t/trace_cli.t",
+      "t/trace_emit_context_bridge.t",
+      "t/trace_generated_handler_branch.t",
+      "t/trace_generated_nonrep_dispatch.t",
+      "t/trace_generated_rep_dispatch.t",
+      "t/trace_ruleir_planning.t",
+      "tools/gen_oracle_corpus.pl",
+      "tools/run_cli_conformance.pl"
+    ],
+    "additions": [
+      {
+        "path": "t/legacy_pathsearch_fallback.t",
+        "commit": "30b2cc3a0d4ecca2a207d46b658287fd6bbb4c7a",
+        "owner": "SESSION-STARTUP-READING.92"
+      },
+      {
+        "path": "t/nested_tree_readiness.t",
+        "commit": "bb76f4437b36216cdd2a609ec70b8570ffaa12d8",
+        "owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.1.1"
+      },
+      {
+        "path": "t/lua_legacy_temp_residue.t",
+        "owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.6"
+      }
+    ]
+  },
+  "canonical": "Exact staged candidate must pass tools/run_ci_local.sh; receipt governs landing and is promoted to committed HEAD by the hook.",
+  "limits": "No runtime, grammar, builder, dependency or parser capability changes. No external deletion. Earlier incomplete Lua census remains failed evidence; optional full backend gates are not claimed. Parent nesting reconciliation remains separate.",
+  "public_inventory": {
+    "base": "27a2168d186cd606d0831e8fffc4d6196e159c07",
+    "added": [
+      "docs/linkedspec-book/src/development/regression-fixtures.md"
+    ],
+    "removed": [],
+    "creation_commit": "30b2cc3a0d4ecca2a207d46b658287fd6bbb4c7a",
+    "mutation_before": 70,
+    "mutation_after": 71,
+    "selector_before": 69,
+    "selector_after": 70,
+    "note": "Published dependency README is an unchanged existing inventory member; no dependency source inspection or modification."
+  },
+  "unchanged_public_semantics": "Each public checker differs from activation HEAD only in EXPECTED_PUBLIC_FILE_COUNT; all three frozen mutation authorities are byte-exact."
+}

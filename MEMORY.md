@@ -1,11 +1,11 @@
 # MEMORY
 
-- activation_commit: `618c0b974f77d576f7a9a983855582bdfaf2210c` — clean activation base for Lua/LuaJIT nesting carriers.
-- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.5 - verify Lua nesting carriers`.
-- active_work_unit: none; Lua/LuaJIT carrier leaf is complete.
-- next_action: Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.6 and repair the Lua storage census false PASS; canonical infrastructure proof precedes parent reconciliation.
+- activation_commit: `feb5a06fefe19f8744f9b178a1f930203292fec0` — clean activation base for Lua legacy census repair.
+- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.6 - reject incomplete storage censuses`.
+- active_work_unit: none — storage verification repair is complete.
+- next_action: Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.3 to reconcile nesting evidence/authoring costs and close bounded parents through canonical milestone proof.
 - in_flight_uncommitted: none.
-- blockers: carrier proof complete; storage census repair .1.1.3.1.2.2.6 is required before reconciliation; .1.1.5 owns stale capability prose and startup .38/.40 recognition defects remain queued. ARCHOGEN owns downstream acceptance; named-argument and format proposals stay parked.
+- blockers: carrier proof and storage census repair complete; canonical parent reconciliation remains; .1.1.5 owns stale capability prose and startup .38/.40 recognition defects remain queued. ARCHOGEN owns downstream acceptance; named-argument and format proposals stay parked.
   Wrapper startup .7 remains open; recovery/purge stay prohibited. No interrupted Phase0 run counts as proof.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
   active table; the task metadata doctrine inventories all consumers, permits arbitrary frontier-row rewrites,
@@ -41,7 +41,7 @@
 - current_map_leaves_scope_resolution: option A preserves pure functions. Helper-mediated rejection uses inline
   explicit-target `set(tree, ...)`; post-commit receiver-write proof uses caller-scoped `.with()`. No implicit
   caller capture or arbitrary user-defined bang method is admitted.
-- current_mutation_public_no_drift: `.19.9` closes public no-drift; current inventory is 70 Markdown files / 14 governed documents / eleven
+- current_mutation_public_no_drift: `.19.9` closes public no-drift; current inventory is 71 Markdown files / 14 governed documents / eleven
   authority-bound example classes / ten stale-current denials / 50 isolated public-checker mutations. Capability
   governance independently pins the owner and exact-one CI registration through four mutations.
 - current_core_state: typed source is 14/0/231; recognition 138/250/58; progressive 9/9/116 plus public

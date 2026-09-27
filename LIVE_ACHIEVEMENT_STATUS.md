@@ -6,13 +6,15 @@ Ordinary .spec language readiness under SPEC-LANGUAGE-SELF-CONTAINMENT.1.1. The 
 
 ## Latest Completed Slice
 
-- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.5 - verify Lua nesting carriers` — five routes per ABI,28 retained-engine recoveries each,133 emitter assertions and51 document cases pass. Legacy storage census failure is not accepted as proof; immediate repair is owned by .6.
+- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.6 - reject incomplete storage censuses` — census regression30, real Lua19/dual-ABI and Perl27 storage checks pass; exact canonical receipt governs landing.
 
 ## Next Action
 
-- Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.6 for the Lua storage census false-PASS repair before canonical parent reconciliation.
+- Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.3 for canonical nesting evidence and authoring-cost reconciliation.
 
 ## Recent Completions
+
+- `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.6` repairs census failure handling and exact Perl allocator registration.
 
 - `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.5` verifies five Lua/LuaJIT nesting routes and owns immediate storage-census repair.
 
@@ -43,8 +45,6 @@ Ordinary .spec language readiness under SPEC-LANGUAGE-SELF-CONTAINMENT.1.1. The 
 - `2026-09-27` — `RGX-CONSUMER-BUILD-REPORTS.1.3.1` records the unauthorized ARCHOGEN write, accurate fix publication and strict other-repository read-only boundary.
 
 - `2026-09-27` — `RGX-CONSUMER-BUILD-REPORTS.1.2` adopts verified f6e5acdc, preserves prior data, restores Rust public leading trivia and strict prefix validation, and requires receipt-bound canonical admission.
-
-- `2026-09-26` — `RGX-CONSUMER-BUILD-REPORTS.1.1` verifies the published LS-004 remedy; retained-pin adoption requires explicit authorization and native/canonical proof.
 
 ## History
 

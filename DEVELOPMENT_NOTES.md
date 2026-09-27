@@ -12,6 +12,23 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-09-27 — Storage census exit status and allocator registration
+
+A find-to-rg pipeline inside if bypasses errexit even with pipefail: a missing root reproduces exit0 and false
+success. The replacement scanner checks directory open/read/close and matching-entry lstat, filters names before
+metadata, never enters unrelated directories or follows symlinks, and distinguishes clear0/residue1/error2.
+Ten repository-local controls assert exact status and both output streams; the real legacy root now scans cleanly.
+
+The adjacent Perl oracle still froze24 owners. Git audit against27a2168d finds exactly two later additions:
+legacy_pathsearch_fallback.t at30b2cc3a0 and nested_tree_readiness.t atbb76f4437. Both already use managed storage;
+the missed step was registration. The census regression is the27th owner. Current count and exact membership are
+updated together; original leaf evidence receives an audit link without retroactively claiming canonical proof.
+
+The first canonical run then stops at a public Markdown inventory guard. The same startup .92 commit introduced
+regression-fixtures.md, the sole added public page since27a2168d. Both inventory counts missed that registration.
+Full page review introduces no semantic examples; exact mutation71/selector70 counts and current references are
+corrected with unchanged classifiers and frozen authorities. The partial gate is recorded as failed, then rerun.
+
 ## 2026-09-27 — Lua nesting proof and storage census integrity
 
 Canonical Lua JSON compares tagged empty arrays/objects, scalar kinds and exact Unicode spans. Native and

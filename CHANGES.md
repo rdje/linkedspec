@@ -12,6 +12,16 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-09-27 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.6: reject incomplete storage censuses
+
+Lua storage verification now distinguishes a clear census from residue or enumeration failure. A read-only
+immediate-entry scanner avoids unrelated protected children and preserves directory/symlink semantics;30 assertions
+and the real dual-ABI19-owner check pass. Exact Git audit preserves24 Perl allocators and identifies two omitted
+managed tests; those plus the new regression produce27, verified by the real Perl storage gate. No parser changes
+or external deletion. Canonical preflight also finds the regression-fixtures chapter added by startup .92 missing
+from two public inventories; complete review registers exactly that page (mutation71/selector70), preserving all
+semantic guards. Exact staged canonical receipt governs this infrastructure landing; nesting reconciliation follows.
+
 ## 2026-09-27 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.5: Lua and LuaJIT nesting carriers
 
 Both ABIs pass five public routes with40 original calls/three mutations each and28 retained-engine recoveries.

@@ -30,7 +30,7 @@ Public documentation may retain the removed spelling only to state a boundary, e
 clearly historical milestone. It may not present the spelling as an accepted example, a remaining compatibility
 surface, or future work. `tools/check_public_aggregate_selector_surface.py` enforces that distinction across the
 root README/roadmaps/architecture state, capability guide, and every mdBook source page. Its exact current inventory
-is 69 public files. It composes the runtime/source retirement checker so public and executable admission cannot
+is 70 public files. It composes the runtime/source retirement checker so public and executable admission cannot
 diverge. Its current inventory is 36 classified retired/history references and zero current examples. Seven concrete
 retired spellings are confined to one uniquely bounded migration section: two rejected examples and five ordered
 old-to-new contrasts guarded by eleven in-memory mutations. Four earlier counted occurrences were prose false
@@ -113,3 +113,12 @@ The correction advances only the expected classified count to36 and synchronizes
 the current census prose. Classifier rules, negative-context requirements, five
 ordered migration contrasts, eleven mutations, runtime rejection and executable
 source checks remain unchanged. The earlier dated evidence retains its scope.
+
+## September27 regression-fixture chapter registration
+
+The first canonical run for SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.6 stops at mutation expected70/observed71;
+the selector preflight also rejects expected69/observed70. Comparing the complete public path set with clean
+27a2168d finds only development/regression-fixtures.md, added by startup .92 at30b2cc3a0. Complete review finds
+regression/fuzz/fallback guidance and no mutation or retired-selector example. Both expected file counts advance
+by exactly one; classifiers, frozen authorities, mutation14/11/10/50 and selector36/0/5/11 controls remain intact.
+Current census prose moves with registration. The failed partial canonical run is not acceptance evidence.

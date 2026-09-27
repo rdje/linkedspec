@@ -40,6 +40,9 @@ if [[ "${1:-}" == '--reuse-complete-lua-gate' ]]; then
 fi
 (( $# == 0 )) || fail "unexpected argument: $1"
 
+prove "$REPO_ROOT/t/lua_legacy_temp_residue.t" ||
+ fail 'legacy Lua residue census regression failed'
+
 LUA_CMD=${LINKEDSPEC_LUA_CMD:-lua}
 LUAJIT_CMD=${LINKEDSPEC_LUAJIT_CMD:-luajit}
 command -v "$LUA_CMD" >/dev/null 2>&1 || fail "required PUC Lua runtime not found: $LUA_CMD"
@@ -184,9 +187,8 @@ set -e
 rg -q 'native output must use the repository filesystem' "$probe_root/reject.out" ||
  fail 'native builder rejection did not identify the filesystem boundary'
 
-if find "$external_root" -maxdepth 1 -type d -name 'linkedspec-lua-*' -print -quit | rg -q .; then
- fail 'an exact Lua-owned directory remains in the old temporary root'
-fi
+perl "$REPO_ROOT/tools/check_lua_legacy_temp_residue.pl" "$external_root" ||
+ fail 'legacy Lua residue census did not pass'
 
 rm -rf -- "$probe_root"
 if [[ -n "$owned_native_root" ]]; then rm -rf -- "$owned_native_root"; fi

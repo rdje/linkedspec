@@ -8,7 +8,7 @@ answers:
   - "which mutation examples must the public guide contain"
   - "does mutation public closeout rewrite the frozen authorities"
   - "how many mutation public documents and mutations are governed"
-date: 2026-09-22
+date: 2026-09-27
 status: current; public no-drift and parent FUTURE-PARITY-BACKLOG.19 closed under .19.9
 tags: [documentation, mutation, autovivification, map-leaves, governance, no-drift, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.19.9 adds tools/check_mutation_public_surface.py and current examples without changing production or frozen contract bytes. The checker inventories 63 public Markdown files; requires exact current anchors in 14 mutation-owning documents; binds eleven example classes to exact write, map_leaves bang, and composition policy strings; rejects ten stale current claims; and rejects 50 isolated authority/document/status mutations. Canonical CI tracks and runs it unconditionally, while tools/check_capability_conformance.pl pins its .19.9 owner and exact-one registration through four additional mutations."
@@ -19,7 +19,7 @@ reverify: "bash tools/run_python_project_data.sh tools/check_mutation_public_sur
 
 The canonical teaching destination is `docs/linkedspec-book/src/dsl/values-containers-and-flow-helpers.md`.
 Fourteen current public documents own exact mutation status or semantics; the checker inventories those documents
-within a bounded 70-file public Markdown surface and fails when a new public file appears without explicit review.
+within a bounded 71-file public Markdown surface and fails when a new public file appears without explicit review.
 
 The required examples cover missing-container creation, dense arrays, existing-kind conflicts, segment/RHS
 evaluation order, original-shape traversal, callback fields, receiver-identity guarding, rollback, detached
@@ -96,3 +96,12 @@ Preflight rejects mutation expected69/observed70 and selector expected68/observe
 The reviewed update advances only the exact file counts and current census prose.
 Mutation14/11/10/50 and selector35/0/5/11 controls, classifiers and frozen authorities
 remain unchanged; the existing recurring commands verify the enlarged inventory.
+
+## September27 regression-fixture chapter registration
+
+The first canonical run for SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.6 stops at mutation expected70/observed71;
+the selector preflight also rejects expected69/observed70. Comparing the complete public path set with clean
+27a2168d finds only development/regression-fixtures.md, added by startup .92 at30b2cc3a0. Complete review finds
+regression/fuzz/fallback guidance and no mutation or retired-selector example. Both expected file counts advance
+by exactly one; classifiers, frozen authorities, mutation14/11/10/50 and selector36/0/5/11 controls remain intact.
+Current census prose moves with registration. The failed partial canonical run is not acceptance evidence.

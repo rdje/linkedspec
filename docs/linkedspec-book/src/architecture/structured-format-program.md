@@ -154,8 +154,8 @@ bash tools/run_lua_project_data.sh luajit lua/test/rule_local_cursor_generated_s
 ```
 
 Both pass133 assertions and independently load four emitted modules with checked child status, exact output and
-cleanup. Canonical nesting reconciliation remains open: a separately owned storage-census check can report success
-after an enumeration error and is scheduled for immediate repair. This bounded proof does not establish the
+cleanup. The storage census now rejects enumeration errors and passes its controlled and real-root checks.
+Canonical nesting reconciliation remains open. This bounded proof does not establish the
 separately tracked malformed-regex native error path.
 This example does not open the structured-format campaign or establish arbitrary-depth resource safety.
 
