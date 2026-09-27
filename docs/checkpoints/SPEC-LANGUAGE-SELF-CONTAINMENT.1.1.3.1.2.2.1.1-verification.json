@@ -1,0 +1,80 @@
+{
+  "owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.1.1",
+  "activation_commit": "425153473d7a795c6a61ca5c1e2d4602cd1fc851",
+  "date": "2026-09-27",
+  "scope": "Perl generated public-entry correctness plus original nesting carrier proof; no v2 schema or neutral contract movement",
+  "evidence": [
+    {
+      "command": "env PERL5LIB= bash tools/project_data_run.sh prove -v -Iperl t/nested_tree_readiness.t t/generated_source_contract.t t/sexpr_document_v1.t t/typed_source_location_values.t t/typed_source_location_perl_contract.t",
+      "result": "PASS5 files/274 top-level tests in97s; new regression192",
+      "log": ".linkedspec-data/scratch/nested-entry-focused.log",
+      "sha256": "bebf8f5e08c4907c4bb931549eb3168c38bb395648c51fd876c7b98984657f71"
+    },
+    {
+      "command": "env PERL5LIB= bash tools/project_data_run.sh prove -v -Iperl t/phase0_regression.t",
+      "result": "PASS1033/1033 in1026s",
+      "log": ".linkedspec-data/scratch/nested-entry-phase0.log",
+      "sha256": "12b918bf5222e8374a8dd40ecb281985eaba3dd5343047d5d605de6519e84165"
+    },
+    {
+      "command": "env PERL5LIB= bash tools/project_data_run.sh perl -I.linkedspec-data/scratch/nested-entry-baseline -Iperl -MBaselineEntry t/nested_tree_readiness.t",
+      "result": "RED15/192; exact clean Runtime and Compiler owners forced before test bootstrap",
+      "log": ".linkedspec-data/scratch/nested-entry-final-red-forced.log",
+      "sha256": "a99c1aa175026573624bd002728a3b79145e6e1442ea2477cbf43019162184bb"
+    },
+    {
+      "command": "env PERL5LIB= bash tools/project_data_run.sh perl -Iperl .linkedspec-data/scratch/nested-perl-entry-probe.pl",
+      "result": "Before repair: native/emitted cursor6/0,1/0,0/0",
+      "log": ".linkedspec-data/scratch/nested-perl-entry-probe.log",
+      "sha256": "ff129ec3ec0e3d89262256588d12a3e1b47d37331a144a854a908bce347205ac"
+    },
+    {
+      "command": "env PERL5LIB= bash tools/project_data_run.sh perl -Iperl .linkedspec-data/scratch/nested-perl-entry-probe.pl",
+      "result": "After repair: native/emitted cursor6/6,1/1,0/0",
+      "log": ".linkedspec-data/scratch/nested-perl-entry-green.log",
+      "sha256": "8c65919de90f318b04c1e2077d6766804cb0bd7e15236e86de24e2ced24167b1"
+    },
+    {
+      "command": "LinkedSpec::Get on tracked nesting grammar with return_descriptor=>1; print meta.action_rewriter_migration",
+      "result": "Five ready rules, ratio1.0000, no blockers or compatibility surface",
+      "log": ".linkedspec-data/scratch/nested-perl-descriptor.log",
+      "sha256": "464066a793d874f011a5cb701bf45f8c6af17b43f4addd8571186dc8133ceef6"
+    },
+    {
+      "command": "bash tools/run_mdbook_local.sh",
+      "result": "PASS",
+      "log": ".linkedspec-data/scratch/nested-entry-book-final.log",
+      "sha256": "ce5be3b666d62c16fcbf133743625d50eeafc822ea04e431b208b0853a2eeebf"
+    }
+  ],
+  "source_hashes": {
+    "perl/LinkedSpec/Runtime.pm": "d6f430b97936639be7c00711af796c493b95c65e6b9c168c965942dd8bab4b26",
+    "perl/LinkedSpec/Compiler.pm": "da360b1080a830e693cfd24f1e96f516c15d288363f8c9b6c59187d6b64370d5",
+    "t/nested_tree_readiness.t": "66ac6ceb4a9bea7fe26eb1ec4ca9d147bbe939498f2e04c814f93f252a5d0386",
+    "tests/language-readiness/nested-tree/grammar.spec": "498ffda35b05222388c64d99b0acb132a56996e97de3ffa9312f7dda6ee0ed72",
+    "tests/language-readiness/nested-tree/cases.json": "7a36a4b32d8a5ac8a1d2f17d6d000a68c707bfc15a4b3a1e93e3e4ddaf4147c7"
+  },
+  "baseline_hashes": {
+    "Runtime": "3e3425f8003dbfc5ced607fc033abb1550b347e02d462b40a1ed73975a9c6a36",
+    "Compiler": "17e8026e0a618335b054611f930951b7ad6d68d2da3dd4a86cc933d1c922a52b"
+  },
+  "baseline_method": "Require exact repository-local clean module paths and populate their canonical %INC keys before the test bootstrap. BaselineEntry.pm is a tiny local preload; original pre-edit prove run independently fails the same15 tests.",
+  "excluded_evidence": {
+    "nested-entry-final-red.log": "Not RED: naive -M Runtime/Compiler lookup selected the old Runtime but current Compiler, as confirmed by %INC. The forced-path preload is authoritative."
+  },
+  "counts": {
+    "new_top_tests": 192,
+    "focused_top_tests": 274,
+    "original_executions_per_route": 40,
+    "immediate_recoveries_per_route": 14,
+    "mutants_per_route": 3,
+    "entry_cases_per_route": 14,
+    "entry_rounds": 2,
+    "child_controls_per_route": 2
+  },
+  "syntax": [
+    "perl -c perl/LinkedSpec.pm: syntax OK",
+    "perl -c -Iperl t/phase0_regression.t: syntax OK"
+  ],
+  "remaining": "Rust/Dart/Julia/Lua carrier proof; canonical nested-tree parent reconciliation before contextual objective"
+}

@@ -12,6 +12,19 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-09-27 — emitted entry must use the public wrapper boundary
+
+The original strict nesting grammar masked native/emitted drift because its prefix guard and catch-all both
+reject skipped comments. Removing only the guard exposes that native Get skips the prefix but old Execute starts
+at0. A minimal public cursor probe locates the missing boundary independently. Runtime now owns one safe scalar-ref
+preparation used by the native wrapper and generated Execute; child handlers remain separate. This is why mutation
+proof must compare mechanisms rather than merely count passing positive cases. The unrelated generated-source
+uninitialized-subtraction warnings reproduce in the earlier clean focused log; this slice adds no such warning.
+
+For reproducible old-owner proof, naive -M preload is insufficient: Runtime's dependency bootstrap selects current
+Compiler. Require both exact retained baseline paths and set canonical %INC keys before compiling the test. The
+initial pre-edit run and forced preload both fail the same15 tests. See the leaf checkpoint and Knowledge card.
+
 ## 2026-09-27 — native nesting readiness is a route-specific claim
 
 The first shared nested-tree objective now passes Perl/Rust/Dart/Julia/PUC Lua/LuaJIT through unchanged public

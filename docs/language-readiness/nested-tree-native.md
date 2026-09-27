@@ -49,3 +49,11 @@ and independent prefix/gap/span mutations remain owned by `.1.1.3.1.2.2`, split 
 execution. Parent reconciliation requires canonical milestone proof. The broad format campaign remains gated.
 
 Exact source/product/log hashes are in `docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.1-verification.json`.
+
+## Subsequent Perl carrier proof
+
+`SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.1.1` repairs emitted public-entry trivia drift exposed by the prefix
+mutation. The separate `t/nested_tree_readiness.t` passes192 tests and verifies five ready rules,40 original
+executions per native/fresh emitted route,14 immediate typed-rejection recoveries per route, three controlled
+mutants,14 repeated entry cases and two child-entry controls. Focused274 and complete Phase01033 pass. Other
+backends' carriers and canonical parent reconciliation remain separate; the native adapter table above is unchanged.

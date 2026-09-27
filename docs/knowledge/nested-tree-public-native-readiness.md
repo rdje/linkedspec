@@ -19,8 +19,7 @@ accepted cases in reverse order and requires exact rejection status with no emit
 fixture preserves half-open Unicode scalar spans, including supplementary characters and leading CRLF.
 
 The adapters terminate on rejected input; this is not same-engine rejection-recovery evidence. Rust reports
-Display text, not a typed error envelope. Supported carriers, typed Rust errors, recovery, descriptor readiness
-and prefix/gap/span mutation controls remain `.1.1.3.1.2.2`. The earlier Perl fixture separately proves native
+Display text, not a typed error envelope. [[perl-emitted-public-entry-trivia]] now proves Perl fresh emitted execution, recovery, readiness and three mutations. Rust/Dart/Julia/Lua carriers, typed errors and recovery remain `.1.1.3.1.2.2`. The earlier Perl fixture separately proves native
 and fresh emitted behavior under [[perl-hash-constructor-nested-values]].
 
 This grammar has bare atoms and parenthesized lists, with no string or comment syntax and no standard-format

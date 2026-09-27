@@ -205,10 +205,78 @@ used by ordinary `.spec` syntax on every backend.
 - [x] **LOCKSTEP** — The book's bounded grammar section reports exact six-runtime native coverage and honest carrier/recovery limits, with repeatable commands. CHANGES, DEVELOPMENT_NOTES, MEMORY, live status, roadmaps, task frontier, ledger and Knowledge Map route remaining work to .1.1.3.1.2.2. No standard-format support or broad campaign admission is claimed.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2`
-  Status: `pending`
+  Status: `active`
   Goal: Verify supported serialized/reconstructed/generated/emitted nested-tree routes, same-engine recovery after typed rejection, readiness descriptors and prefix/gap/span mutation sensitivity.
   Dependencies: `.1.1.3.1.2.1`
   Acceptance: Split backend-sized children before implementation; retain the same authored oracles and honest carrier coverage. No blanket proof from native results.
+
+  Children: `.1.1.3.1.2.2.1`, `.1.1.3.1.2.2.2`, `.1.1.3.1.2.2.3`, `.1.1.3.1.2.2.4`, `.1.1.3.1.2.2.5`
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.1`
+  Status: `active`
+  Goal: Prove Perl nested-tree carrier semantics using native Get and fresh emitted subprocess, typed rejection/recovery and prefix/gap/span mutation controls.
+  Acceptance: Original grammar/cases remain unchanged; exact value kinds and Unicode spans, no partial rejection values, explicit recovery after every rejection and honest carrier/readiness coverage.
+  Activation: Clean425153473d7a795c6a61ca5c1e2d4602cd1fc851; native proof committed, all nine hooks and post-commit pointer pass, brief0 and no pending job.
+  Scope: One new Perl regression consumes the shared fixture, public descriptor, native Get and fresh emitted subprocess. Three controlled grammar mutations demonstrate rejection/span sensitivity; do not change runtime semantics or original oracles.
+  Children: `.1.1.3.1.2.2.1.1`
+  Verification owner: The repair child carries this slice's sole tier/check/trigger declarations; final parent closure remains the canonical reconciliation milestone.
+  Finding: Tool-backed prefix mutation reveals emitted public-entry drift. Its child owns immediate repair; all remaining parent proof is retained and closes only after that repair passes.
+  Verification: All planned Perl evidence is verified and committed through child .1.1.3.1.2.2.1.1; canonical parent reconciliation is owned by .1.1.3.1.2.3 after the remaining backend children.
+  Commit: Proof and repair land together in `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.1.1 - align emitted public entry`; final parent closure belongs to canonical reconciliation.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.1.1`
+  Status: `done`
+  Goal: Restore the existing Perl public-entry leading blank/comment skip in fresh emitted Execute before completing carrier proof.
+  Priority: P1 now; blocks honest native/emitted mutation parity.
+  Activation: Same clean425153473d7a795c6a61ca5c1e2d4602cd1fc851 as the uncommitted parent probe; decompose in the same tree before any runtime edit.
+  Reproduce: New nested_tree_readiness.t fails only prefix emitted mutation108/120. Public minimal Top I.return(cursor_pos()) returns6 natively versus0 emitted for #skip followed by LF and (a), and1 versus0 for leading LF; ordinary (a) gives0 on both. Exact observations: .linkedspec-data/scratch/nested-perl-entry-probe.log.
+  Root cause: Runtime.pm run_get wraps native parser entry with position reset and leading complete blank/hash-comment-line skipping. Compiler.pm generated source postamble Execute line318 resets pos0 but never invokes that skip. Generated-source public Execute therefore bypasses the native public boundary; direct descriptor handlers are intentionally a different internal boundary.
+  Impact: A valid emitted parser can observe different entry cursor/source spans and acceptance from native Get. The original strict nesting grammar masks the difference because its prefix guard plus catch-all reject both paths; the guard-removal mutation exposes it. No RGX/PGEN defect or grammar workaround.
+  Scope: Share the existing safe scalar-ref public-entry preparation between native wrapper and emitted Execute, preserve invalid-input ownership and absolute source positions, and lock LF/comments/EOF/Unicode/non-skipped CRLF and child behavior. No helper syntax, v2 schema or neutral contract change.
+  Related book defect owned here: runtime-semantics.md section10.3 conflates .spec source validation with runtime input, claiming nonblank text and an initial rule declaration are always required. The unchanged empty nesting case and new empty/ordinary/comment-only entry controls prove that false; correct this directly alongside the entry API documentation. No runtime validation policy is relaxed.
+  Verification tier: `focused`
+  Focused checks: Exact old-source RED/new-source GREEN; native/fresh emitted entry controls plus original nesting, typed recovery and three mutations; generated-source, strict-document, typed-source, runtime-owner/input-boundary direct dependents; required syntax and complete Phase0; book, Knowledge, memory/history, doctrines and diff hygiene.
+  Canonical trigger: none for correcting this backend carrier to the existing admitted public-entry semantics without schema or contract movement; parent milestone remains canonical.
+  Acceptance: One source-owned public entry rule, no duplicated child skipping, unchanged original oracle and input content, exact error boundaries. Commit repair before remaining carrier branches.
+  Focused evidence: New regression passes192 top-level tests; five suites pass274 in97s. Baseline fails15/192 (one prefix mutation plus seven entry controls repeated twice). Public minimal probe now agrees6/6,1/1,0/0. Complete Phase0 later passes1033/1033 in1026s.
+  Knowledge: docs/knowledge/perl-emitted-public-entry-trivia.md records exact mechanism, routes, source boundaries and related book correction.
+  Gate transcript: .linkedspec-data/scratch/nested-entry-phase0.log is the complete-run target; only a true1..1033 and PASS closes it. Final focused log is nested-entry-focused.log; authoritative retained-owner RED is nested-entry-final-red-forced.log. Naive preload nested-entry-final-red.log selected current Compiler and is explicitly not RED evidence.
+  Landing correction: The first pre-commit attempt rejected duplicate tier declarations on the newly decomposed parent and repair child. Remove the parent's leaf declarations and retain the child as the sole verification owner; no source/test change or bypass.
+  Verification: Forced clean-owner RED15/192; candidate new regression192, focused274, full Phase01033/1033 in1026s. Original fixture unchanged; five ready rules,40 original native/emitted executions each,14 typed recoveries each, three mutants,14 entry controls repeated twice and two child controls. Book and standard gates pass; exact checkpoint: docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.1.1-verification.json.
+  Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.1.1 - align emitted public entry`.
+
+### `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.1.1` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Public `LinkedSpec::Get` versus `emit_generated_source` cursor probes show6/0 for #skip plus LF and1/0 for leading LF. The nesting prefix mutation exposes the same divergence. The pre-edit run and exact clean-owner preload both fail15/192 assertions; the naive preload that selected current Compiler is excluded.
+- [x] **ROOT CAUSE (WHY + WHERE)** — WHY: native Runtime applies public leading-trivia preparation but emitted Execute only resets0. WHERE: `perl/LinkedSpec/Runtime.pm` run_get wrapper and `perl/LinkedSpec/Compiler.pm` generated postamble; public source emission shows the missing step. Direct child/descriptor handlers intentionally bypass public preparation. The original grammar's two rejection guards had masked the difference.
+- [x] **FIX** — Extract the existing scalar-ref-safe preparation into Runtime, call it from native wrapper and freshly emitted Execute, and load that owner in emitted source. Preserve full input, absolute Unicode positions, child entry, guard ownership and v2 schema. Correct the nearby book confusion between .spec compilation and ordinary parser input.
+- [x] **ADDRESSED (verified)** — New regression192 passes natively and through an independently loaded emitted process: five-rule readiness,40 original executions per route,14 immediate typed status1 recoveries, exact result kinds/spans, prefix/gap/span mutants,14 entry controls repeated twice and two child controls. Baseline/current failure-name comparison removes all15 failures and adds none.
+- [x] **NO REGRESSION** — Five focused suites pass274; complete `prove -v -Iperl t/phase0_regression.t` reaches true `1..1033` and PASS in1026s. Required syntax passes; unchanged original grammar/cases and source/log hashes are recorded. Existing uninitialized-subtraction warnings have a matching pre-repair baseline and are not new failures.
+- [x] **LOCKSTEP** — Public API examples, pipeline/appendix explanations, bounded nesting coverage, Knowledge Map, task tree, ledger, CHANGES, DEVELOPMENT_NOTES, MEMORY, live status and roadmaps agree. Exact book rendering, history limits, memory and diff hygiene pass; final staged doctrines govern landing. Parent milestone closure remains separate from this bounded repair.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.2`
+  Status: `pending`
+  Goal: Prove Rust nested-tree carrier semantics using native, reconstructed and generated supported routes, typed rejection/recovery and prefix/gap/span mutation controls.
+  Acceptance: Original grammar/cases remain unchanged; exact value kinds and Unicode spans, no partial rejection values, explicit recovery after every rejection and honest carrier/readiness coverage.
+  Dependencies: `.1.1.3.1.2.2.1.1` (verified Perl proof; parent status closes at canonical reconciliation).
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.3`
+  Status: `pending`
+  Goal: Prove Dart nested-tree carrier semantics using native, reconstructed and independently emitted supported routes, typed rejection/recovery and prefix/gap/span mutation controls.
+  Acceptance: Original grammar/cases remain unchanged; exact value kinds and Unicode spans, no partial rejection values, explicit recovery after every rejection and honest carrier/readiness coverage.
+  Dependencies: `.1.1.3.1.2.2.2`
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.4`
+  Status: `pending`
+  Goal: Prove Julia nested-tree carrier semantics using native, reconstructed/generated-plan and emitted supported routes, typed rejection/recovery and prefix/gap/span mutation controls.
+  Acceptance: Original grammar/cases remain unchanged; exact value kinds and Unicode spans, no partial rejection values, explicit recovery after every rejection and honest carrier/readiness coverage.
+  Dependencies: `.1.1.3.1.2.2.3`
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.5`
+  Status: `pending`
+  Goal: Prove Lua nested-tree carrier semantics using both ABIs across native, reconstructed/generated-plan and emitted supported routes, typed rejection/recovery and prefix/gap/span mutation controls.
+  Acceptance: Original grammar/cases remain unchanged; exact value kinds and Unicode spans, no partial rejection values, explicit recovery after every rejection and honest carrier/readiness coverage.
+  Dependencies: `.1.1.3.1.2.2.4`
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.3`
   Status: `pending`
@@ -431,6 +499,8 @@ used by ordinary `.spec` syntax on every backend.
 | 4 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.1` | `done` | Typed constructor values and native/fresh emitted spans verified; complete Phase0 1033/1033. |
 | 5 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.6` | `done` | Generic flat bound/computed values, capture compatibility, native/emitted164 and complete Phase01033 verified. |
 | 6 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.1` | `done` | Exact native public-loader6/7/12 on six runtimes; carrier/mutation .1.1.3.1.2.2 follows. |
+| 7 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.1.1` | `done` | Emitted-entry repair and Perl carriers verified192/focused274/Phase01033; Rust is next. |
+| 8 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.2` | `pending` | Rust carriers, typed recovery and mutations after the Perl repair commit. |
 
 ## Decisions
 
@@ -464,6 +534,8 @@ used by ordinary `.spec` syntax on every backend.
 
 ## Verification Log
 
+September27 `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.1.1`: baseline RED15/192; new regression192, focused274, Phase01033 and exact entry/child/mutation/recovery proof pass. Perl carrier evidence is complete; remaining backends precede canonical parent closure.
+
 September27 `.1.1.3.1.2.1`: native public-loader6/7/12 passes on all six runtimes; unchanged authored source/oracles, exact JSON kinds/spans and protected hashes verified. See its checkpoint and nested-tree-native ledger.
 
 September27 `.1.1.6`: baseline RED31/164; candidate native/emitted164, focused120, Phase01033 and exact rendered LF/CRLF example pass. Its checkpoint preserves commands, source/log hashes and excluded interrupted evidence.
@@ -485,6 +557,8 @@ September27 `.1.1.1`: seven neutral/structural checks, 34 ledger source-path/con
 | `.0` | `SPEC-LANGUAGE-SELF-CONTAINMENT.0 - ratify expressive spec self-containment` | Direction capture only; no parser/runtime behavior. |
 
 ## Changelog
+
+- `2026-09-27`: Perl carrier mutation proof exposes and repairs emitted public-entry drift in .1.1.3.1.2.2.1.1. All original grammar/oracles remain exact; next is Rust carrier proof.
 
 - `2026-09-27`: `.1.1.6` fixes generic flat immediately as requested, including baseline-confirmed private capture compatibility. Remaining nesting route proof resumes from its clean commit.
 

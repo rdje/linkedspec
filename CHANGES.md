@@ -12,6 +12,16 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-09-27 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.1.1: emitted Perl public entry
+
+Fresh emitted Execute now shares native Runtime cursor preparation: reset once, skip complete leading LF blank
+and hash-comment lines, retain source/absolute coordinates, and leave child entry and invalid-input guards intact.
+A nesting prefix mutation exposed the old6/0 and1/0 cursor mismatch. Old owners fail15/192 regression tests;
+shared preparation passes192, five focused suites274 and complete Phase01033/1033 in1026s. The new test also
+locks40 original executions and14 immediate typed-rejection recoveries per route, prefix/gap/span mutants,
+14 entry controls repeated twice and child-entry controls. Corrected book prose separates spec-source validation
+from runtime input. Regenerate old artifacts for this fix; v2 schema is unchanged. Remaining backend carriers follow.
+
 ## 2026-09-27 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.1: native nested-tree readiness
 
 The unchanged six-positive/seven-negative nesting fixture passes all six public native text adapters.

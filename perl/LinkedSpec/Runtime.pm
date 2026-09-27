@@ -14,6 +14,22 @@ BEGIN {
 }
 use LinkedSpec::OwnerDispatch ();
 
+# Public native and emitted entry share this cursor preparation. Child handlers
+# deliberately bypass it. Leave invalid inputs to the parser's existing guard.
+sub _prepare_public_input {
+ my ($input_ref) = @_;
+ return unless ref($input_ref) eq 'SCALAR';
+ pos($$input_ref) = 0;
+ while (1) {
+  if ($$input_ref =~ /\G[ \t]*\n/gc) {
+  } elsif ($$input_ref =~ /\G[ \t]*#[^\n]*(?:\n|\z)/gc) {
+  } else {
+   last;
+  }
+ }
+ return;
+}
+
 #------------------------------------------------------------------------------
 # Function: _call_runtime_ctx
 # Purpose : Lazy-load and invoke one `RuntimeContext` helper through the local
@@ -130,20 +146,7 @@ sub run_get {
     # could run, with last_error left empty. The guard mirrors Compiler.pm's exact
     # acceptance (ref ne 'SCALAR'). (MEDIUM-IMPACT.3.2 added the wrapper;
     # PHASE0-BACKHALF-TRIAGE.4 added this guard.)
-    if (ref($input_ref) eq 'SCALAR') {
-     # Reset position to start of input — the build process may have
-     # advanced pos() during bootstrap parsing.
-     pos($$input_ref) = 0;
-     # Skip leading comment lines (# ...) and blank lines before the
-     # main parse loop.
-     while (1) {
-      if ($$input_ref =~ /\G[ \t]*\n/gc) {
-      } elsif ($$input_ref =~ /\G[ \t]*#[^\n]*(?:\n|\z)/gc) {
-      } else {
-       last;
-      }
-     }
-    }
+    _prepare_public_input($input_ref);
     return $original_parser->($input_ref, @invocation_options);
    };
   }

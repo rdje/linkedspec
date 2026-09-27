@@ -746,10 +746,14 @@ while preserving exact parse-result JSON.
 
 ### 10.3 Input Validation
 
-Before parsing, the input is validated:
-- Must be a defined scalar reference.
-- Must contain at least one character of non-comment/non-blank content.
-- The first real line must be a valid rule start.
+Spec compilation validates authored rule structure; parser input is a separate boundary. The Perl public
+execution API accepts a scalar reference and leaves input-shape errors to its existing runtime guard. Empty
+text and comment-only text are passed to the selected grammar, which determines acceptance and the result;
+ordinary parsed data does not have to begin with a `.spec` rule declaration.
+
+Native and freshly emitted public entry reset the cursor and skip the complete leading blank/hash-comment
+lines described in [Runtime wrapper](../compiler/pipeline-overview.md#runtime-wrapper). The source remains
+intact and all coordinates remain absolute. This preparation happens once per public call, not on child entry.
 
 ## 11. Determinism Guarantees
 

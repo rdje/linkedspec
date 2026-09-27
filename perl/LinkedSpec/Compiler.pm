@@ -156,6 +156,7 @@ sub _generated_source_preamble {
   . "no warnings 'void';\n"
   . "use re 'eval';\n"
   . "use LinkedSpec::GeneratedSource ();\n"
+  . "use LinkedSpec::Runtime ();\n"
   . "use LinkedSpec::Trace ();\n"
   . "use LinkedSpec::EntryRuleSelection ();\n"
   . "use LinkedSpec::RuntimeDiagnosticOutput ();\n"
@@ -318,7 +319,7 @@ sub ValidateGeneratedPlan {
 sub Execute {
  my (\$input_ref, \$invocation_options) = \@_;
  ValidateGeneratedPlan();
- pos(\$\$input_ref) = 0 if ref(\$input_ref) eq 'SCALAR';
+ LinkedSpec::Runtime::_prepare_public_input(\$input_ref);
  my \$diagnostic_sink = LinkedSpec::RuntimeDiagnosticOutput::validate_invocation_options(
   \$invocation_options,
  );

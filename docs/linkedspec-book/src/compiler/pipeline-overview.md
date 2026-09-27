@@ -636,9 +636,9 @@ The outward descriptor is not the compiler’s only internal truth. It is a publ
 
 At the start of each public parser invocation, the cursor advances past complete
 leading blank lines (spaces/tabs followed by LF) and leading comment lines
-(spaces/tabs, `#`, then text through LF or end of input). The Perl reference applies
-this boundary in `Runtime::run_get`; Rust applies it to native and generated entry
-routes. It runs once before entering the selected top rule. Child entry and later
+(spaces/tabs, `#`, then text through LF or end of input). Perl's native wrapper and
+freshly emitted `Execute` share the same entry preparation; Rust likewise applies
+it to native and generated entry routes. It runs once before entering the selected top rule. Child entry and later
 match attempts retain the cursor left by the grammar.
 
 The full input remains available and coordinates remain absolute. For example,

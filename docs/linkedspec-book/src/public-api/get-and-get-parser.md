@@ -401,6 +401,34 @@ The older `Get(... generate_only => 1, dump_parser_source => 1, parser_source_re
 compatible and emits the same text. The dedicated method is preferred for application code because it returns the
 source directly and normalizes emission failures.
 
+### Perl input entry and absolute positions
+
+Native `Get` parsers and freshly emitted `Execute` share the same public entry behavior. Each invocation resets
+its scalar-reference input cursor and skips complete leading blank lines (spaces/tabs plus LF) and leading
+`#` comment lines, including a comment ending at EOF. It preserves the full source and absolute Unicode scalar
+positions. Child rule calls do not repeat this preparation.
+
+For a grammar whose entry action returns `cursor_pos()`:
+
+| Input | Entry position |
+| --- | ---: |
+| `word` | 0 |
+| `\nword` | 1 |
+| ` \t\nword` | 3 |
+| `#雪🙂\nword` | 4 |
+| `#comment` | 8 |
+| ` \tword` | 0 |
+| `\r\nword` | 0 |
+
+A CRLF-only line and ordinary horizontal or non-ASCII whitespace are not LF blank lines under this rule.
+`input_slice(0, input_end_pos())` still returns the original text. Empty input is passed to the authored grammar;
+its acceptance and result depend on that grammar. A complete-document parser must validate skipped source too,
+as the [bounded nesting example](../architecture/structured-format-program.md#bounded-nesting-trial) does.
+
+Regenerate older Perl artifacts to receive the corrected entry behavior; the existing v2 plan/schema remains
+unchanged. The regression covers repeated native and fresh-process emitted execution, Unicode/comment/EOF
+controls, child entry and exact typed rejection recovery.
+
 ### Rust generated-source entry selection
 
 Rust `emit_rust_source_v2(&compiled, source_identity)` emits generated-source v2 as ordered `CompiledSpec` state

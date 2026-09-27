@@ -89,7 +89,7 @@ Recursive rule calls restore the enclosing list's `start` and `items` bindings. 
 The trial exposed and repairs a Perl constructor lowering defect; the original expected spans remain unchanged.
 The bounded native proof passes the same six accepted and seven rejected inputs on Perl, Rust, Dart, Julia,
 Lua and LuaJIT, including CRLF and a supplementary Unicode character. Each public-loaded engine returns exact
-ASTs and spans for twelve accepted parses. The earlier Perl test also covers fresh emitted parsers.
+ASTs and spans for twelve accepted parses. The Perl proof also covers fresh-process emitted parsers, five-rule ActionIR readiness and immediate recovery after each typed rejection. Prefix/gap/span mutations demonstrate sensitivity to each claimed boundary.
 
 To repeat a prepared runtime's public-loader check, run from the repository root:
 
