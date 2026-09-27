@@ -40,8 +40,8 @@ establish a different, explicitly accepted mechanism. Merely adding alternate sy
 
 The owning task is `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1`; its first inventory records existing contracts and exact
 backend consumers. The state/control/result inventory is also recorded. Bounded nesting is reconciled; context-name carrier proof
-is described below. Perl lossless segmentation and public staged child composition are also verified below;
-their other backend routes remain pending before gap selection.
+is described below. Perl and Rust lossless segmentation and public staged child composition are also verified
+below; Dart, Julia and Lua carrier proof remains pending before gap selection.
 The format program's `.1` readiness gate remains pending. The original catalog and parked language extension retain
 all their conformance, Unicode, diagnostics, performance and backend obligations.
 
@@ -55,7 +55,7 @@ The caller supplies an already-compiled child grammar and frozen authority; the 
 The annotation cannot use `gap_text()`, copied strings or an arbitrary span as its text operand. The private
 `dispatch_span(...)` intrinsic has a separate authority contract and is not a public helper. The Perl proof below
 retains original item text beside child results and tests child rejection, source provenance and unauthorized
-identity selection. Equivalent backend composition remains separate work.
+identity selection. Rust's equivalent proof is also described below; further backends remain separate work.
 
 The state inventory distinguishes three existing forms that a grammar author can compose:
 
@@ -379,7 +379,7 @@ does not preserve this program's result construction.
 The thirteen authored cases pass through native Perl and independently loaded emitted Perl source. They compare
 exact records and scalar slices, reconstruct the original input, repeat calls on retained parsers and mutate returned
 gap data before another call. Deliberate changes to item selection, tail retention, item spans and entry-prefix
-retention are detected. Equivalent backend carrier proof remains separate work.
+retention are detected. The Rust carrier proof below uses the same records and four mutations.
 
 ### An actual bounded child grammar
 
@@ -425,7 +425,35 @@ permissive leading-zero recognition, wrong local/rebased spans and delimiter-inc
 
 This finite composition proves selected step/call denials, not recursive resource safety, every diagnostic/result
 ceiling or conflicting stitch-target preparation. Distinct item objects avoid the separately tracked Perl/Rust
-destination-conflict defect. Other backend carriers and whole-format conformance remain outside this result.
+destination-conflict defect. Whole-format conformance remains outside this result.
+
+Rust now runs the unchanged parent and child grammars through six matched carrier pairs:
+
+| Parent and child route | Reuse boundary |
+| --- | --- |
+| Native execution of compiled engines | Retained engines |
+| Generated-plan execution of compiled engines | Retained engines |
+| Native execution of JSON-reconstructed engines | Retained engines |
+| Generated-plan execution of JSON-reconstructed engines | Retained engines |
+| Public serialized v2 entry | New engines per call |
+| Independently compiled emitted modules | New engines per call |
+
+Each pair repeats the thirteen original segmentation cases and their enriched counterparts twice, executes the
+four accepted/fifteen rejected child cases, and detects all seven segmentation/child mutations. Exact source
+slicing and reconstruction remain separate from child AST and provenance assertions. The first four pairs retain
+the parent and child engines after failure; the last two demonstrate isolated subsequent calls. The five in-process
+pairs also compare their complete successful enriched values. Fresh emitted modules use the same independent
+assertions, with successful child process status and three executed child tests required by the outer test.
+
+```sh
+bash tools/run_cargo_local.sh test --locked --offline --manifest-path rust/Cargo.toml \
+  -p linkedspec-runtime --test nested_tree_readiness lossless -- --nocapture
+```
+
+Rust preserves exact staged failure codes through its execution error wrappers and typed status1 exits for the
+standalone child. This proof does not claim identical error objects across languages. It also leaves returned-marker
+validation, maximum-counter exhaustion and competing stitch targets with their existing repair owners. Dart, Julia,
+PUC Lua and LuaJIT remain the next carrier checks.
 
 
 ## Approved and parked: language coverage and authoring difficulty

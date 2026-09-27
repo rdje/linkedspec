@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-09-27 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.1: six Rust lossless/child carriers
+
+Extend the existing Rust readiness harness with exact segmentation and actual precompiled child checks through six matched native/reconstructed/generated/serialized/emitted pairs. Reuse the original .spec/JSON oracles and existing scratch allocator/cache. Four retained pairs prove rejection recovery; serialized/emitted pairs prove per-call isolation. Child4/15 and seven mutants cover recognition, preservation, coordinates and bounded inputs. Focused2 outer/3 emitted and full readiness6 plus gap1/staged1 pass; no production or dependency changes. Storage/neutral/book evidence and final doctrine checks belong to the leaf checkpoint; Dart follows.
+
 ## 2026-09-27 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.3: real child composition in Perl
 
 Preserve the original lossless oracle through four native/emitted parent-child pairs with an actual precompiled child grammar. Exact child inputs, local/rebased spans, typed rejection recovery, authority denials, fresh accounting and inert no-seed markers pass. Four strict accepted child ASTs, fifteen rejections and three mutations distinguish recognition from authority plumbing. Readiness252, direct-dependent817, neutral staged123/129 and both exact rendered grammar includes pass. No production runtime changed; backend-sized proof follows under .3.4.

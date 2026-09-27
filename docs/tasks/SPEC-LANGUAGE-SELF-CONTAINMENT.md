@@ -675,10 +675,50 @@ used by ordinary `.spec` syntax on every backend.
 - [x] **LOCKSTEP** — Actual tested grammars are exact rendered book includes. Canonical lossless ledger, Knowledge, checkpoint, task/frontier, roadmaps, bounded live/history and MEMORY agree. Other backend carriers and canonical reconciliation remain separately owned under .3.4/.3.5; existing startup resource/stitch owners stay open.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4`
-  Status: `pending`
+  Status: `active`
   Goal: Extend the unchanged lossless and child-composition corpus to every required native and supported carrier route.
   Dependencies: `.1.1.3.3.3`
+  Children: `.1.1.3.3.4.1`, `.1.1.3.3.4.2`, `.1.1.3.3.4.3`, `.1.1.3.3.4.4`
   Acceptance: Split into backend-sized leaves before implementation. Run Rust, Dart, Julia, PUC Lua and LuaJIT against the original authored oracle; distinguish native, reconstructed, generated and independently emitted carriers, retained recovery and per-call isolation. Preserve authority-negative and provenance mutation controls; do not convert a private dispatch carrier into public API evidence.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.1`
+  Status: `done`
+  Goal: Prove exact lossless segmentation and actual staged child composition through Rust native and supported carriers.
+  Dependencies: `.1.1.3.3.3`
+  Activation: Clean e31c24c7f3c807a640337534c7019fb75908d216; all nine doctrines and post-commit pointer pass, brief empty, no outstanding job.
+  Verification tier: `focused`
+  Focused checks: Rust readiness public parser/compiler validation, native/reconstructed/generated/serialized/fresh emitted parent and actual child; unchanged segment/child corpora and recognition/provenance/bounds mutants; authority denials and selected budgets, exact error codes, recovery versus per-call isolation; direct-dependent staged/gap consumers, neutral staged contract, exact book/render, storage allocation regression, Knowledge/memory/history/doctrines and git diff --check.
+  Canonical trigger: none for bounded authored fixtures and consumer extensions reusing existing storage owners. Any runtime/contract/storage defect is split before repair; .3.5 remains the canonical milestone.
+  Acceptance: Retain independent scalar slicing/classification/reconstruction. Actual precompiled .spec owns child recognition and ASTs; caller only supplies authority and span projection. Cover six supported matched parent/child carriers, repeat original cases, preserve local/global provenance and original item text, and distinguish retained recovery from rebuilt per-call isolation. Use explicit step/call controls without claiming arbitrary recursion or MAX-counter safety. Existing startup .73/.74/.75/.78 remain owned; small direct-span children avoid conflicting destinations, returned markers and extreme arithmetic. No submodule internals or dependency changes.
+  Verification: Focused2 outer/3 emitted PASS; combined readiness6 + gap1 + staged1 PASS, including both prior four-test emitted children; Rust storage PASS17 owners and relocation; neutral staged123/129, exact book/render, unchanged original .spec/JSON, formatting and whitespace pass. Memory/history/Knowledge and registered doctrine checks govern landing. Exact source/log hashes: docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.1-verification.json.
+  Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.1 - verify Rust lossless child carriers`.
+
+### `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.1` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Perl Get/emitted proof did not establish Rust lossless/actual-child carriers. Rust public parse_spec_with_user_functions, validate and compile now run unchanged .spec/JSON sources through native/reconstructed/generated/serialized/fresh emitted routes; seven controlled mutations falsify independent boundaries.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Existing portable authored actions and staged seeds already compose this bounded objective. The parent preserves entry/loop text and declares source-bound groups; the actual Number/Digits .spec constructs child ASTs. Shared rust_checks.rs projects only authorized spans in host glue and independently checks original records, scalar slices and callback requests. No runtime defect was found on these selected routes.
+- [x] **FIX** — Extend the existing readiness harness with six matched pairs and seven mutations; reuse its atomic LocalCrate allocator and target cache. Four pairs retain engines, while serialized and fresh emitted entries create per-call engines. Ten independently compiled modules execute three required child tests.
+- [x] **ADDRESSED (verified)** — Focused2 outer/3 emitted PASS. Each route repeats13 segmentation and enriched cases twice, child4/15 and all seven mutants. Exact authority codes, typed child status1, local/rebased spans, inert markers, detachment and selected budgets pass. Five in-process pairs compare complete successful results; fresh emitted uses the same independent oracle.
+- [x] **NO REGRESSION** — Combined readiness6/gap1/staged1 PASS includes unchanged nesting/context and concurrent emitted jobs; Rust storage PASS17 owners/relocation; neutral staged123/129 and exact book source PASS. Original source/case files match activation HEAD. No production, dependency, generated-format or authority change; focused evidence does not claim canonical/full-backend execution.
+- [x] **LOCKSTEP** — Shared test sources, ledger, book carrier/reuse table, Knowledge, checkpoint, task/frontier, roadmaps, MEMORY and bounded live/history agree. Dart, Julia and shared Lua retain explicit children. Startup .73/.74/.75/.78 obligations remain open; small direct plain-child controls do not close them.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.2`
+  Status: `pending`
+  Goal: Prove the same lossless and actual-child corpus through Dart native and supported reconstructed/generated/emitted carriers.
+  Dependencies: `.1.1.3.3.4.1`
+  Acceptance: Preserve the authored oracle, recognition/provenance/bounds mutants, exact denials and retained/per-call distinction. Review Dart staged provenance/resource defect cards before activation, use strict package analysis and existing storage owners, and split necessary repairs.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.3`
+  Status: `pending`
+  Goal: Prove the same lossless and actual-child corpus through Julia native and supported reconstructed/generated/emitted carriers.
+  Dependencies: `.1.1.3.3.4.2`
+  Acceptance: Preserve exact oracles, mutants, authority denials and retained/per-call distinction. Review Julia staged registry/diagnostic/result-isolation cards, verify fresh emitted hosts, and split any repair dependencies.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.4`
+  Status: `pending`
+  Goal: Prove the same lossless and actual-child corpus through shared Lua carriers on PUC Lua and LuaJIT.
+  Dependencies: `.1.1.3.3.4.3`
+  Acceptance: Run both ABIs with exact original oracles, mutants, authority controls, provenance and supported fresh carriers. Review current shared staged resource/provenance cards and keep both runtime rows explicit. Parent .3.4 closes only during canonical reconciliation .3.5.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.5`
   Status: `pending`
@@ -899,7 +939,7 @@ used by ordinary `.spec` syntax on every backend.
 | 14 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.3` | `done` | Bounded nesting evidence/authoring limits reconciled; exact canonical receipt governs closeout. |
 | 15 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.1` | `done` | Perl native/fresh emitted context-name proof:11/17 cases,90 calls and34 recoveries per route. |
 | 16 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.2` | `done` | Context11/17/22 and original-default6/7/12 pass all six native routes. |
-| 17 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4` | `pending` | Split equivalent backend carrier proof and activate Rust after existing defect review. |
+| 17 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.2` | `pending` | Review Dart staged obligations, then run unchanged lossless and actual-child carrier oracles. |
 
 ## Decisions
 
@@ -933,6 +973,8 @@ used by ordinary `.spec` syntax on every backend.
 
 ## Verification Log
 
+September27 `.1.1.3.3.4.1`: Rust focused2 outer/3 emitted and combined readiness6/gap1/staged1 PASS; unchanged oracles, seven mutants, storage17/relocation, neutral123/129 and exact book PASS. Four retained pairs and two per-call pairs stay distinct; no production repair or broader resource claim.
+
 September27 `.1.1.3.3.3`: four parent/child carrier pairs, strict child cases and three mutants pass252; direct-dependent817, neutral staged123/129 and exact rendered source pass. Actual child recognition stays in .spec; selected call/step bounds do not close recursive or conflicting-target defects.
 
 September27 `.1.1.3.3.2`: native/fresh emitted readiness537, direct-dependent137, neutral gap/staged, exact book source and independent13-case/39-segment scalar reconstruction pass. Published OR/LX defect is corrected and permanently reproduced by an exact old-mode mutant. Child composition remains next.
@@ -963,6 +1005,8 @@ September27 `.1.1.1`: seven neutral/structural checks, 34 ledger source-path/con
 
 ## Commit Log
 
+- `.1.1.3.3.4.1`: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.1 - verify Rust lossless child carriers`.
+
 - `.1.1.3.3.3`: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.3 - verify actual Perl child composition`.
 
 - `.1.1.3.3.2`: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.2 - verify lossless Perl segmentation`.
@@ -974,6 +1018,8 @@ September27 `.1.1.1`: seven neutral/structural checks, 34 ledger source-path/con
 | `.0` | `SPEC-LANGUAGE-SELF-CONTAINMENT.0 - ratify expressive spec self-containment` | Direction capture only; no parser/runtime behavior. |
 
 ## Changelog
+
+- `2026-09-27`: Split .3.4 into Rust/Dart/Julia/shared Lua leaves and complete six matched Rust lossless/actual-child carriers; Dart .3.4.2 follows.
 
 - `2026-09-27`: Complete actual Perl child composition under .3.3; backend-sized equivalent proof .3.4 follows.
 

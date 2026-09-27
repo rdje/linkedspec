@@ -12,6 +12,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-09-27 — Rust actual-child carriers retain the same authoring oracle
+
+A shared checker now verifies original segment records, independent scalar slices and reconstruction before and after child enrichment. Each precompiled child carrier constructs its own textual integer AST; the host only prepares frozen authority and rebases the returned span. Native/reconstructed engines each supply native and generated execution, with serialized and fresh emitted entries completing six pairs. Only the first four retain engines. Complete successful records match across the five in-process pairs; the emitted pair runs the same oracle in three child tests. Existing allocation/cache owners remain unchanged and all three readiness emitted jobs run together. Staged wrapper codes remain exact without claiming Perl/Rust error-object identity or closing extreme-counter/returned-marker/target-conflict defects.
+
 ## 2026-09-27 — Actual child grammars preserve recognition and source authority separately
 
 The staged parent supplies entry_group(0), not reconstructed text. A frozen registry invokes a precompiled child .spec and rebases the child's own span; all recognition and semantic construction stay in that grammar. For α[12]🙂, the child sees12 at local[0,2), mapping to original[2,4), while the parent's item stays[1,5). Strict entry/end guards reject skipped prefixes and trailing junk. Four carrier pairs agree on complete normalized results, sidecars and accounting. Three mutants separately falsify child recognition, span correctness and request bounds. These small resource controls do not close recursive ceilings or conflicting stitch-target preparation.

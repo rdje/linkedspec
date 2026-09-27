@@ -2,7 +2,8 @@
 
 Owner: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3`. Authority review on 2026-09-27 from
 clean `ca197a38c269cfeb89341505db83e395ebf6f308`. Perl segmentation is verified under `.3.2` and
-public staged child composition under `.3.3`; other backend routes remain pending.
+public staged child composition under `.3.3`; Rust matched carriers are verified under `.3.4.1`.
+Dart, Julia and shared Lua routes remain pending.
 
 ## What this objective must establish
 
@@ -152,3 +153,34 @@ includes both complete grammars from their tested sources. No runtime implementa
 The explicit child guards, immutable caller registry and host span projection are current authoring costs. This
 finite composition neither tests arbitrary recursion nor closes startup `.37`, `.73` or `.75`; `.3.4` must check
 each backend's existing defect cards before claiming equivalent readiness.
+
+## Rust matched carriers — .3.4.1
+
+The existing `rust/linkedspec-runtime/tests/nested_tree_readiness.rs` includes two task-owned test functions from
+`tests/language-readiness/lossless-child/rust_carriers.rs`. Shared independent assertions in `rust_checks.rs` also
+run inside the emitted crate; all `.spec` and JSON oracles are unchanged from the Perl leaves. The existing atomic
+scratch allocator and target cache are reused without new output roots or dependency changes.
+
+Native compiled and JSON-reconstructed engines each execute through native and generated-plan entrypoints. These
+four pairs retain both parent and actual child engines throughout the sequence. Public serialized v2 and freshly
+compiled emitted modules form two additional pairs that reconstruct per call. Each pair runs original segmentation
+and composition cases twice, all child4/15 cases, four segmentation mutants and three child mutants. Call/step
+denials, inert no-seed declarations, detached results, exact local/rebased spans and subsequent acceptance are
+separate assertions. Complete successful enriched values match across the five in-process pairs; the fresh pair
+uses the same authored oracles rather than a cross-process full-response-equality claim.
+
+The child callback only invokes its precompiled carrier and projects the child's own span. Child exits retain
+typed status1. Staged failure codes are exact through native/generated execution wrappers; Rust's wrapper objects
+are not Perl's staged error class. The emitted host loads ten modules (three originals and seven mutations), checks
+their metadata/plans and must execute all three child tests successfully.
+
+```sh
+bash tools/run_cargo_local.sh test --locked --offline --manifest-path rust/Cargo.toml \
+  -p linkedspec-runtime --test nested_tree_readiness lossless -- --nocapture
+```
+
+The `.3.4.1` checkpoint records focused and direct-dependent results. No production/runtime, generated format or
+authority changed. Existing startup `.73` target reservation, `.74` returned-marker validation, `.75` saturated call
+counter and `.78` older consumer path portability obligations remain separate; this corpus uses distinct targets,
+plain child ASTs and small counters. Dart `.3.4.2`, Julia `.3.4.3` and both Lua ABIs `.3.4.4` follow before canonical
+parent reconciliation `.3.5`.

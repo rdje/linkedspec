@@ -1,0 +1,83 @@
+{
+  "owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.1",
+  "activation_commit": "e31c24c7f3c807a640337534c7019fb75908d216",
+  "scope": "Bounded Rust matched parent/actual-child carriers; original grammars and JSON cases unchanged; no production or dependency change.",
+  "source_hashes": {
+    "rust/linkedspec-runtime/tests/nested_tree_readiness.rs": "698dd4b525296f490890073857dac200be13277e769ae5b7351aab10a549275c",
+    "tests/language-readiness/lossless-child/rust_carriers.rs": "6a461b9f86525d5ab4d75a74d4395869048e3c146e674badb31d3f652b6cd9cd",
+    "tests/language-readiness/lossless-child/rust_checks.rs": "e26105539eafd80fb870d4959881a086a81f57839018685ff8d84ce8f2bf6f20",
+    "tests/language-readiness/lossless-child/parent.spec": "8b19299a5d3715cba7f44dac266954e8b34497920a308f956f6e35b286ae6435",
+    "tests/language-readiness/lossless-child/child.spec": "34c5f109d401f83fa600a225682599fe924957fdbf45ad2136f55450248badd9",
+    "tests/language-readiness/lossless-child/cases.json": "2589ef997c978ea9fa1e80f886106df7235839d6a89439b88ece328d58e3b3c7",
+    "tests/language-readiness/lossless-segments/grammar.spec": "8f20d242b0f2ea0eee1d70b6f289cf96362cdf3b64ef4cbcc77f5631ffe3eb36",
+    "tests/language-readiness/lossless-segments/cases.json": "fd4fe58d6bb0efa7bcb609b863c3d9a2238bb5c62fa9a1814a143e04416bd89c",
+    "rust/linkedspec-runtime/tests/inter_match_gap_capture_contract.rs": "88464bdfd412b91f4e9cebd2424ee78581f17132498e4113e9e5e008ce43a84d",
+    "rust/linkedspec-runtime/tests/staged_ast_enrichment_contract.rs": "9bad6d2f0bbf43ade705b8d1bc2d2bead4058ef6d8222d2448dfd8e9289ace90",
+    "rust/linkedspec-runtime/src/staged_ast_enrichment.rs": "123448aa6cd3c5c7d3802b2c4043dbc2fc217b43882087354dd10e189389e245",
+    "rust/linkedspec-runtime/src/engine.rs": "5d1c572c2c310f5dd0aa4f62bb07020cf5c416a8483799cd1c85f13ffeb68009",
+    "rust/linkedspec-runtime/src/source_emitter.rs": "4cf298eadd4603690d57794d76f8397e5bf026a70ac617377360650e4880b64b",
+    "rust/Cargo.toml": "4f85f31df8b2228a18e44f22e9a9e276f6ca91943becea7f7025b70d564cbe81",
+    "rust/Cargo.lock": "f225ab48d91b1c2eb3bec063f961d255d9e97b340d0ce300e749ca58ec155428",
+    "capability_conformance/staged_ast_enrichment_contract.json": "578cd031fed01bb8d968a2b536e0d67430317c617a8296edb6c1beb5031bd882",
+    "tools/test_rust_project_data_storage.sh": "82fa3cf790b26f39e743524a9c6d5d113d8ee8fcce59f4f2df9f759674ba97d6",
+    "docs/linkedspec-book/src/architecture/structured-format-program.md": "4201094330068ec4647bc78efd19c2d03bffa043b7b3849e9e780a3d1f34f89f"
+  },
+  "checks": [
+    {
+      "command": "bash tools/run_cargo_local.sh test --locked --offline --manifest-path rust/Cargo.toml -p linkedspec-runtime --test nested_tree_readiness lossless -- --nocapture",
+      "result": "PASS 2 outer tests and 3 fresh child tests from 10 emitted modules; six matched pairs; seven mutants; child4/15"
+    },
+    {
+      "command": "bash tools/run_cargo_local.sh test --locked --offline --manifest-path rust/Cargo.toml -p linkedspec-runtime --test nested_tree_readiness --test inter_match_gap_capture_contract --test staged_ast_enrichment_contract -- --nocapture",
+      "result": "PASS readiness6/gap1/staged1; prior nesting/context emitted children each run4 tests; lossless emitted child runs3"
+    },
+    {
+      "command": "bash tools/test_rust_project_data_storage.sh",
+      "result": "PASS 17 Rust owners, offline cache, generated workspaces, traces and relocation"
+    },
+    {
+      "command": "bash tools/run_python_project_data.sh tools/check_staged_ast_enrichment_contract.py",
+      "result": "PASS 9 rollout legs;123 contract/129 public mutations"
+    },
+    {
+      "command": "bash tools/run_mdbook_local.sh",
+      "result": "PASS; exact tested parent/child source appears once each and all six route/reuse boundaries render"
+    },
+    {
+      "command": "bash tools/project_data_run.sh rustfmt --edition 2024 tests/language-readiness/lossless-child/rust_checks.rs tests/language-readiness/lossless-child/rust_carriers.rs",
+      "result": "formatted before successful builds"
+    }
+  ],
+  "logs": {
+    ".linkedspec-data/scratch/lossless3341/second.log": {
+      "sha256": "eaa09fd99a492c8aa8ef1eda2f0a12f3eda516eff8c9419d8784022a4b34fab8"
+    },
+    ".linkedspec-data/scratch/lossless3341/dependents.log": {
+      "sha256": "0e46b7feb0392cfd3c60ccdf8be9035e82e9558184c405fd1ee6068b26021e2a"
+    },
+    ".linkedspec-data/scratch/lossless3341/storage.log": {
+      "sha256": "c904fada806127096835cc1c93936150af8dce7a487a17511f6ae6efc655b726"
+    },
+    ".linkedspec-data/scratch/lossless3341/staged-neutral.log": {
+      "sha256": "1a7f7a1b01c6865f08350276c188460f729f1dc6f30b05d25ddf904b25bbdf21"
+    },
+    ".linkedspec-data/scratch/lossless3341/mdbook.log": {
+      "sha256": "e4253fdfec60da489903f3f6bc7decd76a20cb5718c33d7d9fd43bfff2242e69"
+    },
+    ".linkedspec-data/scratch/lossless3341/book-source.log": {
+      "sha256": "0db640b55b0a2195f8f610fc7ab73a2ec83542b7adc2540bbfac53077f436baa"
+    }
+  },
+  "limits": [
+    "Four route pairs retain engines; serialized and emitted entries only establish per-call isolation.",
+    "Complete successful enriched values match across five in-process pairs; emitted pair uses the same oracle without cross-process full-record equality.",
+    "Staged errors retain exact codes through Rust wrappers; cross-language error object identity is not asserted.",
+    "Plain direct-span children, distinct targets and small counters do not close startup .73/.74/.75.",
+    "Existing staged consumer path debt remains under startup .78; this emitted crate uses a relative dependency.",
+    "Further backends and canonical reconciliation remain separately owned."
+  ],
+  "development_controls": [
+    "Initial compile rejected LowerHex on the pinned SHA256 output type; test digest formatting now formats individual bytes, and successful build/run logs are separate.",
+    "An initial rendered-prose assertion expected wording absent from the authored book; the final DOM-text check uses the actual carrier/reuse wording and exact source blocks."
+  ]
+}

@@ -20,6 +20,8 @@ use std::time::{SystemTime, UNIX_EPOCH};
 mod checks;
 #[path = "../../../tests/language-readiness/context-names/rust_checks.rs"]
 mod context_checks;
+#[path = "../../../tests/language-readiness/lossless-child/rust_carriers.rs"]
+mod lossless_carriers;
 
 const SOURCE: &str = include_str!("../../../tests/language-readiness/nested-tree/grammar.spec");
 const CASES: &str = include_str!("../../../tests/language-readiness/nested-tree/cases.json");

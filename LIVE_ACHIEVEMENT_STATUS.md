@@ -6,13 +6,15 @@ Ordinary .spec language readiness under SPEC-LANGUAGE-SELF-CONTAINMENT.1.1. The 
 
 ## Latest Completed Slice
 
-- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.3 - verify actual Perl child composition` — four carrier pairs preserve the original oracle; strict child cases, provenance, authority denials and three mutants pass. Readiness252/direct-dependent817 and exact book proof pass.
+- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.1 - verify Rust lossless child carriers` — six matched carriers preserve unchanged segmentation/child oracles, exact provenance and seven mutants. Focused2 outer/3 emitted and direct-dependent8 outer tests pass; existing allocator/cache reused.
 
 ## Next Action
 
-- Split SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4 into backend-sized leaves, review existing staged defect owners and activate Rust proof from the clean boundary.
+- Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.2: equivalent Dart lossless/actual-child proof after reviewing its existing staged provenance/resource obligations.
 
 ## Recent Completions
+
+- `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.1` verifies Rust lossless extraction and real child grammars on six carriers.
 
 - `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.3` verifies actual Perl child composition across four carrier pairs.
 
@@ -43,8 +45,6 @@ Ordinary .spec language readiness under SPEC-LANGUAGE-SELF-CONTAINMENT.1.1. The 
 - `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.5` verifies five Lua/LuaJIT nesting routes and owns immediate storage-census repair.
 
 - `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.4` verifies five Julia nesting routes and typed recovery.
-
-- `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.3` verifies six Dart nesting routes and typed recovery.
 
 ## History
 
