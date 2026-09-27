@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-09-27 — Record the retained artifact census
+
+SESSION-STARTUP-READING.93 inventories repository-owned generated output without deleting reusable caches, dependency data or verification evidence. Restore the overwrite-only cleanup date in `docs/ARTIFACT_CLEANUP.md`; exact scope and measured results belong to the task leaf. Other repositories and submodule internals remain excluded. No runtime or storage policy changes. Focused memory, Knowledge, history, task/doctrine and book checks govern this documentation slice; continue with .92 fallback verification.
+
 ## 2026-09-27 — RGX-CONSUMER-BUILD-REPORTS.1.3.2 - close published consumer-report work locally
 
 Close the bounded consumer-report activity after publication of LS-004 at fd3e328d5 and the local ownership correction8b5b5ffd8. ARCHOGEN LS-001–005 have published remedies; LS-006 was withdrawn and LS-007 requires no behavior change. SEMULITH independently closed its three reports. ARCHOGEN alone owns adoption, verification and any reversal of the unauthorized recipient commit.

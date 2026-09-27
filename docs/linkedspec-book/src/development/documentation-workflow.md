@@ -92,6 +92,12 @@ Examples:
 - `MEMORY.md`
 - `COMMIT.md`
 
+The latest artifact-maintenance date and disposition live in `docs/ARTIFACT_CLEANUP.md`.
+An owned census may retain every artifact: reusable caches, dependency data and
+verification evidence are preserved unless an exact deletion is proved safe.
+The task tree records the census scope and exclusions; the date record is overwritten
+after each cleanup rather than accumulating another history log.
+
 Continuity docs answer different questions:
 
 - What changed in this slice?

@@ -12,6 +12,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-09-27 — Retain artifacts when obsolescence is unproven
+
+SESSION-STARTUP-READING.93 inventories repository-owned generated output without deleting reusable caches, dependency data or verification evidence. Restore the overwrite-only cleanup date in `docs/ARTIFACT_CLEANUP.md`; exact scope and measured results belong to the task leaf. Other repositories and submodule internals remain excluded. No runtime or storage policy changes. Focused memory, Knowledge, history, task/doctrine and book checks govern this documentation slice; continue with .92 fallback verification.
+
 ## 2026-09-27 — Close upstream delivery without claiming downstream acceptance
 
 RGX-CONSUMER-BUILD-REPORTS.1.3.2 closes LinkedSpec’s bounded work using the already published remedyfd3e328d5 and committed correction8b5b5ffd8. Closing this local activity does not change ARCHOGEN’s tracker, establish its acceptance, authorize reversal, or close unrelated defects. All other repositories remain read-only. The five upstream remedies and two no-fix dispositions remain separate from SEMULITH’s three independent closures.

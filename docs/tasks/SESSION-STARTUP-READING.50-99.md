@@ -1707,15 +1707,20 @@ After an owned edit run: perl tools/update_task_tree_index.pl --tree SESSION-STA
   Commit: `pending`
 
 - ID: `SESSION-STARTUP-READING.93`
-  Status: `pending`
+  Status: `done`
   Goal: Perform the due repository-owned generated-artifact census and remove only proven obsolete artifacts.
   Dependencies: Finish .91 cleanly; execute this short maintenance leaf before .92, then .94/.95 and .51. Last recorded census was 2026-09-24T03:37:55+02:00; resume date is September26.
-  Planned tier: focused for inventory and deletion of exact ignored obsolete outputs; canonical only if storage policy/tooling changes prove necessary.
+  Verification tier: `focused`
+  Focused checks: Read-only same-volume artifact census; ignored-output classification; scripts/check_memory_architecture.sh; scripts/check_doctrines.sh; Knowledge synchronization, both history pressure checks git diff --check and bash tools/run_mdbook_local.sh.
+  Canonical trigger: none; inventory and retention record only, with no storage tooling or policy change.
   Planned focused proof: Repository-rooted same-volume census including Rust release/debug incremental/deps .bin/.log and appropriate Dart/Julia/Lua output locations; ownership, nonsymlink, no-live-use and exact pre/post residue proof for every deletion. Retain caches, dependency-owned data and verification logs still referenced by in-flight work.
   Planned canonical boundary: Any storage infrastructure/policy change and final clean push.
   Acceptance: A tracked census disposition accounts for safe deletions and retained artifacts without touching live jobs, reusable caches, shared globals, dependency internals or source fixtures. A zero-deletion census is valid when nothing is demonstrably obsolete.
   Evidence: Director standing approximate24-hour policy; docs/knowledge/repo-generated-artifact-cleanup-boundary.md preserves retained-cache and dependency exclusions. No census or deletion performed during dirty .91.
-  Commit: `pending`
+  Verification: September 27 same-device, nonsymlink metadata census retains all outputs. Rust release absent; debug/incremental 11836 files / 3439727388 bytes, including 477 .bin and 0 .log; debug/deps 90547 files / 26513887663 bytes with 0 .bin/.log. Dart .dart_tool 7 files / 59348773 bytes; dart/build absent. Julia retained depot compiled 580 files / 362705832 bytes. Book output 89 files / 18878885 bytes; logs directory empty; verification 1 file / 148 bytes. None of those traversals encountered symlinks or cross-device/nested-repository exclusions.
+  Disposition: Zero deletions; no artifact was demonstrated obsolete. Root immediate .bin/.log count 0; `.linkedspec-data` 9 logs and scratch 472 immediate .bin/.log files retained as evidence. Scratch 902 entries, six retained cache roots and 56 Lua-named task-output directories are inventoried shallowly only; their contents, dependency sources, other repositories and shared globals are retained without inspection. Lua native outputs are caller-selected repository-volume directories, not a fixed build root. No liveness-based deletion or broad recovery/purge was attempted. The initial broader all-target traversal was terminated without completed counts and is excluded from proof; the completed census above targets the required output roots.
+  Record: docs/ARTIFACT_CLEANUP.md restores the missing overwrite-only latest cleanup record. All scanned generated roots are ignored and have no tracked files. Documentation-only focused memory/Knowledge/history/doctrine/book checks and diff hygiene govern landing; no runtime acceptance claim.
+  Commit: `SESSION-STARTUP-READING.93 - record retained artifact census`
 
 - ID: `SESSION-STARTUP-READING.94`
   Status: `pending`

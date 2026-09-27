@@ -1,9 +1,9 @@
 # MEMORY
 
-- activation_commit: `8b5b5ffd8ea415b9b6d97387da8289e8f18606f3` — clean activation base for local report closeout.
-- latest_completed_leaf: `RGX-CONSUMER-BUILD-REPORTS.1.3.2 - close published consumer-report work locally`.
-- active_work_unit: `SESSION-STARTUP-READING.93` — pending repository-owned artifact census; other repositories remain strictly read-only.
-- next_action: Run the bounded .93 artifact census, retaining dependency data, caches and referenced evidence; then .92/.94/.95/.51. Never modify another repository, including reversing ARCHOGEN82ee99a05.
+- activation_commit: `2ac834913d85c32f532be9b0aab63644838a577a` — clean activation base for artifact census .93.
+- latest_completed_leaf: `SESSION-STARTUP-READING.93 - record retained artifact census`.
+- active_work_unit: `SESSION-STARTUP-READING.92` — pending bounded legacy fallback verification; other repositories remain strictly read-only.
+- next_action: Repair .92 fallback verification using an isolated fixture and real public resolver; then .94/.95/.51. Never modify another repository, including reversing ARCHOGEN82ee99a05.
 - in_flight_uncommitted: none — intended clean post-landing handoff. Published fixfd3e328d5 remains valid; local correction8b5b5ffd8 records the unauthorized ARCHOGEN write.
 - blockers: ARCHOGEN owns its repository disposition and acceptance. Preserve retained transitive edits/evidence; named-argument and format proposals stay parked.
   Wrapper startup .7 remains open; recovery/purge stay prohibited. No interrupted Phase0 run counts as proof.

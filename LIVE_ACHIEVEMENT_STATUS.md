@@ -2,17 +2,19 @@
 
 ## Current Activity
 
-September27 report closeout: all seven ARCHOGEN reports are accounted for: LS-001–005 have published remedies at fd3e328d5; LS-006 is withdrawn and LS-007 needs no behavior change. SEMULITH independently closed its three reports. Correction8b5b5ffd8 records the unauthorized ARCHOGEN write and makes every other repository read-only. RGX-CONSUMER-BUILD-REPORTS.1.3.2 closes LinkedSpec’s bounded report work through canonical acceptance; ARCHOGEN owns its adoption, verification and any reversal. Startup .93/.92/.94/.95/.51 resumes; unrelated defects and global book reconciliation remain open.
+Startup PNT resumes after local consumer-report closeout. Artifact census .93 is complete with zero deletions; caches, generated outputs and evidence remain retained. Other repositories are strictly read-only.
 
 ## Latest Completed Slice
 
-- `RGX-CONSUMER-BUILD-REPORTS.1.3.2 - close published consumer-report work locally` — bounded upstream report work closed; five ARCHOGEN remedies published, two explicit no-fix dispositions, three SEMULITH closures, local ownership correction committed.
+- `SESSION-STARTUP-READING.93 - record retained artifact census` — completed the bounded output census and restored the latest cleanup record; no runtime or storage-policy change.
 
 ## Next Action
 
-- Resume startup .93 artifact census, then .92/.94/.95/.51. Other repositories stay read-only; ARCHOGEN owns any reversal and consumer verification.
+- Repair .92 legacy fallback verification, then .94/.95/.51. ARCHOGEN owns its repository and consumer acceptance; policy reconciliation .5 and the separate reading audit remain open.
 
 ## Recent Completions
+
+- `2026-09-27` — `SESSION-STARTUP-READING.93` retains all artifacts after the bounded census.
 
 - `2026-09-27` — `RGX-CONSUMER-BUILD-REPORTS.1.3.2` closes bounded published report work locally; exact canonical receipt governs landing and final push.
 
@@ -44,7 +46,6 @@ September27 report closeout: all seven ARCHOGEN reports are accounted for: LS-00
 
 - `2026-09-24` — `SESSION-STARTUP-READING.86.5.2.1` verifies explicit division return carriers with focused31/book84 and an isolated old-fixture mutation.
 
-- `2026-09-24` — `SESSION-STARTUP-READING.86.5.1` verifies line-ending slash calls with focused206/book82 and Phase0 1033/1033.
 
 ## History
 
