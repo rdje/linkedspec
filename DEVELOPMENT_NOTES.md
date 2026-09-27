@@ -12,6 +12,19 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-09-27 — Lua nesting proof and storage census integrity
+
+Canonical Lua JSON compares tagged empty arrays/objects, scalar kinds and exact Unicode spans. Native and
+SpecFile-reconstructed engines retain their instance; public v2 for both compiled forms and fresh emitted modules
+create an engine per call. Each ABI therefore proves five routes and28 actual retained-engine recoveries. Reusing
+the existing v2 emitter consumer preserves its managed scratch owner and selected-ABI child environment.
+
+The dual-ABI storage script completes its owner/module/device/cleanup checks but prints PASS even after find emits
+a permission error at an unrelated protected entry in the old OS temp root. Its find-to-rg pipeline is an if
+condition, so no-match and enumeration failure take the same branch despite set-e/pipefail. New P1 .1.1.3.1.2.2.6
+must repair this immediately after the clean carrier commit, with empty/residue/error controls and canonical
+infrastructure proof. No successful legacy-residue census or unfiltered Lua component gate is claimed here.
+
 ## 2026-09-27 — Julia nesting proof respects public routes and binding worlds
 
 Julia exposes native engine reuse and a public generated convenience function that constructs its engine per call.

@@ -6,13 +6,15 @@ Ordinary .spec language readiness under SPEC-LANGUAGE-SELF-CONTAINMENT.1.1. The 
 
 ## Latest Completed Slice
 
-- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.4 - verify Julia nesting carriers` — five public routes preserve exact values/spans and typed rejection; two retained-engine routes prove28 recoveries. New30/emitter65/document128 assertions and storage22/five packages pass.
+- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.5 - verify Lua nesting carriers` — five routes per ABI,28 retained-engine recoveries each,133 emitter assertions and51 document cases pass. Legacy storage census failure is not accepted as proof; immediate repair is owned by .6.
 
 ## Next Action
 
-- Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.5 for PUC Lua/LuaJIT carriers, typed recovery and mutations; canonical parent reconciliation follows.
+- Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.6 for the Lua storage census false-PASS repair before canonical parent reconciliation.
 
 ## Recent Completions
+
+- `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.5` verifies five Lua/LuaJIT nesting routes and owns immediate storage-census repair.
 
 - `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.4` verifies five Julia nesting routes and typed recovery.
 
@@ -43,8 +45,6 @@ Ordinary .spec language readiness under SPEC-LANGUAGE-SELF-CONTAINMENT.1.1. The 
 - `2026-09-27` — `RGX-CONSUMER-BUILD-REPORTS.1.2` adopts verified f6e5acdc, preserves prior data, restores Rust public leading trivia and strict prefix validation, and requires receipt-bound canonical admission.
 
 - `2026-09-26` — `RGX-CONSUMER-BUILD-REPORTS.1.1` verifies the published LS-004 remedy; retained-pin adoption requires explicit authorization and native/canonical proof.
-
-- `2026-09-26` — `SESSION-STARTUP-READING.91` fixes numeric array-value composition with focused128, Phase01033,152 native/fresh cases and exact book proof.
 
 ## History
 

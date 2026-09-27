@@ -1,0 +1,56 @@
+{
+  "owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.5",
+  "activation_commit": "618c0b974f77d576f7a9a983855582bdfaf2210c",
+  "date": "2026-09-27",
+  "evidence": [
+    {
+      "command": "bash tools/run_lua_project_data.sh puc -e 'dofile(\"lua/test/rule_local_cursor_generated_source_test.lua\"); dofile(\"lua/test/sexpr_document_v1_test.lua\")'",
+      "result": "PASS133 v2 assertions;51 document cases,27 round trips,24 recovery checks; child status0, empty stderr, exact report and cleanup",
+      "exit_status": 0,
+      "log": ".linkedspec-data/scratch/nested-lua-puc.log",
+      "sha256": "b82e40ebc37ed8ef7317523a4fc9ca508bb920a4373f8a8189962caa84ae58a9"
+    },
+    {
+      "command": "bash tools/run_lua_project_data.sh luajit -e 'dofile(\"lua/test/rule_local_cursor_generated_source_test.lua\"); dofile(\"lua/test/sexpr_document_v1_test.lua\")'",
+      "result": "PASS133 v2 assertions;51 document cases,27 round trips,24 recovery checks; child status0, empty stderr, exact report and cleanup",
+      "exit_status": 0,
+      "log": ".linkedspec-data/scratch/nested-lua-luajit.log",
+      "sha256": "b82e40ebc37ed8ef7317523a4fc9ca508bb920a4373f8a8189962caa84ae58a9"
+    },
+    {
+      "command": "bash tools/test_lua_project_data_storage.sh",
+      "result": "Returns0/PASS19 but legacy census is INCOMPLETE: find permission error. Preceding owner/trio/device/owned-cleanup checks complete. P1 .6 owns immediate false-PASS repair.",
+      "exit_status": 0,
+      "log": ".linkedspec-data/scratch/nested-lua-storage.log",
+      "sha256": "850a115ea13120c271cdafc2f2387eda48f134cd443c2b72e369772e48123306"
+    },
+    {
+      "command": "bash tools/run_mdbook_local.sh",
+      "result": "PASS",
+      "exit_status": 0,
+      "log": ".linkedspec-data/scratch/nested-lua-book.log",
+      "sha256": "c91aa26f5634729d31268de437fc327a48147380092d9b0fd40a9dfb7d81eae0"
+    }
+  ],
+  "source_hashes": {
+    "lua/test/rule_local_cursor_generated_source_test.lua": "0c8dc632dcbd1d3bc970d4da048002b66e9a572012be667fbcb5f25a2aa2c2a6",
+    "tests/language-readiness/nested-tree/lua_checks.lua": "b87da2890c7d1fa52e062241a136b138d5dfee6e3cc46a007c15902bf248639a",
+    "tests/language-readiness/nested-tree/grammar.spec": "498ffda35b05222388c64d99b0acb132a56996e97de3ffa9312f7dda6ee0ed72",
+    "tests/language-readiness/nested-tree/cases.json": "7a36a4b32d8a5ac8a1d2f17d6d000a68c707bfc15a4b3a1e93e3e4ddaf4147c7",
+    "tools/test_lua_project_data_storage.sh": "74fef1f156ee6e4f2771b3a40ffe809d63be62fc0ceb818b0da923da6993a689"
+  },
+  "counts": {
+    "abis": 2,
+    "routes_per_abi": 5,
+    "original_calls_per_route": 40,
+    "typed_rejections_per_route": 14,
+    "mutants_per_route": 3,
+    "retained_engine_routes_per_abi": 2,
+    "same_engine_recovery_transitions_per_abi": 28,
+    "fresh_emitted_modules_per_abi": 4,
+    "v2_assertions_per_abi": 133,
+    "new_assertions_per_abi": 27
+  },
+  "unchanged": "git diff --exit-code HEAD -- lua/src tests/language-readiness/nested-tree/grammar.spec tests/language-readiness/nested-tree/cases.json examples/integration: PASS",
+  "limits": "SpecFile JSON reconstruction; public v2/emitted entries create an engine per call. No successful legacy census, unfiltered full Lua gate, malformed-regex native behavior, standard-format admission or arbitrary-depth claim. Immediate P1 .6 repairs census integrity before canonical reconciliation."
+}

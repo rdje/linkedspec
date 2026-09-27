@@ -210,7 +210,7 @@ used by ordinary `.spec` syntax on every backend.
   Dependencies: `.1.1.3.1.2.1`
   Acceptance: Split backend-sized children before implementation; retain the same authored oracles and honest carrier coverage. No blanket proof from native results.
 
-  Children: `.1.1.3.1.2.2.1`, `.1.1.3.1.2.2.2`, `.1.1.3.1.2.2.3`, `.1.1.3.1.2.2.4`, `.1.1.3.1.2.2.5`
+  Children: `.1.1.3.1.2.2.1`, `.1.1.3.1.2.2.2`, `.1.1.3.1.2.2.3`, `.1.1.3.1.2.2.4`, `.1.1.3.1.2.2.5`, `.1.1.3.1.2.2.6`
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.1`
   Status: `active`
@@ -322,10 +322,39 @@ used by ordinary `.spec` syntax on every backend.
 - [x] **LOCKSTEP** — Book, native ledger, Knowledge fact, checkpoint, task/live pointers, roadmaps and technical history report five routes and28 retained-engine recoveries; Lua and canonical reconciliation remain separate.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.5`
-  Status: `pending`
+  Status: `done`
   Goal: Prove Lua nested-tree carrier semantics using both ABIs across native, reconstructed/generated-plan and emitted supported routes, typed rejection/recovery and prefix/gap/span mutation controls.
   Acceptance: Original grammar/cases remain unchanged; exact value kinds and Unicode spans, no partial rejection values, explicit recovery after every rejection and honest carrier/readiness coverage.
   Dependencies: `.1.1.3.1.2.2.4`
+
+  Activation: Clean 618c0b974f77d576f7a9a983855582bdfaf2210c after Julia carrier proof; nine doctrines/post-commit pointer pass, brief0 and no pending job.
+  Verification tier: `focused`
+  Focused checks: Extend existing Lua v2 generated-source consumer with nesting native/reconstructed/generated/emitted routes on PUC Lua and LuaJIT; strict-document compatibility, exact child status/stdout/stderr and cleanup, storage oracle, unchanged fixture/runtime, book/Knowledge/memory/history/doctrines/diff checks.
+  Canonical trigger: none for bounded carrier evidence without runtime/schema/contract/admission/storage mechanism change; parent reconciliation remains canonical.
+  Scope: Five public routes per ABI, two retained engines and per-call generated entries; existing v2 test owns scratch. Use valid grammar regexes; the separately owned LUA-STARTUP-READING.2.3 malformed-regex path is outside this focused proof and no unfiltered full-gate success is claimed.
+  Verification: PUC Lua and LuaJIT each pass133 generated-source assertions and all51 strict-document cases. Five routes per ABI pass40 original calls and three mutations; two retained engines prove28 recoveries per ABI. Child status/stdout/stderr/cleanup pass. Storage19/trio/volume checks complete, but legacy census emits a permission error while the script returns0; new P1 .6 owns immediate repair, and no successful legacy census is claimed.
+  Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.5 - verify Lua nesting carriers`.
+
+
+
+- [x] **REPRODUCE / ISSUE** — Text adapters lack carrier/recovery proof. Consume the unchanged six accepts/seven rejects through typed public APIs on both ABIs; storage verification also exposes the independently owned .6 false-PASS census defect.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Native engines retain the parser object; source_emitter generated v2 constructs one per call, including emitted execute. Canonical JSON preserves tagged array/harray identity and scalar kinds. The storage script ignores a failing find pipeline in its if condition; .6 carries exact reproduction and repair acceptance.
+- [x] **FIX** — Extend the existing v2 consumer and reuse its managed temporary owner; shared authored JSON checks, exact typed status1 rejection and mutation controls run through native/reconstructed/generated routes and fresh selected-ABI child modules.
+- [x] **ADDRESSED (verified)** — Five routes per ABI pass40 original calls and three mutations. Two retained engines prove28 immediate recoveries per ABI. Four emitted modules validate metadata/plans, require actual child success and empty stderr, report exact completion and leave no owned workspace.
+- [x] **NO REGRESSION** — Each ABI passes133 assertions (106 existing plus27 new) and51 document cases with27 round trips/24 recovery checks. Runtime/fixture/adapters are unchanged. Storage19/three-module ABI checks pass before the incomplete legacy census; neither an unfiltered full Lua gate nor a successful legacy census is claimed.
+- [x] **LOCKSTEP** — Book, ledger, Knowledge, checkpoint, roadmaps and live/history records state exact proof and limits. P1 .6 is the immediate next slice, followed by canonical parent reconciliation; the discovery is surfaced and owned, not deferred without scheduling.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.6`
+  Status: `pending`
+  Goal: Repair Lua storage verification so a failed legacy-residue census cannot print PASS.
+  Priority: P1 verification integrity; execute immediately after .1.1.3.1.2.2.5 is committed, before canonical parent reconciliation.
+  Reproduction: bash tools/test_lua_project_data_storage.sh returns0 and PASS19 while find reports Operation not permitted for an unrelated protected child of the old OS temp root; exact log is .linkedspec-data/scratch/nested-lua-storage.log.
+  Root cause: The final find-to-rg pipeline is the condition of an if. An enumeration failure with no matches makes the condition false, bypassing both set-e and the residue failure body. Failed enumeration is therefore indistinguishable from a successful empty census.
+  Acceptance: Enumerate only the relevant root entries without entering unrelated directories; preserve exact Lua-owned-prefix residue rejection and other-volume builder rejection. Propagate actual census failures. Prove empty/matching/error cases with repository-local controlled fixtures and real dual-ABI storage proof, preserve all existing boundaries, and use canonical infrastructure verification. No deletion or permission changes in other repositories or shared data.
+  Dependencies: `.1.1.3.1.2.2.5` clean handoff.
+  Verification: pending.
+  Commit: pending.
+
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.3`
   Status: `pending`

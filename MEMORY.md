@@ -1,11 +1,11 @@
 # MEMORY
 
-- activation_commit: `e0173014f71d49a13c4f82daf6926965360fa3c2` — clean activation base for Julia nesting carriers.
-- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.4 - verify Julia nesting carriers`.
-- active_work_unit: none; Julia carrier leaf is complete.
-- next_action: Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.5 for PUC Lua/LuaJIT nesting carriers, typed recovery and mutations; canonical reconciliation follows.
+- activation_commit: `618c0b974f77d576f7a9a983855582bdfaf2210c` — clean activation base for Lua/LuaJIT nesting carriers.
+- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.5 - verify Lua nesting carriers`.
+- active_work_unit: none; Lua/LuaJIT carrier leaf is complete.
+- next_action: Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.6 and repair the Lua storage census false PASS; canonical infrastructure proof precedes parent reconciliation.
 - in_flight_uncommitted: none.
-- blockers: none for nested-tree proof; .1.1.5 owns stale capability prose and startup .38/.40 recognition defects remain queued. ARCHOGEN owns downstream acceptance; named-argument and format proposals stay parked.
+- blockers: carrier proof complete; storage census repair .1.1.3.1.2.2.6 is required before reconciliation; .1.1.5 owns stale capability prose and startup .38/.40 recognition defects remain queued. ARCHOGEN owns downstream acceptance; named-argument and format proposals stay parked.
   Wrapper startup .7 remains open; recovery/purge stay prohibited. No interrupted Phase0 run counts as proof.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
   active table; the task metadata doctrine inventories all consumers, permits arbitrary frontier-row rewrites,

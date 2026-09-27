@@ -141,7 +141,22 @@ bash tools/run_julia_project_data.sh --project=julia -e \
 ```
 
 The child process loads four emitted modules using the retained offline dependencies and checks their metadata,
-plans and results. Lua carrier proof remains a separate next step.
+plans and results.
+
+PUC Lua and LuaJIT now each prove five routes using native and JSON-reconstructed `SpecFile` engines, generated
+v2 entry for both compiled forms and fresh emitted modules. Every route preserves the authored values/spans,
+requires typed status1 rejection and detects the three mutations. Two retained engines prove28 immediate recovery
+transitions per ABI; generated entries create an engine per call. Repeat the expanded emitter consumer with:
+
+```sh
+bash tools/run_lua_project_data.sh puc lua/test/rule_local_cursor_generated_source_test.lua
+bash tools/run_lua_project_data.sh luajit lua/test/rule_local_cursor_generated_source_test.lua
+```
+
+Both pass133 assertions and independently load four emitted modules with checked child status, exact output and
+cleanup. Canonical nesting reconciliation remains open: a separately owned storage-census check can report success
+after an enumeration error and is scheduled for immediate repair. This bounded proof does not establish the
+separately tracked malformed-regex native error path.
 This example does not open the structured-format campaign or establish arbitrary-depth resource safety.
 
 

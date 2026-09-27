@@ -12,6 +12,14 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-09-27 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.5: Lua and LuaJIT nesting carriers
+
+Both ABIs pass five public routes with40 original calls/three mutations each and28 retained-engine recoveries.
+The existing v2 suite grows106 to133 assertions;51 document cases,27 round trips and24 recovery controls pass per
+ABI. Four independently loaded modules require real child success, exact JSON, empty stderr and cleanup. No
+runtime or fixture changes. Storage verification exposes a failed legacy census hidden behind PASS; immediate
+P1 .1.1.3.1.2.2.6 owns repair before canonical reconciliation. The incomplete census is not accepted as proof.
+
 ## 2026-09-27 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.4: Julia nesting carriers
 
 The existing emitter harness now proves five public nesting routes: native and SpecFile-reconstructed engines,

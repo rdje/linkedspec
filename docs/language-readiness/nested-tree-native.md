@@ -107,3 +107,22 @@ Final report parsing remains exact, with no warning filtering. The child exits s
 is verified. Focused proof passes new30, existing emitter65 and strict-document128 assertions (223 total).
 Storage retains22 existing temporary owners and five package trees; original grammar/cases/runtime/manifests are
 unchanged. Lua and canonical parent reconciliation remain.
+
+## Subsequent Lua/LuaJIT carrier proof
+
+`SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.5` extends the existing
+`lua/test/rule_local_cursor_generated_source_test.lua` consumer and adds shared `lua_checks.lua` beside the fixture.
+Each ABI proves five routes: native and SpecFile-JSON reconstructed engines, v2 entry for each compiled form and
+fresh emitted modules. All five pass40 original calls and three mutations. Only the two native routes retain an
+engine, proving28 immediate recoveries per ABI. Every rejected input requires typed RuntimeExitNow status1.
+Canonical JSON compares tagged arrays/objects, numbers/strings/booleans and exact Unicode spans.
+
+The existing managed owner writes four modules and launches the exact selected ABI with inherited source/native
+paths. Metadata/plans and completion are exact; child status must succeed, stderr must be empty and the owned
+workspace must disappear. Each ABI passes133 v2 assertions (106 existing plus27 new),51 strict-document cases,
+27 round trips and24 post-rejection recovery checks. Runtime, original fixture and adapters are unchanged.
+
+Storage verification completes19-owner/three-module dual-ABI/device/owned-cleanup checks, but its legacy-residue
+census reports a permission error while the script still returns0/PASS. New P1 .1.1.3.1.2.2.6 owns immediate repair
+and controlled failure proof before canonical reconciliation. This is not successful legacy-census evidence or
+an unfiltered full Lua gate; LUA-STARTUP-READING.2.3 still owns the malformed-regex native path separately.

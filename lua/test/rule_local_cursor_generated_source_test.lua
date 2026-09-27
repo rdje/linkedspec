@@ -430,6 +430,110 @@ io.write(json.encode(result), "\n")
   check_equal(observed.corrupt_failure.code, "generated_source_compile_failed", "fresh corrupt v2 code")
 end)
 
+-- Bounded nesting uses unchanged authored data and the existing isolated-host owner.
+do
+  local fixture = "tests/language-readiness/nested-tree/"
+  local nesting = dofile(fixture .. "lua_checks.lua")
+  local original = read_file(fixture .. "grammar.spec")
+  local nesting_cases = json.decode(read_file(fixture .. "cases.json"))
+  local function replace_exact(source, needle, replacement, expected_count)
+    local pieces, cursor, count = {}, 1, 0
+    while true do
+      local first, last = source:find(needle, cursor, true)
+      if first == nil then break end
+      pieces[#pieces + 1] = source:sub(cursor, first - 1)
+      pieces[#pieces + 1] = replacement
+      cursor, count = last + 1, count + 1
+    end
+    pieces[#pieces + 1] = source:sub(cursor)
+    assert(count == expected_count, "exact mutation target count")
+    return table.concat(pieces)
+  end
+  local prefix = " if(matches(input_slice(0, cursor_pos()), /[^ \\t\\r\\n\\f\\x0B]/));\n" ..
+    "  exit_now(1);\n endif();\n"
+  local variants = {
+    { id = "original", source = original },
+    { id = "prefix", source = replace_exact(original, prefix, "", 1) },
+    { id = "gap", source = replace_exact(original, " -> Invalid { exit_now(1) }\n", "", 2) },
+    { id = "span", source = replace_exact(original,
+      "[start, cursor_pos()]", "[cursor_pos(), cursor_pos()]", 1) },
+  }
+  local modules = {}
+  for _, variant in ipairs(variants) do
+    local parsed = linkedspec.parse_spec_with_staged_user_function_definitions(variant.source)
+    linkedspec.validate_spec(parsed)
+    local reconstructed = linkedspec.spec_ast.from_json("SpecFile",
+      json.decode(json.encode(linkedspec.spec_ast.to_json(parsed))))
+    linkedspec.validate_spec(reconstructed)
+    for _, spec in ipairs({ parsed, reconstructed }) do
+      local carrier = linkedspec.compile_spec(spec)
+      local carrier_plan = linkedspec.build_generated_rule_plan(carrier)
+      linkedspec.validate_generated_rule_plan_v2(carrier, carrier_plan, variant.id)
+      local labels = json.array()
+      for index, row in ipairs(carrier_plan) do labels[index] = row.label end
+      check_same_json(labels, json.array({ "Top", "List", "Atom", "Space", "Invalid" }),
+        variant.id .. " nesting plan")
+      local engine = linkedspec.runtime_engine(carrier)
+      -- These two native routes retain the engine throughout each rejection/recovery sequence.
+      check(nesting.variant(variant.id, nesting_cases, function(input)
+        return linkedspec.runtime_parse(engine, input).value
+      end), variant.id .. " nesting native")
+      -- Public generated entry constructs an engine on every call.
+      check(nesting.variant(variant.id, nesting_cases, function(input)
+        return linkedspec.execute_generated_parser_v2(carrier, carrier_plan, input, variant.id)
+      end), variant.id .. " nesting generated")
+    end
+    modules[variant.id] = linkedspec.emit_lua_source_v2(
+      linkedspec.compile_spec(parsed), "nested-tree/" .. variant.id)
+  end
+
+  local owned_root
+  with_temp_directory(function(root)
+    owned_root = root
+    write_file(root .. "/checks.lua", read_file(fixture .. "lua_checks.lua"))
+    write_file(root .. "/cases.json", read_file(fixture .. "cases.json"))
+    for id, module_source in pairs(modules) do write_file(root .. "/" .. id .. ".lua", module_source) end
+    write_file(root .. "/runner.lua", [[
+local linkedspec = require("linkedspec")
+local json = linkedspec.json
+local root = assert(arg[1])
+local checks = dofile(root .. "/checks.lua")
+local handle = assert(io.open(root .. "/cases.json", "rb"))
+local cases = json.decode(assert(handle:read("*a")))
+assert(handle:close())
+local modules = 0
+for _, id in ipairs({ "original", "prefix", "gap", "span" }) do
+  local parser = assert(loadfile(root .. "/" .. id .. ".lua"))()
+  checks.exact_json(linkedspec.generated_source_metadata_to_json(parser.metadata()), json.harray({
+    contract_id = "linkedspec-generated-source-v2",
+    format_version = 2,
+    source_identity = "nested-tree/" .. id,
+  }), id .. " metadata")
+  parser.validate_plan(parser.plan())
+  assert(checks.variant(id, cases, parser.execute))
+  modules = modules + 1
+end
+io.write(json.encode(json.harray({ modules = modules, original_executions = 40, mutations = 3 })), "\n")
+]])
+    local runtime = assert(os.getenv("LINKEDSPEC_LUA_TEST_RUNTIME"), "selected ABI runtime required")
+    local stdout_path, stderr_path = root .. "/stdout.json", root .. "/stderr.txt"
+    local command = table.concat({
+      "env LUA_PATH=" .. shell_quote(assert(os.getenv("LUA_PATH"))),
+      "LUA_CPATH=" .. shell_quote(assert(os.getenv("LUA_CPATH"))),
+      shell_quote(runtime), shell_quote(root .. "/runner.lua"), shell_quote(root),
+      ">" .. shell_quote(stdout_path), "2>" .. shell_quote(stderr_path),
+    }, " ")
+    local succeeded = command_succeeded(command)
+    local stdout, stderr = read_file(stdout_path), read_file(stderr_path)
+    assert(succeeded, "nesting child failed:\n" .. stdout .. stderr)
+    check_equal(stderr, "", "nesting child stderr")
+    check_same_json(json.decode(stdout),
+      json.harray({ modules = 4, original_executions = 40, mutations = 3 }),
+      "nesting child completion")
+  end)
+  check(command_succeeded("test ! -e " .. shell_quote(owned_root)), "nesting child cleanup")
+end
+
 if #failures == 0 then
   io.stdout:write("rule-local cursor generated source: ", assertions, " assertions passed\n")
 else
