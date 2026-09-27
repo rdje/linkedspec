@@ -1,11 +1,11 @@
 # MEMORY
 
-- activation_commit: `2cf465ae780013af4153e4129b31ad9db227b7d1` — clean activation base for Dart context-name carriers.
-- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.4 - verify Dart closing-name carriers`.
-- active_work_unit: none — Dart context-name carrier proof complete.
-- next_action: Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.5 for Julia context-name carriers using unchanged oracles and the existing managed emitted harness.
+- activation_commit: `8e2ac09679ddd0a4a361fdfc1e42e72c66bd700d` — clean activation base for Julia context-name carriers.
+- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.5 - verify Julia closing-name carriers`.
+- active_work_unit: none — Julia context-name carrier proof complete.
+- next_action: Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.6 for Lua/LuaJIT context-name carriers using unchanged oracles and the existing managed emitted harness.
 - in_flight_uncommitted: none.
-- blockers: all-six context-name native and Perl/Rust/Dart carrier proof complete; other carriers and lossless probes remain; .1.1.5 owns stale capability prose and startup .38/.40 recognition defects remain queued. ARCHOGEN owns downstream acceptance; named-argument and format proposals stay parked.
+- blockers: all-six context-name native and Perl/Rust/Dart/Julia carrier proof complete; other carriers and lossless probes remain; .1.1.5 owns stale capability prose and startup .38/.40 recognition defects remain queued. ARCHOGEN owns downstream acceptance; named-argument and format proposals stay parked.
   Wrapper startup .7 remains open; recovery/purge stay prohibited. No interrupted Phase0 run counts as proof.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
   active table; the task metadata doctrine inventories all consumers, permits arbitrary frontier-row rewrites,

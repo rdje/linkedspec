@@ -71,7 +71,7 @@ The three-level control is not arbitrary-depth/resource proof; recognition rollb
 or AST rollback. Do not generalize to indentation, XML or other standards.
 
 Perl native/fresh emitted proof above is supplemented by the all-six public-native result below.
-Rust/Dart carrier proof is recorded below; `.1.1.3.2.5-.6` own the remaining backend carriers, and `.7` owns canonical evidence/authoring reconciliation. The overall
+Rust/Dart/Julia carrier proof is recorded below; `.1.1.3.2.6` owns the remaining Lua carriers, and `.7` owns canonical evidence/authoring reconciliation. The overall
 context objective and structured-format campaign remain open. No comparison or recursive-state primitive is
 selected for implementation on the strength of these bounded results.
 
@@ -108,8 +108,8 @@ integration command; the existing project-local Dart/Julia/Lua stores are reused
 dependency pins and both grammar/oracle pairs stay unchanged. Both fixtures are verified on all six routes;
 exact reports, product/source/log hashes and option controls are in this leaf's checkpoint.
 
-Perl's separate fresh emitted/recovery/mutation proof is unchanged. Julia/Lua carriers and typed recovery
-remain .1.1.3.2.5-.6, followed by canonical reconciliation under .7. No XML or broader format admission follows.
+Perl's separate fresh emitted/recovery/mutation proof is unchanged. Lua carriers and typed recovery
+remain .1.1.3.2.6, followed by canonical reconciliation under .7. No XML or broader format admission follows.
 
 ## Rust typed carriers and retained recovery
 
@@ -146,8 +146,8 @@ bash tools/run_cargo_local.sh test --locked --offline --manifest-path rust/Cargo
 ```
 
 The checkpoint records the initial failure and final combined verification separately. Bounded direct-dependent
-checks cover leading trivia and the strict S-expression document. Julia and both Lua carrier proofs
-remain separate leaves; canonical context reconciliation remains .7.
+checks cover leading trivia and the strict S-expression document. Both Lua carrier proofs
+remain a separate leaf; canonical context reconciliation remains .7.
 
 ## Dart typed carriers and emitted package
 
@@ -177,4 +177,28 @@ formatting and package-context analysis pass. Directly analyzing the shared help
 cannot resolve its package import; both real emitted packages analyze the copied helper with fatal diagnostics
 and pass. This invocation limitation is recorded separately from runtime proof. No whole-package gate claim:
 the known SDK deprecations remain owned by DART-STARTUP-READING.2.25. Existing managed temporary-package cleanup,
-local stores, root lockfile and production code are unchanged. Julia/Lua proof and canonical .7 follow.
+local stores, root lockfile and production code are unchanged. Lua proof and canonical .7 follow.
+
+## Julia typed carriers and fresh emitted host
+
+Owner: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.5`, from clean `8e2ac09679ddd0a4a361fdfc1e42e72c66bd700d`.
+Five public Julia routes pass 90 original calls and three context mutations each. Native and SpecFile-JSON
+reconstructed engines each retain their instance across 34 typed rejection/immediate-success pairs, giving
+68 recovery transitions. Public v2 execution on both compiled forms and the fresh emitted module create an
+engine per invocation; those three routes establish isolation. Rejection requires RuntimeExitNow with the
+exact authored status; successful nothing, another exception or a different status cannot satisfy it. Strict
+JSON checks distinguish Bool from Number and preserve exact keys, values and Unicode spans.
+
+The existing emitter test and shared checker take explicit fixture options while preserving nesting defaults.
+The fresh host reads the selected cases and options as data, loads each of four emitted modules, checks v2
+metadata/identity/plan, retrieves bindings through the existing latest-world helper and then invokes them.
+Actual process success and exact JSON output remain mandatory; merged warnings cannot be discarded. Both
+fixture hosts verify cleanup, and the original source/oracle pairs and Julia manifests remain unchanged.
+
+```sh
+bash tools/run_julia_project_data.sh --project=julia -e 'using LinkedSpecJulia, JSON3, Test; const REPO_ROOT=pwd(); include("julia/test/source_emitter_test.jl"); include("julia/test/sexpr_document_v1_test.jl")'
+```
+
+All 253 assertions pass: 30 context, 30 nesting, 65 existing emitter and 128 strict-document. The storage check
+still passes 22 temporary owners/five locked package trees. No private generated-family keyword, runtime,
+dependency or schema change is introduced. Both Lua ABIs and canonical context reconciliation remain open.

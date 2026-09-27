@@ -12,6 +12,14 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-09-27 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.5: Julia closing-name carriers
+
+Parameterize the existing Julia readiness harness/checker for exact context statuses and comparison/state/span
+mutations. Five routes each execute90 calls/three mutants; two retained engines prove68 recoveries. All253
+assertions pass: context30, nesting30, emitter65 and strict-document128. Both fresh hosts require actual success,
+exact reports and cleanup. Storage remains22 owners/five packages. Fixtures/manifests stay exact; no runtime,
+generated-format or private-API change. Book/evidence/current pointers agree; both Lua ABIs follow.
+
 ## 2026-09-27 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.4: Dart closing-name carriers
 
 Extend the existing readiness fixture/harness with exact authored context statuses and comparison/state/span

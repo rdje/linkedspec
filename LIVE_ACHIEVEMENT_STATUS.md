@@ -6,13 +6,15 @@ Ordinary .spec language readiness under SPEC-LANGUAGE-SELF-CONTAINMENT.1.1. The 
 
 ## Latest Completed Slice
 
-- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.4 - verify Dart closing-name carriers` — six routes90 calls/three mutants and136 retained recoveries;62 tests pass, including both strict emitted packages. Main-test analysis and format pass; known package-wide SDK issues remain separate.
+- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.5 - verify Julia closing-name carriers` — five routes90 calls/three mutants and68 retained recoveries;253 assertions pass. Both fresh emitted hosts verify actual success, exact reports and cleanup; storage remains22 owners.
 
 ## Next Action
 
-- Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.5 for Julia context-name carriers, typed recovery and mutations.
+- Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.6 for Lua/LuaJIT context-name carriers, typed recovery and mutations.
 
 ## Recent Completions
+
+- `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.5` verifies five Julia context-name carriers and fresh emitted hosts.
 
 - `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.4` verifies six Dart context-name carriers and strict fresh packages.
 
@@ -43,8 +45,6 @@ Ordinary .spec language readiness under SPEC-LANGUAGE-SELF-CONTAINMENT.1.1. The 
 - `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.6` repairs generic bound/computed container splicing.
 
 - `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.1` repairs nested constructor values and preserves the original nesting oracles.
-
-- `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.2` inventories state/computation evidence and scoping limits.
 
 ## History
 

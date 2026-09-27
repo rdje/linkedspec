@@ -12,6 +12,15 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-09-27 — Julia context-name carriers preserve typed outcomes and fresh-world loading
+
+Explicit fixture options extend the existing checker without weakening nesting defaults. Only RuntimeExitNow
+with authored1/2/3 satisfies rejection; successful nothing and unrelated errors cannot pass. Two retained
+engines prove68 recoveries, while generated v2 on both compiled forms and the fresh module prove per-call
+isolation. All five routes execute90 calls/three mutants. Fresh hosts read options as data and retain latest-
+world binding lookup plus invocation, exact merged-output JSON and real process success. Both cleanup checks
+pass; all253 assertions and storage22/five pass. Runtime, fixture pairs and Julia manifests remain unchanged.
+
 ## 2026-09-27 — Dart context proof uses explicit fixture settings and package-context analysis
 
 Parameterizing inventory, recovery case and span retains original nesting defaults while verifying exact

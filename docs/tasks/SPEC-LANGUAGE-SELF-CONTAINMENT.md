@@ -537,10 +537,29 @@ used by ordinary `.spec` syntax on every backend.
 - [x] **LOCKSTEP** — Book, context ledger, Knowledge, checkpoint, roadmap, task frontier, MEMORY, live status and bounded histories agree. Julia .1.1.3.2.5 follows; canonical parent .7 and broad format admission remain separate.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.5`
-  Status: `pending`
+  Status: `done`
   Goal: Verify Julia context-name reconstructed/v2/emitted routes and context/recovery mutations using existing managed emitter storage.
   Dependencies: `.1.1.3.2.4`
   Acceptance: Exact JSON kinds/spans/statuses; retained/per-call distinction; latest-world fresh child binding access, exact report and real exit success.
+
+  Activation: Clean8e2ac09679ddd0a4a361fdfc1e42e72c66bd700d after Dart carrier commit; all nine doctrines/post-pointer pass, brief0 and clean tree.
+  Scope: Extend the existing Julia emitter readiness harness and shared strict checker with explicit context fixture settings/statuses/mutations. Retain latest-world binding access and managed private-depot child. Preserve original fixtures, runtime, manifests and generated format.
+  Verification tier: `focused`
+  Focused checks: Five context routes with90 calls/three mutations each and68 recoveries on two retained engines; original nesting and full existing emitter/document files; real emitted child exit success/exact report/cleanup; storage inventory, book, Knowledge, memory, histories, doctrines and diff hygiene.
+  Canonical trigger: None for bounded fixture/carrier tests; parent .1.1.3.2.7 owns exact staged canonical reconciliation. Escalate any production or infrastructure contract movement separately.
+
+  Verification: PASS253 assertions: context30, original nesting30, existing emitter65 and strict-document128. Five context routes each execute90 calls/three mutants; two retained engines prove68 immediate recoveries. Both fresh hosts require actual success/exact report and verified cleanup. Storage remains22 owners/five package trees; fixtures and manifests are byte-exact.
+  Evidence: docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.5-verification.json; context ledger and Julia Knowledge card record retained/per-call limits and latest-world loading.
+  Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.5 - verify Julia closing-name carriers`.
+
+### `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.5` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Julia public-native context proof lacked reconstructed/generated/fresh emitted exact status and recovery evidence; the existing emitter readiness harness covered only nesting.
+- [x] **ROOT CAUSE (WHY + WHERE)** — julia/test/source_emitter_test.jl and its shared checker hardcoded the nesting inventory, status1, recovery case and span. Existing public APIs already compose the context grammar; no production defect is observed.
+- [x] **FIX** — Add explicit context fixture options and comparison/state/span variants, preserving nesting defaults, exact typed errors and the established managed latest-world emitted host.
+- [x] **ADDRESSED (verified)** — All253 assertions pass, including30 context controls. Five routes each verify90 original calls/three mutations; two retained engines verify68 recoveries. Both real emitted hosts pass strict reports/status and cleanup assertions.
+- [x] **NO REGRESSION** — Original nesting30, existing emitter65 and strict-document128 pass. Both fixture pairs and Julia manifests stay byte-exact; storage passes22 owners/five package trees. No private generated-family API, runtime or format change.
+- [x] **LOCKSTEP** — Book, context ledger, Knowledge, checkpoint, task frontier, roadmaps, MEMORY and bounded live/history records agree. Lua .1.1.3.2.6 follows; canonical parent .7 remains separate.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.6`
   Status: `pending`
@@ -773,7 +792,7 @@ used by ordinary `.spec` syntax on every backend.
 | 14 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.3` | `done` | Bounded nesting evidence/authoring limits reconciled; exact canonical receipt governs closeout. |
 | 15 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.1` | `done` | Perl native/fresh emitted context-name proof:11/17 cases,90 calls and34 recoveries per route. |
 | 16 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.2` | `done` | Context11/17/22 and original-default6/7/12 pass all six native routes. |
-| 17 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.5` | `pending` | Julia context-name reconstructed/v2/emitted and typed recovery proof. |
+| 17 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.6` | `pending` | Lua/LuaJIT context-name reconstructed/v2/emitted and typed recovery proof. |
 
 ## Decisions
 

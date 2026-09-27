@@ -612,11 +612,28 @@ function _nested_tree_variants(source)
     ]
 end
 
-@testset "Bounded nesting across public Julia carriers" begin
-    fixture = joinpath(REPO_ROOT, "tests", "language-readiness", "nested-tree")
+function _context_name_variants(source)
+    comparison = "  if(str_ne(match_group(0), name));\n   exit_now(2);\n  endif();\n"
+    recursive_edge = " -> Element { push(children, call(Element)) }\n"
+    corrupt_edge = " -> Element { push(children, call(Element)); name = \"lost\" }\n"
+    span = "[start, cursor_pos()]"
+    @test length(findall(comparison, source)) == 1
+    @test length(findall(recursive_edge, source)) == 1
+    @test length(findall(span, source)) == 1
+    return [
+        "original" => source,
+        "comparison" => replace(source, comparison => ""),
+        "state" => replace(source, recursive_edge => corrupt_edge),
+        "span" => replace(source, span => "[cursor_pos(), cursor_pos()]"),
+    ]
+end
+
+function _verify_readiness_fixture(name, make_variants, labels, options)
+    fixture = joinpath(REPO_ROOT, "tests", "language-readiness", name)
+    executions = 2 * (options.accepted_count + 2 * options.rejected_count)
     source = read(joinpath(fixture, "grammar.spec"), String)
     cases = JSON3.read(read(joinpath(fixture, "cases.json"), String), Dict{String,Any})
-    variants = _nested_tree_variants(source)
+    variants = make_variants(source)
     emitted = Dict{String,String}()
     for (id, variant_source) in variants
         parsed = parse_spec_with_staged_user_function_definitions(variant_source)
@@ -627,15 +644,15 @@ end
             compiled = compile_spec(spec)
             plan = build_generated_rule_plan(compiled)
             validate_generated_rule_plan_v2(compiled, plan, id)
-            @test [row.label for row in plan] == ["Top", "List", "Atom", "Space", "Invalid"]
+            @test [row.label for row in plan] == labels
             engine = LinkedSpecRuntimeEngine(compiled)
             # Only these two native routes retain an engine across the sequence.
-            @test NestedTreeChecks.variant(id, cases, input -> runtime_parse(engine, input).value)
+            @test NestedTreeChecks.variant(id, cases, input -> runtime_parse(engine, input).value; options...)
             # The supported generated API constructs an engine for each invocation.
             @test NestedTreeChecks.variant(id, cases,
-                input -> execute_generated_parser_v2(compiled, plan, input, id))
+                input -> execute_generated_parser_v2(compiled, plan, input, id); options...)
         end
-        emitted[id] = emit_julia_source_v2(compile_spec(parsed), "nested-tree/$id")
+        emitted[id] = emit_julia_source_v2(compile_spec(parsed), "$name/$id")
     end
 
     scratch_path = Ref("")
@@ -646,7 +663,12 @@ end
         write(joinpath(scratch, "Project.toml"),
             "name = \"NestedTreeGeneratedHost\"\nuuid = \"d80d8a84-f81a-4c4a-9d45-823368f38fe6\"\nversion = \"0.1.0\"\n")
         cp(joinpath(fixture, "cases.json"), joinpath(scratch, "cases.json"))
-        cp(joinpath(fixture, "julia_checks.jl"), joinpath(scratch, "checks.jl"))
+        cp(joinpath(REPO_ROOT, "tests", "language-readiness", "nested-tree", "julia_checks.jl"),
+            joinpath(scratch, "checks.jl"))
+        write(joinpath(scratch, "config.json"), JSON3.write(Dict(
+            "name" => name, "ids" => first.(variants), "options" => options,
+            "executions" => executions,
+        )))
         for (id, generated) in emitted
             write(joinpath(scratch, "$id.jl"), generated)
         end
@@ -658,8 +680,16 @@ latest_binding(owner::Module, name::Symbol) =
     Base.invokelatest(() -> Core.getglobal(owner, name))
 function main()
     cases = JSON3.read(read(joinpath(ARGS[1], "cases.json"), String), Dict{String,Any})
+    config = JSON3.read(read(joinpath(ARGS[1], "config.json"), String), Dict{String,Any})
+    name = config["name"]
+    settings = config["options"]
+    options = (
+        accepted_count = settings["accepted_count"], rejected_count = settings["rejected_count"],
+        recovery_id = settings["recovery_id"], span_case = settings["span_case"],
+        span_end = settings["span_end"],
+    )
     modules = 0
-    for id in ("original", "prefix", "gap", "span")
+    for id in config["ids"]
         host = Module(gensym(:NestedTreeGenerated))
         Base.include(host, joinpath(ARGS[1], "$id.jl"))
         parser = latest_binding(host, :LinkedSpecGeneratedParser)
@@ -667,15 +697,15 @@ function main()
         NestedTreeChecks.exact_json(to_json(metadata), Dict(
             "contract_id" => "linkedspec-generated-source-v2",
             "format_version" => 2,
-            "source_identity" => "nested-tree/$id",
+            "source_identity" => "$name/$id",
         ))
         plan = Base.invokelatest(latest_binding(parser, :plan))
         Base.invokelatest(latest_binding(parser, :validate_plan), plan)
         execute = latest_binding(parser, :execute)
-        @assert NestedTreeChecks.variant(id, cases, input -> Base.invokelatest(execute, input))
+        @assert NestedTreeChecks.variant(id, cases, input -> Base.invokelatest(execute, input); options...)
         modules += 1
     end
-    print(JSON3.write(Dict("modules" => modules, "original_executions" => 40, "mutations" => 3)))
+    print(JSON3.write(Dict("modules" => modules, "original_executions" => config["executions"], "mutations" => 3)))
 end
 main()
 """)
@@ -683,10 +713,24 @@ main()
         @test passed
         if passed
             @test NestedTreeChecks.exact_json(JSON3.read(output, Dict{String,Any}),
-                Dict("modules" => 4, "original_executions" => 40, "mutations" => 3))
+                Dict("modules" => 4, "original_executions" => executions, "mutations" => 3))
         else
-            @error "nested-tree emitted child failed" output
+            @error "readiness emitted child failed" name output
         end
     end
     @test !ispath(scratch_path[])
+end
+
+@testset "Bounded nesting across public Julia carriers" begin
+    _verify_readiness_fixture("nested-tree", _nested_tree_variants,
+        ["Top", "List", "Atom", "Space", "Invalid"],
+        (accepted_count = 6, rejected_count = 7, recovery_id = "nested_state",
+            span_case = "nested_state", span_end = 9))
+end
+
+@testset "Bounded context names across public Julia carriers" begin
+    _verify_readiness_fixture("context-names", _context_name_variants,
+        ["Top", "Element", "Text", "Space", "Invalid"],
+        (accepted_count = 11, rejected_count = 17, recovery_id = "siblings_restore_parent",
+            span_case = "nested_distinct", span_end = 17))
 end
