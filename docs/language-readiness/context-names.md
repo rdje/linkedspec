@@ -70,7 +70,43 @@ Three statuses improve rejection classification but richer grammar-specific diag
 The three-level control is not arbitrary-depth/resource proof; recognition rollback does not imply user-variable
 or AST rollback. Do not generalize to indentation, XML or other standards.
 
-Only Perl native/fresh emitted execution is established here. `.1.1.3.2.2` owns all six public native adapters;
-`.3-.6` own the other backend carriers, and `.7` owns canonical evidence/authoring reconciliation. The overall
+Perl native/fresh emitted proof above is supplemented by the all-six public-native result below.
+`.1.1.3.2.3-.6` own the other backend carriers, and `.7` owns canonical evidence/authoring reconciliation. The overall
 context objective and structured-format campaign remain open. No comparison or recursive-state primitive is
 selected for implementation on the strength of this single backend result.
+
+## Public native adapter proof
+
+Owner: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.2`, from clean `8b11f40705b31e9c83037602e67758c81a676bd7`.
+The unchanged context grammar/cases pass each documented native text consumer:
+
+| Runtime | Accepted cases | Rejected cases | Accepted parses on one engine | Rejection projection |
+| --- | ---: | ---: | ---: | --- |
+| Perl | 11 | 17 | 22 | typed JSON runtime_exit_now with exact grammar status |
+| Rust | 11 | 17 | 22 | published Display text exit_now(status) |
+| Dart | 11 | 17 | 22 | typed JSON runtime_exit_now with exact grammar status |
+| Julia | 11 | 17 | 22 | typed JSON runtime_exit_now with exact grammar status |
+| PUC Lua | 11 | 17 | 22 | typed JSON runtime_exit_now with exact grammar status |
+| LuaJIT | 11 | 17 | 22 | typed JSON runtime_exit_now with exact grammar status |
+
+The application adapters all choose process exit1 for rejected input; the grammar's1/2/3 status remains separate.
+Accepted cases run forward then reversed through one compiled engine. Each rejected input gets a separate
+process, must produce no value/stdout, and must report the exact authored status. This establishes positive
+reuse and exact rejection, not retained-engine recovery after failure. Rust Display text is not typed-error proof.
+
+The existing `tests/language-readiness/nested-tree/verify_native.py` adds only two fixed fixture choices; its
+unchanged default remains the original6/7/12 nesting trial. The rejection check now reads each authored status,
+with1 as the original fixture's default. Canonical JSON preserves scalar/container kinds, and all grammar/case/
+adapter/product hashes are checked before and after execution. Unknown fixture choices fail before file access.
+
+```sh
+bash tools/run_python_project_data.sh tests/language-readiness/nested-tree/verify_native.py --fixture context-names --runtime rust
+```
+
+Repeat for perl, dart, julia, puc and luajit. The Rust consumer is rebuilt with the published locked offline
+integration command; the existing project-local Dart/Julia/Lua stores are reused. The source adapters, runtime,
+dependency pins and both grammar/oracle pairs stay unchanged. Both fixtures are verified on all six routes;
+exact reports, product/source/log hashes and option controls are in this leaf's checkpoint.
+
+Perl's separate fresh emitted/recovery/mutation proof is unchanged. Other backend carriers and typed recovery
+remain .1.1.3.2.3-.6, followed by canonical reconciliation under .7. No XML or broader format admission follows.

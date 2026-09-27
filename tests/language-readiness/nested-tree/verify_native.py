@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
-"""Check the bounded nesting grammar through a documented public text consumer.
+"""Check a bounded readiness grammar through a documented public text consumer.
 
 Prepare the chosen integration example using the public integration guide, then
-run through tools/run_python_project_data.sh. This is native readiness evidence;
-it does not prove emitted carriers or same-engine recovery after rejection.
+run through tools/run_python_project_data.sh. The default is nested-tree;
+--fixture context-names selects the scoped closing-name trial. This is native
+readiness evidence, not emitted or same-engine rejection-recovery proof.
 """
 
 import argparse
@@ -24,15 +25,20 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--runtime", required=True,
                         choices=("perl", "rust", "dart", "julia", "puc", "luajit"))
-    runtime = parser.parse_args().runtime
+    parser.add_argument("--fixture", default="nested-tree",
+                        choices=("nested-tree", "context-names"))
+    arguments = parser.parse_args()
+    runtime = arguments.runtime
     root = Path(__file__).resolve().parents[3]
-    fixture = root / "tests/language-readiness/nested-tree"
+    fixture = root / "tests/language-readiness" / arguments.fixture
     grammar = fixture / "grammar.spec"
     authority = fixture / "cases.json"
     cases = json.loads(authority.read_text(encoding="utf-8"))
     accepted, rejected = cases["accept"], cases["reject"]
-    assert (len(accepted), len(rejected)) == (6, 7)
-    assert len({case["id"] for case in accepted + rejected}) == 13
+    expected_counts = {"nested-tree": (6, 7), "context-names": (11, 17)}
+    assert (len(accepted), len(rejected)) == expected_counts[arguments.fixture]
+    assert len({case["id"] for case in accepted + rejected}) == sum(
+        expected_counts[arguments.fixture])
     environment = dict(os.environ, PERL5LIB="", PERL5OPT="", PERL_UNICODE="0")
     protected = [grammar, authority]
     integration = root / "examples/integration"
@@ -101,18 +107,21 @@ def main():
     for case in rejected:
         result = run([case["input"]])
         assert result.returncode == 1 and not result.stdout, (runtime, case["id"], result)
+        expected_status = case.get("status", 1)
         if runtime == "rust":
             # This published adapter prints Display. Typed recovery is a later probe.
-            assert result.stderr == b"consumer: exit_now(1)\n", (case["id"], result.stderr)
+            expected_error = f"consumer: exit_now({expected_status})\n".encode("utf-8")
+            assert result.stderr == expected_error, (case["id"], result.stderr)
         else:
             error = json.loads(result.stderr)
-            assert error.get("type") == "runtime_exit_now" and error.get("status") == 1, (
+            assert error.get("type") == "runtime_exit_now" and error.get("status") == expected_status, (
                 runtime, case["id"], error)
 
     for path, original in hashes.items():
         assert hashlib.sha256(path.read_bytes()).hexdigest() == original, path
     print(json.dumps({
-        "status": "PASS", "runtime": runtime, "accepted": len(accepted),
+        "status": "PASS", "runtime": runtime, "fixture": arguments.fixture,
+        "accepted": len(accepted),
         "rejected": len(rejected), "same_engine_accepted_executions": len(repeated),
         "rejection_projection": "Display" if runtime == "rust" else "typed JSON",
         "protected_sha256": {str(path.relative_to(root)): digest for path, digest in hashes.items()},

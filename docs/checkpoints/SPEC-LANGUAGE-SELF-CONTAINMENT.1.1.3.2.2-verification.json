@@ -1,0 +1,332 @@
+{
+  "owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.2",
+  "activation_commit": "8b11f40705b31e9c83037602e67758c81a676bd7",
+  "date": "2026-09-27",
+  "evidence": [
+    {
+      "command": "bash tools/run_python_project_data.sh tests/language-readiness/nested-tree/verify_native.py --fixture context-names --runtime perl",
+      "result": "PASS 11/17/22; exact values/kinds/spans/status and before/after protected hashes",
+      "exit_status": 0,
+      "log": ".linkedspec-data/scratch/context-native-perl.log",
+      "sha256": "4c9dd341bdfd805ce75036f3b6afd869bfc81990d13f2bd965794857af93f529"
+    },
+    {
+      "command": "bash tools/run_python_project_data.sh tests/language-readiness/nested-tree/verify_native.py --runtime perl",
+      "result": "PASS 6/7/12; exact values/kinds/spans/status and before/after protected hashes",
+      "exit_status": 0,
+      "log": ".linkedspec-data/scratch/context-default-perl.log",
+      "sha256": "8914691dc77a67782f361cc3df9e17a24f67f3fc720f10efda21890a997d5db8"
+    },
+    {
+      "command": "bash tools/run_python_project_data.sh tests/language-readiness/nested-tree/verify_native.py --fixture context-names --runtime rust",
+      "result": "PASS 11/17/22; exact values/kinds/spans/status and before/after protected hashes",
+      "exit_status": 0,
+      "log": ".linkedspec-data/scratch/context-native-rust.log",
+      "sha256": "09fc964c3e8b7358f90607af7813d34e7f1fe3036c0b6f0a9255a2bd6fb9be18"
+    },
+    {
+      "command": "bash tools/run_python_project_data.sh tests/language-readiness/nested-tree/verify_native.py --runtime rust",
+      "result": "PASS 6/7/12; exact values/kinds/spans/status and before/after protected hashes",
+      "exit_status": 0,
+      "log": ".linkedspec-data/scratch/context-default-rust.log",
+      "sha256": "7a491c9cf058cf953f7b0756ab26321a2df924c282a69c8f122fe466e8609110"
+    },
+    {
+      "command": "bash tools/run_python_project_data.sh tests/language-readiness/nested-tree/verify_native.py --fixture context-names --runtime dart",
+      "result": "PASS 11/17/22; exact values/kinds/spans/status and before/after protected hashes",
+      "exit_status": 0,
+      "log": ".linkedspec-data/scratch/context-native-dart.log",
+      "sha256": "46992525e3086b70e6a6d6fb92373adb2a1538560797debdbf6876b433b9714b"
+    },
+    {
+      "command": "bash tools/run_python_project_data.sh tests/language-readiness/nested-tree/verify_native.py --runtime dart",
+      "result": "PASS 6/7/12; exact values/kinds/spans/status and before/after protected hashes",
+      "exit_status": 0,
+      "log": ".linkedspec-data/scratch/context-default-dart.log",
+      "sha256": "d19f4a85e23e9cdc21340bd80dbc738f9f284d415d8ae186093e6bc402c2f80f"
+    },
+    {
+      "command": "bash tools/run_python_project_data.sh tests/language-readiness/nested-tree/verify_native.py --fixture context-names --runtime julia",
+      "result": "PASS 11/17/22; exact values/kinds/spans/status and before/after protected hashes",
+      "exit_status": 0,
+      "log": ".linkedspec-data/scratch/context-native-julia.log",
+      "sha256": "34ab9ca8eaf7470dcd3a63ceae6855473ff03727b16bded7a3665631ddeda566"
+    },
+    {
+      "command": "bash tools/run_python_project_data.sh tests/language-readiness/nested-tree/verify_native.py --runtime julia",
+      "result": "PASS 6/7/12; exact values/kinds/spans/status and before/after protected hashes",
+      "exit_status": 0,
+      "log": ".linkedspec-data/scratch/context-default-julia.log",
+      "sha256": "e2c168026fc7cc314f702127c6c85aefc97aa6d041f6d7dc51eeb063a40081d5"
+    },
+    {
+      "command": "bash tools/run_python_project_data.sh tests/language-readiness/nested-tree/verify_native.py --fixture context-names --runtime puc",
+      "result": "PASS 11/17/22; exact values/kinds/spans/status and before/after protected hashes",
+      "exit_status": 0,
+      "log": ".linkedspec-data/scratch/context-native-puc.log",
+      "sha256": "f6ae6ea3bfb0ce63acf73dec6e860008c8fcced98705793fdca00e62c510c079"
+    },
+    {
+      "command": "bash tools/run_python_project_data.sh tests/language-readiness/nested-tree/verify_native.py --runtime puc",
+      "result": "PASS 6/7/12; exact values/kinds/spans/status and before/after protected hashes",
+      "exit_status": 0,
+      "log": ".linkedspec-data/scratch/context-default-puc.log",
+      "sha256": "81a4e78c418f8dc0192c094ea87ee4157e322527790a6d0201b0c6db6447b9b3"
+    },
+    {
+      "command": "bash tools/run_python_project_data.sh tests/language-readiness/nested-tree/verify_native.py --fixture context-names --runtime luajit",
+      "result": "PASS 11/17/22; exact values/kinds/spans/status and before/after protected hashes",
+      "exit_status": 0,
+      "log": ".linkedspec-data/scratch/context-native-luajit.log",
+      "sha256": "a3b393b41fcbe35986e7aebd097a055b8a9d4d1092cb5c302cc23f71c71d2ab3"
+    },
+    {
+      "command": "bash tools/run_python_project_data.sh tests/language-readiness/nested-tree/verify_native.py --runtime luajit",
+      "result": "PASS 6/7/12; exact values/kinds/spans/status and before/after protected hashes",
+      "exit_status": 0,
+      "log": ".linkedspec-data/scratch/context-default-luajit.log",
+      "sha256": "0bd164cf2c0e3ae7959363596bde5445a42799c7c0adc30e53b27c4fa9aef8a7"
+    },
+    {
+      "command": "bash tools/run_cargo_local.sh build --bins --offline --locked --manifest-path examples/integration/rust/Cargo.toml",
+      "result": "PASS documented locked offline consumer build",
+      "exit_status": 0,
+      "log": ".linkedspec-data/scratch/context-native-rust-build.log",
+      "sha256": "89458aaff79baf6ca4dc8ae69398cc8a541297585bb6f5b9a73a7c888f2dd7a7"
+    },
+    {
+      "command": "Python ast.parse plus --help and --fixture ../outside subprocess controls",
+      "result": "PASS syntax/help; invalid fixture exit2 before file access",
+      "exit_status": 0,
+      "log": ".linkedspec-data/scratch/context-native-option-controls.json",
+      "sha256": "0a38ba31296d44c88291db1173fb35ca4401ff10f2bb1c0666418a13439d7dcd"
+    },
+    {
+      "command": "bash tools/run_mdbook_local.sh",
+      "result": "PASS",
+      "exit_status": 0,
+      "log": ".linkedspec-data/scratch/context-native-book.log",
+      "sha256": "d61890f8c87cabc78fd932fda465e7050a87ba8f84d7cbc56dd6d1bdaee5b3c3"
+    }
+  ],
+  "runtime_reports": {
+    "perl": {
+      "context-names": {
+        "accepted": 11,
+        "fixture": "context-names",
+        "limits": "Native text consumer only; no carrier or same-engine rejection-recovery claim",
+        "protected_sha256": {
+          "examples/integration/perl/parse_words.pl": "b5633caef97418e84fa8eb0b901abb9e38f990d920870cb0c54e42763e6ac079",
+          "tests/language-readiness/context-names/cases.json": "3e7f25083e791db8048bed844523e85fbc53763eeaabd1253001a2b2650575ef",
+          "tests/language-readiness/context-names/grammar.spec": "8f408e81e2871b3b76c1a7fc7f99e059dad1c19dd03e91449a05fc9b88fff4b0"
+        },
+        "rejected": 17,
+        "rejection_projection": "typed JSON",
+        "runtime": "perl",
+        "same_engine_accepted_executions": 22,
+        "status": "PASS"
+      },
+      "nested-tree": {
+        "accepted": 6,
+        "fixture": "nested-tree",
+        "limits": "Native text consumer only; no carrier or same-engine rejection-recovery claim",
+        "protected_sha256": {
+          "examples/integration/perl/parse_words.pl": "b5633caef97418e84fa8eb0b901abb9e38f990d920870cb0c54e42763e6ac079",
+          "tests/language-readiness/nested-tree/cases.json": "7a36a4b32d8a5ac8a1d2f17d6d000a68c707bfc15a4b3a1e93e3e4ddaf4147c7",
+          "tests/language-readiness/nested-tree/grammar.spec": "498ffda35b05222388c64d99b0acb132a56996e97de3ffa9312f7dda6ee0ed72"
+        },
+        "rejected": 7,
+        "rejection_projection": "typed JSON",
+        "runtime": "perl",
+        "same_engine_accepted_executions": 12,
+        "status": "PASS"
+      }
+    },
+    "rust": {
+      "context-names": {
+        "accepted": 11,
+        "fixture": "context-names",
+        "limits": "Native text consumer only; no carrier or same-engine rejection-recovery claim",
+        "protected_sha256": {
+          "examples/integration/rust/src/main.rs": "21c660d5e1fe5c453a85e0130c5428ff91ba4c26f6cef79a651e4ed8074ef1ae",
+          "rust/target/debug/linkedspec-integration-example": "0a1e7215acb3cb6ba51bdd4dcc46889b525d20ed6987dddffca5598bf904a416",
+          "tests/language-readiness/context-names/cases.json": "3e7f25083e791db8048bed844523e85fbc53763eeaabd1253001a2b2650575ef",
+          "tests/language-readiness/context-names/grammar.spec": "8f408e81e2871b3b76c1a7fc7f99e059dad1c19dd03e91449a05fc9b88fff4b0"
+        },
+        "rejected": 17,
+        "rejection_projection": "Display",
+        "runtime": "rust",
+        "same_engine_accepted_executions": 22,
+        "status": "PASS"
+      },
+      "nested-tree": {
+        "accepted": 6,
+        "fixture": "nested-tree",
+        "limits": "Native text consumer only; no carrier or same-engine rejection-recovery claim",
+        "protected_sha256": {
+          "examples/integration/rust/src/main.rs": "21c660d5e1fe5c453a85e0130c5428ff91ba4c26f6cef79a651e4ed8074ef1ae",
+          "rust/target/debug/linkedspec-integration-example": "0a1e7215acb3cb6ba51bdd4dcc46889b525d20ed6987dddffca5598bf904a416",
+          "tests/language-readiness/nested-tree/cases.json": "7a36a4b32d8a5ac8a1d2f17d6d000a68c707bfc15a4b3a1e93e3e4ddaf4147c7",
+          "tests/language-readiness/nested-tree/grammar.spec": "498ffda35b05222388c64d99b0acb132a56996e97de3ffa9312f7dda6ee0ed72"
+        },
+        "rejected": 7,
+        "rejection_projection": "Display",
+        "runtime": "rust",
+        "same_engine_accepted_executions": 12,
+        "status": "PASS"
+      }
+    },
+    "dart": {
+      "context-names": {
+        "accepted": 11,
+        "fixture": "context-names",
+        "limits": "Native text consumer only; no carrier or same-engine rejection-recovery claim",
+        "protected_sha256": {
+          "examples/integration/dart/.dart_tool/package_config.json": "7490db096e6e36c467126c0eec097abca1ee8110484159d04431cdb21ee52ab6",
+          "examples/integration/dart/bin/parse_words.dart": "e81b396835629b8586b307d3aae8df403cc11aa2e5b940ff88c7f77e473da02c",
+          "tests/language-readiness/context-names/cases.json": "3e7f25083e791db8048bed844523e85fbc53763eeaabd1253001a2b2650575ef",
+          "tests/language-readiness/context-names/grammar.spec": "8f408e81e2871b3b76c1a7fc7f99e059dad1c19dd03e91449a05fc9b88fff4b0"
+        },
+        "rejected": 17,
+        "rejection_projection": "typed JSON",
+        "runtime": "dart",
+        "same_engine_accepted_executions": 22,
+        "status": "PASS"
+      },
+      "nested-tree": {
+        "accepted": 6,
+        "fixture": "nested-tree",
+        "limits": "Native text consumer only; no carrier or same-engine rejection-recovery claim",
+        "protected_sha256": {
+          "examples/integration/dart/.dart_tool/package_config.json": "7490db096e6e36c467126c0eec097abca1ee8110484159d04431cdb21ee52ab6",
+          "examples/integration/dart/bin/parse_words.dart": "e81b396835629b8586b307d3aae8df403cc11aa2e5b940ff88c7f77e473da02c",
+          "tests/language-readiness/nested-tree/cases.json": "7a36a4b32d8a5ac8a1d2f17d6d000a68c707bfc15a4b3a1e93e3e4ddaf4147c7",
+          "tests/language-readiness/nested-tree/grammar.spec": "498ffda35b05222388c64d99b0acb132a56996e97de3ffa9312f7dda6ee0ed72"
+        },
+        "rejected": 7,
+        "rejection_projection": "typed JSON",
+        "runtime": "dart",
+        "same_engine_accepted_executions": 12,
+        "status": "PASS"
+      }
+    },
+    "julia": {
+      "context-names": {
+        "accepted": 11,
+        "fixture": "context-names",
+        "limits": "Native text consumer only; no carrier or same-engine rejection-recovery claim",
+        "protected_sha256": {
+          "examples/integration/julia/Manifest.toml": "d2e7376273e2ff01a7e46db45c9170944dc16a514387e0584fc253f3a91cf665",
+          "examples/integration/julia/Project.toml": "fe90eb0290bb2eba29a1c0887744d1a0959a4e09885ed74912bbf36d44c3f815",
+          "examples/integration/julia/bin/parse_words.jl": "39af949d1835f43177fbd395fbe84c29e2843a9581ab6440ff2970e4537d02e0",
+          "tests/language-readiness/context-names/cases.json": "3e7f25083e791db8048bed844523e85fbc53763eeaabd1253001a2b2650575ef",
+          "tests/language-readiness/context-names/grammar.spec": "8f408e81e2871b3b76c1a7fc7f99e059dad1c19dd03e91449a05fc9b88fff4b0"
+        },
+        "rejected": 17,
+        "rejection_projection": "typed JSON",
+        "runtime": "julia",
+        "same_engine_accepted_executions": 22,
+        "status": "PASS"
+      },
+      "nested-tree": {
+        "accepted": 6,
+        "fixture": "nested-tree",
+        "limits": "Native text consumer only; no carrier or same-engine rejection-recovery claim",
+        "protected_sha256": {
+          "examples/integration/julia/Manifest.toml": "d2e7376273e2ff01a7e46db45c9170944dc16a514387e0584fc253f3a91cf665",
+          "examples/integration/julia/Project.toml": "fe90eb0290bb2eba29a1c0887744d1a0959a4e09885ed74912bbf36d44c3f815",
+          "examples/integration/julia/bin/parse_words.jl": "39af949d1835f43177fbd395fbe84c29e2843a9581ab6440ff2970e4537d02e0",
+          "tests/language-readiness/nested-tree/cases.json": "7a36a4b32d8a5ac8a1d2f17d6d000a68c707bfc15a4b3a1e93e3e4ddaf4147c7",
+          "tests/language-readiness/nested-tree/grammar.spec": "498ffda35b05222388c64d99b0acb132a56996e97de3ffa9312f7dda6ee0ed72"
+        },
+        "rejected": 7,
+        "rejection_projection": "typed JSON",
+        "runtime": "julia",
+        "same_engine_accepted_executions": 12,
+        "status": "PASS"
+      }
+    },
+    "puc": {
+      "context-names": {
+        "accepted": 11,
+        "fixture": "context-names",
+        "limits": "Native text consumer only; no carrier or same-engine rejection-recovery claim",
+        "protected_sha256": {
+          "examples/integration/lua/bin/parse_words.lua": "c6d4f186f10fc2064b75c74e5e6982409936678200c89cc0e1d692792ed3907b",
+          "examples/integration/lua/build/native/puc/linkedspec_filesystem_native.so": "56404baa6be2133382f496b7f212ac3f4894397b857d1cea8b646ca0509ad792",
+          "examples/integration/lua/build/native/puc/linkedspec_regex_pcre2.so": "215d1de207637bd726b3cd6c4c7ead90b180cd4933d325356c11923d53e129f3",
+          "tests/language-readiness/context-names/cases.json": "3e7f25083e791db8048bed844523e85fbc53763eeaabd1253001a2b2650575ef",
+          "tests/language-readiness/context-names/grammar.spec": "8f408e81e2871b3b76c1a7fc7f99e059dad1c19dd03e91449a05fc9b88fff4b0"
+        },
+        "rejected": 17,
+        "rejection_projection": "typed JSON",
+        "runtime": "puc",
+        "same_engine_accepted_executions": 22,
+        "status": "PASS"
+      },
+      "nested-tree": {
+        "accepted": 6,
+        "fixture": "nested-tree",
+        "limits": "Native text consumer only; no carrier or same-engine rejection-recovery claim",
+        "protected_sha256": {
+          "examples/integration/lua/bin/parse_words.lua": "c6d4f186f10fc2064b75c74e5e6982409936678200c89cc0e1d692792ed3907b",
+          "examples/integration/lua/build/native/puc/linkedspec_filesystem_native.so": "56404baa6be2133382f496b7f212ac3f4894397b857d1cea8b646ca0509ad792",
+          "examples/integration/lua/build/native/puc/linkedspec_regex_pcre2.so": "215d1de207637bd726b3cd6c4c7ead90b180cd4933d325356c11923d53e129f3",
+          "tests/language-readiness/nested-tree/cases.json": "7a36a4b32d8a5ac8a1d2f17d6d000a68c707bfc15a4b3a1e93e3e4ddaf4147c7",
+          "tests/language-readiness/nested-tree/grammar.spec": "498ffda35b05222388c64d99b0acb132a56996e97de3ffa9312f7dda6ee0ed72"
+        },
+        "rejected": 7,
+        "rejection_projection": "typed JSON",
+        "runtime": "puc",
+        "same_engine_accepted_executions": 12,
+        "status": "PASS"
+      }
+    },
+    "luajit": {
+      "context-names": {
+        "accepted": 11,
+        "fixture": "context-names",
+        "limits": "Native text consumer only; no carrier or same-engine rejection-recovery claim",
+        "protected_sha256": {
+          "examples/integration/lua/bin/parse_words.lua": "c6d4f186f10fc2064b75c74e5e6982409936678200c89cc0e1d692792ed3907b",
+          "examples/integration/lua/build/native/luajit/linkedspec_filesystem_native.so": "56404baa6be2133382f496b7f212ac3f4894397b857d1cea8b646ca0509ad792",
+          "examples/integration/lua/build/native/luajit/linkedspec_regex_pcre2.so": "c3842d076cab5f6dc23f59f53c5f84ce79e75c229142adb6b7e9d7fcb54ec29d",
+          "tests/language-readiness/context-names/cases.json": "3e7f25083e791db8048bed844523e85fbc53763eeaabd1253001a2b2650575ef",
+          "tests/language-readiness/context-names/grammar.spec": "8f408e81e2871b3b76c1a7fc7f99e059dad1c19dd03e91449a05fc9b88fff4b0"
+        },
+        "rejected": 17,
+        "rejection_projection": "typed JSON",
+        "runtime": "luajit",
+        "same_engine_accepted_executions": 22,
+        "status": "PASS"
+      },
+      "nested-tree": {
+        "accepted": 6,
+        "fixture": "nested-tree",
+        "limits": "Native text consumer only; no carrier or same-engine rejection-recovery claim",
+        "protected_sha256": {
+          "examples/integration/lua/bin/parse_words.lua": "c6d4f186f10fc2064b75c74e5e6982409936678200c89cc0e1d692792ed3907b",
+          "examples/integration/lua/build/native/luajit/linkedspec_filesystem_native.so": "56404baa6be2133382f496b7f212ac3f4894397b857d1cea8b646ca0509ad792",
+          "examples/integration/lua/build/native/luajit/linkedspec_regex_pcre2.so": "c3842d076cab5f6dc23f59f53c5f84ce79e75c229142adb6b7e9d7fcb54ec29d",
+          "tests/language-readiness/nested-tree/cases.json": "7a36a4b32d8a5ac8a1d2f17d6d000a68c707bfc15a4b3a1e93e3e4ddaf4147c7",
+          "tests/language-readiness/nested-tree/grammar.spec": "498ffda35b05222388c64d99b0acb132a56996e97de3ffa9312f7dda6ee0ed72"
+        },
+        "rejected": 7,
+        "rejection_projection": "typed JSON",
+        "runtime": "luajit",
+        "same_engine_accepted_executions": 12,
+        "status": "PASS"
+      }
+    }
+  },
+  "source_hashes": {
+    "tests/language-readiness/nested-tree/verify_native.py": "a177b58c22777cdcbd128e2d6147fd63da95c33654f6baaf8c5d28d0080deb6c",
+    "tests/language-readiness/nested-tree/grammar.spec": "498ffda35b05222388c64d99b0acb132a56996e97de3ffa9312f7dda6ee0ed72",
+    "tests/language-readiness/nested-tree/cases.json": "7a36a4b32d8a5ac8a1d2f17d6d000a68c707bfc15a4b3a1e93e3e4ddaf4147c7",
+    "tests/language-readiness/context-names/grammar.spec": "8f408e81e2871b3b76c1a7fc7f99e059dad1c19dd03e91449a05fc9b88fff4b0",
+    "tests/language-readiness/context-names/cases.json": "3e7f25083e791db8048bed844523e85fbc53763eeaabd1253001a2b2650575ef"
+  },
+  "preparation": "Published locked offline Rust integration build; retained project-local Dart/Julia/Lua products and stores through existing public integration wrappers. No dependency inspection or pin changes.",
+  "unchanged": "Both grammar/oracle pairs are byte-identical to activation HEAD; native adapters, runtime code, dependency files and store policy are unchanged. All recorded protected hashes still match after all12 runs.",
+  "limits": "Native text adapters only:22 repeated accepted parses on one loaded engine; each rejected input terminates a separate process. Five runtimes preserve typed JSON status; Rust exposes Display. This is not same-engine failure recovery, generated carrier proof, XML, resource/performance or broad campaign admission."
+}

@@ -252,9 +252,27 @@ All five rules are ActionIR-ready. Repeat the proof with:
 bash tools/project_data_run.sh prove -v -Iperl t/nested_tree_readiness.t
 ```
 
-The other runtimes' context-name native/carrier proofs remain pending. This Perl result establishes the bounded
-composition of captures, lexical comparison and recursive state; it does not establish a general format campaign,
-indentation handling, arbitrary-depth safety or speculative rollback.
+The same authored fixture also passes the public native loaders on Perl, Rust, Dart, Julia, PUC Lua and LuaJIT:
+11 accepted cases, 17 rejected cases and 22 accepted parses in forward/reverse order through one loaded engine per
+runtime. All return exact JSON kinds, values and Unicode spans. The adapters exit on the first rejection, so
+this native-adapter proof does not establish recovery after rejection. Perl, Dart, Julia and both Lua runtimes
+preserve typed JSON errors; Rust's published adapter exposes the grammar status through Display text.
+The application process exits with code 1 for a rejection, independently of the grammar's status 1, 2 or 3.
+
+To repeat the public-native trial for a prepared runtime:
+
+```sh
+bash tools/run_python_project_data.sh tests/language-readiness/nested-tree/verify_native.py \
+  --fixture context-names --runtime rust
+```
+
+Replace `rust` with `perl`, `dart`, `julia`, `puc` or `luajit`. Omitting `--fixture` retains the original
+nesting trial. Both fixtures pass on all six routes after this verifier extension.
+
+Other backends' context-name reconstructed/generated/emitted and retained-engine rejection-recovery proofs
+remain separate work. These native results establish bounded composition of captures, lexical comparison and
+recursive state; they do not establish a general format campaign, indentation handling, arbitrary-depth safety
+or speculative rollback.
 
 
 ## Approved and parked: language coverage and authoring difficulty

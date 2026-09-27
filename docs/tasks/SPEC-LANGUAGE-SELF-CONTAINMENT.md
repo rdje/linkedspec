@@ -462,10 +462,28 @@ used by ordinary `.spec` syntax on every backend.
 
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.2`
-  Status: `pending`
+  Status: `done`
   Goal: Verify the unchanged context-name grammar and independent oracles through all six documented public native text adapters, preserving exact status-projection limits.
   Dependencies: `.1.1.3.2.1`
   Acceptance: Exact typed AST/spans and each authored rejection status; repeat accepted inputs and preserve original fixture bytes. No same-engine post-rejection claim from exit-on-error adapters.
+  Activation: Clean8b11f40705b31e9c83037602e67758c81a676bd7; all nine hooks and post-commit pointer pass, brief0 and no pending jobs.
+  Scope: Extend the existing public-native verifier with a fixed context-names fixture choice and per-case authored exit statuses. Reuse published integration APIs and prepared local stores; preserve nested-tree default behavior and both original fixture pairs. No runtime, adapter, dependency or resource policy changes.
+  Verification tier: `focused`
+  Focused checks: All six context-name native runs against11/17 independent oracles and22 repeated accepts; all six default nesting runs as verifier compatibility proof; exact source/product before-after hashes, option/syntax controls, book, Knowledge, memory, histories, doctrines and diff hygiene.
+  Canonical trigger: None for bounded public-native evidence using existing interfaces; parent .1.1.3.2.7 owns canonical closeout. Escalate if an actual contract/infrastructure change becomes necessary.
+  Verification: PASS all12 real adapter runs: unchanged context11/17/22 and default nesting6/7/12 on Perl/Rust/Dart/Julia/PUC/LuaJIT. Exact JSON kinds/spans and grammar statuses1/2/3; no result on rejection. Rust retains Display-only projection. Protected source/product hashes still match; both fixture pairs are byte-identical to activation HEAD. Syntax/help/invalid-choice controls pass. Book and standard gates govern landing.
+  Evidence: docs/language-readiness/context-names.md and docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.2-verification.json preserve route limits, exact reports, published preparation and hashes.
+  Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.2 - verify native closing-name parity`.
+
+### `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.2` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Only Perl context-name carrier evidence existed. The published load-and-compile adapters now execute the unchanged authored source against all11 positive/17 negative cases and22 repeated accepts per runtime. LinkedSpec::Get proof remains separately recorded by .1.
+- [x] **ROOT CAUSE (WHY + WHERE)** — WHY: adapter process failure policy is independent of grammar exit status; hardcoded status1 would reject the new status2/3 oracles. WHERE: verify_native.py rejection loop and the published examples/integration text consumers. All adapters choose process1; Rust projects Display while the others retain typed JSON. This is a verifier extension, not an engine repair.
+- [x] **FIX** — Add two fixed fixture choices with nested-tree unchanged as default; select the exact inventory and read per-case status with legacy default1. Preserve before/after hashing, typed JSON-value comparison, zero output on rejection and documented local runtime preparation.
+- [x] **ADDRESSED (verified)** — All six context11/17/22 runs PASS with exact status and empty result channels on rejection. All six original default6/7/12 runs also PASS. Real subprocess success, protected source/product hashes, syntax, help and invalid-choice exit2 are verified; both source/oracle pairs match activation HEAD.
+- [x] **NO REGRESSION** — Default compatibility is exercised on every runtime; runtime, adapters, fixtures, dependency pins and prepared-store policy are unchanged. Positive accepted-input reuse is established, while exit-on-error adapters carry no rejection-recovery or typed Rust error claim. Focused tier is appropriate; canonical context closeout remains owned by .7.
+- [x] **LOCKSTEP** — Book commands/proof boundary, current context ledger, Perl/native Knowledge cards, checkpoint, roadmaps, task frontier, MEMORY, live status and bounded histories agree. Next is Rust carrier .1.1.3.2.3; broader format admission remains gated.
+
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.3`
   Status: `pending`
@@ -715,7 +733,8 @@ used by ordinary `.spec` syntax on every backend.
 | 13 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.7` | `done` | Quiet absent-entry boundaries;104 focused assertions and Phase01033. |
 | 14 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.3` | `done` | Bounded nesting evidence/authoring limits reconciled; exact canonical receipt governs closeout. |
 | 15 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.1` | `done` | Perl native/fresh emitted context-name proof:11/17 cases,90 calls and34 recoveries per route. |
-| 16 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.2` | `pending` | Next: unchanged context-name fixture through all six public native adapters. |
+| 16 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.2` | `done` | Context11/17/22 and original-default6/7/12 pass all six native routes. |
+| 17 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.3` | `pending` | Next: Rust context-name reconstructed/generated/v2/emitted and typed recovery proof. |
 
 ## Decisions
 
@@ -748,6 +767,8 @@ used by ordinary `.spec` syntax on every backend.
 - None for `.1.1`. The September27 clean prioritization supersedes the earlier callable-first schedule. Format implementation and the optional frontend remain gated by their own prerequisites.
 
 ## Verification Log
+
+September27 `.1.1.3.2.2`: all12 context/default native runs PASS; source/product hashes remain exact and both fixture pairs match activation HEAD. Typed JSON statuses are verified except Rust Display; adapters terminate at rejection. Rust carriers follow.
 
 September27 `.1.1.3.2.1`: public capture/comparison/descriptor probe passes; final native/fresh emitted suite410, direct dependents89 and unchanged storage27 pass. Eleven accepted/seventeen rejected cases,90 calls/34 recoveries per route and three mutants establish bounded Perl context-name composition.
 

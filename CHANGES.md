@@ -12,6 +12,16 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-09-27 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.2: native closing-name parity
+
+The unchanged context-name source/oracles pass all six public native adapters:11 accepted/17 rejected cases and
+22 forward/reverse accepted parses per runtime. The verifier adds a fixed fixture choice and reads each authored
+rejection status while preserving the original nested-tree default. All six default6/7/12 runs pass too.
+Protected source/product hashes and both fixture pairs remain exact. Published Rust preparation, retained local
+stores, syntax/help/invalid-choice controls and book proof pass. Application exit1 stays distinct from grammar
+statuses1/2/3; Rust Display and exit-on-error adapter limitations remain explicit. No runtime, dependency, adapter
+or oracle change. Rust carrier proof follows under .1.1.3.2.3; canonical context closure remains .7.
+
 ## 2026-09-27 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.1: scoped closing-name comparison
 
 Add a bounded context-name grammar and independent11-positive/17-negative AST/span/status oracles. Existing

@@ -12,6 +12,17 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-09-27 — Native adapter exit policy is separate from grammar diagnosis
+
+The published integration consumers choose process exit1 on failure even when the context grammar exits2 or3.
+Perl/Dart/Julia/PUC/LuaJIT preserve typed JSON status; Rust prints Display. The readiness verifier must compare
+the authored status independently of process success/failure, while requiring no stdout/result on rejection.
+Two fixed fixture choices preserve the original nested-tree default. All12 actual context/default runs pass:
+11/17/22 and6/7/12 respectively on every runtime, with strict JSON kinds/values/spans and protected hashes.
+Accepted forward/reverse sequences reuse one engine; rejected inputs terminate their separate processes. This
+is no proof of post-rejection reuse or typed Rust errors. The separate Perl carrier proof already supplies that
+boundary, and Rust/remaining carriers execute next. Both original grammar/oracle pairs are unchanged.
+
 ## 2026-09-27 — Explicit name context composes without a new primitive in Perl
 
 The37-line context grammar saves entry_group(0) and compares match_group(0) in its closing edge through str_ne.
