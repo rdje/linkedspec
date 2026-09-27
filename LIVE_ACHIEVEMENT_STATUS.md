@@ -6,13 +6,15 @@ Ordinary .spec language readiness under SPEC-LANGUAGE-SELF-CONTAINMENT.1.1. The 
 
 ## Latest Completed Slice
 
-- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.1 - scope lossless child readiness proof` — authority plan and independent proof requirements recorded; four neutral checkers and exact path/render audit pass.
+- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.2 - verify lossless Perl segmentation` — thirteen exact native/fresh emitted cases, four extraction mutants, corrected published fence; readiness537/direct-dependent137 and book proof pass.
 
 ## Next Action
 
-- Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.2: Perl native/fresh emitted exact lossless segmentation, before public staged child composition.
+- Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.3: actual precompiled child .spec composition under public staged authority, preserving the original segmentation oracle.
 
 ## Recent Completions
+
+- `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.2` verifies lossless Perl segmentation and corrects the published gap lifecycle.
 
 - `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.1` scopes lossless segmentation and public staged child proof.
 
@@ -43,8 +45,6 @@ Ordinary .spec language readiness under SPEC-LANGUAGE-SELF-CONTAINMENT.1.1. The 
 - `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.3` verifies six Dart nesting routes and typed recovery.
 
 - `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.2` verifies six Rust nesting routes and typed recovery.
-
-- `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.1.1` repairs emitted Perl entry and verifies nesting carriers.
 
 ## History
 

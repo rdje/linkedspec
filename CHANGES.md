@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-09-27 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.2: exact lossless Perl segmentation
+
+Thirteen authored cases preserve every scalar through native/fresh emitted Perl, including Unicode, CRLF, empty/adjacent gaps and public-entry-skipped prefixes. Four extraction mutants separate selection, retention and spans. Fix the published List::OR/LX example to default List:: and lock its exact fence plus old-mode control. Readiness537, direct-dependent137, neutral gap/staged and exact rendered source pass. No runtime implementation changed; actual staged children remain next.
+
 ## 2026-09-27 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.1: lossless child proof scope
 
 Lossless child authority review selects public gap capture and exact staged parse_job assignment, keeps private dispatch_span separate, and defines segmentation, real-child composition, backend carrier and canonical closeout slices. Four existing neutral checkers, 83 contract/checker/consumer paths, eight ledger references and rendered scope assertions pass. No new runtime composition is claimed; .1.1.3.3.2 is next.

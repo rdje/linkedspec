@@ -127,6 +127,118 @@ for my $variant (@context_variants) {
     push @variants, $variant;
 }
 
+my $lossless_fixture = File::Spec->catdir($root, qw(tests language-readiness lossless-segments));
+my $lossless_source = read_text(File::Spec->catfile($lossless_fixture, 'grammar.spec'));
+my $lossless_cases = $json->decode(read_text(File::Spec->catfile($lossless_fixture, 'cases.json')));
+my %lossless_by_id = map { $_->{id} => $_ } @{$lossless_cases->{accept}};
+is(scalar(keys %lossless_by_id), scalar(@{$lossless_cases->{accept}}),
+   'lossless fixture IDs are unique');
+is_deeply([sort keys %lossless_by_id], [sort qw(
+    empty no_match_unicode single_zero unicode_edges adjacent mixed_separators
+    malformed_only malformed_prefix crlf leading_lf comment_prefix comment_eof blank_line
+)], 'lossless corpus preserves every required case');
+my $lossless_descriptor = LinkedSpec::Get(\$lossless_source, return_descriptor => 1);
+my $lossless_summary = $lossless_descriptor->{meta}{action_rewriter_migration};
+is($lossless_summary->{language_agnostic_ready_rule_count}, 2, 'lossless: both rules are ActionIR ready');
+is($lossless_summary->{language_agnostic_blocked_rule_count}, 0, 'lossless: no blocked rules');
+is($lossless_summary->{compatibility_surface_rule_count}, 0, 'lossless: no compatibility-only rules');
+my @lossless_sequence;
+for my $round (1, 2) {
+    push @lossless_sequence, map {
+        +{%$_, lossless => 1, label => "lossless $_->{id} round $round"}
+    } @{$lossless_cases->{accept}};
+}
+push @variants, {
+    id => 'lossless', source_identity => 'lossless-segments/original',
+    source => $lossless_source, inputs => \@lossless_sequence,
+    detachment => $lossless_by_id{unicode_edges},
+};
+
+my $selection_mutant = $lossless_source;
+is(($selection_mutant =~ s/\[0-9\]/[1-9]/), 1, 'lossless selection mutation excludes zero');
+push @variants, {id => 'lossless_selection', source => $selection_mutant, inputs => [
+    {%{$lossless_by_id{single_zero}}, label => 'classification mutant still reconstructs all input',
+     mutation => 'lossless_difference', mutant_expected => [
+         {kind => 'tail', text => '[0]',
+          span => {source_id => 'input', start => 0, end => 3, provenance => 'gap'}},
+     ]},
+]};
+my $tail_mutant = $lossless_source;
+my $tail_statement = <<'TAIL';
+ LX {
+  push(parts, hash("kind", gap_kind(), "span", gap_span(), "text", gap_text()))
+TAIL
+is(($tail_mutant =~ s/\Q$tail_statement\E/ LX {\n/), 1,
+   'lossless tail mutation removes only terminal gap retention');
+my $without_tail = $json->decode($json->encode($lossless_by_id{unicode_edges}{expected}));
+pop @$without_tail;
+push @variants, {id => 'lossless_tail', source => $tail_mutant, inputs => [
+    {%{$lossless_by_id{unicode_edges}}, label => 'omitted tail loses the astral scalar',
+     mutation => 'lossless_difference', mutant_expected => $without_tail},
+]};
+my $item_span_mutant = $lossless_source;
+is(($item_span_mutant =~ s/\[entry_start_pos\(\), entry_end_pos\(\)\]/[entry_end_pos(), entry_end_pos()]/),
+   1, 'lossless span mutation changes only item start');
+my $wrong_span = $json->decode($json->encode($lossless_by_id{unicode_edges}{expected}));
+$wrong_span->[1]{span} = [5, 5];
+push @variants, {id => 'lossless_span', source => $item_span_mutant, inputs => [
+    {%{$lossless_by_id{unicode_edges}}, label => 'wrong item span preserves text but loses provenance',
+     mutation => 'lossless_difference', mutant_expected => $wrong_span},
+]};
+my $prefix_mutant = $lossless_source;
+my $entry_prefix = <<'PREFIX';
+  if(num_ne(cursor_pos(), 0));
+   push(parts, hash("kind", "entry_prefix", "span", [0, cursor_pos()], "text", input_slice(0, cursor_pos())))
+  endif();
+PREFIX
+is(($prefix_mutant =~ s/\Q$entry_prefix\E//), 1,
+   'lossless prefix mutation removes only public-entry prefix retention');
+my $without_prefix = $json->decode($json->encode($lossless_by_id{comment_prefix}{expected}));
+shift @$without_prefix;
+push @variants, {id => 'lossless_prefix', source => $prefix_mutant, inputs => [
+    {%{$lossless_by_id{comment_prefix}}, label => 'omitted entry prefix loses original comment text',
+     mutation => 'lossless_difference', mutant_expected => $without_prefix},
+]};
+
+my $gap_book = read_text(File::Spec->catfile($root,
+    qw(docs linkedspec-book src dsl capture-marks-and-source-locations.md)));
+my ($gap_book_source) = $gap_book =~ /### Current lossless-segmentation example.*?```text\n(.*?)```/s;
+ok(defined($gap_book_source), 'exact published gap example is present');
+if (defined($gap_book_source)) {
+    my @expected;
+    for my $row (
+        ['prefix', 0, 1, 'α', 'alpha'],
+        ['interstitial', 6, 8, ', ', 'beta'],
+        ['interstitial', 12, 15, ' | ', 'gamma'],
+        ['interstitial', 20, 23, "\n- ", 'delta'],
+        ['tail', 28, 29, 'ω'],
+    ) {
+        my ($kind, $start, $end, $text, $item) = @$row;
+        my $record = {kind => $kind, text => $text,
+            span => {source_id => 'input', start => $start, end => $end, provenance => 'gap'}};
+        $record->{item} = {text => $item, slot => {
+            target_rule => 'Item', regex_index => 0, slot_id => 'word',
+            selector_kind => 'named', authored_selector => 'word',
+        }} if defined $item;
+        push @expected, $record;
+    }
+    my $book_empty = {input => '', label => 'published gap example empty input', expected => [
+        {kind => 'tail', text => '',
+         span => {source_id => 'input', start => 0, end => 0, provenance => 'gap'}},
+    ]};
+    my $book_words = {input => "αalpha, beta | gamma\n- deltaω",
+        label => 'exact published Unicode gap example', expected => \@expected};
+    push @variants, {id => 'gap_book', source => $gap_book_source,
+        inputs => [$book_empty, $book_words, $book_empty, $book_words]};
+    my $wrong_mode = $gap_book_source;
+    is(($wrong_mode =~ s/List::\n/List::OR\n/), 1,
+       'book mutation restores the original incorrect OR/LX pairing');
+    push @variants, {id => 'gap_book_wrong_mode', source => $wrong_mode, inputs => [
+        {%$book_empty, mutation => 'lossless_difference', mutant_expected => undef},
+        {%$book_words, mutation => 'lossless_difference', mutant_expected => [undef, undef, undef, undef]},
+    ]};
+}
+
 my $entry_source = <<'SPEC';
 Top::
 I.return(hash("start", cursor_pos(), "end", input_end_pos(), "source", input_slice(0, input_end_pos())))
@@ -178,7 +290,12 @@ sub check_observation {
             ok(!defined($result->{value}), 'no partial value escapes');
         } else {
             is($result->{error}, '', 'execution succeeds');
-            if (($case->{mutation} // '') eq 'accepts_rejected') {
+            if (($case->{mutation} // '') eq 'lossless_difference') {
+                is($json->encode($result->{value}), $json->encode($case->{mutant_expected}),
+                   'controlled mutation has exactly its intended effect');
+                isnt($json->encode($result->{value}), $json->encode($case->{expected}),
+                     'unchanged authored oracle rejects the mutation');
+            } elsif (($case->{mutation} // '') eq 'accepts_rejected') {
                 is(ref($result->{value}), 'ARRAY', 'mutant wrongly accepts a document value');
                 ok(@{$result->{value} || []} > 0, 'valid surrounding forms survive the wrong acceptance');
             } elsif (($case->{mutation} // '') eq 'changes_span') {
@@ -190,6 +307,21 @@ sub check_observation {
             } else {
                 is($json->encode($result->{value}), $json->encode($case->{expected}),
                    'exact independent typed AST and Unicode spans');
+            }
+            if ($case->{lossless} && ref($result->{value}) eq 'ARRAY') {
+                my ($boundary, $reconstruction) = (0, '');
+                for my $segment (@{$result->{value}}) {
+                    my ($start, $end) = ref($segment->{span}) eq 'ARRAY'
+                        ? @{$segment->{span}} : @{$segment->{span}}{qw(start end)};
+                    is($start, $boundary, 'segment begins at the previous end');
+                    cmp_ok($end, '>=', $start, 'segment extent is nonnegative');
+                    is(substr($case->{input}, $start, $end - $start), $segment->{text},
+                       'segment equals its independent decoded-scalar input slice');
+                    $boundary = $end;
+                    $reconstruction .= $segment->{text};
+                }
+                is($boundary, length($case->{input}), 'every decoded scalar is accounted for');
+                is($reconstruction, $case->{input}, 'ordered segments reconstruct the exact input');
             }
         }
     };
@@ -205,6 +337,14 @@ for my $variant (@variants) {
     if (ref($parser) eq 'CODE') {
         check_observation($_, observe($parser, $_->{input}), "$variant->{id} native")
             for @{$variant->{inputs}};
+        if (my $case = $variant->{detachment}) {
+            my $input = $case->{input};
+            my $value = $parser->(\$input);
+            $value->[0]{text} = 'changed returned text';
+            $value->[0]{span}{start} = 999;
+            check_observation({%$case, lossless => 1, label => 'after mutating a returned gap'},
+                observe($parser, $case->{input}), "$variant->{id} native detachment");
+        }
     }
     my $generated = LinkedSpec::emit_generated_source(
         \$variant->{source},
@@ -212,6 +352,7 @@ for my $variant (@variants) {
     my $path = File::Spec->catfile($scratch, "$variant->{id}.pl");
     write_text($path, $generated);
     push @artifacts, {path => File::Spec->abs2rel($path, $root),
+                     detachment_input => $variant->{detachment} ? $variant->{detachment}{input} : undef,
                      inputs => [map { $_->{input} } @{$variant->{inputs}}]};
 }
 my $request = File::Spec->catfile($scratch, 'request.json');
@@ -251,6 +392,14 @@ for my $index (0..$#$artifacts) {
                 status => ref($error) eq 'LinkedSpec::RuntimeExitNow' ? $error->{status} : undef,
             };
         }
+        if (defined $artifact->{detachment_input}) {
+            my $input = $artifact->{detachment_input};
+            my $value = &{"${package}::Execute"}(\$input);
+            $value->[0]{text} = 'changed returned text';
+            $value->[0]{span}{start} = 999;
+            my $again = &{"${package}::Execute"}(\$input);
+            $row->{detachment_result} = $again;
+        }
     }
     push @rows, $row;
 }
@@ -280,6 +429,11 @@ if (-f $output) {
         for my $case_index (0..$#{$variant->{inputs}}) {
             check_observation($variant->{inputs}[$case_index], $row->{observations}[$case_index],
                               "$variant->{id} emitted");
+        }
+        if (my $case = $variant->{detachment}) {
+            check_observation({%$case, lossless => 1, label => 'after mutating a returned gap'},
+                {value => $row->{detachment_result}, error => ''},
+                "$variant->{id} emitted detachment");
         }
     }
 } else {

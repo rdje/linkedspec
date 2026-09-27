@@ -1,0 +1,67 @@
+{
+  "owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.2",
+  "activation_commit": "cdae1d2d0a5fd16afc97fad90619cc05b6c18c2a",
+  "scope": "Bounded Perl segmentation and documentation correction; no staged-child or other-runtime composition claim.",
+  "source_hashes": {
+    "tests/language-readiness/lossless-segments/grammar.spec": "8f20d242b0f2ea0eee1d70b6f289cf96362cdf3b64ef4cbcc77f5631ffe3eb36",
+    "tests/language-readiness/lossless-segments/cases.json": "fd4fe58d6bb0efa7bcb609b863c3d9a2238bb5c62fa9a1814a143e04416bd89c",
+    "t/nested_tree_readiness.t": "07b90b1b5d2c9b70073a4842b381c5798d785e421949c93a52b6b48b6c72d6ce",
+    "t/inter_match_gap_capture_perl_contract.t": "4604ccc0cf68949146a3778ea5627d4a470fdb3925f4b5f1114a2cbe5eb90e52",
+    "t/generated_source_contract.t": "4f4620c2d605d62ff3f6afd65930452a0e6fb74dc5f7e634d2aaa6da2ef6168a",
+    "docs/linkedspec-book/src/architecture/structured-format-program.md": "120056d13692c98e45b743fe9cb4fa4cf71b4c85f9dc1304f80ee0734cf84908",
+    "docs/linkedspec-book/src/dsl/capture-marks-and-source-locations.md": "6873cd55dd6a0cf1f6ee41d2c4e99c7ea1544e2bb875d71687823c00eb6205af",
+    "capability_conformance/inter_match_gap_capture_contract.json": "f5901338a6dac92a56b7dd4089fd7b865f210571089fe6311e83f98c85e4dfdf",
+    "capability_conformance/staged_ast_enrichment_contract.json": "578cd031fed01bb8d968a2b536e0d67430317c617a8296edb6c1beb5031bd882"
+  },
+  "checks": [
+    {
+      "command": "bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/nested_tree_readiness.t",
+      "result": "PASS 537 top-level tests; thirteen exact cases repeated twice on each of native/fresh emitted routes, detachment, four extraction mutants, published fence and old-mode mutant; all prior scenarios retained"
+    },
+    {
+      "command": "bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/inter_match_gap_capture_perl_contract.t t/generated_source_contract.t",
+      "result": "PASS 137 tests"
+    },
+    {
+      "command": "bash tools/run_python_project_data.sh tools/check_inter_match_gap_capture_contract.py",
+      "result": "PASS 9 complete/0 pending;63 semantic/34 public mutations"
+    },
+    {
+      "command": "bash tools/run_python_project_data.sh tools/check_staged_ast_enrichment_contract.py",
+      "result": "PASS 9 rollout legs;123 contract/129 public mutations"
+    },
+    {
+      "command": "perl -c -Iperl t/nested_tree_readiness.t",
+      "result": "syntax OK"
+    },
+    {
+      "command": "bash tools/run_mdbook_local.sh",
+      "result": "PASS; exact HTML code-block comparison matches grammar source and corrected gap fence"
+    }
+  ],
+  "logs": {
+    ".linkedspec-data/scratch/lossless332/book-mode-before.log": {
+      "sha256": "985a55a8523b32abf0b2d787b7c162698e00a21d198657dcdaf49149d08caf2a"
+    },
+    ".linkedspec-data/scratch/lossless332/initial-green.log": {
+      "sha256": "f8705c2ef08a9d7f05528c06fe3e63f2c24784bd35a0261cfbd5ff77e11fcb38"
+    },
+    ".linkedspec-data/scratch/lossless332/readiness-final.log": {
+      "sha256": "b8164ebb526bf30f0780510487e8b618f2d8fc23e1ac0eb7ff1f561006c578de"
+    },
+    ".linkedspec-data/scratch/lossless332/dependents.log": {
+      "sha256": "e2019026498f7f991fff0d0e1cb0b3d361124abb808b926b77b82089b2c5e80b"
+    },
+    ".linkedspec-data/scratch/lossless332/gaps.log": {
+      "sha256": "9479cae2bb2b5c57d5f5faf06d182ca4cfa5716d3e9b972341a71ee1e4cdf305"
+    },
+    ".linkedspec-data/scratch/lossless332/staged.log": {
+      "sha256": "1a7f7a1b01c6865f08350276c188460f729f1dc6f30b05d25ddf904b25bbdf21"
+    },
+    ".linkedspec-data/scratch/lossless332/mdbook.log": {
+      "sha256": "fddba4cc250ab07edd33cf371b6b428c1f0f1de0779a8eec2302c8551b32aa96"
+    }
+  },
+  "independent_oracle": "Committed exact records plus Perl and Python scalar slicing/adjacency/reconstruction agree on13 cases/39 segments. The test locks all thirteen required IDs. Selection mutation retains every scalar but changes item classification.",
+  "diagnostic_limit": "Discarded completed bootstrap debug trace: 240559132 bytes; SHA256 590fdcb3fa36c8d9c51277d78b32782303a2d5b2c08e459b34fc94477790581c.\nGenerated handler retained at .linkedspec-data/scratch/lossless332/generated.pl; lines 81-93 show rep_acode installing EX and returning its collector.\nThe diagnostic command exited25; its trace is not successful test evidence.\n"
+}

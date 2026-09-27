@@ -1,9 +1,9 @@
 # MEMORY
 
-- activation_commit: `ca197a38c269cfeb89341505db83e395ebf6f308` — clean activation base for lossless child authority review.
-- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.1 - scope lossless child readiness proof`.
-- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.2` (pending) — exact lossless segmentation.
-- next_action: Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.2 and prove exact public lossless segmentation through Perl native/fresh emitted execution using docs/language-readiness/lossless-child-parsing.md.
+- activation_commit: `cdae1d2d0a5fd16afc97fad90619cc05b6c18c2a` — clean activation base for exact lossless segmentation.
+- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.2 - verify lossless Perl segmentation`.
+- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.3` (pending) — public staged child composition.
+- next_action: Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.3 to compose the verified lossless parent with a precompiled child .spec under caller-frozen staged authority.
 - in_flight_uncommitted: none.
 - blockers: bounded nesting/context proof reconciled; lossless probes and core-gap selection remain; .1.1.5 owns stale capability prose and startup .38/.40 recognition defects remain queued. ARCHOGEN owns downstream acceptance; named-argument and format proposals stay parked.
   Wrapper startup .7 remains open; recovery/purge stay prohibited. No interrupted Phase0 run counts as proof.

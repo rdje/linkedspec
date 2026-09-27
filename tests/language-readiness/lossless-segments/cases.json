@@ -1,0 +1,520 @@
+{
+  "description": "Bounded extraction oracle; malformed text is retained, not rejected. Coordinates count decoded Unicode scalars.",
+  "accept": [
+    {
+      "id": "empty",
+      "input": "",
+      "expected": [
+        {
+          "kind": "tail",
+          "span": {
+            "source_id": "input",
+            "start": 0,
+            "end": 0,
+            "provenance": "gap"
+          },
+          "text": ""
+        }
+      ]
+    },
+    {
+      "id": "no_match_unicode",
+      "input": "α🙂",
+      "expected": [
+        {
+          "kind": "tail",
+          "span": {
+            "source_id": "input",
+            "start": 0,
+            "end": 2,
+            "provenance": "gap"
+          },
+          "text": "α🙂"
+        }
+      ]
+    },
+    {
+      "id": "single_zero",
+      "input": "[0]",
+      "expected": [
+        {
+          "kind": "prefix",
+          "span": {
+            "source_id": "input",
+            "start": 0,
+            "end": 0,
+            "provenance": "gap"
+          },
+          "text": ""
+        },
+        {
+          "kind": "item",
+          "span": [
+            0,
+            3
+          ],
+          "text": "[0]",
+          "slot": {
+            "target_rule": "Item",
+            "regex_index": 0,
+            "slot_id": "token",
+            "selector_kind": "named",
+            "authored_selector": "token"
+          }
+        },
+        {
+          "kind": "tail",
+          "span": {
+            "source_id": "input",
+            "start": 3,
+            "end": 3,
+            "provenance": "gap"
+          },
+          "text": ""
+        }
+      ]
+    },
+    {
+      "id": "unicode_edges",
+      "input": "α[12]🙂",
+      "expected": [
+        {
+          "kind": "prefix",
+          "span": {
+            "source_id": "input",
+            "start": 0,
+            "end": 1,
+            "provenance": "gap"
+          },
+          "text": "α"
+        },
+        {
+          "kind": "item",
+          "span": [
+            1,
+            5
+          ],
+          "text": "[12]",
+          "slot": {
+            "target_rule": "Item",
+            "regex_index": 0,
+            "slot_id": "token",
+            "selector_kind": "named",
+            "authored_selector": "token"
+          }
+        },
+        {
+          "kind": "tail",
+          "span": {
+            "source_id": "input",
+            "start": 5,
+            "end": 6,
+            "provenance": "gap"
+          },
+          "text": "🙂"
+        }
+      ]
+    },
+    {
+      "id": "adjacent",
+      "input": "[1][0]",
+      "expected": [
+        {
+          "kind": "prefix",
+          "span": {
+            "source_id": "input",
+            "start": 0,
+            "end": 0,
+            "provenance": "gap"
+          },
+          "text": ""
+        },
+        {
+          "kind": "item",
+          "span": [
+            0,
+            3
+          ],
+          "text": "[1]",
+          "slot": {
+            "target_rule": "Item",
+            "regex_index": 0,
+            "slot_id": "token",
+            "selector_kind": "named",
+            "authored_selector": "token"
+          }
+        },
+        {
+          "kind": "interstitial",
+          "span": {
+            "source_id": "input",
+            "start": 3,
+            "end": 3,
+            "provenance": "gap"
+          },
+          "text": ""
+        },
+        {
+          "kind": "item",
+          "span": [
+            3,
+            6
+          ],
+          "text": "[0]",
+          "slot": {
+            "target_rule": "Item",
+            "regex_index": 0,
+            "slot_id": "token",
+            "selector_kind": "named",
+            "authored_selector": "token"
+          }
+        },
+        {
+          "kind": "tail",
+          "span": {
+            "source_id": "input",
+            "start": 6,
+            "end": 6,
+            "provenance": "gap"
+          },
+          "text": ""
+        }
+      ]
+    },
+    {
+      "id": "mixed_separators",
+      "input": "x[7], [80]z",
+      "expected": [
+        {
+          "kind": "prefix",
+          "span": {
+            "source_id": "input",
+            "start": 0,
+            "end": 1,
+            "provenance": "gap"
+          },
+          "text": "x"
+        },
+        {
+          "kind": "item",
+          "span": [
+            1,
+            4
+          ],
+          "text": "[7]",
+          "slot": {
+            "target_rule": "Item",
+            "regex_index": 0,
+            "slot_id": "token",
+            "selector_kind": "named",
+            "authored_selector": "token"
+          }
+        },
+        {
+          "kind": "interstitial",
+          "span": {
+            "source_id": "input",
+            "start": 4,
+            "end": 6,
+            "provenance": "gap"
+          },
+          "text": ", "
+        },
+        {
+          "kind": "item",
+          "span": [
+            6,
+            10
+          ],
+          "text": "[80]",
+          "slot": {
+            "target_rule": "Item",
+            "regex_index": 0,
+            "slot_id": "token",
+            "selector_kind": "named",
+            "authored_selector": "token"
+          }
+        },
+        {
+          "kind": "tail",
+          "span": {
+            "source_id": "input",
+            "start": 10,
+            "end": 11,
+            "provenance": "gap"
+          },
+          "text": "z"
+        }
+      ]
+    },
+    {
+      "id": "malformed_only",
+      "input": "[x] [2",
+      "expected": [
+        {
+          "kind": "tail",
+          "span": {
+            "source_id": "input",
+            "start": 0,
+            "end": 6,
+            "provenance": "gap"
+          },
+          "text": "[x] [2"
+        }
+      ]
+    },
+    {
+      "id": "malformed_prefix",
+      "input": "[x][9]!",
+      "expected": [
+        {
+          "kind": "prefix",
+          "span": {
+            "source_id": "input",
+            "start": 0,
+            "end": 3,
+            "provenance": "gap"
+          },
+          "text": "[x]"
+        },
+        {
+          "kind": "item",
+          "span": [
+            3,
+            6
+          ],
+          "text": "[9]",
+          "slot": {
+            "target_rule": "Item",
+            "regex_index": 0,
+            "slot_id": "token",
+            "selector_kind": "named",
+            "authored_selector": "token"
+          }
+        },
+        {
+          "kind": "tail",
+          "span": {
+            "source_id": "input",
+            "start": 6,
+            "end": 7,
+            "provenance": "gap"
+          },
+          "text": "!"
+        }
+      ]
+    },
+    {
+      "id": "crlf",
+      "input": "\r\n[3]\r\n",
+      "expected": [
+        {
+          "kind": "prefix",
+          "span": {
+            "source_id": "input",
+            "start": 0,
+            "end": 2,
+            "provenance": "gap"
+          },
+          "text": "\r\n"
+        },
+        {
+          "kind": "item",
+          "span": [
+            2,
+            5
+          ],
+          "text": "[3]",
+          "slot": {
+            "target_rule": "Item",
+            "regex_index": 0,
+            "slot_id": "token",
+            "selector_kind": "named",
+            "authored_selector": "token"
+          }
+        },
+        {
+          "kind": "tail",
+          "span": {
+            "source_id": "input",
+            "start": 5,
+            "end": 7,
+            "provenance": "gap"
+          },
+          "text": "\r\n"
+        }
+      ]
+    },
+    {
+      "id": "leading_lf",
+      "input": "\n[4]",
+      "expected": [
+        {
+          "kind": "entry_prefix",
+          "span": [
+            0,
+            1
+          ],
+          "text": "\n"
+        },
+        {
+          "kind": "prefix",
+          "span": {
+            "source_id": "input",
+            "start": 1,
+            "end": 1,
+            "provenance": "gap"
+          },
+          "text": ""
+        },
+        {
+          "kind": "item",
+          "span": [
+            1,
+            4
+          ],
+          "text": "[4]",
+          "slot": {
+            "target_rule": "Item",
+            "regex_index": 0,
+            "slot_id": "token",
+            "selector_kind": "named",
+            "authored_selector": "token"
+          }
+        },
+        {
+          "kind": "tail",
+          "span": {
+            "source_id": "input",
+            "start": 4,
+            "end": 4,
+            "provenance": "gap"
+          },
+          "text": ""
+        }
+      ]
+    },
+    {
+      "id": "comment_prefix",
+      "input": "#α🙂\n[5]",
+      "expected": [
+        {
+          "kind": "entry_prefix",
+          "span": [
+            0,
+            4
+          ],
+          "text": "#α🙂\n"
+        },
+        {
+          "kind": "prefix",
+          "span": {
+            "source_id": "input",
+            "start": 4,
+            "end": 4,
+            "provenance": "gap"
+          },
+          "text": ""
+        },
+        {
+          "kind": "item",
+          "span": [
+            4,
+            7
+          ],
+          "text": "[5]",
+          "slot": {
+            "target_rule": "Item",
+            "regex_index": 0,
+            "slot_id": "token",
+            "selector_kind": "named",
+            "authored_selector": "token"
+          }
+        },
+        {
+          "kind": "tail",
+          "span": {
+            "source_id": "input",
+            "start": 7,
+            "end": 7,
+            "provenance": "gap"
+          },
+          "text": ""
+        }
+      ]
+    },
+    {
+      "id": "comment_eof",
+      "input": "#[6]",
+      "expected": [
+        {
+          "kind": "entry_prefix",
+          "span": [
+            0,
+            4
+          ],
+          "text": "#[6]"
+        },
+        {
+          "kind": "tail",
+          "span": {
+            "source_id": "input",
+            "start": 4,
+            "end": 4,
+            "provenance": "gap"
+          },
+          "text": ""
+        }
+      ]
+    },
+    {
+      "id": "blank_line",
+      "input": " \t\n[9]",
+      "expected": [
+        {
+          "kind": "entry_prefix",
+          "span": [
+            0,
+            3
+          ],
+          "text": " \t\n"
+        },
+        {
+          "kind": "prefix",
+          "span": {
+            "source_id": "input",
+            "start": 3,
+            "end": 3,
+            "provenance": "gap"
+          },
+          "text": ""
+        },
+        {
+          "kind": "item",
+          "span": [
+            3,
+            6
+          ],
+          "text": "[9]",
+          "slot": {
+            "target_rule": "Item",
+            "regex_index": 0,
+            "slot_id": "token",
+            "selector_kind": "named",
+            "authored_selector": "token"
+          }
+        },
+        {
+          "kind": "tail",
+          "span": {
+            "source_id": "input",
+            "start": 6,
+            "end": 6,
+            "provenance": "gap"
+          },
+          "text": ""
+        }
+      ]
+    }
+  ]
+}

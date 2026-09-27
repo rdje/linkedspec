@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `SPEC-LANGUAGE-SELF-CONTAINMENT`
-- Status: `active` / capability inventory selected from clean 30b2cc3a0
+- Status: `active` / bounded language objective proof
 - Roadmap lane: `.spec language evolution / expressive self-containment and alternate authoring profiles`
 - Created: `2026-07-30`
 - Last updated: `2026-09-27`
@@ -66,7 +66,7 @@ used by ordinary `.spec` syntax on every backend.
 ## Task Tree
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT`
-  Status: `active` / capability inventory selected from clean 30b2cc3a0
+  Status: `active` / bounded language objective proof
   Goal: Deliver expressive problem-domain closure plus an optional lossless EBNF-like authoring profile on one
     portable semantic core.
   Children: `.0`, `.1`, `.2`, `.3`, `.4`, `.5`, `.6`
@@ -631,10 +631,27 @@ used by ordinary `.spec` syntax on every backend.
   Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.1 - scope lossless child readiness proof`.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.2`
-  Status: `pending`
+  Status: `done`
   Goal: Prove public lossless segment authoring through Perl native and freshly emitted execution.
   Dependencies: `.1.1.3.3.1`
+  Activation: Clean cdae1d2; authority plan committed with all nine doctrines and the activation-pointer hook passing, empty brief and no pending job.
+  Verification tier: `focused`
+  Focused checks: LinkedSpec::Get and return_descriptor probe of the exact new grammar; existing t/nested_tree_readiness.t extended through native/fresh emitted sequences and mutation controls; direct-dependent gap/generated-entry suites; exact book include/output render; neutral gap and staged checkers; Knowledge/memory/history and all doctrines; git diff --check.
+  Canonical trigger: none for bounded authored fixture and regression proof; any production/contract/infrastructure defect receives a separately owned slice, and .3.5 remains canonical.
   Acceptance: Commit a portable grammar and independently authored exact cases covering empty/no-match input, prefix/interstitial/tail, adjacent matches, Unicode scalars, CRLF and malformed candidate text retained as gaps. Assert ordered spans cover every input scalar exactly once and reconstruct exact input; preserve empty gaps and selected slot identity. Exercise output/spans and grammar mutants, repeat retained-parser calls, and execute the same source in the book. This is segmentation, not strict whole-document validation.
+  Owned documentation defect: The published Current lossless-segmentation example uses List::OR with LX. Exact extracted-source Get returns null for empty input and [null,null] for αalpha, betaω. A default List:: twin returns the claimed segments. dump_parser_source shows rep_acode installing the EX tail and returning its collector rather than executing LX (retained generated.pl lines81-93); language readiness metadata alone still says both rules are ready. This leaf repairs the mode spelling and locks the exact published fence on native/fresh emitted routes. No engine semantic change.
+  Diagnostic hygiene: The initial debug-level bootstrap trace completed and was removed only after its byte count/hash and generated-handler cause were retained. Its command exited25 and is not successful test evidence. docs/ARTIFACT_CLEANUP.md records this exact owned removal.
+  Verification: PASS readiness537, direct-dependent gap/generated137, syntax, neutral gap9/0/63+34 and staged9/123+129. Exact rendered include/fence and independent Python slicing agree with all13 cases/39 segments. Four extraction mutants and the old published mode fail the original oracle with exact wrong outputs on both native/fresh emitted routes. Checkpoint docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.2-verification.json binds sources and logs; standard gates govern landing.
+  Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.2 - verify lossless Perl segmentation`.
+
+### `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.2` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — LinkedSpec::Get on the original extraction draft returns null/collectors despite two all-ready rules. Exact published fence reproduces the same OR/LX failure; the default-loop twin returns the independently expected segments.
+- [x] **ROOT CAUSE (WHY + WHERE)** — dump_parser_source selects rep_acode for explicit OR; its successful-miss branch installs EX and returns the collector. The grammar's LX is the wrong terminal owner. The public-entry prefix is an independently documented boundary, not input deletion or a new engine defect.
+- [x] **FIX** — Use default Segments::/List:: with LX. Commit thirteen exact extraction cases, explicit initial-prefix retention, native/fresh emitted proof and exact published-fence recurrence. No production/runtime or dependency edits.
+- [x] **ADDRESSED (verified)** — Exact source/expected comparisons, independent scalar slicing and reconstruction, repeated calls and returned-gap detachment pass. Four extraction mutations and the original published-mode regression produce their specific wrong outputs and fail the unchanged oracle on both routes.
+- [x] **NO REGRESSION** — Existing nesting/context/entry scenarios remain unchanged in the complete focused readiness consumer; direct-dependent gap/generated-source consumers pass137. Perl syntax and neutral gap/staged checks pass. This authored test/documentation slice uses ADR0073 focused proof; it does not claim a new full Phase0 or six-runtime execution.
+- [x] **LOCKSTEP** — Canonical fixture, lossless ledger, book include/example correction, Knowledge, checkpoints, roadmap/current pointers, cleanup and bounded history carry the same scope. Staged children and other backend routes remain separately owned future work under .3.3/.3.4.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.3`
   Status: `pending`
@@ -867,7 +884,7 @@ used by ordinary `.spec` syntax on every backend.
 | 14 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.3` | `done` | Bounded nesting evidence/authoring limits reconciled; exact canonical receipt governs closeout. |
 | 15 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.1` | `done` | Perl native/fresh emitted context-name proof:11/17 cases,90 calls and34 recoveries per route. |
 | 16 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.2` | `done` | Context11/17/22 and original-default6/7/12 pass all six native routes. |
-| 17 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.2` | `pending` | Prove exact public lossless segmentation before adding staged children. |
+| 17 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.3` | `pending` | Compose an actual precompiled child grammar under public staged authority. |
 
 ## Decisions
 
@@ -901,6 +918,8 @@ used by ordinary `.spec` syntax on every backend.
 
 ## Verification Log
 
+September27 `.1.1.3.3.2`: native/fresh emitted readiness537, direct-dependent137, neutral gap/staged, exact book source and independent13-case/39-segment scalar reconstruction pass. Published OR/LX defect is corrected and permanently reproduced by an exact old-mode mutant. Child composition remains next.
+
 September27 `.1.1.3.3.1`: Lossless child authority review selects public gap capture and exact staged parse_job assignment, keeps private dispatch_span separate, and defines segmentation, real-child composition, backend carrier and canonical closeout slices. Four existing neutral checkers, 83 contract/checker/consumer paths, eight ledger references and rendered scope assertions pass. No new runtime composition is claimed; .1.1.3.3.2 is next.
 
 September27 `.1.1.3.2.2`: all12 context/default native runs PASS; source/product hashes remain exact and both fixture pairs match activation HEAD. Typed JSON statuses are verified except Rust Display; adapters terminate at rejection. Rust carriers follow.
@@ -927,6 +946,8 @@ September27 `.1.1.1`: seven neutral/structural checks, 34 ledger source-path/con
 
 ## Commit Log
 
+- `.1.1.3.3.2`: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.2 - verify lossless Perl segmentation`.
+
 - `.1.1.3.3.1`: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.1 - scope lossless child readiness proof`.
 
 | Leaf | Commit subject or reference | Notes |
@@ -934,6 +955,8 @@ September27 `.1.1.1`: seven neutral/structural checks, 34 ledger source-path/con
 | `.0` | `SPEC-LANGUAGE-SELF-CONTAINMENT.0 - ratify expressive spec self-containment` | Direction capture only; no parser/runtime behavior. |
 
 ## Changelog
+
+- `2026-09-27`: Complete Perl lossless segmentation and published default-loop correction under .3.2; child composition .3.3 follows.
 
 - `2026-09-27`: Split lossless child objective into authority, segmentation, Perl composition, backend proof and canonical reconciliation; completed authority leaf .3.1.
 

@@ -12,6 +12,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-09-27 — Lossless extraction composes entry preservation and loop gaps
+
+The public wrapper keeps original input but may advance past initial blank/comment lines. The grammar explicitly retains that entry_prefix before its invocation-owned gaps. Exact classification complements independent source slicing and reconstruction: excluding zero from the token regex still reconstructs [0] while misclassifying it. Generated-source diagnosis exposes a separate book error: explicit OR terminates through EX, so an LX finalizer does not publish the intended array. The corrected default-loop fence is now executed from book source on both carriers, with its former spelling kept as a falsification control.
+
 ## 2026-09-27 — Lossless extraction needs classification and provenance oracles
 
 Input reconstruction alone can preserve all bytes while classifying items incorrectly. The planned corpus therefore compares authored item/gap records, scalar input slices and ordered reconstruction separately. Public parse_job accepts only admitted source-bound entry/match expressions; gap_text and arbitrary spans are not staged operands. Real child recognition stays in a precompiled .spec. The canonical ledger records authority negatives and existing resource/stitch repair owners; neutral success is not runtime composition proof.

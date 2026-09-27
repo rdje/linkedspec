@@ -40,7 +40,8 @@ establish a different, explicitly accepted mechanism. Merely adding alternate sy
 
 The owning task is `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1`; its first inventory records existing contracts and exact
 backend consumers. The state/control/result inventory is also recorded. Bounded nesting is reconciled; context-name carrier proof
-is described below, with lossless extraction still pending before gap selection.
+is described below. Perl lossless segmentation is also verified below; child composition and its other backend
+routes remain pending before gap selection.
 The format program's `.1` readiness gate remains pending. The original catalog and parked language extension retain
 all their conformance, Unicode, diagnostics, performance and backend obligations.
 
@@ -344,6 +345,42 @@ statuses distinguish causes, while expected-name messages, precise error spans a
 unassessed. No new comparison or state primitive is selected from this result. Lossless segmentation and
 bounded child parsing are the next readiness objective before broader language-gap selection. The format
 campaign, indentation handling, arbitrary-depth/resource safety and speculative rollback remain outside this proof.
+
+
+### Bounded lossless segmentation trial
+
+This extraction grammar recognizes bracketed ASCII integers such as `[12]`. Everything else remains text, including
+malformed candidates such as `[x]` or an unfinished `[2`. It preserves every decoded input scalar without claiming
+that all the input belongs to a valid integer-document language.
+
+```text
+{{#include ../../../../tests/language-readiness/lossless-segments/grammar.spec}}
+```
+
+For `α[12]🙂`, its ordered result has these segments. The item additionally retains the named `token` slot;
+gap spans retain the source identity and `gap` provenance.
+
+| Kind | Half-open scalar span | Exact text |
+| --- | --- | --- |
+| prefix | `[0, 1)` | `α` |
+| item | `[1, 5)` | `[12]` |
+| tail | `[5, 6)` | `🙂` |
+
+Adjacent items retain an empty interstitial gap. Empty input returns one empty tail, while input with no selected
+items returns all of its unskipped text as the tail. Public entry skips complete leading blank/comment lines before
+the grammar starts, so the grammar also records any skipped `[0, cursor_pos())` text as `entry_prefix`. For example,
+`\n[4]` begins with a one-scalar entry prefix and then an empty loop prefix; a blank CRLF line is retained by the
+loop itself. Original source coordinates remain absolute in both cases.
+
+The unadorned `Segments::` selects the default scan loop, whose successful terminal miss runs `LX`. Explicit
+repetition modes have different terminal lifecycle rules; changing this header to `::OR` while retaining `LX`
+does not preserve this program's result construction.
+
+The thirteen authored cases pass through native Perl and independently loaded emitted Perl source. They compare
+exact records and scalar slices, reconstruct the original input, repeat calls on retained parsers and mutate returned
+gap data before another call. Deliberate changes to item selection, tail retention, item spans and entry-prefix
+retention are detected. This is a bounded Perl segmentation result; child parsing and equivalent backend carrier
+proof are still separate work.
 
 
 ## Approved and parked: language coverage and authoring difficulty

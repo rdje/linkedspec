@@ -764,7 +764,7 @@ Item:
    return(hash("slot", entry_slot(), "text", entry_text()))
  }
 
-List::OR
+List::
  @capture_gaps
  I { set(parts, array()) }
  -> Item[word] {
@@ -791,6 +791,10 @@ call of `Item` has no incoming edge, so `entry_slot()` returns `undef`.
 the same rule. An accepted child may consume beyond its selected entry match; only its post-`LE` exit commits the
 next boundary. A failed edge, recognition rollback, or abnormal unwind commits nothing. Nested and recursive
 invocations suspend and restore the parent candidate on the existing invocation authority.
+
+Keep the unadorned `List::` header with this example's `LX` finalizer. An explicit `List::OR` uses repetition
+termination and does not run this default-loop finalizer. The executable readiness suite checks the exact fence
+above on native and freshly emitted Perl, including empty input and the Unicode example.
 
 Static diagnostics reject invalid or duplicate slot names, unknown/out-of-range/malformed selectors, duplicate
 or ineligible `@capture_gaps`, and conflicts with anonymous legacy markers. Reading a gap accessor outside its

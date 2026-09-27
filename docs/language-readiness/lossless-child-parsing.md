@@ -1,7 +1,8 @@
 # Lossless segmentation and bounded child parsing
 
 Owner: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3`. Authority review on 2026-09-27 from
-clean `ca197a38c269cfeb89341505db83e395ebf6f308`; executable composition proof is pending.
+clean `ca197a38c269cfeb89341505db83e395ebf6f308`. Perl segmentation is now verified under `.3.2`;
+staged child composition and other backend routes remain pending.
 
 ## What this objective must establish
 
@@ -88,3 +89,33 @@ Observed boundaries: typed 14 complete / 0 pending / 231 mutations; gaps 9 compl
 and 34 public mutations; progressive 9/9 / 116 contract and 60 public mutations; staged 9 rollout legs / 123
 contract and 129 public mutations. The checkpoint for `.3.1` binds each source and log digest. These counts are
 dated measurements, not an independently maintained capability inventory. The four commands above rederive them.
+
+## Perl segmentation evidence — .3.2
+
+`tests/language-readiness/lossless-segments/grammar.spec` is a two-rule default-loop extraction grammar for
+bracketed ASCII integers. Its committed `cases.json` has thirteen independently authored exact outputs, including
+Unicode and astral text, empty/adjacent gaps, malformed candidates, CRLF and public-entry-skipped LF/comments.
+It retains skipped public-entry text explicitly as `entry_prefix`; invocation-owned gap spans keep their own
+source identity and provenance. It does not change the public entry policy or reject malformed gap text.
+
+The existing `t/nested_tree_readiness.t` harness runs the same original sequence twice on native and independently
+loaded generated source: 26 original calls per route, then a separate returned-gap mutation/reparse check.
+Four grammar mutants independently alter selection, terminal retention, item spans and initial-prefix retention.
+Each has an exact controlled wrong output and fails the unchanged original oracle. In particular, excluding zero
+from the item regex still reconstructs `[0]` exactly as tail text; only classification-aware comparison catches it.
+Every original output also passes adjacency, nonnegative spans, decoded-scalar slicing and full reconstruction.
+
+The published gap example exposed a documentation defect: `List::OR` plus `LX` returned null for empty input and
+null collectors for selected words. `dump_parser_source` locates the mechanism in the repetition handler's
+successful-miss branch: it installs the `EX` tail and returns its collector. The corrected `List::` selects the
+default loop. The harness extracts the exact published fence, executes its empty and full Unicode examples twice
+on both carriers, and restores `::OR` as a deliberate regression control. No runtime implementation changed.
+
+```sh
+bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/nested_tree_readiness.t
+bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/inter_match_gap_capture_perl_contract.t t/generated_source_contract.t
+```
+
+The readiness run passes 537 top-level tests, including all pre-existing nesting/context/entry controls. Exact
+commands, source identities and log digests belong to the `.3.2` checkpoint. `parse_job`, child recognition,
+cross-backend segmentation, resource ceilings and whole-format validation are not proved by this result.
