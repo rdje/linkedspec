@@ -12,6 +12,16 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-10-01 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.4: finite gap classification
+
+Classify the nine-area inventories and three bounded probes in `docs/language-readiness/finite-gap-list.md`.
+Existing contracts express the probes; no new missing parsing primitive is selected. Original repair priorities,
+dependencies and exclusions remain intact. Named arguments stay approved and parked. Six authoring-cost/unassessed
+requirement groups have closure, neutral-objective or gap-audit next actions. Align book, Knowledge, roadmap/task,
+bounded live/resume pointers and the stale hygiene index's next-state wording. Next .1.1.5 is canonical prose/guard
+repair and inventory-parent closeout. Verify with the existing objective evidence audit, exact path/owner review,
+rendered book, Knowledge, bounded histories, memory, all doctrines and diff hygiene; no fresh runtime admission.
+
 ## 2026-10-01 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.4: three-objective reconciliation
 
 Reconcile existing nesting/context/lossless milestones without promoting a new objective. A tracked read-only audit verifies 24 producing checkpoints, 257 historical source references, 149 latest inputs and 134 logs, independently slices authored scalar oracles and rejects corrupted evidence plus inflated recovery counts. Keep strict recognition/extraction and retained/per-call routes distinct; preserve authoring costs, exclusions and all repair owners. The public book, Knowledge, task/frontier and roadmaps agree. Exact staged canonical acceptance closes only representative parent .1.1.3; finite gap review .1.1.4 follows.

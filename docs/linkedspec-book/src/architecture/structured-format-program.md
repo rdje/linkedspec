@@ -41,7 +41,8 @@ establish a different, explicitly accepted mechanism. Merely adding alternate sy
 The owning task is `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1`; its first inventory records existing contracts and exact
 backend consumers. The state/control/result inventory is also recorded. Bounded nesting, context-name matching and
 lossless actual-child composition are reconciled across Perl, Rust, Dart, Julia and both Lua ABIs. The comparison
-below preserves each objective's authoring costs and limits before the finite gap list selects further work.
+below preserves each objective's authoring costs and limits. The finite gap review now routes those observations
+to existing repairs, closure definition and further composed objectives.
 The format program's `.1` readiness gate remains pending. The original catalog and parked language extension retain
 all their conformance, Unicode, diagnostics, performance and backend obligations.
 
@@ -109,6 +110,30 @@ oracles. It rejects executable drift and controlled corrupted evidence. Its outp
 proof, with current evidence integrity; it does not claim a fresh six-runtime execution. The commands below
 rerun the individual runtime proofs when their inputs change.
 
+
+### What the finite gap review selects
+
+All nine areas have existing contracts or bounded evidence: grammar, recursion, cursor, capture, state,
+callables, control, transformation and results. No new missing parsing primitive follows from the three
+successful probes. The review keeps narrower engine and proof defects with their existing repair owners;
+explicit guards and AST/span construction remain concrete authoring work.
+
+| Finding | Consequence for the next work |
+| --- | --- |
+| Existing primitives express the finite probes | Define closure using their actual scope, including intrinsic rule cursor policy, advancing recursion and recognition-only rollback. |
+| Recognition abort, mixed controls, mutation guards, numeric kinds and staged boundaries have open repairs | Repair and reverify an affected boundary before extending a claim that depends on it. Successful bounded workarounds do not close broad defects. |
+| Caller supplies precompiled child authority and span projection | Keep recognition in `.spec` and authorization at the caller boundary; no ambient parser loading follows. |
+| Diagnostics, indentation, quoted/escaped text and richer transformation objectives need composition proof | Select small independent positive/negative oracles before claiming support or proposing a primitive. |
+| Arbitrary depth, regex resources and performance remain unassessed | Describe measured bounds precisely and verify resource repairs; finite success supplies no universal guarantee. |
+
+Named fixed-parameter arguments remain an approved, parked feature. Their absence does not establish a
+prerequisite for this campaign. Lexical closures, recursive user calls, arbitrary user-state rollback and
+new staged operands likewise need an agreed objective before a semantic extension is selected.
+
+The immediate next step corrects the general capability description of removed global parse-mode controls
+and guards its recurrence. Closure definition then states what authored code can compute, observe, mutate and
+return; neutral fixtures distinguish those dimensions with mutations. Only demonstrated reusable gaps become
+implementation leaves. The format campaign and optional EBNF-like frontend retain their separate gates.
 
 ### Bounded nesting trial
 

@@ -12,6 +12,17 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-10-01 — Finite language gap selection (.1.1.4)
+
+The canonical selection is `docs/language-readiness/finite-gap-list.md`: contract admission, finite composition,
+partial implementation/proof defects, authoring costs and unassessed requirements have different consequences.
+No new parsing primitive follows from successful nesting/context/lossless probes. Caller-frozen registry/span
+projection is integration; raw host fallback stays compatibility-only; ambient effects remain forbidden by
+ADR0064 without claiming sandbox security. Existing repairs precede dependent promotion. .1.2 defines current
+closure/failure/resource boundaries, .1.3 selects independent composition oracles/mutations, and .1.4 creates only
+evidence-backed semantic implementation leaves. Named arguments retain PARSER-AUTHORING-APIS.4's parked direction.
+Ordinary documentation proof uses the existing audit plus path/owner/render checks; .1.1.5 remains canonical.
+
 ## 2026-10-01 — Three successful objectives leave costs and broader requirements explicit
 
 Existing primitives compose finite nesting, opening/closing-name comparison and lossless actual-child extraction. The first two validate their bounded document language; the third preserves malformed text as gaps. Route counts reuse original corpora, and per-call entries cannot inflate retained-parser recovery. The consolidated instrument binds historical producing blobs, latest executable evidence and original scalar slices, records documentation evolution separately and falsifies corrupted records/counts. This is fresh evidence integrity over historical runtime execution. Explicit guard work, limited diagnostics and caller-frozen authority guide the next finite gap review without implying general completeness. All three supplied-policy hashes still match September11; startup .5/.29 retain adoption ownership.

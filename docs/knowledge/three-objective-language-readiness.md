@@ -35,6 +35,8 @@ hashes are frozen in the owning checkpoint. This audit is an on-demand instrumen
 not an additional automatic runtime admission gate. Changed runtime inputs require
 the relevant ledger's fresh execution before a current claim advances.
 
-Finite gap selection `.1.1.4` follows. Stale capability prose `.1.1.5` and the
+Finite gap selection `.1.1.4` is recorded in `docs/language-readiness/finite-gap-list.md`;
+[[finite-language-readiness-gap-selection]] routes defects, costs and unassessed requirements.
+Stale capability prose `.1.1.5` and the
 existing startup/backend defects retain their owners; the wider inventory,
 structured-format campaign and alternate authoring frontend remain open.

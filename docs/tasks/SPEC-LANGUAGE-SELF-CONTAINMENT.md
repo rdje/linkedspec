@@ -3,7 +3,7 @@
 ## Metadata
 
 - Tree ID: `SPEC-LANGUAGE-SELF-CONTAINMENT`
-- Status: `active` / bounded language objective proof
+- Status: `active` / finite inventory closeout
 - Roadmap lane: `.spec language evolution / expressive self-containment and alternate authoring profiles`
 - Created: `2026-07-30`
 - Last updated: `2026-10-01`
@@ -66,7 +66,7 @@ used by ordinary `.spec` syntax on every backend.
 ## Task Tree
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT`
-  Status: `active` / bounded language objective proof
+  Status: `active` / finite inventory closeout
   Goal: Deliver expressive problem-domain closure plus an optional lossless EBNF-like authoring profile on one
     portable semantic core.
   Children: `.0`, `.1`, `.2`, `.3`, `.4`, `.5`, `.6`
@@ -828,19 +828,37 @@ used by ordinary `.spec` syntax on every backend.
 - [x] **LOCKSTEP** — Comparison, book, Knowledge card, checkpoint, task/index, roadmaps, bounded live/history and MEMORY agree. .1.1.4 follows; .1.1.5 and startup .5/.29 retain documentation/policy repair obligations. No standard format or alternate syntax is admitted.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.4`
-  Status: `pending`
+  Status: `done`
   Goal: Reconcile the finite inventory and representative evidence into an owned gap list for `.1.2` and `.1.4`.
   Dependencies: `.1.1.3`
+  Activation: Clean f84d794fb18475cb78d5fbd4aec3e37e57514b88; representative parent committed with exact canonical receipt, brief0 and no outstanding job.
+  Verification tier: `focused`
+  Focused checks: Existing three-objective source/log/oracle audit; exact nine-area authority and repair-owner review, finite-list link/owner checks and rendered book review; Knowledge/memory/history/doctrines and git diff --check.
+  Canonical trigger: none for a bounded classification and scheduling ledger preserving existing contracts and admission; .1.1.5 retains canonical manifest/checker repair and inventory-parent closeout.
   Acceptance: Every observed gap is implemented, partial, missing, compatibility-only, backend-host or deliberately forbidden; untested objectives remain separately unassessed. New capability proposals identify reusable semantics and portable proof, and existing defects retain their original repair owners and priority. Do not imply an exhaustive proof of every possible grammar.
+  Selection: docs/language-readiness/finite-gap-list.md classifies nine dimensions, existing repair obligations, compatibility/host/non-authority boundaries and six requirement/cost groups. No missing parsing primitive selected; named arguments stay parked. .1.2/.1.3/.1.4 own explicit next uses; affected repairs precede dependent promotion.
+  Verification: PASS objective audit24 checkpoints/257 historical source references/149 latest inputs/134 logs and original falsification controls; nine unique areas/twelve JSON authorities/thirty pending repair owners plus proposed parked named arguments; all local ledger links and four rendered-book assertions. Book build, Knowledge1220/9632, memory and both history budgets pass. Registered doctrines and diff hygiene govern landing; no fresh backend execution, runtime or contract movement.
+  Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.4 - classify finite language readiness gaps`.
+
+### `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.4` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Two dated inventories and three objective ledgers require one current classified selection before closure definition; existing source/log audit remains the proof boundary.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Separate inventories mix contract admission, known narrower defects and then-unassessed composition. The combined comparison proves finite objectives but cannot infer absent primitives or universal resources.
+- [x] **FIX** — Add the finite gap list with nine areas, original repair routing, compatibility/host/forbidden boundaries, authoring costs and separately scheduled unassessed requirements. Correct the old hygiene index's current next-state wording.
+- [x] **ADDRESSED (verified)** — Review exact authority paths and current repair metadata, verify original evidence with the existing audit, and inspect the rendered finite-selection table. No runtime proof is newly promoted.
+- [x] **NO REGRESSION** — No executable or admitted contract changes; original audit controls, book rendering, history pressure, Knowledge, memory, all doctrines and diff hygiene must pass before landing.
+- [x] **LOCKSTEP** — Ledger, Knowledge, book, task/frontier, roadmaps and bounded live/history agree; .1.1.5 follows before .1.2. Existing priorities/dependencies and parked features remain intact.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.5`
   Status: `pending`
   Goal: Repair the stale general capability description of removed global parse-mode controls and guard recurrence.
   Priority: P2; after representative inventory reconciliation `.1.1.4`, before `.1.2` uses that manifest as closure authority. Coordinate startup `.41.2` without duplicating its broad guide repair.
+  Dependencies: `.1.1.4`
   Reproduce: Run perl tools/check_capability_conformance.pl (passes 20/100/0/0), then compare manifest capability runtime.top_rule_and_parse_mode_controls.contract with rule_local_cursor_contract.json policy.global_override. The former says native execution accepts seek/consume parse-mode controls; the latter removes public overrides, and the public rule-mode guide documents targeted rejection.
   Root cause: tools/check_capability_conformance.pl validate_manifest requires a nonempty contract string for general rows (line797 at activation), while exact text checks at line606 apply only to the two mutation capabilities. No current semantic assertion binds this general row to the rule-local-cursor authority.
   Impact: Inventory readers can infer a removed option is supported from a green census. No runtime regression is asserted.
   Acceptance: Preserve stable capability identity where required, reconcile its description to explicit entry selection and intrinsic family cursor policy, and add a reason-sensitive regression that rejects the stale claim. Verify dependent capability/generated-source consumers and public teaching; use canonical tier for checker/contract admission movement.
+  Closeout: This is the final pending child of .1.1; close the inventory parent only with exact staged canonical acceptance, preserving the finite gap list and all separate repair owners.
   Verification: .1.1.1 freshly passes the capability checker and the specific cursor checker against the contradictory unchanged source. Exact source/read-only reproduction is retained in docs/language-readiness/grammar-cursor-capture.md.
   Commit: pending.
 
@@ -882,6 +900,8 @@ used by ordinary `.spec` syntax on every backend.
     environmental non-authority.
   Acceptance: Normative contracts answer what a `.spec` may compute, observe, mutate, return, and never access,
     including recursion/iteration limits, failure behavior, and host-boundary inputs/results.
+  Dependencies: `.1.1`
+  Inventory input: docs/language-readiness/finite-gap-list.md. Separate admitted/current behavior from target closure; retain recognition-only rollback, distinct callable scopes, intrinsic cursor policy, staged operand authority and unresolved resource limits. Split contract work into bounded leaves before editing normative authority.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3`
   Status: `pending`
@@ -889,6 +909,8 @@ used by ordinary `.spec` syntax on every backend.
   Acceptance: Fixtures cover natural recursion, cursor algebra, interval/boundary capture, nested state, callable
     composition, branching/iteration, structural transformation, and typed result construction; mutations prove
     every claimed semantic dimension matters.
+  Dependencies: `.1.2`
+  Inventory input: Preserve the original three probes; select bounded diagnostic and callable/control/transform objectives with independent negative/effect/kind oracles. Record indentation/quotes/comments requirement scope before proposing syntax, and require affected repair owners before dependent promotion. Split selection, neutral fixture/checker and recurrence work before implementation.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.4`
   Status: `pending`
@@ -896,6 +918,8 @@ used by ordinary `.spec` syntax on every backend.
     implementation leaves before any behavior change.
   Acceptance: Every gap has one owner, portable semantics, test oracle, backend order, compatibility policy, and
     documentation obligation; speculative general-purpose features remain excluded.
+  Dependencies: `.1.3`
+  Inventory input: No new missing parsing primitive is selected by the current finite probes. An agreed minimized failing objective and reusable semantics are required before creating .3 implementation leaves; costs, existing defects and unassessed requirements are not interchangeable.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.2`
   Status: `pending`
@@ -1035,7 +1059,8 @@ used by ordinary `.spec` syntax on every backend.
 | 15 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.1` | `done` | Perl native/fresh emitted context-name proof:11/17 cases,90 calls and34 recoveries per route. |
 | 16 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.2` | `done` | Context11/17/22 and original-default6/7/12 pass all six native routes. |
 | 17 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.4` | `done` | Exact historical evidence and authoring-cost comparison close the bounded parent through canonical acceptance. |
-| 18 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.4` | `pending` | Classify the finite inventory and three objectives into owned gaps, costs, defects and unassessed requirements. |
+| 18 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.4` | `done` | Nine areas classified; original repairs, authoring costs and unassessed requirements retain explicit next actions. |
+| 19 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.5` | `pending` | Repair stale capability prose and guard recurrence before canonical inventory-parent closeout. |
 
 ## Decisions
 
@@ -1068,6 +1093,8 @@ used by ordinary `.spec` syntax on every backend.
 - None for `.1.1`. The September27 clean prioritization supersedes the earlier callable-first schedule. Format implementation and the optional frontend remain gated by their own prerequisites.
 
 ## Verification Log
+
+October1 `.1.1.4`: Finite nine-area classification preserves exact authority/repair owners and schedules six cost/requirement groups without selecting a new primitive. Existing objective audit and ordinary documentation gates govern landing; historical runtime execution is not relabeled as fresh proof.
 
 October1 `.1.1.3.4`: Three-objective audit verifies24 producing checkpoints/257 source references/149 latest inputs/134 logs; original scalar oracles and current table match. Four corrupt inputs/two outside paths/inflated recovery row reject. Current book evolution remains separate from executable identity. Exact staged canonical receipt governs bounded parent closure; actual result belongs to the commit body.
 
@@ -1111,6 +1138,8 @@ September27 `.1.1.1`: seven neutral/structural checks, 34 ledger source-path/con
 
 ## Commit Log
 
+- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.4 - classify finite language readiness gaps` — Current classification and next actions preserve existing contracts, repair priorities, parked named arguments and unassessed scope.
+
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.4 - reconcile three bounded language objectives` — canonical representative-parent closeout; no new runtime/format admission.
 
 - `.1.1.3.3.5`: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.5 - reconcile bounded lossless child readiness`.
@@ -1134,6 +1163,8 @@ September27 `.1.1.1`: seven neutral/structural checks, 34 ledger source-path/con
 | `.0` | `SPEC-LANGUAGE-SELF-CONTAINMENT.0 - ratify expressive spec self-containment` | Direction capture only; no parser/runtime behavior. |
 
 ## Changelog
+
+- `2026-10-01`: `.1.1.4` classifies the finite evidence and schedules closure/objective/audit next uses. `.1.1.5` is the final inventory child and remains canonical; all external repair owners stay open.
 
 - `2026-10-01`: Reconcile three bounded objectives and authoring costs; exact historical evidence audit and canonical acceptance precede finite gap selection `.1.1.4`.
 

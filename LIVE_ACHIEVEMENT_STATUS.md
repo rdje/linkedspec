@@ -6,13 +6,15 @@ Ordinary .spec language readiness under SPEC-LANGUAGE-SELF-CONTAINMENT.1.1. The 
 
 ## Latest Completed Slice
 
-- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.4 - reconcile three bounded language objectives` — exact historical evidence and independent scalar oracles preserve strict recognition versus lossless extraction, retained recovery versus per-call isolation, authoring costs and open repair owners. The exact staged canonical receipt governs representative-parent closeout; no new runtime or format admission.
+- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.4 - classify finite language readiness gaps` — nine areas, existing repairs, compatibility/host/forbidden boundaries and six cost/requirement groups have explicit next actions. No new parsing primitive or runtime admission; original repair priorities/dependencies remain intact.
 
 ## Next Action
 
-- Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.4: classify the nine-area inventory and three bounded objectives into owned gaps, costs, defects and unassessed requirements before .1.1.5 capability-prose repair.
+- Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.5: correct stale capability prose and add a recurrence guard before exact canonical inventory-parent closeout and closure definition .1.2.
 
 ## Recent Completions
+
+- `2026-10-01` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.4` classifies finite gaps and preserves owned repair/requirement next actions.
 
 - `2026-10-01` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.4` reconciles three bounded objectives under exact canonical acceptance.
 
@@ -43,8 +45,6 @@ Ordinary .spec language readiness under SPEC-LANGUAGE-SELF-CONTAINMENT.1.1. The 
 - `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.4` verifies six Dart context-name carriers and strict fresh packages.
 
 - `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.3` verifies six Rust context-name carriers and repairs parallel test allocation.
-
-- `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.2` verifies all-six native context-name parity and original-default compatibility.
 
 ## History
 
