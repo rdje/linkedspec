@@ -130,8 +130,9 @@ Named fixed-parameter arguments remain an approved, parked feature. Their absenc
 prerequisite for this campaign. Lexical closures, recursive user calls, arbitrary user-state rollback and
 new staged operands likewise need an agreed objective before a semantic extension is selected.
 
-The immediate next step corrects the general capability description of removed global parse-mode controls
-and guards its recurrence. Closure definition then states what authored code can compute, observe, mutate and
+The capability census now describes explicit entry selection and intrinsic family cursor policy accurately;
+its stable historical ID does not grant a global parse-mode override. Fifteen reason-sensitive mutations bind
+that row to the existing root-selection and cursor authorities. Closure definition then states what authored code can compute, observe, mutate and
 return; neutral fixtures distinguish those dimensions with mutations. Only demonstrated reusable gaps become
 implementation leaves. The format campaign and optional EBNF-like frontend retain their separate gates.
 

@@ -1,11 +1,11 @@
 # MEMORY
 
-- activation_commit: `f84d794fb18475cb78d5fbd4aec3e37e57514b88` — clean activation base for finite gap classification.
-- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.4 - classify finite language readiness gaps`.
-- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.5` (pending) — stale capability prose and recurrence guard.
-- next_action: Correct the stable entry/cursor capability description, bind it to specific authorities with reason-sensitive regression, then close inventory .1.1 through exact staged canonical CI before .1.2.
-- in_flight_uncommitted: none; finite evidence selects no new missing parsing primitive and all repair owners retain priority/dependencies.
-- blockers: No blocker for .1.1.5; wider format readiness, resource safety and startup/backend repairs remain open. Policies unchanged; startup .5/.29 own adoption. ARCHOGEN owns downstream acceptance.
+- activation_commit: `9a07b6375b0053063c54e48023741f294436242c` — clean activation base for capability description/guard repair.
+- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.5 - guard entry and cursor capability description`.
+- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.1` (pending) — closure matrix and bounded freeze plan.
+- next_action: Retrieve the existing compute/observe/mutate/return/scoping/resource/failure authorities and design a closure matrix separating target, current admitted behavior, known partial repairs and unassessed requirements before normative freeze.
+- in_flight_uncommitted: none; exact staged canonical receipt governs inventory-parent closeout. Stable IDs/states/runtime semantics remain unchanged.
+- blockers: No blocker for .1.2.1; wider format readiness, resource safety and startup/backend repairs remain open. Policies unchanged; startup .5/.29 own adoption. ARCHOGEN owns downstream acceptance.
   Wrapper startup .7 remains open; recovery/purge stay prohibited. No interrupted Phase0 run counts as proof.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
   active table; the task metadata doctrine inventories all consumers, permits arbitrary frontier-row rewrites,

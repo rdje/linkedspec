@@ -23,6 +23,15 @@ evidence_update_2026_07_29_readme_routing: "README-STABILITY-POLICY.1 removes vo
 reverify: "bash tools/check_rule_local_cursor_five_backend.sh"
 ---
 
+## Current inventory update — October1
+
+Self-containment `.1.1.5` registers the reviewed architecture page and capability
+checker after their new removed-option prose/stable identity matches the token census.
+The current ledger is 79 migration files / 8 complete + 0 pending / 60 mutations.
+Only two paths, the count and its current mirrors change; semantic fixtures,
+rollout, recurring consumers and earlier dated measurements remain exact.
+
+
 ## Current inventory update — September24
 
 Scanner parent `SESSION-STARTUP-READING.86.3` registers the new
@@ -71,7 +80,7 @@ The six runtime legs are Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT. The selec
 `trace_stdout_medium`, run across all five commands with `POSIXLY_CORRECT` unset and set.
 
 `recurring_five_backend_gate` and `public_no_drift` are complete. The current cursor ledger is
-77 migration files / 8 complete + 0 pending / 60 mutations. Explicit repeated-OR action-result shape remains
+79 migration files / 8 complete + 0 pending / 60 mutations. Explicit repeated-OR action-result shape remains
 separately owned by `FUTURE-PARITY-BACKLOG.9.1.10` and does not reopen cursor admission.
 
 Related: [[rule-local-cursor-neutral-contract]], [[rule-local-cursor-and-bare-edge-contract]],

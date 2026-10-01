@@ -12,6 +12,17 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-10-01 — Entry/cursor descriptions need semantic authority (.1.1.5)
+
+A nonempty general census string let the old global-override claim pass despite the specific cursor authority.
+The stable row now describes root precedence, intrinsic AND/OR policy, independent children and removed overrides;
+fifteen exact-reason mutations plus unrelated-error falsification lock that relationship without runtime movement.
+The new .1.1.4 architecture paragraph and checker match the existing token census, so their omitted registrations
+are repaired under public/neutral owners at79/8/0/60. Ten current marker mirrors change; dated measurements and
+semantic/rollout JSON remain exact. The failed initial cursor check is owned and superseded by exact omission
+controls and GREEN. Canonical staged proof closes finite inventory .1.1; .1.2.1 designs current/target/partial/
+unassessed closure before normative freeze. Existing repairs and policy adoption remain separately scheduled.
+
 ## 2026-10-01 — Finite language gap selection (.1.1.4)
 
 The canonical selection is `docs/language-readiness/finite-gap-list.md`: contract admission, finite composition,

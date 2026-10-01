@@ -4,6 +4,13 @@
 admitted backends. It complements, rather than replaces, the executable 105-fixture interpreter corpus and the
 66-case primary CLI manifest.
 
+The stable row `runtime.top_rule_and_parse_mode_controls` describes explicit entry selection, then the first
+authored marker or rule, plus intrinsic AND-consume / OR-default-seek and independent child policy. Its historical
+identifier is retained; public/global overrides are removed. The row now cites the root-selection and cursor
+authorities directly. The capability checker pins the description, category, source references, authority IDs,
+selection precedence and four cursor-policy fields, with fifteen reason-sensitive mutations including the old
+accepted-override claim. The census and runtime behavior remain unchanged.
+
 ## Standalone lifecycle block
 
 `standalone_lifecycle_block_contract.json` closes the exact shorthand from ADR `0094`: a standalone rule-body

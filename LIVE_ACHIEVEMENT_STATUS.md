@@ -6,13 +6,15 @@ Ordinary .spec language readiness under SPEC-LANGUAGE-SELF-CONTAINMENT.1.1. The 
 
 ## Latest Completed Slice
 
-- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.4 - classify finite language readiness gaps` — nine areas, existing repairs, compatibility/host/forbidden boundaries and six cost/requirement groups have explicit next actions. No new parsing primitive or runtime admission; original repair priorities/dependencies remain intact.
+- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.5 - guard entry and cursor capability description` — stable row corrected, fifteen reason-sensitive mutations and unrelated-error falsification; two cursor inventory registrations/census mirrors repaired at79/8/0/60. Exact canonical acceptance governs inventory .1.1 closeout; runtime semantics and100/0/0 states unchanged.
 
 ## Next Action
 
-- Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.5: correct stale capability prose and add a recurrence guard before exact canonical inventory-parent closeout and closure definition .1.2.
+- Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.1: design the closure matrix/freeze plan from existing authorities, preserving target/current/partial/unassessed distinctions before normative contract changes.
 
 ## Recent Completions
+
+- `2026-10-01` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.5` guards the stable entry/cursor description and repairs79-file inventory before canonical closeout.
 
 - `2026-10-01` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.4` classifies finite gaps and preserves owned repair/requirement next actions.
 
@@ -43,8 +45,6 @@ Ordinary .spec language readiness under SPEC-LANGUAGE-SELF-CONTAINMENT.1.1. The 
 - `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.5` verifies five Julia context-name carriers and fresh emitted hosts.
 
 - `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.4` verifies six Dart context-name carriers and strict fresh packages.
-
-- `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.3` verifies six Rust context-name carriers and repairs parallel test allocation.
 
 ## History
 

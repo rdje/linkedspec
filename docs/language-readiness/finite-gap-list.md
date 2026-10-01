@@ -70,6 +70,11 @@ The lossless/backend ledgers retain the complete route-specific exclusions. This
 table routes the observations used here, not all defects in the repository. Supplied
 policy adoption stays with startup `.5/.29`; unchanged donor hashes do not close it.
 
+Subsequent `.1.1.5` repairs the general capability description and its missing
+recurrence guard, retaining the stable ID and adding fifteen exact-reason mutations.
+It also registers two new token-bearing cursor inventory inputs at79/8/0/60.
+All other owners above retain the status and dependency obligations recorded here.
+
 ## Host and compatibility boundaries
 
 | Classification | Evidence / consequence | Owner |

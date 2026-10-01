@@ -21,6 +21,12 @@ demonstrate LinkedSpec's primary multi-backend product role: an application embe
 backend as a native library and keeps `.spec` source, parser input, and results in memory.
 No backend requires a CLI or subprocess for complete parser use.
 
+The capability census retains `runtime.top_rule_and_parse_mode_controls` as a stable historical identifier.
+Its current contract describes explicit entry selection, then the first authored top marker or rule,
+with AND consuming, OR/default seeking and each child owning its policy. The old identifier does not advertise
+an accepted global override. The census checker binds this description to the existing root-selection and
+rule-local cursor authorities; this correction adds no runtime option or generated format.
+
 LinkedSpec's public API has three relevant backend-neutral roles: an **inline compile path** (compile in-memory
 `.spec` text into a runnable parser), a **file-oriented path** (resolve a named spec, then compile it), and a
 **generated-source path** (emit independently loadable host source). The concrete Perl names and signatures on this

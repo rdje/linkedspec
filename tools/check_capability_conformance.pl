@@ -67,6 +67,15 @@ sub require_repo_path {
 }
 
 my @expected_backends = qw(perl rust dart julia lua);
+my $entry_cursor_capability_id = 'runtime.top_rule_and_parse_mode_controls';
+my $expected_entry_cursor_contract = 'Native execution selects an explicit top rule, otherwise the first authored top marker or rule; AND consumes, OR/default seeks, child policy is independent, and public/global parse-mode overrides are removed.';
+my @expected_entry_cursor_sources = (
+ 'docs/linkedspec-book/src/user-model/rule-modes-and-parse-modes.md',
+ 'docs/linkedspec-book/src/public-api/get-and-get-parser.md',
+ 'capability_conformance/root_rule_selection_contract.json',
+ 'capability_conformance/rule_local_cursor_contract.json',
+);
+my $entry_cursor_authorities;
 my @expected_exclusions = (
  {
   id                  => 'legacy.perl_plugin_registry',
@@ -761,8 +770,52 @@ sub parse_task_statuses {
  return \%task_status;
 }
 
+sub validate_entry_cursor_capability {
+ my ($manifest, $authorities) = @_;
+ fail('entry/cursor authorities must be an object') unless ref($authorities) eq 'HASH';
+ my @rows = grep { $_->{id} eq $entry_cursor_capability_id } @{$manifest->{capabilities}};
+ fail("$entry_cursor_capability_id must occur exactly once") unless @rows == 1;
+ my $row = $rows[0];
+ fail("$entry_cursor_capability_id.category drifted") unless $row->{category} eq 'native-api';
+ fail("$entry_cursor_capability_id.contract drifted from root-selection and rule-local cursor authorities")
+  unless $row->{contract} eq $expected_entry_cursor_contract;
+ require_exact_string_array("$entry_cursor_capability_id.sources", $row->{sources}, \@expected_entry_cursor_sources);
+
+ for my $name (qw(root cursor)) {
+  my $authority = $authorities->{$name};
+  my $id = $name eq 'root' ? 'linkedspec-root-rule-selection-v1' : 'linkedspec-rule-local-cursor-v1';
+  fail("$entry_cursor_capability_id.$name authority identity drifted")
+   unless ref($authority) eq 'HASH'
+   && defined($authority->{format}) && !ref($authority->{format}) && $authority->{format} eq '1'
+   && defined($authority->{contract_id}) && !ref($authority->{contract_id}) && $authority->{contract_id} eq $id;
+ }
+ my $precedence = $authorities->{root}{precedence};
+ my @expected_precedence = qw(explicit_selector first_authored_marker first_authored_rule);
+ fail("$entry_cursor_capability_id.root precedence drifted")
+  unless ref($precedence) eq 'ARRAY' && @$precedence == @expected_precedence;
+ for my $index (0 .. $#expected_precedence) {
+  my $entry = $precedence->[$index];
+  fail("$entry_cursor_capability_id.root precedence drifted")
+   unless ref($entry) eq 'HASH'
+   && defined($entry->{id}) && !ref($entry->{id}) && $entry->{id} eq $expected_precedence[$index]
+   && defined($entry->{rank}) && !ref($entry->{rank}) && $entry->{rank} eq '' . ($index + 1);
+ }
+ my %expected_policy = (
+  and_cursor => 'consume',
+  or_default_cursor => 'seek',
+  child_cursor => 'a child starts at the caller cursor and applies its own family policy; parent policy never propagates',
+  global_override => 'public parse-mode overrides are removed rather than accepted and ignored',
+ );
+ my $policy = $authorities->{cursor}{policy};
+ fail("$entry_cursor_capability_id.cursor policy must be an object") unless ref($policy) eq 'HASH';
+ for my $key (sort keys %expected_policy) {
+  fail("$entry_cursor_capability_id.cursor $key drifted")
+   unless defined($policy->{$key}) && !ref($policy->{$key}) && $policy->{$key} eq $expected_policy{$key};
+ }
+}
+
 sub validate_manifest {
- my ($manifest, $task_status) = @_;
+ my ($manifest, $task_status, $entry_authorities) = @_;
  require_hash_keys(
   'manifest', $manifest,
   qw(schema_version contract task_owner backends status_values capabilities excluded_or_future)
@@ -825,6 +878,8 @@ sub validate_manifest {
    fail("$where.gap_owner is only allowed when a backend is partial or gap");
   }
  }
+
+ validate_entry_cursor_capability($manifest, $entry_authorities // $entry_cursor_authorities);
 
  fail('manifest.excluded_or_future must be an array') unless ref($manifest->{excluded_or_future}) eq 'ARRAY';
  for my $index (0 .. $#{$manifest->{excluded_or_future}}) {
@@ -892,6 +947,67 @@ sub expect_mutation_failure {
  };
  fail("governance mutation '$name' unexpectedly passed") if $passed;
  die $@ unless $@ =~ /^capability-conformance: ERROR:/;
+}
+
+sub expect_entry_cursor_failure {
+ my ($name, $reason, $check) = @_;
+ my $passed = eval { $check->(); 1 };
+ my $error = $@;
+ fail("entry/cursor mutation '$name' unexpectedly passed") if $passed;
+ fail("entry/cursor mutation '$name' rejected for the wrong reason: $error")
+  unless $error eq "capability-conformance: ERROR: $reason\n";
+}
+
+sub entry_cursor_capability_mutation_checks {
+ my ($manifest, $task_status, $authorities) = @_;
+ # Use the stable public identity and historical prose independently of the
+ # positive validator so a general non-empty-string guard cannot pass this test.
+ my $id = 'runtime.top_rule_and_parse_mode_controls';
+ my ($index) = grep { $manifest->{capabilities}[$_]{id} eq $id } 0 .. $#{$manifest->{capabilities}};
+ fail('entry/cursor mutation setup cannot find the stable capability') unless defined $index;
+ my @mutations = (
+  ['historical_global_override_claim', "$id.contract drifted from root-selection and rule-local cursor authorities", sub {
+   $_[0]{capabilities}[$index]{contract} = 'Native execution accepts equivalent top-rule selection and seek/consume parse-mode controls.';
+  }],
+  ['ignored_global_override_claim', "$id.contract drifted from root-selection and rule-local cursor authorities", sub {
+   $_[0]{capabilities}[$index]{contract} = 'Native execution accepts global parse-mode controls and ignores them.';
+  }],
+  ['stable_identity_renamed', "$id must occur exactly once", sub { $_[0]{capabilities}[$index]{id} = 'runtime.entry_cursor_replacement' }],
+  ['capability_omitted', "$id must occur exactly once", sub { splice @{$_[0]{capabilities}}, $index, 1 }],
+  ['category_drift', "$id.category drifted", sub { $_[0]{capabilities}[$index]{category} = 'language' }],
+  ['root_source_omitted', "$id.sources drifted", sub { splice @{$_[0]{capabilities}[$index]{sources}}, 2, 1 }],
+  ['cursor_source_omitted', "$id.sources drifted", sub { pop @{$_[0]{capabilities}[$index]{sources}} }],
+  ['root_authority_identity', "$id.root authority identity drifted", sub { $_[1]{root}{contract_id} = 'different-root' }],
+  ['root_precedence_order', "$id.root precedence drifted", sub { @{$_[1]{root}{precedence}} = reverse @{$_[1]{root}{precedence}} }],
+  ['root_precedence_rank', "$id.root precedence drifted", sub { $_[1]{root}{precedence}[0]{rank} = 2 }],
+  ['cursor_authority_identity', "$id.cursor authority identity drifted", sub { $_[1]{cursor}{contract_id} = 'different-cursor' }],
+  ['and_policy_seek', "$id.cursor and_cursor drifted", sub { $_[1]{cursor}{policy}{and_cursor} = 'seek' }],
+  ['default_policy_consume', "$id.cursor or_default_cursor drifted", sub { $_[1]{cursor}{policy}{or_default_cursor} = 'consume' }],
+  ['inherited_child_policy', "$id.cursor child_cursor drifted", sub { $_[1]{cursor}{policy}{child_cursor} = 'inherit parent policy' }],
+  ['global_override_accepted', "$id.cursor global_override drifted", sub { $_[1]{cursor}{policy}{global_override} = 'accept and ignore global overrides' }],
+ );
+ for my $mutation (@mutations) {
+  my ($name, $reason, $mutate) = @$mutation;
+  my $candidate = clone_value($manifest);
+  my $candidate_authorities = clone_value($authorities);
+  $mutate->($candidate, $candidate_authorities);
+  expect_entry_cursor_failure($name, $reason, sub {
+   validate_manifest($candidate, $task_status, $candidate_authorities);
+  });
+ }
+ # Falsify the reason assertion itself: a generic checker failure cannot stand
+ # in for rejection of the intended semantic drift.
+ my $wrong_reason_passed = eval {
+  expect_entry_cursor_failure('unrelated_error_control', 'entry/cursor semantic failure', sub {
+   fail('unrelated fixture error');
+  });
+  1;
+ };
+ my $wrong_reason_error = $@;
+ fail('entry/cursor reason assertion did not reject an unrelated error')
+  if $wrong_reason_passed || $wrong_reason_error ne
+   "capability-conformance: ERROR: entry/cursor mutation 'unrelated_error_control' rejected for the wrong reason: capability-conformance: ERROR: unrelated fixture error\n\n";
+ return scalar @mutations;
 }
 
 sub mutate_task_status_line {
@@ -1319,7 +1435,19 @@ my $manifest = eval { decode_json(read_text($manifest_path)) };
 fail("invalid JSON in capability_conformance/manifest.json: $@") if $@;
 my $sources = task_sources();
 my $task_status = parse_task_statuses($sources);
+$entry_cursor_authorities = {
+ map {
+  my ($name, $relative) = @$_;
+  my $value = eval { decode_json(read_text(File::Spec->catfile($repo_root, split m{/}, $relative))) };
+  fail("invalid JSON in $relative: $@") if $@;
+  $name => $value;
+ } (
+  ['root', 'capability_conformance/root_rule_selection_contract.json'],
+  ['cursor', 'capability_conformance/rule_local_cursor_contract.json'],
+ )
+};
 my $counts = validate_manifest($manifest, $task_status);
+my $entry_cursor_mutation_count = entry_cursor_capability_mutation_checks($manifest, $task_status, $entry_cursor_authorities);
 my $mutation_count = governance_mutation_checks($manifest, $sources);
 my %mutation_artifact_paths = (
  map { $_ => $expected_mutation_authorities{$_}{path} } keys %expected_mutation_authorities
@@ -1369,8 +1497,8 @@ my $language_surface_mutation_count = language_surface_mutation_checks(
  $language_surface_contract, $manifest, $language_surface_source
 );
 
-printf "capability-conformance: OK (schema v2; %d capabilities; backend states pass=%d partial=%d gap=%d; %d exclusions; %d governance mutations; %d mutation capabilities; %d mutation-admission mutations; %d mutation-recurring mutations; %d mutation-public-gate mutations; %d governed projections; %d public mutations; %d language-surface mutations)\n",
+printf "capability-conformance: OK (schema v2; %d capabilities; backend states pass=%d partial=%d gap=%d; %d exclusions; %d governance mutations; %d mutation capabilities; %d mutation-admission mutations; %d mutation-recurring mutations; %d mutation-public-gate mutations; %d governed projections; %d public mutations; %d language-surface mutations; %d entry/cursor mutations)\n",
  scalar(@{$manifest->{capabilities}}), @{$counts}{qw(pass partial gap)}, scalar(@{$manifest->{excluded_or_future}}),
  $mutation_count, scalar(@expected_mutation_capabilities), $mutation_admission_count, $mutation_recurring_count,
  $mutation_public_count, scalar(@expected_public_projections), $public_mutation_count,
- $language_surface_mutation_count;
+ $language_surface_mutation_count, $entry_cursor_mutation_count;

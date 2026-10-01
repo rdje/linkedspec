@@ -37,6 +37,6 @@ the relevant ledger's fresh execution before a current claim advances.
 
 Finite gap selection `.1.1.4` is recorded in `docs/language-readiness/finite-gap-list.md`;
 [[finite-language-readiness-gap-selection]] routes defects, costs and unassessed requirements.
-Stale capability prose `.1.1.5` and the
-existing startup/backend defects retain their owners; the wider inventory,
+Stale capability prose `.1.1.5` is repaired with its recurrence guard; the
+existing startup/backend defects retain their owners. The wider closure contract,
 structured-format campaign and alternate authoring frontend remain open.

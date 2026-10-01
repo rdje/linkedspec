@@ -1,8 +1,8 @@
 # ARCHITECTURE STATE
 
-Current cursor inventory, September24: the same-line Dart grammar test adds one
-matching-mode consumer under the existing Dart backend owner. The ledger is now
-77 migration files / 8 complete + 0 pending / 60 mutations; runtime behavior and
+Current cursor inventory, October1: self-containment `.1.1.5` registers the reviewed
+architecture page and capability checker under their existing public/neutral groups. The ledger is now
+79 migration files / 8 complete + 0 pending / 60 mutations; runtime behavior and
 earlier dated admission evidence below remain unchanged.
 
 ## Nested-write and receiver-mutation capabilities are portable

@@ -1,0 +1,240 @@
+{
+  "format": 1,
+  "owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.5",
+  "date": "2026-10-01",
+  "activation_commit": "9a07b6375b0053063c54e48023741f294436242c",
+  "scope": "Correct capability prose/governance and two cursor inventory registrations; canonical inventory-parent closeout. No runtime, descriptor, generated format, authority semantics or backend admission movement.",
+  "capability_delta": {
+    "id": "runtime.top_rule_and_parse_mode_controls",
+    "changed_fields": [
+      "contract",
+      "sources"
+    ],
+    "capabilities": 20,
+    "states": {
+      "pass": 100,
+      "partial": 0,
+      "gap": 0
+    },
+    "ids_backend_states_references": "unchanged"
+  },
+  "regression": {
+    "old_validator": "new mutation routine fails at historical_global_override_claim because old guard accepts it",
+    "new_checker_old_prose": "exact contract-authority error",
+    "semantic_mutations": 15,
+    "reason_assertion_control": "unrelated error rejected on every checker invocation",
+    "red_reconstruction": "Read activation tools/check_capability_conformance.pl prefix before main; derive root from current cwd and append current expect_entry_cursor_failure/entry_cursor_capability_mutation_checks routines plus original manifest/task/authority inputs. The historical mutation must fail as unexpectedly passed. Current tracked checker supplies the permanent GREEN routine."
+  },
+  "cursor_delta": {
+    "new_count": 79,
+    "old_count": 77,
+    "rollout_complete": 8,
+    "rollout_pending": 0,
+    "drift_mutations": 60,
+    "new_paths": [
+      "tools/check_capability_conformance.pl",
+      "docs/linkedspec-book/src/architecture/structured-format-program.md"
+    ],
+    "current_census_markers": 10,
+    "semantic_fixture_rollout_delta": "none",
+    "independent_new_registration_omissions": [
+      {
+        "omitted": "tools/check_capability_conformance.pl",
+        "exact_failure": "migration inventory drifted; missing=[]; unowned=['tools/check_capability_conformance.pl']"
+      },
+      {
+        "omitted": "docs/linkedspec-book/src/architecture/structured-format-program.md",
+        "exact_failure": "migration inventory drifted; missing=[]; unowned=['docs/linkedspec-book/src/architecture/structured-format-program.md']"
+      }
+    ]
+  },
+  "focused": {
+    "perl_suites": 4,
+    "perl_tests": 312,
+    "root": "7 complete / 0 pending / 54 mutations",
+    "language": "250 calls / 105+1 fixtures / 126 independently derived contracts; no omissions",
+    "generated": "v1 support checker passes; no emitted-format change",
+    "historical_objective_audit": {
+      "checkpoints": 24,
+      "source_references": 257,
+      "latest_inputs": 149,
+      "logs": 134
+    },
+    "book": {
+      "rendered_pages": [
+        {
+          "page": "architecture/structured-format-program.html",
+          "markers": [
+            "Fifteen reason-sensitive mutations bind",
+            "stable historical ID does not grant a global parse-mode override"
+          ]
+        },
+        {
+          "page": "public-api/get-and-get-parser.html",
+          "markers": [
+            "runtime.top_rule_and_parse_mode_controls",
+            "old identifier does not advertise an accepted global override"
+          ]
+        },
+        {
+          "page": "user-model/rule-modes-and-parse-modes.html",
+          "markers": [
+            "79 migration files, 8 complete / 0 pending"
+          ]
+        },
+        {
+          "page": "user-model/spec-files-and-rule-paragraphs.html",
+          "markers": [
+            "Cursor public no-drift is separately closed at 79 migration files"
+          ]
+        },
+        {
+          "page": "overview/project-status.html",
+          "markers": [
+            "79 migration files / 8 complete + 0 pending / 60 rejected mutations"
+          ]
+        },
+        {
+          "page": "appendix/backend-handoff.html",
+          "markers": [
+            "79 migration"
+          ]
+        }
+      ],
+      "assertions": 8
+    },
+    "knowledge": "1221 facts / 9636 question keys; synchronized",
+    "closed_markers": "8 families / 12 markers / 15 consumers / 4 mutations; sentinel topology unchanged",
+    "repeated_actions": "8 complete / 0 pending / 54 mutations; independent closed-marker dependent passes"
+  },
+  "commands": [
+    "env PERL5LIB= bash tools/project_data_run.sh perl tools/check_capability_conformance.pl",
+    "bash tools/run_python_project_data.sh tools/check_rule_local_cursor_contract.py",
+    "bash tools/run_python_project_data.sh tools/check_root_rule_selection_contract.py",
+    "env PERL5LIB= bash tools/project_data_run.sh perl tools/check_generated_source_contract.pl",
+    "env PERL5LIB= bash tools/project_data_run.sh perl tools/check_language_capability_coverage.pl --report",
+    "env PERL5LIB= bash tools/project_data_run.sh prove -Iperl t/root_rule_selection_perl_core.t t/root_rule_selection_perl_routes.t t/rule_local_cursor_perl_contract.t t/generated_source_contract.t",
+    "bash tools/run_python_project_data.sh tests/language-readiness/verify_objectives.py",
+    "bash tools/run_mdbook_local.sh",
+    "bash tools/run_python_project_data.sh tools/check_task_tree_closed_capability_markers.py",
+    "bash tools/run_python_project_data.sh tools/check_repeated_action_result_contract.py",
+    "bash scripts/check_task_tree_metadata.sh"
+  ],
+  "source_sha256": {
+    "tools/check_capability_conformance.pl": "cfe410b5588301b005a123028371c341c2caeda89ec1d030e86b92480f6c54fb",
+    "tools/check_rule_local_cursor_contract.py": "6a447b266b842f87d2006898aa0a20c115e27210e63e31499a66b0881113d29b",
+    "capability_conformance/manifest.json": "c132591047215448cc48fe65b89d927b6f851655941b0d6ef5c84495bf94b539",
+    "capability_conformance/root_rule_selection_contract.json": "4bc09c317301db51fffaf78cb6eb5d53d5cb85cb5ed144d6fb75076d8d7784d9",
+    "capability_conformance/rule_local_cursor_contract.json": "ebd41c46111ebebcb77cd8509bb41e6def0e74b3edfb990c1430773327426b66",
+    "capability_conformance/README.md": "0de7138f3120bd5c1b17ea3652b13f671a68aeed62f5712246f0ec79055db68e",
+    "docs/linkedspec-book/src/architecture/structured-format-program.md": "89a1a1503d0cf09828dd0dadfba7b6f7650f25fb92f1cdb7d70fa44229a7c2d7",
+    "docs/linkedspec-book/src/public-api/get-and-get-parser.md": "2a635657ca19e3602f1fff742564589468d1b3479ff5813aeed87295c0a58464",
+    "docs/linkedspec-book/src/user-model/rule-modes-and-parse-modes.md": "8fed7352d224f049cbf48c0416b6ac6c9d7df7c95c38395a48f7e2c6de7cb05b",
+    "docs/linkedspec-book/src/user-model/spec-files-and-rule-paragraphs.md": "936b8b94d55846356dcc0e181f12a3a0fd35fd4a6ee6591b5777d9cc81a66715",
+    "docs/linkedspec-book/src/overview/project-status.md": "e0305e0d71cf5604a021a209bd8dbbfe37235ab2e870599292d8130ff9c054e0",
+    "docs/linkedspec-book/src/appendix/backend-handoff.md": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2",
+    "docs/knowledge/entry-cursor-capability-description-repair.md": "bd8e14307d65245db7bb6f20f403741952a3a902316a2bdf0cb72a59fa31f99d",
+    "tools/check_task_tree_closed_capability_markers.py": "27f9ab18c7195593177506b35e7cfafa5331e35b43d13bb50ac619de2b426599",
+    "docs/knowledge/task-index-marker-anchor-hazard.md": "e6e135adc3c9d6d35b0308a7904794ae5b33521e2ed77193dc895779b9df39d8"
+  },
+  "retained_reports": {
+    ".linkedspec-data/scratch/selfcontain115/capability-before.log": {
+      "sha256": "6ba5a51e91a3bc49d627b0c4b2c56798b94b899f8755cdf97b9dfd3b4197171b",
+      "bytes": 336
+    },
+    ".linkedspec-data/scratch/selfcontain115/cursor-before.log": {
+      "sha256": "4083d1b8ff3892c58d056c56cbd0791ad785504922479a4e1efac5b580d57d8e",
+      "bytes": 953
+    },
+    ".linkedspec-data/scratch/selfcontain115/root-before.log": {
+      "sha256": "876b2f31e254845ad6c742c1eb5a0694cfdb4714b801136458ac699a9219e792",
+      "bytes": 187
+    },
+    ".linkedspec-data/scratch/selfcontain115/capability-stale-red.log": {
+      "sha256": "632f8433a3687a7e60b4bff244b2c697f52991a27114d3528cd13191a6a68e48",
+      "bytes": 143
+    },
+    ".linkedspec-data/scratch/selfcontain115/capability-old-mutants-red.log": {
+      "sha256": "793671ef8c37e4c31f097ff00afd0aeb4949405a4e53f0b9dc4f4c7efeccbd22",
+      "bytes": 108
+    },
+    ".linkedspec-data/scratch/selfcontain115/capability-green-final.log": {
+      "sha256": "ceee8017de9b28001b3616cab96564f946d163508d579b25cb372d8c7d3631e1",
+      "bytes": 363
+    },
+    ".linkedspec-data/scratch/selfcontain115/cursor-two-inputs-red.log": {
+      "sha256": "fe9a938049a9ab1443f2d07d7b54799499d9736dad12351922381c91b8e7081a",
+      "bytes": 994
+    },
+    ".linkedspec-data/scratch/selfcontain115/cursor-green.log": {
+      "sha256": "2520dffa76292a23668415dcfb4aa1b1363fd4f4b8623eb4823e8c62a789a786",
+      "bytes": 355
+    },
+    ".linkedspec-data/scratch/selfcontain115/root-green.log": {
+      "sha256": "876b2f31e254845ad6c742c1eb5a0694cfdb4714b801136458ac699a9219e792",
+      "bytes": 187
+    },
+    ".linkedspec-data/scratch/selfcontain115/generated.log": {
+      "sha256": "a0e95bdc96d2bf9fccb448095edffa0045ca8a57747d1a61ce644dd1da06b0af",
+      "bytes": 132
+    },
+    ".linkedspec-data/scratch/selfcontain115/language.log": {
+      "sha256": "d55efe19068d9c2ea9533bb26dbe0469e46e2041881ddd035b547fd3997f44aa",
+      "bytes": 501
+    },
+    ".linkedspec-data/scratch/selfcontain115/focused-perl.log": {
+      "sha256": "1a63c2030b1ac2ea70c508d4a9caed09dd0e9c8a723db5367eade0e403276ed2",
+      "bytes": 302
+    },
+    ".linkedspec-data/scratch/selfcontain115/cursor-inventory-controls.json": {
+      "sha256": "ce946e378396daf6f2b0dd1a7fc1fbb5446b7c714c1f6239f308c7015e9e4759",
+      "bytes": 535
+    },
+    ".linkedspec-data/scratch/selfcontain115/reason-control.log": {
+      "sha256": "1d1c225b20db673de0d0e456f2617d071384cfd4844acc5aa78c097454a4c0aa",
+      "bytes": 39
+    },
+    ".linkedspec-data/scratch/selfcontain115/syntax.log": {
+      "sha256": "f3a5de590fa1a3889e28ad7125d0336847fb434149971a40ce580bdedcdf3a95",
+      "bytes": 48
+    },
+    ".linkedspec-data/scratch/selfcontain115/objectives.json": {
+      "sha256": "a5d10841f46547fb648375405cc7698ea252a0f4da7c278c9971efe42f560b96",
+      "bytes": 53593
+    },
+    ".linkedspec-data/scratch/selfcontain115/book-final.log": {
+      "sha256": "e12e9ce57a5b786ef155ddf6bc3713fc66ff58650657373b2d56eaa5509eb3c4",
+      "bytes": 274
+    },
+    ".linkedspec-data/scratch/selfcontain115/book-proof.json": {
+      "sha256": "80b36836380c1a37a6f55c5eec9e4fc25bec368ca4e77d4a5c1734af0fd07653",
+      "bytes": 1098
+    },
+    ".linkedspec-data/scratch/selfcontain115/capability-final.log": {
+      "sha256": "ceee8017de9b28001b3616cab96564f946d163508d579b25cb372d8c7d3631e1",
+      "bytes": 363
+    },
+    ".linkedspec-data/scratch/selfcontain115/cursor-final.log": {
+      "sha256": "2520dffa76292a23668415dcfb4aa1b1363fd4f4b8623eb4823e8c62a789a786",
+      "bytes": 355
+    },
+    ".linkedspec-data/scratch/selfcontain115/closed-markers.log": {
+      "sha256": "46155fbecabf2e51e1c5acfbf9f928e5b2c4858a298838124ae8411493c82e3e",
+      "bytes": 97
+    },
+    ".linkedspec-data/scratch/selfcontain115/repeated-action.log": {
+      "sha256": "13087c55e0d8f9bfee92508cfda4e906e69ec9bf2277b2eef597d498efbf5821",
+      "bytes": 115
+    },
+    ".linkedspec-data/scratch/selfcontain115/task-metadata.log": {
+      "sha256": "3a6fd95bdb6c5cc3d55ac05fa1473809c49f70c0d3399f06819fa48dd2b473c7",
+      "bytes": 841
+    },
+    ".linkedspec-data/scratch/selfcontain115/doctrines.log": {
+      "sha256": "2568bb2a4027958ba1a57b9f50c3b32c918d83e157f4ddc298362165c7e9b8f4",
+      "bytes": 5353
+    }
+  },
+  "canonical": "Stage the complete candidate then run bash tools/run_ci_local.sh. Exact receipt and actual outcome are recorded in the commit body; this checkpoint does not claim optional unfiltered backend or six-runtime matrices ran.",
+  "failed_doctrine_run": "Initial doctrine run rejects old77 stable marker mirror; corrected literal passes direct marker/task checks. Failed run is not signoff; exact staged canonical reruns all doctrines."
+}

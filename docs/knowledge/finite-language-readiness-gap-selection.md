@@ -26,7 +26,9 @@ remain forbidden by ADR0064; this is not a sandbox-security claim. Recognition-o
 rollback does not undo arbitrary user-state writes. Named fixed-parameter arguments
 are an independently approved, parked direction, not a selected readiness dependency.
 
-After stale capability prose/guard repair `.1.1.5`, `.1.2` defines closure, failure,
+Stale capability prose/guard repair `.1.1.5` is now recorded in
+[[entry-cursor-capability-description-repair]]. Next `.1.2.1` designs the matrix;
+`.1.2` defines closure, failure,
 scoping and resource boundaries; `.1.3` selects neutral composed objectives and
 mutations, including still-unassessed diagnostics/control/transformation needs.
 `.1.4` creates implementation leaves only for demonstrated reusable semantic gaps.

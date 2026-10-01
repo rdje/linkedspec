@@ -61,3 +61,8 @@ first two failed gates grant no receipts; no guard is removed or weakened.
 September24 scanner parent `.86.3` registers one mode-aware Dart grammar test,
 advancing the current census from76 to77. The stable marker and checker mirror
 move together; all8 families/12 markers/15 consumers/4 mutations remain exact.
+
+October1 self-containment `.1.1.5` registers the architecture page and capability
+checker, advancing77 to79. Its first doctrine run catches the missed stable-marker
+verifier mirror; the same one-literal correction preserves all anchor semantics.
+Direct marker/omission proof and exact staged canonical acceptance govern landing.

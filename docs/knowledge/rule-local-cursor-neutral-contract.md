@@ -45,6 +45,15 @@ evidence_update_2026_07_29_readme_routing: "README-STABILITY-POLICY.1 routes vol
 reverify: "bash tools/run_python_project_data.sh tools/check_rule_local_cursor_contract.py; perl tools/check_capability_conformance.pl; perl tools/check_generated_source_contract.pl"
 ---
 
+## Current inventory update — October1
+
+Self-containment `.1.1.5` registers the reviewed architecture page and capability
+checker after their new removed-option prose/stable identity matches the token census.
+The current ledger is 79 migration files / 8 complete + 0 pending / 60 mutations.
+Only two paths, the count and its current mirrors change; semantic fixtures,
+rollout, recurring consumers and earlier dated measurements remain exact.
+
+
 ## Current inventory update — September24
 
 Scanner parent `SESSION-STARTUP-READING.86.3` registers the new

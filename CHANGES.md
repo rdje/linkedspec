@@ -12,6 +12,17 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-10-01 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.5: entry/cursor census repair
+
+Retain the stable capability ID and all states/references; correct prose and cite root/cursor authorities.
+The capability checker binds selected identities/precedence/policies, rejects fifteen reason-sensitive mutations,
+and falsifies an unrelated-error substitution. Old-validator/historical-prose RED and new-checker GREEN distinguish
+the defect. Register the architecture page missed by .1.1.4 and the new checker in the existing cursor groups;
+current mirrors advance77->79 while semantic fixtures/rollout and dated counts stay exact. Update public teaching,
+Knowledge and continuity; split closure definition into four bounded leaves. Focused root/cursor/generated/language,
+Perl312, inventory omissions, original objective audit and book pass. Exact staged canonical CI governs finite
+inventory-parent closeout, with actual result retained in the commit body. Broader startup .41.2 stays open.
+
 ## 2026-10-01 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.4: finite gap classification
 
 Classify the nine-area inventories and three bounded probes in `docs/language-readiness/finite-gap-list.md`.
