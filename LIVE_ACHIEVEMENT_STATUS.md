@@ -6,13 +6,15 @@ Ordinary .spec language readiness under SPEC-LANGUAGE-SELF-CONTAINMENT.1.1. The 
 
 ## Latest Completed Slice
 
-- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.5 - reconcile bounded lossless child readiness` — reconcile31 pairs across six runtimes, explicit authored costs and all existing defect owners. Seven checkpoints/180 references/132 paths/47 logs and independent13-case/39-segment slicing agree; exact staged canonical receipt governs landing.
+- `REPO-HYGIENE.6 - record artifact review and exit handoff` — due census retains verification evidence/caches with zero deletions. Lossless milestone2aeed31ff is committed with exact canonical acceptance: Phase0 1033/1033 and CLI66/66 twice. Director requested /exit; the next feature slice remains unstarted.
 
 ## Next Action
 
-- Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.4: consolidate all three bounded objectives before .1.1.4 gap selection, keeping unassessed language breadth and separate defects explicit.
+- On resume, activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.4: consolidate all three bounded objectives before .1.1.4 gap selection, keeping unassessed language breadth and separate defects explicit.
 
 ## Recent Completions
+
+- `2026-10-01` — `REPO-HYGIENE.6` records the due artifact review and requested exit handoff with zero deletions.
 
 - `2026-09-28` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.5` reconciles bounded lossless/actual-child evidence under canonical acceptance.
 
@@ -43,8 +45,6 @@ Ordinary .spec language readiness under SPEC-LANGUAGE-SELF-CONTAINMENT.1.1. The 
 - `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.2` verifies all-six native context-name parity and original-default compatibility.
 
 - `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.1` verifies Perl context-name matching, scoped restoration and typed rejection recovery.
-
-- `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.3` reconciles bounded nesting routes, authoring costs and canonical parent closure.
 
 ## History
 

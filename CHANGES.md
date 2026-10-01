@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-10-01 — REPO-HYGIENE.6: artifact review and requested exit handoff
+
+Finish the staged lossless milestone as 2aeed31ff with its exact canonical receipt: Phase 0 passes 1,033/1,033 in 1,024 seconds and both primary CLI runs pass 66/66. The due artifact census retains all 4,092 parent-checkout candidates and 483 Rust incremental bin files; zero exact deletion targets were proved disposable. Overwrite the latest cleanup record, clarify book evidence retention, and leave .1.1.3.4 unstarted in the bounded resume pointer. Other repositories, reusable caches and managed runs remain excluded. Focused book/memory/history/Knowledge/diff proof and mandatory commit hooks verify this maintenance record.
+
 ## 2026-09-28 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.5: bounded lossless/child reconciliation
 
 Reconcile six runtimes and31 matched carrier pairs with exact retained/per-call boundaries, original13 cases/39 segments, child4/15 and seven mutants. Audit seven historical checkpoints,180 source references/132 unique paths and47 logs; only book evolution differs from the producing revisions. Corrupted checkpoint/source/log controls reject. Record explicit prefix/lifecycle/child-guard/registry costs without selecting a new primitive or closing separate defects. Book, Knowledge, roadmaps and frontier agree. Exact staged canonical acceptance is required for parent closure; its receipt and commit body preserve the result.

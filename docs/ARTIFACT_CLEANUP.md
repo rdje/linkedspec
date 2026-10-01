@@ -1,3 +1,3 @@
 # Latest artifact cleanup
 
-2026-09-27T20:56:17+00:00 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.2: removed only its completed 240559132-byte bootstrap debug trace; retained generated handler, digest and bounded reproduction. No cache or other run data removed.
+2026-10-01T15:01:05+00:00 — REPO-HYGIENE.6: zero files removed after the due parent-checkout/Rust log-bin census; retained proof logs, generated outputs and caches, excluded other repositories and managed runs. Exact scope/counts: docs/checkpoints/REPO-HYGIENE.6-artifact-review.json.

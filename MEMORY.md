@@ -1,10 +1,10 @@
 # MEMORY
 
-- activation_commit: `f10c0ce96666f4adf867f329cdf75dd793c003b2` — clean activation base for canonical lossless reconciliation.
-- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.5 - reconcile bounded lossless child readiness`.
+- activation_commit: `2aeed31ff571025cff1040593015683400caa7c0` — clean activation base for artifact review and exit handoff.
+- latest_completed_leaf: `REPO-HYGIENE.6 - record artifact review and exit handoff`.
 - active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.4` (pending) — three-objective reconciliation.
-- next_action: Reconcile bounded nesting, context-name and lossless outcomes under .1.1.3.4, retaining costs and open defects before .1.1.4 gap selection.
-- in_flight_uncommitted: none; .3.5 landing is receipt-bound to exact staged canonical acceptance.
+- next_action: On resume, activate .1.1.3.4 and reconcile nesting, context-name and lossless outcomes, retaining costs and open defects before .1.1.4 gap selection.
+- in_flight_uncommitted: none; director requested exit handoff. Milestone2aeed31ff passed canonical CI (Phase0 1033/1033; CLI66/66 twice); due artifact review is complete.
 - blockers: bounded nesting/context/lossless proof reconciled; three-objective reconciliation and core-gap selection remain; .1.1.5 owns stale capability prose and startup .38/.40 recognition defects remain queued. ARCHOGEN owns downstream acceptance; named-argument and format proposals stay parked.
   Wrapper startup .7 remains open; recovery/purge stay prohibited. No interrupted Phase0 run counts as proof.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the

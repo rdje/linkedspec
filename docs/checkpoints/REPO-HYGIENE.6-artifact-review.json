@@ -1,0 +1,124 @@
+{
+  "owner": "REPO-HYGIENE.6",
+  "at_utc": "2026-10-01T15:01:05.123507+00:00",
+  "scope": "parent-checkout stray artifacts and three explicit Rust log/bin locations; no other repository implementation inspected",
+  "excluded_paths": [
+    ".agents",
+    ".claude",
+    ".codex",
+    ".git",
+    ".linkedspec-data/cache",
+    ".linkedspec-data/scratch/runs",
+    "dart/.dart_tool",
+    "docs/linkedspec-book/book",
+    "rgx",
+    "rust/target"
+  ],
+  "nested_repositories_excluded": [
+    ".linkedspec-data/scratch/backend-integration11/consumer",
+    ".linkedspec-data/scratch/backend-integration22/clean-consumer/vendor/linkedspec",
+    ".linkedspec-data/scratch/backend-integration31/consumer",
+    ".linkedspec-data/scratch/backend-integration32/consumer",
+    ".linkedspec-data/scratch/backend-integration41/consumer",
+    ".linkedspec-data/scratch/backend-integration42/consumer",
+    ".linkedspec-data/scratch/backend-integration51/consumer",
+    ".linkedspec-data/scratch/backend-integration82/consumer",
+    ".linkedspec-data/scratch/ls004-adoption26/retained-rgx"
+  ],
+  "artifact_files": 4092,
+  "artifact_bytes": 8548757149,
+  "by_suffix": {
+    ".DS_Store": {
+      "files": 3,
+      "bytes": 22540
+    },
+    ".log": {
+      "files": 3040,
+      "bytes": 2662761336
+    },
+    ".bin": {
+      "files": 1049,
+      "bytes": 5885973273
+    }
+  },
+  "rust_log_bin": {
+    "rust/target/release": {
+      "exists": false,
+      "files": 0,
+      "bytes": 0
+    },
+    "rust/target/debug/incremental": {
+      "exists": true,
+      "files": 483,
+      "bytes": 2386016452
+    },
+    "rust/target/debug/deps": {
+      "exists": true,
+      "files": 0,
+      "bytes": 0
+    }
+  },
+  "largest_retained": [
+    {
+      "path": ".linkedspec-data/scratch/ls004-recheck26/current-success.log",
+      "bytes": 784063690
+    },
+    {
+      "path": ".linkedspec-data/scratch/backend-integration22/clean-bootstrap.log",
+      "bytes": 347147553
+    },
+    {
+      "path": ".linkedspec-data/scratch/backend-integration83/public-interface/bootstrap.log",
+      "bytes": 347144927
+    },
+    {
+      "path": ".linkedspec-data/scratch/backend-integration83/public-interface/consumer/.app-data/target/debug/incremental/pgen-26it5jz42dm1x/s-hmh3ze4qn5-02ymu5g-e9qf11c319gjmqk1lt70uuw50/query-cache.bin",
+      "bytes": 107599466
+    },
+    {
+      "path": ".linkedspec-data/scratch/backend-integration22/clean-consumer/.app-data/target/debug/incremental/pgen-179qkzf3b7t1b/s-hm9lbq00vl-13smqhn-5n8gsbagzy7a3oe8shtoh57rf/query-cache.bin",
+      "bytes": 107593207
+    },
+    {
+      "path": ".linkedspec-data/scratch/backend-integration83/public-interface/consumer/.app-data/target/debug/incremental/pgen-179qkzf3b7t1b/s-hmh3ymgqlr-0avntiu-44lcnehilceh3vl2mtfu4e98g/query-cache.bin",
+      "bytes": 107593196
+    },
+    {
+      "path": ".linkedspec-data/scratch/backend-integration22/unlocked-consumer/.app-data/target/debug/incremental/pgen-35bg9v2n0keoi/s-hm9mvjvr26-1yjq8wg-aem3hfpxka3z0xteyhhyxfmoa/query-cache.bin",
+      "bytes": 107582418
+    },
+    {
+      "path": ".linkedspec-data/scratch/ls004-adoption26/pre-adoption-rust-target/debug/incremental/pgen-3ld9dqr473dg0/s-hmlmzvzig0-02mague-1k4mbb1yivl4tvfzvpozsgbp0/query-cache.bin",
+      "bytes": 105577337
+    },
+    {
+      "path": ".linkedspec-data/scratch/ls004-adoption26/pre-adoption-rust-target/debug/incremental/pgen-3ld9dqr473dg0/s-hmlmf7yeww-0a8er56-1k4mbb1yivl4tvfzvpozsgbp0/query-cache.bin",
+      "bytes": 105577328
+    },
+    {
+      "path": ".linkedspec-data/scratch/backend-integration22/clean-consumer/.app-data/target/debug/incremental/pgen-179qkzf3b7t1b/s-hm9lgu64rw-0ouu4zy-5n8gsbagzy7a3oe8shtoh57rf/query-cache.bin",
+      "bytes": 105562735
+    },
+    {
+      "path": ".linkedspec-data/scratch/ls004-adoption26/pre-adoption-rust-target/debug/incremental/pgen-0kg24c4d2tj53/s-hlqa02m4s7-0jly8pk-8lvv73dr5m3p18pbkeboetoh5/query-cache.bin",
+      "bytes": 105553835
+    },
+    {
+      "path": ".linkedspec-data/scratch/ls004-adoption26/pre-adoption-rust-target/debug/incremental/pgen-0kg24c4d2tj53/s-hlq9vaqf15-1rzbjmi-8lvv73dr5m3p18pbkeboetoh5/query-cache.bin",
+      "bytes": 105553825
+    }
+  ],
+  "removed_files": 0,
+  "removed_bytes": 0,
+  "disposition": "No exact deletion target approved: retained verification logs, generated outputs and reusable caches; wrapper recover/purge remains prohibited under startup .7.",
+  "milestone_commit": "2aeed31ff571025cff1040593015683400caa7c0",
+  "verification": {
+    "book_render": "PASS",
+    "book_source_sha256": "97dfae7413a2374e2bb23008bb1b7b4443b44dafdbbcd9dadb5a53e364601dbf",
+    "book_log": ".linkedspec-data/scratch/handoff-mdbook-20261001.log",
+    "book_log_sha256": "972e3ebdb18041b81c705f8931143dbca0f4c4691844c84eb720744cced91f79",
+    "permitted_managed_census": "found=0 removed=0 skipped=0 before book build",
+    "prior_required_jobs": "No LinkedSpec CI/test process found by permitted process inspection; the current maintenance commands are awaited separately.",
+    "commit_checks": "Required focused memory/history/Knowledge/diff checks and mandatory nine-doctrine hook before landing."
+  }
+}

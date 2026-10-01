@@ -12,6 +12,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-10-01 — Exit handoff preserves exact proof and the unstarted frontier
+
+Canonical signoff for the lossless reconciliation is preserved in milestone 2aeed31ff and its commit body, including the candidate and log hashes. The due artifact review records measured scope and exclusions without treating age or size as permission to delete evidence. Read-only permitted process inspection and the managed-run census found no earlier LinkedSpec job or managed run; recovery/purge remains prohibited under startup .7. REPO-HYGIENE.6 changes documentation and the latest cleanup record only. The director requested an exit handoff, so the next feature leaf .1.1.3.4 remains unstarted and can be activated from committed state alone.
+
 ## 2026-09-28 — Lossless composition proof distinguishes carrier count from language breadth
 
 Thirty-one matched pairs across six runtimes exercise one bounded authored objective. Perl retains four parent/child pairs; Rust/Dart four each; Julia/PUC/LuaJIT two each. Other routes rebuild per call. Independent segment slicing, exact classification and recognition/provenance mutants prevent reconstruction alone from overstating validity. The compiled registry and span projection are host integration authority, while recognition and semantic AST construction remain in .spec. No new primitive is selected, but prefix preservation, lifecycle choice and strict child guards remain explicit. Historical source/blob verification allows only documented book evolution; no executable drift is waived. Existing resource/stitch/provenance debts remain separate from this canonical milestone.
