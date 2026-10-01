@@ -6,7 +6,7 @@
 - Status: `active` / bounded language objective proof
 - Roadmap lane: `.spec language evolution / expressive self-containment and alternate authoring profiles`
 - Created: `2026-07-30`
-- Last updated: `2026-09-28`
+- Last updated: `2026-10-01`
 - Owner: repo-local workflow
 
 ## Goal
@@ -137,7 +137,8 @@ used by ordinary `.spec` syntax on every backend.
   Acceptance: Each of these five dimensions has current canonical owners, five-backend evidence boundaries, source-located limitations and an executable follow-up where objective composition remains unassessed.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3`
-  Status: `active`
+  Status: `done`
+  Closure: Three historical bounded objectives reconciled by .1.1.3.4; exact staged canonical receipt governs this parent closeout. General language/format readiness remains open.
   Goal: Execute bounded representative grammar objectives against the inventory before selecting new primitives.
   Dependencies: `.1.1.2`
   Children: `.1.1.3.1`, `.1.1.3.2`, `.1.1.3.3`, `.1.1.3.4`
@@ -803,10 +804,28 @@ used by ordinary `.spec` syntax on every backend.
 - [x] **LOCKSTEP** — Ledger, book, current Knowledge statuses/new fact, checkpoint/audit producer, task/frontier, roadmaps, MEMORY and bounded live/history agree. Three-objective .1.1.3.4 follows before finite gap selection; standard formats, alternate syntax and general resource safety remain gated.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.4`
-  Status: `pending`
+  Status: `done`
   Goal: Reconcile the three bounded objective results and authoring costs for gap selection under `.1.1.4`.
   Dependencies: `.1.1.3.1`, `.1.1.3.2`, `.1.1.3.3`
+  Activation: Clean 7c8a240be8f444e314ad415fa9e963045fdd91ec; artifact review is current, brief empty and no uncommitted input. Supplied policy hashes match the existing September11 comparison; startup .5/.29 still own adoption.
+  Verification tier: `canonical`
+  Focused checks: Historical checkpoint/source/log audit for all three objectives, independent authored-oracle spans and corpus enumeration, corrupted evidence controls, exact book table/source assertions and rendering; Knowledge/memory/history/doctrines and diff hygiene.
+  Canonical trigger: Close representative-objective parent .1.1.3 after exact staged tools/run_ci_local.sh acceptance. No new objective or whole-format admission.
   Acceptance: Preserve exact runtime/carrier coverage, limitations, mutations and repair owners; require fresh proof before promoting any objective and keep whole-format campaign readiness pending.
+  Scope: Current evidence integrity over historical six-runtime executions; no new objective promotion, runtime, fixture, public API or capability movement. Close only representative parent .1.1.3 through the mandatory exact staged receipt.
+  Verification: Tracked audit PASS24 producing checkpoints/257 historical source references/149 latest inputs/134 retained logs. Independent corpus enumeration and scalar slicing verify nesting6/7, context11/17, segment13/39 and child4/15; four corrupted inputs, two outside paths and summary recovery inflation reject. Latest executable evidence is exact; only current book evolution differs. Exact rendered source/table review and standard gates pass before canonical CI; actual canonical result is retained in the commit body.
+  Authoring assessment: Existing primitives compose all three bounded objectives; no missing primitive selected. Explicit strictness/prefix guards, AST/span constructors, limited diagnostics, loop/LX selection and frozen caller authority remain costs. Indentation, richer errors, resource safety, performance and whole standards remain unassessed. Existing startup/backend defects retain their original scheduled owners.
+  Evidence: docs/language-readiness/objective-reconciliation.md; docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.4-verification.json; tests/language-readiness/verify_objectives.py.
+  Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.4 - reconcile three bounded language objectives`.
+
+### `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.4` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Existing three milestones have separate source-located proof; current rows still schedule reconciliation before gap selection. The tracked audit command freshly enumerates their checkpoint/source/log evidence without executing a new runtime objective.
+- [x] **ROOT CAUSE (WHY + WHERE)** — WHY: chronological objective ledgers lack a combined comparison of strict recognition, lossless extraction and authoring costs. WHERE: current task/roadmap/book summaries. Earlier public LinkedSpec::Get/parse_spec/compile_spec/runtime carrier mechanisms remain owned by their producing checkpoints.
+- [x] **FIX** — Add one comparison and read-only audit, preserve exact carrier/recovery/mutation limits and original repair ownership, synchronize current book/roadmap/Knowledge/frontier, select finite gap review next.
+- [x] **ADDRESSED (verified)** — PASS24 checkpoint blobs/257 historical source references/149 latest inputs/134 logs; independent scalar slicing and source-exact oracles. Deliberately corrupted checkpoint/source/log/oracle inputs and inflated summary recoveries reject; current book change is identified separately.
+- [x] **NO REGRESSION** — Original runtime and fixture bytes stay exact. Book rendering and git diff --check pass; exact staged bash tools/run_ci_local.sh receipt is required before parent closure lands. Historical six-runtime proof is not relabeled as fresh execution or optional complete backend gates.
+- [x] **LOCKSTEP** — Comparison, book, Knowledge card, checkpoint, task/index, roadmaps, bounded live/history and MEMORY agree. .1.1.4 follows; .1.1.5 and startup .5/.29 retain documentation/policy repair obligations. No standard format or alternate syntax is admitted.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.4`
   Status: `pending`
@@ -1015,7 +1034,8 @@ used by ordinary `.spec` syntax on every backend.
 | 14 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.3` | `done` | Bounded nesting evidence/authoring limits reconciled; exact canonical receipt governs closeout. |
 | 15 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.1` | `done` | Perl native/fresh emitted context-name proof:11/17 cases,90 calls and34 recoveries per route. |
 | 16 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.2` | `done` | Context11/17/22 and original-default6/7/12 pass all six native routes. |
-| 17 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.4` | `pending` | Reconcile all three bounded objective outcomes before gap selection. |
+| 17 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.4` | `done` | Exact historical evidence and authoring-cost comparison close the bounded parent through canonical acceptance. |
+| 18 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.4` | `pending` | Classify the finite inventory and three objectives into owned gaps, costs, defects and unassessed requirements. |
 
 ## Decisions
 
@@ -1048,6 +1068,8 @@ used by ordinary `.spec` syntax on every backend.
 - None for `.1.1`. The September27 clean prioritization supersedes the earlier callable-first schedule. Format implementation and the optional frontend remain gated by their own prerequisites.
 
 ## Verification Log
+
+October1 `.1.1.3.4`: Three-objective audit verifies24 producing checkpoints/257 source references/149 latest inputs/134 logs; original scalar oracles and current table match. Four corrupt inputs/two outside paths/inflated recovery row reject. Current book evolution remains separate from executable identity. Exact staged canonical receipt governs bounded parent closure; actual result belongs to the commit body.
 
 September28 `.1.1.3.3.5`: Reconcile seven checkpoint blobs/180 source references/132 paths/47 logs, exact historical book supersessions, independent13/39 reconstruction and corruption/path controls. Public matrix and full source includes render. Exact staged canonical receipt governs parent closure; actual result is recorded in the commit body.
 
@@ -1089,6 +1111,8 @@ September27 `.1.1.1`: seven neutral/structural checks, 34 ledger source-path/con
 
 ## Commit Log
 
+- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.4 - reconcile three bounded language objectives` — canonical representative-parent closeout; no new runtime/format admission.
+
 - `.1.1.3.3.5`: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.5 - reconcile bounded lossless child readiness`.
 
 - `.1.1.3.3.4.4`: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.4 - verify dual-ABI Lua lossless child carriers`.
@@ -1110,6 +1134,8 @@ September27 `.1.1.1`: seven neutral/structural checks, 34 ledger source-path/con
 | `.0` | `SPEC-LANGUAGE-SELF-CONTAINMENT.0 - ratify expressive spec self-containment` | Direction capture only; no parser/runtime behavior. |
 
 ## Changelog
+
+- `2026-10-01`: Reconcile three bounded objectives and authoring costs; exact historical evidence audit and canonical acceptance precede finite gap selection `.1.1.4`.
 
 - `2026-09-28`: Reconcile bounded lossless/actual-child proof under exact canonical acceptance; three-objective .1.1.3.4 follows.
 

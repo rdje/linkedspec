@@ -39,9 +39,9 @@ For example, a grammar that tentatively builds an AST must separate recognition 
 establish a different, explicitly accepted mechanism. Merely adding alternate syntax would not solve that requirement.
 
 The owning task is `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1`; its first inventory records existing contracts and exact
-backend consumers. The state/control/result inventory is also recorded. Bounded nesting is reconciled; context-name carrier proof
-is described below. Perl, Rust, Dart, Julia and both Lua ABIs verify the bounded lossless segmentation and public staged child
-composition below. The bounded evidence is reconciled under a canonical milestone before gap selection.
+backend consumers. The state/control/result inventory is also recorded. Bounded nesting, context-name matching and
+lossless actual-child composition are reconciled across Perl, Rust, Dart, Julia and both Lua ABIs. The comparison
+below preserves each objective's authoring costs and limits before the finite gap list selects further work.
 The format program's `.1` readiness gate remains pending. The original catalog and parked language extension retain
 all their conformance, Unicode, diagnostics, performance and backend obligations.
 
@@ -73,6 +73,41 @@ strings; value equality alone can hide an incorrect result kind.
 
 Named user-function arguments remain an approved, parked direction. Recording this limitation does not make
 that syntax current or prove it is the next feature the format campaign needs.
+
+### What the three probes establish together
+
+The ordinary language composes all three finite objectives with the existing primitives. Nesting and context-name
+matching require strict document acceptance; lossless extraction preserves malformed candidates as gaps. Their
+successes answer different questions and cannot be combined into a whole-format conformance claim.
+
+| Probe | Independently authored inputs | Proven composition | Remaining authoring work |
+| --- | --- | --- | --- |
+| Nesting | 6 accepted / 7 rejected | Advancing recursion, restored parent state, exact typed trees and Unicode spans | Explicit prefix/gap/end/missing-close guards and AST/span constructors; one rejection status |
+| Context names | 11 accepted / 17 rejected | Opening capture, lexical comparison, recursive state restoration and three typed statuses | The same strictness guards; messages, failure spans and in-document repair need further proof |
+| Lossless / actual child | 13 segment cases / 39 segments; child 4 accepted / 15 rejected | Exact item/gap classification and reconstruction; source-bound staged requests to a real compiled child | Skipped-prefix retention, correct loop/LX lifecycle, strict child entry/end guards and caller-prepared registry/provenance |
+
+Carrier routes repeat these inputs. Retained parsers demonstrate immediate success after typed rejection; entries
+that create an engine per call demonstrate isolation. Neither establishes repair inside a failed document.
+The detailed route and mutation tables below preserve those distinctions. Actual child recognition lives in the
+child `.spec`; the caller supplies frozen compiled authority and projects its span. The public staged operand
+exclusions and private `dispatch_span` boundary remain unchanged.
+
+No missing primitive is selected by these successes. Explicit guard work and limited diagnostics are concrete
+costs for the next requirement review. Indentation, quoted/escaped text, realistic complete standards, resource
+safety, performance and speculative AST/user-state rollback remain unassessed by these probes. Known engine,
+provenance, accounting, result and documentation defects retain their repair owners. The format campaign and
+optional alternate frontend remain gated until their own requirements are met.
+
+To verify the committed evidence without rerunning every runtime, use:
+
+```sh
+bash tools/run_python_project_data.sh tests/language-readiness/verify_objectives.py
+```
+
+This audit checks historical checkpoint/source/log identities and independently slices the original authored
+oracles. It rejects executable drift and controlled corrupted evidence. Its output describes historical runtime
+proof, with current evidence integrity; it does not claim a fresh six-runtime execution. The commands below
+rerun the individual runtime proofs when their inputs change.
 
 
 ### Bounded nesting trial
@@ -129,8 +164,8 @@ changes its span to `[9,9]` for `(a (β) c)`, which the original `[0,9]` oracle 
 This grammar reports typed rejection but does not explain a missing close versus stray text with distinct
 messages. Starting another parse after rejection is also different from recovering inside the same document.
 Neither this trial nor its line count establishes arbitrary-depth safety, performance, speculative AST rollback,
-or format conformance. No new primitive was needed for this bounded objective; the next probes concern scoped
-context-dependent matching and lossless child parsing before choosing general language improvements.
+or format conformance. No new primitive was needed for this bounded objective; the completed context-dependent
+and lossless probes below supply the other bounded evidence for general language-gap selection.
 
 To repeat a prepared runtime's public-loader check, run from the repository root:
 
@@ -343,7 +378,7 @@ This bounded objective demonstrates composition of captures, lexical comparison 
 six runtimes. The 37-line grammar still needs explicit prefix/gap/final-cursor/missing-close guards. Its three
 statuses distinguish causes, while expected-name messages, precise error spans and in-document repair remain
 unassessed. No new comparison or state primitive is selected from this result. Lossless segmentation and
-bounded child parsing are the next readiness objective before broader language-gap selection. The format
+bounded child parsing below supply the remaining bounded objective before broader language-gap selection. The format
 campaign, indentation handling, arbitrary-depth/resource safety and speculative rollback remain outside this proof.
 
 

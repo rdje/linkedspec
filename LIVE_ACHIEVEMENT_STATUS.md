@@ -6,13 +6,15 @@ Ordinary .spec language readiness under SPEC-LANGUAGE-SELF-CONTAINMENT.1.1. The 
 
 ## Latest Completed Slice
 
-- `REPO-HYGIENE.6 - record artifact review and exit handoff` — due census retains verification evidence/caches with zero deletions. Lossless milestone2aeed31ff is committed with exact canonical acceptance: Phase0 1033/1033 and CLI66/66 twice. Director requested /exit; the next feature slice remains unstarted.
+- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.4 - reconcile three bounded language objectives` — exact historical evidence and independent scalar oracles preserve strict recognition versus lossless extraction, retained recovery versus per-call isolation, authoring costs and open repair owners. The exact staged canonical receipt governs representative-parent closeout; no new runtime or format admission.
 
 ## Next Action
 
-- On resume, activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.4: consolidate all three bounded objectives before .1.1.4 gap selection, keeping unassessed language breadth and separate defects explicit.
+- Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.4: classify the nine-area inventory and three bounded objectives into owned gaps, costs, defects and unassessed requirements before .1.1.5 capability-prose repair.
 
 ## Recent Completions
+
+- `2026-10-01` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.4` reconciles three bounded objectives under exact canonical acceptance.
 
 - `2026-10-01` — `REPO-HYGIENE.6` records the due artifact review and requested exit handoff with zero deletions.
 
@@ -43,8 +45,6 @@ Ordinary .spec language readiness under SPEC-LANGUAGE-SELF-CONTAINMENT.1.1. The 
 - `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.3` verifies six Rust context-name carriers and repairs parallel test allocation.
 
 - `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.2` verifies all-six native context-name parity and original-default compatibility.
-
-- `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.1` verifies Perl context-name matching, scoped restoration and typed rejection recovery.
 
 ## History
 

@@ -12,6 +12,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-10-01 — Three successful objectives leave costs and broader requirements explicit
+
+Existing primitives compose finite nesting, opening/closing-name comparison and lossless actual-child extraction. The first two validate their bounded document language; the third preserves malformed text as gaps. Route counts reuse original corpora, and per-call entries cannot inflate retained-parser recovery. The consolidated instrument binds historical producing blobs, latest executable evidence and original scalar slices, records documentation evolution separately and falsifies corrupted records/counts. This is fresh evidence integrity over historical runtime execution. Explicit guard work, limited diagnostics and caller-frozen authority guide the next finite gap review without implying general completeness. All three supplied-policy hashes still match September11; startup .5/.29 retain adoption ownership.
+
 ## 2026-10-01 — Exit handoff preserves exact proof and the unstarted frontier
 
 Canonical signoff for the lossless reconciliation is preserved in milestone 2aeed31ff and its commit body, including the candidate and log hashes. The due artifact review records measured scope and exclusions without treating age or size as permission to delete evidence. Read-only permitted process inspection and the managed-run census found no earlier LinkedSpec job or managed run; recovery/purge remains prohibited under startup .7. REPO-HYGIENE.6 changes documentation and the latest cleanup record only. The director requested an exit handoff, so the next feature leaf .1.1.3.4 remains unstarted and can be activated from committed state alone.

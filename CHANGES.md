@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-10-01 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.4: three-objective reconciliation
+
+Reconcile existing nesting/context/lossless milestones without promoting a new objective. A tracked read-only audit verifies 24 producing checkpoints, 257 historical source references, 149 latest inputs and 134 logs, independently slices authored scalar oracles and rejects corrupted evidence plus inflated recovery counts. Keep strict recognition/extraction and retained/per-call routes distinct; preserve authoring costs, exclusions and all repair owners. The public book, Knowledge, task/frontier and roadmaps agree. Exact staged canonical acceptance closes only representative parent .1.1.3; finite gap review .1.1.4 follows.
+
 ## 2026-10-01 — REPO-HYGIENE.6: artifact review and requested exit handoff
 
 Finish the staged lossless milestone as 2aeed31ff with its exact canonical receipt: Phase 0 passes 1,033/1,033 in 1,024 seconds and both primary CLI runs pass 66/66. The due artifact census retains all 4,092 parent-checkout candidates and 483 Rust incremental bin files; zero exact deletion targets were proved disposable. Overwrite the latest cleanup record, clarify book evidence retention, and leave .1.1.3.4 unstarted in the bounded resume pointer. Other repositories, reusable caches and managed runs remain excluded. Focused book/memory/history/Knowledge/diff proof and mandatory commit hooks verify this maintenance record.
