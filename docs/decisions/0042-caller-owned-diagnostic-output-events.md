@@ -1,7 +1,7 @@
 # 0042 - Diagnostic output uses caller-owned typed events with a quiet default
 
 - Date: 2026-07-16
-- Status: accepted; backend rollout pending
+- Status: accepted; current rollout is owned by the executable neutral contract
 - Tags: architecture, diagnostics, helpers, embedding, generated-source, cli, portability, cross-variant-parity
 
 ## Context

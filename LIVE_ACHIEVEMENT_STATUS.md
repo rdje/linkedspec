@@ -2,17 +2,19 @@
 
 ## Current Activity
 
-Ordinary .spec language readiness under SPEC-LANGUAGE-SELF-CONTAINMENT.1.1. The long-term structured-format campaign requires demonstrated language strength and backend parity; the optional EBNF-like frontend remains later.
+Ordinary .spec language closure definition under SPEC-LANGUAGE-SELF-CONTAINMENT.1.2. The structured-format campaign requires demonstrated language strength and backend parity; the optional frontend remains later.
 
 ## Latest Completed Slice
 
-- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.5 - guard entry and cursor capability description` — stable row corrected, fifteen reason-sensitive mutations and unrelated-error falsification; two cursor inventory registrations/census mirrors repaired at79/8/0/60. Exact canonical acceptance governs inventory .1.1 closeout; runtime semantics and100/0/0 states unchanged.
+- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.1 - design language closure matrix` — sixteen source authorities/66 anchors, distinct scopes/effects/publication and caller responsibilities; current/target/partial/unassessed and existing prerequisites stay explicit. No normative/runtime/admission/numerical change.
 
 ## Next Action
 
-- Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.1: design the closure matrix/freeze plan from existing authorities, preserving target/current/partial/unassessed distinctions before normative contract changes.
+- Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.2: freeze operation/scope/reference structure and independent reason-sensitive governance from the reviewed matrix; deterministic/resource/failure freeze and canonical reconciliation follow.
 
 ## Recent Completions
+
+- `2026-10-01` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.1` designs the source-located closure matrix and bounded freeze plan.
 
 - `2026-10-01` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.5` guards the stable entry/cursor description and repairs79-file inventory before canonical closeout.
 
@@ -43,8 +45,6 @@ Ordinary .spec language readiness under SPEC-LANGUAGE-SELF-CONTAINMENT.1.1. The 
 - `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.6` verifies five context-name routes on both Lua ABIs.
 
 - `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.5` verifies five Julia context-name carriers and fresh emitted hosts.
-
-- `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.4` verifies six Dart context-name carriers and strict fresh packages.
 
 ## History
 

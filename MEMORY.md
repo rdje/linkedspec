@@ -1,11 +1,11 @@
 # MEMORY
 
-- activation_commit: `9a07b6375b0053063c54e48023741f294436242c` — clean activation base for capability description/guard repair.
-- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.5 - guard entry and cursor capability description`.
-- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.1` (pending) — closure matrix and bounded freeze plan.
-- next_action: Retrieve the existing compute/observe/mutate/return/scoping/resource/failure authorities and design a closure matrix separating target, current admitted behavior, known partial repairs and unassessed requirements before normative freeze.
-- in_flight_uncommitted: none; exact staged canonical receipt governs inventory-parent closeout. Stable IDs/states/runtime semantics remain unchanged.
-- blockers: No blocker for .1.2.1; wider format readiness, resource safety and startup/backend repairs remain open. Policies unchanged; startup .5/.29 own adoption. ARCHOGEN owns downstream acceptance.
+- activation_commit: `6052760272a37702698745c866220679e7e13646` — clean activation base for closure design.
+- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.1 - design language closure matrix`.
+- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.2` (pending) — normative operation/scope/reference structure.
+- next_action: Retrieve docs/language-readiness/closure-contract-matrix.md and freeze one versioned neutral operation/scope authority with independent reason-sensitive structural validation, preserving current partial/unassessed status and existing meanings.
+- in_flight_uncommitted: none; planning is committed. Normative freeze, runtime repairs, new objectives and format/profile admission remain pending.
+- blockers: No blocker for .1.2.2; inherited source-detail/general progress/resource reviews stay37.2/.1.2.3/41.2-owned. Policies unchanged; startup .5/.29 own adoption. ARCHOGEN owns downstream acceptance.
   Wrapper startup .7 remains open; recovery/purge stay prohibited. No interrupted Phase0 run counts as proof.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
   active table; the task metadata doctrine inventories all consumers, permits arbitrary frontier-row rewrites,

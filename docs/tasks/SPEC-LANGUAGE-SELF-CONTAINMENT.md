@@ -912,7 +912,7 @@ used by ordinary `.spec` syntax on every backend.
 - [x] **LOCKSTEP** — The shared executable book example passes natively and freshly emitted with LF/CRLF; rendered source/output match. Book reference/status, CHANGES, DEVELOPMENT_NOTES, MEMORY, live status, roadmaps, task tree and Knowledge Map describe the repair. USER_GUIDE's canonical book delegation remains unchanged. Bounded history, memory, doctrines and diff hygiene govern landing.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.2`
-  Status: `pending`
+  Status: `active`
   Goal: Define the problem-domain closure boundary, determinism/resource model, state/scoping rules, and explicit
     environmental non-authority.
   Acceptance: Normative contracts answer what a `.spec` may compute, observe, mutate, return, and never access,
@@ -922,10 +922,28 @@ used by ordinary `.spec` syntax on every backend.
   Inventory input: docs/language-readiness/finite-gap-list.md. Separate admitted/current behavior from target closure; retain recognition-only rollback, distinct callable scopes, intrinsic cursor policy, staged operand authority and unresolved resource limits. Split contract work into bounded leaves before editing normative authority.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.1`
-  Status: `pending`
+  Status: `done`
   Goal: Design a source-located closure contract matrix and bounded freeze plan before editing normative authority.
   Dependencies: `.1.1`
   Acceptance: Retrieve exact existing authorities for compute/observe/mutate/return/non-authority, callable/rule state and progress/resource/failure boundaries. Separate normative target, current admitted behavior, known partial repairs and unassessed requirements. Identify deterministic input/output and host responsibilities; do not infer universal safety or silently choose new numerical limits. Own any genuine contract ambiguity before freeze.
+  Activation: Clean6052760272a37702698745c866220679e7e13646 on October1; inventory .1.1.5 is committed, canonical receipt/post-commit pointer pass, brief0 and no pending job.
+  Scope: Documentation-only matrix and freeze plan, existing-authority/reference review, current Knowledge/decision-header status reconciliation and book/continuity alignment. No normative JSON, runtime, admission or numerical-limit change.
+  Verification tier: `focused`
+  Focused checks: Exact authority identities/pointers and repair-owner metadata; unchanged executable authorities and original objective audit; directly affected public/neutral guards, rendered book, Knowledge, memory, bounded histories, doctrines and diff hygiene.
+  Canonical trigger: none for a bounded design leaf; .1.2.2/.1.2.3 own normative artifacts/checkers and .1.2.4 owns canonical parent closeout.
+
+  Finding (owned and repaired here): The direction card still called the completed first nesting/constructor work active; the general-recursion card still named the closed .14.3 admission as pending. Reproduce by comparing those prior current-status paragraphs with the source task metadata and605276027. Impact: a resuming reader could mistake dated guard evidence for today's diagnostic scope. Preserve original dated probes and bind current recognition/observation to their separate authorities.
+  Finding (owned and repaired here): ADR0042's header/index still said backend rollout pending, although its current neutral contract/checker records8 complete/0 pending. Impact: authoritative status retrieval contradicted current admission. Route current rollout to the existing executable neutral contract; preserve every decision clause, date, fixture and admission state.
+  Verification: PASS16 exact authority identities/66 semantic anchors, unchanged authority bytes, four supplemental plus two coordination owners pending, and .14.3/.14.4 done; original objective audit and six direct public/neutral guards; book five rows/four claims. Final Knowledge/memory/history/doctrine/diff proof governs landing. No new runtime or numerical-policy proof.
+  Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.1 - design language closure matrix`.
+
+### `SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.1` Acceptance Checklist
+
+- [x] **SOURCE / OWNERSHIP** — Clean605276027 activation; retrieve ADR0064/0056/0080/0088/0042, inventories, exact JSON policies and Knowledge before composing the matrix. Indexed task status resolves current owners without modifying other trees.
+- [x] **BOUNDARY / PLAN** — Sixteen authorities answer compute/recognize/observe/mutate/return/diagnose/authority and eight distinct scopes. Target/current/partial/unassessed, publication effects and compatibility/host exclusions remain explicit. Four later stages separate normative freezes, independent closeout and new objectives.
+- [x] **PARTIAL / AMBIGUITY** — Retain finite-ledger repairs and their prerequisites; add existing19/21/35/39 dependencies. Resource/source-detail and general progress/error review remain37.2/.1.2.3/41.2-owned. Select no new numbers, security guarantee, extension or backend promotion.
+- [x] **STATUS RECONCILIATION** — Correct stale directional progress and closed-admission references without relabeling historical ordinary-guard probes as fresh runtime proof.
+- [x] **PROOF / LOCKSTEP** — Exact register/owner review, original audit, six affected guards and rendered book pass. Align Knowledge, roadmaps/frontier, bounded histories/live/resume; ordinary documentation gates and atomic commit complete the handoff.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.2`
   Status: `pending`
@@ -1103,7 +1121,8 @@ used by ordinary `.spec` syntax on every backend.
 | 17 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.4` | `done` | Exact historical evidence and authoring-cost comparison close the bounded parent through canonical acceptance. |
 | 18 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.4` | `done` | Nine areas classified; original repairs, authoring costs and unassessed requirements retain explicit next actions. |
 | 19 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.5` | `done` | Stable row corrected; fifteen reason-sensitive mutations and79-file cursor inventory precede exact canonical parent closeout. |
-| 20 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.1` | `pending` | Design the closure matrix/freeze plan from existing authorities before normative contract changes. |
+| 20 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.1` | `done` | Source-located16/66 matrix, scopes/effects and bounded freeze plan preserve partial/unassessed requirements. |
+| 21 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.2` | `pending` | Freeze operation/scope/reference structure with independent mutation-sensitive governance. |
 
 ## Decisions
 
@@ -1136,6 +1155,8 @@ used by ordinary `.spec` syntax on every backend.
 - None for `.1.1`. The September27 clean prioritization supersedes the earlier callable-first schedule. Format implementation and the optional frontend remain gated by their own prerequisites.
 
 ## Verification Log
+
+October1 `.1.2.1`: Register16 identities/66 anchors and unchanged authorities; six pending repair/coordination owners and closed recognition/observation status; original objective audit and six affected guards; book five scope rows/four claims. The draft CHANGES insertion matched an inline ## mention; the history check rejected its preamble. Correct to the actual section heading, preserve original bytes and recheck347/512 lines/34768/65536 bytes. Documentation-only design; ordinary gates govern landing.
 
 October1 `.1.1.5`: Historical prose/old validator RED, fifteen mutations plus unrelated-error assertion GREEN; exact unchanged manifest identity/states/references and cursor semantics/rollout. Cursor79/8/0/60 and two registration-omission controls, root7/0/54, generated-source/language and direct-dependent Perl312 pass. Exact staged canonical receipt governs inventory-parent closure; actual CI outcome belongs in the commit body.
 
@@ -1183,6 +1204,8 @@ September27 `.1.1.1`: seven neutral/structural checks, 34 ledger source-path/con
 
 ## Commit Log
 
+- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.1 - design language closure matrix` — source-located design and current status reconciliation; no normative/runtime/admission movement.
+
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.5 - guard entry and cursor capability description` — canonical inventory-parent closeout; preserved runtime semantics and existing repair obligations.
 
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.4 - classify finite language readiness gaps` — Current classification and next actions preserve existing contracts, repair priorities, parked named arguments and unassessed scope.
@@ -1210,6 +1233,8 @@ September27 `.1.1.1`: seven neutral/structural checks, 34 ledger source-path/con
 | `.0` | `SPEC-LANGUAGE-SELF-CONTAINMENT.0 - ratify expressive spec self-containment` | Direction capture only; no parser/runtime behavior. |
 
 ## Changelog
+
+- `2026-10-01`: `.1.2.1` designs the16-authority closure matrix, distinct scope/effect/publication and caller boundaries, four bounded follow-on stages and retained partial/unassessed obligations. Correct stale Knowledge progress/admission pointers; next .1.2.2 is canonical normative structure.
 
 - `2026-10-01`: `.1.1.5` repairs stale capability prose/guard and two missing cursor inventory registrations introduced by current documentation/checker work. Canonical acceptance closes finite inventory .1.1; split .1.2 into four bounded contract-design/freeze/closeout leaves.
 

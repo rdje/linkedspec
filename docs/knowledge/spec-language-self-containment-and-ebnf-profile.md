@@ -13,7 +13,7 @@ answers:
   - "how will diagnostics map from canonical IR to EBNF authored source"
   - "does every backend implement the same authoring profile semantics"
   - "when will the self containment and EBNF direction be implemented"
-date: 2026-09-27
+date: 2026-10-01
 status: current
 tags: [architecture, dsl, self-containment, ebnf, frontend, source-map, actionir, handlerir, parity]
 evidence: "ADR 0064 and SPEC-LANGUAGE-SELF-CONTAINMENT.0 accept problem-domain expressive closure without ambient effects, plus an optional honest EBNF-like frontend that lowers losslessly into one canonical semantic model across five backends; no syntax or behavior is implemented by the direction leaf."
@@ -38,11 +38,15 @@ matching, seek/consume, cursor movement, capture/state/actions, progress, failur
 through explicit extensions. Lowering preserves profile identity, original source, Unicode-scalar spans, canonical
 node correspondence, and diagnostic remapping, so users debug the source they authored.
 
-This program has not added syntax; its first composed objective now owns a Perl constructor correctness repair. The director selected ordinary .spec expressiveness
-on September27, after clean fallback-verification commit 30b2cc3a0. The active .1.1 inventory starts with the
-source-located grammar/cursor/capture ledger in docs/language-readiness/grammar-cursor-capture.md and the
-state/control/result ledger in docs/language-readiness/state-control-results.md. The nested-tree objective is active, with constructor repair .1.1.3.1.1 preceding remaining route proof .1.1.3.1.2. The structured-format campaign remains gated on language readiness
-and parity; an optional EBNF-like frontend is later work.
+The director selected ordinary .spec expressiveness on September27 after clean fallback-verification
+commit30b2cc3a0. The grammar/cursor/capture and state/control/result inventories are complete; bounded nesting,
+context-name and lossless/actual-child proof is reconciled under [[three-objective-language-readiness]].
+Constructor/flat and the stale entry/cursor description repairs are committed. The finite inventory closes
+canonically at605276027; its success neither erases separately owned defects nor admits whole formats.
+The source-located closure matrix in docs/language-readiness/closure-contract-matrix.md now designs the next
+operation/scope and deterministic/resource/failure freezes. [[spec-language-closure-contract-plan]] separates
+target/current/partial/unassessed obligations. The optional frontend has added no syntax; structured formats
+and frontend implementation retain their language-readiness/parity gates.
 
  `docs/tasks/SPEC-LANGUAGE-SELF-CONTAINMENT.md` first inventories portable
 capabilities and real gaps, defines mutation-sensitive neutral objectives, closes missing core semantics, proves the

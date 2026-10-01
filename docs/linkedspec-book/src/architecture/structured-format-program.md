@@ -132,9 +132,24 @@ new staged operands likewise need an agreed objective before a semantic extensio
 
 The capability census now describes explicit entry selection and intrinsic family cursor policy accurately;
 its stable historical ID does not grant a global parse-mode override. Fifteen reason-sensitive mutations bind
-that row to the existing root-selection and cursor authorities. Closure definition then states what authored code can compute, observe, mutate and
-return; neutral fixtures distinguish those dimensions with mutations. Only demonstrated reusable gaps become
-implementation leaves. The format campaign and optional EBNF-like frontend retain their separate gates.
+that row to the existing root-selection and cursor authorities. The closure plan now binds sixteen existing
+authorities and separates authored work, state/effects and caller responsibilities:
+
+| Authored work | Boundary the closure contract must preserve |
+| --- | --- |
+| Compute and recognize | Typed expressions, distinct pure-function/deferred-block scopes and linked rules whose children own cursor policy. |
+| Observe and mutate | Authorized source-bound captures and scoped state; recognition restores cursor/boundary/marks, while structural publication preserves its own completed effects. |
+| Return and diagnose | Typed payloads remain separate from match booleans and failure projections; optional caller diagnostic sinks receive ordered events, and absent sinks are quiet. |
+| Compose parsers | Caller freezes compiled authority; each child receives fresh state and narrowing operational grants. Child work does not establish parent cursor progress. |
+| Bound work | Existing scoped progress/resource policies and known repairs precede guarantees; finite accounting supplies no global numerical or regex-preemption bound. |
+
+The operation/scope freeze, deterministic/resource/failure freeze and independent reconciliation are separate
+steps before new composition objectives. Ordinary-rule repetition thresholds and broad failure prose require
+their own scoped review. Raw host fallback and compatibility behavior do not establish portable closure or
+sandbox security. Existing dynamic callback, token, boolean-kind and resource defects retain their owners and
+prerequisites. Neutral fixtures then distinguish selected dimensions with independent value/effect/failure
+oracles and mutations. Only demonstrated reusable gaps become implementation leaves. The format campaign and
+optional EBNF-like frontend retain their separate gates.
 
 ### Bounded nesting trial
 

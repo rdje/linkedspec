@@ -17,7 +17,7 @@ answers:
   - "why did the rust engine return nulls or leaked values for recursive s-expression grammars"
   - "how was Rust TOP-RULE-AS-NORMAL.3.2 fixed"
 date: 2026-08-09
-status: current termination guard; structured progress diagnostic migration pending under FUTURE-PARITY-BACKLOG.14.3
+status: dated ordinary-guard evidence; recognition/observation admission is current under separate authorities
 tags: [engine, parser, top-rule, recursion, termination, forward-progress, SpecEntry, TOP-RULE-AS-NORMAL, ADR-0010]
 evidence: "TOOLBOX probes 2026-06-23 (TOP-RULE-AS-NORMAL.2.1). (1) call_spec_handler_subst shows call(rule) lowers to `&{$$descr{spec}{$rule}{handler}}($descr,$STRING,$minfo)` (ActionIR/Contracts.pm:134, MethodLowering.pm:332); {handler} is the SpecEntry::_build_runtime_handler closure (SpecEntry.pm:438 stores it; line ~262 IS it) -- so EVERY cross-rule call + recursion goes through that one real-Perl closure. dump_parser_source emits a SIMPLIFIED standalone artifact (`&{$descr->{spec}{$rule}}`) that differs from the runtime (`{...}{handler}`). (2) LinkedRE::or: seek = `/(?{...})$re/gcp` (scans FORWARD to EOF -> returns undef); consume = `/\\G(?{...})$re/gcp` (Perl's repeated-zero-width-match prohibition + /gc). Battery of zero-width grammars (probe3/probe4, seek+consume) -- NONE hang. (3) The ONLY reproduced engine hang: `top:: /a/ I { return(call(top)) }` whose handler is an unconditional self-tail-call with NO match/while(1) (dependency_regex_map empty); it OOMs. (4) Fix: a (rule,pos) active-stack non-progress cutoff in the SpecEntry runtime-handler closure -- re-entry at a position already active for that rule => return undef. phase0 960->963 (3 new locks), full run_ci_local.sh EXIT 0, zero regression. (5) SEPARATE GAP: a recursive S-expression grammar with `sexpr::` as the top rule returns null on `(a(b)c)`, while the IDENTICAL inner rule reached via a no-consume `top:: -> sexpr {return(call(sexpr))}` wrapper returns `[\"a\",[\"b\"],\"c\"]` -- the off-by-one in who consumes the leading token. Owned by .2.2."
 evidence_update_2026_07_04: "TOP-RULE-AS-NORMAL.3.2 closed the Rust value parity gap after RUST-PARITY closed the recursive-grammar blocker. Root cause: Rust parsed `declare(array, items)` with raw first arg `Variable(\"array\")`, but the helper evaluated that as a runtime variable and got `\"\"`, making the declaration a no-op; recursive frames then shared the same auto-existing `items` array. Fix: Rust `declare(...)` resolves a raw first positional variable as the literal type token (`scalar`/`array`/`hash`) and RuntimeContext snapshots/restores declared working variables per rule invocation around interpreted and generated-plan direct rule execution. User functions suspend rule declaration tracking because they already use local variable stores; undeclared rule mutations remain caller-visible. Focused top-rule integration passes, corpus_oracle passes over 91 fixtures, and the corpus includes top_rule_body_recursion_sexpr, top_rule_lx_recursion_nested, and top_rule_lx_recursion_sequence."
@@ -63,11 +63,15 @@ consume-before-recurse recursion always advances `pos()` first, so the cutoff ne
 terminating grammar — **phase0 960 → 963** (3 new locks), `tools/run_ci_local.sh` **EXIT 0**, zero
 regression.
 
-The cutoff is not yet the portable progress diagnostic. A current direct no-consume probe returns `undef`, emits
-the trace decision above, and leaves `runtime_ctx_ref->{last_error}` null. `FUTURE-PARITY-BACKLOG.14.3` retains the
-guard as a runtime backstop while adding invocation identity and exact structured direct/mutual non-progress
-records. Zero-width success outside a progress obligation remains representable; repetition/recursive edges may
-not silently spend it as progress.
+At the August9 checkpoint, the ordinary cutoff is not the portable progress diagnostic. That direct
+no-consume probe returns `undef`, emits the trace decision above, and leaves `runtime_ctx_ref->{last_error}` null.
+The then-planned `FUTURE-PARITY-BACKLOG.14.3` subsequently completed recognition-transaction admission;
+recursive observation separately completed under `.14.4`. Their scoped current authorities are
+[[recognition-transaction-neutral-contract]], [[perl-recognition-transaction-integration]] and
+[[recursive-source-observation-audit]]. The October1 closure-plan reconciliation preserves the dated ordinary
+probe; strict cursor errors during active recognition/observation do not establish a universal ordinary-rule
+diagnostic or numerical repetition limit. `SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.3` owns that policy distinction,
+coordinating startup41.2 teaching. Zero-width success remains distinct from accepted progress-sensitive work.
 
 ## Top re-entry recursion VALUE: RESOLVED (`.2.2`) — no engine defect, missing-`LX` authoring case
 

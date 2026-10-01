@@ -100,9 +100,11 @@ Perl/Rust/Dart/Julia/PUC-Lua/LuaJIT proof before `.1.4` creates implementation l
 | Depth/steps/calls, regex substrate limits, extreme arithmetic, determinism and performance | Only recorded finite progress/selected accounting is proven | `.1.2` specifies each existing policy and unresolved limit; `.1.3` supplies bounded controls. Existing resource repairs precede guarantees; performance requires measurements. |
 | Speculative AST/user-state rollback or expanded staged operands | Outside current rollback/operand contract; need unassessed | `.1.2` states current exclusions; `.1.4` may propose reusable semantics only after an agreed failing objective. No inferred extension approval. |
 
-Immediate order remains `.1.1.5` canonical description/guard repair and inventory
-closeout, then `.1.2` closure definition, `.1.3` neutral objectives/mutations and
-`.1.4` evidence-backed gap audit. This is a finite evidence plan, not exhaustive
+After canonical inventory closeout605276027, `.1.2.1` supplies the source-located
+closure matrix in `docs/language-readiness/closure-contract-matrix.md`. Next
+`.1.2.2/.1.2.3` freeze operation/scope and deterministic/resource/failure policies,
+then `.1.2.4` reconciles the definition before `.1.3` neutral objectives/mutations
+and `.1.4` evidence-backed gap audit. This is a finite evidence plan, not exhaustive
 grammar coverage, campaign admission or implementation of the optional frontend.
 
 ## Verification

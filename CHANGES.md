@@ -12,6 +12,18 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-10-01 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.1: closure matrix and freeze plan
+
+Create `docs/language-readiness/closure-contract-matrix.md` with16 source identities/66 exact semantic anchors,
+seven operation dimensions, eight scopes, publication/failure and caller boundaries, explicit partial/unassessed
+obligations and four bounded follow-on stages. Retain existing repair priorities/prerequisites; supplement the
+finite ledger with already-owned19/21/35/39. Reconcile stale direction and closed-recognition-owner Knowledge
+prose without relabeling ordinary dated guard evidence. No executable authority, runtime, admission, global
+numerical limit or frontend changes. Exact register/owner review, original objective audit, six affected guards
+and book five-row/four-claim QA pass; Knowledge/memory/history/doctrine/diff proof governs ordinary landing.
+ADR0042's stale pending header/index routes current rollout to its existing neutral owner; all decision clauses remain exact.
+Next .1.2.2 is canonical operation/scope freeze; resource/failure policy and parent reconciliation remain later.
+
 ## 2026-10-01 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.5: entry/cursor census repair
 
 Retain the stable capability ID and all states/references; correct prose and cite root/cursor authorities.

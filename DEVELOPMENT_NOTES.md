@@ -12,6 +12,18 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-10-01 — Closure needs scoped effects and evidence (.1.2.1)
+
+The16-authority matrix separates target language closure from current finite evidence and partial/unassessed
+obligations. Rule state, pure-function locals, dynamic deferred blocks and recognition tokens have different
+scope/publication behavior. Recognition progress is active-scope-specific; ordinary guards, regex resources
+and broad failure projections need separate review. Diagnostic helpers use caller sinks; child registry/input/
+operational authority is caller-owned and supplies no authored destination/loading permission. Existing35/39
+boolean-kind,19 receiver and21 token-lexical exceptions precede dependent promotion. Source-detail meaning stays
+37.2-owned without silently weakening the neutral promise. Preserve historical mutation-contract status strings
+and use actual admission owners. Correct current Knowledge progress while preserving dated guard measurements.
+No new semantic extension or limit is chosen; two canonical freezes and independent reconciliation follow.
+
 ## 2026-10-01 — Entry/cursor descriptions need semantic authority (.1.1.5)
 
 A nonempty general census string let the old global-override claim pass despite the specific cursor authority.
