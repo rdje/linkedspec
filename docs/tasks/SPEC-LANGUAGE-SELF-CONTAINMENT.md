@@ -946,10 +946,27 @@ used by ordinary `.spec` syntax on every backend.
 - [x] **PROOF / LOCKSTEP** — Exact register/owner review, original audit, six affected guards and rendered book pass. Align Knowledge, roadmaps/frontier, bounded histories/live/resume; ordinary documentation gates and atomic commit complete the handoff.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.2`
-  Status: `pending`
+  Status: `done`
   Goal: Freeze the grammar/cursor/capture/state/callable/control/transformation/result closure boundary on the existing semantic core.
   Dependencies: `.1.2.1`
   Acceptance: One versioned neutral authority describes included/excluded operations, distinct scopes, recognition versus user-state effects, typed results and host-boundary inputs. Bind existing authority identities/proof owners, preserve compatibility exclusions and partial status, and add mutation-sensitive structural validation. Use canonical tier for contract/checker movement; no runtime semantics or profile-only mechanism.
+  Activation: Clean5785e4990bf1b8aa45a105e262475d128dbcecc7 on October1; .1.2.1 committed, post-commit pointer and all nine doctrines pass, brief0 and clean Git state.
+  Owned paths / scope: capability_conformance/language_closure_contract.json and tools/check_language_closure_contract.py freeze operation/scope/reference structure. Register the checker once in canonical CI, advance the independently counted Python entrypoint census38-to39, and align the book, Knowledge and live documents. Existing sixteen authority bytes/admission remain unchanged. Determinism/resource/failure policy remains .1.2.3-owned; this is structural governance, not authored-objective execution.
+  Verification tier: `canonical`
+  Focused checks: Closed schema/relationships, exact source-bound semantic anchors/proof owners, reason-sensitive destructive mutations and unrelated-error control; unchanged original authority/objective audit, direct-dependent contracts, Python storage census, rendered book, histories, Knowledge, memory, doctrines and diff hygiene.
+  Canonical trigger: New versioned neutral contract, independent checker and exact-once canonical registration; stage the complete candidate before receipt-bound local CI.
+  Direct-dependent finding (owned here): The unchanged historical objective audit rejects tools/run_ci_local.sh after the exact new checker registration. Reproduction: run tests/language-readiness/verify_objectives.py on this candidate; failure is current executable evidence drift: tools/run_ci_local.sh. Impact: legitimate governance additions cannot be distinguished from changed historical runtime inputs. Extend only this source's audit with the exact owner-bound insertion normalization; it must reconstruct the historical hash, report governance evolution separately and reject removed original work, extra edits and unrelated-error substitution. Preserve every checkpoint, runtime input and original falsifier.
+  Preparation correction: The first local structural invocation rejected an incorrectly spelled ADR0064 path before mutation proof. Resolve the indexed canonical filename and correct both authority and independent schema; no missing source or semantic ambiguity remains.
+  Verification: Structure16/66/7/8 rejects432 reason-sensitive mutations/four controls; producing and supplemental/coordination owners resolve. Signature3/9/7, binding11/7/6/8, codeblock23 mutations, diagnostics8/0/20, cursor79/8/0/60 and independently counted tool-storage39-entrypoint proof pass. Historical objective audit preserves24 checkpoints/257 historical references/149 latest source identities/134 logs and reports only owner-bound CI insertion evolution, with three new governance controls. Original sixteen authority bytes remain unchanged. Rendered book, Knowledge, history/memory/doctrines/diff and exact staged canonical acceptance govern landing; no new runtime objective is admitted.
+  Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.2 - freeze language closure structure`.
+
+### `SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.2` Acceptance Checklist
+
+- [x] **OWNERSHIP / BOUNDARY** — Clean5785e499 activation; existing matrix/Knowledge/authorities determine scope before artifact/checker creation. One versioned operation/scope/reference definition preserves preferred portable versus compatibility/caller boundaries without new runtime/profile semantics.
+- [x] **SCOPES / RESULTS / EFFECTS** — Seven authored categories and eight scopes distinguish fresh functions, dynamic blocks, recognition-only restoration, post-expression nested writes, root-kind receiver publication and child authority. Typed match/payload/diagnostic channels stay distinct; private handles grant no authority.
+- [x] **REFERENCES / PARTIALS** — Sixteen exact authority identities and66 selected semantic digests bind reviewed anchors, producing owners and dated ledgers. Preserve historical mutation rollout strings, actual admission owners, repair prerequisites, source-detail coordination and unassessed objective/format/frontend limits.
+- [x] **INDEPENDENT GOVERNANCE** — Closed schema and exact relationships reject432 reason-sensitive mutations/four controls, including unrelated-error substitution and selected-source drift. Canonical CI registers one invocation and both tracked inputs; independently counted Python entrypoints become39 without a new allocator.
+- [x] **EVIDENCE EVOLUTION / LOCKSTEP** — Historical audit reconstructs original CI bytes through exact owner-bound insertions and rejects three governance falsifiers; every original checkpoint/runtime/log/corpus check remains. Focused contracts/storage and book proof pass. Knowledge, roadmaps/frontier, bounded histories/live/resume and receipt-bound canonical acceptance govern atomic landing. Resource/failure freeze is next.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.3`
   Status: `pending`
@@ -1122,7 +1139,8 @@ used by ordinary `.spec` syntax on every backend.
 | 18 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.4` | `done` | Nine areas classified; original repairs, authoring costs and unassessed requirements retain explicit next actions. |
 | 19 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.5` | `done` | Stable row corrected; fifteen reason-sensitive mutations and79-file cursor inventory precede exact canonical parent closeout. |
 | 20 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.1` | `done` | Source-located16/66 matrix, scopes/effects and bounded freeze plan preserve partial/unassessed requirements. |
-| 21 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.2` | `pending` | Freeze operation/scope/reference structure with independent mutation-sensitive governance. |
+| 21 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.2` | `done` | Versioned16/66/7/8 structure,432 reason-sensitive mutations/four controls and exact historical CI evolution. |
+| 22 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.3` | `pending` | Freeze deterministic inputs, scoped resources/failures and ambient non-authority without universal limits. |
 
 ## Decisions
 
@@ -1155,6 +1173,8 @@ used by ordinary `.spec` syntax on every backend.
 - None for `.1.1`. The September27 clean prioritization supersedes the earlier callable-first schedule. Format implementation and the optional frontend remain gated by their own prerequisites.
 
 ## Verification Log
+
+October1 `.1.2.2`: Structure16/66/7/8,432 reason-sensitive mutations/four controls and five directly dependent guards pass; original objective audit24/257/149/134 preserves historical runtime inputs while exact reviewed CI evolution gets three negative controls. Tool storage independently counts39 Python entrypoints, retaining three Python temporary owners and15 shell allocators. Book/Knowledge/history/memory/doctrines/diff and exact staged canonical acceptance govern landing; no runtime objective or backend promotion.
 
 October1 `.1.2.1`: Register16 identities/66 anchors and unchanged authorities; six pending repair/coordination owners and closed recognition/observation status; original objective audit and six affected guards; book five scope rows/four claims. The draft CHANGES insertion matched an inline ## mention; the history check rejected its preamble. Correct to the actual section heading, preserve original bytes and recheck347/512 lines/34768/65536 bytes. Documentation-only design; ordinary gates govern landing.
 
@@ -1204,6 +1224,8 @@ September27 `.1.1.1`: seven neutral/structural checks, 34 ledger source-path/con
 
 ## Commit Log
 
+- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.2 - freeze language closure structure` — versioned operation/scope authority, independent source/governance mutations, owned audit evolution and canonical landing.
+
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.1 - design language closure matrix` — source-located design and current status reconciliation; no normative/runtime/admission movement.
 
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.5 - guard entry and cursor capability description` — canonical inventory-parent closeout; preserved runtime semantics and existing repair obligations.
@@ -1233,6 +1255,8 @@ September27 `.1.1.1`: seven neutral/structural checks, 34 ledger source-path/con
 | `.0` | `SPEC-LANGUAGE-SELF-CONTAINMENT.0 - ratify expressive spec self-containment` | Direction capture only; no parser/runtime behavior. |
 
 ## Changelog
+
+- `2026-10-01`: `.1.2.2` freezes versioned16-authority/66-anchor operation/scope structure with432 reason-sensitive mutations/four controls, exact CI registration and historical audit reconstruction. Next .1.2.3 owns resource/failure/ambient policy; no runtime admission changes.
 
 - `2026-10-01`: `.1.2.1` designs the16-authority closure matrix, distinct scope/effect/publication and caller boundaries, four bounded follow-on stages and retained partial/unassessed obligations. Correct stale Knowledge progress/admission pointers; next .1.2.2 is canonical normative structure.
 

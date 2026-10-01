@@ -12,6 +12,20 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-10-01 — Closure governance needs source and scope edges (.1.2.2)
+
+A closed structural definition complements existing semantic contracts; it is not another DSL evaluator.
+Sixteen identities and66 SHA-256 digests bind selected semantic JSON anchors (sorted compact UTF-8, literal
+Unicode), while preserving unselected historical rollout metadata and actual proof-owner routes. The independent
+schema challenges scope visibility/restoration/publication, operation edges, typed results, caller authority,
+claim limits and exact CI topology with432 reason-sensitive mutations/four controls. Existing finite objective,
+partial repair/prerequisite and format/frontend boundaries remain intact. Python entrypoints grow38-to39; no
+temporary allocator is introduced. The original readiness audit initially rejects the intentional CI additions.
+Its targeted repair strips only exact anchored owner-bound registration additions and demands the original CI
+hash, reporting governance evolution separately. Original runtime/checkpoint/log/corpus inputs remain pinned;
+three new controls reject extra edits, removed new inputs and a removed original check. Resource/failure and
+ambient-policy freeze still need scoped review; no global resource number or sandbox guarantee is selected.
+
 ## 2026-10-01 — Closure needs scoped effects and evidence (.1.2.1)
 
 The16-authority matrix separates target language closure from current finite evidence and partial/unassessed

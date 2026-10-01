@@ -28,8 +28,8 @@ are an independently approved, parked direction, not a selected readiness depend
 
 Stale capability prose/guard repair `.1.1.5` is now recorded in
 [[entry-cursor-capability-description-repair]]. The `.1.2.1` matrix is now source-located
-under [[spec-language-closure-contract-plan]]; `.1.2.2/.1.2.3` next freeze operation/scope
-and deterministic/resource/failure boundaries before independent reconciliation; `.1.3` selects neutral composed objectives and
+under [[spec-language-closure-contract-plan]]; `.1.2.2` subsequently freezes operation/scope/reference structure.
+`.1.2.3` next defines deterministic/resource/failure boundaries before independent reconciliation; `.1.3` selects neutral composed objectives and
 mutations, including still-unassessed diagnostics/control/transformation needs.
 `.1.4` creates implementation leaves only for demonstrated reusable semantic gaps.
 Whole-format support, universal depth/resources, performance and alternate syntax

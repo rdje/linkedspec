@@ -6,13 +6,15 @@ Ordinary .spec language closure definition under SPEC-LANGUAGE-SELF-CONTAINMENT.
 
 ## Latest Completed Slice
 
-- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.1 - design language closure matrix` — sixteen source authorities/66 anchors, distinct scopes/effects/publication and caller responsibilities; current/target/partial/unassessed and existing prerequisites stay explicit. No normative/runtime/admission/numerical change.
+- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.2 - freeze language closure structure` — versioned16-authority/66-anchor operation/scope definition, seven categories/eight scopes,432 reason-sensitive mutations/four controls and exact-once CI. Historical CI reconstruction preserves original runtime evidence; no runtime admission or global limit changes.
 
 ## Next Action
 
-- Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.2: freeze operation/scope/reference structure and independent reason-sensitive governance from the reviewed matrix; deterministic/resource/failure freeze and canonical reconciliation follow.
+- Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.3: review scoped ordinary progress/failure evidence and freeze deterministic inputs, inherited resources/failures and ambient non-authority; coordinate37.2/41.2 without weakening their open obligations.
 
 ## Recent Completions
+
+- `2026-10-01` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.2` freezes closure structure with independent governance and exact CI evolution.
 
 - `2026-10-01` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.1` designs the source-located closure matrix and bounded freeze plan.
 
@@ -43,8 +45,6 @@ Ordinary .spec language closure definition under SPEC-LANGUAGE-SELF-CONTAINMENT.
 - `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.7` reconciles bounded context-name proof through canonical closure.
 
 - `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.6` verifies five context-name routes on both Lua ABIs.
-
-- `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.5` verifies five Julia context-name carriers and fresh emitted hosts.
 
 ## History
 

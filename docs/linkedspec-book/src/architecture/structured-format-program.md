@@ -151,6 +151,30 @@ prerequisites. Neutral fixtures then distinguish selected dimensions with indepe
 oracles and mutations. Only demonstrated reusable gaps become implementation leaves. The format campaign and
 optional EBNF-like frontend retain their separate gates.
 
+The versioned definition is `capability_conformance/language_closure_contract.json`
+(`linkedspec-language-closure-v1`). Its operation and scope structure is frozen against sixteen existing
+authorities and66 semantic anchors. Seven authored categories cover computation, recognition, observation,
+mutation, return, diagnostics and parser composition; caller authority is a separate boundary. Eight scopes
+keep rule invocation, pure functions, deferred blocks, recognition attempts, recursive observations, nested
+writes, leaf transformation and child parsing distinct.
+
+For example, rolling back recognition restores its cursor, boundary and marks. A nested write instead evaluates
+its segments and value before taking the publication snapshot; a later structural failure preserves completed
+expression effects. A deferred block sees live caller nonparameters when invoked, while a pure function starts
+with fresh local state. An output event goes to an optional caller sink, with quiet execution when none is installed.
+These differences must survive composition; listing their mechanisms does not close known narrower defects.
+
+```sh
+bash tools/run_python_project_data.sh tools/check_language_closure_contract.py
+```
+
+This check validates definition structure, exact source bindings and producing/repair ownership. Selected anchors
+use SHA-256 over sorted compact UTF-8 JSON with literal Unicode; unrelated historical rollout metadata is excluded.
+Reason-sensitive mutations challenge every declared category and scope, source drift and CI registration.
+The checker does not execute a `.spec` or establish a new composed objective. Determinism/resource/failure policy,
+independent definition reconciliation and runtime objective admission remain separate stages; runtime admission,
+whole-format readiness and the optional frontend have not advanced through this definition alone.
+
 ### Bounded nesting trial
 
 This readiness grammar parses zero or more parenthesized lists containing bare atoms or other lists. It accepts

@@ -7,6 +7,8 @@ answers:
   - "which authoring costs remain after the three representative probes"
   - "how can I audit all three objective checkpoints and original scalar oracles"
   - "what follows three objective reconciliation"
+  - "why does the objective audit reject changed canonical CI"
+  - "which CI evolution is permitted by the historical objective audit"
 date: 2026-10-01
 status: bounded evidence reconciliation; exact canonical acceptance governs parent closure
 tags: [language-readiness, recursion, context, lossless, authoring, evidence]
@@ -34,6 +36,14 @@ recording documentation evolution separately. Its complete enumeration and input
 hashes are frozen in the owning checkpoint. This audit is an on-demand instrument,
 not an additional automatic runtime admission gate. Changed runtime inputs require
 the relevant ledger's fresh execution before a current claim advances.
+
+Subsequent `.1.2.2` registers a new structural checker in canonical CI. The audit
+permits only its exact owner-bound anchored input/call insertions: removing them
+must reconstruct the historical CI hash byte-for-byte. It reports the current hash
+and producing owner separately as governance evolution, preserving all original
+checkpoint/runtime/log/corpus checks. Three targeted controls reject extra edits,
+missing new inputs and removal of an original numeric check; their rejection
+reasons must identify governance drift. This is no fresh runtime objective proof.
 
 Finite gap selection `.1.1.4` is recorded in `docs/language-readiness/finite-gap-list.md`;
 [[finite-language-readiness-gap-selection]] routes defects, costs and unassessed requirements.

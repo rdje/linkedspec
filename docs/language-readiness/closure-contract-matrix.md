@@ -5,6 +5,12 @@ Owner: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.1`. Reviewed 2026-10-01 from clean
 This is a source-located design plan. It changes no semantic authority, runtime,
 admission, generated format, public API or numerical limit.
 
+Subsequent `.1.2.2` freezes operation/scope/reference structure as
+`capability_conformance/language_closure_contract.json` (`linkedspec-language-closure-v1`).
+Its independent checker is structural governance only. The original design below
+retains its review date; deterministic/resource/failure policy and independent
+reconciliation remain `.1.2.3/.1.2.4`-owned.
+
 ## Claim boundary
 
 ADR0064 defines the **target**: normal parsing, extraction and transformation

@@ -829,6 +829,18 @@ primary adapter. See [[inter-match-gap-lua-implementation-plan]].
 - **BOUNDARY:** `.19.9` adds only public-current teaching and recurring no-drift. It does not modify the three
   frozen JSON authorities, runtime code, generated carriers, capability rows, facades, schemas, MCP, or CLI.
 
+### 4.8.8 `tools/check_language_closure_contract.py` — closure structure and source bindings
+
+- **WHAT:** checks the versioned operation/scope/reference definition against an independent closed schema,
+  sixteen source authorities/66 canonical-JSON semantic digests, seven authored operation categories, eight
+  scopes and exact producing/repair owners. Existing admission and frozen historical rollout strings stay intact.
+- **WHEN:** changing the closure artifact, a selected semantic anchor, definition stage or its canonical registration.
+- **HOW:** `bash tools/run_python_project_data.sh tools/check_language_closure_contract.py`.
+- **OUTPUT:** 432 reason-sensitive mutations/four controls; structural governance only, runtime admission unchanged.
+  Controls distinguish unrelated failure, valid unselected metadata evolution, duplicate JSON keys and nonfinite JSON.
+- **BOUNDARY:** it does not evaluate authored objectives, promote backends, freeze global resource numbers or prove
+  a sandbox. Determinism/resource/failure policy and independent definition reconciliation have later owners.
+
 ### 4.9 `tools/check_semantic_introspection_contract.py` — neutral model/query oracle
 
 - **WHAT:** validates `linkedspec-semantic-model-v1`, `linkedspec-semantic-query-v1`, the owned backend-admission

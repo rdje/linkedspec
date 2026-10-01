@@ -303,6 +303,8 @@ require_tracked_file tools/check_root_rule_selection_five_backend.sh
 require_tracked_file tools/check_rule_local_cursor_contract.py
 require_tracked_file tools/check_rule_local_cursor_five_backend.sh
 require_tracked_file tools/check_typed_source_location_contract.py
+require_tracked_file tools/check_language_closure_contract.py
+require_tracked_file capability_conformance/language_closure_contract.json
 require_tracked_file tools/check_typed_source_location_six_runtime.sh
 require_tracked_file tools/check_recursive_observation_six_runtime.sh
 require_tracked_file tools/check_progressive_span_dispatch_six_runtime.sh
@@ -715,6 +717,9 @@ bash tools/test_memory_commit_pointer.sh
 
 log "checking machine-readable backend capability census"
 perl tools/check_capability_conformance.pl
+
+log "checking language closure operation/scope/reference structure"
+bash tools/run_python_project_data.sh tools/check_language_closure_contract.py
 
 log "checking pinned Unicode casing contract"
 bash tools/run_python_project_data.sh tools/check_unicode_case_contract.py

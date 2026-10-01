@@ -12,6 +12,19 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-10-01 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.2: versioned closure structure
+
+Freeze `linkedspec-language-closure-v1` with16 source authorities/66 semantic anchors, seven authored categories
+and eight scopes; preserve exact scope/effect/publication/result and caller boundaries plus partial/unassessed
+owners and compatibility exclusions. Independent governance rejects432 reason-sensitive mutations/four controls.
+Register the checker once in canonical CI and advance independently counted Python entrypoints38-to39 without
+adding a temporary allocator. The direct-dependent historical audit permits only exact owner-bound CI insertions
+whose removal reconstructs the historical hash; three controls reject additional edits, missing new inputs or
+removed original checks. Original24 checkpoints/257 historical refs/149 latest inputs/134 logs remain accounted.
+No runtime, admission, numerical limit or frontend changes. Structural/signature/binding/codeblock/diagnostic,
+cursor79/8/0/60 and tool-storage proof pass; rendered book and ordinary doctrine/history/memory/diff gates plus
+exact staged canonical acceptance govern landing. Next .1.2.3 owns deterministic/resource/failure policy.
+
 ## 2026-10-01 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.1: closure matrix and freeze plan
 
 Create `docs/language-readiness/closure-contract-matrix.md` with16 source identities/66 exact semantic anchors,

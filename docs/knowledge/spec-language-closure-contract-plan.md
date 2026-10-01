@@ -11,10 +11,11 @@ answers:
   - "does diagnostic output grant authored stdout filesystem or network access"
   - "which boolean and dynamic callback repairs qualify language closure"
 date: 2026-10-01
-status: source-located design; normative freeze and composed admission remain pending
+status: operation/scope/reference structure frozen; resource/failure policy and composed admission pending
 tags: [language-readiness, closure, scopes, authority, progress, failure, resources]
 evidence: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.1 reviews sixteen existing authority identities/semantic anchors and supplemental startup19/21/35/39 ownership. docs/language-readiness/closure-contract-matrix.md separates target, finite current evidence, partial exceptions and unassessed requirements; no runtime, contract, admission or numerical limit changes."
 reverify:
+  - "bash tools/run_python_project_data.sh tools/check_language_closure_contract.py"
   - "bash tools/run_python_project_data.sh tests/language-readiness/verify_objectives.py"
   - "bash tools/run_python_project_data.sh tools/check_typed_source_location_contract.py"
   - "bash tools/run_python_project_data.sh tools/check_recognition_transaction_contract.py"
@@ -54,7 +55,12 @@ ADR0042's stale pending header/index now routes current rollout to its executabl
 neutral authority; its decisions and admitted8/0 state stay unchanged. Historical
 ordinary-recursion probes likewise retain their dates and separate current scopes.
 
-Next `.1.2.2` freezes operation/scope/reference structure with independent
-mutation-sensitive governance; `.1.2.3` owns deterministic/resource/failure policies,
+The subsequent `.1.2.2` freeze is `capability_conformance/language_closure_contract.json`
+(`linkedspec-language-closure-v1`), with sixteen identities/66 selected semantic digests,
+seven authored categories and eight scopes. The independent checker rejects432
+reason-sensitive mutations/four controls, including unrelated-error substitution,
+selected source drift and missing/duplicate CI registration. It evaluates no `.spec`
+and changes no runtime admission. Historical rollout metadata remains outside the
+semantic digests; current proof owners remain explicit. `.1.2.3` next owns deterministic/resource/failure policies,
 and `.1.2.4` independently reconciles the parent through canonical proof.
 [[spec-language-self-containment-and-ebnf-profile]] retains the later optional frontend.

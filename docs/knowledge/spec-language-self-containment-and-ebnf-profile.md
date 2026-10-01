@@ -44,7 +44,8 @@ context-name and lossless/actual-child proof is reconciled under [[three-objecti
 Constructor/flat and the stale entry/cursor description repairs are committed. The finite inventory closes
 canonically at605276027; its success neither erases separately owned defects nor admits whole formats.
 The source-located closure matrix in docs/language-readiness/closure-contract-matrix.md now designs the next
-operation/scope and deterministic/resource/failure freezes. [[spec-language-closure-contract-plan]] separates
+operation/scope and deterministic/resource/failure freezes. The subsequent versioned operation/scope structure
+is frozen with independent governance; deterministic/resource/failure policy is next. [[spec-language-closure-contract-plan]] separates
 target/current/partial/unassessed obligations. The optional frontend has added no syntax; structured formats
 and frontend implementation retain their language-readiness/parity gates.
 

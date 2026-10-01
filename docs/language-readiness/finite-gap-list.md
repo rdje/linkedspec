@@ -102,7 +102,7 @@ Perl/Rust/Dart/Julia/PUC-Lua/LuaJIT proof before `.1.4` creates implementation l
 
 After canonical inventory closeout605276027, `.1.2.1` supplies the source-located
 closure matrix in `docs/language-readiness/closure-contract-matrix.md`. Next
-`.1.2.2/.1.2.3` freeze operation/scope and deterministic/resource/failure policies,
+`.1.2.2` subsequently freezes operation/scope/reference structure; `.1.2.3` next defines deterministic/resource/failure policy,
 then `.1.2.4` reconciles the definition before `.1.3` neutral objectives/mutations
 and `.1.4` evidence-backed gap audit. This is a finite evidence plan, not exhaustive
 grammar coverage, campaign admission or implementation of the optional frontend.

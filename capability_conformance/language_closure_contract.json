@@ -1,0 +1,526 @@
+{
+  "format": 1,
+  "contract_id": "linkedspec-language-closure-v1",
+  "definition_owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.2",
+  "stage": {
+    "operation_scope_reference": "frozen",
+    "determinism_resource_failure": "pending_SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.3",
+    "independent_reconciliation": "pending_SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.4",
+    "composed_objectives": "pending_SPEC-LANGUAGE-SELF-CONTAINMENT.1.3"
+  },
+  "claim_boundary": {
+    "semantic_core": "shared_existing_core",
+    "frontend": "not_implemented_here",
+    "runtime_admission": "unchanged",
+    "proof": "structural_governance_only",
+    "evidence_extent": "finite_objectives_only",
+    "partial_exceptions": "retained",
+    "unassessed_objectives": "retained",
+    "security": "no_sandbox_proof",
+    "numeric_limits": "no_new_global_limit"
+  },
+  "authorities": {
+    "root_rule_selection": {
+      "path": "capability_conformance/root_rule_selection_contract.json",
+      "format": 1,
+      "contract_id": "linkedspec-root-rule-selection-v1",
+      "semantic_sha256": {
+        "/precedence": "72ac67771c95607372956f18ac7ea8a1c3d4fdd13b257350da1e4c813359b4ce",
+        "/validation": "6bd30f245210a792f2b2dc9eb75799a27e95c928ab534c6a5ef70efdee8b4ac1",
+        "/selector": "ca063b134b6522e06b416a0bb04011e7d9bfa72e1c50b9758d24bb58b291a2e8"
+      },
+      "proof_owner": "FUTURE-PARITY-BACKLOG.9.1.1.2",
+      "evidence_ledger": "docs/language-readiness/grammar-cursor-capture.md"
+    },
+    "rule_local_cursor": {
+      "path": "capability_conformance/rule_local_cursor_contract.json",
+      "format": 1,
+      "contract_id": "linkedspec-rule-local-cursor-v1",
+      "semantic_sha256": {
+        "/policy/and_cursor": "5db910014ddd7edda5bae872146e6b3a8450c46e26f72d8ca3735e5a85c42926",
+        "/policy/or_default_cursor": "4ab6420e19ca75e472b4cceb160048d84c75675dd668551d7b4d916cdfd00264",
+        "/policy/child_cursor": "2517d913d9f79d41e03565a84feb4ab15297744b5ed7f8f8295c5fcf9fb12e29",
+        "/policy/global_override": "fd10746bbf38a243466801f57a0f15399b471c2580fd4e29c82a3437229cb30c"
+      },
+      "proof_owner": "FUTURE-PARITY-BACKLOG.9.1.9",
+      "evidence_ledger": "docs/language-readiness/grammar-cursor-capture.md"
+    },
+    "typed_source_location": {
+      "path": "capability_conformance/typed_source_location_contract.json",
+      "format": 1,
+      "contract_id": "linkedspec-typed-source-location-v1",
+      "semantic_sha256": {
+        "/policy/source_identity": "b99f324bb3fa0b8701e3304c9d37220ce289f2a6c719c471dcedc424f2e0afae",
+        "/policy/span": "dc5db7f7e662a62c78d97a21152d2d2594e62ad84385a8137ae4502e67229360",
+        "/policy/transactions": "19d47dbf9254550126f0f5c6177146ff0b962c1defb88a20fc8f980adaf26d20",
+        "/policy/progress": "b7a3e83d6e66a6314fd42d93dbef2ed9a33371032d6d6d397ca1c737bd53159e",
+        "/recursive_observations": "5119bfc0f3febd69f6aa53166704e6b55006ed9209bbe54f34405c7dab0e34b8"
+      },
+      "proof_owner": "FUTURE-PARITY-BACKLOG.14.8",
+      "evidence_ledger": "docs/language-readiness/grammar-cursor-capture.md"
+    },
+    "recognition_transaction": {
+      "path": "capability_conformance/recognition_transaction_contract.json",
+      "format": 1,
+      "contract_id": "linkedspec-recognition-transaction-v1",
+      "semantic_sha256": {
+        "/authored_surface/result_separation": "1b2af6166b68c575f9f8c4b05ceeeba216cabaa1e3bd811ccbc1aba673d024ae",
+        "/policy/attempt_result": "e5fb6a8192cc8e5a78e686f19c5fe756218c44513bdecd3616523248972c6976",
+        "/policy/commit": "71fe29d05de8cac69c9cc93bfe714dea6df6537228b7d82058b33d6a5f5469b2",
+        "/policy/rollback": "1aff3057848256dfc6af76c4bbdc26246079b3f15130214812abb2d62e906c47",
+        "/policy/progress": "e38d6ea3c4bb5df03d0721843c1f660e9accf8d00d91b199c4f55d88e44d124b",
+        "/effect_model": "df36f6645ec334ec4cf16dde34feaf8bcb250bacdf703945b4e60272c770aca2"
+      },
+      "proof_owner": "FUTURE-PARITY-BACKLOG.14.3",
+      "evidence_ledger": "docs/language-readiness/grammar-cursor-capture.md"
+    },
+    "inter_match_gap_capture": {
+      "path": "capability_conformance/inter_match_gap_capture_contract.json",
+      "format": 1,
+      "contract_id": "linkedspec-inter-match-gap-capture-v1",
+      "semantic_sha256": {
+        "/authored_surfaces": "d34fe5e36c95a561416a89c0ca32137ba9b6bb0e120617a09c9d29a19caacad1",
+        "/segmentation_cases": "45917e782dd462e965e99a5ec6548d3e21a2c07d45abc3877e2dcc39d0d16708",
+        "/lifecycle_matrix": "b324189363f7ee8dad8a6e5e9964c3223ac45eed8770cf21977a57bc6cd42fff"
+      },
+      "proof_owner": "INTER-MATCH-GAP-CAPTURE.7",
+      "evidence_ledger": "docs/language-readiness/grammar-cursor-capture.md"
+    },
+    "uniform_binding": {
+      "path": "capability_conformance/uniform_binding_contract.json",
+      "format": 1,
+      "contract_id": "linkedspec-uniform-binding-v1",
+      "semantic_sha256": {
+        "/policy/binding": "fc718b84a2f55ede0a4eb0d28db1ebb24f61dc3db91ab7b54110f8528f6ae6c5",
+        "/policy/host_storage": "72d24474e69643ada85149792ef6678eeab301495437558291696c010e1e139f",
+        "/policy/wrong_kind": "079ac648782bfd67e17991366253fff354595338edda5b47539e9265013c6177",
+        "/constructor_policy": "a773e29f183a0eed9e5cfca3f30a10ad2c5940ae7551d17c26d9aaf1ed13d29f"
+      },
+      "proof_owner": "FUTURE-PARITY-BACKLOG.12.1",
+      "evidence_ledger": "docs/language-readiness/state-control-results.md"
+    },
+    "callable_signature": {
+      "path": "capability_conformance/callable_signature_contract.json",
+      "format": 1,
+      "contract_id": "linkedspec-callable-signature-v1",
+      "semantic_sha256": {
+        "/policy/arguments": "4738735348f87edf4f2899687ff4951fc94c5cbfbe9350e2ad5cbf659b831f54",
+        "/policy/rest_binding": "7473a0d759622143207d4ff39e2cb0f6ba0b1abf0112a4b0c678a30fed6cbe49",
+        "/policy/overloads": "ec4fa11cf52d5fae7c2fb7784d48a9eeb3e335c1175c73e2968c5ab428fdeaf2",
+        "/policy/results": "2b33eb2adbe7c09e6f3f6e9956fb05c3ec3bba0e42ed3d696585f53165178d8e"
+      },
+      "proof_owner": "FUTURE-PARITY-BACKLOG.4",
+      "evidence_ledger": "docs/language-readiness/state-control-results.md"
+    },
+    "callable_codeblock": {
+      "path": "capability_conformance/callable_codeblock_contract.json",
+      "format": 1,
+      "contract_id": "linkedspec-callable-codeblock-v1",
+      "semantic_sha256": {
+        "/policy/context": "4627106c342229a945f7b0b7d1cda017ea3f206cad94d841302a69235b3f3754",
+        "/policy/parameters": "543c52aaf96118c8c8112fbf593f9bac222fc257914b7c16b2be08e86caaa56c",
+        "/policy/results": "b6f5798bc625ac6876a9c6fd735d6a096c7f95a4d4626850c2f5ad80b6a3a0b6",
+        "/policy/closures": "c19fa0ee20e0be8d949b4326f50f2fdee122e7ec3665f53c648860ac4b5d72d5"
+      },
+      "proof_owner": "FUTURE-PARITY-BACKLOG.11.8",
+      "evidence_ledger": "docs/language-readiness/state-control-results.md"
+    },
+    "logical_helper": {
+      "path": "capability_conformance/logical_helper_contract.json",
+      "format": 1,
+      "contract_id": "linkedspec-logical-helper-v1",
+      "semantic_sha256": {
+        "/policy/evaluation": "474ea16ed86174832a5963e5e9edfd877d4fe3fae6fb23d1581c5231bdadf031",
+        "/policy/truthiness": "de531d4a0773317c1bb331ae5cda0b4f1e7e322ec13773796693f4c71604e090",
+        "/policy/lazy_controls": "1be6fd7d2644576321aae2daeb264e4abd0e2515dfe2891f8addb76868507178"
+      },
+      "proof_owner": "FUTURE-PARITY-BACKLOG.5.2",
+      "evidence_ledger": "docs/language-readiness/state-control-results.md"
+    },
+    "scalar_numeric": {
+      "path": "capability_conformance/scalar_numeric_contract.json",
+      "format": 1,
+      "contract_id": "linkedspec-scalar-numeric-v1",
+      "semantic_sha256": {
+        "/policy/accepted_number": "27d299e47db07b93ce1c27087061a3c9f0abb9b436f14c831c033e4a03963d8f",
+        "/policy/aggregate_reducers": "0c40f2bbf19d6bb418f2119a61c81172abb32ca831b8f4c879c49ce0994312ad",
+        "/policy/invalid_input": "bcc6b1494c02dfe6641c13e10a56ff13f0a89aa3c436b9bf28576d773685e923",
+        "/policy/round": "a5c35c52bc4d936b3fdd8d4f4ea166c5ecde97643eed8aa6aa5361ab42fc4ea5"
+      },
+      "proof_owner": "LUA-BACKEND-PARITY.4.3.3.1.1",
+      "evidence_ledger": "docs/language-readiness/state-control-results.md"
+    },
+    "write_vivification": {
+      "path": "capability_conformance/write_vivification_contract.json",
+      "format": 1,
+      "contract_id": "linkedspec-write-vivification-v1",
+      "semantic_sha256": {
+        "/policy/evaluation_order": "39cede5c9bab411ee81df1df6d7cdd17e0d861bbbddd4e4ea38149d75d6879a3",
+        "/policy/post_evaluation_snapshot": "56e927f4f6f794ebdb7b8f5214207bff037c4ab7588e89c92727e33d2e0cae0d",
+        "/policy/atomic_commit": "78a4ea6233c2b1da803ea0d76fd99f0d964f78268a6fa9da7684aed3e31abd3f",
+        "/policy/detachment": "fac3cf51bff78015a4b2f9685140e1da9b981366dfd6108da9b935cb9a2b0de5"
+      },
+      "proof_owner": "FUTURE-PARITY-BACKLOG.19.1.1",
+      "evidence_ledger": "docs/language-readiness/state-control-results.md"
+    },
+    "map_leaves_mutation": {
+      "path": "capability_conformance/map_leaves_mutation_contract.json",
+      "format": 1,
+      "contract_id": "linkedspec-map-leaves-mutation-v1",
+      "semantic_sha256": {
+        "/policy/traversal": "3a362e7ece8527ca75ca2820bd101909c03443aca6b5a652cb1432a5fd41fd60",
+        "/policy/reentrancy": "2fea0de496b8e32353bc3f09cc11b593dfbc59519dcb61df3302f66eac2a2082",
+        "/policy/failure_effects": "80a2c89454a490a866e983e1750fd36520e062bc76dba5c304a78624ef507856",
+        "/policy/continuation": "3a5e0448326a48f3dbd72580fc8d0da188ae019fe831ec947e0d6634e442396c"
+      },
+      "proof_owner": "FUTURE-PARITY-BACKLOG.19.1.2",
+      "evidence_ledger": "docs/language-readiness/state-control-results.md"
+    },
+    "write_map_leaves_composition": {
+      "path": "capability_conformance/write_map_leaves_composition_contract.json",
+      "format": 1,
+      "contract_id": "linkedspec-write-map-leaves-composition-v1",
+      "semantic_sha256": {
+        "/requires": "1e4e03b18079b23a8a891f0c5befaa758f68f75185bd4014c76194f17024e0dc",
+        "/policy/identity_guard": "85408daf133a39eccc69caa93b83b009564db3999bd760a5bda3430be0179173",
+        "/policy/later_callback_failure": "41681042afbb20f3c0ac858a15d4789fb76cb6ad231fc376d4670ab35064e507",
+        "/policy/post_commit": "c1fd0b236f7e5976feee0962c0474197c1f2f7f609875b4350c8df8a55f90fb7"
+      },
+      "proof_owner": "FUTURE-PARITY-BACKLOG.19.1.3",
+      "evidence_ledger": "docs/language-readiness/state-control-results.md"
+    },
+    "progressive_span_dispatch": {
+      "path": "capability_conformance/progressive_span_dispatch_contract.json",
+      "format": 1,
+      "contract_id": "linkedspec-progressive-span-dispatch-v1",
+      "semantic_sha256": {
+        "/authored_surface/availability": "1374979effc0c7ce97251a7a5a021774158af135186a32cb05313e8fcd8c9d8b",
+        "/policy/registry": "bb5fbc1514280159aeba08ee926938a4557af753bb616a968932968f113523ae",
+        "/policy/ceilings": "b82dfc9564ad6d234a21d040d971accd29e48a814c5a3bda15df8f108e1afd15",
+        "/policy/progress": "b907eaa6309e7b91f47e1dc96b009a31e64c76d3ecf74819400040a4f4a33f55",
+        "/policy/bounds": "43d5ef8fd8c414dd46f0842360d50d107b574c78a36823160f37de68c7f13d58"
+      },
+      "proof_owner": "FUTURE-PARITY-BACKLOG.14.6",
+      "evidence_ledger": "docs/language-readiness/grammar-cursor-capture.md"
+    },
+    "staged_ast_enrichment": {
+      "path": "capability_conformance/staged_ast_enrichment_contract.json",
+      "format": 1,
+      "contract_id": "linkedspec-staged-ast-enrichment-v1",
+      "semantic_sha256": {
+        "/policy/authority": "17ae5f9aa6dfc89e3dbbcfad179adc9b6301426e06ad5f07491a47d222f3c27a",
+        "/policy/queue": "797a5e6bab1d3975bfc10d7280240613d8b7f2e05b9e76312e63694f239d3d49",
+        "/policy/state": "1b9bd651907c50e213e91b49ebd08a9734a834431c3baf503dd216c21ab26962",
+        "/policy/failure": "64281b0d816a221f7a8f89ddced3900299a5d0383a34bf80c64c7d32e66b00c5",
+        "/policy/detachment": "ece3a7f62441c5ebe83b6aebb00c160113d14d4048d43c0c93e1e4383d079adb"
+      },
+      "proof_owner": "FUTURE-PARITY-BACKLOG.14.7",
+      "evidence_ledger": "docs/language-readiness/grammar-cursor-capture.md"
+    },
+    "diagnostic_output": {
+      "path": "capability_conformance/diagnostic_output_contract.json",
+      "format": 1,
+      "contract_id": "linkedspec-diagnostic-output-v1",
+      "semantic_sha256": {
+        "/policy/delivery": "33e93165ba39b04345490ce4caf0656598e02ac8c1b84b73b3ba953c2f3f9db8",
+        "/policy/result_neutrality": "81019d2a9d1b5e174e7d7dc91bc7fd5fca7bde081dbe40a4ed36bb65b95fcdde",
+        "/policy/sink_failure": "45eabfe2f99c4c771ac38a2a802df1d93693d0f08f9ccd2b8c00473591ddf520",
+        "/policy/exit_now": "10ec63c8226ef1c2169175305ebd586a959cabed4b59f5d5c58113171c235b6d"
+      },
+      "proof_owner": "FUTURE-PARITY-BACKLOG.5.1",
+      "evidence_ledger": "docs/language-readiness/state-control-results.md"
+    }
+  },
+  "operations": {
+    "compute": {
+      "included": [
+        "typed_scalar_and_aggregate_expressions",
+        "positional_fixed_and_final_rest_functions",
+        "deferred_blocks",
+        "eager_helpers_and_selected_controls"
+      ],
+      "authorities": [
+        "uniform_binding",
+        "callable_signature",
+        "callable_codeblock",
+        "logical_helper",
+        "scalar_numeric"
+      ],
+      "scopes": [
+        "pure_function",
+        "deferred_codeblock",
+        "rule_invocation"
+      ],
+      "claim": "existing_mechanisms_with_partial_exceptions"
+    },
+    "recognize": {
+      "included": [
+        "linked_rules",
+        "intrinsic_cursor_families",
+        "advancing_rule_recursion",
+        "linear_recognition_attempts"
+      ],
+      "authorities": [
+        "root_rule_selection",
+        "rule_local_cursor",
+        "recognition_transaction"
+      ],
+      "scopes": [
+        "rule_invocation",
+        "recognition_attempt"
+      ],
+      "claim": "existing_mechanisms_with_partial_exceptions"
+    },
+    "observe": {
+      "included": [
+        "authorized_source_bound_capture",
+        "cursor_boundaries_and_marks",
+        "detached_recursive_observations"
+      ],
+      "authorities": [
+        "typed_source_location",
+        "inter_match_gap_capture"
+      ],
+      "scopes": [
+        "rule_invocation",
+        "recognition_attempt",
+        "recursive_observation"
+      ],
+      "claim": "existing_mechanisms_with_partial_exceptions"
+    },
+    "mutate": {
+      "included": [
+        "typed_working_bindings",
+        "explicit_cursor_operations",
+        "nested_write",
+        "guarded_root_kind_leaf_mutation"
+      ],
+      "authorities": [
+        "uniform_binding",
+        "typed_source_location",
+        "write_vivification",
+        "map_leaves_mutation",
+        "write_map_leaves_composition"
+      ],
+      "scopes": [
+        "rule_invocation",
+        "deferred_codeblock",
+        "nested_write",
+        "leaf_transformation"
+      ],
+      "claim": "existing_mechanisms_with_partial_exceptions"
+    },
+    "return": {
+      "included": [
+        "owner_approved_typed_values",
+        "ordinary_child_payloads",
+        "detached_capture_mutation_and_staged_results"
+      ],
+      "authorities": [
+        "uniform_binding",
+        "callable_signature",
+        "callable_codeblock",
+        "recognition_transaction",
+        "write_vivification",
+        "map_leaves_mutation",
+        "staged_ast_enrichment"
+      ],
+      "scopes": [
+        "rule_invocation",
+        "pure_function",
+        "deferred_codeblock",
+        "recognition_attempt",
+        "nested_write",
+        "leaf_transformation",
+        "child_parse"
+      ],
+      "claim": "existing_mechanisms_with_partial_exceptions"
+    },
+    "diagnose": {
+      "included": [
+        "ordered_typed_diagnostic_events"
+      ],
+      "authorities": [
+        "diagnostic_output"
+      ],
+      "scopes": [
+        "rule_invocation",
+        "deferred_codeblock"
+      ],
+      "claim": "existing_mechanisms_with_partial_exceptions"
+    },
+    "compose": {
+      "included": [
+        "private_progressive_dispatch",
+        "public_staged_source_bound_text_assignment"
+      ],
+      "authorities": [
+        "progressive_span_dispatch",
+        "staged_ast_enrichment"
+      ],
+      "scopes": [
+        "child_parse"
+      ],
+      "claim": "existing_mechanisms_with_partial_exceptions"
+    }
+  },
+  "scopes": {
+    "rule_invocation": {
+      "visible": "source_cursor_capture_and_scoped_declared_state",
+      "restored": "authored_recursive_state_restoration",
+      "publication": "owner_specific_effects",
+      "authorities": [
+        "rule_local_cursor",
+        "uniform_binding",
+        "typed_source_location"
+      ]
+    },
+    "pure_function": {
+      "visible": "eager_explicit_arguments_then_fresh_local_state",
+      "restored": "caller_state_not_implicitly_captured",
+      "publication": "ordinary_value_result",
+      "authorities": [
+        "callable_signature"
+      ]
+    },
+    "deferred_codeblock": {
+      "visible": "live_invocation_caller_nonparameters",
+      "restored": "copied_temporary_parameters",
+      "publication": "block_local_return_nonparameter_effects_persist",
+      "authorities": [
+        "callable_codeblock"
+      ]
+    },
+    "recognition_attempt": {
+      "visible": "one_source_rule_invocation_bound_linear_token",
+      "restored": "cursor_boundary_marks_only_on_rollback",
+      "publication": "strict_match_boolean_separate_from_payload",
+      "authorities": [
+        "recognition_transaction"
+      ]
+    },
+    "recursive_observation": {
+      "visible": "existing_invocation_authority",
+      "restored": "no_second_stack_or_retained_history",
+      "publication": "immediately_detached_record",
+      "authorities": [
+        "typed_source_location"
+      ]
+    },
+    "nested_write": {
+      "visible": "post_expression_root_snapshot",
+      "restored": "structural_receiver_state_only_on_failure",
+      "publication": "atomic_root_commit_detached_result",
+      "authorities": [
+        "write_vivification"
+      ]
+    },
+    "leaf_transformation": {
+      "visible": "resolved_receiver_original_shape_root_kind",
+      "restored": "receiver_only_unrelated_effects_persist",
+      "publication": "atomic_commit_then_continuation",
+      "authorities": [
+        "map_leaves_mutation",
+        "write_map_leaves_composition"
+      ]
+    },
+    "child_parse": {
+      "visible": "fresh_child_state_caller_frozen_registry",
+      "restored": "private_dispatch_leaves_parent_cursor_unchanged",
+      "publication": "owner_specific_detached_child_results",
+      "authorities": [
+        "progressive_span_dispatch",
+        "staged_ast_enrichment"
+      ]
+    }
+  },
+  "relationships": {
+    "entry_selection": "does_not_match_entry_regex",
+    "cursor_restore": "cursor_only_not_recognition_rollback",
+    "recognition_effects": "closed_graph_not_arbitrary_user_state_or_AST_rollback",
+    "function_and_codeblock_scope": "distinct_no_lexical_environment_capture",
+    "codeblock_construction": "inert",
+    "child_work": "not_parent_cursor_progress",
+    "progressive_surface": "private_no_outward_API",
+    "staged_operand": "source_bound_text_assignment_only",
+    "write_snapshot": "after_segments_then_RHS",
+    "leaf_continuation": "after_commit",
+    "leaf_traversal": "original_shape_root_kind"
+  },
+  "results": {
+    "match_presence": "separate_from_payload_truthiness_and_kind",
+    "source_coordinates": "same_source_half_open_Unicode_scalars",
+    "private_values": "no_live_source_token_or_dispatch_handle_escape",
+    "detachment": "owner_specific_not_inferred_for_every_value",
+    "diagnostics": "events_separate_from_result_and_trace",
+    "absent_sink": "quiet",
+    "sink_destination": "caller_owned",
+    "ordinary_data": "path_like_strings_do_not_grant_authority"
+  },
+  "host_boundary": {
+    "inputs": [
+      "decoded_source_and_identity",
+      "explicit_entry_and_supported_options",
+      "explicit_typed_values",
+      "precompiled_child_registry",
+      "narrowing_operational_grants",
+      "optional_typed_diagnostic_sink"
+    ],
+    "caller_responsibilities": [
+      "authorize_source_transfer",
+      "prepare_compile_and_freeze_registry",
+      "install_and_route_sink",
+      "enforce_host_transport_contracts"
+    ],
+    "authored_data_grants_authority": false,
+    "host_grammar_callback_proves_closure": false
+  },
+  "excluded": {
+    "portable_claim": [
+      "raw_host_fallback",
+      "legacy_plugin_behavior",
+      "compatibility_aliases"
+    ],
+    "extensions_not_selected": [
+      "lexical_closures",
+      "recursive_user_functions",
+      "recursive_codeblock_invocation",
+      "defaults",
+      "named_fixed_arguments",
+      "generic_user_defined_bang_methods",
+      "arbitrary_AST_or_user_state_rollback",
+      "expanded_staged_operands"
+    ],
+    "parked_named_arguments_owner": "PARSER-AUTHORING-APIS.4"
+  },
+  "obligations": {
+    "finite_ledger": "docs/language-readiness/finite-gap-list.md",
+    "supplemental_partial_owners": [
+      "SESSION-STARTUP-READING.19",
+      "SESSION-STARTUP-READING.21",
+      "SESSION-STARTUP-READING.35",
+      "SESSION-STARTUP-READING.39"
+    ],
+    "preserve_repair_prerequisites": true,
+    "resource_detail_review_owner": "SESSION-STARTUP-READING.37.2",
+    "general_teaching_review_owner": "SESSION-STARTUP-READING.41.2",
+    "unassessed_selection_owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3",
+    "primitive_selection_owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.4",
+    "mutation_admission_owners": [
+      "FUTURE-PARITY-BACKLOG.19.7",
+      "FUTURE-PARITY-BACKLOG.19.8",
+      "FUTURE-PARITY-BACKLOG.19.9"
+    ]
+  },
+  "references": {
+    "design": "docs/language-readiness/closure-contract-matrix.md",
+    "pure_function_scope": "docs/knowledge/terse-user-defined-functions-mvp-contract.md",
+    "direction": "docs/decisions/0064-expressive-self-containment-and-ebnf-profile.md"
+  },
+  "governance": {
+    "checker": "tools/check_language_closure_contract.py",
+    "route": "tools/run_python_project_data.sh",
+    "ci": "tools/run_ci_local.sh",
+    "invocations": 1
+  }
+}

@@ -1,6 +1,6 @@
 # ROADMAP
 
-October1 feature readiness: SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.1 designs the source-located closure matrix and bounded freeze plan after canonical inventory commit605276027. Sixteen existing authorities separate authored operations, scopes, effects and caller responsibilities from target/partial/unassessed guarantees. No runtime, admission or numerical limit changes. Next .1.2.2 freezes operation/scope structure; existing repairs and format/profile gates remain open.
+October1 feature readiness: SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.2 freezes linkedspec-language-closure-v1 operation/scope/reference structure:16 authorities/66 semantic anchors, seven authored categories and eight scopes. Independent governance rejects432 reason-sensitive mutations with four controls; exact CI evolution preserves historical objective inputs. No runtime admission, numerical limit or frontend changes. Next .1.2.3 defines deterministic/resource/failure policy, followed by independent reconciliation; existing repairs and format/profile gates remain open.
 
 LinkedSpec is being positioned as a progressive extraction parser DSL: fast, recursive, regex-anchored, and intentionally different from strict EBNF-centric tooling.
 
