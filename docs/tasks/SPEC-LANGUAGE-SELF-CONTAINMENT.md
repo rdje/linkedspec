@@ -613,11 +613,13 @@ used by ordinary `.spec` syntax on every backend.
 - [x] **LOCKSTEP** — Ledger, public book, Knowledge, checkpoint, roadmaps, task frontier, MEMORY and bounded live/history records agree. Lossless segmentation/child parsing .1.1.3.3 follows; no XML, indentation or format-campaign admission.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3`
-  Status: `active`
+  Status: `done`
   Goal: Probe lossless segmentation and bounded child parsing with exact source provenance and caller-authorized dispatch.
   Dependencies: `.1.1.3.2`
   Children: `.1.1.3.3.1`, `.1.1.3.3.2`, `.1.1.3.3.3`, `.1.1.3.3.4`, `.1.1.3.3.5`
   Acceptance: Every original scalar belongs to a tested segment; child bounds and composed spans are exact; no host parsing escape or ambient loading is introduced. Keep private carrier and public authoring boundaries explicit.
+
+  Closeout: Bounded child evidence reconciled under .1.1.3.3.5; exact staged canonical receipt is required for this parent closure. All separate defect owners remain open.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.1`
   Status: `done`
@@ -675,11 +677,13 @@ used by ordinary `.spec` syntax on every backend.
 - [x] **LOCKSTEP** — Actual tested grammars are exact rendered book includes. Canonical lossless ledger, Knowledge, checkpoint, task/frontier, roadmaps, bounded live/history and MEMORY agree. Other backend carriers and canonical reconciliation remain separately owned under .3.4/.3.5; existing startup resource/stitch owners stay open.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4`
-  Status: `active`
+  Status: `done`
   Goal: Extend the unchanged lossless and child-composition corpus to every required native and supported carrier route.
   Dependencies: `.1.1.3.3.3`
   Children: `.1.1.3.3.4.1`, `.1.1.3.3.4.2`, `.1.1.3.3.4.3`, `.1.1.3.3.4.4`
   Acceptance: Split into backend-sized leaves before implementation. Run Rust, Dart, Julia, PUC Lua and LuaJIT against the original authored oracle; distinguish native, reconstructed, generated and independently emitted carriers, retained recovery and per-call isolation. Preserve authority-negative and provenance mutation controls; do not convert a private dispatch carrier into public API evidence.
+
+  Closeout: Bounded child evidence reconciled under .1.1.3.3.5; exact staged canonical receipt is required for this parent closure. All separate defect owners remain open.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.1`
   Status: `done`
@@ -774,10 +778,29 @@ used by ordinary `.spec` syntax on every backend.
 - [x] **LOCKSTEP** — Book, exact source includes, ledger, Knowledge, checkpoint, task/frontier, roadmaps, bounded live/history and MEMORY agree. Canonical .3.5 follows; all listed Lua array/resource/marker/provenance and baseline obligations remain open.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.5`
-  Status: `pending`
+  Status: `done`
   Goal: Reconcile bounded lossless/child readiness, authoring costs, known limits and exact canonical milestone evidence.
   Dependencies: `.1.1.3.3.4`
   Acceptance: Audit source/checkpoint identities and route-level results, align ledger/Knowledge/book/roadmaps/frontier, retain open defect owners and unassessed objectives, and run exact staged canonical CI before closing .1.1.3.3. No format-campaign admission or public/private API expansion.
+
+  Activation: Clean f10c0ce96666f4adf867f329cdf75dd793c003b2; all backend children committed, nine doctrines/post-pointer pass, brief0 and no outstanding job.
+  Verification tier: `canonical`
+  Focused checks: Audit all seven checkpoint source/log identities against producing commits and current sources, independent original oracles and exact route/reuse/mutation ledger; book render/source assertions, Knowledge/memory/history/doctrines and diff hygiene.
+  Canonical trigger: Milestone and parent closeout require tools/run_ci_local.sh on the exact fully staged candidate, with a receipt required for landing.
+  Scope: Close bounded lossless/actual-child .3 and backend parent .3.4 only through canonical acceptance; preserve authored costs, runtime-specific limits and all separate defect owners. No runtime, fixture or public contract change.
+  Verification: Seven checkpoint blobs/180 historical source references/132 unique current paths and47 retained logs pass. Only successive book revisions differ, with producing blobs exact. Independent13-case/39-segment reconstruction and three evidence-corruption/two path controls pass; exact book proof and standard gates precede staged canonical CI. Its receipt is mandatory for landing; actual result belongs to the commit body.
+  Authoring assessment: No new primitive selected. The21-line segment grammar,27-line parent and21-line child require explicit skipped-prefix retention, correct loop/LX mode, child entry/end guards and caller-frozen compiled registry/span projection. Neither ambient loading nor copied/gap/arbitrary-span operands are admitted.
+  Evidence: docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.5-verification.json; lossless ledger and reconciliation Knowledge card.
+  Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.5 - reconcile bounded lossless child readiness`.
+
+### `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.5` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Backend-sized proofs exist but current task/roadmap rows still name completed child work as future. The parent lacks one exact route/reuse/authoring-cost ledger; canonical closeout remains required.
+- [x] **ROOT CAUSE (WHY + WHERE)** — WHY: chronological backend evidence was recorded separately while early current-summary rows remained. WHERE: roadmap lane rows, task index and Knowledge statuses. Public Get/parse_spec/compile_spec/runtime carrier producers and their frozen checkpoints establish bounded grammar behavior, not universal language completeness.
+- [x] **FIX** — Reconcile31 matched pairs across six runtimes, retained/per-call distinctions, original source/oracle identities, seven mutation roles, explicit authored guards and every existing defect owner. Correct current summaries while preserving historical evidence; add a read-only reproducible source/log audit.
+- [x] **ADDRESSED (verified)** — All180 historical references/132 current source paths and47 retained logs verify against seven producing commits. Only explained book evolution differs. Independent scalar slicing verifies13 cases/39 segments and child4/15 inventory. Controlled corrupt checkpoint/source/log inputs and outside paths reject; exact book blocks and published matrix render.
+- [x] **NO REGRESSION** — No runtime, original fixture, dependency or generated-format change. Complete backend-focused proofs remain source-exact; canonical CI is required on this exact staged candidate before parent closure can land. Optional unfiltered gates and known separate defects are not claimed closed.
+- [x] **LOCKSTEP** — Ledger, book, current Knowledge statuses/new fact, checkpoint/audit producer, task/frontier, roadmaps, MEMORY and bounded live/history agree. Three-objective .1.1.3.4 follows before finite gap selection; standard formats, alternate syntax and general resource safety remain gated.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.4`
   Status: `pending`
@@ -992,7 +1015,7 @@ used by ordinary `.spec` syntax on every backend.
 | 14 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.3` | `done` | Bounded nesting evidence/authoring limits reconciled; exact canonical receipt governs closeout. |
 | 15 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.1` | `done` | Perl native/fresh emitted context-name proof:11/17 cases,90 calls and34 recoveries per route. |
 | 16 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.2` | `done` | Context11/17/22 and original-default6/7/12 pass all six native routes. |
-| 17 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.5` | `pending` | Canonical reconciliation of all bounded lossless/actual-child routes. |
+| 17 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.4` | `pending` | Reconcile all three bounded objective outcomes before gap selection. |
 
 ## Decisions
 
@@ -1025,6 +1048,8 @@ used by ordinary `.spec` syntax on every backend.
 - None for `.1.1`. The September27 clean prioritization supersedes the earlier callable-first schedule. Format implementation and the optional frontend remain gated by their own prerequisites.
 
 ## Verification Log
+
+September28 `.1.1.3.3.5`: Reconcile seven checkpoint blobs/180 source references/132 paths/47 logs, exact historical book supersessions, independent13/39 reconstruction and corruption/path controls. Public matrix and full source includes render. Exact staged canonical receipt governs parent closure; actual result is recorded in the commit body.
 
 September28 `.1.1.3.3.4.4`: Both Lua ABIs pass222 v2/new62, staged890/gap392 and document51/27/24. Five routes preserve original13/child4/15/seven mutants; actual-result/alias controls and fresh ten-module process status/stderr/report/cleanup pass. Storage19/3/30, neutral123/129 and exact book pass.
 
@@ -1064,6 +1089,8 @@ September27 `.1.1.1`: seven neutral/structural checks, 34 ledger source-path/con
 
 ## Commit Log
 
+- `.1.1.3.3.5`: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.5 - reconcile bounded lossless child readiness`.
+
 - `.1.1.3.3.4.4`: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.4 - verify dual-ABI Lua lossless child carriers`.
 
 - `.1.1.3.3.4.3`: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.3 - verify Julia lossless child carriers`.
@@ -1083,6 +1110,8 @@ September27 `.1.1.1`: seven neutral/structural checks, 34 ledger source-path/con
 | `.0` | `SPEC-LANGUAGE-SELF-CONTAINMENT.0 - ratify expressive spec self-containment` | Direction capture only; no parser/runtime behavior. |
 
 ## Changelog
+
+- `2026-09-28`: Reconcile bounded lossless/actual-child proof under exact canonical acceptance; three-objective .1.1.3.4 follows.
 
 - `2026-09-28`: Complete five shared Lua lossless/actual-child routes per ABI; canonical .3.5 reconciliation follows.
 

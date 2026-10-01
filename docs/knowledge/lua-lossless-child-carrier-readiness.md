@@ -7,7 +7,7 @@ answers:
   - "how does Lua lossless readiness falsify its result-isolation assertion"
   - "how are fresh emitted Lua lossless parent and child modules verified"
 date: 2026-09-28
-status: bounded dual-ABI five-carrier proof verified; canonical reconciliation separately owned
+status: bounded evidence preserved; cross-runtime milestone reconciled under .3.5
 tags: [lua, luajit, language-readiness, lossless, staged-parsing, provenance, isolation]
 evidence: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.4 passes222 v2 assertions (new62/existing160) on each ABI, staged890/gap392 and document51/27/24. Each host verifies five matched routes, original/enriched13 twice, child4/15 and seven mutants. Actual-result mutation plus a deliberately aliased pair prove bounded isolation. Fresh selected-ABI children require exact ten-module reports, successful status, empty stderr and cleanup. Storage19/three dual-ABI modules/30 census controls and neutral123/129 pass."
 reverify:
@@ -34,3 +34,5 @@ The finite valid snapshots, direct spans, plain results and small counters leave
 `.2.26` diagnostics, `.2.27` marker cycles/null, `.2.28` capture ranges, `.2.29` provenance and `.2.8.15/.16` seed
 limits open. Installed-PUC baseline `.2.2` and guidance `.2.1` remain separate; no unfiltered gate, standard format,
 arbitrary span/gap authority or general recursive ceiling claim is made.
+
+[[lossless-child-readiness-reconciliation]] records the completed bounded matrix and authoring costs; historical leaf evidence and open defect limits remain unchanged.

@@ -8,7 +8,7 @@ answers:
   - "which test proves native and emitted lossless segmentation readiness"
   - "can reconstructing all input hide a wrong item gap classification"
 date: 2026-09-27
-status: verified bounded Perl segmentation; staged children and other backends pending
+status: bounded evidence preserved; cross-runtime milestone reconciled under .3.5
 tags: [perl, lossless, gaps, readiness, lifecycle, generated-source, documentation]
 evidence: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.2 passes 537 top-level readiness tests: thirteen exact segmentation cases repeated on native/fresh emitted routes, independent scalar slicing/reconstruction, returned-gap detachment, four grammar mutants and exact published gap-fence proof with its original OR/LX mistake retained as a mutant. Existing nesting/context/entry cases stay unchanged."
 reverify:
@@ -31,3 +31,5 @@ entry behavior with lossless extraction; it does not change preprocessing.
 Reconstruction is necessary but insufficient: a selector mutant can classify `[0]` entirely as gap text and still
 reconstruct it. Exact independently authored classifications/spans and source slicing detect different defects.
 No child-parsing or other-runtime result is inferred from this Perl-only evidence.
+
+[[lossless-child-readiness-reconciliation]] records the completed bounded matrix and authoring costs; historical leaf evidence and open defect limits remain unchanged.

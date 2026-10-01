@@ -7,7 +7,7 @@ answers:
   - "how does the staged child retain local and original source spans"
   - "what rejects a child payload containing leading zeroes or neighboring delimiters"
 date: 2026-09-27
-status: bounded four-pair Perl proof verified; other backend carriers separately owned
+status: bounded evidence preserved; cross-runtime milestone reconciled under .3.5
 tags: [perl, self-containment, lossless, staged-parsing, provenance, readiness]
 evidence: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.3 preserves the thirteen-case original segmentation oracle twice on four native/emitted parent-child combinations. A real child .spec constructs its AST; four strict acceptances, fifteen typed rejections and three mutations separate recognition, bounded input and span correctness. Authority denials, no-seed inertness, typed failure recovery and complete route observation equality are checked."
 reverify:
@@ -36,3 +36,5 @@ These finite controls do not prove recursive resource safety, all diagnostic/res
 or pre-callback reservation of conflicting destinations. Distinct item objects avoid the known startup `.73`
 conflict; [[staged-target-preparation-gaps]] retains that repair. The original authority plan still separates
 public staged operands from private `dispatch_span`, and admits neither `gap_text()` nor arbitrary spans.
+
+[[lossless-child-readiness-reconciliation]] records the completed bounded matrix and authoring costs; historical leaf evidence and open defect limits remain unchanged.

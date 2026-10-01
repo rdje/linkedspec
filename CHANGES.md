@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-09-28 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.5: bounded lossless/child reconciliation
+
+Reconcile six runtimes and31 matched carrier pairs with exact retained/per-call boundaries, original13 cases/39 segments, child4/15 and seven mutants. Audit seven historical checkpoints,180 source references/132 unique paths and47 logs; only book evolution differs from the producing revisions. Corrupted checkpoint/source/log controls reject. Record explicit prefix/lifecycle/child-guard/registry costs without selecting a new primitive or closing separate defects. Book, Knowledge, roadmaps and frontier agree. Exact staged canonical acceptance is required for parent closure; its receipt and commit body preserve the result.
+
 ## 2026-09-28 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.4: shared Lua lossless/child carriers
 
 One shared checker/producer verifies five matched routes on each of PUC Lua and LuaJIT using unchanged source/oracles. Exact scalar reconstruction, child4/15, seven mutants, selected authority/accounting, actual-result mutation and deliberate alias rejection pass. Each fresh child validates ten modules and exact report/status/stderr/cleanup. Per ABI v2:222 (new62), staged890/gap392 and document51/27/24 pass. Storage19/three modules/30 census controls, neutral123/129 and book proof pass; canonical parent reconciliation follows.

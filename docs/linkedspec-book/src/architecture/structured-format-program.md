@@ -41,7 +41,7 @@ establish a different, explicitly accepted mechanism. Merely adding alternate sy
 The owning task is `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1`; its first inventory records existing contracts and exact
 backend consumers. The state/control/result inventory is also recorded. Bounded nesting is reconciled; context-name carrier proof
 is described below. Perl, Rust, Dart, Julia and both Lua ABIs verify the bounded lossless segmentation and public staged child
-composition below. Canonical reconciliation precedes gap selection.
+composition below. The bounded evidence is reconciled under a canonical milestone before gap selection.
 The format program's `.1` readiness gate remains pending. The original catalog and parked language extension retain
 all their conformance, Unicode, diagnostics, performance and backend obligations.
 
@@ -514,7 +514,30 @@ bash tools/run_lua_project_data.sh luajit lua/test/rule_local_cursor_generated_s
 
 This bounded Lua proof leaves malformed host snapshots/provenance, marker cycles, diagnostic-byte containment
 and extreme or malformed resource seeds as separately tracked obligations. It does not admit a standard format,
-arbitrary gap dispatch or recursive resource safety. Canonical reconciliation remains the next milestone.
+arbitrary gap dispatch or recursive resource safety.
+
+The reconciled lossless trial covers the following matched parent/child routes:
+
+| Runtime | Carrier pairs | Pairs retaining both engines | Pairs creating engines per call |
+| --- | ---: | ---: | ---: |
+| Perl | 4 | 4 | 0 |
+| Rust | 6 | 4 | 2 |
+| Dart | 6 | 4 | 2 |
+| Julia | 5 | 2 | 3 |
+| PUC Lua | 5 | 2 | 3 |
+| LuaJIT | 5 | 2 | 3 |
+
+Each pair repeats the thirteen enriched inputs twice, checks strict child recognition, source coordinates,
+selected authority denials and subsequent success after failure. Only retained pairs establish same-engine
+recovery. Perl's separate segmentation routes check four extraction mutants; all four child pairs check three
+child mutants. Every other matched route checks all seven. Counts describe execution routes, not additional
+grammars or general format support.
+
+This trial requires no new language primitive. Its authoring costs are explicit prefix preservation, correct
+loop/lifecycle selection, strict child entry/end guards and a caller-prepared compiled registry. The host projects
+the child's own span but does not recognize its language. This division permits bounded composition while keeping
+input preservation, child validity and dispatch authority separate. The next assessment combines the nesting,
+context-name and lossless trials before selecting language gaps; broader format work remains gated.
 
 
 ## Approved and parked: language coverage and authoring difficulty

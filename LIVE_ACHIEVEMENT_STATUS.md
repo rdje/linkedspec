@@ -6,13 +6,15 @@ Ordinary .spec language readiness under SPEC-LANGUAGE-SELF-CONTAINMENT.1.1. The 
 
 ## Latest Completed Slice
 
-- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.4 - verify dual-ABI Lua lossless child carriers` — five routes per ABI preserve original/enriched13, child4/15 and seven mutants with actual-result/alias controls. Each passes v2:222, staged890/gap392 and document51/27/24; storage19/3/30, neutral123/129 and book proof pass.
+- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.5 - reconcile bounded lossless child readiness` — reconcile31 pairs across six runtimes, explicit authored costs and all existing defect owners. Seven checkpoints/180 references/132 paths/47 logs and independent13-case/39-segment slicing agree; exact staged canonical receipt governs landing.
 
 ## Next Action
 
-- Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.5: reconcile complete bounded lossless/child evidence, authoring costs and remaining owners, then require exact staged canonical CI for parent closure.
+- Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.4: consolidate all three bounded objectives before .1.1.4 gap selection, keeping unassessed language breadth and separate defects explicit.
 
 ## Recent Completions
+
+- `2026-09-28` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.5` reconciles bounded lossless/actual-child evidence under canonical acceptance.
 
 - `2026-09-28` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.4` verifies five lossless/child routes on each Lua ABI.
 
@@ -43,8 +45,6 @@ Ordinary .spec language readiness under SPEC-LANGUAGE-SELF-CONTAINMENT.1.1. The 
 - `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.1` verifies Perl context-name matching, scoped restoration and typed rejection recovery.
 
 - `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.3` reconciles bounded nesting routes, authoring costs and canonical parent closure.
-
-- `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.7` removes absent-entry arithmetic warnings with104 focused assertions and full Phase01033.
 
 ## History
 

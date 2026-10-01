@@ -7,7 +7,7 @@ answers:
   - "does Rust bounded child proof retain engines after a rejected child"
   - "which mutations verify Rust lossless child provenance and input containment"
 date: 2026-09-27
-status: bounded six-carrier proof verified; further backends separately owned
+status: bounded evidence preserved; cross-runtime milestone reconciled under .3.5
 tags: [rust, language-readiness, lossless, staged-parsing, generated-source, provenance]
 evidence: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.1 extends the existing readiness harness with shared independent segmentation and actual-child checks. All six matched routes repeat thirteen original/enriched cases, child4/15 controls and seven mutations. Four retain engines; serialized/fresh emitted entries prove per-call isolation. Two focused outer tests and three independent emitted tests pass without runtime or oracle changes."
 reverify:
@@ -38,3 +38,5 @@ The existing `LocalCrate` allocator and emitted target cache are reused, includi
 sequence that avoids parallel test collisions. No new output root, runtime behavior or generated format is added.
 Known `.73`/`.74`/`.75` staged defects are not closed by distinct destinations, plain child results and small
 counters; neither arbitrary recursive safety nor format conformance follows from this bounded corpus.
+
+[[lossless-child-readiness-reconciliation]] records the completed bounded matrix and authoring costs; historical leaf evidence and open defect limits remain unchanged.

@@ -3,7 +3,7 @@
 Owner: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3`. Authority review on 2026-09-27 from
 clean `ca197a38c269cfeb89341505db83e395ebf6f308`. Perl segmentation is verified under `.3.2` and
 public staged child composition under `.3.3`; Rust matched carriers are verified under `.3.4.1`, Dart under `.3.4.2`
-and Julia under `.3.4.3`. Both shared Lua ABI routes are verified under `.3.4.4`; canonical reconciliation remains `.3.5`.
+and Julia under `.3.4.3`. Both shared Lua ABI routes are verified under `.3.4.4`; `.3.5` reconciles the bounded milestone under exact staged canonical acceptance.
 
 ## What this objective must establish
 
@@ -282,3 +282,58 @@ module, fixture or dependency changes. Malformed arrays `.2.25`, diagnostic byte
 `.2.27`, private capture ranges `.2.28`, malformed provenance `.2.29` and seeded-count defaults `.2.8.15/.16` remain
 owned by LUA-STARTUP-READING, alongside the installed-PUC baseline `.2.2` and stale guidance `.2.1`. Plain child
 values, dense valid snapshots/direct spans and small counters do not close those obligations.
+
+
+## Reconciled bounded milestone — .3.5
+
+All six current runtimes preserve this finite lossless/actual-child objective with the original source and JSON
+oracles. The 21-line segmentation grammar retains39 authored segments across13 cases. The 27-line annotated
+parent and21-line actual child preserve the same item/gap records and distinguish child recognition from authority
+plumbing. The standalone child corpus has four exact accepted ASTs and fifteen typed rejections.
+
+| Runtime | Actual-child carrier pairs | Retained parent/child pairs | Per-call pairs | Mutation evidence |
+| --- | ---: | ---: | ---: | --- |
+| Perl | 4 | 4 | 0 | Four segmentation mutants on separate native/fresh routes; three child mutants on all four pairs |
+| Rust | 6 | 4 | 2 | Seven mutants on every matched route |
+| Dart | 6 | 4 | 2 | Seven mutants on every matched route |
+| Julia | 5 | 2 | 3 | Seven mutants on every matched route |
+| PUC Lua | 5 | 2 | 3 | Seven mutants on every matched route |
+| LuaJIT | 5 | 2 | 3 | Seven mutants on every matched route |
+
+These are31 matched carrier pairs, not31 runtimes or distinct grammars. Each actual-child pair repeats13 original
+enriched cases twice and checks typed failure then subsequent success, selected authority denials, inert markers,
+provenance and output isolation. Only retained pairs establish same-engine recovery; the other pairs establish
+fresh-call behavior. Perl compares complete normalized observations across all four including its fresh process;
+other implementations compare complete successful records within their in-process routes and run the same exact
+oracle in the fresh host. Error wrappers and all resource-report representations are not claimed equal across
+languages. Julia and Lua additionally falsify their actual-result isolation oracle with a deliberately aliased pair.
+
+The tracked `tests/language-readiness/lossless-child/verify_evidence.py` audits all seven original checkpoint blobs
+and180 source references at their producing commits, checks132 unique current source paths and47 retained log
+hashes, and independently reconstructs all13 cases/39 segments using Python scalar slices. The only current source
+differences are the book's successively added backend sections, verified against the exact historical blobs. No
+executable or oracle drift is waived. The reconciliation checkpoint pins the audit producer/output and final book.
+
+### Authoring assessment
+
+No missing primitive is selected by this bounded trial. The ordinary language already supplies item matching,
+entry/gap preservation, typed AST construction and public source-bound staged assignment. Costs remain explicit:
+
+- A public-entry prefix guard must retain text skipped before rule entry. Invocation gaps alone omit that prefix.
+- A default loop with LX owns terminal gaps; explicit OR repetition has a different exit/collector contract.
+- The child must reject skipped prefixes and require exact end coverage. A matching digit substring is not a
+  complete child document, and the result here is a textual integer lexeme rather than numeric conversion.
+- The caller freezes already-compiled registry authority and projects the child's own span. This is integration
+  plumbing; recognition and semantic construction remain in the child grammar. Ambient loading is not admitted.
+- The annotation accepts source-bound entry/match operands, not copied bindings, gap_text or arbitrary spans.
+  Private dispatch_span is a separate contract, not a public workaround.
+
+Malformed candidates intentionally remain gap text. This proof does not establish whole-document validity,
+arbitrary recursion, speculative AST rollback, all resource ceilings or any standard-format implementation.
+Perl/Rust target-reservation, Rust marker/counter, Dart/Julia/Lua diagnostic/provenance and other listed backend
+repair owners stay open. The historical published OR/LX example defect is fixed by `.3.2`; its exact source and
+old-mode control recur in the Perl readiness suite. No other production defect was repaired in these slices.
+
+Exact staged `tools/run_ci_local.sh` acceptance closes `.3.4` and `.3`; the receipt and actual commit body retain
+that result without claiming every optional backend gate ran. Three-objective reconciliation `.1.1.3.4` then
+feeds the finite gap list `.1.1.4`. The structured-format campaign and optional alternate frontend remain gated.

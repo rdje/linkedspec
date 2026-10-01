@@ -7,7 +7,7 @@ answers:
   - "may parse_job accept gap_text or an arbitrary span in the readiness grammar"
   - "what independent oracles must the lossless child readiness corpus use"
 date: 2026-09-27
-status: authority plan and bounded Perl segmentation/child composition verified
+status: bounded evidence preserved; cross-runtime milestone reconciled under .3.5
 tags: [self-containment, lossless, gaps, staged-parsing, authority, readiness]
 evidence: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.1 reviews the existing gap/typed/progressive/staged contracts and passes all four neutral checkers. It selects public parse_job over recognized source-bound items while retaining gap text separately; it does not publish dispatch_span or admit gap_text as a staged operand. That authority-only leaf claims no runtime composition; later .3.2 and .3.3 provide the bounded Perl proof."
 reverify:
@@ -30,3 +30,5 @@ stitch-conflict defects stay with startup `.37`, `.73`, `.75` and the backend-sp
 checks does not close them. `.3.2` verifies bounded native/fresh emitted Perl segmentation and `.3.3` verifies actual precompiled child
 composition across four Perl carrier pairs. Other backend proof is owned by `.3.4`. See
 [[perl-lossless-segmentation-readiness]] and [[perl-lossless-child-composition-readiness]].
+
+[[lossless-child-readiness-reconciliation]] records the completed bounded matrix and authoring costs; historical leaf evidence and open defect limits remain unchanged.

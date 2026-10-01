@@ -7,7 +7,7 @@ answers:
   - "how does Julia lossless readiness falsify its returned-result isolation test"
   - "do fresh emitted Julia children execute the unchanged lossless oracles"
 date: 2026-09-28
-status: bounded five-carrier proof verified; shared Lua and canonical reconciliation separately owned
+status: bounded evidence preserved; cross-runtime milestone reconciled under .3.5
 tags: [julia, language-readiness, lossless, staged-parsing, provenance, isolation]
 evidence: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.3 passes new69 plus existing emitter65/nesting30/context30 assertions (194 total). Five matched routes preserve original/enriched13 twice, child4/15, seven mutants and exact typed failures. Actual returned text/span mutation leaves a second result and the next parse exact; a deliberately aliased pair fails the same oracle. The fresh host executes ten modules and returns the exact required completion report."
 reverify:
@@ -34,3 +34,5 @@ The existing emitter test owns temporary allocation and the private-depot fresh 
 validate metadata/plans and execute all cases/mutants; successful process status and exact report parsing are both
 required, followed by verified scratch removal. Registry-pattern `.2.13` and diagnostic-byte `.2.14` defects remain
 owned and unclosed; valid identities/plain child results/small counters do not exercise their adversarial boundaries.
+
+[[lossless-child-readiness-reconciliation]] records the completed bounded matrix and authoring costs; historical leaf evidence and open defect limits remain unchanged.

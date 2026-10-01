@@ -12,6 +12,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-09-28 — Lossless composition proof distinguishes carrier count from language breadth
+
+Thirty-one matched pairs across six runtimes exercise one bounded authored objective. Perl retains four parent/child pairs; Rust/Dart four each; Julia/PUC/LuaJIT two each. Other routes rebuild per call. Independent segment slicing, exact classification and recognition/provenance mutants prevent reconstruction alone from overstating validity. The compiled registry and span projection are host integration authority, while recognition and semantic AST construction remain in .spec. No new primitive is selected, but prefix preservation, lifecycle choice and strict child guards remain explicit. Historical source/blob verification allows only documented book evolution; no executable drift is waived. Existing resource/stitch/provenance debts remain separate from this canonical milestone.
+
 ## 2026-09-28 — One Lua lossless checker preserves exact evidence on both ABIs
 
 The shared checker uses canonical tagged JSON to distinguish arrays, objects and scalar kinds. Independent UTF-8 scalar splitting checks source slices and full reconstruction alongside authored segment classifications; child recognition remains in the unchanged child grammar. Two retained pairs and three per-call pairs are explicit. Actual-result mutation is challenged by an intentionally aliased pair, and four in-process pairs agree on complete successful records. A fresh process on the selected ABI loads ten emitted modules and unchanged helper copies, validates metadata/plans and must return exact completion with empty stderr. Existing managed allocation and native modules are reused. This finite proof leaves malformed snapshot/provenance, marker cycle/null, diagnostic-byte and seeded-counter defects with their current repair owners.

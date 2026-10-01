@@ -1,0 +1,363 @@
+{
+  "owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.5",
+  "activation_commit": "f10c0ce96666f4adf867f329cdf75dd793c003b2",
+  "scope": "Bounded lossless/actual-child evidence and authored-cost reconciliation; no production/fixture/authority movement. Exact staged canonical receipt governs parent closure.",
+  "audit": {
+    "checkpoints": {
+      "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.1-verification.json": {
+        "logs": 5,
+        "producing_commit": "cdae1d2d0a5fd16afc97fad90619cc05b6c18c2a",
+        "sha256": "92a42d84837000f086192c96f76fb6de3a429c4a2c9cd7c9be952d55e54deb1e",
+        "source_references": 83
+      },
+      "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.2-verification.json": {
+        "logs": 7,
+        "producing_commit": "81ee666f6e03422338d0b002bebe6e6bed94787c",
+        "sha256": "fb2f5a5704b62f2a229bf6c357e92189f4790f8a5c188878df475cb3a8f52c5b",
+        "source_references": 9
+      },
+      "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.3-verification.json": {
+        "logs": 4,
+        "producing_commit": "e31c24c7f3c807a640337534c7019fb75908d216",
+        "sha256": "86b962b6c9f473ede5448139739cb9c0b8d34c7539bab4bac01c026452988c43",
+        "source_references": 14
+      },
+      "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.1-verification.json": {
+        "logs": 6,
+        "producing_commit": "a05b336a33ce5643376ea3020ee93880c82b3943",
+        "sha256": "49bce733254a848551a7938ceea7a63ed2a8b4d13184ef361f278bf198477e4a",
+        "source_references": 18
+      },
+      "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.2-verification.json": {
+        "logs": 7,
+        "producing_commit": "624aa1995d52426a69d7debfdaa2afd6ae578d5f",
+        "sha256": "b3326fa51df18abfd4c42af4673d0c4ac82e5e69afa153ec9f58656254c56f83",
+        "source_references": 20
+      },
+      "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.3-verification.json": {
+        "logs": 6,
+        "producing_commit": "d903f0719823c001144ec346cd32a10fc292f7c6",
+        "sha256": "75cc05d400c9f9a994c881f952f930d41173aedcc70b701516f642927148a1eb",
+        "source_references": 18
+      },
+      "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.4-verification.json": {
+        "logs": 12,
+        "producing_commit": "f10c0ce96666f4adf867f329cdf75dd793c003b2",
+        "sha256": "2aa41d755379eddc043fc3d60e2a7ba8587e06735f125410f98782025c63f638",
+        "source_references": 18
+      }
+    },
+    "child_accept": 4,
+    "child_reject": 15,
+    "current_source_hashes": {
+      "capability_conformance/inter_match_gap_capture_contract.json": "f5901338a6dac92a56b7dd4089fd7b865f210571089fe6311e83f98c85e4dfdf",
+      "capability_conformance/progressive_span_dispatch_contract.json": "3bc07c7968f8667d330c2c8b2f47d1f574750ab0699106385fdf8c3a852b5913",
+      "capability_conformance/staged_ast_enrichment_contract.json": "578cd031fed01bb8d968a2b536e0d67430317c617a8296edb6c1beb5031bd882",
+      "capability_conformance/typed_source_location_contract.json": "4f657eec1b6e0332d9eff6656d9868ad2b5b1fa13f9fddd15d1ba6dac7cb2978",
+      "dart/lib/linkedspec_dart.dart": "ed9cb30217d06fab11232ae0f47a208fd29266b2f273adf3e5a7f9f82f61a07c",
+      "dart/lib/src/action/action_ast.dart": "46db9b5ad6e2e288feacf85807c13cdb9a4d01f82fc6b76d9d42e2d15080a5cd",
+      "dart/lib/src/action/action_contracts.dart": "2dca43dae8e53cdfe6d5253e134e8fe05e8119decfa0a0496faaef45d231cc6f",
+      "dart/lib/src/action/action_parser.dart": "d458ac2c439c1fbfb212259cb762629626d8ac493968515bf7b37a0793b7d7af",
+      "dart/lib/src/compiler/compiled_spec.dart": "99df8289f7c38adaa9b77a093f5054f9288b806c769375e424457fb145cc8938",
+      "dart/lib/src/runtime/bounded_child_parse_authority.dart": "6c524a1bdc1e8330d538cf11c535d68f24c06819ae433b45d70b33e0f5ee6756",
+      "dart/lib/src/runtime/interpreter.dart": "0af1a72725fb2b3691ce57f97278439c63fbe23a153a490f0d51a3397f4a1e24",
+      "dart/lib/src/runtime/staged_ast_enrichment.dart": "d1c8de14ec76eacab1f237435e8f6e0c807e5849ed5a4dba10a79af0514d2f48",
+      "dart/lib/src/semantic/sha256.dart": "dbff7065039118bdf7b6d323a38b8377436742d1a5940aef18a908a863987c70",
+      "dart/lib/src/source_emitter.dart": "62021b13b820cac79d2765a87a46254045ea1b253c84555d43fd7f8b74c81ecc",
+      "dart/pubspec.lock": "601c36466d20513d930c291c44143a801846349fda9ba13a8c6f63b15671a0c0",
+      "dart/pubspec.yaml": "5a116416db5b997aac698762cf57b4dba299f504ecc4ddf36ce416b75a0923b6",
+      "dart/test/inter_match_gap_capture_contract_test.dart": "b2b49d1abad130045ec8449bc8cd1c2a8d6012fddc1b7d45c4f29d7757636a94",
+      "dart/test/nested_tree_readiness_test.dart": "97c1f5a58038840f8ae12e0dcd1c543db6a999f2a1e992868b980fef0bd4bb3c",
+      "dart/test/progressive_span_dispatch_contract_test.dart": "3014fb4ae570c7393f2de6863585fb99ffeb438e165fcee8aaf1bf5a7e222b8c",
+      "dart/test/recursive_observation_contract_test.dart": "cc4cac71e3924e77afd5f4c538a3efefc0323089aad13816dd762e87dca26249",
+      "dart/test/sexpr_document_v1_test.dart": "d9f894bb807afbe04d22bd5bdcfe6e8c7e240cda6d03bb865b6e87ae1ee74fed",
+      "dart/test/source_emitter_test.dart": "ebfa150e20c7767b056a5bfa12a8e76bbef7ba97958f709e8b2657ddbd22bdad",
+      "dart/test/staged_ast_enrichment_contract_test.dart": "b790a8b329d2f3b95607f2e26138202151575df5e02e837f998433e8da495f00",
+      "dart/test/typed_source_location_contract_test.dart": "455fd56c0dff306d8a4a392537a29189f78f72ebe258fe53e134c4fc59a68126",
+      "docs/linkedspec-book/src/architecture/structured-format-program.md": "03e96918d95d27d4de8584ee774f78830766d8a78e87b7f05e4a84e4f7f5a0cc",
+      "docs/linkedspec-book/src/dsl/capture-marks-and-source-locations.md": "6873cd55dd6a0cf1f6ee41d2c4e99c7ea1544e2bb875d71687823c00eb6205af",
+      "julia/Manifest.toml": "2b4e4039b6d3bb76dd8bd9844f90f8083747982737572504198abd2cb64e48e4",
+      "julia/Project.toml": "45bff88352b342d6a3970b3ad2c5cf853a3ff5261034210025d1b8ffc2dd9fa1",
+      "julia/src/LinkedSpecJulia.jl": "5edaeffcc161cf7cc6d3fd604cc8db605d5c65435414ac08d9fe23266dba955f",
+      "julia/src/action/ActionAst.jl": "1aba267c5a5b1357392ceb0831945ff150f7fd311a847e3329360df5eeae797f",
+      "julia/src/action/ActionContracts.jl": "231d2d83bc271adc6a29139d92775241caf87a83aa5cd5ccb20c2f90f60afb84",
+      "julia/src/action/ActionParser.jl": "be008f877f6b112a580902ac7b31c712429fbfb9bdab3b9be767b213ad34dc08",
+      "julia/src/action/CallableContract.jl": "d99f3eed32bd8f384bd932520b9afde21878c8b5e070ed8702889d37aa8fa757",
+      "julia/src/compiler/CompiledSpec.jl": "81073828ea41eda6206dd067d2c8cddbc1149398cef7429a60624e5afe7541d2",
+      "julia/src/runtime/BoundedChildParseAuthority.jl": "d926a419d9aee216974b13ddeb9247cf3e44188aa92cbddce13f1eb78daa7359",
+      "julia/src/runtime/Interpreter.jl": "c1dd49bd983d5e0f71307f19d7e1da0794869ae67774e1219a9874867c646875",
+      "julia/src/runtime/StagedAstEnrichment.jl": "679b231e6db72135ac624cb4cc7aa3298d8b7dcccbe30399069178d68f8cecd3",
+      "julia/src/source/SourceEmitter.jl": "76828ce9b6ecfa995aace3e2e87620789d183bd0a24a005c97a505f22ad39567",
+      "julia/test/inter_match_gap_capture_contract_test.jl": "79426ada8ed54a82f431a1b45c2a32ca5cf547ce6c2da5a9ad37154755cbbf0e",
+      "julia/test/progressive_span_dispatch_contract_test.jl": "62deb068c34a67e71ef26b693c9097a11c2b54ef844f3988c19d4f3dbe1760e1",
+      "julia/test/recursive_observation_contract_test.jl": "f2a167b6d5014fdef9f5f7c00db07fd4f236b851856016236fe8163cae2cc11b",
+      "julia/test/sexpr_document_v1_test.jl": "5cc6236377eaea944d5e5466c80e651c917a5272754d770400fd26ed766eec32",
+      "julia/test/source_emitter_test.jl": "2c7ea5074d60ca80074756645b8fbda3b9aa26214bd10956f6654ae9f988d38a",
+      "julia/test/staged_ast_enrichment_contract_test.jl": "0caa4731f7507dcedc177598204fba70d6c81a17aef323539dcc3388da140fc0",
+      "julia/test/typed_source_location_contract_test.jl": "c1f5b12f0b67aa69686a3a6f2a8951813f99401f9c1af2736b9a2fc99cccbf78",
+      "lua/src/linkedspec/action_ast.lua": "5900fa7f3bb883a7bb3d5c987e840945edea97155e257257e8103f3a832668d5",
+      "lua/src/linkedspec/action_contracts.lua": "b4187bb6d1381a25789afc6e4b6642137cd1e5d05d3838d7882e28cc4d0b9c66",
+      "lua/src/linkedspec/action_parser.lua": "1dfb4a4f95262ba6c9ba6e00ecc1b1ce614db1f12b57eee40f24c1533534c43b",
+      "lua/src/linkedspec/bounded_child_parse_authority.lua": "5d697173e34e677540cd2898a5a2cd118e265aa3d2f45220ecb16db03963a5fc",
+      "lua/src/linkedspec/compiled_spec.lua": "81ec56e81c87e3101ea2367c1ef018774e908e46e449d6c51d285bad8131f886",
+      "lua/src/linkedspec/init.lua": "72f939c282505e09a632a51b7c5cf5b1d7e57508b9772ef8a7e9dd9910d22822",
+      "lua/src/linkedspec/interpreter.lua": "f90e60a70b79b8a3a4dad4791be1528ce574fdbe02af29b02365c39a2aa11b4e",
+      "lua/src/linkedspec/recognition_transaction_runtime.lua": "e210172b953ec2056b01838fe2eabfd61d393390b891643f7b36b3561a2db3cf",
+      "lua/src/linkedspec/sha256.lua": "9e102cb81ce541d6765ef9f41a102e22797f2bc23a246f19efa0124ee1e7db8e",
+      "lua/src/linkedspec/source_emitter.lua": "0ff7d15d53e3b7302ff2b2c4125ec39581f64966a4adf56851e28af0607685cc",
+      "lua/src/linkedspec/staged_ast_enrichment.lua": "28d2eea9da801a4d84054e718110e53611df6bdcea8d62217103d85e711b76ed",
+      "lua/test/inter_match_gap_capture_contract_test.lua": "323a3fca5c7d3e1a85af8f387b0efec3bff779feb5478974d195a5da930f05ce",
+      "lua/test/progressive_span_dispatch_contract_test.lua": "10ad5e29d40a8a2d486c8842850cf1528aba9797bd4f16d3652cd5db9eef926b",
+      "lua/test/recursive_observation_contract_test.lua": "e8f3175908c89f98579020e11a7b5961f4cde6d48a39a19bfb1c9f1ad9b2b320",
+      "lua/test/rule_local_cursor_generated_source_test.lua": "596a393f0be6e010d6be717c58656dcfc56a26c0acb27ff25db8f7296abd014f",
+      "lua/test/sexpr_document_v1_test.lua": "2ebd290a9ddb7f10c1ead3177f7b6eecc3e259e903ddd9ff9b3d84df7ffb79ab",
+      "lua/test/staged_ast_enrichment_contract_test.lua": "44dc32b99b50e051fb45fced11f3ede32afcc7d84a1124b90d10883485e03fee",
+      "lua/test/typed_source_location_contract_test.lua": "8943b4fd6e78f0ea9b71ee3e3458aa044301e51e520652ef2a9ca905e693aebc",
+      "perl/LinkedSpec/StagedASTEnrichment.pm": "6a69d39e1d9de7b849ea429e532232d61f112755cf9b87ba2d16e1291e603f53",
+      "perl/LinkedSpec/StagedASTEnrichmentRuntime.pm": "7d01e18c88ef9de45bf9049a2f3607800a4014aba8a1b4e8ad3fbc99cfac27b3",
+      "perl/LinkedSpec/StagedParseJob.pm": "c9ecca71a9e4a79c48ca94d3569be2ff4560443363cf594d70269f060daf2407",
+      "rust/Cargo.lock": "f225ab48d91b1c2eb3bec063f961d255d9e97b340d0ce300e749ca58ec155428",
+      "rust/Cargo.toml": "4f85f31df8b2228a18e44f22e9a9e276f6ca91943becea7f7025b70d564cbe81",
+      "rust/linkedspec-core/src/callable_contract.rs": "2b24993078757eb4005d71a22fa2e1d1e7266ab34eb80f8275b4b37bfb247605",
+      "rust/linkedspec-core/src/compiler.rs": "7a1a92eaf5ed7bc93392bc5666ac5cb061c573ac04fde3499139d2fc055dccda",
+      "rust/linkedspec-core/src/expr.rs": "45f3b40a548c76ba4a11f0cedd8ee6dc988bf711da30e78ba2bc28f8ffd3e706",
+      "rust/linkedspec-runtime/src/bounded_child_parse_authority.rs": "853515c34ea04dc7cffb073e7946d668dc23d32e5a545294bcf0418f6b65e787",
+      "rust/linkedspec-runtime/src/engine.rs": "5d1c572c2c310f5dd0aa4f62bb07020cf5c416a8483799cd1c85f13ffeb68009",
+      "rust/linkedspec-runtime/src/lib.rs": "3f69d8e02549bf76d3f3495935403b6f87b65f0e9a14c74885f4412b2f64112c",
+      "rust/linkedspec-runtime/src/recognition_transaction.rs": "1b45e9729f4ede18de2182e7947f5eb478ddc944641886442aea06b36a7f8962",
+      "rust/linkedspec-runtime/src/runtime.rs": "b8140cc4bac2d75f3bbb070f19924b505f36899b06dcf3196efa8595c6a8d609",
+      "rust/linkedspec-runtime/src/source_emitter.rs": "4cf298eadd4603690d57794d76f8397e5bf026a70ac617377360650e4880b64b",
+      "rust/linkedspec-runtime/src/staged_ast_enrichment.rs": "123448aa6cd3c5c7d3802b2c4043dbc2fc217b43882087354dd10e189389e245",
+      "rust/linkedspec-runtime/tests/inter_match_gap_capture_contract.rs": "88464bdfd412b91f4e9cebd2424ee78581f17132498e4113e9e5e008ce43a84d",
+      "rust/linkedspec-runtime/tests/nested_tree_readiness.rs": "698dd4b525296f490890073857dac200be13277e769ae5b7351aab10a549275c",
+      "rust/linkedspec-runtime/tests/progressive_span_dispatch_contract.rs": "d42ccfbe4c8a6307b568db3637cea1cc83868aeac8b6ec17b5ee06958db6e9b9",
+      "rust/linkedspec-runtime/tests/recursive_observation_contract.rs": "57caf58049aca5008ad8d03676b101c6a4704b4abe8eadeb24a976869d529b71",
+      "rust/linkedspec-runtime/tests/staged_ast_enrichment_contract.rs": "9bad6d2f0bbf43ade705b8d1bc2d2bead4058ef6d8222d2448dfd8e9289ace90",
+      "rust/linkedspec-runtime/tests/typed_source_location_contract.rs": "15df79dba072f82fecd0cf02f47edb9b31da850baaa1fdfe20334b7706773cfc",
+      "t/generated_source_contract.t": "4f4620c2d605d62ff3f6afd65930452a0e6fb74dc5f7e634d2aaa6da2ef6168a",
+      "t/inter_match_gap_capture_perl_contract.t": "4604ccc0cf68949146a3778ea5627d4a470fdb3925f4b5f1114a2cbe5eb90e52",
+      "t/lossless_child_readiness.t": "3185033387def9d5d968ed45dfcec22d5fd9d2b9171347bd7575cb7f9cbc649f",
+      "t/nested_tree_readiness.t": "07b90b1b5d2c9b70073a4842b381c5798d785e421949c93a52b6b48b6c72d6ce",
+      "t/phase0_regression.t": "5804c7dd003972469d85d2baf3ba0555d05356f9411c1f3fdcae63db00db0c41",
+      "t/progressive_span_dispatch_perl_contract.t": "9180f6ac7b5e64d2adc8db8dac11637f8054e0c02eb9cd3e05cfcb5e8ccd3ded",
+      "t/recursive_observation_perl_contract.t": "e2a343f059c2837dba157605e2e74d6b2c2ae2fb91aeb8bc27814ea704a7589b",
+      "t/staged_ast_enrichment_perl_contract.t": "1d86d958fbe159411b8e744522a58bebea66f299f253e2e013e989ba889360e5",
+      "t/typed_source_location_perl_contract.t": "5de84cc3b09107966c35cb4c97dc8089341fd5730b9d712836e88bed8e7af16e",
+      "t/typed_source_location_values.t": "bb96fade4baadcb4142ff54e43eb9ff71db665b1929cfa7ba092cf5804b57e56",
+      "tests/language-readiness/lossless-child/cases.json": "2589ef997c978ea9fa1e80f886106df7235839d6a89439b88ece328d58e3b3c7",
+      "tests/language-readiness/lossless-child/child.spec": "34c5f109d401f83fa600a225682599fe924957fdbf45ad2136f55450248badd9",
+      "tests/language-readiness/lossless-child/dart_carriers.dart": "e6a8b4d502aeb7b9152cb5bc22aade234772fba558bab15b25e3e0e65e40a7dd",
+      "tests/language-readiness/lossless-child/dart_checks.dart": "708d3c8d5ca9683185e26e099525df6198d2c775e5679dd221393edef7228f63",
+      "tests/language-readiness/lossless-child/julia_carriers.jl": "9b308b17b62cac150df88b5d256ea379db697fd393fb3237f1d2f65caa6ea317",
+      "tests/language-readiness/lossless-child/julia_checks.jl": "3ca60f296b06cf0c07132fbe117dda155729cf12a599ff53b97b233e6c4c26cb",
+      "tests/language-readiness/lossless-child/lua_carriers.lua": "1cd379ca959bcd4d92eec68ebe8f3e20e02d80e7b356adbc5d67db0785697456",
+      "tests/language-readiness/lossless-child/lua_checks.lua": "67a59f580f1daf5ad0c6d0f9a425ab1d8e8445e6d748dffa0a14ad0a63fa4367",
+      "tests/language-readiness/lossless-child/parent.spec": "8b19299a5d3715cba7f44dac266954e8b34497920a308f956f6e35b286ae6435",
+      "tests/language-readiness/lossless-child/rust_carriers.rs": "6a461b9f86525d5ab4d75a74d4395869048e3c146e674badb31d3f652b6cd9cd",
+      "tests/language-readiness/lossless-child/rust_checks.rs": "e26105539eafd80fb870d4959881a086a81f57839018685ff8d84ce8f2bf6f20",
+      "tests/language-readiness/lossless-segments/cases.json": "fd4fe58d6bb0efa7bcb609b863c3d9a2238bb5c62fa9a1814a143e04416bd89c",
+      "tests/language-readiness/lossless-segments/grammar.spec": "8f20d242b0f2ea0eee1d70b6f289cf96362cdf3b64ef4cbcc77f5631ffe3eb36",
+      "tests/language-readiness/nested-tree/dart_checks.dart": "5ae819cccaf0dc2cfb2a1753f5351148307cebc8797ff605fc4ba8c65c15df4a",
+      "tests/language-readiness/nested-tree/julia_checks.jl": "a0511244a5ae78c39e6d68c116a03ab1dcb08610ff8f01f75079551eb3825c62",
+      "tests/language-readiness/nested-tree/lua_checks.lua": "0cf52abd24227574f5e93389836176452332f75c1d751b823f1c70d2c31af435",
+      "tools/check_inter_match_gap_capture_contract.py": "e1a2848fb28ccbffd32edf7d4ed2b0ffcac98ad725fa23f16e5204985aca95c1",
+      "tools/check_inter_match_gap_capture_six_runtime.sh": "9747819b7aa8356ca29c16ff7b88088c1d220e5f2aa1bb14f834a65e0f22e9e6",
+      "tools/check_progressive_span_dispatch_contract.py": "329d04e3f153f54d78180ce9b8256135f95bb06dee2c742880958af26b019990",
+      "tools/check_progressive_span_dispatch_six_runtime.sh": "e2b05730fdf38fa137b36e9365a1b268b5d4a9073fa1815766e16238e4e361f7",
+      "tools/check_recognition_transaction_contract.py": "1e3b87a7ade8770997cd816742bbce89fc6d8f5f448544dbb4bb2b68de93f9c8",
+      "tools/check_recognition_transaction_six_runtime.sh": "ce51cf3e9a8dc94f9fb853927e4fd4e9b315d65dff08a941fd2bedb04a81d6c4",
+      "tools/check_recursive_observation_six_runtime.sh": "6bbfc2723bb9c536dd55be5f51006bff6e97540ba6bfd28dba7f71d5332633bb",
+      "tools/check_staged_ast_enrichment_contract.py": "0f0d0c2b80ae46a8b2cf48bf29359eb246c5010395a43ae2db4f0472764890b5",
+      "tools/check_staged_ast_enrichment_six_runtime.sh": "cc1b2fb80ae1ebb4ffeab9af5de2432f55ad5c3a053d6b42ed6f1fef26fb7ca8",
+      "tools/check_typed_authoring_model_six_runtime.sh": "6f94228c95e2ea33beeb366679724e9ed9d0d69a768dbf8055a25e3f9f8e92b8",
+      "tools/check_typed_gap_composition_six_runtime.sh": "a2ced10cbce57cbe32cc6420b2b903da92866613aa4a6516192b9cc956481dba",
+      "tools/check_typed_source_location_contract.py": "06bf3d142a14cf4997fec57c9cbcb6a00df16bcaff1745b7ad7a8e6d17a3cf40",
+      "tools/check_typed_source_location_six_runtime.sh": "a0ff216ffdd4f41d12345809e13fd5ad35e16736e8c80e4a59995ed3befa2de7",
+      "tools/project_data_env.sh": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73",
+      "tools/run_ci_local.sh": "20d82473dfff48d79290a2ebef4ebab5e84e248638ae023f504db4638f208a41",
+      "tools/run_lua_local.sh": "4713bb8ff741f4340c625f3fbc348f1449965b0dfac44d75e79379a95b4a9ae7",
+      "tools/run_lua_project_data.sh": "e073a655dae2be873f465fd6b7a0ad6266e8edb1f4faf7c75fc7817cd958b84b",
+      "tools/run_python_project_data.sh": "0bc03bb8f4ce550397da9fda086215a1d9f6f452ec413605fbcb8976c06af604",
+      "tools/test_dart_project_data_storage.sh": "a0366a7749aae0ca0154e39c3c8f1108053c1bd3a1ebc8a7f986bbbc2058ceff",
+      "tools/test_julia_project_data_storage.sh": "919f3d62c9b9097cc6586f402d050823ce759ffff50452f775ba4363eb486ec4",
+      "tools/test_lua_project_data_storage.sh": "8e5fbcae1498a5bb864907e5a6c9d55fab8f2b760bf334fbdc96ff0a839d48d8",
+      "tools/test_rust_project_data_storage.sh": "82fa3cf790b26f39e743524a9c6d5d113d8ee8fcce59f4f2df9f759674ba97d6"
+    },
+    "historically_verified_book_updates": [
+      {
+        "checkpoint": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.2-verification.json",
+        "current": "03e96918d95d27d4de8584ee774f78830766d8a78e87b7f05e4a84e4f7f5a0cc",
+        "producing_commit": "81ee666f6e03422338d0b002bebe6e6bed94787c",
+        "recorded": "120056d13692c98e45b743fe9cb4fa4cf71b4c85f9dc1304f80ee0734cf84908",
+        "source": "docs/linkedspec-book/src/architecture/structured-format-program.md"
+      },
+      {
+        "checkpoint": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.3-verification.json",
+        "current": "03e96918d95d27d4de8584ee774f78830766d8a78e87b7f05e4a84e4f7f5a0cc",
+        "producing_commit": "e31c24c7f3c807a640337534c7019fb75908d216",
+        "recorded": "bd8006a936fa2c947be625fb2c581e69c2e49792272a61f6990b0136546b7fd7",
+        "source": "docs/linkedspec-book/src/architecture/structured-format-program.md"
+      },
+      {
+        "checkpoint": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.1-verification.json",
+        "current": "03e96918d95d27d4de8584ee774f78830766d8a78e87b7f05e4a84e4f7f5a0cc",
+        "producing_commit": "a05b336a33ce5643376ea3020ee93880c82b3943",
+        "recorded": "4201094330068ec4647bc78efd19c2d03bffa043b7b3849e9e780a3d1f34f89f",
+        "source": "docs/linkedspec-book/src/architecture/structured-format-program.md"
+      },
+      {
+        "checkpoint": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.2-verification.json",
+        "current": "03e96918d95d27d4de8584ee774f78830766d8a78e87b7f05e4a84e4f7f5a0cc",
+        "producing_commit": "624aa1995d52426a69d7debfdaa2afd6ae578d5f",
+        "recorded": "1c6de533ee391c2e897294bccf8eab8530b772cca49540fd82b814aee933634a",
+        "source": "docs/linkedspec-book/src/architecture/structured-format-program.md"
+      },
+      {
+        "checkpoint": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.3-verification.json",
+        "current": "03e96918d95d27d4de8584ee774f78830766d8a78e87b7f05e4a84e4f7f5a0cc",
+        "producing_commit": "d903f0719823c001144ec346cd32a10fc292f7c6",
+        "recorded": "f60b32add397f82c2405793f5b96395a5eeaf5529def5546d19c5149f485d027",
+        "source": "docs/linkedspec-book/src/architecture/structured-format-program.md"
+      },
+      {
+        "checkpoint": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.4-verification.json",
+        "current": "03e96918d95d27d4de8584ee774f78830766d8a78e87b7f05e4a84e4f7f5a0cc",
+        "producing_commit": "f10c0ce96666f4adf867f329cdf75dd793c003b2",
+        "recorded": "f6ff26da6903e2d36fd7afff07399be0640992ca8f0dc5c534303c6c67b1bff6",
+        "source": "docs/linkedspec-book/src/architecture/structured-format-program.md"
+      }
+    ],
+    "limits": "Source/log integrity and independent segment slicing; runtime execution remains the recorded per-leaf proof.",
+    "log_hashes": {
+      ".linkedspec-data/scratch/lossless331/inter_match_gap_capture.log": "9479cae2bb2b5c57d5f5faf06d182ca4cfa5716d3e9b972341a71ee1e4cdf305",
+      ".linkedspec-data/scratch/lossless331/mdbook.log": "b9881352c2786b481f5a7eafee1d7b072077d88b531626a779d74f28479d6e33",
+      ".linkedspec-data/scratch/lossless331/progressive_span_dispatch.log": "fb63668fbd936c102992d27dc47e9a8d6d843cc9b3db9f94845682648b8728a0",
+      ".linkedspec-data/scratch/lossless331/staged_ast_enrichment.log": "1a7f7a1b01c6865f08350276c188460f729f1dc6f30b05d25ddf904b25bbdf21",
+      ".linkedspec-data/scratch/lossless331/typed_source_location.log": "1e7b9e4f5674c8c3400e9b7dc8b3d007adb9c08b06a5092cf1346e899495c087",
+      ".linkedspec-data/scratch/lossless332/book-mode-before.log": "985a55a8523b32abf0b2d787b7c162698e00a21d198657dcdaf49149d08caf2a",
+      ".linkedspec-data/scratch/lossless332/dependents.log": "e2019026498f7f991fff0d0e1cb0b3d361124abb808b926b77b82089b2c5e80b",
+      ".linkedspec-data/scratch/lossless332/gaps.log": "9479cae2bb2b5c57d5f5faf06d182ca4cfa5716d3e9b972341a71ee1e4cdf305",
+      ".linkedspec-data/scratch/lossless332/initial-green.log": "f8705c2ef08a9d7f05528c06fe3e63f2c24784bd35a0261cfbd5ff77e11fcb38",
+      ".linkedspec-data/scratch/lossless332/mdbook.log": "fddba4cc250ab07edd33cf371b6b428c1f0f1de0779a8eec2302c8551b32aa96",
+      ".linkedspec-data/scratch/lossless332/readiness-final.log": "b8164ebb526bf30f0780510487e8b618f2d8fc23e1ac0eb7ff1f561006c578de",
+      ".linkedspec-data/scratch/lossless332/staged.log": "1a7f7a1b01c6865f08350276c188460f729f1dc6f30b05d25ddf904b25bbdf21",
+      ".linkedspec-data/scratch/lossless333/dependents.log": "6fa3774767fcc080598e5b5d2e1ec3b18dfb73ee4da8f0ad0ac46d8405be39b9",
+      ".linkedspec-data/scratch/lossless333/mdbook.log": "411ebed740c447e36de82f71f6c24d4bd305c1986b3b40d0bf90f95c5dfbb78b",
+      ".linkedspec-data/scratch/lossless333/readiness-final.log": "9ffb9f6b2127b2a50868aa02ff3d6c9ce482595ebe48fc80c9e5e28c2d7f802b",
+      ".linkedspec-data/scratch/lossless333/staged-neutral.log": "1a7f7a1b01c6865f08350276c188460f729f1dc6f30b05d25ddf904b25bbdf21",
+      ".linkedspec-data/scratch/lossless3341/book-source.log": "0db640b55b0a2195f8f610fc7ab73a2ec83542b7adc2540bbfac53077f436baa",
+      ".linkedspec-data/scratch/lossless3341/dependents.log": "0e46b7feb0392cfd3c60ccdf8be9035e82e9558184c405fd1ee6068b26021e2a",
+      ".linkedspec-data/scratch/lossless3341/mdbook.log": "e4253fdfec60da489903f3f6bc7decd76a20cb5718c33d7d9fd43bfff2242e69",
+      ".linkedspec-data/scratch/lossless3341/second.log": "eaa09fd99a492c8aa8ef1eda2f0a12f3eda516eff8c9419d8784022a4b34fab8",
+      ".linkedspec-data/scratch/lossless3341/staged-neutral.log": "1a7f7a1b01c6865f08350276c188460f729f1dc6f30b05d25ddf904b25bbdf21",
+      ".linkedspec-data/scratch/lossless3341/storage.log": "c904fada806127096835cc1c93936150af8dce7a487a17511f6ae6efc655b726",
+      ".linkedspec-data/scratch/lossless3342/analyze-final.log": "b8dd74b535dfea31f86c81e69876a7f3ca8787c07fc6e2c8d14b2277b996bfb3",
+      ".linkedspec-data/scratch/lossless3342/book-source.log": "7dd55848457fb529a8ba6ef5402b6f7c1cde92ccf6f03292ce2dbf00d3393571",
+      ".linkedspec-data/scratch/lossless3342/dependents-final.log": "e2037c9d7a34923d78746ffd2093caaf2023d36924bf5518519df0cd6cee280a",
+      ".linkedspec-data/scratch/lossless3342/final.log": "2c25e19e94904f18126cb148861510286a4968914717fda975b0c82351951988",
+      ".linkedspec-data/scratch/lossless3342/mdbook.log": "397d80d6d1d185e1ead29af59e440162c717dccb5aa767a90ffb32cf83f3fe06",
+      ".linkedspec-data/scratch/lossless3342/staged-neutral.log": "1a7f7a1b01c6865f08350276c188460f729f1dc6f30b05d25ddf904b25bbdf21",
+      ".linkedspec-data/scratch/lossless3342/storage-final.log": "cf475f6510fe07a06d49c439a210548f7621143fbd5058c4163f22fb114a1a81",
+      ".linkedspec-data/scratch/lossless3343/book-source.log": "5ea4d25de1b7cde12e6fd478870d3e7b516ec69fd5d826f6f33719854c44ff28",
+      ".linkedspec-data/scratch/lossless3343/dependents.log": "e404dcac68fc1a6c552109210272e425fa0acb8e226d226231bfd2046d88f0a3",
+      ".linkedspec-data/scratch/lossless3343/initial.log": "e5763b69222c9d9b2e9add788e9e4e6b2a4be664252931c25400c68e4f715f4f",
+      ".linkedspec-data/scratch/lossless3343/mdbook.log": "d6ff7d5f8b5b0a225278307b213e74cc6619b6e489ab5a4167ff533d29135bf4",
+      ".linkedspec-data/scratch/lossless3343/staged-neutral.log": "1a7f7a1b01c6865f08350276c188460f729f1dc6f30b05d25ddf904b25bbdf21",
+      ".linkedspec-data/scratch/lossless3343/storage.log": "03dcabcf60256cb82d68bdef11aba65253694e55fb96815c6e9b6333dd185a57",
+      ".linkedspec-data/scratch/lossless3344/book-source.log": "2e8a71a548ea371f5a55384923f554e0dce8c9a7bb60292f22f30145f5b8c4fc",
+      ".linkedspec-data/scratch/lossless3344/inter_match_gap_capture_contract_test-luajit.log": "32f522f778f27fbf488190bf033511a5e72a43ebb6958ecd3d0a9c6a63dc8bce",
+      ".linkedspec-data/scratch/lossless3344/inter_match_gap_capture_contract_test-puc.log": "e864b86375b06d86487d36e9b92ad2e77c28252329bcdfebc21e8222e4679e26",
+      ".linkedspec-data/scratch/lossless3344/luajit-initial.log": "0d6f99f182abe616d475baeac4f04136b7b6a59ed30813f7b41f0b2ccb75ce2f",
+      ".linkedspec-data/scratch/lossless3344/mdbook.log": "dc2266cbe3057a4e870a9237a021dd2e9aad9ff8871cdbbd6746879a7b87b0c5",
+      ".linkedspec-data/scratch/lossless3344/puc-initial.log": "0d6f99f182abe616d475baeac4f04136b7b6a59ed30813f7b41f0b2ccb75ce2f",
+      ".linkedspec-data/scratch/lossless3344/sexpr_document_v1_test-luajit.log": "9e9297435c1094d3a1faed88a489377f8fcebec06ee1e90475d1174339c20d6a",
+      ".linkedspec-data/scratch/lossless3344/sexpr_document_v1_test-puc.log": "9e9297435c1094d3a1faed88a489377f8fcebec06ee1e90475d1174339c20d6a",
+      ".linkedspec-data/scratch/lossless3344/staged-neutral.log": "1a7f7a1b01c6865f08350276c188460f729f1dc6f30b05d25ddf904b25bbdf21",
+      ".linkedspec-data/scratch/lossless3344/staged_ast_enrichment_contract_test-luajit.log": "e19cd589ab9570ae6ea451601e7ff32aa3e209e2fff3a884077feef5a606c928",
+      ".linkedspec-data/scratch/lossless3344/staged_ast_enrichment_contract_test-puc.log": "b9115fd6ca2041bb5e1b0e8b4dfa9a8f982f711eb9f94fa98cfc8912c613d1d7",
+      ".linkedspec-data/scratch/lossless3344/storage.log": "1b9b2f663323bdfe50eae3729304e811cb904ecce2210a6b2272afe77ef56f8f"
+    },
+    "retained_logs": 47,
+    "segmentation_cases": 13,
+    "segments": 39,
+    "source_references": 180,
+    "unique_sources": 132
+  },
+  "source_hashes": {
+    "tests/language-readiness/lossless-child/verify_evidence.py": "7ec45d86b3ea0876a63e757d8ae71dc40d8d3829d82e40b45232e7bf4e8da352",
+    "docs/linkedspec-book/src/architecture/structured-format-program.md": "03e96918d95d27d4de8584ee774f78830766d8a78e87b7f05e4a84e4f7f5a0cc",
+    "docs/language-readiness/lossless-child-parsing.md": "2c1b378ea2fc8c0899bb41b17393ff53f44d78e79a8dc7031154182678af24a3"
+  },
+  "checks": [
+    {
+      "command": "bash tools/run_python_project_data.sh tests/language-readiness/lossless-child/verify_evidence.py",
+      "result": "PASS seven exact checkpoint blobs/180 historical source references/132 unique current paths/47 retained logs; six historical book revisions only; independent13-case/39-segment scalar reconstruction and child4/15 inventory"
+    },
+    {
+      "command": "in-memory read_relative substitution against the tracked audit producer",
+      "result": "PASS exact controlled rejection of corrupted checkpoint/source/log contents and two outside-path values; no repository input bytes changed"
+    },
+    {
+      "command": "bash tools/run_mdbook_local.sh",
+      "result": "PASS exact parent/child includes, exact route/reuse table and authored limits render"
+    }
+  ],
+  "logs": {
+    ".linkedspec-data/scratch/lossless335/evidence.json": {
+      "sha256": "57374757736ac68f167db2adb7dc2b9a62a79f231c2f9e939466175cc9328d6a"
+    },
+    ".linkedspec-data/scratch/lossless335/audit-controls.log": {
+      "sha256": "7fa07a7b8948e7ea6819abd368c2a2dfaac9d0e2f4619f77c9b72389109ac308"
+    },
+    ".linkedspec-data/scratch/lossless335/mdbook.log": {
+      "sha256": "d84f6d42db12ab98c127dd28a5919708cbf890373323f949f117b3492e32b6c7"
+    },
+    ".linkedspec-data/scratch/lossless335/book-source.log": {
+      "sha256": "aef6de9a7095ba181eb2089471492fe5e0efc547c553d18403a1ac593b0b1e23"
+    }
+  },
+  "canonical": {
+    "command": "bash tools/run_ci_local.sh",
+    "log": ".linkedspec-data/scratch/lossless335/canonical.log",
+    "acceptance": "The exact fully staged candidate must pass and produce its receipt before landing; actual result is recorded in the commit body."
+  },
+  "carrier_pairs": {
+    "perl": {
+      "matched": 4,
+      "retained": 4,
+      "per_call": 0
+    },
+    "rust": {
+      "matched": 6,
+      "retained": 4,
+      "per_call": 2
+    },
+    "dart": {
+      "matched": 6,
+      "retained": 4,
+      "per_call": 2
+    },
+    "julia": {
+      "matched": 5,
+      "retained": 2,
+      "per_call": 3
+    },
+    "puc_lua": {
+      "matched": 5,
+      "retained": 2,
+      "per_call": 3
+    },
+    "luajit": {
+      "matched": 5,
+      "retained": 2,
+      "per_call": 3
+    }
+  },
+  "limits": [
+    "Finite extraction and textual integer-lexeme child; malformed candidates stay gap text.",
+    "Public source-bound exact parse_job assignment remains distinct from private dispatch_span.",
+    "No standard format, ambient loading, speculative AST rollback, arbitrary recursion or complete resource guarantee.",
+    "All prior target/marker/provenance/diagnostic/counter and baseline repair owners remain open.",
+    "Canonical acceptance does not imply every optional unfiltered backend gate ran."
+  ]
+}

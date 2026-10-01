@@ -7,7 +7,7 @@ answers:
   - "which Dart lossless carriers retain engines after child rejection"
   - "how are Dart emitted child readiness modules analyzed and executed"
 date: 2026-09-28
-status: bounded six-carrier proof verified; Julia and Lua separately owned
+status: bounded evidence preserved; cross-runtime milestone reconciled under .3.5
 tags: [dart, language-readiness, lossless, staged-parsing, provenance, generated-source]
 evidence: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.2 uses the unchanged .spec/JSON corpus on six matched parent-child routes. The actual child constructs its AST; the host supplies frozen authority and span projection. Focused2 and selected88 tests pass, including strict fresh-package analysis and exact ten-module completion. Original13 cases twice, child4/15 and seven mutants preserve independent recognition, scalar slicing, reconstruction and provenance oracles."
 reverify:
@@ -37,3 +37,5 @@ Missing identity/top/steps fail before child invocation; one-call exhaustion sto
 inert marker. Child rejection remains typed status1 and staged codes remain exact through execution wrappers.
 This does not close diagnostic bytes (`.2.17`), extreme counters (`.2.18`), malformed provenance (`.2.19`) or the
 whole-package SDK gate (`.2.25`) under DART-STARTUP-READING. It does not establish recursive resource or format safety.
+
+[[lossless-child-readiness-reconciliation]] records the completed bounded matrix and authoring costs; historical leaf evidence and open defect limits remain unchanged.

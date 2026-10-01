@@ -1,11 +1,11 @@
 # MEMORY
 
-- activation_commit: `d903f0719823c001144ec346cd32a10fc292f7c6` — clean activation base for shared Lua lossless child proof.
-- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.4 - verify dual-ABI Lua lossless child carriers`.
-- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.5` (pending) — canonical lossless/child reconciliation.
-- next_action: Activate .3.5, reconcile all lossless/actual-child carrier evidence and authoring costs, then close the bounded parent through exact staged canonical CI.
-- in_flight_uncommitted: none; shared Lua .3.4.4 verified and recorded for clean handoff.
-- blockers: bounded nesting/context proof reconciled; lossless probes and core-gap selection remain; .1.1.5 owns stale capability prose and startup .38/.40 recognition defects remain queued. ARCHOGEN owns downstream acceptance; named-argument and format proposals stay parked.
+- activation_commit: `f10c0ce96666f4adf867f329cdf75dd793c003b2` — clean activation base for canonical lossless reconciliation.
+- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.5 - reconcile bounded lossless child readiness`.
+- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.4` (pending) — three-objective reconciliation.
+- next_action: Reconcile bounded nesting, context-name and lossless outcomes under .1.1.3.4, retaining costs and open defects before .1.1.4 gap selection.
+- in_flight_uncommitted: none; .3.5 landing is receipt-bound to exact staged canonical acceptance.
+- blockers: bounded nesting/context/lossless proof reconciled; three-objective reconciliation and core-gap selection remain; .1.1.5 owns stale capability prose and startup .38/.40 recognition defects remain queued. ARCHOGEN owns downstream acceptance; named-argument and format proposals stay parked.
   Wrapper startup .7 remains open; recovery/purge stay prohibited. No interrupted Phase0 run counts as proof.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
   active table; the task metadata doctrine inventories all consumers, permits arbitrary frontier-row rewrites,
