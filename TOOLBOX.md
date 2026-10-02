@@ -838,11 +838,13 @@ primary adapter. See [[inter-match-gap-lua-implementation-plan]].
   the original 66 anchors remain exact and 24 inherited-policy anchors are added.
 - **WHEN:** changing the closure artifact, a selected semantic anchor, definition stage or its canonical registration.
 - **HOW:** `bash tools/run_python_project_data.sh tools/check_language_closure_contract.py`.
-- **OUTPUT:** 632 reason-sensitive mutations/four controls; structural governance only, runtime admission unchanged.
+- **OUTPUT:** 636 reason-sensitive mutations/four controls; structural governance only, runtime admission unchanged.
   Controls distinguish unrelated failure, valid unselected metadata evolution, duplicate JSON keys and nonfinite JSON.
 - **BOUNDARY:** it does not evaluate authored objectives, promote backends, freeze global resource numbers or prove
-  a sandbox. Policy proof obligations do not execute adversarial runtime cases; independent reconciliation and
-  composed-objective admission have later owners. See docs/language-readiness/closure-policy-boundaries.md.
+  a sandbox. Policy proof obligations do not execute adversarial runtime cases. Independent reconciliation is
+  complete under .1.2.4; composed-objective execution/admission remains .1.3-owned. See
+  docs/language-readiness/closure-policy-boundaries.md and the dated on-demand
+  tests/language-readiness/verify_closure_definition.py audit (run after the book build at its producing revision).
 
 ### 4.9 `tools/check_semantic_introspection_contract.py` — neutral model/query oracle
 

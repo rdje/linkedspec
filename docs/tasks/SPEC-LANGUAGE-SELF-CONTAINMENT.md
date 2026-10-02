@@ -912,7 +912,7 @@ used by ordinary `.spec` syntax on every backend.
 - [x] **LOCKSTEP** — The shared executable book example passes natively and freshly emitted with LF/CRLF; rendered source/output match. Book reference/status, CHANGES, DEVELOPMENT_NOTES, MEMORY, live status, roadmaps, task tree and Knowledge Map describe the repair. USER_GUIDE's canonical book delegation remains unchanged. Bounded history, memory, doctrines and diff hygiene govern landing.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.2`
-  Status: `active`
+  Status: `done`
   Goal: Define the problem-domain closure boundary, determinism/resource model, state/scoping rules, and explicit
     environmental non-authority.
   Acceptance: Normative contracts answer what a `.spec` may compute, observe, mutate, return, and never access,
@@ -996,10 +996,30 @@ used by ordinary `.spec` syntax on every backend.
 - [x] **INDEPENDENT GOVERNANCE / LOCKSTEP** — Preserve16 original sources/66 digests, bind24 more anchors and reject632 reason-sensitive mutations/four controls including both missing stage owners. Original audit/guards, storage and rendered book pass; align roadmap/frontier, Knowledge and bounded live/resume/history. Exact staged canonical acceptance governs atomic landing; .1.2.4 is next.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.4`
-  Status: `pending`
+  Status: `done`
   Goal: Reconcile and close the closure-definition parent before neutral composed objectives.
   Dependencies: `.1.2.3`
   Acceptance: Independently check matrix/authority/validator and book alignment, preserved original contracts, exact partial/unassessed routing and no runtime/admission overclaim. Exact staged canonical acceptance closes .1.2; .1.3 must be split before fixture/checker implementation.
+  Activation: Clean4b16791ad67aee14b7ae53ef426957a9c074beac on October2; scoped policy committed, all nine hooks/post-pointer and promoted canonical receipt pass, brief0 and Git clean.
+  Owned scope / plan: Independently reconcile matrix rows, definition/source anchors, static validator registers, exact producing/repair ownership and rendered public claims. Add an on-demand evidence audit under tests/language-readiness/verify_closure_definition.py and a revision-bound definition-reconciliation checkpoint under docs/checkpoints/; choose exact report schema before creation. Freeze reconciliation metadata in the existing authority/checker and align book, Knowledge, roadmaps/frontier, bounded continuity and a pending .1.3 decomposition before implementation. Preserve all sixteen authority bytes, original66 bindings and90-anchor policy meanings; no new runtime/objective/admission or resource/security guarantee.
+  Verification tier: `canonical`
+  Focused checks: Independent source/register/matrix/reference/owner and rendered-book reconciliation with reason-sensitive destructive controls; original objective audit and unchanged core authorities; direct closure guard, storage census as affected, Knowledge/history/memory/doctrines and diff hygiene.
+  Canonical trigger: Closure-definition parent closeout and normative reconciliation metadata; stage the complete candidate before exact receipt-bound local CI.
+  Checkpoint plan: docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.4-verification.json uses format1 with activation/structure/policy baseline commits, unchanged source hashes, original/additional anchor counts, matrix/register dimensions, preserved external task-file hashes, owner/reference counts, book source/render hashes and reason-sensitive control results. It is dated focused evidence, not a current runtime execution receipt; canonical acceptance is recorded in the commit body. The audit permits only exact reconciliation_owner and stage metadata evolution from the committed policy baseline.
+  Current-summary defect (owned here): finite-gap-list.md repeats the same .1.2.4 next action and retains an obsolete Next before completed .1.2.2. Reproduce by reading its final selection paragraph. Consolidate it to the completed definition and precise pending .1.3.1 selection; no new feature or repair closure.
+  Closeout: Parent .1.2 closes only through exact staged canonical acceptance. Independent reconciliation allows exactly one new producing-owner field and the pending-to-complete stage value; all policy meanings and runtime admission remain byte/semantic-exact. Decompose .1.3 selection, neutral fixture/checker, five backend lanes (six runtime routes) and parent reconciliation before implementation.
+  Verification: Independent audit PASS16 authority bytes/66 original plus24 added anchors,7 operations/8 scopes,112 external task files,44 resolved owners/8 references and19 rendered claims across two pages. Eight targeted corruptions and unrelated-error substitution reject for exact reasons. Production guard636 mutations/four controls passes; original objective evidence,39-entrypoint storage and bounded book/Knowledge/history/memory/doctrine checks govern landing. Canonical acceptance/result is retained in the commit body; no fresh runtime objective, policy meaning or repair status change.
+  Evidence: docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.4-verification.json; tests/language-readiness/verify_closure_definition.py; docs/knowledge/language-closure-definition-reconciliation.md.
+  Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.4 - reconcile language closure definition`.
+
+### `SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.4` Acceptance Checklist
+
+- [x] **OWNERSHIP / BASELINES** — Clean4b16791 activation precedes every change. Original structure and policy commits pin16 source bytes,66 original bindings and24 additions; exact metadata normalization preserves all normative meanings.
+- [x] **INDEPENDENT RECONCILIATION** — Human matrix rows, literal static registers and normalized policy-schema syntax reconcile without importing/evaluating the production validator. Canonical digests, source identities and all declared owners/references agree.
+- [x] **PARTIAL / UNASSESSED ROUTING** — Preserve112 external task-file identities, including repair statuses/prerequisites. Source-detail interpretation, resource/lexical/mutation/recognition defects and parked named arguments retain their owners. Listing mechanisms does not promote objectives or waive repairs.
+- [x] **PUBLIC PROOF / CONTROLS** — Nineteen rendered claims across two pages preserve scoped progress/failure/authority limits. Eight targeted corruptions require exact rejection; unrelated-error substitution cannot count. The checkpoint is dated structural evidence, not fresh grammar execution.
+- [x] **NO REGRESSION / CLOSEOUT** — Guard636/four controls, original objective audit and direct storage/book checks pass. Exact staged canonical acceptance is mandatory for parent .1.2 closure; runtime admission/whole-format/frontend/resource/security claims stay unchanged.
+- [x] **LOCKSTEP / NEXT OWNERS** — Book, Knowledge, roadmap/frontier, finite ledger and bounded live/resume/history agree. Split .1.3 into eight pending leaves before implementation; .1.3.1 selects independent bounded objectives/oracles/prerequisites next.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3`
   Status: `pending`
@@ -1008,7 +1028,56 @@ used by ordinary `.spec` syntax on every backend.
     composition, branching/iteration, structural transformation, and typed result construction; mutations prove
     every claimed semantic dimension matters.
   Dependencies: `.1.2`
+  Children: `.1.3.1`, `.1.3.2`, `.1.3.3`, `.1.3.4`, `.1.3.5`, `.1.3.6`, `.1.3.7`, `.1.3.8`
   Inventory input: Preserve the original three probes; select bounded diagnostic and callable/control/transform objectives with independent negative/effect/kind oracles. Record indentation/quotes/comments requirement scope before proposing syntax, and require affected repair owners before dependent promotion. Split selection, neutral fixture/checker and recurrence work before implementation.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.1`
+  Status: `pending`
+  Goal: Select bounded composed objectives and freeze their requirements, independent oracles, supported public producers and affected repair prerequisites before fixture implementation.
+  Dependencies: `.1.2`
+  Acceptance: Reuse the original nesting/context/lossless evidence without changing its corpora. Select diagnostic and callable/control/transform cases by exact value-kind, order, effect, failure/publication and negative expectations; map all eight parent dimensions to existing or new evidence. Record indentation/quotes/comments requirements and unassessed limits without adding syntax. If a selected claim crosses a known repair, schedule its existing prerequisites before that promotion; successful workarounds cannot close defects.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.2`
+  Status: `pending`
+  Goal: Implement selected neutral fixtures, independent expected observations and a reason-sensitive mutation checker from .1.3.1's approved bounded selection.
+  Dependencies: `.1.3.1`
+  Acceptance: Version input/oracle identities, prove each claimed semantic dimension through positive/negative/effect/kind controls and unrelated-error rejection, and preserve original probes. Select exact owned paths before creation. This leaf establishes neutral governance, not runtime execution or whole-format admission; normative fixture/checker movement requires canonical proof.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3`
+  Status: `pending`
+  Goal: Execute the selected compositions through Perl's public native and independently loaded emitted producers.
+  Dependencies: `.1.3.2`
+  Acceptance: Independent observations match every selected oracle on both producers, including ordered diagnostics and failure/effect/value-kind controls. Bind exact sources/logs and repair prerequisites; minimize any failure through Toolbox public probes and route the repair before dependent promotion.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.4`
+  Status: `pending`
+  Goal: Execute the same unchanged neutral compositions on supported Rust native/reconstructed/generated/emitted carriers.
+  Dependencies: `.1.3.3`
+  Acceptance: Declare actual carrier counts before execution, use independent callers where available, preserve native versus compatibility error channels and compare all observations to the same oracle. Existing final-assignment/substitution/resource repairs block affected claims; no inferred carrier equivalence.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.5`
+  Status: `pending`
+  Goal: Execute the same unchanged neutral compositions on supported Dart native/reconstructed/generated/emitted carriers.
+  Dependencies: `.1.3.4`
+  Acceptance: Exact independent observations and value kinds match selected oracles. Mixed-control, Unicode-order, resource and detachment owners/prerequisites remain mandatory for affected promotion. Report actual carriers and failure/recovery evidence without treating a workaround as repair.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.6`
+  Status: `pending`
+  Goal: Execute the unchanged neutral compositions on supported Julia native and emitted carriers.
+  Dependencies: `.1.3.5`
+  Acceptance: Match independent order/effect/kind/failure oracles and test actual returned-object detachment where claimed. Preserve registry/diagnostic and test-defect ownership; source-exact producers/logs distinguish historical evidence from fresh execution.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.7`
+  Status: `pending`
+  Goal: Execute the unchanged neutral compositions on supported PUC Lua and LuaJIT native and emitted carriers.
+  Dependencies: `.1.3.6`
+  Acceptance: Both ABIs independently match the same oracles and actual-object detachment controls. Preserve array/cycle/capture/provenance/resource owners and prerequisites; no ABI substitution or host-baseline promotion.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.8`
+  Status: `pending`
+  Goal: Reconcile selected six-runtime evidence, authoring costs, mutations, prerequisites and public claims before closing .1.3.
+  Dependencies: `.1.3.3`, `.1.3.4`, `.1.3.5`, `.1.3.6`, `.1.3.7`
+  Acceptance: Independently audit versioned fixtures/checkpoints/logs and actual carrier coverage, preserve original three probes and all partial/unassessed owners, align book/Knowledge/roadmap/frontier, and close the parent only through exact staged canonical proof. .1.4 then selects only evidence-backed minimized primitive gaps; no standard-format or frontend admission follows automatically.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.4`
   Status: `pending`

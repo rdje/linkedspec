@@ -1,10 +1,10 @@
 # MEMORY
 
-- activation_commit: `e4f9dcb8d6ee825119863d076d5a32be42ab9ef6` — clean activation base for normative policy.
-- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.3 - freeze scoped closure policies`.
-- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.4` (pending) — independent definition reconciliation.
-- next_action: Independently reconcile the matrix, scoped policy review, versioned definition, checker and book; verify original contracts/bindings, exact partial/unassessed routing and unchanged runtime admission before canonical .1.2 parent closeout. Split .1.3 selection/fixture/recurrence before implementation.
-- in_flight_uncommitted: none; scoped policy is committed. Independent reconciliation, runtime repairs, new objectives and format/profile admission remain pending.
+- activation_commit: `4b16791ad67aee14b7ae53ef426957a9c074beac` — clean activation base for independent reconciliation.
+- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.4 - reconcile language closure definition`.
+- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.1` (pending) — bounded composition selection.
+- next_action: Activate .1.3.1 from clean HEAD; select bounded diagnostic and callable/control/transform objectives with independent oracles, exact public producers and repair prerequisites before fixture implementation.
+- in_flight_uncommitted: none. Closure definition .1.2 is reconciled; original16 authorities/66 bindings and90 policy anchors remain exact. .1.3 is split into selection, neutral governance, five backend lanes/six runtime routes and canonical reconciliation; no runtime promotion or repair waiver.
 - blockers: No blocker for .1.2.4; source-detail interpretation remains startup37.2-owned, and general teaching coordination remains41.2-owned. Policies unchanged; startup .5/.29 own adoption. ARCHOGEN owns downstream acceptance.
   Wrapper startup .7 remains open; recovery/purge stay prohibited. No interrupted Phase0 run counts as proof.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the

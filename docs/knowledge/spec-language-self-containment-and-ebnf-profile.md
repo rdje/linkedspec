@@ -44,10 +44,11 @@ context-name and lossless/actual-child proof is reconciled under [[three-objecti
 Constructor/flat and the stale entry/cursor description repairs are committed. The finite inventory closes
 canonically at605276027; its success neither erases separately owned defects nor admits whole formats.
 The source-located closure matrix and versioned definition now freeze operation/scope structure and
-scoped deterministic/resource/failure/ambient policies over sixteen authorities/90 anchors, with 632
+scoped deterministic/resource/failure/ambient policies over sixteen authorities/90 anchors, with 636
 reason-sensitive governance mutations. [[spec-language-closure-contract-plan]] and
 [[language-closure-scoped-policy-freeze]] preserve target/current/partial/unassessed obligations.
-Independent canonical reconciliation is next; no runtime admission advances through structural definition. The optional frontend has added no syntax; structured formats
+Independent canonical reconciliation closes .1.2; [[language-closure-definition-reconciliation]] preserves
+all partial prerequisites. Next .1.3.1 selects bounded compositions; no runtime admission advances through structural definition. The optional frontend has added no syntax; structured formats
 and frontend implementation retain their language-readiness/parity gates.
 
  `docs/tasks/SPEC-LANGUAGE-SELF-CONTAINMENT.md` first inventories portable

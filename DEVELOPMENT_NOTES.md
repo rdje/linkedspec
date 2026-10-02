@@ -12,6 +12,21 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-10-02 — Reconcile definition independently of its production schema (.1.2.4)
+
+Pinned Git baselines distinguish original operation/scope66 bindings from24 inherited-policy additions.
+The audit parses human matrix rows and Python syntax trees without importing/evaluating the closure validator.
+Literal registers match artifact edges; complete FIXED_SECTIONS syntax reconstructs the policy baseline after
+one exact stage normalization. Removing the new reconciliation_owner also reconstructs every artifact policy
+meaning. Sixteen authority bytes and112 external task files remain exact, preserving prerequisites as well as
+status. Four source/render statements plus15 retained scoped rendered claims cover two public pages.
+Eight reason-sensitive corruptions and unrelated-error rejection prove audit sensitivity; guard636/four
+controls remains recurring structural governance. The on-demand checkpoint is revision-bound: future legitimate
+external task/book evolution requires an owning new baseline, not weakening this dated proof. It executes no
+grammar and grants no resource/security/runtime admission. .1.3.1 selects requirements/oracles before neutral
+fixtures and six-runtime lanes; existing defects block affected promotion rather than being closed by workarounds.
+
+
 ## 2026-10-02 — Closure policy needs observed inputs and scoped failure effects (.1.2.3)
 
 Repeatability fixes canonical program/source/typed state/registry/grants plus cancellation/deadline/budget/sink

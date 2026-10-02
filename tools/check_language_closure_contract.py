@@ -188,7 +188,7 @@ FIXED_SECTIONS = {
     "stage": {
         "operation_scope_reference": "frozen",
         "determinism_resource_failure": "frozen",
-        "independent_reconciliation": "pending_SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.4",
+        "independent_reconciliation": "complete",
         "composed_objectives": "pending_SPEC-LANGUAGE-SELF-CONTAINMENT.1.3",
     },
     "claim_boundary": {
@@ -406,13 +406,14 @@ def semantic_digest(value: Any) -> str:
 
 
 def validate(contract: Any, sources: dict[str, Any], statuses: dict[str, Any], ci: str) -> None:
-    keys = {"format", "contract_id", "definition_owner", "policy_owner", "authorities", "operations", "scopes"} | FIXED_SECTIONS.keys()
+    keys = {"format", "contract_id", "definition_owner", "policy_owner", "reconciliation_owner", "authorities", "operations", "scopes"} | FIXED_SECTIONS.keys()
     closed_object(contract, keys, "/")
     exact(contract["format"], 1, "/format")
     exact(contract["contract_id"], "linkedspec-language-closure-v1", "/contract_id")
     exact(contract["definition_owner"], "SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.2", "/definition_owner")
     exact(contract["policy_owner"], "SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.3", "/policy_owner")
-    for field in ("definition_owner", "policy_owner"):
+    exact(contract["reconciliation_owner"], "SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.4", "/reconciliation_owner")
+    for field in ("definition_owner", "policy_owner", "reconciliation_owner"):
         require(type(statuses.get(contract[field])) is str, "/" + field, "missing or ambiguous task owner")
     for section, expected in FIXED_SECTIONS.items():
         closed_object(contract[section], expected, f"/{section}")
@@ -501,6 +502,7 @@ def mutation_proof(contract: Any, sources: dict[str, Any], statuses: dict[str, A
         corrupt([key], None)
         corrupt([key], None, delete=True)
     corrupt(["policy_owner"], "unrelated")
+    corrupt(["reconciliation_owner"], "unrelated")
     for section, expected in FIXED_SECTIONS.items():
         for key, value in expected.items():
             replacement = [] if type(value) is list else not value if type(value) is bool else True if type(value) is int else "weakened"
@@ -549,6 +551,7 @@ def mutation_proof(contract: Any, sources: dict[str, Any], statuses: dict[str, A
     for path, owner in [
         ("/definition_owner", contract["definition_owner"]),
         ("/policy_owner", contract["policy_owner"]),
+        ("/reconciliation_owner", contract["reconciliation_owner"]),
         ("/obligations/resource_detail_review_owner", detail_owner),
     ] + [
         (f"/obligations/{field}/{index}", owner)

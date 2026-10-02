@@ -11,7 +11,7 @@ answers:
   - "where is the frozen determinism resource failure and ambient policy review"
   - "do safe point checks prove regex preemption or hard time bounds"
 date: 2026-10-02
-status: scoped policy frozen; runtime admission and independent reconciliation pending
+status: scoped policy frozen and definition reconciled; composed runtime admission pending
 tags: [language-readiness, determinism, progress, resources, failure, authority, partial]
 evidence: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.3 reviews existing authorities from clean e4f9dcb8d6ee825119863d076d5a32be42ab9ef6. Public ordinary-recursion probe reproduces null/null last_error with separate trace. Sixteen original source files/66 bindings remain exact;24 additional semantic anchors and632 reason-sensitive structural mutations preserve finite evidence and repair prerequisites."
 reverify:

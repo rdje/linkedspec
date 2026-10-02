@@ -7,7 +7,7 @@ answers:
   - "what must closure definition and neutral objectives investigate next"
   - "which repair owners block broader language readiness guarantees"
 date: 2026-10-02
-status: finite classification; structure/scoped policy frozen, reconciliation and new objectives pending
+status: finite classification; definition reconciled, composed objective selection pending
 tags: [language-readiness, gap, closure, classification, ownership]
 evidence: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.4 classifies nine areas from existing authorities and the three-objective reconciliation. No new missing parsing primitive is demonstrated. Named arguments remain approved and parked under PARSER-AUTHORING-APIS.4. Existing repair owners preserve priority and dependencies; unassessed objectives have .1.2/.1.3/.1.4 next actions."
 reverify: "Read docs/language-readiness/finite-gap-list.md and its canonical authorities/owners; run bash tools/run_python_project_data.sh tests/language-readiness/verify_objectives.py for historical evidence integrity, then the affected owner's public proof before advancing runtime claims."
@@ -31,7 +31,7 @@ Stale capability prose/guard repair `.1.1.5` is now recorded in
 under [[spec-language-closure-contract-plan]]; `.1.2.2` subsequently freezes operation/scope/reference structure.
 `.1.2.3` subsequently freezes scoped determinism/resources/failure/ambient policy at 90 anchors, preserving
 known resource and Dart lexical-order owners. [[language-closure-scoped-policy-freeze]] retains proof limits;
-`.1.2.4` next independently reconciles the definition. `.1.3` selects neutral composed objectives and
+`.1.2.4` completes independent canonical definition reconciliation. `.1.3.1` selects neutral composed objectives and
 mutations, including still-unassessed diagnostics/control/transformation needs.
 `.1.4` creates implementation leaves only for demonstrated reusable semantic gaps.
 Whole-format support, universal depth/resources, performance and alternate syntax

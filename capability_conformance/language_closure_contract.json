@@ -6,7 +6,7 @@
   "stage": {
     "operation_scope_reference": "frozen",
     "determinism_resource_failure": "frozen",
-    "independent_reconciliation": "pending_SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.4",
+    "independent_reconciliation": "complete",
     "composed_objectives": "pending_SPEC-LANGUAGE-SELF-CONTAINMENT.1.3"
   },
   "claim_boundary": {
@@ -649,5 +649,6 @@
     "route": "tools/run_python_project_data.sh",
     "ci": "tools/run_ci_local.sh",
     "invocations": 1
-  }
+  },
+  "reconciliation_owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.4"
 }

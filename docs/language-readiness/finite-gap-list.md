@@ -102,14 +102,14 @@ Perl/Rust/Dart/Julia/PUC-Lua/LuaJIT proof before `.1.4` creates implementation l
 | Speculative AST/user-state rollback or expanded staged operands | Outside current rollback/operand contract; need unassessed | `.1.2` states current exclusions; `.1.4` may propose reusable semantics only after an agreed failing objective. No inferred extension approval. |
 
 After canonical inventory closeout605276027, `.1.2.1` supplies the source-located
-closure matrix in `docs/language-readiness/closure-contract-matrix.md`. Next
-`.1.2.2` subsequently freezes operation/scope/reference structure; `.1.2.3` freezes scoped determinism/resource/failure/ambient policy,
-preserving all 66 original bindings and adding 24 inherited-policy anchors. Known resource and Dart lexical-order
-repairs retain their owners and prerequisites; the dated review is docs/language-readiness/closure-policy-boundaries.md.
-`.1.2.4` next independently reconciles the definition;
-then `.1.2.4` reconciles the definition before `.1.3` neutral objectives/mutations
-and `.1.4` evidence-backed gap audit. This is a finite evidence plan, not exhaustive
-grammar coverage, campaign admission or implementation of the optional frontend.
+closure matrix in `docs/language-readiness/closure-contract-matrix.md`. `.1.2.2` freezes
+operation/scope/reference structure; `.1.2.3` freezes scoped policy, preserving66 original
+bindings and adding24 inherited-policy anchors. `.1.2.4` independently reconciles the
+definition through canonical parent closeout. Known repairs and prerequisites remain;
+docs/language-readiness/closure-policy-boundaries.md retains the dated policy review.
+Next `.1.3.1` selects bounded composed objectives/oracles/prerequisites before neutral
+fixtures and six-runtime lanes; `.1.4` owns evidence-backed gap audit. This is a finite
+evidence plan, not exhaustive grammar coverage, campaign admission or an optional frontend.
 
 ## Verification
 

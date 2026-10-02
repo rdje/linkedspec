@@ -12,7 +12,12 @@ retains its review date; deterministic/resource/failure policy and independent
 reconciliation have separate owners. Subsequent `.1.2.3` freezes scoped policies,
 preserving the original 66 bindings and adding24 (90 total) with 632 reason-sensitive
 mutations/four controls. The dated review is docs/language-readiness/closure-policy-boundaries.md.
-Independent reconciliation remains `.1.2.4`-owned. The original plan below retains its review context.
+Independent reconciliation is complete under `.1.2.4` through canonical closeout. Its checkpoint
+is docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.4-verification.json; the separate
+baseline/matrix/checker-syntax/owner/book audit runs via tests/language-readiness/verify_closure_definition.py.
+The current guard rejects636 reason-sensitive mutations/four controls. Original policy meanings,
+all90 anchors and112 external task files remain exact; composed objectives start with `.1.3.1` selection.
+The original plan below retains its review context.
 
 ## Claim boundary
 

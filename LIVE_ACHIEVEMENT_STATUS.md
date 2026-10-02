@@ -2,17 +2,19 @@
 
 ## Current Activity
 
-Ordinary .spec language closure definition under SPEC-LANGUAGE-SELF-CONTAINMENT.1.2. The structured-format campaign requires demonstrated language strength and backend parity; the optional frontend remains later.
+Bounded composed-objective selection under SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.1, after closure-definition .1.2 closeout. Structured formats and the optional frontend retain their language-readiness/parity gates.
 
 ## Latest Completed Slice
 
-- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.3 - freeze scoped closure policies` — 16 unchanged authorities/90 anchors,632 reason-sensitive mutations/four controls; explicit determinism, scoped progress/resources, failure publication and ambient policy. Public prose/owner metadata repaired; original66 bindings and all partial prerequisites remain, without runtime/global/timing/security promotion.
+- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.4 - reconcile language closure definition` — Independent matrix/baseline/checker-syntax/owner/rendered-book audit preserves16 authorities/66 original plus24 policy anchors and112 external task files. Guard636/four controls; no runtime/admission/repair movement. Exact staged canonical acceptance closes .1.2.
 
 ## Next Action
 
-- Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.4: independently reconcile matrix/policy review/definition/checker/book, exact original authorities and partial/unassessed routing before canonical .1.2 closeout. Split .1.3 objectives before implementation.
+- Activate .1.3.1 from clean HEAD: select bounded diagnostic/callable/control/transform objectives, independent oracles, exact public producers and affected repair prerequisites before neutral fixture/checker implementation.
 
 ## Recent Completions
+
+- `2026-10-02` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.4` independently reconciles closure definition and splits bounded composition work before implementation.
 
 - `2026-10-02` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.3` freezes scoped policies and corrects bounded progress/error/ordering teaching.
 
@@ -43,8 +45,6 @@ Ordinary .spec language closure definition under SPEC-LANGUAGE-SELF-CONTAINMENT.
 - `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.2` verifies lossless Perl segmentation and corrects the published gap lifecycle.
 
 - `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.1` scopes lossless segmentation and public staged child proof.
-
-- `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.7` reconciles bounded context-name proof through canonical closure.
 
 ## History
 

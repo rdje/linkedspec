@@ -12,6 +12,21 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-10-02 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.4: independent closure closeout
+
+Close definition parent .1.2 through exact staged canonical acceptance. Add a revision-bound independent audit
+and checkpoint for16 unchanged authority bytes,66 original plus24 policy bindings, matrix rows, literal
+operation/scope registers and normalized policy-schema syntax. Preserve112 external task-file hashes and44
+producing/repair/deferred owners;8 references resolve. Nineteen rendered claims across two pages preserve scoped
+teaching;8 targeted corruptions and unrelated-error substitution reject. The recurring guard rejects636
+reason-sensitive mutations/four controls. Only reconciliation owner/stage metadata changes; runtime admission,
+policy meanings and all repair prerequisites stay exact. Split .1.3 into selection, neutral governance,
+five backend lanes/six runtime routes and canonical reconciliation before implementation. Align book,
+Knowledge, roadmaps/frontier, finite selection and bounded continuity; remove the duplicate stale next-action
+sentence. Original objective audit, storage/book/Knowledge/history/memory/doctrines and canonical proof govern
+landing. Canonical result is retained in the producing commit body, not inferred from this historical audit.
+
+
 ## 2026-10-02 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.3: scoped closure policies
 
 Freeze deterministic inputs/order, active-scope progress, inherited resource policies, failure publication and

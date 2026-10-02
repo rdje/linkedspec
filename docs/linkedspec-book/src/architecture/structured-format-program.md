@@ -158,6 +158,18 @@ mutation, return, diagnostics and parser composition; caller authority is a sepa
 keep rule invocation, pure functions, deferred blocks, recognition attempts, recursive observations, nested
 writes, leaf transformation and child parsing distinct.
 
+Definition reconciliation preserves the original 66 bindings and all 90 policy anchors.
+Structural closure is complete; composed objective execution remains pending.
+Known repair prerequisites remain mandatory before dependent promotion.
+This closeout establishes no new runtime admission or sandbox guarantee.
+The separate evidence audit compares committed baselines, matrix rows, static checker
+registers, repair-task bytes and rendered claims; it does not execute an authored grammar:
+
+```sh
+bash tools/run_mdbook_local.sh
+bash tools/run_python_project_data.sh tests/language-readiness/verify_closure_definition.py
+```
+
 For example, rolling back recognition restores its cursor, boundary and marks. A nested write instead evaluates
 its segments and value before taking the publication snapshot; a later structural failure preserves completed
 expression effects. A deferred block sees live caller nonparameters when invoked, while a pure function starts
@@ -171,8 +183,8 @@ bash tools/run_python_project_data.sh tools/check_language_closure_contract.py
 This check validates definition structure, exact source bindings and producing/repair ownership. Selected anchors
 use SHA-256 over sorted compact UTF-8 JSON with literal Unicode; unrelated historical rollout metadata is excluded.
 Reason-sensitive mutations challenge every declared category and scope, source drift and CI registration.
-The checker does not execute a `.spec` or establish a new composed objective. Independent definition reconciliation
-and runtime objective admission remain separate stages; runtime admission,
+The checker does not execute a `.spec` or establish a new composed objective. Independent definition reconciliation is complete. Composed execution and
+runtime objective admission remain pending; runtime admission,
 whole-format readiness and the optional frontend have not advanced through this definition alone.
 
 ### Determinism, progress and failure boundaries

@@ -11,7 +11,7 @@ answers:
   - "does diagnostic output grant authored stdout filesystem or network access"
   - "which boolean and dynamic callback repairs qualify language closure"
 date: 2026-10-02
-status: structure and scoped policy frozen; independent reconciliation and composed admission pending
+status: closure definition reconciled; composed execution/admission pending
 tags: [language-readiness, closure, scopes, authority, progress, failure, resources]
 evidence: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.1 reviews sixteen existing authority identities/semantic anchors and supplemental startup19/21/35/39 ownership. docs/language-readiness/closure-contract-matrix.md separates target, finite current evidence, partial exceptions and unassessed requirements; no runtime, contract, admission or numerical limit changes."
 reverify:
@@ -65,5 +65,7 @@ semantic digests; current proof owners remain explicit. Subsequent `.1.2.3` pres
 those bindings and adds 24 inherited-policy anchors (90 total), with 632 reason-sensitive
 mutations/four controls. [[language-closure-scoped-policy-freeze]] owns the dated
 determinism/resource/failure/ambient review and public-channel corrections.
-`.1.2.4` next independently reconciles the parent through canonical proof.
+`.1.2.4` independently reconciles the parent through canonical proof; the current guard rejects636
+reason-sensitive mutations/four controls. [[language-closure-definition-reconciliation]] records the
+revision-bound audit and precise metadata-only evolution. `.1.3.1` next selects bounded compositions.
 [[spec-language-self-containment-and-ebnf-profile]] retains the later optional frontend.
