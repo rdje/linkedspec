@@ -12,6 +12,16 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-10-02 — Canonical scope closure preserves committed proof (.0.2.0.2)
+
+The prerequisite closeout reconciles the committed repair rather than re-deriving its mechanism. Sources,
+producer/log hashes and35 paired observations retain actual identity controls and narrow scope limits.
+Successful emitted rows omit optional error keys; compare absence as null rather than reject that private
+shape. Canonical CI binds the exact staged parent-closeout candidate, with actual evidence in commit/receipt.
+The prior commit hook exposed premature verification fields for a future leaf: comparison is by stable ID
+and permits exactly one changed owner. Keep future plans in prose until their clean activation. Save that
+workflow fact in Knowledge/book without changing the checker. Registered-function bridge remains next.
+
 ## 2026-10-02 — Persistent callback slots belong to a fresh function invocation (.0.2.0.1)
 
 Filtering caller names alone would lose callback-created slots between invocations of the callback.

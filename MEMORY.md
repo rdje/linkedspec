@@ -1,11 +1,11 @@
 # MEMORY
 
-- activation_commit: `e7401b3cbec6e7cf6d5071f90cee4d08a58f4450` — clean activation base for callback scope repair.
-- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.0.1 - repair pure-function callback scope`.
-- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.0.2` (pending) — canonical callback scope prerequisite closeout.
-- next_action: Activate .0.2.0.2 from clean HEAD; independently reconcile committed scope/native-emitted/actual-frame proof, run exact staged canonical CI and close .0.2.0 before registered-function bridge .0.2.1.
-- in_flight_uncommitted: none after focused repair landing;33 sources/279 tests,23 push/17 native frame/four diagnostic nested checks plus fresh-child actual-frame proof and96 direct-dependent tests. Required Phase0 result belongs to this commit/checkpoint.
-- blockers: No access/decision blocker. Canonical scope closeout precedes bridge; normalization still fails decorate. Startup19/32/35/87 remain separate; source detail37.2, broad teaching41.2, policy5/29 and ARCHOGEN acceptance retain owners.
+- activation_commit: `f07d827f7477e8a8a630ca12003d62761568a9b9` — clean activation base for canonical callback scope closeout.
+- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.0.2 - close callback scope prerequisite`.
+- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1` (pending) — P1 registered pure-function bridge from Perl deferred bodies.
+- next_action: Activate .0.2.1 from clean HEAD; declare compiled registry/context interface and exact code/test paths, reuse central function lowering with signatures/order/fresh locals/nested calls/recursion controls, then repair decorate before dispatcher closeout.
+- in_flight_uncommitted: none after canonical closeout landing; committed scope proof33 sources/279 tests,23 push/17 native frame/four diagnostic assertions plus emitted actual-frame proof and96 dependents. Actual canonical result belongs to the commit/receipt.
+- blockers: No access/decision blocker. Registered-function bridge is next; normalization still fails decorate. Startup19/32/35/87 remain separate; source detail37.2, broad teaching41.2, policy5/29 and ARCHOGEN acceptance retain owners.
   Wrapper startup .7 remains open; recovery/purge stay prohibited. No interrupted Phase0 run counts as proof.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
   active table; the task metadata doctrine inventories all consumers, permits arbitrary frontier-row rewrites,
@@ -52,8 +52,8 @@
   use exact staged canonical CI; task-tree/index, Knowledge Map, mdBook, and bounded live/history move in lockstep.
 - current_engineering_notes_capacity: ADR0122 admits 43 collection files /42 manifest lines /25410 manifest bytes; current41/40/24185 stay bounded.
   Notes segment4967 preserves190 lines/35403 bytes from clean624aa1995; old archive rows/bytes remain exact.
-- current_change_history_capacity: ADR0122 admits47 collection files /46 manifest lines /26255 bytes; current44/43/24527 stay bounded.
-  Changes segment4969 preserves177 lines /35913 bytes from clean2cf465ae7; prior history remains byte-exact.
+- current_change_history_capacity: ADR0122 admits47 collection files /46 manifest lines /26255 bytes; current45/44/25103 stay bounded.
+  Changes segment4968 preserves216 lines /20819 bytes from cleanf07d827f7; prior history remains byte-exact.
 - dependency_boundary: RGX public integration only; it owns PGEN. No internal inspection/analysis, patches, separate PGEN procedure or unrelated pin changes. September26 authorizes only reviewed f6e5acdc for LS-004.
   Normal documented builds remain authorized; retain caches. Startup .80.1-.4 may observe public behavior or track upstream repairs, not investigate dependency internals.
 - latest_bootstrap_read: ADR0123 targets 2–5 minute startup plus thorough task-specific reading. Separate audit remains 89/143 and .1.90. Document integration and .46/.47/.49/.86.1/.86.2 are verified; Perl .86.4.2.4 corrects the regex-type premise; .86.4.3 owns supported helper validation (verified); .86.4.6 verifies helper splitting; .86.4.7 verifies quoted subjects; .86.4.4.1 owns grouped-operand repair .86.4.8; .86.4.8.1 rejects incompatible lookahead and .86.4.8.2 verifies grouped repair; .86.4.4.2.1 fixes generated Trace and .86.4.4.2.2 closes bounded public recomposition; .87 owns four helper/grouping follow-ups. No downstream application acceptance claim.

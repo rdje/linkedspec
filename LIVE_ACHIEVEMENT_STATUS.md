@@ -2,17 +2,19 @@
 
 ## Current Activity
 
-Canonical callback scope prerequisite closeout .1.3.3.0.2.0.2 after the focused repair; then registered-function bridge .0.2.1. Neutral execution/backend lanes retain prerequisites.
+P1 registered-function bridge .1.3.3.0.2.1 after canonical callback scope prerequisite closeout .0.2.0.2. Neutral execution/backend lanes retain prerequisites.
 
 ## Latest Completed Slice
 
-- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.0.1 - repair pure-function callback scope` —33 native/fresh emitted sources/279 top-level tests, actual function frame/slot identity and failure restoration. Runtime records/public authorities/CI unchanged; existing startup32 remains.
+- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.0.2 - close callback scope prerequisite` — Independently reconciles committed sources/logs/producers and35 paired observations, unchanged runtime/tests/authorities/CI and exact canonical acceptance. Existing startup32/decorate limitations remain.
 
 ## Next Action
 
-- Activate .0.2.0.2 from clean HEAD; independently recompose committed scope proof and exact staged canonical acceptance, close .0.2.0 and proceed to registered-function bridge .0.2.1.
+- Activate .0.2.1 from clean HEAD; select the compiled function registry/context interface, exact paths/tier and reuse central lowering. Cover signature/order/fresh-local/nested/recursion and native/emitted controls before dispatcher closeout.
 
 ## Recent Completions
+
+- `2026-10-02` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.0.2` binds committed callback scope proof to canonical prerequisite closure before the function bridge.
 
 - `2026-10-02` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.0.1` repairs callback scope with fresh working maps and function-owned callable lookup.
 
@@ -43,8 +45,6 @@ Canonical callback scope prerequisite closeout .1.3.3.0.2.0.2 after the focused 
 - `2026-09-28` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.5` reconciles bounded lossless/actual-child evidence under canonical acceptance.
 
 - `2026-09-28` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.4` verifies five lossless/child routes on each Lua ABI.
-
-- `2026-09-28` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.3` verifies Julia lossless/child routes with an actual-result alias control.
 
 ## History
 

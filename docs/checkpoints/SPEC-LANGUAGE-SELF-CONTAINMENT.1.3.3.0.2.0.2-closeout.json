@@ -1,0 +1,217 @@
+{
+  "activation_commit": "f07d827f7477e8a8a630ca12003d62761568a9b9",
+  "canonical_plan": {
+    "actual_result_location": "Commit message and staged receipt promoted to committed HEAD; canonical acceptance governs proposed scope-parent closure.",
+    "command": "bash tools/run_ci_local.sh",
+    "exact_staged_candidate_required": true,
+    "log": ".linkedspec-data/scratch/selfcontain1330202/canonical.log",
+    "no_tracked_edits_after_gate": true
+  },
+  "date": "2026-10-02",
+  "focused_logs": [
+    {
+      "path": ".linkedspec-data/scratch/selfcontain1330202/book.log",
+      "sha256": "4833dee4cc1c1f1b3242c15cc48980f7c5f7ce5b440fde93676349908b3cb55c"
+    },
+    {
+      "path": ".linkedspec-data/scratch/selfcontain1330202/knowledge.log",
+      "sha256": "48de3ffbb6c213b5ac3925298038f058acb9d68dd1013064d3a2e97cbd3014c4"
+    },
+    {
+      "path": ".linkedspec-data/scratch/selfcontain1330202/memory.log",
+      "sha256": "0a28d2145572e85624c1199fd93c4b87bec2213088d6996e371df94878f2d74a"
+    },
+    {
+      "path": ".linkedspec-data/scratch/selfcontain1330202/history.log",
+      "sha256": "6d1c901fc9a5620edfaccf118a5c16234ba8e0c9c7b19f214ac108858f0127d9"
+    },
+    {
+      "path": ".linkedspec-data/scratch/selfcontain1330202/fields.log",
+      "sha256": "17432a6a37ccd23e11d3003dc6837e3cdf41756fdcb60f72272a43c321bd3db4"
+    },
+    {
+      "path": ".linkedspec-data/scratch/selfcontain1330202/reconciliation.json",
+      "sha256": "de7cbaed23d0a4b5642bbc15397992a6a742ff0831ab365f5757fc927928187c"
+    },
+    {
+      "path": ".linkedspec-data/scratch/selfcontain1330202/history-review.json",
+      "sha256": "620e5718d093679d49066358a6210601cebb231c80a8371bd74a769c9e8bcfca"
+    }
+  ],
+  "history_rollover": {
+    "all_previous_segment_records_exact": true,
+    "archived_clean_source_range_exact": true,
+    "collection_files_including_root_and_manifest": 45,
+    "manifest_bytes": 25103,
+    "manifest_lines": 44,
+    "mutable_root_trailing_blank_normalized": true,
+    "new_segment": {
+      "byte_count": 20819,
+      "current_path": "CHANGES.md",
+      "immutable": true,
+      "line_count": 216,
+      "retrieval_command": "perl tools/read_document_history.pl --surface change_history --segment 4968",
+      "segment_id": "4968",
+      "sha256": "0c53b15ed89c4508e6c32646dad8173196080af27b148e5ba447b2aa57ff3b0c",
+      "source_blob": "528564772bbd9cde21c68d863ff302c23dc3385c",
+      "source_commit": "f07d827f7477e8a8a630ca12003d62761568a9b9",
+      "source_end_line": 456,
+      "source_path": "CHANGES.md",
+      "source_start_line": 241,
+      "surface": "change_history",
+      "target_path": "docs/history/changes/segment-4968-0c53b15ed89c.md",
+      "type": "segment"
+    }
+  },
+  "next_action": "Activate registered-function bridge .1.3.3.0.2.1 from clean accepted closeout HEAD; do not claim complete normalization/neutral execution or resolve separate startup32/19/35/87 defects.",
+  "owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.0.2",
+  "reconciliation": {
+    "activation_commit": "f07d827f7477e8a8a630ca12003d62761568a9b9",
+    "all_committed_source_identities_match": true,
+    "all_producer_and_log_identities_match": true,
+    "limitations": [
+      "No public schema/admission/runtime record/CI/storage change.",
+      "Scope repaired; complete neutral execution and registered-function bridge remain pending."
+    ],
+    "normalization": [
+      {
+        "events": [],
+        "failure": null,
+        "failure_detail": null,
+        "last_error": {
+          "detail": {
+            "code": "unknown_helper",
+            "kind": "codeblock_runtime_error",
+            "name": "decorate",
+            "observed_class": "LinkedSpec::CodeblockRuntime::Error"
+          },
+          "handler_source_label": "LinkedSpec::generated_handler:Top:_default",
+          "handler_variant": "_default",
+          "owner_stage": "runtime_handler:rule_handler_eval",
+          "rule_label": "Top",
+          "spec_name": "",
+          "spec_path": "",
+          "stage": "rule_handler_eval",
+          "summary": "Rule handler execution failed",
+          "top_rule": "Top",
+          "type": "runtime_handler"
+        },
+        "result": null,
+        "sink_identity_preserved": null
+      },
+      {
+        "canonical_action_ir_count": 28,
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      }
+    ],
+    "observed_sources": 35,
+    "paired_values_errors_and_expected_success_values_match": true,
+    "proof": {
+      "direct_dependents": {
+        "exit": 0,
+        "suites": 4,
+        "tests": 96
+      },
+      "exact_book_examples": 2,
+      "fresh_child_actual_frame_identity_and_alias_control": true,
+      "native_and_fresh_emitted_regression_sources": 33,
+      "native_function_frame_slot_assertions": 17,
+      "native_push_identity_assertions": 23,
+      "phase0": {
+        "exit": 0,
+        "seconds": 1134,
+        "tests": 1033
+      },
+      "rendered_claims": 7,
+      "top_level_tests": 279,
+      "unbound_callable_diagnostic_assertions": 4
+    },
+    "repair_checkpoint": {
+      "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.0.1-verification.json",
+      "sha256": "678a9a5a8c2ce2b4dcf9f88b948a9742023679fb01b154898d661d35f510dc2f"
+    },
+    "repair_commit_hook_all_nine_pass": true,
+    "reviewer_correction": "Emitted successful rows omit error; compare optional error as null rather than require a key.",
+    "startup32": {
+      "error": null,
+      "source": "fn f(value) { temp=\"inner\"; return(value) } Top:: I { temp=\"outer\"; return(f(temp)) }",
+      "value": null
+    },
+    "unchanged_current_runtime_test_ci_storage_and_authorities": true
+  },
+  "rendered_claims": {
+    "architecture/structured-format-program.html": [
+      "This returns null on Perl native Get and fresh emitted execution.",
+      "The combined regression now executes 33 exact native/fresh emitted sources and 279 top-level tests",
+      "Plain callable records retain eight fields with no closure or stored environment.",
+      "receipt-bound canonical acceptance before that bridge."
+    ],
+    "development/local-ci-and-regression.html": [
+      "The staged task-tree delta changes verification declarations for exactly one stable leaf ID.",
+      "Keep future leaves",
+      "Relocating unchanged historical declarations creates no new owner."
+    ]
+  },
+  "roadmap_headers_agree": 3,
+  "sources": [
+    {
+      "path": "perl/LinkedSpec/ActionIR/MethodLowering.pm",
+      "sha256": "6b47b793702d3f2bf4400ed41c494adbce4a320ddad9a1be898c873a60f501e2"
+    },
+    {
+      "path": "perl/LinkedSpec/CodeblockRuntime.pm",
+      "sha256": "1b70bc46f250916d7b3048c915d137925e8f03d1a03dfef6b4d8793a634c0e0c"
+    },
+    {
+      "path": "t/codeblock_push_composition_perl.t",
+      "sha256": "3a20062853625bd7f1b7a5102d0148b4efe4f7dfad6eb33f2a61b19e33371d03"
+    },
+    {
+      "path": "tools/run_ci_local.sh",
+      "sha256": "48367a37c47085cab92c1b9d35edd3b958a4537b78ec61bf3854dd0d35642f6b"
+    },
+    {
+      "path": "tools/check_task_verification_fields.pl",
+      "sha256": "9ec12a368473fd12ff0d7c426c0296a7db876d0def048c24655cd1c3d1222854"
+    },
+    {
+      "path": "scripts/check_verification_cadence.sh",
+      "sha256": "c7a1785dc4c27fea43338f44e2153034134af43a079eff5abe85faff161db163"
+    },
+    {
+      "path": "docs/tasks/SPEC-LANGUAGE-SELF-CONTAINMENT.md",
+      "sha256": "738004c1c80cfc294833db55290820087472998c852702dc93c5721f3666b25a"
+    },
+    {
+      "path": "MEMORY.md",
+      "sha256": "b11266b3822f7c320a8eb323ab05bda1b2a679aafef547347a2f8853e7364b01"
+    },
+    {
+      "path": "docs/knowledge/task-verification-single-owner.md",
+      "sha256": "5a174ed929a556bbb343ed3661cb45c6ec8b5272cb2db0b10d5cc4fe82bbcb40"
+    },
+    {
+      "path": "docs/linkedspec-book/src/architecture/structured-format-program.md",
+      "sha256": "e07dacac4f426919e30f61ef469649a209196ca37452703433a9e3abb5d4f082"
+    },
+    {
+      "path": "docs/linkedspec-book/src/development/local-ci-and-regression.md",
+      "sha256": "69b245d2b248721c58e048c41001e236642d639ff984fa8c49cae9cb5d04bb11"
+    },
+    {
+      "path": "docs/history/changes/manifest.jsonl",
+      "sha256": "3fa6867a1970c51ef229112dcb6e971db5d6b66076b770a1ef205ad015f42371"
+    },
+    {
+      "path": "docs/history/changes/segment-4968-0c53b15ed89c.md",
+      "sha256": "0c53b15ed89c4508e6c32646dad8173196080af27b148e5ba447b2aa57ff3b0c"
+    }
+  ],
+  "unchanged_runtime_test_contract_ci_storage_policy": true,
+  "verification_fields_self_test": 14,
+  "verification_tier": "canonical",
+  "workflow_fact": "Exactly one stable task leaf changes the three verification declarations; future plans remain prose until clean activation. No checker change."
+}

@@ -355,13 +355,14 @@ frames too. Callback parameters remain copied temporary slots and restore functi
 on success or failure. `.with()` temporarily exposes its invocation value and restores a function's
 same-named `value` slot even when the callback fails.
 
-The combined regression now executes33 exact native/fresh emitted sources and279 top-level tests,
-including23 original push identity assertions,17 actual function-frame/slot assertions and four
+The combined regression now executes 33 exact native/fresh emitted sources and 279 top-level tests,
+including 23 original push identity assertions, 17 actual function-frame/slot assertions and four
 callable-diagnostic checks. A deliberately aliased frame control fails the same identity observation.
 Plain callable records retain eight fields with no closure or stored environment. The earlier scope
 leak is corrected under `.1.3.3.0.2.0.1`; existing argument/local-name shadowing remains separately
 owned by startup32. Registered-function calls from deferred bodies still need bridge `.0.2.1`, so
-full normalization execution remains pending. Canonical scope closeout precedes that bridge.
+full normalization execution remains pending. Prerequisite closeout `.0.2.0.2` binds this committed
+scope repair to receipt-bound canonical acceptance before that bridge.
 
 ### Determinism, progress and failure boundaries
 

@@ -32,6 +32,12 @@ small, coherent slices keep moving without weakening the batch boundary:
   milestone/parent closeout, public or cross-backend contract movement, dependency/toolchain changes, CI/hook/
   gate changes, storage/path/doctrine infrastructure, and the final clean push boundary.
 
+The staged task-tree delta changes verification declarations for exactly one stable leaf ID.
+That leaf has one `Verification tier`, one `Focused checks` selection and one `Canonical trigger`.
+Keep future leaves' verification plans in prose until activation from clean HEAD; declaring their
+exact fields alongside the current leaf creates a second owner and blocks the commit. Relocating
+unchanged historical declarations creates no new owner.
+
 Each task-tree leaf records its tier and exact focused checks. For canonical work, first stage the exact candidate
 and leave no unstaged tracked or untracked non-ignored files. The gate binds success to base `HEAD` and a read-only
 SHA-256 of Git's full-index binary staged diff in repository-local project data. The pre-commit doctrine rejects a missing or stale canonical

@@ -1130,7 +1130,7 @@ used by ordinary `.spec` syntax on every backend.
   New P1 prerequisite: Public Get controls reveal that an externally supplied callback invoked by a pure function reads unrelated rule-caller slots. The generated invoke includes callback/cb/secret references inherited from the caller inventory. Direct function reads are fresh and a declared function-local secret controls correctly. Repair .0.2.0 before constructing the registered-function bridge; this is distinct from startup32 argument-local shadowing.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.0`
-  Status: `active`
+  Status: `done`
   Priority: P1 — implicit caller capture violates the admitted pure-function scope contract.
   Goal: Give function-invoked codeblocks the function's fresh working frame, excluding unrelated rule-caller references and retaining working slots across callbacks within that invocation.
   Children: `.1.3.3.0.2.0.0`, `.1.3.3.0.2.0.1`, `.1.3.3.0.2.0.2`
@@ -1138,6 +1138,8 @@ used by ordinary `.spec` syntax on every backend.
   Root cause: _user_function_deps_with_call shallow-copies caller bare_symbol_names; _codeblock_runtime_binding_expr retains that inventory before adding function-local names. The builder is byte-identical to committed activation c02129217, so this mechanism predates the push repair.
   Impact / scheduling: Caller data can cross the pure-function boundary despite a plain noncapturing codeblock record. Fix now as a prerequisite of .0.2.1; retain startup19/32/35/87 as separate owners. No lexical capture or authority expansion is approved.
   Acceptance: Native/fresh emitted read/write, explicit-local and parameter controls; callback-created slots persist within one fresh function invocation and reset between invocations; nested calls and copied codeblock parameter restoration remain correct; rule-invoked callbacks retain live caller bindings. Minimize all additional failures with Toolbox before expanding the repair.
+
+  Closeout: Diagnosis .0.2.0.0 and focused repair .0.2.0.1 retain exact evidence; .0.2.0.2 independently reconciles committed proof and binds this prerequisite closure to exact staged canonical acceptance. Registered-function bridge .0.2.1 remains pending; startup32/19/35/87 and whole neutral execution are separate.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.0.0`
   Status: `done`
@@ -1167,14 +1169,17 @@ used by ordinary `.spec` syntax on every backend.
   Workflow: An early prospective MEMORY check correctly rejected the still-active leaf; mark complete only after required Phase0, then rerun before committing. Knowledge/history/book/syntax/original objective audit/neutral governance/memory/diff and all doctrine hooks govern focused landing. Closeout .0.2.0.2 remains pending canonical; no premature parent closure or broader execution claim.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.0.2`
-  Status: `pending`
+  Status: `done`
   Goal: Independently close the callback scope prerequisite on its committed repair with exact canonical acceptance before the function bridge.
   Dependencies: `.1.3.3.0.2.0.0`, `.1.3.3.0.2.0.1`
   Owned paths: This tree; a bounded closeout checkpoint; current Knowledge/book/roadmap/frontier and continuity. Keep repaired code, tests, records, authorities and CI unchanged.
-  Planned verification: canonical; declare the three exact verification fields at activation from clean repair HEAD.
-  Planned focused proof: Committed diagnosis/repair source/log/hash reconciliation; native/fresh emitted scope and actual-frame controls; original authorities and direct dependents; book/Knowledge/history/memory/doctrines/diff; exact staged canonical receipt.
-  Planned canonical boundary: designated parent closeout of the P1 pure-function scope prerequisite.
+  Verification tier: `canonical`
+  Focused checks: Committed diagnosis/repair source/log/hash reconciliation; native/fresh emitted scope and actual-frame controls; original authorities and direct dependents; book/Knowledge/history/memory/doctrines/diff; exact staged canonical receipt.
+  Canonical trigger: designated parent closeout of the P1 pure-function scope prerequisite.
   Acceptance: Independently reconcile the repaired boundary and all limitations; run complete CI for the staged candidate, commit per COMMIT, clear brief and verify clean HEAD. Close .0.2.0 only after canonical acceptance; then activate bridge .0.2.1.
+  Activation: Clean f07d827f7477e8a8a630ca12003d62761568a9b9, completed279/96/1033 focused repair, brief0 and no tracked/untracked work. Reconcile the committed checkpoint and current source/log hashes rather than re-deriving the diagnosed mechanism. Explicitly own new docs/knowledge/task-verification-single-owner.md plus a bounded clarification in docs/linkedspec-book/src/development/local-ci-and-regression.md for the exact-one changed field owner caught during repair; no checker/policy change.
+  Reconciliation: Committed repair checkpoint hashes match f07d827f7; all producer/log identities remain exact.35 paired observations preserve native/emitted values and optional errors,33 regression sources/279 tests,23 push/17 native actual-frame/four diagnostic checks plus emitted actual frame/alias proof,96 dependents and prior Phase0 1033/1134s. Original authorities/runtime/CI/storage and startup32/decorate limitations remain exact. An initial reviewer assumed a success error key; compare omitted optional error as null instead. No runtime/test/authority change.
+  Canonical plan: Stage the complete candidate with no unstaged/non-ignored inputs, run approved-host tools/run_ci_local.sh to .linkedspec-data/scratch/selfcontain1330202/canonical.log, and record actual candidate/log identities, exit/CLI/RAM/Phase0 in the commit and promoted receipt without tracked post-gate edits. Canonical acceptance governs proposed parent closure; if the gate fails, retain ownership and repair before landing. Next .0.2.1 activates only from clean committed closeout HEAD.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1`
   Status: `pending`
