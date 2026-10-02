@@ -1255,13 +1255,43 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
   Acceptance: Close only after native/fresh emitted results and ordered effects agree with the existing oracles and the actual recursion/slot guards are exercised. Full neutral sixteen-case execution stays owned by .1.3.3.1.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.4`
-  Status: `pending`
+  Status: `active`
   Priority: P1 — retain recoverable instruments before any scratch cleanup or bridge closeout.
   Goal: Reconcile prior callable checkpoints' replay-producer durability and finish the requested claim-policy source/adoption review under explicit ownership.
   Dependencies: clean .0.2.1.1 handoff; no pivot while bridge implementation is dirty.
   Reproduce: Scope repair .0.2.0.1 producer_sources records ignored path/hash entries; current .0.2.1.1 initially did the same and now preserves exact source bodies. Enumerate each selected published replay claim, its tracked test/oracle and actual retained instrument before classifying a leg3 gap. Missing source bodies are not automatically proof that every claim is unreproducible.
   Scope: First inspect the existing .0.2.0.0/.1 and .0.2.1.0 checkpoints, actual retained producer programs and Git source boundaries. Retain/reconstruct exact historical producers where needed, validate their hashes and safe recovery, preserve original evidence and no-drift. Complete the director-requested read-only claim policy review and select a separate owning adoption/audit tree if project-wide work exceeds this bounded callable reconciliation.
   Acceptance: Every selected replay claim has a recoverable tracked instrument or a named, scheduled durability repair with exact source boundary. Adopt applicable claim-verification rules explicitly and own any broader constants/untracked-producer sweep before claiming policy completion. Declare focused/canonical tier and exact paths only at clean activation. Valid-literal and normalization repairs retain separate owners.
+  Children: `.1.3.3.0.2.1.4.0`, `.1.3.3.0.2.1.4.1`; preservation lands before policy adoption so neither becomes an oversized slice.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.4.0`
+  Status: `done`
+  Goal: Preserve exact historical callable replay instruments and their required data without rewriting the original checkpoints.
+  Activation: Clean f9c683543c1e56f87c861d52a2b162d63781042a; bridge canonical exit0, both CLI66/66, Phase01033/1162s, promoted receipt, brief0 and clean Git confirmed.
+  Owned paths: New docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.4.0-recovery.json, one recovery Knowledge card and the structured-format-program architecture chapter; task/index/roadmap/bounded continuity and derived Knowledge. Retained producers, inputs and review logs use .linkedspec-data/scratch/selfcontain13302140; original historical files remain exact.
+  Verification tier: `focused`
+  Focused checks: Enumerate selected producer/input dependencies and original checkpoint/hash/Git boundaries; exact source recovery with corrupt-hash/escaping-path/no-write controls; classify tracked regression oracles separately from standalone observers; unchanged original checkpoints/runtime/authorities; rendered book, Knowledge/history/memory/doctrines/diff.
+  Canonical trigger: none; bounded immutable evidence recovery and public explanation only. Policy/gate adoption is a separate child with its own declaration at clean activation.
+  Acceptance: Recover every selected instrument and required input, bind original capture revisions and logs, prove safe byte-exact reconstruction, and disclose any unavailable or unverified dependency. Do not substitute current71 cases for historical33 cases or relabel historical execution as newly reverified. Archive the recovery instrument itself; preserve all original observations and repair owners.
+
+  Verification: PASS;15 byte-exact recovered inputs, three immutable original checkpoint identities, nine prior-recorded instrument/Git inputs and six rejected zero-file-write controls. Literal dependencies derive from actual consumer reads and match original row-level sources/oracles. Current/runtime/historical checkpoints and authorities stay exact; no historical runtime re-execution or policy adoption completion. Archived capture/recovery/review sources make this proof reproducible. Rendered book/Knowledge/history/memory/doctrines/diff govern focused landing.
+  Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.4.0 - preserve historical callable instruments`.
+
+### `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.4.0` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Prior checkpoints store ignored instrument paths/hashes while their regression oracles remain Git-tracked.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Exact checkpoint membership and consumer reads locate seven standalone programs and two literal inputs; hash-only records identify bytes without retaining them.
+- [x] **FIX** — Preserve15 source/Git inputs, captured boundaries and archived capture/recovery/review instruments in a separate checkpoint; recover into an owned mirror.
+- [x] **ADDRESSED (verified)** —15 recovered byte identities, three original checkpoints, nine prior-recorded instrument/Git inputs, six rejected zero-file-write controls and the verbatim book bootstrap bind source recovery.
+- [x] **NO REGRESSION** — Runtime/tests/authorities and all three original checkpoints stay byte-exact; original captured execution remains historical. Standard rendered book, Knowledge/history/memory/doctrine and diff checks govern focused landing.
+- [x] **LOCKSTEP** — Recovery checkpoint/card/book, child frontier and bounded continuity distinguish source recovery from runtime proof and retain explicit policy/adoption audit ownership.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.4.1`
+  Status: `pending`
+  Goal: Finish the supplied claim-policy adoption review and adopt its applicable publishing contract with explicit local enforcement and audit ownership.
+  Dependencies: clean `.1.3.3.0.2.1.4.0` handoff.
+  Planned proof: Supplied policy identity/comparison, local three-leg publishing contract and review template, deterministic fail-closed enforcement and genuine RED controls, unchanged older evidence, rendered teaching and exact staged canonical proof if doctrine/hook/gate owners change.
+  Acceptance: Re-derive/falsify/durability are explicit local working rules; applicable mechanization has a named checker and registry route. Existing SESSION-STARTUP-READING.5 retains broader constants/untracked-producer/control and alignment audit ownership, and .29 retains its path repair. Neither that audit nor whole-project policy completion is claimed by a bounded adoption slice. Reconcile .4 only after both children are committed.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.3`
   Status: `pending`
@@ -1508,16 +1538,19 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 | 29 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.0.2` | `done` | Committed scope reconciliation and promoted canonical receipt2516cf727. |
 | 30 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.0` | `done` | 24 native/fresh emitted probes and compiler-owned bridge interface plan. |
 | 31 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.1` | `done` | Registered bridge71 native/fresh sources/605 tests with actual identity/effect/error controls and canonical landing. |
-| 32 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.4` | `pending` | NEXT: bounded prior replay-producer durability and requested claim-policy reconciliation before cleanup/closeout. |
-| 33 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.3.0` | `pending` | Source-located valid x,y literal reconstruction diagnosis after durability reconciliation. |
-| 34 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.3.1` | `pending` | Repair the diagnosed valid-literal compiler path and close the P1 prerequisite. |
-| 35 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.2` | `pending` | Canonical committed bridge reconciliation closes .0.2.1/.0.2 after literal repair. |
-| 36 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.0` | `pending` | Diagnose frozen normalization loop/source-contract mismatch before selecting repair. |
-| 37 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.1` | `pending` | Resolve and verify diagnosed loop/source-contract correction. |
-| 38 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.3` | `pending` | Original minimal/normalization controls and independent dispatcher closeout. |
-| 39 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.1` | `pending` | Complete neutral-case and actual semantic-mutant execution after dispatcher prerequisite. |
+| 32 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.4.0` | `done` | Three original observer groups and15 inputs preserved; source recovery only, no historical runtime rerun. |
+| 33 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.4.1` | `pending` | NEXT: explicit local claim-policy adoption and broader audit ownership from clean recovery handoff. |
+| 34 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.3.0` | `pending` | Source-located valid x,y literal reconstruction diagnosis after durability reconciliation. |
+| 35 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.3.1` | `pending` | Repair the diagnosed valid-literal compiler path and close the P1 prerequisite. |
+| 36 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.2` | `pending` | Canonical committed bridge reconciliation closes .0.2.1/.0.2 after literal repair. |
+| 37 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.0` | `pending` | Diagnose frozen normalization loop/source-contract mismatch before selecting repair. |
+| 38 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.1` | `pending` | Resolve and verify diagnosed loop/source-contract correction. |
+| 39 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.3` | `pending` | Original minimal/normalization controls and independent dispatcher closeout. |
+| 40 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.1` | `pending` | Complete neutral-case and actual semantic-mutant execution after dispatcher prerequisite. |
 
 ## Decisions
+
+- `2026-10-02`: Split durability .4 into source recovery .4.0 and explicit policy adoption/audit routing .4.1. Preserve original snapshots and distinguish recoverable instruments from newly executed runtime proof.
 
 - `2026-09-27`: The director confirms that container kind belongs to the value internally, not its binding name. Generic flat dispatch uses the evaluated runtime value; name-based legacy storage routing is compatibility plumbing only. The .1.1.6 native/emitted matrix covers bindings, parameters, nested reads and computed containers.
 

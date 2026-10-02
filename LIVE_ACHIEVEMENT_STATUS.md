@@ -2,17 +2,19 @@
 
 ## Current Activity
 
-P1 prior-producer durability/claim-policy reconciliation .0.2.1.4 after the bounded registered-function bridge; valid x,y literal .0.2.1.3, loop/count .0.4 and independent closeouts precede neutral execution.
+Callable evidence durability under SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.4; policy adoption remains a separate slice.
 
 ## Latest Completed Slice
 
-- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.1 - bridge deferred registered functions` —71 native/fresh emitted sources/605 tests,123 dependents, seven original successes and actual identity/effect/error restoration; corrected old-module baseline fails88 tests. Exact canonical receipt governs landing.
+`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.4.0`:15 exact recovered inputs, three original checkpoint identities and six rejected no-file-write controls. Historical runtime results remain dated; bridge f9c683543 canonical passed CLI66x2 and Phase01033/1162s.
 
 ## Next Action
 
-- Activate .0.2.1.4 from clean HEAD; reconcile retained prior replay producers and requested claim policy before cleanup/closeout, then diagnose/repair valid x,y literal .3. Frozen normalization loop/count remains owned by .0.4.
+Activate .0.2.1.4.1 from clean HEAD for explicit policy adoption and broader audit ownership; valid-literal and normalization repairs follow. Due artifact review retains all proof inputs at a clean owned maintenance boundary.
 
 ## Recent Completions
+
+- `2026-10-02` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.4.0` preserves exact historical callable replay sources with safe recovery controls.
 
 - `2026-10-02` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.1` implements central compiled registered dispatch with actual recursion/copy/effect/error proof.
 
@@ -43,8 +45,6 @@ P1 prior-producer durability/claim-policy reconciliation .0.2.1.4 after the boun
 - `2026-10-01` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.4` classifies finite gaps and preserves owned repair/requirement next actions.
 
 - `2026-10-01` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.4` reconciles three bounded objectives under exact canonical acceptance.
-
-- `2026-10-01` — `REPO-HYGIENE.6` records the due artifact review and requested exit handoff with zero deletions.
 
 ## History
 

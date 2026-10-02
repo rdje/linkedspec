@@ -1183,3 +1183,37 @@ The recipe validates every producer and baseline identity before writing, constr
 the declared scratch root, and checks the filesystem device. Run the checkpoint's replay commands in
 order; its `red.command` uses the reconstructed old-module bootstrap. A deliberately corrupted producer
 hash is rejected before any file write. Keep captured source identities distinct from current results.
+
+### Preserving the earlier callable instruments
+
+The scope diagnosis, scope repair and pre-bridge design checkpoints retain their original results.
+Their standalone observers are now recoverable from
+`docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.4.0-recovery.json`.
+It stores exact source bodies, required literal inputs and Git-blob references for the historical
+33-case regression and pre-repair lowering module. The current 71-case test is a different input.
+
+Recover the archive into an owned scratch mirror without overwriting the retained originals:
+
+```sh
+bash tools/project_data_run.sh python3 - <<'PY'
+import hashlib, json
+from pathlib import Path
+record = json.loads(Path("docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.4.0-recovery.json").read_text())
+row = next(r for r in record["recoverable_inputs"] if r["path"].endswith("/recover.py"))
+source = "".join(row["source_lines"])
+assert hashlib.sha256(source.encode()).hexdigest() == row["sha256"]
+exec(compile(source, "<archived-callable-recovery>", "exec"), {"__name__": "__main__"})
+PY
+```
+
+The recovery validates the complete input plan before recovered file writes, checks the repository
+filesystem and refuses escaping paths or symlinks. Its actual review restores 15 byte-exact inputs
+and rejects six corrupted-input controls with zero file writes. This proves source recoverability;
+it does not claim a new execution of the old runtime, RED, Phase 0 or canonical suites.
+
+For historical execution, use the capture commit named for that claim and the original declared
+relative input paths in an isolated repository-owned workspace. Follow the dependencies' published
+integration instructions. The mirror does not assemble that workspace. The old review.py writes its
+original tracked checkpoint and must not run in the current checkout. Current bridge tests and their
+committed receipt remain the current behavior proof; policy adoption and the broader claim audit
+retain separate task owners.

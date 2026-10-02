@@ -1,6 +1,6 @@
 # ROADMAP
 
-October 2 feature readiness: SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.1 implements the bounded registered-function bridge through central compiled bodies.71 native/fresh emitted sources/605 tests and123 dependents pass; all seven original controls succeed. Actual identities/effects/exceptions and recursion guards retain eight-field records and unchanged authorities. Next P1 producer durability/claim-policy .0.2.1.4, then valid x,y literal .0.2.1.3 precede bridge reconciliation; frozen normalization loop/count mismatch .0.4 precedes dispatcher closeout and neutral execution. Startup19/32/35/87 remain separate.
+October 2 evidence recovery: SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.4.0 preserves15 exact callable observer/input sources across three original checkpoints; six bad-input controls reject with zero file writes. Historical results/runtime/authorities stay exact; source recovery is distinct from runtime replay. Bridge f9c683543 canonical passed both CLI66/66 and Phase01033/1162s. Next explicit claim-policy adoption .4.1, then valid x,y literal .3 and normalization loop/count .0.4 before closeouts and neutral execution; broader startup5/29 audits remain open.
 
 LinkedSpec is being positioned as a progressive extraction parser DSL: fast, recursive, regex-anchored, and intentionally different from strict EBNF-centric tooling.
 

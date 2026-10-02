@@ -1,10 +1,10 @@
 # MEMORY
 
-- activation_commit: `4a3f33a3e38d38b2ac17bf3cfe9a1dd92231096b` — clean activation base for canonical deferred-function bridge implementation.
-- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.1 - bridge deferred registered functions`.
-- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.1` (done) — bounded bridge committed; prerequisites remain before parent closeout.
-- next_action: Activate P1 .1.3.3.0.2.1.4 from clean HEAD; reconcile retained prior callable producer sources and the requested claim-policy adoption review before cleanup/closeout, then resume valid x,y literal diagnosis .3.0.
-- in_flight_uncommitted: none; implementation/evidence/book/continuity land together with exact staged canonical receipt.
+- activation_commit: `f9c683543c1e56f87c861d52a2b162d63781042a` — clean activation base for historical callable instrument recovery.
+- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.4.0 - preserve historical callable instruments`.
+- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.4.0` (done) — source recovery committed; policy adoption remains separate.
+- next_action: Activate .0.2.1.4.1 from clean HEAD; finish explicit claim-policy adoption and broader audit ownership, then valid x,y literal diagnosis .3.0. Artifact review is due; retain all proof inputs and use a clean owned maintenance boundary.
+- in_flight_uncommitted: none; source archive, actual recovery controls, book and continuity land together.
 - blockers: No access/decision blocker. Valid x,y literal .0.2.1.3 and frozen normalization loop/count .0.4 own repair before closeouts. Startup19/32/35/87 remain separate.
   Wrapper startup .7 remains open; recovery/purge stay prohibited. No interrupted Phase0 run counts as proof.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
@@ -50,8 +50,8 @@
 - standing_contracts: all durable paths are repo-relative; all project data stays on the repository filesystem; Only LinkedSpec is writable; every other Git repository is read-only (director September27; see AGENTS and the incident record).
   README remains bounded; ordinary leaves use focused proof and designated infrastructure/public/push boundaries
   use exact staged canonical CI; task-tree/index, Knowledge Map, mdBook, and bounded live/history move in lockstep.
-- current_engineering_notes_capacity: ADR0122 admits 43 collection files /42 manifest lines /25410 manifest bytes; current41/40/24185 stay bounded.
-  Notes segment4967 preserves190 lines/35403 bytes from clean624aa1995; old archive rows/bytes remain exact.
+- current_engineering_notes_capacity: ADR0122 admits 43 collection files /42 manifest lines /25410 manifest bytes; current42/41/24797 stay bounded.
+  Notes segment4966 preserves214 lines/18058 bytes from cleanf9c683543; old archive rows/bytes remain exact.
 - current_change_history_capacity: ADR0122 admits47 collection files /46 manifest lines /26255 bytes; current45/44/25103 stay bounded.
   Changes segment4968 preserves216 lines /20819 bytes from cleanf07d827f7; prior history remains byte-exact.
 - dependency_boundary: RGX public integration only; it owns PGEN. No internal inspection/analysis, patches, separate PGEN procedure or unrelated pin changes. September26 authorizes only reviewed f6e5acdc for LS-004.

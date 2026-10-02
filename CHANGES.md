@@ -12,6 +12,15 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-10-02 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.4.0: preserve historical callable instruments
+
+Archive15 exact observer/input/recovery sources for three original callable checkpoints, including
+Git-bound historical33-case test/baseline and literal inputs verified against row-level source/oracles.
+Restore byte-exact inputs into an owned mirror; six bad-input controls reject with zero file writes.
+Original checkpoints/runtime/authorities stay exact; no historical runtime/RED/Phase0 rerun is claimed.
+Current bridge canonical passed CLI66x2/Phase01033 in1162s at f9c683543. Policy adoption .4.1
+and broader startup5/29 audit remain owned; book/Knowledge/continuity and focused checks align.
+
 ## 2026-10-02 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.1: bridge deferred registered functions
 
 Emit explicit registered signatures/final-block metadata and central compiled bodies outside plain
