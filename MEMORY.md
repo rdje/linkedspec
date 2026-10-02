@@ -1,11 +1,11 @@
 # MEMORY
 
-- activation_commit: `c02129217737b8c4fae015bca4428794aa285d61` — clean activation base for Perl deferred push repair.
-- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.1 - execute guarded deferred push`.
-- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2` (pending) — P1 registered pure-function dispatch from Perl deferred bodies.
-- next_action: Activate .1.3.3.0.2 from clean HEAD; declare compiler-owned function context and exact paths, reuse central lowering with fresh-local/arity/order/recursion controls, then repair decorate before dispatcher closeout and neutral execution.
-- in_flight_uncommitted: none after canonical landing; deferred push17-source/native-emitted and147 top-level/23 nested proof complete. Neutral16-case governance remains140/16/44; decorate blocks full normalization, with other repairs/admission pending.
-- blockers: P1 Perl registered-function repair .1.3.3.0.2 is the next owned work, with no access/decision blocker. Source-detail interpretation remains startup37.2-owned, and broad teaching remains41.2-owned. Policies unchanged; startup .5/.29 own adoption. ARCHOGEN owns downstream acceptance.
+- activation_commit: `eedf599c0d1b176f14e5f5856db9a2a7f20e193b` — clean activation base for callback scope diagnosis.
+- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.0.0 - diagnose pure-function callback scope leak`.
+- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.0.1` (pending) — P1 fresh function callback working-frame repair.
+- next_action: Activate .0.2.0.1 from clean HEAD; choose exact code/test paths and tier, probe read/write/local/parameter/persistence/reset/nested cases, then repair the function binding frame before registered-function bridge .0.2.1.
+- in_flight_uncommitted: none after focused diagnosis landing; three native/fresh emitted controls agree outer/local/null. Checkpoint owns P1 repair; normalization still fails decorate and neutral runtime lanes remain pending.
+- blockers: No access/decision blocker. Scope repair precedes the bridge; startup19/32/35/87 remain distinct. Source detail remains startup37.2-owned, broad teaching41.2-owned; policies startup5/29 and downstream acceptance ARCHOGEN-owned.
   Wrapper startup .7 remains open; recovery/purge stay prohibited. No interrupted Phase0 run counts as proof.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
   active table; the task metadata doctrine inventories all consumers, permits arbitrary frontier-row rewrites,

@@ -1122,10 +1122,46 @@ used by ordinary `.spec` syntax on every backend.
   Canonical plan: Fully stage the complete clean candidate and run approved-host tools/run_ci_local.sh; record actual exit, CLI/RAM/Phase0 and candidate/log identities in the commit/receipt, without post-gate tracked edits. Commit per COMMIT.md, clear brief0 and verify clean HEAD before .1.3.3.0.2 activation.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2`
-  Status: `pending`
+  Status: `active`
   Goal: Bridge registered pure-function calls from deferred bodies through the existing compiler function lowering, with fresh local state and unchanged static precedence.
   Dependencies: `.1.3.3.0.1`; exact function/variadic/contextual-codeblock contracts; startup32 remains a separate known limitation before dependent claims.
   Acceptance: Declare the compiled registry/context interface and exact owned paths before implementation. Reuse central function-body lowering; do not create a partial second function evaluator or store closures/environments in codeblock records. Cover once-only ordered caller arguments, signatures/rest/final-codeblock forms, fresh locals, nested calls, genuine unknown calls, recursion and native/emitted equivalence. Preserve startup19/32/35/87 ownership and report any newly implicated prerequisite.
+  Children: `.1.3.3.0.2.0`, `.1.3.3.0.2.1`
+  New P1 prerequisite: Public Get controls reveal that an externally supplied callback invoked by a pure function reads unrelated rule-caller slots. The generated invoke includes callback/cb/secret references inherited from the caller inventory. Direct function reads are fresh and a declared function-local secret controls correctly. Repair .0.2.0 before constructing the registered-function bridge; this is distinct from startup32 argument-local shadowing.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.0`
+  Status: `active`
+  Priority: P1 — implicit caller capture violates the admitted pure-function scope contract.
+  Goal: Give function-invoked codeblocks the function's fresh working frame, excluding unrelated rule-caller references and retaining working slots across callbacks within that invocation.
+  Children: `.1.3.3.0.2.0.0`, `.1.3.3.0.2.0.1`
+  Reproduce: fn apply(callback: codeblock) { return(callback()) }; Top sets secret=outer and passes cb={|| return(secret)}. Current Get returns outer with ready1/raw0/fallback0/unresolved0 and no context error; pure-function scope requires null. A function-local secret=local returns local, and a direct fn inspect(){return(secret)} returns null.
+  Root cause: _user_function_deps_with_call shallow-copies caller bare_symbol_names; _codeblock_runtime_binding_expr retains that inventory before adding function-local names. The builder is byte-identical to committed activation c02129217, so this mechanism predates the push repair.
+  Impact / scheduling: Caller data can cross the pure-function boundary despite a plain noncapturing codeblock record. Fix now as a prerequisite of .0.2.1; retain startup19/32/35/87 as separate owners. No lexical capture or authority expansion is approved.
+  Acceptance: Native/fresh emitted read/write, explicit-local and parameter controls; callback-created slots persist within one fresh function invocation and reset between invocations; nested calls and copied codeblock parameter restoration remain correct; rule-invoked callbacks retain live caller bindings. Minimize all additional failures with Toolbox before expanding the repair.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.0.0`
+  Status: `done`
+  Goal: Freeze the newly established pure-function callback capture diagnosis and bounded repair plan without runtime changes.
+  Owned paths: This tree; new docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.0.0-diagnosis.json; new docs/knowledge/perl-function-codeblock-caller-scope-leak.md; docs/linkedspec-book/src/architecture/structured-format-program.md; bounded continuity/roadmap/frontier and derived Knowledge Map. No code, tests, contracts or CI changes.
+  Verification tier: `focused`
+  Focused checks: Reverify three exact public Get controls and source binding inventory; independent fresh emitted controls; immutable source/authority review; mdBook/rendered claim, Knowledge Map, history pressure, memory and diff hygiene.
+  Canonical trigger: none for bounded diagnosis/documentation with unchanged runtime, authorities, admission and CI.
+  Acceptance: Exact sources, actual/expected values, compiler metadata, producer/source hashes and generated mechanism survive in the checkpoint. Schedule and own the P1 fix, preserve all distinct defects, commit cleanly and activate .0.2.0.1 next.
+
+  Verification: Three exact public Get/fresh emitted controls agree outer/local/null with no errors and ready1/raw0/fallback0/unresolved0. Both root-cause helpers match pre-push c021 bytes; eleven runtime/fixture/authority/checkpoint inputs remain HEAD-exact. Focused mdBook/rendered claims, Knowledge/history/memory/doctrines/diff proof governs landing. Checkpoint records source/artifact/producer hashes; no runtime change.
+  Next: Activate .0.2.0.1 from clean diagnosis HEAD and inspect write/persistence/nested scope controls before selecting the repair.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.0.1`
+  Status: `pending`
+  Goal: Repair the established function callback scope leak with a fresh invocation-local working frame and native/fresh emitted regression controls.
+  Dependencies: `.1.3.3.0.2.0.0`; admitted pure-function, callable, binding and parameter scopes.
+  Acceptance: Select exact implementation/test paths and verification tier before edits. Exclude caller slots, preserve actual function-local/parameter identities and callback slot persistence, reset between function invocations, retain rule callbacks and all original seventeen push controls. Reject alias/snapshot shortcuts and accidental closure storage; inspect any newly implicated prerequisite before proceeding.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1`
+  Status: `pending`
+  Goal: Implement the compiler-owned registered-function bridge after the function callback scope prerequisite closes.
+  Dependencies: `.1.3.3.0.2.0`
+  Acceptance: Reuse central function-body lowering with exact signatures, final-codeblock normalization, argument order, fresh locals, nested calls and recursion diagnostics. Declare any interface movement and broaden proof before edits; preserve the eight-field record and distinct startup32 limitation. Parent .0.2 closes only after full bounded native/emitted acceptance.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.3`
   Status: `pending`

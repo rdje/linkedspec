@@ -2,17 +2,19 @@
 
 ## Current Activity
 
-P1 Perl registered-function dispatch under SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2, after guarded deferred push .0.1. Full neutral execution and remaining backend lanes retain their prerequisites.
+P1 fresh function callback scope repair .1.3.3.0.2.0.1 before registered-function bridge .0.2.1. Neutral execution and backend lanes retain their prerequisites.
 
 ## Latest Completed Slice
 
-- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.1 - execute guarded deferred push` — Seventeen native/fresh emitted sources,147 top-level tests and23 nested actual-reference controls; rule precedence, copy-on-write, parameter slots and receiver guards. Original normalization now fails at decorate. Canonical proof governs landing.
+- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.0.0 - diagnose pure-function callback scope leak` — Three exact native/fresh emitted controls and generated binding inventory establish outer capture; direct/local controls agree. P1 repair is owned; runtime/authorities/fixtures remain unchanged.
 
 ## Next Action
 
-- Activate .1.3.3.0.2 from clean HEAD; implement registered pure-function dispatch through central compiler lowering and explicit context, preserving fresh locals/signatures/order/recursion and existing startup19/32/35/87 boundaries, then independent closeout and neutral execution.
+- Activate .0.2.0.1 from clean HEAD; inspect scope write/persistence/nested cases with Toolbox, select exact paths/tier and repair invocation-local frames before bridge .0.2.1.
 
 ## Recent Completions
+
+- `2026-10-02` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.0.0` freezes the P1 function callback scope leak and schedules the repair.
 
 - `2026-10-02` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.1` repairs deferred push and owns the next registered-function dispatcher child.
 
@@ -43,8 +45,6 @@ P1 Perl registered-function dispatch under SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.
 - `2026-09-28` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.3` verifies Julia lossless/child routes with an actual-result alias control.
 
 - `2026-09-28` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.2` verifies Dart lossless/actual-child carriers and detached outcome records.
-
-- `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.1` verifies Rust lossless extraction and real child grammars on six carriers.
 
 ## History
 

@@ -12,6 +12,17 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-10-02 — Invocation-time scope stops at the pure-function frame (.0.2.0.0)
+
+A noncapturing callback record can still leak caller state when its invoke site supplies the wrong bindings.
+Public Get and independent fresh emitted controls prove the callback reads outer while a direct fn read is
+null and a declared local reads local. The shallow dependency copy retains rule bare_symbol_names; the
+runtime binding builder includes them before function locals. The responsible helpers predate push repair.
+The remedy must use actual fresh function-local references and persistent callback working slots per
+function invocation, preserve copied callback parameter restoration, and reset across invocations.
+Do not replace this with an implicit-capture contract change or merge the distinct startup32 argument bug.
+The diagnosis checkpoint fixes exact controls/hashes before any implementation under .0.2.0.1.
+
 ## 2026-10-02 — Caller slots and temporary parameters need different identities (.1.3.3.0.1)
 
 A deferred push must guard/rebind the current caller scalar after argument evaluation, then reuse existing

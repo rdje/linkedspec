@@ -12,6 +12,16 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-10-02 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.0.0: diagnose function callback scope
+
+Three public native/fresh emitted controls establish outer/local/null with ready1/raw0/fallback0/unresolved0.
+A function callback inherits unrelated rule slots through the caller inventory; direct function reads remain
+fresh. Both responsible helpers match pre-push c021 bytes; eleven runtime/authority/fixture/checkpoint inputs
+remain HEAD-exact. Preserve exact source/artifact/producer hashes in the diagnosis checkpoint and a new
+Knowledge card. Own P1 repair .0.2.0.1 before registered-function bridge .0.2.1; startup32 remains distinct.
+Update the book's explicit example/current defect, both roadmaps, task frontier and bounded continuity.
+Focused book/rendered, Knowledge/history/memory/doctrine/diff proof; no runtime, CI or authority change.
+
 ## 2026-10-02 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.1: execute guarded deferred push
 
 Perl deferred push now reuses uniform copy-on-write publication and the actual receiver identity guard.

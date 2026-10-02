@@ -310,6 +310,28 @@ caller-function-shadowing, boolean-kind and regex/numeric callback repairs remai
 bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/codeblock_push_composition_perl.t
 ```
 
+### Pure-function callback scope: verified Perl defect
+
+A pure function has fresh parameters and working variables. A callback invoked inside that function
+must resolve nonparameters in the function frame. It has no implicit access to the outer rule:
+
+```spec
+fn apply(callback: codeblock) { return(callback()) }
+Top:: I {
+  secret = "outer"
+  cb = {|| return(secret) }
+  return(apply(cb))
+}
+```
+
+The contract requires null here. Current Perl native Get and a fresh emitted process instead return
+`"outer"`: generated callback invocation incorrectly includes the rule's secret reference. A declared
+function-local secret returns its local value, while a direct function read without a declaration
+returns null. All three controls have ready1 and zero raw/fallback/unresolved counts; readiness alone
+cannot establish correct scope. Repair `.1.3.3.0.2.0.1` precedes registered-function dispatch and full
+normalization execution. Callback-created working slots must persist within one function invocation
+and reset between invocations. This defect is separate from existing argument/local-name shadowing.
+
 ### Determinism, progress and failure boundaries
 
 Determinism fixes the canonical program/versions, decoded source/identity, explicit values/options,

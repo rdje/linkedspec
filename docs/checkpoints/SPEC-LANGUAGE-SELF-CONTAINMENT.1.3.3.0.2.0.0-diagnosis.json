@@ -1,0 +1,156 @@
+{
+  "activation_commit": "eedf599c0d1b176f14e5f5856db9a2a7f20e193b",
+  "date": "2026-10-02",
+  "generated_mechanism": "LinkedSpec::CodeblockRuntime::invoke($callback, [], {\"callback\" => \\$callback, \"cb\" => \\$cb, \"secret\" => \\$secret}, \"callback\", undef, { descriptor => $descr, input => $STRING, match_info => $minfo })",
+  "limits": [
+    "No runtime, admission, authority, CI or original fixture change.",
+    "Native and fresh emitted observations establish this narrow leak, not full normalization execution.",
+    "startup32 argument/local shadowing remains separate; startup19/35/87 remain open."
+  ],
+  "next_action": "Repair function invocation binding frames before the registered-function bridge; inspect persistence, writes and nested cases using Toolbox.",
+  "observations": [
+    {
+      "artifact_sha256": "c9100d7c7674198e578c0d502e3d5b197508029ecfb23ddd89477ea6c4cd4b3c",
+      "emitted": {
+        "error": null,
+        "value": "outer"
+      },
+      "expected": null,
+      "id": "external_callback_read",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "context_error": 0,
+        "value": "outer"
+      },
+      "source": "fn apply(callback: codeblock) { return(callback()) }\nTop:: I { secret=\"outer\"; cb={|| return(secret) }; return(apply(cb)) }",
+      "source_sha256": "262b3915e6946a26f573afc9004d31a5cf0fad57f4337392842882a7aa1ad5fa"
+    },
+    {
+      "artifact_sha256": "c1455587f1fd1d904f66278f1a731e0e7082b2a4efb38bab4e35dd6c1fb92260",
+      "emitted": {
+        "error": null,
+        "value": "local"
+      },
+      "expected": "local",
+      "id": "function_local_control",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "context_error": 0,
+        "value": "local"
+      },
+      "source": "fn apply(callback: codeblock) { secret=\"local\"; return(callback()) }\nTop:: I { secret=\"outer\"; cb={|| return(secret) }; return(apply(cb)) }",
+      "source_sha256": "400789d717531cedfa0b95a57ce1e1d7041256e2d726dba16fc0c44364dc49f5"
+    },
+    {
+      "artifact_sha256": "37c374341771e905aa20c1bb8a63a0b4033018713f47e457cd27f2351e251f62",
+      "emitted": {
+        "error": null,
+        "value": null
+      },
+      "expected": null,
+      "id": "direct_function_control",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "context_error": 0,
+        "value": null
+      },
+      "source": "fn inspect() { return(secret) }\nTop:: I { secret=\"outer\"; return(inspect()) }",
+      "source_sha256": "7283ffe90950a77483c92628671e7939186a6e21b0daab75188c0e922fbf06f7"
+    }
+  ],
+  "owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.0.0",
+  "preexisting_mechanism": {
+    "base": "c02129217737b8c4fae015bca4428794aa285d61",
+    "binding_builder_and_deps_helper_byte_identical": true,
+    "old_base_execution_claimed": false
+  },
+  "priority": "P1",
+  "producer_logs": [
+    {
+      "path": ".linkedspec-data/scratch/selfcontain13302/diagnosis.pl",
+      "sha256": "bbcccda7957b5191043c85602f2c44bc01116bbe0a5ec2f36668defcba5fcfed"
+    },
+    {
+      "path": ".linkedspec-data/scratch/selfcontain13302/emitted-child.pl",
+      "sha256": "6c865cbc4839104517b2bd24d0cec62bb4ef9a40f4e406fe2eb4af7297cb3b09"
+    },
+    {
+      "path": ".linkedspec-data/scratch/selfcontain13302/diagnosis.log",
+      "sha256": "52b38d69db299c6e38ad00e494b5e20b2a4441823d930c51448df9e68dd0257c"
+    },
+    {
+      "path": ".linkedspec-data/scratch/selfcontain13302/scope-preflight.log",
+      "sha256": "e7708f8761ad1b9f8ab5e7f42fdfc033e496a1d607e9c623d7c979ae60923af3"
+    }
+  ],
+  "repair_owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.0.1",
+  "repair_requirements": [
+    "Function callbacks receive only function-local/parameter references.",
+    "Unknown callback working slots belong to the same fresh function invocation, persist across callbacks, and reset between invocations.",
+    "Retain temporary codeblock parameter restoration and rule-caller live slots outside functions.",
+    "Existing startup32 argument-local shadowing is distinct and remains owned."
+  ],
+  "root_cause": "_user_function_deps_with_call shallow-copies caller bare_symbol_names; _codeblock_runtime_binding_expr adds those caller slots before adding function-local names.",
+  "unchanged_sources_authorities": [
+    {
+      "path": "perl/LinkedSpec/ActionIR/MethodLowering.pm",
+      "sha256": "d5720b43443f21a8c0992f6d77a74c4a6a32ecc8f0647a1f16b6b76f9044718d"
+    },
+    {
+      "path": "perl/LinkedSpec/CodeblockRuntime.pm",
+      "sha256": "1b70bc46f250916d7b3048c915d137925e8f03d1a03dfef6b4d8793a634c0e0c"
+    },
+    {
+      "path": "docs/knowledge/map-leaves-function-scope-contract-conflict.md",
+      "sha256": "1b41fe3f2a65a449335d468f05392f620f49fa7b47548c6f657e9d7c8e7e5a5e"
+    },
+    {
+      "path": "docs/knowledge/terse-user-defined-functions-mvp-contract.md",
+      "sha256": "3fcfd70aa8bec094d8701a3f63cc38bdb964ff92a0b032d8661ef35b270d609d"
+    },
+    {
+      "path": "docs/knowledge/terse-user-function-value-call-execution.md",
+      "sha256": "cc8a88ed6b5767bf748a6d971e1ff7ffb921273708c0914c0f72c996492a7a34"
+    },
+    {
+      "path": "docs/knowledge/perl-generic-final-codeblock-normalization.md",
+      "sha256": "4293d9776cfc4c65035e271691d9897be7624f09b4492f2cc596697ad87d9037"
+    },
+    {
+      "path": "docs/knowledge/perl-user-function-caller-shadowing.md",
+      "sha256": "122ce9aede690546f1bce499f32adcb3ab9e8cd87159aa667237cd398f1be6bf"
+    },
+    {
+      "path": "capability_conformance/composed_objective_contract.json",
+      "sha256": "52b76d5b3e48fdf64f25e93b22553eabfa765fc224c101f0f5fbdd8a6abf6e01"
+    },
+    {
+      "path": "tests/language-readiness/composed/normalization.spec",
+      "sha256": "ba9953c282e5e66956dc4b7d22c2acc7b1e879734654e7cb467ad41275cc4249"
+    },
+    {
+      "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.1-selection.json",
+      "sha256": "b9e54e21dff39b08a098ea882a513d507730e0cdd7e4d6199c6374f8dbc30fe7"
+    },
+    {
+      "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.2-verification.json",
+      "sha256": "f4a1e2e3d9fa13c4cdda3171635411df530d2791105ce87234a620fb010485cd"
+    }
+  ],
+  "verification_tier": "focused"
+}
