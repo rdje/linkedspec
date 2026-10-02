@@ -1,10 +1,10 @@
 # MEMORY
 
-- activation_commit: `f07d827f7477e8a8a630ca12003d62761568a9b9` — clean activation base for canonical callback scope closeout.
-- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.0.2 - close callback scope prerequisite`.
-- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1` (pending) — P1 registered pure-function bridge from Perl deferred bodies.
-- next_action: Activate .0.2.1 from clean HEAD; declare compiled registry/context interface and exact code/test paths, reuse central function lowering with signatures/order/fresh locals/nested calls/recursion controls, then repair decorate before dispatcher closeout.
-- in_flight_uncommitted: none after canonical closeout landing; committed scope proof33 sources/279 tests,23 push/17 native frame/four diagnostic assertions plus emitted actual-frame proof and96 dependents. Actual canonical result belongs to the commit/receipt.
+- activation_commit: `2516cf72798212e1686cbddec94018a317276035` — clean activation base for deferred function bridge contract/probes.
+- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.0 - specify deferred function bridge`.
+- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.1` (pending) — P1 registered-function bridge implementation.
+- next_action: Activate .0.2.1.1 from clean HEAD; declare canonical proof and exact paths, implement the selected explicit registry/central-lowering bridge, and verify precedence/signatures/order/fresh scope/nested recursion before reconciliation.
+- in_flight_uncommitted: none after diagnostic landing;24 native/fresh emitted observations and twelve unchanged inputs are bound to the contract checkpoint. No runtime/test/authority movement.
 - blockers: No access/decision blocker. Registered-function bridge is next; normalization still fails decorate. Startup19/32/35/87 remain separate; source detail37.2, broad teaching41.2, policy5/29 and ARCHOGEN acceptance retain owners.
   Wrapper startup .7 remains open; recovery/purge stay prohibited. No interrupted Phase0 run counts as proof.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the

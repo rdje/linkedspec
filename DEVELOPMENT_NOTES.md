@@ -12,6 +12,16 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-10-02 — Compile deferred function bodies once through the existing owner (.0.2.1.0)
+
+Public dumps distinguish central generated function do-blocks from typed deferred calls with only rule
+invocation context. The runtime falls through to a bound codeblock, so same-named slots can wrongly win.
+The selected bridge uses explicit registered_functions metadata and compiled bodies outside plain records.
+Runtime evaluates ordered caller arguments; the central lowerer owns fresh parameters/rest/local scope.
+Guard mixed recursion and actual callback identities and preserve unused-unsupported readiness before
+acceptance. This is a plan, not bridge execution proof;24 paired observations and12 unchanged inputs
+bind the diagnostic. Corrected Execute calling convention and dump capture activation are recorded.
+
 ## 2026-10-02 — Canonical scope closure preserves committed proof (.0.2.0.2)
 
 The prerequisite closeout reconciles the committed repair rather than re-deriving its mechanism. Sources,

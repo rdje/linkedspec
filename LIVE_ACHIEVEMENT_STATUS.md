@@ -2,17 +2,19 @@
 
 ## Current Activity
 
-P1 registered-function bridge .1.3.3.0.2.1 after canonical callback scope prerequisite closeout .0.2.0.2. Neutral execution/backend lanes retain prerequisites.
+P1 registered-function bridge implementation .1.3.3.0.2.1.1 after contract/probes .0; canonical reconciliation .2 and dispatcher closeout precede neutral execution.
 
 ## Latest Completed Slice
 
-- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.0.2 - close callback scope prerequisite` — Independently reconciles committed sources/logs/producers and35 paired observations, unchanged runtime/tests/authorities/CI and exact canonical acceptance. Existing startup32/decorate limitations remain.
+- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.0 - specify deferred function bridge` —24 matching native/fresh emitted probes and twelve unchanged inputs bind the explicit registry/central-lowering plan. Runtime/test/authority state remains unchanged.
 
 ## Next Action
 
-- Activate .0.2.1 from clean HEAD; select the compiled function registry/context interface, exact paths/tier and reuse central lowering. Cover signature/order/fresh-local/nested/recursion and native/emitted controls before dispatcher closeout.
+- Activate .0.2.1.1 from clean HEAD with canonical interface proof; implement and verify registered precedence, exact signatures/final blocks, ordered arguments, fresh frames and nested recursion guards.
 
 ## Recent Completions
+
+- `2026-10-02` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.0` freezes24 paired deferred-function bridge controls and implementation ownership.
 
 - `2026-10-02` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.0.2` binds committed callback scope proof to canonical prerequisite closure before the function bridge.
 
@@ -43,8 +45,6 @@ P1 registered-function bridge .1.3.3.0.2.1 after canonical callback scope prereq
 - `2026-10-01` — `REPO-HYGIENE.6` records the due artifact review and requested exit handoff with zero deletions.
 
 - `2026-09-28` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.5` reconciles bounded lossless/actual-child evidence under canonical acceptance.
-
-- `2026-09-28` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.4` verifies five lossless/child routes on each Lua ABI.
 
 ## History
 

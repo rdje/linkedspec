@@ -1182,10 +1182,49 @@ used by ordinary `.spec` syntax on every backend.
   Canonical plan: Stage the complete candidate with no unstaged/non-ignored inputs, run approved-host tools/run_ci_local.sh to .linkedspec-data/scratch/selfcontain1330202/canonical.log, and record actual candidate/log identities, exit/CLI/RAM/Phase0 in the commit and promoted receipt without tracked post-gate edits. Canonical acceptance governs proposed parent closure; if the gate fails, retain ownership and repair before landing. Next .0.2.1 activates only from clean committed closeout HEAD.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1`
-  Status: `pending`
+  Status: `active`
   Goal: Implement the compiler-owned registered-function bridge after the function callback scope prerequisite closes.
   Dependencies: `.1.3.3.0.2.0`
   Acceptance: Reuse central function-body lowering with exact signatures, final-codeblock normalization, argument order, fresh locals, nested calls and recursion diagnostics. Declare any interface movement and broaden proof before edits; preserve the eight-field record and distinct startup32 limitation. Parent .0.2 closes only after full bounded native/emitted acceptance.
+  Children: `.1.3.3.0.2.1.0`, `.1.3.3.0.2.1.1`, `.1.3.3.0.2.1.2`
+  Slice boundary: Contract/probe .0 freezes the explicit generated invocation interface before implementation .1 changes it; canonical reconciliation .2 alone closes this bridge and parent .0.2. No partial second function evaluator or closures in codeblock records.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.0`
+  Status: `done`
+  Goal: Establish the compiler-owned bridge interface, exact code/test paths and native/fresh emitted failure controls before changing runtime behavior.
+  Activation: Clean 2516cf72798212e1686cbddec94018a317276035; promoted canonical receipt matches HEAD, commit brief is empty and no required job remains.
+  Owned paths: This task tree; new docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.0-contract.json; new docs/knowledge/perl-deferred-function-bridge-design.md; existing architecture book structured-format-program.md; task index, roadmaps, bounded continuity and derived Knowledge. Ignored diagnostic producers/output stay under .linkedspec-data/scratch/selfcontain1330210. No production, test, authority, generated-format, CI or storage change.
+  Verification tier: `focused`
+  Focused checks: Toolbox Get/return_descriptor/parser_source_ref and fresh emitted controls for fixed/rest/final-codeblock calls, ordered arguments, pure scope, nested functions, precedence, arity/keyword/recursion/unknown failures; central lowering/context source review; unchanged authorities/source inputs, rendered book, Knowledge/history/memory/doctrines/diff.
+  Canonical trigger: none for bounded interface planning and diagnostics with unchanged runtime. Implementation .1 must activate its own canonical declarations before private context/emission changes.
+  Acceptance: Bind exact sources, native/emitted values/errors/metadata and generated mechanism to the clean base; describe a bridge that reuses the central function lowerer and common callable metadata, preserves the eight-field record and distinct startup32 limitation, and schedules all required regression/recursion controls before code edits.
+
+  Verification: All24 public Get/descriptor/dumped-source probes and corrected fresh emitted execution agree on values and typed errors. Fixed/rest/final/direct ordered controls succeed; deferred calls fail by registered name, same-named slot incorrectly returns slot, unknown/keyword/static-recursion/startup32 controls retain exact behavior. Twelve reviewed production/test/authority/checkpoint inputs remain base-exact. Source captures require dump_parser_source; generated Execute uses the existing scalar-reference function API. No runtime/test/authority change. Checkpoint and Knowledge bind the selected table/central-lowering plan; actual recursion and slot guards remain implementation acceptance. The maintained Current Frontier still listed completed .1.2.4 as pending and omitted the current .1.3 chain; this leaf owns its verified status/next-row reconciliation against existing task nodes and committed evidence.
+
+  Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.0 - specify deferred function bridge`.
+
+### `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.0` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — LinkedSpec::Get and fresh emitted Execute agree on24 exact sources; deferred decorate/collect/apply/join/outer calls fail at registered dispatch and same-named decorate invokes the wrong slot.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Toolbox parser_source_ref with dump_parser_source shows central generated function do-blocks for direct calls and a plain typed deferred call plus rule-only invocation context. MethodLowering::_codeblock_runtime_invocation_expr and CodeblockRuntime::_eval_call have no registered-function bridge.
+- [x] **FIX** — Select a compiler-owned registered_functions invocation table and private evaluated-argument mode through the existing central lowerer. Implementation .1 and canonical reconciliation .2 own the repair; no runtime change in this diagnostic leaf.
+- [x] **ADDRESSED (verified)** — The checkpoint binds all24 paired value/error/metadata observations and producer/artifact identities, including direct fixed/rest/final forms, ordered effects, precedence, unknown/type/keyword/static-recursion/startup32 controls. Corrected fresh Execute and source capture are rerun.
+- [x] **NO REGRESSION** — Twelve production/test/authority/checkpoint files are activation-base exact; unused unsupported function and startup32 controls retain their current observations. Focused rendered book/Knowledge/history/memory/doctrines/diff checks govern landing; no changed behavior or Phase0 rerun is claimed.
+- [x] **LOCKSTEP** — Owned tree/children, resume pointer, roadmap/frontier, current status/history, Knowledge, checkpoint and public book agree that bridge implementation is pending. No complete neutral execution, other-backend proof or admission follows.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.1`
+  Status: `pending`
+  Goal: Implement and verify the explicit registered-function bridge using the interface selected by .0.
+  Dependencies: `.1.3.3.0.2.1.0`
+  Planned proof: Native/fresh emitted fixed/rest/contextual/explicit/bound callback forms, argument effects/order, fresh scopes/actual slot identity, nested calls and function/codeblock recursion controls, unknown/arity/keyword/type failures; existing callable/variadic/binding/map/Phase0 and exact staged canonical CI before landing.
+  Acceptance: Declare exact implementation paths and canonical fields from clean .0 HEAD. Reuse central function body lowering and common signature/contextual-block metadata. Preserve static callers, all existing push/scope cases, codeblock record bytes, startup32 and separate unrelated prerequisites; split any newly implicated defect before claiming closure.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.2`
+  Status: `pending`
+  Goal: Independently reconcile the committed bridge and original controls, then close .0.2.1 and .0.2 under canonical proof.
+  Dependencies: `.1.3.3.0.2.1.1`
+  Planned proof: Exact committed source/checkpoint/log reconciliation, original seven controls and normalization source on both public producers, unchanged authorities and remaining repair owners, rendered book and exact staged canonical CI.
+  Acceptance: Close only after native/fresh emitted results and ordered effects agree with the existing oracles and the actual recursion/slot guards are exercised. Full neutral sixteen-case execution stays owned by .1.3.3.1.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.3`
   Status: `pending`
@@ -1381,7 +1420,18 @@ used by ordinary `.spec` syntax on every backend.
 | 20 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.1` | `done` | Source-located16/66 matrix, scopes/effects and bounded freeze plan preserve partial/unassessed requirements. |
 | 21 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.2` | `done` | Versioned16/66/7/8 structure,432 reason-sensitive mutations/four controls and exact historical CI evolution. |
 | 22 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.3` | `done` | Scoped policies bind90 anchors/632 mutations, preserve partial owners and qualify ordinary progress/public errors without global guarantees. |
-| 23 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.4` | `pending` | Independently reconcile matrix/definition/checker/book and partial/unassessed routing through exact canonical parent closeout. |
+| 23 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.4` | `done` | Committed closure reconciliation; exact16/90/636 authority remains unchanged. |
+| 24 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.1` | `done` | Original composition sources/minimal controls and owned dispatch repair. |
+| 25 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.2` | `done` | Neutral16 cases/three sources and140/16/44 governance. |
+| 26 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.1` | `done` | Selected push dispatch17 sources/147 tests and actual receiver/parameter identity. |
+| 27 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.0.0` | `done` | Tool-backed pure-function callback scope diagnosis. |
+| 28 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.0.1` | `done` | Scope repair33 sources/279 tests with actual frame proof. |
+| 29 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.0.2` | `done` | Committed scope reconciliation and promoted canonical receipt2516cf727. |
+| 30 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.0` | `done` | 24 native/fresh emitted probes and compiler-owned bridge interface plan. |
+| 31 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.1` | `pending` | NEXT: implement explicit registered dispatch and central compiled body reuse with canonical proof. |
+| 32 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.2` | `pending` | Canonical committed bridge reconciliation closes .0.2.1/.0.2. |
+| 33 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.3` | `pending` | Original minimal/normalization controls and independent dispatcher closeout. |
+| 34 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.1` | `pending` | Complete neutral-case and actual semantic-mutant execution after dispatcher prerequisite. |
 
 ## Decisions
 

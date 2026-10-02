@@ -1084,3 +1084,18 @@ A format is complete only when it has:
 
 “Fast” is a measured result, not an assumption. “Supported” means the documented contract passes, not merely that
 a friendly example was accepted.
+
+
+### Remaining registered-function composition gap on Perl
+
+Direct registered fixed/rest functions and both final contextual-block spellings execute. The same calls
+inside a deferred codeblock still fail with typed `unknown_helper` for the registered name. A bound
+codeblock with the same name can instead win that lookup, although the registered function should take
+precedence. Source readiness remains1 with zero raw/fallback/unresolved counts in these cases; those
+counts do not establish runtime dispatch coverage.
+
+Twenty-four exact native/fresh emitted controls retain this boundary, including direct ordered arguments,
+unknown calls, final-kind rejection, static recursion and the separate argument/local-name shadowing
+limitation. The compiler-owned bridge is planned under `.1.3.3.0.2.1`; implementation and canonical
+reconciliation must complete before the normalization example above can be reported as executable.
+The plain eight-field callable record and fresh function-scope contract remain unchanged.

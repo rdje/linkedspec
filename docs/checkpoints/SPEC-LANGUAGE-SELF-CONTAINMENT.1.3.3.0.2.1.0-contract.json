@@ -1,0 +1,798 @@
+{
+  "activation_commit": "2516cf72798212e1686cbddec94018a317276035",
+  "date": "2026-10-02",
+  "identities_sha256": {
+    ".linkedspec-data/scratch/selfcontain1330210/child.log": "f2f81c1773688924068cbb7fe305a2383d7984de7743adb10b6230e24610d29a",
+    ".linkedspec-data/scratch/selfcontain1330210/child.pl": "7a8f2f551d004acdcc3c03a153b5f1dc17b2f8a9da43c31a5eb316f82d4d96e7",
+    ".linkedspec-data/scratch/selfcontain1330210/observations.json": "47bac7de16c63c40ff8553e1a3349dba3414ce338f8854a3ab9160aa29f7bb35",
+    ".linkedspec-data/scratch/selfcontain1330210/probe.log": "1c1a0cd4baf225f6b35f9470b16fe6d1e71f2ea4a43f8ef4047d550f294de82e",
+    ".linkedspec-data/scratch/selfcontain1330210/probe.pl": "b8bf9cc29cca4be8b974a8c6b695c922e5c86a21d8b233fa0284313d00eb08f7",
+    ".linkedspec-data/scratch/selfcontain1330210/review.py": "0c500093ff503e2dcf4a2d7aa72041f3cdb6dbeb8cc151c8cd4771d715d8e030",
+    "capability_conformance/callable_codeblock_contract.json": "1651e42e0e24e2476dcaffa1f4bd63888bddaa3a845ddaf329be7392c0bfe67e",
+    "capability_conformance/callable_signature_contract.json": "d01a63252648259dadab5f2f565ae7c93e860c055f2a156178f605c4b0c53ca7",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.1-selection.json": "b9e54e21dff39b08a098ea882a513d507730e0cdd7e4d6199c6374f8dbc30fe7",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.2-verification.json": "f4a1e2e3d9fa13c4cdda3171635411df530d2791105ce87234a620fb010485cd",
+    "docs/language-readiness/composed-objective-selection.md": "62e0bddb7214470e7d50a403dc2050d287378ec320e11cbc5f111dd0c599d401",
+    "perl/LinkedSpec/ActionIR/MethodLowering.pm": "6b47b793702d3f2bf4400ed41c494adbce4a320ddad9a1be898c873a60f501e2",
+    "perl/LinkedSpec/CallableContract.pm": "b985f546158bc9cba232c93ed651b65016295c77b7390cda620096b3604fd781",
+    "perl/LinkedSpec/CodeblockRuntime.pm": "1b70bc46f250916d7b3048c915d137925e8f03d1a03dfef6b4d8793a634c0e0c",
+    "perl/LinkedSpec/RuleIR/EmitContext.pm": "6940dcf0be03b65e3d0a69f3efec41e1dca37524930ef20368dae94d99a23a9b",
+    "t/callable_codeblock_literal_contract.t": "4ae605d241ddef38e34f60aba3968c2f3dfe28a0aa6d8de8135a7a320d5c430d",
+    "t/codeblock_push_composition_perl.t": "3a20062853625bd7f1b7a5102d0148b4efe4f7dfad6eb33f2a61b19e33371d03",
+    "t/variadic_user_function_contract.t": "a9e948410c1abcc15c40a45422f2a316c27181d274be1bcf42e12d72f91de259"
+  },
+  "limits": [
+    "bridge not implemented",
+    "no complete neutral16 execution or semantic mutants",
+    "startup19/32/35/87 separately owned",
+    "no other backend/public admission"
+  ],
+  "mechanism": {
+    "deferred": "plain typed call plus descriptor/input/match context; registered table absent",
+    "direct": "central function do-block lowering",
+    "precedence": "same-named codeblock yields slot instead of registered !x"
+  },
+  "observations": [
+    {
+      "emitted": {
+        "carrier": null,
+        "error": null,
+        "value": "!AB"
+      },
+      "emitted_sha256": "d6f32c987b2c59459872e07901f9e5b72f38ab918d78c319b6ee7d71828bf1d9",
+      "id": "fixed_direct",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "value": "!AB"
+      },
+      "source": "fn decorate(text,prefix) { return(cat(prefix,uppercase(text))) }\nTop:: I { return(decorate(\"ab\",\"!\")) }\n",
+      "source_sha256": "16e422bd8e88d69640816f03aae921454360e23d9426ae195346940898cc0c7c"
+    },
+    {
+      "emitted": {
+        "carrier": {
+          "code": "generated_execution_failed",
+          "source_identity": "fixed_deferred.spec",
+          "stage": "execute_generated"
+        },
+        "error": {
+          "code": "unknown_helper",
+          "kind": "codeblock_runtime_error",
+          "name": "decorate",
+          "observed_class": "LinkedSpec::CodeblockRuntime::Error"
+        },
+        "value": null
+      },
+      "emitted_sha256": "32c0159771d9df2f726908e6c81a5eb68396e2df25e065bd9ec108a582d89e0c",
+      "id": "fixed_deferred",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": {
+          "code": "unknown_helper",
+          "kind": "codeblock_runtime_error",
+          "name": "decorate",
+          "observed_class": "LinkedSpec::CodeblockRuntime::Error"
+        },
+        "value": null
+      },
+      "source": "fn decorate(text,prefix) { return(cat(prefix,uppercase(text))) }\nTop:: I { cb={|| return(decorate(\"ab\",\"!\")) }; return(cb()) }\n",
+      "source_sha256": "3024ef3ce6453f0b2bd18c2098e24e87dac3720d7906e5e1b603ea25d76cacd9"
+    },
+    {
+      "emitted": {
+        "carrier": null,
+        "error": null,
+        "value": [
+          "a",
+          [
+            "b",
+            "c"
+          ]
+        ]
+      },
+      "emitted_sha256": "94c1052da207c2a70865408e90c8b4914056055e7f0e9c8c77fc4f3d32f74983",
+      "id": "rest_direct",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "value": [
+          "a",
+          [
+            "b",
+            "c"
+          ]
+        ]
+      },
+      "source": "fn collect(first,...rest) { return([first,rest]) }\nTop:: I { return(collect(\"a\",\"b\",\"c\")) }\n",
+      "source_sha256": "55405876c778a2e80c56261070f36bb634d668f49bc170a8e30cd6a171aa8a94"
+    },
+    {
+      "emitted": {
+        "carrier": {
+          "code": "generated_execution_failed",
+          "source_identity": "rest_deferred.spec",
+          "stage": "execute_generated"
+        },
+        "error": {
+          "code": "unknown_helper",
+          "kind": "codeblock_runtime_error",
+          "name": "collect",
+          "observed_class": "LinkedSpec::CodeblockRuntime::Error"
+        },
+        "value": null
+      },
+      "emitted_sha256": "364b6f0ec8cfae7d294c2c595ca3c65427a8bdc944e7ebde74d4a3926c9aa0dd",
+      "id": "rest_deferred",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": {
+          "code": "unknown_helper",
+          "kind": "codeblock_runtime_error",
+          "name": "collect",
+          "observed_class": "LinkedSpec::CodeblockRuntime::Error"
+        },
+        "value": null
+      },
+      "source": "fn collect(first,...rest) { return([first,rest]) }\nTop:: I { cb={|| return(collect(\"a\",\"b\",\"c\")) }; return(cb()) }\n",
+      "source_sha256": "3976b435cff406296d58684d59693796e6102f384d9bfe13ac7d20d2b52adb38"
+    },
+    {
+      "emitted": {
+        "carrier": {
+          "code": "generated_execution_failed",
+          "source_identity": "rest_empty_deferred.spec",
+          "stage": "execute_generated"
+        },
+        "error": {
+          "code": "unknown_helper",
+          "kind": "codeblock_runtime_error",
+          "name": "collect",
+          "observed_class": "LinkedSpec::CodeblockRuntime::Error"
+        },
+        "value": null
+      },
+      "emitted_sha256": "3d140192dc58784f40413c4e881be921c3bae38001b86801e8b2306abc627ca0",
+      "id": "rest_empty_deferred",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": {
+          "code": "unknown_helper",
+          "kind": "codeblock_runtime_error",
+          "name": "collect",
+          "observed_class": "LinkedSpec::CodeblockRuntime::Error"
+        },
+        "value": null
+      },
+      "source": "fn collect(first,...rest) { return([first,rest]) }\nTop:: I { cb={|| return(collect(\"a\")) }; return(cb()) }\n",
+      "source_sha256": "073cca796c2141ff90bb7eeefa24d2a9fdb9f3064a807174698d67a502c54679"
+    },
+    {
+      "emitted": {
+        "carrier": null,
+        "error": null,
+        "value": "inner"
+      },
+      "emitted_sha256": "ebd4aba3d792c6c1b784ee1e364bc737ceafb3326b8b3d2f1f0bf70ef6550588",
+      "id": "attached_direct",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "value": "inner"
+      },
+      "source": "fn apply(value,callback: codeblock) { return(callback()) }\nTop:: I { return(apply(\"inner\") { return(value) }) }\n",
+      "source_sha256": "8f98501ca62e642cb5095219bb025219cde51c0a9c5ee4505f57a4566c41742f"
+    },
+    {
+      "emitted": {
+        "carrier": {
+          "code": "generated_execution_failed",
+          "source_identity": "attached_deferred.spec",
+          "stage": "execute_generated"
+        },
+        "error": {
+          "code": "unknown_helper",
+          "kind": "codeblock_runtime_error",
+          "name": "apply",
+          "observed_class": "LinkedSpec::CodeblockRuntime::Error"
+        },
+        "value": null
+      },
+      "emitted_sha256": "4210eedb5a7bf959026e0748e6ec23227a131b9c14237a564bb85c40c42f3a24",
+      "id": "attached_deferred",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": {
+          "code": "unknown_helper",
+          "kind": "codeblock_runtime_error",
+          "name": "apply",
+          "observed_class": "LinkedSpec::CodeblockRuntime::Error"
+        },
+        "value": null
+      },
+      "source": "fn apply(value,callback: codeblock) { return(callback()) }\nTop:: I { cb={|| return(apply(\"inner\") { return(value) }) }; return(cb()) }\n",
+      "source_sha256": "14ce007bba6db47a10448433f3bf2dd6275634f2bc39988c7a7b7b2f6358e1b2"
+    },
+    {
+      "emitted": {
+        "carrier": null,
+        "error": null,
+        "value": "inner"
+      },
+      "emitted_sha256": "a63f585880bc11469a0e82ec37edf510435a4f2bd19022457e3c59b089633604",
+      "id": "parenthesized_direct",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "value": "inner"
+      },
+      "source": "fn apply(value,callback: codeblock) { return(callback()) }\nTop:: I { return(apply(\"inner\",{ return(value) })) }\n",
+      "source_sha256": "427ad9c83cfe8086bd7d8423d1a83e11b81b2e94e06999247f9695457b68b62a"
+    },
+    {
+      "emitted": {
+        "carrier": {
+          "code": "generated_execution_failed",
+          "source_identity": "parenthesized_deferred.spec",
+          "stage": "execute_generated"
+        },
+        "error": {
+          "code": "unknown_helper",
+          "kind": "codeblock_runtime_error",
+          "name": "apply",
+          "observed_class": "LinkedSpec::CodeblockRuntime::Error"
+        },
+        "value": null
+      },
+      "emitted_sha256": "7c656276cc416ebc61bb93321cb570b1b42e61ac2453e9b93e67afe705a7b6fc",
+      "id": "parenthesized_deferred",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": {
+          "code": "unknown_helper",
+          "kind": "codeblock_runtime_error",
+          "name": "apply",
+          "observed_class": "LinkedSpec::CodeblockRuntime::Error"
+        },
+        "value": null
+      },
+      "source": "fn apply(value,callback: codeblock) { return(callback()) }\nTop:: I { cb={|| return(apply(\"inner\",{ return(value) })) }; return(cb()) }\n",
+      "source_sha256": "2ce46394153ff8c6299c77029979678936717ba6a29a737cd0d1f1fa0ad0f152"
+    },
+    {
+      "emitted": {
+        "carrier": {
+          "code": "generated_execution_failed",
+          "source_identity": "bound_deferred.spec",
+          "stage": "execute_generated"
+        },
+        "error": {
+          "code": "unknown_helper",
+          "kind": "codeblock_runtime_error",
+          "name": "apply",
+          "observed_class": "LinkedSpec::CodeblockRuntime::Error"
+        },
+        "value": null
+      },
+      "emitted_sha256": "2d0a18525b4f9802a3ac0ac54f2e8fbe5bd3f349efd870a7ecba261360e3c908",
+      "id": "bound_deferred",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": {
+          "code": "unknown_helper",
+          "kind": "codeblock_runtime_error",
+          "name": "apply",
+          "observed_class": "LinkedSpec::CodeblockRuntime::Error"
+        },
+        "value": null
+      },
+      "source": "fn apply(value,callback: codeblock) { return(callback()) }\nTop:: I { value=\"outer\"; inner={|| return(value) }; cb={|| return(apply(\"inner\",inner)) }; return(cb()) }\n",
+      "source_sha256": "fc31c73a178cba779a57bd6ce9c9407c733e55571a18480264912b906c8c51aa"
+    },
+    {
+      "emitted": {
+        "carrier": null,
+        "error": null,
+        "value": [
+          "AB",
+          [
+            "a",
+            "b"
+          ]
+        ]
+      },
+      "emitted_sha256": "a6cc14dcfb815f19d837721a4f7e2e454eb95f85d49db636890a26b2e88def63",
+      "id": "ordered_direct",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "value": [
+          "AB",
+          [
+            "a",
+            "b"
+          ]
+        ]
+      },
+      "source": "fn join(a,b) { return(cat(a,b)) }\nTop:: I { effects=[]; result=join({ push(effects,\"a\"); return(\"A\") },{ push(effects,\"b\"); return(\"B\") }); return([result,effects]) }\n",
+      "source_sha256": "a3e814d9f59c62efca5127f2039b41f1ef5fbd5da5697a2f8598991454c792d2"
+    },
+    {
+      "emitted": {
+        "carrier": {
+          "code": "generated_execution_failed",
+          "source_identity": "ordered_deferred.spec",
+          "stage": "execute_generated"
+        },
+        "error": {
+          "code": "unknown_helper",
+          "kind": "codeblock_runtime_error",
+          "name": "join",
+          "observed_class": "LinkedSpec::CodeblockRuntime::Error"
+        },
+        "value": null
+      },
+      "emitted_sha256": "72b043b2429c10107548d7794e0b27cfd21802108ed3cdfecbbf43ce3e8ab6e3",
+      "id": "ordered_deferred",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": {
+          "code": "unknown_helper",
+          "kind": "codeblock_runtime_error",
+          "name": "join",
+          "observed_class": "LinkedSpec::CodeblockRuntime::Error"
+        },
+        "value": null
+      },
+      "source": "fn join(a,b) { return(cat(a,b)) }\nTop:: I { effects=[]; cb={|| result=join({ push(effects,\"a\"); return(\"A\") },{ push(effects,\"b\"); return(\"B\") }); return([result,effects]) }; return(cb()) }\n",
+      "source_sha256": "c8cc24b35f212691a8a08dc6c6a1df3aeceead8ca23624a0384455b418a8171e"
+    },
+    {
+      "emitted": {
+        "carrier": {
+          "code": "generated_execution_failed",
+          "source_identity": "nested_deferred.spec",
+          "stage": "execute_generated"
+        },
+        "error": {
+          "code": "unknown_helper",
+          "kind": "codeblock_runtime_error",
+          "name": "outer",
+          "observed_class": "LinkedSpec::CodeblockRuntime::Error"
+        },
+        "value": null
+      },
+      "emitted_sha256": "7589dccceae2db1768a2685824cfccc5c3fb90e6fc952c8815083a1de8b11572",
+      "id": "nested_deferred",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": {
+          "code": "unknown_helper",
+          "kind": "codeblock_runtime_error",
+          "name": "outer",
+          "observed_class": "LinkedSpec::CodeblockRuntime::Error"
+        },
+        "value": null
+      },
+      "source": "fn inner(x) { return(uppercase(x)) }\nfn outer(x) { return(cat(\"!\",inner(x))) }\nTop:: I { cb={|| return(outer(\"ab\")) }; return(cb()) }\n",
+      "source_sha256": "244ce6e5295669ad5c7e4e07e701af2a8375defc3b123a9e508e731e72351b3e"
+    },
+    {
+      "emitted": {
+        "carrier": null,
+        "error": null,
+        "value": "slot"
+      },
+      "emitted_sha256": "b509025ef5aad38c89f9036e60f98e7e04d9aa888e3cbb3020e46cfd59f49219",
+      "id": "precedence_deferred",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "value": "slot"
+      },
+      "source": "fn decorate(text,prefix) { return(cat(prefix,text)) }\nTop:: I { decorate={|text,prefix| return(\"slot\") }; cb={|| return(decorate(\"x\",\"!\")) }; return(cb()) }\n",
+      "source_sha256": "5f77f734aca65cfc9797061dd24b4bda283bffbb10d3f67399bb9a1d68f4c808"
+    },
+    {
+      "emitted": {
+        "carrier": {
+          "code": "generated_execution_failed",
+          "source_identity": "wrong_arity_deferred.spec",
+          "stage": "execute_generated"
+        },
+        "error": {
+          "code": "unknown_helper",
+          "kind": "codeblock_runtime_error",
+          "name": "decorate",
+          "observed_class": "LinkedSpec::CodeblockRuntime::Error"
+        },
+        "value": null
+      },
+      "emitted_sha256": "ba1880ba0f2054846da8b4974c276c62d3cef9c68f3de7ef2b2486db3c6a08e9",
+      "id": "wrong_arity_deferred",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": {
+          "code": "unknown_helper",
+          "kind": "codeblock_runtime_error",
+          "name": "decorate",
+          "observed_class": "LinkedSpec::CodeblockRuntime::Error"
+        },
+        "value": null
+      },
+      "source": "fn decorate(text,prefix) { return(cat(prefix,text)) }\nTop:: I { cb={|| return(decorate(\"x\")) }; return(cb()) }\n",
+      "source_sha256": "f4fd0990841e8e17c7396d1e6b88adabfe47a92fffaec7e71aaa25c22ca13f1c"
+    },
+    {
+      "emitted": {
+        "carrier": {
+          "code": "generated_execution_failed",
+          "source_identity": "wrong_final_kind_direct.spec",
+          "stage": "execute_generated"
+        },
+        "error": {
+          "code": "final_argument_not_codeblock",
+          "kind": "codeblock_runtime_error",
+          "observed_class": "LinkedSpec::CodeblockRuntime::Error",
+          "value_kind": "harray"
+        },
+        "value": null
+      },
+      "emitted_sha256": "99f0e8eef1968faf0d9e26eaeea8b9b961afb590b7e003a29c7697042c007c39",
+      "id": "wrong_final_kind_direct",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": {
+          "code": "final_argument_not_codeblock",
+          "kind": "codeblock_runtime_error",
+          "observed_class": "LinkedSpec::CodeblockRuntime::Error",
+          "value_kind": "harray"
+        },
+        "value": null
+      },
+      "source": "fn apply(value,callback: codeblock) { return(callback()) }\nTop:: I { return(apply(\"x\",{})) }\n",
+      "source_sha256": "a8a3391e5ab10e0eb07730db8bf0cfb243a0c2984b344e5f5556a1e65ecb3912"
+    },
+    {
+      "emitted": {
+        "carrier": {
+          "code": "generated_execution_failed",
+          "source_identity": "wrong_final_kind_deferred.spec",
+          "stage": "execute_generated"
+        },
+        "error": {
+          "code": "unknown_helper",
+          "kind": "codeblock_runtime_error",
+          "name": "apply",
+          "observed_class": "LinkedSpec::CodeblockRuntime::Error"
+        },
+        "value": null
+      },
+      "emitted_sha256": "21de0f32cf90dede63fcee55f902ffc0c84c5c7b6e5988e80ecc7d558d04ae3b",
+      "id": "wrong_final_kind_deferred",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": {
+          "code": "unknown_helper",
+          "kind": "codeblock_runtime_error",
+          "name": "apply",
+          "observed_class": "LinkedSpec::CodeblockRuntime::Error"
+        },
+        "value": null
+      },
+      "source": "fn apply(value,callback: codeblock) { return(callback()) }\nTop:: I { cb={|| return(apply(\"x\",{})) }; return(cb()) }\n",
+      "source_sha256": "9f00894db0a368c04cc86568523282dd95610ddf23f30592bdde596b3d722946"
+    },
+    {
+      "emitted": {
+        "carrier": {
+          "code": "generated_execution_failed",
+          "source_identity": "keyword_deferred.spec",
+          "stage": "execute_generated"
+        },
+        "error": {
+          "code": "unsupported_codeblock_actionir",
+          "kind": "raw_perl",
+          "observed_class": "LinkedSpec::CodeblockRuntime::Error"
+        },
+        "value": null
+      },
+      "emitted_sha256": "09376f43d3bb96b3f890a55bb52b9402fafdc7836a5da724f28e9f59732f3f53",
+      "id": "keyword_deferred",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": {
+          "code": "unsupported_codeblock_actionir",
+          "kind": "raw_perl",
+          "observed_class": "LinkedSpec::CodeblockRuntime::Error"
+        },
+        "value": null
+      },
+      "source": "fn id(value) { return(value) }\nTop:: I { cb={|| return(id(value:\"x\")) }; return(cb()) }\n",
+      "source_sha256": "2406e06eead53f0101d397bc44968507db6a4db4bac74d25cb417a5d14fcf5a4"
+    },
+    {
+      "emitted": {
+        "carrier": null,
+        "error": null,
+        "value": null
+      },
+      "emitted_sha256": "68ce5c82a505dcb9181f960181da59a3642ef9f0ef5970a2d680218c95c90f4a",
+      "id": "function_recursion_direct",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1
+      },
+      "native": {
+        "error": null,
+        "value": null
+      },
+      "source": "fn repeat(value) { return(repeat(value)) }\nTop:: I { return(repeat(\"x\")) }\n",
+      "source_sha256": "7198e30191f7fd1e8752ea4df2381315eaa442ae914c3984429b4b70826c4095"
+    },
+    {
+      "emitted": {
+        "carrier": {
+          "code": "generated_execution_failed",
+          "source_identity": "function_recursion_deferred.spec",
+          "stage": "execute_generated"
+        },
+        "error": {
+          "code": "unknown_helper",
+          "kind": "codeblock_runtime_error",
+          "name": "repeat",
+          "observed_class": "LinkedSpec::CodeblockRuntime::Error"
+        },
+        "value": null
+      },
+      "emitted_sha256": "4bd144a6a5cdd1ee60183abd618ceed9e440193028620106c1ec6e8360179aab",
+      "id": "function_recursion_deferred",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": {
+          "code": "unknown_helper",
+          "kind": "codeblock_runtime_error",
+          "name": "repeat",
+          "observed_class": "LinkedSpec::CodeblockRuntime::Error"
+        },
+        "value": null
+      },
+      "source": "fn repeat(value) { return(repeat(value)) }\nTop:: I { cb={|| return(repeat(\"x\")) }; return(cb()) }\n",
+      "source_sha256": "c0fbe3a21fc9baa6467201fb5fa27a574a4a90189646af939a0ededde341cf6b"
+    },
+    {
+      "emitted": {
+        "carrier": {
+          "code": "generated_execution_failed",
+          "source_identity": "callback_function_cycle.spec",
+          "stage": "execute_generated"
+        },
+        "error": {
+          "code": "unknown_helper",
+          "kind": "codeblock_runtime_error",
+          "name": "apply",
+          "observed_class": "LinkedSpec::CodeblockRuntime::Error"
+        },
+        "value": null
+      },
+      "emitted_sha256": "24224d87c470561e82cb8baa0289871a347ee164acd14dd617edb1cc7de30567",
+      "id": "callback_function_cycle",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": {
+          "code": "unknown_helper",
+          "kind": "codeblock_runtime_error",
+          "name": "apply",
+          "observed_class": "LinkedSpec::CodeblockRuntime::Error"
+        },
+        "value": null
+      },
+      "source": "fn apply(callback: codeblock) { return(callback()) }\nTop:: I { cb={|| return(apply(cb)) }; return(cb()) }\n",
+      "source_sha256": "2f36973d21d4121adf1066661d9e8dc7db8737c767743fef6ecbe5353f445849"
+    },
+    {
+      "emitted": {
+        "carrier": {
+          "code": "generated_execution_failed",
+          "source_identity": "unknown_deferred.spec",
+          "stage": "execute_generated"
+        },
+        "error": {
+          "code": "unknown_helper",
+          "kind": "codeblock_runtime_error",
+          "name": "missing_operation",
+          "observed_class": "LinkedSpec::CodeblockRuntime::Error"
+        },
+        "value": null
+      },
+      "emitted_sha256": "05d449ed4e3b59a02b7e3359104a97cf07ae345dd61a0ce995de73d4cd38a05e",
+      "id": "unknown_deferred",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": {
+          "code": "unknown_helper",
+          "kind": "codeblock_runtime_error",
+          "name": "missing_operation",
+          "observed_class": "LinkedSpec::CodeblockRuntime::Error"
+        },
+        "value": null
+      },
+      "source": "\nTop:: I { cb={|| return(missing_operation(\"x\")) }; return(cb()) }\n",
+      "source_sha256": "b251747381ff664ed09d41016e73a0e468ec5d818998eed15cd833183dfe4b7a"
+    },
+    {
+      "emitted": {
+        "carrier": null,
+        "error": null,
+        "value": "ok"
+      },
+      "emitted_sha256": "42b7aeb272c2d20ed59d8169492105896dd281e1153baec7ed19ab6353ac1f93",
+      "id": "unrelated_unsupported_definition",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "value": "ok"
+      },
+      "source": "fn unused() { return(missing_operation()) }\nTop:: I { cb={|| return(\"ok\") }; return(cb()) }\n",
+      "source_sha256": "cc563c8ed4392d2cbd9662e4dcaadd5f50ff18b5d1ef3d12f29c88b245d174d7"
+    },
+    {
+      "emitted": {
+        "carrier": null,
+        "error": null,
+        "value": null
+      },
+      "emitted_sha256": "3b8c29a8d5ba270f24ee5c16015051abd3fa248b74f3f4e32dd5b263498b22d8",
+      "id": "startup32_control",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "value": null
+      },
+      "source": "fn f(value) { temp=\"inner\"; return(value) }\nTop:: I { temp=\"outer\"; return(f(temp)) }\n",
+      "source_sha256": "34bedea258bc52bcec0a61b40ada35c6cf47ee21ce7b27b0606766f166aed196"
+    }
+  ],
+  "observer_corrections": [
+    "First fresh probe used method-call Execute(input=>x); corrected to generated package function Execute(scalar input reference), then reran all24.",
+    "The first source review saw empty parser_source_ref captures; enabled dump_parser_source, reran both producers and reviewed actual captures."
+  ],
+  "owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.0",
+  "schema": "linkedspec-owned-diagnostic-v1",
+  "scope": "24 exact native/fresh emitted pre-implementation probes; no runtime/authority movement",
+  "selected_interface": {
+    "body_lowering": "reuse central function lowerer with already-evaluated argument-array mode; clear mode for nested static calls",
+    "context_field": "registered_functions",
+    "entry_fields": [
+      "signature",
+      "final_codeblock_contract",
+      "compiled callable OR explicit lowering diagnostic"
+    ],
+    "pending_guards": [
+      "signature/keyword/final-kind validation",
+      "once-only ordered caller operands",
+      "fresh local/rest frames",
+      "active function/codeblock state and failure restoration",
+      "independent same-named callbacks",
+      "unrelated unsupported definitions do not pollute readiness"
+    ],
+    "record_fields": "unchanged eight-field plain record"
+  }
+}

@@ -12,6 +12,16 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-10-02 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.0: specify deferred function bridge
+
+Freeze24 exact public Get/descriptor/dumped-source and fresh emitted observations from clean2516cf727.
+Record missing registered dispatch and same-named callback precedence, direct fixed/rest/final/ordered
+controls, unknown/keyword/static-recursion/startup32 limits. Select explicit invocation table and central
+function-lowering argument-array mode; no second evaluator or closures in eight-field records. Split
+canonical implementation .1 and reconciliation .2; runtime/tests/authorities/CI/storage remain unchanged.
+Update Knowledge/checkpoint/book/roadmap/frontier and bounded continuity; focused checks govern landing.
+
+
 ## 2026-10-02 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.0.2: close callback scope prerequisite
 
 Independently reconcile f07d827f7 checkpoint/source/log/producer hashes and35 paired native/emitted
