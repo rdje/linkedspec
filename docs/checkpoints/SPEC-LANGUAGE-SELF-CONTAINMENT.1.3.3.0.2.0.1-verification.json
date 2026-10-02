@@ -1,0 +1,1991 @@
+{
+  "activation_commit": "e7401b3cbec6e7cf6d5071f90cee4d08a58f4450",
+  "canonical_trigger": "none; internal lexical binding repair, unchanged public/generated-format authorities; designated parent closeout follows",
+  "date": "2026-10-02",
+  "implementation": [
+    "Function-owned scalar inventory excludes rule callable names.",
+    "Generate one fresh persistent binding map after arguments/parameters, holding actual function-local references.",
+    "Nested calls replace inherited frame metadata; private map name avoids user local/parameter collisions.",
+    "with localizes/restores the value entry after success or failure.",
+    "Runtime invoke, plain eight-field records, public authorities, original fixtures, CI and storage unchanged."
+  ],
+  "logs": [
+    {
+      "path": ".linkedspec-data/scratch/selfcontain1330201/green-complete.log",
+      "sha256": "23636fc4531b90730ce3f58c93e3d774d1bfe6aab67d6d9ebbf198419565b106"
+    },
+    {
+      "path": ".linkedspec-data/scratch/selfcontain1330201/dependents.log",
+      "sha256": "b7b1486a8dd4e982e980933170987c6c833ae5cbe3db49a4c4577b1fe567d176"
+    },
+    {
+      "path": ".linkedspec-data/scratch/selfcontain1330201/phase0.log",
+      "sha256": "9ec1bde38407aa8c00b23f978c63a8fc8eb163b23d84c287202ea0a6ee07f4b8"
+    },
+    {
+      "path": ".linkedspec-data/scratch/selfcontain1330201/objectives.log",
+      "sha256": "04e9d723b708653f4b2eb262a3165b3dced72818357479c766a4bcaf3bb454d9"
+    },
+    {
+      "path": ".linkedspec-data/scratch/selfcontain1330201/neutral.log",
+      "sha256": "ee0512718fc36c54e926b653892d841801b940ce8a41610ab2e1c912a03b41b8"
+    },
+    {
+      "path": ".linkedspec-data/scratch/selfcontain1330201/baseline-red-preloaded.log",
+      "sha256": "aa9b09029563ac851c9afdff2204fc73a9e7b2c2cc6f161068b785183065e8f1"
+    },
+    {
+      "path": ".linkedspec-data/scratch/selfcontain1330201/baseline-final-red.log",
+      "sha256": "342d4f659c97053dbc05642222f132465e9b5561a6a42e51094c402e51133a80"
+    },
+    {
+      "path": ".linkedspec-data/scratch/selfcontain1330201/callable-preflight.log",
+      "sha256": "fa98aeb9f673f5c04c05cff5957fd7e10463c769b2e22b37c48f096856aa6d81"
+    },
+    {
+      "path": ".linkedspec-data/scratch/selfcontain1330201/callable-green.log",
+      "sha256": "c7e2803d25077ddce81c29eb577d8512f98d745061e163c7681449bc012f1bd9"
+    },
+    {
+      "path": ".linkedspec-data/scratch/selfcontain1330201/observations-final.log",
+      "sha256": "f89c2de635bf5ceedc2406ffff4034aa11857829bbdbb2b83de38082c706f3f9"
+    },
+    {
+      "path": ".linkedspec-data/scratch/selfcontain1330201/book-final.log",
+      "sha256": "223b28d1392e273b566236dfb93a72ca03088529ccd8c4efaf0ee2a10ca3834b"
+    },
+    {
+      "path": ".linkedspec-data/scratch/selfcontain1330201/knowledge.log",
+      "sha256": "fa8a295eb1897a24b6d1172f53c44872234a5836c679b5e470544ca4736f4893"
+    },
+    {
+      "path": ".linkedspec-data/scratch/selfcontain1330201/syntax.log",
+      "sha256": "64992258a6ab30ff2ac85669cfeb7e5d2dd1027d9a92ae434d7efe5130fe46af"
+    },
+    {
+      "path": ".linkedspec-data/scratch/selfcontain1330201/pipeline.log",
+      "sha256": "83efdd4e5b50edd6f93e8ff765304d83547532148371315a5f59fc12f970ba96"
+    },
+    {
+      "path": ".linkedspec-data/scratch/selfcontain1330201/original-controls.log",
+      "sha256": "273ab196059bd6baeda00c2337d969046ca710bd30b89f5bf10d06a96fc7b0be"
+    },
+    {
+      "path": ".linkedspec-data/scratch/selfcontain1330201/startup32.log",
+      "sha256": "2b921323e645ba8b8227d00879ee034c32463355d545fc8db162366f504b5181"
+    }
+  ],
+  "next_action": "Canonical scope prerequisite closeout .1.3.3.0.2.0.2, then registered-function bridge .0.2.1; normalization still fails decorate; no complete neutral execution/admission or other backend claim.",
+  "observations": [
+    {
+      "artifact_sha256": "fc989d286a39bc555ee50c27a969cf8281dd541d73da30cf172dcab962d84622",
+      "emitted": {
+        "load_error": null,
+        "value": null
+      },
+      "expected_value": null,
+      "id": "function_unbound_callable",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1
+      },
+      "native": {
+        "error": null,
+        "value": null
+      },
+      "source": "fn inspect() { return(cb()) }\nTop:: I { cb={|| return(\"outer-callable\") }; return(inspect()) }\n\n",
+      "source_sha256": "20d8f605c8354d2fea40d549ab1e0aca488a945b4699f923045af3a326e8c3ee"
+    },
+    {
+      "artifact_sha256": "984a297894ccfe1da0e75a170a31be808395bad2394d019b7c1da5696cef847a",
+      "emitted": {
+        "carrier": {
+          "code": "generated_execution_failed",
+          "source_identity": "function_with_failure.spec",
+          "stage": "execute_generated"
+        },
+        "error": {
+          "class": "LinkedSpec::CodeblockRuntime::Error",
+          "code": "unknown_helper",
+          "kind": "codeblock_runtime_error",
+          "name": "missing_operation"
+        },
+        "load_error": null,
+        "value": null
+      },
+      "expected_error": {
+        "class": "LinkedSpec::CodeblockRuntime::Error",
+        "code": "unknown_helper",
+        "kind": "codeblock_runtime_error",
+        "name": "missing_operation"
+      },
+      "id": "function_with_failure",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": {
+          "class": "LinkedSpec::CodeblockRuntime::Error",
+          "code": "unknown_helper",
+          "kind": "codeblock_runtime_error",
+          "name": "missing_operation"
+        },
+        "value": null
+      },
+      "source": "fn apply(callback: codeblock) { value=\"function\"; return(with(\"shadow\",callback)) }\nTop:: I { value=\"outside\"; cb={|x| missing_operation() }; return(apply(cb)) }\n\n",
+      "source_sha256": "d0ce16e8b6ad915e0bb0a8027dacb59e78d5d0ae6455e882ab7eb5e97bc669f4"
+    },
+    {
+      "artifact_sha256": "cfd8442203a0e76bcab2f51820409d42a05de6c88c194cfc3f1056485e647354",
+      "emitted": {
+        "load_error": null,
+        "value": null
+      },
+      "expected_value": null,
+      "id": "function_external_read",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "value": null
+      },
+      "source": "fn apply(callback: codeblock) { return(callback()) }\nTop:: I { secret=\"outer\"; cb={|| return(secret) }; return(apply(cb)) }\n\n",
+      "source_sha256": "68b4ad68d0978ca9ef6167eb6802a3a0d4a3855db8e2e98676afba405d02f681"
+    },
+    {
+      "artifact_sha256": "88196fe1507db1ff4e34bf6c90e06d94a14b19ec398a8c8ef0bf478ee93a59d1",
+      "emitted": {
+        "load_error": null,
+        "value": null
+      },
+      "expected_value": null,
+      "id": "function_direct_read",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "value": null
+      },
+      "source": "fn inspect() { return(secret) }\nTop:: I { secret=\"outer\"; return(inspect()) }\n\n",
+      "source_sha256": "686a7982a8318dc6652640c680f977b9e996ea6f47c31c54fa89f53d8ceb8f60"
+    },
+    {
+      "artifact_sha256": "3121d51d2aa084a2191375121c00e6d2f0178f1c9a12c3861e1815cab660f6d6",
+      "emitted": {
+        "load_error": null,
+        "value": "local"
+      },
+      "expected_value": "local",
+      "id": "function_local_read",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "value": "local"
+      },
+      "source": "fn apply(callback: codeblock) { secret=\"local\"; return(callback()) }\nTop:: I { secret=\"outer\"; cb={|| return(secret) }; return(apply(cb)) }\n\n",
+      "source_sha256": "85fc08127483864ef5baec12ba579666ebb891861d2bb88c782401a78d199d86"
+    },
+    {
+      "artifact_sha256": "2c6fffe70981326796e16a2a5ace8fe9326cda4724545d8b60fe3bdc520f6206",
+      "emitted": {
+        "load_error": null,
+        "value": [
+          "inner",
+          "outer"
+        ]
+      },
+      "expected_value": [
+        "inner",
+        "outer"
+      ],
+      "id": "function_external_write",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "value": [
+          "inner",
+          "outer"
+        ]
+      },
+      "source": "fn apply(callback: codeblock) { return(callback()) }\nTop:: I { secret=\"outer\"; cb={|| secret=\"inner\"; return(secret) }; result=apply(cb); return([result,secret]) }\n\n",
+      "source_sha256": "a7362e77536fe67fff454b17feb6f31aef1fab7fe657e3deb41b88d2fcd1006e"
+    },
+    {
+      "artifact_sha256": "2c01d345fbaf95077616ccd44db0cece2191d38439b5e95d1907d1486a005120",
+      "emitted": {
+        "load_error": null,
+        "value": [
+          "inner",
+          "outer"
+        ]
+      },
+      "expected_value": [
+        "inner",
+        "outer"
+      ],
+      "id": "function_local_write",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "value": [
+          "inner",
+          "outer"
+        ]
+      },
+      "source": "fn apply(callback: codeblock) { secret=\"local\"; callback(); return(secret) }\nTop:: I { secret=\"outer\"; cb={|| secret=\"inner\"; return(secret) }; result=apply(cb); return([result,secret]) }\n\n",
+      "source_sha256": "c59909a27cfc06641d9e3ae8967deb8f522f35f8aae3d4fcc73b7e4e55c6aa23"
+    },
+    {
+      "artifact_sha256": "c86e9532f13371b07e81f5c1ce75795bd27e1c35bbea516127100bf965a8d7c8",
+      "emitted": {
+        "load_error": null,
+        "value": [
+          "argument",
+          "outer"
+        ]
+      },
+      "expected_value": [
+        "argument",
+        "outer"
+      ],
+      "id": "function_parameter_read",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "value": [
+          "argument",
+          "outer"
+        ]
+      },
+      "source": "fn apply(secret,callback: codeblock) { return(callback()) }\nTop:: I { secret=\"outer\"; cb={|| return(secret) }; result=apply(\"argument\",cb); return([result,secret]) }\n\n",
+      "source_sha256": "efb4795d9aedd78bc67283325228d500977db5cd7700997f3832c20950d2495e"
+    },
+    {
+      "artifact_sha256": "3d1f069e939bc28048f8b120975170e7a490bfe26bd06475ad60578eb7b55660",
+      "emitted": {
+        "load_error": null,
+        "value": [
+          "changed",
+          "outer"
+        ]
+      },
+      "expected_value": [
+        "changed",
+        "outer"
+      ],
+      "id": "function_parameter_write",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "value": [
+          "changed",
+          "outer"
+        ]
+      },
+      "source": "fn apply(secret,callback: codeblock) { callback(); return(secret) }\nTop:: I { secret=\"outer\"; cb={|| secret=\"changed\"; return(secret) }; result=apply(\"argument\",cb); return([result,secret]) }\n\n",
+      "source_sha256": "3bbbce287b7d1ffb951602723944dc4eb25caf06b1505c1e8c107f440d4d31d2"
+    },
+    {
+      "artifact_sha256": "43f48ee52394998d4e166ece7b1c91cb2ca5e9a4615646031f2e2d8d0a80a189",
+      "emitted": {
+        "actual_function_frame_proof": "four actual frames; alias control rejected",
+        "load_error": null,
+        "value": [
+          [
+            [
+              "a"
+            ],
+            [
+              "a",
+              "b"
+            ]
+          ],
+          [
+            [
+              "a"
+            ],
+            [
+              "a",
+              "b"
+            ]
+          ],
+          [
+            "outside"
+          ]
+        ]
+      },
+      "expected_value": [
+        [
+          [
+            "a"
+          ],
+          [
+            "a",
+            "b"
+          ]
+        ],
+        [
+          [
+            "a"
+          ],
+          [
+            "a",
+            "b"
+          ]
+        ],
+        [
+          "outside"
+        ]
+      ],
+      "id": "function_unknown_persistence_reset",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "value": [
+          [
+            [
+              "a"
+            ],
+            [
+              "a",
+              "b"
+            ]
+          ],
+          [
+            [
+              "a"
+            ],
+            [
+              "a",
+              "b"
+            ]
+          ],
+          [
+            "outside"
+          ]
+        ]
+      },
+      "source": "fn apply(callback: codeblock) { first=callback(\"a\"); second=callback(\"b\"); return([first,second]) }\nTop:: I { items=[\"outside\"]; cb={|x| return(push(items,x)) }; first=apply(cb); second=apply(cb); return([first,second,items]) }\n\n",
+      "source_sha256": "683870e6a7ab0b799b9ebc6d59132f9c0fe1fef7f94403f4b4e79a32e36fcc13"
+    },
+    {
+      "artifact_sha256": "534b1e624c8eb1489e64e151d5799efeda0b276dbb6e3c3a2f49adc86ca4fe29",
+      "emitted": {
+        "load_error": null,
+        "value": [
+          [
+            [
+              "local",
+              "a"
+            ],
+            [
+              "local",
+              "a",
+              "b"
+            ],
+            [
+              "local",
+              "a",
+              "b"
+            ]
+          ],
+          [
+            "outside"
+          ]
+        ]
+      },
+      "expected_value": [
+        [
+          [
+            "local",
+            "a"
+          ],
+          [
+            "local",
+            "a",
+            "b"
+          ],
+          [
+            "local",
+            "a",
+            "b"
+          ]
+        ],
+        [
+          "outside"
+        ]
+      ],
+      "id": "function_known_persistence",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "value": [
+          [
+            [
+              "local",
+              "a"
+            ],
+            [
+              "local",
+              "a",
+              "b"
+            ],
+            [
+              "local",
+              "a",
+              "b"
+            ]
+          ],
+          [
+            "outside"
+          ]
+        ]
+      },
+      "source": "fn apply(callback: codeblock) { items=[\"local\"]; first=callback(\"a\"); second=callback(\"b\"); return([first,second,items]) }\nTop:: I { items=[\"outside\"]; cb={|x| return(push(items,x)) }; result=apply(cb); return([result,items]) }\n\n",
+      "source_sha256": "bb482733db0eb7ccecffc0f4514753a6702d79e4d2ac7edbb887558b4f0b0a60"
+    },
+    {
+      "artifact_sha256": "d5313ed7837aa80a72fff6590117ef7ceb4917546f10bc47c29c3f13343c1173",
+      "emitted": {
+        "load_error": null,
+        "value": "local"
+      },
+      "expected_value": "local",
+      "id": "function_nested_callback",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "value": "local"
+      },
+      "source": "fn apply(callback,inner: codeblock) { secret=\"local\"; return(callback()) }\nTop:: I { secret=\"outer\"; inner={|| return(secret) }; cb={|| return(inner()) }; return(apply(cb,inner)) }\n\n",
+      "source_sha256": "08766354458760ab5d116a5816c3fd90b923712fbbe51bf118eda5a0f779f4f3"
+    },
+    {
+      "artifact_sha256": "9512b93a48f494780d6df9f965bbba93479b3c416fbc6529ec387b6351645840",
+      "emitted": {
+        "load_error": null,
+        "value": [
+          [
+            [
+              "outer"
+            ],
+            [
+              "inner"
+            ],
+            [
+              "outer",
+              "after"
+            ]
+          ],
+          [
+            "outside"
+          ]
+        ]
+      },
+      "expected_value": [
+        [
+          [
+            "outer"
+          ],
+          [
+            "inner"
+          ],
+          [
+            "outer",
+            "after"
+          ]
+        ],
+        [
+          "outside"
+        ]
+      ],
+      "id": "function_nested_frames",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "value": [
+          [
+            [
+              "outer"
+            ],
+            [
+              "inner"
+            ],
+            [
+              "outer",
+              "after"
+            ]
+          ],
+          [
+            "outside"
+          ]
+        ]
+      },
+      "source": "fn inner(callback: codeblock) { return(callback(\"inner\")) }\nfn outer(callback: codeblock) { first=callback(\"outer\"); middle=inner(callback); last=callback(\"after\"); return([first,middle,last]) }\nTop:: I { items=[\"outside\"]; cb={|x| return(push(items,x)) }; result=outer(cb); return([result,items]) }\n\n",
+      "source_sha256": "a4f756b859b92161174e0f88981751ab8a7f29cdc72e4256ae80ee7d20e4f0fe"
+    },
+    {
+      "artifact_sha256": "3712ade4853a0450e3a53b73cb44c9e3122a9e2ea550aa3311e0a2c0c0e5a513",
+      "emitted": {
+        "load_error": null,
+        "value": [
+          [
+            [
+              [
+                "a"
+              ],
+              "a"
+            ],
+            [
+              [
+                "a",
+                "b"
+              ],
+              "b"
+            ],
+            "function"
+          ],
+          [
+            "outside"
+          ],
+          "outside"
+        ]
+      },
+      "expected_value": [
+        [
+          [
+            [
+              "a"
+            ],
+            "a"
+          ],
+          [
+            [
+              "a",
+              "b"
+            ],
+            "b"
+          ],
+          "function"
+        ],
+        [
+          "outside"
+        ],
+        "outside"
+      ],
+      "id": "function_with_persistence_shadow",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "value": [
+          [
+            [
+              [
+                "a"
+              ],
+              "a"
+            ],
+            [
+              [
+                "a",
+                "b"
+              ],
+              "b"
+            ],
+            "function"
+          ],
+          [
+            "outside"
+          ],
+          "outside"
+        ]
+      },
+      "source": "fn apply(callback: codeblock) { value=\"function\"; first=with(\"a\",callback); second=with(\"b\",callback); return([first,second,value]) }\nTop:: I { items=[\"outside\"]; value=\"outside\"; cb={|x| push(items,x); return([items,value]) }; result=apply(cb); return([result,items,value]) }\n\n",
+      "source_sha256": "4c13d903f1d1abf51e02646c3af02b718a603341eacf9a1a6b8932c6cac0dc35"
+    },
+    {
+      "artifact_sha256": "4ce40343938c45df08be2ff9aa695c3879b2b3211daa23d88669d7b63ed27508",
+      "emitted": {
+        "load_error": null,
+        "value": [
+          [
+            "changed",
+            "function"
+          ],
+          "outside"
+        ]
+      },
+      "expected_value": [
+        [
+          "changed",
+          "function"
+        ],
+        "outside"
+      ],
+      "id": "function_callback_parameter_restore",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "value": [
+          [
+            "changed",
+            "function"
+          ],
+          "outside"
+        ]
+      },
+      "source": "fn apply(callback: codeblock) { item=\"function\"; first=callback(\"temporary\"); return([first,item]) }\nTop:: I { item=\"outside\"; cb={|item| item=\"changed\"; return(item) }; result=apply(cb); return([result,item]) }\n\n",
+      "source_sha256": "dde81638181b0328d061ef027208bc01b33e15035ccc414c22abeb49a4dd15a8"
+    },
+    {
+      "artifact_sha256": "193fad33ea9e4f140b31f5a0cb28a54260478fd1fa4b3e482196bd19cbdf4c12",
+      "emitted": {
+        "load_error": null,
+        "value": [
+          "user",
+          "user"
+        ]
+      },
+      "expected_value": [
+        "user",
+        "user"
+      ],
+      "id": "function_private_name_collision",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "value": [
+          "user",
+          "user"
+        ]
+      },
+      "source": "fn apply(callback: codeblock) { __ls_user_fn_codeblock_bindings=\"user\"; return([callback(),__ls_user_fn_codeblock_bindings]) }\nTop:: I { __ls_user_fn_codeblock_bindings=\"outside\"; cb={|| return(__ls_user_fn_codeblock_bindings) }; return(apply(cb)) }\n\n",
+      "source_sha256": "ec171a770babc3b807e32faf0ad520127c15d6432f431e01407d07b7f152b6c5"
+    },
+    {
+      "artifact_sha256": "a373cb2c840cff58a8bf472b4e2f7854f087ebea08e95b74cc1028786841054f",
+      "emitted": {
+        "load_error": null,
+        "value": [
+          "x"
+        ]
+      },
+      "expected_value": [
+        "x"
+      ],
+      "id": "selected_push",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "value": [
+          "x"
+        ]
+      },
+      "source": "Top:: I { seen=[]; cb={|| push(seen,\"x\"); return(seen) }; return(cb()) }\n\n",
+      "source_sha256": "2b975cf0374068106455b662baa00e76e0e484cdf320eee3b291326b21b36bb6"
+    },
+    {
+      "artifact_sha256": "5dafb6958e3a23865260a300a33ad9b2879275ae65339e7f30fc90a3d34fbd88",
+      "emitted": {
+        "load_error": null,
+        "value": [
+          [
+            "x"
+          ],
+          [
+            "x"
+          ]
+        ]
+      },
+      "expected_value": [
+        [
+          "x"
+        ],
+        [
+          "x"
+        ]
+      ],
+      "id": "absent_target",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "value": [
+          [
+            "x"
+          ],
+          [
+            "x"
+          ]
+        ]
+      },
+      "source": "Top:: I { cb={|| return(push(items,\"x\")) }; first=cb(); return([first,items]) }\n\n",
+      "source_sha256": "d7a4bcdf407ada46c7a065ee3ee583c633e9e221b41386407a3a353bb8f585ea"
+    },
+    {
+      "artifact_sha256": "f5afac8c83dac6ead54b75d63293c05edbb4f6b7d07aacd19bf0d7abff3d73e3",
+      "emitted": {
+        "load_error": null,
+        "value": [
+          "x"
+        ]
+      },
+      "expected_value": [
+        "x"
+      ],
+      "id": "null_target",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "value": [
+          "x"
+        ]
+      },
+      "source": "Top:: I { items=undef; cb={|| return(push(items,\"x\")) }; return(cb()) }\n\n",
+      "source_sha256": "72d580c422532178a2d69d70671328ae660ae84eda5e59bbc363135b1f087c90"
+    },
+    {
+      "artifact_sha256": "6af6391b94e78e20ddaa3b38aa6d3b2e903ac5279ccf35f80d752eae18172e91",
+      "emitted": {
+        "load_error": null,
+        "value": [
+          [
+            "x"
+          ],
+          [
+            "rhs"
+          ]
+        ]
+      },
+      "expected_value": [
+        [
+          "x"
+        ],
+        [
+          "rhs"
+        ]
+      ],
+      "id": "argument_once",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "value": [
+          [
+            "x"
+          ],
+          [
+            "rhs"
+          ]
+        ]
+      },
+      "source": "Top:: I { items=[]; effects=[]; cb={|| push(items,{ push(effects,\"rhs\"); return(\"x\") }); return([items,effects]) }; return(cb()) }\n\n",
+      "source_sha256": "b0a54b647e66604fba2c2cc2c33d9f2bb27f96c8c52ceb1a5f0f8aa7d89631ac"
+    },
+    {
+      "artifact_sha256": "6628934a45e604063257ffa152d4bfd84eff22ea9a09a6ab76f0f5dcddd960d1",
+      "emitted": {
+        "load_error": null,
+        "value": [
+          "during",
+          "last"
+        ]
+      },
+      "expected_value": [
+        "during",
+        "last"
+      ],
+      "id": "post_argument_snapshot",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "value": [
+          "during",
+          "last"
+        ]
+      },
+      "source": "Top:: I { items=[\"before\"]; cb={|| push(items,{ items=[\"during\"]; return(\"last\") }); return(items) }; return(cb()) }\n\n",
+      "source_sha256": "83f0cd2cf0b1feb2cce371baa8150de6893c9a25fe21b7a1dc80436a8b0b9dde"
+    },
+    {
+      "artifact_sha256": "5246cfba203227c5300ecf1ee97ccab1e408c1f8ef1106e9d98f190db6409ff5",
+      "emitted": {
+        "load_error": null,
+        "value": [
+          [
+            "a"
+          ],
+          [
+            "a",
+            "b"
+          ],
+          [
+            "a",
+            "b"
+          ]
+        ]
+      },
+      "expected_value": [
+        [
+          "a"
+        ],
+        [
+          "a",
+          "b"
+        ],
+        [
+          "a",
+          "b"
+        ]
+      ],
+      "id": "prior_result",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "value": [
+          [
+            "a"
+          ],
+          [
+            "a",
+            "b"
+          ],
+          [
+            "a",
+            "b"
+          ]
+        ]
+      },
+      "source": "Top:: I { items=[]; cb={|x| return(push(items,x)) }; first=cb(\"a\"); second=cb(\"b\"); return([first,second,items]) }\n\n",
+      "source_sha256": "beae35ec98a208e14a0a7d5d0e2f61a9ade3eb6c9d1d4dec976ccc53c316f5b5"
+    },
+    {
+      "artifact_sha256": "b1b2bb935d1a27354686434b9a234a4d0139fd3b60826d97178f9e52f6820a37",
+      "emitted": {
+        "load_error": null,
+        "value": [
+          [
+            "seed",
+            "inside"
+          ],
+          [
+            "seed"
+          ],
+          [
+            "outside"
+          ]
+        ]
+      },
+      "expected_value": [
+        [
+          "seed",
+          "inside"
+        ],
+        [
+          "seed"
+        ],
+        [
+          "outside"
+        ]
+      ],
+      "id": "copied_parameter",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "value": [
+          [
+            "seed",
+            "inside"
+          ],
+          [
+            "seed"
+          ],
+          [
+            "outside"
+          ]
+        ]
+      },
+      "source": "Top:: I { items=[\"outside\"]; arg=[\"seed\"]; cb={|items| return(push(items,\"inside\")) }; result=cb(arg); return([result,arg,items]) }\n\n",
+      "source_sha256": "2357bed4890bf5665404eb16078d732d90f01d9f93153985d3a24ee8bdcb1297"
+    },
+    {
+      "artifact_sha256": "0d7ba13904231ebd42bfcc3591ac6ddbdb6822525c25c3f07587cf463c2a6102",
+      "emitted": {
+        "load_error": null,
+        "value": [
+          [
+            [
+              "seed",
+              "inner"
+            ],
+            [
+              "seed",
+              "outer"
+            ]
+          ],
+          [
+            "outside"
+          ]
+        ]
+      },
+      "expected_value": [
+        [
+          [
+            "seed",
+            "inner"
+          ],
+          [
+            "seed",
+            "outer"
+          ]
+        ],
+        [
+          "outside"
+        ]
+      ],
+      "id": "nested_parameters",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "value": [
+          [
+            [
+              "seed",
+              "inner"
+            ],
+            [
+              "seed",
+              "outer"
+            ]
+          ],
+          [
+            "outside"
+          ]
+        ]
+      },
+      "source": "Top:: I { items=[\"outside\"]; before=undef; inner={|items| return(push(items,\"inner\")) }; outer={|items| before=inner(items); push(items,\"outer\"); return([before,items]) }; result=outer([\"seed\"]); return([result,items]) }\n\n",
+      "source_sha256": "f681c87e4aff52ac19aa119e49a4d0e71cd0caf193403fec1871b23800359dae"
+    },
+    {
+      "artifact_sha256": "9619574413d819c284153c51eded349b61284e2bb94e29b10735f06a21896e41",
+      "emitted": {
+        "load_error": null,
+        "value": [
+          [],
+          [
+            "rule"
+          ]
+        ]
+      },
+      "expected_value": [
+        [],
+        [
+          "rule"
+        ]
+      ],
+      "id": "rule_precedence",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "value": [
+          [],
+          [
+            "rule"
+          ]
+        ]
+      },
+      "source": "Top:: I { seen=[]; outputs=[]; cb={|| push(seen,outputs); return([seen,outputs]) }; return(cb()) }\nseen: I { return(\"rule\") }\n",
+      "source_sha256": "95fd236708db2669893f00aad7a7256ca9ad7f156838dd1873b4d2a43220ad02"
+    },
+    {
+      "artifact_sha256": "e154881a3c95223b108f0244aecf5c120f41cb985c25521d107aea5beefe53f6",
+      "emitted": {
+        "load_error": null,
+        "value": [
+          "rule"
+        ]
+      },
+      "expected_value": [
+        "rule"
+      ],
+      "id": "nested_rule_context",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "value": [
+          "rule"
+        ]
+      },
+      "source": "Top:: I { seen=[]; outputs=[]; inner={|| push(seen,outputs); return(outputs) }; outer={|| return(inner()) }; return(outer()) }\nseen: I { return(\"rule\") }\n",
+      "source_sha256": "aed64b523ba52d2b1adae0cab6b9388df36632a0b195c3361121b1478b7722c8"
+    },
+    {
+      "artifact_sha256": "d6edad27773645b50d0c77714c2dccbcd634487136d9fe78bc0d3e18caef6634",
+      "emitted": {
+        "load_error": null,
+        "value": [
+          "x"
+        ]
+      },
+      "expected_value": [
+        "x"
+      ],
+      "id": "with_context",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "value": [
+          "x"
+        ]
+      },
+      "source": "Top:: I { seen=[]; cb={|x| return(push(seen,x)) }; return(with(\"x\",cb)) }\n\n",
+      "source_sha256": "3c796db225fcb003296ce1971eba22e76f2e3623b41238caba735f2a06db5250"
+    },
+    {
+      "artifact_sha256": "f5efb3a57f30b89e7c1a468721c7d1ae6a86dab70b19936fddeb08792592fa62",
+      "emitted": {
+        "load_error": null,
+        "value": [
+          "x"
+        ]
+      },
+      "expected_value": [
+        "x"
+      ],
+      "id": "helper_precedence",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "value": [
+          "x"
+        ]
+      },
+      "source": "Top:: I { seen=[]; push={|| return(\"wrong\") }; cb={|| return(push(seen,\"x\")) }; return(cb()) }\n\n",
+      "source_sha256": "9ba8981e745767a522f328b0d69574f5945b4885a9bc601d787c5a917c55e486"
+    },
+    {
+      "artifact_sha256": "7f7068b4dbe35d37cd5b0ecb08c96ca181e5362f51314bf9b12a2315a3df980e",
+      "emitted": {
+        "load_error": null,
+        "value": [
+          [
+            "OK"
+          ],
+          [
+            "OK"
+          ]
+        ]
+      },
+      "expected_value": [
+        [
+          "OK"
+        ],
+        [
+          "OK"
+        ]
+      ],
+      "id": "parameter_receiver_shadow",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "value": [
+          [
+            "OK"
+          ],
+          [
+            "OK"
+          ]
+        ]
+      },
+      "source": "Top:: I { tree=[\"original\"]; cb={|tree| push(tree,\"local\"); return(\"OK\") }; result=tree.map_leaves!() { return(cb([\"arg\"])) }; return([result,tree]) }\n\n",
+      "source_sha256": "67699ce46a01e56d168acd98b7f4bb46bb4cf514b550a06870e6530638c06424"
+    },
+    {
+      "artifact_sha256": "297f3d087307e65ab88d7b852405fb677f80c09a4433bcd9b265212ac5f3b5b9",
+      "emitted": {
+        "carrier": {
+          "code": "generated_execution_failed",
+          "source_identity": "wrong_kind.spec",
+          "stage": "execute_generated"
+        },
+        "error": {
+          "text": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n"
+        },
+        "load_error": null,
+        "value": null
+      },
+      "expected_error": "(?^:binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar)",
+      "id": "wrong_kind",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": {
+          "text": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n"
+        },
+        "value": null
+      },
+      "source": "Top:: I { items=\"wrong\"; cb={|| push(items,\"x\") }; return(cb()) }\n\n",
+      "source_sha256": "3b719056b1f70ab14afa3b0b3fc37ef982a703da9509143c04e576a920285a70"
+    },
+    {
+      "artifact_sha256": "60915ccb8468ac1d3a206516376824140b60382bf4c251f9de4b206862ad6fec",
+      "emitted": {
+        "carrier": {
+          "code": "generated_execution_failed",
+          "source_identity": "unknown_call.spec",
+          "stage": "execute_generated"
+        },
+        "error": {
+          "class": "LinkedSpec::CodeblockRuntime::Error",
+          "code": "unknown_helper",
+          "kind": "codeblock_runtime_error",
+          "name": "missing_operation"
+        },
+        "load_error": null,
+        "value": null
+      },
+      "expected_error": {
+        "class": "LinkedSpec::CodeblockRuntime::Error",
+        "code": "unknown_helper",
+        "kind": "codeblock_runtime_error",
+        "name": "missing_operation"
+      },
+      "id": "unknown_call",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": {
+          "class": "LinkedSpec::CodeblockRuntime::Error",
+          "code": "unknown_helper",
+          "kind": "codeblock_runtime_error",
+          "name": "missing_operation"
+        },
+        "value": null
+      },
+      "source": "Top:: I { cb={|| missing_operation(\"x\") }; return(cb()) }\n\n",
+      "source_sha256": "4ddd539ff16f5a2b1fde343e6740f997fbfdd3625c35972d9734b77a298e93ab"
+    },
+    {
+      "artifact_sha256": "c4cf0f57c883787ef48daad67fa7022fcaaabcd832ca94d06868546b644d9b96",
+      "emitted": {
+        "carrier": {
+          "code": "generated_execution_failed",
+          "source_identity": "arity_before_effects.spec",
+          "stage": "execute_generated"
+        },
+        "error": {
+          "actual_arity": 3,
+          "arguments_evaluated": 0,
+          "class": "LinkedSpec::CodeblockRuntime::Error",
+          "code": "helper_arity_mismatch",
+          "expected_arity": "exactly 2",
+          "helper_name": "push",
+          "kind": "codeblock_runtime_error"
+        },
+        "load_error": null,
+        "value": null
+      },
+      "expected_error": {
+        "actual_arity": 3,
+        "arguments_evaluated": 0,
+        "class": "LinkedSpec::CodeblockRuntime::Error",
+        "code": "helper_arity_mismatch",
+        "expected_arity": "exactly 2",
+        "helper_name": "push",
+        "kind": "codeblock_runtime_error"
+      },
+      "id": "arity_before_effects",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": {
+          "actual_arity": 3,
+          "arguments_evaluated": 0,
+          "class": "LinkedSpec::CodeblockRuntime::Error",
+          "code": "helper_arity_mismatch",
+          "expected_arity": "exactly 2",
+          "helper_name": "push",
+          "kind": "codeblock_runtime_error"
+        },
+        "value": null
+      },
+      "source": "Top:: I { items=[]; effects=[]; cb={|| push(items,{ push(effects,\"bad\"); return(\"x\") },\"extra\") }; return(cb()) }\n\n",
+      "source_sha256": "27bdc40222249a2a1f170879e2e3b8cd1f4ad4a7921b37a875c18b2420de8453"
+    },
+    {
+      "artifact_sha256": "3e62160090c179705408f5911a8a4639f1206f1b30ecec29e9c24795e7140f16",
+      "emitted": {
+        "carrier": {
+          "code": "generated_execution_failed",
+          "source_identity": "active_receiver.spec",
+          "stage": "execute_generated"
+        },
+        "error": {
+          "attempt": "push",
+          "binding": "tree",
+          "class": "LinkedSpec::BindingRuntime::ReceiverMutationError",
+          "code": "receiver_mutation_reentrant",
+          "message": "cannot write active map_leaves! receiver binding 'tree' from its callback",
+          "method": "map_leaves",
+          "operation": "map_leaves_mutation",
+          "source_span": {
+            "end": 20,
+            "start": 4
+          }
+        },
+        "load_error": null,
+        "value": null
+      },
+      "expected_error": "receiver_mutation_reentrant",
+      "id": "active_receiver",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": {
+          "attempt": "push",
+          "binding": "tree",
+          "class": "LinkedSpec::BindingRuntime::ReceiverMutationError",
+          "code": "receiver_mutation_reentrant",
+          "message": "cannot write active map_leaves! receiver binding 'tree' from its callback",
+          "method": "map_leaves",
+          "operation": "map_leaves_mutation",
+          "source_span": {
+            "end": 20,
+            "start": 4
+          }
+        },
+        "value": null
+      },
+      "source": "Top:: I { tree=[\"original\"]; cb={|| push(tree,\"bad\"); return(\"OK\") }; return(tree.map_leaves!() { return(cb()) }) }\n\n",
+      "source_sha256": "ff9a8bdd04b561c58f801b2b6cad7953ef52a44bbc4897e0ee52885274bf5492"
+    },
+    {
+      "artifact_sha256": "9df14622ae7bad30baa7d21004f8121c87a4f514e5651e29ce2fbaf568f50b82",
+      "emitted": {
+        "load_error": null,
+        "value": null
+      },
+      "expected_value": null,
+      "id": "book_function_read",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "value": null
+      },
+      "source": "fn apply(callback: codeblock) { return(callback()) }\nTop:: I {\n  secret = \"outer\"\n  cb = {|| return(secret) }\n  return(apply(cb))\n}",
+      "source_sha256": "cffadfba20ee326bc6991d727f028d916ca49a2acbf3d21c53ee1dac6cb9fe25"
+    },
+    {
+      "artifact_sha256": "2ebd352bae7f24008f2668aabc201f918140d78302b5d56bd3e87b61aab5b46a",
+      "emitted": {
+        "load_error": null,
+        "value": [
+          [
+            [
+              "a"
+            ],
+            [
+              "a",
+              "b"
+            ]
+          ],
+          [
+            [
+              "a"
+            ],
+            [
+              "a",
+              "b"
+            ]
+          ],
+          [
+            "outside"
+          ]
+        ]
+      },
+      "expected_value": [
+        [
+          [
+            "a"
+          ],
+          [
+            "a",
+            "b"
+          ]
+        ],
+        [
+          [
+            "a"
+          ],
+          [
+            "a",
+            "b"
+          ]
+        ],
+        [
+          "outside"
+        ]
+      ],
+      "id": "book_function_persistence",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "value": [
+          [
+            [
+              "a"
+            ],
+            [
+              "a",
+              "b"
+            ]
+          ],
+          [
+            [
+              "a"
+            ],
+            [
+              "a",
+              "b"
+            ]
+          ],
+          [
+            "outside"
+          ]
+        ]
+      },
+      "source": "fn collect(callback: codeblock) {\n  first = callback(\"a\")\n  second = callback(\"b\")\n  return([first, second])\n}\nTop:: I {\n  items = [\"outside\"]\n  append = {|text| return(push(items, text)) }\n  first = collect(append)\n  second = collect(append)\n  return([first, second, items])\n}",
+      "source_sha256": "99090fa298ce774c13664435eb17c008dd0c861586ecdb52132fa60d4f13d99e"
+    }
+  ],
+  "owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.0.1",
+  "preliminary_checks": [
+    {
+      "result": "selected current compiler; positive test is not RED proof; corrected by explicit baseline preload",
+      "surface": "baseline include-path override"
+    },
+    {
+      "result": "two same-line function definitions caused incidental invalid source; corrected to separate definitions before complete controls",
+      "surface": "first new control source"
+    },
+    {
+      "result": "correctly rejected active latest-completed leaf; rerun after honest completion",
+      "surface": "prospective memory before required Phase0 closure"
+    },
+    {
+      "result": "rejected two changed verification owners because future closeout fields were declared early; retain its plan in prose and declare exact fields at activation",
+      "surface": "first commit hook cadence"
+    }
+  ],
+  "producer_sources": [
+    {
+      "path": ".linkedspec-data/scratch/selfcontain1330201/observe.pl",
+      "sha256": "ded9e59126d46d0245a69e125831db7b8af812f18385455be9a99e12dd7f4ee1"
+    },
+    {
+      "path": ".linkedspec-data/scratch/selfcontain1330201/observation-child.pl",
+      "sha256": "83ec887569f04fefa6d433cac9ce1c14471343f837d2378b10aa12a497d19281"
+    },
+    {
+      "path": ".linkedspec-data/scratch/selfcontain1330201/final-regression-source.t",
+      "sha256": "3a20062853625bd7f1b7a5102d0148b4efe4f7dfad6eb33f2a61b19e33371d03"
+    },
+    {
+      "path": ".linkedspec-data/scratch/selfcontain1330201/baseline-source-identities.json",
+      "sha256": "18d2a42f048b04ee7ae8e27c18913d1457ac66a175cc2d68f106cffae0c4c154"
+    },
+    {
+      "path": ".linkedspec-data/scratch/selfcontain1330201/baseline-perl/LinkedSpec/ActionIR/MethodLowering.pm",
+      "sha256": "d5720b43443f21a8c0992f6d77a74c4a6a32ecc8f0647a1f16b6b76f9044718d"
+    }
+  ],
+  "proof": {
+    "direct_dependents": {
+      "exit": 0,
+      "suites": 4,
+      "tests": 96
+    },
+    "exact_book_examples": 2,
+    "fresh_child_actual_frame_identity_and_alias_control": true,
+    "native_and_fresh_emitted_regression_sources": 33,
+    "native_function_frame_slot_assertions": 17,
+    "native_push_identity_assertions": 23,
+    "phase0": {
+      "exit": 0,
+      "seconds": 1134,
+      "tests": 1033
+    },
+    "rendered_claims": 7,
+    "top_level_tests": 279,
+    "unbound_callable_diagnostic_assertions": 4
+  },
+  "reconciliation": {
+    "fresh_child_actual_identity_proof": "four actual frames; alias control rejected",
+    "limits": [
+      "No public schema/admission/runtime record/CI/storage change.",
+      "Scope repaired; complete neutral execution and registered-function bridge remain pending."
+    ],
+    "native_fresh_emitted_value_error_agreement": true,
+    "normalization": [
+      {
+        "events": [],
+        "failure": null,
+        "failure_detail": null,
+        "last_error": {
+          "detail": {
+            "code": "unknown_helper",
+            "kind": "codeblock_runtime_error",
+            "name": "decorate",
+            "observed_class": "LinkedSpec::CodeblockRuntime::Error"
+          },
+          "handler_source_label": "LinkedSpec::generated_handler:Top:_default",
+          "handler_variant": "_default",
+          "owner_stage": "runtime_handler:rule_handler_eval",
+          "rule_label": "Top",
+          "spec_name": "",
+          "spec_path": "",
+          "stage": "rule_handler_eval",
+          "summary": "Rule handler execution failed",
+          "top_rule": "Top",
+          "type": "runtime_handler"
+        },
+        "result": null,
+        "sink_identity_preserved": null
+      },
+      {
+        "canonical_action_ir_count": 28,
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      }
+    ],
+    "observed_sources": 35,
+    "original_controls": {
+      "failure": "decorate",
+      "successes": 6
+    },
+    "original_seventeen_case_rows_exact": true,
+    "red": {
+      "baseline_before_child_identity_addition": "18 failed / 278 completed",
+      "final_baseline": "native scope failures plus fresh-child actual identity failure; incomplete TAP expected; exit2"
+    },
+    "regression_sources": 33,
+    "rendered_claims": [
+      "Pure-function callback scope on Perl",
+      "This returns null on Perl native Get and fresh emitted execution.",
+      "That slot persists across callbacks within one invocation",
+      "The combined regression now executes33 exact native/fresh emitted sources and279 top-level tests",
+      "Plain callable records retain eight fields with no closure or stored environment.",
+      "existing argument/local-name shadowing remains separately owned by startup32.",
+      "full normalization execution remains pending."
+    ],
+    "roadmap_headers_agree": 3,
+    "startup32_still_reproduces": {
+      "error": null,
+      "source": "fn f(value) { temp=\"inner\"; return(value) } Top:: I { temp=\"outer\"; return(f(temp)) }",
+      "value": null
+    },
+    "unbound_callable_metadata": {
+      "canonical_action_ir_fallback_count": 0,
+      "language_agnostic_action_ir_ready": 0,
+      "raw_perl_dependency_count": 0,
+      "unresolved_helper_count": 1
+    },
+    "unchanged": [
+      {
+        "path": "capability_conformance/callable_codeblock_contract.json",
+        "sha256": "1651e42e0e24e2476dcaffa1f4bd63888bddaa3a845ddaf329be7392c0bfe67e"
+      },
+      {
+        "path": "capability_conformance/callable_signature_contract.json",
+        "sha256": "d01a63252648259dadab5f2f565ae7c93e860c055f2a156178f605c4b0c53ca7"
+      },
+      {
+        "path": "capability_conformance/complete_named_mark_contract.json",
+        "sha256": "d7a661b9ef2b5ed33ee922882379450be98c564d9b40f3b3d0885ab569b34cdb"
+      },
+      {
+        "path": "capability_conformance/composed_objective_contract.json",
+        "sha256": "52b76d5b3e48fdf64f25e93b22553eabfa765fc224c101f0f5fbdd8a6abf6e01"
+      },
+      {
+        "path": "capability_conformance/diagnostic_output_contract.json",
+        "sha256": "b3499e13fcd30647395acbe7cf5c86ddcef9d86fde412d8770cdd616831f1e68"
+      },
+      {
+        "path": "capability_conformance/duplicate_regex_slot_identity_contract.json",
+        "sha256": "766941d14ee339a0b2300c6fa7495dabb61d609bb653cf094f4a3929e4b6f223"
+      },
+      {
+        "path": "capability_conformance/fixtures/capability_capture_anonymous_surface.spec",
+        "sha256": "22b52d8899f2891f8807afbe1c477556c686bb2f6fcedb8f1513628b4e9441d0"
+      },
+      {
+        "path": "capability_conformance/fixtures/capability_capture_named_surface.spec",
+        "sha256": "ae3588eae6e6052d0d3257b82552d31cdc982d1c637081c0aaa764ac969758ef"
+      },
+      {
+        "path": "capability_conformance/fixtures/capability_control_marker_surface.spec",
+        "sha256": "355a9d0bd7b962bfa0782693978f0d29c46b58847c49cde7418a8d05927bb92d"
+      },
+      {
+        "path": "capability_conformance/fixtures/capability_cursor_control_surface.spec",
+        "sha256": "ed723182b9ced1461b0c76e6d0a63355d059a2e9f1802e7f1d9f0b275bcd8380"
+      },
+      {
+        "path": "capability_conformance/fixtures/capability_position_helper_surface.spec",
+        "sha256": "a47d1d7994ce799205f6ea11a154bafcae4330ba911b07c7e664a795fe1a5d81"
+      },
+      {
+        "path": "capability_conformance/fixtures/capability_pure_helper_surface.spec",
+        "sha256": "0217a35a04029e3ec4e782f0f93c53e09331bfd7b7f84b9389148669f689e1bb"
+      },
+      {
+        "path": "capability_conformance/generated_source/fixtures/default_action_result_trace_identity/expected.json",
+        "sha256": "24a279376551117f31ed9d92797023d0f89b376a6392801c7d6626e4cb7877e5"
+      },
+      {
+        "path": "capability_conformance/generated_source/fixtures/default_action_result_trace_identity/input.spec",
+        "sha256": "709c141f2b7df1cc51e157f328d9e266bd9254f150ed66f6891eddc29ec2d18a"
+      },
+      {
+        "path": "capability_conformance/generated_source/fixtures/default_action_result_trace_identity/input.txt",
+        "sha256": "073f345000eeb6aaceee4e502ac2f9cc27b38c6be3e922ea4b4de58b3d74cea2"
+      },
+      {
+        "path": "capability_conformance/generated_source_contract.json",
+        "sha256": "7571dbbd92427b31053d620c101a887b2f097719bad24772af9e62fc3f79e8bb"
+      },
+      {
+        "path": "capability_conformance/inter_match_gap_capture_contract.json",
+        "sha256": "f5901338a6dac92a56b7dd4089fd7b865f210571089fe6311e83f98c85e4dfdf"
+      },
+      {
+        "path": "capability_conformance/language_closure_contract.json",
+        "sha256": "7a42f660d0927731c50a7093499a507a5fd60616d6655ba0b8de51ca19ccc5dc"
+      },
+      {
+        "path": "capability_conformance/logical_helper_contract.json",
+        "sha256": "00da921b93f2d7ed86e6080bcac7065c1102e64895ffe9eac23ae80b6e89f2d7"
+      },
+      {
+        "path": "capability_conformance/manifest.json",
+        "sha256": "c132591047215448cc48fe65b89d927b6f851655941b0d6ef5c84495bf94b539"
+      },
+      {
+        "path": "capability_conformance/map_leaves_mutation_contract.json",
+        "sha256": "ae88d4167f31c0e8034f02ae68c73cf3a6c721503c86f54a02e9b1a50f37f4b0"
+      },
+      {
+        "path": "capability_conformance/mcp_implementation_admission.json",
+        "sha256": "9c6d524783808202339ca022e08d87210272b2135395564e8cf822eb42e9b4ca"
+      },
+      {
+        "path": "capability_conformance/mcp_semantic_transport/canonical_frames.jsonl",
+        "sha256": "618ad136855240e2da72880ba6b23ed865aee56c9019cc6d9900958d88676477"
+      },
+      {
+        "path": "capability_conformance/mcp_semantic_transport/corpus.json",
+        "sha256": "345a069c48b27bf2038fa13a30a81d3552ac97c90b4e06c7b29b0bb726479401"
+      },
+      {
+        "path": "capability_conformance/mcp_semantic_transport/schema.json",
+        "sha256": "d974cdec591077d55c31ec48e1d16d3c5c4a4fd349e74392de8d918064326fab"
+      },
+      {
+        "path": "capability_conformance/mcp_semantic_transport/semantic_payloads.json",
+        "sha256": "d942fe3264c2510a722a76d8897713ded74ec179c01a9017c104f63981be3504"
+      },
+      {
+        "path": "capability_conformance/mcp_semantic_transport/validator_cases.json",
+        "sha256": "c1f7040b4f18853a4b2257f36e0e047ac10149a1fe5168f051d407d32392faaa"
+      },
+      {
+        "path": "capability_conformance/mcp_semantic_transport_contract.json",
+        "sha256": "e068519994a7d4fb8e4c8ece0e277a470f48204d4c670f915ba49052a52630b3"
+      },
+      {
+        "path": "capability_conformance/native_spec_resolution_contract.json",
+        "sha256": "755d075ecd70ccf13aabe309a3b5bad74231f2b2d0f163fe674eea7178cc8edb"
+      },
+      {
+        "path": "capability_conformance/outward_descriptor_contract.json",
+        "sha256": "6595fb490348c6e3401d668c72aa80222c2ecffacc5f95a137a82d774bd2565c"
+      },
+      {
+        "path": "capability_conformance/progressive_span_dispatch_contract.json",
+        "sha256": "3bc07c7968f8667d330c2c8b2f47d1f574750ab0699106385fdf8c3a852b5913"
+      },
+      {
+        "path": "capability_conformance/punctuation_light_zero_arg_contract.json",
+        "sha256": "b86ba199eb360fe78f8fa6a94baf4ff6d6757f9b1fe8a8f0e081c9c9bd754e92"
+      },
+      {
+        "path": "capability_conformance/recognition_transaction_contract.json",
+        "sha256": "62aa94082df8d58c116fbe053bcae4d711d0e6ea7eb32fb427b8a4be574e072f"
+      },
+      {
+        "path": "capability_conformance/repeated_action_result/explicit_or_distinct.expected.json",
+        "sha256": "a5f931eaeffc87713594e4ab10c0d9c1a19c5754cc47514bcb9737706680128e"
+      },
+      {
+        "path": "capability_conformance/repeated_action_result/explicit_or_distinct.input",
+        "sha256": "a63d8014dba891345b30174df2b2a57efbb65b4f9f09b98f245d1b3192277ece"
+      },
+      {
+        "path": "capability_conformance/repeated_action_result/explicit_or_distinct.spec",
+        "sha256": "8dec8cfda7ca7266674a1a8da3c47611fbd34affef6e3a2044b0fa48468fe1d6"
+      },
+      {
+        "path": "capability_conformance/repeated_action_result_contract.json",
+        "sha256": "fa0d59871d7910c63b8ff91e5e2875e0f1e87de9499aa0eb376c5e7593d3857f"
+      },
+      {
+        "path": "capability_conformance/root_rule_selection_contract.json",
+        "sha256": "4bc09c317301db51fffaf78cb6eb5d53d5cb85cb5ed144d6fb75076d8d7784d9"
+      },
+      {
+        "path": "capability_conformance/rule_local_cursor_contract.json",
+        "sha256": "ebd41c46111ebebcb77cd8509bb41e6def0e74b3edfb990c1430773327426b66"
+      },
+      {
+        "path": "capability_conformance/scalar_numeric_contract.json",
+        "sha256": "eac6dfca63c0078b78408d6eb93fd5239f8d44b93eb05cc7c0920e2ce888e5ce"
+      },
+      {
+        "path": "capability_conformance/scalar_text_contract.json",
+        "sha256": "7b749a6ba9e4f7b27fe34cf887b28c51a19384502be915f3620d77f2a175afa2"
+      },
+      {
+        "path": "capability_conformance/semantic_introspection/calls_and_staging.spec",
+        "sha256": "c44202083afb6c9c496ed44f8fbccd52adbeb21ca2ddff6648aa40f60056c3fd"
+      },
+      {
+        "path": "capability_conformance/semantic_introspection/failed.spec",
+        "sha256": "c92b3383ee76254a355d6044cbc952c4aa364891ef9a9e803e53a43dc8b25916"
+      },
+      {
+        "path": "capability_conformance/semantic_introspection/graph.spec",
+        "sha256": "28505ba8524900f55e11452988acc6b7d35dccbccc1c0cb6194c8cda80a0cbcf"
+      },
+      {
+        "path": "capability_conformance/semantic_introspection/privacy.spec",
+        "sha256": "8fe5f40cc6e9f5ce438a605f4965e04a78c34f392e13761e66d042730469f8de"
+      },
+      {
+        "path": "capability_conformance/semantic_introspection/runtime.input",
+        "sha256": "a63d8014dba891345b30174df2b2a57efbb65b4f9f09b98f245d1b3192277ece"
+      },
+      {
+        "path": "capability_conformance/semantic_introspection/runtime.spec",
+        "sha256": "e224b813a4a3c79bef65b33c8ac5c1eaeb75e231da5ec3844233b4a8d796351a"
+      },
+      {
+        "path": "capability_conformance/semantic_introspection_contract.json",
+        "sha256": "fe705d53d306d1013dc3eb111ae9f559bdd9d32b2d812ad903a772917d5b1fda"
+      },
+      {
+        "path": "capability_conformance/semantic_introspection_model.json",
+        "sha256": "9c69853b6a2194c2b2a3184f1fe863df46eafe7b31c4e280329fec7094dfbd30"
+      },
+      {
+        "path": "capability_conformance/staged_ast_enrichment_contract.json",
+        "sha256": "578cd031fed01bb8d968a2b536e0d67430317c617a8296edb6c1beb5031bd882"
+      },
+      {
+        "path": "capability_conformance/standalone_lifecycle_block_contract.json",
+        "sha256": "850b89ac59a61b0a544cc5c2286cb262346027b7e4c7abbb31fbf0ad17e08108"
+      },
+      {
+        "path": "capability_conformance/typed_source_location_contract.json",
+        "sha256": "4f657eec1b6e0332d9eff6656d9868ad2b5b1fa13f9fddd15d1ba6dac7cb2978"
+      },
+      {
+        "path": "capability_conformance/unicode_case_contract.json",
+        "sha256": "3f2825750aad3ec8e2671906cb5692137661cac89a4031c2f03480cd1de044a0"
+      },
+      {
+        "path": "capability_conformance/unicode_rule_label_contract.json",
+        "sha256": "30ed6f64cf9515d350ef26a1e591b1df46e253cbd83952d9fa9ba4674c5f494b"
+      },
+      {
+        "path": "capability_conformance/uniform_binding_contract.json",
+        "sha256": "14961ba1dd96ff2d0c2c2e4ba609fcf945ab321b1a8de6ca2458476c5107d5ec"
+      },
+      {
+        "path": "capability_conformance/write_map_leaves_composition_contract.json",
+        "sha256": "4be81636f11c3968d036c1653dcd37ca565971a35deba1d17ea8154892ff8ab5"
+      },
+      {
+        "path": "capability_conformance/write_vivification_contract.json",
+        "sha256": "c6332b7154e557a414121a0f6d49f1fa09ccefd1913f7dd56c7ee95de32adfc2"
+      },
+      {
+        "path": "tests/language-readiness/composed/diagnostic-invalid-arity.spec",
+        "sha256": "bd474ebe5e927111b46163b217da66e3d75802f264558800b3bfeebd14ad773a"
+      },
+      {
+        "path": "tests/language-readiness/composed/diagnostic.spec",
+        "sha256": "fba66e47d14b1a236deb1136ec2c515fa629f8a1d8dce36812431ebe8bc62fc0"
+      },
+      {
+        "path": "tests/language-readiness/composed/normalization.spec",
+        "sha256": "ba9953c282e5e66956dc4b7d22c2acc7b1e879734654e7cb467ad41275cc4249"
+      },
+      {
+        "path": "tests/language-readiness/context-names/grammar.spec",
+        "sha256": "8f408e81e2871b3b76c1a7fc7f99e059dad1c19dd03e91449a05fc9b88fff4b0"
+      },
+      {
+        "path": "tests/language-readiness/lossless-child/child.spec",
+        "sha256": "34c5f109d401f83fa600a225682599fe924957fdbf45ad2136f55450248badd9"
+      },
+      {
+        "path": "tests/language-readiness/lossless-child/parent.spec",
+        "sha256": "8b19299a5d3715cba7f44dac266954e8b34497920a308f956f6e35b286ae6435"
+      },
+      {
+        "path": "tests/language-readiness/lossless-segments/grammar.spec",
+        "sha256": "8f20d242b0f2ea0eee1d70b6f289cf96362cdf3b64ef4cbcc77f5631ffe3eb36"
+      },
+      {
+        "path": "tests/language-readiness/nested-tree/grammar.spec",
+        "sha256": "498ffda35b05222388c64d99b0acb132a56996e97de3ffa9312f7dda6ee0ed72"
+      },
+      {
+        "path": "perl/LinkedSpec/CodeblockRuntime.pm",
+        "sha256": "1b70bc46f250916d7b3048c915d137925e8f03d1a03dfef6b4d8793a634c0e0c"
+      },
+      {
+        "path": "tools/run_ci_local.sh",
+        "sha256": "48367a37c47085cab92c1b9d35edd3b958a4537b78ec61bf3854dd0d35642f6b"
+      },
+      {
+        "path": "tools/test_perl_project_data_storage.sh",
+        "sha256": "97449395da3fa5e5eda30ca5d5b55c52997f112495c9b4feaa15303352f2c03b"
+      },
+      {
+        "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.1-selection.json",
+        "sha256": "b9e54e21dff39b08a098ea882a513d507730e0cdd7e4d6199c6374f8dbc30fe7"
+      },
+      {
+        "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.2-verification.json",
+        "sha256": "f4a1e2e3d9fa13c4cdda3171635411df530d2791105ce87234a620fb010485cd"
+      },
+      {
+        "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.1-verification.json",
+        "sha256": "b0f72a108bf1b0900cee4fd78947ac0ec275a34adc8dd1d97b49e3aa6fe0ea78"
+      },
+      {
+        "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.0.0-diagnosis.json",
+        "sha256": "e8f5f8d3962bdf6a616b1d7522e3cc7438f4e77714118b044ff7db13ac4f8be6"
+      }
+    ]
+  },
+  "red": {
+    "baseline_before_child_identity_addition": "18 failed / 278 completed",
+    "final_baseline": "native scope failures plus fresh-child actual identity failure; incomplete TAP expected; exit2"
+  },
+  "sources": [
+    {
+      "path": "perl/LinkedSpec/ActionIR/MethodLowering.pm",
+      "sha256": "6b47b793702d3f2bf4400ed41c494adbce4a320ddad9a1be898c873a60f501e2"
+    },
+    {
+      "path": "perl/LinkedSpec/CodeblockRuntime.pm",
+      "sha256": "1b70bc46f250916d7b3048c915d137925e8f03d1a03dfef6b4d8793a634c0e0c"
+    },
+    {
+      "path": "t/codeblock_push_composition_perl.t",
+      "sha256": "3a20062853625bd7f1b7a5102d0148b4efe4f7dfad6eb33f2a61b19e33371d03"
+    },
+    {
+      "path": "docs/tasks/SPEC-LANGUAGE-SELF-CONTAINMENT.md",
+      "sha256": "a35e1a343123006a755639b32228c1d063ccabcd94d2ae9508161d38e10d32da"
+    },
+    {
+      "path": "docs/linkedspec-book/src/architecture/structured-format-program.md",
+      "sha256": "e3b9b2e1058a2890b348cb187e04e9b1be10d8e60f788d7765fa6a14abe5884c"
+    },
+    {
+      "path": "docs/knowledge/perl-function-codeblock-caller-scope-leak.md",
+      "sha256": "b12ba024c4f3299b3d5d06fa956d8b8bba2933772ed4252c33d26685cd34687b"
+    },
+    {
+      "path": "MEMORY.md",
+      "sha256": "efb77ab2c93548b3ec2f5db8d7f1ced9a834cc2e046bcfce70e546b6b308c8c4"
+    },
+    {
+      "path": "tools/run_ci_local.sh",
+      "sha256": "48367a37c47085cab92c1b9d35edd3b958a4537b78ec61bf3854dd0d35642f6b"
+    },
+    {
+      "path": "tools/test_perl_project_data_storage.sh",
+      "sha256": "97449395da3fa5e5eda30ca5d5b55c52997f112495c9b4feaa15303352f2c03b"
+    }
+  ],
+  "verification_tier": "focused"
+}

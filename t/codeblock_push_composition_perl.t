@@ -30,6 +30,23 @@ sub error_projection {
 }
 
 my @cases = (
+ {id=>'function_unbound_callable', functions=>'fn inspect() { return(cb()) }', body=>'cb={|| return("outer-callable") }; return(inspect())', expected=>undef, metadata=>{language_agnostic_action_ir_ready=>0,canonical_action_ir_fallback_count=>0,raw_perl_dependency_count=>0,unresolved_helper_count=>1}},
+ {id=>'function_with_failure', functions=>'fn apply(callback: codeblock) { value="function"; return(with("shadow",callback)) }', body=>'value="outside"; cb={|x| missing_operation() }; return(apply(cb))', error=>{class=>'LinkedSpec::CodeblockRuntime::Error',kind=>'codeblock_runtime_error',code=>'unknown_helper',name=>'missing_operation'}},
+ {id=>'function_external_read', functions=>'fn apply(callback: codeblock) { return(callback()) }', body=>'secret="outer"; cb={|| return(secret) }; return(apply(cb))', expected=>undef},
+ {id=>'function_direct_read', functions=>'fn inspect() { return(secret) }', body=>'secret="outer"; return(inspect())', expected=>undef},
+ {id=>'function_local_read', functions=>'fn apply(callback: codeblock) { secret="local"; return(callback()) }', body=>'secret="outer"; cb={|| return(secret) }; return(apply(cb))', expected=>'local'},
+ {id=>'function_external_write', functions=>'fn apply(callback: codeblock) { return(callback()) }', body=>'secret="outer"; cb={|| secret="inner"; return(secret) }; result=apply(cb); return([result,secret])', expected=>['inner','outer']},
+ {id=>'function_local_write', functions=>'fn apply(callback: codeblock) { secret="local"; callback(); return(secret) }', body=>'secret="outer"; cb={|| secret="inner"; return(secret) }; result=apply(cb); return([result,secret])', expected=>['inner','outer']},
+ {id=>'function_parameter_read', functions=>'fn apply(secret,callback: codeblock) { return(callback()) }', body=>'secret="outer"; cb={|| return(secret) }; result=apply("argument",cb); return([result,secret])', expected=>['argument','outer']},
+ {id=>'function_parameter_write', functions=>'fn apply(secret,callback: codeblock) { callback(); return(secret) }', body=>'secret="outer"; cb={|| secret="changed"; return(secret) }; result=apply("argument",cb); return([result,secret])', expected=>['changed','outer']},
+ {id=>'function_unknown_persistence_reset', functions=>'fn apply(callback: codeblock) { first=callback("a"); second=callback("b"); return([first,second]) }', body=>'items=["outside"]; cb={|x| return(push(items,x)) }; first=apply(cb); second=apply(cb); return([first,second,items])', expected=>[[['a'],['a','b']],[['a'],['a','b']],['outside']]},
+ {id=>'function_known_persistence', functions=>'fn apply(callback: codeblock) { items=["local"]; first=callback("a"); second=callback("b"); return([first,second,items]) }', body=>'items=["outside"]; cb={|x| return(push(items,x)) }; result=apply(cb); return([result,items])', expected=>[[['local','a'],['local','a','b'],['local','a','b']],['outside']]},
+ {id=>'function_nested_callback', functions=>'fn apply(callback,inner: codeblock) { secret="local"; return(callback()) }', body=>'secret="outer"; inner={|| return(secret) }; cb={|| return(inner()) }; return(apply(cb,inner))', expected=>'local'},
+ {id=>'function_nested_frames', functions=>'fn inner(callback: codeblock) { return(callback("inner")) }
+fn outer(callback: codeblock) { first=callback("outer"); middle=inner(callback); last=callback("after"); return([first,middle,last]) }', body=>'items=["outside"]; cb={|x| return(push(items,x)) }; result=outer(cb); return([result,items])', expected=>[[['outer'],['inner'],['outer','after']],['outside']]},
+ {id=>'function_with_persistence_shadow', functions=>'fn apply(callback: codeblock) { value="function"; first=with("a",callback); second=with("b",callback); return([first,second,value]) }', body=>'items=["outside"]; value="outside"; cb={|x| push(items,x); return([items,value]) }; result=apply(cb); return([result,items,value])', expected=>[[[['a'],'a'],[['a','b'],'b'],'function'],['outside'],'outside']},
+ {id=>'function_callback_parameter_restore', functions=>'fn apply(callback: codeblock) { item="function"; first=callback("temporary"); return([first,item]) }', body=>'item="outside"; cb={|item| item="changed"; return(item) }; result=apply(cb); return([result,item])', expected=>[['changed','function'],'outside']},
+ {id=>'function_private_name_collision', functions=>'fn apply(callback: codeblock) { __ls_user_fn_codeblock_bindings="user"; return([callback(),__ls_user_fn_codeblock_bindings]) }', body=>'__ls_user_fn_codeblock_bindings="outside"; cb={|| return(__ls_user_fn_codeblock_bindings) }; return(apply(cb))', expected=>['user','user']},
  {id=>'selected_push', body=>'seen=[]; cb={|| push(seen,"x"); return(seen) }; return(cb())', expected=>['x']},
  {id=>'absent_target', body=>'cb={|| return(push(items,"x")) }; first=cb(); return([first,items])', expected=>[['x'],['x']]},
  {id=>'null_target', body=>'items=undef; cb={|| return(push(items,"x")) }; return(cb())', expected=>['x']},
@@ -73,18 +90,22 @@ sub assert_case {
    is_deeply($row->{error}, $case->{error}, "$case->{id} $route retains exact typed failure");
   }
  }
+ if ($route eq 'emitted' && $case->{id} eq 'function_unknown_persistence_reset') {
+  is($row->{actual_function_frame_proof}, 'four actual frames; alias control rejected',
+   'fresh child checks real shared/fresh working-slot identities and rejects an alias');
+ }
 }
 
 my @requests;
 for my $case (@cases) {
- my $source = 'Top:: I { '.$case->{body}." }\n".($case->{rules} // '')."\n";
+ my $source = ($case->{functions} ? $case->{functions}."\n" : '').'Top:: I { '.$case->{body}." }\n".($case->{rules} // '')."\n";
  my %ctx;
  my $descriptor = LinkedSpec::Get(\$source, return_descriptor => 1);
  my $meta = $descriptor->{spec}{Top}{meta}{action_rewriter};
  is_deeply({map {$_=>$meta->{$_} // 0}
   qw(language_agnostic_action_ir_ready canonical_action_ir_fallback_count raw_perl_dependency_count unresolved_helper_count)},
-  {language_agnostic_action_ir_ready=>1,canonical_action_ir_fallback_count=>0,raw_perl_dependency_count=>0,unresolved_helper_count=>0},
-  "$case->{id} is admitted without raw/fallback/unresolved source");
+  $case->{metadata} // {language_agnostic_action_ir_ready=>1,canonical_action_ir_fallback_count=>0,raw_perl_dependency_count=>0,unresolved_helper_count=>0},
+  "$case->{id} has exact readiness/fallback/unresolved metadata");
  my $parser = LinkedSpec::Get(\$source, runtime_ctx_ref => \%ctx);
  my $row = {load_error => ref($parser) eq 'CODE' ? undef : error_projection($ctx{last_error})};
  if (ref($parser) eq 'CODE') {
@@ -106,7 +127,8 @@ for my $case (@cases) {
 my $runner = File::Spec->catfile($scratch, 'emitted_runner.pl');
 open my $runner_fh, '>', $runner or die $!;
 print {$runner_fh} <<'RUNNER';
-use strict; use warnings; use JSON::PP (); use Scalar::Util qw(reftype);
+use strict; use warnings; use JSON::PP (); use Scalar::Util qw(reftype refaddr);
+use LinkedSpec::CodeblockRuntime ();
 my ($output, @sources) = @ARGV; my @rows;
 for my $index (0 .. $#sources) {
  open my $fh, '<', $sources[$index] or die $!;
@@ -116,7 +138,17 @@ for my $index (0 .. $#sources) {
  my $row = {load_error => $loaded ? undef : "$@"};
  if ($loaded) {
   my $input = 'x';
-  $row->{value} = eval { no strict 'refs'; &{"${package}::Execute"}(\$input) };
+  my @frames;
+  my $check_frames = $sources[$index] =~ m{/function_unknown_persistence_reset\.pl\z};
+  my $invoke = \&LinkedSpec::CodeblockRuntime::invoke;
+  $row->{value} = eval {
+   no strict 'refs'; no warnings 'redefine';
+   local *LinkedSpec::CodeblockRuntime::invoke = sub {
+    push @frames, $_[2] if $check_frames;
+    return $invoke->(@_)
+   };
+   &{"${package}::Execute"}(\$input)
+  };
   my $error = $@;
   if (ref($error) || length($error)) {
    if ((reftype($error) // '') eq 'HASH' && ($error->{type} // '') eq 'generated_source_error') {
@@ -124,6 +156,19 @@ for my $index (0 .. $#sources) {
    }
    while ((reftype($error) // '') eq 'HASH' && ($error->{type} // '') eq 'generated_source_error') { $error = $error->{detail} }
    $row->{error} = (reftype($error) // '') eq 'HASH' ? {class=>ref($error), %$error} : {text=>"$error"};
+  }
+  if ($check_frames) {
+   my $valid = sub {
+    my ($maps) = @_;
+    return @$maps == 4
+     && refaddr($maps->[0]) == refaddr($maps->[1])
+     && refaddr($maps->[2]) == refaddr($maps->[3])
+     && refaddr($maps->[0]) != refaddr($maps->[2])
+     && refaddr($maps->[0]{items}) != refaddr($maps->[2]{items});
+   };
+   die 'actual emitted function frame identity failure' unless $valid->(\@frames);
+   die 'aliased emitted frame control accepted' if $valid->([$frames[0],$frames[0],$frames[0],$frames[0]]);
+   $row->{actual_function_frame_proof} = 'four actual frames; alias control rejected';
   }
  }
  push @rows, $row;
@@ -139,7 +184,7 @@ is(system($^X, '-I'.File::Spec->catdir($root, 'perl'), $runner, $output, @reques
 open my $output_fh, '<', $output or die $!;
 my $rows = $json->decode(do { local $/; <$output_fh> });
 close $output_fh or die $!;
-is(scalar(@$rows), scalar(@cases), 'fresh child returns all seventeen cases');
+is(scalar(@$rows), scalar(@cases), 'fresh child returns every push and function-scope case');
 assert_case($rows->[$_], $cases[$_], 'emitted') for 0 .. $#cases;
 
 subtest 'actual caller identities, copy-on-write and failure restoration' => sub {
@@ -197,6 +242,72 @@ subtest 'actual caller identities, copy-on-write and failure restoration' => sub
  ok(!$ok, 'aliased active receiver control actually fails');
  is(ref($@), 'LinkedSpec::BindingRuntime::ReceiverMutationError', 'guard uses scalar identity across alias names');
  is_deeply($tree, ['original'], 'failed traversal preserves actual caller receiver');
+};
+
+subtest 'function callbacks use actual fresh working frames' => sub {
+ my $source = <<'SPEC';
+fn apply(secret,callback: codeblock) {
+ first=callback("a"); second=callback("b"); return([first,second,secret])
+}
+Top:: I {
+ items=["outside"]; secret="outside";
+ cb={|x| secret=cat(secret,x); return(push(items,x)) };
+ first=apply("seed",cb); second=apply("seed",cb); return([first,second,secret,items])
+}
+SPEC
+ my @frames; my @secret_refs; my @records;
+ my $original = \&LinkedSpec::CodeblockRuntime::invoke;
+ {
+  no warnings 'redefine';
+  local *LinkedSpec::CodeblockRuntime::invoke = sub {
+   push @frames, $_[2]; push @secret_refs, $_[2]{secret}; push @records, $_[0];
+   return $original->(@_)
+  };
+  my %ctx;
+  my $parser = LinkedSpec::Get(\$source, runtime_ctx_ref=>\%ctx);
+  ok(ref($parser) eq 'CODE', 'actual-frame source compiles');
+  my $input='x'; my $value=$parser->(\$input);
+  is($ctx{last_error}, undef, 'actual-frame source succeeds');
+  is_deeply($value, [[['a'],['a','b'],'seedab'],[['a'],['a','b'],'seedab'],'outside',['outside']],
+   'direct function reads observe callback writes; outer slots remain untouched');
+ }
+ is(scalar(@frames),4,'four real invocation maps observed without copying');
+ is(refaddr($frames[0]),refaddr($frames[1]),'callbacks in first function share the actual working frame');
+ is(refaddr($frames[2]),refaddr($frames[3]),'callbacks in second function share the actual working frame');
+ my $separate = sub { refaddr($_[0][0]) != refaddr($_[0][2]) };
+ ok($separate->(\@frames),'different function invocations have different actual frame identities');
+ ok(!$separate->([$frames[0],$frames[0],$frames[0],$frames[0]]),
+  'deliberately aliased frames fail the same identity observation');
+ is(refaddr($secret_refs[0]),refaddr($secret_refs[1]),'function parameter reference remains live across callbacks');
+ isnt(refaddr($secret_refs[0]),refaddr($secret_refs[2]),'fresh invocation has a different actual parameter slot');
+ is(${$secret_refs[0]},'seedab','retained actual first parameter slot reflects callback writes');
+ is(${$secret_refs[2]},'seedab','retained actual second parameter slot reflects callback writes');
+ is_deeply([map {scalar(keys %$_)} @records],[8,8,8,8],'actual records retain eight fields without frame storage');
+ isnt(refaddr($frames[0]{items}),refaddr($frames[2]{items}),
+  'callback-created aggregate slots are independent across invocations');
+
+ my $failed_source='fn apply(callback: codeblock) { value="function"; return(with("shadow",callback)) }' .
+  ' Top:: I { value="outside"; cb={|x| missing_operation() }; return(apply(cb)) }';
+ my $failed_frame;
+ {
+  no warnings 'redefine';
+  local *LinkedSpec::CodeblockRuntime::invoke = sub { $failed_frame=$_[2]; return $original->(@_) };
+  my %ctx; my $parser=LinkedSpec::Get(\$failed_source,runtime_ctx_ref=>\%ctx);my $input='x';
+  my $value=$parser->(\$input);
+  is($value,undef,'with failure publishes no result');
+  is($ctx{last_error}{detail}{code},'unknown_helper','original typed callback failure survives');
+ }
+ is(${$failed_frame->{value}},'function','with restores the actual function value reference after failure');
+};
+
+subtest 'functions cannot borrow rule callable names' => sub {
+ my $source='fn inspect() { return(cb()) } Top:: I { cb={|| return("outer-callable") }; return(inspect()) }';
+ my $descriptor=LinkedSpec::Get(\$source,return_descriptor=>1);
+ ok(ref($descriptor) eq 'HASH','unbound callable keeps diagnostic descriptor route');
+ my $meta=$descriptor->{spec}{Top}{meta}{action_rewriter};
+ is($meta->{raw_perl_dependency_count}//0,0,'unbound function callable has no raw fallback');
+ is($meta->{language_agnostic_action_ir_ready},0,'unbound callable is not claimed ready');
+ is_deeply($meta->{unresolved_helpers},['cb'],'unbound callable uses existing unsupported helper diagnostic');
 };
 
 done_testing;

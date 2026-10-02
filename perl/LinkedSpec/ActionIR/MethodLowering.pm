@@ -1440,6 +1440,9 @@ sub _contextual_codeblock_runtime_record {
 sub _codeblock_variable_call_candidate {
  my ($deps, $name) = @_;
  return 0 unless defined($name) && $name =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
+ my $function_names = ref($deps) eq 'HASH' ? $deps->{__user_function_scalar_value_names} : undef;
+ # A pure function cannot borrow callable names from its rule caller.
+ return $function_names->{$name} ? 1 : 0 if ref($function_names) eq 'HASH';
  my $parameter_kinds = ref($deps) eq 'HASH' ? $deps->{__user_function_parameter_kinds} : undef;
  return 1 if ref($parameter_kinds) eq 'HASH' && ($parameter_kinds->{$name} // '') eq 'codeblock';
  return 0 unless ref($deps) eq 'HASH' && ref($deps->{bare_symbol_kind}) eq 'CODE';
@@ -1448,6 +1451,8 @@ sub _codeblock_variable_call_candidate {
 
 sub _codeblock_runtime_binding_expr {
  my ($deps, $required_name) = @_;
+ return $deps->{__user_function_codeblock_binding_frame}
+  if ref($deps) eq 'HASH' && defined($deps->{__user_function_codeblock_binding_frame});
  my %names;
  if (ref($deps) eq 'HASH' && ref($deps->{bare_symbol_names}) eq 'ARRAY') {
   foreach my $name (@{$deps->{bare_symbol_names}}) {
@@ -3294,8 +3299,16 @@ my $lower_numeric_array_reducer_source_expr = sub {
    $scalar_value_names{$1} = 1 if defined($decl) && $decl =~ /\Amy \$([A-Za-z_][A-Za-z0-9_]*);/o;
   }
   $body_deps->{__user_function_scalar_value_names} = \%scalar_value_names;
-  $body_deps->{__user_function_parameter_kinds} = { %{$definition->{parameter_kinds}} }
-   if ref($definition->{parameter_kinds}) eq 'HASH';
+  $body_deps->{__user_function_parameter_kinds} = ref($definition->{parameter_kinds}) eq 'HASH'
+   ? { %{$definition->{parameter_kinds}} } : {};
+  # One map per function invocation keeps callback-created working slots live,
+  # while known slots refer to the actual function locals and parameters.
+  # Replace any enclosing function's frame before lowering this body.
+  delete $body_deps->{__user_function_codeblock_binding_frame};
+  my $frame_name = '__ls_user_fn_codeblock_bindings';
+  $frame_name .= '_' while $scalar_value_names{$frame_name};
+  my $frame_initializer = _codeblock_runtime_binding_expr($body_deps, undef);
+  $body_deps->{__user_function_codeblock_binding_frame} = '$'.$frame_name;
   my @lowered = @$local_decl_statements;
   for (my $idx = 0; $idx < @lowered_args; ++$idx) {
    push @lowered, 'my $__ls_user_fn_arg_'.$idx.' = '.$lowered_args[$idx].';';
@@ -3307,6 +3320,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
    my @rest_args = map { '$__ls_user_fn_arg_'.$_ } @$params .. $#lowered_args;
    push @lowered, 'my $'.$rest_param.' = ['.join(', ', @rest_args).'];';
   }
+  push @lowered, 'my $'.$frame_name.' = '.$frame_initializer.';';
 
   unless (@$statements) {
    push @lowered, 'undef';
@@ -3969,7 +3983,10 @@ my $lower_numeric_array_reducer_source_expr = sub {
   my $invoke_args = $block_kind ne 'codeblock_argument' && @$args == 2
    ? '[$__ls_with_value]' : '[]';
   my $bindings = _codeblock_runtime_binding_expr($deps, 'value');
+  my $shadow_value = ref($deps) eq 'HASH' && defined($deps->{__user_function_codeblock_binding_frame})
+   ? 'local '.$bindings.'->{"value"} = \\$value; ' : '';
   return 'do { my $__ls_with_value = '.$value_expr.'; my $value = $__ls_with_value; '
+   .$shadow_value
    .'require LinkedSpec::CodeblockRuntime; LinkedSpec::CodeblockRuntime::invoke('
    .$record_expr.', '.$invoke_args.', '.$bindings.', "with", undef, '
    ._codeblock_runtime_invocation_expr().') }'

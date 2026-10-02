@@ -2,17 +2,19 @@
 
 ## Current Activity
 
-P1 fresh function callback scope repair .1.3.3.0.2.0.1 before registered-function bridge .0.2.1. Neutral execution and backend lanes retain their prerequisites.
+Canonical callback scope prerequisite closeout .1.3.3.0.2.0.2 after the focused repair; then registered-function bridge .0.2.1. Neutral execution/backend lanes retain prerequisites.
 
 ## Latest Completed Slice
 
-- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.0.0 - diagnose pure-function callback scope leak` — Three exact native/fresh emitted controls and generated binding inventory establish outer capture; direct/local controls agree. P1 repair is owned; runtime/authorities/fixtures remain unchanged.
+- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.0.1 - repair pure-function callback scope` —33 native/fresh emitted sources/279 top-level tests, actual function frame/slot identity and failure restoration. Runtime records/public authorities/CI unchanged; existing startup32 remains.
 
 ## Next Action
 
-- Activate .0.2.0.1 from clean HEAD; inspect scope write/persistence/nested cases with Toolbox, select exact paths/tier and repair invocation-local frames before bridge .0.2.1.
+- Activate .0.2.0.2 from clean HEAD; independently recompose committed scope proof and exact staged canonical acceptance, close .0.2.0 and proceed to registered-function bridge .0.2.1.
 
 ## Recent Completions
+
+- `2026-10-02` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.0.1` repairs callback scope with fresh working maps and function-owned callable lookup.
 
 - `2026-10-02` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.0.0` freezes the P1 function callback scope leak and schedules the repair.
 
@@ -43,8 +45,6 @@ P1 fresh function callback scope repair .1.3.3.0.2.0.1 before registered-functio
 - `2026-09-28` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.4` verifies five lossless/child routes on each Lua ABI.
 
 - `2026-09-28` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.3` verifies Julia lossless/child routes with an actual-result alias control.
-
-- `2026-09-28` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.2` verifies Dart lossless/actual-child carriers and detached outcome records.
 
 ## History
 

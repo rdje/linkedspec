@@ -1,11 +1,11 @@
 # MEMORY
 
-- activation_commit: `eedf599c0d1b176f14e5f5856db9a2a7f20e193b` — clean activation base for callback scope diagnosis.
-- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.0.0 - diagnose pure-function callback scope leak`.
-- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.0.1` (pending) — P1 fresh function callback working-frame repair.
-- next_action: Activate .0.2.0.1 from clean HEAD; choose exact code/test paths and tier, probe read/write/local/parameter/persistence/reset/nested cases, then repair the function binding frame before registered-function bridge .0.2.1.
-- in_flight_uncommitted: none after focused diagnosis landing; three native/fresh emitted controls agree outer/local/null. Checkpoint owns P1 repair; normalization still fails decorate and neutral runtime lanes remain pending.
-- blockers: No access/decision blocker. Scope repair precedes the bridge; startup19/32/35/87 remain distinct. Source detail remains startup37.2-owned, broad teaching41.2-owned; policies startup5/29 and downstream acceptance ARCHOGEN-owned.
+- activation_commit: `e7401b3cbec6e7cf6d5071f90cee4d08a58f4450` — clean activation base for callback scope repair.
+- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.0.1 - repair pure-function callback scope`.
+- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.0.2` (pending) — canonical callback scope prerequisite closeout.
+- next_action: Activate .0.2.0.2 from clean HEAD; independently reconcile committed scope/native-emitted/actual-frame proof, run exact staged canonical CI and close .0.2.0 before registered-function bridge .0.2.1.
+- in_flight_uncommitted: none after focused repair landing;33 sources/279 tests,23 push/17 native frame/four diagnostic nested checks plus fresh-child actual-frame proof and96 direct-dependent tests. Required Phase0 result belongs to this commit/checkpoint.
+- blockers: No access/decision blocker. Canonical scope closeout precedes bridge; normalization still fails decorate. Startup19/32/35/87 remain separate; source detail37.2, broad teaching41.2, policy5/29 and ARCHOGEN acceptance retain owners.
   Wrapper startup .7 remains open; recovery/purge stay prohibited. No interrupted Phase0 run counts as proof.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
   active table; the task metadata doctrine inventories all consumers, permits arbitrary frontier-row rewrites,

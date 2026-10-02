@@ -241,7 +241,7 @@ without changing the detached mapped result or original. Its independent expecte
 This normalization is selected and blocked on Perl. Deferred push now works through the bounded repair
 below; the next call, registered `decorate`, still rejects with typed `unknown_helper`. Source readiness reports
 zero raw fallback and unresolved helpers, which describes recognized source rather than complete
-callback execution coverage. Registered-function repair `.1.3.3.0.2` and closeout precede its Perl execution lane. The existing
+callback execution coverage. Registered-function bridge `.1.3.3.0.2.1` and closeout precede its Perl execution lane. The existing
 regex/numeric callback repairs and every other partial prerequisite remain owned separately.
 The complete requirements and mutation/oracle plan are in
 `docs/language-readiness/composed-objective-selection.md`; no new primitive or syntax is selected.
@@ -268,7 +268,7 @@ A private producer report preserves native failure evidence and compile/runtime 
 observations. Serialized flags cannot establish native error classification, identity or actual-object
 detachment by themselves. Backend lanes must execute public producers, mutate the actual returned objects,
 and reject deliberately aliased controls. They must pass a healthy baseline before semantic mutants count.
-The default checker executes no DSL and changes no runtime admission. P1 registered-function repair .1.3.3.0.2 is next;
+The default checker executes no DSL and changes no runtime admission. P1 registered-function bridge .1.3.3.0.2.1 is next;
 the selected normalization remains blocked. `docs/language-readiness/composed-objective-governance.md`
 records the oracle and evidence boundary. Whole formats and unassessed requirements remain pending.
 
@@ -310,10 +310,10 @@ caller-function-shadowing, boolean-kind and regex/numeric callback repairs remai
 bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/codeblock_push_composition_perl.t
 ```
 
-### Pure-function callback scope: verified Perl defect
+### Pure-function callback scope on Perl
 
 A pure function has fresh parameters and working variables. A callback invoked inside that function
-must resolve nonparameters in the function frame. It has no implicit access to the outer rule:
+resolves nonparameters in the function frame; it has no implicit access to the outer rule:
 
 ```spec
 fn apply(callback: codeblock) { return(callback()) }
@@ -324,13 +324,44 @@ Top:: I {
 }
 ```
 
-The contract requires null here. Current Perl native Get and a fresh emitted process instead return
-`"outer"`: generated callback invocation incorrectly includes the rule's secret reference. A declared
-function-local secret returns its local value, while a direct function read without a declaration
-returns null. All three controls have ready1 and zero raw/fallback/unresolved counts; readiness alone
-cannot establish correct scope. Repair `.1.3.3.0.2.0.1` precedes registered-function dispatch and full
-normalization execution. Callback-created working slots must persist within one function invocation
-and reset between invocations. This defect is separate from existing argument/local-name shadowing.
+This returns null on Perl native Get and fresh emitted execution. Declaring `secret="local"` inside
+apply makes the callback read `"local"`. Writes to a function's declared local or parameter update
+that actual function slot, while the outer rule's same-named slot remains unchanged. Callable lookup
+also uses function locals and parameters; an unbound function call cannot borrow a rule's callback.
+It retains the existing unresolved-helper diagnostic and is not claimed ready.
+
+A callback can create a working slot absent from the function's source. That slot persists across
+callbacks within one invocation, then resets on the next function invocation:
+
+```spec
+fn collect(callback: codeblock) {
+  first = callback("a")
+  second = callback("b")
+  return([first, second])
+}
+Top:: I {
+  items = ["outside"]
+  append = {|text| return(push(items, text)) }
+  first = collect(append)
+  second = collect(append)
+  return([first, second, items])
+}
+```
+
+This returns `[[["a"], ["a", "b"]], [["a"], ["a", "b"]], ["outside"]]`.
+The two function invocations have independent working slots. Within each invocation, push still
+publishes a new array, so the saved first result stays `["a"]`. Nested function calls get separate
+frames too. Callback parameters remain copied temporary slots and restore function-slot mappings
+on success or failure. `.with()` temporarily exposes its invocation value and restores a function's
+same-named `value` slot even when the callback fails.
+
+The combined regression now executes33 exact native/fresh emitted sources and279 top-level tests,
+including23 original push identity assertions,17 actual function-frame/slot assertions and four
+callable-diagnostic checks. A deliberately aliased frame control fails the same identity observation.
+Plain callable records retain eight fields with no closure or stored environment. The earlier scope
+leak is corrected under `.1.3.3.0.2.0.1`; existing argument/local-name shadowing remains separately
+owned by startup32. Registered-function calls from deferred bodies still need bridge `.0.2.1`, so
+full normalization execution remains pending. Canonical scope closeout precedes that bridge.
 
 ### Determinism, progress and failure boundaries
 

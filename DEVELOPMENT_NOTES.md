@@ -12,6 +12,18 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-10-02 — Persistent callback slots belong to a fresh function invocation (.0.2.0.1)
+
+Filtering caller names alone would lose callback-created slots between invocations of the callback.
+Generate one map after function arguments/parameters and bind actual declared scalar references into it.
+The runtime already retains newly created references in that map. Nested function metadata must replace
+an inherited frame, and callable classification must use the function inventory rather than rule kinds.
+Choose a compiler map name absent from function locals/parameters. with localizes the value entry for its
+temporary lexical slot and lets Perl restore it even on failure. Retained actual maps/parameter references
+prove fresh invocations and shared intra-invocation identity; a deliberate alias fails the same observation.
+The runtime record remains plain eight-field data; no captured frame or duplicate evaluator is introduced.
+Argument/local shadowing startup32 and the deferred registered-function bridge remain independent.
+
 ## 2026-10-02 — Invocation-time scope stops at the pure-function frame (.0.2.0.0)
 
 A noncapturing callback record can still leak caller state when its invoke site supplies the wrong bindings.

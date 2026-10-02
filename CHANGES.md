@@ -12,6 +12,19 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-10-02 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.0.1: repair function callback scope
+
+Generate one fresh persistent callback binding map per function invocation, using actual function locals/
+parameters and excluding unrelated rule slots. Function-owned callable eligibility prevents borrowing outer
+callbacks. Nested calls replace inherited frame metadata; generated map names avoid local collisions.
+with localizes/restores its value entry after success/failure. Existing runtime invoke/eight-field records,
+public contracts/admission/CI/storage remain unchanged.33 native/fresh emitted sources pass279 top-level
+tests with23 original push/17 actual-frame/four diagnostic nested assertions; direct dependents pass96.
+Preserve RED controls, actual retained identities and deliberately aliased rejection. Update book with two
+native/emitted examples, Knowledge/roadmap/frontier/checkpoint and bounded continuity. Focused Phase0,
+original-input audit, neutral governance, syntax/book/Knowledge/history/memory/doctrine/diff proof governs
+landing (Phase0 1033/1033 in1134s). Canonical scope closeout precedes registered-function bridge .0.2.1 remains next; startup32/19/35/87 remain separate.
+
 ## 2026-10-02 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.0.0: diagnose function callback scope
 
 Three public native/fresh emitted controls establish outer/local/null with ready1/raw0/fallback0/unresolved0.
