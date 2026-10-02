@@ -559,6 +559,7 @@ require_tracked_file perl/LinkedSpec/MCPServer.pm
 require_tracked_file perl/LinkedSpec/MCPWire.pm
 require_tracked_file perl/LinkedSpec/Numeric.pm
 require_tracked_file t/phase0_regression.t
+require_tracked_file t/codeblock_push_composition_perl.t
 require_tracked_file scripts/check_memory_architecture.sh
 require_tracked_file scripts/check_memory_commit_pointer.sh
 require_tracked_file tools/test_memory_commit_pointer.sh
@@ -1024,6 +1025,9 @@ PERL5LIB= prove -Iperl t/uniform_binding_contract.t
 
 log "running Perl callable-codeblock literal contract fixture"
 PERL5LIB= prove -Iperl t/callable_codeblock_literal_contract.t
+
+log "running Perl deferred push composition and caller-identity fixture"
+PERL5LIB= prove -Iperl t/codeblock_push_composition_perl.t
 
 log "running Perl variadic user-function contract fixture"
 PERL5LIB= prove -Iperl t/variadic_user_function_contract.t

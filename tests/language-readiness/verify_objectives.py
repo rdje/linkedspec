@@ -17,8 +17,9 @@ MILESTONES = ("1.2.3", "2.7", "3.5")
 RUNTIMES = ("perl", "rust", "dart", "julia", "puc", "luajit")
 GOVERNANCE_OWNER = "SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.2"
 COMPOSED_GOVERNANCE_OWNER = "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.2"
-# Only these reviewed insertions may evolve the historical CI input. Removing
-# them must recover its exact historical hash; runtime/test inputs stay pinned.
+PUSH_REPAIR_OWNER = "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.1"
+# Only these reviewed CI insertions and Perl inventory replacements may evolve
+# historical executable inputs. Normalization must recover every original byte.
 CI_INSERTIONS = (
     (b"require_tracked_file tools/check_typed_source_location_contract.py\n",
      b"require_tracked_file tools/check_language_closure_contract.py\n"
@@ -37,6 +38,23 @@ COMPOSED_CI_INSERTIONS = (
     (b"bash tools/run_python_project_data.sh tools/check_language_closure_contract.py\n\n",
      b'log "checking neutral composed objective fixtures and independent observations"\n'
      b"bash tools/run_python_project_data.sh tools/check_composed_objective_contract.py\n\n"),
+)
+PUSH_CI_INSERTIONS = (
+    (b"require_tracked_file t/phase0_regression.t\n",
+     b"require_tracked_file t/codeblock_push_composition_perl.t\n"),
+    (b"PERL5LIB= prove -Iperl t/callable_codeblock_literal_contract.t\n",
+     b'\nlog "running Perl deferred push composition and caller-identity fixture"\n'
+     b"PERL5LIB= prove -Iperl t/codeblock_push_composition_perl.t\n"),
+)
+PERL_STORAGE_REPLACEMENTS = (
+    (b"(( ${#perl_temp_owners[@]} == 27 )) ||\n",
+     b"(( ${#perl_temp_owners[@]} == 28 )) ||\n"),
+    (b' fail "tracked Perl temporary-allocation inventory drifted from 27 to ${#perl_temp_owners[@]}"\n',
+     b' fail "tracked Perl temporary-allocation inventory drifted from 28 to ${#perl_temp_owners[@]}"\n'),
+    (b"for owner in t/legacy_pathsearch_fallback.t t/nested_tree_readiness.t t/lua_legacy_temp_residue.t; do\n",
+     b"for owner in t/legacy_pathsearch_fallback.t t/nested_tree_readiness.t t/lua_legacy_temp_residue.t t/codeblock_push_composition_perl.t; do\n"),
+    (b" '[perl-project-data-test] PASS: 27 Perl allocators, traces, and CLI workspaces stay on repository storage'\n",
+     b" '[perl-project-data-test] PASS: 28 Perl allocators, traces, and CLI workspaces stay on repository storage'\n"),
 )
 
 
@@ -72,7 +90,7 @@ def verify_governance_evolution(source, contents, historical_hash):
     require(source == "tools/run_ci_local.sh", f"unapproved governance source: {source}")
     normalized = contents
     # Strip the later insertions first: their anchors are earlier owned additions.
-    for anchor, insertion in COMPOSED_CI_INSERTIONS + CI_INSERTIONS:
+    for anchor, insertion in PUSH_CI_INSERTIONS + COMPOSED_CI_INSERTIONS + CI_INSERTIONS:
         require(normalized.count(anchor + insertion) == 1,
                 f"governance registration mismatch: {source}")
         normalized = normalized.replace(anchor + insertion, anchor, 1)
@@ -81,7 +99,23 @@ def verify_governance_evolution(source, contents, historical_hash):
     return {"path": source, "historical": historical_hash,
             "current": digest(contents), "owner": GOVERNANCE_OWNER,
             "additional_owner": COMPOSED_GOVERNANCE_OWNER,
+            "runtime_repair_owner": PUSH_REPAIR_OWNER,
             "scope": "exact anchored checker/input registration; original CI bytes preserved"}
+
+
+def verify_perl_storage_evolution(source, contents, historical_hash):
+    require(source == "tools/test_perl_project_data_storage.sh",
+            f"unapproved Perl storage source: {source}")
+    normalized = contents
+    for historical, current in PERL_STORAGE_REPLACEMENTS:
+        require(normalized.count(current) == 1,
+                f"Perl storage registration mismatch: {source}")
+        normalized = normalized.replace(current, historical, 1)
+    require(digest(normalized) == historical_hash,
+            f"unreviewed Perl storage drift: {source}")
+    return {"path": source, "historical": historical_hash,
+            "current": digest(contents), "owner": PUSH_REPAIR_OWNER,
+            "scope": "exact 27-to-28 census and new allocator membership; original bytes preserved"}
 
 
 def audit_evidence(read=read_relative):
@@ -145,6 +179,10 @@ def audit_evidence(read=read_relative):
         if current != row["sha256"]:
             if source == "tools/run_ci_local.sh":
                 governance_updates.append(verify_governance_evolution(
+                    source, read(source), row["sha256"]))
+                continue
+            if source == "tools/test_perl_project_data_storage.sh":
+                governance_updates.append(verify_perl_storage_evolution(
                     source, read(source), row["sha256"]))
                 continue
             require(source.startswith("docs/") and source.endswith(".md"),
@@ -240,30 +278,49 @@ def falsify(report):
             continue
         raise ValueError(f"outside-path control did not reject: {target}")
     governance_controls = 0
+    controls_by_source = {}
     for row in report["governance_updates"]:
         source = row["path"]
         current = read_relative(source)
-        altered = (
-            current + b"# unreviewed edit\n",
-            current.replace(CI_INSERTIONS[0][1], b"", 1),
-            current.replace(b"bash tools/run_python_project_data.sh tools/check_scalar_numeric_contract.py\n", b"", 1),
-            current.replace(COMPOSED_CI_INSERTIONS[0][1], b"", 1),
-            current.replace(COMPOSED_CI_INSERTIONS[1][1], b"", 1),
-            current.replace(COMPOSED_CI_INSERTIONS[1][1],
-                            COMPOSED_CI_INSERTIONS[1][1] * 2, 1),
-        )
+        if source == "tools/run_ci_local.sh":
+            altered = (
+                current + b"# unreviewed edit\n",
+                current.replace(CI_INSERTIONS[0][1], b"", 1),
+                current.replace(b"bash tools/run_python_project_data.sh tools/check_scalar_numeric_contract.py\n", b"", 1),
+                current.replace(COMPOSED_CI_INSERTIONS[0][1], b"", 1),
+                current.replace(COMPOSED_CI_INSERTIONS[1][1], b"", 1),
+                current.replace(COMPOSED_CI_INSERTIONS[1][1],
+                                COMPOSED_CI_INSERTIONS[1][1] * 2, 1),
+                current.replace(PUSH_CI_INSERTIONS[0][1], b"", 1),
+                current.replace(PUSH_CI_INSERTIONS[1][1], b"", 1),
+                current.replace(PUSH_CI_INSERTIONS[1][1], PUSH_CI_INSERTIONS[1][1] * 2, 1),
+            )
+            verify = verify_governance_evolution
+            reasons = ("governance registration mismatch:", "unreviewed governance drift:")
+        elif source == "tools/test_perl_project_data_storage.sh":
+            altered = (current + b"# unreviewed edit\n",) + tuple(
+                current.replace(replacement, historical, 1)
+                for historical, replacement in PERL_STORAGE_REPLACEMENTS
+            ) + (current.replace(PERL_STORAGE_REPLACEMENTS[2][1],
+                                 PERL_STORAGE_REPLACEMENTS[2][1] * 2, 1),)
+            verify = verify_perl_storage_evolution
+            reasons = ("Perl storage registration mismatch:", "unreviewed Perl storage drift:")
+        else:
+            raise ValueError(f"unapproved governance control source: {source}")
+        controls_by_source[source] = 0
         for contents in altered:
             try:
-                verify_governance_evolution(source, contents, row["historical"])
+                verify(source, contents, row["historical"])
             except ValueError as error:
-                require(str(error).startswith(("governance registration mismatch:",
-                                               "unreviewed governance drift:")),
+                require(str(error).startswith(reasons),
                         "unrelated error substituted for governance rejection")
                 governance_controls += 1
+                controls_by_source[source] += 1
             else:
                 raise ValueError("governance corruption control did not reject")
     return {"corrupted_inputs_rejected": list(targets), "outside_paths_rejected": 2,
-            "governance_mutations_rejected": governance_controls}
+            "governance_mutations_rejected": governance_controls,
+            "governance_mutations_by_source": controls_by_source}
 
 
 def verify_summary(report, text):

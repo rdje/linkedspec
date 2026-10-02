@@ -40,14 +40,18 @@ report controls and neutral observation mutations are not executed semantic muta
 Runtime mutants require a healthy baseline and their intended oracle rejection.
 
 One CI call and five tracked inputs are exact. The original audit normalizes the
-new `.1.3.2` insertions before the earlier `.1.2.2` insertions to reconstruct the
-historical CI bytes; six corruption controls preserve that narrow boundary.
+two `.1.3.3.0.1` regression insertions, the `.1.3.2` insertions and the earlier
+`.1.2.2` insertions to reconstruct the historical CI bytes; nine corruption
+controls preserve that narrow boundary. The immutable .1.3.2 checkpoint retains
+its dated six-control proof. The push allocator census is28; four exact owned
+replacements preserve the historical27-owner Perl script with six separate falsifiers.
 The managed storage proof counts40 Python tools and explicitly invokes the new
 checker with hostile external roots; all writes remain on repository storage.
 
 [[bounded-composed-objective-selection]] preserves diagnostic9/normalization7
 requirements and current pilot limits. [[perl-codeblock-composition-dispatch-gap]]
-owns P1 repair `.1.3.3.0` before execution `.1.3.3.1`; startup87.2/.3 and all wider
+owns P1 repair `.1.3.3.0` before execution `.1.3.3.1`; its push child is verified
+in [[perl-codeblock-push-composition]], with registered-function child `.0.2` next. Startup87.2/.3 and all wider
 repairs retain their independent prerequisites. [[language-closure-definition-reconciliation]]
 remains structural closure proof. Whole formats, indentation/quotes/comments,
 richer recovery/resources/performance/security and runtime admission remain pending.

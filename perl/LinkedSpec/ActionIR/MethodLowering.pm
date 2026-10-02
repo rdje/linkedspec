@@ -1465,6 +1465,12 @@ sub _codeblock_runtime_binding_expr {
  return '{'.join(', ', map { _actionir_ast_quote_string_source($_).' => \\$'.$_ } sort keys %names).'}'
 }
 
+sub _codeblock_runtime_invocation_expr {
+ # The current rule context is supplied at invocation, never captured in the
+ # plain codeblock record. It preserves ambiguous push(rule, destination).
+ return '{ descriptor => $descr, input => $STRING, match_info => $minfo }'
+}
+
 sub _split_leading_call_suffix {
  my ($source) = @_;
  return undef unless defined($source)
@@ -3413,7 +3419,8 @@ my $lower_numeric_array_reducer_source_expr = sub {
   my $bindings = _codeblock_runtime_binding_expr($deps, $name);
   return 'do { require LinkedSpec::CodeblockRuntime; '
    .'LinkedSpec::CodeblockRuntime::invoke($'.$name.', ['.join(', ', @lowered_args).'], '
-   .$bindings.', '._actionir_ast_quote_string_source($name).') }'
+   .$bindings.', '._actionir_ast_quote_string_source($name).', undef, '
+   ._codeblock_runtime_invocation_expr().') }'
  };
  my $ast_string_source_node = sub {
   my ($node) = @_;
@@ -3964,7 +3971,8 @@ my $lower_numeric_array_reducer_source_expr = sub {
   my $bindings = _codeblock_runtime_binding_expr($deps, 'value');
   return 'do { my $__ls_with_value = '.$value_expr.'; my $value = $__ls_with_value; '
    .'require LinkedSpec::CodeblockRuntime; LinkedSpec::CodeblockRuntime::invoke('
-   .$record_expr.', '.$invoke_args.', '.$bindings.', "with") }'
+   .$record_expr.', '.$invoke_args.', '.$bindings.', "with", undef, '
+   ._codeblock_runtime_invocation_expr().') }'
  };
  $lower_ast_value_node = sub {
   my ($node, $opts) = @_;

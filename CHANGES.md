@@ -12,6 +12,23 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-10-02 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.1: execute guarded deferred push
+
+Perl deferred push now reuses uniform copy-on-write publication and the actual receiver identity guard.
+An explicit invocation context preserves two-identifier static rule priority and forwards through nested
+codeblocks/with without changing eight-field records. Copied parameters occupy independent temporary scalar
+slots; original caller reference mappings restore on success/failure, including an opaque caller exception.
+Seventeen native/fresh emitted sources pass147 top-level tests with23 nested actual-object assertions;
+existing callable/binding/map suites pass30. Metadata stays ready1/raw0/fallback0/unresolved0. Original seven
+controls have six successes; the unchanged normalization now stops at decorate, with no result/events.
+Require/run the new regression exactly once in CI; original audit preserves24/257/149/134 through two exact
+owned insertions and nine CI controls; the new28th Perl allocator adds exact membership/four historical
+inventory replacements/six storage falsifiers. First canonical attempt stopped at the stale27 count; no failed
+gate counts as proof. Fix Toolbox24 and a leading-slash cache card reference. Authorities/fixtures/checkpoints stay
+exact. Update book with an executed native/fresh emitted example, Knowledge, both roadmaps and continuity.
+Focused proof precedes exact staged canonical landing. Next registered-function child .0.2 and independent
+closeout precede neutral execution; startup19/32/35/87.2/.3 and other repairs remain separate.
+
 ## 2026-10-02 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.2: freeze composed neutral governance
 
 Freeze linkedspec-composed-objectives-v1 at16 cases/three sources/eight dimensions and23 original probe

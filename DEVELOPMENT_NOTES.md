@@ -12,6 +12,24 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-10-02 — Caller slots and temporary parameters need different identities (.1.3.3.0.1)
+
+A deferred push must guard/rebind the current caller scalar after argument evaluation, then reuse existing
+BindingRuntime copy-on-write. Reusing the caller reference for a copied parameter would falsely classify
+same-named parameter mutation as an active receiver write. invoke instead saves reference mappings and installs
+fresh parameter scalar slots; nonparameters keep caller identities, nested invocations forward context and
+restoration rethrows the actual failure object. Original assignment-guard startup19 remains independent.
+Explicit descriptor/input/match-info references at generated call sites preserve static rule priority for
+push(rule,destination); no callable record gains a captured environment or closure. Seventeen native/fresh
+emitted sources and23 nested actual-reference assertions distinguish parameter copies, prior result identity,
+restoration, arity-before-effects and alias guards. The first emitted observer used the wrong wrapper shape;
+repair it to retain generated source/stage/code beside original typed detail, never erase blessed errors.
+The original pipeline now fails at decorate, honestly preserving the next child and startup32/35/87 boundaries.
+CI evolution remains byte-exact and owner-bound; book example and rendered claims are independently verified.
+The first canonical attempt found census27->28 at the new File::Temp owner. Explicitly register it and reverse
+only four exact inventory replacements in historical audit; six storage falsifiers reject missing/duplicated
+membership, counter weakening and unrelated bytes. No failed gate is canonical proof.
+
 ## 2026-10-02 — Neutral observations cannot replace native execution (.1.3.2)
 
 Explicit fixture literals and a separate ordinary ASCII/shape/event model freeze16 cases before producers run.

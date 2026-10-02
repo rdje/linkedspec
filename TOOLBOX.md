@@ -487,7 +487,7 @@ Pass these in the `Get(\$spec, KEY => VALUE, …)` / `get_parser($name, KEY => V
 
 ### 4.3.1 `tools/test_perl_project_data_storage.sh` — Perl SSD-local storage oracle
 
-- **WHAT:** inventory the 24 tracked Perl temporary-allocation owners and execute default/named `File::Temp`,
+- **WHAT:** inventory the 28 tracked Perl temporary-allocation owners and execute default/named `File::Temp`,
   explicit trace-file, and real CLI subprocess-workspace paths inside one managed run.
 - **WHEN:** changing Perl tests, trace/log destinations, the neutral CLI runner, oracle capture, primary-matrix
   routing, or project-data lifecycle.

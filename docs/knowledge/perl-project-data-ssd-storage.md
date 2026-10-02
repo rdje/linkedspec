@@ -13,7 +13,7 @@ answers:
   - where is the verified migrated Perl CLI data retained
   - what hash verified the Perl CLI workspace migration
   - which Perl path values remain inert fixtures
-date: 2026-09-27
+date: 2026-10-02
 status: current
 tags: [perl, storage, ssd, temporary-data, trace, cli, migration, PROJECT-DATA-SSD-ROOTING]
 evidence: "PROJECT-DATA-SSD-ROOTING.2.1 routes the standalone primary matrix and adds tools/test_perl_project_data_storage.sh. The oracle passes from another filesystem across 24 tracked Perl allocators, default/named File::Temp, explicit trace output, and a real CLI child workspace. Sixty-five exact old CLI directories were copied to root-relative retained cache, matched at 17 files/1,590 bytes and canonical SHA-256 2a24e96043cf42b0c5e31d6b77064c64b07e36d6506ff9724d2c361f53ce8f49, exercised, then deleted; old residue is zero."
@@ -35,13 +35,13 @@ routes an actual `LinkedSpec::Trace` event to a file, and launches a real neutra
 requires its cwd to be the active run's `tmp/linkedspec-cli-*` directory and writes an exact expected artifact;
 normal completion must remove the workspace.
 
-The oracle now freezes the complete 27-file Perl allocation inventory, including the CLI runner and the oracle
+The oracle now freezes the complete 28-file Perl allocation inventory, including the CLI runner and the oracle
 generator's two stdout/stderr capture files. It deliberately retains `/tmp`-shaped semantic privacy and redaction
 values because those are inert fixture data, not filesystem writers.
 
 Migration used copy/verify/use/delete. The 65 exact old directories matched manifest case ids and the CLI runner's
 six-character workspace suffix; no symlink entered the set. Their root-relative SSD destination is
-`/.linkedspec-data/cache/migrated/perl-cli-workspaces/`. Source and destination each measured 65 directories,
+`.linkedspec-data/cache/migrated/perl-cli-workspaces/`. Source and destination each measured 65 directories,
 17 files, and 1,590 bytes and matched canonical inventory SHA-256
 `2a24e96043cf42b0c5e31d6b77064c64b07e36d6506ff9724d2c361f53ce8f49`. A copied nested spec/input pair produced
 the exact expected JSON through the Perl primary command. Only then were the exact old sources deleted. The old
@@ -55,3 +55,10 @@ September27 registration audit under SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.
 t/legacy_pathsearch_fallback.t at30b2cc3a0 and t/nested_tree_readiness.t atbb76f4437. The new
 t/lua_legacy_temp_residue.t is the27th owner. The oracle locks their membership and passes real allocation,
 trace and CLI-child cleanup checks with the new staged inventory. No off-volume migration or deletion is needed.
+
+October2 SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.1 adds exactly t/codeblock_push_composition_perl.t as the28th
+owner. Its File::Temp directory derives from the repository scratch root and cleans up after native/fresh
+emitted proof. The oracle checks explicit membership and passes real allocation/trace/CLI cleanup with28.
+Original objective audit preserves the exact historical27-owner script through four owned replacements
+and six reason-sensitive storage falsifiers; all other bytes stay pinned. Toolbox's stale24 and this card's
+leading-slash project-cache reference are corrected; no retained data is moved or deleted.

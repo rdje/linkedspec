@@ -70,13 +70,17 @@ unrelated compilation failure or source-hash rejection cannot count as semantic
 evidence. Mutated loops remain finite.
 
 Canonical CI has exactly one checker call and five exact tracked-input registrations.
-The original objective audit removes only the two `.1.3.2` anchored insertions,
-then the earlier `.1.2.2` insertions, to recover all historical CI bytes. Six
+The original objective audit removes only the two `.1.3.3.0.1` regression insertions,
+the two `.1.3.2` anchored insertions, then the earlier `.1.2.2` insertions, to recover all historical CI bytes. Nine
 reason-sensitive controls reject missing/duplicated registrations and unrelated
-CI changes. Tool storage explicitly admits40 Python entrypoints and runs this new
+CI changes. The push regression adds a28th Perl allocator; four exact owned inventory
+replacements recover the historical storage script and six separate falsifiers reject
+storage drift. Tool storage explicitly admits40 Python entrypoints and runs this new
 checker through the managed Python wrapper with hostile external roots.
 
-Next is P1 Perl repair `.1.3.3.0`, followed by Perl execution `.1.3.3.1` and the
+The bounded Perl push repair `.1.3.3.0.1` has native/emitted controls; the unchanged
+normalization now stops at registered `decorate`. Next is `.1.3.3.0.2`, followed
+by dispatcher closeout, Perl execution `.1.3.3.1` and the
 other backend lanes. Existing startup87.2/.3 and every other repair/prerequisite
 remain separate. Canonical proof governs this normative freeze; execution and
 parent `.1.3` reconciliation remain pending.

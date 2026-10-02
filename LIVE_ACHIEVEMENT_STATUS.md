@@ -2,17 +2,19 @@
 
 ## Current Activity
 
-P1 Perl deferred push/registered-function repair under SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0, after neutral composed governance .1.3.2. Structured formats and the optional frontend retain their language-readiness/parity gates.
+P1 Perl registered-function dispatch under SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2, after guarded deferred push .0.1. Full neutral execution and remaining backend lanes retain their prerequisites.
 
 ## Latest Completed Slice
 
-- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.2 - freeze neutral composed objectives` — Sixteen cases/three sources/eight dimensions with140 structural/16 observation/44 producer-report falsifiers/four controls. Exact CI/storage40 and independent historical audit preserve proof; no DSL execution or runtime admission. Canonical proof governs landing.
+- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.1 - execute guarded deferred push` — Seventeen native/fresh emitted sources,147 top-level tests and23 nested actual-reference controls; rule precedence, copy-on-write, parameter slots and receiver guards. Original normalization now fails at decorate. Canonical proof governs landing.
 
 ## Next Action
 
-- Activate P1 .1.3.3.0 from clean HEAD: reverify public callback push/function failures, repair the existing routes with scope/identity/arity controls, then execute .1.3.3.1. All other repairs/prerequisites remain.
+- Activate .1.3.3.0.2 from clean HEAD; implement registered pure-function dispatch through central compiler lowering and explicit context, preserving fresh locals/signatures/order/recursion and existing startup19/32/35/87 boundaries, then independent closeout and neutral execution.
 
 ## Recent Completions
+
+- `2026-10-02` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.1` repairs deferred push and owns the next registered-function dispatcher child.
 
 - `2026-10-02` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.2` freezes neutral composed sources/oracles and recurring governance before the owned P1 Perl repair.
 
@@ -43,8 +45,6 @@ P1 Perl deferred push/registered-function repair under SPEC-LANGUAGE-SELF-CONTAI
 - `2026-09-28` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.2` verifies Dart lossless/actual-child carriers and detached outcome records.
 
 - `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.1` verifies Rust lossless extraction and real child grammars on six carriers.
-
-- `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.3` verifies actual Perl child composition across four carrier pairs.
 
 ## History
 

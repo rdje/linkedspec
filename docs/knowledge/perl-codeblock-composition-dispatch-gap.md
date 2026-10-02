@@ -84,3 +84,12 @@ Do not erase the retained typed object using JSON blessed-object conversion.
 [[perl-typed-error-json-observation-boundary]] explains that observation hazard.
 These controls are Perl-only fresh measurements; no other backend outcome,
 whole-format readiness or general callable-body coverage is inferred.
+
+October2 `.1.3.3.0.1` repairs the selected push route; [[perl-codeblock-push-composition]]
+records seventeen native/fresh emitted sources and actual identity controls. The original
+seven-control replay now has six successes and only callback_function still fails.
+The unchanged normalization reaches unknown_helper/decorate rather than push, retaining
+ready1/raw0/fallback0/unresolved0 and no result/events. Registered-function child
+`.1.3.3.0.2` is next, followed by independent dispatcher closeout and neutral execution.
+The original dated diagnostic and its immutable selection checkpoint stay exact;
+startup19/32/35/87.2/.3 and other repair prerequisites remain open.

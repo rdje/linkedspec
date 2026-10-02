@@ -7,6 +7,7 @@ use warnings;
 use Scalar::Util qw(blessed reftype);
 use Storable qw(dclone);
 use LinkedSpec::RuntimeLogical ();
+use LinkedSpec::BindingRuntime ();
 
 # Execute version-1 callable-codeblock records as typed data. Generated handlers
 # provide explicit references to caller working slots; this module never captures
@@ -120,6 +121,42 @@ sub _eval_call {
  _error('invalid_codeblock_body', detail => 'call arguments must be an array')
   unless ref($args) eq 'ARRAY';
 
+ if ($name eq 'push') {
+  _error(
+   'helper_arity_mismatch', helper_name => $name,
+   actual_arity => scalar(@$args), expected_arity => 'exactly 2',
+   arguments_evaluated => 0,
+  ) unless @$args == 2;
+  my ($target, $item) = @$args;
+  _error('unknown_helper', name => $name)
+   unless ref($target) eq 'HASH' && ($target->{kind} // '') eq 'variable';
+
+  # Evaluate operands before taking the publication snapshot. The item may
+  # rebind the target, so the first operand's value is deliberately not reused.
+  _eval_expr($target, $ctx);
+  my $value = _eval_expr($item, $ctx);
+  my $target_name = $target->{name};
+  my $invocation = $ctx->{invocation};
+  if (ref($item) eq 'HASH' && ($item->{kind} // '') eq 'variable'
+   && ref($invocation->{descriptor}) eq 'HASH') {
+   my $entry = $invocation->{descriptor}{spec}{$target_name};
+   my $handler = ref($entry) eq 'CODE' ? $entry
+    : ref($entry) eq 'HASH' ? $entry->{handler} : undef;
+   if (ref($handler) eq 'CODE') {
+    $value = $handler->(
+     $invocation->{descriptor}, $invocation->{input}, $invocation->{match_info},
+    );
+    $target_name = $item->{name};
+   }
+  }
+  my $binding = _binding_ref($ctx, $target_name);
+  LinkedSpec::BindingRuntime::assert_receiver_writable(
+   $binding, $target_name, 'push', $node->{source_span},
+  );
+  $$binding = LinkedSpec::BindingRuntime::push_value($$binding, $target_name, $value);
+  return $$binding
+ }
+
  if ($name eq 'and' || $name eq 'or' || $name eq 'not') {
   my $argc = scalar @$args;
   _error(
@@ -189,6 +226,7 @@ sub _eval_call {
   $ctx->{bindings},
   $name,
   $ctx->{active_codeblocks},
+  $ctx->{invocation},
  )
 }
 
@@ -308,13 +346,15 @@ sub _execute_body {
 }
 
 sub invoke {
- my ($record, $args, $bindings, $identity, $active_codeblocks) = @_;
+ my ($record, $args, $bindings, $identity, $active_codeblocks, $invocation) = @_;
  $args = [] unless defined $args;
  $bindings = {} unless defined $bindings;
  $identity = '<codeblock>' unless defined($identity) && length($identity);
  $active_codeblocks = [] unless defined $active_codeblocks;
+ $invocation = {} unless defined $invocation;
  _error('invalid_codeblock_arguments') unless ref($args) eq 'ARRAY';
  _error('invalid_codeblock_bindings') unless ref($bindings) eq 'HASH';
+ _error('invalid_codeblock_invocation_context') unless ref($invocation) eq 'HASH';
  _error('value_not_callable', value_kind => _value_kind($record))
   unless ref($record) eq 'HASH'
       && ($record->{kind} // '') eq 'codeblock_literal'
@@ -343,6 +383,7 @@ sub invoke {
 
  my @param_names = @{$signature->{positional_params}};
  push @param_names, $signature->{rest_param} if defined($signature->{rest_param});
+ my @copied_args = map { _copy_value($_) } @$args;
  my @saved;
  foreach my $name (@param_names) {
   my $binding = $bindings->{$name};
@@ -351,10 +392,14 @@ sub invoke {
    $bindings->{$name} = \$value;
    $binding = $bindings->{$name};
   }
-  push @saved, [$binding, $$binding];
+  push @saved, [$name, $binding];
+  # A parameter shadows the caller slot rather than borrowing its identity.
+  # Receiver guards therefore protect caller mutations without rejecting a
+  # mutation of this independent, copied parameter value.
+  my $parameter_value;
+  $bindings->{$name} = \$parameter_value;
  }
 
- my @copied_args = map { _copy_value($_) } @$args;
  for (my $idx = 0; $idx < @{$signature->{positional_params}}; ++$idx) {
   ${$bindings->{$signature->{positional_params}[$idx]}} = $copied_args[$idx];
  }
@@ -366,6 +411,7 @@ sub invoke {
  my $ctx = {
   bindings => $bindings,
   active_codeblocks => \@active,
+  invocation => $invocation,
  };
  my ($result, $failure);
  my $ok = eval {
@@ -374,7 +420,7 @@ sub invoke {
  };
  $failure = $@ unless $ok;
  foreach my $saved (@saved) {
-  ${$saved->[0]} = $saved->[1];
+  $bindings->{$saved->[0]} = $saved->[1];
  }
  die $failure unless $ok;
  return $result

@@ -1,0 +1,352 @@
+{
+  "activation_commit": "c02129217737b8c4fae015bca4428794aa285d61",
+  "canonical_attempts": [
+    {
+      "attempt": 1,
+      "cause": "New tracked File::Temp allocator raises exact inventory from27 to28; stale registration rejected it.",
+      "correction": "Register exactly the new allocator, update census28, preserve original storage bytes through four exact owned replacements and six controls, synchronize Toolbox/card and restart complete exact-candidate CI.",
+      "exit_code": 1,
+      "full_cli_and_phase0": "not reached",
+      "log": ".linkedspec-data/scratch/selfcontain13301/canonical-attempt1-failed.log",
+      "log_sha256": "e26a30ca3df6593cfd13651d8e85a8576a7b6d57d675cb4b37ac3410d348f287",
+      "new_push_regression": "147/147 PASS before failure",
+      "result": "FAIL",
+      "stage": "Perl project-data storage inventory"
+    }
+  ],
+  "canonical_plan": {
+    "candidate": "complete staged candidate, no unstaged tracked or untracked nonignored inputs",
+    "command": "bash tools/run_ci_local.sh",
+    "next_attempt": 2,
+    "result_location": "actual result, CLI/RAM/Phase0, exact candidate and log hash in commit body and promoted receipt; no post-gate tracked edits",
+    "runner": "approved host execution"
+  },
+  "claim_limits": {
+    "full_neutral_execution": false,
+    "other_backends": "not executed by this leaf",
+    "parent_closeout": "pending SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.3",
+    "registered_function_dispatch": "pending SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2",
+    "runtime_admission_change": false,
+    "separate_repairs": [
+      "SESSION-STARTUP-READING.19",
+      "SESSION-STARTUP-READING.32",
+      "SESSION-STARTUP-READING.35",
+      "SESSION-STARTUP-READING.87.2",
+      "SESSION-STARTUP-READING.87.3"
+    ]
+  },
+  "focused_proof": {
+    "binding_executions": 7,
+    "book_example": {
+      "fresh_emitted": [
+        [
+          "a"
+        ],
+        [
+          "a",
+          "b"
+        ],
+        [
+          "a",
+          "b"
+        ]
+      ],
+      "native": [
+        [
+          "a"
+        ],
+        [
+          "a",
+          "b"
+        ],
+        [
+          "a",
+          "b"
+        ]
+      ],
+      "source": "Top:: I {\n  seen = []\n  append = {|text| return(push(seen, text)) }\n  first = append(\"a\")\n  second = append(\"b\")\n  return([first, second, seen])\n}\n"
+    },
+    "callable_falsifiers": 23,
+    "closure_controls": 4,
+    "closure_falsifiers": 636,
+    "existing_callable_binding_map_top_level_tests": 30,
+    "independent_review": {
+      "book_example_sha256": "f3214cd067b22f94e63832dc5a18618539527762e7d724e1ffc1eb731662fdb1",
+      "cases": [
+        "selected_push",
+        "absent_target",
+        "null_target",
+        "argument_once",
+        "post_argument_snapshot",
+        "prior_result",
+        "copied_parameter",
+        "nested_parameters",
+        "rule_precedence",
+        "nested_rule_context",
+        "with_context",
+        "helper_precedence",
+        "parameter_receiver_shadow",
+        "wrong_kind",
+        "unknown_call",
+        "arity_before_effects",
+        "active_receiver"
+      ],
+      "complete_neutral_execution_claim": false,
+      "frozen_authority_files": 57,
+      "immutable_selection_and_neutral_checkpoints": true,
+      "original_controls": {
+        "remaining_failure": "decorate",
+        "successes": 6
+      },
+      "pipeline": {
+        "events": [],
+        "metadata": {
+          "canonical_action_ir_count": 28,
+          "canonical_action_ir_fallback_count": 0,
+          "language_agnostic_action_ir_ready": 1,
+          "raw_perl_dependency_count": 0,
+          "unresolved_helper_count": 0
+        },
+        "remaining_failure": "decorate",
+        "value": null
+      },
+      "rendered_claims": 7,
+      "roadmap_headers": 3,
+      "roadmap_rows": 2,
+      "routes": [
+        "native_Get",
+        "fresh_emitted_Execute"
+      ],
+      "unchanged_original_spec_sources": true
+    },
+    "map_base_falsifiers": 167,
+    "map_composition_falsifiers": 592,
+    "nested_actual_reference_assertions": 23,
+    "neutral_falsifiers": {
+      "controls": 4,
+      "observation": 16,
+      "structural": 140,
+      "synthetic_report": 44
+    },
+    "objective_audit": {
+      "checkpoints": 24,
+      "ci_controls": 9,
+      "governance_controls_total": 15,
+      "historical_logs": 134,
+      "historical_source_references": 257,
+      "latest_inputs": 149,
+      "owned_governance_sources": 2,
+      "storage_controls": 6
+    },
+    "perl_storage_allocators": 28,
+    "push_routes": [
+      "native_Get",
+      "fresh_emitted_Execute"
+    ],
+    "push_sources": 17,
+    "push_top_level_tests": 147
+  },
+  "format": 1,
+  "implementation": {
+    "codeblock_record_fields": 8,
+    "host_fallback": false,
+    "invocation_context": "optional sixth private argument with explicit descriptor/input/match-info; nested calls forward it; two-identifier static rule push retains precedence",
+    "new_ambient_authority": false,
+    "new_syntax": false,
+    "parameter_frame": "copied values in distinct temporary scalar references; original reference mappings restore on success/failure",
+    "push": "BindingRuntime copy-on-write on post-argument current caller slot; actual receiver identity guard"
+  },
+  "log_sha256": {
+    ".linkedspec-data/scratch/selfcontain13301/binding.log": "5dceaadbc3ebd719926b545d2fa448e92b4c4296bed06870b4c38e41880193d8",
+    ".linkedspec-data/scratch/selfcontain13301/book-example-emitted.log": "596e1d9bdbea77412310f16f235854ec32265fef79ea23b67159dffd63a70931",
+    ".linkedspec-data/scratch/selfcontain13301/book-example-native.log": "596e1d9bdbea77412310f16f235854ec32265fef79ea23b67159dffd63a70931",
+    ".linkedspec-data/scratch/selfcontain13301/book.log": "7cbf3e4237d5ed01c43d67b74d57ba6abb69350785f00887d5078ae82a1c62de",
+    ".linkedspec-data/scratch/selfcontain13301/callable.log": "00374dc3966f70d83b0b8bc16056172b0c1a557829a7b73c2d347d32d5d863de",
+    ".linkedspec-data/scratch/selfcontain13301/canonical-attempt1-failed.log": "e26a30ca3df6593cfd13651d8e85a8576a7b6d57d675cb4b37ac3410d348f287",
+    ".linkedspec-data/scratch/selfcontain13301/closure.log": "f81e008cecd839f6f9da6106d9e84e906717aad4914689fb9adef2b7f22bfeb2",
+    ".linkedspec-data/scratch/selfcontain13301/dependents.log": "18f94f941df20bca92fa2745feea8b52910586d1a76e1a54212fe0b6586b9896",
+    ".linkedspec-data/scratch/selfcontain13301/knowledge.log": "3a4980dc4167d6dd6c20a48811d490602dd5acbeab659e40822c1d0571f2ba0f",
+    ".linkedspec-data/scratch/selfcontain13301/memory.log": "4a88e2e5ec941803db6a5b9baaa1335e93436630b59b25686d6c8920f4914811",
+    ".linkedspec-data/scratch/selfcontain13301/mutation.log": "4609559c068ef9eb36d69f63912cd78cd7171d5874aefbacd203c23aacc28874",
+    ".linkedspec-data/scratch/selfcontain13301/neutral.log": "ee0512718fc36c54e926b653892d841801b940ce8a41610ab2e1c912a03b41b8",
+    ".linkedspec-data/scratch/selfcontain13301/objectives.log": "4f401869e83ac7c944390fbe34855f8af20217fc80df534fa8810b4b15edbfaa",
+    ".linkedspec-data/scratch/selfcontain13301/original-controls.log": "453f74b200ae7f17b583b1414246980f381fbc554ad7a3e5e725283bbe561c84",
+    ".linkedspec-data/scratch/selfcontain13301/perl-storage.log": "eac5f57951cd547b8e5ed485c902d751aef27b3b4fd217648646505bdda98461",
+    ".linkedspec-data/scratch/selfcontain13301/pipeline.log": "c5e2f4f5b11e246ffa4f568a4f2175d4d4858d5771d6192326c40a60eb578453",
+    ".linkedspec-data/scratch/selfcontain13301/push.log": "e43e5dc83edf22bbcf0f6e49a297e0d6f00fba555dde4209910747a14e9334b0",
+    ".linkedspec-data/scratch/selfcontain13301/review.log": "50e4005372a44fac602feab6090f8f47159ceffdd3e4a45a66dd03664a14a090"
+  },
+  "observer_repairs": [
+    "Preserve plain generated_source_error outer source/stage/code and original typed detail; do not assume a blessed wrapper.",
+    "Load subroutine-only emitted artifacts using eval(package/source/1), rather than interpreting the trailing do-file value as failure."
+  ],
+  "original_callable_controls": [
+    {
+      "id": "direct_push",
+      "last_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "source": "Top:: I { seen=[]; push(seen,\"x\"); return(seen) }",
+      "value": [
+        "x"
+      ]
+    },
+    {
+      "id": "callback_push",
+      "last_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "source": "Top:: I { seen=[]; cb={|| push(seen,\"x\"); return(seen) }; return(cb()) }",
+      "value": [
+        "x"
+      ]
+    },
+    {
+      "id": "direct_function",
+      "last_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "source": "fn decorate(text,prefix) { return(cat(prefix,text)) }\nTop:: I { return(decorate(\"x\",\"!\")) }",
+      "value": "!x"
+    },
+    {
+      "id": "callback_function",
+      "last_error": {
+        "detail": {
+          "code": "unknown_helper",
+          "kind": "codeblock_runtime_error",
+          "name": "decorate",
+          "observed_class": "LinkedSpec::CodeblockRuntime::Error"
+        },
+        "handler_source_label": "LinkedSpec::generated_handler:Top:<none>",
+        "handler_variant": "<none>",
+        "owner_stage": "runtime_handler:rule_handler_eval",
+        "rule_label": "Top",
+        "spec_name": "",
+        "spec_path": "",
+        "stage": "rule_handler_eval",
+        "summary": "Rule handler execution failed",
+        "top_rule": "Top",
+        "type": "runtime_handler"
+      },
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "source": "fn decorate(text,prefix) { return(cat(prefix,text)) }\nTop:: I { cb={|| return(decorate(\"x\",\"!\")) }; return(cb()) }",
+      "value": null
+    },
+    {
+      "id": "callback_cat_assignment",
+      "last_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "source": "Top:: I { seen=\"before:\"; cb={|x| seen=cat(seen,x); return(cat(\"!\",x)) }; result=cb(\"x\"); return([result,seen]) }",
+      "value": [
+        "!x",
+        "before:x"
+      ]
+    },
+    {
+      "id": "direct_uppercase",
+      "last_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "source": "Top:: I { return(uppercase(\"ab\")) }",
+      "value": "AB"
+    },
+    {
+      "id": "function_uppercase",
+      "last_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "source": "fn decorate(text,prefix) { return(cat(prefix,uppercase(text))) }\nTop:: I { return(decorate(\"ab\",\"!\")) }",
+      "value": "!AB"
+    }
+  ],
+  "owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.1",
+  "review_date": "2026-10-02",
+  "source_inputs": {
+    "MEMORY.md": "5ffe83724eb78ee95b92d7e83e20d3452b00c8b08e825a862002b3b5d89f3f66",
+    "TOOLBOX.md": "52fdecc789373204ced8e2dc80a6407203f3c5cdcdefd29d146dc0f7691c6645",
+    "capability_conformance/composed_objective_contract.json": "52b76d5b3e48fdf64f25e93b22553eabfa765fc224c101f0f5fbdd8a6abf6e01",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.1-selection.json": "b9e54e21dff39b08a098ea882a513d507730e0cdd7e4d6199c6374f8dbc30fe7",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.2-verification.json": "f4a1e2e3d9fa13c4cdda3171635411df530d2791105ce87234a620fb010485cd",
+    "docs/knowledge/composed-objective-neutral-governance.md": "34e6ba0f420cad5119c5911a0efdd338bbf0e8434caa10d1182cfbcbdc000edc",
+    "docs/knowledge/perl-codeblock-push-composition.md": "65987a0265e2a03f338c785a9efacd0b700a2babc457c8d87334bcc7fd701b88",
+    "docs/knowledge/perl-project-data-ssd-storage.md": "095cd14dd2ed6781230bb9ed1c1f575327b1e393b71d260ce859e73385228285",
+    "docs/language-readiness/composed-objective-governance.md": "1ca2ea6940ab1cb4ac57b74c7ebbf89021053ebd442d65f08dceb065b9ec7797",
+    "docs/linkedspec-book/src/architecture/structured-format-program.md": "3930077757f36d1649c1dc8e013ef8f187af6288c92436b4700a45c63cf26769",
+    "docs/tasks/SPEC-LANGUAGE-SELF-CONTAINMENT.md": "e6a8f535dd7728971cfa82ac085703fb5183241d576698602df797b6ad9f9795",
+    "perl/LinkedSpec/ActionIR/MethodLowering.pm": "d5720b43443f21a8c0992f6d77a74c4a6a32ecc8f0647a1f16b6b76f9044718d",
+    "perl/LinkedSpec/CodeblockRuntime.pm": "1b70bc46f250916d7b3048c915d137925e8f03d1a03dfef6b4d8793a634c0e0c",
+    "t/codeblock_push_composition_perl.t": "f42139f3372ae2f218652edba22597b14ef7bc9f160c84bda4a3e19cc1b57db7",
+    "tests/language-readiness/composed/diagnostic-invalid-arity.spec": "bd474ebe5e927111b46163b217da66e3d75802f264558800b3bfeebd14ad773a",
+    "tests/language-readiness/composed/diagnostic.spec": "fba66e47d14b1a236deb1136ec2c515fa629f8a1d8dce36812431ebe8bc62fc0",
+    "tests/language-readiness/composed/normalization.spec": "ba9953c282e5e66956dc4b7d22c2acc7b1e879734654e7cb467ad41275cc4249",
+    "tests/language-readiness/verify_objectives.py": "7044e24dc4a90a4fa11da1d5c53c939d35f8012d9db16584aaddc59311b50a7e",
+    "tools/run_ci_local.sh": "48367a37c47085cab92c1b9d35edd3b958a4537b78ec61bf3854dd0d35642f6b",
+    "tools/test_perl_project_data_storage.sh": "97449395da3fa5e5eda30ca5d5b55c52997f112495c9b4feaa15303352f2c03b"
+  },
+  "unchanged_normalization_observation": [
+    {
+      "events": [],
+      "failure": null,
+      "failure_detail": null,
+      "last_error": {
+        "detail": {
+          "code": "unknown_helper",
+          "kind": "codeblock_runtime_error",
+          "name": "decorate",
+          "observed_class": "LinkedSpec::CodeblockRuntime::Error"
+        },
+        "handler_source_label": "LinkedSpec::generated_handler:Top:_default",
+        "handler_variant": "_default",
+        "owner_stage": "runtime_handler:rule_handler_eval",
+        "rule_label": "Top",
+        "spec_name": "",
+        "spec_path": "",
+        "stage": "rule_handler_eval",
+        "summary": "Rule handler execution failed",
+        "top_rule": "Top",
+        "type": "runtime_handler"
+      },
+      "result": null,
+      "sink_identity_preserved": null
+    },
+    {
+      "canonical_action_ir_count": 28,
+      "canonical_action_ir_fallback_count": 0,
+      "language_agnostic_action_ir_ready": 1,
+      "raw_perl_dependency_count": 0,
+      "unresolved_helper_count": 0
+    }
+  ],
+  "verification_tier": "canonical"
+}

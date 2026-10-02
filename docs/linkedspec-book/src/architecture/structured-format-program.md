@@ -238,10 +238,10 @@ without changing the detached mapped result or original. Its independent expecte
 }
 ```
 
-This normalization is selected and blocked on Perl. Direct push and registered-function calls work;
-the same calls inside a deferred body reject with typed `unknown_helper`. Source readiness reports
+This normalization is selected and blocked on Perl. Deferred push now works through the bounded repair
+below; the next call, registered `decorate`, still rejects with typed `unknown_helper`. Source readiness reports
 zero raw fallback and unresolved helpers, which describes recognized source rather than complete
-callback execution coverage. Repair `.1.3.3.0` precedes its Perl execution lane. The existing
+callback execution coverage. Registered-function repair `.1.3.3.0.2` and closeout precede its Perl execution lane. The existing
 regex/numeric callback repairs and every other partial prerequisite remain owned separately.
 The complete requirements and mutation/oracle plan are in
 `docs/language-readiness/composed-objective-selection.md`; no new primitive or syntax is selected.
@@ -268,9 +268,47 @@ A private producer report preserves native failure evidence and compile/runtime 
 observations. Serialized flags cannot establish native error classification, identity or actual-object
 detachment by themselves. Backend lanes must execute public producers, mutate the actual returned objects,
 and reject deliberately aliased controls. They must pass a healthy baseline before semantic mutants count.
-The default checker executes no DSL and changes no runtime admission. P1 Perl repair .1.3.3.0 is next;
+The default checker executes no DSL and changes no runtime admission. P1 registered-function repair .1.3.3.0.2 is next;
 the selected normalization remains blocked. `docs/language-readiness/composed-objective-governance.md`
 records the oracle and evidence boundary. Whole formats and unassessed requirements remain pending.
+
+### Deferred push on Perl
+
+Perl deferred codeblocks can now append to a caller's live array binding using the existing
+`push(name, value)` operation. An absent or null target becomes an array; an incompatible value retains
+the existing `binding_kind_mismatch` diagnostic. Operands evaluate once before the update snapshot.
+Each push publishes a new array, so a saved earlier result remains unchanged:
+
+```spec
+Top:: I {
+  seen = []
+  append = {|text| return(push(seen, text)) }
+  first = append("a")
+  second = append("b")
+  return([first, second, seen])
+}
+```
+
+This returns `[["a"], ["a", "b"], ["a", "b"]]`. Nonparameters such as `seen` use caller slots at
+invocation time. Parameters use copied values in separate temporary slots; caller values and reference
+mappings restore on both success and failure. Mutating an array parameter therefore leaves its input
+argument and a same-named caller binding unchanged.
+
+An explicit invocation context preserves `push(rule, destination)` priority for two bare identifiers,
+including nested codeblock calls and `.with()` invocation. The plain eight-field codeblock record gains
+no closure or captured environment. The receiver guard checks the actual destination scalar identity:
+appending to an active `map_leaves!` receiver fails even through an alias, while a same-named temporary
+parameter remains independent and writable.
+
+The bounded regression has17 sources on native Perl and a fresh emitted process,147 top-level tests
+with23 nested actual-reference/failure-restoration assertions. The original seven controls now have six
+successes and one registered-function failure. The unchanged normalization fixture stops at `decorate`;
+its complete neutral execution and semantic mutations remain pending. Existing assignment-guard,
+caller-function-shadowing, boolean-kind and regex/numeric callback repairs remain separate.
+
+```sh
+bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/codeblock_push_composition_perl.t
+```
 
 ### Determinism, progress and failure boundaries
 
