@@ -17,7 +17,7 @@ answers:
   - how many Python checker entrypoints exist
   - where do TAP and oracle capture artifacts go
   - what old tool data was deleted from private tmp
-date: 2026-08-17
+date: 2026-10-02
 status: current
 tags: [storage, ssd, python, bytecode, knowledge-map, mdbook, tap, oracle, temporary-data, portability]
 evidence: "PROJECT-DATA-SSD-ROOTING.2.6 adds tools/run_python_project_data.sh and tools/test_tool_project_data_storage.sh; exports retained PYTHONPYCACHEPREFIX from tools/project_data_env.sh; gives both Unicode generators explicit validated scratch; configures generic KM_OUTPUT_VALIDATOR in .knowledge_map.conf; validates Knowledge Map output before/after generation and mdBook output before/after build; routes canonical/current checker commands; and deletes the exact unreferenced 88-line /private/tmp/linkedspec-julia-reverify-cards.txt after classification. MDBOOK-DESTINATION-ROOT-ALIGNMENT.1 runs mdBook from BOOK_ROOT as build ., and its argument-aware fake proves split, equals, compact, environment, and absolute destinations plus pre-launch hostile/symlink rejection. Real default and relative builds each produce 79 files / 14,120 KiB on the repository volume."
@@ -30,6 +30,7 @@ evidence_update_2026_08_30_write_vivification: "FUTURE-PARITY-BACKLOG.19.1.1 add
 evidence_update_2026_08_31_map_leaves_mutation: "FUTURE-PARITY-BACKLOG.19.1.2 adds tools/check_map_leaves_mutation_contract.py through tools/run_python_project_data.sh. Its future-neutral state machine and 167 mutation checks use in-memory/project-root reads and allocate no temporary workspace. The storage oracle therefore advances only Python tool entrypoints from 36 to 37; Python temporary owners remain three and shell allocator owners remain 15."
 evidence_update_2026_09_05_mutation_public_surface: "FUTURE-PARITY-BACKLOG.19.9 adds tools/check_mutation_public_surface.py through tools/run_python_project_data.sh. Its authority, public-document, stale-claim, and mutation proof use in-memory/project-root reads and allocate no temporary workspace. The storage oracle therefore advances only Python tool entrypoints from 37 to 38; Python temporary owners remain three and shell allocator owners remain 15."
 evidence_update_2026_10_01_closure_structure: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.2 adds tools/check_language_closure_contract.py through the repository-routed wrapper. Its structural/source/mutation proof reads project files and uses in-memory copies without a temporary allocator. The independently counted entrypoint census advances38-to39; three Python temporary owners and15 shell allocator owners remain unchanged."
+evidence_update_2026_10_02_composed_objectives: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.2 adds tools/check_composed_objective_contract.py through the managed Python wrapper and freezes40 entrypoints. It reads project files and mutates in-memory observations, without a temporary allocator; three Python temporary owners and15 shell allocator owners remain unchanged. The focused storage oracle explicitly invokes it with hostile external roots and passes."
 reverify: "bash tools/test_tool_project_data_storage.sh; bash knowledge-map/scripts/check_knowledge_map.sh; bash tools/run_mdbook_local.sh"
 ---
 
@@ -37,7 +38,7 @@ reverify: "bash tools/test_tool_project_data_storage.sh; bash knowledge-map/scri
 
 Use `bash tools/run_python_project_data.sh tools/<checker>.py [args...]` for a maintained Python checker. The
 wrapper accepts a repository-root-relative nonsymlink script, enters managed scratch, and retains imported bytecode
-under `/.linkedspec-data/cache/python-pycache/`. The two Python checkers that regenerate Unicode artifacts also
+under `.linkedspec-data/cache/python-pycache/`. The two Python checkers that regenerate Unicode artifacts also
 select an explicit same-device temporary root, including when invoked directly.
 
 LinkedSpec configures the portable Knowledge Map bundle's optional `KM_OUTPUT_VALIDATOR` through the repo-relative
@@ -48,7 +49,7 @@ same root and verifies created output. Relative split, equals, and compact CLI f
 path that validation approved, independently of the caller's current working directory.
 
 `tools/test_tool_project_data_storage.sh` freezes three Python temporary owners, 15 actual shell allocator owners,
-and 39 Python checker entrypoints. It proves real bytecode, map, HTML, CLI workspace, TAP, and oracle capture paths
+and 40 Python checker entrypoints. It proves real bytecode, map, HTML, CLI workspace, TAP, and oracle capture paths
 use the repository device and hostile external destinations remain absent. Its deliberate cross-volume reads are
 limited to device and exact-path absence checks required for that rejection proof.
 

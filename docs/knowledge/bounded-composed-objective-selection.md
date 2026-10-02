@@ -36,7 +36,7 @@ the Perl prototype fails at callback push. [[perl-codeblock-composition-dispatch
 owns P1 repair `.1.3.3.0` before execution `.1.3.3.1`; readiness metadata cannot
 replace body execution. Existing startup87.2/.3 retain separate acceptance.
 
-`.1.3.2` next selects exact fixture/checker paths and freezes these sixteen cases.
+`.1.3.2` freezes these sixteen cases/three sources under [[composed-objective-neutral-governance]]. P1 Perl repair .1.3.3.0 is next before execution.
 Neutral mutations prove schema/oracle/source integrity. Runtime semantic variants
 must reject for the intended oracle after a healthy baseline passes; preexisting
 helper failure, unrelated compilation failure or source-hash rejection supplies

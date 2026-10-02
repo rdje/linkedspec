@@ -246,6 +246,32 @@ regex/numeric callback repairs and every other partial prerequisite remain owned
 The complete requirements and mutation/oracle plan are in
 `docs/language-readiness/composed-objective-selection.md`; no new primitive or syntax is selected.
 
+### Neutral fixtures are governed; runtime execution is still pending
+
+The sixteen selected cases now have frozen sources and independent expected observations in
+`capability_conformance/composed_objective_contract.json` (`linkedspec-composed-objectives-v1`).
+The canonical sources are `tests/language-readiness/composed/diagnostic.spec`,
+`tests/language-readiness/composed/normalization.spec` and an isolated
+`tests/language-readiness/composed/diagnostic-invalid-arity.spec`. They retain the selected diagnostic and blocked
+normalization sources; original probe identities and closure semantics stay unchanged.
+
+```sh
+bash tools/run_python_project_data.sh tools/check_composed_objective_contract.py
+```
+
+The checker independently builds ASCII word/pair, shape and event expectations without evaluating the DSL.
+It rejects140 structural,16 observation and44 producer-report corruptions, with two unrelated-error and two
+strict-JSON controls. It distinguishes boolean false from numeric0, rich events from returned values,
+quiet evaluation from omitted effects, typed exit from caller failure, and arity rejection from argument work.
+
+A private producer report preserves native failure evidence and compile/runtime phase beside portable
+observations. Serialized flags cannot establish native error classification, identity or actual-object
+detachment by themselves. Backend lanes must execute public producers, mutate the actual returned objects,
+and reject deliberately aliased controls. They must pass a healthy baseline before semantic mutants count.
+The default checker executes no DSL and changes no runtime admission. P1 Perl repair .1.3.3.0 is next;
+the selected normalization remains blocked. `docs/language-readiness/composed-objective-governance.md`
+records the oracle and evidence boundary. Whole formats and unassessed requirements remain pending.
+
 ### Determinism, progress and failure boundaries
 
 Determinism fixes the canonical program/versions, decoded source/identity, explicit values/options,

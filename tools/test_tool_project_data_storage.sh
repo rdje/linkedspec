@@ -71,8 +71,8 @@ expected_python_temp_owners=(
 mapfile -t python_tool_entrypoints < <(
  rg -l '^#!/usr/bin/env python3$' "$REPO_ROOT"/tools/*.py | sed "s|^$REPO_ROOT/||" | sort
 )
-(( ${#python_tool_entrypoints[@]} == 39 )) ||
- fail "Python tool entrypoint inventory drifted from 39 to ${#python_tool_entrypoints[@]}"
+(( ${#python_tool_entrypoints[@]} == 40 )) ||
+ fail "Python tool entrypoint inventory drifted from 40 to ${#python_tool_entrypoints[@]}"
 
 allocator_name='mk''temp'
 mapfile -t shell_temp_owners < <(
@@ -185,13 +185,15 @@ awk '
 if mcp_ci_topology_matches "$mcp_order_mutant"; then
  fail 'MCP canonical topology accepted binding-check-before-validator order'
 fi
+for checker in tools/check_callable_codeblock_contract.py tools/check_composed_objective_contract.py; do
 env \
  LINKEDSPEC_PROJECT_DATA_ROOT="$python_root" \
  LINKEDSPEC_SCRATCH_ROOT="$external_probe/scratch" \
  LINKEDSPEC_CACHE_ROOT="$external_probe/cache" \
  TMPDIR="$external_probe/tmp" TMP="$external_probe/tmp" TEMP="$external_probe/tmp" \
  PYTHONPYCACHEPREFIX="$external_probe/pycache" \
- bash "$REPO_ROOT/tools/run_python_project_data.sh" tools/check_callable_codeblock_contract.py
+ bash "$REPO_ROOT/tools/run_python_project_data.sh" "$checker"
+done
 assert_local_real_path "$python_root/cache/python-pycache"
 find "$python_root/cache/python-pycache" -type f -name '*.pyc' -print -quit | rg -q . ||
  fail 'targeted Python boundary did not retain imported bytecode in repository cache'

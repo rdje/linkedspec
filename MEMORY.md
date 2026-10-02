@@ -1,11 +1,11 @@
 # MEMORY
 
-- activation_commit: `2a8c368159a6c9b927bc6cd7fc524fe0de7319a6` — clean activation base for bounded composition selection.
-- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.1 - select bounded composed objectives`.
-- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.2` (pending) — neutral composed fixtures/oracle governance.
-- next_action: Activate .1.3.2 from clean HEAD; select exact neutral fixture/oracle/checker paths and freeze16 selected cases plus reason-sensitive mutations. Preserve P1 Perl callback repair .1.3.3.0 before execution .1.3.3.1.
-- in_flight_uncommitted: none after selection landing; original16 authorities/90 bindings and three probe corpora stay exact. Selection checkpoint retains six D pilots, seven isolated controls and blocked pipeline; no execution admission.
-- blockers: No blocker for neutral governance; selected Perl normalization needs owned callback push/registered-function repair. Source-detail interpretation remains startup37.2-owned, and broad teaching remains41.2-owned. Policies unchanged; startup .5/.29 own adoption. ARCHOGEN owns downstream acceptance.
+- activation_commit: `70e15013cb5278a7a9c785f75290d5f7fc7a575d` — clean activation base for neutral composed governance.
+- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.2 - freeze neutral composed objectives`.
+- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0` (pending) — P1 Perl deferred push/registered-function dispatch.
+- next_action: Activate .1.3.3.0 from clean HEAD; reverify exact public callback controls and existing dispatcher/function/binding authorities, then repair selected routes before .1.3.3.1 execution.
+- in_flight_uncommitted: none after canonical landing; neutral16-case/three-source governance is frozen at140/16/44 falsifiers. Runtime execution/admission stays pending; existing authorities/original probes and all repair prerequisites remain.
+- blockers: P1 Perl normalization repair .1.3.3.0 is the next owned work, with no access/decision blocker. Source-detail interpretation remains startup37.2-owned, and broad teaching remains41.2-owned. Policies unchanged; startup .5/.29 own adoption. ARCHOGEN owns downstream acceptance.
   Wrapper startup .7 remains open; recovery/purge stay prohibited. No interrupted Phase0 run counts as proof.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
   active table; the task metadata doctrine inventories all consumers, permits arbitrary frontier-row rewrites,

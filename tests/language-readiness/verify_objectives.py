@@ -16,6 +16,7 @@ PREFIX = "SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3."
 MILESTONES = ("1.2.3", "2.7", "3.5")
 RUNTIMES = ("perl", "rust", "dart", "julia", "puc", "luajit")
 GOVERNANCE_OWNER = "SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.2"
+COMPOSED_GOVERNANCE_OWNER = "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.2"
 # Only these reviewed insertions may evolve the historical CI input. Removing
 # them must recover its exact historical hash; runtime/test inputs stay pinned.
 CI_INSERTIONS = (
@@ -25,6 +26,17 @@ CI_INSERTIONS = (
     (b"perl tools/check_capability_conformance.pl\n\n",
      b'log "checking language closure operation/scope/reference structure"\n'
      b"bash tools/run_python_project_data.sh tools/check_language_closure_contract.py\n\n"),
+)
+COMPOSED_CI_INSERTIONS = (
+    (b"require_tracked_file capability_conformance/language_closure_contract.json\n",
+     b"require_tracked_file tools/check_composed_objective_contract.py\n"
+     b"require_tracked_file capability_conformance/composed_objective_contract.json\n"
+     b"require_tracked_file tests/language-readiness/composed/diagnostic.spec\n"
+     b"require_tracked_file tests/language-readiness/composed/normalization.spec\n"
+     b"require_tracked_file tests/language-readiness/composed/diagnostic-invalid-arity.spec\n"),
+    (b"bash tools/run_python_project_data.sh tools/check_language_closure_contract.py\n\n",
+     b'log "checking neutral composed objective fixtures and independent observations"\n'
+     b"bash tools/run_python_project_data.sh tools/check_composed_objective_contract.py\n\n"),
 )
 
 
@@ -59,7 +71,8 @@ def producing_commit(path):
 def verify_governance_evolution(source, contents, historical_hash):
     require(source == "tools/run_ci_local.sh", f"unapproved governance source: {source}")
     normalized = contents
-    for anchor, insertion in CI_INSERTIONS:
+    # Strip the later insertions first: their anchors are earlier owned additions.
+    for anchor, insertion in COMPOSED_CI_INSERTIONS + CI_INSERTIONS:
         require(normalized.count(anchor + insertion) == 1,
                 f"governance registration mismatch: {source}")
         normalized = normalized.replace(anchor + insertion, anchor, 1)
@@ -67,6 +80,7 @@ def verify_governance_evolution(source, contents, historical_hash):
             f"unreviewed governance drift: {source}")
     return {"path": source, "historical": historical_hash,
             "current": digest(contents), "owner": GOVERNANCE_OWNER,
+            "additional_owner": COMPOSED_GOVERNANCE_OWNER,
             "scope": "exact anchored checker/input registration; original CI bytes preserved"}
 
 
@@ -233,6 +247,10 @@ def falsify(report):
             current + b"# unreviewed edit\n",
             current.replace(CI_INSERTIONS[0][1], b"", 1),
             current.replace(b"bash tools/run_python_project_data.sh tools/check_scalar_numeric_contract.py\n", b"", 1),
+            current.replace(COMPOSED_CI_INSERTIONS[0][1], b"", 1),
+            current.replace(COMPOSED_CI_INSERTIONS[1][1], b"", 1),
+            current.replace(COMPOSED_CI_INSERTIONS[1][1],
+                            COMPOSED_CI_INSERTIONS[1][1] * 2, 1),
         )
         for contents in altered:
             try:

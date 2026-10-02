@@ -1052,10 +1052,36 @@ used by ordinary `.spec` syntax on every backend.
 
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.2`
-  Status: `pending`
+  Status: `done`
   Goal: Implement selected neutral fixtures, independent expected observations and a reason-sensitive mutation checker from .1.3.1's approved bounded selection.
   Dependencies: `.1.3.1`
   Acceptance: Version input/oracle identities, prove each claimed semantic dimension through positive/negative/effect/kind controls and unrelated-error rejection, and preserve original probes. Select exact owned paths before creation. This leaf establishes neutral governance, not runtime execution or whole-format admission; normative fixture/checker movement requires canonical proof.
+  Activation: Clean70e15013cb5278a7a9c785f75290d5f7fc7a575d on October2; selection committed, all nine hooks/post-pointer PASS, brief0 and Git clean.
+  Owned paths / plan: capability_conformance/composed_objective_contract.json (linkedspec-composed-objectives-v1); tests/language-readiness/composed/diagnostic.spec, normalization.spec and diagnostic-invalid-arity.spec; tools/check_composed_objective_contract.py. Freeze sixteen selected cases, independently built expectations, source identities, original foundation bindings and sixteen mutation roles. A test-only normalized observation separates native failure evidence from portable value/event/exit/identity/detachment predicates; it is not a new runtime error/API schema. Checker evaluates no DSL.
+  Integration scope: Exact recurring checker/input registrations in tools/run_ci_local.sh; owner-bound normalization and falsifiers in tests/language-readiness/verify_objectives.py preserve original historical CI bytes and all runtime/corpus inputs. New tool-entrypoint inventory count/required-route proof in tools/test_tool_project_data_storage.sh; Toolbox and capability-conformance navigation; book/Knowledge/roadmap/frontier/checkpoint/bounded continuity. Select any additional necessary path here before editing it. No runtime/closure authority semantics/admission changes; P1 .1.3.3.0 and every existing repair remain prerequisites.
+  Verification tier: `canonical`
+  Focused checks: Independent16-case shape/event/value-kind/failure models, exact source/case/owner/foundation register, reason-sensitive structural/observation mutations and unrelated-error rejection; native pilot source identity only, no new execution claim. Original objective audit including narrow new CI controls, selected closure/callable/diagnostic/write/leaf guards, new tool storage inventory/route, rendered book, Knowledge/history/memory/doctrines and diff hygiene.
+  Canonical trigger: Normative neutral oracle/checker and recurring CI/tool-storage integration; require exact fully staged candidate canonical receipt before landing.
+
+  Additional selected documentation paths: docs/language-readiness/composed-objective-governance.md, docs/knowledge/composed-objective-neutral-governance.md and docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.2-verification.json. Record private observer semantics and exact neutral falsifiers without runtime execution claims; current selection/gap/direction fact cards and roadmap/frontier/live docs move in lockstep.
+
+  Additional storage-card owner: docs/knowledge/tool-project-data-ssd-storage.md; update its current Python-only census39-to40, preserving historical/routing counts, and correct its repository-relative bytecode path notation.
+
+  Completion candidate: linkedspec-composed-objectives-v1 freezes16 cases/three exact sources/eight dimensions,23 original probe identities and16 semantic mutation requirements. Independent explicit fixture values and ASCII/shape/event checker preserve kinds/order/effects/quiet/exit/caller failure/arity and actual-object detachment obligations. The private report retains native failure/phase without creating a global runtime API/schema. No DSL execution/admission, original authority or runtime source change.
+  Focused result: Checker rejects140 structural,16 observation and44 private-producer falsifiers plus two unrelated-error/two JSON controls. Explicitly synthetic private CLI report passes shape validation only. Original audit preserves24 checkpoints/257 historical refs/149 latest inputs/134 logs and rejects6 CI evolution corruptions; two new anchored insertions then two earlier ones reconstruct historical bytes exactly. Managed storage40 passes with new checker under hostile external roots; closure636, callable23 and diagnostic20 guards pass. Source/authority/selection identity, rendered book, Knowledge/history/memory/diff proof and exact staged canonical acceptance govern landing.
+  Canonical plan: Fully stage completed sources, normative artifact/checker, narrow CI/storage/history-audit integration, book/Knowledge/continuity and verification checkpoint; run tools/run_ci_local.sh via approved host execution. No tracked edits during/after a successful gate before commit; canonical result/receipt/log digest belong in the producing commit body. Parent .1.3 and all execution lanes remain pending.
+  Continuity: Next P1 .1.3.3.0 fixes public callback push/registered-function routes before .1.3.3.1 execution. Existing startup87.2/.3 and every other repair/prerequisite remain exact. Commit per COMMIT.md; clear brief0 and verify Git clean before activation.
+
+## Acceptance checklist — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.2
+
+- [x] **REQUIREMENTS / SOURCE IDENTITY** — Sixteen selected cases/eight dimensions and three exact sources bind the committed selection;23 original source identities and16 original authorities/90 anchors stay exact. Indentation/quotes/comments/whole formats and broader limits remain unassessed.
+- [x] **INDEPENDENT ORACLES / KINDS** — Explicit fixture expectations match a separate ASCII/shape/event model without importing/evaluating DSL implementation; typed false, arrays/harrays/null, quiet effects and separate failure/publication channels remain distinct.
+- [x] **FALSIFIER REASONS / PROOF LIMITS** — 140 structural/16 observation/44 private-report falsifiers plus two unrelated-error/two JSON controls pass. Synthetic reports and altered projections prove neutral boundaries, not semantic execution; native classification/identity/actual-object detachment and healthy-baseline semantic variants remain producer-owned.
+- [x] **RECURRING TOPOLOGY / STORAGE** — One CI checker/five tracked inputs; exact owner-bound CI normalization plus6 controls preserves historical bytes. New checker runs through managed Python storage;40 tools, three Python temporary owners and15 shell allocator owners remain governed.
+- [x] **LOCKSTEP / SIGNOFF BOUNDARY** — Book, Knowledge, Toolbox, authority navigation, roadmap/frontier, checkpoint and bounded continuity agree. Focused proof precedes exact staged canonical admission; its receipt/result lives in the producing commit body. Next P1 repair precedes any dependent execution promotion.
+
+  Documentation correction owned here: ROADMAP_V2.md still names .1.3.1 because the prior selection sync omitted the second roadmap. Reproduce by comparing its feature header/self-containment row to ROADMAP.md and docs/TASK_TREE.md. Align the header/row now and include three-header equality/current-frontier proof in this checkpoint; no roadmap direction changes.
+
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3`
   Status: `pending`

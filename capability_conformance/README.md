@@ -33,6 +33,24 @@ authorities directly. The capability checker pins the description, category, sou
 selection precedence and four cursor-policy fields, with fifteen reason-sensitive mutations including the old
 accepted-override claim. The census and runtime behavior remain unchanged.
 
+
+## Bounded composed objective fixtures
+
+`composed_objective_contract.json` freezes `linkedspec-composed-objectives-v1` at16 cases/3 grammar sources/
+eight dimensions, retaining23 original probe identities. The explicit fixture expectations and independent
+ASCII/shape/event checker preserve booleans, order, quiet delivery, exit, caller-error identity, arity and
+actual-object detachment requirements. Run:
+
+```sh
+bash tools/run_python_project_data.sh tools/check_composed_objective_contract.py
+```
+
+The140 structural,16 observation and44 producer-report falsifiers plus four controls establish neutral
+governance; the checker executes no DSL or admits a runtime. Native evidence remains producer-owned beside
+private predicates. Exact CI registrations and historical-byte normalization preserve original proof.
+`docs/language-readiness/composed-objective-governance.md` records the boundary; P1 Perl repair .1.3.3.0
+precedes execution .1.3.3.1. All wider repairs and realistic-format requirements remain separate.
+
 ## Standalone lifecycle block
 
 `standalone_lifecycle_block_contract.json` closes the exact shorthand from ADR `0094`: a standalone rule-body

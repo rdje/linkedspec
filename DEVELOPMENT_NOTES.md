@@ -12,6 +12,24 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-10-02 — Neutral observations cannot replace native execution (.1.3.2)
+
+Explicit fixture literals and a separate ordinary ASCII/shape/event model freeze16 cases before producers run.
+Source identities and the immutable selection checkpoint preserve23 original probe files. Kind-aware comparison
+separates false from numeric0 and arrays/harrays/null; outcomes, event order, raw diagnostic output, exit,
+caller-error identity, helper arity and detachment are separate predicates. Native failure/phase stays beside
+this private test record without imposing a public universal error wrapper. Helper arity can reject at compile
+time; authored exit and caller failure must execute. Serialized flags do not prove native classification,
+identity, actual-object mutation or execution; backend lanes perform those assertions and bind real sources/logs.
+
+140 structural/16 observation/44 private-report falsifiers and four reason/JSON controls prove neutral integrity.
+The sixteen semantic roles remain future execution requirements: healthy baseline first, intended oracle rejection
+next, without counting preexisting unknown_helper/compile/source-binding failures. New CI insertions normalize
+before their earlier insertion anchors, reconstructing every historical byte; six mutations keep the exception
+narrow. Managed storage increases only Python checker entrypoints39-to40, retaining three Python temporary and15
+shell allocator owners. P1 Perl repair follows canonical neutral freeze; whole formats and general guarantees stay
+pending. Existing closure/runtime authorities and every separate repair/prerequisite remain unchanged.
+
 ## 2026-10-02 — Callable readiness needs execution evidence (.1.3.1)
 
 Perl public Get accepts/lower-describes direct and deferred push/registered-function calls with ready1 and

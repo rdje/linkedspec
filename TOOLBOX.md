@@ -846,6 +846,22 @@ primary adapter. See [[inter-match-gap-lua-implementation-plan]].
   docs/language-readiness/closure-policy-boundaries.md and the dated on-demand
   tests/language-readiness/verify_closure_definition.py audit (run after the book build at its producing revision).
 
+
+### 4.8.9 `tools/check_composed_objective_contract.py` — independent composed fixtures
+
+- **WHAT:** `linkedspec-composed-objectives-v1` freezes16 selected cases/3 sources/eight dimensions and23
+  original source identities. Independent ASCII/shape/event models preserve typed values, ordered effects,
+  quiet/exit/caller-error/arity observations and actual-object detachment requirements.
+- **HOW:** `bash tools/run_python_project_data.sh tools/check_composed_objective_contract.py`.
+  Add `--observations <repo-relative-report>` only for an actual private producer report.
+- **PROOF:** 140 structural,16 observation and44 producer-report falsifiers plus two unrelated-error/two JSON
+  controls. Exact CI call/five inputs and historical-byte normalization are guarded; managed storage admits40
+  Python entrypoints. The checker executes no DSL; serialized predicates do not prove native classification,
+  identity, detachment or execution. Runtime lanes retain healthy-baseline semantic mutations and actual evidence.
+- **OWNER:** `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.2`; schema/observer limits are in
+  `docs/language-readiness/composed-objective-governance.md`. P1 Perl callback repair .1.3.3.0 precedes execution;
+  startup87.2/.3 and all other prerequisites remain separate. No runtime/admission change.
+
 ### 4.9 `tools/check_semantic_introspection_contract.py` — neutral model/query oracle
 
 - **WHAT:** validates `linkedspec-semantic-model-v1`, `linkedspec-semantic-query-v1`, the owned backend-admission

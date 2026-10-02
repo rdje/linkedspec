@@ -1,0 +1,746 @@
+{
+  "format": 1,
+  "contract_id": "linkedspec-composed-objectives-v1",
+  "fixture_owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.2",
+  "selection_owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.1",
+  "selection": {
+    "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.1-selection.json",
+    "sha256": "b9e54e21dff39b08a098ea882a513d507730e0cdd7e4d6199c6374f8dbc30fe7"
+  },
+  "sources": {
+    "diagnostic": {
+      "path": "tests/language-readiness/composed/diagnostic.spec",
+      "sha256": "fba66e47d14b1a236deb1136ec2c515fa629f8a1d8dce36812431ebe8bc62fc0"
+    },
+    "normalization": {
+      "path": "tests/language-readiness/composed/normalization.spec",
+      "sha256": "ba9953c282e5e66956dc4b7d22c2acc7b1e879734654e7cb467ad41275cc4249"
+    },
+    "diagnostic_invalid_arity": {
+      "path": "tests/language-readiness/composed/diagnostic-invalid-arity.spec",
+      "sha256": "bd474ebe5e927111b46163b217da66e3d75802f264558800b3bfeebd14ad773a"
+    }
+  },
+  "foundation_sources": {
+    "tests/language-readiness/context-names/cases.json": "3e7f25083e791db8048bed844523e85fbc53763eeaabd1253001a2b2650575ef",
+    "tests/language-readiness/context-names/grammar.spec": "8f408e81e2871b3b76c1a7fc7f99e059dad1c19dd03e91449a05fc9b88fff4b0",
+    "tests/language-readiness/context-names/rust_checks.rs": "e7a01a4fc4465c4a1e7933b54b5dc599249a000c356532168d8cbe6093246b43",
+    "tests/language-readiness/lossless-child/cases.json": "2589ef997c978ea9fa1e80f886106df7235839d6a89439b88ece328d58e3b3c7",
+    "tests/language-readiness/lossless-child/child.spec": "34c5f109d401f83fa600a225682599fe924957fdbf45ad2136f55450248badd9",
+    "tests/language-readiness/lossless-child/dart_carriers.dart": "e6a8b4d502aeb7b9152cb5bc22aade234772fba558bab15b25e3e0e65e40a7dd",
+    "tests/language-readiness/lossless-child/dart_checks.dart": "708d3c8d5ca9683185e26e099525df6198d2c775e5679dd221393edef7228f63",
+    "tests/language-readiness/lossless-child/julia_carriers.jl": "9b308b17b62cac150df88b5d256ea379db697fd393fb3237f1d2f65caa6ea317",
+    "tests/language-readiness/lossless-child/julia_checks.jl": "3ca60f296b06cf0c07132fbe117dda155729cf12a599ff53b97b233e6c4c26cb",
+    "tests/language-readiness/lossless-child/lua_carriers.lua": "1cd379ca959bcd4d92eec68ebe8f3e20e02d80e7b356adbc5d67db0785697456",
+    "tests/language-readiness/lossless-child/lua_checks.lua": "67a59f580f1daf5ad0c6d0f9a425ab1d8e8445e6d748dffa0a14ad0a63fa4367",
+    "tests/language-readiness/lossless-child/parent.spec": "8b19299a5d3715cba7f44dac266954e8b34497920a308f956f6e35b286ae6435",
+    "tests/language-readiness/lossless-child/rust_carriers.rs": "6a461b9f86525d5ab4d75a74d4395869048e3c146e674badb31d3f652b6cd9cd",
+    "tests/language-readiness/lossless-child/rust_checks.rs": "e26105539eafd80fb870d4959881a086a81f57839018685ff8d84ce8f2bf6f20",
+    "tests/language-readiness/lossless-segments/cases.json": "fd4fe58d6bb0efa7bcb609b863c3d9a2238bb5c62fa9a1814a143e04416bd89c",
+    "tests/language-readiness/lossless-segments/grammar.spec": "8f20d242b0f2ea0eee1d70b6f289cf96362cdf3b64ef4cbcc77f5631ffe3eb36",
+    "tests/language-readiness/nested-tree/cases.json": "7a36a4b32d8a5ac8a1d2f17d6d000a68c707bfc15a4b3a1e93e3e4ddaf4147c7",
+    "tests/language-readiness/nested-tree/dart_checks.dart": "5ae819cccaf0dc2cfb2a1753f5351148307cebc8797ff605fc4ba8c65c15df4a",
+    "tests/language-readiness/nested-tree/grammar.spec": "498ffda35b05222388c64d99b0acb132a56996e97de3ffa9312f7dda6ee0ed72",
+    "tests/language-readiness/nested-tree/julia_checks.jl": "a0511244a5ae78c39e6d68c116a03ab1dcb08610ff8f01f75079551eb3825c62",
+    "tests/language-readiness/nested-tree/lua_checks.lua": "0cf52abd24227574f5e93389836176452332f75c1d751b823f1c70d2c31af435",
+    "tests/language-readiness/nested-tree/rust_checks.rs": "9d805a415bc2f63e057910af0d1e679e46fd84533bfe2c6c126d912b8ec16b68",
+    "tests/language-readiness/nested-tree/verify_native.py": "a177b58c22777cdcbd128e2d6147fd63da95c33654f6baaf8c5d28d0080deb6c"
+  },
+  "dimensions": {
+    "natural_recursion": [
+      "foundation:nested-tree",
+      "foundation:context-names"
+    ],
+    "cursor_algebra": [
+      "foundation:nested-tree",
+      "foundation:lossless-segments",
+      "D",
+      "P"
+    ],
+    "interval_boundary_capture": [
+      "foundation:lossless-segments",
+      "foundation:lossless-child"
+    ],
+    "nested_state": [
+      "foundation:context-names",
+      "P"
+    ],
+    "callable_composition": [
+      "P"
+    ],
+    "branching_iteration": [
+      "D",
+      "P"
+    ],
+    "structural_transformation": [
+      "P"
+    ],
+    "typed_result_construction": [
+      "D",
+      "P"
+    ]
+  },
+  "policy": {
+    "oracle": "ordinary ASCII word/pair operations and explicit shape/event construction; no DSL evaluator or runtime-derived expectations",
+    "failure": "portable test predicates preserve separate native compile/runtime failure evidence; no global runtime error wrapper",
+    "quiet": "valid arguments still evaluate; no sink means no rich delivery or host diagnostic output",
+    "detachment": "actual returned objects and deliberately aliased falsifiers are required in execution lanes; JSON consumer copies are insufficient",
+    "mutations": "neutral corruption proves oracle/schema integrity only; runtime semantic variants require a healthy baseline and intended oracle rejection",
+    "admission": "neutral governance only; existing runtime admission and all repair prerequisites remain unchanged"
+  },
+  "execution_owners": {
+    "perl": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.1",
+    "rust": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.4",
+    "dart": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.5",
+    "julia": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.6",
+    "puc_lua": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.7",
+    "luajit": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.7"
+  },
+  "repair_owners": [
+    "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0",
+    "SESSION-STARTUP-READING.87.2",
+    "SESSION-STARTUP-READING.87.3"
+  ],
+  "cases": [
+    {
+      "id": "D_ordered_go",
+      "source_id": "diagnostic",
+      "input": "go",
+      "sink_mode": "collect",
+      "expected": {
+        "outcome": "value",
+        "value": {
+          "word": "go",
+          "effects": [
+            "left",
+            "right"
+          ],
+          "payload": false
+        },
+        "events": [
+          {
+            "helper_name": "print",
+            "rule_label": "Top",
+            "message": "begin:go"
+          },
+          {
+            "helper_name": "print_each",
+            "rule_label": "Top",
+            "message": "part:α!"
+          },
+          {
+            "helper_name": "print_each",
+            "rule_label": "Top",
+            "message": "part:!"
+          },
+          {
+            "helper_name": "print_each",
+            "rule_label": "Top",
+            "message": "part:!"
+          },
+          {
+            "helper_name": "print_each",
+            "rule_label": "Top",
+            "message": "part:🙂!"
+          },
+          {
+            "helper_name": "say",
+            "rule_label": "Top",
+            "message": "done\n"
+          }
+        ],
+        "host_output": "",
+        "exit_status": null,
+        "caller_error_identity": null,
+        "helper_arity": null,
+        "detachment": null
+      }
+    },
+    {
+      "id": "D_ordered_wait",
+      "source_id": "diagnostic",
+      "input": "wait",
+      "sink_mode": "collect",
+      "expected": {
+        "outcome": "value",
+        "value": {
+          "word": "wait",
+          "effects": [
+            "left",
+            "right"
+          ],
+          "payload": false
+        },
+        "events": [
+          {
+            "helper_name": "print",
+            "rule_label": "Top",
+            "message": "begin:wait"
+          },
+          {
+            "helper_name": "print_each",
+            "rule_label": "Top",
+            "message": "part:α!"
+          },
+          {
+            "helper_name": "print_each",
+            "rule_label": "Top",
+            "message": "part:!"
+          },
+          {
+            "helper_name": "print_each",
+            "rule_label": "Top",
+            "message": "part:!"
+          },
+          {
+            "helper_name": "print_each",
+            "rule_label": "Top",
+            "message": "part:🙂!"
+          },
+          {
+            "helper_name": "say",
+            "rule_label": "Top",
+            "message": "done\n"
+          }
+        ],
+        "host_output": "",
+        "exit_status": null,
+        "caller_error_identity": null,
+        "helper_arity": null,
+        "detachment": null
+      }
+    },
+    {
+      "id": "D_quiet_go",
+      "source_id": "diagnostic",
+      "input": "go",
+      "sink_mode": "absent",
+      "expected": {
+        "outcome": "value",
+        "value": {
+          "word": "go",
+          "effects": [
+            "left",
+            "right"
+          ],
+          "payload": false
+        },
+        "events": [],
+        "host_output": "",
+        "exit_status": null,
+        "caller_error_identity": null,
+        "helper_arity": null,
+        "detachment": null
+      }
+    },
+    {
+      "id": "D_exit_stop",
+      "source_id": "diagnostic",
+      "input": "stop",
+      "sink_mode": "collect",
+      "expected": {
+        "outcome": "authored_exit",
+        "value": null,
+        "events": [
+          {
+            "helper_name": "print",
+            "rule_label": "Top",
+            "message": "begin:stop"
+          },
+          {
+            "helper_name": "say",
+            "rule_label": "Top",
+            "message": "stop\n"
+          }
+        ],
+        "host_output": "",
+        "exit_status": 7,
+        "caller_error_identity": null,
+        "helper_arity": null,
+        "detachment": null
+      }
+    },
+    {
+      "id": "D_sink_failure_after2",
+      "source_id": "diagnostic",
+      "input": "go",
+      "sink_mode": "throw_after2",
+      "expected": {
+        "outcome": "caller_failure",
+        "value": null,
+        "events": [
+          {
+            "helper_name": "print",
+            "rule_label": "Top",
+            "message": "begin:go"
+          },
+          {
+            "helper_name": "print_each",
+            "rule_label": "Top",
+            "message": "part:α!"
+          }
+        ],
+        "host_output": "",
+        "exit_status": null,
+        "caller_error_identity": true,
+        "helper_arity": null,
+        "detachment": null
+      }
+    },
+    {
+      "id": "D_prefix_bad",
+      "source_id": "diagnostic",
+      "input": "!go",
+      "sink_mode": "collect",
+      "expected": {
+        "outcome": "authored_exit",
+        "value": null,
+        "events": [],
+        "host_output": "",
+        "exit_status": 1,
+        "caller_error_identity": null,
+        "helper_arity": null,
+        "detachment": null
+      }
+    },
+    {
+      "id": "D_suffix_bad",
+      "source_id": "diagnostic",
+      "input": "go!",
+      "sink_mode": "collect",
+      "expected": {
+        "outcome": "authored_exit",
+        "value": null,
+        "events": [],
+        "host_output": "",
+        "exit_status": 1,
+        "caller_error_identity": null,
+        "helper_arity": null,
+        "detachment": null
+      }
+    },
+    {
+      "id": "D_empty",
+      "source_id": "diagnostic",
+      "input": "",
+      "sink_mode": "collect",
+      "expected": {
+        "outcome": "authored_exit",
+        "value": null,
+        "events": [],
+        "host_output": "",
+        "exit_status": 1,
+        "caller_error_identity": null,
+        "helper_arity": null,
+        "detachment": null
+      }
+    },
+    {
+      "id": "D_bad_arity",
+      "source_id": "diagnostic_invalid_arity",
+      "input": "go",
+      "sink_mode": "collect",
+      "expected": {
+        "outcome": "helper_arity",
+        "value": null,
+        "events": [],
+        "host_output": "",
+        "exit_status": null,
+        "caller_error_identity": null,
+        "helper_arity": {
+          "helper": "print_each",
+          "actual": 4,
+          "accepted": [
+            2,
+            3
+          ]
+        },
+        "detachment": null
+      }
+    },
+    {
+      "id": "P_ab_cd",
+      "source_id": "normalization",
+      "input": "ab-cd",
+      "sink_mode": "collect",
+      "expected": {
+        "outcome": "value",
+        "value": {
+          "tree": {
+            "a": "new:AB",
+            "b": {
+              "c": "new:CD"
+            },
+            "meta": {
+              "count": 2
+            }
+          },
+          "mapped": {
+            "a": "new:AB",
+            "b": {
+              "c": "new:CD"
+            }
+          },
+          "original": {
+            "a": "ab",
+            "b": {
+              "c": "cd"
+            }
+          },
+          "seen": [
+            "ab",
+            "cd"
+          ],
+          "text": "outside",
+          "visits": 2
+        },
+        "events": [
+          {
+            "helper_name": "print_each",
+            "rule_label": "Top",
+            "message": "leaf:ab!"
+          },
+          {
+            "helper_name": "print_each",
+            "rule_label": "Top",
+            "message": "leaf:cd!"
+          },
+          {
+            "helper_name": "say",
+            "rule_label": "Top",
+            "message": "done:2\n"
+          }
+        ],
+        "host_output": "",
+        "exit_status": null,
+        "caller_error_identity": null,
+        "helper_arity": null,
+        "detachment": {
+          "actual_result_checked": true,
+          "mapped_unchanged": true,
+          "original_unchanged": true,
+          "deliberately_aliased_control_rejected": true
+        }
+      }
+    },
+    {
+      "id": "P_mixed_case",
+      "source_id": "normalization",
+      "input": "AB-cd",
+      "sink_mode": "collect",
+      "expected": {
+        "outcome": "value",
+        "value": {
+          "tree": {
+            "a": "new:AB",
+            "b": {
+              "c": "new:CD"
+            },
+            "meta": {
+              "count": 2
+            }
+          },
+          "mapped": {
+            "a": "new:AB",
+            "b": {
+              "c": "new:CD"
+            }
+          },
+          "original": {
+            "a": "AB",
+            "b": {
+              "c": "cd"
+            }
+          },
+          "seen": [
+            "AB",
+            "cd"
+          ],
+          "text": "outside",
+          "visits": 2
+        },
+        "events": [
+          {
+            "helper_name": "print_each",
+            "rule_label": "Top",
+            "message": "leaf:AB!"
+          },
+          {
+            "helper_name": "print_each",
+            "rule_label": "Top",
+            "message": "leaf:cd!"
+          },
+          {
+            "helper_name": "say",
+            "rule_label": "Top",
+            "message": "done:2\n"
+          }
+        ],
+        "host_output": "",
+        "exit_status": null,
+        "caller_error_identity": null,
+        "helper_arity": null,
+        "detachment": {
+          "actual_result_checked": true,
+          "mapped_unchanged": true,
+          "original_unchanged": true,
+          "deliberately_aliased_control_rejected": true
+        }
+      }
+    },
+    {
+      "id": "P_short",
+      "source_id": "normalization",
+      "input": "x-y",
+      "sink_mode": "collect",
+      "expected": {
+        "outcome": "value",
+        "value": {
+          "tree": {
+            "a": "new:X",
+            "b": {
+              "c": "new:Y"
+            },
+            "meta": {
+              "count": 2
+            }
+          },
+          "mapped": {
+            "a": "new:X",
+            "b": {
+              "c": "new:Y"
+            }
+          },
+          "original": {
+            "a": "x",
+            "b": {
+              "c": "y"
+            }
+          },
+          "seen": [
+            "x",
+            "y"
+          ],
+          "text": "outside",
+          "visits": 2
+        },
+        "events": [
+          {
+            "helper_name": "print_each",
+            "rule_label": "Top",
+            "message": "leaf:x!"
+          },
+          {
+            "helper_name": "print_each",
+            "rule_label": "Top",
+            "message": "leaf:y!"
+          },
+          {
+            "helper_name": "say",
+            "rule_label": "Top",
+            "message": "done:2\n"
+          }
+        ],
+        "host_output": "",
+        "exit_status": null,
+        "caller_error_identity": null,
+        "helper_arity": null,
+        "detachment": {
+          "actual_result_checked": true,
+          "mapped_unchanged": true,
+          "original_unchanged": true,
+          "deliberately_aliased_control_rejected": true
+        }
+      }
+    },
+    {
+      "id": "P_quiet",
+      "source_id": "normalization",
+      "input": "ab-cd",
+      "sink_mode": "absent",
+      "expected": {
+        "outcome": "value",
+        "value": {
+          "tree": {
+            "a": "new:AB",
+            "b": {
+              "c": "new:CD"
+            },
+            "meta": {
+              "count": 2
+            }
+          },
+          "mapped": {
+            "a": "new:AB",
+            "b": {
+              "c": "new:CD"
+            }
+          },
+          "original": {
+            "a": "ab",
+            "b": {
+              "c": "cd"
+            }
+          },
+          "seen": [
+            "ab",
+            "cd"
+          ],
+          "text": "outside",
+          "visits": 2
+        },
+        "events": [],
+        "host_output": "",
+        "exit_status": null,
+        "caller_error_identity": null,
+        "helper_arity": null,
+        "detachment": {
+          "actual_result_checked": true,
+          "mapped_unchanged": true,
+          "original_unchanged": true,
+          "deliberately_aliased_control_rejected": true
+        }
+      }
+    },
+    {
+      "id": "P_prefix_bad",
+      "source_id": "normalization",
+      "input": "!ab-cd",
+      "sink_mode": "collect",
+      "expected": {
+        "outcome": "authored_exit",
+        "value": null,
+        "events": [],
+        "host_output": "",
+        "exit_status": 1,
+        "caller_error_identity": null,
+        "helper_arity": null,
+        "detachment": null
+      }
+    },
+    {
+      "id": "P_suffix_bad",
+      "source_id": "normalization",
+      "input": "ab-cd!",
+      "sink_mode": "collect",
+      "expected": {
+        "outcome": "authored_exit",
+        "value": null,
+        "events": [],
+        "host_output": "",
+        "exit_status": 1,
+        "caller_error_identity": null,
+        "helper_arity": null,
+        "detachment": null
+      }
+    },
+    {
+      "id": "P_empty",
+      "source_id": "normalization",
+      "input": "",
+      "sink_mode": "collect",
+      "expected": {
+        "outcome": "authored_exit",
+        "value": null,
+        "events": [],
+        "host_output": "",
+        "exit_status": 1,
+        "caller_error_identity": null,
+        "helper_arity": null,
+        "detachment": null
+      }
+    }
+  ],
+  "mutation_requirements": [
+    {
+      "id": "D_operand_order",
+      "case_id": "D_ordered_go",
+      "role": "argument effect order"
+    },
+    {
+      "id": "D_omitted_effect",
+      "case_id": "D_ordered_go",
+      "role": "complete argument effects"
+    },
+    {
+      "id": "D_item_order",
+      "case_id": "D_ordered_go",
+      "role": "ordered item delivery"
+    },
+    {
+      "id": "D_output_in_result",
+      "case_id": "D_ordered_go",
+      "role": "result/output separation"
+    },
+    {
+      "id": "D_boolean_as_number",
+      "case_id": "D_ordered_go",
+      "role": "typed boolean result"
+    },
+    {
+      "id": "D_work_after_exit",
+      "case_id": "D_exit_stop",
+      "role": "immediate authored exit"
+    },
+    {
+      "id": "D_wrapped_caller_failure",
+      "case_id": "D_sink_failure_after2",
+      "role": "identical caller failure"
+    },
+    {
+      "id": "D_effect_before_arity",
+      "case_id": "D_bad_arity",
+      "role": "arity before argument effects"
+    },
+    {
+      "id": "P_frozen_prefix",
+      "case_id": "P_ab_cd",
+      "role": "live caller prefix"
+    },
+    {
+      "id": "P_skipped_function",
+      "case_id": "P_ab_cd",
+      "role": "pure function computation"
+    },
+    {
+      "id": "P_parameter_restore",
+      "case_id": "P_ab_cd",
+      "role": "temporary parameter restoration"
+    },
+    {
+      "id": "P_mapped_alias",
+      "case_id": "P_ab_cd",
+      "role": "actual receiver/result detachment"
+    },
+    {
+      "id": "P_original_alias",
+      "case_id": "P_ab_cd",
+      "role": "actual original-copy detachment"
+    },
+    {
+      "id": "P_reversed_visits",
+      "case_id": "P_ab_cd",
+      "role": "original-shape visitation order"
+    },
+    {
+      "id": "P_wrong_count",
+      "case_id": "P_ab_cd",
+      "role": "finite attached iteration"
+    },
+    {
+      "id": "P_missing_publication",
+      "case_id": "P_ab_cd",
+      "role": "post-transform nested write"
+    }
+  ],
+  "unassessed": [
+    "indentation width/tabs/dedent",
+    "quoted-string escaping",
+    "comments inside versus outside strings",
+    "whole formats",
+    "richer diagnostics/recovery",
+    "general resources/performance",
+    "supplementary-character key ordering",
+    "sandbox security"
+  ]
+}

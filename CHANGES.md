@@ -12,6 +12,20 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-10-02 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.2: freeze composed neutral governance
+
+Freeze linkedspec-composed-objectives-v1 at16 cases/three sources/eight dimensions and23 original probe
+identities. Explicit expected values match an independent ASCII/shape/event checker without DSL evaluation.
+Preserve typed kinds, ordered/quiet effects, exit/caller-error/arity and actual-object detachment obligations.
+Reject140 structural,16 observation and44 producer-report corruptions plus four controls; private synthetic
+records prove report shape only. Add exactly one CI call/five tracked inputs. Two new owner-bound insertions,
+then two earlier ones, recover all historical CI bytes; six controls reject unrelated/registration drift.
+Storage40 explicitly runs the new checker through the managed wrapper with hostile external roots. Align
+book, Toolbox/authority navigation, Knowledge, roadmap/frontier/checkpoint and bounded continuity; trim LIVE
+to16 recent rows. Focused source/original-audit/closure/callable/diagnostic/storage/book/Knowledge/history/memory
+proof precedes exact staged canonical acceptance. No runtime/admission or original16-authority/90-anchor change.
+Next P1 Perl .1.3.3.0 precedes dependent execution; all existing repair prerequisites remain separate.
+
 ## 2026-10-02 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.1: bounded composed selection
 
 Select diagnostic9/normalization7 cases across eight parent dimensions before fixtures. Freeze independent

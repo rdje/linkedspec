@@ -2,17 +2,19 @@
 
 ## Current Activity
 
-Neutral composed fixtures/oracle governance under SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.2, after bounded selection .1.3.1. Structured formats and the optional frontend retain their language-readiness/parity gates.
+P1 Perl deferred push/registered-function repair under SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0, after neutral composed governance .1.3.2. Structured formats and the optional frontend retain their language-readiness/parity gates.
 
 ## Latest Completed Slice
 
-- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.1 - select bounded composed objectives` — Sixteen cases/eight dimensions and independent value/kind/event/failure/alias oracles. Six public Perl D pilots pass; pipeline callback dispatch remains blocked by owned P1 .1.3.3.0. Original sources/authorities and runtime admission remain exact.
+- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.2 - freeze neutral composed objectives` — Sixteen cases/three sources/eight dimensions with140 structural/16 observation/44 producer-report falsifiers/four controls. Exact CI/storage40 and independent historical audit preserve proof; no DSL execution or runtime admission. Canonical proof governs landing.
 
 ## Next Action
 
-- Activate .1.3.2 from clean HEAD: select exact neutral fixture/checker paths, freeze16 cases and reason-sensitive mutations, preserving all repair prerequisites before runtime execution.
+- Activate P1 .1.3.3.0 from clean HEAD: reverify public callback push/function failures, repair the existing routes with scope/identity/arity controls, then execute .1.3.3.1. All other repairs/prerequisites remain.
 
 ## Recent Completions
+
+- `2026-10-02` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.2` freezes neutral composed sources/oracles and recurring governance before the owned P1 Perl repair.
 
 - `2026-10-02` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.1` selects bounded compositions and owns the P1 Perl deferred dispatch repair before execution.
 
@@ -43,8 +45,6 @@ Neutral composed fixtures/oracle governance under SPEC-LANGUAGE-SELF-CONTAINMENT
 - `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.1` verifies Rust lossless extraction and real child grammars on six carriers.
 
 - `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.3` verifies actual Perl child composition across four carrier pairs.
-
-- `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.2` verifies lossless Perl segmentation and corrects the published gap lifecycle.
 
 ## History
 

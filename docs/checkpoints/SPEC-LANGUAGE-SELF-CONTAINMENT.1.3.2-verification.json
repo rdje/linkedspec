@@ -1,0 +1,183 @@
+{
+  "activation_commit": "70e15013cb5278a7a9c785f75290d5f7fc7a575d",
+  "canonical": {
+    "candidate": "exact fully staged tree including this checkpoint; no tracked edits after successful gate",
+    "required": true,
+    "result_location": "producing commit body plus promoted exact-candidate receipt; do not infer result from this plan",
+    "runner": "bash tools/run_ci_local.sh (approved host execution)"
+  },
+  "cases": [
+    "D_ordered_go",
+    "D_ordered_wait",
+    "D_quiet_go",
+    "D_exit_stop",
+    "D_sink_failure_after2",
+    "D_prefix_bad",
+    "D_suffix_bad",
+    "D_empty",
+    "D_bad_arity",
+    "P_ab_cd",
+    "P_mixed_case",
+    "P_short",
+    "P_quiet",
+    "P_prefix_bad",
+    "P_suffix_bad",
+    "P_empty"
+  ],
+  "contract_id": "linkedspec-composed-objectives-v1",
+  "date": "2026-10-02",
+  "dimensions": {
+    "branching_iteration": [
+      "D",
+      "P"
+    ],
+    "callable_composition": [
+      "P"
+    ],
+    "cursor_algebra": [
+      "foundation:nested-tree",
+      "foundation:lossless-segments",
+      "D",
+      "P"
+    ],
+    "interval_boundary_capture": [
+      "foundation:lossless-segments",
+      "foundation:lossless-child"
+    ],
+    "natural_recursion": [
+      "foundation:nested-tree",
+      "foundation:context-names"
+    ],
+    "nested_state": [
+      "foundation:context-names",
+      "P"
+    ],
+    "structural_transformation": [
+      "P"
+    ],
+    "typed_result_construction": [
+      "D",
+      "P"
+    ]
+  },
+  "focused": {
+    "existing_guards": {
+      "callable_mutations": 23,
+      "closure_controls": 4,
+      "closure_mutations": 636,
+      "diagnostic_mutations": 20
+    },
+    "independent_review": {
+      "cases": 16,
+      "dimensions": 8,
+      "independent_import_boundary": "PASS",
+      "native_execution_claim": false,
+      "original_authority_files_unchanged": 56,
+      "original_probe_sources": 23,
+      "rendered_claims": 8,
+      "roadmap_headers": 3,
+      "roadmap_rows": 2,
+      "runtime_source_unchanged": true,
+      "selection_binding": "PASS",
+      "sources": 3
+    },
+    "observation_falsifiers": 16,
+    "original_audit": {
+      "checkpoints": 24,
+      "ci_evolution": [
+        {
+          "additional_owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.2",
+          "current": "cbac2856472f3417cad58f6de8010a3809507a44373886d69c807e6aff81927f",
+          "historical": "20d82473dfff48d79290a2ebef4ebab5e84e248638ae023f504db4638f208a41",
+          "owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.2",
+          "path": "tools/run_ci_local.sh",
+          "scope": "exact anchored checker/input registration; original CI bytes preserved"
+        }
+      ],
+      "controls": {
+        "corrupted_inputs_rejected": [
+          "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.3-verification.json",
+          "perl/LinkedSpec/Runtime.pm",
+          ".linkedspec-data/scratch/nested-native-perl.log",
+          "tests/language-readiness/context-names/cases.json"
+        ],
+        "governance_mutations_rejected": 6,
+        "outside_paths_rejected": 2,
+        "summary_recovery_inflation_rejected": true
+      },
+      "historical_references": 257,
+      "latest_inputs": 149,
+      "retained_logs": 134
+    },
+    "producer_report_falsifiers": 44,
+    "strict_json_controls": 2,
+    "structural_falsifiers": 140,
+    "synthetic_report_only": true,
+    "tool_python_entrypoints": 40,
+    "unrelated_error_controls": 2
+  },
+  "format": 1,
+  "limits": [
+    "Neutral schema/oracle/source/report integrity only; no DSL execution, semantic-mutant execution, runtime admission or whole-format proof.",
+    "Native classification/identity/actual-object detachment require public producer assertions and actual source/log evidence; serialized predicates alone are insufficient.",
+    "P1 Perl push/registered-function repair .1.3.3.0 precedes dependent execution .1.3.3.1; startup87.2/.3 and every other repair prerequisite remain.",
+    "Original16 authorities/90 semantic anchors and runtime sources stay unchanged; current roadmap V2 omission was corrected without direction change.",
+    "No new syntax/primitive/ambient authority/resource bound/security or performance guarantee."
+  ],
+  "logs": {
+    ".linkedspec-data/scratch/selfcontain132/book-final.log": "69818e16e6fa7713f2c1d5799dd13de7095eb43cd2ebe776bfe9a7136102ce27",
+    ".linkedspec-data/scratch/selfcontain132/callable.log": "00374dc3966f70d83b0b8bc16056172b0c1a557829a7b73c2d347d32d5d863de",
+    ".linkedspec-data/scratch/selfcontain132/closure.log": "f81e008cecd839f6f9da6106d9e84e906717aad4914689fb9adef2b7f22bfeb2",
+    ".linkedspec-data/scratch/selfcontain132/diagnostic.log": "eeb6ffd6bde7120ba7872714352ea976498b82fc9be5463269cc335fd6f57c01",
+    ".linkedspec-data/scratch/selfcontain132/knowledge.log": "3a4980dc4167d6dd6c20a48811d490602dd5acbeab659e40822c1d0571f2ba0f",
+    ".linkedspec-data/scratch/selfcontain132/memory.log": "96da38d4f37cf604b9b5bf787bc5e62af9c07855061797e7c2f9fd3e193b2f07",
+    ".linkedspec-data/scratch/selfcontain132/neutral-final.log": "ee0512718fc36c54e926b653892d841801b940ce8a41610ab2e1c912a03b41b8",
+    ".linkedspec-data/scratch/selfcontain132/objectives.log": "84bbebf1108084a7204de9ec0a14c610861028cb001ef0be98bd867baf8c002b",
+    ".linkedspec-data/scratch/selfcontain132/private-report.log": "abf2ffd2ee2959e33c96b7791e48b74466210704d8428919abed8e8b5f11aaa7",
+    ".linkedspec-data/scratch/selfcontain132/review.log": "b937336925234104d7f0460ce1e1fc38a54d1021e608275677bd46788d286f28",
+    ".linkedspec-data/scratch/selfcontain132/storage.log": "7bc4327ec8a0fe83b39acb408d11ca9a910f97de61fea6d565ee30e828e80af5"
+  },
+  "original_source_bindings": {
+    "tests/language-readiness/context-names/cases.json": "3e7f25083e791db8048bed844523e85fbc53763eeaabd1253001a2b2650575ef",
+    "tests/language-readiness/context-names/grammar.spec": "8f408e81e2871b3b76c1a7fc7f99e059dad1c19dd03e91449a05fc9b88fff4b0",
+    "tests/language-readiness/context-names/rust_checks.rs": "e7a01a4fc4465c4a1e7933b54b5dc599249a000c356532168d8cbe6093246b43",
+    "tests/language-readiness/lossless-child/cases.json": "2589ef997c978ea9fa1e80f886106df7235839d6a89439b88ece328d58e3b3c7",
+    "tests/language-readiness/lossless-child/child.spec": "34c5f109d401f83fa600a225682599fe924957fdbf45ad2136f55450248badd9",
+    "tests/language-readiness/lossless-child/dart_carriers.dart": "e6a8b4d502aeb7b9152cb5bc22aade234772fba558bab15b25e3e0e65e40a7dd",
+    "tests/language-readiness/lossless-child/dart_checks.dart": "708d3c8d5ca9683185e26e099525df6198d2c775e5679dd221393edef7228f63",
+    "tests/language-readiness/lossless-child/julia_carriers.jl": "9b308b17b62cac150df88b5d256ea379db697fd393fb3237f1d2f65caa6ea317",
+    "tests/language-readiness/lossless-child/julia_checks.jl": "3ca60f296b06cf0c07132fbe117dda155729cf12a599ff53b97b233e6c4c26cb",
+    "tests/language-readiness/lossless-child/lua_carriers.lua": "1cd379ca959bcd4d92eec68ebe8f3e20e02d80e7b356adbc5d67db0785697456",
+    "tests/language-readiness/lossless-child/lua_checks.lua": "67a59f580f1daf5ad0c6d0f9a425ab1d8e8445e6d748dffa0a14ad0a63fa4367",
+    "tests/language-readiness/lossless-child/parent.spec": "8b19299a5d3715cba7f44dac266954e8b34497920a308f956f6e35b286ae6435",
+    "tests/language-readiness/lossless-child/rust_carriers.rs": "6a461b9f86525d5ab4d75a74d4395869048e3c146e674badb31d3f652b6cd9cd",
+    "tests/language-readiness/lossless-child/rust_checks.rs": "e26105539eafd80fb870d4959881a086a81f57839018685ff8d84ce8f2bf6f20",
+    "tests/language-readiness/lossless-segments/cases.json": "fd4fe58d6bb0efa7bcb609b863c3d9a2238bb5c62fa9a1814a143e04416bd89c",
+    "tests/language-readiness/lossless-segments/grammar.spec": "8f20d242b0f2ea0eee1d70b6f289cf96362cdf3b64ef4cbcc77f5631ffe3eb36",
+    "tests/language-readiness/nested-tree/cases.json": "7a36a4b32d8a5ac8a1d2f17d6d000a68c707bfc15a4b3a1e93e3e4ddaf4147c7",
+    "tests/language-readiness/nested-tree/dart_checks.dart": "5ae819cccaf0dc2cfb2a1753f5351148307cebc8797ff605fc4ba8c65c15df4a",
+    "tests/language-readiness/nested-tree/grammar.spec": "498ffda35b05222388c64d99b0acb132a56996e97de3ffa9312f7dda6ee0ed72",
+    "tests/language-readiness/nested-tree/julia_checks.jl": "a0511244a5ae78c39e6d68c116a03ab1dcb08610ff8f01f75079551eb3825c62",
+    "tests/language-readiness/nested-tree/lua_checks.lua": "0cf52abd24227574f5e93389836176452332f75c1d751b823f1c70d2c31af435",
+    "tests/language-readiness/nested-tree/rust_checks.rs": "9d805a415bc2f63e057910af0d1e679e46fd84533bfe2c6c126d912b8ec16b68",
+    "tests/language-readiness/nested-tree/verify_native.py": "a177b58c22777cdcbd128e2d6147fd63da95c33654f6baaf8c5d28d0080deb6c"
+  },
+  "owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.2",
+  "selection": {
+    "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.1-selection.json",
+    "sha256": "b9e54e21dff39b08a098ea882a513d507730e0cdd7e4d6199c6374f8dbc30fe7"
+  },
+  "source_hashes": {
+    "capability_conformance/composed_objective_contract.json": "52b76d5b3e48fdf64f25e93b22553eabfa765fc224c101f0f5fbdd8a6abf6e01",
+    "docs/language-readiness/composed-objective-governance.md": "22f5c2b0d4c77fd9cff2e35ead753adead9b94aae715e5f827f76d561cfb9e28",
+    "docs/linkedspec-book/src/architecture/structured-format-program.md": "6816a8f3098a40b2e1e8ab9fbdf0c26d8b0da4b28771cf1c90b41789f93bfc2b",
+    "tests/language-readiness/composed/diagnostic-invalid-arity.spec": "bd474ebe5e927111b46163b217da66e3d75802f264558800b3bfeebd14ad773a",
+    "tests/language-readiness/composed/diagnostic.spec": "fba66e47d14b1a236deb1136ec2c515fa629f8a1d8dce36812431ebe8bc62fc0",
+    "tests/language-readiness/composed/normalization.spec": "ba9953c282e5e66956dc4b7d22c2acc7b1e879734654e7cb467ad41275cc4249",
+    "tests/language-readiness/verify_objectives.py": "089068dd32698dd608ce0ca464880aaabbcedc096e1b6c8002a39491e8e4e25d",
+    "tools/check_composed_objective_contract.py": "3ad0987b79d6a424719921ad535fe25fec1f77134f7fd774af3867e854a8f770",
+    "tools/run_ci_local.sh": "cbac2856472f3417cad58f6de8010a3809507a44373886d69c807e6aff81927f",
+    "tools/test_tool_project_data_storage.sh": "38f2655309123e032db3a276d00db91881face3021f6d8416b9c800b99f4fe51"
+  },
+  "verification_tier": "canonical"
+}

@@ -67,5 +67,5 @@ mutations/four controls. [[language-closure-scoped-policy-freeze]] owns the date
 determinism/resource/failure/ambient review and public-channel corrections.
 `.1.2.4` independently reconciles the parent through canonical proof; the current guard rejects636
 reason-sensitive mutations/four controls. [[language-closure-definition-reconciliation]] records the
-revision-bound audit and precise metadata-only evolution. `.1.3.1` selects16 bounded cases across eight dimensions under [[bounded-composed-objective-selection]]. `.1.3.2` next freezes neutral governance; [[perl-codeblock-composition-dispatch-gap]] blocks affected Perl execution.
+revision-bound audit and precise metadata-only evolution. `.1.3.1` selects16 bounded cases across eight dimensions under [[bounded-composed-objective-selection]]. `.1.3.2` freezes [[composed-objective-neutral-governance]]; P1 Perl repair .1.3.3.0 is next; [[perl-codeblock-composition-dispatch-gap]] blocks affected Perl execution.
 [[spec-language-self-containment-and-ebnf-profile]] retains the later optional frontend.
