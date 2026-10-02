@@ -51,6 +51,6 @@ retain distinct scopes, operational deterministic inputs, scoped progress and fa
 publication. Existing runtime admission, source-detail promise, resource/detail,
 lexical-order and other repairs/prerequisites remain unchanged. Structural closure
 does not establish whole-format readiness, sandboxing, new limits or performance.
-`.1.3.1` next selects bounded composed objectives; `.1.3.2` owns neutral governance,
+`.1.3.1` selects16 bounded composed cases/eight dimensions; [[bounded-composed-objective-selection]] preserves current pilot limits and P1 repair ownership. `.1.3.2` next owns neutral governance,
 `.1.3.3`–`.1.3.7` own five backend lanes/six runtime routes, and `.1.3.8` independently
 reconciles execution before `.1.4` can select evidence-backed primitive gaps.

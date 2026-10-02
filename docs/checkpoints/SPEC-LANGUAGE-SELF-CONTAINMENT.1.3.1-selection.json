@@ -1,0 +1,716 @@
+{
+  "activation_commit": "2a8c368159a6c9b927bc6cd7fc524fe0de7319a6",
+  "canonical_trigger": "none: selection/documentation only; fixtures/runtime/authority/CI/admission unchanged; .1.3.2 normative neutral governance will run canonical proof",
+  "claim_limits": [
+    "Selection is not fixture governance, backend admission or whole-format readiness.",
+    "Six fresh D public Perl pilots only; wait/suffix/arity and other runtimes pending.",
+    "P public prototype fails at callback push; ready/raw/fallback/unresolved describe compilation, not execution.",
+    "Seven isolated controls: five success, two typed unknown_helper failures.",
+    "Original three objectives and child evidence remain exact; all external repair prerequisites remain.",
+    "Indentation, quotes/escaping/comments, richer recovery/resources/performance and whole formats remain unassessed.",
+    "No new primitive, syntax, host escape or ambient authority."
+  ],
+  "focused_checks": {
+    "book": {
+      "log": ".linkedspec-data/scratch/selfcontain131/book.log",
+      "result": "PASS",
+      "sha256": "1149b59f0c8d71c1a85a5625f0bd14ba39d31f044d067406d51486c5f777bad3"
+    },
+    "callable": {
+      "log": ".linkedspec-data/scratch/selfcontain131/callable.log",
+      "result": "PASS",
+      "sha256": "00374dc3966f70d83b0b8bc16056172b0c1a557829a7b73c2d347d32d5d863de"
+    },
+    "closure": {
+      "log": ".linkedspec-data/scratch/selfcontain131/closure.log",
+      "result": "PASS",
+      "sha256": "f81e008cecd839f6f9da6106d9e84e906717aad4914689fb9adef2b7f22bfeb2"
+    },
+    "diagnostic": {
+      "log": ".linkedspec-data/scratch/selfcontain131/diagnostic.log",
+      "result": "PASS",
+      "sha256": "eeb6ffd6bde7120ba7872714352ea976498b82fc9be5463269cc335fd6f57c01"
+    },
+    "doctrines": {
+      "log": ".linkedspec-data/scratch/selfcontain131/doctrines-final.log",
+      "registered": 9,
+      "result": "PASS",
+      "sha256": "17bd8fa352f66e11c437faf35d30aa1880f670236c7602a1a58c925b842d98ad"
+    },
+    "knowledge": {
+      "log": ".linkedspec-data/scratch/selfcontain131/knowledge.log",
+      "result": "PASS",
+      "sha256": "3a4980dc4167d6dd6c20a48811d490602dd5acbeab659e40822c1d0571f2ba0f"
+    },
+    "leaves": {
+      "log": ".linkedspec-data/scratch/selfcontain131/leaves.log",
+      "result": "PASS",
+      "sha256": "4609559c068ef9eb36d69f63912cd78cd7171d5874aefbacd203c23aacc28874"
+    },
+    "live_status_correction": "Initial17-row current view rejected; restored ADR0066 maximum16 without history/schema changes; final doctrines PASS.",
+    "memory": {
+      "log": ".linkedspec-data/scratch/selfcontain131/memory.log",
+      "result": "PASS",
+      "sha256": "03a228a5fc9eb9041644f5c5a2a449b642e625240046483e242813411c30be0b"
+    },
+    "objectives": {
+      "log": ".linkedspec-data/scratch/selfcontain131/objectives.log",
+      "result": "PASS",
+      "sha256": "bbd4bd622305933dbec526310128ea48dc2060a0a2f999bd217040d2c9cd17e0"
+    },
+    "selection-qa": {
+      "log": ".linkedspec-data/scratch/selfcontain131/selection-qa.log",
+      "result": "PASS",
+      "sha256": "48fb1b94fbf5ee83420324f60c50d122d4fe9cdce506985ba038e2957a7618ba",
+      "summary": {
+        "authority_files_unchanged": 57,
+        "blocked_P_pilots": 1,
+        "cases": 16,
+        "dimensions": 8,
+        "fresh_D_pilots": 6,
+        "isolated_controls": 7,
+        "rendered_claims": 6,
+        "repair_owner": "P1 .1.3.3.0 before .1.3.3.1",
+        "retained_original_sources": 23,
+        "source_and_provenance": "PASS"
+      }
+    },
+    "write": {
+      "log": ".linkedspec-data/scratch/selfcontain131/write.log",
+      "result": "PASS",
+      "sha256": "16d2aa43e47e05faa40c4ece1d82cf55dc2df1e554a5bb98ee40c999c1a4b447"
+    }
+  },
+  "format": 1,
+  "fresh_public_perl_pilots": [
+    {
+      "descriptor": {
+        "canonical_action_ir_count": 23,
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "input": "go",
+      "log": {
+        "path": ".linkedspec-data/scratch/selfcontain131/diagnostic-go-final.log",
+        "sha256": "ac62a04146496670f59dff78b4938f4bb3fa7f78bdc8012a3e6361b35800674d"
+      },
+      "observation": {
+        "events": [
+          {
+            "helper_name": "print",
+            "message": "begin:go",
+            "rule_label": "Top"
+          },
+          {
+            "helper_name": "print_each",
+            "message": "part:α!",
+            "rule_label": "Top"
+          },
+          {
+            "helper_name": "print_each",
+            "message": "part:!",
+            "rule_label": "Top"
+          },
+          {
+            "helper_name": "print_each",
+            "message": "part:!",
+            "rule_label": "Top"
+          },
+          {
+            "helper_name": "print_each",
+            "message": "part:🙂!",
+            "rule_label": "Top"
+          },
+          {
+            "helper_name": "say",
+            "message": "done\n",
+            "rule_label": "Top"
+          }
+        ],
+        "failure": null,
+        "failure_detail": null,
+        "last_error": null,
+        "result": {
+          "effects": [
+            "left",
+            "right"
+          ],
+          "payload": false,
+          "word": "go"
+        },
+        "sink_identity_preserved": null
+      },
+      "producer_version": "current retained pilot.pl",
+      "sink_mode": "sink",
+      "source_sha256": "fba66e47d14b1a236deb1136ec2c515fa629f8a1d8dce36812431ebe8bc62fc0"
+    },
+    {
+      "descriptor": {
+        "canonical_action_ir_count": 23,
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "input": "stop",
+      "log": {
+        "path": ".linkedspec-data/scratch/selfcontain131/diagnostic-stop-final.log",
+        "sha256": "751ab4393a285bf30eb07cda063223fb9c3f9722465b5d2b6db283e8841c507d"
+      },
+      "observation": {
+        "events": [
+          {
+            "helper_name": "print",
+            "message": "begin:stop",
+            "rule_label": "Top"
+          },
+          {
+            "helper_name": "say",
+            "message": "stop\n",
+            "rule_label": "Top"
+          }
+        ],
+        "failure": "LINKEDSPEC_RUNTIME_EXIT_NOW:7",
+        "failure_detail": {
+          "kind": "runtime_exit_now",
+          "observed_class": "LinkedSpec::RuntimeExitNow",
+          "rule_label": "Top",
+          "status": 7
+        },
+        "last_error": null,
+        "result": null,
+        "sink_identity_preserved": null
+      },
+      "producer_version": "current retained pilot.pl",
+      "sink_mode": "sink",
+      "source_sha256": "fba66e47d14b1a236deb1136ec2c515fa629f8a1d8dce36812431ebe8bc62fc0"
+    },
+    {
+      "descriptor": {
+        "canonical_action_ir_count": 23,
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "input": "go",
+      "log": {
+        "path": ".linkedspec-data/scratch/selfcontain131/diagnostic-quiet-final.log",
+        "sha256": "74b721dadea7016d354cd662ec5ac86a7b98fd17c6109cf40e90141ac310721d"
+      },
+      "observation": {
+        "events": [],
+        "failure": null,
+        "failure_detail": null,
+        "last_error": null,
+        "result": {
+          "effects": [
+            "left",
+            "right"
+          ],
+          "payload": false,
+          "word": "go"
+        },
+        "sink_identity_preserved": null
+      },
+      "producer_version": "current retained pilot.pl",
+      "sink_mode": "quiet",
+      "source_sha256": "fba66e47d14b1a236deb1136ec2c515fa629f8a1d8dce36812431ebe8bc62fc0"
+    },
+    {
+      "descriptor": {
+        "canonical_action_ir_count": 23,
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "input": "go",
+      "log": {
+        "path": ".linkedspec-data/scratch/selfcontain131/diagnostic-throw2-final.log",
+        "sha256": "7906bab1ac5605b587ee5836a6629e5bf46e199a0ec68be58a08fb6058cd042d"
+      },
+      "observation": {
+        "events": [
+          {
+            "helper_name": "print",
+            "message": "begin:go",
+            "rule_label": "Top"
+          },
+          {
+            "helper_name": "print_each",
+            "message": "part:α!",
+            "rule_label": "Top"
+          }
+        ],
+        "failure": "Selection::SinkFailure=HASH(0x7496c97750)",
+        "failure_detail": {
+          "observed_class": "Selection::SinkFailure",
+          "tag": "selection_sink_failure"
+        },
+        "last_error": null,
+        "result": null,
+        "sink_identity_preserved": true
+      },
+      "producer_version": "current retained pilot.pl",
+      "sink_mode": "throw2",
+      "source_sha256": "fba66e47d14b1a236deb1136ec2c515fa629f8a1d8dce36812431ebe8bc62fc0"
+    },
+    {
+      "descriptor": {
+        "canonical_action_ir_count": 23,
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "input": "!go",
+      "log": {
+        "path": ".linkedspec-data/scratch/selfcontain131/diagnostic-prefix.log",
+        "sha256": "5902f02e87e53a2b9641f58390e5935f840e8fd3201f32ce3c0fd21471beb431"
+      },
+      "observation": {
+        "events": [],
+        "failure": "LINKEDSPEC_RUNTIME_EXIT_NOW:1",
+        "last_error": null,
+        "result": null
+      },
+      "producer_version": "earlier same public Get/projection; sink-mode reporting added later; no historical producer-byte claim",
+      "sink_mode": "sink",
+      "source_sha256": "fba66e47d14b1a236deb1136ec2c515fa629f8a1d8dce36812431ebe8bc62fc0"
+    },
+    {
+      "descriptor": {
+        "canonical_action_ir_count": 23,
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "input": "",
+      "log": {
+        "path": ".linkedspec-data/scratch/selfcontain131/diagnostic-empty.log",
+        "sha256": "5902f02e87e53a2b9641f58390e5935f840e8fd3201f32ce3c0fd21471beb431"
+      },
+      "observation": {
+        "events": [],
+        "failure": "LINKEDSPEC_RUNTIME_EXIT_NOW:1",
+        "last_error": null,
+        "result": null
+      },
+      "producer_version": "earlier same public Get/projection; sink-mode reporting added later; no historical producer-byte claim",
+      "sink_mode": "sink",
+      "source_sha256": "fba66e47d14b1a236deb1136ec2c515fa629f8a1d8dce36812431ebe8bc62fc0"
+    },
+    {
+      "descriptor": {
+        "canonical_action_ir_count": 28,
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "input": "ab-cd",
+      "log": {
+        "path": ".linkedspec-data/scratch/selfcontain131/pipeline-current.log",
+        "sha256": "a1b38054d2038f3d8f803d74ebb562ec05e21cf961cef58aa102fdc6caf34626"
+      },
+      "observation": {
+        "events": [],
+        "failure": null,
+        "last_error": {
+          "detail": {
+            "code": "unknown_helper",
+            "kind": "codeblock_runtime_error",
+            "name": "push",
+            "observed_class": "LinkedSpec::CodeblockRuntime::Error"
+          },
+          "handler_source_label": "LinkedSpec::generated_handler:Top:_default",
+          "handler_variant": "_default",
+          "owner_stage": "runtime_handler:rule_handler_eval",
+          "rule_label": "Top",
+          "spec_name": "",
+          "spec_path": "",
+          "stage": "rule_handler_eval",
+          "summary": "Rule handler execution failed",
+          "top_rule": "Top",
+          "type": "runtime_handler"
+        },
+        "result": null
+      },
+      "producer_version": "earlier same public Get/projection; sink-mode reporting added later; no historical producer-byte claim",
+      "sink_mode": "sink",
+      "source_sha256": "ba9953c282e5e66956dc4b7d22c2acc7b1e879734654e7cb467ad41275cc4249"
+    }
+  ],
+  "isolated_callable_controls": {
+    "log": {
+      "path": ".linkedspec-data/scratch/selfcontain131/callable-controls.log",
+      "sha256": "3ab22e7e1279a10599f98526976bd411a16f89baf87297455e2140c284fac97a"
+    },
+    "records": [
+      {
+        "id": "direct_push",
+        "last_error": null,
+        "metadata": {
+          "canonical_action_ir_fallback_count": 0,
+          "language_agnostic_action_ir_ready": 1,
+          "raw_perl_dependency_count": 0,
+          "unresolved_helper_count": 0
+        },
+        "source": "Top:: I { seen=[]; push(seen,\"x\"); return(seen) }",
+        "value": [
+          "x"
+        ]
+      },
+      {
+        "id": "callback_push",
+        "last_error": {
+          "detail": {
+            "code": "unknown_helper",
+            "kind": "codeblock_runtime_error",
+            "name": "push",
+            "observed_class": "LinkedSpec::CodeblockRuntime::Error"
+          },
+          "handler_source_label": "LinkedSpec::generated_handler:Top:<none>",
+          "handler_variant": "<none>",
+          "owner_stage": "runtime_handler:rule_handler_eval",
+          "rule_label": "Top",
+          "spec_name": "",
+          "spec_path": "",
+          "stage": "rule_handler_eval",
+          "summary": "Rule handler execution failed",
+          "top_rule": "Top",
+          "type": "runtime_handler"
+        },
+        "metadata": {
+          "canonical_action_ir_fallback_count": 0,
+          "language_agnostic_action_ir_ready": 1,
+          "raw_perl_dependency_count": 0,
+          "unresolved_helper_count": 0
+        },
+        "source": "Top:: I { seen=[]; cb={|| push(seen,\"x\"); return(seen) }; return(cb()) }",
+        "value": null
+      },
+      {
+        "id": "direct_function",
+        "last_error": null,
+        "metadata": {
+          "canonical_action_ir_fallback_count": 0,
+          "language_agnostic_action_ir_ready": 1,
+          "raw_perl_dependency_count": 0,
+          "unresolved_helper_count": 0
+        },
+        "source": "fn decorate(text,prefix) { return(cat(prefix,text)) }\nTop:: I { return(decorate(\"x\",\"!\")) }",
+        "value": "!x"
+      },
+      {
+        "id": "callback_function",
+        "last_error": {
+          "detail": {
+            "code": "unknown_helper",
+            "kind": "codeblock_runtime_error",
+            "name": "decorate",
+            "observed_class": "LinkedSpec::CodeblockRuntime::Error"
+          },
+          "handler_source_label": "LinkedSpec::generated_handler:Top:<none>",
+          "handler_variant": "<none>",
+          "owner_stage": "runtime_handler:rule_handler_eval",
+          "rule_label": "Top",
+          "spec_name": "",
+          "spec_path": "",
+          "stage": "rule_handler_eval",
+          "summary": "Rule handler execution failed",
+          "top_rule": "Top",
+          "type": "runtime_handler"
+        },
+        "metadata": {
+          "canonical_action_ir_fallback_count": 0,
+          "language_agnostic_action_ir_ready": 1,
+          "raw_perl_dependency_count": 0,
+          "unresolved_helper_count": 0
+        },
+        "source": "fn decorate(text,prefix) { return(cat(prefix,text)) }\nTop:: I { cb={|| return(decorate(\"x\",\"!\")) }; return(cb()) }",
+        "value": null
+      },
+      {
+        "id": "callback_cat_assignment",
+        "last_error": null,
+        "metadata": {
+          "canonical_action_ir_fallback_count": 0,
+          "language_agnostic_action_ir_ready": 1,
+          "raw_perl_dependency_count": 0,
+          "unresolved_helper_count": 0
+        },
+        "source": "Top:: I { seen=\"before:\"; cb={|x| seen=cat(seen,x); return(cat(\"!\",x)) }; result=cb(\"x\"); return([result,seen]) }",
+        "value": [
+          "!x",
+          "before:x"
+        ]
+      },
+      {
+        "id": "direct_uppercase",
+        "last_error": null,
+        "metadata": {
+          "canonical_action_ir_fallback_count": 0,
+          "language_agnostic_action_ir_ready": 1,
+          "raw_perl_dependency_count": 0,
+          "unresolved_helper_count": 0
+        },
+        "source": "Top:: I { return(uppercase(\"ab\")) }",
+        "value": "AB"
+      },
+      {
+        "id": "function_uppercase",
+        "last_error": null,
+        "metadata": {
+          "canonical_action_ir_fallback_count": 0,
+          "language_agnostic_action_ir_ready": 1,
+          "raw_perl_dependency_count": 0,
+          "unresolved_helper_count": 0
+        },
+        "source": "fn decorate(text,prefix) { return(cat(prefix,uppercase(text))) }\nTop:: I { return(decorate(\"ab\",\"!\")) }",
+        "value": "!AB"
+      }
+    ]
+  },
+  "mutation_requirements": {
+    "D": [
+      "operand/effect order",
+      "omitted effects",
+      "item order",
+      "output leaking into result",
+      "boolean as number",
+      "work after exit",
+      "swallowed/wrapped caller failure",
+      "effects before arity rejection"
+    ],
+    "P": [
+      "frozen old prefix",
+      "skipped pure computation",
+      "lost parameter restoration",
+      "receiver/result aliasing",
+      "original-copy aliasing",
+      "reversed visits",
+      "wrong finite loop count",
+      "missing post-map metadata"
+    ]
+  },
+  "oracle_independence": "Explicit shape/event/kind/failure expectations; ASCII split/uppercase only for P; no DSL evaluator or runtime-derived expected data. Actual-object alias controls and semantic mutants remain required after healthy runtime baselines.",
+  "owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.1",
+  "parent_dimensions": [
+    "natural recursion",
+    "cursor algebra",
+    "interval/boundary capture",
+    "nested state",
+    "callable composition",
+    "branching/iteration",
+    "structural transformation",
+    "typed result construction"
+  ],
+  "repair": {
+    "dependent_execution_owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.1",
+    "mechanism": "_eval_call handles a small helper list then caller-bound codeblocks; selected push and registered-function routes are absent.",
+    "owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0",
+    "priority": "P1",
+    "separate_existing_owners": [
+      "SESSION-STARTUP-READING.87.2",
+      "SESSION-STARTUP-READING.87.3"
+    ],
+    "source": {
+      "path": "perl/LinkedSpec/CodeblockRuntime.pm",
+      "sha256": "b4d5e601738d8d3a9f50dd4418106e574966276c36f89ed0824f0ad51b223078"
+    }
+  },
+  "retained_foundation": {
+    "corpora": {
+      "context-names": {
+        "accept": 11,
+        "authored_spans": 25,
+        "case_names": [
+          "empty",
+          "empty_element",
+          "unicode_text",
+          "nested_distinct",
+          "siblings_restore_parent",
+          "repeated_names",
+          "multiple_forms",
+          "leading_crlf",
+          "uppercase_exact",
+          "entity_is_literal",
+          "three_levels",
+          "mismatch",
+          "nested_mismatch",
+          "crossed_names",
+          "case_mismatch",
+          "missing_outer",
+          "missing_inner",
+          "bare_text",
+          "trailing_text",
+          "interstitial_text",
+          "unmatched_close",
+          "attribute_syntax",
+          "self_closing",
+          "malformed_close",
+          "hidden_prefix",
+          "empty_name",
+          "markup_inside",
+          "non_ascii_name"
+        ],
+        "reject": 17,
+        "sha256": "3e7f25083e791db8048bed844523e85fbc53763eeaabd1253001a2b2650575ef"
+      },
+      "lossless-child": {
+        "accept": 4,
+        "authored_spans": 4,
+        "case_names": [
+          "0",
+          "7",
+          "12",
+          "120",
+          "",
+          "00",
+          "01",
+          "-1",
+          "+1",
+          "1.0",
+          "x1",
+          "1x",
+          " 1",
+          "1 ",
+          "\n1",
+          "#skip\n1",
+          "1\n",
+          "１２",
+          "[12]"
+        ],
+        "reject": 15,
+        "sha256": "2589ef997c978ea9fa1e80f886106df7235839d6a89439b88ece328d58e3b3c7"
+      },
+      "lossless-segments": {
+        "accept": 13,
+        "authored_spans": 39,
+        "case_names": [
+          "empty",
+          "no_match_unicode",
+          "single_zero",
+          "unicode_edges",
+          "adjacent",
+          "mixed_separators",
+          "malformed_only",
+          "malformed_prefix",
+          "crlf",
+          "leading_lf",
+          "comment_prefix",
+          "comment_eof",
+          "blank_line"
+        ],
+        "reject": 0,
+        "sha256": "fd4fe58d6bb0efa7bcb609b863c3d9a2238bb5c62fa9a1814a143e04416bd89c"
+      },
+      "nested-tree": {
+        "accept": 6,
+        "authored_spans": 13,
+        "case_names": [
+          "empty",
+          "empty_list",
+          "nested_state",
+          "supplementary_scalar",
+          "multiple_forms",
+          "leading_crlf",
+          "trailing_junk",
+          "missing_close",
+          "bare_document_atom",
+          "unmatched_close",
+          "hidden_prefix",
+          "missing_outer_close",
+          "interstitial_junk"
+        ],
+        "reject": 7,
+        "sha256": "7a36a4b32d8a5ac8a1d2f17d6d000a68c707bfc15a4b3a1e93e3e4ddaf4147c7"
+      }
+    },
+    "latest_original_source_identities": {
+      "tests/language-readiness/context-names/cases.json": "3e7f25083e791db8048bed844523e85fbc53763eeaabd1253001a2b2650575ef",
+      "tests/language-readiness/context-names/grammar.spec": "8f408e81e2871b3b76c1a7fc7f99e059dad1c19dd03e91449a05fc9b88fff4b0",
+      "tests/language-readiness/context-names/rust_checks.rs": "e7a01a4fc4465c4a1e7933b54b5dc599249a000c356532168d8cbe6093246b43",
+      "tests/language-readiness/lossless-child/cases.json": "2589ef997c978ea9fa1e80f886106df7235839d6a89439b88ece328d58e3b3c7",
+      "tests/language-readiness/lossless-child/child.spec": "34c5f109d401f83fa600a225682599fe924957fdbf45ad2136f55450248badd9",
+      "tests/language-readiness/lossless-child/dart_carriers.dart": "e6a8b4d502aeb7b9152cb5bc22aade234772fba558bab15b25e3e0e65e40a7dd",
+      "tests/language-readiness/lossless-child/dart_checks.dart": "708d3c8d5ca9683185e26e099525df6198d2c775e5679dd221393edef7228f63",
+      "tests/language-readiness/lossless-child/julia_carriers.jl": "9b308b17b62cac150df88b5d256ea379db697fd393fb3237f1d2f65caa6ea317",
+      "tests/language-readiness/lossless-child/julia_checks.jl": "3ca60f296b06cf0c07132fbe117dda155729cf12a599ff53b97b233e6c4c26cb",
+      "tests/language-readiness/lossless-child/lua_carriers.lua": "1cd379ca959bcd4d92eec68ebe8f3e20e02d80e7b356adbc5d67db0785697456",
+      "tests/language-readiness/lossless-child/lua_checks.lua": "67a59f580f1daf5ad0c6d0f9a425ab1d8e8445e6d748dffa0a14ad0a63fa4367",
+      "tests/language-readiness/lossless-child/parent.spec": "8b19299a5d3715cba7f44dac266954e8b34497920a308f956f6e35b286ae6435",
+      "tests/language-readiness/lossless-child/rust_carriers.rs": "6a461b9f86525d5ab4d75a74d4395869048e3c146e674badb31d3f652b6cd9cd",
+      "tests/language-readiness/lossless-child/rust_checks.rs": "e26105539eafd80fb870d4959881a086a81f57839018685ff8d84ce8f2bf6f20",
+      "tests/language-readiness/lossless-segments/cases.json": "fd4fe58d6bb0efa7bcb609b863c3d9a2238bb5c62fa9a1814a143e04416bd89c",
+      "tests/language-readiness/lossless-segments/grammar.spec": "8f20d242b0f2ea0eee1d70b6f289cf96362cdf3b64ef4cbcc77f5631ffe3eb36",
+      "tests/language-readiness/nested-tree/cases.json": "7a36a4b32d8a5ac8a1d2f17d6d000a68c707bfc15a4b3a1e93e3e4ddaf4147c7",
+      "tests/language-readiness/nested-tree/dart_checks.dart": "5ae819cccaf0dc2cfb2a1753f5351148307cebc8797ff605fc4ba8c65c15df4a",
+      "tests/language-readiness/nested-tree/grammar.spec": "498ffda35b05222388c64d99b0acb132a56996e97de3ffa9312f7dda6ee0ed72",
+      "tests/language-readiness/nested-tree/julia_checks.jl": "a0511244a5ae78c39e6d68c116a03ab1dcb08610ff8f01f75079551eb3825c62",
+      "tests/language-readiness/nested-tree/lua_checks.lua": "0cf52abd24227574f5e93389836176452332f75c1d751b823f1c70d2c31af435",
+      "tests/language-readiness/nested-tree/rust_checks.rs": "9d805a415bc2f63e057910af0d1e679e46fd84533bfe2c6c126d912b8ec16b68",
+      "tests/language-readiness/nested-tree/verify_native.py": "a177b58c22777cdcbd128e2d6147fd63da95c33654f6baaf8c5d28d0080deb6c"
+    },
+    "reconciliation": {
+      "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.4-verification.json",
+      "sha256": "b3a2cf1324cc89a6862577302437ffc48a7a935ad11450ce56eaab98d94097e9"
+    }
+  },
+  "review_date": "2026-10-02",
+  "selected_case_oracles": {
+    "D_bad_arity": "Isolated Word-action variant has no preceding output: `print_each` receives four arguments containing nested diagnostic effects. Helper-arity rejection precedes all argument effects/delivery. Keep each producer's compile/runtime projection rather than inventing one global error wrapper.",
+    "D_empty": "Empty input; authored fallback exit1 and zero events.",
+    "D_exit_stop": "Input `stop`; `begin:stop`, then `stop\\n`; typed exit7; no later item/action or returned value.",
+    "D_ordered_go": "Input `go`; exact value/kinds and six event triples above.",
+    "D_ordered_wait": "Input `wait`; only word and first message change.",
+    "D_prefix_bad": "Input `!go`; authored exit1 before effects/events.",
+    "D_quiet_go": "No caller sink; same value/effects, zero rich events and host diagnostic output.",
+    "D_sink_failure_after2": "Caller throws its unique error on delivery2; retain those two observed events, identical caller error and no later delivery/value. This tests sink authority, not a grammar callback.",
+    "D_suffix_bad": "Input `go!`; authored exit1 before effects/events.",
+    "P_ab_cd": "Exact value/kinds and three ordered events above.",
+    "P_empty": "Empty input; fallback exit1 and no work/delivery.",
+    "P_mixed_case": "Input `AB-cd`; original/seen retain spelling, normalized output remains `new:AB` / `new:CD`.",
+    "P_prefix_bad": "Input `!ab-cd`; authored exit1 before callback/write/output.",
+    "P_quiet": "Input `ab-cd`, no sink; same output/effects with zero rich events.",
+    "P_short": "Input `x-y`; normalized leaves `new:X` / `new:Y`, count2 and restored text.",
+    "P_suffix_bad": "Input `ab-cd!`; authored exit1 before callback/write/output."
+  },
+  "selection": {
+    "path": "docs/language-readiness/composed-objective-selection.md",
+    "sha256": "62e0bddb7214470e7d50a403dc2050d287378ec320e11cbc5f111dd0c599d401"
+  },
+  "sources": {
+    "callable-controls.pl": {
+      "path": ".linkedspec-data/scratch/selfcontain131/callable-controls.pl",
+      "sha256": "dfc99d3dd63b5e63392f546935b749d783cd2734bd98d4f43bc827660af71224",
+      "text": "use strict;\nuse warnings;\nuse utf8;\nuse LinkedSpec ();\nuse JSON::PP ();\nuse Scalar::Util qw(blessed reftype);\nsub project {\n my ($value) = @_;\n return [map { project($_) } @$value] if (reftype($value) // '') eq 'ARRAY';\n if ((reftype($value) // '') eq 'HASH') {\n  my %fields = map { $_ => project($value->{$_}) } keys %$value;\n  $fields{observed_class} = blessed($value) if blessed($value);\n  return \\%fields;\n }\n return $value;\n}\nmy @cases = (\n ['direct_push', q{Top:: I { seen=[]; push(seen,\"x\"); return(seen) }}],\n ['callback_push', q{Top:: I { seen=[]; cb={|| push(seen,\"x\"); return(seen) }; return(cb()) }}],\n ['direct_function', qq{fn decorate(text,prefix) { return(cat(prefix,text)) }\\nTop:: I { return(decorate(\"x\",\"!\")) }}],\n ['callback_function', qq{fn decorate(text,prefix) { return(cat(prefix,text)) }\\nTop:: I { cb={|| return(decorate(\"x\",\"!\")) }; return(cb()) }}],\n ['callback_cat_assignment', q{Top:: I { seen=\"before:\"; cb={|x| seen=cat(seen,x); return(cat(\"!\",x)) }; result=cb(\"x\"); return([result,seen]) }}],\n ['direct_uppercase', q{Top:: I { return(uppercase(\"ab\")) }}],\n ['function_uppercase', qq{fn decorate(text,prefix) { return(cat(prefix,uppercase(text))) }\\nTop:: I { return(decorate(\"ab\",\"!\")) }}],\n);\nfor my $case (@cases) {\n my ($id,$source) = @$case;\n my %ctx;\n my $parser = LinkedSpec::Get(\\$source, runtime_ctx_ref=>\\%ctx);\n die \"no parser for $id\" unless ref($parser) eq 'CODE';\n my $input='x';\n my $value=$parser->(\\$input);\n my $descriptor=LinkedSpec::Get(\\$source, return_descriptor=>1);\n my $meta=$descriptor->{spec}{Top}{meta}{action_rewriter};\n print JSON::PP->new->canonical->encode({\n  id=>$id, source=>$source, value=>project($value), last_error=>project($ctx{last_error}),\n  metadata=>{map {$_=>$meta->{$_}} qw(canonical_action_ir_fallback_count raw_perl_dependency_count unresolved_helper_count language_agnostic_action_ir_ready)},\n }), \"\\n\";\n}\n"
+    },
+    "diagnostic.spec": {
+      "path": ".linkedspec-data/scratch/selfcontain131/diagnostic.spec",
+      "sha256": "fba66e47d14b1a236deb1136ec2c515fa629f8a1d8dce36812431ebe8bc62fc0",
+      "text": "Top::\n -> Word {\n   if(num_ne(match_start_pos(), 0)) { exit_now(1) }\n   if(num_ne(match_end_pos(), input_end_pos())) { exit_now(1) }\n   effects = []\n   print({ push(effects, \"left\"); return(\"begin:\") },\n         { push(effects, \"right\"); return(match_text()) })\n   if(str_eq(match_text(), \"stop\")) { say(\"stop\"); exit_now(7) }\n   print_each([\"α\", undef, [], \"🙂\"], \"part:\", \"!\")\n   say(\"done\")\n   return({ \"word\": match_text(), \"effects\": copy(effects), \"payload\": false })\n }\nLX { exit_now(1) }\n\nWord:\n /([a-z]+)/\n"
+    },
+    "pilot.pl": {
+      "path": ".linkedspec-data/scratch/selfcontain131/pilot.pl",
+      "sha256": "21f316cdccc45c95d3e6e3032b504e00f50fd8cd4027f8c9936c2553176b9151",
+      "text": "use strict;\nuse warnings;\nuse utf8;\nuse LinkedSpec ();\nuse JSON::PP ();\nuse Scalar::Util qw(blessed reftype refaddr);\nbinmode STDOUT, ':encoding(UTF-8)';\nsub project {\n my ($value) = @_;\n return [map { project($_) } @$value] if (reftype($value) // '') eq 'ARRAY';\n if ((reftype($value) // '') eq 'HASH') {\n  my %fields = map { $_ => project($value->{$_}) } keys %$value;\n  $fields{observed_class} = blessed($value) if blessed($value);\n  return \\%fields;\n }\n return $value;\n}\nlocal $/;\nopen my $fh, '<:encoding(UTF-8)', $ARGV[0] // '.linkedspec-data/scratch/selfcontain131/pipeline.spec' or die $!;\nmy $source = <$fh>;\nmy %ctx;\nmy $parser = LinkedSpec::Get(\\$source, runtime_ctx_ref => \\%ctx);\ndie 'no parser' unless ref($parser) eq 'CODE';\nmy (@events, $result, $error);\nmy $input = $ARGV[1] // 'ab-cd';\nmy $mode = $ARGV[2] // 'sink';\nmy $token = bless {tag=>'selection_sink_failure'}, 'Selection::SinkFailure';\nmy $options = $mode eq 'quiet' ? {} : {diagnostic_sink => sub {\n push @events, {%{$_[0]}};\n die $token if $mode eq 'throw2' && @events == 2;\n}};\neval { $result = $parser->(\\$input, $options); 1 } or $error = $@;\nprint JSON::PP->new->canonical->allow_nonref->encode({\n result => project($result), events => \\@events, last_error => project($ctx{last_error}),\n failure => $error ? \"$error\" : undef,\n failure_detail => project($error),\n sink_identity_preserved => $mode eq 'throw2' ? (ref($error) && refaddr($error)==refaddr($token) ? JSON::PP::true : JSON::PP::false) : undef,\n}), \"\\n\";\nmy $descriptor = LinkedSpec::Get(\\$source, return_descriptor => 1);\nmy $meta = $descriptor->{spec}{Top}{meta}{action_rewriter};\nprint JSON::PP->new->canonical->encode({map {$_=>$meta->{$_}}\n qw(canonical_action_ir_count canonical_action_ir_fallback_count raw_perl_dependency_count unresolved_helper_count language_agnostic_action_ir_ready)}), \"\\n\";\n"
+    },
+    "pipeline-initial.spec": {
+      "path": ".linkedspec-data/scratch/selfcontain131/pipeline-initial.spec",
+      "sha256": "da2492f7e7770b4ed9cf22d20fcdf6333379e8240a1ad02d2619bf1f538e938e",
+      "text": "fn decorate(text, prefix) { return(cat(prefix, uppercase(text))) }\n\nTop::\n -> Word {\n   pieces = split(entry_group(0), \"-\")\n   original = { \"a\": pieces[0], \"b\": { \"c\": pieces[1] } }\n   tree = copy(original)\n   seen = []\n   prefix = \"old:\"\n   text = \"outside\"\n   transform = {|text| push(seen, text); return(decorate(text, prefix)) }\n   prefix = \"new:\"\n   result = tree.map_leaves!() { return(transform(value)) }\n   i = 0\n   visited = 0\n   while(i < count(pieces)) { visited = visited + 1; i = i + 1 }\n   tree[\"meta\"][\"count\"] = visited\n   print_each(seen, \"leaf:\", \"!\")\n   say(\"done:\", visited)\n   return({ \"tree\": copy(tree), \"mapped\": result, \"original\": original,\n            \"seen\": seen, \"text\": text, \"visits\": visited })\n }\n\nWord:\n /([A-Za-z]+-[A-Za-z]+)/\n"
+    },
+    "pipeline.spec": {
+      "path": ".linkedspec-data/scratch/selfcontain131/pipeline.spec",
+      "sha256": "ba9953c282e5e66956dc4b7d22c2acc7b1e879734654e7cb467ad41275cc4249",
+      "text": "fn decorate(text, prefix) { return(cat(prefix, uppercase(text))) }\n\nTop::\n -> Word {\n   if(num_ne(match_start_pos(), 0)) { exit_now(1) }\n   if(num_ne(match_end_pos(), input_end_pos())) { exit_now(1) }\n   pieces = split(match_text(), \"-\")\n   original = { \"a\": pieces[0], \"b\": { \"c\": pieces[1] } }\n   tree = copy(original)\n   seen = []\n   prefix = \"old:\"\n   text = \"outside\"\n   transform = {|text| push(seen, text); return(decorate(text, prefix)) }\n   prefix = \"new:\"\n   result = tree.map_leaves!() { return(transform(value)) }\n   i = 0\n   visited = 0\n   while(i < count(pieces)) { visited = visited + 1; i = i + 1 }\n   tree[\"meta\"][\"count\"] = visited\n   print_each(seen, \"leaf:\", \"!\")\n   say(\"done:\", visited)\n   return({ \"tree\": copy(tree), \"mapped\": result, \"original\": original,\n            \"seen\": seen, \"text\": text, \"visits\": visited })\n }\nLX { exit_now(1) }\n\nWord:\n /([A-Za-z]+-[A-Za-z]+)/\n"
+    }
+  },
+  "verification_tier": "focused"
+}

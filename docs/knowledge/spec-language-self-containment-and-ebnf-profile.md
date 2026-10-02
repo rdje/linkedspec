@@ -48,7 +48,7 @@ scoped deterministic/resource/failure/ambient policies over sixteen authorities/
 reason-sensitive governance mutations. [[spec-language-closure-contract-plan]] and
 [[language-closure-scoped-policy-freeze]] preserve target/current/partial/unassessed obligations.
 Independent canonical reconciliation closes .1.2; [[language-closure-definition-reconciliation]] preserves
-all partial prerequisites. Next .1.3.1 selects bounded compositions; no runtime admission advances through structural definition. The optional frontend has added no syntax; structured formats
+all partial prerequisites. Selection .1.3.1 records16 composed cases/eight dimensions and the owned Perl callback dispatch gap. [[bounded-composed-objective-selection]] records independent expectations; next .1.3.2 freezes neutral fixtures/checker; no runtime admission advances through structural definition. The optional frontend has added no syntax; structured formats
 and frontend implementation retain their language-readiness/parity gates.
 
  `docs/tasks/SPEC-LANGUAGE-SELF-CONTAINMENT.md` first inventories portable

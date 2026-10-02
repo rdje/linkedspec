@@ -187,6 +187,65 @@ The checker does not execute a `.spec` or establish a new composed objective. In
 runtime objective admission remain pending; runtime admission,
 whole-format readiness and the optional frontend have not advanced through this definition alone.
 
+### Selected compositions and their current limits
+
+The next bounded proof has nine diagnostic cases and seven parsed-pair normalization cases.
+The original nesting, context-name and lossless/child probes retain their source and evidence.
+These new cases select independent expectations before neutral fixtures and backend execution.
+They do not admit a complete format or close existing repair prerequisites.
+
+The diagnostic example recognizes one lowercase ASCII word and supplies explicit start/end/fallback
+guards. Its immediate arguments record `left`, then `right`; rich output goes to the caller's sink:
+
+```text
+Top::
+ -> Word {
+   if(num_ne(match_start_pos(), 0)) { exit_now(1) }
+   if(num_ne(match_end_pos(), input_end_pos())) { exit_now(1) }
+   effects = []
+   print({ push(effects, "left"); return("begin:") },
+         { push(effects, "right"); return(match_text()) })
+   if(str_eq(match_text(), "stop")) { say("stop"); exit_now(7) }
+   print_each(["α", undef, [], "🙂"], "part:", "!")
+   say("done")
+   return({ "word": match_text(), "effects": copy(effects), "payload": false })
+ }
+LX { exit_now(1) }
+
+Word:
+ /([a-z]+)/
+```
+
+For `go`, the result is `{"word":"go","effects":["left","right"],"payload":false}`.
+The six event messages are `begin:go`, `part:α!`, `part:!`, `part:!`, `part:🙂!`, then
+`done\n`. No sink preserves the result and effects with zero delivery. `stop` delivers
+`begin:stop`, then `stop\n`, and raises typed exit7 before later work. A caller error on
+delivery2 remains that identical error and stops later delivery. Invalid prefix and empty input
+exit1 before output. These are fresh Perl pilots; other selected cases and backend lanes remain pending.
+They establish controlled diagnostics, rather than richer expected-token or recovery support.
+
+The normalization objective parses `ab-cd`, constructs a nested harray, then invokes a deferred
+callback and pure registered function during leaf transformation. The invocation-time prefix is
+`new:`, the temporary text parameter restores `outside`, and a later nested write adds count2
+without changing the detached mapped result or original. Its independent expected result is:
+
+```json
+{
+  "tree":{"a":"new:AB","b":{"c":"new:CD"},"meta":{"count":2}},
+  "mapped":{"a":"new:AB","b":{"c":"new:CD"}},
+  "original":{"a":"ab","b":{"c":"cd"}},
+  "seen":["ab","cd"],"text":"outside","visits":2
+}
+```
+
+This normalization is selected and blocked on Perl. Direct push and registered-function calls work;
+the same calls inside a deferred body reject with typed `unknown_helper`. Source readiness reports
+zero raw fallback and unresolved helpers, which describes recognized source rather than complete
+callback execution coverage. Repair `.1.3.3.0` precedes its Perl execution lane. The existing
+regex/numeric callback repairs and every other partial prerequisite remain owned separately.
+The complete requirements and mutation/oracle plan are in
+`docs/language-readiness/composed-objective-selection.md`; no new primitive or syntax is selected.
+
 ### Determinism, progress and failure boundaries
 
 Determinism fixes the canonical program/versions, decoded source/identity, explicit values/options,

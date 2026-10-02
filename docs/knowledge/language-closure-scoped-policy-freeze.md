@@ -69,5 +69,4 @@ Ambient exclusions are the preferred portable policy, without default isolation
 or sandbox proof. Proof obligations need independent adversarial/effect/kind
 oracles after relevant repairs. The 632 mutations/four controls execute no grammar,
 advance no runtime admission and assign no universal limit or performance envelope.
-Independent definition reconciliation remains .1.2.4-owned; new objectives remain
-.1.3-owned. [[finite-language-readiness-gap-selection]] retains wider obligations.
+Independent definition reconciliation is complete under .1.2.4; .1.3.1 selects16 bounded compositions without runtime admission. [[bounded-composed-objective-selection]] retains independent oracles and affected repair prerequisites; .1.3.2 next freezes neutral governance. [[finite-language-readiness-gap-selection]] retains wider obligations.

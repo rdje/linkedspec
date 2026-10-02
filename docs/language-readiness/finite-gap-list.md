@@ -84,6 +84,15 @@ All other owners above retain the status and dependency obligations recorded her
 | Backend-host | Runtime matching, caller input/result transfer, precompiled child registry and authorized span projection are substrate/integration. The child `.spec` still recognizes its language; no probe requires a host callback to implement its grammar. | `.1.2` defines the boundary; `.1.3` keeps authored recognition separate from authority adapters. |
 | Forbidden | Default `.spec` gains no filesystem, process, network, environment, clock, randomness, package-loading or FFI authority. This design rule is not a sandbox-security proof. | ADR0064 / `.1.2`; an external effect needs separate explicit authorization and contracts. |
 
+October 2 composition selection adds a confirmed partial boundary: direct Perl
+push and registered functions work, but calls from a deferred codeblock reject
+with typed unknown_helper. Compiler readiness/raw/fallback/unresolved flags do not
+establish interpreted body execution. SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0 owns
+P1 repair before Perl execution .1.3.3.1; existing startup87.2/.3 retain their related
+regex/numeric dispatcher cases. The exact sixteen-case selection is
+docs/language-readiness/composed-objective-selection.md. No new parsing primitive,
+whole-format or backend promotion follows; all earlier repair prerequisites remain.
+
 ## Costs and unassessed requirements: scheduled next actions
 
 No new missing parsing primitive is selected. Named arguments retain their parked

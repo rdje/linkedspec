@@ -12,6 +12,18 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-10-02 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.1: bounded composed selection
+
+Select diagnostic9/normalization7 cases across eight parent dimensions before fixtures. Freeze independent
+value/kind/order/effect/exit/caller-error/alias expectations and sixteen semantic mutation roles; preserve23
+original source identities and all16 authorities/90 bindings. Retain exact public pilot sources/log hashes and
+typed observations in the selection checkpoint. Six Perl diagnostic pilots pass; seven isolated controls expose
+two deferred-body dispatch gaps despite ready1/raw0/fallback0/unresolved0. New P1 .1.3.3.0 owns push and
+registered-function repair before Perl execution .1.3.3.1, keeping startup87.2/.3 separate. Book examples explicitly
+qualify the blocked normalization. Original audit and selected neutral guards pass; rendered selection/source/
+owner/provenance, Knowledge/history/memory/doctrines and diff checks govern focused landing. No runtime,
+syntax, fixture, CI or admission change. Next .1.3.2 freezes the selected neutral oracle and mutation governance.
+
 ## 2026-10-02 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.4: independent closure closeout
 
 Close definition parent .1.2 through exact staged canonical acceptance. Add a revision-bound independent audit

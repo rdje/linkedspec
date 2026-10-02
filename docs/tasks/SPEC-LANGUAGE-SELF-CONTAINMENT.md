@@ -1022,7 +1022,7 @@ used by ordinary `.spec` syntax on every backend.
 - [x] **LOCKSTEP / NEXT OWNERS** — Book, Knowledge, roadmap/frontier, finite ledger and bounded live/resume/history agree. Split .1.3 into eight pending leaves before implementation; .1.3.1 selects independent bounded objectives/oracles/prerequisites next.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3`
-  Status: `pending`
+  Status: `active`
   Goal: Build neutral fixtures and a mutation-sensitive checker for representative self-contained objectives.
   Acceptance: Fixtures cover natural recursion, cursor algebra, interval/boundary capture, nested state, callable
     composition, branching/iteration, structural transformation, and typed result construction; mutations prove
@@ -1032,10 +1032,24 @@ used by ordinary `.spec` syntax on every backend.
   Inventory input: Preserve the original three probes; select bounded diagnostic and callable/control/transform objectives with independent negative/effect/kind oracles. Record indentation/quotes/comments requirement scope before proposing syntax, and require affected repair owners before dependent promotion. Split selection, neutral fixture/checker and recurrence work before implementation.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.1`
-  Status: `pending`
+  Status: `done`
   Goal: Select bounded composed objectives and freeze their requirements, independent oracles, supported public producers and affected repair prerequisites before fixture implementation.
   Dependencies: `.1.2`
   Acceptance: Reuse the original nesting/context/lossless evidence without changing its corpora. Select diagnostic and callable/control/transform cases by exact value-kind, order, effect, failure/publication and negative expectations; map all eight parent dimensions to existing or new evidence. Record indentation/quotes/comments requirements and unassessed limits without adding syntax. If a selected claim crosses a known repair, schedule its existing prerequisites before that promotion; successful workarounds cannot close defects.
+  Activation: Clean2a8c368159a6c9b927bc6cd7fc524fe0de7319a6 on October2; closure parent committed with canonical receipt, all nine hooks/post-pointer PASS, brief0 and Git clean.
+  Owned scope / plan: docs/language-readiness/composed-objective-selection.md will define bounded requirements/case/oracle/mutation selection, exact source contracts/public producers and prerequisite routing before .1.3.2 fixture/checker creation. Review dated Knowledge/inventories and public book/contracts first; use ignored public Perl pilots only to assess authoring feasibility, without new backend/whole-format promotion. Align book, Knowledge, roadmap/frontier and bounded continuity; preserve original corpora and every repair owner. No runtime/authority/CI change belongs to this selection leaf.
+  Verification tier: `focused`
+  Focused checks: Exact selection-to-parent-dimension/authority/repair-owner review and explicit independent positive/negative/effect/kind/failure oracles; original objective audit, selected existing neutral guards, public feasibility probes if needed, rendered book, Knowledge/history/memory/doctrines and diff hygiene.
+  Canonical trigger: none for bounded requirement/oracle selection with unchanged semantics, fixtures, admission and CI; .1.3.2 owns subsequent normative neutral fixture/checker movement and .1.3.8 owns composed parent closeout.
+  Feasibility finding (owned investigation here): Public LinkedSpec::Get pipeline pilot compiles a bound {|text| push(seen,text); return(decorate(text,prefix)) } callback inside map_leaves!, then fails with CodeblockRuntime::Error code unknown_helper/name push. Exact source/log live under .linkedspec-data/scratch/selfcontain131/pipeline.spec and pipeline-pilot.log. The pilot's JSON reporter also cannot serialize the blessed last_error; repair only its ignored projection before diagnosis. Check canonical helper/context authority, descriptor/lowering and existing owners before classifying a supported-operation defect or intended boundary. Preserve this case and schedule any required repair before dependent promotion; no runtime fix is authorized by this selection-only leaf.
+  Diagnosis / scheduling: Five minimal public Get/descriptor controls establish direct push->[x], direct registered decorate(x,!)->!x and ordinary callback cat/assignment->[!x,before:x], versus callback push and callback registered-function unknown_helper failures. Every source has language_agnostic_action_ir_ready=1 and raw/fallback/unresolved counts0; that compiler readiness does not prove callable-body execution coverage. CodeblockRuntime::_eval_call lines116–191 dispatches a small literal helper list then bound-codeblock lookup, with no push or registered-function path. Existing startup87.2/.3 own related matches/numeric cases in this same dispatcher; keep those owners and independent acceptance. New .1.3.3.0 owns these exact selected push/function repairs before Perl execution, with native/emitted, scope/identity/arity/once-only and no-fallback controls. No missing parsing primitive is inferred.
+  Evidence plan: docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.1-selection.json uses format1/activation/review-date, retained original-objective identities, selected diagnostic/pipeline requirements, independent expected-oracle descriptions, public pilot source/log hashes and normalized actual records, source-located repair ownership and claim limits. New fixture/checker paths are selected by .1.3.2 before creation. The initial pipeline capture prototype remains pipeline-initial.spec; current pipeline.spec uses outgoing match_text and explicit prefix/end/fallback guards. Descriptor flags are syntax/lowering evidence, never substituted for execution.
+  Completion: Sixteen cases (diagnostic9/normalization7), eight parent dimensions, independent value/kind/event/failure/alias oracles and sixteen mutation roles are selected. docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.1-selection.json embeds exact pilot sources and normalized observations/hashes;23 original source identities remain exact. Seven isolated controls distinguish five successes from two callback dispatch gaps; six D pilots pass, while pipeline execution remains blocked by P1 .1.3.3.0. No runtime, authority, fixture, CI or admission change.
+  Verification: Focused original-objective audit, closure636/four controls, callable23, diagnostic20, nested-write105 and leaf167/composition592 guards PASS; source/rendered book, selection/source/owner/provenance checks, Knowledge/history/memory/doctrines and diff hygiene govern commit.
+  Continuity: Next .1.3.2 selects exact fixture/checker paths before creation; runtime lanes follow required repair. Commit follows COMMIT.md with brief cleared and clean tree before activation.
+
+  Gate correction: First doctrine run rejected17 recent LIVE rows. ADR0066 requires an overwrite-oriented maximum16-row current view; trimmed the oldest redundant row, preserving its committed task/checkpoint/change/Git evidence and immutable migration history. No history schema/archive/pressure exception introduced. Corrected document-history and all nine doctrines PASS before landing.
+
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.2`
   Status: `pending`
@@ -1047,7 +1061,23 @@ used by ordinary `.spec` syntax on every backend.
   Status: `pending`
   Goal: Execute the selected compositions through Perl's public native and independently loaded emitted producers.
   Dependencies: `.1.3.2`
+  Children: `.1.3.3.0`, `.1.3.3.1`
   Acceptance: Independent observations match every selected oracle on both producers, including ordered diagnostics and failure/effect/value-kind controls. Bind exact sources/logs and repair prerequisites; minimize any failure through Toolbox public probes and route the repair before dependent promotion.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0`
+  Status: `pending`
+  Priority: P1 — blocks the selected callable/control/transform objective on Perl.
+  Goal: Repair selected admitted push and registered-user-function composition inside Perl deferred codeblocks before executing the objective.
+  Dependencies: `.1.3.2`; exact .1.3.1 public controls and callable/binding/function/mutation authorities. Coordinate shared dispatcher work with existing SESSION-STARTUP-READING.87.2/.87.3 without replacing their separate cases or prerequisites.
+  Reproduce: .linkedspec-data/scratch/selfcontain131/callable-controls.pl; direct push and registered-function controls succeed, but callback_push and callback_function return null with CodeblockRuntime::Error unknown_helper/name push or decorate. The real pipeline fails at push before its later calls. All descriptors report ready1/raw0/fallback0/unresolved0.
+  Root cause: perl/LinkedSpec/CodeblockRuntime.pm _eval_call handles a narrow helper list and otherwise tries a bound-codeblock slot; the selected mutation and static registered-function routes are absent. Compiler recognition is not runtime composition proof.
+  Acceptance: Preserve actual caller binding identity for push, eager once-only arguments, copied/restored temporary parameters, live caller nonparameters, registered-function fresh-local semantics, helper/function/bound-codeblock precedence, active recursion diagnostics and receiver guards. Prove direct/callback native and independently emitted controls plus selected neutral observations, including genuinely unknown calls and typed errors. No host fallback, captured lexical environment or new primitive/syntax; broaden tier before any contract/interface movement.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.1`
+  Status: `pending`
+  Goal: Execute the unchanged selected neutral compositions through both public Perl producers after the owned repair.
+  Dependencies: `.1.3.3.0`
+  Acceptance: Match every selected independent order/effect/kind/failure oracle, preserve source/input identity and original probes, retain actual-object detachment falsifiers where claimed, record exact native/emitted carrier evidence and authoring costs, and close parent .1.3.3 only after complete focused acceptance.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.4`
   Status: `pending`

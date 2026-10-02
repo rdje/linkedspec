@@ -31,8 +31,7 @@ Stale capability prose/guard repair `.1.1.5` is now recorded in
 under [[spec-language-closure-contract-plan]]; `.1.2.2` subsequently freezes operation/scope/reference structure.
 `.1.2.3` subsequently freezes scoped determinism/resources/failure/ambient policy at 90 anchors, preserving
 known resource and Dart lexical-order owners. [[language-closure-scoped-policy-freeze]] retains proof limits;
-`.1.2.4` completes independent canonical definition reconciliation. `.1.3.1` selects neutral composed objectives and
-mutations, including still-unassessed diagnostics/control/transformation needs.
+`.1.2.4` completes independent canonical definition reconciliation. `.1.3.1` selects16 bounded diagnostic/normalization cases and independent mutation roles under [[bounded-composed-objective-selection]]. P1 [[perl-codeblock-composition-dispatch-gap]] must be repaired before affected Perl execution. `.1.3.2` next freezes neutral governance; wider diagnostics/control/transformation requirements remain unassessed.
 `.1.4` creates implementation leaves only for demonstrated reusable semantic gaps.
 Whole-format support, universal depth/resources, performance and alternate syntax
 remain pending. [[three-objective-language-readiness]] retains exact proof limits.

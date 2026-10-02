@@ -12,6 +12,22 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-10-02 — Callable readiness needs execution evidence (.1.3.1)
+
+Perl public Get accepts/lower-describes direct and deferred push/registered-function calls with ready1 and
+zero raw/fallback/unresolved counts. Direct calls succeed, but deferred _eval_call has only a narrow literal
+helper list plus bound-codeblock resolution; its typed unknown_helper retains push/decorate and source context.
+Seven controls separate that gap from cat/assignment and uppercase support. Own P1 .1.3.3.0 before dependent
+execution, preserving startup87.2/.3 and binding/parameter/static-precedence/fresh-local/recursion guard contracts.
+The ignored reporter projects blessed error fields without erasing type or replacing caller identity proof.
+
+Selection defines16 cases/eight dimensions before any new fixture/runtime driver. Exact events, typed false,
+quiet evaluation, immediate exit and identical caller sink failure are distinct channels. P's independent ASCII
+shape oracle preserves original/mapped/published roots and live prefix/restored text; actual returned-object alias
+controls cannot use re-decoded JSON. Semantic mutants require a healthy execution baseline and their intended
+oracle rejection; preexisting unknown_helper or unrelated compile failure cannot count. Indentation/quotes/
+comments, whole formats, richer recovery and resource/security/performance claims remain unassessed.
+
 ## 2026-10-02 — Reconcile definition independently of its production schema (.1.2.4)
 
 Pinned Git baselines distinguish original operation/scope66 bindings from24 inherited-policy additions.
