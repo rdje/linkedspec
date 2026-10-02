@@ -6,7 +6,7 @@
 - Status: `active` / closure definition
 - Roadmap lane: `.spec language evolution / expressive self-containment and alternate authoring profiles`
 - Created: `2026-07-30`
-- Last updated: `2026-10-01`
+- Last updated: `2026-10-02`
 - Owner: repo-local workflow
 
 ## Goal
@@ -969,10 +969,31 @@ used by ordinary `.spec` syntax on every backend.
 - [x] **EVIDENCE EVOLUTION / LOCKSTEP** — Historical audit reconstructs original CI bytes through exact owner-bound insertions and rejects three governance falsifiers; every original checkpoint/runtime/log/corpus check remains. Focused contracts/storage and book proof pass. Knowledge, roadmaps/frontier, bounded histories/live/resume and receipt-bound canonical acceptance govern atomic landing. Resource/failure freeze is next.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.3`
-  Status: `pending`
+  Status: `done`
   Goal: Freeze explicit determinism, progress/resource, failure and ambient non-authority policies without inventing guarantees.
   Dependencies: `.1.2.2`
   Acceptance: State observed versus target limits, regex-substrate responsibilities, typed failure/publication effects and caller authorization. Existing resource repairs retain owners and precede dependent guarantees; invalid/adversarial cases and unassessed performance have explicit proof needs. Do not assign unsupported global limits or equate design exclusions with a security sandbox. Use canonical tier for normative movement.
+  Activation: Clean e4f9dcb8d6ee825119863d076d5a32be42ab9ef6 on October2; .1.2.2 committed with exact canonical receipt, all nine hooks and post-commit pointer pass, brief0 and clean Git state.
+  Owned scope: Extend the existing language_closure_contract.json and independent checker with explicit deterministic inputs/order, scoped progress/resources, failure publication and ambient non-authority. Review public LinkedSpec probes and dated canonical facts before interpretation; preserve sixteen original authorities and their runtime admission. Align the runtime appendix, structured-format chapter, Toolbox, Knowledge, matrix/finite ledger, roadmap/task/frontier and bounded continuity. No new backend semantics, limits, performance guarantee or sandbox claim.
+  Policy-reference plan: docs/language-readiness/closure-policy-boundaries.md will be the readable dated boundary review, with a Knowledge fact card pointing to it. Expand selected semantic anchors for inherited cancellation/cycle/budget/failure/loading policies while preserving all original66 digests and source bytes. Policy proof obligations are structural review requirements, not executed runtime cases or a new public admission.
+  Verification tier: `canonical`
+  Focused checks: Reason-sensitive policy mutations and adversarial proof obligations; current public ordinary-progress probe, inherited source policies and unchanged original objective/authority evidence; directly affected guards, rendered book, Knowledge, histories, memory, doctrines and diff hygiene.
+  Canonical trigger: Normative determinism/resource/failure/ambient policy movement and checker expansion; stage the complete candidate before exact receipt-bound local CI.
+  Finding (owned here): ROADMAP.md's expressive self-containment row still schedules .1.2.2 despite its current-status paragraph and committed artifact describing that freeze as complete. Reproduce by comparing the row with .1.2.2's committed task and authority. Impact: roadmap readers can select a completed slice. Repair the row and verify every current self-containment roadmap/frontier statement against the new next action.
+  Public-prose finding (bounded repair here; broader coordination remains startup41.2): Runtime appendix9 claims a configurable100–1000 threshold across all repetition;10 says all errors produce structured payloads. Those generalizations exceed the scoped authorities and public channels. October2 LinkedSpec::Get scalar-reference probe of Top:: I { return(call(Top)) } returns null, emits rule_handler_forward_progress:Top and leaves last_error null, reproducing the dated ordinary cutoff. Recognition/observation progress, sink failures and typed native/compatibility adapters have different owners. Correct this chapter's statements from the verified source distinctions; do not close the broader41.2 review or create unsupported thresholds.
+  Ordering review (existing ownership retained): Knowledge lookup for sorted_values establishes sorted-key correspondence, rather than an independent value sort. The dated Dart supplementary-character mismatch is already owned by DART-STARTUP-READING.2.13.1-.3 with .3/.4/.5 prerequisites. Correct appendix11's ambiguous alphabetic claim and include these owners in the policy/finite ledger; do not infer callback-order failures, reclassify serializer proof or waive runtime repair.
+  Metadata repair (owned here): A validator-only status-removal control accepted a missing original definition_owner while checking the new policy_owner and referenced authorities. Impact: the structural producing-owner claim was incomplete. Require both stage owners to resolve and retain exact-path destructive controls for each; no runtime semantics or admission changes.
+  Verification: PASS16 original authority bytes/66 prior bindings preserved;24 inherited-policy additions yield90 anchors and632 reason-sensitive mutations/four controls. Public ordinary cutoff returns null/null last_error with separate trace; two sorted-view examples preserve key/value correspondence. Direct typed231, recognition58, progressive116/public60, staged123/public129, write105, leaf167/composition592 and diagnostic20 guards pass. Historical objective audit retains24 checkpoints/257 refs/149 latest identities/134 logs and only prior .1.2.2 CI evolution. Tool storage39,15 rendered claims on two pages, Knowledge/history/memory/diff and exact staged canonical acceptance govern landing. No new runtime objective, universal resource limit, timing/security guarantee or repair closure.
+  Preparation correction: The first owner-removal mutation expected the resource-list path for shared37.2, but its earlier dedicated detail-owner obligation correctly rejected first. Make that exact earlier route the explicit test target; unrelated-error substitution remains rejected.
+  Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.3 - freeze scoped closure policies`.
+
+### `SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.3` Acceptance Checklist
+
+- [x] **OWNERSHIP / TOOLS FIRST** — Clean e4f9dcb8 activation and scoped roadmap/book/Knowledge/source review precede edits. LinkedSpec::Get confirms ordinary recursion and sorted-view examples; preserve dates, exact observed channels and other backend limits.
+- [x] **DETERMINISM / PROGRESS** — Explicit program/source/state/authority and operational inputs, governed order and active-scope progress stay distinct. One-shot zero-width, ordinary cutoff and child-versus-parent progress do not imply unrestricted termination or universal diagnostics.
+- [x] **RESOURCES / AUTHORITY** — Preserve inherited intersections/minima, cancellation/deadline/shared accounting and source-detail promise. Computed metadata differs from actual enforcement. Existing resource/detail/lexical owners and prerequisites remain; select no new global number, regex preemption, timing/performance or sandbox guarantee.
+- [x] **FAILURE / PUBLICATION** — Recognition, expression effects, receiver publication, post-commit continuation, progressive fail-only, staged policies and sink/exit/public adapter channels remain separate. Correct bounded public overclaims without closing startup41.2 or unrelated repairs.
+- [x] **INDEPENDENT GOVERNANCE / LOCKSTEP** — Preserve16 original sources/66 digests, bind24 more anchors and reject632 reason-sensitive mutations/four controls including both missing stage owners. Original audit/guards, storage and rendered book pass; align roadmap/frontier, Knowledge and bounded live/resume/history. Exact staged canonical acceptance governs atomic landing; .1.2.4 is next.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.4`
   Status: `pending`
@@ -1140,7 +1161,8 @@ used by ordinary `.spec` syntax on every backend.
 | 19 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.5` | `done` | Stable row corrected; fifteen reason-sensitive mutations and79-file cursor inventory precede exact canonical parent closeout. |
 | 20 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.1` | `done` | Source-located16/66 matrix, scopes/effects and bounded freeze plan preserve partial/unassessed requirements. |
 | 21 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.2` | `done` | Versioned16/66/7/8 structure,432 reason-sensitive mutations/four controls and exact historical CI evolution. |
-| 22 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.3` | `pending` | Freeze deterministic inputs, scoped resources/failures and ambient non-authority without universal limits. |
+| 22 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.3` | `done` | Scoped policies bind90 anchors/632 mutations, preserve partial owners and qualify ordinary progress/public errors without global guarantees. |
+| 23 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.4` | `pending` | Independently reconcile matrix/definition/checker/book and partial/unassessed routing through exact canonical parent closeout. |
 
 ## Decisions
 
@@ -1173,6 +1195,8 @@ used by ordinary `.spec` syntax on every backend.
 - None for `.1.1`. The September27 clean prioritization supersedes the earlier callable-first schedule. Format implementation and the optional frontend remain gated by their own prerequisites.
 
 ## Verification Log
+
+October2 `.1.2.3`: original16 sources/66 digests plus24 policy anchors remain exact;632 reason-sensitive mutations/four controls, public ordinary progress and two sorted-view oracles pass. Typed/recognition/progressive/staged/write/leaf/diagnostic guards and original objective audit pass; tool-storage39 and15 rendered claims on two pages pass. Knowledge/history/memory/doctrine/diff and exact staged canonical receipt govern policy landing; actual canonical outcome belongs in the commit body. No runtime admission or resource/security overclaim.
 
 October1 `.1.2.2`: Structure16/66/7/8,432 reason-sensitive mutations/four controls and five directly dependent guards pass; original objective audit24/257/149/134 preserves historical runtime inputs while exact reviewed CI evolution gets three negative controls. Tool storage independently counts39 Python entrypoints, retaining three Python temporary owners and15 shell allocators. Book/Knowledge/history/memory/doctrines/diff and exact staged canonical acceptance govern landing; no runtime objective or backend promotion.
 
@@ -1224,6 +1248,8 @@ September27 `.1.1.1`: seven neutral/structural checks, 34 ledger source-path/con
 
 ## Commit Log
 
+- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.3 - freeze scoped closure policies` — scoped determinism/progress/resources/failure/ambient authority, source bindings, owner-sensitive mutations and canonical landing.
+
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.2 - freeze language closure structure` — versioned operation/scope authority, independent source/governance mutations, owned audit evolution and canonical landing.
 
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.1 - design language closure matrix` — source-located design and current status reconciliation; no normative/runtime/admission movement.
@@ -1255,6 +1281,8 @@ September27 `.1.1.1`: seven neutral/structural checks, 34 ledger source-path/con
 | `.0` | `SPEC-LANGUAGE-SELF-CONTAINMENT.0 - ratify expressive spec self-containment` | Direction capture only; no parser/runtime behavior. |
 
 ## Changelog
+
+- `2026-10-02`: `.1.2.3` freezes scoped policies at16/90 with632 reason-sensitive mutations/four controls; preserve all original66 anchors, existing repair/prerequisite and proof limits. Public progress/error/key-order teaching and stale roadmap rows are corrected. Independent canonical .1.2.4 reconciliation is next.
 
 - `2026-10-01`: `.1.2.2` freezes versioned16-authority/66-anchor operation/scope structure with432 reason-sensitive mutations/four controls, exact CI registration and historical audit reconstruction. Next .1.2.3 owns resource/failure/ambient policy; no runtime admission changes.
 

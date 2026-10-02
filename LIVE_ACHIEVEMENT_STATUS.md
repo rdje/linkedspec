@@ -6,13 +6,15 @@ Ordinary .spec language closure definition under SPEC-LANGUAGE-SELF-CONTAINMENT.
 
 ## Latest Completed Slice
 
-- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.2 - freeze language closure structure` — versioned16-authority/66-anchor operation/scope definition, seven categories/eight scopes,432 reason-sensitive mutations/four controls and exact-once CI. Historical CI reconstruction preserves original runtime evidence; no runtime admission or global limit changes.
+- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.3 - freeze scoped closure policies` — 16 unchanged authorities/90 anchors,632 reason-sensitive mutations/four controls; explicit determinism, scoped progress/resources, failure publication and ambient policy. Public prose/owner metadata repaired; original66 bindings and all partial prerequisites remain, without runtime/global/timing/security promotion.
 
 ## Next Action
 
-- Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.3: review scoped ordinary progress/failure evidence and freeze deterministic inputs, inherited resources/failures and ambient non-authority; coordinate37.2/41.2 without weakening their open obligations.
+- Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.4: independently reconcile matrix/policy review/definition/checker/book, exact original authorities and partial/unassessed routing before canonical .1.2 closeout. Split .1.3 objectives before implementation.
 
 ## Recent Completions
+
+- `2026-10-02` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.3` freezes scoped policies and corrects bounded progress/error/ordering teaching.
 
 - `2026-10-01` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.2` freezes closure structure with independent governance and exact CI evolution.
 
@@ -43,8 +45,6 @@ Ordinary .spec language closure definition under SPEC-LANGUAGE-SELF-CONTAINMENT.
 - `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.1` scopes lossless segmentation and public staged child proof.
 
 - `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.7` reconciles bounded context-name proof through canonical closure.
-
-- `2026-09-27` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.6` verifies five context-name routes on both Lua ABIs.
 
 ## History
 

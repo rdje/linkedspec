@@ -682,21 +682,37 @@ composition proof is `tools/check_duplicate_regex_slot_identity_five_backend.sh`
 
 ## 9. Zero-Progress Guard
 
-Repeated rules must detect and prevent infinite loops when a child matches but
-consumes zero characters:
+Progress depends on the active operation. The typed-source target requires cursor advance or a
+well-founded decreasing measure. Active recognition/observation requires strictly greater end offsets
+on accepted repetition and recursive edges. A rolled-back candidate or a changed binding, mark or AST
+does not supply cursor progress. One-shot zero-width recognition remains legal.
 
-1. Track consecutive zero-progress matches.
-2. After a configurable threshold (implementation-defined, typically 100–1000),
-   exit the repetition loop.
-3. This prevents hangs on rules like `:*` where the regex can match an empty string.
+Ordinary recursion has a separate same-rule/same-position cutoff. For example:
 
-This guard applies to all repetition modes (`:*`, `:+`, `OR+`, `AND+`, bounded forms).
+```text
+Top:: I { return(call(Top)) }
+```
+
+The documented Perl public probe on `a` terminates with null, a
+`rule_handler_forward_progress:Top` trace decision and null `last_error`. This ordinary compatibility
+guard does not establish a universal typed non-progress error. Selected zero-width iteration controls
+also establish their covered termination behavior; there is no admitted configurable 100–1000 threshold
+across all repetition modes.
+
+Private progressive dispatch leaves the parent cursor unchanged. Staged jobs follow the completed parent
+AST. Their contained-span/lineage and shared-budget rules cannot supply parent cursor progress.
+Depth, calls, steps, result nodes and diagnostic bytes retain owner-specific policies and known partial
+repairs. Calculated limits alone do not prove enforcement; safe points do not prove regex preemption.
+See [Structured-format program](../architecture/structured-format-program.md) for the closure boundary.
 
 ## 10. Error Handling
 
-### 10.1 Structured Error Payloads
+### 10.1 Owner-Specific Structured Diagnostics
 
-All errors produce structured payloads with:
+Structured diagnostic APIs use fields such as those below. The producing API defines its schema and
+available attribution; these fields are not promised for every miss, cutoff, host failure or compatibility
+text adapter:
+
 - `type`: diagnostic family, such as runtime parser or handler failure
 - `stage`: the operation that failed
 - `owner_stage`: the backend owner/stage attribution when available
@@ -707,16 +723,20 @@ All errors produce structured payloads with:
 - `top_rule`: the top-level entry point
 - `rule_label`: the failing rule when known
 
-### 10.2 Non-Throwing Errors
+### 10.2 Native Error Channels
 
-LinkedSpec uses structured error returns (`last_error` channel) rather than
-throwing exceptions for most failure paths. The caller checks for a defined
-error payload to determine success/failure.
+Error delivery is API-specific. A null parse value can be an ordinary miss, a legal falsey payload or
+the ordinary recursion cutoff above. Check the owning match/error channel rather than inferring success
+or failure from payload truthiness or trace.
 
 Perl exposes that channel as `runtime_ctx->{last_error}`. Dart currently exposes
 the same neutral fields as `RuntimeDiagnostic` on
 `RuntimeInterpreterException.diagnostic`; successful Dart parse output is
 unchanged when no runtime error occurs.
+
+Rust diagnostic-aware Engine methods preserve typed failures. Existing `Result<Value, String>` methods
+remain compatibility adapters; the native text probe formats Display output. Use the typed API when
+structured attribution is required.
 
 Julia exposes the same neutral fields through exported `RuntimeDiagnostic` on
 `RuntimeInterpreterException.diagnostic`. Optional engine `spec_name` /
@@ -755,11 +775,41 @@ Native and freshly emitted public entry reset the cursor and skip the complete l
 lines described in [Runtime wrapper](../compiler/pipeline-overview.md#runtime-wrapper). The source remains
 intact and all coordinates remain absolute. This preparation happens once per public call, not on child entry.
 
-## 11. Determinism Guarantees
+### 10.4 Failure Does Not Mean One Transaction
 
-1. **No random number generation** in the parser runtime.
-2. **Deterministic dispatch**: AND-mode rules dispatch in declaration order.
-3. **Deterministic hash operations**: `sorted_keys`, `sorted_values` sort
-   alphabetically — not dependent on host-language hash iteration order.
-4. **First-match-wins**: OR-mode rules use the first matching alternative;
-   with identical input and identical regex ordering, the outcome is deterministic.
+Recognition rollback restores its cursor, boundary and marks. Nested write structural failure preserves
+completed segment/RHS effects. Leaf callback failure prevents receiver publication while unrelated effects
+persist; a later continuation failure follows a completed commit. Private progressive dispatch is fail-only.
+Staged `fail` aborts the composed parse; `keep_text` retains original text with a scheduler-sidecar diagnostic;
+`diagnostic_node` uses the selected target policy with a detached diagnostic node.
+
+Caller sink failure propagates unchanged and stops later evaluation/delivery. Typed exit follows preceding
+events and stops later actions. These channels remain distinct from ordinary diagnostics and trace;
+there is no universal user-state or AST rollback.
+
+## 11. Determinism Boundaries
+
+Repeatability fixes the canonical program/versions, decoded source/identity, explicit entry/options/typed
+values, initial authorized state, frozen registry and effective grants. Observed cancellation, deadline,
+remaining budget and sink behavior are operational inputs. Cancelling at a different safe point may change
+the outcome; host deadline checks do not give authored code clock access.
+
+AND dispatch follows authored order and OR choice selects the first matching alternative in its governed
+order. Expression and callback order follows each helper's contract. `sorted_keys(h)` gives lexical keys;
+`sorted_values(h)` gives values in that same key order, rather than sorting the values themselves. For
+`{"z":1,"a":9}` those views are `["a","z"]` and `[9,1]`. Cross-backend supplementary-character ordering
+has a separately owned Dart exception; finite ASCII examples do not close it.
+
+Root-kind leaf traversal uses original shape. Staged queues sort by breadth-first depth, typed AST path,
+provenance and job id; array indices use numeric order, so index 2 precedes index 10. Do not substitute host
+hash iteration or stringified numeric-index sorting.
+
+The preferred portable policy excludes authored filesystem, process, network, environment, clock,
+randomness, package-loading and FFI authority. Explicit caller source transfer, compilation, registry,
+transport and sink routing remain host responsibilities. Parsed path-like strings, identities, spans,
+markers and results grant no loading authority. Raw host fallback and compatibility behavior stay outside
+this claim; that exclusion is not default ambient-isolation or sandbox proof.
+
+No timing-independent outcome, unrestricted depth, global numerical limit, arbitrary host-regex equivalence
+or performance envelope follows from the finite evidence. Relevant repairs and exact recurrence precede
+dependent guarantees.

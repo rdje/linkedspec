@@ -1,11 +1,11 @@
 # MEMORY
 
-- activation_commit: `5785e4990bf1b8aa45a105e262475d128dbcecc7` — clean activation base for normative structure.
-- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.2 - freeze language closure structure`.
-- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.3` (pending) — determinism/resource/failure and ambient non-authority.
-- next_action: Retrieve the frozen closure structure and matrix, review ordinary progress/failure tools and appendix claims, then freeze explicit deterministic inputs, scoped resources/failures and ambient non-authority without global numerical or security overclaims.
-- in_flight_uncommitted: none; operation/scope/reference structure is committed. Resource/failure freeze, independent reconciliation, runtime repairs, new objectives and format/profile admission remain pending.
-- blockers: No blocker for .1.2.3; source-detail interpretation remains startup37.2-owned, and general teaching coordination remains41.2-owned. Policies unchanged; startup .5/.29 own adoption. ARCHOGEN owns downstream acceptance.
+- activation_commit: `e4f9dcb8d6ee825119863d076d5a32be42ab9ef6` — clean activation base for normative policy.
+- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.3 - freeze scoped closure policies`.
+- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.4` (pending) — independent definition reconciliation.
+- next_action: Independently reconcile the matrix, scoped policy review, versioned definition, checker and book; verify original contracts/bindings, exact partial/unassessed routing and unchanged runtime admission before canonical .1.2 parent closeout. Split .1.3 selection/fixture/recurrence before implementation.
+- in_flight_uncommitted: none; scoped policy is committed. Independent reconciliation, runtime repairs, new objectives and format/profile admission remain pending.
+- blockers: No blocker for .1.2.4; source-detail interpretation remains startup37.2-owned, and general teaching coordination remains41.2-owned. Policies unchanged; startup .5/.29 own adoption. ARCHOGEN owns downstream acceptance.
   Wrapper startup .7 remains open; recovery/purge stay prohibited. No interrupted Phase0 run counts as proof.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
   active table; the task metadata doctrine inventories all consumers, permits arbitrary frontier-row rewrites,

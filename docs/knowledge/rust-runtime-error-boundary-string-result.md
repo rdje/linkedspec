@@ -1,13 +1,13 @@
 ---
 id: rust-runtime-error-boundary-string-result
-title: Rust runtime failures propagate as Engine Result strings, not the core runtime error variant
+title: Rust diagnostic-aware Engine methods preserve typed errors alongside legacy string adapters
 answers:
   - "what error type do Rust Engine execute methods return"
   - "does linkedspec runtime use LinkedSpecError Runtime"
   - "where must Rust structured runtime diagnostics be captured"
   - "how can Rust preserve failing child rule attribution"
   - "why was FUTURE PARITY BACKLOG 1.6.3 split"
-date: 2026-07-11
+date: 2026-10-02
 status: resolved
 tags: [rust, runtime, diagnostics, public-api, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.1.6.3.0 source/toolbox audit. rust/linkedspec-runtime/src/engine.rs exposes execute/execute_value/trace/generated-plan methods as Result<Value,String>, and internal runtime frames use Result<_,String>. rust/linkedspec-core/src/error.rs defines LinkedSpecError::Runtime(String), but linkedspec-runtime has no LinkedSpecError reference. execute_rule is the singular interpreted rule wrapper and receives a child error before variable/recursion frame unwind. RuntimeContext has no top/rule/diagnostic state and Engine stores only CompiledSpec."
@@ -18,9 +18,10 @@ reverify: "rg -n 'pub fn execute|Result<.*String>|fn execute_rule' rust/linkedsp
 
 # Rust Runtime Error Boundary Is the Engine String Result
 
-The active Rust native failure boundary is `linkedspec_runtime::engine::Engine`, whose public execution methods and
-internal runtime frames return raw string errors. The core crate's `LinkedSpecError::Runtime(String)` variant is a
-separate unused declaration, not the type an embedded Rust caller receives.
+At the initial July11 audit, `linkedspec_runtime::engine::Engine` exposed raw string failures.
+The subsequent implementation added diagnostic-aware typed methods while retaining legacy string adapters.
+The core crate's `LinkedSpecError::Runtime(String)` declaration was a separate unused type at that source checkpoint;
+it must not be substituted for the Engine API's actual error channel.
 
 `Engine::execute_rule(...)` is the correct attribution seam for interpreted execution. Child calls pass through it,
 and an error reaches the child's wrapper before that wrapper removes its variable and recursion frames. Capturing a
@@ -30,3 +31,7 @@ does not carry filesystem provenance.
 
 `.1.6.3.1` implemented typed records and diagnostic-aware methods while retaining existing string-returning
 adapters. `.1.6.3.2` closed full no-drift proof and capability admission.
+
+The October2 closure-policy review uses the completed typed boundary and preserves legacy adapters.
+Native text probe Display output is not a universal structured-error schema.
+[[language-closure-scoped-policy-freeze]] qualifies general error teaching without changing runtime behavior.

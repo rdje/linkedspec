@@ -58,6 +58,7 @@ depending on an affected behavior must first run that owner's repair and recurre
 | Rust receiver final assignment / Perl-Rust substitution | Startup `.58`, `.59` | Complete receiver guard and statement-substitution composition |
 | Perl single numeric array constructor / numeric-string reducer result kinds | Startup `.94`, `.95` | Correct constructor and reducer JSON kinds beyond the probe's direct literals/lexemes |
 | Dart attached controls in marker-selected value ranges | Dart `.2.9` | General mixed-control return locality and branch selection |
+| Dart lexical helper supplementary-character order | Dart `.2.13.1-.3` | Portable Unicode lexical key/value ordering; serializer and unmeasured callback order are distinct |
 | Progressive ceilings | Startup `.37` | Complete numeric/resource and diagnostic-ceiling enforcement |
 | Staged destination reservation / returned Rust markers / saturated Rust calls | Startup `.73`, `.74`, `.75` | Conflicting target safety, complete marker validation and extreme counter safety |
 | Dart staged diagnostic bytes / extreme arithmetic / provenance / SDK adapters | Dart `.2.17`, `.2.18`, `.2.19`, `.2.25` | Adversarial staged boundaries and whole-package SDK signoff |
@@ -102,7 +103,10 @@ Perl/Rust/Dart/Julia/PUC-Lua/LuaJIT proof before `.1.4` creates implementation l
 
 After canonical inventory closeout605276027, `.1.2.1` supplies the source-located
 closure matrix in `docs/language-readiness/closure-contract-matrix.md`. Next
-`.1.2.2` subsequently freezes operation/scope/reference structure; `.1.2.3` next defines deterministic/resource/failure policy,
+`.1.2.2` subsequently freezes operation/scope/reference structure; `.1.2.3` freezes scoped determinism/resource/failure/ambient policy,
+preserving all 66 original bindings and adding 24 inherited-policy anchors. Known resource and Dart lexical-order
+repairs retain their owners and prerequisites; the dated review is docs/language-readiness/closure-policy-boundaries.md.
+`.1.2.4` next independently reconciles the definition;
 then `.1.2.4` reconciles the definition before `.1.3` neutral objectives/mutations
 and `.1.4` evidence-backed gap audit. This is a finite evidence plan, not exhaustive
 grammar coverage, campaign admission or implementation of the optional frontend.

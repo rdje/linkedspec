@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Check closure-definition structure and source bindings, not DSL execution."""
+"""Check closure structure, scoped policies and source bindings, not DSL execution."""
 
 from __future__ import annotations
 
@@ -29,12 +29,13 @@ AUTHORITY_REGISTER = {
     "typed_source_location": (
         "14.8",
         "/policy/source_identity /policy/span /policy/transactions /policy/progress "
-        "/recursive_observations",
+        "/recursive_observations /policy/transaction_effects /policy/dispatch_authority",
     ),
     "recognition_transaction": (
         "14.3",
         "/authored_surface/result_separation /policy/attempt_result /policy/commit "
-        "/policy/rollback /policy/progress /effect_model",
+        "/policy/rollback /policy/progress /effect_model /policy/non_progress "
+        "/policy/fail_closed /policy/terminal",
     ),
     "inter_match_gap_capture": (
         "INTER-MATCH-GAP-CAPTURE.7",
@@ -67,15 +68,20 @@ AUTHORITY_REGISTER = {
     "progressive_span_dispatch": (
         "14.6",
         "/authored_surface/availability /policy/registry /policy/ceilings /policy/progress "
-        "/policy/bounds",
+        "/policy/bounds /policy/capabilities /policy/cancellation /policy/cycles "
+        "/policy/state /policy/result /policy/loading /policy/transactions "
+        "/policy/identity /policy/source_view",
     ),
     "staged_ast_enrichment": (
         "14.7",
-        "/policy/authority /policy/queue /policy/state /policy/failure /policy/detachment",
+        "/policy/authority /policy/queue /policy/state /policy/failure /policy/detachment "
+        "/policy/capabilities /policy/cycles /policy/bounds /policy/loading "
+        "/policy/resolution /policy/result /policy/provenance /policy/cache",
     ),
     "diagnostic_output": (
         "5.1",
-        "/policy/delivery /policy/result_neutrality /policy/sink_failure /policy/exit_now",
+        "/policy/delivery /policy/result_neutrality /policy/sink_failure /policy/exit_now "
+        "/policy/arity_validation /policy/evaluation",
     ),
 }
 GRAMMAR_LEDGER = {
@@ -181,7 +187,7 @@ SCOPE_REGISTER = {
 FIXED_SECTIONS = {
     "stage": {
         "operation_scope_reference": "frozen",
-        "determinism_resource_failure": "pending_SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.3",
+        "determinism_resource_failure": "frozen",
         "independent_reconciliation": "pending_SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.4",
         "composed_objectives": "pending_SPEC-LANGUAGE-SELF-CONTAINMENT.1.3",
     },
@@ -191,6 +197,80 @@ FIXED_SECTIONS = {
         "evidence_extent": "finite_objectives_only", "partial_exceptions": "retained",
         "unassessed_objectives": "retained", "security": "no_sandbox_proof",
         "numeric_limits": "no_new_global_limit",
+    },
+    "determinism": {
+        "inputs": [
+            "canonical_program_and_contract_versions", "decoded_source_and_identity",
+            "explicit_entry_options_and_typed_values", "initial_authorized_working_state",
+            "frozen_registry_and_effective_grants", "observed_cancellation_deadline_budget_and_sink_behavior",
+        ],
+        "ordering": [
+            "authored_rule_and_regex_alternative_order", "owner_specific_once_only_expression_order",
+            "root_kind_original_shape_leaf_traversal", "staged_breadth_first_depth_typed_path_provenance_job_id",
+        ],
+        "repeatability": "bounded_semantic_claim_for_fixed_inputs_and_operational_observations",
+        "portable_parity": "selected_authority_order_only_lexical_helper_Unicode_exception_retained",
+        "regex": "governed_matching_contract_and_authorized_substrate_not_arbitrary_host_regex_equivalence",
+        "clock": "host_deadline_observation_not_authored_clock_authority",
+        "sink": "caller_delivery_outcome_is_an_operational_input",
+        "unassessed": "timing_independent_outcome_unrestricted_depth_and_performance",
+    },
+    "progress": {
+        "typed_source_target": "advance_cursor_or_prove_well_founded_decreasing_measure",
+        "recognition_observation": "active_accepted_repetition_and_recursive_edges_require_strict_offset_advance",
+        "one_shot_zero_width": "legal_success_not_proof_of_repetition_progress",
+        "ordinary_rule": "dated_same_rule_position_cutoff_is_separate_from_scoped_progress_diagnostics",
+        "ordinary_iteration": "selected_termination_evidence_not_one_universal_threshold_or_diagnostic",
+        "child": "child_work_never_supplies_parent_cursor_progress",
+        "non_progress": "rollback_or_binding_mark_AST_object_transaction_changes_are_not_cursor_advance",
+        "proof_scope": "finite_controls_not_general_termination_or_left_recursion_admission",
+    },
+    "resources": {
+        "effective_authority": "capability_and_policy_intersections_and_stricter_numeric_source_detail_minima",
+        "non_extension": "shared_cancellation_absolute_deadline_work_and_call_authority_cannot_reset_or_expand",
+        "private_progressive": "contained_strictly_smaller_repeated_spans_depth_calls_and_shared_remaining_work",
+        "staged": "contained_lineage_depth_total_calls_steps_result_nodes_diagnostic_bytes_at_entry_and_safe_points",
+        "computed_versus_enforced": "calculated_effective_metadata_is_not_complete_runtime_enforcement",
+        "detail": "authorized_parser_input_versus_outward_detail_review_preserves_existing_policy_until_owner_resolution",
+        "regex_substrate": "published_matching_behavior_no_host_regex_preemption_or_hard_wall_clock_guarantee",
+        "global_limit": "no_universal_depth_step_call_or_repetition_number_selected",
+        "performance": "unassessed_requires_representative_measurements_and_explicit_envelope",
+        "partial_claim": "affected_runtime_repairs_and_recurrence_precede_dependent_guarantees",
+    },
+    "failure_publication": {
+        "recognition": "strict_match_boolean_independent_of_payload_miss_commit_null_rollback_cursor_boundary_marks_only",
+        "recognition_misuse": "typed_rejection_with_token_abort_and_kind_exceptions_retained",
+        "nested_write": "post_expression_snapshot_structural_failure_preserves_expression_effects_evaluation_error_propagates",
+        "leaf_callback": "no_receiver_publication_on_failure_completed_unrelated_effects_persist",
+        "leaf_continuation": "runs_after_commit_failure_does_not_undo_receiver_commit",
+        "private_progressive": "fail_only_no_retry_or_fallback_no_parent_cursor_progress",
+        "staged_fail": "abort_composed_parse_no_settled_composed_result",
+        "staged_keep_text": "materialize_original_exact_text_and_scheduler_sidecar_diagnostic",
+        "staged_diagnostic_node": "selected_target_policy_with_detached_portable_diagnostic_node",
+        "diagnostic_sink": "caller_failure_propagates_unchanged_and_stops_later_evaluation_or_delivery",
+        "typed_exit": "preceding_events_delivered_then_typed_status_stops_later_actions",
+        "public_channels": "owner_specific_last_error_typed_exception_or_diagnostic_aware_result_with_legacy_adapters",
+        "display_probe": "Rust_native_text_projection_is_Display_only_not_a_universal_error_schema",
+        "ordinary_cutoff": "ordinary_no_consume_recursion_can_return_null_with_null_last_error_and_separate_trace",
+    },
+    "ambient_authority": {
+        "authored_default_policy": "filesystem_process_network_environment_clock_randomness_package_loading_and_FFI_excluded",
+        "caller": "explicit_authorized_input_compilation_registry_transport_and_sink_remain_host_responsibilities",
+        "identity": "source_identity_parser_selector_path_like_data_span_marker_and_result_do_not_grant_loading_authority",
+        "compatibility": "raw_host_fallback_plugins_and_aliases_excluded_from_preferred_portable_claim",
+        "enforcement_extent": "design_exclusion_and_finite_portable_proof_not_default_ambient_isolation_proof",
+        "security": "no_execution_sandbox_or_confinement_guarantee",
+    },
+    "proof_requirements": {
+        "invalid_authority": "deny_elevation_unknown_selector_mutable_registry_and_authored_loading_requests",
+        "invalid_progress": "distinguish_one_shot_zero_width_active_nonprogress_rollback_and_child_parent_progress",
+        "adversarial_resources": "joint_minima_actual_cost_nodes_diagnostic_bytes_detail_cycles_and_counter_extremes",
+        "failure_effects": "separate_receiver_publication_unrelated_effects_continuation_and_staged_policies",
+        "determinism": "fixed_inputs_order_and_operational_observations_with_independent_value_kind_effect_oracles",
+        "source_detail": "independent_authorized_input_and_outward_projection_oracles_before_review_resolution",
+        "runtime_admission": "selected_objectives_after_affected_repairs_then_exact_six_runtime_recurrence",
+        "structural_mutations": "reason_sensitive_definition_and_source_drift_rejection_not_DSL_execution",
+        "unassessed_cost": "measure_performance_regex_limits_and_unrestricted_resources_before_guarantees",
     },
     "relationships": {
         "entry_selection": "does_not_match_entry_regex",
@@ -231,11 +311,24 @@ FIXED_SECTIONS = {
         "unassessed_selection_owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3",
         "primitive_selection_owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.4",
         "mutation_admission_owners": [f"FUTURE-PARITY-BACKLOG.19.{n}" for n in (7, 8, 9)],
+        "resource_repair_owners": [
+            "SESSION-STARTUP-READING.37.1", "SESSION-STARTUP-READING.37.2",
+            "SESSION-STARTUP-READING.37.3", "SESSION-STARTUP-READING.73",
+            "SESSION-STARTUP-READING.74", "SESSION-STARTUP-READING.75",
+            "DART-STARTUP-READING.2.17", "DART-STARTUP-READING.2.18",
+            "JULIA-STARTUP-READING.2.14", "LUA-STARTUP-READING.2.26",
+            "LUA-STARTUP-READING.2.8.15", "LUA-STARTUP-READING.2.8.16",
+        ],
+        "ordering_repair_owners": [f"DART-STARTUP-READING.2.13.{n}" for n in (1, 2, 3)],
     },
     "references": {
         "design": "docs/language-readiness/closure-contract-matrix.md",
         "pure_function_scope": "docs/knowledge/terse-user-defined-functions-mvp-contract.md",
         "direction": "docs/decisions/0064-expressive-self-containment-and-ebnf-profile.md",
+        "policy_review": "docs/language-readiness/closure-policy-boundaries.md",
+        "ordinary_progress": "docs/knowledge/top-rule-recursion-forward-progress-guard.md",
+        "resource_exception": "docs/knowledge/perl-progressive-resource-ceiling-enforcement-gap.md",
+        "native_failure_channels": "docs/knowledge/rust-runtime-error-boundary-string-result.md",
     },
     "governance": {
         "checker": "tools/check_language_closure_contract.py",
@@ -313,11 +406,14 @@ def semantic_digest(value: Any) -> str:
 
 
 def validate(contract: Any, sources: dict[str, Any], statuses: dict[str, Any], ci: str) -> None:
-    keys = {"format", "contract_id", "definition_owner", "authorities", "operations", "scopes"} | FIXED_SECTIONS.keys()
+    keys = {"format", "contract_id", "definition_owner", "policy_owner", "authorities", "operations", "scopes"} | FIXED_SECTIONS.keys()
     closed_object(contract, keys, "/")
     exact(contract["format"], 1, "/format")
     exact(contract["contract_id"], "linkedspec-language-closure-v1", "/contract_id")
     exact(contract["definition_owner"], "SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.2", "/definition_owner")
+    exact(contract["policy_owner"], "SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.3", "/policy_owner")
+    for field in ("definition_owner", "policy_owner"):
+        require(type(statuses.get(contract[field])) is str, "/" + field, "missing or ambiguous task owner")
     for section, expected in FIXED_SECTIONS.items():
         closed_object(contract[section], expected, f"/{section}")
         for key, value in expected.items():
@@ -365,7 +461,7 @@ def validate(contract: Any, sources: dict[str, Any], statuses: dict[str, Any], c
     obligations = contract["obligations"]
     for name in ("resource_detail_review_owner", "general_teaching_review_owner", "unassessed_selection_owner", "primitive_selection_owner"):
         require(type(statuses.get(obligations[name])) is str, "/obligations/" + name, "missing or ambiguous task owner")
-    for name in ("supplemental_partial_owners", "mutation_admission_owners"):
+    for name in ("supplemental_partial_owners", "mutation_admission_owners", "resource_repair_owners", "ordering_repair_owners"):
         for index, owner in enumerate(obligations[name]):
             require(type(statuses.get(owner)) is str, f"/obligations/{name}/{index}", "missing or ambiguous task owner")
     require(type(statuses.get(contract["excluded"]["parked_named_arguments_owner"])) is str, "/excluded/parked_named_arguments_owner", "missing or ambiguous task owner")
@@ -386,7 +482,7 @@ def expect_rejection(contract: Any, sources: dict[str, Any], statuses: dict[str,
 def mutation_proof(contract: Any, sources: dict[str, Any], statuses: dict[str, Any], ci: str) -> tuple[int, int]:
     count = 0
 
-    def corrupt(parts: list[str], value: Any, delete: bool = False, expected_path: str | None = None) -> None:
+    def corrupt(parts: list[str | int], value: Any, delete: bool = False, expected_path: str | None = None) -> None:
         nonlocal count
         mutant = copy.deepcopy(contract)
         current = mutant
@@ -394,20 +490,24 @@ def mutation_proof(contract: Any, sources: dict[str, Any], statuses: dict[str, A
             current = current[part]
         if delete:
             del current[parts[-1]]
-            path = "/" + "/".join(parts[:-1])
+            path = "/" + "/".join(map(str, parts[:-1]))
         else:
             current[parts[-1]] = value
-            path = "/" + "/".join(parts)
+            path = "/" + "/".join(map(str, parts))
         expect_rejection(mutant, sources, statuses, ci, expected_path or path.replace("//", "/"))
         count += 1
 
     for key in contract:
         corrupt([key], None)
         corrupt([key], None, delete=True)
+    corrupt(["policy_owner"], "unrelated")
     for section, expected in FIXED_SECTIONS.items():
         for key, value in expected.items():
             replacement = [] if type(value) is list else not value if type(value) is bool else True if type(value) is int else "weakened"
             corrupt([section, key], replacement)
+            if type(value) is list:
+                for index in range(len(value)):
+                    corrupt([section, key, index], "unrelated")
         corrupt([section, "unknown"], True, expected_path="/" + section)
     for section in ("operations", "scopes"):
         for name, row in contract[section].items():
@@ -442,6 +542,23 @@ def mutation_proof(contract: Any, sources: dict[str, Any], statuses: dict[str, A
         count += 1
     for path in (CONTRACT, "tools/check_language_closure_contract.py"):
         expect_rejection(contract, sources, statuses, ci.replace("require_tracked_file " + path, "# removed input"), "/governance/ci")
+        count += 1
+    detail_owner = contract["obligations"]["resource_detail_review_owner"]
+    # The detail owner is shared: its earlier dedicated obligation is the
+    # intended rejection path, rather than an unrelated-error substitute.
+    for path, owner in [
+        ("/definition_owner", contract["definition_owner"]),
+        ("/policy_owner", contract["policy_owner"]),
+        ("/obligations/resource_detail_review_owner", detail_owner),
+    ] + [
+        (f"/obligations/{field}/{index}", owner)
+        for field in ("resource_repair_owners", "ordering_repair_owners")
+        for index, owner in enumerate(contract["obligations"][field])
+        if owner != detail_owner
+    ]:
+        changed_statuses = dict(statuses)
+        del changed_statuses[owner]
+        expect_rejection(contract, sources, changed_statuses, ci, path)
         count += 1
 
     # A wrong failure must not make a semantic mutation count as covered.
@@ -483,7 +600,8 @@ def main() -> int:
         repo_path(path)
     validate(contract, sources, statuses, ci)
     mutations, controls = mutation_proof(contract, sources, statuses, ci)
-    print(f"language closure structure: 16 authorities / 66 anchors / 7 operations / 8 scopes; {mutations} reason-sensitive mutations / {controls} controls; structural governance only, runtime admission unchanged")
+    anchors = sum(len(row["semantic_sha256"]) for row in contract["authorities"].values())
+    print(f"language closure structure/policy: 16 authorities / {anchors} anchors / 7 operations / 8 scopes; {mutations} reason-sensitive mutations / {controls} controls; structural governance only, runtime admission unchanged")
     return 0
 
 

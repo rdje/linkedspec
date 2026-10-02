@@ -13,7 +13,7 @@ answers:
   - "how will diagnostics map from canonical IR to EBNF authored source"
   - "does every backend implement the same authoring profile semantics"
   - "when will the self containment and EBNF direction be implemented"
-date: 2026-10-01
+date: 2026-10-02
 status: current
 tags: [architecture, dsl, self-containment, ebnf, frontend, source-map, actionir, handlerir, parity]
 evidence: "ADR 0064 and SPEC-LANGUAGE-SELF-CONTAINMENT.0 accept problem-domain expressive closure without ambient effects, plus an optional honest EBNF-like frontend that lowers losslessly into one canonical semantic model across five backends; no syntax or behavior is implemented by the direction leaf."
@@ -43,10 +43,11 @@ commit30b2cc3a0. The grammar/cursor/capture and state/control/result inventories
 context-name and lossless/actual-child proof is reconciled under [[three-objective-language-readiness]].
 Constructor/flat and the stale entry/cursor description repairs are committed. The finite inventory closes
 canonically at605276027; its success neither erases separately owned defects nor admits whole formats.
-The source-located closure matrix in docs/language-readiness/closure-contract-matrix.md now designs the next
-operation/scope and deterministic/resource/failure freezes. The subsequent versioned operation/scope structure
-is frozen with independent governance; deterministic/resource/failure policy is next. [[spec-language-closure-contract-plan]] separates
-target/current/partial/unassessed obligations. The optional frontend has added no syntax; structured formats
+The source-located closure matrix and versioned definition now freeze operation/scope structure and
+scoped deterministic/resource/failure/ambient policies over sixteen authorities/90 anchors, with 632
+reason-sensitive governance mutations. [[spec-language-closure-contract-plan]] and
+[[language-closure-scoped-policy-freeze]] preserve target/current/partial/unassessed obligations.
+Independent canonical reconciliation is next; no runtime admission advances through structural definition. The optional frontend has added no syntax; structured formats
 and frontend implementation retain their language-readiness/parity gates.
 
  `docs/tasks/SPEC-LANGUAGE-SELF-CONTAINMENT.md` first inventories portable

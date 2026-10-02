@@ -12,6 +12,20 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-10-02 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.3: scoped closure policies
+
+Freeze deterministic inputs/order, active-scope progress, inherited resource policies, failure publication and
+ambient non-authority in the existing definition. Preserve16 original authority files/66 bindings;24 added
+semantic anchors yield90 with632 reason-sensitive mutations/four controls. Keep resource/detail/lexical
+repairs and prerequisites explicit; metadata calculations do not prove enforcement. Distinguish ordinary
+null/null-error recursion cutoff, active recognition, child-versus-parent progress and each publication/error
+channel. Public ordinary/sorted-view probes, eight affected guards, original objective audit, tool-storage39
+and15 rendered claims pass. Repair missing original stage-owner validation, stale roadmap rows and bounded
+runtime appendix overclaims; broader startup41.2 and runtime repairs remain open. Knowledge/history/memory/diff
+and exact staged canonical acceptance govern landing. No runtime admission, numerical/timing/performance or
+sandbox guarantee advances. Independent .1.2.4 reconciliation is next.
+
+
 ## 2026-10-01 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.2: versioned closure structure
 
 Freeze `linkedspec-language-closure-v1` with16 source authorities/66 semantic anchors, seven authored categories

@@ -6,8 +6,9 @@ admitted backends. It complements, rather than replaces, the executable 105-fixt
 
 ## Language closure definition
 
-`language_closure_contract.json` freezes operation, scope and reference structure as
-`linkedspec-language-closure-v1`. It binds sixteen existing authorities through66 semantic anchors, seven
+`language_closure_contract.json` freezes operation/scope/reference structure and scoped determinism,
+progress/resources, failure publication and ambient non-authority as `linkedspec-language-closure-v1`.
+It binds sixteen existing authorities through 90 semantic anchors (original 66 plus24 inherited-policy anchors), seven
 authored operation categories and eight distinct scopes. It preserves partial/unassessed obligations,
 compatibility exclusions and caller-owned source/registry/sink authority. It changes no runtime admission.
 
@@ -17,10 +18,12 @@ bash tools/run_python_project_data.sh tools/check_language_closure_contract.py
 
 The independent closed schema checks exact identities, scope/effect/result relationships and proof owners.
 Each anchor is SHA-256 of UTF-8 JSON with sorted object keys, compact separators, literal Unicode and finite
-numbers; unselected historical rollout metadata is outside that digest. Its432 reason-sensitive mutations and
+numbers; unselected historical rollout metadata is outside that digest. Its632 reason-sensitive mutations and
 four controls reject weakening, selected-source drift and missing/duplicate CI registration. This is structural
-governance, not execution of an authored objective. Determinism/resource/failure freeze, independent definition
-reconciliation and composed-objective admission remain separate stages. No global bound or sandbox proof follows.
+governance, not execution of an authored objective or its adversarial proof requirements. Resource/source-detail
+and lexical-order repairs retain their owners/prerequisites. Independent definition reconciliation and composed-objective
+admission remain separate stages. No global bound, timing guarantee or sandbox proof follows.
+The dated readable review is docs/language-readiness/closure-policy-boundaries.md.
 
 The stable row `runtime.top_rule_and_parse_mode_controls` describes explicit entry selection, then the first
 authored marker or rule, plus intrinsic AND-consume / OR-default-seek and independent child policy. Its historical

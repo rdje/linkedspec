@@ -12,6 +12,22 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-10-02 — Closure policy needs observed inputs and scoped failure effects (.1.2.3)
+
+Repeatability fixes canonical program/source/typed state/registry/grants plus cancellation/deadline/budget/sink
+observations. Ordinary recursion's public null/null last_error cutoff is distinct from active strict cursor
+progress; child work supplies no parent progress. Inherited minima and metadata do not establish joint runtime
+enforcement; preserve source-detail review and every relevant repair/prerequisite. Recognition restoration,
+post-expression write snapshots, receiver publication, continuation after commit, staged failure policies and
+sink/exit delivery cannot be collapsed into a universal transaction or error schema. Sorted values follow
+sorted keys; existing Dart supplementary-character repair qualifies portable lexical claims. Preserve original16
+authorities/66 digests and bind24 inherited-policy anchors with632 reason-sensitive mutations/four controls.
+A status-removal RED exposed unchecked original definition-owner existence; both stage owners now resolve with
+exact-path GREEN controls. Fifteen rendered claims and current public examples validate bounded teaching.
+Ambient exclusions do not prove default isolation or a sandbox; global numbers/regex preemption/performance
+remain unassessed. Broader startup41.2 and independent canonical .1.2.4 reconciliation retain their scope.
+
+
 ## 2026-10-01 — Closure governance needs source and scope edges (.1.2.2)
 
 A closed structural definition complements existing semantic contracts; it is not another DSL evaluator.

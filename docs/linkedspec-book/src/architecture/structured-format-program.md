@@ -144,16 +144,16 @@ authorities and separates authored work, state/effects and caller responsibiliti
 | Bound work | Existing scoped progress/resource policies and known repairs precede guarantees; finite accounting supplies no global numerical or regex-preemption bound. |
 
 The operation/scope freeze, deterministic/resource/failure freeze and independent reconciliation are separate
-steps before new composition objectives. Ordinary-rule repetition thresholds and broad failure prose require
-their own scoped review. Raw host fallback and compatibility behavior do not establish portable closure or
+steps before new composition objectives. The scoped policy review distinguishes ordinary guards from active
+recognition/observation and owner-specific error channels. Raw host fallback and compatibility behavior do not establish portable closure or
 sandbox security. Existing dynamic callback, token, boolean-kind and resource defects retain their owners and
 prerequisites. Neutral fixtures then distinguish selected dimensions with independent value/effect/failure
 oracles and mutations. Only demonstrated reusable gaps become implementation leaves. The format campaign and
 optional EBNF-like frontend retain their separate gates.
 
 The versioned definition is `capability_conformance/language_closure_contract.json`
-(`linkedspec-language-closure-v1`). Its operation and scope structure is frozen against sixteen existing
-authorities and66 semantic anchors. Seven authored categories cover computation, recognition, observation,
+(`linkedspec-language-closure-v1`). Its structure and scoped policies bind sixteen existing
+authorities through 90 semantic anchors, retaining all 66 original bindings. Seven authored categories cover computation, recognition, observation,
 mutation, return, diagnostics and parser composition; caller authority is a separate boundary. Eight scopes
 keep rule invocation, pure functions, deferred blocks, recognition attempts, recursive observations, nested
 writes, leaf transformation and child parsing distinct.
@@ -171,9 +171,48 @@ bash tools/run_python_project_data.sh tools/check_language_closure_contract.py
 This check validates definition structure, exact source bindings and producing/repair ownership. Selected anchors
 use SHA-256 over sorted compact UTF-8 JSON with literal Unicode; unrelated historical rollout metadata is excluded.
 Reason-sensitive mutations challenge every declared category and scope, source drift and CI registration.
-The checker does not execute a `.spec` or establish a new composed objective. Determinism/resource/failure policy,
-independent definition reconciliation and runtime objective admission remain separate stages; runtime admission,
+The checker does not execute a `.spec` or establish a new composed objective. Independent definition reconciliation
+and runtime objective admission remain separate stages; runtime admission,
 whole-format readiness and the optional frontend have not advanced through this definition alone.
+
+### Determinism, progress and failure boundaries
+
+Determinism fixes the canonical program/versions, decoded source/identity, explicit values/options,
+initial authorized state, frozen registry and effective grants. Cancellation, deadline, remaining budget
+and sink behavior are operational inputs. A cancelled run and an uninterrupted run need not produce the
+same outcome. Authored code gains no clock or transport authority through those caller observations.
+
+Progress is scoped. Active recognition/observation requires strict cursor advance on accepted repeated
+or recursive work, while one-shot zero-width recognition can succeed. Ordinary recursion has a separate
+same-rule/same-position cutoff; its selected Perl public probe returns null with null `last_error` and a
+trace decision. A child parse does not advance the parent cursor. These distinctions do not select one
+global threshold or prove unrestricted termination.
+
+Inherited child limits narrow authority through intersections and stricter minima. Calculated effective
+metadata is separate from actual enforcement. Progressive limits/source detail, staged counters and
+diagnostic bytes retain known repair owners; Dart lexical helpers retain a supplementary-character order
+exception. Dependent guarantees require their repairs and recurrence. No regex preemption, hard wall-clock
+bound, global number or performance envelope is inferred.
+
+Failure effects follow the operation:
+
+| Example | Publication / effect boundary |
+| --- | --- |
+| Recognition rolls back a candidate | Restore cursor, boundary and marks, without general AST/user-state rollback. |
+| A nested write evaluates its key/value, then rejects the structural path | Preserve completed expression effects from the post-expression snapshot. |
+| A leaf callback fails after an unrelated write | Withhold receiver publication while preserving the unrelated effect. |
+| A continuation fails | The receiver was already committed; the later failure does not undo it. |
+| A staged child fails | `fail` aborts; `keep_text` materializes original text with a sidecar diagnostic; `diagnostic_node` publishes its selected detached diagnostic node. |
+| A caller sink fails | Propagate that failure unchanged and stop later evaluation or delivery. |
+
+Typed diagnostics, `last_error`, native exceptions, diagnostic-aware results and legacy text adapters retain
+their own APIs; null results and trace are not universal failure schemas.
+[Runtime semantics](../appendix/runtime-semantics.md#9-zero-progress-guard) explains the public channels.
+
+The preferred portable policy excludes authored filesystem, process, network, environment, clock,
+randomness, package-loading and FFI effects. Callers still authorize input, compilation, registries,
+transports and sinks. Path-like parsed strings, identities, spans and markers grant no loading authority.
+Compatibility exclusions and finite portable evidence are not default ambient-isolation or sandbox proof.
 
 ### Bounded nesting trial
 

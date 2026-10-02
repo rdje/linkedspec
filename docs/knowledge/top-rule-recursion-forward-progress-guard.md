@@ -73,6 +73,11 @@ probe; strict cursor errors during active recognition/observation do not establi
 diagnostic or numerical repetition limit. `SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.3` owns that policy distinction,
 coordinating startup41.2 teaching. Zero-width success remains distinct from accepted progress-sensitive work.
 
+The October2 .1.2.3 public scalar-reference probe reproduces that ordinary result
+on `a`: null result, null last_error and rule_handler_forward_progress:Top trace.
+[[language-closure-scoped-policy-freeze]] records the exact probe and scoped policy;
+no universal repetition number, diagnostic or new runtime admission is inferred.
+
 ## Top re-entry recursion VALUE: RESOLVED (`.2.2`) — no engine defect, missing-`LX` authoring case
 
 A recursive S-expression grammar with `sexpr::` **as the top rule** at first appeared to return `null` on

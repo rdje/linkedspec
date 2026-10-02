@@ -9,7 +9,10 @@ Subsequent `.1.2.2` freezes operation/scope/reference structure as
 `capability_conformance/language_closure_contract.json` (`linkedspec-language-closure-v1`).
 Its independent checker is structural governance only. The original design below
 retains its review date; deterministic/resource/failure policy and independent
-reconciliation remain `.1.2.3/.1.2.4`-owned.
+reconciliation have separate owners. Subsequent `.1.2.3` freezes scoped policies,
+preserving the original 66 bindings and adding24 (90 total) with 632 reason-sensitive
+mutations/four controls. The dated review is docs/language-readiness/closure-policy-boundaries.md.
+Independent reconciliation remains `.1.2.4`-owned. The original plan below retains its review context.
 
 ## Claim boundary
 
