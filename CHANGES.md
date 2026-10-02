@@ -12,6 +12,14 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-10-02 — REPO-HYGIENE.7: review artifacts and correct read-only boundary
+
+Complete the due parent/Rust artifact census with zero removals. Retain proof/cache/output data,
+exclude other repositories/submodules/managed runs, and archive the census/review source instruments
+plus exact metadata enumeration. Actual fresh metadata, aggregate-falsifier and scope-fixture checks
+pass. Correct the old submodule-task pruning suggestion against the newer read-only authority;
+book/Knowledge/cleanup date and bounded continuity align. Resume claim-policy .0.2.1.4.1.
+
 ## 2026-10-02 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.4.0: preserve historical callable instruments
 
 Archive15 exact observer/input/recovery sources for three original callable checkpoints, including

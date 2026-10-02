@@ -12,6 +12,14 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-10-02 — Artifact retention and repository write authority (.7)
+
+Daily artifact review advances through an owned census even when no exact deletion is safe.
+Recorded file membership is retained beside archived census/review instruments; totals derive from
+those rows and a fresh actual metadata pass. Other repositories/submodules are excluded before
+traversal. A task or notice cannot override the newer LinkedSpec-only write authority; the older
+cleanup-card permission statement is superseded. No purge or liveness inference occurred.
+
 ## 2026-10-02 — Callable source recovery and historical claim granularity (.0.2.1.4.0)
 
 Hash-only standalone observer pointers did not retain their instruments. Preserve their exact source

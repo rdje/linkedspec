@@ -97,6 +97,8 @@ An owned census may retain every artifact: reusable caches, dependency data and
 verification evidence are preserved unless an exact deletion is proved safe.
 The task tree records the census scope and exclusions; the date record is overwritten
 after each cleanup rather than accumulating another history log.
+All other Git repositories and submodules are excluded before traversal. A project task or
+notification does not authorize modifying them; their owners apply any upstream repair.
 Retained verification logs and canonical receipts are evidence, so their size or age
 alone does not authorize deletion. A handoff finishes the current slice, clears
 `git_message_brief.txt`, and verifies clean Git state and no required background job

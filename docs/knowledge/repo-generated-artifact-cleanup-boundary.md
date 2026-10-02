@@ -19,10 +19,11 @@ answers:
   - "what did REPO-HYGIENE.5 remove"
   - "is Dart dot dart tool safe to delete"
   - "how much space did the July 17 artifact cleanup reclaim"
-date: 2026-07-26
+date: 2026-10-02
 status: accepted
 tags: [repo-hygiene, artifacts, cleanup, rust, julia, depot, precompile, mdbook, rgx, task-tree]
 evidence: "REPO-HYGIENE.3-.5 established the historical rebuildable-output boundary. PROJECT-DATA-SSD-ROOTING.2.0-.2.6 supersede routine space-recovery behavior: the repository now resides on a 4 TB SSD; supported workflows retain reusable language caches under .linkedspec-data/cache, use runtime-derived same-filesystem scratch, and reject project-owned output on another filesystem. tools/test_tool_project_data_storage.sh proves exact output boundaries without broad temporary-root scans."
+evidence_update_2026_10_02: "REPO-HYGIENE.7 corrects the maintained submodule-task permission statement against the newer director boundary. The archived census/review instruments and exact retained enumeration live in docs/checkpoints/REPO-HYGIENE.7-artifact-review.json; no deletion or liveness/purge operation occurred."
 reverify: "git check-ignore -v rust/target docs/linkedspec-book/book dart/.dart_tool .linkedspec-data; git ls-files rust/target docs/linkedspec-book/book dart/.dart_tool .linkedspec-data; bash tools/test_tool_project_data_storage.sh"
 ---
 
@@ -48,9 +49,12 @@ old-root census is justified only for a named migration or residue proof. If one
 require repository ownership and liveness evidence before deleting that exact path. Never inventory or delete an
 entire shared temporary root merely to recover space; it can contain agent state, application IPC, and other projects.
 
-Do not delete `.log` or `.bin` hits under `rgx/` as part of parent-repo cleanup. Those files are inside the tracked
-`rgx` submodule's stimulus, fixture, or issue-artifact corpus. Any pruning there needs an explicit submodule-owned
-task and its own status check.
+Do not delete or modify anything under `rgx/` or any other Git repository. The September27 director
+instruction permits this agent to write LinkedSpec only; a task or notification does not authorize crossing
+that boundary. Parent cleanup excludes every submodule and nested repository before traversal. Report
+upstream artifact issues through the public integration boundary; its owner applies any repair. The older
+submodule-owned-task pruning suggestion is superseded. No dependency implementation classification is
+needed to enforce this exclusion.
 
 `REPO-HYGIENE.5` repeated the boundary on 2026-07-17. It removed 2.6G of Rust output, 30M of Dart output, 267M of
 dedicated Julia compiled caches, and fifteen exact stale generation logs totaling about 13.6GB decimal. Available

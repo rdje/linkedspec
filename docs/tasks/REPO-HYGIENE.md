@@ -6,7 +6,7 @@
 - Status: `completed`
 - Roadmap lane: `Overall roadmap — repository maintenance`
 - Created: `2026-06-16`
-- Last updated: `2026-10-01` (`REPO-HYGIENE.6`: due artifact review and exit handoff)
+- Last updated: `2026-10-02` (`REPO-HYGIENE.7`: due artifact review and current read-only boundary)
 - Owner: repo-local workflow
 
 ## Goal
@@ -153,6 +153,20 @@ the durable handoff state current.
 - [x] **NO REGRESSION** — No runtime, fixture, dependency, storage mechanism or gate changes. Retained logs, compiled outputs and caches remain; scripts/check_memory_architecture.sh and mandatory doctrine hooks verify the documentation-only slice.
 - [x] **LOCKSTEP** — Cleanup record, checkpoint, task/index, book retention guidance and bounded live/change/note/resume docs agree; SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.4 remains unstarted for the next session.
 
+- ID: `REPO-HYGIENE.7`
+  Status: `done`
+  Goal: Complete the due daily artifact review while retaining proof inputs and correcting the current submodule cleanup boundary.
+  Activation: Clean e3ed7cc824c9e55416bea9c74dd39e9f5b83fb68; recovery hooks/post-pointer pass, brief0 and clean Git confirmed.
+  Owned paths: docs/ARTIFACT_CLEANUP.md; new docs/checkpoints/REPO-HYGIENE.7-artifact-review.json; current cleanup Knowledge card and development/documentation-workflow.md; this tree/index, bounded change/notes/live/resume and derived Knowledge. Census/review instruments and scratch use .linkedspec-data/scratch/hygiene7; archive instrument bodies in the checkpoint.
+  Verification tier: `focused`
+  Focused checks: Non-following parent-checkout artifact census and explicit Rust release/incremental/deps log/bin locations; exclude nested repositories, all submodules, retained caches and managed runs; record every retained candidate and derive aggregate counts from those rows; fresh census plus direct per-file OS metadata oracle, corrupt-count and balanced-size controls; no deletion; book/Knowledge/history/memory/doctrines/diff.
+  Canonical trigger: none; recurring maintenance snapshot and existing read-only policy clarification only, with no storage, gate, runtime or dependency change.
+  Reproduce: Latest review October1 15:01:05 UTC is over24 hours old. Current cleanup card still suggests a submodule-owned task can authorize pruning; September27 director authority makes all other repositories read-only to this agent.
+  Acceptance: Advance the latest review only after a scoped census, preserve all proof/cache artifacts, archive the actual census instrument, correct the maintained permission statement, and commit a clean resume to SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.4.1. No liveness/recovery/purge inference or other-repository write.
+
+  Verification: PASS; 4341 parent candidates/8985768888 bytes retained, 9 nested repositories excluded, explicit Rust rows/counts preserved in the checkpoint. Fresh scope census and direct per-file OS metadata match; corrupt aggregate count and balanced size redistribution reject, and fixed inclusion/exclusion fixtures pass. Census/review source bodies and hashes are archived. Zero removals; no liveness/recovery/purge operation. Book/Knowledge/history/memory/doctrine/diff govern focused landing.
+  Commit: `REPO-HYGIENE.7 - review artifacts and correct read-only boundary`.
+
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
@@ -161,6 +175,7 @@ the durable handoff state current.
 | 2 | `REPO-HYGIENE.4` | `done` | Reclaimed about 20G from Rust/mdBook output, Julia compiled caches, and proven stale generation logs without deleting depot or unrelated temp content |
 | 3 | `REPO-HYGIENE.5` | `done` | Reclaimed 16G from measured rebuildable caches and 15 provenance-checked stale generation logs. |
 | 4 | `REPO-HYGIENE.6` | `done` | Due October1 census retains proof/cache artifacts and records the requested exit handoff. |
+| 5 | `REPO-HYGIENE.7` | `done` | Due October2 review after clean instrument recovery; retain proof/cache data and enforce other-repository exclusion. |
 
 ## Decisions
 
@@ -189,6 +204,7 @@ the durable handoff state current.
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-10-02` | `REPO-HYGIENE.7` | Archived census/review; actual per-path and fixture/corrupt-count controls; book/memory/history/Knowledge/doctrine/diff | PASS — zero removals; exact dated scope/enumeration in checkpoint. Resume claim-policy .0.2.1.4.1. |
 | `2026-10-01` | `REPO-HYGIENE.6` | Parent artifact and explicit Rust log/bin census; permitted process/run inspection; mdBook render; memory/history/Knowledge/doctrine/diff gates | PASS — zero removals; exact counts and exclusions in the checkpoint. Milestone2aeed31ff preserves canonical signoff; .1.1.3.4 remains unstarted. |
 | `2026-07-17` | `REPO-HYGIENE.5` | Existing cleanup fact retrieval; `df -h`; exact `du`; ignored/tracked checks; main-checkout log/bin/temp scan; exact log header/process/`lsof` proof; removal of Rust/Dart build output, two Julia compiled caches, and 15 exact stale logs; post-absence/depot/unrelated-tree/status checks; memory/KM/task/doctrine/diff gates | PASS — immediate deletion baseline 55G/89% became 71G/85%, reclaiming 16G. Dedicated depot registries/logs, unrelated 18G `claude-501`, unknown temp trees, `rgx` fixtures, and all tracked content remain. The earlier 29G/94% session observation is retained separately because external cleanup occurred before deletion. |
 | `2026-07-06` | `REPO-HYGIENE.2` | `.gitignore` update; `.gitmodules` `ignore = dirty`; `git status --ignored`; `git ls-files --stage rgx`; `git submodule status -- rgx`; memory/doctrine/Knowledge Map/diff checks | `.claude/projects/` is ignored; `rgx` remains a tracked submodule/gitlink at `8763a0e`; dirty submodule worktree state no longer dirties parent status. |
@@ -200,6 +216,7 @@ the durable handoff state current.
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `REPO-HYGIENE.7` | `REPO-HYGIENE.7 - review artifacts and correct read-only boundary` | Due review preserves all proof/cache data and excludes every other repository. |
 | `REPO-HYGIENE.6` | `REPO-HYGIENE.6 - record artifact review and exit handoff` | Due review preserves evidence and caches; clean resume continues .1.1.3.4. |
 | `REPO-HYGIENE.5` | `REPO-HYGIENE.5 - clean recurring generated artifacts` | Exact ignored caches and 15 stale generation logs removed; 16G reclaimed; depot and unrelated content preserved. |
 | `REPO-HYGIENE.2` | `REPO-HYGIENE.2 - ignore Claude project state and rgx local dirt` | `.claude/projects/` ignore plus `rgx` submodule local-dirt ignore. |
@@ -208,6 +225,8 @@ the durable handoff state current.
 | `REPO-HYGIENE.1` | `pending` | Populated after commit |
 
 ## Changelog
+
+- `2026-10-02`: Complete REPO-HYGIENE.7 after clean e3ed7cc824; retain the dated census and archived instruments, correct the current read-only boundary, then resume claim-policy adoption.
 
 - `2026-10-01`: Complete REPO-HYGIENE.6 after clean2aeed31ff; record a conservative zero-deletion census and the director-requested exit handoff.
 

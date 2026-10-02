@@ -2,17 +2,19 @@
 
 ## Current Activity
 
-Callable evidence durability under SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.4; policy adoption remains a separate slice.
+Due artifact review completed under REPO-HYGIENE.7; the feature frontier stays SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.4.1.
 
 ## Latest Completed Slice
 
-`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.4.0`:15 exact recovered inputs, three original checkpoint identities and six rejected no-file-write controls. Historical runtime results remain dated; bridge f9c683543 canonical passed CLI66x2 and Phase01033/1162s.
+`REPO-HYGIENE.7`: scoped retained metadata census, archived instruments, actual count/scope controls and zero removals. Current other-repository write boundary corrected; feature source recovery remains committed at e3ed7cc824.
 
 ## Next Action
 
-Activate .0.2.1.4.1 from clean HEAD for explicit policy adoption and broader audit ownership; valid-literal and normalization repairs follow. Due artifact review retains all proof inputs at a clean owned maintenance boundary.
+Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.4.1 from clean HEAD for explicit policy adoption and wider audit ownership; valid-literal and normalization repairs follow.
 
 ## Recent Completions
+
+- `2026-10-02` — `REPO-HYGIENE.7` retains the due artifact census and corrects the current other-repository cleanup boundary.
 
 - `2026-10-02` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.4.0` preserves exact historical callable replay sources with safe recovery controls.
 
@@ -43,8 +45,6 @@ Activate .0.2.1.4.1 from clean HEAD for explicit policy adoption and broader aud
 - `2026-10-01` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.5` guards the stable entry/cursor description and repairs79-file inventory before canonical closeout.
 
 - `2026-10-01` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.4` classifies finite gaps and preserves owned repair/requirement next actions.
-
-- `2026-10-01` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.4` reconciles three bounded objectives under exact canonical acceptance.
 
 ## History
 

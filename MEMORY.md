@@ -1,10 +1,10 @@
 # MEMORY
 
-- activation_commit: `f9c683543c1e56f87c861d52a2b162d63781042a` — clean activation base for historical callable instrument recovery.
-- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.4.0 - preserve historical callable instruments`.
-- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.4.0` (done) — source recovery committed; policy adoption remains separate.
-- next_action: Activate .0.2.1.4.1 from clean HEAD; finish explicit claim-policy adoption and broader audit ownership, then valid x,y literal diagnosis .3.0. Artifact review is due; retain all proof inputs and use a clean owned maintenance boundary.
-- in_flight_uncommitted: none; source archive, actual recovery controls, book and continuity land together.
+- activation_commit: `e3ed7cc824c9e55416bea9c74dd39e9f5b83fb68` — clean activation base for due artifact review.
+- latest_completed_leaf: `REPO-HYGIENE.7 - review artifacts and correct read-only boundary`.
+- active_work_unit: `REPO-HYGIENE.7` (done) — retained census committed; feature frontier remains unstarted.
+- next_action: Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.4.1 from clean HEAD; finish explicit claim-policy adoption and broader audit ownership, then valid x,y literal diagnosis .3.0.
+- in_flight_uncommitted: none; review record, archived instruments, corrected boundary and continuity land together.
 - blockers: No access/decision blocker. Valid x,y literal .0.2.1.3 and frozen normalization loop/count .0.4 own repair before closeouts. Startup19/32/35/87 remain separate.
   Wrapper startup .7 remains open; recovery/purge stay prohibited. No interrupted Phase0 run counts as proof.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the

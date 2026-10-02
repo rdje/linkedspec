@@ -2,6 +2,8 @@
 
 October 2 evidence recovery: SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.4.0 preserves15 exact callable observer/input sources across three original checkpoints; six bad-input controls reject with zero file writes. Historical results/runtime/authorities stay exact; source recovery is distinct from runtime replay. Bridge f9c683543 canonical passed both CLI66/66 and Phase01033/1162s. Next explicit claim-policy adoption .4.1, then valid x,y literal .3 and normalization loop/count .0.4 before closeouts and neutral execution; broader startup5/29 audits remain open.
 
+Latest maintenance: REPO-HYGIENE.7 records the due artifact review with zero removals and archived census instruments; every other repository/submodule remains read-only and excluded. Feature next action remains .0.2.1.4.1.
+
 September27 report closeout: all seven ARCHOGEN reports are accounted for: LS-001–005 have published remedies at fd3e328d5; LS-006 is withdrawn and LS-007 needs no behavior change. SEMULITH independently closed its three reports. Correction8b5b5ffd8 records the unauthorized ARCHOGEN write and makes every other repository read-only. RGX-CONSUMER-BUILD-REPORTS.1.3.2 closes LinkedSpec’s bounded report work through canonical acceptance; ARCHOGEN owns its adoption, verification and any reversal. Artifact census .93 is complete with zero deletions; startup .92/.94/.95/.51 resumes; unrelated defects and global book reconciliation remain open.
 
 
