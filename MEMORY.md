@@ -1,12 +1,12 @@
 # MEMORY
 
-- activation_commit: `67af62f7aa6dff39b6c3fd64b15fb5139f691a0a` — clean activation base for lexical signature repair.
-- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.3.1 - protect callable signature pipe ownership`.
-- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.3.1` (done) — signature/quote ownership repaired; normalization, attached-control and ordering owners remain.
-- next_action: Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.0 from clean HEAD; diagnose frozen normalization count/infix source against admitted contracts.
-- in_flight_uncommitted: none; completed focused signature repair and all required jobs are recorded before handoff.
-- blockers: No access/decision blocker. Signature repair .0.2.1.3.1 passes; normalization .0.4, attached-control .0.5 and residual-order .0.6 own prerequisites before closeouts. Startup19/32/35/87 remain separate.
-  Wrapper startup .7 remains open; recovery/purge stay prohibited. No interrupted Phase0 run counts as proof.
+- activation_commit: `446fb65fadca2e1bd31fec93bb9de779eb2134d1` — clean normalization diagnosis base.
+- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.0 - diagnose normalization call grammar mismatch`.
+- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.0` (done) — explicit canonical successor selected; original bytes preserved.
+- next_action: Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.1 from clean HEAD; implement source succession and narrow historical Phase0/CI audit reconciliation with canonical proof.
+- in_flight_uncommitted: none; diagnosis captures, scope, owners and focused verification are recorded before handoff.
+- blockers: No access/decision blocker. P1 .0.5/.0.6/.0.7 remain; .4.1 owns the historical audit rejection for the new signature test. Startup19/32/35/87 remain separate.
+  Wrapper startup .7 remains open; recovery/purge stay prohibited.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
   active table; the task metadata doctrine inventories all consumers, permits arbitrary frontier-row rewrites,
   and requires every exact current task ID to be unique across partitioned and unpartitioned storage.

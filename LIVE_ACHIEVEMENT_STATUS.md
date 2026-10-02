@@ -2,17 +2,19 @@
 
 ## Current Activity
 
-Literal signature repair verified; full PNT continues with normalization before canonical bridge reconciliation.
+Normalization call grammar diagnosed; full PNT continues with canonical successor source/binding and historical audit reconciliation.
 
 ## Latest Completed Slice
 
-`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.3.1`: quote-aware signature delimiter protection,19 healthy native/fresh pairs,729 dependents and full Phase01033/1231s. P1 attached-control .0.5 and residual-order/readiness .0.6 remain owned.
+`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.0`: eleven paired controls, seven admitted-form successes, three evidence REDs and102 unchanged production/governing inputs. False-ready raw-expression telemetry is P1-owned .0.7; .0.5/.0.6 remain separate.
 
 ## Next Action
 
-Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.0 from clean HEAD; diagnose frozen normalization count/infix source against current admitted contracts.
+Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.1 from clean HEAD; implement the selected source succession and exact Phase0/CI historical audit corrections with canonical acceptance.
 
 ## Recent Completions
+
+- `2026-10-02` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.0` diagnoses unsupported infix and selects an explicit canonical successor; raw-readiness/audit defects remain owned.
 
 - `2026-10-02` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.3.1` repairs signature/quote ownership with matched public RED/GREEN and required Phase0 proof.
 
@@ -43,8 +45,6 @@ Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.0 from clean HEAD; diagnose fr
 - `2026-10-02` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.4` independently reconciles closure definition and splits bounded composition work before implementation.
 
 - `2026-10-02` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.3` freezes scoped policies and corrects bounded progress/error/ordering teaching.
-
-- `2026-10-01` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.2` freezes closure structure with independent governance and exact CI evolution.
 
 ## History
 

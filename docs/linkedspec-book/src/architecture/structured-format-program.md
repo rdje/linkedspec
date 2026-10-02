@@ -310,7 +310,7 @@ detachment by themselves. Backend lanes must execute public producers, mutate th
 and reject deliberately aliased controls. They must pass a healthy baseline before semantic mutants count.
 The default checker executes no DSL and changes no runtime admission. The bounded Perl registered-function
 bridge is implemented and the literal signature prerequisite is repaired. Canonical reconciliation,
-normalization, deferred attached-control and residual-event-order prerequisites remain before complete
+normalization, deferred attached-control, residual-event-order and nested raw-expression readiness prerequisites remain before complete
 neutral execution. `docs/language-readiness/composed-objective-governance.md`
 records the oracle and evidence boundary. Whole formats and unassessed requirements remain pending.
 
@@ -343,8 +343,8 @@ appending to an active `map_leaves!` receiver fails even through an alias, while
 parameter remains independent and writable.
 
 The bounded regression has17 sources on native Perl and a fresh emitted process,147 top-level tests
-with23 nested actual-reference/failure-restoration assertions. The original seven controls now have six
-successes and one registered-function failure. The unchanged normalization fixture stops at `decorate`;
+with23 nested actual-reference/failure-restoration assertions. At that push-repair boundary the original seven controls had six
+successes and one registered-function failure. The normalization fixture then stopped at `decorate`;
 its complete neutral execution and semantic mutations remain pending. Existing assignment-guard,
 caller-function-shadowing, boolean-kind and regex/numeric callback repairs remain separate.
 
@@ -404,7 +404,7 @@ Plain callable records retain eight fields with no closure or stored environment
 leak is corrected under `.1.3.3.0.2.0.1`; existing argument/local-name shadowing remains separately
 owned by startup32. Scope prerequisite `.0.2.0.2` closes this repair under canonical acceptance.
 The registered-function bridge below extends the combined regression to 71 sources and 605 tests;
-full normalization execution remains pending on its separate literal and loop prerequisites.
+full normalization execution remains subject to source correction and the separately owned control/metadata prerequisites.
 
 ### Determinism, progress and failure boundaries
 
@@ -1172,11 +1172,37 @@ child independently checks rest separation, actual operand effects and handler e
 exception identity and restored context. The existing 33 source rows remain byte-exact. All seven
 original isolated composition controls now succeed on both producers.
 
-This proves the bounded bridge, not the complete normalization pipeline. The valid `{|x,y| return(x) }`
-literal still passes AST parsing but fails compiler reconstruction; its `left,right` twin works.
-Prerequisite `.0.2.1.3` owns that repair before bridge reconciliation. The frozen pipeline's remaining
-loop/count mismatch belongs to `.0.4`. Startup32 argument/local-name shadowing, startup19/35/87 and
-other backend lanes retain their owners. Recognized-source readiness does not prove runtime coverage.
+The later `.0.2.1.3.1` repair protects callable signature pipes, including `x,y` and operator-named
+rest parameters. The frozen pipeline's remaining loop/count mismatch belongs to `.0.4`.
+Startup32 argument/local-name shadowing, startup19/35/87 and other backend lanes retain their owners.
+Recognized-source readiness does not prove runtime coverage.
+
+### Call grammar in the normalization loop
+
+Arithmetic and numeric comparisons use ordinary calls. A counted loop can compose `count` with
+`num_lt` and `num_add`:
+
+```spec
+Top:: I { pieces=["a","b"]; i=0; while(num_lt(i,count(pieces))) { i=num_add(i,1) }; return(i) }
+```
+
+This returns `2` on native Perl and independently loaded emitted source. The equivalent loop using
+`lt(i,count(pieces))` and `add(i,1)`, or `<(i,count(pieces))` and `+(i,1)`, also returns `2`.
+The [numeric helper reference](../dsl/value-container-flow-helper-reference.md#numeric-value-helpers)
+defines these call forms and explicit nested grouping.
+
+The original selected fixture instead contains `i < count(pieces)` and infix increments.
+Its AST marks those expressions `raw_perl/unsupported_expression`; emitted Perl retains the barewords
+and calls a host `count`, which fails at runtime. Direct `count(pieces)` returns `2`. Replacing only
+that loop with admitted calls in a scratch source yields the selected nested `new:AB`/`new:CD`
+result, count2 and restored caller text on both routes. `.0.4.1` owns an explicit successor fixture
+and source-binding correction, preserving the original bytes and all selected oracles.
+
+The diagnosis also exposes false portability telemetry: these raw nested expressions currently
+report ready1/raw0/fallback0/unresolved0. For example, `i=2; i=i+1; return(i)` returns `1`, and
+an infix `i < 1` condition selects its true branch, because the emitted bareword is not the bound
+DSL variable. `.0.7` owns reporting those raw dependencies under ADR0003; source correction alone
+does not close that defect. Complete case/event/detachment execution remains with the subsequent owners.
 
 ### Reconstructing dated bridge probes from a fresh checkout
 

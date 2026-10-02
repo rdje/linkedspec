@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-10-02 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.0 normalization call grammar diagnosis
+
+Eleven public native/fresh controls preserve the frozen source and establish unsupported infix as host-source passthrough: count-direct and three admitted loop forms succeed; original/minimal loops fail host count; infix increment/condition preserve wrong-intent bareword behavior and actual fresh warnings. Only a one-loop scratch replacement yields the selected nested value. Three corrupted observations reject;102 production/governing inputs remain activation-exact; neutral140/16/44 and rendered book pass. Select explicit canonical normalization-calls successor under .4.1 with unchanged oracles/original bytes. P1 .0.7 owns false-ready nested raw telemetry; .4.1 also owns exact historical-audit reconciliation of the new Phase0 regression. Retain the failed audit and observer corrections honestly; no runtime/fixture/authority admission follows.
+
 ## 2026-10-02 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.3.1: protect callable signature pipes
 
 Protect exact unquoted callable signature delimiters before host pipe-quote detection. Fixed/rest operator-named parameters, zero/nested/quoted headers and existing host quote payloads have regression coverage; public records/signature/source/spans and all other production/authority inputs remain unchanged. Twenty exact native/fresh sources retain original/restored-Core/green/re-applied controls: nineteen final healthy pairs and the explicit deferred control_if failure. Three actual corrupted observation controls reject. Preserve typed error carriers, all content-addressed capture groups and nine controlled metadata-order/readiness observations. Own attached-control .0.5 and residual-order .0.6 before dispatcher closeout; normalization precedes canonical bridge reconciliation. Seven final dependent suites729 and required full Phase01033/1231s pass; staged doctrine acceptance governs landing. Two stopped intermediate attempts remain non-proof.

@@ -1,0 +1,589 @@
+{
+  "version": 1,
+  "owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.0",
+  "claims": [
+    {
+      "name": "normalization-call-grammar-diagnosis",
+      "statement": "Frozen infix expressions pass through as host source; admitted count and arithmetic/comparison calls execute. Select an explicit successor while preserving original source and independently owning false-ready telemetry.",
+      "scope": "Eleven matched native/fresh sources at activation-exact production: seven admitted-form successes, two host-call failures and two retained infix host behaviors. The full call-form pilot proves one value only; seven-case/event/rejection/actual-object detachment and other backends are not claimed.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/project_data_run.sh env PERL5LIB= perl -Iperl docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.0-probe.pl; bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.0-review.py",
+        "granularity": "Each exact source, AST descendant, metadata, lowering/dump/emitted bytes and native/fresh value/error.",
+        "result": "Original and minimal infix loops fail host count; direct count and three admitted loop spellings return2. Infix increment/condition return1/yes while helpers return3/no. Only the loop changes in the successful full value pilot. All original production/normative inputs remain base-exact."
+      },
+      "falsify": {
+        "status": "checked",
+        "hypothesis": "count itself is unsupported, success changes unrelated source, or ready metadata proves raw-free AST.",
+        "oracle": "Explicit literal expected values, direct count, three admitted call forms, exact one-loop source replacement and actual raw AST descendants; manual call grammar plus ADR0003. Native failure and independently loaded emitted error retain the actual host count detail.",
+        "red_control": "Original/minimal host-call failures and wrong-intent infix results remain beside successful call controls; false-success, hidden-raw-child and changed-successor-source corruptions all reject, then the actual capture passes."
+      },
+      "durability": {
+        "status": "checked",
+        "mode": "live",
+        "inputs": [
+          {
+            "path": "capability_conformance/callable_codeblock_contract.json",
+            "sha256": "1651e42e0e24e2476dcaffa1f4bd63888bddaa3a845ddaf329be7392c0bfe67e",
+            "role": "input"
+          },
+          {
+            "path": "capability_conformance/callable_signature_contract.json",
+            "sha256": "d01a63252648259dadab5f2f565ae7c93e860c055f2a156178f605c4b0c53ca7",
+            "role": "input"
+          },
+          {
+            "path": "capability_conformance/composed_objective_contract.json",
+            "sha256": "52b76d5b3e48fdf64f25e93b22553eabfa765fc224c101f0f5fbdd8a6abf6e01",
+            "role": "input"
+          },
+          {
+            "path": "capability_conformance/outward_descriptor_contract.json",
+            "sha256": "6595fb490348c6e3401d668c72aa80222c2ecffacc5f95a137a82d774bd2565c",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.1-selection.json",
+            "sha256": "b9e54e21dff39b08a098ea882a513d507730e0cdd7e4d6199c6374f8dbc30fe7",
+            "role": "input"
+          },
+          {
+            "path": "docs/language-readiness/composed-objective-governance.md",
+            "sha256": "1ca2ea6940ab1cb4ac57b74c7ebbf89021053ebd442d65f08dceb065b9ec7797",
+            "role": "input"
+          },
+          {
+            "path": "docs/language-readiness/composed-objective-selection.md",
+            "sha256": "62e0bddb7214470e7d50a403dc2050d287378ec320e11cbc5f111dd0c599d401",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedRE.pm",
+            "sha256": "8f3bb342f25b1d0f9c8986e2477d1b00d7bb1359cf38b9d209f680d216896e12",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec.pm",
+            "sha256": "693bf62c48a850ed1f0a32400ad96744a9f2bcaaf4dff53e16f36a4127cf1ae2",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/AST.pm",
+            "sha256": "5d5fa7e8f130f1c0eef39f7ce8129b01563467aa339152073ef4bcb9ebd30dfd",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/AST/Parser.pm",
+            "sha256": "8c3e1708278b3e199eb30a7095ca0e70825c01ba4b5a46612e77f7cc8f5dff50",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/ArrayPipeline.pm",
+            "sha256": "a9bf7048ecfef2ab9d50c024b1b84a1ad525e64fefde01caab5632168be9b1e7",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/CanonicalEvents.pm",
+            "sha256": "6d6caa83dab46cf3915a7d9e0b81d8a11fcd29ac0262b30041a3c81be0af3c4d",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/CanonicalEvents/Core.pm",
+            "sha256": "a56a8caa2b1a4e151ab4171a2e8af515a3c187b38ce0280a9b1c4ae84706052d",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/Contracts.pm",
+            "sha256": "f062292c073f37817484fd77e54d763f9595618ecd7d05a5d592a4eca621c361",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/ControlFlow.pm",
+            "sha256": "84171511b0b5a6511bce4d8510c741d2e5275afe54e40dc9cecb62299a5d5f6a",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/DeclareMethod.pm",
+            "sha256": "6ed978febab3ccd85447a2a1be5c1c9e96c255242269b356abe5fb8881259ba3",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/Diagnostics.pm",
+            "sha256": "0574e93aeb14a63158d5af08d41ff1775fe263030d1557e59047f1cadb770712",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/FlowExpr.pm",
+            "sha256": "47516700d0cdb67f4183425053a9886d9ae0906a79de6cb1590e4f9e2dfff3f2",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/MethodExpr.pm",
+            "sha256": "d4a39f686554d943272aabb9e60a4c4c0c49af1b279a105ed05cc82750acbceb",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/MethodLowering.pm",
+            "sha256": "7418677f2fb9e2f9ca39c1606cff888826b788fd2ff8c911fba75d32b9b365b5",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/ProgressiveSpanDispatch.pm",
+            "sha256": "e357772a2b9d9aae0c5becbfcb3bf238ff4ddc1df466c7063aeef69a1cab0ec5",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/RewritePipeline.pm",
+            "sha256": "221597b09903211a883b2072f90783e92fb0f2491e17f0e797b623f27e5f27c9",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/Scanner.pm",
+            "sha256": "2e991add41a4325aec65eaa1a7c77904db2b5497292d134bf66d081cbc7579a6",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/Scanner/FlowRules.pm",
+            "sha256": "18463d7b84ee525a554e9781288b993f6d39b38d24e25ecbca2d53ae806417d6",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/Scanner/LegacyRules.pm",
+            "sha256": "a78386909d43cfd0e0bbb19e41243564007acfc53edf6f760131dd8f1f51fed9",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/Scanner/PrimitiveBasicRules.pm",
+            "sha256": "dc987808055afe2843f5c61da0526893ebcfa3028fdddf4f64ad41c77cc9fd7d",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/Scanner/PrimitivePipelineRules.pm",
+            "sha256": "17dcac93902068341f5d529dd6bd360616da0f3542ee6345df0d51f1f619eef2",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/Scanner/RecognitionTransactionRules.pm",
+            "sha256": "2ad196c9a6e8f8e4872fbc5164ac9b5255cb94b1d6b52028345f3a070f9f0580",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/ScannerCore.pm",
+            "sha256": "507bef74ab642d4f65e9222b2687a5f955f279fdd03403ab2ef83c3005c7766e",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/StagedParseJob.pm",
+            "sha256": "63b4b211d6f7f94ffa398f4ee07316fc717387faec443e9e5299e0186e8627cc",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/StatementSplit.pm",
+            "sha256": "32f2aec5d3b815155453183fc1f0def94e2fc83d7c05fefb9b6b101133e8a94a",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/StatementSplit/Core.pm",
+            "sha256": "0bd4d14f36d052e18f95048de9ed2429cf8106685b184b7774681894e36dfb23",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/StatementSplit/Mode.pm",
+            "sha256": "be7e4ba728ffa06ec021ac1d6cba57ef612411697adfe621852f0f9ebfe14bd0",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/Trace.pm",
+            "sha256": "e005c842ec16e8c8292b75b98a28d293a1178458a1a93bce1faad371a080dace",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/ValueExpr.pm",
+            "sha256": "5da83310d071b2c115496e50686a8510ca829d0e9590b2b244f95fcea8d95459",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/BindingRuntime.pm",
+            "sha256": "4168ea0bb10dbe22f7be409e5b58087534ae42cb14d77d254608df1650bfdc91",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/BootstrapSpec.pm",
+            "sha256": "72525deda4f91586a5acd7de3b302dee1d989ba9e03f4c9f9740b1c3175ae938",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/BootstrapSpec/Core.pm",
+            "sha256": "8375456a2f2fab3e0682eaf8901e815ac156d883d3a39113e66b90076b9e5c14",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/CallableContract.pm",
+            "sha256": "b985f546158bc9cba232c93ed651b65016295c77b7390cda620096b3604fd781",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/CodeblockRuntime.pm",
+            "sha256": "93f5cd09381c5d4f92d08046531626544d2fd94dff8b0d3afa5ab9fd406ccd73",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/Compiler.pm",
+            "sha256": "da360b1080a830e693cfd24f1e96f516c15d288363f8c9b6c59187d6b64370d5",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/CompilerState.pm",
+            "sha256": "c81730a5653576574ce61879d37df2b1e0472e41f35f5b5ce87f895a52862aa4",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/EntryRuleSelection.pm",
+            "sha256": "ce30112d405908bc0589d0ef5e5b4fa9299c0dbd758f760a99eb84e5acccea25",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/GeneratedSource.pm",
+            "sha256": "f4a446847c241973278d3c1c30407047bb9b53fdf75ba5f9830e874290e66f68",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/HandlerVariantEmitter.pm",
+            "sha256": "22382f132066572f72c4f745bd6f356439e26c8b55171af57ec531b06682327d",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/InterMatchGapRuntime.pm",
+            "sha256": "daef20c20a491ceaa50306167a8880602fe68c7228ade17f486f346686d31976",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/MCPContract.pm",
+            "sha256": "06babcb9021a343d6111a447c39105dc1e29cd166e89ccac780f4d132af500ce",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/MCPContractRuntime.pm",
+            "sha256": "09fb23f0fa66575811ee42e1102f145c76715e55151cbf2451035c468bc64a35",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/MCPServer.pm",
+            "sha256": "df2bd23f8ae66eb7a0e028e10b43c80893309f5091eb8f90f533d5adca0aad8d",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/MCPWire.pm",
+            "sha256": "1760f96a3f542d41d302eb6c39438f74fcab9dde8f48c59c49654e80d6a8af56",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/Numeric.pm",
+            "sha256": "584f04b4ce883ce82948b8f2543da73167ce76ca4e62cb6c6edea80f5a519308",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/OwnerDispatch.pm",
+            "sha256": "19247f57117f66b4cf4ca2b3205373b2167dc4d9790b89dbba8a5a43f94d58ca",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/ParserFactory.pm",
+            "sha256": "d8cad7309e0650b59b1221b636f7eff7514cf49ad26c8f512ec6c837af3ef8bc",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/PluginBridge.pm",
+            "sha256": "51118e069fe2d95dd9d0aa8b7fbf427c3167db2724bb35dfe9a9202c47925c21",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/PluginRegistry.pm",
+            "sha256": "f84ba93c083e09a38fd8e01a9ff65b9b71b9f2c23ac4c987a854337e4a86425a",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/ProgressiveSpanDispatch.pm",
+            "sha256": "3f3612b6fb665f9e8678de54a5c876d9b5519bbffeb81e50b29f5262488da5cd",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/ProgressiveSpanDispatchPolicy.pm",
+            "sha256": "36b5bf0a73c53df33ced49e53e7399311a0029de4379aef17d8dec86a7a33eb3",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/ProgressiveSpanDispatchRuntime.pm",
+            "sha256": "451981a723f5f7383875f51c3e1093ae9898396efab5db2d39a22ac93b6d5a90",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/RecognitionTransaction.pm",
+            "sha256": "308543bb1194ba4c6b8837a25346076e03ac55a76cd0522f0b8c8127e7e5618d",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/RecognitionTransactionPolicy.pm",
+            "sha256": "7946837d224b579f1f3e9fc2b6a5e785994ada3ac4fffe8d60601665a77fc528",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/RecognitionTransactionRuntime.pm",
+            "sha256": "d9b36b3d692a1414227d6a43e342d97785c889c0a8259523d0ecb7bdd72e5923",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/RecursiveObservationPolicy.pm",
+            "sha256": "ac1bcc4654e108bdd7f646726f474ed48d9fc613bbdb864a16b6e6bc4568aaa9",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/Resolver.pm",
+            "sha256": "5260447fff3e6d9c7dd4d4b8d971991d640efec979c49fde62c1bc41da55cce0",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/RuleIR.pm",
+            "sha256": "5cdd4065a6f0e5165863146c4b4693fa54168344f6225dd9a1748e096e331997",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/RuleIR/EmitContext.pm",
+            "sha256": "6940dcf0be03b65e3d0a69f3efec41e1dca37524930ef20368dae94d99a23a9b",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/Runtime.pm",
+            "sha256": "d6f430b97936639be7c00711af796c493b95c65e6b9c168c965942dd8bab4b26",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/RuntimeContext.pm",
+            "sha256": "740bfbea87e3e4ba9f8f541c08f495ad43342f2d27599fbc834bbbd47a8ebab8",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/RuntimeDiagnosticOutput.pm",
+            "sha256": "aa44df92d185bf107d91752aa8a4cfabde5f998ffac6633bc72dab0e59851653",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/RuntimeLogical.pm",
+            "sha256": "e2b7b9eb8dc7b8a66260edfcc5dbc1959dd7e0d3dbc3f4a973fcbd3a5333dad1",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/RuntimeSemanticObservation.pm",
+            "sha256": "39eab6327669426d497827ce80af0353bc88ce32fb333266c18fe4e5cd2ab158",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/SemanticCallProjection.pm",
+            "sha256": "c03259c6c01b7105d81557699e959bf36825545aa068df4ef877a00554c121fc",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/SemanticIndex.pm",
+            "sha256": "d7301d1efb58fd5f282e9a27ed958a897ab34e6c034f5e30f8e11045ebff029f",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/SemanticQuery.pm",
+            "sha256": "740ab20cdae43f07d56bcd0c02d18ddf83b0b449a742b4fee775b1e81f64f210",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/SemanticRuntimeProjection.pm",
+            "sha256": "3820b4d7bd4bf035eebd78667f2955bfc8f120bcc8185abc8234821948314764",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/SemanticSourceMap.pm",
+            "sha256": "f8dcc03277bbca0f8f964b966143029bdb3153215d8e2cfb9bc9686c7e344306",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/SemanticStaticProjection.pm",
+            "sha256": "1424f9aa507a25b70c213515ee216885d8f5bdd0b12294004af5e5605d4d9822",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/SourceLocation.pm",
+            "sha256": "c494440264af91bb5a1ba196cc5e5e7e92d367e63fe3a249fd5a050fb1d23793",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/SpecEntry.pm",
+            "sha256": "47d2139ff180d959692b78079aff9097970e3d1ee977d34595a4de4c21dc17c1",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/SpecLoader.pm",
+            "sha256": "2465593661da9a3d60df04c5730d718742680a8b9103cbd5f6b1183f6b7700ee",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/StagedASTEnrichment.pm",
+            "sha256": "6a69d39e1d9de7b849ea429e532232d61f112755cf9b87ba2d16e1291e603f53",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/StagedASTEnrichmentRuntime.pm",
+            "sha256": "7d01e18c88ef9de45bf9049a2f3607800a4014aba8a1b4e8ad3fbc99cfac27b3",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/StagedParseJob.pm",
+            "sha256": "c9ecca71a9e4a79c48ca94d3569be2ff4560443363cf594d70269f060daf2407",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/StagedParseJobPolicy.pm",
+            "sha256": "d08855a2f5c35e00b73cc23f2cc8e0a88283b9c4a8a1cc7500a5efe743ce53f1",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/StagedParserRegistry.pm",
+            "sha256": "0f5f9de9b8af952a1d4eadd20b39490ce3fc897a18be9a6d391f9808318a713b",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/Trace.pm",
+            "sha256": "f8041e80c7f8342a0497710b130a14085c3dddd0d1ee67eeb04f51dd196ffe22",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/UnicodeCaseMapping.pm",
+            "sha256": "944386217a59c811b4333df9070d222e07ba9d5ed8eb163ed2fdcd4c5c73889f",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/UnicodeXIDContinue.pm",
+            "sha256": "db2185e0a2366849c126d76b27ad5591eee9463ea5e825e815e9feabe97b8947",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/UserFunctionRegistry.pm",
+            "sha256": "805626ff7aeebdbb00565fa102afccdd3e6c8126e2e341f44bfeff1d0cd5361c",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/Validation.pm",
+            "sha256": "ac8623e87c7157812e99f8b729fa136d0ff2fe2dc66cfbbc9a91fddd818f49c9",
+            "role": "input"
+          },
+          {
+            "path": "perl/PPlugin.pm",
+            "sha256": "7cf5f3e1ff7465a2307b9a2ab8efded717648a188bf5f0dfacaac569370c36d1",
+            "role": "input"
+          },
+          {
+            "path": "perl/PathSearch.pm",
+            "sha256": "ad943a8335f1bbb031214e3c60ea2b97cd8440eed68dacac218062c42e7eb255",
+            "role": "input"
+          },
+          {
+            "path": "perl/env.conf",
+            "sha256": "45ed4c049b260fed7bf5e9ced195e259b9327834ff08def0581d1f01ffe60591",
+            "role": "input"
+          },
+          {
+            "path": "perl/gdcheck.pl",
+            "sha256": "e12ddba1c2a252c91ba48f24ad888e7693f92bdb167a791e847025fe41f153f5",
+            "role": "input"
+          },
+          {
+            "path": "perl/htmlcss_driver.pl",
+            "sha256": "9abd0b9bc521b97df100517c547da60b82c6dcd947726733c6001d420582c67c",
+            "role": "input"
+          },
+          {
+            "path": "perl/ptchange.pl",
+            "sha256": "13336081ceff048e5172169d4e9bad5997b245c10170ef30f81220dcaae30062",
+            "role": "input"
+          },
+          {
+            "path": "t/phase0_regression.t",
+            "sha256": "6cf4fc95a503b32212b11f4a0780c1f17d97458c6912b33026a1e5cf346974b8",
+            "role": "input"
+          },
+          {
+            "path": "tests/language-readiness/composed/diagnostic-invalid-arity.spec",
+            "sha256": "bd474ebe5e927111b46163b217da66e3d75802f264558800b3bfeebd14ad773a",
+            "role": "input"
+          },
+          {
+            "path": "tests/language-readiness/composed/diagnostic.spec",
+            "sha256": "fba66e47d14b1a236deb1136ec2c515fa629f8a1d8dce36812431ebe8bc62fc0",
+            "role": "input"
+          },
+          {
+            "path": "tests/language-readiness/composed/normalization.spec",
+            "sha256": "ba9953c282e5e66956dc4b7d22c2acc7b1e879734654e7cb467ad41275cc4249",
+            "role": "input"
+          },
+          {
+            "path": "tests/language-readiness/verify_objectives.py",
+            "sha256": "7044e24dc4a90a4fa11da1d5c53c939d35f8012d9db16584aaddc59311b50a7e",
+            "role": "input"
+          },
+          {
+            "path": "tools/check_composed_objective_contract.py",
+            "sha256": "3ad0987b79d6a424719921ad535fe25fec1f77134f7fd774af3867e854a8f770",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.0-probe.pl",
+            "sha256": "57a8b49e65c88b402c1a35a83f8d3ad53374d44e9ccb194fa970624d22f884df",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.0-fresh.pl",
+            "sha256": "4b2bd0cf8e7109fef7212ce84780d7719c9005eaec1469d5e70b8fdd9332088b",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.0-review.py",
+            "sha256": "e1c39a389c33601c86c4e64defcdad2f395457f70902f0a54a4ebcc893c4114f",
+            "role": "producer"
+          },
+          {
+            "path": "docs/linkedspec-book/src/architecture/structured-format-program.md",
+            "sha256": "d5e735b3eb5fbda5b535c8140e66ea63131120365842e2b791958e7215a164ba",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0003-raw-perl-free-spec-authoring.md",
+            "sha256": "0d25361633aac15599afb235840f6433ea193c9d9531079ce257f559514f8f39",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+            "sha256": "268ccfb066ba094bb44139f1273a85d3462424286037ac22add41193a8822905",
+            "role": "input"
+          },
+          {
+            "path": "tools/project_data_run.sh",
+            "sha256": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f",
+            "role": "input"
+          },
+          {
+            "path": "tools/project_data_env.sh",
+            "sha256": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73",
+            "role": "input"
+          },
+          {
+            "path": "tools/run_python_project_data.sh",
+            "sha256": "0bc03bb8f4ce550397da9fda086215a1d9f6f452ec413605fbcb8976c06af604",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.0-diagnosis.json",
+            "sha256": "0d16fbb98bbc42b140820efe9a5e09c64a9f8f6910223e256d2d72d6206d2b2e",
+            "role": "input"
+          }
+        ]
+      }
+    }
+  ]
+}

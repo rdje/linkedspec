@@ -1,6 +1,6 @@
 # ROADMAP
 
-October 2 literal repair: SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.3.1 protects unquoted signature pipes, including active backtick ownership. Nineteen final native/fresh healthy pairs,729 dependent tests and full Phase01033/1231s pass; original/restored-Core and quoted-opener RED/GREEN, typed carriers and tracked captures remain exact. Next normalization .0.4.0; attached-control .0.5 and hash-order/readiness .0.6 are P1-owned before dispatcher closeout. Canonical bridge reconciliation follows normalization; broader startup5/29 audits remain open.
+October 2 normalization diagnosis: SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.0 retains eleven native/fresh pairs and102 unchanged production/governing inputs. Unsupported infix leaves host count/barewords; admitted call loops and a one-loop full value pilot succeed. Next .4.1 canonically binds an explicit call-form successor and narrow historical Phase0 audit evolution, preserving original bytes/oracles. False-ready nested raw expressions are P1-owned .0.7 alongside .0.5/.0.6 before dispatcher closeout.
 
 LinkedSpec is being positioned as a progressive extraction parser DSL: fast, recursive, regex-anchored, and intentionally different from strict EBNF-centric tooling.
 
