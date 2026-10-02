@@ -171,6 +171,32 @@ subtest 'lowering serializes inert typed data without host callable objects' => 
         'generated execution preserves the parsed callable signature');
 };
 
+subtest 'operator-named signature parameters preserve native and generated calls' => sub {
+    my $index = 0;
+    for my $name (qw(y tr s q qq qx qr m)) {
+        for my $params ("x,$name", "x,...$name") {
+            my $source = 'Top:: I { cb={|' . $params
+                . '| return(x) }; return(cb("ok","unused")) }';
+            my %ctx;
+            my $parser = LinkedSpec::Get(\$source, runtime_ctx_ref => \%ctx);
+            my $input = 'x';
+            is($parser->(\$input), 'ok', "$params native invocation returns its first parameter");
+            is($ctx{last_error}, undef, "$params has no native handler compilation error");
+            my $generated = LinkedSpec::emit_generated_source(\$source,
+                source_identity => "signature-pipe-$index.spec");
+            my $package = 'LinkedSpec::SignaturePipeGenerated' . $index++;
+            my $loaded = eval "package $package; $generated; 1";
+            ok($loaded, "$params generated source loads") or diag($@);
+            if ($loaded) {
+                no strict 'refs';
+                my $fresh_input = 'x';
+                is(&{"${package}::Execute"}(\$fresh_input), 'ok',
+                    "$params generated invocation returns its first parameter");
+            }
+        }
+    }
+};
+
 subtest 'user-function arguments and results preserve codeblock records' => sub {
     my $argument_source = '{|x| return(x) }';
     my $result_source = '{|| return("ok") }';

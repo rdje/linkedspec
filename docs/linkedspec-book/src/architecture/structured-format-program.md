@@ -243,24 +243,48 @@ now execute in the bounded regression below. The frozen source next fails at `wh
 generated Perl retains that condition and the infix increments without lowering. Both native and fresh
 emitted execution report an undefined `count` function despite ready1/raw0/fallback0/unresolved0 metadata.
 The loop/source-contract prerequisite `.1.3.3.0.4` must establish the admitted arithmetic spelling and
-resolve that mismatch before dispatcher closeout and complete neutral execution. The separate valid
-`x,y` callback-literal prerequisite and existing regex/numeric callback repairs retain their owners.
+resolve that mismatch before dispatcher closeout and complete neutral execution. The valid `x,y`
+callback-literal prerequisite is repaired at its lexical boundary below. Separately observed attached-control
+and residual-event-order gaps, plus existing regex/numeric callback repairs, retain their owners.
 The complete requirements and mutation/oracle plan are in
 `docs/language-readiness/composed-objective-selection.md`; no new primitive or syntax is selected.
 
 #### Callable signature pipes in Perl action splitting
 
-The valid minimal source `Top:: I { finishBlock={|x,y| return(x) }; return(finishBlock("ok","unused")) }`
-exposes a diagnosed splitter defect. The standalone literal AST is correct, but the preceding
-statement splitter reads the final `y|` as host transliteration syntax, merges the following return,
-and leaves raw literal text in generated Perl. A final `q` or `...y` shows the same mechanism;
-`left,right`, `x,z` and `y,x` execute correctly. Metadata still reports ready1/raw0/fallback0/unresolved0,
-so successful recognition is insufficient evidence of successful generated compilation.
-Eight exact native/fresh emitted controls include a scoped diagnostic intervention at the `x,y` closer:
-the unchanged source then returns `ok`; restoring the splitter restores failure. The tracked
-`.0.2.1.3.0-diagnosis.json` checkpoint retains complete sources, ASTs, actual splitter events, lowered
-actions, handler dumps and outcomes. Repair `.0.2.1.3.1` owns explicit signature protection and
-compatibility proof; this diagnosis changes no runtime behavior or callable record format.
+Perl protects the exact `{|` opener and its matching signature pipe before host quote recognition.
+The signature closes even when its final fixed/rest parameter is named `y`, `tr`, `s`, `q`, `qq`,
+`qx`, `qr`, or `m`. Once it closes, ordinary body strings, regexes, nested literals and host quote
+lexing resume. Callable records retain their eight fields, signatures, authored source and spans.
+
+```spec
+Top:: I { cb={|x,y| return(x) }; return(cb("ok","unused")) }
+```
+
+This returns `ok`. The rest-parameter twin preserves the same result:
+
+```spec
+Top:: I { cb={|x,...q| return(x) }; return(cb("ok","unused")) }
+```
+
+Nested callable bodies retain their own signature boundaries:
+
+```spec
+Top:: I {
+  cb={|x,y| nested={|s,q| return(s) }; return(nested(x,y)) };
+  return(cb("ok","unused"))
+}
+```
+
+Before the repair, the splitter read the final `y|` as host transliteration, merged the following
+return and left raw invalid literal text in generated Perl. Standalone literal parsing was correct,
+and ready1/raw0/fallback0/unresolved0 metadata could still accompany compilation failure.
+`.0.2.1.3.0` retains its exact diagnosis/intervention/restoration. `.0.2.1.3.1` retains twenty unchanged
+native/fresh emitted sources, exact old-Core restoration and re-applied proof: nineteen return `ok`.
+The additional attached-`if` source loads after the pipe fix but still raises typed
+`unsupported_codeblock_actionir`/`control_if` on both routes; `.0.5` owns that separate correction.
+Residual unmatched-helper descriptor events can also change order across controlled process hash seeds
+while selected lowered code stays identical. `.0.6` owns ordering/overlap and readiness diagnosis;
+the snapshots preserve each observed order. Neither defect is waived by the healthy pipe controls.
 
 ### Neutral fixtures are governed; runtime execution is still pending
 
@@ -285,8 +309,9 @@ observations. Serialized flags cannot establish native error classification, ide
 detachment by themselves. Backend lanes must execute public producers, mutate the actual returned objects,
 and reject deliberately aliased controls. They must pass a healthy baseline before semantic mutants count.
 The default checker executes no DSL and changes no runtime admission. The bounded Perl registered-function
-bridge is implemented; its valid-literal prerequisite, reconciliation and normalization loop prerequisite
-remain before complete neutral execution. `docs/language-readiness/composed-objective-governance.md`
+bridge is implemented and the literal signature prerequisite is repaired. Canonical reconciliation,
+normalization, deferred attached-control and residual-event-order prerequisites remain before complete
+neutral execution. `docs/language-readiness/composed-objective-governance.md`
 records the oracle and evidence boundary. Whole formats and unassessed requirements remain pending.
 
 ### Deferred push on Perl

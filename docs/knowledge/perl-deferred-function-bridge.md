@@ -53,9 +53,10 @@ implementation; dated outputs were regenerated with the old modules and all24 ch
 
 All seven original isolated controls now succeed. Frozen normalization still fails with undefined count;
 generated while condition and infix increments remain unlowered despite ready1/raw0/fallback0/unresolved0.
-P1 .0.4 owns source/contract diagnosis and repair. A valid x,y callback literal passes the AST facade but
-emits raw invalid Perl; the left,right twin succeeds. P1 .0.2.1.3 owns its source-located reconstruction repair
-before bridge reconciliation. No whole pipeline, neutral16 semantic-mutant execution, other-backend parity,
+P1 .0.4 owns source/contract diagnosis and repair. At the earlier bridge boundary a valid x,y literal
+passed the AST facade but emitted raw invalid Perl; .0.2.1.3.1 subsequently protects its signature
+delimiter, with nineteen healthy native/fresh pairs. Deferred attached-if and residual event-order
+gaps remain separately owned by .0.5/.0.6 before dispatcher closeout. No whole pipeline, neutral16 semantic-mutant execution, other-backend parity,
 new syntax, public admission or generated-format-v2 claim follows. Startup19/32/35/87 remain separate.
 
 The checkpoint now preserves exact producer source lines and hashes, including the baseline bootstrap

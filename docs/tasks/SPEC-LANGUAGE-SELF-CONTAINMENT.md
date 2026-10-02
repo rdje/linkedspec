@@ -1098,7 +1098,8 @@ used by ordinary `.spec` syntax on every backend.
   Reproduce: .linkedspec-data/scratch/selfcontain131/callable-controls.pl; direct push and registered-function controls succeed, but callback_push and callback_function return null with CodeblockRuntime::Error unknown_helper/name push or decorate. The real pipeline fails at push before its later calls. All descriptors report ready1/raw0/fallback0/unresolved0.
   Root cause: perl/LinkedSpec/CodeblockRuntime.pm _eval_call handles a narrow helper list and otherwise tries a bound-codeblock slot; the selected mutation and static registered-function routes are absent. Compiler recognition is not runtime composition proof.
   Acceptance: Preserve actual caller binding identity for push, eager once-only arguments, copied/restored temporary parameters, live caller nonparameters, registered-function fresh-local semantics, helper/function/bound-codeblock precedence, active recursion diagnostics and receiver guards. Prove direct/callback native and independently emitted controls plus selected neutral observations, including genuinely unknown calls and typed errors. No host fallback, captured lexical environment or new primitive/syntax; broaden tier before any contract/interface movement.
-  Children: `.1.3.3.0.1`, `.1.3.3.0.2`, `.1.3.3.0.4`, `.1.3.3.0.3`
+  Children: `.1.3.3.0.1`, `.1.3.3.0.2`, `.1.3.3.0.4`, `.1.3.3.0.5`, `.1.3.3.0.6`, `.1.3.3.0.3`
+  Current prerequisites: Original push/function routes are repaired. Literal .0.2.1.3.1 owns exact final splitter proof; normalization .0.4, newly observed deferred attached-control .0.5 and residual event-order/readiness .0.6 remain before dispatcher closure. Preserve original reproduced failures as historical evidence rather than calling them current.
   Scope boundary: Existing startup19 assignment guards, startup32 caller-local function shadowing, startup35 boolean literals and startup87.2/.3 matches/numeric helper dispatch retain separate ownership and acceptance. Partial dispatch repairs do not close them or admit the full neutral pipeline. The plain eight-field codeblock record and all normative authorities stay unchanged.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.1`
@@ -1250,7 +1251,7 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.2`
   Status: `pending`
   Goal: Independently reconcile the committed bridge and original controls, then close .0.2.1 and .0.2 under canonical proof.
-  Dependencies: `.1.3.3.0.2.1.1`, committed `.1.3.3.0.2.1.4.0`/`.1.3.3.0.2.1.4.1`, `.1.3.3.0.2.1.3`; this canonical leaf also reconciles parent .4, so parent status is not its own prerequisite.
+  Dependencies: `.1.3.3.0.2.1.1`, committed `.1.3.3.0.2.1.4.0`/`.1.3.3.0.2.1.4.1`, `.1.3.3.0.2.1.3`, `.1.3.3.0.4`; normalization must satisfy the existing oracle before this canonical reconciliation. This leaf also reconciles parent .4, so parent status is not its own prerequisite.
   Planned proof: Exact committed source/checkpoint/log reconciliation, original seven controls and normalization source on both public producers, unchanged authorities and remaining repair owners, rendered book and exact staged canonical CI.
   Acceptance: Close only after native/fresh emitted results and ordered effects agree with the existing oracles and the actual recursion/slot guards are exercised. Full neutral sixteen-case execution stays owned by .1.3.3.1.
 
@@ -1317,7 +1318,7 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 - [x] **LOCKSTEP** — Doctrine/registry/cadence, policy/review, source-bound record, book/Knowledge/task/roadmap and bounded continuity name the same partial adoption boundary.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.3`
-  Status: `pending`
+  Status: `done`
   Priority: P1 — admitted valid callback literal produces raw invalid generated source.
   Goal: Diagnose and repair the x,y literal reconstruction failure before registered-function bridge closeout.
   Dependencies: clean implementation .0.2.1.1 handoff; no pivot while its runtime work is dirty.
@@ -1325,6 +1326,8 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
   Impact: A valid fixed signature falls through to raw literal text and fails generated Perl compilation. No supported callback claim may waive it.
   Children: `.1.3.3.0.2.1.3.0`, `.1.3.3.0.2.1.3.1`
   Acceptance: Use Get/descriptor/substitution/source dump to find the exact intermediate mechanism, bind native/fresh emitted baseline, fix its owning compiler path with RED/GREEN and focused direct dependents, and keep all original bridge/scope/push records and authorities exact. Declare paths/tier before edits; canonical context/format/infrastructure movement requires broadened proof.
+
+  Closure: .3.0 source-located diagnosis and .3.1 bounded lexical repair are committed through focused/required Phase0 acceptance. Attached-control .0.5 and residual metadata .0.6 remain separate prerequisites; normalization .0.4 is the next eligible leaf before canonical bridge reconciliation.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.3.0`
   Status: `done`
@@ -1353,10 +1356,33 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 - [x] **LOCKSTEP** — Causal card/book/checkpoint/claim, task/roadmaps/frontier and bounded continuity share the diagnosis/repair boundary; prior claim capture is explicitly historical e63.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.3.1`
-  Status: `pending`
+  Status: `done`
   Goal: Repair and verify the diagnosed literal reconstruction path before bridge reconciliation.
   Dependencies: `.1.3.3.0.2.1.3.0`
+  Activation: Clean 67af62f7aa6dff39b6c3fd64b15fb5139f691a0a; completed source-located diagnosis, brief0 and no required job. Exact Core/Mode/AST/rewriter and existing phase0/callable tests reviewed; no normative ambiguity or authority gap.
+  Owned paths: perl/LinkedSpec/ActionIR/StatementSplit/Core.pm only for production; existing t/phase0_regression.t and t/callable_codeblock_literal_contract.t; new tracked .3.1 public probe/fresh/review/capture and claim record; causal/literal/bridge Knowledge and architecture book; task index/roadmaps/frontier/bounded continuity/derived Knowledge. Freeze the completed .3.0 claim at actual 67af62f7a with unchanged hashes/results. Scratch under .linkedspec-data/scratch/selfcontain13302131. Public callable/signature/descriptor contracts, eight-field records, invocation context, authorities, dependency pins and CI/storage remain unchanged; add any necessary owner before edits.
+  Verification tier: `focused`
+  Focused checks: Actual pre-fix RED/new tests, repaired and restored-baseline public native/fresh controls; operator-named fixed/rest/zero/nested/string/body signature and host pipe-quote boundaries; original bridge regression and callable/variadic/binding/map/AST/trace direct dependents; Perl syntax and full phase0_regression per COMMIT; unchanged authorities; book/Knowledge/history/memory/all doctrines/diff.
+  Canonical trigger: none for bounded lexical scanner correction without schema/context/generated-format or infrastructure movement; broaden before landing if scope moves. Later bridge reconciliation and final push require canonical proof.
+  Claim verification: `docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.3.1.json`
   Acceptance: Matched native/fresh emitted RED/GREEN, original callable/bridge and compiler dependents, no raw fallback or record/schema drift, accurate book/Knowledge/checkpoint/continuity, and warranted canonical proof close this P1 prerequisite.
+  Discovered defect: After signature protection, the unchanged body-regex probe reaches a typed unsupported_codeblock_actionir/control_if in CodeblockRuntime::_eval_expr. This separate attached-control-body gap is P1-owned by .0.5 below before dispatcher closeout, not waived as a healthy pipe result or semantic mutant. The initial green observer exits25 because JSON encoding does not preserve that blessed typed error; .3.1 owns observer correction and final matched producer reruns, retaining the original source/failure.
+  Additional owned observation: Re-applied native/fresh values, typed errors and generated bytes agree, but nested/body descriptor unmatched-helper event order changes. CanonicalEvents.pm appends residual helper_event_queue entries using unsorted keys at line249. .3.1 owns the tracked order observer and exact controlled hash-seed evidence; separate .0.6 owns normative source-order/overlap diagnosis and repair before dispatcher closeout. Preserve each observed order; do not sort the captured evidence or claim whole-record byte identity.
+  Prelanding corrections: First Phase0 fails the existing fixed eight-test plan after28 added splitter assertions; stop its identified owned wrapper with TERM, retain the partial143 log as non-proof, replace the fixed plan with done_testing and rerun full Phase0. Review initially assumed a single baseline merged statement and invariant nested body_ast; actual broken nested source has three fragments and its inner body_ast is corrected by this same splitter. Compare unchanged literal signature/source/spans/fields and retain all actual intermediate AST/metadata boundaries instead.
+  Final quote audit: The working guard ran before active backtick consumption. A quoted {| opener consequently left the new signature flag set and merged a following valid x,y callback with its return. Tracked quotes.pl records the actual two-part RED versus three-part independent oracle. Move the guard after existing single-entry/backtick-consumption calls, preserving their relative order, add the regression and retain the intermediate Core source. The intermediate Phase0 attempt2 is stopped143 before changing code, not counted as proof; final attempt3 and all public/direct-dependent/book controls rerun on the exact corrected Core.
+  Staged documentation correction: The acceptance shape gate rejects pending in a completed checklist even when it describes other owners. Name .0.4/.0.5/.0.6 explicitly instead. The first doctrine run also observes the resulting staged/worktree mismatch; restage the corrected task and rerun the complete gate through pre-commit without changing runtime proof inputs.
+
+  Verification: PASS; seven final direct-dependent suites729 tests, full Phase0 attempt3 1033 tests/1231s and syntax. Twenty unchanged native/fresh sources retain19 healthy pairs and the exact .0.5 typed failure; restored old Core reproduces compile failures, final re-application preserves values/errors/generated bytes/splits/record fields. Three corruption controls reject, quoted-opener RED/GREEN and three verbatim book pairs pass, nine controlled order/readiness observations retain .0.6 ownership;91 production/authority inputs other than Core remain activation-exact. First/second Phase0 attempts are interrupted143/non-proof. Rendered book/Knowledge/history/memory/staged doctrines govern landing; full canonical CI is reserved for the designated bridge/final boundary.
+  Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.3.1 - protect callable signature pipe ownership`.
+
+### `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.3.1` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — New callable RED fails48/48 internal assertions and one of11 top-level tests; exact pre-fix and restored-Core public sources fail native/fresh compilation.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Whole-action splitter treats an operator-named final signature parameter as host quote syntax; the new delimiter flag must also respect every active quote owner.
+- [x] **FIX** — Core protects exact unquoted opener/closer after existing active quote consumption; Mode/public schemas/records/context are unchanged. Dynamic splitter plan retains all37 assertions including the actual backtick regression.
+- [x] **ADDRESSED (verified)** — Nineteen final native/fresh healthy pairs, exact old-Core restoration/re-application, typed-error retention, three actual corruptions and verbatim book execution retain tracked instruments and recoverable capture groups.
+- [x] **NO REGRESSION** — Seven suites729 and required full Phase01033/1231s pass;91 other production/authority inputs remain base-exact. Actual attached-control/order gaps are owned .0.5/.0.6, not waived or counted healthy.
+- [x] **LOCKSTEP** — Public book/causal cards, watched claims/checkpoint, task/roadmap/frontier and bounded continuity retain matching corrected behavior; separate .0.4/.0.5/.0.6 own the remaining prerequisites.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4`
   Status: `pending`
@@ -1382,8 +1408,50 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.3`
   Status: `pending`
   Goal: Independently reconcile the two repaired dispatcher routes against the original minimal controls and selected normalization objective before parent closeout.
-  Dependencies: `.1.3.3.0.1`, `.1.3.3.0.2`, `.1.3.3.0.4`
+  Dependencies: `.1.3.3.0.1`, `.1.3.3.0.2`, `.1.3.3.0.4`, `.1.3.3.0.5`, `.1.3.3.0.6`
   Acceptance: Bind exact code, sources, native/emitted observations and focused controls; retain all unrelated repair prerequisites. Close .1.3.3.0 only after the selected pipeline runs correctly without raw host fallback, and then activate .1.3.3.1 for complete neutral-case and semantic-mutant execution.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5`
+  Status: `pending`
+  Priority: P1 — accepted attached control AST is unsupported inside a deferred callable body.
+  Goal: Diagnose and repair attached control execution in deferred Perl bodies before dispatcher closeout.
+  Dependencies: clean literal .0.2.1.3 and normalization .0.4 handoffs.
+  Reproduce: Top:: I { cb={|x,y| if(matches(x, /ok/)) { return(x) }; return("miss") }; return(cb("ok","unused")) } after the signature repair. Public native execution reports a typed unsupported_codeblock_actionir with kind control_if; CodeblockRuntime::_eval_expr falls through to that diagnostic because it has no control_if arm. Final .3.1 probe/capture must retain source-bound native/fresh evidence. Normative control/helper and body-return semantics need .5.0 diagnosis before changing this separate runtime.
+  Impact: The recognized attached conditional cannot execute inside a deferred body. This is separate from signature segmentation and cannot be counted as a healthy control or mutation.
+  Children: `.1.3.3.0.5.0`, `.1.3.3.0.5.1`
+  Acceptance: Use public toolbox controls and canonical control/return contracts; select compiler/runtime ownership and tier; retain exact historical failure, implement distinguishing RED/GREEN with branch laziness and local returns, cover direct dependents and appropriate canonical acceptance without schema drift.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.0`
+  Status: `pending`
+  Goal: Freeze the exact deferred attached-control failure, normative semantics and bounded repair ownership before runtime edits.
+  Acceptance: Matched native/fresh typed failure and positive equivalent controls locate the unsupported AST boundary; contract/source/return/scope review selects safe repair paths and verification tier without assuming all control families behave alike.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.1`
+  Status: `pending`
+  Goal: Implement and verify the diagnosed deferred-control correction before dispatcher closure.
+  Dependencies: `.1.3.3.0.5.0`
+  Acceptance: Actual branch/operand/body effects, return propagation, caller/parameter restoration and native/fresh RED/GREEN plus direct dependents establish the bounded repair; preserve other open controls, accurate public teaching and warranted canonical proof.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6`
+  Status: `pending`
+  Priority: P1 — residual helper metadata order is nondeterministic and can affect readiness classification.
+  Goal: Diagnose and repair residual canonical helper-event ordering/overlap before dispatcher closeout.
+  Dependencies: clean literal .0.2.1.3, normalization .0.4 and deferred-control .0.5 handoffs.
+  Reproduce: .3.1 green/re-applied nested and body-regex sources retain identical generated code and outcomes but descriptor canonical_action_ir_events residual entries change order. CanonicalEvents::_build_canonical_action_ir_events appends unmatched events via unsorted keys %helper_event_queue. The tracked .3.1-order.pl observer records public descriptor/substitution under controlled PERL_HASH_SEED/PERL_PERTURB_KEYS; retain precise scope and classify actual overlap effects in .6.0.
+  Impact: A nominal canonical event sequence is process-order dependent. Observed pre-fix body metadata can differ in readiness/unresolved classification; current healthy runtime outcomes are not proof that arbitrary overlap is harmless.
+  Children: `.1.3.3.0.6.0`, `.1.3.3.0.6.1`
+  Acceptance: Source-bound controlled public observations and canonical order/provenance contracts select deterministic source-order ownership, not a cosmetic sorted snapshot. Preserve exact prior records; verify overlapping/repeated helper spans, readiness and unchanged public execution, direct dependents and warranted canonical boundary.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.0`
+  Status: `pending`
+  Goal: Freeze residual event permutation/readiness effects and normative ordering/overlap before compiler edits.
+  Acceptance: Controlled process/hash-order observations locate exact queue producer/consumer source and distinguish harmless metadata permutation from classification/execution drift; select bounded paths/tier and retain evidence without normalizing it away.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.1`
+  Status: `pending`
+  Goal: Repair and verify the diagnosed residual-event ordering/overlap mechanism.
+  Dependencies: `.1.3.3.0.6.0`
+  Acceptance: Actual controlled RED/GREEN source/duplicate/overlap and order/readiness/public execution checks plus direct dependents establish deterministic canonical behavior; full warranted acceptance precedes .0.3.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.1`
   Status: `pending`
@@ -1585,12 +1653,16 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 | 32 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.4.0` | `done` | Three original observer groups and15 inputs preserved; source recovery only, no historical runtime rerun. |
 | 33 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.4.1` | `done` | Three-leg working rules and watched-source doctrine adopted; broader startup5/29 audit remains open. |
 | 34 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.3.0` | `done` | Host quote mode consumes the signature closer; exact intervention/restoration and eight paired controls locate .3.1 repair. |
-| 35 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.3.1` | `pending` | Repair the diagnosed valid-literal compiler path and close the P1 prerequisite. |
+| 35 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.3.1` | `done` | Exact quote-aware signature protection;19 healthy paired controls,729 dependents and required Phase01033/1231s; new .0.5/.0.6 remain owned. |
 | 36 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.2` | `pending` | Canonical committed bridge reconciliation closes .0.2.1/.0.2 after literal repair. |
 | 37 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.0` | `pending` | Diagnose frozen normalization loop/source-contract mismatch before selecting repair. |
 | 38 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.1` | `pending` | Resolve and verify diagnosed loop/source-contract correction. |
 | 39 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.3` | `pending` | Original minimal/normalization controls and independent dispatcher closeout. |
 | 40 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.1` | `pending` | Complete neutral-case and actual semantic-mutant execution after dispatcher prerequisite. |
+| 41 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.0` | `pending` | Diagnose accepted deferred attached-if execution after normalization handoff. |
+| 42 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.1` | `pending` | Repair and verify the diagnosed deferred-control path before dispatcher closeout. |
+| 43 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.0` | `pending` | Diagnose hash-order-dependent residual canonical events and readiness/overlap. |
+| 44 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.1` | `pending` | Repair canonical residual ordering with exact source/provenance controls. |
 
 ## Decisions
 

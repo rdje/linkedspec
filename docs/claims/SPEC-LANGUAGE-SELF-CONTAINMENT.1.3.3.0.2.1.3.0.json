@@ -5,7 +5,7 @@
     {
       "name": "literal-signature-pipe-diagnosis",
       "statement": "The selected accepted literals fail because the action splitter mistakes an operator-named final parameter's closing pipe for host quote syntax; bypassing only the exact x,y closer restores both public routes, and restoring it restores failure.",
-      "scope": "Eight named native/fresh emitted diagnostic controls on unchanged e63 production/authority bytes, including an exact scoped intervention and restoration. Metadata is recorded independently of actual compilation. This is source-located diagnosis, not production repair or general pipeline acceptance.",
+      "scope": "Historical diagnosis capture landed in 67af62f7aa6dff39b6c3fd64b15fb5139f691a0a on activation e63a20c635ea74981e7476107750fbb1410a1be0 production bytes. Replay in an isolated owned LinkedSpec workspace at that boundary. Eight named native/fresh emitted diagnostic controls on unchanged e63 production/authority bytes, including an exact scoped intervention and restoration. Metadata is recorded independently of actual compilation. This is source-located diagnosis, not production repair or general pipeline acceptance. Existing results/input hashes remain unchanged; qualification is not a new measurement.",
       "rederive": {
         "status": "checked",
         "command": "bash tools/project_data_run.sh env PERL5LIB= perl -Iperl docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.3.0-probe.pl; bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.3.0-review.py",
@@ -20,7 +20,7 @@
       },
       "durability": {
         "status": "checked",
-        "mode": "live",
+        "mode": "historical",
         "inputs": [
           {
             "path": "perl/LinkedRE.pm",
@@ -512,7 +512,8 @@
             "sha256": "128823a6c148c85be7c0f5df8240cc3be4ab9e2ca30d54b51fea35adcba3f2af",
             "role": "input"
           }
-        ]
+        ],
+        "revision": "67af62f7aa6dff39b6c3fd64b15fb5139f691a0a"
       }
     }
   ]

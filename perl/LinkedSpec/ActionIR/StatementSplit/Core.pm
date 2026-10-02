@@ -45,6 +45,7 @@ sub _build_initial_state {
   angle_quote_depth => 0,
   angle_quote_escape_next => 0,
   in_pipe_quote => 0,
+  in_callable_signature => 0,
   pipe_quote_segments_remaining => 0,
   pipe_quote_escape_next => 0,
   in_line_comment => 0,
@@ -391,6 +392,22 @@ sub split_action_ir_statements {
   if (LinkedSpec::ActionIR::StatementSplit::Mode::consume_pipe_quote($state, $char)) { next; }
   if (LinkedSpec::ActionIR::StatementSplit::Mode::maybe_enter_single_quote($state, $char)) { next; }
   if (LinkedSpec::ActionIR::StatementSplit::Mode::consume_backtick_quote($state, $char)) { next; }
+  # Exact {| opens a callable signature in unquoted source. Its closing pipe
+  # belongs to that signature even when the final parameter is named y, q, etc.
+  # Protect only those two delimiters; the body and existing host quote modes
+  # resume their ordinary lexical ownership after the signature closes.
+  if ($char eq '|') {
+   if ($state->{in_callable_signature}) {
+    $state->{in_callable_signature} = 0;
+    $state->{statement} .= $char;
+    next;
+   }
+   if ($state->{statement} =~ /\{\z/o) {
+    $state->{in_callable_signature} = 1;
+    $state->{statement} .= $char;
+    next;
+   }
+  }
   if (LinkedSpec::ActionIR::StatementSplit::Mode::maybe_enter_double_quote($state, $char)) { next; }
   if (LinkedSpec::ActionIR::StatementSplit::Mode::maybe_enter_backtick_quote($state, $char)) { next; }
   if (LinkedSpec::ActionIR::StatementSplit::Mode::maybe_enter_line_comment($state, $char)) { next; }

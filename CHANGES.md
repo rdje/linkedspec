@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-10-02 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.3.1: protect callable signature pipes
+
+Protect exact unquoted callable signature delimiters before host pipe-quote detection. Fixed/rest operator-named parameters, zero/nested/quoted headers and existing host quote payloads have regression coverage; public records/signature/source/spans and all other production/authority inputs remain unchanged. Twenty exact native/fresh sources retain original/restored-Core/green/re-applied controls: nineteen final healthy pairs and the explicit deferred control_if failure. Three actual corrupted observation controls reject. Preserve typed error carriers, all content-addressed capture groups and nine controlled metadata-order/readiness observations. Own attached-control .0.5 and residual-order .0.6 before dispatcher closeout; normalization precedes canonical bridge reconciliation. Seven final dependent suites729 and required full Phase01033/1231s pass; staged doctrine acceptance governs landing. Two stopped intermediate attempts remain non-proof.
+
 ## 2026-10-02 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.3.0: diagnose callable signature pipe splitting
 
 Trace exact public AST/substitution/descriptor/dump/native and fresh emitted controls to the statement splitter: final y/rest-y/q enters host pipe-quote mode and merges the following return. Eight paired controls include renamed/reordered positives and exact diagnostic intervention/restoration. Two fabricated observations reject;91 production/authority inputs remain activation-exact. Retain tracked instruments/full captures/three-leg claims, qualify the previous policy capture as historical e63, and select lexical signature repair .3.1 without changing runtime behavior.

@@ -2,17 +2,19 @@
 
 ## Current Activity
 
-Valid-literal cause diagnosed; full PNT continues with lexical signature protection before bridge closeout.
+Literal signature repair verified; full PNT continues with normalization before canonical bridge reconciliation.
 
 ## Latest Completed Slice
 
-`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.3.0`: host quote mode consumes the signature closer; eight public native/fresh controls, intervention/restoration and retained instruments establish the repair boundary.
+`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.3.1`: quote-aware signature delimiter protection,19 healthy native/fresh pairs,729 dependents and full Phase01033/1231s. P1 attached-control .0.5 and residual-order/readiness .0.6 remain owned.
 
 ## Next Action
 
-Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.3.1 from clean HEAD and repair the owned lexical splitter with RED/GREEN and direct-dependent proof.
+Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.0 from clean HEAD; diagnose frozen normalization count/infix source against current admitted contracts.
 
 ## Recent Completions
+
+- `2026-10-02` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.3.1` repairs signature/quote ownership with matched public RED/GREEN and required Phase0 proof.
 
 - `2026-10-02` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.3.0` diagnoses the callable signature pipe collision with exact causal controls.
 
@@ -43,8 +45,6 @@ Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.3.1 from clean HEAD and repa
 - `2026-10-02` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.3` freezes scoped policies and corrects bounded progress/error/ordering teaching.
 
 - `2026-10-01` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.2` freezes closure structure with independent governance and exact CI evolution.
-
-- `2026-10-01` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.1` designs the source-located closure matrix and bounded freeze plan.
 
 ## History
 

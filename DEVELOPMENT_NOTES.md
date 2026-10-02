@@ -12,6 +12,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-10-02 — Explicit signature delimiters, typed failures and canonical residual ordering (.3.1)
+
+A per-invocation Core signature flag protects only the exact unquoted opener and matching pipe, leaving existing quote modes and body nesting in place. Broken nested literals split into three fragments before correction, so invariant AST comparison belongs to signature/source/spans/record fields while inner body segmentation legitimately changes. Preserve the actual compile/runtime boundary and blessed inner error fields: the additional control_if body loads after the pipe repair but remains unsupported in CodeblockRuntime. Unsorted residual helper_event_queue keys in CanonicalEvents append process-dependent metadata; controlled seeds reproduce permutation and pre-fix readiness1/unresolved0 versus0/2. Selected lowered-code bytes and runtime outcomes agree, while raw metadata orders remain unnormalized evidence for .0.6. Source-bound old-Core preloading asserts its exact Git bytes/%INC binding; re-applied public proof restores nineteen healthy pairs. Full Phase0 first catches a fixed assertion-plan oversight, corrected with done_testing before its required rerun.
+
 ## 2026-10-02 — Callable signature closer versus host pipe quote (.3.0)
 
 Correct standalone literal recognition does not protect whole-action splitting: AST::Parser::parse_action_block first asks StatementSplit::Core to segment source. Mode::maybe_enter_pipe_quote mistakes the accepted final parameter y for a transliteration operator, consumes the signature closer and suppresses tail boundaries. Its merged assignment RHS becomes raw_perl although descriptor recognition still reports ready1/raw0/fallback0/unresolved0. Actual lexical mode observations plus exact bypass/restoration distinguish this cause from AST or runtime bridge failure. Protect the explicit signature at the splitter in .3.1; retain host quote compatibility. Earlier live claim inputs are frozen at their actual capture commit with unchanged hashes/results before evolving task bytes.

@@ -45,11 +45,11 @@ Variable-call resolution and dynamic caller execution have since landed under
 Related facts: [[callable-codeblock-literal-contract]], [[perl-actionir-ast-block-value-lowering]],
 [[variadic-user-function-contract]].
 
-October2 source-located diagnosis: valid literals with operator-named final parameters can
-be lost by the preceding whole-action statement splitter, despite correct standalone
-literal parsing. [[perl-callable-signature-pipe-splitting]] records the exact public
-failure, scoped intervention/restoration and `.3.1` repair owner. Existing construction
-proof does not waive this distinct compiler prerequisite.
+October2 source-located diagnosis exposed operator-named final parameters being lost by
+the preceding whole-action splitter despite correct standalone parsing. Subsequent `.3.1`
+protects those explicit signature pipes; [[perl-callable-signature-pipe-splitting]] retains
+the exact historical failure, intervention/restoration and bounded native/fresh repair.
+Deferred attached-control and residual-event-order gaps remain separately owned.
 
 
 ## September 13 callable literal consumer reading

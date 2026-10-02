@@ -749,7 +749,6 @@ PERL
     is($err, '', 'ActionIR::StatementSplit::Core require/split subprocess does not emit stderr');
 };
 subtest 'actionir_statement_split_core_requires_newline_or_semicolon_boundaries' => sub {
-    plan tests => 8;
 
     my $trim = sub {
         my ($value) = @_;
@@ -834,6 +833,54 @@ subtest 'actionir_statement_split_core_requires_newline_or_semicolon_boundaries'
         ['if(on){switch(kind,case("A"){return_undef()},default(){say("miss")})}else(){return_undef()}'],
         'statement-split core leaves same-line attached inline-composite switch branch blocks as one explicit blocker',
     );
+
+    for my $name (qw(y tr s q qq qx qr m)) {
+        for my $params ("x,$name", "x,...$name") {
+            my $assignment = 'cb={|' . $params . '| return(x) }';
+            is_deeply(
+                LinkedSpec::ActionIR::StatementSplit::Core::split_action_ir_statements(
+                    $assignment . '; return(cb("ok","unused"))', $trim,
+                ),
+                [$assignment, 'return(cb("ok","unused"))'],
+                "callable signature $params preserves its following statement",
+            );
+        }
+    }
+    for my $assignment (
+        'cb={|| return("ok") }',
+        'cb={|x,y| nested={|s,q| return(s) }; return(nested(x,y)) }',
+        'cb={|x,y| text="{|s,q|"; return(x) }',
+    ) {
+        is_deeply(
+            LinkedSpec::ActionIR::StatementSplit::Core::split_action_ir_statements(
+                $assignment . '; return(cb("ok","unused"))', $trim,
+            ),
+            [$assignment, 'return(cb("ok","unused"))'],
+            'zero, nested and quoted signature pipes retain their exact source boundary',
+        );
+    }
+    for my $quote (
+        'q|a;b|', 'qq|a;b|', 'qx|a;b|', 'qr|a;b|', 'm|a;b|',
+        's|a;b|c;d|', 'tr|a;b|c;d|', 'y|a;b|c;d|',
+        'q|{\|x,y\||',
+    ) {
+        my $assignment = 'text=' . $quote;
+        is_deeply(
+            LinkedSpec::ActionIR::StatementSplit::Core::split_action_ir_statements(
+                $assignment . '; return(text)', $trim,
+            ),
+            [$assignment, 'return(text)'],
+            "host pipe quote $quote retains its semicolon payload",
+        );
+    }
+    is_deeply(
+        LinkedSpec::ActionIR::StatementSplit::Core::split_action_ir_statements(
+            q!text=`echo {|s,q`; cb={|x,y| return(x) }; return(cb("ok","unused"))!, $trim,
+        ),
+        ['text=`echo {|s,q`', 'cb={|x,y| return(x) }', 'return(cb("ok","unused"))'],
+        'an opener inside an active backtick quote cannot spoil a following callable signature',
+    );
+    done_testing();
 };
 subtest 'actionir_canonical_events_require_avoids_core_load_until_build' => sub {
     plan tests => 6;

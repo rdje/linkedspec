@@ -1,11 +1,11 @@
 # MEMORY
 
-- activation_commit: `e63a20c635ea74981e7476107750fbb1410a1be0` — clean activation base for valid-literal diagnosis.
-- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.3.0 - diagnose callable signature pipe splitting`.
-- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.3.0` (done) — signature closer enters host pipe-quote mode; lexical repair .3.1 next.
-- next_action: Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.3.1 from clean HEAD; protect explicit callable signatures in the diagnosed statement splitter.
-- in_flight_uncommitted: none; source-bound diagnosis committed before the lexical repair.
-- blockers: No access/decision blocker. Valid x,y literal .0.2.1.3 and frozen normalization loop/count .0.4 own repair before closeouts. Startup19/32/35/87 remain separate.
+- activation_commit: `67af62f7aa6dff39b6c3fd64b15fb5139f691a0a` — clean activation base for lexical signature repair.
+- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.3.1 - protect callable signature pipe ownership`.
+- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.3.1` (done) — signature/quote ownership repaired; normalization, attached-control and ordering owners remain.
+- next_action: Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.0 from clean HEAD; diagnose frozen normalization count/infix source against admitted contracts.
+- in_flight_uncommitted: none; completed focused signature repair and all required jobs are recorded before handoff.
+- blockers: No access/decision blocker. Signature repair .0.2.1.3.1 passes; normalization .0.4, attached-control .0.5 and residual-order .0.6 own prerequisites before closeouts. Startup19/32/35/87 remain separate.
   Wrapper startup .7 remains open; recovery/purge stay prohibited. No interrupted Phase0 run counts as proof.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
   active table; the task metadata doctrine inventories all consumers, permits arbitrary frontier-row rewrites,
