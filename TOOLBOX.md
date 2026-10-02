@@ -41,6 +41,14 @@ supporting techniques** that complement them. (Always run with `perl -Iperl …`
   clean-Git reconstruction/slices, queryability, and rollover limits. Use `tools/read_document_history.pl`
   instead of scanning old live prose.
 
+The `CLAIM-VERIFICATION` doctrine (`scripts/check_claim_verification.sh`) checks new leaf
+claim declarations and strict tracked records in `docs/claims/`. It verifies source-byte
+identity and disclosed leg gaps without executing recorded commands; the publishing
+contract and its honest limits live in `DOCTRINE_ENFORCEMENT.md` section 12 (ADR0126).
+Use `bash scripts/check_claim_verification.sh --self-test` for its fixture controls.
+`tools/test_claim_verification_staged.py` exercises the adoption candidate through an
+alternate index in this repository; it preserves the real index and changes no other repo.
+
 ### The task-acceptance checklist (recommended for any code-change leaf)
 
 Copy into the owning `docs/tasks/<TREE>.md` leaf; each box backed by the cited LinkedSpec-tool output.
@@ -587,8 +595,8 @@ primary adapter. See [[inter-match-gap-lua-implementation-plan]].
 ### 4.3.7 Python/tool output and SSD-local storage oracle
 
 - **WHAT:** `tools/run_python_project_data.sh` runs one repository-relative Python checker with managed scratch and
-  retained `PYTHONPYCACHEPREFIX`; `tools/test_tool_project_data_storage.sh` freezes three Python temporary owners,
-  15 shell allocator owners, and 38 Python tool entrypoints while exercising Python bytecode, Unicode-generator
+  retained `PYTHONPYCACHEPREFIX`; `tools/test_tool_project_data_storage.sh` freezes the actual Python temporary-owner,
+  shell allocator and Python-entrypoint inventories while exercising Python bytecode, Unicode-generator
   scratch, Knowledge Map output, mdBook destinations, CLI workspaces, TAP, and oracle capture boundaries.
 - **WHEN:** use the targeted wrapper for every maintained Python checker command; run the oracle when changing
   Python imports/tempfiles, shell allocation, Knowledge Map configuration/output, mdBook output, conformance,

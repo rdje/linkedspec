@@ -1,10 +1,10 @@
 # MEMORY
 
-- activation_commit: `e3ed7cc824c9e55416bea9c74dd39e9f5b83fb68` — clean activation base for due artifact review.
-- latest_completed_leaf: `REPO-HYGIENE.7 - review artifacts and correct read-only boundary`.
-- active_work_unit: `REPO-HYGIENE.7` (done) — retained census committed; feature frontier remains unstarted.
-- next_action: Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.4.1 from clean HEAD; finish explicit claim-policy adoption and broader audit ownership, then valid x,y literal diagnosis .3.0.
-- in_flight_uncommitted: none; review record, archived instruments, corrected boundary and continuity land together.
+- activation_commit: `0ec53b59c3afbe675c0c0b487a1ca10d5e6a55f7` — clean activation base for claim-policy adoption.
+- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.4.1 - enforce three-leg claim publishing`.
+- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.4.1` (done) — working rules/checker adopted; wider startup5/29 audit stays open.
+- next_action: Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.3.0 from clean HEAD; use Get/descriptor/substitution/source dump to diagnose the admitted x,y literal failure.
+- in_flight_uncommitted: none; exact staged canonical receipt governs the infrastructure landing.
 - blockers: No access/decision blocker. Valid x,y literal .0.2.1.3 and frozen normalization loop/count .0.4 own repair before closeouts. Startup19/32/35/87 remain separate.
   Wrapper startup .7 remains open; recovery/purge stay prohibited. No interrupted Phase0 run counts as proof.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the

@@ -7,10 +7,12 @@ use FindBin qw($RealBin);
 # Moving an unchanged node must not manufacture another completed slice.
 my $ROOT = "$RealBin/..";
 my @FIELDS = ('Verification tier', 'Focused checks', 'Canonical trigger');
-die "usage: perl tools/check_task_verification_fields.pl [--self-test]\n"
-    if @ARGV && (@ARGV != 1 || $ARGV[0] ne '--self-test');
+die "usage: perl tools/check_task_verification_fields.pl [--self-test|--owner]\n"
+    if @ARGV && (@ARGV != 1 || $ARGV[0] !~ /\A--(?:self-test|owner)\z/);
 run_self_tests();
-if (@ARGV) { print "task-verification-fields: PASS 14 identity/relocation controls\n"; exit 0 }
+if (@ARGV && $ARGV[0] eq '--self-test') {
+    print "task-verification-fields: PASS 14 identity/relocation controls\n"; exit 0;
+}
 
 chdir $ROOT or die "cannot enter repository root: $!\n";
 my @paths = grep { $_ ne '' } split /\0/, git_bytes(
@@ -24,7 +26,7 @@ for my $path (@paths) {
     $after{$path} = git_bytes('show', ":$path") if $index_paths{$path};
 }
 my ($owner, $tier) = changed_owner(\%before, \%after);
-print "$tier\n";
+print((@ARGV ? $owner : $tier) . "\n");
 
 sub declarations {
     my ($files) = @_;

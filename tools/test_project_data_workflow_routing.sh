@@ -27,6 +27,7 @@ device_id() {
 routed_entrypoints=(
  .githooks/pre-commit
  scripts/check_doctrines.sh
+ scripts/check_claim_verification.sh
  scripts/check_memory_architecture.sh
  scripts/check_task_tree_metadata.sh
  scripts/check_diagnosis_evidence.sh
@@ -177,6 +178,7 @@ run_routed_case() {
 
 run_routed_case memory success "$REPO_ROOT/scripts/check_memory_architecture.sh"
 run_routed_case doctrines success "$REPO_ROOT/scripts/check_doctrines.sh"
+run_routed_case claim-verification success "$REPO_ROOT/scripts/check_claim_verification.sh"
 run_routed_case knowledge-map success "$REPO_ROOT/knowledge-map/scripts/check_knowledge_map.sh"
 run_routed_case mdbook success "$REPO_ROOT/tools/run_mdbook_local.sh"
 run_routed_case perl-storage success "$REPO_ROOT/tools/test_perl_project_data_storage.sh"

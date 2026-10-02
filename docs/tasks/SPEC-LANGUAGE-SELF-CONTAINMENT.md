@@ -1250,7 +1250,7 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.2`
   Status: `pending`
   Goal: Independently reconcile the committed bridge and original controls, then close .0.2.1 and .0.2 under canonical proof.
-  Dependencies: `.1.3.3.0.2.1.1`, `.1.3.3.0.2.1.4`, `.1.3.3.0.2.1.3`
+  Dependencies: `.1.3.3.0.2.1.1`, committed `.1.3.3.0.2.1.4.0`/`.1.3.3.0.2.1.4.1`, `.1.3.3.0.2.1.3`; this canonical leaf also reconciles parent .4, so parent status is not its own prerequisite.
   Planned proof: Exact committed source/checkpoint/log reconciliation, original seven controls and normalization source on both public producers, unchanged authorities and remaining repair owners, rendered book and exact staged canonical CI.
   Acceptance: Close only after native/fresh emitted results and ordered effects agree with the existing oracles and the actual recursion/slot guards are exercised. Full neutral sixteen-case execution stays owned by .1.3.3.1.
 
@@ -1263,6 +1263,7 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
   Scope: First inspect the existing .0.2.0.0/.1 and .0.2.1.0 checkpoints, actual retained producer programs and Git source boundaries. Retain/reconstruct exact historical producers where needed, validate their hashes and safe recovery, preserve original evidence and no-drift. Complete the director-requested read-only claim policy review and select a separate owning adoption/audit tree if project-wide work exceeds this bounded callable reconciliation.
   Acceptance: Every selected replay claim has a recoverable tracked instrument or a named, scheduled durability repair with exact source boundary. Adopt applicable claim-verification rules explicitly and own any broader constants/untracked-producer sweep before claiming policy completion. Declare focused/canonical tier and exact paths only at clean activation. Valid-literal and normalization repairs retain separate owners.
   Children: `.1.3.3.0.2.1.4.0`, `.1.3.3.0.2.1.4.1`; preservation lands before policy adoption so neither becomes an oversized slice.
+  Reconciliation: Both children preserve sources and adopt bounded working rules; wider audit remains open. Parent reconciliation is retained for the canonical bridge closeout .0.2.1.2 after literal/normalization prerequisites, not inferred from one child commit.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.4.0`
   Status: `done`
@@ -1287,11 +1288,33 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 - [x] **LOCKSTEP** — Recovery checkpoint/card/book, child frontier and bounded continuity distinguish source recovery from runtime proof and retain explicit policy/adoption audit ownership.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.4.1`
-  Status: `pending`
+  Status: `done`
+  Activation: Clean 0ec53b59c3afbe675c0c0b487a1ca10d5e6a55f7, empty brief, no required background job; README/bootstrap/continuity/current leaf and supplied policy recovered.
+  Owned paths: DOCTRINE_ENFORCEMENT.md publishing contract, COMMIT.md review template, ADR0126, scripts/check_claim_verification.sh, tools/check_claim_verification.py, tools/check_task_verification_fields.pl owner API, tools/test_tool_project_data_storage.sh and tools/test_project_data_workflow_routing.sh integration, doctrine/cadence registration, docs/claims record, Knowledge/book and bounded continuity. No runtime/dependency/historical checkpoint edits.
+  Verification tier: `canonical`
+  Focused checks: Actual claim record schema/source/producer controls, staged owner and stale-input RED/GREEN, unchanged default verification-tier API, doctrine/cadence controls, rendered book, Knowledge/history/memory/diff.
+  Canonical trigger: New publishing doctrine/checker and registration/cadence infrastructure require exact staged local CI.
+  Claim verification: `docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.4.1.json`
   Goal: Finish the supplied claim-policy adoption review and adopt its applicable publishing contract with explicit local enforcement and audit ownership.
   Dependencies: clean `.1.3.3.0.2.1.4.0` handoff.
   Planned proof: Supplied policy identity/comparison, local three-leg publishing contract and review template, deterministic fail-closed enforcement and genuine RED controls, unchanged older evidence, rendered teaching and exact staged canonical proof if doctrine/hook/gate owners change.
   Acceptance: Re-derive/falsify/durability are explicit local working rules; applicable mechanization has a named checker and registry route. Existing SESSION-STARTUP-READING.5 retains broader constants/untracked-producer/control and alignment audit ownership, and .29 retains its path repair. Neither that audit nor whole-project policy completion is claimed by a bounded adoption slice. Reconcile .4 only after both children are committed.
+
+  Verification: PASS embedded three positive/sixteen rejected schema/input controls and actual staged six positive/eight rejected controls with exact rejection reasons, restored positives, default tier/owner API and real-index preservation. Canonical receipt binds the exact staged candidate; whole-project adoption/audit and old runtime replay are not claimed.
+  Infrastructure integration repair: Canonical attempt1 exits1 at tools/test_tool_project_data_storage.sh's exact Python temporary-owner inventory after all preceding reported checks pass. New test_claim_verification_staged.py is the fourth allocator and new checker/test make42 entrypoints; register them, route the new shell checker, require verified managed scratch and prove its allocation/cleanup plus hostile/symlink rejection before attempt2. Partial attempt1 is not canonical proof.
+  Log: .linkedspec-data/scratch/claim-adoption-canonical.log — retained failed attempt1; resumed exact candidate uses claim-adoption-canonical-2.log.
+  Instrument repair: Initial alternate-index no-measurement positive failed on the task input hash. Controlled owner mutations now refresh only the fixture task hash and assert exact failure reasons, so declaration tests reach their intended check rather than an unrelated stale-input guard.
+  Evidence: docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.4.1.json names the three legs, exact scope and watched artifact inputs; tracked checker and alternate-index test retain the actual instruments.
+  Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.4.1 - enforce three-leg claim publishing`.
+
+### `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.4.1` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Supplied policy identity matches the September review; selected observer durability repair is committed but a local publishing contract/checker was absent.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Hash-only ignored producers do not retain source; repeated aggregate/checklist passes cannot establish independence or semantics. Existing TASK-ACCEPTANCE checks evidence shape without executing Markdown commands.
+- [x] **FIX** — ADR0126 adopts explicit local working rules, COMMIT review template and strict claim records; the registered checker validates declared legs and tracked regular blob identities without running recorded commands.
+- [x] **ADDRESSED (verified)** — Actual known-bad schema/source inputs and alternate staged-index mutations reject; restored controls and default owner/tier API pass. Exact staged canonical infrastructure proof governs landing.
+- [x] **NO REGRESSION** — Runtime, callable authorities and older checkpoints retain their exact bytes. Existing selected verification tiers, history/memory/Knowledge and rendered book remain governed; broader audit stays open under startup5/29.
+- [x] **LOCKSTEP** — Doctrine/registry/cadence, policy/review, source-bound record, book/Knowledge/task/roadmap and bounded continuity name the same partial adoption boundary.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.3`
   Status: `pending`
@@ -1539,7 +1562,7 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 | 30 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.0` | `done` | 24 native/fresh emitted probes and compiler-owned bridge interface plan. |
 | 31 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.1` | `done` | Registered bridge71 native/fresh sources/605 tests with actual identity/effect/error controls and canonical landing. |
 | 32 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.4.0` | `done` | Three original observer groups and15 inputs preserved; source recovery only, no historical runtime rerun. |
-| 33 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.4.1` | `pending` | NEXT: explicit local claim-policy adoption and broader audit ownership from clean recovery handoff. |
+| 33 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.4.1` | `done` | Three-leg working rules and watched-source doctrine adopted; broader startup5/29 audit remains open. |
 | 34 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.3.0` | `pending` | Source-located valid x,y literal reconstruction diagnosis after durability reconciliation. |
 | 35 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.3.1` | `pending` | Repair the diagnosed valid-literal compiler path and close the P1 prerequisite. |
 | 36 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.2` | `pending` | Canonical committed bridge reconciliation closes .0.2.1/.0.2 after literal repair. |
@@ -1634,6 +1657,8 @@ September27 `.1.1.1`: seven neutral/structural checks, 34 ledger source-path/con
 
 ## Commit Log
 
+- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.4.1 - enforce three-leg claim publishing` — ADR0126 local rules/review and registered disclosure/source-identity check; wider audit remains open.
+
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.3 - freeze scoped closure policies` — scoped determinism/progress/resources/failure/ambient authority, source bindings, owner-sensitive mutations and canonical landing.
 
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.2 - freeze language closure structure` — versioned operation/scope authority, independent source/governance mutations, owned audit evolution and canonical landing.
@@ -1667,6 +1692,8 @@ September27 `.1.1.1`: seven neutral/structural checks, 34 ledger source-path/con
 | `.0` | `SPEC-LANGUAGE-SELF-CONTAINMENT.0 - ratify expressive spec self-containment` | Direction capture only; no parser/runtime behavior. |
 
 ## Changelog
+
+- 2026-10-02: `.0.2.1.4.1` adopts the local publishing working contract and watched-source doctrine; selected source preservation remains historical and startup5/29 owns broader audit completion.
 
 - `2026-10-02`: `.1.2.3` freezes scoped policies at16/90 with632 reason-sensitive mutations/four controls; preserve all original66 anchors, existing repair/prerequisite and proof limits. Public progress/error/key-order teaching and stale roadmap rows are corrected. Independent canonical .1.2.4 reconciliation is next.
 

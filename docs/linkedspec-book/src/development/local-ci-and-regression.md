@@ -1737,9 +1737,9 @@ The recurring proof is:
 $ bash tools/test_tool_project_data_storage.sh
 ```
 
-It freezes three Python temporary owners, 14 shell allocator owners, and 31 Python checker entrypoints. It creates
+It freezes the actual Python temporary-owner, shell allocator and Python-entrypoint inventories. It creates
 real retained bytecode, Knowledge Map, fake-mdBook HTML, CLI workspace, and TAP artifacts on the repository device;
-locks both oracle subprocess captures to initialized `TMPDIR`; proves hostile Python, Knowledge Map, and mdBook
+locks both oracle subprocess captures to initialized `TMPDIR`; proves managed claim-test allocation/cleanup and rejects its hostile/symlink scratch; proves hostile Python, Knowledge Map, and mdBook
 destinations are rejected without creation; and works through the outside-cwd routing oracle. The only deliberate
 cross-volume reads are bounded device/absence checks needed to prove rejection. An initial exact census found one
 disposable 88-line Julia audit list in the old temporary root; after content/provenance classification, that exact

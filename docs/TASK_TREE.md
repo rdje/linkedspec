@@ -1,6 +1,6 @@
 # Repo-Local Task Tree Workflow
 
-October 2 evidence recovery: SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.4.0 preserves15 exact callable observer/input sources across three original checkpoints; six bad-input controls reject with zero file writes. Historical results/runtime/authorities stay exact; source recovery is distinct from runtime replay. Bridge f9c683543 canonical passed both CLI66/66 and Phase01033/1162s. Next explicit claim-policy adoption .4.1, then valid x,y literal .3 and normalization loop/count .0.4 before closeouts and neutral execution; broader startup5/29 audits remain open.
+October 2 policy adoption: SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.4.1 adopts the local three-leg publishing/review contract and registered watched-source disclosure check (ADR0126). Callable source recovery remains committed; older evidence/runtime stay exact. Wider constants/published-producer/control/alignment audit stays open under startup5 and diagnostic repair29. Next valid x,y literal diagnosis .0.2.1.3.0, then normalization .0.4 before canonical bridge closeout and neutral execution.
 
 Latest maintenance: REPO-HYGIENE.7 records the due artifact review with zero removals and archived census instruments; every other repository/submodule remains read-only and excluded. Feature next action remains .0.2.1.4.1.
 

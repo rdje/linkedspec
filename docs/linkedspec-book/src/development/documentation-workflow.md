@@ -139,6 +139,43 @@ Closeout `.2` independently recomposed the committed checker, both hook views, a
 and historical documentation owners without implementation change; it found no current contradiction and made
 the only two unqualified historical task statements point explicitly to ADR `0065`.
 
+## Publishing a measured result
+
+A published measurement carries three different checks: re-derive it from the actual
+source at the claim's granularity, falsify a competing hypothesis with a distinguishing
+oracle and a control observed failing, then retain the producer and gate all artifact
+inputs. A count of search hits is a population to classify; it is not automatically a
+count of defects. Aggregate conservation cannot establish correct per-item assignment.
+
+The local contract is `DOCTRINE_ENFORCEMENT.md` section 12, adopted under ADR0126.
+`COMMIT.md` contains the review template. New task leaves declare a bounded record in
+`docs/claims/`, or explain why no measured claim is published. Checked records name the
+command/result, hypothesis/oracle/RED and tracked producer/input hashes. Missing legs
+name a reason and an open repair task. The adoption record is a complete schema example.
+
+For instance, an output-count assertion should identify the exact source population and
+command, a deliberate dropped/wrong-row control, and the tracked observer that wrote the
+result. If the observer exists only in ignored scratch, publish **durability gap** and its
+repair owner until its source is retained. Repeating that observer does not cure the gap.
+For stochastic performance use intervals and method; named cases and contract counts
+require exact agreement. Explain differences from earlier adjudicated sibling cases.
+
+```bash
+bash scripts/check_claim_verification.sh
+```
+
+The registered checker validates disclosure and declared regular tracked byte identities;
+it never executes commands from a record. `live` hashes watch index inputs; `historical`
+hashes preserve an explicit existing Git capture rather than today's counter. Re-measure
+or explicitly preserve/supersede a stale record; changing its hash alone is not verification.
+The selected tests and canonical gate still establish actual behavior. The checker cannot
+establish that a source list is complete, a RED happened, or an oracle is independent.
+
+This bounded working-rule/checker adoption does not finish the broader published-constant,
+ignored-producer, control and alignment audit owned by startup task .5. Diagnostic path
+repair .29 remains required before that audit closeout. Older checkpoints and their
+historical results retain their original scope and bytes.
+
 ## Definition of done
 
 If a slice changes what the outside world needs to understand about LinkedSpec, the book should move too.

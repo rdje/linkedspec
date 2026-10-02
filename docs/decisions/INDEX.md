@@ -154,6 +154,8 @@ changed* lives in git (layer D), not here.
 
 | [0125](0125-startup-task-partitions.md) | Lossless startup semantic partitions under unchanged limits and task-identity verification cadence | 2026-09-24 | accepted; canonical migration acceptance required | task-tree, continuity, retrieval, containment |
 
+| [0126](0126-claim-publishing-contract.md) | Three-leg publishing contract and watched claim source identities | 2026-10-02 | accepted; infrastructure signoff required | claims, evidence, durability, doctrine |
+
 ## How to add a record
 1. Copy the shape of an existing record (`Date`, `Status`, `Tags`, then `## Context /
    Decision / Consequences / Links`).

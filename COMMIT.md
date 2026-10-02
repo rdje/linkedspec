@@ -109,6 +109,26 @@ The batch rule therefore becomes: focused validation and one commit per ordinary
 final clean push boundary, unless a designated canonical leaf required it earlier. Local hooks remain bypassable,
 so a bypass is visible workflow non-compliance, not an enforcement impossibility.
 
+## Publishing measured claims
+
+Follow the local three-leg contract in `DOCTRINE_ENFORCEMENT.md` section 12 (ADR `0126`).
+Every new leaf declares one ``Claim verification: `docs/claims/LEAF.json` `` record, or
+`Claim verification: none: <why this slice publishes no new measurement>`.
+The registered `CLAIM-VERIFICATION` check validates disclosure and tracked byte identities;
+selected tests and canonical CI establish behavior. It never executes recorded commands.
+
+Review template for each published measurement:
+
+- **Claim / scope:** exact question, population, item/container granularity and live or historical boundary.
+- **Re-derive:** actual command and retained result; disclose an unavailable leg with a repair owner.
+- **Falsify:** competing hypothesis, distinguishing independent/historical oracle, and observed RED control.
+- **Durability:** tracked recoverable producer and every artifact input, including instrument; derive or hash-gate changing constants.
+- **Limits:** missing legs, stochastic interval/method, unassessed routes and prior adjudications; named instances and contract numbers are exact.
+
+Run `bash scripts/check_claim_verification.sh` with the selected proof. New records belong
+under `docs/claims/`, one bounded unit per leaf. Keep broader audit completion with its
+existing task owner rather than inferring it from a newly passing record.
+
 ## Required pre-commit validation
 - Run relevant syntax/tests for the task.
 - Record and run the task-tree leaf's selected `focused` or `canonical` verification tier as defined above.

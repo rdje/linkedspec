@@ -2,17 +2,19 @@
 
 ## Current Activity
 
-Due artifact review completed under REPO-HYGIENE.7; the feature frontier stays SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.4.1.
+Claim publishing working rules/checker adopted; full PNT continues with the valid-literal prerequisite.
 
 ## Latest Completed Slice
 
-`REPO-HYGIENE.7`: scoped retained metadata census, archived instruments, actual count/scope controls and zero removals. Current other-repository write boundary corrected; feature source recovery remains committed at e3ed7cc824.
+`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.4.1`: local three-leg contract/review, strict tracked records, source-identity controls and registered doctrine. Whole-project audit remains open under startup5/29.
 
 ## Next Action
 
-Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.4.1 from clean HEAD for explicit policy adoption and wider audit ownership; valid-literal and normalization repairs follow.
+Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.3.0 for exact valid x,y literal compiler diagnosis before repair and bridge closeout.
 
 ## Recent Completions
+
+- `2026-10-02` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.4.1` adopts bounded claim publishing and watched-source enforcement; wider audit remains open.
 
 - `2026-10-02` — `REPO-HYGIENE.7` retains the due artifact census and corrects the current other-repository cleanup boundary.
 
@@ -43,8 +45,6 @@ Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.4.1 from clean HEAD for expl
 - `2026-10-01` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.1` designs the source-located closure matrix and bounded freeze plan.
 
 - `2026-10-01` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.5` guards the stable entry/cursor description and repairs79-file inventory before canonical closeout.
-
-- `2026-10-01` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.4` classifies finite gaps and preserves owned repair/requirement next actions.
 
 ## History
 

@@ -21,7 +21,7 @@ require_literal() {
 
 is_canonical_path() {
   case "$1" in
-    scripts/check_verification_cadence.sh|tools/check_task_verification_fields.pl|scripts/check_startup_task_partitions.pl|scripts/check_task_tree_current_ids.pl|tools/read_task_tree.pl|tools/update_task_tree_index.pl)
+    tools/test_tool_project_data_storage.sh|tools/test_project_data_workflow_routing.sh|scripts/check_claim_verification.sh|tools/check_claim_verification.py|tools/test_claim_verification_staged.py|scripts/check_verification_cadence.sh|tools/check_task_verification_fields.pl|scripts/check_startup_task_partitions.pl|scripts/check_task_tree_current_ids.pl|tools/read_task_tree.pl|tools/update_task_tree_index.pl)
       return 0
       ;;
     .github/workflows/*|.githooks/*|COMMIT.md|DOCTRINE_ENFORCEMENT.md|tools/run_ci_local.sh|tools/run_*_local.sh|scripts/check_doctrines.sh|scripts/check_memory_architecture.sh|scripts/check_task_tree_metadata.sh|scripts/check_diagnosis_evidence.sh|scripts/check_repo_root_path_portability.sh|scripts/check_project_data_storage_locality.sh|scripts/check_document_history.sh|scripts/check_readme_stability.sh|*/Cargo.lock|*/pubspec.lock|*/Manifest.toml|*/Project.toml)
@@ -57,6 +57,11 @@ self_test() {
     'COMMIT.md'
     'rust/Cargo.lock'
     'julia/Project.toml'
+    'tools/test_tool_project_data_storage.sh'
+    'tools/test_project_data_workflow_routing.sh'
+    'scripts/check_claim_verification.sh'
+    'tools/check_claim_verification.py'
+    'tools/test_claim_verification_staged.py'
     'scripts/check_verification_cadence.sh'
     'tools/check_task_verification_fields.pl'
     'scripts/check_startup_task_partitions.pl'

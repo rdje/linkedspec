@@ -68,6 +68,7 @@ Startup uses the targeted-reading and 2–5 minute recovery guidance in `SESSION
 - **Before committing, run `scripts/check_memory_architecture.sh`** — git hooks and the
   local CI gate (`tools/run_ci_local.sh`) run it too; a non-compliant change fails and
   cannot land.
+- **Publish measured claims with three named legs** (`DOCTRINE_ENFORCEMENT.md` section 12, ADR `0126`): re-derive at the claim granularity, falsify with a distinguishing oracle and observed RED, and retain/gate the actual producer and all artifact inputs. Disclose missing legs with repair owners; every new leaf declares its claim record or a no-measurement explanation per `COMMIT.md`.
 - **Write a Knowledge Map fact card** (`docs/knowledge/<id>.md`, front-matter with an
   `answers:` list of the questions an agent would grep) whenever you establish a durable
   structural/causal fact, or catch yourself re-deriving one — so the next session finds it

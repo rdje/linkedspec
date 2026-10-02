@@ -1,0 +1,659 @@
+{
+  "version": 1,
+  "owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.4.1",
+  "claims": [
+    {
+      "name": "publishing-checker-controls",
+      "statement": "The admitted disclosure/identity checker accepts its positive fixtures and rejects the selected malformed, stale and missing-evidence controls.",
+      "scope": "Embedded schema/source fixtures and the staged adoption candidate only; not semantic truth, input completeness, historical runtime replay, or whole-project audit completion. The record itself is a Git-versioned intrinsic fixture and has no self-hash.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash scripts/check_claim_verification.sh --self-test; bash tools/run_python_project_data.sh tools/test_claim_verification_staged.py",
+        "granularity": "Each named fixture and each alternate-index mutation; not a suite-level attribute assigned to individual cases.",
+        "result": "Embedded: 3 positive / 16 rejected controls. Actual staged: 6 positive / 8 rejected controls; unchanged default tier API, restored baseline, and identical real index."
+      },
+      "falsify": {
+        "status": "checked",
+        "hypothesis": "A nonempty evidence label or retained hash alone lets stale, untracked or missing evidence pass.",
+        "oracle": "SHA256 of actual Git blobs, strict source membership and actual current task status; alternate-index mutations invoke the complete registered checker, independently of the positive fixture wording.",
+        "red_control": "Wrong hashes/untracked producer/missing legs reject in the embedded validator; actual modified producer bytes, removed record, symlink mode, missing/duplicate owner declarations and a completed gap owner reject in the staged checker. Each mutation is reverted; the actual baseline passes again. A real historical Git producer passes and a missing historical revision rejects."
+      },
+      "durability": {
+        "status": "checked",
+        "mode": "live",
+        "inputs": [
+          {
+            "path": "COMMIT.md",
+            "sha256": "eecc7322ac551a5f0a6fb3cedc6d9c50a7ffeffbab9b194776e9bcbbea98665c",
+            "role": "input"
+          },
+          {
+            "path": "DOCTRINE_ENFORCEMENT.md",
+            "sha256": "60681e8f66668f03b0a5b699fe5adb340e0506cd2813d6b27dcbbb6c1ec84256",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/ACCUMULATOR-CONVENTION-AUDIT.md",
+            "sha256": "8c7a8555b14a31ca2351e8746bbe4a4fd2efdddd684716eef14965161b3d88ae",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/ALIAS-RETIREMENT-DOC-SYNC.md",
+            "sha256": "7734f8aaa62ff9b24ce1a02d973a2d2052dc1fc52be174127f7ef6392a2c21bb",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/BACKBONE-ACTION-IR-LOWERING.md",
+            "sha256": "455072dea2b0b450fa0f88eea48d6489d7bf184cb8a77d37dc8cf6409993fe73",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/BACKEND-COMPANION-BOOKS.md",
+            "sha256": "805fd825415677804694d812a29cdf1cb9b3158c2f2454d25edc49a871d1d4df",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/BACKEND-INTEGRATION-GUIDES.md",
+            "sha256": "95ffd026d04a59f0c2df66aea21b29cd00a86086a07c99c7b4716eb6bf8ccf4d",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/BACKTRACK-SURFACE-RUST-ALIGNMENT.md",
+            "sha256": "5487d50b705f0eae396f7eb797a5169eb2e3218e59285a7324c3fb54741326bc",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/BOOK-DOCUMENTATION-SYNC.md",
+            "sha256": "c1d53f9e61de984adc604a9bb82a23d1f306066d9733dff137d5d68df719e03b",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/BOOTSTRAP-RESUME-SYNC.md",
+            "sha256": "be5d67cbe206925c30fc281252ea95a1bfd4bbe4180c266d6e5e34ee9d718704",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/COMPAT-ALIAS-RETIREMENT-V2.md",
+            "sha256": "8632e53dcb2a98bfa1743322cff5c407cd2cad81098331db89fb164ff4db802c",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/COMPAT-ALIAS-RETIREMENT.md",
+            "sha256": "52b0efee6f868c4c0355a02096cdf450439758a4d8acbc89745bbe51faa5bb05",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/COMPAT-ALIAS-TEST-CLEANUP.md",
+            "sha256": "3a036a9191a7cbb59ae1b629f192f2b14b1e3000bbc237b03324efc1a87a6839",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/CONFORMANCE-SOURCE-READING.md",
+            "sha256": "2dc355ed4d889f754261a71b906e588b141bbee244a670485a5056b85ea11be9",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/CONSUMER-REPORT-DELIVERY.md",
+            "sha256": "4a3c907b7aee12f3415890d4e027e1cb112636c884b6474cce6fe95baa4f8a4b",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/DART-BACKEND-PARITY.md",
+            "sha256": "add1b2e49e5d93d2944847f0d19ddd9658bab0971fff696eaa17c1959bf2828d",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/DART-STARTUP-READING.md",
+            "sha256": "dd61c75c4d5fecee1df2974edf3a3974ae79b6d7e12eb8c29015fa83eb5b0304",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/DOC-BOOK-SYNC.md",
+            "sha256": "9716355bbf1bf55822b68708b53cc6db63fbeeaa28f8d4b7e8b5459997140e4e",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/DOC-CODEBASE-ALIGNMENT.md",
+            "sha256": "cf7f4e9b3c49bdc29886ae0ddbf29e093efdef4f825691b679fd161bfb129ccf",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/DOC-DRIFT-SYNC.md",
+            "sha256": "0338dd1597fbf58bc3882149c7eb690f466ef6313c9194e627da11c799b6f2b1",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/DOCTRINE-ENFORCEMENT-ADOPT.md",
+            "sha256": "c5ee38bd1b6f76d86b695788cc78bb7806295edaca13bf4d408e7f2c3a78ee03",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/FLUENT-BLOCK-EQUIVALENCE.md",
+            "sha256": "a804a2669047f2d4dc9d8b56b8ef9f3af204c297d4ea276af3b1ecbf657b2481",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/FUTURE-PARITY-BACKLOG.00-08.md",
+            "sha256": "a7529d3198538a70af33bc84f488381f504e8e5fac059174086608666da9964f",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/FUTURE-PARITY-BACKLOG.09.md",
+            "sha256": "6b7b4c274edb04e60b3f1de361a336e2945fced44c54627b88c7227490446ae9",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/FUTURE-PARITY-BACKLOG.10.0-6.md",
+            "sha256": "64c385e5711b2a35b1b3a63848b3380927b1f8ed0b0d55926193d4fb32ae0075",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/FUTURE-PARITY-BACKLOG.10.7-10.md",
+            "sha256": "6e1484528ba85c51fcab239356810f0ffa7e387abbf45440fa2767ad5a2c8031",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/FUTURE-PARITY-BACKLOG.11-13.md",
+            "sha256": "0c6f12fb41cce5ed36f7b8d4180f3ec173866b8aa61556dd645a3bf4c1eca105",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/FUTURE-PARITY-BACKLOG.14.6.5-8.md",
+            "sha256": "2ab1bddc62f7c2b1eb9ae0b1c8695b582bda80b7855d5553490aaa60d7d210b9",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/FUTURE-PARITY-BACKLOG.14.md",
+            "sha256": "cb1c72eb8cf1fa17b8e9c7c4e6a9e6dc15ee9aeccabf0824cbf841ba0bc543de",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/FUTURE-PARITY-BACKLOG.15-24.md",
+            "sha256": "575a3e1e8dea5d6d52cce2cf8873cbbacfed0cc756df7fd72d83670a559ba641",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/FUTURE-PARITY-BACKLOG.history.md",
+            "sha256": "3731fc8fa2faf26143c19a5b59a9033907311aa10d938281c5d4ad93768dfacf",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/FUTURE-PARITY-BACKLOG.index.jsonl",
+            "sha256": "9b345cf1e9c03244c9d843126354dc5bbd7adbd7a493ef238cd2d8da1e0afdb9",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/FUTURE-PARITY-BACKLOG.md",
+            "sha256": "2aebe2af8d4b0193a77b678fa30750fd8f26a9731b5a8a532d42b2193bf93ed6",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/FUTURE-PARITY-PARTITION-CAPACITY.md",
+            "sha256": "2d70bea92779d9b76b1819a566d4c9930352c3a6d4f6df1f9593120e97ff9969",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/INTER-MATCH-GAP-CAPTURE.md",
+            "sha256": "8b6dfe1a33f1b4b500fa9dbf1da38306933319ab57cda0d9ec91464f1df637b3",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/JULIA-BACKEND-PARITY.md",
+            "sha256": "522b514bd399133daa4d0d95cf6385518607434cebefcf1980ecfa1596e605fb",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/JULIA-STARTUP-READING.md",
+            "sha256": "10a00516ba3d2832ea82e0111ddd8c601f286b16cf696c1d95781fc733dec47e",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/KNOWLEDGE-MAP-DOC.md",
+            "sha256": "7f066b36724466ef2075b46bd12c22e38a8a5566963ace8713949e5bf7c4731d",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/LEGACY-VHDL-RETIRE.md",
+            "sha256": "9a9554c0b733877d7d5b31cffefb7b2424e06ea8e6e10882457380ea183bd1a7",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/LIFECYCLE-FAMILY-AUDIT.md",
+            "sha256": "571a2c90f2e1efa45368a61682b15df87aafa96e2561c22e0267a816fa3f782e",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/LINKEDSPEC-ENHANCEMENTS.md",
+            "sha256": "1327f9fbfeba0bb2ed179c23c89b228c20ee8e51aa023c36dd6136fa04da032b",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/LINKEDSPEC-LOW-EFFORT.md",
+            "sha256": "4c6f506cbcc9815a3d823198d5491a712e3ee021f06fab174170fbc4a2c57225",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/LIVE-DOCUMENT-PRESSURE-CONTAINMENT.md",
+            "sha256": "3712e049cc29fc0b7ff81ec8c591b3a3bbb9b57354345e4b45abfc276cfd719a",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/LUA-BACKEND-PARITY.md",
+            "sha256": "a453820dcf298a68654df59bd7af193dbcdabf6cbb255f1c276c70e308ac55b2",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/LUA-STARTUP-READING.md",
+            "sha256": "6bda25cdba1e0b10ffda22b2ccd738f1815579e18ae780298e99d0a0d755551a",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/MDBOOK-DESTINATION-ROOT-ALIGNMENT.md",
+            "sha256": "565ddfdbf1ed498850e0b922bc3b3d4401c554613c65c22b01f40de79da32757",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/MDBOOK-FORMAT-CORRECTNESS.md",
+            "sha256": "1ec9555e735cb856b239a2cea987333439768d0c84ea17ac9314dc5edbcf853c",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/MDBOOK-RENDERED-READABILITY.md",
+            "sha256": "800011d60554769b4354fa06c9fab16bb489e48b7106f0bac86ce831c7c92315",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/MDBOOK-VARIANT-AGNOSTIC.md",
+            "sha256": "f3e6ecec82ce319397e08b62f4f8bd92c54fd031c0e1fc82bf8c16c38f50bb8f",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/MEDIUM-IMPACT.md",
+            "sha256": "755d016bd757e36496918e3e477fc847ad40d68c4c8fe1858f2d7cbce0f9369d",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/MEMORY-ARCHITECTURE-DOC.md",
+            "sha256": "b6190a05e59556c51cb990651a6d3b4888332a87f2d54eb828cd352a72435847",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/MEMORY-COMMIT-POINTER-ENFORCEMENT.md",
+            "sha256": "08c9ce8a7d386e1c16ef55b8cddca7fe19c315be7d336ecaa68a3b820297fbdc",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/MEMORY-PUSH-POINTER-SYNC.md",
+            "sha256": "63bcab0b32be984ba4e01f9087510086012be5b2e66aaab7f7475b76feaaa9cf",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/METHOD-LIKE-DSL-MIGRATION.md",
+            "sha256": "d75b008b5ed1e195a42833af9bed2cbb89ffb039115c1b8cdd0942fa6b2b400c",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/NATIVE-PARSER-ACCELERATOR.md",
+            "sha256": "81274d52d73df7c7c417a5c424b28f88fd1d1e09ffe0d5165f361d784f17b8ec",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/NONCORE-QUARANTINE.md",
+            "sha256": "7e13852a543b3f9282ae8f02a34734a506cc3708c4194ed999113a582db1c815",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/NONCURRENT-HELPER-CODE-PURGE.md",
+            "sha256": "0ba388f8556edd9c6c5ac4f697b917bb89a0e8af1d47f308ebc04f2276c0b250",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/PARSER-AUTHORING-APIS.md",
+            "sha256": "982e9ea7cef5194761139727735635b31586dec7c2bb430b830bc65d48f32f8a",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/PERL-ACTIONIR-AST-MIGRATION.md",
+            "sha256": "99277d2bdf68371abf3f5b59d08923456480873474d30f94d4b174ada7488f36",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/PHASE0-BACKHALF-TRIAGE.md",
+            "sha256": "9752fd9b2add06baf3825cc5ff124bb96567986610f3a940ad5eff9f5f49a4ce",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/PHASE1-PARSER-CORE-ISOLATION.md",
+            "sha256": "8767012cc929f08bc7876cc930de119e87d977a51f065a62af81ecb686720653",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/PHASE1A-CLOSE-OUT.md",
+            "sha256": "1088c822f86d616cd685aa8cf1b954c0f7f8c4674f1b6db6840b810f2805df88",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/PHASE2-DSL-FRONTEND.md",
+            "sha256": "9b973b446c4a604a78170ca16f2c9b7f0984bde71988a42ccf39ba0bae389335",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/PHASE3-EXECUTION-SEMANTICS.md",
+            "sha256": "00ee0be99f484bb5d7cfe35f3a1a81b1171ef349c83485bb07c2da555fd676f0",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/PHASE4-CAPTURE-MARK-API.md",
+            "sha256": "c97f3d1769b721d3ea53266f81214d8de25b4afc2a8675c344b50b6d57d730a4",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/PHASE5-RUNTIME-DIAGNOSTICS.md",
+            "sha256": "c8c0d82e63d9a412718d3309b22936cffea10d20983a923f02dd730461349e85",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/PHASE6-DOCUMENTATION.md",
+            "sha256": "fa4a316739b09a2c4f93bdfd3f42f5452773322f4cef77244e8bdc8254ad429f",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/PHASE7-SELF-HOSTED-SPEC.md",
+            "sha256": "f97aa37de3f20397ca0ca01ae7a8fe6b6cfa9704bae3785d7ba526f1b2021a6c",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/PHASE8-MULTI-BACKEND-HANDOFF.md",
+            "sha256": "c2a14d630df564a2ade9fee8986233267a08e37fc89501801b16c75f3830c664",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/PHASE9-RUST-VARIANT.md",
+            "sha256": "c4e214dc2b6c2c3d623a895bba248084fd6cd806e9908cd7ae6da2026de754aa",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/PLUGIN-ACTION-MIGRATION-STALE-REFERENCES.md",
+            "sha256": "b2f0dc09e599d503ffb5fe0d6b695d74824a55c3a6880b1d2d357ea28b7bcacb",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/PLUGIN-ACTION-MIGRATION.md",
+            "sha256": "94fe5a575ab7f636485083f0d081438fc17853164979faac09a300d29f47d5f9",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/PLUGIN-MODERNIZATION.md",
+            "sha256": "fa8da47f9f74ebe3807e944180037f13285c5d8178f2095b9f3fa916663ee83e",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/PPLUGIN-WALKTHROUGH-DRIFT.md",
+            "sha256": "08742c892d19206524a9b178d58bee91eadedaa5935e6276509fc19eb11e41fd",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/PROJECT-DATA-SSD-ROOTING.md",
+            "sha256": "6a6ae8f525305e3a19289639805965fbfda3dd5e06fcac8528f05421fe70ed2d",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/PUBLIC-STATUS-DRIFT-SYNC.md",
+            "sha256": "9fff9ba2e093181da2ca2dac5f3af5cd59e83d327d4f510904f5aa8ea14cfa37",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/README-STABILITY-POLICY.md",
+            "sha256": "faaf093fd21110d2ca2e1f83fcdfe93a0cef6dfa08a43ba6a414d9345bc3107e",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/REPO-HYGIENE.md",
+            "sha256": "751de44421e0e6c0d1d22eb8b6af95c00f25b9d639def7051a2eaf75ed9409d0",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/REPO-ROOT-PATH-PORTABILITY.md",
+            "sha256": "e7ad65f63d5cd8ec515a915ad969dbee0584333ba32bf701a7007fca3243d043",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/RGX-ADOPTION.md",
+            "sha256": "ddf32db8a906d76e25aa0ffea2bb88c5653e6a102ae2aed4308ad4d6d24a9648",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/RGX-BRANCH-TRACKING.md",
+            "sha256": "718080edacaa312ba0d24cc4579edea990174b3c7cd7b048b12c54493d77c7e1",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/RGX-BUILD-REPRO.md",
+            "sha256": "4b7b229937c99414eda2c94646fee444124af55e2e8c946b58b950781689b6c3",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/RGX-CONSUMER-BUILD-REPORTS.md",
+            "sha256": "83774f63fc42e336356e4390d5fc9adc0f8c63b328c6c9a0cae1526af401fbae",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/ROADMAP-DRIFT-RECONCILE.md",
+            "sha256": "d73cb15e86b83dae4a0e66b5ffaf21513dfac1787c62e6eef86fefaec100ddc8",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/ROADMAP-POST-12-DRIFT-SYNC.md",
+            "sha256": "a5ca7b6e59c3cb788a00052cbf1c1d7787caaa2f8217676e826cd7318c9a6af1",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/ROADMAP-V2-TRACKER-SYNC.md",
+            "sha256": "b2941b6bc073c03a2d54ba8ef5327d839092b89a19a736e90219330723b9f804",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/RUST-DEPENDENCY-WARNING-ZERO.md",
+            "sha256": "fe25469e309675a60534a0457d93f8a6a58653e5a201bc27b0dae8a3c0c6ed05",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/RUST-DIAGNOSTICS.md",
+            "sha256": "1ba2d0b73f30faedd7a47f111775d99217b28d3c862db270d08bf03591b87d3a",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/RUST-EDGE-SEMANTICS.md",
+            "sha256": "9a75e1936ad20888fa6aaa9e918a277db00bd3f8e0a69859cf0e0ea8108380c6",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/RUST-FUNCTIONAL-PARITY.md",
+            "sha256": "8b4531033347d84fdc74f03c65f06fc4bace481587d5035aa23ba0d3ac7fbf98",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/RUST-MUTATION-TESTING.md",
+            "sha256": "693117b2e8f1609707c6b88192f34044a6b222ffed7e0baf7ebd1203f31073db",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/RUST-PARITY.md",
+            "sha256": "0ae92d2f6a2ac4b9c38d45a0612bc0b992ce182a3af26e4bbc44a0b9d0d59d8a",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/RUST-README-DRIFT-SYNC.md",
+            "sha256": "f10656904252bc9343489cbb39dcb1dd06d6d4c2f599695f097493eb9bfdfcef",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/RUST-STATUS-DRIFT-SYNC.md",
+            "sha256": "0403c7acc90ba4c3bdd7a072adc4830e7fc3ac3563d49e3cead9cf09f94cf4e0",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/SCALAREF-RETIREMENT.md",
+            "sha256": "51aaaa5cc4ee19b71d02abed995f533c69f8f92e8947378e8cfa2ed3aee7fd81",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/SESSION-STARTUP-READING.01-03.md",
+            "sha256": "d42dbd5002d2551902c5322641001981ec9a7489de9eeedff5500192f03e524d",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/SESSION-STARTUP-READING.04-49.md",
+            "sha256": "2f1e2ff7310a0ab9b0fdc1561ad2f53ef4de0fb611a6b6737cfe989a51228b02",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/SESSION-STARTUP-READING.50-99.md",
+            "sha256": "b74530521ab16ea7a01e5460289bcd33c149183d45e2b6a97ef22a1331c652f1",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/SESSION-STARTUP-READING.history.md",
+            "sha256": "f777d05caa25ac05d0baea63cec267dff57fd5cb385ef1ed6feb1d45ce65316c",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/SESSION-STARTUP-READING.index.jsonl",
+            "sha256": "1b27899cdc1c03bcd38c89885ff97b3e5b2a4d09ca95120fb04b38dd89d44740",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/SESSION-STARTUP-READING.md",
+            "sha256": "48d25d5aba4d30a557502fbf01578f8ae0081ad3c99bce46b31e0cc4aeff774d",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/SEXPR-DOCUMENT-INTEGRATION.md",
+            "sha256": "fe07d3f02fbbfe1e2470201806db5decd697fe394895e491a24e961754abbf7c",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/SPEC-FORMAT-TERSE.md",
+            "sha256": "dd7acfe7331643ab6b36d07a7c5260ed1f5f3289c66421623d89273c34a10a70",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/SPEC-LANG-REFERENCE.md",
+            "sha256": "fc85c0be55d5d75aee150d2cdb403e2483ad498e5ba84cb1735f10e6dc28938e",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/SPEC-LANGUAGE-SELF-CONTAINMENT.md",
+            "sha256": "3a408787699ddb2026192003fd5db8adb9b0e40d4668fdb19ac6f3254657ddce",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/SPEC-SOURCE-TERSE-CLOSEOUT.md",
+            "sha256": "a0be6b06abb2468c2bbac2129e06bed8743be4a4f19f1f4d0511542a7f6842e0",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/SPEC-SPEC-SELFHOST.md",
+            "sha256": "c8cd564d0769516084c76c984e8560559676e6b455ac26f4d3c6a225f79974f5",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/STAGED-LINKED-PARSING.md",
+            "sha256": "8b831287bc84d1fca9640902d9b224263c8da9026c0572e5b725ac1a8261f1e8",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/STATEMENT-SEPARATOR-EXAMPLE-ALIGNMENT.md",
+            "sha256": "fae548e50bdd89cace1f571b387d5dc5fd6575e5412407018d984faf53f0f98a",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/STRUCTURED-TEXT-FORMAT-PROGRAM.md",
+            "sha256": "3d6795cfe1b590fb0695748b6b08474fcedea5a86e928a41a7165eca315d86a6",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/SUPPORTING-SOURCE-READING.md",
+            "sha256": "61c4aef0c8fdf020966f0cb6b7fc2fceeecd8e35a9827f22b182379b59eb8d8b",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/TASK-TREE-INDEX-SYNC.md",
+            "sha256": "e8a41455491d33e48000676f78142fb80ababbc071186a777dc3262a87149526",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/TASK-TREE-METADATA-HYGIENE.md",
+            "sha256": "09a33d7ccf5161606f0a254c17659e3de189c369309cac8e82ab06d8626f44ed",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/TEMPLATE.md",
+            "sha256": "aed71696b27bfdc0709ba8146a614920a8da6b05cffad4ebd0889713d57872b1",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/TOP-RULE-AS-NORMAL.md",
+            "sha256": "1bfb25a938165a5ea8dc67a62312599626182eb957e166d20fd5dfe265097119",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/TRACE-OBSERVABILITY.md",
+            "sha256": "cfb3b768ae91d765e9abbfef521f8cc4d18f917480b7e9b900ee497232e3e801",
+            "role": "input"
+          },
+          {
+            "path": "docs/tasks/VERIFICATION-CADENCE-POLICY.md",
+            "sha256": "2303907075571d4f922c1617efe3f92c1703ef9a03b5c3b5a4b5b0d4c8719941",
+            "role": "input"
+          },
+          {
+            "path": "scripts/check_claim_verification.sh",
+            "sha256": "3bac32b0118c174520d9dd5a9c9fb36b7a37e90d6d0698acfc0ec6b3f72d0f9a",
+            "role": "producer"
+          },
+          {
+            "path": "tools/check_claim_verification.py",
+            "sha256": "d283728bba09cab61714551d549019ea28b6a052c80184b54f6c1c3e65f6756b",
+            "role": "producer"
+          },
+          {
+            "path": "tools/check_task_verification_fields.pl",
+            "sha256": "92a64d5899b90a6fcdf997b4bea177299cb2816b14c93d0a9f71a0e064b7a2d2",
+            "role": "producer"
+          },
+          {
+            "path": "tools/project_data_env.sh",
+            "sha256": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73",
+            "role": "input"
+          },
+          {
+            "path": "tools/project_data_run.sh",
+            "sha256": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f",
+            "role": "input"
+          },
+          {
+            "path": "tools/run_python_project_data.sh",
+            "sha256": "0bc03bb8f4ce550397da9fda086215a1d9f6f452ec413605fbcb8976c06af604",
+            "role": "input"
+          },
+          {
+            "path": "tools/test_claim_verification_staged.py",
+            "sha256": "8b75696d73754e39d179e011f3645e51b16e66d4f49cdb8d0092cd9d6116d1c0",
+            "role": "producer"
+          },
+          {
+            "path": "tools/test_project_data_workflow_routing.sh",
+            "sha256": "d33fb95446ece194a647d814d843e779eb5ea30227bacfd289a15b84c97b298c",
+            "role": "input"
+          },
+          {
+            "path": "tools/test_tool_project_data_storage.sh",
+            "sha256": "f4738b424505e0da0006678394195ac5ef9e247bf8ec55a4bf4e454d1763c6e7",
+            "role": "input"
+          }
+        ]
+      }
+    }
+  ]
+}

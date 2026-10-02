@@ -12,6 +12,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-10-02 — Claim publishing disclosure and source identity (ADR0126)
+
+A hash gate establishes declared byte identity, not input completeness or semantic truth. The new checker never executes recorded commands; it reuses the existing single-owner classifier and reads index blobs/current repair statuses, excluding index-registered immutable task history. Alternate-index mutations exercise the complete checker without changing the real index or another repository. Three-leg working rules are adopted within the existing bounded doctrine surface; full constants/published-producer/control/alignment auditing stays owned by startup5/29. Canonical attempt1 catches the new allocator missing from the exact storage inventory; explicit managed-root allocation, focused positive/negative storage proof and storage/routing enrollment repair the owning integration without weakening its census. Supplied claim policy SHA256 remains 9f99df25209c43afb74d77e348dd2d0cdb68ce96cf17a4f272ede8328f6046bd; no donor deployment number is imported.
+
 ## 2026-10-02 — Artifact retention and repository write authority (.7)
 
 Daily artifact review advances through an owned census even when no exact deletion is safe.

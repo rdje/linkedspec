@@ -31,6 +31,7 @@ evidence_update_2026_08_31_map_leaves_mutation: "FUTURE-PARITY-BACKLOG.19.1.2 ad
 evidence_update_2026_09_05_mutation_public_surface: "FUTURE-PARITY-BACKLOG.19.9 adds tools/check_mutation_public_surface.py through tools/run_python_project_data.sh. Its authority, public-document, stale-claim, and mutation proof use in-memory/project-root reads and allocate no temporary workspace. The storage oracle therefore advances only Python tool entrypoints from 37 to 38; Python temporary owners remain three and shell allocator owners remain 15."
 evidence_update_2026_10_01_closure_structure: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.2 adds tools/check_language_closure_contract.py through the repository-routed wrapper. Its structural/source/mutation proof reads project files and uses in-memory copies without a temporary allocator. The independently counted entrypoint census advances38-to39; three Python temporary owners and15 shell allocator owners remain unchanged."
 evidence_update_2026_10_02_composed_objectives: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.2 adds tools/check_composed_objective_contract.py through the managed Python wrapper and freezes40 entrypoints. It reads project files and mutates in-memory observations, without a temporary allocator; three Python temporary owners and15 shell allocator owners remain unchanged. The focused storage oracle explicitly invokes it with hostile external roots and passes."
+evidence_update_2026_10_02_claim_adoption: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.4.1 registers the fourth Python temporary owner and42 Python entrypoints after actual canonical inventory rejection. The alternate-index test allocates only in independently validated managed run scratch; its storage mode proves allocation/cleanup and rejects actual hostile and symlink roots. Shell allocator membership is unchanged. Current oracle/card/book/Toolbox descriptions delegate their changing inventory to the executable owner."
 reverify: "bash tools/test_tool_project_data_storage.sh; bash knowledge-map/scripts/check_knowledge_map.sh; bash tools/run_mdbook_local.sh"
 ---
 
@@ -48,8 +49,8 @@ the book root, rejects another-filesystem or symlink output before launch, then 
 same root and verifies created output. Relative split, equals, and compact CLI forms therefore execute the exact
 path that validation approved, independently of the caller's current working directory.
 
-`tools/test_tool_project_data_storage.sh` freezes three Python temporary owners, 15 actual shell allocator owners,
-and 40 Python checker entrypoints. It proves real bytecode, map, HTML, CLI workspace, TAP, and oracle capture paths
+`tools/test_tool_project_data_storage.sh` freezes the actual Python temporary-owner, shell allocator and
+Python-entrypoint inventories. It proves real bytecode, map, HTML, CLI workspace, TAP, and oracle capture paths
 use the repository device and hostile external destinations remain absent. Its deliberate cross-volume reads are
 limited to device and exact-path absence checks required for that rejection proof.
 

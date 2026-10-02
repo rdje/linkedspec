@@ -244,7 +244,8 @@ Enforced by [`scripts/check_doctrines.sh`](scripts/check_doctrines.sh) via
 | `REPO-ROOT-PATHS` | structural | `scripts/check_repo_root_path_portability.sh` | tracked parent-repository text contains no checkout/developer/private-session identity, Rust primary discovery is runtime-rooted, and all five primary commands retain their dynamic anchors |
 | `PROJECT-DATA-STORAGE` | structural | `scripts/check_project_data_storage_locality.sh` | tracked project-storage defaults and current documented output commands stay repository-filesystem rooted while explicit caller/inert/tool/system paths remain legal |
 | `DOCUMENT-HISTORY` | structural | `scripts/check_document_history.sh` | bounded current documentation views/hot shards preserve strict repository-relative manifests, immutable segments, exact clean-Git reconstruction or source slices, queryability, complete-record rollover, and current-view limits |
-| `README-STABILITY` | structural | `scripts/check_readme_stability.sh` | root `README.md` stays within reviewed line/byte budgets and stable landing scope; all 62 reader/overflow routes close across 20 lifecycle-controlled surfaces in the resulting tree; debt growth and threshold increases require their exact owners/decisions |
+| `README-STABILITY` | structural | `scripts/check_readme_stability.sh` | root `README.md` stays within reviewed line/byte budgets and stable landing scope; all registry-derived reader/overflow routes close across their lifecycle-controlled surfaces in the resulting tree; debt growth and threshold increases require their exact owners/decisions |
+| `CLAIM-VERIFICATION` | evidence + identity | `scripts/check_claim_verification.sh` | each staged owning leaf declares a claim record or explains no measured claims; strict records name re-derivation, falsification and durability or an open repair; checked durability requires tracked regular producer/input bytes and rejects stale hashes at the declared live/historical boundary; recorded commands are never executed |
 | `VERIFICATION-CADENCE` | structural + evidence | `scripts/check_verification_cadence.sh` | every new staged leaf declares one focused/canonical tier and selected checks; high-risk gate/dependency/doctrine paths require canonical tier; canonical claims carry an exact staged-candidate local-CI receipt; pre-commit remains fast and pre-push owns the clean canonical boundary |
 
 Deterministic-oracle doctrine run via the broader gate (`tools/run_ci_local.sh`): the phase0
@@ -279,3 +280,80 @@ To add a doctrine here: write `scripts/check_<id>.sh` (§4 contract), add one li
 *This document is itself an instance of the architecture it describes: a portable, in-repo,
 git-tracked standard backed by a runnable driver and mechanical gates — adoptable by any project by
 following §8.*
+
+
+## 12. Claim verification — local publishing contract
+
+Adopted working rules, 2026-10-02, under ADR `0126`. The supplied portable policy was
+reviewed at SHA256 `9f99df25209c43afb74d77e348dd2d0cdb68ce96cf17a4f272ede8328f6046bd`;
+this local contract owns its enforcement and requires no external repository at runtime.
+Its three legs define what **checked** means before publishing a measurement:
+
+1. **Re-derive.** State the question, population and granularity; run the source-derived
+   command and retain its result. Item claims require item evidence. A repeated aggregate
+   or a consistent copy does not establish an individual fact. Attribute a failing change
+   with prior-state/re-apply controls in an isolated owned workspace when safe.
+2. **Falsify.** Name a competing hypothesis and an oracle that distinguishes it. Prefer
+   independent inputs or an adjudicated historical case; explain any different treatment
+   of equivalent cases. Observe the control rejecting a known bad input. Enumerate set
+   claims in both directions and classify search hits before calling them defects.
+   Derive classifiers and memberships from the actual producer, not its description.
+3. **Make durable.** Retain the actual producer and all artifact inputs, including the
+   instrument itself. Derive changing constants on demand or gate their full input
+   identity. An ignored script path/hash without recoverable source is a disclosed gap.
+
+A published claim states its scope and all three legs. A missing leg names its reason and
+an open, scheduled task owner; it is never hidden behind **verified** or **signoff**.
+For stochastic measurements publish intervals and method, not a single precise point.
+For deterministic counts keep the same question/population/pattern; changing one changes
+what is measured. Review challenged prose, the measured aspect, and named instances
+separately. Named instances and contract numbers require exact agreement; a judgement
+estimate's tolerance never excuses a wrong instance or contract. A new instrument that
+contradicts an older result bears the burden of distinguishing which is wrong.
+
+### Record format and review boundary
+
+`COMMIT.md` carries the publishing review template. Every newly staged owning leaf has
+exactly one declaration, alongside its existing verification tier:
+
+```text
+  Claim verification: `docs/claims/TREE.1.json`
+```
+
+If the slice publishes no new measured claim, use `Claim verification: none: <reason>`.
+This requires a real explanation, not an exemption from publishing discipline. A record
+has `version: 1`, its exact stable `owner`, and a nonempty `claims` array. Each claim has
+`name`, `statement`, `scope`, and `rederive`, `falsify`, `durability` objects. Records are
+bounded to 128 KiB each and named by their leaf, rather than appended to a live monolith.
+The admitted record is an executable schema example; the tracked checker is the schema.
+
+- Checked re-derivation names `command`, `granularity`, `result`.
+- Checked falsification names `hypothesis`, `oracle`, `red_control`.
+- Checked durability names `mode` and nonempty `inputs`; each input has relative `path`,
+  lowercase SHA256, and `role` (`producer` or `input`). At least one producer is required.
+- Every leg has `status: checked` or `status: gap`. A gap instead carries `reason` and
+  `repair_owner`, which must resolve to an open current task.
+- `live` inputs are read from the index and watched on every doctrine run. `historical`
+  inputs additionally name an exact existing Git `revision`; their hashes preserve that
+  capture, not a claim about today's tree. Freeze an earlier committed live record only
+  with an explicit scope qualification and its actual capture commit, never a self-hash.
+
+The checker reads tracked regular blobs, rejects traversal, unknown/duplicate fields,
+missing legs, untracked producers, stale hashes and absent repair owners. Its staged-owner
+query reuses verification cadence's exact single-owner classifier. It never runs commands
+from JSON or Markdown. Ordinary selected tests and receipt-bound canonical CI retain
+responsibility for actual behavior and expensive re-measurement.
+
+**Honest limit:** this gate validates disclosure and declared byte identities. It cannot
+prove that prose is true, the input list is complete, an oracle is independent, a declared
+RED happened, or a `none` explanation omits no claim. Author review and the actual selected
+oracle must establish those facts. Hash agreement alone is not semantic verification.
+
+### Adoption status and remaining ownership
+
+Working rules, review format and this bounded disclosure/identity mechanism are adopted.
+The selected callable instruments were preserved under `.0.2.1.4.0`; no older checkpoint
+or historical result is rewritten here. `SESSION-STARTUP-READING.5` owns the wider published
+constant census, ignored-producer census restricted to published claims, deliberate control
+failures and alignment audit. `.29` owns the known diagnostic-path repair before that
+closeout. Whole-project claim-policy adoption and that audit are **not complete**.

@@ -64,6 +64,7 @@ expected_python_temp_owners=(
  tools/check_executable_aggregate_selector_sources.py
  tools/check_unicode_case_contract.py
  tools/check_unicode_rule_label_contract.py
+ tools/test_claim_verification_staged.py
 )
 [[ "${python_temp_owners[*]}" == "${expected_python_temp_owners[*]}" ]] ||
  fail "Python temporary-owner inventory drifted: ${python_temp_owners[*]}"
@@ -71,8 +72,8 @@ expected_python_temp_owners=(
 mapfile -t python_tool_entrypoints < <(
  rg -l '^#!/usr/bin/env python3$' "$REPO_ROOT"/tools/*.py | sed "s|^$REPO_ROOT/||" | sort
 )
-(( ${#python_tool_entrypoints[@]} == 40 )) ||
- fail "Python tool entrypoint inventory drifted from 40 to ${#python_tool_entrypoints[@]}"
+(( ${#python_tool_entrypoints[@]} == 42 )) ||
+ fail "Python tool entrypoint inventory drifted from 42 to ${#python_tool_entrypoints[@]}"
 
 allocator_name='mk''temp'
 mapfile -t shell_temp_owners < <(
@@ -185,15 +186,38 @@ awk '
 if mcp_ci_topology_matches "$mcp_order_mutant"; then
  fail 'MCP canonical topology accepted binding-check-before-validator order'
 fi
-for checker in tools/check_callable_codeblock_contract.py tools/check_composed_objective_contract.py; do
+for checker in tools/check_callable_codeblock_contract.py tools/check_composed_objective_contract.py tools/check_claim_verification.py; do
+ checker_args=()
+ [[ "$checker" == tools/check_claim_verification.py ]] && checker_args+=(--self-test)
 env \
  LINKEDSPEC_PROJECT_DATA_ROOT="$python_root" \
  LINKEDSPEC_SCRATCH_ROOT="$external_probe/scratch" \
  LINKEDSPEC_CACHE_ROOT="$external_probe/cache" \
  TMPDIR="$external_probe/tmp" TMP="$external_probe/tmp" TEMP="$external_probe/tmp" \
  PYTHONPYCACHEPREFIX="$external_probe/pycache" \
- bash "$REPO_ROOT/tools/run_python_project_data.sh" "$checker"
+ bash "$REPO_ROOT/tools/run_python_project_data.sh" "$checker" "${checker_args[@]}"
 done
+env LINKEDSPEC_PROJECT_DATA_ROOT="$python_root" \
+ LINKEDSPEC_SCRATCH_ROOT="$external_probe/scratch" LINKEDSPEC_CACHE_ROOT="$external_probe/cache" \
+ TMPDIR="$external_probe/tmp" TMP="$external_probe/tmp" TEMP="$external_probe/tmp" \
+ PYTHONPYCACHEPREFIX="$external_probe/pycache" \
+ bash "$REPO_ROOT/tools/run_python_project_data.sh" tools/test_claim_verification_staged.py --storage-self-test
+
+mkdir -p -- "$case_root/claim-scratch-target"
+ln -s -- "$case_root/claim-scratch-target" "$case_root/claim-scratch-link"
+for candidate in "$external_root" "$case_root/claim-scratch-link"; do
+ set +e
+ claim_rejection=$(env PYTHONDONTWRITEBYTECODE=1 LINKEDSPEC_RUN_DIR="$candidate" \
+  python3 "$REPO_ROOT/tools/test_claim_verification_staged.py" --storage-self-test 2>&1)
+ claim_status=$?
+ set -e
+ [[ "$claim_status" -ne 0 ]] || fail 'claim allocation accepted hostile/symlink managed scratch'
+ printf '%s\n' "$claim_rejection" | rg -q 'outside the repository filesystem|contains a symlink' || \
+  fail 'claim allocation did not identify its rejected managed scratch'
+done
+[[ -z "$(find "$case_root/claim-scratch-target" -mindepth 1 -print -quit)" ]] || \
+ fail 'claim allocation wrote through rejected symlink scratch'
+
 assert_local_real_path "$python_root/cache/python-pycache"
 find "$python_root/cache/python-pycache" -type f -name '*.pyc' -print -quit | rg -q . ||
  fail 'targeted Python boundary did not retain imported bytecode in repository cache'
