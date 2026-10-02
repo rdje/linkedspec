@@ -5,7 +5,7 @@
     {
       "name": "publishing-checker-controls",
       "statement": "The admitted disclosure/identity checker accepts its positive fixtures and rejects the selected malformed, stale and missing-evidence controls.",
-      "scope": "Embedded schema/source fixtures and the staged adoption candidate only; not semantic truth, input completeness, historical runtime replay, or whole-project audit completion. The record itself is a Git-versioned intrinsic fixture and has no self-hash.",
+      "scope": "Historical adoption staged candidate captured in e63a20c635ea74981e7476107750fbb1410a1be0 from base 0ec53b59c3afbe675c0c0b487a1ca10d5e6a55f7. Replay the staged controls at that base with the captured candidate index in an isolated owned LinkedSpec workspace. Embedded schema/source fixtures and that adoption candidate only; not semantic truth, input completeness, historical runtime replay, or whole-project audit completion. Results and input hashes are unchanged; this qualification is not a new measurement. The record itself is Git-versioned and has no self-hash.",
       "rederive": {
         "status": "checked",
         "command": "bash scripts/check_claim_verification.sh --self-test; bash tools/run_python_project_data.sh tools/test_claim_verification_staged.py",
@@ -20,7 +20,7 @@
       },
       "durability": {
         "status": "checked",
-        "mode": "live",
+        "mode": "historical",
         "inputs": [
           {
             "path": "COMMIT.md",
@@ -652,7 +652,8 @@
             "sha256": "f4738b424505e0da0006678394195ac5ef9e247bf8ec55a4bf4e454d1763c6e7",
             "role": "input"
           }
-        ]
+        ],
+        "revision": "e63a20c635ea74981e7476107750fbb1410a1be0"
       }
     }
   ]

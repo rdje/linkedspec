@@ -248,6 +248,20 @@ resolve that mismatch before dispatcher closeout and complete neutral execution.
 The complete requirements and mutation/oracle plan are in
 `docs/language-readiness/composed-objective-selection.md`; no new primitive or syntax is selected.
 
+#### Callable signature pipes in Perl action splitting
+
+The valid minimal source `Top:: I { finishBlock={|x,y| return(x) }; return(finishBlock("ok","unused")) }`
+exposes a diagnosed splitter defect. The standalone literal AST is correct, but the preceding
+statement splitter reads the final `y|` as host transliteration syntax, merges the following return,
+and leaves raw literal text in generated Perl. A final `q` or `...y` shows the same mechanism;
+`left,right`, `x,z` and `y,x` execute correctly. Metadata still reports ready1/raw0/fallback0/unresolved0,
+so successful recognition is insufficient evidence of successful generated compilation.
+Eight exact native/fresh emitted controls include a scoped diagnostic intervention at the `x,y` closer:
+the unchanged source then returns `ok`; restoring the splitter restores failure. The tracked
+`.0.2.1.3.0-diagnosis.json` checkpoint retains complete sources, ASTs, actual splitter events, lowered
+actions, handler dumps and outcomes. Repair `.0.2.1.3.1` owns explicit signature protection and
+compatibility proof; this diagnosis changes no runtime behavior or callable record format.
+
 ### Neutral fixtures are governed; runtime execution is still pending
 
 The sixteen selected cases now have frozen sources and independent expected observations in

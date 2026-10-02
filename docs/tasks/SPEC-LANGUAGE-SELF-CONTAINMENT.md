@@ -1327,9 +1327,30 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
   Acceptance: Use Get/descriptor/substitution/source dump to find the exact intermediate mechanism, bind native/fresh emitted baseline, fix its owning compiler path with RED/GREEN and focused direct dependents, and keep all original bridge/scope/push records and authorities exact. Declare paths/tier before edits; canonical context/format/infrastructure movement requires broadened proof.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.3.0`
-  Status: `pending`
+  Status: `done`
   Goal: Freeze the minimal valid-literal compiler failure and precise source-located cause before repair.
+  Activation: Clean e63a20c635ea74981e7476107750fbb1410a1be0; brief0, exact canonical HEAD receipt and no required background job. README/bootstrap/memory, literal contract/bridge Knowledge, roadmap and public chapter recovered; cause remains unproven.
+  Owned paths: This tree; tracked diagnosis/fresh-process producers and capture under docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.3.0*; new matching docs/claims record and causal Knowledge card; existing literal/bridge Knowledge and structured-format-program book; task index/roadmaps/bounded continuity/derived Knowledge. Freeze the already committed .4.1 claim record as historical e63 with unchanged hashes/results and explicit adoption-candidate scope. Scratch stays under .linkedspec-data/scratch/selfcontain13302130. No production/test/authority/interface/CI/storage edits in this diagnosis.
+  Verification tier: `focused`
+  Focused checks: Public Get/descriptor/substitution/source dump, standalone and parsed-entry AST comparisons, native and fresh emitted controls, precise owning-source review and distinguishing negative control; unchanged production/authority identities; existing callable/AST direct dependents; book/Knowledge/history/memory/all doctrines/diff.
+  Canonical trigger: none for source-located diagnosis without runtime or infrastructure movement; repair .3.1 selects its actual tier and paths before edits.
+  Claim verification: `docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.3.0.json`
   Acceptance: Exact x,y/left,right source pairs, metadata, typed AST and native/fresh emitted failure are durable; no intermediate cause is guessed. Select the bounded owning compiler repair and its tier before code changes.
+
+  Verification: Eight exact native/fresh controls confirm splitter host-quote entry at final y/rest-y/q, malformed whole-action raw RHS and raw generated text; renamed/reordered twins pass. Scoped exact x,y-closer intervention returns ok on both routes, restoration fails again. Two fabricated observation controls reject;91 production/authority inputs remain e63-exact. Tracked probe/fresh/review programs, full capture and watched claims retain all declared inputs. Focused direct dependents and documentation/doctrines govern landing.
+  Prelanding correction: The history checker rejected an insertion accidentally anchored to an inline ## token in the CHANGES preamble. Rebuild from exact HEAD bytes and anchor the new record to a start-of-line heading; preserve the complete preamble and all old records.
+  Root cause: StatementSplit::Mode::maybe_enter_pipe_quote operator-suffix recognition consumes the callable signature closer; Core then suppresses brace/semicolon processing. AST::Parser::parse_action_block receives one merged assignment, whose RHS becomes raw_perl. Descriptor readiness does not establish compilation.
+  Repair selection: .3.1 owns StatementSplit/Core.pm lexical signature state, existing phase0 splitter and callable/AST tests, direct dependents and book/Knowledge/checkpoint/claims/continuity. Ordinary focused compiler correction preserves all public schemas/records/invocation context; full Phase0 is required by COMMIT for the rewriter, and canonical broadening remains required if scope moves. Protect explicit signature delimiters before host quote recognition, preserve host pipe forms/nested/body ownership/malformed diagnostics. No production code changes in .3.0.
+  Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.3.0 - diagnose callable signature pipe splitting`.
+
+### `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.3.0` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Exact accepted x,y source fails native handler compilation and independent emitted loading; original source/AST/metadata/dumps/errors retained.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Actual pipe mode entry at y/rest-y/q merges the following statement; source-located Core/Mode and whole-action raw RHS establish the mechanism.
+- [x] **FIX** — Select lexical signature protection in .3.1; scoped diagnostic bypass plus restoration establishes the causal boundary without shipping a partial fix.
+- [x] **ADDRESSED (verified)** — Eight paired controls, two observed review REDs and91 unchanged production/authority inputs are retained with actual tracked instruments.
+- [x] **NO REGRESSION** — Production/runtime/authorities stay exact; existing callable/AST direct dependents and focused documentation/doctrines govern this diagnosis only.
+- [x] **LOCKSTEP** — Causal card/book/checkpoint/claim, task/roadmaps/frontier and bounded continuity share the diagnosis/repair boundary; prior claim capture is explicitly historical e63.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.3.1`
   Status: `pending`
@@ -1563,7 +1584,7 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 | 31 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.1` | `done` | Registered bridge71 native/fresh sources/605 tests with actual identity/effect/error controls and canonical landing. |
 | 32 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.4.0` | `done` | Three original observer groups and15 inputs preserved; source recovery only, no historical runtime rerun. |
 | 33 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.4.1` | `done` | Three-leg working rules and watched-source doctrine adopted; broader startup5/29 audit remains open. |
-| 34 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.3.0` | `pending` | Source-located valid x,y literal reconstruction diagnosis after durability reconciliation. |
+| 34 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.3.0` | `done` | Host quote mode consumes the signature closer; exact intervention/restoration and eight paired controls locate .3.1 repair. |
 | 35 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.3.1` | `pending` | Repair the diagnosed valid-literal compiler path and close the P1 prerequisite. |
 | 36 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.2` | `pending` | Canonical committed bridge reconciliation closes .0.2.1/.0.2 after literal repair. |
 | 37 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.0` | `pending` | Diagnose frozen normalization loop/source-contract mismatch before selecting repair. |

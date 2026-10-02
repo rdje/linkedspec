@@ -2,17 +2,19 @@
 
 ## Current Activity
 
-Claim publishing working rules/checker adopted; full PNT continues with the valid-literal prerequisite.
+Valid-literal cause diagnosed; full PNT continues with lexical signature protection before bridge closeout.
 
 ## Latest Completed Slice
 
-`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.4.1`: local three-leg contract/review, strict tracked records, source-identity controls and registered doctrine. Whole-project audit remains open under startup5/29.
+`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.3.0`: host quote mode consumes the signature closer; eight public native/fresh controls, intervention/restoration and retained instruments establish the repair boundary.
 
 ## Next Action
 
-Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.3.0 for exact valid x,y literal compiler diagnosis before repair and bridge closeout.
+Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.3.1 from clean HEAD and repair the owned lexical splitter with RED/GREEN and direct-dependent proof.
 
 ## Recent Completions
+
+- `2026-10-02` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.3.0` diagnoses the callable signature pipe collision with exact causal controls.
 
 - `2026-10-02` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.4.1` adopts bounded claim publishing and watched-source enforcement; wider audit remains open.
 
@@ -43,8 +45,6 @@ Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.3.0 for exact valid x,y lite
 - `2026-10-01` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.2` freezes closure structure with independent governance and exact CI evolution.
 
 - `2026-10-01` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.1` designs the source-located closure matrix and bounded freeze plan.
-
-- `2026-10-01` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.5` guards the stable entry/cursor description and repairs79-file inventory before canonical closeout.
 
 ## History
 

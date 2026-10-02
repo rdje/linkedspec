@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-10-02 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.3.0: diagnose callable signature pipe splitting
+
+Trace exact public AST/substitution/descriptor/dump/native and fresh emitted controls to the statement splitter: final y/rest-y/q enters host pipe-quote mode and merges the following return. Eight paired controls include renamed/reordered positives and exact diagnostic intervention/restoration. Two fabricated observations reject;91 production/authority inputs remain activation-exact. Retain tracked instruments/full captures/three-leg claims, qualify the previous policy capture as historical e63, and select lexical signature repair .3.1 without changing runtime behavior.
+
 ## 2026-10-02 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.4.1: enforce three-leg claim publishing
 
 Adopt the reviewed source policy as explicit local working rules in DOCTRINE_ENFORCEMENT section12 and the COMMIT review template. Register a strict claim disclosure/source-identity checker, a compatible staged-owner query and canonical path classification. Embedded and actual alternate-index RED/GREEN controls retain their tracked instruments; records disclose missing legs and distinguish live identities from historical captures. Enroll the new managed allocator and entrypoints in the storage/routing oracles, verify hostile/symlink rejection, and replace stale current inventory copies with their executable owner. Runtime and older evidence are unchanged. Wider startup5/29 audit remains open; valid-literal diagnosis follows exact canonical infrastructure landing.

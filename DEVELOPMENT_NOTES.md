@@ -12,6 +12,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-10-02 — Callable signature closer versus host pipe quote (.3.0)
+
+Correct standalone literal recognition does not protect whole-action splitting: AST::Parser::parse_action_block first asks StatementSplit::Core to segment source. Mode::maybe_enter_pipe_quote mistakes the accepted final parameter y for a transliteration operator, consumes the signature closer and suppresses tail boundaries. Its merged assignment RHS becomes raw_perl although descriptor recognition still reports ready1/raw0/fallback0/unresolved0. Actual lexical mode observations plus exact bypass/restoration distinguish this cause from AST or runtime bridge failure. Protect the explicit signature at the splitter in .3.1; retain host quote compatibility. Earlier live claim inputs are frozen at their actual capture commit with unchanged hashes/results before evolving task bytes.
+
 ## 2026-10-02 — Claim publishing disclosure and source identity (ADR0126)
 
 A hash gate establishes declared byte identity, not input completeness or semantic truth. The new checker never executes recorded commands; it reuses the existing single-owner classifier and reads index blobs/current repair statuses, excluding index-registered immutable task history. Alternate-index mutations exercise the complete checker without changing the real index or another repository. Three-leg working rules are adopted within the existing bounded doctrine surface; full constants/published-producer/control/alignment auditing stays owned by startup5/29. Canonical attempt1 catches the new allocator missing from the exact storage inventory; explicit managed-root allocation, focused positive/negative storage proof and storage/routing enrollment repair the owning integration without weakening its census. Supplied claim policy SHA256 remains 9f99df25209c43afb74d77e348dd2d0cdb68ce96cf17a4f272ede8328f6046bd; no donor deployment number is imported.
