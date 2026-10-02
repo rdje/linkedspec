@@ -4,14 +4,42 @@ use 5.010;
 use strict;
 use warnings;
 
-use Scalar::Util qw(blessed reftype);
+use Scalar::Util qw(blessed reftype refaddr);
 use Storable qw(dclone);
+use Hash::Util::FieldHash qw(fieldhash);
 use LinkedSpec::RuntimeLogical ();
 use LinkedSpec::BindingRuntime ();
+use LinkedSpec::CallableContract ();
 
 # Execute version-1 callable-codeblock records as typed data. Generated handlers
 # provide explicit references to caller working slots; this module never captures
 # a lexical environment and never stores a host coderef in the record.
+fieldhash my %codeblock_origins;
+
+sub _codeblock_origin {
+ my ($record) = @_;
+ my $key = ref($record->{body_ast}) eq 'HASH' ? $record->{body_ast} : $record;
+ return $codeblock_origins{$key} ||= {};
+}
+
+sub _inherit_codeblock_origin {
+ my ($source, $copy) = @_;
+ my $key = ref($copy->{body_ast}) eq 'HASH' ? $copy->{body_ast} : $copy;
+ $codeblock_origins{$key} = _codeblock_origin($source);
+}
+
+sub _copy_codeblock_origins {
+ my ($source, $copy, $seen) = @_;
+ return unless ref($source) && ref($copy);
+ return if $seen->{refaddr($source)}++;
+ my $kind = reftype($source) // '';
+ if ($kind eq 'HASH') {
+  _inherit_codeblock_origin($source, $copy) if ($source->{kind} // '') eq 'codeblock_literal';
+  _copy_codeblock_origins($source->{$_}, $copy->{$_}, $seen) for keys %$source;
+ } elsif ($kind eq 'ARRAY') {
+  _copy_codeblock_origins($source->[$_], $copy->[$_], $seen) for 0 .. $#$source;
+ }
+}
 
 sub _error {
  my ($code, %fields) = @_;
@@ -24,7 +52,11 @@ sub _error {
 sub _copy_value {
  my ($value) = @_;
  return $value unless ref($value);
- return dclone($value)
+ my $copy = dclone($value);
+ # Weak AST keys carry only an opaque identity marker. Copies remain the
+ # same callable, while independently constructed equal records stay distinct.
+ _copy_codeblock_origins($value, $copy, {});
+ return $copy
 }
 
 sub _value_kind {
@@ -114,6 +146,67 @@ sub _scalar_text {
  return $text
 }
 
+sub enter_function {
+ my ($invocation, $name) = @_;
+ my $active = $invocation->{active_functions} || [];
+ _error('invalid_codeblock_invocation_context') unless ref($active) eq 'ARRAY';
+ for (my $idx = 0; $idx < @$active; ++$idx) {
+  next unless $active->[$idx] eq $name;
+  _error('user_function_recursion_unsupported', function_name => $name,
+   cycle => [@$active[$idx .. $#$active], $name]);
+ }
+ return [@$active, $name]
+}
+
+sub _eval_registered_function {
+ my ($node, $ctx, $entry) = @_;
+ my $name = $node->{name};
+ my $args = $node->{args};
+ my $signature = $entry->{signature};
+ _error('invalid_registered_function', function_name => $name)
+  unless ref($signature) eq 'HASH' && ref($signature->{positional_params}) eq 'ARRAY';
+ my $keywords = grep {
+  ref($_) eq 'HASH' && ($_->{kind} // '') eq 'raw_perl'
+   && ($_->{source} // '') =~ /\A\s*[A-Za-z_][A-Za-z0-9_]*\s*:/s
+ } @$args;
+ _error('user_function_keyword_arguments_unsupported', function_name => $name,
+  got => 0 + $keywords, arguments_evaluated => 0) if $keywords;
+ my $argc = scalar @$args;
+ my ($min, $max) = @{$signature}{qw(min_arity max_arity)};
+ if (!defined($min) || $argc < $min || (defined($max) && $argc > $max)) {
+  my $expected = defined($max) && $max == $min ? "exactly $min" : "at least $min";
+  _error('user_function_arity_mismatch', function_name => $name,
+   expected => $expected, got => $argc, arguments_evaluated => 0);
+ }
+ # Check active calls before operands; the compiled central lowerer installs
+ # and localizes the new function frame for both dynamic and nested static calls.
+ enter_function($ctx->{invocation}, $name);
+ if (ref($entry->{lowering_error}) eq 'HASH') {
+  my %failure = %{$entry->{lowering_error}};
+  my $code = delete $failure{code};
+  _error($code, %failure);
+ }
+ _error('invalid_registered_function', function_name => $name)
+  unless ref($entry->{call}) eq 'CODE';
+
+ my @arguments = @$args;
+ my $contract = $entry->{final_codeblock_contract};
+ if (ref($contract) eq 'HASH' && @arguments
+  && ref($arguments[-1]) eq 'HASH' && ($arguments[-1]{kind} // '') eq 'block_value') {
+  _error('final_argument_not_codeblock', value_kind => 'block')
+   unless LinkedSpec::CallableContract::accepts_argument_count($contract, $#arguments);
+  $arguments[-1] = LinkedSpec::CallableContract::contextual_argument_from_block($arguments[-1]);
+  _error('invalid_codeblock_body') unless ref($arguments[-1]) eq 'HASH';
+ }
+ my @values = map {
+  ref($_) eq 'HASH' && ($_->{kind} // '') eq 'codeblock_argument'
+   ? _copy_value(LinkedSpec::CallableContract::runtime_record_from_argument($_))
+   : _eval_expr($_, $ctx)
+ } @arguments;
+ require_codeblock_value($values[-1]) if ref($contract) eq 'HASH';
+ return $entry->{call}->(\@values, $ctx->{invocation})
+}
+
 sub _eval_call {
  my ($node, $ctx) = @_;
  my $name = $node->{name} // '';
@@ -172,6 +265,10 @@ sub _eval_call {
   }
   return LinkedSpec::RuntimeLogical::evaluate($name, \@logical_values)
  }
+
+ my $functions = $ctx->{invocation}{registered_functions};
+ my $function = ref($functions) eq 'HASH' ? $functions->{$name} : undef;
+ return _eval_registered_function($node, $ctx, $function) if ref($function) eq 'HASH';
 
  my @values = map { _eval_expr($_, $ctx) } @$args;
 
@@ -266,7 +363,7 @@ sub _eval_expr {
  return undef if $kind eq 'undef';
  return $node->{value} ? 1 : 0 if $kind eq 'boolean';
  return _read_binding($ctx, $node->{name}) if $kind eq 'variable';
- return _copy_value($node) if $kind eq 'codeblock_literal';
+ return dclone($node) if $kind eq 'codeblock_literal';
  _error($node->{code} // 'invalid_codeblock_literal')
   if $kind eq 'codeblock_literal_error';
 
@@ -350,11 +447,11 @@ sub invoke {
  $args = [] unless defined $args;
  $bindings = {} unless defined $bindings;
  $identity = '<codeblock>' unless defined($identity) && length($identity);
- $active_codeblocks = [] unless defined $active_codeblocks;
  $invocation = {} unless defined $invocation;
  _error('invalid_codeblock_arguments') unless ref($args) eq 'ARRAY';
  _error('invalid_codeblock_bindings') unless ref($bindings) eq 'HASH';
  _error('invalid_codeblock_invocation_context') unless ref($invocation) eq 'HASH';
+ $active_codeblocks = $invocation->{active_codeblocks} || [] unless defined $active_codeblocks;
  _error('value_not_callable', value_kind => _value_kind($record))
   unless ref($record) eq 'HASH'
       && ($record->{kind} // '') eq 'codeblock_literal'
@@ -375,11 +472,21 @@ sub invoke {
  }
 
  my @active = @$active_codeblocks;
+ # Parameter transfer copies records. Preserve their actual origin outside the
+ # eight-field record, distinguishing equal independent literals from aliases.
+ my $record_origin = _codeblock_origin($record);
+ my $active_records = $invocation->{active_codeblock_records} || [];
+ _error('invalid_codeblock_invocation_context') unless ref($active_records) eq 'ARRAY';
  for (my $idx = 0; $idx < @active; ++$idx) {
-  next unless defined($active[$idx]) && $active[$idx] eq $identity;
+  my $same = ref($active_records->[$idx]) ? refaddr($active_records->[$idx]) == refaddr($record_origin)
+   : defined($active[$idx]) && $active[$idx] eq $identity;
+  next unless $same;
   _error('codeblock_recursion_unsupported', cycle => [@active[$idx .. $#active], $identity])
  }
+ my @record_keys = (map { $active_records->[$_] } 0 .. $#active);
+ push @record_keys, $record_origin;
  push @active, $identity;
+ $invocation = { %$invocation, active_codeblocks => \@active, active_codeblock_records => \@record_keys };
 
  my @param_names = @{$signature->{positional_params}};
  push @param_names, $signature->{rest_param} if defined($signature->{rest_param});

@@ -2,17 +2,19 @@
 
 ## Current Activity
 
-P1 registered-function bridge implementation .1.3.3.0.2.1.1 after contract/probes .0; canonical reconciliation .2 and dispatcher closeout precede neutral execution.
+P1 prior-producer durability/claim-policy reconciliation .0.2.1.4 after the bounded registered-function bridge; valid x,y literal .0.2.1.3, loop/count .0.4 and independent closeouts precede neutral execution.
 
 ## Latest Completed Slice
 
-- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.0 - specify deferred function bridge` —24 matching native/fresh emitted probes and twelve unchanged inputs bind the explicit registry/central-lowering plan. Runtime/test/authority state remains unchanged.
+- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.1 - bridge deferred registered functions` —71 native/fresh emitted sources/605 tests,123 dependents, seven original successes and actual identity/effect/error restoration; corrected old-module baseline fails88 tests. Exact canonical receipt governs landing.
 
 ## Next Action
 
-- Activate .0.2.1.1 from clean HEAD with canonical interface proof; implement and verify registered precedence, exact signatures/final blocks, ordered arguments, fresh frames and nested recursion guards.
+- Activate .0.2.1.4 from clean HEAD; reconcile retained prior replay producers and requested claim policy before cleanup/closeout, then diagnose/repair valid x,y literal .3. Frozen normalization loop/count remains owned by .0.4.
 
 ## Recent Completions
+
+- `2026-10-02` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.1` implements central compiled registered dispatch with actual recursion/copy/effect/error proof.
 
 - `2026-10-02` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.0` freezes24 paired deferred-function bridge controls and implementation ownership.
 
@@ -43,8 +45,6 @@ P1 registered-function bridge implementation .1.3.3.0.2.1.1 after contract/probe
 - `2026-10-01` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.4` reconciles three bounded objectives under exact canonical acceptance.
 
 - `2026-10-01` — `REPO-HYGIENE.6` records the due artifact review and requested exit handoff with zero deletions.
-
-- `2026-09-28` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.5` reconciles bounded lossless/actual-child evidence under canonical acceptance.
 
 ## History
 

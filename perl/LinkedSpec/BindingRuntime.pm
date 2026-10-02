@@ -14,7 +14,14 @@ sub _clone_value {
  my ($value) = @_;
  return $value ? JSON::PP::true : JSON::PP::false if JSON::PP::is_bool($value);
  return [map { _clone_value($_) } @$value] if ref($value) eq 'ARRAY';
- return {map { $_ => _clone_value($value->{$_}) } keys %$value} if ref($value) eq 'HASH';
+ if (ref($value) eq 'HASH') {
+  my $copy = {map { $_ => _clone_value($value->{$_}) } keys %$value};
+  if (($value->{kind} // '') eq 'codeblock_literal') {
+   require LinkedSpec::CodeblockRuntime;
+   LinkedSpec::CodeblockRuntime::_inherit_codeblock_origin($value, $copy);
+  }
+  return $copy;
+ }
  return $value
 }
 

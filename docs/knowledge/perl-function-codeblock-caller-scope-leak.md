@@ -7,7 +7,7 @@ answers:
   - "which task owns fresh function callback working frames"
   - "is the function callback scope leak the startup32 argument shadow defect"
 date: 2026-10-02
-status: bounded repair verified; registered-function bridge remains pending
+status: bounded scope repair verified; registered bridge implemented with separate prerequisites
 tags: [perl, codeblock, user-functions, scope, language-readiness]
 evidence: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.0.0 diagnosis checkpoint preserves three exact native/fresh emitted sources, values, metadata, producer hashes and unchanged authorities."
 reverify: "bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/codeblock_push_composition_perl.t t/callable_codeblock_literal_contract.t t/variadic_user_function_contract.t"
@@ -57,3 +57,7 @@ A fresh emitted child independently checks the actual four callback invocation m
 within each function, distinct maps/working slots across functions, and rejection of an aliased control.
 The historical compiler comparison must preload baseline MethodLowering before facade bootstrap:
 a simple include-path override selected current lowering and therefore did not establish RED proof.
+
+October2 [[perl-deferred-function-bridge]] extends these original33 byte-exact source rows to71/605,
+using the same fresh central function frame. The bridge is implemented; literal and normalization
+prerequisites remain before independent closeout. Historical scope measurements above remain exact.

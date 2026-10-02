@@ -1,11 +1,11 @@
 # MEMORY
 
-- activation_commit: `2516cf72798212e1686cbddec94018a317276035` — clean activation base for deferred function bridge contract/probes.
-- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.0 - specify deferred function bridge`.
-- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.1` (pending) — P1 registered-function bridge implementation.
-- next_action: Activate .0.2.1.1 from clean HEAD; declare canonical proof and exact paths, implement the selected explicit registry/central-lowering bridge, and verify precedence/signatures/order/fresh scope/nested recursion before reconciliation.
-- in_flight_uncommitted: none after diagnostic landing;24 native/fresh emitted observations and twelve unchanged inputs are bound to the contract checkpoint. No runtime/test/authority movement.
-- blockers: No access/decision blocker. Registered-function bridge is next; normalization still fails decorate. Startup19/32/35/87 remain separate; source detail37.2, broad teaching41.2, policy5/29 and ARCHOGEN acceptance retain owners.
+- activation_commit: `4a3f33a3e38d38b2ac17bf3cfe9a1dd92231096b` — clean activation base for canonical deferred-function bridge implementation.
+- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.1 - bridge deferred registered functions`.
+- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.1` (done) — bounded bridge committed; prerequisites remain before parent closeout.
+- next_action: Activate P1 .1.3.3.0.2.1.4 from clean HEAD; reconcile retained prior callable producer sources and the requested claim-policy adoption review before cleanup/closeout, then resume valid x,y literal diagnosis .3.0.
+- in_flight_uncommitted: none; implementation/evidence/book/continuity land together with exact staged canonical receipt.
+- blockers: No access/decision blocker. Valid x,y literal .0.2.1.3 and frozen normalization loop/count .0.4 own repair before closeouts. Startup19/32/35/87 remain separate.
   Wrapper startup .7 remains open; recovery/purge stay prohibited. No interrupted Phase0 run counts as proof.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
   active table; the task metadata doctrine inventories all consumers, permits arbitrary frontier-row rewrites,

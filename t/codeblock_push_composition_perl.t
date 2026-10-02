@@ -6,7 +6,7 @@ use File::Path qw(make_path);
 use File::Spec ();
 use File::Temp qw(tempdir);
 use JSON::PP ();
-use Scalar::Util qw(refaddr reftype);
+use Scalar::Util qw(refaddr reftype weaken);
 
 use LinkedSpec ();
 use LinkedSpec::ActionIR::AST ();
@@ -30,7 +30,47 @@ sub error_projection {
 }
 
 my @cases = (
+ {'body'=>'return(decorate("ab","!"))','expected'=>'!AB','functions'=>'fn decorate(text,prefix) { return(cat(prefix,uppercase(text))) }','id'=>'bridge_fixed_direct'},
+ {'body'=>'cb={|| return(decorate("ab","!")) }; return(cb())','expected'=>'!AB','functions'=>'fn decorate(text,prefix) { return(cat(prefix,uppercase(text))) }','id'=>'bridge_fixed_deferred'},
+ {'body'=>'return(collect("a","b","c"))','expected'=>['a',['b','c']],'functions'=>'fn collect(first,...rest) { return([first,rest]) }','id'=>'bridge_rest_direct'},
+ {'body'=>'cb={|| return(collect("a","b","c")) }; return(cb())','expected'=>['a',['b','c']],'functions'=>'fn collect(first,...rest) { return([first,rest]) }','id'=>'bridge_rest_deferred'},
+ {'body'=>'cb={|| return(collect("a")) }; return(cb())','expected'=>['a',[]],'functions'=>'fn collect(first,...rest) { return([first,rest]) }','id'=>'bridge_rest_empty_deferred'},
+ {'body'=>'return(apply("inner") { return(value) })','expected'=>'inner','functions'=>'fn apply(value,callback: codeblock) { return(callback()) }','id'=>'bridge_attached_direct'},
+ {'body'=>'cb={|| return(apply("inner") { return(value) }) }; return(cb())','expected'=>'inner','functions'=>'fn apply(value,callback: codeblock) { return(callback()) }','id'=>'bridge_attached_deferred'},
+ {'body'=>'return(apply("inner",{ return(value) }))','expected'=>'inner','functions'=>'fn apply(value,callback: codeblock) { return(callback()) }','id'=>'bridge_parenthesized_direct'},
+ {'body'=>'cb={|| return(apply("inner",{ return(value) })) }; return(cb())','expected'=>'inner','functions'=>'fn apply(value,callback: codeblock) { return(callback()) }','id'=>'bridge_parenthesized_deferred'},
+ {'body'=>'value="outer"; inner={|| return(value) }; cb={|| return(apply("inner",inner)) }; return(cb())','expected'=>'inner','functions'=>'fn apply(value,callback: codeblock) { return(callback()) }','id'=>'bridge_bound_deferred'},
+ {'body'=>'effects=[]; result=join({ push(effects,"a"); return("A") },{ push(effects,"b"); return("B") }); return([result,effects])','expected'=>['AB',['a','b']],'functions'=>'fn join(a,b) { return(cat(a,b)) }','id'=>'bridge_ordered_direct'},
+ {'body'=>'effects=[]; cb={|| result=join({ push(effects,"a"); return("A") },{ push(effects,"b"); return("B") }); return([result,effects]) }; return(cb())','expected'=>['AB',['a','b']],'functions'=>'fn join(a,b) { return(cat(a,b)) }','id'=>'bridge_ordered_deferred'},
+ {'body'=>'cb={|| return(outer("ab")) }; return(cb())','expected'=>'!AB','functions'=>'fn inner(x) { return(uppercase(x)) }
+fn outer(x) { return(cat("!",inner(x))) }','id'=>'bridge_nested_deferred'},
+ {'body'=>'decorate={|text,prefix| return("slot") }; cb={|| return(decorate("x","!")) }; return(cb())','expected'=>'!x','functions'=>'fn decorate(text,prefix) { return(cat(prefix,text)) }','id'=>'bridge_precedence_deferred'},
+ {'body'=>'cb={|| return(decorate("x")) }; return(cb())','error'=>{'arguments_evaluated'=>0,'class'=>'LinkedSpec::CodeblockRuntime::Error','code'=>'user_function_arity_mismatch','expected'=>'exactly 2','function_name'=>'decorate','got'=>1,'kind'=>'codeblock_runtime_error'},'functions'=>'fn decorate(text,prefix) { return(cat(prefix,text)) }','id'=>'bridge_wrong_arity_deferred'},
+ {'body'=>'return(apply("x",{}))','error'=>{'class'=>'LinkedSpec::CodeblockRuntime::Error','code'=>'final_argument_not_codeblock','kind'=>'codeblock_runtime_error','value_kind'=>'harray'},'functions'=>'fn apply(value,callback: codeblock) { return(callback()) }','id'=>'bridge_wrong_final_kind_direct'},
+ {'body'=>'cb={|| return(apply("x",{})) }; return(cb())','error'=>{'class'=>'LinkedSpec::CodeblockRuntime::Error','code'=>'final_argument_not_codeblock','kind'=>'codeblock_runtime_error','value_kind'=>'harray'},'functions'=>'fn apply(value,callback: codeblock) { return(callback()) }','id'=>'bridge_wrong_final_kind_deferred'},
+ {'body'=>'cb={|| return(id(value:"x")) }; return(cb())','error'=>{'arguments_evaluated'=>0,'class'=>'LinkedSpec::CodeblockRuntime::Error','code'=>'user_function_keyword_arguments_unsupported','function_name'=>'id','got'=>1,'kind'=>'codeblock_runtime_error'},'functions'=>'fn id(value) { return(value) }','id'=>'bridge_keyword_deferred'},
+ {'body'=>'return(repeat("x"))','expected'=>undef,'functions'=>'fn repeat(value) { return(repeat(value)) }','id'=>'bridge_function_recursion_direct','metadata'=>{'canonical_action_ir_fallback_count'=>0,'language_agnostic_action_ir_ready'=>0,'raw_perl_dependency_count'=>0,'unresolved_helper_count'=>1}},
+ {'body'=>'cb={|| return(repeat("x")) }; return(cb())','error'=>{'class'=>'LinkedSpec::CodeblockRuntime::Error','code'=>'user_function_recursion_unsupported','cycle'=>['repeat','repeat'],'function_name'=>'repeat','kind'=>'codeblock_runtime_error'},'functions'=>'fn repeat(value) { return(repeat(value)) }','id'=>'bridge_function_recursion_deferred'},
+ {'body'=>'cb={|| return(apply(cb)) }; return(cb())','error'=>{'class'=>'LinkedSpec::CodeblockRuntime::Error','code'=>'codeblock_recursion_unsupported','cycle'=>['cb','callback'],'kind'=>'codeblock_runtime_error'},'functions'=>'fn apply(callback: codeblock) { return(callback()) }','id'=>'bridge_callback_function_cycle'},
+ {'body'=>'cb={|| return(missing_operation("x")) }; return(cb())','error'=>{'class'=>'LinkedSpec::CodeblockRuntime::Error','code'=>'unknown_helper','kind'=>'codeblock_runtime_error','name'=>'missing_operation'},'functions'=>'','id'=>'bridge_unknown_deferred'},
+ {'body'=>'cb={|| return("ok") }; return(cb())','expected'=>'ok','functions'=>'fn unused() { return(missing_operation()) }','id'=>'bridge_unrelated_unsupported_definition'},
+ {'body'=>'temp="outer"; return(f(temp))','expected'=>undef,'functions'=>'fn f(value) { temp="inner"; return(value) }','id'=>'bridge_startup32_control'},
+ {'body'=>'outerBlock={|callback,...rest| return(callback(rest[0],rest[1])) }; middleBlock={|callback,...rest| return(callback(rest[0],rest[1])) }; finishBlock={|left,right| return(left) }; return(outerBlock(middleBlock,finishBlock,"done"))','expected'=>'done','id'=>'bridge_equal_independent_callbacks'},
+ {'body'=>'cb={|self| fresh=copy(self); return(fresh(fresh)) }; return(cb(cb))','error'=>{'class'=>'LinkedSpec::CodeblockRuntime::Error','code'=>'codeblock_recursion_unsupported','cycle'=>['cb','fresh'],'kind'=>'codeblock_runtime_error'},'id'=>'bridge_cloned_callback_cycle'},
+ {'body'=>'cb={|self| items=[]; push(items,self); fresh=items[0]; return(fresh(fresh)) }; return(cb(cb))','error'=>{'class'=>'LinkedSpec::CodeblockRuntime::Error','code'=>'codeblock_recursion_unsupported','cycle'=>['cb','fresh'],'kind'=>'codeblock_runtime_error'},'id'=>'bridge_aggregate_callback_cycle'},
+ {'body'=>'cb={|self| fresh=duplicate(self); return(fresh(fresh)) }; return(cb(cb))','error'=>{'class'=>'LinkedSpec::CodeblockRuntime::Error','code'=>'codeblock_recursion_unsupported','cycle'=>['cb','fresh'],'kind'=>'codeblock_runtime_error'},'functions'=>'fn duplicate(record) { return(copy(record)) }','id'=>'bridge_compiled_copy_cycle'},
+ {'body'=>'cb={|| first=collect("a"); second=collect(); return([first,second]) }; return(cb())','expected'=>[['a','tag'],['tag']],'functions'=>'fn collect(...items) { push(items,"tag"); return(items) }','id'=>'bridge_rest_fresh'},
+ {'body'=>'secret="outside"; cb={|| result=inspect(); return([result,secret]) }; return(cb())','expected'=>[undef,'outside'],'functions'=>'fn inspect() { return(secret) }','id'=>'bridge_fresh_scope'},
+ {'body'=>'cb={|| return(apply({|| return("inner") })) }; return(cb())','expected'=>'inner','functions'=>'fn apply(cb: codeblock) { return(cb()) }','id'=>'bridge_same_name_distinct_frames'},
+ {'body'=>'next={|| return("end") }; cb={|| return(apply(next)) }; outer={|| return(apply(cb)) }; return(outer())','error'=>{'class'=>'LinkedSpec::CodeblockRuntime::Error','code'=>'user_function_recursion_unsupported','cycle'=>['apply','apply'],'function_name'=>'apply','kind'=>'codeblock_runtime_error'},'functions'=>'fn apply(callback: codeblock) { return(callback()) }','id'=>'bridge_dynamic_function_cycle'},
+ {'body'=>'next={|| return("end") }; cb={|| return(outer(next)) }; root={|| return(outer(cb)) }; return(root())','error'=>{'class'=>'LinkedSpec::CodeblockRuntime::Error','code'=>'user_function_recursion_unsupported','cycle'=>['outer','inner','outer'],'function_name'=>'outer','kind'=>'codeblock_runtime_error'},'functions'=>'fn inner(callback: codeblock) { return(callback()) }
+fn outer(callback: codeblock) { return(inner(callback)) }','id'=>'bridge_static_dynamic_function_cycle'},
+ {'body'=>'cb={|| return(reveal("value")) }; return(cb())','expected'=>['value','local','marker'],'functions'=>'fn reveal(__ls_registered_fn_args) { __ls_registered_fn_context="local"; __ls_codeblock_invocation="marker"; return([__ls_registered_fn_args,__ls_registered_fn_context,__ls_codeblock_invocation]) }','id'=>'bridge_private_names'},
+ {'body'=>'cb={|| return(bad()) }; return(cb())','error'=>{'class'=>'LinkedSpec::CodeblockRuntime::Error','code'=>'user_function_body_unsupported','function_name'=>'bad','kind'=>'codeblock_runtime_error','unresolved_helpers'=>['missing_operation']},'functions'=>'fn bad() { return(missing_operation()) }','id'=>'bridge_unsupported_body'},
+ {'body'=>'effects=[]; cb={|| return(pair({ push(effects,"bad"); return("x") })) }; return(cb())','error'=>{'arguments_evaluated'=>0,'class'=>'LinkedSpec::CodeblockRuntime::Error','code'=>'user_function_arity_mismatch','expected'=>'exactly 2','function_name'=>'pair','got'=>1,'kind'=>'codeblock_runtime_error'},'functions'=>'fn pair(first,second) { return([first,second]) }','id'=>'bridge_arity_effects'},
+ {'body'=>'effects=[]; cb={|| return(pair({ push(effects,"bad"); return("x") },second:"y")) }; return(cb())','error'=>{'arguments_evaluated'=>0,'class'=>'LinkedSpec::CodeblockRuntime::Error','code'=>'user_function_keyword_arguments_unsupported','function_name'=>'pair','got'=>1,'kind'=>'codeblock_runtime_error'},'functions'=>'fn pair(first,second) { return([first,second]) }','id'=>'bridge_keyword_effects'},
  {id=>'function_unbound_callable', functions=>'fn inspect() { return(cb()) }', body=>'cb={|| return("outer-callable") }; return(inspect())', expected=>undef, metadata=>{language_agnostic_action_ir_ready=>0,canonical_action_ir_fallback_count=>0,raw_perl_dependency_count=>0,unresolved_helper_count=>1}},
+ {id=>'bridge_failure_restore', functions=>'fn fail(callback: codeblock) { return(callback("temporary")) }', body=>'item="outside"; cb={|item| missing_operation() }; outer={|| return(fail(cb)) }; return(outer())', error=>{class=>'LinkedSpec::CodeblockRuntime::Error',kind=>'codeblock_runtime_error',code=>'unknown_helper',name=>'missing_operation'}},
  {id=>'function_with_failure', functions=>'fn apply(callback: codeblock) { value="function"; return(with("shadow",callback)) }', body=>'value="outside"; cb={|x| missing_operation() }; return(apply(cb))', error=>{class=>'LinkedSpec::CodeblockRuntime::Error',kind=>'codeblock_runtime_error',code=>'unknown_helper',name=>'missing_operation'}},
  {id=>'function_external_read', functions=>'fn apply(callback: codeblock) { return(callback()) }', body=>'secret="outer"; cb={|| return(secret) }; return(apply(cb))', expected=>undef},
  {id=>'function_direct_read', functions=>'fn inspect() { return(secret) }', body=>'secret="outer"; return(inspect())', expected=>undef},
@@ -94,6 +134,18 @@ sub assert_case {
   is($row->{actual_function_frame_proof}, 'four actual frames; alias control rejected',
    'fresh child checks real shared/fresh working-slot identities and rejects an alias');
  }
+ if ($route eq 'emitted' && $case->{id} eq 'bridge_rest_fresh') {
+  is($row->{actual_bridge_rest_proof}, 'two actual rest results; alias control rejected',
+   'fresh child checks real compiled rest identities and rejects an alias');
+ }
+ if ($route eq 'emitted' && $case->{id} =~ /\Abridge_(?:arity_effects|keyword_effects|ordered_deferred)\z/) {
+  is($row->{actual_bridge_effects_proof}, 'actual effects and compiled entry count agree',
+   "$case->{id} fresh child checks actual operand effects and handler entries");
+ }
+ if ($route eq 'emitted' && $case->{id} eq 'bridge_failure_restore') {
+  is($row->{actual_bridge_failure_proof}, 'actual exception and restored context agree',
+   'fresh child checks actual typed exception identity and restored function/caller state');
+ }
 }
 
 my @requests;
@@ -139,12 +191,44 @@ for my $index (0 .. $#sources) {
  if ($loaded) {
   my $input = 'x';
   my @frames;
+  my @rest_results;
+  my ($effects_binding, $handler_entries, $actual_error, $actual_context, $caller_item) = (undef, 0);
   my $check_frames = $sources[$index] =~ m{/function_unknown_persistence_reset\.pl\z};
+  my $check_rest = $sources[$index] =~ m{/bridge_rest_fresh\.pl\z};
+  my $check_effects = $sources[$index] =~ m{/bridge_(arity_effects|keyword_effects|ordered_deferred)\.pl\z} ? $1 : undef;
+  my $check_failure = $sources[$index] =~ m{/bridge_failure_restore\.pl\z};
   my $invoke = \&LinkedSpec::CodeblockRuntime::invoke;
   $row->{value} = eval {
    no strict 'refs'; no warnings 'redefine';
    local *LinkedSpec::CodeblockRuntime::invoke = sub {
     push @frames, $_[2] if $check_frames;
+    $effects_binding = $_[2]{effects} if defined($check_effects) && !$effects_binding;
+    $caller_item = $_[2]{item} if $check_failure && !$caller_item;
+    if ((defined($check_effects) || $check_failure) && ref($_[5]) eq 'HASH') {
+     my $name = $check_failure ? 'fail' : $check_effects eq 'ordered_deferred' ? 'join' : 'pair';
+     my $functions = $_[5]{registered_functions};
+     my $entry = ref($functions) eq 'HASH' ? $functions->{$name} : undef;
+     if (ref($entry) eq 'HASH' && ref($entry->{call}) eq 'CODE') {
+      my $call = $entry->{call};
+      local $entry->{call} = sub {
+       ++$handler_entries; $actual_context = $_[1];
+       my $value; my $ok = eval { $value = $call->(@_); 1 };
+       $actual_error = $@ unless $ok;
+       die $actual_error unless $ok;
+       return $value;
+      };
+      return $invoke->(@_);
+     }
+    }
+    if ($check_rest && ref($_[5]) eq 'HASH') {
+     my $functions = $_[5]{registered_functions};
+     my $entry = ref($functions) eq 'HASH' ? $functions->{collect} : undef;
+     if (ref($entry) eq 'HASH' && ref($entry->{call}) eq 'CODE') {
+      my $call = $entry->{call};
+      local $entry->{call} = sub { my $value=$call->(@_); push @rest_results,$value; return $value };
+      return $invoke->(@_);
+     }
+    }
     return $invoke->(@_)
    };
    &{"${package}::Execute"}(\$input)
@@ -156,6 +240,21 @@ for my $index (0 .. $#sources) {
    }
    while ((reftype($error) // '') eq 'HASH' && ($error->{type} // '') eq 'generated_source_error') { $error = $error->{detail} }
    $row->{error} = (reftype($error) // '') eq 'HASH' ? {class=>ref($error), %$error} : {text=>"$error"};
+  }
+  if (defined($check_effects)) {
+   my $positive = $check_effects eq 'ordered_deferred';
+   my $valid = $effects_binding
+    && JSON::PP->new->canonical->encode($$effects_binding) eq ($positive ? '["a","b"]' : '[]')
+    && $handler_entries == ($positive ? 1 : 0);
+   $row->{actual_bridge_effects_proof} = $valid ? 'actual effects and compiled entry count agree'
+    : 'actual effect/entry observation failed';
+  }
+  if ($check_failure) {
+   my $valid = ref($actual_error) && ref($error) && refaddr($actual_error) == refaddr($error)
+    && $actual_context && JSON::PP->new->canonical->encode($actual_context->{active_functions}) eq '[]'
+    && $caller_item && $$caller_item eq 'outside';
+   $row->{actual_bridge_failure_proof} = $valid ? 'actual exception and restored context agree'
+    : 'actual exception/state observation failed';
   }
   if ($check_frames) {
    my $valid = sub {
@@ -169,6 +268,18 @@ for my $index (0 .. $#sources) {
    die 'actual emitted function frame identity failure' unless $valid->(\@frames);
    die 'aliased emitted frame control accepted' if $valid->([$frames[0],$frames[0],$frames[0],$frames[0]]);
    $row->{actual_function_frame_proof} = 'four actual frames; alias control rejected';
+  }
+  if ($check_rest) {
+   my $distinct = sub {
+    my ($values)=@_;
+    return @$values == 2 && ref($values->[0]) eq 'ARRAY' && ref($values->[1]) eq 'ARRAY'
+     && refaddr($values->[0]) != refaddr($values->[1]);
+   };
+   my $valid = $distinct->(\@rest_results)
+    && !$distinct->([$rest_results[0],$rest_results[0]])
+    && JSON::PP->new->canonical->encode(\@rest_results) eq '[["a","tag"],["tag"]]';
+   $row->{actual_bridge_rest_proof} = $valid ? 'two actual rest results; alias control rejected'
+    : 'actual compiled rest identity failure';
   }
  }
  push @rows, $row;
@@ -308,6 +419,110 @@ subtest 'functions cannot borrow rule callable names' => sub {
  is($meta->{raw_perl_dependency_count}//0,0,'unbound function callable has no raw fallback');
  is($meta->{language_agnostic_action_ir_ready},0,'unbound callable is not claimed ready');
  is_deeply($meta->{unresolved_helpers},['cb'],'unbound callable uses existing unsupported helper diagnostic');
+};
+
+subtest 'registered bridge retains actual values, errors and restored state' => sub {
+ my $source='fn gather(...items) { return(items) }' .
+  ' Top:: I { cb={|| first=gather("a"); second=gather("b"); return([first,second]) }; return(cb()) }';
+ my (@results,@arguments,@contexts,@records);
+ my $invoke=\&LinkedSpec::CodeblockRuntime::invoke;
+ my ($value,%ctx);
+ {
+  no warnings 'redefine';
+  local *LinkedSpec::CodeblockRuntime::invoke = sub {
+   push @records,$_[0];
+   my $functions=$_[5]{registered_functions};
+   my $entry=ref($functions) eq 'HASH' ? $functions->{gather} : undef;
+   return $invoke->(@_) unless ref($entry) eq 'HASH' && ref($entry->{call}) eq 'CODE';
+   my $call=$entry->{call};
+   local $entry->{call}=sub {
+    push @arguments,$_[0]; push @contexts,$_[1];
+    my $result=$call->(@_); push @results,$result; return $result;
+   };
+   return $invoke->(@_);
+  };
+  my $parser=LinkedSpec::Get(\$source,runtime_ctx_ref=>\%ctx); my $input='x'; $value=$parser->(\$input);
+ }
+ is($ctx{last_error},undef,'actual compiled rest source succeeds');
+ is_deeply($value,[['a'],['b']],'source result matches independent rest oracle');
+ my $distinct=sub { @{$_[0]} == 2 && refaddr($_[0][0]) != refaddr($_[0][1]) };
+ ok($distinct->(\@results),'compiled function returns actual distinct rest arrays');
+ ok(!$distinct->([$results[0],$results[0]]),'same observation rejects deliberately aliased results');
+ ok($distinct->(\@arguments),'caller argument arrays are actual separate invocation values');
+ is_deeply([map {$_->{active_functions}} @contexts],[[],[]],'actual invocation contexts restore active functions');
+ is_deeply([map {scalar(keys %$_)} @records],[8],'actual codeblock stores no registry or origin field');
+ if (@results == 2) {
+  push @{$results[0]},'mutation';
+  is_deeply($results[1],['b'],'mutating one retained actual rest value leaves the other intact');
+  is_deeply($value,[['a'],['b']],'actual returned outer arrays are detached from retained callee values');
+ } else {
+  fail('requires two actual callee results to prove independent mutation');
+  fail('requires actual callee results to prove detached outer arrays');
+ }
+
+ for my $control (
+  ['arity','pair({ push(effects,"bad"); return("x") })','user_function_arity_mismatch',[],0],
+  ['keyword','pair({ push(effects,"bad"); return("x") },second:"y")','user_function_keyword_arguments_unsupported',[],0],
+  ['positive','pair({ push(effects,"a"); return("A") },{ push(effects,"b"); return("B") })',undef,['a','b'],1],
+ ) {
+  my ($id,$call_source,$error_code,$effects,$expected_calls)=@$control;
+  my $control_source='fn pair(first,second) { return([first,second]) } Top:: I { effects=[]; cb={|| return('.$call_source.') }; return(cb()) }';
+  my ($binding,$calls)= (undef,0); my %control_ctx;
+  {
+   no warnings 'redefine';
+   local *LinkedSpec::CodeblockRuntime::invoke=sub {
+    $binding=$_[2]{effects};
+    my $functions=$_[5]{registered_functions};
+    my $entry=ref($functions) eq 'HASH' ? $functions->{pair} : undef;
+    return $invoke->(@_) unless ref($entry) eq 'HASH' && ref($entry->{call}) eq 'CODE';
+    my $call=$entry->{call};
+    local $entry->{call}=sub {++$calls; return $call->(@_)};
+    return $invoke->(@_);
+   };
+   my $parser=LinkedSpec::Get(\$control_source,runtime_ctx_ref=>\%control_ctx);my $input='x';$parser->(\$input);
+  }
+  is_deeply($$binding,$effects,"$id checks actual caller effects rather than the serialized counter");
+  is($calls,$expected_calls,"$id observes actual compiled handler entry count");
+  is($control_ctx{last_error}{detail}{code},$error_code,"$id retains the selected typed failure");
+ }
+
+ my $failed_source='fn fail(callback: codeblock) { return(callback("temporary")) } Top:: I { item="outside"; cb={|item| missing_operation() }; outer={|| return(fail(cb)) }; return(outer()) }';
+ my ($actual_error,$actual_context,$caller_item); my %failed_ctx;
+ {
+  no warnings 'redefine';
+  local *LinkedSpec::CodeblockRuntime::invoke=sub {
+   $caller_item=$_[2]{item} unless $caller_item;
+   my $functions=$_[5]{registered_functions};
+   my $entry=ref($functions) eq 'HASH' ? $functions->{fail} : undef;
+   return $invoke->(@_) unless ref($entry) eq 'HASH' && ref($entry->{call}) eq 'CODE';
+   my $call=$entry->{call};
+   local $entry->{call}=sub {
+    $actual_context=$_[1];my $result;my $ok=eval {$result=$call->(@_);1};
+    $actual_error=$@ unless $ok;die $actual_error unless $ok;return $result;
+   };
+   return $invoke->(@_);
+  };
+  my $parser=LinkedSpec::Get(\$failed_source,runtime_ctx_ref=>\%failed_ctx);my $input='x';$parser->(\$input);
+ }
+ is(refaddr($failed_ctx{last_error}{detail}),refaddr($actual_error),'actual typed callback exception survives the compiled bridge');
+ is_deeply($actual_context ? $actual_context->{active_functions} : undef,[],
+  'failure restores the actual function recursion state');
+ is($$caller_item,'outside','failure preserves the actual unrelated caller slot');
+
+ unless (LinkedSpec::CodeblockRuntime->can('_codeblock_origin')) {
+  fail('requires opaque callable origins to prove copy/independence/lifetime');
+  return;
+ }
+ my $record=LinkedSpec::ActionIR::AST::parse_action_expr('{|| return("value") }');
+ my $copy=LinkedSpec::CodeblockRuntime::_copy_value($record);
+ my $independent=LinkedSpec::ActionIR::AST::parse_action_expr('{|| return("value") }');
+ is(refaddr(LinkedSpec::CodeblockRuntime::_codeblock_origin($record)),
+  refaddr(LinkedSpec::CodeblockRuntime::_codeblock_origin($copy)),'copied callable retains actual opaque origin');
+ isnt(refaddr(LinkedSpec::CodeblockRuntime::_codeblock_origin($record)),
+  refaddr(LinkedSpec::CodeblockRuntime::_codeblock_origin($independent)),'equal independently constructed callable has a distinct origin');
+ my $marker=LinkedSpec::CodeblockRuntime::_codeblock_origin($record);
+ my $weak_ast=$record->{body_ast};weaken($weak_ast);undef $record;undef $copy;
+ is($weak_ast,undef,'retaining opaque identity metadata does not retain the callable AST or environment');
 };
 
 done_testing;

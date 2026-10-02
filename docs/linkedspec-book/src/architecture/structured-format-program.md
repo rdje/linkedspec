@@ -238,11 +238,13 @@ without changing the detached mapped result or original. Its independent expecte
 }
 ```
 
-This normalization is selected and blocked on Perl. Deferred push now works through the bounded repair
-below; the next call, registered `decorate`, still rejects with typed `unknown_helper`. Source readiness reports
-zero raw fallback and unresolved helpers, which describes recognized source rather than complete
-callback execution coverage. Registered-function bridge `.1.3.3.0.2.1` and closeout precede its Perl execution lane. The existing
-regex/numeric callback repairs and every other partial prerequisite remain owned separately.
+This normalization is selected and remains blocked on Perl. Deferred push and registered `decorate`
+now execute in the bounded regression below. The frozen source next fails at `while(i < count(pieces))`:
+generated Perl retains that condition and the infix increments without lowering. Both native and fresh
+emitted execution report an undefined `count` function despite ready1/raw0/fallback0/unresolved0 metadata.
+The loop/source-contract prerequisite `.1.3.3.0.4` must establish the admitted arithmetic spelling and
+resolve that mismatch before dispatcher closeout and complete neutral execution. The separate valid
+`x,y` callback-literal prerequisite and existing regex/numeric callback repairs retain their owners.
 The complete requirements and mutation/oracle plan are in
 `docs/language-readiness/composed-objective-selection.md`; no new primitive or syntax is selected.
 
@@ -268,8 +270,9 @@ A private producer report preserves native failure evidence and compile/runtime 
 observations. Serialized flags cannot establish native error classification, identity or actual-object
 detachment by themselves. Backend lanes must execute public producers, mutate the actual returned objects,
 and reject deliberately aliased controls. They must pass a healthy baseline before semantic mutants count.
-The default checker executes no DSL and changes no runtime admission. P1 registered-function bridge .1.3.3.0.2.1 is next;
-the selected normalization remains blocked. `docs/language-readiness/composed-objective-governance.md`
+The default checker executes no DSL and changes no runtime admission. The bounded Perl registered-function
+bridge is implemented; its valid-literal prerequisite, reconciliation and normalization loop prerequisite
+remain before complete neutral execution. `docs/language-readiness/composed-objective-governance.md`
 records the oracle and evidence boundary. Whole formats and unassessed requirements remain pending.
 
 ### Deferred push on Perl
@@ -360,9 +363,9 @@ including 23 original push identity assertions, 17 actual function-frame/slot as
 callable-diagnostic checks. A deliberately aliased frame control fails the same identity observation.
 Plain callable records retain eight fields with no closure or stored environment. The earlier scope
 leak is corrected under `.1.3.3.0.2.0.1`; existing argument/local-name shadowing remains separately
-owned by startup32. Registered-function calls from deferred bodies still need bridge `.0.2.1`, so
-full normalization execution remains pending. Prerequisite closeout `.0.2.0.2` binds this committed
-scope repair to receipt-bound canonical acceptance before that bridge.
+owned by startup32. Scope prerequisite `.0.2.0.2` closes this repair under canonical acceptance.
+The registered-function bridge below extends the combined regression to 71 sources and 605 tests;
+full normalization execution remains pending on its separate literal and loop prerequisites.
 
 ### Determinism, progress and failure boundaries
 
@@ -1086,16 +1089,97 @@ A format is complete only when it has:
 a friendly example was accepted.
 
 
-### Remaining registered-function composition gap on Perl
+### Registered functions inside Perl deferred codeblocks
 
-Direct registered fixed/rest functions and both final contextual-block spellings execute. The same calls
-inside a deferred codeblock still fail with typed `unknown_helper` for the registered name. A bound
-codeblock with the same name can instead win that lookup, although the registered function should take
-precedence. Source readiness remains1 with zero raw/fallback/unresolved counts in these cases; those
-counts do not establish runtime dispatch coverage.
+A deferred codeblock can call a registered pure function using its existing signature. Registered
+functions take precedence over same-named callable slots. Fixed arguments evaluate once in source order;
+variadic calls receive a fresh rest array. Function callbacks use the function's fresh working frame:
 
-Twenty-four exact native/fresh emitted controls retain this boundary, including direct ordered arguments,
-unknown calls, final-kind rejection, static recursion and the separate argument/local-name shadowing
-limitation. The compiler-owned bridge is planned under `.1.3.3.0.2.1`; implementation and canonical
-reconciliation must complete before the normalization example above can be reported as executable.
-The plain eight-field callable record and fresh function-scope contract remain unchanged.
+```spec
+fn decorate(text,prefix) { return(cat(prefix,uppercase(text))) }
+Top:: I {
+  cb={|| return(decorate("ab","!")) };
+  return(cb())
+}
+```
+
+Both native and fresh emitted execution return `"!AB"`. Variadic state belongs to each function call:
+
+```spec
+fn collect(...items) { push(items,"tag"); return(items) }
+Top:: I {
+  cb={|| first=collect("a"); second=collect(); return([first,second]) };
+  return(cb())
+}
+```
+
+The result is `[["a","tag"],["tag"]]`. Explicit, bound, parenthesized and attached final codeblocks
+use the same callable contract as direct function calls. Arity and unsupported keyword arguments reject
+before operand work; a wrong final value retains `final_argument_not_codeblock`. Unknown operations and
+unsupported function bodies keep typed diagnostics. An unrelated unused unsupported definition does
+not change the calling rule's readiness.
+
+The compiler emits a private invocation table containing signatures, final-block metadata and callable
+bodies produced by the existing central function lowerer. Runtime dispatch receives already evaluated
+arguments; it neither recompiles source nor interprets a second function AST. The plain eight-field
+codeblock record carries no callable closure, environment, registry or recursion field. Active function
+state unwinds on success and failure. Callable aliases and published copies retain opaque identities
+outside the record; independently constructed equal callbacks remain distinct. Recursive mixed calls
+retain typed cycle diagnostics.
+
+The combined regression executes 71 exact native/fresh emitted sources and 605 top-level tests. Native
+checks retain actual rest/frame/slot/error identities, with deliberate alias controls. A fresh emitted
+child independently checks rest separation, actual operand effects and handler entry counts, typed
+exception identity and restored context. The existing 33 source rows remain byte-exact. All seven
+original isolated composition controls now succeed on both producers.
+
+This proves the bounded bridge, not the complete normalization pipeline. The valid `{|x,y| return(x) }`
+literal still passes AST parsing but fails compiler reconstruction; its `left,right` twin works.
+Prerequisite `.0.2.1.3` owns that repair before bridge reconciliation. The frozen pipeline's remaining
+loop/count mismatch belongs to `.0.4`. Startup32 argument/local-name shadowing, startup19/35/87 and
+other backend lanes retain their owners. Recognized-source readiness does not prove runtime coverage.
+
+### Reconstructing dated bridge probes from a fresh checkout
+
+A hash identifies an instrument but does not retain it. The registered-function bridge checkpoint
+`docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.1-verification.json` stores the exact probe
+programs as source lines with hashes, an independently checked reconstruction recipe, and ordered
+`replay_commands`. Its captured observations describe that implementation boundary. Later compiler
+changes can change a dated observation; the tracked regression remains the current behavior check.
+
+From the repository root, recover the programs and committed baseline modules on the repository volume:
+
+```sh
+bash tools/project_data_run.sh python3 - <<'PY'
+import hashlib, json, subprocess
+from pathlib import Path
+root = Path.cwd().resolve()
+record = json.loads(Path("docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.1-verification.json").read_text())
+allowed = (root / ".linkedspec-data/scratch/selfcontain1330211").resolve()
+assert allowed.is_relative_to(root)
+plan = []
+for producer in record["producer_sources"]:
+    data = "".join(producer["source_lines"]).encode()
+    assert hashlib.sha256(data).hexdigest() == producer["sha256"]
+    target = (root / producer["path"]).resolve()
+    assert target.is_relative_to(allowed)
+    plan.append((target, data))
+for source, expected in record["red"]["activation_modules"].items():
+    assert source.startswith("perl/") and ".." not in Path(source).parts
+    data = subprocess.check_output(["git", "show", record["activation_commit"] + ":" + source])
+    assert hashlib.sha256(data).hexdigest() == expected
+    target = (allowed / "baseline-perl" / source.removeprefix("perl/")).resolve()
+    assert target.is_relative_to(allowed)
+    plan.append((target, data))
+for target, data in plan:
+    target.parent.mkdir(parents=True, exist_ok=True)
+    assert target.parent.stat().st_dev == root.stat().st_dev
+    target.write_bytes(data)
+print("validated producer sources and baseline modules reconstructed")
+PY
+```
+
+The recipe validates every producer and baseline identity before writing, constrains destinations to
+the declared scratch root, and checks the filesystem device. Run the checkpoint's replay commands in
+order; its `red.command` uses the reconstructed old-module bootstrap. A deliberately corrupted producer
+hash is rejected before any file write. Keep captured source identities distinct from current results.

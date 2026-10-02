@@ -8,7 +8,7 @@ answers:
   - "which task owns Perl callback push and registered function dispatch repair"
   - "why is the composed normalization objective still blocked on Perl"
 date: 2026-10-02
-status: confirmed composition gap; P1 repair scheduled before selected Perl objective
+status: original dispatch gaps repaired; separate literal and normalization prerequisites remain
 tags: [perl, callable, codeblock, composition, dispatch, partial, language-readiness]
 evidence: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.1 public Get/descriptor controls from clean2a8c368159a6c9b927bc6cd7fc524fe0de7319a6: five direct/callback successes and two callback failures. Every descriptor is ready1/raw0/fallback0/unresolved0. CodeblockRuntime::_eval_call dispatches a narrow helper list then bound-codeblock lookup, without the selected push or registered-function routes. Repair owner SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0 precedes Perl execution .1.3.3.1."
 reverify: "Run the inline public Get probe below through bash tools/project_data_run.sh; inspect perl/LinkedSpec/CodeblockRuntime.pm _eval_call and the owning task before advancing dependent claims."
@@ -93,3 +93,12 @@ ready1/raw0/fallback0/unresolved0 and no result/events. Registered-function chil
 `.1.3.3.0.2` is next, followed by independent dispatcher closeout and neutral execution.
 The original dated diagnostic and its immutable selection checkpoint stay exact;
 startup19/32/35/87.2/.3 and other repair prerequisites remain open.
+
+October2 `.1.3.3.0.2.1.1` implements the registered bridge through central compiled function bodies.
+[[perl-deferred-function-bridge]] binds71 native/fresh emitted sources/605 tests and actual identities,
+effects/error restoration. All seven original controls now succeed. The exact frozen normalization
+source reaches an undefined count function: generated condition truthy(i < count(pieces)) and both
+infix increments remain unlowered despite ready1/raw0/fallback0/unresolved0. P1 `.0.4` owns the precise
+compiler-versus-admitted-source diagnosis and repair before dispatcher closeout. The x,y callback
+literal reconstruction prerequisite `.0.2.1.3` also remains; full pipeline/neutral execution is not claimed.
+Original dated failure evidence and frozen authorities remain exact.

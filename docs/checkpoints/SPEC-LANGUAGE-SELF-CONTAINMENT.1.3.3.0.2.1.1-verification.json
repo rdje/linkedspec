@@ -1,0 +1,2681 @@
+{
+  "activation_commit": "4a3f33a3e38d38b2ac17bf3cfe9a1dd92231096b",
+  "canonical_attempts": [
+    {
+      "attempt": 1,
+      "candidate_sha256": "1fd33c09f2f0491b309b38f39df1b90cbdd911c5902cd034415434829cb548aa",
+      "cause": "historical .0 completed LOCKSTEP line contains pending; unchanged checker rejects any checked-label occurrence across staged task file",
+      "correction": "retain the historical qualification in following paragraph; add exact Get/descriptor/dump signature to current root-cause evidence; no runtime/checker change",
+      "exit_code": 1,
+      "log": ".linkedspec-data/scratch/selfcontain1330211/canonical-initial-acceptance.log",
+      "log_sha256": "042532c482c4e695448ff729c06e72c4036762314524fda8de78e4f8aa288c61",
+      "runtime_checks_reached": false,
+      "stage": "initial doctrine suite, TASK-ACCEPTANCE"
+    },
+    {
+      "attempt": 2,
+      "candidate_sha256": "aa4a1d30ad036a30b5bbc1b12ac21b0a6e1a3fb68bac9a36e5badcbc4bf4bcb7",
+      "cause": "current replay producer source bodies were ignored and only hashes were recorded",
+      "complete_canonical_proof": false,
+      "correction": "embed exact producer sources and root-relative reconstruction recipe in tracked checkpoint before fresh canonical gate",
+      "exit_code": 143,
+      "log": ".linkedspec-data/scratch/selfcontain1330211/canonical-interrupted-durability.log",
+      "log_sha256": "5f1343113e2fe76b06e1eb50fc3d7531ff18511ee9d33e7ec9baf41cfefc48a2",
+      "stage": "typed source-location Rust admission consumer; deliberately terminated isolated managed CI group"
+    },
+    {
+      "attempt": 3,
+      "candidate_sha256": "ac7d9c4d11cc6e9e1353241d018c7fea554ce728671cc59239ee35e338db800c",
+      "cause": "development recovery addition exceeds existing per-file line ceiling2075/2048",
+      "correction": "move exact full recipe to already-owned bridge architecture chapter; retain bounded development navigation; no cap/checker/registry change",
+      "exit_code": 1,
+      "log": ".linkedspec-data/scratch/selfcontain1330211/canonical-recovery-book-pressure.log",
+      "log_sha256": "889fa7a04259b553f9386f468a3ed42d0e6e8d3e066e5b006b854c383c5d59c7",
+      "runtime_checks_reached": false,
+      "stage": "initial doctrine suite, README-STABILITY"
+    }
+  ],
+  "canonical_plan": {
+    "acceptance": "complete exact staged candidate, approved host tools/run_ci_local.sh; actual candidate/log/exit/CLI/RAM/Phase0 in commit brief/promoted receipt; no tracked post-gate edits",
+    "log": ".linkedspec-data/scratch/selfcontain1330211/canonical.log",
+    "next_action": "activate .0.2.1.4 durability/claim-policy reconciliation from clean committed implementation HEAD, then literal diagnosis .3.0"
+  },
+  "canonical_trigger": "private explicit invocation context and generated callable body emission movement",
+  "date": "2026-10-02",
+  "durability_proof": {
+    "book_copy": "exact recipe body agrees with tracked checkpoint",
+    "embedded_sources": "exact source bodies, verified hashes and runtime paths reconstruct all replay programs plus three committed baseline modules",
+    "historical_boundary": "replay from the captured implementation source boundary; later behavior changes are not silently substituted",
+    "negative": [
+      "actual recipe rejects corrupt producer hash before any observed write",
+      "actual recipe rejects destination outside owned scratch root before any observed write"
+    ],
+    "positive": "actual reconstruction completes and source bytes match"
+  },
+  "evidence_sha256": {
+    ".linkedspec-data/scratch/selfcontain1330211/baseline-emitted-state-red.log": "46d34fdb5c47c85885df4ee6823398fd8a81c44428c7f86a537e53cfe6fbf873",
+    ".linkedspec-data/scratch/selfcontain1330211/baseline-perl/LinkedSpec/ActionIR/MethodLowering.pm": "6b47b793702d3f2bf4400ed41c494adbce4a320ddad9a1be898c873a60f501e2",
+    ".linkedspec-data/scratch/selfcontain1330211/baseline-perl/LinkedSpec/BindingRuntime.pm": "cb07c2b646e284259b021e206c9349b698b668a1929b5b3afd79c0af1ca09076",
+    ".linkedspec-data/scratch/selfcontain1330211/baseline-perl/LinkedSpec/BridgeBaseline.pm": "40e3da56ef5e3b72e771d811b1f9762c8cfbe75f3e773d81c4bd3819a7daaf03",
+    ".linkedspec-data/scratch/selfcontain1330211/baseline-perl/LinkedSpec/CodeblockRuntime.pm": "1b70bc46f250916d7b3048c915d137925e8f03d1a03dfef6b4d8793a634c0e0c",
+    ".linkedspec-data/scratch/selfcontain1330211/book-bridge-0.pl": "636fb3b93c6b9ff104c94b0c5903b2402b4ae311ab82c39184a4a8e5bbca05c4",
+    ".linkedspec-data/scratch/selfcontain1330211/book-bridge-1.pl": "409704030347bee920f398294a6bb746737784100b2ea2d52ebd934682ec1e93",
+    ".linkedspec-data/scratch/selfcontain1330211/book-child.log": "9fd84e60d1cbfa0345027d1224ca75410e065480995abf7ade89bea4b402e173",
+    ".linkedspec-data/scratch/selfcontain1330211/book-child.pl": "6112bcdf16f287f67df2de4eb438c22fa5506a6f6bc0bfcf58e1d47f95071608",
+    ".linkedspec-data/scratch/selfcontain1330211/book-proof.log": "8b6f199c08e60b396dfb6246a121a45528b664557a03a37161bed70b13b3ad66",
+    ".linkedspec-data/scratch/selfcontain1330211/book-proof.pl": "6d9dd325e1f7466f7703af81189071cdc563d035c8c7c735955f19516e6387fa",
+    ".linkedspec-data/scratch/selfcontain1330211/book.log": "2f51f5064b1050b399191b051c37fe588bedb93630f80a2c11aa3328e6a2d53d",
+    ".linkedspec-data/scratch/selfcontain1330211/controls/child.log": "79283d758e5e83b2317ad2775bf53325918ed232a757ee1c0de01e27fe639c6d",
+    ".linkedspec-data/scratch/selfcontain1330211/controls/child.pl": "42947b5548a4a04d3838303ed691194fcdbdae62eaabf3fff13ffe64d172d8de",
+    ".linkedspec-data/scratch/selfcontain1330211/controls/observations-final.json": "01d8033ddbd0987175afea37609eaf03d3b21289c3f678c401a1313faa363514",
+    ".linkedspec-data/scratch/selfcontain1330211/controls/probe.log": "f3ad4e2feaed8ddbb6563afd249a053d96041922f01c55709b7ef96375d977ac",
+    ".linkedspec-data/scratch/selfcontain1330211/controls/probe.pl": "68c25b00c0749e13c1b44134bb2ac0e97aee68f5d09cdea66fe7f506e21bd3d3",
+    ".linkedspec-data/scratch/selfcontain1330211/dependents.log": "0f05f65cee53c3aab149450bdcbe31ceb6df210244e592b2c19c99bf7dad0c6c",
+    ".linkedspec-data/scratch/selfcontain1330211/green-emitted-state.log": "ac16919737c5774de657b06575d2b857fa7b7c699350dbb2c17564eac9a21875",
+    ".linkedspec-data/scratch/selfcontain1330211/literal-fresh.json": "33b7d8ce8a033f5cbbc814fd46b6068ae52eba283d737b0b57e22e66d9c56f1a",
+    ".linkedspec-data/scratch/selfcontain1330211/literal-fresh.log": "4a1f332b07a3940304895f16b90d5d72d5f30e99029f71ed05b93d5893d06ac3",
+    ".linkedspec-data/scratch/selfcontain1330211/literal-fresh.pl": "2c245bba69ac7cc76193f27012d049e1dcc90915290cbbbb958e4fd943a3c7a1",
+    ".linkedspec-data/scratch/selfcontain1330211/literal-prereq.json": "41ca41e75cc76638a1cfc1edbcda0049fb8915c037074f2e10e6aaeaa73bd63d",
+    ".linkedspec-data/scratch/selfcontain1330211/literal-prereq.log": "3681ba620f3af7d70cbb3b5449e5602e5d1342957d153925aad382438accfb86",
+    ".linkedspec-data/scratch/selfcontain1330211/literal-prereq.pl": "9ea799e77c75bdad629de1c6c9c15ef961781b56908fe18c198aa6e8dffe68b5",
+    ".linkedspec-data/scratch/selfcontain1330211/native-observations.json": "52fb5abd0610be02a4be919675f9938660c41aaa4c78e2714c3f2018818c1834",
+    ".linkedspec-data/scratch/selfcontain1330211/neutral-final.log": "ee0512718fc36c54e926b653892d841801b940ce8a41610ab2e1c912a03b41b8",
+    ".linkedspec-data/scratch/selfcontain1330211/neutral.log": "ee0512718fc36c54e926b653892d841801b940ce8a41610ab2e1c912a03b41b8",
+    ".linkedspec-data/scratch/selfcontain1330211/objective-audit.log": "a39c97854b2ab3e88e6bb65195f39df607e44e9d8b4e9df063b0d942d4438c19",
+    ".linkedspec-data/scratch/selfcontain1330211/observation-child.pl": "8da62fc44b0953f83e5f7f9e4f3a10cc4348fe1eecb0276cfdd965664b49dae8",
+    ".linkedspec-data/scratch/selfcontain1330211/observations-final.json": "a21490c3471be101a1f2c2fcb7cfd884713cf16f99e042ea0ccf9e52a9c9412c",
+    ".linkedspec-data/scratch/selfcontain1330211/observe-child-final.log": "d079a23c6bc082c04e6b25051a7049f503f909385673946c2c6ec0da563f7672",
+    ".linkedspec-data/scratch/selfcontain1330211/observe-final.log": "d2b08fecf6962e56cae63d8360387cf3632f6d411689d167130774b190e4d2af",
+    ".linkedspec-data/scratch/selfcontain1330211/observe.pl": "3973bad417c4c4bc3d9c5c0f2971558691eb88009cc3b158a56f3882c7401784",
+    ".linkedspec-data/scratch/selfcontain1330211/reconstruct-proof.log": "bcdf13c158fe12a3a88d415c2649f54658c2eb8046da822a0625c54361d9e8c0",
+    ".linkedspec-data/scratch/selfcontain1330211/reconstruct-proof.py": "cd4a58ae7a277055a7856430174ec9122fd1d2517a97fc5abe56c4d779369707",
+    ".linkedspec-data/scratch/selfcontain1330211/reconstruct.log": "d0a2a6a6d61a2e00cc354d8407f656a213de67b7f25089952717dba7f942e0e9",
+    ".linkedspec-data/scratch/selfcontain1330211/reconstruct.py": "81a7751d4cce3ee72ca0de081c4f75b15e67887746696d0109eaae0c044b9542",
+    ".linkedspec-data/scratch/selfcontain1330211/review.py": "7e23def19462d3aadb90b2ea3a9d60622b67a054930d9cb405f3f84a9e9f76f0"
+  },
+  "focused_completion": {
+    "book": "two verbatim examples native plus fresh child; rendered HTML current claims checked",
+    "governance": "neutral16/3/8 with140/16/44 falsifiers unchanged; memory/history/diff PASS; all doctrines required again in canonical/pre-commit",
+    "syntax": "MethodLowering, CodeblockRuntime, BindingRuntime, facade, regression and Phase0 syntax PASS"
+  },
+  "format": "linkedspec-owned-implementation-verification-v1",
+  "implementation": {
+    "central_owner": "MethodLowering::_codeblock_runtime_invocation_expr and central _lower_method_value_expr/user-function closure",
+    "copy_identity": "weak opaque AST origins, preserved through CodeblockRuntime/BindingRuntime clones; shallow compiled copy shares AST; independent evaluated literals are fresh",
+    "private_names": "all function parameter/rest/local names and caller bare names excluded",
+    "record_fields": 8,
+    "runtime_dispatch": "signature/common final-block contract and compiled handler, no second function interpreter",
+    "static_order": "local declarations before argument temporaries unchanged; startup32 remains"
+  },
+  "limits": [
+    "No full pipeline success: frozen normalization reaches unlowered count/infix loop, P1 .0.4 owns source-contract diagnosis/repair.",
+    "Valid x,y AST literal reconstruction still fails native/fresh generated compilation; left,right twin succeeds; P1 .0.2.1.3 owns repair before bridge reconciliation.",
+    "No neutral16 complete execution, semantic mutants, other-backend parity or public/generated-format-v2 admission.",
+    "Startup19/32/35/87 and unrelated repair prerequisites remain separate."
+  ],
+  "literal_boundary": [
+    {
+      "ast": {
+        "body_ast": {
+          "kind": "action_block",
+          "source": " return(x) ",
+          "source_span": {
+            "end": 17,
+            "start": 6
+          },
+          "statements": [
+            {
+              "drops_value": 1,
+              "expr": {
+                "args": [
+                  {
+                    "kind": "variable",
+                    "name": "x",
+                    "source": "x",
+                    "source_span": {
+                      "end": 15,
+                      "start": 14
+                    }
+                  }
+                ],
+                "kind": "call",
+                "name": "return",
+                "source": "return(x)",
+                "source_method": "return",
+                "source_span": {
+                  "end": 16,
+                  "start": 7
+                }
+              },
+              "kind": "action_stmt",
+              "source": "return(x)",
+              "source_span": {
+                "end": 16,
+                "start": 7
+              }
+            }
+          ]
+        },
+        "body_source": " return(x) ",
+        "body_span": {
+          "end": 17,
+          "start": 6
+        },
+        "kind": "codeblock_literal",
+        "signature": {
+          "kind": "callable_signature",
+          "max_arity": 2,
+          "min_arity": 2,
+          "positional_params": [
+            "x",
+            "y"
+          ],
+          "rest_param": null,
+          "version": 1
+        },
+        "source_span": {
+          "end": 18,
+          "start": 0
+        },
+        "source_text": "{|x,y| return(x) }",
+        "version": 1
+      },
+      "dump_sha256": "215c522aa2a79284a7b05fb05afaf67a5bc65ff08befd3240b1b0f56b744fb20",
+      "emitted_sha256": "191b41c0d0d185fc1c1f2912b6ca59df5fef56c27a7a367c1d878fb97564ddd1",
+      "fresh_emitted": {
+        "error": null,
+        "id": "xy",
+        "load_error": "syntax error at (eval 44) line 50, near \"{|\"\nsyntax error at (eval 44) line 81, near \"}\n\nsub ExecuteWithTrace \"\nCan't use global @_ in \"my\" at (eval 44) line 82, near \"= @_\"\nsyntax error at (eval 44) line 86, near \")\n}\"\nMissing right curly or square bracket at (eval 44) line 90, at end of line\n",
+        "value": null
+      },
+      "id": "xy",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": "Transliteration pattern not terminated at LinkedSpec::generated_handler:Top:<none> line 23.\n",
+        "value": null
+      },
+      "source": "Top:: I { finishBlock={|x,y| return(x) }; return(finishBlock(\"ok\",\"unused\")) }",
+      "source_sha256": "b5efe01b03407e801a79075a7afd7cead6a245b6758f2d813835fd00bf031d6b"
+    },
+    {
+      "ast": {
+        "body_ast": {
+          "kind": "action_block",
+          "source": " return(left) ",
+          "source_span": {
+            "end": 27,
+            "start": 13
+          },
+          "statements": [
+            {
+              "drops_value": 1,
+              "expr": {
+                "args": [
+                  {
+                    "kind": "variable",
+                    "name": "left",
+                    "source": "left",
+                    "source_span": {
+                      "end": 25,
+                      "start": 21
+                    }
+                  }
+                ],
+                "kind": "call",
+                "name": "return",
+                "source": "return(left)",
+                "source_method": "return",
+                "source_span": {
+                  "end": 26,
+                  "start": 14
+                }
+              },
+              "kind": "action_stmt",
+              "source": "return(left)",
+              "source_span": {
+                "end": 26,
+                "start": 14
+              }
+            }
+          ]
+        },
+        "body_source": " return(left) ",
+        "body_span": {
+          "end": 27,
+          "start": 13
+        },
+        "kind": "codeblock_literal",
+        "signature": {
+          "kind": "callable_signature",
+          "max_arity": 2,
+          "min_arity": 2,
+          "positional_params": [
+            "left",
+            "right"
+          ],
+          "rest_param": null,
+          "version": 1
+        },
+        "source_span": {
+          "end": 28,
+          "start": 0
+        },
+        "source_text": "{|left,right| return(left) }",
+        "version": 1
+      },
+      "dump_sha256": "2050e97c078f6e66f755003d517c43e5288c083d147e95f7921dceb5bc76f052",
+      "emitted_sha256": "a596ee3dd127f6006e9789b3925fa73b422b163391844f5e0045af38364469cd",
+      "fresh_emitted": {
+        "error": null,
+        "id": "left-right",
+        "load_error": null,
+        "value": "ok"
+      },
+      "id": "left-right",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "value": "ok"
+      },
+      "source": "Top:: I { finishBlock={|left,right| return(left) }; return(finishBlock(\"ok\",\"unused\")) }",
+      "source_sha256": "23c62c55d498b65109f715f269144326d1e3210750e6f89555aa9290d01935dd"
+    }
+  ],
+  "normalization_boundary": {
+    "emitted": {
+      "carrier": {
+        "code": "generated_execution_failed",
+        "source_identity": "original_normalization.spec",
+        "stage": "execute_generated"
+      },
+      "error": "Undefined subroutine &BridgeObservation::Case71::count called at (eval 118) line 107.\n",
+      "output": "",
+      "value": null
+    },
+    "emitted_sha256": "4bf4c6ff60aab8f6ccd0977c5052e9df18bd2cfb324c8faa2ce472885d0dc59e",
+    "id": "original_normalization",
+    "input": "ab-cd",
+    "metadata": {
+      "canonical_action_ir_fallback_count": 0,
+      "language_agnostic_action_ir_ready": 1,
+      "raw_perl_dependency_count": 0,
+      "unresolved_helper_count": 0
+    },
+    "native": {
+      "error": "Undefined subroutine &LinkedSpec::SpecEntry::count called at LinkedSpec::generated_handler:Top:_default line 80.\n",
+      "output": "[2026-10-02 14:31:42][NONE][SpecEntry.pm][trace_decision:63] DECISION rule_handler_eval:Top => SKIPPED\n[2026-10-02 14:31:42][NONE][SpecEntry.pm][trace_decision:63]   Context: Undefined subroutine &LinkedSpec::SpecEntry::count called at LinkedSpec::generated_handler:Top:_default line 80.\n[2026-10-02 14:31:42][NONE][SpecEntry.pm][trace_decision:63]   Context: \n",
+      "value": null
+    },
+    "source": "fn decorate(text, prefix) { return(cat(prefix, uppercase(text))) }\n\nTop::\n -> Word {\n   if(num_ne(match_start_pos(), 0)) { exit_now(1) }\n   if(num_ne(match_end_pos(), input_end_pos())) { exit_now(1) }\n   pieces = split(match_text(), \"-\")\n   original = { \"a\": pieces[0], \"b\": { \"c\": pieces[1] } }\n   tree = copy(original)\n   seen = []\n   prefix = \"old:\"\n   text = \"outside\"\n   transform = {|text| push(seen, text); return(decorate(text, prefix)) }\n   prefix = \"new:\"\n   result = tree.map_leaves!() { return(transform(value)) }\n   i = 0\n   visited = 0\n   while(i < count(pieces)) { visited = visited + 1; i = i + 1 }\n   tree[\"meta\"][\"count\"] = visited\n   print_each(seen, \"leaf:\", \"!\")\n   say(\"done:\", visited)\n   return({ \"tree\": copy(tree), \"mapped\": result, \"original\": original,\n            \"seen\": seen, \"text\": text, \"visits\": visited })\n }\nLX { exit_now(1) }\n\nWord:\n /([A-Za-z]+-[A-Za-z]+)/\n",
+    "source_sha256": "ba9953c282e5e66956dc4b7d22c2acc7b1e879734654e7cb467ad41275cc4249"
+  },
+  "observer_corrections": [
+    "Initial .0 scratch replay overwrote dated generated artifacts; exact old-module replay restores all24 source/emitted hashes to committed .0 checkpoint. Own implementation output root now used.",
+    "Naive old-module include/preload selected current dependency modules because facade BEGIN prepends INC, so its passing run is excluded from RED. Correct explicit canonical INC bootstrap completes with88 failures.",
+    "Failure raw stdout includes native framework traces; only50 stdout pairs from rows without runtime errors are compared. Plain normalization namespace/line errors remain raw instead of being falsely asserted byte-equal."
+  ],
+  "original_controls": [
+    {
+      "emitted": {
+        "carrier": null,
+        "error": null,
+        "output": "",
+        "value": [
+          "x"
+        ]
+      },
+      "emitted_sha256": "08ae4d5e7ef2c7a32adaebc793277b08c22704a58939467ecacc344e2953ecbf",
+      "id": "direct_push",
+      "input": "x",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "output": "",
+        "value": [
+          "x"
+        ]
+      },
+      "source": "Top:: I { seen=[]; push(seen,\"x\"); return(seen) }",
+      "source_sha256": "7b36f4540db66efbe708d55dbb639c174ad9642e9b70e07482b9f9d88f18632d"
+    },
+    {
+      "emitted": {
+        "carrier": null,
+        "error": null,
+        "output": "",
+        "value": [
+          "x"
+        ]
+      },
+      "emitted_sha256": "cdac2c8cc9db7739184f40206c7e805694591f823bc99eefb5b4dbb9938ddd47",
+      "id": "callback_push",
+      "input": "x",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "output": "",
+        "value": [
+          "x"
+        ]
+      },
+      "source": "Top:: I { seen=[]; cb={|| push(seen,\"x\"); return(seen) }; return(cb()) }",
+      "source_sha256": "d58a6b50eaa608cbb487205b6d7bb2ffd2913ae01dbd3466f68041c5a79a02fa"
+    },
+    {
+      "emitted": {
+        "carrier": null,
+        "error": null,
+        "output": "",
+        "value": "!x"
+      },
+      "emitted_sha256": "2d0b705c0c01e78fed1250360562f3b9a77d8e95172ee5692f2b08de79886363",
+      "id": "direct_function",
+      "input": "x",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "output": "",
+        "value": "!x"
+      },
+      "source": "fn decorate(text,prefix) { return(cat(prefix,text)) }\nTop:: I { return(decorate(\"x\",\"!\")) }",
+      "source_sha256": "35a9db3b9065a65b7a655f56fd230223a46428e0c77d1e623e1cc1057e4b2d85"
+    },
+    {
+      "emitted": {
+        "carrier": null,
+        "error": null,
+        "output": "",
+        "value": "!x"
+      },
+      "emitted_sha256": "a594b41c25497da6f1f916a86f1bb1bc4eb1037ecd3a9595989fb174790a8ac1",
+      "id": "callback_function",
+      "input": "x",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "output": "",
+        "value": "!x"
+      },
+      "source": "fn decorate(text,prefix) { return(cat(prefix,text)) }\nTop:: I { cb={|| return(decorate(\"x\",\"!\")) }; return(cb()) }",
+      "source_sha256": "f9510048a44950a6a810d2e107a05a5e42c0aee2f3c0e19935c31cc60b02aef9"
+    },
+    {
+      "emitted": {
+        "carrier": null,
+        "error": null,
+        "output": "",
+        "value": [
+          "!x",
+          "before:x"
+        ]
+      },
+      "emitted_sha256": "41846588604d22c77c3d32bd3f1f57d8dd4c7c6e2a23d84140e61a9bfaa09d9a",
+      "id": "callback_cat_assignment",
+      "input": "x",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "output": "",
+        "value": [
+          "!x",
+          "before:x"
+        ]
+      },
+      "source": "Top:: I { seen=\"before:\"; cb={|x| seen=cat(seen,x); return(cat(\"!\",x)) }; result=cb(\"x\"); return([result,seen]) }",
+      "source_sha256": "34fe5ca1c95c543a68977e5149705a4eb371676a49b98dee83208156302aeff9"
+    },
+    {
+      "emitted": {
+        "carrier": null,
+        "error": null,
+        "output": "",
+        "value": "AB"
+      },
+      "emitted_sha256": "2ce7e2a960c448a56539336000aa1e6f6877f0887a9496e4444924385b982889",
+      "id": "direct_uppercase",
+      "input": "x",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "output": "",
+        "value": "AB"
+      },
+      "source": "Top:: I { return(uppercase(\"ab\")) }",
+      "source_sha256": "3cd5ccb7fefcb82d2a398a00a86b0738dfaa48389b01def2557ed6f44d67f864"
+    },
+    {
+      "emitted": {
+        "carrier": null,
+        "error": null,
+        "output": "",
+        "value": "!AB"
+      },
+      "emitted_sha256": "f33f0262271e651c7010a0e2638f48cf4ce205c9447e357562c53970372a64b1",
+      "id": "function_uppercase",
+      "input": "x",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "output": "",
+        "value": "!AB"
+      },
+      "source": "fn decorate(text,prefix) { return(cat(prefix,uppercase(text))) }\nTop:: I { return(decorate(\"ab\",\"!\")) }",
+      "source_sha256": "bf0a1c437e6c0c10a592aa288cf8ce3df85adf5643a43f52a6f4619e3c3c4667"
+    }
+  ],
+  "owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.1",
+  "producer_sources": [
+    {
+      "path": ".linkedspec-data/scratch/selfcontain1330211/observe.pl",
+      "sha256": "3973bad417c4c4bc3d9c5c0f2971558691eb88009cc3b158a56f3882c7401784",
+      "source_lines": [
+        "use strict; use warnings; use LinkedSpec (); use JSON::PP (); use Scalar::Util qw(blessed reftype);\n",
+        "use Digest::SHA qw(sha256_hex);\n",
+        "my $out='.linkedspec-data/scratch/selfcontain1330211';\n",
+        "sub project {\n",
+        " my ($v)=@_;return [map {project($_)} @$v] if (reftype($v)//'') eq 'ARRAY';\n",
+        " return {map(($_=>project($v->{$_})),keys %$v),blessed($v)?(observed_class=>blessed($v)):()}\n",
+        "  if (reftype($v)//'') eq 'HASH';return $v;\n",
+        "}\n",
+        "open my $tf,'<','t/codeblock_push_composition_perl.t' or die $!;my $test=do {local $/;<$tf>};close $tf;\n",
+        "my ($case_text)=$test=~/my \\@cases = \\(\\n(.*?)\\n\\);\\n\\nsub assert_case/s;\n",
+        "die 'case source missing' unless defined $case_text;my $cases=eval '['.$case_text.']';die $@ unless ref($cases) eq 'ARRAY';\n",
+        "my @sources=map {[$_->{id},($_->{functions}?$_->{functions}.\"\\n\":'').'Top:: I { '.$_->{body}.\" }\\n\".($_->{rules}//'').\"\\n\",'x']} @$cases;\n",
+        "open my $nf,'<','tests/language-readiness/composed/normalization.spec' or die $!;my $normalization=do {local $/;<$nf>};close $nf;\n",
+        "push @sources,['original_normalization',$normalization,'ab-cd'];\n",
+        "my @rows;\n",
+        "for my $case (@sources) {\n",
+        " my ($id,$source,$input)=@$case;\n",
+        " my $descriptor=LinkedSpec::Get(\\$source,return_descriptor=>1);my %ctx;\n",
+        " my $parser=LinkedSpec::Get(\\$source,runtime_ctx_ref=>\\%ctx);my ($value,$events);\n",
+        " {open my $capture,'>',\\$events or die $!;local *STDOUT=$capture;$value=$parser->(\\$input)}\n",
+        " my $last=$ctx{last_error};my $error=ref($last) eq 'HASH'?$last->{detail}:$last;\n",
+        " my $emitted=LinkedSpec::emit_generated_source(\\$source,source_identity=>\"$id.spec\");\n",
+        " for my $file (['spec',$source],['pl',$emitted]) {open my $fh,'>',\"$out/$id.$file->[0]\" or die $!;print {$fh} $file->[1];close $fh or die $!}\n",
+        " my $meta=$descriptor->{spec}{Top}{meta}{action_rewriter};\n",
+        " push @rows,{id=>$id,source=>$source,input=>$input,source_sha256=>sha256_hex($source),emitted_sha256=>sha256_hex($emitted),\n",
+        "  metadata=>{map {($_=>$meta->{$_}//0)} qw(language_agnostic_action_ir_ready canonical_action_ir_fallback_count raw_perl_dependency_count unresolved_helper_count)},\n",
+        "  native=>{value=>project($value),error=>project($error),output=>$events//''}};\n",
+        "}\n",
+        "open my $fh,'>',\"$out/native-observations.json\" or die $!;print {$fh} JSON::PP->new->canonical->pretty->encode(\\@rows);close $fh;\n",
+        "print scalar(@rows),\" native observations/artifacts written\\n\";\n"
+      ]
+    },
+    {
+      "path": ".linkedspec-data/scratch/selfcontain1330211/observation-child.pl",
+      "sha256": "8da62fc44b0953f83e5f7f9e4f3a10cc4348fe1eecb0276cfdd965664b49dae8",
+      "source_lines": [
+        "use strict;use warnings;use JSON::PP ();use Scalar::Util qw(blessed reftype);\n",
+        "my $out='.linkedspec-data/scratch/selfcontain1330211';\n",
+        "sub project {my ($v)=@_;return [map {project($_)} @$v] if (reftype($v)//'') eq 'ARRAY';return {map(($_=>project($v->{$_})),keys %$v),blessed($v)?(observed_class=>blessed($v)):()} if (reftype($v)//'') eq 'HASH';return $v}\n",
+        "open my $nf,'<',\"$out/native-observations.json\" or die $!;my $rows=JSON::PP->new->decode(do {local $/;<$nf>});close $nf;\n",
+        "for my $index (0..$#$rows) {\n",
+        " my $row=$rows->[$index];open my $fh,'<',\"$out/$row->{id}.pl\" or die $!;my $source=do {local $/;<$fh>};close $fh;\n",
+        " my $package=\"BridgeObservation::Case$index\";my $loaded=eval \"package $package; $source\\n1;\";die $@ unless $loaded;\n",
+        " my ($value,$output);my $input=$row->{input};my $ok;\n",
+        " {open my $capture,'>',\\$output or die $!;local *STDOUT=$capture;$ok=eval {no strict 'refs';$value=&{\"${package}::Execute\"}(\\$input);1}}\n",
+        " my $error=$ok?undef:$@;my $carrier;\n",
+        " if ((reftype($error)//'') eq 'HASH' && ($error->{type}//'') eq 'generated_source_error') {$carrier={map {($_=>$error->{$_})} qw(code stage source_identity)};$error=$error->{detail}}\n",
+        " $row->{emitted}={value=>project($value),error=>project($error),output=>$output//'',carrier=>$carrier};\n",
+        "}\n",
+        "open my $fh,'>',\"$out/observations-final.json\" or die $!;print {$fh} JSON::PP->new->canonical->pretty->encode($rows);close $fh;\n",
+        "print scalar(@$rows),\" fresh emitted observations written\\n\";\n"
+      ]
+    },
+    {
+      "path": ".linkedspec-data/scratch/selfcontain1330211/controls/probe.pl",
+      "sha256": "68c25b00c0749e13c1b44134bb2ac0e97aee68f5d09cdea66fe7f506e21bd3d3",
+      "source_lines": [
+        "use strict; use warnings; use LinkedSpec (); use JSON::PP (); use Scalar::Util qw(blessed reftype);\n",
+        "use Digest::SHA qw(sha256_hex);\n",
+        "my $out='.linkedspec-data/scratch/selfcontain1330211/controls';\n",
+        "sub project {\n",
+        " my ($v)=@_;return [map {project($_)} @$v] if (reftype($v)//'') eq 'ARRAY';\n",
+        " return {map(($_=>project($v->{$_})),keys %$v),blessed($v)?(observed_class=>blessed($v)):()}\n",
+        "  if (reftype($v)//'') eq 'HASH';return $v;\n",
+        "}\n",
+        "my @sources=@{JSON::PP->new->decode(<<'CONTROLS')};\n",
+        "[[\"direct_push\", \"Top:: I { seen=[]; push(seen,\\\"x\\\"); return(seen) }\", \"x\"], [\"callback_push\", \"Top:: I { seen=[]; cb={|| push(seen,\\\"x\\\"); return(seen) }; return(cb()) }\", \"x\"], [\"direct_function\", \"fn decorate(text,prefix) { return(cat(prefix,text)) }\\nTop:: I { return(decorate(\\\"x\\\",\\\"!\\\")) }\", \"x\"], [\"callback_function\", \"fn decorate(text,prefix) { return(cat(prefix,text)) }\\nTop:: I { cb={|| return(decorate(\\\"x\\\",\\\"!\\\")) }; return(cb()) }\", \"x\"], [\"callback_cat_assignment\", \"Top:: I { seen=\\\"before:\\\"; cb={|x| seen=cat(seen,x); return(cat(\\\"!\\\",x)) }; result=cb(\\\"x\\\"); return([result,seen]) }\", \"x\"], [\"direct_uppercase\", \"Top:: I { return(uppercase(\\\"ab\\\")) }\", \"x\"], [\"function_uppercase\", \"fn decorate(text,prefix) { return(cat(prefix,uppercase(text))) }\\nTop:: I { return(decorate(\\\"ab\\\",\\\"!\\\")) }\", \"x\"]]\n",
+        "CONTROLS\n",
+        "my @rows;\n",
+        "for my $case (@sources) {\n",
+        " my ($id,$source,$input)=@$case;\n",
+        " my $descriptor=LinkedSpec::Get(\\$source,return_descriptor=>1);my %ctx;\n",
+        " my $parser=LinkedSpec::Get(\\$source,runtime_ctx_ref=>\\%ctx);my ($value,$events);\n",
+        " {open my $capture,'>',\\$events or die $!;local *STDOUT=$capture;$value=$parser->(\\$input)}\n",
+        " my $last=$ctx{last_error};my $error=ref($last) eq 'HASH'?$last->{detail}:$last;\n",
+        " my $emitted=LinkedSpec::emit_generated_source(\\$source,source_identity=>\"$id.spec\");\n",
+        " for my $file (['spec',$source],['pl',$emitted]) {open my $fh,'>',\"$out/$id.$file->[0]\" or die $!;print {$fh} $file->[1];close $fh or die $!}\n",
+        " my $meta=$descriptor->{spec}{Top}{meta}{action_rewriter};\n",
+        " push @rows,{id=>$id,source=>$source,input=>$input,source_sha256=>sha256_hex($source),emitted_sha256=>sha256_hex($emitted),\n",
+        "  metadata=>{map {($_=>$meta->{$_}//0)} qw(language_agnostic_action_ir_ready canonical_action_ir_fallback_count raw_perl_dependency_count unresolved_helper_count)},\n",
+        "  native=>{value=>project($value),error=>project($error),output=>$events//''}};\n",
+        "}\n",
+        "open my $fh,'>',\"$out/native-observations.json\" or die $!;print {$fh} JSON::PP->new->canonical->pretty->encode(\\@rows);close $fh;\n",
+        "print scalar(@rows),\" native observations/artifacts written\\n\";\n"
+      ]
+    },
+    {
+      "path": ".linkedspec-data/scratch/selfcontain1330211/controls/child.pl",
+      "sha256": "42947b5548a4a04d3838303ed691194fcdbdae62eaabf3fff13ffe64d172d8de",
+      "source_lines": [
+        "use strict;use warnings;use JSON::PP ();use Scalar::Util qw(blessed reftype);\n",
+        "my $out='.linkedspec-data/scratch/selfcontain1330211/controls';\n",
+        "sub project {my ($v)=@_;return [map {project($_)} @$v] if (reftype($v)//'') eq 'ARRAY';return {map(($_=>project($v->{$_})),keys %$v),blessed($v)?(observed_class=>blessed($v)):()} if (reftype($v)//'') eq 'HASH';return $v}\n",
+        "open my $nf,'<',\"$out/native-observations.json\" or die $!;my $rows=JSON::PP->new->decode(do {local $/;<$nf>});close $nf;\n",
+        "for my $index (0..$#$rows) {\n",
+        " my $row=$rows->[$index];open my $fh,'<',\"$out/$row->{id}.pl\" or die $!;my $source=do {local $/;<$fh>};close $fh;\n",
+        " my $package=\"BridgeObservation::Case$index\";my $loaded=eval \"package $package; $source\\n1;\";die $@ unless $loaded;\n",
+        " my ($value,$output);my $input=$row->{input};my $ok;\n",
+        " {open my $capture,'>',\\$output or die $!;local *STDOUT=$capture;$ok=eval {no strict 'refs';$value=&{\"${package}::Execute\"}(\\$input);1}}\n",
+        " my $error=$ok?undef:$@;my $carrier;\n",
+        " if ((reftype($error)//'') eq 'HASH' && ($error->{type}//'') eq 'generated_source_error') {$carrier={map {($_=>$error->{$_})} qw(code stage source_identity)};$error=$error->{detail}}\n",
+        " $row->{emitted}={value=>project($value),error=>project($error),output=>$output//'',carrier=>$carrier};\n",
+        "}\n",
+        "open my $fh,'>',\"$out/observations-final.json\" or die $!;print {$fh} JSON::PP->new->canonical->pretty->encode($rows);close $fh;\n",
+        "print scalar(@$rows),\" fresh emitted observations written\\n\";\n"
+      ]
+    },
+    {
+      "path": ".linkedspec-data/scratch/selfcontain1330211/literal-prereq.pl",
+      "sha256": "9ea799e77c75bdad629de1c6c9c15ef961781b56908fe18c198aa6e8dffe68b5",
+      "source_lines": [
+        "use strict; use warnings; use LinkedSpec (); use LinkedSpec::ActionIR::AST (); use JSON::PP ();\n",
+        "use Scalar::Util qw(reftype blessed); use Digest::SHA qw(sha256_hex);\n",
+        "my @rows; my $out='.linkedspec-data/scratch/selfcontain1330211';\n",
+        "for my $pair (['xy','{|x,y| return(x) }'],['left-right','{|left,right| return(left) }']) {\n",
+        " my ($id,$literal)=@$pair; my $source='Top:: I { finishBlock='.$literal.'; return(finishBlock(\"ok\",\"unused\")) }';\n",
+        " my $ast=LinkedSpec::ActionIR::AST::parse_action_expr($literal);\n",
+        " my $descriptor=LinkedSpec::Get(\\$source,return_descriptor=>1);\n",
+        " my ($dump,%ctx);my $parser=LinkedSpec::Get(\\$source,runtime_ctx_ref=>\\%ctx,dump_parser_source=>1,parser_source_ref=>\\$dump);\n",
+        " my $input='x';my $value=$parser->(\\$input);my $last=$ctx{last_error};\n",
+        " my $error=ref($last) eq 'HASH' ? $last->{detail} : $last;\n",
+        " my $emitted=LinkedSpec::emit_generated_source(\\$source,source_identity=>\"literal-$id.spec\");\n",
+        " my $package='LiteralPrerequisite::'.($id eq 'xy'?'XY':'Other');\n",
+        " my $loaded=eval \"package $package; $emitted\\n1;\";my $load_error=$loaded?undef:\"$@\";\n",
+        " my ($emitted_value,$emitted_error);\n",
+        " if ($loaded) {my $ok=eval {no strict 'refs';$emitted_value=&{\"${package}::Execute\"}(\\$input);1};$emitted_error=$@ unless $ok}\n",
+        " for my $file (['spec',$source],['dump.pl',$dump// ''],['pl',$emitted]) {\n",
+        "  open my $fh,'>',\"$out/literal-$id.$file->[0]\" or die $!;print {$fh} $file->[1];close $fh or die $!;\n",
+        " }\n",
+        " push @rows,{id=>$id,source=>$source,source_sha256=>sha256_hex($source),ast=>$ast,\n",
+        "  metadata=>$descriptor->{spec}{Top}{meta}{action_rewriter},native=>{value=>$value,error=>$error},\n",
+        "  emitted=>{load_error=>$load_error,value=>$emitted_value,error=>ref($emitted_error)?{class=>ref($emitted_error),%$emitted_error}:$emitted_error},\n",
+        "  emitted_sha256=>sha256_hex($emitted),dump_sha256=>sha256_hex($dump// '')};\n",
+        "}\n",
+        "open my $fh,'>',\"$out/literal-prereq.json\" or die $!;print {$fh} JSON::PP->new->canonical->pretty->encode(\\@rows);close $fh or die $!;\n",
+        "print \"two literal source/AST/native/emitted controls captured\\n\";\n"
+      ]
+    },
+    {
+      "path": ".linkedspec-data/scratch/selfcontain1330211/literal-fresh.pl",
+      "sha256": "2c245bba69ac7cc76193f27012d049e1dcc90915290cbbbb958e4fd943a3c7a1",
+      "source_lines": [
+        "use strict;use warnings;use JSON::PP ();my @rows;\n",
+        "for my $id (qw(xy left-right)) {\n",
+        " open my $f,'<',\".linkedspec-data/scratch/selfcontain1330211/literal-$id.pl\" or die $!;\n",
+        " my $source=do {local $/;<$f>};close $f;\n",
+        " my $package=$id eq 'xy'?'LiteralFresh::XY':'LiteralFresh::Other';\n",
+        " my $ok=eval \"package $package; $source\\n1;\";my $load=$ok?undef:\"$@\";my($value,$error);\n",
+        " if($ok){my $input='x';my $ran=eval {no strict 'refs';$value=&{\"${package}::Execute\"}(\\$input);1};$error=\"$@\" unless $ran}\n",
+        " push @rows,{id=>$id,load_error=>$load,value=>$value,error=>$error};\n",
+        "}\n",
+        "open my $o,'>','.linkedspec-data/scratch/selfcontain1330211/literal-fresh.json' or die $!;print {$o} JSON::PP->new->canonical->pretty->encode(\\@rows);close $o;\n"
+      ]
+    },
+    {
+      "path": ".linkedspec-data/scratch/selfcontain1330211/book-proof.pl",
+      "sha256": "6d9dd325e1f7466f7703af81189071cdc563d035c8c7c735955f19516e6387fa",
+      "source_lines": [
+        "use strict;use warnings;use LinkedSpec ();use JSON::PP ();\n",
+        "open my $f,'<','docs/linkedspec-book/src/architecture/structured-format-program.md' or die $!;my $book=do {local $/;<$f>};close $f;\n",
+        "my ($section)=$book=~/### Registered functions inside Perl deferred codeblocks\\n(.*)/s;die 'section missing' unless defined $section;\n",
+        "my @sources=$section=~/```spec\\n(.*?)\\n```/sg;die 'expected two source examples' unless @sources==2;\n",
+        "my @expected=('!AB',[[qw(a tag)],[qw(tag)]]);my $out='.linkedspec-data/scratch/selfcontain1330211';my $json=JSON::PP->new->canonical->allow_nonref;\n",
+        "for my $idx (0..$#sources) {\n",
+        " my %ctx;my $p=LinkedSpec::Get(\\$sources[$idx],runtime_ctx_ref=>\\%ctx);my $input='x';my $value=$p->(\\$input);\n",
+        " die 'native example mismatch' unless !$ctx{last_error} && $json->encode($value) eq $json->encode($expected[$idx]);\n",
+        " my $emitted=LinkedSpec::emit_generated_source(\\$sources[$idx],source_identity=>\"book-bridge-$idx.spec\");open my $o,'>',\"$out/book-bridge-$idx.pl\" or die $!;print {$o} $emitted;close $o;\n",
+        "}\n",
+        "print \"two verbatim book examples match native independent oracles\\n\";\n"
+      ]
+    },
+    {
+      "path": ".linkedspec-data/scratch/selfcontain1330211/book-child.pl",
+      "sha256": "6112bcdf16f287f67df2de4eb438c22fa5506a6f6bc0bfcf58e1d47f95071608",
+      "source_lines": [
+        "use strict;use warnings;use JSON::PP ();my @expected=('!AB',[[qw(a tag)],[qw(tag)]]);my $json=JSON::PP->new->canonical->allow_nonref;\n",
+        "for my $idx (0..1){open my $f,'<',\".linkedspec-data/scratch/selfcontain1330211/book-bridge-$idx.pl\" or die $!;my $source=do {local $/;<$f>};close $f;my $pkg=\"BookBridge::Case$idx\";eval \"package $pkg; $source\\n1;\" or die $@;my $input='x';no strict 'refs';my $value=&{\"${pkg}::Execute\"}(\\$input);die 'emitted example mismatch' unless $json->encode($value) eq $json->encode($expected[$idx])}\n",
+        "print \"two verbatim book artifacts match fresh emitted independent oracles\\n\";\n"
+      ]
+    },
+    {
+      "path": ".linkedspec-data/scratch/selfcontain1330211/baseline-perl/LinkedSpec/BridgeBaseline.pm",
+      "sha256": "40e3da56ef5e3b72e771d811b1f9762c8cfbe75f3e773d81c4bd3819a7daaf03",
+      "source_lines": [
+        "package LinkedSpec::BridgeBaseline;\n",
+        "use strict; use warnings;\n",
+        "BEGIN {\n",
+        " require File::Basename; require File::Spec;\n",
+        " my $base=File::Spec->rel2abs(File::Basename::dirname(File::Basename::dirname(__FILE__)));\n",
+        " my @modules=qw(LinkedSpec/BindingRuntime.pm LinkedSpec/ActionIR/MethodLowering.pm LinkedSpec/CodeblockRuntime.pm);\n",
+        " # Dependency BEGIN blocks prepend their own source root. Bind every selected\n",
+        " # module's canonical key before loading absolute, committed copies.\n",
+        " $INC{$_}=File::Spec->catfile($base,split('/',$_)) for @modules;\n",
+        " for my $module (@modules) { require $INC{$module} }\n",
+        " die 'baseline loaded current origin provider' if LinkedSpec::CodeblockRuntime->can('_codeblock_origin');\n",
+        " for my $module (@modules) { die \"baseline module mismatch: $module\" unless index($INC{$module},$base)==0 }\n",
+        "}\n",
+        "1;\n"
+      ]
+    },
+    {
+      "path": ".linkedspec-data/scratch/selfcontain1330211/review.py",
+      "sha256": "7e23def19462d3aadb90b2ea3a9d60622b67a054930d9cb405f3f84a9e9f76f0",
+      "source_lines": [
+        "from pathlib import Path\n",
+        "import hashlib,json,re,subprocess\n",
+        "root=Path('.linkedspec-data/scratch/selfcontain1330211')\n",
+        "base='4a3f33a3e38d38b2ac17bf3cfe9a1dd92231096b'\n",
+        "owner='SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.1'\n",
+        "def digest(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()\n",
+        "def old(p):return subprocess.check_output(['git','show',base+':'+p])\n",
+        "modules=['perl/LinkedSpec/ActionIR/MethodLowering.pm','perl/LinkedSpec/CodeblockRuntime.pm','perl/LinkedSpec/BindingRuntime.pm']\n",
+        "for p in modules:assert (root/'baseline-perl'/p.removeprefix('perl/')).read_bytes()==old(p),p\n",
+        "pattern=r'my @cases = \\(\\n(.*?)\\n\\);\\n\\nsub assert_case'\n",
+        "original=re.search(pattern,old('t/codeblock_push_composition_perl.t').decode(),re.S)[1]\n",
+        "current=re.search(pattern,Path('t/codeblock_push_composition_perl.t').read_text(),re.S)[1]\n",
+        "filtered=re.sub(r\"^ \\{id=>'bridge_failure_restore'.*\\n\",'',current,flags=re.M)\n",
+        "assert original in filtered,'original33 rows changed'\n",
+        "rows=json.loads((root/'observations-final.json').read_text());assert len(rows)==72\n",
+        "for row in rows[:-1]:\n",
+        " for k in ['value','error']:assert row['native'].get(k)==row['emitted'].get(k),(row['id'],k)\n",
+        " assert digest(root/(row['id']+'.spec'))==row['source_sha256']\n",
+        " assert digest(root/(row['id']+'.pl'))==row['emitted_sha256']\n",
+        " if not row['native'].get('error'):assert row['native']['output']==row['emitted']['output'],row['id']\n",
+        "controls=json.loads((root/'controls/observations-final.json').read_text());assert len(controls)==7\n",
+        "prior=json.loads(Path('docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.1-verification.json').read_text())['original_callable_controls']\n",
+        "for row,original_row in zip(controls,prior):\n",
+        " assert row['id']==original_row['id'] and row['source']==original_row['source']\n",
+        " assert row['native']['value']==row['emitted']['value']\n",
+        " assert row['native']['error'] is None and row['emitted']['error'] is None\n",
+        " assert row['native']['output']==row['emitted']['output']\n",
+        "contract=json.loads(Path('docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.0-contract.json').read_text())\n",
+        "for row in contract['observations']:\n",
+        " out=Path('.linkedspec-data/scratch/selfcontain1330210')\n",
+        " assert digest(out/(row['id']+'.spec'))==row['source_sha256']\n",
+        " assert digest(out/(row['id']+'.pl'))==row['emitted_sha256']\n",
+        "assert 'Tests=605' in (root/'green-emitted-state.log').read_text()\n",
+        "assert '# Looks like you failed 88 tests of 605.' in (root/'baseline-emitted-state-red.log').read_text()\n",
+        "assert 'Files=6, Tests=123' in (root/'dependents.log').read_text()\n",
+        "unchanged=['perl/LinkedSpec/CallableContract.pm','perl/LinkedSpec/RuleIR/EmitContext.pm','capability_conformance/callable_codeblock_contract.json','capability_conformance/callable_signature_contract.json','capability_conformance/composed_objective_contract.json','tests/language-readiness/composed/normalization.spec','tests/language-readiness/composed/diagnostic.spec','tests/language-readiness/composed/diagnostic-invalid-arity.spec','docs/language-readiness/composed-objective-selection.md','docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.1-selection.json','docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.2-verification.json','tools/run_ci_local.sh','PROJECT_DATA_POLICY.md']\n",
+        "unchanged=[p for p in unchanged if Path(p).exists()]\n",
+        "for p in unchanged:assert Path(p).read_bytes()==old(p),p\n",
+        "literal=json.loads((root/'literal-prereq.json').read_text());fresh=json.loads((root/'literal-fresh.json').read_text())\n",
+        "for row,fr in zip(literal,fresh):\n",
+        " assert row['ast']['kind']=='codeblock_literal'\n",
+        " assert len(row['ast']['signature']['positional_params'])==2\n",
+        " assert digest(root/('literal-'+row['id']+'.pl'))==row['emitted_sha256']\n",
+        " assert digest(root/('literal-'+row['id']+'.dump.pl'))==row['dump_sha256']\n",
+        " assert fr['value']==row['emitted']['value']\n",
+        " assert bool(fr['load_error'])==bool(row['emitted']['load_error'])\n",
+        "normalization=rows[-1];assert normalization['id']=='original_normalization'\n",
+        "assert 'Undefined subroutine' in normalization['native']['error'] and '::count' in normalization['native']['error']\n",
+        "assert 'Undefined subroutine' in normalization['emitted']['error'] and '::count' in normalization['emitted']['error']\n",
+        "artifacts=['observe.pl','observation-child.pl','native-observations.json','observations-final.json','observe-final.log','observe-child-final.log','green-emitted-state.log','baseline-emitted-state-red.log','dependents.log','baseline-perl/LinkedSpec/BridgeBaseline.pm','literal-prereq.pl','literal-prereq.json','literal-prereq.log','literal-fresh.pl','literal-fresh.json','literal-fresh.log','controls/probe.pl','controls/child.pl','controls/observations-final.json','controls/probe.log','controls/child.log','neutral.log','objective-audit.log']\n",
+        "artifacts += ['reconstruct.py','reconstruct-proof.py','reconstruct.log','reconstruct-proof.log','review.py','book.log','book-proof.pl','book-child.pl','book-proof.log','book-child.log','book-bridge-0.pl','book-bridge-1.pl','neutral-final.log']\n",
+        "artifacts += [str(p.relative_to(root)) for p in (root/'baseline-perl').rglob('*.pm') if p.name!='BridgeBaseline.pm']\n",
+        "payload={\n",
+        " 'format':'linkedspec-owned-implementation-verification-v1','owner':owner,'activation_commit':base,'date':'2026-10-02',\n",
+        " 'verification_tier':'canonical','canonical_trigger':'private explicit invocation context and generated callable body emission movement',\n",
+        " 'implementation':{'central_owner':'MethodLowering::_codeblock_runtime_invocation_expr and central _lower_method_value_expr/user-function closure','runtime_dispatch':'signature/common final-block contract and compiled handler, no second function interpreter','copy_identity':'weak opaque AST origins, preserved through CodeblockRuntime/BindingRuntime clones; shallow compiled copy shares AST; independent evaluated literals are fresh','record_fields':8,'static_order':'local declarations before argument temporaries unchanged; startup32 remains','private_names':'all function parameter/rest/local names and caller bare names excluded'},\n",
+        " 'proof':{'source_count':71,'tests':605,'original_source_rows':33,'original_rows_sha256':hashlib.sha256(original.encode()).hexdigest(),'original_rows_byte_exact':True,'native_actual_bridge_assertions':24,'retained_nested_push_assertions':23,'retained_nested_scope_assertions':17,'retained_unbound_diagnostic_checks':4,'fresh_emitted_actual_controls':['four retained function maps and deliberate alias','distinct actual compiled rest results and deliberate alias','actual operand effects and handler entry counts for arity/keyword/ordered positive','actual exception refaddr and restored active-functions/caller slot'],'value_error_pairs':71,'stdout_pairs_without_runtime_errors':50,'direct_dependent_suites':6,'direct_dependent_tests':123,'all_seven_original_controls_succeed':True},\n",
+        " 'red':{'activation_modules':{p:digest(root/'baseline-perl'/p.removeprefix('perl/')) for p in modules},'tests_completed':605,'failures':88,'exit_code':88,'command':\"bash tools/project_data_run.sh env PERL5OPT='-I.linkedspec-data/scratch/selfcontain1330211/baseline-perl -MLinkedSpec::BridgeBaseline' perl -Iperl t/codeblock_push_composition_perl.t\",'identity_assertion':'bootstrap prebinds all three canonical INC keys before absolute requires, rejects current origin provider and asserts all paths; PERL5OPT applies in emitted child'},\n",
+        " 'observer_corrections':['Initial .0 scratch replay overwrote dated generated artifacts; exact old-module replay restores all24 source/emitted hashes to committed .0 checkpoint. Own implementation output root now used.','Naive old-module include/preload selected current dependency modules because facade BEGIN prepends INC, so its passing run is excluded from RED. Correct explicit canonical INC bootstrap completes with88 failures.','Failure raw stdout includes native framework traces; only50 stdout pairs from rows without runtime errors are compared. Plain normalization namespace/line errors remain raw instead of being falsely asserted byte-equal.'],\n",
+        " 'source_inputs_sha256':{p:digest(p) for p in modules+['t/codeblock_push_composition_perl.t','docs/linkedspec-book/src/architecture/structured-format-program.md','docs/linkedspec-book/src/development/local-ci-and-regression.md']+unchanged},\n",
+        " 'unchanged_from_activation':unchanged,\n",
+        " 'evidence_sha256':{str(root/p):digest(root/p) for p in artifacts},\n",
+        " 'regression_observations':[{'id':r['id'],'source_sha256':r['source_sha256'],'emitted_sha256':r['emitted_sha256'],'metadata':r['metadata'],'native':r['native'],'emitted_carrier':r['emitted']['carrier'],'emitted_value_error_matches_native':True} for r in rows[:-1]],\n",
+        " 'original_controls':controls,\n",
+        " 'normalization_boundary':normalization,\n",
+        " 'literal_boundary':[{'id':r['id'],'source':r['source'],'source_sha256':r['source_sha256'],'ast':r['ast'],'metadata':{k:r['metadata'].get(k,0) for k in ['language_agnostic_action_ir_ready','raw_perl_dependency_count','canonical_action_ir_fallback_count','unresolved_helper_count']},'native':r['native'],'fresh_emitted':fr,'dump_sha256':r['dump_sha256'],'emitted_sha256':r['emitted_sha256']} for r,fr in zip(literal,fresh)],\n",
+        " 'limits':['No full pipeline success: frozen normalization reaches unlowered count/infix loop, P1 .0.4 owns source-contract diagnosis/repair.','Valid x,y AST literal reconstruction still fails native/fresh generated compilation; left,right twin succeeds; P1 .0.2.1.3 owns repair before bridge reconciliation.','No neutral16 complete execution, semantic mutants, other-backend parity or public/generated-format-v2 admission.','Startup19/32/35/87 and unrelated repair prerequisites remain separate.'],\n",
+        " 'reconstruction_source_lines':['import hashlib, json, subprocess\\n', 'from pathlib import Path\\n', 'root = Path.cwd().resolve()\\n', 'record = json.loads(Path(\"docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.1-verification.json\").read_text())\\n', 'allowed = (root / \".linkedspec-data/scratch/selfcontain1330211\").resolve()\\n', 'assert allowed.is_relative_to(root)\\n', 'plan = []\\n', 'for producer in record[\"producer_sources\"]:\\n', '    data = \"\".join(producer[\"source_lines\"]).encode()\\n', '    assert hashlib.sha256(data).hexdigest() == producer[\"sha256\"]\\n', '    target = (root / producer[\"path\"]).resolve()\\n', '    assert target.is_relative_to(allowed)\\n', '    plan.append((target, data))\\n', 'for source, expected in record[\"red\"][\"activation_modules\"].items():\\n', '    assert source.startswith(\"perl/\") and \"..\" not in Path(source).parts\\n', '    data = subprocess.check_output([\"git\", \"show\", record[\"activation_commit\"] + \":\" + source])\\n', '    assert hashlib.sha256(data).hexdigest() == expected\\n', '    target = (allowed / \"baseline-perl\" / source.removeprefix(\"perl/\")).resolve()\\n', '    assert target.is_relative_to(allowed)\\n', '    plan.append((target, data))\\n', 'for target, data in plan:\\n', '    target.parent.mkdir(parents=True, exist_ok=True)\\n', '    assert target.parent.stat().st_dev == root.stat().st_dev\\n', '    target.write_bytes(data)\\n', 'print(\"validated producer sources and baseline modules reconstructed\")\\n'],\n",
+        " 'replay_commands':['bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/codeblock_push_composition_perl.t','bash tools/project_data_run.sh perl -Iperl .linkedspec-data/scratch/selfcontain1330211/observe.pl','bash tools/project_data_run.sh perl -Iperl .linkedspec-data/scratch/selfcontain1330211/observation-child.pl','bash tools/project_data_run.sh perl -Iperl .linkedspec-data/scratch/selfcontain1330211/controls/probe.pl','bash tools/project_data_run.sh perl -Iperl .linkedspec-data/scratch/selfcontain1330211/controls/child.pl','bash tools/project_data_run.sh perl -Iperl .linkedspec-data/scratch/selfcontain1330211/literal-prereq.pl','bash tools/project_data_run.sh perl -Iperl .linkedspec-data/scratch/selfcontain1330211/literal-fresh.pl','bash tools/project_data_run.sh perl -Iperl .linkedspec-data/scratch/selfcontain1330211/book-proof.pl','bash tools/project_data_run.sh perl -Iperl .linkedspec-data/scratch/selfcontain1330211/book-child.pl'],\n",
+        " 'producer_sources':[{'path':str(root/p),'sha256':digest(root/p),'source_lines':(root/p).read_text().splitlines(keepends=True)} for p in ['observe.pl','observation-child.pl','controls/probe.pl','controls/child.pl','literal-prereq.pl','literal-fresh.pl','book-proof.pl','book-child.pl','baseline-perl/LinkedSpec/BridgeBaseline.pm','review.py','reconstruct-proof.py']],\n",
+        " 'durability_proof':{'embedded_sources':'exact source bodies, verified hashes and runtime paths reconstruct all replay programs plus three committed baseline modules','positive':'actual reconstruction completes and source bytes match','negative':['actual recipe rejects corrupt producer hash before any observed write','actual recipe rejects destination outside owned scratch root before any observed write'],'book_copy':'exact recipe body agrees with tracked checkpoint','historical_boundary':'replay from the captured implementation source boundary; later behavior changes are not silently substituted'},\n",
+        " 'focused_completion':{'book':'two verbatim examples native plus fresh child; rendered HTML current claims checked','syntax':'MethodLowering, CodeblockRuntime, BindingRuntime, facade, regression and Phase0 syntax PASS','governance':'neutral16/3/8 with140/16/44 falsifiers unchanged; memory/history/diff PASS; all doctrines required again in canonical/pre-commit'},\n",
+        " 'canonical_attempts':[{'attempt': 1, 'exit_code': 1, 'stage': 'initial doctrine suite, TASK-ACCEPTANCE', 'runtime_checks_reached': False, 'cause': 'historical .0 completed LOCKSTEP line contains pending; unchanged checker rejects any checked-label occurrence across staged task file', 'correction': 'retain the historical qualification in following paragraph; add exact Get/descriptor/dump signature to current root-cause evidence; no runtime/checker change', 'candidate_sha256': '1fd33c09f2f0491b309b38f39df1b90cbdd911c5902cd034415434829cb548aa', 'log': '.linkedspec-data/scratch/selfcontain1330211/canonical-initial-acceptance.log', 'log_sha256': '042532c482c4e695448ff729c06e72c4036762314524fda8de78e4f8aa288c61'}],\n",
+        " 'additional_canonical_attempts':[{'attempt': 2, 'exit_code': 143, 'stage': 'typed source-location Rust admission consumer; deliberately terminated isolated managed CI group', 'complete_canonical_proof': False, 'cause': 'current replay producer source bodies were ignored and only hashes were recorded', 'correction': 'embed exact producer sources and root-relative reconstruction recipe in tracked checkpoint before fresh canonical gate', 'candidate_sha256': 'aa4a1d30ad036a30b5bbc1b12ac21b0a6e1a3fb68bac9a36e5badcbc4bf4bcb7', 'log': '.linkedspec-data/scratch/selfcontain1330211/canonical-interrupted-durability.log', 'log_sha256': '5f1343113e2fe76b06e1eb50fc3d7531ff18511ee9d33e7ec9baf41cfefc48a2'}],\n",
+        " 'documentation_canonical_attempts':[{'attempt': 3, 'exit_code': 1, 'stage': 'initial doctrine suite, README-STABILITY', 'runtime_checks_reached': False, 'cause': 'development recovery addition exceeds existing per-file line ceiling2075/2048', 'correction': 'move exact full recipe to already-owned bridge architecture chapter; retain bounded development navigation; no cap/checker/registry change', 'candidate_sha256': 'ac7d9c4d11cc6e9e1353241d018c7fea554ce728671cc59239ee35e338db800c', 'log': '.linkedspec-data/scratch/selfcontain1330211/canonical-recovery-book-pressure.log', 'log_sha256': '889fa7a04259b553f9386f468a3ed42d0e6e8d3e066e5b006b854c383c5d59c7'}],\n",
+        " 'canonical_plan':{'log':str(root/'canonical.log'),'acceptance':'complete exact staged candidate, approved host tools/run_ci_local.sh; actual candidate/log/exit/CLI/RAM/Phase0 in commit brief/promoted receipt; no tracked post-gate edits','next_action':'activate .0.2.1.4 durability/claim-policy reconciliation from clean committed implementation HEAD, then literal diagnosis .3.0'}\n",
+        "}\n",
+        "payload['canonical_attempts'] += payload.pop('additional_canonical_attempts') + payload.pop('documentation_canonical_attempts')\n",
+        "Path('docs/checkpoints/'+owner+'-verification.json').write_text(json.dumps(payload,indent=2,sort_keys=True,ensure_ascii=False)+'\\n')\n",
+        "print('71 exact pairs/50 stdout; seven original successes;33 row bytes and24 recovered dated pairs exact;13 unchanged inputs;605 GREEN/88 RED/123 dependents verified')\n"
+      ]
+    },
+    {
+      "path": ".linkedspec-data/scratch/selfcontain1330211/reconstruct-proof.py",
+      "sha256": "cd4a58ae7a277055a7856430174ec9122fd1d2517a97fc5abe56c4d779369707",
+      "source_lines": [
+        "from pathlib import Path\n",
+        "import copy,hashlib,json,shlex\n",
+        "root=Path('.linkedspec-data/scratch/selfcontain1330211')\n",
+        "record_path='docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.1-verification.json'\n",
+        "record=json.loads(Path(record_path).read_text());code=''.join(record['reconstruction_source_lines'])\n",
+        "assert code==(root/'reconstruct.py').read_text()\n",
+        "book=Path('docs/linkedspec-book/src/architecture/structured-format-program.md').read_text()\n",
+        "assert code in book,'book reconstruction recipe drift'\n",
+        "archived={p['path'] for p in record['producer_sources']}\n",
+        "assert len(archived)==len(record['producer_sources'])\n",
+        "for command in record['replay_commands']:\n",
+        " program=shlex.split(command)[-1]\n",
+        " if program.startswith(str(root)+'/'):assert program in archived,program\n",
+        "for program in ['baseline-perl/LinkedSpec/BridgeBaseline.pm','review.py','reconstruct-proof.py']:assert str(root/program) in archived\n",
+        "for row in record['producer_sources']:\n",
+        " data=''.join(row['source_lines']).encode()\n",
+        " assert hashlib.sha256(data).hexdigest()==row['sha256']\n",
+        " assert data==Path(row['path']).read_bytes()\n",
+        "# Exercise the actual reconstruction body with changed inputs. Observe real\n",
+        "# write calls; both guards must reject before any write can occur.\n",
+        "for label,edit in [('bad-hash',lambda r:r['producer_sources'][0].update(sha256='0'*64)),('escaping-path',lambda r:r['producer_sources'][0].update(path='.linkedspec-data/scratch/outside-bridge.pl'))]:\n",
+        " altered=copy.deepcopy(record);edit(altered);path=root/(label+'.json');path.write_text(json.dumps(altered))\n",
+        " probe=code.replace(record_path,str(path));writes=[];original=Path.write_bytes\n",
+        " def observed_write(self,data):\n",
+        "  writes.append(str(self));return original(self,data)\n",
+        " Path.write_bytes=observed_write\n",
+        " try:\n",
+        "  try:exec(compile(probe,'tracked-checkpoint-reconstruction','exec'),{})\n",
+        "  except AssertionError:pass\n",
+        "  else:raise RuntimeError(label+' control accepted')\n",
+        " finally:Path.write_bytes=original\n",
+        " assert writes==[],(label,writes)\n",
+        " print(label+' rejected by actual recipe before any write')\n",
+        "print(str(len(archived))+' exact embedded producers; every replay program retained; book/recipe identity and both fail-closed controls PASS')\n"
+      ]
+    }
+  ],
+  "proof": {
+    "all_seven_original_controls_succeed": true,
+    "direct_dependent_suites": 6,
+    "direct_dependent_tests": 123,
+    "fresh_emitted_actual_controls": [
+      "four retained function maps and deliberate alias",
+      "distinct actual compiled rest results and deliberate alias",
+      "actual operand effects and handler entry counts for arity/keyword/ordered positive",
+      "actual exception refaddr and restored active-functions/caller slot"
+    ],
+    "native_actual_bridge_assertions": 24,
+    "original_rows_byte_exact": true,
+    "original_rows_sha256": "679fe537d83acd1b1b04ecc2b1d90e0b1e3a7383fa0d266d379378316e23d4e0",
+    "original_source_rows": 33,
+    "retained_nested_push_assertions": 23,
+    "retained_nested_scope_assertions": 17,
+    "retained_unbound_diagnostic_checks": 4,
+    "source_count": 71,
+    "stdout_pairs_without_runtime_errors": 50,
+    "tests": 605,
+    "value_error_pairs": 71
+  },
+  "reconstruction_source_lines": [
+    "import hashlib, json, subprocess\n",
+    "from pathlib import Path\n",
+    "root = Path.cwd().resolve()\n",
+    "record = json.loads(Path(\"docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.1-verification.json\").read_text())\n",
+    "allowed = (root / \".linkedspec-data/scratch/selfcontain1330211\").resolve()\n",
+    "assert allowed.is_relative_to(root)\n",
+    "plan = []\n",
+    "for producer in record[\"producer_sources\"]:\n",
+    "    data = \"\".join(producer[\"source_lines\"]).encode()\n",
+    "    assert hashlib.sha256(data).hexdigest() == producer[\"sha256\"]\n",
+    "    target = (root / producer[\"path\"]).resolve()\n",
+    "    assert target.is_relative_to(allowed)\n",
+    "    plan.append((target, data))\n",
+    "for source, expected in record[\"red\"][\"activation_modules\"].items():\n",
+    "    assert source.startswith(\"perl/\") and \"..\" not in Path(source).parts\n",
+    "    data = subprocess.check_output([\"git\", \"show\", record[\"activation_commit\"] + \":\" + source])\n",
+    "    assert hashlib.sha256(data).hexdigest() == expected\n",
+    "    target = (allowed / \"baseline-perl\" / source.removeprefix(\"perl/\")).resolve()\n",
+    "    assert target.is_relative_to(allowed)\n",
+    "    plan.append((target, data))\n",
+    "for target, data in plan:\n",
+    "    target.parent.mkdir(parents=True, exist_ok=True)\n",
+    "    assert target.parent.stat().st_dev == root.stat().st_dev\n",
+    "    target.write_bytes(data)\n",
+    "print(\"validated producer sources and baseline modules reconstructed\")\n"
+  ],
+  "red": {
+    "activation_modules": {
+      "perl/LinkedSpec/ActionIR/MethodLowering.pm": "6b47b793702d3f2bf4400ed41c494adbce4a320ddad9a1be898c873a60f501e2",
+      "perl/LinkedSpec/BindingRuntime.pm": "cb07c2b646e284259b021e206c9349b698b668a1929b5b3afd79c0af1ca09076",
+      "perl/LinkedSpec/CodeblockRuntime.pm": "1b70bc46f250916d7b3048c915d137925e8f03d1a03dfef6b4d8793a634c0e0c"
+    },
+    "command": "bash tools/project_data_run.sh env PERL5OPT='-I.linkedspec-data/scratch/selfcontain1330211/baseline-perl -MLinkedSpec::BridgeBaseline' perl -Iperl t/codeblock_push_composition_perl.t",
+    "exit_code": 88,
+    "failures": 88,
+    "identity_assertion": "bootstrap prebinds all three canonical INC keys before absolute requires, rejects current origin provider and asserts all paths; PERL5OPT applies in emitted child",
+    "tests_completed": 605
+  },
+  "regression_observations": [
+    {
+      "emitted_carrier": null,
+      "emitted_sha256": "bd869331a28f7b77a43c70e0222bcd94128e014f2b2bba086c7ab7ee139734c0",
+      "emitted_value_error_matches_native": true,
+      "id": "bridge_fixed_direct",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "output": "",
+        "value": "!AB"
+      },
+      "source_sha256": "c4ba6604846c10c8f171372da2dba77d42543c78f0e67bde54c9630c72cc050a"
+    },
+    {
+      "emitted_carrier": null,
+      "emitted_sha256": "81a4f29383cd2ffc438ebb9105aba98ba3277d500bd18cceeb841fa16c737bc3",
+      "emitted_value_error_matches_native": true,
+      "id": "bridge_fixed_deferred",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "output": "",
+        "value": "!AB"
+      },
+      "source_sha256": "ae4215ce430353a7f02ffe489c86fc3a191626a0a3ca1a61e837061bf979a0c1"
+    },
+    {
+      "emitted_carrier": null,
+      "emitted_sha256": "9a32b3327bfb2b9447cec83f7ed8cd2a4adf1d6cc338d13c881ea2b2c9e1992d",
+      "emitted_value_error_matches_native": true,
+      "id": "bridge_rest_direct",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "output": "",
+        "value": [
+          "a",
+          [
+            "b",
+            "c"
+          ]
+        ]
+      },
+      "source_sha256": "cb03db8819f7fd0b129a51fe93f0b363f472d5ecbdb27c662db756a008758ca5"
+    },
+    {
+      "emitted_carrier": null,
+      "emitted_sha256": "3e3d715f9327f7a4313f7acb166a7dac59753077f4d32f3bcf90f94705d48851",
+      "emitted_value_error_matches_native": true,
+      "id": "bridge_rest_deferred",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "output": "",
+        "value": [
+          "a",
+          [
+            "b",
+            "c"
+          ]
+        ]
+      },
+      "source_sha256": "8064d5d398163660858e84b8ca21721f9596fd6c9eb085bc08a91611a5184246"
+    },
+    {
+      "emitted_carrier": null,
+      "emitted_sha256": "c4aaa49eee2917326b81fe48705c17dc060cfa7151c6c585e6d78964acfb6efe",
+      "emitted_value_error_matches_native": true,
+      "id": "bridge_rest_empty_deferred",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "output": "",
+        "value": [
+          "a",
+          []
+        ]
+      },
+      "source_sha256": "d1920c4ab7918c8b5374f56665ae4abf7c6ae2da53c93424e6e1762f498ff03c"
+    },
+    {
+      "emitted_carrier": null,
+      "emitted_sha256": "22628ba416e351282ecbbd63f536a5306d39d0fb3ee1eed7aa8c05304d165862",
+      "emitted_value_error_matches_native": true,
+      "id": "bridge_attached_direct",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "output": "",
+        "value": "inner"
+      },
+      "source_sha256": "2b2bb3857f2816774ec0e7a46339db72fb32669eb92f63b7ff3dbe650cdf644f"
+    },
+    {
+      "emitted_carrier": null,
+      "emitted_sha256": "0da8e5ab8f312791abcad8216922e4dee33d1f25e09a5cc2b0e73fe4b15a1db7",
+      "emitted_value_error_matches_native": true,
+      "id": "bridge_attached_deferred",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "output": "",
+        "value": "inner"
+      },
+      "source_sha256": "d98f8193b26cb5c7fb14c11ddfc20b627854784332fffe02fbd5f5f343252c0c"
+    },
+    {
+      "emitted_carrier": null,
+      "emitted_sha256": "abfd975a6ebef7546a95a565c2ad4ffff5cd77e9f50e05e4016baab68ac01df2",
+      "emitted_value_error_matches_native": true,
+      "id": "bridge_parenthesized_direct",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "output": "",
+        "value": "inner"
+      },
+      "source_sha256": "01391cec71288e90eda5cac97440013d8afb269f3de854b7db7568c1dba9c968"
+    },
+    {
+      "emitted_carrier": null,
+      "emitted_sha256": "bc70bc229aea9cf9b24e26f939a75f8999a41e1343b7ee3b95979335cfede381",
+      "emitted_value_error_matches_native": true,
+      "id": "bridge_parenthesized_deferred",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "output": "",
+        "value": "inner"
+      },
+      "source_sha256": "8ddeeb07f0833b18dead4464167ec0ad298ac3bd0dc91f2a688659fb0c86713d"
+    },
+    {
+      "emitted_carrier": null,
+      "emitted_sha256": "46bec75560351f8624c83bbdb42d6bdb108e2dc9416714b2d56775e470ec1ff3",
+      "emitted_value_error_matches_native": true,
+      "id": "bridge_bound_deferred",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "output": "",
+        "value": "inner"
+      },
+      "source_sha256": "24005a756b63e6017fc2acec9f22bdbd058157f47303826b6d31dfad8974548e"
+    },
+    {
+      "emitted_carrier": null,
+      "emitted_sha256": "0bfb5cf986b76ff52c51bdbc66d74543869cbc266bad8286ff31f5adf983fecc",
+      "emitted_value_error_matches_native": true,
+      "id": "bridge_ordered_direct",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "output": "",
+        "value": [
+          "AB",
+          [
+            "a",
+            "b"
+          ]
+        ]
+      },
+      "source_sha256": "244458d29e1d2a43cd43b9c677119ecf4ddd1743df27ca1505d95b54c2b2f3f0"
+    },
+    {
+      "emitted_carrier": null,
+      "emitted_sha256": "3f6b7faac2485544c98007abc115393ad15fc649bedd419abf349163f3262c48",
+      "emitted_value_error_matches_native": true,
+      "id": "bridge_ordered_deferred",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "output": "",
+        "value": [
+          "AB",
+          [
+            "a",
+            "b"
+          ]
+        ]
+      },
+      "source_sha256": "6409b4fa1298cc6637ddf0d59c8be7c6690f47a86995ea764358d072dd61560e"
+    },
+    {
+      "emitted_carrier": null,
+      "emitted_sha256": "8593ac6b739324c93c4eb6dc12ca0f9c9ffa6ec14e653e2b354b377cdd6c9407",
+      "emitted_value_error_matches_native": true,
+      "id": "bridge_nested_deferred",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "output": "",
+        "value": "!AB"
+      },
+      "source_sha256": "1ef562ab3e22159fb9185531e5666b516996b46b3b6b9bff005810a0a2354104"
+    },
+    {
+      "emitted_carrier": null,
+      "emitted_sha256": "23cf7b3b97f7d407615815a11eac41b2ba9ceebb0377ae6410eb5066f7dde85b",
+      "emitted_value_error_matches_native": true,
+      "id": "bridge_precedence_deferred",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "output": "",
+        "value": "!x"
+      },
+      "source_sha256": "696b16a2ab02a2d92fb01343dc1f18bb033a9c97045847818decfd806a03f56c"
+    },
+    {
+      "emitted_carrier": {
+        "code": "generated_execution_failed",
+        "source_identity": "bridge_wrong_arity_deferred.spec",
+        "stage": "execute_generated"
+      },
+      "emitted_sha256": "2d630d92414de0dc4445813767b5c8bbdadf2ee1d4f2a379e09c79c5f631c542",
+      "emitted_value_error_matches_native": true,
+      "id": "bridge_wrong_arity_deferred",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": {
+          "arguments_evaluated": 0,
+          "code": "user_function_arity_mismatch",
+          "expected": "exactly 2",
+          "function_name": "decorate",
+          "got": 1,
+          "kind": "codeblock_runtime_error",
+          "observed_class": "LinkedSpec::CodeblockRuntime::Error"
+        },
+        "output": "[2026-10-02 14:31:30][NONE][SpecEntry.pm][trace_decision:63] DECISION rule_handler_eval:Top => SKIPPED\n[2026-10-02 14:31:30][NONE][SpecEntry.pm][trace_decision:63]   Context: bless( {'arguments_evaluated' => 0,'code' => 'user_function_arity_mismatch','expected' => 'exactly 2','function_name' => 'decorate','got' => 1,'kind' => 'codeblock_runtime_error'}, 'LinkedSpec::CodeblockRuntime::Error' )\n",
+        "value": null
+      },
+      "source_sha256": "2e49f8a4a259dd69b682abd11a6519758cc2444fc1d2ea8e32442ef7fc3184d2"
+    },
+    {
+      "emitted_carrier": {
+        "code": "generated_execution_failed",
+        "source_identity": "bridge_wrong_final_kind_direct.spec",
+        "stage": "execute_generated"
+      },
+      "emitted_sha256": "e00c82ade739f65c919f7951bf86a087edb919459127fefd9ca34fd5794a1739",
+      "emitted_value_error_matches_native": true,
+      "id": "bridge_wrong_final_kind_direct",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": {
+          "code": "final_argument_not_codeblock",
+          "kind": "codeblock_runtime_error",
+          "observed_class": "LinkedSpec::CodeblockRuntime::Error",
+          "value_kind": "harray"
+        },
+        "output": "[2026-10-02 14:31:30][NONE][SpecEntry.pm][trace_decision:63] DECISION rule_handler_eval:Top => SKIPPED\n[2026-10-02 14:31:30][NONE][SpecEntry.pm][trace_decision:63]   Context: bless( {'code' => 'final_argument_not_codeblock','kind' => 'codeblock_runtime_error','value_kind' => 'harray'}, 'LinkedSpec::CodeblockRuntime::Error' )\n",
+        "value": null
+      },
+      "source_sha256": "4071fe4bd874c9c9a14fe232af4e77c04fca082a236399825d132cb2f6eda316"
+    },
+    {
+      "emitted_carrier": {
+        "code": "generated_execution_failed",
+        "source_identity": "bridge_wrong_final_kind_deferred.spec",
+        "stage": "execute_generated"
+      },
+      "emitted_sha256": "2504365d776af4936132a3c280e37f96842d8b47922dda55069c69b10fbeef5f",
+      "emitted_value_error_matches_native": true,
+      "id": "bridge_wrong_final_kind_deferred",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": {
+          "code": "final_argument_not_codeblock",
+          "kind": "codeblock_runtime_error",
+          "observed_class": "LinkedSpec::CodeblockRuntime::Error",
+          "value_kind": "harray"
+        },
+        "output": "[2026-10-02 14:31:31][NONE][SpecEntry.pm][trace_decision:63] DECISION rule_handler_eval:Top => SKIPPED\n[2026-10-02 14:31:31][NONE][SpecEntry.pm][trace_decision:63]   Context: bless( {'code' => 'final_argument_not_codeblock','kind' => 'codeblock_runtime_error','value_kind' => 'harray'}, 'LinkedSpec::CodeblockRuntime::Error' )\n",
+        "value": null
+      },
+      "source_sha256": "5557ed03c70c6200fb7e80697fc1f56a23f4cd14029b913d24880942499085df"
+    },
+    {
+      "emitted_carrier": {
+        "code": "generated_execution_failed",
+        "source_identity": "bridge_keyword_deferred.spec",
+        "stage": "execute_generated"
+      },
+      "emitted_sha256": "6c1bb8a747244fd52d782c66f09f01743df04fb65ef3505a2b587acdc7e1bf85",
+      "emitted_value_error_matches_native": true,
+      "id": "bridge_keyword_deferred",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": {
+          "arguments_evaluated": 0,
+          "code": "user_function_keyword_arguments_unsupported",
+          "function_name": "id",
+          "got": 1,
+          "kind": "codeblock_runtime_error",
+          "observed_class": "LinkedSpec::CodeblockRuntime::Error"
+        },
+        "output": "[2026-10-02 14:31:31][NONE][SpecEntry.pm][trace_decision:63] DECISION rule_handler_eval:Top => SKIPPED\n[2026-10-02 14:31:31][NONE][SpecEntry.pm][trace_decision:63]   Context: bless( {'arguments_evaluated' => 0,'code' => 'user_function_keyword_arguments_unsupported','function_name' => 'id','got' => 1,'kind' => 'codeblock_runtime_error'}, 'LinkedSpec::CodeblockRuntime::Error' )\n",
+        "value": null
+      },
+      "source_sha256": "c487a516f0fb667d437296a24ea81d8ca61de1d1269bc1f63481e85a9bcc8a32"
+    },
+    {
+      "emitted_carrier": null,
+      "emitted_sha256": "35c29b2ac11619aa62916701fc4c9e2ca025efd3917e5169ce1d83f5e415b5ff",
+      "emitted_value_error_matches_native": true,
+      "id": "bridge_function_recursion_direct",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1
+      },
+      "native": {
+        "error": null,
+        "output": "",
+        "value": null
+      },
+      "source_sha256": "9ec8e4fbaec4f6511144dc932d0717f896b18b369a70b28532c2435d024f673d"
+    },
+    {
+      "emitted_carrier": {
+        "code": "generated_execution_failed",
+        "source_identity": "bridge_function_recursion_deferred.spec",
+        "stage": "execute_generated"
+      },
+      "emitted_sha256": "c64b9fecf5a22a6a4c61e3e6acfd6e9430cceaa43afd5dec7edcd55b6fd857d4",
+      "emitted_value_error_matches_native": true,
+      "id": "bridge_function_recursion_deferred",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": {
+          "code": "user_function_recursion_unsupported",
+          "cycle": [
+            "repeat",
+            "repeat"
+          ],
+          "function_name": "repeat",
+          "kind": "codeblock_runtime_error",
+          "observed_class": "LinkedSpec::CodeblockRuntime::Error"
+        },
+        "output": "[2026-10-02 14:31:31][NONE][SpecEntry.pm][trace_decision:63] DECISION rule_handler_eval:Top => SKIPPED\n[2026-10-02 14:31:31][NONE][SpecEntry.pm][trace_decision:63]   Context: bless( {'code' => 'user_function_recursion_unsupported','cycle' => ['repeat','repeat'],'function_name' => 'repeat','kind' => 'codeblock_runtime_error'}, 'LinkedSpec::CodeblockRuntime::Error' )\n",
+        "value": null
+      },
+      "source_sha256": "7d393b34fd402735e41078eb1a1742c0c51509ebdf9d7056ac2b16cf4caec943"
+    },
+    {
+      "emitted_carrier": {
+        "code": "generated_execution_failed",
+        "source_identity": "bridge_callback_function_cycle.spec",
+        "stage": "execute_generated"
+      },
+      "emitted_sha256": "da6df34390405db3519a6c2b0b2a8c84882eb308ecf857450c8adbb1398b50a9",
+      "emitted_value_error_matches_native": true,
+      "id": "bridge_callback_function_cycle",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": {
+          "code": "codeblock_recursion_unsupported",
+          "cycle": [
+            "cb",
+            "callback"
+          ],
+          "kind": "codeblock_runtime_error",
+          "observed_class": "LinkedSpec::CodeblockRuntime::Error"
+        },
+        "output": "[2026-10-02 14:31:31][NONE][SpecEntry.pm][trace_decision:63] DECISION rule_handler_eval:Top => SKIPPED\n[2026-10-02 14:31:31][NONE][SpecEntry.pm][trace_decision:63]   Context: bless( {'code' => 'codeblock_recursion_unsupported','cycle' => ['cb','callback'],'kind' => 'codeblock_runtime_error'}, 'LinkedSpec::CodeblockRuntime::Error' )\n",
+        "value": null
+      },
+      "source_sha256": "02431fc601472b570e9b783e56cf39f66d6b0f335ab7b9dfc8b6c17ae5357988"
+    },
+    {
+      "emitted_carrier": {
+        "code": "generated_execution_failed",
+        "source_identity": "bridge_unknown_deferred.spec",
+        "stage": "execute_generated"
+      },
+      "emitted_sha256": "36b727d1cd1f644db0d338803ca123e12c09632c954a997641b7ef96f56fbdb0",
+      "emitted_value_error_matches_native": true,
+      "id": "bridge_unknown_deferred",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": {
+          "code": "unknown_helper",
+          "kind": "codeblock_runtime_error",
+          "name": "missing_operation",
+          "observed_class": "LinkedSpec::CodeblockRuntime::Error"
+        },
+        "output": "[2026-10-02 14:31:31][NONE][SpecEntry.pm][trace_decision:63] DECISION rule_handler_eval:Top => SKIPPED\n[2026-10-02 14:31:31][NONE][SpecEntry.pm][trace_decision:63]   Context: bless( {'code' => 'unknown_helper','kind' => 'codeblock_runtime_error','name' => 'missing_operation'}, 'LinkedSpec::CodeblockRuntime::Error' )\n",
+        "value": null
+      },
+      "source_sha256": "d1773f2e6c2c73ba52fbc6db983e4d66fb51966ab6ed3c42270f1d12dab140de"
+    },
+    {
+      "emitted_carrier": null,
+      "emitted_sha256": "c9d34c6825cfd8b91079a4df5f9b2bf0c9a02b913d5c579bf975271540c31ecd",
+      "emitted_value_error_matches_native": true,
+      "id": "bridge_unrelated_unsupported_definition",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "output": "",
+        "value": "ok"
+      },
+      "source_sha256": "d4d1530fb98ec0be0bc209b9ae9e7e320afb9075a0983722557b2980d6137bf6"
+    },
+    {
+      "emitted_carrier": null,
+      "emitted_sha256": "bdc39eec6957d8c1b82425a53aeb1c4df03f5ad52d6515c4c6beca48b888f6d7",
+      "emitted_value_error_matches_native": true,
+      "id": "bridge_startup32_control",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "output": "",
+        "value": null
+      },
+      "source_sha256": "843011ed52fe04cf48f37f1c4f41d526dacad64f8ed709676cb050fbace06597"
+    },
+    {
+      "emitted_carrier": null,
+      "emitted_sha256": "8158dda6ab551fa56a60636924cd467881d783afbb413173e33c0217590ac440",
+      "emitted_value_error_matches_native": true,
+      "id": "bridge_equal_independent_callbacks",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "output": "",
+        "value": "done"
+      },
+      "source_sha256": "ec39669a9dfbd70bdf3eee5ae495986fbb53c3de540d02d523b062c5d8fe2bd5"
+    },
+    {
+      "emitted_carrier": {
+        "code": "generated_execution_failed",
+        "source_identity": "bridge_cloned_callback_cycle.spec",
+        "stage": "execute_generated"
+      },
+      "emitted_sha256": "6e2e33861588b1e44d00b82703bc5223547194fe4c92596ff0614ba3e9c82a69",
+      "emitted_value_error_matches_native": true,
+      "id": "bridge_cloned_callback_cycle",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": {
+          "code": "codeblock_recursion_unsupported",
+          "cycle": [
+            "cb",
+            "fresh"
+          ],
+          "kind": "codeblock_runtime_error",
+          "observed_class": "LinkedSpec::CodeblockRuntime::Error"
+        },
+        "output": "[2026-10-02 14:31:32][NONE][SpecEntry.pm][trace_decision:63] DECISION rule_handler_eval:Top => SKIPPED\n[2026-10-02 14:31:32][NONE][SpecEntry.pm][trace_decision:63]   Context: bless( {'code' => 'codeblock_recursion_unsupported','cycle' => ['cb','fresh'],'kind' => 'codeblock_runtime_error'}, 'LinkedSpec::CodeblockRuntime::Error' )\n",
+        "value": null
+      },
+      "source_sha256": "ba4e9b55f79f1795e0d97ec8c39605d47847d2d86c44512388c2041ab2e955bc"
+    },
+    {
+      "emitted_carrier": {
+        "code": "generated_execution_failed",
+        "source_identity": "bridge_aggregate_callback_cycle.spec",
+        "stage": "execute_generated"
+      },
+      "emitted_sha256": "0f636f2688378fc83b686ca0d917020a269f260731c933813fb4b0fc73b98b09",
+      "emitted_value_error_matches_native": true,
+      "id": "bridge_aggregate_callback_cycle",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": {
+          "code": "codeblock_recursion_unsupported",
+          "cycle": [
+            "cb",
+            "fresh"
+          ],
+          "kind": "codeblock_runtime_error",
+          "observed_class": "LinkedSpec::CodeblockRuntime::Error"
+        },
+        "output": "[2026-10-02 14:31:32][NONE][SpecEntry.pm][trace_decision:63] DECISION rule_handler_eval:Top => SKIPPED\n[2026-10-02 14:31:32][NONE][SpecEntry.pm][trace_decision:63]   Context: bless( {'code' => 'codeblock_recursion_unsupported','cycle' => ['cb','fresh'],'kind' => 'codeblock_runtime_error'}, 'LinkedSpec::CodeblockRuntime::Error' )\n",
+        "value": null
+      },
+      "source_sha256": "54e016214271f69bafed05974f8ef4e982fc688fd7bc72d8709b2744236d6581"
+    },
+    {
+      "emitted_carrier": {
+        "code": "generated_execution_failed",
+        "source_identity": "bridge_compiled_copy_cycle.spec",
+        "stage": "execute_generated"
+      },
+      "emitted_sha256": "abe006446fb8565df056d23bc90b0942dea1e65f881fe06889c37af2af9bb17f",
+      "emitted_value_error_matches_native": true,
+      "id": "bridge_compiled_copy_cycle",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": {
+          "code": "codeblock_recursion_unsupported",
+          "cycle": [
+            "cb",
+            "fresh"
+          ],
+          "kind": "codeblock_runtime_error",
+          "observed_class": "LinkedSpec::CodeblockRuntime::Error"
+        },
+        "output": "[2026-10-02 14:31:32][NONE][SpecEntry.pm][trace_decision:63] DECISION rule_handler_eval:Top => SKIPPED\n[2026-10-02 14:31:32][NONE][SpecEntry.pm][trace_decision:63]   Context: bless( {'code' => 'codeblock_recursion_unsupported','cycle' => ['cb','fresh'],'kind' => 'codeblock_runtime_error'}, 'LinkedSpec::CodeblockRuntime::Error' )\n",
+        "value": null
+      },
+      "source_sha256": "02a740ac2a2c47fd8da4886b3743ccf0116c0fd1a846f688adbf490f2efb2cf6"
+    },
+    {
+      "emitted_carrier": null,
+      "emitted_sha256": "bea21a8b5f6b9580887b81cfd808acef8450e6daa3d0cf1e57960dbd39779dc4",
+      "emitted_value_error_matches_native": true,
+      "id": "bridge_rest_fresh",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "output": "",
+        "value": [
+          [
+            "a",
+            "tag"
+          ],
+          [
+            "tag"
+          ]
+        ]
+      },
+      "source_sha256": "f84ccbc29141f650a797ea2b08590ffba0744f980d64813642303f36031f5de6"
+    },
+    {
+      "emitted_carrier": null,
+      "emitted_sha256": "bb0921a31a60117b2674ecfc9136c64c1ff79e51c4fb400fa4182b8c7e318444",
+      "emitted_value_error_matches_native": true,
+      "id": "bridge_fresh_scope",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "output": "",
+        "value": [
+          null,
+          "outside"
+        ]
+      },
+      "source_sha256": "f0ddebf12fb0c0bc8e6e865cc3b289562ee97f3a8a83cc20b7d634f77754c60d"
+    },
+    {
+      "emitted_carrier": null,
+      "emitted_sha256": "d8194c56c985b21a498445973c0aac21b3f21d810ea93326bca64dda23e8e4d0",
+      "emitted_value_error_matches_native": true,
+      "id": "bridge_same_name_distinct_frames",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "output": "",
+        "value": "inner"
+      },
+      "source_sha256": "7b497639f769e1b344126b1bf16895d4b01e2f604c5040867dabd8af9736bbe6"
+    },
+    {
+      "emitted_carrier": {
+        "code": "generated_execution_failed",
+        "source_identity": "bridge_dynamic_function_cycle.spec",
+        "stage": "execute_generated"
+      },
+      "emitted_sha256": "dfab3c054afe964e2f06619c5a7995a1e2470e854f94b4427a570d5e5c88421e",
+      "emitted_value_error_matches_native": true,
+      "id": "bridge_dynamic_function_cycle",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": {
+          "code": "user_function_recursion_unsupported",
+          "cycle": [
+            "apply",
+            "apply"
+          ],
+          "function_name": "apply",
+          "kind": "codeblock_runtime_error",
+          "observed_class": "LinkedSpec::CodeblockRuntime::Error"
+        },
+        "output": "[2026-10-02 14:31:33][NONE][SpecEntry.pm][trace_decision:63] DECISION rule_handler_eval:Top => SKIPPED\n[2026-10-02 14:31:33][NONE][SpecEntry.pm][trace_decision:63]   Context: bless( {'code' => 'user_function_recursion_unsupported','cycle' => ['apply','apply'],'function_name' => 'apply','kind' => 'codeblock_runtime_error'}, 'LinkedSpec::CodeblockRuntime::Error' )\n",
+        "value": null
+      },
+      "source_sha256": "d362a7df2f9f6b8ea1149e5cf654264eb42464a0c44b5c15a546059c2e767be5"
+    },
+    {
+      "emitted_carrier": {
+        "code": "generated_execution_failed",
+        "source_identity": "bridge_static_dynamic_function_cycle.spec",
+        "stage": "execute_generated"
+      },
+      "emitted_sha256": "a18131fe92d40e4c04ac039233197452f5e8a4a255bbfc723871fde9d166d337",
+      "emitted_value_error_matches_native": true,
+      "id": "bridge_static_dynamic_function_cycle",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": {
+          "code": "user_function_recursion_unsupported",
+          "cycle": [
+            "outer",
+            "inner",
+            "outer"
+          ],
+          "function_name": "outer",
+          "kind": "codeblock_runtime_error",
+          "observed_class": "LinkedSpec::CodeblockRuntime::Error"
+        },
+        "output": "[2026-10-02 14:31:33][NONE][SpecEntry.pm][trace_decision:63] DECISION rule_handler_eval:Top => SKIPPED\n[2026-10-02 14:31:33][NONE][SpecEntry.pm][trace_decision:63]   Context: bless( {'code' => 'user_function_recursion_unsupported','cycle' => ['outer','inner','outer'],'function_name' => 'outer','kind' => 'codeblock_runtime_error'}, 'LinkedSpec::CodeblockRuntime::Error' )\n",
+        "value": null
+      },
+      "source_sha256": "a3aa248b7c00dac7b034515b487608f0855e39be7ac234da9caf168f0a065d56"
+    },
+    {
+      "emitted_carrier": null,
+      "emitted_sha256": "a1abcc29c9c161a1520f3fd904d59df64afc3350b07313d14f1d57c603e41596",
+      "emitted_value_error_matches_native": true,
+      "id": "bridge_private_names",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "output": "",
+        "value": [
+          "value",
+          "local",
+          "marker"
+        ]
+      },
+      "source_sha256": "cfc04a32df1504f01c71bd277c34cd9624669323c6a118acf0583d5aec2bc3aa"
+    },
+    {
+      "emitted_carrier": {
+        "code": "generated_execution_failed",
+        "source_identity": "bridge_unsupported_body.spec",
+        "stage": "execute_generated"
+      },
+      "emitted_sha256": "caf7bb4efcf6aaf26c606a2a766993642280ebe229badcc76bfb026450e6b923",
+      "emitted_value_error_matches_native": true,
+      "id": "bridge_unsupported_body",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": {
+          "code": "user_function_body_unsupported",
+          "function_name": "bad",
+          "kind": "codeblock_runtime_error",
+          "observed_class": "LinkedSpec::CodeblockRuntime::Error",
+          "unresolved_helpers": [
+            "missing_operation"
+          ]
+        },
+        "output": "[2026-10-02 14:31:34][NONE][SpecEntry.pm][trace_decision:63] DECISION rule_handler_eval:Top => SKIPPED\n[2026-10-02 14:31:34][NONE][SpecEntry.pm][trace_decision:63]   Context: bless( {'code' => 'user_function_body_unsupported','function_name' => 'bad','kind' => 'codeblock_runtime_error','unresolved_helpers' => ['missing_operation']}, 'LinkedSpec::CodeblockRuntime::Error' )\n",
+        "value": null
+      },
+      "source_sha256": "687c299b3be9e68bbc60064b1ca127b014926dc904e4060fccb99d9c1a412782"
+    },
+    {
+      "emitted_carrier": {
+        "code": "generated_execution_failed",
+        "source_identity": "bridge_arity_effects.spec",
+        "stage": "execute_generated"
+      },
+      "emitted_sha256": "1a2d88e4ec997c98f7e94d4da9d4262f8875b45cefb90695db811faa70ddefd3",
+      "emitted_value_error_matches_native": true,
+      "id": "bridge_arity_effects",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": {
+          "arguments_evaluated": 0,
+          "code": "user_function_arity_mismatch",
+          "expected": "exactly 2",
+          "function_name": "pair",
+          "got": 1,
+          "kind": "codeblock_runtime_error",
+          "observed_class": "LinkedSpec::CodeblockRuntime::Error"
+        },
+        "output": "[2026-10-02 14:31:34][NONE][SpecEntry.pm][trace_decision:63] DECISION rule_handler_eval:Top => SKIPPED\n[2026-10-02 14:31:34][NONE][SpecEntry.pm][trace_decision:63]   Context: bless( {'arguments_evaluated' => 0,'code' => 'user_function_arity_mismatch','expected' => 'exactly 2','function_name' => 'pair','got' => 1,'kind' => 'codeblock_runtime_error'}, 'LinkedSpec::CodeblockRuntime::Error' )\n",
+        "value": null
+      },
+      "source_sha256": "07d35be99875de070eac4c2e5ef302d8e6590b0b79cca7caba74f0feb1fcb88e"
+    },
+    {
+      "emitted_carrier": {
+        "code": "generated_execution_failed",
+        "source_identity": "bridge_keyword_effects.spec",
+        "stage": "execute_generated"
+      },
+      "emitted_sha256": "cab3f21892c94f42c8d4db49b374d962ef7d94fa2229376365d8b97190d49d21",
+      "emitted_value_error_matches_native": true,
+      "id": "bridge_keyword_effects",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": {
+          "arguments_evaluated": 0,
+          "code": "user_function_keyword_arguments_unsupported",
+          "function_name": "pair",
+          "got": 1,
+          "kind": "codeblock_runtime_error",
+          "observed_class": "LinkedSpec::CodeblockRuntime::Error"
+        },
+        "output": "[2026-10-02 14:31:34][NONE][SpecEntry.pm][trace_decision:63] DECISION rule_handler_eval:Top => SKIPPED\n[2026-10-02 14:31:34][NONE][SpecEntry.pm][trace_decision:63]   Context: bless( {'arguments_evaluated' => 0,'code' => 'user_function_keyword_arguments_unsupported','function_name' => 'pair','got' => 1,'kind' => 'codeblock_runtime_error'}, 'LinkedSpec::CodeblockRuntime::Error' )\n",
+        "value": null
+      },
+      "source_sha256": "caa3fc7013c4d8e53d5fbd05cc09c6def2009e018e1ea5b25ebe31980e1e0dcf"
+    },
+    {
+      "emitted_carrier": null,
+      "emitted_sha256": "fc989d286a39bc555ee50c27a969cf8281dd541d73da30cf172dcab962d84622",
+      "emitted_value_error_matches_native": true,
+      "id": "function_unbound_callable",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1
+      },
+      "native": {
+        "error": null,
+        "output": "",
+        "value": null
+      },
+      "source_sha256": "20d8f605c8354d2fea40d549ab1e0aca488a945b4699f923045af3a326e8c3ee"
+    },
+    {
+      "emitted_carrier": {
+        "code": "generated_execution_failed",
+        "source_identity": "bridge_failure_restore.spec",
+        "stage": "execute_generated"
+      },
+      "emitted_sha256": "e9c76ee29e66d7a047c33fa2fb9f19e14d3f234475228da3527e1f46432ba36e",
+      "emitted_value_error_matches_native": true,
+      "id": "bridge_failure_restore",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": {
+          "code": "unknown_helper",
+          "kind": "codeblock_runtime_error",
+          "name": "missing_operation",
+          "observed_class": "LinkedSpec::CodeblockRuntime::Error"
+        },
+        "output": "[2026-10-02 14:31:35][NONE][SpecEntry.pm][trace_decision:63] DECISION rule_handler_eval:Top => SKIPPED\n[2026-10-02 14:31:35][NONE][SpecEntry.pm][trace_decision:63]   Context: bless( {'code' => 'unknown_helper','kind' => 'codeblock_runtime_error','name' => 'missing_operation'}, 'LinkedSpec::CodeblockRuntime::Error' )\n",
+        "value": null
+      },
+      "source_sha256": "54efd726d37bfaa1068c6aebd4c3eb67e053b9de00edc69f85d8510c86af9908"
+    },
+    {
+      "emitted_carrier": {
+        "code": "generated_execution_failed",
+        "source_identity": "function_with_failure.spec",
+        "stage": "execute_generated"
+      },
+      "emitted_sha256": "87807dc09c6d29ecc100209fb4b40f2157b793fcbdf906179cbd0b8773968984",
+      "emitted_value_error_matches_native": true,
+      "id": "function_with_failure",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": {
+          "code": "unknown_helper",
+          "kind": "codeblock_runtime_error",
+          "name": "missing_operation",
+          "observed_class": "LinkedSpec::CodeblockRuntime::Error"
+        },
+        "output": "[2026-10-02 14:31:35][NONE][SpecEntry.pm][trace_decision:63] DECISION rule_handler_eval:Top => SKIPPED\n[2026-10-02 14:31:35][NONE][SpecEntry.pm][trace_decision:63]   Context: bless( {'code' => 'unknown_helper','kind' => 'codeblock_runtime_error','name' => 'missing_operation'}, 'LinkedSpec::CodeblockRuntime::Error' )\n",
+        "value": null
+      },
+      "source_sha256": "d0ce16e8b6ad915e0bb0a8027dacb59e78d5d0ae6455e882ab7eb5e97bc669f4"
+    },
+    {
+      "emitted_carrier": null,
+      "emitted_sha256": "c837990d3d5e70f280a1b19182547e7522f4873c295a20da71692550bafa8d88",
+      "emitted_value_error_matches_native": true,
+      "id": "function_external_read",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "output": "",
+        "value": null
+      },
+      "source_sha256": "68b4ad68d0978ca9ef6167eb6802a3a0d4a3855db8e2e98676afba405d02f681"
+    },
+    {
+      "emitted_carrier": null,
+      "emitted_sha256": "88196fe1507db1ff4e34bf6c90e06d94a14b19ec398a8c8ef0bf478ee93a59d1",
+      "emitted_value_error_matches_native": true,
+      "id": "function_direct_read",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "output": "",
+        "value": null
+      },
+      "source_sha256": "686a7982a8318dc6652640c680f977b9e996ea6f47c31c54fa89f53d8ceb8f60"
+    },
+    {
+      "emitted_carrier": null,
+      "emitted_sha256": "77355d3b821f5e70b8fe732b989926429816ae36d438bc5179ae8bbc895ab049",
+      "emitted_value_error_matches_native": true,
+      "id": "function_local_read",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "output": "",
+        "value": "local"
+      },
+      "source_sha256": "85fc08127483864ef5baec12ba579666ebb891861d2bb88c782401a78d199d86"
+    },
+    {
+      "emitted_carrier": null,
+      "emitted_sha256": "6243e497319d90245df321e019ee1692be3d125bf9c375e9153f26f7bbbaafae",
+      "emitted_value_error_matches_native": true,
+      "id": "function_external_write",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "output": "",
+        "value": [
+          "inner",
+          "outer"
+        ]
+      },
+      "source_sha256": "a7362e77536fe67fff454b17feb6f31aef1fab7fe657e3deb41b88d2fcd1006e"
+    },
+    {
+      "emitted_carrier": null,
+      "emitted_sha256": "433a5ecc7bc525b3ddbbc60ccc21fffcf88900515f3ab357b0a5e03fa5df5038",
+      "emitted_value_error_matches_native": true,
+      "id": "function_local_write",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "output": "",
+        "value": [
+          "inner",
+          "outer"
+        ]
+      },
+      "source_sha256": "c59909a27cfc06641d9e3ae8967deb8f522f35f8aae3d4fcc73b7e4e55c6aa23"
+    },
+    {
+      "emitted_carrier": null,
+      "emitted_sha256": "3fbab7b3dc5b717490a9f687fd6d41c60697a1359ff406d5c1b6bd711d2edfec",
+      "emitted_value_error_matches_native": true,
+      "id": "function_parameter_read",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "output": "",
+        "value": [
+          "argument",
+          "outer"
+        ]
+      },
+      "source_sha256": "efb4795d9aedd78bc67283325228d500977db5cd7700997f3832c20950d2495e"
+    },
+    {
+      "emitted_carrier": null,
+      "emitted_sha256": "98475acad01c1e8eda674f074a757a751961ed5380c5c7f9a8c80eb0904c9860",
+      "emitted_value_error_matches_native": true,
+      "id": "function_parameter_write",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "output": "",
+        "value": [
+          "changed",
+          "outer"
+        ]
+      },
+      "source_sha256": "3bbbce287b7d1ffb951602723944dc4eb25caf06b1505c1e8c107f440d4d31d2"
+    },
+    {
+      "emitted_carrier": null,
+      "emitted_sha256": "364cdc0195c3ddc24d4080d4dd918c6917721af26530873c34ad0354acf8cecb",
+      "emitted_value_error_matches_native": true,
+      "id": "function_unknown_persistence_reset",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "output": "",
+        "value": [
+          [
+            [
+              "a"
+            ],
+            [
+              "a",
+              "b"
+            ]
+          ],
+          [
+            [
+              "a"
+            ],
+            [
+              "a",
+              "b"
+            ]
+          ],
+          [
+            "outside"
+          ]
+        ]
+      },
+      "source_sha256": "683870e6a7ab0b799b9ebc6d59132f9c0fe1fef7f94403f4b4e79a32e36fcc13"
+    },
+    {
+      "emitted_carrier": null,
+      "emitted_sha256": "fa11834ab315698cfa0357929d9792fa4f8e4492c8dce7f41c99eb806fa827a0",
+      "emitted_value_error_matches_native": true,
+      "id": "function_known_persistence",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "output": "",
+        "value": [
+          [
+            [
+              "local",
+              "a"
+            ],
+            [
+              "local",
+              "a",
+              "b"
+            ],
+            [
+              "local",
+              "a",
+              "b"
+            ]
+          ],
+          [
+            "outside"
+          ]
+        ]
+      },
+      "source_sha256": "bb482733db0eb7ccecffc0f4514753a6702d79e4d2ac7edbb887558b4f0b0a60"
+    },
+    {
+      "emitted_carrier": null,
+      "emitted_sha256": "8a3bc3ef908aac53f3cbd7920bd4853b0a9989b6b50df2d18eecfc0dceb392ae",
+      "emitted_value_error_matches_native": true,
+      "id": "function_nested_callback",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "output": "",
+        "value": "local"
+      },
+      "source_sha256": "08766354458760ab5d116a5816c3fd90b923712fbbe51bf118eda5a0f779f4f3"
+    },
+    {
+      "emitted_carrier": null,
+      "emitted_sha256": "7486f3a9552b43ec1af00cadbf26cfd4dd880ccd0dd3483ffaeac9f730499078",
+      "emitted_value_error_matches_native": true,
+      "id": "function_nested_frames",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "output": "",
+        "value": [
+          [
+            [
+              "outer"
+            ],
+            [
+              "inner"
+            ],
+            [
+              "outer",
+              "after"
+            ]
+          ],
+          [
+            "outside"
+          ]
+        ]
+      },
+      "source_sha256": "a4f756b859b92161174e0f88981751ab8a7f29cdc72e4256ae80ee7d20e4f0fe"
+    },
+    {
+      "emitted_carrier": null,
+      "emitted_sha256": "ac11212b8cb17bd44b64a39e0570a8fd58774a0104e11f2ee17348149ebc7dc7",
+      "emitted_value_error_matches_native": true,
+      "id": "function_with_persistence_shadow",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "output": "",
+        "value": [
+          [
+            [
+              [
+                "a"
+              ],
+              "a"
+            ],
+            [
+              [
+                "a",
+                "b"
+              ],
+              "b"
+            ],
+            "function"
+          ],
+          [
+            "outside"
+          ],
+          "outside"
+        ]
+      },
+      "source_sha256": "4c13d903f1d1abf51e02646c3af02b718a603341eacf9a1a6b8932c6cac0dc35"
+    },
+    {
+      "emitted_carrier": null,
+      "emitted_sha256": "b07b49630655ad004a878da7d8790630911db807268ff4c2d62df01be1717ffc",
+      "emitted_value_error_matches_native": true,
+      "id": "function_callback_parameter_restore",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "output": "",
+        "value": [
+          [
+            "changed",
+            "function"
+          ],
+          "outside"
+        ]
+      },
+      "source_sha256": "dde81638181b0328d061ef027208bc01b33e15035ccc414c22abeb49a4dd15a8"
+    },
+    {
+      "emitted_carrier": null,
+      "emitted_sha256": "4980f20109fb8366929c40369f414bfebbebbbf32e0388fa254b4e767d2b6b73",
+      "emitted_value_error_matches_native": true,
+      "id": "function_private_name_collision",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "output": "",
+        "value": [
+          "user",
+          "user"
+        ]
+      },
+      "source_sha256": "ec171a770babc3b807e32faf0ad520127c15d6432f431e01407d07b7f152b6c5"
+    },
+    {
+      "emitted_carrier": null,
+      "emitted_sha256": "a373cb2c840cff58a8bf472b4e2f7854f087ebea08e95b74cc1028786841054f",
+      "emitted_value_error_matches_native": true,
+      "id": "selected_push",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "output": "",
+        "value": [
+          "x"
+        ]
+      },
+      "source_sha256": "2b975cf0374068106455b662baa00e76e0e484cdf320eee3b291326b21b36bb6"
+    },
+    {
+      "emitted_carrier": null,
+      "emitted_sha256": "5dafb6958e3a23865260a300a33ad9b2879275ae65339e7f30fc90a3d34fbd88",
+      "emitted_value_error_matches_native": true,
+      "id": "absent_target",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "output": "",
+        "value": [
+          [
+            "x"
+          ],
+          [
+            "x"
+          ]
+        ]
+      },
+      "source_sha256": "d7a4bcdf407ada46c7a065ee3ee583c633e9e221b41386407a3a353bb8f585ea"
+    },
+    {
+      "emitted_carrier": null,
+      "emitted_sha256": "f5afac8c83dac6ead54b75d63293c05edbb4f6b7d07aacd19bf0d7abff3d73e3",
+      "emitted_value_error_matches_native": true,
+      "id": "null_target",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "output": "",
+        "value": [
+          "x"
+        ]
+      },
+      "source_sha256": "72d580c422532178a2d69d70671328ae660ae84eda5e59bbc363135b1f087c90"
+    },
+    {
+      "emitted_carrier": null,
+      "emitted_sha256": "6af6391b94e78e20ddaa3b38aa6d3b2e903ac5279ccf35f80d752eae18172e91",
+      "emitted_value_error_matches_native": true,
+      "id": "argument_once",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "output": "",
+        "value": [
+          [
+            "x"
+          ],
+          [
+            "rhs"
+          ]
+        ]
+      },
+      "source_sha256": "b0a54b647e66604fba2c2cc2c33d9f2bb27f96c8c52ceb1a5f0f8aa7d89631ac"
+    },
+    {
+      "emitted_carrier": null,
+      "emitted_sha256": "6628934a45e604063257ffa152d4bfd84eff22ea9a09a6ab76f0f5dcddd960d1",
+      "emitted_value_error_matches_native": true,
+      "id": "post_argument_snapshot",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "output": "",
+        "value": [
+          "during",
+          "last"
+        ]
+      },
+      "source_sha256": "83f0cd2cf0b1feb2cce371baa8150de6893c9a25fe21b7a1dc80436a8b0b9dde"
+    },
+    {
+      "emitted_carrier": null,
+      "emitted_sha256": "5246cfba203227c5300ecf1ee97ccab1e408c1f8ef1106e9d98f190db6409ff5",
+      "emitted_value_error_matches_native": true,
+      "id": "prior_result",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "output": "",
+        "value": [
+          [
+            "a"
+          ],
+          [
+            "a",
+            "b"
+          ],
+          [
+            "a",
+            "b"
+          ]
+        ]
+      },
+      "source_sha256": "beae35ec98a208e14a0a7d5d0e2f61a9ade3eb6c9d1d4dec976ccc53c316f5b5"
+    },
+    {
+      "emitted_carrier": null,
+      "emitted_sha256": "b1b2bb935d1a27354686434b9a234a4d0139fd3b60826d97178f9e52f6820a37",
+      "emitted_value_error_matches_native": true,
+      "id": "copied_parameter",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "output": "",
+        "value": [
+          [
+            "seed",
+            "inside"
+          ],
+          [
+            "seed"
+          ],
+          [
+            "outside"
+          ]
+        ]
+      },
+      "source_sha256": "2357bed4890bf5665404eb16078d732d90f01d9f93153985d3a24ee8bdcb1297"
+    },
+    {
+      "emitted_carrier": null,
+      "emitted_sha256": "0d7ba13904231ebd42bfcc3591ac6ddbdb6822525c25c3f07587cf463c2a6102",
+      "emitted_value_error_matches_native": true,
+      "id": "nested_parameters",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "output": "",
+        "value": [
+          [
+            [
+              "seed",
+              "inner"
+            ],
+            [
+              "seed",
+              "outer"
+            ]
+          ],
+          [
+            "outside"
+          ]
+        ]
+      },
+      "source_sha256": "f681c87e4aff52ac19aa119e49a4d0e71cd0caf193403fec1871b23800359dae"
+    },
+    {
+      "emitted_carrier": null,
+      "emitted_sha256": "9619574413d819c284153c51eded349b61284e2bb94e29b10735f06a21896e41",
+      "emitted_value_error_matches_native": true,
+      "id": "rule_precedence",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "output": "",
+        "value": [
+          [],
+          [
+            "rule"
+          ]
+        ]
+      },
+      "source_sha256": "95fd236708db2669893f00aad7a7256ca9ad7f156838dd1873b4d2a43220ad02"
+    },
+    {
+      "emitted_carrier": null,
+      "emitted_sha256": "e154881a3c95223b108f0244aecf5c120f41cb985c25521d107aea5beefe53f6",
+      "emitted_value_error_matches_native": true,
+      "id": "nested_rule_context",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "output": "",
+        "value": [
+          "rule"
+        ]
+      },
+      "source_sha256": "aed64b523ba52d2b1adae0cab6b9388df36632a0b195c3361121b1478b7722c8"
+    },
+    {
+      "emitted_carrier": null,
+      "emitted_sha256": "d6edad27773645b50d0c77714c2dccbcd634487136d9fe78bc0d3e18caef6634",
+      "emitted_value_error_matches_native": true,
+      "id": "with_context",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "output": "",
+        "value": [
+          "x"
+        ]
+      },
+      "source_sha256": "3c796db225fcb003296ce1971eba22e76f2e3623b41238caba735f2a06db5250"
+    },
+    {
+      "emitted_carrier": null,
+      "emitted_sha256": "f5efb3a57f30b89e7c1a468721c7d1ae6a86dab70b19936fddeb08792592fa62",
+      "emitted_value_error_matches_native": true,
+      "id": "helper_precedence",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "output": "",
+        "value": [
+          "x"
+        ]
+      },
+      "source_sha256": "9ba8981e745767a522f328b0d69574f5945b4885a9bc601d787c5a917c55e486"
+    },
+    {
+      "emitted_carrier": null,
+      "emitted_sha256": "7f7068b4dbe35d37cd5b0ecb08c96ca181e5362f51314bf9b12a2315a3df980e",
+      "emitted_value_error_matches_native": true,
+      "id": "parameter_receiver_shadow",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "output": "",
+        "value": [
+          [
+            "OK"
+          ],
+          [
+            "OK"
+          ]
+        ]
+      },
+      "source_sha256": "67699ce46a01e56d168acd98b7f4bb46bb4cf514b550a06870e6530638c06424"
+    },
+    {
+      "emitted_carrier": {
+        "code": "generated_execution_failed",
+        "source_identity": "wrong_kind.spec",
+        "stage": "execute_generated"
+      },
+      "emitted_sha256": "297f3d087307e65ab88d7b852405fb677f80c09a4433bcd9b265212ac5f3b5b9",
+      "emitted_value_error_matches_native": true,
+      "id": "wrong_kind",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+        "output": "[2026-10-02 14:31:41][NONE][SpecEntry.pm][trace_decision:63] DECISION rule_handler_eval:Top => SKIPPED\n[2026-10-02 14:31:41][NONE][SpecEntry.pm][trace_decision:63]   Context: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n[2026-10-02 14:31:41][NONE][SpecEntry.pm][trace_decision:63]   Context: \n",
+        "value": null
+      },
+      "source_sha256": "3b719056b1f70ab14afa3b0b3fc37ef982a703da9509143c04e576a920285a70"
+    },
+    {
+      "emitted_carrier": {
+        "code": "generated_execution_failed",
+        "source_identity": "unknown_call.spec",
+        "stage": "execute_generated"
+      },
+      "emitted_sha256": "60915ccb8468ac1d3a206516376824140b60382bf4c251f9de4b206862ad6fec",
+      "emitted_value_error_matches_native": true,
+      "id": "unknown_call",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": {
+          "code": "unknown_helper",
+          "kind": "codeblock_runtime_error",
+          "name": "missing_operation",
+          "observed_class": "LinkedSpec::CodeblockRuntime::Error"
+        },
+        "output": "[2026-10-02 14:31:41][NONE][SpecEntry.pm][trace_decision:63] DECISION rule_handler_eval:Top => SKIPPED\n[2026-10-02 14:31:41][NONE][SpecEntry.pm][trace_decision:63]   Context: bless( {'code' => 'unknown_helper','kind' => 'codeblock_runtime_error','name' => 'missing_operation'}, 'LinkedSpec::CodeblockRuntime::Error' )\n",
+        "value": null
+      },
+      "source_sha256": "4ddd539ff16f5a2b1fde343e6740f997fbfdd3625c35972d9734b77a298e93ab"
+    },
+    {
+      "emitted_carrier": {
+        "code": "generated_execution_failed",
+        "source_identity": "arity_before_effects.spec",
+        "stage": "execute_generated"
+      },
+      "emitted_sha256": "c4cf0f57c883787ef48daad67fa7022fcaaabcd832ca94d06868546b644d9b96",
+      "emitted_value_error_matches_native": true,
+      "id": "arity_before_effects",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": {
+          "actual_arity": 3,
+          "arguments_evaluated": 0,
+          "code": "helper_arity_mismatch",
+          "expected_arity": "exactly 2",
+          "helper_name": "push",
+          "kind": "codeblock_runtime_error",
+          "observed_class": "LinkedSpec::CodeblockRuntime::Error"
+        },
+        "output": "[2026-10-02 14:31:41][NONE][SpecEntry.pm][trace_decision:63] DECISION rule_handler_eval:Top => SKIPPED\n[2026-10-02 14:31:41][NONE][SpecEntry.pm][trace_decision:63]   Context: bless( {'actual_arity' => 3,'arguments_evaluated' => 0,'code' => 'helper_arity_mismatch','expected_arity' => 'exactly 2','helper_name' => 'push','kind' => 'codeblock_runtime_error'}, 'LinkedSpec::CodeblockRuntime::Error' )\n",
+        "value": null
+      },
+      "source_sha256": "27bdc40222249a2a1f170879e2e3b8cd1f4ad4a7921b37a875c18b2420de8453"
+    },
+    {
+      "emitted_carrier": {
+        "code": "generated_execution_failed",
+        "source_identity": "active_receiver.spec",
+        "stage": "execute_generated"
+      },
+      "emitted_sha256": "3e62160090c179705408f5911a8a4639f1206f1b30ecec29e9c24795e7140f16",
+      "emitted_value_error_matches_native": true,
+      "id": "active_receiver",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": {
+          "attempt": "push",
+          "binding": "tree",
+          "code": "receiver_mutation_reentrant",
+          "message": "cannot write active map_leaves! receiver binding 'tree' from its callback",
+          "method": "map_leaves",
+          "observed_class": "LinkedSpec::BindingRuntime::ReceiverMutationError",
+          "operation": "map_leaves_mutation",
+          "source_span": {
+            "end": 20,
+            "start": 4
+          }
+        },
+        "output": "[2026-10-02 14:31:41][NONE][SpecEntry.pm][trace_decision:63] DECISION rule_handler_eval:Top => SKIPPED\n[2026-10-02 14:31:41][NONE][SpecEntry.pm][trace_decision:63]   Context: bless( {'attempt' => 'push','binding' => 'tree','code' => 'receiver_mutation_reentrant','message' => 'cannot write active map_leaves! receiver binding \\'tree\\' from its callback','method' => 'map_leaves','operation' => 'map_leaves_mutation','source_span' => {'end' => 20,'start' => 4}}, 'LinkedSpec::BindingRuntime::ReceiverMutationError' )\n",
+        "value": null
+      },
+      "source_sha256": "ff9a8bdd04b561c58f801b2b6cad7953ef52a44bbc4897e0ee52885274bf5492"
+    }
+  ],
+  "replay_commands": [
+    "bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/codeblock_push_composition_perl.t",
+    "bash tools/project_data_run.sh perl -Iperl .linkedspec-data/scratch/selfcontain1330211/observe.pl",
+    "bash tools/project_data_run.sh perl -Iperl .linkedspec-data/scratch/selfcontain1330211/observation-child.pl",
+    "bash tools/project_data_run.sh perl -Iperl .linkedspec-data/scratch/selfcontain1330211/controls/probe.pl",
+    "bash tools/project_data_run.sh perl -Iperl .linkedspec-data/scratch/selfcontain1330211/controls/child.pl",
+    "bash tools/project_data_run.sh perl -Iperl .linkedspec-data/scratch/selfcontain1330211/literal-prereq.pl",
+    "bash tools/project_data_run.sh perl -Iperl .linkedspec-data/scratch/selfcontain1330211/literal-fresh.pl",
+    "bash tools/project_data_run.sh perl -Iperl .linkedspec-data/scratch/selfcontain1330211/book-proof.pl",
+    "bash tools/project_data_run.sh perl -Iperl .linkedspec-data/scratch/selfcontain1330211/book-child.pl"
+  ],
+  "source_inputs_sha256": {
+    "capability_conformance/callable_codeblock_contract.json": "1651e42e0e24e2476dcaffa1f4bd63888bddaa3a845ddaf329be7392c0bfe67e",
+    "capability_conformance/callable_signature_contract.json": "d01a63252648259dadab5f2f565ae7c93e860c055f2a156178f605c4b0c53ca7",
+    "capability_conformance/composed_objective_contract.json": "52b76d5b3e48fdf64f25e93b22553eabfa765fc224c101f0f5fbdd8a6abf6e01",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.1-selection.json": "b9e54e21dff39b08a098ea882a513d507730e0cdd7e4d6199c6374f8dbc30fe7",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.2-verification.json": "f4a1e2e3d9fa13c4cdda3171635411df530d2791105ce87234a620fb010485cd",
+    "docs/language-readiness/composed-objective-selection.md": "62e0bddb7214470e7d50a403dc2050d287378ec320e11cbc5f111dd0c599d401",
+    "docs/linkedspec-book/src/architecture/structured-format-program.md": "badf36995f2955c281fcc0e25743d9ae52cb09319b1804da83031f6c8c31770a",
+    "docs/linkedspec-book/src/development/local-ci-and-regression.md": "cc36543b9c256d90b854c4593763116e166d330d242a3cd6b0d32bbd5d8ab090",
+    "perl/LinkedSpec/ActionIR/MethodLowering.pm": "7418677f2fb9e2f9ca39c1606cff888826b788fd2ff8c911fba75d32b9b365b5",
+    "perl/LinkedSpec/BindingRuntime.pm": "4168ea0bb10dbe22f7be409e5b58087534ae42cb14d77d254608df1650bfdc91",
+    "perl/LinkedSpec/CallableContract.pm": "b985f546158bc9cba232c93ed651b65016295c77b7390cda620096b3604fd781",
+    "perl/LinkedSpec/CodeblockRuntime.pm": "93f5cd09381c5d4f92d08046531626544d2fd94dff8b0d3afa5ab9fd406ccd73",
+    "perl/LinkedSpec/RuleIR/EmitContext.pm": "6940dcf0be03b65e3d0a69f3efec41e1dca37524930ef20368dae94d99a23a9b",
+    "t/codeblock_push_composition_perl.t": "5c773a03f472acaf509863e314621d8a735318113e1478d15e559ad27c86fd46",
+    "tests/language-readiness/composed/diagnostic-invalid-arity.spec": "bd474ebe5e927111b46163b217da66e3d75802f264558800b3bfeebd14ad773a",
+    "tests/language-readiness/composed/diagnostic.spec": "fba66e47d14b1a236deb1136ec2c515fa629f8a1d8dce36812431ebe8bc62fc0",
+    "tests/language-readiness/composed/normalization.spec": "ba9953c282e5e66956dc4b7d22c2acc7b1e879734654e7cb467ad41275cc4249",
+    "tools/run_ci_local.sh": "48367a37c47085cab92c1b9d35edd3b958a4537b78ec61bf3854dd0d35642f6b"
+  },
+  "unchanged_from_activation": [
+    "perl/LinkedSpec/CallableContract.pm",
+    "perl/LinkedSpec/RuleIR/EmitContext.pm",
+    "capability_conformance/callable_codeblock_contract.json",
+    "capability_conformance/callable_signature_contract.json",
+    "capability_conformance/composed_objective_contract.json",
+    "tests/language-readiness/composed/normalization.spec",
+    "tests/language-readiness/composed/diagnostic.spec",
+    "tests/language-readiness/composed/diagnostic-invalid-arity.spec",
+    "docs/language-readiness/composed-objective-selection.md",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.1-selection.json",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.2-verification.json",
+    "tools/run_ci_local.sh"
+  ],
+  "verification_tier": "canonical"
+}

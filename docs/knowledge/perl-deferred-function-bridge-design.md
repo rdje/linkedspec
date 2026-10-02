@@ -6,10 +6,10 @@ answers:
   - "why does a same-named callback override a registered function in Perl deferred code"
   - "which regression controls must precede the Perl deferred function bridge"
 date: 2026-10-02
-status: selected implementation plan; runtime bridge not implemented
+status: historical selected plan; implemented by perl-deferred-function-bridge
 tags: [perl, functions, codeblock, composition, compiler, partial]
 evidence: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.0: 24 exact public Get/descriptor/source-dump controls and independently loaded fresh emitted artifacts from clean2516cf727. Checkpoint docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.0-contract.json binds observations, producers and reviewed inputs. Implementation .1 and canonical reconciliation .2 remain pending."
-reverify: "Inspect the checkpoint's exact sources through LinkedSpec::Get/return_descriptor/parser_source_ref and fresh emit_generated_source execution; current regression remains PERL5LIB= prove -Iperl t/codeblock_push_composition_perl.t. This card describes the pre-implementation boundary, not current bridge success."
+reverify: "Inspect the checkpoint's exact sources through LinkedSpec::Get/return_descriptor/parser_source_ref and fresh emit_generated_source execution; current regression remains PERL5LIB= prove -Iperl t/codeblock_push_composition_perl.t. This card preserves the pre-implementation boundary; current bounded proof is perl-deferred-function-bridge."
 ---
 
 Twenty-four native/fresh emitted observations agree. Direct fixed/rest calls and both contextual-final
@@ -67,3 +67,8 @@ dispatcher closeout. Neutral sixteen-case execution remains a later owner, inclu
 The keyword baseline reports `unsupported_codeblock_actionir` with detail kind `raw_perl`; this is typed
 data rejection, not raw execution. Direct recursive functions retain ready0/unresolved1. The startup32
 control still returns null with no runtime error. Startup19/32/35/87 and other backends retain their owners.
+
+October2 implementation `.0.2.1.1` supersedes the pending runtime state, preserving this dated plan
+and checkpoint. [[perl-deferred-function-bridge]] records central lowering, opaque origin propagation,
+71 sources/605 tests and remaining literal/normalization prerequisites. BindingRuntime clone propagation
+was declared before editing; CallableContract and all public authorities remain unchanged.

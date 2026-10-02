@@ -12,6 +12,24 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-10-02 — Central compiled bodies and opaque callable origins (.0.2.1.1)
+
+The private registered_functions invocation table reuses central function lowering with evaluated
+argument-array mode, cleared before nested calls. It carries signatures/contracts/handlers or typed
+unsupported-body data outside the eight-field record; unused definitions do not poison readiness.
+Mixed function state localizes across compiled/interpreted calls. Weak AST-keyed opaque tokens preserve
+actual callable origins through CodeblockRuntime/BindingRuntime deep copies and shallow compiled copy;
+value-derived identity falsely rejected a finite pair of independent equal callbacks and was replaced.
+Actual native/fresh emitted rest/effect/handler/error/context observations test real references;71/605
+passes, old three-module baseline88 failures,123 dependents and seven original successes bind proof.
+Replay source bodies and safe reconstruction now live in the tracked checkpoint. Facade dependency
+BEGIN blocks prepend INC: RED must prebind every canonical INC key before requiring
+absolute committed modules. The initial override falsely ran current code; corrected identity assertions
+apply in native and child processes. Dated .0 artifacts accidentally replayed were restored with old
+modules and all24 committed hashes match. Framework failure stdout is not a DSL-event equality claim.
+Frozen normalization now reaches unlowered count/infix loop; valid x,y AST emits invalid literal source.
+Separate P1 owners diagnose/repair these boundaries before closeout, retaining original frozen bytes.
+
 ## 2026-10-02 — Compile deferred function bodies once through the existing owner (.0.2.1.0)
 
 Public dumps distinguish central generated function do-blocks from typed deferred calls with only rule

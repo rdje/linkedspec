@@ -12,6 +12,20 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-10-02 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.1: bridge deferred registered functions
+
+Emit explicit registered signatures/final-block metadata and central compiled bodies outside plain
+codeblock records. Dispatch before bound slots, reject arity/keywords before operands, evaluate once
+in order, retain fresh parameters/rest/working frames and localize mixed recursion. Weak opaque
+callable origins survive deep publication and shallow copies while independent equal literals differ.
+71 native/fresh sources pass605 top-level tests; original33 rows remain byte-exact,123 dependents pass,
+all seven original controls succeed. Correct three-module RED baseline fails88 completed tests. Actual
+native/emitted identity/effect/error/restoration controls and source-bound checkpoint/book/Knowledge
+support bounded acceptance; tracked checkpoint retains replay source bodies and safe reconstruction.
+Exact staged canonical receipt supplies full Phase0/broader proof after the documented retries.
+Own P1 valid x,y literal reconstruction .0.2.1.3 and frozen normalization loop/count .0.4 before closeout.
+Public authorities, generated-format-v2, CI/storage and startup19/32/35/87 remain unchanged/separate.
+
 ## 2026-10-02 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.0: specify deferred function bridge
 
 Freeze24 exact public Get/descriptor/dumped-source and fresh emitted observations from clean2516cf727.

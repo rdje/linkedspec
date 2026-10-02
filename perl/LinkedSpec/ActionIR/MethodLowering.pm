@@ -1471,9 +1471,76 @@ sub _codeblock_runtime_binding_expr {
 }
 
 sub _codeblock_runtime_invocation_expr {
+ my ($deps) = @_;
+ return $deps->{__codeblock_runtime_invocation}
+  if ref($deps) eq 'HASH' && defined($deps->{__codeblock_runtime_invocation});
  # The current rule context is supplied at invocation, never captured in the
  # plain codeblock record. It preserves ambiguous push(rule, destination).
- return '{ descriptor => $descr, input => $STRING, match_info => $minfo }'
+ my $base = '{ descriptor => $descr, input => $STRING, match_info => $minfo }';
+ my $definitions = _user_function_registry_by_name($deps);
+ return $base unless ref($definitions) eq 'HASH' && keys %$definitions;
+
+ # Internal argument/context names must survive nested inlined function bodies.
+ # Keep them outside the complete registry's authored local/parameter inventory.
+ my %names = map { $_ => 1 } @{$deps->{bare_symbol_names} || []};
+ foreach my $definition (values %$definitions) {
+  my $signature = _user_function_call_signature($definition);
+  next unless ref($signature) eq 'HASH';
+  $names{$_} = 1 for @{$signature->{positional_params}};
+  $names{$signature->{rest_param}} = 1 if defined($signature->{rest_param});
+  foreach my $decl (@{_user_function_local_decl_statements($definition)}) {
+   $names{$1} = 1 if $decl =~ /\Amy [\$\@\%]([A-Za-z_][A-Za-z0-9_]*);/o;
+  }
+ }
+ my @private_names;
+ foreach my $stem (qw(__ls_codeblock_invocation __ls_registered_fn_args __ls_registered_fn_context)) {
+  my $name = $stem;
+  $name .= '_' while $names{$name};
+  $names{$name} = 1;
+  push @private_names, '$'.$name;
+ }
+ my ($context, $arguments, $function_context) = @private_names;
+ my @entries;
+ foreach my $name (sort keys %$definitions) {
+  my $definition = _user_function_definition_for_name($deps, $name);
+  my $signature = _user_function_call_signature($definition);
+  next unless ref($signature) eq 'HASH';
+  my @rejections;
+  my $body_deps = {
+   %$deps,
+   __user_function_call_stack => [],
+   __user_function_lowering_rejections => \@rejections,
+   __codeblock_runtime_invocation => $function_context,
+   __user_function_runtime_arguments => { name => $name, expression => $arguments },
+  };
+  my $call_source = $name.'('.join(', ', map { 'undef' } @{$signature->{positional_params}}).')';
+  my $body = _lower_method_value_expr($call_source, $body_deps);
+  LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, 'LinkedSpec::ActionIR::Diagnostics');
+  my $diagnostic = LinkedSpec::ActionIR::Diagnostics::_find_unresolved_action_helpers(
+   $body // '', [], $body_deps,
+  );
+  my $contract = _contextual_codeblock_contract($deps, 'helper', $name);
+  my $entry = 'signature => '._actionir_ast_plain_data_expr($signature)
+   .', final_codeblock_contract => '._actionir_ast_plain_data_expr($contract);
+  if (!defined($body) || !length($body) || $diagnostic->{unresolved_helper_count}) {
+   # Deferred dispatch must reject unsupported lowering, without counting an
+   # unrelated, unused definition as an unresolved call in the rule source.
+   my $failure = @rejections ? $rejections[0] : {
+    code => 'user_function_body_unsupported', function_name => $name,
+    unresolved_helpers => $diagnostic->{unresolved_helpers},
+   };
+   $entry .= ', lowering_error => '._actionir_ast_plain_data_expr($failure);
+  } else {
+   $entry .= ', call => sub { my ('.$arguments.', '.$function_context.') = @_; '
+    .'my ($descr, $STRING, $minfo) = @{'.$function_context.'}{qw(descriptor input match_info)}; '
+    .'return '.$body.'; }';
+  }
+  push @entries, _actionir_ast_quote_string_source($name).' => { '.$entry.' }';
+ }
+ my $active = _actionir_ast_plain_data_expr($deps->{__user_function_call_stack} || []);
+ return 'do { my '.$context.' = { descriptor => $descr, input => $STRING, match_info => $minfo, '
+  .'active_functions => '.$active.' }; '.$context.'->{registered_functions} = { '
+  .join(', ', @entries).' }; '.$context.' }'
 }
 
 sub _split_leading_call_suffix {
@@ -3233,8 +3300,14 @@ my $lower_numeric_array_reducer_source_expr = sub {
   my $normalized = _normalize_contextual_codeblock_call_node($deps, 'helper', $node, $name);
   return _actionir_ast_unsupported_helper_expr($name) if defined($normalized->{error});
   $node = $normalized->{node};
-  return _actionir_ast_unsupported_helper_expr($name)
-   if _user_function_call_stack_contains($deps, $name);
+  if (_user_function_call_stack_contains($deps, $name)) {
+   my $rejections = $deps->{__user_function_lowering_rejections};
+   push @$rejections, {
+    code => 'user_function_recursion_unsupported', function_name => $name,
+    cycle => [@{$deps->{__user_function_call_stack}}, $name],
+   } if ref($rejections) eq 'ARRAY';
+   return _actionir_ast_unsupported_helper_expr($name);
+  }
 
   my $args = $node->{args} || [];
   my $signature = _user_function_call_signature($definition);
@@ -3245,8 +3318,15 @@ my $lower_numeric_array_reducer_source_expr = sub {
        && @$args >= $signature->{min_arity}
        && (!defined($signature->{max_arity}) || @$args <= $signature->{max_arity});
 
+  my $runtime = $deps->{__user_function_runtime_arguments};
+  my $runtime_arguments = ref($runtime) eq 'HASH' && ($runtime->{name} // '') eq $name
+   ? $runtime->{expression} : undef;
   my @lowered_args;
   for (my $arg_idx = 0; $arg_idx < @$args; ++$arg_idx) {
+   if (defined($runtime_arguments)) {
+    push @lowered_args, $runtime_arguments.'->['.$arg_idx.']';
+    next;
+   }
    my $arg = $args->[$arg_idx];
    my $arg_source = $lower_user_function_node_source_expr->($arg);
    my $arg_expr;
@@ -3280,6 +3360,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
    unless ref($statements) eq 'ARRAY';
 
   my $body_deps = _user_function_deps_with_call($deps, $name);
+  delete $body_deps->{__user_function_runtime_arguments};
   my $nested_write_targets = _user_function_nested_write_targets($definition);
   $body_deps->{nested_write_target} = sub {
    my ($target) = @_;
@@ -3318,7 +3399,16 @@ my $lower_numeric_array_reducer_source_expr = sub {
   }
   if (defined($rest_param)) {
    my @rest_args = map { '$__ls_user_fn_arg_'.$_ } @$params .. $#lowered_args;
-   push @lowered, 'my $'.$rest_param.' = ['.join(', ', @rest_args).'];';
+   my $rest = defined($runtime_arguments)
+    ? '[@{'.$runtime_arguments.'}['.scalar(@$params).' .. $#{'.$runtime_arguments.'}]]'
+    : '['.join(', ', @rest_args).']';
+   push @lowered, 'my $'.$rest_param.' = '.$rest.';';
+  }
+  if (defined($deps->{__codeblock_runtime_invocation})) {
+   my $context = $deps->{__codeblock_runtime_invocation};
+   push @lowered, 'local '.$context.'->{active_functions} = '
+    .'LinkedSpec::CodeblockRuntime::enter_function('.$context.', '
+    ._actionir_ast_quote_string_source($name).');';
   }
   push @lowered, 'my $'.$frame_name.' = '.$frame_initializer.';';
 
@@ -3434,7 +3524,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
   return 'do { require LinkedSpec::CodeblockRuntime; '
    .'LinkedSpec::CodeblockRuntime::invoke($'.$name.', ['.join(', ', @lowered_args).'], '
    .$bindings.', '._actionir_ast_quote_string_source($name).', undef, '
-   ._codeblock_runtime_invocation_expr().') }'
+   ._codeblock_runtime_invocation_expr($deps).') }'
  };
  my $ast_string_source_node = sub {
   my ($node) = @_;
@@ -3989,7 +4079,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
    .$shadow_value
    .'require LinkedSpec::CodeblockRuntime; LinkedSpec::CodeblockRuntime::invoke('
    .$record_expr.', '.$invoke_args.', '.$bindings.', "with", undef, '
-   ._codeblock_runtime_invocation_expr().') }'
+   ._codeblock_runtime_invocation_expr($deps).') }'
  };
  $lower_ast_value_node = sub {
   my ($node, $opts) = @_;

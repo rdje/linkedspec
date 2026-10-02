@@ -2028,3 +2028,10 @@ canonical milestone or push:
 ```
 
 If a code/spec/runtime change also changes public understanding, update the public book and run the book build too.
+
+### Reconstructing dated bridge probes
+
+The [registered-function bridge chapter](../architecture/structured-format-program.md#reconstructing-dated-bridge-probes-from-a-fresh-checkout)
+contains the complete root-relative recovery recipe. Its tracked checkpoint retains producer source
+bodies, hashes, baseline identities and ordered replay commands. Recovery validates all identities and
+destinations before writing; later compiler changes remain distinct from the dated evidence boundary.
