@@ -7,6 +7,7 @@ answers:
   - "why is the historical objective audit durability leg a gap"
   - "which task owns the 134 objective audit artifact inputs"
   - "why did normalization mode proof need an ignored audit report"
+  - "what is the exact historical audit artifact population and recovery format"
 date: 2026-10-03
 status: P1 bounded input recovery owned by SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.2
 tags: [claims, durability, artifacts, historical-audit, input-coverage]
@@ -15,6 +16,7 @@ reverify:
   - "bash tools/run_python_project_data.sh tests/language-readiness/verify_objectives.py (requires retained historical artifact inputs)"
   - "Inspect docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.1-verification.json historical_audit_input_coverage and the source-bound reviewer."
   - "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.1-mode-replay-proof.py"
+  - "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.2.0-census.py"
 ---
 
 The audit treats134 ignored local logs as inputs and checks their exact historical
@@ -48,3 +50,18 @@ Historical inputs/results/hashes remain unchanged, existing raw logs stay retain
 and historical writers must not run in the current checkout. Broader constants,
 producer and claim auditing remains startup5/29. No claim is made here that every
 earlier proof is unreproducible or that no possible archival source exists.
+
+The `.4.2.0` read-only census independently reconstructs 48/39/47 milestone entries
+and requires exact equality with the committed 134-member audit map. All old hashes
+match. Raw bytes total 84,613,241; independent zlib1.2.12 level9 sizing totals
+3,394,928. The 24 selected checkpoints total 214,367 bytes and provide zero complete
+log identities among whole bytes, decoded UTF-8 strings and joined string arrays.
+The three selected tracked surfaces have no common archive-extension member.
+Other encodings and surfaces remain unassessed. Actual byte corruption, removed
+membership, changed identity and three outside paths reject through healthy validators.
+
+The source-bound capture and bounded plan live at
+`docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.2.0-verification.json` and
+`docs/language-readiness/historical-audit-artifact-recovery.md`. `.4.2.1` implements
+the closed deterministic ZIP/manifest, safe isolated restoration and historical
+audit replay under original-input-read denial. Census does not close byte recovery.

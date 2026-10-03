@@ -5,7 +5,7 @@
     {
       "name": "call-form-normalization-source-succession",
       "statement": "An explicit one-loop successor uses admitted arithmetic calls and executes the unchanged seven normalization oracles on native and fresh emitted Perl, with preserved tracked original RED.",
-      "scope": "Seven paired cases/21 top-level tests and eight actual returned-object/alias controls; sixteen authority oracles unchanged. Neutral152/16/44 falsifiers are governance, not DSL semantic mutations; five direct suites/652 tests. Historical audit artifact recovery is a separate disclosed claim. No other backend or complete format admission.",
+      "scope": "Seven paired cases/21 top-level tests and eight actual returned-object/alias controls; sixteen authority oracles unchanged. Neutral152/16/44 falsifiers are governance, not DSL semantic mutations; five direct suites/652 tests. Historical audit artifact recovery is a separate disclosed claim. No other backend or complete format admission. Historical normalization/source/replay capture at committed0f15e194febbe0e6099fba5ae5f9bca8a1b1d7be; subsequent artifact census does not refresh these results or hashes.",
       "rederive": {
         "status": "checked",
         "command": "mkdir -p .linkedspec-data/scratch && bash tools/project_data_run.sh env PERL5LIB= prove -v -Iperl t/composed_normalization_perl.t > .linkedspec-data/scratch/normalization-correction-public-2.log 2>&1 && bash tools/run_python_project_data.sh tools/check_composed_objective_contract.py > .linkedspec-data/scratch/normalization-correction-neutral-2.log 2>&1 && bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/diagnostic_output_perl_contract.t t/callable_codeblock_literal_contract.t t/codeblock_push_composition_perl.t t/uniform_binding_contract.t t/map_leaves_mutation_perl_contract.t > .linkedspec-data/scratch/normalization-correction-dependents.log 2>&1 && bash tools/run_mdbook_local.sh > .linkedspec-data/scratch/normalization-correction-book.log 2>&1 && bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.1-mode-proof.py > .linkedspec-data/scratch/normalization-correction-mode-proof.log 2>&1 && bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.1-mode-replay-proof.py > .linkedspec-data/scratch/normalization-correction-mode-replay-proof.log 2>&1 && bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.1-review.py --normalization-only",
@@ -20,7 +20,7 @@
       },
       "durability": {
         "status": "checked",
-        "mode": "live",
+        "mode": "historical",
         "inputs": [
           {
             "path": "capability_conformance/callable_codeblock_contract.json",
@@ -1477,7 +1477,8 @@
             "sha256": "eed4b91daf4f28421dbbd306295b5f19309ea8b9cd5dbe3b74e5888e94d5aa9b",
             "role": "input"
           }
-        ]
+        ],
+        "revision": "0f15e194febbe0e6099fba5ae5f9bca8a1b1d7be"
       }
     },
     {

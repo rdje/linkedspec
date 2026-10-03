@@ -2,17 +2,19 @@
 
 ## Current Activity
 
-Full PNT: explicit normalization successor verified; bounded historical artifact-input recovery follows its receipt-bound landing.
+Full PNT: historical artifact-input census complete; isolated exact-byte recovery implementation follows.
 
 ## Latest Completed Slice
 
-`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.1`: seven native/fresh cases/21 tests, eight actual-object alias controls and four observation REDs. Original source/sixteen oracles preserved;92 production/governing inputs exact. Neutral152/16/44, historical audit24/257/149/134 with12/6/3 mutations and five dependents652 PASS. Historical-audit leg3 is explicitly gap-owned by P1 .0.4.2; the normalization proof is complete. Exact staged canonical receipt governs landing.
+`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.2.0`: independent48/39/47 milestones reconstruct134 exact old log identities;84,613,241 raw bytes/3,394,928 independent compressed bytes. Bounded selected checkpoint coverage, actual corruption/two population/three path controls and tracked format plan retained. Byte-recovery leg remains open under .4.2.1; no parent admission.
 
 ## Next Action
 
-Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.2 from clean HEAD; verify the134 historical audit artifact inputs, then reconcile bridge parents. P1 .0.5/.0.6/.0.7 remain separate.
+Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.2.1 from clean HEAD; implement the closed ZIP/manifest, safe isolated restoration and audit replay under original-input-read denial, then canonical parent signoff before bridge .0.2.1.2. P1 .0.5/.0.6/.0.7 remain separate.
 
 ## Recent Completions
+
+- `2026-10-03` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.2.0` retains exact134-input census/controls and bounded recovery plan.
 
 - `2026-10-03` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.1` binds explicit normalization succession and repairs exact historical audit evolution.
 
@@ -44,7 +46,6 @@ Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.2 from clean HEAD; verify the1
 
 - `2026-10-02` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.1` selects bounded compositions and owns the P1 Perl deferred dispatch repair before execution.
 
-- `2026-10-02` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.4` independently reconciles closure definition and splits bounded composition work before implementation.
 
 ## History
 

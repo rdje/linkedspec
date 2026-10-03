@@ -352,6 +352,16 @@ Normalization review controls recover their required audit metadata from the tra
 without the historical logs or an ignored intermediate report. That metadata recovery leaves the original
 log-byte recovery task open.
 
+The bounded census reconstructs the original nesting/context/lossless populations
+(48/39/47 entries) and verifies all 134 old hashes. They total 84,613,241 bytes;
+independent compression measures about 3.4MB. The 24 selected checkpoints contain
+no complete log identity among their whole bytes, UTF-8 strings or joined string
+arrays. Other encodings and archival surfaces are unassessed. The next recovery
+slice retains opaque bytes in a closed ZIP/manifest, restores into a newly created
+repository-volume directory and runs the historical audit while denying reads of
+the original logs. Until that proof passes, compression sizes and hash records
+remain census evidence. No historical runtime result is replaced by this work.
+
 ### Deferred push on Perl
 
 Perl deferred codeblocks can now append to a caller's live array binding using the existing

@@ -12,6 +12,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-10-03 — Source-bound artifact census before recovery (.4.2.0)
+
+Independent historical milestone populations must equal the audit map before sizing or coverage claims. An actual membership falsifier invokes that same comparison with removed membership or changed identity; inequality alone is not observed validator rejection. Complete-byte hashes differ from archive recovery. The selected checkpoint UTF-8/string-array census is bounded, and compression lengths are only sizing. A closed deterministic ZIP plus independent manifest avoids treating opaque observed trace paths as extraction paths. New managed destination, exclusive files, original-read denial and exact historical audit replay are implementation acceptance under .4.2.1; source/claim historical freezing prevents later input changes from refreshing old measurements.
+
 ## 2026-10-03 — Explicit normalization succession and exact historical audit (.4.1)
 
 Unsupported infix is corrected by an explicit governed source successor, preserving the frozen original and all16 oracles. Native/fresh instruments mutate actual returned trees before testing detachment, then deliberately alias those actual trees; JSON snapshots only preserve the initial value and comparison baselines. Pipes avoid new temporary allocator ownership. Typed JSON comparisons distinguish numbers from strings/booleans. Historical CI normalization strips newest anchored insertions first. The legitimate Phase0 signature subtest/plan evolution is reversed using exact committed before/after blobs, preserving every other historical byte. New successor registrations split an older CI block, exposing a no-op block-removal falsifier; remove its actual artifact line and require all counted mutations to change bytes. The early uncommitted auditor producer was not archived, so its failure is diagnostic chronology only; final12/6/3 controls and historical .4.0 source-bound RED supply proof. No runtime/infix/schema/admission change; remaining .0.5/.0.6/.0.7 owners stay open.

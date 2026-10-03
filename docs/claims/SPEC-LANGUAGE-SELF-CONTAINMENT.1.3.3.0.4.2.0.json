@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.2.0",
+  "claims": [
+    {
+      "name": "closed-historical-artifact-census",
+      "statement": "The selected historical audit consumes134 exact local artifact inputs; census sizes and selected checkpoint coverage are measured, while byte recovery remains open.",
+      "scope": "Read-only population reconstructed from three original milestones (48/39/47) at clean0f15e194f and compared with the .4.1 audit. All134 hashes match;84,613,241 raw bytes and3,394,928 independent zlib1.2.12 level9 bytes. Selected24 checkpoints/214,367 bytes yield zero complete-log identities among whole bytes/decoded UTF-8 strings/joined string arrays. Archive-extension census covers only docs/checkpoints, docs/history and tests/language-readiness; other encodings/surfaces unassessed. Producer/capture use this leaf prefix under docs/checkpoints. Compression is sizing only.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.2.0-census.py",
+        "granularity": "Each original path/hash, regular same-volume input size/hash/compressed length, and selected checkpoint identity/decoded candidate. Source SHA256 and exact result are retained in docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.2.0-verification.json.",
+        "result": "134 exact population members and all historical hashes PASS;84,613,241 raw/3,394,928 compressed bytes,24 selected checkpoints, zero exact selected candidate identities and zero selected archive-extension members. No raw input changed."
+      },
+      "falsify": {
+        "status": "checked",
+        "hypothesis": "A missing or changed log identity is accepted, byte corruption is hidden, or outside paths enter the population.",
+        "oracle": "Independent original nesting/context/lossless milestone maps must equal the committed .4.1 audited map; actual artifact bytes must match original hashes.",
+        "red_control": "Appended actual log byte rejects historical artifact hash mismatch; removed member and changed identity each reject milestone population differs from audited population through the healthy validator; three outside paths reject. Exact controls and source digest are in the retained verification capture."
+      },
+      "durability": {
+        "status": "gap",
+        "reason": "Producer and census result are tracked, but the134 original input byte streams remain ignored local files. Selected checkpoint candidate coverage and compression sizes do not constitute an archive. The chosen closed ZIP/manifest format and isolated recovery/audit controls are specified in docs/language-readiness/historical-audit-artifact-recovery.md; no recovery or parent admission is claimed.",
+        "repair_owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.2.1"
+      }
+    }
+  ]
+}

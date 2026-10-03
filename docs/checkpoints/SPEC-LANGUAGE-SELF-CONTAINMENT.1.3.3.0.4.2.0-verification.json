@@ -1,0 +1,952 @@
+{
+  "activation_commit": "0f15e194febbe0e6099fba5ae5f9bca8a1b1d7be",
+  "archive_extensions_in_selected_surfaces": [],
+  "artifacts": [
+    {
+      "bytes": 62,
+      "path": ".linkedspec-data/scratch/context-dart-analysis-final.log",
+      "sha256": "b8dd74b535dfea31f86c81e69876a7f3ca8787c07fc6e2c8d14b2277b996bfb3",
+      "zlib_level9_bytes": 67
+    },
+    {
+      "bytes": 813,
+      "path": ".linkedspec-data/scratch/context-dart-analysis.log",
+      "sha256": "32a60e803c119756235cd122e22de94b99a937d850a128f0ccdfc369345fd773",
+      "zlib_level9_bytes": 327
+    },
+    {
+      "bytes": 274,
+      "path": ".linkedspec-data/scratch/context-dart-book.log",
+      "sha256": "67f199a3140fffeb9d3144d113f5b6c7906964221fc8f784a8b49507ad9325d3",
+      "zlib_level9_bytes": 209
+    },
+    {
+      "bytes": 7086,
+      "path": ".linkedspec-data/scratch/context-dart-final.log",
+      "sha256": "5b33c93e99d8cf1a9d6df23e286d134f250aa3e0dbd591a542d6c79f05cb54e1",
+      "zlib_level9_bytes": 506
+    },
+    {
+      "bytes": 47,
+      "path": ".linkedspec-data/scratch/context-dart-format.log",
+      "sha256": "43a0060b01f8d00290502db016cbde393b149f5a0971989771a4fe3fddc181e7",
+      "zlib_level9_bytes": 55
+    },
+    {
+      "bytes": 770,
+      "path": ".linkedspec-data/scratch/context-default-dart.log",
+      "sha256": "d19f4a85e23e9cdc21340bd80dbc738f9f284d415d8ae186093e6bc402c2f80f",
+      "zlib_level9_bytes": 478
+    },
+    {
+      "bytes": 865,
+      "path": ".linkedspec-data/scratch/context-default-julia.log",
+      "sha256": "e2c168026fc7cc314f702127c6c85aefc97aa6d041f6d7dc51eeb063a40081d5",
+      "zlib_level9_bytes": 519
+    },
+    {
+      "bytes": 932,
+      "path": ".linkedspec-data/scratch/context-default-luajit.log",
+      "sha256": "0bd164cf2c0e3ae7959363596bde5445a42799c7c0adc30e53b27c4fa9aef8a7",
+      "zlib_level9_bytes": 545
+    },
+    {
+      "bytes": 636,
+      "path": ".linkedspec-data/scratch/context-default-perl.log",
+      "sha256": "8914691dc77a67782f361cc3df9e17a24f67f3fc720f10efda21890a997d5db8",
+      "zlib_level9_bytes": 412
+    },
+    {
+      "bytes": 923,
+      "path": ".linkedspec-data/scratch/context-default-puc.log",
+      "sha256": "81a4e78c418f8dc0192c094ea87ee4157e322527790a6d0201b0c6db6447b9b3",
+      "zlib_level9_bytes": 544
+    },
+    {
+      "bytes": 750,
+      "path": ".linkedspec-data/scratch/context-default-rust.log",
+      "sha256": "7a491c9cf058cf953f7b0756ab26321a2df924c282a69c8f122fe466e8609110",
+      "zlib_level9_bytes": 472
+    },
+    {
+      "bytes": 274,
+      "path": ".linkedspec-data/scratch/context-julia-book.log",
+      "sha256": "e746c7bd3a348d2c2d69d62b877efdb0114e31ead8ea8f5b3e6895885ab69c05",
+      "zlib_level9_bytes": 209
+    },
+    {
+      "bytes": 802,
+      "path": ".linkedspec-data/scratch/context-julia-final.log",
+      "sha256": "62c3b0e7544e84ff7be3a1a7267818043fe5e479938e1e745becec468357698a",
+      "zlib_level9_bytes": 267
+    },
+    {
+      "bytes": 129,
+      "path": ".linkedspec-data/scratch/context-julia-storage.log",
+      "sha256": "03dcabcf60256cb82d68bdef11aba65253694e55fb96815c6e9b6333dd185a57",
+      "zlib_level9_bytes": 116
+    },
+    {
+      "bytes": 274,
+      "path": ".linkedspec-data/scratch/context-lua-book.log",
+      "sha256": "7ef7da0a418175013819d8ebb13a9281557a67bbc66df53a5f69b5183cbca596",
+      "zlib_level9_bytes": 209
+    },
+    {
+      "bytes": 157,
+      "path": ".linkedspec-data/scratch/context-lua-luajit-final.log",
+      "sha256": "6bc77fefe2ed759afe1eef1b5d83d4a38b6fd6fe09d493b63e4db7029c69068c",
+      "zlib_level9_bytes": 135
+    },
+    {
+      "bytes": 157,
+      "path": ".linkedspec-data/scratch/context-lua-puc-final.log",
+      "sha256": "6bc77fefe2ed759afe1eef1b5d83d4a38b6fd6fe09d493b63e4db7029c69068c",
+      "zlib_level9_bytes": 135
+    },
+    {
+      "bytes": 501,
+      "path": ".linkedspec-data/scratch/context-lua-storage.log",
+      "sha256": "faaa7e8f92b9d705c09bab39d193b93fa8094abbde035522a578ec635168493b",
+      "zlib_level9_bytes": 281
+    },
+    {
+      "bytes": 274,
+      "path": ".linkedspec-data/scratch/context-names-book-final.log",
+      "sha256": "51a6f846fd1c6a2ed0cd6b045251be2a73a803430b2a1d0c93a7fa78bbac723a",
+      "zlib_level9_bytes": 208
+    },
+    {
+      "bytes": 274,
+      "path": ".linkedspec-data/scratch/context-names-book.log",
+      "sha256": "d1378a0d1c890250121eb6d577ce2a1b743691aa79d205c055d725440b22d245",
+      "zlib_level9_bytes": 209
+    },
+    {
+      "bytes": 225441,
+      "path": ".linkedspec-data/scratch/context-names-dependents.log",
+      "sha256": "0063350af5949233500927be5174d3b987efb779aa7cb8756c25064c6daf72e6",
+      "zlib_level9_bytes": 20430
+    },
+    {
+      "bytes": 76905,
+      "path": ".linkedspec-data/scratch/context-names-perl-final.log",
+      "sha256": "21e720118826c84119177c7220c9d40a1b289fce8d79c73acfddab6442c59759",
+      "zlib_level9_bytes": 5347
+    },
+    {
+      "bytes": 76076,
+      "path": ".linkedspec-data/scratch/context-names-perl.log",
+      "sha256": "3230c160a0d66563b1d522f59a749614cf6b4a27d908ba9b11a71581448b8d82",
+      "zlib_level9_bytes": 5274
+    },
+    {
+      "bytes": 4867,
+      "path": ".linkedspec-data/scratch/context-names-probe.log",
+      "sha256": "5147769c4ac557402bdeb110a6412cfd7674faff569d94745d1f8e7fb4e23e80",
+      "zlib_level9_bytes": 1032
+    },
+    {
+      "bytes": 363,
+      "path": ".linkedspec-data/scratch/context-names-storage.log",
+      "sha256": "883cd60c441ae54bfe14f7c48bec67e17d1e66ed9ad84c360a7b925820f243e4",
+      "zlib_level9_bytes": 208
+    },
+    {
+      "bytes": 13929,
+      "path": ".linkedspec-data/scratch/context-names-test-name-audit.json",
+      "sha256": "df2ab66a479a3eb54d85502c174428aee119c46663487d09e8424e308ca02700",
+      "zlib_level9_bytes": 1510
+    },
+    {
+      "bytes": 274,
+      "path": ".linkedspec-data/scratch/context-native-book.log",
+      "sha256": "d61890f8c87cabc78fd932fda465e7050a87ba8f84d7cbc56dd6d1bdaee5b3c3",
+      "zlib_level9_bytes": 209
+    },
+    {
+      "bytes": 778,
+      "path": ".linkedspec-data/scratch/context-native-dart.log",
+      "sha256": "46992525e3086b70e6a6d6fb92373adb2a1538560797debdbf6876b433b9714b",
+      "zlib_level9_bytes": 480
+    },
+    {
+      "bytes": 873,
+      "path": ".linkedspec-data/scratch/context-native-julia.log",
+      "sha256": "34ab9ca8eaf7470dcd3a63ceae6855473ff03727b16bded7a3665631ddeda566",
+      "zlib_level9_bytes": 522
+    },
+    {
+      "bytes": 940,
+      "path": ".linkedspec-data/scratch/context-native-luajit.log",
+      "sha256": "a3b393b41fcbe35986e7aebd097a055b8a9d4d1092cb5c302cc23f71c71d2ab3",
+      "zlib_level9_bytes": 545
+    },
+    {
+      "bytes": 397,
+      "path": ".linkedspec-data/scratch/context-native-option-controls.json",
+      "sha256": "0a38ba31296d44c88291db1173fb35ca4401ff10f2bb1c0666418a13439d7dcd",
+      "zlib_level9_bytes": 241
+    },
+    {
+      "bytes": 644,
+      "path": ".linkedspec-data/scratch/context-native-perl.log",
+      "sha256": "4c9dd341bdfd805ce75036f3b6afd869bfc81990d13f2bd965794857af93f529",
+      "zlib_level9_bytes": 414
+    },
+    {
+      "bytes": 931,
+      "path": ".linkedspec-data/scratch/context-native-puc.log",
+      "sha256": "f6ae6ea3bfb0ce63acf73dec6e860008c8fcced98705793fdca00e62c510c079",
+      "zlib_level9_bytes": 544
+    },
+    {
+      "bytes": 3380828,
+      "path": ".linkedspec-data/scratch/context-native-rust-build.log",
+      "sha256": "89458aaff79baf6ca4dc8ae69398cc8a541297585bb6f5b9a73a7c888f2dd7a7",
+      "zlib_level9_bytes": 121819
+    },
+    {
+      "bytes": 758,
+      "path": ".linkedspec-data/scratch/context-native-rust.log",
+      "sha256": "09fc964c3e8b7358f90607af7813d34e7f1fe3036c0b6f0a9255a2bd6fb9be18",
+      "zlib_level9_bytes": 474
+    },
+    {
+      "bytes": 274,
+      "path": ".linkedspec-data/scratch/context-rust-book.log",
+      "sha256": "cbdda8dcad46318a1b4e15f9240ef7f4441ab72d8513b00a7a7933b92caac2b6",
+      "zlib_level9_bytes": 208
+    },
+    {
+      "bytes": 3382090,
+      "path": ".linkedspec-data/scratch/context-rust-carriers.log",
+      "sha256": "c74d03d024672f03805c75123e2da874370b0977e38dcf51b4a730b875846d1a",
+      "zlib_level9_bytes": 122387
+    },
+    {
+      "bytes": 3382343,
+      "path": ".linkedspec-data/scratch/context-rust-final.log",
+      "sha256": "0e8e397b7ddd30450b991542d0693983db10566b96ab5fd8b2b4c3f1c97cedac",
+      "zlib_level9_bytes": 122376
+    },
+    {
+      "bytes": 0,
+      "path": ".linkedspec-data/scratch/context-rust-format.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "zlib_level9_bytes": 8
+    },
+    {
+      "bytes": 274,
+      "path": ".linkedspec-data/scratch/entry-boundary-book-final.log",
+      "sha256": "6aa87f841c6348cb557866f9a9ec619b46aa4e2339b4777cb30ba3ce8bfd4683",
+      "zlib_level9_bytes": 209
+    },
+    {
+      "bytes": 274,
+      "path": ".linkedspec-data/scratch/entry-boundary-book.log",
+      "sha256": "1771f4b67c71e9470f0d8015b58cdd98634d0b73a20669d00591347b1baa17be",
+      "zlib_level9_bytes": 209
+    },
+    {
+      "bytes": 253363,
+      "path": ".linkedspec-data/scratch/entry-boundary-focused-green.log",
+      "sha256": "cf192a667ece54d9d1179f3b6adc277c912206db2599ad899ff6ecc06ed5302d",
+      "zlib_level9_bytes": 21998
+    },
+    {
+      "bytes": 193549,
+      "path": ".linkedspec-data/scratch/entry-boundary-generated-final.log",
+      "sha256": "e9ad807c547aac12e3bc88f4bc75cfa2526b8e8e18c445dbc502eaafbad80892",
+      "zlib_level9_bytes": 15739
+    },
+    {
+      "bytes": 1791056,
+      "path": ".linkedspec-data/scratch/entry-boundary-phase0-final.log",
+      "sha256": "46525c518175526e30692e5d1d3f54a1d16c8ba4644173f81781025666846543",
+      "zlib_level9_bytes": 142992
+    },
+    {
+      "bytes": 1792162,
+      "path": ".linkedspec-data/scratch/entry-boundary-phase0.log",
+      "sha256": "fcdc85e90e8b64c07ed06ace39684f120489c662d4a2e67a8cc38a2c0fcf9a16",
+      "zlib_level9_bytes": 143511
+    },
+    {
+      "bytes": 195032,
+      "path": ".linkedspec-data/scratch/entry-boundary-red-with-regression.log",
+      "sha256": "83b3b2a2a153174dbcd32753dd0a5a35d1eeda732a5f6074d63f88193e2dc2cd",
+      "zlib_level9_bytes": 16059
+    },
+    {
+      "bytes": 363,
+      "path": ".linkedspec-data/scratch/entry-boundary-storage.log",
+      "sha256": "883cd60c441ae54bfe14f7c48bec67e17d1e66ed9ad84c360a7b925820f243e4",
+      "zlib_level9_bytes": 208
+    },
+    {
+      "bytes": 449,
+      "path": ".linkedspec-data/scratch/lossless331/inter_match_gap_capture.log",
+      "sha256": "9479cae2bb2b5c57d5f5faf06d182ca4cfa5716d3e9b972341a71ee1e4cdf305",
+      "zlib_level9_bytes": 237
+    },
+    {
+      "bytes": 274,
+      "path": ".linkedspec-data/scratch/lossless331/mdbook.log",
+      "sha256": "b9881352c2786b481f5a7eafee1d7b072077d88b531626a779d74f28479d6e33",
+      "zlib_level9_bytes": 209
+    },
+    {
+      "bytes": 389,
+      "path": ".linkedspec-data/scratch/lossless331/progressive_span_dispatch.log",
+      "sha256": "fb63668fbd936c102992d27dc47e9a8d6d843cc9b3db9f94845682648b8728a0",
+      "zlib_level9_bytes": 249
+    },
+    {
+      "bytes": 339,
+      "path": ".linkedspec-data/scratch/lossless331/staged_ast_enrichment.log",
+      "sha256": "1a7f7a1b01c6865f08350276c188460f729f1dc6f30b05d25ddf904b25bbdf21",
+      "zlib_level9_bytes": 230
+    },
+    {
+      "bytes": 431,
+      "path": ".linkedspec-data/scratch/lossless331/typed_source_location.log",
+      "sha256": "1e7b9e4f5674c8c3400e9b7dc8b3d007adb9c08b06a5092cf1346e899495c087",
+      "zlib_level9_bytes": 265
+    },
+    {
+      "bytes": 896,
+      "path": ".linkedspec-data/scratch/lossless332/book-mode-before.log",
+      "sha256": "985a55a8523b32abf0b2d787b7c162698e00a21d198657dcdaf49149d08caf2a",
+      "zlib_level9_bytes": 290
+    },
+    {
+      "bytes": 227,
+      "path": ".linkedspec-data/scratch/lossless332/dependents.log",
+      "sha256": "e2019026498f7f991fff0d0e1cb0b3d361124abb808b926b77b82089b2c5e80b",
+      "zlib_level9_bytes": 175
+    },
+    {
+      "bytes": 449,
+      "path": ".linkedspec-data/scratch/lossless332/gaps.log",
+      "sha256": "9479cae2bb2b5c57d5f5faf06d182ca4cfa5716d3e9b972341a71ee1e4cdf305",
+      "zlib_level9_bytes": 237
+    },
+    {
+      "bytes": 1995,
+      "path": ".linkedspec-data/scratch/lossless332/initial-green.log",
+      "sha256": "f8705c2ef08a9d7f05528c06fe3e63f2c24784bd35a0261cfbd5ff77e11fcb38",
+      "zlib_level9_bytes": 396
+    },
+    {
+      "bytes": 274,
+      "path": ".linkedspec-data/scratch/lossless332/mdbook.log",
+      "sha256": "fddba4cc250ab07edd33cf371b6b428c1f0f1de0779a8eec2302c8551b32aa96",
+      "zlib_level9_bytes": 209
+    },
+    {
+      "bytes": 163,
+      "path": ".linkedspec-data/scratch/lossless332/readiness-final.log",
+      "sha256": "b8164ebb526bf30f0780510487e8b618f2d8fc23e1ac0eb7ff1f561006c578de",
+      "zlib_level9_bytes": 140
+    },
+    {
+      "bytes": 339,
+      "path": ".linkedspec-data/scratch/lossless332/staged.log",
+      "sha256": "1a7f7a1b01c6865f08350276c188460f729f1dc6f30b05d25ddf904b25bbdf21",
+      "zlib_level9_bytes": 230
+    },
+    {
+      "bytes": 326,
+      "path": ".linkedspec-data/scratch/lossless333/dependents.log",
+      "sha256": "6fa3774767fcc080598e5b5d2e1ec3b18dfb73ee4da8f0ad0ac46d8405be39b9",
+      "zlib_level9_bytes": 214
+    },
+    {
+      "bytes": 274,
+      "path": ".linkedspec-data/scratch/lossless333/mdbook.log",
+      "sha256": "411ebed740c447e36de82f71f6c24d4bd305c1986b3b40d0bf90f95c5dfbb78b",
+      "zlib_level9_bytes": 209
+    },
+    {
+      "bytes": 166,
+      "path": ".linkedspec-data/scratch/lossless333/readiness-final.log",
+      "sha256": "9ffb9f6b2127b2a50868aa02ff3d6c9ce482595ebe48fc80c9e5e28c2d7f802b",
+      "zlib_level9_bytes": 141
+    },
+    {
+      "bytes": 339,
+      "path": ".linkedspec-data/scratch/lossless333/staged-neutral.log",
+      "sha256": "1a7f7a1b01c6865f08350276c188460f729f1dc6f30b05d25ddf904b25bbdf21",
+      "zlib_level9_bytes": 230
+    },
+    {
+      "bytes": 78,
+      "path": ".linkedspec-data/scratch/lossless3341/book-source.log",
+      "sha256": "0db640b55b0a2195f8f610fc7ab73a2ec83542b7adc2540bbfac53077f436baa",
+      "zlib_level9_bytes": 80
+    },
+    {
+      "bytes": 3382922,
+      "path": ".linkedspec-data/scratch/lossless3341/dependents.log",
+      "sha256": "0e46b7feb0392cfd3c60ccdf8be9035e82e9558184c405fd1ee6068b26021e2a",
+      "zlib_level9_bytes": 122542
+    },
+    {
+      "bytes": 274,
+      "path": ".linkedspec-data/scratch/lossless3341/mdbook.log",
+      "sha256": "e4253fdfec60da489903f3f6bc7decd76a20cb5718c33d7d9fd43bfff2242e69",
+      "zlib_level9_bytes": 209
+    },
+    {
+      "bytes": 3381424,
+      "path": ".linkedspec-data/scratch/lossless3341/second.log",
+      "sha256": "eaa09fd99a492c8aa8ef1eda2f0a12f3eda516eff8c9419d8784022a4b34fab8",
+      "zlib_level9_bytes": 122165
+    },
+    {
+      "bytes": 339,
+      "path": ".linkedspec-data/scratch/lossless3341/staged-neutral.log",
+      "sha256": "1a7f7a1b01c6865f08350276c188460f729f1dc6f30b05d25ddf904b25bbdf21",
+      "zlib_level9_bytes": 230
+    },
+    {
+      "bytes": 16919634,
+      "path": ".linkedspec-data/scratch/lossless3341/storage.log",
+      "sha256": "c904fada806127096835cc1c93936150af8dce7a487a17511f6ae6efc655b726",
+      "zlib_level9_bytes": 613006
+    },
+    {
+      "bytes": 62,
+      "path": ".linkedspec-data/scratch/lossless3342/analyze-final.log",
+      "sha256": "b8dd74b535dfea31f86c81e69876a7f3ca8787c07fc6e2c8d14b2277b996bfb3",
+      "zlib_level9_bytes": 67
+    },
+    {
+      "bytes": 77,
+      "path": ".linkedspec-data/scratch/lossless3342/book-source.log",
+      "sha256": "7dd55848457fb529a8ba6ef5402b6f7c1cde92ccf6f03292ce2dbf00d3393571",
+      "zlib_level9_bytes": 82
+    },
+    {
+      "bytes": 10853,
+      "path": ".linkedspec-data/scratch/lossless3342/dependents-final.log",
+      "sha256": "e2037c9d7a34923d78746ffd2093caaf2023d36924bf5518519df0cd6cee280a",
+      "zlib_level9_bytes": 726
+    },
+    {
+      "bytes": 261,
+      "path": ".linkedspec-data/scratch/lossless3342/final.log",
+      "sha256": "2c25e19e94904f18126cb148861510286a4968914717fda975b0c82351951988",
+      "zlib_level9_bytes": 171
+    },
+    {
+      "bytes": 274,
+      "path": ".linkedspec-data/scratch/lossless3342/mdbook.log",
+      "sha256": "397d80d6d1d185e1ead29af59e440162c717dccb5aa767a90ffb32cf83f3fe06",
+      "zlib_level9_bytes": 209
+    },
+    {
+      "bytes": 339,
+      "path": ".linkedspec-data/scratch/lossless3342/staged-neutral.log",
+      "sha256": "1a7f7a1b01c6865f08350276c188460f729f1dc6f30b05d25ddf904b25bbdf21",
+      "zlib_level9_bytes": 230
+    },
+    {
+      "bytes": 2162,
+      "path": ".linkedspec-data/scratch/lossless3342/storage-final.log",
+      "sha256": "cf475f6510fe07a06d49c439a210548f7621143fbd5058c4163f22fb114a1a81",
+      "zlib_level9_bytes": 428
+    },
+    {
+      "bytes": 146,
+      "path": ".linkedspec-data/scratch/lossless3343/book-source.log",
+      "sha256": "5ea4d25de1b7cde12e6fd478870d3e7b516ec69fd5d826f6f33719854c44ff28",
+      "zlib_level9_bytes": 124
+    },
+    {
+      "bytes": 994,
+      "path": ".linkedspec-data/scratch/lossless3343/dependents.log",
+      "sha256": "e404dcac68fc1a6c552109210272e425fa0acb8e226d226231bfd2046d88f0a3",
+      "zlib_level9_bytes": 352
+    },
+    {
+      "bytes": 816,
+      "path": ".linkedspec-data/scratch/lossless3343/initial.log",
+      "sha256": "e5763b69222c9d9b2e9add788e9e4e6b2a4be664252931c25400c68e4f715f4f",
+      "zlib_level9_bytes": 258
+    },
+    {
+      "bytes": 274,
+      "path": ".linkedspec-data/scratch/lossless3343/mdbook.log",
+      "sha256": "d6ff7d5f8b5b0a225278307b213e74cc6619b6e489ab5a4167ff533d29135bf4",
+      "zlib_level9_bytes": 209
+    },
+    {
+      "bytes": 339,
+      "path": ".linkedspec-data/scratch/lossless3343/staged-neutral.log",
+      "sha256": "1a7f7a1b01c6865f08350276c188460f729f1dc6f30b05d25ddf904b25bbdf21",
+      "zlib_level9_bytes": 230
+    },
+    {
+      "bytes": 129,
+      "path": ".linkedspec-data/scratch/lossless3343/storage.log",
+      "sha256": "03dcabcf60256cb82d68bdef11aba65253694e55fb96815c6e9b6333dd185a57",
+      "zlib_level9_bytes": 116
+    },
+    {
+      "bytes": 165,
+      "path": ".linkedspec-data/scratch/lossless3344/book-source.log",
+      "sha256": "2e8a71a548ea371f5a55384923f554e0dce8c9a7bb60292f22f30145f5b8c4fc",
+      "zlib_level9_bytes": 137
+    },
+    {
+      "bytes": 76,
+      "path": ".linkedspec-data/scratch/lossless3344/inter_match_gap_capture_contract_test-luajit.log",
+      "sha256": "32f522f778f27fbf488190bf033511a5e72a43ebb6958ecd3d0a9c6a63dc8bce",
+      "zlib_level9_bytes": 82
+    },
+    {
+      "bytes": 77,
+      "path": ".linkedspec-data/scratch/lossless3344/inter_match_gap_capture_contract_test-puc.log",
+      "sha256": "e864b86375b06d86487d36e9b92ad2e77c28252329bcdfebc21e8222e4679e26",
+      "zlib_level9_bytes": 82
+    },
+    {
+      "bytes": 58,
+      "path": ".linkedspec-data/scratch/lossless3344/luajit-initial.log",
+      "sha256": "0d6f99f182abe616d475baeac4f04136b7b6a59ed30813f7b41f0b2ccb75ce2f",
+      "zlib_level9_bytes": 63
+    },
+    {
+      "bytes": 274,
+      "path": ".linkedspec-data/scratch/lossless3344/mdbook.log",
+      "sha256": "dc2266cbe3057a4e870a9237a021dd2e9aad9ff8871cdbbd6746879a7b87b0c5",
+      "zlib_level9_bytes": 208
+    },
+    {
+      "bytes": 58,
+      "path": ".linkedspec-data/scratch/lossless3344/puc-initial.log",
+      "sha256": "0d6f99f182abe616d475baeac4f04136b7b6a59ed30813f7b41f0b2ccb75ce2f",
+      "zlib_level9_bytes": 63
+    },
+    {
+      "bytes": 99,
+      "path": ".linkedspec-data/scratch/lossless3344/sexpr_document_v1_test-luajit.log",
+      "sha256": "9e9297435c1094d3a1faed88a489377f8fcebec06ee1e90475d1174339c20d6a",
+      "zlib_level9_bytes": 102
+    },
+    {
+      "bytes": 99,
+      "path": ".linkedspec-data/scratch/lossless3344/sexpr_document_v1_test-puc.log",
+      "sha256": "9e9297435c1094d3a1faed88a489377f8fcebec06ee1e90475d1174339c20d6a",
+      "zlib_level9_bytes": 102
+    },
+    {
+      "bytes": 339,
+      "path": ".linkedspec-data/scratch/lossless3344/staged-neutral.log",
+      "sha256": "1a7f7a1b01c6865f08350276c188460f729f1dc6f30b05d25ddf904b25bbdf21",
+      "zlib_level9_bytes": 230
+    },
+    {
+      "bytes": 68,
+      "path": ".linkedspec-data/scratch/lossless3344/staged_ast_enrichment_contract_test-luajit.log",
+      "sha256": "e19cd589ab9570ae6ea451601e7ff32aa3e209e2fff3a884077feef5a606c928",
+      "zlib_level9_bytes": 73
+    },
+    {
+      "bytes": 69,
+      "path": ".linkedspec-data/scratch/lossless3344/staged_ast_enrichment_contract_test-puc.log",
+      "sha256": "b9115fd6ca2041bb5e1b0e8b4dfa9a8f982f711eb9f94fa98cfc8912c613d1d7",
+      "zlib_level9_bytes": 74
+    },
+    {
+      "bytes": 501,
+      "path": ".linkedspec-data/scratch/lossless3344/storage.log",
+      "sha256": "1b9b2f663323bdfe50eae3729304e811cb904ecce2210a6b2272afe77ef56f8f",
+      "zlib_level9_bytes": 281
+    },
+    {
+      "bytes": 224,
+      "path": ".linkedspec-data/scratch/lua-census-baseline.log",
+      "sha256": "7bc501574fca4f4123c2b07a754a8249c96425e201c374e609865e49cf6ebc26",
+      "zlib_level9_bytes": 193
+    },
+    {
+      "bytes": 37224346,
+      "path": ".linkedspec-data/scratch/lua-census-canonical-first-failed.log",
+      "sha256": "2207dcadf55f954760af8d96895e6600b89f43c49c4aa791dedeba448b7b4dc8",
+      "zlib_level9_bytes": 1354376
+    },
+    {
+      "bytes": 1875,
+      "path": ".linkedspec-data/scratch/lua-census-focused-final.log",
+      "sha256": "39ffa9527a9b8e26d41e1aa78ce2d10e20d23589d3027e99883b996a40f9e680",
+      "zlib_level9_bytes": 471
+    },
+    {
+      "bytes": 138,
+      "path": ".linkedspec-data/scratch/lua-census-mutation-green.log",
+      "sha256": "f55415aacdf95ae079c433091d44d710a84274e53677cdd1e59af39ce0294e90",
+      "zlib_level9_bytes": 118
+    },
+    {
+      "bytes": 356,
+      "path": ".linkedspec-data/scratch/lua-census-perl-inventory-red.log",
+      "sha256": "7722801561ec6f4290594194e7cdd336b7e8cafb673bd36c8069867910f42a06",
+      "zlib_level9_bytes": 210
+    },
+    {
+      "bytes": 363,
+      "path": ".linkedspec-data/scratch/lua-census-perl-storage-green.log",
+      "sha256": "883cd60c441ae54bfe14f7c48bec67e17d1e66ed9ad84c360a7b925820f243e4",
+      "zlib_level9_bytes": 208
+    },
+    {
+      "bytes": 917,
+      "path": ".linkedspec-data/scratch/lua-census-selector-green.log",
+      "sha256": "df68ce9554e52e973567b9ae9607672e32292ae2e05b040e7aab32fb918df61e",
+      "zlib_level9_bytes": 448
+    },
+    {
+      "bytes": 87,
+      "path": ".linkedspec-data/scratch/lua-census-selector-red.log",
+      "sha256": "38a3834e4698f92df375c621c9e39bb6e4144be57a92705b6e69b5e32245c1a1",
+      "zlib_level9_bytes": 86
+    },
+    {
+      "bytes": 501,
+      "path": ".linkedspec-data/scratch/lua-census-storage-final.log",
+      "sha256": "1b9b2f663323bdfe50eae3729304e811cb904ecce2210a6b2272afe77ef56f8f",
+      "zlib_level9_bytes": 281
+    },
+    {
+      "bytes": 369,
+      "path": ".linkedspec-data/scratch/nested-dart-analysis.log",
+      "sha256": "57de3ba1c48b3686f79fc459f54347beadf8e97e4ef7f28b8148daa5e18bce3a",
+      "zlib_level9_bytes": 174
+    },
+    {
+      "bytes": 274,
+      "path": ".linkedspec-data/scratch/nested-dart-book.log",
+      "sha256": "9ba104990c745fdecb8fbfaa94168a017f623caf6bf3946354686fcc8798c4ca",
+      "zlib_level9_bytes": 208
+    },
+    {
+      "bytes": 230,
+      "path": ".linkedspec-data/scratch/nested-dart-carriers.log",
+      "sha256": "3b11823c102b901b03031c1c8786443a09bac62bde8bb22b23b2a1a011b14f96",
+      "zlib_level9_bytes": 157
+    },
+    {
+      "bytes": 6208,
+      "path": ".linkedspec-data/scratch/nested-dart-compatibility.log",
+      "sha256": "77d2ad13d56d4e90697f6b4cbd46d8c3ff02d34ff4e37067a6e74be224e41a67",
+      "zlib_level9_bytes": 423
+    },
+    {
+      "bytes": 62,
+      "path": ".linkedspec-data/scratch/nested-dart-focused-analysis.log",
+      "sha256": "b8dd74b535dfea31f86c81e69876a7f3ca8787c07fc6e2c8d14b2277b996bfb3",
+      "zlib_level9_bytes": 67
+    },
+    {
+      "bytes": 47,
+      "path": ".linkedspec-data/scratch/nested-dart-format.log",
+      "sha256": "49e1d7c17e381c4cf29c50278d30c5bbb0615c2e84748ed46e37b61bb09bb48c",
+      "zlib_level9_bytes": 55
+    },
+    {
+      "bytes": 274,
+      "path": ".linkedspec-data/scratch/nested-entry-book-final.log",
+      "sha256": "ce5be3b666d62c16fcbf133743625d50eeafc822ea04e431b208b0853a2eeebf",
+      "zlib_level9_bytes": 208
+    },
+    {
+      "bytes": 37978,
+      "path": ".linkedspec-data/scratch/nested-entry-final-red-forced.log",
+      "sha256": "a99c1aa175026573624bd002728a3b79145e6e1442ea2477cbf43019162184bb",
+      "zlib_level9_bytes": 2965
+    },
+    {
+      "bytes": 259680,
+      "path": ".linkedspec-data/scratch/nested-entry-focused.log",
+      "sha256": "bebf8f5e08c4907c4bb931549eb3168c38bb395648c51fd876c7b98984657f71",
+      "zlib_level9_bytes": 22418
+    },
+    {
+      "bytes": 1791026,
+      "path": ".linkedspec-data/scratch/nested-entry-phase0.log",
+      "sha256": "12b918bf5222e8374a8dd40ecb281985eaba3dd5343047d5d605de6519e84165",
+      "zlib_level9_bytes": 142982
+    },
+    {
+      "bytes": 274,
+      "path": ".linkedspec-data/scratch/nested-julia-book.log",
+      "sha256": "cd352b0d2faa508b585029234778586c9605e2b6ea64bc3e084a5b3e0f9f411f",
+      "zlib_level9_bytes": 208
+    },
+    {
+      "bytes": 658,
+      "path": ".linkedspec-data/scratch/nested-julia-carriers-green.log",
+      "sha256": "3df75933bbfa9d37c2e7fef3f4a287fafdd6b314e4fd30d1ad2c0c7ef55f138d",
+      "zlib_level9_bytes": 252
+    },
+    {
+      "bytes": 3106,
+      "path": ".linkedspec-data/scratch/nested-julia-carriers.log",
+      "sha256": "b14d5417fec68fbedd3a3643922788f321a556c352480ab5f3721d1dcf40ca2a",
+      "zlib_level9_bytes": 1035
+    },
+    {
+      "bytes": 12082,
+      "path": ".linkedspec-data/scratch/nested-julia-diagnose.log",
+      "sha256": "933220fe4f6516d57d42b93cd596a25859c96ec87d1a5f010a33949a1b85a478",
+      "zlib_level9_bytes": 1351
+    },
+    {
+      "bytes": 129,
+      "path": ".linkedspec-data/scratch/nested-julia-storage.log",
+      "sha256": "03dcabcf60256cb82d68bdef11aba65253694e55fb96815c6e9b6333dd185a57",
+      "zlib_level9_bytes": 116
+    },
+    {
+      "bytes": 274,
+      "path": ".linkedspec-data/scratch/nested-lua-book.log",
+      "sha256": "c91aa26f5634729d31268de437fc327a48147380092d9b0fd40a9dfb7d81eae0",
+      "zlib_level9_bytes": 209
+    },
+    {
+      "bytes": 157,
+      "path": ".linkedspec-data/scratch/nested-lua-luajit.log",
+      "sha256": "b82e40ebc37ed8ef7317523a4fc9ca508bb920a4373f8a8189962caa84ae58a9",
+      "zlib_level9_bytes": 135
+    },
+    {
+      "bytes": 157,
+      "path": ".linkedspec-data/scratch/nested-lua-puc.log",
+      "sha256": "b82e40ebc37ed8ef7317523a4fc9ca508bb920a4373f8a8189962caa84ae58a9",
+      "zlib_level9_bytes": 135
+    },
+    {
+      "bytes": 357,
+      "path": ".linkedspec-data/scratch/nested-lua-storage.log",
+      "sha256": "850a115ea13120c271cdafc2f2387eda48f134cd443c2b72e369772e48123306",
+      "zlib_level9_bytes": 188
+    },
+    {
+      "bytes": 744,
+      "path": ".linkedspec-data/scratch/nested-native-dart.log",
+      "sha256": "337a16cca05b53758a813dfedb29754835f1adcd8da3bb01bcde2b71d351d2c6",
+      "zlib_level9_bytes": 467
+    },
+    {
+      "bytes": 839,
+      "path": ".linkedspec-data/scratch/nested-native-julia.log",
+      "sha256": "f03d18322e4938a3a2c5882ef4f8124e2a5a10fe43f013766d5a3ca67e77f007",
+      "zlib_level9_bytes": 508
+    },
+    {
+      "bytes": 906,
+      "path": ".linkedspec-data/scratch/nested-native-luajit.log",
+      "sha256": "2d64442808ee0af755df0d9cd93459ea57085d87a84778f2a23d7e312d504f96",
+      "zlib_level9_bytes": 534
+    },
+    {
+      "bytes": 610,
+      "path": ".linkedspec-data/scratch/nested-native-perl.log",
+      "sha256": "dc062e7c172b824349cca911aef3c96fc217da0e2591b149395b58798dab2353",
+      "zlib_level9_bytes": 402
+    },
+    {
+      "bytes": 897,
+      "path": ".linkedspec-data/scratch/nested-native-puc.log",
+      "sha256": "e2380ed987dddc84e967b440d5fd4fb2cbac1ef0dc4da51b8220caf5665435f8",
+      "zlib_level9_bytes": 533
+    },
+    {
+      "bytes": 724,
+      "path": ".linkedspec-data/scratch/nested-native-rust.log",
+      "sha256": "3b6467d71ca050c259aa3d2456a855cd6d47002b75420ad5b017aff3c4657431",
+      "zlib_level9_bytes": 461
+    },
+    {
+      "bytes": 1202,
+      "path": ".linkedspec-data/scratch/nested-perl-descriptor.log",
+      "sha256": "464066a793d874f011a5cb701bf45f8c6af17b43f4addd8571186dc8133ceef6",
+      "zlib_level9_bytes": 291
+    },
+    {
+      "bytes": 347,
+      "path": ".linkedspec-data/scratch/nested-perl-entry-green.log",
+      "sha256": "8c65919de90f318b04c1e2077d6766804cb0bd7e15236e86de24e2ced24167b1",
+      "zlib_level9_bytes": 98
+    },
+    {
+      "bytes": 347,
+      "path": ".linkedspec-data/scratch/nested-perl-entry-probe.log",
+      "sha256": "ff129ec3ec0e3d89262256588d12a3e1b47d37331a144a854a908bce347205ac",
+      "zlib_level9_bytes": 96
+    },
+    {
+      "bytes": 274,
+      "path": ".linkedspec-data/scratch/nested-rust-book.log",
+      "sha256": "36c1b4863dcb344de354361bc8ae97ff9abec715c57e80bec396898525996171",
+      "zlib_level9_bytes": 208
+    },
+    {
+      "bytes": 3381395,
+      "path": ".linkedspec-data/scratch/nested-rust-carriers.log",
+      "sha256": "10d2de2416fcc6d383139fb1926190b19b62bd1f154f0db03b821b3fa37a8a28",
+      "zlib_level9_bytes": 122107
+    },
+    {
+      "bytes": 3381413,
+      "path": ".linkedspec-data/scratch/nested-rust-compatibility.log",
+      "sha256": "6647cd5063ce51fb7b955d24f970efe092c138e893a2ceb7d08e444662ba73dc",
+      "zlib_level9_bytes": 122098
+    }
+  ],
+  "controls": {
+    "actual_byte_corruption_rejected": ".linkedspec-data/scratch/context-dart-analysis-final.log",
+    "outside_paths_rejected": 3,
+    "population_rejections": [
+      {
+        "mutation": "remove-member",
+        "path": ".linkedspec-data/scratch/context-dart-analysis-final.log",
+        "reason": "milestone population differs from audited population"
+      },
+      {
+        "mutation": "change-identity",
+        "path": ".linkedspec-data/scratch/context-dart-analysis-final.log",
+        "reason": "milestone population differs from audited population"
+      }
+    ]
+  },
+  "format": 1,
+  "limits": "Read-only population/size/hash and selected coverage census. UTF-8 strings/joined string arrays and archive extensions only; other encodings/surfaces unassessed. Compression is a sizing probe, not an archive. Required raw inputs remain local; byte recovery is not claimed.",
+  "milestone_inputs": {
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.3-verification.json": "a02e741db32895f565afcc6cc14ed597136b6ff96fa1b969086d9890c833721a",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.7-verification.json": "69993ccf6c58870fb51bbd4127b5fd11e035fcd69c4e4d3fe018cdf6d9d2330a",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.5-verification.json": "218e6b7df33c5ac8e978cb0c866312407b6ea8207f473249e342a154954881dc"
+  },
+  "milestone_log_counts": {
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.3-verification.json": 48,
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.7-verification.json": 39,
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.5-verification.json": 47
+  },
+  "owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.2.0",
+  "producer_sha256": "7d059224e4729e0dbec63c1f447c17f1e2c7131f7904ae16be27fb1f5b57118f",
+  "reference": {
+    "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.1-verification.json",
+    "sha256": "eed4b91daf4f28421dbbd306295b5f19309ea8b9cd5dbe3b74e5888e94d5aa9b"
+  },
+  "selected_coverage": {},
+  "selected_inputs": {
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.1-verification.json": {
+      "bytes": 7141,
+      "sha256": "1f2d260804af53333c1fdb47ef0b41b7813cbdb776dd10e1cd9139b900bcb033"
+    },
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.1.1-verification.json": {
+      "bytes": 4619,
+      "sha256": "6466bc49541fdcba6f4e54e54ccd656ec068ebf92cb883fb0be1c87283b61627"
+    },
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.2-verification.json": {
+      "bytes": 2666,
+      "sha256": "7aab8efd46714ff3bdf088621a60a8791fa4434794ccfa2657a9aa198a725c56"
+    },
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.3-verification.json": {
+      "bytes": 3961,
+      "sha256": "dfdeda4673510fd8ded3c6fc1f044680634f3ef35d6bee61773a45edc56a0bf0"
+    },
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.4-verification.json": {
+      "bytes": 4197,
+      "sha256": "194f984ff7287f32442c89eace8431e589d12d3cb7455b1627dd47b4700fea50"
+    },
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.5-verification.json": {
+      "bytes": 3380,
+      "sha256": "c0e2e7dd9718d3c7daccbefc7ca765660020f411db58e8924a64d2013dca06b6"
+    },
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.6-verification.json": {
+      "bytes": 8225,
+      "sha256": "5eb6f0fbd7838291236550318df39ff9c6214b964775e8f80610aefb1260a517"
+    },
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.7-verification.json": {
+      "bytes": 4858,
+      "sha256": "babaeac1bd2bd2b368768d0e6a737766bef03279f982dd4946e40c8f8bee0519"
+    },
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.3-verification.json": {
+      "bytes": 24740,
+      "sha256": "a02e741db32895f565afcc6cc14ed597136b6ff96fa1b969086d9890c833721a"
+    },
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.1-verification.json": {
+      "bytes": 4855,
+      "sha256": "1e190b9d960684120834ac13a09307471f65aeb89fa84c1d4d0d64bdecd42077"
+    },
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.2-verification.json": {
+      "bytes": 19523,
+      "sha256": "4da5202dcdd47ce10c1bc1f94a0298d7d0de8efc1250feaaeba249b9c752957f"
+    },
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.3-verification.json": {
+      "bytes": 3876,
+      "sha256": "714e00e0d191387a5dbaa7f96281c9a7a4004904f81eafad53c3369bfa2efa15"
+    },
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.4-verification.json": {
+      "bytes": 4926,
+      "sha256": "2570af5a8d131019e18f9beeadc267095b08c2aff99927ad7c392a521195c6f4"
+    },
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.5-verification.json": {
+      "bytes": 2923,
+      "sha256": "7729e2b76ad5f5622df8974421acaa187b8af49e8a6d376408073181a070dae9"
+    },
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.6-verification.json": {
+      "bytes": 3566,
+      "sha256": "fe5bf56c26341c4337ba44435e0d8e023aabe37efe11546abad4a886586fcc9b"
+    },
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.7-verification.json": {
+      "bytes": 31579,
+      "sha256": "69993ccf6c58870fb51bbd4127b5fd11e035fcd69c4e4d3fe018cdf6d9d2330a"
+    },
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.1-verification.json": {
+      "bytes": 13897,
+      "sha256": "92a42d84837000f086192c96f76fb6de3a429c4a2c9cd7c9be952d55e54deb1e"
+    },
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.2-verification.json": {
+      "bytes": 4342,
+      "sha256": "fb2f5a5704b62f2a229bf6c357e92189f4790f8a5c188878df475cb3a8f52c5b"
+    },
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.3-verification.json": {
+      "bytes": 4618,
+      "sha256": "86b962b6c9f473ede5448139739cb9c0b8d34c7539bab4bac01c026452988c43"
+    },
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.1-verification.json": {
+      "bytes": 6081,
+      "sha256": "49bce733254a848551a7938ceea7a63ed2a8b4d13184ef361f278bf198477e4a"
+    },
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.2-verification.json": {
+      "bytes": 6225,
+      "sha256": "b3326fa51df18abfd4c42af4673d0c4ac82e5e69afa153ec9f58656254c56f83"
+    },
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.3-verification.json": {
+      "bytes": 5604,
+      "sha256": "75cc05d400c9f9a994c881f952f930d41173aedcc70b701516f642927148a1eb"
+    },
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.4-verification.json": {
+      "bytes": 7463,
+      "sha256": "2aa41d755379eddc043fc3d60e2a7ba8587e06735f125410f98782025c63f638"
+    },
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.5-verification.json": {
+      "bytes": 31102,
+      "sha256": "218e6b7df33c5ac8e978cb0c866312407b6ea8207f473249e342a154954881dc"
+    }
+  },
+  "summary": {
+    "exact_log_identities_in_selected_candidates": 0,
+    "inputs": 134,
+    "raw_bytes": 84613241,
+    "selected_checkpoint_bytes": 214367,
+    "selected_checkpoints": 24,
+    "zlib_level9_bytes": 3394928
+  },
+  "zlib_version": "1.2.12"
+}

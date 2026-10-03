@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-10-03 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.2.0: census historical audit artifact inputs
+
+Retain a read-only source-bound census/capture: three original milestone populations48/39/47 equal the audited134-member map, all old hashes match, raw84,613,241 bytes and zlib1.2.12 level9 sizing3,394,928 bytes. Selected24 checkpoints/214,367 bytes yield zero complete-log identities among disclosed candidates; other encodings/surfaces remain unassessed. Actual-byte corruption, two population mutations and three outside paths reject. Freeze the earlier normalization claim at actual0f15 without changing observations/hashes. Retain a closed ZIP/manifest/restoration/audit-denial plan and explicit byte-recovery durability gap under .4.2.1. Focused census/book/Knowledge/history/memory/ten doctrines/diff govern landing; no production, fixture, CI/storage or dependency change.
+
 ## 2026-10-03 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.1: bind call-form normalization successor
 
 Add an explicit successor changing only the unsupported infix loop to num_lt/num_add calls. Preserve the original source/selection/checkpoints and sixteen independent case oracles; bind closed old/new provenance and exact recurring proof registration. Seven native/fresh cases pass21 top-level tests and eight actual-object/alias controls; four corrupted observations reject. Neutral152/16/44, historical audit24/257/149/134 with12 CI/six storage/three Phase0 byte-changing mutations, five dependent suites652 and rendered full book source/example pass. Reverse only the committed signature subtest/plan delta in historical audit; correct a no-op older CI mutator without refreshing old hashes.92 production/governing inputs remain exact. Exact staged canonical receipt governs this source/CI boundary. Bounded historical artifact-input recovery .0.4.2 precedes bridge canonical reconciliation; deferred-control/order/raw-readiness .0.5/.0.6/.0.7 remain independent.

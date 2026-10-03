@@ -1471,6 +1471,30 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
   Planned scope: Census selected input identities and existing archival coverage before classifying gaps; retain only the exact required opaque observation bytes through a bounded repository-volume format and tracked producer/manifest. All operational paths stay relative, every restored input must match its old hash, and historical sources/results remain unchanged. Do not execute historical writers or use observed trace paths as filesystem locations. Design a safe restore into a declared managed destination with no traversal/symlink escape or ambiguous overwrite; recover then rerun the actual audit and distinguishing controls. Broader source/claim audit remains startup5/29.
   Planned proof: Exact134 membership/bytes/hashes, actual isolated recovery and byte corruption/path/overwrite controls, complete unchanged historical audit and source-bound claim correction. Storage/artifact infrastructure and parent admission use receipt-bound canonical tier at activation. If inventory exceeds one safe artifact slice, split capture/recovery/signoff before implementation.
   Acceptance: The selected artifact-input leg has verified tracked recovery or an exact narrower named residual blocker; do not convert a hash-only record into an archival claim. Bridge .0.2.1.2 waits for this bounded repair.
+  Children: `.1.3.3.0.4.2.0`, `.1.3.3.0.4.2.1`
+  Slice decision: Separate the source-bound closed-population/coverage census and bounded format plan from archive/restoration implementation. The selected raw population is approximately84.6MB; preserve originals and exact old identities throughout. Census does not claim archival recovery or close the parent.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.2.0`
+  Status: `done`
+  Goal: Inventory the exact historical artifact population, assess selected existing coverage and choose a bounded recovery format before implementation.
+  Activation: Clean0f15e194febbe0e6099fba5ae5f9bca8a1b1d7be; normalization source/replay correction committed, all ten hooks/post-pointer pass, brief0, no required jobs. Relevant roadmap, audit reader, claim owner rules, recovery card and storage/task capacity policy reviewed. Archive/decoder implementation remains .4.2.1.
+  Owned paths / plan: New read-only .4.2.0 census producer/verification capture under docs/checkpoints and claim record under docs/claims; scoped recovery plan under docs/language-readiness; recovery Knowledge/card and relevant architecture-book teaching; current task/index/roadmaps/bounded continuity/derived Knowledge. Preserve all existing raw logs, producing checkpoints and source hashes. Freeze .4.1's checked normalization leg at actual0f15e194f without refreshing any measurements; its separate artifact gap stays open under parent .4.2. Scratch stays .linkedspec-data/scratch/objective-artifact-census. No production, fixture, CI/storage/hook, dependency or schema changes.
+  Verification tier: `focused`
+  Focused checks: Independent population reconstruction from the three historical milestones versus the current audit; each regular relative same-volume input's exact old hash/bytes; selected existing coverage census and actual distinguishing corruption/membership/path controls; source-bound capture and explicit durability disclosure; book/Knowledge/history/memory/all doctrines/diff.
+  Canonical trigger: none for read-only census/format planning; archive/restoration and recurring infrastructure implementation .4.2.1 require exact canonical proof.
+  Claim verification: `docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.2.0.json`
+  Acceptance: Exact measured membership/sizes/hashes and bounded coverage findings survive through a tracked producer/capture; recovery format and next implementation paths/proof are explicit. Missing byte-recovery durability remains disclosed under .4.2.1; census is not a repair/admission claim.
+
+  Completion: Independent48/39/47 milestone populations equal the committed audited134-member map. All original regular same-volume hashes match; raw84,613,241 bytes, independent zlib1.2.12 level9 lengths3,394,928 bytes. Selected24 checkpoints/214,367 bytes contain zero complete-log identities among whole/UTF-8-string/joined-array candidates; no archive-extension member in the three selected surfaces. Other encodings/surfaces remain unassessed. Actual-byte corruption, two actual population changes and three outside paths reject. Source-bound producer/capture and explicit ZIP/manifest/restoration/replay plan retained; no archive or byte recovery claimed. .4.1 normalization claim frozen at actual0f15 without changed measurements.
+  Verification: Read-only census and reason-sensitive controls PASS; book/Knowledge/history/memory/ten doctrines and diff govern focused landing.
+  Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.2.0 - census historical audit artifact inputs`.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.2.1`
+  Status: `pending`
+  Goal: Retain the exact selected observation bytes and prove safe isolated restoration plus historical audit re-derivation.
+  Dependencies: `.1.3.3.0.4.2.0`
+  Planned scope: Implement the reviewed bounded opaque-byte archive/manifest and read-only validator/restorer; all operational paths relative and managed on the repository volume. Exact original hash population, no traversal/symlink escape or overwrite, independent corruption/absence controls and actual original-input-read denial must distinguish recovery. Rerun the historical audit on restored inputs; retain original raw files and historical writers/results. Correct only the explicitly superseded selected durability legs after verified recovery, preserving their prior measurements. Recurring registration/owned CI evolution and canonical parent signoff remain in this leaf.
+  Acceptance: Exact selected bytes are recoverable from tracked inputs in an isolated managed destination and the complete audit passes without reading original local logs. Close .4.2 only with source-bound recovery/controls and exact canonical receipt; broader startup5/29 remains separate.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.3`
   Status: `pending`
@@ -1746,7 +1770,8 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 | 36 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.2` | `pending` | Canonical committed bridge reconciliation closes .0.2.1/.0.2 after literal repair. |
 | 37 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.0` | `done` | Eleven public pairs locate unsupported infix; select canonical call-form successor and retain raw-readiness .0.7/audit owners. |
 | 38 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.1` | `done` | Exact one-loop successor, seven paired cases and narrow historical audit verified; canonical receipt governs landing. |
-| 38.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.2` | `pending` | Verify recovery of the historical audit's134 retained input logs before bridge signoff. |
+| 38.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.2.0` | `done` | Exact134-input census and closed archive/restoration plan; recovery remains open. |
+| 38.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.2.1` | `pending` | Implement isolated exact-byte recovery and canonical parent signoff before bridge reconciliation. |
 | 39 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.3` | `pending` | Original minimal/normalization controls and independent dispatcher closeout. |
 | 40 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.1` | `pending` | Complete neutral-case and actual semantic-mutant execution after dispatcher prerequisite. |
 | 41 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.0` | `pending` | Diagnose accepted deferred attached-if execution after normalization handoff. |

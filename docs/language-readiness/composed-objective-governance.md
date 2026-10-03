@@ -114,3 +114,14 @@ Complete D/P execution and sixteen runtime semantic mutation roles remain with
 `.1.3.3.1`, after bridge/dispatcher reconciliation and independent deferred-control,
 residual-order and raw-readiness owners `.0.5/.0.6/.0.7`. Other backends and
 startup87.2/.3 retain independent acceptance; parent `.1.3` stays open.
+
+The `.4.2.0` source-bound census independently reconstructs134 original inputs from
+the48/39/47 milestone maps. All old hashes match, with84,613,241 raw bytes and
+3,394,928 independent zlib level9 bytes; sizing does not establish an archive.
+Selected24 checkpoints/214,367 bytes yield no complete log identity among the
+disclosed whole-byte/UTF-8-string/joined-array candidates. Other encodings/surfaces
+remain unassessed. Actual corruption, two population changes and three outside
+paths reject. The selected closed ZIP/manifest and isolated recovery/audit controls
+are specified in `docs/language-readiness/historical-audit-artifact-recovery.md`.
+`.4.2.1` owns implementation and canonical parent signoff. The earlier normalization
+claim is frozen at actual0f15; its measurements and separate open artifact gap remain.
