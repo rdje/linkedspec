@@ -862,13 +862,31 @@ primary adapter. See [[inter-match-gap-lua-implementation-plan]].
   quiet/exit/caller-error/arity observations and actual-object detachment requirements.
 - **HOW:** `bash tools/run_python_project_data.sh tools/check_composed_objective_contract.py`.
   Add `--observations <repo-relative-report>` only for an actual private producer report.
-- **PROOF:** 140 structural,16 observation and44 producer-report falsifiers plus two unrelated-error/two JSON
-  controls. Exact CI call/five inputs and historical-byte normalization are guarded; managed storage admits40
-  Python entrypoints. The checker executes no DSL; serialized predicates do not prove native classification,
+- **PROOF:** Current152 structural,16 observation and44 producer-report falsifiers plus two unrelated-error/two JSON
+  controls preserve the original140 structural proof and add explicit normalization source succession.
+  Original five CI inputs remain; the successor/native/fresh proof adds three separately owned inputs.
+  The checker executes no DSL; serialized predicates do not prove native classification,
   identity, detachment or execution. Runtime lanes retain healthy-baseline semantic mutations and actual evidence.
 - **OWNER:** `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.2`; schema/observer limits are in
   `docs/language-readiness/composed-objective-governance.md`. P1 Perl callback repair .1.3.3.0 precedes execution;
   startup87.2/.3 and all other prerequisites remain separate. No runtime/admission change.
+
+### 4.8.10 Historical objective artifact recovery
+
+- **WHAT:** `tests/language-readiness/recover_objective_audit_inputs.py` validates the closed134-log
+  ZIP/manifest against independent original milestone identities and the source-bound census. Validation
+  writes no files; explicit `--restore <relative-new-directory>` requires an unused destination beneath
+  `.linkedspec-data/scratch/objective-artifact-recovery/`, on the repository volume.
+- **HOW:** `bash tools/run_python_project_data.sh tests/language-readiness/recover_objective_audit_inputs.py`.
+  Run `bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.2.1-proof.py`
+  for actual isolated restoration, deterministic regeneration,22 recovery controls and full historical audit
+  under original-log-read/tracked-write denial. Only declared managed scratch is written.
+- **BOUNDARY:** All134 byte streams/84,613,241 bytes recover exactly from the3,406,206-byte archive.
+  Opaque log contents never supply operational paths.15 CI/six storage/three Phase0 mutations reconstruct
+  historical governance; runtime observations retain their dated per-leaf scope. One recurring proof call
+  and13 declared CI inputs are separately owned by `.0.4.2.1`. See
+  `docs/language-readiness/historical-audit-artifact-recovery.md`. Bridge/dispatcher/full D/P and broader
+  startup5/29 auditing remain separate.
 
 ### 4.9 `tools/check_semantic_introspection_contract.py` — neutral model/query oracle
 

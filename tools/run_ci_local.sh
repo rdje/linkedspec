@@ -312,6 +312,19 @@ require_tracked_file tests/language-readiness/composed/normalization.spec
 require_tracked_file tests/language-readiness/composed/normalization-calls.spec
 require_tracked_file t/composed_normalization_perl.t
 require_tracked_file docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.1-fresh.pl
+require_tracked_file tests/language-readiness/recover_objective_audit_inputs.py
+require_tracked_file tests/language-readiness/artifacts/objective-audit-inputs.zip
+require_tracked_file tests/language-readiness/artifacts/objective-audit-inputs.json
+require_tracked_file docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.2.1-proof.py
+require_tracked_file docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.2.1-archive.py
+require_tracked_file docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.2.0-census.py
+require_tracked_file docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.2.0-verification.json
+require_tracked_file tests/language-readiness/verify_objectives.py
+require_tracked_file docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.1-verification.json
+require_tracked_file docs/language-readiness/objective-reconciliation.md
+require_tracked_file docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.3-verification.json
+require_tracked_file docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.7-verification.json
+require_tracked_file docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.5-verification.json
 require_tracked_file tests/language-readiness/composed/diagnostic-invalid-arity.spec
 require_tracked_file tools/check_typed_source_location_six_runtime.sh
 require_tracked_file tools/check_recursive_observation_six_runtime.sh
@@ -732,6 +745,9 @@ bash tools/run_python_project_data.sh tools/check_language_closure_contract.py
 
 log "checking neutral composed objective fixtures and independent observations"
 bash tools/run_python_project_data.sh tools/check_composed_objective_contract.py
+
+log "checking isolated historical artifact recovery and read-denied audit"
+bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.2.1-proof.py
 
 log "checking pinned Unicode casing contract"
 bash tools/run_python_project_data.sh tools/check_unicode_case_contract.py

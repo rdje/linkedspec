@@ -59,6 +59,30 @@ NORMALIZATION_CI_INSERTIONS = (
      b'\nlog "running Perl call-form normalization source and native/fresh object controls"\n'
      b"PERL5LIB= prove -Iperl t/composed_normalization_perl.t\n"),
 )
+ARTIFACT_RECOVERY_OWNER = "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.2.1"
+ARTIFACT_CI_INSERTIONS = (
+    (b'require_tracked_file docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.1-fresh.pl\n',
+     b'require_tracked_file tests/language-readiness/recover_objective_audit_inputs.py\n'
+     b'require_tracked_file tests/language-readiness/artifacts/objective-audit-inputs.zip\n'
+     b'require_tracked_file tests/language-readiness/artifacts/objective-audit-inputs.json\n'
+     b'require_tracked_file docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.2.1-proof.py\n'
+     b'require_tracked_file docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.2.1-archive.py\n'
+     b'require_tracked_file docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.2.0-census.py\n'
+     b'require_tracked_file docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.2.0-verification.json\n'
+     b'require_tracked_file tests/language-readiness/verify_objectives.py\n'
+     b'require_tracked_file docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.1-verification.json\n'
+     b'require_tracked_file docs/language-readiness/objective-reconciliation.md\n'
+     b'require_tracked_file docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.3-verification.json\n'
+     b'require_tracked_file docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.7-verification.json\n'
+     b'require_tracked_file docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.5-verification.json\n'
+    ),
+    (b'bash tools/run_python_project_data.sh tools/check_composed_objective_contract.py\n\n',
+     b'log "checking isolated historical artifact recovery and read-denied audit"\n'
+     b'bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.2.1-proof.py\n'
+     b'\n'
+    ),
+)
+
 PERL_STORAGE_REPLACEMENTS = (
     (b"(( ${#perl_temp_owners[@]} == 27 )) ||\n",
      b"(( ${#perl_temp_owners[@]} == 28 )) ||\n"),
@@ -103,7 +127,7 @@ def verify_governance_evolution(source, contents, historical_hash):
     require(source == "tools/run_ci_local.sh", f"unapproved governance source: {source}")
     normalized = contents
     # Strip the later insertions first: their anchors are earlier owned additions.
-    for anchor, insertion in (NORMALIZATION_CI_INSERTIONS + PUSH_CI_INSERTIONS
+    for anchor, insertion in (ARTIFACT_CI_INSERTIONS + NORMALIZATION_CI_INSERTIONS + PUSH_CI_INSERTIONS
                               + COMPOSED_CI_INSERTIONS + CI_INSERTIONS):
         require(normalized.count(anchor + insertion) == 1,
                 f"governance registration mismatch: {source}")
@@ -115,6 +139,7 @@ def verify_governance_evolution(source, contents, historical_hash):
             "additional_owner": COMPOSED_GOVERNANCE_OWNER,
             "runtime_repair_owner": PUSH_REPAIR_OWNER,
             "source_correction_owner": NORMALIZATION_CORRECTION_OWNER,
+            "artifact_recovery_owner": ARTIFACT_RECOVERY_OWNER,
             "scope": "exact anchored checker/input registration; original CI bytes preserved"}
 
 
@@ -343,6 +368,10 @@ def falsify(report):
                 current.replace(NORMALIZATION_CI_INSERTIONS[1][1], b"", 1),
                 current.replace(NORMALIZATION_CI_INSERTIONS[1][1],
                                 NORMALIZATION_CI_INSERTIONS[1][1] * 2, 1),
+                current.replace(ARTIFACT_CI_INSERTIONS[0][1], b"", 1),
+                current.replace(ARTIFACT_CI_INSERTIONS[1][1], b"", 1),
+                current.replace(ARTIFACT_CI_INSERTIONS[1][1],
+                                ARTIFACT_CI_INSERTIONS[1][1] * 2, 1),
             )
             verify = verify_governance_evolution
             reasons = ("governance registration mismatch:", "unreviewed governance drift:")

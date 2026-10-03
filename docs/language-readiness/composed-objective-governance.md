@@ -80,9 +80,10 @@ case/value/event/failure/alias mutation roles remain exact.
 Canonical CI has one neutral checker call and one Perl normalization regression call.
 Eight exact tracked inputs cover the artifact/checker, three selected sources, the
 original normalization file and both native/fresh instruments. The objective audit
-removes only the two `.0.4.1` successor/proof insertions, then `.0.1` push, `.1.3.2`
+removes the two `.0.4.2.1` artifact insertions first, then the two `.0.4.1`
+successor/proof insertions, `.0.1` push and `.1.3.2`
 composed and `.1.2.2` closure insertions to reconstruct all historical CI bytes.
-Twelve reason-sensitive mutations reject missing/duplicate registrations and unrelated
+Fifteen reason-sensitive mutations reject missing/duplicate registrations and unrelated
 edits. Every counted mutation must change actual bytes; the older composed-input
 mutator removes its actual artifact line because the successor splits that old block.
 
@@ -99,10 +100,12 @@ checkpoints/257 references/149 inputs/134 logs, with12 CI/six storage/three Phas
 mutations. No old source hash or dated result is refreshed.
 
 Canonical proof governs this source succession and recurring Perl regression.
-The actual historical audit above requires134 retained local artifact inputs.
+The original `.4.1` audit required134 retained local artifact inputs. Current
+isolated recovery supplies their exact byte streams from the tracked archive.
 Its hash report does not establish byte recovery: the .4.1 claim explicitly marks
-that separate durability leg as a gap under P1 `.0.4.2`. Selected recovery must
-close before bridge parent signoff; normalization-only review skips legacy inputs
+that separate durability leg as a gap under P1 `.0.4.2` at its capture. Verified
+selected recovery now explicitly supersedes that leg without refreshing prior
+measurements; normalization-only review skips legacy inputs
 and leaves tracked captures unchanged. See
 `docs/knowledge/historical-objective-audit-input-recovery.md` for the bounded witness.
 The mode-denial instrument recovers its intermediate report data in memory from
@@ -123,5 +126,10 @@ disclosed whole-byte/UTF-8-string/joined-array candidates. Other encodings/surfa
 remain unassessed. Actual corruption, two population changes and three outside
 paths reject. The selected closed ZIP/manifest and isolated recovery/audit controls
 are specified in `docs/language-readiness/historical-audit-artifact-recovery.md`.
-`.4.2.1` owns implementation and canonical parent signoff. The earlier normalization
-claim is frozen at actual0f15; its measurements and separate open artifact gap remain.
+`.4.2.1` verifies exact134-input restoration,22 actual recovery controls and full
+audit24/257/149/134 with15/6/3 governance controls, under healthy zero original-log
+reads/tracked writes. Regeneration from restored bytes is byte-exact. One recurring
+proof/thirteen inputs and exact newest-first CI reversal retain prior bytes;
+canonical proof governs parent landing. The earlier normalization
+claim is frozen at actual0f15; its measurements remain. Only the separate selected
+artifact durability gap is superseded by the source-bound recovery proof.

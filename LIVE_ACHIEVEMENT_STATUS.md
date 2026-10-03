@@ -2,17 +2,19 @@
 
 ## Current Activity
 
-Full PNT: historical artifact-input census complete; isolated exact-byte recovery implementation follows.
+Full PNT: exact selected historical artifact recovery verified; committed bridge/parent reconciliation follows canonical artifact landing.
 
 ## Latest Completed Slice
 
-`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.2.0`: independent48/39/47 milestones reconstruct134 exact old log identities;84,613,241 raw bytes/3,394,928 independent compressed bytes. Bounded selected checkpoint coverage, actual corruption/two population/three path controls and tracked format plan retained. Byte-recovery leg remains open under .4.2.1; no parent admission.
+`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.2.1`: closed3,406,206-byte ZIP restores134 exact original inputs/84,613,241 bytes. Isolated regeneration is byte-exact;22 recovery controls and full audit24/257/149/134 with15/6/3 governance controls pass under healthy0 original-log/0 tracked-write attempts. One recurring proof/thirteen inputs and explicit selected durability supersession preserve all original measurements. Exact canonical receipt governs artifact parent landing.
 
 ## Next Action
 
-Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.2.1 from clean HEAD; implement the closed ZIP/manifest, safe isolated restoration and audit replay under original-input-read denial, then canonical parent signoff before bridge .0.2.1.2. P1 .0.5/.0.6/.0.7 remain separate.
+Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.2 from clean HEAD; freeze completed recovery claims at their actual committed capture and independently reconcile bridge parents canonically. P1 .0.5/.0.6/.0.7 and full D/P execution remain separate.
 
 ## Recent Completions
+
+- `2026-10-03` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.2.1` recovers134 exact inputs and runs read-denied historical audit.
 
 - `2026-10-03` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.2.0` retains exact134-input census/controls and bounded recovery plan.
 
@@ -43,8 +45,6 @@ Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.2.1 from clean HEAD; implement
 - `2026-10-02` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.1` repairs deferred push and owns the next registered-function dispatcher child.
 
 - `2026-10-02` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.2` freezes neutral composed sources/oracles and recurring governance before the owned P1 Perl repair.
-
-- `2026-10-02` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.1` selects bounded compositions and owns the P1 Perl deferred dispatch repair before execution.
 
 
 ## History

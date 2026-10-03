@@ -1,0 +1,819 @@
+{
+  "archive": {
+    "bytes": 3406206,
+    "path": "tests/language-readiness/artifacts/objective-audit-inputs.zip",
+    "sha256": "4f48d1dacd2de861a2b9ebdcb361b30a8d0084cc88700edf39801cee1df1a715"
+  },
+  "census": {
+    "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.2.0-verification.json",
+    "sha256": "cba764a520368a559934069850b9b4dcab1b210f5665f826c91e79ceb83951a3"
+  },
+  "entries": [
+    {
+      "bytes": 62,
+      "member": "log0000",
+      "path": ".linkedspec-data/scratch/context-dart-analysis-final.log",
+      "sha256": "b8dd74b535dfea31f86c81e69876a7f3ca8787c07fc6e2c8d14b2277b996bfb3"
+    },
+    {
+      "bytes": 813,
+      "member": "log0001",
+      "path": ".linkedspec-data/scratch/context-dart-analysis.log",
+      "sha256": "32a60e803c119756235cd122e22de94b99a937d850a128f0ccdfc369345fd773"
+    },
+    {
+      "bytes": 274,
+      "member": "log0002",
+      "path": ".linkedspec-data/scratch/context-dart-book.log",
+      "sha256": "67f199a3140fffeb9d3144d113f5b6c7906964221fc8f784a8b49507ad9325d3"
+    },
+    {
+      "bytes": 7086,
+      "member": "log0003",
+      "path": ".linkedspec-data/scratch/context-dart-final.log",
+      "sha256": "5b33c93e99d8cf1a9d6df23e286d134f250aa3e0dbd591a542d6c79f05cb54e1"
+    },
+    {
+      "bytes": 47,
+      "member": "log0004",
+      "path": ".linkedspec-data/scratch/context-dart-format.log",
+      "sha256": "43a0060b01f8d00290502db016cbde393b149f5a0971989771a4fe3fddc181e7"
+    },
+    {
+      "bytes": 770,
+      "member": "log0005",
+      "path": ".linkedspec-data/scratch/context-default-dart.log",
+      "sha256": "d19f4a85e23e9cdc21340bd80dbc738f9f284d415d8ae186093e6bc402c2f80f"
+    },
+    {
+      "bytes": 865,
+      "member": "log0006",
+      "path": ".linkedspec-data/scratch/context-default-julia.log",
+      "sha256": "e2c168026fc7cc314f702127c6c85aefc97aa6d041f6d7dc51eeb063a40081d5"
+    },
+    {
+      "bytes": 932,
+      "member": "log0007",
+      "path": ".linkedspec-data/scratch/context-default-luajit.log",
+      "sha256": "0bd164cf2c0e3ae7959363596bde5445a42799c7c0adc30e53b27c4fa9aef8a7"
+    },
+    {
+      "bytes": 636,
+      "member": "log0008",
+      "path": ".linkedspec-data/scratch/context-default-perl.log",
+      "sha256": "8914691dc77a67782f361cc3df9e17a24f67f3fc720f10efda21890a997d5db8"
+    },
+    {
+      "bytes": 923,
+      "member": "log0009",
+      "path": ".linkedspec-data/scratch/context-default-puc.log",
+      "sha256": "81a4e78c418f8dc0192c094ea87ee4157e322527790a6d0201b0c6db6447b9b3"
+    },
+    {
+      "bytes": 750,
+      "member": "log0010",
+      "path": ".linkedspec-data/scratch/context-default-rust.log",
+      "sha256": "7a491c9cf058cf953f7b0756ab26321a2df924c282a69c8f122fe466e8609110"
+    },
+    {
+      "bytes": 274,
+      "member": "log0011",
+      "path": ".linkedspec-data/scratch/context-julia-book.log",
+      "sha256": "e746c7bd3a348d2c2d69d62b877efdb0114e31ead8ea8f5b3e6895885ab69c05"
+    },
+    {
+      "bytes": 802,
+      "member": "log0012",
+      "path": ".linkedspec-data/scratch/context-julia-final.log",
+      "sha256": "62c3b0e7544e84ff7be3a1a7267818043fe5e479938e1e745becec468357698a"
+    },
+    {
+      "bytes": 129,
+      "member": "log0013",
+      "path": ".linkedspec-data/scratch/context-julia-storage.log",
+      "sha256": "03dcabcf60256cb82d68bdef11aba65253694e55fb96815c6e9b6333dd185a57"
+    },
+    {
+      "bytes": 274,
+      "member": "log0014",
+      "path": ".linkedspec-data/scratch/context-lua-book.log",
+      "sha256": "7ef7da0a418175013819d8ebb13a9281557a67bbc66df53a5f69b5183cbca596"
+    },
+    {
+      "bytes": 157,
+      "member": "log0015",
+      "path": ".linkedspec-data/scratch/context-lua-luajit-final.log",
+      "sha256": "6bc77fefe2ed759afe1eef1b5d83d4a38b6fd6fe09d493b63e4db7029c69068c"
+    },
+    {
+      "bytes": 157,
+      "member": "log0016",
+      "path": ".linkedspec-data/scratch/context-lua-puc-final.log",
+      "sha256": "6bc77fefe2ed759afe1eef1b5d83d4a38b6fd6fe09d493b63e4db7029c69068c"
+    },
+    {
+      "bytes": 501,
+      "member": "log0017",
+      "path": ".linkedspec-data/scratch/context-lua-storage.log",
+      "sha256": "faaa7e8f92b9d705c09bab39d193b93fa8094abbde035522a578ec635168493b"
+    },
+    {
+      "bytes": 274,
+      "member": "log0018",
+      "path": ".linkedspec-data/scratch/context-names-book-final.log",
+      "sha256": "51a6f846fd1c6a2ed0cd6b045251be2a73a803430b2a1d0c93a7fa78bbac723a"
+    },
+    {
+      "bytes": 274,
+      "member": "log0019",
+      "path": ".linkedspec-data/scratch/context-names-book.log",
+      "sha256": "d1378a0d1c890250121eb6d577ce2a1b743691aa79d205c055d725440b22d245"
+    },
+    {
+      "bytes": 225441,
+      "member": "log0020",
+      "path": ".linkedspec-data/scratch/context-names-dependents.log",
+      "sha256": "0063350af5949233500927be5174d3b987efb779aa7cb8756c25064c6daf72e6"
+    },
+    {
+      "bytes": 76905,
+      "member": "log0021",
+      "path": ".linkedspec-data/scratch/context-names-perl-final.log",
+      "sha256": "21e720118826c84119177c7220c9d40a1b289fce8d79c73acfddab6442c59759"
+    },
+    {
+      "bytes": 76076,
+      "member": "log0022",
+      "path": ".linkedspec-data/scratch/context-names-perl.log",
+      "sha256": "3230c160a0d66563b1d522f59a749614cf6b4a27d908ba9b11a71581448b8d82"
+    },
+    {
+      "bytes": 4867,
+      "member": "log0023",
+      "path": ".linkedspec-data/scratch/context-names-probe.log",
+      "sha256": "5147769c4ac557402bdeb110a6412cfd7674faff569d94745d1f8e7fb4e23e80"
+    },
+    {
+      "bytes": 363,
+      "member": "log0024",
+      "path": ".linkedspec-data/scratch/context-names-storage.log",
+      "sha256": "883cd60c441ae54bfe14f7c48bec67e17d1e66ed9ad84c360a7b925820f243e4"
+    },
+    {
+      "bytes": 13929,
+      "member": "log0025",
+      "path": ".linkedspec-data/scratch/context-names-test-name-audit.json",
+      "sha256": "df2ab66a479a3eb54d85502c174428aee119c46663487d09e8424e308ca02700"
+    },
+    {
+      "bytes": 274,
+      "member": "log0026",
+      "path": ".linkedspec-data/scratch/context-native-book.log",
+      "sha256": "d61890f8c87cabc78fd932fda465e7050a87ba8f84d7cbc56dd6d1bdaee5b3c3"
+    },
+    {
+      "bytes": 778,
+      "member": "log0027",
+      "path": ".linkedspec-data/scratch/context-native-dart.log",
+      "sha256": "46992525e3086b70e6a6d6fb92373adb2a1538560797debdbf6876b433b9714b"
+    },
+    {
+      "bytes": 873,
+      "member": "log0028",
+      "path": ".linkedspec-data/scratch/context-native-julia.log",
+      "sha256": "34ab9ca8eaf7470dcd3a63ceae6855473ff03727b16bded7a3665631ddeda566"
+    },
+    {
+      "bytes": 940,
+      "member": "log0029",
+      "path": ".linkedspec-data/scratch/context-native-luajit.log",
+      "sha256": "a3b393b41fcbe35986e7aebd097a055b8a9d4d1092cb5c302cc23f71c71d2ab3"
+    },
+    {
+      "bytes": 397,
+      "member": "log0030",
+      "path": ".linkedspec-data/scratch/context-native-option-controls.json",
+      "sha256": "0a38ba31296d44c88291db1173fb35ca4401ff10f2bb1c0666418a13439d7dcd"
+    },
+    {
+      "bytes": 644,
+      "member": "log0031",
+      "path": ".linkedspec-data/scratch/context-native-perl.log",
+      "sha256": "4c9dd341bdfd805ce75036f3b6afd869bfc81990d13f2bd965794857af93f529"
+    },
+    {
+      "bytes": 931,
+      "member": "log0032",
+      "path": ".linkedspec-data/scratch/context-native-puc.log",
+      "sha256": "f6ae6ea3bfb0ce63acf73dec6e860008c8fcced98705793fdca00e62c510c079"
+    },
+    {
+      "bytes": 3380828,
+      "member": "log0033",
+      "path": ".linkedspec-data/scratch/context-native-rust-build.log",
+      "sha256": "89458aaff79baf6ca4dc8ae69398cc8a541297585bb6f5b9a73a7c888f2dd7a7"
+    },
+    {
+      "bytes": 758,
+      "member": "log0034",
+      "path": ".linkedspec-data/scratch/context-native-rust.log",
+      "sha256": "09fc964c3e8b7358f90607af7813d34e7f1fe3036c0b6f0a9255a2bd6fb9be18"
+    },
+    {
+      "bytes": 274,
+      "member": "log0035",
+      "path": ".linkedspec-data/scratch/context-rust-book.log",
+      "sha256": "cbdda8dcad46318a1b4e15f9240ef7f4441ab72d8513b00a7a7933b92caac2b6"
+    },
+    {
+      "bytes": 3382090,
+      "member": "log0036",
+      "path": ".linkedspec-data/scratch/context-rust-carriers.log",
+      "sha256": "c74d03d024672f03805c75123e2da874370b0977e38dcf51b4a730b875846d1a"
+    },
+    {
+      "bytes": 3382343,
+      "member": "log0037",
+      "path": ".linkedspec-data/scratch/context-rust-final.log",
+      "sha256": "0e8e397b7ddd30450b991542d0693983db10566b96ab5fd8b2b4c3f1c97cedac"
+    },
+    {
+      "bytes": 0,
+      "member": "log0038",
+      "path": ".linkedspec-data/scratch/context-rust-format.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 274,
+      "member": "log0039",
+      "path": ".linkedspec-data/scratch/entry-boundary-book-final.log",
+      "sha256": "6aa87f841c6348cb557866f9a9ec619b46aa4e2339b4777cb30ba3ce8bfd4683"
+    },
+    {
+      "bytes": 274,
+      "member": "log0040",
+      "path": ".linkedspec-data/scratch/entry-boundary-book.log",
+      "sha256": "1771f4b67c71e9470f0d8015b58cdd98634d0b73a20669d00591347b1baa17be"
+    },
+    {
+      "bytes": 253363,
+      "member": "log0041",
+      "path": ".linkedspec-data/scratch/entry-boundary-focused-green.log",
+      "sha256": "cf192a667ece54d9d1179f3b6adc277c912206db2599ad899ff6ecc06ed5302d"
+    },
+    {
+      "bytes": 193549,
+      "member": "log0042",
+      "path": ".linkedspec-data/scratch/entry-boundary-generated-final.log",
+      "sha256": "e9ad807c547aac12e3bc88f4bc75cfa2526b8e8e18c445dbc502eaafbad80892"
+    },
+    {
+      "bytes": 1791056,
+      "member": "log0043",
+      "path": ".linkedspec-data/scratch/entry-boundary-phase0-final.log",
+      "sha256": "46525c518175526e30692e5d1d3f54a1d16c8ba4644173f81781025666846543"
+    },
+    {
+      "bytes": 1792162,
+      "member": "log0044",
+      "path": ".linkedspec-data/scratch/entry-boundary-phase0.log",
+      "sha256": "fcdc85e90e8b64c07ed06ace39684f120489c662d4a2e67a8cc38a2c0fcf9a16"
+    },
+    {
+      "bytes": 195032,
+      "member": "log0045",
+      "path": ".linkedspec-data/scratch/entry-boundary-red-with-regression.log",
+      "sha256": "83b3b2a2a153174dbcd32753dd0a5a35d1eeda732a5f6074d63f88193e2dc2cd"
+    },
+    {
+      "bytes": 363,
+      "member": "log0046",
+      "path": ".linkedspec-data/scratch/entry-boundary-storage.log",
+      "sha256": "883cd60c441ae54bfe14f7c48bec67e17d1e66ed9ad84c360a7b925820f243e4"
+    },
+    {
+      "bytes": 449,
+      "member": "log0047",
+      "path": ".linkedspec-data/scratch/lossless331/inter_match_gap_capture.log",
+      "sha256": "9479cae2bb2b5c57d5f5faf06d182ca4cfa5716d3e9b972341a71ee1e4cdf305"
+    },
+    {
+      "bytes": 274,
+      "member": "log0048",
+      "path": ".linkedspec-data/scratch/lossless331/mdbook.log",
+      "sha256": "b9881352c2786b481f5a7eafee1d7b072077d88b531626a779d74f28479d6e33"
+    },
+    {
+      "bytes": 389,
+      "member": "log0049",
+      "path": ".linkedspec-data/scratch/lossless331/progressive_span_dispatch.log",
+      "sha256": "fb63668fbd936c102992d27dc47e9a8d6d843cc9b3db9f94845682648b8728a0"
+    },
+    {
+      "bytes": 339,
+      "member": "log0050",
+      "path": ".linkedspec-data/scratch/lossless331/staged_ast_enrichment.log",
+      "sha256": "1a7f7a1b01c6865f08350276c188460f729f1dc6f30b05d25ddf904b25bbdf21"
+    },
+    {
+      "bytes": 431,
+      "member": "log0051",
+      "path": ".linkedspec-data/scratch/lossless331/typed_source_location.log",
+      "sha256": "1e7b9e4f5674c8c3400e9b7dc8b3d007adb9c08b06a5092cf1346e899495c087"
+    },
+    {
+      "bytes": 896,
+      "member": "log0052",
+      "path": ".linkedspec-data/scratch/lossless332/book-mode-before.log",
+      "sha256": "985a55a8523b32abf0b2d787b7c162698e00a21d198657dcdaf49149d08caf2a"
+    },
+    {
+      "bytes": 227,
+      "member": "log0053",
+      "path": ".linkedspec-data/scratch/lossless332/dependents.log",
+      "sha256": "e2019026498f7f991fff0d0e1cb0b3d361124abb808b926b77b82089b2c5e80b"
+    },
+    {
+      "bytes": 449,
+      "member": "log0054",
+      "path": ".linkedspec-data/scratch/lossless332/gaps.log",
+      "sha256": "9479cae2bb2b5c57d5f5faf06d182ca4cfa5716d3e9b972341a71ee1e4cdf305"
+    },
+    {
+      "bytes": 1995,
+      "member": "log0055",
+      "path": ".linkedspec-data/scratch/lossless332/initial-green.log",
+      "sha256": "f8705c2ef08a9d7f05528c06fe3e63f2c24784bd35a0261cfbd5ff77e11fcb38"
+    },
+    {
+      "bytes": 274,
+      "member": "log0056",
+      "path": ".linkedspec-data/scratch/lossless332/mdbook.log",
+      "sha256": "fddba4cc250ab07edd33cf371b6b428c1f0f1de0779a8eec2302c8551b32aa96"
+    },
+    {
+      "bytes": 163,
+      "member": "log0057",
+      "path": ".linkedspec-data/scratch/lossless332/readiness-final.log",
+      "sha256": "b8164ebb526bf30f0780510487e8b618f2d8fc23e1ac0eb7ff1f561006c578de"
+    },
+    {
+      "bytes": 339,
+      "member": "log0058",
+      "path": ".linkedspec-data/scratch/lossless332/staged.log",
+      "sha256": "1a7f7a1b01c6865f08350276c188460f729f1dc6f30b05d25ddf904b25bbdf21"
+    },
+    {
+      "bytes": 326,
+      "member": "log0059",
+      "path": ".linkedspec-data/scratch/lossless333/dependents.log",
+      "sha256": "6fa3774767fcc080598e5b5d2e1ec3b18dfb73ee4da8f0ad0ac46d8405be39b9"
+    },
+    {
+      "bytes": 274,
+      "member": "log0060",
+      "path": ".linkedspec-data/scratch/lossless333/mdbook.log",
+      "sha256": "411ebed740c447e36de82f71f6c24d4bd305c1986b3b40d0bf90f95c5dfbb78b"
+    },
+    {
+      "bytes": 166,
+      "member": "log0061",
+      "path": ".linkedspec-data/scratch/lossless333/readiness-final.log",
+      "sha256": "9ffb9f6b2127b2a50868aa02ff3d6c9ce482595ebe48fc80c9e5e28c2d7f802b"
+    },
+    {
+      "bytes": 339,
+      "member": "log0062",
+      "path": ".linkedspec-data/scratch/lossless333/staged-neutral.log",
+      "sha256": "1a7f7a1b01c6865f08350276c188460f729f1dc6f30b05d25ddf904b25bbdf21"
+    },
+    {
+      "bytes": 78,
+      "member": "log0063",
+      "path": ".linkedspec-data/scratch/lossless3341/book-source.log",
+      "sha256": "0db640b55b0a2195f8f610fc7ab73a2ec83542b7adc2540bbfac53077f436baa"
+    },
+    {
+      "bytes": 3382922,
+      "member": "log0064",
+      "path": ".linkedspec-data/scratch/lossless3341/dependents.log",
+      "sha256": "0e46b7feb0392cfd3c60ccdf8be9035e82e9558184c405fd1ee6068b26021e2a"
+    },
+    {
+      "bytes": 274,
+      "member": "log0065",
+      "path": ".linkedspec-data/scratch/lossless3341/mdbook.log",
+      "sha256": "e4253fdfec60da489903f3f6bc7decd76a20cb5718c33d7d9fd43bfff2242e69"
+    },
+    {
+      "bytes": 3381424,
+      "member": "log0066",
+      "path": ".linkedspec-data/scratch/lossless3341/second.log",
+      "sha256": "eaa09fd99a492c8aa8ef1eda2f0a12f3eda516eff8c9419d8784022a4b34fab8"
+    },
+    {
+      "bytes": 339,
+      "member": "log0067",
+      "path": ".linkedspec-data/scratch/lossless3341/staged-neutral.log",
+      "sha256": "1a7f7a1b01c6865f08350276c188460f729f1dc6f30b05d25ddf904b25bbdf21"
+    },
+    {
+      "bytes": 16919634,
+      "member": "log0068",
+      "path": ".linkedspec-data/scratch/lossless3341/storage.log",
+      "sha256": "c904fada806127096835cc1c93936150af8dce7a487a17511f6ae6efc655b726"
+    },
+    {
+      "bytes": 62,
+      "member": "log0069",
+      "path": ".linkedspec-data/scratch/lossless3342/analyze-final.log",
+      "sha256": "b8dd74b535dfea31f86c81e69876a7f3ca8787c07fc6e2c8d14b2277b996bfb3"
+    },
+    {
+      "bytes": 77,
+      "member": "log0070",
+      "path": ".linkedspec-data/scratch/lossless3342/book-source.log",
+      "sha256": "7dd55848457fb529a8ba6ef5402b6f7c1cde92ccf6f03292ce2dbf00d3393571"
+    },
+    {
+      "bytes": 10853,
+      "member": "log0071",
+      "path": ".linkedspec-data/scratch/lossless3342/dependents-final.log",
+      "sha256": "e2037c9d7a34923d78746ffd2093caaf2023d36924bf5518519df0cd6cee280a"
+    },
+    {
+      "bytes": 261,
+      "member": "log0072",
+      "path": ".linkedspec-data/scratch/lossless3342/final.log",
+      "sha256": "2c25e19e94904f18126cb148861510286a4968914717fda975b0c82351951988"
+    },
+    {
+      "bytes": 274,
+      "member": "log0073",
+      "path": ".linkedspec-data/scratch/lossless3342/mdbook.log",
+      "sha256": "397d80d6d1d185e1ead29af59e440162c717dccb5aa767a90ffb32cf83f3fe06"
+    },
+    {
+      "bytes": 339,
+      "member": "log0074",
+      "path": ".linkedspec-data/scratch/lossless3342/staged-neutral.log",
+      "sha256": "1a7f7a1b01c6865f08350276c188460f729f1dc6f30b05d25ddf904b25bbdf21"
+    },
+    {
+      "bytes": 2162,
+      "member": "log0075",
+      "path": ".linkedspec-data/scratch/lossless3342/storage-final.log",
+      "sha256": "cf475f6510fe07a06d49c439a210548f7621143fbd5058c4163f22fb114a1a81"
+    },
+    {
+      "bytes": 146,
+      "member": "log0076",
+      "path": ".linkedspec-data/scratch/lossless3343/book-source.log",
+      "sha256": "5ea4d25de1b7cde12e6fd478870d3e7b516ec69fd5d826f6f33719854c44ff28"
+    },
+    {
+      "bytes": 994,
+      "member": "log0077",
+      "path": ".linkedspec-data/scratch/lossless3343/dependents.log",
+      "sha256": "e404dcac68fc1a6c552109210272e425fa0acb8e226d226231bfd2046d88f0a3"
+    },
+    {
+      "bytes": 816,
+      "member": "log0078",
+      "path": ".linkedspec-data/scratch/lossless3343/initial.log",
+      "sha256": "e5763b69222c9d9b2e9add788e9e4e6b2a4be664252931c25400c68e4f715f4f"
+    },
+    {
+      "bytes": 274,
+      "member": "log0079",
+      "path": ".linkedspec-data/scratch/lossless3343/mdbook.log",
+      "sha256": "d6ff7d5f8b5b0a225278307b213e74cc6619b6e489ab5a4167ff533d29135bf4"
+    },
+    {
+      "bytes": 339,
+      "member": "log0080",
+      "path": ".linkedspec-data/scratch/lossless3343/staged-neutral.log",
+      "sha256": "1a7f7a1b01c6865f08350276c188460f729f1dc6f30b05d25ddf904b25bbdf21"
+    },
+    {
+      "bytes": 129,
+      "member": "log0081",
+      "path": ".linkedspec-data/scratch/lossless3343/storage.log",
+      "sha256": "03dcabcf60256cb82d68bdef11aba65253694e55fb96815c6e9b6333dd185a57"
+    },
+    {
+      "bytes": 165,
+      "member": "log0082",
+      "path": ".linkedspec-data/scratch/lossless3344/book-source.log",
+      "sha256": "2e8a71a548ea371f5a55384923f554e0dce8c9a7bb60292f22f30145f5b8c4fc"
+    },
+    {
+      "bytes": 76,
+      "member": "log0083",
+      "path": ".linkedspec-data/scratch/lossless3344/inter_match_gap_capture_contract_test-luajit.log",
+      "sha256": "32f522f778f27fbf488190bf033511a5e72a43ebb6958ecd3d0a9c6a63dc8bce"
+    },
+    {
+      "bytes": 77,
+      "member": "log0084",
+      "path": ".linkedspec-data/scratch/lossless3344/inter_match_gap_capture_contract_test-puc.log",
+      "sha256": "e864b86375b06d86487d36e9b92ad2e77c28252329bcdfebc21e8222e4679e26"
+    },
+    {
+      "bytes": 58,
+      "member": "log0085",
+      "path": ".linkedspec-data/scratch/lossless3344/luajit-initial.log",
+      "sha256": "0d6f99f182abe616d475baeac4f04136b7b6a59ed30813f7b41f0b2ccb75ce2f"
+    },
+    {
+      "bytes": 274,
+      "member": "log0086",
+      "path": ".linkedspec-data/scratch/lossless3344/mdbook.log",
+      "sha256": "dc2266cbe3057a4e870a9237a021dd2e9aad9ff8871cdbbd6746879a7b87b0c5"
+    },
+    {
+      "bytes": 58,
+      "member": "log0087",
+      "path": ".linkedspec-data/scratch/lossless3344/puc-initial.log",
+      "sha256": "0d6f99f182abe616d475baeac4f04136b7b6a59ed30813f7b41f0b2ccb75ce2f"
+    },
+    {
+      "bytes": 99,
+      "member": "log0088",
+      "path": ".linkedspec-data/scratch/lossless3344/sexpr_document_v1_test-luajit.log",
+      "sha256": "9e9297435c1094d3a1faed88a489377f8fcebec06ee1e90475d1174339c20d6a"
+    },
+    {
+      "bytes": 99,
+      "member": "log0089",
+      "path": ".linkedspec-data/scratch/lossless3344/sexpr_document_v1_test-puc.log",
+      "sha256": "9e9297435c1094d3a1faed88a489377f8fcebec06ee1e90475d1174339c20d6a"
+    },
+    {
+      "bytes": 339,
+      "member": "log0090",
+      "path": ".linkedspec-data/scratch/lossless3344/staged-neutral.log",
+      "sha256": "1a7f7a1b01c6865f08350276c188460f729f1dc6f30b05d25ddf904b25bbdf21"
+    },
+    {
+      "bytes": 68,
+      "member": "log0091",
+      "path": ".linkedspec-data/scratch/lossless3344/staged_ast_enrichment_contract_test-luajit.log",
+      "sha256": "e19cd589ab9570ae6ea451601e7ff32aa3e209e2fff3a884077feef5a606c928"
+    },
+    {
+      "bytes": 69,
+      "member": "log0092",
+      "path": ".linkedspec-data/scratch/lossless3344/staged_ast_enrichment_contract_test-puc.log",
+      "sha256": "b9115fd6ca2041bb5e1b0e8b4dfa9a8f982f711eb9f94fa98cfc8912c613d1d7"
+    },
+    {
+      "bytes": 501,
+      "member": "log0093",
+      "path": ".linkedspec-data/scratch/lossless3344/storage.log",
+      "sha256": "1b9b2f663323bdfe50eae3729304e811cb904ecce2210a6b2272afe77ef56f8f"
+    },
+    {
+      "bytes": 224,
+      "member": "log0094",
+      "path": ".linkedspec-data/scratch/lua-census-baseline.log",
+      "sha256": "7bc501574fca4f4123c2b07a754a8249c96425e201c374e609865e49cf6ebc26"
+    },
+    {
+      "bytes": 37224346,
+      "member": "log0095",
+      "path": ".linkedspec-data/scratch/lua-census-canonical-first-failed.log",
+      "sha256": "2207dcadf55f954760af8d96895e6600b89f43c49c4aa791dedeba448b7b4dc8"
+    },
+    {
+      "bytes": 1875,
+      "member": "log0096",
+      "path": ".linkedspec-data/scratch/lua-census-focused-final.log",
+      "sha256": "39ffa9527a9b8e26d41e1aa78ce2d10e20d23589d3027e99883b996a40f9e680"
+    },
+    {
+      "bytes": 138,
+      "member": "log0097",
+      "path": ".linkedspec-data/scratch/lua-census-mutation-green.log",
+      "sha256": "f55415aacdf95ae079c433091d44d710a84274e53677cdd1e59af39ce0294e90"
+    },
+    {
+      "bytes": 356,
+      "member": "log0098",
+      "path": ".linkedspec-data/scratch/lua-census-perl-inventory-red.log",
+      "sha256": "7722801561ec6f4290594194e7cdd336b7e8cafb673bd36c8069867910f42a06"
+    },
+    {
+      "bytes": 363,
+      "member": "log0099",
+      "path": ".linkedspec-data/scratch/lua-census-perl-storage-green.log",
+      "sha256": "883cd60c441ae54bfe14f7c48bec67e17d1e66ed9ad84c360a7b925820f243e4"
+    },
+    {
+      "bytes": 917,
+      "member": "log0100",
+      "path": ".linkedspec-data/scratch/lua-census-selector-green.log",
+      "sha256": "df68ce9554e52e973567b9ae9607672e32292ae2e05b040e7aab32fb918df61e"
+    },
+    {
+      "bytes": 87,
+      "member": "log0101",
+      "path": ".linkedspec-data/scratch/lua-census-selector-red.log",
+      "sha256": "38a3834e4698f92df375c621c9e39bb6e4144be57a92705b6e69b5e32245c1a1"
+    },
+    {
+      "bytes": 501,
+      "member": "log0102",
+      "path": ".linkedspec-data/scratch/lua-census-storage-final.log",
+      "sha256": "1b9b2f663323bdfe50eae3729304e811cb904ecce2210a6b2272afe77ef56f8f"
+    },
+    {
+      "bytes": 369,
+      "member": "log0103",
+      "path": ".linkedspec-data/scratch/nested-dart-analysis.log",
+      "sha256": "57de3ba1c48b3686f79fc459f54347beadf8e97e4ef7f28b8148daa5e18bce3a"
+    },
+    {
+      "bytes": 274,
+      "member": "log0104",
+      "path": ".linkedspec-data/scratch/nested-dart-book.log",
+      "sha256": "9ba104990c745fdecb8fbfaa94168a017f623caf6bf3946354686fcc8798c4ca"
+    },
+    {
+      "bytes": 230,
+      "member": "log0105",
+      "path": ".linkedspec-data/scratch/nested-dart-carriers.log",
+      "sha256": "3b11823c102b901b03031c1c8786443a09bac62bde8bb22b23b2a1a011b14f96"
+    },
+    {
+      "bytes": 6208,
+      "member": "log0106",
+      "path": ".linkedspec-data/scratch/nested-dart-compatibility.log",
+      "sha256": "77d2ad13d56d4e90697f6b4cbd46d8c3ff02d34ff4e37067a6e74be224e41a67"
+    },
+    {
+      "bytes": 62,
+      "member": "log0107",
+      "path": ".linkedspec-data/scratch/nested-dart-focused-analysis.log",
+      "sha256": "b8dd74b535dfea31f86c81e69876a7f3ca8787c07fc6e2c8d14b2277b996bfb3"
+    },
+    {
+      "bytes": 47,
+      "member": "log0108",
+      "path": ".linkedspec-data/scratch/nested-dart-format.log",
+      "sha256": "49e1d7c17e381c4cf29c50278d30c5bbb0615c2e84748ed46e37b61bb09bb48c"
+    },
+    {
+      "bytes": 274,
+      "member": "log0109",
+      "path": ".linkedspec-data/scratch/nested-entry-book-final.log",
+      "sha256": "ce5be3b666d62c16fcbf133743625d50eeafc822ea04e431b208b0853a2eeebf"
+    },
+    {
+      "bytes": 37978,
+      "member": "log0110",
+      "path": ".linkedspec-data/scratch/nested-entry-final-red-forced.log",
+      "sha256": "a99c1aa175026573624bd002728a3b79145e6e1442ea2477cbf43019162184bb"
+    },
+    {
+      "bytes": 259680,
+      "member": "log0111",
+      "path": ".linkedspec-data/scratch/nested-entry-focused.log",
+      "sha256": "bebf8f5e08c4907c4bb931549eb3168c38bb395648c51fd876c7b98984657f71"
+    },
+    {
+      "bytes": 1791026,
+      "member": "log0112",
+      "path": ".linkedspec-data/scratch/nested-entry-phase0.log",
+      "sha256": "12b918bf5222e8374a8dd40ecb281985eaba3dd5343047d5d605de6519e84165"
+    },
+    {
+      "bytes": 274,
+      "member": "log0113",
+      "path": ".linkedspec-data/scratch/nested-julia-book.log",
+      "sha256": "cd352b0d2faa508b585029234778586c9605e2b6ea64bc3e084a5b3e0f9f411f"
+    },
+    {
+      "bytes": 658,
+      "member": "log0114",
+      "path": ".linkedspec-data/scratch/nested-julia-carriers-green.log",
+      "sha256": "3df75933bbfa9d37c2e7fef3f4a287fafdd6b314e4fd30d1ad2c0c7ef55f138d"
+    },
+    {
+      "bytes": 3106,
+      "member": "log0115",
+      "path": ".linkedspec-data/scratch/nested-julia-carriers.log",
+      "sha256": "b14d5417fec68fbedd3a3643922788f321a556c352480ab5f3721d1dcf40ca2a"
+    },
+    {
+      "bytes": 12082,
+      "member": "log0116",
+      "path": ".linkedspec-data/scratch/nested-julia-diagnose.log",
+      "sha256": "933220fe4f6516d57d42b93cd596a25859c96ec87d1a5f010a33949a1b85a478"
+    },
+    {
+      "bytes": 129,
+      "member": "log0117",
+      "path": ".linkedspec-data/scratch/nested-julia-storage.log",
+      "sha256": "03dcabcf60256cb82d68bdef11aba65253694e55fb96815c6e9b6333dd185a57"
+    },
+    {
+      "bytes": 274,
+      "member": "log0118",
+      "path": ".linkedspec-data/scratch/nested-lua-book.log",
+      "sha256": "c91aa26f5634729d31268de437fc327a48147380092d9b0fd40a9dfb7d81eae0"
+    },
+    {
+      "bytes": 157,
+      "member": "log0119",
+      "path": ".linkedspec-data/scratch/nested-lua-luajit.log",
+      "sha256": "b82e40ebc37ed8ef7317523a4fc9ca508bb920a4373f8a8189962caa84ae58a9"
+    },
+    {
+      "bytes": 157,
+      "member": "log0120",
+      "path": ".linkedspec-data/scratch/nested-lua-puc.log",
+      "sha256": "b82e40ebc37ed8ef7317523a4fc9ca508bb920a4373f8a8189962caa84ae58a9"
+    },
+    {
+      "bytes": 357,
+      "member": "log0121",
+      "path": ".linkedspec-data/scratch/nested-lua-storage.log",
+      "sha256": "850a115ea13120c271cdafc2f2387eda48f134cd443c2b72e369772e48123306"
+    },
+    {
+      "bytes": 744,
+      "member": "log0122",
+      "path": ".linkedspec-data/scratch/nested-native-dart.log",
+      "sha256": "337a16cca05b53758a813dfedb29754835f1adcd8da3bb01bcde2b71d351d2c6"
+    },
+    {
+      "bytes": 839,
+      "member": "log0123",
+      "path": ".linkedspec-data/scratch/nested-native-julia.log",
+      "sha256": "f03d18322e4938a3a2c5882ef4f8124e2a5a10fe43f013766d5a3ca67e77f007"
+    },
+    {
+      "bytes": 906,
+      "member": "log0124",
+      "path": ".linkedspec-data/scratch/nested-native-luajit.log",
+      "sha256": "2d64442808ee0af755df0d9cd93459ea57085d87a84778f2a23d7e312d504f96"
+    },
+    {
+      "bytes": 610,
+      "member": "log0125",
+      "path": ".linkedspec-data/scratch/nested-native-perl.log",
+      "sha256": "dc062e7c172b824349cca911aef3c96fc217da0e2591b149395b58798dab2353"
+    },
+    {
+      "bytes": 897,
+      "member": "log0126",
+      "path": ".linkedspec-data/scratch/nested-native-puc.log",
+      "sha256": "e2380ed987dddc84e967b440d5fd4fb2cbac1ef0dc4da51b8220caf5665435f8"
+    },
+    {
+      "bytes": 724,
+      "member": "log0127",
+      "path": ".linkedspec-data/scratch/nested-native-rust.log",
+      "sha256": "3b6467d71ca050c259aa3d2456a855cd6d47002b75420ad5b017aff3c4657431"
+    },
+    {
+      "bytes": 1202,
+      "member": "log0128",
+      "path": ".linkedspec-data/scratch/nested-perl-descriptor.log",
+      "sha256": "464066a793d874f011a5cb701bf45f8c6af17b43f4addd8571186dc8133ceef6"
+    },
+    {
+      "bytes": 347,
+      "member": "log0129",
+      "path": ".linkedspec-data/scratch/nested-perl-entry-green.log",
+      "sha256": "8c65919de90f318b04c1e2077d6766804cb0bd7e15236e86de24e2ced24167b1"
+    },
+    {
+      "bytes": 347,
+      "member": "log0130",
+      "path": ".linkedspec-data/scratch/nested-perl-entry-probe.log",
+      "sha256": "ff129ec3ec0e3d89262256588d12a3e1b47d37331a144a854a908bce347205ac"
+    },
+    {
+      "bytes": 274,
+      "member": "log0131",
+      "path": ".linkedspec-data/scratch/nested-rust-book.log",
+      "sha256": "36c1b4863dcb344de354361bc8ae97ff9abec715c57e80bec396898525996171"
+    },
+    {
+      "bytes": 3381395,
+      "member": "log0132",
+      "path": ".linkedspec-data/scratch/nested-rust-carriers.log",
+      "sha256": "10d2de2416fcc6d383139fb1926190b19b62bd1f154f0db03b821b3fa37a8a28"
+    },
+    {
+      "bytes": 3381413,
+      "member": "log0133",
+      "path": ".linkedspec-data/scratch/nested-rust-compatibility.log",
+      "sha256": "6647cd5063ce51fb7b955d24f970efe092c138e893a2ceb7d08e444662ba73dc"
+    }
+  ],
+  "owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.2.1",
+  "version": 1
+}

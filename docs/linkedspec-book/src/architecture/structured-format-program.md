@@ -344,23 +344,39 @@ the actual tree to `mapped` and confirms that the same predicate detects the ali
 replace these eight object controls. Complete diagnostic/normalization execution and the sixteen runtime semantic
 mutation roles remain a separate lane; other backends are not admitted by this bounded Perl proof.
 
-Historical objective-audit integrity is separate from fresh-checkout recovery. Its134 retained local logs
-match their recorded hashes, but the new hash capture does not establish recovery of those input bytes.
-P1 `.0.4.2` owns bounded artifact recovery before bridge parent signoff. This does not weaken the retained
-seven-case normalization proof or establish that every earlier proof is unreproducible.
+Historical objective-audit integrity is separate from fresh-checkout recovery. The original hash capture
+verified134 retained local logs while leaving their byte recovery open. `.0.4.2.1` now closes recovery for
+that exact selected population through a tracked archive and isolated proof. The historical runtime
+observations and seven-case normalization proof retain their original scope.
 Normalization review controls recover their required audit metadata from the tracked checkpoint and run
-without the historical logs or an ignored intermediate report. That metadata recovery leaves the original
-log-byte recovery task open.
+without the historical logs or an ignored intermediate report. Those controls recovered metadata;
+the original log bytes required their own recovery proof.
 
 The bounded census reconstructs the original nesting/context/lossless populations
-(48/39/47 entries) and verifies all 134 old hashes. They total 84,613,241 bytes;
-independent compression measures about 3.4MB. The 24 selected checkpoints contain
+(48/39/47 entries) and verifies all 134 old hashes. They total 84,613,241 bytes.
+The 24 selected checkpoints contain
 no complete log identity among their whole bytes, UTF-8 strings or joined string
-arrays. Other encodings and archival surfaces are unassessed. The next recovery
-slice retains opaque bytes in a closed ZIP/manifest, restores into a newly created
-repository-volume directory and runs the historical audit while denying reads of
-the original logs. Until that proof passes, compression sizes and hash records
-remain census evidence. No historical runtime result is replaced by this work.
+arrays. Other encodings and archival surfaces remain unassessed. The implemented
+closed ZIP/manifest retains opaque bytes in 3,406,206 bytes, restores into a newly
+created repository-volume directory and runs the historical audit while denying
+reads of the original logs. Every restored size/hash matches; regeneration from
+those restored bytes is byte-exact. No historical runtime result is replaced.
+
+Validate without writing, or explicitly restore into an unused directory:
+
+```sh
+bash tools/run_python_project_data.sh tests/language-readiness/recover_objective_audit_inputs.py
+bash tools/run_python_project_data.sh tests/language-readiness/recover_objective_audit_inputs.py --restore .linkedspec-data/scratch/objective-artifact-recovery/manual-review
+```
+
+Validation reports134 inputs/84,613,241 bytes. An existing destination, traversal or
+symlink is rejected before restoration. ZIP member names never become extraction
+paths; the independent closed manifest supplies the original relative identities.
+The recurring proof exercises22 actual recovery rejections, four audit input/two
+path controls and15 CI/six storage/three Phase0 governance mutations. Its deliberate
+read/write probes test the guards; the subsequent healthy replay makes zero original
+log reads and zero tracked writes. Bridge reconciliation and complete composed
+execution remain separate tasks.
 
 ### Deferred push on Perl
 
@@ -1222,7 +1238,7 @@ original isolated composition controls now succeed on both producers.
 
 The later `.0.2.1.3.1` repair protects callable signature pipes, including `x,y` and operator-named
 rest parameters. The original frozen pipeline retains its historical infix failure; the explicit call-form
-successor passes all seven normalization cases. Historical audit-input recovery `.0.4.2` remains before bridge parent signoff.
+successor passes all seven normalization cases. Historical audit-input recovery `.0.4.2` is verified for the134 selected logs; canonical bridge reconciliation remains next.
 Startup32 argument/local-name shadowing, startup19/35/87 and other backend lanes retain their owners.
 Recognized-source readiness does not prove runtime coverage.
 

@@ -12113,10 +12113,10 @@ _Authored value arity prevents callback helper values from being consumed as opt
 - **source:** [`docs/knowledge/hash-tree-callback-append-scope-collision.md`](docs/knowledge/hash-tree-callback-append-scope-collision.md)
 
 ### historical-objective-audit-input-recovery
-_Historical objective audit hashes retained local logs without establishing their recovery_
+_Selected historical objective audit inputs have exact isolated archive recovery_
 
 - **answers:** can a fresh checkout recover the historical objective audit input logs | does a retained log hash prove archival recovery | why is the historical objective audit durability leg a gap | which task owns the 134 objective audit artifact inputs | why did normalization mode proof need an ignored audit report | what is the exact historical audit artifact population and recovery format
-- **date:** 2026-10-03 · **status:** P1 bounded input recovery owned by SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.2
+- **date:** 2026-10-03 · **status:** Selected134-log recovery verified under SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.2.1; canonical parent landing required
 - **evidence:** `The .0.4.1 author review follows verify_objectives.py's actual read(log) hash loop. Its134 local artifact inputs total84,613,241 bytes; the selected24 checkpoints total214,367 bytes. Concrete context-lua-storage.log is501 bytes, has no Git path history and its actual TAP timing line is absent from those selected checkpoints. The new audit capture records hashes without complete byte recovery. This is a new-claim coverage gap, not blanket classification of all earlier proof. The normalization-only public review consumes no legacy log and writes no tracked file. .0.4.2 must verify selected recovery before bridge parent closure.`
 - **source:** [`docs/knowledge/historical-objective-audit-input-recovery.md`](docs/knowledge/historical-objective-audit-input-recovery.md)
 

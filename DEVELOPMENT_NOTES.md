@@ -12,6 +12,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-10-03 — Closed opaque archive and read-denied historical replay (.4.2.1)
+
+ZIP names never become extraction paths: the independent original milestone population and source-bound census fix logical paths, sizes and hashes. The validator checks the complete archive before new exclusive managed output; actual rebinding of mutated archive metadata forces deeper member/content controls to reject independently. The historical audit accepts an injected reader and existing falsifiers use the same restored mapping. Actual original-read/tracked-write probes test guards separately from healthy zero-attempt replay; missing restored data fails without fallback. The capture producer rebuilds in memory from restored bytes under the same guard, proving exact deterministic regeneration without hidden original inputs. Historical compression/coverage/governance results keep their dated boundary; only selected durability legs are superseded, not refreshed. Exact new CI insertions reverse before normalization/older blocks; three new byte-changing controls preserve every historical byte.
+
 ## 2026-10-03 — Source-bound artifact census before recovery (.4.2.0)
 
 Independent historical milestone populations must equal the audit map before sizing or coverage claims. An actual membership falsifier invokes that same comparison with removed membership or changed identity; inequality alone is not observed validator rejection. Complete-byte hashes differ from archive recovery. The selected checkpoint UTF-8/string-array census is bounded, and compression lengths are only sizing. A closed deterministic ZIP plus independent manifest avoids treating opaque observed trace paths as extraction paths. New managed destination, exclusive files, original-read denial and exact historical audit replay are implementation acceptance under .4.2.1; source/claim historical freezing prevents later input changes from refreshing old measurements.

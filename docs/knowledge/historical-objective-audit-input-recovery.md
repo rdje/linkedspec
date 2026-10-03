@@ -1,6 +1,6 @@
 ---
 id: historical-objective-audit-input-recovery
-title: Historical objective audit hashes retained local logs without establishing their recovery
+title: Selected historical objective audit inputs have exact isolated archive recovery
 answers:
   - "can a fresh checkout recover the historical objective audit input logs"
   - "does a retained log hash prove archival recovery"
@@ -9,14 +9,13 @@ answers:
   - "why did normalization mode proof need an ignored audit report"
   - "what is the exact historical audit artifact population and recovery format"
 date: 2026-10-03
-status: P1 bounded input recovery owned by SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.2
+status: Selected134-log recovery verified under SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.2.1; canonical parent landing required
 tags: [claims, durability, artifacts, historical-audit, input-coverage]
 evidence: "The .0.4.1 author review follows verify_objectives.py's actual read(log) hash loop. Its134 local artifact inputs total84,613,241 bytes; the selected24 checkpoints total214,367 bytes. Concrete context-lua-storage.log is501 bytes, has no Git path history and its actual TAP timing line is absent from those selected checkpoints. The new audit capture records hashes without complete byte recovery. This is a new-claim coverage gap, not blanket classification of all earlier proof. The normalization-only public review consumes no legacy log and writes no tracked file. .0.4.2 must verify selected recovery before bridge parent closure."
 reverify:
-  - "bash tools/run_python_project_data.sh tests/language-readiness/verify_objectives.py (requires retained historical artifact inputs)"
-  - "Inspect docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.1-verification.json historical_audit_input_coverage and the source-bound reviewer."
-  - "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.1-mode-replay-proof.py"
-  - "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.2.0-census.py"
+  - "bash tools/run_python_project_data.sh tests/language-readiness/recover_objective_audit_inputs.py"
+  - "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.2.1-proof.py"
+  - "Historical census at0ed526576: docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.2.0-verification.json; no old measurement is refreshed."
 ---
 
 The audit treats134 ignored local logs as inputs and checks their exact historical
@@ -65,3 +64,15 @@ The source-bound capture and bounded plan live at
 `docs/language-readiness/historical-audit-artifact-recovery.md`. `.4.2.1` implements
 the closed deterministic ZIP/manifest, safe isolated restoration and historical
 audit replay under original-input-read denial. Census does not close byte recovery.
+
+
+`.4.2.1` retains the exact selected bytes in the3,406,206-byte ZIP/closed manifest.
+The independent134-member population and all restored sizes/hashes match.22 actual
+recovery controls and the complete historical audit (24/257/149/134,15 CI/six
+storage/three Phase0 mutations) pass. Actual original-read/tracked-write probes
+exercise the guards; subsequent healthy replay makes zero attempts. Regeneration
+from restored bytes is byte-exact under that same guard. Original files and
+milestone/census captures remain intact. Only selected .4.1/.4.2.0 durability gaps
+are explicitly superseded; their original measurements and falsifiers remain exact.
+One recurring proof/thirteen inputs are registered. Wider startup5/29 auditing,
+bridge/dispatcher and complete D/P/backend/format admission remain separate.
