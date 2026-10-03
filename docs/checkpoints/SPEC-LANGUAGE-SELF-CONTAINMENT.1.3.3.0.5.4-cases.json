@@ -1,0 +1,348 @@
+[
+  {
+    "id": "empty_original",
+    "source": "Top:: I {  cb={|| return() }; return(cb()) }",
+    "expected": null,
+    "baseline_error": "invalid_codeblock_return",
+    "baseline_name": null,
+    "baseline_kind": null,
+    "baseline_expected": null,
+    "baseline_effects": null
+  },
+  {
+    "id": "null_original",
+    "source": "Top:: I {  cb={|| return_undef() }; return(cb()) }",
+    "expected": null,
+    "baseline_error": "unknown_helper",
+    "baseline_name": "return_undef",
+    "baseline_kind": null,
+    "baseline_expected": null,
+    "baseline_effects": null
+  },
+  {
+    "id": "empty_skip",
+    "source": "Top:: I {  cb={|| return(); unknown_helper() }; return(cb()) }",
+    "expected": null,
+    "baseline_error": "invalid_codeblock_return",
+    "baseline_name": null,
+    "baseline_kind": null,
+    "baseline_expected": null,
+    "baseline_effects": null
+  },
+  {
+    "id": "empty_attached",
+    "source": "Top:: I {  cb={|| if(true) { return() }; unknown_helper() }; return(cb()) }",
+    "expected": null,
+    "baseline_error": "invalid_codeblock_return",
+    "baseline_name": null,
+    "baseline_kind": null,
+    "baseline_expected": null,
+    "baseline_effects": null
+  },
+  {
+    "id": "empty_marker",
+    "source": "Top:: I {  cb={|| if(true); return(); endif(); unknown_helper() }; return(cb()) }",
+    "expected": null,
+    "baseline_error": "invalid_codeblock_return",
+    "baseline_name": null,
+    "baseline_kind": null,
+    "baseline_expected": null,
+    "baseline_effects": null
+  },
+  {
+    "id": "empty_nested",
+    "source": "Top:: I {  cb={|| if(false); unknown_helper(); elseif(true); if(true) { return() }; unknown_helper(); endif(); unknown_helper() }; return(cb()) }",
+    "expected": null,
+    "baseline_error": "invalid_codeblock_return",
+    "baseline_name": null,
+    "baseline_kind": null,
+    "baseline_expected": null,
+    "baseline_effects": null
+  },
+  {
+    "id": "empty_eager",
+    "source": "Top:: I {  cb={|| value={ return(); unknown_helper() }; return([value,\"outer\"]) }; return(cb()) }",
+    "expected": [
+      null,
+      "outer"
+    ],
+    "baseline_error": "invalid_codeblock_return",
+    "baseline_name": null,
+    "baseline_kind": null,
+    "baseline_expected": null,
+    "baseline_effects": null
+  },
+  {
+    "id": "empty_value",
+    "source": "Top:: I {  cb={|| return(if(true,{ return(); unknown_helper() },else(unknown_helper()))) }; return(cb()) }",
+    "expected": null,
+    "baseline_error": "invalid_codeblock_return",
+    "baseline_name": null,
+    "baseline_kind": null,
+    "baseline_expected": null,
+    "baseline_effects": null
+  },
+  {
+    "id": "empty_effects",
+    "source": "Top:: I { effects=[]; cb={|| push(effects,\"before\"); return(); push(effects,\"bad\") }; return(cb()) }",
+    "effects": [
+      "before"
+    ],
+    "expected": null,
+    "baseline_error": "invalid_codeblock_return",
+    "baseline_name": null,
+    "baseline_kind": null,
+    "baseline_expected": null,
+    "baseline_effects": [
+      "before"
+    ]
+  },
+  {
+    "id": "empty_scope",
+    "source": "Top:: I { x=\"outside\"; rest=[\"caller\"]; cb={|x,...rest| return(); unknown_helper() }; return(cb(\"inside\",\"one\",\"two\")) }",
+    "expected": null,
+    "baseline_error": "invalid_codeblock_return",
+    "baseline_name": null,
+    "baseline_kind": null,
+    "baseline_expected": null,
+    "baseline_effects": null
+  },
+  {
+    "id": "empty_skipped",
+    "source": "Top:: I {  cb={|| if(false) { return(); unknown_helper() }; return(\"hit\") }; return(cb()) }",
+    "expected": "hit",
+    "baseline_error": null,
+    "baseline_name": null,
+    "baseline_kind": null,
+    "baseline_expected": "hit",
+    "baseline_effects": null
+  },
+  {
+    "id": "null_skip",
+    "source": "Top:: I {  cb={|| return_undef(); unknown_helper() }; return(cb()) }",
+    "expected": null,
+    "baseline_error": "unknown_helper",
+    "baseline_name": "return_undef",
+    "baseline_kind": null,
+    "baseline_expected": null,
+    "baseline_effects": null
+  },
+  {
+    "id": "null_attached",
+    "source": "Top:: I {  cb={|| if(true) { return_undef() }; unknown_helper() }; return(cb()) }",
+    "expected": null,
+    "baseline_error": "unknown_helper",
+    "baseline_name": "return_undef",
+    "baseline_kind": null,
+    "baseline_expected": null,
+    "baseline_effects": null
+  },
+  {
+    "id": "null_marker",
+    "source": "Top:: I {  cb={|| if(true); return_undef(); endif(); unknown_helper() }; return(cb()) }",
+    "expected": null,
+    "baseline_error": "unknown_helper",
+    "baseline_name": "return_undef",
+    "baseline_kind": null,
+    "baseline_expected": null,
+    "baseline_effects": null
+  },
+  {
+    "id": "null_nested",
+    "source": "Top:: I {  cb={|| if(false); unknown_helper(); elseif(true); if(true) { return_undef() }; unknown_helper(); endif(); unknown_helper() }; return(cb()) }",
+    "expected": null,
+    "baseline_error": "unknown_helper",
+    "baseline_name": "return_undef",
+    "baseline_kind": null,
+    "baseline_expected": null,
+    "baseline_effects": null
+  },
+  {
+    "id": "null_eager",
+    "source": "Top:: I {  cb={|| value={ return_undef(); unknown_helper() }; return([value,\"outer\"]) }; return(cb()) }",
+    "expected": [
+      null,
+      "outer"
+    ],
+    "baseline_error": "unknown_helper",
+    "baseline_name": "return_undef",
+    "baseline_kind": null,
+    "baseline_expected": null,
+    "baseline_effects": null
+  },
+  {
+    "id": "null_value",
+    "source": "Top:: I {  cb={|| return(if(true,{ return_undef(); unknown_helper() },else(unknown_helper()))) }; return(cb()) }",
+    "expected": null,
+    "baseline_error": "unknown_helper",
+    "baseline_name": "return_undef",
+    "baseline_kind": null,
+    "baseline_expected": null,
+    "baseline_effects": null
+  },
+  {
+    "id": "null_effects",
+    "source": "Top:: I { effects=[]; cb={|| push(effects,\"before\"); return_undef(); push(effects,\"bad\") }; return(cb()) }",
+    "effects": [
+      "before"
+    ],
+    "expected": null,
+    "baseline_error": "unknown_helper",
+    "baseline_name": "return_undef",
+    "baseline_kind": null,
+    "baseline_expected": null,
+    "baseline_effects": [
+      "before"
+    ]
+  },
+  {
+    "id": "null_scope",
+    "source": "Top:: I { x=\"outside\"; rest=[\"caller\"]; cb={|x,...rest| return_undef(); unknown_helper() }; return(cb(\"inside\",\"one\",\"two\")) }",
+    "expected": null,
+    "baseline_error": "unknown_helper",
+    "baseline_name": "return_undef",
+    "baseline_kind": null,
+    "baseline_expected": null,
+    "baseline_effects": null
+  },
+  {
+    "id": "null_skipped",
+    "source": "Top:: I {  cb={|| if(false) { return_undef(); unknown_helper() }; return(\"hit\") }; return(cb()) }",
+    "expected": "hit",
+    "baseline_error": null,
+    "baseline_name": null,
+    "baseline_kind": null,
+    "baseline_expected": "hit",
+    "baseline_effects": null
+  },
+  {
+    "id": "null_scope_label",
+    "source": "Top:: I {  cb={|| return_undef(Top); unknown_helper() }; return(cb()) }",
+    "expected": null,
+    "baseline_error": "unknown_helper",
+    "baseline_name": "return_undef",
+    "baseline_kind": null,
+    "baseline_expected": null,
+    "baseline_effects": null
+  },
+  {
+    "id": "null_precedence",
+    "source": "Top:: I { return_undef={|| return(\"shadow\") }; cb={|| return_undef(); unknown_helper() }; return(cb()) }",
+    "expected": null,
+    "baseline_error": "unknown_helper",
+    "baseline_name": "unknown_helper",
+    "baseline_kind": null,
+    "baseline_expected": null,
+    "baseline_effects": null
+  },
+  {
+    "id": "single_return",
+    "source": "Top:: I {  cb={|| return(\"hit\"); unknown_helper() }; return(cb()) }",
+    "expected": "hit",
+    "baseline_error": null,
+    "baseline_name": null,
+    "baseline_kind": null,
+    "baseline_expected": "hit",
+    "baseline_effects": null
+  },
+  {
+    "id": "explicit_null",
+    "source": "Top:: I {  cb={|| return(undef); unknown_helper() }; return(cb()) }",
+    "expected": null,
+    "baseline_error": null,
+    "baseline_name": null,
+    "baseline_kind": null,
+    "baseline_expected": null,
+    "baseline_effects": null
+  },
+  {
+    "id": "false_payload",
+    "source": "Top:: I {  cb={|flag| return(flag); unknown_helper() }; return(cb(false)) }",
+    "expected": false,
+    "baseline_error": null,
+    "baseline_name": null,
+    "baseline_kind": null,
+    "baseline_expected": false,
+    "baseline_effects": null
+  },
+  {
+    "id": "empty_payload",
+    "source": "Top:: I {  cb={|| return([]); unknown_helper() }; return(cb()) }",
+    "expected": [],
+    "baseline_error": null,
+    "baseline_name": null,
+    "baseline_kind": null,
+    "baseline_expected": [],
+    "baseline_effects": null
+  },
+  {
+    "id": "return_arity",
+    "source": "Top:: I { effects=[]; cb={|| return(push(effects,\"bad\"),\"extra\") }; return(cb()) }",
+    "effects": [],
+    "expected_arity": "0 or 1",
+    "error": "invalid_codeblock_return",
+    "baseline_error": "invalid_codeblock_return",
+    "baseline_name": null,
+    "baseline_kind": null,
+    "baseline_expected": null,
+    "baseline_effects": []
+  },
+  {
+    "id": "null_arity",
+    "source": "Top:: I { effects=[]; cb={|| return_undef(push(effects,\"bad\")) }; return(cb()) }",
+    "effects": [],
+    "expected_arity": "exactly 0",
+    "error": "invalid_codeblock_return",
+    "baseline_error": "unknown_helper",
+    "baseline_name": "return_undef",
+    "baseline_kind": null,
+    "baseline_expected": null,
+    "baseline_effects": [
+      "bad"
+    ]
+  },
+  {
+    "id": "null_literal_arity",
+    "source": "Top:: I {  cb={|| return_undef(\"bad\") }; return(cb()) }",
+    "expected_arity": "exactly 0",
+    "error": "invalid_codeblock_return",
+    "baseline_error": "unknown_helper",
+    "baseline_name": "return_undef",
+    "baseline_kind": null,
+    "baseline_expected": null,
+    "baseline_effects": null
+  },
+  {
+    "id": "operand_failure_scope",
+    "source": "Top:: I { x=\"outside\"; cb={|x| return(unknown_helper()) }; return(cb(\"inside\")) }",
+    "error": "unknown_helper",
+    "name": "unknown_helper",
+    "baseline_error": "unknown_helper",
+    "baseline_name": "unknown_helper",
+    "baseline_kind": null,
+    "baseline_expected": null,
+    "baseline_effects": null
+  },
+  {
+    "id": "while_excluded",
+    "source": "Top:: I {  cb={|| while(false) { \"bad\" }; return(\"after\") }; return(cb()) }",
+    "kind": "control_while",
+    "error": "unsupported_codeblock_actionir",
+    "baseline_error": "unsupported_codeblock_actionir",
+    "baseline_name": null,
+    "baseline_kind": "control_while",
+    "baseline_expected": null,
+    "baseline_effects": null
+  },
+  {
+    "id": "null_value_excluded",
+    "source": "Top:: I {  cb={|| return(cat(\"pre\",return_undef())) }; return(cb()) }",
+    "error": "unknown_helper",
+    "name": "return_undef",
+    "baseline_error": "unknown_helper",
+    "baseline_name": "return_undef",
+    "baseline_kind": null,
+    "baseline_expected": null,
+    "baseline_effects": null
+  }
+]

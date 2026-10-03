@@ -2,17 +2,19 @@
 
 ## Current Activity
 
-Full PNT: callable attached/marker/value conditionals verified; null-return then while precede order/readiness and dispatcher closeout.
+Full PNT: callable conditional/null-return families verified; deferred while precedes order/readiness and dispatcher closeout.
 
 ## Latest Completed Slice
 
-`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.3`:44 matched native/fresh RED/GREEN sources, twelve corruption controls and twelve suites/947 tests PASS. Typed source poison/original x-rest slots-array-error identities and four exact rendered examples pass. Six canonical probes and six PUC CLI comparisons confirm selected values/null. Prior marker claim freezes atd0ab1140; current attached/marker tests replace only source-identical value failures.
+`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.4`:32 matched native/fresh RED/GREEN sources, thirteen corruption controls and thirteen suites/981 tests PASS. Local/eager null boundaries, original caller/error identities and source poison pass. Seven canonical/raw and six PUC CLI controls preserve scope; four executed examples/stale flow teaching render. Prior value claim freezes ate133707f; three current tests replace only source-identical null-return failures.
 
 ## Next Action
 
-Activate null-return SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.4 from clean committed HEAD. While .5.5, startup35 boolean identity, order/readiness .6/.7 and full D/P remain separate.
+Activate deferred while SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.5 from clean committed HEAD. Startup35 boolean identity, order/readiness .6/.7 and full D/P remain separate.
 
 ## Recent Completions
+
+- `2026-10-03` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.4` repairs local null-return forms with981 focused tests.
 
 - `2026-10-03` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.3` repairs lazy callable value conditionals with947 focused tests.
 
@@ -43,8 +45,6 @@ Activate null-return SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.4 from clean commi
 - `2026-10-02` — `REPO-HYGIENE.7` retains the due artifact census and corrects the current other-repository cleanup boundary.
 
 - `2026-10-02` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.4.0` preserves exact historical callable replay sources with safe recovery controls.
-
-- `2026-10-02` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.1` implements central compiled registered dispatch with actual recursion/copy/effect/error proof.
 
 ## History
 

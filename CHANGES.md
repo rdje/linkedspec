@@ -12,6 +12,18 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-10-03 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.4: execute local null returns
+
+The private statement sequence accepts empty return and return_undef, retaining optional bare
+null-helper scope labels and validating arity before effects. The local return flag preserves
+null exits through selected branches; eager expression blocks let their caller continue.
+32 matched native/fresh RED/GREEN sources, thirteen corruption controls and thirteen suites/981
+tests PASS. Old conditional tests replace only source-identical zero/null-return failure oracles;
+old cases/producers/captures remain exact, value claim historical ate133707f. Four executed book
+examples and the previously stale value-flow paragraph render.252 claim inputs bind28 executed
+instruments; raw/canonical and PUC comparisons remain bounded. While, literal kind, metadata/
+readiness, function MVP and full execution stay separately owned; public carriers remain unchanged.
+
 ## 2026-10-03 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.3: execute lazy callable value conditionals
 
 A58-line private typed dispatcher validates canonical value-if branches before effects,

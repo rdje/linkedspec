@@ -1,0 +1,108 @@
+{
+  "owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.4",
+  "limits": "Public PUC CLI comparison/diagnostics only; no backend admission.",
+  "cases": [
+    {
+      "id": "empty_original",
+      "source": "Top:: I {  cb={|| return() }; return(cb()) }",
+      "command": [
+        "bash",
+        "tools/run_lua_project_data.sh",
+        "puc",
+        "lua/bin/linkedspec-lua",
+        "--spec-file",
+        ".linkedspec-data/scratch/codeblock-null-return/native-comparison/empty_original.spec",
+        "--input",
+        ""
+      ],
+      "exit": 0,
+      "stdout": "null\n",
+      "stderr": ""
+    },
+    {
+      "id": "null_original",
+      "source": "Top:: I {  cb={|| return_undef() }; return(cb()) }",
+      "command": [
+        "bash",
+        "tools/run_lua_project_data.sh",
+        "puc",
+        "lua/bin/linkedspec-lua",
+        "--spec-file",
+        ".linkedspec-data/scratch/codeblock-null-return/native-comparison/null_original.spec",
+        "--input",
+        ""
+      ],
+      "exit": 0,
+      "stdout": "null\n",
+      "stderr": ""
+    },
+    {
+      "id": "empty_attached",
+      "source": "Top:: I {  cb={|| if(true) { return() }; unknown_helper() }; return(cb()) }",
+      "command": [
+        "bash",
+        "tools/run_lua_project_data.sh",
+        "puc",
+        "lua/bin/linkedspec-lua",
+        "--spec-file",
+        ".linkedspec-data/scratch/codeblock-null-return/native-comparison/empty_attached.spec",
+        "--input",
+        ""
+      ],
+      "exit": 0,
+      "stdout": "null\n",
+      "stderr": ""
+    },
+    {
+      "id": "null_eager",
+      "source": "Top:: I {  cb={|| value={ return_undef(); unknown_helper() }; return([value,\"outer\"]) }; return(cb()) }",
+      "command": [
+        "bash",
+        "tools/run_lua_project_data.sh",
+        "puc",
+        "lua/bin/linkedspec-lua",
+        "--spec-file",
+        ".linkedspec-data/scratch/codeblock-null-return/native-comparison/null_eager.spec",
+        "--input",
+        ""
+      ],
+      "exit": 0,
+      "stdout": "[null,\"outer\"]\n",
+      "stderr": ""
+    },
+    {
+      "id": "null_nested",
+      "source": "Top:: I {  cb={|| if(false); unknown_helper(); elseif(true); if(true) { return_undef() }; unknown_helper(); endif(); unknown_helper() }; return(cb()) }",
+      "command": [
+        "bash",
+        "tools/run_lua_project_data.sh",
+        "puc",
+        "lua/bin/linkedspec-lua",
+        "--spec-file",
+        ".linkedspec-data/scratch/codeblock-null-return/native-comparison/null_nested.spec",
+        "--input",
+        ""
+      ],
+      "exit": 0,
+      "stdout": "null\n",
+      "stderr": ""
+    },
+    {
+      "id": "empty_value",
+      "source": "Top:: I {  cb={|| return(if(true,{ return(); unknown_helper() },else(unknown_helper()))) }; return(cb()) }",
+      "command": [
+        "bash",
+        "tools/run_lua_project_data.sh",
+        "puc",
+        "lua/bin/linkedspec-lua",
+        "--spec-file",
+        ".linkedspec-data/scratch/codeblock-null-return/native-comparison/empty_value.spec",
+        "--input",
+        ""
+      ],
+      "exit": 0,
+      "stdout": "null\n",
+      "stderr": ""
+    }
+  ]
+}

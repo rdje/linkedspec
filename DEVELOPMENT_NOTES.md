@@ -12,6 +12,21 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-10-03 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.4: null flag propagation and raw control boundaries
+
+The existing sequence-return branch gains12 lines/removes4: zero/one-payload return and
+zero-effective-argument return_undef preserve the established local return flag. Optional bare
+scope label is skipped without evaluation; malformed arity rejects before operand effects.
+Typed null stops nested branches while eager expression blocks consume their own boundary.
+The actual34-test baseline fails24 groups; current981 focused tests and thirteen observation
+corruptions pass. Actual caller/error identity, source poison and six PUC CLI null/eager results
+survive. Seven direct probes show raw empty/multi-value return versus canonical null helper;
+whole-action readiness includes an unknown sentinel and cannot isolate return readiness.
+No typed multi-value or value-position null-helper admission follows from raw Perl behavior.
+All TAP streams use lossless JSON containment from first capture.246 runtime inputs plus six
+final verification/book/config/wrapper inputs yield252 claim inputs and28 executed producers.
+The stale flow paragraph is owned/corrected/rendered; old source/capture claims stay historical.
+
 ## 2026-10-03 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.3: value dispatch before generic operands
 
 Public substitution/AST/Get/fresh dumps distinguish the existing canonical value-call contract

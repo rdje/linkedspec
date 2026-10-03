@@ -1,0 +1,37 @@
+[
+  {
+    "id": "empty",
+    "action": "return()",
+    "source": "Top:: I { return(); unknown_helper() }"
+  },
+  {
+    "id": "null",
+    "action": "return_undef()",
+    "source": "Top:: I { return_undef(); unknown_helper() }"
+  },
+  {
+    "id": "explicit_null",
+    "action": "return(undef)",
+    "source": "Top:: I { return(undef); unknown_helper() }"
+  },
+  {
+    "id": "null_scope",
+    "action": "return_undef(Top)",
+    "source": "Top:: I { return_undef(Top); unknown_helper() }"
+  },
+  {
+    "id": "null_payload",
+    "action": "return_undef(\"bad\")",
+    "source": "Top:: I { return_undef(\"bad\"); unknown_helper() }"
+  },
+  {
+    "id": "tagged_return",
+    "action": "return(tag,\"a\",\"b\")",
+    "source": "Top:: I { return(tag,\"a\",\"b\"); unknown_helper() }"
+  },
+  {
+    "id": "extra_return",
+    "action": "return(\"a\",\"b\")",
+    "source": "Top:: I { return(\"a\",\"b\"); unknown_helper() }"
+  }
+]

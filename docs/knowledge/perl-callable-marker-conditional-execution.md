@@ -7,10 +7,10 @@ answers:
   - "why did the attached callable test stop expecting marker failure"
   - "does Perl validate unreachable marker controls before an early return"
 date: 2026-10-03
-status: marker executor; value/null/while and boolean literal owners stay separate
+status: marker executor; while and boolean literal owners stay separate
 tags: [perl, callable, actionir, marker, control, return]
 evidence: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.2 tracked public native/fresh source matrix, actual pre-fix runtime and documented PUC CLI comparisons."
-reverify: "prove -Iperl t/codeblock_marker_if_perl.t; .5.2 full review is historical atd0ab1140 because .5.3 supersedes value_excluded; use .5.3-review.py for current successor proof."
+reverify: "prove -Iperl t/codeblock_marker_if_perl.t; .5.2 full review is historical atd0ab1140 because .5.3 supersedes value_excluded; use .5.4-review.py for current successor proof."
 ---
 
 The private marker collector reads typed sibling statements, counts nested marker if/endif
@@ -38,3 +38,6 @@ while, function MVP, event ordering/readiness and dispatcher/full16 remain indep
 
 Value `.0.5.3` now executes canonical lazy value conditionals; the old failure evidence
 remains historical. See [the value executor card](perl-callable-value-conditional-execution.md).
+
+Null-return `.0.5.4` now closes the private empty-return/return_undef gap. Earlier failures
+remain historical; see [the null-return card](perl-callable-null-return-execution.md).

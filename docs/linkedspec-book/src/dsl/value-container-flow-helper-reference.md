@@ -1586,8 +1586,9 @@ use the same truthiness and skip unselected bodies. A statement conditional yiel
 an explicit return exits the callable; an eager expression block keeps its own return boundary.
 See the [complete callable examples](../architecture/structured-format-program.md#current-perl-deferred-conditional-boundary).
 Callable value `if` also preserves the selected payload and laziness, including ordered `elseif`
-arms and wrapped or plain final fallback. While and the null-return spellings
-`return()`/`return_undef()` retain separate repair owners; `return(undef)` works in this evaluator.
+arms and wrapped or plain final fallback. In these callable bodies,
+`return()`/`return_undef()` now exit with null; eager blocks keep a local return boundary.
+Deferred while retains its repair owner. `return(undef)` continues to work.
 
 Use attached-block control flow when a branch needs substantial statement bodies or repeated side effects.
 The short `i`/`elif` spellings are statement-marker aliases, while `when`/`otherwise` are attached-block aliases;

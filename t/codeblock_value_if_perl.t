@@ -15,6 +15,21 @@ my $prefix = 'docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.3-';
 open my $cases_file, '<', $prefix.'cases.json' or die $!;
 my $cases = JSON::PP->new->decode(do { local $/; <$cases_file> });
 close $cases_file or die $!;
+open my $null_file, '<', 'docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.4-cases.json' or die $!;
+my $null_cases=JSON::PP->new->decode(do { local $/; <$null_file> });
+close $null_file or die $!;
+my %null_successors=map { $_->{id} => $_ } @$null_cases;
+for my $case (@$cases) {
+ my $id = $case->{id};
+ my $successor = $id eq 'zero_return_excluded' || $id eq 'empty_return_excluded'
+  ? $null_successors{empty_original} : $id eq 'null_return_excluded' || $id eq 'return_undef_excluded'
+  ? $null_successors{null_original} : undef;
+ next unless $successor;
+ die 'null-return successor source drift' unless $successor->{source} eq $case->{source};
+ delete @{$case}{qw(error kind name)};
+ $case->{expected}=$successor->{expected};
+}
+
 open my $producer, '-|', $^X, '-Iperl', $prefix.'probe.pl', grep { $_ eq '--baseline' } @ARGV or die $!;
 my $bytes = do { local $/; <$producer> };
 close $producer or die 'public value conditional producer failed';

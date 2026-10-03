@@ -1,0 +1,195 @@
+[
+   {
+      "action" : "return()",
+      "ast" : {
+         "args" : [],
+         "kind" : "call",
+         "name" : "return",
+         "source" : "return()",
+         "source_method" : "return",
+         "source_span" : {
+            "end" : 8,
+            "start" : 0
+         }
+      },
+      "id" : "empty",
+      "substitution" : "return()"
+   },
+   {
+      "action" : "return_undef()",
+      "ast" : {
+         "args" : [],
+         "kind" : "call",
+         "name" : "return_undef",
+         "source" : "return_undef()",
+         "source_method" : "return_undef",
+         "source_span" : {
+            "end" : 14,
+            "start" : 0
+         }
+      },
+      "id" : "null",
+      "substitution" : "return undef"
+   },
+   {
+      "action" : "return(undef)",
+      "ast" : {
+         "args" : [
+            {
+               "kind" : "undef",
+               "source" : "undef",
+               "source_span" : {
+                  "end" : 12,
+                  "start" : 7
+               }
+            }
+         ],
+         "kind" : "call",
+         "name" : "return",
+         "source" : "return(undef)",
+         "source_method" : "return",
+         "source_span" : {
+            "end" : 13,
+            "start" : 0
+         }
+      },
+      "id" : "explicit_null",
+      "substitution" : "return undef"
+   },
+   {
+      "action" : "return_undef(Top)",
+      "ast" : {
+         "args" : [
+            {
+               "kind" : "variable",
+               "name" : "Top",
+               "source" : "Top",
+               "source_span" : {
+                  "end" : 16,
+                  "start" : 13
+               }
+            }
+         ],
+         "kind" : "call",
+         "name" : "return_undef",
+         "source" : "return_undef(Top)",
+         "source_method" : "return_undef",
+         "source_span" : {
+            "end" : 17,
+            "start" : 0
+         }
+      },
+      "id" : "null_scope",
+      "substitution" : "return undef"
+   },
+   {
+      "action" : "return_undef(\"bad\")",
+      "ast" : {
+         "args" : [
+            {
+               "kind" : "string",
+               "quote" : "\"",
+               "source" : "\"bad\"",
+               "source_span" : {
+                  "end" : 18,
+                  "start" : 13
+               },
+               "value" : "bad"
+            }
+         ],
+         "kind" : "call",
+         "name" : "return_undef",
+         "source" : "return_undef(\"bad\")",
+         "source_method" : "return_undef",
+         "source_span" : {
+            "end" : 19,
+            "start" : 0
+         }
+      },
+      "id" : "null_payload",
+      "substitution" : "return_undef(\"bad\")"
+   },
+   {
+      "action" : "return(tag,\"a\",\"b\")",
+      "ast" : {
+         "args" : [
+            {
+               "kind" : "variable",
+               "name" : "tag",
+               "source" : "tag",
+               "source_span" : {
+                  "end" : 10,
+                  "start" : 7
+               }
+            },
+            {
+               "kind" : "string",
+               "quote" : "\"",
+               "source" : "\"a\"",
+               "source_span" : {
+                  "end" : 14,
+                  "start" : 11
+               },
+               "value" : "a"
+            },
+            {
+               "kind" : "string",
+               "quote" : "\"",
+               "source" : "\"b\"",
+               "source_span" : {
+                  "end" : 18,
+                  "start" : 15
+               },
+               "value" : "b"
+            }
+         ],
+         "kind" : "call",
+         "name" : "return",
+         "source" : "return(tag,\"a\",\"b\")",
+         "source_method" : "return",
+         "source_span" : {
+            "end" : 19,
+            "start" : 0
+         }
+      },
+      "id" : "tagged_return",
+      "substitution" : "return(tag,\"a\",\"b\")"
+   },
+   {
+      "action" : "return(\"a\",\"b\")",
+      "ast" : {
+         "args" : [
+            {
+               "kind" : "string",
+               "quote" : "\"",
+               "source" : "\"a\"",
+               "source_span" : {
+                  "end" : 10,
+                  "start" : 7
+               },
+               "value" : "a"
+            },
+            {
+               "kind" : "string",
+               "quote" : "\"",
+               "source" : "\"b\"",
+               "source_span" : {
+                  "end" : 14,
+                  "start" : 11
+               },
+               "value" : "b"
+            }
+         ],
+         "kind" : "call",
+         "name" : "return",
+         "source" : "return(\"a\",\"b\")",
+         "source_method" : "return",
+         "source_span" : {
+            "end" : 15,
+            "start" : 0
+         }
+      },
+      "id" : "extra_return",
+      "substitution" : "return(\"a\",\"b\")"
+   }
+]

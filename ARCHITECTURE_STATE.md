@@ -5,6 +5,17 @@ architecture page and capability checker under their existing public/neutral gro
 79 migration files / 8 complete + 0 pending / 60 mutations; runtime behavior and
 earlier dated admission evidence below remain unchanged.
 
+## Perl callable null-return execution
+
+Self-containment `.1.3.3.0.5.4` extends the existing private statement return boundary:
+zero/one-payload return and zero-effective-argument return_undef validate before effects,
+then stop with the local return flag. Null returns propagate through attached/marker bodies;
+eager expressions consume their own boundary. The canonical optional bare scope label on
+return_undef is retained. Value-position null helper use and raw multi-value return are not
+admitted. Public records/compiler/context remain unchanged. Current older tests replace
+only source-identical null-return failure expectations; captures stay historical. While
+`.5.5`, boolean literal identity, metadata/readiness and full execution remain open.
+
 ## Perl callable lazy value conditional execution
 
 Self-containment `.1.3.3.0.5.3` adds a private typed value-if dispatcher before generic
@@ -13,8 +24,7 @@ validate before effects, select conditions once, and evaluate only the selected 
 Actual false/null/container results survive; a missing selected arm yields null. Eager
 logical helpers and statement return boundaries stay intact. The old attached/marker
 value failure gets source-identical success expectations; original captures remain historical.
-Public records, contexts, source generation and other production stay unchanged. Null-return
-`.5.4`, while `.5.5`, literal identity startup35, metadata/readiness and full execution remain open.
+Public records, contexts, source generation and other production stay unchanged. While `.5.5`, literal identity startup35, metadata/readiness and full execution remain open.
 
 ## Perl callable attached and marker conditional execution
 
@@ -26,7 +36,7 @@ once and unselected bodies stay lazy. The private value/return flag preserves ne
 callable/eager expression boundaries consume them. Statement groups yield null without return.
 The plain record, public context and original caller/error identities remain intact. New marker51
 plus current849 dependent tests pass900; source-identical old failure teaching is superseded with
-historical input/result retention. Null-return/while .5.4-.5, boolean literal startup35,
+historical input/result retention. While .5.5, boolean literal startup35,
 function MVP, ordering/readiness and dispatcher/full execution remain independent owners.
 
 ## Nested-write and receiver-mutation capabilities are portable

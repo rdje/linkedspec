@@ -627,11 +627,19 @@ sub _execute_sequence {
    $result = undef;
    next;
   }
-  if (ref($expr) eq 'HASH' && ($expr->{kind} // '') eq 'call' && ($expr->{name} // '') eq 'return') {
+  if (ref($expr) eq 'HASH' && ($expr->{kind} // '') eq 'call'
+   && (($expr->{name} // '') eq 'return' || ($expr->{name} // '') eq 'return_undef')) {
    my $args = $expr->{args};
-   _error('invalid_codeblock_return', expected => 'exactly 1', got => ref($args) eq 'ARRAY' ? scalar(@$args) : 0)
-    unless ref($args) eq 'ARRAY' && @$args == 1;
-   return (_eval_expr($args->[0], $ctx), 1)
+   my @effective = ref($args) eq 'ARRAY' ? @$args : ();
+   my $null_return = $expr->{name} eq 'return_undef';
+   # The canonical null-return helper permits one optional bare scope label.
+   shift @effective if $null_return && @effective == 1
+    && ref($effective[0]) eq 'HASH' && ($effective[0]{kind} // '') eq 'variable';
+   my $max = $null_return ? 0 : 1;
+   _error('invalid_codeblock_return', expected => $null_return ? 'exactly 0' : '0 or 1',
+    got => ref($args) eq 'ARRAY' ? scalar(@$args) : 0,
+   ) unless ref($args) eq 'ARRAY' && @effective <= $max;
+   return (@effective ? _eval_expr($effective[0], $ctx) : undef, 1)
   }
   $result = _eval_expr($expr, $ctx);
  }

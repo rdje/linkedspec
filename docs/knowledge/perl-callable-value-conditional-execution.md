@@ -8,10 +8,10 @@ answers:
   - "why do marker and attached tests no longer expect value if failure"
   - "how are raw value conditional TAP bytes preserved through whitespace checks"
 date: 2026-10-03
-status: current value executor; null-return while and literal kind remain separately owned
+status: current value executor; while and literal kind remain separately owned
 tags: [perl, callable, actionir, value, lazy, conditional]
 evidence: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.3 native/fresh RED-GREEN, canonical substitution/AST and published PUC CLI comparisons."
-reverify: "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.3-review.py"
+reverify: "prove -Iperl t/codeblock_value_if_perl.t; .5.3 full review is historical ate133707f because .5.4 supersedes null-return failures; current successor proof is .5.4-review.py."
 ---
 
 `CodeblockRuntime::_eval_call` previously evaluated all operands before resolving `if`,
@@ -41,3 +41,6 @@ metadata/readiness and dispatcher/full execution remain separate owners.
 Raw prove output contains meaningful trailing whitespace. Six JSON envelopes retain its
 exact bytes, lengths and pre-envelope proof hashes; the current read-only envelope checker
 rejects eighteen corruptions. The raw output is preserved rather than trimmed.
+
+Null-return `.0.5.4` now closes the private empty-return/return_undef gap. Earlier failures
+remain historical; see [the null-return card](perl-callable-null-return-execution.md).

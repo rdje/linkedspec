@@ -321,8 +321,10 @@ The Perl deferred evaluator executes attached and marker `if`/`elseif`/`else` wi
 conditions, lazy selected bodies and local returns through nested branches. Marker groups close
 with `endif`; missing closure, later branches after fallback and reached orphans diagnose.
 A conditional statement itself yields null; a later expression may supply the implicit result.
-An eager expression block keeps its own return boundary. Value-form `if`/`else`, deferred while,
-and zero-argument `return()`/`return_undef()` remain separately owned gaps; `return(undef)` works.
+An eager expression block keeps its own return boundary. Value-form `if`/`else` selects only
+one payload lazily. `return()` and `return_undef()` now stop a callable with null and skip
+continuation; their returns propagate through selected branches and stay local to eager blocks.
+Deferred while remains separately owned. `return(undef)` continues to work.
 The [architecture examples](../architecture/structured-format-program.md#current-perl-deferred-conditional-boundary)
 show exact working sources, results and remaining boundaries. Parameter slots restore on success
 and failure, and preceding nonparameter effects remain visible.

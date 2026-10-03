@@ -1474,8 +1474,33 @@ unknown helper. An optional final `else(payload)` or plain final payload supplie
 wrappers remain supported. Branch order and wrapper arity validate before condition effects.
 Value aliases are not admitted by this repair; use `if`, `elseif`, and `else`.
 
-Zero-argument `return()` raises `invalid_codeblock_return`, and `return_undef()` raises
-`unknown_helper` in this evaluator. Separate leaves own those boundaries and deferred while.
+In Perl callable bodies, both `return()` and `return_undef()` now exit with null and skip
+later statements. The selected return propagates through attached and marker branches.
+An eager expression block consumes its own return, so its caller can continue:
+
+```spec
+Top:: I {  cb={|| return() }; return(cb()) }
+```
+
+```spec
+Top:: I {  cb={|| return_undef() }; return(cb()) }
+```
+
+```spec
+Top:: I {  cb={|| if(false); unknown_helper(); elseif(true); if(true) { return_undef() }; unknown_helper(); endif(); unknown_helper() }; return(cb()) }
+```
+
+```spec
+Top:: I {  cb={|| value={ return_undef(); unknown_helper() }; return([value,"outer"]) }; return(cb()) }
+```
+
+The first three return null. The last returns `[null,"outer"]`. One-payload `return(value)`
+keeps its existing behavior, including false and empty containers. The private executor accepts
+zero or one payload for `return`, and zero for `return_undef`; the latter also retains the existing
+optional bare scope-label spelling. Invalid arity rejects before argument effects.
+`return_undef` is a statement exit here, so putting it inside an ordinary value-helper argument
+remains unsupported. Deferred while remains separately owned. These callable results do not
+admit general multi-value returns or change the compiler's raw/readiness boundaries.
 The working explicit-null spelling skips the later unknown helper:
 
 ```spec
