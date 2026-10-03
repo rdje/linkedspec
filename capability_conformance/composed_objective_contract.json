@@ -13,8 +13,8 @@
       "sha256": "fba66e47d14b1a236deb1136ec2c515fa629f8a1d8dce36812431ebe8bc62fc0"
     },
     "normalization": {
-      "path": "tests/language-readiness/composed/normalization.spec",
-      "sha256": "ba9953c282e5e66956dc4b7d22c2acc7b1e879734654e7cb467ad41275cc4249"
+      "path": "tests/language-readiness/composed/normalization-calls.spec",
+      "sha256": "f4e45215d893a3c159eb146dd4c37b5008e6670bb52e180e3deebd8139e6a83e"
     },
     "diagnostic_invalid_arity": {
       "path": "tests/language-readiness/composed/diagnostic-invalid-arity.spec",
@@ -742,5 +742,22 @@
     "general resources/performance",
     "supplementary-character key ordering",
     "sandbox security"
-  ]
+  ],
+  "source_corrections": {
+    "normalization": {
+      "owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.1",
+      "original": {
+        "path": "tests/language-readiness/composed/normalization.spec",
+        "sha256": "ba9953c282e5e66956dc4b7d22c2acc7b1e879734654e7cb467ad41275cc4249"
+      },
+      "successor": {
+        "path": "tests/language-readiness/composed/normalization-calls.spec",
+        "sha256": "f4e45215d893a3c159eb146dd4c37b5008e6670bb52e180e3deebd8139e6a83e"
+      },
+      "change": {
+        "from": "while(i < count(pieces)) { visited = visited + 1; i = i + 1 }",
+        "to": "while(num_lt(i,count(pieces))) { visited = num_add(visited,1); i = num_add(i,1) }"
+      }
+    }
+  }
 }

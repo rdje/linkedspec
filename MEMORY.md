@@ -1,11 +1,11 @@
 # MEMORY
 
-- activation_commit: `446fb65fadca2e1bd31fec93bb9de779eb2134d1` — clean normalization diagnosis base.
-- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.0 - diagnose normalization call grammar mismatch`.
-- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.0` (done) — explicit canonical successor selected; original bytes preserved.
-- next_action: Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.1 from clean HEAD; implement source succession and narrow historical Phase0/CI audit reconciliation with canonical proof.
-- in_flight_uncommitted: none; diagnosis captures, scope, owners and focused verification are recorded before handoff.
-- blockers: No access/decision blocker. P1 .0.5/.0.6/.0.7 remain; .4.1 owns the historical audit rejection for the new signature test. Startup19/32/35/87 remain separate.
+- activation_commit: `03e2bb9a7f48abbe58771f624cb6aba3a068fd35` — clean canonical normalization correction base.
+- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.1 - bind call-form normalization successor`.
+- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.1` (done) — source succession, exact audit evolution and source-bound fresh replay with honest separate durability disclosure.
+- next_action: Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.2 from clean HEAD; verify recovery of the134 historical audit artifact inputs before bridge parent signoff.
+- in_flight_uncommitted: none — intended clean post-landing handoff.
+- blockers: No access/decision blocker. P1 .0.5/.0.6/.0.7 remain independent; artifact recovery and bridge reconciliation precede their diagnosis/repair. Startup19/32/35/87 remain separate.
   Wrapper startup .7 remains open; recovery/purge stay prohibited.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
   active table; the task metadata doctrine inventories all consumers, permits arbitrary frontier-row rewrites,

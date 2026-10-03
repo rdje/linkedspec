@@ -165,3 +165,14 @@ D/P. `.1.4` records requirements and evidence-backed gaps; later format catalog/
 provide complete-language requirements. Named arguments remain parked under
 `PARSER-AUTHORING-APIS.4`. No ambient filesystem/process/network/clock/RNG authority,
 new global limit, sandbox guarantee or optional frontend is selected.
+
+## Explicit source correction after diagnosis
+
+`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.0` establishes that the initial pipeline
+uses unsupported infix condition/increments; direct `count` and admitted call loops
+work. `.0.4.1` selects `normalization-calls.spec` with only that loop changed to
+`num_lt`/`num_add`. The original source and immutable selection checkpoint remain
+exact. Explicit correction provenance binds both source identities; all sixteen case
+oracles, dimensions, mutation roles and foundation inputs retain their meanings.
+Seven P cases now pass native/fresh Perl value/event/exit/quiet/actual-object controls;
+full D/P semantic mutation execution and other backends remain separately owned.

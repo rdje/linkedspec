@@ -2,17 +2,19 @@
 
 ## Current Activity
 
-Normalization call grammar diagnosed; full PNT continues with canonical successor source/binding and historical audit reconciliation.
+Full PNT: explicit normalization successor verified; bounded historical artifact-input recovery follows its receipt-bound landing.
 
 ## Latest Completed Slice
 
-`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.0`: eleven paired controls, seven admitted-form successes, three evidence REDs and102 unchanged production/governing inputs. False-ready raw-expression telemetry is P1-owned .0.7; .0.5/.0.6 remain separate.
+`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.1`: seven native/fresh cases/21 tests, eight actual-object alias controls and four observation REDs. Original source/sixteen oracles preserved;92 production/governing inputs exact. Neutral152/16/44, historical audit24/257/149/134 with12/6/3 mutations and five dependents652 PASS. Historical-audit leg3 is explicitly gap-owned by P1 .0.4.2; the normalization proof is complete. Exact staged canonical receipt governs landing.
 
 ## Next Action
 
-Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.1 from clean HEAD; implement the selected source succession and exact Phase0/CI historical audit corrections with canonical acceptance.
+Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.2 from clean HEAD; verify the134 historical audit artifact inputs, then reconcile bridge parents. P1 .0.5/.0.6/.0.7 remain separate.
 
 ## Recent Completions
+
+- `2026-10-03` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.1` binds explicit normalization succession and repairs exact historical audit evolution.
 
 - `2026-10-02` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.0` diagnoses unsupported infix and selects an explicit canonical successor; raw-readiness/audit defects remain owned.
 
@@ -43,8 +45,6 @@ Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.1 from clean HEAD; implement t
 - `2026-10-02` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.1` selects bounded compositions and owns the P1 Perl deferred dispatch repair before execution.
 
 - `2026-10-02` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.4` independently reconciles closure definition and splits bounded composition work before implementation.
-
-- `2026-10-02` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.3` freezes scoped policies and corrects bounded progress/error/ordering teaching.
 
 ## History
 

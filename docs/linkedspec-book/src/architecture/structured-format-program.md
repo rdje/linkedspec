@@ -238,14 +238,13 @@ without changing the detached mapped result or original. Its independent expecte
 }
 ```
 
-This normalization is selected and remains blocked on Perl. Deferred push and registered `decorate`
-now execute in the bounded regression below. The frozen source next fails at `while(i < count(pieces))`:
-generated Perl retains that condition and the infix increments without lowering. Both native and fresh
-emitted execution report an undefined `count` function despite ready1/raw0/fallback0/unresolved0 metadata.
-The loop/source-contract prerequisite `.1.3.3.0.4` must establish the admitted arithmetic spelling and
-resolve that mismatch before dispatcher closeout and complete neutral execution. The valid `x,y`
-callback-literal prerequisite is repaired at its lexical boundary below. Separately observed attached-control
-and residual-event-order gaps, plus existing regex/numeric callback repairs, retain their owners.
+The call-form normalization now passes all seven selected cases on native and fresh emitted Perl.
+The original frozen source remains historical evidence: `while(i < count(pieces))` and its infix increments
+retain host text without lowering and fail at the undefined host `count` function. Arithmetic and comparison
+use calls such as `num_lt(i,count(pieces))` and `num_add(i,1)`. Source correction `.1.3.3.0.4.1` binds an explicit
+successor with only that loop changed; it preserves the original source and all sixteen selected case oracles.
+The valid `x,y` callback-literal prerequisite is repaired at its lexical boundary below. Attached-control,
+residual-event-order and nested raw-expression readiness gaps retain their independent owners.
 The complete requirements and mutation/oracle plan are in
 `docs/language-readiness/composed-objective-selection.md`; no new primitive or syntax is selected.
 
@@ -286,21 +285,22 @@ Residual unmatched-helper descriptor events can also change order across control
 while selected lowered code stays identical. `.0.6` owns ordering/overlap and readiness diagnosis;
 the snapshots preserve each observed order. Neither defect is waived by the healthy pipe controls.
 
-### Neutral fixtures are governed; runtime execution is still pending
+### Governed fixtures and bounded Perl normalization
 
 The sixteen selected cases now have frozen sources and independent expected observations in
 `capability_conformance/composed_objective_contract.json` (`linkedspec-composed-objectives-v1`).
-The canonical sources are `tests/language-readiness/composed/diagnostic.spec`,
-`tests/language-readiness/composed/normalization.spec` and an isolated
-`tests/language-readiness/composed/diagnostic-invalid-arity.spec`. They retain the selected diagnostic and blocked
-normalization sources; original probe identities and closure semantics stay unchanged.
+The selected sources are `tests/language-readiness/composed/diagnostic.spec`,
+`tests/language-readiness/composed/normalization-calls.spec` and an isolated
+`tests/language-readiness/composed/diagnostic-invalid-arity.spec`. The closed correction record binds
+the original `normalization.spec`, its successor and their exact one-loop difference. Original probes,
+selection/checkpoints, sixteen oracles and closure semantics stay unchanged.
 
 ```sh
 bash tools/run_python_project_data.sh tools/check_composed_objective_contract.py
 ```
 
 The checker independently builds ASCII word/pair, shape and event expectations without evaluating the DSL.
-It rejects140 structural,16 observation and44 producer-report corruptions, with two unrelated-error and two
+It rejects152 structural,16 observation and44 producer-report corruptions, with two unrelated-error and two
 strict-JSON controls. It distinguishes boolean false from numeric0, rich events from returned values,
 quiet evaluation from omitted effects, typed exit from caller failure, and arity rejection from argument work.
 
@@ -309,10 +309,48 @@ observations. Serialized flags cannot establish native error classification, ide
 detachment by themselves. Backend lanes must execute public producers, mutate the actual returned objects,
 and reject deliberately aliased controls. They must pass a healthy baseline before semantic mutants count.
 The default checker executes no DSL and changes no runtime admission. The bounded Perl registered-function
-bridge is implemented and the literal signature prerequisite is repaired. Canonical reconciliation,
-normalization, deferred attached-control, residual-event-order and nested raw-expression readiness prerequisites remain before complete
+bridge is implemented and the literal signature prerequisite is repaired. Seven paired normalization cases pass;
+canonical bridge reconciliation, deferred attached-control, residual-event-order and nested raw-expression readiness prerequisites remain before complete
 neutral execution. `docs/language-readiness/composed-objective-governance.md`
 records the oracle and evidence boundary. Whole formats and unassessed requirements remain pending.
+
+The complete call-form normalization source is:
+
+```spec
+{{#include ../../../../tests/language-readiness/composed/normalization-calls.spec}}
+```
+
+`map_leaves!` invokes the callback with a temporary `text` parameter and the caller's live `prefix`.
+The callback records each original leaf, calls pure `decorate`, then publishes a detached mapped result.
+The later `tree.meta.count` write changes the tree while preserving `mapped` and `original`; `text` restores
+to `outside`. For `ab-cd`, the full returned value is the JSON shown above, and the ordered messages are
+`leaf:ab!`, `leaf:cd!`, then `done:2\n`.
+
+| Input / sink | Result and delivery |
+| --- | --- |
+| `ab-cd`, collecting | `new:AB` / `new:CD`, original `ab` / `cd`, three ordered messages. |
+| `AB-cd`, collecting | Same normalized leaves; original `AB` / `cd` and matching leaf messages. |
+| `x-y`, collecting | `new:X` / `new:Y`, original `x` / `y`, three ordered messages. |
+| `ab-cd`, absent | Same complete value, zero delivered events. |
+| `!ab-cd`, `ab-cd!`, or empty | Typed exit1 before value or delivery. |
+
+```sh
+bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/composed_normalization_perl.t
+```
+
+The regression passes21 top-level tests. For four accepted cases on each route, it mutates the actual returned
+tree at root and nested leaves, checks that mapped/original objects remain unchanged, then deliberately aliases
+the actual tree to `mapped` and confirms that the same predicate detects the alias. A JSON consumer copy cannot
+replace these eight object controls. Complete diagnostic/normalization execution and the sixteen runtime semantic
+mutation roles remain a separate lane; other backends are not admitted by this bounded Perl proof.
+
+Historical objective-audit integrity is separate from fresh-checkout recovery. Its134 retained local logs
+match their recorded hashes, but the new hash capture does not establish recovery of those input bytes.
+P1 `.0.4.2` owns bounded artifact recovery before bridge parent signoff. This does not weaken the retained
+seven-case normalization proof or establish that every earlier proof is unreproducible.
+Normalization review controls recover their required audit metadata from the tracked checkpoint and run
+without the historical logs or an ignored intermediate report. That metadata recovery leaves the original
+log-byte recovery task open.
 
 ### Deferred push on Perl
 
@@ -1173,7 +1211,8 @@ exception identity and restored context. The existing 33 source rows remain byte
 original isolated composition controls now succeed on both producers.
 
 The later `.0.2.1.3.1` repair protects callable signature pipes, including `x,y` and operator-named
-rest parameters. The frozen pipeline's remaining loop/count mismatch belongs to `.0.4`.
+rest parameters. The original frozen pipeline retains its historical infix failure; the explicit call-form
+successor passes all seven normalization cases. Historical audit-input recovery `.0.4.2` remains before bridge parent signoff.
 Startup32 argument/local-name shadowing, startup19/35/87 and other backend lanes retain their owners.
 Recognized-source readiness does not prove runtime coverage.
 
@@ -1195,14 +1234,15 @@ The original selected fixture instead contains `i < count(pieces)` and infix inc
 Its AST marks those expressions `raw_perl/unsupported_expression`; emitted Perl retains the barewords
 and calls a host `count`, which fails at runtime. Direct `count(pieces)` returns `2`. Replacing only
 that loop with admitted calls in a scratch source yields the selected nested `new:AB`/`new:CD`
-result, count2 and restored caller text on both routes. `.0.4.1` owns an explicit successor fixture
-and source-binding correction, preserving the original bytes and all selected oracles.
+result, count2 and restored caller text on both routes. `.0.4.1` binds that explicit successor fixture
+and verifies all seven cases, preserving the original bytes and all selected oracles.
 
 The diagnosis also exposes false portability telemetry: these raw nested expressions currently
 report ready1/raw0/fallback0/unresolved0. For example, `i=2; i=i+1; return(i)` returns `1`, and
 an infix `i < 1` condition selects its true branch, because the emitted bareword is not the bound
 DSL variable. `.0.7` owns reporting those raw dependencies under ADR0003; source correction alone
-does not close that defect. Complete case/event/detachment execution remains with the subsequent owners.
+does not close that defect. Complete D/P semantic-mutant admission and independent control/order/readiness
+repairs remain with the subsequent owners.
 
 ### Reconstructing dated bridge probes from a fresh checkout
 

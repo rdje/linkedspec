@@ -18,6 +18,10 @@ RUNTIMES = ("perl", "rust", "dart", "julia", "puc", "luajit")
 GOVERNANCE_OWNER = "SPEC-LANGUAGE-SELF-CONTAINMENT.1.2.2"
 COMPOSED_GOVERNANCE_OWNER = "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.2"
 PUSH_REPAIR_OWNER = "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.1"
+NORMALIZATION_CORRECTION_OWNER = "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.1"
+SIGNATURE_REPAIR_OWNER = "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.3.1"
+SIGNATURE_BEFORE = "67af62f7aa6dff39b6c3fd64b15fb5139f691a0a"
+SIGNATURE_AFTER = "446fb65fadca2e1bd31fec93bb9de779eb2134d1"
 # Only these reviewed CI insertions and Perl inventory replacements may evolve
 # historical executable inputs. Normalization must recover every original byte.
 CI_INSERTIONS = (
@@ -45,6 +49,15 @@ PUSH_CI_INSERTIONS = (
     (b"PERL5LIB= prove -Iperl t/callable_codeblock_literal_contract.t\n",
      b'\nlog "running Perl deferred push composition and caller-identity fixture"\n'
      b"PERL5LIB= prove -Iperl t/codeblock_push_composition_perl.t\n"),
+)
+NORMALIZATION_CI_INSERTIONS = (
+    (b"require_tracked_file tests/language-readiness/composed/normalization.spec\n",
+     b"require_tracked_file tests/language-readiness/composed/normalization-calls.spec\n"
+     b"require_tracked_file t/composed_normalization_perl.t\n"
+     b"require_tracked_file docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.1-fresh.pl\n"),
+    (b"PERL5LIB= prove -Iperl t/codeblock_push_composition_perl.t\n",
+     b'\nlog "running Perl call-form normalization source and native/fresh object controls"\n'
+     b"PERL5LIB= prove -Iperl t/composed_normalization_perl.t\n"),
 )
 PERL_STORAGE_REPLACEMENTS = (
     (b"(( ${#perl_temp_owners[@]} == 27 )) ||\n",
@@ -90,7 +103,8 @@ def verify_governance_evolution(source, contents, historical_hash):
     require(source == "tools/run_ci_local.sh", f"unapproved governance source: {source}")
     normalized = contents
     # Strip the later insertions first: their anchors are earlier owned additions.
-    for anchor, insertion in PUSH_CI_INSERTIONS + COMPOSED_CI_INSERTIONS + CI_INSERTIONS:
+    for anchor, insertion in (NORMALIZATION_CI_INSERTIONS + PUSH_CI_INSERTIONS
+                              + COMPOSED_CI_INSERTIONS + CI_INSERTIONS):
         require(normalized.count(anchor + insertion) == 1,
                 f"governance registration mismatch: {source}")
         normalized = normalized.replace(anchor + insertion, anchor, 1)
@@ -100,7 +114,33 @@ def verify_governance_evolution(source, contents, historical_hash):
             "current": digest(contents), "owner": GOVERNANCE_OWNER,
             "additional_owner": COMPOSED_GOVERNANCE_OWNER,
             "runtime_repair_owner": PUSH_REPAIR_OWNER,
+            "source_correction_owner": NORMALIZATION_CORRECTION_OWNER,
             "scope": "exact anchored checker/input registration; original CI bytes preserved"}
+
+
+def signature_subtest(contents):
+    start = b"subtest 'actionir_statement_split_core_requires_newline_or_semicolon_boundaries' => sub {\n"
+    following = b"subtest 'actionir_canonical_events_require_avoids_core_load_until_build' => sub {\n"
+    require(contents.count(start) == contents.count(following) == 1,
+            "signature regression marker mismatch: t/phase0_regression.t")
+    first = contents.index(start)
+    end = contents.index(following, first)
+    return contents[first:end]
+
+
+def verify_signature_regression_evolution(source, contents, historical_hash):
+    require(source == "t/phase0_regression.t", f"unapproved signature regression source: {source}")
+    before = git("show", f"{SIGNATURE_BEFORE}:{source}")
+    after = git("show", f"{SIGNATURE_AFTER}:{source}")
+    require(contents == after, f"unreviewed signature-regression drift: {source}")
+    # Replace only the exact owned subtest, including its fixed/dynamic plan change.
+    normalized = contents.replace(signature_subtest(after), signature_subtest(before), 1)
+    require(normalized == before and digest(normalized) == historical_hash,
+            f"unreviewed signature-regression history: {source}")
+    return {"path": source, "historical": historical_hash, "current": digest(contents),
+            "owner": SIGNATURE_REPAIR_OWNER, "reconciliation_owner": NORMALIZATION_CORRECTION_OWNER,
+            "before_revision": SIGNATURE_BEFORE, "after_revision": SIGNATURE_AFTER,
+            "scope": "exact committed signature subtest and plan replacement only; original Phase0 bytes recovered"}
 
 
 def verify_perl_storage_evolution(source, contents, historical_hash):
@@ -183,6 +223,10 @@ def audit_evidence(read=read_relative):
                 continue
             if source == "tools/test_perl_project_data_storage.sh":
                 governance_updates.append(verify_perl_storage_evolution(
+                    source, read(source), row["sha256"]))
+                continue
+            if source == "t/phase0_regression.t":
+                governance_updates.append(verify_signature_regression_evolution(
                     source, read(source), row["sha256"]))
                 continue
             require(source.startswith("docs/") and source.endswith(".md"),
@@ -287,13 +331,18 @@ def falsify(report):
                 current + b"# unreviewed edit\n",
                 current.replace(CI_INSERTIONS[0][1], b"", 1),
                 current.replace(b"bash tools/run_python_project_data.sh tools/check_scalar_numeric_contract.py\n", b"", 1),
-                current.replace(COMPOSED_CI_INSERTIONS[0][1], b"", 1),
+                current.replace(b"require_tracked_file capability_conformance/composed_objective_contract.json\n",
+                                b"", 1),
                 current.replace(COMPOSED_CI_INSERTIONS[1][1], b"", 1),
                 current.replace(COMPOSED_CI_INSERTIONS[1][1],
                                 COMPOSED_CI_INSERTIONS[1][1] * 2, 1),
                 current.replace(PUSH_CI_INSERTIONS[0][1], b"", 1),
                 current.replace(PUSH_CI_INSERTIONS[1][1], b"", 1),
                 current.replace(PUSH_CI_INSERTIONS[1][1], PUSH_CI_INSERTIONS[1][1] * 2, 1),
+                current.replace(NORMALIZATION_CI_INSERTIONS[0][1], b"", 1),
+                current.replace(NORMALIZATION_CI_INSERTIONS[1][1], b"", 1),
+                current.replace(NORMALIZATION_CI_INSERTIONS[1][1],
+                                NORMALIZATION_CI_INSERTIONS[1][1] * 2, 1),
             )
             verify = verify_governance_evolution
             reasons = ("governance registration mismatch:", "unreviewed governance drift:")
@@ -305,8 +354,22 @@ def falsify(report):
                                  PERL_STORAGE_REPLACEMENTS[2][1] * 2, 1),)
             verify = verify_perl_storage_evolution
             reasons = ("Perl storage registration mismatch:", "unreviewed Perl storage drift:")
+        elif source == "t/phase0_regression.t":
+            before = git("show", f"{SIGNATURE_BEFORE}:{source}")
+            owned = signature_subtest(current)
+            altered = (
+                current.replace(owned, signature_subtest(before), 1),
+                current.replace(owned, owned.replace(b"    done_testing();\n",
+                                                    b"    plan tests => 8;\n", 1), 1),
+                current + b"# unreviewed edit outside the owned subtest\n",
+            )
+            verify = verify_signature_regression_evolution
+            reasons = ("unreviewed signature-regression drift:",
+                       "unreviewed signature-regression history:", "signature regression marker mismatch:")
         else:
             raise ValueError(f"unapproved governance control source: {source}")
+        require(all(candidate != current for candidate in altered),
+                f"governance controls must change actual bytes: {source}")
         controls_by_source[source] = 0
         for contents in altered:
             try:

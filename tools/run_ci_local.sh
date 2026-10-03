@@ -309,6 +309,9 @@ require_tracked_file tools/check_composed_objective_contract.py
 require_tracked_file capability_conformance/composed_objective_contract.json
 require_tracked_file tests/language-readiness/composed/diagnostic.spec
 require_tracked_file tests/language-readiness/composed/normalization.spec
+require_tracked_file tests/language-readiness/composed/normalization-calls.spec
+require_tracked_file t/composed_normalization_perl.t
+require_tracked_file docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.1-fresh.pl
 require_tracked_file tests/language-readiness/composed/diagnostic-invalid-arity.spec
 require_tracked_file tools/check_typed_source_location_six_runtime.sh
 require_tracked_file tools/check_recursive_observation_six_runtime.sh
@@ -1028,6 +1031,9 @@ PERL5LIB= prove -Iperl t/callable_codeblock_literal_contract.t
 
 log "running Perl deferred push composition and caller-identity fixture"
 PERL5LIB= prove -Iperl t/codeblock_push_composition_perl.t
+
+log "running Perl call-form normalization source and native/fresh object controls"
+PERL5LIB= prove -Iperl t/composed_normalization_perl.t
 
 log "running Perl variadic user-function contract fixture"
 PERL5LIB= prove -Iperl t/variadic_user_function_contract.t

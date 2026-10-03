@@ -21,21 +21,48 @@ OWNER = "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.2"
 SELECTION_OWNER = "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.1"
 SELECTION = "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.1-selection.json"
 SELECTION_SHA = "b9e54e21dff39b08a098ea882a513d507730e0cdd7e4d6199c6374f8dbc30fe7"
+SOURCE_CORRECTION_OWNER = "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.1"
 CI_CALL = "bash tools/run_python_project_data.sh tools/check_composed_objective_contract.py"
+PERL_REGRESSION_CALL = "PERL5LIB= prove -Iperl t/composed_normalization_perl.t"
+PERL_REGRESSION_INPUTS = (
+    "t/composed_normalization_perl.t",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.1-fresh.pl",
+)
 SOURCES = {
     "diagnostic": {
         "path": "tests/language-readiness/composed/diagnostic.spec",
         "sha256": "fba66e47d14b1a236deb1136ec2c515fa629f8a1d8dce36812431ebe8bc62fc0",
     },
     "normalization": {
-        "path": "tests/language-readiness/composed/normalization.spec",
-        "sha256": "ba9953c282e5e66956dc4b7d22c2acc7b1e879734654e7cb467ad41275cc4249",
+        "path": "tests/language-readiness/composed/normalization-calls.spec",
+        "sha256": "f4e45215d893a3c159eb146dd4c37b5008e6670bb52e180e3deebd8139e6a83e",
     },
     "diagnostic_invalid_arity": {
         "path": "tests/language-readiness/composed/diagnostic-invalid-arity.spec",
         "sha256": "bd474ebe5e927111b46163b217da66e3d75802f264558800b3bfeebd14ad773a",
     },
 }
+SOURCE_CORRECTIONS = {
+    "normalization": {
+        "owner": SOURCE_CORRECTION_OWNER,
+        "original": {
+            "path": "tests/language-readiness/composed/normalization.spec",
+            "sha256": "ba9953c282e5e66956dc4b7d22c2acc7b1e879734654e7cb467ad41275cc4249",
+        },
+        "successor": dict(SOURCES["normalization"]),
+        "change": {
+            "from": "while(i < count(pieces)) { visited = visited + 1; i = i + 1 }",
+            "to": "while(num_lt(i,count(pieces))) { visited = num_add(visited,1); i = num_add(i,1) }",
+        },
+    },
+}
+
+
+def source_input_paths() -> list[str]:
+    return [*(source["path"] for source in SOURCES.values()),
+            *(row["original"]["path"] for row in SOURCE_CORRECTIONS.values())]
+
+
 # Independent input/mode register from the selected requirements, not the artifact.
 CASES = (
     ("D_ordered_go", "diagnostic", "go", "collect"),
@@ -269,6 +296,7 @@ def expected_contract(read: Callable[[str], bytes] = read_relative) -> dict[str,
         "selection_owner": SELECTION_OWNER,
         "selection": {"path": SELECTION, "sha256": SELECTION_SHA},
         "sources": copy.deepcopy(SOURCES), "foundation_sources": selection_foundation(read),
+        "source_corrections": copy.deepcopy(SOURCE_CORRECTIONS),
         "dimensions": copy.deepcopy(DIMENSIONS), "policy": copy.deepcopy(POLICY),
         "execution_owners": copy.deepcopy(EXECUTION_OWNERS), "repair_owners": list(REPAIRS),
         "cases": [expected_case(case) for case in CASES],
@@ -305,23 +333,36 @@ def validate_contract(actual: Any, read: Callable[[str], bytes] = read_relative)
     for source in SOURCES.values():
         require(digest(read(source["path"])) == source["sha256"],
                 "source_binding", f"source changed: {source['path']}")
+    for correction in SOURCE_CORRECTIONS.values():
+        original = read(correction["original"]["path"])
+        require(digest(original) == correction["original"]["sha256"],
+                "source_history_binding", "original normalization source changed")
+        before = correction["change"]["from"].encode()
+        after = correction["change"]["to"].encode()
+        require(original.count(before) == 1 and original.replace(before, after, 1)
+                == read(correction["successor"]["path"]),
+                "source_correction", "successor differs beyond the one diagnosed loop")
     for path, checksum in expected["foundation_sources"].items():
         require(digest(read(path)) == checksum, "foundation_binding", f"original source changed: {path}")
     validate_owners(task_statuses(ROOT / "docs/tasks"))
     ci = read("tools/run_ci_local.sh").decode().splitlines()
-    require(ci.count(CI_CALL) == 1, "ci_registration", "checker needs exactly one canonical call")
-    inputs = [CONTRACT, "tools/check_composed_objective_contract.py",
-              *(source["path"] for source in SOURCES.values())]
+    for call in (CI_CALL, PERL_REGRESSION_CALL):
+        require(ci.count(call) == 1, "ci_registration", "proof needs exactly one canonical call: " + call)
+    inputs = [CONTRACT, "tools/check_composed_objective_contract.py", *source_input_paths(),
+              *PERL_REGRESSION_INPUTS]
     for path in inputs:
         require(ci.count("require_tracked_file " + path) == 1,
                 "ci_registration", f"input needs exactly one registration: {path}")
 
 
 def validate_owners(statuses: dict[str, str | None]) -> None:
-    for owner in [OWNER, SELECTION_OWNER, *EXECUTION_OWNERS.values(), *REPAIRS]:
+    for owner in [OWNER, SELECTION_OWNER, SOURCE_CORRECTION_OWNER,
+                  *EXECUTION_OWNERS.values(), *REPAIRS]:
         require(owner in statuses, "owner", f"missing task owner {owner}")
     require(statuses[SELECTION_OWNER] == "done", "owner", "selection is incomplete")
     require(statuses[OWNER] in ("active", "done"), "owner", "fixture owner is not activated")
+    require(statuses[SOURCE_CORRECTION_OWNER] in ("active", "done"),
+            "owner", "source correction is not activated")
 
 
 def rejection(check: Callable[[], None], reason: str) -> None:
@@ -423,24 +464,35 @@ def contract_falsifiers(contract: dict[str, Any]) -> int:
             return data + b" " if path == target else data
         rejection(lambda: validate_contract(contract, corrupted_source), "source_binding")
         count += 1
+    original_path = SOURCE_CORRECTIONS["normalization"]["original"]["path"]
+    rejection(lambda: validate_contract(contract, lambda path: read_relative(path) +
+              (b" " if path == original_path else b"")), "source_history_binding")
+    count += 1
+    for field in ("owner", "original", "successor", "change"):
+        mutant = copy.deepcopy(contract)
+        mutant["source_corrections"]["normalization"][field] = "weakened"
+        rejection(lambda: validate_contract(mutant), "contract_source_corrections")
+        count += 1
     target = next(iter(contract["foundation_sources"]))
     rejection(lambda: validate_contract(contract, lambda path: read_relative(path) +
               (b" " if path == target else b"")), "foundation_binding")
     count += 1
-    for replacement in ("", CI_CALL + "\n" + CI_CALL):
-        rejection(lambda: validate_contract(contract, lambda path: read_relative(path).replace(
-            CI_CALL.encode(), replacement.encode(), 1) if path == "tools/run_ci_local.sh"
-            else read_relative(path)), "ci_registration")
-        count += 1
-    for path in [CONTRACT, "tools/check_composed_objective_contract.py",
-                 *(source["path"] for source in SOURCES.values())]:
+    for call in (CI_CALL, PERL_REGRESSION_CALL):
+        for replacement in ("", call + "\n" + call):
+            rejection(lambda: validate_contract(contract, lambda path: read_relative(path).replace(
+                call.encode(), replacement.encode(), 1) if path == "tools/run_ci_local.sh"
+                else read_relative(path)), "ci_registration")
+            count += 1
+    for path in [CONTRACT, "tools/check_composed_objective_contract.py", *source_input_paths(),
+                 *PERL_REGRESSION_INPUTS]:
         line = ("require_tracked_file " + path + "\n").encode()
         rejection(lambda: validate_contract(contract, lambda target: read_relative(target).replace(
             line, b"", 1) if target == "tools/run_ci_local.sh" else read_relative(target)),
             "ci_registration")
         count += 1
     statuses = task_statuses(ROOT / "docs/tasks")
-    for owner in dict.fromkeys([OWNER, SELECTION_OWNER, *EXECUTION_OWNERS.values(), *REPAIRS]):
+    for owner in dict.fromkeys([OWNER, SELECTION_OWNER, SOURCE_CORRECTION_OWNER,
+                               *EXECUTION_OWNERS.values(), *REPAIRS]):
         mutant = dict(statuses)
         del mutant[owner]
         rejection(lambda: validate_owners(mutant), "owner")
