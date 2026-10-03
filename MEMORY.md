@@ -1,11 +1,11 @@
 # MEMORY
 
-- activation_commit: `e07f80f74c8c80b426c4b846a1293139848229db` — clean deferred-control diagnosis activation base.
-- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.0 - diagnose deferred conditional execution`.
-- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.0` (done) — twenty-source deferred conditional diagnosis.
-- next_action: Activate existing SESSION-STARTUP-READING.87.2 from committed clean HEAD; repair deferred matches literal/string operands before attached .0.5.1, marker .0.5.2 and value .0.5.3.
-- in_flight_uncommitted: none; diagnosis completed and no required jobs at landing.
-- blockers: No access/decision blocker. startup87.2 precedes .0.5 repairs; .0.6/.0.7 precede dispatcher/full execution. Bridge/literal/source/durability parents are closed; other startup repairs remain separate.
+- activation_commit: `52763bce22569c5b68392484de162ee5dc395255` — clean callable matches repair activation base.
+- latest_completed_leaf: `SESSION-STARTUP-READING.87.2 - execute callable matches pattern operands`.
+- active_work_unit: `SESSION-STARTUP-READING.87.2` (done) — bounded matches repair and exact diagnostic/evidence corrections.
+- next_action: Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.1 from committed clean HEAD; implement typed attached branch execution and nested block-local returns.
+- in_flight_uncommitted: none; final focused runtime/capsule/book proof completed before landing.
+- blockers: No access/decision blocker. Matches prerequisite is repaired; attached/marker/value .0.5 and order/readiness .0.6/.0.7 precede dispatcher/full execution. Other startup repairs remain separate.
   Wrapper startup .7 remains open; recovery/purge stay prohibited.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
   active table; the task metadata doctrine inventories all consumers, permits arbitrary frontier-row rewrites,

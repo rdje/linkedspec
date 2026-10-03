@@ -212,9 +212,26 @@ contract is defined. Current Perl evaluates that standalone expression as a matc
 against its implicit host subject; Rust evaluates it to the pattern string.
 Parser recognition of regex syntax does not make those behaviors equivalent.
 
-These examples describe ordinary rule action blocks. Perl currently rejects
-`matches` inside an invoked callable `{|text| ... }` body with either literal or
-string patterns; repair is tracked under `SESSION-STARTUP-READING.87.2`.
+Perl callable bodies now execute this same helper with literal and string patterns:
+
+```spec
+Top:: I { cb={|| return(matches("abc",/b/)) }; return(cb()) }
+```
+
+Native and independently loaded emitted parsers return numeric `1`; the no-match
+counterpart returns numeric `0`. A caller pattern binding or copied pattern parameter
+also works. Literal `i`, `m`, `s`, `x` and `g` comparisons are covered by the matched
+public regression; physical multiline subjects avoid the separate string-escape drift.
+
+The subject evaluates once first. An undefined subject returns `0` and skips the
+pattern operand, including its effects. Otherwise the pattern evaluates once after
+the subject. Wrong arity rejects before operand work. Invalid dynamic patterns retain
+a typed `invalid_matches_pattern` error with the regex reason and operand source span;
+failures restore actual caller parameter slots.
+The helper takes precedence over a same-named callable variable. Literal handling is
+limited to this pattern position: returning a bare regex from a deferred body still
+raises `unsupported_codeblock_actionir`/`regex`, without adding a regex value type.
+
 The [Perl integration guide](../public-api/integration-perl.md#regex-and-division-in-action-code)
 also gives working multiline match/substitution patterns and quoted subjects,
 generated-parser coverage, grouped-pattern support, and the remaining

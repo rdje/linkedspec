@@ -1412,7 +1412,8 @@ Top:: I {
 ```
 
 Both routes return `ok`. Attached statement-control function bodies exceed the current
-function MVP. Calling `matches` directly inside a deferred body has a separate literal/string
-pattern prerequisite; the registered example executes it through the existing function lowerer.
+function MVP. The committed matches prerequisite now also executes literal/string patterns directly
+inside a deferred body. This does not supply the missing conditional dispatcher; the
+registered example executes its conditional through the existing function lowerer.
 The tracked twenty-source diagnosis distinguishes these boundaries without changing the
 plain callable record or claiming complete conditional support.

@@ -214,6 +214,38 @@ sub _eval_call {
  _error('invalid_codeblock_body', detail => 'call arguments must be an array')
   unless ref($args) eq 'ARRAY';
 
+ if ($name eq 'matches') {
+  _error('helper_arity_mismatch', helper_name => $name,
+   actual_arity => scalar(@$args), expected_arity => 'exactly 2',
+   arguments_evaluated => 0,
+  ) unless @$args == 2;
+  my $value = _eval_expr($args->[0], $ctx);
+  # The compiled helper skips its pattern operand for an undefined subject.
+  return 0 unless defined $value;
+  my $operand = $args->[1];
+  my $pattern;
+  if (ref($operand) eq 'HASH' && ($operand->{kind} // '') eq 'regex') {
+   $pattern = $operand->{pattern};
+   my $flags = $operand->{flags} // '';
+   # Global/continue flags cannot change this first-match boolean on a fresh
+   # subject. Compile-once and capture-preservation flags expose no value here.
+   $flags =~ s/[gcop]//g;
+   $pattern = '(?'.$flags.')'.$pattern if length $flags;
+  } else {
+   $pattern = _eval_expr($operand, $ctx);
+  }
+  my ($result, $failure);
+  my $ok = eval { $result = ($value =~ /$pattern/) ? 1 : 0; 1 };
+  unless ($ok) {
+   $failure = $@;
+   my $runtime_file = __FILE__;
+   $failure =~ s/ at \Q$runtime_file\E line \d+(?:, <[^>\n]+> line \d+)?\.?\n?\z//;
+   _error('invalid_matches_pattern', detail => $failure,
+    source_span => $operand->{source_span});
+  }
+  return $result
+ }
+
  if ($name eq 'push') {
   _error(
    'helper_arity_mismatch', helper_name => $name,

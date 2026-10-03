@@ -12,6 +12,29 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-10-03 — SESSION-STARTUP-READING.87.2: contextual patterns and matched source replay
+
+The direct matches lowerer evaluates its subject before a defined guard and pattern operand. The
+new private callable dispatcher follows that order instead of generic eager operand evaluation.
+Typed literal pattern payload/flags are consumed only in the helper's second position; standalone
+regex nodes remain unsupported. A fresh subject's first-match boolean has no exposed g/c cursor,
+compile-once or capture-preservation value. No source eval or public regex carrier is added.
+
+Actual public invocation observations distinguish original caller slots from equal-value references,
+retain error identity and inspect real arity/operand effects. A tracked exact runtime-before module
+loads explicitly in both RED producers before LinkedSpec imports; review never swaps production.
+Original emitted hashes agree across RED/GREEN. Raw failure traces remain with only anchored timestamp
+projection, while metadata ordering retains its separate owner. The first repaired textual-newline
+flag controls expose the already documented supporting .2.4 escape drift; preserve those inputs/results
+and use physical LF in final flag comparisons without changing string semantics. First799-test proof
+and source are retained before the final actual-input census expansion; final claim binds its rerun.
+
+Prelanding checks expose raw TAP trailing whitespace and a host __FILE__ suffix in the new
+regex diagnostic. Preserve earlier complete bytes through hash-linked in-memory capsules;
+strip only the exact module/filehandle suffix in current typed errors and retain the existing
+operand span. Native/fresh tests distinguish reason/span/identity from host location. This
+corrects the owned implementation and evidence representation without changing older claims.
+
 ## 2026-10-03 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.0: conditional execution and prerequisite separation
 
 Typed conditions/bodies/branch roles already survive parsing. Deferred _eval_expr lacks control_if,

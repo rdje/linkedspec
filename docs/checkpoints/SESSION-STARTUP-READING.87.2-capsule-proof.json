@@ -1,0 +1,24 @@
+{
+  "capsules": 6,
+  "raw_bytes": 2221817,
+  "controls": [
+    {
+      "name": "bytes",
+      "reason": "capsule byte identity"
+    },
+    {
+      "name": "metadata",
+      "reason": "capsule metadata"
+    },
+    {
+      "name": "path",
+      "reason": "capsule metadata"
+    }
+  ],
+  "original_source_and_capture_links": "PASS",
+  "decoder_write_attempts": 0,
+  "actual_write_denial": {
+    "attempts": 1,
+    "created": false
+  }
+}

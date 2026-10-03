@@ -5,7 +5,7 @@
     {
       "name": "committed-bridge-prerequisite-reconciliation",
       "statement": "Seven original composition controls remain byte/source/oracle exact on native and fresh emitted Perl; unchanged bridge and prerequisite regressions pass750 tests, and historical producer recovery preserves26 exact source identities.",
-      "scope": "Selected seven original controls,71-source/605-test bridge regression, six direct-dependent suites124 tests and seven-case normalization21 tests.14 bridge/authority/original-checkpoint inputs and26 archived producer/Git bodies are checked.12 observation/source corruptions reject. Original infix fixture and historical captures/results remain unchanged. This is bounded parent reconciliation; dispatcher/full16 runtime/semantic mutants, other backends, control/order/readiness and startup19/32/35/87 remain separate.",
+      "scope": "Selected seven original controls,71-source/605-test bridge regression, six direct-dependent suites124 tests and seven-case normalization21 tests.14 bridge/authority/original-checkpoint inputs and26 archived producer/Git bodies are checked.12 observation/source corruptions reject. Original infix fixture and historical captures/results remain unchanged. This is bounded parent reconciliation; dispatcher/full16 runtime/semantic mutants, other backends, control/order/readiness and startup19/32/35/87 remain separate. This observation/input boundary is historical at committed52763; startup87.2 changes callable matches execution without refreshing these earlier measurements or hashes.",
       "rederive": {
         "status": "checked",
         "command": "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.2-review.py",
@@ -20,7 +20,7 @@
       },
       "durability": {
         "status": "checked",
-        "mode": "live",
+        "mode": "historical",
         "inputs": [
           {
             "path": "capability_conformance/callable_codeblock_contract.json",
@@ -627,7 +627,8 @@
             "sha256": "0bc03bb8f4ce550397da9fda086215a1d9f6f452ec413605fbcb8976c06af604",
             "role": "input"
           }
-        ]
+        ],
+        "revision": "52763bce22569c5b68392484de162ee5dc395255"
       }
     }
   ]

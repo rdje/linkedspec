@@ -1,0 +1,221 @@
+[
+  {
+    "id": "literal_hit_direct",
+    "source": "Top:: I { return(matches(\"abc\",/b/)) }",
+    "expected": 1
+  },
+  {
+    "id": "literal_hit_deferred",
+    "source": "Top:: I { cb={|| return(matches(\"abc\",/b/)) }; return(cb()) }",
+    "expected": 1
+  },
+  {
+    "id": "literal_miss_direct",
+    "source": "Top:: I { return(matches(\"abc\",/z/)) }",
+    "expected": 0
+  },
+  {
+    "id": "literal_miss_deferred",
+    "source": "Top:: I { cb={|| return(matches(\"abc\",/z/)) }; return(cb()) }",
+    "expected": 0
+  },
+  {
+    "id": "string_hit_direct",
+    "source": "Top:: I { return(matches(\"abc\",\"b\")) }",
+    "expected": 1
+  },
+  {
+    "id": "string_hit_deferred",
+    "source": "Top:: I { cb={|| return(matches(\"abc\",\"b\")) }; return(cb()) }",
+    "expected": 1
+  },
+  {
+    "id": "string_miss_direct",
+    "source": "Top:: I { return(matches(\"abc\",\"z\")) }",
+    "expected": 0
+  },
+  {
+    "id": "string_miss_deferred",
+    "source": "Top:: I { cb={|| return(matches(\"abc\",\"z\")) }; return(cb()) }",
+    "expected": 0
+  },
+  {
+    "id": "insensitive_direct",
+    "source": "Top:: I { return(matches(\"ABC\",/^a/i)) }",
+    "expected": 1
+  },
+  {
+    "id": "insensitive_deferred",
+    "source": "Top:: I { cb={|| return(matches(\"ABC\",/^a/i)) }; return(cb()) }",
+    "expected": 1
+  },
+  {
+    "id": "multiline_direct",
+    "source": "Top:: I { return(matches(\"x\ny\",/^y/m)) }",
+    "expected": 1
+  },
+  {
+    "id": "multiline_deferred",
+    "source": "Top:: I { cb={|| return(matches(\"x\ny\",/^y/m)) }; return(cb()) }",
+    "expected": 1
+  },
+  {
+    "id": "dotall_direct",
+    "source": "Top:: I { return(matches(\"x\ny\",/x.y/s)) }",
+    "expected": 1
+  },
+  {
+    "id": "dotall_deferred",
+    "source": "Top:: I { cb={|| return(matches(\"x\ny\",/x.y/s)) }; return(cb()) }",
+    "expected": 1
+  },
+  {
+    "id": "extended_direct",
+    "source": "Top:: I { return(matches(\"abc\",/a b/x)) }",
+    "expected": 1
+  },
+  {
+    "id": "extended_deferred",
+    "source": "Top:: I { cb={|| return(matches(\"abc\",/a b/x)) }; return(cb()) }",
+    "expected": 1
+  },
+  {
+    "id": "global_direct",
+    "source": "Top:: I { return(matches(\"abc\",/b/g)) }",
+    "expected": 1
+  },
+  {
+    "id": "global_deferred",
+    "source": "Top:: I { cb={|| return(matches(\"abc\",/b/g)) }; return(cb()) }",
+    "expected": 1
+  },
+  {
+    "id": "slash_direct",
+    "source": "Top:: I { return(matches(\"a/b\",/a\\/b/)) }",
+    "expected": 1
+  },
+  {
+    "id": "slash_deferred",
+    "source": "Top:: I { cb={|| return(matches(\"a/b\",/a\\/b/)) }; return(cb()) }",
+    "expected": 1
+  },
+  {
+    "id": "null_subject_direct",
+    "source": "Top:: I { return(matches(undef,/b/)) }",
+    "expected": 0
+  },
+  {
+    "id": "null_subject_deferred",
+    "source": "Top:: I { cb={|| return(matches(undef,/b/)) }; return(cb()) }",
+    "expected": 0
+  },
+  {
+    "id": "empty_subject_direct",
+    "source": "Top:: I { return(matches(\"\",/^$/)) }",
+    "expected": 1
+  },
+  {
+    "id": "empty_subject_deferred",
+    "source": "Top:: I { cb={|| return(matches(\"\",/^$/)) }; return(cb()) }",
+    "expected": 1
+  },
+  {
+    "id": "dynamic_pattern_direct",
+    "source": "Top:: I { x=\"abc\"; pattern=\"b\"; value=matches(x,pattern); return(value) }",
+    "expected": 1
+  },
+  {
+    "id": "dynamic_pattern_deferred",
+    "source": "Top:: I { x=\"abc\"; pattern=\"b\"; cb={|| value=matches(x,pattern); return(value) }; return(cb()) }",
+    "expected": 1
+  },
+  {
+    "id": "ordered_effects_direct",
+    "source": "Top:: I { effects=[]; subject={|| push(effects,\"subject\"); return(\"abc\") }; pattern={|| push(effects,\"pattern\"); return(\"b\") }; value=matches(subject(),pattern()); return([value,effects]) }",
+    "expected": [
+      1,
+      [
+        "subject",
+        "pattern"
+      ]
+    ]
+  },
+  {
+    "id": "ordered_effects_deferred",
+    "source": "Top:: I { effects=[]; subject={|| push(effects,\"subject\"); return(\"abc\") }; pattern={|| push(effects,\"pattern\"); return(\"b\") }; cb={|| value=matches(subject(),pattern()); return([value,effects]) }; return(cb()) }",
+    "expected": [
+      1,
+      [
+        "subject",
+        "pattern"
+      ]
+    ]
+  },
+  {
+    "id": "null_effects_direct",
+    "source": "Top:: I { effects=[]; subject={|| push(effects,\"subject\"); return(undef) }; pattern={|| push(effects,\"pattern\"); return(\"b\") }; value=matches(subject(),pattern()); return([value,effects]) }",
+    "expected": [
+      0,
+      [
+        "subject"
+      ]
+    ]
+  },
+  {
+    "id": "null_effects_deferred",
+    "source": "Top:: I { effects=[]; subject={|| push(effects,\"subject\"); return(undef) }; pattern={|| push(effects,\"pattern\"); return(\"b\") }; cb={|| value=matches(subject(),pattern()); return([value,effects]) }; return(cb()) }",
+    "expected": [
+      0,
+      [
+        "subject"
+      ]
+    ]
+  },
+  {
+    "id": "static_precedence_direct",
+    "source": "Top:: I { matches={|| return(\"slot\") }; value=matches(\"abc\",\"b\"); return(value) }",
+    "expected": 1
+  },
+  {
+    "id": "static_precedence_deferred",
+    "source": "Top:: I { matches={|| return(\"slot\") }; cb={|| value=matches(\"abc\",\"b\"); return(value) }; return(cb()) }",
+    "expected": 1
+  },
+  {
+    "id": "parameter_scope",
+    "source": "Top:: I { x=\"outside\"; pattern=\"z\"; cb={|x,pattern| return(matches(x,pattern)) }; value=cb(\"abc\",\"b\"); return([value,x,pattern]) }",
+    "expected": [
+      1,
+      "outside",
+      "z"
+    ]
+  },
+  {
+    "id": "unsupported_regex_value",
+    "source": "Top:: I { cb={|| return(/b/) }; return(cb()) }",
+    "error": "unsupported_codeblock_actionir",
+    "kind": "regex"
+  },
+  {
+    "id": "unknown_helper",
+    "source": "Top:: I { cb={|| return(missing_match(\"abc\",\"b\")) }; return(cb()) }",
+    "error": "unknown_helper",
+    "name": "missing_match"
+  },
+  {
+    "id": "wrong_arity",
+    "source": "Top:: I { effects=[]; subject={|| push(effects,\"subject\"); return(\"abc\") }; cb={|| return(matches(subject())) }; return(cb()) }",
+    "error": "helper_arity_mismatch"
+  },
+  {
+    "id": "invalid_string_scope",
+    "source": "Top:: I { x=\"outside\"; cb={|x| return(matches(x,\"[\")) }; return(cb(\"abc\")) }",
+    "error": "invalid_matches_pattern"
+  },
+  {
+    "id": "pattern_failure_scope",
+    "source": "Top:: I { x=\"outside\"; cb={|x| return(matches(x,missing_match())) }; return(cb(\"abc\")) }",
+    "error": "unknown_helper",
+    "name": "missing_match"
+  }
+]

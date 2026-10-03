@@ -87,3 +87,12 @@ so they are not healthy equivalent controls. The admitted alternative
 `fn choose(x) { return(if(matches(x,/ok/),x,else("miss"))) }` returns `ok` directly and through
 the registered deferred bridge. No function-statement extension is inferred. `.0.6` metadata,
 `.0.7` readiness, dispatcher/full-sixteen execution and other backends remain separate.
+
+## Current prerequisite succession
+
+Committed `.87.2` repairs literal/string matches in deferred bodies with matched public
+RED/GREEN and actual operand/scope/error controls. The twenty-source `.0.5.0` diagnosis
+and bridge reconciliation claims are frozen at52763 with old hashes/results unchanged.
+Their original matches failure is historical; attached `.0.5.1`, marker `.0.5.2` and
+value `.0.5.3` still require their independent control/return repairs. Numeric helpers,
+`.0.6` ordering and `.0.7` readiness are not closed by pattern dispatch.

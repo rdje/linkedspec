@@ -1,0 +1,38 @@
+[
+  {
+    "path": "docs/checkpoints/SESSION-STARTUP-READING.87.2-green-before.json",
+    "bytes": 1320504,
+    "sha256": "43f2ad933bdab350019a8c3f533050d67cbfcea71c8e22759fb51eefff2c0649",
+    "original_path": "docs/checkpoints/SESSION-STARTUP-READING.87.2-green.json"
+  },
+  {
+    "path": "docs/checkpoints/SESSION-STARTUP-READING.87.2-verification-before.json",
+    "bytes": 416211,
+    "sha256": "30b4db0c33308e82dd1c96b93b8222b92c4ec8e5ca2a1761074a7e6b70e07301",
+    "original_path": "docs/checkpoints/SESSION-STARTUP-READING.87.2-verification-before.json"
+  },
+  {
+    "path": "docs/checkpoints/SESSION-STARTUP-READING.87.2-verification-path-before.json",
+    "bytes": 417123,
+    "sha256": "bc9d327657b1dfed8fedfea506a06789e59cc9985716dd87ecea1ac18b7d04d4",
+    "original_path": "docs/checkpoints/SESSION-STARTUP-READING.87.2-verification.json"
+  },
+  {
+    "path": "docs/checkpoints/SESSION-STARTUP-READING.87.2-test-red.json",
+    "bytes": 43224,
+    "sha256": "6b519288c11f69abf47a1a455a8d5e3abf93949271dd96d766e71c55b9b029e5",
+    "original_path": "docs/checkpoints/SESSION-STARTUP-READING.87.2-test-red.log"
+  },
+  {
+    "path": "docs/checkpoints/SESSION-STARTUP-READING.87.2-test-intermediate.json",
+    "bytes": 21766,
+    "sha256": "5d9febd45ae632a40af4376e4cbbcbd8464546ff4e2ded6480a56edb919007f2",
+    "original_path": "docs/checkpoints/SESSION-STARTUP-READING.87.2-test-intermediate.log"
+  },
+  {
+    "path": "docs/checkpoints/SESSION-STARTUP-READING.87.2-doctrines-before.json",
+    "bytes": 2989,
+    "sha256": "084f1ddb0e264a30a98731d7bfdb353f9d345de6530d128e9b0b0ae5eac88efc",
+    "original_path": ".linkedspec-data/scratch/codeblock-matches-doctrines.log"
+  }
+]

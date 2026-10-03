@@ -6,7 +6,7 @@
 - Status: `active`
 - Roadmap lane: `Targeted session continuity / separately tracked full-reading audit`
 - Created: `2026-09-06`
-- Last updated: `2026-09-27`
+- Last updated: `2026-10-03`
 - Owner: repo-local workflow
 - Reading baseline: `baeb984e36a94a15951cd23d4c52def5064cdaca`
 - Partition authority: `docs/decisions/0125-startup-task-partitions.md`
@@ -20,18 +20,14 @@
 
 ## Current Frontier
 
-No startup repair is selected at this handoff. The director’s September27 return to
-feature implementation selects `SPEC-LANGUAGE-SELF-CONTAINMENT.1.1` after the clean
-.92 commit. Repair order .94/.95/.51/.96 remains queued; every existing defect and
-the separate reading audit retain their owners. .93 census and .92 isolated fallback
-verification are complete.
-
-The stable repair frontier below applies when this lane resumes; the current global
-priority is the feature work above.
+The self-containment deferred-control diagnosis selects existing `.87.2` as a bounded
+feature prerequisite from clean52763. Matches literal/string repair is complete under `.87.2`;
+return after its clean commit to `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.1`. Other startup order
+.94/.95/.51/.96 and the separate reading audit retain their ownership and priority.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `SESSION-STARTUP-READING.94` | `pending` | First repair when this lane resumes after the selected feature work; then .95/.51/.96. |
+| 1 | `SESSION-STARTUP-READING.87.2` | `done` | Bounded prerequisite verified; return to self-containment attached .0.5.1. |
 
 Indexed-read .88 and compact-key .50 repairs are verified. The bounded scanner/helper
 parent .86 is closed; independent helper/grouping repairs remain under .87.

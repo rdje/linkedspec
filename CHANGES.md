@@ -12,6 +12,22 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-10-03 — SESSION-STARTUP-READING.87.2: execute callable matches pattern operands
+
+CodeblockRuntime now dispatches existing matches before same-named callable slots. It evaluates
+the subject once, skips pattern work for undef, handles literal flags/string patterns and returns
+exact numeric0/1. Arity rejects before operand effects; invalid dynamic patterns carry typed errors
+while operand failures retain their original object. Parameters restore actual caller references.
+Matched38-source native/fresh RED/GREEN, new39-test regression, eight direct dependents and ten
+reviewer corruption controls establish the bounded repair (799 focused tests). Complete sources,
+emitted bytes/raw observations and TAP streams are tracked; old bridge/diagnosis claims freeze at52763.
+Initial escape-route failures stay with supporting .2.4. No regex value kind, generic regex evaluation,
+record/schema/contract or dependency/CI change. Book and current continuity align; attached .0.5.1 follows.
+
+Final typed pattern failures retain reason/span without host locations. Six byte-exact earlier
+stream capsules recover2221817 bytes with three corruption controls and an actual write-denial
+control; decoder-body audit observes zero writes. All final runtime/instrument proof is rerun.
+
 ## 2026-10-03 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.0: diagnose deferred conditional execution
 
 Retain twenty complete public native/fresh sources and four ASTs without runtime/test/authority edits.

@@ -373,8 +373,9 @@ public file API, and executes each generated parser in a fresh Perl process.
 It checks the documented values, error channel, rule descriptors and generated
 source identities alongside the existing generated-source contract tests.
 
-These examples cover ordinary rule actions. Perl's separate callable `matches`
-and arithmetic-helper gaps, plus function-position `filter_match`, remain; use the
+These examples cover ordinary rule actions. Callable `matches` now supports literal/string
+patterns through its existing helper contract. Arithmetic-helper gaps and function-position
+`filter_match` remain; use the
 [value-helper reference](../dsl/value-container-flow-helper-reference.md#regex-patterns-and-variable-values)
 and its [numeric helper restrictions](../dsl/value-container-flow-helper-reference.md#numeric-value-helpers)
 for their current supported forms. The regex-brace and escape limitations

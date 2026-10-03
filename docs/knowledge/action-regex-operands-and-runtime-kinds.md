@@ -8,9 +8,11 @@ answers:
   - can regex patterns be used inside action blocks
   - would a first class regex type help LinkedSpec
   - why does Perl matches fail inside a callable codeblock
+  - does callable matches skip pattern effects for an undefined subject
+  - how are literal regex flags handled by callable matches
   - which task owns function position filter_match on Perl
-date: 2026-09-24
-status: current audit; measured .86.4.3/.86.4.6/.86.4.7 repairs verified; grouped operands .86.4.8.2 verified; independent helpers remain open
+date: 2026-10-03
+status: bounded callable matches repair verified; original audit observations remain historical; independent helpers remain open
 tags: [regex, actionir, runtime-values, perl, rust, dart, julia, lua]
 evidence: "SESSION-STARTUP-READING.86.4.2.4 reads the neutral binding contract, relevant mdBook sections and first-party AST/evaluator owners. The tracked diagnostic measures thirteen action cases plus an AST probe on accepted production at 7c318569. Source inspection of other backends is not a fresh five-backend execution claim."
 reverify: "bash tools/project_data_run.sh env PERL5LIB= perl -Iperl docs/checkpoints/SESSION-STARTUP-READING.86.4.2.4.pl; inspect values, generated source and both error channels, not process exit alone."
@@ -133,3 +135,41 @@ here. A type would not itself resolve lexical slash ambiguity.
 
 This is an engineering recommendation in response to the September23 discussion,
 not approval, roadmap admission, or a new implementation task.
+
+## October 3 callable matches repair
+
+`SESSION-STARTUP-READING.87.2` adds only helper dispatch and contextual literal pattern
+handling in `CodeblockRuntime::_eval_call`. Subject evaluation occurs once before pattern
+evaluation; an undefined subject returns numeric0 without evaluating the pattern. Otherwise
+string patterns evaluate once, or the existing typed regex payload/flags supply a private
+pattern. No generic `_eval_expr(regex)` arm or new runtime value/record field is introduced.
+Static helper dispatch precedes a same-named callable slot. Arity rejects before actual operand
+effects; invalid compiled string patterns raise typed `invalid_matches_pattern`, while an
+operand's existing typed failure is rethrown unchanged. Caller parameter slots restore.
+
+The38-source native/fresh matrix includes16 direct/deferred pairs, copied parameters and
+four rejection controls plus an operand-failure control. Literal/string true/false, dynamic
+caller patterns, i/m/s/x/g, escaped slash, empty/undefined subject, ordered effects and
+same-named slot controls retain exact numeric0/1 or complete values. Public invoke observers
+check actual original reference/error identity and deliberately distinct equal-value slots.
+The new regression passes39 tests. The read-only reviewer loads the exact activation module
+for matched RED on both routes; it does not replace working production. Full source/generated
+bytes and raw observations survive in red.json/green.json; only anchored failure-trace dates
+project for equality, and residual metadata ordering stays with self-containment .0.6.
+
+The first flag controls used textual \n in a quoted subject. After helper repair only those
+two deferred values differed: typed AST stores backslash+n, while inline compiled Perl expands
+LF. This is the previously documented SUPPORTING-SOURCE-READING.2.4 string-fidelity defect.
+Initial cases/red and repaired failure logs remain retained; final paired flag controls use
+physical LF and leave decoding untouched. Attached/marker/value conditionals, numeric helpers,
+readiness/metadata, dispatcher/full16 and other backends remain independently owned.
+
+The prelanding portability gate found a host module location in the new regex compiler
+error detail. Final diagnostics retain the regex reason and existing operand source span,
+removing only the exact current module suffix and optional fresh-child filehandle line.
+Both public routes prove the selected22..25 span and retain thrown-object identity.
+Six self-describing capsules preserve original complete streams byte-exact in memory;
+old reviewer/claim hashes independently cross-check their links, and three actual
+byte/metadata/path corruptions reject. Observed historical paths are opaque data and
+never filesystem operands. Raw TAP trailing spaces survive in those capsules; current
+tracked text passes whitespace and relocation checks.

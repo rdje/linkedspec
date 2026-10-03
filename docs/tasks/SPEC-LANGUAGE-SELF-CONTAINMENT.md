@@ -1876,7 +1876,7 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 | 39 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.3` | `pending` | Original minimal/normalization controls and independent dispatcher closeout. |
 | 40 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.1` | `pending` | Complete neutral-case and actual semantic-mutant execution after dispatcher prerequisite. |
 | 41 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.0` | `done` | Twenty-source/four-AST diagnosis and660 focused tests; actual scope/error/effect proof retained. |
-| 42 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.1` | `pending` | Existing startup87.2 matches/regex prerequisite is next; attached branch/local-return repair follows its clean commit. |
+| 42 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.1` | `pending` | Existing startup87.2 matches/regex prerequisite is verified; activate attached branch/local-return repair after its clean commit. |
 | 42.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.2` | `pending` | Independently verify/repair deferred marker conditional groups after attached repair. |
 | 42.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.3` | `pending` | Independently verify/repair deferred lazy value-if dispatch after statement families. |
 | 43 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.0` | `pending` | Diagnose hash-order-dependent residual canonical events and readiness/overlap. |
