@@ -1,0 +1,1654 @@
+{
+  "version": 1,
+  "owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.1",
+  "claims": [
+    {
+      "name": "pending-residual-scan-occurrence-order",
+      "statement": "The permanent15-test queue regression fails exactly A/B/A against the activation owner and passes current code. Nine exact sources under three controlled seeds retain27 baseline/current comparisons with native and independent fresh records; all current full event sequences match independent order oracles. Eleven complete suites pass424 top-level TAP tests;15 current traces and ten evidence corruption rejections pass.",
+      "scope": "Only CanonicalEvents production changes. Top-level/exclusive ownership and remaining scanner occurrences preserved without public fields. Scan provenance is contract precedence plus occurrences, not global lexical order. Source-identical AST/substitution/dump/emitted/native/fresh and non-order metadata agree in the measured population. Nested raw/quoted readiness remain separate owners, not portable positives. No arbitrary-overlap/performance/resource/backend/dispatcher/full-composition admission. Known fresh raw warning streams survive; only process eval-location identifiers are excluded from before/current equality while warning classes are checked on both sides. Fixed seeds are exact named observations, not a probability interval. Historical objective audit permits exactly the anchored occurrence subtest insertion, recovers every prior Phase0 byte and keeps original archive/log/capture identities; it establishes no fresh historical objective execution.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.1-capture.py red; bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.1-capture.py green; bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.1-tests.py red; bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.1-tests.py green; bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.1-trace-capture.py; bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.1-phase0-check.py; bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.1-review.py; bash tools/run_mdbook_local.sh; bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.1-book-check.py; after full staging: bash tools/run_ci_local.sh; bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.1-governance-check.py",
+        "granularity": "Each of27 case/seed comparisons has baseline/current native/fresh observations; raw arrays/streams and all source/generated/AST/metadata identities retained. Exact before owner matches clean5bbceb962 Git bytes. Three actual baseline source populations permute; every current full sequence agrees across three named seeds and independent raw-order oracles. Each full TAP/trace/current Phase0 child and rendered source identity checked.",
+        "result": "27 matched source/seed before/current comparisons,15 current traces, eleven complete suites/424 top-level TAP tests and actual15-test recurring child PASS; ten evidence controls reject.320 focused input hashes bound; three executed examples render. Canonical acceptance is independently required for the exact staged candidate and mechanically enforced before commit; no full-gate count is preclaimed. Activation audit actually rejects the new insertion; current isolated archive replay restores134 inputs/84613241 bytes with zero original-log read or tracked-write attempts. Six Phase0 evolution controls plus prior fifteen CI/six inventory controls reject27 governance corruptions. The exact7089-byte first canonical failure is preserved in a SHA-bound envelope; three base64/hash/length corruption controls reject and the focused path doctrine passes without any exception."
+      },
+      "falsify": {
+        "status": "checked",
+        "hypothesis": "Sorting/grouping raw keys appears stable but loses interleaved equal-text occurrences, replay repeats consumed/exclusive events, metadata fields/values change, or consumer/recurrence evidence is fabricated.",
+        "oracle": "A/B/A permanent regression actually fails only its occurrence-order assertion on the unchanged before owner;14 ownership/schema/identity/fallback/input controls remain green. Independent exact raw-order oracles plus full-record equality across seeds, multiset equality only for before/current population, exact source/generated identities and independently loaded emitted values; current routed lowering traces and recurring child.",
+        "red_control": "Ten actual rejections: wrong native value, missing occurrence, leaked private flag, changed readiness, altered source, wrong emitted input, reversed sequence, hidden failed TAP, removed consumer decision and replaced recurring child. These are evidence/reviewer controls, not runtime semantic mutants. Original actual queue RED remains captured; baseline/current source intervention establishes repair. The first recurrence extractor failure/source is retained; corrected bounded extraction executes the exact intended child. Byte-exact activation audit reproduces the canonical rejection; six Phase0 evolution controls isolate prior signature/plan drift, unrelated edits, missing/duplicated/altered recurrence while exact insertion removal recovers the committed prior source. Three observed envelope controls reject invalid base64, wrong SHA-256 and wrong byte length; decoded original failure bytes remain exact."
+      },
+      "durability": {
+        "status": "checked",
+        "mode": "live",
+        "inputs": [
+          {
+            "path": "capability_conformance/inter_match_gap_capture_contract.json",
+            "sha256": "f5901338a6dac92a56b7dd4089fd7b865f210571089fe6311e83f98c85e4dfdf",
+            "role": "input"
+          },
+          {
+            "path": "capability_conformance/progressive_span_dispatch_contract.json",
+            "sha256": "3bc07c7968f8667d330c2c8b2f47d1f574750ab0699106385fdf8c3a852b5913",
+            "role": "input"
+          },
+          {
+            "path": "capability_conformance/staged_ast_enrichment_contract.json",
+            "sha256": "578cd031fed01bb8d968a2b536e0d67430317c617a8296edb6c1beb5031bd882",
+            "role": "input"
+          },
+          {
+            "path": "capability_conformance/typed_source_location_contract.json",
+            "sha256": "4f657eec1b6e0332d9eff6656d9868ad2b5b1fa13f9fddd15d1ba6dac7cb2978",
+            "role": "input"
+          },
+          {
+            "path": "dart/lib/linkedspec_dart.dart",
+            "sha256": "ed9cb30217d06fab11232ae0f47a208fd29266b2f273adf3e5a7f9f82f61a07c",
+            "role": "input"
+          },
+          {
+            "path": "dart/lib/src/action/action_ast.dart",
+            "sha256": "46db9b5ad6e2e288feacf85807c13cdb9a4d01f82fc6b76d9d42e2d15080a5cd",
+            "role": "input"
+          },
+          {
+            "path": "dart/lib/src/action/action_contracts.dart",
+            "sha256": "2dca43dae8e53cdfe6d5253e134e8fe05e8119decfa0a0496faaef45d231cc6f",
+            "role": "input"
+          },
+          {
+            "path": "dart/lib/src/action/action_parser.dart",
+            "sha256": "d458ac2c439c1fbfb212259cb762629626d8ac493968515bf7b37a0793b7d7af",
+            "role": "input"
+          },
+          {
+            "path": "dart/lib/src/compiler/compiled_spec.dart",
+            "sha256": "99df8289f7c38adaa9b77a093f5054f9288b806c769375e424457fb145cc8938",
+            "role": "input"
+          },
+          {
+            "path": "dart/lib/src/runtime/bounded_child_parse_authority.dart",
+            "sha256": "6c524a1bdc1e8330d538cf11c535d68f24c06819ae433b45d70b33e0f5ee6756",
+            "role": "input"
+          },
+          {
+            "path": "dart/lib/src/runtime/interpreter.dart",
+            "sha256": "0af1a72725fb2b3691ce57f97278439c63fbe23a153a490f0d51a3397f4a1e24",
+            "role": "input"
+          },
+          {
+            "path": "dart/lib/src/runtime/matching.dart",
+            "sha256": "4a8ae6e9367ab29817e18feb9df25e92a15171fa2456d4a7e18bacd455d12c57",
+            "role": "input"
+          },
+          {
+            "path": "dart/lib/src/runtime/staged_ast_enrichment.dart",
+            "sha256": "d1c8de14ec76eacab1f237435e8f6e0c807e5849ed5a4dba10a79af0514d2f48",
+            "role": "input"
+          },
+          {
+            "path": "dart/lib/src/semantic/sha256.dart",
+            "sha256": "dbff7065039118bdf7b6d323a38b8377436742d1a5940aef18a908a863987c70",
+            "role": "input"
+          },
+          {
+            "path": "dart/lib/src/source_emitter.dart",
+            "sha256": "62021b13b820cac79d2765a87a46254045ea1b253c84555d43fd7f8b74c81ecc",
+            "role": "input"
+          },
+          {
+            "path": "dart/pubspec.lock",
+            "sha256": "601c36466d20513d930c291c44143a801846349fda9ba13a8c6f63b15671a0c0",
+            "role": "input"
+          },
+          {
+            "path": "dart/pubspec.yaml",
+            "sha256": "5a116416db5b997aac698762cf57b4dba299f504ecc4ddf36ce416b75a0923b6",
+            "role": "input"
+          },
+          {
+            "path": "dart/test/inter_match_gap_capture_contract_test.dart",
+            "sha256": "b2b49d1abad130045ec8449bc8cd1c2a8d6012fddc1b7d45c4f29d7757636a94",
+            "role": "input"
+          },
+          {
+            "path": "dart/test/nested_tree_readiness_test.dart",
+            "sha256": "97c1f5a58038840f8ae12e0dcd1c543db6a999f2a1e992868b980fef0bd4bb3c",
+            "role": "input"
+          },
+          {
+            "path": "dart/test/progressive_span_dispatch_contract_test.dart",
+            "sha256": "3014fb4ae570c7393f2de6863585fb99ffeb438e165fcee8aaf1bf5a7e222b8c",
+            "role": "input"
+          },
+          {
+            "path": "dart/test/recursive_observation_contract_test.dart",
+            "sha256": "cc4cac71e3924e77afd5f4c538a3efefc0323089aad13816dd762e87dca26249",
+            "role": "input"
+          },
+          {
+            "path": "dart/test/sexpr_document_v1_test.dart",
+            "sha256": "d9f894bb807afbe04d22bd5bdcfe6e8c7e240cda6d03bb865b6e87ae1ee74fed",
+            "role": "input"
+          },
+          {
+            "path": "dart/test/source_emitter_test.dart",
+            "sha256": "ebfa150e20c7767b056a5bfa12a8e76bbef7ba97958f709e8b2657ddbd22bdad",
+            "role": "input"
+          },
+          {
+            "path": "dart/test/staged_ast_enrichment_contract_test.dart",
+            "sha256": "b790a8b329d2f3b95607f2e26138202151575df5e02e837f998433e8da495f00",
+            "role": "input"
+          },
+          {
+            "path": "dart/test/typed_source_location_contract_test.dart",
+            "sha256": "455fd56c0dff306d8a4a392537a29189f78f72ebe258fe53e134c4fc59a68126",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.1-verification.json",
+            "sha256": "1f2d260804af53333c1fdb47ef0b41b7813cbdb776dd10e1cd9139b900bcb033",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.1.1-verification.json",
+            "sha256": "6466bc49541fdcba6f4e54e54ccd656ec068ebf92cb883fb0be1c87283b61627",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.2-verification.json",
+            "sha256": "7aab8efd46714ff3bdf088621a60a8791fa4434794ccfa2657a9aa198a725c56",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.3-verification.json",
+            "sha256": "dfdeda4673510fd8ded3c6fc1f044680634f3ef35d6bee61773a45edc56a0bf0",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.4-verification.json",
+            "sha256": "194f984ff7287f32442c89eace8431e589d12d3cb7455b1627dd47b4700fea50",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.5-verification.json",
+            "sha256": "c0e2e7dd9718d3c7daccbefc7ca765660020f411db58e8924a64d2013dca06b6",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.6-verification.json",
+            "sha256": "5eb6f0fbd7838291236550318df39ff9c6214b964775e8f80610aefb1260a517",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.2.7-verification.json",
+            "sha256": "babaeac1bd2bd2b368768d0e6a737766bef03279f982dd4946e40c8f8bee0519",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.3-verification.json",
+            "sha256": "a02e741db32895f565afcc6cc14ed597136b6ff96fa1b969086d9890c833721a",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.1-verification.json",
+            "sha256": "1e190b9d960684120834ac13a09307471f65aeb89fa84c1d4d0d64bdecd42077",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.2-verification.json",
+            "sha256": "4da5202dcdd47ce10c1bc1f94a0298d7d0de8efc1250feaaeba249b9c752957f",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.3-verification.json",
+            "sha256": "714e00e0d191387a5dbaa7f96281c9a7a4004904f81eafad53c3369bfa2efa15",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.4-verification.json",
+            "sha256": "2570af5a8d131019e18f9beeadc267095b08c2aff99927ad7c392a521195c6f4",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.5-verification.json",
+            "sha256": "7729e2b76ad5f5622df8974421acaa187b8af49e8a6d376408073181a070dae9",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.6-verification.json",
+            "sha256": "fe5bf56c26341c4337ba44435e0d8e023aabe37efe11546abad4a886586fcc9b",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.7-verification.json",
+            "sha256": "69993ccf6c58870fb51bbd4127b5fd11e035fcd69c4e4d3fe018cdf6d9d2330a",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.1-verification.json",
+            "sha256": "92a42d84837000f086192c96f76fb6de3a429c4a2c9cd7c9be952d55e54deb1e",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.2-verification.json",
+            "sha256": "fb2f5a5704b62f2a229bf6c357e92189f4790f8a5c188878df475cb3a8f52c5b",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.3-verification.json",
+            "sha256": "86b962b6c9f473ede5448139739cb9c0b8d34c7539bab4bac01c026452988c43",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.1-verification.json",
+            "sha256": "49bce733254a848551a7938ceea7a63ed2a8b4d13184ef361f278bf198477e4a",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.2-verification.json",
+            "sha256": "b3326fa51df18abfd4c42af4673d0c4ac82e5e69afa153ec9f58656254c56f83",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.3-verification.json",
+            "sha256": "75cc05d400c9f9a994c881f952f930d41173aedcc70b701516f642927148a1eb",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.4.4-verification.json",
+            "sha256": "2aa41d755379eddc043fc3d60e2a7ba8587e06735f125410f98782025c63f638",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.5-verification.json",
+            "sha256": "218e6b7df33c5ac8e978cb0c866312407b6ea8207f473249e342a154954881dc",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.1-verification.json",
+            "sha256": "eed4b91daf4f28421dbbd306295b5f19309ea8b9cd5dbe3b74e5888e94d5aa9b",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.2.0-census.py",
+            "sha256": "7d059224e4729e0dbec63c1f447c17f1e2c7131f7904ae16be27fb1f5b57118f",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.2.0-verification.json",
+            "sha256": "cba764a520368a559934069850b9b4dcab1b210f5665f826c91e79ceb83951a3",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.2.1-archive.py",
+            "sha256": "4364f336b22d31f72933efeed8ecc45be1c91340c91613a2f53cb9335222e572",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.2.1-proof.py",
+            "sha256": "10f6efdf8922cdf15f37bfd55979528fea729d38d8cbb38fa5be1ae91f831a3a",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.0-observe.pm",
+            "sha256": "db95711bc94aa6c774576647c4ad83b98d526b03efc6fa583ad1b1075a9b1c9f",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.1-before.pm",
+            "sha256": "6d6caa83dab46cf3915a7d9e0b81d8a11fcd29ac0262b30041a3c81be0af3c4d",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.1-book-check.json",
+            "sha256": "384bef768428ba8bd23cad283860ebdebe478f4273989c47f1b53d6f386a18f5",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.1-book-check.py",
+            "sha256": "529bb89501d31773b4a40913d2a1c0e608ef2017060592a1bde4a4ae0bb6c247",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.1-canonical-before.json",
+            "sha256": "b3f7892cd70ed856ad3b4ed10f57a9911ba2c040973a336bace5df852d944760",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.1-capture.py",
+            "sha256": "7e34452ce5b5d0c79bc6087defc55d920a51849645b25b80d2bb5f796a76b385",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.1-cases.json",
+            "sha256": "f593a80f7732346404a4b99632313817bd1a119961657a079142ddd2d73e71b4",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.1-fresh.pl",
+            "sha256": "5c93b169c6289f6fe4ced58a473e55b944688adb088e9cb4553122c827e63645",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.1-governance-before.py",
+            "sha256": "1eed29928d004cf9c1daa8030a8c45c4fa8c5be524a833e99024d461155a2cb1",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.1-governance-check.json",
+            "sha256": "0d43994f7efd8ac80d80c65603c4c2b140679cc80000871039bcd401f0b153bf",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.1-governance-check.py",
+            "sha256": "622ef228e289b40248ab64768c129553cd5bea855898437dfd13b2e04064732a",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.1-green-tests.json",
+            "sha256": "ffc923ce63cf885fa1b502803848bbd0900aa9a11ed6a62500a3c732708e7989",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.1-green.json",
+            "sha256": "85ded57faf830334c2c8de39ea4f409c41372327ad0b33f6703a0c76ca61cf7b",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.1-order-oracles.json",
+            "sha256": "5a829cf9959eb15eda462cb05a71055a9c2e1e620ff7a7258d18d17b2adde492",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.1-phase0-check-before.json",
+            "sha256": "0f6dde7bb61f973dfbb9cd5ffe04d68b85869a0c04ab0e3b38a079c9220e46c5",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.1-phase0-check-before.py",
+            "sha256": "9ba4f05c2ec6dfb2ba68deece0eabeb760e65adcc49f4c88e23946dea245cfd5",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.1-phase0-check.json",
+            "sha256": "8cfb8fab20bc884379df3073e8aa4044ce347032e92d098a16b50d038750e3ef",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.1-phase0-check.py",
+            "sha256": "c6d87421b3a6e9baa66513af2560fe5875da6005320fc59a86daa853f05072ee",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.1-probe.pl",
+            "sha256": "a055b6b83cc780d69839f483c81756c76f7466aba9bb3ef9389cc02202fc8a6b",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.1-red-tests.json",
+            "sha256": "72abd041e53b8c460340f93c31cf386db1abda1e188365ccba85238c8ae6637c",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.1-red.json",
+            "sha256": "fa810f163c9d64823143f3bed530fb84fae1d498e4035f760726aa24a0a884e2",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.1-review.py",
+            "sha256": "0fa0939fd6527ca374a1bd989b15570912a61d6f5bd4ce57bd583fccb81acd8f",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.1-tests.py",
+            "sha256": "799ee7d99ebcc01abe57e5eae684491467526f72401cee5e95dbf7b20bd48616",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.1-trace-capture.py",
+            "sha256": "10293b3f1425ab83635b72b24a417bf2d705d49c2eb309e0f80223e8b86c403d",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.1-trace.json",
+            "sha256": "31be7fa10c554029b7f09e7074fd46e6f6b4d12bd30d2ff4cd03843ba382a2a3",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.1-trace.pl",
+            "sha256": "e30aeacfc93cc4211f5c8081bafc7e56b2f798999edf9107c56191543d69be21",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.1-verification.json",
+            "sha256": "dd0c8e7c9a38b74f300117e7826e1b1d2ee8453b223f854ff2c992e8f9ada1d5",
+            "role": "input"
+          },
+          {
+            "path": "docs/language-readiness/objective-reconciliation.md",
+            "sha256": "30b992eff26f179a37fdeda878112d05494464b52ccd711bfd6a281d89623c17",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/architecture/structured-format-program.md",
+            "sha256": "e8f0495749541ac5280f0002c34f201748a184662925ca7945d41fad53352549",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/development/regression-fixtures.md",
+            "sha256": "ed58cbd9b48c87c15456a4e47e8a7a81a4ed1bf7f9da67679681883819110b5d",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/dsl/actionir-lowering-mental-model.md",
+            "sha256": "635c95a2e34c062246b38496de067eb820f180447b60539f3782ab476df57bc4",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/dsl/capture-marks-and-source-locations.md",
+            "sha256": "6873cd55dd6a0cf1f6ee41d2c4e99c7ea1544e2bb875d71687823c00eb6205af",
+            "role": "input"
+          },
+          {
+            "path": "julia/Manifest.toml",
+            "sha256": "2b4e4039b6d3bb76dd8bd9844f90f8083747982737572504198abd2cb64e48e4",
+            "role": "input"
+          },
+          {
+            "path": "julia/Project.toml",
+            "sha256": "45bff88352b342d6a3970b3ad2c5cf853a3ff5261034210025d1b8ffc2dd9fa1",
+            "role": "input"
+          },
+          {
+            "path": "julia/src/LinkedSpecJulia.jl",
+            "sha256": "5edaeffcc161cf7cc6d3fd604cc8db605d5c65435414ac08d9fe23266dba955f",
+            "role": "input"
+          },
+          {
+            "path": "julia/src/action/ActionAst.jl",
+            "sha256": "1aba267c5a5b1357392ceb0831945ff150f7fd311a847e3329360df5eeae797f",
+            "role": "input"
+          },
+          {
+            "path": "julia/src/action/ActionContracts.jl",
+            "sha256": "231d2d83bc271adc6a29139d92775241caf87a83aa5cd5ccb20c2f90f60afb84",
+            "role": "input"
+          },
+          {
+            "path": "julia/src/action/ActionParser.jl",
+            "sha256": "be008f877f6b112a580902ac7b31c712429fbfb9bdab3b9be767b213ad34dc08",
+            "role": "input"
+          },
+          {
+            "path": "julia/src/action/CallableContract.jl",
+            "sha256": "d99f3eed32bd8f384bd932520b9afde21878c8b5e070ed8702889d37aa8fa757",
+            "role": "input"
+          },
+          {
+            "path": "julia/src/compiler/CompiledSpec.jl",
+            "sha256": "81073828ea41eda6206dd067d2c8cddbc1149398cef7429a60624e5afe7541d2",
+            "role": "input"
+          },
+          {
+            "path": "julia/src/runtime/BoundedChildParseAuthority.jl",
+            "sha256": "d926a419d9aee216974b13ddeb9247cf3e44188aa92cbddce13f1eb78daa7359",
+            "role": "input"
+          },
+          {
+            "path": "julia/src/runtime/Interpreter.jl",
+            "sha256": "c1dd49bd983d5e0f71307f19d7e1da0794869ae67774e1219a9874867c646875",
+            "role": "input"
+          },
+          {
+            "path": "julia/src/runtime/StagedAstEnrichment.jl",
+            "sha256": "679b231e6db72135ac624cb4cc7aa3298d8b7dcccbe30399069178d68f8cecd3",
+            "role": "input"
+          },
+          {
+            "path": "julia/src/source/SourceEmitter.jl",
+            "sha256": "76828ce9b6ecfa995aace3e2e87620789d183bd0a24a005c97a505f22ad39567",
+            "role": "input"
+          },
+          {
+            "path": "julia/test/inter_match_gap_capture_contract_test.jl",
+            "sha256": "79426ada8ed54a82f431a1b45c2a32ca5cf547ce6c2da5a9ad37154755cbbf0e",
+            "role": "input"
+          },
+          {
+            "path": "julia/test/progressive_span_dispatch_contract_test.jl",
+            "sha256": "62deb068c34a67e71ef26b693c9097a11c2b54ef844f3988c19d4f3dbe1760e1",
+            "role": "input"
+          },
+          {
+            "path": "julia/test/recursive_observation_contract_test.jl",
+            "sha256": "f2a167b6d5014fdef9f5f7c00db07fd4f236b851856016236fe8163cae2cc11b",
+            "role": "input"
+          },
+          {
+            "path": "julia/test/sexpr_document_v1_test.jl",
+            "sha256": "5cc6236377eaea944d5e5466c80e651c917a5272754d770400fd26ed766eec32",
+            "role": "input"
+          },
+          {
+            "path": "julia/test/source_emitter_test.jl",
+            "sha256": "2c7ea5074d60ca80074756645b8fbda3b9aa26214bd10956f6654ae9f988d38a",
+            "role": "input"
+          },
+          {
+            "path": "julia/test/staged_ast_enrichment_contract_test.jl",
+            "sha256": "0caa4731f7507dcedc177598204fba70d6c81a17aef323539dcc3388da140fc0",
+            "role": "input"
+          },
+          {
+            "path": "julia/test/typed_source_location_contract_test.jl",
+            "sha256": "c1f5b12f0b67aa69686a3a6f2a8951813f99401f9c1af2736b9a2fc99cccbf78",
+            "role": "input"
+          },
+          {
+            "path": "lua/src/linkedspec/action_ast.lua",
+            "sha256": "5900fa7f3bb883a7bb3d5c987e840945edea97155e257257e8103f3a832668d5",
+            "role": "input"
+          },
+          {
+            "path": "lua/src/linkedspec/action_contracts.lua",
+            "sha256": "b4187bb6d1381a25789afc6e4b6642137cd1e5d05d3838d7882e28cc4d0b9c66",
+            "role": "input"
+          },
+          {
+            "path": "lua/src/linkedspec/action_parser.lua",
+            "sha256": "1dfb4a4f95262ba6c9ba6e00ecc1b1ce614db1f12b57eee40f24c1533534c43b",
+            "role": "input"
+          },
+          {
+            "path": "lua/src/linkedspec/bounded_child_parse_authority.lua",
+            "sha256": "5d697173e34e677540cd2898a5a2cd118e265aa3d2f45220ecb16db03963a5fc",
+            "role": "input"
+          },
+          {
+            "path": "lua/src/linkedspec/compiled_spec.lua",
+            "sha256": "81ec56e81c87e3101ea2367c1ef018774e908e46e449d6c51d285bad8131f886",
+            "role": "input"
+          },
+          {
+            "path": "lua/src/linkedspec/init.lua",
+            "sha256": "72f939c282505e09a632a51b7c5cf5b1d7e57508b9772ef8a7e9dd9910d22822",
+            "role": "input"
+          },
+          {
+            "path": "lua/src/linkedspec/interpreter.lua",
+            "sha256": "f90e60a70b79b8a3a4dad4791be1528ce574fdbe02af29b02365c39a2aa11b4e",
+            "role": "input"
+          },
+          {
+            "path": "lua/src/linkedspec/recognition_transaction_runtime.lua",
+            "sha256": "e210172b953ec2056b01838fe2eabfd61d393390b891643f7b36b3561a2db3cf",
+            "role": "input"
+          },
+          {
+            "path": "lua/src/linkedspec/sha256.lua",
+            "sha256": "9e102cb81ce541d6765ef9f41a102e22797f2bc23a246f19efa0124ee1e7db8e",
+            "role": "input"
+          },
+          {
+            "path": "lua/src/linkedspec/source_emitter.lua",
+            "sha256": "0ff7d15d53e3b7302ff2b2c4125ec39581f64966a4adf56851e28af0607685cc",
+            "role": "input"
+          },
+          {
+            "path": "lua/src/linkedspec/staged_ast_enrichment.lua",
+            "sha256": "28d2eea9da801a4d84054e718110e53611df6bdcea8d62217103d85e711b76ed",
+            "role": "input"
+          },
+          {
+            "path": "lua/test/inter_match_gap_capture_contract_test.lua",
+            "sha256": "323a3fca5c7d3e1a85af8f387b0efec3bff779feb5478974d195a5da930f05ce",
+            "role": "input"
+          },
+          {
+            "path": "lua/test/progressive_span_dispatch_contract_test.lua",
+            "sha256": "10ad5e29d40a8a2d486c8842850cf1528aba9797bd4f16d3652cd5db9eef926b",
+            "role": "input"
+          },
+          {
+            "path": "lua/test/recursive_observation_contract_test.lua",
+            "sha256": "e8f3175908c89f98579020e11a7b5961f4cde6d48a39a19bfb1c9f1ad9b2b320",
+            "role": "input"
+          },
+          {
+            "path": "lua/test/rule_local_cursor_generated_source_test.lua",
+            "sha256": "596a393f0be6e010d6be717c58656dcfc56a26c0acb27ff25db8f7296abd014f",
+            "role": "input"
+          },
+          {
+            "path": "lua/test/sexpr_document_v1_test.lua",
+            "sha256": "2ebd290a9ddb7f10c1ead3177f7b6eecc3e259e903ddd9ff9b3d84df7ffb79ab",
+            "role": "input"
+          },
+          {
+            "path": "lua/test/staged_ast_enrichment_contract_test.lua",
+            "sha256": "44dc32b99b50e051fb45fced11f3ede32afcc7d84a1124b90d10883485e03fee",
+            "role": "input"
+          },
+          {
+            "path": "lua/test/typed_source_location_contract_test.lua",
+            "sha256": "8943b4fd6e78f0ea9b71ee3e3458aa044301e51e520652ef2a9ca905e693aebc",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedRE.pm",
+            "sha256": "8f3bb342f25b1d0f9c8986e2477d1b00d7bb1359cf38b9d209f680d216896e12",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec.pm",
+            "sha256": "693bf62c48a850ed1f0a32400ad96744a9f2bcaaf4dff53e16f36a4127cf1ae2",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/AST.pm",
+            "sha256": "5d5fa7e8f130f1c0eef39f7ce8129b01563467aa339152073ef4bcb9ebd30dfd",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/AST/Parser.pm",
+            "sha256": "8c3e1708278b3e199eb30a7095ca0e70825c01ba4b5a46612e77f7cc8f5dff50",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/ArrayPipeline.pm",
+            "sha256": "a9bf7048ecfef2ab9d50c024b1b84a1ad525e64fefde01caab5632168be9b1e7",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/CanonicalEvents.pm",
+            "sha256": "2a820f35919ea0bbd1ab9f29bfb3e7cf287813d7636ca3f3a2f5e7c1e97f51ea",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/CanonicalEvents/Core.pm",
+            "sha256": "a56a8caa2b1a4e151ab4171a2e8af515a3c187b38ce0280a9b1c4ae84706052d",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/Contracts.pm",
+            "sha256": "f062292c073f37817484fd77e54d763f9595618ecd7d05a5d592a4eca621c361",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/ControlFlow.pm",
+            "sha256": "84171511b0b5a6511bce4d8510c741d2e5275afe54e40dc9cecb62299a5d5f6a",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/DeclareMethod.pm",
+            "sha256": "6ed978febab3ccd85447a2a1be5c1c9e96c255242269b356abe5fb8881259ba3",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/Diagnostics.pm",
+            "sha256": "0574e93aeb14a63158d5af08d41ff1775fe263030d1557e59047f1cadb770712",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/FlowExpr.pm",
+            "sha256": "47516700d0cdb67f4183425053a9886d9ae0906a79de6cb1590e4f9e2dfff3f2",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/MethodExpr.pm",
+            "sha256": "d4a39f686554d943272aabb9e60a4c4c0c49af1b279a105ed05cc82750acbceb",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/MethodLowering.pm",
+            "sha256": "7418677f2fb9e2f9ca39c1606cff888826b788fd2ff8c911fba75d32b9b365b5",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/ProgressiveSpanDispatch.pm",
+            "sha256": "e357772a2b9d9aae0c5becbfcb3bf238ff4ddc1df466c7063aeef69a1cab0ec5",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/RewritePipeline.pm",
+            "sha256": "221597b09903211a883b2072f90783e92fb0f2491e17f0e797b623f27e5f27c9",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/Scanner.pm",
+            "sha256": "2e991add41a4325aec65eaa1a7c77904db2b5497292d134bf66d081cbc7579a6",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/Scanner/FlowRules.pm",
+            "sha256": "18463d7b84ee525a554e9781288b993f6d39b38d24e25ecbca2d53ae806417d6",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/Scanner/LegacyRules.pm",
+            "sha256": "a78386909d43cfd0e0bbb19e41243564007acfc53edf6f760131dd8f1f51fed9",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/Scanner/PrimitiveBasicRules.pm",
+            "sha256": "dc987808055afe2843f5c61da0526893ebcfa3028fdddf4f64ad41c77cc9fd7d",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/Scanner/PrimitivePipelineRules.pm",
+            "sha256": "17dcac93902068341f5d529dd6bd360616da0f3542ee6345df0d51f1f619eef2",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/Scanner/RecognitionTransactionRules.pm",
+            "sha256": "2ad196c9a6e8f8e4872fbc5164ac9b5255cb94b1d6b52028345f3a070f9f0580",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/ScannerCore.pm",
+            "sha256": "507bef74ab642d4f65e9222b2687a5f955f279fdd03403ab2ef83c3005c7766e",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/StagedParseJob.pm",
+            "sha256": "63b4b211d6f7f94ffa398f4ee07316fc717387faec443e9e5299e0186e8627cc",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/StatementSplit.pm",
+            "sha256": "32f2aec5d3b815155453183fc1f0def94e2fc83d7c05fefb9b6b101133e8a94a",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/StatementSplit/Core.pm",
+            "sha256": "0bd4d14f36d052e18f95048de9ed2429cf8106685b184b7774681894e36dfb23",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/StatementSplit/Mode.pm",
+            "sha256": "be7e4ba728ffa06ec021ac1d6cba57ef612411697adfe621852f0f9ebfe14bd0",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/Trace.pm",
+            "sha256": "e005c842ec16e8c8292b75b98a28d293a1178458a1a93bce1faad371a080dace",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/ValueExpr.pm",
+            "sha256": "5da83310d071b2c115496e50686a8510ca829d0e9590b2b244f95fcea8d95459",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/BindingRuntime.pm",
+            "sha256": "4168ea0bb10dbe22f7be409e5b58087534ae42cb14d77d254608df1650bfdc91",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/BootstrapSpec.pm",
+            "sha256": "72525deda4f91586a5acd7de3b302dee1d989ba9e03f4c9f9740b1c3175ae938",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/BootstrapSpec/Core.pm",
+            "sha256": "8375456a2f2fab3e0682eaf8901e815ac156d883d3a39113e66b90076b9e5c14",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/CallableContract.pm",
+            "sha256": "b985f546158bc9cba232c93ed651b65016295c77b7390cda620096b3604fd781",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/CodeblockRuntime.pm",
+            "sha256": "e03f57b0e7150a6b6c8d97ce5db8f9f1ab25690008d6c23abc955f91d8421bb7",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/Compiler.pm",
+            "sha256": "da360b1080a830e693cfd24f1e96f516c15d288363f8c9b6c59187d6b64370d5",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/CompilerState.pm",
+            "sha256": "c81730a5653576574ce61879d37df2b1e0472e41f35f5b5ce87f895a52862aa4",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/EntryRuleSelection.pm",
+            "sha256": "ce30112d405908bc0589d0ef5e5b4fa9299c0dbd758f760a99eb84e5acccea25",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/GeneratedSource.pm",
+            "sha256": "f4a446847c241973278d3c1c30407047bb9b53fdf75ba5f9830e874290e66f68",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/HandlerVariantEmitter.pm",
+            "sha256": "22382f132066572f72c4f745bd6f356439e26c8b55171af57ec531b06682327d",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/InterMatchGapRuntime.pm",
+            "sha256": "daef20c20a491ceaa50306167a8880602fe68c7228ade17f486f346686d31976",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/MCPContract.pm",
+            "sha256": "06babcb9021a343d6111a447c39105dc1e29cd166e89ccac780f4d132af500ce",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/MCPContractRuntime.pm",
+            "sha256": "09fb23f0fa66575811ee42e1102f145c76715e55151cbf2451035c468bc64a35",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/MCPServer.pm",
+            "sha256": "df2bd23f8ae66eb7a0e028e10b43c80893309f5091eb8f90f533d5adca0aad8d",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/MCPWire.pm",
+            "sha256": "1760f96a3f542d41d302eb6c39438f74fcab9dde8f48c59c49654e80d6a8af56",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/Numeric.pm",
+            "sha256": "584f04b4ce883ce82948b8f2543da73167ce76ca4e62cb6c6edea80f5a519308",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/OwnerDispatch.pm",
+            "sha256": "19247f57117f66b4cf4ca2b3205373b2167dc4d9790b89dbba8a5a43f94d58ca",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/ParserFactory.pm",
+            "sha256": "d8cad7309e0650b59b1221b636f7eff7514cf49ad26c8f512ec6c837af3ef8bc",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/PluginBridge.pm",
+            "sha256": "51118e069fe2d95dd9d0aa8b7fbf427c3167db2724bb35dfe9a9202c47925c21",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/PluginRegistry.pm",
+            "sha256": "f84ba93c083e09a38fd8e01a9ff65b9b71b9f2c23ac4c987a854337e4a86425a",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/ProgressiveSpanDispatch.pm",
+            "sha256": "3f3612b6fb665f9e8678de54a5c876d9b5519bbffeb81e50b29f5262488da5cd",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/ProgressiveSpanDispatchPolicy.pm",
+            "sha256": "36b5bf0a73c53df33ced49e53e7399311a0029de4379aef17d8dec86a7a33eb3",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/ProgressiveSpanDispatchRuntime.pm",
+            "sha256": "451981a723f5f7383875f51c3e1093ae9898396efab5db2d39a22ac93b6d5a90",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/RecognitionTransaction.pm",
+            "sha256": "308543bb1194ba4c6b8837a25346076e03ac55a76cd0522f0b8c8127e7e5618d",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/RecognitionTransactionPolicy.pm",
+            "sha256": "7946837d224b579f1f3e9fc2b6a5e785994ada3ac4fffe8d60601665a77fc528",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/RecognitionTransactionRuntime.pm",
+            "sha256": "d9b36b3d692a1414227d6a43e342d97785c889c0a8259523d0ecb7bdd72e5923",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/RecursiveObservationPolicy.pm",
+            "sha256": "ac1bcc4654e108bdd7f646726f474ed48d9fc613bbdb864a16b6e6bc4568aaa9",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/Resolver.pm",
+            "sha256": "5260447fff3e6d9c7dd4d4b8d971991d640efec979c49fde62c1bc41da55cce0",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/RuleIR.pm",
+            "sha256": "5cdd4065a6f0e5165863146c4b4693fa54168344f6225dd9a1748e096e331997",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/RuleIR/EmitContext.pm",
+            "sha256": "6940dcf0be03b65e3d0a69f3efec41e1dca37524930ef20368dae94d99a23a9b",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/Runtime.pm",
+            "sha256": "d6f430b97936639be7c00711af796c493b95c65e6b9c168c965942dd8bab4b26",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/RuntimeContext.pm",
+            "sha256": "740bfbea87e3e4ba9f8f541c08f495ad43342f2d27599fbc834bbbd47a8ebab8",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/RuntimeDiagnosticOutput.pm",
+            "sha256": "aa44df92d185bf107d91752aa8a4cfabde5f998ffac6633bc72dab0e59851653",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/RuntimeLogical.pm",
+            "sha256": "e2b7b9eb8dc7b8a66260edfcc5dbc1959dd7e0d3dbc3f4a973fcbd3a5333dad1",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/RuntimeSemanticObservation.pm",
+            "sha256": "39eab6327669426d497827ce80af0353bc88ce32fb333266c18fe4e5cd2ab158",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/SemanticCallProjection.pm",
+            "sha256": "c03259c6c01b7105d81557699e959bf36825545aa068df4ef877a00554c121fc",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/SemanticIndex.pm",
+            "sha256": "d7301d1efb58fd5f282e9a27ed958a897ab34e6c034f5e30f8e11045ebff029f",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/SemanticQuery.pm",
+            "sha256": "740ab20cdae43f07d56bcd0c02d18ddf83b0b449a742b4fee775b1e81f64f210",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/SemanticRuntimeProjection.pm",
+            "sha256": "3820b4d7bd4bf035eebd78667f2955bfc8f120bcc8185abc8234821948314764",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/SemanticSourceMap.pm",
+            "sha256": "f8dcc03277bbca0f8f964b966143029bdb3153215d8e2cfb9bc9686c7e344306",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/SemanticStaticProjection.pm",
+            "sha256": "1424f9aa507a25b70c213515ee216885d8f5bdd0b12294004af5e5605d4d9822",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/SourceLocation.pm",
+            "sha256": "c494440264af91bb5a1ba196cc5e5e7e92d367e63fe3a249fd5a050fb1d23793",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/SpecEntry.pm",
+            "sha256": "47d2139ff180d959692b78079aff9097970e3d1ee977d34595a4de4c21dc17c1",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/SpecLoader.pm",
+            "sha256": "2465593661da9a3d60df04c5730d718742680a8b9103cbd5f6b1183f6b7700ee",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/StagedASTEnrichment.pm",
+            "sha256": "6a69d39e1d9de7b849ea429e532232d61f112755cf9b87ba2d16e1291e603f53",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/StagedASTEnrichmentRuntime.pm",
+            "sha256": "7d01e18c88ef9de45bf9049a2f3607800a4014aba8a1b4e8ad3fbc99cfac27b3",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/StagedParseJob.pm",
+            "sha256": "c9ecca71a9e4a79c48ca94d3569be2ff4560443363cf594d70269f060daf2407",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/StagedParseJobPolicy.pm",
+            "sha256": "d08855a2f5c35e00b73cc23f2cc8e0a88283b9c4a8a1cc7500a5efe743ce53f1",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/StagedParserRegistry.pm",
+            "sha256": "0f5f9de9b8af952a1d4eadd20b39490ce3fc897a18be9a6d391f9808318a713b",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/Trace.pm",
+            "sha256": "f8041e80c7f8342a0497710b130a14085c3dddd0d1ee67eeb04f51dd196ffe22",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/UnicodeCaseMapping.pm",
+            "sha256": "944386217a59c811b4333df9070d222e07ba9d5ed8eb163ed2fdcd4c5c73889f",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/UnicodeXIDContinue.pm",
+            "sha256": "db2185e0a2366849c126d76b27ad5591eee9463ea5e825e815e9feabe97b8947",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/UserFunctionRegistry.pm",
+            "sha256": "805626ff7aeebdbb00565fa102afccdd3e6c8126e2e341f44bfeff1d0cd5361c",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/Validation.pm",
+            "sha256": "ac8623e87c7157812e99f8b729fa136d0ff2fe2dc66cfbbc9a91fddd818f49c9",
+            "role": "input"
+          },
+          {
+            "path": "perl/PPlugin.pm",
+            "sha256": "7cf5f3e1ff7465a2307b9a2ab8efded717648a188bf5f0dfacaac569370c36d1",
+            "role": "input"
+          },
+          {
+            "path": "perl/PathSearch.pm",
+            "sha256": "ad943a8335f1bbb031214e3c60ea2b97cd8440eed68dacac218062c42e7eb255",
+            "role": "input"
+          },
+          {
+            "path": "perl/env.conf",
+            "sha256": "45ed4c049b260fed7bf5e9ced195e259b9327834ff08def0581d1f01ffe60591",
+            "role": "input"
+          },
+          {
+            "path": "perl/gdcheck.pl",
+            "sha256": "e12ddba1c2a252c91ba48f24ad888e7693f92bdb167a791e847025fe41f153f5",
+            "role": "input"
+          },
+          {
+            "path": "perl/htmlcss_driver.pl",
+            "sha256": "9abd0b9bc521b97df100517c547da60b82c6dcd947726733c6001d420582c67c",
+            "role": "input"
+          },
+          {
+            "path": "perl/ptchange.pl",
+            "sha256": "13336081ceff048e5172169d4e9bad5997b245c10170ef30f81220dcaae30062",
+            "role": "input"
+          },
+          {
+            "path": "rust/Cargo.lock",
+            "sha256": "f225ab48d91b1c2eb3bec063f961d255d9e97b340d0ce300e749ca58ec155428",
+            "role": "input"
+          },
+          {
+            "path": "rust/Cargo.toml",
+            "sha256": "4f85f31df8b2228a18e44f22e9a9e276f6ca91943becea7f7025b70d564cbe81",
+            "role": "input"
+          },
+          {
+            "path": "rust/linkedspec-core/src/callable_contract.rs",
+            "sha256": "2b24993078757eb4005d71a22fa2e1d1e7266ab34eb80f8275b4b37bfb247605",
+            "role": "input"
+          },
+          {
+            "path": "rust/linkedspec-core/src/compiler.rs",
+            "sha256": "7a1a92eaf5ed7bc93392bc5666ac5cb061c573ac04fde3499139d2fc055dccda",
+            "role": "input"
+          },
+          {
+            "path": "rust/linkedspec-core/src/expr.rs",
+            "sha256": "45f3b40a548c76ba4a11f0cedd8ee6dc988bf711da30e78ba2bc28f8ffd3e706",
+            "role": "input"
+          },
+          {
+            "path": "rust/linkedspec-runtime/src/bounded_child_parse_authority.rs",
+            "sha256": "853515c34ea04dc7cffb073e7946d668dc23d32e5a545294bcf0418f6b65e787",
+            "role": "input"
+          },
+          {
+            "path": "rust/linkedspec-runtime/src/engine.rs",
+            "sha256": "5d1c572c2c310f5dd0aa4f62bb07020cf5c416a8483799cd1c85f13ffeb68009",
+            "role": "input"
+          },
+          {
+            "path": "rust/linkedspec-runtime/src/lib.rs",
+            "sha256": "3f69d8e02549bf76d3f3495935403b6f87b65f0e9a14c74885f4412b2f64112c",
+            "role": "input"
+          },
+          {
+            "path": "rust/linkedspec-runtime/src/recognition_transaction.rs",
+            "sha256": "1b45e9729f4ede18de2182e7947f5eb478ddc944641886442aea06b36a7f8962",
+            "role": "input"
+          },
+          {
+            "path": "rust/linkedspec-runtime/src/runtime.rs",
+            "sha256": "b8140cc4bac2d75f3bbb070f19924b505f36899b06dcf3196efa8595c6a8d609",
+            "role": "input"
+          },
+          {
+            "path": "rust/linkedspec-runtime/src/source_emitter.rs",
+            "sha256": "4cf298eadd4603690d57794d76f8397e5bf026a70ac617377360650e4880b64b",
+            "role": "input"
+          },
+          {
+            "path": "rust/linkedspec-runtime/src/staged_ast_enrichment.rs",
+            "sha256": "123448aa6cd3c5c7d3802b2c4043dbc2fc217b43882087354dd10e189389e245",
+            "role": "input"
+          },
+          {
+            "path": "rust/linkedspec-runtime/tests/inter_match_gap_capture_contract.rs",
+            "sha256": "88464bdfd412b91f4e9cebd2424ee78581f17132498e4113e9e5e008ce43a84d",
+            "role": "input"
+          },
+          {
+            "path": "rust/linkedspec-runtime/tests/nested_tree_readiness.rs",
+            "sha256": "698dd4b525296f490890073857dac200be13277e769ae5b7351aab10a549275c",
+            "role": "input"
+          },
+          {
+            "path": "rust/linkedspec-runtime/tests/progressive_span_dispatch_contract.rs",
+            "sha256": "d42ccfbe4c8a6307b568db3637cea1cc83868aeac8b6ec17b5ee06958db6e9b9",
+            "role": "input"
+          },
+          {
+            "path": "rust/linkedspec-runtime/tests/recursive_observation_contract.rs",
+            "sha256": "57caf58049aca5008ad8d03676b101c6a4704b4abe8eadeb24a976869d529b71",
+            "role": "input"
+          },
+          {
+            "path": "rust/linkedspec-runtime/tests/staged_ast_enrichment_contract.rs",
+            "sha256": "9bad6d2f0bbf43ade705b8d1bc2d2bead4058ef6d8222d2448dfd8e9289ace90",
+            "role": "input"
+          },
+          {
+            "path": "rust/linkedspec-runtime/tests/typed_source_location_contract.rs",
+            "sha256": "15df79dba072f82fecd0cf02f47edb9b31da850baaa1fdfe20334b7706773cfc",
+            "role": "input"
+          },
+          {
+            "path": "specs/BNF.spec",
+            "sha256": "7e7436b5d4d5fc5e46a074303130bd809dcd741a082b2d168a6a02a9c941b3eb",
+            "role": "input"
+          },
+          {
+            "path": "specs/DT.spec",
+            "sha256": "4937f9848b7125bc095a414b7ec70cd150fcd9c4d3d08c8ef0195e063572533a",
+            "role": "input"
+          },
+          {
+            "path": "specs/Lispish.spec",
+            "sha256": "1aca70b0a5dca6f2d788f07275e4746426964062ccbe6dffcc129594807583ab",
+            "role": "input"
+          },
+          {
+            "path": "specs/SExprDocumentV1.spec",
+            "sha256": "01a781078d4282f832bdbff37d8194aef9ef688bdeffe874e159cfe4b26ca3c9",
+            "role": "input"
+          },
+          {
+            "path": "specs/ds_vhistory.spec",
+            "sha256": "86c24f62739cd6099b12be742511f77a12b128f3cbb2080f872157fb8ef26477",
+            "role": "input"
+          },
+          {
+            "path": "specs/ebnf.spec",
+            "sha256": "a9082820aed7e3a0f934a25c6e31e71f48f6604a6a2effe804625a8ff1eda054",
+            "role": "input"
+          },
+          {
+            "path": "specs/hlink_substitution.spec",
+            "sha256": "654d5c88a07bb9a067de3c13d7fa3a7616092d2c15be522f23a7ce6b8205172e",
+            "role": "input"
+          },
+          {
+            "path": "specs/ifelse.spec",
+            "sha256": "a5dc04f47d03b8f405accb9b6e9d88c5f0ea1c1a19cf8d91f0d82bfe7ca151e5",
+            "role": "input"
+          },
+          {
+            "path": "specs/lib_reader.spec",
+            "sha256": "5705d98ddde28ad2c9c36573b1429039ea04f6551698b2381b79d400b84e12fb",
+            "role": "input"
+          },
+          {
+            "path": "specs/operators_try.spec",
+            "sha256": "51da411557f83ff7ff9261752499132a65c8d246b89f74cb0b268f155ae6f811",
+            "role": "input"
+          },
+          {
+            "path": "specs/portmap.spec",
+            "sha256": "8eaa69168df3331386ae46f898a27166f722e5bbabced6fa6fdad7c0d798c7c6",
+            "role": "input"
+          },
+          {
+            "path": "specs/pplugin.spec",
+            "sha256": "5f165a65b8fac5e1bb55997eb2dfa0be2bc264d7b3e8017eb759764202c1b31c",
+            "role": "input"
+          },
+          {
+            "path": "specs/regdef.spec",
+            "sha256": "61a244abd049ed1537d923d1526f3250f8cc5b8ea4351691b7ce0a4eca41f192",
+            "role": "input"
+          },
+          {
+            "path": "specs/sdce.spec",
+            "sha256": "ff3ea59523287f2a1c2f761a1cdf056bde9db3111e97b3a8b276425b44fcd32d",
+            "role": "input"
+          },
+          {
+            "path": "specs/simenv.spec",
+            "sha256": "b0566013312ae33631de4a52166f8f81d944ef12b09f4bdedbeab62eed8d36fa",
+            "role": "input"
+          },
+          {
+            "path": "specs/spec.spec",
+            "sha256": "d752521e6de8a91e450d75176504f1afe168a06f458c8a542179e2d5eb46f2ee",
+            "role": "input"
+          },
+          {
+            "path": "specs/tablegrep.spec",
+            "sha256": "39d232ce1f7f87f3ab2bbc226f864dcca487bc103b27c3e55ab4ac2334660882",
+            "role": "input"
+          },
+          {
+            "path": "specs/tclite.spec",
+            "sha256": "bdf7e110ecc3a093f266ce8ddd31b1ffff6880cf8a202e607a226351be3107b3",
+            "role": "input"
+          },
+          {
+            "path": "specs/tkgui.spec",
+            "sha256": "db1671535cf2747a46e1be80577de2155785b900bb41c5d4128768204a272465",
+            "role": "input"
+          },
+          {
+            "path": "specs/user_function_definition.spec",
+            "sha256": "621f766229cc93c05649a465217223646f765228917d934b6d92365f0e6ecbae",
+            "role": "input"
+          },
+          {
+            "path": "specs/verilog.spec",
+            "sha256": "3d0a7dac512941503e6de4bd0ef1c747d61e555ca88df410346dc2dd80b7e134",
+            "role": "input"
+          },
+          {
+            "path": "specs/vhdl.spec",
+            "sha256": "1bd4b995847f6b1ade72fd6a9f3c7bd531218ac97d3cd643f9633d4671f167e6",
+            "role": "input"
+          },
+          {
+            "path": "t/actionir_ast_parser.t",
+            "sha256": "7a84dcda10f3b4a86ccaaa82157168291ae741a213e9ec269596a1c284e76413",
+            "role": "producer"
+          },
+          {
+            "path": "t/canonical_event_occurrence_order.t",
+            "sha256": "22abdea36f95bdb48d758c1ab250764efc29247a696105a292cd8704036b29c2",
+            "role": "producer"
+          },
+          {
+            "path": "t/codeblock_while_perl.t",
+            "sha256": "32ff6a04f11fea6f371beb519af120f0e9ec17047e9f10b225ccb91ae900c87f",
+            "role": "producer"
+          },
+          {
+            "path": "t/generated_source_contract.t",
+            "sha256": "4f4620c2d605d62ff3f6afd65930452a0e6fb74dc5f7e634d2aaa6da2ef6168a",
+            "role": "producer"
+          },
+          {
+            "path": "t/inter_match_gap_capture_perl_contract.t",
+            "sha256": "4604ccc0cf68949146a3778ea5627d4a470fdb3925f4b5f1114a2cbe5eb90e52",
+            "role": "input"
+          },
+          {
+            "path": "t/lossless_child_readiness.t",
+            "sha256": "3185033387def9d5d968ed45dfcec22d5fd9d2b9171347bd7575cb7f9cbc649f",
+            "role": "input"
+          },
+          {
+            "path": "t/lua_legacy_temp_residue.t",
+            "sha256": "03ac99abc020e6df8df0501a055df874994eb6891910b60b3bed973d59dae221",
+            "role": "input"
+          },
+          {
+            "path": "t/nested_tree_readiness.t",
+            "sha256": "07b90b1b5d2c9b70073a4842b381c5798d785e421949c93a52b6b48b6c72d6ce",
+            "role": "input"
+          },
+          {
+            "path": "t/noncurrent_helper_metadata.t",
+            "sha256": "89e8e2c405efe749cde97d1953fbdda8e5ff033f57e68e1e23bbf229d052ecbd",
+            "role": "producer"
+          },
+          {
+            "path": "t/phase0_regression.t",
+            "sha256": "3a9f91cdeaf0e06bf4099b53acf88c59a8a9636683e2bd2aad7cd9b4f12ee726",
+            "role": "producer"
+          },
+          {
+            "path": "t/progressive_span_dispatch_perl_contract.t",
+            "sha256": "9180f6ac7b5e64d2adc8db8dac11637f8054e0c02eb9cd3e05cfcb5e8ccd3ded",
+            "role": "producer"
+          },
+          {
+            "path": "t/recognition_transaction_perl_contract.t",
+            "sha256": "9480c4f7c7fa2553cd58a10071cf0e85385f3705ef40dc21bf8cf39e7b12ddf9",
+            "role": "producer"
+          },
+          {
+            "path": "t/recursive_observation_perl_contract.t",
+            "sha256": "e2a343f059c2837dba157605e2e74d6b2c2ae2fb91aeb8bc27814ea704a7589b",
+            "role": "producer"
+          },
+          {
+            "path": "t/staged_ast_enrichment_perl_contract.t",
+            "sha256": "1d86d958fbe159411b8e744522a58bebea66f299f253e2e013e989ba889360e5",
+            "role": "producer"
+          },
+          {
+            "path": "t/trace_actionir_method_lowering.t",
+            "sha256": "c64276dff722a5a662bc96ee78bec29294a8721673f0496ecb419589d25252cd",
+            "role": "producer"
+          },
+          {
+            "path": "t/trace_actionir_pipeline.t",
+            "sha256": "4293556db2cb38b545bd795b565473d28e1322c37b32e56b5906d735f84fcd17",
+            "role": "producer"
+          },
+          {
+            "path": "t/typed_source_location_perl_contract.t",
+            "sha256": "5de84cc3b09107966c35cb4c97dc8089341fd5730b9d712836e88bed8e7af16e",
+            "role": "input"
+          },
+          {
+            "path": "t/typed_source_location_values.t",
+            "sha256": "bb96fade4baadcb4142ff54e43eb9ff71db665b1929cfa7ba092cf5804b57e56",
+            "role": "input"
+          },
+          {
+            "path": "tests/language-readiness/artifacts/objective-audit-inputs.json",
+            "sha256": "4ed1132d0e4d447b4cf4d0b1652d4928c07b273b30cd03192867662dd75e536c",
+            "role": "input"
+          },
+          {
+            "path": "tests/language-readiness/artifacts/objective-audit-inputs.zip",
+            "sha256": "4f48d1dacd2de861a2b9ebdcb361b30a8d0084cc88700edf39801cee1df1a715",
+            "role": "input"
+          },
+          {
+            "path": "tests/language-readiness/context-names/cases.json",
+            "sha256": "3e7f25083e791db8048bed844523e85fbc53763eeaabd1253001a2b2650575ef",
+            "role": "input"
+          },
+          {
+            "path": "tests/language-readiness/context-names/grammar.spec",
+            "sha256": "8f408e81e2871b3b76c1a7fc7f99e059dad1c19dd03e91449a05fc9b88fff4b0",
+            "role": "input"
+          },
+          {
+            "path": "tests/language-readiness/context-names/rust_checks.rs",
+            "sha256": "e7a01a4fc4465c4a1e7933b54b5dc599249a000c356532168d8cbe6093246b43",
+            "role": "input"
+          },
+          {
+            "path": "tests/language-readiness/lossless-child/cases.json",
+            "sha256": "2589ef997c978ea9fa1e80f886106df7235839d6a89439b88ece328d58e3b3c7",
+            "role": "input"
+          },
+          {
+            "path": "tests/language-readiness/lossless-child/child.spec",
+            "sha256": "34c5f109d401f83fa600a225682599fe924957fdbf45ad2136f55450248badd9",
+            "role": "input"
+          },
+          {
+            "path": "tests/language-readiness/lossless-child/dart_carriers.dart",
+            "sha256": "e6a8b4d502aeb7b9152cb5bc22aade234772fba558bab15b25e3e0e65e40a7dd",
+            "role": "input"
+          },
+          {
+            "path": "tests/language-readiness/lossless-child/dart_checks.dart",
+            "sha256": "708d3c8d5ca9683185e26e099525df6198d2c775e5679dd221393edef7228f63",
+            "role": "input"
+          },
+          {
+            "path": "tests/language-readiness/lossless-child/julia_carriers.jl",
+            "sha256": "9b308b17b62cac150df88b5d256ea379db697fd393fb3237f1d2f65caa6ea317",
+            "role": "input"
+          },
+          {
+            "path": "tests/language-readiness/lossless-child/julia_checks.jl",
+            "sha256": "3ca60f296b06cf0c07132fbe117dda155729cf12a599ff53b97b233e6c4c26cb",
+            "role": "input"
+          },
+          {
+            "path": "tests/language-readiness/lossless-child/lua_carriers.lua",
+            "sha256": "1cd379ca959bcd4d92eec68ebe8f3e20e02d80e7b356adbc5d67db0785697456",
+            "role": "input"
+          },
+          {
+            "path": "tests/language-readiness/lossless-child/lua_checks.lua",
+            "sha256": "67a59f580f1daf5ad0c6d0f9a425ab1d8e8445e6d748dffa0a14ad0a63fa4367",
+            "role": "input"
+          },
+          {
+            "path": "tests/language-readiness/lossless-child/parent.spec",
+            "sha256": "8b19299a5d3715cba7f44dac266954e8b34497920a308f956f6e35b286ae6435",
+            "role": "input"
+          },
+          {
+            "path": "tests/language-readiness/lossless-child/rust_carriers.rs",
+            "sha256": "6a461b9f86525d5ab4d75a74d4395869048e3c146e674badb31d3f652b6cd9cd",
+            "role": "input"
+          },
+          {
+            "path": "tests/language-readiness/lossless-child/rust_checks.rs",
+            "sha256": "e26105539eafd80fb870d4959881a086a81f57839018685ff8d84ce8f2bf6f20",
+            "role": "input"
+          },
+          {
+            "path": "tests/language-readiness/lossless-segments/cases.json",
+            "sha256": "fd4fe58d6bb0efa7bcb609b863c3d9a2238bb5c62fa9a1814a143e04416bd89c",
+            "role": "input"
+          },
+          {
+            "path": "tests/language-readiness/lossless-segments/grammar.spec",
+            "sha256": "8f20d242b0f2ea0eee1d70b6f289cf96362cdf3b64ef4cbcc77f5631ffe3eb36",
+            "role": "input"
+          },
+          {
+            "path": "tests/language-readiness/nested-tree/cases.json",
+            "sha256": "7a36a4b32d8a5ac8a1d2f17d6d000a68c707bfc15a4b3a1e93e3e4ddaf4147c7",
+            "role": "input"
+          },
+          {
+            "path": "tests/language-readiness/nested-tree/dart_checks.dart",
+            "sha256": "5ae819cccaf0dc2cfb2a1753f5351148307cebc8797ff605fc4ba8c65c15df4a",
+            "role": "input"
+          },
+          {
+            "path": "tests/language-readiness/nested-tree/grammar.spec",
+            "sha256": "498ffda35b05222388c64d99b0acb132a56996e97de3ffa9312f7dda6ee0ed72",
+            "role": "input"
+          },
+          {
+            "path": "tests/language-readiness/nested-tree/julia_checks.jl",
+            "sha256": "a0511244a5ae78c39e6d68c116a03ab1dcb08610ff8f01f75079551eb3825c62",
+            "role": "input"
+          },
+          {
+            "path": "tests/language-readiness/nested-tree/lua_checks.lua",
+            "sha256": "0cf52abd24227574f5e93389836176452332f75c1d751b823f1c70d2c31af435",
+            "role": "input"
+          },
+          {
+            "path": "tests/language-readiness/nested-tree/rust_checks.rs",
+            "sha256": "9d805a415bc2f63e057910af0d1e679e46fd84533bfe2c6c126d912b8ec16b68",
+            "role": "input"
+          },
+          {
+            "path": "tests/language-readiness/nested-tree/verify_native.py",
+            "sha256": "a177b58c22777cdcbd128e2d6147fd63da95c33654f6baaf8c5d28d0080deb6c",
+            "role": "input"
+          },
+          {
+            "path": "tests/language-readiness/recover_objective_audit_inputs.py",
+            "sha256": "50e55b058ac27beff3c550184c0cc0570c566cde6590920769f26ac2b60200dd",
+            "role": "producer"
+          },
+          {
+            "path": "tests/language-readiness/verify_objectives.py",
+            "sha256": "d49362e909350685e17d464bc3c8dc9ab7bc9a108082b727df81b05de456f570",
+            "role": "producer"
+          },
+          {
+            "path": "tools/check_inter_match_gap_capture_contract.py",
+            "sha256": "e1a2848fb28ccbffd32edf7d4ed2b0ffcac98ad725fa23f16e5204985aca95c1",
+            "role": "input"
+          },
+          {
+            "path": "tools/check_inter_match_gap_capture_six_runtime.sh",
+            "sha256": "9747819b7aa8356ca29c16ff7b88088c1d220e5f2aa1bb14f834a65e0f22e9e6",
+            "role": "input"
+          },
+          {
+            "path": "tools/check_lua_legacy_temp_residue.pl",
+            "sha256": "5a453c58fe970d7ea2823f700d6875d34aeb9b989325bb1577cf319550fe0d44",
+            "role": "input"
+          },
+          {
+            "path": "tools/check_mutation_public_surface.py",
+            "sha256": "6dce83e027486c5ea2f4e81027dce9b6cae97ad54e53b1e86c4daf3f05696194",
+            "role": "input"
+          },
+          {
+            "path": "tools/check_progressive_span_dispatch_contract.py",
+            "sha256": "329d04e3f153f54d78180ce9b8256135f95bb06dee2c742880958af26b019990",
+            "role": "input"
+          },
+          {
+            "path": "tools/check_progressive_span_dispatch_six_runtime.sh",
+            "sha256": "e2b05730fdf38fa137b36e9365a1b268b5d4a9073fa1815766e16238e4e361f7",
+            "role": "input"
+          },
+          {
+            "path": "tools/check_public_aggregate_selector_surface.py",
+            "sha256": "a5991e8dbdfd6bdfd3226c8368ba9e341e741904280f21ee3fe870f26bad5808",
+            "role": "input"
+          },
+          {
+            "path": "tools/check_recognition_transaction_contract.py",
+            "sha256": "1e3b87a7ade8770997cd816742bbce89fc6d8f5f448544dbb4bb2b68de93f9c8",
+            "role": "input"
+          },
+          {
+            "path": "tools/check_recognition_transaction_six_runtime.sh",
+            "sha256": "ce51cf3e9a8dc94f9fb853927e4fd4e9b315d65dff08a941fd2bedb04a81d6c4",
+            "role": "input"
+          },
+          {
+            "path": "tools/check_recursive_observation_six_runtime.sh",
+            "sha256": "6bbfc2723bb9c536dd55be5f51006bff6e97540ba6bfd28dba7f71d5332633bb",
+            "role": "input"
+          },
+          {
+            "path": "tools/check_staged_ast_enrichment_contract.py",
+            "sha256": "0f0d0c2b80ae46a8b2cf48bf29359eb246c5010395a43ae2db4f0472764890b5",
+            "role": "input"
+          },
+          {
+            "path": "tools/check_staged_ast_enrichment_six_runtime.sh",
+            "sha256": "cc1b2fb80ae1ebb4ffeab9af5de2432f55ad5c3a053d6b42ed6f1fef26fb7ca8",
+            "role": "input"
+          },
+          {
+            "path": "tools/check_typed_authoring_model_six_runtime.sh",
+            "sha256": "6f94228c95e2ea33beeb366679724e9ed9d0d69a768dbf8055a25e3f9f8e92b8",
+            "role": "input"
+          },
+          {
+            "path": "tools/check_typed_gap_composition_six_runtime.sh",
+            "sha256": "a2ced10cbce57cbe32cc6420b2b903da92866613aa4a6516192b9cc956481dba",
+            "role": "input"
+          },
+          {
+            "path": "tools/check_typed_source_location_contract.py",
+            "sha256": "06bf3d142a14cf4997fec57c9cbcb6a00df16bcaff1745b7ad7a8e6d17a3cf40",
+            "role": "input"
+          },
+          {
+            "path": "tools/check_typed_source_location_six_runtime.sh",
+            "sha256": "a0ff216ffdd4f41d12345809e13fd5ad35e16736e8c80e4a59995ed3befa2de7",
+            "role": "input"
+          },
+          {
+            "path": "tools/project_data_env.sh",
+            "sha256": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73",
+            "role": "input"
+          },
+          {
+            "path": "tools/project_data_run.sh",
+            "sha256": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f",
+            "role": "input"
+          },
+          {
+            "path": "tools/run_ci_local.sh",
+            "sha256": "f0f51e5c46b21c0077e356b637a1d2901cab0451fbb2a9ade180b1137eedf4fb",
+            "role": "input"
+          },
+          {
+            "path": "tools/run_lua_local.sh",
+            "sha256": "4713bb8ff741f4340c625f3fbc348f1449965b0dfac44d75e79379a95b4a9ae7",
+            "role": "input"
+          },
+          {
+            "path": "tools/run_lua_project_data.sh",
+            "sha256": "e073a655dae2be873f465fd6b7a0ad6266e8edb1f4faf7c75fc7817cd958b84b",
+            "role": "input"
+          },
+          {
+            "path": "tools/run_mdbook_local.sh",
+            "sha256": "ef232c0bcb54fd2b32478b97e2ed98ede533873bf60332226e0c1af319780515",
+            "role": "input"
+          },
+          {
+            "path": "tools/run_python_project_data.sh",
+            "sha256": "0bc03bb8f4ce550397da9fda086215a1d9f6f452ec413605fbcb8976c06af604",
+            "role": "input"
+          },
+          {
+            "path": "tools/test_dart_project_data_storage.sh",
+            "sha256": "a0366a7749aae0ca0154e39c3c8f1108053c1bd3a1ebc8a7f986bbbc2058ceff",
+            "role": "input"
+          },
+          {
+            "path": "tools/test_julia_project_data_storage.sh",
+            "sha256": "919f3d62c9b9097cc6586f402d050823ce759ffff50452f775ba4363eb486ec4",
+            "role": "input"
+          },
+          {
+            "path": "tools/test_lua_project_data_storage.sh",
+            "sha256": "8e5fbcae1498a5bb864907e5a6c9d55fab8f2b760bf334fbdc96ff0a839d48d8",
+            "role": "input"
+          },
+          {
+            "path": "tools/test_perl_project_data_storage.sh",
+            "sha256": "97449395da3fa5e5eda30ca5d5b55c52997f112495c9b4feaa15303352f2c03b",
+            "role": "input"
+          },
+          {
+            "path": "tools/test_rust_project_data_storage.sh",
+            "sha256": "82fa3cf790b26f39e743524a9c6d5d113d8ee8fcce59f4f2df9f759674ba97d6",
+            "role": "input"
+          }
+        ]
+      }
+    }
+  ]
+}

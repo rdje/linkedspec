@@ -1,0 +1,56 @@
+{
+  "nested_original": [
+    "cb={|x,y| nested={|s,q| return(s) }; return(nested(x,y)) }",
+    "return(cb(\"ok\",\"unused\"))",
+    "return(s)",
+    "return(nested(x,y))"
+  ],
+  "body_original": [
+    "cb={|x,y| if(matches(x, /ok/)) { return(x) }; return(\"miss\") }",
+    "return(cb(\"ok\",\"unused\"))",
+    "return(x)",
+    "return(\"miss\")",
+    "if(matches(x, /ok/)) { return(x) }"
+  ],
+  "repeated": [
+    "cb={|| if(false) { return(\"a\") }; if(false) { return(\"b\") }; return(\"a\") }",
+    "return(cb())",
+    "return(\"a\")",
+    "return(\"b\")",
+    "return(\"a\")",
+    "if(false) { return(\"a\") }",
+    "if(false) { return(\"b\") }"
+  ],
+  "attached": [
+    "if(true) { return(\"hit\") }",
+    "return(\"miss\")",
+    "return(\"hit\")"
+  ],
+  "marker": [
+    "if(false)",
+    "return(\"bad\")",
+    "else()",
+    "return(\"hit\")",
+    "endif()"
+  ],
+  "quoted": [
+    "return(\"return(inner); if(true)\")",
+    "if(true)"
+  ],
+  "raw_ambiguous": [
+    "unknown_helper(return(\"inner\"),return(\"other\"))",
+    "return(\"after\")",
+    "return(\"inner\")",
+    "return(\"other\")"
+  ],
+  "raw_single": [
+    "unknown_helper(return(\"inner\"))",
+    "return(\"after\")",
+    "return(\"inner\")"
+  ],
+  "nested_raw_known": [
+    "i=2",
+    "i=i+1",
+    "return(i)"
+  ]
+}

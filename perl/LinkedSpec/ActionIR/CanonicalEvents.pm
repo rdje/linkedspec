@@ -150,11 +150,13 @@ sub _build_canonical_action_ir_events {
   unless ref($split_action_ir_statements) eq 'CODE';
 
  my %helper_event_queue;
+ my @helper_event_order;
  foreach my $helper_event (@$helper_events) {
   my $raw_key = $trim_action_ir_value->($helper_event->{raw});
   next unless defined($raw_key) && length($raw_key);
   my $canonical_event = _canonicalize_helper_action_ir_event($label, $helper_event, $deps);
   push @{$helper_event_queue{$raw_key}}, $canonical_event;
+  push @helper_event_order, [$raw_key, $canonical_event];
   LinkedSpec::ActionIR::Trace::decision(
    owner => 'canonical_events',
    phase => 'build_canonical_action_ir_events',
@@ -246,25 +248,27 @@ sub _build_canonical_action_ir_events {
   }
  }
 
- foreach my $raw_key (keys %helper_event_queue) {
-  while (@{$helper_event_queue{$raw_key}}) {
-   my $event = shift @{$helper_event_queue{$raw_key}};
-   delete $event->{_exclusive_statement};
-   $event->{source} = 'unmatched_helper_scan_event';
-   push @canonical_events, $event;
-   LinkedSpec::ActionIR::Trace::decision(
-    owner => 'canonical_events',
-    phase => 'build_canonical_action_ir_events',
-    label => $label,
-    decision => 'unmatched_helper_event',
-    taken => 1,
-    context => {
-     raw => $raw_key,
-     kind => ref($event) eq 'HASH' ? ($event->{kind} // '') : '',
-     contract_id => ref($event) eq 'HASH' ? ($event->{contract_id} // '') : '',
-    },
-   );
-  }
+ # Replay pending occurrences, including equal-text events interleaved across keys.
+ foreach my $queued_event (@helper_event_order) {
+  my ($raw_key, $event) = @$queued_event;
+  my $pending = $helper_event_queue{$raw_key};
+  next unless ref($pending) eq 'ARRAY' && @$pending && $pending->[0] == $event;
+  shift @$pending;
+  delete $event->{_exclusive_statement};
+  $event->{source} = 'unmatched_helper_scan_event';
+  push @canonical_events, $event;
+  LinkedSpec::ActionIR::Trace::decision(
+   owner => 'canonical_events',
+   phase => 'build_canonical_action_ir_events',
+   label => $label,
+   decision => 'unmatched_helper_event',
+   taken => 1,
+   context => {
+    raw => $raw_key,
+    kind => ref($event) eq 'HASH' ? ($event->{kind} // '') : '',
+    contract_id => ref($event) eq 'HASH' ? ($event->{contract_id} // '') : '',
+   },
+  );
  }
 
  my %hits;

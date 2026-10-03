@@ -1793,7 +1793,7 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
   Handoff: Clean canonical commit first, then activate residual-order diagnosis .6.0 without sorting or weakening raw historical records. No push before the authorized PNT boundary.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6`
-  Status: `pending`
+  Status: `done`
   Priority: P1 — residual helper metadata order is nondeterministic and can affect readiness classification.
   Goal: Diagnose and repair residual canonical helper-event ordering/overlap before dispatcher closeout.
   Dependencies: clean literal .0.2.1.3, normalization .0.4 and deferred-control .0.5 handoffs.
@@ -1801,6 +1801,8 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
   Impact: A nominal canonical event sequence is process-order dependent. Observed pre-fix body metadata can differ in readiness/unresolved classification; current healthy runtime outcomes are not proof that arbitrary overlap is harmless.
   Children: `.1.3.3.0.6.0`, `.1.3.3.0.6.1`
   Acceptance: Source-bound controlled public observations and canonical order/provenance contracts select explicit deterministic occurrence/provenance ownership that preserves top-level source order, not a cosmetic sorted snapshot. Preserve exact prior records; verify overlapping/repeated helper spans, readiness and unchanged public execution, direct dependents and warranted canonical boundary.
+
+  Closeout condition: Both children complete; .6.1 exact staged canonical receipt is required before the compiler commit can land. This closes ordering only; .7 readiness remains separate.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.0`
   Status: `done`
@@ -1827,11 +1829,40 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
   Handoff: Complete due artifact cleanup from this clean diagnosis commit, then activate .6.1 canonical compiler repair. Quoted .7.2 and nested raw .7.0/.1 precede dispatcher/full execution.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.1`
-  Status: `pending`
+  Status: `done`
   Goal: Repair and verify the diagnosed residual-event ordering/overlap mechanism.
   Dependencies: `.1.3.3.0.6.0`
   Selected scope: perl/LinkedSpec/ActionIR/CanonicalEvents.pm residual queue occurrence ownership only; no scanner/AST/value/runtime/schema/authority/dependency changes. New queue regression and .6.1 source-bound RED/GREEN/before compiler snapshot/read-only reviewers, consumer tests, book/Knowledge/continuity. Declare exact paths/tier at clean activation; preserve .6.0 raw arrays and freeze its claim before production edits.
   Acceptance: Actual controlled RED/GREEN source/duplicate/overlap and order/readiness/public execution checks plus direct dependents establish deterministic canonical behavior; full warranted acceptance precedes .0.3.
+
+  Activation: Clean5bbceb962cc5aa5fb071b86efa479178e0e25d32; due hygiene .8 all ten doctrines/post-pointer PASS, brief0/Git clean. Current .6.0 diagnosis/raw captures are committed at bf1e4edd; exact source/consumer policy and Toolbox evidence recovered before code selection.
+  Owned paths: perl/LinkedSpec/ActionIR/CanonicalEvents.pm only production; new t/canonical_event_occurrence_order.t, recurring invocation through a dedicated t/phase0_regression.t subtest; .6.1 public source-bound probe/fresh/cases/capture/reviewer/queue observer/before module/raw RED-GREEN/full TAP/checkpoint programs and results; new claim/fact. Relevant current residual/deferred metadata Knowledge, ActionIR order/architecture book, task/index/roadmaps and bounded live/resume/history. Scratch .linkedspec-data/scratch/residual-event-order-repair. No CI script, scanner/AST/schema/value/authority/dependency or historical producer/capture edits. Declare any additional integration path first.
+  Verification tier: `canonical`
+  Focused checks: Adversarial A/B/A residual occurrences with equal raw but distinguishing arguments/contract priority, matched top-level removal and exclusive raw-key ownership, blank queue entries/fallback/count/public schema/input immutability. Exact source-bound baseline/current public descriptors, AST/substitution/dump/emitted/native/fresh/readiness under seeds0/1/2; retain raw arrays and require deterministic current order without normalizing snapshots. Source-identical compatibility controls and genuine corrupted data/queue order/consumer inputs must reject. New regression plus trace/metadata/AST/generated-source/callable and recursive/transaction/progressive/staged metadata direct dependents; syntax/book/Knowledge/history/memory/diff/all doctrines.
+  Canonical trigger: Changes canonical compiler event-array order consumed by lowering/readiness policies. Fully stage the complete verified candidate, then exact staged tools/run_ci_local.sh receipt required before landing. Phase0 includes the permanent queue regression without changing CI scripts or neutral historical CI authorities.
+  Claim verification: `docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.1.json`
+  Canonical failure / added integration ownership: First exact staged CI exited1 at isolated historical proof replay: verify_signature_regression_evolution rejects the new Phase0 recurrence as unreviewed signature-regression drift. Own tests/language-readiness/verify_objectives.py exact insertion normalization and targeted missing/duplicated/altered-hook controls here, plus new .6.1 governance before snapshot/check program/raw JSON and failed-CI JSON; update the objective Knowledge fact and bounded proof bookkeeping. Removing exactly the new insertion must recover SIGNATURE_AFTER bytes, then the original signature replacement must recover historical SIGNATURE_BEFORE/hash. No broad drift permission, original capture rewrite or runtime admission. Full canonical rerun remains mandatory after restaging.
+  Recurrence instrument correction: The first phase0-check regex expected heredoc semicolon before its closing call parenthesis, skipped the intended child and extracted a later handler fixture. Retained before producer/JSON proves its outside-subroutine return failure. Bound extraction to the exact subtest section and actual <<PERL); shape, with a required do-file prefix; production/new Phase0 source is unchanged by this instrument correction.
+  Additional proof correction: After adding the historical replay, the source-hash guard correctly rejected the subsequently edited architecture chapter; recapture only after freezing that chapter. One read of the recapture target before its process completed rejected empty JSON and changed no evidence; wait for successful capture completion before any dependent review/publication. Preserve the first failed canonical combined log in .6.1-canonical-before.json. Staged diff-check also rejected the new stdout JSON producer's doubled final newline; emit one newline, recapture into scratch after completion, then republish/rebind the proof before canonical rerun.
+  Additional owned instrumentation: .6.1-phase0-check.py/json extracts and executes the exact new recurring child snippet from t/phase0_regression.t, retaining complete command/TAP/stdout/stderr before the canonical gate. This verifies the actual do-file completion boundary independently of direct prove.
+  Actual RED: New15-test queue regression exits1 with exactly its A/B/A occurrence-order assertion failing; other14 input/ownership/schema/fallback controls pass. Complete raw TAP/stdout/stderr is retained in .6.1-red-tests.json. Public baseline27-source/seed capture is retained against the byte-exact activation CanonicalEvents snapshot. .6.1-order-oracles.json independently enumerates exact expected raw occurrence orders before implementation. Current public trace.pl/trace-capture.py/json is additionally owned to verify reached consumer decisions after repair.
+  Preservation: Freeze .6.0 live claim at actualbf1e4edd04371eeddf33f8445239348e12f887f2 before production/book changes, keeping all old hashes/results exact. Preserve .6.0 capture/probe/fresh/trace/tests/reviewer/original historical writer bytes; current successor programs are new .6.1 files. .7.0/.1 nested raw and .7.2 quoted false blockers remain known failures, not admitted positives.
+
+  Focused verification: PASS27 matched source/seed before/current native-fresh comparisons, nine exact current full sequences across seeds and independent orders,15 current consumer traces, eleven complete suites/424 top-level TAP tests and actual15-test Phase0 child. The exact before owner has only A/B/A failing,14 controls passing; baseline three sources permute in this new population. Ten evidence corruptions reject.320 focused input hashes plus325 final claim inputs/30 producer roles bind exact source/results; three executed book examples render. Only CanonicalEvents production changes; Phase0 permanently invokes the standalone regression. Raw arrays/streams/old claims/captures stay exact. Known raw warning eval-location identifiers are excluded only from equality, with both streams and warning classes retained.
+  Log packaging defect / repair owned here: Second canonical run exits1 with nine doctrines PASS and REPO-ROOT-PATHS rejecting .6.1-canonical-before.json's raw captured checkout identity. Retain identical historical log bytes in a base64/length/SHA-256 envelope rather than persisting that identity as project text. Extend the owned governance-check.py with initial --capture-failure serialization, default exact decode/hash/known-failure validation and observed invalid-base64/hash/length controls; retain all original first-run evidence without changing the path doctrine. Rebind proof/claim and rerun exact staged canonical CI.
+  Historical recurrence verification: Activation audit reproduces RED; exact insertion removal recovers committed prior Phase0 bytes. Current isolated archive replay restores134 inputs/84613241 bytes with zero original-log read/zero tracked-write attempts; six Phase0, fifteen CI and six inventory byte-changing corruptions reject27 governance mutations. Prior signature corruption controls are isolated from the new insertion. All original archive/capture bytes remain unchanged; this is historical integrity proof, not fresh objective execution.
+
+## Acceptance Checklist — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.1
+- [x] **REPRODUCE / ISSUE** — retain exact activation owner and actual15-test RED with only interleaved occurrence order failing;27 source/seed baseline/current comparisons preserve all raw metadata.
+- [x] **ROOT CAUSE / POLICY** — Toolbox descriptor/substitution/AST/emission/trace isolates the raw-key residual drain and real cursor/overlap consumer decisions. Preserve top-level/exclusive ownership and scan occurrence provenance; do not invent global lexical order or public fields.
+- [x] **FIX / PERMANENT REGRESSION** — ordered reference occurrences alongside queues skip consumed/deleted heads and preserve A/B/A. Standalone15-test unit passes and exact new Phase0 child runs. Other production/grammar/authorities remain activation-exact.
+- [x] **FOCUSED NO REGRESSION** — nine current full sequences/independent oracles, raw record populations/non-order metadata, exact AST/substitution/dump/emission and native/fresh observations agree;15 traces and eleven complete suites/424 top-level TAP tests pass. Ten evidence controls actually reject.
+- [x] **LOCKSTEP / SCOPE** — historical .6.0 claim freezes at actualbf1e4edd with original hashes/results. Current book/Knowledge/task/roadmaps/bounded continuity and325-input claim agree; raw/quoted readiness .7.0/.1/.2 and dispatcher/full execution remain owned.
+- [x] **CANONICAL LANDING CONDITION** — stage the complete candidate and require successful exact tools/run_ci_local.sh receipt before commit. Mandatory hooks enforce this condition; focused evidence does not preclaim full-gate execution/counts.
+
+  Verification: Focused checkpoint/reviewer/syntax/book/Knowledge/history/memory/diff PASS; exact staged canonical receipt and all ten landing hooks independently govern compiler landing.
+  Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.1 - preserve residual event occurrences` (Git owns identity).
+  Handoff: From this clean canonical commit, activate nested raw-readiness diagnosis .7.0; .7.1 repair and quoted blockers .7.2 precede dispatcher/full composition. No push before the authorized PNT boundary.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7`
   Status: `pending`
@@ -2080,7 +2111,9 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 | 42.4 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.5` | `done` | 30 matched sources,1014 tests; guarded typed loops/local returns/original identities verified. |
 | 42.5 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.6` | `done` | Exact committed input/evidence reconciliation; canonical receipt governs bounded parent closeout. |
 | 43 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.0` | `done` | Nine sources/27 native-fresh, six originals,15 traces/34 tests and ten controls; repair selected. |
-| 43.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.1` | `pending` | Pending scan occurrences after due cleanup; canonical compiler boundary. |
+| 43.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.1` | `done` | Pending scan occurrences repaired;325-input/424-test proof and exact canonical landing condition. |
+| 43.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.0` | `pending` | Diagnose false-ready nested raw expressions with public source/consumer controls. |
+| 43.3 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1` | `pending` | Repair diagnosed nested raw readiness before dispatcher. |
 | 44 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2` | `pending` | P1 quoted-data false helper/control blockers before dispatcher. |
 | 44 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.1` | `pending` | Repair canonical residual ordering with exact source/provenance controls. |
 | 45 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.0` | `pending` | Diagnose missed nested raw-expression portability dependencies after prior handoffs. |
@@ -2207,6 +2240,8 @@ September27 `.1.1.1`: seven neutral/structural checks, 34 ledger source-path/con
 | `.0` | `SPEC-LANGUAGE-SELF-CONTAINMENT.0 - ratify expressive spec self-containment` | Direction capture only; no parser/runtime behavior. |
 
 ## Changelog
+
+- 2026-10-03: `.0.6.1` preserves each pending scan occurrence with actual queue RED/GREEN and27 public comparisons/424 focused tests/15 traces; canonical receipt gates landing and .7.0 is next.
 
 - 2026-10-03: `.0.6.0` freezes residual order/consumer diagnosis, selects occurrence provenance and owns quoted false blockers `.0.7.2`; due cleanup precedes repair.
 

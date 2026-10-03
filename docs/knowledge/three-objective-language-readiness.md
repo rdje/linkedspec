@@ -9,6 +9,8 @@ answers:
   - "what follows three objective reconciliation"
   - "why does the objective audit reject changed canonical CI"
   - "which CI evolution is permitted by the historical objective audit"
+  - "why does the historical objective audit reject a new Phase0 regression"
+  - "which exact Phase0 recurrence evolution preserves historical objective proof"
 date: 2026-10-01
 status: bounded evidence reconciliation; exact canonical acceptance governs parent closure
 tags: [language-readiness, recursion, context, lossless, authoring, evidence]
@@ -50,3 +52,12 @@ Finite gap selection `.1.1.4` is recorded in `docs/language-readiness/finite-gap
 Stale capability prose `.1.1.5` is repaired with its recurrence guard; the
 existing startup/backend defects retain their owners. The wider closure contract,
 structured-format campaign and alternate authoring frontend remain open.
+
+Residual occurrence repair `.1.3.3.0.6.1` adds one exact Phase0 recurrence subtest. Its
+first canonical gate rejects the unrecognized drift; current audit normalization removes
+only that complete anchored insertion, recovers committed SIGNATURE_AFTER exactly, then
+reverses the existing signature repair to recover the original historical bytes/hash.
+Six Phase0 corruption controls reject prior signature/plan drift, unrelated edits and
+missing/duplicated/changed recurrence. The new before snapshot reproduces the old rejection;
+isolated recovery reruns the historical audit without reading original logs or writing
+tracked evidence. No original checkpoint, capture or runtime objective is rewritten.

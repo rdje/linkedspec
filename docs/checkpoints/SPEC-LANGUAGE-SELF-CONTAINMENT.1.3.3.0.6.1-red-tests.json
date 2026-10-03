@@ -1,0 +1,16 @@
+{
+  "mode": "red",
+  "rows": [
+    {
+      "command": [
+        "prove",
+        "-v",
+        "-Iperl",
+        "t/canonical_event_occurrence_order.t"
+      ],
+      "exit": 1,
+      "stdout": "t/canonical_event_occurrence_order.t .. \nnot ok 1 - interleaved residual scan occurrences remain A/B/A rather than raw-key groups\nok 2 - all three occurrences counted\nok 3 - kind telemetry retains duplicate occurrences\nok 4 - equal-text occurrences remain distinct canonical records\nok 5 - private ownership flag does not escape\nok 6 - canonical assembly does not mutate scanner input\nok 7 - authored top-level order precedes the remaining occurrence\nok 8 - consumed occurrences are not replayed\nok 9 - exclusive top-level ownership removes the whole matching raw-key queue\nok 10 - discarded exclusive alternatives are not counted\nok 11 - exclusive flags remain private\nok 12 - blank helper keys are skipped and fallback retained\nok 13 - fallback telemetry is unchanged\nok 14 - empty action has no invented occurrence\nok 15 - matching trims queue keys without altering raw provenance\n1..15\nDubious, test returned 1 (wstat 256, 0x100)\nFailed 1/15 subtests \n\nTest Summary Report\n-------------------\nt/canonical_event_occurrence_order.t (Wstat: 256 Tests: 15 Failed: 1)\n  Failed test:  1\n  Non-zero exit status: 1\nFiles=1, Tests=15,  0 wallclock secs ( 0.00 usr  0.01 sys +  0.02 cusr  0.00 csys =  0.03 CPU)\nResult: FAIL\n",
+      "stderr": "\n#   Failed test 'interleaved residual scan occurrences remain A/B/A rather than raw-key groups'\n#   at t/canonical_event_occurrence_order.t line 34.\n#     Structures begin differing at:\n#          $got->[1] = 'return(a)'\n#     $expected->[1] = 'return(b)'\n# Looks like you failed 1 test of 15.\n"
+    }
+  ]
+}

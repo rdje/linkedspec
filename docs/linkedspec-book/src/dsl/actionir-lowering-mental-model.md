@@ -202,18 +202,19 @@ These guides go deeper than the book chapters and include exact emitted-Perl sha
 ## Canonical event order and execution
 
 A descriptor event list is compiler telemetry, not a trace of actions executed at runtime.
-Top-level statements are assembled in their authored order. Helper scans also find nested
-occurrences; the scan input is grouped by contract precedence, with occurrences retained
-within each contract. This input order is not global lexical source order.
+Top-level statements keep their authored order and existing exclusive ownership. Remaining
+helper occurrences now follow the helper scan input, including equal-text occurrences
+interleaved across raw keys. Consumed occurrences and alternatives removed by an exclusive
+statement are not replayed. The internal queue bookkeeping adds no public event fields.
 
-The current Perl residual suffix still drains raw-text queues through hash iteration.
-The same source can therefore produce different residual event sequences in separate
-processes. Repeated equal-text events matter: `return("a")`, `return("b")`, then
-`return("a")` are three occurrences, not two distinct raw-text keys. A sorted snapshot or
-first-seen-key list cannot establish occurrence ownership.
+Helper scans are grouped by contract precedence, with occurrences retained within each
+contract. This is stable scan provenance, not global lexical source order. For example,
+`return("a")`, `return("b")`, then `return("a")` are three occurrences. Sorting distinct raw
+keys or grouping all equal text together would lose that interleaving.
 
-These exact controlled sources return `ok` and `a` respectively, both natively and from
-independently loaded emitted source under the three measured seeds:
+The earlier hash-key residual drain and its raw permutations remain historical evidence.
+These exact sources return `ok` and `a` respectively, both natively and from independently
+loaded emitted source in the measured before/after source-and-seed comparisons:
 
 ```spec
 Top:: I { cb={|x,y| nested={|s,q| return(s) }; return(nested(x,y)) }; return(cb("ok","unused")) }
@@ -223,29 +224,33 @@ Top:: I { cb={|x,y| nested={|s,q| return(s) }; return(nested(x,y)) }; return(cb(
 Top:: I { cb={|| if(false) { return("a") }; if(false) { return("b") }; return("a") }; return(cb()) }
 ```
 
-Their residual metadata permutations do not change lowering, readiness counts or results
-in this measured population. The lowering consumer advances a source cursor; its traces
-show nested callable residuals missing that cursor after the top-level literal was lowered.
-Ambiguous raw-statement overlap follows a different skip path. These controls do not prove
-all overlaps harmless. The selected repair preserves top-level/exclusive ownership and
-replays each pending residual in helper-scan occurrence order; it is not implemented by
-this diagnosis.
+For the second source, the top-level assignment and outer return precede the residual
+`RETURN a`, `RETURN b`, `RETURN a`, then the two attached `IF` events. This ordering records
+scanner precedence; it does not say those returns or branches were executed.
 
-Readiness also has separate known defects. This source returns its exact quoted value,
-yet currently reports an extra `IF` event and three unresolved helpers:
+The current nine-source matrix preserves full ordered records across three controlled
+seeds. Exact substitutions, parser dumps, emitted source, ASTs, metadata populations/counts
+and native/fresh values match the before-owner observations. Fifteen current lowering traces
+retain the measured source-cursor misses, ambiguous raw skips and single unmatched rewrites.
+Those bounded controls do not establish arbitrary-overlap equivalence. Raw compatibility
+results and process-specific host warning locations do not establish portable semantics.
+
+Readiness still has separate known defects. This source returns its exact quoted value,
+yet reports an extra `IF` event and three unresolved helpers:
 
 ```spec
 Top:: I { return("return(inner); if(true)") }
 ```
 
-The typed argument is a string. Its helper-looking contents must remain data; current
-metadata is misleading. Quoted-payload repair and nested raw-expression readiness have
-separate owners. A working value cannot establish portable readiness, and a false blocker
-must not be removed by hiding genuine unsupported source.
+Its typed argument is a string. The helper-looking contents must remain data; quoted-payload
+repair is independently owned. Nested raw expressions can also be falsely reported ready.
+Stable event order does not repair those classifications. A working value cannot establish
+portable readiness, and a false blocker must not be removed by hiding genuine raw source.
 
-The recoverable diagnosis retains raw arrays and complete streams in
-`docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.0-observations.json` and its
-trace/original captures. The read-only `...6.0-review.py` checks source identity, counts,
-permutation evidence, typed literals and actual consumer decisions. It never overwrites
-those captures. The three fixed seeds are named observations, not a probability estimate
-or a cross-backend admission.
+The historical diagnosis keeps unmodified arrays and streams under the `.0.6.0` checkpoint
+prefix. The `.0.6.1` successor retains an exact before-owner module, source-identical
+before/after public captures, independent occurrence-order oracles, complete TAP and current
+traces. Its read-only reviewer rejects corrupted source/order/population/consumer evidence;
+it never overwrites captures. The permanent regression is also invoked by Phase 0. Compiler
+landing requires canonical acceptance of the exact staged candidate. Three fixed seeds are
+named observations, not a probability estimate or another backend's admission.

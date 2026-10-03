@@ -1,0 +1,13 @@
+{
+  "source": "t/phase0_regression.t",
+  "source_sha256": "3a9f91cdeaf0e06bf4099b53acf88c59a8a9636683e2bd2aad7cd9b4f12ee726",
+  "command": [
+    "perl",
+    "-Iperl",
+    "-e",
+    "my ($descr, $STRING, $info) = @_;\nBEGIN {\n no warnings 'once';\n ++$LinkedSpec::SpecEntry::TEST_RUNTIME_HANDLER_COMPILE_COUNT;\n}\nreturn ['ok'];"
+  ],
+  "exit": 255,
+  "stdout": "",
+  "stderr": "Can't return outside a subroutine at -e line 6.\n"
+}

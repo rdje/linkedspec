@@ -1,0 +1,13 @@
+{
+  "source": "t/phase0_regression.t",
+  "source_sha256": "3a9f91cdeaf0e06bf4099b53acf88c59a8a9636683e2bd2aad7cd9b4f12ee726",
+  "command": [
+    "perl",
+    "-Iperl",
+    "-e",
+    "my $result = do './t/canonical_event_occurrence_order.t';\ndie $@ if $@;\ndie \"queue regression did not load: $!\" unless defined $result;"
+  ],
+  "exit": 0,
+  "stdout": "ok 1 - interleaved residual scan occurrences remain A/B/A rather than raw-key groups\nok 2 - all three occurrences counted\nok 3 - kind telemetry retains duplicate occurrences\nok 4 - equal-text occurrences remain distinct canonical records\nok 5 - private ownership flag does not escape\nok 6 - canonical assembly does not mutate scanner input\nok 7 - authored top-level order precedes the remaining occurrence\nok 8 - consumed occurrences are not replayed\nok 9 - exclusive top-level ownership removes the whole matching raw-key queue\nok 10 - discarded exclusive alternatives are not counted\nok 11 - exclusive flags remain private\nok 12 - blank helper keys are skipped and fallback retained\nok 13 - fallback telemetry is unchanged\nok 14 - empty action has no invented occurrence\nok 15 - matching trims queue keys without altering raw provenance\n1..15\n",
+  "stderr": ""
+}

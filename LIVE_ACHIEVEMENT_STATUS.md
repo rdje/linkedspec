@@ -2,17 +2,19 @@
 
 ## Current Activity
 
-Full PNT: due artifact review complete with zero removals; selected residual occurrence-order compiler repair resumes next.
+Full PNT: residual scan occurrence order repaired under canonical landing condition; nested raw-readiness diagnosis is next.
 
 ## Latest Completed Slice
 
-`REPO-HYGIENE.8`: dated parent/Rust artifact census and fresh independent per-file metadata checks pass; inflated count/balanced wrong sizes reject. Proof logs, outputs and caches retained; all nested repositories/submodules, symlinks/other volumes and managed runs excluded. Zero removals; rendered retention teaching passes.
+`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.1`:9 exact sources/27 before/current native-fresh comparisons, nine stable full sequences,15 current consumer traces and eleven full suites/424 top-level TAP tests pass. Exact before-owner queue has only A/B/A failing; current15-test regression and actual Phase0 child pass. Ten evidence controls reject;325 claim inputs/30 producers and three rendered examples bind proof. Exact staged canonical receipt governs compiler acceptance.
 
 ## Next Action
 
-Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.1 from clean HEAD. Preserve top-level/exclusive ownership and append pending scan occurrences; canonical compiler acceptance before landing. Nested raw .7.0/.1 and quoted-data .7.2 precede dispatcher/full execution.
+Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.0 from clean canonical HEAD. Diagnose nested raw false-ready reporting, then own .7.1 repair and .7.2 quoted false blockers before dispatcher/full composition. Due hygiene .8 is complete; recovery/purge remains prohibited.
 
 ## Recent Completions
+
+- `2026-10-03` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.1` preserves pending scan occurrences; exact canonical receipt gates landing.
 
 - `2026-10-03` — `REPO-HYGIENE.8` verifies the due retained census/per-file controls with zero removals.
 
@@ -43,8 +45,6 @@ Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.1 from clean HEAD. Preserve to
 - `2026-10-03` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.1` binds explicit normalization succession and repairs exact historical audit evolution.
 
 - `2026-10-02` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.0` diagnoses unsupported infix and selects an explicit canonical successor; raw-readiness/audit defects remain owned.
-
-- `2026-10-02` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.3.1` repairs signature/quote ownership with matched public RED/GREEN and required Phase0 proof.
 
 ## History
 

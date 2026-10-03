@@ -10,7 +10,7 @@ answers:
   - "why must callable matches be repaired before deferred attached if"
   - "which tasks own deferred marker and value conditional failures"
 date: 2026-10-03
-status: historical diagnosis retained; matches/attached/marker/value/null/while repairs complete; .0.6 ordering remains separate
+status: historical diagnosis retained; executor/order successors verified separately; nested raw/quoted readiness stays open
 tags: [perl, actionir, callable, control, metadata, nondeterminism, partial]
 evidence: "Literal repair .3.1 retains twenty native/fresh sources: nineteen healthy pairs and exact typed control_if failure on both routes. Controlled hash-seed public descriptor/substitution observations retain residual event permutations. Tracked programs/observations and original source boundaries are in its verification checkpoint and claim record."
 reverify: "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.0-review.py at its captured e07f production boundary; .0.5/.0.6 and startup87.2 intentionally change these observations. Earlier .3.1 order evidence remains historical."
@@ -106,3 +106,12 @@ selects canonical payloads lazily; its current fact is the value executor card. 
 return flags. See perl-callable-while-execution for current proof; prior failures above
 remain historical. Numeric helpers, event ordering/readiness and dispatcher/full execution
 retain their independent owners.
+
+## Current residual-order successor
+
+`.0.6.1` now preserves top-level/exclusive ownership and appends each pending scan occurrence,
+including A/B/A duplicates, without public event fields. Exact source-bound before/current
+native/fresh observations and direct consumers retain their measured semantics; canonical
+acceptance governs compiler landing. Prior hash-order and invalid old-Core classifications
+remain historical. See perl-residual-event-occurrence-order for the current boundary; nested
+raw `.0.7.0/.1` and quoted false blockers `.0.7.2` still precede dispatcher/full execution.

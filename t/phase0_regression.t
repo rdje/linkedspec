@@ -882,6 +882,16 @@ subtest 'actionir_statement_split_core_requires_newline_or_semicolon_boundaries'
     );
     done_testing();
 };
+subtest 'actionir_residual_occurrence_order_regression' => sub {
+    plan tests => 2;
+    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');
+my $result = do './t/canonical_event_occurrence_order.t';
+die $@ if $@;
+die "queue regression did not load: $!" unless defined $result;
+PERL
+    is($exit_code, 0, 'permanent queue occurrence/ownership regression passes') or diag($err || $out);
+    like($out, qr/^1\.\.[1-9][0-9]*$/m, 'the complete standalone assertion plan actually ran');
+};
 subtest 'actionir_canonical_events_require_avoids_core_load_until_build' => sub {
     plan tests => 6;
 

@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-10-03 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.1: preserve pending residual occurrences
+
+Only CanonicalEvents production changes: retain ordered raw-key/reference occurrences alongside queues; replay only pending heads after authored/exclusive top-level consumption. Equal raw A/B/A remains interleaved without public fields or guessed source order. Exact old-owner15-test RED has only order failing; current unit, actual Phase0 child and11 full suites/424 top-level TAP tests pass. Nine exact sources/27 baseline-current native-fresh comparisons have deterministic full records and unchanged measured consumers;15 traces/ten evidence controls pass.325 claim inputs bind30 producing instruments; three executed examples render. First canonical gate rejected the new Phase0 insertion; exact historical-audit normalization recovers prior bytes and rejects six Phase0 drift controls. Isolated134-input/84613241-byte archive replay retains zero original reads/zero tracked writes and27 governance controls. Canonical receipt for the restaged candidate is required. Raw/quoted readiness .7 remains open.
+
 ## 2026-10-03 — REPO-HYGIENE.8: due retained artifact census
 
 Dated parent census retains5661 candidates/10108187384 bytes; three Rust log/bin locations are inspected separately and nine nested repositories excluded. Fresh census and independent per-file lstat match; aggregate inflation and balanced wrong-size controls reject. Zero removals: proof inputs/logs, reusable outputs and caches remain. No process recovery/purge or other-repository write. Track all census/review programs, raw snapshot and verification/claim; overwrite latest-only cleanup record and render retention teaching. Compiler .6.1 resumes next.

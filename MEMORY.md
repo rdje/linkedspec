@@ -1,11 +1,11 @@
 # MEMORY
 
-- activation_commit: `bf1e4edd04371eeddf33f8445239348e12f887f2` — clean daily artifact review activation base.
-- latest_completed_leaf: `REPO-HYGIENE.8 - retain daily artifact census`.
-- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.1` (pending) — bounded residual occurrence-order compiler repair.
-- next_action: Activate .6.1 from clean HEAD, preserve diagnosis/old producer boundaries, prove ordered pending occurrences and unchanged measured consumers, then exact staged canonical acceptance.
-- in_flight_uncommitted: none; daily retained artifact census, independent metadata/controls and latest-only cleanup record are committed.
-- blockers: No access/decision blocker. Matches and attached/marker/value/null/while executors are repaired; bounded control parent is reconciled; order/readiness .6/.7 precede dispatcher/full execution. Other startup repairs remain separate.
+- activation_commit: `5bbceb962cc5aa5fb071b86efa479178e0e25d32` — clean residual-event compiler repair activation base.
+- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.1 - preserve residual event occurrences`.
+- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.0` (pending) — source-bound nested raw-readiness diagnosis.
+- next_action: Activate .7.0 from clean canonical HEAD; use public AST/descriptor/substitution/trace to freeze nested raw blockers and bounded repair ownership; preserve quoted .7.2.
+- in_flight_uncommitted: none; residual occurrence repair, permanent regression, full focused evidence and canonical landing condition are committed.
+- blockers: No access/decision blocker. Matches and attached/marker/value/null/while executors are repaired; control parent/order repair are reconciled; nested raw/quoted readiness .7 precedes dispatcher/full execution. Other startup repairs remain separate.
   Wrapper startup .7 remains open; recovery/purge stay prohibited.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
   active table; the task metadata doctrine inventories all consumers, permits arbitrary frontier-row rewrites,

@@ -22,6 +22,20 @@ NORMALIZATION_CORRECTION_OWNER = "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.1"
 SIGNATURE_REPAIR_OWNER = "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.3.1"
 SIGNATURE_BEFORE = "67af62f7aa6dff39b6c3fd64b15fb5139f691a0a"
 SIGNATURE_AFTER = "446fb65fadca2e1bd31fec93bb9de779eb2134d1"
+OCCURRENCE_REPAIR_OWNER = "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.1"
+OCCURRENCE_ANCHOR = b"subtest 'actionir_canonical_events_require_avoids_core_load_until_build' => sub {\n"
+OCCURRENCE_INSERTION = (
+    b"subtest 'actionir_residual_occurrence_order_regression' => sub {\n"
+    b"    plan tests => 2;\n"
+    b"    my ($exit_code, $out, $err) = run_perl_snippet_in_subprocess(<<'PERL');\n"
+    b"my $result = do './t/canonical_event_occurrence_order.t';\n"
+    b"die $@ if $@;\n"
+    b'die "queue regression did not load: $!" unless defined $result;\n'
+    b"PERL\n"
+    b"    is($exit_code, 0, 'permanent queue occurrence/ownership regression passes') or diag($err || $out);\n"
+    b"    like($out, qr/^1\\.\\.[1-9][0-9]*$/m, 'the complete standalone assertion plan actually ran');\n"
+    b"};\n"
+)
 # Only these reviewed CI insertions and Perl inventory replacements may evolve
 # historical executable inputs. Normalization must recover every original byte.
 CI_INSERTIONS = (
@@ -157,15 +171,20 @@ def verify_signature_regression_evolution(source, contents, historical_hash):
     require(source == "t/phase0_regression.t", f"unapproved signature regression source: {source}")
     before = git("show", f"{SIGNATURE_BEFORE}:{source}")
     after = git("show", f"{SIGNATURE_AFTER}:{source}")
-    require(contents == after, f"unreviewed signature-regression drift: {source}")
+    require(contents.count(OCCURRENCE_INSERTION + OCCURRENCE_ANCHOR) == 1,
+            f"occurrence regression registration mismatch: {source}")
+    prior = contents.replace(OCCURRENCE_INSERTION + OCCURRENCE_ANCHOR,
+                             OCCURRENCE_ANCHOR, 1)
+    require(prior == after, f"unreviewed signature-regression drift: {source}")
     # Replace only the exact owned subtest, including its fixed/dynamic plan change.
-    normalized = contents.replace(signature_subtest(after), signature_subtest(before), 1)
+    normalized = prior.replace(signature_subtest(after), signature_subtest(before), 1)
     require(normalized == before and digest(normalized) == historical_hash,
             f"unreviewed signature-regression history: {source}")
     return {"path": source, "historical": historical_hash, "current": digest(contents),
             "owner": SIGNATURE_REPAIR_OWNER, "reconciliation_owner": NORMALIZATION_CORRECTION_OWNER,
+            "occurrence_repair_owner": OCCURRENCE_REPAIR_OWNER,
             "before_revision": SIGNATURE_BEFORE, "after_revision": SIGNATURE_AFTER,
-            "scope": "exact committed signature subtest and plan replacement only; original Phase0 bytes recovered"}
+            "scope": "exact occurrence regression insertion and committed signature subtest/plan replacement only; original Phase0 bytes recovered"}
 
 
 def verify_perl_storage_evolution(source, contents, historical_hash):
@@ -385,15 +404,22 @@ def falsify(report):
             reasons = ("Perl storage registration mismatch:", "unreviewed Perl storage drift:")
         elif source == "t/phase0_regression.t":
             before = git("show", f"{SIGNATURE_BEFORE}:{source}")
-            owned = signature_subtest(current)
+            # Isolate the original signature controls from the new recurrence.
+            owned = signature_subtest(current.replace(OCCURRENCE_INSERTION + OCCURRENCE_ANCHOR,
+                                                       OCCURRENCE_ANCHOR, 1))
             altered = (
                 current.replace(owned, signature_subtest(before), 1),
                 current.replace(owned, owned.replace(b"    done_testing();\n",
                                                     b"    plan tests => 8;\n", 1), 1),
                 current + b"# unreviewed edit outside the owned subtest\n",
+                current.replace(OCCURRENCE_INSERTION, b"", 1),
+                current.replace(OCCURRENCE_INSERTION, OCCURRENCE_INSERTION * 2, 1),
+                current.replace(OCCURRENCE_INSERTION,
+                                OCCURRENCE_INSERTION.replace(b"    plan tests => 2;\n",
+                                                             b"    plan tests => 1;\n"), 1),
             )
             verify = verify_signature_regression_evolution
-            reasons = ("unreviewed signature-regression drift:",
+            reasons = ("occurrence regression registration mismatch:", "unreviewed signature-regression drift:",
                        "unreviewed signature-regression history:", "signature regression marker mismatch:")
         else:
             raise ValueError(f"unapproved governance control source: {source}")

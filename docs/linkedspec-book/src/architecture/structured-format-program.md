@@ -1579,17 +1579,28 @@ literal kind, complete-format self-containment or other-backend admission. Compi
 event ordering and nested raw-expression readiness still need independent correction;
 working runtime results do not prove portable metadata.
 
-### Residual metadata diagnosis remains distinct from callable execution
+### Stable residual metadata remains distinct from portable readiness
 
-The bounded deferred-control parent is canonically reconciled. A separate current
-nine-source diagnosis retains27 native/fresh observations, six original public captures,
-15 lowering traces and four focused suites (34 top-level TAP tests). Four residual event
-sequences permute while measured lowering, readiness counts and values remain stable.
-The next compiler slice preserves top-level ownership and residual scan occurrences;
-it must not turn a raw-key grouping into an apparent source-order contract.
+The bounded callable-control parent is canonically reconciled. The separate residual-order
+repair preserves top-level/exclusive ownership and each remaining helper-scan occurrence.
+Nine exact sources under three controlled seeds retain27 before/after native/fresh comparisons;
+current full event records have one ordered sequence per source. Eleven focused suites pass
+424 top-level TAP tests, including the15-assertion occurrence regression. The exact new Phase 0
+child also runs; canonical acceptance of the staged compiler candidate gates landing.
 
-The quoted string `"return(inner); if(true)"` executes as literal data yet currently creates
-false helper/control metadata. That P1 defect is scheduled under `.0.7.2`; nested raw
-false-ready reporting remains `.0.7.0/.1`. See the [ActionIR order explanation](../dsl/actionir-lowering-mental-model.md#canonical-event-order-and-execution)
-for exact executed examples and the limits of these observations. None of this closes
-dispatcher/full composition, arbitrary overlap, or another backend's readiness.
+The historical objective audit accepts only the exact new Phase 0 regression insertion.
+Removing it recovers every prior byte; six corruption controls reject signature/plan drift,
+unrelated edits, and missing, duplicate or altered recurrence. The isolated archived evidence
+replay remains read-only toward original logs and tracked captures. It does not claim new
+runtime execution of the historical objectives.
+
+Source-identical substitutions, ASTs, dumps/emitted bytes, metadata populations/counts and
+native/fresh values remain unchanged in the measured controls. Fifteen current lowering traces
+retain their actual consumer decisions; ten evidence corruptions reject. Scan precedence is
+not global source order or arbitrary-overlap equivalence.
+
+The quoted string `"return(inner); if(true)"` still executes as data yet creates false
+helper/control metadata. P1 `.0.7.2` owns that repair; nested raw false-ready reporting remains
+`.0.7.0/.1`. See the [ActionIR order explanation](../dsl/actionir-lowering-mental-model.md#canonical-event-order-and-execution)
+for exact executed examples. Stable order does not close readiness, dispatcher/full composition
+or another backend's behavior.

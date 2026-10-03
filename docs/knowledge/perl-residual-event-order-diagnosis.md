@@ -9,10 +9,10 @@ answers:
   - "why does helper-looking quoted text create false readiness blockers"
   - "which task owns quoted-payload helper metadata repair"
 date: 2026-10-03
-status: current bounded diagnosis; order repair .0.6.1 and quoted repair .0.7.2 pending
+status: historical diagnosis at bf1e4edd; .0.6.1 is the current order-repair successor; readiness remains open
 tags: [perl, actionir, metadata, nondeterminism, provenance, readiness]
 evidence: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.0 retains27 source-bound native/fresh observations, six original public captures,15 public substitution traces, four complete suites/34 top-level TAP tests and ten observed evidence corruptions."
-reverify: "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.0-review.py; public capture.py and trace-capture.py emit new raw observations to stdout only. Never rerun original-order.py, the historical initial capture writer."
+reverify: "Use .0.6.0 reviewer only at captured bf1e4edd inputs. Current repair evidence: bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.1-review.py. Never rerun historical original-order.py."
 ---
 
 At cleanbb615f387, CanonicalEvents::_build_canonical_action_ir_events queues helper events
@@ -50,3 +50,7 @@ ordered helper provenance, canonical event multisets, counts and runtime expecta
 traces and complete TAP. Ten evidence corruptions reject, including erased permutation,
 missing occurrence and removed consumer decisions. They are report controls, not runtime mutants.
 All tracked Perl/spec/test input bytes equal activation Git blobs; no executable change occurs.
+
+Current succession: `.0.6.1` preserves pending occurrences using an ordered list alongside
+raw-key queues. See [the current repair fact](perl-residual-event-occurrence-order.md).
+All diagnosis arrays/streams and its historical claim hashes/results remain exact.
