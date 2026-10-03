@@ -1123,12 +1123,14 @@ used by ordinary `.spec` syntax on every backend.
   Canonical plan: Fully stage the complete clean candidate and run approved-host tools/run_ci_local.sh; record actual exit, CLI/RAM/Phase0 and candidate/log identities in the commit/receipt, without post-gate tracked edits. Commit per COMMIT.md, clear brief0 and verify clean HEAD before .1.3.3.0.2 activation.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2`
-  Status: `active`
+  Status: `done`
   Goal: Bridge registered pure-function calls from deferred bodies through the existing compiler function lowering, with fresh local state and unchanged static precedence.
   Dependencies: `.1.3.3.0.1`; exact function/variadic/contextual-codeblock contracts; startup32 remains a separate known limitation before dependent claims.
   Acceptance: Declare the compiled registry/context interface and exact owned paths before implementation. Reuse central function-body lowering; do not create a partial second function evaluator or store closures/environments in codeblock records. Cover once-only ordered caller arguments, signatures/rest/final-codeblock forms, fresh locals, nested calls, genuine unknown calls, recursion and native/emitted equivalence. Preserve startup19/32/35/87 ownership and report any newly implicated prerequisite.
   Children: `.1.3.3.0.2.0`, `.1.3.3.0.2.1`
   New P1 prerequisite: Public Get controls reveal that an externally supplied callback invoked by a pure function reads unrelated rule-caller slots. The generated invoke includes callback/cb/secret references inherited from the caller inventory. Direct function reads are fresh and a declared function-local secret controls correctly. Repair .0.2.0 before constructing the registered-function bridge; this is distinct from startup32 argument-local shadowing.
+
+  Reconciled by .0.2.1.2: Committed children and exact retained source/capture boundaries, original seven native/fresh controls,750 tracked tests, twelve source/result corruptions, guarded archive audit and neutral governance establish bounded completion. Exact staged canonical receipt is required before landing this parent closeout. Original infix failure and independent .0.5/.0.6/.0.7/startup/full-execution owners remain unchanged.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.0`
   Status: `done`
@@ -1183,12 +1185,14 @@ used by ordinary `.spec` syntax on every backend.
   Canonical plan: Stage the complete candidate with no unstaged/non-ignored inputs, run approved-host tools/run_ci_local.sh to .linkedspec-data/scratch/selfcontain1330202/canonical.log, and record actual candidate/log identities, exit/CLI/RAM/Phase0 in the commit and promoted receipt without tracked post-gate edits. Canonical acceptance governs proposed parent closure; if the gate fails, retain ownership and repair before landing. Next .0.2.1 activates only from clean committed closeout HEAD.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1`
-  Status: `active`
+  Status: `done`
   Goal: Implement the compiler-owned registered-function bridge after the function callback scope prerequisite closes.
   Dependencies: `.1.3.3.0.2.0`
   Acceptance: Reuse central function-body lowering with exact signatures, final-codeblock normalization, argument order, fresh locals, nested calls and recursion diagnostics. Declare any interface movement and broaden proof before edits; preserve the eight-field record and distinct startup32 limitation. Parent .0.2 closes only after full bounded native/emitted acceptance.
   Children: `.1.3.3.0.2.1.0`, `.1.3.3.0.2.1.1`, `.1.3.3.0.2.1.4`, `.1.3.3.0.2.1.3`, `.1.3.3.0.2.1.2`
   Slice boundary: Contract/probe .0 freezes the explicit generated invocation interface before implementation .1 changes it; canonical reconciliation .2 alone closes this bridge and parent .0.2. No partial second function evaluator or closures in codeblock records.
+
+  Reconciled by .0.2.1.2: Committed children and exact retained source/capture boundaries, original seven native/fresh controls,750 tracked tests, twelve source/result corruptions, guarded archive audit and neutral governance establish bounded completion. Exact staged canonical receipt is required before landing this parent closeout. Original infix failure and independent .0.5/.0.6/.0.7/startup/full-execution owners remain unchanged.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.0`
   Status: `done`
@@ -1249,14 +1253,38 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 - [x] **LOCKSTEP** — Checkpoint, Knowledge, book, roadmap/frontier and bounded continuity agree on bounded bridge completion and separate P1 literal/loop prerequisites. No complete neutral execution, semantic-mutant or other-backend admission claim follows.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.2`
-  Status: `pending`
+  Status: `done`
   Goal: Independently reconcile the committed bridge and original controls, then close .0.2.1 and .0.2 under canonical proof.
   Dependencies: `.1.3.3.0.2.1.1`, committed `.1.3.3.0.2.1.4.0`/`.1.3.3.0.2.1.4.1`, `.1.3.3.0.2.1.3`, `.1.3.3.0.4`; normalization must satisfy the existing oracle and artifact recovery .0.4.2 must close before this canonical reconciliation. This leaf also reconciles parent .4, so parent status is not its own prerequisite.
   Planned proof: Exact committed source/checkpoint/log reconciliation, original seven controls and authorized normalization-calls successor on both public producers, unchanged authorities and remaining repair owners, rendered book and exact staged canonical CI. Preserve original normalization.spec and its historical infix failure; do not require that unsupported source to become healthy.
   Acceptance: Close only after native/fresh emitted results and ordered effects agree with the existing oracles and the actual recursion/slot guards are exercised. Full neutral sixteen-case execution stays owned by .1.3.3.1.
 
+  Activation: Clean0075a5b163cd9690d4ad70b1c8ea1da796088ab5; artifact recovery canonical/ten commit hooks/post-pointer/promoted receipt PASS, brief0 and no required jobs. Relevant bridge/parent prerequisites, original source/control checkpoints and producer recovery, normalization governance and selected artifact recovery reviewed. No production/dependency/schema or historical capture edits.
+  Owned paths / plan: New .0.2.1.2 read-only public native/fresh probe, reviewer and verification capture under docs/checkpoints; new claim under docs/claims. Freeze the newly completed .4.1 audit/.4.2.0/.4.2.1 live durability legs at actual0075 without changing input hashes/results; retain the earlier normalization leg's0f15 revision. Current task/parent closure, index/roadmap/live continuity, relevant bridge/normalization/recovery Knowledge and governing/book teaching move together. Scratch .linkedspec-data/scratch/bridge-reconciliation. Preserve original sources/checkpoints/authorities and actual .0.5/.0.6/.0.7/startup owners; no historical writer replay in current checkout. Declare additional paths here before editing.
+  Verification tier: `canonical`
+  Focused checks: Exact committed source/authority/checkpoint/producer recovery reconciliation; original seven controls and authorized normalization successor on native/public dump/fresh emitted routes; actual registered-call recursion/slot/identity/effect/error guards through unchanged tracked regressions; source-bound control corruption and honest historical/original-failure boundary; artifact read-denied audit, rendered book/Knowledge/history/memory/doctrines/diff.
+  Canonical trigger: Independent milestone/parent closeout requires exact fully staged canonical receipt; no new runtime/authority/CI behavior is planned.
+  Claim verification: `docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.2.json`
+  Acceptance boundary: Reconcile only .0.2.1/.0.2 and their literal/durability/normalization prerequisites from committed evidence plus selected fresh proof. Full neutral sixteen-case/semantic-mutant execution, dispatcher and independent .0.5/.0.6/.0.7/startup defects remain separate.
+
+  Reviewer correction: The first read-only attempt rejected the intentionally corrected composed authority against its older bridge hash. Exclude only that governed source-correction input from the older-byte comparison; separately require the exact authorized loop and unchanged current neutral oracles. Do not refresh the old capture. Final reviewer also checks nonempty public dumped source and exact original emitted identities. No repository defect or runtime waiver follows from that instrument assumption.
+
+  Verification: PASS seven original native/fresh controls with byte-exact original emitted sources;750 completed tests across eight unchanged suites (bridge605, six direct dependents124, normalization21). Fourteen original bridge/checkpoint/authority inputs and26 historical producer/Git bodies remain exact. Twelve source/result/event-order/quiet/rejection corruptions reject. The literal regression's extra signature assertion explains current dependent124 versus dated123; no historical measurement is refreshed. Independent guarded artifact audit134 inputs/24 checkpoints/257 references/149 current inputs and22 recovery/15 CI/six storage/three Phase0 controls PASS with healthy0 original reads/0 tracked writes. Neutral152/16/44 and rendered book PASS. Claim captures all nine new log byte streams and121 tracked byte inputs. No production/test/fixture/authority/CI/dependency edits.
+  Pre-canonical disclosure correction: Eight doctrines pass; claim verification rejects an unsupported durability result key and producer-input role label in the new strict record. Remove only that prose field and use the existing producer role; all121 inputs and actual measurements remain unchanged. Verification cadence also requires the not-yet-produced exact canonical receipt, so it is earned through the canonical driver rather than bypassed.
+  Canonical plan: Fully stage the complete candidate, then approved-host tools/run_ci_local.sh writes .linkedspec-data/scratch/bridge-reconciliation-canonical.log. Exact candidate/log/exit/CLI/RAM/Phase0 identities belong to the ignored commit brief and promoted receipt, without tracked post-gate edits. The required gate remains this leaf's ownership until completion; no next activation while dirty. Next eligible leaf .0.5.0 diagnoses deferred attached control from committed clean HEAD.
+  Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.2 - reconcile committed function bridge prerequisites`.
+
+### `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.2` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Original Get/descriptor/dump/fresh observations and retained historical checkpoints identify the bounded registered-call, literal and normalization prerequisites.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Committed MethodLowering/CodeblockRuntime/BindingRuntime source identities preserve central compiled dispatch, fresh frames and opaque recursion origins; StatementSplit repair and explicit call-form successor retain separate causal records.
+- [x] **FIX** — Reconcile committed children and parents through a new read-only public probe/reviewer; freeze selected recovery claims at actual0075 while retaining normalization0f15 and every old measurement/input identity.
+- [x] **ADDRESSED (verified)** — Seven original paired controls,750 completed tracked tests,26 exact recovered source bodies and twelve intended reviewer REDs pass; actual runtime recursion/slot/identity/effect/exception/alias guards stay exercised.
+- [x] **NO REGRESSION** — Original sources/checkpoints/authorities remain exact; neutral governance and guarded artifact audit pass. Exact staged canonical CI supplies required Phase0/broader acceptance before parent landing.
+- [x] **LOCKSTEP** — Claim/capture, book/Knowledge/task/index/roadmaps and bounded continuity agree on bounded parent closure; independent dispatcher/control/order/readiness/startup/full-execution owners retain scope.
+
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.4`
-  Status: `active`
+  Status: `done`
   Priority: P1 — retain recoverable instruments before any scratch cleanup or bridge closeout.
   Goal: Reconcile prior callable checkpoints' replay-producer durability and finish the requested claim-policy source/adoption review under explicit ownership.
   Dependencies: clean .0.2.1.1 handoff; no pivot while bridge implementation is dirty.
@@ -1265,6 +1293,8 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
   Acceptance: Every selected replay claim has a recoverable tracked instrument or a named, scheduled durability repair with exact source boundary. Adopt applicable claim-verification rules explicitly and own any broader constants/untracked-producer sweep before claiming policy completion. Declare focused/canonical tier and exact paths only at clean activation. Valid-literal and normalization repairs retain separate owners.
   Children: `.1.3.3.0.2.1.4.0`, `.1.3.3.0.2.1.4.1`; preservation lands before policy adoption so neither becomes an oversized slice.
   Reconciliation: Both children preserve sources and adopt bounded working rules; wider audit remains open. Parent reconciliation is retained for the canonical bridge closeout .0.2.1.2 after literal/normalization prerequisites, not inferred from one child commit.
+
+  Reconciled by .0.2.1.2: Committed children and exact retained source/capture boundaries, original seven native/fresh controls,750 tracked tests, twelve source/result corruptions, guarded archive audit and neutral governance establish bounded completion. Exact staged canonical receipt is required before landing this parent closeout. Original infix failure and independent .0.5/.0.6/.0.7/startup/full-execution owners remain unchanged.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.4.0`
   Status: `done`
@@ -1385,7 +1415,7 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 - [x] **LOCKSTEP** — Public book/causal cards, watched claims/checkpoint, task/roadmap/frontier and bounded continuity retain matching corrected behavior; separate .0.4/.0.5/.0.6 own the remaining prerequisites.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4`
-  Status: `pending`
+  Status: `done`
   Priority: P1 — the frozen normalization objective fails after repaired callback function dispatch.
   Goal: Resolve the selected normalization loop/source-contract mismatch before dispatcher closeout and neutral runtime execution.
   Dependencies: clean registered bridge/literal prerequisite handoff; no pivot while .0.2.1.1 is dirty.
@@ -1393,6 +1423,8 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
   Root boundary: These expressions remain unlowered; cause and normative status of infix source versus admitted num_lt/num_add helpers need .0 diagnosis. The current attached-while fact explicitly proves the helper-spelled form. Do not label an unverified syntax extension as an admitted compiler defect, silently change frozen sources, or count this plain native/fresh runtime failure as a semantic mutant.
   Children: `.1.3.3.0.4.0`, `.1.3.3.0.4.1`, `.1.3.3.0.4.2`
   Acceptance: Minimize with Get/descriptor/substitution/dumped source and compare canonical arithmetic/while contracts and source selection. Choose an owning compiler correction or explicit fixture/authority correction with historical preservation, then prove healthy original/authorized successor observations and exact no-drift before parent closeout. Startup87 numeric codeblock dispatch remains separate.
+
+  Reconciled by .0.2.1.2: Committed children and exact retained source/capture boundaries, original seven native/fresh controls,750 tracked tests, twelve source/result corruptions, guarded archive audit and neutral governance establish bounded completion. Exact staged canonical receipt is required before landing this parent closeout. Original infix failure and independent .0.5/.0.6/.0.7/startup/full-execution owners remain unchanged.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.0`
   Status: `done`
@@ -1791,7 +1823,7 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 | 33 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.4.1` | `done` | Three-leg working rules and watched-source doctrine adopted; broader startup5/29 audit remains open. |
 | 34 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.3.0` | `done` | Host quote mode consumes the signature closer; exact intervention/restoration and eight paired controls locate .3.1 repair. |
 | 35 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.3.1` | `done` | Exact quote-aware signature protection;19 healthy paired controls,729 dependents and required Phase01033/1231s; new .0.5/.0.6 remain owned. |
-| 36 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.2` | `pending` | Canonical committed bridge reconciliation closes .0.2.1/.0.2 after literal repair. |
+| 36 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.2` | `done` | Canonical committed bridge reconciliation closes .0.2.1/.0.2 after literal repair. |
 | 37 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.0` | `done` | Eleven public pairs locate unsupported infix; select canonical call-form successor and retain raw-readiness .0.7/audit owners. |
 | 38 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.1` | `done` | Exact one-loop successor, seven paired cases and narrow historical audit verified; canonical receipt governs landing. |
 | 38.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.2.0` | `done` | Exact134-input census and closed archive/restoration plan; recovery remains open. |

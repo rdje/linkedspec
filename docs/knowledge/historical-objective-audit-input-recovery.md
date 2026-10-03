@@ -9,7 +9,7 @@ answers:
   - "why did normalization mode proof need an ignored audit report"
   - "what is the exact historical audit artifact population and recovery format"
 date: 2026-10-03
-status: Selected134-log recovery verified under SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.2.1; canonical parent landing required
+status: Selected134-log recovery committed under0075a5b; bridge reconciliation preserves the historical capture
 tags: [claims, durability, artifacts, historical-audit, input-coverage]
 evidence: "The .0.4.1 author review follows verify_objectives.py's actual read(log) hash loop. Its134 local artifact inputs total84,613,241 bytes; the selected24 checkpoints total214,367 bytes. Concrete context-lua-storage.log is501 bytes, has no Git path history and its actual TAP timing line is absent from those selected checkpoints. The new audit capture records hashes without complete byte recovery. This is a new-claim coverage gap, not blanket classification of all earlier proof. The normalization-only public review consumes no legacy log and writes no tracked file. .0.4.2 must verify selected recovery before bridge parent closure."
 reverify:
@@ -76,3 +76,10 @@ milestone/census captures remain intact. Only selected .4.1/.4.2.0 durability ga
 are explicitly superseded; their original measurements and falsifiers remain exact.
 One recurring proof/thirteen inputs are registered. Wider startup5/29 auditing,
 bridge/dispatcher and complete D/P/backend/format admission remain separate.
+
+The recovery canonical boundary landed at0075a5b163cd9690d4ad70b1c8ea1da796088ab5.
+Bridge reconciliation `.0.2.1.2` freezes only the newly completed durability legs
+at that committed revision; normalization remains historical at0f15. No earlier
+measurement or input identity is refreshed. Its selected audit replay again checks
+restored bytes under original-log denial; that integrity proof does not re-execute
+the historical runtime producers.

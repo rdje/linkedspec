@@ -12,6 +12,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-10-03 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.2: reconcile committed function bridge prerequisites
+
+- Reconcile bounded function-bridge, literal, source-correction and producer-durability parents through new read-only public native/fresh instruments; preserve every original source/capture and the historical infix failure.
+- Seven original controls retain exact emitted identities; eight unchanged suites pass750 tests (605 bridge/124 dependents/21 normalization).26 recovered producer/Git bodies,14 original bridge/checkpoint/authority identities and12 intended observation/source rejections pass. Complete nine-log observations and121 tracked inputs are retained in the new capture/claim.
+- Guarded archive audit and neutral152/16/44 pass; book/Knowledge/history/memory/doctrines and exact staged canonical CI govern parent landing. Freeze only newly completed recovery claim legs at0075, retaining normalization0f15 and original hashes/results.
+- Next .0.5.0 diagnoses deferred attached control; ordering/readiness, dispatcher/full16 execution and startup defects retain separate ownership. No production/test/authority/CI/dependency change.
+
 ## 2026-10-03 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.2.1: recover historical audit artifact inputs
 
 Retain a deterministic3,406,206-byte ZIP/closed manifest for the exact134 original log inputs/84,613,241 bytes. Independent milestone/census authority, bounded read-only validation and exclusive managed restoration reject corrupt content/members/paths/symlinks/overwrites. Actual isolated restoration/regeneration and22 recovery controls PASS; full historical audit24/257/149/134 with four input/two path/15 CI/six storage/three Phase0 controls and summary inflation pass under healthy zero original-log reads/tracked writes. Deliberate actual probes validate denial guards. One recurring proof/thirteen inputs normalize newest-first, preserving all prior CI bytes. Original logs/milestone/census/.4.1 captures and old claim measurements remain exact; explicitly supersede only the two selected durability gaps through184 retained inputs. Repair stale Toolbox neutral counters/navigation, sync book/Knowledge/roadmap/live state. Focused source/CLI/determinism/history/book/doctrines plus exact staged canonical receipt govern artifact parent landing; bridge/dispatcher/full D/P/backend/format and wider startup5/29 remain separate.

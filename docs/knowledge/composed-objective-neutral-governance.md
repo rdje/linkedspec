@@ -52,7 +52,7 @@ checker with hostile external roots; all writes remain on repository storage.
 [[bounded-composed-objective-selection]] preserves diagnostic9/normalization7
 requirements and current pilot limits. [[perl-codeblock-composition-dispatch-gap]]
 owns P1 repair `.1.3.3.0` before execution `.1.3.3.1`; its push child is verified
-in [[perl-codeblock-push-composition]], with the registered-function bridge verified and canonical reconciliation `.0.2.1.2` next after normalization. Startup87.2/.3 and all wider
+in [[perl-codeblock-push-composition]], with the registered-function bridge verified and canonical reconciliation `.0.2.1.2` owning bounded bridge parent acceptance. Startup87.2/.3 and all wider
 repairs retain their independent prerequisites. [[language-closure-definition-reconciliation]]
 remains structural closure proof. Whole formats, indentation/quotes/comments,
 richer recovery/resources/performance/security and runtime admission remain pending.
@@ -80,7 +80,8 @@ preserving all other historical bytes. A no-op old block-removal control is corr
 to remove an actual artifact registration; every counted mutation must change bytes.
 Complete D/P semantic execution and `.0.5/.0.6/.0.7` remain independent owners.
 
-The .4.1 claim separates normalization proof from a disclosed historical-audit
-artifact-input durability gap. [[historical-objective-audit-input-recovery]] owns
-selected134-log recovery under `.0.4.2` before bridge parent signoff; current hash
-verification does not imply archival byte recovery or certify all older claims.
+The .4.1 claim separates normalization proof from the historical-audit input
+durability gap disclosed at that capture. Committed `.0.4.2.1` closes selected134-log
+recovery through the archive and guarded audit in
+[[historical-objective-audit-input-recovery]]. `.0.2.1.2` reconciles those bounded
+prerequisites; this does not certify all older claims or complete runtime admission.

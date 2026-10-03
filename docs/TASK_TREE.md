@@ -1,6 +1,6 @@
 # Repo-Local Task Tree Workflow
 
-October 3 artifact recovery: SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.2.1 retains134 exact historical log inputs/84,613,241 bytes in a3,406,206-byte archive. Isolated restoration/regeneration,22 recovery controls and full24/257/149/134 audit with15/6/3 governance mutations pass under healthy zero original reads/tracked writes. Canonical artifact parent landing precedes bridge reconciliation .0.2.1.2; P1 .0.5/.0.6/.0.7 remain independent.
+October 3 bridge reconciliation: SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.2 independently checks the committed bridge, original seven controls and authorized normalization successor. Bounded bridge/literal/source/durability parents are reconciled under required exact canonical acceptance; next .0.5.0 diagnoses deferred control; P1 .0.5/.0.6/.0.7 remain before dispatcher and complete neutral execution.
 
 Latest maintenance: REPO-HYGIENE.7 records the due artifact review with zero removals and archived census instruments; every other repository/submodule remains read-only and excluded. Feature next action follows the current frontier above.
 

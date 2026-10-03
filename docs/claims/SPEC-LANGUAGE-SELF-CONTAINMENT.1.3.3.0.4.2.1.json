@@ -5,7 +5,7 @@
     {
       "name": "isolated-historical-artifact-recovery",
       "statement": "All134 selected original audit log bytes are retained in a closed archive and restored exactly; historical integrity audit and distinguishing controls pass without reading original local logs or writing tracked files.",
-      "scope": "Exact134-input population/84,613,241 bytes reconstructed independently from48/39/47 milestone maps. ZIP3406206 bytes SHA2564f48d1dacd2de861a2b9ebdcb361b30a8d0084cc88700edf39801cee1df1a715; fixed 4MiB compressed/96MiB expanded bounds.22 actual recovery controls, four audit input/two path controls and15 CI/six storage/three Phase0 controls. Runtime observations remain historical; bridge/dispatcher/full D/P/other backend/format admission and wider startup5/29 audits remain separate.",
+      "scope": "Exact134-input population/84,613,241 bytes reconstructed independently from48/39/47 milestone maps. ZIP3406206 bytes SHA2564f48d1dacd2de861a2b9ebdcb361b30a8d0084cc88700edf39801cee1df1a715; fixed 4MiB compressed/96MiB expanded bounds.22 actual recovery controls, four audit input/two path controls and15 CI/six storage/three Phase0 controls. Runtime observations remain historical; bridge/dispatcher/full D/P/other backend/format admission and wider startup5/29 audits remain separate. Selected recovery durability capture is historical at committed0075a5b163cd9690d4ad70b1c8ea1da796088ab5; later reconciliation does not refresh these measurements or input hashes.",
       "rederive": {
         "status": "checked",
         "command": "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.2.1-proof.py",
@@ -20,7 +20,7 @@
       },
       "durability": {
         "status": "checked",
-        "mode": "live",
+        "mode": "historical",
         "inputs": [
           {
             "path": "capability_conformance/inter_match_gap_capture_contract.json",
@@ -942,7 +942,8 @@
             "sha256": "fee9a7dc971b5adbd194caf572b9aaedc77f8c9d0c9785e4a90665c977faa0e9",
             "role": "input"
           }
-        ]
+        ],
+        "revision": "0075a5b163cd9690d4ad70b1c8ea1da796088ab5"
       }
     }
   ]

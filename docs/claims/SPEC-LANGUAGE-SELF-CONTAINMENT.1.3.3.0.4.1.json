@@ -1484,7 +1484,7 @@
     {
       "name": "historical-objective-audit-byte-evolution",
       "statement": "The historical .4.1 audit preserved source identities through exact owned CI/storage/Phase0 evolution; its selected byte-recovery durability gap is now explicitly superseded by .4.2.1.",
-      "scope": "Actual local run:24 checkpoints/257 references/149 current source inputs/134 retained log hashes;12 CI/six storage/three Phase0 actual-byte corruption controls. Historical runtime proof is not a fresh objective or backend admission. The prior byte-recovery durability gap is explicitly superseded only by .4.2.1 isolated archive recovery/read-denied audit; original measurements, rederive and falsify results remain unchanged. Coverage and governance counts retain their original capture-time boundary; they are not refreshed by the added archive or CI registration.",
+      "scope": "Actual local run:24 checkpoints/257 references/149 current source inputs/134 retained log hashes;12 CI/six storage/three Phase0 actual-byte corruption controls. Historical runtime proof is not a fresh objective or backend admission. The prior byte-recovery durability gap is explicitly superseded only by .4.2.1 isolated archive recovery/read-denied audit; original measurements, rederive and falsify results remain unchanged. Coverage and governance counts retain their original capture-time boundary; they are not refreshed by the added archive or CI registration. Selected recovery durability capture is historical at committed0075a5b163cd9690d4ad70b1c8ea1da796088ab5; later reconciliation does not refresh these measurements or input hashes.",
       "rederive": {
         "status": "checked",
         "command": "bash tools/run_python_project_data.sh tests/language-readiness/verify_objectives.py",
@@ -1499,7 +1499,7 @@
       },
       "durability": {
         "status": "checked",
-        "mode": "live",
+        "mode": "historical",
         "inputs": [
           {
             "path": "capability_conformance/inter_match_gap_capture_contract.json",
@@ -2421,7 +2421,8 @@
             "sha256": "fee9a7dc971b5adbd194caf572b9aaedc77f8c9d0c9785e4a90665c977faa0e9",
             "role": "input"
           }
-        ]
+        ],
+        "revision": "0075a5b163cd9690d4ad70b1c8ea1da796088ab5"
       }
     }
   ]

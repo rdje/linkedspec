@@ -7,7 +7,7 @@ answers:
   - "which correction owns normalization-calls.spec"
   - "why do raw infix expressions report language agnostic ready"
   - "does correcting the normalization fixture resolve raw expression telemetry"
-date: 2026-10-02
+date: 2026-10-03
 status: explicit call-form successor verified; independent raw-readiness repair remains
 tags: [perl, normalization, arithmetic, control, readiness, raw-perl, source-binding]
 evidence: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.0 tracks eleven native/fresh controls and source-bound review; original fixture/selection/authority bytes and production remain exact. Seven admitted-form controls succeed, two infix host calls fail and two infix host-behavior controls retain incorrect DSL-intent results."
@@ -51,10 +51,11 @@ logs, with12 CI/six storage/three Phase0 mutations. Earlier diagnosis/pilot resu
 above remain historical; the full D/P semantic-mutant lane and `.0.5/.0.6/.0.7`
 are separate from this correction.
 
-The historical audit's134 local artifact inputs have a separately disclosed
-recovery gap; [[historical-objective-audit-input-recovery]] routes P1 `.0.4.2`.
-Its hash report is not source-complete fresh-checkout recovery. The seven-case
-normalization proof has retained public producers and complete captures.
+The historical audit's originally disclosed134-input recovery gap is closed by
+committed `.0.4.2.1`; [[historical-objective-audit-input-recovery]] retains the
+exact archive/restoration boundary. `.0.2.1.2` independently reconciles the explicit
+loop difference and seven-case normalization observations before bounded parent
+closure. The original infix failure and independent raw-readiness defect remain.
 
 A separate policy defect survives fixture correction. The infix controls have raw
 AST descendants yet report ready1/raw0/fallback0/unresolved0. i=2; i=i+1 returns1;

@@ -1238,9 +1238,36 @@ original isolated composition controls now succeed on both producers.
 
 The later `.0.2.1.3.1` repair protects callable signature pipes, including `x,y` and operator-named
 rest parameters. The original frozen pipeline retains its historical infix failure; the explicit call-form
-successor passes all seven normalization cases. Historical audit-input recovery `.0.4.2` is verified for the134 selected logs; canonical bridge reconciliation remains next.
+successor passes all seven normalization cases. Historical audit-input recovery `.0.4.2` is committed for the134 selected logs;
+independent `.0.2.1.2` reconciles the bridge and these bounded prerequisites under
+exact staged canonical acceptance. Deferred attached-control execution, residual
+metadata ordering and nested raw-expression readiness remain separate repairs.
 Startup32 argument/local-name shadowing, startup19/35/87 and other backend lanes retain their owners.
 Recognized-source readiness does not prove runtime coverage.
+
+### Independently checking the committed bridge
+
+The closeout reviewer reruns the seven original public native/fresh controls, the
+unchanged71-source bridge regression and six direct-dependent suites, and the
+seven-case call-form normalization proof. It compares exact values and ordered
+effects with the retained oracles and checks the unchanged bridge/compiler and
+callable authorities. The actual runtime identity, recursion, slot and restoration
+assertions stay in the tracked tests; serialized flags do not replace them.
+
+```sh
+bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.2-review.py
+```
+
+The command writes only managed scratch logs and prints its complete observation.
+It rejects altered control values/source identities, normalization event order,
+quietness and typed rejection status. Historical producer bodies are checked from
+retained source lines or exact Git blobs without executing old writers. Earlier
+captures keep their original hashes and revisions; the new observation records
+the current selected execution. The original infix fixture remains unchanged.
+
+This reconciles the bounded function bridge, literal and source/durability
+prerequisites. It does not close the dispatcher or establish full sixteen-case
+runtime and semantic-mutant admission; those activities retain separate owners.
 
 ### Call grammar in the normalization loop
 

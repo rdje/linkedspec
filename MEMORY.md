@@ -1,11 +1,11 @@
 # MEMORY
 
-- activation_commit: `0ed526576788327eaf60c4c9ad34a19c57d22da6` — clean artifact recovery activation base.
-- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.2.1 - recover historical audit artifact inputs`.
-- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.2` (pending) — committed bridge/parent reconciliation.
-- next_action: Activate .0.2.1.2 from clean HEAD; freeze newly completed recovery claims at their actual committed capture, then independently reconcile bridge parents canonically.
-- in_flight_uncommitted: none — intended clean post-landing handoff. Exact134-input artifact recovery committed; original logs/captures retained.
-- blockers: No access/decision blocker. P1 .0.5/.0.6/.0.7 remain independent; artifact recovery is verified; bridge reconciliation precedes their diagnosis/repair. Startup19/32/35/87 remain separate.
+- activation_commit: `0075a5b163cd9690d4ad70b1c8ea1da796088ab5` — clean bridge reconciliation activation base.
+- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.2 - reconcile committed function bridge prerequisites`.
+- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.2` (done) — bounded bridge/parent reconciliation.
+- next_action: Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.0 from clean HEAD and diagnose deferred attached-control semantics through public native/fresh probes.
+- in_flight_uncommitted: none; intended committed handoff after exact canonical acceptance.
+- blockers: No access/decision blocker. P1 .0.5/.0.6/.0.7 remain before dispatcher/full execution; bounded bridge/literal/source/durability parents are reconciled. Startup19/32/35/87 remain separate.
   Wrapper startup .7 remains open; recovery/purge stay prohibited.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
   active table; the task metadata doctrine inventories all consumers, permits arbitrary frontier-row rewrites,

@@ -5,7 +5,7 @@
     {
       "name": "closed-historical-artifact-census",
       "statement": "The historical census measured134 exact local artifact inputs and bounded selected coverage; its byte-recovery durability gap is now explicitly superseded by .4.2.1.",
-      "scope": "Read-only population reconstructed from three original milestones (48/39/47) at clean0f15e194f and compared with the .4.1 audit. All134 hashes match;84,613,241 raw bytes and3,394,928 independent zlib1.2.12 level9 bytes. Selected24 checkpoints/214,367 bytes yield zero complete-log identities among whole bytes/decoded UTF-8 strings/joined string arrays. Archive-extension census covers only docs/checkpoints, docs/history and tests/language-readiness; other encodings/surfaces unassessed. Producer/capture use this leaf prefix under docs/checkpoints. Compression is sizing only. The prior byte-recovery durability gap is explicitly superseded only by .4.2.1 isolated archive recovery/read-denied audit; original measurements, rederive and falsify results remain unchanged. Coverage and governance counts retain their original capture-time boundary; they are not refreshed by the added archive or CI registration.",
+      "scope": "Read-only population reconstructed from three original milestones (48/39/47) at clean0f15e194f and compared with the .4.1 audit. All134 hashes match;84,613,241 raw bytes and3,394,928 independent zlib1.2.12 level9 bytes. Selected24 checkpoints/214,367 bytes yield zero complete-log identities among whole bytes/decoded UTF-8 strings/joined string arrays. Archive-extension census covers only docs/checkpoints, docs/history and tests/language-readiness; other encodings/surfaces unassessed. Producer/capture use this leaf prefix under docs/checkpoints. Compression is sizing only. The prior byte-recovery durability gap is explicitly superseded only by .4.2.1 isolated archive recovery/read-denied audit; original measurements, rederive and falsify results remain unchanged. Coverage and governance counts retain their original capture-time boundary; they are not refreshed by the added archive or CI registration. Selected recovery durability capture is historical at committed0075a5b163cd9690d4ad70b1c8ea1da796088ab5; later reconciliation does not refresh these measurements or input hashes.",
       "rederive": {
         "status": "checked",
         "command": "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.2.0-census.py",
@@ -20,7 +20,7 @@
       },
       "durability": {
         "status": "checked",
-        "mode": "live",
+        "mode": "historical",
         "inputs": [
           {
             "path": "capability_conformance/inter_match_gap_capture_contract.json",
@@ -942,7 +942,8 @@
             "sha256": "fee9a7dc971b5adbd194caf572b9aaedc77f8c9d0c9785e4a90665c977faa0e9",
             "role": "input"
           }
-        ]
+        ],
+        "revision": "0075a5b163cd9690d4ad70b1c8ea1da796088ab5"
       }
     }
   ]

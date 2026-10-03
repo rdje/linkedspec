@@ -1,0 +1,1072 @@
+{
+  "falsifiers": [
+    {
+      "name": "direct_push-actual-result",
+      "reason": "control oracle mismatch"
+    },
+    {
+      "name": "callback_push-actual-result",
+      "reason": "control oracle mismatch"
+    },
+    {
+      "name": "direct_function-actual-result",
+      "reason": "control oracle mismatch"
+    },
+    {
+      "name": "callback_function-actual-result",
+      "reason": "control oracle mismatch"
+    },
+    {
+      "name": "callback_cat_assignment-actual-result",
+      "reason": "control oracle mismatch"
+    },
+    {
+      "name": "direct_uppercase-actual-result",
+      "reason": "control oracle mismatch"
+    },
+    {
+      "name": "function_uppercase-actual-result",
+      "reason": "control oracle mismatch"
+    },
+    {
+      "name": "control-source-identity",
+      "reason": "control source changed"
+    },
+    {
+      "name": "normalization-value",
+      "reason": "normalization historical oracle mismatch"
+    },
+    {
+      "name": "normalization-event-order",
+      "reason": "normalization historical oracle mismatch"
+    },
+    {
+      "name": "normalization-quiet",
+      "reason": "normalization historical oracle mismatch"
+    },
+    {
+      "name": "normalization-typed-rejection",
+      "reason": "normalization historical oracle mismatch"
+    }
+  ],
+  "limits": "Current selected native/fresh bridge and normalization proof only. Historical captures/producers are preserved, not replayed. The original infix failure is not admitted. Dispatcher, complete16 runtime/mutants, other backends, control/order/readiness and startup19/32/35/87 remain separately owned.",
+  "logs": [
+    {
+      "command": [
+        "perl",
+        "-Iperl",
+        "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.2-probe.pl"
+      ],
+      "exit": 0,
+      "path": ".linkedspec-data/scratch/bridge-reconciliation/controls.json",
+      "sha256": "cd7eb098d01b7182d38699508eb5212a3f93184e512fb2eb165739c57090b41b",
+      "stderr": "",
+      "stdout": "[{\"dumped_bytes\":9000,\"dumped_sha256\":\"a3de61369e6a0d5ef4295ee10f410f3257db09be4913053cc93be5085a8f248b\",\"emitted_sha256\":\"08ae4d5e7ef2c7a32adaebc793277b08c22704a58939467ecacc344e2953ecbf\",\"fresh\":{\"emitted_sha256\":\"08ae4d5e7ef2c7a32adaebc793277b08c22704a58939467ecacc344e2953ecbf\",\"error\":null,\"output\":\"\",\"stderr\":\"\",\"value\":[\"x\"]},\"id\":\"direct_push\",\"metadata\":{\"canonical_action_ir_fallback_count\":0,\"language_agnostic_action_ir_ready\":1,\"raw_perl_dependency_count\":0,\"unresolved_helper_count\":0},\"native\":{\"error\":null,\"output\":\"\",\"stderr\":\"\",\"value\":[\"x\"]},\"source_sha256\":\"7b36f4540db66efbe708d55dbb639c174ad9642e9b70e07482b9f9d88f18632d\"},{\"dumped_bytes\":11564,\"dumped_sha256\":\"973aabed949bdc869fd61ed72ac8a1859e1a501412df844a5bd996462b063542\",\"emitted_sha256\":\"cdac2c8cc9db7739184f40206c7e805694591f823bc99eefb5b4dbb9938ddd47\",\"fresh\":{\"emitted_sha256\":\"cdac2c8cc9db7739184f40206c7e805694591f823bc99eefb5b4dbb9938ddd47\",\"error\":null,\"output\":\"\",\"stderr\":\"\",\"value\":[\"x\"]},\"id\":\"callback_push\",\"metadata\":{\"canonical_action_ir_fallback_count\":0,\"language_agnostic_action_ir_ready\":1,\"raw_perl_dependency_count\":0,\"unresolved_helper_count\":0},\"native\":{\"error\":null,\"output\":\"\",\"stderr\":\"\",\"value\":[\"x\"]},\"source_sha256\":\"d58a6b50eaa608cbb487205b6d7bb2ffd2913ae01dbd3466f68041c5a79a02fa\"},{\"dumped_bytes\":9556,\"dumped_sha256\":\"76306379e11a60056723e5eefe2e9f71bc28af68e47925b4bc7338f5eccf4017\",\"emitted_sha256\":\"2d0b705c0c01e78fed1250360562f3b9a77d8e95172ee5692f2b08de79886363\",\"fresh\":{\"emitted_sha256\":\"2d0b705c0c01e78fed1250360562f3b9a77d8e95172ee5692f2b08de79886363\",\"error\":null,\"output\":\"\",\"stderr\":\"\",\"value\":\"!x\"},\"id\":\"direct_function\",\"metadata\":{\"canonical_action_ir_fallback_count\":0,\"language_agnostic_action_ir_ready\":1,\"raw_perl_dependency_count\":0,\"unresolved_helper_count\":0},\"native\":{\"error\":null,\"output\":\"\",\"stderr\":\"\",\"value\":\"!x\"},\"source_sha256\":\"35a9db3b9065a65b7a655f56fd230223a46428e0c77d1e623e1cc1057e4b2d85\"},{\"dumped_bytes\":12922,\"dumped_sha256\":\"11b7ec001f9a7e31ae237ced701321f1969d83f0df0cc861edd3ff4605e1f2f7\",\"emitted_sha256\":\"a594b41c25497da6f1f916a86f1bb1bc4eb1037ecd3a9595989fb174790a8ac1\",\"fresh\":{\"emitted_sha256\":\"a594b41c25497da6f1f916a86f1bb1bc4eb1037ecd3a9595989fb174790a8ac1\",\"error\":null,\"output\":\"\",\"stderr\":\"\",\"value\":\"!x\"},\"id\":\"callback_function\",\"metadata\":{\"canonical_action_ir_fallback_count\":0,\"language_agnostic_action_ir_ready\":1,\"raw_perl_dependency_count\":0,\"unresolved_helper_count\":0},\"native\":{\"error\":null,\"output\":\"\",\"stderr\":\"\",\"value\":\"!x\"},\"source_sha256\":\"f9510048a44950a6a810d2e107a05a5e42c0aee2f3c0e19935c31cc60b02aef9\"},{\"dumped_bytes\":12341,\"dumped_sha256\":\"27ffdbcc688f2bc66593f78fb599c98dcd272284859d2b8ea517310c3e628af6\",\"emitted_sha256\":\"41846588604d22c77c3d32bd3f1f57d8dd4c7c6e2a23d84140e61a9bfaa09d9a\",\"fresh\":{\"emitted_sha256\":\"41846588604d22c77c3d32bd3f1f57d8dd4c7c6e2a23d84140e61a9bfaa09d9a\",\"error\":null,\"output\":\"\",\"stderr\":\"\",\"value\":[\"!x\",\"before:x\"]},\"id\":\"callback_cat_assignment\",\"metadata\":{\"canonical_action_ir_fallback_count\":0,\"language_agnostic_action_ir_ready\":1,\"raw_perl_dependency_count\":0,\"unresolved_helper_count\":0},\"native\":{\"error\":null,\"output\":\"\",\"stderr\":\"\",\"value\":[\"!x\",\"before:x\"]},\"source_sha256\":\"34fe5ca1c95c543a68977e5149705a4eb371676a49b98dee83208156302aeff9\"},{\"dumped_bytes\":8983,\"dumped_sha256\":\"2d30fef8d77e86a4a43d1aeb10c8b25ea1973f4dbb1be6a681d01e7bba7724f0\",\"emitted_sha256\":\"2ce7e2a960c448a56539336000aa1e6f6877f0887a9496e4444924385b982889\",\"fresh\":{\"emitted_sha256\":\"2ce7e2a960c448a56539336000aa1e6f6877f0887a9496e4444924385b982889\",\"error\":null,\"output\":\"\",\"stderr\":\"\",\"value\":\"AB\"},\"id\":\"direct_uppercase\",\"metadata\":{\"canonical_action_ir_fallback_count\":0,\"language_agnostic_action_ir_ready\":1,\"raw_perl_dependency_count\":0,\"unresolved_helper_count\":0},\"native\":{\"error\":null,\"output\":\"\",\"stderr\":\"\",\"value\":\"AB\"},\"source_sha256\":\"3cd5ccb7fefcb82d2a398a00a86b0738dfaa48389b01def2557ed6f44d67f864\"},{\"dumped_bytes\":9674,\"dumped_sha256\":\"7088f5ea17cabcb83d63ee4fef7423d441bb2d7b421819b44ca12cc9f9ffa86c\",\"emitted_sha256\":\"f33f0262271e651c7010a0e2638f48cf4ce205c9447e357562c53970372a64b1\",\"fresh\":{\"emitted_sha256\":\"f33f0262271e651c7010a0e2638f48cf4ce205c9447e357562c53970372a64b1\",\"error\":null,\"output\":\"\",\"stderr\":\"\",\"value\":\"!AB\"},\"id\":\"function_uppercase\",\"metadata\":{\"canonical_action_ir_fallback_count\":0,\"language_agnostic_action_ir_ready\":1,\"raw_perl_dependency_count\":0,\"unresolved_helper_count\":0},\"native\":{\"error\":null,\"output\":\"\",\"stderr\":\"\",\"value\":\"!AB\"},\"source_sha256\":\"bf0a1c437e6c0c10a592aa288cf8ce3df85adf5643a43f52a6f4619e3c3c4667\"}]\n"
+    },
+    {
+      "command": [
+        "prove",
+        "-v",
+        "-Iperl",
+        "t/codeblock_push_composition_perl.t"
+      ],
+      "exit": 0,
+      "path": ".linkedspec-data/scratch/bridge-reconciliation/codeblock_push_composition_perl.t.log",
+      "sha256": "0dd4f1d8c1c082eb727a3bc50dd9ef26d69ecaa079a801e21154aed11acc942a",
+      "stderr": "",
+      "stdout": "t/codeblock_push_composition_perl.t .. \nok 1 - bridge_fixed_direct has exact readiness/fallback/unresolved metadata\nok 2 - bridge_fixed_direct native compiles/loads\nok 3 - bridge_fixed_direct native succeeds\nok 4 - bridge_fixed_direct native matches independent value\nok 5 - bridge_fixed_direct public emitter returns source\nok 6 - bridge_fixed_deferred has exact readiness/fallback/unresolved metadata\nok 7 - bridge_fixed_deferred native compiles/loads\nok 8 - bridge_fixed_deferred native succeeds\nok 9 - bridge_fixed_deferred native matches independent value\nok 10 - bridge_fixed_deferred public emitter returns source\nok 11 - bridge_rest_direct has exact readiness/fallback/unresolved metadata\nok 12 - bridge_rest_direct native compiles/loads\nok 13 - bridge_rest_direct native succeeds\nok 14 - bridge_rest_direct native matches independent value\nok 15 - bridge_rest_direct public emitter returns source\nok 16 - bridge_rest_deferred has exact readiness/fallback/unresolved metadata\nok 17 - bridge_rest_deferred native compiles/loads\nok 18 - bridge_rest_deferred native succeeds\nok 19 - bridge_rest_deferred native matches independent value\nok 20 - bridge_rest_deferred public emitter returns source\nok 21 - bridge_rest_empty_deferred has exact readiness/fallback/unresolved metadata\nok 22 - bridge_rest_empty_deferred native compiles/loads\nok 23 - bridge_rest_empty_deferred native succeeds\nok 24 - bridge_rest_empty_deferred native matches independent value\nok 25 - bridge_rest_empty_deferred public emitter returns source\nok 26 - bridge_attached_direct has exact readiness/fallback/unresolved metadata\nok 27 - bridge_attached_direct native compiles/loads\nok 28 - bridge_attached_direct native succeeds\nok 29 - bridge_attached_direct native matches independent value\nok 30 - bridge_attached_direct public emitter returns source\nok 31 - bridge_attached_deferred has exact readiness/fallback/unresolved metadata\nok 32 - bridge_attached_deferred native compiles/loads\nok 33 - bridge_attached_deferred native succeeds\nok 34 - bridge_attached_deferred native matches independent value\nok 35 - bridge_attached_deferred public emitter returns source\nok 36 - bridge_parenthesized_direct has exact readiness/fallback/unresolved metadata\nok 37 - bridge_parenthesized_direct native compiles/loads\nok 38 - bridge_parenthesized_direct native succeeds\nok 39 - bridge_parenthesized_direct native matches independent value\nok 40 - bridge_parenthesized_direct public emitter returns source\nok 41 - bridge_parenthesized_deferred has exact readiness/fallback/unresolved metadata\nok 42 - bridge_parenthesized_deferred native compiles/loads\nok 43 - bridge_parenthesized_deferred native succeeds\nok 44 - bridge_parenthesized_deferred native matches independent value\nok 45 - bridge_parenthesized_deferred public emitter returns source\nok 46 - bridge_bound_deferred has exact readiness/fallback/unresolved metadata\nok 47 - bridge_bound_deferred native compiles/loads\nok 48 - bridge_bound_deferred native succeeds\nok 49 - bridge_bound_deferred native matches independent value\nok 50 - bridge_bound_deferred public emitter returns source\nok 51 - bridge_ordered_direct has exact readiness/fallback/unresolved metadata\nok 52 - bridge_ordered_direct native compiles/loads\nok 53 - bridge_ordered_direct native succeeds\nok 54 - bridge_ordered_direct native matches independent value\nok 55 - bridge_ordered_direct public emitter returns source\nok 56 - bridge_ordered_deferred has exact readiness/fallback/unresolved metadata\nok 57 - bridge_ordered_deferred native compiles/loads\nok 58 - bridge_ordered_deferred native succeeds\nok 59 - bridge_ordered_deferred native matches independent value\nok 60 - bridge_ordered_deferred public emitter returns source\nok 61 - bridge_nested_deferred has exact readiness/fallback/unresolved metadata\nok 62 - bridge_nested_deferred native compiles/loads\nok 63 - bridge_nested_deferred native succeeds\nok 64 - bridge_nested_deferred native matches independent value\nok 65 - bridge_nested_deferred public emitter returns source\nok 66 - bridge_precedence_deferred has exact readiness/fallback/unresolved metadata\nok 67 - bridge_precedence_deferred native compiles/loads\nok 68 - bridge_precedence_deferred native succeeds\nok 69 - bridge_precedence_deferred native matches independent value\nok 70 - bridge_precedence_deferred public emitter returns source\nok 71 - bridge_wrong_arity_deferred has exact readiness/fallback/unresolved metadata\n[2026-10-03 08:10:25][NONE][SpecEntry.pm][trace_decision:63] DECISION rule_handler_eval:Top => SKIPPED\n[2026-10-03 08:10:25][NONE][SpecEntry.pm][trace_decision:63]   Context: bless( {'arguments_evaluated' => 0,'code' => 'user_function_arity_mismatch','expected' => 'exactly 2','function_name' => 'decorate','got' => 1,'kind' => 'codeblock_runtime_error'}, 'LinkedSpec::CodeblockRuntime::Error' )\nok 72 - bridge_wrong_arity_deferred native compiles/loads\nok 73 - bridge_wrong_arity_deferred native publishes no result on failure\nok 74 - bridge_wrong_arity_deferred native retains exact typed failure\nok 75 - bridge_wrong_arity_deferred public emitter returns source\nok 76 - bridge_wrong_final_kind_direct has exact readiness/fallback/unresolved metadata\n[2026-10-03 08:10:26][NONE][SpecEntry.pm][trace_decision:63] DECISION rule_handler_eval:Top => SKIPPED\n[2026-10-03 08:10:26][NONE][SpecEntry.pm][trace_decision:63]   Context: bless( {'code' => 'final_argument_not_codeblock','kind' => 'codeblock_runtime_error','value_kind' => 'harray'}, 'LinkedSpec::CodeblockRuntime::Error' )\nok 77 - bridge_wrong_final_kind_direct native compiles/loads\nok 78 - bridge_wrong_final_kind_direct native publishes no result on failure\nok 79 - bridge_wrong_final_kind_direct native retains exact typed failure\nok 80 - bridge_wrong_final_kind_direct public emitter returns source\nok 81 - bridge_wrong_final_kind_deferred has exact readiness/fallback/unresolved metadata\n[2026-10-03 08:10:26][NONE][SpecEntry.pm][trace_decision:63] DECISION rule_handler_eval:Top => SKIPPED\n[2026-10-03 08:10:26][NONE][SpecEntry.pm][trace_decision:63]   Context: bless( {'code' => 'final_argument_not_codeblock','kind' => 'codeblock_runtime_error','value_kind' => 'harray'}, 'LinkedSpec::CodeblockRuntime::Error' )\nok 82 - bridge_wrong_final_kind_deferred native compiles/loads\nok 83 - bridge_wrong_final_kind_deferred native publishes no result on failure\nok 84 - bridge_wrong_final_kind_deferred native retains exact typed failure\nok 85 - bridge_wrong_final_kind_deferred public emitter returns source\nok 86 - bridge_keyword_deferred has exact readiness/fallback/unresolved metadata\n[2026-10-03 08:10:26][NONE][SpecEntry.pm][trace_decision:63] DECISION rule_handler_eval:Top => SKIPPED\n[2026-10-03 08:10:26][NONE][SpecEntry.pm][trace_decision:63]   Context: bless( {'arguments_evaluated' => 0,'code' => 'user_function_keyword_arguments_unsupported','function_name' => 'id','got' => 1,'kind' => 'codeblock_runtime_error'}, 'LinkedSpec::CodeblockRuntime::Error' )\nok 87 - bridge_keyword_deferred native compiles/loads\nok 88 - bridge_keyword_deferred native publishes no result on failure\nok 89 - bridge_keyword_deferred native retains exact typed failure\nok 90 - bridge_keyword_deferred public emitter returns source\nok 91 - bridge_function_recursion_direct has exact readiness/fallback/unresolved metadata\nok 92 - bridge_function_recursion_direct native compiles/loads\nok 93 - bridge_function_recursion_direct native succeeds\nok 94 - bridge_function_recursion_direct native matches independent value\nok 95 - bridge_function_recursion_direct public emitter returns source\nok 96 - bridge_function_recursion_deferred has exact readiness/fallback/unresolved metadata\n[2026-10-03 08:10:26][NONE][SpecEntry.pm][trace_decision:63] DECISION rule_handler_eval:Top => SKIPPED\n[2026-10-03 08:10:26][NONE][SpecEntry.pm][trace_decision:63]   Context: bless( {'code' => 'user_function_recursion_unsupported','cycle' => ['repeat','repeat'],'function_name' => 'repeat','kind' => 'codeblock_runtime_error'}, 'LinkedSpec::CodeblockRuntime::Error' )\nok 97 - bridge_function_recursion_deferred native compiles/loads\nok 98 - bridge_function_recursion_deferred native publishes no result on failure\nok 99 - bridge_function_recursion_deferred native retains exact typed failure\nok 100 - bridge_function_recursion_deferred public emitter returns source\nok 101 - bridge_callback_function_cycle has exact readiness/fallback/unresolved metadata\n[2026-10-03 08:10:26][NONE][SpecEntry.pm][trace_decision:63] DECISION rule_handler_eval:Top => SKIPPED\n[2026-10-03 08:10:26][NONE][SpecEntry.pm][trace_decision:63]   Context: bless( {'code' => 'codeblock_recursion_unsupported','cycle' => ['cb','callback'],'kind' => 'codeblock_runtime_error'}, 'LinkedSpec::CodeblockRuntime::Error' )\nok 102 - bridge_callback_function_cycle native compiles/loads\nok 103 - bridge_callback_function_cycle native publishes no result on failure\nok 104 - bridge_callback_function_cycle native retains exact typed failure\nok 105 - bridge_callback_function_cycle public emitter returns source\nok 106 - bridge_unknown_deferred has exact readiness/fallback/unresolved metadata\n[2026-10-03 08:10:26][NONE][SpecEntry.pm][trace_decision:63] DECISION rule_handler_eval:Top => SKIPPED\n[2026-10-03 08:10:26][NONE][SpecEntry.pm][trace_decision:63]   Context: bless( {'code' => 'unknown_helper','kind' => 'codeblock_runtime_error','name' => 'missing_operation'}, 'LinkedSpec::CodeblockRuntime::Error' )\nok 107 - bridge_unknown_deferred native compiles/loads\nok 108 - bridge_unknown_deferred native publishes no result on failure\nok 109 - bridge_unknown_deferred native retains exact typed failure\nok 110 - bridge_unknown_deferred public emitter returns source\nok 111 - bridge_unrelated_unsupported_definition has exact readiness/fallback/unresolved metadata\nok 112 - bridge_unrelated_unsupported_definition native compiles/loads\nok 113 - bridge_unrelated_unsupported_definition native succeeds\nok 114 - bridge_unrelated_unsupported_definition native matches independent value\nok 115 - bridge_unrelated_unsupported_definition public emitter returns source\nok 116 - bridge_startup32_control has exact readiness/fallback/unresolved metadata\nok 117 - bridge_startup32_control native compiles/loads\nok 118 - bridge_startup32_control native succeeds\nok 119 - bridge_startup32_control native matches independent value\nok 120 - bridge_startup32_control public emitter returns source\nok 121 - bridge_equal_independent_callbacks has exact readiness/fallback/unresolved metadata\nok 122 - bridge_equal_independent_callbacks native compiles/loads\nok 123 - bridge_equal_independent_callbacks native succeeds\nok 124 - bridge_equal_independent_callbacks native matches independent value\nok 125 - bridge_equal_independent_callbacks public emitter returns source\nok 126 - bridge_cloned_callback_cycle has exact readiness/fallback/unresolved metadata\n[2026-10-03 08:10:27][NONE][SpecEntry.pm][trace_decision:63] DECISION rule_handler_eval:Top => SKIPPED\n[2026-10-03 08:10:27][NONE][SpecEntry.pm][trace_decision:63]   Context: bless( {'code' => 'codeblock_recursion_unsupported','cycle' => ['cb','fresh'],'kind' => 'codeblock_runtime_error'}, 'LinkedSpec::CodeblockRuntime::Error' )\nok 127 - bridge_cloned_callback_cycle native compiles/loads\nok 128 - bridge_cloned_callback_cycle native publishes no result on failure\nok 129 - bridge_cloned_callback_cycle native retains exact typed failure\nok 130 - bridge_cloned_callback_cycle public emitter returns source\nok 131 - bridge_aggregate_callback_cycle has exact readiness/fallback/unresolved metadata\n[2026-10-03 08:10:27][NONE][SpecEntry.pm][trace_decision:63] DECISION rule_handler_eval:Top => SKIPPED\n[2026-10-03 08:10:27][NONE][SpecEntry.pm][trace_decision:63]   Context: bless( {'code' => 'codeblock_recursion_unsupported','cycle' => ['cb','fresh'],'kind' => 'codeblock_runtime_error'}, 'LinkedSpec::CodeblockRuntime::Error' )\nok 132 - bridge_aggregate_callback_cycle native compiles/loads\nok 133 - bridge_aggregate_callback_cycle native publishes no result on failure\nok 134 - bridge_aggregate_callback_cycle native retains exact typed failure\nok 135 - bridge_aggregate_callback_cycle public emitter returns source\nok 136 - bridge_compiled_copy_cycle has exact readiness/fallback/unresolved metadata\n[2026-10-03 08:10:28][NONE][SpecEntry.pm][trace_decision:63] DECISION rule_handler_eval:Top => SKIPPED\n[2026-10-03 08:10:28][NONE][SpecEntry.pm][trace_decision:63]   Context: bless( {'code' => 'codeblock_recursion_unsupported','cycle' => ['cb','fresh'],'kind' => 'codeblock_runtime_error'}, 'LinkedSpec::CodeblockRuntime::Error' )\nok 137 - bridge_compiled_copy_cycle native compiles/loads\nok 138 - bridge_compiled_copy_cycle native publishes no result on failure\nok 139 - bridge_compiled_copy_cycle native retains exact typed failure\nok 140 - bridge_compiled_copy_cycle public emitter returns source\nok 141 - bridge_rest_fresh has exact readiness/fallback/unresolved metadata\nok 142 - bridge_rest_fresh native compiles/loads\nok 143 - bridge_rest_fresh native succeeds\nok 144 - bridge_rest_fresh native matches independent value\nok 145 - bridge_rest_fresh public emitter returns source\nok 146 - bridge_fresh_scope has exact readiness/fallback/unresolved metadata\nok 147 - bridge_fresh_scope native compiles/loads\nok 148 - bridge_fresh_scope native succeeds\nok 149 - bridge_fresh_scope native matches independent value\nok 150 - bridge_fresh_scope public emitter returns source\nok 151 - bridge_same_name_distinct_frames has exact readiness/fallback/unresolved metadata\nok 152 - bridge_same_name_distinct_frames native compiles/loads\nok 153 - bridge_same_name_distinct_frames native succeeds\nok 154 - bridge_same_name_distinct_frames native matches independent value\nok 155 - bridge_same_name_distinct_frames public emitter returns source\nok 156 - bridge_dynamic_function_cycle has exact readiness/fallback/unresolved metadata\n[2026-10-03 08:10:28][NONE][SpecEntry.pm][trace_decision:63] DECISION rule_handler_eval:Top => SKIPPED\n[2026-10-03 08:10:28][NONE][SpecEntry.pm][trace_decision:63]   Context: bless( {'code' => 'user_function_recursion_unsupported','cycle' => ['apply','apply'],'function_name' => 'apply','kind' => 'codeblock_runtime_error'}, 'LinkedSpec::CodeblockRuntime::Error' )\nok 157 - bridge_dynamic_function_cycle native compiles/loads\nok 158 - bridge_dynamic_function_cycle native publishes no result on failure\nok 159 - bridge_dynamic_function_cycle native retains exact typed failure\nok 160 - bridge_dynamic_function_cycle public emitter returns source\nok 161 - bridge_static_dynamic_function_cycle has exact readiness/fallback/unresolved metadata\n[2026-10-03 08:10:29][NONE][SpecEntry.pm][trace_decision:63] DECISION rule_handler_eval:Top => SKIPPED\n[2026-10-03 08:10:29][NONE][SpecEntry.pm][trace_decision:63]   Context: bless( {'code' => 'user_function_recursion_unsupported','cycle' => ['outer','inner','outer'],'function_name' => 'outer','kind' => 'codeblock_runtime_error'}, 'LinkedSpec::CodeblockRuntime::Error' )\nok 162 - bridge_static_dynamic_function_cycle native compiles/loads\nok 163 - bridge_static_dynamic_function_cycle native publishes no result on failure\nok 164 - bridge_static_dynamic_function_cycle native retains exact typed failure\nok 165 - bridge_static_dynamic_function_cycle public emitter returns source\nok 166 - bridge_private_names has exact readiness/fallback/unresolved metadata\nok 167 - bridge_private_names native compiles/loads\nok 168 - bridge_private_names native succeeds\nok 169 - bridge_private_names native matches independent value\nok 170 - bridge_private_names public emitter returns source\nok 171 - bridge_unsupported_body has exact readiness/fallback/unresolved metadata\n[2026-10-03 08:10:29][NONE][SpecEntry.pm][trace_decision:63] DECISION rule_handler_eval:Top => SKIPPED\n[2026-10-03 08:10:29][NONE][SpecEntry.pm][trace_decision:63]   Context: bless( {'code' => 'user_function_body_unsupported','function_name' => 'bad','kind' => 'codeblock_runtime_error','unresolved_helpers' => ['missing_operation']}, 'LinkedSpec::CodeblockRuntime::Error' )\nok 172 - bridge_unsupported_body native compiles/loads\nok 173 - bridge_unsupported_body native publishes no result on failure\nok 174 - bridge_unsupported_body native retains exact typed failure\nok 175 - bridge_unsupported_body public emitter returns source\nok 176 - bridge_arity_effects has exact readiness/fallback/unresolved metadata\n[2026-10-03 08:10:29][NONE][SpecEntry.pm][trace_decision:63] DECISION rule_handler_eval:Top => SKIPPED\n[2026-10-03 08:10:29][NONE][SpecEntry.pm][trace_decision:63]   Context: bless( {'arguments_evaluated' => 0,'code' => 'user_function_arity_mismatch','expected' => 'exactly 2','function_name' => 'pair','got' => 1,'kind' => 'codeblock_runtime_error'}, 'LinkedSpec::CodeblockRuntime::Error' )\nok 177 - bridge_arity_effects native compiles/loads\nok 178 - bridge_arity_effects native publishes no result on failure\nok 179 - bridge_arity_effects native retains exact typed failure\nok 180 - bridge_arity_effects public emitter returns source\nok 181 - bridge_keyword_effects has exact readiness/fallback/unresolved metadata\n[2026-10-03 08:10:29][NONE][SpecEntry.pm][trace_decision:63] DECISION rule_handler_eval:Top => SKIPPED\n[2026-10-03 08:10:29][NONE][SpecEntry.pm][trace_decision:63]   Context: bless( {'arguments_evaluated' => 0,'code' => 'user_function_keyword_arguments_unsupported','function_name' => 'pair','got' => 1,'kind' => 'codeblock_runtime_error'}, 'LinkedSpec::CodeblockRuntime::Error' )\nok 182 - bridge_keyword_effects native compiles/loads\nok 183 - bridge_keyword_effects native publishes no result on failure\nok 184 - bridge_keyword_effects native retains exact typed failure\nok 185 - bridge_keyword_effects public emitter returns source\nok 186 - function_unbound_callable has exact readiness/fallback/unresolved metadata\nok 187 - function_unbound_callable native compiles/loads\nok 188 - function_unbound_callable native succeeds\nok 189 - function_unbound_callable native matches independent value\nok 190 - function_unbound_callable public emitter returns source\nok 191 - bridge_failure_restore has exact readiness/fallback/unresolved metadata\n[2026-10-03 08:10:30][NONE][SpecEntry.pm][trace_decision:63] DECISION rule_handler_eval:Top => SKIPPED\n[2026-10-03 08:10:30][NONE][SpecEntry.pm][trace_decision:63]   Context: bless( {'code' => 'unknown_helper','kind' => 'codeblock_runtime_error','name' => 'missing_operation'}, 'LinkedSpec::CodeblockRuntime::Error' )\nok 192 - bridge_failure_restore native compiles/loads\nok 193 - bridge_failure_restore native publishes no result on failure\nok 194 - bridge_failure_restore native retains exact typed failure\nok 195 - bridge_failure_restore public emitter returns source\nok 196 - function_with_failure has exact readiness/fallback/unresolved metadata\n[2026-10-03 08:10:30][NONE][SpecEntry.pm][trace_decision:63] DECISION rule_handler_eval:Top => SKIPPED\n[2026-10-03 08:10:30][NONE][SpecEntry.pm][trace_decision:63]   Context: bless( {'code' => 'unknown_helper','kind' => 'codeblock_runtime_error','name' => 'missing_operation'}, 'LinkedSpec::CodeblockRuntime::Error' )\nok 197 - function_with_failure native compiles/loads\nok 198 - function_with_failure native publishes no result on failure\nok 199 - function_with_failure native retains exact typed failure\nok 200 - function_with_failure public emitter returns source\nok 201 - function_external_read has exact readiness/fallback/unresolved metadata\nok 202 - function_external_read native compiles/loads\nok 203 - function_external_read native succeeds\nok 204 - function_external_read native matches independent value\nok 205 - function_external_read public emitter returns source\nok 206 - function_direct_read has exact readiness/fallback/unresolved metadata\nok 207 - function_direct_read native compiles/loads\nok 208 - function_direct_read native succeeds\nok 209 - function_direct_read native matches independent value\nok 210 - function_direct_read public emitter returns source\nok 211 - function_local_read has exact readiness/fallback/unresolved metadata\nok 212 - function_local_read native compiles/loads\nok 213 - function_local_read native succeeds\nok 214 - function_local_read native matches independent value\nok 215 - function_local_read public emitter returns source\nok 216 - function_external_write has exact readiness/fallback/unresolved metadata\nok 217 - function_external_write native compiles/loads\nok 218 - function_external_write native succeeds\nok 219 - function_external_write native matches independent value\nok 220 - function_external_write public emitter returns source\nok 221 - function_local_write has exact readiness/fallback/unresolved metadata\nok 222 - function_local_write native compiles/loads\nok 223 - function_local_write native succeeds\nok 224 - function_local_write native matches independent value\nok 225 - function_local_write public emitter returns source\nok 226 - function_parameter_read has exact readiness/fallback/unresolved metadata\nok 227 - function_parameter_read native compiles/loads\nok 228 - function_parameter_read native succeeds\nok 229 - function_parameter_read native matches independent value\nok 230 - function_parameter_read public emitter returns source\nok 231 - function_parameter_write has exact readiness/fallback/unresolved metadata\nok 232 - function_parameter_write native compiles/loads\nok 233 - function_parameter_write native succeeds\nok 234 - function_parameter_write native matches independent value\nok 235 - function_parameter_write public emitter returns source\nok 236 - function_unknown_persistence_reset has exact readiness/fallback/unresolved metadata\nok 237 - function_unknown_persistence_reset native compiles/loads\nok 238 - function_unknown_persistence_reset native succeeds\nok 239 - function_unknown_persistence_reset native matches independent value\nok 240 - function_unknown_persistence_reset public emitter returns source\nok 241 - function_known_persistence has exact readiness/fallback/unresolved metadata\nok 242 - function_known_persistence native compiles/loads\nok 243 - function_known_persistence native succeeds\nok 244 - function_known_persistence native matches independent value\nok 245 - function_known_persistence public emitter returns source\nok 246 - function_nested_callback has exact readiness/fallback/unresolved metadata\nok 247 - function_nested_callback native compiles/loads\nok 248 - function_nested_callback native succeeds\nok 249 - function_nested_callback native matches independent value\nok 250 - function_nested_callback public emitter returns source\nok 251 - function_nested_frames has exact readiness/fallback/unresolved metadata\nok 252 - function_nested_frames native compiles/loads\nok 253 - function_nested_frames native succeeds\nok 254 - function_nested_frames native matches independent value\nok 255 - function_nested_frames public emitter returns source\nok 256 - function_with_persistence_shadow has exact readiness/fallback/unresolved metadata\nok 257 - function_with_persistence_shadow native compiles/loads\nok 258 - function_with_persistence_shadow native succeeds\nok 259 - function_with_persistence_shadow native matches independent value\nok 260 - function_with_persistence_shadow public emitter returns source\nok 261 - function_callback_parameter_restore has exact readiness/fallback/unresolved metadata\nok 262 - function_callback_parameter_restore native compiles/loads\nok 263 - function_callback_parameter_restore native succeeds\nok 264 - function_callback_parameter_restore native matches independent value\nok 265 - function_callback_parameter_restore public emitter returns source\nok 266 - function_private_name_collision has exact readiness/fallback/unresolved metadata\nok 267 - function_private_name_collision native compiles/loads\nok 268 - function_private_name_collision native succeeds\nok 269 - function_private_name_collision native matches independent value\nok 270 - function_private_name_collision public emitter returns source\nok 271 - selected_push has exact readiness/fallback/unresolved metadata\nok 272 - selected_push native compiles/loads\nok 273 - selected_push native succeeds\nok 274 - selected_push native matches independent value\nok 275 - selected_push public emitter returns source\nok 276 - absent_target has exact readiness/fallback/unresolved metadata\nok 277 - absent_target native compiles/loads\nok 278 - absent_target native succeeds\nok 279 - absent_target native matches independent value\nok 280 - absent_target public emitter returns source\nok 281 - null_target has exact readiness/fallback/unresolved metadata\nok 282 - null_target native compiles/loads\nok 283 - null_target native succeeds\nok 284 - null_target native matches independent value\nok 285 - null_target public emitter returns source\nok 286 - argument_once has exact readiness/fallback/unresolved metadata\nok 287 - argument_once native compiles/loads\nok 288 - argument_once native succeeds\nok 289 - argument_once native matches independent value\nok 290 - argument_once public emitter returns source\nok 291 - post_argument_snapshot has exact readiness/fallback/unresolved metadata\nok 292 - post_argument_snapshot native compiles/loads\nok 293 - post_argument_snapshot native succeeds\nok 294 - post_argument_snapshot native matches independent value\nok 295 - post_argument_snapshot public emitter returns source\nok 296 - prior_result has exact readiness/fallback/unresolved metadata\nok 297 - prior_result native compiles/loads\nok 298 - prior_result native succeeds\nok 299 - prior_result native matches independent value\nok 300 - prior_result public emitter returns source\nok 301 - copied_parameter has exact readiness/fallback/unresolved metadata\nok 302 - copied_parameter native compiles/loads\nok 303 - copied_parameter native succeeds\nok 304 - copied_parameter native matches independent value\nok 305 - copied_parameter public emitter returns source\nok 306 - nested_parameters has exact readiness/fallback/unresolved metadata\nok 307 - nested_parameters native compiles/loads\nok 308 - nested_parameters native succeeds\nok 309 - nested_parameters native matches independent value\nok 310 - nested_parameters public emitter returns source\nok 311 - rule_precedence has exact readiness/fallback/unresolved metadata\nok 312 - rule_precedence native compiles/loads\nok 313 - rule_precedence native succeeds\nok 314 - rule_precedence native matches independent value\nok 315 - rule_precedence public emitter returns source\nok 316 - nested_rule_context has exact readiness/fallback/unresolved metadata\nok 317 - nested_rule_context native compiles/loads\nok 318 - nested_rule_context native succeeds\nok 319 - nested_rule_context native matches independent value\nok 320 - nested_rule_context public emitter returns source\nok 321 - with_context has exact readiness/fallback/unresolved metadata\nok 322 - with_context native compiles/loads\nok 323 - with_context native succeeds\nok 324 - with_context native matches independent value\nok 325 - with_context public emitter returns source\nok 326 - helper_precedence has exact readiness/fallback/unresolved metadata\nok 327 - helper_precedence native compiles/loads\nok 328 - helper_precedence native succeeds\nok 329 - helper_precedence native matches independent value\nok 330 - helper_precedence public emitter returns source\nok 331 - parameter_receiver_shadow has exact readiness/fallback/unresolved metadata\nok 332 - parameter_receiver_shadow native compiles/loads\nok 333 - parameter_receiver_shadow native succeeds\nok 334 - parameter_receiver_shadow native matches independent value\nok 335 - parameter_receiver_shadow public emitter returns source\nok 336 - wrong_kind has exact readiness/fallback/unresolved metadata\n[2026-10-03 08:10:36][NONE][SpecEntry.pm][trace_decision:63] DECISION rule_handler_eval:Top => SKIPPED\n[2026-10-03 08:10:36][NONE][SpecEntry.pm][trace_decision:63]   Context: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n[2026-10-03 08:10:36][NONE][SpecEntry.pm][trace_decision:63]   Context: \nok 337 - wrong_kind native compiles/loads\nok 338 - wrong_kind native publishes no result on failure\nok 339 - wrong_kind native retains kind diagnostic\nok 340 - wrong_kind public emitter returns source\nok 341 - unknown_call has exact readiness/fallback/unresolved metadata\n[2026-10-03 08:10:36][NONE][SpecEntry.pm][trace_decision:63] DECISION rule_handler_eval:Top => SKIPPED\n[2026-10-03 08:10:36][NONE][SpecEntry.pm][trace_decision:63]   Context: bless( {'code' => 'unknown_helper','kind' => 'codeblock_runtime_error','name' => 'missing_operation'}, 'LinkedSpec::CodeblockRuntime::Error' )\nok 342 - unknown_call native compiles/loads\nok 343 - unknown_call native publishes no result on failure\nok 344 - unknown_call native retains exact typed failure\nok 345 - unknown_call public emitter returns source\nok 346 - arity_before_effects has exact readiness/fallback/unresolved metadata\n[2026-10-03 08:10:36][NONE][SpecEntry.pm][trace_decision:63] DECISION rule_handler_eval:Top => SKIPPED\n[2026-10-03 08:10:36][NONE][SpecEntry.pm][trace_decision:63]   Context: bless( {'actual_arity' => 3,'arguments_evaluated' => 0,'code' => 'helper_arity_mismatch','expected_arity' => 'exactly 2','helper_name' => 'push','kind' => 'codeblock_runtime_error'}, 'LinkedSpec::CodeblockRuntime::Error' )\nok 347 - arity_before_effects native compiles/loads\nok 348 - arity_before_effects native publishes no result on failure\nok 349 - arity_before_effects native retains exact typed failure\nok 350 - arity_before_effects public emitter returns source\nok 351 - active_receiver has exact readiness/fallback/unresolved metadata\n[2026-10-03 08:10:37][NONE][SpecEntry.pm][trace_decision:63] DECISION rule_handler_eval:Top => SKIPPED\n[2026-10-03 08:10:37][NONE][SpecEntry.pm][trace_decision:63]   Context: bless( {'attempt' => 'push','binding' => 'tree','code' => 'receiver_mutation_reentrant','message' => 'cannot write active map_leaves! receiver binding \\'tree\\' from its callback','method' => 'map_leaves','operation' => 'map_leaves_mutation','source_span' => {'end' => 20,'start' => 4}}, 'LinkedSpec::BindingRuntime::ReceiverMutationError' )\nok 352 - active_receiver native compiles/loads\nok 353 - active_receiver native publishes no result on failure\nok 354 - active_receiver native retains typed receiver error\nok 355 - active_receiver native rejects actual active slot\nok 356 - active_receiver native identifies mutation\nok 357 - active_receiver public emitter returns source\nok 358 - fresh emitted child executes without the authoring compiler\nok 359 - fresh child returns every push and function-scope case\nok 360 - bridge_fixed_direct emitted compiles/loads\nok 361 - bridge_fixed_direct emitted succeeds\nok 362 - bridge_fixed_direct emitted matches independent value\nok 363 - bridge_fixed_deferred emitted compiles/loads\nok 364 - bridge_fixed_deferred emitted succeeds\nok 365 - bridge_fixed_deferred emitted matches independent value\nok 366 - bridge_rest_direct emitted compiles/loads\nok 367 - bridge_rest_direct emitted succeeds\nok 368 - bridge_rest_direct emitted matches independent value\nok 369 - bridge_rest_deferred emitted compiles/loads\nok 370 - bridge_rest_deferred emitted succeeds\nok 371 - bridge_rest_deferred emitted matches independent value\nok 372 - bridge_rest_empty_deferred emitted compiles/loads\nok 373 - bridge_rest_empty_deferred emitted succeeds\nok 374 - bridge_rest_empty_deferred emitted matches independent value\nok 375 - bridge_attached_direct emitted compiles/loads\nok 376 - bridge_attached_direct emitted succeeds\nok 377 - bridge_attached_direct emitted matches independent value\nok 378 - bridge_attached_deferred emitted compiles/loads\nok 379 - bridge_attached_deferred emitted succeeds\nok 380 - bridge_attached_deferred emitted matches independent value\nok 381 - bridge_parenthesized_direct emitted compiles/loads\nok 382 - bridge_parenthesized_direct emitted succeeds\nok 383 - bridge_parenthesized_direct emitted matches independent value\nok 384 - bridge_parenthesized_deferred emitted compiles/loads\nok 385 - bridge_parenthesized_deferred emitted succeeds\nok 386 - bridge_parenthesized_deferred emitted matches independent value\nok 387 - bridge_bound_deferred emitted compiles/loads\nok 388 - bridge_bound_deferred emitted succeeds\nok 389 - bridge_bound_deferred emitted matches independent value\nok 390 - bridge_ordered_direct emitted compiles/loads\nok 391 - bridge_ordered_direct emitted succeeds\nok 392 - bridge_ordered_direct emitted matches independent value\nok 393 - bridge_ordered_deferred emitted compiles/loads\nok 394 - bridge_ordered_deferred emitted succeeds\nok 395 - bridge_ordered_deferred emitted matches independent value\nok 396 - bridge_ordered_deferred fresh child checks actual operand effects and handler entries\nok 397 - bridge_nested_deferred emitted compiles/loads\nok 398 - bridge_nested_deferred emitted succeeds\nok 399 - bridge_nested_deferred emitted matches independent value\nok 400 - bridge_precedence_deferred emitted compiles/loads\nok 401 - bridge_precedence_deferred emitted succeeds\nok 402 - bridge_precedence_deferred emitted matches independent value\nok 403 - bridge_wrong_arity_deferred emitted compiles/loads\nok 404 - bridge_wrong_arity_deferred emitted publishes no result on failure\nok 405 - bridge_wrong_arity_deferred retains independent generated failure provenance\nok 406 - bridge_wrong_arity_deferred emitted retains exact typed failure\nok 407 - bridge_wrong_final_kind_direct emitted compiles/loads\nok 408 - bridge_wrong_final_kind_direct emitted publishes no result on failure\nok 409 - bridge_wrong_final_kind_direct retains independent generated failure provenance\nok 410 - bridge_wrong_final_kind_direct emitted retains exact typed failure\nok 411 - bridge_wrong_final_kind_deferred emitted compiles/loads\nok 412 - bridge_wrong_final_kind_deferred emitted publishes no result on failure\nok 413 - bridge_wrong_final_kind_deferred retains independent generated failure provenance\nok 414 - bridge_wrong_final_kind_deferred emitted retains exact typed failure\nok 415 - bridge_keyword_deferred emitted compiles/loads\nok 416 - bridge_keyword_deferred emitted publishes no result on failure\nok 417 - bridge_keyword_deferred retains independent generated failure provenance\nok 418 - bridge_keyword_deferred emitted retains exact typed failure\nok 419 - bridge_function_recursion_direct emitted compiles/loads\nok 420 - bridge_function_recursion_direct emitted succeeds\nok 421 - bridge_function_recursion_direct emitted matches independent value\nok 422 - bridge_function_recursion_deferred emitted compiles/loads\nok 423 - bridge_function_recursion_deferred emitted publishes no result on failure\nok 424 - bridge_function_recursion_deferred retains independent generated failure provenance\nok 425 - bridge_function_recursion_deferred emitted retains exact typed failure\nok 426 - bridge_callback_function_cycle emitted compiles/loads\nok 427 - bridge_callback_function_cycle emitted publishes no result on failure\nok 428 - bridge_callback_function_cycle retains independent generated failure provenance\nok 429 - bridge_callback_function_cycle emitted retains exact typed failure\nok 430 - bridge_unknown_deferred emitted compiles/loads\nok 431 - bridge_unknown_deferred emitted publishes no result on failure\nok 432 - bridge_unknown_deferred retains independent generated failure provenance\nok 433 - bridge_unknown_deferred emitted retains exact typed failure\nok 434 - bridge_unrelated_unsupported_definition emitted compiles/loads\nok 435 - bridge_unrelated_unsupported_definition emitted succeeds\nok 436 - bridge_unrelated_unsupported_definition emitted matches independent value\nok 437 - bridge_startup32_control emitted compiles/loads\nok 438 - bridge_startup32_control emitted succeeds\nok 439 - bridge_startup32_control emitted matches independent value\nok 440 - bridge_equal_independent_callbacks emitted compiles/loads\nok 441 - bridge_equal_independent_callbacks emitted succeeds\nok 442 - bridge_equal_independent_callbacks emitted matches independent value\nok 443 - bridge_cloned_callback_cycle emitted compiles/loads\nok 444 - bridge_cloned_callback_cycle emitted publishes no result on failure\nok 445 - bridge_cloned_callback_cycle retains independent generated failure provenance\nok 446 - bridge_cloned_callback_cycle emitted retains exact typed failure\nok 447 - bridge_aggregate_callback_cycle emitted compiles/loads\nok 448 - bridge_aggregate_callback_cycle emitted publishes no result on failure\nok 449 - bridge_aggregate_callback_cycle retains independent generated failure provenance\nok 450 - bridge_aggregate_callback_cycle emitted retains exact typed failure\nok 451 - bridge_compiled_copy_cycle emitted compiles/loads\nok 452 - bridge_compiled_copy_cycle emitted publishes no result on failure\nok 453 - bridge_compiled_copy_cycle retains independent generated failure provenance\nok 454 - bridge_compiled_copy_cycle emitted retains exact typed failure\nok 455 - bridge_rest_fresh emitted compiles/loads\nok 456 - bridge_rest_fresh emitted succeeds\nok 457 - bridge_rest_fresh emitted matches independent value\nok 458 - fresh child checks real compiled rest identities and rejects an alias\nok 459 - bridge_fresh_scope emitted compiles/loads\nok 460 - bridge_fresh_scope emitted succeeds\nok 461 - bridge_fresh_scope emitted matches independent value\nok 462 - bridge_same_name_distinct_frames emitted compiles/loads\nok 463 - bridge_same_name_distinct_frames emitted succeeds\nok 464 - bridge_same_name_distinct_frames emitted matches independent value\nok 465 - bridge_dynamic_function_cycle emitted compiles/loads\nok 466 - bridge_dynamic_function_cycle emitted publishes no result on failure\nok 467 - bridge_dynamic_function_cycle retains independent generated failure provenance\nok 468 - bridge_dynamic_function_cycle emitted retains exact typed failure\nok 469 - bridge_static_dynamic_function_cycle emitted compiles/loads\nok 470 - bridge_static_dynamic_function_cycle emitted publishes no result on failure\nok 471 - bridge_static_dynamic_function_cycle retains independent generated failure provenance\nok 472 - bridge_static_dynamic_function_cycle emitted retains exact typed failure\nok 473 - bridge_private_names emitted compiles/loads\nok 474 - bridge_private_names emitted succeeds\nok 475 - bridge_private_names emitted matches independent value\nok 476 - bridge_unsupported_body emitted compiles/loads\nok 477 - bridge_unsupported_body emitted publishes no result on failure\nok 478 - bridge_unsupported_body retains independent generated failure provenance\nok 479 - bridge_unsupported_body emitted retains exact typed failure\nok 480 - bridge_arity_effects emitted compiles/loads\nok 481 - bridge_arity_effects emitted publishes no result on failure\nok 482 - bridge_arity_effects retains independent generated failure provenance\nok 483 - bridge_arity_effects emitted retains exact typed failure\nok 484 - bridge_arity_effects fresh child checks actual operand effects and handler entries\nok 485 - bridge_keyword_effects emitted compiles/loads\nok 486 - bridge_keyword_effects emitted publishes no result on failure\nok 487 - bridge_keyword_effects retains independent generated failure provenance\nok 488 - bridge_keyword_effects emitted retains exact typed failure\nok 489 - bridge_keyword_effects fresh child checks actual operand effects and handler entries\nok 490 - function_unbound_callable emitted compiles/loads\nok 491 - function_unbound_callable emitted succeeds\nok 492 - function_unbound_callable emitted matches independent value\nok 493 - bridge_failure_restore emitted compiles/loads\nok 494 - bridge_failure_restore emitted publishes no result on failure\nok 495 - bridge_failure_restore retains independent generated failure provenance\nok 496 - bridge_failure_restore emitted retains exact typed failure\nok 497 - fresh child checks actual typed exception identity and restored function/caller state\nok 498 - function_with_failure emitted compiles/loads\nok 499 - function_with_failure emitted publishes no result on failure\nok 500 - function_with_failure retains independent generated failure provenance\nok 501 - function_with_failure emitted retains exact typed failure\nok 502 - function_external_read emitted compiles/loads\nok 503 - function_external_read emitted succeeds\nok 504 - function_external_read emitted matches independent value\nok 505 - function_direct_read emitted compiles/loads\nok 506 - function_direct_read emitted succeeds\nok 507 - function_direct_read emitted matches independent value\nok 508 - function_local_read emitted compiles/loads\nok 509 - function_local_read emitted succeeds\nok 510 - function_local_read emitted matches independent value\nok 511 - function_external_write emitted compiles/loads\nok 512 - function_external_write emitted succeeds\nok 513 - function_external_write emitted matches independent value\nok 514 - function_local_write emitted compiles/loads\nok 515 - function_local_write emitted succeeds\nok 516 - function_local_write emitted matches independent value\nok 517 - function_parameter_read emitted compiles/loads\nok 518 - function_parameter_read emitted succeeds\nok 519 - function_parameter_read emitted matches independent value\nok 520 - function_parameter_write emitted compiles/loads\nok 521 - function_parameter_write emitted succeeds\nok 522 - function_parameter_write emitted matches independent value\nok 523 - function_unknown_persistence_reset emitted compiles/loads\nok 524 - function_unknown_persistence_reset emitted succeeds\nok 525 - function_unknown_persistence_reset emitted matches independent value\nok 526 - fresh child checks real shared/fresh working-slot identities and rejects an alias\nok 527 - function_known_persistence emitted compiles/loads\nok 528 - function_known_persistence emitted succeeds\nok 529 - function_known_persistence emitted matches independent value\nok 530 - function_nested_callback emitted compiles/loads\nok 531 - function_nested_callback emitted succeeds\nok 532 - function_nested_callback emitted matches independent value\nok 533 - function_nested_frames emitted compiles/loads\nok 534 - function_nested_frames emitted succeeds\nok 535 - function_nested_frames emitted matches independent value\nok 536 - function_with_persistence_shadow emitted compiles/loads\nok 537 - function_with_persistence_shadow emitted succeeds\nok 538 - function_with_persistence_shadow emitted matches independent value\nok 539 - function_callback_parameter_restore emitted compiles/loads\nok 540 - function_callback_parameter_restore emitted succeeds\nok 541 - function_callback_parameter_restore emitted matches independent value\nok 542 - function_private_name_collision emitted compiles/loads\nok 543 - function_private_name_collision emitted succeeds\nok 544 - function_private_name_collision emitted matches independent value\nok 545 - selected_push emitted compiles/loads\nok 546 - selected_push emitted succeeds\nok 547 - selected_push emitted matches independent value\nok 548 - absent_target emitted compiles/loads\nok 549 - absent_target emitted succeeds\nok 550 - absent_target emitted matches independent value\nok 551 - null_target emitted compiles/loads\nok 552 - null_target emitted succeeds\nok 553 - null_target emitted matches independent value\nok 554 - argument_once emitted compiles/loads\nok 555 - argument_once emitted succeeds\nok 556 - argument_once emitted matches independent value\nok 557 - post_argument_snapshot emitted compiles/loads\nok 558 - post_argument_snapshot emitted succeeds\nok 559 - post_argument_snapshot emitted matches independent value\nok 560 - prior_result emitted compiles/loads\nok 561 - prior_result emitted succeeds\nok 562 - prior_result emitted matches independent value\nok 563 - copied_parameter emitted compiles/loads\nok 564 - copied_parameter emitted succeeds\nok 565 - copied_parameter emitted matches independent value\nok 566 - nested_parameters emitted compiles/loads\nok 567 - nested_parameters emitted succeeds\nok 568 - nested_parameters emitted matches independent value\nok 569 - rule_precedence emitted compiles/loads\nok 570 - rule_precedence emitted succeeds\nok 571 - rule_precedence emitted matches independent value\nok 572 - nested_rule_context emitted compiles/loads\nok 573 - nested_rule_context emitted succeeds\nok 574 - nested_rule_context emitted matches independent value\nok 575 - with_context emitted compiles/loads\nok 576 - with_context emitted succeeds\nok 577 - with_context emitted matches independent value\nok 578 - helper_precedence emitted compiles/loads\nok 579 - helper_precedence emitted succeeds\nok 580 - helper_precedence emitted matches independent value\nok 581 - parameter_receiver_shadow emitted compiles/loads\nok 582 - parameter_receiver_shadow emitted succeeds\nok 583 - parameter_receiver_shadow emitted matches independent value\nok 584 - wrong_kind emitted compiles/loads\nok 585 - wrong_kind emitted publishes no result on failure\nok 586 - wrong_kind retains independent generated failure provenance\nok 587 - wrong_kind emitted retains kind diagnostic\nok 588 - unknown_call emitted compiles/loads\nok 589 - unknown_call emitted publishes no result on failure\nok 590 - unknown_call retains independent generated failure provenance\nok 591 - unknown_call emitted retains exact typed failure\nok 592 - arity_before_effects emitted compiles/loads\nok 593 - arity_before_effects emitted publishes no result on failure\nok 594 - arity_before_effects retains independent generated failure provenance\nok 595 - arity_before_effects emitted retains exact typed failure\nok 596 - active_receiver emitted compiles/loads\nok 597 - active_receiver emitted publishes no result on failure\nok 598 - active_receiver retains independent generated failure provenance\nok 599 - active_receiver emitted retains typed receiver error\nok 600 - active_receiver emitted rejects actual active slot\nok 601 - active_receiver emitted identifies mutation\n# Subtest: actual caller identities, copy-on-write and failure restoration\n    ok 1 - temporary copied parameter mutates\n    ok 2 - actual argument remains unchanged\n    ok 3 - actual returned aggregate is detached from argument\n    ok 4 - caller scalar reference mapping restores\n    ok 5 - caller value was never rebound\n    ok 6 - later publication has an independent actual array identity\n    ok 7 - later push does not alter the actual prior result\n    ok 8 - mutation returns the current typed target\n    ok 9 - failure control actually fails\n    ok 10 - original typed failure survives restoration\n    ok 11 - failure restores caller reference identity\n    ok 12 - failure leaves caller parameter value intact\n    ok 13 - caller rule failure control actually fails\n    ok 14 - caller rule executes exactly once\n    ok 15 - restoration rethrows the actual caller failure object\n    ok 16 - caller failure restores the parameter reference mapping\n    ok 17 - failed rule appends no value\n    ok 18 - arity control actually fails\n    ok 19 - arity diagnosis precedes arguments\n    ok 20 - actual caller effect array confirms no argument evaluation\n    ok 21 - aliased active receiver control actually fails\n    ok 22 - guard uses scalar identity across alias names\n    ok 23 - failed traversal preserves actual caller receiver\n    1..23\nok 602 - actual caller identities, copy-on-write and failure restoration\n# Subtest: function callbacks use actual fresh working frames\n    ok 1 - actual-frame source compiles\n    ok 2 - actual-frame source succeeds\n    ok 3 - direct function reads observe callback writes; outer slots remain untouched\n    ok 4 - four real invocation maps observed without copying\n    ok 5 - callbacks in first function share the actual working frame\n    ok 6 - callbacks in second function share the actual working frame\n    ok 7 - different function invocations have different actual frame identities\n    ok 8 - deliberately aliased frames fail the same identity observation\n    ok 9 - function parameter reference remains live across callbacks\n    ok 10 - fresh invocation has a different actual parameter slot\n    ok 11 - retained actual first parameter slot reflects callback writes\n    ok 12 - retained actual second parameter slot reflects callback writes\n    ok 13 - actual records retain eight fields without frame storage\n    ok 14 - callback-created aggregate slots are independent across invocations\n[2026-10-03 08:10:37][NONE][SpecEntry.pm][trace_decision:63] DECISION rule_handler_eval:Top => SKIPPED\n[2026-10-03 08:10:37][NONE][SpecEntry.pm][trace_decision:63]   Context: bless( {'code' => 'unknown_helper','kind' => 'codeblock_runtime_error','name' => 'missing_operation'}, 'LinkedSpec::CodeblockRuntime::Error' )\n    ok 15 - with failure publishes no result\n    ok 16 - original typed callback failure survives\n    ok 17 - with restores the actual function value reference after failure\n    1..17\nok 603 - function callbacks use actual fresh working frames\n# Subtest: functions cannot borrow rule callable names\n    ok 1 - unbound callable keeps diagnostic descriptor route\n    ok 2 - unbound function callable has no raw fallback\n    ok 3 - unbound callable is not claimed ready\n    ok 4 - unbound callable uses existing unsupported helper diagnostic\n    1..4\nok 604 - functions cannot borrow rule callable names\n# Subtest: registered bridge retains actual values, errors and restored state\n    ok 1 - actual compiled rest source succeeds\n    ok 2 - source result matches independent rest oracle\n    ok 3 - compiled function returns actual distinct rest arrays\n    ok 4 - same observation rejects deliberately aliased results\n    ok 5 - caller argument arrays are actual separate invocation values\n    ok 6 - actual invocation contexts restore active functions\n    ok 7 - actual codeblock stores no registry or origin field\n    ok 8 - mutating one retained actual rest value leaves the other intact\n    ok 9 - actual returned outer arrays are detached from retained callee values\n[2026-10-03 08:10:37][NONE][SpecEntry.pm][trace_decision:63] DECISION rule_handler_eval:Top => SKIPPED\n[2026-10-03 08:10:37][NONE][SpecEntry.pm][trace_decision:63]   Context: bless( {'arguments_evaluated' => 0,'code' => 'user_function_arity_mismatch','expected' => 'exactly 2','function_name' => 'pair','got' => 1,'kind' => 'codeblock_runtime_error'}, 'LinkedSpec::CodeblockRuntime::Error' )\n    ok 10 - arity checks actual caller effects rather than the serialized counter\n    ok 11 - arity observes actual compiled handler entry count\n    ok 12 - arity retains the selected typed failure\n[2026-10-03 08:10:37][NONE][SpecEntry.pm][trace_decision:63] DECISION rule_handler_eval:Top => SKIPPED\n[2026-10-03 08:10:37][NONE][SpecEntry.pm][trace_decision:63]   Context: bless( {'arguments_evaluated' => 0,'code' => 'user_function_keyword_arguments_unsupported','function_name' => 'pair','got' => 1,'kind' => 'codeblock_runtime_error'}, 'LinkedSpec::CodeblockRuntime::Error' )\n    ok 13 - keyword checks actual caller effects rather than the serialized counter\n    ok 14 - keyword observes actual compiled handler entry count\n    ok 15 - keyword retains the selected typed failure\n    ok 16 - positive checks actual caller effects rather than the serialized counter\n    ok 17 - positive observes actual compiled handler entry count\n    ok 18 - positive retains the selected typed failure\n[2026-10-03 08:10:37][NONE][SpecEntry.pm][trace_decision:63] DECISION rule_handler_eval:Top => SKIPPED\n[2026-10-03 08:10:37][NONE][SpecEntry.pm][trace_decision:63]   Context: bless( {'code' => 'unknown_helper','kind' => 'codeblock_runtime_error','name' => 'missing_operation'}, 'LinkedSpec::CodeblockRuntime::Error' )\n    ok 19 - actual typed callback exception survives the compiled bridge\n    ok 20 - failure restores the actual function recursion state\n    ok 21 - failure preserves the actual unrelated caller slot\n    ok 22 - copied callable retains actual opaque origin\n    ok 23 - equal independently constructed callable has a distinct origin\n    ok 24 - retaining opaque identity metadata does not retain the callable AST or environment\n    1..24\nok 605 - registered bridge retains actual values, errors and restored state\n1..605\nok\nAll tests successful.\nFiles=1, Tests=605, 30 wallclock secs ( 0.03 usr  0.01 sys + 28.73 cusr  0.24 csys = 29.01 CPU)\nResult: PASS\n"
+    },
+    {
+      "command": [
+        "prove",
+        "-v",
+        "-Iperl",
+        "t/callable_codeblock_literal_contract.t"
+      ],
+      "exit": 0,
+      "path": ".linkedspec-data/scratch/bridge-reconciliation/callable_codeblock_literal_contract.t.log",
+      "sha256": "bca8deac3708e2be37796f3673e4b4a2b6f2a41b5e043ecaae21537a80af9e5a",
+      "stderr": "",
+      "stdout": "t/callable_codeblock_literal_contract.t .. \n# Subtest: neutral brace classification and valid literal AST records\n    ok 1 - empty_harray has the neutral brace classification\n    ok 2 - keyed_harray has the neutral brace classification\n    ok 3 - dynamic_key_harray has the neutral brace classification\n    ok 4 - immediate_block has the neutral brace classification\n    ok 5 - zero_arg_codeblock has the neutral brace classification\n    ok 6 - fixed_codeblock has the neutral brace classification\n    ok 7 - rest_codeblock has the neutral brace classification\n    ok 8 - join_fixed exposes exactly the version-1 codeblock AST fields\n    ok 9 - join_fixed has codeblock AST version 1\n    ok 10 - join_fixed preserves exact literal source\n    ok 11 - join_fixed preserves exact body source\n    ok 12 - join_fixed preserves its exact source span\n    ok 13 - join_fixed preserves its exact body span\n    ok 14 - join_fixed owns a typed ActionIR body\n    ok 15 - join_fixed body AST preserves source bytes\n    ok 16 - join_fixed preserves the canonical callable signature\n    ok 17 - join_fixed signature minimum matches its fixed prefix\n    ok 18 - join_fixed signature maximum is exact or open\n    ok 19 - join_fixed captures no environment field\n    ok 20 - read_dynamic exposes exactly the version-1 codeblock AST fields\n    ok 21 - read_dynamic has codeblock AST version 1\n    ok 22 - read_dynamic preserves exact literal source\n    ok 23 - read_dynamic preserves exact body source\n    ok 24 - read_dynamic preserves its exact source span\n    ok 25 - read_dynamic preserves its exact body span\n    ok 26 - read_dynamic owns a typed ActionIR body\n    ok 27 - read_dynamic body AST preserves source bytes\n    ok 28 - read_dynamic preserves the canonical callable signature\n    ok 29 - read_dynamic signature minimum matches its fixed prefix\n    ok 30 - read_dynamic signature maximum is exact or open\n    ok 31 - read_dynamic captures no environment field\n    ok 32 - mutate_dynamic exposes exactly the version-1 codeblock AST fields\n    ok 33 - mutate_dynamic has codeblock AST version 1\n    ok 34 - mutate_dynamic preserves exact literal source\n    ok 35 - mutate_dynamic preserves exact body source\n    ok 36 - mutate_dynamic preserves its exact source span\n    ok 37 - mutate_dynamic preserves its exact body span\n    ok 38 - mutate_dynamic owns a typed ActionIR body\n    ok 39 - mutate_dynamic body AST preserves source bytes\n    ok 40 - mutate_dynamic preserves the canonical callable signature\n    ok 41 - mutate_dynamic signature minimum matches its fixed prefix\n    ok 42 - mutate_dynamic signature maximum is exact or open\n    ok 43 - mutate_dynamic captures no environment field\n    ok 44 - restore_parameter exposes exactly the version-1 codeblock AST fields\n    ok 45 - restore_parameter has codeblock AST version 1\n    ok 46 - restore_parameter preserves exact literal source\n    ok 47 - restore_parameter preserves exact body source\n    ok 48 - restore_parameter preserves its exact source span\n    ok 49 - restore_parameter preserves its exact body span\n    ok 50 - restore_parameter owns a typed ActionIR body\n    ok 51 - restore_parameter body AST preserves source bytes\n    ok 52 - restore_parameter preserves the canonical callable signature\n    ok 53 - restore_parameter signature minimum matches its fixed prefix\n    ok 54 - restore_parameter signature maximum is exact or open\n    ok 55 - restore_parameter captures no environment field\n    ok 56 - collect_rest exposes exactly the version-1 codeblock AST fields\n    ok 57 - collect_rest has codeblock AST version 1\n    ok 58 - collect_rest preserves exact literal source\n    ok 59 - collect_rest preserves exact body source\n    ok 60 - collect_rest preserves its exact source span\n    ok 61 - collect_rest preserves its exact body span\n    ok 62 - collect_rest owns a typed ActionIR body\n    ok 63 - collect_rest body AST preserves source bytes\n    ok 64 - collect_rest preserves the canonical callable signature\n    ok 65 - collect_rest signature minimum matches its fixed prefix\n    ok 66 - collect_rest signature maximum is exact or open\n    ok 67 - collect_rest captures no environment field\n    ok 68 - early_return exposes exactly the version-1 codeblock AST fields\n    ok 69 - early_return has codeblock AST version 1\n    ok 70 - early_return preserves exact literal source\n    ok 71 - early_return preserves exact body source\n    ok 72 - early_return preserves its exact source span\n    ok 73 - early_return preserves its exact body span\n    ok 74 - early_return owns a typed ActionIR body\n    ok 75 - early_return body AST preserves source bytes\n    ok 76 - early_return preserves the canonical callable signature\n    ok 77 - early_return signature minimum matches its fixed prefix\n    ok 78 - early_return signature maximum is exact or open\n    ok 79 - early_return captures no environment field\n    ok 80 - shadow_static exposes exactly the version-1 codeblock AST fields\n    ok 81 - shadow_static has codeblock AST version 1\n    ok 82 - shadow_static preserves exact literal source\n    ok 83 - shadow_static preserves exact body source\n    ok 84 - shadow_static preserves its exact source span\n    ok 85 - shadow_static preserves its exact body span\n    ok 86 - shadow_static owns a typed ActionIR body\n    ok 87 - shadow_static body AST preserves source bytes\n    ok 88 - shadow_static preserves the canonical callable signature\n    ok 89 - shadow_static signature minimum matches its fixed prefix\n    ok 90 - shadow_static signature maximum is exact or open\n    ok 91 - shadow_static captures no environment field\n    ok 92 - a callable literal composes as an assignment RHS\n    ok 93 - nested literal source span remains exact in its containing expression\n    ok 94 - nested literal body span remains exact in its containing expression\n    ok 95 - typed body statement spans use the containing expression coordinate space\n    1..95\nok 1 - neutral brace classification and valid literal AST records\n# Subtest: invalid literal forms retain neutral diagnostic codes\n    ok 1 - whitespace_after_brace remains a typed literal error\n    ok 2 - whitespace_after_brace keeps the neutral diagnostic code\n    ok 3 - missing_signature_closer remains a typed literal error\n    ok 4 - missing_signature_closer keeps the neutral diagnostic code\n    ok 5 - empty_parameter remains a typed literal error\n    ok 6 - empty_parameter keeps the neutral diagnostic code\n    ok 7 - invalid_parameter remains a typed literal error\n    ok 8 - invalid_parameter keeps the neutral diagnostic code\n    ok 9 - rest_not_final remains a typed literal error\n    ok 10 - rest_not_final keeps the neutral diagnostic code\n    ok 11 - missing_rest_name remains a typed literal error\n    ok 12 - missing_rest_name keeps the neutral diagnostic code\n    ok 13 - rest_marker_name_whitespace remains a typed literal error\n    ok 14 - rest_marker_name_whitespace keeps the neutral diagnostic code\n    ok 15 - duplicate_parameter remains a typed literal error\n    ok 16 - duplicate_parameter keeps the neutral diagnostic code\n    ok 17 - reserved_parameter remains a typed literal error\n    ok 18 - reserved_parameter keeps the neutral diagnostic code\n    1..18\nok 2 - invalid literal forms retain neutral diagnostic codes\n# Subtest: lowering serializes inert typed data without host callable objects\n    ok 1 - generated Perl reconstructs the codeblock from canonical hex-serialized data\n    ok 2 - generated construction contains no host closure or coderef\n    ok 3 - literal syntax is inert serialized data rather than executable Perl\n    ok 4 - focused callable-codeblock spec compiles\n    ok 5 - constructing and copying a codeblock does not execute its body\n    ok 6 - runtime codeblock keeps the exact typed record fields\n    ok 7 - generated execution preserves exact literal source\n    ok 8 - generated execution preserves exact body source\n    ok 9 - generated execution preserves typed body source\n    ok 10 - generated execution preserves the parsed callable signature\n    1..10\nok 3 - lowering serializes inert typed data without host callable objects\n# Subtest: operator-named signature parameters preserve native and generated calls\n    ok 1 - x,y native invocation returns its first parameter\n    ok 2 - x,y has no native handler compilation error\n    ok 3 - x,y generated source loads\n    ok 4 - x,y generated invocation returns its first parameter\n    ok 5 - x,...y native invocation returns its first parameter\n    ok 6 - x,...y has no native handler compilation error\n    ok 7 - x,...y generated source loads\n    ok 8 - x,...y generated invocation returns its first parameter\n    ok 9 - x,tr native invocation returns its first parameter\n    ok 10 - x,tr has no native handler compilation error\n    ok 11 - x,tr generated source loads\n    ok 12 - x,tr generated invocation returns its first parameter\n    ok 13 - x,...tr native invocation returns its first parameter\n    ok 14 - x,...tr has no native handler compilation error\n    ok 15 - x,...tr generated source loads\n    ok 16 - x,...tr generated invocation returns its first parameter\n    ok 17 - x,s native invocation returns its first parameter\n    ok 18 - x,s has no native handler compilation error\n    ok 19 - x,s generated source loads\n    ok 20 - x,s generated invocation returns its first parameter\n    ok 21 - x,...s native invocation returns its first parameter\n    ok 22 - x,...s has no native handler compilation error\n    ok 23 - x,...s generated source loads\n    ok 24 - x,...s generated invocation returns its first parameter\n    ok 25 - x,q native invocation returns its first parameter\n    ok 26 - x,q has no native handler compilation error\n    ok 27 - x,q generated source loads\n    ok 28 - x,q generated invocation returns its first parameter\n    ok 29 - x,...q native invocation returns its first parameter\n    ok 30 - x,...q has no native handler compilation error\n    ok 31 - x,...q generated source loads\n    ok 32 - x,...q generated invocation returns its first parameter\n    ok 33 - x,qq native invocation returns its first parameter\n    ok 34 - x,qq has no native handler compilation error\n    ok 35 - x,qq generated source loads\n    ok 36 - x,qq generated invocation returns its first parameter\n    ok 37 - x,...qq native invocation returns its first parameter\n    ok 38 - x,...qq has no native handler compilation error\n    ok 39 - x,...qq generated source loads\n    ok 40 - x,...qq generated invocation returns its first parameter\n    ok 41 - x,qx native invocation returns its first parameter\n    ok 42 - x,qx has no native handler compilation error\n    ok 43 - x,qx generated source loads\n    ok 44 - x,qx generated invocation returns its first parameter\n    ok 45 - x,...qx native invocation returns its first parameter\n    ok 46 - x,...qx has no native handler compilation error\n    ok 47 - x,...qx generated source loads\n    ok 48 - x,...qx generated invocation returns its first parameter\n    ok 49 - x,qr native invocation returns its first parameter\n    ok 50 - x,qr has no native handler compilation error\n    ok 51 - x,qr generated source loads\n    ok 52 - x,qr generated invocation returns its first parameter\n    ok 53 - x,...qr native invocation returns its first parameter\n    ok 54 - x,...qr has no native handler compilation error\n    ok 55 - x,...qr generated source loads\n    ok 56 - x,...qr generated invocation returns its first parameter\n    ok 57 - x,m native invocation returns its first parameter\n    ok 58 - x,m has no native handler compilation error\n    ok 59 - x,m generated source loads\n    ok 60 - x,m generated invocation returns its first parameter\n    ok 61 - x,...m native invocation returns its first parameter\n    ok 62 - x,...m has no native handler compilation error\n    ok 63 - x,...m generated source loads\n    ok 64 - x,...m generated invocation returns its first parameter\n    1..64\nok 4 - operator-named signature parameters preserve native and generated calls\n# Subtest: user-function arguments and results preserve codeblock records\n    ok 1 - focused callable-codeblock spec compiles\n    ok 2 - a codeblock passed through a user-function parameter remains exact typed data\n    ok 3 - a codeblock constructed and returned by a user function remains exact typed data\n    1..3\nok 5 - user-function arguments and results preserve codeblock records\n# Subtest: neutral fixture executes with dynamic caller context\n    ok 1 - focused callable-codeblock spec compiles\n    ok 2 - the contract-sourced Perl fixture matches every neutral invocation result\n    ok 3 - standalone generated source containing codeblock calls loads\n    ok 4 - standalone generated execution matches the neutral fixture\n    1..4\nok 6 - neutral fixture executes with dynamic caller context\n# Subtest: standalone discard and static callable precedence remain exact\n    ok 1 - focused callable-codeblock spec compiles\n    ok 2 - a standalone codeblock call executes its side effects and discards its result\n    ok 3 - a standalone codeblock call introduces no raw Perl dependency\n    ok 4 - a standalone codeblock call is canonical VALUE_DROP ActionIR\n    ok 5 - focused callable-codeblock spec compiles\n    ok 6 - a governed helper retains precedence over a same-named codeblock binding\n    ok 7 - focused callable-codeblock spec compiles\n    ok 8 - a registered user function retains precedence over a same-named codeblock binding\n    1..8\nok 7 - standalone discard and static callable precedence remain exact\n# Subtest: typed invocation failures preserve neutral diagnostic payloads\n    ok 1 - focused callable-codeblock failure spec compiles\n[2026-10-03 08:10:55][NONE][SpecEntry.pm][trace_decision:63] DECISION rule_handler_eval:Top => SKIPPED\n[2026-10-03 08:10:55][NONE][SpecEntry.pm][trace_decision:63]   Context: bless( {'code' => 'codeblock_arity_mismatch','expected' => 'exactly 1','got' => 0,'kind' => 'codeblock_runtime_error'}, 'LinkedSpec::CodeblockRuntime::Error' )\n    ok 2 - fixed arity mismatch returns no parser result\n    ok 3 - 'fixed arity mismatch has a typed runtime detail' isa 'LinkedSpec::CodeblockRuntime::Error'\n    ok 4 - fixed arity mismatch preserves neutral code\n    ok 5 - fixed arity mismatch preserves neutral expected\n    ok 6 - fixed arity mismatch preserves neutral got\n    ok 7 - focused callable-codeblock failure spec compiles\n[2026-10-03 08:10:55][NONE][SpecEntry.pm][trace_decision:63] DECISION rule_handler_eval:Top => SKIPPED\n[2026-10-03 08:10:55][NONE][SpecEntry.pm][trace_decision:63]   Context: bless( {'code' => 'codeblock_keyword_arguments_unsupported','expected' => 'positional arguments','got' => 1,'kind' => 'codeblock_runtime_error'}, 'LinkedSpec::CodeblockRuntime::Error' )\n    ok 8 - keyword argument rejection returns no parser result\n    ok 9 - 'keyword argument rejection has a typed runtime detail' isa 'LinkedSpec::CodeblockRuntime::Error'\n    ok 10 - keyword argument rejection preserves neutral code\n    ok 11 - keyword argument rejection preserves neutral expected\n    ok 12 - keyword argument rejection preserves neutral got\n    ok 13 - focused callable-codeblock failure spec compiles\n[2026-10-03 08:10:55][NONE][SpecEntry.pm][trace_decision:63] DECISION rule_handler_eval:Top => SKIPPED\n[2026-10-03 08:10:55][NONE][SpecEntry.pm][trace_decision:63]   Context: bless( {'code' => 'value_not_callable','kind' => 'codeblock_runtime_error','value_kind' => 'scalar'}, 'LinkedSpec::CodeblockRuntime::Error' )\n    ok 14 - bound scalar is not callable returns no parser result\n    ok 15 - 'bound scalar is not callable has a typed runtime detail' isa 'LinkedSpec::CodeblockRuntime::Error'\n    ok 16 - bound scalar is not callable preserves neutral code\n    ok 17 - bound scalar is not callable preserves neutral value_kind\n    ok 18 - focused callable-codeblock failure spec compiles\n[2026-10-03 08:10:55][NONE][SpecEntry.pm][trace_decision:63] DECISION rule_handler_eval:Top => SKIPPED\n[2026-10-03 08:10:55][NONE][SpecEntry.pm][trace_decision:63]   Context: bless( {'code' => 'codeblock_recursion_unsupported','cycle' => ['reader','reader'],'kind' => 'codeblock_runtime_error'}, 'LinkedSpec::CodeblockRuntime::Error' )\n    ok 19 - direct recursion rejection returns no parser result\n    ok 20 - 'direct recursion rejection has a typed runtime detail' isa 'LinkedSpec::CodeblockRuntime::Error'\n    ok 21 - direct recursion rejection preserves neutral code\n    ok 22 - direct recursion rejection preserves neutral cycle\n    ok 23 - 'a failing body reports a typed runtime error directly' isa 'LinkedSpec::CodeblockRuntime::Error'\n    ok 24 - a failing body preserves its typed cause\n    ok 25 - a failing body identifies the unknown call\n    ok 26 - temporary parameter binding restores after body failure\n    1..26\nok 8 - typed invocation failures preserve neutral diagnostic payloads\n# Subtest: final codeblock declarations and contextual AST normalization are metadata-owned\n    ok 1 - typed-codeblock user-function descriptor builds\n    ok 2 - typed-codeblock function uses the exact neutral version-3 record\n    ok 3 - typed-codeblock function is outward descriptor version 3\n    ok 4 - typed-codeblock function preserves ordered parameter names\n    ok 5 - typed-codeblock function declares only the final parameter kind\n    ok 6 - staged body payload preserves the final parameter kind\n    ok 7 - staged body parse job preserves the final parameter kind\n    ok 8 - attached helper block normalizes to typed codeblock_argument\n    ok 9 - parenthesized helper block normalizes to typed codeblock_argument\n    ok 10 - attached and parenthesized helper forms have one canonical semantic AST payload\n    ok 11 - receiver parser recognizes attached syntax generically\n    ok 12 - generic receiver syntax is marked for later callable-contract validation\n    1..12\nok 9 - final codeblock declarations and contextual AST normalization are metadata-owned\n# Subtest: helper user-function and receiver contextual forms execute equivalently\n    ok 1 - focused callable-codeblock spec compiles\n    ok 2 - return(with(\"x\") { return(cat(value, \"!\")) }) executes through declared codeblock metadata\n    ok 3 - focused callable-codeblock spec compiles\n    ok 4 - return(with(\"x\", { return(cat(value, \"!\")) })) executes through declared codeblock metadata\n    ok 5 - focused callable-codeblock spec compiles\n    ok 6 - return(with(\"x\", {|item| return(cat(item, \"!\")) })) executes through declared codeblock metadata\n    ok 7 - focused callable-codeblock spec compiles\n    ok 8 - return(\"x\".with() { return(cat(value, \"!\")) }) executes through declared codeblock metadata\n    ok 9 - focused callable-codeblock spec compiles\n    ok 10 - return(\"x\".with({ return(cat(value, \"!\")) })) executes through declared codeblock metadata\n    ok 11 - focused callable-codeblock spec compiles\n    ok 12 - return(\"x\".with({|item| return(cat(item, \"!\")) })) executes through declared codeblock metadata\n    ok 13 - focused callable-codeblock spec compiles\n    ok 14 - typed user functions accept attached, parenthesized, and explicit-literal codeblocks\n    ok 15 - standalone generated typed-callback source loads\n    ok 16 - standalone generated typed-callback execution preserves all three forms\n    ok 17 - focused callable-codeblock spec compiles\n    ok 18 - { \"b\" : 2, \"a\" : 1 }.map_leaves() { return(cat(value, \"!\")) } uses the receiver callable contract\n    ok 19 - focused callable-codeblock spec compiles\n    ok 20 - { \"b\" : 2, \"a\" : 1 }.map_leaves({ return(cat(value, \"!\")) }) uses the receiver callable contract\n    1..20\nok 10 - helper user-function and receiver contextual forms execute equivalently\n# Subtest: typed final-codeblock declaration and value failures stay explicit\n[2026-10-03 08:10:56][NONE][Compiler.pm][log_output:479] CRITICAL ERROR\n[2026-10-03 08:10:56][NONE][Compiler.pm][log_output:479]   Context: User function registry build failed\n    ok 1 - callback: codeblock(item) is rejected before parser construction\n    ok 2 - callback: codeblock(item) reports codeblock_declaration_has_no_argument_list\n[2026-10-03 08:10:56][NONE][Compiler.pm][log_output:479] CRITICAL ERROR\n[2026-10-03 08:10:56][NONE][Compiler.pm][log_output:479]   Context: User function registry build failed\n    ok 3 - callback: codeblock, tail is rejected before parser construction\n    ok 4 - callback: codeblock, tail reports codeblock_parameter_must_be_final\n[2026-10-03 08:10:56][NONE][Compiler.pm][log_output:479] CRITICAL ERROR\n[2026-10-03 08:10:56][NONE][Compiler.pm][log_output:479]   Context: User function registry build failed\n    ok 5 - : codeblock is rejected before parser construction\n    ok 6 - : codeblock reports invalid_codeblock_parameter_name\n[2026-10-03 08:10:56][NONE][Compiler.pm][log_output:479] CRITICAL ERROR\n[2026-10-03 08:10:56][NONE][Compiler.pm][log_output:479]   Context: User function registry build failed\n    ok 7 - callback: closure is rejected before parser construction\n    ok 8 - callback: closure reports unknown_parameter_type\n[2026-10-03 08:10:56][NONE][Compiler.pm][log_output:479] CRITICAL ERROR\n[2026-10-03 08:10:56][NONE][Compiler.pm][log_output:479]   Context: User function registry build failed\n    ok 9 - an independently malformed function header is rejected\n    ok 10 - generic malformed-header detail remains stable\n    ok 11 - a colon in the function body cannot reclassify the header diagnostic\n    ok 12 - focused callable-codeblock failure spec compiles\n[2026-10-03 08:10:56][NONE][SpecEntry.pm][trace_decision:63] DECISION rule_handler_eval:Top => SKIPPED\n[2026-10-03 08:10:56][NONE][SpecEntry.pm][trace_decision:63]   Context: bless( {'code' => 'final_argument_not_codeblock','kind' => 'codeblock_runtime_error','value_kind' => 'harray'}, 'LinkedSpec::CodeblockRuntime::Error' )\n    ok 13 - harray in a codeblock slot returns no parser result\n    ok 14 - 'harray in a codeblock slot has typed runtime detail' isa 'LinkedSpec::CodeblockRuntime::Error'\n    ok 15 - harray in a codeblock slot is not contextually promoted\n    ok 16 - typed rejection preserves the actual harray kind\n    ok 17 - focused callable-codeblock failure spec compiles\n[2026-10-03 08:10:56][NONE][SpecEntry.pm][trace_decision:63] DECISION rule_handler_eval:Top => SKIPPED\n[2026-10-03 08:10:56][NONE][SpecEntry.pm][trace_decision:63]   Context: bless( {'code' => 'final_argument_not_codeblock','kind' => 'codeblock_runtime_error','value_kind' => 'harray'}, 'LinkedSpec::CodeblockRuntime::Error' )\n    ok 18 - helper harray in a codeblock slot returns no parser result\n    ok 19 - 'helper harray in a codeblock slot has typed runtime detail' isa 'LinkedSpec::CodeblockRuntime::Error'\n    ok 20 - helper harray uses the declared final-codeblock boundary\n    ok 21 - helper typed rejection preserves the actual harray kind\n    ok 22 - focused callable-codeblock failure spec compiles\n[2026-10-03 08:10:56][NONE][SpecEntry.pm][trace_decision:63] DECISION rule_handler_eval:Top => SKIPPED\n[2026-10-03 08:10:56][NONE][SpecEntry.pm][trace_decision:63]   Context: bless( {'code' => 'final_argument_not_codeblock','kind' => 'codeblock_runtime_error','value_kind' => 'harray'}, 'LinkedSpec::CodeblockRuntime::Error' )\n    ok 23 - receiver harray in a codeblock slot returns no parser result\n    ok 24 - 'receiver harray in a codeblock slot has typed runtime detail' isa 'LinkedSpec::CodeblockRuntime::Error'\n    ok 25 - receiver harray uses the declared final-codeblock boundary\n    ok 26 - receiver typed rejection preserves the actual harray kind\n    1..26\nok 11 - typed final-codeblock declaration and value failures stay explicit\n1..11\nok\nAll tests successful.\nFiles=1, Tests=11, 18 wallclock secs ( 0.02 usr  0.00 sys + 18.59 cusr  0.12 csys = 18.73 CPU)\nResult: PASS\n"
+    },
+    {
+      "command": [
+        "prove",
+        "-v",
+        "-Iperl",
+        "t/variadic_user_function_contract.t"
+      ],
+      "exit": 0,
+      "path": ".linkedspec-data/scratch/bridge-reconciliation/variadic_user_function_contract.t.log",
+      "sha256": "11209477e6674f449b997281efd207df091f47e74e449dd824fe0f00c997d638",
+      "stderr": "",
+      "stdout": "t/variadic_user_function_contract.t .. \nok 1 - loads the adopted callable-signature contract\nok 2 - permanent self-hosted grammar compiles with variadic definition ownership\nok 3 - self-hosted grammar preserves fixed and variadic definitions in source order\nok 4 - self-hosted grammar emits the adopted version-2 signature\nok 5 - neutral variadic fixture builds a descriptor\nok 6 - neutral variadic descriptor build leaves last_error clear\nok 7 - descriptor exposes the function registry\nok 8 - fixed function retains the exact version-1 outward record shape\nok 9 - fixed function remains version 1\nok 10 - fixed function retains ordered params\nok 11 - fixed function retains exact arity\nok 12 - fixed function does not gain a signature field\nok 13 - all_values variadic function is exposed\nok 14 - all_values uses the exact version-2 outward record shape\nok 15 - all_values function record is version 2\nok 16 - all_values preserves the adopted callable signature\nok 17 - all_values does not reinterpret version-1 params/arity\nok 18 - all_values body_payload is present\nok 19 - all_values body_payload preserves the same signature\nok 20 - all_values body_payload uses signature instead of params/arity\nok 21 - all_values body_parse_job is present\nok 22 - all_values body_parse_job preserves the same signature\nok 23 - all_values body_parse_job uses signature instead of params/arity\nok 24 - collect variadic function is exposed\nok 25 - collect uses the exact version-2 outward record shape\nok 26 - collect function record is version 2\nok 27 - collect preserves the adopted callable signature\nok 28 - collect does not reinterpret version-1 params/arity\nok 29 - collect body_payload is present\nok 30 - collect body_payload preserves the same signature\nok 31 - collect body_payload uses signature instead of params/arity\nok 32 - collect body_parse_job is present\nok 33 - collect body_parse_job preserves the same signature\nok 34 - collect body_parse_job uses signature instead of params/arity\nok 35 - variadic fixture generates Perl parser source\nok 36 - generated source binds extras into a fresh rest array\nok 37 - generated source has no unsupported-helper sentinel\nok 38 - neutral variadic fixture compiles to a parser\nok 39 - Perl executes every valid neutral variadic call case exactly\nok 40 - separate invocations receive distinct fresh empty rest arrays\nok 41 - ordered-evaluation fixture compiles\nok 42 - variadic arguments evaluate exactly once from left to right before rest binding\n[2026-10-03 08:11:15][NONE][Compiler.pm][log_output:479] CRITICAL ERROR\n[2026-10-03 08:11:15][NONE][Compiler.pm][log_output:479]   Context: User function registry build failed\nok 43 - rest_not_final definition is rejected\nok 44 - rest_not_final is owned by function_registry\nok 45 - rest_not_final reports a stable definition diagnostic\n[2026-10-03 08:11:15][NONE][Compiler.pm][log_output:479] CRITICAL ERROR\n[2026-10-03 08:11:15][NONE][Compiler.pm][log_output:479]   Context: User function registry build failed\nok 46 - multiple_rest definition is rejected\nok 47 - multiple_rest is owned by function_registry\nok 48 - multiple_rest reports a stable definition diagnostic\n[2026-10-03 08:11:15][NONE][Compiler.pm][log_output:479] CRITICAL ERROR\n[2026-10-03 08:11:15][NONE][Compiler.pm][log_output:479]   Context: User function registry build failed\nok 49 - missing_rest_name definition is rejected\nok 50 - missing_rest_name is owned by function_registry\nok 51 - missing_rest_name reports a stable definition diagnostic\n[2026-10-03 08:11:15][NONE][Compiler.pm][log_output:479] CRITICAL ERROR\n[2026-10-03 08:11:15][NONE][Compiler.pm][log_output:479]   Context: User function registry build failed\nok 52 - suffix_rest_marker definition is rejected\nok 53 - suffix_rest_marker is owned by function_registry\nok 54 - suffix_rest_marker reports a stable definition diagnostic\n[2026-10-03 08:11:15][NONE][Compiler.pm][log_output:479] CRITICAL ERROR\n[2026-10-03 08:11:15][NONE][Compiler.pm][log_output:479]   Context: User function registry build failed\nok 55 - rest_marker_name_whitespace definition is rejected\nok 56 - rest_marker_name_whitespace is owned by function_registry\nok 57 - rest_marker_name_whitespace reports a stable definition diagnostic\n[2026-10-03 08:11:15][NONE][Compiler.pm][log_output:479] CRITICAL ERROR\n[2026-10-03 08:11:15][NONE][Compiler.pm][log_output:479]   Context: User function registry build failed\nok 58 - duplicate_rest_name definition is rejected\nok 59 - duplicate_rest_name is owned by function_registry\nok 60 - duplicate_rest_name reports a stable definition diagnostic\n[2026-10-03 08:11:15][NONE][Compiler.pm][log_output:479] CRITICAL ERROR\n[2026-10-03 08:11:15][NONE][Compiler.pm][log_output:479]   Context: User function registry build failed\nok 61 - reserved_rest_name definition is rejected\nok 62 - reserved_rest_name is owned by function_registry\nok 63 - reserved_rest_name reports a stable definition diagnostic\nok 64 - wrong-arity calls retain the diagnostic descriptor path\nok 65 - wrong arity never falls back to raw Perl\nok 66 - fixed-extra and variadic-missing-prefix calls report their registered callees\n1..66\nok\nAll tests successful.\nFiles=1, Tests=66, 19 wallclock secs ( 0.01 usr  0.00 sys + 18.12 cusr  0.11 csys = 18.24 CPU)\nResult: PASS\n"
+    },
+    {
+      "command": [
+        "prove",
+        "-v",
+        "-Iperl",
+        "t/uniform_binding_contract.t"
+      ],
+      "exit": 0,
+      "path": ".linkedspec-data/scratch/bridge-reconciliation/uniform_binding_contract.t.log",
+      "sha256": "60fdd2c323d3c8b05384ea3deeec8c0360e5a3e91e8de9d92af2824c3d71d2e5",
+      "stderr": "",
+      "stdout": "t/uniform_binding_contract.t .. \nok 1 - loads the adopted uniform-binding contract\n# Subtest: contract future fixture executes live and from standalone generated source\n    ok 1 - uniform-binding future fixture compiles\n    ok 2 - live Perl matches the deterministic neutral fixture\n    ok 3 - live neutral fixture leaves structured runtime error clear\n    ok 4 - uniform-binding fixture emits standalone source\n    ok 5 - generated fixture has no unsupported-helper residue\n    ok 6 - standalone uniform-binding source loads\n    ok 7 - standalone generated execution completes\n    ok 8 - standalone generated execution matches the fixture\n    1..8\nok 2 - contract future fixture executes live and from standalone generated source\n# Subtest: bare mutations auto-create and return updated typed bindings\n    ok 1 - bare mutation fixture compiles\n    ok 2 - push, split, and hash-index mutation share bare typed bindings and return independent updates\n    ok 3 - bare mutation fixture leaves structured runtime error clear\n    1..3\nok 3 - bare mutations auto-create and return updated typed bindings\n# Subtest: bare in-place collection helpers update one binding and return snapshots\n    ok 1 - bare collection mutation fixture compiles\n    ok 2 - collection transforms return independent values and leave the binding at the latest update\n    ok 3 - bare collection mutation leaves structured runtime error clear\n    1..3\nok 4 - bare in-place collection helpers update one binding and return snapshots\n# Subtest: all array-end methods return independent updated arrays\n    ok 1 - array-end result fixture compiles\n    ok 2 - push/pop end methods return saved updates and continuations consume the current array\n    ok 3 - array-end result fixture leaves structured runtime error clear\n    1..3\nok 5 - all array-end methods return independent updated arrays\n# Subtest: set returns the post-assignment typed value for receiver chaining\n    ok 1 - set chaining fixture compiles\n    ok 2 - set chains from the assigned typed value and preserves the binding\n    ok 3 - set chaining fixture leaves structured runtime error clear\n    1..3\nok 6 - set returns the post-assignment typed value for receiver chaining\n# Subtest: pure helpers read the same scalar-held typed binding that mutations update\n    ok 1 - pure uniform-binding helper fixture compiles\n    ok 2 - pure array/hash helpers observe mutation updates through the one bare typed binding\n    ok 3 - pure uniform-binding helper fixture leaves structured runtime error clear\n    ok 4 - print_each evaluates the scalar-held bare array binding through the diagnostic seam\n    1..4\nok 7 - pure helpers read the same scalar-held typed binding that mutations update\n# Subtest: static rule push keeps precedence over a same-named binding\n    ok 1 - ambiguous push resolves the potential static-rule entry\n    ok 2 - ambiguous push retains a representation-neutral static-rule branch\n    ok 3 - ambiguous push also contains the bare array-binding branch\n    ok 4 - static push precedence fixture compiles\n    ok 5 - registered rule wins and the same-named binding is unchanged\n    ok 6 - static push precedence leaves structured runtime error clear\n    1..6\nok 8 - static rule push keeps precedence over a same-named binding\n# Subtest: wrong-kind mutation reports the neutral code and fields\n    ok 1 - wrong-kind mutation fixture compiles\n[2026-10-03 08:11:30][NONE][SpecEntry.pm][trace_decision:63] DECISION rule_handler_eval:Top => SKIPPED\n[2026-10-03 08:11:30][NONE][SpecEntry.pm][trace_decision:63]   Context: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n[2026-10-03 08:11:30][NONE][SpecEntry.pm][trace_decision:63]   Context: \n    ok 2 - wrong-kind push returns no parser result\n    ok 3 - wrong-kind push reports the neutral diagnostic code\n    ok 4 - wrong-kind push reports the binding identifier\n    ok 5 - wrong-kind push reports the required kind\n    ok 6 - wrong-kind push reports the actual kind\n    1..6\nok 9 - wrong-kind mutation reports the neutral code and fields\n# Subtest: exact aggregate selectors hard-reject at Perl compile and generated-source boundaries\n    ok 1 - array_read has no compatibility lowering result\n    ok 2 - array_read direct lowering reports the neutral diagnostic fields\n    ok 3 - array_read is rejected while compiling a live parser\n    ok 4 - array_read live rejection is compiler-owned\n    ok 5 - array_read live diagnostic preserves neutral fields\n    ok 6 - array_read cannot emit standalone generated source\n    ok 7 - array_read generated-source rejection is structured\n    ok 8 - array_read generated-source rejection has the stable outer code\n    ok 9 - array_read generated-source detail preserves neutral fields\n    ok 10 - array_whitespace has no compatibility lowering result\n    ok 11 - array_whitespace direct lowering reports the neutral diagnostic fields\n    ok 12 - array_whitespace is rejected while compiling a live parser\n    ok 13 - array_whitespace live rejection is compiler-owned\n    ok 14 - array_whitespace live diagnostic preserves neutral fields\n    ok 15 - array_whitespace cannot emit standalone generated source\n    ok 16 - array_whitespace generated-source rejection is structured\n    ok 17 - array_whitespace generated-source rejection has the stable outer code\n    ok 18 - array_whitespace generated-source detail preserves neutral fields\n    ok 19 - hash_read has no compatibility lowering result\n    ok 20 - hash_read direct lowering reports the neutral diagnostic fields\n    ok 21 - hash_read is rejected while compiling a live parser\n    ok 22 - hash_read live rejection is compiler-owned\n    ok 23 - hash_read live diagnostic preserves neutral fields\n    ok 24 - hash_read cannot emit standalone generated source\n    ok 25 - hash_read generated-source rejection is structured\n    ok 26 - hash_read generated-source rejection has the stable outer code\n    ok 27 - hash_read generated-source detail preserves neutral fields\n    ok 28 - nested_copy has no compatibility lowering result\n    ok 29 - nested_copy direct lowering reports the neutral diagnostic fields\n    ok 30 - nested_copy is rejected while compiling a live parser\n    ok 31 - nested_copy live rejection is compiler-owned\n    ok 32 - nested_copy live diagnostic preserves neutral fields\n    ok 33 - nested_copy cannot emit standalone generated source\n    ok 34 - nested_copy generated-source rejection is structured\n    ok 35 - nested_copy generated-source rejection has the stable outer code\n    ok 36 - nested_copy generated-source detail preserves neutral fields\n    ok 37 - set_target has no compatibility lowering result\n    ok 38 - set_target direct lowering reports the neutral diagnostic fields\n    ok 39 - set_target is rejected while compiling a live parser\n    ok 40 - set_target live rejection is compiler-owned\n    ok 41 - set_target live diagnostic preserves neutral fields\n    ok 42 - set_target cannot emit standalone generated source\n    ok 43 - set_target generated-source rejection is structured\n    ok 44 - set_target generated-source rejection has the stable outer code\n    ok 45 - set_target generated-source detail preserves neutral fields\n    ok 46 - receiver has no compatibility lowering result\n    ok 47 - receiver direct lowering reports the neutral diagnostic fields\n    ok 48 - receiver is rejected while compiling a live parser\n    ok 49 - receiver live rejection is compiler-owned\n    ok 50 - receiver live diagnostic preserves neutral fields\n    ok 51 - receiver cannot emit standalone generated source\n    ok 52 - receiver generated-source rejection is structured\n    ok 53 - receiver generated-source rejection has the stable outer code\n    ok 54 - receiver generated-source detail preserves neutral fields\n    ok 55 - unused user-function body cannot hide a removed selector\n    ok 56 - unused function rejection is compiler-owned\n    ok 57 - unused function rejects while building the staged function registry\n    ok 58 - unused function rejection preserves the neutral selector fields\n    1..58\nok 10 - exact aggregate selectors hard-reject at Perl compile and generated-source boundaries\n# Subtest: retained aggregate constructors and literals remain distinct from removed selectors\n    ok 1 - array_empty_call still lowers\n    ok 2 - array_empty_call does not enter removed-selector rejection\n    ok 3 - array_quoted_single still lowers\n    ok 4 - array_quoted_single does not enter removed-selector rejection\n    ok 5 - array_computed_single still lowers\n    ok 6 - array_computed_single does not enter removed-selector rejection\n    ok 7 - array_multiple still lowers\n    ok 8 - array_multiple does not enter removed-selector rejection\n    ok 9 - hash_empty_call still lowers\n    ok 10 - hash_empty_call does not enter removed-selector rejection\n    ok 11 - hash_pair still lowers\n    ok 12 - hash_pair does not enter removed-selector rejection\n    ok 13 - array_literal_single still lowers\n    ok 14 - array_literal_single does not enter removed-selector rejection\n    ok 15 - harray_literal still lowers\n    ok 16 - harray_literal does not enter removed-selector rejection\n    ok 17 - retained aggregate constructor fixture compiles\n    ok 18 - empty, quoted/computed/multi constructors and literals retain their distinct values\n    ok 19 - retained aggregate constructors leave structured runtime error clear\n    1..19\nok 11 - retained aggregate constructors and literals remain distinct from removed selectors\n# Subtest: selector-free source remains behavior-compatible after migration\n    ok 1 - temporary selector compatibility fixture compiles\n    ok 2 - bare typed bindings preserve the former compatibility result\n    ok 3 - selector-free compatibility result leaves structured runtime error clear\n    1..3\nok 12 - selector-free source remains behavior-compatible after migration\n1..12\nok\nAll tests successful.\nFiles=1, Tests=12, 16 wallclock secs ( 0.01 usr  0.00 sys + 16.31 cusr  0.09 csys = 16.41 CPU)\nResult: PASS\n"
+    },
+    {
+      "command": [
+        "prove",
+        "-v",
+        "-Iperl",
+        "t/map_leaves_mutation_perl_contract.t"
+      ],
+      "exit": 0,
+      "path": ".linkedspec-data/scratch/bridge-reconciliation/map_leaves_mutation_perl_contract.t.log",
+      "sha256": "e39ee43eedfb4dfe5709c97f896d07aa3388b3648a1c334630150f6aebd9a054",
+      "stderr": "",
+      "stdout": "t/map_leaves_mutation_perl_contract.t .. \nok 1 - loads the frozen map_leaves! contract\n# Subtest: dedicated receiver-mutation AST and exclusions agree with the neutral contract\n    ok 1 - bare_receiver_no_continuation preserves every frozen AST field and span\n    ok 2 - array_count_continuation preserves every frozen AST field and span\n    ok 3 - insignificant_whitespace uses the dedicated AST kind\n    ok 4 - insignificant_whitespace preserves the receiver\n    ok 5 - insignificant_whitespace preserves ordinary continuation methods\n    ok 6 - nested_callback_braces uses the dedicated AST kind\n    ok 7 - nested_callback_braces preserves the receiver\n    ok 8 - nested_callback_braces preserves ordinary continuation methods\n    ok 9 - function_form is rejected\n    ok 10 - function_form is a typed parser diagnostic\n    ok 11 - function_form preserves diagnostic code\n    ok 12 - function_form preserves diagnostic stage\n    ok 13 - function_form preserves exact message\n    ok 14 - function_form preserves the authored half-open span\n    ok 15 - literal_receiver is rejected\n    ok 16 - literal_receiver is a typed parser diagnostic\n    ok 17 - literal_receiver preserves diagnostic code\n    ok 18 - literal_receiver preserves diagnostic stage\n    ok 19 - literal_receiver preserves exact message\n    ok 20 - literal_receiver preserves the authored half-open span\n    ok 21 - helper_result_receiver is rejected\n    ok 22 - helper_result_receiver is a typed parser diagnostic\n    ok 23 - helper_result_receiver preserves diagnostic code\n    ok 24 - helper_result_receiver preserves diagnostic stage\n    ok 25 - helper_result_receiver preserves exact message\n    ok 26 - helper_result_receiver preserves the authored half-open span\n    ok 27 - nested_receiver is rejected\n    ok 28 - nested_receiver is a typed parser diagnostic\n    ok 29 - nested_receiver preserves diagnostic code\n    ok 30 - nested_receiver preserves diagnostic stage\n    ok 31 - nested_receiver preserves exact message\n    ok 32 - nested_receiver preserves the authored half-open span\n    ok 33 - property_receiver is rejected\n    ok 34 - property_receiver is a typed parser diagnostic\n    ok 35 - property_receiver preserves diagnostic code\n    ok 36 - property_receiver preserves diagnostic stage\n    ok 37 - property_receiver preserves exact message\n    ok 38 - property_receiver preserves the authored half-open span\n    ok 39 - reserved_receiver is rejected\n    ok 40 - reserved_receiver is a typed parser diagnostic\n    ok 41 - reserved_receiver preserves diagnostic code\n    ok 42 - reserved_receiver preserves diagnostic stage\n    ok 43 - reserved_receiver preserves exact message\n    ok 44 - reserved_receiver preserves the authored half-open span\n    ok 45 - walk_bang is rejected\n    ok 46 - walk_bang is a typed parser diagnostic\n    ok 47 - walk_bang preserves diagnostic code\n    ok 48 - walk_bang preserves diagnostic stage\n    ok 49 - walk_bang preserves exact message\n    ok 50 - walk_bang preserves the authored half-open span\n    ok 51 - reduce_bang is rejected\n    ok 52 - reduce_bang is a typed parser diagnostic\n    ok 53 - reduce_bang preserves diagnostic code\n    ok 54 - reduce_bang preserves diagnostic stage\n    ok 55 - reduce_bang preserves exact message\n    ok 56 - reduce_bang preserves the authored half-open span\n    ok 57 - arbitrary_bang is rejected\n    ok 58 - arbitrary_bang is a typed parser diagnostic\n    ok 59 - arbitrary_bang preserves diagnostic code\n    ok 60 - arbitrary_bang preserves diagnostic stage\n    ok 61 - arbitrary_bang preserves exact message\n    ok 62 - arbitrary_bang preserves the authored half-open span\n    ok 63 - separated_suffix is rejected\n    ok 64 - separated_suffix is a typed parser diagnostic\n    ok 65 - separated_suffix preserves diagnostic code\n    ok 66 - separated_suffix preserves diagnostic stage\n    ok 67 - separated_suffix preserves exact message\n    ok 68 - separated_suffix preserves the authored half-open span\n    ok 69 - double_bang is rejected\n    ok 70 - double_bang is a typed parser diagnostic\n    ok 71 - double_bang preserves diagnostic code\n    ok 72 - double_bang preserves diagnostic stage\n    ok 73 - double_bang preserves exact message\n    ok 74 - double_bang preserves the authored half-open span\n    ok 75 - arguments_not_empty is rejected\n    ok 76 - arguments_not_empty is a typed parser diagnostic\n    ok 77 - arguments_not_empty preserves diagnostic code\n    ok 78 - arguments_not_empty preserves diagnostic stage\n    ok 79 - arguments_not_empty preserves exact message\n    ok 80 - arguments_not_empty preserves the authored half-open span\n    ok 81 - callback_missing is rejected\n    ok 82 - callback_missing is a typed parser diagnostic\n    ok 83 - callback_missing preserves diagnostic code\n    ok 84 - callback_missing preserves diagnostic stage\n    ok 85 - callback_missing preserves exact message\n    ok 86 - callback_missing preserves the authored half-open span\n    ok 87 - bang_continuation is rejected\n    ok 88 - bang_continuation is a typed parser diagnostic\n    ok 89 - bang_continuation preserves diagnostic code\n    ok 90 - bang_continuation preserves diagnostic stage\n    ok 91 - bang_continuation preserves exact message\n    ok 92 - bang_continuation preserves the authored half-open span\n    ok 93 - nonbang_twin stays outside receiver-mutation syntax\n    ok 94 - walk_nonbang stays outside receiver-mutation syntax\n    ok 95 - reduce_nonbang stays outside receiver-mutation syntax\n    ok 96 - bang_word_alias stays outside receiver-mutation syntax\n    ok 97 - bang_variable stays outside receiver-mutation syntax\n    1..97\nok 2 - dedicated receiver-mutation AST and exclusions agree with the neutral contract\n# Subtest: runtime traverses the frozen topology and commits only rebuilt leaves\n    ok 1 - hash_sorted_frames_and_cross_kind_leaf callback frame follows frozen order and shape\n    ok 2 - hash_sorted_frames_and_cross_kind_leaf callback frame follows frozen order and shape\n    ok 3 - hash_sorted_frames_and_cross_kind_leaf callback frame follows frozen order and shape\n    ok 4 - hash_sorted_frames_and_cross_kind_leaf publishes only rebuilt leaves\n    ok 5 - hash_sorted_frames_and_cross_kind_leaf returns the detached rebuilt root\n    ok 6 - hash_sorted_frames_and_cross_kind_leaf visits every and only frozen leaf\n    ok 7 - array_index_frames_and_cross_kind_leaf callback frame follows frozen order and shape\n    ok 8 - array_index_frames_and_cross_kind_leaf callback frame follows frozen order and shape\n    ok 9 - array_index_frames_and_cross_kind_leaf callback frame follows frozen order and shape\n    ok 10 - array_index_frames_and_cross_kind_leaf callback frame follows frozen order and shape\n    ok 11 - array_index_frames_and_cross_kind_leaf publishes only rebuilt leaves\n    ok 12 - array_index_frames_and_cross_kind_leaf returns the detached rebuilt root\n    ok 13 - array_index_frames_and_cross_kind_leaf visits every and only frozen leaf\n    ok 14 - replacement_root_kind_not_revisited callback frame follows frozen order and shape\n    ok 15 - replacement_root_kind_not_revisited publishes only rebuilt leaves\n    ok 16 - replacement_root_kind_not_revisited returns the detached rebuilt root\n    ok 17 - replacement_root_kind_not_revisited visits every and only frozen leaf\n    ok 18 - callback_path_and_value_are_copied callback frame follows frozen order and shape\n    ok 19 - callback_path_and_value_are_copied callback frame follows frozen order and shape\n    ok 20 - callback_path_and_value_are_copied publishes only rebuilt leaves\n    ok 21 - callback_path_and_value_are_copied returns the detached rebuilt root\n    ok 22 - callback_path_and_value_are_copied visits every and only frozen leaf\n    ok 23 - unrelated_side_effects_persist callback frame follows frozen order and shape\n    ok 24 - unrelated_side_effects_persist callback frame follows frozen order and shape\n    ok 25 - unrelated_side_effects_persist publishes only rebuilt leaves\n    ok 26 - unrelated_side_effects_persist returns the detached rebuilt root\n    ok 27 - unrelated_side_effects_persist visits every and only frozen leaf\n    ok 28 - unrelated_receiver_mutation_allowed callback frame follows frozen order and shape\n    ok 29 - unrelated_receiver_mutation_allowed publishes only rebuilt leaves\n    ok 30 - unrelated_receiver_mutation_allowed returns the detached rebuilt root\n    ok 31 - unrelated_receiver_mutation_allowed visits every and only frozen leaf\n    ok 32 - empty_hash_commits_without_callback publishes only rebuilt leaves\n    ok 33 - empty_hash_commits_without_callback returns the detached rebuilt root\n    ok 34 - empty_hash_commits_without_callback visits every and only frozen leaf\n    ok 35 - empty_array_commits_without_callback publishes only rebuilt leaves\n    ok 36 - empty_array_commits_without_callback returns the detached rebuilt root\n    ok 37 - empty_array_commits_without_callback visits every and only frozen leaf\n    1..37\nok 3 - runtime traverses the frozen topology and commits only rebuilt leaves\n# Subtest: receiver validation and guard failures are typed and atomic\n    ok 1 - missing receiver is rejected\n    ok 2 - missing receiver uses the typed receiver error\n    ok 3 - missing receiver preserves its code\n    ok 4 - null receiver is rejected\n    ok 5 - null receiver uses the typed receiver error\n    ok 6 - null receiver preserves its code\n    ok 7 - null receiver preserves its runtime kind\n    ok 8 - string receiver is rejected\n    ok 9 - string receiver uses the typed receiver error\n    ok 10 - string receiver preserves its code\n    ok 11 - string receiver preserves its runtime kind\n    ok 12 - direct_assignment_reentrant throws the typed receiver guard\n    ok 13 - direct_assignment_reentrant preserves the reentrant code\n    ok 14 - direct_assignment_reentrant identifies the attempted write surface\n    ok 15 - direct_assignment_reentrant leaves the receiver unchanged\n    ok 16 - nested_bang_reentrant throws the typed receiver guard\n    ok 17 - nested_bang_reentrant preserves the reentrant code\n    ok 18 - nested_bang_reentrant identifies the attempted write surface\n    ok 19 - nested_bang_reentrant leaves the receiver unchanged\n    ok 20 - nested_write_reentrant throws the typed receiver guard\n    ok 21 - nested_write_reentrant preserves the reentrant code\n    ok 22 - nested_write_reentrant identifies the attempted write surface\n    ok 23 - nested_write_reentrant leaves the receiver unchanged\n    ok 24 - helper_mediated_reentrant throws the typed receiver guard\n    ok 25 - helper_mediated_reentrant preserves the reentrant code\n    ok 26 - helper_mediated_reentrant identifies the attempted write surface\n    ok 27 - helper_mediated_reentrant leaves the receiver unchanged\n    ok 28 - helper_mediated_reentrant preserves completed unrelated effects\n    ok 29 - helper:set_key is rejected for the active tree identity\n    ok 30 - helper:set_key reports its exact write surface\n    ok 31 - helper:set_key leaves the hash receiver unchanged\n    ok 32 - helper:set_key leaves the array receiver unchanged\n    ok 33 - helper:push is rejected for the active items identity\n    ok 34 - helper:push reports its exact write surface\n    ok 35 - helper:push leaves the hash receiver unchanged\n    ok 36 - helper:push leaves the array receiver unchanged\n    ok 37 - append is rejected for the active items identity\n    ok 38 - append reports its exact write surface\n    ok 39 - append leaves the hash receiver unchanged\n    ok 40 - append leaves the array receiver unchanged\n    ok 41 - push_back is rejected for the active items identity\n    ok 42 - push_back reports its exact write surface\n    ok 43 - push_back leaves the hash receiver unchanged\n    ok 44 - push_back leaves the array receiver unchanged\n    ok 45 - push_front is rejected for the active items identity\n    ok 46 - push_front reports its exact write surface\n    ok 47 - push_front leaves the hash receiver unchanged\n    ok 48 - push_front leaves the array receiver unchanged\n    ok 49 - pop_back is rejected for the active items identity\n    ok 50 - pop_back reports its exact write surface\n    ok 51 - pop_back leaves the hash receiver unchanged\n    ok 52 - pop_back leaves the array receiver unchanged\n    ok 53 - pop_front is rejected for the active items identity\n    ok 54 - pop_front reports its exact write surface\n    ok 55 - pop_front leaves the hash receiver unchanged\n    ok 56 - pop_front leaves the array receiver unchanged\n    ok 57 - helper:split is rejected for the active items identity\n    ok 58 - helper:split reports its exact write surface\n    ok 59 - helper:split preserves the authored pipeline write span\n    ok 60 - helper:split leaves the hash receiver unchanged\n    ok 61 - helper:split leaves the array receiver unchanged\n    ok 62 - helper:split_each is rejected for the active items identity\n    ok 63 - helper:split_each reports its exact write surface\n    ok 64 - helper:split_each preserves the authored pipeline write span\n    ok 65 - helper:split_each leaves the hash receiver unchanged\n    ok 66 - helper:split_each leaves the array receiver unchanged\n    ok 67 - helper:trim_each is rejected for the active items identity\n    ok 68 - helper:trim_each reports its exact write surface\n    ok 69 - helper:trim_each preserves the authored pipeline write span\n    ok 70 - helper:trim_each leaves the hash receiver unchanged\n    ok 71 - helper:trim_each leaves the array receiver unchanged\n    ok 72 - helper:filter_nonempty is rejected for the active items identity\n    ok 73 - helper:filter_nonempty reports its exact write surface\n    ok 74 - helper:filter_nonempty preserves the authored pipeline write span\n    ok 75 - helper:filter_nonempty leaves the hash receiver unchanged\n    ok 76 - helper:filter_nonempty leaves the array receiver unchanged\n    ok 77 - helper:filter_match is rejected for the active items identity\n    ok 78 - helper:filter_match reports its exact write surface\n    ok 79 - helper:filter_match preserves the authored pipeline write span\n    ok 80 - helper:filter_match leaves the hash receiver unchanged\n    ok 81 - helper:filter_match leaves the array receiver unchanged\n    ok 82 - helper:lowercase_each is rejected for the active items identity\n    ok 83 - helper:lowercase_each reports its exact write surface\n    ok 84 - helper:lowercase_each preserves the authored pipeline write span\n    ok 85 - helper:lowercase_each leaves the hash receiver unchanged\n    ok 86 - helper:lowercase_each leaves the array receiver unchanged\n    ok 87 - helper:uppercase_each is rejected for the active items identity\n    ok 88 - helper:uppercase_each reports its exact write surface\n    ok 89 - helper:uppercase_each preserves the authored pipeline write span\n    ok 90 - helper:uppercase_each leaves the hash receiver unchanged\n    ok 91 - helper:uppercase_each leaves the array receiver unchanged\n    ok 92 - helper:uniq is rejected for the active items identity\n    ok 93 - helper:uniq reports its exact write surface\n    ok 94 - helper:uniq preserves the authored pipeline write span\n    ok 95 - helper:uniq leaves the hash receiver unchanged\n    ok 96 - helper:uniq leaves the array receiver unchanged\n    ok 97 - helper:trim_each is rejected for the active items identity\n    ok 98 - helper:trim_each reports its exact write surface\n    ok 99 - helper:trim_each preserves the authored pipeline write span\n    ok 100 - helper:trim_each leaves the hash receiver unchanged\n    ok 101 - helper:trim_each leaves the array receiver unchanged\n    1..101\nok 4 - receiver validation and guard failures are typed and atomic\n# Subtest: callback failure is atomic and the identity guard always releases\n    ok 1 - callback failure propagates\n    ok 2 - callback failure is not wrapped\n    ok 3 - callback failure publishes no partial leaf updates\n    ok 4 - unrelated callback effects retain ordinary semantics\n    ok 5 - a later invocation succeeds after callback failure\n    ok 6 - the successful retry returns the rebuilt root\n    1..6\nok 5 - callback failure is atomic and the identity guard always releases\n# Subtest: all aggregate boundaries and same-spelling local identities stay detached\n    ok 1 - committed receiver is detached from every callback/result boundary\n    ok 2 - same spelling with a different scalar identity remains writable\n    ok 3 - shadow write does not interfere with leaf publication\n    1..3\nok 6 - all aggregate boundaries and same-spelling local identities stay detached\n# Subtest: continuations start after publication and guard release\n    ok 1 - post-commit write uses the ordinary nested-write diagnostic\n    ok 2 - post-commit write preserves the nested-write code\n    ok 3 - post-commit failure preserves the already-published leaves\n    ok 4 - ordinary count continuation succeeds\n    ok 5 - count continuation consumes the detached updated result\n    ok 6 - array leaves publish before the continuation\n    1..6\nok 7 - continuations start after publication and guard release\n# Subtest: full Perl compilation has no fallback or syntax residue\n    ok 1 - map_leaves! spec compiles\n    ok 2 - compiled map_leaves! parser executes\n    ok 3 - compiled parser returns and retains the published tree\n    ok 4 - compiled bang traversal has no canonical fallback\n    ok 5 - compiled bang traversal has no unresolved helper\n    ok 6 - compiled bang traversal remains ActionIR ready\n    ok 7 - generated Perl contains no bang-method syntax residue\n    ok 8 - generated Perl uses the owned receiver runtime\n    1..8\nok 8 - full Perl compilation has no fallback or syntax residue\n1..8\nok\nAll tests successful.\nFiles=1, Tests=8, 16 wallclock secs ( 0.01 usr  0.00 sys + 15.49 cusr  0.10 csys = 15.60 CPU)\nResult: PASS\n"
+    },
+    {
+      "command": [
+        "prove",
+        "-v",
+        "-Iperl",
+        "t/actionir_ast_parser.t"
+      ],
+      "exit": 0,
+      "path": ".linkedspec-data/scratch/bridge-reconciliation/actionir_ast_parser.t.log",
+      "sha256": "313011971c71506cda6d21497dc841601bbff34dbe4ff6aca8d958c4e91f6483",
+      "stderr": "",
+      "stdout": "t/actionir_ast_parser.t .. \n# Subtest: calls literals variables and value-drop statements\n    ok 1 - parse_action_block returns an action block\n    ok 2 - AST parser refines newline-separated chain statements\n    ok 3 - method statement parses as a call\n    ok 4 - set helper name is preserved by MethodExpr\n    ok 5 - bare call argument parses as a variable\n    ok 6 - quoted call argument parses as a string\n    ok 7 - string payload is captured without delimiters\n    ok 8 - single-quoted action argument parses as a string\n    ok 9 - single-quoted action argument preserves regex escapes\n    ok 10 - standalone expression statements silently drop their value\n    ok 11 - standalone function-call receiver chain parses as fluent_chain\n    ok 12 - function call can be a receiver expression\n    ok 13 - receiver call name is preserved\n    ok 14 - receiver-chain calls are ordered\n    ok 15 - receiver-chain call arguments are parsed as expressions\n    1..15\nok 1 - calls literals variables and value-drop statements\n# Subtest: primitive literals\n    ok 1 - integer literal parses\n    ok 2 - negative decimal literal parses\n    ok 3 - true parses as boolean\n    ok 4 - false carries boolean false\n    ok 5 - undef parses as undef\n    ok 6 - regex literal parses\n    ok 7 - regex flags are captured\n    1..7\nok 2 - primitive literals\n# Subtest: direct access and indexed variables\n    ok 1 - single numeric segment parses as indexed_var\n    ok 2 - indexed_var base name is captured\n    ok 3 - indexed_var index is an expression\n    ok 4 - mixed direct access parses as nested_access\n    ok 5 - nested_access base is captured\n    ok 6 - segment kinds preserve key/index roles\n    ok 7 - quoted segment becomes a key\n    ok 8 - bare segment payload parses as a variable expression\n    ok 9 - bare segment variable name is captured\n    1..9\nok 3 - direct access and indexed variables\n# Subtest: shape literals and expression-valued blocks\n    ok 1 - array shape literal parses\n    ok 2 - array literal items are typed expressions\n    ok 3 - hash shape literal parses\n    ok 4 - hash literal entries are captured\n    ok 5 - bare hash key is an expression\n    ok 6 - quoted hash key is a string expression\n    ok 7 - hash value can be a nested shape literal\n    ok 8 - colon hash shape literal parses\n    ok 9 - colon hash literal entries are captured\n    ok 10 - colon hash value can be a nested array shape literal\n    ok 11 - colon hash value can be a nested hash shape literal\n    ok 12 - old hash-literal fat-arrow separator is retired\n    ok 13 - retired hash-literal diagnostic points to colon association\n    ok 14 - double-colon payload does not trigger colon hash parsing\n    ok 15 - non-empty non-hash-pair braces parse as a block value\n    ok 16 - block value owns nested statements\n    ok 17 - block statement calls use the same method parser seam\n    ok 18 - block final expression parses as a variable\n    1..18\nok 4 - shape literals and expression-valued blocks\n# Subtest: trailing block call arguments\n    ok 1 - with(...) trailing block parses as a call\n    ok 2 - trailing block call keeps the source callee\n    ok 3 - trailing block call is explicitly flagged\n    ok 4 - explicit value plus trailing block become two call arguments\n    ok 5 - explicit with value parses as the first argument\n    ok 6 - trailing body parses as the final block_value argument\n    ok 7 - block argument preserves its brace source\n    ok 8 - block argument owns parsed block statements\n    ok 9 - zero-argument with() trailing block is flagged\n    ok 10 - zero-argument with() carries only the final block argument\n    ok 11 - zero-argument with() block is the final argument\n    ok 12 - receiver .with() trailing block parses as a fluent chain\n    ok 13 - receiver .with() preserves later fluent calls\n    ok 14 - receiver .with() segment is explicitly flagged\n    ok 15 - receiver .with() carries only the trailing block argument\n    ok 16 - receiver .with() block is the final argument\n    ok 17 - hash-tree receiver trailing block parses as a fluent chain\n    ok 18 - hash-tree receiver trailing block preserves later fluent calls\n    ok 19 - hash-tree receiver trailing block segment is explicitly flagged\n    ok 20 - map_leaves() carries only the trailing block argument\n    ok 21 - map_leaves() block is the final argument\n    ok 22 - array-tree receiver trailing block parses as the same fluent chain shape\n    ok 23 - array-tree receiver trailing block preserves later array-family fluent calls\n    ok 24 - array-tree receiver trailing block segment is explicitly flagged\n    ok 25 - array-tree map_leaves() carries only the trailing block argument\n    ok 26 - array-tree map_leaves() block is the final argument\n    ok 27 - reduce_leaves(...) trailing block is flagged\n    ok 28 - reduce_leaves(initial) carries initial value plus block argument\n    ok 29 - reduce_leaves block is the final argument\n    ok 30 - unknown trailing-block callees still parse for lowering diagnostics\n    1..30\nok 5 - trailing block call arguments\n# Subtest: assignment and mutation statement nodes\n    ok 1 - bare assignment parses as assign_scalar\n    ok 2 - assign_scalar RHS is a parsed expression\n    ok 3 - array append operator parses as assign_array_append\n    ok 4 - array append target name is captured\n    ok 5 - array append RHS is parsed\n    ok 6 - one-segment assignment parses through the unified nested-write node\n    ok 7 - unified nested-write assignment retains its bare binding base\n    ok 8 - hash assignment owns an expression-bearing path segment\n    ok 9 - hash assignment segment is parsed as an expression\n    ok 10 - hash assignment RHS is parsed as hash literal\n    ok 11 - colon hash-index assignment uses the same unified node\n    ok 12 - colon hash assignment RHS is parsed as hash literal\n    ok 13 - single-equals operator spelling parses as a call\n    ok 14 - single-equals operator call keeps the symbol callee\n    ok 15 - single-equals operator target is parsed\n    ok 16 - single-equals operator value is parsed\n    1..16\nok 6 - assignment and mutation statement nodes\n# Subtest: structured control forms parse as typed AST nodes\n    ok 1 - attached if parses as control_if\n    ok 2 - control_if preserves the source keyword\n    ok 3 - control_if carries the canonical keyword\n    ok 4 - control_if condition is parsed as an expression\n    ok 5 - control_if owns its attached body block\n    ok 6 - control_if body statements are parsed\n    ok 7 - marker when parses through the if-family control node\n    ok 8 - when preserves its alias keyword\n    ok 9 - when canonicalizes to if\n    ok 10 - when condition is parsed as a call\n    ok 11 - attached elseif parses through the if-family control node\n    ok 12 - elseif branch role is explicit\n    ok 13 - elseif keeps its canonical keyword\n    ok 14 - elseif condition is parsed as a call\n    ok 15 - elseif preserves its attached body source\n    ok 16 - marker elif parses through the if-family control node\n    ok 17 - elif branch role is explicit\n    ok 18 - elif canonicalizes to elseif\n    ok 19 - bare else marker parses as control_else\n    ok 20 - else carries its canonical keyword\n    ok 21 - parenthesized else marker parses as control_else\n    ok 22 - attached otherwise parses as control_else\n    ok 23 - otherwise preserves its alias keyword\n    ok 24 - otherwise canonicalizes to else\n    ok 25 - otherwise body statements are parsed\n    ok 26 - bare endif marker parses as control_endif\n    ok 27 - endif carries its canonical keyword\n    ok 28 - parenthesized endif marker parses as control_endif\n    ok 29 - marker switch parses as control_switch\n    ok 30 - marker switch source expression is parsed\n    ok 31 - attached switch parses as control_switch\n    ok 32 - switch source expression is parsed\n    ok 33 - attached switch owns parsed case branches\n    ok 34 - switch case branch is typed\n    ok 35 - case match expression is parsed\n    ok 36 - case body is parsed\n    ok 37 - switch default branch is typed\n    ok 38 - default body is parsed\n    ok 39 - marker case parses as control_case\n    ok 40 - marker case match payload is parsed as an expression\n    ok 41 - bare default marker parses as control_default\n    ok 42 - default carries its canonical keyword\n    ok 43 - parenthesized default marker parses as control_default\n    ok 44 - bare endcase marker parses as control_endcase\n    ok 45 - parenthesized endcase marker parses as control_endcase\n    ok 46 - bare endswitch marker parses as control_endswitch\n    ok 47 - parenthesized endswitch marker parses as control_endswitch\n    ok 48 - marker while parses as control_while\n    ok 49 - marker while condition is parsed as a call\n    ok 50 - attached while parses as control_while\n    ok 51 - while condition is parsed as a call\n    ok 52 - while body statements are parsed\n    ok 53 - inline value if remains a generic call\n    ok 54 - inline value if keeps its helper name\n    ok 55 - inline value switch remains a generic call\n    ok 56 - inline value switch keeps its helper name\n    1..56\nok 7 - structured control forms parse as typed AST nodes\n# Subtest: if-family control lowering consumes AST nodes\n    ok 1 - attached if/elseif/else lowers typed truth from AST condition and body fields\n    ok 2 - when/otherwise aliases lower typed truth from AST condition and body fields\n    ok 3 - marker if/elseif/else/endif lowers typed truth from AST condition fields\n    ok 4 - if-family control lowering does not reuse original text or AST source fields\n    ok 5 - if-family control lowering entered through the AST parser\n    1..5\nok 8 - if-family control lowering consumes AST nodes\n# Subtest: switch control lowering consumes AST nodes\n    ok 1 - attached switch source lowers from AST source_expr\n    ok 2 - attached case lowers from AST match and body fields\n    ok 3 - attached default lowers from AST default body\n    ok 4 - marker switch source lowers from AST source_expr\n    ok 5 - marker case lowers from AST match field while preserving switch stack\n    ok 6 - marker default and endswitch lower from AST markers\n    ok 7 - switch control lowering does not reuse original text, fake fallback body, or AST source fields\n    ok 8 - switch control lowering entered through the AST parser\n    1..8\nok 9 - switch control lowering consumes AST nodes\n# Subtest: while control lowering consumes AST nodes\n    ok 1 - attached while condition lowers typed truth from AST condition field\n    ok 2 - attached while keeps the existing iteration-safety guard\n    ok 3 - attached while body lowers from AST body statements\n    ok 4 - while control lowering does not reuse original text or AST source fields\n    ok 5 - while control lowering entered through the AST parser\n    1..5\nok 10 - while control lowering consumes AST nodes\n# Subtest: assignment and mutation statement lowering consumes AST nodes\n    ok 1 - scalar assignment operator lowers RHS from AST fields\n    ok 2 - array append operator lowers RHS into the uniform binding mutation\n    ok 3 - hash-index assignment lowers key/RHS into the uniform binding mutation\n    ok 4 - assignment/mutation statement lowering does not reuse fake AST source or original poison text\n    ok 5 - assignment/mutation statements entered through the AST parser\n    1..5\nok 11 - assignment and mutation statement lowering consumes AST nodes\n# Subtest: authored value arity outranks legacy optional scope fallback\n    ok 1 - an already-valid value argument list remains intact when authored values take precedence\n    ok 2 - an otherwise-invalid fixed-arity list still uses the optional-scope compatibility fallback\n    ok 3 - variadic cat preserves the authored bare first value\n    ok 4 - variadic num_add preserves the authored bare first value\n    ok 5 - variadic num_mul preserves the authored bare first value\n    ok 6 - variadic num_min preserves the authored bare first value\n    ok 7 - variadic num_max preserves the authored bare first value\n    ok 8 - variadic coalesce preserves authored bare candidates in order\n    ok 9 - variadic coalesce_nonempty preserves authored bare candidates in order\n    ok 10 - optional-width substr preserves all three authored bare values\n    ok 11 - append RHS lowering preserves the same complete cat value list\n    1..11\nok 12 - authored value arity outranks legacy optional scope fallback\n# Subtest: assignment expression lowering consumes AST nodes\n    ok 1 - scalar assignment expression returns the stored scalar value\n    ok 2 - single-equals operator call composes with a nested scalar assignment value\n    ok 3 - set compatibility spelling returns the stored scalar value in value position\n    ok 4 - direct array shape RHS assignment returns the stored scalar-held array value\n    ok 5 - single-equals operator call returns the stored scalar-held hash value\n    ok 6 - retired colon scalar target reports the bare-read migration diagnostic\n    ok 7 - old hash-literal fat arrow reports the colon-association diagnostic\n    ok 8 - old hash-literal fat arrow does not lower as a Perl hash pair\n    ok 9 - array append expression returns the updated typed binding\n    ok 10 - one-segment assignment expression returns the detached unified nested-write result\n    ok 11 - array append expression can feed an aggregate receiver chain\n    1..11\nok 13 - assignment expression lowering consumes AST nodes\n# Subtest: statement helper-call lowering consumes AST call nodes\n    ok 1 - set statement lowers from AST call args\n    ok 2 - set_key statement lowers target/key/value into the uniform binding update\n    ok 3 - return statement lowers payload from AST call args\n    ok 4 - return_undef statement lowers from AST call arity\n    ok 5 - array end-mutation statement lowers into the uniform binding mutation\n    ok 6 - statement helper-call lowering does not reuse fake AST source or original poison text\n    ok 7 - statement helper calls entered through the AST parser\n    1..7\nok 14 - statement helper-call lowering consumes AST call nodes\n# Subtest: receiver chains accept all expression receivers\n    ok 1 - function-call receiver chain parses\n    ok 2 - function call receiver is typed\n    ok 3 - call receiver chain methods are ordered\n    ok 4 - numeric literal receiver parses without splitting the decimal point\n    ok 5 - number receiver chain methods are ordered\n    ok 6 - block value can be a receiver expression\n    ok 7 - block receiver chain methods are ordered\n    1..7\nok 15 - receiver chains accept all expression receivers\n# Subtest: non-call value lowering consumes AST nodes\n    ok 1 - AST value lowering preserves shape, scalar-read, literal, and direct-access output\n    ok 2 - AST value lowering preserves block-value output\n    ok 3 - value lowering invoked the AST parser for non-call value expressions\n    1..3\nok 16 - non-call value lowering consumes AST nodes\n# Subtest: value-only helper-call lowering consumes AST call nodes\n    ok 1 - AST helper-call lowering preserves the outer string helper output\n    ok 2 - AST helper-call lowering recursively lowers nested value-only calls\n    ok 3 - AST helper-call lowering does not reuse fake source text for supported calls\n    ok 4 - AST helper-call lowering preserves the outer numeric helper output\n    ok 5 - AST helper-call lowering recursively lowers nested numeric helper calls\n    ok 6 - AST helper-call lowering preserves compatibility only for unsupported argument calls\n    ok 7 - value-only helper calls entered through the AST parser\n    1..7\nok 17 - value-only helper-call lowering consumes AST call nodes\n# Subtest: aggregate helper-call lowering consumes AST call nodes\n    ok 1 - AST aggregate lowering preserves quoted array wrapper literal payloads\n    ok 2 - AST aggregate lowering does not turn quoted wrapper payloads into array symbols\n    ok 3 - AST aggregate lowering preserves numeric reducer output\n    ok 4 - AST aggregate lowering preserves array symbol slots for numeric reducers\n    ok 5 - AST aggregate lowering preserves array collection symbol slots\n    ok 6 - AST aggregate lowering preserves collection count value slots\n    ok 7 - AST aggregate lowering preserves merge_hash hash source slots\n    ok 8 - AST aggregate lowering preserves the nested set_key typed-binding source\n    ok 9 - AST aggregate lowering composes nested value-only helper slots\n    ok 10 - AST aggregate lowering preserves nested pick_keys hash helper output\n    ok 11 - AST aggregate lowering preserves has_key terminal output\n    ok 12 - hash constructor reads the typed shape variable\n    ok 13 - hash constructor preserves its nested helper\n    ok 14 - generic flat evaluates its typed binding once\n    ok 15 - generic flat retains runtime harray dispatch\n    ok 16 - AST aggregate lowering does not reuse fake source text for supported calls\n    ok 17 - aggregate helper calls entered through the AST parser\n    1..17\nok 18 - aggregate helper-call lowering consumes AST call nodes\n# Subtest: covered helper-call diagnostics retire AST host-call leakage\n    ok 1 - unsupported covered value helper no longer lowers to a host substr call\n    ok 2 - unsupported covered value helper leaves diagnostic sentinel\n    ok 3 - unsupported covered aggregate helper no longer lowers to a host count call\n    ok 4 - unsupported covered aggregate helper leaves diagnostic sentinel\n    ok 5 - nested unsupported covered helper no longer becomes a host-call cat operand\n    ok 6 - nested unsupported covered helper remains visible to diagnostics\n    ok 7 - descriptor still builds with unsupported covered helper sentinel\n    ok 8 - unsupported covered helper is not reported as raw Perl fallback\n    ok 9 - unsupported covered helper is reported as one unresolved helper\n    ok 10 - unsupported covered helper diagnostic names the helper\n    ok 11 - unsupported covered helper blocks language-agnostic readiness through diagnostics\n    ok 12 - unresolved-helper statements carry the sentinel\n    1..12\nok 19 - covered helper-call diagnostics retire AST host-call leakage\n# Subtest: standalone AST value statements drop covered values without raw fallback\n    ok 1 - standalone trim lowers as a discarded value expression\n    ok 2 - standalone trim no longer remains as raw host-call text\n    ok 3 - standalone cat lowers as a discarded value expression\n    ok 4 - standalone cat no longer remains as raw host-call text\n    ok 5 - malformed covered standalone helper lowers to the unresolved-helper sentinel\n    ok 6 - malformed covered standalone helper no longer remains as raw host-call text\n    ok 7 - standalone string receiver chain lowers as a discarded value expression\n    ok 8 - standalone string receiver chain no longer remains as raw source text\n    ok 9 - descriptor builds for supported standalone value statements\n    ok 10 - supported standalone value statements have no raw Perl dependency\n    ok 11 - supported standalone value statements have no unresolved helper\n    ok 12 - supported standalone value statements remain language-agnostic ready\n    ok 13\n    ok 14 - descriptor builds for unsupported covered standalone value statement\n    ok 15 - unsupported covered standalone helper is not reported as raw Perl fallback\n    ok 16 - unsupported covered standalone helper is reported as unresolved\n    ok 17 - unsupported covered standalone helper names the helper\n    ok 18 - unsupported covered standalone helper blocks readiness through diagnostics\n    ok 19 - standalone unknown user function remains raw until the function registry owns discard semantics\n    ok 20 - standalone unknown function-call receiver chain remains raw until function calls resolve\n    ok 21 - descriptor still builds for unknown standalone user-function statements\n    ok 22 - unknown standalone user-function statements remain raw Perl dependencies\n    ok 23 - unknown standalone user-function statements are not claimed as covered helper diagnostics yet\n    1..23\nok 20 - standalone AST value statements drop covered values without raw fallback\n# Subtest: fluent_chain value lowering consumes AST nodes\n    ok 1 - AST fluent_chain lowering preserves number helper composition\n    ok 2 - AST fluent_chain lowering bridges string chains into array terminals\n    ok 3 - AST fluent_chain lowering preserves block-valued array receivers\n    ok 4 - AST fluent_chain lowering preserves hash-to-array receiver chains\n    ok 5 - AST fluent_chain lowering preserves terminal number-chain continuation behavior\n    ok 6 - unsupported covered chain helper no longer lowers to a host substr call\n    ok 7 - unsupported covered chain helper leaves diagnostic sentinel\n    ok 8 - AST fluent_chain lowering does not reuse fake chain, call, receiver, or argument source text\n    ok 9 - receiver-dot chains entered through the AST parser\n    1..9\nok 21 - fluent_chain value lowering consumes AST nodes\n# Subtest: return-payload lowering consumes AST nodes before raw fallback\n    ok 1 - AST return payload lowers bare scalar reads from typed nodes\n    ok 2 - AST return payload lowers booleans from typed nodes\n    ok 3 - AST return payload lowers nested helper calls from typed nodes\n    ok 4 - AST return payload lowers nested access from typed nodes\n    ok 5 - AST return payload lowers hash literals from typed nodes\n    ok 6 - unsupported covered return-payload chain helper does not leak as a host call\n    ok 7 - unsupported covered return-payload chain helper keeps diagnostic sentinel\n    ok 8 - unknown return-payload call does not leak as a host call\n    ok 9 - unknown return-payload call keeps diagnostic sentinel\n    ok 10 - unknown function-call receiver does not leak into receiver-chain lowering\n    ok 11 - unknown function-call receiver keeps diagnostic sentinel\n    ok 12 - AST variable return payloads still lower through scalar source-slot reads\n    ok 13 - AST variable return payloads do not leak raw identifiers\n    ok 14 - AST return-payload lowering does not reuse fake source text\n    ok 15 - raw compatibility return payloads keep the narrow typed helper fallback\n    ok 16 - return payloads entered through the AST parser\n    1..16\nok 22 - return-payload lowering consumes AST nodes before raw fallback\n# Subtest: block-value lowering consumes AST action statements\n    ok 1 - non-final block-local return still uses the guarded block-value wrapper\n    ok 2 - block side-effect assignment lowers from AST action statement fields\n    ok 3 - block-local return payload lowers from AST call argument\n    ok 4 - post-return guarded side effect also lowers from AST action statement fields\n    ok 5 - final block expression lowers from AST statement expression\n    ok 6 - block-value lowering does not reuse fake statement source or original poison text\n    ok 7 - block-value lowering entered through the AST parser\n    1..7\nok 23 - block-value lowering consumes AST action statements\n1..23\nok\nAll tests successful.\nFiles=1, Tests=23, 16 wallclock secs ( 0.02 usr  0.00 sys + 16.57 cusr  0.09 csys = 16.68 CPU)\nResult: PASS\n"
+    },
+    {
+      "command": [
+        "prove",
+        "-v",
+        "-Iperl",
+        "t/trace_actionir_method_lowering.t"
+      ],
+      "exit": 0,
+      "path": ".linkedspec-data/scratch/bridge-reconciliation/trace_actionir_method_lowering.t.log",
+      "sha256": "90f7deb1abc2114ca8057787fd8d76c00f63c1620e5b78fc01a0ef8fc013656c",
+      "stderr": "",
+      "stdout": "t/trace_actionir_method_lowering.t .. \n# Subtest: MethodLowering traces value helper family and unsupported helper decisions\n    1..6\n    ok 1 - trim helper lowering is unchanged\n    ok 2 - trace reports string helper family\n    ok 3 - trace reports AST value lowering success\n    ok 4 - unknown helper still lowers to the unsupported-helper sentinel\n    ok 5 - trace reports unknown helper family\n    ok 6 - trace reports unsupported helper exit\nok 1 - MethodLowering traces value helper family and unsupported helper decisions\n# Subtest: MethodLowering traces receiver-chain family transitions\n    1..15\n    ok 1 - string receiver chain normalization uses bare reads\n    ok 2 - trace reports string receiver chain\n    ok 3 - trace reports string chain step\n    ok 4 - number receiver chain normalization uses bare reads\n    ok 5 - trace reports number receiver chain\n    ok 6 - trace reports number chain step\n    ok 7 - hash receiver chain normalization keeps the bare typed binding\n    ok 8 - trace reports hash receiver chain\n    ok 9 - trace reports hash chain step\n    ok 10 - array receiver chain normalization is unchanged\n    ok 11 - trace reports array receiver chain\n    ok 12 - trace reports array chain step\n    ok 13 - AST fluent receiver chain lowering is unchanged\n    ok 14 - trace reports AST string receiver-chain lowering\n    ok 15 - trace reports lowered AST fluent-chain value\nok 2 - MethodLowering traces receiver-chain family transitions\n# Subtest: MethodLowering traces assignment and mutation decisions\n    1..14\n    ok 1 - bare direct-shape assignment stores the scalar-held value\n    ok 2 - trace reports lower_assign_statement enter scope\n    ok 3 - trace reports bare value-target assignment decision\n    ok 4 - trace reports lower_assign_statement exit scope\n    ok 5 - scalar assignment operator lowering is unchanged\n    ok 6 - trace reports AST scalar assignment operator\n    ok 7 - array append operator lowers through the uniform typed binding\n    ok 8 - trace reports AST array append operator\n    ok 9 - trace reports mutation slot scalar read\n    ok 10 - one-segment assignment lowers through the unified typed path binding\n    ok 11 - trace reports the unified AST nested-write assignment\n    ok 12 - array end-mutation method lowers through the uniform typed binding\n    ok 13 - trace reports AST array end-mutation method\n    ok 14 - trace reports lowered array end-mutation wrapper\nok 3 - MethodLowering traces assignment and mutation decisions\n# Subtest: MethodLowering trace hooks keep LinkedSpec::Trace lazy until explicitly loaded\n    1..4\n    ok 1 - subprocess exits cleanly\n    ok 2 - requiring MethodLowering keeps Trace unloaded\n    ok 3 - MethodLowering call stays Trace-lazy without explicit trace configuration\n    ok 4 - subprocess does not emit stderr\nok 4 - MethodLowering trace hooks keep LinkedSpec::Trace lazy until explicitly loaded\n1..4\nok\nAll tests successful.\nFiles=1, Tests=4,  1 wallclock secs ( 0.01 usr  0.00 sys +  0.11 cusr  0.06 csys =  0.18 CPU)\nResult: PASS\n"
+    },
+    {
+      "command": [
+        "prove",
+        "-v",
+        "-Iperl",
+        "t/composed_normalization_perl.t"
+      ],
+      "exit": 0,
+      "path": ".linkedspec-data/scratch/bridge-reconciliation/composed_normalization_perl.t.log",
+      "sha256": "55450ea6d923e7eacb09462c05cfb93ac579612be73375405b5cdb48d8c5605e",
+      "stderr": "",
+      "stdout": "t/composed_normalization_perl.t .. \nok 1 - admitted call source is ready\nok 2 - admitted call source has zero raw_perl_dependency_count\nok 3 - admitted call source has zero canonical_action_ir_fallback_count\nok 4 - admitted call source has zero unresolved_helper_count\n# Subtest: P_ab_cd native\n    ok 1 - independent typed nested value and continuation\n    ok 2 - exact ordered diagnostic delivery or quietness\n    ok 3 - typed authored exit or successful value\n    ok 4 - no unrelated exception\n    ok 5 - no suppressed native runtime failure\n    ok 6 - no host output\n    ok 7 - no host stderr\n    ok 8 - actual returned-tree mutation preserves mapped/original; deliberate alias rejects\n    1..8\nok 5 - P_ab_cd native\n# Subtest: P_mixed_case native\n    ok 1 - independent typed nested value and continuation\n    ok 2 - exact ordered diagnostic delivery or quietness\n    ok 3 - typed authored exit or successful value\n    ok 4 - no unrelated exception\n    ok 5 - no suppressed native runtime failure\n    ok 6 - no host output\n    ok 7 - no host stderr\n    ok 8 - actual returned-tree mutation preserves mapped/original; deliberate alias rejects\n    1..8\nok 6 - P_mixed_case native\n# Subtest: P_short native\n    ok 1 - independent typed nested value and continuation\n    ok 2 - exact ordered diagnostic delivery or quietness\n    ok 3 - typed authored exit or successful value\n    ok 4 - no unrelated exception\n    ok 5 - no suppressed native runtime failure\n    ok 6 - no host output\n    ok 7 - no host stderr\n    ok 8 - actual returned-tree mutation preserves mapped/original; deliberate alias rejects\n    1..8\nok 7 - P_short native\n# Subtest: P_quiet native\n    ok 1 - independent typed nested value and continuation\n    ok 2 - exact ordered diagnostic delivery or quietness\n    ok 3 - typed authored exit or successful value\n    ok 4 - no unrelated exception\n    ok 5 - no suppressed native runtime failure\n    ok 6 - no host output\n    ok 7 - no host stderr\n    ok 8 - actual returned-tree mutation preserves mapped/original; deliberate alias rejects\n    1..8\nok 8 - P_quiet native\n# Subtest: P_prefix_bad native\n    ok 1 - independent typed nested value and continuation\n    ok 2 - exact ordered diagnostic delivery or quietness\n    ok 3 - typed authored exit or successful value\n    ok 4 - no unrelated exception\n    ok 5 - no suppressed native runtime failure\n    ok 6 - no host output\n    ok 7 - no host stderr\n    ok 8 - actual returned-tree mutation preserves mapped/original; deliberate alias rejects\n    1..8\nok 9 - P_prefix_bad native\n# Subtest: P_suffix_bad native\n    ok 1 - independent typed nested value and continuation\n    ok 2 - exact ordered diagnostic delivery or quietness\n    ok 3 - typed authored exit or successful value\n    ok 4 - no unrelated exception\n    ok 5 - no suppressed native runtime failure\n    ok 6 - no host output\n    ok 7 - no host stderr\n    ok 8 - actual returned-tree mutation preserves mapped/original; deliberate alias rejects\n    1..8\nok 10 - P_suffix_bad native\n# Subtest: P_empty native\n    ok 1 - independent typed nested value and continuation\n    ok 2 - exact ordered diagnostic delivery or quietness\n    ok 3 - typed authored exit or successful value\n    ok 4 - no unrelated exception\n    ok 5 - no suppressed native runtime failure\n    ok 6 - no host output\n    ok 7 - no host stderr\n    ok 8 - actual returned-tree mutation preserves mapped/original; deliberate alias rejects\n    1..8\nok 11 - P_empty native\nok 12 - independent emitted child completes\nok 13 - fresh child loads exact emitted bytes\nok 14 - fresh child retains all seven cases\n# Subtest: P_ab_cd fresh emitted\n    ok 1 - case identity and order retained\n    ok 2 - independent typed nested value and continuation\n    ok 3 - exact ordered diagnostic delivery or quietness\n    ok 4 - typed authored exit or successful value\n    ok 5 - no unrelated exception\n    ok 6 - no host output\n    ok 7 - no host stderr\n    ok 8 - actual fresh returned-object and alias controls\n    1..8\nok 15 - P_ab_cd fresh emitted\n# Subtest: P_mixed_case fresh emitted\n    ok 1 - case identity and order retained\n    ok 2 - independent typed nested value and continuation\n    ok 3 - exact ordered diagnostic delivery or quietness\n    ok 4 - typed authored exit or successful value\n    ok 5 - no unrelated exception\n    ok 6 - no host output\n    ok 7 - no host stderr\n    ok 8 - actual fresh returned-object and alias controls\n    1..8\nok 16 - P_mixed_case fresh emitted\n# Subtest: P_short fresh emitted\n    ok 1 - case identity and order retained\n    ok 2 - independent typed nested value and continuation\n    ok 3 - exact ordered diagnostic delivery or quietness\n    ok 4 - typed authored exit or successful value\n    ok 5 - no unrelated exception\n    ok 6 - no host output\n    ok 7 - no host stderr\n    ok 8 - actual fresh returned-object and alias controls\n    1..8\nok 17 - P_short fresh emitted\n# Subtest: P_quiet fresh emitted\n    ok 1 - case identity and order retained\n    ok 2 - independent typed nested value and continuation\n    ok 3 - exact ordered diagnostic delivery or quietness\n    ok 4 - typed authored exit or successful value\n    ok 5 - no unrelated exception\n    ok 6 - no host output\n    ok 7 - no host stderr\n    ok 8 - actual fresh returned-object and alias controls\n    1..8\nok 18 - P_quiet fresh emitted\n# Subtest: P_prefix_bad fresh emitted\n    ok 1 - case identity and order retained\n    ok 2 - independent typed nested value and continuation\n    ok 3 - exact ordered diagnostic delivery or quietness\n    ok 4 - typed authored exit or successful value\n    ok 5 - no unrelated exception\n    ok 6 - no host output\n    ok 7 - no host stderr\n    ok 8 - actual fresh returned-object and alias controls\n    1..8\nok 19 - P_prefix_bad fresh emitted\n# Subtest: P_suffix_bad fresh emitted\n    ok 1 - case identity and order retained\n    ok 2 - independent typed nested value and continuation\n    ok 3 - exact ordered diagnostic delivery or quietness\n    ok 4 - typed authored exit or successful value\n    ok 5 - no unrelated exception\n    ok 6 - no host output\n    ok 7 - no host stderr\n    ok 8 - actual fresh returned-object and alias controls\n    1..8\nok 20 - P_suffix_bad fresh emitted\n# Subtest: P_empty fresh emitted\n    ok 1 - case identity and order retained\n    ok 2 - independent typed nested value and continuation\n    ok 3 - exact ordered diagnostic delivery or quietness\n    ok 4 - typed authored exit or successful value\n    ok 5 - no unrelated exception\n    ok 6 - no host output\n    ok 7 - no host stderr\n    ok 8 - actual fresh returned-object and alias controls\n    1..8\nok 21 - P_empty fresh emitted\n# NORMALIZATION_OBSERVATIONS {\"emitted_sha256\":\"b26a75087e312930b181a34c20ba37d718b9b9fc5026f69cfdb206f278f61770\",\"fresh\":[{\"detachment\":{\"deliberately_aliased_control_rejected\":1,\"mapped_unchanged\":1,\"original_unchanged\":1},\"events\":[{\"helper_name\":\"print_each\",\"message\":\"leaf:ab!\",\"rule_label\":\"Top\"},{\"helper_name\":\"print_each\",\"message\":\"leaf:cd!\",\"rule_label\":\"Top\"},{\"helper_name\":\"say\",\"message\":\"done:2\\n\",\"rule_label\":\"Top\"}],\"exit_status\":null,\"id\":\"P_ab_cd\",\"stderr\":\"\",\"stdout\":\"\",\"unexpected_error\":null,\"value\":{\"mapped\":{\"a\":\"new:AB\",\"b\":{\"c\":\"new:CD\"}},\"original\":{\"a\":\"ab\",\"b\":{\"c\":\"cd\"}},\"seen\":[\"ab\",\"cd\"],\"text\":\"outside\",\"tree\":{\"a\":\"new:AB\",\"b\":{\"c\":\"new:CD\"},\"meta\":{\"count\":2}},\"visits\":2}},{\"detachment\":{\"deliberately_aliased_control_rejected\":1,\"mapped_unchanged\":1,\"original_unchanged\":1},\"events\":[{\"helper_name\":\"print_each\",\"message\":\"leaf:AB!\",\"rule_label\":\"Top\"},{\"helper_name\":\"print_each\",\"message\":\"leaf:cd!\",\"rule_label\":\"Top\"},{\"helper_name\":\"say\",\"message\":\"done:2\\n\",\"rule_label\":\"Top\"}],\"exit_status\":null,\"id\":\"P_mixed_case\",\"stderr\":\"\",\"stdout\":\"\",\"unexpected_error\":null,\"value\":{\"mapped\":{\"a\":\"new:AB\",\"b\":{\"c\":\"new:CD\"}},\"original\":{\"a\":\"AB\",\"b\":{\"c\":\"cd\"}},\"seen\":[\"AB\",\"cd\"],\"text\":\"outside\",\"tree\":{\"a\":\"new:AB\",\"b\":{\"c\":\"new:CD\"},\"meta\":{\"count\":2}},\"visits\":2}},{\"detachment\":{\"deliberately_aliased_control_rejected\":1,\"mapped_unchanged\":1,\"original_unchanged\":1},\"events\":[{\"helper_name\":\"print_each\",\"message\":\"leaf:x!\",\"rule_label\":\"Top\"},{\"helper_name\":\"print_each\",\"message\":\"leaf:y!\",\"rule_label\":\"Top\"},{\"helper_name\":\"say\",\"message\":\"done:2\\n\",\"rule_label\":\"Top\"}],\"exit_status\":null,\"id\":\"P_short\",\"stderr\":\"\",\"stdout\":\"\",\"unexpected_error\":null,\"value\":{\"mapped\":{\"a\":\"new:X\",\"b\":{\"c\":\"new:Y\"}},\"original\":{\"a\":\"x\",\"b\":{\"c\":\"y\"}},\"seen\":[\"x\",\"y\"],\"text\":\"outside\",\"tree\":{\"a\":\"new:X\",\"b\":{\"c\":\"new:Y\"},\"meta\":{\"count\":2}},\"visits\":2}},{\"detachment\":{\"deliberately_aliased_control_rejected\":1,\"mapped_unchanged\":1,\"original_unchanged\":1},\"events\":[],\"exit_status\":null,\"id\":\"P_quiet\",\"stderr\":\"\",\"stdout\":\"\",\"unexpected_error\":null,\"value\":{\"mapped\":{\"a\":\"new:AB\",\"b\":{\"c\":\"new:CD\"}},\"original\":{\"a\":\"ab\",\"b\":{\"c\":\"cd\"}},\"seen\":[\"ab\",\"cd\"],\"text\":\"outside\",\"tree\":{\"a\":\"new:AB\",\"b\":{\"c\":\"new:CD\"},\"meta\":{\"count\":2}},\"visits\":2}},{\"detachment\":null,\"events\":[],\"exit_status\":1,\"id\":\"P_prefix_bad\",\"stderr\":\"\",\"stdout\":\"\",\"unexpected_error\":null,\"value\":null},{\"detachment\":null,\"events\":[],\"exit_status\":1,\"id\":\"P_suffix_bad\",\"stderr\":\"\",\"stdout\":\"\",\"unexpected_error\":null,\"value\":null},{\"detachment\":null,\"events\":[],\"exit_status\":1,\"id\":\"P_empty\",\"stderr\":\"\",\"stdout\":\"\",\"unexpected_error\":null,\"value\":null}],\"native\":[{\"detachment\":{\"deliberately_aliased_control_rejected\":1,\"mapped_unchanged\":1,\"original_unchanged\":1},\"events\":[{\"helper_name\":\"print_each\",\"message\":\"leaf:ab!\",\"rule_label\":\"Top\"},{\"helper_name\":\"print_each\",\"message\":\"leaf:cd!\",\"rule_label\":\"Top\"},{\"helper_name\":\"say\",\"message\":\"done:2\\n\",\"rule_label\":\"Top\"}],\"exit_status\":null,\"id\":\"P_ab_cd\",\"stderr\":\"\",\"stdout\":\"\",\"unexpected_error\":null,\"value\":{\"mapped\":{\"a\":\"new:AB\",\"b\":{\"c\":\"new:CD\"}},\"original\":{\"a\":\"ab\",\"b\":{\"c\":\"cd\"}},\"seen\":[\"ab\",\"cd\"],\"text\":\"outside\",\"tree\":{\"a\":\"new:AB\",\"b\":{\"c\":\"new:CD\"},\"meta\":{\"count\":2}},\"visits\":2}},{\"detachment\":{\"deliberately_aliased_control_rejected\":1,\"mapped_unchanged\":1,\"original_unchanged\":1},\"events\":[{\"helper_name\":\"print_each\",\"message\":\"leaf:AB!\",\"rule_label\":\"Top\"},{\"helper_name\":\"print_each\",\"message\":\"leaf:cd!\",\"rule_label\":\"Top\"},{\"helper_name\":\"say\",\"message\":\"done:2\\n\",\"rule_label\":\"Top\"}],\"exit_status\":null,\"id\":\"P_mixed_case\",\"stderr\":\"\",\"stdout\":\"\",\"unexpected_error\":null,\"value\":{\"mapped\":{\"a\":\"new:AB\",\"b\":{\"c\":\"new:CD\"}},\"original\":{\"a\":\"AB\",\"b\":{\"c\":\"cd\"}},\"seen\":[\"AB\",\"cd\"],\"text\":\"outside\",\"tree\":{\"a\":\"new:AB\",\"b\":{\"c\":\"new:CD\"},\"meta\":{\"count\":2}},\"visits\":2}},{\"detachment\":{\"deliberately_aliased_control_rejected\":1,\"mapped_unchanged\":1,\"original_unchanged\":1},\"events\":[{\"helper_name\":\"print_each\",\"message\":\"leaf:x!\",\"rule_label\":\"Top\"},{\"helper_name\":\"print_each\",\"message\":\"leaf:y!\",\"rule_label\":\"Top\"},{\"helper_name\":\"say\",\"message\":\"done:2\\n\",\"rule_label\":\"Top\"}],\"exit_status\":null,\"id\":\"P_short\",\"stderr\":\"\",\"stdout\":\"\",\"unexpected_error\":null,\"value\":{\"mapped\":{\"a\":\"new:X\",\"b\":{\"c\":\"new:Y\"}},\"original\":{\"a\":\"x\",\"b\":{\"c\":\"y\"}},\"seen\":[\"x\",\"y\"],\"text\":\"outside\",\"tree\":{\"a\":\"new:X\",\"b\":{\"c\":\"new:Y\"},\"meta\":{\"count\":2}},\"visits\":2}},{\"detachment\":{\"deliberately_aliased_control_rejected\":1,\"mapped_unchanged\":1,\"original_unchanged\":1},\"events\":[],\"exit_status\":null,\"id\":\"P_quiet\",\"stderr\":\"\",\"stdout\":\"\",\"unexpected_error\":null,\"value\":{\"mapped\":{\"a\":\"new:AB\",\"b\":{\"c\":\"new:CD\"}},\"original\":{\"a\":\"ab\",\"b\":{\"c\":\"cd\"}},\"seen\":[\"ab\",\"cd\"],\"text\":\"outside\",\"tree\":{\"a\":\"new:AB\",\"b\":{\"c\":\"new:CD\"},\"meta\":{\"count\":2}},\"visits\":2}},{\"detachment\":null,\"events\":[],\"exit_status\":1,\"id\":\"P_prefix_bad\",\"stderr\":\"\",\"stdout\":\"\",\"unexpected_error\":null,\"value\":null},{\"detachment\":null,\"events\":[],\"exit_status\":1,\"id\":\"P_suffix_bad\",\"stderr\":\"\",\"stdout\":\"\",\"unexpected_error\":null,\"value\":null},{\"detachment\":null,\"events\":[],\"exit_status\":1,\"id\":\"P_empty\",\"stderr\":\"\",\"stdout\":\"\",\"unexpected_error\":null,\"value\":null}],\"source_path\":\"tests/language-readiness/composed/normalization-calls.spec\",\"source_sha256\":\"f4e45215d893a3c159eb146dd4c37b5008e6670bb52e180e3deebd8139e6a83e\"}\n1..21\nok\nAll tests successful.\nFiles=1, Tests=21, 15 wallclock secs ( 0.01 usr  0.00 sys + 15.34 cusr  0.11 csys = 15.46 CPU)\nResult: PASS\n"
+    }
+  ],
+  "normalization": {
+    "emitted_sha256": "b26a75087e312930b181a34c20ba37d718b9b9fc5026f69cfdb206f278f61770",
+    "fresh": [
+      {
+        "detachment": {
+          "deliberately_aliased_control_rejected": 1,
+          "mapped_unchanged": 1,
+          "original_unchanged": 1
+        },
+        "events": [
+          {
+            "helper_name": "print_each",
+            "message": "leaf:ab!",
+            "rule_label": "Top"
+          },
+          {
+            "helper_name": "print_each",
+            "message": "leaf:cd!",
+            "rule_label": "Top"
+          },
+          {
+            "helper_name": "say",
+            "message": "done:2\n",
+            "rule_label": "Top"
+          }
+        ],
+        "exit_status": null,
+        "id": "P_ab_cd",
+        "stderr": "",
+        "stdout": "",
+        "unexpected_error": null,
+        "value": {
+          "mapped": {
+            "a": "new:AB",
+            "b": {
+              "c": "new:CD"
+            }
+          },
+          "original": {
+            "a": "ab",
+            "b": {
+              "c": "cd"
+            }
+          },
+          "seen": [
+            "ab",
+            "cd"
+          ],
+          "text": "outside",
+          "tree": {
+            "a": "new:AB",
+            "b": {
+              "c": "new:CD"
+            },
+            "meta": {
+              "count": 2
+            }
+          },
+          "visits": 2
+        }
+      },
+      {
+        "detachment": {
+          "deliberately_aliased_control_rejected": 1,
+          "mapped_unchanged": 1,
+          "original_unchanged": 1
+        },
+        "events": [
+          {
+            "helper_name": "print_each",
+            "message": "leaf:AB!",
+            "rule_label": "Top"
+          },
+          {
+            "helper_name": "print_each",
+            "message": "leaf:cd!",
+            "rule_label": "Top"
+          },
+          {
+            "helper_name": "say",
+            "message": "done:2\n",
+            "rule_label": "Top"
+          }
+        ],
+        "exit_status": null,
+        "id": "P_mixed_case",
+        "stderr": "",
+        "stdout": "",
+        "unexpected_error": null,
+        "value": {
+          "mapped": {
+            "a": "new:AB",
+            "b": {
+              "c": "new:CD"
+            }
+          },
+          "original": {
+            "a": "AB",
+            "b": {
+              "c": "cd"
+            }
+          },
+          "seen": [
+            "AB",
+            "cd"
+          ],
+          "text": "outside",
+          "tree": {
+            "a": "new:AB",
+            "b": {
+              "c": "new:CD"
+            },
+            "meta": {
+              "count": 2
+            }
+          },
+          "visits": 2
+        }
+      },
+      {
+        "detachment": {
+          "deliberately_aliased_control_rejected": 1,
+          "mapped_unchanged": 1,
+          "original_unchanged": 1
+        },
+        "events": [
+          {
+            "helper_name": "print_each",
+            "message": "leaf:x!",
+            "rule_label": "Top"
+          },
+          {
+            "helper_name": "print_each",
+            "message": "leaf:y!",
+            "rule_label": "Top"
+          },
+          {
+            "helper_name": "say",
+            "message": "done:2\n",
+            "rule_label": "Top"
+          }
+        ],
+        "exit_status": null,
+        "id": "P_short",
+        "stderr": "",
+        "stdout": "",
+        "unexpected_error": null,
+        "value": {
+          "mapped": {
+            "a": "new:X",
+            "b": {
+              "c": "new:Y"
+            }
+          },
+          "original": {
+            "a": "x",
+            "b": {
+              "c": "y"
+            }
+          },
+          "seen": [
+            "x",
+            "y"
+          ],
+          "text": "outside",
+          "tree": {
+            "a": "new:X",
+            "b": {
+              "c": "new:Y"
+            },
+            "meta": {
+              "count": 2
+            }
+          },
+          "visits": 2
+        }
+      },
+      {
+        "detachment": {
+          "deliberately_aliased_control_rejected": 1,
+          "mapped_unchanged": 1,
+          "original_unchanged": 1
+        },
+        "events": [],
+        "exit_status": null,
+        "id": "P_quiet",
+        "stderr": "",
+        "stdout": "",
+        "unexpected_error": null,
+        "value": {
+          "mapped": {
+            "a": "new:AB",
+            "b": {
+              "c": "new:CD"
+            }
+          },
+          "original": {
+            "a": "ab",
+            "b": {
+              "c": "cd"
+            }
+          },
+          "seen": [
+            "ab",
+            "cd"
+          ],
+          "text": "outside",
+          "tree": {
+            "a": "new:AB",
+            "b": {
+              "c": "new:CD"
+            },
+            "meta": {
+              "count": 2
+            }
+          },
+          "visits": 2
+        }
+      },
+      {
+        "detachment": null,
+        "events": [],
+        "exit_status": 1,
+        "id": "P_prefix_bad",
+        "stderr": "",
+        "stdout": "",
+        "unexpected_error": null,
+        "value": null
+      },
+      {
+        "detachment": null,
+        "events": [],
+        "exit_status": 1,
+        "id": "P_suffix_bad",
+        "stderr": "",
+        "stdout": "",
+        "unexpected_error": null,
+        "value": null
+      },
+      {
+        "detachment": null,
+        "events": [],
+        "exit_status": 1,
+        "id": "P_empty",
+        "stderr": "",
+        "stdout": "",
+        "unexpected_error": null,
+        "value": null
+      }
+    ],
+    "native": [
+      {
+        "detachment": {
+          "deliberately_aliased_control_rejected": 1,
+          "mapped_unchanged": 1,
+          "original_unchanged": 1
+        },
+        "events": [
+          {
+            "helper_name": "print_each",
+            "message": "leaf:ab!",
+            "rule_label": "Top"
+          },
+          {
+            "helper_name": "print_each",
+            "message": "leaf:cd!",
+            "rule_label": "Top"
+          },
+          {
+            "helper_name": "say",
+            "message": "done:2\n",
+            "rule_label": "Top"
+          }
+        ],
+        "exit_status": null,
+        "id": "P_ab_cd",
+        "stderr": "",
+        "stdout": "",
+        "unexpected_error": null,
+        "value": {
+          "mapped": {
+            "a": "new:AB",
+            "b": {
+              "c": "new:CD"
+            }
+          },
+          "original": {
+            "a": "ab",
+            "b": {
+              "c": "cd"
+            }
+          },
+          "seen": [
+            "ab",
+            "cd"
+          ],
+          "text": "outside",
+          "tree": {
+            "a": "new:AB",
+            "b": {
+              "c": "new:CD"
+            },
+            "meta": {
+              "count": 2
+            }
+          },
+          "visits": 2
+        }
+      },
+      {
+        "detachment": {
+          "deliberately_aliased_control_rejected": 1,
+          "mapped_unchanged": 1,
+          "original_unchanged": 1
+        },
+        "events": [
+          {
+            "helper_name": "print_each",
+            "message": "leaf:AB!",
+            "rule_label": "Top"
+          },
+          {
+            "helper_name": "print_each",
+            "message": "leaf:cd!",
+            "rule_label": "Top"
+          },
+          {
+            "helper_name": "say",
+            "message": "done:2\n",
+            "rule_label": "Top"
+          }
+        ],
+        "exit_status": null,
+        "id": "P_mixed_case",
+        "stderr": "",
+        "stdout": "",
+        "unexpected_error": null,
+        "value": {
+          "mapped": {
+            "a": "new:AB",
+            "b": {
+              "c": "new:CD"
+            }
+          },
+          "original": {
+            "a": "AB",
+            "b": {
+              "c": "cd"
+            }
+          },
+          "seen": [
+            "AB",
+            "cd"
+          ],
+          "text": "outside",
+          "tree": {
+            "a": "new:AB",
+            "b": {
+              "c": "new:CD"
+            },
+            "meta": {
+              "count": 2
+            }
+          },
+          "visits": 2
+        }
+      },
+      {
+        "detachment": {
+          "deliberately_aliased_control_rejected": 1,
+          "mapped_unchanged": 1,
+          "original_unchanged": 1
+        },
+        "events": [
+          {
+            "helper_name": "print_each",
+            "message": "leaf:x!",
+            "rule_label": "Top"
+          },
+          {
+            "helper_name": "print_each",
+            "message": "leaf:y!",
+            "rule_label": "Top"
+          },
+          {
+            "helper_name": "say",
+            "message": "done:2\n",
+            "rule_label": "Top"
+          }
+        ],
+        "exit_status": null,
+        "id": "P_short",
+        "stderr": "",
+        "stdout": "",
+        "unexpected_error": null,
+        "value": {
+          "mapped": {
+            "a": "new:X",
+            "b": {
+              "c": "new:Y"
+            }
+          },
+          "original": {
+            "a": "x",
+            "b": {
+              "c": "y"
+            }
+          },
+          "seen": [
+            "x",
+            "y"
+          ],
+          "text": "outside",
+          "tree": {
+            "a": "new:X",
+            "b": {
+              "c": "new:Y"
+            },
+            "meta": {
+              "count": 2
+            }
+          },
+          "visits": 2
+        }
+      },
+      {
+        "detachment": {
+          "deliberately_aliased_control_rejected": 1,
+          "mapped_unchanged": 1,
+          "original_unchanged": 1
+        },
+        "events": [],
+        "exit_status": null,
+        "id": "P_quiet",
+        "stderr": "",
+        "stdout": "",
+        "unexpected_error": null,
+        "value": {
+          "mapped": {
+            "a": "new:AB",
+            "b": {
+              "c": "new:CD"
+            }
+          },
+          "original": {
+            "a": "ab",
+            "b": {
+              "c": "cd"
+            }
+          },
+          "seen": [
+            "ab",
+            "cd"
+          ],
+          "text": "outside",
+          "tree": {
+            "a": "new:AB",
+            "b": {
+              "c": "new:CD"
+            },
+            "meta": {
+              "count": 2
+            }
+          },
+          "visits": 2
+        }
+      },
+      {
+        "detachment": null,
+        "events": [],
+        "exit_status": 1,
+        "id": "P_prefix_bad",
+        "stderr": "",
+        "stdout": "",
+        "unexpected_error": null,
+        "value": null
+      },
+      {
+        "detachment": null,
+        "events": [],
+        "exit_status": 1,
+        "id": "P_suffix_bad",
+        "stderr": "",
+        "stdout": "",
+        "unexpected_error": null,
+        "value": null
+      },
+      {
+        "detachment": null,
+        "events": [],
+        "exit_status": 1,
+        "id": "P_empty",
+        "stderr": "",
+        "stdout": "",
+        "unexpected_error": null,
+        "value": null
+      }
+    ],
+    "source_path": "tests/language-readiness/composed/normalization-calls.spec",
+    "source_sha256": "f4e45215d893a3c159eb146dd4c37b5008e6670bb52e180e3deebd8139e6a83e"
+  },
+  "original_controls": [
+    {
+      "dumped_bytes": 9000,
+      "dumped_sha256": "a3de61369e6a0d5ef4295ee10f410f3257db09be4913053cc93be5085a8f248b",
+      "emitted_sha256": "08ae4d5e7ef2c7a32adaebc793277b08c22704a58939467ecacc344e2953ecbf",
+      "fresh": {
+        "emitted_sha256": "08ae4d5e7ef2c7a32adaebc793277b08c22704a58939467ecacc344e2953ecbf",
+        "error": null,
+        "output": "",
+        "stderr": "",
+        "value": [
+          "x"
+        ]
+      },
+      "id": "direct_push",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "output": "",
+        "stderr": "",
+        "value": [
+          "x"
+        ]
+      },
+      "source_sha256": "7b36f4540db66efbe708d55dbb639c174ad9642e9b70e07482b9f9d88f18632d"
+    },
+    {
+      "dumped_bytes": 11564,
+      "dumped_sha256": "973aabed949bdc869fd61ed72ac8a1859e1a501412df844a5bd996462b063542",
+      "emitted_sha256": "cdac2c8cc9db7739184f40206c7e805694591f823bc99eefb5b4dbb9938ddd47",
+      "fresh": {
+        "emitted_sha256": "cdac2c8cc9db7739184f40206c7e805694591f823bc99eefb5b4dbb9938ddd47",
+        "error": null,
+        "output": "",
+        "stderr": "",
+        "value": [
+          "x"
+        ]
+      },
+      "id": "callback_push",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "output": "",
+        "stderr": "",
+        "value": [
+          "x"
+        ]
+      },
+      "source_sha256": "d58a6b50eaa608cbb487205b6d7bb2ffd2913ae01dbd3466f68041c5a79a02fa"
+    },
+    {
+      "dumped_bytes": 9556,
+      "dumped_sha256": "76306379e11a60056723e5eefe2e9f71bc28af68e47925b4bc7338f5eccf4017",
+      "emitted_sha256": "2d0b705c0c01e78fed1250360562f3b9a77d8e95172ee5692f2b08de79886363",
+      "fresh": {
+        "emitted_sha256": "2d0b705c0c01e78fed1250360562f3b9a77d8e95172ee5692f2b08de79886363",
+        "error": null,
+        "output": "",
+        "stderr": "",
+        "value": "!x"
+      },
+      "id": "direct_function",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "output": "",
+        "stderr": "",
+        "value": "!x"
+      },
+      "source_sha256": "35a9db3b9065a65b7a655f56fd230223a46428e0c77d1e623e1cc1057e4b2d85"
+    },
+    {
+      "dumped_bytes": 12922,
+      "dumped_sha256": "11b7ec001f9a7e31ae237ced701321f1969d83f0df0cc861edd3ff4605e1f2f7",
+      "emitted_sha256": "a594b41c25497da6f1f916a86f1bb1bc4eb1037ecd3a9595989fb174790a8ac1",
+      "fresh": {
+        "emitted_sha256": "a594b41c25497da6f1f916a86f1bb1bc4eb1037ecd3a9595989fb174790a8ac1",
+        "error": null,
+        "output": "",
+        "stderr": "",
+        "value": "!x"
+      },
+      "id": "callback_function",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "output": "",
+        "stderr": "",
+        "value": "!x"
+      },
+      "source_sha256": "f9510048a44950a6a810d2e107a05a5e42c0aee2f3c0e19935c31cc60b02aef9"
+    },
+    {
+      "dumped_bytes": 12341,
+      "dumped_sha256": "27ffdbcc688f2bc66593f78fb599c98dcd272284859d2b8ea517310c3e628af6",
+      "emitted_sha256": "41846588604d22c77c3d32bd3f1f57d8dd4c7c6e2a23d84140e61a9bfaa09d9a",
+      "fresh": {
+        "emitted_sha256": "41846588604d22c77c3d32bd3f1f57d8dd4c7c6e2a23d84140e61a9bfaa09d9a",
+        "error": null,
+        "output": "",
+        "stderr": "",
+        "value": [
+          "!x",
+          "before:x"
+        ]
+      },
+      "id": "callback_cat_assignment",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "output": "",
+        "stderr": "",
+        "value": [
+          "!x",
+          "before:x"
+        ]
+      },
+      "source_sha256": "34fe5ca1c95c543a68977e5149705a4eb371676a49b98dee83208156302aeff9"
+    },
+    {
+      "dumped_bytes": 8983,
+      "dumped_sha256": "2d30fef8d77e86a4a43d1aeb10c8b25ea1973f4dbb1be6a681d01e7bba7724f0",
+      "emitted_sha256": "2ce7e2a960c448a56539336000aa1e6f6877f0887a9496e4444924385b982889",
+      "fresh": {
+        "emitted_sha256": "2ce7e2a960c448a56539336000aa1e6f6877f0887a9496e4444924385b982889",
+        "error": null,
+        "output": "",
+        "stderr": "",
+        "value": "AB"
+      },
+      "id": "direct_uppercase",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "output": "",
+        "stderr": "",
+        "value": "AB"
+      },
+      "source_sha256": "3cd5ccb7fefcb82d2a398a00a86b0738dfaa48389b01def2557ed6f44d67f864"
+    },
+    {
+      "dumped_bytes": 9674,
+      "dumped_sha256": "7088f5ea17cabcb83d63ee4fef7423d441bb2d7b421819b44ca12cc9f9ffa86c",
+      "emitted_sha256": "f33f0262271e651c7010a0e2638f48cf4ce205c9447e357562c53970372a64b1",
+      "fresh": {
+        "emitted_sha256": "f33f0262271e651c7010a0e2638f48cf4ce205c9447e357562c53970372a64b1",
+        "error": null,
+        "output": "",
+        "stderr": "",
+        "value": "!AB"
+      },
+      "id": "function_uppercase",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "output": "",
+        "stderr": "",
+        "value": "!AB"
+      },
+      "source_sha256": "bf0a1c437e6c0c10a592aa288cf8ce3df85adf5643a43f52a6f4619e3c3c4667"
+    }
+  ],
+  "owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.2",
+  "preserved_bridge_inputs": {
+    "capability_conformance/callable_codeblock_contract.json": "1651e42e0e24e2476dcaffa1f4bd63888bddaa3a845ddaf329be7392c0bfe67e",
+    "capability_conformance/callable_signature_contract.json": "d01a63252648259dadab5f2f565ae7c93e860c055f2a156178f605c4b0c53ca7",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.0.0-diagnosis.json": "e8f5f8d3962bdf6a616b1d7522e3cc7438f4e77714118b044ff7db13ac4f8be6",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.0.1-verification.json": "678a9a5a8c2ce2b4dcf9f88b948a9742023679fb01b154898d661d35f510dc2f",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.0-contract.json": "47a0622de488f027b079536ecbe206361cc9f7b5dfb54f160dde5bbf909479f3",
+    "perl/LinkedSpec/ActionIR/MethodLowering.pm": "7418677f2fb9e2f9ca39c1606cff888826b788fd2ff8c911fba75d32b9b365b5",
+    "perl/LinkedSpec/BindingRuntime.pm": "4168ea0bb10dbe22f7be409e5b58087534ae42cb14d77d254608df1650bfdc91",
+    "perl/LinkedSpec/CallableContract.pm": "b985f546158bc9cba232c93ed651b65016295c77b7390cda620096b3604fd781",
+    "perl/LinkedSpec/CodeblockRuntime.pm": "93f5cd09381c5d4f92d08046531626544d2fd94dff8b0d3afa5ab9fd406ccd73",
+    "perl/LinkedSpec/RuleIR/EmitContext.pm": "6940dcf0be03b65e3d0a69f3efec41e1dca37524930ef20368dae94d99a23a9b",
+    "t/codeblock_push_composition_perl.t": "5c773a03f472acaf509863e314621d8a735318113e1478d15e559ad27c86fd46",
+    "tests/language-readiness/composed/diagnostic-invalid-arity.spec": "bd474ebe5e927111b46163b217da66e3d75802f264558800b3bfeebd14ad773a",
+    "tests/language-readiness/composed/diagnostic.spec": "fba66e47d14b1a236deb1136ec2c515fa629f8a1d8dce36812431ebe8bc62fc0",
+    "tests/language-readiness/composed/normalization.spec": "ba9953c282e5e66956dc4b7d22c2acc7b1e879734654e7cb467ad41275cc4249"
+  },
+  "recovered_producers": {
+    ".linkedspec-data/scratch/selfcontain13302/diagnosis.pl": "bbcccda7957b5191043c85602f2c44bc01116bbe0a5ec2f36668defcba5fcfed",
+    ".linkedspec-data/scratch/selfcontain13302/emitted-child.pl": "6c865cbc4839104517b2bd24d0cec62bb4ef9a40f4e406fe2eb4af7297cb3b09",
+    ".linkedspec-data/scratch/selfcontain13302/scope-finding.json": "343ba7093a52470dc39e1c84303c6c0b90e39096e5d3593545775a70618984a7",
+    ".linkedspec-data/scratch/selfcontain1330201/baseline-perl/LinkedSpec/ActionIR/MethodLowering.pm": "d5720b43443f21a8c0992f6d77a74c4a6a32ecc8f0647a1f16b6b76f9044718d",
+    ".linkedspec-data/scratch/selfcontain1330201/baseline-source-identities.json": "18d2a42f048b04ee7ae8e27c18913d1457ac66a175cc2d68f106cffae0c4c154",
+    ".linkedspec-data/scratch/selfcontain1330201/book-examples.json": "d7b7b8431e34b0d88e41e1c0fc566656bdfa0e03153218ad1ab70308a32cbb46",
+    ".linkedspec-data/scratch/selfcontain1330201/final-regression-source.t": "3a20062853625bd7f1b7a5102d0148b4efe4f7dfad6eb33f2a61b19e33371d03",
+    ".linkedspec-data/scratch/selfcontain1330201/observation-child.pl": "83ec887569f04fefa6d433cac9ce1c14471343f837d2378b10aa12a497d19281",
+    ".linkedspec-data/scratch/selfcontain1330201/observe.pl": "ded9e59126d46d0245a69e125831db7b8af812f18385455be9a99e12dd7f4ee1",
+    ".linkedspec-data/scratch/selfcontain1330210/child.pl": "7a8f2f551d004acdcc3c03a153b5f1dc17b2f8a9da43c31a5eb316f82d4d96e7",
+    ".linkedspec-data/scratch/selfcontain1330210/probe.pl": "b8bf9cc29cca4be8b974a8c6b695c922e5c86a21d8b233fa0284313d00eb08f7",
+    ".linkedspec-data/scratch/selfcontain1330210/review.py": "0c500093ff503e2dcf4a2d7aa72041f3cdb6dbeb8cc151c8cd4771d715d8e030",
+    ".linkedspec-data/scratch/selfcontain1330211/baseline-perl/LinkedSpec/BridgeBaseline.pm": "40e3da56ef5e3b72e771d811b1f9762c8cfbe75f3e773d81c4bd3819a7daaf03",
+    ".linkedspec-data/scratch/selfcontain1330211/book-child.pl": "6112bcdf16f287f67df2de4eb438c22fa5506a6f6bc0bfcf58e1d47f95071608",
+    ".linkedspec-data/scratch/selfcontain1330211/book-proof.pl": "6d9dd325e1f7466f7703af81189071cdc563d035c8c7c735955f19516e6387fa",
+    ".linkedspec-data/scratch/selfcontain1330211/controls/child.pl": "42947b5548a4a04d3838303ed691194fcdbdae62eaabf3fff13ffe64d172d8de",
+    ".linkedspec-data/scratch/selfcontain1330211/controls/probe.pl": "68c25b00c0749e13c1b44134bb2ac0e97aee68f5d09cdea66fe7f506e21bd3d3",
+    ".linkedspec-data/scratch/selfcontain1330211/literal-fresh.pl": "2c245bba69ac7cc76193f27012d049e1dcc90915290cbbbb958e4fd943a3c7a1",
+    ".linkedspec-data/scratch/selfcontain1330211/literal-prereq.pl": "9ea799e77c75bdad629de1c6c9c15ef961781b56908fe18c198aa6e8dffe68b5",
+    ".linkedspec-data/scratch/selfcontain1330211/observation-child.pl": "8da62fc44b0953f83e5f7f9e4f3a10cc4348fe1eecb0276cfdd965664b49dae8",
+    ".linkedspec-data/scratch/selfcontain1330211/observe.pl": "3973bad417c4c4bc3d9c5c0f2971558691eb88009cc3b158a56f3882c7401784",
+    ".linkedspec-data/scratch/selfcontain1330211/reconstruct-proof.py": "cd4a58ae7a277055a7856430174ec9122fd1d2517a97fc5abe56c4d779369707",
+    ".linkedspec-data/scratch/selfcontain1330211/review.py": "7e23def19462d3aadb90b2ea3a9d60622b67a054930d9cb405f3f84a9e9f76f0",
+    ".linkedspec-data/scratch/selfcontain13302140/archive.py": "632af9c0b72248371831c30388afd14625041d5fd80aa874479003ab5bda6977",
+    ".linkedspec-data/scratch/selfcontain13302140/recover.py": "7c73dbfb2eb8ec06f4b22968c2bcee1933c0d0436532f5a4293f6d9f67ec4a55",
+    ".linkedspec-data/scratch/selfcontain13302140/review.py": "5b55bde1c4e4edf8000125d7e21623a91bc99e21a15784717809d00e29f358ab"
+  },
+  "tests": [
+    {
+      "path": "t/codeblock_push_composition_perl.t",
+      "tests": 605
+    },
+    {
+      "path": "t/callable_codeblock_literal_contract.t",
+      "tests": 11
+    },
+    {
+      "path": "t/variadic_user_function_contract.t",
+      "tests": 66
+    },
+    {
+      "path": "t/uniform_binding_contract.t",
+      "tests": 12
+    },
+    {
+      "path": "t/map_leaves_mutation_perl_contract.t",
+      "tests": 8
+    },
+    {
+      "path": "t/actionir_ast_parser.t",
+      "tests": 23
+    },
+    {
+      "path": "t/trace_actionir_method_lowering.t",
+      "tests": 4
+    },
+    {
+      "path": "t/composed_normalization_perl.t",
+      "tests": 21
+    }
+  ],
+  "tracked_inputs": {
+    "capability_conformance/callable_codeblock_contract.json": "1651e42e0e24e2476dcaffa1f4bd63888bddaa3a845ddaf329be7392c0bfe67e",
+    "capability_conformance/callable_signature_contract.json": "d01a63252648259dadab5f2f565ae7c93e860c055f2a156178f605c4b0c53ca7",
+    "capability_conformance/composed_objective_contract.json": "d75eacd0a3dfcb802d6864c042b5b466731719ee2a54e8af94ff19debb4bcf3d",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.1-selection.json": "b9e54e21dff39b08a098ea882a513d507730e0cdd7e4d6199c6374f8dbc30fe7",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.2-verification.json": "f4a1e2e3d9fa13c4cdda3171635411df530d2791105ce87234a620fb010485cd",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.0.0-diagnosis.json": "e8f5f8d3962bdf6a616b1d7522e3cc7438f4e77714118b044ff7db13ac4f8be6",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.0.1-verification.json": "678a9a5a8c2ce2b4dcf9f88b948a9742023679fb01b154898d661d35f510dc2f",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.0-contract.json": "47a0622de488f027b079536ecbe206361cc9f7b5dfb54f160dde5bbf909479f3",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.1-verification.json": "b28f0cc3251c68518bd4e9555cec8ffe5cb00ab6443e7b0fcd37bee4f8deb90b",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.2-fresh.pl": "9465a5ca222c30415335c8b6cc23adbf12aa16be2778da0be918f48d6a3a793b",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.2-probe.pl": "3e862614d8fcef4bce5932cc4cb51377ad4bfbf263fc992002bb0823e7e4bb35",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.2-review.py": "2daa9b45482cbf7bd5b1e2c96ce3e72e2f795ba2017c55ad53d83650193884ae",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.4.0-recovery.json": "cdccdce1fc75fc9ab365b96435cdfad2910683bea7acb82357d5fc5907c1a472",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.1-fresh.pl": "7d18448460c004f03512e726d44ea46cc1eabe1116ef39e066cb6f59fd6ede0a",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.1-verification.json": "eed4b91daf4f28421dbbd306295b5f19309ea8b9cd5dbe3b74e5888e94d5aa9b",
+    "docs/language-readiness/composed-objective-selection.md": "3c22bad15cf8bd8bc76fc2267656e708c479df09e3a8c72c3cb0817106974689",
+    "perl/LinkedRE.pm": "8f3bb342f25b1d0f9c8986e2477d1b00d7bb1359cf38b9d209f680d216896e12",
+    "perl/LinkedSpec.pm": "693bf62c48a850ed1f0a32400ad96744a9f2bcaaf4dff53e16f36a4127cf1ae2",
+    "perl/LinkedSpec/ActionIR/AST.pm": "5d5fa7e8f130f1c0eef39f7ce8129b01563467aa339152073ef4bcb9ebd30dfd",
+    "perl/LinkedSpec/ActionIR/AST/Parser.pm": "8c3e1708278b3e199eb30a7095ca0e70825c01ba4b5a46612e77f7cc8f5dff50",
+    "perl/LinkedSpec/ActionIR/ArrayPipeline.pm": "a9bf7048ecfef2ab9d50c024b1b84a1ad525e64fefde01caab5632168be9b1e7",
+    "perl/LinkedSpec/ActionIR/CanonicalEvents.pm": "6d6caa83dab46cf3915a7d9e0b81d8a11fcd29ac0262b30041a3c81be0af3c4d",
+    "perl/LinkedSpec/ActionIR/CanonicalEvents/Core.pm": "a56a8caa2b1a4e151ab4171a2e8af515a3c187b38ce0280a9b1c4ae84706052d",
+    "perl/LinkedSpec/ActionIR/Contracts.pm": "f062292c073f37817484fd77e54d763f9595618ecd7d05a5d592a4eca621c361",
+    "perl/LinkedSpec/ActionIR/ControlFlow.pm": "84171511b0b5a6511bce4d8510c741d2e5275afe54e40dc9cecb62299a5d5f6a",
+    "perl/LinkedSpec/ActionIR/DeclareMethod.pm": "6ed978febab3ccd85447a2a1be5c1c9e96c255242269b356abe5fb8881259ba3",
+    "perl/LinkedSpec/ActionIR/Diagnostics.pm": "0574e93aeb14a63158d5af08d41ff1775fe263030d1557e59047f1cadb770712",
+    "perl/LinkedSpec/ActionIR/FlowExpr.pm": "47516700d0cdb67f4183425053a9886d9ae0906a79de6cb1590e4f9e2dfff3f2",
+    "perl/LinkedSpec/ActionIR/MethodExpr.pm": "d4a39f686554d943272aabb9e60a4c4c0c49af1b279a105ed05cc82750acbceb",
+    "perl/LinkedSpec/ActionIR/MethodLowering.pm": "7418677f2fb9e2f9ca39c1606cff888826b788fd2ff8c911fba75d32b9b365b5",
+    "perl/LinkedSpec/ActionIR/ProgressiveSpanDispatch.pm": "e357772a2b9d9aae0c5becbfcb3bf238ff4ddc1df466c7063aeef69a1cab0ec5",
+    "perl/LinkedSpec/ActionIR/RewritePipeline.pm": "221597b09903211a883b2072f90783e92fb0f2491e17f0e797b623f27e5f27c9",
+    "perl/LinkedSpec/ActionIR/Scanner.pm": "2e991add41a4325aec65eaa1a7c77904db2b5497292d134bf66d081cbc7579a6",
+    "perl/LinkedSpec/ActionIR/Scanner/FlowRules.pm": "18463d7b84ee525a554e9781288b993f6d39b38d24e25ecbca2d53ae806417d6",
+    "perl/LinkedSpec/ActionIR/Scanner/LegacyRules.pm": "a78386909d43cfd0e0bbb19e41243564007acfc53edf6f760131dd8f1f51fed9",
+    "perl/LinkedSpec/ActionIR/Scanner/PrimitiveBasicRules.pm": "dc987808055afe2843f5c61da0526893ebcfa3028fdddf4f64ad41c77cc9fd7d",
+    "perl/LinkedSpec/ActionIR/Scanner/PrimitivePipelineRules.pm": "17dcac93902068341f5d529dd6bd360616da0f3542ee6345df0d51f1f619eef2",
+    "perl/LinkedSpec/ActionIR/Scanner/RecognitionTransactionRules.pm": "2ad196c9a6e8f8e4872fbc5164ac9b5255cb94b1d6b52028345f3a070f9f0580",
+    "perl/LinkedSpec/ActionIR/ScannerCore.pm": "507bef74ab642d4f65e9222b2687a5f955f279fdd03403ab2ef83c3005c7766e",
+    "perl/LinkedSpec/ActionIR/StagedParseJob.pm": "63b4b211d6f7f94ffa398f4ee07316fc717387faec443e9e5299e0186e8627cc",
+    "perl/LinkedSpec/ActionIR/StatementSplit.pm": "32f2aec5d3b815155453183fc1f0def94e2fc83d7c05fefb9b6b101133e8a94a",
+    "perl/LinkedSpec/ActionIR/StatementSplit/Core.pm": "0bd4d14f36d052e18f95048de9ed2429cf8106685b184b7774681894e36dfb23",
+    "perl/LinkedSpec/ActionIR/StatementSplit/Mode.pm": "be7e4ba728ffa06ec021ac1d6cba57ef612411697adfe621852f0f9ebfe14bd0",
+    "perl/LinkedSpec/ActionIR/Trace.pm": "e005c842ec16e8c8292b75b98a28d293a1178458a1a93bce1faad371a080dace",
+    "perl/LinkedSpec/ActionIR/ValueExpr.pm": "5da83310d071b2c115496e50686a8510ca829d0e9590b2b244f95fcea8d95459",
+    "perl/LinkedSpec/BindingRuntime.pm": "4168ea0bb10dbe22f7be409e5b58087534ae42cb14d77d254608df1650bfdc91",
+    "perl/LinkedSpec/BootstrapSpec.pm": "72525deda4f91586a5acd7de3b302dee1d989ba9e03f4c9f9740b1c3175ae938",
+    "perl/LinkedSpec/BootstrapSpec/Core.pm": "8375456a2f2fab3e0682eaf8901e815ac156d883d3a39113e66b90076b9e5c14",
+    "perl/LinkedSpec/CallableContract.pm": "b985f546158bc9cba232c93ed651b65016295c77b7390cda620096b3604fd781",
+    "perl/LinkedSpec/CodeblockRuntime.pm": "93f5cd09381c5d4f92d08046531626544d2fd94dff8b0d3afa5ab9fd406ccd73",
+    "perl/LinkedSpec/Compiler.pm": "da360b1080a830e693cfd24f1e96f516c15d288363f8c9b6c59187d6b64370d5",
+    "perl/LinkedSpec/CompilerState.pm": "c81730a5653576574ce61879d37df2b1e0472e41f35f5b5ce87f895a52862aa4",
+    "perl/LinkedSpec/EntryRuleSelection.pm": "ce30112d405908bc0589d0ef5e5b4fa9299c0dbd758f760a99eb84e5acccea25",
+    "perl/LinkedSpec/GeneratedSource.pm": "f4a446847c241973278d3c1c30407047bb9b53fdf75ba5f9830e874290e66f68",
+    "perl/LinkedSpec/HandlerVariantEmitter.pm": "22382f132066572f72c4f745bd6f356439e26c8b55171af57ec531b06682327d",
+    "perl/LinkedSpec/InterMatchGapRuntime.pm": "daef20c20a491ceaa50306167a8880602fe68c7228ade17f486f346686d31976",
+    "perl/LinkedSpec/MCPContract.pm": "06babcb9021a343d6111a447c39105dc1e29cd166e89ccac780f4d132af500ce",
+    "perl/LinkedSpec/MCPContractRuntime.pm": "09fb23f0fa66575811ee42e1102f145c76715e55151cbf2451035c468bc64a35",
+    "perl/LinkedSpec/MCPServer.pm": "df2bd23f8ae66eb7a0e028e10b43c80893309f5091eb8f90f533d5adca0aad8d",
+    "perl/LinkedSpec/MCPWire.pm": "1760f96a3f542d41d302eb6c39438f74fcab9dde8f48c59c49654e80d6a8af56",
+    "perl/LinkedSpec/Numeric.pm": "584f04b4ce883ce82948b8f2543da73167ce76ca4e62cb6c6edea80f5a519308",
+    "perl/LinkedSpec/OwnerDispatch.pm": "19247f57117f66b4cf4ca2b3205373b2167dc4d9790b89dbba8a5a43f94d58ca",
+    "perl/LinkedSpec/ParserFactory.pm": "d8cad7309e0650b59b1221b636f7eff7514cf49ad26c8f512ec6c837af3ef8bc",
+    "perl/LinkedSpec/PluginBridge.pm": "51118e069fe2d95dd9d0aa8b7fbf427c3167db2724bb35dfe9a9202c47925c21",
+    "perl/LinkedSpec/PluginRegistry.pm": "f84ba93c083e09a38fd8e01a9ff65b9b71b9f2c23ac4c987a854337e4a86425a",
+    "perl/LinkedSpec/ProgressiveSpanDispatch.pm": "3f3612b6fb665f9e8678de54a5c876d9b5519bbffeb81e50b29f5262488da5cd",
+    "perl/LinkedSpec/ProgressiveSpanDispatchPolicy.pm": "36b5bf0a73c53df33ced49e53e7399311a0029de4379aef17d8dec86a7a33eb3",
+    "perl/LinkedSpec/ProgressiveSpanDispatchRuntime.pm": "451981a723f5f7383875f51c3e1093ae9898396efab5db2d39a22ac93b6d5a90",
+    "perl/LinkedSpec/RecognitionTransaction.pm": "308543bb1194ba4c6b8837a25346076e03ac55a76cd0522f0b8c8127e7e5618d",
+    "perl/LinkedSpec/RecognitionTransactionPolicy.pm": "7946837d224b579f1f3e9fc2b6a5e785994ada3ac4fffe8d60601665a77fc528",
+    "perl/LinkedSpec/RecognitionTransactionRuntime.pm": "d9b36b3d692a1414227d6a43e342d97785c889c0a8259523d0ecb7bdd72e5923",
+    "perl/LinkedSpec/RecursiveObservationPolicy.pm": "ac1bcc4654e108bdd7f646726f474ed48d9fc613bbdb864a16b6e6bc4568aaa9",
+    "perl/LinkedSpec/Resolver.pm": "5260447fff3e6d9c7dd4d4b8d971991d640efec979c49fde62c1bc41da55cce0",
+    "perl/LinkedSpec/RuleIR.pm": "5cdd4065a6f0e5165863146c4b4693fa54168344f6225dd9a1748e096e331997",
+    "perl/LinkedSpec/RuleIR/EmitContext.pm": "6940dcf0be03b65e3d0a69f3efec41e1dca37524930ef20368dae94d99a23a9b",
+    "perl/LinkedSpec/Runtime.pm": "d6f430b97936639be7c00711af796c493b95c65e6b9c168c965942dd8bab4b26",
+    "perl/LinkedSpec/RuntimeContext.pm": "740bfbea87e3e4ba9f8f541c08f495ad43342f2d27599fbc834bbbd47a8ebab8",
+    "perl/LinkedSpec/RuntimeDiagnosticOutput.pm": "aa44df92d185bf107d91752aa8a4cfabde5f998ffac6633bc72dab0e59851653",
+    "perl/LinkedSpec/RuntimeLogical.pm": "e2b7b9eb8dc7b8a66260edfcc5dbc1959dd7e0d3dbc3f4a973fcbd3a5333dad1",
+    "perl/LinkedSpec/RuntimeSemanticObservation.pm": "39eab6327669426d497827ce80af0353bc88ce32fb333266c18fe4e5cd2ab158",
+    "perl/LinkedSpec/SemanticCallProjection.pm": "c03259c6c01b7105d81557699e959bf36825545aa068df4ef877a00554c121fc",
+    "perl/LinkedSpec/SemanticIndex.pm": "d7301d1efb58fd5f282e9a27ed958a897ab34e6c034f5e30f8e11045ebff029f",
+    "perl/LinkedSpec/SemanticQuery.pm": "740ab20cdae43f07d56bcd0c02d18ddf83b0b449a742b4fee775b1e81f64f210",
+    "perl/LinkedSpec/SemanticRuntimeProjection.pm": "3820b4d7bd4bf035eebd78667f2955bfc8f120bcc8185abc8234821948314764",
+    "perl/LinkedSpec/SemanticSourceMap.pm": "f8dcc03277bbca0f8f964b966143029bdb3153215d8e2cfb9bc9686c7e344306",
+    "perl/LinkedSpec/SemanticStaticProjection.pm": "1424f9aa507a25b70c213515ee216885d8f5bdd0b12294004af5e5605d4d9822",
+    "perl/LinkedSpec/SourceLocation.pm": "c494440264af91bb5a1ba196cc5e5e7e92d367e63fe3a249fd5a050fb1d23793",
+    "perl/LinkedSpec/SpecEntry.pm": "47d2139ff180d959692b78079aff9097970e3d1ee977d34595a4de4c21dc17c1",
+    "perl/LinkedSpec/SpecLoader.pm": "2465593661da9a3d60df04c5730d718742680a8b9103cbd5f6b1183f6b7700ee",
+    "perl/LinkedSpec/StagedASTEnrichment.pm": "6a69d39e1d9de7b849ea429e532232d61f112755cf9b87ba2d16e1291e603f53",
+    "perl/LinkedSpec/StagedASTEnrichmentRuntime.pm": "7d01e18c88ef9de45bf9049a2f3607800a4014aba8a1b4e8ad3fbc99cfac27b3",
+    "perl/LinkedSpec/StagedParseJob.pm": "c9ecca71a9e4a79c48ca94d3569be2ff4560443363cf594d70269f060daf2407",
+    "perl/LinkedSpec/StagedParseJobPolicy.pm": "d08855a2f5c35e00b73cc23f2cc8e0a88283b9c4a8a1cc7500a5efe743ce53f1",
+    "perl/LinkedSpec/StagedParserRegistry.pm": "0f5f9de9b8af952a1d4eadd20b39490ce3fc897a18be9a6d391f9808318a713b",
+    "perl/LinkedSpec/Trace.pm": "f8041e80c7f8342a0497710b130a14085c3dddd0d1ee67eeb04f51dd196ffe22",
+    "perl/LinkedSpec/UnicodeCaseMapping.pm": "944386217a59c811b4333df9070d222e07ba9d5ed8eb163ed2fdcd4c5c73889f",
+    "perl/LinkedSpec/UnicodeXIDContinue.pm": "db2185e0a2366849c126d76b27ad5591eee9463ea5e825e815e9feabe97b8947",
+    "perl/LinkedSpec/UserFunctionRegistry.pm": "805626ff7aeebdbb00565fa102afccdd3e6c8126e2e341f44bfeff1d0cd5361c",
+    "perl/LinkedSpec/Validation.pm": "ac8623e87c7157812e99f8b729fa136d0ff2fe2dc66cfbbc9a91fddd818f49c9",
+    "perl/PPlugin.pm": "7cf5f3e1ff7465a2307b9a2ab8efded717648a188bf5f0dfacaac569370c36d1",
+    "perl/PathSearch.pm": "ad943a8335f1bbb031214e3c60ea2b97cd8440eed68dacac218062c42e7eb255",
+    "perl/env.conf": "45ed4c049b260fed7bf5e9ced195e259b9327834ff08def0581d1f01ffe60591",
+    "perl/gdcheck.pl": "e12ddba1c2a252c91ba48f24ad888e7693f92bdb167a791e847025fe41f153f5",
+    "perl/htmlcss_driver.pl": "9abd0b9bc521b97df100517c547da60b82c6dcd947726733c6001d420582c67c",
+    "perl/ptchange.pl": "13336081ceff048e5172169d4e9bad5997b245c10170ef30f81220dcaae30062",
+    "t/actionir_ast_parser.t": "7a84dcda10f3b4a86ccaaa82157168291ae741a213e9ec269596a1c284e76413",
+    "t/callable_codeblock_literal_contract.t": "900088057ea348c87e319f673f5495732fcce042bb923d11d10d02c05639e43f",
+    "t/codeblock_push_composition_perl.t": "5c773a03f472acaf509863e314621d8a735318113e1478d15e559ad27c86fd46",
+    "t/composed_normalization_perl.t": "43b3b0fff2fe6873600de1937dfb2b129a77f0af92063f6b3df78896b96e7369",
+    "t/map_leaves_mutation_perl_contract.t": "39bdf8f08e2b7fa39035a5013dee8c93e8729c0df40f06870ecbee4e1265fc2f",
+    "t/trace_actionir_method_lowering.t": "c64276dff722a5a662bc96ee78bec29294a8721673f0496ecb419589d25252cd",
+    "t/uniform_binding_contract.t": "9a1107e0c5ff60cbcf3690192f1b6a56ade4dc7e176151e14aa2f3fbf50014aa",
+    "t/variadic_user_function_contract.t": "a9e948410c1abcc15c40a45422f2a316c27181d274be1bcf42e12d72f91de259",
+    "tests/language-readiness/composed/diagnostic-invalid-arity.spec": "bd474ebe5e927111b46163b217da66e3d75802f264558800b3bfeebd14ad773a",
+    "tests/language-readiness/composed/diagnostic.spec": "fba66e47d14b1a236deb1136ec2c515fa629f8a1d8dce36812431ebe8bc62fc0",
+    "tests/language-readiness/composed/normalization-calls.spec": "f4e45215d893a3c159eb146dd4c37b5008e6670bb52e180e3deebd8139e6a83e",
+    "tests/language-readiness/composed/normalization.spec": "ba9953c282e5e66956dc4b7d22c2acc7b1e879734654e7cb467ad41275cc4249",
+    "tools/project_data_env.sh": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73",
+    "tools/project_data_run.sh": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f",
+    "tools/run_python_project_data.sh": "0bc03bb8f4ce550397da9fda086215a1d9f6f452ec413605fbcb8976c06af604"
+  },
+  "version": 1
+}

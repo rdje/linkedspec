@@ -12,6 +12,12 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-10-03 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.2: current execution and historical source recovery
+
+The independent bridge reviewer uses retained original sources plus explicit value literals, public Get/descriptor/dumped source and a separate emitted child. Exact emitted identities and quiet outputs agree. The unchanged71-source605-test regression exercises actual recursion/slot/frame/rest/effect/exception guards; six current dependents total124 after the signature regression, while dated123 remains historical. Normalization21 adds complete seven-case oracle comparison.12 deliberate source/result/event-order/quiet/rejection corruptions reject.
+
+Historical producer bodies are validated in memory from tracked source lines or exact Git blobs; historical writers never run in the current checkout. The first reviewer incorrectly compared the authorized composed source correction to an older hash; its bounded exclusion is paired with exact one-loop succession and independent unchanged neutral governance. Final source-bound capture retains26 producer identities,14 preserved inputs, nine complete new logs and121 watched bytes. Recovery claims freeze at0075; normalization remains0f15. Parent completion is bounded and requires exact canonical staged acceptance. Deferred control/order/readiness and full execution remain separate.
+
 ## 2026-10-03 — Closed opaque archive and read-denied historical replay (.4.2.1)
 
 ZIP names never become extraction paths: the independent original milestone population and source-bound census fix logical paths, sizes and hashes. The validator checks the complete archive before new exclusive managed output; actual rebinding of mutated archive metadata forces deeper member/content controls to reject independently. The historical audit accepts an injected reader and existing falsifiers use the same restored mapping. Actual original-read/tracked-write probes test guards separately from healthy zero-attempt replay; missing restored data fails without fallback. The capture producer rebuilds in memory from restored bytes under the same guard, proving exact deterministic regeneration without hidden original inputs. Historical compression/coverage/governance results keep their dated boundary; only selected durability legs are superseded, not refreshed. Exact new CI insertions reverse before normalization/older blocks; three new byte-changing controls preserve every historical byte.

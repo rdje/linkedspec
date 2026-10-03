@@ -9,8 +9,8 @@ answers:
   - "does the Perl registered bridge restore actual typed exceptions and function state"
   - "why does the frozen normalization still fail after registered dispatch repair"
   - "can a fresh checkout reconstruct the deferred function bridge probes"
-date: 2026-10-02
-status: bounded bridge verified; literal and normalization prerequisites remain
+date: 2026-10-03
+status: bounded bridge and committed prerequisites reconciled; independent dispatcher repairs remain
 tags: [perl, functions, codeblock, composition, compiler, recursion, partial]
 evidence: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.1: 71 exact native/fresh emitted sources,605 top-level tests; old three-module baseline88 failures; six direct-dependent suites123 tests; seven original controls succeed. Checkpoint docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.1-verification.json binds producers, sources, logs and paired observations. Canonical exact-candidate outcome belongs to commit/receipt."
 reverify: "bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/codeblock_push_composition_perl.t t/callable_codeblock_literal_contract.t t/variadic_user_function_contract.t t/uniform_binding_contract.t t/map_leaves_mutation_perl_contract.t t/actionir_ast_parser.t t/trace_actionir_method_lowering.t; then inspect the source-bound checkpoint and owning prerequisite leaves."
@@ -66,3 +66,27 @@ deliberately interrupted143 before completing to correct that gap. Reconstruct w
 book's checkpoint recipe, verify every source/baseline hash before writing, and re-run from the captured
 implementation source boundary. Future compiler/book changes may intentionally change these dated
 observations;71 current regression oracles remain tracked in the existing test and recurring CI.
+
+## Independent reconciliation — 2026-10-03
+
+`.0.2.1.2` retains a read-only public Get/descriptor/dump probe and separate fresh
+child for the seven original sources. Its reviewer compares explicit original
+values and quiet outputs, unchanged bridge/compiler/test/contract bytes, the
+exact authorized one-loop successor and the earlier seven-case normalization
+observation. It runs the unchanged71-source regression and six direct dependents,
+plus normalization, and retains complete TAP results. Actual recursion, registered
+slot precedence, rest/frame/exception identities and deliberate aliases remain
+assertions on runtime objects in those tracked tests. Result/source/event-order/
+quiet/rejection corruptions must fail the reviewer.
+
+Historical producer bodies are recovered in memory from retained source lines or
+exact Git blobs and hash-checked; historical writers are never run in the current
+checkout. The original infix fixture/captures and their failure remain unchanged.
+Literal/source/durability prerequisites are reconciled under exact staged canonical
+parent acceptance. `.0.5/.0.6/.0.7` and startup19/32/35/87 remain independent,
+and full sixteen-case runtime/semantic-mutant execution belongs to `.1.3.3.1`.
+
+Reverify with `bash tools/run_python_project_data.sh
+docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.2-review.py`.
+The new complete observation is a current selected proof; prior measurements retain
+their actual capture revisions rather than receiving refreshed hashes.
