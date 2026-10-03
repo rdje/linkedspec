@@ -1578,3 +1578,18 @@ function bodies, numeric helpers in deferred bodies, portable next behavior, boo
 literal kind, complete-format self-containment or other-backend admission. Compiler
 event ordering and nested raw-expression readiness still need independent correction;
 working runtime results do not prove portable metadata.
+
+### Residual metadata diagnosis remains distinct from callable execution
+
+The bounded deferred-control parent is canonically reconciled. A separate current
+nine-source diagnosis retains27 native/fresh observations, six original public captures,
+15 lowering traces and four focused suites (34 top-level TAP tests). Four residual event
+sequences permute while measured lowering, readiness counts and values remain stable.
+The next compiler slice preserves top-level ownership and residual scan occurrences;
+it must not turn a raw-key grouping into an apparent source-order contract.
+
+The quoted string `"return(inner); if(true)"` executes as literal data yet currently creates
+false helper/control metadata. That P1 defect is scheduled under `.0.7.2`; nested raw
+false-ready reporting remains `.0.7.0/.1`. See the [ActionIR order explanation](../dsl/actionir-lowering-mental-model.md#canonical-event-order-and-execution)
+for exact executed examples and the limits of these observations. None of this closes
+dispatcher/full composition, arbitrary overlap, or another backend's readiness.

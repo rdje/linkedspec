@@ -198,3 +198,54 @@ The repo-root ActionIR guides are the exhaustive working references while this b
 - `USER_GUIDE_RuleModesAndSplit.md` — rule modes and split-boundary details
 
 These guides go deeper than the book chapters and include exact emitted-Perl shapes for compatibility and migration work.
+
+## Canonical event order and execution
+
+A descriptor event list is compiler telemetry, not a trace of actions executed at runtime.
+Top-level statements are assembled in their authored order. Helper scans also find nested
+occurrences; the scan input is grouped by contract precedence, with occurrences retained
+within each contract. This input order is not global lexical source order.
+
+The current Perl residual suffix still drains raw-text queues through hash iteration.
+The same source can therefore produce different residual event sequences in separate
+processes. Repeated equal-text events matter: `return("a")`, `return("b")`, then
+`return("a")` are three occurrences, not two distinct raw-text keys. A sorted snapshot or
+first-seen-key list cannot establish occurrence ownership.
+
+These exact controlled sources return `ok` and `a` respectively, both natively and from
+independently loaded emitted source under the three measured seeds:
+
+```spec
+Top:: I { cb={|x,y| nested={|s,q| return(s) }; return(nested(x,y)) }; return(cb("ok","unused")) }
+```
+
+```spec
+Top:: I { cb={|| if(false) { return("a") }; if(false) { return("b") }; return("a") }; return(cb()) }
+```
+
+Their residual metadata permutations do not change lowering, readiness counts or results
+in this measured population. The lowering consumer advances a source cursor; its traces
+show nested callable residuals missing that cursor after the top-level literal was lowered.
+Ambiguous raw-statement overlap follows a different skip path. These controls do not prove
+all overlaps harmless. The selected repair preserves top-level/exclusive ownership and
+replays each pending residual in helper-scan occurrence order; it is not implemented by
+this diagnosis.
+
+Readiness also has separate known defects. This source returns its exact quoted value,
+yet currently reports an extra `IF` event and three unresolved helpers:
+
+```spec
+Top:: I { return("return(inner); if(true)") }
+```
+
+The typed argument is a string. Its helper-looking contents must remain data; current
+metadata is misleading. Quoted-payload repair and nested raw-expression readiness have
+separate owners. A working value cannot establish portable readiness, and a false blocker
+must not be removed by hiding genuine unsupported source.
+
+The recoverable diagnosis retains raw arrays and complete streams in
+`docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.0-observations.json` and its
+trace/original captures. The read-only `...6.0-review.py` checks source identity, counts,
+permutation evidence, typed literals and actual consumer decisions. It never overwrites
+those captures. The three fixed seeds are named observations, not a probability estimate
+or a cross-backend admission.

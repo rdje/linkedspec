@@ -2,17 +2,19 @@
 
 ## Current Activity
 
-Full PNT: bounded deferred-control parent reconciled; residual event ordering/readiness precedes dispatcher/full execution.
+Full PNT: residual event-order diagnosis complete; due artifact cleanup precedes the selected compiler repair. Readiness/quoted-data and dispatcher/full execution remain owned.
 
 ## Latest Completed Slice
 
-`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.6`:250 exact committed inputs,14 complete retained suites/1014 tests and30 source-bound RED/GREEN oracles checked; eight corruption controls reject. Runtime execution is reused at identical inputs, not rerun. Six historical claims/four loop-source successors preserve boundaries; eight executed examples render. Exact staged canonical receipt governs acceptance.
+`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.0`:9 exact sources/27 native-fresh observations, six original public captures,15 substitution traces and four unchanged suites/34 top-level TAP tests retained. Four cases permute residual records with measured results/counts/readiness stable; ten evidence corruptions reject. Occurrence-provenance repair .6.1 preserves top-level ownership. Quoted false blockers belong to .7.2.
 
 ## Next Action
 
-Activate residual event-order diagnosis SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.0 from clean HEAD. Preserve controlled raw descriptor/overlap/readiness observations; numeric/literal/next/function/full16 remain separate.
+Complete the due REPO-HYGIENE artifact cleanup from clean HEAD, then activate .6.1 compiler repair. Nested raw .7.0/.1 and quoted-data .7.2 precede dispatcher; recovery/purge and other-repository writes remain prohibited.
 
 ## Recent Completions
+
+- `2026-10-03` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.0` freezes residual provenance/consumer diagnosis and owns quoted-data blockers.
 
 - `2026-10-03` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.6` reconciles bounded control parent under exact canonical acceptance.
 
@@ -43,8 +45,6 @@ Activate residual event-order diagnosis SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6
 - `2026-10-02` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.3.1` repairs signature/quote ownership with matched public RED/GREEN and required Phase0 proof.
 
 - `2026-10-02` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.3.0` diagnoses the callable signature pipe collision with exact causal controls.
-
-- `2026-10-02` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.4.1` adopts bounded claim publishing and watched-source enforcement; wider audit remains open.
 
 ## History
 

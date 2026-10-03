@@ -12,6 +12,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-10-03 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.0: consumer trace and occurrence policy
+
+Residual raw-key queues drain through unsorted keys; scan input is contract precedence plus occurrences, not global source order. Body/repeated traces reach3/5 source_span_missing decisions; ambiguous raw control skips2 residuals, single raw control rewrites1. The measured nine-source/27 native-fresh lowering/count/readiness/value observations stay stable, without arbitrary-overlap equivalence. A/B/A occurrences cannot be recovered by first-seen-key grouping. Select an occurrence sequence alongside queues under .6.1 canonical ownership. Typed quoted data returns exact values but reports IF/unresolved3/ready0; own .7.2 independently. Ten evidence corruptions and34 focused top-level TAP tests pass; historical captures stay exact. Correct a stale ROADMAP.md value-control row to the current selected repair. One inline publication script failed Python parsing before any write; corrected structured construction leaves evidence/results untouched. README remains unchanged.
+
 ## 2026-10-03 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.6: retained execution at identical inputs
 
 Parent reconciliation compares all250 cumulative current input hashes and Git blobs to clean

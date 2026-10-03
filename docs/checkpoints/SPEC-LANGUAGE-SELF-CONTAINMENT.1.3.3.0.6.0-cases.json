@@ -1,0 +1,48 @@
+[
+  {
+    "id": "nested_original",
+    "source": "Top:: I { cb={|x,y| nested={|s,q| return(s) }; return(nested(x,y)) }; return(cb(\"ok\",\"unused\")) }",
+    "expected": "ok"
+  },
+  {
+    "id": "body_original",
+    "source": "Top:: I { cb={|x,y| if(matches(x, /ok/)) { return(x) }; return(\"miss\") }; return(cb(\"ok\",\"unused\")) }",
+    "expected": "ok"
+  },
+  {
+    "id": "repeated",
+    "source": "Top:: I { cb={|| if(false) { return(\"a\") }; if(false) { return(\"b\") }; return(\"a\") }; return(cb()) }",
+    "expected": "a"
+  },
+  {
+    "id": "attached",
+    "source": "Top:: I { if(true) { return(\"hit\") }; return(\"miss\") }",
+    "expected": "hit"
+  },
+  {
+    "id": "marker",
+    "source": "Top:: I { if(false); return(\"bad\"); else(); return(\"hit\"); endif() }",
+    "expected": "hit"
+  },
+  {
+    "id": "quoted",
+    "source": "Top:: I { return(\"return(inner); if(true)\") }",
+    "expected": "return(inner); if(true)"
+  },
+  {
+    "id": "raw_ambiguous",
+    "source": "Top:: I { unknown_helper(return(\"inner\"),return(\"other\")); return(\"after\") }",
+    "scope": "raw compatibility control; observed host result is not portable return admission"
+  },
+  {
+    "id": "raw_single",
+    "source": "Top:: I { unknown_helper(return(\"inner\")); return(\"after\") }",
+    "scope": "raw compatibility control; observed host result is not portable return admission"
+  },
+  {
+    "id": "nested_raw_known",
+    "source": "Top:: I { i=2; i=i+1; return(i) }",
+    "expected": 1,
+    "scope": "known false-ready nested raw owner .0.7; no repair/admission here"
+  }
+]

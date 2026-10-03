@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-10-03 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.0: residual event provenance diagnosis
+
+No production changes. Nine exact sources under seeds0/1/2 retain27 native/fresh observations, six original public captures and15 public substitution traces. Four residual arrays permute with measured lowering/readiness/values stable; full raw records remain. Four unchanged suites pass34 top-level TAP tests and ten evidence corruptions reject. Select top-level-preserving pending scan occurrences for .6.1. Quoted data falsely creates helper/control blockers; P1 .7.2 owns repair before dispatcher. Three executed examples render;139 claim inputs bind15 producing instruments. Due cleanup is next.
+
 ## 2026-10-03 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.6: reconcile bounded deferred control parent
 
 No executable input changes. Read-only reconciliation checks250 committed inputs and complete

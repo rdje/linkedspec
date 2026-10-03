@@ -20,7 +20,7 @@
       },
       "durability": {
         "status": "checked",
-        "mode": "live",
+        "mode": "historical",
         "inputs": [
           {
             "path": "capability_conformance/callable_codeblock_contract.json",
@@ -1352,7 +1352,8 @@
             "sha256": "731a69ecdcd7b44a5fe021629de946b49499e81391505704e1b618335cda67cb",
             "role": "input"
           }
-        ]
+        ],
+        "revision": "bb615f387850fa74f7cbfa3c78b8cf4682373c16"
       }
     }
   ]
