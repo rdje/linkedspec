@@ -324,7 +324,9 @@ A conditional statement itself yields null; a later expression may supply the im
 An eager expression block keeps its own return boundary. Value-form `if`/`else` selects only
 one payload lazily. `return()` and `return_undef()` now stop a callable with null and skip
 continuation; their returns propagate through selected branches and stay local to eager blocks.
-Deferred while remains separately owned. `return(undef)` continues to work.
+Attached while also executes with once-per-check conditions, local return propagation and
+the existing 10000-body guard. A final false check succeeds; exhaustion fails before another
+body and preserves preceding effects. `return(undef)` continues to work.
 The [architecture examples](../architecture/structured-format-program.md#current-perl-deferred-conditional-boundary)
 show exact working sources, results and remaining boundaries. Parameter slots restore on success
 and failure, and preceding nonparameter effects remain visible.

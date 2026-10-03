@@ -12,6 +12,22 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-10-03 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.5: while guard order and local flags
+
+Public canonical while checks truthiness before incrementing its10000 guard and entering body.
+The private15-line sequence arm follows that mechanism. Body10000 may make the condition false
+and succeed; a subsequent true check fails before any extra body. Exactly10000 effects survive,
+with typed while-node span/completed count/original error; original fixed/rest slots-array restore.
+Nested branches/loops propagate the local return flag; eager blocks consume their own boundary.
+Actual33-test baseline fails32 groups; current14 suites1014 tests and14 observation corruptions
+pass. Four direct canonical sources/four AST-substitution fragments and seven PUC CLI comparisons
+preserve raw error boundaries without claiming backend admission.250 runtime inputs plus six
+final proof/book/config/wrapper inputs yield256 claim inputs and33 producer-labeled instruments.
+All TAP stays losslessly JSON-contained. Parent reconciliation requires separate canonical receipt.
+The first landing hook rejected a live-status control byte/missing Next Action heading from
+a Python replacement tail; commit stayed at its activation base. Explicit section repair
+and heading/control-byte/history checks resolve it before retry; runtime proof is unchanged.
+
 ## 2026-10-03 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.4: null flag propagation and raw control boundaries
 
 The existing sequence-return branch gains12 lines/removes4: zero/one-payload return and

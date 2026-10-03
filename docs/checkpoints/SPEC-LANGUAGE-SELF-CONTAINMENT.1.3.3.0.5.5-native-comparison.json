@@ -1,0 +1,125 @@
+{
+  "owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.5",
+  "limits": "Public PUC CLI comparison/diagnostics only; no backend admission.",
+  "cases": [
+    {
+      "id": "original",
+      "source": "Top:: I {  cb={|| while(false) { \"bad\" }; return(\"after\") }; return(cb()) }",
+      "command": [
+        "bash",
+        "tools/run_lua_project_data.sh",
+        "puc",
+        "lua/bin/linkedspec-lua",
+        "--spec-file",
+        ".linkedspec-data/scratch/codeblock-while/native-comparison/original.spec",
+        "--input",
+        ""
+      ],
+      "exit": 0,
+      "stdout": "\"after\"\n",
+      "stderr": ""
+    },
+    {
+      "id": "multiple",
+      "source": "Top:: I {  cb={|| text=\"\"; while(matches(text,/^x{0,2}$/)) { text=cat(text,\"x\") }; return(text) }; return(cb()) }",
+      "command": [
+        "bash",
+        "tools/run_lua_project_data.sh",
+        "puc",
+        "lua/bin/linkedspec-lua",
+        "--spec-file",
+        ".linkedspec-data/scratch/codeblock-while/native-comparison/multiple.spec",
+        "--input",
+        ""
+      ],
+      "exit": 0,
+      "stdout": "\"xxx\"\n",
+      "stderr": ""
+    },
+    {
+      "id": "implicit_false",
+      "source": "Top:: I {  cb={|| while(false) { \"bad\" } }; return(cb()) }",
+      "command": [
+        "bash",
+        "tools/run_lua_project_data.sh",
+        "puc",
+        "lua/bin/linkedspec-lua",
+        "--spec-file",
+        ".linkedspec-data/scratch/codeblock-while/native-comparison/implicit_false.spec",
+        "--input",
+        ""
+      ],
+      "exit": 0,
+      "stdout": "null\n",
+      "stderr": ""
+    },
+    {
+      "id": "implicit_one",
+      "source": "Top:: I {  cb={|| flag=true; while(flag) { flag=false; \"body\" } }; return(cb()) }",
+      "command": [
+        "bash",
+        "tools/run_lua_project_data.sh",
+        "puc",
+        "lua/bin/linkedspec-lua",
+        "--spec-file",
+        ".linkedspec-data/scratch/codeblock-while/native-comparison/implicit_one.spec",
+        "--input",
+        ""
+      ],
+      "exit": 0,
+      "stdout": "null\n",
+      "stderr": ""
+    },
+    {
+      "id": "eager_local",
+      "source": "Top:: I {  cb={|| value={ while(true) { return(\"inner\") }; unknown_helper() }; return([value,\"outer\"]) }; return(cb()) }",
+      "command": [
+        "bash",
+        "tools/run_lua_project_data.sh",
+        "puc",
+        "lua/bin/linkedspec-lua",
+        "--spec-file",
+        ".linkedspec-data/scratch/codeblock-while/native-comparison/eager_local.spec",
+        "--input",
+        ""
+      ],
+      "exit": 0,
+      "stdout": "[\"inner\",\"outer\"]\n",
+      "stderr": ""
+    },
+    {
+      "id": "guard_final_false",
+      "source": "Top:: I {  cb={|| effects=\"\"; while(matches(effects,/^x{0,9999}$/)) { effects=cat(effects,\"x\") }; return(length(effects)) }; return(cb()) }",
+      "command": [
+        "bash",
+        "tools/run_lua_project_data.sh",
+        "puc",
+        "lua/bin/linkedspec-lua",
+        "--spec-file",
+        ".linkedspec-data/scratch/codeblock-while/native-comparison/guard_final_false.spec",
+        "--input",
+        ""
+      ],
+      "exit": 0,
+      "stdout": "10000\n",
+      "stderr": ""
+    },
+    {
+      "id": "guard_exhaustion",
+      "source": "Top:: I { effects=\"\"; cb={|| while(true) { effects=cat(effects,\"x\") }; return(\"bad\") }; return(cb()) }",
+      "command": [
+        "bash",
+        "tools/run_lua_project_data.sh",
+        "puc",
+        "lua/bin/linkedspec-lua",
+        "--spec-file",
+        ".linkedspec-data/scratch/codeblock-while/native-comparison/guard_exhaustion.spec",
+        "--input",
+        ""
+      ],
+      "exit": 1,
+      "stdout": "",
+      "stderr": "linkedspec: parser invocation failed\n"
+    }
+  ]
+}

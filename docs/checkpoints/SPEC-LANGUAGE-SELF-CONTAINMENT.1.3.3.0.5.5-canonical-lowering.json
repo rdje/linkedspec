@@ -1,0 +1,452 @@
+[
+   {
+      "ast" : {
+         "args" : [
+            {
+               "kind" : "boolean",
+               "source" : "false",
+               "source_span" : {
+                  "end" : 11,
+                  "start" : 6
+               },
+               "value" : 0
+            }
+         ],
+         "body" : {
+            "kind" : "action_block",
+            "source" : " \"bad\" ",
+            "source_span" : {
+               "end" : 7,
+               "start" : 0
+            },
+            "statements" : [
+               {
+                  "drops_value" : 1,
+                  "expr" : {
+                     "kind" : "string",
+                     "quote" : "\"",
+                     "source" : "\"bad\"",
+                     "source_span" : {
+                        "end" : 6,
+                        "start" : 1
+                     },
+                     "value" : "bad"
+                  },
+                  "kind" : "action_stmt",
+                  "source" : "\"bad\"",
+                  "source_span" : {
+                     "end" : 6,
+                     "start" : 1
+                  }
+               }
+            ]
+         },
+         "body_source" : "{ \"bad\" }",
+         "body_source_span" : {
+            "end" : 22,
+            "start" : 13
+         },
+         "canonical_keyword" : "while",
+         "condition" : {
+            "kind" : "boolean",
+            "source" : "false",
+            "source_span" : {
+               "end" : 11,
+               "start" : 6
+            },
+            "value" : 0
+         },
+         "keyword" : "while",
+         "kind" : "control_while",
+         "source" : "while(false) { \"bad\" }",
+         "source_span" : {
+            "end" : 22,
+            "start" : 0
+         }
+      },
+      "expression" : "while(false) { \"bad\" }",
+      "substitution" : "do { my $__ls_while_guard_1 = 0; for (; do { require LinkedSpec::RuntimeLogical; LinkedSpec::RuntimeLogical::truthy(0) }; ) { die \"LinkedSpec while iteration safety limit exceeded after 10000 iterations\" if ++$__ls_while_guard_1 > 10000; \"bad\" } }"
+   },
+   {
+      "ast" : {
+         "args" : [
+            {
+               "args" : [
+                  {
+                     "kind" : "variable",
+                     "name" : "text",
+                     "source" : "text",
+                     "source_span" : {
+                        "end" : 18,
+                        "start" : 14
+                     }
+                  },
+                  {
+                     "flags" : "",
+                     "kind" : "regex",
+                     "pattern" : "^x{0,2}$",
+                     "source" : "/^x{0,2}$/",
+                     "source_span" : {
+                        "end" : 29,
+                        "start" : 19
+                     }
+                  }
+               ],
+               "kind" : "call",
+               "name" : "matches",
+               "source" : "matches(text,/^x{0,2}$/)",
+               "source_method" : "matches",
+               "source_span" : {
+                  "end" : 30,
+                  "start" : 6
+               }
+            }
+         ],
+         "body" : {
+            "kind" : "action_block",
+            "source" : " text=cat(text,\"x\") ",
+            "source_span" : {
+               "end" : 20,
+               "start" : 0
+            },
+            "statements" : [
+               {
+                  "drops_value" : 1,
+                  "expr" : {
+                     "kind" : "assign_scalar",
+                     "name" : "text",
+                     "source" : "text=cat(text,\"x\")",
+                     "source_span" : {
+                        "end" : 19,
+                        "start" : 1
+                     },
+                     "value" : {
+                        "args" : [
+                           {
+                              "kind" : "variable",
+                              "name" : "text",
+                              "source" : "text",
+                              "source_span" : {
+                                 "end" : 14,
+                                 "start" : 10
+                              }
+                           },
+                           {
+                              "kind" : "string",
+                              "quote" : "\"",
+                              "source" : "\"x\"",
+                              "source_span" : {
+                                 "end" : 18,
+                                 "start" : 15
+                              },
+                              "value" : "x"
+                           }
+                        ],
+                        "kind" : "call",
+                        "name" : "cat",
+                        "source" : "cat(text,\"x\")",
+                        "source_method" : "cat",
+                        "source_span" : {
+                           "end" : 19,
+                           "start" : 6
+                        }
+                     }
+                  },
+                  "kind" : "action_stmt",
+                  "source" : "text=cat(text,\"x\")",
+                  "source_span" : {
+                     "end" : 19,
+                     "start" : 1
+                  }
+               }
+            ]
+         },
+         "body_source" : "{ text=cat(text,\"x\") }",
+         "body_source_span" : {
+            "end" : 54,
+            "start" : 32
+         },
+         "canonical_keyword" : "while",
+         "condition" : {
+            "args" : [
+               {
+                  "kind" : "variable",
+                  "name" : "text",
+                  "source" : "text",
+                  "source_span" : {
+                     "end" : 18,
+                     "start" : 14
+                  }
+               },
+               {
+                  "flags" : "",
+                  "kind" : "regex",
+                  "pattern" : "^x{0,2}$",
+                  "source" : "/^x{0,2}$/",
+                  "source_span" : {
+                     "end" : 29,
+                     "start" : 19
+                  }
+               }
+            ],
+            "kind" : "call",
+            "name" : "matches",
+            "source" : "matches(text,/^x{0,2}$/)",
+            "source_method" : "matches",
+            "source_span" : {
+               "end" : 30,
+               "start" : 6
+            }
+         },
+         "keyword" : "while",
+         "kind" : "control_while",
+         "source" : "while(matches(text,/^x{0,2}$/)) { text=cat(text,\"x\") }",
+         "source_span" : {
+            "end" : 54,
+            "start" : 0
+         }
+      },
+      "expression" : "while(matches(text,/^x{0,2}$/)) { text=cat(text,\"x\") }",
+      "substitution" : "do { my $__ls_while_guard_1 = 0; for (; do { require LinkedSpec::RuntimeLogical; LinkedSpec::RuntimeLogical::truthy(do { my $__ls_matches_value = $text; defined($__ls_matches_value) ? (($__ls_matches_value =~ /^x{0,2}$/) ? 1 : 0) : 0 }) }; ) { die \"LinkedSpec while iteration safety limit exceeded after 10000 iterations\" if ++$__ls_while_guard_1 > 10000; $text = do { my @__ls_cat_parts = ($text, \"x\"); my $__ls_cat_ok = 1; for my $__ls_cat_part (@__ls_cat_parts) { if (!defined($__ls_cat_part)) { $__ls_cat_ok = 0; last; } if (ref($__ls_cat_part)) { if (ref($__ls_cat_part) eq 'JSON::PP::Boolean') { $__ls_cat_part = $__ls_cat_part ? '1' : '0'; } else { $__ls_cat_ok = 0; last; } } else { $__ls_cat_part = \"$__ls_cat_part\"; $__ls_cat_part = '0' if $__ls_cat_part =~ /\\A-0(?:\\.0+)?\\z/; } } $__ls_cat_ok ? join('', @__ls_cat_parts) : undef } } }"
+   },
+   {
+      "ast" : {
+         "args" : [
+            {
+               "args" : [
+                  {
+                     "kind" : "variable",
+                     "name" : "effects",
+                     "source" : "effects",
+                     "source_span" : {
+                        "end" : 21,
+                        "start" : 14
+                     }
+                  },
+                  {
+                     "flags" : "",
+                     "kind" : "regex",
+                     "pattern" : "^x{0,9999}$",
+                     "source" : "/^x{0,9999}$/",
+                     "source_span" : {
+                        "end" : 35,
+                        "start" : 22
+                     }
+                  }
+               ],
+               "kind" : "call",
+               "name" : "matches",
+               "source" : "matches(effects,/^x{0,9999}$/)",
+               "source_method" : "matches",
+               "source_span" : {
+                  "end" : 36,
+                  "start" : 6
+               }
+            }
+         ],
+         "body" : {
+            "kind" : "action_block",
+            "source" : " effects=cat(effects,\"x\") ",
+            "source_span" : {
+               "end" : 26,
+               "start" : 0
+            },
+            "statements" : [
+               {
+                  "drops_value" : 1,
+                  "expr" : {
+                     "kind" : "assign_scalar",
+                     "name" : "effects",
+                     "source" : "effects=cat(effects,\"x\")",
+                     "source_span" : {
+                        "end" : 25,
+                        "start" : 1
+                     },
+                     "value" : {
+                        "args" : [
+                           {
+                              "kind" : "variable",
+                              "name" : "effects",
+                              "source" : "effects",
+                              "source_span" : {
+                                 "end" : 20,
+                                 "start" : 13
+                              }
+                           },
+                           {
+                              "kind" : "string",
+                              "quote" : "\"",
+                              "source" : "\"x\"",
+                              "source_span" : {
+                                 "end" : 24,
+                                 "start" : 21
+                              },
+                              "value" : "x"
+                           }
+                        ],
+                        "kind" : "call",
+                        "name" : "cat",
+                        "source" : "cat(effects,\"x\")",
+                        "source_method" : "cat",
+                        "source_span" : {
+                           "end" : 25,
+                           "start" : 9
+                        }
+                     }
+                  },
+                  "kind" : "action_stmt",
+                  "source" : "effects=cat(effects,\"x\")",
+                  "source_span" : {
+                     "end" : 25,
+                     "start" : 1
+                  }
+               }
+            ]
+         },
+         "body_source" : "{ effects=cat(effects,\"x\") }",
+         "body_source_span" : {
+            "end" : 66,
+            "start" : 38
+         },
+         "canonical_keyword" : "while",
+         "condition" : {
+            "args" : [
+               {
+                  "kind" : "variable",
+                  "name" : "effects",
+                  "source" : "effects",
+                  "source_span" : {
+                     "end" : 21,
+                     "start" : 14
+                  }
+               },
+               {
+                  "flags" : "",
+                  "kind" : "regex",
+                  "pattern" : "^x{0,9999}$",
+                  "source" : "/^x{0,9999}$/",
+                  "source_span" : {
+                     "end" : 35,
+                     "start" : 22
+                  }
+               }
+            ],
+            "kind" : "call",
+            "name" : "matches",
+            "source" : "matches(effects,/^x{0,9999}$/)",
+            "source_method" : "matches",
+            "source_span" : {
+               "end" : 36,
+               "start" : 6
+            }
+         },
+         "keyword" : "while",
+         "kind" : "control_while",
+         "source" : "while(matches(effects,/^x{0,9999}$/)) { effects=cat(effects,\"x\") }",
+         "source_span" : {
+            "end" : 66,
+            "start" : 0
+         }
+      },
+      "expression" : "while(matches(effects,/^x{0,9999}$/)) { effects=cat(effects,\"x\") }",
+      "substitution" : "do { my $__ls_while_guard_1 = 0; for (; do { require LinkedSpec::RuntimeLogical; LinkedSpec::RuntimeLogical::truthy(do { my $__ls_matches_value = $effects; defined($__ls_matches_value) ? (($__ls_matches_value =~ /^x{0,9999}$/) ? 1 : 0) : 0 }) }; ) { die \"LinkedSpec while iteration safety limit exceeded after 10000 iterations\" if ++$__ls_while_guard_1 > 10000; $effects = do { my @__ls_cat_parts = ($effects, \"x\"); my $__ls_cat_ok = 1; for my $__ls_cat_part (@__ls_cat_parts) { if (!defined($__ls_cat_part)) { $__ls_cat_ok = 0; last; } if (ref($__ls_cat_part)) { if (ref($__ls_cat_part) eq 'JSON::PP::Boolean') { $__ls_cat_part = $__ls_cat_part ? '1' : '0'; } else { $__ls_cat_ok = 0; last; } } else { $__ls_cat_part = \"$__ls_cat_part\"; $__ls_cat_part = '0' if $__ls_cat_part =~ /\\A-0(?:\\.0+)?\\z/; } } $__ls_cat_ok ? join('', @__ls_cat_parts) : undef } } }"
+   },
+   {
+      "ast" : {
+         "args" : [
+            {
+               "kind" : "boolean",
+               "source" : "true",
+               "source_span" : {
+                  "end" : 10,
+                  "start" : 6
+               },
+               "value" : 1
+            }
+         ],
+         "body" : {
+            "kind" : "action_block",
+            "source" : " effects=cat(effects,\"x\") ",
+            "source_span" : {
+               "end" : 26,
+               "start" : 0
+            },
+            "statements" : [
+               {
+                  "drops_value" : 1,
+                  "expr" : {
+                     "kind" : "assign_scalar",
+                     "name" : "effects",
+                     "source" : "effects=cat(effects,\"x\")",
+                     "source_span" : {
+                        "end" : 25,
+                        "start" : 1
+                     },
+                     "value" : {
+                        "args" : [
+                           {
+                              "kind" : "variable",
+                              "name" : "effects",
+                              "source" : "effects",
+                              "source_span" : {
+                                 "end" : 20,
+                                 "start" : 13
+                              }
+                           },
+                           {
+                              "kind" : "string",
+                              "quote" : "\"",
+                              "source" : "\"x\"",
+                              "source_span" : {
+                                 "end" : 24,
+                                 "start" : 21
+                              },
+                              "value" : "x"
+                           }
+                        ],
+                        "kind" : "call",
+                        "name" : "cat",
+                        "source" : "cat(effects,\"x\")",
+                        "source_method" : "cat",
+                        "source_span" : {
+                           "end" : 25,
+                           "start" : 9
+                        }
+                     }
+                  },
+                  "kind" : "action_stmt",
+                  "source" : "effects=cat(effects,\"x\")",
+                  "source_span" : {
+                     "end" : 25,
+                     "start" : 1
+                  }
+               }
+            ]
+         },
+         "body_source" : "{ effects=cat(effects,\"x\") }",
+         "body_source_span" : {
+            "end" : 40,
+            "start" : 12
+         },
+         "canonical_keyword" : "while",
+         "condition" : {
+            "kind" : "boolean",
+            "source" : "true",
+            "source_span" : {
+               "end" : 10,
+               "start" : 6
+            },
+            "value" : 1
+         },
+         "keyword" : "while",
+         "kind" : "control_while",
+         "source" : "while(true) { effects=cat(effects,\"x\") }",
+         "source_span" : {
+            "end" : 40,
+            "start" : 0
+         }
+      },
+      "expression" : "while(true) { effects=cat(effects,\"x\") }",
+      "substitution" : "do { my $__ls_while_guard_1 = 0; for (; do { require LinkedSpec::RuntimeLogical; LinkedSpec::RuntimeLogical::truthy(1) }; ) { die \"LinkedSpec while iteration safety limit exceeded after 10000 iterations\" if ++$__ls_while_guard_1 > 10000; $effects = do { my @__ls_cat_parts = ($effects, \"x\"); my $__ls_cat_ok = 1; for my $__ls_cat_part (@__ls_cat_parts) { if (!defined($__ls_cat_part)) { $__ls_cat_ok = 0; last; } if (ref($__ls_cat_part)) { if (ref($__ls_cat_part) eq 'JSON::PP::Boolean') { $__ls_cat_part = $__ls_cat_part ? '1' : '0'; } else { $__ls_cat_ok = 0; last; } } else { $__ls_cat_part = \"$__ls_cat_part\"; $__ls_cat_part = '0' if $__ls_cat_part =~ /\\A-0(?:\\.0+)?\\z/; } } $__ls_cat_ok ? join('', @__ls_cat_parts) : undef } } }"
+   }
+]

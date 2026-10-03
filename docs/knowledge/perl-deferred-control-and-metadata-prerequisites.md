@@ -10,7 +10,7 @@ answers:
   - "why must callable matches be repaired before deferred attached if"
   - "which tasks own deferred marker and value conditional failures"
 date: 2026-10-03
-status: historical diagnosis retained; matches/attached/marker/value/null repairs complete; while and .0.6 remain separate
+status: historical diagnosis retained; matches/attached/marker/value/null/while repairs complete; .0.6 ordering remains separate
 tags: [perl, actionir, callable, control, metadata, nondeterminism, partial]
 evidence: "Literal repair .3.1 retains twenty native/fresh sources: nineteen healthy pairs and exact typed control_if failure on both routes. Controlled hash-seed public descriptor/substitution observations retain residual event permutations. Tracked programs/observations and original source boundaries are in its verification checkpoint and claim record."
 reverify: "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.0-review.py at its captured e07f production boundary; .0.5/.0.6 and startup87.2 intentionally change these observations. Earlier .3.1 order evidence remains historical."
@@ -99,3 +99,10 @@ Marker `.0.5.2` groups typed statements and propagates local returns. Value `.0.
 selects canonical payloads lazily; its current fact is the value executor card. Null-return
 `.0.5.4` now preserves local null exits; while `.0.5.5` retains independent repair ownership. Numeric helpers,
 `.0.6` ordering and `.0.7` readiness are not closed by pattern dispatch.
+
+## October 3 attached while successor
+
+`.0.5.5` closes the typed attached while executor using the existing10000 guard and local
+return flags. See perl-callable-while-execution for current proof; prior failures above
+remain historical. Numeric helpers, event ordering/readiness and dispatcher/full execution
+retain their independent owners.

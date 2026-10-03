@@ -8,10 +8,10 @@ answers:
   - "why do marker and attached tests no longer expect value if failure"
   - "how are raw value conditional TAP bytes preserved through whitespace checks"
 date: 2026-10-03
-status: current value executor; while and literal kind remain separately owned
+status: value executor verified; while successor verified; literal kind separate
 tags: [perl, callable, actionir, value, lazy, conditional]
 evidence: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.3 native/fresh RED-GREEN, canonical substitution/AST and published PUC CLI comparisons."
-reverify: "prove -Iperl t/codeblock_value_if_perl.t; .5.3 full review is historical ate133707f because .5.4 supersedes null-return failures; current successor proof is .5.4-review.py."
+reverify: "prove -Iperl t/codeblock_value_if_perl.t; current successor replay: bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.5-review.py. Earlier full reviews are historical because old loop failures are superseded."
 ---
 
 `CodeblockRuntime::_eval_call` previously evaluated all operands before resolving `if`,
@@ -44,3 +44,9 @@ rejects eighteen corruptions. The raw output is preserved rather than trimmed.
 
 Null-return `.0.5.4` now closes the private empty-return/return_undef gap. Earlier failures
 remain historical; see [the null-return card](perl-callable-null-return-execution.md).
+
+## October 3 while successor
+
+Typed attached while now executes under `.0.5.5`; the former loop failure described above
+is retained history. Current tests replace only its exact source-identical oracle; old
+observations/producers remain unchanged. The while fact card owns guard/local-return semantics.

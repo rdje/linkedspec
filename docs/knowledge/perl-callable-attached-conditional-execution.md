@@ -10,10 +10,10 @@ answers:
   - "why did a malformed attached else tail become raw_perl in the Perl AST"
   - "which task repairs unsupported control_while in a deferred Perl callback"
 date: 2026-10-03
-status: attached and marker statement executors verified; value/null/while separately owned
+status: attached/marker/value/null/while successors verified; original observations historical
 tags: [perl, callable, actionir, control, return, scope]
 evidence: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.1 source-complete RED/GREEN observations, native CLI comparison, focused regression and actual replay capture."
-reverify: "prove -Iperl t/codeblock_attached_if_perl.t; .5.1 full review is historical atfd022815 because .5.2 supersedes marker_excluded. Current null-return successor proof is .5.4-review.py."
+reverify: "prove -Iperl t/codeblock_attached_if_perl.t; current successor replay: bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.5-review.py. Earlier full reviews are historical because old loop failures are superseded."
 ---
 
 `CodeblockRuntime::_execute_sequence` reads typed action statements. Attached `control_if`
@@ -60,3 +60,9 @@ remains historical. See [the value executor card](perl-callable-value-conditiona
 
 Null-return `.0.5.4` now closes the private empty-return/return_undef gap. Earlier failures
 remain historical; see [the null-return card](perl-callable-null-return-execution.md).
+
+## October 3 while successor
+
+Typed attached while now executes under `.0.5.5`; the former loop failure described above
+is retained history. Current tests replace only its exact source-identical oracle; old
+observations/producers remain unchanged. The while fact card owns guard/local-return semantics.

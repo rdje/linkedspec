@@ -1,0 +1,328 @@
+[
+  {
+    "id": "original",
+    "source": "Top:: I {  cb={|| while(false) { \"bad\" }; return(\"after\") }; return(cb()) }",
+    "expected": "after",
+    "baseline_error": "unsupported_codeblock_actionir",
+    "baseline_name": null,
+    "baseline_kind": "control_while",
+    "baseline_expected": null,
+    "baseline_effects": null
+  },
+  {
+    "id": "skip_body",
+    "source": "Top:: I {  cb={|| while(false) { unknown_helper() }; return(\"after\") }; return(cb()) }",
+    "expected": "after",
+    "baseline_error": "unsupported_codeblock_actionir",
+    "baseline_name": null,
+    "baseline_kind": "control_while",
+    "baseline_expected": null,
+    "baseline_effects": null
+  },
+  {
+    "id": "one",
+    "source": "Top:: I { effects=[]; cb={|| flag=true; while(flag) { push(effects,\"body\"); flag=false }; return(effects) }; return(cb()) }",
+    "expected": [
+      "body"
+    ],
+    "baseline_error": "unsupported_codeblock_actionir",
+    "baseline_name": null,
+    "baseline_kind": "control_while",
+    "baseline_expected": null,
+    "baseline_effects": []
+  },
+  {
+    "id": "multiple",
+    "source": "Top:: I {  cb={|| text=\"\"; while(matches(text,/^x{0,2}$/)) { text=cat(text,\"x\") }; return(text) }; return(cb()) }",
+    "expected": "xxx",
+    "baseline_error": "unsupported_codeblock_actionir",
+    "baseline_name": null,
+    "baseline_kind": "control_while",
+    "baseline_expected": null,
+    "baseline_effects": null
+  },
+  {
+    "id": "condition_effects",
+    "source": "Top:: I { effects=[]; condition_cb={|| push(effects,\"condition\"); return(matches(length(effects),/^(?:1|3)$/)) }; cb={|| while(condition_cb()) { push(effects,\"body\") }; return(effects) }; return(cb()) }",
+    "expected": [
+      "condition",
+      "body",
+      "condition",
+      "body",
+      "condition"
+    ],
+    "baseline_error": "unsupported_codeblock_actionir",
+    "baseline_name": null,
+    "baseline_kind": "control_while",
+    "baseline_expected": null,
+    "baseline_effects": []
+  },
+  {
+    "id": "nested",
+    "source": "Top:: I { effects=[]; cb={|| outer=true; while(outer) { inner=true; while(inner) { push(effects,\"inner\"); inner=false }; push(effects,\"outer\"); outer=false }; return(effects) }; return(cb()) }",
+    "expected": [
+      "inner",
+      "outer"
+    ],
+    "baseline_error": "unsupported_codeblock_actionir",
+    "baseline_name": null,
+    "baseline_kind": "control_while",
+    "baseline_expected": null,
+    "baseline_effects": []
+  },
+  {
+    "id": "attached_return",
+    "source": "Top:: I {  cb={|| while(true) { if(false) { unknown_helper() } else { return(\"hit\") }; unknown_helper() }; unknown_helper() }; return(cb()) }",
+    "expected": "hit",
+    "baseline_error": "unsupported_codeblock_actionir",
+    "baseline_name": null,
+    "baseline_kind": "control_while",
+    "baseline_expected": null,
+    "baseline_effects": null
+  },
+  {
+    "id": "marker_return",
+    "source": "Top:: I {  cb={|| while(true) { if(true); return(\"hit\"); endif(); unknown_helper() }; unknown_helper() }; return(cb()) }",
+    "expected": "hit",
+    "baseline_error": "unsupported_codeblock_actionir",
+    "baseline_name": null,
+    "baseline_kind": "control_while",
+    "baseline_expected": null,
+    "baseline_effects": null
+  },
+  {
+    "id": "value_return",
+    "source": "Top:: I {  cb={|| while(true) { return(if(false,unknown_helper(),else(\"hit\"))) }; unknown_helper() }; return(cb()) }",
+    "expected": "hit",
+    "baseline_error": "unsupported_codeblock_actionir",
+    "baseline_name": null,
+    "baseline_kind": "control_while",
+    "baseline_expected": null,
+    "baseline_effects": null
+  },
+  {
+    "id": "nested_return",
+    "source": "Top:: I {  cb={|| while(true) { while(true) { return(\"hit\") }; unknown_helper() }; unknown_helper() }; return(cb()) }",
+    "expected": "hit",
+    "baseline_error": "unsupported_codeblock_actionir",
+    "baseline_name": null,
+    "baseline_kind": "control_while",
+    "baseline_expected": null,
+    "baseline_effects": null
+  },
+  {
+    "id": "null_return",
+    "source": "Top:: I {  cb={|| while(true) { return_undef() }; unknown_helper() }; return(cb()) }",
+    "expected": null,
+    "baseline_error": "unsupported_codeblock_actionir",
+    "baseline_name": null,
+    "baseline_kind": "control_while",
+    "baseline_expected": null,
+    "baseline_effects": null
+  },
+  {
+    "id": "empty_return",
+    "source": "Top:: I {  cb={|| while(true) { return() }; unknown_helper() }; return(cb()) }",
+    "expected": null,
+    "baseline_error": "unsupported_codeblock_actionir",
+    "baseline_name": null,
+    "baseline_kind": "control_while",
+    "baseline_expected": null,
+    "baseline_effects": null
+  },
+  {
+    "id": "false_return",
+    "source": "Top:: I {  cb={|flag| while(true) { return(flag) }; unknown_helper() }; return(cb(false)) }",
+    "expected": false,
+    "baseline_error": "unsupported_codeblock_actionir",
+    "baseline_name": null,
+    "baseline_kind": "control_while",
+    "baseline_expected": null,
+    "baseline_effects": null
+  },
+  {
+    "id": "eager_local",
+    "source": "Top:: I {  cb={|| value={ while(true) { return(\"inner\") }; unknown_helper() }; return([value,\"outer\"]) }; return(cb()) }",
+    "expected": [
+      "inner",
+      "outer"
+    ],
+    "baseline_error": "unsupported_codeblock_actionir",
+    "baseline_name": null,
+    "baseline_kind": "control_while",
+    "baseline_expected": null,
+    "baseline_effects": null
+  },
+  {
+    "id": "loop_in_marker",
+    "source": "Top:: I {  cb={|| if(true); while(true) { return(\"hit\") }; endif(); unknown_helper() }; return(cb()) }",
+    "expected": "hit",
+    "baseline_error": "unsupported_codeblock_actionir",
+    "baseline_name": null,
+    "baseline_kind": "control_while",
+    "baseline_expected": null,
+    "baseline_effects": null
+  },
+  {
+    "id": "loop_in_attached",
+    "source": "Top:: I {  cb={|| if(true) { while(true) { return(\"hit\") } }; unknown_helper() }; return(cb()) }",
+    "expected": "hit",
+    "baseline_error": "unsupported_codeblock_actionir",
+    "baseline_name": null,
+    "baseline_kind": "control_while",
+    "baseline_expected": null,
+    "baseline_effects": null
+  },
+  {
+    "id": "implicit_false",
+    "source": "Top:: I {  cb={|| while(false) { \"bad\" } }; return(cb()) }",
+    "expected": null,
+    "baseline_error": "unsupported_codeblock_actionir",
+    "baseline_name": null,
+    "baseline_kind": "control_while",
+    "baseline_expected": null,
+    "baseline_effects": null
+  },
+  {
+    "id": "implicit_one",
+    "source": "Top:: I {  cb={|| flag=true; while(flag) { flag=false; \"body\" } }; return(cb()) }",
+    "expected": null,
+    "baseline_error": "unsupported_codeblock_actionir",
+    "baseline_name": null,
+    "baseline_kind": "control_while",
+    "baseline_expected": null,
+    "baseline_effects": null
+  },
+  {
+    "id": "truth_zero",
+    "source": "Top:: I {  cb={|| while(0) { unknown_helper() }; return(\"after\") }; return(cb()) }",
+    "expected": "after",
+    "baseline_error": "unsupported_codeblock_actionir",
+    "baseline_name": null,
+    "baseline_kind": "control_while",
+    "baseline_expected": null,
+    "baseline_effects": null
+  },
+  {
+    "id": "truth_zero_string",
+    "source": "Top:: I {  cb={|| while(\"0\") { return(\"hit\") }; unknown_helper() }; return(cb()) }",
+    "expected": "hit",
+    "baseline_error": "unsupported_codeblock_actionir",
+    "baseline_name": null,
+    "baseline_kind": "control_while",
+    "baseline_expected": null,
+    "baseline_effects": null
+  },
+  {
+    "id": "truth_empty_array",
+    "source": "Top:: I {  cb={|| while([]) { unknown_helper() }; return(\"after\") }; return(cb()) }",
+    "expected": "after",
+    "baseline_error": "unsupported_codeblock_actionir",
+    "baseline_name": null,
+    "baseline_kind": "control_while",
+    "baseline_expected": null,
+    "baseline_effects": null
+  },
+  {
+    "id": "truth_null",
+    "source": "Top:: I {  cb={|| while(undef) { unknown_helper() }; return(\"after\") }; return(cb()) }",
+    "expected": "after",
+    "baseline_error": "unsupported_codeblock_actionir",
+    "baseline_name": null,
+    "baseline_kind": "control_while",
+    "baseline_expected": null,
+    "baseline_effects": null
+  },
+  {
+    "id": "parameter_scope",
+    "source": "Top:: I { x=\"outside\"; cb={|x| while(matches(x,/inside/)) { x=\"done\" }; return(x) }; return(cb(\"inside\")) }",
+    "expected": "done",
+    "baseline_error": "unsupported_codeblock_actionir",
+    "baseline_name": null,
+    "baseline_kind": "control_while",
+    "baseline_expected": null,
+    "baseline_effects": null
+  },
+  {
+    "id": "rest_scope",
+    "source": "Top:: I { x=\"outside\"; rest=[\"caller\"]; cb={|x,...rest| flag=true; while(flag) { push(rest,\"local\"); flag=false }; return([x,rest]) }; return(cb(\"inside\",\"one\",\"two\")) }",
+    "expected": [
+      "inside",
+      [
+        "one",
+        "two",
+        "local"
+      ]
+    ],
+    "baseline_error": "unsupported_codeblock_actionir",
+    "baseline_name": null,
+    "baseline_kind": "control_while",
+    "baseline_expected": null,
+    "baseline_effects": null
+  },
+  {
+    "id": "condition_failure_scope",
+    "source": "Top:: I { x=\"outside\"; cb={|x| while(unknown_helper()) { \"bad\" }; return(x) }; return(cb(\"inside\")) }",
+    "error": "unknown_helper",
+    "name": "unknown_helper",
+    "baseline_error": "unsupported_codeblock_actionir",
+    "baseline_name": null,
+    "baseline_kind": "control_while",
+    "baseline_expected": null,
+    "baseline_effects": null
+  },
+  {
+    "id": "body_failure_scope",
+    "source": "Top:: I { x=\"outside\"; cb={|x| while(true) { unknown_helper() }; return(x) }; return(cb(\"inside\")) }",
+    "error": "unknown_helper",
+    "name": "unknown_helper",
+    "baseline_error": "unsupported_codeblock_actionir",
+    "baseline_name": null,
+    "baseline_kind": "control_while",
+    "baseline_expected": null,
+    "baseline_effects": null
+  },
+  {
+    "id": "guard_final_false",
+    "source": "Top:: I {  cb={|| effects=\"\"; while(matches(effects,/^x{0,9999}$/)) { effects=cat(effects,\"x\") }; return(length(effects)) }; return(cb()) }",
+    "expected": 10000,
+    "baseline_error": "unsupported_codeblock_actionir",
+    "baseline_name": null,
+    "baseline_kind": "control_while",
+    "baseline_expected": null,
+    "baseline_effects": ""
+  },
+  {
+    "id": "guard_exhaustion",
+    "source": "Top:: I { effects=\"\"; cb={|| while(true) { effects=cat(effects,\"x\") }; return(\"bad\") }; return(cb()) }",
+    "guard": true,
+    "error": "while_iteration_limit_exceeded",
+    "baseline_error": "unsupported_codeblock_actionir",
+    "baseline_name": null,
+    "baseline_kind": "control_while",
+    "baseline_expected": null,
+    "baseline_effects": ""
+  },
+  {
+    "id": "guard_failure_scope",
+    "source": "Top:: I { x=\"outside\"; effects=\"\"; cb={|x| while(true) { effects=cat(effects,\"x\") }; return(x) }; return(cb(\"inside\")) }",
+    "guard": true,
+    "error": "while_iteration_limit_exceeded",
+    "baseline_error": "unsupported_codeblock_actionir",
+    "baseline_name": null,
+    "baseline_kind": "control_while",
+    "baseline_expected": null,
+    "baseline_effects": ""
+  },
+  {
+    "id": "numeric_excluded",
+    "source": "Top:: I {  cb={|| while(num_lt(0,1)) { return(\"hit\") } }; return(cb()) }",
+    "error": "unknown_helper",
+    "name": "num_lt",
+    "baseline_error": "unsupported_codeblock_actionir",
+    "baseline_name": null,
+    "baseline_kind": "control_while",
+    "baseline_expected": null,
+    "baseline_effects": null
+  }
+]

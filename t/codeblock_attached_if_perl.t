@@ -46,6 +46,17 @@ for my $case (@$cases) {
  $case->{expected}=$successor->{expected};
 }
 
+open my $while_file, '<', 'docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.5-cases.json' or die $!;
+my $while_cases=JSON::PP->new->decode(do { local $/; <$while_file> });
+close $while_file or die $!;
+my ($while_successor)=grep { $_->{id} eq 'original' } @$while_cases;
+for my $case (@$cases) {
+ next unless $case->{id} eq 'loop_excluded' || $case->{id} eq 'while_excluded';
+ die 'while successor source drift' unless $while_successor->{source} eq $case->{source};
+ delete @{$case}{qw(error kind name)};
+ $case->{expected}=$while_successor->{expected};
+}
+
 open my $producer, '-|', $^X, '-Iperl', $prefix.'probe.pl' or die $!;
 my $bytes = do { local $/; <$producer> };
 close $producer or die 'public attached conditional producer failed';

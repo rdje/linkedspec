@@ -12,6 +12,17 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-10-03 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.5: execute guarded callable while
+
+A15-line private typed while dispatcher preserves condition-before-guard-before-body order,
+local return flags and null statement results. Final false after body10000 succeeds; another
+true check rejects before body10001 with typed span/completed count and preserved body effects.
+30 matched native/fresh RED/GREEN sources,14 corruption controls and14 suites/1014 tests PASS.
+Four direct canonical/seven PUC CLI comparisons and four executed book examples preserve scope.
+Four current tests replace only source-identical old loop failures; old captures/producers stay
+exact and null claim freezes at85e63d655.256 claim inputs bind33 producer instruments. Canonical
+parent .5.6 follows; numeric/literal/function/next/order/readiness/full execution remain separate.
+
 ## 2026-10-03 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.4: execute local null returns
 
 The private statement sequence accepts empty return and return_undef, retaining optional bare

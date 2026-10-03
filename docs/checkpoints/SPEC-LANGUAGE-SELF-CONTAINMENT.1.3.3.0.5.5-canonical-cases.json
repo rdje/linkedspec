@@ -1,0 +1,18 @@
+[
+  {
+    "id": "original",
+    "source": "Top:: I {  while(false) { \"bad\" }; return(\"after\") }"
+  },
+  {
+    "id": "multiple",
+    "source": "Top:: I {  text=\"\"; while(matches(text,/^x{0,2}$/)) { text=cat(text,\"x\") }; return(text) }"
+  },
+  {
+    "id": "guard_final_false",
+    "source": "Top:: I {  effects=\"\"; while(matches(effects,/^x{0,9999}$/)) { effects=cat(effects,\"x\") }; return(length(effects)) }"
+  },
+  {
+    "id": "guard_exhaustion",
+    "source": "Top:: I { effects=\"\"; while(true) { effects=cat(effects,\"x\") }; return(\"bad\") }"
+  }
+]

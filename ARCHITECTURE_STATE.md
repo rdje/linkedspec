@@ -5,6 +5,18 @@ architecture page and capability checker under their existing public/neutral gro
 79 migration files / 8 complete + 0 pending / 60 mutations; runtime behavior and
 earlier dated admission evidence below remain unchanged.
 
+## Perl callable guarded while execution
+
+Self-containment `.1.3.3.0.5.5` adds15 lines to the private statement sequence for typed
+attached while. Conditions evaluate once before guard/body; the existing10000 guard permits
+a final false check and fails before another body when still true. Local returns propagate
+through nested loops/branches; eager blocks consume their own boundary. Guard errors retain
+typed node spans/completed counts and preceding effects; actual fixed/rest slots/array/error
+identities restore. Public carriers, compiler and context remain unchanged. Four older tests
+replace only source-identical loop failure oracles; captures stay historical. Numeric87.3,
+literal35, function MVP, metadata/readiness and dispatcher/full execution remain separate.
+Canonical parent reconciliation `.5.6` follows before residual-order diagnosis `.6.0`.
+
 ## Perl callable null-return execution
 
 Self-containment `.1.3.3.0.5.4` extends the existing private statement return boundary:
@@ -13,8 +25,7 @@ then stop with the local return flag. Null returns propagate through attached/ma
 eager expressions consume their own boundary. The canonical optional bare scope label on
 return_undef is retained. Value-position null helper use and raw multi-value return are not
 admitted. Public records/compiler/context remain unchanged. Current older tests replace
-only source-identical null-return failure expectations; captures stay historical. While
-`.5.5`, boolean literal identity, metadata/readiness and full execution remain open.
+only source-identical null-return failure expectations; captures stay historical. While now executes under `.5.5`; boolean literal identity, metadata/readiness and full execution remain open.
 
 ## Perl callable lazy value conditional execution
 
@@ -24,7 +35,7 @@ validate before effects, select conditions once, and evaluate only the selected 
 Actual false/null/container results survive; a missing selected arm yields null. Eager
 logical helpers and statement return boundaries stay intact. The old attached/marker
 value failure gets source-identical success expectations; original captures remain historical.
-Public records, contexts, source generation and other production stay unchanged. While `.5.5`, literal identity startup35, metadata/readiness and full execution remain open.
+Public records, contexts, source generation and other production stay unchanged. While now executes under `.5.5`; literal identity startup35, metadata/readiness and full execution remain open.
 
 ## Perl callable attached and marker conditional execution
 
@@ -36,7 +47,7 @@ once and unselected bodies stay lazy. The private value/return flag preserves ne
 callable/eager expression boundaries consume them. Statement groups yield null without return.
 The plain record, public context and original caller/error identities remain intact. New marker51
 plus current849 dependent tests pass900; source-identical old failure teaching is superseded with
-historical input/result retention. While .5.5, boolean literal startup35,
+historical input/result retention. While now executes under .5.5; boolean literal startup35,
 function MVP, ordering/readiness and dispatcher/full execution remain independent owners.
 
 ## Nested-write and receiver-mutation capabilities are portable

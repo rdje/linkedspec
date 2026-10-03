@@ -1499,7 +1499,7 @@ keeps its existing behavior, including false and empty containers. The private e
 zero or one payload for `return`, and zero for `return_undef`; the latter also retains the existing
 optional bare scope-label spelling. Invalid arity rejects before argument effects.
 `return_undef` is a statement exit here, so putting it inside an ordinary value-helper argument
-remains unsupported. Deferred while remains separately owned. These callable results do not
+remains unsupported. These callable results do not
 admit general multi-value returns or change the compiler's raw/readiness boundaries.
 The working explicit-null spelling skips the later unknown helper:
 
@@ -1522,3 +1522,45 @@ Top:: I {
 Both routes return `ok`. Attached statement-control function bodies exceed the current
 function MVP. The callable statement-control repairs do not extend that MVP or value control,
 loops, metadata ordering, nested raw-expression readiness or complete composed-format execution.
+
+### Current Perl callable while boundary
+
+Attached `while(condition) { statements }` now executes inside Perl callable bodies.
+It checks the condition once before each body, including the final false check, using the
+same truthiness as conditionals. A false condition skips the body. The loop is a statement
+and yields null unless an explicit return exits the callable. Nested loops and selected
+branches propagate that return; an eager expression block consumes its own return.
+
+```spec
+Top:: I {  cb={|| while(false) { "bad" }; return("after") }; return(cb()) }
+```
+
+```spec
+Top:: I {  cb={|| text=""; while(matches(text,/^x{0,2}$/)) { text=cat(text,"x") }; return(text) }; return(cb()) }
+```
+
+```spec
+Top:: I { effects=[]; condition_cb={|| push(effects,"condition"); return(matches(length(effects),/^(?:1|3)$/)) }; cb={|| while(condition_cb()) { push(effects,"body") }; return(effects) }; return(cb()) }
+```
+
+```spec
+Top:: I {  cb={|| value={ while(true) { return("inner") }; unknown_helper() }; return([value,"outer"]) }; return(cb()) }
+```
+
+These return `"after"`, `"xxx"`, `["condition","body","condition","body","condition"]`,
+and `["inner","outer"]`, respectively. The third example checks twice before bodies and
+once more to stop. The fourth returns only from its eager block before the caller continues.
+Null and false returns inside a loop keep their result kind and skip continuation. Fixed/rest
+parameter slots restore on success or failure; nonparameter body effects remain visible.
+
+The existing guard permits 10000 body executions. A false condition after body 10000 succeeds;
+a true condition at the next check raises the typed `while_iteration_limit_exceeded` error
+before body 10001. It retains `iteration_limit=10000`, `iterations_executed=10000` and the
+typed while-node source span. Prior body effects remain visible. This matches the existing
+Perl direct-action guard order; that direct route retains its existing host diagnostic.
+
+This repair covers typed attached while in the private Perl executor. Numeric helpers inside
+callables remain owned by startup87.3; the examples use supported matching/string helpers.
+Portable `next()` and exact-limit Dart/Julia normalization retain backlog5 ownership.
+Boolean literal kind, function statement MVP, descriptor ordering/readiness, dispatcher/full
+execution and other-backend admission remain separate.

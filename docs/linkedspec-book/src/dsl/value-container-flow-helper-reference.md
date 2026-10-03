@@ -1588,7 +1588,8 @@ See the [complete callable examples](../architecture/structured-format-program.m
 Callable value `if` also preserves the selected payload and laziness, including ordered `elseif`
 arms and wrapped or plain final fallback. In these callable bodies,
 `return()`/`return_undef()` now exit with null; eager blocks keep a local return boundary.
-Deferred while retains its repair owner. `return(undef)` continues to work.
+Attached while also executes in Perl callables with the existing guarded statement/local-return
+semantics. `return(undef)` continues to work.
 
 Use attached-block control flow when a branch needs substantial statement bodies or repeated side effects.
 The short `i`/`elif` spellings are statement-marker aliases, while `when`/`otherwise` are attached-block aliases;
@@ -1733,6 +1734,14 @@ local to that block. The default deterministic guard is 10000 body executions. P
 condition after the final allowed body and succeed if it has become false; Dart and Julia currently throw at that
 boundary. Avoid `next()` inside portable loop bodies too: Perl/Lua continue the inner loop, Rust treats it as a
 no-op, and Dart/Julia propagate it to rule repetition. `FUTURE-PARITY-BACKLOG.5` owns both normalizations.
+
+In Perl callable bodies, attached while follows that same condition-before-guard-before-body
+order and local return boundary. A loop statement itself yields null; preceding body effects
+survive guard failure, and fixed/rest parameter slots restore. The private typed error includes
+the while-node span and the exact completed-body count. See the
+[executed callable loop examples](../architecture/structured-format-program.md#current-perl-callable-while-boundary).
+Numeric helpers in deferred Perl bodies remain a separate repair; use the supported
+matching/string helper examples there to isolate loop execution.
 
 ## Debug output helpers
 

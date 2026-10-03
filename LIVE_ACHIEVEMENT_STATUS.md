@@ -2,17 +2,19 @@
 
 ## Current Activity
 
-Full PNT: callable conditional/null-return families verified; deferred while precedes order/readiness and dispatcher closeout.
+Full PNT: bounded deferred-control executors verified; canonical parent reconciliation precedes event ordering/readiness and dispatcher closeout.
 
 ## Latest Completed Slice
 
-`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.4`:32 matched native/fresh RED/GREEN sources, thirteen corruption controls and thirteen suites/981 tests PASS. Local/eager null boundaries, original caller/error identities and source poison pass. Seven canonical/raw and six PUC CLI controls preserve scope; four executed examples/stale flow teaching render. Prior value claim freezes ate133707f; three current tests replace only source-identical null-return failures.
+`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.5`:30 matched native/fresh RED/GREEN sources, fourteen corruption controls and fourteen suites/1014 tests PASS. Guard order/final false/exact10000 effects and local/eager/null/false returns preserve original caller/error identities. Four direct canonical and seven PUC CLI controls retain bounded scope; four executed examples render. Null claim freezes at85e63d655; four current older tests replace only source-identical loop failures.
 
 ## Next Action
 
-Activate deferred while SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.5 from clean committed HEAD. Startup35 boolean identity, order/readiness .6/.7 and full D/P remain separate.
+Activate bounded control parent reconciliation SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.6 from clean HEAD; exact staged canonical acceptance precedes .6.0. Numeric87.3/literal35/order/readiness/full D/P remain separate.
 
 ## Recent Completions
+
+- `2026-10-03` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.5` executes guarded callable while with1014 focused tests.
 
 - `2026-10-03` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.4` repairs local null-return forms with981 focused tests.
 
@@ -43,8 +45,6 @@ Activate deferred while SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.5 from clean co
 - `2026-10-02` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.4.1` adopts bounded claim publishing and watched-source enforcement; wider audit remains open.
 
 - `2026-10-02` — `REPO-HYGIENE.7` retains the due artifact census and corrects the current other-repository cleanup boundary.
-
-- `2026-10-02` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.4.0` preserves exact historical callable replay sources with safe recovery controls.
 
 ## History
 

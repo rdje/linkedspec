@@ -606,6 +606,21 @@ sub _execute_sequence {
   _error('invalid_codeblock_body', detail => 'body statement must be action_stmt')
    unless ref($statement) eq 'HASH' && ($statement->{kind} // '') eq 'action_stmt';
   my $expr = $statement->{expr};
+  if (ref($expr) eq 'HASH' && ($expr->{kind} // '') eq 'control_while'
+   && ref($expr->{body}) eq 'HASH') {
+   my $iterations = 0;
+   while (LinkedSpec::RuntimeLogical::truthy(_eval_expr($expr->{condition}, $ctx))) {
+    # Match the canonical guard: check only after a true condition, before body.
+    _error('while_iteration_limit_exceeded', iteration_limit => 10000,
+     iterations_executed => $iterations - 1, source_span => $expr->{source_span},
+     detail => 'LinkedSpec while iteration safety limit exceeded after 10000 iterations',
+    ) if ++$iterations > 10000;
+    my ($value, $returned) = _execute_sequence($expr->{body}, $ctx);
+    return ($value, 1) if $returned;
+   }
+   $result = undef;
+   next;
+  }
   if (ref($expr) eq 'HASH' && ($expr->{kind} // '') eq 'control_if'
    && ($expr->{branch_role} // '') eq 'if' && !exists($expr->{body})) {
    my ($next, $value, $returned) = _execute_marker_if($statements, $index, $ctx);

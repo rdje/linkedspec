@@ -7,10 +7,10 @@ answers:
   - "why do conditional tests no longer expect empty return failures"
   - "does a raw direct return prove typed portable return arity"
 date: 2026-10-03
-status: current private null-return executor; while and raw readiness remain separate
+status: null-return executor verified; while successor verified; raw readiness separate
 tags: [perl, callable, return, null, actionir]
 evidence: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.4 exact native/fresh sources, baseline runtime, typed source-poison/identity controls and published PUC CLI comparisons."
-reverify: "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.4-review.py"
+reverify: "prove -Iperl t/codeblock_null_return_perl.t; current successor replay: bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.5-review.py. Earlier full reviews are historical because old loop failures are superseded."
 ---
 
 The private statement sequence now accepts zero or one payload for return and
@@ -36,3 +36,9 @@ tests load source-identical success oracles; the value claim is historical at e1
 Use the current focused tests or this successor review rather than an old full reviewer.
 The stale values-and-flow book paragraph is corrected to reflect already working value
 conditionals and these null returns. Source-bound rendered examples check that teaching.
+
+## October 3 while successor
+
+Typed attached while now executes under `.0.5.5`; the former loop failure described above
+is retained history. Current tests replace only its exact source-identical oracle; old
+observations/producers remain unchanged. The while fact card owns guard/local-return semantics.

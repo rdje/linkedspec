@@ -1,11 +1,11 @@
 # MEMORY
 
-- activation_commit: `e133707f99dbb057667f8f80fbd3c47327de9bec` — clean null-return repair activation base.
-- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.4 - execute local null returns`.
-- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.4` (done) — local null-return repair verified.
-- next_action: Activate deferred while SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.5 from clean committed HEAD; recover canonical loop/return contracts through public tools first.
-- in_flight_uncommitted: none; completed null-return slice committed with32-source/981-test and rendered-book proof.
-- blockers: No access/decision blocker. Matches prerequisite is repaired; attached/marker/value .0.5 and order/readiness .0.6/.0.7 precede dispatcher/full execution. Other startup repairs remain separate.
+- activation_commit: `85e63d655b8c26ccb3146f9792462c94b2120c02` — clean deferred while activation base.
+- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.5 - execute guarded callable while`.
+- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.5` (done) — guarded typed while/native-fresh identities verified.
+- next_action: Activate bounded control parent reconciliation SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.6 from clean committed HEAD; exact staged canonical acceptance before .6.0.
+- in_flight_uncommitted: none; focused while proof committed, no required job remains.
+- blockers: No access/decision blocker. Matches and attached/marker/value/null/while executors are repaired; canonical parent .5.6 and order/readiness .6/.7 precede dispatcher/full execution. Other startup repairs remain separate.
   Wrapper startup .7 remains open; recovery/purge stay prohibited.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
   active table; the task metadata doctrine inventories all consumers, permits arbitrary frontier-row rewrites,
