@@ -1,0 +1,75 @@
+{
+   "aliases" : [
+      {
+         "action" : " i=2; if(i < 1) { return(\"yes\") }; return(\"no\") ",
+         "argument" : {
+            "kind" : "raw_perl",
+            "reason" : "unsupported_expression",
+            "source" : "i < 1",
+            "source_span" : {
+               "end" : 14,
+               "start" : 9
+            }
+         },
+         "condition" : {
+            "kind" : "raw_perl",
+            "reason" : "unsupported_expression",
+            "source" : "i < 1",
+            "source_span" : {
+               "end" : 14,
+               "start" : 9
+            }
+         },
+         "id" : "condition_raw",
+         "shared_reference" : 1,
+         "source" : "Top:: I { i=2; if(i < 1) { return(\"yes\") }; return(\"no\") }"
+      },
+      {
+         "action" : " i=2; while(i < 1) { return(\"yes\") }; return(\"no\") ",
+         "argument" : {
+            "kind" : "raw_perl",
+            "reason" : "unsupported_expression",
+            "source" : "i < 1",
+            "source_span" : {
+               "end" : 17,
+               "start" : 12
+            }
+         },
+         "condition" : {
+            "kind" : "raw_perl",
+            "reason" : "unsupported_expression",
+            "source" : "i < 1",
+            "source_span" : {
+               "end" : 17,
+               "start" : 12
+            }
+         },
+         "id" : "while_raw",
+         "shared_reference" : 1,
+         "source" : "Top:: I { i=2; while(i < 1) { return(\"yes\") }; return(\"no\") }"
+      }
+   ],
+   "limits" : "Two measured control sources and one extra AST-only action fragment; no additional native/fresh route.",
+   "repeated_distinct_references" : 1,
+   "repeated_raw" : [
+      {
+         "kind" : "raw_perl",
+         "reason" : "unsupported_expression",
+         "source" : "i+1",
+         "source_span" : {
+            "end" : 5,
+            "start" : 2
+         }
+      },
+      {
+         "kind" : "raw_perl",
+         "reason" : "unsupported_expression",
+         "source" : "i+1",
+         "source_span" : {
+            "end" : 12,
+            "start" : 9
+         }
+      }
+   ],
+   "repeated_source" : "i=i+1; i=i+1"
+}

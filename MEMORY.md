@@ -1,11 +1,11 @@
 # MEMORY
 
-- activation_commit: `5bbceb962cc5aa5fb071b86efa479178e0e25d32` — clean residual-event compiler repair activation base.
-- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.1 - preserve residual event occurrences`.
-- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.0` (pending) — source-bound nested raw-readiness diagnosis.
-- next_action: Activate .7.0 from clean canonical HEAD; use public AST/descriptor/substitution/trace to freeze nested raw blockers and bounded repair ownership; preserve quoted .7.2.
-- in_flight_uncommitted: none; residual occurrence repair, permanent regression, full focused evidence and canonical landing condition are committed.
-- blockers: No access/decision blocker. Matches and attached/marker/value/null/while executors are repaired; control parent/order repair are reconciled; nested raw/quoted readiness .7 precedes dispatcher/full execution. Other startup repairs remain separate.
+- activation_commit: `834e0a3ddaf63789ea23dfac6c7cf273c01342e6` — clean nested raw-readiness diagnosis activation base.
+- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.0 - diagnose nested raw readiness`.
+- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.0` (done) — source-bound diagnosis committed; .7.1 repair is next.
+- next_action: Activate .7.1 from clean HEAD; declare original-source diagnostic/provenance paths and canonical tier, census callers/shipped specs, then prove readiness RED/GREEN.
+- in_flight_uncommitted: none.
+- blockers: No access/decision blocker. Matches and attached/marker/value/null/while executors are repaired; control parent/order repair are reconciled; nested raw/quoted/comment readiness .7.1/.2/.3 precedes dispatcher/full execution. Other startup repairs remain separate.
   Wrapper startup .7 remains open; recovery/purge stay prohibited.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
   active table; the task metadata doctrine inventories all consumers, permits arbitrary frontier-row rewrites,

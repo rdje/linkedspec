@@ -1,0 +1,25 @@
+{
+  "owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.0",
+  "result": "PASS",
+  "examples": [
+    {
+      "id": "assignment_raw",
+      "source_sha256": "1781521529612cb4c4be6c275a0c421919dcdf1c8007d596838cdb8929185314"
+    },
+    {
+      "id": "assignment_canonical",
+      "source_sha256": "4203289fbde569a9b9182dab3b3345c429ffae7e5e9ac2f19b796bae1e6471ce"
+    },
+    {
+      "id": "codeblock_body_raw",
+      "source_sha256": "a8e70651bdc001eaba8ace52d855406f9eea49448145f3de6028d7dcaf7d8cb4"
+    },
+    {
+      "id": "comment_data",
+      "source_sha256": "c021fbee825187c1a68d27ba2da930301a21753d8199bf6a6bbf746322bff73f"
+    }
+  ],
+  "source": "docs/linkedspec-book/src/dsl/actionir-lowering-mental-model.md",
+  "source_sha256": "69ca80bc9febb87417afa6354a3eb21a7b2dca193fa6c726f5bd50736fd8c240",
+  "limits": "Four exact executed source identities and bounded diagnostic teaching; no layout, new runtime or other-backend admission."
+}

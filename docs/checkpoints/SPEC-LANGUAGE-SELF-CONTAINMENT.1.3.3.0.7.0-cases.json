@@ -1,0 +1,112 @@
+[
+  {
+    "id": "assignment_raw",
+    "source": "Top:: I { i=2; i=i+1; return(i) }",
+    "expected_raw_expression_sources": [
+      "i+1"
+    ],
+    "role": "nested raw assignment"
+  },
+  {
+    "id": "condition_raw",
+    "source": "Top:: I { i=2; if(i < 1) { return(\"yes\") }; return(\"no\") }",
+    "expected_raw_expression_sources": [
+      "i < 1"
+    ],
+    "role": "nested raw condition"
+  },
+  {
+    "id": "while_raw",
+    "source": "Top:: I { i=2; while(i < 1) { return(\"yes\") }; return(\"no\") }",
+    "expected_raw_expression_sources": [
+      "i < 1"
+    ],
+    "role": "nested raw while condition"
+  },
+  {
+    "id": "call_argument_raw",
+    "source": "Top:: I { i=2; return(num_add(i+1,2)) }",
+    "expected_raw_expression_sources": [
+      "i+1"
+    ],
+    "role": "nested raw known-helper argument"
+  },
+  {
+    "id": "array_element_raw",
+    "source": "Top:: I { i=2; return([i+1]) }",
+    "expected_raw_expression_sources": [
+      "i+1"
+    ],
+    "role": "nested raw container element"
+  },
+  {
+    "id": "hash_value_raw",
+    "source": "Top:: I { i=2; return({ \"n\": i+1 }) }",
+    "expected_raw_expression_sources": [
+      "i+1"
+    ],
+    "role": "nested raw harray value"
+  },
+  {
+    "id": "codeblock_body_raw",
+    "source": "Top:: I { cb={|i| i=i+1; return(i) }; return(cb(2)) }",
+    "expected_raw_expression_sources": [
+      "i+1"
+    ],
+    "role": "nested raw deferred body"
+  },
+  {
+    "id": "assignment_canonical",
+    "source": "Top:: I { i=2; i=num_add(i,1); return(i) }",
+    "expected_raw_expression_sources": [],
+    "role": "canonical assignment alternative"
+  },
+  {
+    "id": "condition_canonical",
+    "source": "Top:: I { i=2; if(num_lt(i,1)) { return(\"yes\") }; return(\"no\") }",
+    "expected_raw_expression_sources": [],
+    "role": "canonical condition alternative"
+  },
+  {
+    "id": "call_argument_canonical",
+    "source": "Top:: I { i=2; return(num_add(num_add(i,1),2)) }",
+    "expected_raw_expression_sources": [],
+    "role": "canonical nested helper argument"
+  },
+  {
+    "id": "container_canonical",
+    "source": "Top:: I { i=2; return([num_add(i,1), { \"n\": i }]) }",
+    "expected_raw_expression_sources": [],
+    "role": "canonical nested value containers"
+  },
+  {
+    "id": "codeblock_canonical",
+    "source": "Top:: I { cb={|x| return(x) }; return(cb(\"ok\")) }",
+    "expected_raw_expression_sources": [],
+    "role": "canonical deferred body"
+  },
+  {
+    "id": "literal_data",
+    "source": "Top:: I { return(\"i=i+1; i < 1\") }",
+    "expected_raw_expression_sources": [],
+    "role": "raw-looking authored string data"
+  },
+  {
+    "id": "comment_data",
+    "source": "Top:: I { # i=i+1; i < 1\n return(\"ok\") }",
+    "expected_raw_expression_sources": [],
+    "role": "raw-looking authored comment data"
+  },
+  {
+    "id": "quoted_helper_known",
+    "source": "Top:: I { return(\"return(inner); if(true)\") }",
+    "expected_raw_expression_sources": [],
+    "role": "separate known quoted helper false blocker .7.2"
+  },
+  {
+    "id": "raw_statement",
+    "source": "Top:: I { my $host=3; return($host) }",
+    "expected_raw_expression_sources": null,
+    "role": "visible legacy top-level raw statement"
+  }
+]

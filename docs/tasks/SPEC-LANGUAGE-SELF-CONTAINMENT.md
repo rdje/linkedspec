@@ -1867,24 +1867,46 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7`
   Status: `pending`
   Priority: P1 — unsupported nested expressions are falsely reported raw-free and language-agnostic ready.
-  Goal: Diagnose and repair nested raw-expression portability telemetry without admitting infix grammar or hiding legacy source.
+  Goal: Diagnose and repair nested raw-expression portability telemetry without admitting infix grammar or hiding legacy source. Comments also need distinct source-data classification under .7.3.
   Dependencies: clean normalization .0.4, deferred-control .0.5 and residual-order .0.6 handoffs; must close before .0.3.
   Reproduce: .4.0 public sources i=2; i=i+1; return(i) and i=2; if(i < 1) { return("yes") }; return("no") have raw_perl/unsupported_expression AST children, preserve host barewords, and return1/yes on native/fresh routes while reporting ready1/raw0/fallback0/unresolved0. The frozen while source similarly leaves count as a host call and fails. ADR0003 requires remaining raw source to be surfaced rather than hidden by ready.
-  Source boundary: AST/Parser.pm::_parse_expr_without_chain ends at unsupported_expression; ValueExpr.pm::_lower_assignment_source_expr returns source_passthrough. CanonicalEvents.pm lines175–234 counts unmatched top-level statements, while EmitContext.pm::_build_action_rewriter_meta lines1630–1640 derives raw/ready from those counts. Exact nested traversal, canonical coverage and downstream compatibility effects need .7.0 diagnosis; no repair is guessed here.
+  Source boundary: AST/Parser.pm::_parse_expr_without_chain ends at unsupported_expression. The .7.0 actual assignment trace reaches FlowExpr passthrough_no_call then ValueExpr flow_composite_value, not its conditional final source_passthrough branch. CanonicalEvents.pm counts unmatched top-level statements, while EmitContext.pm::_build_action_rewriter_meta derives raw/ready from those counts. .7.0 freezes source-occurrence policy and .7.1 owns verified reporting repair.
   Impact: Descriptor portability claims can conceal raw host dependencies and semantically misleading results. This is separate from hash-order overlap .0.6 and from correcting the selected fixture .0.4.
-  Children: `.1.3.3.0.7.0`, `.1.3.3.0.7.1`, `.1.3.3.0.7.2`
+  Children: `.1.3.3.0.7.0`, `.1.3.3.0.7.1`, `.1.3.3.0.7.2`, `.1.3.3.0.7.3`
   Acceptance: Exact nested condition/assignment/call/control and canonical positives distinguish true raw dependencies from authored string/comment payloads. Preserve host-source evidence, report deterministic blockers/provenance and verify shipped-spec readiness/direct dependents with warranted canonical signoff.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.0`
-  Status: `pending`
+  Status: `done`
   Goal: Freeze the nested raw-expression readiness mechanism, policy, source locations and bounded repair ownership.
   Acceptance: Public source-bound AST/descriptor/lowering controls locate missed nested dependencies and consumer effects; select safe compiler paths/tier without expanding grammar or conflating hash-order repair.
+
+  Activation: Clean834e0a3ddaf63789ea23dfac6c7cf273c01342e6; occurrence repair landed with canonical exit0, CLI66/66 in both environments, Phase01034/1034, all ten hooks/post-pointer PASS, promoted receipt, brief0/Git clean. ADR0003, roadmap raw-source policy, relevant ActionIR book and dated normalization/order facts reviewed; existing public raw assignment still exposes an unsupported_expression AST descendant while ready1/value1.
+  Owned paths / plan: New .7.0-cases.json/probe.pl/fresh.pl/capture.py/trace.pl/trace-capture.py/review.py/tests.py/observations.json/trace.json/tests.json/verification.json/book-check.py/book-check.json under docs/checkpoints/; docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.0.json and new docs/knowledge/perl-nested-raw-readiness-diagnosis.md. Preserve every .6.1 producer/capture; freeze its claim at actual834e0a3dd before book/input edits. Public AST/descriptor/substitution/dump/emitted/native/fresh/trace controls cover nested assignment, condition, call/value container, deferred body, canonical alternatives, authored literal/comment data and visible top-level raw; retain quoted helper false blockers separately under .7.2. Scratch .linkedspec-data/scratch/nested-raw-readiness. No production/runtime/grammar/schema/authority/CI/dependency changes in this diagnostic leaf. Declare additions before use.
+  Verification tier: `focused`
+  Focused checks: Exact source-bound current public AST/descriptor/lowering/native/fresh and trace controls, independent raw-node/source/readiness expectations and reason-sensitive corrupted observation controls; unchanged AST parser/metadata/generated-source/trace direct dependents, rendered source-identical book examples, full producer/input claim identities, Knowledge/history/memory/diff and all doctrines.
+  Canonical trigger: none for source-bound diagnosis with unchanged compiler/runtime/authority/CI. .7.1 owns subsequent readiness contract movement and warranted exact staged canonical signoff.
+  Claim verification: `docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.0.json`
+  Additional owned structural probe: .7.0-ast-alias.pl/json uses the public AST API plus actual reference identity to distinguish shared condition/args representations from source occurrences, and two repeated equal-text raw expressions with distinct source spans. Independent diagnosis reviewer must never count serialized aliases as two authored occurrences.
+  Actual data-negative failure: comment_data had independently expected no executable raw expression, but the current public AST emits raw_perl for # i=i+1; i < 1. Both native/fresh return ok while ready0/raw dependency1/fallback1. Preserve the original policy expectation/capture and route this separate source-comment AST/classification defect to .7.3; do not silently amend the desired data oracle or treat the comment as genuine raw execution.
+  Reached-branch clarification: Public assignment_raw trace reaches FlowExpr.pm:415 passthrough_no_call with i+1, while ValueExpr reports flow_composite_value and both canonical_raw_perl_fallback decisions are SKIPPED. Do not claim this control reaches ValueExpr's final source_passthrough branch. CanonicalEvents only counts unmatched top-level statements; EmitContext raw collection only visits RAW_PERL events and ready uses fallback/unresolved counts. Preserve exact trace/source-bound proof and clarify the older normalization fact by successor note before closeout. Additional owned documentation path: docs/knowledge/perl-normalization-call-grammar.md.
+  Reviewer correction: The first review rejected its blanket quiet-stdout assumption. Actual codeblock_body_raw native failure emits two DUMP_NONE rule_handler_eval records from SpecEntry.pm:421; all three raw timestamped streams are retained. Validate those exact failure records and quiet healthy/fresh routes separately; an executed corruption must reject a removed failure trace. This is the existing failure-channel mechanism, not a new runtime repair.
+  Actual proof: Sixteen exact sources across seeds0/1/2 produce48 native/fresh pairs and16 current lowering traces. Seven sources/21 case-seed pairs have one actual nested raw source occurrence each but ready1/raw0/fallback0/unresolved0 and empty blockers. Six preserve host bareword warnings and incorrect DSL-intent values; the deferred body fails with the same original unsupported_codeblock_actionir object through native/fresh adapters. Canonical alternatives and ordinary literal data remain raw-free. Four unchanged suites pass42 top-level TAP tests; twelve reason-sensitive evidence corruptions reject.133 input hashes bind the final focused diagnosis before the separate book proof.
+  Source occurrence policy: Actual reference probes prove condition/args[0] share one node in both measured controls; two equal-text assignments at different spans are distinct nodes. Count each original source occurrence once per source unit, not JSON representation or distinct raw text. Preserve top-level RAW_PERL event/fallback telemetry and prevent a containing raw statement from counting its children again. Blocker text may remain unique while provenance must retain distinct spans. Comment classification and quoted helper masking remain separate .7.3/.7.2 repairs.
+  Repair boundary selected: .7.1 may add original-source AST diagnostics at RuleIR::EmitContext::_rewrite_action_code_with_diagnostics, accumulate per source unit and derive raw dependency/readiness/blocker metadata there. CanonicalEvents arrays/fallback count retain their existing event meaning; no grammar, source rewriting, runtime values, canonical event schema, AST schema or helper authority changes are selected. Declare any provenance fields and their semantics before implementation. Census shipped specs and lifecycle/action/deferred/function callers before landing; current AST raw markers are not by themselves proof that every legacy form is an unsupported executable dependency. If that census exposes a separate small defect, own it before fixing rather than broadening an implicit waiver.
+  Frontier repair: Review found three stale duplicate .6.1/.7.0/.7.1 frontier rows, including a pending copy of completed .6.1. Remove only those duplicates and keep one accurate current row per leaf; this correction belongs to the current documentation diagnosis.
+  Book reviewer correction: The first rendered-source check decoded HTML entities before stripping markup, so authored i < 1 was misread as markup and removed. Strip actual tags before entity decoding; verify the full original multiline comment source, without whitespace/source projection. The book itself already preserves the exact case.
+  Additional owned claim producer: .7.0-claim.py derives counts/input identities from the completed readonly reviewer and rendered-book results; emits stdout only and rejects stale diagnostic input hashes. Freeze it before the final review so it is itself hash-bound.
+
+  Closeout: Source-bound public diagnosis, twelve actual evidence controls,42 TAP tests, four rendered exact examples and138-input/15-producer claim PASS.133 diagnostic inputs remain activation-exact where executable. Knowledge/history/memory/diff/all-doctrine checks govern the focused landing. No canonical run required for this unchanged-production diagnosis.
+  Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.0 - diagnose nested raw readiness` (Git owns identity).
+  Handoff: From the clean diagnostic commit, activate .7.1 declared canonical reporting repair; preserve every diagnostic artifact and historical .6.1 byte, then .7.2/.7.3 before dispatcher/full execution.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1`
   Status: `pending`
   Goal: Repair and verify diagnosed nested raw-expression readiness reporting.
   Dependencies: `.1.3.3.0.7.0`
   Acceptance: Actual false-ready RED/GREEN, nested/quoted canonical controls, deterministic source blockers, shipped-spec readiness and direct dependents pass before dispatcher closeout.
+  Selected prerequisite: Follow .7.0 source-occurrence/containing-raw policy and original-source diagnostic boundary. Before any implementation declare exact production/test/provenance paths and canonical tier: public readiness/count reporting changes require receipt-bound canonical acceptance. Preserve .7.0 captures and freeze its claim at its actual landed revision. Extend source-bound controls across rule lifecycle/action/deferred/function units, repeated spans and shared aliases; census shipped-spec metadata and compare all execution/lowering bytes that should remain unchanged. Quoted-helper and source-comment false positives remain .7.2/.7.3 owners.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2`
   Status: `pending`
@@ -1894,6 +1916,15 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
   Reproduce: `.6.0` case quoted, Top:: I { return("return(inner); if(true)") }, returns the exact literal natively and from fresh emitted source under seeds0/1/2, yet records residual IF if(true), unresolved_helper_count3 and ready0. Complete source-bound observations remain in `.6.0-observations.json`.
   Impact: Ordinary literal data creates false portability blockers and control metadata; healthy execution does not validate that descriptor classification.
   Acceptance: Use Toolbox trace/AST/descriptor to locate quote masking across helper discovery, canonical events and unresolved diagnostics; preserve source/value bytes, prove quoted/escaped/nested/comment negatives and genuine unquoted helper/raw positives. Declare paths/tier before implementation; actual RED/GREEN plus direct consumer checks and warranted canonical signoff close this leaf. No literal grammar expansion or hidden blocker removal.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.3`
+  Status: `pending`
+  Priority: P1 — accepted source comments are classified as executable raw Perl.
+  Goal: Diagnose and repair source-comment AST/readiness classification while preserving actual raw expressions, source spans and authored data.
+  Dependencies: `.1.3.3.0.7.2`; required before dispatcher `.1.3.3.0.3` and parent `.0.7` closure.
+  Reproduce: .7.0 comment_data, Top:: I { # i=i+1; i < 1 followed by newline return("ok") }, returns ok natively and from independent fresh emitted source in all three measured seeds. Public parse_action_block retains raw_perl source # i=i+1; i < 1/reason unsupported_expression, and metadata reports ready0/raw dependency1/fallback1. Exact source/streams/AST/spans are retained in .7.0-observations.json and trace.json.
+  Impact: Comment data falsely blocks portability classification. This differs from .7.2's typed-string AST with phantom helper/control events. Deferred/function/comment variants are unassessed, not admitted or reclassified from one ordinary-action case.
+  Acceptance: Toolbox AST/descriptor/lowering/trace and published lexical contracts establish actual comment scope before implementation. Actual source-bound RED/GREEN proves comment/data/helper masking without hiding real raw dependencies; verify source bytes/spans, inline/nested/deferred routes where already accepted, quoted hash characters, escaped payloads and genuine raw/helper controls. Declare paths/tier and direct consumers; warranted canonical signoff precedes parent closeout. No new comment syntax or blanket raw-node waiver.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.1`
   Status: `pending`
@@ -2112,12 +2143,10 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 | 42.5 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.6` | `done` | Exact committed input/evidence reconciliation; canonical receipt governs bounded parent closeout. |
 | 43 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.0` | `done` | Nine sources/27 native-fresh, six originals,15 traces/34 tests and ten controls; repair selected. |
 | 43.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.1` | `done` | Pending scan occurrences repaired;325-input/424-test proof and exact canonical landing condition. |
-| 43.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.0` | `pending` | Diagnose false-ready nested raw expressions with public source/consumer controls. |
+| 43.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.0` | `done` | 16 sources/48 pairs,16 traces/42 tests and twelve controls; source-occurrence repair boundary frozen. |
 | 43.3 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1` | `pending` | Repair diagnosed nested raw readiness before dispatcher. |
-| 44 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2` | `pending` | P1 quoted-data false helper/control blockers before dispatcher. |
-| 44 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.1` | `pending` | Repair canonical residual ordering with exact source/provenance controls. |
-| 45 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.0` | `pending` | Diagnose missed nested raw-expression portability dependencies after prior handoffs. |
-| 46 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1` | `pending` | Repair deterministic raw-expression blockers before dispatcher closeout. |
+| 43.4 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2` | `pending` | P1 quoted-data false helper/control blockers before dispatcher. |
+| 43.5 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.3` | `pending` | Source-comment AST/raw false blocker; required before dispatcher and .7 closure. |
 
 ## Decisions
 

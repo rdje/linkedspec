@@ -1,0 +1,1222 @@
+{
+  "owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.0",
+  "result": "PASS",
+  "activation": "834e0a3ddaf63789ea23dfac6c7cf273c01342e6",
+  "full_sources": 16,
+  "case_seed_native_fresh_pairs": 48,
+  "missed_nested_sources": [
+    "assignment_raw",
+    "condition_raw",
+    "while_raw",
+    "call_argument_raw",
+    "array_element_raw",
+    "hash_value_raw",
+    "codeblock_body_raw"
+  ],
+  "missed_nested_case_seed_pairs": 21,
+  "comments_false_raw_owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.3",
+  "quoted_false_helper_owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2",
+  "source_results": [
+    {
+      "id": "assignment_raw",
+      "seed": "0",
+      "raw_representations": 1,
+      "raw_source_occurrences": [
+        {
+          "start": 8,
+          "end": 11,
+          "source": "i+1",
+          "reason": "unsupported_expression",
+          "representations": [
+            "/statements/1/expr/value"
+          ]
+        }
+      ],
+      "current_flags": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "native_value": 1,
+      "fresh_warning_bytes": 175
+    },
+    {
+      "id": "assignment_raw",
+      "seed": "1",
+      "raw_representations": 1,
+      "raw_source_occurrences": [
+        {
+          "start": 8,
+          "end": 11,
+          "source": "i+1",
+          "reason": "unsupported_expression",
+          "representations": [
+            "/statements/1/expr/value"
+          ]
+        }
+      ],
+      "current_flags": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "native_value": 1,
+      "fresh_warning_bytes": 175
+    },
+    {
+      "id": "assignment_raw",
+      "seed": "2",
+      "raw_representations": 1,
+      "raw_source_occurrences": [
+        {
+          "start": 8,
+          "end": 11,
+          "source": "i+1",
+          "reason": "unsupported_expression",
+          "representations": [
+            "/statements/1/expr/value"
+          ]
+        }
+      ],
+      "current_flags": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "native_value": 1,
+      "fresh_warning_bytes": 175
+    },
+    {
+      "id": "condition_raw",
+      "seed": "0",
+      "raw_representations": 2,
+      "raw_source_occurrences": [
+        {
+          "start": 9,
+          "end": 14,
+          "source": "i < 1",
+          "reason": "unsupported_expression",
+          "representations": [
+            "/statements/1/expr/args/0",
+            "/statements/1/expr/condition"
+          ]
+        }
+      ],
+      "current_flags": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "native_value": "yes",
+      "fresh_warning_bytes": 177
+    },
+    {
+      "id": "condition_raw",
+      "seed": "1",
+      "raw_representations": 2,
+      "raw_source_occurrences": [
+        {
+          "start": 9,
+          "end": 14,
+          "source": "i < 1",
+          "reason": "unsupported_expression",
+          "representations": [
+            "/statements/1/expr/args/0",
+            "/statements/1/expr/condition"
+          ]
+        }
+      ],
+      "current_flags": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "native_value": "yes",
+      "fresh_warning_bytes": 177
+    },
+    {
+      "id": "condition_raw",
+      "seed": "2",
+      "raw_representations": 2,
+      "raw_source_occurrences": [
+        {
+          "start": 9,
+          "end": 14,
+          "source": "i < 1",
+          "reason": "unsupported_expression",
+          "representations": [
+            "/statements/1/expr/args/0",
+            "/statements/1/expr/condition"
+          ]
+        }
+      ],
+      "current_flags": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "native_value": "yes",
+      "fresh_warning_bytes": 177
+    },
+    {
+      "id": "while_raw",
+      "seed": "0",
+      "raw_representations": 2,
+      "raw_source_occurrences": [
+        {
+          "start": 12,
+          "end": 17,
+          "source": "i < 1",
+          "reason": "unsupported_expression",
+          "representations": [
+            "/statements/1/expr/args/0",
+            "/statements/1/expr/condition"
+          ]
+        }
+      ],
+      "current_flags": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "native_value": "yes",
+      "fresh_warning_bytes": 177
+    },
+    {
+      "id": "while_raw",
+      "seed": "1",
+      "raw_representations": 2,
+      "raw_source_occurrences": [
+        {
+          "start": 12,
+          "end": 17,
+          "source": "i < 1",
+          "reason": "unsupported_expression",
+          "representations": [
+            "/statements/1/expr/args/0",
+            "/statements/1/expr/condition"
+          ]
+        }
+      ],
+      "current_flags": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "native_value": "yes",
+      "fresh_warning_bytes": 177
+    },
+    {
+      "id": "while_raw",
+      "seed": "2",
+      "raw_representations": 2,
+      "raw_source_occurrences": [
+        {
+          "start": 12,
+          "end": 17,
+          "source": "i < 1",
+          "reason": "unsupported_expression",
+          "representations": [
+            "/statements/1/expr/args/0",
+            "/statements/1/expr/condition"
+          ]
+        }
+      ],
+      "current_flags": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "native_value": "yes",
+      "fresh_warning_bytes": 177
+    },
+    {
+      "id": "call_argument_raw",
+      "seed": "0",
+      "raw_representations": 1,
+      "raw_source_occurrences": [
+        {
+          "start": 21,
+          "end": 24,
+          "source": "i+1",
+          "reason": "unsupported_expression",
+          "representations": [
+            "/statements/1/expr/args/0/args/0"
+          ]
+        }
+      ],
+      "current_flags": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "native_value": 3,
+      "fresh_warning_bytes": 175
+    },
+    {
+      "id": "call_argument_raw",
+      "seed": "1",
+      "raw_representations": 1,
+      "raw_source_occurrences": [
+        {
+          "start": 21,
+          "end": 24,
+          "source": "i+1",
+          "reason": "unsupported_expression",
+          "representations": [
+            "/statements/1/expr/args/0/args/0"
+          ]
+        }
+      ],
+      "current_flags": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "native_value": 3,
+      "fresh_warning_bytes": 175
+    },
+    {
+      "id": "call_argument_raw",
+      "seed": "2",
+      "raw_representations": 1,
+      "raw_source_occurrences": [
+        {
+          "start": 21,
+          "end": 24,
+          "source": "i+1",
+          "reason": "unsupported_expression",
+          "representations": [
+            "/statements/1/expr/args/0/args/0"
+          ]
+        }
+      ],
+      "current_flags": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "native_value": 3,
+      "fresh_warning_bytes": 175
+    },
+    {
+      "id": "array_element_raw",
+      "seed": "0",
+      "raw_representations": 1,
+      "raw_source_occurrences": [
+        {
+          "start": 14,
+          "end": 17,
+          "source": "i+1",
+          "reason": "unsupported_expression",
+          "representations": [
+            "/statements/1/expr/args/0/items/0"
+          ]
+        }
+      ],
+      "current_flags": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "native_value": [
+        1
+      ],
+      "fresh_warning_bytes": 175
+    },
+    {
+      "id": "array_element_raw",
+      "seed": "1",
+      "raw_representations": 1,
+      "raw_source_occurrences": [
+        {
+          "start": 14,
+          "end": 17,
+          "source": "i+1",
+          "reason": "unsupported_expression",
+          "representations": [
+            "/statements/1/expr/args/0/items/0"
+          ]
+        }
+      ],
+      "current_flags": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "native_value": [
+        1
+      ],
+      "fresh_warning_bytes": 175
+    },
+    {
+      "id": "array_element_raw",
+      "seed": "2",
+      "raw_representations": 1,
+      "raw_source_occurrences": [
+        {
+          "start": 14,
+          "end": 17,
+          "source": "i+1",
+          "reason": "unsupported_expression",
+          "representations": [
+            "/statements/1/expr/args/0/items/0"
+          ]
+        }
+      ],
+      "current_flags": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "native_value": [
+        1
+      ],
+      "fresh_warning_bytes": 175
+    },
+    {
+      "id": "hash_value_raw",
+      "seed": "0",
+      "raw_representations": 1,
+      "raw_source_occurrences": [
+        {
+          "start": 20,
+          "end": 23,
+          "source": "i+1",
+          "reason": "unsupported_expression",
+          "representations": [
+            "/statements/1/expr/args/0/entries/0/value"
+          ]
+        }
+      ],
+      "current_flags": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "native_value": {
+        "n": 1
+      },
+      "fresh_warning_bytes": 175
+    },
+    {
+      "id": "hash_value_raw",
+      "seed": "1",
+      "raw_representations": 1,
+      "raw_source_occurrences": [
+        {
+          "start": 20,
+          "end": 23,
+          "source": "i+1",
+          "reason": "unsupported_expression",
+          "representations": [
+            "/statements/1/expr/args/0/entries/0/value"
+          ]
+        }
+      ],
+      "current_flags": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "native_value": {
+        "n": 1
+      },
+      "fresh_warning_bytes": 175
+    },
+    {
+      "id": "hash_value_raw",
+      "seed": "2",
+      "raw_representations": 1,
+      "raw_source_occurrences": [
+        {
+          "start": 20,
+          "end": 23,
+          "source": "i+1",
+          "reason": "unsupported_expression",
+          "representations": [
+            "/statements/1/expr/args/0/entries/0/value"
+          ]
+        }
+      ],
+      "current_flags": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "native_value": {
+        "n": 1
+      },
+      "fresh_warning_bytes": 175
+    },
+    {
+      "id": "codeblock_body_raw",
+      "seed": "0",
+      "raw_representations": 1,
+      "raw_source_occurrences": [
+        {
+          "start": 11,
+          "end": 14,
+          "source": "i+1",
+          "reason": "unsupported_expression",
+          "representations": [
+            "/statements/0/expr/value/body_ast/statements/0/expr/value"
+          ]
+        }
+      ],
+      "current_flags": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "native_value": null,
+      "fresh_warning_bytes": 0
+    },
+    {
+      "id": "codeblock_body_raw",
+      "seed": "1",
+      "raw_representations": 1,
+      "raw_source_occurrences": [
+        {
+          "start": 11,
+          "end": 14,
+          "source": "i+1",
+          "reason": "unsupported_expression",
+          "representations": [
+            "/statements/0/expr/value/body_ast/statements/0/expr/value"
+          ]
+        }
+      ],
+      "current_flags": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "native_value": null,
+      "fresh_warning_bytes": 0
+    },
+    {
+      "id": "codeblock_body_raw",
+      "seed": "2",
+      "raw_representations": 1,
+      "raw_source_occurrences": [
+        {
+          "start": 11,
+          "end": 14,
+          "source": "i+1",
+          "reason": "unsupported_expression",
+          "representations": [
+            "/statements/0/expr/value/body_ast/statements/0/expr/value"
+          ]
+        }
+      ],
+      "current_flags": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "native_value": null,
+      "fresh_warning_bytes": 0
+    },
+    {
+      "id": "assignment_canonical",
+      "seed": "0",
+      "raw_representations": 0,
+      "raw_source_occurrences": [],
+      "current_flags": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "native_value": 3,
+      "fresh_warning_bytes": 0
+    },
+    {
+      "id": "assignment_canonical",
+      "seed": "1",
+      "raw_representations": 0,
+      "raw_source_occurrences": [],
+      "current_flags": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "native_value": 3,
+      "fresh_warning_bytes": 0
+    },
+    {
+      "id": "assignment_canonical",
+      "seed": "2",
+      "raw_representations": 0,
+      "raw_source_occurrences": [],
+      "current_flags": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "native_value": 3,
+      "fresh_warning_bytes": 0
+    },
+    {
+      "id": "condition_canonical",
+      "seed": "0",
+      "raw_representations": 0,
+      "raw_source_occurrences": [],
+      "current_flags": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "native_value": "no",
+      "fresh_warning_bytes": 0
+    },
+    {
+      "id": "condition_canonical",
+      "seed": "1",
+      "raw_representations": 0,
+      "raw_source_occurrences": [],
+      "current_flags": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "native_value": "no",
+      "fresh_warning_bytes": 0
+    },
+    {
+      "id": "condition_canonical",
+      "seed": "2",
+      "raw_representations": 0,
+      "raw_source_occurrences": [],
+      "current_flags": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "native_value": "no",
+      "fresh_warning_bytes": 0
+    },
+    {
+      "id": "call_argument_canonical",
+      "seed": "0",
+      "raw_representations": 0,
+      "raw_source_occurrences": [],
+      "current_flags": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "native_value": 5,
+      "fresh_warning_bytes": 0
+    },
+    {
+      "id": "call_argument_canonical",
+      "seed": "1",
+      "raw_representations": 0,
+      "raw_source_occurrences": [],
+      "current_flags": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "native_value": 5,
+      "fresh_warning_bytes": 0
+    },
+    {
+      "id": "call_argument_canonical",
+      "seed": "2",
+      "raw_representations": 0,
+      "raw_source_occurrences": [],
+      "current_flags": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "native_value": 5,
+      "fresh_warning_bytes": 0
+    },
+    {
+      "id": "container_canonical",
+      "seed": "0",
+      "raw_representations": 0,
+      "raw_source_occurrences": [],
+      "current_flags": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "native_value": [
+        3,
+        {
+          "n": 2
+        }
+      ],
+      "fresh_warning_bytes": 0
+    },
+    {
+      "id": "container_canonical",
+      "seed": "1",
+      "raw_representations": 0,
+      "raw_source_occurrences": [],
+      "current_flags": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "native_value": [
+        3,
+        {
+          "n": 2
+        }
+      ],
+      "fresh_warning_bytes": 0
+    },
+    {
+      "id": "container_canonical",
+      "seed": "2",
+      "raw_representations": 0,
+      "raw_source_occurrences": [],
+      "current_flags": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "native_value": [
+        3,
+        {
+          "n": 2
+        }
+      ],
+      "fresh_warning_bytes": 0
+    },
+    {
+      "id": "codeblock_canonical",
+      "seed": "0",
+      "raw_representations": 0,
+      "raw_source_occurrences": [],
+      "current_flags": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "native_value": "ok",
+      "fresh_warning_bytes": 0
+    },
+    {
+      "id": "codeblock_canonical",
+      "seed": "1",
+      "raw_representations": 0,
+      "raw_source_occurrences": [],
+      "current_flags": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "native_value": "ok",
+      "fresh_warning_bytes": 0
+    },
+    {
+      "id": "codeblock_canonical",
+      "seed": "2",
+      "raw_representations": 0,
+      "raw_source_occurrences": [],
+      "current_flags": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "native_value": "ok",
+      "fresh_warning_bytes": 0
+    },
+    {
+      "id": "literal_data",
+      "seed": "0",
+      "raw_representations": 0,
+      "raw_source_occurrences": [],
+      "current_flags": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "native_value": "i=i+1; i < 1",
+      "fresh_warning_bytes": 0
+    },
+    {
+      "id": "literal_data",
+      "seed": "1",
+      "raw_representations": 0,
+      "raw_source_occurrences": [],
+      "current_flags": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "native_value": "i=i+1; i < 1",
+      "fresh_warning_bytes": 0
+    },
+    {
+      "id": "literal_data",
+      "seed": "2",
+      "raw_representations": 0,
+      "raw_source_occurrences": [],
+      "current_flags": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "native_value": "i=i+1; i < 1",
+      "fresh_warning_bytes": 0
+    },
+    {
+      "id": "comment_data",
+      "seed": "0",
+      "raw_representations": 1,
+      "raw_source_occurrences": [
+        {
+          "start": 1,
+          "end": 15,
+          "source": "# i=i+1; i < 1",
+          "reason": "unsupported_expression",
+          "representations": [
+            "/statements/0/expr"
+          ]
+        }
+      ],
+      "current_flags": [
+        0,
+        1,
+        1,
+        0
+      ],
+      "native_value": "ok",
+      "fresh_warning_bytes": 0
+    },
+    {
+      "id": "comment_data",
+      "seed": "1",
+      "raw_representations": 1,
+      "raw_source_occurrences": [
+        {
+          "start": 1,
+          "end": 15,
+          "source": "# i=i+1; i < 1",
+          "reason": "unsupported_expression",
+          "representations": [
+            "/statements/0/expr"
+          ]
+        }
+      ],
+      "current_flags": [
+        0,
+        1,
+        1,
+        0
+      ],
+      "native_value": "ok",
+      "fresh_warning_bytes": 0
+    },
+    {
+      "id": "comment_data",
+      "seed": "2",
+      "raw_representations": 1,
+      "raw_source_occurrences": [
+        {
+          "start": 1,
+          "end": 15,
+          "source": "# i=i+1; i < 1",
+          "reason": "unsupported_expression",
+          "representations": [
+            "/statements/0/expr"
+          ]
+        }
+      ],
+      "current_flags": [
+        0,
+        1,
+        1,
+        0
+      ],
+      "native_value": "ok",
+      "fresh_warning_bytes": 0
+    },
+    {
+      "id": "quoted_helper_known",
+      "seed": "0",
+      "raw_representations": 0,
+      "raw_source_occurrences": [],
+      "current_flags": [
+        0,
+        0,
+        0,
+        3
+      ],
+      "native_value": "return(inner); if(true)",
+      "fresh_warning_bytes": 0
+    },
+    {
+      "id": "quoted_helper_known",
+      "seed": "1",
+      "raw_representations": 0,
+      "raw_source_occurrences": [],
+      "current_flags": [
+        0,
+        0,
+        0,
+        3
+      ],
+      "native_value": "return(inner); if(true)",
+      "fresh_warning_bytes": 0
+    },
+    {
+      "id": "quoted_helper_known",
+      "seed": "2",
+      "raw_representations": 0,
+      "raw_source_occurrences": [],
+      "current_flags": [
+        0,
+        0,
+        0,
+        3
+      ],
+      "native_value": "return(inner); if(true)",
+      "fresh_warning_bytes": 0
+    },
+    {
+      "id": "raw_statement",
+      "seed": "0",
+      "raw_representations": 2,
+      "raw_source_occurrences": [
+        {
+          "start": 1,
+          "end": 11,
+          "source": "my $host=3",
+          "reason": "unsupported_expression",
+          "representations": [
+            "/statements/0/expr"
+          ]
+        },
+        {
+          "start": 20,
+          "end": 25,
+          "source": "$host",
+          "reason": "unsupported_expression",
+          "representations": [
+            "/statements/1/expr/args/0"
+          ]
+        }
+      ],
+      "current_flags": [
+        0,
+        1,
+        1,
+        0
+      ],
+      "native_value": 3,
+      "fresh_warning_bytes": 0
+    },
+    {
+      "id": "raw_statement",
+      "seed": "1",
+      "raw_representations": 2,
+      "raw_source_occurrences": [
+        {
+          "start": 1,
+          "end": 11,
+          "source": "my $host=3",
+          "reason": "unsupported_expression",
+          "representations": [
+            "/statements/0/expr"
+          ]
+        },
+        {
+          "start": 20,
+          "end": 25,
+          "source": "$host",
+          "reason": "unsupported_expression",
+          "representations": [
+            "/statements/1/expr/args/0"
+          ]
+        }
+      ],
+      "current_flags": [
+        0,
+        1,
+        1,
+        0
+      ],
+      "native_value": 3,
+      "fresh_warning_bytes": 0
+    },
+    {
+      "id": "raw_statement",
+      "seed": "2",
+      "raw_representations": 2,
+      "raw_source_occurrences": [
+        {
+          "start": 1,
+          "end": 11,
+          "source": "my $host=3",
+          "reason": "unsupported_expression",
+          "representations": [
+            "/statements/0/expr"
+          ]
+        },
+        {
+          "start": 20,
+          "end": 25,
+          "source": "$host",
+          "reason": "unsupported_expression",
+          "representations": [
+            "/statements/1/expr/args/0"
+          ]
+        }
+      ],
+      "current_flags": [
+        0,
+        1,
+        1,
+        0
+      ],
+      "native_value": 3,
+      "fresh_warning_bytes": 0
+    }
+  ],
+  "alias_proof": {
+    "actual_shared_control_references": 2,
+    "repeated_distinct_source_occurrences": 2,
+    "supplemental_scope": "one AST-only repeated-action fragment; two existing source ASTs"
+  },
+  "traces": 16,
+  "tests": {
+    "t/actionir_ast_parser.t": 23,
+    "t/noncurrent_helper_metadata.t": 2,
+    "t/generated_source_contract.t": 12,
+    "t/trace_actionir_pipeline.t": 5
+  },
+  "top_level_TAP_tests": 42,
+  "controls": [
+    {
+      "name": "readiness hidden",
+      "reason": "current readiness tuple"
+    },
+    {
+      "name": "raw child erased",
+      "reason": "current raw AST sources"
+    },
+    {
+      "name": "raw span shifted",
+      "reason": "raw source span"
+    },
+    {
+      "name": "source replaced",
+      "reason": "source identity"
+    },
+    {
+      "name": "fresh input replaced",
+      "reason": "fresh emitted identity"
+    },
+    {
+      "name": "canonical value wrong",
+      "reason": "current observed value"
+    },
+    {
+      "name": "host warnings lost",
+      "reason": "actual retained host warnings"
+    },
+    {
+      "name": "deferred failure trace lost",
+      "reason": "actual retained deferred failure trace"
+    },
+    {
+      "name": "shared condition hidden",
+      "reason": "control shared condition identity"
+    },
+    {
+      "name": "repeated occurrence collapsed",
+      "reason": "distinct repeated source occurrences"
+    },
+    {
+      "name": "failed TAP hidden",
+      "reason": "TAP exit/membership"
+    },
+    {
+      "name": "reached branch removed",
+      "reason": "reached raw passthrough branch"
+    }
+  ],
+  "tracked_inputs": {
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.0-observe.pm": "db95711bc94aa6c774576647c4ad83b98d526b03efc6fa583ad1b1075a9b1c9f",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.0-ast-alias.json": "fcd6653abf181353dadf720e2837dbca7601c93f1fe9b0df0ffbb5df3bba7e73",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.0-ast-alias.pl": "cb637ec365321e78e35236c094cd10de2b3b87df073d36ee49498adc017eff9a",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.0-capture.py": "7b174aa490201bdd6b9d20e3cfc72eb3945711b93c59a4fd6c0181913f3c4886",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.0-cases.json": "17482f7525232c8b8398694c35869f6687111045134cd45cff016bf5a123b850",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.0-claim.py": "f2eed337f4eb69daa11f8ba8bb90a816725fa0ea80e574a9e83ce2e4a84bd3bd",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.0-fresh.pl": "5c93b169c6289f6fe4ced58a473e55b944688adb088e9cb4553122c827e63645",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.0-observations.json": "a7e4b50c5c1f2d6aa1cabc069c013ed80010dbd336fff50dac11f60d8cafa43a",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.0-probe.pl": "861b93541dbdde1a1ee034b9f7ba3355dffd750a5ce709c6bbab858686382aff",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.0-review.py": "87fa110b89bf933e8d1808f37d547de2f29413be5693e2eb0cf8a8940559e1b9",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.0-tests.json": "8aff839580b7dac5d10ef2fdf4b5765866d5f53e09ec4773d44ecac2ee5bd8fa",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.0-tests.py": "7a4ddee8d43d4f3bb5fd0e774130999849e626a1ab7576474f05da8a9af3f142",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.0-trace-capture.py": "4b24198a8cab10a226773294589bac3f2395702a363cc2e22b6a0b77f78a8305",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.0-trace.json": "8190b7b8b59861faf045d60124484d03f7976d0b44cac16d118e6269f47de651",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.0-trace.pl": "2fad48988effd1a3f62df012fd41d1a166d19d65f01ea5c59d67b84b919d32e2",
+    "perl/LinkedRE.pm": "8f3bb342f25b1d0f9c8986e2477d1b00d7bb1359cf38b9d209f680d216896e12",
+    "perl/LinkedSpec.pm": "693bf62c48a850ed1f0a32400ad96744a9f2bcaaf4dff53e16f36a4127cf1ae2",
+    "perl/LinkedSpec/ActionIR/AST.pm": "5d5fa7e8f130f1c0eef39f7ce8129b01563467aa339152073ef4bcb9ebd30dfd",
+    "perl/LinkedSpec/ActionIR/AST/Parser.pm": "8c3e1708278b3e199eb30a7095ca0e70825c01ba4b5a46612e77f7cc8f5dff50",
+    "perl/LinkedSpec/ActionIR/ArrayPipeline.pm": "a9bf7048ecfef2ab9d50c024b1b84a1ad525e64fefde01caab5632168be9b1e7",
+    "perl/LinkedSpec/ActionIR/CanonicalEvents.pm": "2a820f35919ea0bbd1ab9f29bfb3e7cf287813d7636ca3f3a2f5e7c1e97f51ea",
+    "perl/LinkedSpec/ActionIR/CanonicalEvents/Core.pm": "a56a8caa2b1a4e151ab4171a2e8af515a3c187b38ce0280a9b1c4ae84706052d",
+    "perl/LinkedSpec/ActionIR/Contracts.pm": "f062292c073f37817484fd77e54d763f9595618ecd7d05a5d592a4eca621c361",
+    "perl/LinkedSpec/ActionIR/ControlFlow.pm": "84171511b0b5a6511bce4d8510c741d2e5275afe54e40dc9cecb62299a5d5f6a",
+    "perl/LinkedSpec/ActionIR/DeclareMethod.pm": "6ed978febab3ccd85447a2a1be5c1c9e96c255242269b356abe5fb8881259ba3",
+    "perl/LinkedSpec/ActionIR/Diagnostics.pm": "0574e93aeb14a63158d5af08d41ff1775fe263030d1557e59047f1cadb770712",
+    "perl/LinkedSpec/ActionIR/FlowExpr.pm": "47516700d0cdb67f4183425053a9886d9ae0906a79de6cb1590e4f9e2dfff3f2",
+    "perl/LinkedSpec/ActionIR/MethodExpr.pm": "d4a39f686554d943272aabb9e60a4c4c0c49af1b279a105ed05cc82750acbceb",
+    "perl/LinkedSpec/ActionIR/MethodLowering.pm": "7418677f2fb9e2f9ca39c1606cff888826b788fd2ff8c911fba75d32b9b365b5",
+    "perl/LinkedSpec/ActionIR/ProgressiveSpanDispatch.pm": "e357772a2b9d9aae0c5becbfcb3bf238ff4ddc1df466c7063aeef69a1cab0ec5",
+    "perl/LinkedSpec/ActionIR/RewritePipeline.pm": "221597b09903211a883b2072f90783e92fb0f2491e17f0e797b623f27e5f27c9",
+    "perl/LinkedSpec/ActionIR/Scanner.pm": "2e991add41a4325aec65eaa1a7c77904db2b5497292d134bf66d081cbc7579a6",
+    "perl/LinkedSpec/ActionIR/Scanner/FlowRules.pm": "18463d7b84ee525a554e9781288b993f6d39b38d24e25ecbca2d53ae806417d6",
+    "perl/LinkedSpec/ActionIR/Scanner/LegacyRules.pm": "a78386909d43cfd0e0bbb19e41243564007acfc53edf6f760131dd8f1f51fed9",
+    "perl/LinkedSpec/ActionIR/Scanner/PrimitiveBasicRules.pm": "dc987808055afe2843f5c61da0526893ebcfa3028fdddf4f64ad41c77cc9fd7d",
+    "perl/LinkedSpec/ActionIR/Scanner/PrimitivePipelineRules.pm": "17dcac93902068341f5d529dd6bd360616da0f3542ee6345df0d51f1f619eef2",
+    "perl/LinkedSpec/ActionIR/Scanner/RecognitionTransactionRules.pm": "2ad196c9a6e8f8e4872fbc5164ac9b5255cb94b1d6b52028345f3a070f9f0580",
+    "perl/LinkedSpec/ActionIR/ScannerCore.pm": "507bef74ab642d4f65e9222b2687a5f955f279fdd03403ab2ef83c3005c7766e",
+    "perl/LinkedSpec/ActionIR/StagedParseJob.pm": "63b4b211d6f7f94ffa398f4ee07316fc717387faec443e9e5299e0186e8627cc",
+    "perl/LinkedSpec/ActionIR/StatementSplit.pm": "32f2aec5d3b815155453183fc1f0def94e2fc83d7c05fefb9b6b101133e8a94a",
+    "perl/LinkedSpec/ActionIR/StatementSplit/Core.pm": "0bd4d14f36d052e18f95048de9ed2429cf8106685b184b7774681894e36dfb23",
+    "perl/LinkedSpec/ActionIR/StatementSplit/Mode.pm": "be7e4ba728ffa06ec021ac1d6cba57ef612411697adfe621852f0f9ebfe14bd0",
+    "perl/LinkedSpec/ActionIR/Trace.pm": "e005c842ec16e8c8292b75b98a28d293a1178458a1a93bce1faad371a080dace",
+    "perl/LinkedSpec/ActionIR/ValueExpr.pm": "5da83310d071b2c115496e50686a8510ca829d0e9590b2b244f95fcea8d95459",
+    "perl/LinkedSpec/BindingRuntime.pm": "4168ea0bb10dbe22f7be409e5b58087534ae42cb14d77d254608df1650bfdc91",
+    "perl/LinkedSpec/BootstrapSpec.pm": "72525deda4f91586a5acd7de3b302dee1d989ba9e03f4c9f9740b1c3175ae938",
+    "perl/LinkedSpec/BootstrapSpec/Core.pm": "8375456a2f2fab3e0682eaf8901e815ac156d883d3a39113e66b90076b9e5c14",
+    "perl/LinkedSpec/CallableContract.pm": "b985f546158bc9cba232c93ed651b65016295c77b7390cda620096b3604fd781",
+    "perl/LinkedSpec/CodeblockRuntime.pm": "e03f57b0e7150a6b6c8d97ce5db8f9f1ab25690008d6c23abc955f91d8421bb7",
+    "perl/LinkedSpec/Compiler.pm": "da360b1080a830e693cfd24f1e96f516c15d288363f8c9b6c59187d6b64370d5",
+    "perl/LinkedSpec/CompilerState.pm": "c81730a5653576574ce61879d37df2b1e0472e41f35f5b5ce87f895a52862aa4",
+    "perl/LinkedSpec/EntryRuleSelection.pm": "ce30112d405908bc0589d0ef5e5b4fa9299c0dbd758f760a99eb84e5acccea25",
+    "perl/LinkedSpec/GeneratedSource.pm": "f4a446847c241973278d3c1c30407047bb9b53fdf75ba5f9830e874290e66f68",
+    "perl/LinkedSpec/HandlerVariantEmitter.pm": "22382f132066572f72c4f745bd6f356439e26c8b55171af57ec531b06682327d",
+    "perl/LinkedSpec/InterMatchGapRuntime.pm": "daef20c20a491ceaa50306167a8880602fe68c7228ade17f486f346686d31976",
+    "perl/LinkedSpec/MCPContract.pm": "06babcb9021a343d6111a447c39105dc1e29cd166e89ccac780f4d132af500ce",
+    "perl/LinkedSpec/MCPContractRuntime.pm": "09fb23f0fa66575811ee42e1102f145c76715e55151cbf2451035c468bc64a35",
+    "perl/LinkedSpec/MCPServer.pm": "df2bd23f8ae66eb7a0e028e10b43c80893309f5091eb8f90f533d5adca0aad8d",
+    "perl/LinkedSpec/MCPWire.pm": "1760f96a3f542d41d302eb6c39438f74fcab9dde8f48c59c49654e80d6a8af56",
+    "perl/LinkedSpec/Numeric.pm": "584f04b4ce883ce82948b8f2543da73167ce76ca4e62cb6c6edea80f5a519308",
+    "perl/LinkedSpec/OwnerDispatch.pm": "19247f57117f66b4cf4ca2b3205373b2167dc4d9790b89dbba8a5a43f94d58ca",
+    "perl/LinkedSpec/ParserFactory.pm": "d8cad7309e0650b59b1221b636f7eff7514cf49ad26c8f512ec6c837af3ef8bc",
+    "perl/LinkedSpec/PluginBridge.pm": "51118e069fe2d95dd9d0aa8b7fbf427c3167db2724bb35dfe9a9202c47925c21",
+    "perl/LinkedSpec/PluginRegistry.pm": "f84ba93c083e09a38fd8e01a9ff65b9b71b9f2c23ac4c987a854337e4a86425a",
+    "perl/LinkedSpec/ProgressiveSpanDispatch.pm": "3f3612b6fb665f9e8678de54a5c876d9b5519bbffeb81e50b29f5262488da5cd",
+    "perl/LinkedSpec/ProgressiveSpanDispatchPolicy.pm": "36b5bf0a73c53df33ced49e53e7399311a0029de4379aef17d8dec86a7a33eb3",
+    "perl/LinkedSpec/ProgressiveSpanDispatchRuntime.pm": "451981a723f5f7383875f51c3e1093ae9898396efab5db2d39a22ac93b6d5a90",
+    "perl/LinkedSpec/RecognitionTransaction.pm": "308543bb1194ba4c6b8837a25346076e03ac55a76cd0522f0b8c8127e7e5618d",
+    "perl/LinkedSpec/RecognitionTransactionPolicy.pm": "7946837d224b579f1f3e9fc2b6a5e785994ada3ac4fffe8d60601665a77fc528",
+    "perl/LinkedSpec/RecognitionTransactionRuntime.pm": "d9b36b3d692a1414227d6a43e342d97785c889c0a8259523d0ecb7bdd72e5923",
+    "perl/LinkedSpec/RecursiveObservationPolicy.pm": "ac1bcc4654e108bdd7f646726f474ed48d9fc613bbdb864a16b6e6bc4568aaa9",
+    "perl/LinkedSpec/Resolver.pm": "5260447fff3e6d9c7dd4d4b8d971991d640efec979c49fde62c1bc41da55cce0",
+    "perl/LinkedSpec/RuleIR.pm": "5cdd4065a6f0e5165863146c4b4693fa54168344f6225dd9a1748e096e331997",
+    "perl/LinkedSpec/RuleIR/EmitContext.pm": "6940dcf0be03b65e3d0a69f3efec41e1dca37524930ef20368dae94d99a23a9b",
+    "perl/LinkedSpec/Runtime.pm": "d6f430b97936639be7c00711af796c493b95c65e6b9c168c965942dd8bab4b26",
+    "perl/LinkedSpec/RuntimeContext.pm": "740bfbea87e3e4ba9f8f541c08f495ad43342f2d27599fbc834bbbd47a8ebab8",
+    "perl/LinkedSpec/RuntimeDiagnosticOutput.pm": "aa44df92d185bf107d91752aa8a4cfabde5f998ffac6633bc72dab0e59851653",
+    "perl/LinkedSpec/RuntimeLogical.pm": "e2b7b9eb8dc7b8a66260edfcc5dbc1959dd7e0d3dbc3f4a973fcbd3a5333dad1",
+    "perl/LinkedSpec/RuntimeSemanticObservation.pm": "39eab6327669426d497827ce80af0353bc88ce32fb333266c18fe4e5cd2ab158",
+    "perl/LinkedSpec/SemanticCallProjection.pm": "c03259c6c01b7105d81557699e959bf36825545aa068df4ef877a00554c121fc",
+    "perl/LinkedSpec/SemanticIndex.pm": "d7301d1efb58fd5f282e9a27ed958a897ab34e6c034f5e30f8e11045ebff029f",
+    "perl/LinkedSpec/SemanticQuery.pm": "740ab20cdae43f07d56bcd0c02d18ddf83b0b449a742b4fee775b1e81f64f210",
+    "perl/LinkedSpec/SemanticRuntimeProjection.pm": "3820b4d7bd4bf035eebd78667f2955bfc8f120bcc8185abc8234821948314764",
+    "perl/LinkedSpec/SemanticSourceMap.pm": "f8dcc03277bbca0f8f964b966143029bdb3153215d8e2cfb9bc9686c7e344306",
+    "perl/LinkedSpec/SemanticStaticProjection.pm": "1424f9aa507a25b70c213515ee216885d8f5bdd0b12294004af5e5605d4d9822",
+    "perl/LinkedSpec/SourceLocation.pm": "c494440264af91bb5a1ba196cc5e5e7e92d367e63fe3a249fd5a050fb1d23793",
+    "perl/LinkedSpec/SpecEntry.pm": "47d2139ff180d959692b78079aff9097970e3d1ee977d34595a4de4c21dc17c1",
+    "perl/LinkedSpec/SpecLoader.pm": "2465593661da9a3d60df04c5730d718742680a8b9103cbd5f6b1183f6b7700ee",
+    "perl/LinkedSpec/StagedASTEnrichment.pm": "6a69d39e1d9de7b849ea429e532232d61f112755cf9b87ba2d16e1291e603f53",
+    "perl/LinkedSpec/StagedASTEnrichmentRuntime.pm": "7d01e18c88ef9de45bf9049a2f3607800a4014aba8a1b4e8ad3fbc99cfac27b3",
+    "perl/LinkedSpec/StagedParseJob.pm": "c9ecca71a9e4a79c48ca94d3569be2ff4560443363cf594d70269f060daf2407",
+    "perl/LinkedSpec/StagedParseJobPolicy.pm": "d08855a2f5c35e00b73cc23f2cc8e0a88283b9c4a8a1cc7500a5efe743ce53f1",
+    "perl/LinkedSpec/StagedParserRegistry.pm": "0f5f9de9b8af952a1d4eadd20b39490ce3fc897a18be9a6d391f9808318a713b",
+    "perl/LinkedSpec/Trace.pm": "f8041e80c7f8342a0497710b130a14085c3dddd0d1ee67eeb04f51dd196ffe22",
+    "perl/LinkedSpec/UnicodeCaseMapping.pm": "944386217a59c811b4333df9070d222e07ba9d5ed8eb163ed2fdcd4c5c73889f",
+    "perl/LinkedSpec/UnicodeXIDContinue.pm": "db2185e0a2366849c126d76b27ad5591eee9463ea5e825e815e9feabe97b8947",
+    "perl/LinkedSpec/UserFunctionRegistry.pm": "805626ff7aeebdbb00565fa102afccdd3e6c8126e2e341f44bfeff1d0cd5361c",
+    "perl/LinkedSpec/Validation.pm": "ac8623e87c7157812e99f8b729fa136d0ff2fe2dc66cfbbc9a91fddd818f49c9",
+    "perl/PPlugin.pm": "7cf5f3e1ff7465a2307b9a2ab8efded717648a188bf5f0dfacaac569370c36d1",
+    "perl/PathSearch.pm": "ad943a8335f1bbb031214e3c60ea2b97cd8440eed68dacac218062c42e7eb255",
+    "perl/env.conf": "45ed4c049b260fed7bf5e9ced195e259b9327834ff08def0581d1f01ffe60591",
+    "perl/gdcheck.pl": "e12ddba1c2a252c91ba48f24ad888e7693f92bdb167a791e847025fe41f153f5",
+    "perl/htmlcss_driver.pl": "9abd0b9bc521b97df100517c547da60b82c6dcd947726733c6001d420582c67c",
+    "perl/ptchange.pl": "13336081ceff048e5172169d4e9bad5997b245c10170ef30f81220dcaae30062",
+    "specs/BNF.spec": "7e7436b5d4d5fc5e46a074303130bd809dcd741a082b2d168a6a02a9c941b3eb",
+    "specs/DT.spec": "4937f9848b7125bc095a414b7ec70cd150fcd9c4d3d08c8ef0195e063572533a",
+    "specs/Lispish.spec": "1aca70b0a5dca6f2d788f07275e4746426964062ccbe6dffcc129594807583ab",
+    "specs/SExprDocumentV1.spec": "01a781078d4282f832bdbff37d8194aef9ef688bdeffe874e159cfe4b26ca3c9",
+    "specs/ds_vhistory.spec": "86c24f62739cd6099b12be742511f77a12b128f3cbb2080f872157fb8ef26477",
+    "specs/ebnf.spec": "a9082820aed7e3a0f934a25c6e31e71f48f6604a6a2effe804625a8ff1eda054",
+    "specs/hlink_substitution.spec": "654d5c88a07bb9a067de3c13d7fa3a7616092d2c15be522f23a7ce6b8205172e",
+    "specs/ifelse.spec": "a5dc04f47d03b8f405accb9b6e9d88c5f0ea1c1a19cf8d91f0d82bfe7ca151e5",
+    "specs/lib_reader.spec": "5705d98ddde28ad2c9c36573b1429039ea04f6551698b2381b79d400b84e12fb",
+    "specs/operators_try.spec": "51da411557f83ff7ff9261752499132a65c8d246b89f74cb0b268f155ae6f811",
+    "specs/portmap.spec": "8eaa69168df3331386ae46f898a27166f722e5bbabced6fa6fdad7c0d798c7c6",
+    "specs/pplugin.spec": "5f165a65b8fac5e1bb55997eb2dfa0be2bc264d7b3e8017eb759764202c1b31c",
+    "specs/regdef.spec": "61a244abd049ed1537d923d1526f3250f8cc5b8ea4351691b7ce0a4eca41f192",
+    "specs/sdce.spec": "ff3ea59523287f2a1c2f761a1cdf056bde9db3111e97b3a8b276425b44fcd32d",
+    "specs/simenv.spec": "b0566013312ae33631de4a52166f8f81d944ef12b09f4bdedbeab62eed8d36fa",
+    "specs/spec.spec": "d752521e6de8a91e450d75176504f1afe168a06f458c8a542179e2d5eb46f2ee",
+    "specs/tablegrep.spec": "39d232ce1f7f87f3ab2bbc226f864dcca487bc103b27c3e55ab4ac2334660882",
+    "specs/tclite.spec": "bdf7e110ecc3a093f266ce8ddd31b1ffff6880cf8a202e607a226351be3107b3",
+    "specs/tkgui.spec": "db1671535cf2747a46e1be80577de2155785b900bb41c5d4128768204a272465",
+    "specs/user_function_definition.spec": "621f766229cc93c05649a465217223646f765228917d934b6d92365f0e6ecbae",
+    "specs/verilog.spec": "3d0a7dac512941503e6de4bd0ef1c747d61e555ca88df410346dc2dd80b7e134",
+    "specs/vhdl.spec": "1bd4b995847f6b1ade72fd6a9f3c7bd531218ac97d3cd643f9633d4671f167e6",
+    "t/actionir_ast_parser.t": "7a84dcda10f3b4a86ccaaa82157168291ae741a213e9ec269596a1c284e76413",
+    "t/generated_source_contract.t": "4f4620c2d605d62ff3f6afd65930452a0e6fb74dc5f7e634d2aaa6da2ef6168a",
+    "t/noncurrent_helper_metadata.t": "89e8e2c405efe749cde97d1953fbdda8e5ff033f57e68e1e23bbf229d052ecbd",
+    "t/trace_actionir_pipeline.t": "4293556db2cb38b545bd795b565473d28e1322c37b32e56b5906d735f84fcd17",
+    "tools/project_data_env.sh": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73",
+    "tools/project_data_run.sh": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f",
+    "tools/run_python_project_data.sh": "0bc03bb8f4ce550397da9fda086215a1d9f6f452ec413605fbcb8976c06af604"
+  },
+  "limits": "Current source-bound diagnosis, not a runtime/schema repair. Six infix host results/warnings and a deferred typed failure are not portable positives. Desired comment data oracle intentionally fails current AST classification. Condition aliases are two representations of one source occurrence; repeated equal-text distinct spans stay distinct. Three fixed seeds are named observations, not a probability interval. Raw streams are preserved; no warning/time projection or equality assertion for stderr. One supplemental AST-only fragment has no added native/fresh route. No function-body/shipped-spec census, arbitrary syntax, infix admission, dispatcher/full composition or other-backend promotion."
+}

@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-10-03 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.0: source-bound nested raw-readiness diagnosis
+
+Sixteen exact sources across three fixed seeds retain48 native/fresh pairs and16 actual traces. Seven sources/21 pairs report ready1/raw0/fallback0 while containing unsupported raw AST descendants; six host-warning results and the deferred original-object typed failure stay intact. Four unchanged suites pass42 top-level TAP tests; twelve actual evidence corruptions reject. Shared control aliases are one source occurrence, repeated distinct spans remain separate.138 claim inputs/15 producers and four rendered source-identical examples bind diagnosis. No compiler/runtime/grammar/schema/authority/CI change. Original-source reporting repair .7.1 is selected; quoted data .7.2 and new source-comment classification .7.3 remain scheduled before dispatcher. Three stale duplicate frontier rows removed; prior .6.1 claim freezes at actual834e0a3dd.
+
 ## 2026-10-03 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.1: preserve pending residual occurrences
 
 Only CanonicalEvents production changes: retain ordered raw-key/reference occurrences alongside queues; replay only pending heads after authored/exclusive top-level consumption. Equal raw A/B/A remains interleaved without public fields or guessed source order. Exact old-owner15-test RED has only order failing; current unit, actual Phase0 child and11 full suites/424 top-level TAP tests pass. Nine exact sources/27 baseline-current native-fresh comparisons have deterministic full records and unchanged measured consumers;15 traces/ten evidence controls pass.325 claim inputs bind30 producing instruments; three executed examples render. First canonical gate rejected the new Phase0 insertion; exact historical-audit normalization recovers prior bytes and rejects six Phase0 drift controls. Isolated134-input/84613241-byte archive replay retains zero original reads/zero tracked writes and27 governance controls. Canonical receipt for the restaged candidate is required. Raw/quoted readiness .7 remains open.

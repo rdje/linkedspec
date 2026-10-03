@@ -70,3 +70,14 @@ The initial diagnostic instrument incorrectly used parse_action_expr on an entir
 statement sequence. It raised nested_write_root_not_addressable during observation.
 Using parse_action_block corrects that probe-only error; the failed producer version
 and log remain captured. It is not evidence of an accepted compiler regression.
+
+## Reached-branch clarification — 2026-10-03
+
+The conditional description of ValueExpr's final `source_passthrough` above is
+not the reached branch for the independently measured `i=2; i=i+1; return(i)`.
+The `.0.7.0` actual lowering trace reaches FlowExpr's `passthrough_no_call` with
+`i+1`; ValueExpr then reports `flow_composite_value`, and both canonical raw
+fallback decisions are skipped. [[perl-nested-raw-readiness-diagnosis]] preserves
+the exact source, AST, consumer trace, source-occurrence policy and separate
+quoted/comment defects. No production repair or infix admission follows from
+this clarification.

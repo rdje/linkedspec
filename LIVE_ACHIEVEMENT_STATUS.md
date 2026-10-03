@@ -2,17 +2,19 @@
 
 ## Current Activity
 
-Full PNT: residual scan occurrence order repaired under canonical landing condition; nested raw-readiness diagnosis is next.
+Full PNT: nested raw-readiness diagnosis complete; source reporting repair .7.1 is next.
 
 ## Latest Completed Slice
 
-`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.1`:9 exact sources/27 before/current native-fresh comparisons, nine stable full sequences,15 current consumer traces and eleven full suites/424 top-level TAP tests pass. Exact before-owner queue has only A/B/A failing; current15-test regression and actual Phase0 child pass. Ten evidence controls reject;325 claim inputs/30 producers and three rendered examples bind proof. Exact staged canonical receipt governs compiler acceptance.
+`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.0`:16 sources/48 native-fresh pairs,16 traces and42 top-level TAP tests pass; twelve evidence controls reject. Seven sources falsely report ready despite nested raw nodes. Actual reference identity distinguishes shared conditions from repeated spans; deferred failures/warnings remain exact.138 claim inputs/15 producers and four executed rendered examples bind diagnosis. No production/runtime changes; quoted .7.2 and comment .7.3 defects remain owned.
 
 ## Next Action
 
-Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.0 from clean canonical HEAD. Diagnose nested raw false-ready reporting, then own .7.1 repair and .7.2 quoted false blockers before dispatcher/full composition. Due hygiene .8 is complete; recovery/purge remains prohibited.
+Activate .7.1 from clean HEAD. Declare original-source diagnostics/provenance paths and canonical tier, census caller/shipped-spec compatibility, then prove readiness RED/GREEN. .7.2 quoted masking and .7.3 source-comment classification follow before dispatcher/full composition. Recovery/purge stays prohibited; due hygiene .8 is complete.
 
 ## Recent Completions
+
+- `2026-10-03` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.0` freezes nested raw/source-occurrence diagnosis and owns comment classification.
 
 - `2026-10-03` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.1` preserves pending scan occurrences; exact canonical receipt gates landing.
 
@@ -43,8 +45,6 @@ Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.0 from clean canonical HEAD. D
 - `2026-10-03` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.2.0` retains exact134-input census/controls and bounded recovery plan.
 
 - `2026-10-03` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.1` binds explicit normalization succession and repairs exact historical audit evolution.
-
-- `2026-10-02` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.0` diagnoses unsupported infix and selects an explicit canonical successor; raw-readiness/audit defects remain owned.
 
 ## History
 

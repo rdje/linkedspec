@@ -254,3 +254,58 @@ traces. Its read-only reviewer rejects corrupted source/order/population/consume
 it never overwrites captures. The permanent regression is also invoked by Phase 0. Compiler
 landing requires canonical acceptance of the exact staged candidate. Three fixed seeds are
 named observations, not a probability estimate or another backend's admission.
+
+## Reading portability diagnostics
+
+Perl readiness reporting currently misses some unsupported expressions nested
+inside recognized helper statements. Arithmetic and comparison use call form.
+These two exact measured sources illustrate the difference:
+
+```spec
+Top:: I { i=2; i=i+1; return(i) }
+```
+
+```spec
+Top:: I { i=2; i=num_add(i,1); return(i) }
+```
+
+The first contains an unsupported raw `i+1` AST child. It retains host Perl
+behavior and returns1 on both measured routes; the fresh emitted route also
+reports bareword/numeric warnings. Its ready1/raw0/fallback0 metadata is a known
+defect. The second uses the admitted helper and returns3 with no raw child.
+Use canonical calls; infix source is not portable authoring.
+
+The same reporting defect reaches deferred bodies:
+
+```spec
+Top:: I { cb={|i| i=i+1; return(i) }; return(cb(2)) }
+```
+
+Although metadata says ready, actual invocation fails with
+`unsupported_codeblock_actionir` for `raw_perl`. Native context and fresh
+generated-source errors expose that failure through their own public channels;
+native handler evaluation also emits its normal failure trace. A ready flag
+does not erase an observed unsupported body.
+
+Data must also be distinguished from executable source. This measured ordinary
+action returns ok, but the current AST classifies the comment as raw and reports
+a false portability blocker:
+
+```spec
+Top:: I { # i=i+1; i < 1
+ return("ok") }
+```
+
+Source-comment classification has a separate repair owner. This ordinary LF
+case establishes no deferred/function comment support. The earlier quoted
+string example likewise remains data despite phantom helper telemetry.
+
+The current diagnosis retains16 full sources/48 native-and-fresh pairs under
+three named seeds and16 lowering traces. Seven sources have hidden raw
+dependencies. Conditions may appear twice in serialized ASTs because condition
+and argument fields share a node; that is one source occurrence. Equal text at
+different spans remains separate. These distinctions guide the reporting
+repair without changing event order, source semantics or the accepted grammar.
+The diagnostic checkpoint preserves complete streams and its original policy
+oracles. No shipped-spec census, dispatcher/full-composition or other-backend
+admission is established by this bounded diagnosis.
