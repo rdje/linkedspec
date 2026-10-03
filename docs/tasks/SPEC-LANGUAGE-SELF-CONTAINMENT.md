@@ -1099,7 +1099,7 @@ used by ordinary `.spec` syntax on every backend.
   Root cause: perl/LinkedSpec/CodeblockRuntime.pm _eval_call handles a narrow helper list and otherwise tries a bound-codeblock slot; the selected mutation and static registered-function routes are absent. Compiler recognition is not runtime composition proof.
   Acceptance: Preserve actual caller binding identity for push, eager once-only arguments, copied/restored temporary parameters, live caller nonparameters, registered-function fresh-local semantics, helper/function/bound-codeblock precedence, active recursion diagnostics and receiver guards. Prove direct/callback native and independently emitted controls plus selected neutral observations, including genuinely unknown calls and typed errors. No host fallback, captured lexical environment or new primitive/syntax; broaden tier before any contract/interface movement.
   Children: `.1.3.3.0.1`, `.1.3.3.0.2`, `.1.3.3.0.4`, `.1.3.3.0.5`, `.1.3.3.0.6`, `.1.3.3.0.7`, `.1.3.3.0.3`
-  Current prerequisites: Original push/function routes and literal segmentation are repaired. Normalization .0.4, deferred attached-control .0.5, residual event-order/readiness .0.6 and nested raw-expression readiness .0.7 remain before dispatcher closure. Preserve original reproduced failures as historical evidence rather than calling them current.
+  Current prerequisites: Original push/function routes, literal segmentation and explicit normalization/artifact recovery are complete. Deferred conditional .0.5 (existing startup87.2 first, then attached/marker/value slices), residual event-order/readiness .0.6 and nested raw-expression readiness .0.7 remain before dispatcher closure. Preserve original reproduced failures as historical evidence rather than calling them current.
   Scope boundary: Existing startup19 assignment guards, startup32 caller-local function shadowing, startup35 boolean literals and startup87.2/.3 matches/numeric helper dispatch retain separate ownership and acceptance. Partial dispatch repairs do not close them or admit the full neutral pipeline. The plain eight-field codeblock record and all normative authorities stay unchanged.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.1`
@@ -1565,19 +1565,64 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
   Dependencies: clean literal .0.2.1.3 and normalization .0.4 handoffs.
   Reproduce: Top:: I { cb={|x,y| if(matches(x, /ok/)) { return(x) }; return("miss") }; return(cb("ok","unused")) } after the signature repair. Public native execution reports a typed unsupported_codeblock_actionir with kind control_if; CodeblockRuntime::_eval_expr falls through to that diagnostic because it has no control_if arm. Final .3.1 probe/capture must retain source-bound native/fresh evidence. Normative control/helper and body-return semantics need .5.0 diagnosis before changing this separate runtime.
   Impact: The recognized attached conditional cannot execute inside a deferred body. This is separate from signature segmentation and cannot be counted as a healthy control or mutation.
-  Children: `.1.3.3.0.5.0`, `.1.3.3.0.5.1`
+  Children: `.1.3.3.0.5.0`, `.1.3.3.0.5.1`, `.1.3.3.0.5.2`, `.1.3.3.0.5.3`
   Acceptance: Use public toolbox controls and canonical control/return contracts; select compiler/runtime ownership and tier; retain exact historical failure, implement distinguishing RED/GREEN with branch laziness and local returns, cover direct dependents and appropriate canonical acceptance without schema drift.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.0`
-  Status: `pending`
+  Status: `done`
   Goal: Freeze the exact deferred attached-control failure, normative semantics and bounded repair ownership before runtime edits.
   Acceptance: Matched native/fresh typed failure and positive equivalent controls locate the unsupported AST boundary; contract/source/return/scope review selects safe repair paths and verification tier without assuming all control families behave alike.
+
+  Activation: Clean e07f80f74c8c80b426c4b846a1293139848229db; bridge parent closeout canonical exit0/CLI66 twice/Phase01033 in1063s, ten hooks/post-pointer/promoted receipt PASS, brief0 and no required jobs. Bounded bridge/literal/source/durability parents are closed. Existing deferred-control Knowledge, callable block-local return/context/parameter contracts, AST if-family lowering and public helper teaching reviewed; current control family extent remains diagnosis work. Artifact cleanup is not yet due (latest October2 15:55UTC).
+  Owned paths / plan: New .0.5.0 public probe, fresh child, read-only reviewer and complete observation capture under docs/checkpoints; new claim under docs/claims. Relevant deferred-control Knowledge and public architecture/helper teaching, task/frontier/index/roadmaps and bounded continuity move together. Scratch .linkedspec-data/scratch/deferred-control-diagnosis. Production, tests, fixtures/authorities, CI/storage/dependencies and original captures stay exact. Public Get/descriptor/substitution/dump and AST probes precede implementation inspection; declare additional paths before edits. No historical writer replay.
+  Verification tier: `focused`
+  Focused checks: Source-bound public native/fresh attached-if failure and positive equivalent/early-return/scope/parameter controls; typed AST/control-family/return/loop contracts and exact compiler/runtime source location; actual distinguishing effects and observation corruption; direct callable-literal/AST/bridge/normalization regressions; original source/authority preservation and rendered book/Knowledge/history/memory/doctrines/diff.
+  Canonical trigger: none for source-preserving diagnosis; .0.5.1 declares its repair tier after actual interface/contract extent is known.
+  Claim verification: `docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.0.json`
+  Replay comparison correction: The first actual replay rejects whole native failure stdout equality. Recursive field comparison proves only wall-clock prefixes on SpecEntry trace_decision lines differ; values, typed carriers, actual identities/effects and all emitted bytes agree. Existing bridge Knowledge already distinguishes framework failure traces from DSL effects. Preserve both raw streams and project only anchored datetime prefixes for replay equality; no metadata sorting, source-hash refresh or DSL-effect suppression. The first attempted review remains failed diagnostic chronology.
+  Additional owned capture: .0.5.0-observations.json retains complete final public source/AST/metadata/dumped/emitted/value/error/runtime-identity data; the smaller verification capture references its tracked byte identity and retains focused logs. .5.2/.5.3 explicitly own observed marker/value-if residuals; no finding is left unscheduled.
+  Limits: This leaf freezes observed control coverage and selects repair ownership. It does not change runtime behavior, assume every control family is equivalent, close .0.5/.0.6/.0.7/dispatcher/full16 execution, or refresh earlier proofs.
+  Additional owned diagnostics: Preserve the first probe source/observation as .0.5.0-probe-before.pl and .0.5.0-observation-before.json; its when source misses one brace, and function probes need explicit LF source separation before their unexpected null result is classified. Final proof keeps these corrections distinct from compiler defects. Actual public invoke observations may inspect existing caller binding/error identities without changing production.
+  Dependency reconciliation: Corrected LF-separated attached-statement function bodies remain unsupported under the existing value-oriented function MVP; their deterministic unresolved/bridge body diagnostics are not healthy equivalents. Admitted return(if(...)) function and bridged variants succeed. Direct deferred matches literal reproduces the already-owned regex/helper failure in SESSION-STARTUP-READING.87.2, whose indexed leaf owns both literal/string operands. Finish this diagnosis and clean commit, then schedule .87.2 before .0.5.1 so the original matches-based attached-if source can become healthy. .0.5 still owns branch/return semantics; no duplicate helper owner or function feature extension. Add .0.5.0-observe.pm as a shared read-only public-invoke observer, preserving actual binding/effect/error identities and deliberate equal-value reference control.
+
+  Verification: PASS; actual current public replay matches retained semantic/source/generated observations after only anchored failure-trace timestamp projection. Twenty native/fresh pairs and four ASTs retain five healthy comparisons, ten control_if failures, three other typed failures and two unsupported function bodies. Actual original-slot restoration, equal-value distinct-reference rejection, exact thrown-object identity and before-only effects pass both routes. Ten actual observation corruptions reject; four unchanged suites pass660 tests (11 literal,23 AST,605 bridge,21 normalization). Complete original observations, actual replay core, all four TAP streams and source hashes survive in tracked captures. Production/tests/authorities remain e07f-exact; focused book/Knowledge/history/memory/all-doctrine checks govern landing.
+  Current-summary correction: TASK_TREE index row still names historical artifact recovery and schedules the already completed bridge reconciliation despite its updated leading paragraph. This diagnosis owns correction of that exact row plus current book/roadmap summaries to the twenty-source diagnosis and startup87.2 prerequisite; existing past evidence is unchanged.
+  Instrument correction: The successful review's actual replay command field reused the final suite command variable. Preserve a distinct replay_command, rerun the public replay and all focused suites, and retain the corrected capture before claim publication. Actual command/result attribution is part of this leaf's proof.
+  Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.0 - diagnose deferred conditional execution`.
+
+### `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.0` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Exact original and nine conditional variants load native/fresh, then retain unsupported_codeblock_actionir/control_if; complete sources/generated bytes/carriers survive.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Public AST/substitution/dumps distinguish recognized control nodes from missing CodeblockRuntime::_eval_expr dispatch and top-level-only _execute_body returns; no literal or function-MVP expansion is assumed.
+- [x] **FIX** — Select existing startup87.2 matches/regex prerequisite before attached .5.1; independently schedule marker .5.2 and value .5.3 with exact reproductions/impact and lazy branch/return/restoration acceptance.
+- [x] **ADDRESSED (verified)** — Twenty paired observations, four ASTs, actual caller-slot/error/effect identities and equal-value reference control are retained; ten distinguishing corrupted observations reject through the same reviewer.
+- [x] **NO REGRESSION** — Four unchanged suites660 tests pass; production/tests/authorities stay activation-exact. Diagnosis claims no runtime repair, other-backend admission or full-sixteen execution.
+- [x] **LOCKSTEP** — Tracked public producers/captures/claim, causal Knowledge, rendered book, task/roadmap/current index and bounded live/resume/history align; next startup87.2 activates only after this clean commit.
+
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.1`
   Status: `pending`
   Goal: Implement and verify the diagnosed deferred-control correction before dispatcher closure.
-  Dependencies: `.1.3.3.0.5.0`
+  Dependencies: `.1.3.3.0.5.0`, committed `SESSION-STARTUP-READING.87.2` matches/regex prerequisite
   Acceptance: Actual branch/operand/body effects, return propagation, caller/parameter restoration and native/fresh RED/GREEN plus direct dependents establish the bounded repair; preserve other open controls, accurate public teaching and warranted canonical proof.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.2`
+  Status: `pending`
+  Priority: P1 — an existing marker conditional is parsed but cannot execute in a deferred body.
+  Goal: Repair or independently verify deferred marker if/elseif/else/endif after attached-control repair, without enlarging .5.1 beyond a safe slice.
+  Dependencies: committed `.1.3.3.0.5.0`, `.1.3.3.0.5.1`; matching helper prerequisite `SESSION-STARTUP-READING.87.2`.
+  Reproduce: Top:: I { cb={|| if(true); return("hit"); else(); return("miss"); endif() }; return(cb()) }. Public native/fresh currently fail unsupported_codeblock_actionir/control_if; typed body statements separately contain control_if/control_else/control_endif.
+  Impact: Published marker branching cannot compose through the callable runtime. Current .5.0 freezes the exact source/typed failure; .5.1 may intentionally cover only attached branch bodies.
+  Acceptance: Reverify after .5.1, own the remaining implementation if needed, and prove matching nested marker groups, branch laziness, returns, actual caller/parameter/error restoration and native/fresh parity. Malformed/orphan controls retain precise diagnostics. Preserve attached controls, authorities and all other owners; declare paths/tier before edits and commit independently.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.3`
+  Status: `pending`
+  Priority: P1 — an existing value conditional eagerly reaches an unsupported branch marker in a deferred body.
+  Goal: Repair or independently verify deferred value-form if/else after statement-family repairs through the existing conditional contract.
+  Dependencies: committed `.1.3.3.0.5.0`, `.1.3.3.0.5.1`, `.1.3.3.0.5.2`; matching helper prerequisite `SESSION-STARTUP-READING.87.2`.
+  Reproduce: Top:: I { cb={|| return(if(true,"hit",else("miss"))) }; return(cb()) }. Both public routes fail unknown_helper/else; the admitted value-oriented function containing return(if(matches(x,/ok/),x,else("miss"))) succeeds directly and through the registered deferred bridge.
+  Impact: Value conditional composition bypasses existing lazy branch semantics in the narrow deferred evaluator. _eval_call evaluates generic operands before it has an if/branch family dispatcher.
+  Acceptance: Reverify remaining failure after earlier repairs, reuse governed conditional/truthiness rules, and prove exact values, once-only/lazy condition and branch effects, nested function/callback routes, returns and restoration. Preserve eager logical-helper semantics and genuinely unsupported-call diagnostics. No silent function-body extension or new record/schema field; declare bounded paths/tier and commit independently.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6`
   Status: `pending`
@@ -1830,8 +1875,10 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 | 38.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.2.1` | `done` | Exact134-input recovery/read-denied audit and canonical artifact parent signoff; bridge reconciliation next. |
 | 39 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.3` | `pending` | Original minimal/normalization controls and independent dispatcher closeout. |
 | 40 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.1` | `pending` | Complete neutral-case and actual semantic-mutant execution after dispatcher prerequisite. |
-| 41 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.0` | `pending` | Diagnose accepted deferred attached-if execution after normalization handoff. |
-| 42 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.1` | `pending` | Repair and verify the diagnosed deferred-control path before dispatcher closeout. |
+| 41 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.0` | `done` | Twenty-source/four-AST diagnosis and660 focused tests; actual scope/error/effect proof retained. |
+| 42 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.1` | `pending` | Existing startup87.2 matches/regex prerequisite is next; attached branch/local-return repair follows its clean commit. |
+| 42.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.2` | `pending` | Independently verify/repair deferred marker conditional groups after attached repair. |
+| 42.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.3` | `pending` | Independently verify/repair deferred lazy value-if dispatch after statement families. |
 | 43 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.0` | `pending` | Diagnose hash-order-dependent residual canonical events and readiness/overlap. |
 | 44 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.1` | `pending` | Repair canonical residual ordering with exact source/provenance controls. |
 | 45 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.0` | `pending` | Diagnose missed nested raw-expression portability dependencies after prior handoffs. |

@@ -2,17 +2,19 @@
 
 ## Current Activity
 
-Full PNT: bounded committed bridge and its literal/source/durability prerequisites reconciled; deferred attached-control diagnosis follows clean canonical landing.
+Full PNT: deferred conditional diagnosis complete; repair the existing matches/regex prerequisite before attached, marker and value conditional slices.
 
 ## Latest Completed Slice
 
-`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.2`: seven original native/fresh controls,750 completed tests across eight suites,26 exact historical producer bodies and12 distinguishing source/result controls PASS. Original captures and unsupported infix source remain exact; selected recovery claims are frozen at0075. Exact staged canonical receipt governs bounded parent closeout; independent control/order/readiness and full execution remain.
+`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.0`: twenty native/fresh sources, four typed ASTs, five healthy comparisons, ten conditional failures, three other typed failures and two unsupported function bodies retained. Actual parameter/error/effect identities and ten corruption controls pass; four unchanged suites pass660 tests. Production/tests/authorities remain exact; no runtime repair is claimed.
 
 ## Next Action
 
-Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.0 from committed clean HEAD; diagnose deferred attached-control semantics before its bounded repair. P1 .0.6/.0.7 and full D/P execution follow separately.
+Activate SESSION-STARTUP-READING.87.2 from clean committed HEAD; repair existing deferred matches literal/string support, then return to .0.5.1/.2/.3. .0.6/.0.7 and full D/P execution follow separately.
 
 ## Recent Completions
+
+- `2026-10-03` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.0` freezes deferred conditional boundaries and schedules existing matches prerequisite.
 
 - `2026-10-03` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.2` reconciles bounded bridge parents with750 tests and preserved original evidence.
 
@@ -43,8 +45,6 @@ Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.0 from committed clean HEAD; d
 - `2026-10-02` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.0.1` repairs callback scope with fresh working maps and function-owned callable lookup.
 
 - `2026-10-02` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.0.0` freezes the P1 function callback scope leak and schedules the repair.
-
-- `2026-10-02` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.1` repairs deferred push and owns the next registered-function dispatcher child.
 
 
 ## History

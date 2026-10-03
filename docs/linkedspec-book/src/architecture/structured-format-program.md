@@ -310,8 +310,8 @@ detachment by themselves. Backend lanes must execute public producers, mutate th
 and reject deliberately aliased controls. They must pass a healthy baseline before semantic mutants count.
 The default checker executes no DSL and changes no runtime admission. The bounded Perl registered-function
 bridge is implemented and the literal signature prerequisite is repaired. Seven paired normalization cases pass;
-canonical bridge reconciliation, deferred attached-control, residual-event-order and nested raw-expression readiness prerequisites remain before complete
-neutral execution. `docs/language-readiness/composed-objective-governance.md`
+Canonical bridge reconciliation is complete. Deferred conditional execution, residual-event-order and
+nested raw-expression readiness prerequisites remain before complete neutral execution. `docs/language-readiness/composed-objective-governance.md`
 records the oracle and evidence boundary. Whole formats and unassessed requirements remain pending.
 
 The complete call-form normalization source is:
@@ -1375,3 +1375,44 @@ integration instructions. The mirror does not assemble that workspace. The old r
 original tracked checkpoint and must not run in the current checkout. Current bridge tests and their
 committed receipt remain the current behavior proof; policy adoption and the broader claim audit
 retain separate task owners.
+
+### Current Perl deferred conditional boundary
+
+Perl recognizes attached conditions inside callable literals, but the deferred evaluator
+currently rejects their typed `control_if` node. This complete source loads on native and
+fresh emitted routes, then raises `unsupported_codeblock_actionir`:
+
+```spec
+Top:: I {
+  cb={|| if(true) { return("hit") }; return("miss") };
+  return(cb())
+}
+```
+
+Direct rule control already returns `hit`. A callable with `return("hit")` also succeeds;
+its return exits only that invocation. On the conditional failure, copied parameters restore
+the caller's original slots and the typed error retains its identity. Effects preceding the
+conditional remain visible; neither the selected branch nor following statements execute.
+The failure does not mean literal construction captured an environment or changed scope.
+
+Marker conditions such as `if(true); return("hit"); else(); return("miss"); endif()` and
+value-form `return(if(true,"hit",else("miss")))` have distinct deferred failures. The former
+reaches `control_if`; the latter currently reaches an unsupported `else` helper during eager
+operand evaluation. Attached, marker and value-form repairs are separately tracked and must
+retain existing truthiness, lazy branches and invocation-local return semantics.
+
+Registered pure functions support the value-oriented alternative:
+
+```spec
+fn choose(x) { return(if(matches(x,/ok/),x,else("miss"))) }
+Top:: I {
+  cb={|| return(choose("ok")) };
+  return(cb())
+}
+```
+
+Both routes return `ok`. Attached statement-control function bodies exceed the current
+function MVP. Calling `matches` directly inside a deferred body has a separate literal/string
+pattern prerequisite; the registered example executes it through the existing function lowerer.
+The tracked twenty-source diagnosis distinguishes these boundaries without changing the
+plain callable record or claiming complete conditional support.

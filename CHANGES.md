@@ -12,6 +12,16 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-10-03 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.0: diagnose deferred conditional execution
+
+Retain twenty complete public native/fresh sources and four ASTs without runtime/test/authority edits.
+Ten conditional failures locate the missing typed control arm; actual caller-slot and error identity
+restore, and effects stop before branch/continuation. Five healthy comparisons, three other typed
+failures and two unsupported function bodies keep their exact scope. Four suites pass660 tests;
+ten corrupted observations reject. Full emitted bytes, raw observations and TAP streams are tracked.
+Next existing startup87.2 repairs matches/regex before attached .5.1, marker .5.2 and value .5.3.
+Book, Knowledge and current roadmaps/frontier/continuity agree; focused doctrines govern landing.
+
 ## 2026-10-03 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.2: reconcile committed function bridge prerequisites
 
 - Reconcile bounded function-bridge, literal, source-correction and producer-durability parents through new read-only public native/fresh instruments; preserve every original source/capture and the historical infix failure.

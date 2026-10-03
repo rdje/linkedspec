@@ -317,6 +317,13 @@ nonparameter reads and writes use the caller's current working slots. `return(..
 final expression is the implicit result, compatible receiver chains may continue, and a standalone call discards
 only the result.
 
+The current Perl deferred evaluator has a narrower conditional boundary than direct rule actions.
+Attached and marker `if` bodies fail with typed `unsupported_codeblock_actionir`/`control_if`;
+value-form `if`/`else` currently fails on the `else` helper. Parameter slots still restore on
+failure, and earlier effects remain visible. The [architecture examples](../architecture/structured-format-program.md#current-perl-deferred-conditional-boundary)
+show these exact cases and a working registered value-oriented function alternative. These
+repairs are tracked separately from literal syntax and the general callable scope contract.
+
 Rust classifies exact `{|` before harray/eager braces, retains the same eight-field literal and fixed/rest
 signature with Unicode character-coordinate spans, and carries it through compiled JSON, user functions,
 generated plans, emitted source, and semantic `codeblock` descriptors. Construction never creates a host closure

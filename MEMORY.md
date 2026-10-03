@@ -1,11 +1,11 @@
 # MEMORY
 
-- activation_commit: `0075a5b163cd9690d4ad70b1c8ea1da796088ab5` — clean bridge reconciliation activation base.
-- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.2 - reconcile committed function bridge prerequisites`.
-- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.2` (done) — bounded bridge/parent reconciliation.
-- next_action: Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.0 from clean HEAD and diagnose deferred attached-control semantics through public native/fresh probes.
-- in_flight_uncommitted: none; intended committed handoff after exact canonical acceptance.
-- blockers: No access/decision blocker. P1 .0.5/.0.6/.0.7 remain before dispatcher/full execution; bounded bridge/literal/source/durability parents are reconciled. Startup19/32/35/87 remain separate.
+- activation_commit: `e07f80f74c8c80b426c4b846a1293139848229db` — clean deferred-control diagnosis activation base.
+- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.0 - diagnose deferred conditional execution`.
+- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.0` (done) — twenty-source deferred conditional diagnosis.
+- next_action: Activate existing SESSION-STARTUP-READING.87.2 from committed clean HEAD; repair deferred matches literal/string operands before attached .0.5.1, marker .0.5.2 and value .0.5.3.
+- in_flight_uncommitted: none; diagnosis completed and no required jobs at landing.
+- blockers: No access/decision blocker. startup87.2 precedes .0.5 repairs; .0.6/.0.7 precede dispatcher/full execution. Bridge/literal/source/durability parents are closed; other startup repairs remain separate.
   Wrapper startup .7 remains open; recovery/purge stay prohibited.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
   active table; the task metadata doctrine inventories all consumers, permits arbitrary frontier-row rewrites,

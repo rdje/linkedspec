@@ -12,6 +12,20 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-10-03 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.0: conditional execution and prerequisite separation
+
+Typed conditions/bodies/branch roles already survive parsing. Deferred _eval_expr lacks control_if,
+and _execute_body currently recognizes only top-level local return. Actual invoke observers retain
+original caller-slot refaddr and thrown error identity, reject an equal-value distinct reference,
+and observe only the precondition effect on failure. These runtime objects establish scope/effect
+facts; ten serialized observation corruptions independently challenge the reviewer.
+Value-oriented functions provide a working return(if(...)) comparison; attached statement bodies
+are outside that MVP. Existing startup87.2 owns literal/string matches operands; marker/value
+conditional gaps receive separate P1 leaves. Only anchored native failure trace datetimes project
+for replay equality; raw streams remain. No metadata sorting or historical result refresh occurs.
+The first probe's source typo and initial trace comparison are retained diagnostic chronology.
+The replay command report now retains its own command variable instead of the last suite command.
+
 ## 2026-10-03 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.2: current execution and historical source recovery
 
 The independent bridge reviewer uses retained original sources plus explicit value literals, public Get/descriptor/dumped source and a separate emitted child. Exact emitted identities and quiet outputs agree. The unchanged71-source605-test regression exercises actual recursion/slot/frame/rest/effect/exception guards; six current dependents total124 after the signature regression, while dated123 remains historical. Normalization21 adds complete seven-case oracle comparison.12 deliberate source/result/event-order/quiet/rejection corruptions reject.
