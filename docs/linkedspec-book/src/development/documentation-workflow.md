@@ -97,6 +97,9 @@ An owned census may retain every artifact: reusable caches, dependency data and
 verification evidence are preserved unless an exact deletion is proved safe.
 The task tree records the census scope and exclusions; the date record is overwritten
 after each cleanup rather than accumulating another history log.
+A dated census records file metadata at that moment; it does not prove content ownership
+or authorize deletion. Keep the retained snapshot immutable. A later live census is a new
+observation, while a read-only reviewer can still check the old recorded totals and inputs.
 All other Git repositories and submodules are excluded before traversal. A project task or
 notification does not authorize modifying them; their owners apply any upstream repair.
 Retained verification logs and canonical receipts are evidence, so their size or age

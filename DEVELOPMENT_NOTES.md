@@ -12,6 +12,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-10-03 — REPO-HYGIENE.8: dated metadata is not disposability
+
+Daily review inherits the archived non-following parent/same-volume scope, excludes submodules/nested Git repositories and retained caches/managed runs, and checks explicit Rust target log/bin paths separately. Source programs now emit stdout only; default reviewer checks immutable recorded totals, --live independently recenses and lstat-checks each file. Balanced +1/-1 log corruption keeps all totals green but rejects per-file metadata. No content ownership or disposability claim follows from byte sizes; zero files removed. First review rejected incomplete JSON while census was still running; corrected dependency sequencing and reran only after successful completion. All retained historical inputs stay exact; book/Knowledge/continuity return to .6.1.
+
 ## 2026-10-03 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.0: consumer trace and occurrence policy
 
 Residual raw-key queues drain through unsorted keys; scan input is contract precedence plus occurrences, not global source order. Body/repeated traces reach3/5 source_span_missing decisions; ambiguous raw control skips2 residuals, single raw control rewrites1. The measured nine-source/27 native-fresh lowering/count/readiness/value observations stay stable, without arbitrary-overlap equivalence. A/B/A occurrences cannot be recovered by first-seen-key grouping. Select an occurrence sequence alongside queues under .6.1 canonical ownership. Typed quoted data returns exact values but reports IF/unresolved3/ready0; own .7.2 independently. Ten evidence corruptions and34 focused top-level TAP tests pass; historical captures stay exact. Correct a stale ROADMAP.md value-control row to the current selected repair. One inline publication script failed Python parsing before any write; corrected structured construction leaves evidence/results untouched. README remains unchanged.

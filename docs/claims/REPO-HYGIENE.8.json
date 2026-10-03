@@ -1,0 +1,89 @@
+{
+  "version": 1,
+  "owner": "REPO-HYGIENE.8",
+  "claims": [
+    {
+      "name": "dated-retained-artifact-review",
+      "statement": "The dated same-volume census retains5661 parent candidates/10108187384 bytes, excludes nine nested repositories and inspects three Rust log/bin locations separately. Fresh census/lstat checks agree; aggregate inflation and balanced wrong sizes reject; zero removals.",
+      "scope": "Exact October3 dated metadata snapshot and current direct OS metadata verification. Parent walk excludes caches/managed runs/generated book/Dart/Rust target, with explicit Rust release/incremental/deps probes. Other repositories/submodules, symlinks and other volumes excluded. No content-hash ownership, disposability, runtime, resource reclamation or liveness/purge guarantee.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/run_python_project_data.sh docs/checkpoints/REPO-HYGIENE.8-census.py; bash tools/run_python_project_data.sh docs/checkpoints/REPO-HYGIENE.8-review.py --live; bash tools/run_mdbook_local.sh; bash tools/run_python_project_data.sh docs/checkpoints/REPO-HYGIENE.8-book-check.py",
+        "granularity": "Each retained path/suffix/byte-size row, nested/symlink/volume exclusion and explicit Rust row. Complete snapshot to fresh census and independent lstat; controls at per-file/aggregate granularity. Captures emit stdout only; default reviewer reads stored totals without live recensus.",
+        "result": "Actual source-bound snapshot retained, fresh census and independent per-file metadata match. Two observed corruption rejections and included/excluded fixture pass. Rendered retention teaching passes. Zero deletion operations; fullCI not required for this maintenance record."
+      },
+      "falsify": {
+        "status": "checked",
+        "hypothesis": "Aggregate counts can hide missing artifacts, balanced wrong file sizes, or traversal into another repository/symlink/volume.",
+        "oracle": "Per-path independent lstat, a fresh scoped census and explicit inclusion/exclusion fixture with a nested Git marker, plus retained scope exclusions.",
+        "red_control": "Inflated aggregate count rejects. Balanced +1/-1 log sizes keep all bucket totals green but reject against actual per-file lstat. Fixture retains only two artifacts/Finder metadata and excludes ordinary files, .git/.agents, mock submodule and nested Git directory. These are census data controls, not runtime semantic mutants."
+      },
+      "durability": {
+        "status": "checked",
+        "mode": "live",
+        "inputs": [
+          {
+            "path": ".gitmodules",
+            "sha256": "4729bfbffee3843019cfb136bcc9352cf63d3f749c2cf74fe19e4aefb132892e",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.8-artifact-review.json",
+            "sha256": "8c85055e1365fd1baf197180258a39fec4eed309d3829a477e6c9078a427031e",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.8-book-check.json",
+            "sha256": "85bb07d6a92e9e7bd0c9adb849be5ce34d00deecb133e491a6223dd7b033ac59",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.8-book-check.py",
+            "sha256": "5922b4631c4e28f55a34a60168a34d8d36c5ae0753a0883587240d5da0f0b9e6",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.8-census.py",
+            "sha256": "1664522ff73051d28cc1137d1ad46165e183a837ab81fa7551f037ae657864fb",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.8-review.py",
+            "sha256": "0ff6cdddd3c865269022dc7c0adf7a3069385aa71798e47ed9f3e6441e0e1607",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.8-verification.json",
+            "sha256": "19b576488034ae32c5740032047fc24593ff73b630c4cecec7a2ec12709223a7",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/development/documentation-workflow.md",
+            "sha256": "780a11dc02e93d82ce106b7630370d80fc45d401baddf9716716987f9044de92",
+            "role": "input"
+          },
+          {
+            "path": "tools/project_data_env.sh",
+            "sha256": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73",
+            "role": "input"
+          },
+          {
+            "path": "tools/project_data_run.sh",
+            "sha256": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f",
+            "role": "input"
+          },
+          {
+            "path": "tools/run_mdbook_local.sh",
+            "sha256": "ef232c0bcb54fd2b32478b97e2ed98ede533873bf60332226e0c1af319780515",
+            "role": "input"
+          },
+          {
+            "path": "tools/run_python_project_data.sh",
+            "sha256": "0bc03bb8f4ce550397da9fda086215a1d9f6f452ec413605fbcb8976c06af604",
+            "role": "input"
+          }
+        ]
+      }
+    }
+  ]
+}

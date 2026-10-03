@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-10-03 — REPO-HYGIENE.8: due retained artifact census
+
+Dated parent census retains5661 candidates/10108187384 bytes; three Rust log/bin locations are inspected separately and nine nested repositories excluded. Fresh census and independent per-file lstat match; aggregate inflation and balanced wrong-size controls reject. Zero removals: proof inputs/logs, reusable outputs and caches remain. No process recovery/purge or other-repository write. Track all census/review programs, raw snapshot and verification/claim; overwrite latest-only cleanup record and render retention teaching. Compiler .6.1 resumes next.
+
 ## 2026-10-03 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.0: residual event provenance diagnosis
 
 No production changes. Nine exact sources under seeds0/1/2 retain27 native/fresh observations, six original public captures and15 public substitution traces. Four residual arrays permute with measured lowering/readiness/values stable; full raw records remain. Four unchanged suites pass34 top-level TAP tests and ten evidence corruptions reject. Select top-level-preserving pending scan occurrences for .6.1. Quoted data falsely creates helper/control blockers; P1 .7.2 owns repair before dispatcher. Three executed examples render;139 claim inputs bind15 producing instruments. Due cleanup is next.

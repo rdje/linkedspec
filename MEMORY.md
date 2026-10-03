@@ -1,10 +1,10 @@
 # MEMORY
 
-- activation_commit: `bb615f387850fa74f7cbfa3c78b8cf4682373c16` — clean event-order diagnosis activation base.
-- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.0 - diagnose residual event provenance`.
-- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.1` (pending) — selected compiler repair; due artifact cleanup precedes activation.
-- next_action: Activate the next REPO-HYGIENE leaf from clean HEAD; perform the due safe artifact census/cleanup, commit it, then activate residual order .6.1.
-- in_flight_uncommitted: none; diagnosis, raw captures/traces, focused suites, rejecting controls and selected repair are committed.
+- activation_commit: `bf1e4edd04371eeddf33f8445239348e12f887f2` — clean daily artifact review activation base.
+- latest_completed_leaf: `REPO-HYGIENE.8 - retain daily artifact census`.
+- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.1` (pending) — bounded residual occurrence-order compiler repair.
+- next_action: Activate .6.1 from clean HEAD, preserve diagnosis/old producer boundaries, prove ordered pending occurrences and unchanged measured consumers, then exact staged canonical acceptance.
+- in_flight_uncommitted: none; daily retained artifact census, independent metadata/controls and latest-only cleanup record are committed.
 - blockers: No access/decision blocker. Matches and attached/marker/value/null/while executors are repaired; bounded control parent is reconciled; order/readiness .6/.7 precede dispatcher/full execution. Other startup repairs remain separate.
   Wrapper startup .7 remains open; recovery/purge stay prohibited.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the

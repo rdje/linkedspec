@@ -2,17 +2,19 @@
 
 ## Current Activity
 
-Full PNT: residual event-order diagnosis complete; due artifact cleanup precedes the selected compiler repair. Readiness/quoted-data and dispatcher/full execution remain owned.
+Full PNT: due artifact review complete with zero removals; selected residual occurrence-order compiler repair resumes next.
 
 ## Latest Completed Slice
 
-`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.0`:9 exact sources/27 native-fresh observations, six original public captures,15 substitution traces and four unchanged suites/34 top-level TAP tests retained. Four cases permute residual records with measured results/counts/readiness stable; ten evidence corruptions reject. Occurrence-provenance repair .6.1 preserves top-level ownership. Quoted false blockers belong to .7.2.
+`REPO-HYGIENE.8`: dated parent/Rust artifact census and fresh independent per-file metadata checks pass; inflated count/balanced wrong sizes reject. Proof logs, outputs and caches retained; all nested repositories/submodules, symlinks/other volumes and managed runs excluded. Zero removals; rendered retention teaching passes.
 
 ## Next Action
 
-Complete the due REPO-HYGIENE artifact cleanup from clean HEAD, then activate .6.1 compiler repair. Nested raw .7.0/.1 and quoted-data .7.2 precede dispatcher; recovery/purge and other-repository writes remain prohibited.
+Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.1 from clean HEAD. Preserve top-level/exclusive ownership and append pending scan occurrences; canonical compiler acceptance before landing. Nested raw .7.0/.1 and quoted-data .7.2 precede dispatcher/full execution.
 
 ## Recent Completions
+
+- `2026-10-03` — `REPO-HYGIENE.8` verifies the due retained census/per-file controls with zero removals.
 
 - `2026-10-03` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.0` freezes residual provenance/consumer diagnosis and owns quoted-data blockers.
 
@@ -43,8 +45,6 @@ Complete the due REPO-HYGIENE artifact cleanup from clean HEAD, then activate .6
 - `2026-10-02` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.0` diagnoses unsupported infix and selects an explicit canonical successor; raw-readiness/audit defects remain owned.
 
 - `2026-10-02` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.3.1` repairs signature/quote ownership with matched public RED/GREEN and required Phase0 proof.
-
-- `2026-10-02` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.3.0` diagnoses the callable signature pipe collision with exact causal controls.
 
 ## History
 

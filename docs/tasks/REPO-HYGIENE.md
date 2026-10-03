@@ -6,7 +6,7 @@
 - Status: `completed`
 - Roadmap lane: `Overall roadmap — repository maintenance`
 - Created: `2026-06-16`
-- Last updated: `2026-10-02` (`REPO-HYGIENE.7`: due artifact review and current read-only boundary)
+- Last updated: `2026-10-03` (`REPO-HYGIENE.8`: due review before residual-event compiler repair)
 - Owner: repo-local workflow
 
 ## Goal
@@ -40,7 +40,7 @@ the durable handoff state current.
 - ID: `REPO-HYGIENE`
   Status: `completed`
   Goal: `Repository hygiene — ignore local artifacts and safely reclaim generated caches`
-  Children: `REPO-HYGIENE.1`, `REPO-HYGIENE.2`, `REPO-HYGIENE.3`, `REPO-HYGIENE.4`, `REPO-HYGIENE.5`, `REPO-HYGIENE.6`
+  Children: `REPO-HYGIENE.1`, `REPO-HYGIENE.2`, `REPO-HYGIENE.3`, `REPO-HYGIENE.4`, `REPO-HYGIENE.5`, `REPO-HYGIENE.6`, `REPO-HYGIENE.7`, `REPO-HYGIENE.8`
 
 - ID: `REPO-HYGIENE.1`
   Status: `done`
@@ -167,6 +167,23 @@ the durable handoff state current.
   Verification: PASS; 4341 parent candidates/8985768888 bytes retained, 9 nested repositories excluded, explicit Rust rows/counts preserved in the checkpoint. Fresh scope census and direct per-file OS metadata match; corrupt aggregate count and balanced size redistribution reject, and fixed inclusion/exclusion fixtures pass. Census/review source bodies and hashes are archived. Zero removals; no liveness/recovery/purge operation. Book/Knowledge/history/memory/doctrine/diff govern focused landing.
   Commit: `REPO-HYGIENE.7 - review artifacts and correct read-only boundary`.
 
+- ID: `REPO-HYGIENE.8`
+  Status: `done`
+  Goal: Complete the due daily artifact review before the selected compiler repair while preserving all proof/cache data and repository boundaries.
+  Activation: Cleanbf1e4edd04371eeddf33f8445239348e12f887f2; diagnosis all ten doctrines/post-pointer PASS, brief0 and Git clean confirmed before pivot.
+  Reproduce: Latest cleanup October2 15:55:46 UTC is over24 hours old during the October3 post-diagnosis review. No cleanup/purge ran during the dirty diagnosis.
+  Owned paths: docs/ARTIFACT_CLEANUP.md; new docs/checkpoints/REPO-HYGIENE.8-census.py, review.py, artifact-review.json and verification.json; new docs/claims/REPO-HYGIENE.8.json; .8-book-check.py/json for rendered retention teaching; cleanup Knowledge card and development/documentation-workflow.md; this tree/index, current ROADMAP.md/ROADMAP_V2.md cleanup-to-feature routing, bounded history/live/resume and derived map. Scratch .linkedspec-data/scratch/hygiene8. Read archived .7 instruments, preserve their exact historical bytes.
+  Verification tier: `focused`
+  Focused checks: Non-following same-volume parent artifact census plus explicit Rust release/incremental/deps log/bin locations; exclude all submodules/nested repositories, managed runs, caches and generated book/Dart outputs. Retain each candidate; derive totals from per-file rows; fresh census and independent lstat validate; reject corrupt totals/balanced sizes, prove included/excluded fixture scope. No age-based deletion, process recovery/purge or cross-repository write. Update latest-only cleanup record, book/Knowledge/history/memory/diff and all mandatory doctrines.
+  Canonical trigger: none; dated maintenance snapshot under unchanged storage/CI/runtime/dependency mechanisms.
+  Claim verification: `docs/claims/REPO-HYGIENE.8.json`
+  Capture sequencing correction: The first review was launched while census output was still in flight and rejected its empty JSON. No result was published; wait for successful census completion before running the dependent reviewer.
+  Acceptance: Exact retained census and producer/result/controls are recoverable; remove only provably safe exact targets if any, overwrite latest cleanup timestamp/disposition after verification, and commit a clean handoff to SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.1. No runtime/performance/liveness or fullCI claim.
+
+  Verification: PASS;5661 parent candidates/10108187384 bytes retained, nine nested repositories excluded, explicit Rust release absent/deps0/incremental483 rows/2390805202 bytes. Fresh census/lstat agree; inflated count/balanced wrong-size controls reject and inclusion/exclusion fixture passes. Full producers/snapshot/results are tracked; zero removals and no liveness/purge operation. Rendered retention teaching PASS; focused doctrine/history/memory/diff landing governs completion.
+  Commit: `REPO-HYGIENE.8 - retain daily artifact census` (Git owns identity).
+  Handoff: Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.1 from clean HEAD; no required background job remains.
+
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
@@ -176,6 +193,7 @@ the durable handoff state current.
 | 3 | `REPO-HYGIENE.5` | `done` | Reclaimed 16G from measured rebuildable caches and 15 provenance-checked stale generation logs. |
 | 4 | `REPO-HYGIENE.6` | `done` | Due October1 census retains proof/cache artifacts and records the requested exit handoff. |
 | 5 | `REPO-HYGIENE.7` | `done` | Due October2 review after clean instrument recovery; retain proof/cache data and enforce other-repository exclusion. |
+| 6 | `REPO-HYGIENE.8` | `done` | Due October3 review after clean diagnosis; preserve proof inputs/cache and return to compiler .6.1. |
 
 ## Decisions
 
@@ -204,6 +222,7 @@ the durable handoff state current.
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-10-03` | `REPO-HYGIENE.8` | Tracked census/live lstat/fresh metadata and corruption/fixture controls; book/history/memory/Knowledge/doctrine/diff | PASS — zero removals; exact snapshot retained; compiler .6.1 next. |
 | `2026-10-02` | `REPO-HYGIENE.7` | Archived census/review; actual per-path and fixture/corrupt-count controls; book/memory/history/Knowledge/doctrine/diff | PASS — zero removals; exact dated scope/enumeration in checkpoint. Resume claim-policy .0.2.1.4.1. |
 | `2026-10-01` | `REPO-HYGIENE.6` | Parent artifact and explicit Rust log/bin census; permitted process/run inspection; mdBook render; memory/history/Knowledge/doctrine/diff gates | PASS — zero removals; exact counts and exclusions in the checkpoint. Milestone2aeed31ff preserves canonical signoff; .1.1.3.4 remains unstarted. |
 | `2026-07-17` | `REPO-HYGIENE.5` | Existing cleanup fact retrieval; `df -h`; exact `du`; ignored/tracked checks; main-checkout log/bin/temp scan; exact log header/process/`lsof` proof; removal of Rust/Dart build output, two Julia compiled caches, and 15 exact stale logs; post-absence/depot/unrelated-tree/status checks; memory/KM/task/doctrine/diff gates | PASS — immediate deletion baseline 55G/89% became 71G/85%, reclaiming 16G. Dedicated depot registries/logs, unrelated 18G `claude-501`, unknown temp trees, `rgx` fixtures, and all tracked content remain. The earlier 29G/94% session observation is retained separately because external cleanup occurred before deletion. |
@@ -216,6 +235,7 @@ the durable handoff state current.
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `REPO-HYGIENE.8` | `REPO-HYGIENE.8 - retain daily artifact census` | Dated snapshot/current OS metadata proof; preserve artifacts and return to .6.1. |
 | `REPO-HYGIENE.7` | `REPO-HYGIENE.7 - review artifacts and correct read-only boundary` | Due review preserves all proof/cache data and excludes every other repository. |
 | `REPO-HYGIENE.6` | `REPO-HYGIENE.6 - record artifact review and exit handoff` | Due review preserves evidence and caches; clean resume continues .1.1.3.4. |
 | `REPO-HYGIENE.5` | `REPO-HYGIENE.5 - clean recurring generated artifacts` | Exact ignored caches and 15 stale generation logs removed; 16G reclaimed; depot and unrelated content preserved. |
@@ -225,6 +245,8 @@ the durable handoff state current.
 | `REPO-HYGIENE.1` | `pending` | Populated after commit |
 
 ## Changelog
+
+- 2026-10-03: `.8` completes the due source-bound census/live metadata controls with zero removals, retains proof/cache data and returns to residual event repair.
 
 - `2026-10-02`: Complete REPO-HYGIENE.7 after clean e3ed7cc824; retain the dated census and archived instruments, correct the current read-only boundary, then resume claim-policy adoption.
 
