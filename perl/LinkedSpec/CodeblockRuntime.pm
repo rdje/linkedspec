@@ -207,12 +207,70 @@ sub _eval_registered_function {
  return $entry->{call}->(\@values, $ctx->{invocation})
 }
 
+sub _eval_if_value {
+ my ($node, $ctx) = @_;
+ my $args = $node->{args};
+ _error('helper_arity_mismatch', helper_name => 'if',
+  actual_arity => scalar(@$args), expected_arity => 'at least 2',
+  arguments_evaluated => 0,
+ ) unless @$args >= 2;
+
+ my @branches = ([$args->[0], $args->[1]]);
+ my $fallback_seen = 0;
+ # Validate the whole typed branch list before evaluating any operands.
+ for (my $index = 2; $index < @$args; ++$index) {
+  my $branch = $args->[$index];
+  _error('invalid_codeblock_body', detail => 'invalid conditional branch')
+   unless ref($branch) eq 'HASH';
+  my $name = ($branch->{kind} // '') eq 'call'
+   ? ($branch->{name} // '') : '';
+  _error('invalid_codeblock_control', detail => 'branch after fallback',
+   source_span => $branch->{source_span},
+  ) if $fallback_seen;
+  if ($name eq 'elseif' || $name eq 'else') {
+   my $values = $branch->{args};
+   _error('invalid_codeblock_body', detail => 'branch arguments must be an array')
+    unless ref($values) eq 'ARRAY';
+   my $arity = $name eq 'elseif' ? 2 : 1;
+   my @effective = @$values;
+   # Match the existing inline lowerer's optional leading bare scope label.
+   shift @effective if @effective == $arity + 1
+    && ref($effective[0]) eq 'HASH'
+    && ($effective[0]{kind} // '') eq 'variable';
+   _error('helper_arity_mismatch', helper_name => $name,
+    actual_arity => scalar(@$values), expected_arity => 'exactly '.$arity,
+    arguments_evaluated => 0,
+   ) unless @effective == $arity;
+   if ($name eq 'elseif') {
+    push @branches, [@effective];
+   } else {
+    push @branches, [undef, $effective[0]];
+    $fallback_seen = 1;
+   }
+   next;
+  }
+  _error('invalid_codeblock_control', detail => 'fallback must be the final branch',
+   source_span => $branch->{source_span},
+  ) unless $index == $#$args;
+  push @branches, [undef, $branch];
+  $fallback_seen = 1;
+ }
+ foreach my $branch (@branches) {
+  return _eval_expr($branch->[1], $ctx)
+   if !defined($branch->[0])
+    || LinkedSpec::RuntimeLogical::truthy(_eval_expr($branch->[0], $ctx));
+ }
+ return undef
+}
+
 sub _eval_call {
  my ($node, $ctx) = @_;
  my $name = $node->{name} // '';
  my $args = $node->{args};
  _error('invalid_codeblock_body', detail => 'call arguments must be an array')
   unless ref($args) eq 'ARRAY';
+
+ return _eval_if_value($node, $ctx) if $name eq 'if';
 
  if ($name eq 'matches') {
   _error('helper_arity_mismatch', helper_name => $name,

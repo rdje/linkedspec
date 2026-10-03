@@ -1,10 +1,10 @@
 # MEMORY
 
-- activation_commit: `fd022815e05d5d061e9fbbab5ba12ff0af582425` — clean marker conditional repair activation base.
-- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.2 - execute marker callable conditionals`.
-- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.2` (done) —48 matched sources,900 tests and original x/rest/error identities.
-- next_action: Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.3 from this clean handoff; diagnose and repair governed lazy value-if dispatch.
-- in_flight_uncommitted: none; completed marker slice is committed by this handoff. No required jobs.
+- activation_commit: `d0ab1140fc97d4518c75b0429b565ddade30dbc0` — clean value conditional repair activation base.
+- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.3 - execute lazy callable value conditionals`.
+- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.3` (done) — lazy value conditional and exact TAP proof verified.
+- next_action: Activate null-return SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.4 from clean committed HEAD; recover canonical return/arity/local-boundary rules first.
+- in_flight_uncommitted: none; completed value conditional slice committed with matched44-source/947-test and exact TAP proof.
 - blockers: No access/decision blocker. Matches prerequisite is repaired; attached/marker/value .0.5 and order/readiness .0.6/.0.7 precede dispatcher/full execution. Other startup repairs remain separate.
   Wrapper startup .7 remains open; recovery/purge stay prohibited.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the

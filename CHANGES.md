@@ -12,6 +12,22 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-10-03 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.3: execute lazy callable value conditionals
+
+A58-line private typed dispatcher validates canonical value-if branches before effects,
+selects conditions once and evaluates only the selected payload. False/null/container results,
+ordered elseif and wrapped/plain fallback compose through existing caller/eager/statement boundaries.
+44 exact matched native/fresh RED/GREEN sources, twelve observation corruptions and twelve
+suites/947 tests PASS. Six canonical/public PUC controls and four executed book examples agree.
+Current attached/marker tests replace only source-identical old value failure expectations;
+all prior captures/producers stay exact, marker claim historical atd0ab1140.258 claim inputs bind
+actual instruments/results. Null-return/while, literal kind, metadata/readiness and full execution
+remain separately owned; no public carrier/generated format/other-backend admission change.
+Six lossless TAP envelopes match pre-envelope byte hashes/lengths and reject18 corruptions.
+A commit launched before inspecting the whitespace result was cancelled before HEAD moved;
+the full focused proof was rerun with envelopes, and staged diff checks pass.
+
+
 ## 2026-10-03 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.2: execute marker callable conditionals
 
 The private evaluator groups typed marker if/elseif/else/endif, shields attached sibling arms,

@@ -1,0 +1,433 @@
+[
+   {
+      "ast" : {
+         "args" : [
+            {
+               "kind" : "boolean",
+               "source" : "true",
+               "source_span" : {
+                  "end" : 7,
+                  "start" : 3
+               },
+               "value" : 1
+            },
+            {
+               "kind" : "string",
+               "quote" : "\"",
+               "source" : "\"hit\"",
+               "source_span" : {
+                  "end" : 13,
+                  "start" : 8
+               },
+               "value" : "hit"
+            },
+            {
+               "args" : [
+                  {
+                     "kind" : "string",
+                     "quote" : "\"",
+                     "source" : "\"miss\"",
+                     "source_span" : {
+                        "end" : 25,
+                        "start" : 19
+                     },
+                     "value" : "miss"
+                  }
+               ],
+               "kind" : "call",
+               "name" : "else",
+               "source" : "else(\"miss\")",
+               "source_method" : "else",
+               "source_span" : {
+                  "end" : 26,
+                  "start" : 14
+               }
+            }
+         ],
+         "kind" : "call",
+         "name" : "if",
+         "source" : "if(true,\"hit\",else(\"miss\"))",
+         "source_method" : "if",
+         "source_span" : {
+            "end" : 27,
+            "start" : 0
+         }
+      },
+      "error" : null,
+      "expression" : "if(true,\"hit\",else(\"miss\"))",
+      "substitution" : "return do { my $__ls_if_value; if (do { require LinkedSpec::RuntimeLogical; LinkedSpec::RuntimeLogical::truthy(1) }) { $__ls_if_value = \"hit\"; } else { $__ls_if_value = \"miss\"; } $__ls_if_value }",
+      "value" : "hit"
+   },
+   {
+      "ast" : {
+         "args" : [
+            {
+               "kind" : "boolean",
+               "source" : "false",
+               "source_span" : {
+                  "end" : 8,
+                  "start" : 3
+               },
+               "value" : 0
+            },
+            {
+               "kind" : "string",
+               "quote" : "\"",
+               "source" : "\"bad\"",
+               "source_span" : {
+                  "end" : 14,
+                  "start" : 9
+               },
+               "value" : "bad"
+            }
+         ],
+         "kind" : "call",
+         "name" : "if",
+         "source" : "if(false,\"bad\")",
+         "source_method" : "if",
+         "source_span" : {
+            "end" : 15,
+            "start" : 0
+         }
+      },
+      "error" : null,
+      "expression" : "if(false,\"bad\")",
+      "substitution" : "return do { my $__ls_if_value; if (do { require LinkedSpec::RuntimeLogical; LinkedSpec::RuntimeLogical::truthy(0) }) { $__ls_if_value = \"bad\"; } $__ls_if_value }",
+      "value" : null
+   },
+   {
+      "ast" : {
+         "args" : [
+            {
+               "kind" : "boolean",
+               "source" : "false",
+               "source_span" : {
+                  "end" : 8,
+                  "start" : 3
+               },
+               "value" : 0
+            },
+            {
+               "kind" : "string",
+               "quote" : "\"",
+               "source" : "\"bad\"",
+               "source_span" : {
+                  "end" : 14,
+                  "start" : 9
+               },
+               "value" : "bad"
+            },
+            {
+               "kind" : "string",
+               "quote" : "\"",
+               "source" : "\"hit\"",
+               "source_span" : {
+                  "end" : 20,
+                  "start" : 15
+               },
+               "value" : "hit"
+            }
+         ],
+         "kind" : "call",
+         "name" : "if",
+         "source" : "if(false,\"bad\",\"hit\")",
+         "source_method" : "if",
+         "source_span" : {
+            "end" : 21,
+            "start" : 0
+         }
+      },
+      "error" : null,
+      "expression" : "if(false,\"bad\",\"hit\")",
+      "substitution" : "return do { my $__ls_if_value; if (do { require LinkedSpec::RuntimeLogical; LinkedSpec::RuntimeLogical::truthy(0) }) { $__ls_if_value = \"bad\"; } else { $__ls_if_value = \"hit\"; } $__ls_if_value }",
+      "value" : "hit"
+   },
+   {
+      "ast" : {
+         "args" : [
+            {
+               "kind" : "boolean",
+               "source" : "false",
+               "source_span" : {
+                  "end" : 8,
+                  "start" : 3
+               },
+               "value" : 0
+            },
+            {
+               "kind" : "string",
+               "quote" : "\"",
+               "source" : "\"bad\"",
+               "source_span" : {
+                  "end" : 14,
+                  "start" : 9
+               },
+               "value" : "bad"
+            },
+            {
+               "args" : [
+                  {
+                     "kind" : "boolean",
+                     "source" : "true",
+                     "source_span" : {
+                        "end" : 26,
+                        "start" : 22
+                     },
+                     "value" : 1
+                  },
+                  {
+                     "kind" : "string",
+                     "quote" : "\"",
+                     "source" : "\"hit\"",
+                     "source_span" : {
+                        "end" : 32,
+                        "start" : 27
+                     },
+                     "value" : "hit"
+                  }
+               ],
+               "kind" : "call",
+               "name" : "elseif",
+               "source" : "elseif(true,\"hit\")",
+               "source_method" : "elseif",
+               "source_span" : {
+                  "end" : 33,
+                  "start" : 15
+               }
+            },
+            {
+               "args" : [
+                  {
+                     "kind" : "string",
+                     "quote" : "\"",
+                     "source" : "\"miss\"",
+                     "source_span" : {
+                        "end" : 45,
+                        "start" : 39
+                     },
+                     "value" : "miss"
+                  }
+               ],
+               "kind" : "call",
+               "name" : "else",
+               "source" : "else(\"miss\")",
+               "source_method" : "else",
+               "source_span" : {
+                  "end" : 46,
+                  "start" : 34
+               }
+            }
+         ],
+         "kind" : "call",
+         "name" : "if",
+         "source" : "if(false,\"bad\",elseif(true,\"hit\"),else(\"miss\"))",
+         "source_method" : "if",
+         "source_span" : {
+            "end" : 47,
+            "start" : 0
+         }
+      },
+      "error" : null,
+      "expression" : "if(false,\"bad\",elseif(true,\"hit\"),else(\"miss\"))",
+      "substitution" : "return do { my $__ls_if_value; if (do { require LinkedSpec::RuntimeLogical; LinkedSpec::RuntimeLogical::truthy(0) }) { $__ls_if_value = \"bad\"; } elsif (do { require LinkedSpec::RuntimeLogical; LinkedSpec::RuntimeLogical::truthy(1) }) { $__ls_if_value = \"hit\"; } else { $__ls_if_value = \"miss\"; } $__ls_if_value }",
+      "value" : "hit"
+   },
+   {
+      "ast" : {
+         "args" : [
+            {
+               "kind" : "boolean",
+               "source" : "false",
+               "source_span" : {
+                  "end" : 7,
+                  "start" : 2
+               },
+               "value" : 0
+            },
+            {
+               "kind" : "string",
+               "quote" : "\"",
+               "source" : "\"bad\"",
+               "source_span" : {
+                  "end" : 13,
+                  "start" : 8
+               },
+               "value" : "bad"
+            },
+            {
+               "args" : [
+                  {
+                     "kind" : "boolean",
+                     "source" : "true",
+                     "source_span" : {
+                        "end" : 23,
+                        "start" : 19
+                     },
+                     "value" : 1
+                  },
+                  {
+                     "kind" : "string",
+                     "quote" : "\"",
+                     "source" : "\"hit\"",
+                     "source_span" : {
+                        "end" : 29,
+                        "start" : 24
+                     },
+                     "value" : "hit"
+                  }
+               ],
+               "kind" : "call",
+               "name" : "elif",
+               "source" : "elif(true,\"hit\")",
+               "source_method" : "elif",
+               "source_span" : {
+                  "end" : 30,
+                  "start" : 14
+               }
+            },
+            {
+               "args" : [
+                  {
+                     "kind" : "string",
+                     "quote" : "\"",
+                     "source" : "\"miss\"",
+                     "source_span" : {
+                        "end" : 42,
+                        "start" : 36
+                     },
+                     "value" : "miss"
+                  }
+               ],
+               "kind" : "call",
+               "name" : "else",
+               "source" : "else(\"miss\")",
+               "source_method" : "else",
+               "source_span" : {
+                  "end" : 43,
+                  "start" : 31
+               }
+            }
+         ],
+         "kind" : "call",
+         "name" : "i",
+         "source" : "i(false,\"bad\",elif(true,\"hit\"),else(\"miss\"))",
+         "source_method" : "i",
+         "source_span" : {
+            "end" : 44,
+            "start" : 0
+         }
+      },
+      "error" : null,
+      "expression" : "i(false,\"bad\",elif(true,\"hit\"),else(\"miss\"))",
+      "substitution" : "return do { if (do { require LinkedSpec::RuntimeLogical; LinkedSpec::RuntimeLogical::truthy(\"bad\") }) { } elsif (do { require LinkedSpec::RuntimeLogical; LinkedSpec::RuntimeLogical::truthy(\"hit\") }) { } else { \"miss\" } }",
+      "value" : null
+   },
+   {
+      "ast" : {
+         "args" : [
+            {
+               "kind" : "boolean",
+               "source" : "false",
+               "source_span" : {
+                  "end" : 8,
+                  "start" : 3
+               },
+               "value" : 0
+            },
+            {
+               "kind" : "string",
+               "quote" : "\"",
+               "source" : "\"bad\"",
+               "source_span" : {
+                  "end" : 14,
+                  "start" : 9
+               },
+               "value" : "bad"
+            },
+            {
+               "args" : [
+                  {
+                     "kind" : "variable",
+                     "name" : "Top",
+                     "source" : "Top",
+                     "source_span" : {
+                        "end" : 25,
+                        "start" : 22
+                     }
+                  },
+                  {
+                     "kind" : "boolean",
+                     "source" : "true",
+                     "source_span" : {
+                        "end" : 30,
+                        "start" : 26
+                     },
+                     "value" : 1
+                  },
+                  {
+                     "kind" : "string",
+                     "quote" : "\"",
+                     "source" : "\"hit\"",
+                     "source_span" : {
+                        "end" : 36,
+                        "start" : 31
+                     },
+                     "value" : "hit"
+                  }
+               ],
+               "kind" : "call",
+               "name" : "elseif",
+               "source" : "elseif(Top,true,\"hit\")",
+               "source_method" : "elseif",
+               "source_span" : {
+                  "end" : 37,
+                  "start" : 15
+               }
+            },
+            {
+               "args" : [
+                  {
+                     "kind" : "variable",
+                     "name" : "Top",
+                     "source" : "Top",
+                     "source_span" : {
+                        "end" : 46,
+                        "start" : 43
+                     }
+                  },
+                  {
+                     "kind" : "string",
+                     "quote" : "\"",
+                     "source" : "\"miss\"",
+                     "source_span" : {
+                        "end" : 53,
+                        "start" : 47
+                     },
+                     "value" : "miss"
+                  }
+               ],
+               "kind" : "call",
+               "name" : "else",
+               "source" : "else(Top,\"miss\")",
+               "source_method" : "else",
+               "source_span" : {
+                  "end" : 54,
+                  "start" : 38
+               }
+            }
+         ],
+         "kind" : "call",
+         "name" : "if",
+         "source" : "if(false,\"bad\",elseif(Top,true,\"hit\"),else(Top,\"miss\"))",
+         "source_method" : "if",
+         "source_span" : {
+            "end" : 55,
+            "start" : 0
+         }
+      },
+      "error" : null,
+      "expression" : "if(false,\"bad\",elseif(Top,true,\"hit\"),else(Top,\"miss\"))",
+      "substitution" : "return do { my $__ls_if_value; if (do { require LinkedSpec::RuntimeLogical; LinkedSpec::RuntimeLogical::truthy(0) }) { $__ls_if_value = \"bad\"; } elsif (do { require LinkedSpec::RuntimeLogical; LinkedSpec::RuntimeLogical::truthy(1) }) { $__ls_if_value = \"hit\"; } else { $__ls_if_value = \"miss\"; } $__ls_if_value }",
+      "value" : "hit"
+   }
+]

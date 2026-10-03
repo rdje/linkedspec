@@ -1,0 +1,108 @@
+{
+  "owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.3",
+  "limits": "Public PUC CLI comparison/diagnostics only; no backend admission.",
+  "cases": [
+    {
+      "id": "original",
+      "source": "Top:: I {  cb={|| return(if(true,\"hit\",else(\"miss\"))) }; return(cb()) }",
+      "command": [
+        "bash",
+        "tools/run_lua_project_data.sh",
+        "puc",
+        "lua/bin/linkedspec-lua",
+        "--spec-file",
+        ".linkedspec-data/scratch/codeblock-value-if/native-comparison/original.spec",
+        "--input",
+        ""
+      ],
+      "exit": 0,
+      "stdout": "\"hit\"\n",
+      "stderr": ""
+    },
+    {
+      "id": "false",
+      "source": "Top:: I {  cb={|| return(if(false,\"bad\",else(\"hit\"))) }; return(cb()) }",
+      "command": [
+        "bash",
+        "tools/run_lua_project_data.sh",
+        "puc",
+        "lua/bin/linkedspec-lua",
+        "--spec-file",
+        ".linkedspec-data/scratch/codeblock-value-if/native-comparison/false.spec",
+        "--input",
+        ""
+      ],
+      "exit": 0,
+      "stdout": "\"hit\"\n",
+      "stderr": ""
+    },
+    {
+      "id": "no_match",
+      "source": "Top:: I {  cb={|| return(if(false,\"bad\")) }; return(cb()) }",
+      "command": [
+        "bash",
+        "tools/run_lua_project_data.sh",
+        "puc",
+        "lua/bin/linkedspec-lua",
+        "--spec-file",
+        ".linkedspec-data/scratch/codeblock-value-if/native-comparison/no_match.spec",
+        "--input",
+        ""
+      ],
+      "exit": 0,
+      "stdout": "null\n",
+      "stderr": ""
+    },
+    {
+      "id": "plain_fallback",
+      "source": "Top:: I {  cb={|| return(if(false,\"bad\",\"hit\")) }; return(cb()) }",
+      "command": [
+        "bash",
+        "tools/run_lua_project_data.sh",
+        "puc",
+        "lua/bin/linkedspec-lua",
+        "--spec-file",
+        ".linkedspec-data/scratch/codeblock-value-if/native-comparison/plain_fallback.spec",
+        "--input",
+        ""
+      ],
+      "exit": 0,
+      "stdout": "\"hit\"\n",
+      "stderr": ""
+    },
+    {
+      "id": "elseif",
+      "source": "Top:: I {  cb={|| return(if(false,\"bad\",elseif(true,\"hit\"),else(\"miss\"))) }; return(cb()) }",
+      "command": [
+        "bash",
+        "tools/run_lua_project_data.sh",
+        "puc",
+        "lua/bin/linkedspec-lua",
+        "--spec-file",
+        ".linkedspec-data/scratch/codeblock-value-if/native-comparison/elseif.spec",
+        "--input",
+        ""
+      ],
+      "exit": 0,
+      "stdout": "\"hit\"\n",
+      "stderr": ""
+    },
+    {
+      "id": "nested",
+      "source": "Top:: I {  cb={|| return(if(false,\"bad\",elseif(true,if(false,\"bad\",else(\"hit\"))),else(\"bad\"))) }; return(cb()) }",
+      "command": [
+        "bash",
+        "tools/run_lua_project_data.sh",
+        "puc",
+        "lua/bin/linkedspec-lua",
+        "--spec-file",
+        ".linkedspec-data/scratch/codeblock-value-if/native-comparison/nested.spec",
+        "--input",
+        ""
+      ],
+      "exit": 0,
+      "stdout": "\"hit\"\n",
+      "stderr": ""
+    }
+  ]
+}

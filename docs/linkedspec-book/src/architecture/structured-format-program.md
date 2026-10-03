@@ -1447,7 +1447,33 @@ and a branch after fallback reject before condition effects, with the typed open
 span. Reached orphan controls also diagnose. An explicit return skips later statements, including
 an unreachable trailing control; this grouping adds no whole-body syntax preflight.
 
-Value-form `return(if(true,"hit",else("miss")))` still reaches unsupported helper `else`.
+Callable value conditionals now return the selected payload. They evaluate conditions once,
+stop at the first true arm, and leave all unselected conditions and payloads unevaluated.
+A missing matching arm returns null. These are value expressions; the statement result rules
+above still apply. For example:
+
+```spec
+Top:: I {  cb={|| return(if(true,"hit",else("miss"))) }; return(cb()) }
+```
+
+```spec
+Top:: I {  cb={|| return(if(false,"bad",elseif(false,"bad"),elseif(true,"hit"),elseif(unknown_helper(),"bad"),else(unknown_helper()))) }; return(cb()) }
+```
+
+```spec
+Top:: I {  cb={|| return(if(false,"bad","hit")) }; return(cb()) }
+```
+
+```spec
+Top:: I {  cb={|flag| return(if(true,flag,else("bad"))); unknown_helper() }; return(cb(false)) }
+```
+
+The first three examples return `"hit"`; the last returns JSON `false` and skips the later
+unknown helper. An optional final `else(payload)` or plain final payload supplies fallback.
+`elseif(condition,payload)` arms stay ordered. Existing leading bare scope labels on branch
+wrappers remain supported. Branch order and wrapper arity validate before condition effects.
+Value aliases are not admitted by this repair; use `if`, `elseif`, and `else`.
+
 Zero-argument `return()` raises `invalid_codeblock_return`, and `return_undef()` raises
 `unknown_helper` in this evaluator. Separate leaves own those boundaries and deferred while.
 The working explicit-null spelling skips the later unknown helper:

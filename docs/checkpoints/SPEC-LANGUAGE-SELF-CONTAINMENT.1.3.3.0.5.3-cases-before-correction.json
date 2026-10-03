@@ -1,0 +1,264 @@
+[
+  {
+    "id": "original",
+    "source": "Top:: I {  cb={|| return(if(true,\"hit\",else(\"miss\"))) }; return(cb()) }",
+    "expected": "hit"
+  },
+  {
+    "id": "false",
+    "source": "Top:: I {  cb={|| return(if(false,\"bad\",else(\"hit\"))) }; return(cb()) }",
+    "expected": "hit"
+  },
+  {
+    "id": "no_match",
+    "source": "Top:: I {  cb={|| return(if(false,\"bad\")) }; return(cb()) }",
+    "expected": null
+  },
+  {
+    "id": "no_fallback_true",
+    "source": "Top:: I {  cb={|| return(if(true,\"hit\")) }; return(cb()) }",
+    "expected": "hit"
+  },
+  {
+    "id": "plain_fallback",
+    "source": "Top:: I {  cb={|| return(if(false,\"bad\",\"hit\")) }; return(cb()) }",
+    "expected": "hit"
+  },
+  {
+    "id": "elseif",
+    "source": "Top:: I {  cb={|| return(if(false,\"bad\",elseif(true,\"hit\"),else(\"miss\"))) }; return(cb()) }",
+    "expected": "hit"
+  },
+  {
+    "id": "ordered",
+    "source": "Top:: I {  cb={|| return(if(false,\"bad\",elseif(false,\"bad\"),elseif(true,\"hit\"),elseif(unknown_helper(),\"bad\"),else(unknown_helper()))) }; return(cb()) }",
+    "expected": "hit"
+  },
+  {
+    "id": "selected_only",
+    "source": "Top:: I {  cb={|| return(if(true,\"hit\",elseif(unknown_helper(),unknown_helper()),else(unknown_helper()))) }; return(cb()) }",
+    "expected": "hit"
+  },
+  {
+    "id": "skip_then",
+    "source": "Top:: I {  cb={|| return(if(false,unknown_helper(),else(\"hit\"))) }; return(cb()) }",
+    "expected": "hit"
+  },
+  {
+    "id": "nested",
+    "source": "Top:: I {  cb={|| return(if(false,\"bad\",elseif(true,if(false,\"bad\",else(\"hit\"))),else(\"bad\"))) }; return(cb()) }",
+    "expected": "hit"
+  },
+  {
+    "id": "zero",
+    "source": "Top:: I {  cb={|| return(if(0,\"bad\",else(\"hit\"))) }; return(cb()) }",
+    "expected": "hit"
+  },
+  {
+    "id": "zero_string",
+    "source": "Top:: I {  cb={|| return(if(\"0\",\"hit\",else(\"bad\"))) }; return(cb()) }",
+    "expected": "hit"
+  },
+  {
+    "id": "empty_array",
+    "source": "Top:: I {  cb={|| return(if([],\"bad\",else(\"hit\"))) }; return(cb()) }",
+    "expected": "hit"
+  },
+  {
+    "id": "null_condition",
+    "source": "Top:: I {  cb={|| return(if(undef,\"bad\",else(\"hit\"))) }; return(cb()) }",
+    "expected": "hit"
+  },
+  {
+    "id": "null_payload",
+    "source": "Top:: I {  cb={|| return(if(true,undef,else(\"bad\"))); unknown_helper() }; return(cb()) }",
+    "expected": null
+  },
+  {
+    "id": "false_payload",
+    "source": "Top:: I {  cb={|flag| return(if(true,flag,else(\"bad\"))); unknown_helper() }; return(cb(false)) }",
+    "expected": false
+  },
+  {
+    "id": "array_payload",
+    "source": "Top:: I {  cb={|| return(if(true,[\"hit\",0],else(\"bad\"))) }; return(cb()) }",
+    "expected": [
+      "hit",
+      0
+    ]
+  },
+  {
+    "id": "hash_payload",
+    "source": "Top:: I {  cb={|| return(if(false,\"bad\",else(hash(\"key\",\"hit\")))) }; return(cb()) }",
+    "expected": {
+      "key": "hit"
+    }
+  },
+  {
+    "id": "assignment",
+    "source": "Top:: I {  cb={|| value=if(false,\"bad\",else(\"hit\")); return(value) }; return(cb()) }",
+    "expected": "hit"
+  },
+  {
+    "id": "helper_nesting",
+    "source": "Top:: I {  cb={|| return(cat(\"pre\",if(false,\"bad\",else(\"hit\")))) }; return(cb()) }",
+    "expected": "prehit"
+  },
+  {
+    "id": "marker_nested",
+    "source": "Top:: I {  cb={|| if(true); return(if(false,\"bad\",else(\"hit\"))); endif(); return(\"bad\") }; return(cb()) }",
+    "expected": "hit"
+  },
+  {
+    "id": "attached_nested",
+    "source": "Top:: I {  cb={|| if(true) { return(if(false,\"bad\",else(\"hit\"))) }; return(\"bad\") }; return(cb()) }",
+    "expected": "hit"
+  },
+  {
+    "id": "eager_local_return",
+    "source": "Top:: I {  cb={|| value={ return(if(true,\"inner\",else(\"bad\"))); unknown_helper() }; return([value,\"outer\"]) }; return(cb()) }",
+    "expected": [
+      "inner",
+      "outer"
+    ]
+  },
+  {
+    "id": "selected_effects",
+    "source": "Top:: I { effects=[]; cb={|| value=if(false,push(effects,\"bad\"),else(push(effects,\"selected\"))); return([value,effects]) }; return(cb()) }",
+    "expected": [
+      [
+        "selected"
+      ],
+      [
+        "selected"
+      ]
+    ]
+  },
+  {
+    "id": "condition_effects",
+    "source": "Top:: I { effects=[]; first={|| push(effects,\"first\"); return(false) }; second={|| push(effects,\"second\"); return(true) }; cb={|| return(if(first(),\"bad\",elseif(second(),effects),elseif(unknown_helper(),\"bad\"),else(\"bad\"))) }; return(cb()) }",
+    "expected": [
+      "first",
+      "second"
+    ]
+  },
+  {
+    "id": "parameter_scope",
+    "source": "Top:: I { x=\"outside\"; cb={|x| return(if(matches(x,/ok/),x,else(\"miss\"))) }; return(cb(\"ok\")) }",
+    "expected": "ok"
+  },
+  {
+    "id": "rest_scope",
+    "source": "Top:: I { x=\"outside\"; rest=[\"caller\"]; cb={|x,...rest| return(if(true,[x,rest],else(\"bad\"))) }; return(cb(\"inside\",\"one\",\"two\")) }",
+    "expected": [
+      "inside",
+      [
+        "one",
+        "two"
+      ]
+    ]
+  },
+  {
+    "id": "condition_failure_scope",
+    "source": "Top:: I { x=\"outside\"; cb={|x| return(if(unknown_helper(),x,else(\"bad\"))) }; return(cb(\"inside\")) }",
+    "error": "unknown_helper",
+    "name": "unknown_helper"
+  },
+  {
+    "id": "payload_failure_scope",
+    "source": "Top:: I { x=\"outside\"; cb={|x| return(if(true,unknown_helper(),else(x))) }; return(cb(\"inside\")) }",
+    "error": "unknown_helper",
+    "name": "unknown_helper"
+  },
+  {
+    "id": "helper_precedence",
+    "source": "Top:: I { if={|| return(\"shadow\") }; cb={|| return(if(false,\"bad\",else(\"hit\"))) }; return(cb()) }",
+    "expected": "hit"
+  },
+  {
+    "id": "scope_wrappers",
+    "source": "Top:: I {  cb={|| return(if(false,\"bad\",elseif(Top,true,\"hit\"),else(Top,\"miss\"))) }; return(cb()) }",
+    "expected": "hit"
+  },
+  {
+    "id": "scope_fallback",
+    "source": "Top:: I {  cb={|| return(if(false,\"bad\",else(Top,\"hit\"))) }; return(cb()) }",
+    "expected": "hit"
+  },
+  {
+    "id": "compiled_direct",
+    "source": "Top:: I { fn fn_value(x) { return(if(matches(x,/ok/),x,else(\"miss\"))) }; cb={|| return(fn_value(\"ok\")) }; return(cb()) }",
+    "expected": "ok"
+  },
+  {
+    "id": "eager_logical",
+    "source": "Top:: I {  cb={|| return(and(false,unknown_helper())) }; return(cb()) }",
+    "error": "unknown_helper",
+    "name": "unknown_helper"
+  },
+  {
+    "id": "empty_return_excluded",
+    "source": "Top:: I {  cb={|| return() }; return(cb()) }",
+    "error": "invalid_codeblock_return"
+  },
+  {
+    "id": "return_undef_excluded",
+    "source": "Top:: I {  cb={|| return_undef() }; return(cb()) }",
+    "error": "unknown_helper",
+    "name": "return_undef"
+  },
+  {
+    "id": "while_excluded",
+    "source": "Top:: I {  cb={|| while(false) { \"bad\" }; return(\"after\") }; return(cb()) }",
+    "kind": "control_while",
+    "error": "unsupported_codeblock_actionir"
+  },
+  {
+    "id": "alias_excluded",
+    "source": "Top:: I {  cb={|| return(i(false,\"bad\",elif(true,\"hit\"),else(\"miss\"))) }; return(cb()) }",
+    "error": "unknown_helper",
+    "name": "elif"
+  },
+  {
+    "id": "if_arity",
+    "source": "Top:: I { effects=[]; cb={|| return(if(push(effects,\"bad\"))) }; return(cb()) }",
+    "helper_name": "if",
+    "expected_arity": "at least 2",
+    "effects": [],
+    "error": "helper_arity_mismatch"
+  },
+  {
+    "id": "elseif_arity",
+    "source": "Top:: I { effects=[]; cb={|| return(if(push(effects,\"bad\"),\"hit\",elseif(true))) }; return(cb()) }",
+    "helper_name": "elseif",
+    "expected_arity": "exactly 2",
+    "effects": [],
+    "error": "helper_arity_mismatch"
+  },
+  {
+    "id": "else_arity",
+    "source": "Top:: I { effects=[]; cb={|| return(if(push(effects,\"bad\"),\"hit\",else())) }; return(cb()) }",
+    "helper_name": "else",
+    "expected_arity": "exactly 1",
+    "effects": [],
+    "error": "helper_arity_mismatch"
+  },
+  {
+    "id": "duplicate_else",
+    "source": "Top:: I { effects=[]; cb={|| return(if(push(effects,\"bad\"),\"hit\",else(\"bad\"),else(\"bad\"))) }; return(cb()) }",
+    "effects": [],
+    "error": "invalid_codeblock_control"
+  },
+  {
+    "id": "elseif_after_else",
+    "source": "Top:: I { effects=[]; cb={|| return(if(push(effects,\"bad\"),\"hit\",else(\"bad\"),elseif(true,\"bad\"))) }; return(cb()) }",
+    "effects": [],
+    "error": "invalid_codeblock_control"
+  },
+  {
+    "id": "plain_before_arm",
+    "source": "Top:: I { effects=[]; cb={|| return(if(push(effects,\"bad\"),\"hit\",\"bad\",elseif(true,\"bad\"))) }; return(cb()) }",
+    "effects": [],
+    "error": "invalid_codeblock_control"
+  }
+]

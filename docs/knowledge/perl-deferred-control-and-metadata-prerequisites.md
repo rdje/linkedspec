@@ -10,7 +10,7 @@ answers:
   - "why must callable matches be repaired before deferred attached if"
   - "which tasks own deferred marker and value conditional failures"
 date: 2026-10-03
-status: historical diagnosis retained; matches/attached/marker repairs complete; value/null/while and .0.6 remain separate
+status: historical diagnosis retained; matches/attached/marker/value repairs complete; null/while and .0.6 remain separate
 tags: [perl, actionir, callable, control, metadata, nondeterminism, partial]
 evidence: "Literal repair .3.1 retains twenty native/fresh sources: nineteen healthy pairs and exact typed control_if failure on both routes. Controlled hash-seed public descriptor/substitution observations retain residual event permutations. Tracked programs/observations and original source boundaries are in its verification checkpoint and claim record."
 reverify: "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.0-review.py at its captured e07f production boundary; .0.5/.0.6 and startup87.2 intentionally change these observations. Earlier .3.1 order evidence remains historical."
@@ -95,6 +95,7 @@ RED/GREEN and actual operand/scope/error controls. The twenty-source `.0.5.0` di
 and bridge reconciliation claims are frozen at52763 with old hashes/results unchanged.
 Their original matches failure is historical. Attached `.0.5.1` now executes typed branches
 and nested local returns; its current fact is [the attached executor card](perl-callable-attached-conditional-execution.md).
-Marker `.0.5.2` now groups typed statements and propagates local returns. Value `.0.5.3`,
-null-return `.0.5.4` and while `.0.5.5` retain independent repair ownership. Numeric helpers,
+Marker `.0.5.2` groups typed statements and propagates local returns. Value `.0.5.3` now
+selects canonical payloads lazily; its current fact is the value executor card. Null-return
+`.0.5.4` and while `.0.5.5` retain independent repair ownership. Numeric helpers,
 `.0.6` ordering and `.0.7` readiness are not closed by pattern dispatch.

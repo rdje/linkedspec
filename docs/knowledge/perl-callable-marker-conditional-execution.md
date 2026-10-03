@@ -10,7 +10,7 @@ date: 2026-10-03
 status: marker executor; value/null/while and boolean literal owners stay separate
 tags: [perl, callable, actionir, marker, control, return]
 evidence: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.2 tracked public native/fresh source matrix, actual pre-fix runtime and documented PUC CLI comparisons."
-reverify: "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.2-review.py"
+reverify: "prove -Iperl t/codeblock_marker_if_perl.t; .5.2 full review is historical atd0ab1140 because .5.3 supersedes value_excluded; use .5.3-review.py for current successor proof."
 ---
 
 The private marker collector reads typed sibling statements, counts nested marker if/endif
@@ -35,3 +35,6 @@ not JSON false. Exact before-bool source/observations survive; the final marker 
 false argument and returns its parameter, preserving boolean kind and proving falsey return.
 No boolean evaluator repair is hidden in this leaf. Value if/else, empty return/return_undef,
 while, function MVP, event ordering/readiness and dispatcher/full16 remain independent owners.
+
+Value `.0.5.3` now executes canonical lazy value conditionals; the old failure evidence
+remains historical. See [the value executor card](perl-callable-value-conditional-execution.md).

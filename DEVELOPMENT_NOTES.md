@@ -12,6 +12,25 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-10-03 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.3: value dispatch before generic operands
+
+Public substitution/AST/Get/fresh dumps distinguish the existing canonical value-call contract
+from statement controls. Generic operand evaluation reached unselected else/elseif or unknown
+payloads; private typed dispatch now validates branch order/arity and lazily selects one value.
+Optional wrapper scope labels mirror the canonical lowerer. Value aliases remain excluded.
+The typed false parameter isolates return-kind propagation from separately owned literal drift.
+The final47-test baseline fails37 groups; corrected function declaration placement and direct
+body_ast test key preserve their original failures/sources instead of silently replacing proof.
+Full proof passes947 tests/twelve corruption controls with actual identity/equal-value checks.
+253 runtime inputs plus final verification/book sources/config/wrapper yield258 claim inputs;
+25 executed instruments are producer-labeled. Older marker/attached cases and producers remain
+unchanged; source-identical current success expectations supersede their historical value failures.
+No semantic-runtime-mutant or metadata/readiness/other-backend admission claim follows.
+Six lossless TAP envelopes match pre-envelope byte hashes/lengths and reject18 corruptions.
+A commit launched before inspecting the whitespace result was cancelled before HEAD moved;
+the full focused proof was rerun with envelopes, and staged diff checks pass.
+
+
 ## 2026-10-03 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.2: marker grouping and source-identical successor proof
 
 Marker grouping scans typed siblings and nested if/endif, with attached arms shielded from the

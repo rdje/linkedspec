@@ -13,7 +13,7 @@ date: 2026-10-03
 status: attached and marker statement executors verified; value/null/while separately owned
 tags: [perl, callable, actionir, control, return, scope]
 evidence: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.1 source-complete RED/GREEN observations, native CLI comparison, focused regression and actual replay capture."
-reverify: "prove -Iperl t/codeblock_attached_if_perl.t; .5.1 full review is historical atfd022815 because .5.2 supersedes marker_excluded. Current marker proof is .5.2-review.py."
+reverify: "prove -Iperl t/codeblock_attached_if_perl.t; .5.1 full review is historical atfd022815 because .5.2 supersedes marker_excluded. Current value successor proof is .5.3-review.py."
 ---
 
 `CodeblockRuntime::_execute_sequence` reads typed action statements. Attached `control_if`
@@ -54,3 +54,6 @@ Explicit semicolon-separated variants create typed sibling branches and are reje
 selected-body effects by invalid_codeblock_control. Orphan and marker-mixed groups retain typed
 unsupported diagnostics. This is a test-source correction; no raw AST is reparsed or executed,
 and raw-expression/readiness claims remain with .0.7.
+
+Value `.0.5.3` now executes canonical lazy value conditionals; the old failure evidence
+remains historical. See [the value executor card](perl-callable-value-conditional-execution.md).
