@@ -2,17 +2,19 @@
 
 ## Current Activity
 
-Full PNT: typed attached callable controls verified; marker then value/null-return forms precede order/readiness and dispatcher closeout.
+Full PNT: typed attached and marker callable controls verified; value-if then null-return/while precede order/readiness and dispatcher closeout.
 
 ## Latest Completed Slice
 
-`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.1`:47 matched native/fresh RED/GREEN sources, actual branch/scope/error identities and ten corruption controls PASS. Ten suites pass849 tests, including the new50-test regression. Existing statement/return boundaries agree with three documented PUC CLI sources; only CodeblockRuntime production changes. Prior matches claim freezes at5174958 without refreshing results.
+`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.2`:48 matched native/fresh RED/GREEN sources and twelve corruption controls PASS. Eleven suites pass900 tests (new51 marker plus current849 dependents). Source-poisoned AST/original x/rest/error identities and four exact rendered examples pass. Five documented PUC CLI sources establish selected statement/malformed/return boundaries. Prior attached claim freezes atfd022815; boolean literal mismatch stays startup35.
 
 ## Next Action
 
-Activate marker SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.2 from clean committed HEAD. Value .5.3, newly scheduled null-return .5.4 and while .5.5, order/readiness .6/.7 and full D/P remain separate.
+Activate value-if SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.3 from clean committed HEAD. Null-return .5.4, while .5.5, startup35 boolean identity, order/readiness .6/.7 and full D/P remain separate.
 
 ## Recent Completions
+
+- `2026-10-03` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.2` repairs typed marker groups/nested returns with900 focused tests.
 
 - `2026-10-03` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.1` repairs typed attached callable branches and nested returns with849 focused tests.
 
@@ -43,8 +45,6 @@ Activate marker SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.2 from clean committed 
 - `2026-10-02` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.1` implements central compiled registered dispatch with actual recursion/copy/effect/error proof.
 
 - `2026-10-02` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.0` freezes24 paired deferred-function bridge controls and implementation ownership.
-
-- `2026-10-02` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.0.2` binds committed callback scope proof to canonical prerequisite closure before the function bridge.
 
 ## History
 

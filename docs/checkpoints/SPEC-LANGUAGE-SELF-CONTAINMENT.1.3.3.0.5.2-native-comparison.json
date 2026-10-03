@@ -1,0 +1,91 @@
+{
+  "owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.2",
+  "limits": "Public PUC CLI comparison/diagnostics only; no backend admission.",
+  "cases": [
+    {
+      "id": "implicit_true",
+      "source": "Top:: I {  cb={|| if(true); \"hit\"; endif() }; return(cb()) }",
+      "command": [
+        "bash",
+        "tools/run_lua_project_data.sh",
+        "puc",
+        "lua/bin/linkedspec-lua",
+        "--spec-file",
+        ".linkedspec-data/scratch/codeblock-marker-if/native-comparison/implicit_true.spec",
+        "--input",
+        ""
+      ],
+      "exit": 0,
+      "stdout": "null\n",
+      "stderr": ""
+    },
+    {
+      "id": "implicit_false",
+      "source": "Top:: I {  cb={|| if(false); \"hit\"; endif() }; return(cb()) }",
+      "command": [
+        "bash",
+        "tools/run_lua_project_data.sh",
+        "puc",
+        "lua/bin/linkedspec-lua",
+        "--spec-file",
+        ".linkedspec-data/scratch/codeblock-marker-if/native-comparison/implicit_false.spec",
+        "--input",
+        ""
+      ],
+      "exit": 0,
+      "stdout": "null\n",
+      "stderr": ""
+    },
+    {
+      "id": "missing_endif",
+      "source": "Top:: I { cb={|| if(true); return(\"hit\") }; return(cb()) }",
+      "command": [
+        "bash",
+        "tools/run_lua_project_data.sh",
+        "puc",
+        "lua/bin/linkedspec-lua",
+        "--spec-file",
+        ".linkedspec-data/scratch/codeblock-marker-if/native-comparison/missing_endif.spec",
+        "--input",
+        ""
+      ],
+      "exit": 1,
+      "stdout": "",
+      "stderr": "linkedspec: parser invocation failed\n"
+    },
+    {
+      "id": "duplicate_else",
+      "source": "Top:: I { cb={|| if(true); return(\"hit\"); else(); return(\"bad\"); else(); return(\"bad\"); endif() }; return(cb()) }",
+      "command": [
+        "bash",
+        "tools/run_lua_project_data.sh",
+        "puc",
+        "lua/bin/linkedspec-lua",
+        "--spec-file",
+        ".linkedspec-data/scratch/codeblock-marker-if/native-comparison/duplicate_else.spec",
+        "--input",
+        ""
+      ],
+      "exit": 1,
+      "stdout": "",
+      "stderr": "linkedspec: parser invocation failed\n"
+    },
+    {
+      "id": "extra_endif",
+      "source": "Top:: I { cb={|| if(true); return(\"hit\"); endif(); endif() }; return(cb()) }",
+      "command": [
+        "bash",
+        "tools/run_lua_project_data.sh",
+        "puc",
+        "lua/bin/linkedspec-lua",
+        "--spec-file",
+        ".linkedspec-data/scratch/codeblock-marker-if/native-comparison/extra_endif.spec",
+        "--input",
+        ""
+      ],
+      "exit": 0,
+      "stdout": "\"hit\"\n",
+      "stderr": ""
+    }
+  ]
+}

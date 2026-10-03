@@ -485,6 +485,58 @@ sub _execute_attached_if {
  return ($next, undef, 0)
 }
 
+sub _execute_marker_if {
+ my ($statements, $index, $ctx) = @_;
+ my $opening = $statements->[$index]{expr};
+ my @branches = ({condition => $opening->{condition}, statements => []});
+ my ($depth, $has_else) = (1, 0);
+ for (my $next = $index + 1; $next < @$statements; $next++) {
+  my $statement = $statements->[$next];
+  _error('invalid_codeblock_body', detail => 'body statement must be action_stmt')
+   unless ref($statement) eq 'HASH' && ($statement->{kind} // '') eq 'action_stmt';
+  my $expr = $statement->{expr};
+  my $kind = ref($expr) eq 'HASH' ? ($expr->{kind} // '') : '';
+  if ($kind eq 'control_if' && ($expr->{branch_role} // '') eq 'if' && ref($expr->{body}) eq 'HASH') {
+   # Attached sibling arms belong to this nested statement, not the marker group.
+   push @{$branches[-1]{statements}}, $statement;
+   while ($next + 1 < @$statements) {
+    my $arm_statement = $statements->[$next + 1];
+    last unless ref($arm_statement) eq 'HASH' && ($arm_statement->{kind} // '') eq 'action_stmt';
+    my $arm = $arm_statement->{expr};
+    last unless ref($arm) eq 'HASH' && ref($arm->{body}) eq 'HASH';
+    last unless (($arm->{kind} // '') eq 'control_if' && ($arm->{branch_role} // '') eq 'elseif')
+     || ($arm->{kind} // '') eq 'control_else';
+    push @{$branches[-1]{statements}}, $arm_statement;
+    $next++;
+   }
+   next;
+  }
+  if ($kind eq 'control_if' && ($expr->{branch_role} // '') eq 'if') {
+   $depth++;
+  } elsif ($kind eq 'control_endif') {
+   if (--$depth == 0) {
+    foreach my $branch (@branches) {
+     next if exists($branch->{condition})
+      && !LinkedSpec::RuntimeLogical::truthy(_eval_expr($branch->{condition}, $ctx));
+     my ($value, $returned) = _execute_sequence({kind => 'action_block', statements => $branch->{statements}}, $ctx);
+     return ($next + 1, $value, 1) if $returned;
+     last;
+    }
+    return ($next + 1, undef, 0)
+   }
+  } elsif ($depth == 1 && (($kind eq 'control_if' && ($expr->{branch_role} // '') eq 'elseif')
+   || $kind eq 'control_else')) {
+   _error('unsupported_codeblock_actionir', kind => $kind) if ref($expr->{body}) eq 'HASH';
+   _error('invalid_codeblock_control', detail => 'marker branch follows else', source_span => $expr->{source_span}) if $has_else;
+   $has_else = 1 if $kind eq 'control_else';
+   push @branches, {statements => [], $has_else ? () : (condition => $expr->{condition})};
+   next;
+  }
+  push @{$branches[-1]{statements}}, $statement;
+ }
+ _error('invalid_codeblock_control', detail => 'marker if missing endif', source_span => $opening->{source_span})
+}
+
 sub _execute_sequence {
  my ($body, $ctx) = @_;
  _error('invalid_codeblock_body', detail => 'body must be an action_block')
@@ -496,6 +548,19 @@ sub _execute_sequence {
   _error('invalid_codeblock_body', detail => 'body statement must be action_stmt')
    unless ref($statement) eq 'HASH' && ($statement->{kind} // '') eq 'action_stmt';
   my $expr = $statement->{expr};
+  if (ref($expr) eq 'HASH' && ($expr->{kind} // '') eq 'control_if'
+   && ($expr->{branch_role} // '') eq 'if' && !exists($expr->{body})) {
+   my ($next, $value, $returned) = _execute_marker_if($statements, $index, $ctx);
+   return ($value, 1) if $returned;
+   $index = $next - 1;
+   $result = undef;
+   next;
+  }
+  if (ref($expr) eq 'HASH' && !exists($expr->{body})
+   && (($expr->{kind} // '') eq 'control_endif' || ($expr->{kind} // '') eq 'control_else'
+    || (($expr->{kind} // '') eq 'control_if' && ($expr->{branch_role} // '') eq 'elseif'))) {
+   _error('invalid_codeblock_control', detail => 'marker control without matching if', source_span => $expr->{source_span})
+  }
   if (ref($expr) eq 'HASH' && ($expr->{kind} // '') eq 'control_if'
    && ($expr->{branch_role} // '') eq 'if' && ref($expr->{body}) eq 'HASH') {
    my ($next, $value, $returned) = _execute_attached_if($statements, $index, $ctx);

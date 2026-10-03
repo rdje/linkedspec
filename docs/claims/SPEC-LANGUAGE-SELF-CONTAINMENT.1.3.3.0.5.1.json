@@ -5,7 +5,7 @@
     {
       "name": "callable-attached-conditional-execution",
       "statement": "Perl callable attached if/elseif/else executes typed conditions and bodies with governed truthiness, lazy selection and nested local return;849 focused tests pass.",
-      "scope": "47 exact public source pairs on native and independent fresh emitted Perl, including original matches composition, branch/alias/nested/effect/truthiness/fixed-rest scope cases, four compiled direct controls, two straight callable controls and eight typed exclusions/errors. The final source matrix includes working return(undef). Public typed-AST invocation tests poison recorded source fields and reject separated malformed/orphan/mixed groups. PUC Lua CLI compares only three selected existing result/return boundaries. No marker/value/null-return-form repair, loop/function-MVP extension, record/context/schema change, raw ordering/readiness repair, dispatcher/full16 execution or other-backend admission. Direct typed invocation additionally checks original fixed/rest binding references, original rest-array identity and an equal-value distinct-array control; native/fresh source observers measure original x references and copied-rest results.",
+      "scope": "47 exact public source pairs on native and independent fresh emitted Perl, including original matches composition, branch/alias/nested/effect/truthiness/fixed-rest scope cases, four compiled direct controls, two straight callable controls and eight typed exclusions/errors. The final source matrix includes working return(undef). Public typed-AST invocation tests poison recorded source fields and reject separated malformed/orphan/mixed groups. PUC Lua CLI compares only three selected existing result/return boundaries. No marker/value/null-return-form repair, loop/function-MVP extension, record/context/schema change, raw ordering/readiness repair, dispatcher/full16 execution or other-backend admission. Direct typed invocation additionally checks original fixed/rest binding references, original rest-array identity and an equal-value distinct-array control; native/fresh source observers measure original x references and copied-rest results. This input/observation boundary is historical atfd022815; marker .5.2 supersedes the earlier marker_excluded failure without refreshing its hashes or results.",
       "rederive": {
         "status": "checked",
         "command": "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.1-review.py; bash tools/run_mdbook_local.sh; bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.1-book-check.py",
@@ -20,7 +20,7 @@
       },
       "durability": {
         "status": "checked",
-        "mode": "live",
+        "mode": "historical",
         "inputs": [
           {
             "path": "capability_conformance/callable_codeblock_contract.json",
@@ -1247,7 +1247,8 @@
             "sha256": "0bc03bb8f4ce550397da9fda086215a1d9f6f452ec413605fbcb8976c06af604",
             "role": "input"
           }
-        ]
+        ],
+        "revision": "fd022815e05d5d061e9fbbab5ba12ff0af582425"
       }
     }
   ]

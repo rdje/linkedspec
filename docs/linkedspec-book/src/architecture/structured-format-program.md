@@ -1415,15 +1415,45 @@ The result is `["inner","outer"]`. Copied fixed/rest parameters restore their or
 slots on success and failure; branch/helper failures retain the actual thrown typed object.
 Earlier nonparameter effects remain visible. The plain callable record and scope contract are unchanged.
 
-Marker conditions such as `if(true); return("hit"); else(); return("miss"); endif()` and
-value-form `return(if(true,"hit",else("miss")))` retain separate deferred failures. The former
-reaches unsupported `control_if`; the latter reaches unsupported helper `else` during eager
-operand evaluation. Zero-argument `return()` currently raises `invalid_codeblock_return`, and
-`return_undef()` raises `unknown_helper` in this evaluator. Separate repair leaves own all four
-boundaries. The working explicit-null spelling also skips the later unknown helper:
+Marker `if`/`elseif`/`else`/`endif` also executes inside a Perl callable. The evaluator groups
+matching typed statements, selects conditions once, skips unselected bodies and carries local
+returns through nested marker or attached controls. This returns `hit`:
 
 ```spec
-Top:: I { cb={|| if(true) { return(undef) }; unknown_helper() }; return(cb()) }
+Top:: I {  cb={|| if(true); return("hit"); else(); return("miss"); endif() }; return(cb()) }
+```
+
+A marker group without an explicit return yields null, just like an attached conditional statement.
+An eager expression block keeps its own early-return boundary:
+
+```spec
+Top:: I {  cb={|| value={ if(true); return("inner"); endif(); return("bad") }; return([value,"outer"]) }; return(cb()) }
+```
+
+The result is `["inner","outer"]`. Return propagation also preserves a typed false argument
+and a null result; neither falls through to the later statement:
+
+```spec
+Top:: I { cb={|flag| if(true); return(flag); endif(); return("bad") }; return(cb(false)) }
+```
+
+This returns JSON `false`. The separate dynamic boolean-literal identity gap remains: writing
+`return(false)` inside the callable currently produces numeric `0`; passing an existing typed
+boolean preserves its kind. Marker conditions still use governed truthiness.
+
+The portable marker aliases are `i` and `elif`. Perl additionally accepts marker `when` and
+`otherwise`; these opposite-shape extensions are not new portable admission. Missing `endif`
+and a branch after fallback reject before condition effects, with the typed opening/offending
+span. Reached orphan controls also diagnose. An explicit return skips later statements, including
+an unreachable trailing control; this grouping adds no whole-body syntax preflight.
+
+Value-form `return(if(true,"hit",else("miss")))` still reaches unsupported helper `else`.
+Zero-argument `return()` raises `invalid_codeblock_return`, and `return_undef()` raises
+`unknown_helper` in this evaluator. Separate leaves own those boundaries and deferred while.
+The working explicit-null spelling skips the later unknown helper:
+
+```spec
+Top:: I { cb={|| if(true); return(undef); endif(); unknown_helper() }; return(cb()) }
 ```
 
 This returns null on both routes.
@@ -1439,5 +1469,5 @@ Top:: I {
 ```
 
 Both routes return `ok`. Attached statement-control function bodies exceed the current
-function MVP. The callable attached-control repair does not extend that MVP, marker/value control,
+function MVP. The callable statement-control repairs do not extend that MVP or value control,
 loops, metadata ordering, nested raw-expression readiness or complete composed-format execution.

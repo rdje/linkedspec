@@ -12,6 +12,19 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-10-03 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.2: execute marker callable conditionals
+
+The private evaluator groups typed marker if/elseif/else/endif, shields attached sibling arms,
+selects conditions once and runs only selected bodies. Nested marker/attached returns propagate;
+eager blocks keep their own boundary and completed statement groups yield null. Reached malformed
+closure/order/orphans retain typed diagnostics/spans; early returns skip later statements.
+48 matched native/fresh RED/GREEN sources, twelve corruption controls and eleven suites/900 tests
+PASS. The attached test's old marker source now has a source-identical success oracle; its cases,
+producers/captures and245-input claim remain historical atfd022815. New51 marker tests cover actual
+x/rest/error identities, source poisoning and false/null returns. Five public PUC comparisons and
+four exact rendered examples bind bounded semantics. Before-bool literal mismatch remains startup35;
+value-if/null-return/while, function MVP, metadata/readiness and full execution stay separate.
+
 ## 2026-10-03 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.1: execute attached callable conditionals
 
 The private typed evaluator selects attached if/elseif/else bodies through governed truthiness,

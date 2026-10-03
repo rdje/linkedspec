@@ -5,16 +5,18 @@ architecture page and capability checker under their existing public/neutral gro
 79 migration files / 8 complete + 0 pending / 60 mutations; runtime behavior and
 earlier dated admission evidence below remain unchanged.
 
-## Perl callable attached conditional execution
+## Perl callable attached and marker conditional execution
 
-Self-containment `.1.3.3.0.5.1` executes typed attached if/elseif/else bodies inside the existing
-private callable evaluator. LinkedSpec truthiness governs once-only conditions; unselected bodies
-and later conditions stay lazy. A private value/return flag carries local return through nested
-conditional bodies, while callable and eager-expression block boundaries consume their own return.
-Attached controls yield null without an explicit return. The existing plain eight-field record,
-caller stores, copied parameter restoration and public invocation context are unchanged.
-Marker/value controls, null-return spellings and deferred while remain separately owned by `.5.2-.5`; statement
-function MVP, metadata/order/readiness, dispatcher/full execution and other backends are not extended.
+Self-containment `.1.3.3.0.5.1-.2` executes typed attached and marker if/elseif/else bodies
+inside the existing private callable evaluator. Marker grouping counts nested if/endif and shields
+attached sibling arms from outer branches. Reached closure/order/orphan errors diagnose before
+condition effects; early return still skips later statements. Governed truthiness selects conditions
+once and unselected bodies stay lazy. The private value/return flag preserves nested returns while
+callable/eager expression boundaries consume them. Statement groups yield null without return.
+The plain record, public context and original caller/error identities remain intact. New marker51
+plus current849 dependent tests pass900; source-identical old failure teaching is superseded with
+historical input/result retention. Value/null-return/while .5.3-.5, boolean literal startup35,
+function MVP, ordering/readiness and dispatcher/full execution remain independent owners.
 
 ## Nested-write and receiver-mutation capabilities are portable
 

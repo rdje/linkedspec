@@ -12,6 +12,21 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-10-03 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.2: marker grouping and source-identical successor proof
+
+Marker grouping scans typed siblings and nested if/endif, with attached arms shielded from the
+outer branch split. It constructs private selected-body views; no public record/context/schema or
+host-source execution is added. Missing closure or branches after fallback reject before conditions.
+The documented PUC CLI shows an early return ignores an unreachable extra endif, so this correction
+validates reached groups without inventing whole-body syntax preflight.
+The first false literal control exposed the indexed numeric0 drift owned by startup35. Exact
+before-bool sources/observations survive; passing typed false and returning its parameter isolates
+marker return behavior. Both false and null remain distinct in the strict checker, with two actual
+corruption controls. An inherited absent true-row mutation was corrected to original and retained.
+Current t/codeblock_attached_if_perl.t changes only its obsolete marker-failure expectation; it loads
+a source-identical successor oracle and leaves the old source/captures exact atfd022815. New51 and
+current849 tests pass900; all full streams/producer hashes are retained, with separate book QA.
+
 ## 2026-10-03 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.1: typed branch sequences and local return boundaries
 
 A private sequence yields value plus explicit-return flag. Conditional bodies propagate that flag;

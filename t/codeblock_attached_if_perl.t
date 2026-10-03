@@ -9,6 +9,17 @@ my $prefix = 'docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.1-';
 open my $cases_file, '<', $prefix.'cases.json' or die $!;
 my $cases = JSON::PP->new->decode(do { local $/; <$cases_file> });
 close $cases_file or die $!;
+open my $successor_file, '<', 'docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.2-cases.json' or die $!;
+my $successors=JSON::PP->new->decode(do { local $/; <$successor_file> });
+close $successor_file or die $!;
+my ($marker_successor)=grep { $_->{id} eq 'original' } @$successors;
+for my $case (@$cases) {
+ next unless $case->{id} eq 'marker_excluded';
+ die 'marker successor source drift' unless $marker_successor->{source} eq $case->{source};
+ delete @{$case}{qw(error kind name)};
+ $case->{expected}=$marker_successor->{expected};
+}
+
 open my $producer, '-|', $^X, '-Iperl', $prefix.'probe.pl' or die $!;
 my $bytes = do { local $/; <$producer> };
 close $producer or die 'public attached conditional producer failed';

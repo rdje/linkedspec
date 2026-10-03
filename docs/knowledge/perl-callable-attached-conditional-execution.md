@@ -10,10 +10,10 @@ answers:
   - "why did a malformed attached else tail become raw_perl in the Perl AST"
   - "which task repairs unsupported control_while in a deferred Perl callback"
 date: 2026-10-03
-status: attached executor verified; marker/value/null-return forms separately owned
+status: attached and marker statement executors verified; value/null/while separately owned
 tags: [perl, callable, actionir, control, return, scope]
 evidence: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.1 source-complete RED/GREEN observations, native CLI comparison, focused regression and actual replay capture."
-reverify: "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.1-review.py"
+reverify: "prove -Iperl t/codeblock_attached_if_perl.t; .5.1 full review is historical atfd022815 because .5.2 supersedes marker_excluded. Current marker proof is .5.2-review.py."
 ---
 
 `CodeblockRuntime::_execute_sequence` reads typed action statements. Attached `control_if`
@@ -34,7 +34,7 @@ proves branch execution uses typed conditions/bodies rather than reparsing recor
 The documented PUC Lua CLI independently agrees on final conditional null and eager local return
 for three exact selected sources; this is a bounded comparison, not backend admission.
 
-Marker controls remain `.5.2`, lazy value if/else `.5.3`, null-return forms `.5.4`,
+Marker controls are repaired by `.5.2`; lazy value if/else remains `.5.3`, null-return forms `.5.4`,
 and the observed deferred while failure `.5.5`. The exact loop_excluded source loads on both
 routes but fails unsupported_codeblock_actionir/control_while even for a false condition.
 `Top:: I { cb={|| return() }; return(cb()) }` reports invalid_codeblock_return/expected exactly1;
