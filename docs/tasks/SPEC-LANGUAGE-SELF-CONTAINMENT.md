@@ -1559,7 +1559,7 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
   Acceptance: Bind exact code, sources, native/emitted observations and focused controls; retain all unrelated repair prerequisites. Close .1.3.3.0 only after the selected pipeline runs correctly without raw host fallback, and then activate .1.3.3.1 for complete neutral-case and semantic-mutant execution.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5`
-  Status: `pending`
+  Status: `done`
   Priority: P1 — accepted attached control AST is unsupported inside a deferred callable body.
   Goal: Diagnose and repair attached control execution in deferred Perl bodies before dispatcher closeout.
   Dependencies: clean literal .0.2.1.3 and normalization .0.4 handoffs.
@@ -1567,6 +1567,8 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
   Impact: The recognized attached conditional cannot execute inside a deferred body. This is separate from signature segmentation and cannot be counted as a healthy control or mutation.
   Children: `.1.3.3.0.5.0`, `.1.3.3.0.5.1`, `.1.3.3.0.5.2`, `.1.3.3.0.5.3`, `.1.3.3.0.5.4`, `.1.3.3.0.5.5`, `.1.3.3.0.5.6`
   Acceptance: Use public toolbox controls and canonical control/return contracts; select compiler/runtime ownership and tier; retain exact historical failure, implement distinguishing RED/GREEN with branch laziness and local returns, cover direct dependents and appropriate canonical acceptance without schema drift.
+
+  Closeout boundary: `.5.6` reconciles only the independently committed typed attached/marker/value/null/while executor families and matches prerequisite. Exact staged canonical acceptance is mandatory before this planned closeout lands; numeric/literal/function/next/metadata/readiness/dispatcher/full16 and other-backend owners remain open.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.0`
   Status: `done`
@@ -1762,11 +1764,33 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
   Handoff: Commit clean first, then activate bounded control parent reconciliation .5.6 under exact staged canonical acceptance before .6.0. Numeric87.3/literal35/function MVP/next normalization/order/readiness and dispatcher/full execution remain separate.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.6`
-  Status: `pending`
+  Status: `done`
   Goal: Reconcile the bounded deferred-control parent after all independently committed executor repairs.
   Dependencies: committed `.1.3.3.0.5.0` through `.1.3.3.0.5.5` and startup87.2.
   Acceptance: Read current source-bound successor reviews/tests and exact historical boundaries; preserve independent numeric/literal/function/metadata/full16 owners. Close only the bounded control parent with current focused compatibility proof and receipt-bound canonical acceptance of the exact staged candidate. Commit before residual-order diagnosis .0.6.0.
   Planned verification: canonical parent closeout under ADR0073, current dependent suites/evidence/docs and all doctrines; exact staged receipt required before landing. Declare the owning fields at clean activation.
+
+  Activation: Cleanfdc21053294bfed95a26444d9e072ce69f205587; while30-source/1014-test/14-control proof and all ten doctrines/post-pointer PASS; brief0/Git clean. README/bootstrap/ADR0073/0126 and current while/conditional Knowledge recovered; earlier bridge reconciliation pattern read without executing its historical writers.
+  Owned paths / plan: No production/test/fixture/authority/dependency/CI/storage changes. Own this control-parent task/index plus architecture/roadmap/live/resume/history, new .5.6 read-only evidence reconciliation/reviewer/result/book-QA/claim and relevant Knowledge/book summary. Scratch .linkedspec-data/scratch/control-reconciliation; exact staged canonical logs/receipt stay repository-local. Freeze while claim historical at actualfdc210532 before book edits, hashes/results unchanged. Compare every current runtime/test/instrument input to the committed while checkpoint and its14 complete TAP streams; independently validate source-identical successor oracles and retain predecessor snapshots at their actual boundaries. No repeated runtime suite without changes/new uncertainty; previous focused execution is reused at identical inputs, not called fresh execution.
+  Verification tier: `canonical`
+  Focused checks: Read-only exact250-input current while compatibility boundary and retained14-suite1014-test proof, matched RED/GREEN/guard/value/identity evidence and producer/capture identity; distinguishing corrupted input/result/guard/scope/source controls. Render parent-summary/book teaching and verify exact example preservation; Knowledge/history/memory/all doctrines/diff.
+  Canonical trigger: Bounded control parent closeout under ADR0073; fully staged candidate and successful exact receipt required before landing. No dispatcher/full16/metadata/readiness or other-backend closure.
+  Claim verification: `docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.6.json`
+
+  Current reconciliation:250 committed runtime/test/instrument/artifact input hashes and Git blobs match. The full retained14-suite1014-test TAP,30 source-bound RED/GREEN observations and committed oracle validate; no runtime suite is rerun or called fresh. Eight controlled input/TAP/count/exit/guard/slot/source/eager-return corruptions reject. Six predecessor claims remain historical with results/hashes exact; four current loop successor sources equal their originals.266 claim inputs bind the three executed review/check instruments; old test/probe inputs represent retained prior execution.
+  Draft reviewer correction: First read-only run looked up marker .5.2 loop_excluded, absent from its actual population. Targeted retained-case lookup showed while_excluded; corrected the lookup before any evidence/measurement was published. Current observed results and all historical data stay exact.
+
+## Acceptance Checklist — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.6
+- [x] **OWNED BOUNDARY** — activate from cleanfdc210532 and preserve all production/tests/fixtures/authorities/carriers; only bounded control-parent documentation/evidence changes.
+- [x] **RECONCILE EXACT INPUTS** — read-only .5.6 reviewer checks all250 cumulative committed inputs and14 complete retained TAP suites/1014 tests. Runtime execution is reused at identical inputs, not newly claimed.
+- [x] **DISTINGUISHING ORACLES** —30 source-bound current/baseline observations use the committed independent reviewer; eight input/TAP/guard/slot/source/local-return corruptions actually reject. No semantic-mutant promotion.
+- [x] **PRESERVE HISTORY / SCOPE** —six predecessor claim snapshots retain hashes/results/actual revisions, four source-identical loop-successor sources agree, and numeric/literal/function/next/order/readiness/dispatcher/full16 remain owned separately.
+- [x] **LOCKSTEP** —current composition teaching renders with eight preserved executed null/while source identities; Knowledge/architecture/roadmap/task/index/live/resume/history and266-input claim align.
+- [x] **CANONICAL LANDING CONDITION** —fully stage this exact candidate, run tools/run_ci_local.sh and land only with its successful exact receipt. Hooks enforce that condition; no canonical test counts or fresh runtime execution are preclaimed by this reconciliation.
+
+  Verification: read-only250-input/14-suite1014-retained-test/30-case checks and eight corruption controls PASS; eight rendered source identities PASS. Syntax/Knowledge/history/memory/diff/all doctrines and exact staged canonical receipt govern landing.
+  Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.6 - reconcile deferred control parent` (Git owns identity).
+  Handoff: Clean canonical commit first, then activate residual-order diagnosis .6.0 without sorting or weakening raw historical records. No push before the authorized PNT boundary.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6`
   Status: `pending`
@@ -2025,7 +2049,7 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 | 42.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.3` | `done` | 44 matched sources,947 tests; lazy values/original identities and lossless TAP verified. |
 | 42.3 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.4` | `done` | 32 matched sources,981 tests; null exits/local boundaries and original identities verified. |
 | 42.4 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.5` | `done` | 30 matched sources,1014 tests; guarded typed loops/local returns/original identities verified. |
-| 42.5 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.6` | `pending` | Reconcile bounded control parent under exact staged canonical acceptance. |
+| 42.5 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.6` | `done` | Exact committed input/evidence reconciliation; canonical receipt governs bounded parent closeout. |
 | 43 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.0` | `pending` | Diagnose hash-order-dependent residual canonical events and readiness/overlap. |
 | 44 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.1` | `pending` | Repair canonical residual ordering with exact source/provenance controls. |
 | 45 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.0` | `pending` | Diagnose missed nested raw-expression portability dependencies after prior handoffs. |

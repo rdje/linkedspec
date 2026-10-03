@@ -1564,3 +1564,17 @@ callables remain owned by startup87.3; the examples use supported matching/strin
 Portable `next()` and exact-limit Dart/Julia normalization retain backlog5 ownership.
 Boolean literal kind, function statement MVP, descriptor ordering/readiness, dispatcher/full
 execution and other-backend admission remain separate.
+
+### What the Perl callable control composition covers
+
+Attached and marker conditionals, value conditionals, null exits and attached while
+now compose through the same private typed statement/value evaluator. Selected branches
+and loop bodies preserve local returns, eager blocks keep their own return boundary, and
+fixed/rest parameter slots restore while nonparameter effects remain live. The examples
+above distinguish a null statement result from an explicit exit and a selected value payload.
+
+This is bounded control coverage. It does not establish every helper or statement in
+function bodies, numeric helpers in deferred bodies, portable next behavior, boolean
+literal kind, complete-format self-containment or other-backend admission. Compiler
+event ordering and nested raw-expression readiness still need independent correction;
+working runtime results do not prove portable metadata.

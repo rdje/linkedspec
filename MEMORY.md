@@ -1,11 +1,11 @@
 # MEMORY
 
-- activation_commit: `85e63d655b8c26ccb3146f9792462c94b2120c02` — clean deferred while activation base.
-- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.5 - execute guarded callable while`.
-- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.5` (done) — guarded typed while/native-fresh identities verified.
-- next_action: Activate bounded control parent reconciliation SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.6 from clean committed HEAD; exact staged canonical acceptance before .6.0.
-- in_flight_uncommitted: none; focused while proof committed, no required job remains.
-- blockers: No access/decision blocker. Matches and attached/marker/value/null/while executors are repaired; canonical parent .5.6 and order/readiness .6/.7 precede dispatcher/full execution. Other startup repairs remain separate.
+- activation_commit: `fdc21053294bfed95a26444d9e072ce69f205587` — clean control-parent activation base.
+- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.6 - reconcile deferred control parent`.
+- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.6` (done) — bounded control parent canonically reconciled.
+- next_action: Activate residual event-order diagnosis SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.0 from clean committed HEAD; preserve raw seed-dependent evidence.
+- in_flight_uncommitted: none; bounded parent acceptance committed, no required job remains.
+- blockers: No access/decision blocker. Matches and attached/marker/value/null/while executors are repaired; bounded control parent is reconciled; order/readiness .6/.7 precede dispatcher/full execution. Other startup repairs remain separate.
   Wrapper startup .7 remains open; recovery/purge stay prohibited.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
   active table; the task metadata doctrine inventories all consumers, permits arbitrary frontier-row rewrites,

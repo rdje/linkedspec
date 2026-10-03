@@ -1,0 +1,49 @@
+{
+  "owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.6",
+  "result": "PASS",
+  "examples": [
+    {
+      "family": "5.4",
+      "id": "empty_original",
+      "source_sha256": "94e454423657e8d069505f288b63e3e0e7d465e7aff3f91e6da48acc25d4d2c9"
+    },
+    {
+      "family": "5.4",
+      "id": "null_original",
+      "source_sha256": "90945b8da4b26be3bc13e335ee654fa0fbeaac4e8172ca43dfa98cf6112d1f7a"
+    },
+    {
+      "family": "5.4",
+      "id": "null_nested",
+      "source_sha256": "942de949e1993242dcd5216a177e350f0b93cea49e05e210074b332b5b1c2df7"
+    },
+    {
+      "family": "5.4",
+      "id": "null_eager",
+      "source_sha256": "5cd955714eed000aba26faf8bcd6eee1776e584dc50daff9b7e293594949d66b"
+    },
+    {
+      "family": "5.5",
+      "id": "original",
+      "source_sha256": "0217ba2ffa3cd2107e3b780cc4de90c70e117f7f54fb827779ad8413dc132d43"
+    },
+    {
+      "family": "5.5",
+      "id": "multiple",
+      "source_sha256": "5a2b0794c4789eec88372722574f3fe2c8b7f28e8060fab33e97bf55a2ae74be"
+    },
+    {
+      "family": "5.5",
+      "id": "condition_effects",
+      "source_sha256": "26c22f6e55335c33ef0fd45f4c37aa29f6073a76a285cc2648a7e1a07dbb1e09"
+    },
+    {
+      "family": "5.5",
+      "id": "eager_local",
+      "source_sha256": "5988552c51de151b6c1edb86b679252cc3ee200005272b9c0acaba6209e97ddd"
+    }
+  ],
+  "source": "docs/linkedspec-book/src/architecture/structured-format-program.md",
+  "source_sha256": "d26df9e2263e0058e9110f8b60a11c2a2600fa1721819f170d3cfbf6d122bec8",
+  "limits": "Eight preserved executed source/rendered-text identities plus bounded composition/exclusion teaching; no whole HTML/theme or visual admission."
+}

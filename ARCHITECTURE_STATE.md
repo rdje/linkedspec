@@ -15,7 +15,8 @@ typed node spans/completed counts and preceding effects; actual fixed/rest slots
 identities restore. Public carriers, compiler and context remain unchanged. Four older tests
 replace only source-identical loop failure oracles; captures stay historical. Numeric87.3,
 literal35, function MVP, metadata/readiness and dispatcher/full execution remain separate.
-Canonical parent reconciliation `.5.6` follows before residual-order diagnosis `.6.0`.
+Bounded parent reconciliation `.5.6` preserves the exact committed runtime/input proof;
+receipt-bound canonical acceptance governs its closeout before residual-order diagnosis `.6.0`.
 
 ## Perl callable null-return execution
 

@@ -12,6 +12,18 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-10-03 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.6: retained execution at identical inputs
+
+Parent reconciliation compares all250 cumulative current input hashes and Git blobs to clean
+fdc210532, parses complete14-suite1014-test retained TAP and invokes the committed30-case
+RED/GREEN oracle. It performs no runtime suite replay. Eight corrupted input/TAP/guard/slot/
+source/eager-return records reject. Prior six claims keep historical revisions/hashes/results;
+only the preceding live while claim gains its actual historical mode/revision before book edits.
+The draft .5.2 loop ID lookup was corrected to actual while_excluded before publishing evidence.
+Eight preserved executed null/while examples and bounded composition teaching render. Exact
+staged canonical receipt is required independently of this evidence reconciliation; closing
+control composition must not promote event readiness, helpers or complete language coverage.
+
 ## 2026-10-03 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.5: while guard order and local flags
 
 Public canonical while checks truthiness before incrementing its10000 guard and entering body.
