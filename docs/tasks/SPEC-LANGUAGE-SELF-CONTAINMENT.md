@@ -1565,7 +1565,7 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
   Dependencies: clean literal .0.2.1.3 and normalization .0.4 handoffs.
   Reproduce: Top:: I { cb={|x,y| if(matches(x, /ok/)) { return(x) }; return("miss") }; return(cb("ok","unused")) } after the signature repair. Public native execution reports a typed unsupported_codeblock_actionir with kind control_if; CodeblockRuntime::_eval_expr falls through to that diagnostic because it has no control_if arm. Final .3.1 probe/capture must retain source-bound native/fresh evidence. Normative control/helper and body-return semantics need .5.0 diagnosis before changing this separate runtime.
   Impact: The recognized attached conditional cannot execute inside a deferred body. This is separate from signature segmentation and cannot be counted as a healthy control or mutation.
-  Children: `.1.3.3.0.5.0`, `.1.3.3.0.5.1`, `.1.3.3.0.5.2`, `.1.3.3.0.5.3`
+  Children: `.1.3.3.0.5.0`, `.1.3.3.0.5.1`, `.1.3.3.0.5.2`, `.1.3.3.0.5.3`, `.1.3.3.0.5.4`, `.1.3.3.0.5.5`
   Acceptance: Use public toolbox controls and canonical control/return contracts; select compiler/runtime ownership and tier; retain exact historical failure, implement distinguishing RED/GREEN with branch laziness and local returns, cover direct dependents and appropriate canonical acceptance without schema drift.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.0`
@@ -1601,10 +1601,27 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.1`
-  Status: `pending`
+  Status: `done`
   Goal: Implement and verify the diagnosed deferred-control correction before dispatcher closure.
   Dependencies: `.1.3.3.0.5.0`, committed `SESSION-STARTUP-READING.87.2` matches/regex prerequisite
   Acceptance: Actual branch/operand/body effects, return propagation, caller/parameter restoration and native/fresh RED/GREEN plus direct dependents establish the bounded repair; preserve other open controls, accurate public teaching and warranted canonical proof.
+  Activation: Clean5174958ea5d2d9aa709faff6d9c7d91189553b08; matched38-source matches RED/GREEN,799 focused tests/ten observation controls/six guarded evidence recoveries, all ten hooks/post-pointer and brief0/Git clean. Existing .5.0 diagnosis, AST if-family/alias-shape cards, callable return/context/resolution contract and eager-block/helper teaching reviewed. Marker/value and metadata/readiness owners stay separate; artifact cleanup is not yet due.
+  Owned paths / plan: perl/LinkedSpec/CodeblockRuntime.pm only production; new t/codeblock_attached_if_perl.t and .5.1 public probe/fresh/read-only reviewer/exact before-runtime/full RED-GREEN evidence under docs/checkpoints, new claim under docs/claims. Relevant deferred-control Knowledge and architecture/flow-helper/eager-callable teaching, task/frontier/index/roadmaps and bounded continuity/derived Knowledge. Freeze completed startup87.2's current runtime-dependent claim at actual5174958 with hashes/results unchanged before production edits. All other compiler/tests/fixtures/authorities, eight-field callable records/signatures/contexts, dependencies and CI/storage/old captures stay exact. Scratch .linkedspec-data/scratch/codeblock-attached-if. Public Get/descriptor/substitution/dump/typed AST precede implementation selection; optional read-only first-party published native CLI comparison may resolve existing implicit statement-result semantics using owned scratch fixtures/output, without backend writes/admission. Declare further paths before edits.
+  Verification tier: `focused`
+  Focused checks: Exact original attached-if RED/GREEN and true/false/elseif/else/alias/nested branch/return/once-only/lazy effect cases; governed truthiness and invocation-local return across conditional bodies, eager-block return boundary, original caller/parameter/error identities and deliberate equal-value control. Typed AST source-poisoning, native/independent fresh emitted parity, matched exact before-runtime replay, preserved marker/value exclusions and genuine unsupported diagnostics; new regression plus current matches/literal/logical/variadic/binding/bridge/normalization/AST direct dependents; syntax, unchanged sources/authorities, rendered exact book examples, Knowledge/history/memory/all doctrines/diff.
+  Canonical trigger: none for private typed evaluator correction with existing control/return contract and unchanged record/context/schema; broaden before landing if actual semantics/interface extent moves. Later conditional-parent/dispatcher and push boundaries require canonical proof. This runtime evaluator is not the action rewriter.
+  Claim verification: `docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.1.json`
+  Additional ownership: .5.1 cases.json, boundary-return.json, native-comparison.json, native-compare.py and its exact public CLI scratch inputs/output; new docs/knowledge/perl-callable-attached-conditional-execution.md. Null-return forms remain separately scheduled under .5.4; their exact public native/fresh failures are retained by this slice.
+  Proof correction: The first collector used a nonexistent Lua environment input; retained review-before.py records it. A new malformed-control assertion actually parsed the invalid unseparated tail as raw_perl, confirmed by the tracked public malformed-probe/AST and failed test/log. Corrected semicolon-separated sources target the real typed sibling sequence; no parser/raw repair or new admission is inferred. Actual failed TAP is retained, and the final reviewer preserves each suite stream before asserting success. Matches regression producer/fresh/cases and the native build instrument are explicit current proof inputs.
+  Known process-locality recurrence: read-only project-data Python child38799 printed setpgid EPERM and still exited0. Existing SESSION-STARTUP-READING.7 owns this liveness/containment gap; no recovery/purge or general process-group guarantee is inferred.
+  Scope constraint: Repair attached typed statement branches and conditional return propagation only. Preserve eager block-local returns, marker/value-if owner failures until their own slices, function MVP exclusions and raw event/readiness evidence. Do not infer final statement-value or alias portability from a host rule lifecycle; use canonical contract/public controls before choosing implementation.
+
+  Verification: PASS47 matched exact native/fresh RED/GREEN sources, ten actual observation corruptions, actual before-runtime replay, three documented PUC CLI return/result comparisons and typed AST diagnosis. New50-test regression plus unchanged799 dependency tests pass849 across ten suites. Complete source/dump/emitted/raw metadata/runtime observations and all actual TAP streams remain tracked;241 runtime proof inputs plus final result and bounded book QA are hash-bound. Only CodeblockRuntime production changed. Five exact executed book sources render; Knowledge1239/9739, syntax and focused history checks pass; all doctrines/diff and landing hooks govern commit.
+  Scope-proof strengthening: Native/fresh matrices observe actual x slots and copied rest results. Direct public typed invoke assertions now pass for actual rest binding/array identities and an equal-value negative control; prior test/proof/claim bytes survive and the complete selected849-test proof was rerun.
+  Claim correction: Doctrine check rejected the manifest because its six tracked producing programs were labeled input. Corrected producer roles without changing hashes, results or source proof; final claim check and landing hooks must pass. Observed while_excluded is now explicitly owned/scheduled under .5.5 rather than left as an unowned exclusion.
+  Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.1 - execute attached callable conditionals` (Git owns identity).
+  Handoff: Clean commit first, then activate marker .5.2. Value .5.3, null-return .5.4 and while .5.5 remain scheduled; metadata .6/readiness .7 and dispatcher/full execution stay open.
+
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.2`
   Status: `pending`
@@ -1623,6 +1640,24 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
   Reproduce: Top:: I { cb={|| return(if(true,"hit",else("miss"))) }; return(cb()) }. Both public routes fail unknown_helper/else; the admitted value-oriented function containing return(if(matches(x,/ok/),x,else("miss"))) succeeds directly and through the registered deferred bridge.
   Impact: Value conditional composition bypasses existing lazy branch semantics in the narrow deferred evaluator. _eval_call evaluates generic operands before it has an if/branch family dispatcher.
   Acceptance: Reverify remaining failure after earlier repairs, reuse governed conditional/truthiness rules, and prove exact values, once-only/lazy condition and branch effects, nested function/callback routes, returns and restoration. Preserve eager logical-helper semantics and genuinely unsupported-call diagnostics. No silent function-body extension or new record/schema field; declare bounded paths/tier and commit independently.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.4`
+  Status: `pending`
+  Priority: P1 — published null-return spellings fail inside callable bodies.
+  Goal: Repair zero-argument return and return_undef through the existing local-return contract after conditional families.
+  Dependencies: committed `.1.3.3.0.5.1`, `.1.3.3.0.5.2`, `.1.3.3.0.5.3`.
+  Reproduce: Top:: I { cb={|| return() }; return(cb()) } gives invalid_codeblock_return/expected exactly1/got0; replacing return() with return_undef() gives unknown_helper/return_undef. Public native/fresh sources and actual typed errors are retained in .5.1's cases/RED/GREEN; straight and conditional forms need independent controls.
+  Impact: The documented empty return and explicit null-return helper cannot stop a callable or an eager block inside it; the public eager-block and attached-else examples promise local early return.
+  Acceptance: Use canonical return contract and public controls to prove null result plus skipped continuation, nested conditional propagation, eager-block local boundary, helper precedence, arity-before-effects, original scope/error identity and native/fresh parity. Preserve other controls and existing contracts/record/schema; declare paths/tier before edits and commit independently.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.5`
+  Status: `pending`
+  Priority: P1 — a recognized deferred while statement cannot execute, even with a false condition.
+  Goal: Diagnose and repair governed while execution in callable bodies after conditional/null-return families.
+  Dependencies: committed `.1.3.3.0.5.1` through `.1.3.3.0.5.4`; this owns runtime loop execution separately from `.0.7` raw readiness telemetry.
+  Reproduce: Top:: I { cb={|| while(false) { "bad" }; return("after") }; return(cb()) } loads on native/fresh Perl but raises unsupported_codeblock_actionir/control_while. Exact source, generated bytes and both typed failures are retained as .5.1 loop_excluded in its matched RED/GREEN matrix.
+  Impact: Authored loop control cannot compose through deferred callbacks; a false loop cannot simply skip its body and continue. Published direct-action while remains independent.
+  Acceptance: First diagnose through public AST/Get/descriptor/substitution/native/fresh and canonical while/truthiness/return contracts. Declare bounded paths/tier before repair; prove false/nonempty loops, once-per-iteration conditions, body effects, nested local/eager return boundaries and original parameter/error identities with meaningful RED/GREEN/direct dependents. Split other loop-control helpers if their extent requires it; preserve marker/value/function/readiness owners and public carriers. Commit independently before the control parent closes.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6`
   Status: `pending`
@@ -1876,9 +1911,11 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 | 39 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.3` | `pending` | Original minimal/normalization controls and independent dispatcher closeout. |
 | 40 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.1` | `pending` | Complete neutral-case and actual semantic-mutant execution after dispatcher prerequisite. |
 | 41 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.0` | `done` | Twenty-source/four-AST diagnosis and660 focused tests; actual scope/error/effect proof retained. |
-| 42 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.1` | `pending` | Existing startup87.2 matches/regex prerequisite is verified; activate attached branch/local-return repair after its clean commit. |
-| 42.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.2` | `pending` | Independently verify/repair deferred marker conditional groups after attached repair. |
+| 42 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.1` | `done` | 47 matched sources,849 focused tests; actual x/rest and typed attached/local returns verified. |
+| 42.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.2` | `pending` | Next clean activation: deferred marker groups after verified attached repair. |
 | 42.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.3` | `pending` | Independently verify/repair deferred lazy value-if dispatch after statement families. |
+| 42.3 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.4` | `pending` | Repair published null-return forms after conditional families. |
+| 42.4 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.5` | `pending` | Diagnose/repair public deferred while failure after return forms. |
 | 43 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.0` | `pending` | Diagnose hash-order-dependent residual canonical events and readiness/overlap. |
 | 44 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.1` | `pending` | Repair canonical residual ordering with exact source/provenance controls. |
 | 45 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.0` | `pending` | Diagnose missed nested raw-expression portability dependencies after prior handoffs. |

@@ -12,6 +12,22 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-10-03 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.1: typed branch sequences and local return boundaries
+
+A private sequence yields value plus explicit-return flag. Conditional bodies propagate that flag;
+callable and eager-expression blocks consume it locally. The existing plain record, public context
+and invocation restoration need no new field or host closure. Statement controls discard their own
+implicit values, independently checked through three documented PUC CLI sources.
+The first malformed-group test was a false typed-AST assumption: unseparated invalid else tails
+parse raw_perl. Exact public AST/failed test/log survive; separated typed duplicates/orphans/mixed
+controls now have meaningful rejection checks. Direct typed invoke adds actual rest binding/array restoration and an equal-value array control;
+the complete849-test proof reruns after that strengthening. The first collector's nonexistent Lua environment
+path is retained in review-before.py; final census names the real native build and actual matches
+producer/fresh/cases inputs. Full current replay retains47 sources/849 TAP tests/ten corruptions.
+Empty return()/return_undef() failures are scheduled as .5.4; the false-while typed failure is
+owned by .5.5. Claim producer roles were corrected after the doctrine manifest rejection.
+Known setpgid EPERM recurrence remains startup7; no managed-run recovery/purge is attempted.
+
 ## 2026-10-03 — SESSION-STARTUP-READING.87.2: contextual patterns and matched source replay
 
 The direct matches lowerer evaluates its subject before a defined guard and pattern operand. The

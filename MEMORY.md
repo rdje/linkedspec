@@ -1,10 +1,10 @@
 # MEMORY
 
-- activation_commit: `52763bce22569c5b68392484de162ee5dc395255` — clean callable matches repair activation base.
-- latest_completed_leaf: `SESSION-STARTUP-READING.87.2 - execute callable matches pattern operands`.
-- active_work_unit: `SESSION-STARTUP-READING.87.2` (done) — bounded matches repair and exact diagnostic/evidence corrections.
-- next_action: Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.1 from committed clean HEAD; implement typed attached branch execution and nested block-local returns.
-- in_flight_uncommitted: none; final focused runtime/capsule/book proof completed before landing.
+- activation_commit: `5174958ea5d2d9aa709faff6d9c7d91189553b08` — clean attached conditional repair activation base.
+- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.1 - execute attached callable conditionals`.
+- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.1` (done) —47 matched sources,849 focused tests and original x/rest references.
+- next_action: Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.2 from this clean committed handoff; diagnose and repair deferred marker conditional groups.
+- in_flight_uncommitted: none; completed attached slice is committed by this handoff. No required jobs.
 - blockers: No access/decision blocker. Matches prerequisite is repaired; attached/marker/value .0.5 and order/readiness .0.6/.0.7 precede dispatcher/full execution. Other startup repairs remain separate.
   Wrapper startup .7 remains open; recovery/purge stay prohibited.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the

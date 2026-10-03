@@ -1,0 +1,282 @@
+{
+   "sources" : [
+      {
+         "ast" : {
+            "body_ast" : {
+               "kind" : "action_block",
+               "source" : " if(true) { return(\"hit\") } else { return(\"bad\") } elseif(true) { return(\"bad\") } ",
+               "source_span" : {
+                  "end" : 85,
+                  "start" : 3
+               },
+               "statements" : [
+                  {
+                     "drops_value" : 1,
+                     "expr" : {
+                        "args" : [
+                           {
+                              "kind" : "boolean",
+                              "source" : "true",
+                              "source_span" : {
+                                 "end" : 11,
+                                 "start" : 7
+                              },
+                              "value" : 1
+                           }
+                        ],
+                        "body" : {
+                           "kind" : "action_block",
+                           "source" : " return(\"hit\") ",
+                           "source_span" : {
+                              "end" : 15,
+                              "start" : 0
+                           },
+                           "statements" : [
+                              {
+                                 "drops_value" : 1,
+                                 "expr" : {
+                                    "args" : [
+                                       {
+                                          "kind" : "string",
+                                          "quote" : "\"",
+                                          "source" : "\"hit\"",
+                                          "source_span" : {
+                                             "end" : 13,
+                                             "start" : 8
+                                          },
+                                          "value" : "hit"
+                                       }
+                                    ],
+                                    "kind" : "call",
+                                    "name" : "return",
+                                    "source" : "return(\"hit\")",
+                                    "source_method" : "return",
+                                    "source_span" : {
+                                       "end" : 14,
+                                       "start" : 1
+                                    }
+                                 },
+                                 "kind" : "action_stmt",
+                                 "source" : "return(\"hit\")",
+                                 "source_span" : {
+                                    "end" : 14,
+                                    "start" : 1
+                                 }
+                              }
+                           ]
+                        },
+                        "body_source" : "{ return(\"hit\") }",
+                        "body_source_span" : {
+                           "end" : 30,
+                           "start" : 13
+                        },
+                        "branch_role" : "if",
+                        "canonical_keyword" : "if",
+                        "condition" : {
+                           "kind" : "boolean",
+                           "source" : "true",
+                           "source_span" : {
+                              "end" : 11,
+                              "start" : 7
+                           },
+                           "value" : 1
+                        },
+                        "keyword" : "if",
+                        "kind" : "control_if",
+                        "source" : "if(true) { return(\"hit\") }",
+                        "source_span" : {
+                           "end" : 30,
+                           "start" : 4
+                        }
+                     },
+                     "kind" : "action_stmt",
+                     "source" : "if(true) { return(\"hit\") }",
+                     "source_span" : {
+                        "end" : 30,
+                        "start" : 4
+                     }
+                  },
+                  {
+                     "drops_value" : 1,
+                     "expr" : {
+                        "kind" : "raw_perl",
+                        "reason" : "unsupported_expression",
+                        "source" : "else { return(\"bad\") } elseif(true) { return(\"bad\") }",
+                        "source_span" : {
+                           "end" : 84,
+                           "start" : 31
+                        }
+                     },
+                     "kind" : "action_stmt",
+                     "source" : "else { return(\"bad\") } elseif(true) { return(\"bad\") }",
+                     "source_span" : {
+                        "end" : 84,
+                        "start" : 31
+                     }
+                  }
+               ]
+            },
+            "body_source" : " if(true) { return(\"hit\") } else { return(\"bad\") } elseif(true) { return(\"bad\") } ",
+            "body_span" : {
+               "end" : 85,
+               "start" : 3
+            },
+            "kind" : "codeblock_literal",
+            "signature" : {
+               "kind" : "callable_signature",
+               "max_arity" : 0,
+               "min_arity" : 0,
+               "positional_params" : [],
+               "rest_param" : null,
+               "version" : 1
+            },
+            "source_span" : {
+               "end" : 86,
+               "start" : 0
+            },
+            "source_text" : "{|| if(true) { return(\"hit\") } else { return(\"bad\") } elseif(true) { return(\"bad\") } }",
+            "version" : 1
+         },
+         "source" : "{|| if(true) { return(\"hit\") } else { return(\"bad\") } elseif(true) { return(\"bad\") } }"
+      },
+      {
+         "ast" : {
+            "body_ast" : {
+               "kind" : "action_block",
+               "source" : " if(true) { return(\"hit\") } else { return(\"bad\") } else { return(\"bad\") } ",
+               "source_span" : {
+                  "end" : 77,
+                  "start" : 3
+               },
+               "statements" : [
+                  {
+                     "drops_value" : 1,
+                     "expr" : {
+                        "args" : [
+                           {
+                              "kind" : "boolean",
+                              "source" : "true",
+                              "source_span" : {
+                                 "end" : 11,
+                                 "start" : 7
+                              },
+                              "value" : 1
+                           }
+                        ],
+                        "body" : {
+                           "kind" : "action_block",
+                           "source" : " return(\"hit\") ",
+                           "source_span" : {
+                              "end" : 15,
+                              "start" : 0
+                           },
+                           "statements" : [
+                              {
+                                 "drops_value" : 1,
+                                 "expr" : {
+                                    "args" : [
+                                       {
+                                          "kind" : "string",
+                                          "quote" : "\"",
+                                          "source" : "\"hit\"",
+                                          "source_span" : {
+                                             "end" : 13,
+                                             "start" : 8
+                                          },
+                                          "value" : "hit"
+                                       }
+                                    ],
+                                    "kind" : "call",
+                                    "name" : "return",
+                                    "source" : "return(\"hit\")",
+                                    "source_method" : "return",
+                                    "source_span" : {
+                                       "end" : 14,
+                                       "start" : 1
+                                    }
+                                 },
+                                 "kind" : "action_stmt",
+                                 "source" : "return(\"hit\")",
+                                 "source_span" : {
+                                    "end" : 14,
+                                    "start" : 1
+                                 }
+                              }
+                           ]
+                        },
+                        "body_source" : "{ return(\"hit\") }",
+                        "body_source_span" : {
+                           "end" : 30,
+                           "start" : 13
+                        },
+                        "branch_role" : "if",
+                        "canonical_keyword" : "if",
+                        "condition" : {
+                           "kind" : "boolean",
+                           "source" : "true",
+                           "source_span" : {
+                              "end" : 11,
+                              "start" : 7
+                           },
+                           "value" : 1
+                        },
+                        "keyword" : "if",
+                        "kind" : "control_if",
+                        "source" : "if(true) { return(\"hit\") }",
+                        "source_span" : {
+                           "end" : 30,
+                           "start" : 4
+                        }
+                     },
+                     "kind" : "action_stmt",
+                     "source" : "if(true) { return(\"hit\") }",
+                     "source_span" : {
+                        "end" : 30,
+                        "start" : 4
+                     }
+                  },
+                  {
+                     "drops_value" : 1,
+                     "expr" : {
+                        "kind" : "raw_perl",
+                        "reason" : "unsupported_expression",
+                        "source" : "else { return(\"bad\") } else { return(\"bad\") }",
+                        "source_span" : {
+                           "end" : 76,
+                           "start" : 31
+                        }
+                     },
+                     "kind" : "action_stmt",
+                     "source" : "else { return(\"bad\") } else { return(\"bad\") }",
+                     "source_span" : {
+                        "end" : 76,
+                        "start" : 31
+                     }
+                  }
+               ]
+            },
+            "body_source" : " if(true) { return(\"hit\") } else { return(\"bad\") } else { return(\"bad\") } ",
+            "body_span" : {
+               "end" : 77,
+               "start" : 3
+            },
+            "kind" : "codeblock_literal",
+            "signature" : {
+               "kind" : "callable_signature",
+               "max_arity" : 0,
+               "min_arity" : 0,
+               "positional_params" : [],
+               "rest_param" : null,
+               "version" : 1
+            },
+            "source_span" : {
+               "end" : 78,
+               "start" : 0
+            },
+            "source_text" : "{|| if(true) { return(\"hit\") } else { return(\"bad\") } else { return(\"bad\") } }",
+            "version" : 1
+         },
+         "source" : "{|| if(true) { return(\"hit\") } else { return(\"bad\") } else { return(\"bad\") } }"
+      }
+   ]
+}

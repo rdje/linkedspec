@@ -1581,6 +1581,13 @@ when(matches(kind, /^node_/)) {
 
 Inline `if(...)` and `switch(...)` are portable value expressions when simple branch payloads need to feed
 `return(...)`, an assignment RHS, or fluent `.return(...)`. They evaluate only the selected payload branch.
+Perl callable bodies also execute attached branches, including nested local returns. Conditions
+use the same truthiness and skip unselected bodies. A statement conditional yields null unless
+an explicit return exits the callable; an eager expression block keeps its own return boundary.
+See the [complete callable examples](../architecture/structured-format-program.md#current-perl-deferred-conditional-boundary).
+Deferred marker/value conditionals and the null-return spellings `return()`/`return_undef()` have
+separate current repair owners; `return(undef)` works in this evaluator.
+
 Use attached-block control flow when a branch needs substantial statement bodies or repeated side effects.
 The short `i`/`elif` spellings are statement-marker aliases, while `when`/`otherwise` are attached-block aliases;
 they are not alternate names for these inline value helpers. Some backends currently accept the aliases in the

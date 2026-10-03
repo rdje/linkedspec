@@ -1,0 +1,15 @@
+{
+  "owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.1",
+  "exact_executed_examples": [
+    "true",
+    "original",
+    "implicit_true",
+    "eager_local_return",
+    "explicit_null_return"
+  ],
+  "rendered_source": "docs/linkedspec-book/src/architecture/structured-format-program.md",
+  "source_sha256": "7e1af0b0abcf375a04995a0bc7d389141c8bdb7edf46262d5fbf7dcc5f173c27",
+  "cases_sha256": "7b5638af74aba7c6810f6107ae5c61f295b0ffdde207fc0958d0f034e7956584",
+  "result": "PASS",
+  "limits": "Five selected rendered text/source identities after run_mdbook_local.sh; no whole HTML/theme identity or visual admission."
+}

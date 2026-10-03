@@ -1,0 +1,5 @@
+{
+  "owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.4",
+  "native_raw_stdout": "[2026-10-03 11:54:55][NONE][SpecEntry.pm][trace_decision:63] DECISION rule_handler_eval:Top => SKIPPED\n[2026-10-03 11:54:55][NONE][SpecEntry.pm][trace_decision:63]   Context: bless( {'code' => 'invalid_codeblock_return','expected' => 'exactly 1','got' => 0,'kind' => 'codeblock_runtime_error'}, 'LinkedSpec::CodeblockRuntime::Error' )\n{\"body\":\"return()\",\"code\":\"invalid_codeblock_return\",\"kind\":\"codeblock_runtime_error\",\"name\":null,\"value\":null}\n[2026-10-03 11:54:55][NONE][SpecEntry.pm][trace_decision:63] DECISION rule_handler_eval:Top => SKIPPED\n[2026-10-03 11:54:55][NONE][SpecEntry.pm][trace_decision:63]   Context: bless( {'code' => 'unknown_helper','kind' => 'codeblock_runtime_error','name' => 'return_undef'}, 'LinkedSpec::CodeblockRuntime::Error' )\n{\"body\":\"return_undef()\",\"code\":\"unknown_helper\",\"kind\":\"codeblock_runtime_error\",\"name\":\"return_undef\",\"value\":null}\n",
+  "limits": "Initial diagnostic only; the exact two sources are replayed on native/fresh routes in the .5.1 source matrix."
+}

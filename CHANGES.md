@@ -12,6 +12,19 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-10-03 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.1: execute attached callable conditionals
+
+The private typed evaluator selects attached if/elseif/else bodies through governed truthiness,
+skips later conditions/unselected bodies and carries explicit return through nested conditional
+bodies. Callable/eager-expression block boundaries consume their own return; a conditional
+statement otherwise yields null. Original caller slots and thrown objects remain intact.
+47 exact native/fresh matched RED/GREEN sources, ten corruption controls and ten suites/849 tests
+PASS, including original matches composition, effects, truthiness, fixed/rest scope and typed-source
+poisoning. Three public PUC CLI comparisons agree on selected existing return/result boundaries.
+Sources/generated/raw observations/full TAP/claim, Knowledge and rendered examples are tracked.
+Prior matches claim freezes at5174958. Marker/value/null-return/while forms remain .5.2-.5; ordering,
+readiness, function MVP, dispatcher/full16 and other-backend admission remain separate.
+
 ## 2026-10-03 — SESSION-STARTUP-READING.87.2: execute callable matches pattern operands
 
 CodeblockRuntime now dispatches existing matches before same-named callable slots. It evaluates

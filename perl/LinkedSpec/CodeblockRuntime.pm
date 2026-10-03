@@ -454,24 +454,72 @@ sub _eval_expr {
  _error('unsupported_codeblock_actionir', kind => $kind)
 }
 
-sub _execute_body {
+sub _execute_attached_if {
+ my ($statements, $index, $ctx) = @_;
+ my @branches = ($statements->[$index]{expr});
+ my $has_else = 0;
+ my $next = $index + 1;
+ while ($next < @$statements) {
+  my $statement = $statements->[$next];
+  last unless ref($statement) eq 'HASH' && ($statement->{kind} // '') eq 'action_stmt';
+  my $branch = $statement->{expr};
+  last unless ref($branch) eq 'HASH';
+  my $kind = $branch->{kind} // '';
+  last unless ($kind eq 'control_if' && ($branch->{branch_role} // '') eq 'elseif')
+   || $kind eq 'control_else';
+  # Marker controls have a separate owner; do not mix them into an attached group.
+  _error('unsupported_codeblock_actionir', kind => $kind) unless ref($branch->{body}) eq 'HASH';
+  _error('invalid_codeblock_control', detail => 'attached branch follows else') if $has_else;
+  $has_else = 1 if $kind eq 'control_else';
+  push @branches, $branch;
+  $next++;
+ }
+ foreach my $branch (@branches) {
+  next unless ($branch->{kind} // '') eq 'control_else'
+   || LinkedSpec::RuntimeLogical::truthy(_eval_expr($branch->{condition}, $ctx));
+  my ($value, $returned) = _execute_sequence($branch->{body}, $ctx);
+  return ($next, $value, 1) if $returned;
+  last;
+ }
+ # Attached controls are statements: only an explicit return carries a value out.
+ return ($next, undef, 0)
+}
+
+sub _execute_sequence {
  my ($body, $ctx) = @_;
  _error('invalid_codeblock_body', detail => 'body must be an action_block')
   unless ref($body) eq 'HASH' && ($body->{kind} // '') eq 'action_block';
  my $result;
- foreach my $statement (@{$body->{statements} || []}) {
+ my $statements = $body->{statements} || [];
+ for (my $index = 0; $index < @$statements; $index++) {
+  my $statement = $statements->[$index];
   _error('invalid_codeblock_body', detail => 'body statement must be action_stmt')
    unless ref($statement) eq 'HASH' && ($statement->{kind} // '') eq 'action_stmt';
   my $expr = $statement->{expr};
+  if (ref($expr) eq 'HASH' && ($expr->{kind} // '') eq 'control_if'
+   && ($expr->{branch_role} // '') eq 'if' && ref($expr->{body}) eq 'HASH') {
+   my ($next, $value, $returned) = _execute_attached_if($statements, $index, $ctx);
+   return ($value, 1) if $returned;
+   $index = $next - 1;
+   $result = undef;
+   next;
+  }
   if (ref($expr) eq 'HASH' && ($expr->{kind} // '') eq 'call' && ($expr->{name} // '') eq 'return') {
    my $args = $expr->{args};
    _error('invalid_codeblock_return', expected => 'exactly 1', got => ref($args) eq 'ARRAY' ? scalar(@$args) : 0)
     unless ref($args) eq 'ARRAY' && @$args == 1;
-   return _eval_expr($args->[0], $ctx)
+   return (_eval_expr($args->[0], $ctx), 1)
   }
   $result = _eval_expr($expr, $ctx);
  }
- return $result
+ return ($result, 0)
+}
+
+sub _execute_body {
+ my ($body, $ctx) = @_;
+ # Callable and eager-expression blocks consume their own return boundary.
+ my ($value) = _execute_sequence($body, $ctx);
+ return $value
 }
 
 sub invoke {

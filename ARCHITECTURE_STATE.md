@@ -5,6 +5,17 @@ architecture page and capability checker under their existing public/neutral gro
 79 migration files / 8 complete + 0 pending / 60 mutations; runtime behavior and
 earlier dated admission evidence below remain unchanged.
 
+## Perl callable attached conditional execution
+
+Self-containment `.1.3.3.0.5.1` executes typed attached if/elseif/else bodies inside the existing
+private callable evaluator. LinkedSpec truthiness governs once-only conditions; unselected bodies
+and later conditions stay lazy. A private value/return flag carries local return through nested
+conditional bodies, while callable and eager-expression block boundaries consume their own return.
+Attached controls yield null without an explicit return. The existing plain eight-field record,
+caller stores, copied parameter restoration and public invocation context are unchanged.
+Marker/value controls, null-return spellings and deferred while remain separately owned by `.5.2-.5`; statement
+function MVP, metadata/order/readiness, dispatcher/full execution and other backends are not extended.
+
 ## Nested-write and receiver-mutation capabilities are portable
 
 `FUTURE-PARITY-BACKLOG.19.7` admits `language.nested_write_vivification` and

@@ -10,7 +10,7 @@ answers:
   - "why must callable matches be repaired before deferred attached if"
   - "which tasks own deferred marker and value conditional failures"
 date: 2026-10-03
-status: twenty-source diagnosis; matches prerequisite then .0.5 repairs; .0.6 remains separate
+status: historical diagnosis retained; matches and attached repairs complete; marker/value/null and .0.6 remain separate
 tags: [perl, actionir, callable, control, metadata, nondeterminism, partial]
 evidence: "Literal repair .3.1 retains twenty native/fresh sources: nineteen healthy pairs and exact typed control_if failure on both routes. Controlled hash-seed public descriptor/substitution observations retain residual event permutations. Tracked programs/observations and original source boundaries are in its verification checkpoint and claim record."
 reverify: "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.0-review.py at its captured e07f production boundary; .0.5/.0.6 and startup87.2 intentionally change these observations. Earlier .3.1 order evidence remains historical."
@@ -93,6 +93,7 @@ the registered deferred bridge. No function-statement extension is inferred. `.0
 Committed `.87.2` repairs literal/string matches in deferred bodies with matched public
 RED/GREEN and actual operand/scope/error controls. The twenty-source `.0.5.0` diagnosis
 and bridge reconciliation claims are frozen at52763 with old hashes/results unchanged.
-Their original matches failure is historical; attached `.0.5.1`, marker `.0.5.2` and
-value `.0.5.3` still require their independent control/return repairs. Numeric helpers,
+Their original matches failure is historical. Attached `.0.5.1` now executes typed branches
+and nested local returns; its current fact is [the attached executor card](perl-callable-attached-conditional-execution.md).
+Marker `.0.5.2`, value `.0.5.3` and null-return `.0.5.4` retain independent repair ownership. Numeric helpers,
 `.0.6` ordering and `.0.7` readiness are not closed by pattern dispatch.

@@ -5,7 +5,7 @@
     {
       "name": "callable-matches-pattern-execution",
       "statement": "Existing callable matches now agrees with selected direct-action controls on native/fresh Perl, preserving exact booleans and actual operand/scope/error behavior;799 focused tests pass.",
-      "scope": "38 exact sources:16 direct/deferred pairs, one copied-parameter scope case and five typed rejection/operand-failure cases. Literal/string patterns, selected i/m/s/x/g flags, escaped slash, null/empty subjects, ordered/skipped effects, static helper precedence, arity and actual reference/error identity are measured. No first-class regex kind, generic regex-node evaluation, broader flags/host interpolation admission, string decoder change, conditional/order/readiness repair, full16 execution or other-backend claim. Old bridge/diagnosis records remain historical52763.",
+      "scope": "38 exact sources:16 direct/deferred pairs, one copied-parameter scope case and five typed rejection/operand-failure cases. Literal/string patterns, selected i/m/s/x/g flags, escaped slash, null/empty subjects, ordered/skipped effects, static helper precedence, arity and actual reference/error identity are measured. No first-class regex kind, generic regex-node evaluation, broader flags/host interpolation admission, string decoder change, conditional/order/readiness repair, full16 execution or other-backend claim. Old bridge/diagnosis records remain historical52763. This observation/input boundary is historical at5174958; attached .0.5.1 changes the callable runtime without refreshing these measurements or hashes.",
       "rederive": {
         "status": "checked",
         "command": "bash tools/run_python_project_data.sh docs/checkpoints/SESSION-STARTUP-READING.87.2-review.py",
@@ -20,7 +20,7 @@
       },
       "durability": {
         "status": "checked",
-        "mode": "live",
+        "mode": "historical",
         "inputs": [
           {
             "path": "capability_conformance/callable_codeblock_contract.json",
@@ -712,7 +712,8 @@
             "sha256": "e2312704ed1e74bc52ea9173388c6063d4d5b1182f24ec0e2408859af1aaaf2d",
             "role": "input"
           }
-        ]
+        ],
+        "revision": "5174958ea5d2d9aa709faff6d9c7d91189553b08"
       }
     }
   ]

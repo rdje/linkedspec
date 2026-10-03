@@ -279,8 +279,9 @@ return and left raw invalid literal text in generated Perl. Standalone literal p
 and ready1/raw0/fallback0/unresolved0 metadata could still accompany compilation failure.
 `.0.2.1.3.0` retains its exact diagnosis/intervention/restoration. `.0.2.1.3.1` retains twenty unchanged
 native/fresh emitted sources, exact old-Core restoration and re-applied proof: nineteen return `ok`.
-The additional attached-`if` source loads after the pipe fix but still raises typed
-`unsupported_codeblock_actionir`/`control_if` on both routes; `.0.5` owns that separate correction.
+The additional attached-`if` source historically loaded after the pipe fix but raised typed
+`unsupported_codeblock_actionir`/`control_if` on both routes. `.0.5.1` now repairs that attached
+statement boundary; its exact earlier failure remains in the original captures.
 Residual unmatched-helper descriptor events can also change order across controlled process hash seeds
 while selected lowered code stays identical. `.0.6` owns ordering/overlap and readiness diagnosis;
 the snapshots preserve each observed order. Neither defect is waived by the healthy pipe controls.
@@ -1378,28 +1379,54 @@ retain separate task owners.
 
 ### Current Perl deferred conditional boundary
 
-Perl recognizes attached conditions inside callable literals, but the deferred evaluator
-currently rejects their typed `control_if` node. This complete source loads on native and
-fresh emitted routes, then raises `unsupported_codeblock_actionir`:
+Perl executes attached `if`/`elseif`/`else` bodies inside callable literals through their typed
+conditions and bodies. Conditions run once, in order, until a branch is selected; later conditions
+and all unselected bodies are skipped. A return inside nested attached bodies exits the current
+callable invocation. This complete example returns `hit` on native and fresh emitted routes:
 
 ```spec
-Top:: I {
-  cb={|| if(true) { return("hit") }; return("miss") };
-  return(cb())
-}
+Top:: I {  cb={|| if(true) { return("hit") }; return("miss") }; return(cb()) }
 ```
 
-Direct rule control already returns `hit`. A callable with `return("hit")` also succeeds;
-its return exits only that invocation. On the conditional failure, copied parameters restore
-the caller's original slots and the typed error retains its identity. Effects preceding the
-conditional remain visible; neither the selected branch nor following statements execute.
-The failure does not mean literal construction captured an environment or changed scope.
+The original pattern-based composition also returns `ok`:
+
+```spec
+Top:: I {  cb={|x,y| if(matches(x,/ok/)) { return(x) }; return("miss") }; return(cb("ok","unused")) }
+```
+
+`when` and `otherwise` are the portable attached aliases. Perl also accepts attached `i` and `elif`;
+those opposite-shape alias extensions remain narrower than the portable intersection.
+Conditions use LinkedSpec truthiness: null, false, numeric zero and empty containers are false,
+while the nonempty string `"0"` is true. Attached controls are statements, so their final body
+expression does not become the callable's implicit result:
+
+```spec
+Top:: I {  cb={|| if(true) { "hit" } }; return(cb()) }
+```
+
+This returns null. A later ordinary expression can still supply the implicit result.
+An eager expression block consumes its own early return, allowing the outer callback to continue:
+
+```spec
+Top:: I {  cb={|| value={ if(true) { return("inner") }; return("bad") }; return([value,"outer"]) }; return(cb()) }
+```
+
+The result is `["inner","outer"]`. Copied fixed/rest parameters restore their original caller
+slots on success and failure; branch/helper failures retain the actual thrown typed object.
+Earlier nonparameter effects remain visible. The plain callable record and scope contract are unchanged.
 
 Marker conditions such as `if(true); return("hit"); else(); return("miss"); endif()` and
-value-form `return(if(true,"hit",else("miss")))` have distinct deferred failures. The former
-reaches `control_if`; the latter currently reaches an unsupported `else` helper during eager
-operand evaluation. Attached, marker and value-form repairs are separately tracked and must
-retain existing truthiness, lazy branches and invocation-local return semantics.
+value-form `return(if(true,"hit",else("miss")))` retain separate deferred failures. The former
+reaches unsupported `control_if`; the latter reaches unsupported helper `else` during eager
+operand evaluation. Zero-argument `return()` currently raises `invalid_codeblock_return`, and
+`return_undef()` raises `unknown_helper` in this evaluator. Separate repair leaves own all four
+boundaries. The working explicit-null spelling also skips the later unknown helper:
+
+```spec
+Top:: I { cb={|| if(true) { return(undef) }; unknown_helper() }; return(cb()) }
+```
+
+This returns null on both routes.
 
 Registered pure functions support the value-oriented alternative:
 
@@ -1412,8 +1439,5 @@ Top:: I {
 ```
 
 Both routes return `ok`. Attached statement-control function bodies exceed the current
-function MVP. The committed matches prerequisite now also executes literal/string patterns directly
-inside a deferred body. This does not supply the missing conditional dispatcher; the
-registered example executes its conditional through the existing function lowerer.
-The tracked twenty-source diagnosis distinguishes these boundaries without changing the
-plain callable record or claiming complete conditional support.
+function MVP. The callable attached-control repair does not extend that MVP, marker/value control,
+loops, metadata ordering, nested raw-expression readiness or complete composed-format execution.
