@@ -138,6 +138,7 @@ sub _actionir_owner_package {
   scanner => 'LinkedSpec::ActionIR::Scanner',
   canonical_events => 'LinkedSpec::ActionIR::CanonicalEvents',
   diagnostics => 'LinkedSpec::ActionIR::Diagnostics',
+  raw_dependencies => 'LinkedSpec::ActionIR::RawDependencies',
   statement_split => 'LinkedSpec::ActionIR::StatementSplit',
   contracts => 'LinkedSpec::ActionIR::Contracts',
   flow_expr => 'LinkedSpec::ActionIR::FlowExpr',
@@ -420,6 +421,8 @@ sub _build_rewrite_diag_acc {
   canonical_action_ir_count  => 0,
   canonical_action_ir_events => [],
   canonical_action_ir_fallback_count => 0,
+  raw_perl_expression_dependencies => [],
+  raw_perl_expression_source_units => [],
  }
 }
 
@@ -1258,8 +1261,23 @@ sub _canonicalize_helper_action_ir_event {
  return _call_actionir_owner_with_deps('canonical_events', '_canonicalize_helper_action_ir_event', @args)
 }
 
+sub _attach_raw_expression_diagnostics {
+ my ($code, $diag, $source_unit) = @_;
+ return $diag unless ref($diag) eq 'HASH'
+  && ref($diag->{canonical_action_ir_events}) eq 'ARRAY';
+ my %unit = ref($source_unit) eq 'HASH'
+  ? %$source_unit : (kind => 'action', index => 0, source => $code);
+ my $dependencies = _call_actionir_owner(
+  'raw_dependencies', 'collect_expression_dependencies',
+  $unit{source}, $diag->{canonical_action_ir_events},
+ );
+ $diag->{raw_perl_expression_dependencies} = $dependencies;
+ $diag->{raw_perl_expression_source_units} = @$dependencies ? [\%unit] : [];
+ return $diag
+}
+
 sub _rewrite_action_code_with_diagnostics {
- my ($label, $code, $rewrite_rules) = @_;
+ my ($label, $code, $rewrite_rules, $source_unit) = @_;
  local $__ls_current_rule_label = defined($label) && !ref($label) ? $label : '';
  my $scope = _trace_emit_context_enter(
   'rewrite_action_code_with_diagnostics',
@@ -1275,6 +1293,7 @@ sub _rewrite_action_code_with_diagnostics {
  if ($wantarray) {
   my @ret = _call_actionir_owner_with_deps('rewrite_pipeline', '_rewrite_action_code_with_diagnostics', $label, $code, $rewrite_rules);
   my $diag = $ret[1];
+  _attach_raw_expression_diagnostics($code, $diag, $source_unit);
   _trace_emit_context_decision(
    phase => 'rewrite_action_code_with_diagnostics',
    label => $label,
@@ -1300,6 +1319,7 @@ sub _rewrite_action_code_with_diagnostics {
  }
  if (defined $wantarray) {
   my $ret = _call_actionir_owner_with_deps('rewrite_pipeline', '_rewrite_action_code_with_diagnostics', $label, $code, $rewrite_rules);
+  _attach_raw_expression_diagnostics($code, $ret, $source_unit);
   _trace_emit_context_decision(
    phase => 'rewrite_action_code_with_diagnostics',
    label => $label,
@@ -1473,11 +1493,27 @@ sub rewrite_action_code_for_compat {
 }
 
 sub _normalize_rule_code_chunks {
- my ($label, $chunks, $rewrite_diag_acc, $rewrite_rules) = @_;
+ my ($label, $chunks, $rewrite_diag_acc, $rewrite_rules, $source_kind, $generated_chunks) = @_;
 
  my @normalized;
+ my $source_index = 0;
  foreach my $chunk (@$chunks) {
-  my ($rewritten, $diag) = _rewrite_action_code_with_diagnostics($label, $chunk, $rewrite_rules);
+  my $action_source = $chunk;
+  # RuleIR records only semantic marker chunks it created. Match both the
+  # ordinal and exact bytes so an authored twin or replaced slot stays visible.
+  if (ref($generated_chunks) eq 'ARRAY') {
+   foreach my $generated (@$generated_chunks) {
+    next unless ref($generated) eq 'HASH'
+     && (($generated->{kind} // '') eq 'named_mark'
+         || ($generated->{kind} // '') eq 'move_position')
+     && defined($generated->{index}) && $generated->{index} == $source_index
+     && defined($generated->{source}) && $generated->{source} eq $chunk;
+    $action_source = '';
+    last;
+   }
+  }
+  my ($rewritten, $diag) = _rewrite_action_code_with_diagnostics($label, $chunk, $rewrite_rules,
+   {kind => $source_kind // 'lifecycle', index => $source_index++, source => $action_source});
   _accumulate_action_rewrite_diagnostics($rewrite_diag_acc, $diag) if $rewrite_diag_acc;
   $rewritten = _preserve_terminal_block_statement_separator($chunk, $rewritten);
   $rewritten =~ s/\s*;\s*$//o;
@@ -1492,8 +1528,10 @@ sub _rewrite_acode_entries {
 
  my @ACODEs;
  my @dependency_refs;
+ my $source_index = 0;
  foreach my $acode_entry (@$acode_entries) {
-  my ($rewritten_acode, $diag) = _rewrite_action_code_with_diagnostics($label, $acode_entry->{code}, $rewrite_rules);
+  my ($rewritten_acode, $diag) = _rewrite_action_code_with_diagnostics($label, $acode_entry->{code}, $rewrite_rules,
+   {kind => 'acode', index => $source_index++, source => $acode_entry->{code}});
   _accumulate_action_rewrite_diagnostics($rewrite_diag_acc, $diag);
   push @ACODEs, $rewritten_acode;
   my $dependency_ref = {
@@ -1518,8 +1556,19 @@ sub _rewrite_bcode_entries {
 
  my @BCALLs;
  my %BCODEs;
+ my $source_index = 0;
  foreach my $bcode_entry (@$bcode_entries) {
-  my ($rewritten_bcode, $diag) = _rewrite_action_code_with_diagnostics($label, $bcode_entry->{code}, $rewrite_rules);
+  # Only the BCODE caller separates the exact Core-owned bridge. An authored
+  # matching assignment after it remains part of the diagnostic action source.
+  my $action_source = $bcode_entry->{code};
+  my $bridge = '$'.$label.' = call('.$bcode_entry->{call}.')';
+  if ($action_source eq $bridge) {
+   $action_source = '';
+  } elsif (index($action_source, $bridge.";\n") == 0) {
+   $action_source = substr($action_source, length($bridge) + 2);
+  }
+  my ($rewritten_bcode, $diag) = _rewrite_action_code_with_diagnostics($label, $bcode_entry->{code}, $rewrite_rules,
+   {kind => 'bcode', index => $source_index++, target => $bcode_entry->{call}, source => $action_source});
   _accumulate_action_rewrite_diagnostics($rewrite_diag_acc, $diag);
   push @BCALLs, $bcode_entry->{call};
   $BCODEs{$bcode_entry->{call}} = $rewritten_bcode;
@@ -1529,15 +1578,15 @@ sub _rewrite_bcode_entries {
 }
 
 sub _normalize_rule_lifecycle_code {
- my ($label, $code_blocks, $rewrite_diag_acc, $rewrite_rules) = @_;
+ my ($label, $code_blocks, $rewrite_diag_acc, $rewrite_rules, $generated_lecode) = @_;
  return {
-  icode  => _normalize_rule_code_chunks($label, $code_blocks->{ICODE},  $rewrite_diag_acc, $rewrite_rules),
-  ecode  => _normalize_rule_code_chunks($label, $code_blocks->{ECODE},  $rewrite_diag_acc, $rewrite_rules),
-  excode => _normalize_rule_code_chunks($label, $code_blocks->{EXCODE}, $rewrite_diag_acc, $rewrite_rules),
-  itcode => _normalize_rule_code_chunks($label, $code_blocks->{ITCODE}, $rewrite_diag_acc, $rewrite_rules),
-  lxcode => _normalize_rule_code_chunks($label, $code_blocks->{LXCODE}, $rewrite_diag_acc, $rewrite_rules),
-  lscode => _normalize_rule_code_chunks($label, $code_blocks->{LSCODE}, $rewrite_diag_acc, $rewrite_rules),
-  lecode => _normalize_rule_code_chunks($label, $code_blocks->{LECODE}, $rewrite_diag_acc, $rewrite_rules),
+  icode  => _normalize_rule_code_chunks($label, $code_blocks->{ICODE},  $rewrite_diag_acc, $rewrite_rules, 'icode'),
+  ecode  => _normalize_rule_code_chunks($label, $code_blocks->{ECODE},  $rewrite_diag_acc, $rewrite_rules, 'ecode'),
+  excode => _normalize_rule_code_chunks($label, $code_blocks->{EXCODE}, $rewrite_diag_acc, $rewrite_rules, 'excode'),
+  itcode => _normalize_rule_code_chunks($label, $code_blocks->{ITCODE}, $rewrite_diag_acc, $rewrite_rules, 'itcode'),
+  lxcode => _normalize_rule_code_chunks($label, $code_blocks->{LXCODE}, $rewrite_diag_acc, $rewrite_rules, 'lxcode'),
+  lscode => _normalize_rule_code_chunks($label, $code_blocks->{LSCODE}, $rewrite_diag_acc, $rewrite_rules, 'lscode'),
+  lecode => _normalize_rule_code_chunks($label, $code_blocks->{LECODE}, $rewrite_diag_acc, $rewrite_rules, 'lecode', $generated_lecode),
  }
 }
 
@@ -1565,6 +1614,11 @@ sub _collect_raw_perl_dependency_statements {
   my $raw_code = (ref($event->{args}) eq 'HASH') ? $event->{args}{code} : $event->{raw};
   $raw_code = _trim_action_ir_value($raw_code);
   next unless defined($raw_code) && length($raw_code);
+  next if $seen_raw_perl_dependency_statement{$raw_code}++;
+  push @raw_perl_dependency_statements, $raw_code;
+ }
+ foreach my $dependency (@{$rewrite_diag_acc->{raw_perl_expression_dependencies} || []}) {
+  my $raw_code = $dependency->{source};
   next if $seen_raw_perl_dependency_statement{$raw_code}++;
   push @raw_perl_dependency_statements, $raw_code;
  }
@@ -1627,7 +1681,8 @@ sub _build_action_rewriter_meta {
  my @rewrite_contract_ids = map { $_->{id} } @$rewrite_rules;
  my @unresolved_helper_statements = _collect_unresolved_helper_statements($rewrite_diag_acc);
  my @raw_perl_dependency_statements = _collect_raw_perl_dependency_statements($rewrite_diag_acc);
- my $raw_perl_dependency_count = $rewrite_diag_acc->{canonical_action_ir_fallback_count} || 0;
+ my $raw_perl_dependency_count = ($rewrite_diag_acc->{canonical_action_ir_fallback_count} || 0)
+  + scalar(@{$rewrite_diag_acc->{raw_perl_expression_dependencies} || []});
  my @language_agnostic_action_ir_blocker_statements = _build_language_agnostic_blocker_statements(
  \@raw_perl_dependency_statements,
   \@unresolved_helper_statements,
@@ -1655,6 +1710,8 @@ sub _build_action_rewriter_meta {
   canonical_action_ir_events => [@{$rewrite_diag_acc->{canonical_action_ir_events}}],
   canonical_action_ir_fallback_count => $rewrite_diag_acc->{canonical_action_ir_fallback_count},
   raw_perl_dependency_count => $raw_perl_dependency_count,
+  raw_perl_expression_dependencies => [@{$rewrite_diag_acc->{raw_perl_expression_dependencies} || []}],
+  raw_perl_expression_source_units => [@{$rewrite_diag_acc->{raw_perl_expression_source_units} || []}],
   raw_perl_dependency_statements => \@raw_perl_dependency_statements,
   compatibility_surface_count => $compatibility_surface_diag->{compatibility_surface_count},
   compatibility_surface_contract_ids => [@{$compatibility_surface_diag->{compatibility_surface_contract_ids}}],
@@ -2495,8 +2552,10 @@ sub build_rule_ir_emit_context {
  # return->assignment) instead of the preamble.  Avoids MIXED_ACTIONS with bcodes.
  my $and_icode;
  if (ref($rule_ir->{and_icode_entries}) eq 'ARRAY' && @{$rule_ir->{and_icode_entries}}) {
+  my $source_index = 0;
   for my $entry (@{$rule_ir->{and_icode_entries}}) {
-   my ($rewritten, $diag) = _rewrite_action_code_with_diagnostics($label, $entry->{code}, $rewrite_rules);
+   my ($rewritten, $diag) = _rewrite_action_code_with_diagnostics($label, $entry->{code}, $rewrite_rules,
+    {kind => 'and_icode', index => $source_index++, source => $entry->{code}});
    _accumulate_action_rewrite_diagnostics($rewrite_diag_acc, $diag);
    $and_icode = $rewritten unless defined($and_icode);
   }
@@ -2506,6 +2565,7 @@ sub build_rule_ir_emit_context {
   $rule_ir->{code_blocks},
   $rewrite_diag_acc,
   $rewrite_rules,
+  $rule_ir->{generated_lecode},
  );
 
  $acodes = [map { _harmonize_scalar_binding_child_pushes($_) } @{$acodes || []}];

@@ -1,0 +1,110 @@
+[
+  {
+    "id": "emit_context_meta_exposes_language_agnostic_readiness",
+    "source": "Top::&\n /a/ -> Top { call(Leaf); return(1) }\n\nMixed::&\n /b/ -> Mixed { call(Leaf); my $tmp = 1 }\n\nUnresolved::&\n /c/ -> Unresolved { return(Leaf, $x) }\n\nLeaf:\n /a/ -> Leaf { return(1) }\n /b/ -> Leaf { return(1) }\n /c/ -> Leaf { return(1) }\n"
+  },
+  {
+    "id": "emit_context_meta_exposes_language_agnostic_blocker_statements",
+    "source": "Top::&\n /a/ -> Top { call(Leaf); return(1) }\n\nCombo::&\n /b/ -> Combo { return(Leaf, $x); my $tmp = 1 }\n\nLeaf:\n /a/ -> Leaf { return(1) }\n /b/ -> Leaf { return(1) }\n"
+  },
+  {
+    "id": "emit_context_meta_exposes_compatibility_surface_without_demoting_ready_rules",
+    "source": "Top::&\n /a/ -> Top { call(CompatReady); return(array(\"?Top:\")) }\n\nCompatReady::&\n /b/ -> CompatReady { return 1; exit }\n\nCompatBlocked::&\n /c/ -> CompatBlocked { return 1; my $tmp = 2 }\n"
+  },
+  {
+    "id": "return_descriptor_exposes_action_rewriter_migration_summary",
+    "source": "Top::&\n /a/ -> Top { call(Leaf); return(1) }\n\nMixed::&\n /b/ -> Mixed { call(Leaf); my $tmp = 1 }\n\nUnresolved::&\n /c/ -> Unresolved { return(Leaf, $x) }\n\nLeaf:\n /a/ -> Leaf { return(1) }\n /b/ -> Leaf { return(1) }\n /c/ -> Leaf { return(1) }\n"
+  },
+  {
+    "id": "return_descriptor_exposes_action_rewriter_compatibility_surface_summary",
+    "source": "Top::&\n /a/ -> Top { call(CompatReady); return(array(\"?Top:\")) }\n\nCompatReady::&\n /b/ -> CompatReady { return 1; exit }\n\nCompatBlocked::&\n /c/ -> CompatBlocked { return 1; my $tmp = 2 }\n"
+  },
+  {
+    "id": "compatibility_surface_metadata_includes_legacy_helper_wrappers",
+    "source": "Top::&\n /(\\w+)/ -> Top { my $retv = call(Leaf); capture_if(Top); return(array(\"?Top:\")) }\n\nLeaf:\n /(\\w+)/ -> Leaf { return 1 }\n"
+  },
+  {
+    "id": "return_descriptor_exposes_action_rewriter_migration_blocker_type_breakdown",
+    "source": "Top::&\n /a/ -> Top { call(Leaf); return(1) }\n\nRawOnly::&\n /b/ -> RawOnly { call(Leaf); my $tmp = 1 }\n\nUnresolvedOnly::&\n /c/ -> UnresolvedOnly { return(Leaf, $x) }\n\nMixed::&\n /d/ -> Mixed { return(Leaf, $x); my $tmp = 2 }\n\nLeaf:\n /a/ -> Leaf { return(1) }\n /b/ -> Leaf { return(1) }\n /c/ -> Leaf { return(1) }\n /d/ -> Leaf { return(1) }\n"
+  },
+  {
+    "id": "emit_context_canonical_action_ir_lowers_call_wrappers_without_raw_fallback",
+    "source": "Top::&\n /a/ -> Top { my $retv = call(Leaf); $retv = call(Leaf); push @Top, call(Leaf) }\n\nLeaf:\n /a/ -> Leaf { return(1) }\n"
+  },
+  {
+    "id": "emit_context_canonical_action_ir_lowers_push_child_call_indexed_wrapper_without_raw_fallback",
+    "source": "Top::&\n /a/ -> Top { push @Top, call(Leaf)->[1] }\n\nLeaf:\n /a/ -> Leaf { return(1) }\n"
+  },
+  {
+    "id": "emit_context_canonical_action_ir_lowers_return_call_wrapper_without_raw_fallback",
+    "source": "Top::&\n /a/ -> Top { return call(Leaf) }\n\nLeaf:\n /a/ -> Leaf { return(1) }\n"
+  },
+  {
+    "id": "emit_context_canonical_action_ir_classifies_bare_return_statements_without_raw_fallback",
+    "source": "Top::&\n /a/ -> Top { return 1; return }\n"
+  },
+  {
+    "id": "emit_context_canonical_action_ir_classifies_bare_exit_statements_without_raw_fallback",
+    "source": "Top::&\n /a/ -> Top { exit; exit 1; exit(2) }\n"
+  },
+  {
+    "id": "emit_context_canonical_action_ir_classifies_prefix_newline_linecount_without_raw_fallback",
+    "source": "Top::&\n /a/ -> Top { my @startline = substr($$STRING, 0, $IPOS) =~ /\\n/g }\n"
+  },
+  {
+    "id": "emit_context_canonical_action_ir_classifies_bare_my_declarations_without_raw_fallback",
+    "source": "Top::&\n /a/ -> Top { my $retv; my @matches }\n"
+  },
+  {
+    "id": "emit_context_canonical_action_ir_classifies_position_tracking_cluster_without_raw_fallback",
+    "source": "Top::&\n /a/ -> Top { my @matches; my $last_pos=$IPOS; $last_pos = pos($$STRING); $IPOS = pos $$STRING; my $shift = $LSPOS - $last_pos - length($LMATCH); push @matches, substr($$STRING, $last_pos, $shift) if $shift }\n"
+  },
+  {
+    "id": "emit_context_canonical_action_ir_classifies_inline_regex_subst_assignment_without_raw_fallback",
+    "source": "Top::&\n /a/ -> Top { $args =~ s/\\s*\\)\\s*$// }\n"
+  },
+  {
+    "id": "emit_context_canonical_action_ir_classifies_lexical_match_assignment_without_raw_fallback",
+    "source": "Top::&\n /a/ -> Top { my $args = $IMATCH }\n"
+  },
+  {
+    "id": "emit_context_canonical_action_ir_classifies_imatch_list_destructure_without_raw_fallback",
+    "source": "Top::&\n /a/ -> Top { my ($attribute_name, $value) = @IMATCH_LIST }\n"
+  },
+  {
+    "id": "emit_context_canonical_action_ir_classifies_print_foreach_iterable_without_raw_fallback",
+    "source": "Top::&\n /a/ -> Top { print \"perl_dquotes:<<$_>>\\n\" foreach (@matches) }\n"
+  },
+  {
+    "id": "emit_context_canonical_action_ir_classifies_split_trim_filter_assignment_without_raw_fallback",
+    "source": "Top::&\n /a/ -> Top { my @parts = grep { length($_) } map { my $v = $_; $v =~ s/^\\s+|\\s+$//g; $v } split /\\s*,\\s*/, $args }\n"
+  },
+  {
+    "id": "emit_context_canonical_action_ir_classifies_ref_field_assignment_without_raw_fallback",
+    "source": "Top::&\n /a/ -> Top { $prev_node_type = $retv->{type} }\n"
+  },
+  {
+    "id": "method_empty_action_return_with_leading_space_args_stays_balanced",
+    "source": "Top::&\n /a/ -> Top .return ((map {lc} @IMATCH_LIST), \\@Top, call(Leaf))\n\nLeaf:\n /a/ -> Leaf { return(1) }\n"
+  },
+  {
+    "id": "spec_format_terse_3_3_3_mutation_assignment_expression_values",
+    "source": "Top::\n /x/ -> Done { set(value, \"ok\"); set(key, \"stage\"); return(array(items += value, copy(items), meta[key] = value, copy(meta), (items += \"x\").count(), (meta[\"last\"] = value).count_keys())) }\n\nDone::\n /[a-z]+/\n"
+  },
+  {
+    "id": "spec_format_terse_3_3_4_assignment_expression_closure",
+    "source": "fn keep(value) { return(fn_out = value) }\nTop::\n /x/ -> Done { set(value, \"ok\"); set(key, \"stage\"); return(array(name = value, name, =(other, cat(name, \"!\")), other, set(third, keep(\"fn\")), third, set(current, \"surface\"), current, items = [value], items, set(meta, { key : value }), meta, set(items_mut, [value]), items_mut += \"tail\", copy(items_mut), set(meta_mut, { key : value }), meta_mut[\"extra\"] = other, copy(meta_mut), (items_mut += \"last\").count(), (meta_mut[\"last\"] = value).count_keys())) }\n\nDone::\n /[a-z]+/\n"
+  },
+  {
+    "id": "compatibility_return_raw_inner",
+    "source": "Top:: I { return i+1 }\n"
+  },
+  {
+    "id": "canonical_return_raw_inner",
+    "source": "Top:: I { return(i+1) }\n"
+  },
+  {
+    "id": "compatibility_call_wrapper_raw_inner",
+    "source": "Top:: I { my $retv = call(Leaf, i+1) }\n\nLeaf:: I { return(1) }\n"
+  }
+]

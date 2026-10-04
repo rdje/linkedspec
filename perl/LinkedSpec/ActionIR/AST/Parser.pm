@@ -364,7 +364,7 @@ sub _parse_trailing_block_call_expr {
  my $block_start = $start + $attached->{open_idx};
  my $block_end = $start + $attached->{close_idx} + 1;
  my $block_source = substr($trimmed, $attached->{open_idx}, $attached->{close_idx} - $attached->{open_idx} + 1);
- my $block = parse_action_block($attached->{body});
+ my $block = parse_action_block($attached->{body}, { base_start => $block_start + 1 });
  push @args, _node('block_value', $block_source, $block_start, $block_end, block => $block);
 
  return _node(
@@ -397,7 +397,7 @@ sub _parse_attached_control_flow_expr {
  return undef unless length($head_trimmed);
 
  my $body_source = substr($trimmed, $attached->{open_idx}, $attached->{close_idx} - $attached->{open_idx} + 1);
- my $body = parse_action_block($attached->{body});
+ my $body = parse_action_block($attached->{body}, { base_start => $start + $attached->{open_idx} + 1 });
  return _parse_control_flow_head(
   $head_trimmed,
   $head_start,
@@ -662,7 +662,7 @@ sub _parse_brace_expr {
  if (_fallback_trim($payload) eq '' || _has_top_level_hash_pair_separator($payload)) {
   return _parse_hash_literal_expr($trimmed, $payload, $start, $end);
  }
- my $block = parse_action_block($payload);
+ my $block = parse_action_block($payload, { base_start => $start + 1 });
  return _node('block_value', $trimmed, $start, $end, block => $block)
 }
 

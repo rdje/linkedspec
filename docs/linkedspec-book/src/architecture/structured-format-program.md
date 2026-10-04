@@ -1600,7 +1600,11 @@ retain their actual consumer decisions; ten evidence corruptions reject. Scan pr
 not global source order or arbitrary-overlap equivalence.
 
 The quoted string `"return(inner); if(true)"` still executes as data yet creates false
-helper/control metadata. P1 `.0.7.2` owns that repair; nested raw false-ready reporting remains
-`.0.7.0/.1`. See the [ActionIR order explanation](../dsl/actionir-lowering-mental-model.md#canonical-event-order-and-execution)
+helper/control metadata. P1 `.0.7.2` owns that repair. Nested raw-expression reporting now
+counts uncovered source occurrences and exposes action-unit provenance. Nested block
+coordinates now index the enclosing action, and exact compiler-generated marker slots
+retain their prior fallback diagnostics. Original host behavior and unsupported deferred-body
+failures remain unchanged. Source comments have
+their own `.0.7.3` classification repair. See the [ActionIR order explanation](../dsl/actionir-lowering-mental-model.md#canonical-event-order-and-execution)
 for exact executed examples. Stable order does not close readiness, dispatcher/full composition
 or another backend's behavior.

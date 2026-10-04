@@ -1,0 +1,14 @@
+[
+  {
+    "id": "bridge_keyword_deferred",
+    "source": "fn id(value) { return(value) }\nTop:: I { cb={|| return(id(value:\"x\")) }; return(cb()) }\n\n",
+    "input": "x",
+    "expected_raw_expression_sources": null
+  },
+  {
+    "id": "bridge_keyword_effects",
+    "source": "fn pair(first,second) { return([first,second]) }\nTop:: I { effects=[]; cb={|| return(pair({ push(effects,\"bad\"); return(\"x\") },second:\"y\")) }; return(cb()) }\n\n",
+    "input": "x",
+    "expected_raw_expression_sources": null
+  }
+]

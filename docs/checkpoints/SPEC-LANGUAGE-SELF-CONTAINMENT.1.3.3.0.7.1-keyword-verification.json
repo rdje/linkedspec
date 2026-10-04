@@ -1,0 +1,79 @@
+{
+  "owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1",
+  "result": "PASS",
+  "activation": "c9673d7eff39836fdc94d59b8d47639db5e937d4",
+  "sources": 2,
+  "native_fresh_pairs": 6,
+  "top_level_TAP_tests": 605,
+  "actual_RED": {
+    "plan": 605,
+    "failed_top_level": 2,
+    "assertions": [
+      86,
+      181
+    ]
+  },
+  "second_canonical_failure_log_bytes": 37328805,
+  "controls": [
+    {
+      "name": "keyword readiness hidden",
+      "reason": "keyword source-presence policy"
+    },
+    {
+      "name": "keyword span shifted",
+      "reason": "keyword occurrence provenance"
+    },
+    {
+      "name": "keyword operand effects",
+      "reason": "keyword no operand effects"
+    },
+    {
+      "name": "keyword error replaced",
+      "reason": "keyword original pre-operand error identity"
+    },
+    {
+      "name": "keyword emitted digest replaced",
+      "reason": "keyword emitted identity"
+    },
+    {
+      "name": "keyword trace lost",
+      "reason": "keyword retained native trace"
+    },
+    {
+      "name": "runtime failure envelope base64",
+      "reason": "runtime canonical base64"
+    },
+    {
+      "name": "runtime failure envelope compressed_sha256",
+      "reason": "runtime canonical compressed identity"
+    },
+    {
+      "name": "runtime failure envelope bytes",
+      "reason": "runtime canonical raw identity"
+    }
+  ],
+  "tracked_inputs": {
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-before-Diagnostics.pm": "0574e93aeb14a63158d5af08d41ff1775fe263030d1557e59047f1cadb770712",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-before-EmitContext.pm": "6940dcf0be03b65e3d0a69f3efec41e1dca37524930ef20368dae94d99a23a9b",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-before-codeblock-push.t": "5c773a03f472acaf509863e314621d8a735318113e1478d15e559ad27c86fd46",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-before-span-Parser.pm": "8c3e1708278b3e199eb30a7095ca0e70825c01ba4b5a46612e77f7cc8f5dff50",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-before-span-RuleIR.pm": "5cdd4065a6f0e5165863146c4b4693fa54168344f6225dd9a1748e096e331997",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-canonical-runtime-before.json": "70745b1eca99054cc9bd714c48e8204a17b6b7b08fa82166db09e54cf2cee9e6",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-canonical-runtime-failure.py": "7ef21458e1b3ed866a0a9fc18fa74060b5581c1263f4da6a35a6966f5a2a580f",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-keyword-after.json": "182c461f8f6efa4c04ad1f2bd05bbd40ea016086607f9e2151f1b5b41d559da9",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-keyword-before.json": "d1c32f9c86cf678a2fa5cc06b35ae7e92672a3be2d188ec04251d2e1ffce01b4",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-keyword-capture.py": "04f47b3c0e084094aede543000ddf5a813ae0622cb26e198c2b3da868da05749",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-keyword-cases.json": "84446922b14385e748ebcc771a2e06689f0ff60bb0dc4567ea322afbadbd03a1",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-keyword-fresh.pl": "41b058446246df5c0d53e97eaa0267b79f98c88cce10548d215d2a5d42c1a0c3",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-keyword-probe.pl": "f37791c618f17ae79aed2d08f579d0b250d7b4b84195ed5a0deb389d2fbe6a3a",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-keyword-review.py": "03946f32fc20e91febea1947cec2d9d3b5d6573437854f8c318a9a7c1fc15985",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-keyword-tests-after.json": "063e35eda55a93e89388c1b01472b8e5a35fe6bd9f1da8f375d93aa2b4b370cb",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-keyword-tests-before.json": "747b10d54e75ecb6c2f875a395188e4e1211cadba957aad0371e85e7e8f6ac07",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-keyword-tests.py": "90a8e44a82c4d1844e5afa418eff64c1b889d3ff9e871f6cbb7e1f887136d87d",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-span-normalize.py": "02fddde49448648ec9e2f252be54c394cea9d25400bf2b59c37d5601b80be3e9",
+    "perl/LinkedSpec/ActionIR/AST/Parser.pm": "fe1c8b8502d0852022152b65d8b6061eec66f02a1dd4d6f551a2c0d621b3d284",
+    "perl/LinkedSpec/CodeblockRuntime.pm": "e03f57b0e7150a6b6c8d97ce5db8f9f1ab25690008d6c23abc955f91d8421bb7",
+    "t/codeblock_push_composition_perl.t": "1901949f6bd292ceec01d74019fa91cedd378dd62bc5c61241df730d0020d607"
+  },
+  "limits": "Supplemental keyword controls are typed rejections, not syntax admission. Reporting counts unsupported source even though guard rejects before operands; Execution/error/effect observations remain exact; compiler output may change only in independently verified nested AST coordinate payloads. Native timestamped traces are retained and shape-checked, not compared byte-for-byte. Three named seeds are not a probability interval."
+}

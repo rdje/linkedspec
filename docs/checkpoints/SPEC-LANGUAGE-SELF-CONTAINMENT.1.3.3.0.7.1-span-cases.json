@@ -1,0 +1,22 @@
+[
+  {
+    "id": "mark",
+    "source": "Top::\n -> MoveTop\n\nMoveTop: /foo/ /bar/ @mark(body_start)\n",
+    "input": "bar"
+  },
+  {
+    "id": "move_pos",
+    "source": "Top::\n -> MoveTop\n\nMoveTop: /foo/ /bar/ @move_pos\n",
+    "input": "bar"
+  },
+  {
+    "id": "capture_slice",
+    "source": "Top::\n -> MoveTop\n\nMoveTop: /foo/ /bar/ @capture_slice\n",
+    "input": "bar"
+  },
+  {
+    "id": "capture_from_here",
+    "source": "Top::\n -> MoveTop\n\nMoveTop: /foo/ /bar/ @capture_from_here\n",
+    "input": "bar"
+  }
+]

@@ -1,0 +1,214 @@
+[
+  {
+    "id": "assignment_raw",
+    "source": "Top:: I { i=2; i=i+1; return(i) }",
+    "expected_raw_expression_sources": [
+      "i+1"
+    ],
+    "role": "nested raw assignment"
+  },
+  {
+    "id": "condition_raw",
+    "source": "Top:: I { i=2; if(i < 1) { return(\"yes\") }; return(\"no\") }",
+    "expected_raw_expression_sources": [
+      "i < 1"
+    ],
+    "role": "nested raw condition"
+  },
+  {
+    "id": "while_raw",
+    "source": "Top:: I { i=2; while(i < 1) { return(\"yes\") }; return(\"no\") }",
+    "expected_raw_expression_sources": [
+      "i < 1"
+    ],
+    "role": "nested raw while condition"
+  },
+  {
+    "id": "call_argument_raw",
+    "source": "Top:: I { i=2; return(num_add(i+1,2)) }",
+    "expected_raw_expression_sources": [
+      "i+1"
+    ],
+    "role": "nested raw known-helper argument"
+  },
+  {
+    "id": "array_element_raw",
+    "source": "Top:: I { i=2; return([i+1]) }",
+    "expected_raw_expression_sources": [
+      "i+1"
+    ],
+    "role": "nested raw container element"
+  },
+  {
+    "id": "hash_value_raw",
+    "source": "Top:: I { i=2; return({ \"n\": i+1 }) }",
+    "expected_raw_expression_sources": [
+      "i+1"
+    ],
+    "role": "nested raw harray value"
+  },
+  {
+    "id": "codeblock_body_raw",
+    "source": "Top:: I { cb={|i| i=i+1; return(i) }; return(cb(2)) }",
+    "expected_raw_expression_sources": [
+      "i+1"
+    ],
+    "role": "nested raw deferred body"
+  },
+  {
+    "id": "assignment_canonical",
+    "source": "Top:: I { i=2; i=num_add(i,1); return(i) }",
+    "expected_raw_expression_sources": [],
+    "role": "canonical assignment alternative"
+  },
+  {
+    "id": "condition_canonical",
+    "source": "Top:: I { i=2; if(num_lt(i,1)) { return(\"yes\") }; return(\"no\") }",
+    "expected_raw_expression_sources": [],
+    "role": "canonical condition alternative"
+  },
+  {
+    "id": "call_argument_canonical",
+    "source": "Top:: I { i=2; return(num_add(num_add(i,1),2)) }",
+    "expected_raw_expression_sources": [],
+    "role": "canonical nested helper argument"
+  },
+  {
+    "id": "container_canonical",
+    "source": "Top:: I { i=2; return([num_add(i,1), { \"n\": i }]) }",
+    "expected_raw_expression_sources": [],
+    "role": "canonical nested value containers"
+  },
+  {
+    "id": "codeblock_canonical",
+    "source": "Top:: I { cb={|x| return(x) }; return(cb(\"ok\")) }",
+    "expected_raw_expression_sources": [],
+    "role": "canonical deferred body"
+  },
+  {
+    "id": "literal_data",
+    "source": "Top:: I { return(\"i=i+1; i < 1\") }",
+    "expected_raw_expression_sources": [],
+    "role": "raw-looking authored string data"
+  },
+  {
+    "id": "comment_data",
+    "source": "Top:: I { # i=i+1; i < 1\n return(\"ok\") }",
+    "expected_raw_expression_sources": [],
+    "role": "raw-looking authored comment data"
+  },
+  {
+    "id": "quoted_helper_known",
+    "source": "Top:: I { return(\"return(inner); if(true)\") }",
+    "expected_raw_expression_sources": [],
+    "role": "separate known quoted helper false blocker .7.2"
+  },
+  {
+    "id": "raw_statement",
+    "source": "Top:: I { my $host=3; return($host) }",
+    "expected_raw_expression_sources": null,
+    "role": "visible legacy top-level raw statement"
+  },
+  {
+    "id": "repeated_raw",
+    "source": "Top:: I { i=2; i=i+1; i=i+1; return(i) }",
+    "input": "",
+    "scope": "caller/source-unit compatibility control; actual outcome remains unassessed until capture"
+  },
+  {
+    "id": "repeated_units",
+    "source": "Top:: I { i=2; i=i+1 } I { i=i+1; return(i) }",
+    "input": "",
+    "scope": "caller/source-unit compatibility control; actual outcome remains unassessed until capture"
+  },
+  {
+    "id": "function_raw",
+    "source": "fn increment(x) { return(x+1) }\nTop:: I { return(increment(2)) }",
+    "input": "",
+    "scope": "caller/source-unit compatibility control; actual outcome remains unassessed until capture"
+  },
+  {
+    "id": "function_canonical",
+    "source": "fn increment(x) { return(num_add(x,1)) }\nTop:: I { return(increment(2)) }",
+    "input": "",
+    "scope": "caller/source-unit compatibility control; actual outcome remains unassessed until capture"
+  },
+  {
+    "id": "unused_function_raw",
+    "source": "fn unused(x) { return(x+1) }\nTop:: I { return(\"ok\") }",
+    "input": "",
+    "scope": "caller/source-unit compatibility control; actual outcome remains unassessed until capture"
+  },
+  {
+    "id": "transitive_function_raw",
+    "source": "fn inner(x) { return(x+1) }\nfn outer(x) { return(inner(x)) }\nTop:: I { return(outer(2)) }",
+    "input": "",
+    "scope": "caller/source-unit compatibility control; actual outcome remains unassessed until capture"
+  },
+  {
+    "id": "raw_containing_statement",
+    "source": "Top:: I { do { my $i=2; $i=$i+1 }; return(\"ok\") }",
+    "input": "",
+    "scope": "caller/source-unit compatibility control; actual outcome remains unassessed until capture"
+  },
+  {
+    "id": "quoted_hash_data",
+    "source": "Top:: I { return(\"# i=i+1\") }",
+    "input": "",
+    "scope": "caller/source-unit compatibility control; actual outcome remains unassessed until capture"
+  },
+  {
+    "id": "action_edge_raw",
+    "source": "Top:: I { i=2 } -> Done { return(i+1) }\n\nDone: /x/",
+    "input": "x",
+    "scope": "caller/source-unit compatibility control; actual outcome remains unassessed until capture"
+  },
+  {
+    "id": "blind_edge_raw",
+    "source": "Top:: I { i=2 } => Done { return(i+1) }\n\nDone:: I { return(\"child\") }",
+    "input": "",
+    "scope": "caller/source-unit compatibility control; actual outcome remains unassessed until capture"
+  },
+  {
+    "id": "and_local_raw",
+    "source": "Top:AND /x/ I { i=2; return(i+1) }",
+    "input": "x",
+    "scope": "caller/source-unit compatibility control; actual outcome remains unassessed until capture"
+  },
+  {
+    "id": "lifecycle_e_raw",
+    "source": "Top:: E { i=2; i=i+1 }",
+    "input": "",
+    "scope": "caller/source-unit compatibility control; actual outcome remains unassessed until capture"
+  },
+  {
+    "id": "lifecycle_ex_raw",
+    "source": "Top:: EX { i=2; i=i+1 }",
+    "input": "",
+    "scope": "caller/source-unit compatibility control; actual outcome remains unassessed until capture"
+  },
+  {
+    "id": "lifecycle_it_raw",
+    "source": "Top:: IT { i=2; i=i+1 }",
+    "input": "",
+    "scope": "caller/source-unit compatibility control; actual outcome remains unassessed until capture"
+  },
+  {
+    "id": "lifecycle_ls_raw",
+    "source": "Top:: LS { i=2; i=i+1 }",
+    "input": "",
+    "scope": "caller/source-unit compatibility control; actual outcome remains unassessed until capture"
+  },
+  {
+    "id": "lifecycle_le_raw",
+    "source": "Top:: LE { i=2; i=i+1 }",
+    "input": "",
+    "scope": "caller/source-unit compatibility control; actual outcome remains unassessed until capture"
+  },
+  {
+    "id": "lifecycle_lx_raw",
+    "source": "Top:: LX { i=2; i=i+1 }",
+    "input": "",
+    "scope": "caller/source-unit compatibility control; actual outcome remains unassessed until capture"
+  }
+]

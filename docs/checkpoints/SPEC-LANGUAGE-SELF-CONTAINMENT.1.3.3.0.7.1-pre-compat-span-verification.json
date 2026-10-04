@@ -1,0 +1,83 @@
+{
+  "owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1",
+  "result": "PASS",
+  "sources": 4,
+  "native_fresh_pairs": 12,
+  "top_level_TAP_tests": 20,
+  "actual_RED": {
+    "plan": 20,
+    "failed_top_level": 14
+  },
+  "third_canonical_failure_log_bytes": 40904417,
+  "controls": [
+    {
+      "name": "unrelated AST shift",
+      "reason": "span bounded AST coordinates"
+    },
+    {
+      "name": "outside payload drift",
+      "reason": "span bounded compiler source: emitted"
+    },
+    {
+      "name": "old fallback hidden",
+      "reason": "span original canonical fallback/readiness"
+    },
+    {
+      "name": "span failed TAP hidden",
+      "reason": "span TAP plan/exit"
+    },
+    {
+      "name": "serialized non-coordinate kind",
+      "reason": "serialized AST semantic drift"
+    },
+    {
+      "name": "serialized non-coordinate source",
+      "reason": "serialized AST semantic drift"
+    },
+    {
+      "name": "span failure envelope base64",
+      "reason": "runtime canonical base64"
+    },
+    {
+      "name": "span failure envelope compressed_sha256",
+      "reason": "runtime canonical compressed identity"
+    },
+    {
+      "name": "span failure envelope bytes",
+      "reason": "runtime canonical raw identity"
+    }
+  ],
+  "tracked_inputs": {
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-before-Diagnostics.pm": "0574e93aeb14a63158d5af08d41ff1775fe263030d1557e59047f1cadb770712",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-before-EmitContext.pm": "6940dcf0be03b65e3d0a69f3efec41e1dca37524930ef20368dae94d99a23a9b",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-before-span-Diagnostics.pm": "8f41105b4e7807674120f006f1f74f5ddb58b19b680dbbb7a447dcced3c917cf",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-before-span-EmitContext.pm": "0c91f65b457f8a809c4dfd3145c6189540464a3c9fe781c5fe57dcdc1798b338",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-before-span-Parser.pm": "8c3e1708278b3e199eb30a7095ca0e70825c01ba4b5a46612e77f7cc8f5dff50",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-before-span-RawDependencies.pm": "f89311a80aabd421832def572cc1481a5d917ca74c901781edcf9e8a23d36b2e",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-before-span-RuleIR.pm": "5cdd4065a6f0e5165863146c4b4693fa54168344f6225dd9a1748e096e331997",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-before-span-phase0.t": "3a9f91cdeaf0e06bf4099b53acf88c59a8a9636683e2bd2aad7cd9b4f12ee726",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-canonical-span-before.json": "2e6b4c3b08f2e0f2c22a08c376e271d7fa950ab79eeae32ca9bbd3e805628414",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-canonical-span-failure.py": "6f4b1f57cc09c29a94ab915c9535e9a5203ca984db94f7d3201bf182cfa3ec01",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-keyword-after.json": "5af8c8725bc0a785c04741416853735987902c777fd44b7b2afc3cc7850923d2",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-keyword-before.json": "d1c32f9c86cf678a2fa5cc06b35ae7e92672a3be2d188ec04251d2e1ffce01b4",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-span-after.json": "dfc6aae9e477a47b55b1f399606bbbd24cb5a2063d28b8d9cce45e4865cfe68c",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-span-before.json": "7bb4fc3bd40248d0ed0486bd85d778f9a346eb239c68da574d79c912730dc760",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-span-capture.py": "582af2838e8755fa2a6826dcc6bf9db4a67ab75f1581fc053ba2b11795389ce5",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-span-cases.json": "19430c63f9f5d1174d635ec624d895de00c08c69b012d14b92bde627edc1502d",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-span-fresh.pl": "ec1d59f995c31406efe909f628c7a6f06484facd087afd246e62fe1262212cdc",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-span-normalize.py": "02fddde49448648ec9e2f252be54c394cea9d25400bf2b59c37d5601b80be3e9",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-span-phase0.py": "7408118849e614a92e2abdc3bc1a015017f2672d79c7f0aec407d5787337d4d4",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-span-probe.pl": "a5de063da9dd79d8ad9ffc54c19509a25c3339f6ae86d331af44b4f49a821d2d",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-span-review.py": "149ed2f85d558994e285ba5dc0c017b16528096f221fe0c6245d2999a30090ed",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-span-tests-after.json": "159c5e7121fb9e6b0124a410cc6ae0dac6ca3d90d3cd54d13ab1232eea65efb9",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-span-tests-before.json": "f0589cdc59b6dfa1356e1d23f130286e004c08144d27713026a37b68773c6216",
+    "perl/LinkedSpec/ActionIR/AST/Parser.pm": "fe1c8b8502d0852022152b65d8b6061eec66f02a1dd4d6f551a2c0d621b3d284",
+    "perl/LinkedSpec/ActionIR/Diagnostics.pm": "8f41105b4e7807674120f006f1f74f5ddb58b19b680dbbb7a447dcced3c917cf",
+    "perl/LinkedSpec/ActionIR/RawDependencies.pm": "f89311a80aabd421832def572cc1481a5d917ca74c901781edcf9e8a23d36b2e",
+    "perl/LinkedSpec/RuleIR.pm": "25346e3cd52c5e43cd272794185f72ecc40c25f0fd14db89d3c61adfded0cdbe",
+    "perl/LinkedSpec/RuleIR/EmitContext.pm": "f9f97eec8386bdf5571bcc4ac70ba6e42004d684b8c218328b42b42ec32dba13",
+    "t/actionir_nested_block_source_spans.t": "2e7abc8180483def2876ca02a3805099d90ffcedd3ade7a8e9341fe88cfb368e",
+    "t/phase0_regression.t": "3a9f91cdeaf0e06bf4099b53acf88c59a8a9636683e2bd2aad7cd9b4f12ee726"
+  },
+  "limits": "Three child-frame coordinate repairs only; generated lifecycle exact slot/source provenance suppresses added scanning, preserving prior canonical fallback. Authored twins and replaced slots remain visible. Nine positive forms and nine typed diagnostics include Unicode/CRLF and nonzero bases; no new grammar, runtime or backend admission."
+}

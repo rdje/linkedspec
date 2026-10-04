@@ -243,8 +243,8 @@ Top:: I { return("return(inner); if(true)") }
 ```
 
 Its typed argument is a string. The helper-looking contents must remain data; quoted-payload
-repair is independently owned. Nested raw expressions can also be falsely reported ready.
-Stable event order does not repair those classifications. A working value cannot establish
+repair is independently owned. The nested raw-expression reporting repair is explained below.
+Stable event order alone does not repair those classifications. A working value cannot establish
 portable readiness, and a false blocker must not be removed by hiding genuine raw source.
 
 The historical diagnosis keeps unmodified arrays and streams under the `.0.6.0` checkpoint
@@ -257,8 +257,8 @@ named observations, not a probability estimate or another backend's admission.
 
 ## Reading portability diagnostics
 
-Perl readiness reporting currently misses some unsupported expressions nested
-inside recognized helper statements. Arithmetic and comparison use call form.
+Perl readiness reporting includes unsupported expressions nested inside recognized
+helper statements. Arithmetic and comparison use call form.
 These two exact measured sources illustrate the difference:
 
 ```spec
@@ -271,8 +271,10 @@ Top:: I { i=2; i=num_add(i,1); return(i) }
 
 The first contains an unsupported raw `i+1` AST child. It retains host Perl
 behavior and returns1 on both measured routes; the fresh emitted route also
-reports bareword/numeric warnings. Its ready1/raw0/fallback0 metadata is a known
-defect. The second uses the admitted helper and returns3 with no raw child.
+reports bareword/numeric warnings. It now reports ready0/raw1/fallback0 and
+exposes `i+1` as a raw dependency and portability blocker. The earlier
+ready1/raw0/fallback0 observation remains historical diagnostic evidence.
+The second uses the admitted helper and returns3 with no raw child.
 Use canonical calls; infix source is not portable authoring.
 
 The same reporting defect reaches deferred bodies:
@@ -281,7 +283,7 @@ The same reporting defect reaches deferred bodies:
 Top:: I { cb={|i| i=i+1; return(i) }; return(cb(2)) }
 ```
 
-Although metadata says ready, actual invocation fails with
+Metadata now reports ready0/raw1/fallback0; actual invocation still fails with
 `unsupported_codeblock_actionir` for `raw_perl`. Native context and fresh
 generated-source errors expose that failure through their own public channels;
 native handler evaluation also emits its normal failure trace. A ready flag
@@ -300,12 +302,151 @@ Source-comment classification has a separate repair owner. This ordinary LF
 case establishes no deferred/function comment support. The earlier quoted
 string example likewise remains data despite phantom helper telemetry.
 
-The current diagnosis retains16 full sources/48 native-and-fresh pairs under
-three named seeds and16 lowering traces. Seven sources have hidden raw
-dependencies. Conditions may appear twice in serialized ASTs because condition
-and argument fields share a node; that is one source occurrence. Equal text at
-different spans remains separate. These distinctions guide the reporting
-repair without changing event order, source semantics or the accepted grammar.
-The diagnostic checkpoint preserves complete streams and its original policy
-oracles. No shipped-spec census, dispatcher/full-composition or other-backend
-admission is established by this bounded diagnosis.
+The historical diagnosis retains16 full sources/48 native-and-fresh pairs under
+three named seeds and16 lowering traces. Its seven hidden raw dependencies are
+now visible in rule-action diagnostics. Conditions may appear twice in serialized
+ASTs because condition and argument fields share a node; that is one source
+occurrence. Equal text at different spans or in different action units remains
+separate. For example, this source has two raw expression occurrences, while
+the displayed raw text contains `i+1` once:
+
+```spec
+Top:: I { i=2; i=i+1; i=i+1; return(i) }
+```
+
+`canonical_action_ir_fallback_count` keeps its top-level event meaning.
+`raw_perl_dependency_count` adds uncovered nonempty `unsupported_expression`
+occurrences to that existing fallback count. A raw-containing statement already
+represented by a `RAW_PERL` event covers its child raw nodes; they are not counted
+again. Raw display and blocker lists contain unique text rather than occurrence
+counts. Existing canonical events and helper diagnostics keep their meanings.
+
+`raw_perl_expression_dependencies` exposes each added occurrence as `source`,
+`reason`, `source_span` with `start`/`end`, and `source_unit`.
+`raw_perl_expression_source_units` records `kind`, `index`, and the diagnostic
+unit's exact `source`; blind actions also record `target`. The span indexes that
+recorded action-unit text, not the absolute `.spec` file. Normalized fluent units
+may be derived text. Unit kinds distinguish lifecycle slots, action edges,
+blind edges and AND-local actions; repeated units retain separate indices.
+Both arrays are empty when there are no added expression dependencies.
+
+Nested eager braces, attached calls and attached controls propagate their body
+start into child ASTs. Success nodes and typed parse errors use Unicode-scalar
+coordinates in the containing action unit, including leading spaces and CRLF.
+Correcting those coordinates can change serialized AST payloads in substitutions,
+parser dumps and emitted Perl; the executable source around those payloads,
+node structure, values and runtime behavior retain their existing contracts.
+
+Semantic rule markers also create compiler-owned lifecycle code:
+
+```spec
+Top::
+ -> MoveTop
+
+MoveTop: /foo/ /bar/ @mark(body_start)
+```
+
+This measured named mark keeps ready1/raw0. RuleIR records the exact generated
+LE slot and source; only that matching chunk is excluded from added expression
+scanning. An authored identical chunk in a later slot, or changed source in the
+recorded slot, remains visible. Position markers `@move_pos`, `@capture_slice`
+and `@capture_from_here` keep their existing raw1/fallback1/ready0 diagnostic;
+generated ownership does not remove prior canonical fallback events. Their
+canonical portability classification has a separate reconciliation task before
+readiness closeout; runtime equivalence alone does not establish that contract.
+
+
+Readiness reports unsupported source present in an action; it is not an execution
+trace. These measured keyword calls remain unsupported:
+
+```spec
+fn id(value) { return(value) }
+Top:: I { cb={|| return(id(value:"x")) }; return(cb()) }
+
+```
+
+```spec
+fn pair(first,second) { return([first,second]) }
+Top:: I { effects=[]; cb={|| return(pair({ push(effects,"bad"); return("x") },second:"y")) }; return(cb()) }
+
+```
+
+Their raw expression dependencies are `value:"x"` and `second:"y"`, respectively.
+Both report ready0/raw1/fallback0. Native and fresh emitted execution retain the
+typed `user_function_keyword_arguments_unsupported` error, with
+`arguments_evaluated`0. The second control leaves `effects` empty: rejection
+occurs before either operand executes. No keyword syntax is admitted by this
+reporting change. Its source spans are18–27 and69–79 in the recorded I-action
+units; those units include their original leading/trailing spaces.
+
+A blind action's rewrite input includes a compiler-generated call assignment.
+Only that caller separates its exact bridge from the diagnostic body. For this
+measured source, the added dependency is `i+1`, indexed in ` return(i+1) `:
+
+```spec
+Top:: I { i=2 } => Done { return(i+1) }
+
+Done:: I { return("child") }
+```
+
+Canonical blind calls remain raw-free. Authored text with the same spelling as the generated bridge
+is retained in its diagnostic unit; the existing `assign_call` contract owns that supported wrapper.
+A genuine adjacent `i+1` still blocks readiness and retains its authored offset. A mismatched blind
+target retains the complete source unit rather than applying the generated-prefix separation.
+
+Supported legacy contracts also matter: a raw whole-expression AST can describe
+a statement already owned by an exact canonical helper contract. This measured
+wrapper source retains ready1/raw0/fallback0:
+
+```spec
+Top::&
+ /a/ -> Top { my $retv = call(Leaf); $retv = call(Leaf); push @Top, call(Leaf) }
+
+Leaf:
+ /a/ -> Leaf { return(1) }
+```
+
+Canonical ownership requires the exact statement and a sanctioned legacy contract;
+it never blankets arbitrary descendants of an outer `return(...)`. Bare `return`
+and `exit` payloads are inspected independently. This measured method return keeps
+its canonical RETURN/CALL events, but its host map/reference operands report
+ready0/raw2/fallback0:
+
+```spec
+Top::&
+ /a/ -> Top .return ((map {lc} @IMATCH_LIST), \@Top, call(Leaf))
+
+Leaf:
+ /a/ -> Leaf { return(1) }
+```
+
+Existing ordinary assignment-expression lowering also supports grouped mutation
+receivers. This measured source retains ready1/raw0 and its existing values:
+
+```spec
+Top::
+ /x/ -> Done { set(value, "ok"); set(key, "stage"); return(array(items += value, copy(items), meta[key] = value, copy(meta), (items += "x").count(), (meta["last"] = value).count_keys())) }
+
+Done::
+ /[a-z]+/
+```
+
+The collector inspects the typed inner assignment and still exposes unsupported
+inner values. It leaves grouped assignments inside deferred codeblocks raw: that
+executor consumes the original AST and has no corresponding admission. This
+reporting classification adds no syntax or runtime behavior.
+
+The repair covers original rule-action and deferred-body ASTs. It does not scan
+the function registry or claim a transitive function dependency count. Measured
+referenced raw function bodies retain unresolved-helper guards; an unused raw
+function does not newly block the rule. Comments and quoted helper-looking data
+retain their separate repair owners. Shipped-spec descriptor census is source
+compilation evidence, not full execution or syntax admission. Source-reference
+compilation must use the exact decoded file text; passing a filename to `Get`
+does not establish that file's readiness.
+
+The diagnostic and repair checkpoints preserve original sources, full streams,
+before-owner modules and independent fresh observations. The reporting change
+leaves ASTs, lowering, emitted source and runtime behavior unchanged. Fixed seeds
+are named observations, not a probability estimate. Canonical signoff is required
+for landing; dispatcher/full composition and other-backend admission remain open.

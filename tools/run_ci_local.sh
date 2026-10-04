@@ -575,6 +575,11 @@ require_tracked_file perl/LinkedSpec/MCPServer.pm
 require_tracked_file perl/LinkedSpec/MCPWire.pm
 require_tracked_file perl/LinkedSpec/Numeric.pm
 require_tracked_file t/phase0_regression.t
+require_tracked_file perl/LinkedSpec/ActionIR/RawDependencies.pm
+require_tracked_file t/actionir_raw_dependency_metadata.t
+require_tracked_file t/actionir_raw_dependency_provenance.t
+require_tracked_file t/actionir_nested_block_source_spans.t
+require_tracked_file t/actionir_raw_dependency_compatibility.t
 require_tracked_file t/codeblock_push_composition_perl.t
 require_tracked_file scripts/check_memory_architecture.sh
 require_tracked_file scripts/check_memory_commit_pointer.sh
@@ -679,6 +684,11 @@ perl -c tools/check_generated_source_contract.pl
 perl -c tools/check_language_capability_coverage.pl
 perl -c tools/check_native_spec_resolution_contract.pl
 perl -c -Iperl t/actionir_ast_parser.t
+perl -c -Iperl perl/LinkedSpec/ActionIR/RawDependencies.pm
+perl -c -Iperl t/actionir_raw_dependency_metadata.t
+perl -c -Iperl t/actionir_raw_dependency_provenance.t
+perl -c -Iperl t/actionir_nested_block_source_spans.t
+perl -c -Iperl t/actionir_raw_dependency_compatibility.t
 perl -c -Iperl t/cli_conformance_runner.t
 perl -c -Iperl t/trace_cli.t
 perl -c -Iperl t/native_spec_resolution.t
@@ -1077,6 +1087,9 @@ perl tools/check_language_capability_coverage.pl
 
 log "running ActionIR AST parser focused suite"
 prove -Iperl t/actionir_ast_parser.t
+
+log "running source-bound raw dependency readiness and provenance suites"
+PERL5LIB= prove -Iperl t/actionir_raw_dependency_metadata.t t/actionir_raw_dependency_provenance.t t/actionir_nested_block_source_spans.t t/actionir_raw_dependency_compatibility.t
 
 log "running codegen-inspector explicit-owner smoke suite"
 PERL5LIB= prove -Iperl t/inspect_spec_codegen.t

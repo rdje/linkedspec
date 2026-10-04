@@ -6,12 +6,16 @@ answers:
   - "which Perl AST block parsers lose base_start"
   - "do Perl callable and receiver callback blocks preserve nested source offsets"
   - "where is nested Perl ActionIR span repair owned"
-date: 2026-09-06
-status: confirmed defect; SESSION-STARTUP-READING.15 owns repair after required reading
+date: 2026-10-04
+status: three blocking handoffs repaired under SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1; startup .15 retains broader closeout
 tags: [perl, actionir, ast, diagnostics, source-span, defect]
 evidence: "SESSION-STARTUP-READING.3.2.16 read AST/Parser.pm 1–1498 at unchanged baeb984e. Seven ASCII and two Unicode direct AST controls isolate missing base_start in eager braces, attached function calls, and attached controls. Public Get logs the same inner-body offset and retains its blessed Diagnostic in last_error.detail. Existing parser/punctuation suites pass 30 top-level tests without detecting this gap."
-reverify: "rg -n 'parse_action_block[(][$](attached|payload|body_source)' perl/LinkedSpec/ActionIR/AST/Parser.pm"
+historical_reverify: "rg -n 'parse_action_block[(][$](attached|payload|body_source)' perl/LinkedSpec/ActionIR/AST/Parser.pm"
+reverify: "bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/actionir_nested_block_source_spans.t; bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-span-review.py"
 ---
+
+The following observations are the frozen September6 diagnosis; the October4
+repair is described below.
 
 At base_start 100, an empty nested-write selector must retain its location in the containing expression.
 All seven controls throw `nested_write_segment_empty`, stage `action_parse`, with an authored Unicode-scalar span:
@@ -49,3 +53,17 @@ failure, or other-backend failure was performed in the reading checkpoint.
 Repair `.15` must propagate offsets through all affected nested paths and lock success nodes as well as
 diagnostics, without altering valid syntax, rejection, or source units. Related: [[perl-actionir-ast-parser-seam]],
 [[perl-callable-codeblock-literal-record]], [[write-vivification-neutral-contract]].
+
+
+October4 prerequisite repair under `.7.1` changes exactly the three missing
+`base_start` handoffs. Nine positive forms and nine typed diagnostic controls
+include nonzero bases, repeated raw text, nested levels and Unicode/CRLF; adjacent
+callable/receiver/map forms stay correct. The complete20-test source fails14
+subtests against frozen pre-span owners and passes20 currently. Opaque wrapper
+payloads and caller error state remain exact. Four semantic marker sources across
+three seeds preserve native/fresh values and prior fallback/readiness diagnostics;
+matching compiler-owned LE slots avoid added expression scanning while authored
+twins and replaced slots remain visible. Original AST/source structure stays
+exact except for the independently checked child coordinates and corresponding
+serialized AST payloads. Canonical acceptance gates landing; startup `.15` owns
+any remaining original carrier/public diagnostic reconciliation.

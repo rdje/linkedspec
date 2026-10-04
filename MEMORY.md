@@ -1,11 +1,11 @@
 # MEMORY
 
-- activation_commit: `834e0a3ddaf63789ea23dfac6c7cf273c01342e6` — clean nested raw-readiness diagnosis activation base.
-- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.0 - diagnose nested raw readiness`.
-- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.0` (done) — source-bound diagnosis committed; .7.1 repair is next.
-- next_action: Activate .7.1 from clean HEAD; declare original-source diagnostic/provenance paths and canonical tier, census callers/shipped specs, then prove readiness RED/GREEN.
-- in_flight_uncommitted: none.
-- blockers: No access/decision blocker. Matches and attached/marker/value/null/while executors are repaired; control parent/order repair are reconciled; nested raw/quoted/comment readiness .7.1/.2/.3 precedes dispatcher/full execution. Other startup repairs remain separate.
+- activation_commit: `c9673d7eff39836fdc94d59b8d47639db5e937d4` — clean nested raw-readiness reporting repair activation base.
+- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1 - report raw expression source dependencies`.
+- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1` (done) — source-unit reporting/compatibility verified; exact canonical receipt required for landing.
+- next_action: From this clean canonical commit, activate .7.2 quoted-helper masking, then .7.3 source comments and .7.4 marker fallback before dispatcher/full execution.
+- in_flight_uncommitted: none;1098 focused tests/16 suites, scoped Phase024, fresh99 primary/55-source census,447-input/73-instrument claim and twelve rendered examples verified.
+- blockers: No access/decision blocker. Matches and attached/marker/value/null/while executors are repaired; control parent/order and raw-expression reporting are reconciled; quoted/comment readiness .7.2/.3 precedes dispatcher/full execution. Other startup repairs remain separate.
   Wrapper startup .7 remains open; recovery/purge stay prohibited.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
   active table; the task metadata doctrine inventories all consumers, permits arbitrary frontier-row rewrites,

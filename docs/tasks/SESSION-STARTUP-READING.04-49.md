@@ -189,6 +189,8 @@ After an owned edit run: perl tools/update_task_tree_index.pl --tree SESSION-STA
     mutation setup; split safe children before implementation if public/carrier work exceeds one slice.
   Verification: `pending` — `.3.2.16` proves three omitted base_start handoffs and passing adjacent controls.
   Commit: `pending`
+  October4 prerequisite: SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1 owns the three missing AST base_start handoffs exposed as a blocker during raw-readiness canonical Phase0. Its frozen pre-span/current20-test RED14/GREEN20 covers successful child spans and typed diagnostics, nonzero bases, nested/repeated/Unicode/CRLF and adjacent callable/receiver/map controls; four marker native/fresh populations retain semantic behavior and original fallback. This is an owned prerequisite in that current leaf, not a dirty-tree pivot or completion of this broader original carrier/public-diagnostic closeout. Resume this leaf from its original acceptance after the .7.1 prerequisite is committed.
+
 - ID: `SESSION-STARTUP-READING.16`
   Status: `pending`
   Goal: Make emptiness depend on the evaluated DSL value and keep literals out of host symbol lookup.

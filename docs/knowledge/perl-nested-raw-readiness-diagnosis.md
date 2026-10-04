@@ -9,7 +9,7 @@ answers:
   - "do source comments falsely block Perl readiness"
   - "what owns the nested raw readiness repair"
 date: 2026-10-03
-status: diagnosis verified; repairs pending
+status: historical diagnosis verified; reporting successor focused proof complete
 tags: [perl, actionir, readiness, raw-perl, provenance, comments]
 evidence: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.0 retains16 sources/48 native-fresh pairs,16 actual traces,42 top-level TAP tests and twelve actual evidence corruption rejections; public reference identity distinguishes shared aliases from distinct repeated spans."
 reverify: "At the recorded diagnostic revision, run bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.0-review.py; producer/input identities are bound in its claim. Later compiler repairs require historical replay rather than refreshing these captures."
@@ -58,3 +58,9 @@ all caller-surface census, actual RED/GREEN and warranted canonical signoff
 precede landing. This diagnosis changes no production, AST/event schema,
 authority, grammar, dependency or backend. Dispatcher/full composition and
 complete language admission remain unassessed here.
+
+The `.0.7.1` successor now exposes uncovered raw expression occurrences while
+preserving this historical diagnosis and its captures. It records source-unit
+provenance and separates only BCODE's exact compiler bridge; see
+[[perl-raw-readiness-source-unit-provenance]]. Quoted-data and source-comment
+classification remain `.0.7.2/.3`. Exact canonical signoff independently gates reporting landing.

@@ -2000,6 +2000,16 @@ Record the selected tier and proof in the owning leaf; use the [verification tie
 
 ## How to interpret failures
 
+The canonical gate runs `t/actionir_raw_dependency_metadata.t`, `t/actionir_raw_dependency_provenance.t`,
+`t/actionir_nested_block_source_spans.t` and `t/actionir_raw_dependency_compatibility.t` with empty `PERL5LIB`.
+Their69 subtests cover raw/canonical/data occurrences, child/unit spans, generated provenance and legacy ownership.
+Eleven dependents plus605 composition tests bring focused proof to1098;24 extracted Phase0 cases pass separately.
+Fourteen measured metadata assertion changes recover original Phase0 bytes; serialized AST coordinates may change.
+The source-reference census compiles33 controls/22 shipped specs with800 units before/after; it is
+descriptor evidence, not execution admission. See [portability diagnostics](../dsl/actionir-lowering-mental-model.md#reading-portability-diagnostics).
+Historical auditing permits only three exact CI registration blocks. Removing them recovers prior
+committed CI bytes; twelve new controls reject missing, duplicate, disabled or misdirected registrations.
+
 Read failures by owner and surface:
 
 - A syntax failure in `perl/LinkedSpec.pm` means the facade or an eagerly loaded dependency is broken.

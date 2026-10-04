@@ -263,6 +263,14 @@ sub _accumulate_action_rewrite_diagnostics {
 
  $acc->{canonical_action_ir_fallback_count} += ($diag->{canonical_action_ir_fallback_count} || 0);
 
+ my $units = $diag->{raw_perl_expression_source_units} || [];
+ my $dependencies = $diag->{raw_perl_expression_dependencies} || [];
+ my $unit_offset = scalar(@{$acc->{raw_perl_expression_source_units} || []});
+ push @{$acc->{raw_perl_expression_source_units}}, map { {%$_} } @$units;
+ push @{$acc->{raw_perl_expression_dependencies}}, map {
+  { %$_, source_span => {%{$_->{source_span}}}, source_unit => $_->{source_unit} + $unit_offset }
+ } @$dependencies;
+
  return $acc
 }
 

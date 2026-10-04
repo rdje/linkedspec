@@ -1,0 +1,745 @@
+{
+  "owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1",
+  "result": "PASS",
+  "activation": "c9673d7eff39836fdc94d59b8d47639db5e937d4",
+  "full_sources": 33,
+  "native_fresh_pairs": 99,
+  "census_sources": 55,
+  "shipped_sources": 22,
+  "rewrite_units": 800,
+  "raw_AST_marker_counts": {
+    "before": {
+      "shipped": 0,
+      "controls": 27
+    },
+    "after": {
+      "shipped": 0,
+      "controls": 27
+    }
+  },
+  "historical_original_pairs": 48,
+  "first_canonical_failure_log_bytes": 2859,
+  "supplemental_keyword_sources": 2,
+  "supplemental_keyword_native_fresh_pairs": 6,
+  "second_canonical_failure_log_bytes": 37328805,
+  "source_results": [
+    {
+      "id": "assignment_raw",
+      "raw_occurrences": 1,
+      "raw_count": 1,
+      "ready": 0,
+      "source_units": [
+        {
+          "kind": "icode",
+          "index": 0,
+          "source": " i=2; i=i+1; return(i) "
+        }
+      ],
+      "native_value": 1
+    },
+    {
+      "id": "condition_raw",
+      "raw_occurrences": 1,
+      "raw_count": 1,
+      "ready": 0,
+      "source_units": [
+        {
+          "kind": "icode",
+          "index": 0,
+          "source": " i=2; if(i < 1) { return(\"yes\") }; return(\"no\") "
+        }
+      ],
+      "native_value": "yes"
+    },
+    {
+      "id": "while_raw",
+      "raw_occurrences": 1,
+      "raw_count": 1,
+      "ready": 0,
+      "source_units": [
+        {
+          "kind": "icode",
+          "index": 0,
+          "source": " i=2; while(i < 1) { return(\"yes\") }; return(\"no\") "
+        }
+      ],
+      "native_value": "yes"
+    },
+    {
+      "id": "call_argument_raw",
+      "raw_occurrences": 1,
+      "raw_count": 1,
+      "ready": 0,
+      "source_units": [
+        {
+          "kind": "icode",
+          "index": 0,
+          "source": " i=2; return(num_add(i+1,2)) "
+        }
+      ],
+      "native_value": 3
+    },
+    {
+      "id": "array_element_raw",
+      "raw_occurrences": 1,
+      "raw_count": 1,
+      "ready": 0,
+      "source_units": [
+        {
+          "kind": "icode",
+          "index": 0,
+          "source": " i=2; return([i+1]) "
+        }
+      ],
+      "native_value": [
+        1
+      ]
+    },
+    {
+      "id": "hash_value_raw",
+      "raw_occurrences": 1,
+      "raw_count": 1,
+      "ready": 0,
+      "source_units": [
+        {
+          "kind": "icode",
+          "index": 0,
+          "source": " i=2; return({ \"n\": i+1 }) "
+        }
+      ],
+      "native_value": {
+        "n": 1
+      }
+    },
+    {
+      "id": "codeblock_body_raw",
+      "raw_occurrences": 1,
+      "raw_count": 1,
+      "ready": 0,
+      "source_units": [
+        {
+          "kind": "icode",
+          "index": 0,
+          "source": " cb={|i| i=i+1; return(i) }; return(cb(2)) "
+        }
+      ],
+      "native_value": null
+    },
+    {
+      "id": "assignment_canonical",
+      "raw_occurrences": 0,
+      "raw_count": 0,
+      "ready": 1,
+      "source_units": [],
+      "native_value": 3
+    },
+    {
+      "id": "condition_canonical",
+      "raw_occurrences": 0,
+      "raw_count": 0,
+      "ready": 1,
+      "source_units": [],
+      "native_value": "no"
+    },
+    {
+      "id": "call_argument_canonical",
+      "raw_occurrences": 0,
+      "raw_count": 0,
+      "ready": 1,
+      "source_units": [],
+      "native_value": 5
+    },
+    {
+      "id": "container_canonical",
+      "raw_occurrences": 0,
+      "raw_count": 0,
+      "ready": 1,
+      "source_units": [],
+      "native_value": [
+        3,
+        {
+          "n": 2
+        }
+      ]
+    },
+    {
+      "id": "codeblock_canonical",
+      "raw_occurrences": 0,
+      "raw_count": 0,
+      "ready": 1,
+      "source_units": [],
+      "native_value": "ok"
+    },
+    {
+      "id": "literal_data",
+      "raw_occurrences": 0,
+      "raw_count": 0,
+      "ready": 1,
+      "source_units": [],
+      "native_value": "i=i+1; i < 1"
+    },
+    {
+      "id": "comment_data",
+      "raw_occurrences": 0,
+      "raw_count": 1,
+      "ready": 0,
+      "source_units": [],
+      "native_value": "ok"
+    },
+    {
+      "id": "quoted_helper_known",
+      "raw_occurrences": 0,
+      "raw_count": 0,
+      "ready": 0,
+      "source_units": [],
+      "native_value": "return(inner); if(true)"
+    },
+    {
+      "id": "raw_statement",
+      "raw_occurrences": 1,
+      "raw_count": 2,
+      "ready": 0,
+      "source_units": [
+        {
+          "kind": "icode",
+          "index": 0,
+          "source": " my $host=3; return($host) "
+        }
+      ],
+      "native_value": 3
+    },
+    {
+      "id": "repeated_raw",
+      "raw_occurrences": 2,
+      "raw_count": 2,
+      "ready": 0,
+      "source_units": [
+        {
+          "kind": "icode",
+          "index": 0,
+          "source": " i=2; i=i+1; i=i+1; return(i) "
+        }
+      ],
+      "native_value": 1
+    },
+    {
+      "id": "repeated_units",
+      "raw_occurrences": 2,
+      "raw_count": 2,
+      "ready": 0,
+      "source_units": [
+        {
+          "kind": "icode",
+          "index": 0,
+          "source": " i=2; i=i+1 "
+        },
+        {
+          "kind": "icode",
+          "index": 1,
+          "source": " i=i+1; return(i) "
+        }
+      ],
+      "native_value": 1
+    },
+    {
+      "id": "function_raw",
+      "raw_occurrences": 0,
+      "raw_count": 0,
+      "ready": 0,
+      "source_units": [],
+      "native_value": null
+    },
+    {
+      "id": "function_canonical",
+      "raw_occurrences": 0,
+      "raw_count": 0,
+      "ready": 1,
+      "source_units": [],
+      "native_value": 3
+    },
+    {
+      "id": "unused_function_raw",
+      "raw_occurrences": 0,
+      "raw_count": 0,
+      "ready": 1,
+      "source_units": [],
+      "native_value": "ok"
+    },
+    {
+      "id": "transitive_function_raw",
+      "raw_occurrences": 0,
+      "raw_count": 0,
+      "ready": 0,
+      "source_units": [],
+      "native_value": null
+    },
+    {
+      "id": "raw_containing_statement",
+      "raw_occurrences": 0,
+      "raw_count": 1,
+      "ready": 0,
+      "source_units": [],
+      "native_value": "ok"
+    },
+    {
+      "id": "quoted_hash_data",
+      "raw_occurrences": 0,
+      "raw_count": 0,
+      "ready": 1,
+      "source_units": [],
+      "native_value": "# i=i+1"
+    },
+    {
+      "id": "action_edge_raw",
+      "raw_occurrences": 1,
+      "raw_count": 1,
+      "ready": 0,
+      "source_units": [
+        {
+          "kind": "acode",
+          "index": 0,
+          "source": " return(i+1) "
+        }
+      ],
+      "native_value": 1
+    },
+    {
+      "id": "blind_edge_raw",
+      "raw_occurrences": 1,
+      "raw_count": 1,
+      "ready": 0,
+      "source_units": [
+        {
+          "kind": "bcode",
+          "index": 0,
+          "source": " return(i+1) ",
+          "target": "Done"
+        }
+      ],
+      "native_value": null
+    },
+    {
+      "id": "and_local_raw",
+      "raw_occurrences": 1,
+      "raw_count": 1,
+      "ready": 0,
+      "source_units": [
+        {
+          "kind": "and_icode",
+          "index": 0,
+          "source": " i=2; return(i+1) "
+        }
+      ],
+      "native_value": null
+    },
+    {
+      "id": "lifecycle_e_raw",
+      "raw_occurrences": 1,
+      "raw_count": 1,
+      "ready": 0,
+      "source_units": [
+        {
+          "kind": "ecode",
+          "index": 0,
+          "source": " i=2; i=i+1 "
+        }
+      ],
+      "native_value": null
+    },
+    {
+      "id": "lifecycle_ex_raw",
+      "raw_occurrences": 1,
+      "raw_count": 1,
+      "ready": 0,
+      "source_units": [
+        {
+          "kind": "excode",
+          "index": 0,
+          "source": " i=2; i=i+1 "
+        }
+      ],
+      "native_value": null
+    },
+    {
+      "id": "lifecycle_it_raw",
+      "raw_occurrences": 1,
+      "raw_count": 1,
+      "ready": 0,
+      "source_units": [
+        {
+          "kind": "itcode",
+          "index": 0,
+          "source": " i=2; i=i+1 "
+        }
+      ],
+      "native_value": null
+    },
+    {
+      "id": "lifecycle_ls_raw",
+      "raw_occurrences": 1,
+      "raw_count": 1,
+      "ready": 0,
+      "source_units": [
+        {
+          "kind": "lscode",
+          "index": 0,
+          "source": " i=2; i=i+1 "
+        }
+      ],
+      "native_value": null
+    },
+    {
+      "id": "lifecycle_le_raw",
+      "raw_occurrences": 1,
+      "raw_count": 1,
+      "ready": 0,
+      "source_units": [
+        {
+          "kind": "lecode",
+          "index": 0,
+          "source": " i=2; i=i+1 "
+        }
+      ],
+      "native_value": null
+    },
+    {
+      "id": "lifecycle_lx_raw",
+      "raw_occurrences": 1,
+      "raw_count": 1,
+      "ready": 0,
+      "source_units": [
+        {
+          "kind": "lxcode",
+          "index": 0,
+          "source": " i=2; i=i+1 "
+        }
+      ],
+      "native_value": null
+    }
+  ],
+  "actual_RED": [
+    {
+      "source": "t/actionir_raw_dependency_metadata.t",
+      "plan": 16,
+      "failed_top_level": 9
+    },
+    {
+      "source": "t/actionir_raw_dependency_provenance.t",
+      "plan": 6,
+      "failed_top_level": 6
+    }
+  ],
+  "tests": {
+    "t/actionir_raw_dependency_metadata.t": 16,
+    "t/actionir_raw_dependency_provenance.t": 6,
+    "t/canonical_event_occurrence_order.t": 15,
+    "t/trace_actionir_pipeline.t": 5,
+    "t/noncurrent_helper_metadata.t": 2,
+    "t/actionir_ast_parser.t": 23,
+    "t/trace_actionir_method_lowering.t": 4,
+    "t/generated_source_contract.t": 12,
+    "t/codeblock_while_perl.t": 33,
+    "t/recursive_observation_perl_contract.t": 7,
+    "t/recognition_transaction_perl_contract.t": 51,
+    "t/progressive_span_dispatch_perl_contract.t": 129,
+    "t/staged_ast_enrichment_perl_contract.t": 143,
+    "t/codeblock_push_composition_perl.t": 605
+  },
+  "top_level_TAP_tests": 1051,
+  "controls": [
+    {
+      "name": "ready hidden",
+      "reason": "repaired readiness"
+    },
+    {
+      "name": "raw count hidden",
+      "reason": "raw occurrence count"
+    },
+    {
+      "name": "source span shifted",
+      "reason": "source occurrence provenance"
+    },
+    {
+      "name": "repeat collapsed",
+      "reason": "source occurrence provenance"
+    },
+    {
+      "name": "unit conflated",
+      "reason": "source occurrence provenance"
+    },
+    {
+      "name": "blind bridge included",
+      "reason": "source unit provenance"
+    },
+    {
+      "name": "raw display hidden",
+      "reason": "visible raw dependency display"
+    },
+    {
+      "name": "events changed",
+      "reason": "unchanged metadata contracts"
+    },
+    {
+      "name": "lowering changed",
+      "reason": "unchanged compiler output: substitution"
+    },
+    {
+      "name": "canonical value changed",
+      "reason": "unchanged consumer observation: value"
+    },
+    {
+      "name": "host warnings lost",
+      "reason": "retained host warnings"
+    },
+    {
+      "name": "failed TAP hidden",
+      "reason": "TAP exit/membership"
+    },
+    {
+      "name": "source replaced",
+      "reason": "public source identity"
+    },
+    {
+      "name": "fresh source digest replaced",
+      "reason": "independent fresh emitted identity"
+    },
+    {
+      "name": "original deferred error replaced",
+      "reason": "retained deferred failure identity"
+    },
+    {
+      "name": "native failure trace lost",
+      "reason": "retained native failure trace"
+    },
+    {
+      "name": "failed canonical envelope base64",
+      "reason": "canonical failure base64"
+    },
+    {
+      "name": "failed canonical envelope sha256",
+      "reason": "canonical failure byte identity"
+    },
+    {
+      "name": "failed canonical envelope bytes",
+      "reason": "canonical failure byte identity"
+    },
+    {
+      "name": "keyword readiness hidden",
+      "reason": "keyword source-presence policy"
+    },
+    {
+      "name": "keyword span shifted",
+      "reason": "keyword occurrence provenance"
+    },
+    {
+      "name": "keyword operand effects",
+      "reason": "keyword no operand effects"
+    },
+    {
+      "name": "keyword error replaced",
+      "reason": "keyword original pre-operand error identity"
+    },
+    {
+      "name": "keyword emitted digest replaced",
+      "reason": "keyword emitted identity"
+    },
+    {
+      "name": "keyword trace lost",
+      "reason": "keyword retained native trace"
+    },
+    {
+      "name": "runtime failure envelope base64",
+      "reason": "runtime canonical base64"
+    },
+    {
+      "name": "runtime failure envelope compressed_sha256",
+      "reason": "runtime canonical compressed identity"
+    },
+    {
+      "name": "runtime failure envelope bytes",
+      "reason": "runtime canonical raw identity"
+    }
+  ],
+  "tracked_inputs": {
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.0-observe.pm": "db95711bc94aa6c774576647c4ad83b98d526b03efc6fa583ad1b1075a9b1c9f",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.0-cases.json": "17482f7525232c8b8398694c35869f6687111045134cd45cff016bf5a123b850",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.0-observations.json": "a7e4b50c5c1f2d6aa1cabc069c013ed80010dbd336fff50dac11f60d8cafa43a",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-after.json": "1731478bca0b73594b4989b0c011ebfb31cf70c6f234aa9ee61c7b1f9454cfbb",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-before-Diagnostics.pm": "0574e93aeb14a63158d5af08d41ff1775fe263030d1557e59047f1cadb770712",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-before-EmitContext.pm": "6940dcf0be03b65e3d0a69f3efec41e1dca37524930ef20368dae94d99a23a9b",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-before-codeblock-push.t": "5c773a03f472acaf509863e314621d8a735318113e1478d15e559ad27c86fd46",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-before-local-ci.md": "881da5174de46990bfa84a9edc95c9e199c8e05ee773d2afaf2e11adb8f86a2e",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-before.json": "ff5be1d76b40960d9f4d82671c86b92fa351915e9c8001fdc7b8ae8c620a1e14",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-canonical-before.json": "7cd61c6708ceca3d7985f0d01e8be9901e1e74ada84e084221ef0998afe0ea9a",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-canonical-failure.py": "3445efe8bfd83d238c487aebd77f0105f187b8f0ead0f6770e914f40165141ba",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-canonical-runtime-before.json": "70745b1eca99054cc9bd714c48e8204a17b6b7b08fa82166db09e54cf2cee9e6",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-canonical-runtime-failure.py": "7ef21458e1b3ed866a0a9fc18fa74060b5581c1263f4da6a35a6966f5a2a580f",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-capture.py": "a59db509c8ea6b554dcb79f0036093641cb05f519fb69defc39121f4dffea801",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-cases.json": "bedbb63ef83ba61a0fcbb3d0221fcea9b3c72787c2f2938c2aed03495f009b97",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-census-after.json": "69f5b178a42a662ab027687c3ce484564d89429566a879d7cbe409464ba5464d",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-census-before.json": "ea3313f9b8d9f43af0467707e6e676d381e82ed068a790f0df370a9782603e62",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-census-file-before.json": "582ee7fe609c1897f80c994d0e9659b744e4bd3fece472a221f547b78a65d2d0",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-census-file-before.pl": "afb5d9b649e979697a810969309d7ce1964cb4554f6675d4a47348c671ecdb2f",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-census-file-before.py": "3f4c5d08515be4f262b411eb6f13d83b894198c99ca95848910d10709d4afd83",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-census-initial-replay.json": "4282f9a1ef14d1c804897e924c5d076ec3233687f71284d6fc6bb051cbcd8302",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-census-initial-replay.py": "23540e23e5984f21d1fa614ec3abd65fbe502302324f108293927c978f46efb4",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-census-initial.pl": "4cf80055ec0dcab4ba13e8de0191ff506e2dd7c946dba52f4c4dbbd2745e27e9",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-census-initial.py": "9bacc503c0a10cc8d4fbe6fcbdd64445ccdb8bed62e95355701b1987d118ac4d",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-census-source.pl": "161fbdbd6d8a08b26393dd3ed2166eedd10246cddef381ac8c053a366299f9eb",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-census-source.py": "9398b29f65f4db3e57fac795a417b5b391e910126ee04192cccf2cedd4f9aae4",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-census.pl": "afb5d9b649e979697a810969309d7ce1964cb4554f6675d4a47348c671ecdb2f",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-census.py": "3f4c5d08515be4f262b411eb6f13d83b894198c99ca95848910d10709d4afd83",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-fresh.pl": "41b058446246df5c0d53e97eaa0267b79f98c88cce10548d215d2a5d42c1a0c3",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-governance-before.py": "d49362e909350685e17d464bc3c8dc9ab7bc9a108082b727df81b05de456f570",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-governance-check.py": "f9d8d4d36ebf8a7c0c1bc3e22775754a603274232de5b45309c9d4d7948d1d51",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-keyword-after.json": "83ccf309ce19987714c7257c41c0a68732a24cd6ddc2b5150f28721123e06571",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-keyword-before.json": "d1c32f9c86cf678a2fa5cc06b35ae7e92672a3be2d188ec04251d2e1ffce01b4",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-keyword-capture.py": "04f47b3c0e084094aede543000ddf5a813ae0622cb26e198c2b3da868da05749",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-keyword-cases.json": "84446922b14385e748ebcc771a2e06689f0ff60bb0dc4567ea322afbadbd03a1",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-keyword-fresh.pl": "41b058446246df5c0d53e97eaa0267b79f98c88cce10548d215d2a5d42c1a0c3",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-keyword-probe.pl": "e06fa9faaac83ab5fcf5468e066ace4de7cceadc9477df47f3239d4c7044848b",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-keyword-review.py": "bfaacb935bebb86aa7a5aa256b130962f446d694ae770cd372d06e2448d711c7",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-keyword-tests-after.json": "8230e788e2e72048a7df5b162e10eb25e59170811a5eca92190ac003570670d2",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-keyword-tests-before.json": "747b10d54e75ecb6c2f875a395188e4e1211cadba957aad0371e85e7e8f6ac07",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-keyword-tests.py": "90a8e44a82c4d1844e5afa418eff64c1b889d3ff9e871f6cbb7e1f887136d87d",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-keyword-verification.json": "5ba7a21afd268c72a9033d7603ccebad24d3457111e7392ee985e130fe9b544c",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-probe.pl": "8c344af8b10d91ea646633f93a3e621974acff52393ea583998a693e0283989f",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-review.py": "da708ac10c823c50fb0cf3c1bbd8b31830007675bee6e27eb1748c8bd2315178",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-tests-after.json": "55af6ad88d38559ba67ea4113ba8e8428ec283639160de30aee928e8f955b194",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-tests-before.json": "9cde6ebca94f025194f138e461459081a231d508ecdb8ccd4b6fbf8624e5af97",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-tests-first-green.json": "f95c92fc6ce61a1397c854ef0e402f6cecd9ce3d75b8d1f2abd2c3f2fe2dc6a3",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-tests-original.py": "4b8610a0e9fa52dac2db7576ce991501e1ceb182b475b0b348feca1b05aaa89c",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-tests-provenance-before.json": "65ddbd2c9e31b1e28bf5f3c71852ee4a910b94a2ddfcd6a9a35f8e15b0639d3a",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-tests.py": "704ae4321e766158d8091b34ad19f92126793079d2f8f6975b0538d4d2fd491f",
+    "perl/LinkedRE.pm": "8f3bb342f25b1d0f9c8986e2477d1b00d7bb1359cf38b9d209f680d216896e12",
+    "perl/LinkedSpec.pm": "693bf62c48a850ed1f0a32400ad96744a9f2bcaaf4dff53e16f36a4127cf1ae2",
+    "perl/LinkedSpec/ActionIR/AST.pm": "5d5fa7e8f130f1c0eef39f7ce8129b01563467aa339152073ef4bcb9ebd30dfd",
+    "perl/LinkedSpec/ActionIR/AST/Parser.pm": "8c3e1708278b3e199eb30a7095ca0e70825c01ba4b5a46612e77f7cc8f5dff50",
+    "perl/LinkedSpec/ActionIR/ArrayPipeline.pm": "a9bf7048ecfef2ab9d50c024b1b84a1ad525e64fefde01caab5632168be9b1e7",
+    "perl/LinkedSpec/ActionIR/CanonicalEvents.pm": "2a820f35919ea0bbd1ab9f29bfb3e7cf287813d7636ca3f3a2f5e7c1e97f51ea",
+    "perl/LinkedSpec/ActionIR/CanonicalEvents/Core.pm": "a56a8caa2b1a4e151ab4171a2e8af515a3c187b38ce0280a9b1c4ae84706052d",
+    "perl/LinkedSpec/ActionIR/Contracts.pm": "f062292c073f37817484fd77e54d763f9595618ecd7d05a5d592a4eca621c361",
+    "perl/LinkedSpec/ActionIR/ControlFlow.pm": "84171511b0b5a6511bce4d8510c741d2e5275afe54e40dc9cecb62299a5d5f6a",
+    "perl/LinkedSpec/ActionIR/DeclareMethod.pm": "6ed978febab3ccd85447a2a1be5c1c9e96c255242269b356abe5fb8881259ba3",
+    "perl/LinkedSpec/ActionIR/Diagnostics.pm": "8f41105b4e7807674120f006f1f74f5ddb58b19b680dbbb7a447dcced3c917cf",
+    "perl/LinkedSpec/ActionIR/FlowExpr.pm": "47516700d0cdb67f4183425053a9886d9ae0906a79de6cb1590e4f9e2dfff3f2",
+    "perl/LinkedSpec/ActionIR/MethodExpr.pm": "d4a39f686554d943272aabb9e60a4c4c0c49af1b279a105ed05cc82750acbceb",
+    "perl/LinkedSpec/ActionIR/MethodLowering.pm": "7418677f2fb9e2f9ca39c1606cff888826b788fd2ff8c911fba75d32b9b365b5",
+    "perl/LinkedSpec/ActionIR/ProgressiveSpanDispatch.pm": "e357772a2b9d9aae0c5becbfcb3bf238ff4ddc1df466c7063aeef69a1cab0ec5",
+    "perl/LinkedSpec/ActionIR/RawDependencies.pm": "f89311a80aabd421832def572cc1481a5d917ca74c901781edcf9e8a23d36b2e",
+    "perl/LinkedSpec/ActionIR/RewritePipeline.pm": "221597b09903211a883b2072f90783e92fb0f2491e17f0e797b623f27e5f27c9",
+    "perl/LinkedSpec/ActionIR/Scanner.pm": "2e991add41a4325aec65eaa1a7c77904db2b5497292d134bf66d081cbc7579a6",
+    "perl/LinkedSpec/ActionIR/Scanner/FlowRules.pm": "18463d7b84ee525a554e9781288b993f6d39b38d24e25ecbca2d53ae806417d6",
+    "perl/LinkedSpec/ActionIR/Scanner/LegacyRules.pm": "a78386909d43cfd0e0bbb19e41243564007acfc53edf6f760131dd8f1f51fed9",
+    "perl/LinkedSpec/ActionIR/Scanner/PrimitiveBasicRules.pm": "dc987808055afe2843f5c61da0526893ebcfa3028fdddf4f64ad41c77cc9fd7d",
+    "perl/LinkedSpec/ActionIR/Scanner/PrimitivePipelineRules.pm": "17dcac93902068341f5d529dd6bd360616da0f3542ee6345df0d51f1f619eef2",
+    "perl/LinkedSpec/ActionIR/Scanner/RecognitionTransactionRules.pm": "2ad196c9a6e8f8e4872fbc5164ac9b5255cb94b1d6b52028345f3a070f9f0580",
+    "perl/LinkedSpec/ActionIR/ScannerCore.pm": "507bef74ab642d4f65e9222b2687a5f955f279fdd03403ab2ef83c3005c7766e",
+    "perl/LinkedSpec/ActionIR/StagedParseJob.pm": "63b4b211d6f7f94ffa398f4ee07316fc717387faec443e9e5299e0186e8627cc",
+    "perl/LinkedSpec/ActionIR/StatementSplit.pm": "32f2aec5d3b815155453183fc1f0def94e2fc83d7c05fefb9b6b101133e8a94a",
+    "perl/LinkedSpec/ActionIR/StatementSplit/Core.pm": "0bd4d14f36d052e18f95048de9ed2429cf8106685b184b7774681894e36dfb23",
+    "perl/LinkedSpec/ActionIR/StatementSplit/Mode.pm": "be7e4ba728ffa06ec021ac1d6cba57ef612411697adfe621852f0f9ebfe14bd0",
+    "perl/LinkedSpec/ActionIR/Trace.pm": "e005c842ec16e8c8292b75b98a28d293a1178458a1a93bce1faad371a080dace",
+    "perl/LinkedSpec/ActionIR/ValueExpr.pm": "5da83310d071b2c115496e50686a8510ca829d0e9590b2b244f95fcea8d95459",
+    "perl/LinkedSpec/BindingRuntime.pm": "4168ea0bb10dbe22f7be409e5b58087534ae42cb14d77d254608df1650bfdc91",
+    "perl/LinkedSpec/BootstrapSpec.pm": "72525deda4f91586a5acd7de3b302dee1d989ba9e03f4c9f9740b1c3175ae938",
+    "perl/LinkedSpec/BootstrapSpec/Core.pm": "8375456a2f2fab3e0682eaf8901e815ac156d883d3a39113e66b90076b9e5c14",
+    "perl/LinkedSpec/CallableContract.pm": "b985f546158bc9cba232c93ed651b65016295c77b7390cda620096b3604fd781",
+    "perl/LinkedSpec/CodeblockRuntime.pm": "e03f57b0e7150a6b6c8d97ce5db8f9f1ab25690008d6c23abc955f91d8421bb7",
+    "perl/LinkedSpec/Compiler.pm": "da360b1080a830e693cfd24f1e96f516c15d288363f8c9b6c59187d6b64370d5",
+    "perl/LinkedSpec/CompilerState.pm": "c81730a5653576574ce61879d37df2b1e0472e41f35f5b5ce87f895a52862aa4",
+    "perl/LinkedSpec/EntryRuleSelection.pm": "ce30112d405908bc0589d0ef5e5b4fa9299c0dbd758f760a99eb84e5acccea25",
+    "perl/LinkedSpec/GeneratedSource.pm": "f4a446847c241973278d3c1c30407047bb9b53fdf75ba5f9830e874290e66f68",
+    "perl/LinkedSpec/HandlerVariantEmitter.pm": "22382f132066572f72c4f745bd6f356439e26c8b55171af57ec531b06682327d",
+    "perl/LinkedSpec/InterMatchGapRuntime.pm": "daef20c20a491ceaa50306167a8880602fe68c7228ade17f486f346686d31976",
+    "perl/LinkedSpec/MCPContract.pm": "06babcb9021a343d6111a447c39105dc1e29cd166e89ccac780f4d132af500ce",
+    "perl/LinkedSpec/MCPContractRuntime.pm": "09fb23f0fa66575811ee42e1102f145c76715e55151cbf2451035c468bc64a35",
+    "perl/LinkedSpec/MCPServer.pm": "df2bd23f8ae66eb7a0e028e10b43c80893309f5091eb8f90f533d5adca0aad8d",
+    "perl/LinkedSpec/MCPWire.pm": "1760f96a3f542d41d302eb6c39438f74fcab9dde8f48c59c49654e80d6a8af56",
+    "perl/LinkedSpec/Numeric.pm": "584f04b4ce883ce82948b8f2543da73167ce76ca4e62cb6c6edea80f5a519308",
+    "perl/LinkedSpec/OwnerDispatch.pm": "19247f57117f66b4cf4ca2b3205373b2167dc4d9790b89dbba8a5a43f94d58ca",
+    "perl/LinkedSpec/ParserFactory.pm": "d8cad7309e0650b59b1221b636f7eff7514cf49ad26c8f512ec6c837af3ef8bc",
+    "perl/LinkedSpec/PluginBridge.pm": "51118e069fe2d95dd9d0aa8b7fbf427c3167db2724bb35dfe9a9202c47925c21",
+    "perl/LinkedSpec/PluginRegistry.pm": "f84ba93c083e09a38fd8e01a9ff65b9b71b9f2c23ac4c987a854337e4a86425a",
+    "perl/LinkedSpec/ProgressiveSpanDispatch.pm": "3f3612b6fb665f9e8678de54a5c876d9b5519bbffeb81e50b29f5262488da5cd",
+    "perl/LinkedSpec/ProgressiveSpanDispatchPolicy.pm": "36b5bf0a73c53df33ced49e53e7399311a0029de4379aef17d8dec86a7a33eb3",
+    "perl/LinkedSpec/ProgressiveSpanDispatchRuntime.pm": "451981a723f5f7383875f51c3e1093ae9898396efab5db2d39a22ac93b6d5a90",
+    "perl/LinkedSpec/RecognitionTransaction.pm": "308543bb1194ba4c6b8837a25346076e03ac55a76cd0522f0b8c8127e7e5618d",
+    "perl/LinkedSpec/RecognitionTransactionPolicy.pm": "7946837d224b579f1f3e9fc2b6a5e785994ada3ac4fffe8d60601665a77fc528",
+    "perl/LinkedSpec/RecognitionTransactionRuntime.pm": "d9b36b3d692a1414227d6a43e342d97785c889c0a8259523d0ecb7bdd72e5923",
+    "perl/LinkedSpec/RecursiveObservationPolicy.pm": "ac1bcc4654e108bdd7f646726f474ed48d9fc613bbdb864a16b6e6bc4568aaa9",
+    "perl/LinkedSpec/Resolver.pm": "5260447fff3e6d9c7dd4d4b8d971991d640efec979c49fde62c1bc41da55cce0",
+    "perl/LinkedSpec/RuleIR.pm": "5cdd4065a6f0e5165863146c4b4693fa54168344f6225dd9a1748e096e331997",
+    "perl/LinkedSpec/RuleIR/EmitContext.pm": "0c91f65b457f8a809c4dfd3145c6189540464a3c9fe781c5fe57dcdc1798b338",
+    "perl/LinkedSpec/Runtime.pm": "d6f430b97936639be7c00711af796c493b95c65e6b9c168c965942dd8bab4b26",
+    "perl/LinkedSpec/RuntimeContext.pm": "740bfbea87e3e4ba9f8f541c08f495ad43342f2d27599fbc834bbbd47a8ebab8",
+    "perl/LinkedSpec/RuntimeDiagnosticOutput.pm": "aa44df92d185bf107d91752aa8a4cfabde5f998ffac6633bc72dab0e59851653",
+    "perl/LinkedSpec/RuntimeLogical.pm": "e2b7b9eb8dc7b8a66260edfcc5dbc1959dd7e0d3dbc3f4a973fcbd3a5333dad1",
+    "perl/LinkedSpec/RuntimeSemanticObservation.pm": "39eab6327669426d497827ce80af0353bc88ce32fb333266c18fe4e5cd2ab158",
+    "perl/LinkedSpec/SemanticCallProjection.pm": "c03259c6c01b7105d81557699e959bf36825545aa068df4ef877a00554c121fc",
+    "perl/LinkedSpec/SemanticIndex.pm": "d7301d1efb58fd5f282e9a27ed958a897ab34e6c034f5e30f8e11045ebff029f",
+    "perl/LinkedSpec/SemanticQuery.pm": "740ab20cdae43f07d56bcd0c02d18ddf83b0b449a742b4fee775b1e81f64f210",
+    "perl/LinkedSpec/SemanticRuntimeProjection.pm": "3820b4d7bd4bf035eebd78667f2955bfc8f120bcc8185abc8234821948314764",
+    "perl/LinkedSpec/SemanticSourceMap.pm": "f8dcc03277bbca0f8f964b966143029bdb3153215d8e2cfb9bc9686c7e344306",
+    "perl/LinkedSpec/SemanticStaticProjection.pm": "1424f9aa507a25b70c213515ee216885d8f5bdd0b12294004af5e5605d4d9822",
+    "perl/LinkedSpec/SourceLocation.pm": "c494440264af91bb5a1ba196cc5e5e7e92d367e63fe3a249fd5a050fb1d23793",
+    "perl/LinkedSpec/SpecEntry.pm": "47d2139ff180d959692b78079aff9097970e3d1ee977d34595a4de4c21dc17c1",
+    "perl/LinkedSpec/SpecLoader.pm": "2465593661da9a3d60df04c5730d718742680a8b9103cbd5f6b1183f6b7700ee",
+    "perl/LinkedSpec/StagedASTEnrichment.pm": "6a69d39e1d9de7b849ea429e532232d61f112755cf9b87ba2d16e1291e603f53",
+    "perl/LinkedSpec/StagedASTEnrichmentRuntime.pm": "7d01e18c88ef9de45bf9049a2f3607800a4014aba8a1b4e8ad3fbc99cfac27b3",
+    "perl/LinkedSpec/StagedParseJob.pm": "c9ecca71a9e4a79c48ca94d3569be2ff4560443363cf594d70269f060daf2407",
+    "perl/LinkedSpec/StagedParseJobPolicy.pm": "d08855a2f5c35e00b73cc23f2cc8e0a88283b9c4a8a1cc7500a5efe743ce53f1",
+    "perl/LinkedSpec/StagedParserRegistry.pm": "0f5f9de9b8af952a1d4eadd20b39490ce3fc897a18be9a6d391f9808318a713b",
+    "perl/LinkedSpec/Trace.pm": "f8041e80c7f8342a0497710b130a14085c3dddd0d1ee67eeb04f51dd196ffe22",
+    "perl/LinkedSpec/UnicodeCaseMapping.pm": "944386217a59c811b4333df9070d222e07ba9d5ed8eb163ed2fdcd4c5c73889f",
+    "perl/LinkedSpec/UnicodeXIDContinue.pm": "db2185e0a2366849c126d76b27ad5591eee9463ea5e825e815e9feabe97b8947",
+    "perl/LinkedSpec/UserFunctionRegistry.pm": "805626ff7aeebdbb00565fa102afccdd3e6c8126e2e341f44bfeff1d0cd5361c",
+    "perl/LinkedSpec/Validation.pm": "ac8623e87c7157812e99f8b729fa136d0ff2fe2dc66cfbbc9a91fddd818f49c9",
+    "perl/PPlugin.pm": "7cf5f3e1ff7465a2307b9a2ab8efded717648a188bf5f0dfacaac569370c36d1",
+    "perl/PathSearch.pm": "ad943a8335f1bbb031214e3c60ea2b97cd8440eed68dacac218062c42e7eb255",
+    "perl/env.conf": "45ed4c049b260fed7bf5e9ced195e259b9327834ff08def0581d1f01ffe60591",
+    "perl/gdcheck.pl": "e12ddba1c2a252c91ba48f24ad888e7693f92bdb167a791e847025fe41f153f5",
+    "perl/htmlcss_driver.pl": "9abd0b9bc521b97df100517c547da60b82c6dcd947726733c6001d420582c67c",
+    "perl/ptchange.pl": "13336081ceff048e5172169d4e9bad5997b245c10170ef30f81220dcaae30062",
+    "specs/BNF.spec": "7e7436b5d4d5fc5e46a074303130bd809dcd741a082b2d168a6a02a9c941b3eb",
+    "specs/DT.spec": "4937f9848b7125bc095a414b7ec70cd150fcd9c4d3d08c8ef0195e063572533a",
+    "specs/Lispish.spec": "1aca70b0a5dca6f2d788f07275e4746426964062ccbe6dffcc129594807583ab",
+    "specs/SExprDocumentV1.spec": "01a781078d4282f832bdbff37d8194aef9ef688bdeffe874e159cfe4b26ca3c9",
+    "specs/ds_vhistory.spec": "86c24f62739cd6099b12be742511f77a12b128f3cbb2080f872157fb8ef26477",
+    "specs/ebnf.spec": "a9082820aed7e3a0f934a25c6e31e71f48f6604a6a2effe804625a8ff1eda054",
+    "specs/hlink_substitution.spec": "654d5c88a07bb9a067de3c13d7fa3a7616092d2c15be522f23a7ce6b8205172e",
+    "specs/ifelse.spec": "a5dc04f47d03b8f405accb9b6e9d88c5f0ea1c1a19cf8d91f0d82bfe7ca151e5",
+    "specs/lib_reader.spec": "5705d98ddde28ad2c9c36573b1429039ea04f6551698b2381b79d400b84e12fb",
+    "specs/operators_try.spec": "51da411557f83ff7ff9261752499132a65c8d246b89f74cb0b268f155ae6f811",
+    "specs/portmap.spec": "8eaa69168df3331386ae46f898a27166f722e5bbabced6fa6fdad7c0d798c7c6",
+    "specs/pplugin.spec": "5f165a65b8fac5e1bb55997eb2dfa0be2bc264d7b3e8017eb759764202c1b31c",
+    "specs/regdef.spec": "61a244abd049ed1537d923d1526f3250f8cc5b8ea4351691b7ce0a4eca41f192",
+    "specs/sdce.spec": "ff3ea59523287f2a1c2f761a1cdf056bde9db3111e97b3a8b276425b44fcd32d",
+    "specs/simenv.spec": "b0566013312ae33631de4a52166f8f81d944ef12b09f4bdedbeab62eed8d36fa",
+    "specs/spec.spec": "d752521e6de8a91e450d75176504f1afe168a06f458c8a542179e2d5eb46f2ee",
+    "specs/tablegrep.spec": "39d232ce1f7f87f3ab2bbc226f864dcca487bc103b27c3e55ab4ac2334660882",
+    "specs/tclite.spec": "bdf7e110ecc3a093f266ce8ddd31b1ffff6880cf8a202e607a226351be3107b3",
+    "specs/tkgui.spec": "db1671535cf2747a46e1be80577de2155785b900bb41c5d4128768204a272465",
+    "specs/user_function_definition.spec": "621f766229cc93c05649a465217223646f765228917d934b6d92365f0e6ecbae",
+    "specs/verilog.spec": "3d0a7dac512941503e6de4bd0ef1c747d61e555ca88df410346dc2dd80b7e134",
+    "specs/vhdl.spec": "1bd4b995847f6b1ade72fd6a9f3c7bd531218ac97d3cd643f9633d4671f167e6",
+    "t/actionir_ast_parser.t": "7a84dcda10f3b4a86ccaaa82157168291ae741a213e9ec269596a1c284e76413",
+    "t/actionir_raw_dependency_metadata.t": "7662d89a7d9c6d377b318b7740eeed6da2d80e4d0f28319cf1b057382354961f",
+    "t/actionir_raw_dependency_provenance.t": "58d26cf5138266ef04aafdd40d18a41cdbae988d76f04a9a3c9db4aa538c6a0b",
+    "t/canonical_event_occurrence_order.t": "22abdea36f95bdb48d758c1ab250764efc29247a696105a292cd8704036b29c2",
+    "t/codeblock_push_composition_perl.t": "1901949f6bd292ceec01d74019fa91cedd378dd62bc5c61241df730d0020d607",
+    "t/codeblock_while_perl.t": "32ff6a04f11fea6f371beb519af120f0e9ec17047e9f10b225ccb91ae900c87f",
+    "t/generated_source_contract.t": "4f4620c2d605d62ff3f6afd65930452a0e6fb74dc5f7e634d2aaa6da2ef6168a",
+    "t/noncurrent_helper_metadata.t": "89e8e2c405efe749cde97d1953fbdda8e5ff033f57e68e1e23bbf229d052ecbd",
+    "t/progressive_span_dispatch_perl_contract.t": "9180f6ac7b5e64d2adc8db8dac11637f8054e0c02eb9cd3e05cfcb5e8ccd3ded",
+    "t/recognition_transaction_perl_contract.t": "9480c4f7c7fa2553cd58a10071cf0e85385f3705ef40dc21bf8cf39e7b12ddf9",
+    "t/recursive_observation_perl_contract.t": "e2a343f059c2837dba157605e2e74d6b2c2ae2fb91aeb8bc27814ea704a7589b",
+    "t/staged_ast_enrichment_perl_contract.t": "1d86d958fbe159411b8e744522a58bebea66f299f253e2e013e989ba889360e5",
+    "t/trace_actionir_method_lowering.t": "c64276dff722a5a662bc96ee78bec29294a8721673f0496ecb419589d25252cd",
+    "t/trace_actionir_pipeline.t": "4293556db2cb38b545bd795b565473d28e1322c37b32e56b5906d735f84fcd17",
+    "tools/project_data_env.sh": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73",
+    "tools/project_data_run.sh": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f",
+    "tools/run_python_project_data.sh": "0bc03bb8f4ce550397da9fda086215a1d9f6f452ec413605fbcb8976c06af604"
+  },
+  "limits": "Rule-action/deferred source-unit telemetry only. Exact event diagnostics, ASTs, substitutions, parser dumps, emitted source, routed values and original error identities are retained. Raw streams remain complete; stderr/timestamps are not projected or asserted byte-equal across runs. Six infix host results/warnings and an unsupported deferred-body failure are not portable positives. Function/transitive guards keep their measured unresolved behavior. All22 shipped sources have zero raw AST markers, so covered shipped-raw observations are vacuous. Quoted helpers and comments remain independently owned defects. Three fixed seeds are named observations, not a probability interval. No new grammar, runtime semantics, function admission, dispatcher/full execution or other backend admission."
+}

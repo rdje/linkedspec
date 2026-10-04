@@ -1,0 +1,93 @@
+{
+  "owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1",
+  "result": "PASS",
+  "sources": 27,
+  "rewrite_units": 57,
+  "top_level_TAP_tests": 27,
+  "scoped_Phase0_subtests": 24,
+  "changed_Phase0_subtests": 5,
+  "changed_Phase0_assertions": 14,
+  "controls": [
+    {
+      "name": "host operand masked",
+      "reason": "compatibility exact raw occurrences"
+    },
+    {
+      "name": "legacy falsely raw",
+      "reason": "compatibility exact raw occurrences"
+    },
+    {
+      "name": "event drift",
+      "reason": "compatibility canonical diagnostics"
+    },
+    {
+      "name": "raw span shift",
+      "reason": "compatibility exact raw occurrences"
+    },
+    {
+      "name": "legacy demoted",
+      "reason": "compatibility readiness"
+    },
+    {
+      "name": "lowering drift",
+      "reason": "compatibility AST/lowering behavior"
+    },
+    {
+      "name": "stale oracle: emit_context_meta_exposes_language_agnostic_readiness",
+      "reason": "raw-readiness oracle assertion mismatch: t/phase0_regression.t"
+    },
+    {
+      "name": "stale oracle: emit_context_meta_exposes_language_agnostic_blocker_statements",
+      "reason": "raw-readiness oracle assertion mismatch: t/phase0_regression.t"
+    },
+    {
+      "name": "stale oracle: return_descriptor_exposes_action_rewriter_migration_summary",
+      "reason": "raw-readiness oracle assertion mismatch: t/phase0_regression.t"
+    },
+    {
+      "name": "stale oracle: return_descriptor_exposes_action_rewriter_migration_blocker_type_breakdown",
+      "reason": "raw-readiness oracle assertion mismatch: t/phase0_regression.t"
+    },
+    {
+      "name": "stale oracle: method_empty_action_return_with_leading_space_args_stays_balanced",
+      "reason": "raw-readiness oracle assertion mismatch: t/phase0_regression.t"
+    }
+  ],
+  "tracked_inputs": {
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-before-compat-Diagnostics.pm": "8f41105b4e7807674120f006f1f74f5ddb58b19b680dbbb7a447dcced3c917cf",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-before-compat-EmitContext.pm": "f9f97eec8386bdf5571bcc4ac70ba6e42004d684b8c218328b42b42ec32dba13",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-before-compat-Parser.pm": "fe1c8b8502d0852022152b65d8b6061eec66f02a1dd4d6f551a2c0d621b3d284",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-before-compat-RawDependencies.pm": "f89311a80aabd421832def572cc1481a5d917ca74c901781edcf9e8a23d36b2e",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-before-compat-RuleIR.pm": "25346e3cd52c5e43cd272794185f72ecc40c25f0fd14db89d3c61adfded0cdbe",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-before-span-phase0.t": "3a9f91cdeaf0e06bf4099b53acf88c59a8a9636683e2bd2aad7cd9b4f12ee726",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-compatibility-after.json": "c067bb128b06906316baca567af6e5ed66fa254bd8d92f37a6754d495e29a480",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-compatibility-before.json": "4578a4f51672833ab6262d65d17a159841c458aed265f0f24a8d324488c60a28",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-compatibility-capture.py": "27488611478a7cad63527949823c1b27b86f77cc736154dbd03f90369a23de25",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-compatibility-cases.json": "a62538ca8ad19736d9795aee8bc44462462b80e737a0e7bb5198349dc9e15e38",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-compatibility-oracles.json": "ac08b074a47644faa9e61b2725fbeaab9fad454020b912a5354c6a1f17b0a155",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-compatibility-original.json": "842b30e66ec3ae1d2342eb6e93b27f18c0e4d020662c6f37fcca649212475b6e",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-compatibility-probe.pl": "dfb48524dc3fb8a8f15e76b3e361b5e97b68fbcf78bfe043374c71773db9e0b5",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-compatibility-review.py": "ca866c19b4827a1d4a121af30e9ce0fb6c263631df05fa642e4a5aad89d1f865",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-compatibility-tests-after.json": "c931766f9c000796c8fa9412a25dbcd28846c8f365851534a3e83778a9136eb7",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-compatibility-tests-before.json": "9ceda832db5bc0d73bd955f91ee44052e191d54f375888f2fa092352827426e2",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-compatibility-tests.py": "01c87c9e015894810f395e74221bb64e46475c807ef2d1cfbde037ac6d514e7c",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-metadata-replay.json": "1db3f83101cba9e8e44dcc7a2e207c5c11074617f17aab71641f4e200c3a6387",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-metadata-replay.pl": "4771255a8f03f7667dfd373d88949e2a2ceef13f7b8bb66a82d6b716b955d50c",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-metadata-replay.py": "948abd6d52a1a964f9500678662b900acfec4b892b5a3ec563b271462680ea6d",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-pre-compat-census-after.json": "443f73e42cc23398c2a3e24e96f23cd50e42c314eff11f13699136910dcbbb62",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-scoped-phase0-after.json": "48c42f6e25a6fe7e8c49d77b3bb4407c8c12c6fdc06cd100c09371329c1ef1bc",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-scoped-phase0-before.json": "ac3fcd6fcd00a62dfd505608b82e81e40b27b1121c1448a5c8aba11efb827b46",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-scoped-phase0-first-after.json": "805179826cd25b8ef62ba19309a277f0c26a4706cdf39d988610f13a946d3cf3",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-scoped-phase0.py": "f32c4cc50079c1c45524a592ebca316fd6949a01ddb3adb6cd9828f3c6f40b0c",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-span-normalize.py": "02fddde49448648ec9e2f252be54c394cea9d25400bf2b59c37d5601b80be3e9",
+    "perl/LinkedSpec/ActionIR/AST/Parser.pm": "fe1c8b8502d0852022152b65d8b6061eec66f02a1dd4d6f551a2c0d621b3d284",
+    "perl/LinkedSpec/ActionIR/Diagnostics.pm": "8f41105b4e7807674120f006f1f74f5ddb58b19b680dbbb7a447dcced3c917cf",
+    "perl/LinkedSpec/ActionIR/RawDependencies.pm": "b9144cdd2cc1dfbe30186870972e4eade61db87b878567f59e2a9007edd54f55",
+    "perl/LinkedSpec/RuleIR.pm": "25346e3cd52c5e43cd272794185f72ecc40c25f0fd14db89d3c61adfded0cdbe",
+    "perl/LinkedSpec/RuleIR/EmitContext.pm": "f9f97eec8386bdf5571bcc4ac70ba6e42004d684b8c218328b42b42ec32dba13",
+    "t/actionir_raw_dependency_compatibility.t": "e0b6cf22d0f0ddca4c67e4df6489aa394aec76dbccc09005e4a627b27870cab0",
+    "t/phase0_regression.t": "a5f17950ada7435dfcf85da5f3ba77053a64e8d669d03058f4d895abf02db4b4",
+    "tests/language-readiness/verify_objectives.py": "7d7e760af1cba6c47754ef8aeca5f833b4637cdcd13b95bfe3527436461d6adc"
+  },
+  "limits": "Exact legacy whole-statement ownership and ordinary supported assignment groups preserve prior canonical/AST/lowering contracts. Generic raw inner operands remain visible, and deferred groups retain unsupported AST classification.27-source descriptor observations and scoped24-subtest proof do not replace full1034 Phase0 or canonical acceptance. Diagnostic unmasked replay is excluded from unaffected acceptance; final fresh primary/census captures provide that proof."
+}

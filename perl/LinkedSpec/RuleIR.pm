@@ -483,6 +483,11 @@ sub _collect_rule_ir {
    push @{$rule_ir->{code_blocks}{LECODE}},
     '$IPOS = LinkedSpec::SourceLocation::Runtime::capture_boundary_write_position('.
     '$info, $STRING, pos $$STRING, "rule_move_pos")';
+   push @{$rule_ir->{generated_lecode}}, {
+    kind => 'move_position',
+    index => $#{$rule_ir->{code_blocks}{LECODE}},
+    source => $rule_ir->{code_blocks}{LECODE}[-1],
+   };
    _trace_rule_ir_decision(
     phase => 'collect',
     label => $rule_ir->{label},
@@ -509,6 +514,11 @@ sub _collect_rule_ir {
      mark_name => $mark_name,
      mark_pos_expr => '$$info{marks}{\''.$rule_label.'\'}{\''.$mark_name.'\'}',
     ).'; }';
+   push @{$rule_ir->{generated_lecode}}, {
+    kind => 'named_mark',
+    index => $#{$rule_ir->{code_blocks}{LECODE}},
+    source => $rule_ir->{code_blocks}{LECODE}[-1],
+   };
    _trace_rule_ir_decision(
     phase => 'collect',
     label => $rule_ir->{label},

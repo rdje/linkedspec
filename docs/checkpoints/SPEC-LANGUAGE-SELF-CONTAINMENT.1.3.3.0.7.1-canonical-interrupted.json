@@ -1,0 +1,14 @@
+{
+  "owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1",
+  "source": ".linkedspec-data/scratch/nested-raw-readiness-repair/canonical-compat-final.log",
+  "encoding": "base64",
+  "bytes": 273,
+  "sha256": "d8d7e570bee82eba78a96c74f55a711a28c46379ebf3d2d7d8505163ce065c45",
+  "base64": "W2NpXSByZXBvIHJvb3Q6IC9Wb2x1bWVzL1NTRC9Eb2N1bWVudHMvZ2l0aHViL2xpbmtlZHNwZWMKW2NpXSBjaGVja2luZyByZXF1aXJlZCBjb21tYW5kcwpbY2ldIHJ1bm5pbmcgdGhlIGdlbmVyYWwgZG9jdHJpbmUgZW5mb3JjZXIgKERPQ1RSSU5FX0VORk9SQ0VNRU5ULm1kIMKnNS/Cpzcg4oCUIEU0IGJhY2tzdG9wKTogdGhlIHJlZ2lzdHJ5IGRyaXZlciBydW5zIGV2ZXJ5IHJlZ2lzdGVyZWQgY2hlY2sgKG1lbW9yeS1hcmNoaXRlY3R1cmUsIEtub3dsZWRnZSBNYXAsIC4uLikK",
+  "limits": "Owned canonical runner stopped with TERM after a failed staged whitespace check, during doctrine startup. Partial stream only; no successful receipt or failed-test/complete-gate claim.",
+  "kind": "interrupted_canonical_startup",
+  "exit": 143,
+  "activation": "c9673d7eff39836fdc94d59b8d47639db5e937d4",
+  "staged_content_sha256": "beb612190c2b4f615b5de6176458b5948bd85dc76989336beda7de6f0ebcedef",
+  "command": "bash tools/run_ci_local.sh > .linkedspec-data/scratch/nested-raw-readiness-repair/canonical-compat-final.log 2>&1"
+}

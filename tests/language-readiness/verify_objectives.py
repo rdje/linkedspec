@@ -97,6 +97,25 @@ ARTIFACT_CI_INSERTIONS = (
     ),
 )
 
+RAW_READINESS_OWNER = "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1"
+RAW_READINESS_CI_INSERTIONS = (
+    (b"require_tracked_file t/phase0_regression.t\n",
+     b"require_tracked_file perl/LinkedSpec/ActionIR/RawDependencies.pm\n"
+     b"require_tracked_file t/actionir_raw_dependency_metadata.t\n"
+     b"require_tracked_file t/actionir_raw_dependency_provenance.t\n"
+     b"require_tracked_file t/actionir_nested_block_source_spans.t\n"
+     b"require_tracked_file t/actionir_raw_dependency_compatibility.t\n"),
+    (b"perl -c -Iperl t/actionir_ast_parser.t\n",
+     b"perl -c -Iperl perl/LinkedSpec/ActionIR/RawDependencies.pm\n"
+     b"perl -c -Iperl t/actionir_raw_dependency_metadata.t\n"
+     b"perl -c -Iperl t/actionir_raw_dependency_provenance.t\n"
+     b"perl -c -Iperl t/actionir_nested_block_source_spans.t\n"
+     b"perl -c -Iperl t/actionir_raw_dependency_compatibility.t\n"),
+    (b"prove -Iperl t/actionir_ast_parser.t\n",
+     b'\nlog "running source-bound raw dependency readiness and provenance suites"\n'
+     b"PERL5LIB= prove -Iperl t/actionir_raw_dependency_metadata.t t/actionir_raw_dependency_provenance.t t/actionir_nested_block_source_spans.t t/actionir_raw_dependency_compatibility.t\n"),
+)
+
 PERL_STORAGE_REPLACEMENTS = (
     (b"(( ${#perl_temp_owners[@]} == 27 )) ||\n",
      b"(( ${#perl_temp_owners[@]} == 28 )) ||\n"),
@@ -141,7 +160,7 @@ def verify_governance_evolution(source, contents, historical_hash):
     require(source == "tools/run_ci_local.sh", f"unapproved governance source: {source}")
     normalized = contents
     # Strip the later insertions first: their anchors are earlier owned additions.
-    for anchor, insertion in (ARTIFACT_CI_INSERTIONS + NORMALIZATION_CI_INSERTIONS + PUSH_CI_INSERTIONS
+    for anchor, insertion in (RAW_READINESS_CI_INSERTIONS + ARTIFACT_CI_INSERTIONS + NORMALIZATION_CI_INSERTIONS + PUSH_CI_INSERTIONS
                               + COMPOSED_CI_INSERTIONS + CI_INSERTIONS):
         require(normalized.count(anchor + insertion) == 1,
                 f"governance registration mismatch: {source}")
@@ -154,6 +173,7 @@ def verify_governance_evolution(source, contents, historical_hash):
             "runtime_repair_owner": PUSH_REPAIR_OWNER,
             "source_correction_owner": NORMALIZATION_CORRECTION_OWNER,
             "artifact_recovery_owner": ARTIFACT_RECOVERY_OWNER,
+            "raw_readiness_owner": RAW_READINESS_OWNER,
             "scope": "exact anchored checker/input registration; original CI bytes preserved"}
 
 
@@ -167,13 +187,41 @@ def signature_subtest(contents):
     return contents[first:end]
 
 
+def restore_raw_readiness_oracles(contents):
+    path = "docs/checkpoints/" + RAW_READINESS_OWNER + "-compatibility-oracles.json"
+    table = json.loads(read_relative(path))
+    expected = ("emit_context_meta_exposes_language_agnostic_readiness",
+                "emit_context_meta_exposes_language_agnostic_blocker_statements",
+                "return_descriptor_exposes_action_rewriter_migration_summary",
+                "return_descriptor_exposes_action_rewriter_migration_blocker_type_breakdown",
+                "method_empty_action_return_with_leading_space_args_stays_balanced")
+    require(tuple(row["subtest"] for row in table["subtests"]) == expected
+            and sum(len(row["assertions"]) for row in table["subtests"]) == 14,
+            "raw-readiness oracle table mismatch: t/phase0_regression.t")
+    for row in table["subtests"]:
+        marker = ("subtest '" + row["subtest"] + "' => sub {\n").encode()
+        require(contents.count(marker) == 1,
+                "raw-readiness oracle marker mismatch: t/phase0_regression.t")
+        start = contents.index(marker)
+        end = contents.find(b"\nsubtest ", start + len(marker))
+        require(end >= 0, "raw-readiness oracle boundary mismatch: t/phase0_regression.t")
+        block = contents[start:end]
+        for pair in row["assertions"]:
+            old, new = pair["before"].encode(), pair["after"].encode()
+            require(old != new and block.count(new) == 1,
+                    "raw-readiness oracle assertion mismatch: t/phase0_regression.t")
+            block = block.replace(new, old, 1)
+        contents = contents[:start] + block + contents[end:]
+    return contents
+
+
 def verify_signature_regression_evolution(source, contents, historical_hash):
     require(source == "t/phase0_regression.t", f"unapproved signature regression source: {source}")
     before = git("show", f"{SIGNATURE_BEFORE}:{source}")
     after = git("show", f"{SIGNATURE_AFTER}:{source}")
     require(contents.count(OCCURRENCE_INSERTION + OCCURRENCE_ANCHOR) == 1,
             f"occurrence regression registration mismatch: {source}")
-    prior = contents.replace(OCCURRENCE_INSERTION + OCCURRENCE_ANCHOR,
+    prior = restore_raw_readiness_oracles(contents).replace(OCCURRENCE_INSERTION + OCCURRENCE_ANCHOR,
                              OCCURRENCE_ANCHOR, 1)
     require(prior == after, f"unreviewed signature-regression drift: {source}")
     # Replace only the exact owned subtest, including its fixed/dynamic plan change.
@@ -183,8 +231,9 @@ def verify_signature_regression_evolution(source, contents, historical_hash):
     return {"path": source, "historical": historical_hash, "current": digest(contents),
             "owner": SIGNATURE_REPAIR_OWNER, "reconciliation_owner": NORMALIZATION_CORRECTION_OWNER,
             "occurrence_repair_owner": OCCURRENCE_REPAIR_OWNER,
+            "raw_readiness_owner": RAW_READINESS_OWNER,
             "before_revision": SIGNATURE_BEFORE, "after_revision": SIGNATURE_AFTER,
-            "scope": "exact occurrence regression insertion and committed signature subtest/plan replacement only; original Phase0 bytes recovered"}
+            "scope": "exact fourteen metadata assertion replacements, occurrence regression insertion and committed signature subtest/plan replacement; original Phase0 bytes recovered"}
 
 
 def verify_perl_storage_evolution(source, contents, historical_hash):
@@ -391,6 +440,22 @@ def falsify(report):
                 current.replace(ARTIFACT_CI_INSERTIONS[1][1], b"", 1),
                 current.replace(ARTIFACT_CI_INSERTIONS[1][1],
                                 ARTIFACT_CI_INSERTIONS[1][1] * 2, 1),
+                current.replace(RAW_READINESS_CI_INSERTIONS[0][1], b"", 1),
+                current.replace(RAW_READINESS_CI_INSERTIONS[1][1], b"", 1),
+                current.replace(RAW_READINESS_CI_INSERTIONS[2][1], b"", 1),
+                current.replace(RAW_READINESS_CI_INSERTIONS[2][1],
+                                RAW_READINESS_CI_INSERTIONS[2][1] * 2, 1),
+                current.replace(RAW_READINESS_CI_INSERTIONS[2][1],
+                                RAW_READINESS_CI_INSERTIONS[2][1].replace(b"PERL5LIB= prove", b"PERL5LIB= true"), 1),
+                current.replace(RAW_READINESS_CI_INSERTIONS[0][1],
+                                RAW_READINESS_CI_INSERTIONS[0][1].replace(b"metadata.t", b"missing.t"), 1),
+                current.replace(b"require_tracked_file t/actionir_nested_block_source_spans.t\n", b"", 1),
+                current.replace(b"perl -c -Iperl t/actionir_nested_block_source_spans.t\n", b"", 1),
+                current.replace(b" t/actionir_nested_block_source_spans.t t/actionir_raw_dependency_compatibility.t\n",
+                                b" t/actionir_raw_dependency_compatibility.t\n", 1),
+                current.replace(b"require_tracked_file t/actionir_raw_dependency_compatibility.t\n", b"", 1),
+                current.replace(b"perl -c -Iperl t/actionir_raw_dependency_compatibility.t\n", b"", 1),
+                current.replace(b" t/actionir_raw_dependency_compatibility.t\n", b"\n", 1),
             )
             verify = verify_governance_evolution
             reasons = ("governance registration mismatch:", "unreviewed governance drift:")
@@ -418,8 +483,12 @@ def falsify(report):
                                 OCCURRENCE_INSERTION.replace(b"    plan tests => 2;\n",
                                                              b"    plan tests => 1;\n"), 1),
             )
+            table = json.loads(read_relative("docs/checkpoints/" + RAW_READINESS_OWNER + "-compatibility-oracles.json"))
+            altered += tuple(current.replace(row["assertions"][0]["after"].encode(),
+                                             row["assertions"][0]["before"].encode(), 1)
+                             for row in table["subtests"])
             verify = verify_signature_regression_evolution
-            reasons = ("occurrence regression registration mismatch:", "unreviewed signature-regression drift:",
+            reasons = ("raw-readiness oracle assertion mismatch:", "occurrence regression registration mismatch:", "unreviewed signature-regression drift:",
                        "unreviewed signature-regression history:", "signature regression marker mismatch:")
         else:
             raise ValueError(f"unapproved governance control source: {source}")

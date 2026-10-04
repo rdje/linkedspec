@@ -40089,7 +40089,7 @@ SPEC
 
     my $unresolved_meta = $descr->{spec}{Unresolved}{meta}{action_rewriter};
     is($unresolved_meta->{unresolved_helper_count}, 1, 'unresolved helper rule reports unresolved helper count');
-    is($unresolved_meta->{raw_perl_dependency_count}, 0, 'unresolved helper rule can still report zero raw-Perl fallback dependency count');
+    is($unresolved_meta->{raw_perl_dependency_count}, 1, 'unresolved helper rule also reports its raw $x expression dependency');
     ok(!$unresolved_meta->{language_agnostic_action_ir_ready}, 'unresolved helper rule is not language-agnostic action-IR ready');
 };
 subtest 'emit_context_meta_exposes_language_agnostic_blocker_statements' => sub {
@@ -40117,9 +40117,9 @@ SPEC
     my $combo_meta = $descr->{spec}{Combo}{meta}{action_rewriter};
     is($combo_meta->{unresolved_helper_count}, 1, 'combo rule tracks unresolved helper count');
     is_deeply($combo_meta->{unresolved_helper_statements}, ['return(Leaf, $x)'], 'combo rule exposes unresolved helper statement payloads');
-    is_deeply($combo_meta->{raw_perl_dependency_statements}, ['my $tmp = 1'], 'combo rule exposes raw-Perl fallback dependency statements');
-    is_deeply($combo_meta->{language_agnostic_action_ir_blocker_statements}, ['my $tmp = 1', 'return(Leaf, $x)'], 'combo rule exposes combined language-agnostic blocker statements');
-    is($combo_meta->{language_agnostic_action_ir_blocker_statement_count}, 2, 'combo rule exposes combined blocker statement count');
+    is_deeply($combo_meta->{raw_perl_dependency_statements}, ['my $tmp = 1', '$x'], 'combo rule exposes fallback and inner raw-expression dependency statements');
+    is_deeply($combo_meta->{language_agnostic_action_ir_blocker_statements}, ['my $tmp = 1', '$x', 'return(Leaf, $x)'], 'combo rule exposes combined language-agnostic blocker statements');
+    is($combo_meta->{language_agnostic_action_ir_blocker_statement_count}, 3, 'combo rule exposes combined blocker statement count');
     ok(!$combo_meta->{language_agnostic_action_ir_ready}, 'combo rule with unresolved helper and raw fallback is not language-agnostic action-IR ready');
 };
 subtest 'emit_context_meta_exposes_compatibility_surface_without_demoting_ready_rules' => sub {
@@ -40182,13 +40182,13 @@ SPEC
     is($summary->{rules_with_action_rewriter_meta}, 4, 'migration summary tracks rules with action_rewriter metadata');
     is($summary->{language_agnostic_ready_rule_count}, 2, 'migration summary tracks ready rule count');
     is($summary->{language_agnostic_blocked_rule_count}, 2, 'migration summary tracks blocked rule count');
-    is($summary->{language_agnostic_blocker_statement_total_count}, 2, 'migration summary tracks total blocker statement count across blocked rules');
+    is($summary->{language_agnostic_blocker_statement_total_count}, 3, 'migration summary tracks total blocker statement count across blocked rules');
     is_deeply($summary->{language_agnostic_ready_rules}, ['Top', 'Leaf'], 'migration summary exposes deterministic ready-rule list in source order');
 
     my ($mixed_row) = grep { $_->{rule} eq 'Mixed' } @{$summary->{language_agnostic_blocked_rules}};
     my ($unresolved_row) = grep { $_->{rule} eq 'Unresolved' } @{$summary->{language_agnostic_blocked_rules}};
     is_deeply($mixed_row->{blocker_statements}, ['my $tmp = 1'], 'migration summary blocked entry preserves RAW_PERL blocker payload');
-    is_deeply($unresolved_row->{blocker_statements}, ['return(Leaf, $x)'], 'migration summary blocked entry preserves unresolved-helper blocker payload');
+    is_deeply($unresolved_row->{blocker_statements}, ['$x', 'return(Leaf, $x)'], 'migration summary blocked entry preserves raw-expression and unresolved-helper blocker payloads');
     is(scalar(@{$summary->{language_agnostic_blocked_rules_by_priority}}), 2, 'migration summary exposes prioritized blocked-rule list');
     is_deeply($summary->{language_agnostic_blocked_rules_by_priority}, ['Unresolved', 'Mixed'], 'migration summary sorts blocked rules by deterministic blocker priority');
     is($summary->{language_agnostic_top_blocked_rule}, 'Unresolved', 'migration summary exposes top blocked rule');
@@ -40297,14 +40297,14 @@ SPEC
 
     is($summary->{language_agnostic_blocked_rule_count}, 3, 'migration summary tracks blocked-rule count for blocker-type breakdown corpus');
     is($summary->{language_agnostic_blocked_raw_perl_only_rule_count}, 1, 'migration summary tracks raw-Perl-only blocked-rule count');
-    is($summary->{language_agnostic_blocked_unresolved_helper_only_rule_count}, 1, 'migration summary tracks unresolved-helper-only blocked-rule count');
-    is($summary->{language_agnostic_blocked_mixed_rule_count}, 1, 'migration summary tracks mixed blocked-rule count');
+    is($summary->{language_agnostic_blocked_unresolved_helper_only_rule_count}, 0, 'migration summary tracks unresolved-helper-only blocked-rule count');
+    is($summary->{language_agnostic_blocked_mixed_rule_count}, 2, 'migration summary tracks mixed blocked-rule count');
     is($summary->{language_agnostic_blocked_raw_perl_only_ratio}, '0.3333', 'migration summary tracks raw-Perl-only blocked-rule ratio');
-    is($summary->{language_agnostic_blocked_unresolved_helper_only_ratio}, '0.3333', 'migration summary tracks unresolved-helper-only blocked-rule ratio');
-    is($summary->{language_agnostic_blocked_mixed_ratio}, '0.3333', 'migration summary tracks mixed blocked-rule ratio');
+    is($summary->{language_agnostic_blocked_unresolved_helper_only_ratio}, '0.0000', 'migration summary tracks unresolved-helper-only blocked-rule ratio');
+    is($summary->{language_agnostic_blocked_mixed_ratio}, '0.6667', 'migration summary tracks mixed blocked-rule ratio');
     is_deeply($summary->{language_agnostic_blocked_raw_perl_only_rules}, ['RawOnly'], 'migration summary exposes deterministic raw-Perl-only blocked-rule list');
-    is_deeply($summary->{language_agnostic_blocked_unresolved_helper_only_rules}, ['UnresolvedOnly'], 'migration summary exposes deterministic unresolved-helper-only blocked-rule list');
-    is_deeply($summary->{language_agnostic_blocked_mixed_rules}, ['Mixed'], 'migration summary exposes deterministic mixed blocked-rule list');
+    is_deeply($summary->{language_agnostic_blocked_unresolved_helper_only_rules}, [], 'migration summary exposes deterministic unresolved-helper-only blocked-rule list');
+    is_deeply($summary->{language_agnostic_blocked_mixed_rules}, ['UnresolvedOnly', 'Mixed'], 'migration summary exposes deterministic mixed blocked-rule list');
     is($summary->{language_agnostic_top_blocked_rule}, 'Mixed', 'migration summary priority still surfaces mixed rule with highest blocker load');
 };
 subtest 'emit_context_canonical_action_ir_lowers_call_wrappers_without_raw_fallback' => sub {
@@ -41313,8 +41313,8 @@ SPEC
     my $meta = $descr->{spec}{Top}{meta}{action_rewriter};
     is($meta->{canonical_action_ir_fallback_count}, 0, 'method-style return with leading-space args avoids RAW_PERL fallback');
     is($meta->{unresolved_helper_count}, 0, 'method-style return with leading-space args avoids unresolved helper hits');
-    is($meta->{raw_perl_dependency_count}, 0, 'method-style return with leading-space args reports zero raw-perl dependency');
-    ok($meta->{language_agnostic_action_ir_ready}, 'method-style return with leading-space args remains language-agnostic action-IR ready');
+    is($meta->{raw_perl_dependency_count}, 2, 'method-style return reports its authored host map and reference expression dependencies');
+    ok(!$meta->{language_agnostic_action_ir_ready}, 'method-style return with authored host operands is not language-agnostic action-IR ready');
     ok(grep { $_ eq 'RETURN' } @{$meta->{canonical_action_ir_nodes}}, 'method-style return contributes canonical RETURN action-IR node');
 };
 subtest 'emit_context_canonical_action_ir_handles_nested_semicolon_payloads' => sub {

@@ -1,0 +1,1696 @@
+package LinkedSpec::ActionIR::AST::Parser;
+
+use 5.010;
+BEGIN {
+ require File::Basename;
+ my $module_dir = (File::Basename::fileparse(__FILE__))[1];
+ my $ast_dir = File::Basename::dirname($module_dir);
+ my $action_ir_dir = File::Basename::dirname($ast_dir);
+ my $linked_spec_dir = File::Basename::dirname($action_ir_dir);
+ my $perl_root = File::Basename::dirname($linked_spec_dir);
+ unshift @INC, $perl_root unless grep { defined($_) && $_ eq $perl_root } @INC;
+}
+
+use LinkedSpec::ActionIR::AST ();
+use LinkedSpec::OwnerDispatch ();
+
+#------------------------------------------------------------------------------
+# Package : LinkedSpec::ActionIR::AST::Parser
+# Purpose : Parse ActionIR helper/action text into typed AST nodes without
+#           changing the existing text-lowering pipeline. Later migration leaves
+#           can switch consumers to these nodes family by family.
+#------------------------------------------------------------------------------
+
+sub _fallback_trim {
+ my ($value) = @_;
+ return undef unless defined $value;
+ $value =~ s/^\s+//o;
+ $value =~ s/\s+$//o;
+ return $value
+}
+
+sub _trim_cb {
+ my ($deps) = @_;
+ return $deps->{trim_action_ir_value}
+  if ref($deps) eq 'HASH' && ref($deps->{trim_action_ir_value}) eq 'CODE';
+ return \&_fallback_trim
+}
+
+sub _trim_with_offsets {
+ my ($text, $base_start) = @_;
+ $text = '' unless defined $text;
+ $base_start = 0 unless defined $base_start;
+ my $leading = 0;
+ if ($text =~ /\A(\s+)/s) {
+  $leading = length($1);
+ }
+ my $trailing = 0;
+ if ($text =~ /(\s+)\z/s) {
+  $trailing = length($1);
+ }
+ my $start = $base_start + $leading;
+ my $end = $base_start + length($text) - $trailing;
+ my $trimmed = substr($text, $leading, length($text) - $leading - $trailing);
+ return ($trimmed, $start, $end)
+}
+
+sub _span {
+ my ($start, $end) = @_;
+ return LinkedSpec::ActionIR::AST::source_span($start, $end)
+}
+
+sub _node {
+ my ($kind, $source, $start, $end, %fields) = @_;
+ return LinkedSpec::ActionIR::AST::node(
+  $kind,
+  source => $source,
+  source_span => _span($start, $end),
+  %fields,
+ )
+}
+
+sub _raw_node {
+ my ($source, $start, $end, $reason) = @_;
+ $reason = 'unsupported_expression' unless defined($reason) && length($reason);
+ return _node('raw_perl', $source, $start, $end, reason => $reason)
+}
+
+sub _throw_action_parse_diagnostic {
+ my ($code, $message, $start, $end) = @_;
+ die bless({
+  code => $code,
+  stage => 'action_parse',
+  source_span => {
+   start => 0 + $start,
+   end => 0 + $end,
+   unit => 'unicode_scalar',
+   provenance => 'authored',
+  },
+  message => $message,
+ }, 'LinkedSpec::ActionIR::AST::Parser::Diagnostic')
+}
+
+sub _require_method_expr_pkg {
+ LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, 'LinkedSpec::ActionIR::MethodExpr');
+ return 'LinkedSpec::ActionIR::MethodExpr'
+}
+
+sub _split_top_level_csv {
+ my ($payload, $method) = @_;
+ _require_method_expr_pkg();
+ return LinkedSpec::ActionIR::MethodExpr::_split_top_level_csv($payload, $method)
+}
+
+sub _parse_method_function_expr {
+ my ($expr, $receiver) = @_;
+ _require_method_expr_pkg();
+ return LinkedSpec::ActionIR::MethodExpr::_parse_method_function_expr($expr, $receiver)
+}
+
+sub _call_semantic_fields {
+ my ($method) = @_;
+ return () unless defined($method)
+  && ($method eq 'and' || $method eq 'or' || $method eq 'not');
+ return (
+  semantic_family => 'logical',
+  evaluation_policy => 'eager_left_to_right',
+  result_kind => 'boolean',
+  minimum_arity => 1,
+  maximum_arity => $method eq 'not' ? 1 : undef,
+ )
+}
+
+sub _looks_like_slash_symbol_call_at {
+ my ($text, $idx) = @_;
+ _require_method_expr_pkg();
+ return LinkedSpec::ActionIR::MethodExpr::_looks_like_slash_symbol_call_at($text, $idx)
+}
+
+sub _find_piece_offset {
+ my ($haystack, $needle, $search_pos) = @_;
+ $search_pos = 0 unless defined $search_pos;
+ return undef unless defined($haystack) && defined($needle);
+ my $idx = index($haystack, $needle, $search_pos);
+ return $idx >= 0 ? $idx : undef
+}
+
+sub parse_action_block {
+ my ($code, $deps) = @_;
+ $code = '' unless defined $code;
+ $deps = {} unless ref($deps) eq 'HASH';
+ my $base_start = defined($deps->{base_start}) ? $deps->{base_start} : 0;
+ my $trim_action_ir_value = _trim_cb($deps);
+
+ LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, 'LinkedSpec::ActionIR::StatementSplit');
+ my $parts = LinkedSpec::ActionIR::StatementSplit::_split_action_ir_statements(
+  $code,
+  { trim_action_ir_value => $trim_action_ir_value },
+ );
+ $parts = [] unless ref($parts) eq 'ARRAY';
+
+ my @statement_spans;
+ my $search_pos = 0;
+ foreach my $statement (@$parts) {
+  my $pos = _find_piece_offset($code, $statement, $search_pos);
+  $pos = $search_pos unless defined $pos;
+  my $end = $pos + length($statement);
+  push @statement_spans, @{_split_ast_newline_statement_text($statement, $base_start + $pos)};
+  $search_pos = $end;
+ }
+
+ my @statements = map {
+  parse_action_statement($_->{source}, { base_start => $_->{start}, deps => $deps })
+ } @statement_spans;
+
+ return _node(
+  'action_block',
+  $code,
+  $base_start,
+  $base_start + length($code),
+  statements => \@statements,
+ )
+}
+
+sub _split_ast_newline_statement_text {
+ my ($statement, $base_start) = @_;
+ $statement = '' unless defined $statement;
+ $base_start = 0 unless defined $base_start;
+ my @pieces;
+ my $segment_start = 0;
+ my $len = length($statement);
+ my $state = _new_scan_state();
+
+ for (my $idx = 0; $idx < $len; ++$idx) {
+  my $ch = substr($statement, $idx, 1);
+  if (_consume_scan_char($state, $statement, $idx, $ch)) {
+   next;
+  }
+  next unless ($ch eq "\n" || $ch eq "\r") && _scan_is_top_level($state);
+  my $candidate = substr($statement, $segment_start, $idx - $segment_start);
+  my ($trimmed, $start, $end) = _trim_with_offsets($candidate, $base_start + $segment_start);
+  next unless length($trimmed) && _looks_like_ast_statement($trimmed);
+  push @pieces, {
+   source => $trimmed,
+   start => $start,
+   end => $end,
+  };
+  $segment_start = _next_nonspace_index($statement, $idx + 1);
+  $idx = $segment_start - 1;
+ }
+
+ my $tail = substr($statement, $segment_start);
+ my ($trimmed, $start, $end) = _trim_with_offsets($tail, $base_start + $segment_start);
+ push @pieces, {
+  source => $trimmed,
+  start => $start,
+  end => $end,
+ } if length($trimmed);
+ return \@pieces
+}
+
+sub _next_nonspace_index {
+ my ($text, $idx) = @_;
+ my $len = length($text);
+ while ($idx < $len && substr($text, $idx, 1) =~ /\s/o) {
+  ++$idx;
+ }
+ return $idx
+}
+
+sub _looks_like_ast_statement {
+ my ($statement) = @_;
+ my $node = _parse_expr($statement, 0, length($statement));
+ return (ref($node) eq 'HASH' && ($node->{kind} // '') ne 'raw_perl') ? 1 : 0
+}
+
+sub parse_action_statement {
+ my ($statement, $opts) = @_;
+ $opts = {} unless ref($opts) eq 'HASH';
+ my $base_start = defined($opts->{base_start}) ? $opts->{base_start} : 0;
+ my ($trimmed, $start, $end) = _trim_with_offsets($statement, $base_start);
+ my $expr = $trimmed eq 'next'
+  ? _node('call', $trimmed, $start, $end, name => 'next', source_method => 'next', args => [])
+  : parse_action_expr($trimmed, { base_start => $start, deps => $opts->{deps} || {} });
+ return _node(
+  'action_stmt',
+  $trimmed,
+  $start,
+  $end,
+  expr => $expr,
+  drops_value => 1,
+ )
+}
+
+sub parse_action_expr {
+ my ($expr, $opts) = @_;
+ $opts = {} unless ref($opts) eq 'HASH';
+ my $base_start = defined($opts->{base_start}) ? $opts->{base_start} : 0;
+ my ($trimmed, $start, $end) = _trim_with_offsets($expr, $base_start);
+ return _raw_node($trimmed, $start, $end, 'empty_expression')
+  unless length($trimmed);
+ return _parse_expr($trimmed, $start, $end)
+}
+
+sub _parse_expr {
+ my ($trimmed, $start, $end) = @_;
+ my $assignment = _parse_assignment_expr($trimmed, $start, $end);
+ return $assignment if $assignment;
+
+ my $receiver_mutation = _parse_receiver_mutation_expr($trimmed, $start, $end);
+ return $receiver_mutation if $receiver_mutation;
+
+ my $chain = _parse_fluent_chain_expr($trimmed, $start, $end);
+ return $chain if $chain;
+
+ return _parse_expr_without_chain($trimmed, $start, $end)
+}
+
+sub _parse_expr_without_chain {
+ my ($trimmed, $start, $end) = @_;
+ my $literal = _parse_literal_expr($trimmed, $start, $end);
+ return $literal if $literal;
+
+ my $shape = _parse_shape_or_block_expr($trimmed, $start, $end);
+ return $shape if $shape;
+
+ if ($trimmed =~ /\A:([A-Za-z_][A-Za-z0-9_]*)\z/o) {
+  return _node('colon_scalar_slot_removed', $trimmed, $start, $end, name => $1)
+ }
+
+ my $control = _parse_control_flow_expr($trimmed, $start, $end);
+ return $control if $control;
+
+ my $call = _parse_call_expr($trimmed, $start, $end);
+ return $call if $call;
+
+ my $var_or_access = _parse_variable_or_access_expr($trimmed, $start, $end);
+ return $var_or_access if $var_or_access;
+
+ return _raw_node($trimmed, $start, $end, 'unsupported_expression')
+}
+
+sub _parse_literal_expr {
+ my ($trimmed, $start, $end) = @_;
+ return _node('number', $trimmed, $start, $end, value => 0 + $trimmed)
+  if $trimmed =~ /\A-?\d+(?:\.\d+)?\z/o;
+ return _node('undef', $trimmed, $start, $end)
+  if $trimmed eq 'undef';
+ return _node('boolean', $trimmed, $start, $end, value => 1)
+  if $trimmed eq 'true';
+ return _node('boolean', $trimmed, $start, $end, value => 0)
+  if $trimmed eq 'false';
+ if ($trimmed =~ /\A(['"])((?:\\.|(?!\1).)*)\1\z/s) {
+  my ($quote, $payload) = ($1, $2);
+  return _node(
+   'string',
+   $trimmed,
+   $start,
+   $end,
+   value => _unescape_string_payload($payload, $quote),
+   quote => $quote,
+  )
+ }
+ if ($trimmed =~ m{\A/((?:\\.|[^/])*)/([A-Za-z]*)\z}s) {
+  return _node('regex', $trimmed, $start, $end, pattern => $1, flags => $2)
+ }
+ return undef
+}
+
+sub _unescape_string_payload {
+ my ($payload, $quote) = @_;
+ $payload = '' unless defined $payload;
+ $payload =~ s/\\([\\'"])/$1/go;
+ return $payload
+}
+
+sub _parse_call_expr {
+ my ($trimmed, $start, $end) = @_;
+ my $trailing_block_call = _parse_trailing_block_call_expr($trimmed, $start, $end);
+ return $trailing_block_call if $trailing_block_call;
+
+ my $call = _parse_method_function_expr($trimmed);
+ return undef unless ref($call) eq 'HASH' && defined($call->{method});
+ my $open_idx = index($trimmed, '(');
+ my $payload = substr($trimmed, $open_idx + 1, length($trimmed) - $open_idx - 2);
+ my @args = _parse_arg_exprs($payload, $start + $open_idx + 1, $call->{method});
+ return _node(
+  'call',
+  $trimmed,
+  $start,
+  $end,
+  name => $call->{method},
+  source_method => $call->{source_method},
+  args => \@args,
+  _call_semantic_fields($call->{method}),
+ )
+}
+
+sub _parse_trailing_block_call_expr {
+ my ($trimmed, $start, $end) = @_;
+ my $attached = _split_attached_block_expr($trimmed);
+ return undef unless ref($attached) eq 'HASH';
+
+ my ($head_trimmed, $head_start) = _trim_with_offsets($attached->{head}, $start);
+ return undef unless length($head_trimmed);
+
+ my $call = _parse_method_function_expr($head_trimmed);
+ return undef unless ref($call) eq 'HASH' && defined($call->{method});
+
+ my $open_idx = index($head_trimmed, '(');
+ return undef if $open_idx < 0;
+ my $payload = substr($head_trimmed, $open_idx + 1, length($head_trimmed) - $open_idx - 2);
+ my @args = _parse_arg_exprs($payload, $head_start + $open_idx + 1, $call->{method});
+
+ my $block_start = $start + $attached->{open_idx};
+ my $block_end = $start + $attached->{close_idx} + 1;
+ my $block_source = substr($trimmed, $attached->{open_idx}, $attached->{close_idx} - $attached->{open_idx} + 1);
+ my $block = parse_action_block($attached->{body}, { base_start => $block_start + 1 });
+ push @args, _node('block_value', $block_source, $block_start, $block_end, block => $block);
+
+ return _node(
+  'call',
+  $trimmed,
+  $start,
+  $end,
+  name => $call->{method},
+  source_method => $call->{source_method},
+  args => \@args,
+  trailing_block_arg => 1,
+  trailing_block_source_span => _span($block_start, $block_end),
+  _call_semantic_fields($call->{method}),
+ )
+}
+
+sub _parse_control_flow_expr {
+ my ($trimmed, $start, $end) = @_;
+ my $attached = _parse_attached_control_flow_expr($trimmed, $start, $end);
+ return $attached if $attached;
+ return _parse_control_flow_head($trimmed, $start, $trimmed, $start, $end, undef)
+}
+
+sub _parse_attached_control_flow_expr {
+ my ($trimmed, $start, $end) = @_;
+ my $attached = _split_attached_block_expr($trimmed);
+ return undef unless ref($attached) eq 'HASH';
+
+ my ($head_trimmed, $head_start) = _trim_with_offsets($attached->{head}, $start);
+ return undef unless length($head_trimmed);
+
+ my $body_source = substr($trimmed, $attached->{open_idx}, $attached->{close_idx} - $attached->{open_idx} + 1);
+ my $body = parse_action_block($attached->{body}, { base_start => $start + $attached->{open_idx} + 1 });
+ return _parse_control_flow_head(
+  $head_trimmed,
+  $head_start,
+  $trimmed,
+  $start,
+  $end,
+  {
+   body => $body,
+   body_source => $body_source,
+   body_source_span => _span($start + $attached->{open_idx}, $start + $attached->{close_idx} + 1),
+  },
+ )
+}
+
+sub _parse_control_flow_head {
+ my ($head, $head_start, $source, $start, $end, $attached_fields) = @_;
+ my $normalized = _normalize_control_flow_head($head);
+ return undef unless ref($normalized) eq 'HASH';
+
+ my $call = _parse_method_function_expr($normalized->{head});
+ return undef unless ref($call) eq 'HASH' && defined($call->{method});
+
+ my $open_idx = index($normalized->{head}, '(');
+ return undef if $open_idx < 0;
+ my $payload = substr($normalized->{head}, $open_idx + 1, length($normalized->{head}) - $open_idx - 2);
+ my @args = _parse_arg_exprs($payload, $head_start + $open_idx + 1, $call->{method});
+
+ my $method = $call->{method};
+ my $keyword = $normalized->{keyword};
+ my $canonical_keyword = _canonical_control_flow_keyword($method);
+ return undef unless defined($canonical_keyword);
+
+ my %common = (
+  keyword => $keyword,
+  canonical_keyword => $canonical_keyword,
+  args => \@args,
+ );
+ if (ref($attached_fields) eq 'HASH') {
+  %common = (%common, %$attached_fields);
+ }
+
+ if ($method eq 'if' || $method eq 'i' || $method eq 'when' || $method eq 'elseif' || $method eq 'elif') {
+  return undef unless @args == 1;
+  my $branch_role = ($method eq 'elseif' || $method eq 'elif') ? 'elseif' : 'if';
+  return _node(
+   'control_if',
+   $source,
+   $start,
+   $end,
+   %common,
+   branch_role => $branch_role,
+   condition => $args[0],
+  )
+ }
+
+ if ($method eq 'else' || $method eq 'otherwise') {
+  return undef unless @args == 0;
+  return _node('control_else', $source, $start, $end, %common, branch_role => 'else')
+ }
+
+ if ($method eq 'endif') {
+  return undef unless @args == 0;
+  return undef if ref($attached_fields) eq 'HASH';
+  return _node('control_endif', $source, $start, $end, %common)
+ }
+
+ if ($method eq 'while') {
+  return undef unless @args == 1;
+  return _node('control_while', $source, $start, $end, %common, condition => $args[0])
+ }
+
+ if ($method eq 'switch') {
+  return undef unless @args == 1;
+  my %switch_fields = (
+   %common,
+   source_expr => $args[0],
+  );
+  if (ref($attached_fields) eq 'HASH') {
+   my $branches = _parse_switch_attached_branches(
+    $attached_fields->{body_source},
+    $attached_fields->{body_source_span}{start},
+   );
+   if (ref($branches) eq 'HASH') {
+    $switch_fields{cases} = $branches->{cases};
+    $switch_fields{default} = $branches->{default};
+   }
+  }
+  return _node('control_switch', $source, $start, $end, %switch_fields)
+ }
+
+ if ($method eq 'case') {
+  return undef unless @args == 1;
+  return _node('control_case', $source, $start, $end, %common, match => $args[0])
+ }
+
+ if ($method eq 'default') {
+  return undef unless @args == 0;
+  return _node('control_default', $source, $start, $end, %common)
+ }
+
+ if ($method eq 'endcase') {
+  return undef unless @args == 0;
+  return undef if ref($attached_fields) eq 'HASH';
+  return _node('control_endcase', $source, $start, $end, %common)
+ }
+
+ if ($method eq 'endswitch') {
+  return undef unless @args == 0;
+  return undef if ref($attached_fields) eq 'HASH';
+  return _node('control_endswitch', $source, $start, $end, %common)
+ }
+
+ return undef
+}
+
+sub _normalize_control_flow_head {
+ my ($head) = @_;
+ my $trimmed = _fallback_trim($head);
+ return undef unless defined($trimmed) && length($trimmed);
+
+ return { head => 'else()', keyword => 'otherwise' }
+  if $trimmed eq 'otherwise';
+ return { head => "$trimmed()", keyword => $trimmed }
+  if $trimmed =~ /\A(?:else|endif|default|endcase|endswitch)\z/o;
+ return undef unless $trimmed =~ /\A([A-Za-z_][A-Za-z0-9_]*)/o;
+ my $keyword = $1;
+ return undef unless defined _canonical_control_flow_keyword($keyword);
+ return { head => $trimmed, keyword => $keyword }
+}
+
+sub _canonical_control_flow_keyword {
+ my ($method) = @_;
+ return undef unless defined $method;
+ return 'if' if $method eq 'i' || $method eq 'when';
+ return 'elseif' if $method eq 'elif';
+ return 'else' if $method eq 'otherwise';
+ return $method
+  if $method =~ /\A(?:if|elseif|else|endif|while|switch|case|default|endcase|endswitch)\z/o;
+ return undef
+}
+
+sub _split_attached_block_expr {
+ my ($text) = @_;
+ return undef unless defined($text) && length($text);
+ my $open_idx = _find_top_level_open_brace($text, 0);
+ return undef unless defined $open_idx;
+ my $close_idx = _find_matching_delim($text, $open_idx, '{', '}');
+ return undef unless defined $close_idx;
+ my $tail = substr($text, $close_idx + 1);
+ my $tail_trimmed = _fallback_trim($tail);
+ return undef if defined($tail_trimmed) && length($tail_trimmed);
+
+ return {
+  head => substr($text, 0, $open_idx),
+  body => substr($text, $open_idx + 1, $close_idx - $open_idx - 1),
+  open_idx => $open_idx,
+  close_idx => $close_idx,
+ }
+}
+
+sub _parse_switch_attached_branches {
+ my ($body_source, $body_start) = @_;
+ return undef unless defined($body_source) && length($body_source) >= 2;
+ return undef unless _outer_delimiter_is_balanced($body_source, '{', '}');
+ my $payload = substr($body_source, 1, length($body_source) - 2);
+ my $payload_start = $body_start + 1;
+ my $len = length($payload);
+ my $pos = 0;
+ my @cases;
+ my $default;
+
+ while ($pos < $len) {
+  $pos = _skip_switch_branch_separators($payload, $pos);
+  last if $pos >= $len;
+
+  my $open_idx = _find_top_level_open_brace($payload, $pos);
+  return undef unless defined $open_idx;
+  my $close_idx = _find_matching_delim($payload, $open_idx, '{', '}');
+  return undef unless defined $close_idx;
+  my $expr = substr($payload, $pos, $close_idx - $pos + 1);
+  my ($expr_trimmed, $expr_start, $expr_end) = _trim_with_offsets($expr, $payload_start + $pos);
+  my $branch = _parse_control_flow_expr($expr_trimmed, $expr_start, $expr_end);
+  return undef unless ref($branch) eq 'HASH';
+  my $kind = $branch->{kind} // '';
+  if ($kind eq 'control_case') {
+   push @cases, $branch;
+  } elsif ($kind eq 'control_default') {
+   return undef if defined $default;
+   $default = $branch;
+  } else {
+   return undef;
+  }
+  $pos = $close_idx + 1;
+ }
+
+ return {
+  cases => \@cases,
+  default => $default,
+ }
+}
+
+sub _skip_switch_branch_separators {
+ my ($text, $pos) = @_;
+ my $len = length($text);
+ while ($pos < $len) {
+  my $ch = substr($text, $pos, 1);
+  last unless $ch =~ /\s/o || $ch eq ';';
+  ++$pos;
+ }
+ return $pos
+}
+
+sub _parse_arg_exprs {
+ my ($payload, $payload_start, $method) = @_;
+ my $parts = _split_top_level_csv($payload, $method);
+ my %pattern_starts;
+ if (defined($method)) {
+  my $prefix = "$method(";
+  %pattern_starts = map { ($_->[0] - length($prefix)) => 1 }
+   @{LinkedSpec::ActionIR::MethodExpr::_helper_pattern_ranges($prefix . $payload . ')')};
+ }
+ my @args;
+ my $cursor = 0;
+ foreach my $arg (@$parts) {
+  my $arg_offset = _find_piece_offset($payload, $arg, $cursor);
+  $arg_offset = $cursor unless defined $arg_offset;
+  my $start = $payload_start + $arg_offset;
+  # A recognized pattern owns the argument before fluent-dot parsing begins.
+  my $literal = $pattern_starts{$arg_offset}
+   ? _parse_literal_expr($arg, $start, $start + length($arg)) : undef;
+  push @args, $literal // parse_action_expr($arg, { base_start => $start });
+  $cursor = $arg_offset + length($arg);
+ }
+ return @args
+}
+
+sub _parse_shape_or_block_expr {
+ my ($trimmed, $start, $end) = @_;
+ return _parse_array_literal_expr($trimmed, $start, $end)
+  if substr($trimmed, 0, 1) eq '[';
+ return _parse_brace_expr($trimmed, $start, $end)
+  if substr($trimmed, 0, 1) eq '{';
+ return undef
+}
+
+sub _parse_array_literal_expr {
+ my ($trimmed, $start, $end) = @_;
+ return undef unless _outer_delimiter_is_balanced($trimmed, '[', ']');
+ my $payload = substr($trimmed, 1, length($trimmed) - 2);
+ my @items = _parse_arg_exprs($payload, $start + 1);
+ return _node('array_literal', $trimmed, $start, $end, items => \@items)
+}
+
+sub _parse_brace_expr {
+ my ($trimmed, $start, $end) = @_;
+ return undef unless _outer_delimiter_is_balanced($trimmed, '{', '}');
+ return _parse_codeblock_literal_expr($trimmed, $start, $end)
+  if substr($trimmed, 0, 2) eq '{|';
+ my $payload = substr($trimmed, 1, length($trimmed) - 2);
+ return _codeblock_literal_error_node($trimmed, $start, $end, 'invalid_codeblock_opener')
+  if $payload =~ /\A\s+\|/s;
+ if (_fallback_trim($payload) eq '' || _has_top_level_hash_pair_separator($payload)) {
+  return _parse_hash_literal_expr($trimmed, $payload, $start, $end);
+ }
+ my $block = parse_action_block($payload, { base_start => $start + 1 });
+ return _node('block_value', $trimmed, $start, $end, block => $block)
+}
+
+sub _parse_codeblock_literal_expr {
+ my ($source_text, $start, $end) = @_;
+ my $signature_end = index($source_text, '|', 2);
+ return _codeblock_literal_error_node(
+  $source_text,
+  $start,
+  $end,
+  'missing_codeblock_signature_closer',
+ ) if $signature_end < 0;
+
+ my $signature_source = substr($source_text, 2, $signature_end - 2);
+ my ($signature, $error_code) = _parse_codeblock_signature($signature_source);
+ return _codeblock_literal_error_node($source_text, $start, $end, $error_code)
+  unless ref($signature) eq 'HASH';
+
+ my $body_start = $start + $signature_end + 1;
+ my $body_end = $end - 1;
+ my $body_source = substr($source_text, $signature_end + 1, length($source_text) - $signature_end - 2);
+ my $body_ast = parse_action_block($body_source, { base_start => $body_start });
+ return LinkedSpec::ActionIR::AST::node(
+  'codeblock_literal',
+  version => 1,
+  signature => $signature,
+  body_source => $body_source,
+  body_ast => $body_ast,
+  source_text => $source_text,
+  source_span => _span($start, $end),
+  body_span => _span($body_start, $body_end),
+ )
+}
+
+sub _parse_codeblock_signature {
+ my ($source) = @_;
+ $source = '' unless defined $source;
+ my @parts = length($source) ? split(/,/, $source, -1) : ();
+ @parts = map { _fallback_trim($_) } @parts;
+ return (undef, 'invalid_parameter') if grep { !defined($_) || !length($_) } @parts;
+
+ my @positional_params;
+ my $rest_param;
+ my %seen;
+ for (my $idx = 0; $idx < @parts; ++$idx) {
+  my $part = $parts[$idx];
+  my $name;
+  if (substr($part, 0, 3) eq '...') {
+   return (undef, 'rest_parameter_must_be_final') if $idx != $#parts;
+   return (undef, 'invalid_rest_parameter')
+    unless $part =~ /\A\.\.\.([A-Za-z_][A-Za-z0-9_]*)\z/o;
+   $name = $1;
+   $rest_param = $name;
+  } else {
+   return (undef, 'invalid_parameter')
+    unless $part =~ /\A([A-Za-z_][A-Za-z0-9_]*)\z/o;
+   $name = $1;
+   push @positional_params, $name;
+  }
+  return (undef, 'duplicate_parameter') if $seen{$name}++;
+  return (undef, 'reserved_parameter') if _codeblock_parameter_is_reserved($name);
+ }
+
+ return ({
+  kind => 'callable_signature',
+  version => 1,
+  positional_params => \@positional_params,
+  rest_param => $rest_param,
+  min_arity => scalar(@positional_params),
+  max_arity => defined($rest_param) ? undef : scalar(@positional_params),
+ }, undef)
+}
+
+sub _codeblock_parameter_is_reserved {
+ my ($name) = @_;
+ return 0 unless defined($name) && length($name);
+ state %reserved = map { $_ => 1 } qw(
+  fn return I LS LE E EX IT LX STRING descr minfo LSPOS LEPOS LMATCH LSMATCH IMATCH
+  IMATCH_LIST LMATCH_LIST IMATCH_HASH LMATCH_HASH SELF this ctx runtime_ctx
+ );
+ return $reserved{$name} ? 1 : 0
+}
+
+sub _codeblock_literal_error_node {
+ my ($source, $start, $end, $code) = @_;
+ $code = 'invalid_codeblock_literal' unless defined($code) && length($code);
+ return _node(
+  'codeblock_literal_error',
+  $source,
+  $start,
+  $end,
+  code => $code,
+ )
+}
+
+sub _parse_hash_literal_expr {
+ my ($trimmed, $payload, $start, $end) = @_;
+ my $parts = _split_top_level_csv($payload);
+ my @entries;
+ my $cursor = 0;
+ foreach my $entry (@$parts) {
+  my $entry_offset = _find_piece_offset($payload, $entry, $cursor);
+  $entry_offset = $cursor unless defined $entry_offset;
+  my $separator = _find_top_level_hash_pair_separator($entry);
+  return _raw_node($trimmed, $start, $end, 'invalid_hash_literal')
+   unless ref($separator) eq 'HASH';
+  my $separator_idx = $separator->{idx};
+  my $separator_len = $separator->{length};
+  if (($separator->{token} // '') eq '=>') {
+   my $separator_start = $start + 1 + $entry_offset + $separator_idx;
+   return _node(
+    'hash_literal_fat_arrow_removed',
+    $trimmed,
+    $start,
+    $end,
+    reason => 'hash_literal_use_colon',
+    separator => '=>',
+    replacement_separator => ':',
+    separator_source_span => _span($separator_start, $separator_start + $separator_len),
+   )
+  }
+  my $key_text = substr($entry, 0, $separator_idx);
+  my $value_text = substr($entry, $separator_idx + $separator_len);
+  my ($key_trimmed, $key_start) = _trim_with_offsets($key_text, $start + 1 + $entry_offset);
+  my ($value_trimmed, $value_start) = _trim_with_offsets($value_text, $start + 1 + $entry_offset + $separator_idx + $separator_len);
+  push @entries, {
+   key => parse_action_expr($key_trimmed, { base_start => $key_start }),
+   value => parse_action_expr($value_trimmed, { base_start => $value_start }),
+  };
+  $cursor = $entry_offset + length($entry);
+ }
+ return _node('hash_literal', $trimmed, $start, $end, entries => \@entries)
+}
+
+sub _parse_variable_or_access_expr {
+ my ($trimmed, $start, $end) = @_;
+ return undef unless $trimmed =~ /\A([A-Za-z_][A-Za-z0-9_]*)/o;
+ my $name = $1;
+ my $pos = length($name);
+ while ($pos < length($trimmed) && substr($trimmed, $pos, 1) =~ /\s/o) {
+  ++$pos;
+ }
+ if ($pos == length($trimmed)) {
+  return _node('variable', $trimmed, $start, $end, name => $name)
+ }
+ return undef unless substr($trimmed, $pos, 1) eq '[';
+
+ my $segments = _parse_access_segments($trimmed, $pos, $start);
+ return undef unless ref($segments) eq 'ARRAY';
+ if (@$segments == 1 && $segments->[0]{kind} eq 'index') {
+  return _node(
+   'indexed_var',
+   $trimmed,
+   $start,
+   $end,
+   name => $name,
+   index => $segments->[0]{expr},
+  )
+ }
+ return _node(
+  'nested_access',
+  $trimmed,
+  $start,
+  $end,
+  base => $name,
+  segments => $segments,
+ )
+}
+
+sub _parse_access_segments {
+ my ($trimmed, $pos, $base_start) = @_;
+ my @segments;
+ my $len = length($trimmed);
+ while ($pos < $len) {
+  while ($pos < $len && substr($trimmed, $pos, 1) =~ /\s/o) {
+   ++$pos;
+  }
+  return \@segments if $pos == $len;
+  return undef unless substr($trimmed, $pos, 1) eq '[';
+  my $close = _find_matching_delim($trimmed, $pos, '[', ']');
+  return undef unless defined $close;
+  my $payload = substr($trimmed, $pos + 1, $close - $pos - 1);
+  my ($payload_trimmed, $payload_start) = _trim_with_offsets($payload, $base_start + $pos + 1);
+  my $expr = parse_action_expr($payload_trimmed, { base_start => $payload_start });
+  if (($expr->{kind} // '') eq 'string') {
+   push @segments, {
+    kind => 'key',
+    value => $expr->{value},
+    source => substr($trimmed, $pos, $close - $pos + 1),
+    source_span => _span($base_start + $pos, $base_start + $close + 1),
+   };
+  } else {
+   push @segments, {
+    kind => 'index',
+    expr => $expr,
+    source => substr($trimmed, $pos, $close - $pos + 1),
+    source_span => _span($base_start + $pos, $base_start + $close + 1),
+   };
+  }
+  $pos = $close + 1;
+ }
+ return \@segments
+}
+
+sub _parse_assignment_expr {
+ my ($trimmed, $start, $end) = @_;
+ my $append_idx = _find_top_level_token($trimmed, '+=');
+ if (defined $append_idx) {
+  my $left = _fallback_trim(substr($trimmed, 0, $append_idx));
+  return undef unless defined($left) && $left =~ /\A([A-Za-z_][A-Za-z0-9_]*)\z/o;
+  my $value_text = substr($trimmed, $append_idx + 2);
+  my ($value_trimmed, $value_start) = _trim_with_offsets($value_text, $start + $append_idx + 2);
+  return _node(
+   'assign_array_append',
+   $trimmed,
+   $start,
+   $end,
+   name => $1,
+   value => parse_action_expr($value_trimmed, { base_start => $value_start }),
+  )
+ }
+
+ my $nested_write = _parse_nested_write_assignment_expr($trimmed, $start, $end);
+ return $nested_write if $nested_write;
+
+ my $eq_idx = _find_top_level_assignment_eq($trimmed);
+ return undef unless defined $eq_idx;
+ my $left_text = substr($trimmed, 0, $eq_idx);
+ my $right_text = substr($trimmed, $eq_idx + 1);
+ my ($left_trimmed, $left_start, $left_end) = _trim_with_offsets($left_text, $start);
+ my ($right_trimmed, $right_start) = _trim_with_offsets($right_text, $start + $eq_idx + 1);
+ my $value = parse_action_expr($right_trimmed, { base_start => $right_start });
+
+ if ($left_trimmed =~ /\A([A-Za-z_][A-Za-z0-9_]*)\z/o) {
+  return _node('assign_scalar', $trimmed, $start, $end, name => $1, value => $value)
+ }
+
+ my $left = _parse_variable_or_access_expr($left_trimmed, $left_start, $left_end);
+ if (ref($left) eq 'HASH') {
+  if (($left->{kind} // '') eq 'indexed_var') {
+   return _node(
+    'assign_hash_index',
+    $trimmed,
+    $start,
+    $end,
+    name => $left->{name},
+    key => $left->{index},
+    value => $value,
+   )
+  }
+  if (($left->{kind} // '') eq 'nested_access' && @{$left->{segments} || []} == 1) {
+   my $segment = $left->{segments}[0];
+   my $key = $segment->{kind} eq 'key'
+    ? _node('string', $segment->{source}, $segment->{source_span}{start}, $segment->{source_span}{end}, value => $segment->{value})
+    : $segment->{expr};
+   return _node(
+    'assign_hash_index',
+    $trimmed,
+    $start,
+    $end,
+    name => $left->{base},
+    key => $key,
+    value => $value,
+   )
+  }
+  if (($left->{kind} // '') eq 'nested_access' && @{$left->{segments} || []} > 1) {
+   return _node(
+    'assign_nested_access',
+    $trimmed,
+    $start,
+    $end,
+    base => $left->{base},
+    segments => $left->{segments},
+    value => $value,
+   )
+  }
+ }
+
+ return undef
+}
+
+sub _find_nested_write_assignment_eq {
+ my ($text) = @_;
+ my $eq_idx = _find_top_level_assignment_eq($text);
+ return $eq_idx if defined($eq_idx) && index(substr($text, 0, $eq_idx), '[') >= 0;
+ return undef unless index($text, '[') >= 0;
+ my $first_open = index($text, '[');
+ my $unclosed_root = substr($text, 0, $first_open);
+ return undef unless $unclosed_root =~ /\A\s*[A-Za-z_][A-Za-z0-9_]*\s*\z/o;
+
+ # An unclosed final path segment keeps the ordinary top-level scanner inside
+ # bracket depth. Find its assignment token without treating quoted/comparison
+ # equals as ownership. This branch exists only to produce the exact authored
+ # unclosed-segment diagnostic.
+ my $state = _new_scan_state();
+ my $len = length($text);
+ my $candidate;
+ for (my $idx = 0; $idx < $len; ++$idx) {
+  my $ch = substr($text, $idx, 1);
+  next if _consume_quote_only_scan_char($state, $text, $idx, $ch);
+  next unless $ch eq '=';
+  my $prev = $idx > 0 ? substr($text, $idx - 1, 1) : '';
+  my $next = $idx + 1 < $len ? substr($text, $idx + 1, 1) : '';
+  next if $next eq '>' || $next eq '=';
+  next if $prev eq '<' || $prev eq '>' || $prev eq '!' || $prev eq '=' || $prev eq ':';
+  $candidate = $idx;
+ }
+ return $candidate
+}
+
+sub _parse_nested_write_assignment_expr {
+ my ($trimmed, $start, $end) = @_;
+ my $eq_idx = _find_nested_write_assignment_eq($trimmed);
+ return undef unless defined $eq_idx;
+ return undef if $eq_idx > 0 && substr($trimmed, $eq_idx - 1, 1) eq ':';
+
+ my $left_text = substr($trimmed, 0, $eq_idx);
+ my $right_text = substr($trimmed, $eq_idx + 1);
+ my ($left, $left_start, $left_end) = _trim_with_offsets($left_text, $start);
+ my ($right, $right_start) = _trim_with_offsets($right_text, $start + $eq_idx + 1);
+ return undef unless index($left, '[') >= 0;
+
+ my $opening = index($left, '[');
+ my $root_source = substr($left, 0, $opening);
+ my ($root, $root_start, $root_end) = _trim_with_offsets($root_source, $left_start);
+ unless (defined($root) && $root =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o) {
+  my $message = defined($root) && $root =~ /\A(?:\{|\[|['"]|-?\d)/s
+   ? 'nested write root must be a bare identifier'
+   : 'nested write root must remain a bare identifier';
+  _throw_action_parse_diagnostic(
+   'nested_write_root_not_addressable',
+   $message,
+   $root_start,
+   $root_end > $root_start ? $root_end : $root_start + 1,
+  );
+ }
+
+ state %reserved = map { $_ => 1 } qw(
+  CAPTURE IINDEX IMATCH IMATCH_HASH IMATCH_LIST IPOS
+  LINDEX LMATCH LMATCH_HASH LMATCH_LIST LSPOS STRING
+  descr false info minfo null retv true undef
+ );
+ if ($reserved{$root}) {
+  _throw_action_parse_diagnostic(
+   'nested_write_root_reserved',
+   "nested write root '$root' is reserved",
+   $root_start,
+   $root_end,
+  );
+ }
+
+ my @segments;
+ my $cursor = $opening;
+ my $left_len = length($left);
+ while ($cursor < $left_len) {
+  while ($cursor < $left_len && substr($left, $cursor, 1) =~ /\s/o) {
+   ++$cursor;
+  }
+  last if $cursor == $left_len;
+  unless (substr($left, $cursor, 1) eq '[') {
+   my $next_open = index($left, '[', $cursor);
+   my $diagnostic_end = $next_open >= 0 ? $next_open : length($left);
+   _throw_action_parse_diagnostic(
+    'nested_write_root_not_addressable',
+    'nested write root must remain a bare identifier',
+    $root_start,
+    $left_start + $diagnostic_end,
+   );
+  }
+
+  my $segment_open = $cursor;
+  my $close = _find_matching_delim($left, $segment_open, '[', ']');
+  unless (defined $close) {
+   my $diagnostic_end = $left_len;
+   --$diagnostic_end while $diagnostic_end > $segment_open
+    && substr($left, $diagnostic_end - 1, 1) =~ /\s/o;
+   _throw_action_parse_diagnostic(
+    'nested_write_segment_unclosed',
+    'nested write segment is missing its closing bracket',
+    $left_start + $segment_open,
+    $left_start + $diagnostic_end,
+   );
+  }
+
+  my $payload = substr($left, $segment_open + 1, $close - $segment_open - 1);
+  my ($segment_source, $segment_start, $segment_end) = _trim_with_offsets(
+   $payload,
+   $left_start + $segment_open + 1,
+  );
+  unless (length($segment_source)) {
+   _throw_action_parse_diagnostic(
+    'nested_write_segment_empty',
+    'nested write segment may not be empty',
+    $left_start + $segment_open,
+    $left_start + $close + 1,
+   );
+  }
+
+  my $expression = $segment_source eq 'null'
+   ? _node('undef', $segment_source, $segment_start, $segment_end, literal_spelling => 'null')
+   : parse_action_expr($segment_source, { base_start => $segment_start });
+  if (!ref($expression) || ($expression->{kind} // '') eq 'raw_perl') {
+   _throw_action_parse_diagnostic(
+    'nested_write_segment_expression_invalid',
+    'segment must be one balanced ActionIR value expression',
+    $segment_start,
+    $segment_end,
+   );
+  }
+  push @segments, {
+   kind => 'path_segment',
+   source => $segment_source,
+   source_span => _span($segment_start, $segment_end),
+   expression => $expression,
+  };
+  $cursor = $close + 1;
+ }
+
+ return undef unless @segments;
+ my $value = parse_action_expr($right, { base_start => $right_start });
+ return _node(
+  'assign_nested_access',
+  $trimmed,
+  $start,
+  $end,
+  base => $root,
+  segments => \@segments,
+  value => $value,
+ )
+}
+
+sub _top_level_dot_indexes {
+ my ($text) = @_;
+ my @dots;
+ my $state = _new_scan_state();
+ my $len = length($text // '');
+ for (my $idx = 0; $idx < $len; ++$idx) {
+  my $ch = substr($text, $idx, 1);
+  if (_consume_scan_char($state, $text, $idx, $ch)) {
+   next;
+  }
+  push @dots, $idx if $ch eq '.' && _scan_is_top_level($state);
+ }
+ return \@dots
+}
+
+sub _receiver_bang_candidate_at {
+ my ($text, $dot) = @_;
+ my $len = length($text // '');
+ my $idx = $dot + 1;
+ ++$idx while $idx < $len && substr($text, $idx, 1) =~ /\s/o;
+ my $name_start = $idx;
+ return undef unless $idx < $len && substr($text, $idx, 1) =~ /[A-Za-z_]/o;
+ ++$idx;
+ ++$idx while $idx < $len && substr($text, $idx, 1) =~ /[A-Za-z0-9_]/o;
+ my $name_end = $idx;
+ my $bang_start = $idx;
+ ++$bang_start while $bang_start < $len && substr($text, $bang_start, 1) =~ /\s/o;
+ return undef unless $bang_start < $len && substr($text, $bang_start, 1) eq '!';
+ my $bang_end = $bang_start;
+ ++$bang_end while $bang_end < $len && substr($text, $bang_end, 1) eq '!';
+ return {
+  dot => $dot,
+  name_start => $name_start,
+  name_end => $name_end,
+  bang_start => $bang_start,
+  bang_end => $bang_end,
+  spaced => $bang_start == $name_end ? 0 : 1,
+  bang_count => $bang_end - $bang_start,
+ }
+}
+
+sub _first_receiver_bang_candidate {
+ my ($text) = @_;
+ foreach my $dot (@{_top_level_dot_indexes($text)}) {
+  my $candidate = _receiver_bang_candidate_at($text, $dot);
+  return $candidate if ref($candidate) eq 'HASH';
+ }
+ return undef
+}
+
+sub _parse_receiver_mutation_expr {
+ my ($trimmed, $start, $end) = @_;
+ if ($trimmed =~ /\Amap_leaves!\s*\(/o) {
+  _throw_action_parse_diagnostic(
+   'bang_method_function_form_invalid',
+   'map_leaves! is receiver-only; use binding.map_leaves!() { ... }',
+   $start,
+   $start + length('map_leaves!'),
+  );
+ }
+
+ my $candidate = _first_receiver_bang_candidate($trimmed);
+ return undef unless ref($candidate) eq 'HASH';
+ my $method = substr(
+  $trimmed,
+  $candidate->{name_start},
+  $candidate->{name_end} - $candidate->{name_start},
+ );
+ my $source_method = substr(
+  $trimmed,
+  $candidate->{name_start},
+  $candidate->{bang_end} - $candidate->{name_start},
+ );
+ if ($candidate->{spaced}) {
+  _throw_action_parse_diagnostic(
+   'bang_method_suffix_invalid',
+   'the bang suffix must immediately follow map_leaves',
+   $start + $candidate->{name_start},
+   $start + $candidate->{bang_end},
+  );
+ }
+ if ($candidate->{bang_count} != 1) {
+  _throw_action_parse_diagnostic(
+   'bang_method_suffix_invalid',
+   'map_leaves! accepts exactly one bang suffix',
+   $start + $candidate->{name_start},
+   $start + $candidate->{bang_end},
+  );
+ }
+ if ($method ne 'map_leaves') {
+  _throw_action_parse_diagnostic(
+   'bang_method_unknown',
+   "unsupported bang method '$source_method'",
+   $start + $candidate->{name_start},
+   $start + $candidate->{bang_end},
+  );
+ }
+
+ my ($receiver, $receiver_start, $receiver_end) = _trim_with_offsets(
+  substr($trimmed, 0, $candidate->{dot}),
+  $start,
+ );
+ unless ($receiver =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o) {
+  _throw_action_parse_diagnostic(
+   'receiver_mutation_receiver_not_addressable',
+   'receiver mutation requires one bare uniform-binding identifier',
+   $receiver_start,
+   $receiver_end,
+  );
+ }
+ state %reserved = map { $_ => 1 } qw(
+  CAPTURE IINDEX IMATCH IMATCH_HASH IMATCH_LIST IPOS
+  LINDEX LMATCH LMATCH_HASH LMATCH_LIST LSPOS STRING
+  descr false info minfo null retv true undef
+ );
+ if ($reserved{$receiver}) {
+  _throw_action_parse_diagnostic(
+   'receiver_mutation_receiver_reserved',
+   "receiver mutation cannot target reserved binding '$receiver'",
+   $receiver_start,
+   $receiver_end,
+  );
+ }
+
+ my $cursor = $candidate->{bang_end};
+ my $len = length($trimmed);
+ ++$cursor while $cursor < $len && substr($trimmed, $cursor, 1) =~ /\s/o;
+ unless ($cursor < $len && substr($trimmed, $cursor, 1) eq '(') {
+  _throw_action_parse_diagnostic(
+   'map_leaves_mutation_arguments_invalid',
+   'map_leaves! expects empty parentheses before its callback',
+   $start + $candidate->{name_start},
+   $start + $cursor,
+  );
+ }
+ my $open_paren = $cursor;
+ my $close_paren = _find_matching_delim($trimmed, $open_paren, '(', ')');
+ unless (defined $close_paren) {
+  _throw_action_parse_diagnostic(
+   'map_leaves_mutation_arguments_invalid',
+   'map_leaves! expects empty parentheses before its callback',
+   $start + $open_paren,
+   $end,
+  );
+ }
+ if (substr($trimmed, $open_paren + 1, $close_paren - $open_paren - 1) =~ /\S/o) {
+  _throw_action_parse_diagnostic(
+   'map_leaves_mutation_arguments_invalid',
+   'map_leaves! expects empty parentheses before its callback',
+   $start + $open_paren,
+   $start + $close_paren + 1,
+  );
+ }
+
+ my $callback_open = $close_paren + 1;
+ ++$callback_open while $callback_open < $len && substr($trimmed, $callback_open, 1) =~ /\s/o;
+ unless ($callback_open < $len && substr($trimmed, $callback_open, 1) eq '{') {
+  _throw_action_parse_diagnostic(
+   'map_leaves_mutation_callback_missing',
+   'map_leaves! requires one immediate trailing callback block',
+   $start + $candidate->{name_start},
+   $start + $close_paren + 1,
+  );
+ }
+ my $callback_close = _find_matching_delim($trimmed, $callback_open, '{', '}');
+ unless (defined $callback_close) {
+  _throw_action_parse_diagnostic(
+   'map_leaves_mutation_callback_missing',
+   'map_leaves! requires one immediate trailing callback block',
+   $start + $callback_open,
+   $end,
+  );
+ }
+
+ my $body_source = substr($trimmed, $callback_open + 1, $callback_close - $callback_open - 1);
+ my $body = parse_action_block($body_source, { base_start => $start + $callback_open + 1 });
+ my @continuation;
+ my $tail_start = $callback_close + 1;
+ my $tail = substr($trimmed, $tail_start);
+ if ($tail =~ /\S/o) {
+  my $synthetic = 'x'.$tail;
+  my $segments = _split_top_level_fluent_segments($synthetic);
+  return _raw_node($trimmed, $start, $end, 'invalid_receiver_mutation_continuation')
+   unless ref($segments) eq 'ARRAY' && @$segments > 1 && $segments->[0]{text} eq 'x';
+  for (my $idx = 1; $idx < @$segments; ++$idx) {
+   my $segment = $segments->[$idx];
+   my $segment_start = $start + $tail_start + $segment->{start} - 1;
+   my $segment_end = $start + $tail_start + $segment->{end} - 1;
+   if ($segment->{text} =~ /\A([A-Za-z_][A-Za-z0-9_]*)(!+)/o) {
+    _throw_action_parse_diagnostic(
+     'receiver_mutation_continuation_bang_invalid',
+     'a receiver-mutation chain continuation must use an existing non-bang fluent call',
+     $segment_start,
+     $segment_start + length($1) + length($2),
+    );
+   }
+   my $call = _parse_fluent_call_segment(
+    $segment->{text},
+    $segment_start,
+    $segment_end,
+    $idx == $#$segments,
+   );
+   return _raw_node($trimmed, $start, $end, 'invalid_receiver_mutation_continuation')
+    unless ref($call) eq 'HASH';
+   my $open = index($segment->{text}, '(');
+   my $close = defined($open) && $open >= 0
+    ? _find_matching_delim($segment->{text}, $open, '(', ')')
+    : undef;
+   return _raw_node($trimmed, $start, $end, 'invalid_receiver_mutation_continuation')
+    unless defined $close;
+   push @continuation, {
+    kind => 'fluent_call',
+    method => $call->{method},
+    source_method => $call->{source_method},
+    source => $segment->{text},
+    source_span => _span($segment_start, $segment_end),
+    args_source => substr($segment->{text}, $open + 1, $close - $open - 1),
+    args_span => _span($segment_start + $open + 1, $segment_start + $close),
+   };
+  }
+ }
+
+ my $callback_source = substr($trimmed, $callback_open, $callback_close - $callback_open + 1);
+ my $mutation_source = substr(
+  $trimmed,
+  $candidate->{name_start},
+  $callback_close - $candidate->{name_start} + 1,
+ );
+ return _node(
+  'receiver_mutation_chain',
+  $trimmed,
+  $start,
+  $end,
+  receiver => _node(
+   'binding_reference',
+   $receiver,
+   $receiver_start,
+   $receiver_end,
+   name => $receiver,
+  ),
+  mutation => _node(
+   'receiver_mutation_call',
+   $mutation_source,
+   $start + $candidate->{name_start},
+   $start + $callback_close + 1,
+   method => 'map_leaves',
+   source_method => 'map_leaves!',
+   method_span => _span($start + $candidate->{name_start}, $start + $candidate->{bang_end}),
+   args_span => _span($start + $open_paren, $start + $close_paren + 1),
+   callback => _node(
+    'block_value',
+    $callback_source,
+    $start + $callback_open,
+    $start + $callback_close + 1,
+    body => $body,
+   ),
+  ),
+  continuation => \@continuation,
+ )
+}
+
+sub _parse_fluent_chain_expr {
+ my ($trimmed, $start, $end) = @_;
+ my $segments = _split_top_level_fluent_segments($trimmed);
+ return undef unless ref($segments) eq 'ARRAY' && @$segments > 1;
+
+ my $receiver_seg = $segments->[0];
+ my $receiver = _parse_expr_without_chain(
+  $receiver_seg->{text},
+  $start + $receiver_seg->{start},
+  $start + $receiver_seg->{end},
+ );
+
+ my @calls;
+ for (my $idx = 1; $idx < @$segments; ++$idx) {
+  my $seg = $segments->[$idx];
+  my $call = _parse_fluent_call_segment(
+   $seg->{text},
+   $start + $seg->{start},
+   $start + $seg->{end},
+   $idx == $#$segments,
+  );
+  return _raw_node($trimmed, $start, $end, 'invalid_fluent_chain')
+   unless ref($call) eq 'HASH';
+  push @calls, $call;
+ }
+
+ return _node(
+  'fluent_chain',
+  $trimmed,
+  $start,
+  $end,
+  receiver => $receiver,
+  calls => \@calls,
+ )
+}
+
+sub _parse_fluent_call_segment {
+ my ($text, $start, $end, $allow_bare_zero_arg) = @_;
+ return undef unless defined($text) && length($text);
+
+ if ($allow_bare_zero_arg && $text =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o) {
+  my $bare_call = _parse_method_function_expr("$text()");
+  return undef unless ref($bare_call) eq 'HASH' && defined($bare_call->{method});
+  return {
+   method => $bare_call->{method},
+   source_method => $bare_call->{source_method},
+   args => [],
+   source => $text,
+   source_span => _span($start, $end),
+  }
+ }
+
+ my $call = _parse_method_function_expr($text, 1);
+ if (ref($call) eq 'HASH' && defined($call->{method})) {
+  my $open_idx = index($text, '(');
+  return undef if $open_idx < 0;
+  my $payload = substr($text, $open_idx + 1, length($text) - $open_idx - 2);
+  my @args = _parse_arg_exprs($payload, $start + $open_idx + 1, '.' . $call->{method});
+  return {
+   method => $call->{method},
+   source_method => $call->{source_method},
+   args => \@args,
+   source => $text,
+   source_span => _span($start, $end),
+  }
+ }
+
+ my $attached = _split_attached_block_expr($text);
+ return undef unless ref($attached) eq 'HASH';
+
+ my ($head_trimmed, $head_start) = _trim_with_offsets($attached->{head}, $start);
+ return undef unless length($head_trimmed);
+ $call = _parse_method_function_expr($head_trimmed, 1);
+ return undef unless ref($call) eq 'HASH' && defined($call->{method});
+ my $open_idx = index($head_trimmed, '(');
+ return undef if $open_idx < 0;
+ my $payload = substr($head_trimmed, $open_idx + 1, length($head_trimmed) - $open_idx - 2);
+ my @args = _parse_arg_exprs($payload, $head_start + $open_idx + 1, '.' . $call->{method});
+
+ my $block_start = $start + $attached->{open_idx};
+ my $block_end = $start + $attached->{close_idx} + 1;
+ my $block_source = substr($text, $attached->{open_idx}, $attached->{close_idx} - $attached->{open_idx} + 1);
+ my $block = parse_action_block($attached->{body}, { base_start => $block_start + 1 });
+ push @args, _node('block_value', $block_source, $block_start, $block_end, block => $block);
+
+ return {
+  method => $call->{method},
+  source_method => $call->{source_method},
+  args => \@args,
+  source => $text,
+  source_span => _span($start, $end),
+  trailing_block_arg => 1,
+  receiver_trailing_block_arg => 1,
+  trailing_block_source_span => _span($block_start, $block_end),
+ }
+}
+
+sub _split_top_level_fluent_segments {
+ my ($text) = @_;
+ my @segments;
+ my $segment_start = 0;
+ my $len = length($text);
+ my $state = _new_scan_state();
+ for (my $idx = 0; $idx < $len; ++$idx) {
+  my $ch = substr($text, $idx, 1);
+  if (_consume_scan_char($state, $text, $idx, $ch)) {
+   next;
+  }
+  next unless $ch eq '.';
+  next unless _scan_is_top_level($state);
+  if ($idx > 0 && $idx + 1 < $len) {
+   my $prev = substr($text, $idx - 1, 1);
+   my $next = substr($text, $idx + 1, 1);
+   next if $prev =~ /\d/o && $next =~ /\d/o;
+  }
+  my $segment = substr($text, $segment_start, $idx - $segment_start);
+  my ($trimmed, $seg_start, $seg_end) = _trim_with_offsets($segment, $segment_start);
+  push @segments, { text => $trimmed, start => $seg_start, end => $seg_end };
+  $segment_start = $idx + 1;
+ }
+ return undef unless @segments;
+ my $segment = substr($text, $segment_start);
+ my ($trimmed, $seg_start, $seg_end) = _trim_with_offsets($segment, $segment_start);
+ push @segments, { text => $trimmed, start => $seg_start, end => $seg_end };
+ return \@segments
+}
+
+sub _find_top_level_open_brace {
+ my ($text, $start_pos) = @_;
+ return undef unless defined $text;
+ $start_pos = 0 unless defined $start_pos;
+ my $len = length($text);
+ my $state = _new_scan_state();
+
+ for (my $idx = 0; $idx < $len; ++$idx) {
+  my $ch = substr($text, $idx, 1);
+  if (_consume_quote_only_scan_char($state, $text, $idx, $ch)) {
+   next;
+  }
+  return $idx
+   if $idx >= $start_pos && $ch eq '{' && _scan_is_top_level($state);
+  if ($ch eq '(') { ++$state->{paren_depth}; next; }
+  if ($ch eq ')') { --$state->{paren_depth} if $state->{paren_depth} > 0; next; }
+  if ($ch eq '{') { ++$state->{brace_depth}; next; }
+  if ($ch eq '}') { --$state->{brace_depth} if $state->{brace_depth} > 0; next; }
+  if ($ch eq '[') { ++$state->{bracket_depth}; next; }
+  if ($ch eq ']') { --$state->{bracket_depth} if $state->{bracket_depth} > 0; next; }
+ }
+ return undef
+}
+
+sub _outer_delimiter_is_balanced {
+ my ($text, $open, $close) = @_;
+ return 0 unless defined($text) && length($text) >= 2;
+ return 0 unless substr($text, 0, 1) eq $open && substr($text, -1, 1) eq $close;
+ my $match = _find_matching_delim($text, 0, $open, $close);
+ return defined($match) && $match == length($text) - 1 ? 1 : 0
+}
+
+sub _find_matching_delim {
+ my ($text, $open_idx, $open, $close) = @_;
+ my $len = length($text);
+ my $depth = 0;
+ my $state = _new_scan_state();
+ for (my $idx = $open_idx; $idx < $len; ++$idx) {
+  my $ch = substr($text, $idx, 1);
+  if ($idx == $open_idx) {
+   return undef unless $ch eq $open;
+   ++$depth;
+   next;
+  }
+  if (_consume_quote_only_scan_char($state, $text, $idx, $ch)) {
+   next;
+  }
+  if ($ch eq $open) {
+   ++$depth;
+   next;
+  }
+  if ($ch eq $close) {
+   --$depth if $depth > 0;
+   return $idx if $depth == 0;
+   next;
+  }
+ }
+ return undef
+}
+
+sub _has_top_level_fat_arrow {
+ my ($text) = @_;
+ return defined(_find_top_level_fat_arrow($text)) ? 1 : 0
+}
+
+sub _has_top_level_hash_pair_separator {
+ my ($text) = @_;
+ return defined(_find_top_level_hash_pair_separator($text)) ? 1 : 0
+}
+
+sub _find_top_level_hash_pair_separator {
+ my ($text) = @_;
+ return undef unless defined $text;
+ my $state = _new_scan_state();
+ my $len = length($text);
+ for (my $idx = 0; $idx < $len; ++$idx) {
+  my $ch = substr($text, $idx, 1);
+  if (_consume_scan_char($state, $text, $idx, $ch)) {
+   next;
+  }
+  next unless _scan_is_top_level($state);
+  if ($ch eq '=' && $idx + 1 < $len && substr($text, $idx, 2) eq '=>') {
+   return { idx => $idx, length => 2, token => '=>' };
+  }
+  if ($ch eq ':') {
+   my $prev = $idx > 0 ? substr($text, $idx - 1, 1) : '';
+   my $next = $idx + 1 < $len ? substr($text, $idx + 1, 1) : '';
+   next if $prev eq ':' || $next eq ':';
+   return { idx => $idx, length => 1, token => ':' };
+  }
+ }
+ return undef
+}
+
+sub _find_top_level_fat_arrow {
+ my ($text) = @_;
+ return _find_top_level_token($text, '=>')
+}
+
+sub _find_top_level_assignment_eq {
+ my ($text) = @_;
+ my $state = _new_scan_state();
+ my $len = length($text);
+ for (my $idx = 0; $idx < $len; ++$idx) {
+  my $ch = substr($text, $idx, 1);
+  if (_consume_scan_char($state, $text, $idx, $ch)) {
+   next;
+  }
+  next unless $ch eq '=';
+  next unless _scan_is_top_level($state);
+  my $prev = $idx > 0 ? substr($text, $idx - 1, 1) : '';
+  my $next = $idx + 1 < $len ? substr($text, $idx + 1, 1) : '';
+  next if $next eq '>' || $next eq '=';
+  next if $prev eq '<' || $prev eq '>' || $prev eq '!' || $prev eq '=';
+  return $idx;
+ }
+ return undef
+}
+
+sub _find_top_level_token {
+ my ($text, $token) = @_;
+ return undef unless defined($text) && defined($token) && length($token);
+ my $state = _new_scan_state();
+ my $len = length($text);
+ my $token_len = length($token);
+ for (my $idx = 0; $idx <= $len - $token_len; ++$idx) {
+  my $ch = substr($text, $idx, 1);
+  if (_consume_scan_char($state, $text, $idx, $ch)) {
+   next;
+  }
+  next unless _scan_is_top_level($state);
+  return $idx if substr($text, $idx, $token_len) eq $token;
+ }
+ return undef
+}
+
+sub _new_scan_state {
+ return {
+  paren_depth => 0,
+  brace_depth => 0,
+  bracket_depth => 0,
+  in_single_quote => 0,
+  in_double_quote => 0,
+  in_slash_quote => 0,
+  escape_next => 0,
+  slash_escape_next => 0,
+ }
+}
+
+sub _scan_is_top_level {
+ my ($state) = @_;
+ return $state->{paren_depth} == 0 && $state->{brace_depth} == 0 && $state->{bracket_depth} == 0
+}
+
+sub _consume_quote_only_scan_char {
+ my ($state, $text, $idx, $ch) = @_;
+ if ($state->{in_slash_quote}) {
+  if ($state->{slash_escape_next}) { $state->{slash_escape_next} = 0; }
+  elsif ($ch eq '\\') { $state->{slash_escape_next} = 1; }
+  elsif ($ch eq '/') { $state->{in_slash_quote} = 0; }
+  return 1;
+ }
+ if ($state->{in_single_quote}) {
+  if ($state->{escape_next}) { $state->{escape_next} = 0; }
+  elsif ($ch eq '\\') { $state->{escape_next} = 1; }
+  elsif ($ch eq "'") { $state->{in_single_quote} = 0; }
+  return 1;
+ }
+ if ($state->{in_double_quote}) {
+  if ($state->{escape_next}) { $state->{escape_next} = 0; }
+  elsif ($ch eq '\\') { $state->{escape_next} = 1; }
+  elsif ($ch eq '"') { $state->{in_double_quote} = 0; }
+  return 1;
+ }
+ if ($ch eq "'") {
+  $state->{in_single_quote} = 1;
+  return 1;
+ }
+ if ($ch eq '"') {
+  $state->{in_double_quote} = 1;
+  return 1;
+ }
+ if ($ch eq '/') {
+  return 0 if _looks_like_slash_symbol_call_at($text, $idx);
+  my $prefix = substr($text, 0, $idx);
+  $prefix =~ s/\s+$//o;
+  if (!length($prefix) || substr($prefix, -1, 1) =~ /[\(\[,=>]/o) {
+   $state->{in_slash_quote} = 1;
+   $state->{slash_escape_next} = 0;
+   return 1;
+  }
+ }
+ return 0
+}
+
+sub _consume_scan_char {
+ my ($state, $text, $idx, $ch) = @_;
+ return 1 if _consume_quote_only_scan_char($state, $text, $idx, $ch);
+ if ($ch eq '(') { ++$state->{paren_depth}; return 1; }
+ if ($ch eq ')') { --$state->{paren_depth} if $state->{paren_depth} > 0; return 1; }
+ if ($ch eq '{') { ++$state->{brace_depth}; return 1; }
+ if ($ch eq '}') { --$state->{brace_depth} if $state->{brace_depth} > 0; return 1; }
+ if ($ch eq '[') { ++$state->{bracket_depth}; return 1; }
+ if ($ch eq ']') { --$state->{bracket_depth} if $state->{bracket_depth} > 0; return 1; }
+ return 0
+}
+
+package LinkedSpec::ActionIR::AST::Parser::Diagnostic;
+
+use overload '""' => sub { return $_[0]{message} // $_[0]{code} // 'action parse failed' }, fallback => 1;
+
+1;

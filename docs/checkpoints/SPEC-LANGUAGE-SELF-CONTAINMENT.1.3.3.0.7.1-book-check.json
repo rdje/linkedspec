@@ -1,0 +1,57 @@
+{
+  "owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1",
+  "result": "PASS",
+  "examples": [
+    {
+      "id": "assignment_raw",
+      "source_sha256": "1781521529612cb4c4be6c275a0c421919dcdf1c8007d596838cdb8929185314"
+    },
+    {
+      "id": "assignment_canonical",
+      "source_sha256": "4203289fbde569a9b9182dab3b3345c429ffae7e5e9ac2f19b796bae1e6471ce"
+    },
+    {
+      "id": "codeblock_body_raw",
+      "source_sha256": "a8e70651bdc001eaba8ace52d855406f9eea49448145f3de6028d7dcaf7d8cb4"
+    },
+    {
+      "id": "comment_data",
+      "source_sha256": "c021fbee825187c1a68d27ba2da930301a21753d8199bf6a6bbf746322bff73f"
+    },
+    {
+      "id": "repeated_raw",
+      "source_sha256": "e01ab6c3b51ef0cbb2115bc03dbe00688b413ad837770438b2c6aca1a13e32c3"
+    },
+    {
+      "id": "blind_edge_raw",
+      "source_sha256": "3237e56c9310ec45c62a96bd5190ef8d642b6f5104f17ecfb7d09e715638b7da"
+    },
+    {
+      "id": "bridge_keyword_deferred",
+      "source_sha256": "c487a516f0fb667d437296a24ea81d8ca61de1d1269bc1f63481e85a9bcc8a32"
+    },
+    {
+      "id": "bridge_keyword_effects",
+      "source_sha256": "caa3fc7013c4d8e53d5fbd05cc09c6def2009e018e1ea5b25ebe31980e1e0dcf"
+    },
+    {
+      "id": "mark",
+      "source_sha256": "646ac571e7bc56aac38298fc273b7e88cfd3521f6060e80fdc64b6fbe1d1e3f4"
+    },
+    {
+      "id": "emit_context_canonical_action_ir_lowers_call_wrappers_without_raw_fallback",
+      "source_sha256": "2a0728323fe79cc7db02d9be9da91e6bd2776e4e5ef92ea5e055ec4dae19d6aa"
+    },
+    {
+      "id": "method_empty_action_return_with_leading_space_args_stays_balanced",
+      "source_sha256": "1358d40df84bc1fc20fd7ec87201def21b8ffcb12f51ce5f4c724a0beafb95e7"
+    },
+    {
+      "id": "spec_format_terse_3_3_3_mutation_assignment_expression_values",
+      "source_sha256": "482ad12537cc7f2bb4b03e64dbd46f6e94a49b1fb929771753cf41a033d57224"
+    }
+  ],
+  "source": "docs/linkedspec-book/src/dsl/actionir-lowering-mental-model.md",
+  "source_sha256": "e57b68d225f08447347c3796c2bae74c3192851a19439b8f59ab63893b431b43",
+  "limits": "Twelve exact measured source identities and rendered reporting/provenance teaching; two keyword controls are typed failures, not syntax admission. No other-backend or complete composed execution admission."
+}
