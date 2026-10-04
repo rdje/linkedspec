@@ -14,6 +14,32 @@ use Scalar::Util ();
 
 our $_source_event_recorder;
 
+# Called only by a provenance-aware producer. Keep the ordinary split callback
+# at its existing call site when recording is inactive.
+sub _split_scanner_statements_with_source_frames {
+ my $source = $_[1];
+ LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, 'LinkedSpec::ActionIR::StatementSplit::Core');
+ my $result = LinkedSpec::ActionIR::StatementSplit::Core::_split_with_source_frames(@_);
+ # A custom callback can split a different string. Its returned events remain
+ # valid callback results, but that string cannot authorize action coordinates.
+ for my $frame (@{$result->{source_frames}}) {
+  $frame = undef unless defined($source) && !ref($source)
+   && defined($frame) && $frame->{source} eq $source;
+ }
+ return $result
+}
+
+# A later trim callback may transform the statement. Preserve its event and
+# decline an origin unless the exact original frame still describes its raw.
+sub _record_statement_source_event {
+ my ($event, $frame) = @_;
+ return $event unless ref($_source_event_recorder) eq 'CODE'
+  && ref($frame) eq 'HASH' && defined($event->{raw}) && !ref($event->{raw})
+  && $event->{raw} eq $frame->{raw};
+ return _record_scanned_source_event($event, $frame->{source},
+  $frame->{source_span}{start}, $frame->{source_span}{end})
+}
+
 # A producer records the exact match before passing its event to the caller.
 # Ordinary scans return the same event object without collecting source data.
 sub _record_scanned_source_event {

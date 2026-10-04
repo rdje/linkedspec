@@ -1,0 +1,39 @@
+{
+  "git_inputs": 3811,
+  "supplied_inputs": 3813,
+  "fixture_groups": 29,
+  "before_failed_groups": [
+    29
+  ],
+  "after_failed_groups": [],
+  "probe_pairs": 3,
+  "controls": [
+    {
+      "name": "promote partial guard",
+      "rejected": true,
+      "reason": "complete exact guard report"
+    },
+    {
+      "name": "forge guard producer",
+      "rejected": true,
+      "reason": "actual guard producer"
+    },
+    {
+      "name": "erase guard RED",
+      "rejected": true,
+      "reason": "actual guard fixture exit"
+    },
+    {
+      "name": "erase source boundary",
+      "rejected": true,
+      "reason": "actual guard input boundaries"
+    },
+    {
+      "name": "forge probe stdout",
+      "rejected": true,
+      "reason": "channel bytes"
+    }
+  ],
+  "instrument_sha256": "d96b0be6450cf5c64a2e05ebee6443bfcf12f15a3375c50912f9bb2dee7c3b3e",
+  "scope": "Two complete fixed-input guard boundaries; before uses exact initial producers, after final guard. Only ScannerCore bytes differ; exploratory live probe is separate."
+}

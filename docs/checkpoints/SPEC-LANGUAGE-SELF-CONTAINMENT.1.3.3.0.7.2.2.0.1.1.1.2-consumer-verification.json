@@ -1,0 +1,58 @@
+{
+  "revision": "aef9e551c7e563985c79c53fcba574ee5df8d509",
+  "suites": 8,
+  "top_level_tests": 1148,
+  "plans": {
+    "t/phase0_regression.t": 1034,
+    "t/actionir_helper_source_provenance.t": 13,
+    "t/actionir_basic_regex_source_provenance.t": 10,
+    "t/actionir_ast_parser.t": 23,
+    "t/actionir_raw_dependency_provenance.t": 6,
+    "t/actionir_nested_block_source_spans.t": 20,
+    "t/actionir_raw_dependency_compatibility.t": 27,
+    "t/canonical_event_occurrence_order.t": 15
+  },
+  "controls": [
+    {
+      "name": "omit suite",
+      "rejected": true,
+      "reason": "exact consumer population"
+    },
+    {
+      "name": "promote partial",
+      "rejected": true,
+      "reason": "complete exact consumer boundary"
+    },
+    {
+      "name": "forge producer",
+      "rejected": true,
+      "reason": "actual consumer instrument"
+    },
+    {
+      "name": "forge source manifest",
+      "rejected": true,
+      "reason": "actual consumer input manifest"
+    },
+    {
+      "name": "forge source tree",
+      "rejected": true,
+      "reason": "actual consumer input tree"
+    },
+    {
+      "name": "erase guard",
+      "rejected": true,
+      "reason": "consumer input guards"
+    },
+    {
+      "name": "forge actual exit",
+      "rejected": true,
+      "reason": "actual consumer exit"
+    },
+    {
+      "name": "forge actual stream",
+      "rejected": true,
+      "reason": "channel bytes"
+    }
+  ],
+  "instrument_sha256": "b1536b37c373d66497d6926cc19eb6831a54f0ff0e05ed170a226aa3eba3325d"
+}

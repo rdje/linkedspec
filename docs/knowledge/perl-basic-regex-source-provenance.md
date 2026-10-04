@@ -7,7 +7,7 @@ answers:
   - "does basic helper provenance change public events or callback dependencies"
   - "which basic scanner statement provenance work remains"
 date: 2026-10-04
-status: nine regex contracts implemented; statement framing and family composition pending
+status: nine regex contracts implemented; statement frames/hooks implemented; family composition pending
 tags: [perl, actionir, scanner, source-provenance, unicode, source-span]
 evidence: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.0 retains the actual complete ten-group frozen-owner RED (nine failures, empty-result guard green) and unchanged ten-group GREEN. Independent authored Unicode-scalar positions cover quoted and repeated equal calls for all nine regex contracts. The private/compiler result is historical at3fc589f84. Original passing consumer channels retain their disclosed input/falsification gaps in the exact pre-supersession record. Source-bound .1.1.3.1 remeasurement supersedes broader acceptance; it does not recover the original live-document reads."
 reverify:
@@ -35,7 +35,7 @@ The preceding three-contract channel proof is historical at80ecf47f258a7f23a5959
 Its current permanent guard suite remains separate. P1 selected consumer/render input-closure repair `.1.1.3` is complete through
 source-bound1337-group composition under `.1.1.3.1`; its original disclosed
 observation remains preserved and does not widen the private/compiler result. Eleven basic statement
-contracts still need exact producer-side statement frames under `.1.1.1`, then
+contracts now have exact splitter frames under `.1.1.1.1` and producer hooks under `.1.1.1.2`; canonical family acceptance `.1.1.1.3` is next, then
 `.1.1.2` independently composes the family. Remaining scanner producers,
 membership/replacement, recurring canonical admission, marker provenance and
 comments retain their existing owners. No public event schema or backend admission

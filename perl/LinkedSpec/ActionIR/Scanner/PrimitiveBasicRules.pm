@@ -114,7 +114,13 @@ while ($code =~ /\breturn\s+call\s*\(\s*(?<callee>\w+)\s*\)/g) {
 sub _scan_contract_return_bare {
  my ($code) = @_;
  my @events;
-foreach my $statement (@{_split_action_ir_statements($code)}) {
+ my $framed = ref($LinkedSpec::ActionIR::ScannerCore::_source_event_recorder) eq 'CODE'
+  ? LinkedSpec::ActionIR::ScannerCore::_split_scanner_statements_with_source_frames(\&_split_action_ir_statements, $code)
+  : undef;
+ my $statements = $framed ? $framed->{statements} : _split_action_ir_statements($code);
+ my $statement_index = 0;
+foreach my $statement (@$statements) {
+ my $frame = $framed ? $framed->{source_frames}[$statement_index++] : undef;
  my $trimmed = _trim_action_ir_value($statement);
  next unless defined($trimmed) && length($trimmed);
  next unless $trimmed =~ /^return(?:\s+.+)?$/o;
@@ -124,7 +130,7 @@ foreach my $statement (@{_split_action_ir_statements($code)}) {
  my $payload = $trimmed;
  $payload =~ s/^return//o;
  $payload = _trim_action_ir_value($payload // '');
- push @events, {raw => $trimmed, args => {payload => $payload}};
+ push @events, LinkedSpec::ActionIR::ScannerCore::_record_statement_source_event({raw => $trimmed, args => {payload => $payload}}, $frame);
 }
  return \@events
 }
@@ -132,14 +138,20 @@ foreach my $statement (@{_split_action_ir_statements($code)}) {
 sub _scan_contract_exit_bare {
  my ($code) = @_;
  my @events;
-foreach my $statement (@{_split_action_ir_statements($code)}) {
+ my $framed = ref($LinkedSpec::ActionIR::ScannerCore::_source_event_recorder) eq 'CODE'
+  ? LinkedSpec::ActionIR::ScannerCore::_split_scanner_statements_with_source_frames(\&_split_action_ir_statements, $code)
+  : undef;
+ my $statements = $framed ? $framed->{statements} : _split_action_ir_statements($code);
+ my $statement_index = 0;
+foreach my $statement (@$statements) {
+ my $frame = $framed ? $framed->{source_frames}[$statement_index++] : undef;
  my $trimmed = _trim_action_ir_value($statement);
  next unless defined($trimmed) && length($trimmed);
  next unless $trimmed =~ /^exit(?:\b|(?=\())/o;
  my $payload = $trimmed;
  $payload =~ s/^exit//o;
  $payload = _trim_action_ir_value($payload // '');
- push @events, {raw => $trimmed, args => {payload => $payload}};
+ push @events, LinkedSpec::ActionIR::ScannerCore::_record_statement_source_event({raw => $trimmed, args => {payload => $payload}}, $frame);
 }
  return \@events
 }
@@ -147,11 +159,17 @@ foreach my $statement (@{_split_action_ir_statements($code)}) {
 sub _scan_contract_linecount_prefix_newline_matches {
  my ($code) = @_;
  my @events;
-foreach my $statement (@{_split_action_ir_statements($code)}) {
+ my $framed = ref($LinkedSpec::ActionIR::ScannerCore::_source_event_recorder) eq 'CODE'
+  ? LinkedSpec::ActionIR::ScannerCore::_split_scanner_statements_with_source_frames(\&_split_action_ir_statements, $code)
+  : undef;
+ my $statements = $framed ? $framed->{statements} : _split_action_ir_statements($code);
+ my $statement_index = 0;
+foreach my $statement (@$statements) {
+ my $frame = $framed ? $framed->{source_frames}[$statement_index++] : undef;
  my $trimmed = _trim_action_ir_value($statement);
  next unless defined($trimmed) && length($trimmed);
  next unless $trimmed =~ /^my\s+\@(?<target>\w+)\s*=\s*substr\(\s*\$\$STRING\s*,\s*0\s*,\s*(?<upto>(?:[^()]++|(?<P>\((?:[^()]++|(?&P))*\)))+)\)\s*=~\s*\/\\n\/g$/o;
- push @events, {raw => $trimmed, args => {target => $+{target}, upto => _trim_action_ir_value($+{upto})}};
+ push @events, LinkedSpec::ActionIR::ScannerCore::_record_statement_source_event({raw => $trimmed, args => {target => $+{target}, upto => _trim_action_ir_value($+{upto})}}, $frame);
 }
  return \@events
 }
@@ -159,11 +177,17 @@ foreach my $statement (@{_split_action_ir_statements($code)}) {
 sub _scan_contract_print_capture_substr {
  my ($code) = @_;
  my @events;
-foreach my $statement (@{_split_action_ir_statements($code)}) {
+ my $framed = ref($LinkedSpec::ActionIR::ScannerCore::_source_event_recorder) eq 'CODE'
+  ? LinkedSpec::ActionIR::ScannerCore::_split_scanner_statements_with_source_frames(\&_split_action_ir_statements, $code)
+  : undef;
+ my $statements = $framed ? $framed->{statements} : _split_action_ir_statements($code);
+ my $statement_index = 0;
+foreach my $statement (@$statements) {
+ my $frame = $framed ? $framed->{source_frames}[$statement_index++] : undef;
  my $trimmed = _trim_action_ir_value($statement);
  next unless defined($trimmed) && length($trimmed);
  next unless $trimmed =~ /^print\s*"<"\s*\.\s*substr\(\s*\$\$STRING\s*,\s*\$IPOS\s*,\s*\$LSPOS\s*-\s*\$IPOS\s*-\s*1\s*\)\s*\.\s*">\\n"\s*$/o;
- push @events, {raw => $trimmed, args => {source => 'capture_substr'}};
+ push @events, LinkedSpec::ActionIR::ScannerCore::_record_statement_source_event({raw => $trimmed, args => {source => 'capture_substr'}}, $frame);
 }
  return \@events
 }
@@ -171,12 +195,18 @@ foreach my $statement (@{_split_action_ir_statements($code)}) {
 sub _scan_contract_my_declare_bare {
  my ($code) = @_;
  my @events;
-foreach my $statement (@{_split_action_ir_statements($code)}) {
+ my $framed = ref($LinkedSpec::ActionIR::ScannerCore::_source_event_recorder) eq 'CODE'
+  ? LinkedSpec::ActionIR::ScannerCore::_split_scanner_statements_with_source_frames(\&_split_action_ir_statements, $code)
+  : undef;
+ my $statements = $framed ? $framed->{statements} : _split_action_ir_statements($code);
+ my $statement_index = 0;
+foreach my $statement (@$statements) {
+ my $frame = $framed ? $framed->{source_frames}[$statement_index++] : undef;
  my $trimmed = _trim_action_ir_value($statement);
  next unless defined($trimmed) && length($trimmed);
  next unless $trimmed =~ /^my\s+(?<sigil>[\$\@\%])(?<name>\w+)$/o;
  my $declaration_type = $+{sigil} eq '$' ? 'scalar' : $+{sigil} eq '@' ? 'array' : 'hash';
- push @events, {raw => $trimmed, args => {declaration_type => $declaration_type, names => [$+{name}], scope => 'my'}};
+ push @events, LinkedSpec::ActionIR::ScannerCore::_record_statement_source_event({raw => $trimmed, args => {declaration_type => $declaration_type, names => [$+{name}], scope => 'my'}}, $frame);
 }
  return \@events
 }
@@ -184,11 +214,17 @@ foreach my $statement (@{_split_action_ir_statements($code)}) {
 sub _scan_contract_assign_match_my {
  my ($code) = @_;
  my @events;
-foreach my $statement (@{_split_action_ir_statements($code)}) {
+ my $framed = ref($LinkedSpec::ActionIR::ScannerCore::_source_event_recorder) eq 'CODE'
+  ? LinkedSpec::ActionIR::ScannerCore::_split_scanner_statements_with_source_frames(\&_split_action_ir_statements, $code)
+  : undef;
+ my $statements = $framed ? $framed->{statements} : _split_action_ir_statements($code);
+ my $statement_index = 0;
+foreach my $statement (@$statements) {
+ my $frame = $framed ? $framed->{source_frames}[$statement_index++] : undef;
  my $trimmed = _trim_action_ir_value($statement);
  next unless defined($trimmed) && length($trimmed);
  next unless $trimmed =~ /^my\s+\$(?<target>\w+)\s*=\s*\$(?<source>CAPTURE|IMATCH|LMATCH)$/o;
- push @events, {raw => $trimmed, args => {target => $+{target}, source => $+{source}, scope => 'my'}};
+ push @events, LinkedSpec::ActionIR::ScannerCore::_record_statement_source_event({raw => $trimmed, args => {target => $+{target}, source => $+{source}, scope => 'my'}}, $frame);
 }
  return \@events
 }
@@ -196,21 +232,27 @@ foreach my $statement (@{_split_action_ir_statements($code)}) {
 sub _scan_contract_destructure_imatch_list_my {
  my ($code) = @_;
  my @events;
-foreach my $statement (@{_split_action_ir_statements($code)}) {
+ my $framed = ref($LinkedSpec::ActionIR::ScannerCore::_source_event_recorder) eq 'CODE'
+  ? LinkedSpec::ActionIR::ScannerCore::_split_scanner_statements_with_source_frames(\&_split_action_ir_statements, $code)
+  : undef;
+ my $statements = $framed ? $framed->{statements} : _split_action_ir_statements($code);
+ my $statement_index = 0;
+foreach my $statement (@$statements) {
+ my $frame = $framed ? $framed->{source_frames}[$statement_index++] : undef;
  my $trimmed = _trim_action_ir_value($statement);
  next unless defined($trimmed) && length($trimmed);
  next unless $trimmed =~ /^my\s*\((?<targets>[^()]+)\)\s*=\s*\@IMATCH_LIST$/o;
  my @targets = grep { defined($_) && length($_) } map { _trim_action_ir_value($_) } split /\s*,\s*/o, $+{targets};
  next unless @targets;
  next if grep { $_ !~ /^\$\w+$/o } @targets;
- push @events, {
+ push @events, LinkedSpec::ActionIR::ScannerCore::_record_statement_source_event({
   raw  => $trimmed,
   args => {
    targets => [map { my $name = $_; $name =~ s/^\$//o; $name } @targets],
    source  => 'IMATCH_LIST',
    scope   => 'my',
   },
- };
+ }, $frame);
 }
  return \@events
 }
@@ -218,11 +260,17 @@ foreach my $statement (@{_split_action_ir_statements($code)}) {
 sub _scan_contract_regex_subst_assignment {
  my ($code) = @_;
  my @events;
-foreach my $statement (@{_split_action_ir_statements($code)}) {
+ my $framed = ref($LinkedSpec::ActionIR::ScannerCore::_source_event_recorder) eq 'CODE'
+  ? LinkedSpec::ActionIR::ScannerCore::_split_scanner_statements_with_source_frames(\&_split_action_ir_statements, $code)
+  : undef;
+ my $statements = $framed ? $framed->{statements} : _split_action_ir_statements($code);
+ my $statement_index = 0;
+foreach my $statement (@$statements) {
+ my $frame = $framed ? $framed->{source_frames}[$statement_index++] : undef;
  my $trimmed = _trim_action_ir_value($statement);
  next unless defined($trimmed) && length($trimmed);
  next unless $trimmed =~ /^\$(?<target>\w+)\s*=~\s*s\/(?<pattern>(?:\\.|[^\/])*)\/(?<replacement>(?:\\.|[^\/])*)\/(?<flags>[a-z]*)$/o;
- push @events, {raw => $trimmed, args => {target => $+{target}, pattern => '/'.$+{pattern}.'/', replacement => '/'.$+{replacement}.'/', flags => ($+{flags} // ''), scope => undef}};
+ push @events, LinkedSpec::ActionIR::ScannerCore::_record_statement_source_event({raw => $trimmed, args => {target => $+{target}, pattern => '/'.$+{pattern}.'/', replacement => '/'.$+{replacement}.'/', flags => ($+{flags} // ''), scope => undef}}, $frame);
 }
  return \@events
 }
@@ -230,11 +278,17 @@ foreach my $statement (@{_split_action_ir_statements($code)}) {
 sub _scan_contract_next_bare {
  my ($code) = @_;
  my @events;
-foreach my $statement (@{_split_action_ir_statements($code)}) {
+ my $framed = ref($LinkedSpec::ActionIR::ScannerCore::_source_event_recorder) eq 'CODE'
+  ? LinkedSpec::ActionIR::ScannerCore::_split_scanner_statements_with_source_frames(\&_split_action_ir_statements, $code)
+  : undef;
+ my $statements = $framed ? $framed->{statements} : _split_action_ir_statements($code);
+ my $statement_index = 0;
+foreach my $statement (@$statements) {
+ my $frame = $framed ? $framed->{source_frames}[$statement_index++] : undef;
  my $trimmed = _trim_action_ir_value($statement);
  next unless defined($trimmed) && length($trimmed);
  next unless $trimmed =~ /^next\s+\w+$/o;
- push @events, {raw => $trimmed, args => {}};
+ push @events, LinkedSpec::ActionIR::ScannerCore::_record_statement_source_event({raw => $trimmed, args => {}}, $frame);
 }
  return \@events
 }
@@ -242,11 +296,17 @@ foreach my $statement (@{_split_action_ir_statements($code)}) {
 sub _scan_contract_ref_field_assign {
  my ($code) = @_;
  my @events;
-foreach my $statement (@{_split_action_ir_statements($code)}) {
+ my $framed = ref($LinkedSpec::ActionIR::ScannerCore::_source_event_recorder) eq 'CODE'
+  ? LinkedSpec::ActionIR::ScannerCore::_split_scanner_statements_with_source_frames(\&_split_action_ir_statements, $code)
+  : undef;
+ my $statements = $framed ? $framed->{statements} : _split_action_ir_statements($code);
+ my $statement_index = 0;
+foreach my $statement (@$statements) {
+ my $frame = $framed ? $framed->{source_frames}[$statement_index++] : undef;
  my $trimmed = _trim_action_ir_value($statement);
  next unless defined($trimmed) && length($trimmed);
  next unless $trimmed =~ /^(?<decl>my\s+)?\$(?<target>\w+)\s*=\s*\$(?<source>\w+)\s*->\s*(?<path>(?:\{[^{}]+\}|\[[^\[\]]+\])(?:\s*(?:\{[^{}]+\}|\[[^\[\]]+\]))*)$/o;
- push @events, {raw => $trimmed, args => {target => $+{target}, source => $+{source}, path => _trim_action_ir_value($+{path}), scope => ($+{decl} ? 'my' : 'existing')}};
+ push @events, LinkedSpec::ActionIR::ScannerCore::_record_statement_source_event({raw => $trimmed, args => {target => $+{target}, source => $+{source}, path => _trim_action_ir_value($+{path}), scope => ($+{decl} ? 'my' : 'existing')}}, $frame);
 }
  return \@events
 }
@@ -254,7 +314,13 @@ foreach my $statement (@{_split_action_ir_statements($code)}) {
 sub _scan_contract_position_tracking {
  my ($code) = @_;
  my @events;
-foreach my $statement (@{_split_action_ir_statements($code)}) {
+ my $framed = ref($LinkedSpec::ActionIR::ScannerCore::_source_event_recorder) eq 'CODE'
+  ? LinkedSpec::ActionIR::ScannerCore::_split_scanner_statements_with_source_frames(\&_split_action_ir_statements, $code)
+  : undef;
+ my $statements = $framed ? $framed->{statements} : _split_action_ir_statements($code);
+ my $statement_index = 0;
+foreach my $statement (@$statements) {
+ my $frame = $framed ? $framed->{source_frames}[$statement_index++] : undef;
  my $trimmed = _trim_action_ir_value($statement);
  next unless defined($trimmed) && length($trimmed);
  next unless (
@@ -264,7 +330,7 @@ foreach my $statement (@{_split_action_ir_statements($code)}) {
   $trimmed =~ /^push\s+\@\w+\s*,\s*substr\(\s*\$\$STRING\s*,\s*\$last_pos\s*,\s*\$shift\s*\)\s*if\s*\$shift\s*$/o ||
   $trimmed =~ /^push\s+\@\w+\s*,\s*\{[^{}]*substr\(\s*\$\$STRING\s*,\s*\$last_pos\s*,\s*\$shift\s*\)[^{}]*\}\s*if\s*\$shift\s*$/o
  );
- push @events, {raw => $trimmed, args => {category => 'position_tracking'}};
+ push @events, LinkedSpec::ActionIR::ScannerCore::_record_statement_source_event({raw => $trimmed, args => {category => 'position_tracking'}}, $frame);
 }
  return \@events
 }

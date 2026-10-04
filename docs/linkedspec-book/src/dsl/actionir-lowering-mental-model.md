@@ -264,8 +264,7 @@ that private channel: the two call assignments, indexed and unindexed built-in
 child pushes, `return call(...)`, and `entry_slot()`, `gap_span()`, `gap_text()`,
 `gap_kind()`. This includes the existing syntactic matches inside strings; none
 of those matches has yet been classified as executable. Public raw text, arguments,
-lowering and event order remain unchanged. Statement-based compatibility scans
-still need their own source frames.
+lowering and event order remain unchanged. The eleven basic statement scans now use their own original splitter frames.
 
 The statement splitter preserves comments and quoted punctuation in its returned
 text. Its default trim callback removes whitespace at the edges. For example,
@@ -298,9 +297,9 @@ statement matches an independently authored contiguous scalar interval in the
 original input, including Unicode whitespace and CRLF. That bounded observation
 supports producer-side statement spans; it does not establish every possible
 host-language input or transformation by a custom dependency callback. These
-statement producers still have no private origins. Their repair will preserve the
-existing five callbacks and capture occurrence identity at the splitter, rather
-than search the source for equal raw strings. Comment classification, executable
+statement producers had zero private origins at the diagnostic boundary. Their implemented
+hooks retain the existing five callbacks and capture occurrence identity at the splitter,
+without searching the source for equal raw strings. Comment classification, executable
 membership and residual replacement remain subsequent work.
 
 The private splitter now publishes an aligned `source_frames` sidecar for its
@@ -326,8 +325,57 @@ The preserved 28-group fixture fails 25 groups before this private capture and
 passes all 28 afterward. Sixty-six source/seed before-and-after compiler records
 remain identical, while 177 statement frames match the independent original
 scalar intervals. Initial runs and their actual fixture/source boundaries remain
-recoverable. This is a private compiler probe; the eleven statement event producers
-still need hooks connecting these frames to their original event objects.
+recoverable. This is a private compiler probe.
+
+All eleven basic statement event producers now connect those aligned frames to the
+original event objects when private provenance recording is active. Each producer
+captures the occurrence index before filtering a statement, so ignored comments and
+quoted assignments do not shift later positions. It retains the original raw text,
+argument objects, recognition expressions, event order and callback effects. Ordinary
+scans call the existing splitter directly; they add no public source fields.
+
+The covered contracts are:
+
+| Contract | Existing statement family |
+| --- | --- |
+| `return_bare` | Bare return and payload |
+| `exit_bare` | Bare exit and payload |
+| `linecount_prefix_newline_matches` | Newline matches in a prefix substring |
+| `print_capture_substr` | Print the current captured substring |
+| `my_declare_bare` | Bare scalar, array or hash declaration |
+| `assign_match_my` | Assign a capture/match scalar |
+| `destructure_imatch_list_my` | Destructure the match list |
+| `regex_subst_assignment` | Regex substitution assignment |
+| `next_bare` | Named loop continuation |
+| `ref_field_assign` | Assignment from a referenced field path |
+| `position_tracking` | Existing cursor/position bookkeeping forms |
+
+For the same declaration string, with `$scanner_deps` obtained from the ordinary
+Scanner dependency bundle:
+
+```perl
+my $result = LinkedSpec::ActionIR::ScannerCore::_scan_contract_ir_events_with_provenance(
+    {id => 'my_declare_bare'}, 'my $x; my $x;', $scanner_deps
+);
+# source_origins spans: [0, 5), [7, 12)
+```
+
+Each origin contains the complete original source, scalar interval and the exact event
+object in the returned event array. Copied/opaque split arrays and changed entries gain
+no borrowed origins. If a later trim callback changes the raw text, the existing event
+is preserved and its origin is omitted. Nested scans isolate their collectors and restore
+the outer frames. A custom callback that splits a different source also keeps its event,
+but that other string cannot authorize coordinates in the requested action. The private
+bridge snapshots the requested source before the callback and declines foreign frames.
+The original foreign-source probe reproduces one incorrect origin before this guard and
+none afterward; those actual channels and source identities remain separate from the
+initial 28-group captures. The permanent producer fixture preserves 21 failing groups before the
+hooks and passes all 29 afterward, including callback count/argument/error guards.
+Across the 22 authored inputs and three seeds, all 111 emitted origins match independent
+original occurrence intervals; all 177 statement frames and 66 full public compiler
+records remain unchanged. This bounded proof does not classify executable membership,
+repair comment semantics or admit arbitrary host syntax. Canonical statement-family
+acceptance and the wider twenty-contract composition remain separate tasks.
 
 
 These are compiler inspection examples, not recommended parsing actions. Each

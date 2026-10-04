@@ -2225,15 +2225,30 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 - [x] **LOCKSTEP** — Complete58-input final book renders four original examples/five controls, prior28-input claim freezes historically at e614, and Knowledge/task/index/roadmap/resume/live/change/notes/claim/memory/history/diff/doctrine checks accompany the focused landing. Event hooks and canonical family closeout remain separately owned.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.2`
-  Status: `pending`
+  Status: `done`
   Goal: Connect all eleven basic statement event producers to the private splitter frames while preserving original event/argument objects and ordering.
   Dependencies: `.1.1.1.1`
   Owned paths: PrimitiveBasicRules and strictly necessary private scanner bridge; permanent focused tests and fixed-input before/after checkpoint/claim artifacts, book/Knowledge and continuity.
-  Planned verification tier upon activation: focused
-  Planned focused proof: Eleven repeated-contract RED/GREEN groups; all22 diagnosis cases with independent scalar/event identity oracle; before/after full public compiler objects/substitution/diagnostics/dumps, selected complete direct consumers and Phase0, syntax/book/all doctrine checks.
-  Planned canonical boundary: None; private producer hooks; .3 gates family closeout.
-  Planned claim: No pending-task measurement; publish the exact implementation claim record upon activation before landing.
+  Verification tier: `focused`
+  Focused checks: Eleven repeated-contract RED/GREEN groups plus callback/identity/nesting guards; all22 diagnosis cases with independent scalar/event identity oracle; fixed-source before/after full public compiler objects/substitution/diagnostics/dumps, complete direct consumers and Phase0, syntax/book/all doctrine/claim/Knowledge/history checks.
+  Canonical trigger: None; private producer hooks; .3 gates family closeout.
+  Claim verification: `docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.2.json`
+  Activation: Clean aef9e551c7e563985c79c53fcba574ee5df8d509; daily .9 all ten doctrines/post-pointer passed, brief0/Git clean/no jobs confirmed. Knowledge/public frame and regex-channel contracts, PrimitiveBasicRules eleven loop sites, ScannerCore private recorder and five callbacks, permanent direct tests and ActionIR book are understood.
+  Exact ownership: perl/LinkedSpec/ActionIR/Scanner/PrimitiveBasicRules.pm and a strictly necessary ScannerCore private bridge; t/actionir_basic_statement_source_provenance.t, owning checkpoints/claim, current provenance Knowledge/book/continuity and prior current claim historical freezes before their bound inputs change. Fixed input clones live under .linkedspec-data/scratch/basic-statement-provenance.
+  Owned callback-source defect: Confirmed through actual public/private scanner APIs: source my $input; plus a callback splitting my $other; preserves the other declaration event but incorrectly records the foreign string origin. ScannerCore private bridge now snapshots requested source before invoking the callback and declines frames from any other source; returned events remain unchanged. Permanent foreign-source guard also covers equal raw text in a differently prefixed source. Original28-group fixture, both source boundaries/full streams/reviewer and consumer run remain retained before refinement; final29-group same-fixture runs and final consumers establish the guarded boundary. No Core/public callback or recognition change.
+  Verification: PASS; Eleven basic statement producers now retain original event/argument identity and exact private scalar origins. The same29-group fixture is RED21/GREEN0;111 event origins and177 unchanged frames across66 full public/compiler pairs satisfy independent original occurrence intervals. Both main boundaries supply3813 inputs (3811 immutable Git plus two common overlays); only PrimitiveBasicRules/ScannerCore change. A foreign-source callback defect is reproduced and fixed by snapshotting requested source; separate source-fixed29-group guard is RED1/GREEN0 with three probe pairs and five controls. All initial28-group source/fixture/capture/reviewer and pre-guard consumer channels remain separate. Eight final guarded consumers pass1148 complete groups, including Phase01034, with exact manifest/observation/tree/producer bindings and eight controls. Main16, guard5, consumer8 and book5 total34 reason-specific controls; five examples render from58 complete book inputs. Prior cleanup claim freezes at exact aef9 after21 input hashes verify. Canonical family acceptance .3 and wider composition remain separately owned.
   Acceptance: Capture the exact frame at emission, before any nested scan. Keep existing regexes, trim/split call counts, five dependency signatures, public raw/args and order unchanged. Custom/opaque returns never gain invented origins; executable membership remains later.
+
+  Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.2 - retain basic statement source origins`.
+
+## Acceptance Checklist — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.2
+
+- [x] **REPRODUCE / ISSUE** — Full actual LinkedSpec::Get/return_descriptor/dump_parser_source/call_spec_handler_subst records retain original selected events without origins; same29-group fixture observes21 RED groups. Private/public callback probe additionally exposes a canonical array from a different source.
+- [x] **ROOT CAUSE (WHY + WHERE)** — PrimitiveBasicRules eleven statement loops discard original flush frames; ScannerCore's new bridge initially trusts array identity without requested-source authority. Original authored scalar intervals and exact foreign-source RED identify both mechanisms.
+- [x] **FIX** — Capture aligned frame by occurrence index before filtering; retain each original event/args object at emission. Ordinary split callbacks stay direct. Snapshot requested source before private splitting; decline foreign, copied, opaque, changed or later-transformed origins while preserving events and callback effects.
+- [x] **ADDRESSED (verified)** — Main same29-group RED21/GREEN0,111 exact event origins/177 unchanged frames and66 identical public/compiler pairs. Separately fixed same29-group guard RED1/GREEN0 and three literal probe pairs pass;16 main/five guard reason-specific controls reject. Initial source/fixture/execution identities stay recoverable.
+- [x] **NO REGRESSION** — Eight unchanged final consumers complete1148 ordered groups including full Phase01034, exact source manifest/tree/observation/producer bindings, actual full channels and Result: PASS. Eight TAP/source corruption controls reject; original initial consumers remain separately retained.
+- [x] **LOCKSTEP** — Full58-input book renders five examples/five controls; prior21-input cleanup claim freezes at exact aef9. Claims, Knowledge, task/index/roadmap/resume/live/change/notes and memory/history/diff/doctrine gates accompany focused landing. Canonical family acceptance and wider composition remain separately owned.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.3`
   Status: `pending`
@@ -2629,7 +2644,7 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 | 43.4.2.0.1.1.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1` | `active` | Diagnosis complete; private frames, eleven producer hooks and canonical family acceptance separately owned. |
 | 43.4.2.0.1.1.1.0 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.0` | `done` | 66 Toolbox cases/59 spans and37 events per run;52 consumer groups/33 controls/three rendered examples. |
 | 43.4.2.0.1.1.1.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.1` | `done` | Private frames:28 GREEN/177 spans/66 identical compiler pairs,1148 consumer groups and26 controls. |
-| 43.4.2.0.1.1.1.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.2` | `pending` | Eleven producer hooks; unchanged public compiler objects. |
+| 43.4.2.0.1.1.1.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.2` | `done` | Eleven producer hooks:29 GREEN/111 origins/66 identical pairs,1148 guarded consumer groups; canonical .3 next. |
 | 43.4.2.0.1.1.1.3 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.3` | `pending` | Independent family acceptance and exact staged canonical proof. |
 | 43.4.2.0.1.1.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.2` | `pending` | Independent twenty-contract basic family composition. |
 | 43.4.2.0.1.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2` | `pending` | Complete remaining pipeline source provenance before membership. |

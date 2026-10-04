@@ -1,0 +1,31 @@
+{
+  "mode": "before",
+  "command": [
+    "bash",
+    "tools/project_data_run.sh",
+    "env",
+    "PERL5LIB=",
+    "perl",
+    "-Iperl",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.2-foreign-source-probe.pl"
+  ],
+  "exit": 0,
+  "inputs": {
+    "perl/LinkedSpec/ActionIR/ScannerCore.pm": "9f2c4cd113f1ed4160ba55358e7a0947eb84a87a967fcec07c71364e685b73eb",
+    "perl/LinkedSpec/ActionIR/Scanner/PrimitiveBasicRules.pm": "536c9f9127bbfa01ffb26eaa70574104f2cc6da5f2cd3a49041a72a4a51ca1df",
+    "tools/project_data_run.sh": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f",
+    "tools/project_data_env.sh": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.2-foreign-source-capture.py": "ddcf41b0a7ca69371c3cb60520b16b2314898fa4391e154eff1dc9ec9bd2c94b",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.2-foreign-source-probe.pl": "81f59556eae63b8d2738ad054d33f0e59ba90f0e95fd9bdcb2e003de68e5d3df"
+  },
+  "stdout": {
+    "bytes": 1023,
+    "sha256": "fb27621d5cb54653316a4feb67da4892aaef892fabdef383213daa80b12920a3",
+    "gzip_base64": "H4sIAAAAAAAC/5WRQQ7CIBBF95yCTFy6cKsexTTNiERJLBCgmqbp3ZXa2JYONrIifz4zw/st45yDdeqBQQI/8DYKUZMPqYOP0mmQ3qcdr9GD7uqnj8bKRYo7OgzK6DI0tm8NXuBbhO3CrbGS6aixasJNOkgrxbKNF2aYVDVzfzc3g8Pn4OObtH3HkgHgTe2ELI1TV6VXkPTYaCZZWn8DW2WWx0aS+w1vyW8NIUH8w3D+4gikqfQWNY1Q6kss7InsA7qe+26+BpEr+64Htj7flZhSnMzMBPZHVD9CouIpUhx0JFO0+Rj67346pvCVtnU4AuvYCzk/ktT/AwAA"
+  },
+  "stderr": {
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "gzip_base64": "H4sIAAAAAAAC/wMAAAAAAAAAAAA="
+  }
+}

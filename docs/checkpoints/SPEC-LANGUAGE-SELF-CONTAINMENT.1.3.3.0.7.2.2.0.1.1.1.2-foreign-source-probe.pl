@@ -1,0 +1,13 @@
+use strict;
+use warnings;
+use JSON::PP ();
+use LinkedSpec::ActionIR::Scanner ();
+use LinkedSpec::ActionIR::ScannerCore ();
+use LinkedSpec::RuleIR::EmitContext ();
+my $deps=LinkedSpec::ActionIR::Scanner::default_deps_for_package('LinkedSpec::RuleIR::EmitContext');
+my $split=$deps->{split_action_ir_statements};
+my %callbacks=(%$deps,split_action_ir_statements=>sub { return $split->('my $other;') });
+my $source='my $input;';
+my $public=LinkedSpec::ActionIR::Scanner::scan_contract_ir_events({id=>'my_declare_bare'},$source,\%callbacks);
+my $private=LinkedSpec::ActionIR::ScannerCore::_scan_contract_ir_events_with_provenance({id=>'my_declare_bare'},$source,\%callbacks);
+print JSON::PP->new->canonical->pretty->encode({source=>$source,public=>$public,private=>$private});

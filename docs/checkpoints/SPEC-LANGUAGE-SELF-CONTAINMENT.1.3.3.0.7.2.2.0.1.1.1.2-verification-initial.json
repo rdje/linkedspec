@@ -1,0 +1,94 @@
+{
+  "revision": "aef9e551c7e563985c79c53fcba574ee5df8d509",
+  "git_inputs": 3811,
+  "supplied_inputs": 3813,
+  "compiler_pairs": 66,
+  "frames": 177,
+  "fixture_groups": 28,
+  "before_failed_groups": 21,
+  "after_failed_groups": 0,
+  "controls": [
+    {
+      "name": "alter public compiler output",
+      "rejected": true,
+      "reason": "complete before-after public compiler identity"
+    },
+    {
+      "name": "drop produced event origin",
+      "rejected": true,
+      "reason": "authored event source origins"
+    },
+    {
+      "name": "reuse duplicate occurrence",
+      "rejected": true,
+      "reason": "authored event source origins"
+    },
+    {
+      "name": "Unicode byte offset",
+      "rejected": true,
+      "reason": "authored event source origins"
+    },
+    {
+      "name": "quoted equal text mapping",
+      "rejected": true,
+      "reason": "authored event source origins"
+    },
+    {
+      "name": "invent origin for unrecognized comment",
+      "rejected": true,
+      "reason": "authored event source origins"
+    },
+    {
+      "name": "forge original event identity",
+      "rejected": true,
+      "reason": "exact original event identities"
+    },
+    {
+      "name": "drop original statement frame",
+      "rejected": true,
+      "reason": "authored original scalar frames"
+    },
+    {
+      "name": "drop canonical input",
+      "rejected": true,
+      "reason": "complete immutable Git membership"
+    },
+    {
+      "name": "forge canonical bytes",
+      "rejected": true,
+      "reason": "original Git bytes"
+    },
+    {
+      "name": "drop actual producer overlay",
+      "rejected": true,
+      "reason": "exact overlay membership"
+    },
+    {
+      "name": "promote partial run",
+      "rejected": true,
+      "reason": "complete exact-source report"
+    },
+    {
+      "name": "forge executing producer",
+      "rejected": true,
+      "reason": "actual capture instrument"
+    },
+    {
+      "name": "erase input boundary guard",
+      "rejected": true,
+      "reason": "actual input boundary guards"
+    },
+    {
+      "name": "erase actual fixture RED",
+      "rejected": true,
+      "reason": "actual fixture exit"
+    },
+    {
+      "name": "forge stdout identity",
+      "rejected": true,
+      "reason": "channel bytes"
+    }
+  ],
+  "instrument_sha256": "a67bcaffa117c7385696a48c1b4a5ea17637df412dada9e315cd270061447f5c",
+  "event_origins": 111
+}

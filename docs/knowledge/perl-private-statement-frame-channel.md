@@ -9,7 +9,7 @@ answers:
   - "does statement framing publish origins for the eleven basic events yet"
   - "how do nested private splitter collectors restore the outer invocation"
 date: 2026-10-04
-status: private splitter frame implementation verified under .1; event hooks remain .2
+status: private splitter frame implementation verified under .1; eleven event hooks implemented under .2; canonical family acceptance pending
 tags: [perl, actionir, statements, source-frame, identity, unicode]
 evidence: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.1 retains exact28-group RED25/GREEN0,66 complete public/compiler before-after pairs,177 authored original scalar frames and source-fixed consumer/book proof."
 reverify:
@@ -48,8 +48,9 @@ Initial executions retain their actual fixture/Core source identities separately
 final guarded/format-corrected runs. Same3766 supplied inputs/modes are checked before
 and after each run; only Core's declared production overlay differs between phases.
 
-This private splitter API does not yet connect the eleven basic statement event
-producers to their origins. Child .2 owns those hooks and .3 canonical family acceptance;
+The .2 producer hooks now connect the eleven basic statement event producers to these
+original frames. Follow perl-basic-statement-event-source-provenance for their exact scope.
+Child .3 owns canonical family acceptance;
 executable membership, comments and replacement remain subsequent work. Arbitrary host
 syntax, malicious custom callback mutation and cross-host transcript identity are not
 admitted by this bounded proof. All project bytes are parent-owned, with immutable Git

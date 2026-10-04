@@ -1,0 +1,115 @@
+{
+  "revision": "aef9e551c7e563985c79c53fcba574ee5df8d509",
+  "mode": "before",
+  "input_tree": ".linkedspec-data/scratch/basic-statement-provenance/before-frames-izbjzurk",
+  "complete": true,
+  "runs": [
+    {
+      "kind": "fixture",
+      "seed": 0,
+      "command": [
+        "bash",
+        "tools/project_data_run.sh",
+        "prove",
+        "-v",
+        "-Iperl",
+        "t/actionir_basic_statement_source_provenance.t"
+      ],
+      "exit": 1,
+      "stdout": {
+        "encoding": "gzip-base64",
+        "bytes": 19972,
+        "sha256": "b9a0f2d1e5393c259bfb155a8b10bddbf56303c59ee19bc1db2eac365fc2d5ba",
+        "data": "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"
+      },
+      "stderr": {
+        "encoding": "gzip-base64",
+        "bytes": 768,
+        "sha256": "fa6eaeb5b55bc8a0c5048ebe5a1689b9be3879807cdfbd511f73b558634444d4",
+        "data": "H4sIAAAAAAAC/92QQUvDQBCF7/srBixED8Y01kYFBUGkB289ioTJZpIsiTtldyKpv95tY6RQPIg3B/Yy+3jvzacgzEl4T2g6KkHIC0QVOzK1Bc+90wQNerAM7ExtLHaAWgxbwF6asJNtpCYXFJCL8du4vEBvdO4Fhd7ISj7a5RvH72TRaooFOmMJ5oss/vYAWIvrtfSOPBQUIqE0VUXO2DoE3B4I9zOrWc7vX5JXuIPVw3p1mgxZdkVpuUwxOTtQz2jYkBYqJ/Uj0+4wARqMF6X+LYtlUmaX179hMSqfmVsfarUEW+6hGrmkezIeuIJFrNQRMQw2DTnQ2HUF6nZCp9HuAr5QfdARRM3syrAINpH6E8KbWP3Ufj62DOXToPoEa8nyLgADAAA="
+      },
+      "inputs_before": 3813,
+      "inputs_after": 3813
+    },
+    {
+      "kind": "toolbox",
+      "seed": 0,
+      "command": [
+        "bash",
+        "tools/project_data_run.sh",
+        "perl",
+        "-Iperl",
+        "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.2-guard-probe.pl"
+      ],
+      "exit": 0,
+      "stdout": {
+        "encoding": "gzip-base64",
+        "bytes": 1023,
+        "sha256": "fb27621d5cb54653316a4feb67da4892aaef892fabdef383213daa80b12920a3",
+        "data": "H4sIAAAAAAAC/5WRQQ7CIBBF95yCTFy6cKsexTTNiERJLBCgmqbp3ZXa2JYONrIifz4zw/st45yDdeqBQQI/8DYKUZMPqYOP0mmQ3qcdr9GD7uqnj8bKRYo7OgzK6DI0tm8NXuBbhO3CrbGS6aixasJNOkgrxbKNF2aYVDVzfzc3g8Pn4OObtH3HkgHgTe2ELI1TV6VXkPTYaCZZWn8DW2WWx0aS+w1vyW8NIUH8w3D+4gikqfQWNY1Q6kss7InsA7qe+26+BpEr+64Htj7flZhSnMzMBPZHVD9CouIpUhx0JFO0+Rj67346pvCVtnU4AuvYCzk/ktT/AwAA"
+      },
+      "stderr": {
+        "encoding": "gzip-base64",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "data": "H4sIAAAAAAAC/wMAAAAAAAAAAAA="
+      },
+      "inputs_before": 3813,
+      "inputs_after": 3813
+    },
+    {
+      "kind": "toolbox",
+      "seed": 1,
+      "command": [
+        "bash",
+        "tools/project_data_run.sh",
+        "perl",
+        "-Iperl",
+        "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.2-guard-probe.pl"
+      ],
+      "exit": 0,
+      "stdout": {
+        "encoding": "gzip-base64",
+        "bytes": 1023,
+        "sha256": "fb27621d5cb54653316a4feb67da4892aaef892fabdef383213daa80b12920a3",
+        "data": "H4sIAAAAAAAC/5WRQQ7CIBBF95yCTFy6cKsexTTNiERJLBCgmqbp3ZXa2JYONrIifz4zw/st45yDdeqBQQI/8DYKUZMPqYOP0mmQ3qcdr9GD7uqnj8bKRYo7OgzK6DI0tm8NXuBbhO3CrbGS6aixasJNOkgrxbKNF2aYVDVzfzc3g8Pn4OObtH3HkgHgTe2ELI1TV6VXkPTYaCZZWn8DW2WWx0aS+w1vyW8NIUH8w3D+4gikqfQWNY1Q6kss7InsA7qe+26+BpEr+64Htj7flZhSnMzMBPZHVD9CouIpUhx0JFO0+Rj67346pvCVtnU4AuvYCzk/ktT/AwAA"
+      },
+      "stderr": {
+        "encoding": "gzip-base64",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "data": "H4sIAAAAAAAC/wMAAAAAAAAAAAA="
+      },
+      "inputs_before": 3813,
+      "inputs_after": 3813
+    },
+    {
+      "kind": "toolbox",
+      "seed": 42,
+      "command": [
+        "bash",
+        "tools/project_data_run.sh",
+        "perl",
+        "-Iperl",
+        "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.2-guard-probe.pl"
+      ],
+      "exit": 0,
+      "stdout": {
+        "encoding": "gzip-base64",
+        "bytes": 1023,
+        "sha256": "fb27621d5cb54653316a4feb67da4892aaef892fabdef383213daa80b12920a3",
+        "data": "H4sIAAAAAAAC/5WRQQ7CIBBF95yCTFy6cKsexTTNiERJLBCgmqbp3ZXa2JYONrIifz4zw/st45yDdeqBQQI/8DYKUZMPqYOP0mmQ3qcdr9GD7uqnj8bKRYo7OgzK6DI0tm8NXuBbhO3CrbGS6aixasJNOkgrxbKNF2aYVDVzfzc3g8Pn4OObtH3HkgHgTe2ELI1TV6VXkPTYaCZZWn8DW2WWx0aS+w1vyW8NIUH8w3D+4gikqfQWNY1Q6kss7InsA7qe+26+BpEr+64Htj7flZhSnMzMBPZHVD9CouIpUhx0JFO0+Rj67346pvCVtnU4AuvYCzk/ktT/AwAA"
+      },
+      "stderr": {
+        "encoding": "gzip-base64",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "data": "H4sIAAAAAAAC/wMAAAAAAAAAAAA="
+      },
+      "inputs_before": 3813,
+      "inputs_after": 3813
+    }
+  ],
+  "instrument_sha256": "38cd82e9389576199f6ff9884c508b7da74e80d67fe077e94815080af7584bd2",
+  "stream_instrument_sha256": "d054f68eb1a892b56ec2db1d4b6c56bcfb0bce5ac9b9e4fdef225c2273ffb1fe"
+}

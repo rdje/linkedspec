@@ -1,0 +1,115 @@
+{
+  "revision": "aef9e551c7e563985c79c53fcba574ee5df8d509",
+  "mode": "after",
+  "input_tree": ".linkedspec-data/scratch/basic-statement-provenance/after-frames-a_o3ra52",
+  "complete": true,
+  "runs": [
+    {
+      "kind": "fixture",
+      "seed": 0,
+      "command": [
+        "bash",
+        "tools/project_data_run.sh",
+        "prove",
+        "-v",
+        "-Iperl",
+        "t/actionir_basic_statement_source_provenance.t"
+      ],
+      "exit": 0,
+      "stdout": {
+        "encoding": "gzip-base64",
+        "bytes": 19753,
+        "sha256": "f5500afaf3b13810dfd4ea7ab5c27d9432acf59a677d0380fe0ab134fc91815b",
+        "data": "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"
+      },
+      "stderr": {
+        "encoding": "gzip-base64",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "data": "H4sIAAAAAAAC/wMAAAAAAAAAAAA="
+      },
+      "inputs_before": 3813,
+      "inputs_after": 3813
+    },
+    {
+      "kind": "toolbox",
+      "seed": 0,
+      "command": [
+        "bash",
+        "tools/project_data_run.sh",
+        "perl",
+        "-Iperl",
+        "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.2-guard-probe.pl"
+      ],
+      "exit": 0,
+      "stdout": {
+        "encoding": "gzip-base64",
+        "bytes": 580,
+        "sha256": "dc98759806ba8ecd2b29dc7f78431ce5b3a5dcfe25f00051975a6f2591e911ca",
+        "data": "H4sIAAAAAAAC/5WQUQqDMBBE/3OKsPSzJ2iPUkTSdLEBTcImWop49xoNGmMtNF/L7GRmeT3jnIMl1QmPwC+8D0LQsEPtXZBuURpfv47BI6hy6ad180BZCxJeGV36t52iwUkxinDeubVoMK9at8Y/kSDfFPsYJ01sat5b/7A1A4lX9PFTHj+wrACcaUliaUhVSs93FmxJBdveayXT8xMeB4z+APSDzjc0GZcjKCmRYxwTizkxUlh8StvWX4EN7APrS6jWRAIAAA=="
+      },
+      "stderr": {
+        "encoding": "gzip-base64",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "data": "H4sIAAAAAAAC/wMAAAAAAAAAAAA="
+      },
+      "inputs_before": 3813,
+      "inputs_after": 3813
+    },
+    {
+      "kind": "toolbox",
+      "seed": 1,
+      "command": [
+        "bash",
+        "tools/project_data_run.sh",
+        "perl",
+        "-Iperl",
+        "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.2-guard-probe.pl"
+      ],
+      "exit": 0,
+      "stdout": {
+        "encoding": "gzip-base64",
+        "bytes": 580,
+        "sha256": "dc98759806ba8ecd2b29dc7f78431ce5b3a5dcfe25f00051975a6f2591e911ca",
+        "data": "H4sIAAAAAAAC/5WQUQqDMBBE/3OKsPSzJ2iPUkTSdLEBTcImWop49xoNGmMtNF/L7GRmeT3jnIMl1QmPwC+8D0LQsEPtXZBuURpfv47BI6hy6ad180BZCxJeGV36t52iwUkxinDeubVoMK9at8Y/kSDfFPsYJ01sat5b/7A1A4lX9PFTHj+wrACcaUliaUhVSs93FmxJBdveayXT8xMeB4z+APSDzjc0GZcjKCmRYxwTizkxUlh8StvWX4EN7APrS6jWRAIAAA=="
+      },
+      "stderr": {
+        "encoding": "gzip-base64",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "data": "H4sIAAAAAAAC/wMAAAAAAAAAAAA="
+      },
+      "inputs_before": 3813,
+      "inputs_after": 3813
+    },
+    {
+      "kind": "toolbox",
+      "seed": 42,
+      "command": [
+        "bash",
+        "tools/project_data_run.sh",
+        "perl",
+        "-Iperl",
+        "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.2-guard-probe.pl"
+      ],
+      "exit": 0,
+      "stdout": {
+        "encoding": "gzip-base64",
+        "bytes": 580,
+        "sha256": "dc98759806ba8ecd2b29dc7f78431ce5b3a5dcfe25f00051975a6f2591e911ca",
+        "data": "H4sIAAAAAAAC/5WQUQqDMBBE/3OKsPSzJ2iPUkTSdLEBTcImWop49xoNGmMtNF/L7GRmeT3jnIMl1QmPwC+8D0LQsEPtXZBuURpfv47BI6hy6ad180BZCxJeGV36t52iwUkxinDeubVoMK9at8Y/kSDfFPsYJ01sat5b/7A1A4lX9PFTHj+wrACcaUliaUhVSs93FmxJBdveayXT8xMeB4z+APSDzjc0GZcjKCmRYxwTizkxUlh8StvWX4EN7APrS6jWRAIAAA=="
+      },
+      "stderr": {
+        "encoding": "gzip-base64",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "data": "H4sIAAAAAAAC/wMAAAAAAAAAAAA="
+      },
+      "inputs_before": 3813,
+      "inputs_after": 3813
+    }
+  ],
+  "instrument_sha256": "38cd82e9389576199f6ff9884c508b7da74e80d67fe077e94815080af7584bd2",
+  "stream_instrument_sha256": "d054f68eb1a892b56ec2db1d4b6c56bcfb0bce5ac9b9e4fdef225c2273ffb1fe"
+}

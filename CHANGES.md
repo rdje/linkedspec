@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-10-04 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.2: retain basic statement source origins
+
+Eleven basic statement producers now retain original event/argument identity and exact private scalar origins. The same29-group fixture is RED21/GREEN0;111 event origins and177 unchanged frames across66 full public/compiler pairs satisfy independent original occurrence intervals. Both main boundaries supply3813 inputs (3811 immutable Git plus two common overlays); only PrimitiveBasicRules/ScannerCore change. A foreign-source callback defect is reproduced and fixed by snapshotting requested source; separate source-fixed29-group guard is RED1/GREEN0 with three probe pairs and five controls. All initial28-group source/fixture/capture/reviewer and pre-guard consumer channels remain separate. Eight final guarded consumers pass1148 complete groups, including Phase01034, with exact manifest/observation/tree/producer bindings and eight controls. Main16, guard5, consumer8 and book5 total34 reason-specific controls; five examples render from58 complete book inputs. Prior cleanup claim freezes at exact aef9 after21 input hashes verify. Canonical family acceptance .3 and wider composition remain separately owned.
+
 ## 2026-10-04 — REPO-HYGIENE.9: retain daily artifact census
 
 Dated 2026-10-04T20:15:09.584501+00:00 census retains 7741 parent candidates/11634211060 bytes and excludes nine nested repositories. Rust release is absent, deps has zero log/bin files, and incremental retains483 rows/2390943383 bytes. Fresh scoped census and independent per-file lstat agree; aggregate inflation and balanced wrong sizes reject, inclusion/exclusion fixture passes, and actual exit0/full channels/input guards pass four controls. Zero files removed; all proof/cache data retained. Complete58-input book renders one retained-review example with five controls. Prior frame claim freezes at exact abe6756ae after all37 input hashes verify; eleven producer hooks .1.1.1.2 are next.
