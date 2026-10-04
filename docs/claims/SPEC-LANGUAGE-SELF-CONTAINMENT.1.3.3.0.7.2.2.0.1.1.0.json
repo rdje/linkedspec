@@ -805,27 +805,6 @@
         ],
         "revision": "3fc589f8494fd55b4f0154d6c226797a4fa2f711"
       }
-    },
-    {
-      "name": "broader-consumer-and-book-observation-with-disclosed-proof-gaps",
-      "statement": "Thirteen selected unchanged suites report1337 top-level passes, including complete Phase0; the actual book command reports success and two examples are present in retained rendered HTML. The finite observations are preserved; broader falsification and complete transitive input closure remain open.",
-      "scope": "Actual observed command/TAP/rendered outputs only. Phase0 reads corpus/contract/nested test and root/book Markdown inputs omitted by the initial publisher; generated-source tests read examples. Root continuity documents changed after the run. The book reads sources beyond its chapter/toml. The initial claim/publisher are retained as superseded artifacts, not silently refreshed. Wider prior-record input-closure review remains owned by SESSION-STARTUP-READING.5. No whole-project proof/admission or reproducibility claim follows from these transcripts.",
-      "rederive": {
-        "status": "checked",
-        "command": "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.0-consumers.py; bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.0-book.py; bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.0-review.py",
-        "granularity": "Thirteen named complete TAP plans and actual render command/chapter output at the observed worktree boundary; transitive input identities and their prior historical bytes are not fully established.",
-        "result": "Actual exit0/full plans total1337; book exit0/two normalized rendered examples. Original streams are retained unchanged."
-      },
-      "falsify": {
-        "status": "gap",
-        "reason": "The current twelve controls distinguish the private/compiler proof and rendered example drift, but do not execute broader missing/transitively changed input and truncated/failing consumer TAP controls. Those distinguishing controls are required before closing this broader claim.",
-        "repair_owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.3"
-      },
-      "durability": {
-        "status": "gap",
-        "reason": "Selected suite/tool sources and transcripts are retained in the source-bound primary manifest, but the actual transitive corpus/contract/nested consumer/root-doc/book/example input closure is incomplete. Some root Markdown bytes changed after the run and were not frozen at read time; updating hashes alone would misidentify original inputs. Preserve this boundary and recover or re-measure in the owned repair.",
-        "repair_owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.3"
-      }
     }
   ]
 }

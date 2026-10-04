@@ -1,10 +1,10 @@
 # MEMORY
 
-- activation_commit: `3fc589f8494fd55b4f0154d6c226797a4fa2f711` — clean fixed-input proof preparation activation base.
-- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.3.0 - prepare fixed consumer input proof`.
-- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.3.1` (pending) — complete selected consumer/render remeasurement.
-- next_action: Activate .3.1 from clean HEAD; run the frozen capsule through all13 unchanged suites and actual book render, independently accept complete TAP/input controls, then resume .1.1.1 statement frames.
-- in_flight_uncommitted: none; capsule/instruments, complete smoke/RED evidence and documentation committed; no background job remains.
+- activation_commit: `e853cd5a7537c0ad8452ffac57af18ef48215df1` — clean fixed-input proof preparation activation base.
+- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.3.1 - accept source-bound consumer composition`.
+- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1` (pending) — exact basic statement provenance frames.
+- next_action: Activate .1.1.1 from clean consumer-proof closeout; use Toolbox splitter/public scanner probes and independently authored comment/quote/repeat/CRLF/Unicode boundaries to select exact producer frames before implementation.
+- in_flight_uncommitted: none.
 - blockers: No access/decision blocker. Matches and attached/marker/value/null/while executors are repaired; control parent/order and raw-expression reporting are reconciled; quoted/comment readiness .7.2/.3 precedes dispatcher/full execution. Other startup repairs remain separate.
   Wrapper startup .7 remains open; recovery/purge stay prohibited.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the

@@ -9,7 +9,7 @@ answers:
 date: 2026-10-04
 status: nine regex contracts implemented; statement framing and family composition pending
 tags: [perl, actionir, scanner, source-provenance, unicode, source-span]
-evidence: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.0 retains the actual complete ten-group frozen-owner RED (nine failures, empty-result guard green) and unchanged ten-group GREEN. Independent authored Unicode-scalar positions cover quoted and repeated equal calls for all nine regex contracts. The private/compiler result is historical at3fc589f84. Original passing consumer channels retain separately disclosed input/falsification gaps until .1.1.3 remeasurement; they are not complete source-input acceptance."
+evidence: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.0 retains the actual complete ten-group frozen-owner RED (nine failures, empty-result guard green) and unchanged ten-group GREEN. Independent authored Unicode-scalar positions cover quoted and repeated equal calls for all nine regex contracts. The private/compiler result is historical at3fc589f84. Original passing consumer channels retain their disclosed input/falsification gaps in the exact pre-supersession record. Source-bound .1.1.3.1 remeasurement supersedes broader acceptance; it does not recover the original live-document reads."
 reverify:
   - "bash tools/project_data_run.sh env PERL5LIB= prove -v -Iperl t/actionir_basic_regex_source_provenance.t t/actionir_helper_source_provenance.t"
   - "Historical original reviewer/captures and private/compiler input hashes are preserved at3fc589f8494fd55b4f0154d6c226797a4fa2f711; follow selected-consumer-proof-input-closure-gap for broader remeasurement."
@@ -32,8 +32,9 @@ including a Unicode prefix, CRLF and tabs. The recorder retains all three;
 it does not decide executable membership or replace source.
 
 The preceding three-contract channel proof is historical at80ecf47f258a7f23a59598a1c5500a34fe662a7c.
-Its current permanent guard suite remains separate. P1 selected consumer/render input-closure repair `.1.1.3` runs first; its disclosed
-gaps do not widen the fully source-bound private/compiler result. Eleven basic statement
+Its current permanent guard suite remains separate. P1 selected consumer/render input-closure repair `.1.1.3` is complete through
+source-bound1337-group composition under `.1.1.3.1`; its original disclosed
+observation remains preserved and does not widen the private/compiler result. Eleven basic statement
 contracts still need exact producer-side statement frames under `.1.1.1`, then
 `.1.1.2` independently composes the family. Remaining scanner producers,
 membership/replacement, recurring canonical admission, marker provenance and

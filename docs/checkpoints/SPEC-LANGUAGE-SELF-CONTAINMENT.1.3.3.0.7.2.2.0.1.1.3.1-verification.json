@@ -1,0 +1,206 @@
+{
+  "activation": "e853cd5a7537c0ad8452ffac57af18ef48215df1",
+  "measured_boundary": {
+    "revision": "3fc589f8494fd55b4f0154d6c226797a4fa2f711",
+    "overlays": [
+      "docs/linkedspec-book/src/development/documentation-workflow.md"
+    ]
+  },
+  "capsules": [
+    {
+      "sha256": "12bccbdfb3033087af2f71864814a7f28a327af6ce8c049113bbeb257aed289a",
+      "files": 738,
+      "passing_suites": 12,
+      "passing_tests": 1298
+    },
+    {
+      "sha256": "18a064af86a1b96d9878877d17abba1d9014fcc93528258021da6bb8587a28fa",
+      "files": 742,
+      "passing_suites": 1,
+      "passing_tests": 39
+    }
+  ],
+  "added_checkpoint_inputs": [
+    "docs/checkpoints/SESSION-STARTUP-READING.87.2-cases.json",
+    "docs/checkpoints/SESSION-STARTUP-READING.87.2-probe.pl",
+    "docs/checkpoints/SESSION-STARTUP-READING.87.2-fresh.pl",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.0-observe.pm"
+  ],
+  "suites": 13,
+  "top_level_tests": 1337,
+  "suite_plans": [
+    {
+      "test": "t/phase0_regression.t",
+      "tests": 1034
+    },
+    {
+      "test": "t/actionir_helper_source_provenance.t",
+      "tests": 13
+    },
+    {
+      "test": "t/inter_match_gap_capture_perl_contract.t",
+      "tests": 125
+    },
+    {
+      "test": "t/actionir_ast_parser.t",
+      "tests": 23
+    },
+    {
+      "test": "t/trace_actionir_pipeline.t",
+      "tests": 5
+    },
+    {
+      "test": "t/canonical_event_occurrence_order.t",
+      "tests": 15
+    },
+    {
+      "test": "t/actionir_raw_dependency_metadata.t",
+      "tests": 16
+    },
+    {
+      "test": "t/actionir_raw_dependency_provenance.t",
+      "tests": 6
+    },
+    {
+      "test": "t/actionir_raw_dependency_compatibility.t",
+      "tests": 27
+    },
+    {
+      "test": "t/actionir_nested_block_source_spans.t",
+      "tests": 20
+    },
+    {
+      "test": "t/noncurrent_helper_metadata.t",
+      "tests": 2
+    },
+    {
+      "test": "t/generated_source_contract.t",
+      "tests": 12
+    },
+    {
+      "test": "t/codeblock_matches_perl.t",
+      "tests": 39
+    }
+  ],
+  "source_related_sites": 326,
+  "named_input_edges": 21,
+  "rendered_examples": 2,
+  "controls": [
+    {
+      "name": "missing_named_suite",
+      "reason": "exact named consumer population",
+      "rejected": true
+    },
+    {
+      "name": "incomplete_repair",
+      "reason": "completed remaining measurement boundary",
+      "rejected": true
+    },
+    {
+      "name": "promote_initial_failure",
+      "reason": "honest initial incomplete boundary",
+      "rejected": true
+    },
+    {
+      "name": "promote_smoke_mode",
+      "reason": "completed remaining measurement boundary",
+      "rejected": true
+    },
+    {
+      "name": "relabel_initial_capsule",
+      "reason": "actual per-run fixed input capsule",
+      "rejected": true
+    },
+    {
+      "name": "ungated_post_run_inputs",
+      "reason": "closed runtime input boundaries",
+      "rejected": true
+    },
+    {
+      "name": "false_executing_source",
+      "reason": "actual executing instrument byte identity",
+      "rejected": true
+    },
+    {
+      "name": "wrong_consumer_command",
+      "reason": "actual selected consumer command",
+      "rejected": true
+    },
+    {
+      "name": "failed_top_level_TAP",
+      "reason": "consumer failing TAP t/phase0_regression.t",
+      "rejected": true
+    },
+    {
+      "name": "failed_nested_TAP",
+      "reason": "consumer failing TAP t/phase0_regression.t",
+      "rejected": true
+    },
+    {
+      "name": "missing_final_plan",
+      "reason": "consumer complete positive plan t/codeblock_matches_perl.t",
+      "rejected": true
+    },
+    {
+      "name": "missing_planned_reach",
+      "reason": "consumer complete ordered reach t/phase0_regression.t",
+      "rejected": true
+    },
+    {
+      "name": "false_prove_completion",
+      "reason": "prove final success marker t/codeblock_matches_perl.t",
+      "rejected": true
+    },
+    {
+      "name": "hidden_stream_change",
+      "reason": "stream byte identity",
+      "rejected": true
+    },
+    {
+      "name": "erase_actual_input_failure",
+      "reason": "actual initial missing-input RED",
+      "rejected": true
+    },
+    {
+      "name": "failed_book_render",
+      "reason": "successful measured book/input boundary",
+      "rejected": true
+    },
+    {
+      "name": "changed_authored_example",
+      "reason": "independent authored example identity",
+      "rejected": true
+    },
+    {
+      "name": "missing_transitive_JSON",
+      "reason": "capsule directory population",
+      "rejected": true
+    },
+    {
+      "name": "missing_checkpoint_probe",
+      "reason": "capsule directory population",
+      "rejected": true
+    },
+    {
+      "name": "changed_nested_consumer",
+      "reason": "input byte identity t/staged_ast_enrichment_perl_contract.t",
+      "rejected": true
+    },
+    {
+      "name": "drop_lexical_site",
+      "reason": "complete source-related lexical census",
+      "rejected": true
+    },
+    {
+      "name": "drop_input_edge",
+      "reason": "complete named input edge population",
+      "rejected": true
+    }
+  ],
+  "scope": "Twelve unchanged suites passed at the original738-file fixed boundary; the last suite passed39 groups after four exact Git checkpoint inputs were added. Each actual per-run boundary is preserved; shared bytes/modes are identical. The original missing-input failure remains recorded. This source-bound composition supersedes earlier broader acceptance without recovering its unretained live-document reads. Wider historical audit remains startup .5. Canonical closeout follows the exact staged current candidate.",
+  "public_book": {
+    "inputs": 58,
+    "capsule_sha256": "86b5323c679a1cee23bb8a06a71d67296e0db74ff16e938452400600eeb1a60d",
+    "rendered_examples": 2
+  }
+}

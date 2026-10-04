@@ -7,7 +7,7 @@ answers:
   - "can continuity publishing change Phase0 input bytes after its run"
   - "who owns the selected consumer and book proof input closure repair"
 date: 2026-10-04
-status: P1 preparation verified under .1.1.3.0; full remeasurement pending .1.1.3.1
+status: selected gap superseded by verified source-bound remeasurement .1.1.3.1; historical audit remains open
 tags: [claims, evidence, provenance, phase0, documentation, input-closure]
 evidence: "The final .1.1.0 review preserves the original claim/publisher as claim-initial.json/.py, separates the complete private/compiler measurement from consumer/render observations, and discloses broader falsification/durability gaps with an immediate P1 repair. The actual passing TAP and render streams are unchanged."
 reverify: "Read the source-backed selected input graph and actual remeasurement under .1.1.3 when it lands; initial producer/claim and observed streams remain under docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.0-. Do not refresh their input hashes as if they captured a newer run."
@@ -28,8 +28,9 @@ the exact bytes at each original read were not separately retained. The passing
 transcripts remain actual observations, but missing hashes cannot simply be
 filled with today's bytes and labeled the original measurement.
 
-The new claim records the broad result with explicit falsification and durability
-gaps. `.1.1.3` owns the selected graph/census, producer/input retention, stable
+The original disclosed claim records the broad result with explicit falsification
+and durability gaps. Its exact before record remains retained under .1.1.3.1;
+the new source-bound measurement supersedes active acceptance. `.1.1.3` owns the selected graph/census, producer/input retention, stable
 publication boundary, actual distinguishing controls and recovery or remeasurement
 where needed. It runs before basic statement framing. The larger prior-record
 producer audit remains with `SESSION-STARTUP-READING.5`; this finding does not close
@@ -40,5 +41,10 @@ at3fc589f8494fd55b4f0154d6c226797a4fa2f711 plus one explicit development
 book overlay. Independent Git/rg census, two-suite25-group smoke, actual render
 and18 reason-checked controls pass. An actual added snapshot input after a
 successful consumer rejects while its completed channels survive. This prepares
-remeasurement; it does not re-label the original thirteen-suite run. `.3.1` is
-next, before statement frames; the broader historical audit remains startup .5.
+remeasurement; it does not re-label the original thirteen-suite run. `.3.1` now
+accepts1337 groups from two fixed boundaries with common input identities: twelve
+suites at738 files, then39 groups after exactly four missing checkpoint inputs
+are added. The actual initial missing-file RED stays intact. Twenty-two evidence
+corruptions reject; the final public book has a separate complete capsule and
+render. Preparation is frozen at exact e853cd5; the private/compiler claim remains
+unchanged. Statement frames are next; the broader historical audit stays startup .5.

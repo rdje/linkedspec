@@ -1,0 +1,19 @@
+{
+  "activation": "e853cd5a7537c0ad8452ffac57af18ef48215df1",
+  "superseding_measurement": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.3.1",
+  "records": [
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.3.0.json",
+      "before_sha256": "8c4169b00403d2f2a34d15acacad79b46349eb9ccd790283fa02be7f6a66b061",
+      "retained_before": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.3.1-before-preparation-claim.json",
+      "action": "Freeze unchanged preparation inputs at their exact committed boundary."
+    },
+    {
+      "path": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.0.json",
+      "before_sha256": "9c6c2b741158e153bb18806503e929a85f91535751ffd2f9ea5e7d686a8fdd42",
+      "retained_before": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.3.1-before-regex-claim.json",
+      "action": "Preserve old broader disclosed observation; retire it from active acceptance in favor of the new complete fixed-input execution."
+    }
+  ],
+  "limit": "No old live-document read bytes are invented or relabeled. All original streams, producers, claim statements and disclosed gaps survive in immutable Git and retained before records. This is selected proof supersession, not completion of startup .5 historical audit."
+}

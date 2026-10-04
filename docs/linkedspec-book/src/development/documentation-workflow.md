@@ -185,6 +185,20 @@ complete output channels and reject missing inputs or incomplete TAP plans.
 Passing older transcripts retain their original boundary until remeasurement
 supersedes them. Preparation alone is not consumer acceptance.
 
+The selected thirteen-suite remeasurement preserves two actual input boundaries.
+Twelve suites complete 1,298 groups using the original fixed capsule. The last
+suite initially fails before its first assertion because its checkpoint case
+file is absent. Its probe, fresh-process program and shared observer are also
+required inputs. Adding those four exact files from the same Git revision lets
+that suite complete its 39 groups. Every shared input byte and mode stays the
+same; the earlier passing runs retain their original capsule identity. Independent
+review checks complete plans, ordered results, exits, producer identities and
+input membership, and rejects missing inputs and altered or incomplete evidence.
+The combined result is 1,337 groups across thirteen unchanged suites. The failed
+run remains available; the new result supersedes the older broader observation
+without inventing its unretained document reads. The final public book has its
+own complete input capsule and render, separate from historical test inputs.
+
 This bounded working-rule/checker adoption does not finish the broader published-constant,
 ignored-producer, control and alignment audit owned by startup task .5. Diagnostic path
 repair .29 remains required before that audit closeout. Older checkpoints and their

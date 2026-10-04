@@ -2173,7 +2173,7 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
   Acceptance: Exact source/argument/occurrence public identities, all selected regex and statement frames, original private-channel guards and affected consumers pass before closing the family parent. No executable membership or public schema admission.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.3`
-  Status: `active`
+  Status: `done`
   Goal: Repair the selected consumer/render proof's transitive input closure and distinguishing falsification before further basic provenance work.
   Priority: P1; next immediately after clean regex code landing, before .1.1.1.
   Dependencies: `.1.3.3.0.7.2.2.0.1.1.0`
@@ -2211,10 +2211,33 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 - [x] **LOCKSTEP** — Task/index/roadmaps, clean resume/live state, change/notes, Knowledge gap/capsule cards, complete bounded claim and development book methodology updated; prior private/compiler record frozen at3fc589f84. Focused all-doctrine boundary required before landing.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.3.1`
-  Status: `pending`
-  Goal: Re-measure and independently accept the selected unchanged consumer/render proof from a fixed input capsule.
+  Status: `done`
+  Goal: Re-measure and independently accept the selected unchanged consumer/render proof at retained fixed input boundaries.
   Dependencies: `.1.3.3.0.7.2.2.0.1.1.3.0`
   Acceptance: Execute the exact thirteen selected suites and render original source-identical examples from the recoverable capsule; require actual complete TAP plans and clean finite exit channels. Independently gate all artifact contents and directory memberships, actual producer bytes and original source owners. Observe missing/changed transitive-input and incomplete/failing TAP RED controls. Preserve/supersede the earlier broader observation with explicit original/current boundaries and no after-run document hash refresh. Close .3 only after committed verified remeasurement; then resume statement framing .1.1.1.
+
+  Activation: Clean e853cd5a7537c0ad8452ffac57af18ef48215df1; all ten doctrines and post-commit activation check pass, brief0 and no background job. The selected capsule/plan, actual source-reader graph, unchanged suite/nested-consumer interfaces, fixed runner and independent corruption/complete-TAP oracles, claim contract and development/DSL book sections are reviewed. Production and standard consumers remain activation-exact; RGX/PGEN and other repositories stay black boxes/read-only.
+  Owned paths: Checkpoint prefix docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.3.1- owns consumers.json, before-preparation-claim.json, before-regex-claim.json, review.py/verification.json, supersession.py/json, claim.py, book.py/json, book-inputs.tar.gz and book-inputs.json plus any explicitly retained initial instruments/results. Reuse the committed .3.0 fixed runner and738-file capsule without changing its actual producer/input bytes. This task/index/resume/live/roadmap/change/notes/book/Knowledge, docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.3.1.json and historical preservation/adjudication of .3.0/.1.1.0 records. Scratch remains .linkedspec-data/scratch/selected-proof-closure. Preserve original captures; no recovery/purge or other-repository writes.
+  Additional owned paths: docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.3.1-plan.json, prepare.py, input-oracle.py, inputs.tar.gz/json, input-graph.json, input-verification.json, run.py, consumers-initial.json, consumers-repair.json and repair.json. The original committed .3.0 capsule/producers remain unchanged.
+  Owned P1 defect / actual initial RED: The first twelve suites finish1298 top-level groups with738 inputs intact; final codeblock_matches exits2 before any TAP because line8 opens omitted SESSION-STARTUP-READING.87.2-cases.json. Its public probe additionally requires .87.2-probe.pl, .87.2-fresh.pl and shared .5.0-observe.pm. All original channels are retained in consumers-initial.json. Source graph contained the lexical reader but the pool selector did not close its checkpoint namespace. Repair now: add exactly these four immutable input blobs, independently require/gate them and all common original bytes; re-execute the failed39-group consumer and book. Preserve first-twelve actual input boundaries without relabeling them as the expanded capsule; acceptance composes per-consumer source-bound observations from the two fixed capsules. Canonical current-candidate closeout remains required.
+
+  Verification tier: `canonical`
+  Focused checks: Actual complete13-suite fixed-capsule run, source-identical book examples and supplied-input contents/modes/membership before/after every operation; independent exact suite/plan/reach/source/instrument identities, observed missing/changed-input and incomplete/failing-TAP controls. Original broader observation preservation and explicit supersession, complete fresh public book input capture/render, syntax, memory/Knowledge/claim/history/diff and all doctrines.
+  Canonical trigger: Bounded P1 proof-repair parent closeout; exact staged tools/run_ci_local.sh receipt is required after the completed fixed-input remeasurement and documentation candidate are staged. No production/public DSL or registered gate movement.
+  Claim verification: `docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.3.1.json`
+  Supersession decision: The original broader run's changing live-document bytes cannot be reconstructed from its transcript. Preserve its complete disclosed record and all original output bytes; a new fully supplied-input-bound measurement supersedes that acceptance claim. Do not label the new run as recovery of the old read boundary. Freeze preparation at this exact activation before updating its bound records/book explanation; every original input digest must match immutable Git. Wider historical project-wide audit stays SESSION-STARTUP-READING.5.
+
+  Verification: Thirteen unchanged suites complete1337 top-level groups: twelve pass1298 with738 fixed inputs; the final suite passes39 after four exact Git checkpoint inputs are added. Common bytes/modes are unchanged and both actual capsule boundaries remain explicit. The initial missing-file RED, all original streams and old disclosed records survive. Independent Git/rg/TAP review verifies326 lexical sites/21 named edges and rejects22 evidence corruptions; two original examples render from both the repaired consumer capsule and a separate complete final public-book capsule. New source-bound acceptance supersedes the old broader observation without recovering its unretained live-document reads; startup .5 stays open. Expanded input-oracle additionally rejects15 capsule/TAP corruptions. Final public book is retained separately and independently accepted. Syntax, claim, Knowledge, bounded history, memory, whitespace and all doctrines accompany exact staged canonical acceptance; its receipt is mandatory before landing. Production/spec/standard-test sources remain exact to the measurement.
+  Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.3.1 - accept source-bound consumer composition`
+
+## Acceptance Checklist — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.3.1
+
+- [x] **REPRODUCE / ISSUE** — Actual original broader input gap and first full fixed-capsule checkpoint-input RED retained with complete channels.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Phase0 root/corpus/nested readers need contents and membership; codeblock_matches_perl.t line8 and probe/fresh shared observer need four out-of-namespace immutable checkpoint files.
+- [x] **FIX** — Expand only by those four Git blobs; gate common bytes/modes and preserve both per-run boundaries. Original observations and disclosed record survive explicit supersession.
+- [x] **ADDRESSED (verified)** — Initial final-suite failure becomes39-group GREEN; independent Git/rg/content/producer/reach oracles reject22 evidence corruptions plus15 input-oracle controls.
+- [x] **NO REGRESSION** — All13 unchanged suite plans complete1337 groups; source/mode/population boundaries hold and original examples render from consumer and separate final public-book capsules.
+- [x] **LOCKSTEP** — Bounded complete claim, historical old-input preservation, task/frontier/roadmaps, Knowledge, clean intended resume/live/history and mdBook agree. Canonical receipt gates this parent closeout. Broader historical audit remains startup .5.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2`
   Status: `pending`
@@ -2520,9 +2543,9 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 | 43.4.2.0.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1` | `active` | Producer source provenance and explicit recursive frames. |
 | 43.4.2.0.1.0 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.0` | `done` | Private three-contract spans;18 public identities/39 origins/13 GREEN groups/1199 unchanged tests. |
 | 43.4.2.0.1.1.0 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.0` | `done` | Nine regex contracts;27 public identities/81 spans, complete RED/GREEN and unchanged consumers. |
-| 43.4.2.0.1.1.3 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.3` | `active` | P1 selected consumer/render input closure and falsification before statement framing. |
+| 43.4.2.0.1.1.3 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.3` | `done` | Source-bound1337 consumer groups at explicit two-capsule boundaries; statement frames next. |
 | 43.4.2.0.1.1.3.0 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.3.0` | `done` | 738 exact inputs, 25 smoke groups, two rendered examples and18 controls; full remeasurement next. |
-| 43.4.2.0.1.1.3.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.3.1` | `pending` | Complete unchanged consumer/render remeasurement and falsification. |
+| 43.4.2.0.1.1.3.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.3.1` | `done` | 1337 groups, retained initial RED/four-input repair,22 controls and final book proof; canonical receipt gates landing. |
 | 43.4.2.0.1.1.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1` | `pending` | Exact basic statement-frame production before family composition. |
 | 43.4.2.0.1.1.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.2` | `pending` | Independent twenty-contract basic family composition. |
 | 43.4.2.0.1.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2` | `pending` | Complete remaining pipeline source provenance before membership. |

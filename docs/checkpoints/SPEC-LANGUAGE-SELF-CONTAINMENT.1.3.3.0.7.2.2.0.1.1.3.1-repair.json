@@ -1,0 +1,18 @@
+{
+  "initial_report": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.3.1-consumers-initial.json",
+  "cause": "t/codeblock_matches_perl.t line8 reads a checkpoint case file outside the initial selected namespace. Its published probe requires a fresh-process program and a shared observer. The lexical census contained the reader but the pool selector omitted four required checkpoint inputs.",
+  "observed_initial_exit": 1,
+  "observed_test_exit": 2,
+  "first_twelve_passing_groups": 1298,
+  "added_inputs": [
+    "docs/checkpoints/SESSION-STARTUP-READING.87.2-cases.json",
+    "docs/checkpoints/SESSION-STARTUP-READING.87.2-probe.pl",
+    "docs/checkpoints/SESSION-STARTUP-READING.87.2-fresh.pl",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.0-observe.pm"
+  ],
+  "repair": "Add exactly four immutable Git3fc589f8 blobs. Gate all original shared input bytes and modes; rerun only the failed consumer and book. Preserve the first twelve passing observations at their actual original capsule boundary.",
+  "repaired_report": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.3.1-consumers-repair.json",
+  "repaired_passing_groups": 39,
+  "accepted_total": 1337,
+  "scope": "The suite and production sources are unchanged. Baseline-only .87.2-runtime-before.pm is not used by this consumer command and is unassessed."
+}

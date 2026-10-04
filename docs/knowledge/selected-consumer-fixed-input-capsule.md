@@ -9,12 +9,12 @@ answers:
   - "what are the 314 selected source related reader sites"
   - "why did fixed input preparation freeze the REPO HYGIENE 8 claim"
 date: 2026-10-04
-status: preparation verified; full remeasurement pending .1.1.3.1
+status: preparation historical at e853; selected remeasurement verified under .1.1.3.1
 tags: [claims, phase0, capsule, input-closure, git-boundary, documentation]
 evidence: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.3.0 independently verifies738 regular supplied inputs,314 source-related lexical sites and16 named input edges, two unchanged25-group smoke suites/two rendered examples, and18 reason-checked controls. An actual post-run extra corpus member rejects while completed13-group TAP/channels remain saved."
 reverify:
-  - "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.3.0-review.py"
-  - "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.3.0-accept.py"
+  - "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.3.1-review.py --public-book"
+  - "To reproduce preparation-only review/acceptance, restore its exact complete e853cd5a7537c0ad8452ffac57af18ef48215df1 input boundary; current publication intentionally supersedes the old broader record and chapter."
 ---
 
 # Selected consumer proof freezes supplied contents and directory membership
@@ -40,7 +40,12 @@ completed channels before a later integrity or render assertion. The actual
 post-run added corpus input produces RED while its completed13-group TAP survives
 and completion remains false. All original/transitional producers and captures
 remain retained. Preparation passes two unchanged suites25 groups and actual
-rendered examples; full thirteen-suite proof belongs to immediate .1.1.3.1.
+rendered examples. Later .1.1.3.1 completes the selected thirteen-suite proof
+at two actual boundaries: twelve suites1298 groups with738 inputs, then the
+last39 groups after four checkpoint files expand it to742. Each run retains
+its own capsule identity; all common bytes/modes are identical. The initial
+missing-file failure remains retained. This is source-bound composition, not
+a single successful full run of the expanded capsule.
 
 The dated REPO-HYGIENE.8 claim also bound the edited development chapter. The
 initial doctrine run rejects its stale live input. freeze.py verifies the entire

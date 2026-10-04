@@ -2,17 +2,19 @@
 
 ## Current Activity
 
-Full PNT: fixed consumer input preparation is complete; selected thirteen-suite remeasurement precedes statement frames, remaining producer families, membership/replacement and canonical composition.
+Full PNT: selected consumer proof repair is complete; basic statement provenance precedes family composition, remaining producers and executable membership/replacement.
 
 ## Latest Completed Slice
 
-`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.3.0` — Prepared a conservative capsule of738 exact parent-owned input files from Git3fc589f8494fd55b4f0154d6c226797a4fa2f711 plus one explicit book overlay. Independent Git/rg census verifies314 source-related lexical sites and16 named input edges; these are not classified runtime reads or defects. Two unchanged smoke suites pass25 complete groups and two source-identical examples render. Eighteen reason-checked controls reject, including an actual post-run input mutation that retains completed TAP/channels. Original broader observations stay unchanged; complete thirteen-suite remeasurement is next under .3.1.
+`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.3.1` — Thirteen unchanged suites complete1337 top-level groups: twelve pass1298 with738 fixed inputs; the final suite passes39 after four exact Git checkpoint inputs are added. Common bytes/modes are unchanged and both actual capsule boundaries remain explicit. The initial missing-file RED, all original streams and old disclosed records survive. Independent Git/rg/TAP review verifies326 lexical sites/21 named edges and rejects22 evidence corruptions; two original examples render from both the repaired consumer capsule and a separate complete final public-book capsule. New source-bound acceptance supersedes the old broader observation without recovering its unretained live-document reads; startup .5 stays open.
 
 ## Next Action
 
-Activate `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.3.1` after clean preparation landing; execute all13 unchanged suites and the book from the fixed capsule, independently verify complete TAP and retained input identities, and adjudicate the broader .1.1.0 gaps. Statement frames .1.1.1 follow clean .3 closeout. No recovery/purge.
+Activate `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1` from the clean closeout. Probe splitter/source boundaries first and preserve eleven statement contracts without changing public event/dependency interfaces. No recovery/purge.
 
 ## Recent Completions
+
+- `2026-10-04` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.3.1` accepts1337 source-bound groups and preserves the initial checkpoint-input RED.
 
 - `2026-10-04` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.3.0` prepares738 fixed inputs,25 smoke groups/two renders and18 reason-checked controls.
 
@@ -43,8 +45,6 @@ Activate `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.3.1` after clean pr
 - `2026-10-03` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.4` repairs local null-return forms with981 focused tests.
 
 - `2026-10-03` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.3` repairs lazy callable value conditionals with947 focused tests.
-
-- `2026-10-03` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.2` repairs typed marker groups/nested returns with900 focused tests.
 
 ## History
 
