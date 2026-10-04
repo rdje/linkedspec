@@ -242,6 +242,23 @@ lowering. The preserved diagnostic fixture currently fails eleven of thirteen
 groups; the genuine unsupported/raw and opaque-return guards pass. This is a
 complete failing baseline, not acceptance of the repaired compiler.
 
+The first provenance step now records original scalar source positions privately
+for the Perl `return_general`, `set_value`, and `if_flow` scanners. It keeps the
+original event object and arguments; the position records remain separate from
+public descriptor events. For the standalone action strings inside the two examples
+above, without their surrounding framing spaces, return matches start at `0, 23`
+and set matches at `6, 23, 39`. The quoted set at `6` is deliberately still recorded
+as a syntactic match at this stage. Provenance identifies where a scanner matched;
+the subsequent membership repair decides whether that source is executable.
+
+The private collector follows the selected event array by object identity, retains
+empty and opaque dispatcher returns, isolates nested invocations, and checks that
+each recorded scalar span retrieves its exact original raw source. Ordinary public
+scans retain their existing fields and order. Remaining producer families and recursive
+frames, quoted-source selection, exact replacement, and final recurring acceptance
+are separate steps. This private channel does not repair the quoted-value or readiness
+defects described below.
+
 The earlier hash-key residual drain and its raw permutations remain historical evidence.
 These exact sources return `ok` and `a` respectively, both natively and from independently
 loaded emitted source in the measured before/after source-and-seed comparisons:

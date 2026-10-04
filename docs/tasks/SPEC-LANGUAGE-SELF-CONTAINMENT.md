@@ -2092,10 +2092,76 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
   Commit: This leaf lands the bounded additional diagnosis; Git is the commit identity authority. Next producer provenance .1 activates only after the clean handoff.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1`
-  Status: `pending`
+  Status: `active`
   Goal: Preserve scanner match provenance through a private source-bound interface.
   Dependencies: `.1.3.3.0.7.2.2.0.0`
   Acceptance: Select exact producer families from the committed inventory and split if needed. Capture actual regex offsets before nested parsing overwrites match globals; translate recursive/substatement frames explicitly. Preserve original raw/args bytes, family precedence, occurrence order, opaque delegation and caller error state; no public event schema changes. Verify affected scanner/control/recognized-pattern consumers and commit before membership changes.
+
+  Children: `.1.3.3.0.7.2.2.0.1.0`, `.1.3.3.0.7.2.2.0.1.1`, `.1.3.3.0.7.2.2.0.1.2`, `.1.3.3.0.7.2.2.0.1.3`, `.1.3.3.0.7.2.2.0.1.4`, `.1.3.3.0.7.2.2.0.1.5`, `.1.3.3.0.7.2.2.0.1.6`
+  Producer slices: First establish the private recording seam and three source-bound return/set/IF producers. Then complete basic, remaining pipeline, recursive/composed flow, remaining legacy and staged/progressive/recognition owners separately; split the large legacy owner into measured safe batches before activation. Each slice keeps public events unchanged and owns actual source-position tests. Private provenance is not connected to readiness/replacement until the parent is independently composed.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.0`
+  Status: `done`
+  Goal: Record exact source positions privately for return_general, set_value and if_flow without changing public helper events.
+  Dependencies: `.1.3.3.0.7.2.2.0.0`
+  Activation: Clean 8d71b3b5cbea894416c14a9fade10968a73a8a5f; all ten hooks/post-pointer PASS, Git clean, brief0 and no background job. Relevant scanner registry/five scoped dependencies/first-defined opaque behavior, OwnerDispatch error preservation, helper-pattern/slash contracts, occurrence/order/readiness and book sections reviewed. Freeze the prior mapping claim/fact before changing bound production inputs.
+  Owned paths: perl/LinkedSpec/ActionIR/ScannerCore.pm, Scanner/LegacyRules.pm, Scanner/PrimitivePipelineRules.pm and Scanner/FlowRules.pm; t/actionir_helper_source_provenance.t. No CI registration or public metadata fields change here. This task/index/resume/live/roadmap/change/notes/book/Knowledge and docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.0.json; preserve prior .0.0 manifest at actual 8d71b3b5cbea894416c14a9fade10968a73a8a5f. Checkpoint prefix docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.0- owns before-ScannerCore.pm, before-LegacyRules.pm, before-PrimitivePipelineRules.pm, before-FlowRules.pm, cases.json, probe.pl, capture.py, before.json, after.json, tests.py, tests-before.json, tests-after.json, consumers.py/json, review.py/verification.json, book.py/json and claim.py plus any explicit initial failed instruments/captures. Scratch is .linkedspec-data/scratch/helper-source-provenance; preserve all original captures and no recovery/purge.
+  Verification tier: `focused`
+  Focused checks: Actual complete private-provenance RED/GREEN; source-identical original/public versus private event equality and independently authored offsets, original raw/argument bytes, both counterexamples, quotes/Unicode/CRLF/regex/flow bodies, genuine and opaque/empty/delegated error/reentrant guards. Source-bound before/after public substitution/diagnostic identity; unchanged AST/order/trace/raw/span/generated/matches consumers and full Phase0; reviewer evidence corruptions, actual book render/examples, syntax, memory/Knowledge/claim/history/diff and all doctrines.
+  Canonical trigger: None; internal source sidecar only, with public events/arguments/lowering/CI unchanged. Membership/replacement public behavior and recurring registration require their designated canonical acceptance later.
+  Claim verification: `docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.0.json`
+  Private design: ScannerCore scopes an invocation-local recorder; producer hooks return the exact original event object and capture match positions before nested parsing. A private owner entry returns events and a separate source-origin sidecar, preserving opaque/empty returns and caller error state. Families explicitly load their Core hook. Validate source bounds and exact raw slices when recording; public events have no added fields. Record quoted syntactic matches as such; lexical membership is a later slice, not an implicit filter here. Coverage is exactly three contracts until the remaining producer leaves land.
+  Acceptance: Actual before/after provenance oracles distinguish quoted position8 from genuine return23 and quoted set6/real23/39 without altering stream order or losing events. Unicode spans use scalar coordinates; opaque events retain identity and nesting restores recorder state. Current quote defects and marker/comments remain unchanged and explicitly owned. Complete focused verification and per-slice commit before the next producer family.
+
+  Actual before permanent RED: Source-identical frozen four-owner command retains complete13 groups/11 failures; empty and opaque/caller-error controls pass. The old compiler has no private source channel; the explicitly labeled before adapter calls the published Scanner and reports an empty sidecar, never invented spans. All original TAP/fixture hashes and channels remain exact. Six independently authored scalar-position fixtures cover the two mapping counterexamples, quoted/real IF block, Unicode/CRLF, escapes and accepted regex/slash forms. Eighteen source-identical public compiler probes over seeds0/1/2 must finish before production changes.
+
+  Verification: All13 permanent provenance groups PASS after the same fixture fails11 before; empty/opaque/caller-error guards pass both. Six exact sources/18 source-and-seed before/after compiler pairs retain identical public event arrays, arguments, substitution, diagnostics, dumps and emitted source.39 private origins match independent scalar spans, including quoted/genuine twins and Unicode/CRLF. Full Phase0 1034 and ten unchanged consumers165 PASS; total unchanged1199, plus13 new groups. Twelve actual evidence corruptions reject; two exact book examples render. Only four declared production owners and the new test change; standard consumers/spec/CI/governance remain activation-exact. Coverage is exactly return_general/set_value/if_flow; quoted syntactic matches and existing value/readiness/marker/comment defects remain unchanged, not admitted or fixed. Focused doctrine/claim/Knowledge/history/diff and final hooks govern landing.
+  Commit: This bounded private channel lands independently; Git is the commit identity authority. Activate PrimitiveBasicRules .1 only after clean handoff and historical claim freeze.
+
+## Acceptance Checklist — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.0
+
+- [x] **REPRODUCE / ISSUE** — call_spec_handler_subst and public Scanner probes retain exact occurrence/raw inputs; frozen four-owner permanent proof has complete13-group/11-failure RED, without invented old spans.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Tool-backed before arrays carry raw/args without occurrence positions; ScannerCore and three declared producer match sites need exact pre-parse coordinates, with reference-bound private origins and explicit original source frames.
+- [x] **FIX** — Invocation-local Core recorder and return_general/set_value/if_flow hooks retain original event objects, arguments and source slices; ordinary public events gain no fields, and remaining producer ownership stays explicit.
+- [x] **ADDRESSED (verified)** — All13 provenance groups PASS;39 source origins satisfy independent spans in18 before/after pairs. Nested/unowned isolation, invalid-slice rejection, inactive passthrough and opaque/empty/caller-error behavior execute successfully.
+- [x] **NO REGRESSION** — All18 public event/diagnostic/substitution/dump/emission identities match. Full Phase0 1034 plus ten unchanged165 top-level tests PASS; twelve executed evidence corruptions reject. No quote/readiness repair or broader backend admission is inferred.
+- [x] **LOCKSTEP** — Two exact examples render with partial three-contract scope; task/index/resume/live/roadmap/book/Knowledge/claims and bounded histories agree. git diff --check and focused scripts/check_doctrines.sh hook acceptance govern the clean commit.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1`
+  Status: `pending`
+  Goal: Complete PrimitiveBasicRules source provenance.
+  Dependencies: `.1.3.3.0.7.2.2.0.1.0`
+  Acceptance: Select exact regex and statement frames, preserve all raw/args and current five callback dependencies; verify actual source/occurrence/direct consumer oracles before commit.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2`
+  Status: `pending`
+  Goal: Complete remaining PrimitivePipelineRules source provenance.
+  Dependencies: `.1.3.3.0.7.2.2.0.1.1`
+  Acceptance: Keep literal receivers and structured statement/array plans; explicitly translate complete statement frames and do not feed masked operands into parsing.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3`
+  Status: `pending`
+  Goal: Complete remaining FlowRules source provenance and recursive frames.
+  Dependencies: `.1.3.3.0.7.2.2.0.1.2`
+  Acceptance: Translate case/default block and inline-switch argument frames explicitly; preserve composite traversal rather than global lexical sorting.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4`
+  Status: `pending`
+  Goal: Complete remaining LegacyRules source provenance.
+  Dependencies: `.1.3.3.0.7.2.2.0.1.3`
+  Acceptance: Split the large measured producer inventory into safe coherent families before any implementation; preserve legacy ownership and accepted slash patterns.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5`
+  Status: `pending`
+  Goal: Complete staged/progressive/recognition source provenance.
+  Dependencies: `.1.3.3.0.7.2.2.0.1.4`
+  Acceptance: Use published LinkedSpec contracts and exact option/token/transaction sources; only this repository is writable and RGX/PGEN stay black boxes.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6`
+  Status: `pending`
+  Goal: Independently compose all producer provenance.
+  Dependencies: `.1.3.3.0.7.2.2.0.1.5`
+  Acceptance: Verify every selected producer/source frame, public-event equality, opaque/error/order invariants and source-bound recurrence before closing this private parent.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2`
   Status: `pending`
@@ -2368,7 +2434,14 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 | 43.4.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2` | `active` | Evidence-selected bounded lexical ownership repair after committed diagnosis. |
 | 43.4.2.0 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0` | `active` | Executable occurrence repair, including quoted literal corruption and typed nested host-call failures. |
 | 43.4.2.0.0 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.0` | `done` | Two raw-key mapper failures and complete expected RED; production unchanged. |
-| 43.4.2.0.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1` | `pending` | Producer source provenance and explicit recursive frames. |
+| 43.4.2.0.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1` | `active` | Producer source provenance and explicit recursive frames. |
+| 43.4.2.0.1.0 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.0` | `done` | Private three-contract spans;18 public identities/39 origins/13 GREEN groups/1199 unchanged tests. |
+| 43.4.2.0.1.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1` | `pending` | Complete PrimitiveBasicRules source provenance before membership. |
+| 43.4.2.0.1.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2` | `pending` | Complete remaining pipeline source provenance before membership. |
+| 43.4.2.0.1.3 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3` | `pending` | Complete recursive/composed flow source provenance before membership. |
+| 43.4.2.0.1.4 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4` | `pending` | Complete remaining legacy, to be split source provenance before membership. |
+| 43.4.2.0.1.5 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5` | `pending` | Complete staged/progressive/recognition source provenance before membership. |
+| 43.4.2.0.1.6 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6` | `pending` | Complete independent producer composition source provenance before membership. |
 | 43.4.2.0.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2` | `pending` | Executable source membership with original arguments. |
 | 43.4.2.0.3 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3` | `pending` | Exact replacement preserving quoted twins and genuine order. |
 | 43.4.2.0.4 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.4` | `pending` | Recurring test registration and exact canonical composition. |

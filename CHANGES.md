@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-10-04 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.0: retain private helper match provenance
+
+Implement the invocation-local ScannerCore sidecar and return_general/set_value/if_flow hooks in four source owners. Original objects/arguments/public fields stay intact. Six exact sources/18 before-after pairs preserve complete public events, diagnostics, substitution, parser dumps and emission;39 private origins satisfy independent scalar spans. The same permanent13-group fixture fails11 before/two guards green and passes all13 after. Full Phase0 1034 plus ten unchanged165 tests PASS; twelve evidence corruptions reject and two exact examples render. Freeze prior mapping claim historically. Remaining producers, membership/replacement/recurring canonical acceptance and marker/comments remain explicit successors; quoted syntactic matches are retained, so no quote/readiness fix or backend admission is claimed.
+
 ## 2026-10-04 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.0: helper scan occurrence ambiguity
 
 Two exact seed0 Toolbox AST/substitution/diagnostic captures execute and reject earliest-raw and skip-quoted raw-key mappers. The former drops a genuine return; the latter reorders real set calls. Preserve exact original/replayed thirteen-group RED with11 failures/two green guards,45 unchanged consumer tests,12 evidence controls, seven source-bound scanner families and two rendered examples. Keep all production/spec/standard-test/CI/governance bytes exact to ea45. Freeze prior diagnosis manifest historically and decompose private provenance, membership, exact replacement and recurring canonical composition before production edits. The failing candidate fixture is retained under checkpoints rather than installed as a standard test.

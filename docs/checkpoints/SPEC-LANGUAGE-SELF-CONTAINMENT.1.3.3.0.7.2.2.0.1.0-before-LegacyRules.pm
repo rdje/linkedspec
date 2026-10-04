@@ -1,0 +1,1182 @@
+#------------------------------------------------------------------------------
+# Package: LinkedSpec::ActionIR::Scanner::LegacyRules
+# Purpose: Direct helper-pattern scanner for legacy and compatibility DSL
+#          surfaces before canonical ActionIR lowering.
+#------------------------------------------------------------------------------
+package LinkedSpec::ActionIR::Scanner::LegacyRules;
+
+use 5.010;
+BEGIN {
+ require File::Basename;
+ my $module_dir = (File::Basename::fileparse(__FILE__))[1];
+ my $action_ir_dir = File::Basename::dirname($module_dir);
+ my $linked_spec_dir = File::Basename::dirname($action_ir_dir);
+ my $perl_root = File::Basename::dirname($linked_spec_dir);
+ unshift @INC, $perl_root unless grep { defined($_) && $_ eq $perl_root } @INC;
+}
+use LinkedSpec::ActionIR::MethodExpr ();
+
+sub _is_primitive_literal_token {
+ my ($expr) = @_;
+ my $trimmed = _trim_action_ir_value($expr);
+ return 0 unless defined($trimmed) && length($trimmed);
+ return 1 if $trimmed =~ /^-?\d+(?:\.\d+)?$/o;
+ return 1 if $trimmed =~ /^\"(?:\\.|[^\"])*\"$/s || $trimmed =~ /^'(?:\\.|[^'])*'$/s;
+ return 1 if $trimmed eq 'undef' || $trimmed eq 'true' || $trimmed eq 'false';
+ return 0
+}
+
+sub try_scan_contract_ir_events {
+ my ($id, $code) = @_;
+ my %dispatch = (
+  'call' => \&_scan_contract_call,
+  'push_single_arg' => \&_scan_contract_push_single_arg,
+  'push_indexed_arg' => \&_scan_contract_push_indexed_arg,
+  'push_target_arg' => \&_scan_contract_push_target_arg,
+  'push_target_indexed_arg' => \&_scan_contract_push_target_indexed_arg,
+  'push_scope_target_arg' => \&_scan_contract_push_scope_target_arg,
+  'return_general' => \&_scan_contract_return_general,
+  'return' => \&_scan_contract_return,
+  'capture_macro' => \&_scan_contract_capture_macro,
+  'capture' => \&_scan_contract_capture,
+  'capture_if' => \&_scan_contract_capture_if,
+  'capture_if_macro' => \&_scan_contract_capture_if_macro,
+  'capture_slice' => \&_scan_contract_capture_slice,
+  'capture_slice_len' => \&_scan_contract_capture_slice_len,
+  'capture_slice_until_cursor' => \&_scan_contract_capture_slice_until_cursor,
+  'capture_slice_until_cursor_len' => \&_scan_contract_capture_slice_until_cursor_len,
+  'capture_until_boundary' => \&_scan_contract_capture_until_boundary,
+  'capture_take_until_cursor' => \&_scan_contract_capture_take_until_cursor,
+  'capture_take_until_cursor_len' => \&_scan_contract_capture_take_until_cursor_len,
+  'capture_slice_pos' => \&_scan_contract_capture_slice_pos,
+  'capture_slice_line' => \&_scan_contract_capture_slice_line,
+  'capture_slice_col' => \&_scan_contract_capture_slice_col,
+  'capture_slice_length' => \&_scan_contract_capture_slice_length,
+  'start_capture_slice' => \&_scan_contract_start_capture_slice,
+  'start_capture_slice_from_mark' => \&_scan_contract_start_capture_slice_from_mark,
+  'capture_slice_here' => \&_scan_contract_capture_slice_here,
+  'capture_rest' => \&_scan_contract_capture_rest,
+  'capture_rest_len' => \&_scan_contract_capture_rest_len,
+  'capture_rest_length' => \&_scan_contract_capture_rest_length,
+  'capture_take_rest' => \&_scan_contract_capture_take_rest,
+  'capture_take_rest_len' => \&_scan_contract_capture_take_rest_len,
+  'capture_take_slice' => \&_scan_contract_capture_take_slice,
+  'capture_take_slice_len' => \&_scan_contract_capture_take_slice_len,
+  'capture_from_rule_start' => \&_scan_contract_capture_from_rule_start,
+  'capture_len_from_rule_start' => \&_scan_contract_capture_len_from_rule_start,
+  'capture_from_mark' => \&_scan_contract_capture_from_mark,
+  'capture_len_from_mark' => \&_scan_contract_capture_len_from_mark,
+  'capture_take_from_mark' => \&_scan_contract_capture_take_from_mark,
+  'capture_take_len_from_mark' => \&_scan_contract_capture_take_len_from_mark,
+  'capture_rest_from_mark' => \&_scan_contract_capture_rest_from_mark,
+  'capture_rest_len_from_mark' => \&_scan_contract_capture_rest_len_from_mark,
+  'capture_take_rest_from_mark' => \&_scan_contract_capture_take_rest_from_mark,
+  'capture_take_rest_len_from_mark' => \&_scan_contract_capture_take_rest_len_from_mark,
+  'capture_until_cursor_from_mark' => \&_scan_contract_capture_until_cursor_from_mark,
+  'capture_until_cursor_len_from_mark' => \&_scan_contract_capture_until_cursor_len_from_mark,
+  'capture_take_until_cursor_from_mark' => \&_scan_contract_capture_take_until_cursor_from_mark,
+  'capture_take_until_cursor_len_from_mark' => \&_scan_contract_capture_take_until_cursor_len_from_mark,
+  'capture_between_marks' => \&_scan_contract_capture_between_marks,
+  'capture_len_between_marks' => \&_scan_contract_capture_len_between_marks,
+  'capture_take_between_marks' => \&_scan_contract_capture_take_between_marks,
+  'capture_take_between_len_marks' => \&_scan_contract_capture_take_between_len_marks,
+  'mark_input_start' => \&_scan_contract_mark_input_start,
+  'mark_input_end' => \&_scan_contract_mark_input_end,
+  'mark_here' => \&_scan_contract_mark_here,
+  'mark_entry_start' => \&_scan_contract_mark_entry_start,
+  'mark_entry_end' => \&_scan_contract_mark_entry_end,
+  'mark_match_start' => \&_scan_contract_mark_match_start,
+  'mark_match_end' => \&_scan_contract_mark_match_end,
+  'mark_copy' => \&_scan_contract_mark_copy,
+  'mark_capture_slice' => \&_scan_contract_mark_capture_slice,
+  'clear_mark' => \&_scan_contract_clear_mark,
+  'mark_exists' => \&_scan_contract_mark_exists,
+  'mark_pos' => \&_scan_contract_mark_pos,
+  'mark_line' => \&_scan_contract_mark_line,
+  'mark_col' => \&_scan_contract_mark_col,
+  'cursor_pos' => \&_scan_contract_cursor_pos,
+  'cursor_line' => \&_scan_contract_cursor_line,
+  'cursor_col' => \&_scan_contract_cursor_col,
+  'cursor_rest' => \&_scan_contract_cursor_rest,
+  'cursor_rest_len' => \&_scan_contract_cursor_rest_len,
+  'input_slice' => \&_scan_contract_input_slice,
+  'input_text' => \&_scan_contract_input_text,
+  'input_len' => \&_scan_contract_input_len,
+  'input_end_pos' => \&_scan_contract_input_end_pos,
+  'input_end_line' => \&_scan_contract_input_end_line,
+  'input_end_col' => \&_scan_contract_input_end_col,
+  'entry_text' => \&_scan_contract_entry_text,
+  'entry_group' => \&_scan_contract_entry_group,
+  'entry_groups' => \&_scan_contract_entry_groups,
+  'entry_named' => \&_scan_contract_entry_named,
+  'entry_has' => \&_scan_contract_entry_has,
+  'entry_map' => \&_scan_contract_entry_map,
+  'entry_named_map' => \&_scan_contract_entry_named_map,
+  'entry_line' => \&_scan_contract_entry_line,
+  'entry_start_line' => \&_scan_contract_entry_start_line,
+  'entry_col' => \&_scan_contract_entry_col,
+  'entry_start_col' => \&_scan_contract_entry_start_col,
+  'entry_len' => \&_scan_contract_entry_len,
+  'entry_start_pos' => \&_scan_contract_entry_start_pos,
+  'entry_end_pos' => \&_scan_contract_entry_end_pos,
+  'entry_end_line' => \&_scan_contract_entry_end_line,
+  'entry_end_col' => \&_scan_contract_entry_end_col,
+  'match_text' => \&_scan_contract_match_text,
+  'match_group' => \&_scan_contract_match_group,
+  'match_groups' => \&_scan_contract_match_groups,
+  'match_named' => \&_scan_contract_match_named,
+  'match_has' => \&_scan_contract_match_has,
+  'match_map' => \&_scan_contract_match_map,
+  'match_named_map' => \&_scan_contract_match_named_map,
+  'match_len' => \&_scan_contract_match_len,
+  'match_start_pos' => \&_scan_contract_match_start_pos,
+  'match_end_pos' => \&_scan_contract_match_end_pos,
+  'match_end_line' => \&_scan_contract_match_end_line,
+  'match_end_col' => \&_scan_contract_match_end_col,
+  'match_start_line' => \&_scan_contract_match_start_line,
+  'match_line' => \&_scan_contract_match_line,
+  'match_start_col' => \&_scan_contract_match_start_col,
+  'match_col' => \&_scan_contract_match_col,
+  'save_cursor' => \&_scan_contract_save_cursor,
+  'restore_cursor' => \&_scan_contract_restore_cursor,
+  'rewind_entry_start' => \&_scan_contract_rewind_entry_start,
+  'rewind_match_start' => \&_scan_contract_rewind_match_start,
+ );
+ my $handler = $dispatch{$id};
+ return undef unless $handler;
+ return $handler->($code)
+}
+
+sub _scan_contract_call {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bcall\s*\(\s*(?<callee>\w+)\s*\)/g) {
+ my $prefix = substr($code, 0, $-[0]);
+ next if $prefix =~ /recognize_once\s*\(\s*[A-Za-z_][A-Za-z0-9_]*\s*,\s*\z/o;
+ next if $prefix =~ /observe_recognition\s*\(\s*[^,]+\s*,\s*\z/o;
+ push @events, {raw => $&, args => {callee => $+{callee}}};
+}
+ return \@events
+}
+
+sub _scan_contract_push_single_arg {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bpush\s*\(\s*(?<source>\w+)\s*\)/g) {
+ push @events, {raw => $&, args => {source => $+{source}}};
+}
+ return \@events
+}
+
+sub _scan_contract_push_target_arg {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bpush\s*\(\s*(?<source>\w+)\s*,\s*(?<target>\w+)\s*\)/g) {
+ next if _is_primitive_literal_token($+{target});
+ push @events, {raw => $&, args => {source => $+{source}, target => $+{target}}};
+}
+ return \@events
+}
+
+sub _scan_contract_push_indexed_arg {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bpush\s*\(\s*(?<source>\w+)\s*,\s*(?<index>\d+)\s*\)/g) {
+ push @events, {raw => $&, args => {source => $+{source}, index => $+{index}}};
+}
+ return \@events
+}
+
+sub _scan_contract_push_target_indexed_arg {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bpush\s*\(\s*(?<source>\w+)\s*,\s*(?<target>\w+)\s*,\s*(?<index>\d+)\s*\)/g) {
+ push @events, {raw => $&, args => {source => $+{source}, target => $+{target}, index => $+{index}}};
+}
+ return \@events
+}
+
+sub _scan_contract_push_scope_target_arg {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bpush\s*\(\s*(?<scope>\w+)\s*,\s*(?<source>\w+)\s*,\s*(?<target>\w+)\s*\)/g) {
+ push @events, {raw => $&, args => {scope => $+{scope}, source => $+{source}, target => $+{target}}};
+}
+ return \@events
+}
+
+sub _scan_contract_return_general {
+ my ($code) = @_;
+ my @events;
+ my $view = LinkedSpec::ActionIR::MethodExpr::_helper_pattern_view($code);
+while ($view =~ /\b(?<expr>return\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/g) {
+ my $expr = substr($code, $-[0], $+[0] - $-[0]);
+ my $call = _parse_method_function_expr($expr);
+ next unless $call && $call->{method} eq 'return';
+ my $args = $call->{args} || [];
+ next unless ref($args) eq 'ARRAY' && @$args == 1;
+ push @events, {raw => $expr, args => {payload => _trim_action_ir_value($args->[0])}};
+}
+ return \@events
+}
+
+sub _scan_contract_return {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\breturn\s*\(\s*(?<label>\w+)\s*,(?<arg>\s*(?:[^\(\)]++|(?<par>\((?:[^\(\)]++|(?&par))+\)))+)\s*\)/g) {
+ push @events, {raw => $&, args => {label => $+{label}, arg => _trim_action_ir_value($+{arg})}};
+}
+ return \@events
+}
+
+sub _scan_contract_capture_macro {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\$CAPTURE\b/g) {
+ push @events, {raw => $&, args => {}};
+}
+ return \@events
+}
+
+sub _scan_contract_capture {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bcapture\s*\(\s*(?<label>\w+)\s*\)/g) {
+ push @events, {raw => $&, args => {label => $+{label}}};
+}
+ return \@events
+}
+
+sub _scan_contract_capture_if {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bcapture_if\s*\(\s*(?<label>\w+)\s*\)/g) {
+ push @events, {raw => $&, args => {label => $+{label}}};
+}
+ return \@events
+}
+
+sub _scan_contract_capture_if_macro {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bCAPTURE_IF\s*\(\s*\)/g) {
+ push @events, {raw => $&, args => {}};
+}
+ return \@events
+}
+
+sub _scan_contract_capture_slice {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bcapture_slice\s*\(\s*\)/g) {
+ push @events, {raw => $&, args => {}};
+}
+ return \@events
+}
+
+sub _scan_contract_capture_slice_len {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bcapture_slice_len\s*\(\s*\)/g) {
+ push @events, {raw => $&, args => {}};
+}
+ return \@events
+}
+
+sub _scan_contract_capture_slice_until_cursor {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bcapture_slice_until_cursor\s*\(\s*\)/g) {
+ push @events, {raw => $&, args => {}};
+}
+ return \@events
+}
+
+sub _scan_contract_capture_slice_until_cursor_len {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bcapture_slice_until_cursor_len\s*\(\s*\)/g) {
+ push @events, {raw => $&, args => {}};
+}
+ return \@events
+}
+
+sub _scan_contract_capture_until_boundary {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bcapture_until_boundary\s*\(\s*(?<boundaries>(?:"(?:\\.|[^"])*"|'(?:\\.|[^'])*'|\w+)(?:\s*,\s*(?:"(?:\\.|[^"])*"|'(?:\\.|[^'])*'|\w+))*)\s*\)/g) {
+ my @boundaries;
+ for my $boundary (split(/\s*,\s*/, $+{boundaries})) {
+  if ($boundary =~ /\A(["'])(.*)\1\z/s) {
+   $boundary = $2;
+   $boundary =~ s/\\(["'\\])/$1/g;
+  }
+  push @boundaries, $boundary if length($boundary);
+ }
+ push @events, {raw => $&, args => {boundaries => \@boundaries}};
+}
+ return \@events
+}
+
+sub _scan_contract_capture_take_until_cursor {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bcapture_take_until_cursor\s*\(\s*\)/g) {
+ push @events, {raw => $&, args => {}};
+}
+ return \@events
+}
+
+sub _scan_contract_capture_take_until_cursor_len {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bcapture_take_until_cursor_len\s*\(\s*\)/g) {
+ push @events, {raw => $&, args => {}};
+}
+ return \@events
+}
+
+#------------------------------------------------------------------------------
+# Function: _scan_contract_capture_slice_pos
+# Purpose : Scan explicit anonymous capture-boundary position reads.
+# Args    : ($code)
+# Returns : arrayref of discovered helper events
+#------------------------------------------------------------------------------
+sub _scan_contract_capture_slice_pos {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bcapture_slice_pos\s*\(\s*\)/g) {
+ push @events, {raw => $&, args => {}};
+}
+ return \@events
+}
+
+sub _scan_contract_capture_slice_line {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bcapture_slice_line\s*\(\s*\)/g) {
+ push @events, {raw => $&, args => {}};
+}
+ return \@events
+}
+
+sub _scan_contract_capture_slice_col {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bcapture_slice_col\s*\(\s*\)/g) {
+ push @events, {raw => $&, args => {}};
+}
+ return \@events
+}
+
+sub _scan_contract_capture_slice_length {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bcapture_slice_length\s*\(\s*\)/g) {
+ push @events, {raw => $&, args => {}};
+}
+ return \@events
+}
+
+sub _scan_contract_start_capture_slice {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bstart_capture_slice\s*\(\s*\)/g) {
+ push @events, {raw => $&, args => {}};
+}
+ return \@events
+}
+
+sub _scan_contract_capture_slice_here {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bcapture_slice_here\s*\(\s*\)/g) {
+ push @events, {raw => $&, args => {}};
+}
+ return \@events
+}
+
+sub _scan_contract_capture_rest {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bcapture_rest\s*\(\s*\)/g) {
+ push @events, {raw => $&, args => {}};
+}
+ return \@events
+}
+
+sub _scan_contract_capture_rest_len {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bcapture_rest_len\s*\(\s*\)/g) {
+ push @events, {raw => $&, args => {}};
+}
+ return \@events
+}
+
+sub _scan_contract_capture_rest_length {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bcapture_rest_length\s*\(\s*\)/g) {
+ push @events, {raw => $&, args => {}};
+}
+ return \@events
+}
+
+sub _scan_contract_capture_take_rest {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bcapture_take_rest\s*\(\s*\)/g) {
+ push @events, {raw => $&, args => {}};
+}
+ return \@events
+}
+
+sub _scan_contract_capture_take_rest_len {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bcapture_take_rest_len\s*\(\s*\)/g) {
+ push @events, {raw => $&, args => {}};
+}
+ return \@events
+}
+
+sub _scan_contract_capture_from_rule_start {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bcapture_from_rule_start\s*\(\s*\)/g) {
+ push @events, {raw => $&, args => {}};
+}
+ return \@events
+}
+
+sub _scan_contract_capture_len_from_rule_start {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bcapture_len_from_rule_start\s*\(\s*\)/g) {
+ push @events, {raw => $&, args => {}};
+}
+ return \@events
+}
+
+sub _scan_contract_capture_take_slice {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bcapture_take\s*\(\s*\)/g) {
+ push @events, {raw => $&, args => {}};
+}
+ return \@events
+}
+
+sub _scan_contract_capture_take_slice_len {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bcapture_take_len\s*\(\s*\)/g) {
+ push @events, {raw => $&, args => {}};
+}
+ return \@events
+}
+
+sub _scan_contract_start_capture_slice_from_mark {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bstart_capture_slice_from\s*\(\s*(?<mark>\w+)\s*\)/g) {
+ push @events, {raw => $&, args => {mark => $+{mark}}};
+}
+ return \@events
+}
+
+sub _scan_contract_capture_from_mark {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bcapture_from\s*\(\s*(?<mark>\w+)\s*\)/g) {
+ push @events, {raw => $&, args => {mark => $+{mark}}};
+}
+ return \@events
+}
+
+sub _scan_contract_capture_len_from_mark {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bcapture_len_from\s*\(\s*(?<mark>\w+)\s*\)/g) {
+ push @events, {raw => $&, args => {mark => $+{mark}}};
+}
+ return \@events
+}
+
+sub _scan_contract_capture_take_from_mark {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bcapture_take\s*\(\s*(?<mark>\w+)\s*\)/g) {
+ push @events, {raw => $&, args => {mark => $+{mark}}};
+}
+ return \@events
+}
+
+sub _scan_contract_capture_take_len_from_mark {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bcapture_take_len_from\s*\(\s*(?<mark>\w+)\s*\)/g) {
+ push @events, {raw => $&, args => {mark => $+{mark}}};
+}
+ return \@events
+}
+
+sub _scan_contract_capture_rest_from_mark {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bcapture_rest_from\s*\(\s*(?<mark>\w+)\s*\)/g) {
+ push @events, {raw => $&, args => {mark => $+{mark}}};
+}
+ return \@events
+}
+
+sub _scan_contract_capture_rest_len_from_mark {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bcapture_rest_len_from\s*\(\s*(?<mark>\w+)\s*\)/g) {
+ push @events, {raw => $&, args => {mark => $+{mark}}};
+}
+ return \@events
+}
+
+sub _scan_contract_capture_take_rest_from_mark {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bcapture_take_rest_from\s*\(\s*(?<mark>\w+)\s*\)/g) {
+ push @events, {raw => $&, args => {mark => $+{mark}}};
+}
+ return \@events
+}
+
+sub _scan_contract_capture_take_rest_len_from_mark {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bcapture_take_rest_len_from\s*\(\s*(?<mark>\w+)\s*\)/g) {
+ push @events, {raw => $&, args => {mark => $+{mark}}};
+}
+ return \@events
+}
+
+sub _scan_contract_capture_until_cursor_from_mark {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bcapture_until_cursor_from\s*\(\s*(?<mark>\w+)\s*\)/g) {
+ push @events, {raw => $&, args => {mark => $+{mark}}};
+}
+ return \@events
+}
+
+sub _scan_contract_capture_until_cursor_len_from_mark {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bcapture_until_cursor_len_from\s*\(\s*(?<mark>\w+)\s*\)/g) {
+ push @events, {raw => $&, args => {mark => $+{mark}}};
+}
+ return \@events
+}
+
+sub _scan_contract_capture_take_until_cursor_from_mark {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bcapture_take_until_cursor_from\s*\(\s*(?<mark>\w+)\s*\)/g) {
+ push @events, {raw => $&, args => {mark => $+{mark}}};
+}
+ return \@events
+}
+
+sub _scan_contract_capture_take_until_cursor_len_from_mark {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bcapture_take_until_cursor_len_from\s*\(\s*(?<mark>\w+)\s*\)/g) {
+ push @events, {raw => $&, args => {mark => $+{mark}}};
+}
+ return \@events
+}
+
+sub _scan_contract_capture_between_marks {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bcapture_between\s*\(\s*(?<start>\w+)\s*,\s*(?<end>\w+)\s*\)/g) {
+ push @events, {raw => $&, args => {start => $+{start}, end => $+{end}}};
+}
+ return \@events
+}
+
+sub _scan_contract_capture_len_between_marks {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bcapture_len_between\s*\(\s*(?<start>\w+)\s*,\s*(?<end>\w+)\s*\)/g) {
+ push @events, {raw => $&, args => {start => $+{start}, end => $+{end}}};
+}
+ return \@events
+}
+
+sub _scan_contract_capture_take_between_marks {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bcapture_take_between\s*\(\s*(?<start>\w+)\s*,\s*(?<end>\w+)\s*\)/g) {
+ push @events, {raw => $&, args => {start => $+{start}, end => $+{end}}};
+}
+ return \@events
+}
+
+sub _scan_contract_capture_take_between_len_marks {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bcapture_take_between_len\s*\(\s*(?<start>\w+)\s*,\s*(?<end>\w+)\s*\)/g) {
+ push @events, {raw => $&, args => {start => $+{start}, end => $+{end}}};
+}
+ return \@events
+}
+
+sub _scan_contract_mark_here {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bmark_here\s*\(\s*(?<mark>\w+)\s*\)/g) {
+ push @events, {raw => $&, args => {mark => $+{mark}}};
+}
+ return \@events
+}
+
+sub _scan_contract_mark_input_start {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bmark_input_start\s*\(\s*(?<mark>\w+)\s*\)/g) {
+ push @events, {raw => $&, args => {mark => $+{mark}}};
+}
+ return \@events
+}
+
+sub _scan_contract_mark_input_end {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bmark_input_end\s*\(\s*(?<mark>\w+)\s*\)/g) {
+ push @events, {raw => $&, args => {mark => $+{mark}}};
+}
+ return \@events
+}
+
+sub _scan_contract_mark_entry_start {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bmark_entry_start\s*\(\s*(?<mark>\w+)\s*\)/g) {
+ push @events, {raw => $&, args => {mark => $+{mark}}};
+}
+ return \@events
+}
+
+sub _scan_contract_mark_entry_end {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bmark_entry_end\s*\(\s*(?<mark>\w+)\s*\)/g) {
+ push @events, {raw => $&, args => {mark => $+{mark}}};
+}
+ return \@events
+}
+
+sub _scan_contract_mark_match_start {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bmark_match_start\s*\(\s*(?<mark>\w+)\s*\)/g) {
+ push @events, {raw => $&, args => {mark => $+{mark}}};
+}
+ return \@events
+}
+
+sub _scan_contract_mark_match_end {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bmark_match_end\s*\(\s*(?<mark>\w+)\s*\)/g) {
+ push @events, {raw => $&, args => {mark => $+{mark}}};
+}
+ return \@events
+}
+
+sub _scan_contract_mark_copy {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bmark_copy\s*\(\s*(?<target>\w+)\s*,\s*(?<source>\w+)\s*\)/g) {
+ push @events, {raw => $&, args => {target => $+{target}, source => $+{source}}};
+}
+ return \@events
+}
+
+sub _scan_contract_mark_capture_slice {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bmark_capture_slice\s*\(\s*(?<mark>\w+)\s*\)/g) {
+ push @events, {raw => $&, args => {mark => $+{mark}}};
+}
+ return \@events
+}
+
+sub _scan_contract_clear_mark {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bclear_mark\s*\(\s*(?<mark>\w+)\s*\)/g) {
+ push @events, {raw => $&, args => {mark => $+{mark}}};
+}
+ return \@events
+}
+
+sub _scan_contract_mark_exists {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bmark_exists\s*\(\s*(?<mark>\w+)\s*\)/g) {
+ push @events, {raw => $&, args => {mark => $+{mark}}};
+}
+ return \@events
+}
+
+sub _scan_contract_mark_pos {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bmark_pos\s*\(\s*(?<mark>\w+)\s*\)/g) {
+ push @events, {raw => $&, args => {mark => $+{mark}}};
+}
+ return \@events
+}
+
+sub _scan_contract_mark_line {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bmark_line\s*\(\s*(?<mark>\w+)\s*\)/g) {
+ push @events, {raw => $&, args => {mark => $+{mark}}};
+}
+ return \@events
+}
+
+sub _scan_contract_mark_col {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bmark_col\s*\(\s*(?<mark>\w+)\s*\)/g) {
+ push @events, {raw => $&, args => {mark => $+{mark}}};
+}
+ return \@events
+}
+
+sub _scan_contract_cursor_pos {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bcursor_pos\s*\(\s*\)/g) {
+ push @events, {raw => $&, args => {}};
+}
+ return \@events
+}
+
+sub _scan_contract_cursor_line {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bcursor_line\s*\(\s*\)/g) {
+ push @events, {raw => $&, args => {}};
+}
+ return \@events
+}
+
+sub _scan_contract_cursor_col {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bcursor_col\s*\(\s*\)/g) {
+ push @events, {raw => $&, args => {}};
+}
+ return \@events
+}
+
+sub _scan_contract_cursor_rest {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bcursor_rest\s*\(\s*\)/g) {
+ push @events, {raw => $&, args => {}};
+}
+ return \@events
+}
+
+sub _scan_contract_cursor_rest_len {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bcursor_rest_len\s*\(\s*\)/g) {
+ push @events, {raw => $&, args => {}};
+}
+ return \@events
+}
+
+sub _scan_contract_input_text {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\binput_text\s*\(\s*\)/g) {
+ push @events, {raw => $&, args => {}};
+}
+ return \@events
+}
+
+sub _scan_contract_input_slice {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\b(?<expr>input_slice\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/g) {
+ push @events, {raw => $+{expr}, args => {}};
+}
+ return \@events
+}
+
+sub _scan_contract_input_len {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\binput_len\s*\(\s*\)/g) {
+ push @events, {raw => $&, args => {}};
+}
+ return \@events
+}
+
+sub _scan_contract_input_end_pos {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\binput_end_pos\s*\(\s*\)/g) {
+ push @events, {raw => $&, args => {}};
+}
+ return \@events
+}
+
+sub _scan_contract_input_end_line {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\binput_end_line\s*\(\s*\)/g) {
+ push @events, {raw => $&, args => {}};
+}
+ return \@events
+}
+
+sub _scan_contract_input_end_col {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\binput_end_col\s*\(\s*\)/g) {
+ push @events, {raw => $&, args => {}};
+}
+ return \@events
+}
+
+sub _scan_contract_entry_text {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bentry_text\s*\(\s*\)/g) {
+ push @events, {raw => $&, args => {}};
+}
+ return \@events
+}
+
+sub _scan_contract_entry_group {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bentry_group\s*\(\s*(?<index>\d+)\s*\)/g) {
+ push @events, {raw => $&, args => {index => $+{index}}};
+}
+ return \@events
+}
+
+sub _scan_contract_entry_groups {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bentry_groups\s*\(\s*\)/g) {
+ push @events, {raw => $&, args => {}};
+}
+ return \@events
+}
+
+sub _scan_contract_entry_named {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bentry_named\s*\(\s*(?<name>\w+)\s*\)/g) {
+ push @events, {raw => $&, args => {name => $+{name}}};
+}
+ return \@events
+}
+
+sub _scan_contract_entry_has {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bentry_has\s*\(\s*(?<name>\w+)\s*\)/g) {
+ push @events, {raw => $&, args => {name => $+{name}}};
+}
+ return \@events
+}
+
+sub _scan_contract_entry_map {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bentry_map\s*\(\s*\)/g) {
+ push @events, {raw => $&, args => {}};
+}
+ return \@events
+}
+
+sub _scan_contract_entry_named_map {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bentry_named_map\s*\(\s*\)/g) {
+ push @events, {raw => $&, args => {}};
+}
+ return \@events
+}
+
+sub _scan_contract_entry_line {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bentry_line\s*\(\s*\)/g) {
+ push @events, {raw => $&, args => {}};
+}
+ return \@events
+}
+
+sub _scan_contract_entry_start_line {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bentry_start_line\s*\(\s*\)/g) {
+ push @events, {raw => $&, args => {}};
+}
+ return \@events
+}
+
+sub _scan_contract_entry_col {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bentry_col\s*\(\s*\)/g) {
+ push @events, {raw => $&, args => {}};
+}
+ return \@events
+}
+
+sub _scan_contract_entry_start_col {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bentry_start_col\s*\(\s*\)/g) {
+ push @events, {raw => $&, args => {}};
+}
+ return \@events
+}
+
+sub _scan_contract_entry_len {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bentry_len\s*\(\s*\)/g) {
+ push @events, {raw => $&, args => {}};
+}
+ return \@events
+}
+
+sub _scan_contract_entry_start_pos {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bentry_start_pos\s*\(\s*\)/g) {
+ push @events, {raw => $&, args => {}};
+}
+ return \@events
+}
+
+sub _scan_contract_entry_end_pos {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bentry_end_pos\s*\(\s*\)/g) {
+ push @events, {raw => $&, args => {}};
+}
+ return \@events
+}
+
+sub _scan_contract_entry_end_line {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bentry_end_line\s*\(\s*\)/g) {
+ push @events, {raw => $&, args => {}};
+}
+ return \@events
+}
+
+sub _scan_contract_entry_end_col {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bentry_end_col\s*\(\s*\)/g) {
+ push @events, {raw => $&, args => {}};
+}
+ return \@events
+}
+
+sub _scan_contract_match_text {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bmatch_text\s*\(\s*\)/g) {
+ push @events, {raw => $&, args => {}};
+}
+ return \@events
+}
+
+sub _scan_contract_match_group {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bmatch_group\s*\(\s*(?<index>\d+)\s*\)/g) {
+ push @events, {raw => $&, args => {index => $+{index}}};
+}
+ return \@events
+}
+
+sub _scan_contract_match_groups {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bmatch_groups\s*\(\s*\)/g) {
+ push @events, {raw => $&, args => {}};
+}
+ return \@events
+}
+
+sub _scan_contract_match_named {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bmatch_named\s*\(\s*(?<name>\w+)\s*\)/g) {
+ push @events, {raw => $&, args => {name => $+{name}}};
+}
+ return \@events
+}
+
+sub _scan_contract_match_has {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bmatch_has\s*\(\s*(?<name>\w+)\s*\)/g) {
+ push @events, {raw => $&, args => {name => $+{name}}};
+}
+ return \@events
+}
+
+sub _scan_contract_match_map {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bmatch_map\s*\(\s*\)/g) {
+ push @events, {raw => $&, args => {}};
+}
+ return \@events
+}
+
+sub _scan_contract_match_named_map {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bmatch_named_map\s*\(\s*\)/g) {
+ push @events, {raw => $&, args => {}};
+}
+ return \@events
+}
+
+sub _scan_contract_match_len {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bmatch_len\s*\(\s*\)/g) {
+ push @events, {raw => $&, args => {}};
+}
+ return \@events
+}
+
+sub _scan_contract_match_start_pos {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bmatch_start_pos\s*\(\s*\)/g) {
+ push @events, {raw => $&, args => {}};
+}
+ return \@events
+}
+
+sub _scan_contract_match_end_pos {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bmatch_end_pos\s*\(\s*\)/g) {
+ push @events, {raw => $&, args => {}};
+}
+ return \@events
+}
+
+sub _scan_contract_match_end_line {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bmatch_end_line\s*\(\s*\)/g) {
+ push @events, {raw => $&, args => {}};
+}
+ return \@events
+}
+
+sub _scan_contract_match_end_col {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bmatch_end_col\s*\(\s*\)/g) {
+ push @events, {raw => $&, args => {}};
+}
+ return \@events
+}
+
+sub _scan_contract_match_start_line {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bmatch_start_line\s*\(\s*\)/g) {
+ push @events, {raw => $&, args => {}};
+}
+ return \@events
+}
+
+sub _scan_contract_match_line {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bmatch_line\s*\(\s*\)/g) {
+ push @events, {raw => $&, args => {}};
+}
+ return \@events
+}
+
+sub _scan_contract_match_start_col {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bmatch_start_col\s*\(\s*\)/g) {
+ push @events, {raw => $&, args => {}};
+}
+ return \@events
+}
+
+sub _scan_contract_match_col {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bmatch_col\s*\(\s*\)/g) {
+ push @events, {raw => $&, args => {}};
+}
+ return \@events
+}
+
+sub _scan_contract_save_cursor {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\bsave_cursor\s*\(\s*\)/g) {
+ push @events, {raw => $&, args => {}};
+}
+ return \@events
+}
+
+sub _scan_contract_restore_cursor {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\brestore_cursor\s*\(\s*\)/g) {
+ push @events, {raw => $&, args => {}};
+}
+ return \@events
+}
+
+sub _scan_contract_rewind_entry_start {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\brewind_entry_start\s*\(\s*\)/g) {
+ push @events, {raw => $&, args => {}};
+}
+ return \@events
+}
+
+sub _scan_contract_rewind_match_start {
+ my ($code) = @_;
+ my @events;
+while ($code =~ /\brewind_match_start\s*\(\s*\)/g) {
+ push @events, {raw => $&, args => {}};
+}
+ return \@events
+}
+
+1;

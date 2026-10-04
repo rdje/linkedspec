@@ -10,6 +10,56 @@ BEGIN {
 }
 use LinkedSpec::OwnerDispatch ();
 use LinkedSpec::ActionIR::Trace ();
+use Scalar::Util ();
+
+our $_source_event_recorder;
+
+# A producer records the exact match before passing its event to the caller.
+# Ordinary scans return the same event object without collecting source data.
+sub _record_scanned_source_event {
+ my ($event, $source, $start, $end) = @_;
+ return $event unless ref($_source_event_recorder) eq 'CODE';
+ die "(LinkedSpec::ActionIR::ScannerCore source provenance) -E- invalid source coordinates"
+  unless ref($event) eq 'HASH' && defined($source) && !ref($source)
+   && defined($start) && !ref($start) && $start =~ /\A[0-9]+\z/
+   && defined($end) && !ref($end) && $end =~ /\A[0-9]+\z/
+   && $start <= $end && $end <= length($source);
+ die "(LinkedSpec::ActionIR::ScannerCore source provenance) -E- raw source mismatch"
+  unless defined($event->{raw}) && !ref($event->{raw})
+   && substr($source, $start, $end - $start) eq $event->{raw};
+ $_source_event_recorder->({
+  event => $event,
+  source => $source,
+  source_span => {start => 0 + $start, end => 0 + $end},
+ });
+ return $event
+}
+
+# Private invocation-local sidecar. Instrumented producers retain their own
+# source frames; origins follow the selected event stream, never a lexical sort.
+# Contracts without producer hooks still return their ordinary events, with no
+# fabricated origins. Opaque dispatcher returns retain their original identity.
+sub _scan_contract_ir_events_with_provenance {
+ my @args = @_;
+ return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
+  my @recorded;
+  local $_source_event_recorder = sub { push @recorded, $_[0] };
+  my $events = scan_contract_ir_events(@args);
+  my @origins;
+  if (ref($events) eq 'ARRAY') {
+   my %by_event;
+   foreach my $origin (@recorded) {
+    push @{$by_event{Scalar::Util::refaddr($origin->{event})}}, $origin;
+   }
+   foreach my $event (@$events) {
+    next unless ref($event) eq 'HASH';
+    my $queue = $by_event{Scalar::Util::refaddr($event)};
+    push @origins, shift @$queue if $queue && @$queue;
+   }
+  }
+  return {events => $events, source_origins => \@origins}
+ })
+}
 
 #------------------------------------------------------------------------------
 # Package : LinkedSpec::ActionIR::ScannerCore

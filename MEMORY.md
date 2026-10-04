@@ -1,10 +1,10 @@
 # MEMORY
 
-- activation_commit: `ea45d933d6af8776bb4205514f423e3b7627af0d` — clean source-occurrence diagnosis activation base.
-- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.0 - expose helper scan occurrence ambiguity`.
-- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1` (pending) — private producer source provenance.
-- next_action: Activate producer provenance .7.2.2.0.1 from the clean landed diagnosis, freeze its live claim, and select exact family/frame subleaves from the source-bound inventory before implementation.
-- in_flight_uncommitted: none; completed diagnosis and exact RED fixture are committed, no production change or background job.
+- activation_commit: `8d71b3b5cbea894416c14a9fade10968a73a8a5f` — clean private provenance activation base.
+- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.0 - retain private helper match provenance`.
+- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1` (pending) — PrimitiveBasicRules source provenance.
+- next_action: Activate PrimitiveBasicRules provenance .7.2.2.0.1.1 from the clean landed private-channel commit; freeze its live claim, select exact regex/statement frames and capture independent source-position RED before implementation.
+- in_flight_uncommitted: none; the private channel, complete source-bound proof and documentation are committed; no background job remains.
 - blockers: No access/decision blocker. Matches and attached/marker/value/null/while executors are repaired; control parent/order and raw-expression reporting are reconciled; quoted/comment readiness .7.2/.3 precedes dispatcher/full execution. Other startup repairs remain separate.
   Wrapper startup .7 remains open; recovery/purge stay prohibited.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the

@@ -1,0 +1,88 @@
+[
+  {
+    "id": "outer_return_suppresses_quoted_inner",
+    "contract": "return_general",
+    "action": "return('return(\"x\")'); return(\"x\")",
+    "starts": [
+      0,
+      23
+    ],
+    "raws": [
+      "return('return(\"x\")')",
+      "return(\"x\")"
+    ],
+    "source": "Top:: I { return('return(\"x\")'); return(\"x\") }"
+  },
+  {
+    "id": "quoted_set_before_interleaved_real",
+    "contract": "set_value",
+    "action": "text=\"set(counter,1)\"; set(counter,2); set(counter,1); return(counter)",
+    "starts": [
+      6,
+      23,
+      39
+    ],
+    "raws": [
+      "set(counter,1)",
+      "set(counter,2)",
+      "set(counter,1)"
+    ],
+    "source": "Top:: I { text=\"set(counter,1)\"; set(counter,2); set(counter,1); return(counter) }"
+  },
+  {
+    "id": "quoted_if_and_real_block",
+    "contract": "if_flow",
+    "action": "return(\"if(true)\"); if(false){return(\"ok\")}",
+    "starts": [
+      8,
+      20
+    ],
+    "raws": [
+      "if(true)",
+      "if(false){return(\"ok\")}"
+    ],
+    "source": "Top:: I { return(\"if(true)\"); if(false){return(\"ok\")} }"
+  },
+  {
+    "id": "unicode_crlf_returns",
+    "contract": "return_general",
+    "action": "text=\"雪\";\r\nreturn(\"if(true)\");\r\nreturn(\"雪\")",
+    "starts": [
+      11,
+      32
+    ],
+    "raws": [
+      "return(\"if(true)\")",
+      "return(\"雪\")"
+    ],
+    "source": "Top:: I { text=\"雪\";\r\nreturn(\"if(true)\");\r\nreturn(\"雪\") }"
+  },
+  {
+    "id": "escaped_double_quote",
+    "contract": "return_general",
+    "action": "return(\"quote\\\"; if(true)\"); return(\"ok\")",
+    "starts": [
+      0,
+      29
+    ],
+    "raws": [
+      "return(\"quote\\\"; if(true)\")",
+      "return(\"ok\")"
+    ],
+    "source": "Top:: I { return(\"quote\\\"; if(true)\"); return(\"ok\") }"
+  },
+  {
+    "id": "regex_payload_and_slash_call",
+    "contract": "return_general",
+    "action": "return(matches(\"iftrue\", /if(true)/)); return(/(14,2))",
+    "starts": [
+      0,
+      39
+    ],
+    "raws": [
+      "return(matches(\"iftrue\", /if(true)/))",
+      "return(/(14,2))"
+    ],
+    "source": "Top:: I { return(matches(\"iftrue\", /if(true)/)); return(/(14,2)) }"
+  }
+]

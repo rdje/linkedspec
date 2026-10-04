@@ -9,6 +9,7 @@ BEGIN {
  my $perl_root = File::Basename::dirname($linked_spec_dir);
  unshift @INC, $perl_root unless grep { defined($_) && $_ eq $perl_root } @INC;
 }
+use LinkedSpec::ActionIR::ScannerCore ();
 
 sub try_scan_contract_ir_events {
  my ($id, $code) = @_;
@@ -133,17 +134,19 @@ sub _scan_contract_set_value {
  my ($code) = @_;
  my @events;
  while ($code =~ /\b(?<expr>set\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/g) {
-  my $call = _parse_method_function_expr($+{expr});
+  my ($start, $end) = ($-[0], $+[0]);
+  my $expr = $+{expr};
+  my $call = _parse_method_function_expr($expr);
   next unless $call && $call->{method} eq 'set';
  my $effective_args = _normalize_method_args_with_optional_scope($call->{args} || [], 2, 2);
  next unless $effective_args;
- push @events, {
-  raw => $+{expr},
+ push @events, LinkedSpec::ActionIR::ScannerCore::_record_scanned_source_event({
+  raw => $expr,
   args => {
    target => _trim_action_ir_value($effective_args->[0]),
    source => _trim_action_ir_value($effective_args->[1]),
   },
- };
+ }, $code, $start, $end);
 }
  return \@events
 }

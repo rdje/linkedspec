@@ -7,12 +7,12 @@ answers:
   - "why does earliest raw matching drop a genuine return"
   - "where is the scanner family source provenance inventory"
 date: 2026-10-04
-status: measured diagnosis; producer provenance repair pending
+status: historical diagnosis at8d71b3b5c; private producer provenance implementation active
 tags: [perl, actionir, scanner, source-ownership, event-order]
 evidence: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.0 owns two seed0 public AST/substitution/diagnostic probes, independent source occurrence positions and two actually executed candidate mapper failures at unchanged production ea45d933d. Parent .7.2.2.0 owns the decomposed repair."
 reverify:
   - "At diagnosis production ea45d933d, run bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0-mapping.py. After implementation use the committed frozen captures and the historical claim rather than rerun changed scanners as the old baseline."
-  - "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0-review.py"
+  - "At frozen8d71b3b5c run bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0-review.py"
 ---
 
 # Raw helper spelling cannot recover exact scanner occurrence identity

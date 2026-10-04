@@ -2,17 +2,19 @@
 
 ## Current Activity
 
-Full PNT: quoted-source diagnosis is committed; exact occurrence-mapping diagnosis splits producer provenance, executable membership, replacement and canonical composition before marker diagnostics.
+Full PNT: first private source-provenance implementation is complete; remaining producer families precede executable membership, exact replacement and canonical composition, then marker diagnostics.
 
 ## Latest Completed Slice
 
-`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.0` captures two seed0 public AST/substitution/diagnostic probes and two actual candidate raw-key mapper failures. Original and replayed thirteen-group fixture retains11 expected failures/two green guards; four unchanged suites pass45 tests. Twelve evidence corruptions reject; seven scanner families are source-bound, including six FlowRules nested/composed calls. Two exact examples render. Production/spec/standard-test/CI/governance owners remain activation-identical; no quote repair or backend admission is claimed.
+`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.0` implements the Core sidecar and return_general/set_value/if_flow hooks. Six sources/18 exact before-after compiler pairs preserve public events, arguments, diagnostics, substitution, parser dumps and emitted source;39 private origins match independent scalar spans. All13 provenance groups PASS after11 of13 fail before, with two existing guards green. Full Phase0 1034 and ten unchanged165 tests PASS; twelve evidence controls reject and two exact examples render. Coverage is three contracts; no quoted-value/readiness fix or backend admission is claimed.
 
 ## Next Action
 
-From clean diagnosis activate .7.2.2.0.1 producer provenance, freeze this claim at the landed revision, and declare exact family/frame subleaves before implementation. Then membership .2, replacement .3 and recurring/canonical composition .4; diagnostic origin .7.2.2.1 and independent .7.2.3 closeout follow. Comments .7.3/marker fallback .7.4 precede dispatcher/full execution. The Unicode trace defect remains separately scheduled after a clean compiler handoff; recovery/purge stays prohibited.
+From the clean private-channel commit activate PrimitiveBasicRules .7.2.2.0.1.1; freeze the live claim, then declare exact regex/statement frames and independent position RED. Remaining pipeline/flow/legacy/staged producers and composition follow before membership .0.2, replacement .0.3, recurring/canonical .0.4, diagnostic origin .7.2.2.1 and independent .7.2.3. Comments/marker fallback and separately owned Unicode trace sink remain; recovery/purge stays prohibited.
 
 ## Recent Completions
+
+- `2026-10-04` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.0` implements exact private spans for three scanner contracts with public output unchanged.
 
 - `2026-10-04` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.0` rejects raw-key occurrence inference and freezes complete quote RED.
 
@@ -44,7 +46,6 @@ From clean diagnosis activate .7.2.2.0.1 producer provenance, freeze this claim 
 
 - `2026-10-03` — `SESSION-STARTUP-READING.87.2` repairs bounded callable literal/string matches with799 focused tests.
 
-- `2026-10-03` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.0` freezes deferred conditional boundaries and schedules existing matches prerequisite.
 
 
 ## History

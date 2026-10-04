@@ -1,0 +1,25 @@
+{
+  "mode": "after",
+  "command": [
+    "prove",
+    "-v",
+    "-Iperl",
+    "t/actionir_helper_source_provenance.t"
+  ],
+  "baseline": null,
+  "test_path": "t/actionir_helper_source_provenance.t",
+  "test_sha256": "7de5f68e3b6cd9ea87feebbefc8b590a59df910c54a636af2759215ea4fd4e82",
+  "exit": 0,
+  "stdout": {
+    "encoding": "gzip-base64",
+    "bytes": 6380,
+    "sha256": "4fbcac2dbee12c1de82b3e9cdcb36f034798f80bbcec8e6eba130c27064452ee",
+    "data": "H4sIAAAAAAAC/+1YTY/jNgy9+1cQ6KVFt2k8yXzsAnNYFOh50WnPhiIxsTqK5BWlzOTfl7Jsx94N2mR6mIvnkElsUnwk36NshV+FDNpZ7asaTYO+Ihe9xKrx7oBWWImLAIsFFD/AU9wEpPAJGq8PIiCgDf4ImkAchDZiY7AA/nPPUMIvg9VpJZC1sBYN4KumQK1xuViUxTceZ9YdRXcxMEyPIXpbUWwaj0RI1dfoAqpKcwR/DodH6bzSdgfJA/0BCaTbNwYTyLgxWgIy0g4Ye9+wt7YKG+QPG8B5vdNWGPDiBZyU0XtMaRnOpvdZsQ8KWQPXNbLpXgT+UQsCZ3HAklfqfdbTOOYIIobaeVRAUhjhoXGkU5sGaLfsMoAfcOXewdaL/dCKO7bMBryK5uxABG4Aw8vZgtv8jXLAfz+Yd3l2CKgRA94Htkm/uaTBa0yFHFzympsj96o3/3gx1nJ5HdiyvABteXMd3DK1sEen0SgCCuKYeEdanaNK4vCq6AhzET1HdO6uE4Zqg1tuOpvwCgbFgS97FGYm80zm/0XmC/Gur8R7ewneuyvx3r9FfPdFR9YLxPS99PS2EjbfrTbGyedZcLPg3mH3WJ8I/D0lR7SNVkunsJLebLuNhmbKzpR9B8qmrpyl44iuyBAb5rRyvA7m56CZrjNd34GuqdZn6Tiiq8cdvlaNOBonVDuFyQiqKwY+P4nPtH0P2qbi/Sstx9N23wRe9MVyl5mP0QT+txfaUr41prB1zI8Uj21HpzT83AycVl6JM7eTg5rUpf8MMj6uacTXiKDQ4E4ksvHaChJs9IDep2AeB/GoMcDON3cHdGKxTpiiP+gDTgTVmXYFapUxTq9rc9sfGotqAoQbwlzqlx9kdcLeV6Jty8dT2MuzG1XG8mdbwH6AsFFgeRKEGvM5Qk8Y6TiL1zCpTXu/yyhxkMvPPxVffNEs88gFS2cNwC8/z2KH0+mTbnBxnMygU7k0y4Jb+s0QWQ3mY2W11KXxdJlUphXcG9KbjOHe7SCMVtwG6hTb+RCrBSfPvZxPMoWNi1YlMWbpZvO9pjwzPY6lfnMS5VgBQpvIbdMpZsOBdJjW4/pA62sD3b4x0N21ge7fGOjhqkBMjYein62XNnfy0pOdmFH5oBral3qaDHC2SkfMu+kU4YksAwt6FFb38RpBFGrv4q6eCqRzqR1fEUq10ySP7T6dm6LfBa7FNkkrT1GleSvhGrNvXotAOY4ZWvkynuBa2eRpO5kDljf2dEvWjtD28zhJyutNDMO2NBmXxANLngbjMFr7wkyTXLVJvglpv4kVn42BlDNve1Fyc2kbzaL4XRukx/ID/JluPZarDwBLeOH5KdNrL+OUBD/CcrFcQiQP+Rvx7Pm5/b4Gebos0/XH7vpvX/76qfijBfEJvnx+eir+AeFRbczsGAAA"
+  },
+  "stderr": {
+    "encoding": "gzip-base64",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "data": "H4sIAAAAAAAC/wMAAAAAAAAAAAA="
+  }
+}
