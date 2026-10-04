@@ -1,0 +1,89 @@
+{
+  "revision": "e6140e2240879377dc1280b73194cb93554bae7b",
+  "git_inputs": 3764,
+  "supplied_inputs": 3766,
+  "compiler_pairs": 66,
+  "frames": 177,
+  "fixture_groups": 28,
+  "before_failed_groups": 25,
+  "after_failed_groups": 0,
+  "controls": [
+    {
+      "name": "alter public compiler output",
+      "rejected": true,
+      "reason": "complete before-after public compiler identity"
+    },
+    {
+      "name": "drop produced frame",
+      "rejected": true,
+      "reason": "authored original scalar frames"
+    },
+    {
+      "name": "reuse duplicate occurrence",
+      "rejected": true,
+      "reason": "authored original scalar frames"
+    },
+    {
+      "name": "Unicode byte offset",
+      "rejected": true,
+      "reason": "authored original scalar frames"
+    },
+    {
+      "name": "quoted equal text mapping",
+      "rejected": true,
+      "reason": "authored original scalar frames"
+    },
+    {
+      "name": "strip retained comment",
+      "rejected": true,
+      "reason": "authored original scalar frames"
+    },
+    {
+      "name": "invent event origins",
+      "rejected": true,
+      "reason": "private missing-origin baseline"
+    },
+    {
+      "name": "drop canonical input",
+      "rejected": true,
+      "reason": "complete immutable Git membership"
+    },
+    {
+      "name": "forge canonical bytes",
+      "rejected": true,
+      "reason": "original Git bytes"
+    },
+    {
+      "name": "drop actual Core overlay",
+      "rejected": true,
+      "reason": "exact overlay membership"
+    },
+    {
+      "name": "promote partial run",
+      "rejected": true,
+      "reason": "complete exact-source report"
+    },
+    {
+      "name": "forge executing producer",
+      "rejected": true,
+      "reason": "actual capture instrument"
+    },
+    {
+      "name": "erase input boundary guard",
+      "rejected": true,
+      "reason": "actual input boundary guards"
+    },
+    {
+      "name": "erase actual fixture RED",
+      "rejected": true,
+      "reason": "actual fixture exit"
+    },
+    {
+      "name": "forge stdout identity",
+      "rejected": true,
+      "reason": "channel bytes"
+    }
+  ],
+  "instrument_sha256": "e6738ea2a0a9bd9cbb53960705a4023a4bbda55537788346f5a3f46f96d5a120",
+  "initial_boundaries_preserved": true
+}

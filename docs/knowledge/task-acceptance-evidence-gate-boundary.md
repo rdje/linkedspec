@@ -10,7 +10,7 @@ answers:
   - "what should I do if TASK-ACCEPTANCE fires unexpectedly"
   - "what are the known limits of the task acceptance evidence gate"
   - "why does a completed checklist containing Result CodeBlock fail acceptance"
-date: 2026-09-22
+date: 2026-10-04
 status: current
 tags: [doctrine-enforcement, task-trees, evidence, tooling]
 evidence: "scripts/check_diagnosis_evidence.sh; scripts/check_doctrines.sh; DOCTRINE_ENFORCEMENT.md §10; TOOLBOX.md; docs/tasks/DOCTRINE-ENFORCEMENT-ADOPT.md"
@@ -56,3 +56,5 @@ predicate also matches a Rust generic such as `Result<CodeBlock>` on a checked
 line. Plain-language wording (the parsed block or an attributed error), with
 other work described as separately owned, passes the unchanged staged checker.
 The compiler/runtime proof is unaffected; this is a checklist-format constraint.
+
+October4 private splitter frames repeat this documented constraint: two checked lines qualifying separate future production/hooks work use the forbidden literal. The hook rejects TASK-ACCEPTANCE while the other nine doctrines pass. Completed evidence uses separately owned wording; future leaf statuses and the checker remain unchanged.

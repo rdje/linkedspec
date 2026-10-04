@@ -1,10 +1,10 @@
 # MEMORY
 
-- activation_commit: `c02ce88826f815c201a652d5b29bd3cf044d2740` — clean selected consumer-proof closeout activation base.
-- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.0 - diagnose basic statement source frames`.
-- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.1` (pending) — private splitter-produced source frames.
-- next_action: Activate .1.1.1.1 from this clean diagnosis commit; preserve callback/return identity while capturing original scalar boundaries; .2 owns eleven producer hooks and .3 canonical family acceptance.
-- in_flight_uncommitted: None; diagnosis/producers/actual failed selection and repair/public book/claims are committed. No jobs or production changes.
+- activation_commit: `e6140e2240879377dc1280b73194cb93554bae7b` — clean basic statement diagnosis activation base.
+- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.1 - retain private splitter source frames`.
+- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.2` (pending) — eleven basic statement event-producer hooks after due daily cleanup.
+- next_action: Own due artifact cleanup from this clean frame commit, retaining proof inputs/caches; then activate .1.1.1.2 to attach eleven original events to validated private frames.
+- in_flight_uncommitted: None; private frames, exact RED/GREEN/consumer/book/claim proof and initial boundaries are committed. No jobs. Daily cleanup is due before further producer work.
 - blockers: No access/decision blocker. Matches and attached/marker/value/null/while executors are repaired; control parent/order and raw-expression reporting are reconciled; quoted/comment readiness .7.2/.3 precedes dispatcher/full execution. Other startup repairs remain separate.
   Wrapper startup .7 remains open; recovery/purge stay prohibited.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the

@@ -303,6 +303,33 @@ existing five callbacks and capture occurrence identity at the splitter, rather
 than search the source for equal raw strings. Comment classification, executable
 membership and residual replacement remain subsequent work.
 
+The private splitter now publishes an aligned `source_frames` sidecar for its
+exact returned array. It captures original boundaries during splitting and checks
+each trimmed value against that original scalar interval. The callback still runs
+once with its original arguments, and the returned array stays the same object.
+A copied or opaque callback return receives no borrowed frames. A changed array
+entry or custom interior transformation keeps its result and receives no invented
+frame; a source supplied as a reference also receives no scalar frame. Nested
+private calls restore the enclosing collector, and callback errors propagate.
+
+For compiler diagnostics, with `$default_split` obtained from the ordinary
+Scanner dependency bundle:
+
+```perl
+my $result = LinkedSpec::ActionIR::StatementSplit::Core::_split_with_source_frames(
+    $default_split, 'my $x; my $x;'
+);
+# source_frames spans: [0, 5), [7, 12)
+```
+
+The preserved 28-group fixture fails 25 groups before this private capture and
+passes all 28 afterward. Sixty-six source/seed before-and-after compiler records
+remain identical, while 177 statement frames match the independent original
+scalar intervals. Initial runs and their actual fixture/source boundaries remain
+recoverable. This is a private compiler probe; the eleven statement event producers
+still need hooks connecting these frames to their original event objects.
+
+
 These are compiler inspection examples, not recommended parsing actions. Each
 contains one quoted syntactic occurrence followed by two equal real occurrences:
 

@@ -2192,20 +2192,37 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 - [x] **REPRODUCE / ISSUE** — Default Scanner and LinkedSpec::Get/return_descriptor/dump_parser_source/call_spec_handler_subst retain22 original source cases and complete three-seed channels; all selected statement events lack private origins.
 - [x] **ROOT CAUSE (WHY + WHERE)** — Toolbox callback locator points to EmitContext.pm:472 and its canonical StatementSplit forwarding. Core quote/comment append and flush sites preserve original text; the eleven PrimitiveBasicRules statement producers emit events without positions.
 - [x] **FIX** — Diagnosis chooses private producer-side contiguous scalar frames, array/event identity and occurrence indexing; .1/.2/.3 own implementation and canonical family acceptance. Header-only documentation and incorrect runner selection are corrected with exact original producer/failed evidence preserved.
-- [x] **ADDRESSED (verified)** — All59 statement intervals and37 event selections per run satisfy independent authored scalar construction;19 reason-checked RED controls reject misleading source/frame evidence. This addresses the diagnosis, not the still-pending production provenance repair.
+- [x] **ADDRESSED (verified)** — All59 statement intervals and37 event selections per run satisfy independent authored scalar construction;19 reason-checked RED controls reject misleading source/frame evidence. This verifies the diagnosis; production provenance repair is separately owned.
 - [x] **NO REGRESSION** — Four unchanged selected consumers complete52 groups with Result: PASS; nine evidence controls reject. Production bytes remain activation-exact. The first nonexistent-suite attempt remains explicitly incomplete, then all four correctly selected suites run again.
 - [x] **LOCKSTEP** — Complete58-input final book renders three original examples/five controls; Knowledge/task/index/roadmap/resume/live/change/notes, exact historical37-input freeze and memory/claim/history/diff/doctrine proof accompany the focused landing.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.1`
-  Status: `pending`
+  Status: `done`
   Goal: Capture private contiguous statement frames at canonical splitter boundaries without changing its returned strings or callback signatures.
   Dependencies: `.1.1.1.0`
   Owned paths: perl/LinkedSpec/ActionIR/StatementSplit/Core.pm and any strictly necessary private scanner bridge; owning focused test/checkpoint/claim artifacts, ActionIR book, Knowledge and continuity documents. No public dependency expansion or lexical recognizer change.
-  Planned verification tier upon activation: focused
-  Planned focused proof: Same authored original scalar intervals, exact returned array/string and five-callback preservation, nested/private invocation isolation, opaque/custom callback guard; actual RED/GREEN, complete direct-consumer/Phase0 channels, syntax/book and all doctrine/claim/Knowledge/history checks.
-  Planned canonical boundary: None; private frame capture only; statement-family acceptance .3 is canonical.
-  Planned claim: No pending-task measurement; publish the exact implementation claim record upon activation before landing.
+  Verification tier: `focused`
+  Focused checks: Same authored original scalar intervals, exact returned array/string and five-callback preservation, nested/private invocation isolation, opaque/custom callback guard; actual RED/GREEN, complete direct-consumer/Phase0 channels, syntax/book and all doctrine/claim/Knowledge/history checks.
+  Canonical trigger: None; private frame capture only; statement-family acceptance .3 is canonical.
+  Claim verification: `docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.1.json`
   Acceptance: Observe existing callback exactly once; record frames from original state boundaries before trimming, with exact source-slice validation. Match returned array identity and occurrence index, never equal raw text. Preserve callback side effects, errors, nesting and unknown callback behavior; no fabricated origins or global retained state.
+
+  Activation: Clean e6140e2240879377dc1280b73194cb93554bae7b; all ten hooks/post-pointer passed, brief0 and no jobs. Diagnose-first Knowledge card and exact22 authored spans are retained under .0; one-owner verification card governs activation. Canonical callback/flush sites and only their callers, public five-dependency interfaces and ActionIR book are understood.
+  Exact ownership: perl/LinkedSpec/ActionIR/StatementSplit/Core.pm, t/actionir_statement_source_frames.t, docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.1-* and its claim; fixed before/after same-volume scratch, prior .0 claim historical freeze before bound book updates, relevant Knowledge including recorded one-owner recurrence, book and continuity. Scanner producer/event hooks remain .2.
+
+  Verification: Private canonical splitting now retains original scalar frames by returned-array identity and occurrence index. The unchanged28-group fixture fails25 before and passes28 after;177 frames across66 source/seed pairs satisfy authored scalar intervals while complete public/compiler records stay identical. Eight unchanged suites pass1148 groups, including Phase01034, at3766 fixed inputs. Fifteen frame/source, six TAP/consumer and five render controls reject; four original examples render from58 final book inputs. Initial Core/fixture runs remain explicit, non-scalar/transformed/copied returns gain no invented frames, and the prior diagnosis freezes at exact e614 with unchanged28 input hashes. Eleven producer hooks remain .2 and canonical family acceptance .3.
+  Landing correction: The first hook run passes nine doctrines and rejects TASK-ACCEPTANCE because two checked lines mention the literal pending while qualifying separate future work. Existing Knowledge card task-acceptance-evidence-gate-boundary already documents this whole-file predicate. Move the qualification to separately owned wording without changing later statuses; no checker/policy or behavioral proof changes.
+  Owned guard refinement: Initial GREEN/source/fixture channels remain preserved before indentation correction and the non-scalar-source guard. The final fixture additionally verifies existing reference stringification without invented origins; final before/after runs use its unchanged exact bytes. No prior failed or intermediate capture is relabeled.
+  Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.1 - retain private splitter source frames`
+
+## Acceptance Checklist — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.1
+
+- [x] **REPRODUCE / ISSUE** — Actual default split/Scanner plus LinkedSpec::Get/return_descriptor/dump_parser_source/call_spec_handler_subst retain full28-group RED and66 fixed-source Toolbox records;25 frame groups fail before, three guards pass.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Canonical Core flush sites discarded original scalar boundaries; default trim preserves contiguous edges. The .0 authored oracle establishes exact original positions without equal-raw lookup.
+- [x] **FIX** — One Core owner captures starts at original flush boundaries and publishes aligned private batches. Its wrapper binds exact returned-array identity, calls the existing callback once, preserves arguments/errors/nesting and declines frames for copied/opaque/changed/non-scalar/transformed entries.
+- [x] **ADDRESSED (verified)** — The same final28-group fixture passes28;177 produced frames equal independent original source intervals. Fifteen reason-checked frame/source/producer/channel/compiler corruptions reject. Original intermediate executions retain their actual byte identities.
+- [x] **NO REGRESSION** — All66 before/after complete public/compiler objects are identical. Eight unchanged consumers complete1148 ordered top-level groups with Result: PASS, including full Phase01034; six consumer corruptions reject. Only the declared Core production overlay differs across source-fixed phases.
+- [x] **LOCKSTEP** — Complete58-input final book renders four original examples/five controls, prior28-input claim freezes historically at e614, and Knowledge/task/index/roadmap/resume/live/change/notes/claim/memory/history/diff/doctrine checks accompany the focused landing. Event hooks and canonical family closeout remain separately owned.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.2`
   Status: `pending`
@@ -2611,7 +2628,7 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 | 43.4.2.0.1.1.3.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.3.1` | `done` | 1337 groups, retained initial RED/four-input repair,22 controls and final book proof; canonical receipt gates landing. |
 | 43.4.2.0.1.1.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1` | `active` | Diagnosis complete; private frames, eleven producer hooks and canonical family acceptance separately owned. |
 | 43.4.2.0.1.1.1.0 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.0` | `done` | 66 Toolbox cases/59 spans and37 events per run;52 consumer groups/33 controls/three rendered examples. |
-| 43.4.2.0.1.1.1.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.1` | `pending` | Private splitter boundary frames with unchanged five callbacks. |
+| 43.4.2.0.1.1.1.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.1` | `done` | Private frames:28 GREEN/177 spans/66 identical compiler pairs,1148 consumer groups and26 controls. |
 | 43.4.2.0.1.1.1.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.2` | `pending` | Eleven producer hooks; unchanged public compiler objects. |
 | 43.4.2.0.1.1.1.3 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.3` | `pending` | Independent family acceptance and exact staged canonical proof. |
 | 43.4.2.0.1.1.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.2` | `pending` | Independent twenty-contract basic family composition. |

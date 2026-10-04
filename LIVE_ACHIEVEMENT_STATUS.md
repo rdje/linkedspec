@@ -2,17 +2,19 @@
 
 ## Current Activity
 
-Full PNT: basic statement diagnosis is complete; private splitter frames precede eleven producer hooks, canonical family acceptance and remaining provenance/membership work.
+Full PNT: private statement frames are complete. Due daily cleanup precedes eleven producer hooks, canonical family acceptance and remaining provenance/membership work.
 
 ## Latest Completed Slice
 
-`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.0` — Twenty-two authored statement cases complete66 Toolbox inspections at fixed Git c02 plus two explicit overlays. Each run has59 contiguous original scalar spans and37 events with zero private origins;19 diagnosis controls reject. Four unchanged consumers pass52 groups/nine controls, and three original examples render from58 complete final book inputs/five controls. Initial incorrect suite selection is retained and corrected; previous consumer claim freezes at c02 with unchanged37 input hashes. Private frame capture, eleven producer hooks and canonical family acceptance are now separately owned.
+`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.1` — Private canonical splitting now retains original scalar frames by returned-array identity and occurrence index. The unchanged28-group fixture fails25 before and passes28 after;177 frames across66 source/seed pairs satisfy authored scalar intervals while complete public/compiler records stay identical. Eight unchanged suites pass1148 groups, including Phase01034, at3766 fixed inputs. Fifteen frame/source, six TAP/consumer and five render controls reject; four original examples render from58 final book inputs. Initial Core/fixture runs remain explicit, non-scalar/transformed/copied returns gain no invented frames, and the prior diagnosis freezes at exact e614 with unchanged28 input hashes. Eleven producer hooks remain .2 and canonical family acceptance .3.
 
 ## Next Action
 
-Activate `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.1` from the clean diagnosis commit; capture producer-side splitter scalar boundaries privately while preserving callback/public behavior. No recovery/purge.
+After the clean .1 commit, own and complete due artifact cleanup, then activate `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.2` for eleven event-producer hooks. Retain proof inputs/caches; no recovery/purge.
 
 ## Recent Completions
+
+- `2026-10-04` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.1` captures177 private scalar frames,28 GREEN and1148 unchanged consumer groups.
 
 - `2026-10-04` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.0` verifies contiguous statement intervals and owns three implementation slices.
 
@@ -43,8 +45,6 @@ Activate `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.1` from the clean
 - `2026-10-03` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.6` reconciles bounded control parent under exact canonical acceptance.
 
 - `2026-10-03` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.5` executes guarded callable while with1014 focused tests.
-
-- `2026-10-03` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.4` repairs local null-return forms with981 focused tests.
 
 ## History
 

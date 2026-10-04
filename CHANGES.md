@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-10-04 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.1: retain private splitter source frames
+
+Private canonical splitting now retains original scalar frames by returned-array identity and occurrence index. The unchanged28-group fixture fails25 before and passes28 after;177 frames across66 source/seed pairs satisfy authored scalar intervals while complete public/compiler records stay identical. Eight unchanged suites pass1148 groups, including Phase01034, at3766 fixed inputs. Fifteen frame/source, six TAP/consumer and five render controls reject; four original examples render from58 final book inputs. Initial Core/fixture runs remain explicit, non-scalar/transformed/copied returns gain no invented frames, and the prior diagnosis freezes at exact e614 with unchanged28 input hashes. Eleven producer hooks remain .2 and canonical family acceptance .3.
+
 ## 2026-10-04 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.0: diagnose basic statement source frames
 
 Twenty-two authored statement cases complete66 Toolbox inspections at fixed Git c02 plus two explicit overlays. Each run has59 contiguous original scalar spans and37 events with zero private origins;19 diagnosis controls reject. Four unchanged consumers pass52 groups/nine controls, and three original examples render from58 complete final book inputs/five controls. Initial incorrect suite selection is retained and corrected; previous consumer claim freezes at c02 with unchanged37 input hashes. Private frame capture, eleven producer hooks and canonical family acceptance are now separately owned.

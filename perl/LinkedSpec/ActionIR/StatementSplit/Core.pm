@@ -11,6 +11,40 @@ BEGIN {
  unshift @INC, $perl_root unless grep { defined($_) && $_ eq $perl_root } @INC;
 }
 use LinkedSpec::OwnerDispatch ();
+use Scalar::Util ();
+
+our $_source_statement_recorder;
+
+# The canonical splitter publishes its original array and aligned source frames
+# only inside a private invocation. A callback is still called exactly once with
+# its original arguments; opaque or copied returns never borrow another array's
+# provenance. Nested private calls restore the enclosing collector.
+sub _split_with_source_frames {
+ my ($callback, @args) = @_;
+ return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
+  my @recorded;
+  local $_source_statement_recorder = sub { push @recorded, $_[0] };
+  my $statements = $callback->(@args);
+  my @frames;
+  if (ref($statements) eq 'ARRAY') {
+   foreach my $batch (@recorded) {
+    next unless Scalar::Util::refaddr($batch->{statements})
+     == Scalar::Util::refaddr($statements);
+    for my $idx (0 .. $#$statements) {
+     my $frame = $batch->{source_frames}[$idx];
+     my $value = $statements->[$idx];
+     # A custom callback may change a produced entry before returning its array.
+     # Keep that result, but decline a frame for changed or non-scalar text.
+     push @frames, defined($frame) && defined($value) && !ref($value)
+      && $frame->{raw} eq $value ? $frame : undef;
+    }
+    last;
+   }
+  }
+  return {statements => $statements, source_frames => \@frames}
+ })
+}
+
 
 #------------------------------------------------------------------------------
 # Package : LinkedSpec::ActionIR::StatementSplit::Core
@@ -29,7 +63,11 @@ sub _require_method_expr_pkg {
 }
 
 sub _build_initial_state {
+ my ($source) = @_;
  return {
+  source => $source,
+  statement_start => 0,
+  next_position => 0,
   statement => '',
   paren_depth => 0,
   brace_depth => 0,
@@ -303,10 +341,41 @@ sub _should_split_on_method_boundary {
  return ($chars->[$next_idx] =~ /[A-Za-z_]/o) ? 1 : 0
 }
 
+# Derive coordinates from the accumulated original statement and its boundary,
+# never by locating equal trimmed text elsewhere in the action. The existing trim
+# callback runs once at the existing site. Only exact edge trimming can publish a
+# contiguous frame; custom interior transformations retain their result without
+# invented source coordinates.
+sub _frame_for_trimmed_statement {
+ my ($state, $trimmed) = @_;
+ return undef unless defined($trimmed) && !ref($trimmed)
+  && defined($state->{source}) && !ref($state->{source});
+ my $statement = $state->{statement};
+ my ($leading) = $statement =~ /\A(\s*)/;
+ my ($trailing) = $statement =~ /(\s*)\z/;
+ my $left = length($leading);
+ my $right = length($statement) - length($trailing);
+ return undef if $left > $right;
+ return undef unless substr($statement, $left, $right - $left) eq $trimmed;
+ my $start = $state->{statement_start} + $left;
+ my $end = $state->{statement_start} + $right;
+ return undef unless substr($state->{source}, $start, $end - $start) eq $trimmed;
+ return {
+  source => $state->{source},
+  raw => $trimmed,
+  source_span => {start => $start, end => $end},
+ }
+}
+
 sub _push_trimmed_statement {
- my ($statements, $trim_action_ir_value, $statement) = @_;
+ my ($statements, $trim_action_ir_value, $statement, $state) = @_;
  my $trimmed = $trim_action_ir_value->($statement);
- push @$statements, $trimmed if defined($trimmed) && length($trimmed);
+ if (defined($trimmed) && length($trimmed)) {
+  push @$statements, $trimmed;
+  if (ref($_source_statement_recorder) eq 'CODE') {
+   push @{$state->{source_frames}}, _frame_for_trimmed_statement($state, $trimmed);
+  }
+ }
  return
 }
 
@@ -314,8 +383,9 @@ sub _consume_top_level_line_break {
  my ($state, $char, $statements, $trim_action_ir_value) = @_;
  return 0 unless $char eq "\n" || $char eq "\r";
  return 0 if $state->{paren_depth} || $state->{brace_depth} || $state->{bracket_depth};
- _push_trimmed_statement($statements, $trim_action_ir_value, $state->{statement});
+ _push_trimmed_statement($statements, $trim_action_ir_value, $state->{statement}, $state);
  $state->{statement} = '';
+ $state->{statement_start} = $state->{next_position};
  return 1
 }
 
@@ -363,8 +433,9 @@ sub _consume_nesting_or_terminator {
   $state->{brace_depth} == 0 &&
   $state->{bracket_depth} == 0
  ) {
-  _push_trimmed_statement($statements, $trim_action_ir_value, $state->{statement});
+  _push_trimmed_statement($statements, $trim_action_ir_value, $state->{statement}, $state);
   $state->{statement} = '';
+  $state->{statement_start} = $state->{next_position};
   return 1;
  }
 
@@ -374,12 +445,13 @@ sub _consume_nesting_or_terminator {
 sub split_action_ir_statements {
  my ($code, $trim_action_ir_value) = @_;
  _require_statement_split_mode_pkg();
- my $state = _build_initial_state();
+ my $state = _build_initial_state($code // '');
  my @statements;
  my @chars = split //, ($code // '');
 
  for (my $idx = 0; $idx < @chars; ++$idx) {
   my $char = $chars[$idx];
+  $state->{next_position} = $idx + 1;
   if (LinkedSpec::ActionIR::StatementSplit::Mode::consume_line_comment($state, $char)) {
    _consume_top_level_line_break($state, $char, \@statements, $trim_action_ir_value)
     unless $state->{in_line_comment};
@@ -426,19 +498,27 @@ sub split_action_ir_statements {
   if (_consume_top_level_line_break($state, $char, \@statements, $trim_action_ir_value)) { next; }
   if (_consume_nesting_or_terminator($state, $char, \@statements, $trim_action_ir_value)) {
    if (_should_split_on_method_boundary($state, \@chars, $idx, $trim_action_ir_value)) {
-    _push_trimmed_statement(\@statements, $trim_action_ir_value, $state->{statement});
+    _push_trimmed_statement(\@statements, $trim_action_ir_value, $state->{statement}, $state);
     $state->{statement} = '';
+    $state->{statement_start} = $state->{next_position};
    }
    next;
   }
   $state->{statement} .= $char;
   if (_should_split_on_method_boundary($state, \@chars, $idx, $trim_action_ir_value)) {
-   _push_trimmed_statement(\@statements, $trim_action_ir_value, $state->{statement});
+   _push_trimmed_statement(\@statements, $trim_action_ir_value, $state->{statement}, $state);
    $state->{statement} = '';
+   $state->{statement_start} = $state->{next_position};
   }
  }
 
- _push_trimmed_statement(\@statements, $trim_action_ir_value, $state->{statement});
+ _push_trimmed_statement(\@statements, $trim_action_ir_value, $state->{statement}, $state);
+ if (ref($_source_statement_recorder) eq 'CODE') {
+  $_source_statement_recorder->({
+   statements => \@statements,
+   source_frames => $state->{source_frames} // [],
+  });
+ }
  return \@statements
 }
 
