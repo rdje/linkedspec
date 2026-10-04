@@ -1,0 +1,323 @@
+{
+  "owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.1",
+  "activation": "012038a637e727a57fe8ac387b27d7267f76f465",
+  "sources": 22,
+  "native_fresh_pairs": 66,
+  "trace_processes": 22,
+  "trace_capture_exit": 1,
+  "trace_warning_owner": "PERL-TRACE-UNICODE-SINK.1",
+  "desired_oracle_summary": [
+    {
+      "id": "double_control",
+      "desired_value_matches": true,
+      "actual_value": "return(inner); if(true)",
+      "ready": 0,
+      "raw": 0,
+      "fallback": 0,
+      "unresolved": 3,
+      "set_events": 0,
+      "if_events": 1
+    },
+    {
+      "id": "single_control",
+      "desired_value_matches": true,
+      "actual_value": "return(inner); if(true)",
+      "ready": 0,
+      "raw": 0,
+      "fallback": 0,
+      "unresolved": 3,
+      "set_events": 0,
+      "if_events": 1
+    },
+    {
+      "id": "escaped_double",
+      "desired_value_matches": true,
+      "actual_value": "quote\"; if(true); slash\\; return(inner)",
+      "ready": 0,
+      "raw": 0,
+      "fallback": 0,
+      "unresolved": 3,
+      "set_events": 0,
+      "if_events": 1
+    },
+    {
+      "id": "escaped_single",
+      "desired_value_matches": true,
+      "actual_value": "quote'; if(true); slash\\; return(inner)",
+      "ready": 0,
+      "raw": 0,
+      "fallback": 0,
+      "unresolved": 3,
+      "set_events": 0,
+      "if_events": 1
+    },
+    {
+      "id": "unicode_crlf",
+      "desired_value_matches": true,
+      "actual_value": "雪 if(true); return(inner)",
+      "ready": 0,
+      "raw": 0,
+      "fallback": 0,
+      "unresolved": 3,
+      "set_events": 0,
+      "if_events": 1
+    },
+    {
+      "id": "quoted_set",
+      "desired_value_matches": false,
+      "actual_value": " = 2",
+      "ready": 1,
+      "raw": 0,
+      "fallback": 0,
+      "unresolved": 0,
+      "set_events": 1,
+      "if_events": 0
+    },
+    {
+      "id": "standalone_quoted_set",
+      "desired_value_matches": true,
+      "actual_value": "ok",
+      "ready": 0,
+      "raw": 1,
+      "fallback": 1,
+      "unresolved": 0,
+      "set_events": 1,
+      "if_events": 0
+    },
+    {
+      "id": "nested_data",
+      "desired_value_matches": false,
+      "actual_value": null,
+      "ready": 0,
+      "raw": 0,
+      "fallback": 0,
+      "unresolved": 3,
+      "set_events": 1,
+      "if_events": 1
+    },
+    {
+      "id": "deferred_data",
+      "desired_value_matches": true,
+      "actual_value": "set(counter, 2); if(true)",
+      "ready": 1,
+      "raw": 0,
+      "fallback": 0,
+      "unresolved": 0,
+      "set_events": 1,
+      "if_events": 1
+    },
+    {
+      "id": "sentinel_data",
+      "desired_value_matches": true,
+      "actual_value": "LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:substr",
+      "ready": 0,
+      "raw": 0,
+      "fallback": 0,
+      "unresolved": 1,
+      "set_events": 0,
+      "if_events": 0
+    },
+    {
+      "id": "unsupported_substr",
+      "desired_value_matches": true,
+      "actual_value": null,
+      "ready": 0,
+      "raw": 0,
+      "fallback": 0,
+      "unresolved": 1,
+      "set_events": 0,
+      "if_events": 0
+    },
+    {
+      "id": "unsupported_count",
+      "desired_value_matches": true,
+      "actual_value": null,
+      "ready": 0,
+      "raw": 0,
+      "fallback": 0,
+      "unresolved": 1,
+      "set_events": 0,
+      "if_events": 0
+    },
+    {
+      "id": "unsupported_nested",
+      "desired_value_matches": null,
+      "actual_value": null,
+      "ready": 0,
+      "raw": 0,
+      "fallback": 0,
+      "unresolved": 1,
+      "set_events": 0,
+      "if_events": 0
+    },
+    {
+      "id": "mixed_sentinel",
+      "desired_value_matches": true,
+      "actual_value": [
+        "LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:substr",
+        null
+      ],
+      "ready": 0,
+      "raw": 0,
+      "fallback": 0,
+      "unresolved": 2,
+      "set_events": 0,
+      "if_events": 0
+    },
+    {
+      "id": "mixed_set",
+      "desired_value_matches": false,
+      "actual_value": [
+        1,
+        "1 = 2"
+      ],
+      "ready": 1,
+      "raw": 0,
+      "fallback": 0,
+      "unresolved": 0,
+      "set_events": 2,
+      "if_events": 0
+    },
+    {
+      "id": "repeated_set",
+      "desired_value_matches": false,
+      "actual_value": [
+        2,
+        "2 = 1",
+        "2 = 2"
+      ],
+      "ready": 1,
+      "raw": 0,
+      "fallback": 0,
+      "unresolved": 0,
+      "set_events": 4,
+      "if_events": 0
+    },
+    {
+      "id": "true_control",
+      "desired_value_matches": true,
+      "actual_value": "ok",
+      "ready": 1,
+      "raw": 0,
+      "fallback": 0,
+      "unresolved": 0,
+      "set_events": 0,
+      "if_events": 1
+    },
+    {
+      "id": "quoted_condition",
+      "desired_value_matches": true,
+      "actual_value": "ok",
+      "ready": 0,
+      "raw": 0,
+      "fallback": 0,
+      "unresolved": 2,
+      "set_events": 0,
+      "if_events": 1
+    },
+    {
+      "id": "regex_data",
+      "desired_value_matches": false,
+      "actual_value": null,
+      "ready": 0,
+      "raw": 0,
+      "fallback": 0,
+      "unresolved": 2,
+      "set_events": 0,
+      "if_events": 1
+    },
+    {
+      "id": "quoted_comment",
+      "desired_value_matches": true,
+      "actual_value": "# set(counter,2); if(true)",
+      "ready": 0,
+      "raw": 0,
+      "fallback": 0,
+      "unresolved": 4,
+      "set_events": 1,
+      "if_events": 1
+    },
+    {
+      "id": "source_comment",
+      "desired_value_matches": true,
+      "actual_value": "ok",
+      "ready": 0,
+      "raw": 1,
+      "fallback": 1,
+      "unresolved": 3,
+      "set_events": 1,
+      "if_events": 1
+    },
+    {
+      "id": "raw_operand",
+      "desired_value_matches": null,
+      "actual_value": 1,
+      "ready": 0,
+      "raw": 1,
+      "fallback": 0,
+      "unresolved": 0,
+      "set_events": 0,
+      "if_events": 0
+    }
+  ],
+  "suites": [
+    {
+      "path": "t/actionir_ast_parser.t",
+      "tests": 23
+    },
+    {
+      "path": "t/trace_actionir_pipeline.t",
+      "tests": 5
+    },
+    {
+      "path": "t/canonical_event_occurrence_order.t",
+      "tests": 15
+    },
+    {
+      "path": "t/actionir_raw_dependency_metadata.t",
+      "tests": 16
+    },
+    {
+      "path": "t/actionir_raw_dependency_provenance.t",
+      "tests": 6
+    },
+    {
+      "path": "t/actionir_raw_dependency_compatibility.t",
+      "tests": 27
+    },
+    {
+      "path": "t/actionir_nested_block_source_spans.t",
+      "tests": 20
+    },
+    {
+      "path": "t/noncurrent_helper_metadata.t",
+      "tests": 2
+    },
+    {
+      "path": "t/generated_source_contract.t",
+      "tests": 12
+    },
+    {
+      "path": "t/codeblock_matches_perl.t",
+      "tests": 39
+    }
+  ],
+  "tests": 165,
+  "rejected_evidence_controls": [
+    "authored source",
+    "typed string ownership",
+    "fresh emitted identity",
+    "hidden false IF",
+    "hidden quoted value corruption",
+    "hidden authored marker",
+    "hidden true unsupported helper",
+    "raw span drift",
+    "lost mixed helper occurrence",
+    "hidden fresh interpolation warning",
+    "hidden native host-call failure",
+    "hidden Unicode trace warning",
+    "hidden reached replacement",
+    "hidden failed suite"
+  ],
+  "limits": "Diagnostic current quote oracles remain RED; no repair/backend/syntax admission. Raw host values and warnings are not portable positives. Complete streams remain unprojected. Three named seeds are exact observations, not a statistical confidence interval."
+}

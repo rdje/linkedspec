@@ -1,10 +1,10 @@
 # MEMORY
 
-- activation_commit: `363c79109ea8498252927547438ade47117ae71e` — clean quoted-data planning activation base.
-- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.0 - plan quoted-data repair`.
-- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.0` (done) — quoted diagnosis/repair/closeout ownership and canonical reporting handoff reconciled.
-- next_action: From this clean planning commit activate source-bound quoted-data diagnosis .7.2.1 before bounded implementation .7.2.2 and closeout .7.2.3.
-- in_flight_uncommitted: none; compiler/runtime/captures unchanged, reporting claim frozen at363c79109, documentation/ownership synchronized.
+- activation_commit: `012038a637e727a57fe8ac387b27d7267f76f465` — clean source-bound quoted-data diagnosis activation base.
+- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.1 - diagnose quoted action source ownership`.
+- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.1` (done) — current quote/value/event/marker/runtime diagnosis preserved; production unchanged.
+- next_action: Activate .7.2.2.0 executable occurrence repair, freeze this diagnosis at its landed revision, then .7.2.2.1 diagnostic provenance before independent .7.2.3 acceptance.
+- in_flight_uncommitted: none;66 native/fresh pairs,22 traces,165 consumer tests and14 reviewer controls complete; original failure channels retained, book rendered.
 - blockers: No access/decision blocker. Matches and attached/marker/value/null/while executors are repaired; control parent/order and raw-expression reporting are reconciled; quoted/comment readiness .7.2/.3 precedes dispatcher/full execution. Other startup repairs remain separate.
   Wrapper startup .7 remains open; recovery/purge stay prohibited.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
@@ -50,10 +50,10 @@
 - standing_contracts: all durable paths are repo-relative; all project data stays on the repository filesystem; Only LinkedSpec is writable; every other Git repository is read-only (director September27; see AGENTS and the incident record).
   README remains bounded; ordinary leaves use focused proof and designated infrastructure/public/push boundaries
   use exact staged canonical CI; task-tree/index, Knowledge Map, mdBook, and bounded live/history move in lockstep.
-- current_engineering_notes_capacity: ADR0122 admits 43 collection files /42 manifest lines /25410 manifest bytes; current42/41/24797 stay bounded.
-  Notes segment4966 preserves214 lines/18058 bytes from cleanf9c683543; old archive rows/bytes remain exact.
-- current_change_history_capacity: ADR0122 admits47 collection files /46 manifest lines /26255 bytes; current45/44/25103 stay bounded.
-  Changes segment4968 preserves216 lines /20819 bytes from cleanf07d827f7; prior history remains byte-exact.
+- current_engineering_notes_capacity: ADR0122 admits43 files /42 manifest lines /25410 bytes; latest manifest42 lines/25409 bytes remains within its exact bound.
+  Diagnosis rollover segment4965 preserves231 lines/25099 bytes from clean012038a637; prior immutable rows/bytes remain exact.
+- current_change_history_capacity: ADR0122 admits47 files /46 manifest lines /26255 bytes; latest manifest45 lines/25679 bytes remains bounded.
+  Diagnosis rollover segment4967 preserves212 lines/21636 bytes from clean012038a637; prior immutable rows/bytes remain exact.
 - dependency_boundary: RGX public integration only; it owns PGEN. No internal inspection/analysis, patches, separate PGEN procedure or unrelated pin changes. September26 authorizes only reviewed f6e5acdc for LS-004.
   Normal documented builds remain authorized; retain caches. Startup .80.1-.4 may observe public behavior or track upstream repairs, not investigate dependency internals.
 - latest_bootstrap_read: ADR0123 targets 2–5 minute startup plus thorough task-specific reading. Separate audit remains 89/143 and .1.90. Document integration and .46/.47/.49/.86.1/.86.2 are verified; Perl .86.4.2.4 corrects the regex-type premise; .86.4.3 owns supported helper validation (verified); .86.4.6 verifies helper splitting; .86.4.7 verifies quoted subjects; .86.4.4.1 owns grouped-operand repair .86.4.8; .86.4.8.1 rejects incompatible lookahead and .86.4.8.2 verifies grouped repair; .86.4.4.2.1 fixes generated Trace and .86.4.4.2.2 closes bounded public recomposition; .87 owns four helper/grouping follow-ups. No downstream application acceptance claim.

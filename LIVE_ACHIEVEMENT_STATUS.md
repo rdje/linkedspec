@@ -2,17 +2,19 @@
 
 ## Current Activity
 
-Full PNT: quoted-data planning .7.2.0 is complete; current source-bound diagnosis .7.2.1 is next, before bounded repair and independent closeout.
+Full PNT: source-bound quoted diagnosis .7.2.1 is complete; executable occurrence repair .7.2.2.0 is next, then diagnostic provenance .1 and independent closeout.
 
 ## Latest Completed Slice
 
-`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.0` splits quoted-data diagnosis .1, evidence-selected repair .2 and closeout .3 before implementation. Task/index/resume/roadmap/book/Knowledge handoff is reconciled; reporting .7.1 claim is historical at canonically accepted363c79109. Compiler/runtime/captures remain unchanged; focused documentation/doctrines govern landing.
+`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.1` retains22 exact sources/66 seeded native-fresh Perl pairs,22 complete lowering traces and165 passing tests across ten unchanged consumers.14 evidence controls reject;147 inputs bind24 producers. Quoted set values corrupt, phantom IF triggers original-source fallback and two nested host-call failures per seed, authored marker data falsely blocks readiness. Initial reviewer/unsupported-success assumptions remain frozen; all actual streams stay exact. Four source-identical book examples render. Production remains unchanged; focused doctrines govern landing.
 
 ## Next Action
 
-From the clean planning commit activate current source-bound Toolbox diagnosis .7.2.1, declaring exact producers/captures/tier before use. Reverify older quoted primitive/ASSIGN observations without claiming their broad startup closure. Then .7.2.2 repair/.7.2.3 closeout, comments .7.3 and marker fallback .7.4 precede dispatcher/full execution. Recovery/purge stays prohibited.
+From the clean diagnosis commit activate .7.2.2.0 executable occurrence repair and freeze current diagnosis claims at the landed revision before changing their inputs. Then .7.2.2.1 diagnostic provenance and .7.2.3 independent acceptance, comments .7.3 and marker fallback .7.4 before dispatcher/full execution. PERL-TRACE-UNICODE-SINK.1 owns the measured routed Unicode warning and is scheduled after a clean compiler handoff. Older startup .18 broad scope remains open; recovery/purge stays prohibited.
 
 ## Recent Completions
+
+- `2026-10-04` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.1` freezes current quoted value/event/marker/runtime diagnosis and splits bounded repair.
 
 - `2026-10-04` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.0` splits quoted-data work and reconciles the canonical reporting handoff.
 
@@ -43,8 +45,6 @@ From the clean planning commit activate current source-bound Toolbox diagnosis .
 - `2026-10-03` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.0` freezes deferred conditional boundaries and schedules existing matches prerequisite.
 
 - `2026-10-03` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.2` reconciles bounded bridge parents with750 tests and preserved original evidence.
-
-- `2026-10-03` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.2.1` recovers134 exact inputs and runs read-denied historical audit.
 
 ## History
 

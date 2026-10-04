@@ -254,6 +254,44 @@ independent closeout are tracked separately, including the earlier quoted primit
 observations. Accepted quote syntax and genuine unsupported operands elsewhere in the action
 retain their existing contracts while that work proceeds.
 
+The current quote diagnosis also exposes a value defect:
+
+```spec
+Top:: I { return("set(counter, 2)") }
+```
+
+The intended result is the literal `set(counter, 2)`. The current primitive scan
+creates a false `ASSIGN`, and residual lowering changes the literal contents to
+`$counter = 2` before generated Perl evaluates the string. This case remains a
+known defect. A mixed action must retain genuine executable assignments while
+leaving an identical spelling inside data untouched.
+
+For the quoted `if(true)` example above, the current lowering trace reaches the
+phantom replacement, then detects an unbalanced flow stack and returns the original
+action text. That fallback explains the healthy literal value; it does not validate
+the false compiler events or readiness classification.
+For the measured nested `cat` and `matches` controls, this fallback also leaves
+unlowered host calls and causes execution errors in both native and fresh emitted
+Perl. Those failures are owned by the same source-occurrence repair.
+
+Unsupported-helper diagnostics also need source ownership:
+
+```spec
+Top:: I { return("LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:substr") }
+```
+
+```spec
+Top:: I { return(substr("abc")) }
+```
+
+The first action returns ordinary authored string data. The second uses an
+unsupported helper arity and must remain blocked; its current lowering returns
+`undef` through a compiler-owned diagnostic marker. Both currently contribute one
+unresolved `substr` because diagnostics search marker text without origin information.
+Ignoring every quoted string would erase the second action's genuine blocker.
+These examples describe the measured Perl reference behavior and pending repair;
+they do not admit unsupported syntax or establish another backend's behavior.
+
 The historical diagnosis keeps unmodified arrays and streams under the `.0.6.0` checkpoint
 prefix. The `.0.6.1` successor retains an exact before-owner module, source-identical
 before/after public captures, independent occurrence-order oracles, complete TAP and current

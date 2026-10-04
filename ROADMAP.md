@@ -1,6 +1,6 @@
 # ROADMAP
 
-October 4 quoted-data handoff: source-unit raw reporting .7.1 is canonically accepted at363c79109. Its focused evidence is frozen at that committed revision. SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2 is split before implementation into planning .0, current source-bound diagnosis .1, bounded repair .2 and independent closeout .3. Older quoted primitive/assignment observations are reverified through their published interfaces; broader startup ownership remains open. Comments .7.3 and generated position-marker fallback .7.4 follow before dispatcher/full execution.
+October 4 quoted-source diagnosis: SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.1 retains22 exact sources/66 native-fresh Perl pairs,22 actual lowering traces and165 passing tests across ten unchanged consumers. Fourteen evidence corruptions reject;147 source-bound inputs include24 producers. Quoted primitive values still corrupt, phantom IF/unresolved records remain, and two typed nested cases fail host-call execution per seed. Repair is split into executable occurrence ownership .7.2.2.0 then diagnostic provenance .7.2.2.1 before independent .7.2.3 closeout. Comments .7.3 and marker fallback .7.4 still precede dispatcher/full execution; separately owned Unicode trace sink repair is scheduled after a clean compiler handoff. No implementation/backend admission is claimed.
 
 LinkedSpec is being positioned as a progressive extraction parser DSL: fast, recursive, regex-anchored, and intentionally different from strict EBNF-centric tooling.
 
