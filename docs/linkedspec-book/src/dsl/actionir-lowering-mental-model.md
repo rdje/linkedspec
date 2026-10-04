@@ -267,6 +267,42 @@ of those matches has yet been classified as executable. Public raw text, argumen
 lowering and event order remain unchanged. Statement-based compatibility scans
 still need their own source frames.
 
+The statement splitter preserves comments and quoted punctuation in its returned
+text. Its default trim callback removes whitespace at the edges. For example,
+this action string produces a quoted assignment and two separate declarations;
+the equal declaration text inside the string is not a declaration statement:
+
+```perl
+text="my $x"; my $x; my $x;
+```
+
+A top-level line break can end a statement after a comment. This input produces
+`my #inside` and `$x`, neither recognized by the bare declaration contract:
+
+```perl
+my #inside
+ $x;
+```
+
+Inside parentheses the same line break remains part of one statement:
+
+```perl
+return (7 #inside
+);
+```
+
+These are splitter/compiler inspection examples, not execution recommendations.
+Twenty-two authored inputs, including repeated examples for all eleven basic
+statement contracts, were inspected under three hash seeds. Each returned
+statement matches an independently authored contiguous scalar interval in the
+original input, including Unicode whitespace and CRLF. That bounded observation
+supports producer-side statement spans; it does not establish every possible
+host-language input or transformation by a custom dependency callback. These
+statement producers still have no private origins. Their repair will preserve the
+existing five callbacks and capture occurrence identity at the splitter, rather
+than search the source for equal raw strings. Comment classification, executable
+membership and residual replacement remain subsequent work.
+
 These are compiler inspection examples, not recommended parsing actions. Each
 contains one quoted syntactic occurrence followed by two equal real occurrences:
 

@@ -1,0 +1,33 @@
+{
+  "book_inputs": 58,
+  "rendered_examples": 3,
+  "controls": [
+    {
+      "name": "promote failed render",
+      "rejected": true,
+      "reason": "complete actual render"
+    },
+    {
+      "name": "erase render guard",
+      "rejected": true,
+      "reason": "book input guards"
+    },
+    {
+      "name": "forge renderer",
+      "rejected": true,
+      "reason": "actual book instrument"
+    },
+    {
+      "name": "forge rendered channel",
+      "rejected": true,
+      "reason": "book channel bytes"
+    },
+    {
+      "name": "erase actual examples",
+      "rejected": true,
+      "reason": "original authored rendered examples"
+    }
+  ],
+  "complete": true,
+  "instrument_sha256": "7797de3ca05c9744951b3691e7fae86369b9c08eacf4dcae37ef483ed8ffeb7b"
+}

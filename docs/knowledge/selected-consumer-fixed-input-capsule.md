@@ -13,7 +13,7 @@ status: preparation historical at e853; selected remeasurement verified under .1
 tags: [claims, phase0, capsule, input-closure, git-boundary, documentation]
 evidence: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.3.0 independently verifies738 regular supplied inputs,314 source-related lexical sites and16 named input edges, two unchanged25-group smoke suites/two rendered examples, and18 reason-checked controls. An actual post-run extra corpus member rejects while completed13-group TAP/channels remain saved."
 reverify:
-  - "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.3.1-review.py --public-book"
+  - "At exact c02ce88826f815c201a652d5b29bd3cf044d2740 run bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.3.1-review.py --public-book; publication/producer bytes are historical and must not be refreshed."
   - "To reproduce preparation-only review/acceptance, restore its exact complete e853cd5a7537c0ad8452ffac57af18ef48215df1 input boundary; current publication intentionally supersedes the old broader record and chapter."
 ---
 

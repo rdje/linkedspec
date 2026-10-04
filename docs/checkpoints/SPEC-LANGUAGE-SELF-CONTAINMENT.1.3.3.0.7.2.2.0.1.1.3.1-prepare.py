@@ -1,4 +1,4 @@
-"""Prepare exact Git-owned input bytes, without consulting a live worktree."""
+"""Prepare immutable Git inputs plus the explicitly supplied working book overlay."""
 from pathlib import Path, PurePosixPath
 import gzip
 import hashlib

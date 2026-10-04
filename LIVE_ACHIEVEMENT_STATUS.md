@@ -2,17 +2,19 @@
 
 ## Current Activity
 
-Full PNT: selected consumer proof repair is complete; basic statement provenance precedes family composition, remaining producers and executable membership/replacement.
+Full PNT: basic statement diagnosis is complete; private splitter frames precede eleven producer hooks, canonical family acceptance and remaining provenance/membership work.
 
 ## Latest Completed Slice
 
-`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.3.1` — Thirteen unchanged suites complete1337 top-level groups: twelve pass1298 with738 fixed inputs; the final suite passes39 after four exact Git checkpoint inputs are added. Common bytes/modes are unchanged and both actual capsule boundaries remain explicit. The initial missing-file RED, all original streams and old disclosed records survive. Independent Git/rg/TAP review verifies326 lexical sites/21 named edges and rejects22 evidence corruptions; two original examples render from both the repaired consumer capsule and a separate complete final public-book capsule. New source-bound acceptance supersedes the old broader observation without recovering its unretained live-document reads; startup .5 stays open.
+`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.0` — Twenty-two authored statement cases complete66 Toolbox inspections at fixed Git c02 plus two explicit overlays. Each run has59 contiguous original scalar spans and37 events with zero private origins;19 diagnosis controls reject. Four unchanged consumers pass52 groups/nine controls, and three original examples render from58 complete final book inputs/five controls. Initial incorrect suite selection is retained and corrected; previous consumer claim freezes at c02 with unchanged37 input hashes. Private frame capture, eleven producer hooks and canonical family acceptance are now separately owned.
 
 ## Next Action
 
-Activate `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1` from the clean closeout. Probe splitter/source boundaries first and preserve eleven statement contracts without changing public event/dependency interfaces. No recovery/purge.
+Activate `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.1` from the clean diagnosis commit; capture producer-side splitter scalar boundaries privately while preserving callback/public behavior. No recovery/purge.
 
 ## Recent Completions
+
+- `2026-10-04` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.0` verifies contiguous statement intervals and owns three implementation slices.
 
 - `2026-10-04` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.3.1` accepts1337 source-bound groups and preserves the initial checkpoint-input RED.
 
@@ -43,8 +45,6 @@ Activate `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1` from the clean c
 - `2026-10-03` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.5` executes guarded callable while with1014 focused tests.
 
 - `2026-10-03` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.4` repairs local null-return forms with981 focused tests.
-
-- `2026-10-03` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.3` repairs lazy callable value conditionals with947 focused tests.
 
 ## History
 

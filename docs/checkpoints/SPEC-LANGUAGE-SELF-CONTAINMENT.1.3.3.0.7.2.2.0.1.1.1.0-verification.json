@@ -1,0 +1,615 @@
+{
+  "revision": "c02ce88826f815c201a652d5b29bd3cf044d2740",
+  "git_inputs": 3738,
+  "overlays": 2,
+  "runs": 3,
+  "cases_per_run": 22,
+  "statements": 59,
+  "events": 37,
+  "expected": [
+    {
+      "id": "leading_comment_repeated_declare",
+      "action": "# lead\r\n\tmy $x;  my $x;",
+      "statements": [
+        {
+          "start": 0,
+          "end": 6,
+          "raw": "# lead"
+        },
+        {
+          "start": 9,
+          "end": 14,
+          "raw": "my $x"
+        },
+        {
+          "start": 17,
+          "end": 22,
+          "raw": "my $x"
+        }
+      ],
+      "event_indices": [
+        1,
+        2
+      ]
+    },
+    {
+      "id": "internal_comment_declare",
+      "action": "my #inside\r\n $x;",
+      "statements": [
+        {
+          "start": 0,
+          "end": 10,
+          "raw": "my #inside"
+        },
+        {
+          "start": 13,
+          "end": 15,
+          "raw": "$x"
+        }
+      ],
+      "event_indices": []
+    },
+    {
+      "id": "internal_comment_exit",
+      "action": "exit #inside\r\n 7;",
+      "statements": [
+        {
+          "start": 0,
+          "end": 12,
+          "raw": "exit #inside"
+        },
+        {
+          "start": 15,
+          "end": 16,
+          "raw": "7"
+        }
+      ],
+      "event_indices": [
+        0
+      ]
+    },
+    {
+      "id": "quoted_twin_declare",
+      "action": "text=\"my $x\"; my $x; my $x;",
+      "statements": [
+        {
+          "start": 0,
+          "end": 12,
+          "raw": "text=\"my $x\""
+        },
+        {
+          "start": 14,
+          "end": 19,
+          "raw": "my $x"
+        },
+        {
+          "start": 21,
+          "end": 26,
+          "raw": "my $x"
+        }
+      ],
+      "event_indices": [
+        1,
+        2
+      ]
+    },
+    {
+      "id": "unicode_crlf_return",
+      "action": "# α\r\n \treturn 7; return 7;",
+      "statements": [
+        {
+          "start": 0,
+          "end": 3,
+          "raw": "# α"
+        },
+        {
+          "start": 7,
+          "end": 15,
+          "raw": "return 7"
+        },
+        {
+          "start": 17,
+          "end": 25,
+          "raw": "return 7"
+        }
+      ],
+      "event_indices": [
+        1,
+        2
+      ]
+    },
+    {
+      "id": "attached_boundary",
+      "action": "my $x; if(true) { my $x; } else { my $x; }; my $x;",
+      "statements": [
+        {
+          "start": 0,
+          "end": 5,
+          "raw": "my $x"
+        },
+        {
+          "start": 7,
+          "end": 26,
+          "raw": "if(true) { my $x; }"
+        },
+        {
+          "start": 27,
+          "end": 42,
+          "raw": "else { my $x; }"
+        },
+        {
+          "start": 44,
+          "end": 49,
+          "raw": "my $x"
+        }
+      ],
+      "event_indices": [
+        0,
+        3
+      ]
+    },
+    {
+      "id": "return_bare_repeated",
+      "action": "# α\r\n \treturn 7;\r\n return 7;",
+      "statements": [
+        {
+          "start": 0,
+          "end": 3,
+          "raw": "# α"
+        },
+        {
+          "start": 7,
+          "end": 15,
+          "raw": "return 7"
+        },
+        {
+          "start": 19,
+          "end": 27,
+          "raw": "return 7"
+        }
+      ],
+      "event_indices": [
+        1,
+        2
+      ]
+    },
+    {
+      "id": "exit_bare_repeated",
+      "action": "# α\r\n \texit 7;\r\n exit 7;",
+      "statements": [
+        {
+          "start": 0,
+          "end": 3,
+          "raw": "# α"
+        },
+        {
+          "start": 7,
+          "end": 13,
+          "raw": "exit 7"
+        },
+        {
+          "start": 17,
+          "end": 23,
+          "raw": "exit 7"
+        }
+      ],
+      "event_indices": [
+        1,
+        2
+      ]
+    },
+    {
+      "id": "linecount_prefix_newline_matches_repeated",
+      "action": "# α\r\n \tmy @lines = substr($$STRING, 0, $IPOS) =~ /\\n/g;\r\n my @lines = substr($$STRING, 0, $IPOS) =~ /\\n/g;",
+      "statements": [
+        {
+          "start": 0,
+          "end": 3,
+          "raw": "# α"
+        },
+        {
+          "start": 7,
+          "end": 54,
+          "raw": "my @lines = substr($$STRING, 0, $IPOS) =~ /\\n/g"
+        },
+        {
+          "start": 58,
+          "end": 105,
+          "raw": "my @lines = substr($$STRING, 0, $IPOS) =~ /\\n/g"
+        }
+      ],
+      "event_indices": [
+        1,
+        2
+      ]
+    },
+    {
+      "id": "print_capture_substr_repeated",
+      "action": "# α\r\n \tprint \"<\" . substr($$STRING, $IPOS, $LSPOS - $IPOS - 1) . \">\\n\";\r\n print \"<\" . substr($$STRING, $IPOS, $LSPOS - $IPOS - 1) . \">\\n\";",
+      "statements": [
+        {
+          "start": 0,
+          "end": 3,
+          "raw": "# α"
+        },
+        {
+          "start": 7,
+          "end": 70,
+          "raw": "print \"<\" . substr($$STRING, $IPOS, $LSPOS - $IPOS - 1) . \">\\n\""
+        },
+        {
+          "start": 74,
+          "end": 137,
+          "raw": "print \"<\" . substr($$STRING, $IPOS, $LSPOS - $IPOS - 1) . \">\\n\""
+        }
+      ],
+      "event_indices": [
+        1,
+        2
+      ]
+    },
+    {
+      "id": "my_declare_bare_repeated",
+      "action": "# α\r\n \tmy $x;\r\n my $x;",
+      "statements": [
+        {
+          "start": 0,
+          "end": 3,
+          "raw": "# α"
+        },
+        {
+          "start": 7,
+          "end": 12,
+          "raw": "my $x"
+        },
+        {
+          "start": 16,
+          "end": 21,
+          "raw": "my $x"
+        }
+      ],
+      "event_indices": [
+        1,
+        2
+      ]
+    },
+    {
+      "id": "assign_match_my_repeated",
+      "action": "# α\r\n \tmy $x = $CAPTURE;\r\n my $x = $CAPTURE;",
+      "statements": [
+        {
+          "start": 0,
+          "end": 3,
+          "raw": "# α"
+        },
+        {
+          "start": 7,
+          "end": 23,
+          "raw": "my $x = $CAPTURE"
+        },
+        {
+          "start": 27,
+          "end": 43,
+          "raw": "my $x = $CAPTURE"
+        }
+      ],
+      "event_indices": [
+        1,
+        2
+      ]
+    },
+    {
+      "id": "destructure_imatch_list_my_repeated",
+      "action": "# α\r\n \tmy ($x, $y) = @IMATCH_LIST;\r\n my ($x, $y) = @IMATCH_LIST;",
+      "statements": [
+        {
+          "start": 0,
+          "end": 3,
+          "raw": "# α"
+        },
+        {
+          "start": 7,
+          "end": 33,
+          "raw": "my ($x, $y) = @IMATCH_LIST"
+        },
+        {
+          "start": 37,
+          "end": 63,
+          "raw": "my ($x, $y) = @IMATCH_LIST"
+        }
+      ],
+      "event_indices": [
+        1,
+        2
+      ]
+    },
+    {
+      "id": "regex_subst_assignment_repeated",
+      "action": "# α\r\n \t$x =~ s/a/b/g;\r\n $x =~ s/a/b/g;",
+      "statements": [
+        {
+          "start": 0,
+          "end": 3,
+          "raw": "# α"
+        },
+        {
+          "start": 7,
+          "end": 20,
+          "raw": "$x =~ s/a/b/g"
+        },
+        {
+          "start": 24,
+          "end": 37,
+          "raw": "$x =~ s/a/b/g"
+        }
+      ],
+      "event_indices": [
+        1,
+        2
+      ]
+    },
+    {
+      "id": "next_bare_repeated",
+      "action": "# α\r\n \tnext LOOP;\r\n next LOOP;",
+      "statements": [
+        {
+          "start": 0,
+          "end": 3,
+          "raw": "# α"
+        },
+        {
+          "start": 7,
+          "end": 16,
+          "raw": "next LOOP"
+        },
+        {
+          "start": 20,
+          "end": 29,
+          "raw": "next LOOP"
+        }
+      ],
+      "event_indices": [
+        1,
+        2
+      ]
+    },
+    {
+      "id": "ref_field_assign_repeated",
+      "action": "# α\r\n \tmy $x = $node->{key}[0];\r\n my $x = $node->{key}[0];",
+      "statements": [
+        {
+          "start": 0,
+          "end": 3,
+          "raw": "# α"
+        },
+        {
+          "start": 7,
+          "end": 30,
+          "raw": "my $x = $node->{key}[0]"
+        },
+        {
+          "start": 34,
+          "end": 57,
+          "raw": "my $x = $node->{key}[0]"
+        }
+      ],
+      "event_indices": [
+        1,
+        2
+      ]
+    },
+    {
+      "id": "position_tracking_repeated",
+      "action": "# α\r\n \t$x = pos($$STRING);\r\n $x = pos($$STRING);",
+      "statements": [
+        {
+          "start": 0,
+          "end": 3,
+          "raw": "# α"
+        },
+        {
+          "start": 7,
+          "end": 25,
+          "raw": "$x = pos($$STRING)"
+        },
+        {
+          "start": 29,
+          "end": 47,
+          "raw": "$x = pos($$STRING)"
+        }
+      ],
+      "event_indices": [
+        1,
+        2
+      ]
+    },
+    {
+      "id": "nested_comment_return",
+      "action": "return (7 #inside\r\n);",
+      "statements": [
+        {
+          "start": 0,
+          "end": 20,
+          "raw": "return (7 #inside\r\n)"
+        }
+      ],
+      "event_indices": []
+    },
+    {
+      "id": "hash_in_quoted_return",
+      "action": "return \"#inside; my $x\";",
+      "statements": [
+        {
+          "start": 0,
+          "end": 23,
+          "raw": "return \"#inside; my $x\""
+        }
+      ],
+      "event_indices": [
+        0
+      ]
+    },
+    {
+      "id": "slashes_and_comments",
+      "action": "$x =~ s/a#;b/c#;d/g;\r\n# next\r\n$x =~ s/a#;b/c#;d/g;",
+      "statements": [
+        {
+          "start": 0,
+          "end": 19,
+          "raw": "$x =~ s/a#;b/c#;d/g"
+        },
+        {
+          "start": 22,
+          "end": 28,
+          "raw": "# next"
+        },
+        {
+          "start": 30,
+          "end": 49,
+          "raw": "$x =~ s/a#;b/c#;d/g"
+        }
+      ],
+      "event_indices": [
+        0,
+        2
+      ]
+    },
+    {
+      "id": "unicode_space_declare",
+      "action": " my $x; my $x;",
+      "statements": [
+        {
+          "start": 1,
+          "end": 6,
+          "raw": "my $x"
+        },
+        {
+          "start": 8,
+          "end": 13,
+          "raw": "my $x"
+        }
+      ],
+      "event_indices": [
+        0,
+        1
+      ]
+    },
+    {
+      "id": "trailing_comment_declare",
+      "action": "my $x #inside;\r\nmy $x;",
+      "statements": [
+        {
+          "start": 0,
+          "end": 14,
+          "raw": "my $x #inside;"
+        },
+        {
+          "start": 16,
+          "end": 21,
+          "raw": "my $x"
+        }
+      ],
+      "event_indices": [
+        1
+      ]
+    }
+  ],
+  "controls": [
+    {
+      "name": "erase repeated event",
+      "rejected": true,
+      "reason": "recognized statement order"
+    },
+    {
+      "name": "invent private origins",
+      "rejected": true,
+      "reason": "private missing-origin baseline"
+    },
+    {
+      "name": "strip comment text",
+      "rejected": true,
+      "reason": "original contiguous statement text"
+    },
+    {
+      "name": "join comment-separated statement",
+      "rejected": true,
+      "reason": "original contiguous statement text"
+    },
+    {
+      "name": "invent nested declaration",
+      "rejected": true,
+      "reason": "recognized statement order"
+    },
+    {
+      "name": "erase compiler failure",
+      "rejected": true,
+      "reason": "Toolbox compile/inspection failure"
+    },
+    {
+      "name": "drop case",
+      "rejected": true,
+      "reason": "case population"
+    },
+    {
+      "name": "add dependency",
+      "rejected": true,
+      "reason": "five dependency keys"
+    },
+    {
+      "name": "quoted twin source offset",
+      "rejected": true,
+      "reason": "ordered scalar interval"
+    },
+    {
+      "name": "Unicode byte offset",
+      "rejected": true,
+      "reason": "authored scalar interval"
+    },
+    {
+      "name": "reuse repeated occurrence",
+      "rejected": true,
+      "reason": "event occurrence identity"
+    },
+    {
+      "name": "missing regular input",
+      "rejected": true,
+      "reason": "complete Git input membership"
+    },
+    {
+      "name": "forge Git input hash",
+      "rejected": true,
+      "reason": "Git input bytes"
+    },
+    {
+      "name": "forge mode",
+      "rejected": true,
+      "reason": "Git input identity"
+    },
+    {
+      "name": "promote partial capture",
+      "rejected": true,
+      "reason": "complete exact-input report"
+    },
+    {
+      "name": "forge instrument",
+      "rejected": true,
+      "reason": "actual capture instrument"
+    },
+    {
+      "name": "omit actual input guard",
+      "rejected": true,
+      "reason": "input boundary guards"
+    },
+    {
+      "name": "forge actual exit",
+      "rejected": true,
+      "reason": "actual successful probe"
+    },
+    {
+      "name": "forge channel hash",
+      "rejected": true,
+      "reason": "channel bytes"
+    }
+  ],
+  "review_instrument_sha256": "334bd5247ceef4d231e0ced32f4f7a4b4c7d3756377d6a38c036df723cbc6074"
+}

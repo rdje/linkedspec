@@ -1,0 +1,60 @@
+{
+  "revision": "c02ce88826f815c201a652d5b29bd3cf044d2740",
+  "suites": 4,
+  "plans": {
+    "t/actionir_helper_source_provenance.t": 13,
+    "t/actionir_basic_regex_source_provenance.t": 10,
+    "t/actionir_ast_parser.t": 23,
+    "t/actionir_raw_dependency_provenance.t": 6
+  },
+  "top_level_tests": 52,
+  "controls": [
+    {
+      "name": "drop suite",
+      "rejected": true,
+      "reason": "exact consumer selection"
+    },
+    {
+      "name": "promote partial",
+      "rejected": true,
+      "reason": "complete consumer boundary"
+    },
+    {
+      "name": "forge producer",
+      "rejected": true,
+      "reason": "actual consumer instrument"
+    },
+    {
+      "name": "omit input guard",
+      "rejected": true,
+      "reason": "consumer input guards"
+    },
+    {
+      "name": "forge exit",
+      "rejected": true,
+      "reason": "consumer exit"
+    },
+    {
+      "name": "forge channel",
+      "rejected": true,
+      "reason": "channel bytes"
+    },
+    {
+      "name": "failed nested TAP",
+      "rejected": true,
+      "reason": "failing TAP"
+    },
+    {
+      "name": "truncate top-level reach",
+      "rejected": true,
+      "reason": "ordered complete TAP reach"
+    },
+    {
+      "name": "erase prove completion",
+      "rejected": true,
+      "reason": "prove final markers"
+    }
+  ],
+  "failed_selection_preserved": true,
+  "instrument_sha256": "fef895fe7b7d4a55b27c52dccf4d978360bc8cd6c274644e1bd7ae136efe1d27"
+}

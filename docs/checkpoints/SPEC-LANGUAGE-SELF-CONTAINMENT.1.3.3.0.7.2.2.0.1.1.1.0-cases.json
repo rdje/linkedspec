@@ -1,0 +1,156 @@
+[
+  {
+    "id": "leading_comment_repeated_declare",
+    "contract": "my_declare_bare",
+    "action": "# lead\r\n\tmy $x;  my $x;"
+  },
+  {
+    "id": "internal_comment_declare",
+    "contract": "my_declare_bare",
+    "action": "my #inside\r\n $x;"
+  },
+  {
+    "id": "internal_comment_exit",
+    "contract": "exit_bare",
+    "action": "exit #inside\r\n 7;"
+  },
+  {
+    "id": "quoted_twin_declare",
+    "contract": "my_declare_bare",
+    "action": "text=\"my $x\"; my $x; my $x;"
+  },
+  {
+    "id": "unicode_crlf_return",
+    "contract": "return_bare",
+    "action": "# α\r\n \treturn 7; return 7;"
+  },
+  {
+    "id": "attached_boundary",
+    "contract": "my_declare_bare",
+    "action": "my $x; if(true) { my $x; } else { my $x; }; my $x;"
+  },
+  {
+    "id": "return_bare_repeated",
+    "contract": "return_bare",
+    "action": "# α\r\n \treturn 7;\r\n return 7;",
+    "expected_raws": [
+      "return 7",
+      "return 7"
+    ]
+  },
+  {
+    "id": "exit_bare_repeated",
+    "contract": "exit_bare",
+    "action": "# α\r\n \texit 7;\r\n exit 7;",
+    "expected_raws": [
+      "exit 7",
+      "exit 7"
+    ]
+  },
+  {
+    "id": "linecount_prefix_newline_matches_repeated",
+    "contract": "linecount_prefix_newline_matches",
+    "action": "# α\r\n \tmy @lines = substr($$STRING, 0, $IPOS) =~ /\\n/g;\r\n my @lines = substr($$STRING, 0, $IPOS) =~ /\\n/g;",
+    "expected_raws": [
+      "my @lines = substr($$STRING, 0, $IPOS) =~ /\\n/g",
+      "my @lines = substr($$STRING, 0, $IPOS) =~ /\\n/g"
+    ]
+  },
+  {
+    "id": "print_capture_substr_repeated",
+    "contract": "print_capture_substr",
+    "action": "# α\r\n \tprint \"<\" . substr($$STRING, $IPOS, $LSPOS - $IPOS - 1) . \">\\n\";\r\n print \"<\" . substr($$STRING, $IPOS, $LSPOS - $IPOS - 1) . \">\\n\";",
+    "expected_raws": [
+      "print \"<\" . substr($$STRING, $IPOS, $LSPOS - $IPOS - 1) . \">\\n\"",
+      "print \"<\" . substr($$STRING, $IPOS, $LSPOS - $IPOS - 1) . \">\\n\""
+    ]
+  },
+  {
+    "id": "my_declare_bare_repeated",
+    "contract": "my_declare_bare",
+    "action": "# α\r\n \tmy $x;\r\n my $x;",
+    "expected_raws": [
+      "my $x",
+      "my $x"
+    ]
+  },
+  {
+    "id": "assign_match_my_repeated",
+    "contract": "assign_match_my",
+    "action": "# α\r\n \tmy $x = $CAPTURE;\r\n my $x = $CAPTURE;",
+    "expected_raws": [
+      "my $x = $CAPTURE",
+      "my $x = $CAPTURE"
+    ]
+  },
+  {
+    "id": "destructure_imatch_list_my_repeated",
+    "contract": "destructure_imatch_list_my",
+    "action": "# α\r\n \tmy ($x, $y) = @IMATCH_LIST;\r\n my ($x, $y) = @IMATCH_LIST;",
+    "expected_raws": [
+      "my ($x, $y) = @IMATCH_LIST",
+      "my ($x, $y) = @IMATCH_LIST"
+    ]
+  },
+  {
+    "id": "regex_subst_assignment_repeated",
+    "contract": "regex_subst_assignment",
+    "action": "# α\r\n \t$x =~ s/a/b/g;\r\n $x =~ s/a/b/g;",
+    "expected_raws": [
+      "$x =~ s/a/b/g",
+      "$x =~ s/a/b/g"
+    ]
+  },
+  {
+    "id": "next_bare_repeated",
+    "contract": "next_bare",
+    "action": "# α\r\n \tnext LOOP;\r\n next LOOP;",
+    "expected_raws": [
+      "next LOOP",
+      "next LOOP"
+    ]
+  },
+  {
+    "id": "ref_field_assign_repeated",
+    "contract": "ref_field_assign",
+    "action": "# α\r\n \tmy $x = $node->{key}[0];\r\n my $x = $node->{key}[0];",
+    "expected_raws": [
+      "my $x = $node->{key}[0]",
+      "my $x = $node->{key}[0]"
+    ]
+  },
+  {
+    "id": "position_tracking_repeated",
+    "contract": "position_tracking",
+    "action": "# α\r\n \t$x = pos($$STRING);\r\n $x = pos($$STRING);",
+    "expected_raws": [
+      "$x = pos($$STRING)",
+      "$x = pos($$STRING)"
+    ]
+  },
+  {
+    "id": "nested_comment_return",
+    "contract": "return_bare",
+    "action": "return (7 #inside\r\n);"
+  },
+  {
+    "id": "hash_in_quoted_return",
+    "contract": "return_bare",
+    "action": "return \"#inside; my $x\";"
+  },
+  {
+    "id": "slashes_and_comments",
+    "contract": "regex_subst_assignment",
+    "action": "$x =~ s/a#;b/c#;d/g;\r\n# next\r\n$x =~ s/a#;b/c#;d/g;"
+  },
+  {
+    "id": "unicode_space_declare",
+    "contract": "my_declare_bare",
+    "action": " my $x; my $x;"
+  },
+  {
+    "id": "trailing_comment_declare",
+    "contract": "my_declare_bare",
+    "action": "my $x #inside;\r\nmy $x;"
+  }
+]

@@ -1,0 +1,8 @@
+{
+  "revision": "c02ce88826f815c201a652d5b29bd3cf044d2740",
+  "bound_inputs_verified": 37,
+  "before_sha256": "1013e1cd1c671ee4c0fd676b5126a5387a96f07f1e69c453de79cfbcdedb672b",
+  "after_sha256": "133c6676930f360facf8e5ad3441e4ec21182b39426e9525d073573e973b0922",
+  "scope": "Only durability mode/revision changed; original producer bytes are retained at their immutable Git boundaries. Two prepare headers alone now describe the existing working book-overlay branch accurately.",
+  "instrument_sha256": "623f6f922f0377dfb072f6d17cc76802d193607efef33cbb9ce5cc51341df3b3"
+}

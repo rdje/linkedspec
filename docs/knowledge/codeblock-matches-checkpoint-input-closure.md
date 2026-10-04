@@ -10,7 +10,7 @@ date: 2026-10-04
 status: supplied-input defect fixed and independently verified under .1.1.3.1
 tags: [claims, capsule, checkpoint, perl, codeblock, source-boundary]
 evidence: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.3.1 retains initial exit1/test exit2 at line8 with no TAP and1298 completed groups from twelve earlier suites. Exactly four immutable checkpoint inputs repair the final unchanged39-group consumer. Independent review preserves738/742-file actual boundaries, common input byte/mode identities and22 distinguishing RED controls."
-reverify: "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.3.1-review.py --public-book"
+reverify: "At exact c02ce88826f815c201a652d5b29bd3cf044d2740 run bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.3.1-review.py --public-book; publication/producer bytes are historical and must not be refreshed."
 ---
 
 # Codeblock matches consumer needs four checkpoint files
