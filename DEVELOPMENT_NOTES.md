@@ -12,6 +12,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-10-04 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.0: occurrence identity precedes lexical filtering
+
+Legacy return scanning consumes an outer call containing quoted inner text, so per-raw earliest matching can attach the later real event to a non-event inside data. Set scanning emits quoted A/real B/real A; skipping quotes can consume the later A for the first event, retaining A/B rather than genuine B/A. Measured candidate simulations establish that equal spelling is insufficient. Canonical residual order already preserves its input; producer source provenance must carry identity and explicit recursive/argument/statement frames without changing public fields or feeding masked operands into typed parsing. The seven source-bound families include six FlowRules nested/composed calls; ordinary if/else scans differ from recursive case/default scans. Complete expected RED, full captures and twelve independent evidence corruptions prevent a healthy value or a mapper projection from masquerading as repaired source ownership.
+
 ## 2026-10-04 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.1: quoted data and diagnostic origin
 
 A quoted IF reaches residual replacement, leaves an unbalanced flow stack and returns original action text. Healthy literal execution hides false events; typed nested cat/matches instead escape as host calls and fail both public routes. Quoted set reaches residual substitution and changes literal contents before interpolation. CanonicalEvents queues scanner events rather than running a second assignment lexer; a repair must retain executable occurrence identity through scanning and replacement, including identical quoted/real twins in both orders.

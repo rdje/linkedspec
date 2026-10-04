@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-10-04 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.0: helper scan occurrence ambiguity
+
+Two exact seed0 Toolbox AST/substitution/diagnostic captures execute and reject earliest-raw and skip-quoted raw-key mappers. The former drops a genuine return; the latter reorders real set calls. Preserve exact original/replayed thirteen-group RED with11 failures/two green guards,45 unchanged consumer tests,12 evidence controls, seven source-bound scanner families and two rendered examples. Keep all production/spec/standard-test/CI/governance bytes exact to ea45. Freeze prior diagnosis manifest historically and decompose private provenance, membership, exact replacement and recurring canonical composition before production edits. The failing candidate fixture is retained under checkpoints rather than installed as a standard test.
+
 ## 2026-10-04 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.1: quoted source ownership diagnosis
 
 Retain22 exact sources/66 native-fresh Perl pairs,22 actual traces and165 passing tests across ten unchanged suites.14 evidence controls reject;147 artifact inputs bind24 producers, four source-identical examples render. Full streams use lossless gzip/base64/SHA/length envelopes; production/spec/tests remain activation-exact. Actual quoted set corruption, false IF/unresolved metadata, authored marker false blockers and six source/seed nested host-call failures select executable occurrence repair .7.2.2.0 then diagnostic provenance .1. Original reviewer/case assumptions remain frozen. Unicode trace warning/capture exit1 is owned by PERL-TRACE-UNICODE-SINK.1; source comments and broad startup .18 remain separate. Focused doctrine/claim/history/Knowledge/diff checks govern diagnosis landing; no runtime or backend repair is claimed.

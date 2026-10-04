@@ -1,0 +1,36 @@
+[
+  {
+    "id": "suppressed_quoted_return",
+    "action": "return('return(\"x\")'); return(\"x\")",
+    "contract": "return_general",
+    "quoted_raw": "return(\"x\")",
+    "quoted_start": 8,
+    "real_starts": [
+      0,
+      23
+    ],
+    "real_raws": [
+      "return('return(\"x\")')",
+      "return(\"x\")"
+    ],
+    "candidate": "earliest_per_raw",
+    "source": "Top:: I { return('return(\"x\")'); return(\"x\") }"
+  },
+  {
+    "id": "interleaved_quoted_set",
+    "action": "text=\"set(counter,1)\"; set(counter,2); set(counter,1); return(counter)",
+    "contract": "set_value",
+    "quoted_raw": "set(counter,1)",
+    "quoted_start": 6,
+    "real_starts": [
+      23,
+      39
+    ],
+    "real_raws": [
+      "set(counter,2)",
+      "set(counter,1)"
+    ],
+    "candidate": "skip_quoted_per_raw",
+    "source": "Top:: I { text=\"set(counter,1)\"; set(counter,2); set(counter,1); return(counter) }"
+  }
+]

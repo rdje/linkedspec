@@ -2051,7 +2051,7 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 - [x] **DIRECT CONSUMERS / LOCKSTEP** — Ten unchanged suites165 tests pass;147 inputs/24 producers hash-bind proof; four exact examples render. Current tree/index/resume/live/roadmap/book/Knowledge and bounded history handoff prepared; required doctrine/claim/diff checks govern landing.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2`
-  Status: `pending`
+  Status: `active`
   Goal: Repair the diagnosed quoted-data ownership defects while preserving authored values and genuine dependencies.
   Dependencies: `.1.3.3.0.7.2.1`
   Children: `.1.3.3.0.7.2.2.0`, `.1.3.3.0.7.2.2.1`
@@ -2059,11 +2059,61 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
   Acceptance: Select and declare exact production/test/interface paths from committed diagnosis; split further if independent mechanisms exceed a safe slice. Actual permanent RED/GREEN and source-bound direct/fresh compatibility prove lexical ownership, occurrence order, literal bytes and genuine helper/raw detection. Preserve separate comment and older broad carrier owners. Public event/readiness or infrastructure changes require exact staged canonical proof; synchronize book/Knowledge/live docs and commit every implemented leaf.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0`
-  Status: `pending`
+  Status: `active`
   Goal: Preserve executable occurrence identity through helper scanning and residual source replacement.
   Dependencies: `.1.3.3.0.7.2.1`
+  Children: `.1.3.3.0.7.2.2.0.0`, `.1.3.3.0.7.2.2.0.1`, `.1.3.3.0.7.2.2.0.2`, `.1.3.3.0.7.2.2.0.3`, `.1.3.3.0.7.2.2.0.4`
+  Safe-slice split: The proposed three-owner filter cannot infer exact matches from raw event spelling alone. Before production edits, .0 preserves the actual complete RED fixture and falsifies candidate raw-key mappers through public probes. .1 owns producer source provenance and its private interface, .2 executable source membership, .3 exact residual replacement and .4 recurring registration/canonical composition. Declare exact producer families and recursive source frames from the .0 inventory before each implementation activation; no masked argument parsing or public event-field expansion.
   Candidate owners: MethodExpr lexical/slash ownership, ScannerCore family dispatch, RewritePipeline source-span selection and their affected direct scanner/canonical consumers; declare exact paths/tier/producers before changing them.
+  Activation: Cleanea45d933d6af8776bb4205514f423e3b7627af0d; all ten diagnosis hooks/post-pointer PASS, brief0, no background job. Relevant roadmap/decision/lexical/helper/descriptor/source-unit contracts, affected public probe paths, unchanged consumer suites and book sections reviewed. The quote-before-real occurrence gap is explicitly unmeasured until the supplementary Toolbox probes execute.
+  Owned paths: perl/LinkedSpec/ActionIR/MethodExpr.pm, ScannerCore.pm and RewritePipeline.pm; t/actionir_quoted_source_ownership.t; the exact recurring tracked/syntax/execution registrations in tools/run_ci_local.sh and their historical validation consumer if its anchored source oracle requires reconciliation. This task/index/resume/live/roadmap/change/notes/book/Knowledge and docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.json; freeze .7.2.1 claim/fact at actualea45d933d before changing bound inputs. Checkpoint prefix docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0- owns before-MethodExpr.pm, before-ScannerCore.pm, before-RewritePipeline.pm, cases.json, probe.pl, fresh.pl, capture.py, before.json, after.json, occurrence-probe.pl, occurrence-before.json, tests.py, tests-before.json, tests-after.json, review.py, verification.json, trace.pl, trace-before.json, trace-after.json, book.py, book.json, claim.py and explicitly retained initial failed instruments/captures. Producers declare exact corpus/seed/baseline modes before execution; scratch is .linkedspec-data/scratch/quoted-executable-ownership. Original captures remain immutable; no recovery/purge.
+  Parent proof obligations: Before any repair, source-identical public occurrence twins in both orders and permanent focused RED; frozen-owner/current public AST/substitution/descriptor/dump/native/fresh source-value/error controls with actual streams, independent occurrence/literal/raw/legacy/slash oracles, reached traces and executed evidence falsifiers. Unchanged direct scanner/AST/canonical/raw/span/trace/generated/matches consumers, actual book rendering/examples, syntax, historical CI-registration source controls, memory/Knowledge/claims/history/diff and all doctrines.
+  Parent canonical boundary: Public literal/event behavior and recurring CI registration change; exact staged tools/run_ci_local.sh receipt is required before commit.
+  Source-ownership boundary: Reuse the published existing helper-pattern/slash-call and quote/host-quote/comment contracts. Match executable start positions while retaining complete original argument/literal bytes; do not feed masked operands into parsing/lowering. Equal raw text cannot identify an occurrence. Source replacement must avoid a quoted twin preceding an actual helper, including strings created by lowering. Preserve opaque scanner/delegation returns and caller error state. Any further lexer/method precedence or grammar issue must be independently owned and split before widening this slice.
+  Before-change public occurrence proof: occurrence-probe.pl calls both published call_spec_handler_subst and its diagnostic owner on four exact supplementary sources, requiring identical output. Quoted-before-real and real-before-quoted each produce two set_value events for one real occurrence; the intervening quoted twin produces three for two real occurrences, and actual substitution changes each literal. Regex /if(true)/ contributes a false IF and original-source fallback. cases-initial.json preserves an initial expected1 typo for matches("ifXtrue", /if(true)/); before runtime measurement correct only that independent expected value to0 because grouping does not match the inserted X. Every executed source/action/input/manual-helper byte remains unchanged; occurrence-before.json is untouched.
+  Actual permanent RED: tests-before.json retains the frozen three-owner command and complete thirteen-group TAP plan; eleven groups fail, two genuine unsupported/raw and opaque/caller-error guards pass. No fatal/truncated plan is accepted as RED. New supported surfaces are excluded by ADR0011; lexical membership repairs existing scanner/typed-lowering seams only. Additional exact governance owner: tests/language-readiness/verify_objectives.py; preserve its before bytes and current historical hash while allowing only three anchored new-test registrations, with actual omitted/duplicate/disabled/extra-edit rejections.
   Acceptance: Actual RED/GREEN protects both quote forms, escapes, Unicode/CRLF, nested/deferred literals, quoted/real identical helper twins in both orders and repeated distinct occurrences. Reproduce the quote-before-real replacement ambiguity before choosing its repair. Close the actually failing nested_data/regex_data native/fresh host-call paths to their independently authored literal/matches values, preserving original failures as RED. Preserve original arguments/spans, contract precedence, genuine control/raw/legacy helpers and supported slash patterns; source comments retain their separate AST/fallback repair. Update recurring focused tests and book/Knowledge/live docs, then exact staged canonical verification and commit. This child must honestly preserve the still-open marker diagnostic boundary rather than claim all quoted readiness fixed.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.0`
+  Status: `done`
+  Goal: Freeze complete quoted-source RED and prove why raw spelling alone cannot identify executable scan occurrences.
+  Dependencies: `.1.3.3.0.7.2.1`
+  Activation: Clean ea45d933d6af8776bb4205514f423e3b7627af0d; parent preparatory instruments remain owned here, with no production/gate implementation changes.
+  Owned paths: Parent checkpoint prefix .7.2.2.0- and new mapping-cases.json, mapping-probe.pl, mapping.py, mapping.json, red-fixture.t, replay-red.py, replay-red.json, inventory.py, inventory.json, review.py, verification.json, book.py, book.json, claim.py; docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.0.json. Preserve the exact untracked failing t/actionir_quoted_source_ownership.t bytes as red-fixture.t before removing only that owned candidate from t/. Freeze prior claim at ea45, then current task/index/resume/live/roadmap/change/notes/COMMIT/book/Knowledge. Production, standard tests, CI and governance consumers stay byte-identical to activation.
+  Verification tier: `focused`
+  Focused checks: Source-bound public AST/facade substitution/diagnostic probes; actually executed candidate-mapper false-drop/order controls, complete thirteen-group RED replay with two guards green, exact source/test/producer identities and scanner-family inventory, read-only reviewer corruptions, unchanged occurrence/AST/scanner consumers, actual book render, memory/Knowledge/claim/history/diff and all doctrines.
+  Canonical trigger: None; evidence and safe ownership decomposition only, without production/test-registration/public contract movement. Implementation admission .4 retains exact canonical proof.
+  Claim verification: `docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.0.json`
+  Competing hypotheses: Earliest per-raw matching can pair a genuine return with a quoted inner call suppressed by the outer regex match; skipping quoted positions can attach a fake set event to a later real twin and reorder interleaved real calls. These are candidate simulations until the explicit public capture and independent occurrence lists prove them; never claim an executed production mutant.
+  Acceptance: Preserve original before TAP/fixture and capture bytes, disclose expected RED rather than declare runtime acceptance, record source-bound distinguishing observations and exact producer ownership, then commit a clean handoff to producer provenance .1.
+
+  Verification: Two exact seed0 public AST/facade/diagnostic captures execute both candidate mappers: earliest raw matching loses real return at23 to quoted8; skip-quoted matching retains set1 at39 before set2 at23. Complete preserved/replayed13-group RED has11 failures and two true guards green; four unchanged consumers pass45. Twelve executed evidence corruptions reject; seven exact family files inventory source construction and six FlowRules nested/composed calls. Two byte-identical book examples render. Production/spec/standard-test/CI/governance owners remain activation-exact. Parent26-case list is preparation, not a new runtime population; original failed desired quote oracles remain honest. Focused all-doctrine/claim/history/Knowledge/diff checks govern landing.
+  Initial doctrine gate: Eight doctrines PASS; claim/cadence reject two new verification owners because activation fields on the newly split parent remained uncommitted. Preserve gate-initial.json as the exact tool-returned combined stream (separate stdout/stderr unavailable). Remove only the parent leaf declarations; .0.0 alone owns this focused commit. No bypass; re-run the complete driver and hooks.
+  Commit: This leaf lands the bounded additional diagnosis; Git is the commit identity authority. Next producer provenance .1 activates only after the clean handoff.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1`
+  Status: `pending`
+  Goal: Preserve scanner match provenance through a private source-bound interface.
+  Dependencies: `.1.3.3.0.7.2.2.0.0`
+  Acceptance: Select exact producer families from the committed inventory and split if needed. Capture actual regex offsets before nested parsing overwrites match globals; translate recursive/substatement frames explicitly. Preserve original raw/args bytes, family precedence, occurrence order, opaque delegation and caller error state; no public event schema changes. Verify affected scanner/control/recognized-pattern consumers and commit before membership changes.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2`
+  Status: `pending`
+  Goal: Exclude authored quoted/pattern data using exact producer occurrence provenance.
+  Dependencies: `.1.3.3.0.7.2.2.0.1`
+  Acceptance: Reuse existing quote/host-quote/helper-pattern/slash-call contracts, retain original arguments, genuine literal receivers and true dependencies; no globally masked parsing or inferred raw-key pairing. Replay exact quoted/repeated/order guards and direct consumers before committing.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3`
+  Status: `pending`
+  Goal: Replace only the selected executable residual occurrence, preserving quoted twins and literal bytes.
+  Dependencies: `.1.3.3.0.7.2.2.0.2`
+  Acceptance: Verify original and rewritten source frames, mixed identical occurrences in both orders, interleaved calls, nested/deferred values and native/fresh host-call repair. Preserve genuine raw spans and existing family ordering, then commit.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.4`
+  Status: `pending`
+  Goal: Admit recurring executable source-ownership proof and independently compose this repair.
+  Dependencies: `.1.3.3.0.7.2.2.0.3`
+  Acceptance: Install the preserved diagnostic fixture as a green recurring test, register exact tracked/syntax/execution CI slots and reconcile only their source-bound historical consumer. Preserve before bytes and execute omitted/duplicate/disabled/extra-edit rejections; complete native/fresh compatibility, public book, unchanged consumers and exact staged canonical acceptance. Close executable parent .0 only; diagnostic origin .7.2.2.1 remains next.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.1`
   Status: `pending`
@@ -2315,8 +2365,13 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 | 43.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.1` | `done` | Pending scan occurrences repaired;325-input/424-test proof and exact canonical landing condition. |
 | 43.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.0` | `done` | 16 sources/48 pairs,16 traces/42 tests and twelve controls; source-occurrence repair boundary frozen. |
 | 43.3 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1` | `done` | Canonically accepted363c79109; focused proof/447-input claim remain historical at that revision. |
-| 43.4.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2` | `pending` | Evidence-selected bounded lexical ownership repair after committed diagnosis. |
-| 43.4.2.0 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0` | `pending` | Executable occurrence repair, including quoted literal corruption and typed nested host-call failures. |
+| 43.4.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2` | `active` | Evidence-selected bounded lexical ownership repair after committed diagnosis. |
+| 43.4.2.0 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0` | `active` | Executable occurrence repair, including quoted literal corruption and typed nested host-call failures. |
+| 43.4.2.0.0 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.0` | `done` | Two raw-key mapper failures and complete expected RED; production unchanged. |
+| 43.4.2.0.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1` | `pending` | Producer source provenance and explicit recursive frames. |
+| 43.4.2.0.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2` | `pending` | Executable source membership with original arguments. |
+| 43.4.2.0.3 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3` | `pending` | Exact replacement preserving quoted twins and genuine order. |
+| 43.4.2.0.4 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.4` | `pending` | Recurring test registration and exact canonical composition. |
 | 43.4.2.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.1` | `pending` | Unresolved executable helpers and compiler-marker provenance; preserve genuine blockers. |
 | 43.4.3 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.3` | `pending` | Independent quoted-data closeout before comments .7.3. |
 | 43.5 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.3` | `pending` | Source-comment AST/raw false blocker; required before dispatcher and .7 closure. |

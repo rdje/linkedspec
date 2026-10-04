@@ -2,17 +2,19 @@
 
 ## Current Activity
 
-Full PNT: source-bound quoted diagnosis .7.2.1 is complete; executable occurrence repair .7.2.2.0 is next, then diagnostic provenance .1 and independent closeout.
+Full PNT: quoted-source diagnosis is committed; exact occurrence-mapping diagnosis splits producer provenance, executable membership, replacement and canonical composition before marker diagnostics.
 
 ## Latest Completed Slice
 
-`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.1` retains22 exact sources/66 seeded native-fresh Perl pairs,22 complete lowering traces and165 passing tests across ten unchanged consumers.14 evidence controls reject;147 inputs bind24 producers. Quoted set values corrupt, phantom IF triggers original-source fallback and two nested host-call failures per seed, authored marker data falsely blocks readiness. Initial reviewer/unsupported-success assumptions remain frozen; all actual streams stay exact. Four source-identical book examples render. Production remains unchanged; focused doctrines govern landing.
+`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.0` captures two seed0 public AST/substitution/diagnostic probes and two actual candidate raw-key mapper failures. Original and replayed thirteen-group fixture retains11 expected failures/two green guards; four unchanged suites pass45 tests. Twelve evidence corruptions reject; seven scanner families are source-bound, including six FlowRules nested/composed calls. Two exact examples render. Production/spec/standard-test/CI/governance owners remain activation-identical; no quote repair or backend admission is claimed.
 
 ## Next Action
 
-From the clean diagnosis commit activate .7.2.2.0 executable occurrence repair and freeze current diagnosis claims at the landed revision before changing their inputs. Then .7.2.2.1 diagnostic provenance and .7.2.3 independent acceptance, comments .7.3 and marker fallback .7.4 before dispatcher/full execution. PERL-TRACE-UNICODE-SINK.1 owns the measured routed Unicode warning and is scheduled after a clean compiler handoff. Older startup .18 broad scope remains open; recovery/purge stays prohibited.
+From clean diagnosis activate .7.2.2.0.1 producer provenance, freeze this claim at the landed revision, and declare exact family/frame subleaves before implementation. Then membership .2, replacement .3 and recurring/canonical composition .4; diagnostic origin .7.2.2.1 and independent .7.2.3 closeout follow. Comments .7.3/marker fallback .7.4 precede dispatcher/full execution. The Unicode trace defect remains separately scheduled after a clean compiler handoff; recovery/purge stays prohibited.
 
 ## Recent Completions
+
+- `2026-10-04` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.0` rejects raw-key occurrence inference and freezes complete quote RED.
 
 - `2026-10-04` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.1` freezes current quoted value/event/marker/runtime diagnosis and splits bounded repair.
 
@@ -44,7 +46,6 @@ From the clean diagnosis commit activate .7.2.2.0 executable occurrence repair a
 
 - `2026-10-03` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.0` freezes deferred conditional boundaries and schedules existing matches prerequisite.
 
-- `2026-10-03` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.2` reconciles bounded bridge parents with750 tests and preserved original evidence.
 
 ## History
 

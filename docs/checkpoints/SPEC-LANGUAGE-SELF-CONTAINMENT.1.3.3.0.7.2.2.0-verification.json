@@ -1,0 +1,92 @@
+{
+  "owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.0",
+  "activation": "ea45d933d6af8776bb4205514f423e3b7627af0d",
+  "public_probe_sources": 2,
+  "candidate_mapper_failures": 2,
+  "red_groups": 13,
+  "failed_groups": 11,
+  "green_guard_groups": 2,
+  "suites": [
+    {
+      "path": "t/canonical_event_occurrence_order.t",
+      "tests": 15
+    },
+    {
+      "path": "t/actionir_ast_parser.t",
+      "tests": 23
+    },
+    {
+      "path": "t/noncurrent_helper_metadata.t",
+      "tests": 2
+    },
+    {
+      "path": "t/trace_actionir_pipeline.t",
+      "tests": 5
+    }
+  ],
+  "consumer_tests": 45,
+  "scanner_families": 7,
+  "book_examples": 2,
+  "rejected_evidence_controls": [
+    {
+      "name": "hide_real_return",
+      "rejected": true,
+      "reason": "measured scan occurrence stream"
+    },
+    {
+      "name": "hide_quoted_set",
+      "rejected": true,
+      "reason": "measured scan occurrence stream"
+    },
+    {
+      "name": "erase_typed_string",
+      "rejected": true,
+      "reason": "typed quoted data"
+    },
+    {
+      "name": "move_independent_real_occurrence",
+      "rejected": true,
+      "reason": "independent real occurrence list"
+    },
+    {
+      "name": "hide_candidate_false_drop",
+      "rejected": true,
+      "reason": "candidate false drop"
+    },
+    {
+      "name": "hide_candidate_wrong_order",
+      "rejected": true,
+      "reason": "candidate wrong order"
+    },
+    {
+      "name": "truncate_red_plan",
+      "rejected": true,
+      "reason": "complete RED plan"
+    },
+    {
+      "name": "hide_red_group",
+      "rejected": true,
+      "reason": "eleven actual RED groups"
+    },
+    {
+      "name": "hide_true_guard_failure",
+      "rejected": true,
+      "reason": "eleven actual RED groups"
+    },
+    {
+      "name": "omit_scanner_family",
+      "rejected": true,
+      "reason": "exact seven scanner families"
+    },
+    {
+      "name": "drift_family_source",
+      "rejected": true,
+      "reason": "family inventory binding"
+    },
+    {
+      "name": "change_rendered_source_example",
+      "rejected": true,
+      "reason": "render example identity"
+    }
+  ]
+}

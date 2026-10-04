@@ -8,10 +8,11 @@ answers:
   - "can unresolved diagnostics ignore every quoted string"
   - "where is quoted helper source ownership diagnosed"
 date: 2026-10-04
-status: current diagnosis; implementation remains pending
+status: historical diagnosis accepted at ea45d933d; executable repair is active
 tags: [perl, actionir, quoted-data, canonical-events, source-ownership, diagnostics]
 evidence: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.1 owns current public AST/substitution/descriptor/native/fresh probes, complete trace/TAP streams and independent source/value oracles. Production activation is012038a637e727a57fe8ac387b27d7267f76f465. Pending .7.2.2 owns repair, .7.2.3 independent acceptance; SESSION-STARTUP-READING.18 retains broader ownership. PERL-TRACE-UNICODE-SINK.1 separately owns the exact Unicode trace warning."
 reverify:
+  - "Re-run the following commands at frozen ea45d933d6af8776bb4205514f423e3b7627af0d; current repair proof belongs to .7.2.2.0."
   - "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.1-capture.py"
   - "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.1-capture.py trace"
   - "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.1-review.py"

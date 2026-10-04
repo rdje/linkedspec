@@ -1,0 +1,97 @@
+{
+  "command": [
+    "perl",
+    "-Iperl",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0-mapping-probe.pl"
+  ],
+  "exit": 0,
+  "stdout": {
+    "encoding": "gzip-base64",
+    "bytes": 15325,
+    "sha256": "7ef548640b9e9ce757e8d48ffbe7651ab76b43208d62d9517a610b36e3d9a5ab",
+    "data": "H4sIAAAAAAAC/+1aTa+bOBTd51cgVOn1SVlgCBBe1UUX1aibWbSd1aRCDpgEPQIZMJmMnvLfxw6EQDBgCAnJa7KJAH/ce659bB/ft5EgCKIFIxSJwovwN30kv7f0n36EFnYDn34VQ4Tj0P/4lP7PxO1MfH56/iQUXojjfO0I06q5BunbV9e39y0mjZtzL7Be8/VooSiIQwt17PjYgBmtoV+2gRZAiRXKZFz6FGEY7i2XCp92p11giNEK+bgAX/YrdUnr2GGwjswN9OK9c2DMKoS265Bp9AHXcMHusrZvRgQiHLr+QhzXlv4nDnASiaeGkrmgnUSLq2J1sCpiJ0vjppJZKPW6krt687JwicUhV1lpx/7yq6KbY0As6HlVWIk+XOWtqCzXPHcaqporhJeBzd8XR+SymIFqrKsmXi2uzNiVSCbCK8x0oitanJ43ul3vc8nhsrfvj2ZmIj/P7GN0GXZRFH52UaRe6GV7P5TCXHWvSSSMhZsRGFkZkklqQGrJH5XeNrhaJpDCi18jpvei7cKFH0TYtSLGDs6CfuC7ZGCZKSZuaFpB7CdmjJsLo027XdOBiapAWsP/vADazJ0Hd6CtwMchsdF08wPWXCAfhZA9hY6D4/vXn399/5NdKIT/dl1e9vWWyFsjinBin9hxTWgDYkKrNwdd83ziA2xUQ6HMAesQEp1D6/U4zCWOWksXsxE/+EynS+0Rg9WqH9iIPXcOzda6l4LDMXNLJd/NtEVby4sjd0Po93CGY8Q0LZxCfvY0fx/T9hrQVRyvdu3G9fmzr9TkmVOPuGmSBj2T7rxRFNFWbbQmSzzyLTdtmadSuneI/dTFUqXYJ0UDb4NsMyPDdJaDxqJtp3lSrWmT10uQy8ZWRzm1hbpcG+VSmxURTtvj2j+lEyqK1/uYkab3xxvbLAOUX7h+BuuXF+Gb8CbwiV7CjtGSGS2hrGrJ5t+WNaRKsmFMLGtqI0VBui458hwYhqI5ytSBqqRrmjxXp4Y2IZ8U1XZkx5FtSZ8Ap9h8PCc7QhyfSIJCaqSwt+npVJcbncBTIS9itMWfZ2KE8Mf9UEXhGDzPxE9C/o38XHwGR0DSV5cQIC9hWhuJUpfuT6I8YkwYa0EYi+xhYNh8DqVY85xCK2JyKzpVlRkZqjUG8MsmvJpJUTDhxaytdMKDXAE8ddRBMMmpJUVHxEEO+m3G4UMy5JcMNzB04dxDDdJexhsp+PzCYZsK7aXDCb90KNffTHSZI5wY+/Fq3gIy+TJQaS1UVrUPlVUeSmMlJMGztBV3FS0U1ub228ir+g3LqxwQtdVX9b701QfbXptt1RbXwBPlTtgWXAYqmR8qFfTBtuCO2BYMxraqwsO2ijE424Je2LbS3QZfH2w7PNtqBj+FaHJHtr2xy+4KBeea1926xMMQqjrkdXctTC0potLfBmevf+GtDnDh3UnQEQlwC4SPOlvni6JEzTMTbY/Ki2awRiHEQdhw1/vlx49vfzRcAnWQVK55TZ7rUeZB+kDG3cFGOF26zseW/+A0EKTgriEFN5nMcTZcl0rn4FkvHuPwMuMw9lcQW8vjRSrhdD9Zp24wXyYFgB7gxzXX+aDPZJoq0M/MslGHzLK5ChVcI0Uko47LU8E9bLA6Q37Ohuw3YeGLYttwh/lO96xXg1R+fozSK4zSvhLzelnm22TtnbXG30Q6n9Qmna9FOh1nllxDApxLh4yH4OaYAXeim7PT3/pKuWpMkJtC4EgqmDoGmFoOnNsafdQnmg1sfWo7kjRVHUvVdVszLBmpqq1ZzsQAkm3BCdKk+gS5D9QP4bMwEz+kFpEHQP3IPcuFJ3DwIXuZZdCNsjEoEvxJmXme0QlYKAFdEke70f8RJpe23TsAAA=="
+  },
+  "stderr": {
+    "encoding": "gzip-base64",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "data": "H4sIAAAAAAAC/wMAAAAAAAAAAAA="
+  },
+  "candidate_simulations": [
+    {
+      "id": "suppressed_quoted_return",
+      "candidate": "earliest_per_raw",
+      "decisions": [
+        {
+          "raw": "return('return(\"x\")')",
+          "mapped_start": 0,
+          "kept": true
+        },
+        {
+          "raw": "return(\"x\")",
+          "mapped_start": 8,
+          "kept": false
+        }
+      ],
+      "actual_kept": [
+        {
+          "raw": "return('return(\"x\")')",
+          "start": 0
+        }
+      ],
+      "expected": [
+        {
+          "raw": "return('return(\"x\")')",
+          "start": 0
+        },
+        {
+          "raw": "return(\"x\")",
+          "start": 23
+        }
+      ],
+      "oracle_matches": false
+    },
+    {
+      "id": "interleaved_quoted_set",
+      "candidate": "skip_quoted_per_raw",
+      "decisions": [
+        {
+          "raw": "set(counter,1)",
+          "mapped_start": 39,
+          "kept": true
+        },
+        {
+          "raw": "set(counter,2)",
+          "mapped_start": 23,
+          "kept": true
+        },
+        {
+          "raw": "set(counter,1)",
+          "mapped_start": -1,
+          "kept": false
+        }
+      ],
+      "actual_kept": [
+        {
+          "raw": "set(counter,1)",
+          "start": 39
+        },
+        {
+          "raw": "set(counter,2)",
+          "start": 23
+        }
+      ],
+      "expected": [
+        {
+          "raw": "set(counter,2)",
+          "start": 23
+        },
+        {
+          "raw": "set(counter,1)",
+          "start": 39
+        }
+      ],
+      "oracle_matches": false
+    }
+  ]
+}

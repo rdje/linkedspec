@@ -212,6 +212,36 @@ contract. This is stable scan provenance, not global lexical source order. For e
 `return("a")`, `return("b")`, then `return("a")` are three occurrences. Sorting distinct raw
 keys or grouping all equal text together would lose that interleaving.
 
+Equal spelling also cannot establish which source occurrence produced an event.
+The following current Perl probe has two genuine return calls. The inner text is
+a string value and is consumed as part of the outer scanner match:
+
+```spec
+Top:: I { return('return("x")'); return("x") }
+```
+
+Pairing each event with its earliest equal source text would attach the second
+real return to the inner string and incorrectly discard it. Simply skipping
+quoted positions has a different failure:
+
+```spec
+Top:: I { text="set(counter,1)"; set(counter,2); set(counter,1); return(counter) }
+```
+
+The current set scanner reports the quoted `set(counter,1)` and both real calls.
+A raw-key mapper that skips the string can assign the first false event to the
+later real twin, keeping `set(counter,1)` before `set(counter,2)` and losing the
+last event. The independent source oracle requires the real calls in `2`, then
+`1` order. Both candidate mappings were executed against captured public helper
+arrays and failed their occurrence oracles; they are not compiler repairs.
+
+The pending quote repair therefore needs source occurrence provenance from
+the scanner, followed by executable-source selection and exact replacement.
+Original argument and literal bytes must remain available to typed parsing and
+lowering. The preserved diagnostic fixture currently fails eleven of thirteen
+groups; the genuine unsupported/raw and opaque-return guards pass. This is a
+complete failing baseline, not acceptance of the repaired compiler.
+
 The earlier hash-key residual drain and its raw permutations remain historical evidence.
 These exact sources return `ok` and `a` respectively, both natively and from independently
 loaded emitted source in the measured before/after source-and-seed comparisons:

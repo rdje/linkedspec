@@ -1,0 +1,327 @@
+[
+  {
+    "id": "double_control",
+    "action": "return(\"return(inner); if(true)\")",
+    "source": "Top:: I { return(\"return(inner); if(true)\") }",
+    "input": "",
+    "role": "literal",
+    "executable_helpers": [
+      "return"
+    ],
+    "expected": "return(inner); if(true)"
+  },
+  {
+    "id": "single_control",
+    "action": "return('return(inner); if(true)')",
+    "source": "Top:: I { return('return(inner); if(true)') }",
+    "input": "",
+    "role": "literal",
+    "executable_helpers": [
+      "return"
+    ],
+    "expected": "return(inner); if(true)"
+  },
+  {
+    "id": "escaped_double",
+    "action": "return(\"quote\\\"; if(true); slash\\\\; return(inner)\")",
+    "source": "Top:: I { return(\"quote\\\"; if(true); slash\\\\; return(inner)\") }",
+    "input": "",
+    "role": "literal",
+    "executable_helpers": [
+      "return"
+    ],
+    "expected": "quote\"; if(true); slash\\; return(inner)"
+  },
+  {
+    "id": "escaped_single",
+    "action": "return('quote\\'; if(true); slash\\\\; return(inner)')",
+    "source": "Top:: I { return('quote\\'; if(true); slash\\\\; return(inner)') }",
+    "input": "",
+    "role": "literal",
+    "executable_helpers": [
+      "return"
+    ],
+    "expected": "quote'; if(true); slash\\; return(inner)"
+  },
+  {
+    "id": "unicode_crlf",
+    "action": "\r\n return(\"雪 if(true); return(inner)\")",
+    "source": "Top:: I { \r\n return(\"雪 if(true); return(inner)\") }",
+    "input": "",
+    "role": "literal",
+    "executable_helpers": [
+      "return"
+    ],
+    "expected": "雪 if(true); return(inner)"
+  },
+  {
+    "id": "quoted_set",
+    "action": "return(\"set(counter, 2)\")",
+    "source": "Top:: I { return(\"set(counter, 2)\") }",
+    "input": "",
+    "role": "literal",
+    "executable_helpers": [
+      "return"
+    ],
+    "expected": "set(counter, 2)"
+  },
+  {
+    "id": "standalone_quoted_set",
+    "action": "\"set(counter, 2)\"; return(\"ok\")",
+    "source": "Top:: I { \"set(counter, 2)\"; return(\"ok\") }",
+    "input": "",
+    "role": "literal",
+    "executable_helpers": [
+      "return"
+    ],
+    "expected": "ok"
+  },
+  {
+    "id": "nested_data",
+    "action": "return(cat(\"set(counter, 2)\",\"; if(true); return(inner)\"))",
+    "source": "Top:: I { return(cat(\"set(counter, 2)\",\"; if(true); return(inner)\")) }",
+    "input": "",
+    "role": "literal",
+    "executable_helpers": [
+      "return",
+      "cat"
+    ],
+    "expected": "set(counter, 2); if(true); return(inner)"
+  },
+  {
+    "id": "deferred_data",
+    "action": "cb={|| return(\"set(counter, 2); if(true)\") }; return(cb())",
+    "source": "Top:: I { cb={|| return(\"set(counter, 2); if(true)\") }; return(cb()) }",
+    "input": "",
+    "role": "deferred_literal",
+    "executable_helpers": [
+      "return",
+      "return"
+    ],
+    "expected": "set(counter, 2); if(true)"
+  },
+  {
+    "id": "sentinel_data",
+    "action": "return(\"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:substr\")",
+    "source": "Top:: I { return(\"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:substr\") }",
+    "input": "",
+    "role": "literal",
+    "executable_helpers": [
+      "return"
+    ],
+    "expected": "LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:substr"
+  },
+  {
+    "id": "unsupported_substr",
+    "action": "return(substr(\"abc\"))",
+    "source": "Top:: I { return(substr(\"abc\")) }",
+    "input": "",
+    "role": "unsupported",
+    "executable_helpers": [
+      "return",
+      "substr"
+    ],
+    "expected": null
+  },
+  {
+    "id": "unsupported_count",
+    "action": "return(count())",
+    "source": "Top:: I { return(count()) }",
+    "input": "",
+    "role": "unsupported",
+    "executable_helpers": [
+      "return",
+      "count"
+    ],
+    "expected": null
+  },
+  {
+    "id": "unsupported_nested",
+    "action": "return(cat(substr(\"abc\"),\"x\"))",
+    "source": "Top:: I { return(cat(substr(\"abc\"),\"x\")) }",
+    "input": "",
+    "role": "unsupported",
+    "executable_helpers": [
+      "return",
+      "cat",
+      "substr"
+    ],
+    "value_scope": "Unsupported nested helper form; no successful result oracle or syntax admission."
+  },
+  {
+    "id": "mixed_sentinel",
+    "action": "return([\"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:substr\",substr(\"abc\")])",
+    "source": "Top:: I { return([\"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:substr\",substr(\"abc\")]) }",
+    "input": "",
+    "role": "unsupported",
+    "executable_helpers": [
+      "return",
+      "substr"
+    ],
+    "expected": [
+      "LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:substr",
+      null
+    ]
+  },
+  {
+    "id": "mixed_set",
+    "action": "set(counter,1); return([counter,\"set(counter, 2)\"])",
+    "source": "Top:: I { set(counter,1); return([counter,\"set(counter, 2)\"]) }",
+    "input": "",
+    "role": "mixed",
+    "executable_helpers": [
+      "set",
+      "return"
+    ],
+    "expected": [
+      1,
+      "set(counter, 2)"
+    ]
+  },
+  {
+    "id": "repeated_set",
+    "action": "set(counter,1); set(counter,2); return([counter,\"set(counter,1)\",\"set(counter,2)\"])",
+    "source": "Top:: I { set(counter,1); set(counter,2); return([counter,\"set(counter,1)\",\"set(counter,2)\"]) }",
+    "input": "",
+    "role": "mixed",
+    "executable_helpers": [
+      "set",
+      "set",
+      "return"
+    ],
+    "expected": [
+      2,
+      "set(counter,1)",
+      "set(counter,2)"
+    ]
+  },
+  {
+    "id": "true_control",
+    "action": "if(true) { return(\"ok\") }; return(\"miss\")",
+    "source": "Top:: I { if(true) { return(\"ok\") }; return(\"miss\") }",
+    "input": "",
+    "role": "executable",
+    "executable_helpers": [
+      "if",
+      "return",
+      "return"
+    ],
+    "expected": "ok"
+  },
+  {
+    "id": "quoted_condition",
+    "action": "if(\"if(true)\") { return(\"ok\") }; return(\"miss\")",
+    "source": "Top:: I { if(\"if(true)\") { return(\"ok\") }; return(\"miss\") }",
+    "input": "",
+    "role": "mixed",
+    "executable_helpers": [
+      "if",
+      "return",
+      "return"
+    ],
+    "expected": "ok"
+  },
+  {
+    "id": "regex_data",
+    "action": "return(matches(\"if(true)\", /if\\(true\\)/))",
+    "source": "Top:: I { return(matches(\"if(true)\", /if\\(true\\)/)) }",
+    "input": "",
+    "role": "regex",
+    "executable_helpers": [
+      "return",
+      "matches"
+    ],
+    "expected": 1
+  },
+  {
+    "id": "quoted_comment",
+    "action": "return(\"# set(counter,2); if(true)\")",
+    "source": "Top:: I { return(\"# set(counter,2); if(true)\") }",
+    "input": "",
+    "role": "literal",
+    "executable_helpers": [
+      "return"
+    ],
+    "expected": "# set(counter,2); if(true)"
+  },
+  {
+    "id": "source_comment",
+    "action": "# set(counter,2); if(true)\n return(\"ok\")",
+    "source": "Top:: I { # set(counter,2); if(true)\n return(\"ok\") }",
+    "input": "",
+    "role": "comment",
+    "executable_helpers": [
+      "return"
+    ],
+    "expected": "ok"
+  },
+  {
+    "id": "raw_operand",
+    "action": "return(add(0,i+1))",
+    "source": "Top:: I { return(add(0,i+1)) }",
+    "input": "",
+    "role": "raw",
+    "executable_helpers": [
+      "return",
+      "add"
+    ]
+  },
+  {
+    "id": "quoted_before_real",
+    "source": "Top:: I { text=\"set(counter,2)\"; set(counter,2); return([text,counter]) }",
+    "action": "text=\"set(counter,2)\"; set(counter,2); return([text,counter])",
+    "input": "",
+    "role": "supplemental_occurrence",
+    "expected": [
+      "set(counter,2)",
+      2
+    ],
+    "executable_helpers": [
+      "set",
+      "return"
+    ]
+  },
+  {
+    "id": "real_before_quoted",
+    "source": "Top:: I { set(counter,2); text=\"set(counter,2)\"; return([text,counter]) }",
+    "action": "set(counter,2); text=\"set(counter,2)\"; return([text,counter])",
+    "input": "",
+    "role": "supplemental_occurrence",
+    "expected": [
+      "set(counter,2)",
+      2
+    ],
+    "executable_helpers": [
+      "set",
+      "return"
+    ]
+  },
+  {
+    "id": "quoted_between_repeats",
+    "source": "Top:: I { set(counter,1); text=\"set(counter,1)\"; set(counter,1); return([text,counter]) }",
+    "action": "set(counter,1); text=\"set(counter,1)\"; set(counter,1); return([text,counter])",
+    "input": "",
+    "role": "supplemental_occurrence",
+    "expected": [
+      "set(counter,1)",
+      1
+    ],
+    "executable_helpers": [
+      "set",
+      "set",
+      "return"
+    ]
+  },
+  {
+    "id": "regex_call_spelling",
+    "source": "Top:: I { return(matches(\"ifXtrue\", /if(true)/)) }",
+    "action": "return(matches(\"ifXtrue\", /if(true)/))",
+    "input": "",
+    "role": "supplemental_occurrence",
+    "expected": 1,
+    "executable_helpers": [
+      "return",
+      "matches"
+    ]
+  }
+]

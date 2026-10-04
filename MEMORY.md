@@ -1,10 +1,10 @@
 # MEMORY
 
-- activation_commit: `012038a637e727a57fe8ac387b27d7267f76f465` — clean source-bound quoted-data diagnosis activation base.
-- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.1 - diagnose quoted action source ownership`.
-- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.1` (done) — current quote/value/event/marker/runtime diagnosis preserved; production unchanged.
-- next_action: Activate .7.2.2.0 executable occurrence repair, freeze this diagnosis at its landed revision, then .7.2.2.1 diagnostic provenance before independent .7.2.3 acceptance.
-- in_flight_uncommitted: none;66 native/fresh pairs,22 traces,165 consumer tests and14 reviewer controls complete; original failure channels retained, book rendered.
+- activation_commit: `ea45d933d6af8776bb4205514f423e3b7627af0d` — clean source-occurrence diagnosis activation base.
+- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.0 - expose helper scan occurrence ambiguity`.
+- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1` (pending) — private producer source provenance.
+- next_action: Activate producer provenance .7.2.2.0.1 from the clean landed diagnosis, freeze its live claim, and select exact family/frame subleaves from the source-bound inventory before implementation.
+- in_flight_uncommitted: none; completed diagnosis and exact RED fixture are committed, no production change or background job.
 - blockers: No access/decision blocker. Matches and attached/marker/value/null/while executors are repaired; control parent/order and raw-expression reporting are reconciled; quoted/comment readiness .7.2/.3 precedes dispatcher/full execution. Other startup repairs remain separate.
   Wrapper startup .7 remains open; recovery/purge stay prohibited.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the

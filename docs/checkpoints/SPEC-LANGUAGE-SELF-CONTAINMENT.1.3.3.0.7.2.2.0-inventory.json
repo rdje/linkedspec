@@ -1,0 +1,1477 @@
+{
+  "scope": "Seven exact current dispatcher-family source files. Textual event construction and nested/composed call sites, not a runtime reachability/contract census.",
+  "core_path": "perl/LinkedSpec/ActionIR/ScannerCore.pm",
+  "core_sha256": "507bef74ab642d4f65e9222b2687a5f955f279fdd03403ab2ef83c3005c7766e",
+  "families": [
+    {
+      "package": "LinkedSpec::ActionIR::StagedParseJob",
+      "path": "perl/LinkedSpec/ActionIR/StagedParseJob.pm",
+      "sha256": "63b4b211d6f7f94ffa398f4ee07316fc717387faec443e9e5299e0186e8627cc",
+      "event_producer_functions": [
+        {
+          "name": "try_scan_contract_ir_events",
+          "line": 46,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 1,
+          "regex_global_loops": 0
+        }
+      ]
+    },
+    {
+      "package": "LinkedSpec::ActionIR::ProgressiveSpanDispatch",
+      "path": "perl/LinkedSpec/ActionIR/ProgressiveSpanDispatch.pm",
+      "sha256": "e357772a2b9d9aae0c5becbfcb3bf238ff4ddc1df466c7063aeef69a1cab0ec5",
+      "event_producer_functions": [
+        {
+          "name": "try_scan_contract_ir_events",
+          "line": 38,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 1,
+          "regex_global_loops": 0
+        }
+      ]
+    },
+    {
+      "package": "LinkedSpec::ActionIR::Scanner::RecognitionTransactionRules",
+      "path": "perl/LinkedSpec/ActionIR/Scanner/RecognitionTransactionRules.pm",
+      "sha256": "2ad196c9a6e8f8e4872fbc5164ac9b5255cb94b1d6b52028345f3a070f9f0580",
+      "event_producer_functions": [
+        {
+          "name": "_scan_observation",
+          "line": 25,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 0
+        },
+        {
+          "name": "_scan_checkpoint",
+          "line": 67,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 0
+        },
+        {
+          "name": "_scan_attempt",
+          "line": 78,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 0
+        },
+        {
+          "name": "_scan_commit",
+          "line": 102,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 0
+        },
+        {
+          "name": "_scan_rollback",
+          "line": 113,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 0
+        }
+      ]
+    },
+    {
+      "package": "LinkedSpec::ActionIR::Scanner::PrimitiveBasicRules",
+      "path": "perl/LinkedSpec/ActionIR/Scanner/PrimitiveBasicRules.pm",
+      "sha256": "dc987808055afe2843f5c61da0526893ebcfa3028fdddf4f64ad41c77cc9fd7d",
+      "event_producer_functions": [
+        {
+          "name": "_scan_contract_zero_arg_gap_helper",
+          "line": 42,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_assign_call_my",
+          "line": 51,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_assign_call",
+          "line": 60,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_push_child_call_indexed_builtin",
+          "line": 69,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_push_child_call_builtin",
+          "line": 78,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_return_call",
+          "line": 87,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_return_bare",
+          "line": 96,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 1,
+          "regex_global_loops": 0
+        },
+        {
+          "name": "_scan_contract_exit_bare",
+          "line": 114,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 1,
+          "regex_global_loops": 0
+        },
+        {
+          "name": "_scan_contract_linecount_prefix_newline_matches",
+          "line": 129,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 1,
+          "regex_global_loops": 0
+        },
+        {
+          "name": "_scan_contract_print_capture_substr",
+          "line": 141,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 1,
+          "regex_global_loops": 0
+        },
+        {
+          "name": "_scan_contract_my_declare_bare",
+          "line": 153,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 1,
+          "regex_global_loops": 0
+        },
+        {
+          "name": "_scan_contract_assign_match_my",
+          "line": 166,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 1,
+          "regex_global_loops": 0
+        },
+        {
+          "name": "_scan_contract_destructure_imatch_list_my",
+          "line": 178,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 1,
+          "regex_global_loops": 0
+        },
+        {
+          "name": "_scan_contract_regex_subst_assignment",
+          "line": 200,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 1,
+          "regex_global_loops": 0
+        },
+        {
+          "name": "_scan_contract_next_bare",
+          "line": 212,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 1,
+          "regex_global_loops": 0
+        },
+        {
+          "name": "_scan_contract_ref_field_assign",
+          "line": 224,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 1,
+          "regex_global_loops": 0
+        },
+        {
+          "name": "_scan_contract_position_tracking",
+          "line": 236,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 1,
+          "regex_global_loops": 0
+        }
+      ]
+    },
+    {
+      "package": "LinkedSpec::ActionIR::Scanner::PrimitivePipelineRules",
+      "path": "perl/LinkedSpec/ActionIR/Scanner/PrimitivePipelineRules.pm",
+      "sha256": "17dcac93902068341f5d529dd6bd360616da0f3542ee6345df0d51f1f619eef2",
+      "event_producer_functions": [
+        {
+          "name": "_scan_contract_print_foreach_iterable",
+          "line": 60,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 1,
+          "regex_global_loops": 0
+        },
+        {
+          "name": "_scan_contract_split_trim_filter_assignment",
+          "line": 72,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 1,
+          "regex_global_loops": 0
+        },
+        {
+          "name": "_scan_contract_push",
+          "line": 93,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_set_value",
+          "line": 132,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_scalar_assignment_operator",
+          "line": 151,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 1,
+          "regex_global_loops": 0
+        },
+        {
+          "name": "_scan_contract_array_append_operator",
+          "line": 172,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 1,
+          "regex_global_loops": 0
+        },
+        {
+          "name": "_scan_contract_array_end_mutation_method",
+          "line": 261,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 1,
+          "regex_global_loops": 0
+        },
+        {
+          "name": "_scan_contract_hash_index_assignment_operator",
+          "line": 352,
+          "literal_event_constructors": 2,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 1,
+          "regex_global_loops": 0
+        },
+        {
+          "name": "_scan_contract_set_key_statement",
+          "line": 389,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 1,
+          "regex_global_loops": 0
+        },
+        {
+          "name": "_scan_contract_regex_subst",
+          "line": 420,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_split_array",
+          "line": 429,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_split_each",
+          "line": 449,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_trim_each",
+          "line": 467,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_filter_nonempty",
+          "line": 480,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_lowercase_each",
+          "line": 493,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_uppercase_each",
+          "line": 506,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_uniq_array",
+          "line": 519,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_filter_match",
+          "line": 532,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_value_drop_statement",
+          "line": 551,
+          "literal_event_constructors": 2,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 1,
+          "regex_global_loops": 0
+        }
+      ]
+    },
+    {
+      "package": "LinkedSpec::ActionIR::Scanner::FlowRules",
+      "path": "perl/LinkedSpec/ActionIR/Scanner/FlowRules.pm",
+      "sha256": "18463d7b84ee525a554e9781288b993f6d39b38d24e25ecbca2d53ae806417d6",
+      "event_producer_functions": [
+        {
+          "name": "_scan_inline_switch_branch_events",
+          "line": 48,
+          "literal_event_constructors": 2,
+          "nested_or_composed_event_calls": [
+            {
+              "callee": "_scan_contract_case_marker_events",
+              "arguments": "$nested_expr"
+            },
+            {
+              "callee": "_scan_contract_default_marker_events",
+              "arguments": "$nested_expr"
+            }
+          ],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_case_marker_events",
+          "line": 94,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [
+            {
+              "callee": "_scan_contract_case_marker_events",
+              "arguments": "$block"
+            }
+          ],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_default_marker_events",
+          "line": 118,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [
+            {
+              "callee": "_scan_contract_default_marker_events",
+              "arguments": "$+{block}"
+            }
+          ],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_if_flow",
+          "line": 133,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_elseif_flow",
+          "line": 147,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_else_flow",
+          "line": 161,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_endif_flow",
+          "line": 175,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_while_flow",
+          "line": 188,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_switch_flow",
+          "line": 203,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_case_flow",
+          "line": 217,
+          "literal_event_constructors": 0,
+          "nested_or_composed_event_calls": [
+            {
+              "callee": "_scan_inline_switch_branch_events",
+              "arguments": "$code, 'case'"
+            }
+          ],
+          "statement_split_calls": 0,
+          "regex_global_loops": 0
+        },
+        {
+          "name": "_scan_contract_default_flow",
+          "line": 224,
+          "literal_event_constructors": 0,
+          "nested_or_composed_event_calls": [
+            {
+              "callee": "_scan_inline_switch_branch_events",
+              "arguments": "$code, 'default'"
+            }
+          ],
+          "statement_split_calls": 0,
+          "regex_global_loops": 0
+        },
+        {
+          "name": "_scan_contract_endcase_flow",
+          "line": 231,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_endswitch_flow",
+          "line": 244,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_say_stmt",
+          "line": 257,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_print_stmt",
+          "line": 270,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_print_each",
+          "line": 283,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_exit_now",
+          "line": 299,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_next_stmt",
+          "line": 311,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 1,
+          "regex_global_loops": 0
+        },
+        {
+          "name": "_scan_contract_return_undef",
+          "line": 323,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        }
+      ]
+    },
+    {
+      "package": "LinkedSpec::ActionIR::Scanner::LegacyRules",
+      "path": "perl/LinkedSpec/ActionIR/Scanner/LegacyRules.pm",
+      "sha256": "a78386909d43cfd0e0bbb19e41243564007acfc53edf6f760131dd8f1f51fed9",
+      "event_producer_functions": [
+        {
+          "name": "_scan_contract_call",
+          "line": 150,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_push_single_arg",
+          "line": 162,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_push_target_arg",
+          "line": 171,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_push_indexed_arg",
+          "line": 181,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_push_target_indexed_arg",
+          "line": 190,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_push_scope_target_arg",
+          "line": 199,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_return_general",
+          "line": 208,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_return",
+          "line": 223,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_capture_macro",
+          "line": 232,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_capture",
+          "line": 241,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_capture_if",
+          "line": 250,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_capture_if_macro",
+          "line": 259,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_capture_slice",
+          "line": 268,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_capture_slice_len",
+          "line": 277,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_capture_slice_until_cursor",
+          "line": 286,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_capture_slice_until_cursor_len",
+          "line": 295,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_capture_until_boundary",
+          "line": 304,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_capture_take_until_cursor",
+          "line": 321,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_capture_take_until_cursor_len",
+          "line": 330,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_capture_slice_pos",
+          "line": 345,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_capture_slice_line",
+          "line": 354,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_capture_slice_col",
+          "line": 363,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_capture_slice_length",
+          "line": 372,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_start_capture_slice",
+          "line": 381,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_capture_slice_here",
+          "line": 390,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_capture_rest",
+          "line": 399,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_capture_rest_len",
+          "line": 408,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_capture_rest_length",
+          "line": 417,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_capture_take_rest",
+          "line": 426,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_capture_take_rest_len",
+          "line": 435,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_capture_from_rule_start",
+          "line": 444,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_capture_len_from_rule_start",
+          "line": 453,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_capture_take_slice",
+          "line": 462,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_capture_take_slice_len",
+          "line": 471,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_start_capture_slice_from_mark",
+          "line": 480,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_capture_from_mark",
+          "line": 489,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_capture_len_from_mark",
+          "line": 498,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_capture_take_from_mark",
+          "line": 507,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_capture_take_len_from_mark",
+          "line": 516,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_capture_rest_from_mark",
+          "line": 525,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_capture_rest_len_from_mark",
+          "line": 534,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_capture_take_rest_from_mark",
+          "line": 543,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_capture_take_rest_len_from_mark",
+          "line": 552,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_capture_until_cursor_from_mark",
+          "line": 561,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_capture_until_cursor_len_from_mark",
+          "line": 570,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_capture_take_until_cursor_from_mark",
+          "line": 579,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_capture_take_until_cursor_len_from_mark",
+          "line": 588,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_capture_between_marks",
+          "line": 597,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_capture_len_between_marks",
+          "line": 606,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_capture_take_between_marks",
+          "line": 615,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_capture_take_between_len_marks",
+          "line": 624,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_mark_here",
+          "line": 633,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_mark_input_start",
+          "line": 642,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_mark_input_end",
+          "line": 651,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_mark_entry_start",
+          "line": 660,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_mark_entry_end",
+          "line": 669,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_mark_match_start",
+          "line": 678,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_mark_match_end",
+          "line": 687,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_mark_copy",
+          "line": 696,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_mark_capture_slice",
+          "line": 705,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_clear_mark",
+          "line": 714,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_mark_exists",
+          "line": 723,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_mark_pos",
+          "line": 732,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_mark_line",
+          "line": 741,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_mark_col",
+          "line": 750,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_cursor_pos",
+          "line": 759,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_cursor_line",
+          "line": 768,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_cursor_col",
+          "line": 777,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_cursor_rest",
+          "line": 786,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_cursor_rest_len",
+          "line": 795,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_input_text",
+          "line": 804,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_input_slice",
+          "line": 813,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_input_len",
+          "line": 822,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_input_end_pos",
+          "line": 831,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_input_end_line",
+          "line": 840,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_input_end_col",
+          "line": 849,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_entry_text",
+          "line": 858,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_entry_group",
+          "line": 867,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_entry_groups",
+          "line": 876,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_entry_named",
+          "line": 885,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_entry_has",
+          "line": 894,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_entry_map",
+          "line": 903,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_entry_named_map",
+          "line": 912,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_entry_line",
+          "line": 921,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_entry_start_line",
+          "line": 930,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_entry_col",
+          "line": 939,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_entry_start_col",
+          "line": 948,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_entry_len",
+          "line": 957,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_entry_start_pos",
+          "line": 966,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_entry_end_pos",
+          "line": 975,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_entry_end_line",
+          "line": 984,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_entry_end_col",
+          "line": 993,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_match_text",
+          "line": 1002,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_match_group",
+          "line": 1011,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_match_groups",
+          "line": 1020,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_match_named",
+          "line": 1029,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_match_has",
+          "line": 1038,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_match_map",
+          "line": 1047,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_match_named_map",
+          "line": 1056,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_match_len",
+          "line": 1065,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_match_start_pos",
+          "line": 1074,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_match_end_pos",
+          "line": 1083,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_match_end_line",
+          "line": 1092,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_match_end_col",
+          "line": 1101,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_match_start_line",
+          "line": 1110,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_match_line",
+          "line": 1119,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_match_start_col",
+          "line": 1128,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_match_col",
+          "line": 1137,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_save_cursor",
+          "line": 1146,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_restore_cursor",
+          "line": 1155,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_rewind_entry_start",
+          "line": 1164,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        },
+        {
+          "name": "_scan_contract_rewind_match_start",
+          "line": 1173,
+          "literal_event_constructors": 1,
+          "nested_or_composed_event_calls": [],
+          "statement_split_calls": 0,
+          "regex_global_loops": 1
+        }
+      ]
+    }
+  ]
+}

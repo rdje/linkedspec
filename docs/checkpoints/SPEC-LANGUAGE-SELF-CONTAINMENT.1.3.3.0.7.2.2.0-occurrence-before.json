@@ -1,0 +1,459 @@
+{
+   "cases" : [
+      {
+         "action" : "text=\"set(counter,2)\"; set(counter,2); return([text,counter])",
+         "diagnostics" : {
+            "canonical_action_ir_count" : 4,
+            "canonical_action_ir_events" : [
+               {
+                  "args" : {
+                     "source" : "\"set(counter,2)\"",
+                     "target" : "text"
+                  },
+                  "contract_id" : "scalar_assignment_operator",
+                  "kind" : "ASSIGN",
+                  "raw" : "text=\"set(counter,2)\"",
+                  "source" : "helper_contract"
+               },
+               {
+                  "args" : {
+                     "source" : "2",
+                     "target" : "counter"
+                  },
+                  "contract_id" : "set_value",
+                  "kind" : "ASSIGN",
+                  "raw" : "set(counter,2)",
+                  "source" : "helper_contract"
+               },
+               {
+                  "args" : {
+                     "payload" : "[text,counter]"
+                  },
+                  "contract_id" : "return_general",
+                  "kind" : "RETURN",
+                  "raw" : "return([text,counter])",
+                  "source" : "helper_contract"
+               },
+               {
+                  "args" : {
+                     "source" : "2",
+                     "target" : "counter"
+                  },
+                  "contract_id" : "set_value",
+                  "kind" : "ASSIGN",
+                  "raw" : "set(counter,2)",
+                  "source" : "unmatched_helper_scan_event"
+               }
+            ],
+            "canonical_action_ir_fallback_count" : 0,
+            "canonical_action_ir_hits" : {
+               "ASSIGN" : 3,
+               "RETURN" : 1
+            },
+            "canonical_action_ir_nodes" : [
+               "ASSIGN",
+               "RETURN"
+            ],
+            "helper_action_ir_count" : 4,
+            "helper_action_ir_events" : [
+               {
+                  "args" : {
+                     "payload" : "[text,counter]"
+                  },
+                  "contract_id" : "return_general",
+                  "exclusive_statement" : 0,
+                  "ir_node" : "RETURN",
+                  "raw" : "return([text,counter])"
+               },
+               {
+                  "args" : {
+                     "source" : "\"set(counter,2)\"",
+                     "target" : "text"
+                  },
+                  "contract_id" : "scalar_assignment_operator",
+                  "exclusive_statement" : 0,
+                  "ir_node" : "ASSIGN",
+                  "raw" : "text=\"set(counter,2)\""
+               },
+               {
+                  "args" : {
+                     "source" : "2",
+                     "target" : "counter"
+                  },
+                  "contract_id" : "set_value",
+                  "exclusive_statement" : 0,
+                  "ir_node" : "ASSIGN",
+                  "raw" : "set(counter,2)"
+               },
+               {
+                  "args" : {
+                     "source" : "2",
+                     "target" : "counter"
+                  },
+                  "contract_id" : "set_value",
+                  "exclusive_statement" : 0,
+                  "ir_node" : "ASSIGN",
+                  "raw" : "set(counter,2)"
+               }
+            ],
+            "helper_action_ir_hits" : {
+               "ASSIGN" : 3,
+               "RETURN" : 1
+            },
+            "helper_action_ir_nodes" : [
+               "ASSIGN",
+               "RETURN"
+            ],
+            "raw_perl_expression_dependencies" : [],
+            "raw_perl_expression_source_units" : [],
+            "unresolved_helper_count" : 0,
+            "unresolved_helper_events" : [],
+            "unresolved_helper_hits" : {},
+            "unresolved_helpers" : []
+         },
+         "id" : "quoted_before_real",
+         "source" : "Top:: I { text=\"set(counter,2)\"; set(counter,2); return([text,counter]) }",
+         "source_sha256" : "362cb891839faaaaba32002e13ccd55d606623b90a07959cfceac877b4fb3f0f",
+         "substitution" : "$text = \"$counter = 2\"; $counter = 2; return [$text, $counter]"
+      },
+      {
+         "action" : "set(counter,2); text=\"set(counter,2)\"; return([text,counter])",
+         "diagnostics" : {
+            "canonical_action_ir_count" : 4,
+            "canonical_action_ir_events" : [
+               {
+                  "args" : {
+                     "source" : "2",
+                     "target" : "counter"
+                  },
+                  "contract_id" : "set_value",
+                  "kind" : "ASSIGN",
+                  "raw" : "set(counter,2)",
+                  "source" : "helper_contract"
+               },
+               {
+                  "args" : {
+                     "source" : "\"set(counter,2)\"",
+                     "target" : "text"
+                  },
+                  "contract_id" : "scalar_assignment_operator",
+                  "kind" : "ASSIGN",
+                  "raw" : "text=\"set(counter,2)\"",
+                  "source" : "helper_contract"
+               },
+               {
+                  "args" : {
+                     "payload" : "[text,counter]"
+                  },
+                  "contract_id" : "return_general",
+                  "kind" : "RETURN",
+                  "raw" : "return([text,counter])",
+                  "source" : "helper_contract"
+               },
+               {
+                  "args" : {
+                     "source" : "2",
+                     "target" : "counter"
+                  },
+                  "contract_id" : "set_value",
+                  "kind" : "ASSIGN",
+                  "raw" : "set(counter,2)",
+                  "source" : "unmatched_helper_scan_event"
+               }
+            ],
+            "canonical_action_ir_fallback_count" : 0,
+            "canonical_action_ir_hits" : {
+               "ASSIGN" : 3,
+               "RETURN" : 1
+            },
+            "canonical_action_ir_nodes" : [
+               "ASSIGN",
+               "RETURN"
+            ],
+            "helper_action_ir_count" : 4,
+            "helper_action_ir_events" : [
+               {
+                  "args" : {
+                     "payload" : "[text,counter]"
+                  },
+                  "contract_id" : "return_general",
+                  "exclusive_statement" : 0,
+                  "ir_node" : "RETURN",
+                  "raw" : "return([text,counter])"
+               },
+               {
+                  "args" : {
+                     "source" : "\"set(counter,2)\"",
+                     "target" : "text"
+                  },
+                  "contract_id" : "scalar_assignment_operator",
+                  "exclusive_statement" : 0,
+                  "ir_node" : "ASSIGN",
+                  "raw" : "text=\"set(counter,2)\""
+               },
+               {
+                  "args" : {
+                     "source" : "2",
+                     "target" : "counter"
+                  },
+                  "contract_id" : "set_value",
+                  "exclusive_statement" : 0,
+                  "ir_node" : "ASSIGN",
+                  "raw" : "set(counter,2)"
+               },
+               {
+                  "args" : {
+                     "source" : "2",
+                     "target" : "counter"
+                  },
+                  "contract_id" : "set_value",
+                  "exclusive_statement" : 0,
+                  "ir_node" : "ASSIGN",
+                  "raw" : "set(counter,2)"
+               }
+            ],
+            "helper_action_ir_hits" : {
+               "ASSIGN" : 3,
+               "RETURN" : 1
+            },
+            "helper_action_ir_nodes" : [
+               "ASSIGN",
+               "RETURN"
+            ],
+            "raw_perl_expression_dependencies" : [],
+            "raw_perl_expression_source_units" : [],
+            "unresolved_helper_count" : 0,
+            "unresolved_helper_events" : [],
+            "unresolved_helper_hits" : {},
+            "unresolved_helpers" : []
+         },
+         "id" : "real_before_quoted",
+         "source" : "Top:: I { set(counter,2); text=\"set(counter,2)\"; return([text,counter]) }",
+         "source_sha256" : "c1ee759d26c91ff71a222f8c7cbf86e78d4c525b206b0747171933ba30658043",
+         "substitution" : "$counter = 2; $text = \"$counter = 2\"; return [$text, $counter]"
+      },
+      {
+         "action" : "set(counter,1); text=\"set(counter,1)\"; set(counter,1); return([text,counter])",
+         "diagnostics" : {
+            "canonical_action_ir_count" : 5,
+            "canonical_action_ir_events" : [
+               {
+                  "args" : {
+                     "source" : "1",
+                     "target" : "counter"
+                  },
+                  "contract_id" : "set_value",
+                  "kind" : "ASSIGN",
+                  "raw" : "set(counter,1)",
+                  "source" : "helper_contract"
+               },
+               {
+                  "args" : {
+                     "source" : "\"set(counter,1)\"",
+                     "target" : "text"
+                  },
+                  "contract_id" : "scalar_assignment_operator",
+                  "kind" : "ASSIGN",
+                  "raw" : "text=\"set(counter,1)\"",
+                  "source" : "helper_contract"
+               },
+               {
+                  "args" : {
+                     "source" : "1",
+                     "target" : "counter"
+                  },
+                  "contract_id" : "set_value",
+                  "kind" : "ASSIGN",
+                  "raw" : "set(counter,1)",
+                  "source" : "helper_contract"
+               },
+               {
+                  "args" : {
+                     "payload" : "[text,counter]"
+                  },
+                  "contract_id" : "return_general",
+                  "kind" : "RETURN",
+                  "raw" : "return([text,counter])",
+                  "source" : "helper_contract"
+               },
+               {
+                  "args" : {
+                     "source" : "1",
+                     "target" : "counter"
+                  },
+                  "contract_id" : "set_value",
+                  "kind" : "ASSIGN",
+                  "raw" : "set(counter,1)",
+                  "source" : "unmatched_helper_scan_event"
+               }
+            ],
+            "canonical_action_ir_fallback_count" : 0,
+            "canonical_action_ir_hits" : {
+               "ASSIGN" : 4,
+               "RETURN" : 1
+            },
+            "canonical_action_ir_nodes" : [
+               "ASSIGN",
+               "RETURN"
+            ],
+            "helper_action_ir_count" : 5,
+            "helper_action_ir_events" : [
+               {
+                  "args" : {
+                     "payload" : "[text,counter]"
+                  },
+                  "contract_id" : "return_general",
+                  "exclusive_statement" : 0,
+                  "ir_node" : "RETURN",
+                  "raw" : "return([text,counter])"
+               },
+               {
+                  "args" : {
+                     "source" : "\"set(counter,1)\"",
+                     "target" : "text"
+                  },
+                  "contract_id" : "scalar_assignment_operator",
+                  "exclusive_statement" : 0,
+                  "ir_node" : "ASSIGN",
+                  "raw" : "text=\"set(counter,1)\""
+               },
+               {
+                  "args" : {
+                     "source" : "1",
+                     "target" : "counter"
+                  },
+                  "contract_id" : "set_value",
+                  "exclusive_statement" : 0,
+                  "ir_node" : "ASSIGN",
+                  "raw" : "set(counter,1)"
+               },
+               {
+                  "args" : {
+                     "source" : "1",
+                     "target" : "counter"
+                  },
+                  "contract_id" : "set_value",
+                  "exclusive_statement" : 0,
+                  "ir_node" : "ASSIGN",
+                  "raw" : "set(counter,1)"
+               },
+               {
+                  "args" : {
+                     "source" : "1",
+                     "target" : "counter"
+                  },
+                  "contract_id" : "set_value",
+                  "exclusive_statement" : 0,
+                  "ir_node" : "ASSIGN",
+                  "raw" : "set(counter,1)"
+               }
+            ],
+            "helper_action_ir_hits" : {
+               "ASSIGN" : 4,
+               "RETURN" : 1
+            },
+            "helper_action_ir_nodes" : [
+               "ASSIGN",
+               "RETURN"
+            ],
+            "raw_perl_expression_dependencies" : [],
+            "raw_perl_expression_source_units" : [],
+            "unresolved_helper_count" : 0,
+            "unresolved_helper_events" : [],
+            "unresolved_helper_hits" : {},
+            "unresolved_helpers" : []
+         },
+         "id" : "quoted_between_repeats",
+         "source" : "Top:: I { set(counter,1); text=\"set(counter,1)\"; set(counter,1); return([text,counter]) }",
+         "source_sha256" : "d03745e7fc3fe68da37d396937939fb6c74fe6983c8c6c2487a94558390bdc91",
+         "substitution" : "$counter = 1; $text = \"$counter = 1\"; $counter = 1; return [$text, $counter]"
+      },
+      {
+         "action" : "return(matches(\"ifXtrue\", /if(true)/))",
+         "diagnostics" : {
+            "canonical_action_ir_count" : 2,
+            "canonical_action_ir_events" : [
+               {
+                  "args" : {
+                     "payload" : "matches(\"ifXtrue\", /if(true)/)"
+                  },
+                  "contract_id" : "return_general",
+                  "kind" : "RETURN",
+                  "raw" : "return(matches(\"ifXtrue\", /if(true)/))",
+                  "source" : "helper_contract"
+               },
+               {
+                  "args" : {
+                     "condition" : "true"
+                  },
+                  "contract_id" : "if_flow",
+                  "kind" : "IF",
+                  "raw" : "if(true)",
+                  "source" : "unmatched_helper_scan_event"
+               }
+            ],
+            "canonical_action_ir_fallback_count" : 0,
+            "canonical_action_ir_hits" : {
+               "IF" : 1,
+               "RETURN" : 1
+            },
+            "canonical_action_ir_nodes" : [
+               "IF",
+               "RETURN"
+            ],
+            "helper_action_ir_count" : 2,
+            "helper_action_ir_events" : [
+               {
+                  "args" : {
+                     "payload" : "matches(\"ifXtrue\", /if(true)/)"
+                  },
+                  "contract_id" : "return_general",
+                  "exclusive_statement" : 0,
+                  "ir_node" : "RETURN",
+                  "raw" : "return(matches(\"ifXtrue\", /if(true)/))"
+               },
+               {
+                  "args" : {
+                     "condition" : "true"
+                  },
+                  "contract_id" : "if_flow",
+                  "exclusive_statement" : 0,
+                  "ir_node" : "IF",
+                  "raw" : "if(true)"
+               }
+            ],
+            "helper_action_ir_hits" : {
+               "IF" : 1,
+               "RETURN" : 1
+            },
+            "helper_action_ir_nodes" : [
+               "IF",
+               "RETURN"
+            ],
+            "raw_perl_expression_dependencies" : [],
+            "raw_perl_expression_source_units" : [],
+            "unresolved_helper_count" : 2,
+            "unresolved_helper_events" : [
+               {
+                  "helper" : "if",
+                  "raw" : "return(matches(\"ifXtrue\", /if(true)/))"
+               },
+               {
+                  "helper" : "if",
+                  "raw" : "return(matches(\"ifXtrue\", /if(true)/))"
+               }
+            ],
+            "unresolved_helper_hits" : {
+               "if" : 2
+            },
+            "unresolved_helpers" : [
+               "if"
+            ]
+         },
+         "id" : "regex_call_spelling",
+         "source" : "Top:: I { return(matches(\"ifXtrue\", /if(true)/)) }",
+         "source_sha256" : "e361e51f6e434521104b484f93f2453f98b95db19db5c4fa406a7930afa5490f",
+         "substitution" : "return(matches(\"ifXtrue\", /if(true)/))"
+      }
+   ]
+}

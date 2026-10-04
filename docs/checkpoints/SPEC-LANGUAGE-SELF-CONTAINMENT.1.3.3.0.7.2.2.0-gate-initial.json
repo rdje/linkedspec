@@ -1,0 +1,14 @@
+{
+  "command": [
+    "bash",
+    "scripts/check_doctrines.sh"
+  ],
+  "exit": 1,
+  "capture_scope": "Complete tool-returned combined output; original stdout/stderr separation and elapsed total unavailable. Host-generated absolute diagnostic path is evidence only.",
+  "combined_output": {
+    "encoding": "gzip-base64",
+    "bytes": 1909,
+    "sha256": "ce1080fb84141f7488ac0e96c18205b4118c305c2e9c31608ebac0d8bcbf81ce",
+    "data": "H4sIAAAAAAAC/5VVzXLbNhC+6yn2pnbGkBynaafO9MBSdKJaEjUUnU4mk/FA4FJCDRIMAEpRT32IvkPfo4/SJ+kCkGU57SXiQRR/9vvZb1dCcdmwHRpZS8Gd1O013CTT2TWkuml4W8Hww7BDo4YXMBy/06pv0I5Xq8l4ogWdt86ON9Jt+/VYyfYBK9uhGDutlR2LLYqHe8ftw/05wH0tUVV21IWajOl9i2b4cQgGXW9arKDVLfsdjQb8LB1Yx11v4erVq9FA/A9di6pmDq2DZbJawUvotJVO7hDG8OJ7qvobCkdVhW6dIV6D89ehQqppwrmFpqcqYsvbDUKtDeFz4dQBdItANGW7AYW8fk03e7LmCj6sllnKZsnizV3yJmOrbHbD0nxRJtPFPFuUoxejl3Rcjn4YXdFxeQFf9/zo8uMztkzwCluBjz1yW/T2bEjdGb0oIwrDwN1JNBdEWvSWHiXDyBEv3vdXcLKb6itwRm42aAaDn774wCRPy2K6yCBb3ORFmnmuUGTLvCjhy4cHEPsA82yeF+9ZUqRv4Z8//oSqN3ytEL5jih/QQIONNocLIIvlLspbe1t5uOiZkZiWUTcqXdcg2x03klPg4JtY+t6XnpZZWt4V2aip4O+/fvz2BH+7yH+dZRNyeZ4sAwHvVkVu7siD21bvFVbU5znvQFoqD/bQCthTmEESSE28wOreCLSnomWyumVlkVHRrEwmSZnEypRx0uN4xR2/gI4bJ0OiohBqkRculCb7qYcdX0sl3YFuiq021j9w8Pm00joaqedwSZpmyzJZpFnAOvZ7oykYflhiXC310RiqGLgwZxDJWIGdIwyC9qOoqHrUNwujuqJRZX5UAXcy5OoE7HvLijwv2TIp366iSMMFvUUDFQaMekdC3dYGiVwpqP3MdUY21EEmjuvDaE1m+iAaVPoYY8vrJ6xlkf9CPWTeTbYq84Im4xlgZ7QfYWYJk7RTD2veKxeBq+Ma8iPQu653RzefWLJaKrQHcrYJbLA6QVOu73yW2dupB34fYEMIvbG9MVT4hBD3xU7i3hIltGhIbtgQ52Beo4JPPZpDaPpWetqHM2eTyZwmv0x+ns6mZYSMF4MepLYSe9JCFCraarKNwLQdufRfnkFogyUTaOZjsz0j25PNpzUHYUkApLNkOmfvsmJ6M02TcpovAmaLewjr9PkKrKQNOaVp8WUVbqLPBoU2lYW1pB9nnal6gWYsW3IefIh88PEJ/ByWpckke4wxFSNlxse+afy8Pe6rxy1FtXUN+630k3PaUccNIU+Bjw2IQxGdIKYoO2f/s8a+5jOgrtM+bNFex+1P+0oTu9PloC+bBC1RwrhBQ+lcUwLImxHcyM/A1zSmr+kt+k9zsD503NrR4F/w858RdQcAAA=="
+  }
+}
