@@ -2,17 +2,19 @@
 
 ## Current Activity
 
-Full PNT: basic regex provenance is complete; P1 selected consumer/render proof-input repair precedes statement frames and remaining producer families, then membership/replacement and canonical composition.
+Full PNT: fixed consumer input preparation is complete; selected thirteen-suite remeasurement precedes statement frames, remaining producer families, membership/replacement and canonical composition.
 
 ## Latest Completed Slice
 
-`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.0` — Nine basic regex contracts retain exact private full-input spans.27 source/seed before-after compiler pairs preserve public events/arguments/substitution/diagnostics/dumps/emission;81 origins match independent scalar positions. The same ten-group fixture fails nine before, passes ten after and retains its empty-result guard. Thirteen unchanged suites pass1337 top-level tests, including complete Phase0. Broader consumer/render falsification and transitive input closure are disclosed gaps owned by .1.1.3. Twelve evidence corruptions reject; two examples render with explicitly documented Markdown newline normalization. Quoted syntactic matches remain recorded; statement/recursive framing, membership/replacement and canonical recurrence remain open.
+`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.3.0` — Prepared a conservative capsule of738 exact parent-owned input files from Git3fc589f8494fd55b4f0154d6c226797a4fa2f711 plus one explicit book overlay. Independent Git/rg census verifies314 source-related lexical sites and16 named input edges; these are not classified runtime reads or defects. Two unchanged smoke suites pass25 complete groups and two source-identical examples render. Eighteen reason-checked controls reject, including an actual post-run input mutation that retains completed TAP/channels. Original broader observations stay unchanged; complete thirteen-suite remeasurement is next under .3.1.
 
 ## Next Action
 
-Activate P1 selected proof-input repair `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.3` after clean regex landing, before statement frames .1.1.1. Freeze current proof; public split/scanner tools select exact framing before implementation. Family composition, remaining pipeline/flow/legacy/staged producers, membership/replacement, recurring canonical acceptance and marker/comments remain owned. No recovery/purge.
+Activate `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.3.1` after clean preparation landing; execute all13 unchanged suites and the book from the fixed capsule, independently verify complete TAP and retained input identities, and adjudicate the broader .1.1.0 gaps. Statement frames .1.1.1 follow clean .3 closeout. No recovery/purge.
 
 ## Recent Completions
+
+- `2026-10-04` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.3.0` prepares738 fixed inputs,25 smoke groups/two renders and18 reason-checked controls.
 
 - `2026-10-04` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.0` retains private positions for nine basic regex contracts; public compiler output unchanged.
 
@@ -43,8 +45,6 @@ Activate P1 selected proof-input repair `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.
 - `2026-10-03` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.3` repairs lazy callable value conditionals with947 focused tests.
 
 - `2026-10-03` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.2` repairs typed marker groups/nested returns with900 focused tests.
-
-- `2026-10-03` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.1` repairs typed attached callable branches and nested returns with849 focused tests.
 
 ## History
 

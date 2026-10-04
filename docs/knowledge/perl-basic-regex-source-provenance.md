@@ -9,10 +9,10 @@ answers:
 date: 2026-10-04
 status: nine regex contracts implemented; statement framing and family composition pending
 tags: [perl, actionir, scanner, source-provenance, unicode, source-span]
-evidence: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.0 retains the actual complete ten-group frozen-owner RED (nine failures, empty-result guard green) and unchanged ten-group GREEN. Independent authored Unicode-scalar positions cover quoted and repeated equal calls for all nine regex contracts. Complete compiler/consumer acceptance is recorded by the source-bound reviewer and claim."
+evidence: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.0 retains the actual complete ten-group frozen-owner RED (nine failures, empty-result guard green) and unchanged ten-group GREEN. Independent authored Unicode-scalar positions cover quoted and repeated equal calls for all nine regex contracts. The private/compiler result is historical at3fc589f84. Original passing consumer channels retain separately disclosed input/falsification gaps until .1.1.3 remeasurement; they are not complete source-input acceptance."
 reverify:
   - "bash tools/project_data_run.sh env PERL5LIB= prove -v -Iperl t/actionir_basic_regex_source_provenance.t t/actionir_helper_source_provenance.t"
-  - "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.0-review.py"
+  - "Historical original reviewer/captures and private/compiler input hashes are preserved at3fc589f8494fd55b4f0154d6c226797a4fa2f711; follow selected-consumer-proof-input-closure-gap for broader remeasurement."
 ---
 
 # Nine basic Perl regex scanner contracts retain exact original match spans privately

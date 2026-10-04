@@ -174,6 +174,17 @@ or explicitly preserve/supersede a stale record; changing its hash alone is not 
 The selected tests and canonical gate still establish actual behavior. The checker cannot
 establish that a source list is complete, a RED happened, or an oracle is independent.
 
+A test can read more than its own source file. Phase 0 discovers shipped specs,
+corpora and book Markdown, reads JSON contracts and runs nested consumers. A
+file hash for the named suite therefore does not identify every input. Retain
+both the contents and directory membership of its input trees. A fixed input
+capsule also lets continuity documents change after a run without changing the
+bytes that the run actually examined. Gate the capsule against its declared Git
+boundary and any explicit candidate overlays before and after execution; retain
+complete output channels and reject missing inputs or incomplete TAP plans.
+Passing older transcripts retain their original boundary until remeasurement
+supersedes them. Preparation alone is not consumer acceptance.
+
 This bounded working-rule/checker adoption does not finish the broader published-constant,
 ignored-producer, control and alignment audit owned by startup task .5. Diagnostic path
 repair .29 remains required before that audit closeout. Older checkpoints and their

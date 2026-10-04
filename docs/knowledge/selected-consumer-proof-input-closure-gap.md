@@ -7,7 +7,7 @@ answers:
   - "can continuity publishing change Phase0 input bytes after its run"
   - "who owns the selected consumer and book proof input closure repair"
 date: 2026-10-04
-status: P1 repair pending under SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.3
+status: P1 preparation verified under .1.1.3.0; full remeasurement pending .1.1.3.1
 tags: [claims, evidence, provenance, phase0, documentation, input-closure]
 evidence: "The final .1.1.0 review preserves the original claim/publisher as claim-initial.json/.py, separates the complete private/compiler measurement from consumer/render observations, and discloses broader falsification/durability gaps with an immediate P1 repair. The actual passing TAP and render streams are unchanged."
 reverify: "Read the source-backed selected input graph and actual remeasurement under .1.1.3 when it lands; initial producer/claim and observed streams remain under docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.0-. Do not refresh their input hashes as if they captured a newer run."
@@ -34,3 +34,11 @@ publication boundary, actual distinguishing controls and recovery or remeasureme
 where needed. It runs before basic statement framing. The larger prior-record
 producer audit remains with `SESSION-STARTUP-READING.5`; this finding does not close
 that audit or retroactively repair older records.
+
+Preparation `.1.1.3.0` now retains a conservative capsule of738 regular inputs
+at3fc589f8494fd55b4f0154d6c226797a4fa2f711 plus one explicit development
+book overlay. Independent Git/rg census, two-suite25-group smoke, actual render
+and18 reason-checked controls pass. An actual added snapshot input after a
+successful consumer rejects while its completed channels survive. This prepares
+remeasurement; it does not re-label the original thirteen-suite run. `.3.1` is
+next, before statement frames; the broader historical audit remains startup .5.

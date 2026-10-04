@@ -1,0 +1,10 @@
+{
+  "command": [
+    "bash",
+    "scripts/check_doctrines.sh"
+  ],
+  "exit": 1,
+  "transport": "Exact combined text returned by exec/write_stdin; separate stdout/stderr unavailable. This is a gate observation, not a full replayable initial staged-candidate receipt.",
+  "combined": "claim-verification: FAIL: stale input: docs/linkedspec-book/src/development/documentation-workflow.md; remeasure or preserve an explicitly historical capture\nclaim-verification: self-test PASS 3 positive / 16 rejected controls\n\n================ DOCTRINE ENFORCEMENT REPORT ================\n  PASS  MEMORY-ARCH \u2014 durable 4-layer memory, activation-boundary, and clean-handoff invariants (MEMORY_ARCHITECTURE.md \u00a79)\n  PASS  KNOWLEDGE-MAP \u2014 the derived Knowledge Map is in sync with its fact sources\n  PASS  TASK-TREE-METADATA \u2014 task metadata, partitions, and stable closed-capability anchors stay consistent\n  PASS  TASK-ACCEPTANCE \u2014 staged governed changes carry a task-tree acceptance checklist with LinkedSpec-tool evidence\n  PASS  REPO-ROOT-PATHS \u2014 tracked repository paths and all five primary-command roots are relocation-safe\n  PASS  PROJECT-DATA-STORAGE \u2014 tracked project-storage defaults and documented outputs stay repository-filesystem rooted\n  PASS  DOCUMENT-HISTORY \u2014 bounded current documentation views preserve exact repository-local queryable history\n  PASS  README-STABILITY \u2014 README and every routed destination retain reviewed resulting-tree pressure controls\n  FAIL  CLAIM-VERIFICATION \u2014 new claim declarations disclose three legs and records bind tracked producer/input identities\n  PASS  VERIFICATION-CADENCE \u2014 ordinary commits declare focused proof while canonical boundaries carry exact staged-tree receipts\n============================================================\ndoctrines: one or more doctrines FAILED \u2014 commit/merge blocked. Fix above; do not bypass.\n",
+  "repair": "The dated REPO-HYGIENE.8 live manifest hashes the development chapter. Verify every original input at immutable activation3fc, preserve its manifest/results historically, and rerun all doctrines without bypass."
+}

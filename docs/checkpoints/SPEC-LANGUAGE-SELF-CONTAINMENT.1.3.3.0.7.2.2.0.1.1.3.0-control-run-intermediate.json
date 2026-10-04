@@ -1,0 +1,79 @@
+{
+  "version": 1,
+  "mode": "smoke",
+  "capsule_sha256": "12bccbdfb3033087af2f71864814a7f28a327af6ce8c049113bbeb257aed289a",
+  "boundary": {
+    "revision": "3fc589f8494fd55b4f0154d6c226797a4fa2f711",
+    "overlays": [
+      "docs/linkedspec-book/src/development/documentation-workflow.md"
+    ]
+  },
+  "input_tree": ".linkedspec-data/scratch/selected-proof-closure/fixed-inputs-wbc2fm4z",
+  "input_summary": {
+    "files": 738,
+    "input_bytes": 84571062,
+    "suites": 13
+  },
+  "toolchain_scope": "Read-only PATH-resolved host Perl/prove/mdBook and their OS/standard-library dependencies; project payload bytes are capsule-owned. No submodule or other-repository payload is used.",
+  "runtime_identities": [
+    {
+      "tool": "perl",
+      "sha256": "85e5621137742a37be052f58800372b2005f91f609ad55019832214b5d9e61bc",
+      "bytes": 167184
+    },
+    {
+      "tool": "prove",
+      "sha256": "616af4c61030f3282766a6c0651d0c117e6bf42587c81061c28c1a8dbca2021c",
+      "bytes": 13658
+    },
+    {
+      "tool": "mdbook",
+      "sha256": "f3a6fe5cf6bf6d5e13b25d07a295bd1ccd093268ff97d13ba7e78bb9fa45eaca",
+      "bytes": 12682656
+    }
+  ],
+  "rows": [
+    {
+      "command": [
+        "bash",
+        "tools/project_data_run.sh",
+        "prove",
+        "-v",
+        "-Iperl",
+        "t/actionir_helper_source_provenance.t"
+      ],
+      "exit": 0,
+      "stdout": {
+        "encoding": "gzip-base64",
+        "bytes": 6380,
+        "sha256": "501c75ce11ea9247d00d2d412a25a3ab9c5a3a0ce0120ff8983f3ad6dc012abc",
+        "data": "H4sIAAAAAAAC/+1YTY/jNgy9+1cQ6KVFt2k8yXzsAnNYFOh50WnPhiIxsTqK5BWlzOTfl7Jsx94N2mR6mIvnkElsUnwk36NshV+FDNpZ7asaTYO+Ihe9xKrx7oBWWImLAIsFFD/AU9wEpPAJGq8PIiCgDf4ImkAchDZiY7AA/nPPUMIvg9VpJZC1sBYN4KumQK1xuViUxTceZ9YdRXcxMEyPIXpbUWwaj0RI1dfoAqpKcwR/DodH6bzSdgfJA/0BCaTbNwYTyLgxWgIy0g4Ye9+wt7YKG+QPG8B5vdNWGPDiBZyU0XtMaRnOpvdZsQ8KWQPXNbLpXgT+UQsCZ3HAklfqfdbTOOYIIobaeVRAUhjhoXGkU5sGaLfsMoAfcOXewdaL/dCKO7bMBryK5uxABG4Aw8vZgtv8jXLAfz+Yd3l2CKgRA94Htkm/uaTBa0yFHFzympsj96o3/3gx1nJ5HdiyvABteXMd3DK1sEen0SgCCuKYeEdanaNK4vCq6AhzET1HdO6uE4Zqg1tuOpvwCgbFgS97FGYm80zm/0XmC/Gur8R7ewneuyvx3r9FfPdFR9YLxPS99PS2EjbfrTbGyedZcLPg3mH3WJ8I/D0lR7SNVkunsJLebLuNhmbKzpR9B8qmrpyl44iuyBAb5rRyvA7m56CZrjNd34GuqdZn6Tiiq8cdvlaNOBonVDuFyQiqKwY+P4nPtH0P2qbi/Sstx9N23wRe9MVyl5mP0QT+txfaUr41prB1zI8Uj21HpzT83AycVl6JM7eTg5rUpf8MMj6uacTXiKDQ4E4ksvHaChJs9IDep2AeB/GoMcDON3cHdGKxTpiiP+gDTgTVmXYFapUxTq9rc9sfGotqAoQbwlzqlx9kdcLeV6Jty8dT2MuzG1XG8mdbwH6AsFFgeRKEGvM5Qk8Y6TiL1zCpTXu/yyhxkMvPPxVffNEs88gFS2cNwC8/z2KH0+mTbnBxnMygU7k0y4Jb+s0QWQ3mY2W11KXxdJlUphXcG9KbjOHe7SCMVtwG6hTb+RCrBSfPvZxPMoWNi1YlMWbpZvO9pjwzPY6lfnMS5VgBQpvIbdMpZsOBdJjW4/pA62sD3b4x0N21ge7fGOjhqkBMjYein62XNnfy0pOdmFH5oBral3qaDHC2SkfMu+kU4YksAwt6FFb38RpBFGrv4q6eCqRzqR1fEUq10ySP7T6dm6LfBa7FNkkrT1GleSvhGrNvXotAOY4ZWvkynuBa2eRpO5kDljf2dEvWjtD28zhJyutNDMO2NBmXxANLngbjMFr7wkyTXLVJvglpv4kVn42BlDNve1Fyc2kbzaL4XRukx/ID/JluPZarDwBLeOH5KdNrL+OUBD/CcrEsIZKH9G0JxLPn5/b7GuTpskzXH9sft/Dbl79+Kv5oQXyCL5+fnop/ALjH4+DsGAAA"
+      },
+      "stderr": {
+        "encoding": "gzip-base64",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "data": "H4sIAAAAAAAC/wMAAAAAAAAAAAA="
+      },
+      "test": "t/actionir_helper_source_provenance.t",
+      "inputs_before": 738,
+      "input_check_failure": "runtime input directory population"
+    }
+  ],
+  "book": null,
+  "complete": false,
+  "instruments": [
+    {
+      "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.3.0-run.py",
+      "sha256": "e70a422b7b875ebc61a4571d01ebb88a11bb2ffc4f2db3f54a4de07baefad9bb"
+    },
+    {
+      "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.3.0-review.py",
+      "sha256": "b9a279b0364e516b1bd6d68a8a2debb5a64e13bf38e9b09b733fdee26d286d12"
+    },
+    {
+      "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.3.0-plan.json",
+      "sha256": "945816541108bd66015039b59e469d5184631f537730d7f324ba48094f88f248"
+    }
+  ]
+}

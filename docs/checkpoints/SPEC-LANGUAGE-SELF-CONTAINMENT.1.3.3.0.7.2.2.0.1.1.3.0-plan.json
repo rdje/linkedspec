@@ -1,0 +1,140 @@
+{
+  "version": 1,
+  "owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.3.0",
+  "revision": "3fc589f8494fd55b4f0154d6c226797a4fa2f711",
+  "roots": [
+    "perl",
+    "specs",
+    "t",
+    "tests",
+    "examples",
+    "conf",
+    "tablescript",
+    "ebnf",
+    "capability_conformance",
+    "tools",
+    "scripts",
+    "doctrine",
+    "knowledge-map",
+    ".githooks",
+    "docs/linkedspec-book"
+  ],
+  "checkpoint_prefixes": [
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.1-",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.0-",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.0-"
+  ],
+  "tests": [
+    "t/phase0_regression.t",
+    "t/actionir_helper_source_provenance.t",
+    "t/inter_match_gap_capture_perl_contract.t",
+    "t/actionir_ast_parser.t",
+    "t/trace_actionir_pipeline.t",
+    "t/canonical_event_occurrence_order.t",
+    "t/actionir_raw_dependency_metadata.t",
+    "t/actionir_raw_dependency_provenance.t",
+    "t/actionir_raw_dependency_compatibility.t",
+    "t/actionir_nested_block_source_spans.t",
+    "t/noncurrent_helper_metadata.t",
+    "t/generated_source_contract.t",
+    "t/codeblock_matches_perl.t"
+  ],
+  "nested_tests": [
+    "t/canonical_event_occurrence_order.t",
+    "t/legacy_pathsearch_fallback.t",
+    "t/multiline_helper_pattern_validation.t",
+    "t/staged_ast_enrichment_perl_contract.t"
+  ],
+  "graph_sentinels": [
+    [
+      "t/phase0_regression.t",
+      "my @all_specs = discover_specs($spec_dir);",
+      "spec directory population"
+    ],
+    [
+      "t/phase0_regression.t",
+      "my @files = discover_dir_files_by_suffix($dataset->{dir}, $dataset->{suffix});",
+      "conf/tablescript/ebnf directory populations"
+    ],
+    [
+      "t/phase0_regression.t",
+      "'quoted-newlines.json'",
+      "Lispish exact fixture input"
+    ],
+    [
+      "t/phase0_regression.t",
+      "'outward_descriptor_contract.json'",
+      "descriptor contract"
+    ],
+    [
+      "t/phase0_regression.t",
+      "'rule_local_cursor_contract.json'",
+      "cursor contract"
+    ],
+    [
+      "t/phase0_regression.t",
+      "my @markdown_docs = discover_markdown_docs($repo_root);",
+      "root/book Markdown population"
+    ],
+    [
+      "t/phase0_regression.t",
+      "'legacy_pathsearch_fallback.t'",
+      "nested resolution consumer"
+    ],
+    [
+      "t/phase0_regression.t",
+      "'multiline_helper_pattern_validation.t'",
+      "nested helper consumer"
+    ],
+    [
+      "t/phase0_regression.t",
+      "'t/staged_ast_enrichment_perl_contract.t'",
+      "nested staged consumer"
+    ],
+    [
+      "t/phase0_regression.t",
+      "'capability_conformance', 'fixtures'",
+      "named newline fixtures"
+    ],
+    [
+      "t/generated_source_contract.t",
+      "'input.spec'",
+      "generated source spec fixture"
+    ],
+    [
+      "t/generated_source_contract.t",
+      "'input.txt'",
+      "generated source input fixture"
+    ],
+    [
+      "t/generated_source_contract.t",
+      "'expected.json'",
+      "generated source value oracle"
+    ],
+    [
+      "t/generated_source_contract.t",
+      "'examples', 'direct-read-purity.spec'",
+      "fresh generated example"
+    ],
+    [
+      "t/actionir_helper_source_provenance.t",
+      "$prefix.'cases.json'",
+      "authored private span fixtures"
+    ],
+    [
+      "t/staged_ast_enrichment_perl_contract.t",
+      "'staged_ast_enrichment_contract.json'",
+      "transitive staged contract"
+    ]
+  ],
+  "book_chapter": "docs/linkedspec-book/src/dsl/actionir-lowering-mental-model.md",
+  "book_examples": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.0-cases.json",
+  "book_example_indices": [
+    0,
+    7
+  ],
+  "scope": "Conservative parent-owned input capsule, not a minimal read set. Root regular files and complete selected trees preserve dynamically discovered membership. Gitlinks and symbolic links are excluded; selected symbolic links fail closed. External OS/Perl/mdBook runtime dependencies are read-only toolchain prerequisites, not project artifact payloads.",
+  "overlays": [
+    "docs/linkedspec-book/src/development/documentation-workflow.md"
+  ]
+}

@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-10-04 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.3.0: prepare fixed consumer input proof
+
+Prepared a conservative capsule of738 exact parent-owned input files from Git3fc589f8494fd55b4f0154d6c226797a4fa2f711 plus one explicit book overlay. Independent Git/rg census verifies314 source-related lexical sites and16 named input edges; these are not classified runtime reads or defects. Two unchanged smoke suites pass25 complete groups and two source-identical examples render. Eighteen reason-checked controls reject, including an actual post-run input mutation that retains completed TAP/channels. Original broader observations stay unchanged; complete thirteen-suite remeasurement is next under .3.1.
+
 ## 2026-10-04 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.0: retain basic regex match provenance
 
 Nine basic regex contracts retain exact private full-input spans.27 source/seed before-after compiler pairs preserve public events/arguments/substitution/diagnostics/dumps/emission;81 origins match independent scalar positions. The same ten-group fixture fails nine before, passes ten after and retains its empty-result guard. Thirteen unchanged suites pass1337 top-level tests, including complete Phase0. Broader consumer/render falsification and transitive input closure are disclosed gaps owned by .1.1.3. Twelve evidence corruptions reject; two examples render with explicitly documented Markdown newline normalization. Quoted syntactic matches remain recorded; statement/recursive framing, membership/replacement and canonical recurrence remain open.

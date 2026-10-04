@@ -1,0 +1,20 @@
+{
+  "record": "docs/claims/REPO-HYGIENE.8.json",
+  "revision": "3fc589f8494fd55b4f0154d6c226797a4fa2f711",
+  "verified_original_inputs": [
+    ".gitmodules",
+    "docs/checkpoints/REPO-HYGIENE.8-artifact-review.json",
+    "docs/checkpoints/REPO-HYGIENE.8-book-check.json",
+    "docs/checkpoints/REPO-HYGIENE.8-book-check.py",
+    "docs/checkpoints/REPO-HYGIENE.8-census.py",
+    "docs/checkpoints/REPO-HYGIENE.8-review.py",
+    "docs/checkpoints/REPO-HYGIENE.8-verification.json",
+    "docs/linkedspec-book/src/development/documentation-workflow.md",
+    "tools/project_data_env.sh",
+    "tools/project_data_run.sh",
+    "tools/run_mdbook_local.sh",
+    "tools/run_python_project_data.sh"
+  ],
+  "manifest_preserved": true,
+  "scope": "Historical identity preservation only. All original claim/results, input hashes and dated cleanup scope remain unchanged; no cleanup or current artifact census ran."
+}

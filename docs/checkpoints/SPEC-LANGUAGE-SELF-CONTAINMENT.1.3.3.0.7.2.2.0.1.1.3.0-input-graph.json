@@ -1,0 +1,1706 @@
+{
+  "revision": "3fc589f8494fd55b4f0154d6c226797a4fa2f711",
+  "source_related_sites": [
+    {
+      "path": "t/phase0_regression.t",
+      "line": 22,
+      "source": "#   (slurp, write_text, discover_specs, discover_dir_files_by_suffix,"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 46,
+      "source": "my @all_specs = discover_specs($spec_dir);"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 59,
+      "source": "        my $content = slurp($path);"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 73,
+      "source": "        my $content = slurp($path);"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 888,
+      "source": "my $result = do './t/canonical_event_occurrence_order.t';"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 1178,
+      "source": "    my $owner_dispatch_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'OwnerDispatch.pm'));"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 1179,
+      "source": "    my $linkedspec_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec.pm'));"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 1180,
+      "source": "    my $trace_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'Trace.pm'));"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 1181,
+      "source": "    my $runtime_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'Runtime.pm'));"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 1182,
+      "source": "    my $parser_factory_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'ParserFactory.pm'));"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 1183,
+      "source": "    my $bootstrap_spec_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'BootstrapSpec.pm'));"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 1184,
+      "source": "    my $bootstrap_spec_core_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'BootstrapSpec', 'Core.pm'));"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 1185,
+      "source": "    my $compiler_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'Compiler.pm'));"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 1186,
+      "source": "    my $spec_entry_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'SpecEntry.pm'));"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 1187,
+      "source": "    my $rule_ir_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'RuleIR.pm'));"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 1188,
+      "source": "    my $emit_context_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'RuleIR', 'EmitContext.pm'));"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 1189,
+      "source": "    my $rewrite_pipeline_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'ActionIR', 'RewritePipeline.pm'));"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 1190,
+      "source": "    my $scanner_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'ActionIR', 'Scanner.pm'));"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 1191,
+      "source": "    my $scanner_core_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'ActionIR', 'ScannerCore.pm'));"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 1192,
+      "source": "    my $statement_split_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'ActionIR', 'StatementSplit.pm'));"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 1193,
+      "source": "    my $statement_split_core_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'ActionIR', 'StatementSplit', 'Core.pm'));"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 1194,
+      "source": "    my $canonical_events_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'ActionIR', 'CanonicalEvents.pm'));"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 1195,
+      "source": "    my $diagnostics_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'ActionIR', 'Diagnostics.pm'));"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 1196,
+      "source": "    my $value_expr_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'ActionIR', 'ValueExpr.pm'));"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 1197,
+      "source": "    my $flow_expr_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'ActionIR', 'FlowExpr.pm'));"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 1198,
+      "source": "    my $array_pipeline_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'ActionIR', 'ArrayPipeline.pm'));"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 1199,
+      "source": "    my $control_flow_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'ActionIR', 'ControlFlow.pm'));"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 1200,
+      "source": "    my $contracts_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'ActionIR', 'Contracts.pm'));"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 1201,
+      "source": "    my $method_lowering_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'ActionIR', 'MethodLowering.pm'));"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 1202,
+      "source": "    my $declare_method_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'ActionIR', 'DeclareMethod.pm'));"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 1203,
+      "source": "    my $resolver_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'Resolver.pm'));"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 1204,
+      "source": "    my $validation_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'Validation.pm'));"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 1205,
+      "source": "    my $plugin_bridge_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'PluginBridge.pm'));"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 1517,
+      "source": "    my $contracts_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'ActionIR', 'Contracts.pm'));"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 1525,
+      "source": "    my $scanner_core_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'ActionIR', 'ScannerCore.pm'));"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 1533,
+      "source": "    my $statement_split_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'ActionIR', 'StatementSplit.pm'));"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 1541,
+      "source": "    my $canonical_events_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'ActionIR', 'CanonicalEvents.pm'));"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 1549,
+      "source": "    my $diagnostics_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'ActionIR', 'Diagnostics.pm'));"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 1557,
+      "source": "    my $rewrite_pipeline_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'ActionIR', 'RewritePipeline.pm'));"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 1565,
+      "source": "    my $array_pipeline_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'ActionIR', 'ArrayPipeline.pm'));"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 1573,
+      "source": "    my $plugin_bridge_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'PluginBridge.pm'));"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 1581,
+      "source": "    my $parser_factory_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'ParserFactory.pm'));"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 1589,
+      "source": "    my $pplugin_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'PPlugin.pm'));"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 1597,
+      "source": "    my $compiler_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'Compiler.pm'));"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 1605,
+      "source": "    my $declare_method_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'ActionIR', 'DeclareMethod.pm'));"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 1613,
+      "source": "    my $value_expr_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'ActionIR', 'ValueExpr.pm'));"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 1621,
+      "source": "    my $flow_expr_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'ActionIR', 'FlowExpr.pm'));"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 1629,
+      "source": "    my $control_flow_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'ActionIR', 'ControlFlow.pm'));"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 1637,
+      "source": "    my $method_lowering_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'ActionIR', 'MethodLowering.pm'));"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 2745,
+      "source": "    my $trace_log = slurp($tmp_log);"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 3204,
+      "source": "    my $pplugin_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'PPlugin.pm'));"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 3208,
+      "source": "        open(STDOUT, '>', \\$stdout) or die \"Unable to capture STDOUT: $!\";"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 3239,
+      "source": "    like($pplugin_pm, qr/sub _read_plugin_file\\b.*open\\(my \\$fh, '<', \\$plugin_file\\)/s, 'PPlugin registry builder now uses an explicit file reader helper');"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 3294,
+      "source": "    my $pplugin_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'PPlugin.pm'));"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 3526,
+      "source": "    my $source_content = slurp($source_spec);"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 3530,
+      "source": "    open(my $fh, '>', $tmp_spec) or die \"Cannot create explicit-path spec '$tmp_spec': $!\";"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 3553,
+      "source": "    my $source_content = slurp($source_spec);"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 3555,
+      "source": "    open(my $fh, '>', $tmp_spec) or die \"Cannot create cwd-resolution spec '$tmp_spec': $!\";"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 3815,
+      "source": "        open(STDOUT, '>', \\$out) or die \"Unable to capture STDOUT: $!\";"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 3816,
+      "source": "        open(STDERR, '>', \\$warn) or die \"Unable to capture STDERR: $!\";"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 3842,
+      "source": "        open(STDOUT, '>', \\$out) or die \"Unable to capture STDOUT: $!\";"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 3843,
+      "source": "        open(STDERR, '>', \\$warn) or die \"Unable to capture STDERR: $!\";"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 3871,
+      "source": "        open(STDOUT, '>', \\$out) or die \"Unable to capture STDOUT: $!\";"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 3872,
+      "source": "        open(STDERR, '>', \\$warn) or die \"Unable to capture STDERR: $!\";"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 3904,
+      "source": "        open(STDOUT, '>', \\$out) or die \"Unable to capture STDOUT: $!\";"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 3905,
+      "source": "        open(STDERR, '>', \\$warn) or die \"Unable to capture STDERR: $!\";"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 3934,
+      "source": "        open(STDOUT, '>', \\$out) or die \"Unable to capture STDOUT: $!\";"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 3935,
+      "source": "        open(STDERR, '>', \\$warn) or die \"Unable to capture STDERR: $!\";"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 3966,
+      "source": "        open(STDOUT, '>', \\$out) or die \"Unable to capture STDOUT: $!\";"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 3967,
+      "source": "        open(STDERR, '>', \\$warn) or die \"Unable to capture STDERR: $!\";"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 3989,
+      "source": "    my $source_content = slurp($source_spec);"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 3993,
+      "source": "    open(my $fh, '>', $tmp_spec) or die \"Cannot create go-once fallback spec '$tmp_spec': $!\";"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 4031,
+      "source": "        ($exit_code, $out, $err) = run_perl_test_file_in_subprocess($test_path);"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 4071,
+      "source": "    my $source_content = slurp($source_spec);"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 4073,
+      "source": "    open(my $fh, '>', $tmp_spec) or die \"Cannot create unreadable-open-failure spec '$tmp_spec': $!\";"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 4085,
+      "source": "    like($out, qr/Unable to open spec file/, 'unreadable-spec reports open failure');"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 4099,
+      "source": "    open(my $fh, '>', $tmp_spec) or die \"Cannot create malformed spec '$tmp_spec': $!\";"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 4137,
+      "source": "    open(my $fh, '>', $tmp_spec) or die \"Cannot create malformed-handler spec '$tmp_spec': $!\";"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 4202,
+      "source": "    open(my $fh, '>', $tmp_spec) or die \"Cannot create mixed-action/blind-call spec '$tmp_spec': $!\";"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 4332,
+      "source": "    is($descr->{spec}{Top}{meta}{rep_max}, 10**9, 'Top metadata preserves open upper bound sentinel');"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 4349,
+      "source": "    is($descr->{spec}{Top}{meta}{rep_max}, 10**9, 'Top metadata preserves open upper bound sentinel');"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 4369,
+      "source": "    ok(ref($bounded_parser) eq 'CODE', 'open-ended bounded OR parser builds');"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 4377,
+      "source": "    ok(!$@, 'open-ended bounded OR parser full-input execution does not die') or diag(normalize_error($@));"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 4380,
+      "source": "    is_deeply($bounded_full, $explicit_full, 'explicit OR parser matches the open-ended bounded OR behavior');"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 4388,
+      "source": "    ok(!$@, 'open-ended bounded OR parser empty-input execution does not die') or diag(normalize_error($@));"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 4391,
+      "source": "    ok(!defined($bounded_empty), 'open-ended bounded OR parser rejects empty input below the implicit minimum');"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 4424,
+      "source": "    ok(ref($bounded_parser) eq 'CODE', 'open-ended bounded OR blind-call parser builds');"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 4432,
+      "source": "    ok(!$@, 'open-ended bounded OR blind-call parser full-input execution does not die') or diag(normalize_error($@));"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 4435,
+      "source": "    is_deeply($bounded_full, $or_plus_full, 'OR+ blind-call parser matches the open-ended bounded OR blind-call behavior');"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 4443,
+      "source": "    ok(!$@, 'open-ended bounded OR blind-call parser empty-input execution does not die') or diag(normalize_error($@));"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 4446,
+      "source": "    ok(!defined($bounded_empty), 'open-ended bounded OR blind-call parser rejects empty input below the implicit minimum');"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 4490,
+      "source": "    is($descr->{spec}{TwoOrMore}{meta}{rep_max}, 10**9, 'TwoOrMore metadata preserves open upper bound sentinel');"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 4851,
+      "source": "    is($descr->{spec}{Explicit}{meta}{rep_max}, 10**9, 'explicit OR blind-call rule preserves the open upper bound sentinel');"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 5151,
+      "source": "    is($descr->{spec}{Top}{meta}{rep_max}, 10**9, 'Top metadata preserves open upper bound sentinel');"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 5185,
+      "source": "    ok(ref($bounded_parser) eq 'CODE', 'open-ended bounded AND parser builds');"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 5193,
+      "source": "    ok(!$@, 'open-ended bounded AND parser full-input execution does not die') or diag(normalize_error($@));"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 5203,
+      "source": "    is_deeply($bounded_full, $and_plus_full, 'AND+ parser matches the open-ended bounded AND behavior');"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 5211,
+      "source": "    ok(!$@, 'open-ended bounded AND parser empty-input execution does not die') or diag(normalize_error($@));"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 5214,
+      "source": "    ok(!defined($bounded_short), 'open-ended bounded AND parser rejects empty input below the implicit minimum');"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 5262,
+      "source": "    is($descr->{spec}{TwoOrMore}{meta}{rep_max}, 10**9, 'TwoOrMore metadata preserves open upper bound sentinel');"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 6518,
+      "source": "    like($out, qr/__INVALID_DSL__/, 'validation rejects rule-label-like lines inside open blocks rather than silently consuming them');"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 6519,
+      "source": "    like($out, qr/Rule definition not allowed inside open block/, 'nested rule-like block line diagnostic identifies the inside-block restriction');"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 6542,
+      "source": "    like($out, qr/__PARSER_BAD__/, 'compile pipeline rejects rule-like lines inside open action blocks at the validation stage');"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 6543,
+      "source": "    like($out, qr/Rule definition not allowed inside open block/, 'compile pipeline reports the inside-block restriction diagnostic');"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 6565,
+      "source": "    like($out, qr/__INVALID_DSL__/, 'validation rejects bare rule-label line inside open action block');"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 6566,
+      "source": "    like($out, qr/Rule definition not allowed inside open block/, 'inside-block rule-label diagnostic names the restriction');"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 6588,
+      "source": "    like($out, qr/__INVALID_DSL__/, 'validation rejects top-rule label line inside open action block');"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 6589,
+      "source": "    like($out, qr/Rule definition not allowed inside open block/, 'inside-block top-rule-label diagnostic names the restriction');"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 6617,
+      "source": "        like($out, qr/__INVALID_DSL__/, \"validation rejects rule-label with mode suffix inside open block: $mode_line\");"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 6652,
+      "source": "        like($out, qr/__VALID_DSL__/, \"validation accepts non-rule-label content inside open block: $block_content\");"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 6676,
+      "source": "    like($out, qr/__INVALID_DSL__/, 'validation rejects rule-label line inside deeply nested open blocks');"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 6677,
+      "source": "    like($out, qr/Rule definition not allowed inside open block/, 'deeply nested rule-label diagnostic names the restriction');"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 6695,
+      "source": "    like($out, qr/__INVALID_DSL__/, 'validation rejects multiline rule blocks that stay open through EOF');"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 6713,
+      "source": "    like($out, qr/__INVALID_DSL__/, 'validation rejects same-line rule blocks that stay open through EOF');"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 6843,
+      "source": "  open(my $fh, \"<\", $spec_file) or die \"cannot open $spec_file: $!\";"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 7690,
+      "source": "        open STDOUT, '>', \\$stdout or die \"open stdout scalar failed: $!\";"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 9510,
+      "source": "    my $parser_factory_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'ParserFactory.pm'));"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 9523,
+      "source": "    my $runtime_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'Runtime.pm'));"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 9557,
+      "source": "    my $spec_entry_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'SpecEntry.pm'));"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 9773,
+      "source": "    open(my $fh, '>', $tmp_spec) or die \"Cannot create unreadable parser-factory spec '$tmp_spec': $!\";"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 9808,
+      "source": "    is($runtime_ctx->{last_error}{summary}, \"Unable to open spec file '$tmp_spec'\", 'load_spec_content false-return preserves the specific resolver summary');"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 10115,
+      "source": "    open(my $fh, '>', $tmp_spec) or die \"Cannot create spec '$tmp_spec': $!\";"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 10151,
+      "source": "    open(my $fh, '>', $tmp_spec) or die \"Cannot create spec '$tmp_spec': $!\";"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 10187,
+      "source": "    open(my $fh, '>', $tmp_spec) or die \"Cannot create spec '$tmp_spec': $!\";"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 10224,
+      "source": "    open(my $fh, '>', $tmp_spec) or die \"Cannot create spec '$tmp_spec': $!\";"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 10261,
+      "source": "    open(my $fh, '>', $tmp_spec) or die \"Cannot create spec '$tmp_spec': $!\";"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 10972,
+      "source": "    open(my $fh, '>', $tmp_spec) or die \"Cannot create unreadable get_parser spec '$tmp_spec': $!\";"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 10999,
+      "source": "    is($runtime_ctx->{last_error}{summary}, \"Unable to open spec file '$tmp_spec'\", 'get_parser unreadable spec failure preserves resolver-specific load summary');"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 11002,
+      "source": "    like($out, qr/Unable to open spec file/, 'get_parser still emits the existing unreadable-spec diagnostic while exposing runtime_ctx_ref');"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 11370,
+      "source": "    open(my $fh, '>', $tmp_spec) or die \"Cannot create invalid spec '$tmp_spec': $!\";"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 11407,
+      "source": "    open(my $fh, '>', $tmp_spec) or die \"Cannot create late-build-failure spec '$tmp_spec': $!\";"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 11515,
+      "source": "    open(my $fh, '>', $tmp_spec) or die \"Cannot create runtime handler spec '$tmp_spec': $!\";"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 11559,
+      "source": "    open(my $fh, '>', $tmp_spec) or die \"Cannot create runtime parser spec '$tmp_spec': $!\";"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 11621,
+      "source": "    open(my $fh, '>', $tmp_spec) or die \"Cannot create invalid input-ref spec '$tmp_spec': $!\";"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 11719,
+      "source": "        open(STDERR, '>', \\$stderr) or die \"unable to capture STDERR: $!\";"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 13791,
+      "source": " -> Top[0] { set(stage, \"open\") }"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 13821,
+      "source": " -> Top[0] { set(stage, \"open\") }"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 13847,
+      "source": " -> Top[0] { set(stage, \"open\") }"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 13974,
+      "source": " -> Top[0] { start_capture_slice(); set(stage, \"open\") }"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 14012,
+      "source": " -> Top[0] { start_capture_slice(); set(stage, \"open\") }"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 14051,
+      "source": " -> Top[0] { set(stage, \"open\") }"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 14090,
+      "source": " -> Top[0] { set(stage, \"open\") }"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 14166,
+      "source": " -> Top[0] { set(stage, \"open\") }"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 14487,
+      "source": " -> Top[0] { set(stage, \"open\") }"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 14522,
+      "source": " -> Top[0] { set(stage, \"open\") }"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 14556,
+      "source": " -> Top[0] { set(stage, \"open\") }"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 14589,
+      "source": " -> Top[0] { set(stage, \"open\") }"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 14622,
+      "source": " -> Top[0] { set(stage, \"open\") }"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 14781,
+      "source": " -> Top[0] { set(stage, \"open\") }"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 14812,
+      "source": " -> Top[0] { set(stage, \"open\") }"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 14843,
+      "source": " -> Top[0] { set(stage, \"open\") }"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 15080,
+      "source": " -> Top[0] { set(stage, \"open\") }"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 15111,
+      "source": " -> Top[0] { set(stage, \"open\") }"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 15141,
+      "source": " -> Top[0] { set(stage, \"open\") }"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 15169,
+      "source": " -> Top[0] { set(stage, \"open\"); return(call(Child)) }"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 15445,
+      "source": " -> Top[0] { set(stage, \"open\"); return(call(Child)) }"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 15479,
+      "source": " -> Top[0] { set(stage, \"open\"); return(call(Child)) }"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 15690,
+      "source": " -> Top[0] { set(stage, \"open\") }"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 15761,
+      "source": " -> Top[0] { set(stage, \"open\") }"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 15796,
+      "source": " -> Top[0] { set(stage, \"open\") }"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 15831,
+      "source": " -> Top[0] { set(stage, \"open\") }"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 15866,
+      "source": " -> Top[0] { set(seen, \"open\") }"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 41616,
+      "source": "    my $source_content = slurp($source_spec);"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 41664,
+      "source": "    my $source_content = slurp($source_spec);"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 41680,
+      "source": "    my $source_content = slurp($source_spec);"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 41771,
+      "source": "    my $source_content = slurp($source_spec);"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 41861,
+      "source": "    my $source_content = slurp($source_spec);"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 41873,
+      "source": "    my $source_content = slurp($source_spec);"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 42029,
+      "source": "    my $source_content = slurp($source_spec);"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 42097,
+      "source": "    my $source_content = slurp($source_spec);"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 42112,
+      "source": "    my $source_content = slurp($source_spec);"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 42124,
+      "source": "    my $source_content = slurp($source_spec);"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 42136,
+      "source": "    my $source_content = slurp($source_spec);"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 42146,
+      "source": "    my $source_content = slurp($source_spec);"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 42158,
+      "source": "    my $source_content = slurp($source_spec);"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 42186,
+      "source": "    my $source_content = slurp($source_spec);"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 42202,
+      "source": "    my $source_content = slurp($source_spec);"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 42219,
+      "source": "    my $source_content = slurp($source_spec);"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 42291,
+      "source": "    my $source_content = slurp($source_spec);"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 42302,
+      "source": "    open my $capture, '>', \\$stdout or die \"open scalar stdout capture: $!\";"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 42336,
+      "source": "    my $source_content = slurp($source_spec);"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 42378,
+      "source": "    my $source_content = slurp($source_spec);"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 42422,
+      "source": "    my $source_content = slurp($source_spec);"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 42509,
+      "source": "    my $source_content = slurp($source_spec);"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 42527,
+      "source": "    my $source_content = slurp($source_spec);"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 42540,
+      "source": "    my $source_content = slurp($source_spec);"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 42623,
+      "source": "    my $source_content = slurp($source_spec);"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 42686,
+      "source": "    my $source_content = slurp($source_spec);"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 42710,
+      "source": "    my $source_content = slurp($source_spec);"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 42815,
+      "source": "    my $source_content = slurp($source_spec);"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 42905,
+      "source": "    my $source_content = slurp($source_spec);"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 42990,
+      "source": "    my $source_content = slurp($source_spec);"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 43082,
+      "source": "    my $source_content = slurp($source_spec);"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 43094,
+      "source": "    my $source_content = slurp($source_spec);"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 43106,
+      "source": "    my $source_content = slurp($source_spec);"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 43118,
+      "source": "    my $source_content = slurp($source_spec);"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 43159,
+      "source": "    my $source_content = slurp($source_spec);"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 43268,
+      "source": "    my $source_content = slurp($source_spec);"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 43288,
+      "source": "        my $source_content = slurp(File::Spec->catfile($spec_dir, \"$name.spec\"));"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 43320,
+      "source": "    my $manifest = JSON::PP->new->decode(slurp($manifest_path));"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 43421,
+      "source": "        my @files = discover_dir_files_by_suffix($dataset->{dir}, $dataset->{suffix});"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 43511,
+      "source": "        open(STDOUT, '>', \\$build_stdout) or die \"Unable to capture STDOUT: $!\";"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 43512,
+      "source": "        open(STDERR, '>', \\$build_stderr) or die \"Unable to capture STDERR: $!\";"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 43564,
+      "source": "    my $trace_content = slurp($trace_log);"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 43975,
+      "source": "    my @markdown_docs = discover_markdown_docs($repo_root);"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 43979,
+      "source": "        my $content = slurp($path);"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 43997,
+      "source": "    my $spec_spec_content = slurp(File::Spec->catfile($spec_dir, 'spec.spec'));"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 44008,
+      "source": "        my $content = slurp(File::Spec->catfile($spec_dir, \"$spec_name.spec\"));"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 44029,
+      "source": "    my $spec_spec_content = slurp(File::Spec->catfile($spec_dir, 'spec.spec'));"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 44065,
+      "source": "    my $lifecycle_content = slurp(File::Spec->catfile($spec_dir, 'tablegrep.spec'));"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 44077,
+      "source": "    my $blind_content = slurp(File::Spec->catfile($spec_dir, 'pplugin.spec'));"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 44092,
+      "source": "    my $content = slurp(File::Spec->catfile($spec_dir, 'spec.spec'));"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 44109,
+      "source": "    my $spec_spec_content = slurp(File::Spec->catfile($spec_dir, 'spec.spec'));"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 44110,
+      "source": "    my $bootstrap_spec_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'BootstrapSpec.pm'));"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 44111,
+      "source": "    my $bootstrap_spec_core_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'BootstrapSpec', 'Core.pm'));"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 44165,
+      "source": "    my $user_function_spec = slurp($user_function_spec_path);"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 44212,
+      "source": "    is($no_args->{source_span}{end}, index($input, \"\\nfn empty_spaces\"), 'source_span end is exact half-open offset');"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 44509,
+      "source": "    my $contract = JSON::PP->new->decode(slurp($contract_path));"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 44511,
+      "source": "    my $cursor_contract = JSON::PP->new->decode(slurp($cursor_contract_path));"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 44791,
+      "source": "    # opendir '../plugin' census plus the get_plugin/run_plugin/dispatch_plugin_autoload_name"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 44795,
+      "source": "    my $plugin_bridge_pm = slurp(File::Spec->catfile($Bin, '..', 'perl', 'LinkedSpec', 'PluginBridge.pm'));"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 46031,
+      "source": "        my $source = slurp($path);"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 46237,
+      "source": "        open my $dump_fh, '>', \\$dump_stdout or die \"open scalar stdout: $!\";"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 48437,
+      "source": "    my ($exit_code, $out, $err) = run_perl_test_file_in_subprocess($test_path);"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 48446,
+      "source": "    my ($exit_code, $out, $err) = run_perl_test_file_in_subprocess($test_path);"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 48455,
+      "source": "sub discover_specs {"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 48457,
+      "source": "    opendir(my $dh, $dir) or die \"Cannot open specs directory '$dir': $!\";"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 48463,
+      "source": "sub discover_markdown_docs {"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 48499,
+      "source": "sub slurp {"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 48501,
+      "source": "    open(my $fh, '<', $path) or die \"Cannot read '$path': $!\";"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 48508,
+      "source": "    open(my $fh, '>', $path) or die \"Cannot write '$path': $!\";"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 48536,
+      "source": "sub discover_dir_files_by_suffix {"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 48538,
+      "source": "    opendir(my $dh, $dir) or die \"Cannot open directory '$dir': $!\";"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 48550,
+      "source": "    my $data = slurp($file);"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 48565,
+      "source": "    my $data = slurp($file);"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 48619,
+      "source": "        open(STDOUT, '>', \\$stdout) or die \"Unable to capture STDOUT: $!\";"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 48620,
+      "source": "        open(STDERR, '>', \\$stderr) or die \"Unable to capture STDERR: $!\";"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 48705,
+      "source": "sub run_perl_test_file_in_subprocess {"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 48739,
+      "source": "        open(STDOUT, '>', \\$stdout) or die \"Unable to capture STDOUT: $!\";"
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "line": 48740,
+      "source": "        open(STDERR, '>', \\$stderr) or die \"Unable to capture STDERR: $!\";"
+    },
+    {
+      "path": "t/actionir_helper_source_provenance.t",
+      "line": 8,
+      "source": "        my $prefix = './docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.0-before-';"
+    },
+    {
+      "path": "t/actionir_helper_source_provenance.t",
+      "line": 22,
+      "source": "my $prefix = 'docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.0-';"
+    },
+    {
+      "path": "t/actionir_helper_source_provenance.t",
+      "line": 23,
+      "source": "open my $file, '<:raw', $prefix.'cases.json' or die $!;"
+    },
+    {
+      "path": "t/inter_match_gap_capture_perl_contract.t",
+      "line": 23,
+      "source": "sub slurp {"
+    },
+    {
+      "path": "t/inter_match_gap_capture_perl_contract.t",
+      "line": 25,
+      "source": " open my $fh, '<:raw', $path or die \"cannot read $path: $!\";"
+    },
+    {
+      "path": "t/inter_match_gap_capture_perl_contract.t",
+      "line": 156,
+      "source": " my $self_hosted_source = slurp(File::Spec->catfile($Bin, '..', 'specs', 'spec.spec'));"
+    },
+    {
+      "path": "t/inter_match_gap_capture_perl_contract.t",
+      "line": 647,
+      "source": " -> Container[open] { push(gaps, array(gap_text(), call(Container))) }"
+    },
+    {
+      "path": "t/inter_match_gap_capture_perl_contract.t",
+      "line": 651,
+      "source": " open=/\\{/"
+    },
+    {
+      "path": "t/inter_match_gap_capture_perl_contract.t",
+      "line": 674,
+      "source": " -> Container[open] { return(array(gap_text(), call(Container), gap_text())) }"
+    },
+    {
+      "path": "t/inter_match_gap_capture_perl_contract.t",
+      "line": 676,
+      "source": " open=/\\{/"
+    },
+    {
+      "path": "t/inter_match_gap_capture_perl_contract.t",
+      "line": 1002,
+      "source": " -> Container[open] { push(gaps, array(gap_text(), call(Container))) }"
+    },
+    {
+      "path": "t/inter_match_gap_capture_perl_contract.t",
+      "line": 1006,
+      "source": " open=/\\{/"
+    },
+    {
+      "path": "t/inter_match_gap_capture_perl_contract.t",
+      "line": 1092,
+      "source": " -> Container[open] { return(array(gap_text(), call(Container), gap_text())) }"
+    },
+    {
+      "path": "t/inter_match_gap_capture_perl_contract.t",
+      "line": 1094,
+      "source": " open=/\\{/"
+    },
+    {
+      "path": "t/trace_actionir_pipeline.t",
+      "line": 24,
+      "source": " open(my $fh, '<', $path) or die \"cannot read '$path': $!\";"
+    },
+    {
+      "path": "t/canonical_event_occurrence_order.t",
+      "line": 8,
+      "source": "        require './docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.1-before.pm';"
+    },
+    {
+      "path": "t/canonical_event_occurrence_order.t",
+      "line": 9,
+      "source": "        $INC{'LinkedSpec/ActionIR/CanonicalEvents.pm'} = 'docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.1-before.pm';"
+    },
+    {
+      "path": "t/generated_source_contract.t",
+      "line": 30,
+      "source": "sub read_text {"
+    },
+    {
+      "path": "t/generated_source_contract.t",
+      "line": 32,
+      "source": " open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";"
+    },
+    {
+      "path": "t/generated_source_contract.t",
+      "line": 247,
+      "source": " my $spec = read_text(File::Spec->catfile($fixture_dir, 'input.spec'));"
+    },
+    {
+      "path": "t/generated_source_contract.t",
+      "line": 248,
+      "source": " my $input = read_text(File::Spec->catfile($fixture_dir, 'input.txt'));"
+    },
+    {
+      "path": "t/generated_source_contract.t",
+      "line": 249,
+      "source": " my $expected = decode_json(read_text(File::Spec->catfile($fixture_dir, 'expected.json')));"
+    },
+    {
+      "path": "t/generated_source_contract.t",
+      "line": 332,
+      "source": " my $trace = read_text($trace_path);"
+    },
+    {
+      "path": "t/generated_source_contract.t",
+      "line": 404,
+      "source": "  open my $capture, '>', \\$diagnostic or die \"cannot open diagnostic capture: $!\";"
+    },
+    {
+      "path": "t/generated_source_contract.t",
+      "line": 511,
+      "source": " my $book = read_text($book_path);"
+    },
+    {
+      "path": "t/generated_source_contract.t",
+      "line": 535,
+      "source": "  open my $spec_fh, '>:encoding(UTF-8)', $path or die \"cannot write $path: $!\";"
+    },
+    {
+      "path": "t/generated_source_contract.t",
+      "line": 576,
+      "source": "  open my $program, '>:encoding(UTF-8)', $program_path or die \"cannot write $program_path: $!\";"
+    },
+    {
+      "path": "t/generated_source_contract.t",
+      "line": 601,
+      "source": "  open my $child, '-|', $^X, '-I' . File::Spec->catdir($repo_root, 'perl'), $program_path, @inputs"
+    },
+    {
+      "path": "t/generated_source_contract.t",
+      "line": 694,
+      "source": "   open my $fh,'>:encoding(UTF-8)',$path or die $!;"
+    },
+    {
+      "path": "t/generated_source_contract.t",
+      "line": 729,
+      "source": "  open my $fh,'>:encoding(UTF-8)',$path or die $!;"
+    },
+    {
+      "path": "t/generated_source_contract.t",
+      "line": 736,
+      "source": "  my $source = read_text(File::Spec->catfile($read_repo_root, 'examples', 'direct-read-purity.spec'));"
+    },
+    {
+      "path": "t/generated_source_contract.t",
+      "line": 759,
+      "source": "   open my $fh, '>:encoding(UTF-8)', $path or die $!;"
+    },
+    {
+      "path": "t/generated_source_contract.t",
+      "line": 822,
+      "source": "  open my $fh,'>',$manifest or die $!;"
+    },
+    {
+      "path": "t/generated_source_contract.t",
+      "line": 826,
+      "source": "  open my $run_fh,'>',$runner or die $!;"
+    },
+    {
+      "path": "t/generated_source_contract.t",
+      "line": 833,
+      "source": "open my $fh,'<',$ARGV[0] or die $!;"
+    },
+    {
+      "path": "t/generated_source_contract.t",
+      "line": 839,
+      "source": " open my $source_fh,'<:encoding(UTF-8)',File::Spec->catfile($ARGV[2],$case->{path}) or die $!;"
+    },
+    {
+      "path": "t/generated_source_contract.t",
+      "line": 854,
+      "source": "open my $out,'>',$ARGV[1] or die $!;"
+    },
+    {
+      "path": "t/generated_source_contract.t",
+      "line": 862,
+      "source": "  if(open my $result,'<',$output) {"
+    },
+    {
+      "path": "t/generated_source_contract.t",
+      "line": 925,
+      "source": " my $book = read_text(File::Spec->catfile($root, 'examples', 'function-array-values.spec'));"
+    },
+    {
+      "path": "t/generated_source_contract.t",
+      "line": 954,
+      "source": "  open my $fh, '>:encoding(UTF-8)', $path or die $!;"
+    },
+    {
+      "path": "t/generated_source_contract.t",
+      "line": 961,
+      "source": " open my $runner_fh, '>', $runner or die $!;"
+    },
+    {
+      "path": "t/generated_source_contract.t",
+      "line": 970,
+      "source": " open my $fh, '<:encoding(UTF-8)', File::Spec->catfile($root,$artifacts[$index]) or die $!;"
+    },
+    {
+      "path": "t/generated_source_contract.t",
+      "line": 985,
+      "source": "open my $out,'>',$output or die $!;"
+    },
+    {
+      "path": "t/generated_source_contract.t",
+      "line": 994,
+      "source": "  my $rows = $json->decode(read_text($output));"
+    },
+    {
+      "path": "t/generated_source_contract.t",
+      "line": 1047,
+      "source": " my $grammar = read_text(File::Spec->catfile($fixture,'grammar.spec'));"
+    },
+    {
+      "path": "t/generated_source_contract.t",
+      "line": 1048,
+      "source": " my $oracle = $json->decode(read_text(File::Spec->catfile($fixture,'cases.json')));"
+    },
+    {
+      "path": "t/generated_source_contract.t",
+      "line": 1114,
+      "source": " my $flat_book = read_text(File::Spec->catfile($root,'examples','flat-bound-values.spec'));"
+    },
+    {
+      "path": "t/generated_source_contract.t",
+      "line": 1158,
+      "source": "  open my $fh,'>:encoding(UTF-8)',$path or die $!;"
+    },
+    {
+      "path": "t/generated_source_contract.t",
+      "line": 1164,
+      "source": " open my $request_fh,'>',$request or die $!;"
+    },
+    {
+      "path": "t/generated_source_contract.t",
+      "line": 1168,
+      "source": " open my $runner_fh,'>',$runner or die $!;"
+    },
+    {
+      "path": "t/generated_source_contract.t",
+      "line": 1175,
+      "source": "open my $request_fh,'<',$request or die $!;"
+    },
+    {
+      "path": "t/generated_source_contract.t",
+      "line": 1181,
+      "source": " open my $fh,'<:encoding(UTF-8)',File::Spec->catfile($root,$artifact->{path}) or die $!;"
+    },
+    {
+      "path": "t/generated_source_contract.t",
+      "line": 1199,
+      "source": "open my $out,'>',$output or die $!;"
+    },
+    {
+      "path": "t/generated_source_contract.t",
+      "line": 1208,
+      "source": "  my $rows = $json->decode(read_text($output));"
+    },
+    {
+      "path": "t/generated_source_contract.t",
+      "line": 1299,
+      "source": " my $book = read_text(File::Spec->catfile($root,'examples','numeric-array-values.spec'));"
+    },
+    {
+      "path": "t/generated_source_contract.t",
+      "line": 1326,
+      "source": "  open my $fh,'>:encoding(UTF-8)',$path or die $!;"
+    },
+    {
+      "path": "t/generated_source_contract.t",
+      "line": 1332,
+      "source": " open my $fh,'>',$runner or die $!;"
+    },
+    {
+      "path": "t/generated_source_contract.t",
+      "line": 1342,
+      "source": " open my $fh,'<:encoding(UTF-8)',File::Spec->catfile($root,$artifacts[$index]) or die $!;"
+    },
+    {
+      "path": "t/generated_source_contract.t",
+      "line": 1357,
+      "source": "open my $out,'>',$output or die $!;"
+    },
+    {
+      "path": "t/generated_source_contract.t",
+      "line": 1366,
+      "source": "  my $rows = $json->decode(read_text($output));"
+    },
+    {
+      "path": "t/generated_source_contract.t",
+      "line": 1468,
+      "source": "  open my $fh, '>:encoding(UTF-8)', $path or die $!;"
+    },
+    {
+      "path": "t/generated_source_contract.t",
+      "line": 1474,
+      "source": " open my $request_fh, '>', $request or die $!;"
+    },
+    {
+      "path": "t/generated_source_contract.t",
+      "line": 1478,
+      "source": " open my $runner_fh, '>', $runner or die $!;"
+    },
+    {
+      "path": "t/generated_source_contract.t",
+      "line": 1485,
+      "source": "open my $request_fh,'<',$request or die $!;"
+    },
+    {
+      "path": "t/generated_source_contract.t",
+      "line": 1491,
+      "source": " open my $fh,'<:encoding(UTF-8)',File::Spec->catfile($root,$artifact->{path}) or die $!;"
+    },
+    {
+      "path": "t/generated_source_contract.t",
+      "line": 1508,
+      "source": "open my $out,'>',$output or die $!;"
+    },
+    {
+      "path": "t/generated_source_contract.t",
+      "line": 1517,
+      "source": "  my $rows = $json->decode(read_text($output));"
+    },
+    {
+      "path": "t/codeblock_matches_perl.t",
+      "line": 7,
+      "source": "my $prefix = 'docs/checkpoints/SESSION-STARTUP-READING.87.2-';"
+    },
+    {
+      "path": "t/codeblock_matches_perl.t",
+      "line": 8,
+      "source": "open my $cases_file, '<', $prefix.'cases.json' or die $!;"
+    },
+    {
+      "path": "t/codeblock_matches_perl.t",
+      "line": 11,
+      "source": "open my $producer, '-|', $^X, '-Iperl', $prefix.'probe.pl' or die $!;"
+    },
+    {
+      "path": "t/legacy_pathsearch_fallback.t",
+      "line": 20,
+      "source": "    open my $fh, '<:raw', $path or die \"Cannot read '$path': $!\";"
+    },
+    {
+      "path": "t/legacy_pathsearch_fallback.t",
+      "line": 30,
+      "source": "    open STDOUT, '>', \\$out or die \"Cannot capture stdout: $!\";"
+    },
+    {
+      "path": "t/legacy_pathsearch_fallback.t",
+      "line": 31,
+      "source": "    open STDERR, '>', \\$err or die \"Cannot capture stderr: $!\";"
+    },
+    {
+      "path": "t/staged_ast_enrichment_perl_contract.t",
+      "line": 27,
+      "source": " open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";"
+    }
+  ],
+  "required_input_edges": [
+    {
+      "path": "t/phase0_regression.t",
+      "literal": "my @all_specs = discover_specs($spec_dir);",
+      "role": "spec directory population",
+      "lines": [
+        46
+      ]
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "literal": "my @files = discover_dir_files_by_suffix($dataset->{dir}, $dataset->{suffix});",
+      "role": "conf/tablescript/ebnf directory populations",
+      "lines": [
+        43421
+      ]
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "literal": "'quoted-newlines.json'",
+      "role": "Lispish exact fixture input",
+      "lines": [
+        43319
+      ]
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "literal": "'outward_descriptor_contract.json'",
+      "role": "descriptor contract",
+      "lines": [
+        44508
+      ]
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "literal": "'rule_local_cursor_contract.json'",
+      "role": "cursor contract",
+      "lines": [
+        44510
+      ]
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "literal": "my @markdown_docs = discover_markdown_docs($repo_root);",
+      "role": "root/book Markdown population",
+      "lines": [
+        43975
+      ]
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "literal": "'legacy_pathsearch_fallback.t'",
+      "role": "nested resolution consumer",
+      "lines": [
+        4026
+      ]
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "literal": "'multiline_helper_pattern_validation.t'",
+      "role": "nested helper consumer",
+      "lines": [
+        48436
+      ]
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "literal": "'t/staged_ast_enrichment_perl_contract.t'",
+      "role": "nested staged consumer",
+      "lines": [
+        48444
+      ]
+    },
+    {
+      "path": "t/phase0_regression.t",
+      "literal": "'capability_conformance', 'fixtures'",
+      "role": "named newline fixtures",
+      "lines": [
+        46029
+      ]
+    },
+    {
+      "path": "t/generated_source_contract.t",
+      "literal": "'input.spec'",
+      "role": "generated source spec fixture",
+      "lines": [
+        247
+      ]
+    },
+    {
+      "path": "t/generated_source_contract.t",
+      "literal": "'input.txt'",
+      "role": "generated source input fixture",
+      "lines": [
+        248
+      ]
+    },
+    {
+      "path": "t/generated_source_contract.t",
+      "literal": "'expected.json'",
+      "role": "generated source value oracle",
+      "lines": [
+        249
+      ]
+    },
+    {
+      "path": "t/generated_source_contract.t",
+      "literal": "'examples', 'direct-read-purity.spec'",
+      "role": "fresh generated example",
+      "lines": [
+        736
+      ]
+    },
+    {
+      "path": "t/actionir_helper_source_provenance.t",
+      "literal": "$prefix.'cases.json'",
+      "role": "authored private span fixtures",
+      "lines": [
+        23
+      ]
+    },
+    {
+      "path": "t/staged_ast_enrichment_perl_contract.t",
+      "literal": "'staged_ast_enrichment_contract.json'",
+      "role": "transitive staged contract",
+      "lines": [
+        90
+      ]
+    }
+  ],
+  "classification": "Source-related lexical sites are a census to review, not classified defect counts or a minimal runtime read graph. Complete selected directory contents form a conservative retained superset."
+}

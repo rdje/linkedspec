@@ -1,0 +1,88 @@
+{
+  "summary": {
+    "files": 738,
+    "input_bytes": 84571062,
+    "suites": 13,
+    "original_observed_tests": 1337,
+    "original_boundary_limit": "Original passing channels only; this review does not recover their unretained transitive live input bytes. New full execution belongs to .3.1."
+  },
+  "source_related_sites": 314,
+  "named_input_edges": 16,
+  "controls": [
+    {
+      "name": "omit_transitive_contract_json",
+      "reason": "capsule directory population",
+      "rejected": true
+    },
+    {
+      "name": "change_discovered_corpus_bytes",
+      "reason": "input byte identity conf/ambitiming.conf",
+      "rejected": true
+    },
+    {
+      "name": "drop_discovered_corpus_member_and_manifest_row",
+      "reason": "capsule directory population",
+      "rejected": true
+    },
+    {
+      "name": "change_nested_consumer",
+      "reason": "input byte identity t/staged_ast_enrichment_perl_contract.t",
+      "rejected": true
+    },
+    {
+      "name": "change_frozen_continuity_document",
+      "reason": "input byte identity MEMORY.md",
+      "rejected": true
+    },
+    {
+      "name": "add_unretained_input",
+      "reason": "capsule directory population",
+      "rejected": true
+    },
+    {
+      "name": "drop_required_tree_selection",
+      "reason": "required transitive input trees",
+      "rejected": true
+    },
+    {
+      "name": "relabel_live_Git_boundary",
+      "reason": "immutable Git boundary",
+      "rejected": true
+    },
+    {
+      "name": "forge_bytes_and_hash_for_source_owner",
+      "reason": "immutable source owner perl/LinkedSpec.pm",
+      "rejected": true
+    },
+    {
+      "name": "unsafe_archive_path",
+      "reason": "unsafe capsule entry",
+      "rejected": true
+    },
+    {
+      "name": "missing_final_plan",
+      "reason": "consumer complete positive plan t/phase0_regression.t",
+      "rejected": true
+    },
+    {
+      "name": "missing_planned_result",
+      "reason": "consumer complete ordered reach t/phase0_regression.t",
+      "rejected": true
+    },
+    {
+      "name": "failed_top_level_result",
+      "reason": "consumer failing TAP t/phase0_regression.t",
+      "rejected": true
+    },
+    {
+      "name": "failed_nested_result",
+      "reason": "consumer failing TAP t/phase0_regression.t",
+      "rejected": true
+    },
+    {
+      "name": "missing_prove_final_marker",
+      "reason": "prove final success marker t/phase0_regression.t",
+      "rejected": true
+    }
+  ]
+}

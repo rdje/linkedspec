@@ -1,0 +1,40 @@
+{
+  "boundary": {
+    "revision": "3fc589f8494fd55b4f0154d6c226797a4fa2f711",
+    "overlays": [
+      "docs/linkedspec-book/src/development/documentation-workflow.md"
+    ]
+  },
+  "files": 738,
+  "input_bytes": 84571062,
+  "lexical_sites": 314,
+  "named_input_edges": 16,
+  "smoke_suites": 2,
+  "smoke_tests": 25,
+  "rendered_examples": 2,
+  "capsule_TAP_controls": 15,
+  "actual_post_run_input_RED": {
+    "control": "add an actual unretained input after the first completed consumer",
+    "reason": "runtime input directory population",
+    "observed_rejection": true,
+    "retained_complete_tap_tests": 13,
+    "failed_run_report": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.3.0-control-run.json",
+    "instrument": {
+      "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.3.0-run-controls.py",
+      "sha256": "0f1d27c9c5db6e89eea8161d77a8422c7b2d95fe9c753188025b3fcdb207735c"
+    }
+  },
+  "graph_controls": [
+    {
+      "name": "drop_lexical_site",
+      "rejected": true,
+      "reason": "complete source-related lexical census"
+    },
+    {
+      "name": "drop_input_edge",
+      "rejected": true,
+      "reason": "complete named input edge population"
+    }
+  ],
+  "limit": "Preparation and two-suite smoke only. Thirteen-suite remeasurement and broader gap adjudication remain .3.1; wider historical claim audit remains SESSION-STARTUP-READING.5."
+}

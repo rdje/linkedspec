@@ -2173,13 +2173,48 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
   Acceptance: Exact source/argument/occurrence public identities, all selected regex and statement frames, original private-channel guards and affected consumers pass before closing the family parent. No executable membership or public schema admission.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.3`
-  Status: `pending`
+  Status: `active`
   Goal: Repair the selected consumer/render proof's transitive input closure and distinguishing falsification before further basic provenance work.
   Priority: P1; next immediately after clean regex code landing, before .1.1.1.
   Dependencies: `.1.3.3.0.7.2.2.0.1.1.0`
   Reproduce: claim.py originally selects only Perl/spec files, named suite files and selected tool/book paths. Actual Phase0 reads conf/tablescript/ebnf, contract JSON/fixtures, nested Perl consumers and discovered root/book Markdown; generated-source consumers read examples. The current continuity publishing step changes some root Markdown after the captured run. The original book compiler reads other book sources beyond the chapter/toml in that manifest.
   Impact: Passing finite transcripts remain real, but the broader proof cannot claim retained/gated complete artifact inputs or distinguishing RED controls. Merely updating missing hashes cannot recover unrecorded original live bytes.
   Acceptance: Preserve all original outputs and initial publisher/claim identities. Establish the actual selected input graph using source-backed instrumentation and independent census; capture/freeze actual bytes or use an exact immutable Git boundary, execute reason-checked missing/changed-input and incomplete/failure TAP controls, and re-measure where original input identities cannot be recovered. Reconcile exact producer/document bytes and publication order without a self-hash or after-run live-doc drift. Split before implementation if necessary. All new broader results have complete three-leg claims or explicit scheduled gaps; this bounded repair does not close startup .5's historical project-wide audit.
+
+  Children: `.1.3.3.0.7.2.2.0.1.1.3.0`, `.1.3.3.0.7.2.2.0.1.1.3.1`
+  Safe-slice split: First retain a source-backed conservative input capsule, independent Git census, reason-checked missing/changed-input controls and stable run producer. Then execute the unchanged thirteen suites and book from a fixed capsule, validate complete TAP plus rendered examples, falsify incomplete/failing results and reconcile the earlier disclosed gaps. Original regex captures and initial publisher remain untouched. A capsule binds content and directory membership, including discovered corpus/book inputs; a suite-file hash alone does not.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.3.0`
+  Status: `done`
+  Goal: Prepare and independently verify a recoverable selected consumer/render input capsule and stable measurement producer.
+  Dependencies: `.1.3.3.0.7.2.2.0.1.1.0`
+  Activation: Clean 3fc589f8494fd55b4f0154d6c226797a4fa2f711; ten doctrines and post-commit pointer pass, brief0, no background run. Knowledge gap card, actual selected suite readers/nested consumers, storage/run wrappers, claim contract, relevant roadmap and book development verification sections reviewed.
+  Owned paths: Checkpoint prefix docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.3.0- owns plan.json, prepare.py, inputs.tar.gz, inputs.json, input-graph.json, review.py, verification.json, run.py, run-controls.py/json, control-run.json, smoke.json, accept.py/acceptance.json, claim.py, freeze.py/json, gate-initial.json and all explicitly retained initial/intermediate instruments/results. Also docs/claims/REPO-HYGIENE.8.json is a direct book-input dependency: freeze only its unchanged input manifest at verified activation3fc, without a new cleanup claim. Scratch .linkedspec-data/scratch/selected-proof-closure stays on the repository filesystem. This task/index/resume/live/roadmap/change/notes, gap/closure Knowledge cards, development/documentation-workflow.md book chapter and docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.3.0.json. Freeze the preceding live regex claim at actual 3fc589f8494fd55b4f0154d6c226797a4fa2f711 before bound book inputs change. Production, standard tests, CI/hooks and all submodules remain untouched.
+  Verification tier: `focused`
+  Focused checks: Git-derived input preparation plus independent capsule/source-reader census; observed missing/changed transitive input, changed directory population, unsafe archive path and altered source-owner rejection. Stable run/TAP reviewer controls use retained original passing observations without relabeling their boundary; syntax, book render with full book input capture, memory/Knowledge/claim/history/diff and all doctrines. Full unchanged consumer remeasurement belongs to .3.1 after this clean preparation landing.
+  Canonical trigger: None; retained diagnostic proof instruments and explanatory development documentation only, without registered gate/public DSL/infrastructure changes.
+  Claim verification: `docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.3.0.json`
+  Acceptance: Recover all capsule paths exactly at the declared immutable Git boundary, derive directory membership independently and reject reason-checked missing/changed inputs. Retain the actual instrument and selected read-site evidence. The prepared runner never consumes live continuity bytes, writes only same-volume generated state, verifies all fixed inputs before and after and preserves complete channels incrementally. Do not claim thirteen-suite acceptance before .3.1 executes it.
+
+  Verification: Prepared a conservative capsule of738 exact parent-owned input files from Git3fc589f8494fd55b4f0154d6c226797a4fa2f711 plus one explicit book overlay. Independent Git/rg census verifies314 source-related lexical sites and16 named input edges; these are not classified runtime reads or defects. Two unchanged smoke suites pass25 complete groups and two source-identical examples render. Eighteen reason-checked controls reject, including an actual post-run input mutation that retains completed TAP/channels. Original broader observations stay unchanged; complete thirteen-suite remeasurement is next under .3.1. Actual initial/intermediate producers and outputs are retained. Initial preparation caught the root-level RGX gitlink before artifact creation; exclude gitlinks as metadata without inspecting their payload. Final reviewer compares every regular capsule file and membership with immutable Git; only the tracked development chapter is an explicit candidate overlay. The runner writes completed streams before any later integrity/render assertion; actual extra-corpus RED retains its13-group completed consumer and marks incomplete. Python syntax, actual fixed-capsule book rendering, Knowledge/claim/history/memory/diff and all doctrines govern landing.
+  Initial doctrine gate: Nine PASS; CLAIM-VERIFICATION correctly rejects the dated REPO-HYGIENE.8 live record because it also binds the development chapter. gate-initial.json retains the exact combined tool-returned text; no claim of a separately retained initial staged receipt. freeze.py verifies every original cleanup input at activation3fc, preserves its exact input manifest and all claim/result fields, and changes only live/historical boundary metadata. No fresh census, cleanup or deletion runs. Re-run all doctrines after staging this direct dependency preservation.
+
+  Commit: Bounded preparation only; .3.1 activates from the clean handoff and executes the full selected matrix. No new full-suite/DSL admission.
+
+## Acceptance Checklist — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.3.0
+
+- [x] **REPRODUCE / ISSUE** — Source-bound input-graph.json identifies actual Phase0 LinkedSpec::Get readers/discovery, JSON/fixture/nested consumers and generated-source examples omitted by the original publisher; its passing channels remain observations.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Exact t/phase0_regression.t slurp/discover_markdown_docs/corpus and nested-consumer sites plus generated_source_contract.t public emit_generated_source inputs need content and directory identity; changing continuity bytes cannot repair an older unretained read boundary.
+- [x] **FIX** — Recoverable regular-file capsule, independent Git/rg census and fixed runner preserve original input bytes, explicit book overlay, exact modes, same-volume output and completed channels before later failure.
+- [x] **ADDRESSED (verified)** — Eighteen actual reason-checked controls reject; a real post-run added corpus member raises runtime input population RED while its complete13-group TAP survives. Actual current smoke25 passes and both source-identical examples render.
+- [x] **NO REGRESSION** — Two selected unchanged consumers finish all13+12 planned groups; exact original13-suite1337 TAP is preserved without relabeling its missing input boundary. Full fresh Phase0/matrix belongs to immediate .3.1, so preparation does not assert it ran again.
+- [x] **LOCKSTEP** — Task/index/roadmaps, clean resume/live state, change/notes, Knowledge gap/capsule cards, complete bounded claim and development book methodology updated; prior private/compiler record frozen at3fc589f84. Focused all-doctrine boundary required before landing.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.3.1`
+  Status: `pending`
+  Goal: Re-measure and independently accept the selected unchanged consumer/render proof from a fixed input capsule.
+  Dependencies: `.1.3.3.0.7.2.2.0.1.1.3.0`
+  Acceptance: Execute the exact thirteen selected suites and render original source-identical examples from the recoverable capsule; require actual complete TAP plans and clean finite exit channels. Independently gate all artifact contents and directory memberships, actual producer bytes and original source owners. Observe missing/changed transitive-input and incomplete/failing TAP RED controls. Preserve/supersede the earlier broader observation with explicit original/current boundaries and no after-run document hash refresh. Close .3 only after committed verified remeasurement; then resume statement framing .1.1.1.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2`
   Status: `pending`
@@ -2485,7 +2520,9 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 | 43.4.2.0.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1` | `active` | Producer source provenance and explicit recursive frames. |
 | 43.4.2.0.1.0 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.0` | `done` | Private three-contract spans;18 public identities/39 origins/13 GREEN groups/1199 unchanged tests. |
 | 43.4.2.0.1.1.0 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.0` | `done` | Nine regex contracts;27 public identities/81 spans, complete RED/GREEN and unchanged consumers. |
-| 43.4.2.0.1.1.3 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.3` | `pending` | P1 selected consumer/render input closure and falsification before statement framing. |
+| 43.4.2.0.1.1.3 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.3` | `active` | P1 selected consumer/render input closure and falsification before statement framing. |
+| 43.4.2.0.1.1.3.0 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.3.0` | `done` | 738 exact inputs, 25 smoke groups, two rendered examples and18 controls; full remeasurement next. |
+| 43.4.2.0.1.1.3.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.3.1` | `pending` | Complete unchanged consumer/render remeasurement and falsification. |
 | 43.4.2.0.1.1.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1` | `pending` | Exact basic statement-frame production before family composition. |
 | 43.4.2.0.1.1.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.2` | `pending` | Independent twenty-contract basic family composition. |
 | 43.4.2.0.1.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2` | `pending` | Complete remaining pipeline source provenance before membership. |

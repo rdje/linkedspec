@@ -1,0 +1,11 @@
+{
+  "control": "add an actual unretained input after the first completed consumer",
+  "reason": "runtime input directory population",
+  "observed_rejection": true,
+  "retained_complete_tap_tests": 13,
+  "failed_run_report": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.3.0-control-run.json",
+  "instrument": {
+    "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.3.0-run-controls.py",
+    "sha256": "0f1d27c9c5db6e89eea8161d77a8422c7b2d95fe9c753188025b3fcdb207735c"
+  }
+}
