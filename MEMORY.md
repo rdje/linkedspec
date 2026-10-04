@@ -1,10 +1,10 @@
 # MEMORY
 
-- activation_commit: `e6140e2240879377dc1280b73194cb93554bae7b` — clean basic statement diagnosis activation base.
-- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.1 - retain private splitter source frames`.
-- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.2` (pending) — eleven basic statement event-producer hooks after due daily cleanup.
-- next_action: Own due artifact cleanup from this clean frame commit, retaining proof inputs/caches; then activate .1.1.1.2 to attach eleven original events to validated private frames.
-- in_flight_uncommitted: None; private frames, exact RED/GREEN/consumer/book/claim proof and initial boundaries are committed. No jobs. Daily cleanup is due before further producer work.
+- activation_commit: `abe6756ae638ce68d6219c4794142b02c5450f3e` — clean private splitter frame activation base.
+- latest_completed_leaf: `REPO-HYGIENE.9 - retain daily artifact census`.
+- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.2` (pending) — eleven basic statement event-producer hooks.
+- next_action: Activate .1.1.1.2 from this clean cleanup commit; attach eleven original events to validated private frames with fixed-source RED/GREEN and public compiler identity.
+- in_flight_uncommitted: None; dated cleanup metadata/full channels/book/claim proof and exact historical frame freeze are committed. No jobs; no deletions or recovery/purge.
 - blockers: No access/decision blocker. Matches and attached/marker/value/null/while executors are repaired; control parent/order and raw-expression reporting are reconciled; quoted/comment readiness .7.2/.3 precedes dispatcher/full execution. Other startup repairs remain separate.
   Wrapper startup .7 remains open; recovery/purge stay prohibited.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the

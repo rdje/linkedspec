@@ -1,3 +1,5 @@
+October4 artifact review: REPO-HYGIENE.9 retains the verified exact metadata/full channels with zero removals; private frames are committed at abe6756ae. Eleven event-producer hooks .1.1.1.2 resume next.
+
 # ROADMAP
 
 October4 private frames: SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.1 — Private canonical splitting now retains original scalar frames by returned-array identity and occurrence index. The unchanged28-group fixture fails25 before and passes28 after;177 frames across66 source/seed pairs satisfy authored scalar intervals while complete public/compiler records stay identical. Eight unchanged suites pass1148 groups, including Phase01034, at3766 fixed inputs. Fifteen frame/source, six TAP/consumer and five render controls reject; four original examples render from58 final book inputs. Initial Core/fixture runs remain explicit, non-scalar/transformed/copied returns gain no invented frames, and the prior diagnosis freezes at exact e614 with unchanged28 input hashes. Eleven producer hooks remain .2 and canonical family acceptance .3.

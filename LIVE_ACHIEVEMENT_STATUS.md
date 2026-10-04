@@ -2,17 +2,19 @@
 
 ## Current Activity
 
-Full PNT: private statement frames are complete. Due daily cleanup precedes eleven producer hooks, canonical family acceptance and remaining provenance/membership work.
+Full PNT: daily artifact review and private statement frames are complete. Eleven event-producer hooks precede canonical family acceptance and remaining provenance/membership work.
 
 ## Latest Completed Slice
 
-`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.1` — Private canonical splitting now retains original scalar frames by returned-array identity and occurrence index. The unchanged28-group fixture fails25 before and passes28 after;177 frames across66 source/seed pairs satisfy authored scalar intervals while complete public/compiler records stay identical. Eight unchanged suites pass1148 groups, including Phase01034, at3766 fixed inputs. Fifteen frame/source, six TAP/consumer and five render controls reject; four original examples render from58 final book inputs. Initial Core/fixture runs remain explicit, non-scalar/transformed/copied returns gain no invented frames, and the prior diagnosis freezes at exact e614 with unchanged28 input hashes. Eleven producer hooks remain .2 and canonical family acceptance .3.
+`REPO-HYGIENE.9` — Dated 2026-10-04T20:15:09.584501+00:00 census retains 7741 parent candidates/11634211060 bytes and excludes nine nested repositories. Rust release is absent, deps has zero log/bin files, and incremental retains483 rows/2390943383 bytes. Fresh scoped census and independent per-file lstat agree; aggregate inflation and balanced wrong sizes reject, inclusion/exclusion fixture passes, and actual exit0/full channels/input guards pass four controls. Zero files removed; all proof/cache data retained. Complete58-input book renders one retained-review example with five controls. Prior frame claim freezes at exact abe6756ae after all37 input hashes verify; eleven producer hooks .1.1.1.2 are next.
 
 ## Next Action
 
-After the clean .1 commit, own and complete due artifact cleanup, then activate `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.2` for eleven event-producer hooks. Retain proof inputs/caches; no recovery/purge.
+Activate `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.2` from clean HEAD to attach eleven original events to private source frames. Retain proof inputs/caches; no recovery/purge.
 
 ## Recent Completions
+
+- `2026-10-04` — `REPO-HYGIENE.9` retains the due exact metadata census/full channels with zero removals.
 
 - `2026-10-04` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.1` captures177 private scalar frames,28 GREEN and1148 unchanged consumer groups.
 
@@ -43,8 +45,6 @@ After the clean .1 commit, own and complete due artifact cleanup, then activate 
 - `2026-10-03` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.0` freezes residual provenance/consumer diagnosis and owns quoted-data blockers.
 
 - `2026-10-03` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.6` reconciles bounded control parent under exact canonical acceptance.
-
-- `2026-10-03` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.5` executes guarded callable while with1014 focused tests.
 
 ## History
 

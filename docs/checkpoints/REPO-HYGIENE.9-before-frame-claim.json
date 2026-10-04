@@ -1,0 +1,214 @@
+{
+  "version": 1,
+  "owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.1",
+  "claims": [
+    {
+      "name": "private-canonical-statement-frame-channel",
+      "statement": "The private canonical splitter channel preserves the original callback result and aligned original Unicode scalar source frames. The same 28-group fixture fails 25 groups against the original Core and passes all 28 against the changed Core. Sixty-six complete before/after Toolbox compiler pairs retain identical public results while producing 177 authored source frames after the change. Each fixed boundary supplies 3764 immutable regular Git inputs and the same two explicit fixture/probe overlays, totaling 3766 inputs; only the Core contents differ between the boundaries. Eight unchanged consumers pass 1148 complete top-level groups, including 1034 Phase-0 groups. Fifteen independent frame controls, six consumer controls and five render controls reject their specific corruptions. Four examples render from 58 separately retained book inputs. The original initial fixture/Core boundaries and actual streams remain separately recoverable. All 28 original diagnosis input hashes verify before its claim freezes at the exact activation commit.",
+      "scope": "Bounded private statement-frame implementation, not the eleven statement event hooks, executable membership/comment semantics, runtime execution, DSL/backend admission, cross-host equivalence or global audit closure. The callback executes once with its original arguments; exact returned-array identity and occurrence index select frames, never an equal-text search. Opaque/copied results, changed entries, non-scalar source and custom interior transformations decline fabricated coordinates; unaffected exact entries and nested collectors are covered. Arbitrary malicious callback mutations and arbitrary host syntax are unassessed. The complete supplied-input superset is not a minimal observed runtime read set. Regular Git bytes/modes are recoverable at e6140e2240879377dc1280b73194cb93554bae7b; explicit overlays, original initial Core/test bytes, manifests, producer hashes and both actual channels are retained. Gitlinks and non-regular entries are excluded without payload reads. Every actual command has before/after contents/modes/population guards. Read-only host OS, Perl, Python standard libraries and PATH-resolved prove/mdBook are necessary external execution prerequisites; consumer/render executable SHA identities are recorded separately. Project-owned scratch and outputs stay on the repository filesystem. Eleven producer hooks belong to .1.1.1.2; canonical statement-family acceptance belongs to .1.1.1.3; twenty-contract composition and broader historical claim audit remain open.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.1-capture.py --mode before; bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.1-capture.py --mode after; bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.1-review.py; bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.1-consumers.py; bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.1-consumer-review.py; bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.1-freeze.py; bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.1-book.py --review",
+        "granularity": "Complete immutable Git membership/object/SHA256/mode census and explicit overlays; all actual command boundaries and full channels; 28 ordered fixture groups and exact observed RED; all 22 authored source cases across three seeds, 66 full public compiler pairs and 177 source frames; eight complete ordered positive TAP plans; complete 58-input render capsule and four literal examples; original initial producer/input boundaries and exact 28-input historical freeze.",
+        "result": "The private canonical splitter channel preserves the original callback result and aligned original Unicode scalar source frames. The same 28-group fixture fails 25 groups against the original Core and passes all 28 against the changed Core. Sixty-six complete before/after Toolbox compiler pairs retain identical public results while producing 177 authored source frames after the change. Each fixed boundary supplies 3764 immutable regular Git inputs and the same two explicit fixture/probe overlays, totaling 3766 inputs; only the Core contents differ between the boundaries. Eight unchanged consumers pass 1148 complete top-level groups, including 1034 Phase-0 groups. Fifteen independent frame controls, six consumer controls and five render controls reject their specific corruptions. Four examples render from 58 separately retained book inputs. The original initial fixture/Core boundaries and actual streams remain separately recoverable. All 28 original diagnosis input hashes verify before its claim freezes at the exact activation commit."
+      },
+      "falsify": {
+        "status": "checked",
+        "hypothesis": "Equal raw text, byte offsets, dropped comments/frames, altered public compiler results, unretained inputs, changed producers, incomplete or failed actual commands could falsely pass frame acceptance.",
+        "oracle": "Independent literal-segment construction and Unicode scalar occurrence offsets; full public compiler equality; immutable Git object/content/mode census; exact actual producer and channel hashes; complete ordered TAP reach including nested failures; original authored examples in actual rendered HTML.",
+        "red_control": "The unchanged 28-group fixture observes actual baseline exit 1 and exactly 25 failed top-level groups, then actual changed-Core exit 0 with all 28 groups passing. Fifteen reason-sensitive corruptions reject altered compiler results, dropped/reused/byte-offset/quoted/comment frames, invented event origins, missing or forged source/Core overlays, partial reports, forged producers/guards/exits/channels. Six consumer corruptions reject omitted/partial suites or forged producer/guard/exit/channel. Five render corruptions reject failed render, missing guard, forged producer/channel and missing examples."
+      },
+      "durability": {
+        "status": "checked",
+        "mode": "live",
+        "inputs": [
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.0-capture.py",
+            "sha256": "d054f68eb1a892b56ec2db1d4b6c56bcfb0bce5ac9b9e4fdef225c2273ffb1fe",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.0-cases.json",
+            "sha256": "92e5d6c95fab7cc48502831458e084ee65885b98930798de2059bd7dbfecceca",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.0-review.py",
+            "sha256": "334bd5247ceef4d231e0ced32f4f7a4b4c7d3756377d6a38c036df723cbc6074",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.0-verification.json",
+            "sha256": "caa5b3b8fcc4f987aafa9f7ec9b687308df5785a22568696a3d76509f6677df3",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.1-Core-initial.pm",
+            "sha256": "786443bf474526c3e973bcd6a7be7735f7984fea755049332f59b0d859a3a0b6",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.1-after-initial-inputs.json",
+            "sha256": "6a8b7bcd33c07bd32b6882151ff6438b320b5eb129331c6396049e9a2a71a122",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.1-after-initial.json",
+            "sha256": "c9303765cf82efaeb8b882aa3150dda005579b92aaebb48d8888623e24a5993b",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.1-after-inputs.json",
+            "sha256": "c06ed1a8564840ffc25aadabd52fa1e9f1dcc34c96351d8f4a4346eacbed490d",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.1-after.json",
+            "sha256": "b1ae4343c1d53345a8b99b7085a30d8ae2f9179dd3fd6457d59be8ce064a0cb0",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.1-before-diagnosis-claim.json",
+            "sha256": "6f2b04ae615995a76214636cc06e7c87e4ac44b0ee13e49fff5e35e7dd1b755b",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.1-before-initial-inputs.json",
+            "sha256": "98241748a9880dc47bb54b6aeec4cd0c0e1cf036dfb715b32fdb58f637e32dd2",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.1-before-initial.json",
+            "sha256": "3b0c1feed875bdae6535d6358260599230bb696e148fb4f64e353d5609b0d6b0",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.1-before-inputs.json",
+            "sha256": "d240edbe75242f50f7b3c3290ec12a72b500a054524e3aaff9a50df58fca3c55",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.1-before.json",
+            "sha256": "cebcdfb3a03ecb6a30ae8468b14cae095c57fa8090d7b2d1d9ebd00515462b5f",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.1-book-inputs.json",
+            "sha256": "09918ba7d664ed74d78ad672c90c2a9e1e4c46e3f3017e5c08252048f82284b6",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.1-book-inputs.tar.gz",
+            "sha256": "5949e6b42c5492d6211e98a1395473e9223e71520040e5f6aacaca9c302ac2aa",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.1-book-verification.json",
+            "sha256": "d2a7a902678c18ead046f5059cc4244d81ea6978db2019657aac597231c2d083",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.1-book.json",
+            "sha256": "482e61fbe15b5aeec3a3f5d261f31a729026565284cc18a3e03e18b79b554813",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.1-book.py",
+            "sha256": "39b3aeb3642925e586b9765f0852057ba1c24fff3d43fdf45244e0675ba9e879",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.1-capture.py",
+            "sha256": "6e8545dbaa1313d8b4d99663271c4779325730f040aaf0f4c2bded7b299fd423",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.1-claim.py",
+            "sha256": "6c447cbac0a46d48d9b6e33348cf72146173d5a553c711a20947f214d6da2955",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.1-consumer-review.py",
+            "sha256": "e5175ba6a11dc3fa05b9f69fd1758a914d67800bfaac65b799e593b491004796",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.1-consumer-verification.json",
+            "sha256": "3eb0ae03d14b3eac6867c5660f605275ffcd5837eafab07cc8ded312b39a1cd6",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.1-consumers.json",
+            "sha256": "7ad779b9f9c88063af845bcccd1e642d1439729fcd78f569d17ea1ab8567fe4e",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.1-consumers.py",
+            "sha256": "187a4f4a765cb75268cca511202d175bfc959ae2f7ad8f7fcf0b9f832c48dffb",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.1-fixture-initial.t",
+            "sha256": "068fcd1ec30029f1cc140fed639c3a9029812ecd7d619a902c0c9b280929adb4",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.1-freeze.json",
+            "sha256": "ac06b3a8f37b28f774fb4af59652407ad9dc73f590076e59f46f32f61dc3b863",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.1-freeze.py",
+            "sha256": "ce1d18c27540b77066d2972a0025b9ead271f08beb050ec687a6b51b11fa78c9",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.1-probe.pl",
+            "sha256": "010ab9167cbff30c8d6677c3fb46edc7921b4d25ba9923a9021d018a9d6b2973",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.1-review.py",
+            "sha256": "e6738ea2a0a9bd9cbb53960705a4023a4bbda55537788346f5a3f46f96d5a120",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.1-verification.json",
+            "sha256": "a28bda5c9cfa3faaab44353ef3bd147eb29d061e9d8ff24e5e988d8d467e5cf7",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/dsl/actionir-lowering-mental-model.md",
+            "sha256": "edef2f9282b8445f81f420f40a2d761b42a6c295367aaf11bd308d886a2223f8",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/StatementSplit/Core.pm",
+            "sha256": "03c5721b4c8fc56c9e90322bd7999b7ad6132376efb7200e3d7aea7ab15e9415",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_statement_source_frames.t",
+            "sha256": "c030fd5fb736608f56fa32db56ca65eadd6ce834946e562c2c67978704e771f8",
+            "role": "producer"
+          },
+          {
+            "path": "tools/project_data_env.sh",
+            "sha256": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73",
+            "role": "producer"
+          },
+          {
+            "path": "tools/project_data_run.sh",
+            "sha256": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f",
+            "role": "producer"
+          },
+          {
+            "path": "tools/run_python_project_data.sh",
+            "sha256": "0bc03bb8f4ce550397da9fda086215a1d9f6f452ec413605fbcb8976c06af604",
+            "role": "producer"
+          }
+        ]
+      }
+    }
+  ]
+}

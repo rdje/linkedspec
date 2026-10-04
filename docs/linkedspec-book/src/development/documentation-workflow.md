@@ -100,6 +100,15 @@ after each cleanup rather than accumulating another history log.
 A dated census records file metadata at that moment; it does not prove content ownership
 or authorize deletion. Keep the retained snapshot immutable. A later live census is a new
 observation, while a read-only reviewer can still check the old recorded totals and inputs.
+For a retained daily snapshot, the review order is census completion, fresh scoped comparison,
+and independent per-file metadata checks. Save the actual producers, exit statuses and both
+output channels before advancing the latest date. A successful review may remove zero files.
+For example, the retained October4 snapshot can be checked without recapturing changing state:
+
+```bash
+bash tools/run_python_project_data.sh docs/checkpoints/REPO-HYGIENE.9-review.py
+```
+
 All other Git repositories and submodules are excluded before traversal. A project task or
 notification does not authorize modifying them; their owners apply any upstream repair.
 Retained verification logs and canonical receipts are evidence, so their size or age

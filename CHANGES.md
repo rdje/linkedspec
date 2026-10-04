@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-10-04 — REPO-HYGIENE.9: retain daily artifact census
+
+Dated 2026-10-04T20:15:09.584501+00:00 census retains 7741 parent candidates/11634211060 bytes and excludes nine nested repositories. Rust release is absent, deps has zero log/bin files, and incremental retains483 rows/2390943383 bytes. Fresh scoped census and independent per-file lstat agree; aggregate inflation and balanced wrong sizes reject, inclusion/exclusion fixture passes, and actual exit0/full channels/input guards pass four controls. Zero files removed; all proof/cache data retained. Complete58-input book renders one retained-review example with five controls. Prior frame claim freezes at exact abe6756ae after all37 input hashes verify; eleven producer hooks .1.1.1.2 are next.
+
 ## 2026-10-04 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.1: retain private splitter source frames
 
 Private canonical splitting now retains original scalar frames by returned-array identity and occurrence index. The unchanged28-group fixture fails25 before and passes28 after;177 frames across66 source/seed pairs satisfy authored scalar intervals while complete public/compiler records stay identical. Eight unchanged suites pass1148 groups, including Phase01034, at3766 fixed inputs. Fifteen frame/source, six TAP/consumer and five render controls reject; four original examples render from58 final book inputs. Initial Core/fixture runs remain explicit, non-scalar/transformed/copied returns gain no invented frames, and the prior diagnosis freezes at exact e614 with unchanged28 input hashes. Eleven producer hooks remain .2 and canonical family acceptance .3.

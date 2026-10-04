@@ -6,7 +6,7 @@
 - Status: `completed`
 - Roadmap lane: `Overall roadmap — repository maintenance`
 - Created: `2026-06-16`
-- Last updated: `2026-10-03` (`REPO-HYGIENE.8`: due review before residual-event compiler repair)
+- Last updated: `2026-10-04` (`REPO-HYGIENE.9`: due review after clean private splitter frames)
 - Owner: repo-local workflow
 
 ## Goal
@@ -40,7 +40,7 @@ the durable handoff state current.
 - ID: `REPO-HYGIENE`
   Status: `completed`
   Goal: `Repository hygiene — ignore local artifacts and safely reclaim generated caches`
-  Children: `REPO-HYGIENE.1`, `REPO-HYGIENE.2`, `REPO-HYGIENE.3`, `REPO-HYGIENE.4`, `REPO-HYGIENE.5`, `REPO-HYGIENE.6`, `REPO-HYGIENE.7`, `REPO-HYGIENE.8`
+  Children: `REPO-HYGIENE.1`, `REPO-HYGIENE.2`, `REPO-HYGIENE.3`, `REPO-HYGIENE.4`, `REPO-HYGIENE.5`, `REPO-HYGIENE.6`, `REPO-HYGIENE.7`, `REPO-HYGIENE.8`, `REPO-HYGIENE.9`
 
 - ID: `REPO-HYGIENE.1`
   Status: `done`
@@ -184,6 +184,23 @@ the durable handoff state current.
   Commit: `REPO-HYGIENE.8 - retain daily artifact census` (Git owns identity).
   Handoff: Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.1 from clean HEAD; no required background job remains.
 
+- ID: `REPO-HYGIENE.9`
+  Status: `done`
+  Goal: Complete the due daily artifact census after committed private splitter frames, preserving evidence, caches and repository boundaries.
+  Activation: Clean abe6756ae638ce68d6219c4794142b02c5450f3e; all ten doctrines/post-pointer passed, brief0, no jobs and clean Git confirmed before pivot.
+  Reproduce: Latest cleanup October3 16:37:49 UTC is over24 hours old on October4. No cleanup or dirty-tree pivot occurred during the frame slice.
+  Owned paths: docs/ARTIFACT_CLEANUP.md; new docs/checkpoints/REPO-HYGIENE.9-* census/reviewer/actual capture/book/claim producers and results; docs/claims/REPO-HYGIENE.9.json; cleanup Knowledge and public documentation-workflow.md; this tree/index, ROADMAP.md/ROADMAP_V2.md, bounded history/live/resume and derived map. Scratch .linkedspec-data/scratch/hygiene9. Prior frame claim historical freeze at exact abe6756ae before complete-publication inputs change; retain its original 37 input identities. All previous proof inputs remain immutable.
+  Verification tier: `focused`
+  Focused checks: Same-volume non-following parent metadata census and three explicit Rust log/bin locations; all submodules/nested repositories, symlinks, other volumes, managed runs, caches and generated book/Dart outputs excluded. Fresh census and independent per-file lstat; aggregate/balanced-size corruptions and inclusion/exclusion fixture. Retain all candidates unless exact disposability is proved. Capture actual producer/status/full channels, render public retention teaching, and run memory/history/Knowledge/claims/diff/all doctrines.
+  Canonical trigger: none; recurring metadata record under unchanged storage/CI/runtime/dependency mechanisms.
+  Claim verification: `docs/claims/REPO-HYGIENE.9.json`
+  Acceptance: Verify dated exact candidate rows and exclusions before overwriting latest cleanup record. No age/size-based deletion, process recovery/purge or other-repository write. Resume self-containment .1.1.1.2 from a clean committed handoff.
+  Owned documentation drift: ROADMAP_V2 still names statement framing as next after .1 completed private frames. Correct that stale route with this handoff to eleven producer hooks; do not close their task or alter measured prior proof.
+
+  Verification: PASS; Dated 2026-10-04T20:15:09.584501+00:00 census retains 7741 parent candidates/11634211060 bytes and excludes nine nested repositories. Rust release is absent, deps has zero log/bin files, and incremental retains483 rows/2390943383 bytes. Fresh scoped census and independent per-file lstat agree; aggregate inflation and balanced wrong sizes reject, inclusion/exclusion fixture passes, and actual exit0/full channels/input guards pass four controls. Zero files removed; all proof/cache data retained. Complete58-input book renders one retained-review example with five controls. Prior frame claim freezes at exact abe6756ae after all37 input hashes verify; eleven producer hooks .1.1.1.2 are next.
+  Commit: `REPO-HYGIENE.9 - retain daily artifact census` (Git owns identity).
+  Handoff: Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.2 from clean HEAD; no required job remains.
+
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
@@ -194,6 +211,7 @@ the durable handoff state current.
 | 4 | `REPO-HYGIENE.6` | `done` | Due October1 census retains proof/cache artifacts and records the requested exit handoff. |
 | 5 | `REPO-HYGIENE.7` | `done` | Due October2 review after clean instrument recovery; retain proof/cache data and enforce other-repository exclusion. |
 | 6 | `REPO-HYGIENE.8` | `done` | Due October3 review after clean diagnosis; preserve proof inputs/cache and return to compiler .6.1. |
+| 7 | `REPO-HYGIENE.9` | `done` | Due October4 review after clean private frames; preserve evidence and resume eleven producer hooks. |
 
 ## Decisions
 
@@ -222,6 +240,7 @@ the durable handoff state current.
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-10-04` | `REPO-HYGIENE.9` | Actual census/live lstat/fresh metadata, two metadata/four channel/five book controls; claim/Knowledge/history/memory/doctrine/diff | PASS — zero removals; retained exact snapshot; producer hooks .1.1.1.2 next. |
 | `2026-10-03` | `REPO-HYGIENE.8` | Tracked census/live lstat/fresh metadata and corruption/fixture controls; book/history/memory/Knowledge/doctrine/diff | PASS — zero removals; exact snapshot retained; compiler .6.1 next. |
 | `2026-10-02` | `REPO-HYGIENE.7` | Archived census/review; actual per-path and fixture/corrupt-count controls; book/memory/history/Knowledge/doctrine/diff | PASS — zero removals; exact dated scope/enumeration in checkpoint. Resume claim-policy .0.2.1.4.1. |
 | `2026-10-01` | `REPO-HYGIENE.6` | Parent artifact and explicit Rust log/bin census; permitted process/run inspection; mdBook render; memory/history/Knowledge/doctrine/diff gates | PASS — zero removals; exact counts and exclusions in the checkpoint. Milestone2aeed31ff preserves canonical signoff; .1.1.3.4 remains unstarted. |
@@ -235,6 +254,7 @@ the durable handoff state current.
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `REPO-HYGIENE.9` | `REPO-HYGIENE.9 - retain daily artifact census` | Actual full channels and independent metadata; preserve evidence/cache and return to eleven statement hooks. |
 | `REPO-HYGIENE.8` | `REPO-HYGIENE.8 - retain daily artifact census` | Dated snapshot/current OS metadata proof; preserve artifacts and return to .6.1. |
 | `REPO-HYGIENE.7` | `REPO-HYGIENE.7 - review artifacts and correct read-only boundary` | Due review preserves all proof/cache data and excludes every other repository. |
 | `REPO-HYGIENE.6` | `REPO-HYGIENE.6 - record artifact review and exit handoff` | Due review preserves evidence and caches; clean resume continues .1.1.3.4. |
@@ -245,6 +265,8 @@ the durable handoff state current.
 | `REPO-HYGIENE.1` | `pending` | Populated after commit |
 
 ## Changelog
+
+- 2026-10-04: `.9` verifies due metadata/actual-channel/book proof with zero removals, preserves all inputs/caches and resumes eleven statement event hooks.
 
 - 2026-10-03: `.8` completes the due source-bound census/live metadata controls with zero removals, retains proof/cache data and returns to residual event repair.
 
