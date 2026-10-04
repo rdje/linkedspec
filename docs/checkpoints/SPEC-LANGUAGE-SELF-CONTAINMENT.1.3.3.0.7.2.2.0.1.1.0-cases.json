@@ -1,0 +1,146 @@
+[
+  {
+    "id": "assign_call_my_quoted_and_repeated",
+    "contract": "assign_call_my",
+    "action": "note=\"雪;my $x = call(Done)\";\r\n  my $x = call(Done);\tmy $x = call(Done)",
+    "raws": [
+      "my $x = call(Done)",
+      "my $x = call(Done)",
+      "my $x = call(Done)"
+    ],
+    "starts": [
+      8,
+      32,
+      52
+    ],
+    "source": "Top:: I { note=\"雪;my $x = call(Done)\";\r\n  my $x = call(Done);\tmy $x = call(Done) }\nDone: /x/ I.return(\"child\")\n"
+  },
+  {
+    "id": "assign_call_quoted_and_repeated",
+    "contract": "assign_call",
+    "action": "note=\"雪;$x = call(Done)\";\r\n  $x = call(Done);\t$x = call(Done)",
+    "raws": [
+      "$x = call(Done)",
+      "$x = call(Done)",
+      "$x = call(Done)"
+    ],
+    "starts": [
+      8,
+      29,
+      46
+    ],
+    "source": "Top:: I { note=\"雪;$x = call(Done)\";\r\n  $x = call(Done);\t$x = call(Done) }\nDone: /x/ I.return(\"child\")\n"
+  },
+  {
+    "id": "push_child_call_indexed_builtin_quoted_and_repeated",
+    "contract": "push_child_call_indexed_builtin",
+    "action": "note=\"雪;push @x, call(Done)->[2]\";\r\n  push @x, call(Done)->[2];\tpush @x, call(Done)->[2]",
+    "raws": [
+      "push @x, call(Done)->[2]",
+      "push @x, call(Done)->[2]",
+      "push @x, call(Done)->[2]"
+    ],
+    "starts": [
+      8,
+      38,
+      64
+    ],
+    "source": "Top:: I { note=\"雪;push @x, call(Done)->[2]\";\r\n  push @x, call(Done)->[2];\tpush @x, call(Done)->[2] }\nDone: /x/ I.return(\"child\")\n"
+  },
+  {
+    "id": "push_child_call_builtin_quoted_and_repeated",
+    "contract": "push_child_call_builtin",
+    "action": "note=\"雪;push @x, call(Done)\";\r\n  push @x, call(Done);\tpush @x, call(Done)",
+    "raws": [
+      "push @x, call(Done)",
+      "push @x, call(Done)",
+      "push @x, call(Done)"
+    ],
+    "starts": [
+      8,
+      33,
+      54
+    ],
+    "source": "Top:: I { note=\"雪;push @x, call(Done)\";\r\n  push @x, call(Done);\tpush @x, call(Done) }\nDone: /x/ I.return(\"child\")\n"
+  },
+  {
+    "id": "return_call_quoted_and_repeated",
+    "contract": "return_call",
+    "action": "note=\"雪;return call(Done)\";\r\n  return call(Done);\treturn call(Done)",
+    "raws": [
+      "return call(Done)",
+      "return call(Done)",
+      "return call(Done)"
+    ],
+    "starts": [
+      8,
+      31,
+      50
+    ],
+    "source": "Top:: I { note=\"雪;return call(Done)\";\r\n  return call(Done);\treturn call(Done) }\nDone: /x/ I.return(\"child\")\n"
+  },
+  {
+    "id": "entry_slot_quoted_and_repeated",
+    "contract": "entry_slot",
+    "action": "note=\"雪;entry_slot( )\";\r\n  entry_slot( );\tentry_slot( )",
+    "raws": [
+      "entry_slot( )",
+      "entry_slot( )",
+      "entry_slot( )"
+    ],
+    "starts": [
+      8,
+      27,
+      42
+    ],
+    "source": "Top:: I { note=\"雪;entry_slot( )\";\r\n  entry_slot( );\tentry_slot( ) }\nDone: /x/ I.return(\"child\")\n"
+  },
+  {
+    "id": "gap_span_quoted_and_repeated",
+    "contract": "gap_span",
+    "action": "note=\"雪;gap_span()\";\r\n  gap_span();\tgap_span()",
+    "raws": [
+      "gap_span()",
+      "gap_span()",
+      "gap_span()"
+    ],
+    "starts": [
+      8,
+      24,
+      36
+    ],
+    "source": "Top:: I { note=\"雪;gap_span()\";\r\n  gap_span();\tgap_span() }\nDone: /x/ I.return(\"child\")\n"
+  },
+  {
+    "id": "gap_text_quoted_and_repeated",
+    "contract": "gap_text",
+    "action": "note=\"雪;gap_text( )\";\r\n  gap_text( );\tgap_text( )",
+    "raws": [
+      "gap_text( )",
+      "gap_text( )",
+      "gap_text( )"
+    ],
+    "starts": [
+      8,
+      25,
+      38
+    ],
+    "source": "Top:: I { note=\"雪;gap_text( )\";\r\n  gap_text( );\tgap_text( ) }\nDone: /x/ I.return(\"child\")\n"
+  },
+  {
+    "id": "gap_kind_quoted_and_repeated",
+    "contract": "gap_kind",
+    "action": "note=\"雪;gap_kind()\";\r\n  gap_kind();\tgap_kind()",
+    "raws": [
+      "gap_kind()",
+      "gap_kind()",
+      "gap_kind()"
+    ],
+    "starts": [
+      8,
+      24,
+      36
+    ],
+    "source": "Top:: I { note=\"雪;gap_kind()\";\r\n  gap_kind();\tgap_kind() }\nDone: /x/ I.return(\"child\")\n"
+  }
+]

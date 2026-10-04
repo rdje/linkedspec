@@ -9,6 +9,7 @@ BEGIN {
  my $perl_root = File::Basename::dirname($linked_spec_dir);
  unshift @INC, $perl_root unless grep { defined($_) && $_ eq $perl_root } @INC;
 }
+use LinkedSpec::ActionIR::ScannerCore ();
 
 sub try_scan_contract_ir_events {
  my ($id, $code) = @_;
@@ -43,7 +44,9 @@ sub _scan_contract_zero_arg_gap_helper {
  my ($name, $code) = @_;
  my @events;
  while ($code =~ /\b(?<expr>\Q$name\E\s*\(\s*\))/g) {
-  push @events, {raw => $+{expr}, args => {}};
+  my ($source_start, $source_end) = ($-[0], $+[0]);
+  push @events, LinkedSpec::ActionIR::ScannerCore::_record_scanned_source_event(
+   {raw => $+{expr}, args => {}}, $code, $source_start, $source_end);
  }
  return \@events
 }
@@ -52,7 +55,10 @@ sub _scan_contract_assign_call_my {
  my ($code) = @_;
  my @events;
 while ($code =~ /\bmy\s+(?<target>\$\w+)\s*=\s*call\s*\(\s*(?<callee>\w+)\s*\)/g) {
- push @events, {raw => $&, args => {target => $+{target}, callee => $+{callee}, scope => 'my'}};
+ my ($source_start, $source_end) = ($-[0], $+[0]);
+ push @events, LinkedSpec::ActionIR::ScannerCore::_record_scanned_source_event(
+  {raw => $&, args => {target => $+{target}, callee => $+{callee}, scope => 'my'}},
+  $code, $source_start, $source_end);
 }
  return \@events
 }
@@ -61,7 +67,10 @@ sub _scan_contract_assign_call {
  my ($code) = @_;
  my @events;
 while ($code =~ /(?<!\bmy\s)(?<target>\$\w+)\s*=\s*call\s*\(\s*(?<callee>\w+)\s*\)/g) {
- push @events, {raw => $&, args => {target => $+{target}, callee => $+{callee}, scope => 'existing'}};
+ my ($source_start, $source_end) = ($-[0], $+[0]);
+ push @events, LinkedSpec::ActionIR::ScannerCore::_record_scanned_source_event(
+  {raw => $&, args => {target => $+{target}, callee => $+{callee}, scope => 'existing'}},
+  $code, $source_start, $source_end);
 }
  return \@events
 }
@@ -70,7 +79,10 @@ sub _scan_contract_push_child_call_indexed_builtin {
  my ($code) = @_;
  my @events;
 while ($code =~ /\bpush\s+\@(?<target>\w+)\s*,\s*call\s*\(\s*(?<callee>\w+)\s*\)\s*->\s*\[\s*(?<index>\d+)\s*\]/g) {
- push @events, {raw => $&, args => {target => $+{target}, callee => $+{callee}, index => $+{index}}};
+ my ($source_start, $source_end) = ($-[0], $+[0]);
+ push @events, LinkedSpec::ActionIR::ScannerCore::_record_scanned_source_event(
+  {raw => $&, args => {target => $+{target}, callee => $+{callee}, index => $+{index}}},
+  $code, $source_start, $source_end);
 }
  return \@events
 }
@@ -79,7 +91,10 @@ sub _scan_contract_push_child_call_builtin {
  my ($code) = @_;
  my @events;
 while ($code =~ /\bpush\s+\@(?<target>\w+)\s*,\s*call\s*\(\s*(?<callee>\w+)\s*\)(?!\s*->\s*\[)/g) {
- push @events, {raw => $&, args => {target => $+{target}, callee => $+{callee}}};
+ my ($source_start, $source_end) = ($-[0], $+[0]);
+ push @events, LinkedSpec::ActionIR::ScannerCore::_record_scanned_source_event(
+  {raw => $&, args => {target => $+{target}, callee => $+{callee}}},
+  $code, $source_start, $source_end);
 }
  return \@events
 }
@@ -88,7 +103,10 @@ sub _scan_contract_return_call {
  my ($code) = @_;
  my @events;
 while ($code =~ /\breturn\s+call\s*\(\s*(?<callee>\w+)\s*\)/g) {
- push @events, {raw => $&, args => {callee => $+{callee}, context => 'return'}};
+ my ($source_start, $source_end) = ($-[0], $+[0]);
+ push @events, LinkedSpec::ActionIR::ScannerCore::_record_scanned_source_event(
+  {raw => $&, args => {callee => $+{callee}, context => 'return'}},
+  $code, $source_start, $source_end);
 }
  return \@events
 }

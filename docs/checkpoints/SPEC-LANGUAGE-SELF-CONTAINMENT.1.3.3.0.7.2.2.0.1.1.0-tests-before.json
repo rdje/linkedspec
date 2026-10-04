@@ -1,0 +1,25 @@
+{
+  "mode": "before",
+  "command": [
+    "prove",
+    "-v",
+    "-Iperl",
+    "t/actionir_basic_regex_source_provenance.t"
+  ],
+  "baseline": "1",
+  "test_path": "t/actionir_basic_regex_source_provenance.t",
+  "test_sha256": "fe624a438869370454d3b401992ad4a94455b5a01fb9ba2ee257532b4635a3da",
+  "exit": 1,
+  "stdout": {
+    "encoding": "gzip-base64",
+    "bytes": 4153,
+    "sha256": "9cd558431d3653a3da5fdccbdaadffd9d41586194839b49f21fae007bda4a4fa",
+    "data": "H4sIAAAAAAAC/+2XUW/TMBDH3/MpTuKlE22Xbh2QSntAoElICKENxGPkOkdrzbWDz+4aPj3nphnZWLuSvSYPVXL23f3vd44b+1MhvbJGuXwuSMnc4QI3OdngJOals2s0wkgcexiPIXkFN2HukfwMBJFamFwKrfNVlf8K1mORC1NwiBIFPyTAl72FCYygdGrNNnAorSuUWbAFCd0aCaRdlRp5sAxzrSQg5/TUeJ+xtzIFx+Qf48E6tVBGaHDiDqyUwTlkgaAV+a2PsT76nbMfCrkELjDw9JXw/LAUBNbgvZ46Wttv+jCfrkAEv7QOCyAuVjgoLanI7F7iBbvUxOCnQl0QkBcV2OBJFU+VNRmPL5JdvkjnCJZ7yPfYO2I/e4T9GeZloGUul0oX9fQodcPz50Fpr0zfh659iDq7wD3Qm74nL+zJ9ImeHNkLhz64fm96Gf/o/BzIFnOO4aqctPU98q7I30Sdhzm2iC9EmVMp+i2mM++37HyQ4iPaHjf96u5M+92O9l6Kj2jfsriedlfa2Y72XortvXtV+gq2Ry/YHr2iJEP3LAE3TCHSneNSrJV17R48PDe0+bZGGvMRX1rN1AMfAG1Crf+oxvxwH22s7be9sbXXZGNrk2uwZkksNo1x/58V+0/S5GOYKxtoCJH5TjU3P4PBHbfVw9l5Oh1CusnS9CS5EkrHwVPOSXWbCJLkW3S9CauVcBVcY2mdT0b/Xok//kA9+BGzz7bpIcanWSy0FjCD7IQR7NT4ehQmo4yNX6wZ/UZnY8E+rkwfeDBLrnguXU6GdbDLSToESOGO2yO1lbdAKAkGkI7TFAI5qO+oIni9vZ+C/GuW0X65s3/4+v0kuUYKmvVevf/0OfkDepf89jkQAAA="
+  },
+  "stderr": {
+    "encoding": "gzip-base64",
+    "bytes": 5167,
+    "sha256": "dacfb3fc974bf1e15fda1d7027b3b801eca26d579d149b755ade73bc05cb950c",
+    "data": "H4sIAAAAAAAC/+2VT0sDMRDF7/kUAxb2ZK1WQQU9iSdvHkXCdHe6OzRNYjIr7bd3qlaLf6BVbyawC8lmhvdefmwM6NjT5xrZUQNCWaAirDvAWnp0MEfRSYcZgieIiR9RCELiln1l1uUoIAdawcFzshPMXNtELS1sDn2qycYUHsmjr2ko4FhbHR8N38pfRxvkHKpRtbFOi0i1UKPr48qYL+WybyiSvry4JWAvXUj6MdfoMEEMmVe68u/UjjfV3krqNZ5EGSakQUDD0ykl9q32Pv9oa6C+9i/vRvdwAVdBa3wQNcZZNnYO1k7XO6vTteCbEGZZZcwIlqGH6Yv3o2f3eixTOBka8ykVzJlbbzUEZ+dL+9AHbW7RN2o1kh5iU5kfhnGiR2cKOf+BnIJNwWZLbGKfO1t37JoXdFYpLZSdSc9O2BeUCko/RakgVBDaEaFEKrBcYgWb3bDRNNLSZhekUFOo2ZaaFqPNEcsFVZjZiRmhRfnPFGZ2Ymam0fw5M98JOnsXdDgamie/k5GvLxQAAA=="
+  }
+}

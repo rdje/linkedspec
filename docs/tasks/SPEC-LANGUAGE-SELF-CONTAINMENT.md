@@ -2128,10 +2128,58 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 - [x] **LOCKSTEP** — Two exact examples render with partial three-contract scope; task/index/resume/live/roadmap/book/Knowledge/claims and bounded histories agree. git diff --check and focused scripts/check_doctrines.sh hook acceptance govern the clean commit.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1`
-  Status: `pending`
+  Status: `active`
   Goal: Complete PrimitiveBasicRules source provenance.
   Dependencies: `.1.3.3.0.7.2.2.0.1.0`
+  Children: `.1.3.3.0.7.2.2.0.1.1.0`, `.1.3.3.0.7.2.2.0.1.1.1`, `.1.3.3.0.7.2.2.0.1.1.2`, `.1.3.3.0.7.2.2.0.1.1.3`
+  Safe-slice split: Nine regex contracts retain direct full-input coordinates; eleven statement contracts depend on trimmed splitter output. Split direct regex recording from exact statement-frame production and independent family composition. Do not infer statement occurrence identity from equal raw text; source comments can make splitter output discontinuous, so inspect the actual public split/probe before choosing a frame representation.
   Acceptance: Select exact regex and statement frames, preserve all raw/args and current five callback dependencies; verify actual source/occurrence/direct consumer oracles before commit.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.0`
+  Status: `done`
+  Goal: Retain exact private match provenance for the nine PrimitiveBasicRules regex contracts.
+  Dependencies: `.1.3.3.0.7.2.2.0.1.0`
+  Activation: Clean 80ecf47f258a7f23a59598a1c5500a34fe662a7c; hooks configured, brief empty and no background job. README/bootstrap/memory, relevant roadmap, scanner/dependency/occurrence/private-channel owners and public ActionIR chapter reviewed. Supplied policies match recorded source hashes; cleanup is less than24 hours old.
+  Owned paths: perl/LinkedSpec/ActionIR/Scanner/PrimitiveBasicRules.pm; t/actionir_basic_regex_source_provenance.t; checkpoint prefix docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.0- (before-PrimitiveBasicRules.pm, cases.json, probe.pl, capture.py, before.json, after.json, tests.py, tests-before.json, tests-after.json, consumers.py/json, review.py, verification.json, book.py/json, claim.py, publish.py, capture-initial.py, claim-initial.py/json); one claim record, prior live claim historical freeze, task/index/resume/live/roadmap/change/notes/book/Knowledge. No statement, Core/dependency, CI, spec or other-repository edits.
+  Verification tier: `focused`
+  Focused checks: Source-bound unchanged public Scanner and Toolbox substitution/descriptor/dump/emission before/after; independent scalar positions for nine contracts and repeated quoted/real occurrences, Unicode/CRLF and original arguments; permanent complete frozen-owner RED/GREEN; previous private-channel and direct scanner/AST/order/trace/raw/generated/gap consumers, full Phase0, read-only evidence corruptions, actual book render, syntax, memory/Knowledge/claim/history/diff and all doctrines.
+  Canonical trigger: None; private telemetry only with public event/lowering/contract/dependency/CI behavior unchanged. Public membership/replacement/registration acceptance remains separately canonical.
+  Claim verification: `docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.0.json`
+  Acceptance: Capture original full-source regex coordinates before recording; original event objects/raw/args and family ordering remain exact. Cover assign_call_my, assign_call, push_child_call_indexed_builtin, push_child_call_builtin, return_call and entry_slot/gap_span/gap_text/gap_kind. Record quoted syntactic matches without filtering. Preserve initial failures and artifacts; no recovery/purge. Commit before statement-frame implementation.
+
+  Verification: Nine basic regex contracts retain exact private full-input spans.27 source/seed before-after compiler pairs preserve public events/arguments/substitution/diagnostics/dumps/emission;81 origins match independent scalar positions. The same ten-group fixture fails nine before, passes ten after and retains its empty-result guard. Thirteen unchanged suites pass1337 top-level tests, including complete Phase0. Twelve evidence corruptions reject; two examples render with explicitly documented Markdown newline normalization. Quoted syntactic matches remain recorded; statement/recursive framing, membership/replacement and canonical recurrence remain open. Executed captures retain capture-initial.py byte identity; current capture.py corrects only its inherited header wording. Prior three-contract claim is frozen at80ecf47f2 without manifest changes. Focused doctrine/claim/Knowledge/history/diff and hooks govern landing.
+  Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.0 - retain basic regex match provenance`
+  Final claim review / owned defect: The inherited claim publisher hashes selected suite producers but omits transitive Phase0 corpus/contract/nested-consumer inputs and the complete book source population. Phase0 also scans live root/book Markdown; continuity publishing after the run changes some of those bytes. The actual passing transcripts remain untouched, but their broader falsification/input-closure legs are not yet checked. Preserve the original claim/publisher as explicitly superseded initial artifacts; separate fully source-bound private/compiler measurements from the honestly disclosed consumer/render gap. P1 .1.1.3 runs immediately after this clean code commit and before statement work; broader prior-record audit stays with startup .5. No tests are re-blessed and no full-proof closure is claimed.
+
+## Acceptance Checklist — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.0
+
+- [x] **REPRODUCE / ISSUE** — Public Scanner and call_spec_handler_subst/LinkedSpec::Get probes retain exact source/raw inputs; complete frozen-owner ten-group TAP fails nine missing-origin groups, empty-result guard green.
+- [x] **ROOT CAUSE (WHY + WHERE)** — PrimitiveBasicRules emits original events without producer positions; equal quoted/real raw text cannot identify the original regex occurrence. The private source hook already exists; nine direct full-input contracts need pre-record match coordinates.
+- [x] **FIX** — One producer imports the Core hook and captures original regex start/end before recording. Existing regexes, event objects/arguments, five callback dependencies and all statement scans remain unchanged.
+- [x] **ADDRESSED (verified)** — Complete unchanged fixture goes from nine failing groups to ten passing groups; actual failed-name difference is precisely the nine producer cases.81 origins in27 pairs satisfy independent Unicode scalar/source/object oracles.
+- [x] **NO REGRESSION** — All27 public compiler identities match; thirteen unchanged suites reach their complete GREEN TAP plans, including full Phase0; syntax and twelve evidence corruption controls pass.
+- [x] **LOCKSTEP** — Exact-source book examples/render, Knowledge, prior historical claim, task/index/roadmap/resume/live/change/notes and bounded-history/claim/doctrine gates accompany this private-only slice. Statement framing .1.1.1 follows after clean commit.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1`
+  Status: `pending`
+  Goal: Preserve exact source frames for the eleven basic statement contracts.
+  Dependencies: `.1.3.3.0.7.2.2.0.1.1.3`
+  Acceptance: Use Toolbox split/public scanner probes first; independently test comments, quotes, repeated identical statements, attached boundaries, whitespace and Unicode/CRLF. Select producer-side framing without raw-key source search or five-callback expansion; explicitly own any non-contiguous original-source representation before implementation. Split further if needed.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.2`
+  Status: `pending`
+  Goal: Independently compose all twenty PrimitiveBasicRules provenance contracts.
+  Dependencies: `.1.3.3.0.7.2.2.0.1.1.1`
+  Acceptance: Exact source/argument/occurrence public identities, all selected regex and statement frames, original private-channel guards and affected consumers pass before closing the family parent. No executable membership or public schema admission.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.3`
+  Status: `pending`
+  Goal: Repair the selected consumer/render proof's transitive input closure and distinguishing falsification before further basic provenance work.
+  Priority: P1; next immediately after clean regex code landing, before .1.1.1.
+  Dependencies: `.1.3.3.0.7.2.2.0.1.1.0`
+  Reproduce: claim.py originally selects only Perl/spec files, named suite files and selected tool/book paths. Actual Phase0 reads conf/tablescript/ebnf, contract JSON/fixtures, nested Perl consumers and discovered root/book Markdown; generated-source consumers read examples. The current continuity publishing step changes some root Markdown after the captured run. The original book compiler reads other book sources beyond the chapter/toml in that manifest.
+  Impact: Passing finite transcripts remain real, but the broader proof cannot claim retained/gated complete artifact inputs or distinguishing RED controls. Merely updating missing hashes cannot recover unrecorded original live bytes.
+  Acceptance: Preserve all original outputs and initial publisher/claim identities. Establish the actual selected input graph using source-backed instrumentation and independent census; capture/freeze actual bytes or use an exact immutable Git boundary, execute reason-checked missing/changed-input and incomplete/failure TAP controls, and re-measure where original input identities cannot be recovered. Reconcile exact producer/document bytes and publication order without a self-hash or after-run live-doc drift. Split before implementation if necessary. All new broader results have complete three-leg claims or explicit scheduled gaps; this bounded repair does not close startup .5's historical project-wide audit.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2`
   Status: `pending`
@@ -2436,7 +2484,10 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 | 43.4.2.0.0 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.0` | `done` | Two raw-key mapper failures and complete expected RED; production unchanged. |
 | 43.4.2.0.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1` | `active` | Producer source provenance and explicit recursive frames. |
 | 43.4.2.0.1.0 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.0` | `done` | Private three-contract spans;18 public identities/39 origins/13 GREEN groups/1199 unchanged tests. |
-| 43.4.2.0.1.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1` | `pending` | Complete PrimitiveBasicRules source provenance before membership. |
+| 43.4.2.0.1.1.0 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.0` | `done` | Nine regex contracts;27 public identities/81 spans, complete RED/GREEN and unchanged consumers. |
+| 43.4.2.0.1.1.3 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.3` | `pending` | P1 selected consumer/render input closure and falsification before statement framing. |
+| 43.4.2.0.1.1.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1` | `pending` | Exact basic statement-frame production before family composition. |
+| 43.4.2.0.1.1.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.2` | `pending` | Independent twenty-contract basic family composition. |
 | 43.4.2.0.1.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2` | `pending` | Complete remaining pipeline source provenance before membership. |
 | 43.4.2.0.1.3 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3` | `pending` | Complete recursive/composed flow source provenance before membership. |
 | 43.4.2.0.1.4 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4` | `pending` | Complete remaining legacy, to be split source provenance before membership. |
@@ -2483,6 +2534,8 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 - None for `.1.1`. The September27 clean prioritization supersedes the earlier callable-first schedule. Format implementation and the optional frontend remain gated by their own prerequisites.
 
 ## Verification Log
+
+- `2026-10-04` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.0` — Nine basic regex contracts retain exact private full-input spans.27 source/seed before-after compiler pairs preserve public events/arguments/substitution/diagnostics/dumps/emission;81 origins match independent scalar positions. The same ten-group fixture fails nine before, passes ten after and retains its empty-result guard. Thirteen unchanged suites pass1337 top-level tests, including complete Phase0. Twelve evidence corruptions reject; two examples render with explicitly documented Markdown newline normalization. Quoted syntactic matches remain recorded; statement/recursive framing, membership/replacement and canonical recurrence remain open.
 
 October2 `.1.2.3`: original16 sources/66 digests plus24 policy anchors remain exact;632 reason-sensitive mutations/four controls, public ordinary progress and two sorted-view oracles pass. Typed/recognition/progressive/staged/write/leaf/diagnostic guards and original objective audit pass; tool-storage39 and15 rendered claims on two pages pass. Knowledge/history/memory/doctrine/diff and exact staged canonical receipt govern policy landing; actual canonical outcome belongs in the commit body. No runtime admission or resource/security overclaim.
 
@@ -2535,6 +2588,8 @@ September27 `.1.1.1`: seven neutral/structural checks, 34 ledger source-path/con
 | `2026-07-30` | `.0` | ADR/KM retrieval; KM 762/6,186; mdBook 79/13,884; memory; whitespace; seven doctrines; canonical CLI 66x2 + Phase 0 1,031/1,031 in 641s | `pass` |
 
 ## Commit Log
+
+- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.0 - retain basic regex match provenance` — private nine-contract instrumentation; Git owns commit identity.
 
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.4.1 - enforce three-leg claim publishing` — ADR0126 local rules/review and registered disclosure/source-identity check; wider audit remains open.
 

@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-10-04 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.0: retain basic regex match provenance
+
+Nine basic regex contracts retain exact private full-input spans.27 source/seed before-after compiler pairs preserve public events/arguments/substitution/diagnostics/dumps/emission;81 origins match independent scalar positions. The same ten-group fixture fails nine before, passes ten after and retains its empty-result guard. Thirteen unchanged suites pass1337 top-level tests, including complete Phase0. Broader consumer/render falsification and transitive input closure are disclosed gaps owned by .1.1.3. Twelve evidence corruptions reject; two examples render with explicitly documented Markdown newline normalization. Quoted syntactic matches remain recorded; statement/recursive framing, membership/replacement and canonical recurrence remain open.
+
 ## 2026-10-04 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.0: retain private helper match provenance
 
 Implement the invocation-local ScannerCore sidecar and return_general/set_value/if_flow hooks in four source owners. Original objects/arguments/public fields stay intact. Six exact sources/18 before-after pairs preserve complete public events, diagnostics, substitution, parser dumps and emission;39 private origins satisfy independent scalar spans. The same permanent13-group fixture fails11 before/two guards green and passes all13 after. Full Phase0 1034 plus ten unchanged165 tests PASS; twelve evidence corruptions reject and two exact examples render. Freeze prior mapping claim historically. Remaining producers, membership/replacement/recurring canonical acceptance and marker/comments remain explicit successors; quoted syntactic matches are retained, so no quote/readiness fix or backend admission is claimed.

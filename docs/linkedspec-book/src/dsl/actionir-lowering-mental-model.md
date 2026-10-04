@@ -259,6 +259,34 @@ frames, quoted-source selection, exact replacement, and final recurring acceptan
 are separate steps. This private channel does not repair the quoted-value or readiness
 defects described below.
 
+Nine basic regex contracts also retain their full-input scalar match positions in
+that private channel: the two call assignments, indexed and unindexed built-in
+child pushes, `return call(...)`, and `entry_slot()`, `gap_span()`, `gap_text()`,
+`gap_kind()`. This includes the existing syntactic matches inside strings; none
+of those matches has yet been classified as executable. Public raw text, arguments,
+lowering and event order remain unchanged. Statement-based compatibility scans
+still need their own source frames.
+
+These are compiler inspection examples, not recommended parsing actions. Each
+contains one quoted syntactic occurrence followed by two equal real occurrences:
+
+```spec
+Top:: I { note="雪;my $x = call(Done)";
+  my $x = call(Done);	my $x = call(Done) }
+Done: /x/ I.return("child")
+```
+
+```spec
+Top:: I { note="雪;gap_text( )";
+  gap_text( );	gap_text( ) }
+Done: /x/ I.return("child")
+```
+
+The captured action inputs use CRLF after the quoted assignment; the book displays
+LF. That display normalization does not alter the retained compiler input or its
+Unicode scalar position oracle. Private provenance also keeps the original event
+object, rather than reconstructing it by matching equal raw text.
+
 The earlier hash-key residual drain and its raw permutations remain historical evidence.
 These exact sources return `ok` and `a` respectively, both natively and from independently
 loaded emitted source in the measured before/after source-and-seed comparisons:
