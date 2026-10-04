@@ -2,17 +2,19 @@
 
 ## Current Activity
 
-Full PNT: private statement frames and eleven producer hooks are implemented. Canonical statement-family acceptance precedes wider composition and remaining provenance/membership work.
+Full PNT: the eleven statement contracts have independently accepted private frames, event origins and requested-source authority. Twenty-contract basic composition follows before remaining provenance/membership work.
 
 ## Latest Completed Slice
 
-`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.2` — Eleven basic statement producers now retain original event/argument identity and exact private scalar origins. The same29-group fixture is RED21/GREEN0;111 event origins and177 unchanged frames across66 full public/compiler pairs satisfy independent original occurrence intervals. Both main boundaries supply3813 inputs (3811 immutable Git plus two common overlays); only PrimitiveBasicRules/ScannerCore change. A foreign-source callback defect is reproduced and fixed by snapshotting requested source; separate source-fixed29-group guard is RED1/GREEN0 with three probe pairs and five controls. All initial28-group source/fixture/capture/reviewer and pre-guard consumer channels remain separate. Eight final guarded consumers pass1148 complete groups, including Phase01034, with exact manifest/observation/tree/producer bindings and eight controls. Main16, guard5, consumer8 and book5 total34 reason-specific controls; five examples render from58 complete book inputs. Prior cleanup claim freezes at exact aef9 after21 input hashes verify. Canonical family acceptance .3 and wider composition remain separately owned.
+`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.3` — Fresh eleven-contract recurrence supplies 3,864 immutable regular Git inputs with no overlays: four fixtures pass 80 groups; 66 complete guarded compiler records retain 177 authored scalar frames and 111 original event origins. Three foreign-source probes preserve events with zero invented origins. Fifteen acceptance controls observe RED. Original reviewer defects, renamed-file selection failures and unbound traceback-context diagnostics retain their actual source/channels with explicit limitations. Two fresh source-bound failed replays match all six original logical frames and pass six distinguishing controls, including both original-context REDs. The interrupted first canonical attempt retains its exact staged diff/combined output and observed exit 143, with no complete pass or receipt claim. Complete 58-input book renders five original examples and diagnostic-source teaching in two chapters, with six render controls. All 61 original producer-claim input hashes verify before historical freeze at ab2c. Production and permanent fixtures remain unchanged. Exact staged canonical CI must pass again before family closeout; wider twenty-contract composition and semantic repairs retain their owners.
 
 ## Next Action
 
-Activate `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.3` from clean HEAD; independently accept the eleven-contract frame/producer composition and run exact staged canonical CI. Wider twenty-contract composition and executable membership retain separate owners.
+Activate `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.2` from clean HEAD; independently compose all nine regex and eleven statement producers. Remaining producers, executable membership, replacement, marker/comments and trace repairs retain their separate owners.
 
 ## Recent Completions
+
+- `2026-10-05` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.3` accepts3864-input statement recurrence,80 fixture groups/111 origins and canonical family landing.
 
 - `2026-10-04` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.2` retains111 origins/29 GREEN, fixes foreign-source authority and verifies1148 guarded consumer groups.
 
@@ -43,8 +45,6 @@ Activate `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.3` from clean HEA
 - `2026-10-03` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.1` preserves pending scan occurrences; exact canonical receipt gates landing.
 
 - `2026-10-03` — `REPO-HYGIENE.8` verifies the due retained census/per-file controls with zero removals.
-
-- `2026-10-03` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.0` freezes residual provenance/consumer diagnosis and owns quoted-data blockers.
 
 ## History
 

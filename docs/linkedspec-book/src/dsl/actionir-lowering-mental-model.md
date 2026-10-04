@@ -374,8 +374,13 @@ hooks and passes all 29 afterward, including callback count/argument/error guard
 Across the 22 authored inputs and three seeds, all 111 emitted origins match independent
 original occurrence intervals; all 177 statement frames and 66 full public compiler
 records remain unchanged. This bounded proof does not classify executable membership,
-repair comment semantics or admit arbitrary host syntax. Canonical statement-family
-acceptance and the wider twenty-contract composition remain separate tasks.
+repair comment semantics or admit arbitrary host syntax. The statement-family acceptance repeats all eleven contracts from one immutable
+source boundary. It independently checks original frame/event occurrences, exact event
+identity, unchanged complete compiler records, foreign-source rejection and all four
+source-provenance fixtures. Complete TAP plans and both output channels are retained;
+missing inputs, incomplete plans and nested failures are distinguishing rejection
+controls. Canonical CI gates this family closeout on the exact staged candidate. The
+wider twenty-contract composition remains separately owned.
 
 
 These are compiler inspection examples, not recommended parsing actions. Each

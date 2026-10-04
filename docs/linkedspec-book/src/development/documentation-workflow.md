@@ -213,6 +213,24 @@ ignored-producer, control and alignment audit owned by startup task .5. Diagnost
 repair .29 remains required before that audit closeout. Older checkpoints and their
 historical results retain their original scope and bytes.
 
+
+### Replayed diagnostic source
+
+A logical compile filename supplies coordinates; it does not bind the source text
+that Python displays in a traceback. If retained bytes contain
+`raise RuntimeError("original")` but a newer file at that filename contains
+`raise RuntimeError("newer")`, a replay can raise the original exception while
+printing the newer line. That displayed line is another artifact input.
+
+The retained reviewer replay supplies the exact original text to the traceback
+formatter before execution and independently compares every displayed logical frame
+with the executed source at its reported line number. Its source hashes, commands,
+input guards, exit codes and both channels are retained. Two original diagnostics
+with mismatched context remain explicitly limited historical evidence; fresh bound
+replays reproduce their same failures with the correct original lines. Distinguishing
+controls reject the old context, incomplete runs, changed producers, erased failures
+and forged channels. A filename alone is never evidence of diagnostic source identity.
+
 ## Definition of done
 
 If a slice changes what the outside world needs to understand about LinkedSpec, the book should move too.

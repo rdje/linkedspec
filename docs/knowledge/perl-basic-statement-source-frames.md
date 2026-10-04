@@ -8,7 +8,7 @@ answers:
   - "how are statement source offsets distinguished from equal quoted raw strings"
   - "what does default trim_action_ir_value remove"
 date: 2026-10-04
-status: diagnosis historical at c02/e614; private frames .1 and eleven producer hooks .2 implemented; canonical family acceptance pending
+status: diagnosis historical at c02/e614; private frames .1 and eleven producer hooks .2 implemented; statement-family acceptance .3 verified with canonical landing requirement
 tags: [perl, actionir, statements, source-provenance, comments, unicode]
 evidence: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.0 captures22 authored cases/three seeds at3738 regular immutable Git inputs plus two explicit overlays,59 statements and37 selected events per run, zero private origins;19 diagnosis/9 consumer/5 book RED controls,52 complete consumer groups and three rendered original examples."
 reverify:
@@ -52,3 +52,19 @@ before/after contents, modes and population gates are retained. OS/host Perl and
 libraries are necessary read-only prerequisites; no cross-host transcript identity or
 new runtime/backend admission is claimed. The first incorrect AST-suite selection is
 retained separately; the corrected existing four suites pass52 complete groups.
+
+Statement-family .3 repeats the complete immutable ab2c activation boundary:3864
+regular inputs/no overlays, four fixtures80 groups,66 exact prior guarded compiler
+recurrences,177 authored frames and111 exact original event origins. Three foreign-source
+probes preserve events without origins. Fifteen reason-specific RED controls and five
+render controls pass; final source-bound diagnostic repair and updated teaching follow below.
+The original .2 claim freezes at ab2c after61 input hashes verify. Exact staged canonical
+receipt is the family landing condition; twenty-contract composition remains .1.1.2.
+
+The final .3 boundary additionally binds two failed reviewer replays to the exact
+executed source: all six logical traceback frames match, and six controls reject both
+original unbound contexts plus producer/channel/completeness corruptions. Original
+uncached diagnostics disclose the unbound formatter input rather than claiming it
+recovered. Final 58-input book renders five examples/two chapters with six controls.
+The interrupted first canonical attempt is retained without a complete pass claim;
+exact staged canonical CI repeats after repair. Follow python-replay-traceback-source-binding.

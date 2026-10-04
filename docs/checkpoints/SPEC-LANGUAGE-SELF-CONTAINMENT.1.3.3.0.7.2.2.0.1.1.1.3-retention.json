@@ -1,0 +1,287 @@
+{
+  "complete": true,
+  "runs": [
+    {
+      "case": "heading",
+      "command": [
+        "bash",
+        "tools/project_data_run.sh",
+        "python3",
+        "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.3-replay-review.py",
+        "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.3-review-initial.py",
+        "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.3-review.py"
+      ],
+      "exit": 1,
+      "stdout": {
+        "encoding": "gzip-base64",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "data": "H4sIAAAAAAAC/wMAAAAAAAAAAAA="
+      },
+      "stderr": {
+        "encoding": "gzip-base64",
+        "bytes": 1330,
+        "sha256": "4e8233ba37038ef808b83c0d715efed598a6effe67846438c5d3376396db9ab7",
+        "data": "H4sIAAAAAAAC/81T30/jMAx+56+weGknde02DiEqQJqgICRunNQeL9OoQuZBtDSpkvQOdDr+dpwcnCp+6F5OYvZD7MS1v8+1K8M43jC+hrjR1oFBjsoBZ1KCZNYN8i2AUyERtrMrLbsGbVaWJ9mJ5mQrZ7Nb4e66m0wKtcalbZFnS81txu+Qr1stfEj5rTgeXkxnZ9+nZ8WwLC5Oh8eXs2p6PvtazKp0nO6QjtK9dEI6It/rztBgK9kDHT8E/kzbh+0EqArCZJSAUHDQ6GUn8YgAAuA98pjrpiWosdWd4ZjAihzFGrIi/x4NEvgV1bW/ruso77/XtTfCLdkNE4rs34OQ+5Hk+v/LZzb2VUfHXyZvW+qbEPc7sEGA98cBr4cYAIYaNQ2MNi7+cyT0qsQKaYb/cniRjf4Ze/uBW59Sj+NK3LvOoH1mOY9Mp2y0mI8Wb2m+O7YbxHS3z/SFWGDBrEXjwCJ3Qis7H+f5ZAGHh1AVZVXSvvpVl+iQQiQF4RJsJ8htddtJ5j+KQqJn+WgFp6EORRfGaJPDv9NuPQFULOW2MgUAAA=="
+      },
+      "source_sha256": "379e29bb064d7b6b38b68cbd94e720efd5f1decc7c5dc157525119f2ae61f5ba",
+      "inputs_before": [
+        {
+          "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.0-capture.py",
+          "sha256": "d054f68eb1a892b56ec2db1d4b6c56bcfb0bce5ac9b9e4fdef225c2273ffb1fe"
+        },
+        {
+          "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.0-review.py",
+          "sha256": "334bd5247ceef4d231e0ced32f4f7a4b4c7d3756377d6a38c036df723cbc6074"
+        },
+        {
+          "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.2-review.py",
+          "sha256": "cf28bc3356c4f10576034c01f6a21c3133d423e2d9ac7115b4d322fcb5f9c59c"
+        },
+        {
+          "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.3-capture.py",
+          "sha256": "cf43df266755b8358ee028344b56b42658fbd6f22206dd2862a0a6e7f9cda8a2"
+        },
+        {
+          "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.3-inputs.json",
+          "sha256": "2872427dc82c1ff3884b881f9bbb27a2a7c52958dfe4db7ab3cc019c80a86d3f"
+        },
+        {
+          "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.3-observations.json",
+          "sha256": "95eec5be3e7afdd4cae6b76a3f77ffb4622d29e8c1441d8a1459d0cb1148a531"
+        },
+        {
+          "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.3-replay-review.py",
+          "sha256": "b888c0c2b5fa6eec0235d90df0dca98404b2885f641397109f18603c6ffafbcd"
+        },
+        {
+          "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.3-review-contract-initial.py",
+          "sha256": "9d53aa84242b033dcbfd25b6f504b82e98f4ce5cf6d467e7447b19f456654c09"
+        },
+        {
+          "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.3-review-initial.py",
+          "sha256": "379e29bb064d7b6b38b68cbd94e720efd5f1decc7c5dc157525119f2ae61f5ba"
+        },
+        {
+          "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.3-review-retention.py",
+          "sha256": "8197b34592465b2897523bd5d48deae9e6feff04614229793669d7360d8cae8b"
+        },
+        {
+          "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.3-review.py",
+          "sha256": "188229d1c2c66b58351b9691124d65be5825993c16b43ab3324f9030c29709ac"
+        }
+      ],
+      "inputs_after": [
+        {
+          "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.0-capture.py",
+          "sha256": "d054f68eb1a892b56ec2db1d4b6c56bcfb0bce5ac9b9e4fdef225c2273ffb1fe"
+        },
+        {
+          "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.0-review.py",
+          "sha256": "334bd5247ceef4d231e0ced32f4f7a4b4c7d3756377d6a38c036df723cbc6074"
+        },
+        {
+          "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.2-review.py",
+          "sha256": "cf28bc3356c4f10576034c01f6a21c3133d423e2d9ac7115b4d322fcb5f9c59c"
+        },
+        {
+          "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.3-capture.py",
+          "sha256": "cf43df266755b8358ee028344b56b42658fbd6f22206dd2862a0a6e7f9cda8a2"
+        },
+        {
+          "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.3-inputs.json",
+          "sha256": "2872427dc82c1ff3884b881f9bbb27a2a7c52958dfe4db7ab3cc019c80a86d3f"
+        },
+        {
+          "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.3-observations.json",
+          "sha256": "95eec5be3e7afdd4cae6b76a3f77ffb4622d29e8c1441d8a1459d0cb1148a531"
+        },
+        {
+          "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.3-replay-review.py",
+          "sha256": "b888c0c2b5fa6eec0235d90df0dca98404b2885f641397109f18603c6ffafbcd"
+        },
+        {
+          "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.3-review-contract-initial.py",
+          "sha256": "9d53aa84242b033dcbfd25b6f504b82e98f4ce5cf6d467e7447b19f456654c09"
+        },
+        {
+          "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.3-review-initial.py",
+          "sha256": "379e29bb064d7b6b38b68cbd94e720efd5f1decc7c5dc157525119f2ae61f5ba"
+        },
+        {
+          "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.3-review-retention.py",
+          "sha256": "8197b34592465b2897523bd5d48deae9e6feff04614229793669d7360d8cae8b"
+        },
+        {
+          "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.3-review.py",
+          "sha256": "188229d1c2c66b58351b9691124d65be5825993c16b43ab3324f9030c29709ac"
+        }
+      ]
+    },
+    {
+      "case": "contract",
+      "command": [
+        "bash",
+        "tools/project_data_run.sh",
+        "python3",
+        "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.3-replay-review.py",
+        "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.3-review-contract-initial.py",
+        "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.3-review.py"
+      ],
+      "exit": 1,
+      "stdout": {
+        "encoding": "gzip-base64",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "data": "H4sIAAAAAAAC/wMAAAAAAAAAAAA="
+      },
+      "stderr": {
+        "encoding": "gzip-base64",
+        "bytes": 824,
+        "sha256": "975ded60dffb409a8a512eb12dfcd690bc9e71c2ee33edcf8054a6950cb31e9f",
+        "data": "H4sIAAAAAAAC/81S20rDQBB971cMfUkKufQCFYsKpU2LWKOQ6otoSDdTG7rJht2NtpT67c4GlXp5FHTmYc9cdvZwduYyYbhI2BrsXCgNEhkWGljCOfBE6dagATDJOELTvxW8ylH5UTT2x4IRLrTyHzO9qhY+z4o1pqpE5qeCKZ+tkK1LkZmW6DoYubNhOL0ZTgM3CmYTd3QVzofn4WUQzr2O1yNve0del7xNsfGeK7HkyZaOpwyfvXLbdIBeQei2HcgKOMlFWnE8I4IAuEFmM5GXRNVWopIMHVhSUCQ5IcvUrZYDOyuOTTqOrcFhPY4NqLOE8yQrCO9b9ewXsofft78U9ouinX73u6RGBPtQgX9E+Lhf8zUUa4JMFJo2WSs4BSWkxtTesTvrPW3dw1JIYOYObogZNbx97k/26bcbF7gNpBSSNuNjXuMVddINFzgDAAA="
+      },
+      "source_sha256": "9d53aa84242b033dcbfd25b6f504b82e98f4ce5cf6d467e7447b19f456654c09",
+      "inputs_before": [
+        {
+          "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.0-capture.py",
+          "sha256": "d054f68eb1a892b56ec2db1d4b6c56bcfb0bce5ac9b9e4fdef225c2273ffb1fe"
+        },
+        {
+          "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.0-review.py",
+          "sha256": "334bd5247ceef4d231e0ced32f4f7a4b4c7d3756377d6a38c036df723cbc6074"
+        },
+        {
+          "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.2-review.py",
+          "sha256": "cf28bc3356c4f10576034c01f6a21c3133d423e2d9ac7115b4d322fcb5f9c59c"
+        },
+        {
+          "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.3-capture.py",
+          "sha256": "cf43df266755b8358ee028344b56b42658fbd6f22206dd2862a0a6e7f9cda8a2"
+        },
+        {
+          "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.3-inputs.json",
+          "sha256": "2872427dc82c1ff3884b881f9bbb27a2a7c52958dfe4db7ab3cc019c80a86d3f"
+        },
+        {
+          "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.3-observations.json",
+          "sha256": "95eec5be3e7afdd4cae6b76a3f77ffb4622d29e8c1441d8a1459d0cb1148a531"
+        },
+        {
+          "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.3-replay-review.py",
+          "sha256": "b888c0c2b5fa6eec0235d90df0dca98404b2885f641397109f18603c6ffafbcd"
+        },
+        {
+          "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.3-review-contract-initial.py",
+          "sha256": "9d53aa84242b033dcbfd25b6f504b82e98f4ce5cf6d467e7447b19f456654c09"
+        },
+        {
+          "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.3-review-initial.py",
+          "sha256": "379e29bb064d7b6b38b68cbd94e720efd5f1decc7c5dc157525119f2ae61f5ba"
+        },
+        {
+          "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.3-review-retention.py",
+          "sha256": "8197b34592465b2897523bd5d48deae9e6feff04614229793669d7360d8cae8b"
+        },
+        {
+          "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.3-review.py",
+          "sha256": "188229d1c2c66b58351b9691124d65be5825993c16b43ab3324f9030c29709ac"
+        }
+      ],
+      "inputs_after": [
+        {
+          "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.0-capture.py",
+          "sha256": "d054f68eb1a892b56ec2db1d4b6c56bcfb0bce5ac9b9e4fdef225c2273ffb1fe"
+        },
+        {
+          "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.0-review.py",
+          "sha256": "334bd5247ceef4d231e0ced32f4f7a4b4c7d3756377d6a38c036df723cbc6074"
+        },
+        {
+          "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.2-review.py",
+          "sha256": "cf28bc3356c4f10576034c01f6a21c3133d423e2d9ac7115b4d322fcb5f9c59c"
+        },
+        {
+          "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.3-capture.py",
+          "sha256": "cf43df266755b8358ee028344b56b42658fbd6f22206dd2862a0a6e7f9cda8a2"
+        },
+        {
+          "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.3-inputs.json",
+          "sha256": "2872427dc82c1ff3884b881f9bbb27a2a7c52958dfe4db7ab3cc019c80a86d3f"
+        },
+        {
+          "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.3-observations.json",
+          "sha256": "95eec5be3e7afdd4cae6b76a3f77ffb4622d29e8c1441d8a1459d0cb1148a531"
+        },
+        {
+          "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.3-replay-review.py",
+          "sha256": "b888c0c2b5fa6eec0235d90df0dca98404b2885f641397109f18603c6ffafbcd"
+        },
+        {
+          "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.3-review-contract-initial.py",
+          "sha256": "9d53aa84242b033dcbfd25b6f504b82e98f4ce5cf6d467e7447b19f456654c09"
+        },
+        {
+          "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.3-review-initial.py",
+          "sha256": "379e29bb064d7b6b38b68cbd94e720efd5f1decc7c5dc157525119f2ae61f5ba"
+        },
+        {
+          "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.3-review-retention.py",
+          "sha256": "8197b34592465b2897523bd5d48deae9e6feff04614229793669d7360d8cae8b"
+        },
+        {
+          "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.3-review.py",
+          "sha256": "188229d1c2c66b58351b9691124d65be5825993c16b43ab3324f9030c29709ac"
+        }
+      ]
+    }
+  ],
+  "inputs": [
+    {
+      "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.0-capture.py",
+      "sha256": "d054f68eb1a892b56ec2db1d4b6c56bcfb0bce5ac9b9e4fdef225c2273ffb1fe"
+    },
+    {
+      "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.0-review.py",
+      "sha256": "334bd5247ceef4d231e0ced32f4f7a4b4c7d3756377d6a38c036df723cbc6074"
+    },
+    {
+      "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.2-review.py",
+      "sha256": "cf28bc3356c4f10576034c01f6a21c3133d423e2d9ac7115b4d322fcb5f9c59c"
+    },
+    {
+      "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.3-capture.py",
+      "sha256": "cf43df266755b8358ee028344b56b42658fbd6f22206dd2862a0a6e7f9cda8a2"
+    },
+    {
+      "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.3-inputs.json",
+      "sha256": "2872427dc82c1ff3884b881f9bbb27a2a7c52958dfe4db7ab3cc019c80a86d3f"
+    },
+    {
+      "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.3-observations.json",
+      "sha256": "95eec5be3e7afdd4cae6b76a3f77ffb4622d29e8c1441d8a1459d0cb1148a531"
+    },
+    {
+      "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.3-replay-review.py",
+      "sha256": "b888c0c2b5fa6eec0235d90df0dca98404b2885f641397109f18603c6ffafbcd"
+    },
+    {
+      "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.3-review-contract-initial.py",
+      "sha256": "9d53aa84242b033dcbfd25b6f504b82e98f4ce5cf6d467e7447b19f456654c09"
+    },
+    {
+      "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.3-review-initial.py",
+      "sha256": "379e29bb064d7b6b38b68cbd94e720efd5f1decc7c5dc157525119f2ae61f5ba"
+    },
+    {
+      "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.3-review-retention.py",
+      "sha256": "8197b34592465b2897523bd5d48deae9e6feff04614229793669d7360d8cae8b"
+    },
+    {
+      "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.3-review.py",
+      "sha256": "188229d1c2c66b58351b9691124d65be5825993c16b43ab3324f9030c29709ac"
+    }
+  ],
+  "instrument_sha256": "8197b34592465b2897523bd5d48deae9e6feff04614229793669d7360d8cae8b",
+  "replay_sha256": "b888c0c2b5fa6eec0235d90df0dca98404b2885f641397109f18603c6ffafbcd"
+}

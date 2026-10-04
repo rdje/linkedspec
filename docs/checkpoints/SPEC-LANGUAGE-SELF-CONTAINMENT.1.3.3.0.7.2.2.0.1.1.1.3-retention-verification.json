@@ -1,0 +1,39 @@
+{
+  "complete": true,
+  "failed_replays": 2,
+  "logical_frames": 6,
+  "controls": [
+    {
+      "name": "original unbound heading context",
+      "observed": "RED",
+      "reason": "traceback context matches executed source"
+    },
+    {
+      "name": "original unbound contract context",
+      "observed": "RED",
+      "reason": "traceback context matches executed source"
+    },
+    {
+      "name": "promote partial replays",
+      "observed": "RED",
+      "reason": "complete retention replays"
+    },
+    {
+      "name": "forge replay producer",
+      "observed": "RED",
+      "reason": "actual source-bound replay producer"
+    },
+    {
+      "name": "erase actual failure",
+      "observed": "RED",
+      "reason": "actual distinguishing failure"
+    },
+    {
+      "name": "forge retained channel",
+      "observed": "RED",
+      "reason": "retention channel bytes"
+    }
+  ],
+  "instrument_sha256": "8197b34592465b2897523bd5d48deae9e6feff04614229793669d7360d8cae8b",
+  "scope": "Original uncached diagnostics retain an unbound formatter input and are not promoted to complete input closure. Fresh cached replays bind all displayed lines to actual executed bytes."
+}

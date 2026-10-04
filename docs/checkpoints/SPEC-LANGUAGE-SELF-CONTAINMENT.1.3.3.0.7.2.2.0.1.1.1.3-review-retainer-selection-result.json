@@ -1,0 +1,36 @@
+{
+  "command": [
+    "bash",
+    "tools/run_python_project_data.sh",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.3-review-initial.py"
+  ],
+  "exit": 1,
+  "inputs": [
+    {
+      "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.3-review-initial.py",
+      "sha256": "379e29bb064d7b6b38b68cbd94e720efd5f1decc7c5dc157525119f2ae61f5ba"
+    },
+    {
+      "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.3-inputs.json",
+      "sha256": "2872427dc82c1ff3884b881f9bbb27a2a7c52958dfe4db7ab3cc019c80a86d3f"
+    },
+    {
+      "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.3-observations.json",
+      "sha256": "95eec5be3e7afdd4cae6b76a3f77ffb4622d29e8c1441d8a1459d0cb1148a531"
+    }
+  ],
+  "stdout": {
+    "encoding": "gzip-base64",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "data": "H4sIAAAAAAAC/wMAAAAAAAAAAAA="
+  },
+  "stderr": {
+    "encoding": "gzip-base64",
+    "bytes": 1241,
+    "sha256": "523d672578af4bca6b84504b31e864d4723caf6d33c252fa2a3e7733144f2786",
+    "data": "H4sIAAAAAAAC/82UXWvbMBSG7/MrDr1JwhIpH4WUsIyF1CmFzgtLVgZjCbJ9XGuRdYwkL+Smv32S07GMrWx36zlgH30gvc9ryRsjUkxEuodOSdaBwRS1g1QoBUpY1522AJZSIVzwe1J1iZav19f8mlJfa2f5g3RFnXAl9R4zW2HKM0otTwtM9xXJMGW9ihb9u3l883F+E/XX0d2yv3gfb+a38bso3rAhG/scsAkb+Rz4dshx3+A3iYe+1NJJoVh1vOiB3wZheDnqgdTwuqSsVvjGSwQohdSdblM++thuX6Dwq6tGd5D6pFnLHL3tM/hqSTNFIrOdlXBFZ/UhWt5+glfQlrqqnWVhQrvLDIpslxwd2k73RPvnePy3OLeJKscLKjExeOALVEoYXh1dQfrtmA0veXiwCV8aUeKBzN7yVTPK8h89/B6NlaRtM9dbmzwt0DQrzxW6drvgzG53ZsxkMmmc+UnXoB38JwKLKmdUofYnNMNZ2yTtHiR1nqOR+mE26IKwkE9bv6Nvn4kXgjxskANZo92gq40GSSfYgN2DgHxG2wPUKWWnyhgytgcaD2HBXw7DXwx4PlrBmJjckmqdRWGHKXz2b00w+gIxga3TAvLgHhnIpP9fODLHKbT//y07vyit7wJY41PZBAAA"
+  },
+  "instrument_sha256": "a7e190f3bd4c2d43dd36d04e5fbf2192db5aa7494c49931546c2ff6a5917416e",
+  "scope": "Original reviewer source executed with its original logical filename; selection-failure attempt retained separately. Complete GREEN TAP is preserved unchanged."
+}

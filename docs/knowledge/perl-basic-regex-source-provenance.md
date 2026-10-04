@@ -35,7 +35,7 @@ The preceding three-contract channel proof is historical at80ecf47f258a7f23a5959
 Its current permanent guard suite remains separate. P1 selected consumer/render input-closure repair `.1.1.3` is complete through
 source-bound1337-group composition under `.1.1.3.1`; its original disclosed
 observation remains preserved and does not widen the private/compiler result. Eleven basic statement
-contracts now have exact splitter frames under `.1.1.1.1` and producer hooks under `.1.1.1.2`; canonical family acceptance `.1.1.1.3` is next, then
+contracts now have exact splitter frames under `.1.1.1.1` and producer hooks under `.1.1.1.2`; statement-family acceptance `.1.1.1.3` verifies their unchanged composition with exact canonical landing proof; next
 `.1.1.2` independently composes the family. Remaining scanner producers,
 membership/replacement, recurring canonical admission, marker provenance and
 comments retain their existing owners. No public event schema or backend admission

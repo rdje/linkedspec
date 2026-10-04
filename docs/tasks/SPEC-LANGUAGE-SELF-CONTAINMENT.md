@@ -6,7 +6,7 @@
 - Status: `active` / closure definition
 - Roadmap lane: `.spec language evolution / expressive self-containment and alternate authoring profiles`
 - Created: `2026-07-30`
-- Last updated: `2026-10-04`
+- Last updated: `2026-10-05`
 - Owner: repo-local workflow
 
 ## Goal
@@ -2161,13 +2161,13 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 - [x] **LOCKSTEP** — Exact-source book examples/render, Knowledge, prior historical claim, task/index/roadmap/resume/live/change/notes and bounded-history/claim/doctrine gates accompany this private-only slice. Statement framing .1.1.1 follows after clean commit.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1`
-  Status: `active`
+  Status: `done`
   Goal: Preserve exact source frames for the eleven basic statement contracts.
   Dependencies: `.1.3.3.0.7.2.2.0.1.1.3`
   Acceptance: Use Toolbox split/public scanner probes first; independently test comments, quotes, repeated identical statements, attached boundaries, whitespace and Unicode/CRLF. Select producer-side framing without raw-key source search or five-callback expansion; explicitly own any non-contiguous original-source representation before implementation. Split further if needed.
 
 
-  Children: `.1.3.3.0.7.2.2.0.1.1.1.0-.3`; diagnosis is complete; private frame capture, producer hooks and canonical family acceptance are separately owned.
+  Children: `.1.3.3.0.7.2.2.0.1.1.1.0-.3`; diagnosis, private frame capture and eleven producer hooks are complete; .3 independently accepts their composition with an exact staged canonical landing condition. Only this statement family closes.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.0`
   Status: `done`
@@ -2251,15 +2251,36 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 - [x] **LOCKSTEP** — Full58-input book renders five examples/five controls; prior21-input cleanup claim freezes at exact aef9. Claims, Knowledge, task/index/roadmap/resume/live/change/notes and memory/history/diff/doctrine gates accompany focused landing. Canonical family acceptance and wider composition remain separately owned.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.3`
-  Status: `pending`
+  Status: `done`
   Goal: Independently accept the eleven-contract statement frame/producer composition and close only this family parent.
   Dependencies: `.1.1.1.2`
   Owned paths: Source-bound recurring family proof/checkpoint/claim artifacts and affected book/Knowledge/continuity; exact staged canonical receipt.
-  Planned verification tier upon activation: canonical
-  Planned focused proof: Complete fixed-input independent composition including nested/opaque/custom callback boundaries, public identity and event/source occurrence matching, actual falsifier RED controls and source closure; complete direct consumers, book and doctrines.
-  Planned canonical boundary: Parent/family closeout; exact staged canonical proof required before landing.
-  Planned claim: No pending-task measurement; publish the exact acceptance record upon activation before landing.
+  Verification tier: `canonical`
+  Focused checks: Complete fixed-input independent composition including nested/opaque/custom callback boundaries, public identity and event/source occurrence matching, actual falsifier RED controls and source closure; source-bound diagnostic replay/frame checks and observed original-context RED; complete direct consumers, book and doctrines.
+  Canonical trigger: Parent/family closeout; exact staged canonical proof required before landing.
+  Claim verification: `docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.3.json`
   Acceptance: All eleven selected producers have exact source origins where the canonical splitter publishes validated frames; preserve unchanged callback/public behavior and explicit unknown-callback limits. Do not close sibling twenty-contract composition or membership/replacement.
+
+  Activation: Clean ab2c0b9357007aab31302e01c9f4a73aaf2fc5c8; all ten hooks/post-pointer pass, brief0, Git clean and no jobs. Scoped Knowledge, authored interval/identity oracle, private Core/ScannerCore/PrimitiveBasicRules interfaces, permanent fixtures, ActionIR book and canonical receipt workflow are understood.
+  Exact ownership: New SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.3 checkpoint/claim prefix; fresh recurrence from complete immutable activation Git regular inputs with no production overlays; independent source/event/frame/channel/TAP checks and retained RED controls; historical mode/revision-only freeze of the prior .2 claim before book changes; affected book/Knowledge/task/index/roadmap/continuity. No production, public interface, standard fixture, submodule or CI/gate changes. Canonical exact staged receipt is mandatory before landing.
+
+  Owned reviewer defect: The initial suite-heading parser assumes exactly two dots, while prove pads actual headings with differing dot counts. The retained four-suite transcript is complete GREEN80; reproduce the initial reviewer exit1 with exact original source/full channels, then accept two-or-more literal dots while retaining exact suite order/plans/reach and negative controls. No runtime/test output is rewritten.
+  Retention refinement: Executing the preserved reviewer under its renamed file initially changes its derived checkpoint prefix and fails input selection. Preserve that retainer/source/failed selection channel, then execute the exact original bytes with the original logical filename to reproduce the suite-heading predicate. This is a runner defect; original fixture/Toolbox channels remain unchanged.
+  Owned oracle-field defect: After suite-heading repair, the reviewer incorrectly reads contract from the authored interval record, which deliberately contains only source/statement/event-index data. Preserve the actual KeyError/source and repair contract census to read observed case metadata, then compare against the explicit eleven-contract list; the independent author checker already verifies each case contract. No observed channels or author inputs change.
+
+  Verification: Fresh eleven-contract recurrence supplies 3,864 immutable regular Git inputs with no overlays: four fixtures pass 80 groups; 66 complete guarded compiler records retain 177 authored scalar frames and 111 original event origins. Three foreign-source probes preserve events with zero invented origins. Fifteen acceptance controls observe RED. Original reviewer defects, renamed-file selection failures and unbound traceback-context diagnostics retain their actual source/channels with explicit limitations. Two fresh source-bound failed replays match all six original logical frames and pass six distinguishing controls, including both original-context REDs. The interrupted first canonical attempt retains its exact staged diff/combined output and observed exit 143, with no complete pass or receipt claim. Complete 58-input book renders five original examples and diagnostic-source teaching in two chapters, with six render controls. All 61 original producer-claim input hashes verify before historical freeze at ab2c. Production and permanent fixtures remain unchanged. Exact staged canonical CI must pass again before family closeout; wider twenty-contract composition and semantic repairs retain their owners.
+  Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.3 - accept statement source family`
+
+## Acceptance Checklist — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.3
+
+- [x] **REPRODUCE / ISSUE** — Fresh immutable activation recurrence retains all3864 regular Git inputs, four actual focused suites and all six seed probes/full channels. Original reviewer/selection failures are reproduced and retained separately from successful runtime observations.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Core produces canonical frames; ScannerCore binds requested source authority; eleven PrimitiveBasicRules loops bind original returned-array occurrence and exact event identity. Independent authored segments distinguish equal raw text and Unicode positions. Initial reviewer failures are precise heading-padding and interval-record field-selection defects.
+- [x] **FIX** — Family acceptance composes the committed private frame/event/guard mechanism without production changes. Reviewer handles real prove heading padding, verifies observed contracts against eleven explicit names and retains original failed source/channels. Bound traceback formatting uses the exact executed bytes; all six logical frames match and six diagnostic controls reject. Original uncached contexts remain explicitly limited.
+- [x] **ADDRESSED (verified)** — All177 authored frames/111 original origins match in66 inspections; full channels equal the original guarded boundary exactly. Three literal foreign-source results preserve events and reject foreign coordinates. Fifteen reason-specific RED controls reject false acceptance.
+- [x] **NO REGRESSION** — Four unchanged source-provenance fixtures complete80 ordered positive groups including nested/callback/identity/error guards. Complete immutable input content/mode/population guards surround every actual command; canonical exact staged receipt is required before landing.
+- [x] **LOCKSTEP** — Full58-input book renders five original examples and diagnostic-source teaching across two chapters/six controls; prior61-input producer claim freezes historically without changed original identities. Knowledge/task/index/roadmap/resume/live/change/notes, claim/memory/history/diff/doctrine checks and exact staged canonical receipt govern the family closeout. Wider family composition and semantic repairs retain separate owners.
+
+  Owned diagnostic-context input defect / P1: Actual original failed replay channels execute retained source under the original logical filename, but Python traceback formatting reads the newer file for displayed source lines. Both retained diagnostics show mismatched executed/source-context lines; the formatter input was not bound. Preserve original producers/channels as explicitly limited initial evidence, bind replay linecache to the exact executed bytes and validate every displayed logical frame independently against those original lines. Retain distinguishing old-context RED and fresh bound replay controls; add a Knowledge fact. Runtime recurrence inputs/events/frames remain unaffected. Stop the original canonical attempt (observed exit143, no receipt/pass); preserve its exact staged candidate and combined output. Complete corrected proof, refresh the claim, then stage and run canonical CI again before landing.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.2`
   Status: `pending`
@@ -2641,11 +2662,11 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 | 43.4.2.0.1.1.3 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.3` | `done` | Source-bound1337 consumer groups at explicit two-capsule boundaries; statement frames next. |
 | 43.4.2.0.1.1.3.0 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.3.0` | `done` | 738 exact inputs, 25 smoke groups, two rendered examples and18 controls; full remeasurement next. |
 | 43.4.2.0.1.1.3.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.3.1` | `done` | 1337 groups, retained initial RED/four-input repair,22 controls and final book proof; canonical receipt gates landing. |
-| 43.4.2.0.1.1.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1` | `active` | Diagnosis complete; private frames, eleven producer hooks and canonical family acceptance separately owned. |
+| 43.4.2.0.1.1.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1` | `done` | Private frames/eleven producers independently accepted; twenty-contract composition follows. |
 | 43.4.2.0.1.1.1.0 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.0` | `done` | 66 Toolbox cases/59 spans and37 events per run;52 consumer groups/33 controls/three rendered examples. |
 | 43.4.2.0.1.1.1.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.1` | `done` | Private frames:28 GREEN/177 spans/66 identical compiler pairs,1148 consumer groups and26 controls. |
 | 43.4.2.0.1.1.1.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.2` | `done` | Eleven producer hooks:29 GREEN/111 origins/66 identical pairs,1148 guarded consumer groups; canonical .3 next. |
-| 43.4.2.0.1.1.1.3 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.3` | `pending` | Independent family acceptance and exact staged canonical proof. |
+| 43.4.2.0.1.1.1.3 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.3` | `done` | Immutable3864 inputs,80 GREEN groups/66 compiler recurrences/111 origins; exact canonical receipt gates closeout. |
 | 43.4.2.0.1.1.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.2` | `pending` | Independent twenty-contract basic family composition. |
 | 43.4.2.0.1.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2` | `pending` | Complete remaining pipeline source provenance before membership. |
 | 43.4.2.0.1.3 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3` | `pending` | Complete recursive/composed flow source provenance before membership. |

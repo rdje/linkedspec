@@ -1,0 +1,36 @@
+{
+  "command": [
+    "bash",
+    "tools/run_python_project_data.sh",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.3-review-contract-initial.py"
+  ],
+  "exit": 1,
+  "inputs": [
+    {
+      "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.3-review-contract-initial.py",
+      "sha256": "9d53aa84242b033dcbfd25b6f504b82e98f4ce5cf6d467e7447b19f456654c09"
+    },
+    {
+      "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.3-inputs.json",
+      "sha256": "2872427dc82c1ff3884b881f9bbb27a2a7c52958dfe4db7ab3cc019c80a86d3f"
+    },
+    {
+      "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.3-observations.json",
+      "sha256": "95eec5be3e7afdd4cae6b76a3f77ffb4622d29e8c1441d8a1459d0cb1148a531"
+    }
+  ],
+  "stdout": {
+    "encoding": "gzip-base64",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "data": "H4sIAAAAAAAC/wMAAAAAAAAAAAA="
+  },
+  "stderr": {
+    "encoding": "gzip-base64",
+    "bytes": 1268,
+    "sha256": "5a6a355f93d1cf0b9b54a9a7230939ab6de7126a27217a9fe73a49beebad49e0",
+    "data": "H4sIAAAAAAAC/82U32/TMBDH3/tXnPbSViR2fyAqKoqounSaNEJFy4SEaOU4l8XUsSPboerL/nbsdIgimOCxd5J9dk72fb62szGMY8b4HnqVtg4MclQOOJMSJLOuP+0ALIVEuKL3WjYVWrpeX9NrzX2snKUPwpVNRqVQe8xtjZzmmlvKS+T7WouQsl4li/hunt58mt8k8Tq5W8aLD+lmfpu+T9INGZKx9wGZkJH3gR8HH8cGvws8xFwr56t0sVDCCSZJfbyKwO+HMHw1ikAoeFPpvJH41tcKUDGhev02fPS23V4ywetBCxBqfipeiQL9Qczgm9WKSM1y21sxV/ZWH5Pl7Wd4AV2h6sZZEhK6fWKQ5bvs6ND2+ifsv9vj/9m5Xrp2tNQVZgYPdIFSMkProyu1ejcmw5c0NGRCl4ZVeNBmb+mq/UqKnzP0Ho0VWtk212ucPS3QDmvPFaZ2u6DMbncmzGQyaZX5RdeiHfxZgUVZEF2j8nc2x1nXZN0IsqYo0Aj1MBv0gVkopp0/0bfP2IUgD1vkQNbWbtA1RoHQJ9iAHUFAPqONABXX+SkyRhsbgcJDWPC3y/APAZ63ThAm1W6pG5UnYYcpfPG90jD6CqkG2/ASiqCeNpAL/wdx2hyn0L2g53b+Yjo/AMaOiwP0BAAA"
+  },
+  "instrument_sha256": "fecbafca8fed4ee53b380e9f73c426f21f7cefb646c86f7a25b8a77f1cc6bb23",
+  "scope": "Original reviewer source executed with its original logical filename; selection-failure attempt retained separately. Complete GREEN TAP is preserved unchanged."
+}

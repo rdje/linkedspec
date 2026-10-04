@@ -1,0 +1,38 @@
+{
+  "command": [
+    "bash",
+    "tools/project_data_run.sh",
+    "python3",
+    "-c",
+    "from pathlib import Path; logical = str(Path('docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.3-review.py').resolve()); exec(compile(Path('docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.3-review-contract-initial.py' ).read_bytes(), logical, 'exec'), {'__file__': logical, '__name__': '__main__'})"
+  ],
+  "exit": 1,
+  "inputs": [
+    {
+      "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.3-review-contract-initial.py",
+      "sha256": "9d53aa84242b033dcbfd25b6f504b82e98f4ce5cf6d467e7447b19f456654c09"
+    },
+    {
+      "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.3-inputs.json",
+      "sha256": "2872427dc82c1ff3884b881f9bbb27a2a7c52958dfe4db7ab3cc019c80a86d3f"
+    },
+    {
+      "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.3-observations.json",
+      "sha256": "95eec5be3e7afdd4cae6b76a3f77ffb4622d29e8c1441d8a1459d0cb1148a531"
+    }
+  ],
+  "stdout": {
+    "encoding": "gzip-base64",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "data": "H4sIAAAAAAAC/wMAAAAAAAAAAAA="
+  },
+  "stderr": {
+    "encoding": "gzip-base64",
+    "bytes": 1265,
+    "sha256": "1fee27ee703c9db08aef7286ac49ee1e3f377344067fd626a8d171e3cfdaf1dc",
+    "data": "H4sIAAAAAAAC/9VUUU/bMBB+51eceLEjNQkFiWnAkCooaBp0SO32gljkOtfWq+OLbAdWoe2379yOahMST5vE7h58Pufsz+fvy8QrjVOllyAbChE8anQRtLIWrAoxO9oBuDAWYfckRG/c/HS3B9Y4hH4PjIOThurO4il/BjDz1ECr4sKaKZimJR/hhqfHYGlueFN4B7yLTDkpatKh1AvUy5aMi6Ec3wzP8qvB6PLT4HKYj4dXF/nZx9Fk8H50PRxNin5xwL5XvCn22fd4nvwg93hv8KFoVyIrPAay9yiz7BjwG2qpqWkZ/j85MtfkIjcw5saZaJRNGCCBUHU1XUUMMus9Xb0HIgESnHkUVTVjUFUljn5briqnmk2S40YZx/H3bN3Z12U/2L78/7aldvmZbNcg02F8Xp6T5jiRY27iopuWzPYl1qFFXf51ym7FdLj/XE6JAnLz/puOvyLAbw/XeBPENcAnKYQkcdY91vLR3wqtAoo7Hn8tizuYkQefar8GcoUlVQdZo6Yapcf0y7gVvnOBq/pcGGJNHZdlGafpgdMvKOLP1/2Aq6H35FlO2+N3fgLb8WZf8QQAAA=="
+  },
+  "instrument_sha256": "fecbafca8fed4ee53b380e9f73c426f21f7cefb646c86f7a25b8a77f1cc6bb23",
+  "scope": "Original reviewer source executed with its original logical filename; selection-failure attempt retained separately. Complete GREEN TAP is preserved unchanged."
+}

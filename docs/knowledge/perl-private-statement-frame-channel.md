@@ -9,7 +9,7 @@ answers:
   - "does statement framing publish origins for the eleven basic events yet"
   - "how do nested private splitter collectors restore the outer invocation"
 date: 2026-10-04
-status: private splitter frame implementation verified under .1; eleven event hooks implemented under .2; canonical family acceptance pending
+status: private splitter frame implementation verified under .1; eleven event hooks implemented under .2; statement-family acceptance .3 verified with canonical landing requirement
 tags: [perl, actionir, statements, source-frame, identity, unicode]
 evidence: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.1 retains exact28-group RED25/GREEN0,66 complete public/compiler before-after pairs,177 authored original scalar frames and source-fixed consumer/book proof."
 reverify:
@@ -50,8 +50,24 @@ and after each run; only Core's declared production overlay differs between phas
 
 The .2 producer hooks now connect the eleven basic statement event producers to these
 original frames. Follow perl-basic-statement-event-source-provenance for their exact scope.
-Child .3 owns canonical family acceptance;
+Child .3 independently accepts the family with exact staged canonical proof;
 executable membership, comments and replacement remain subsequent work. Arbitrary host
 syntax, malicious custom callback mutation and cross-host transcript identity are not
 admitted by this bounded proof. All project bytes are parent-owned, with immutable Git
 inputs and explicit overlays; submodules remain excluded black boxes.
+
+Statement-family .3 repeats the complete immutable ab2c activation boundary:3864
+regular inputs/no overlays, four fixtures80 groups,66 exact prior guarded compiler
+recurrences,177 authored frames and111 exact original event origins. Three foreign-source
+probes preserve events without origins. Fifteen reason-specific RED controls and five
+render controls pass; final source-bound diagnostic repair and updated teaching follow below.
+The original .2 claim freezes at ab2c after61 input hashes verify. Exact staged canonical
+receipt is the family landing condition; twenty-contract composition remains .1.1.2.
+
+The final .3 boundary additionally binds two failed reviewer replays to the exact
+executed source: all six logical traceback frames match, and six controls reject both
+original unbound contexts plus producer/channel/completeness corruptions. Original
+uncached diagnostics disclose the unbound formatter input rather than claiming it
+recovered. Final 58-input book renders five examples/two chapters with six controls.
+The interrupted first canonical attempt is retained without a complete pass claim;
+exact staged canonical CI repeats after repair. Follow python-replay-traceback-source-binding.

@@ -3,13 +3,14 @@ id: perl-basic-statement-event-source-provenance
 title: Eleven basic statement producers retain original event identity and scalar origins privately
 answers:
   - "which eleven basic statement contracts now retain private origins"
+  - "where are basic statement oracle contract identifiers recorded"
   - "how do ignored statements affect event source occurrence indices"
   - "does basic statement provenance preserve callback counts and arguments"
   - "what happens when later trim changes an event raw string"
   - "how do nested basic statement scans restore outer source frames"
   - "does statement source provenance classify executable comments or quoted text"
 date: 2026-10-04
-status: eleven producer hooks verified under .2; canonical family acceptance and wider composition remain pending
+status: eleven producer hooks verified under .2; statement-family acceptance .3 verified with canonical landing requirement; wider composition remains pending
 tags: [perl, actionir, statements, source-provenance, identity, unicode]
 evidence: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.2 retains actual29-group RED21/GREEN0,66 full compiler pairs with unchanged public objects,177 unchanged source frames and111 exact event origins across22 authored cases/three seeds. Complete3811 immutable regular Git inputs plus two common overlays and two after-only production replacements supply3813 members. Sixteen independent source/event/compiler/channel corruptions reject."
 reverify:
@@ -49,8 +50,7 @@ are read-only; project scratch remains on the repository filesystem.
 
 This records syntactic scanner occurrences. It does not repair comment semantics,
 decide executable membership, replace source or admit arbitrary host syntax, malicious
-custom callbacks or cross-host transcript equality. Canonical eleven-contract family
-acceptance remains .1.1.1.3; the broader twenty-contract composition is .1.1.2, and
+custom callbacks or cross-host transcript equality. Eleven-contract family acceptance is .1.1.1.3; the broader twenty-contract composition is .1.1.2, and
 remaining producers/membership/replacement keep their separate owners.
 
 The final guarded eight-consumer run is bound to the actual manifest, source-observation
@@ -58,3 +58,25 @@ bytes, input tree and producer identities;1148 complete groups include Phase0103
 reason-specific source/TAP controls reject. The separately fixed guard29-group RED1/GREEN0
 and three literal probe pairs pass with five controls. Initial live diagnosis and original
 28-group/capture/consumer boundaries are retained separately from final acceptance.
+
+Statement-family .3 repeats the complete immutable ab2c activation boundary:3864
+regular inputs/no overlays, four fixtures80 groups,66 exact prior guarded compiler
+recurrences,177 authored frames and111 exact original event origins. Three foreign-source
+probes preserve events without origins. Fifteen reason-specific RED controls and five
+render controls pass; final source-bound diagnostic repair and updated teaching follow below.
+The original .2 claim freezes at ab2c after61 input hashes verify. Exact staged canonical
+receipt is the family landing condition; twenty-contract composition remains .1.1.2.
+
+The authored interval records from .0-review.py::author_cases contain id, action,
+statements and event_indices. Contract identity is in the observed row.case metadata,
+checked against explicit per-case contract order by author.check_rows and the eleven-name
+family census. It is not a field of the independent interval record. The .3 reviewer
+retains and repairs the original field-selection failure without changing observations.
+
+The final .3 boundary additionally binds two failed reviewer replays to the exact
+executed source: all six logical traceback frames match, and six controls reject both
+original unbound contexts plus producer/channel/completeness corruptions. Original
+uncached diagnostics disclose the unbound formatter input rather than claiming it
+recovered. Final 58-input book renders five examples/two chapters with six controls.
+The interrupted first canonical attempt is retained without a complete pass claim;
+exact staged canonical CI repeats after repair. Follow python-replay-traceback-source-binding.

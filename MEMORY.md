@@ -1,10 +1,10 @@
 # MEMORY
 
-- activation_commit: `aef9e551c7e563985c79c53fcba574ee5df8d509` — clean daily artifact census activation base.
-- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.2 - retain basic statement source origins`.
-- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.3` (pending) — canonical eleven-contract statement-family acceptance.
-- next_action: Activate .1.1.1.3 from clean HEAD; independently accept current frame/producer/guard composition, update the book and run exact staged canonical CI.
-- in_flight_uncommitted: None; eleven producer hooks, source authority guard, exact final/initial proof and1148 guarded consumers are committed. No jobs or deletions.
+- activation_commit: `ab2c0b9357007aab31302e01c9f4a73aaf2fc5c8` — clean eleven-producer activation base.
+- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.3 - accept statement source family`.
+- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.2` (pending) — independent twenty-contract basic family composition.
+- next_action: Activate .1.1.2 from clean HEAD; compose nine regex and eleven statement contracts with original source/argument/occurrence identity and private-channel guards.
+- in_flight_uncommitted: None; statement-family recurrence and source-bound diagnostic repair are committed behind the exact canonical receipt. No jobs or deletions.
 - blockers: No access/decision blocker. Matches and attached/marker/value/null/while executors are repaired; control parent/order and raw-expression reporting are reconciled; quoted/comment readiness .7.2/.3 precedes dispatcher/full execution. Other startup repairs remain separate.
   Wrapper startup .7 remains open; recovery/purge stay prohibited.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the

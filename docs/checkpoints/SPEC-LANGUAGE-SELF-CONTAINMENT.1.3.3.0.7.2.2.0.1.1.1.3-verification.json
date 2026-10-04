@@ -1,0 +1,106 @@
+{
+  "revision": "ab2c0b9357007aab31302e01c9f4a73aaf2fc5c8",
+  "git_inputs": 3864,
+  "overlays": 0,
+  "contracts": [
+    "assign_match_my",
+    "destructure_imatch_list_my",
+    "exit_bare",
+    "linecount_prefix_newline_matches",
+    "my_declare_bare",
+    "next_bare",
+    "position_tracking",
+    "print_capture_substr",
+    "ref_field_assign",
+    "regex_subst_assignment",
+    "return_bare"
+  ],
+  "fixture_suites": 4,
+  "fixture_groups": 80,
+  "toolbox_inspections": 66,
+  "frames": 177,
+  "event_origins": 111,
+  "foreign_source_probes": 3,
+  "exact_previous_guarded_compiler_recurrence": true,
+  "diagnostic_replays_source_bound": true,
+  "diagnostic_controls": 6,
+  "original_formatter_input_gap_disclosed": true,
+  "controls": [
+    {
+      "name": "drop original event occurrence",
+      "observed": "RED",
+      "reason": "authored event source origins"
+    },
+    {
+      "name": "reuse equal earlier occurrence",
+      "observed": "RED",
+      "reason": "authored event source origins"
+    },
+    {
+      "name": "forge event reference identity",
+      "observed": "RED",
+      "reason": "exact original event identities"
+    },
+    {
+      "name": "drop splitter frame",
+      "observed": "RED",
+      "reason": "authored original scalar frames"
+    },
+    {
+      "name": "invent foreign origin",
+      "observed": "RED",
+      "reason": "literal foreign-source boundary"
+    },
+    {
+      "name": "omit supplied input",
+      "observed": "RED",
+      "reason": "complete unique Git membership"
+    },
+    {
+      "name": "forge source bytes",
+      "observed": "RED",
+      "reason": "original Git member bytes"
+    },
+    {
+      "name": "promote partial recurrence",
+      "observed": "RED",
+      "reason": "complete exact-source recurrence"
+    },
+    {
+      "name": "forge executing producer",
+      "observed": "RED",
+      "reason": "actual recurrence producer"
+    },
+    {
+      "name": "erase command guard",
+      "observed": "RED",
+      "reason": "actual complete input guards"
+    },
+    {
+      "name": "promote unsuccessful exit",
+      "observed": "RED",
+      "reason": "actual successful exit"
+    },
+    {
+      "name": "forge retained channel",
+      "observed": "RED",
+      "reason": "channel bytes"
+    },
+    {
+      "name": "omit actual suite",
+      "observed": "RED",
+      "reason": "complete selected suite population"
+    },
+    {
+      "name": "shorten actual plan",
+      "observed": "RED",
+      "reason": "complete selected suite plan"
+    },
+    {
+      "name": "conceal nested failure",
+      "observed": "RED",
+      "reason": "no nested fixture failure"
+    }
+  ],
+  "instrument_sha256": "188229d1c2c66b58351b9691124d65be5825993c16b43ab3324f9030c29709ac"
+}
