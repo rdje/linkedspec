@@ -247,6 +247,13 @@ repair is independently owned. The nested raw-expression reporting repair is exp
 Stable event order alone does not repair those classifications. A working value cannot establish
 portable readiness, and a false blocker must not be removed by hiding genuine raw source.
 
+Literal contents must retain their data meaning during helper discovery, canonical-event
+construction, lowering and unresolved-helper reporting. Recognizing the outer `return` does
+not make the text inside its quoted argument executable. Diagnosis, a bounded repair and
+independent closeout are tracked separately, including the earlier quoted primitive-rewrite
+observations. Accepted quote syntax and genuine unsupported operands elsewhere in the action
+retain their existing contracts while that work proceeds.
+
 The historical diagnosis keeps unmodified arrays and streams under the `.0.6.0` checkpoint
 prefix. The `.0.6.1` successor retains an exact before-owner module, source-identical
 before/after public captures, independent occurrence-order oracles, complete TAP and current

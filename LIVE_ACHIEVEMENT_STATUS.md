@@ -2,19 +2,21 @@
 
 ## Current Activity
 
-Full PNT: raw-expression reporting/compatibility proof complete under the exact canonical landing condition; quoted-data .7.2 follows from the clean commit.
+Full PNT: quoted-data planning .7.2.0 is complete; current source-bound diagnosis .7.2.1 is next, before bounded repair and independent closeout.
 
 ## Latest Completed Slice
 
-`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1`: fresh33-source/99 matched native-fresh records,55 descriptors/800 units and all22 shipped prior readiness/counts;16 complete suites/1098 tests, separately24 extracted Phase0 bodies.27 compatibility sources/57 units,48 evidence corruptions, twelve rendered examples and isolated134-input recovery/44 governance controls bind447 inputs/73 instruments. Exact legacy ownership/generated provenance preserve canonical meaning; three child-frame spans are corrected, with coordinate-only serialized AST changes. Exact staged canonical receipt governs landing; quoted .7.2/comments .7.3/marker fallback .7.4 remain owned.
+`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.0` splits quoted-data diagnosis .1, evidence-selected repair .2 and closeout .3 before implementation. Task/index/resume/roadmap/book/Knowledge handoff is reconciled; reporting .7.1 claim is historical at canonically accepted363c79109. Compiler/runtime/captures remain unchanged; focused documentation/doctrines govern landing.
 
 ## Next Action
 
-From the clean canonical .7.1 commit, activate .7.2 quoted-helper masking, then .7.3 comment classification and .7.4 marker fallback reconciliation before dispatcher/full execution. Recovery/purge stays prohibited; hygiene .8 is complete.
+From the clean planning commit activate current source-bound Toolbox diagnosis .7.2.1, declaring exact producers/captures/tier before use. Reverify older quoted primitive/ASSIGN observations without claiming their broad startup closure. Then .7.2.2 repair/.7.2.3 closeout, comments .7.3 and marker fallback .7.4 precede dispatcher/full execution. Recovery/purge stays prohibited.
 
 ## Recent Completions
 
-- `2026-10-04` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1` reconciles source-unit raw reporting/spans/legacy ownership; exact canonical receipt gates landing.
+- `2026-10-04` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.0` splits quoted-data work and reconciles the canonical reporting handoff.
+
+- `2026-10-04` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1` canonically lands source-unit raw reporting/spans/legacy ownership at363c79109.
 
 - `2026-10-03` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.0` freezes nested raw/source-occurrence diagnosis and owns comment classification.
 
@@ -43,8 +45,6 @@ From the clean canonical .7.1 commit, activate .7.2 quoted-helper masking, then 
 - `2026-10-03` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.2` reconciles bounded bridge parents with750 tests and preserved original evidence.
 
 - `2026-10-03` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.2.1` recovers134 exact inputs and runs read-denied historical audit.
-
-- `2026-10-03` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.2.0` retains exact134-input census/controls and bounded recovery plan.
 
 ## History
 

@@ -1,10 +1,10 @@
 # MEMORY
 
-- activation_commit: `c9673d7eff39836fdc94d59b8d47639db5e937d4` — clean nested raw-readiness reporting repair activation base.
-- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1 - report raw expression source dependencies`.
-- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1` (done) — source-unit reporting/compatibility verified; exact canonical receipt required for landing.
-- next_action: From this clean canonical commit, activate .7.2 quoted-helper masking, then .7.3 source comments and .7.4 marker fallback before dispatcher/full execution.
-- in_flight_uncommitted: none;1098 focused tests/16 suites, scoped Phase024, fresh99 primary/55-source census,447-input/73-instrument claim and twelve rendered examples verified.
+- activation_commit: `363c79109ea8498252927547438ade47117ae71e` — clean quoted-data planning activation base.
+- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.0 - plan quoted-data repair`.
+- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.0` (done) — quoted diagnosis/repair/closeout ownership and canonical reporting handoff reconciled.
+- next_action: From this clean planning commit activate source-bound quoted-data diagnosis .7.2.1 before bounded implementation .7.2.2 and closeout .7.2.3.
+- in_flight_uncommitted: none; compiler/runtime/captures unchanged, reporting claim frozen at363c79109, documentation/ownership synchronized.
 - blockers: No access/decision blocker. Matches and attached/marker/value/null/while executors are repaired; control parent/order and raw-expression reporting are reconciled; quoted/comment readiness .7.2/.3 precedes dispatcher/full execution. Other startup repairs remain separate.
   Wrapper startup .7 remains open; recovery/purge stay prohibited.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the

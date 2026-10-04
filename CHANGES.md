@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-10-04 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.0: quoted-data work ownership
+
+Split quoted-data work into current diagnosis, evidence-selected repair and independent closeout before implementation. Reconcile the stale task-index row and live/roadmap/book handoff with canonically accepted reporting commit363c79109; freeze its claim at that revision. Older quoted primitive/ASSIGN observations retain their broader startup owner and require current re-verification. Compiler/runtime/captures remain unchanged; focused documentation and doctrine checks govern this planning commit.
+
 ## 2026-10-04 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1: source-unit raw dependency reporting
 
 Original-source diagnostics count uncovered unsupported expressions per unit/span/reason, preserving canonical fallback meaning, shared aliases, repeated occurrences and unique display text. Exact generated BCODE/lifecycle provenance separates compiler-owned text. Sixteen fenced legacy contracts retain their whole-statement ownership; bare return/exit payloads and supported ordinary assignment groups expose real inner host operands, while deferred groups remain raw. Three missing Parser body-start handoffs now preserve authored coordinates. AST structure/source/runtime semantics stay intact; serialized AST spans may change inside otherwise exact lowering/dump/emitted source.

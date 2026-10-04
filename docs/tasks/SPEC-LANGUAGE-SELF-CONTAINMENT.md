@@ -6,7 +6,7 @@
 - Status: `active` / closure definition
 - Roadmap lane: `.spec language evolution / expressive self-containment and alternate authoring profiles`
 - Created: `2026-07-30`
-- Last updated: `2026-10-03`
+- Last updated: `2026-10-04`
 - Owner: repo-local workflow
 
 ## Goal
@@ -1992,13 +1992,55 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
   Preparation corrections: Numeric claim-count replacement inadvertently changed the 445 substring inside two old task-tree commit references; final diff inspection caught both before landing. Restore their exact clean-HEAD lines (b044542bc47894f69954fcbdda451ed2548c3bb3 and bf1e4edd04371eeddf33f8445239348e12f887f2) and verify all other updated surface diffs. Knowledge generation was also staged before its asynchronous writer finished; the unstaged/index comparison caught the partial map. Wait for completed generation, stage the complete derived map and require zero unstaged inputs before the canonical restart. Neither preparation state is accepted proof or a landed change.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2`
-  Status: `pending`
+  Status: `active`
   Priority: P1 — quoted data is falsely reported as executable helper/control activity.
   Goal: Diagnose and repair quoted-payload helper metadata without altering authored literal values or hiding real raw dependencies.
   Dependencies: `.1.3.3.0.6.1`, `.1.3.3.0.7.1`; required before dispatcher `.1.3.3.0.3`.
+  Children: `.1.3.3.0.7.2.0`, `.1.3.3.0.7.2.1`, `.1.3.3.0.7.2.2`, `.1.3.3.0.7.2.3`
   Reproduce: `.6.0` case quoted, Top:: I { return("return(inner); if(true)") }, returns the exact literal natively and from fresh emitted source under seeds0/1/2, yet records residual IF if(true), unresolved_helper_count3 and ready0. Complete source-bound observations remain in `.6.0-observations.json`.
   Impact: Ordinary literal data creates false portability blockers and control metadata; healthy execution does not validate that descriptor classification.
   Acceptance: Use Toolbox trace/AST/descriptor to locate quote masking across helper discovery, canonical events and unresolved diagnostics; preserve source/value bytes, prove quoted/escaped/nested/comment negatives and genuine unquoted helper/raw positives. Declare paths/tier before implementation; actual RED/GREEN plus direct consumer checks and warranted canonical signoff close this leaf. No literal grammar expansion or hidden blocker removal.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.0`
+  Status: `done`
+  Goal: Split quoted-data diagnosis, bounded repair and closeout before implementation; reconcile the committed reporting handoff.
+  Activation: Clean363c79109ea8498252927547438ade47117ae71e. The .7.1 canonical gate exits0 with Phase01034/1034 and both CLI environments66/66; all ten commit doctrines and the post-commit pointer pass, its receipt is promoted, brief0 and Git clean. No background job remains.
+  Owned paths / plan: This task-tree, docs/TASK_TREE.md, MEMORY.md, LIVE_ACHIEVEMENT_STATUS.md, ROADMAP.md, ROADMAP_V2.md, CHANGES.md, DEVELOPMENT_NOTES.md, docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1.json, docs/knowledge/perl-residual-event-order-diagnosis.md and docs/linkedspec-book/src/dsl/actionir-lowering-mental-model.md; derived KNOWLEDGE_MAP.md and any required lossless bounded-history rollover. No executable or recurring-gate changes. Preserve every completed capture/instrument and freeze .7.1 claim at its actual landed revision before changing hash-bound documentation.
+  Verification tier: `focused`
+  Focused checks: Read existing quoted-data/primitive-rewrite facts and published raw-source/event/source-unit contracts; verify the clean commit/receipt/brief handoff, exact task IDs/frontier and historical claim identities, render the book, and run memory/Knowledge/history/diff/all-doctrine checks.
+  Canonical trigger: none for scheduling and documentation with unchanged compiler/runtime/public semantics; .7.2.2 and .7.2.3 require warranted exact canonical acceptance.
+  Claim verification: none: This slice publishes no new experiment or measurement; it routes existing committed proof and pending work.
+  Required diagnosis boundary: .7.2.1 must use Toolbox before implementation and reverify the quoted return control against current production. Recover the older SESSION-STARTUP-READING.18 quoted primitive/ASSIGN observations without assuming their dated behavior is unchanged. Preserve exact source, typed AST, helper/canonical/unresolved records, actual lowering decisions and direct/fresh Perl values/errors. Accepted quote/escape/nesting/regex/comment forms must be distinguished from unsupported grammar; genuine executable helper/raw positives falsify blanket masking. Comments remain .7.3; older .18 retains its broader source-reading/carrier acceptance.
+  Continuity defect owned here: docs/TASK_TREE.md still names nested raw-readiness repair as next after .7.1 landed. Replace only that active row with the quoted diagnosis frontier; preserve every closed-state sentinel. Refresh intended clean resume/live/roadmap handoff without editing historical proof.
+  Additional owned continuity path: docs/knowledge/perl-raw-readiness-source-unit-provenance.md; record the successful existing canonical landing and scope its full evidence re-verification to the frozen revision.
+  Acceptance: A single next diagnostic leaf, bounded repair and closeout successors, explicit evidence/tier boundaries, current task-index/live/book pointers and historical .7.1 claim remain consistent; selected focused checks pass before this planning leaf commits.
+
+## Acceptance Checklist — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.0
+- [x] **OWNERSHIP / CLEAN ACTIVATION** — start from verified363c79109 with matching canonical receipt, empty brief and clean Git; split the pending parent before executable changes.
+- [x] **BOUNDED NEXT ACTION / DEFECT OWNERSHIP** — current quoted diagnosis .1 precedes evidence-selected repair .2 and closeout .3; older primitive/ASSIGN, comment and broad startup owners remain explicit. Correct the stale task-index row.
+- [x] **HISTORY / LIVE LOCKSTEP** — freeze .7.1 claim at363c79109 and preserve all captures/instruments; task/index/resume/roadmap/live/book/Knowledge pointers agree.
+- [x] **RENDER / LANDING CONDITION** — actual mdBook build and rendered literal-semantics paragraph pass; completed Knowledge generation, memory/historical-claim/history/diff and all doctrines must pass before the focused commit. No executable change or new runtime measurement.
+  Verification: Actual book rendering/rendered paragraph, staged memory/handoff, historical claim identities, Knowledge synchronization, source-scope preservation and whitespace pass; both bounded-history checks warn below their rollover limits. All ten focused doctrines PASS; final hooks recheck the staged documents after the full-path re-verification clarification. No executable paths changed.
+  Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.0 - plan quoted-data repair`
+  Handoff: From the clean planning commit activate .7.2.1 current Toolbox diagnosis; declare its producers/captures/tier before use. No production implementation begins in this leaf.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.1`
+  Status: `pending`
+  Goal: Diagnose executable-source ownership across quoted helper discovery, canonical events, lowering and unresolved diagnostics.
+  Dependencies: `.1.3.3.0.7.2.0`
+  Acceptance: Declare source-bound producers/captures and focused tier before use. Reproduce current public quoted-data errors through Toolbox AST/descriptor/substitution/trace and independent fresh emitted Perl, recover older .18 evidence, preserve actual channels/source/error identity, and distinguish accepted lexical negatives from genuine helpers/raw operands. Independent source/occurrence/value expectations and executed evidence falsifiers select bounded repair paths without changing production or claiming new syntax/backend admission. Commit the complete diagnosis before implementing .7.2.2.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2`
+  Status: `pending`
+  Goal: Repair the diagnosed quoted-data ownership defects while preserving authored values and genuine dependencies.
+  Dependencies: `.1.3.3.0.7.2.1`
+  Acceptance: Select and declare exact production/test/interface paths from committed diagnosis; split further if independent mechanisms exceed a safe slice. Actual permanent RED/GREEN and source-bound direct/fresh compatibility prove lexical ownership, occurrence order, literal bytes and genuine helper/raw detection. Preserve separate comment and older broad carrier owners. Public event/readiness or infrastructure changes require exact staged canonical proof; synchronize book/Knowledge/live docs and commit every implemented leaf.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.3`
+  Status: `pending`
+  Goal: Independently recompose quoted-data acceptance and close the bounded parent before source-comment repair.
+  Dependencies: `.1.3.3.0.7.2.2`
+  Acceptance: Re-run the committed source/occurrence/value/error oracles and direct consumer obligations, reconcile any bounded older .18 prerequisites without claiming its broad closure, verify teaching/claims and exact canonical public-boundary proof, close only .7.2, and commit a clean handoff to .7.3.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.3`
   Status: `pending`
@@ -2236,8 +2278,10 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 | 43 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.0` | `done` | Nine sources/27 native-fresh, six originals,15 traces/34 tests and ten controls; repair selected. |
 | 43.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.1` | `done` | Pending scan occurrences repaired;325-input/424-test proof and exact canonical landing condition. |
 | 43.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.0` | `done` | 16 sources/48 pairs,16 traces/42 tests and twelve controls; source-occurrence repair boundary frozen. |
-| 43.3 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1` | `done` | Reporting/spans/compatibility proof1098/scoped24/447 inputs PASS; exact canonical receipt is required before landing. |
-| 43.4 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2` | `pending` | P1 quoted-data false helper/control blockers before dispatcher. |
+| 43.3 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1` | `done` | Canonically accepted363c79109; focused proof/447-input claim remain historical at that revision. |
+| 43.4.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.1` | `pending` | Source-bound current quoted-data diagnosis before any compiler change. |
+| 43.4.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2` | `pending` | Evidence-selected bounded lexical ownership repair after committed diagnosis. |
+| 43.4.3 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.3` | `pending` | Independent quoted-data closeout before comments .7.3. |
 | 43.5 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.3` | `pending` | Source-comment AST/raw false blocker; required before dispatcher and .7 closure. |
 | 43.6 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.4` | `pending` | P2 generated position-marker canonical fallback reconciliation before readiness closeout. |
 

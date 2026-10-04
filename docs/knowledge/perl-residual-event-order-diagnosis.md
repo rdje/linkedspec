@@ -54,3 +54,11 @@ All tracked Perl/spec/test input bytes equal activation Git blobs; no executable
 Current succession: `.0.6.1` preserves pending occurrences using an ordered list alongside
 raw-key queues. See [the current repair fact](perl-residual-event-occurrence-order.md).
 All diagnosis arrays/streams and its historical claim hashes/results remain exact.
+
+October4 succession: raw-expression reporting `.0.7.1` lands at
+`363c79109ea8498252927547438ade47117ae71e` with exact canonical acceptance. Quoted-data
+parent `.0.7.2` is split before implementation: planning `.0`, current source-bound
+diagnosis `.1`, evidence-selected repair `.2`, then independent closeout `.3`.
+The older quoted primitive/ASSIGN evidence is indexed by
+[[perl-quoted-primitive-rewrite-event-drift]]; its broader startup owner remains open.
+The next diagnosis must reverify current behavior rather than refresh historical captures.

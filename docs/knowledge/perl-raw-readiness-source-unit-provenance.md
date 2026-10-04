@@ -17,10 +17,10 @@ answers:
   - "does a canonical return cover unsupported inner operands"
   - "are grouped assignment receivers raw inside deferred codeblocks"
 date: 2026-10-04
-status: focused source-unit reporting and compatibility verification; canonical landing required
+status: verified source-unit reporting and compatibility at363c79109; quoted/comment/marker successors remain open
 tags: [perl, actionir, readiness, blind-call, provenance]
 evidence: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1 retains fresh33-source/99 matched native-fresh records and55-source/800-unit census, all22 shipped prior readiness/counts and zero shipped raw AST markers. Sixteen suites pass1098 top-level tests;24 extracted Phase0 bodies pass separately.27 compatibility sources/57 units,48 evidence controls/twelve rendered examples and44 isolated governance controls bind447 inputs/73 instruments. Exact canonical receipt independently gates landing; original failed instruments/captures remain frozen."
-reverify: "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-review.py; bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/actionir_raw_dependency_metadata.t t/actionir_raw_dependency_provenance.t t/actionir_nested_block_source_spans.t t/actionir_raw_dependency_compatibility.t. Complete census uses census-source.py, never failed file-route variants."
+reverify: "Full .7.1 evidence is frozen at363c79109ea8498252927547438ade47117ae71e: run bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1-review.py at that revision or through historical replay, without refreshing captures after newer documentation/compiler changes. Current permanent proof: bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/actionir_raw_dependency_metadata.t t/actionir_raw_dependency_provenance.t t/actionir_nested_block_source_spans.t t/actionir_raw_dependency_compatibility.t. Complete census uses census-source.py, never failed file-route variants."
 ---
 
 The authored control is:
@@ -146,3 +146,10 @@ not unchanged metadata or runtime acceptance. Final proof uses complete fresh
 primary/census captures. The initial provenance negative also misclassified a
 supported assign_call twin as host raw; its original source/failing stream are
 preserved, and corrected tests use genuine adjacent operands and exact offsets.
+
+Canonical landing is now complete at `363c79109ea8498252927547438ade47117ae71e`:
+the exact staged candidate passes Phase01034/1034, both primary CLI environments66/66
+and all mandatory gate stages; all ten commit doctrines/post-pointer pass and the
+receipt is promoted. Optional environment-selected gates are skipped, without a
+broader optional-coverage claim. `.0.7.2.0` freezes the focused claim at that
+revision and routes quoted-data diagnosis `.0.7.2.1` before implementation.
