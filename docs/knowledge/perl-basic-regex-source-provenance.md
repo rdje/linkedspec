@@ -7,7 +7,7 @@ answers:
   - "does basic helper provenance change public events or callback dependencies"
   - "which basic scanner statement provenance work remains"
 date: 2026-10-04
-status: nine regex contracts implemented; statement frames/hooks implemented; family composition pending
+status: nine regex and eleven statement contracts implemented; mixed focused proof verified; canonical family closeout separately owned
 tags: [perl, actionir, scanner, source-provenance, unicode, source-span]
 evidence: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.0 retains the actual complete ten-group frozen-owner RED (nine failures, empty-result guard green) and unchanged ten-group GREEN. Independent authored Unicode-scalar positions cover quoted and repeated equal calls for all nine regex contracts. The private/compiler result is historical at3fc589f84. Original passing consumer channels retain their disclosed input/falsification gaps in the exact pre-supersession record. Source-bound .1.1.3.1 remeasurement supersedes broader acceptance; it does not recover the original live-document reads."
 reverify:
@@ -36,7 +36,7 @@ Its current permanent guard suite remains separate. P1 selected consumer/render 
 source-bound1337-group composition under `.1.1.3.1`; its original disclosed
 observation remains preserved and does not widen the private/compiler result. Eleven basic statement
 contracts now have exact splitter frames under `.1.1.1.1` and producer hooks under `.1.1.1.2`; statement-family acceptance `.1.1.1.3` verifies their unchanged composition with exact canonical landing proof; next
-`.1.1.2` independently composes the family. Remaining scanner producers,
+`.1.1.2.0` independently verifies the mixed twenty-contract proof; `.1.1.2.1` owns canonical recurrence/parent closeout. Follow perl-basic-family-mixed-source-provenance. Remaining scanner producers,
 membership/replacement, recurring canonical admission, marker provenance and
 comments retain their existing owners. No public event schema or backend admission
 is implied by private telemetry.

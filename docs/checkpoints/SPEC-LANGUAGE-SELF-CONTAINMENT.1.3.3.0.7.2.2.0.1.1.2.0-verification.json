@@ -1,0 +1,117 @@
+{
+  "complete": true,
+  "revision": "318457e6e62683d485ded02bdbe9566931aaca97",
+  "regular_inputs": 3899,
+  "overlays": 3,
+  "contracts": 20,
+  "seeds": 3,
+  "authored_statement_frames": 129,
+  "authored_event_origins": 147,
+  "fixture_suites": 8,
+  "fixture_groups": 144,
+  "foreign_probes": 3,
+  "initial_failed_capture_preserved": true,
+  "controls": [
+    {
+      "name": "erase contract",
+      "observed": "RED",
+      "reason": "exact twenty-contract population and order"
+    },
+    {
+      "name": "change original argument",
+      "observed": "RED",
+      "reason": "authored exact public arguments and occurrences"
+    },
+    {
+      "name": "erase original event",
+      "observed": "RED",
+      "reason": "authored exact public arguments and occurrences"
+    },
+    {
+      "name": "reuse equal raw occurrence",
+      "observed": "RED",
+      "reason": "authored mixed event origins"
+    },
+    {
+      "name": "forge argument reference",
+      "observed": "RED",
+      "reason": "original event and argument reference identities"
+    },
+    {
+      "name": "forge original event reference",
+      "observed": "RED",
+      "reason": "original event and argument reference identities"
+    },
+    {
+      "name": "erase callback effect",
+      "observed": "RED",
+      "reason": "unchanged original callback sequence and arguments"
+    },
+    {
+      "name": "erase ignored statement frame",
+      "observed": "RED",
+      "reason": "authored mixed statement frames"
+    },
+    {
+      "name": "promote private public schema",
+      "observed": "RED",
+      "reason": "unchanged private public events"
+    },
+    {
+      "name": "forge compiler success",
+      "observed": "RED",
+      "reason": "complete clean Toolbox inspection"
+    },
+    {
+      "name": "invent foreign origin",
+      "observed": "RED",
+      "reason": "literal foreign-source boundary"
+    },
+    {
+      "name": "erase supplied input",
+      "observed": "RED",
+      "reason": "complete unique Git membership"
+    },
+    {
+      "name": "forge supplied source bytes",
+      "observed": "RED",
+      "reason": "original Git member bytes"
+    },
+    {
+      "name": "erase authored overlay",
+      "observed": "RED",
+      "reason": "exact authored overlay membership"
+    },
+    {
+      "name": "promote incomplete run",
+      "observed": "RED",
+      "reason": "complete exact-source capture"
+    },
+    {
+      "name": "forge actual producer",
+      "observed": "RED",
+      "reason": "actual capture producer"
+    },
+    {
+      "name": "promote failed actual command",
+      "observed": "RED",
+      "reason": "actual successful exit"
+    },
+    {
+      "name": "forge actual channel",
+      "observed": "RED",
+      "reason": "channel bytes"
+    },
+    {
+      "name": "shorten actual TAP plan",
+      "observed": "RED",
+      "reason": "complete selected suite plan"
+    },
+    {
+      "name": "promote nested TAP failure",
+      "observed": "RED",
+      "reason": "no nested fixture failure"
+    }
+  ],
+  "instrument_sha256": "d8e5cf9ce633f391ab77d29531d98b8a2acd261b23f40a6bf6e69b08aa647247"
+}

@@ -1,0 +1,952 @@
+{
+  "action": "# 雪\r\n \tnote=\"雪;my $cx = call(Done);$ex = call(Done);push @ix, call(Done)->[2];push @px, call(Done);return call(Done);entry_slot( );gap_span();gap_text( );gap_kind();\";\r\n\tmy $cx = call(Done);\r\n $ex = call(Done);\r\n push @ix, call(Done)->[2];\r\n push @px, call(Done);\r\n return call(Done);\r\n entry_slot( );\r\n gap_span();\r\n gap_text( );\r\n gap_kind();\r\n return 7;\r\n exit 7;\r\n my @lines = substr($$STRING, 0, $IPOS) =~ /\\n/g;\r\n print \"<\" . substr($$STRING, $IPOS, $LSPOS - $IPOS - 1) . \">\\n\";\r\n my $dx;\r\n my $mx = $CAPTURE;\r\n my ($ax, $bx) = @IMATCH_LIST;\r\n $sx =~ s/a/b/g;\r\n next LOOP;\r\n my $fx = $node->{key}[0];\r\n $tx = pos($$STRING);\r\n # β\r\n\t$tx = pos($$STRING);\r\n my $fx = $node->{key}[0];\r\n next LOOP;\r\n $sx =~ s/a/b/g;\r\n my ($ax, $bx) = @IMATCH_LIST;\r\n my $mx = $CAPTURE;\r\n my $dx;\r\n print \"<\" . substr($$STRING, $IPOS, $LSPOS - $IPOS - 1) . \">\\n\";\r\n my @lines = substr($$STRING, 0, $IPOS) =~ /\\n/g;\r\n exit 7;\r\n return 7;\r\n gap_kind();\r\n gap_text( );\r\n gap_span();\r\n entry_slot( );\r\n return call(Done);\r\n push @px, call(Done);\r\n push @ix, call(Done)->[2];\r\n $ex = call(Done);\r\n my $cx = call(Done);\r\n ",
+  "statements": [
+    {
+      "raw": "# 雪",
+      "source_span": {
+        "start": 0,
+        "end": 3
+      }
+    },
+    {
+      "raw": "note=\"雪;my $cx = call(Done);$ex = call(Done);push @ix, call(Done)->[2];push @px, call(Done);return call(Done);entry_slot( );gap_span();gap_text( );gap_kind();\"",
+      "source_span": {
+        "start": 7,
+        "end": 166
+      }
+    },
+    {
+      "raw": "my $cx = call(Done)",
+      "source_span": {
+        "start": 170,
+        "end": 189
+      }
+    },
+    {
+      "raw": "$ex = call(Done)",
+      "source_span": {
+        "start": 193,
+        "end": 209
+      }
+    },
+    {
+      "raw": "push @ix, call(Done)->[2]",
+      "source_span": {
+        "start": 213,
+        "end": 238
+      }
+    },
+    {
+      "raw": "push @px, call(Done)",
+      "source_span": {
+        "start": 242,
+        "end": 262
+      }
+    },
+    {
+      "raw": "return call(Done)",
+      "source_span": {
+        "start": 266,
+        "end": 283
+      }
+    },
+    {
+      "raw": "entry_slot( )",
+      "source_span": {
+        "start": 287,
+        "end": 300
+      }
+    },
+    {
+      "raw": "gap_span()",
+      "source_span": {
+        "start": 304,
+        "end": 314
+      }
+    },
+    {
+      "raw": "gap_text( )",
+      "source_span": {
+        "start": 318,
+        "end": 329
+      }
+    },
+    {
+      "raw": "gap_kind()",
+      "source_span": {
+        "start": 333,
+        "end": 343
+      }
+    },
+    {
+      "raw": "return 7",
+      "source_span": {
+        "start": 347,
+        "end": 355
+      }
+    },
+    {
+      "raw": "exit 7",
+      "source_span": {
+        "start": 359,
+        "end": 365
+      }
+    },
+    {
+      "raw": "my @lines = substr($$STRING, 0, $IPOS) =~ /\\n/g",
+      "source_span": {
+        "start": 369,
+        "end": 416
+      }
+    },
+    {
+      "raw": "print \"<\" . substr($$STRING, $IPOS, $LSPOS - $IPOS - 1) . \">\\n\"",
+      "source_span": {
+        "start": 420,
+        "end": 483
+      }
+    },
+    {
+      "raw": "my $dx",
+      "source_span": {
+        "start": 487,
+        "end": 493
+      }
+    },
+    {
+      "raw": "my $mx = $CAPTURE",
+      "source_span": {
+        "start": 497,
+        "end": 514
+      }
+    },
+    {
+      "raw": "my ($ax, $bx) = @IMATCH_LIST",
+      "source_span": {
+        "start": 518,
+        "end": 546
+      }
+    },
+    {
+      "raw": "$sx =~ s/a/b/g",
+      "source_span": {
+        "start": 550,
+        "end": 564
+      }
+    },
+    {
+      "raw": "next LOOP",
+      "source_span": {
+        "start": 568,
+        "end": 577
+      }
+    },
+    {
+      "raw": "my $fx = $node->{key}[0]",
+      "source_span": {
+        "start": 581,
+        "end": 605
+      }
+    },
+    {
+      "raw": "$tx = pos($$STRING)",
+      "source_span": {
+        "start": 609,
+        "end": 628
+      }
+    },
+    {
+      "raw": "# β",
+      "source_span": {
+        "start": 632,
+        "end": 635
+      }
+    },
+    {
+      "raw": "$tx = pos($$STRING)",
+      "source_span": {
+        "start": 638,
+        "end": 657
+      }
+    },
+    {
+      "raw": "my $fx = $node->{key}[0]",
+      "source_span": {
+        "start": 661,
+        "end": 685
+      }
+    },
+    {
+      "raw": "next LOOP",
+      "source_span": {
+        "start": 689,
+        "end": 698
+      }
+    },
+    {
+      "raw": "$sx =~ s/a/b/g",
+      "source_span": {
+        "start": 702,
+        "end": 716
+      }
+    },
+    {
+      "raw": "my ($ax, $bx) = @IMATCH_LIST",
+      "source_span": {
+        "start": 720,
+        "end": 748
+      }
+    },
+    {
+      "raw": "my $mx = $CAPTURE",
+      "source_span": {
+        "start": 752,
+        "end": 769
+      }
+    },
+    {
+      "raw": "my $dx",
+      "source_span": {
+        "start": 773,
+        "end": 779
+      }
+    },
+    {
+      "raw": "print \"<\" . substr($$STRING, $IPOS, $LSPOS - $IPOS - 1) . \">\\n\"",
+      "source_span": {
+        "start": 783,
+        "end": 846
+      }
+    },
+    {
+      "raw": "my @lines = substr($$STRING, 0, $IPOS) =~ /\\n/g",
+      "source_span": {
+        "start": 850,
+        "end": 897
+      }
+    },
+    {
+      "raw": "exit 7",
+      "source_span": {
+        "start": 901,
+        "end": 907
+      }
+    },
+    {
+      "raw": "return 7",
+      "source_span": {
+        "start": 911,
+        "end": 919
+      }
+    },
+    {
+      "raw": "gap_kind()",
+      "source_span": {
+        "start": 923,
+        "end": 933
+      }
+    },
+    {
+      "raw": "gap_text( )",
+      "source_span": {
+        "start": 937,
+        "end": 948
+      }
+    },
+    {
+      "raw": "gap_span()",
+      "source_span": {
+        "start": 952,
+        "end": 962
+      }
+    },
+    {
+      "raw": "entry_slot( )",
+      "source_span": {
+        "start": 966,
+        "end": 979
+      }
+    },
+    {
+      "raw": "return call(Done)",
+      "source_span": {
+        "start": 983,
+        "end": 1000
+      }
+    },
+    {
+      "raw": "push @px, call(Done)",
+      "source_span": {
+        "start": 1004,
+        "end": 1024
+      }
+    },
+    {
+      "raw": "push @ix, call(Done)->[2]",
+      "source_span": {
+        "start": 1028,
+        "end": 1053
+      }
+    },
+    {
+      "raw": "$ex = call(Done)",
+      "source_span": {
+        "start": 1057,
+        "end": 1073
+      }
+    },
+    {
+      "raw": "my $cx = call(Done)",
+      "source_span": {
+        "start": 1077,
+        "end": 1096
+      }
+    }
+  ],
+  "contracts": [
+    {
+      "id": "assign_call_my",
+      "family": "regex",
+      "events": [
+        {
+          "raw": "my $cx = call(Done)",
+          "args": {
+            "target": "$cx",
+            "callee": "Done",
+            "scope": "my"
+          },
+          "source_span": {
+            "start": 15,
+            "end": 34
+          }
+        },
+        {
+          "raw": "my $cx = call(Done)",
+          "args": {
+            "target": "$cx",
+            "callee": "Done",
+            "scope": "my"
+          },
+          "source_span": {
+            "start": 170,
+            "end": 189
+          }
+        },
+        {
+          "raw": "my $cx = call(Done)",
+          "args": {
+            "target": "$cx",
+            "callee": "Done",
+            "scope": "my"
+          },
+          "source_span": {
+            "start": 1077,
+            "end": 1096
+          }
+        }
+      ]
+    },
+    {
+      "id": "assign_call",
+      "family": "regex",
+      "events": [
+        {
+          "raw": "$ex = call(Done)",
+          "args": {
+            "target": "$ex",
+            "callee": "Done",
+            "scope": "existing"
+          },
+          "source_span": {
+            "start": 35,
+            "end": 51
+          }
+        },
+        {
+          "raw": "$ex = call(Done)",
+          "args": {
+            "target": "$ex",
+            "callee": "Done",
+            "scope": "existing"
+          },
+          "source_span": {
+            "start": 193,
+            "end": 209
+          }
+        },
+        {
+          "raw": "$ex = call(Done)",
+          "args": {
+            "target": "$ex",
+            "callee": "Done",
+            "scope": "existing"
+          },
+          "source_span": {
+            "start": 1057,
+            "end": 1073
+          }
+        }
+      ]
+    },
+    {
+      "id": "push_child_call_indexed_builtin",
+      "family": "regex",
+      "events": [
+        {
+          "raw": "push @ix, call(Done)->[2]",
+          "args": {
+            "target": "ix",
+            "callee": "Done",
+            "index": "2"
+          },
+          "source_span": {
+            "start": 52,
+            "end": 77
+          }
+        },
+        {
+          "raw": "push @ix, call(Done)->[2]",
+          "args": {
+            "target": "ix",
+            "callee": "Done",
+            "index": "2"
+          },
+          "source_span": {
+            "start": 213,
+            "end": 238
+          }
+        },
+        {
+          "raw": "push @ix, call(Done)->[2]",
+          "args": {
+            "target": "ix",
+            "callee": "Done",
+            "index": "2"
+          },
+          "source_span": {
+            "start": 1028,
+            "end": 1053
+          }
+        }
+      ]
+    },
+    {
+      "id": "push_child_call_builtin",
+      "family": "regex",
+      "events": [
+        {
+          "raw": "push @px, call(Done)",
+          "args": {
+            "target": "px",
+            "callee": "Done"
+          },
+          "source_span": {
+            "start": 78,
+            "end": 98
+          }
+        },
+        {
+          "raw": "push @px, call(Done)",
+          "args": {
+            "target": "px",
+            "callee": "Done"
+          },
+          "source_span": {
+            "start": 242,
+            "end": 262
+          }
+        },
+        {
+          "raw": "push @px, call(Done)",
+          "args": {
+            "target": "px",
+            "callee": "Done"
+          },
+          "source_span": {
+            "start": 1004,
+            "end": 1024
+          }
+        }
+      ]
+    },
+    {
+      "id": "return_call",
+      "family": "regex",
+      "events": [
+        {
+          "raw": "return call(Done)",
+          "args": {
+            "callee": "Done",
+            "context": "return"
+          },
+          "source_span": {
+            "start": 99,
+            "end": 116
+          }
+        },
+        {
+          "raw": "return call(Done)",
+          "args": {
+            "callee": "Done",
+            "context": "return"
+          },
+          "source_span": {
+            "start": 266,
+            "end": 283
+          }
+        },
+        {
+          "raw": "return call(Done)",
+          "args": {
+            "callee": "Done",
+            "context": "return"
+          },
+          "source_span": {
+            "start": 983,
+            "end": 1000
+          }
+        }
+      ]
+    },
+    {
+      "id": "entry_slot",
+      "family": "regex",
+      "events": [
+        {
+          "raw": "entry_slot( )",
+          "args": {},
+          "source_span": {
+            "start": 117,
+            "end": 130
+          }
+        },
+        {
+          "raw": "entry_slot( )",
+          "args": {},
+          "source_span": {
+            "start": 287,
+            "end": 300
+          }
+        },
+        {
+          "raw": "entry_slot( )",
+          "args": {},
+          "source_span": {
+            "start": 966,
+            "end": 979
+          }
+        }
+      ]
+    },
+    {
+      "id": "gap_span",
+      "family": "regex",
+      "events": [
+        {
+          "raw": "gap_span()",
+          "args": {},
+          "source_span": {
+            "start": 131,
+            "end": 141
+          }
+        },
+        {
+          "raw": "gap_span()",
+          "args": {},
+          "source_span": {
+            "start": 304,
+            "end": 314
+          }
+        },
+        {
+          "raw": "gap_span()",
+          "args": {},
+          "source_span": {
+            "start": 952,
+            "end": 962
+          }
+        }
+      ]
+    },
+    {
+      "id": "gap_text",
+      "family": "regex",
+      "events": [
+        {
+          "raw": "gap_text( )",
+          "args": {},
+          "source_span": {
+            "start": 142,
+            "end": 153
+          }
+        },
+        {
+          "raw": "gap_text( )",
+          "args": {},
+          "source_span": {
+            "start": 318,
+            "end": 329
+          }
+        },
+        {
+          "raw": "gap_text( )",
+          "args": {},
+          "source_span": {
+            "start": 937,
+            "end": 948
+          }
+        }
+      ]
+    },
+    {
+      "id": "gap_kind",
+      "family": "regex",
+      "events": [
+        {
+          "raw": "gap_kind()",
+          "args": {},
+          "source_span": {
+            "start": 154,
+            "end": 164
+          }
+        },
+        {
+          "raw": "gap_kind()",
+          "args": {},
+          "source_span": {
+            "start": 333,
+            "end": 343
+          }
+        },
+        {
+          "raw": "gap_kind()",
+          "args": {},
+          "source_span": {
+            "start": 923,
+            "end": 933
+          }
+        }
+      ]
+    },
+    {
+      "id": "return_bare",
+      "family": "statement",
+      "events": [
+        {
+          "raw": "return 7",
+          "args": {
+            "payload": "7"
+          },
+          "source_span": {
+            "start": 347,
+            "end": 355
+          }
+        },
+        {
+          "raw": "return 7",
+          "args": {
+            "payload": "7"
+          },
+          "source_span": {
+            "start": 911,
+            "end": 919
+          }
+        }
+      ]
+    },
+    {
+      "id": "exit_bare",
+      "family": "statement",
+      "events": [
+        {
+          "raw": "exit 7",
+          "args": {
+            "payload": "7"
+          },
+          "source_span": {
+            "start": 359,
+            "end": 365
+          }
+        },
+        {
+          "raw": "exit 7",
+          "args": {
+            "payload": "7"
+          },
+          "source_span": {
+            "start": 901,
+            "end": 907
+          }
+        }
+      ]
+    },
+    {
+      "id": "linecount_prefix_newline_matches",
+      "family": "statement",
+      "events": [
+        {
+          "raw": "my @lines = substr($$STRING, 0, $IPOS) =~ /\\n/g",
+          "args": {
+            "target": "lines",
+            "upto": "$IPOS"
+          },
+          "source_span": {
+            "start": 369,
+            "end": 416
+          }
+        },
+        {
+          "raw": "my @lines = substr($$STRING, 0, $IPOS) =~ /\\n/g",
+          "args": {
+            "target": "lines",
+            "upto": "$IPOS"
+          },
+          "source_span": {
+            "start": 850,
+            "end": 897
+          }
+        }
+      ]
+    },
+    {
+      "id": "print_capture_substr",
+      "family": "statement",
+      "events": [
+        {
+          "raw": "print \"<\" . substr($$STRING, $IPOS, $LSPOS - $IPOS - 1) . \">\\n\"",
+          "args": {
+            "source": "capture_substr"
+          },
+          "source_span": {
+            "start": 420,
+            "end": 483
+          }
+        },
+        {
+          "raw": "print \"<\" . substr($$STRING, $IPOS, $LSPOS - $IPOS - 1) . \">\\n\"",
+          "args": {
+            "source": "capture_substr"
+          },
+          "source_span": {
+            "start": 783,
+            "end": 846
+          }
+        }
+      ]
+    },
+    {
+      "id": "my_declare_bare",
+      "family": "statement",
+      "events": [
+        {
+          "raw": "my $dx",
+          "args": {
+            "declaration_type": "scalar",
+            "names": [
+              "dx"
+            ],
+            "scope": "my"
+          },
+          "source_span": {
+            "start": 487,
+            "end": 493
+          }
+        },
+        {
+          "raw": "my $dx",
+          "args": {
+            "declaration_type": "scalar",
+            "names": [
+              "dx"
+            ],
+            "scope": "my"
+          },
+          "source_span": {
+            "start": 773,
+            "end": 779
+          }
+        }
+      ]
+    },
+    {
+      "id": "assign_match_my",
+      "family": "statement",
+      "events": [
+        {
+          "raw": "my $mx = $CAPTURE",
+          "args": {
+            "target": "mx",
+            "source": "CAPTURE",
+            "scope": "my"
+          },
+          "source_span": {
+            "start": 497,
+            "end": 514
+          }
+        },
+        {
+          "raw": "my $mx = $CAPTURE",
+          "args": {
+            "target": "mx",
+            "source": "CAPTURE",
+            "scope": "my"
+          },
+          "source_span": {
+            "start": 752,
+            "end": 769
+          }
+        }
+      ]
+    },
+    {
+      "id": "destructure_imatch_list_my",
+      "family": "statement",
+      "events": [
+        {
+          "raw": "my ($ax, $bx) = @IMATCH_LIST",
+          "args": {
+            "targets": [
+              "ax",
+              "bx"
+            ],
+            "source": "IMATCH_LIST",
+            "scope": "my"
+          },
+          "source_span": {
+            "start": 518,
+            "end": 546
+          }
+        },
+        {
+          "raw": "my ($ax, $bx) = @IMATCH_LIST",
+          "args": {
+            "targets": [
+              "ax",
+              "bx"
+            ],
+            "source": "IMATCH_LIST",
+            "scope": "my"
+          },
+          "source_span": {
+            "start": 720,
+            "end": 748
+          }
+        }
+      ]
+    },
+    {
+      "id": "regex_subst_assignment",
+      "family": "statement",
+      "events": [
+        {
+          "raw": "$sx =~ s/a/b/g",
+          "args": {
+            "target": "sx",
+            "pattern": "/a/",
+            "replacement": "/b/",
+            "flags": "g",
+            "scope": null
+          },
+          "source_span": {
+            "start": 550,
+            "end": 564
+          }
+        },
+        {
+          "raw": "$sx =~ s/a/b/g",
+          "args": {
+            "target": "sx",
+            "pattern": "/a/",
+            "replacement": "/b/",
+            "flags": "g",
+            "scope": null
+          },
+          "source_span": {
+            "start": 702,
+            "end": 716
+          }
+        }
+      ]
+    },
+    {
+      "id": "next_bare",
+      "family": "statement",
+      "events": [
+        {
+          "raw": "next LOOP",
+          "args": {},
+          "source_span": {
+            "start": 568,
+            "end": 577
+          }
+        },
+        {
+          "raw": "next LOOP",
+          "args": {},
+          "source_span": {
+            "start": 689,
+            "end": 698
+          }
+        }
+      ]
+    },
+    {
+      "id": "ref_field_assign",
+      "family": "statement",
+      "events": [
+        {
+          "raw": "my $fx = $node->{key}[0]",
+          "args": {
+            "target": "fx",
+            "source": "node",
+            "path": "{key}[0]",
+            "scope": "my"
+          },
+          "source_span": {
+            "start": 581,
+            "end": 605
+          }
+        },
+        {
+          "raw": "my $fx = $node->{key}[0]",
+          "args": {
+            "target": "fx",
+            "source": "node",
+            "path": "{key}[0]",
+            "scope": "my"
+          },
+          "source_span": {
+            "start": 661,
+            "end": 685
+          }
+        }
+      ]
+    },
+    {
+      "id": "position_tracking",
+      "family": "statement",
+      "events": [
+        {
+          "raw": "$tx = pos($$STRING)",
+          "args": {
+            "category": "position_tracking"
+          },
+          "source_span": {
+            "start": 609,
+            "end": 628
+          }
+        },
+        {
+          "raw": "$tx = pos($$STRING)",
+          "args": {
+            "category": "position_tracking"
+          },
+          "source_span": {
+            "start": 638,
+            "end": 657
+          }
+        }
+      ]
+    }
+  ]
+}

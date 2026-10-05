@@ -380,7 +380,27 @@ identity, unchanged complete compiler records, foreign-source rejection and all 
 source-provenance fixtures. Complete TAP plans and both output channels are retained;
 missing inputs, incomplete plans and nested failures are distinguishing rejection
 controls. Canonical CI gates this family closeout on the exact staged candidate. The
-wider twenty-contract composition remains separately owned.
+mixed twenty-contract proof now uses one shared action input. Its literal construction
+includes a quoted row of all nine regex forms, every regex and statement form in
+forward order, an ignored comment, then all twenty forms in reverse order. Unicode,
+CRLF and Unicode whitespace remain in the original source. For each of three hash
+seeds, the nine regex scans retain three syntactic matches each; the eleven statement
+scans retain two original statements each. That is 49 event origins and 43 splitter
+frames per input, with no origin inferred by searching equal raw text.
+
+The independent oracle checks exact original arguments as well as spans. It distinguishes
+an indexed child push from an unindexed push, call-return from bare return, declaration
+from assignment, and each zero-argument gap helper. Public and private scans retain the
+same values and dependency callback sequence. Every private origin refers to its original
+event object and original argument object; the sidecar adds no public event fields.
+Eight unchanged source/scanner/AST/order consumers pass 144 complete test groups,
+including the existing callback, nested collector, opaque result, foreign-source and
+caller-error guards. Actual full output channels and immutable source inputs are retained;
+twenty distinguishing controls reject missing or altered occurrences, arguments, references,
+callbacks, inputs and incomplete or failed results. The initial missing-test-path harness
+failure stays recorded as incomplete evidence. Canonical recurrence and BasicRules parent
+closeout remain separately owned. This composition does not classify executable text,
+repair comment semantics or activate source replacement.
 
 
 These are compiler inspection examples, not recommended parsing actions. Each

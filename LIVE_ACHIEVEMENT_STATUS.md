@@ -2,17 +2,19 @@
 
 ## Current Activity
 
-Full PNT: the eleven statement contracts have independently accepted private frames, event origins and requested-source authority. Twenty-contract basic composition follows before remaining provenance/membership work.
+Full PNT: the mixed twenty-contract BasicRules source/argument/occurrence proof is established without production changes. Canonical family recurrence and parent closeout follow before remaining provenance/membership work.
 
 ## Latest Completed Slice
 
-`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.3` — Fresh eleven-contract recurrence supplies 3,864 immutable regular Git inputs with no overlays: four fixtures pass 80 groups; 66 complete guarded compiler records retain 177 authored scalar frames and 111 original event origins. Three foreign-source probes preserve events with zero invented origins. Fifteen acceptance controls observe RED. Original reviewer defects, renamed-file selection failures and unbound traceback-context diagnostics retain their actual source/channels with explicit limitations. Two fresh source-bound failed replays match all six original logical frames and pass six distinguishing controls, including both original-context REDs. The interrupted first canonical attempt retains its exact staged diff/combined output and observed exit 143, with no complete pass or receipt claim. Complete 58-input book renders five original examples and diagnostic-source teaching in two chapters, with six render controls. All 61 original producer-claim input hashes verify before historical freeze at ab2c. Production and permanent fixtures remain unchanged. Exact staged canonical CI must pass again before family closeout; wider twenty-contract composition and semantic repairs retain their owners.
+`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.2.0` — One literal mixed source composes all20 BasicRules contracts under three seeds:60 ordered public/private contract pairs,147 original event/argument identities and scalar origins,129 statement frames, unchanged callback sequences and three clean complete Toolbox streams. Eight unchanged source/scanner/AST/order/raw suites pass144 full groups; three foreign-source probes retain events with zero invented origins. Twenty reason-specific controls observe RED. Complete3899 immutable regular Git inputs plus three explicit overlays are recoverable and guarded before/after all7 actual commands. The initial nonexistent test-path prove exit2 retains original producer/manifest/full channels as incomplete evidence; the corrected existing ordering suite is verified. Complete58-input book renders five original examples/two chapters with seven controls;53 original statement-family input hashes verify before historical-only freeze at318457. Production/spec/standard tests/CI/dependencies remain unchanged.
 
 ## Next Action
 
-Activate `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.2` from clean HEAD; independently compose all nine regex and eleven statement producers. Remaining producers, executable membership, replacement, marker/comments and trace repairs retain their separate owners.
+Activate `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.2.1` from clean HEAD; independently recur the committed mixed proof and run exact staged canonical CI before closing the BasicRules family. Remaining producers, executable membership, replacement, marker/comments and trace repairs retain separate owners.
 
 ## Recent Completions
+
+- `2026-10-05` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.2.0` verifies20 mixed contracts/147 origins/129 frames and144 consumer groups with27 proof/render controls.
 
 - `2026-10-05` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.3` accepts3864-input statement recurrence,80 fixture groups/111 origins and canonical family landing.
 
@@ -43,8 +45,6 @@ Activate `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.2` from clean HEAD;
 - `2026-10-03` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.0` freezes nested raw/source-occurrence diagnosis and owns comment classification.
 
 - `2026-10-03` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.1` preserves pending scan occurrences; exact canonical receipt gates landing.
-
-- `2026-10-03` — `REPO-HYGIENE.8` verifies the due retained census/per-file controls with zero removals.
 
 ## History
 

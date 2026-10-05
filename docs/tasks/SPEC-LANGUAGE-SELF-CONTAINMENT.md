@@ -2283,10 +2283,44 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
   Owned diagnostic-context input defect / P1: Actual original failed replay channels execute retained source under the original logical filename, but Python traceback formatting reads the newer file for displayed source lines. Both retained diagnostics show mismatched executed/source-context lines; the formatter input was not bound. Preserve original producers/channels as explicitly limited initial evidence, bind replay linecache to the exact executed bytes and validate every displayed logical frame independently against those original lines. Retain distinguishing old-context RED and fresh bound replay controls; add a Knowledge fact. Runtime recurrence inputs/events/frames remain unaffected. Stop the original canonical attempt (observed exit143, no receipt/pass); preserve its exact staged candidate and combined output. Complete corrected proof, refresh the claim, then stage and run canonical CI again before landing.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.2`
-  Status: `pending`
+  Status: `active`
   Goal: Independently compose all twenty PrimitiveBasicRules provenance contracts.
   Dependencies: `.1.3.3.0.7.2.2.0.1.1.1`
+  Children: `.1.3.3.0.7.2.2.0.1.1.2.0`, `.1.3.3.0.7.2.2.0.1.1.2.1`
+  Safe-slice split: First author and verify one mixed twenty-contract source/argument/occurrence oracle, actual source-bound probes, original guards and direct consumers. Then independently recur from the committed proof boundary and run exact staged canonical CI before closing .1.1.2 and BasicRules .1.1. No executable membership or public schema admission.
   Acceptance: Exact source/argument/occurrence public identities, all selected regex and statement frames, original private-channel guards and affected consumers pass before closing the family parent. No executable membership or public schema admission.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.2.0`
+  Status: `done`
+  Goal: Establish the independent mixed twenty-contract BasicRules composition proof.
+  Dependencies: `.1.3.3.0.7.2.2.0.1.1.1.3`
+  Activation: Clean 318457e6e62683d485ded02bdbe9566931aaca97, exact canonical receipt verified, empty brief and no jobs. Relevant roadmap, BasicRules constructors, ScannerCore/private frame bridge, independent regex/statement oracles and ActionIR book reviewed. Nine regex and eleven statement producers stay unchanged; all five dependency callbacks retain their contract.
+  Owned paths: Checkpoint prefix .1.1.2.0-, its claim, prior .1.1.1.3 claim historical freeze, BasicRules Knowledge cards, task/index/resume/live/roadmap/change/notes and ActionIR book. No production, standard test, spec, CI, hook, dependency or other repository changes.
+  Verification tier: `focused`
+  Focused checks: Immutable regular Git inputs plus explicit authored probe overlays; twenty mixed public/private contract scans and original argument/occurrence/reference identities under three seeds; actual callback sequence equality, complete source-frame oracle and full Toolbox channels; four permanent private provenance guards and direct scanner/AST/order/raw consumers; reason-specific observed RED controls; actual book render, memory/Knowledge/claims/history/diff and all doctrines.
+  Canonical trigger: None; bounded evidence preparation only. .1.1.2.1 owns the canonical family/parent closeout after this clean committed proof.
+  Claim verification: `docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.2.0.json`
+  Acceptance: Literal input construction authors scalar spans and exact original arguments independently of scanned events/raw-text lookup. Mixed repeated and quoted regex matches, interleaved statement kinds, ignored comments and Unicode/CRLF retain each contract's original ordered events and private source identity. Capture actual producer/all supplied inputs/full channels and distinguishing controls without widening readiness or executable membership.
+  Owned harness defect / P1: Initial capture selected nonexistent t/actionir_canonical_scanner_order.t. Actual prove exits2 after five suites; full stdout/stderr and original producer/manifest are retained as initial-* with no complete acceptance. Correct the selection to existing t/canonical_event_occurrence_order.t and verify its entire plan, then rerun the actual capture. Production is unaffected.
+
+  Verification: One independently authored shared action supplies20 contracts,43 contiguous statements and49 original selected events per seed. Three actual seeds preserve60 ordered public/private contract pairs,147 event/argument reference identities and original scalar origins,129 frames, identical dependency callbacks and three complete clean Toolbox streams. Eight unchanged fixtures/AST/order/raw consumers pass144 full groups, including original nested/callback/error/opaque/source-authority guards; three foreign-source probes retain events with zero invented origin. Complete3899 immutable regular Git inputs plus three explicit overlays have actual before/after byte/mode/population guards around all7 commands. Twenty observed reason-specific RED controls reject;58-input book renders five original examples/two chapters with seven controls. All53 prior statement-family input hashes verify before historical freeze at318457. The original missing-test-path prove exit2/full channels are retained separately incomplete; corrected ordering selection is verified without production changes. Focused doctrine/claim/Knowledge/history/diff and hooks govern landing; canonical closeout remains .1.1.2.1.
+  Commit: Git is the accepted slice identity authority. Activate .1.1.2.1 only from the clean committed mixed-proof boundary.
+
+## Acceptance Checklist — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.2.0
+
+- [x] **REPRODUCE / ISSUE** — Actual immutable-source Toolbox probes inspect one mixed20-contract action; original wrong-path prove exit2/source/channels remain separately incomplete, and fresh corrected capture succeeds.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Nine full-input regex hooks and eleven canonical statement hooks share ScannerCore's private event sidecar; literal input construction supplies independent arguments and scalar occurrence frames. The initial harness failure is the nonexistent ordering-test selection.
+- [x] **FIX** — Independent mixed oracle/probe/reviewer binds all20 contracts and original event/argument references without production edits; corrected canonical_event_occurrence_order selection replaces only the nonexistent test path.
+- [x] **ADDRESSED (verified)** — Three seeds retain147 original event origins/129 frames with exact public arguments, private reference identities, callback sequence and complete clean Toolbox streams. Twenty reason-specific corruptions observe RED.
+- [x] **NO REGRESSION** — Eight unchanged suites pass144 complete ordered groups and three foreign-source probes retain zero origins. All3899 regular Git inputs/three explicit overlays have actual before/after content/mode/population guards and full channels.
+- [x] **LOCKSTEP** — Complete58-input book renders five unchanged examples/two chapters/seven controls;53 prior claim hashes verify before historical-only freeze. Task/index/roadmap/resume/live/Knowledge/claims/history/diff/doctrine checks govern this focused landing; canonical BasicRules closeout remains separately owned.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.2.1`
+  Status: `pending`
+  Goal: Independently recur and canonically accept the twenty-contract BasicRules family.
+  Dependencies: `.1.3.3.0.7.2.2.0.1.1.2.0`
+  Planned verification: Exact immutable committed mixed oracle/probes, permanent private guards and affected consumers, retained full channels and independent source/argument/occurrence controls; actual book render; exact staged canonical receipt before BasicRules parent closeout.
+  Acceptance: Close .1.1.2 and .1.1 only after the full mixed twenty-contract proof and canonical gate pass at the exact landing boundary. Remaining producer families, membership/replacement, marker/comment repairs and broader audits stay separately owned.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.3`
   Status: `done`
