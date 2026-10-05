@@ -343,6 +343,14 @@ original recognizer did so. Adding an exact source origin does not turn that
 observation into executable membership. Quoted-source membership is subsequent
 work; the provenance oracle retains the original syntactic population.
 
+A fresh immutable family recurrence repeats all sixteen Flow contracts using
+committed producers and fixtures. It checks original event/argument objects,
+full-action scalar intervals, callback/compiler channels, MethodExpr argument
+frames and custom authority denials under three hash seeds. Exact staged canonical
+CI is required before family acceptance closes. This closes private provenance;
+quoted executable membership, other scanner families, comments and replacement
+remain subsequent work.
+
 ### Original method argument boundaries
 
 The current method-expression parser returns the original trimmed expression

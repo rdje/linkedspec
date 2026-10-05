@@ -8,11 +8,13 @@ answers:
   - "does a quoted case payload produce a Flow scanner event"
   - "what owns recursive Flow source provenance"
 date: 2026-10-05
-status: all sixteen Flow producer source contracts verified; canonical family acceptance owned
+status: all sixteen Flow source contracts independently accepted through exact canonical landing
 tags: [perl, actionir, flow, scanner, source-provenance, traversal]
-evidence: "Recursive .1.3.2.1 verifies4197-input before/after plus sole Flow/exact consumer deltas, RED6-GREEN7/1180 groups/147 origins/48 pairs/29 evidence controls and19 book examples. Direct .1.3.1 verifies14 contracts/RED16-GREEN21/1158 groups/87 origins/48 complete unchanged compiler pairs,22 evidence and16 render controls at4099-input immutable before/after boundaries. SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.0 retains original public/private Toolbox effects from immutable b73f1f59a and independent literal scalar/argument/traversal oracles. Original omitted quoted-case expectation is separately retained and observed RED; runtime input bytes remain exact."
+evidence: "Fresh .1.3.3 verifies4233-input/no-overlay recurrence,16 contracts/147 origins/138 frames/837 groups/48 pairs/31 controls plus58-input book19 examples/three chapters/19 controls; exact canonical receipt gates landing. Recursive .1.3.2.1 verifies4197-input before/after plus sole Flow/exact consumer deltas, RED6-GREEN7/1180 groups/147 origins/48 pairs/29 evidence controls and19 book examples. Direct .1.3.1 verifies14 contracts/RED16-GREEN21/1158 groups/87 origins/48 complete unchanged compiler pairs,22 evidence and16 render controls at4099-input immutable before/after boundaries. SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.0 retains original public/private Toolbox effects from immutable b73f1f59a and independent literal scalar/argument/traversal oracles. Original omitted quoted-case expectation is separately retained and observed RED; runtime input bytes remain exact."
 reverify:
-  - "After final recursive acceptance: bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.2.1-review.py"
+  - "Current family: bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.3-review.py"
+  - "At frozen1d450522afb79aa87e579db148224ad6ed2c11e0 replay recursive .1.3.2.1-review.py; do not refresh its current-source boundary after later producer changes."
+  - "Original recursive acceptance: bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.2.1-review.py"
   - "At frozen6ce479842be85219990be889914f354f1a4aaa44 replay direct .1.3.1-review.py; do not refresh its original recursive boundary after consumption changes."
   - "At frozen f3f87ce110db89fca0e3db4debd4d9948df0b8df replay the original .1.3.0 diagnosis/control; its current-source guard must not be refreshed after producer changes."
 ---
@@ -38,8 +40,9 @@ switch arguments are trimmed by MethodExpr's actual CSV splitter, which also
 drops empty slots. Captured-block bases and parser-produced argument occurrences
 must be translated explicitly. Custom callbacks that copy, transform or parse
 foreign source retain their ordinary results but cannot fabricate authority.
-The existing statement-frame bridge handles `next_stmt`; argument authority is
-separately owned by `.1.3.2.0` before any new bridge is implemented.
+The existing statement-frame bridge handles `next_stmt`; original argument
+authority was diagnosed under `.1.3.2.0`, and its private bridge is implemented
+under `.1.3.2.0.1` before recursive Flow consumption.
 
 The original nested `say("case(\\"quoted\\")")` payload is also scanned as
 syntactic case text. The recursive marker regex starts inside the string and
@@ -80,3 +83,11 @@ whole-stream review verifies87-to147 origins/three seeds/48 unchanged complete
 compiler pairs with29 evidence controls; the original quoted syntactic observations above stay part of the
 literal oracle. The previous direct-test assertion of absent recursive origins
 is explicitly reconciled to that independent original oracle.
+
+Fresh immutable whole-family recurrence under `.1.3.3` uses4233 regular committed
+Git inputs with no overlays. All sixteen contracts retain147 origins and138
+MethodExpr argument frames across three seeds. Complete prior Flow compiler
+and MethodExpr channels remain byte-identical;837 selected compatibility
+groups and separate authority fixtures pass.31 reason-specific evidence
+controls reject corruptions. Exact staged canonical receipt gates family
+landing; executable membership and other producer families remain separate.

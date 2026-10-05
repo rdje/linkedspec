@@ -1,10 +1,10 @@
 # MEMORY
 
-- activation_commit: `441f9c82343507f98428fa8982e5ad13c0cdae8c` — clean recursive Flow consumer activation base.
-- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.2.1 - retain recursive Flow source origins`.
-- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.2.1` (done) — recursive Flow source-frame consumption accepted.
-- next_action: Activate .1.3.3 from clean HEAD; fresh immutable all16 Flow recurrence and exact canonical acceptance; check notes pressure before required rollover/capacity.
-- in_flight_uncommitted: none; verified recursive Flow/proof/book/Knowledge/live docs and claim are committed.
+- activation_commit: `1d450522afb79aa87e579db148224ad6ed2c11e0` — clean whole Flow acceptance activation base.
+- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.3 - accept Flow source family`.
+- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.3` (done) — complete Flow source family; Legacy `.1.4` next.
+- next_action: Activate Legacy `.1.4` from clean HEAD; diagnose the original large producer inventory through LinkedSpec tools and split safe owned families before implementation.
+- in_flight_uncommitted: None after landing; exact staged canonical receipt required by this acceptance commit.
 - blockers: No access/decision blocker. Matches and attached/marker/value/null/while executors are repaired; control parent/order and raw-expression reporting are reconciled; quoted/comment readiness .7.2/.3 precedes dispatcher/full execution. Other startup repairs remain separate.
   Wrapper startup .7 remains open; recovery/purge stay prohibited.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the

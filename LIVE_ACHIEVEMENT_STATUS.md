@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Full PNT: all sixteen Flow producers now retain original source occurrences. Next .1.3.3 independently repeats complete immutable family contracts and exact canonical CI before closure. Other producers/membership/comments/replacement/global audits remain owned.
+Full PNT: all sixteen Flow source producers have fresh independent whole-family acceptance, gated by exact staged canonical CI. Next Legacy .1.4 diagnoses and splits its large original inventory. Other producers/membership/comments/replacement/global audits remain owned.
 
 ## Latest Completed Slice
 
-`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.2.1` — Recursive Flow .1.3.2.1 verifies4197 immutable inputs/one Flow+exact consumer delta, RED6-GREEN7/1180 groups and87-to147 origins under three seeds;48 complete compiler pairs unchanged,29 evidence/18 book controls reject. Fourteen guarded commands; separate authority RED1/GREEN3 across three seeds;58-input book19 examples/three chapters.49 prior bridge hashes verify before historical freeze. Initial local fixture bound, book instrument quoting and consumer reviewer corrections are retained; original quoted syntactic membership remains unchanged.
+`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.3` — Fresh Flow family .1.3.3 verifies4233 immutable inputs/no overlays, all16 contracts/147 origins/138 argument frames/48 unchanged compiler pairs under three seeds;16 suites837 groups plus authority3,31 evidence/19 book controls reject. Exact canonical receipt gates family acceptance; Legacy safe-slice diagnosis follows. Ten fully guarded commands preserve complete prior Flow/MethodExpr channels. Complete58-input book renders19 examples/three chapters;51 prior hashes verify before historical freeze. No production or standard test changes.
 
 ## Next Action
 
-Activate .1.3.3 from clean HEAD; repeat all sixteen Flow contracts/reference/scalar/callback/compiler channels from a fresh immutable baseline, reconcile current teaching, then exact staged canonical signoff. Engineering notes58975 bytes is below rollover58983; own any required next rollover/capacity before changing infrastructure.
+Activate Legacy .1.4 from clean HEAD; recover original producer contracts, exact source authority and public compiler channels with LinkedSpec tools, then define safe coherent implementation children. Engineering notes58975 bytes remains below rollover58983; capacity work must be owned before a required rollover.
 
 ## Recent Completions
 
+- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.3` — immutable Flow acceptance;16 contracts/147 origins/138 frames/837 groups/31 RED controls.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.2.1` — recursive Flow origins; RED6/GREEN7/1180 groups/147 origins/48 unchanged pairs.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.2.0.1` — private method argument frames; RED10/GREEN15/1173 groups/138 exact frames.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.2.0` — original argument/callback authority diagnosis;124 groups/23 literal arguments and RED evidence controls.
@@ -29,10 +30,6 @@ Activate .1.3.3 from clean HEAD; repeat all sixteen Flow contracts/reference/sca
 - `2026-10-05` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.3` accepts3864-input statement recurrence,80 fixture groups/111 origins and canonical family landing.
 - `2026-10-04` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.2` retains111 origins/29 GREEN, fixes foreign-source authority and verifies1148 guarded consumer groups.
 - `2026-10-04` — `REPO-HYGIENE.9` retains the due exact metadata census/full channels with zero removals.
-- `2026-10-04` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.1` captures177 private scalar frames,28 GREEN and1148 unchanged consumer groups.
-
-
-
 
 ## History
 

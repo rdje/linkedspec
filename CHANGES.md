@@ -12,6 +12,12 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-10-05 — Complete Flow source family acceptance (.1.3.3)
+
+Fresh Flow family .1.3.3 verifies4233 immutable inputs/no overlays, all16 contracts/147 origins/138 argument frames/48 unchanged compiler pairs under three seeds;16 suites837 groups plus authority3,31 evidence/19 book controls reject. Exact canonical receipt gates family acceptance; Legacy safe-slice diagnosis follows.
+
+Fresh immutable committed producers retain all original event/argument references, scalar coordinates, marker-first traversal and exact complete prior callback/compiler channels. Ten guarded commands include selected source/frame/AST/order/trace/composition consumers and custom authority denials. Complete58-input book renders19 examples/three chapters; all51 prior claim hashes verify before historical freeze. Production/tests are unchanged; executable membership and global audits remain separate. Existing engineering mechanism notes remain current and unchanged.
+
 ## 2026-10-05 — Recursive Flow source origins (.1.3.2.1)
 
 Translate original captured-block and verified MethodExpr argument frames into full-action scalar origins in recursive case/default producers. Snapshot bounds before callbacks and retain marker-first depth-first traversal followed by inline branches; original events/args/constructor references and quoted syntactic observations remain unchanged. Reconcile only the direct-test assertions that previously required absent recursive origins.

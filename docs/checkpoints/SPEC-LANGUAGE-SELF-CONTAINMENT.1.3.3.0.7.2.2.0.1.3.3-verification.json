@@ -1,0 +1,174 @@
+{
+  "complete": true,
+  "revision": "1d450522afb79aa87e579db148224ad6ed2c11e0",
+  "regular_inputs": 4233,
+  "overlays": 0,
+  "commands": 10,
+  "contracts": 16,
+  "seeds": 3,
+  "source_origins": 147,
+  "method_frames": 138,
+  "complete_compiler_pairs": 48,
+  "fixture_suites": 16,
+  "fixture_groups": 837,
+  "authority_groups": 3,
+  "controls": [
+    {
+      "name": "if_flow if_flow omitted origin",
+      "observed": "RED",
+      "reason": "original hook population"
+    },
+    {
+      "name": "elseif_flow elseif_flow omitted origin",
+      "observed": "RED",
+      "reason": "literal direct original scalar origins"
+    },
+    {
+      "name": "else_flow else_flow omitted origin",
+      "observed": "RED",
+      "reason": "literal direct original scalar origins"
+    },
+    {
+      "name": "endif_flow endif_flow omitted origin",
+      "observed": "RED",
+      "reason": "literal direct original scalar origins"
+    },
+    {
+      "name": "while_flow while_flow omitted origin",
+      "observed": "RED",
+      "reason": "literal direct original scalar origins"
+    },
+    {
+      "name": "switch_flow switch_flow omitted origin",
+      "observed": "RED",
+      "reason": "literal direct original scalar origins"
+    },
+    {
+      "name": "endcase_flow endcase_flow omitted origin",
+      "observed": "RED",
+      "reason": "literal direct original scalar origins"
+    },
+    {
+      "name": "endswitch_flow endswitch_flow omitted origin",
+      "observed": "RED",
+      "reason": "literal direct original scalar origins"
+    },
+    {
+      "name": "say_stmt say_stmt omitted origin",
+      "observed": "RED",
+      "reason": "literal direct original scalar origins"
+    },
+    {
+      "name": "print_stmt print_stmt omitted origin",
+      "observed": "RED",
+      "reason": "literal direct original scalar origins"
+    },
+    {
+      "name": "print_each print_each omitted origin",
+      "observed": "RED",
+      "reason": "literal direct original scalar origins"
+    },
+    {
+      "name": "exit_now exit_now omitted origin",
+      "observed": "RED",
+      "reason": "literal direct original scalar origins"
+    },
+    {
+      "name": "next_stmt next_stmt omitted origin",
+      "observed": "RED",
+      "reason": "literal direct original scalar origins"
+    },
+    {
+      "name": "return_undef return_undef omitted origin",
+      "observed": "RED",
+      "reason": "literal direct original scalar origins"
+    },
+    {
+      "name": "recursive switch_flow omitted origin",
+      "observed": "RED",
+      "reason": "literal direct original scalar origins"
+    },
+    {
+      "name": "recursive case_flow omitted origin",
+      "observed": "RED",
+      "reason": "literal direct original scalar origins"
+    },
+    {
+      "name": "recursive default_flow omitted origin",
+      "observed": "RED",
+      "reason": "literal direct original scalar origins"
+    },
+    {
+      "name": "arguments case_flow omitted origin",
+      "observed": "RED",
+      "reason": "literal direct original scalar origins"
+    },
+    {
+      "name": "arguments default_flow omitted origin",
+      "observed": "RED",
+      "reason": "literal direct original scalar origins"
+    },
+    {
+      "name": "recursive origin_event",
+      "observed": "RED",
+      "reason": "actual returned constructor argument identities"
+    },
+    {
+      "name": "recursive constructed_event",
+      "observed": "RED",
+      "reason": "actual returned constructor argument identities"
+    },
+    {
+      "name": "recursive constructed_args",
+      "observed": "RED",
+      "reason": "actual returned constructor argument identities"
+    },
+    {
+      "name": "wrong recursive scalar",
+      "observed": "RED",
+      "reason": "literal direct original scalar origins"
+    },
+    {
+      "name": "lost method frame",
+      "observed": "RED",
+      "reason": "literal original parser scalar frames"
+    },
+    {
+      "name": "forged CSV reference",
+      "observed": "RED",
+      "reason": "actual private returned references"
+    },
+    {
+      "name": "lost acceptance run",
+      "observed": "RED",
+      "reason": "complete acceptance commands"
+    },
+    {
+      "name": "lost acceptance guard",
+      "observed": "RED",
+      "reason": "complete acceptance runtime guards"
+    },
+    {
+      "name": "lost Git input",
+      "observed": "RED",
+      "reason": "complete unique immutable Git population"
+    },
+    {
+      "name": "forged channel",
+      "observed": "RED",
+      "reason": "complete channel bytes"
+    },
+    {
+      "name": "forged producer",
+      "observed": "RED",
+      "reason": "actual acceptance capture producer"
+    },
+    {
+      "name": "failed authority assertion",
+      "observed": "RED",
+      "reason": "positive authority fixture reach"
+    }
+  ],
+  "instrument_sha256": "5f9e4d3d346a0aa7edf486eb1d54f67460253253ad398da1fc4a78e28669526c",
+  "scope": "Fresh unchanged committed whole-family recurrence. Canonical staged receipt remains required before acceptance closure; source membership and global audits remain separate."
+}
