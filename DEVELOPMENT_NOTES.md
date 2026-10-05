@@ -12,6 +12,12 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-10-05 — Original recursive Flow occurrence authority (.1.3.0)
+
+FlowRules case/default concatenate marker/block depth-first traversal with inline-switch argument traversal. A later tail marker therefore precedes an earlier inline branch; lexical sorting changes the contract. Equal branch twins require occurrence authority from captured block bases and actual MethodExpr CSV argument frames. CSV trims whitespace and drops empty slots; a raw-key lookup cannot reconstruct their original positions. Preserve default callback effects and returned event/argument references; custom copied/transformed/foreign results must decline authority. Own that bridge diagnosis before implementation, then direct and recursive producer slices and canonical family acceptance.
+
+An original nested quoted case payload produces a syntactic marker event; its regex/parser mechanism is retained, not silently removed. The first oracle's omission is actually RED. Runtime sources/dispatchers and immutable capture remain exact; separate corrected review authors the quoted interval from literal fragments. It is scheduled under .7.2 lexical membership after provenance and independently checked under .7.2.3. Prior family claim is historically frozen only after all34 exact input hashes verify. Book examples teach current gaps and traversal rather than claiming new origins. Durable fact: docs/knowledge/perl-flow-recursive-source-provenance.md; source-bound record: docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.0.json.
+
 ## 2026-10-05 — immutable pipeline family acceptance (SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.3)
 
 Repeat the exact committed corrected probe and original literal source/argument/interval/plan oracle from all4050 regular Git members, with no overlays. Validate every input object/content/mode/population and actual producer/import/prior channels; retain full stdout/stderr and guards for all nine commands. Current reference marker compares actual returned events, and the equal-valued copy control recurs unchanged. Historical null metadata/self-comparison/selector failures keep their original bytes, limits and repair ownership.

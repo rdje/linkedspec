@@ -235,6 +235,51 @@ an expression-shaped `do { ... }`, so `endswitch()` needs a generated host termi
 following newline-separated statement. Ordinary `if` block closure remains statement-shaped
 and receives no such terminator. Neither detail changes the source-level separator rule.
 
+### Flow source occurrences and recursive traversal
+
+Flow scanner events describe syntactic observations. The original family has sixteen
+contract dispatchers: thirteen scan regex matches, `next_stmt` splits statements,
+and `case_flow` / `default_flow` each concatenate two traversals. At the current
+pipeline acceptance boundary, only `if_flow` records private original-source origins
+in this family. The remaining Flow origins are being repaired in owned slices;
+this diagnosis does not change recognition or executable membership.
+
+Direct aliases and bare markers preserve their original spelling in event `raw`:
+
+```text
+otherwise { next }  -> else_flow raw: otherwise { next }, args: {}
+endif              -> endif_flow raw: endif, args: {}
+while(false) { next() } -> while_flow args.condition: false
+```
+
+Parsing `otherwise` through a normalized `else()` helper does not authorize an
+`else()` source span: the source occurrence is still the authored `otherwise`.
+Likewise, callbacks can parse nested syntax and replace regex match globals; a
+producer must snapshot its own match coordinates before invoking them.
+
+Case/default first scan marker matches, recursing into attached blocks in depth-first
+order. They then append the inline-switch branch traversal, including nested branch
+arguments. For example:
+
+```text
+switch(kind, case("inline", case("nested")), default(default())); case("tail")
+# case_flow event order:
+# case("tail"), case("inline", case("nested")), case("nested")
+```
+
+The complete inline branch raw above is `case("inline", case("nested"))`.
+The later tail marker precedes the earlier inline branch in this composite stream.
+Sorting events by source position would change the original contract. Repeated
+`case("twin")` or `default()` arguments also require separate occurrence frames;
+equal raw text cannot identify which original argument produced an event.
+
+Recursive source provenance must translate each captured block and each trimmed
+parser argument back to the full original action. Leading/trailing whitespace and
+empty comma slots affect source offsets even when the parser drops them from its
+argument array. Private frame authority must therefore come from the actual parser
+invocation and returned argument references, with transformed/copied/foreign callback
+results retaining their events but receiving no invented source authority.
+
 ### CanonicalEvents
 
 `ActionIR::CanonicalEvents` records recognized current helper calls as ActionIR event records. Each event carries a contract ID, resolved arguments, and metadata needed by the later lowering stages. Deleted helper names are not canonicalized into replacement events. Raw-Perl compatibility passthroughs may still be classified for migration reporting, but their descriptor-facing diagnostic labels stay neutral instead of reusing retired helper names.

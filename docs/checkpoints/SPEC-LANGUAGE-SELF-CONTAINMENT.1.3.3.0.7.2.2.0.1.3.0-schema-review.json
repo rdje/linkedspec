@@ -1,0 +1,7 @@
+{
+  "valid": true,
+  "claims": 1,
+  "gaps": 0,
+  "instrument_sha256": "5e59ff3613fb5f0ad1d46a004cc9ef0ddf37a7617717c1f4472bd37cfa1e2433",
+  "scope": "Actual existing strict checker validates this live record and all input bytes. Full staged check and all commit hooks remain mandatory; no schema/checker changes."
+}

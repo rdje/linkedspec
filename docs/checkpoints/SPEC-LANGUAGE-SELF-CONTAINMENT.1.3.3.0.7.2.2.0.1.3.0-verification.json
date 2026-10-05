@@ -1,0 +1,146 @@
+{
+  "complete": true,
+  "revision": "b73f1f59aab5c248fded038ec53399a5ddd3bb60",
+  "regular_inputs": 4065,
+  "overlays": 3,
+  "contracts": 16,
+  "cases": 16,
+  "seeds": 3,
+  "actual_commands": 49,
+  "fixture_suites": 6,
+  "fixture_groups": 103,
+  "controls": [
+    {
+      "name": "omitted command",
+      "observed": "RED",
+      "reason": "complete command population"
+    },
+    {
+      "name": "lost guard",
+      "observed": "RED",
+      "reason": "complete immutable runtime guards"
+    },
+    {
+      "name": "truncated channel",
+      "observed": "RED",
+      "reason": "complete channel bytes"
+    },
+    {
+      "name": "if_flow omitted occurrence",
+      "observed": "RED",
+      "reason": "literal original event arguments and composite order"
+    },
+    {
+      "name": "elseif_flow omitted occurrence",
+      "observed": "RED",
+      "reason": "literal original event arguments and composite order"
+    },
+    {
+      "name": "else_flow omitted occurrence",
+      "observed": "RED",
+      "reason": "literal original event arguments and composite order"
+    },
+    {
+      "name": "endif_flow omitted occurrence",
+      "observed": "RED",
+      "reason": "literal original event arguments and composite order"
+    },
+    {
+      "name": "while_flow omitted occurrence",
+      "observed": "RED",
+      "reason": "literal original event arguments and composite order"
+    },
+    {
+      "name": "switch_flow omitted occurrence",
+      "observed": "RED",
+      "reason": "literal original event arguments and composite order"
+    },
+    {
+      "name": "endcase_flow omitted occurrence",
+      "observed": "RED",
+      "reason": "literal original event arguments and composite order"
+    },
+    {
+      "name": "endswitch_flow omitted occurrence",
+      "observed": "RED",
+      "reason": "literal original event arguments and composite order"
+    },
+    {
+      "name": "say_stmt omitted occurrence",
+      "observed": "RED",
+      "reason": "literal original event arguments and composite order"
+    },
+    {
+      "name": "print_stmt omitted occurrence",
+      "observed": "RED",
+      "reason": "literal original event arguments and composite order"
+    },
+    {
+      "name": "print_each omitted occurrence",
+      "observed": "RED",
+      "reason": "literal original event arguments and composite order"
+    },
+    {
+      "name": "exit_now omitted occurrence",
+      "observed": "RED",
+      "reason": "literal original event arguments and composite order"
+    },
+    {
+      "name": "next_stmt omitted occurrence",
+      "observed": "RED",
+      "reason": "literal original event arguments and composite order"
+    },
+    {
+      "name": "return_undef omitted occurrence",
+      "observed": "RED",
+      "reason": "literal original event arguments and composite order"
+    },
+    {
+      "name": "recursive omitted occurrence",
+      "observed": "RED",
+      "reason": "literal original event arguments and composite order"
+    },
+    {
+      "name": "arguments omitted occurrence",
+      "observed": "RED",
+      "reason": "literal original event arguments and composite order"
+    },
+    {
+      "name": "global sort",
+      "observed": "RED",
+      "reason": "literal original event arguments and composite order"
+    },
+    {
+      "name": "changed callback",
+      "observed": "RED",
+      "reason": "unchanged exact callback effects"
+    },
+    {
+      "name": "origin_event",
+      "observed": "RED",
+      "reason": "actual returned constructor argument references"
+    },
+    {
+      "name": "constructed_event",
+      "observed": "RED",
+      "reason": "actual returned constructor argument references"
+    },
+    {
+      "name": "constructed_args",
+      "observed": "RED",
+      "reason": "actual returned constructor argument references"
+    },
+    {
+      "name": "wrong scalar span",
+      "observed": "RED",
+      "reason": "original scalar source identity"
+    },
+    {
+      "name": "omitted Git input",
+      "observed": "RED",
+      "reason": "complete unique original Git population"
+    }
+  ],
+  "events_per_seed": 49,
+  "instrument_sha256": "09c4be236ee4ab962227d7734a357097a209ad3a587a323ba4191cf5b94d4a9a"
+}

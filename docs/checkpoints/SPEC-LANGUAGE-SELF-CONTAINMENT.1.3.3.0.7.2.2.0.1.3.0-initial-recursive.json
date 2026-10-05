@@ -1,0 +1,1916 @@
+{
+   "action" : "note(\"雪😀\");\r\ncase(\"outer\") { case(\"inner\") { case(\"deep\"); }; }; default { default { default; }; };\r\nswitch(kind, case(\"inline\", case(\"nested\"), case(\"twin\")), default(default(), default())); case(\"twin\"); default()",
+   "dependency_keys" : [
+      "build_array_pipeline_plan_from_expr",
+      "normalize_method_args_with_optional_scope",
+      "parse_method_function_expr",
+      "split_action_ir_statements",
+      "trim_action_ir_value"
+   ],
+   "diagnostics" : {
+      "canonical_action_ir_count" : 16,
+      "canonical_action_ir_events" : [
+         {
+            "args" : {
+               "code" : "note(\"雪😀\")"
+            },
+            "contract_id" : null,
+            "kind" : "RAW_PERL",
+            "raw" : "note(\"雪😀\")",
+            "source" : "fallback_non_helper_statement"
+         },
+         {
+            "args" : {
+               "value" : "\"outer\""
+            },
+            "contract_id" : "case_flow",
+            "kind" : "CASE",
+            "raw" : "case(\"outer\") { case(\"inner\") { case(\"deep\"); }; }",
+            "source" : "helper_contract"
+         },
+         {
+            "args" : {},
+            "contract_id" : "default_flow",
+            "kind" : "DEFAULT",
+            "raw" : "default { default { default; }; }",
+            "source" : "helper_contract"
+         },
+         {
+            "args" : {
+               "expr" : "kind"
+            },
+            "contract_id" : "switch_flow",
+            "kind" : "SWITCH",
+            "raw" : "switch(kind, case(\"inline\", case(\"nested\"), case(\"twin\")), default(default(), default()))",
+            "source" : "helper_contract"
+         },
+         {
+            "args" : {
+               "value" : "\"twin\""
+            },
+            "contract_id" : "case_flow",
+            "kind" : "CASE",
+            "raw" : "case(\"twin\")",
+            "source" : "helper_contract"
+         },
+         {
+            "args" : {},
+            "contract_id" : "default_flow",
+            "kind" : "DEFAULT",
+            "raw" : "default()",
+            "source" : "helper_contract"
+         },
+         {
+            "args" : {
+               "value" : "\"inner\""
+            },
+            "contract_id" : "case_flow",
+            "kind" : "CASE",
+            "raw" : "case(\"inner\") { case(\"deep\"); }",
+            "source" : "unmatched_helper_scan_event"
+         },
+         {
+            "args" : {
+               "value" : "\"deep\""
+            },
+            "contract_id" : "case_flow",
+            "kind" : "CASE",
+            "raw" : "case(\"deep\")",
+            "source" : "unmatched_helper_scan_event"
+         },
+         {
+            "args" : {
+               "value" : "\"inline\""
+            },
+            "contract_id" : "case_flow",
+            "kind" : "CASE",
+            "raw" : "case(\"inline\", case(\"nested\"), case(\"twin\"))",
+            "source" : "unmatched_helper_scan_event"
+         },
+         {
+            "args" : {
+               "value" : "\"nested\""
+            },
+            "contract_id" : "case_flow",
+            "kind" : "CASE",
+            "raw" : "case(\"nested\")",
+            "source" : "unmatched_helper_scan_event"
+         },
+         {
+            "args" : {
+               "value" : "\"twin\""
+            },
+            "contract_id" : "case_flow",
+            "kind" : "CASE",
+            "raw" : "case(\"twin\")",
+            "source" : "unmatched_helper_scan_event"
+         },
+         {
+            "args" : {},
+            "contract_id" : "default_flow",
+            "kind" : "DEFAULT",
+            "raw" : "default { default; }",
+            "source" : "unmatched_helper_scan_event"
+         },
+         {
+            "args" : {},
+            "contract_id" : "default_flow",
+            "kind" : "DEFAULT",
+            "raw" : "default",
+            "source" : "unmatched_helper_scan_event"
+         },
+         {
+            "args" : {},
+            "contract_id" : "default_flow",
+            "kind" : "DEFAULT",
+            "raw" : "default(default(), default())",
+            "source" : "unmatched_helper_scan_event"
+         },
+         {
+            "args" : {},
+            "contract_id" : "default_flow",
+            "kind" : "DEFAULT",
+            "raw" : "default()",
+            "source" : "unmatched_helper_scan_event"
+         },
+         {
+            "args" : {},
+            "contract_id" : "default_flow",
+            "kind" : "DEFAULT",
+            "raw" : "default()",
+            "source" : "unmatched_helper_scan_event"
+         }
+      ],
+      "canonical_action_ir_fallback_count" : 1,
+      "canonical_action_ir_hits" : {
+         "CASE" : 7,
+         "DEFAULT" : 7,
+         "RAW_PERL" : 1,
+         "SWITCH" : 1
+      },
+      "canonical_action_ir_nodes" : [
+         "CASE",
+         "DEFAULT",
+         "RAW_PERL",
+         "SWITCH"
+      ],
+      "compatibility_surface_contract_ids" : [],
+      "compatibility_surface_count" : 0,
+      "compatibility_surface_events" : [],
+      "compatibility_surface_hits" : {},
+      "compatibility_surface_statement_count" : 0,
+      "compatibility_surface_statements" : [],
+      "helper_action_ir_count" : 15,
+      "helper_action_ir_events" : [
+         {
+            "args" : {
+               "expr" : "kind"
+            },
+            "contract_id" : "switch_flow",
+            "exclusive_statement" : 0,
+            "ir_node" : "SWITCH",
+            "raw" : "switch(kind, case(\"inline\", case(\"nested\"), case(\"twin\")), default(default(), default()))"
+         },
+         {
+            "args" : {
+               "value" : "\"outer\""
+            },
+            "contract_id" : "case_flow",
+            "exclusive_statement" : 0,
+            "ir_node" : "CASE",
+            "raw" : "case(\"outer\") { case(\"inner\") { case(\"deep\"); }; }"
+         },
+         {
+            "args" : {
+               "value" : "\"inner\""
+            },
+            "contract_id" : "case_flow",
+            "exclusive_statement" : 0,
+            "ir_node" : "CASE",
+            "raw" : "case(\"inner\") { case(\"deep\"); }"
+         },
+         {
+            "args" : {
+               "value" : "\"deep\""
+            },
+            "contract_id" : "case_flow",
+            "exclusive_statement" : 0,
+            "ir_node" : "CASE",
+            "raw" : "case(\"deep\")"
+         },
+         {
+            "args" : {
+               "value" : "\"twin\""
+            },
+            "contract_id" : "case_flow",
+            "exclusive_statement" : 0,
+            "ir_node" : "CASE",
+            "raw" : "case(\"twin\")"
+         },
+         {
+            "args" : {
+               "value" : "\"inline\""
+            },
+            "contract_id" : "case_flow",
+            "exclusive_statement" : 0,
+            "ir_node" : "CASE",
+            "raw" : "case(\"inline\", case(\"nested\"), case(\"twin\"))"
+         },
+         {
+            "args" : {
+               "value" : "\"nested\""
+            },
+            "contract_id" : "case_flow",
+            "exclusive_statement" : 0,
+            "ir_node" : "CASE",
+            "raw" : "case(\"nested\")"
+         },
+         {
+            "args" : {
+               "value" : "\"twin\""
+            },
+            "contract_id" : "case_flow",
+            "exclusive_statement" : 0,
+            "ir_node" : "CASE",
+            "raw" : "case(\"twin\")"
+         },
+         {
+            "args" : {},
+            "contract_id" : "default_flow",
+            "exclusive_statement" : 0,
+            "ir_node" : "DEFAULT",
+            "raw" : "default { default { default; }; }"
+         },
+         {
+            "args" : {},
+            "contract_id" : "default_flow",
+            "exclusive_statement" : 0,
+            "ir_node" : "DEFAULT",
+            "raw" : "default { default; }"
+         },
+         {
+            "args" : {},
+            "contract_id" : "default_flow",
+            "exclusive_statement" : 0,
+            "ir_node" : "DEFAULT",
+            "raw" : "default"
+         },
+         {
+            "args" : {},
+            "contract_id" : "default_flow",
+            "exclusive_statement" : 0,
+            "ir_node" : "DEFAULT",
+            "raw" : "default()"
+         },
+         {
+            "args" : {},
+            "contract_id" : "default_flow",
+            "exclusive_statement" : 0,
+            "ir_node" : "DEFAULT",
+            "raw" : "default(default(), default())"
+         },
+         {
+            "args" : {},
+            "contract_id" : "default_flow",
+            "exclusive_statement" : 0,
+            "ir_node" : "DEFAULT",
+            "raw" : "default()"
+         },
+         {
+            "args" : {},
+            "contract_id" : "default_flow",
+            "exclusive_statement" : 0,
+            "ir_node" : "DEFAULT",
+            "raw" : "default()"
+         }
+      ],
+      "helper_action_ir_hits" : {
+         "CASE" : 7,
+         "DEFAULT" : 7,
+         "SWITCH" : 1
+      },
+      "helper_action_ir_nodes" : [
+         "CASE",
+         "DEFAULT",
+         "SWITCH"
+      ],
+      "language_agnostic_action_ir_blocker_statement_count" : 5,
+      "language_agnostic_action_ir_blocker_statements" : [
+         "note(\"雪😀\")",
+         "case(\"outer\") { case(\"inner\") { case(\"deep\"); }; }",
+         "do { my $__ls_switch_value_1 = $kind; my $__ls_switch_hit_1 = 0; if (!$__ls_switch_hit_1 && $__ls_switch_value_1 eq \"inline\") { $__ls_switch_hit_1 = 1; case(\"nested\"); case(\"twin\") }; if (!$__ls_switch_hit_1) { $__ls_switch_hit_1 = 1; default(); default() } }",
+         "case(\"twin\")",
+         "default()"
+      ],
+      "language_agnostic_action_ir_ready" : 0,
+      "raw_perl_dependency_count" : 1,
+      "raw_perl_dependency_statements" : [
+         "note(\"雪😀\")"
+      ],
+      "raw_perl_expression_dependencies" : [],
+      "raw_perl_expression_source_units" : [],
+      "rewrite_contract_ids" : [
+         "call",
+         "push_single_arg",
+         "push_indexed_arg",
+         "push_target_arg",
+         "push_target_indexed_arg",
+         "push_scope_target_arg",
+         "assign_call_my",
+         "assign_call",
+         "push_child_call_indexed_builtin",
+         "push_child_call_builtin",
+         "return_call",
+         "observe_recognition",
+         "entry_slot",
+         "gap_span",
+         "gap_text",
+         "gap_kind",
+         "recognition_checkpoint",
+         "recognize_once",
+         "recognition_commit",
+         "recognition_rollback",
+         "staged_parse_job",
+         "progressive_span_dispatch",
+         "return_general",
+         "return",
+         "return_bare",
+         "return_undef",
+         "capture_macro",
+         "capture",
+         "capture_if",
+         "capture_if_macro",
+         "capture_slice",
+         "capture_slice_len",
+         "capture_slice_until_cursor",
+         "capture_slice_until_cursor_len",
+         "capture_until_boundary",
+         "capture_take_until_cursor",
+         "capture_take_until_cursor_len",
+         "capture_slice_line",
+         "capture_slice_col",
+         "capture_slice_pos",
+         "capture_slice_length",
+         "start_capture_slice",
+         "start_capture_slice_from_mark",
+         "capture_slice_here",
+         "capture_rest",
+         "capture_rest_len",
+         "capture_rest_length",
+         "capture_take_rest",
+         "capture_take_rest_len",
+         "capture_take_slice",
+         "capture_take_slice_len",
+         "capture_from_rule_start",
+         "capture_len_from_rule_start",
+         "capture_from_mark",
+         "capture_len_from_mark",
+         "capture_take_from_mark",
+         "capture_take_len_from_mark",
+         "capture_rest_from_mark",
+         "capture_rest_len_from_mark",
+         "capture_take_rest_from_mark",
+         "capture_take_rest_len_from_mark",
+         "capture_until_cursor_from_mark",
+         "capture_until_cursor_len_from_mark",
+         "capture_take_until_cursor_from_mark",
+         "capture_take_until_cursor_len_from_mark",
+         "capture_between_marks",
+         "capture_len_between_marks",
+         "capture_take_between_marks",
+         "capture_take_between_len_marks",
+         "mark_input_start",
+         "mark_input_end",
+         "mark_here",
+         "mark_entry_start",
+         "mark_entry_end",
+         "mark_match_start",
+         "mark_match_end",
+         "mark_copy",
+         "mark_capture_slice",
+         "clear_mark",
+         "mark_exists",
+         "mark_pos",
+         "mark_line",
+         "mark_col",
+         "cursor_pos",
+         "cursor_line",
+         "cursor_col",
+         "cursor_rest",
+         "cursor_rest_len",
+         "input_slice",
+         "input_text",
+         "input_len",
+         "input_end_pos",
+         "input_end_line",
+         "input_end_col",
+         "entry_text",
+         "entry_group",
+         "entry_groups",
+         "entry_named",
+         "entry_has",
+         "entry_map",
+         "entry_named_map",
+         "entry_line",
+         "entry_start_line",
+         "entry_col",
+         "entry_start_col",
+         "entry_len",
+         "entry_start_pos",
+         "entry_end_pos",
+         "entry_end_line",
+         "entry_end_col",
+         "match_start_pos",
+         "match_text",
+         "match_group",
+         "match_groups",
+         "match_named",
+         "match_has",
+         "match_map",
+         "match_named_map",
+         "match_len",
+         "match_end_pos",
+         "match_end_line",
+         "match_end_col",
+         "match_start_line",
+         "match_line",
+         "match_start_col",
+         "match_col",
+         "save_cursor",
+         "restore_cursor",
+         "rewind_entry_start",
+         "rewind_match_start",
+         "exit_bare",
+         "linecount_prefix_newline_matches",
+         "print_capture_substr",
+         "my_declare_bare",
+         "assign_match_my",
+         "destructure_imatch_list_my",
+         "regex_subst_assignment",
+         "next_bare",
+         "ref_field_assign",
+         "position_tracking",
+         "print_foreach_iterable",
+         "split_trim_filter_assignment",
+         "push",
+         "scalar_assignment_operator",
+         "array_append_operator",
+         "array_end_mutation_method",
+         "hash_index_assignment_operator",
+         "set_value",
+         "set_key_statement",
+         "regex_subst",
+         "split_array",
+         "split_each",
+         "trim_each",
+         "filter_nonempty",
+         "lowercase_each",
+         "uppercase_each",
+         "uniq_array",
+         "filter_match",
+         "value_drop_statement",
+         "if_flow",
+         "elseif_flow",
+         "else_flow",
+         "endif_flow",
+         "while_flow",
+         "switch_flow",
+         "case_flow",
+         "default_flow",
+         "endcase_flow",
+         "endswitch_flow",
+         "say_stmt",
+         "print_each",
+         "print_stmt",
+         "exit_now",
+         "next_stmt"
+      ],
+      "unresolved_helper_count" : 8,
+      "unresolved_helper_events" : [
+         {
+            "helper" : "case",
+            "raw" : "case(\"outer\") { case(\"inner\") { case(\"deep\"); }; }"
+         },
+         {
+            "helper" : "case",
+            "raw" : "case(\"outer\") { case(\"inner\") { case(\"deep\"); }; }"
+         },
+         {
+            "helper" : "case",
+            "raw" : "case(\"outer\") { case(\"inner\") { case(\"deep\"); }; }"
+         },
+         {
+            "helper" : "case",
+            "raw" : "do { my $__ls_switch_value_1 = $kind; my $__ls_switch_hit_1 = 0; if (!$__ls_switch_hit_1 && $__ls_switch_value_1 eq \"inline\") { $__ls_switch_hit_1 = 1; case(\"nested\"); case(\"twin\") }; if (!$__ls_switch_hit_1) { $__ls_switch_hit_1 = 1; default(); default() } }"
+         },
+         {
+            "helper" : "case",
+            "raw" : "do { my $__ls_switch_value_1 = $kind; my $__ls_switch_hit_1 = 0; if (!$__ls_switch_hit_1 && $__ls_switch_value_1 eq \"inline\") { $__ls_switch_hit_1 = 1; case(\"nested\"); case(\"twin\") }; if (!$__ls_switch_hit_1) { $__ls_switch_hit_1 = 1; default(); default() } }"
+         },
+         {
+            "helper" : "case",
+            "raw" : "case(\"twin\")"
+         },
+         {
+            "helper" : "default",
+            "raw" : "default()"
+         },
+         {
+            "helper" : "default",
+            "raw" : "default()"
+         }
+      ],
+      "unresolved_helper_hits" : {
+         "case" : 6,
+         "default" : 2
+      },
+      "unresolved_helper_statements" : [
+         "case(\"outer\") { case(\"inner\") { case(\"deep\"); }; }",
+         "do { my $__ls_switch_value_1 = $kind; my $__ls_switch_hit_1 = 0; if (!$__ls_switch_hit_1 && $__ls_switch_value_1 eq \"inline\") { $__ls_switch_hit_1 = 1; case(\"nested\"); case(\"twin\") }; if (!$__ls_switch_hit_1) { $__ls_switch_hit_1 = 1; default(); default() } }",
+         "case(\"twin\")",
+         "default()"
+      ],
+      "unresolved_helpers" : [
+         "case",
+         "default"
+      ]
+   },
+   "dump" : "# LinkedSpec generated parser source.\n# contract_id: linkedspec-generated-source-v2\n# format_version: 2\n# source_identity: LINKEDSPEC_GENERATED_SOURCE_IDENTITY\nno strict;\nno warnings 'void';\nuse re 'eval';\nuse LinkedSpec::GeneratedSource ();\nuse LinkedSpec::Runtime ();\nuse LinkedSpec::Trace ();\nuse LinkedSpec::EntryRuleSelection ();\nuse LinkedSpec::RuntimeDiagnosticOutput ();\nuse LinkedSpec::RuntimeSemanticObservation ();\nuse LinkedSpec::Numeric ();\nuse LinkedSpec::UnicodeCaseMapping ();\nuse LinkedSpec::RecognitionTransactionRuntime ();\nuse LinkedSpec::InterMatchGapRuntime ();\nuse LinkedSpec::ProgressiveSpanDispatchRuntime ();\nuse LinkedSpec::StagedASTEnrichmentRuntime ();\nsub _trace_runtime_mark_event { return LinkedSpec::GeneratedSource::trace_mark_event(@_) }\nour $LINKEDSPEC_GENERATED_SOURCE_CONTRACT = 'linkedspec-generated-source-v2';\nour $LINKEDSPEC_GENERATED_SOURCE_FORMAT = 2;\nour $LINKEDSPEC_GENERATED_SOURCE_IDENTITY = '<inline>';\n\nmy $descr = {\n spec => {\n\n Top => sub {\nmy ($descr, $STRING, $info) = @_;\n$info = {} unless ref($info) eq \"HASH\";\nrequire LinkedSpec::SourceLocation;\nLinkedSpec::SourceLocation::Runtime::ensure_authority($info, $STRING);\nmy $IMATCH      = $$info{match};\nmy @IMATCH_LIST = @{$$info{match_list} // []};\nmy %IMATCH_HASH = %{$$info{match_hash} // {}};\nmy $IINDEX      = $$info{index};\nmy $IPOS        = LinkedSpec::SourceLocation::Runtime::capture_boundary_write_position(\n $info, $STRING, pos $$STRING, \"handler_entry\"\n);\n$$info{marks} = {} unless ref($$info{marks}) eq \"HASH\";\nmy $__ls_recognition_invocation = LinkedSpec::RecognitionTransactionRuntime::enter_invocation(\n $descr, $STRING, $info, \\$IPOS, \"Top\"\n);\n\n\nmy @Top;\n\n note(\"雪😀\");\r\ncase(\"outer\") { case(\"inner\") { case(\"deep\"); }; }; default { default { default; }; };\r\ndo { my $__ls_switch_value_1 = $kind; my $__ls_switch_hit_1 = 0; if (!$__ls_switch_hit_1 && $__ls_switch_value_1 eq \"inline\") { $__ls_switch_hit_1 = 1; case(\"nested\"); case(\"twin\") }; if (!$__ls_switch_hit_1) { $__ls_switch_hit_1 = 1; default(); default() } }; case(\"twin\"); default() ;\n },\n\n Done => sub {\nmy ($descr, $STRING, $info) = @_;\n$info = {} unless ref($info) eq \"HASH\";\nrequire LinkedSpec::SourceLocation;\nLinkedSpec::SourceLocation::Runtime::ensure_authority($info, $STRING);\nmy $IMATCH      = $$info{match};\nmy @IMATCH_LIST = @{$$info{match_list} // []};\nmy %IMATCH_HASH = %{$$info{match_hash} // {}};\nmy $IINDEX      = $$info{index};\nmy $IPOS        = LinkedSpec::SourceLocation::Runtime::capture_boundary_write_position(\n $info, $STRING, pos $$STRING, \"handler_entry\"\n);\n$$info{marks} = {} unless ref($$info{marks}) eq \"HASH\";\nmy $__ls_recognition_invocation = LinkedSpec::RecognitionTransactionRuntime::enter_invocation(\n $descr, $STRING, $info, \\$IPOS, \"Done\"\n);\n\n\nmy @Done;\n\nreturn \"child\";\n },\n },\n dependency_regex_map => {\n\n },\n dependency_slot_map => {\n\n }\n};\n\nmy $LINKEDSPEC_GENERATED_EXPECTED_PLAN = [\n { label => 'Top', family => 'default' },\n { label => 'Done', family => 'default' },\n];\nmy $LINKEDSPEC_GENERATED_ACTIVE_PLAN = LinkedSpec::GeneratedSource::clone_plan($LINKEDSPEC_GENERATED_EXPECTED_PLAN);\nmy $LINKEDSPEC_GENERATED_ENTRY_RULES = [\n { label => 'Top', is_top => 1 },\n { label => 'Done', is_top => 0 },\n];\nmy $LINKEDSPEC_GENERATED_CONFIGURED_ENTRY_RULE = undef;\n\nsub LinkedSpecGeneratedMetadata {\n return {\n  contract_id => $LINKEDSPEC_GENERATED_SOURCE_CONTRACT,\n  format_version => $LINKEDSPEC_GENERATED_SOURCE_FORMAT,\n  source_identity => $LINKEDSPEC_GENERATED_SOURCE_IDENTITY,\n  plan => LinkedSpec::GeneratedSource::clone_plan($LINKEDSPEC_GENERATED_EXPECTED_PLAN),\n  entry_rule_contract => $LinkedSpec::EntryRuleSelection::CONTRACT_ID,\n  entry_rules => LinkedSpec::GeneratedSource::clone_entry_rules($LINKEDSPEC_GENERATED_ENTRY_RULES),\n }\n}\n\nsub LinkedSpecGeneratedPlan {\n return LinkedSpec::GeneratedSource::clone_plan($LINKEDSPEC_GENERATED_EXPECTED_PLAN)\n}\n\nsub ValidateGeneratedPlan {\n my ($plan, $actual_contract) = @_;\n $plan = $LINKEDSPEC_GENERATED_ACTIVE_PLAN unless defined $plan;\n $actual_contract = $LINKEDSPEC_GENERATED_SOURCE_CONTRACT unless defined $actual_contract;\n return LinkedSpec::GeneratedSource::validate_plan(\n  expected => $LINKEDSPEC_GENERATED_EXPECTED_PLAN,\n  actual => $plan,\n  source_identity => $LINKEDSPEC_GENERATED_SOURCE_IDENTITY,\n  expected_contract => 'linkedspec-generated-source-v2',\n  actual_contract => $actual_contract,\n )\n}\n\nsub Execute {\n my ($input_ref, $invocation_options) = @_;\n ValidateGeneratedPlan();\n LinkedSpec::Runtime::_prepare_public_input($input_ref);\n my $diagnostic_sink = LinkedSpec::RuntimeDiagnosticOutput::validate_invocation_options(\n  $invocation_options,\n );\n my $semantic_observation_sink = LinkedSpec::RuntimeSemanticObservation::validate_invocation_options(\n  $invocation_options,\n );\n my $progressive_dispatch_state = LinkedSpec::ProgressiveSpanDispatchRuntime::begin_invocation(\n  $input_ref,\n  $invocation_options,\n );\n my $staged_enrichment_state = LinkedSpec::StagedASTEnrichmentRuntime::begin_invocation(\n  $input_ref,\n  $invocation_options,\n );\n my $explicit_entry_rule = $LINKEDSPEC_GENERATED_CONFIGURED_ENTRY_RULE;\n if (ref($invocation_options) eq 'HASH'\n  && defined($invocation_options->{top_rule})\n  && length($invocation_options->{top_rule})) {\n  $explicit_entry_rule = $invocation_options->{top_rule};\n }\n my $entry_selection = LinkedSpec::EntryRuleSelection::select_entry_rule(\n  $LINKEDSPEC_GENERATED_ENTRY_RULES,\n  $explicit_entry_rule,\n );\n unless ($entry_selection->{ok}) {\n  my $entry_rule = $entry_selection->{entry_rule};\n  LinkedSpec::GeneratedSource::trace_role(\n   role => 'generated_entry_selection',\n   source_identity => $LINKEDSPEC_GENERATED_SOURCE_IDENTITY,\n   rule_label => defined($entry_rule) ? $entry_rule : '',\n   status => 'error',\n  );\n  die LinkedSpec::GeneratedSource::new_error(\n   stage => $entry_selection->{stage},\n   code => $entry_selection->{code},\n   summary => 'Generated parser entry-rule selection failed',\n   source_identity => $LINKEDSPEC_GENERATED_SOURCE_IDENTITY,\n   defined($entry_rule) ? (entry_rule => $entry_rule, rule_label => $entry_rule) : (),\n   detail => defined($entry_rule)\n    ? \"No declared rule matches explicit entry selector '$entry_rule'\"\n    : 'Generated parser source has no declared entry rule',\n  )\n }\n my $entry_rule = $entry_selection->{entry_rule};\n my $entry_family = LinkedSpec::GeneratedSource::family_for_rule(\n  $LINKEDSPEC_GENERATED_EXPECTED_PLAN,\n  $entry_rule,\n );\n my $sink_slot = LinkedSpec::RuntimeDiagnosticOutput::sink_slot_name();\n my $control_error_slot = LinkedSpec::RuntimeDiagnosticOutput::control_error_slot_name();\n my $semantic_sink_slot = LinkedSpec::RuntimeSemanticObservation::sink_slot_name();\n my $semantic_control_error_slot = LinkedSpec::RuntimeSemanticObservation::control_error_slot_name();\n my $progressive_dispatch_slot = LinkedSpec::ProgressiveSpanDispatchRuntime::descriptor_slot_name();\n local $descr->{$sink_slot} = $diagnostic_sink;\n local $descr->{$control_error_slot} = undef;\n local $descr->{$semantic_sink_slot} = $semantic_observation_sink;\n local $descr->{$semantic_control_error_slot} = undef;\n local $descr->{$progressive_dispatch_slot} = $progressive_dispatch_state;\n my $semantic_input_identity = defined($semantic_observation_sink)\n  ? LinkedSpec::RuntimeSemanticObservation::input_identity($input_ref)\n  : undef;\n LinkedSpec::GeneratedSource::trace_role(\n  role => 'generated_entry_selection',\n  source_identity => $LINKEDSPEC_GENERATED_SOURCE_IDENTITY,\n  rule_label => $entry_rule,\n  handler_family => $entry_family,\n  selection_basis => $entry_selection->{basis},\n  status => 'ok',\n );\n LinkedSpec::GeneratedSource::trace_role(\n  role => 'generated_rule_enter',\n  source_identity => $LINKEDSPEC_GENERATED_SOURCE_IDENTITY,\n  rule_label => $entry_rule,\n  handler_family => $entry_family,\n );\n LinkedSpec::GeneratedSource::trace_role(\n  role => 'generated_family_decision',\n  source_identity => $LINKEDSPEC_GENERATED_SOURCE_IDENTITY,\n  rule_label => $entry_rule,\n  handler_family => $entry_family,\n );\n my ($result, $execution_error);\n my $ok = eval {\n  $result = &{$descr->{spec}{$entry_rule}}($descr, $input_ref);\n  $result = LinkedSpec::StagedASTEnrichmentRuntime::complete_invocation(\n   $staged_enrichment_state,\n   $descr,\n   $input_ref,\n   $result,\n  );\n  1\n };\n $execution_error = $@;\n LinkedSpec::GeneratedSource::trace_role(\n  role => 'generated_rule_exit',\n  source_identity => $LINKEDSPEC_GENERATED_SOURCE_IDENTITY,\n  rule_label => $entry_rule,\n  handler_family => $entry_family,\n  status => $ok ? 'ok' : 'error',\n );\n die $execution_error\n  if !$ok && (\n   LinkedSpec::RuntimeDiagnosticOutput::is_marked_control_error(\n    $descr,\n    $execution_error,\n   )\n   || LinkedSpec::RuntimeSemanticObservation::is_marked_control_error(\n    $descr,\n    $execution_error,\n   )\n  );\n die $execution_error\n  if !$ok && (\n   LinkedSpec::RecognitionTransactionRuntime::is_error($execution_error)\n   || LinkedSpec::RecognitionTransactionRuntime::is_recursive_observation_error($execution_error)\n   || LinkedSpec::InterMatchGapRuntime::is_error($execution_error)\n   || LinkedSpec::ProgressiveSpanDispatchRuntime::is_error($execution_error)\n   || LinkedSpec::StagedASTEnrichmentRuntime::is_error($execution_error)\n  );\n die LinkedSpec::GeneratedSource::new_error(\n  stage => 'execute_generated',\n  code => 'generated_execution_failed',\n  summary => 'Generated parser execution failed',\n  source_identity => $LINKEDSPEC_GENERATED_SOURCE_IDENTITY,\n  rule_label => $entry_rule,\n  handler_family => $entry_family,\n  detail => $execution_error,\n ) unless $ok;\n LinkedSpec::RuntimeSemanticObservation::emit_rule_result(\n  $descr,\n  rule_label => $entry_rule,\n  position => pos($$input_ref),\n  input_identity => $semantic_input_identity,\n );\n return $result\n}\n\nsub ExecuteWithTrace {\n my ($input_ref, $trace_config, $invocation_options) = @_;\n require LinkedSpec::Trace;\n LinkedSpec::Trace::configure_trace(%$trace_config) if ref($trace_config) eq 'HASH';\n return Execute($input_ref, $invocation_options)\n}\n\nsub Get { return Execute(@_) }\n",
+   "failure" : null,
+   "id" : "recursive",
+   "internal_stderr" : "",
+   "internal_stdout" : "",
+   "rows" : [
+      {
+         "contract" : "if_flow",
+         "identity" : [],
+         "private_calls" : [],
+         "private_result" : {
+            "events" : [],
+            "source_origins" : []
+         },
+         "public_calls" : [],
+         "public_events" : []
+      },
+      {
+         "contract" : "elseif_flow",
+         "identity" : [],
+         "private_calls" : [],
+         "private_result" : {
+            "events" : [],
+            "source_origins" : []
+         },
+         "public_calls" : [],
+         "public_events" : []
+      },
+      {
+         "contract" : "else_flow",
+         "identity" : [],
+         "private_calls" : [],
+         "private_result" : {
+            "events" : [],
+            "source_origins" : []
+         },
+         "public_calls" : [],
+         "public_events" : []
+      },
+      {
+         "contract" : "endif_flow",
+         "identity" : [],
+         "private_calls" : [],
+         "private_result" : {
+            "events" : [],
+            "source_origins" : []
+         },
+         "public_calls" : [],
+         "public_events" : []
+      },
+      {
+         "contract" : "while_flow",
+         "identity" : [],
+         "private_calls" : [],
+         "private_result" : {
+            "events" : [],
+            "source_origins" : []
+         },
+         "public_calls" : [],
+         "public_events" : []
+      },
+      {
+         "contract" : "switch_flow",
+         "identity" : [],
+         "private_calls" : [
+            {
+               "args" : [
+                  "switch(kind, case(\"inline\", case(\"nested\"), case(\"twin\")), default(default(), default()))"
+               ],
+               "callback" : "parse_method_function_expr",
+               "result" : {
+                  "args" : [
+                     "kind",
+                     "case(\"inline\", case(\"nested\"), case(\"twin\"))",
+                     "default(default(), default())"
+                  ],
+                  "method" : "switch",
+                  "source" : "switch(kind, case(\"inline\", case(\"nested\"), case(\"twin\")), default(default(), default()))",
+                  "source_method" : "switch"
+               }
+            },
+            {
+               "args" : [
+                  "kind"
+               ],
+               "callback" : "trim_action_ir_value",
+               "result" : "kind"
+            }
+         ],
+         "private_result" : {
+            "events" : [
+               {
+                  "args" : {
+                     "expr" : "kind"
+                  },
+                  "raw" : "switch(kind, case(\"inline\", case(\"nested\"), case(\"twin\")), default(default(), default()))"
+               }
+            ],
+            "source_origins" : []
+         },
+         "public_calls" : [
+            {
+               "args" : [
+                  "switch(kind, case(\"inline\", case(\"nested\"), case(\"twin\")), default(default(), default()))"
+               ],
+               "callback" : "parse_method_function_expr",
+               "result" : {
+                  "args" : [
+                     "kind",
+                     "case(\"inline\", case(\"nested\"), case(\"twin\"))",
+                     "default(default(), default())"
+                  ],
+                  "method" : "switch",
+                  "source" : "switch(kind, case(\"inline\", case(\"nested\"), case(\"twin\")), default(default(), default()))",
+                  "source_method" : "switch"
+               }
+            },
+            {
+               "args" : [
+                  "kind"
+               ],
+               "callback" : "trim_action_ir_value",
+               "result" : "kind"
+            }
+         ],
+         "public_events" : [
+            {
+               "args" : {
+                  "expr" : "kind"
+               },
+               "raw" : "switch(kind, case(\"inline\", case(\"nested\"), case(\"twin\")), default(default(), default()))"
+            }
+         ]
+      },
+      {
+         "contract" : "case_flow",
+         "identity" : [],
+         "private_calls" : [
+            {
+               "args" : [
+                  "case(\"outer\")"
+               ],
+               "callback" : "parse_method_function_expr",
+               "result" : {
+                  "args" : [
+                     "\"outer\""
+                  ],
+                  "method" : "case",
+                  "source" : "case(\"outer\")",
+                  "source_method" : "case"
+               }
+            },
+            {
+               "args" : [
+                  "\"outer\""
+               ],
+               "callback" : "trim_action_ir_value",
+               "result" : "\"outer\""
+            },
+            {
+               "args" : [
+                  "case(\"inner\")"
+               ],
+               "callback" : "parse_method_function_expr",
+               "result" : {
+                  "args" : [
+                     "\"inner\""
+                  ],
+                  "method" : "case",
+                  "source" : "case(\"inner\")",
+                  "source_method" : "case"
+               }
+            },
+            {
+               "args" : [
+                  "\"inner\""
+               ],
+               "callback" : "trim_action_ir_value",
+               "result" : "\"inner\""
+            },
+            {
+               "args" : [
+                  "case(\"deep\")"
+               ],
+               "callback" : "parse_method_function_expr",
+               "result" : {
+                  "args" : [
+                     "\"deep\""
+                  ],
+                  "method" : "case",
+                  "source" : "case(\"deep\")",
+                  "source_method" : "case"
+               }
+            },
+            {
+               "args" : [
+                  "\"deep\""
+               ],
+               "callback" : "trim_action_ir_value",
+               "result" : "\"deep\""
+            },
+            {
+               "args" : [
+                  "case(\"inline\", case(\"nested\"), case(\"twin\"))"
+               ],
+               "callback" : "parse_method_function_expr",
+               "result" : {
+                  "args" : [
+                     "\"inline\"",
+                     "case(\"nested\")",
+                     "case(\"twin\")"
+                  ],
+                  "method" : "case",
+                  "source" : "case(\"inline\", case(\"nested\"), case(\"twin\"))",
+                  "source_method" : "case"
+               }
+            },
+            {
+               "args" : [
+                  "case(\"twin\")"
+               ],
+               "callback" : "parse_method_function_expr",
+               "result" : {
+                  "args" : [
+                     "\"twin\""
+                  ],
+                  "method" : "case",
+                  "source" : "case(\"twin\")",
+                  "source_method" : "case"
+               }
+            },
+            {
+               "args" : [
+                  "\"twin\""
+               ],
+               "callback" : "trim_action_ir_value",
+               "result" : "\"twin\""
+            },
+            {
+               "args" : [
+                  "switch(kind, case(\"inline\", case(\"nested\"), case(\"twin\")), default(default(), default()))"
+               ],
+               "callback" : "parse_method_function_expr",
+               "result" : {
+                  "args" : [
+                     "kind",
+                     "case(\"inline\", case(\"nested\"), case(\"twin\"))",
+                     "default(default(), default())"
+                  ],
+                  "method" : "switch",
+                  "source" : "switch(kind, case(\"inline\", case(\"nested\"), case(\"twin\")), default(default(), default()))",
+                  "source_method" : "switch"
+               }
+            },
+            {
+               "args" : [
+                  "case(\"inline\", case(\"nested\"), case(\"twin\"))"
+               ],
+               "callback" : "parse_method_function_expr",
+               "result" : {
+                  "args" : [
+                     "\"inline\"",
+                     "case(\"nested\")",
+                     "case(\"twin\")"
+                  ],
+                  "method" : "case",
+                  "source" : "case(\"inline\", case(\"nested\"), case(\"twin\"))",
+                  "source_method" : "case"
+               }
+            },
+            {
+               "args" : [
+                  "case(\"inline\", case(\"nested\"), case(\"twin\"))"
+               ],
+               "callback" : "trim_action_ir_value",
+               "result" : "case(\"inline\", case(\"nested\"), case(\"twin\"))"
+            },
+            {
+               "args" : [
+                  "\"inline\""
+               ],
+               "callback" : "trim_action_ir_value",
+               "result" : "\"inline\""
+            },
+            {
+               "args" : [
+                  "case(\"nested\")"
+               ],
+               "callback" : "parse_method_function_expr",
+               "result" : {
+                  "args" : [
+                     "\"nested\""
+                  ],
+                  "method" : "case",
+                  "source" : "case(\"nested\")",
+                  "source_method" : "case"
+               }
+            },
+            {
+               "args" : [
+                  "\"nested\""
+               ],
+               "callback" : "trim_action_ir_value",
+               "result" : "\"nested\""
+            },
+            {
+               "args" : [
+                  "case(\"twin\")"
+               ],
+               "callback" : "parse_method_function_expr",
+               "result" : {
+                  "args" : [
+                     "\"twin\""
+                  ],
+                  "method" : "case",
+                  "source" : "case(\"twin\")",
+                  "source_method" : "case"
+               }
+            },
+            {
+               "args" : [
+                  "\"twin\""
+               ],
+               "callback" : "trim_action_ir_value",
+               "result" : "\"twin\""
+            },
+            {
+               "args" : [
+                  "default(default(), default())"
+               ],
+               "callback" : "parse_method_function_expr",
+               "result" : {
+                  "args" : [
+                     "default()",
+                     "default()"
+                  ],
+                  "method" : "default",
+                  "source" : "default(default(), default())",
+                  "source_method" : "default"
+               }
+            }
+         ],
+         "private_result" : {
+            "events" : [
+               {
+                  "args" : {
+                     "value" : "\"outer\""
+                  },
+                  "raw" : "case(\"outer\") { case(\"inner\") { case(\"deep\"); }; }"
+               },
+               {
+                  "args" : {
+                     "value" : "\"inner\""
+                  },
+                  "raw" : "case(\"inner\") { case(\"deep\"); }"
+               },
+               {
+                  "args" : {
+                     "value" : "\"deep\""
+                  },
+                  "raw" : "case(\"deep\")"
+               },
+               {
+                  "args" : {
+                     "value" : "\"twin\""
+                  },
+                  "raw" : "case(\"twin\")"
+               },
+               {
+                  "args" : {
+                     "value" : "\"inline\""
+                  },
+                  "raw" : "case(\"inline\", case(\"nested\"), case(\"twin\"))"
+               },
+               {
+                  "args" : {
+                     "value" : "\"nested\""
+                  },
+                  "raw" : "case(\"nested\")"
+               },
+               {
+                  "args" : {
+                     "value" : "\"twin\""
+                  },
+                  "raw" : "case(\"twin\")"
+               }
+            ],
+            "source_origins" : []
+         },
+         "public_calls" : [
+            {
+               "args" : [
+                  "case(\"outer\")"
+               ],
+               "callback" : "parse_method_function_expr",
+               "result" : {
+                  "args" : [
+                     "\"outer\""
+                  ],
+                  "method" : "case",
+                  "source" : "case(\"outer\")",
+                  "source_method" : "case"
+               }
+            },
+            {
+               "args" : [
+                  "\"outer\""
+               ],
+               "callback" : "trim_action_ir_value",
+               "result" : "\"outer\""
+            },
+            {
+               "args" : [
+                  "case(\"inner\")"
+               ],
+               "callback" : "parse_method_function_expr",
+               "result" : {
+                  "args" : [
+                     "\"inner\""
+                  ],
+                  "method" : "case",
+                  "source" : "case(\"inner\")",
+                  "source_method" : "case"
+               }
+            },
+            {
+               "args" : [
+                  "\"inner\""
+               ],
+               "callback" : "trim_action_ir_value",
+               "result" : "\"inner\""
+            },
+            {
+               "args" : [
+                  "case(\"deep\")"
+               ],
+               "callback" : "parse_method_function_expr",
+               "result" : {
+                  "args" : [
+                     "\"deep\""
+                  ],
+                  "method" : "case",
+                  "source" : "case(\"deep\")",
+                  "source_method" : "case"
+               }
+            },
+            {
+               "args" : [
+                  "\"deep\""
+               ],
+               "callback" : "trim_action_ir_value",
+               "result" : "\"deep\""
+            },
+            {
+               "args" : [
+                  "case(\"inline\", case(\"nested\"), case(\"twin\"))"
+               ],
+               "callback" : "parse_method_function_expr",
+               "result" : {
+                  "args" : [
+                     "\"inline\"",
+                     "case(\"nested\")",
+                     "case(\"twin\")"
+                  ],
+                  "method" : "case",
+                  "source" : "case(\"inline\", case(\"nested\"), case(\"twin\"))",
+                  "source_method" : "case"
+               }
+            },
+            {
+               "args" : [
+                  "case(\"twin\")"
+               ],
+               "callback" : "parse_method_function_expr",
+               "result" : {
+                  "args" : [
+                     "\"twin\""
+                  ],
+                  "method" : "case",
+                  "source" : "case(\"twin\")",
+                  "source_method" : "case"
+               }
+            },
+            {
+               "args" : [
+                  "\"twin\""
+               ],
+               "callback" : "trim_action_ir_value",
+               "result" : "\"twin\""
+            },
+            {
+               "args" : [
+                  "switch(kind, case(\"inline\", case(\"nested\"), case(\"twin\")), default(default(), default()))"
+               ],
+               "callback" : "parse_method_function_expr",
+               "result" : {
+                  "args" : [
+                     "kind",
+                     "case(\"inline\", case(\"nested\"), case(\"twin\"))",
+                     "default(default(), default())"
+                  ],
+                  "method" : "switch",
+                  "source" : "switch(kind, case(\"inline\", case(\"nested\"), case(\"twin\")), default(default(), default()))",
+                  "source_method" : "switch"
+               }
+            },
+            {
+               "args" : [
+                  "case(\"inline\", case(\"nested\"), case(\"twin\"))"
+               ],
+               "callback" : "parse_method_function_expr",
+               "result" : {
+                  "args" : [
+                     "\"inline\"",
+                     "case(\"nested\")",
+                     "case(\"twin\")"
+                  ],
+                  "method" : "case",
+                  "source" : "case(\"inline\", case(\"nested\"), case(\"twin\"))",
+                  "source_method" : "case"
+               }
+            },
+            {
+               "args" : [
+                  "case(\"inline\", case(\"nested\"), case(\"twin\"))"
+               ],
+               "callback" : "trim_action_ir_value",
+               "result" : "case(\"inline\", case(\"nested\"), case(\"twin\"))"
+            },
+            {
+               "args" : [
+                  "\"inline\""
+               ],
+               "callback" : "trim_action_ir_value",
+               "result" : "\"inline\""
+            },
+            {
+               "args" : [
+                  "case(\"nested\")"
+               ],
+               "callback" : "parse_method_function_expr",
+               "result" : {
+                  "args" : [
+                     "\"nested\""
+                  ],
+                  "method" : "case",
+                  "source" : "case(\"nested\")",
+                  "source_method" : "case"
+               }
+            },
+            {
+               "args" : [
+                  "\"nested\""
+               ],
+               "callback" : "trim_action_ir_value",
+               "result" : "\"nested\""
+            },
+            {
+               "args" : [
+                  "case(\"twin\")"
+               ],
+               "callback" : "parse_method_function_expr",
+               "result" : {
+                  "args" : [
+                     "\"twin\""
+                  ],
+                  "method" : "case",
+                  "source" : "case(\"twin\")",
+                  "source_method" : "case"
+               }
+            },
+            {
+               "args" : [
+                  "\"twin\""
+               ],
+               "callback" : "trim_action_ir_value",
+               "result" : "\"twin\""
+            },
+            {
+               "args" : [
+                  "default(default(), default())"
+               ],
+               "callback" : "parse_method_function_expr",
+               "result" : {
+                  "args" : [
+                     "default()",
+                     "default()"
+                  ],
+                  "method" : "default",
+                  "source" : "default(default(), default())",
+                  "source_method" : "default"
+               }
+            }
+         ],
+         "public_events" : [
+            {
+               "args" : {
+                  "value" : "\"outer\""
+               },
+               "raw" : "case(\"outer\") { case(\"inner\") { case(\"deep\"); }; }"
+            },
+            {
+               "args" : {
+                  "value" : "\"inner\""
+               },
+               "raw" : "case(\"inner\") { case(\"deep\"); }"
+            },
+            {
+               "args" : {
+                  "value" : "\"deep\""
+               },
+               "raw" : "case(\"deep\")"
+            },
+            {
+               "args" : {
+                  "value" : "\"twin\""
+               },
+               "raw" : "case(\"twin\")"
+            },
+            {
+               "args" : {
+                  "value" : "\"inline\""
+               },
+               "raw" : "case(\"inline\", case(\"nested\"), case(\"twin\"))"
+            },
+            {
+               "args" : {
+                  "value" : "\"nested\""
+               },
+               "raw" : "case(\"nested\")"
+            },
+            {
+               "args" : {
+                  "value" : "\"twin\""
+               },
+               "raw" : "case(\"twin\")"
+            }
+         ]
+      },
+      {
+         "contract" : "default_flow",
+         "identity" : [],
+         "private_calls" : [
+            {
+               "args" : [
+                  "default()"
+               ],
+               "callback" : "parse_method_function_expr",
+               "result" : {
+                  "args" : [],
+                  "method" : "default",
+                  "source" : "default()",
+                  "source_method" : "default"
+               }
+            },
+            {
+               "args" : [
+                  [],
+                  0,
+                  0
+               ],
+               "callback" : "normalize_method_args_with_optional_scope",
+               "result" : []
+            },
+            {
+               "args" : [
+                  "default()"
+               ],
+               "callback" : "parse_method_function_expr",
+               "result" : {
+                  "args" : [],
+                  "method" : "default",
+                  "source" : "default()",
+                  "source_method" : "default"
+               }
+            },
+            {
+               "args" : [
+                  [],
+                  0,
+                  0
+               ],
+               "callback" : "normalize_method_args_with_optional_scope",
+               "result" : []
+            },
+            {
+               "args" : [
+                  "default()"
+               ],
+               "callback" : "parse_method_function_expr",
+               "result" : {
+                  "args" : [],
+                  "method" : "default",
+                  "source" : "default()",
+                  "source_method" : "default"
+               }
+            },
+            {
+               "args" : [
+                  [],
+                  0,
+                  0
+               ],
+               "callback" : "normalize_method_args_with_optional_scope",
+               "result" : []
+            },
+            {
+               "args" : [
+                  "default(default(), default())"
+               ],
+               "callback" : "parse_method_function_expr",
+               "result" : {
+                  "args" : [
+                     "default()",
+                     "default()"
+                  ],
+                  "method" : "default",
+                  "source" : "default(default(), default())",
+                  "source_method" : "default"
+               }
+            },
+            {
+               "args" : [
+                  [
+                     "default()",
+                     "default()"
+                  ],
+                  0,
+                  0
+               ],
+               "callback" : "normalize_method_args_with_optional_scope",
+               "result" : null
+            },
+            {
+               "args" : [
+                  "default()"
+               ],
+               "callback" : "parse_method_function_expr",
+               "result" : {
+                  "args" : [],
+                  "method" : "default",
+                  "source" : "default()",
+                  "source_method" : "default"
+               }
+            },
+            {
+               "args" : [
+                  [],
+                  0,
+                  0
+               ],
+               "callback" : "normalize_method_args_with_optional_scope",
+               "result" : []
+            },
+            {
+               "args" : [
+                  "switch(kind, case(\"inline\", case(\"nested\"), case(\"twin\")), default(default(), default()))"
+               ],
+               "callback" : "parse_method_function_expr",
+               "result" : {
+                  "args" : [
+                     "kind",
+                     "case(\"inline\", case(\"nested\"), case(\"twin\"))",
+                     "default(default(), default())"
+                  ],
+                  "method" : "switch",
+                  "source" : "switch(kind, case(\"inline\", case(\"nested\"), case(\"twin\")), default(default(), default()))",
+                  "source_method" : "switch"
+               }
+            },
+            {
+               "args" : [
+                  "case(\"inline\", case(\"nested\"), case(\"twin\"))"
+               ],
+               "callback" : "parse_method_function_expr",
+               "result" : {
+                  "args" : [
+                     "\"inline\"",
+                     "case(\"nested\")",
+                     "case(\"twin\")"
+                  ],
+                  "method" : "case",
+                  "source" : "case(\"inline\", case(\"nested\"), case(\"twin\"))",
+                  "source_method" : "case"
+               }
+            },
+            {
+               "args" : [
+                  "default(default(), default())"
+               ],
+               "callback" : "parse_method_function_expr",
+               "result" : {
+                  "args" : [
+                     "default()",
+                     "default()"
+                  ],
+                  "method" : "default",
+                  "source" : "default(default(), default())",
+                  "source_method" : "default"
+               }
+            },
+            {
+               "args" : [
+                  "default(default(), default())"
+               ],
+               "callback" : "trim_action_ir_value",
+               "result" : "default(default(), default())"
+            },
+            {
+               "args" : [
+                  "default()"
+               ],
+               "callback" : "parse_method_function_expr",
+               "result" : {
+                  "args" : [],
+                  "method" : "default",
+                  "source" : "default()",
+                  "source_method" : "default"
+               }
+            },
+            {
+               "args" : [
+                  [],
+                  0,
+                  0
+               ],
+               "callback" : "normalize_method_args_with_optional_scope",
+               "result" : []
+            },
+            {
+               "args" : [
+                  "default()"
+               ],
+               "callback" : "parse_method_function_expr",
+               "result" : {
+                  "args" : [],
+                  "method" : "default",
+                  "source" : "default()",
+                  "source_method" : "default"
+               }
+            },
+            {
+               "args" : [
+                  [],
+                  0,
+                  0
+               ],
+               "callback" : "normalize_method_args_with_optional_scope",
+               "result" : []
+            }
+         ],
+         "private_result" : {
+            "events" : [
+               {
+                  "args" : {},
+                  "raw" : "default { default { default; }; }"
+               },
+               {
+                  "args" : {},
+                  "raw" : "default { default; }"
+               },
+               {
+                  "args" : {},
+                  "raw" : "default"
+               },
+               {
+                  "args" : {},
+                  "raw" : "default()"
+               },
+               {
+                  "args" : {},
+                  "raw" : "default(default(), default())"
+               },
+               {
+                  "args" : {},
+                  "raw" : "default()"
+               },
+               {
+                  "args" : {},
+                  "raw" : "default()"
+               }
+            ],
+            "source_origins" : []
+         },
+         "public_calls" : [
+            {
+               "args" : [
+                  "default()"
+               ],
+               "callback" : "parse_method_function_expr",
+               "result" : {
+                  "args" : [],
+                  "method" : "default",
+                  "source" : "default()",
+                  "source_method" : "default"
+               }
+            },
+            {
+               "args" : [
+                  [],
+                  0,
+                  0
+               ],
+               "callback" : "normalize_method_args_with_optional_scope",
+               "result" : []
+            },
+            {
+               "args" : [
+                  "default()"
+               ],
+               "callback" : "parse_method_function_expr",
+               "result" : {
+                  "args" : [],
+                  "method" : "default",
+                  "source" : "default()",
+                  "source_method" : "default"
+               }
+            },
+            {
+               "args" : [
+                  [],
+                  0,
+                  0
+               ],
+               "callback" : "normalize_method_args_with_optional_scope",
+               "result" : []
+            },
+            {
+               "args" : [
+                  "default()"
+               ],
+               "callback" : "parse_method_function_expr",
+               "result" : {
+                  "args" : [],
+                  "method" : "default",
+                  "source" : "default()",
+                  "source_method" : "default"
+               }
+            },
+            {
+               "args" : [
+                  [],
+                  0,
+                  0
+               ],
+               "callback" : "normalize_method_args_with_optional_scope",
+               "result" : []
+            },
+            {
+               "args" : [
+                  "default(default(), default())"
+               ],
+               "callback" : "parse_method_function_expr",
+               "result" : {
+                  "args" : [
+                     "default()",
+                     "default()"
+                  ],
+                  "method" : "default",
+                  "source" : "default(default(), default())",
+                  "source_method" : "default"
+               }
+            },
+            {
+               "args" : [
+                  [
+                     "default()",
+                     "default()"
+                  ],
+                  0,
+                  0
+               ],
+               "callback" : "normalize_method_args_with_optional_scope",
+               "result" : null
+            },
+            {
+               "args" : [
+                  "default()"
+               ],
+               "callback" : "parse_method_function_expr",
+               "result" : {
+                  "args" : [],
+                  "method" : "default",
+                  "source" : "default()",
+                  "source_method" : "default"
+               }
+            },
+            {
+               "args" : [
+                  [],
+                  0,
+                  0
+               ],
+               "callback" : "normalize_method_args_with_optional_scope",
+               "result" : []
+            },
+            {
+               "args" : [
+                  "switch(kind, case(\"inline\", case(\"nested\"), case(\"twin\")), default(default(), default()))"
+               ],
+               "callback" : "parse_method_function_expr",
+               "result" : {
+                  "args" : [
+                     "kind",
+                     "case(\"inline\", case(\"nested\"), case(\"twin\"))",
+                     "default(default(), default())"
+                  ],
+                  "method" : "switch",
+                  "source" : "switch(kind, case(\"inline\", case(\"nested\"), case(\"twin\")), default(default(), default()))",
+                  "source_method" : "switch"
+               }
+            },
+            {
+               "args" : [
+                  "case(\"inline\", case(\"nested\"), case(\"twin\"))"
+               ],
+               "callback" : "parse_method_function_expr",
+               "result" : {
+                  "args" : [
+                     "\"inline\"",
+                     "case(\"nested\")",
+                     "case(\"twin\")"
+                  ],
+                  "method" : "case",
+                  "source" : "case(\"inline\", case(\"nested\"), case(\"twin\"))",
+                  "source_method" : "case"
+               }
+            },
+            {
+               "args" : [
+                  "default(default(), default())"
+               ],
+               "callback" : "parse_method_function_expr",
+               "result" : {
+                  "args" : [
+                     "default()",
+                     "default()"
+                  ],
+                  "method" : "default",
+                  "source" : "default(default(), default())",
+                  "source_method" : "default"
+               }
+            },
+            {
+               "args" : [
+                  "default(default(), default())"
+               ],
+               "callback" : "trim_action_ir_value",
+               "result" : "default(default(), default())"
+            },
+            {
+               "args" : [
+                  "default()"
+               ],
+               "callback" : "parse_method_function_expr",
+               "result" : {
+                  "args" : [],
+                  "method" : "default",
+                  "source" : "default()",
+                  "source_method" : "default"
+               }
+            },
+            {
+               "args" : [
+                  [],
+                  0,
+                  0
+               ],
+               "callback" : "normalize_method_args_with_optional_scope",
+               "result" : []
+            },
+            {
+               "args" : [
+                  "default()"
+               ],
+               "callback" : "parse_method_function_expr",
+               "result" : {
+                  "args" : [],
+                  "method" : "default",
+                  "source" : "default()",
+                  "source_method" : "default"
+               }
+            },
+            {
+               "args" : [
+                  [],
+                  0,
+                  0
+               ],
+               "callback" : "normalize_method_args_with_optional_scope",
+               "result" : []
+            }
+         ],
+         "public_events" : [
+            {
+               "args" : {},
+               "raw" : "default { default { default; }; }"
+            },
+            {
+               "args" : {},
+               "raw" : "default { default; }"
+            },
+            {
+               "args" : {},
+               "raw" : "default"
+            },
+            {
+               "args" : {},
+               "raw" : "default()"
+            },
+            {
+               "args" : {},
+               "raw" : "default(default(), default())"
+            },
+            {
+               "args" : {},
+               "raw" : "default()"
+            },
+            {
+               "args" : {},
+               "raw" : "default()"
+            }
+         ]
+      },
+      {
+         "contract" : "endcase_flow",
+         "identity" : [],
+         "private_calls" : [],
+         "private_result" : {
+            "events" : [],
+            "source_origins" : []
+         },
+         "public_calls" : [],
+         "public_events" : []
+      },
+      {
+         "contract" : "endswitch_flow",
+         "identity" : [],
+         "private_calls" : [],
+         "private_result" : {
+            "events" : [],
+            "source_origins" : []
+         },
+         "public_calls" : [],
+         "public_events" : []
+      },
+      {
+         "contract" : "say_stmt",
+         "identity" : [],
+         "private_calls" : [],
+         "private_result" : {
+            "events" : [],
+            "source_origins" : []
+         },
+         "public_calls" : [],
+         "public_events" : []
+      },
+      {
+         "contract" : "print_each",
+         "identity" : [],
+         "private_calls" : [],
+         "private_result" : {
+            "events" : [],
+            "source_origins" : []
+         },
+         "public_calls" : [],
+         "public_events" : []
+      },
+      {
+         "contract" : "print_stmt",
+         "identity" : [],
+         "private_calls" : [],
+         "private_result" : {
+            "events" : [],
+            "source_origins" : []
+         },
+         "public_calls" : [],
+         "public_events" : []
+      },
+      {
+         "contract" : "exit_now",
+         "identity" : [],
+         "private_calls" : [],
+         "private_result" : {
+            "events" : [],
+            "source_origins" : []
+         },
+         "public_calls" : [],
+         "public_events" : []
+      },
+      {
+         "contract" : "next_stmt",
+         "identity" : [],
+         "private_calls" : [
+            {
+               "args" : [
+                  "note(\"雪😀\");\r\ncase(\"outer\") { case(\"inner\") { case(\"deep\"); }; }; default { default { default; }; };\r\nswitch(kind, case(\"inline\", case(\"nested\"), case(\"twin\")), default(default(), default())); case(\"twin\"); default()"
+               ],
+               "callback" : "split_action_ir_statements",
+               "result" : [
+                  "note(\"雪😀\")",
+                  "case(\"outer\") { case(\"inner\") { case(\"deep\"); }; }",
+                  "default { default { default; }; }",
+                  "switch(kind, case(\"inline\", case(\"nested\"), case(\"twin\")), default(default(), default()))",
+                  "case(\"twin\")",
+                  "default()"
+               ]
+            },
+            {
+               "args" : [
+                  "note(\"雪😀\")"
+               ],
+               "callback" : "trim_action_ir_value",
+               "result" : "note(\"雪😀\")"
+            },
+            {
+               "args" : [
+                  "case(\"outer\") { case(\"inner\") { case(\"deep\"); }; }"
+               ],
+               "callback" : "trim_action_ir_value",
+               "result" : "case(\"outer\") { case(\"inner\") { case(\"deep\"); }; }"
+            },
+            {
+               "args" : [
+                  "default { default { default; }; }"
+               ],
+               "callback" : "trim_action_ir_value",
+               "result" : "default { default { default; }; }"
+            },
+            {
+               "args" : [
+                  "switch(kind, case(\"inline\", case(\"nested\"), case(\"twin\")), default(default(), default()))"
+               ],
+               "callback" : "trim_action_ir_value",
+               "result" : "switch(kind, case(\"inline\", case(\"nested\"), case(\"twin\")), default(default(), default()))"
+            },
+            {
+               "args" : [
+                  "case(\"twin\")"
+               ],
+               "callback" : "trim_action_ir_value",
+               "result" : "case(\"twin\")"
+            },
+            {
+               "args" : [
+                  "default()"
+               ],
+               "callback" : "trim_action_ir_value",
+               "result" : "default()"
+            }
+         ],
+         "private_result" : {
+            "events" : [],
+            "source_origins" : []
+         },
+         "public_calls" : [
+            {
+               "args" : [
+                  "note(\"雪😀\");\r\ncase(\"outer\") { case(\"inner\") { case(\"deep\"); }; }; default { default { default; }; };\r\nswitch(kind, case(\"inline\", case(\"nested\"), case(\"twin\")), default(default(), default())); case(\"twin\"); default()"
+               ],
+               "callback" : "split_action_ir_statements",
+               "result" : [
+                  "note(\"雪😀\")",
+                  "case(\"outer\") { case(\"inner\") { case(\"deep\"); }; }",
+                  "default { default { default; }; }",
+                  "switch(kind, case(\"inline\", case(\"nested\"), case(\"twin\")), default(default(), default()))",
+                  "case(\"twin\")",
+                  "default()"
+               ]
+            },
+            {
+               "args" : [
+                  "note(\"雪😀\")"
+               ],
+               "callback" : "trim_action_ir_value",
+               "result" : "note(\"雪😀\")"
+            },
+            {
+               "args" : [
+                  "case(\"outer\") { case(\"inner\") { case(\"deep\"); }; }"
+               ],
+               "callback" : "trim_action_ir_value",
+               "result" : "case(\"outer\") { case(\"inner\") { case(\"deep\"); }; }"
+            },
+            {
+               "args" : [
+                  "default { default { default; }; }"
+               ],
+               "callback" : "trim_action_ir_value",
+               "result" : "default { default { default; }; }"
+            },
+            {
+               "args" : [
+                  "switch(kind, case(\"inline\", case(\"nested\"), case(\"twin\")), default(default(), default()))"
+               ],
+               "callback" : "trim_action_ir_value",
+               "result" : "switch(kind, case(\"inline\", case(\"nested\"), case(\"twin\")), default(default(), default()))"
+            },
+            {
+               "args" : [
+                  "case(\"twin\")"
+               ],
+               "callback" : "trim_action_ir_value",
+               "result" : "case(\"twin\")"
+            },
+            {
+               "args" : [
+                  "default()"
+               ],
+               "callback" : "trim_action_ir_value",
+               "result" : "default()"
+            }
+         ],
+         "public_events" : []
+      },
+      {
+         "contract" : "return_undef",
+         "identity" : [],
+         "private_calls" : [],
+         "private_result" : {
+            "events" : [],
+            "source_origins" : []
+         },
+         "public_calls" : [],
+         "public_events" : []
+      }
+   ],
+   "statement_frames" : [
+      {
+         "raw" : "note(\"雪😀\")",
+         "source" : "note(\"雪😀\");\r\ncase(\"outer\") { case(\"inner\") { case(\"deep\"); }; }; default { default { default; }; };\r\nswitch(kind, case(\"inline\", case(\"nested\"), case(\"twin\")), default(default(), default())); case(\"twin\"); default()",
+         "source_span" : {
+            "end" : 10,
+            "start" : 0
+         }
+      },
+      {
+         "raw" : "case(\"outer\") { case(\"inner\") { case(\"deep\"); }; }",
+         "source" : "note(\"雪😀\");\r\ncase(\"outer\") { case(\"inner\") { case(\"deep\"); }; }; default { default { default; }; };\r\nswitch(kind, case(\"inline\", case(\"nested\"), case(\"twin\")), default(default(), default())); case(\"twin\"); default()",
+         "source_span" : {
+            "end" : 63,
+            "start" : 13
+         }
+      },
+      {
+         "raw" : "default { default { default; }; }",
+         "source" : "note(\"雪😀\");\r\ncase(\"outer\") { case(\"inner\") { case(\"deep\"); }; }; default { default { default; }; };\r\nswitch(kind, case(\"inline\", case(\"nested\"), case(\"twin\")), default(default(), default())); case(\"twin\"); default()",
+         "source_span" : {
+            "end" : 98,
+            "start" : 65
+         }
+      },
+      {
+         "raw" : "switch(kind, case(\"inline\", case(\"nested\"), case(\"twin\")), default(default(), default()))",
+         "source" : "note(\"雪😀\");\r\ncase(\"outer\") { case(\"inner\") { case(\"deep\"); }; }; default { default { default; }; };\r\nswitch(kind, case(\"inline\", case(\"nested\"), case(\"twin\")), default(default(), default())); case(\"twin\"); default()",
+         "source_span" : {
+            "end" : 190,
+            "start" : 101
+         }
+      },
+      {
+         "raw" : "case(\"twin\")",
+         "source" : "note(\"雪😀\");\r\ncase(\"outer\") { case(\"inner\") { case(\"deep\"); }; }; default { default { default; }; };\r\nswitch(kind, case(\"inline\", case(\"nested\"), case(\"twin\")), default(default(), default())); case(\"twin\"); default()",
+         "source_span" : {
+            "end" : 204,
+            "start" : 192
+         }
+      },
+      {
+         "raw" : "default()",
+         "source" : "note(\"雪😀\");\r\ncase(\"outer\") { case(\"inner\") { case(\"deep\"); }; }; default { default { default; }; };\r\nswitch(kind, case(\"inline\", case(\"nested\"), case(\"twin\")), default(default(), default())); case(\"twin\"); default()",
+         "source_span" : {
+            "end" : 215,
+            "start" : 206
+         }
+      }
+   ],
+   "substitution" : "note(\"雪😀\");\r\ncase(\"outer\") { case(\"inner\") { case(\"deep\"); }; }; default { default { default; }; };\r\ndo { my $__ls_switch_value_1 = $kind; my $__ls_switch_hit_1 = 0; if (!$__ls_switch_hit_1 && $__ls_switch_value_1 eq \"inline\") { $__ls_switch_hit_1 = 1; case(\"nested\"); case(\"twin\") }; if (!$__ls_switch_hit_1) { $__ls_switch_hit_1 = 1; default(); default() } }; case(\"twin\"); default()"
+}

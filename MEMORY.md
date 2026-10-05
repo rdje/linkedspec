@@ -1,10 +1,10 @@
 # MEMORY
 
-- activation_commit: `e0a09bf474db1cec13b7169e7a3e2a33f97aaed4` — clean pipeline canonical family activation base.
-- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.3 - accept pipeline source family`.
-- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3` (pending) — Flow recursive source provenance.
-- next_action: After clean canonical pipeline landing, activate .1.3; diagnose exact original Flow/recursive source frames through Knowledge/Toolbox and create safe owned children before implementation.
-- in_flight_uncommitted: none; .1.2.3 immutable recurrence/book/claims fully accepted; exact staged canonical receipt gates landing. Production and standard tests remain unchanged.
+- activation_commit: `b73f1f59aab5c248fded038ec53399a5ddd3bb60` — clean Flow provenance diagnosis activation base.
+- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.0 - diagnose recursive Flow source frames`.
+- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.0` (done) — original Flow source/recursive diagnosis accepted; .1.3.1 is next.
+- next_action: Activate .1.3.1 direct Flow regex/next statement provenance from clean HEAD; preserve existing if origins and all original callback/argument/compiler contracts, then commit before argument bridge diagnosis .1.3.2.0.
+- in_flight_uncommitted: none; original diagnosis/proof/publication and owned safe-slice plan are committed.
 - blockers: No access/decision blocker. Matches and attached/marker/value/null/while executors are repaired; control parent/order and raw-expression reporting are reconciled; quoted/comment readiness .7.2/.3 precedes dispatcher/full execution. Other startup repairs remain separate.
   Wrapper startup .7 remains open; recovery/purge stay prohibited.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the

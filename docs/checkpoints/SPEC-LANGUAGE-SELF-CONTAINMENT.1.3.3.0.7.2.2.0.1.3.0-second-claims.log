@@ -1,0 +1,2 @@
+claim-verification: FAIL: falsify: expected keys ['status', 'hypothesis', 'oracle', 'red_control']
+claim-verification: self-test PASS 3 positive / 16 rejected controls

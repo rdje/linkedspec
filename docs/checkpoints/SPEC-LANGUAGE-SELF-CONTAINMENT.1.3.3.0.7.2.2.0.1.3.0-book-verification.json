@@ -1,0 +1,84 @@
+{
+  "book_inputs": 58,
+  "rendered_examples": 12,
+  "rendered_sections": 3,
+  "controls": [
+    {
+      "name": "erase Flow traversal",
+      "rejected": true,
+      "reason": "rendered Flow composite traversal teaching"
+    },
+    {
+      "name": "promote failed render",
+      "rejected": true,
+      "reason": "complete actual render"
+    },
+    {
+      "name": "erase render guard",
+      "rejected": true,
+      "reason": "book input guards"
+    },
+    {
+      "name": "forge renderer",
+      "rejected": true,
+      "reason": "actual book instrument"
+    },
+    {
+      "name": "forge rendered channel",
+      "rejected": true,
+      "reason": "book channel bytes"
+    },
+    {
+      "name": "erase actual examples",
+      "rejected": true,
+      "reason": "original authored rendered examples"
+    },
+    {
+      "name": "erase composition teaching",
+      "rejected": true,
+      "reason": "rendered twenty-contract composition teaching"
+    },
+    {
+      "name": "erase family closeout teaching",
+      "rejected": true,
+      "reason": "rendered immutable family closeout teaching"
+    },
+    {
+      "name": "erase pipeline diagnosis",
+      "rejected": true,
+      "reason": "rendered pipeline regex source teaching"
+    },
+    {
+      "name": "erase corrected metadata",
+      "rejected": true,
+      "reason": "rendered corrected source metadata teaching"
+    },
+    {
+      "name": "erase diagnostic teaching",
+      "rejected": true,
+      "reason": "rendered diagnostic source teaching"
+    },
+    {
+      "name": "erase historical input classification",
+      "rejected": true,
+      "reason": "rendered historical input classification teaching"
+    },
+    {
+      "name": "erase statement teaching",
+      "rejected": true,
+      "reason": "rendered pipeline statement source teaching"
+    },
+    {
+      "name": "erase returned identity teaching",
+      "rejected": true,
+      "reason": "rendered returned reference identity teaching"
+    },
+    {
+      "name": "erase pipeline family acceptance",
+      "rejected": true,
+      "reason": "rendered pipeline family acceptance teaching"
+    }
+  ],
+  "complete": true,
+  "instrument_sha256": "f0821c8c0cc48272f708a15afc7bf991cc1db89149165cf7d82ad12d1ab37bba"
+}

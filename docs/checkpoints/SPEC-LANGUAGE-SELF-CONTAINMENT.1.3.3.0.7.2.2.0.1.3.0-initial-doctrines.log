@@ -1,0 +1,16 @@
+claim-verification: FAIL: claim: expected keys ['name', 'statement', 'scope', 'rederive', 'falsify', 'durability']
+claim-verification: self-test PASS 3 positive / 16 rejected controls
+
+================ DOCTRINE ENFORCEMENT REPORT ================
+  PASS  MEMORY-ARCH — durable 4-layer memory, activation-boundary, and clean-handoff invariants (MEMORY_ARCHITECTURE.md §9)
+  PASS  KNOWLEDGE-MAP — the derived Knowledge Map is in sync with its fact sources
+  PASS  TASK-TREE-METADATA — task metadata, partitions, and stable closed-capability anchors stay consistent
+  PASS  TASK-ACCEPTANCE — staged governed changes carry a task-tree acceptance checklist with LinkedSpec-tool evidence
+  PASS  REPO-ROOT-PATHS — tracked repository paths and all five primary-command roots are relocation-safe
+  PASS  PROJECT-DATA-STORAGE — tracked project-storage defaults and documented outputs stay repository-filesystem rooted
+  PASS  DOCUMENT-HISTORY — bounded current documentation views preserve exact repository-local queryable history
+  PASS  README-STABILITY — README and every routed destination retain reviewed resulting-tree pressure controls
+  FAIL  CLAIM-VERIFICATION — new claim declarations disclose three legs and records bind tracked producer/input identities
+  PASS  VERIFICATION-CADENCE — ordinary commits declare focused proof while canonical boundaries carry exact staged-tree receipts
+============================================================
+doctrines: one or more doctrines FAILED — commit/merge blocked. Fix above; do not bypass.

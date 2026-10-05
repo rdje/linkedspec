@@ -1,0 +1,90 @@
+[
+  {
+    "id": "simple",
+    "action": "note(\"雪😀\");\r\nif(true) { say(\"a\") }; elseif(false) { print(\"b\") }; otherwise { next }; endif; while(false) { next() }; switch(kind) { case(\"a\") { print_each(items) } default { exit_now() } }; endcase; endswitch; say(\"x\", 3); print(\"y\"); print_each(items); exit_now(7); next; return_undef()",
+    "contracts": [
+      "if_flow",
+      "elseif_flow",
+      "else_flow",
+      "endif_flow",
+      "while_flow",
+      "switch_flow",
+      "case_flow",
+      "default_flow",
+      "endcase_flow",
+      "endswitch_flow",
+      "say_stmt",
+      "print_each",
+      "print_stmt",
+      "exit_now",
+      "next_stmt",
+      "return_undef"
+    ]
+  },
+  {
+    "id": "recursive",
+    "action": "note(\"雪😀\");\r\ncase(\"outer\") { case(\"inner\") { case(\"deep\"); }; }; default { default { default; }; };\r\nswitch(kind, case(\"inline\", case(\"nested\"), case(\"twin\")), default(default(), default())); case(\"twin\"); default()",
+    "contracts": [
+      "if_flow",
+      "elseif_flow",
+      "else_flow",
+      "endif_flow",
+      "while_flow",
+      "switch_flow",
+      "case_flow",
+      "default_flow",
+      "endcase_flow",
+      "endswitch_flow",
+      "say_stmt",
+      "print_each",
+      "print_stmt",
+      "exit_now",
+      "next_stmt",
+      "return_undef"
+    ]
+  },
+  {
+    "id": "arguments",
+    "action": "switch(kind,  case(\"a\", say(\"case(\\\"quoted\\\")\"), case(\"a\")) , default(default(), default()) )",
+    "contracts": [
+      "if_flow",
+      "elseif_flow",
+      "else_flow",
+      "endif_flow",
+      "while_flow",
+      "switch_flow",
+      "case_flow",
+      "default_flow",
+      "endcase_flow",
+      "endswitch_flow",
+      "say_stmt",
+      "print_each",
+      "print_stmt",
+      "exit_now",
+      "next_stmt",
+      "return_undef"
+    ]
+  },
+  {
+    "id": "quoted",
+    "action": "say(\"if(true); elseif(false); case(\\\"q\\\"); default; endif; endswitch\"); if(true); case(\"q\"); default;",
+    "contracts": [
+      "if_flow",
+      "elseif_flow",
+      "else_flow",
+      "endif_flow",
+      "while_flow",
+      "switch_flow",
+      "case_flow",
+      "default_flow",
+      "endcase_flow",
+      "endswitch_flow",
+      "say_stmt",
+      "print_each",
+      "print_stmt",
+      "exit_now",
+      "next_stmt",
+      "return_undef"
+    ]
+  }
+]

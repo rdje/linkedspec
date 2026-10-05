@@ -1,0 +1,562 @@
+[
+  {
+    "id": "if_flow",
+    "action": "note(\"雪😀\");\r\nif(true) { say(\"a\") };\r\nif(true) { say(\"a\") }",
+    "contracts": [
+      "if_flow"
+    ],
+    "expected": {
+      "if_flow": [
+        {
+          "raw": "if(true) { say(\"a\") }",
+          "args": {
+            "condition": "true"
+          },
+          "start": 13,
+          "end": 34
+        },
+        {
+          "raw": "if(true) { say(\"a\") }",
+          "args": {
+            "condition": "true"
+          },
+          "start": 37,
+          "end": 58
+        }
+      ]
+    }
+  },
+  {
+    "id": "elseif_flow",
+    "action": "note(\"雪😀\");\r\nelseif(false) { print(\"b\") };\r\nelseif(false) { print(\"b\") }",
+    "contracts": [
+      "elseif_flow"
+    ],
+    "expected": {
+      "elseif_flow": [
+        {
+          "raw": "elseif(false) { print(\"b\") }",
+          "args": {
+            "condition": "false"
+          },
+          "start": 13,
+          "end": 41
+        },
+        {
+          "raw": "elseif(false) { print(\"b\") }",
+          "args": {
+            "condition": "false"
+          },
+          "start": 44,
+          "end": 72
+        }
+      ]
+    }
+  },
+  {
+    "id": "else_flow",
+    "action": "note(\"雪😀\");\r\notherwise { next };\r\notherwise { next }",
+    "contracts": [
+      "else_flow"
+    ],
+    "expected": {
+      "else_flow": [
+        {
+          "raw": "otherwise { next }",
+          "args": {},
+          "start": 13,
+          "end": 31
+        },
+        {
+          "raw": "otherwise { next }",
+          "args": {},
+          "start": 34,
+          "end": 52
+        }
+      ]
+    }
+  },
+  {
+    "id": "endif_flow",
+    "action": "note(\"雪😀\");\r\nendif;\r\nendif",
+    "contracts": [
+      "endif_flow"
+    ],
+    "expected": {
+      "endif_flow": [
+        {
+          "raw": "endif",
+          "args": {},
+          "start": 13,
+          "end": 18
+        },
+        {
+          "raw": "endif",
+          "args": {},
+          "start": 21,
+          "end": 26
+        }
+      ]
+    }
+  },
+  {
+    "id": "while_flow",
+    "action": "note(\"雪😀\");\r\nwhile(false) { next() };\r\nwhile(false) { next() }",
+    "contracts": [
+      "while_flow"
+    ],
+    "expected": {
+      "while_flow": [
+        {
+          "raw": "while(false) { next() }",
+          "args": {
+            "condition": "false"
+          },
+          "start": 13,
+          "end": 36
+        },
+        {
+          "raw": "while(false) { next() }",
+          "args": {
+            "condition": "false"
+          },
+          "start": 39,
+          "end": 62
+        }
+      ]
+    }
+  },
+  {
+    "id": "switch_flow",
+    "action": "note(\"雪😀\");\r\nswitch(kind) { case(\"a\") { print_each(items) } default { exit_now() } };\r\nswitch(kind) { case(\"a\") { print_each(items) } default { exit_now() } }",
+    "contracts": [
+      "switch_flow"
+    ],
+    "expected": {
+      "switch_flow": [
+        {
+          "raw": "switch(kind) { case(\"a\") { print_each(items) } default { exit_now() } }",
+          "args": {
+            "expr": "kind"
+          },
+          "start": 13,
+          "end": 84
+        },
+        {
+          "raw": "switch(kind) { case(\"a\") { print_each(items) } default { exit_now() } }",
+          "args": {
+            "expr": "kind"
+          },
+          "start": 87,
+          "end": 158
+        }
+      ]
+    }
+  },
+  {
+    "id": "endcase_flow",
+    "action": "note(\"雪😀\");\r\nendcase;\r\nendcase",
+    "contracts": [
+      "endcase_flow"
+    ],
+    "expected": {
+      "endcase_flow": [
+        {
+          "raw": "endcase",
+          "args": {},
+          "start": 13,
+          "end": 20
+        },
+        {
+          "raw": "endcase",
+          "args": {},
+          "start": 23,
+          "end": 30
+        }
+      ]
+    }
+  },
+  {
+    "id": "endswitch_flow",
+    "action": "note(\"雪😀\");\r\nendswitch;\r\nendswitch",
+    "contracts": [
+      "endswitch_flow"
+    ],
+    "expected": {
+      "endswitch_flow": [
+        {
+          "raw": "endswitch",
+          "args": {},
+          "start": 13,
+          "end": 22
+        },
+        {
+          "raw": "endswitch",
+          "args": {},
+          "start": 25,
+          "end": 34
+        }
+      ]
+    }
+  },
+  {
+    "id": "say_stmt",
+    "action": "note(\"雪😀\");\r\nsay(\"x\", 3);\r\nsay(\"x\", 3)",
+    "contracts": [
+      "say_stmt"
+    ],
+    "expected": {
+      "say_stmt": [
+        {
+          "raw": "say(\"x\", 3)",
+          "args": {
+            "values": [
+              "\"x\"",
+              "3"
+            ]
+          },
+          "start": 13,
+          "end": 24
+        },
+        {
+          "raw": "say(\"x\", 3)",
+          "args": {
+            "values": [
+              "\"x\"",
+              "3"
+            ]
+          },
+          "start": 27,
+          "end": 38
+        }
+      ]
+    }
+  },
+  {
+    "id": "print_stmt",
+    "action": "note(\"雪😀\");\r\nprint(\"y\");\r\nprint(\"y\")",
+    "contracts": [
+      "print_stmt"
+    ],
+    "expected": {
+      "print_stmt": [
+        {
+          "raw": "print(\"y\")",
+          "args": {
+            "values": [
+              "\"y\""
+            ]
+          },
+          "start": 13,
+          "end": 23
+        },
+        {
+          "raw": "print(\"y\")",
+          "args": {
+            "values": [
+              "\"y\""
+            ]
+          },
+          "start": 26,
+          "end": 36
+        }
+      ]
+    }
+  },
+  {
+    "id": "print_each",
+    "action": "note(\"雪😀\");\r\nprint_each(items);\r\nprint_each(items)",
+    "contracts": [
+      "print_each"
+    ],
+    "expected": {
+      "print_each": [
+        {
+          "raw": "print_each(items)",
+          "args": {
+            "target": "items"
+          },
+          "start": 13,
+          "end": 30
+        },
+        {
+          "raw": "print_each(items)",
+          "args": {
+            "target": "items"
+          },
+          "start": 33,
+          "end": 50
+        }
+      ]
+    }
+  },
+  {
+    "id": "exit_now",
+    "action": "note(\"雪😀\");\r\nexit_now(7);\r\nexit_now(7)",
+    "contracts": [
+      "exit_now"
+    ],
+    "expected": {
+      "exit_now": [
+        {
+          "raw": "exit_now(7)",
+          "args": {
+            "payload": "7"
+          },
+          "start": 13,
+          "end": 24
+        },
+        {
+          "raw": "exit_now(7)",
+          "args": {
+            "payload": "7"
+          },
+          "start": 27,
+          "end": 38
+        }
+      ]
+    }
+  },
+  {
+    "id": "next_stmt",
+    "action": "note(\"雪😀\");\r\nnext;\r\nnext",
+    "contracts": [
+      "next_stmt"
+    ],
+    "expected": {
+      "next_stmt": [
+        {
+          "raw": "next",
+          "args": {},
+          "start": 13,
+          "end": 17
+        },
+        {
+          "raw": "next",
+          "args": {},
+          "start": 20,
+          "end": 24
+        }
+      ]
+    }
+  },
+  {
+    "id": "return_undef",
+    "action": "note(\"雪😀\");\r\nreturn_undef();\r\nreturn_undef()",
+    "contracts": [
+      "return_undef"
+    ],
+    "expected": {
+      "return_undef": [
+        {
+          "raw": "return_undef()",
+          "args": {
+            "value": "undef"
+          },
+          "start": 13,
+          "end": 27
+        },
+        {
+          "raw": "return_undef()",
+          "args": {
+            "value": "undef"
+          },
+          "start": 30,
+          "end": 44
+        }
+      ]
+    }
+  },
+  {
+    "id": "recursive",
+    "action": "note(\"雪😀\");\r\ncase(\"outer\") { case(\"inner\") { case(\"deep\"); }; }; default { default { default; }; };\r\nswitch(kind, case(\"inline\", case(\"nested\"), case(\"twin\")), default(default(), default())); case(\"twin\"); default()",
+    "contracts": [
+      "if_flow",
+      "elseif_flow",
+      "else_flow",
+      "endif_flow",
+      "while_flow",
+      "switch_flow",
+      "case_flow",
+      "default_flow",
+      "endcase_flow",
+      "endswitch_flow",
+      "say_stmt",
+      "print_each",
+      "print_stmt",
+      "exit_now",
+      "next_stmt",
+      "return_undef"
+    ],
+    "expected": {
+      "switch_flow": [
+        {
+          "raw": "switch(kind, case(\"inline\", case(\"nested\"), case(\"twin\")), default(default(), default()))",
+          "args": {
+            "expr": "kind"
+          },
+          "start": 101,
+          "end": 190
+        }
+      ],
+      "case_flow": [
+        {
+          "raw": "case(\"outer\") { case(\"inner\") { case(\"deep\"); }; }",
+          "args": {
+            "value": "\"outer\""
+          },
+          "start": 13,
+          "end": 63
+        },
+        {
+          "raw": "case(\"inner\") { case(\"deep\"); }",
+          "args": {
+            "value": "\"inner\""
+          },
+          "start": 29,
+          "end": 60
+        },
+        {
+          "raw": "case(\"deep\")",
+          "args": {
+            "value": "\"deep\""
+          },
+          "start": 45,
+          "end": 57
+        },
+        {
+          "raw": "case(\"twin\")",
+          "args": {
+            "value": "\"twin\""
+          },
+          "start": 192,
+          "end": 204
+        },
+        {
+          "raw": "case(\"inline\", case(\"nested\"), case(\"twin\"))",
+          "args": {
+            "value": "\"inline\""
+          },
+          "start": 114,
+          "end": 158
+        },
+        {
+          "raw": "case(\"nested\")",
+          "args": {
+            "value": "\"nested\""
+          },
+          "start": 129,
+          "end": 143
+        },
+        {
+          "raw": "case(\"twin\")",
+          "args": {
+            "value": "\"twin\""
+          },
+          "start": 145,
+          "end": 157
+        }
+      ],
+      "default_flow": [
+        {
+          "raw": "default { default { default; }; }",
+          "args": {},
+          "start": 65,
+          "end": 98
+        },
+        {
+          "raw": "default { default; }",
+          "args": {},
+          "start": 75,
+          "end": 95
+        },
+        {
+          "raw": "default",
+          "args": {},
+          "start": 85,
+          "end": 92
+        },
+        {
+          "raw": "default()",
+          "args": {},
+          "start": 206,
+          "end": 215
+        },
+        {
+          "raw": "default(default(), default())",
+          "args": {},
+          "start": 160,
+          "end": 189
+        },
+        {
+          "raw": "default()",
+          "args": {},
+          "start": 168,
+          "end": 177
+        },
+        {
+          "raw": "default()",
+          "args": {},
+          "start": 179,
+          "end": 188
+        }
+      ]
+    }
+  },
+  {
+    "id": "arguments",
+    "action": "switch(kind,  case(\"a\", say(\"case(\\\"quoted\\\")\"), case(\"a\")) , , default(default(), default()))",
+    "contracts": [
+      "case_flow",
+      "default_flow"
+    ],
+    "expected": {
+      "case_flow": [
+        {
+          "raw": "case(\"a\", say(\"case(\\\"quoted\\\")\"), case(\"a\"))",
+          "args": {
+            "value": "\"a\""
+          },
+          "start": 14,
+          "end": 59
+        },
+        {
+          "raw": "case(\\\"quoted\\\")\")",
+          "args": {
+            "value": "\\\"quoted\\\")\""
+          },
+          "start": 29,
+          "end": 47
+        },
+        {
+          "raw": "case(\"a\")",
+          "args": {
+            "value": "\"a\""
+          },
+          "start": 49,
+          "end": 58
+        }
+      ],
+      "default_flow": [
+        {
+          "raw": "default(default(), default())",
+          "args": {},
+          "start": 64,
+          "end": 93
+        },
+        {
+          "raw": "default()",
+          "args": {},
+          "start": 72,
+          "end": 81
+        },
+        {
+          "raw": "default()",
+          "args": {},
+          "start": 83,
+          "end": 92
+        }
+      ]
+    }
+  }
+]

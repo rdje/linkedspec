@@ -1,0 +1,8 @@
+{
+  "observed": "RED",
+  "reason": "literal original event arguments and composite order",
+  "case": "arguments",
+  "seed": 0,
+  "instrument_sha256": "fc4d242edf8cde870c230c250b2a4f9a970d0b9e0086c1051297e4ebd2b385bf",
+  "scope": "Actual original capture rejects a false omitted quoted-case expectation. Runtime source/contracts and original inputs remain unchanged; corrected review oracle authors the extra original syntactic interval."
+}

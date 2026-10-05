@@ -1,0 +1,55 @@
+---
+id: perl-flow-recursive-source-provenance
+title: Original Flow traversal concatenates marker recursion before inline arguments
+answers:
+  - "how do FlowRules case and default scanners order recursive events"
+  - "which FlowRules contracts already record original source origins"
+  - "why must inline switch arguments have original occurrence frames"
+  - "does a quoted case payload produce a Flow scanner event"
+  - "what owns recursive Flow source provenance"
+date: 2026-10-05
+status: original diagnosis; direct and recursive implementation pending
+tags: [perl, actionir, flow, scanner, source-provenance, traversal]
+evidence: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.0 retains original public/private Toolbox effects from immutable b73f1f59a and independent literal scalar/argument/traversal oracles. Original omitted quoted-case expectation is separately retained and observed RED; runtime input bytes remain exact."
+reverify:
+  - "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.0-review.py"
+  - "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.0-original-oracle-control.py"
+---
+
+# Flow origins require both match and recursive argument occurrence authority
+
+At the original b73f1f59a boundary, FlowRules dispatches sixteen contracts.
+Thirteen direct regex producers include the already instrumented `if_flow`;
+`next_stmt` splits statements. Case/default are composite producers: each first
+scans marker matches and recursively scans attached blocks, then appends the
+inline-switch branch traversal and recursively scans parsed branch arguments.
+Remaining origins are absent at this boundary; ordinary public/private event
+arrays and dependency callback effects stay equal.
+
+A later `case("tail")` can precede an earlier inline branch in this selected
+stream. Preserve depth-first marker traversal followed by inline traversal; a
+global lexical sort would change the original contract. Repeated branch twins
+need separate source occurrences, even when their raw values are equal.
+
+`_scan_contract_case_marker_events` receives a captured block or a parsed nested
+argument; its local offsets do not directly describe the full action. Inline
+switch arguments are trimmed by MethodExpr's actual CSV splitter, which also
+drops empty slots. Captured-block bases and parser-produced argument occurrences
+must be translated explicitly. Custom callbacks that copy, transform or parse
+foreign source retain their ordinary results but cannot fabricate authority.
+The existing statement-frame bridge handles `next_stmt`; argument authority is
+separately owned by `.1.3.2.0` before any new bridge is implemented.
+
+The original nested `say("case(\\"quoted\\")")` payload is also scanned as
+syntactic case text. The recursive marker regex starts inside the string and
+its parser accepts the captured tail. This diagnosis preserves that observation;
+the quoted-source membership repair and independent closeout remain under
+`.7.2.2` / `.7.2.3`. Do not count only executable branches when establishing
+the original scanner population. The first author omitted this event; its
+source/oracle/capture are preserved, and the separate corrected review oracle
+authors the quoted interval from literal fragments without searching events.
+
+Safe implementation owners are `.1.3.1` for direct regex/statement hooks,
+`.1.3.2` for argument authority and recursive translation, and `.1.3.3` for
+fresh whole-family recurrence plus canonical acceptance. This is private source
+telemetry, not new recognition, DSL admission or executable membership.

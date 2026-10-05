@@ -2573,10 +2573,75 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 - [x] **LOCKSTEP** — Book58 inputs/ten examples/three chapters/14 controls and prior38-hash historical freeze pass. Task/frontier/index/two roadmaps/Knowledge/live/resume/history/claim align; exact staged canonical gate must succeed before this completed candidate can land.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3`
-  Status: `pending`
+  Status: `active`
   Goal: Complete remaining FlowRules source provenance and recursive frames.
   Dependencies: `.1.3.3.0.7.2.2.0.1.2`
   Acceptance: Translate case/default block and inline-switch argument frames explicitly; preserve composite traversal rather than global lexical sorting.
+
+  Children: `.1.3.3.0.7.2.2.0.1.3.0` diagnosis; implementation children are derived from its exact producer/recursive-frame inventory before production edits; final canonical family acceptance remains required.
+  Safe-slice plan: Recover the original Flow dispatch population and both original source/argument/recursive traversal contracts with actual public/private Toolbox observations first. Split simple producers and translated recursive arguments into coherent verified implementation leaves after that diagnosis. Preserve existing if_flow origins, full original arguments/callbacks/compiler channels and composite traversal. No executable membership, quote/comment/replacement or new DSL admission.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.0`
+  Status: `done`
+  Goal: Diagnose all original FlowRules producer and recursive argument/source-frame contracts at an immutable input boundary, then own safe implementation slices.
+  Dependencies: `.1.3.3.0.7.2.2.0.1.2.3`
+  Activation: Clean b73f1f59aab5c248fded038ec53399a5ddd3bb60; pipeline parent canonically committed, all ten hooks/post-pointer PASS, exact committed receipt, brief0 and no jobs. Original three-contract source channel/quoted-source ownership Knowledge, current Flow parent requirements, public ActionIR/Toolbox probes and scanner/traversal book reviewed. Remaining code/interfaces/fixture/contract inventory will be recovered through the published LinkedSpec probes and canonical records before diagnosis or production changes.
+  Owned paths: Leaf .1.3.0 checkpoint/claim artifacts and diagnostic instruments/original literal source/argument/interval oracles; exact prior .1.2.3 claim historical freeze before bound publication changes; Flow/source Knowledge, ActionIR/development book, task/frontier/index/roadmaps/live/resume/history. No production/spec/standard-test/CI/hook/storage/dependency/other-repository change planned.
+  Verification tier: `focused`
+  Focused checks: Actual public/private Flow scanner/Toolbox probes, independent literal original source/argument/interval/callback/recursive traversal oracle, current existing if_flow origins and original source authority; immutable regular Git plus exact authored probe/oracle overlays, complete command/channel/content/mode/population guards and distinguishing corruption controls. Affected unchanged source-frame/AST/order/flow consumers, complete book inputs/render, prior claim freeze, memory/Knowledge/claim/history/diff and all doctrines.
+  Canonical trigger: None for bounded diagnosis and owned safe-slice planning preserving code/fixtures/public contracts. Separate final family closeout will require immutable recurrence and exact canonical receipt; escalate if diagnosis exposes cross-cutting uncertainty.
+  Claim verification: `docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.0.json`
+  Acceptance: Retain original observations and inspect exact mechanism/source locations with LinkedSpec tools. Every encountered defect gets reproduction/impact/repair ownership. Define precise producer and recursive-frame children only from observed original contracts; do not invent coordinates from equal raw text or globally sort composite traversal.
+
+  Original diagnosis: Original actual recursive Toolbox probe returns marker/block case events outer/inner/deep/tail, then inline case/nested/twin; default follows analogous marker/block/tail then inline/default-child order. All original recursive origins are absent. Original if_flow hooks remain separate. This is composite traversal, not lexical order; duplicate equal-text twins require original match/argument occurrence frames. Initial live source/probe transcript is retained as exploratory only; immutable recurrence independently authors the source/args/intervals and guards all regular Git inputs plus three exact overlays.
+  Encountered issue / owned boundary: Inline case payload say("case(\"quoted\")") returns an extra case marker observation when _scan_contract_case_marker_events recursively scans the parsed payload expression. Actual captured raw is case(\"quoted\")") with value \"quoted\")". The marker regex is unmasked and starts inside the quoted payload; parse_method_function_expr accepts its captured syntactic tail. This belongs to existing .7.2 source-membership repair after producer frames, not a recognition change in this diagnosis. Impact: counting only executable branches would omit an original scanner event and lose its occurrence authority. Original oracle/cases/capture remain exact; a separately retained corrected review oracle splits the literal source at the quoted occurrence. The actual original omission hypothesis is observed RED and retained in original-oracle-control.json. Resolution schedule: provenance .1.3.2 preserves its original full-source frame; .7.2.2 downstream lexical membership rejects quoted ownership; .7.2.3 independently verifies quoted-data closeout.
+  Publication instrument repair: First book render succeeded, but inherited reviewer selected only language-perl fences and rejected new text examples. Preserve first actual capsule/render/producer; final reviewer selects perl/text fences and observes the same missing-example denial control. A shell authoring typo initially left book.py absent and the project wrapper rejected it without a render; corrected before final capture. Neither failure is promoted to accepted proof.
+  Claim schema repair: Initial all-doctrine gate passes nine doctrines but rejects the new claim's extra limitations key. Required scope already retains every limit; remove only the unsupported field from the actual claim producer, regenerate its source binding and retain initial-doctrines.log. No checker/schema exception or earlier adjudication change. A second selected check rejects extra result keys in falsify/durability; the actual strict schema permits results only in rederive. Retain second-claims.log, inspect every leg against the existing validator and validate the complete new record/live inputs with the actual checker before full staged replay. No checker changes. A staged diff check then catches one reviewer trailing space missed by the earlier unstaged check. Stop the exact pending commit and its observed descendants before landing; HEAD remains b73f1f59a and the index is preserved. Fix whitespace, rerun the actual review/control/claim binding, and require both cached and worktree diff checks. Retain stopped-commit.log as a partial, non-signoff result. Final claim verification and all commit hooks remain mandatory.
+  Owned repair plan: `.1.3.1` direct Flow regex producers plus next statement hook (preserve existing if hook); `.1.3.2.0` private MethodExpr parse/CSV argument occurrence authority diagnosis and bridge contract before implementation; `.1.3.2.1` exact block/argument recursive frame translation preserving both passes, callback count/results/reference authority; `.1.3.3` immutable whole-family recurrence and canonical acceptance. Split or insert a bridge implementation child after exact interface diagnosis if needed; no new production bridge is assumed yet.
+
+  Verification: PASS immutable4065 regular inputs/three exact overlays,49 complete guarded commands,16 dispatcher contracts/16 cases/three seeds/49 original syntactic events per seed; original two if origins per seed retain actual returned/constructor/argument references. Complete public/private callback effects and substitution/diagnostic/parser-dump channels recur unchanged across seeds.26 reason-specific evidence controls plus the actual original omitted-quoted-event control observe RED. Six unchanged suites pass103 ordered groups; storage PASS. Complete58-input book renders12 examples/three chapters with15 RED controls.34 prior bound hashes verify before mode/revision-only freeze. No production/spec/standard-test changes; global source membership and historical audit remain open.
+  Evidence: Leaf-prefixed capture/review/original and corrected oracle/probe/control/freeze/book producers, full input/channel capsules and source-bound claim retain exact original results and explicit initial limits. Complete original regular Git superset is not minimal observed IO; custom argument callback authority remains owned .1.3.2.0, not admitted here.
+  Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.0 - diagnose recursive Flow source frames`.
+
+### `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.0` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Actual original public/private probes retain16 Flow dispatcher contracts and missing remaining origins; recursive repeated twins and quoted payload observation are reproduced at the original boundary.
+- [x] **ROOT CAUSE (WHY + WHERE)** — FlowRules concatenates marker/block traversal and inline-switch argument traversal; local captured-block/trimmed CSV argument offsets need full-source translation. Unmasked recursive case marker scanning owns the original quoted observation.
+- [x] **FIX** — Bounded diagnosis retains exact original sources/results and independently authored intervals; owns direct hooks, argument-authority diagnosis/bridge, recursive translation and canonical family acceptance before any production changes.
+- [x] **ADDRESSED (verified)** — Complete immutable input/command/channel/mode/population guards and literal event/argument/traversal oracles pass;26 distinguishing evidence controls and actual original omitted-quoted-event hypothesis are RED.
+- [x] **NO REGRESSION** — Production/spec/standard-test bytes equal immutable b73f1f59a; public/private callback/compiler channels recur unchanged and six affected suites pass103 groups. Original if origin/reference authority remains exact.
+- [x] **LOCKSTEP** — Book, Knowledge, claim, task/frontier/index/roadmaps and bounded continuity teach the same original diagnosis and pending implementation boundary; prior34 input identities and earlier adjudications remain exact after historical freeze.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.1`
+  Status: `pending`
+  Goal: Record direct Flow regex and next statement source occurrences while preserving original events, arguments and callback behavior.
+  Dependencies: `.1.3.3.0.7.2.2.0.1.3.0`
+  Acceptance: Snapshot original match coordinates before callback parsing for thirteen direct regex producers including unchanged if_flow; bind next via existing statement-frame authority. Unicode/CRLF/repetition, aliases/bare markers, custom callbacks/nested restoration/error state, public compiler channels and rejected/empty scans are independently verified. Case/default recursive paths remain owned by .1.3.2.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.2`
+  Status: `pending`
+  Goal: Translate original recursive case/default block and inline argument source occurrences without changing composite order.
+  Dependencies: `.1.3.3.0.7.2.2.0.1.3.1`
+  Children: `.1.3.2.0` diagnose private MethodExpr/CSV occurrence authority and exact default/custom callback contracts; implementation leaf ownership follows that diagnosis; `.1.3.2.1` owns recursive Flow consumption after a verified bridge exists.
+  Acceptance: Original full action source plus exact block/trimmed argument occurrence frames, never equal-text lookup. Preserve marker depth-first traversal followed by inline traversal, ordinary return identities/callback effects and source authority denial for transformed/copied/foreign callbacks. Direct MethodExpr consumers and whole Flow/source compatibility remain green.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.2.0`
+  Status: `pending`
+  Goal: Diagnose and specify invocation-local MethodExpr argument occurrence authority through original public parser/CSV callback probes.
+  Dependencies: `.1.3.3.0.7.2.2.0.1.3.1`
+  Acceptance: Retain actual callback source/argument identity, leading/trailing whitespace, dropped empty CSV slots, slash-pattern masks, repeated equal arguments, Unicode/CRLF, copied/transformed/foreign/opaque results, nested and exceptional invocations. Derive a bounded bridge leaf before production changes; no global cache or coordinate search.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.2.1`
+  Status: `pending`
+  Goal: Consume verified original block/argument frames in recursive case/default producers.
+  Dependencies: `.1.3.3.0.7.2.2.0.1.3.2.0` and its verified bridge implementation child.
+  Acceptance: Independent original full-source scalar intervals distinguish direct and inline repeated twins, recursive attached blocks and nested inline expressions. Preserve exact event/argument references, normalization callbacks, marker-first/inline-second traversal, public compiler channels and unknown/transformed callback authority denial. No lexical sort, membership repair or new DSL admission.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.3`
+  Status: `pending`
+  Goal: Accept the complete original Flow provenance family after direct and recursive repairs.
+  Dependencies: `.1.3.3.0.7.2.2.0.1.3.1` and `.1.3.3.0.7.2.2.0.1.3.2`
+  Acceptance: Fresh immutable all-contract recurrence with independent source/argument/interval/traversal and actual returned-reference oracles, full callback/compiler channels, focused consumer compatibility, complete book inputs/render and exact staged canonical CI receipt before parent closure.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4`
   Status: `pending`
@@ -2882,7 +2947,9 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 | 43.4.2.0.1.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2` | `done` | All19 private source contracts independently verified; exact canonical receipt gates .1.2.3 parent acceptance. |
 | 43.4.2.0.1.2.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.2` | `done` | Eight statement contracts/ten constructors;1801 GREEN,207 origins and corrected returned-reference proof. |
 | 43.4.2.0.1.2.3 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.3` | `done` | Immutable4050/no overlays;207 origins/135 frames/803 groups, canonical receipt gates landing. |
-| 43.4.2.0.1.3 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3` | `pending` | Complete recursive/composed flow source provenance before membership. |
+| 43.4.2.0.1.3 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3` | `active` | Complete recursive/composed flow source provenance before membership. |
+| 43.4.2.0.1.3.0 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.0` | `done` | Original Flow source/argument/traversal diagnosis; direct and recursive repairs owned. |
+| 43.4.2.0.1.3.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.1` | `pending` | Next: direct Flow regex and next statement source hooks. |
 | 43.4.2.0.1.4 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4` | `pending` | Complete remaining legacy, to be split source provenance before membership. |
 | 43.4.2.0.1.5 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5` | `pending` | Complete staged/progressive/recognition source provenance before membership. |
 | 43.4.2.0.1.6 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6` | `pending` | Complete independent producer composition source provenance before membership. |
