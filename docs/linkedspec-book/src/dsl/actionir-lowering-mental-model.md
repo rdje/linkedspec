@@ -317,6 +317,44 @@ argument array. Private frame authority must therefore come from the actual pars
 invocation and returned argument references, with transformed/copied/foreign callback
 results retaining their events but receiving no invented source authority.
 
+### Original method argument boundaries
+
+The current method-expression parser returns the original trimmed expression
+and an array of trimmed, nonempty arguments. It keeps the exact object returned
+by its CSV splitter. Empty slots disappear from that array:
+
+```text
+ call( same, ,same )
+# source: call( same, ,same )
+# args: [same, same]
+# authored scalar argument intervals in the original input: [7, 11), [13, 17)
+```
+
+Those intervals describe the original input; the current parser does not yet
+publish an argument-frame sidecar. Matching equal argument strings after parsing
+cannot distinguish their occurrences. Coordinates must be captured at the actual
+CSV piece boundaries, then translated through leading expression whitespace and
+the opening parenthesis. A returned argument index is not the original CSV slot
+index when empty slots were dropped.
+
+Regex helper context also matters:
+
+```text
+matches("x,雪", /(x),雪/imu)
+# args: ["x,雪", /(x),雪/imu]
+filter_match(/(x),雪/imu)  # receiver parser context
+# args: [/(x),雪/imu]
+```
+
+The structural helper-pattern view preserves character offsets and original
+CR/LF; returned values come from the original source. Receiver calls pass their
+context to CSV splitting. The planned private bridge preserves all ordinary
+callback results and references, including copied, changed, foreign-source and
+opaque results, while requiring producer authority before lending coordinates.
+Nested calls and exceptions retain their existing behavior. This diagnosis does
+not admit recursive Flow origins; the bridge and its Flow consumers are separate
+implementation steps.
+
 ### CanonicalEvents
 
 `ActionIR::CanonicalEvents` records recognized current helper calls as ActionIR event records. Each event carries a contract ID, resolved arguments, and metadata needed by the later lowering stages. Deleted helper names are not canonicalized into replacement events. Raw-Perl compatibility passthroughs may still be classified for migration reporting, but their descriptor-facing diagnostic labels stay neutral instead of reusing retired helper names.

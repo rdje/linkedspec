@@ -12,6 +12,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-10-05 — Method argument authority diagnosis (.1.3.2.0)
+
+Original CSV identity, trim/payload bases and dropped slots are verified. Bridge implementation follows .1.3.2.0.1; see docs/knowledge/perl-private-method-argument-authority.md.
+
 ## 2026-10-05 — Direct Flow origins preserve original producer authority (.1.3.1)
 
 All thirteen direct regex Flow producers now record their original match frame; twelve hooks are new and if_flow is unchanged. next_stmt uses the existing statement bridge, advances its frame index before recognition, and declines changed raw/source authority without losing ordinary callback events. Aliases and bare markers retain authored spelling, not normalized parser text. Per-entry split authority preserves an unchanged neighbor even if another entry changes; the original false test expectation and failure are retained before correction.

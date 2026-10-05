@@ -2,19 +2,19 @@
 
 ## Current Activity
 
-Full PNT: direct Flow source provenance is accepted. Next .1.3.2.0 diagnoses original MethodExpr/CSV argument authority before a bridge and recursive translation. Complete Flow family acceptance still requires its canonical receipt; other producers/membership/comment/replacement and global audits remain owned.
+Full PNT: original MethodExpr/CSV argument diagnosis is accepted. Next .1.3.2.0.1 implements invocation-local producer sidecars before recursive Flow consumption. Direct Flow remains accepted; whole-family canonical acceptance and other producers/membership/comments/replacement/global audits remain owned.
 
 ## Latest Completed Slice
 
-`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.1` — Direct Flow .1.3.1 verifies14 contracts from4099 immutable inputs/two overlays per epoch and one owner delta:RED16/GREEN21,87 origins/48 unchanged compiler pairs across three seeds,1158 selected groups,22 evidence/16 render controls. Existing if/per-entry authority and recursive case/default behavior remain intact. Complete58-input book renders15 examples/three chapters. All42 prior claim bindings verify before historical freeze; original test/reviewer/prototype limits remain retained. No public recognition/schema/Core/MethodExpr/dependency changes.
+`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.2.0` — Argument diagnosis .1.3.2.0 verifies4141 immutable inputs/two overlays, ten literal cases/23 arguments/three seeds,14 callback controls and124 groups;23 evidence controls reject. Exact CSV return identity, trim/payload bases, empty slots and original custom behavior are retained. Production and standard tests remain unchanged. Prior55 direct Flow claim hashes verify before historical freeze; book17 examples/three chapters reflect current diagnosis and future bridge ownership.
 
 ## Next Action
 
-Activate .1.3.2.0 from clean committed HEAD; use Knowledge/Toolbox to retain original parser/CSV result/reference/argument interval contracts, then own a bounded bridge implementation before production edits.
-
+Activate .1.3.2.0.1 from clean HEAD; implement bounded invocation-local MethodExpr CSV/parser frames from the accepted literal producer/identity contracts, retaining RED/GREEN and unchanged ordinary channels before recursive consumers.
 
 ## Recent Completions
 
+- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.2.0` — original argument/callback authority diagnosis;124 groups/23 literal arguments and RED evidence controls.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.1` — fourteen direct Flow hooks; RED16/GREEN21/1158 groups/87 origins and unchanged compiler pairs.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.0` — original Flow recursive source diagnosis and safe repair owners; original quoted observation retained.
 - `2026-10-05` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.3` accepts4050 immutable inputs/all19 pipeline contracts/207 origins/803 groups behind exact canonical landing.
@@ -30,7 +30,7 @@ Activate .1.3.2.0 from clean committed HEAD; use Knowledge/Toolbox to retain ori
 - `2026-10-04` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.1` captures177 private scalar frames,28 GREEN and1148 unchanged consumer groups.
 - `2026-10-04` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.0` verifies contiguous statement intervals and owns three implementation slices.
 - `2026-10-04` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.3.1` accepts1337 source-bound groups and preserves the initial checkpoint-input RED.
-- `2026-10-04` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.3.0` prepares738 fixed inputs,25 smoke groups/two renders and18 reason-checked controls.
+
 
 ## History
 

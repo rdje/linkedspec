@@ -1,10 +1,10 @@
 # MEMORY
 
-- activation_commit: `f3f87ce110db89fca0e3db4debd4d9948df0b8df` — clean direct Flow provenance activation base.
-- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.1 - retain direct Flow source origins`.
-- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.1` (done) — direct Flow provenance accepted; .1.3.2.0 is next.
-- next_action: Activate .1.3.2.0 from clean HEAD; diagnose original MethodExpr/CSV callback argument occurrence authority with Toolbox and independent literal intervals, then own a bounded bridge leaf before production changes.
-- in_flight_uncommitted: none; direct Flow hooks/regression/immutable proof/book/live docs and claim are committed.
+- activation_commit: `6ce479842be85219990be889914f354f1a4aaa44` — clean MethodExpr argument diagnosis activation base.
+- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.2.0 - diagnose MethodExpr argument authority`.
+- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.2.0` (done) — original MethodExpr/CSV argument authority diagnosis accepted.
+- next_action: Activate .1.3.2.0.1 from clean HEAD; implement invocation-local MethodExpr CSV/parser sidecars using accepted literal boundaries and identity contracts, then verify before recursive Flow consumers.
+- in_flight_uncommitted: none; original argument diagnosis/proof/book/Knowledge/live docs and claim are committed.
 - blockers: No access/decision blocker. Matches and attached/marker/value/null/while executors are repaired; control parent/order and raw-expression reporting are reconciled; quoted/comment readiness .7.2/.3 precedes dispatcher/full execution. Other startup repairs remain separate.
   Wrapper startup .7 remains open; recovery/purge stay prohibited.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the

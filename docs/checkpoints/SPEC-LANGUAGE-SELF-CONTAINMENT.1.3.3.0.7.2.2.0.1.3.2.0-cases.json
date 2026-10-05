@@ -1,0 +1,435 @@
+[
+  {
+    "id": "twins",
+    "source": " \r\nswitch( kind , case(\"雪\", case(\"雪\")) , case(\"雪\", case(\"雪\")) , default(default()) )\r\n\t",
+    "receiver": false,
+    "method": "switch",
+    "trimmed": "switch( kind , case(\"雪\", case(\"雪\")) , case(\"雪\", case(\"雪\")) , default(default()) )",
+    "payload": " kind , case(\"雪\", case(\"雪\")) , case(\"雪\", case(\"雪\")) , default(default()) ",
+    "payload_start": 10,
+    "slots": [
+      {
+        "slot": 0,
+        "raw": " kind ",
+        "start": 10,
+        "end": 16
+      },
+      {
+        "slot": 1,
+        "raw": " case(\"雪\", case(\"雪\")) ",
+        "start": 17,
+        "end": 39
+      },
+      {
+        "slot": 2,
+        "raw": " case(\"雪\", case(\"雪\")) ",
+        "start": 40,
+        "end": 62
+      },
+      {
+        "slot": 3,
+        "raw": " default(default()) ",
+        "start": 63,
+        "end": 83
+      }
+    ],
+    "arguments": [
+      {
+        "raw": "kind",
+        "start": 11,
+        "end": 15,
+        "slot": 0
+      },
+      {
+        "raw": "case(\"雪\", case(\"雪\"))",
+        "start": 18,
+        "end": 38,
+        "slot": 1
+      },
+      {
+        "raw": "case(\"雪\", case(\"雪\"))",
+        "start": 41,
+        "end": 61,
+        "slot": 2
+      },
+      {
+        "raw": "default(default())",
+        "start": 64,
+        "end": 82,
+        "slot": 3
+      }
+    ]
+  },
+  {
+    "id": "empty-slots",
+    "source": "  switch(, kind ,  , case(\"x\") ,, default() ,)  ",
+    "receiver": false,
+    "method": "switch",
+    "trimmed": "switch(, kind ,  , case(\"x\") ,, default() ,)",
+    "payload": ", kind ,  , case(\"x\") ,, default() ,",
+    "payload_start": 9,
+    "slots": [
+      {
+        "slot": 0,
+        "raw": "",
+        "start": 9,
+        "end": 9
+      },
+      {
+        "slot": 1,
+        "raw": " kind ",
+        "start": 10,
+        "end": 16
+      },
+      {
+        "slot": 2,
+        "raw": "  ",
+        "start": 17,
+        "end": 19
+      },
+      {
+        "slot": 3,
+        "raw": " case(\"x\") ",
+        "start": 20,
+        "end": 31
+      },
+      {
+        "slot": 4,
+        "raw": "",
+        "start": 32,
+        "end": 32
+      },
+      {
+        "slot": 5,
+        "raw": " default() ",
+        "start": 33,
+        "end": 44
+      },
+      {
+        "slot": 6,
+        "raw": "",
+        "start": 45,
+        "end": 45
+      }
+    ],
+    "arguments": [
+      {
+        "raw": "kind",
+        "start": 11,
+        "end": 15,
+        "slot": 1
+      },
+      {
+        "raw": "case(\"x\")",
+        "start": 21,
+        "end": 30,
+        "slot": 3
+      },
+      {
+        "raw": "default()",
+        "start": 34,
+        "end": 43,
+        "slot": 5
+      }
+    ]
+  },
+  {
+    "id": "quotes-braces-index",
+    "source": "call( \"a,b\" , 'c,d' , array(1,2) , { say(\"雪,β\") } , tree[cat(\"a\", \"b\")] )",
+    "receiver": false,
+    "method": "call",
+    "trimmed": "call( \"a,b\" , 'c,d' , array(1,2) , { say(\"雪,β\") } , tree[cat(\"a\", \"b\")] )",
+    "payload": " \"a,b\" , 'c,d' , array(1,2) , { say(\"雪,β\") } , tree[cat(\"a\", \"b\")] ",
+    "payload_start": 5,
+    "slots": [
+      {
+        "slot": 0,
+        "raw": " \"a,b\" ",
+        "start": 5,
+        "end": 12
+      },
+      {
+        "slot": 1,
+        "raw": " 'c,d' ",
+        "start": 13,
+        "end": 20
+      },
+      {
+        "slot": 2,
+        "raw": " array(1,2) ",
+        "start": 21,
+        "end": 33
+      },
+      {
+        "slot": 3,
+        "raw": " { say(\"雪,β\") } ",
+        "start": 34,
+        "end": 50
+      },
+      {
+        "slot": 4,
+        "raw": " tree[cat(\"a\", \"b\")] ",
+        "start": 51,
+        "end": 72
+      }
+    ],
+    "arguments": [
+      {
+        "raw": "\"a,b\"",
+        "start": 6,
+        "end": 11,
+        "slot": 0
+      },
+      {
+        "raw": "'c,d'",
+        "start": 14,
+        "end": 19,
+        "slot": 1
+      },
+      {
+        "raw": "array(1,2)",
+        "start": 22,
+        "end": 32,
+        "slot": 2
+      },
+      {
+        "raw": "{ say(\"雪,β\") }",
+        "start": 35,
+        "end": 49,
+        "slot": 3
+      },
+      {
+        "raw": "tree[cat(\"a\", \"b\")]",
+        "start": 52,
+        "end": 71,
+        "slot": 4
+      }
+    ]
+  },
+  {
+    "id": "pattern-context",
+    "source": " matches( \"x,雪\" , /(x),雪/imu )\r\n",
+    "receiver": false,
+    "method": "matches",
+    "trimmed": "matches( \"x,雪\" , /(x),雪/imu )",
+    "payload": " \"x,雪\" , /(x),雪/imu ",
+    "payload_start": 9,
+    "slots": [
+      {
+        "slot": 0,
+        "raw": " \"x,雪\" ",
+        "start": 9,
+        "end": 16
+      },
+      {
+        "slot": 1,
+        "raw": " /(x),雪/imu ",
+        "start": 17,
+        "end": 29
+      }
+    ],
+    "arguments": [
+      {
+        "raw": "\"x,雪\"",
+        "start": 10,
+        "end": 15,
+        "slot": 0
+      },
+      {
+        "raw": "/(x),雪/imu",
+        "start": 18,
+        "end": 28,
+        "slot": 1
+      }
+    ]
+  },
+  {
+    "id": "receiver-pattern",
+    "source": "  filter_match( /(x),雪/imu ) ",
+    "receiver": true,
+    "method": "filter_match",
+    "trimmed": "filter_match( /(x),雪/imu )",
+    "payload": " /(x),雪/imu ",
+    "payload_start": 15,
+    "slots": [
+      {
+        "slot": 0,
+        "raw": " /(x),雪/imu ",
+        "start": 15,
+        "end": 27
+      }
+    ],
+    "arguments": [
+      {
+        "raw": "/(x),雪/imu",
+        "start": 16,
+        "end": 26,
+        "slot": 0
+      }
+    ]
+  },
+  {
+    "id": "numeric-slash",
+    "source": "array( /(14,2) , 14/cos )",
+    "receiver": false,
+    "method": "array",
+    "trimmed": "array( /(14,2) , 14/cos )",
+    "payload": " /(14,2) , 14/cos ",
+    "payload_start": 6,
+    "slots": [
+      {
+        "slot": 0,
+        "raw": " /(14,2) ",
+        "start": 6,
+        "end": 15
+      },
+      {
+        "slot": 1,
+        "raw": " 14/cos ",
+        "start": 16,
+        "end": 24
+      }
+    ],
+    "arguments": [
+      {
+        "raw": "/(14,2)",
+        "start": 7,
+        "end": 14,
+        "slot": 0
+      },
+      {
+        "raw": "14/cos",
+        "start": 17,
+        "end": 23,
+        "slot": 1
+      }
+    ]
+  },
+  {
+    "id": "zero-argument",
+    "source": " \r\ndefault() ",
+    "receiver": false,
+    "method": "default",
+    "trimmed": "default()",
+    "payload": "",
+    "payload_start": 11,
+    "slots": [],
+    "arguments": []
+  },
+  {
+    "id": "whitespace-only",
+    "source": "default( \t\r\n )",
+    "receiver": false,
+    "method": "default",
+    "trimmed": "default( \t\r\n )",
+    "payload": " \t\r\n ",
+    "payload_start": 8,
+    "slots": [
+      {
+        "slot": 0,
+        "raw": " \t\r\n ",
+        "start": 8,
+        "end": 13
+      }
+    ],
+    "arguments": []
+  },
+  {
+    "id": "repeated-ordinary",
+    "source": "call( same ,same, same )",
+    "receiver": false,
+    "method": "call",
+    "trimmed": "call( same ,same, same )",
+    "payload": " same ,same, same ",
+    "payload_start": 5,
+    "slots": [
+      {
+        "slot": 0,
+        "raw": " same ",
+        "start": 5,
+        "end": 11
+      },
+      {
+        "slot": 1,
+        "raw": "same",
+        "start": 12,
+        "end": 16
+      },
+      {
+        "slot": 2,
+        "raw": " same ",
+        "start": 17,
+        "end": 23
+      }
+    ],
+    "arguments": [
+      {
+        "raw": "same",
+        "start": 6,
+        "end": 10,
+        "slot": 0
+      },
+      {
+        "raw": "same",
+        "start": 12,
+        "end": 16,
+        "slot": 1
+      },
+      {
+        "raw": "same",
+        "start": 18,
+        "end": 22,
+        "slot": 2
+      }
+    ]
+  },
+  {
+    "id": "unicode-crlf",
+    "source": " call( \"雪\" ,\r\n case(\"β\") \r\n, \"😀\" )\r\n",
+    "receiver": false,
+    "method": "call",
+    "trimmed": "call( \"雪\" ,\r\n case(\"β\") \r\n, \"😀\" )",
+    "payload": " \"雪\" ,\r\n case(\"β\") \r\n, \"😀\" ",
+    "payload_start": 6,
+    "slots": [
+      {
+        "slot": 0,
+        "raw": " \"雪\" ",
+        "start": 6,
+        "end": 11
+      },
+      {
+        "slot": 1,
+        "raw": "\r\n case(\"β\") \r\n",
+        "start": 12,
+        "end": 27
+      },
+      {
+        "slot": 2,
+        "raw": " \"😀\" ",
+        "start": 28,
+        "end": 33
+      }
+    ],
+    "arguments": [
+      {
+        "raw": "\"雪\"",
+        "start": 7,
+        "end": 10,
+        "slot": 0
+      },
+      {
+        "raw": "case(\"β\")",
+        "start": 15,
+        "end": 24,
+        "slot": 1
+      },
+      {
+        "raw": "\"😀\"",
+        "start": 29,
+        "end": 32,
+        "slot": 2
+      }
+    ]
+  }
+]

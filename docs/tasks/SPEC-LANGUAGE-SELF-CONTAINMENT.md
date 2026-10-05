@@ -2650,22 +2650,52 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
   Final hook repair: All ten doctrines ran; eight passed while TASK-ACCEPTANCE rejected the previous diagnosis checklist's word pending and REPO-ROOT-PATHS rejected absolute paths emitted by __file__ in the new log packaging. Clarify the historical completed checklist without changing its scope; derive repository-relative capsule/report paths from the current root. Decode and byte/hash-verify the same original streams, regenerate only packaging/claim bindings, and repeat the actual affected gates before all ten commit hooks. Original runtime/source/book measurements are unchanged.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.2`
-  Status: `pending`
+  Status: `active`
   Goal: Translate original recursive case/default block and inline argument source occurrences without changing composite order.
   Dependencies: `.1.3.3.0.7.2.2.0.1.3.1`
   Children: `.1.3.2.0` diagnose private MethodExpr/CSV occurrence authority and exact default/custom callback contracts; implementation leaf ownership follows that diagnosis; `.1.3.2.1` owns recursive Flow consumption after a verified bridge exists.
   Acceptance: Original full action source plus exact block/trimmed argument occurrence frames, never equal-text lookup. Preserve marker depth-first traversal followed by inline traversal, ordinary return identities/callback effects and source authority denial for transformed/copied/foreign callbacks. Direct MethodExpr consumers and whole Flow/source compatibility remain green.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.2.0`
-  Status: `pending`
+  Status: `done`
   Goal: Diagnose and specify invocation-local MethodExpr argument occurrence authority through original public parser/CSV callback probes.
   Dependencies: `.1.3.3.0.7.2.2.0.1.3.1`
   Acceptance: Retain actual callback source/argument identity, leading/trailing whitespace, dropped empty CSV slots, slash-pattern masks, repeated equal arguments, Unicode/CRLF, copied/transformed/foreign/opaque results, nested and exceptional invocations. Derive a bounded bridge leaf before production changes; no global cache or coordinate search.
 
+  Activation: Clean 6ce479842be85219990be889914f354f1a4aaa44; direct Flow leaf committed with all ten doctrines and post-pointer PASS, brief0, no pending jobs. Relevant Knowledge Map questions, canonical Flow traversal/statement authority/helper-pattern context, MethodExpr parser/CSV producer boundaries, Flow consumers, focused tests, roadmap and book reviewed. No existing argument occurrence bridge fact was found.
+  Owned paths: Leaf-prefixed authored literal argument cases/probe/immutable capture/reviewer/control/book/claim instruments; argument authority Knowledge card, task/frontier/index/roadmap/live/resume/history; exact prior .1.3.1 claim historical freeze before its bound book publication changes. Production, standard tests, dispatch/recognizers/callbacks/CI/storage/dependencies and other repositories remain untouched.
+  Verification tier: `focused`
+  Focused checks: Immutable clean-activation regular Git population plus exact authored overlays; original parser/CSV input/result/reference/callback observations across three hash seeds, literal cumulative Unicode scalar boundaries for trim/empty slots/repeated twins/slash context and receiver calls. Exact copied/changed/foreign/opaque/nested/error callback behavior and caller error state are observed without granting hypothetical authority. Toolbox substitution/descriptor/parser dump and direct parser/AST/Flow/frame/order/trace consumers; independent distinguishing RED controls, complete book input/render, strict claim/live input identities, history/memory/Knowledge/diff and all commit doctrines.
+  Canonical trigger: No production/public/infrastructure change in this bounded original-contract diagnosis. Bridge implementation follows its own verified leaf; Flow whole-family closeout .1.3.3 requires exact canonical CI.
+  Claim verification: `docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.2.0.json`
+  Next: Author literal CSV/expression cases and callback probes, execute them through LinkedSpec's own facade plus exact parser callbacks at the immutable activation boundary, then derive and own a bounded bridge implementation child from the verified contracts. Do not infer occurrence authority from equal raw strings or fabricate frames for copied/transformed/foreign results.
+  Authoring correction: First nested Python/shell heredoc was rejected by Python syntax before any probe file was written; switched to exact patch authoring. Actual authored Perl passes syntax. No runtime observation or measurement came from that rejected command.
+
+  Verified diagnosis: Immutable4141 regular Git inputs/two exact overlays, four fully guarded commands, ten literal cases/23 authored original argument intervals and three identical full hash-seed channels. Actual CSV/parser callback references/results and14 controlled callback records are retained; seven suites pass124 groups. Independent reviewer observes23 reason-specific evidence corruptions RED. Leading trim/payload base/dropped empty slots and receiver/helper pattern contexts are explicit. There is no current private argument frame publication; copied/changed/foreign/opaque ordinary returns must remain intact.
+  Implementation ownership: Child .1.3.2.0.1 owns the bounded invocation-local MethodExpr CSV/parser sidecars and regression. Production changes start only after this diagnosis commits; .1.3.2.1 consumes the verified bridge afterward.
+
+  Final verification: PASS exact4141 immutable regular Git inputs/two runtime overlays, four guarded commands/three full identical seeds; ten literal cases23 arguments and14 callback controls; seven suites124 groups and23 distinguishing evidence controls RED. Complete58-input book renders17 examples/three chapters with17 reason-specific controls RED; all55 prior claim input hashes verify before historical freeze. Original producer/test/callback behavior remains exact; no argument frames are yet published. Canonical Flow acceptance remains .1.3.3.
+  Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.2.0 - diagnose MethodExpr argument authority`.
+
+### `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.2.0` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — LinkedSpec::Get return_descriptor/dump_parser_source and call_spec_handler_subst probes retain original Flow compiler channels; MethodExpr/CSV has no argument source sidecar at clean6ce4798. Ten independent literal cases distinguish repeated positions, dropped empty slots and leading trim.
+- [x] **ROOT CAUSE (WHY + WHERE)** — MethodExpr.pm parser trims before extracting payload and CSV emits only nonempty trimmed original pieces. Result hashes retain exact callback arrays; values alone cannot authorize source occurrences. Actual producer boundaries and receiver/helper-pattern contexts are observed.
+- [x] **FIX** — Diagnosis owns bounded .1.3.2.0.1 sidecar implementation before .1.3.2.1 recursive consumers, with exact source/return identity, retained occurrence alignment, original scalar translation and nested/error preservation. No production behavior change in this diagnosis.
+- [x] **ADDRESSED (verified)** — PASS immutable4141 inputs/two overlays/four commands/three identical complete channels,23 literal arguments and14 exact controlled callback records;23 evidence corruptions observe RED.
+- [x] **NO REGRESSION** — Original production/spec/standard-test bytes equal activation Git; seven suites pass124 groups. Default/copied/nested Flow traversal remains exact; changed/foreign/opaque/error returns preserve ordinary behavior and caller error state.
+- [x] **LOCKSTEP** — Source-bound claim/producers/inputs,58-input book17 examples/three chapters/17 controls, Knowledge/task/frontier/index/roadmaps/live/resume/history name the same original diagnosis and bridge ownership. Prior55 input hashes and original adjudications survive historical freeze.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.2.0.1`
+  Status: `pending`
+  Goal: Publish invocation-local original CSV and parsed argument occurrence frames without changing ordinary parser results or callback contracts.
+  Dependencies: `.1.3.3.0.7.2.2.0.1.3.2.0`
+  Acceptance: Record canonical CSV flush boundaries and retained argument indices; translate original expression trim and payload bases before callbacks. Select exact returned canonical arrays/parser hashes plus original source authority, preserve per-entry changed-value denials, reject copied/foreign/opaque authority without altering returns. Nested collectors restore outer state; original exceptions/caller $@/receiver/helper-pattern context stay intact. No public fields/new callback/global cache/raw search. Retain independent literal RED/GREEN, all original diagnosis channels, direct MethodExpr/AST/Flow consumers and book teaching before commit.
+
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.2.1`
   Status: `pending`
   Goal: Consume verified original block/argument frames in recursive case/default producers.
-  Dependencies: `.1.3.3.0.7.2.2.0.1.3.2.0` and its verified bridge implementation child.
+  Dependencies: `.1.3.3.0.7.2.2.0.1.3.2.0.1`.
   Acceptance: Independent original full-source scalar intervals distinguish direct and inline repeated twins, recursive attached blocks and nested inline expressions. Preserve exact event/argument references, normalization callbacks, marker-first/inline-second traversal, public compiler channels and unknown/transformed callback authority denial. No lexical sort, membership repair or new DSL admission.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.3`

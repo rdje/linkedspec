@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-10-05 — MethodExpr argument occurrence diagnosis (.1.3.2.0)
+
+Retain original parser/CSV boundaries, callback arguments/results and actual returned references from4141 immutable regular Git inputs plus two authored runtime overlays. Ten literal cases/23 arguments recur across three seeds; seven affected suites pass124 groups and23 evidence controls observe RED. Original copy/change/foreign/opaque/nested/error behavior remains unchanged. The current parser publishes no argument frames; .1.3.2.0.1 owns invocation-local sidecars before recursive Flow consumers. Complete book teaching and55 prior claim bindings are retained; production and standard tests are unchanged.
+
 ## 2026-10-05 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.1: direct Flow source hooks
 
 Add twelve remaining regex producer hooks and one next statement hook in FlowRules; existing if hook remains unchanged. Regex producers snapshot original scalar coordinates before parsing and return original event/argument objects. next consumes existing statement frames by occurrence, including ignored statements, with exact source/raw authority. Recognition, callback effects, public event schema and recursive case/default behavior remain unchanged.

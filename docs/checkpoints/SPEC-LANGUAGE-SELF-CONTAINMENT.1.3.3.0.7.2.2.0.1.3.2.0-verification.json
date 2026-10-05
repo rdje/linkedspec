@@ -1,0 +1,132 @@
+{
+  "complete": true,
+  "revision": "6ce479842be85219990be889914f354f1a4aaa44",
+  "regular_inputs": 4141,
+  "overlays": 2,
+  "commands": 4,
+  "cases": 10,
+  "arguments": 23,
+  "seeds": 3,
+  "callback_controls": 14,
+  "fixture_suites": 7,
+  "fixture_groups": 124,
+  "controls": [
+    {
+      "name": "twins changed source",
+      "observed": "RED",
+      "reason": "literal original parser results"
+    },
+    {
+      "name": "empty-slots changed source",
+      "observed": "RED",
+      "reason": "literal original parser results"
+    },
+    {
+      "name": "quotes-braces-index changed source",
+      "observed": "RED",
+      "reason": "literal original parser results"
+    },
+    {
+      "name": "pattern-context changed source",
+      "observed": "RED",
+      "reason": "literal original parser results"
+    },
+    {
+      "name": "receiver-pattern changed source",
+      "observed": "RED",
+      "reason": "literal original parser results"
+    },
+    {
+      "name": "numeric-slash changed source",
+      "observed": "RED",
+      "reason": "literal original parser results"
+    },
+    {
+      "name": "zero-argument changed source",
+      "observed": "RED",
+      "reason": "literal original parser results"
+    },
+    {
+      "name": "whitespace-only changed source",
+      "observed": "RED",
+      "reason": "literal original parser results"
+    },
+    {
+      "name": "repeated-ordinary changed source",
+      "observed": "RED",
+      "reason": "literal original parser results"
+    },
+    {
+      "name": "unicode-crlf changed source",
+      "observed": "RED",
+      "reason": "literal original parser results"
+    },
+    {
+      "name": "copied reference",
+      "observed": "RED",
+      "reason": "actual returned argument array reference"
+    },
+    {
+      "name": "omitted callback",
+      "observed": "RED",
+      "reason": "exact single CSV callback and receiver context"
+    },
+    {
+      "name": "lost empty-slot distinction",
+      "observed": "RED",
+      "reason": "literal original parser results"
+    },
+    {
+      "name": "wrong traversal",
+      "observed": "RED",
+      "reason": "original marker-first inline-second traversal"
+    },
+    {
+      "name": "lost caller error",
+      "observed": "RED",
+      "reason": "caller error state preserved"
+    },
+    {
+      "name": "changed exception",
+      "observed": "RED",
+      "reason": "exact CSV exception"
+    },
+    {
+      "name": "changed foreign result",
+      "observed": "RED",
+      "reason": "exact foreign Flow callback results"
+    },
+    {
+      "name": "changed transformed result",
+      "observed": "RED",
+      "reason": "exact transformed Flow callback results"
+    },
+    {
+      "name": "omitted command",
+      "observed": "RED",
+      "reason": "complete guarded commands"
+    },
+    {
+      "name": "lost input guard",
+      "observed": "RED",
+      "reason": "complete runtime input guards"
+    },
+    {
+      "name": "forged channel",
+      "observed": "RED",
+      "reason": "complete channel bytes"
+    },
+    {
+      "name": "forged producer",
+      "observed": "RED",
+      "reason": "actual capture producer"
+    },
+    {
+      "name": "lost Git input",
+      "observed": "RED",
+      "reason": "complete unique original Git population"
+    }
+  ],
+  "instrument_sha256": "4638353787f92a6bd4e36f31433c454f54332c7d95050c310f4324ac399f4d6b",
+  "scope": "Original result/reference/boundary diagnosis. Literal intervals are independently authored expectations for a future bridge, not current published frames. No production changes or arbitrary callback authority admission."
+}
