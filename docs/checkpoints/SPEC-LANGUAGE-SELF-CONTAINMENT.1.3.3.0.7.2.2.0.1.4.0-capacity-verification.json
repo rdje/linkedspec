@@ -1,0 +1,49 @@
+{
+  "complete": true,
+  "revision": "da3d34945d5067410b79f51782395f15b5184ff4",
+  "instrument_sha256": "d9340ae58a67e7e4f54a6ea4b44cd209931600bcb11bf038a4ee5435f276f532",
+  "prior_archives": 41,
+  "archive_bytes": 27233,
+  "archive_lines": 201,
+  "root_bytes": 32359,
+  "root_lines": 144,
+  "manifest_bytes": 26021,
+  "manifest_lines": 43,
+  "collection_files": 44,
+  "scalar_changes": 3,
+  "controls": [
+    {
+      "name": "archive_byte",
+      "observed": "RED",
+      "reason": "original clean suffix identity"
+    },
+    {
+      "name": "prior_archive_byte",
+      "observed": "RED",
+      "reason": "all prior immutable archive bytes"
+    },
+    {
+      "name": "prior_row_order",
+      "observed": "RED",
+      "reason": "all prior exact manifest rows and order"
+    },
+    {
+      "name": "root_byte",
+      "observed": "RED",
+      "reason": "root exact prefix and note with only final blank separator removed"
+    },
+    {
+      "name": "unrelated_limit",
+      "observed": "RED",
+      "reason": "exact three scalar transitions and all other rows"
+    },
+    {
+      "name": "new_source_commit",
+      "observed": "RED",
+      "reason": "exact new archive binding"
+    }
+  ],
+  "production_thresholds": 18,
+  "production_red_controls": 7,
+  "scope": "Exact approved prerequisite at da3d; complete prior archive/manifest/root reconstruction, unchanged production threshold/authority functions. Exact staged canonical CI remains required."
+}

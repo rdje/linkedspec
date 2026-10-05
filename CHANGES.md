@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-10-05 — Original Legacy producer diagnosis and finite note admission (.1.4.0)
+
+Original Legacy .1.4.0 verifies4252 immutable inputs/three exact overlays/four guarded commands;112 contracts/115 cases/227 events/two origins per seed/103 groups/123 RED. Six safe families are owned. Granted ADR0127 admits only three engineering-note scalars with exact rollover/18 production thresholds/13 RED controls; exact canonical receipt gates landing. Complete58-input book renders19 examples/three chapters with20 RED controls;108 prior hashes verify before historical freeze. Runtime/spec/standard tests remain unchanged.
+
 ## 2026-10-05 — Complete Flow source family acceptance (.1.3.3)
 
 Fresh Flow family .1.3.3 verifies4233 immutable inputs/no overlays, all16 contracts/147 origins/138 argument frames/48 unchanged compiler pairs under three seeds;16 suites837 groups plus authority3,31 evidence/19 book controls reject. Exact canonical receipt gates family acceptance; Legacy safe-slice diagnosis follows.

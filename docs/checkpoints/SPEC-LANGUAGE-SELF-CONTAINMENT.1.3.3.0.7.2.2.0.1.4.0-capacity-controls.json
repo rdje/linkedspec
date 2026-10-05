@@ -1,0 +1,153 @@
+{
+   "complete" : true,
+   "controls" : [
+      {
+         "name" : "missing_new_record",
+         "observed" : "RED",
+         "reason" : "actual production indexed authorization rejected missing exact admission authority"
+      },
+      {
+         "name" : "missing_index",
+         "observed" : "RED",
+         "reason" : "actual production indexed authorization rejected missing exact admission authority"
+      },
+      {
+         "name" : "wrong_old_limits",
+         "observed" : "RED",
+         "reason" : "actual production indexed authorization rejected missing exact admission authority"
+      },
+      {
+         "name" : "wrong_new_limits",
+         "observed" : "RED",
+         "reason" : "actual production indexed authorization rejected missing exact admission authority"
+      },
+      {
+         "name" : "wrong_old_contract",
+         "observed" : "RED",
+         "reason" : "actual production indexed authorization rejected missing exact admission authority"
+      },
+      {
+         "name" : "wrong_new_contract",
+         "observed" : "RED",
+         "reason" : "actual production indexed authorization rejected missing exact admission authority"
+      },
+      {
+         "name" : "unreviewed_increase",
+         "observed" : "RED",
+         "reason" : "actual production numeric increase rejects absent reviewed authority"
+      }
+   ],
+   "instrument_sha256" : "b8b4d9a8499786ec387f9bf73aed8dc07d72041f4b2f66b5c940a945281262f8",
+   "production_sha256" : "c764d2f626bfb14db1919dc4af85827c61deec0c5fa98bb9e5aae354b7dfc083",
+   "scope" : "Exact unchanged production functions; in-memory authority fixtures model added indexed ADR inputs. Normal resulting-tree gate remains mandatory.",
+   "thresholds" : [
+      {
+         "limit" : 43,
+         "metric" : "files",
+         "rejected" : false,
+         "value" : 43
+      },
+      {
+         "limit" : 44,
+         "metric" : "files",
+         "rejected" : false,
+         "value" : 43
+      },
+      {
+         "limit" : 43,
+         "metric" : "files",
+         "rejected" : true,
+         "value" : 44
+      },
+      {
+         "limit" : 44,
+         "metric" : "files",
+         "rejected" : false,
+         "value" : 44
+      },
+      {
+         "limit" : 43,
+         "metric" : "files",
+         "rejected" : true,
+         "value" : 45
+      },
+      {
+         "limit" : 44,
+         "metric" : "files",
+         "rejected" : true,
+         "value" : 45
+      },
+      {
+         "limit" : 42,
+         "metric" : "lines",
+         "rejected" : false,
+         "value" : 42
+      },
+      {
+         "limit" : 43,
+         "metric" : "lines",
+         "rejected" : false,
+         "value" : 42
+      },
+      {
+         "limit" : 42,
+         "metric" : "lines",
+         "rejected" : true,
+         "value" : 43
+      },
+      {
+         "limit" : 43,
+         "metric" : "lines",
+         "rejected" : false,
+         "value" : 43
+      },
+      {
+         "limit" : 42,
+         "metric" : "lines",
+         "rejected" : true,
+         "value" : 44
+      },
+      {
+         "limit" : 43,
+         "metric" : "lines",
+         "rejected" : true,
+         "value" : 44
+      },
+      {
+         "limit" : 25410,
+         "metric" : "bytes",
+         "rejected" : true,
+         "value" : 26020
+      },
+      {
+         "limit" : 26021,
+         "metric" : "bytes",
+         "rejected" : false,
+         "value" : 26020
+      },
+      {
+         "limit" : 25410,
+         "metric" : "bytes",
+         "rejected" : true,
+         "value" : 26021
+      },
+      {
+         "limit" : 26021,
+         "metric" : "bytes",
+         "rejected" : false,
+         "value" : 26021
+      },
+      {
+         "limit" : 25410,
+         "metric" : "bytes",
+         "rejected" : true,
+         "value" : 26022
+      },
+      {
+         "limit" : 26021,
+         "metric" : "bytes",
+         "rejected" : true,
+         "value" : 26022
+      }
+   ]
+}

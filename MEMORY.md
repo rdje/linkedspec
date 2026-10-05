@@ -1,10 +1,10 @@
 # MEMORY
 
-- activation_commit: `1d450522afb79aa87e579db148224ad6ed2c11e0` — clean whole Flow acceptance activation base.
-- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.3 - accept Flow source family`.
-- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.3` (done) — complete Flow source family; Legacy `.1.4` next.
-- next_action: Activate Legacy `.1.4` from clean HEAD; diagnose the original large producer inventory through LinkedSpec tools and split safe owned families before implementation.
-- in_flight_uncommitted: None after landing; exact staged canonical receipt required by this acceptance commit.
+- activation_commit: `da3d34945d5067410b79f51782395f15b5184ff4` — clean Legacy diagnosis activation base.
+- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0 - diagnose Legacy source families`.
+- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0` (done) — original Legacy source diagnosis and Granted finite note admission.
+- next_action: Activate Legacy .1.4.1 from clean committed HEAD; preserve existing return_general and verify original source/reference/callback behavior for eight call/return/push contracts.
+- in_flight_uncommitted: none — intended clean canonical landing; no required job remains after commit.
 - blockers: No access/decision blocker. Matches and attached/marker/value/null/while executors are repaired; control parent/order and raw-expression reporting are reconciled; quoted/comment readiness .7.2/.3 precedes dispatcher/full execution. Other startup repairs remain separate.
   Wrapper startup .7 remains open; recovery/purge stay prohibited.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
@@ -50,8 +50,8 @@
 - standing_contracts: all durable paths are repo-relative; all project data stays on the repository filesystem; Only LinkedSpec is writable; every other Git repository is read-only (director September27; see AGENTS and the incident record).
   README remains bounded; ordinary leaves use focused proof and designated infrastructure/public/push boundaries
   use exact staged canonical CI; task-tree/index, Knowledge Map, mdBook, and bounded live/history move in lockstep.
-- current_engineering_notes_capacity: ADR0122 admits43 files /42 manifest lines /25410 bytes; latest manifest42 lines/25409 bytes remains within its exact bound.
-  Diagnosis rollover segment4965 preserves231 lines/25099 bytes from clean012038a637; prior immutable rows/bytes remain exact.
+- current_engineering_notes_capacity: Granted ADR0127 admits44 files /43 manifest lines /26021 bytes; resulting manifest43 lines/26021 bytes is exact.
+  Legacy segment4964 preserves201 lines/27233 bytes from clean da3d; all prior immutable rows/bytes remain exact.
 - current_change_history_capacity: ADR0122 admits47 files /46 manifest lines /26255 bytes; latest manifest45 lines/25679 bytes remains bounded.
   Diagnosis rollover segment4967 preserves212 lines/21636 bytes from clean012038a637; prior immutable rows/bytes remain exact.
 - dependency_boundary: RGX public integration only; it owns PGEN. No internal inspection/analysis, patches, separate PGEN procedure or unrelated pin changes. September26 authorizes only reviewed f6e5acdc for LS-004.

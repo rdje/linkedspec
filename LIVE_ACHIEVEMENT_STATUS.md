@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Full PNT: all sixteen Flow source producers have fresh independent whole-family acceptance, gated by exact staged canonical CI. Next Legacy .1.4 diagnoses and splits its large original inventory. Other producers/membership/comments/replacement/global audits remain owned.
+Full PNT: original Legacy diagnosis and Granted finite engineering-note prerequisite verified; exact canonical landing governs completion. Six source families and quoted-boundary P1 repair are owned; production/spec/standard tests remain unchanged.
 
 ## Latest Completed Slice
 
-`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.3` — Fresh Flow family .1.3.3 verifies4233 immutable inputs/no overlays, all16 contracts/147 origins/138 argument frames/48 unchanged compiler pairs under three seeds;16 suites837 groups plus authority3,31 evidence/19 book controls reject. Exact canonical receipt gates family acceptance; Legacy safe-slice diagnosis follows. Ten fully guarded commands preserve complete prior Flow/MethodExpr channels. Complete58-input book renders19 examples/three chapters;51 prior hashes verify before historical freeze. No production or standard test changes.
+`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0` — Original Legacy .1.4.0 verifies4252 immutable inputs/three exact overlays/four guarded commands;112 contracts/115 cases/227 events/two origins per seed/103 groups/123 RED. Six safe families are owned. Granted ADR0127 admits only three engineering-note scalars with exact rollover/18 production thresholds/13 RED controls; exact canonical receipt gates landing. Complete58-input book renders19 original examples/three chapters with20 RED controls;108 prior hashes verify before historical freeze. Prior41 archive files and manifest records remain byte-exact. Runtime implementation follows from a clean activation.
 
 ## Next Action
 
-Activate Legacy .1.4 from clean HEAD; recover original producer contracts, exact source authority and public compiler channels with LinkedSpec tools, then define safe coherent implementation children. Engineering notes58975 bytes remains below rollover58983; capacity work must be owned before a required rollover.
+Activate Legacy .1.4.1 from clean committed HEAD and retain original source identities for eight call/return/push producers. Quoted boundary .1.4.0.1 must close before anonymous capture; no membership or broader audit closure follows.
 
 ## Recent Completions
 
+- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0` — original112-contract/115-case diagnosis; Granted three-scalar note rollover.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.3` — immutable Flow acceptance;16 contracts/147 origins/138 frames/837 groups/31 RED controls.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.2.1` — recursive Flow origins; RED6/GREEN7/1180 groups/147 origins/48 unchanged pairs.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.2.0.1` — private method argument frames; RED10/GREEN15/1173 groups/138 exact frames.
@@ -29,7 +30,6 @@ Activate Legacy .1.4 from clean HEAD; recover original producer contracts, exact
 - `2026-10-05` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.2.0` verifies20 mixed contracts/147 origins/129 frames and144 consumer groups with27 proof/render controls.
 - `2026-10-05` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.3` accepts3864-input statement recurrence,80 fixture groups/111 origins and canonical family landing.
 - `2026-10-04` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.2` retains111 origins/29 GREEN, fixes foreign-source authority and verifies1148 guarded consumer groups.
-- `2026-10-04` — `REPO-HYGIENE.9` retains the due exact metadata census/full channels with zero removals.
 
 ## History
 

@@ -2791,10 +2791,95 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 - [x] **LOCKSTEP** — Complete58-input book19 examples/three chapters/19 controls and51-hash freeze pass. Knowledge/task/frontier/index/roadmaps/live/resume/change history/claim align; other producers and membership/global audit remain separately owned.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4`
-  Status: `pending`
+  Status: `active`
   Goal: Complete remaining LegacyRules source provenance.
   Dependencies: `.1.3.3.0.7.2.2.0.1.3`
   Acceptance: Split the large measured producer inventory into safe coherent families before any implementation; preserve legacy ownership and accepted slash patterns.
+
+  Children: `.1.4.0` original inventory and safe family partition; implementation children follow only its actual source/argument/callback observations. Final whole Legacy family acceptance remains canonical.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0`
+  Status: `done`
+  Goal: Diagnose the complete original LegacyRules dispatcher/producer population and partition safe source-provenance families before implementation.
+  Dependencies: `.1.3.3.0.7.2.2.0.1.3.3`
+  Activation: Cleanda3d34945d5067410b79f51782395f15b5184ff4; Flow family committed with all ten doctrines/post-pointer and promoted exact canonical receipt PASS, brief0/no jobs. Knowledge Map scanner-family/first private source channel and current Flow/argument authority, Toolbox substitution/descriptor/parser-source interfaces, Legacy dispatch/producer entrypoints, relevant roadmap/book and existing inventory pointer read. Exact current population and family mechanisms require fresh bounded diagnostic probes; no assumed public admission from internal contract IDs.
+  Owned paths: Leaf-prefixed original inventory/cases/oracle/probe/immutable capture/reviewer/control/freeze/book/claim instruments; Legacy source Knowledge, task/frontier/index/roadmaps/live/resume/history and relevant book teaching. Exact previous .1.3.3 claim historical freeze before bound publication changes. Production/spec/standard tests/CI/storage/dependencies and other repositories unchanged. Own necessary engineering-note pressure resolution before new notes; current58975-byte hot shard leaves only7 bytes below rollover and exact archive capacity cannot silently grow.
+  Verification tier: `canonical`
+  Focused checks: Actual LinkedSpec public/private scanner and Toolbox original full arguments/coordinate/callback/compiler observations; complete immutable regular Git plus exact authored overlays, full command/channel/content/mode/population guards and independent literal source/argument/scalar oracles. Complete dispatcher inventory and safe coherent partition coverage; unchanged affected AST/source/frame/order/legacy consumers; distinguishing evidence RED controls, complete book input/render, strict claim/freeze/current identities, memory/Knowledge/history/diff/all doctrines.
+  Canonical trigger: Explicitly granted three-scalar engineering-note capacity prerequisite is owned within this leaf; newly accepted indexed ADR0127, governed rollover and exact staged receipt-bound canonical CI are mandatory before landing. Runtime diagnosis remains production-exact; no dirty task-tree pivot.
+  Claim verification: `docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.json`
+  Next: Activate call/return/push family .1.4.1 only after this exact canonical candidate commits cleanly; quoted-boundary repair .1.4.0.1 must precede anonymous capture .1.4.2.
+
+  Exploratory probe repairs: First boundary probe attempts to JSON-serialize the entire descriptor and rejects CODE references; retain initial-boundary-probe.pl and select only canonical action_rewriter metadata. The next actual probe retains events/substitution but parser-source collection incorrectly dereferences an ARRAY as SCALAR; retain that exploratory capsule and use the existing Toolbox probe's parser_source_ref option. Neither incomplete probe is final acceptance evidence. A read of the still-running first output returned empty JSON and was rejected; dependent analysis now waits for completion.
+  Encountered defect / owned schedule: Public scanner and call_spec_handler_subst for capture_until_boundary("a,b", end) return three boundaries ("a, b", end) rather than the two accepted quoted arguments. LegacyRules::_scan_contract_capture_until_boundary recognizes quoted tokens but splits the captured list with raw comma regex. Impact: generated boundary rule labels differ from authored quoted labels. Own precise original argument-token diagnosis and focused quoted-comma/escape repair before boundary producer provenance; other literal/word arguments and callback behavior remain unchanged. Public support/label contract is still to be checked, so no broad label admission is inferred. New child `.1.4.0.1` owns resolution; original exploratory output is retained.
+
+  Source refinement and diagnosis verification: Contracts capture_until_boundary lowerer repeats the same raw comma split, so `.1.4.0.1` owns both scanner and public lowering. Literal original 115-case review passes227 events/two return origins per seed; first macro expectation mistakenly uses $CAPTURE_IF instead of actual CAPTURE_IF(), and mark_copy argument labels are reversed. Retain initial inventory/cases/exploratory bytes before precise source-confirmed correction. The first origin oracle used start/end instead of actual source_span fields; retain initial-oracle.py before schema correction. Fresh complete4252 regular Git inputs/three exact overlays/four guarded commands pass112 contracts,115 cases,103 selected groups and three identical full channels including11 Toolbox compiler cases per seed.123 reason-specific evidence corruptions RED. Six safe families cover all112 dispatcher IDs exactly once; no production/tests change.
+  Engineering-note publication blocker / concrete proposal: Clean notes58975 bytes plus the complete618-byte diagnosis record crosses mandatory90% rollover. Current engineering history43-file capacity and42-line/25410-byte manifest capacity are full (actual42/25409). Original exact clean records cannot be edited, deleted or repacked by the rollover contract. Read-only capacity-proposal.py/json selects an exact27233-byte/201-line clean suffix and projects32360-byte/145-line retained root, within unchanged50% target. Proposed three scalars: engineering_notes max_files43→44; manifest max_lines42→43 and max_bytes25410→26021. Every other limit/route/authority/history byte stays exact; no unlimited reserve. README_POLICY and ADR0122 require a new accepted indexed capacity decision, and ADR0122 expressly excludes unrelated runtime/PNT growth. Director approval is required before limit mutation. Own this prerequisite within current .1.4.0 so no dirty task-tree pivot occurs; canonical tier is required if approved infrastructure admission is included. Proposal/input/producer records are complete and reviewable; book proof and claim/publication completion continue independently.
+  Verification: Complete original4252-input/three-overlay/four-command diagnosis passes112 contracts/115 cases/227 events and two return origins per seed,103 compatibility groups, eleven Toolbox compiler cases per seed and three identical full channels;123 reason-specific controls RED. Complete58-input book renders19 original examples/three chapters with20 controls RED; all108 prior live hashes verify before historical freeze. Director-granted ADR0127 admission changes exactly three scalars; governed segment4964 preserves201 lines/27233 bytes and governs145 lines/32360 bytes, then removes only one final blank separator for144 lines/32359 bytes. All41 prior archives and prior manifest rows are byte-exact. Six reconstruction RED controls,18 actual production threshold observations and seven actual indexed authority RED controls PASS. Strict two-claim schema/current input checks and all normal doctrines govern landing; exact staged canonical receipt is mandatory. No implementation or quoted-boundary closure is claimed.
+  Staging repair: git diff --cached --check rejected one final blank line in the retained note fixture. The prematurely started canonical gate was stopped (exit143) before acceptance; log SHA-256 d8d7e570bee82eba78a96c74f55a711a28c46379ebf3d2d7d8505163ce065c45. Store the complete618-byte note as617-byte Markdown plus an explicit one-byte record separator in the producers; actual root/manifest/archive bytes and approved capacity are unchanged. Repeat capacity/claim checks, exact staging prechecks and canonical CI. No result from the interrupted gate is accepted.
+  Encountered capacity-draft pressure / repaired here: Actual resulting-tree routing check rejects decisions aggregate13016/13000 lines. Compact only the uncommitted new ADR0127 draft while preserving all six exact authorization markers, director grant, routing rationale, stable responsibility and canonical boundary; prior decisions and all decisions limits remain exact. Retain the initial actual capacity publisher; current draft/proof/claim identities and normal gate must reverify before landing.
+  Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0 - diagnose Legacy source families`.
+
+  Encountered publication-metadata defect / repaired here: copied book manifest wording incorrectly named an earlier direct-Flow runtime boundary f3f87ce110. Original book producer/report/manifest/verification bytes are retained as initial-book artifacts; correct the actual producer to name separate Legacy diagnosis da3d and rerender the same complete58 book inputs. No book or runtime content changed.
+  Approved capacity prerequisite (2026-10-05): Director answered Granted to the exact retained proposal. Additional owned paths: doctrine/readme_stability/routes.jsonl (only engineering_notes max_files43→44 and manifest max_lines42→43/max_bytes25410→26021); new accepted indexed docs/decisions/0127-legacy-diagnosis-note-capacity.md; DEVELOPMENT_NOTES.md, its manifest and new immutable segment4964. Stable responsibility LIVE-DOCUMENT-PRESSURE-CONTAINMENT.3, all other controls and immutable history remain exact. Retain actual publisher/reviewer/production-control instruments and every input. Canonical infrastructure admission is this leaf prerequisite, not an ordinary feature threshold change. No canonical/hook/push exception is granted.
+
+### `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — All112 original dispatcher contracts and three distinct exclusions/defect controls retain actual public/private argument and callback observations, full compiler channels and two existing return origins per seed.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Original source-bound dispatcher/handler inventory partitions112 IDs into six producer mechanisms; quoted comma splitting is present in both LegacyRules and Contracts and has a separate P1 repair owner.
+- [x] **FIX** — Freeze complete independent literal diagnosis and safe implementation children before hooks; admit only the explicitly Granted finite engineering-note rollover under indexed ADR0127 and canonical infrastructure tier.
+- [x] **ADDRESSED (verified)** — Complete guarded immutable diagnosis,123 evidence RED controls, exact original channels and actual reference identity checks PASS; independent capacity reconstruction/6 RED and actual18 thresholds/7 authority RED PASS.
+- [x] **NO REGRESSION** — Production/spec/standard tests remain da3d-exact;103 compatibility groups and complete three-seed channels agree. All prior archive/manifest bytes remain exact, unrelated limits remain exact, and exact canonical receipt gates this landing.
+- [x] **LOCKSTEP** — Complete book58/19/3/20 proof, prior108-hash freeze, two strict claims, Knowledge/task/frontier/index/roadmaps/live/resume/change-and-notes history agree. Remaining families, executable membership and historical audits remain separately owned.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1`
+  Status: `pending`
+  Priority: P1 — accepted quoted boundary argument loses its original token boundary.
+  Goal: Verify the public quoted boundary-label contract, reproduce exact comma/escape tokenization failure, and repair it before Legacy boundary provenance hooks.
+  Dependencies: `.1.4.0` original diagnosis and safe partition.
+  Acceptance: Independent literal quoted/word/empty/escaped/mixed arguments and original full source intervals; retain actual public scanner/substitution/descriptor/parser source before repair, RED/GREEN fixture, unchanged current boundary/capture/AST consumers and book. Preserve matching/labels/callbacks except the diagnosed quoted delimiter split; no new label syntax admission without existing contract evidence.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.1`
+  Status: `pending`
+  Goal: Retain original source origins for eight call/return/push dispatcher contracts.
+  Dependencies: `.1.4.0` clean diagnosis.
+  Acceptance: Preserve existing return_general hook/helper-pattern view, original push literal exclusions and recognize_once/observe_recognition call exclusions; exact before/after public args/callback/compiler channels, original scalar bounds/reference identities, RED/GREEN and focused consumers. No new compatibility syntax admission.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.2`
+  Status: `pending`
+  Goal: Retain original source origins for26 anonymous capture dispatcher contracts.
+  Dependencies: `.1.4.1`; quoted boundary defect `.1.4.0.1` verified before boundary hook.
+  Acceptance: Original capture macro/zero-argument/boundary occurrences and aliases retain matching, exact args/constructor/returned references and full public compiler channels. Snapshot own coordinates before callbacks/argument parsing, preserve original quoted syntactic population and all unaffected contracts; no raw-text lookup.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.3`
+  Status: `pending`
+  Goal: Retain original source origins for17 named capture dispatcher contracts.
+  Dependencies: `.1.4.2`.
+  Acceptance: Exact one-mark/two-mark and take/read alias occurrences preserve original mark argument order, source scalar intervals/repeated Unicode/CRLF twins/actual event and argument objects, full public compiler/callback channels and focused capture consumers.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.4`
+  Status: `pending`
+  Goal: Retain original source origins for14 mark-control dispatcher contracts.
+  Dependencies: `.1.4.3`.
+  Acceptance: Preserve original mark_copy target/source order and mark creation/query/reset raw/args/reference/source contracts; unchanged callback and public compiler behavior, literal RED/GREEN source fixture and focused named-mark consumers.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.5`
+  Status: `pending`
+  Goal: Retain original source origins for15 cursor/input dispatcher contracts.
+  Dependencies: `.1.4.4`.
+  Acceptance: Zero-argument cursor/input/control producers and balanced input_slice expression preserve original recognizers/args/raw, exact repeated source intervals/actual objects and public compiler channels; source-location/cursor consumers and original slash/quote contexts stay unchanged.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.6`
+  Status: `pending`
+  Goal: Retain original source origins for32 entry/match dispatcher contracts.
+  Dependencies: `.1.4.5`.
+  Acceptance: Preserve original zero-argument/index/name/alias producers and their raw/args/actual references/scalar occurrence bounds, original event ordering/public compiler channels and focused entry/match/source projections.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.7`
+  Status: `pending`
+  Goal: Independently accept the complete Legacy source family.
+  Dependencies: `.1.4.6` and `.1.4.0.1`.
+  Acceptance: Fresh immutable all112-contract recurrence from committed producers, original independent literal scalar/args/reference/callback/compiler oracles and precise separately verified boundary correction; complete changed-surface/direct consumers/book/claims/live docs and exact staged canonical receipt before parent closure.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5`
   Status: `pending`
@@ -3102,7 +3187,9 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 | 43.4.2.0.1.3.2.0.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.2.0.1` | `done` | Private argument frames verified;138 original occurrences/RED10-GREEN15. |
 | 43.4.2.0.1.3.2.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.2.1` | `done` | Recursive Flow verified;147 origins/RED6-GREEN7/1180 groups. |
 | 43.4.2.0.1.3.3 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.3` | `done` | Immutable4233/no overlays;16 contracts/837 groups; canonical receipt gates acceptance. |
-| 43.4.2.0.1.4 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4` | `pending` | Complete remaining legacy, to be split source provenance before membership. |
+| 43.4.2.0.1.4 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4` | `active` | Original112-contract diagnosis verified; finite note capacity decision gates publication. |
+| 43.4.2.0.1.4.0 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0` | `done` | Original112-contract diagnosis/115 cases/103 groups/123 RED; Granted finite note admission; exact canonical landing. |
+| 43.4.2.0.1.4.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.1` | `pending` | Eight original call/return/push producers; clean diagnosis activation and literal source/reference/compatibility proof first. |
 | 43.4.2.0.1.5 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5` | `pending` | Complete staged/progressive/recognition source provenance before membership. |
 | 43.4.2.0.1.6 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6` | `pending` | Complete independent producer composition source provenance before membership. |
 | 43.4.2.0.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2` | `pending` | Executable source membership with original arguments. |

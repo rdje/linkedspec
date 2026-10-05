@@ -156,6 +156,8 @@ changed* lives in git (layer D), not here.
 
 | [0126](0126-claim-publishing-contract.md) | Three-leg publishing contract and watched claim source identities | 2026-10-02 | accepted; infrastructure signoff required | claims, evidence, durability, doctrine |
 
+| [0127](0127-legacy-diagnosis-note-capacity.md) | Finite engineering-note rollover capacity for original Legacy diagnosis | 2026-10-05 | accepted; explicit director grant | history, capacity, verification |
+
 ## How to add a record
 1. Copy the shape of an existing record (`Date`, `Status`, `Tags`, then `## Context /
    Decision / Consequences / Links`).

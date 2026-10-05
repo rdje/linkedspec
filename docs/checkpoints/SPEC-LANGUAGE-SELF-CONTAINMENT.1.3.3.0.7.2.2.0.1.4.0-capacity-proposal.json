@@ -1,0 +1,66 @@
+{
+  "revision": "da3d34945d5067410b79f51782395f15b5184ff4",
+  "status": "proposal only; director approval and separate canonical infrastructure admission required",
+  "old_limits": {
+    "max_bytes_per_file": 524288,
+    "max_files": 43,
+    "max_lines_per_file": 4096,
+    "max_total_bytes": 3407872,
+    "max_total_lines": 29000
+  },
+  "new_limits": {
+    "max_bytes_per_file": 524288,
+    "max_files": 44,
+    "max_lines_per_file": 4096,
+    "max_total_bytes": 3407872,
+    "max_total_lines": 29000
+  },
+  "old_member_limits": {
+    "DEVELOPMENT_NOTES.md": {
+      "max_bytes": 65536,
+      "max_lines": 512
+    },
+    "docs/history/development-notes/manifest.jsonl": {
+      "max_bytes": 25410,
+      "max_lines": 42
+    }
+  },
+  "new_member_limits": {
+    "DEVELOPMENT_NOTES.md": {
+      "max_bytes": 65536,
+      "max_lines": 512
+    },
+    "docs/history/development-notes/manifest.jsonl": {
+      "max_bytes": 26021,
+      "max_lines": 43
+    }
+  },
+  "original_root_bytes": 58975,
+  "original_root_lines": 342,
+  "current_manifest_bytes": 25409,
+  "current_manifest_lines": 42,
+  "proposed_manifest_bytes": 26021,
+  "proposed_manifest_lines": 43,
+  "retained_root_bytes": 32360,
+  "retained_root_lines": 145,
+  "archive_record": {
+    "byte_count": 27233,
+    "current_path": "DEVELOPMENT_NOTES.md",
+    "immutable": true,
+    "line_count": 201,
+    "retrieval_command": "perl tools/read_document_history.pl --surface engineering_notes --segment 4964",
+    "segment_id": "4964",
+    "sha256": "8783c6d63164ded0745e6fd2e9cd9a440d71e3d5b682635b1b5573e126507f0e",
+    "source_blob": "ad8a3a11a2b3f3ae69af57b33bd3d6e9cbc569e5",
+    "source_commit": "da3d34945d5067410b79f51782395f15b5184ff4",
+    "source_end_line": 342,
+    "source_path": "DEVELOPMENT_NOTES.md",
+    "source_start_line": 142,
+    "surface": "engineering_notes",
+    "target_path": "docs/history/development-notes/segment-4964-8783c6d63164.md",
+    "type": "segment"
+  },
+  "new_note_bytes": 618,
+  "archive_sha256": "8783c6d63164ded0745e6fd2e9cd9a440d71e3d5b682635b1b5573e126507f0e",
+  "scope": "Exactly one additional archive member and one manifest row; three scalar transitions only. Hot-root budgets/90% rollover/50% retain, other fields/collections and all immutable history bytes stay exact. No reserve for unlimited PNT. Final source commit/manifest binding must be rederived at clean infrastructure activation."
+}

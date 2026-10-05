@@ -351,6 +351,14 @@ CI is required before family acceptance closes. This closes private provenance;
 quoted executable membership, other scanner families, comments and replacement
 remain subsequent work.
 
+Legacy scanner source work is partitioned by producer mechanism: call/return/push,
+anonymous captures, named captures, mark controls, cursor/input reads, and
+entry/match reads. The original private diagnosis covers 112 internal contracts
+with repeated Unicode/CRLF fixtures. Only `return_general` already supplies source
+origins at that boundary. These internal compatibility names do not establish new
+public helper spellings. Each family must retain its original arguments and
+compiler behavior before executable source membership can use its coordinates.
+
 ### Original method argument boundaries
 
 The current method-expression parser returns the original trimmed expression
