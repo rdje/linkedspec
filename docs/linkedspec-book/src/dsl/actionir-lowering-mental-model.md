@@ -239,10 +239,12 @@ and receives no such terminator. Neither detail changes the source-level separat
 
 Flow scanner events describe syntactic observations. The original family has sixteen
 contract dispatchers: thirteen scan regex matches, `next_stmt` splits statements,
-and `case_flow` / `default_flow` each concatenate two traversals. At the current
-pipeline acceptance boundary, only `if_flow` records private original-source origins
-in this family. The remaining Flow origins are being repaired in owned slices;
-this diagnosis does not change recognition or executable membership.
+and `case_flow` / `default_flow` each concatenate two traversals. At the original
+pipeline acceptance boundary, only `if_flow` recorded private original-source origins
+in this family. All fourteen direct Flow contracts now retain original occurrence
+frames: thirteen regex producers and the `next_stmt` statement producer. The
+recursive case/default producers remain separately owned. These private hooks
+do not change recognition or executable membership.
 
 Direct aliases and bare markers preserve their original spelling in event `raw`:
 
@@ -256,6 +258,41 @@ Parsing `otherwise` through a normalized `else()` helper does not authorize an
 `else()` source span: the source occurrence is still the authored `otherwise`.
 Likewise, callbacks can parse nested syntax and replace regex match globals; a
 producer must snapshot its own match coordinates before invoking them.
+
+Direct origins retain the complete original action, scalar intervals and original
+returned event/argument objects. For example:
+
+```perl
+my $result = LinkedSpec::ActionIR::ScannerCore::_scan_contract_ir_events_with_provenance(
+    {id => 'elseif_flow'}, 'elseif(true); elseif(true)', $scanner_deps
+);
+# source_origins spans: [0, 12), [14, 26)
+```
+
+Bare markers retain their authored spelling rather than the normalized parser call:
+
+```perl
+my $result = LinkedSpec::ActionIR::ScannerCore::_scan_contract_ir_events_with_provenance(
+    {id => 'else_flow'}, 'otherwise', $scanner_deps
+);
+# event raw: otherwise; source_origins span: [0, 9)
+```
+
+`next` uses the same private statement-frame authority as basic and pipeline
+statement producers. Ignored statements still consume their occurrence frame:
+
+```perl
+my $result = LinkedSpec::ActionIR::ScannerCore::_scan_contract_ir_events_with_provenance(
+    {id => 'next_stmt'}, 'note(); next; next()', $scanner_deps
+);
+# source_origins spans: [8, 12), [14, 20)
+```
+
+Unknown/copied/foreign callback arrays cannot lend frames. If a callback changes
+one returned entry, that entry declines authority while an exact unchanged entry
+retains its own frame. A later trim transformation also retains its ordinary event
+without inventing a source interval. Nested scans restore the outer recorder;
+ordinary scans keep the original callback count, arguments, results and event schema.
 
 Case/default first scan marker matches, recursing into attached blocks in depth-first
 order. They then append the inline-switch branch traversal, including nested branch

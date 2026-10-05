@@ -8,12 +8,12 @@ answers:
   - "does a quoted case payload produce a Flow scanner event"
   - "what owns recursive Flow source provenance"
 date: 2026-10-05
-status: original diagnosis; direct and recursive implementation pending
+status: fourteen direct producer hooks verified; recursive argument frames pending
 tags: [perl, actionir, flow, scanner, source-provenance, traversal]
-evidence: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.0 retains original public/private Toolbox effects from immutable b73f1f59a and independent literal scalar/argument/traversal oracles. Original omitted quoted-case expectation is separately retained and observed RED; runtime input bytes remain exact."
+evidence: "Direct .1.3.1 verifies14 contracts/RED16-GREEN21/1158 groups/87 origins/48 complete unchanged compiler pairs,22 evidence and16 render controls at4099-input immutable before/after boundaries. SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.0 retains original public/private Toolbox effects from immutable b73f1f59a and independent literal scalar/argument/traversal oracles. Original omitted quoted-case expectation is separately retained and observed RED; runtime input bytes remain exact."
 reverify:
-  - "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.0-review.py"
-  - "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.0-original-oracle-control.py"
+  - "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.1-review.py"
+  - "At frozen f3f87ce110db89fca0e3db4debd4d9948df0b8df replay the original .1.3.0 diagnosis/control; its current-source guard must not be refreshed after producer changes."
 ---
 
 # Flow origins require both match and recursive argument occurrence authority
@@ -53,3 +53,13 @@ Safe implementation owners are `.1.3.1` for direct regex/statement hooks,
 `.1.3.2` for argument authority and recursive translation, and `.1.3.3` for
 fresh whole-family recurrence plus canonical acceptance. This is private source
 telemetry, not new recognition, DSL admission or executable membership.
+
+Current direct implementation under `.1.3.1` adds twelve remaining regex producer
+hooks and the `next_stmt` hook through the existing statement-frame bridge;
+`if_flow` remains unchanged. Each regex producer snapshots its original coordinates
+before parser callbacks and records the original event/argument object. `next`
+consumes a frame for every split occurrence, including ignored statements, and
+uses exact original source/raw authority. A changed callback entry declines its
+frame while an unchanged neighboring entry retains its own original occurrence;
+unknown/copied/foreign arrays and trim transformations do not invent authority.
+Recursive case/default and their argument bridge remain separately owned.

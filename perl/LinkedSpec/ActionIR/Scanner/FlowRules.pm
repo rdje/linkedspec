@@ -154,12 +154,16 @@ sub _scan_contract_elseif_flow {
  my ($code) = @_;
  my @events;
 while ($code =~ /\b(?<head>(?:elif|elseif)\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))(?<block>\s*(?<BRACE>\{(?:[^{}\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&BRACE))*\}))?/g) {
+ my ($start, $end) = ($-[0], $+[0]);
  my $call = _parse_method_function_expr($+{head});
  next unless $call;
  my $effective_args = $call->{args} || [];
  next unless ref($effective_args) eq 'ARRAY' && @$effective_args >= 1;
  my $raw = $+{head}.($+{block} // '');
- push @events, {raw => $raw, args => {condition => _trim_action_ir_value($effective_args->[0])}};
+ push @events, LinkedSpec::ActionIR::ScannerCore::_record_scanned_source_event(
+  {raw => $raw, args => {condition => _trim_action_ir_value($effective_args->[0])}},
+  $code, $start, $end,
+ );
 }
  return \@events
 }
@@ -168,12 +172,16 @@ sub _scan_contract_else_flow {
  my ($code) = @_;
  my @events;
  while ($code =~ /\b(?<head>(?:else|otherwise)(?!\w)(?:\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))?)(?<block>\s*(?<BRACE>\{(?:[^{}\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&BRACE))*\}))?/g) {
+ my ($start, $end) = ($-[0], $+[0]);
  my $call = _parse_method_function_expr(_normalize_bare_zero_arg_flow_marker_expr($+{head}));
  next unless $call;
  my $effective_args = _normalize_method_args_with_optional_scope($call->{args} || [], 0, undef);
  next unless $effective_args;
  my $raw = $+{head}.($+{block} // '');
- push @events, {raw => $raw, args => {}};
+ push @events, LinkedSpec::ActionIR::ScannerCore::_record_scanned_source_event(
+  {raw => $raw, args => {}},
+  $code, $start, $end,
+ );
 }
  return \@events
 }
@@ -182,11 +190,15 @@ sub _scan_contract_endif_flow {
  my ($code) = @_;
  my @events;
  while ($code =~ /\b(?<expr>endif(?!\w)(?:\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))?)/g) {
+ my ($start, $end) = ($-[0], $+[0]);
  my $call = _parse_method_function_expr(_normalize_bare_zero_arg_flow_marker_expr($+{expr}));
  next unless $call;
  my $effective_args = _normalize_method_args_with_optional_scope($call->{args} || [], 0, 0);
  next unless $effective_args;
- push @events, {raw => $+{expr}, args => {}};
+ push @events, LinkedSpec::ActionIR::ScannerCore::_record_scanned_source_event(
+  {raw => $+{expr}, args => {}},
+  $code, $start, $end,
+ );
 }
  return \@events
 }
@@ -195,13 +207,17 @@ sub _scan_contract_while_flow {
  my ($code) = @_;
  my @events;
  while ($code =~ /\b(?<head>while\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))(?<block>\s*(?<BRACE>\{(?:[^{}\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&BRACE))*\}))?/g) {
+  my ($start, $end) = ($-[0], $+[0]);
   my $call = _parse_method_function_expr($+{head});
   next unless $call;
   my $effective_args = _normalize_method_args_with_optional_scope($call->{args} || [], 1, 1);
   next unless $effective_args && @$effective_args == 1;
   next unless defined $+{block};
   my $raw = $+{head}.$+{block};
-  push @events, {raw => $raw, args => {condition => _trim_action_ir_value($effective_args->[0])}};
+  push @events, LinkedSpec::ActionIR::ScannerCore::_record_scanned_source_event(
+   {raw => $raw, args => {condition => _trim_action_ir_value($effective_args->[0])}},
+   $code, $start, $end,
+  );
  }
  return \@events
 }
@@ -210,12 +226,16 @@ sub _scan_contract_switch_flow {
  my ($code) = @_;
  my @events;
 while ($code =~ /\b(?<head>switch\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))(?<block>\s*(?<BRACE>\{(?:[^{}\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&BRACE))*\}))?/g) {
+ my ($start, $end) = ($-[0], $+[0]);
  my $call = _parse_method_function_expr($+{head});
  next unless $call;
  my $effective_args = $call->{args} || [];
  next unless ref($effective_args) eq 'ARRAY' && @$effective_args >= 1;
  my $raw = $+{head}.($+{block} // '');
- push @events, {raw => $raw, args => {expr => _trim_action_ir_value($effective_args->[0])}};
+ push @events, LinkedSpec::ActionIR::ScannerCore::_record_scanned_source_event(
+  {raw => $raw, args => {expr => _trim_action_ir_value($effective_args->[0])}},
+  $code, $start, $end,
+ );
 }
  return \@events
 }
@@ -238,11 +258,15 @@ sub _scan_contract_endcase_flow {
  my ($code) = @_;
  my @events;
  while ($code =~ /\b(?<expr>endcase(?!\w)(?:\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))?)/g) {
+ my ($start, $end) = ($-[0], $+[0]);
  my $call = _parse_method_function_expr(_normalize_bare_zero_arg_flow_marker_expr($+{expr}));
  next unless $call;
  my $effective_args = _normalize_method_args_with_optional_scope($call->{args} || [], 0, 0);
  next unless $effective_args;
- push @events, {raw => $+{expr}, args => {}};
+ push @events, LinkedSpec::ActionIR::ScannerCore::_record_scanned_source_event(
+  {raw => $+{expr}, args => {}},
+  $code, $start, $end,
+ );
 }
  return \@events
 }
@@ -251,11 +275,15 @@ sub _scan_contract_endswitch_flow {
  my ($code) = @_;
  my @events;
  while ($code =~ /\b(?<expr>endswitch(?!\w)(?:\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))?)/g) {
+ my ($start, $end) = ($-[0], $+[0]);
  my $call = _parse_method_function_expr(_normalize_bare_zero_arg_flow_marker_expr($+{expr}));
  next unless $call;
  my $effective_args = _normalize_method_args_with_optional_scope($call->{args} || [], 0, 0);
  next unless $effective_args;
- push @events, {raw => $+{expr}, args => {}};
+ push @events, LinkedSpec::ActionIR::ScannerCore::_record_scanned_source_event(
+  {raw => $+{expr}, args => {}},
+  $code, $start, $end,
+ );
 }
  return \@events
 }
@@ -264,11 +292,15 @@ sub _scan_contract_say_stmt {
  my ($code) = @_;
  my @events;
 while ($code =~ /\b(?<expr>say\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/g) {
+ my ($start, $end) = ($-[0], $+[0]);
  my $call = _parse_method_function_expr($+{expr});
  next unless $call && ($call->{method} // '') eq 'say';
  my $effective_args = $call->{args} || [];
  next unless ref($effective_args) eq 'ARRAY';
- push @events, {raw => $+{expr}, args => {values => [map { _trim_action_ir_value($_) } @$effective_args]}};
+ push @events, LinkedSpec::ActionIR::ScannerCore::_record_scanned_source_event(
+  {raw => $+{expr}, args => {values => [map { _trim_action_ir_value($_) } @$effective_args]}},
+  $code, $start, $end,
+ );
 }
  return \@events
 }
@@ -277,11 +309,15 @@ sub _scan_contract_print_stmt {
  my ($code) = @_;
  my @events;
 while ($code =~ /\b(?<expr>print\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/g) {
+ my ($start, $end) = ($-[0], $+[0]);
  my $call = _parse_method_function_expr($+{expr});
  next unless $call && ($call->{method} // '') eq 'print';
  my $effective_args = $call->{args} || [];
  next unless ref($effective_args) eq 'ARRAY';
- push @events, {raw => $+{expr}, args => {values => [map { _trim_action_ir_value($_) } @$effective_args]}};
+ push @events, LinkedSpec::ActionIR::ScannerCore::_record_scanned_source_event(
+  {raw => $+{expr}, args => {values => [map { _trim_action_ir_value($_) } @$effective_args]}},
+  $code, $start, $end,
+ );
 }
  return \@events
 }
@@ -290,14 +326,18 @@ sub _scan_contract_print_each {
  my ($code) = @_;
  my @events;
 while ($code =~ /\b(?<expr>print_each\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/g) {
+ my ($start, $end) = ($-[0], $+[0]);
  my $call = _parse_method_function_expr($+{expr});
  next unless $call && $call->{method} eq 'print_each';
  my $effective_args = $call->{args} || [];
  next unless ref($effective_args) eq 'ARRAY';
- push @events, {
-  raw  => $+{expr},
-  args => {target => @$effective_args ? _trim_action_ir_value($effective_args->[0]) : ''},
- };
+ push @events, LinkedSpec::ActionIR::ScannerCore::_record_scanned_source_event(
+  {
+   raw  => $+{expr},
+   args => {target => @$effective_args ? _trim_action_ir_value($effective_args->[0]) : ''},
+  },
+  $code, $start, $end,
+ );
 }
  return \@events
 }
@@ -306,10 +346,14 @@ sub _scan_contract_exit_now {
  my ($code) = @_;
  my @events;
 while ($code =~ /\b(?<expr>exit_now\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/g) {
+ my ($start, $end) = ($-[0], $+[0]);
  my $call = _parse_method_function_expr($+{expr});
  next unless $call && ($call->{method} // '') eq 'exit_now';
  my @args = @{$call->{args} || []};
- push @events, {raw => $+{expr}, args => {payload => @args ? _trim_action_ir_value($args[0]) : ''}};
+ push @events, LinkedSpec::ActionIR::ScannerCore::_record_scanned_source_event(
+  {raw => $+{expr}, args => {payload => @args ? _trim_action_ir_value($args[0]) : ''}},
+  $code, $start, $end,
+ );
 }
  return \@events
 }
@@ -317,11 +361,18 @@ while ($code =~ /\b(?<expr>exit_now\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"]
 sub _scan_contract_next_stmt {
  my ($code) = @_;
  my @events;
- foreach my $statement (@{_split_action_ir_statements($code)}) {
+ my $framed = ref($LinkedSpec::ActionIR::ScannerCore::_source_event_recorder) eq 'CODE'
+  ? LinkedSpec::ActionIR::ScannerCore::_split_scanner_statements_with_source_frames(\&_split_action_ir_statements, $code) : undef;
+ my $statements = $framed ? $framed->{statements} : _split_action_ir_statements($code);
+ my $statement_index = 0;
+ foreach my $statement (@$statements) {
+  my $frame = $framed ? $framed->{source_frames}[$statement_index++] : undef;
   my $trimmed = _trim_action_ir_value($statement);
   next unless defined($trimmed) && length($trimmed);
   next unless $trimmed =~ /^next(?:\s*\(\s*\))?$/o;
-  push @events, {raw => $trimmed, args => {}};
+  push @events, LinkedSpec::ActionIR::ScannerCore::_record_statement_source_event(
+   {raw => $trimmed, args => {}}, $frame,
+  );
  }
  return \@events
 }
@@ -330,11 +381,15 @@ sub _scan_contract_return_undef {
  my ($code) = @_;
  my @events;
 while ($code =~ /\b(?<expr>return_undef\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/g) {
+ my ($start, $end) = ($-[0], $+[0]);
  my $call = _parse_method_function_expr($+{expr});
  next unless $call;
  my $effective_args = _normalize_method_args_with_optional_scope($call->{args} || [], 0, 0);
  next unless $effective_args;
- push @events, {raw => $+{expr}, args => {value => 'undef'}};
+ push @events, LinkedSpec::ActionIR::ScannerCore::_record_scanned_source_event(
+  {raw => $+{expr}, args => {value => 'undef'}},
+  $code, $start, $end,
+ );
 }
  return \@events
 }

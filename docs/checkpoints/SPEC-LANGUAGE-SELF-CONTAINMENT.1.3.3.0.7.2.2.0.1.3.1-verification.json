@@ -1,0 +1,131 @@
+{
+  "complete": true,
+  "revision": "f3f87ce110db89fca0e3db4debd4d9948df0b8df",
+  "regular_inputs": 4099,
+  "overlays": 2,
+  "direct_contracts": 14,
+  "new_regex_hooks": 12,
+  "new_statement_hooks": 1,
+  "seeds": 3,
+  "actual_commands": 8,
+  "before_red_groups": 16,
+  "after_green_groups": 21,
+  "fixture_suites": 8,
+  "fixture_groups": 1158,
+  "before_origins": 6,
+  "after_origins": 87,
+  "complete_compiler_pairs": 48,
+  "controls": [
+    {
+      "name": "if_flow missing origin",
+      "observed": "RED",
+      "reason": "original hook population"
+    },
+    {
+      "name": "elseif_flow missing origin",
+      "observed": "RED",
+      "reason": "literal direct original scalar origins"
+    },
+    {
+      "name": "else_flow missing origin",
+      "observed": "RED",
+      "reason": "literal direct original scalar origins"
+    },
+    {
+      "name": "endif_flow missing origin",
+      "observed": "RED",
+      "reason": "literal direct original scalar origins"
+    },
+    {
+      "name": "while_flow missing origin",
+      "observed": "RED",
+      "reason": "literal direct original scalar origins"
+    },
+    {
+      "name": "switch_flow missing origin",
+      "observed": "RED",
+      "reason": "literal direct original scalar origins"
+    },
+    {
+      "name": "endcase_flow missing origin",
+      "observed": "RED",
+      "reason": "literal direct original scalar origins"
+    },
+    {
+      "name": "endswitch_flow missing origin",
+      "observed": "RED",
+      "reason": "literal direct original scalar origins"
+    },
+    {
+      "name": "say_stmt missing origin",
+      "observed": "RED",
+      "reason": "literal direct original scalar origins"
+    },
+    {
+      "name": "print_stmt missing origin",
+      "observed": "RED",
+      "reason": "literal direct original scalar origins"
+    },
+    {
+      "name": "print_each missing origin",
+      "observed": "RED",
+      "reason": "literal direct original scalar origins"
+    },
+    {
+      "name": "exit_now missing origin",
+      "observed": "RED",
+      "reason": "literal direct original scalar origins"
+    },
+    {
+      "name": "next_stmt missing origin",
+      "observed": "RED",
+      "reason": "literal direct original scalar origins"
+    },
+    {
+      "name": "return_undef missing origin",
+      "observed": "RED",
+      "reason": "literal direct original scalar origins"
+    },
+    {
+      "name": "origin_event",
+      "observed": "RED",
+      "reason": "actual returned constructor argument identities"
+    },
+    {
+      "name": "constructed_event",
+      "observed": "RED",
+      "reason": "actual returned constructor argument identities"
+    },
+    {
+      "name": "constructed_args",
+      "observed": "RED",
+      "reason": "actual returned constructor argument identities"
+    },
+    {
+      "name": "wrong scalar interval",
+      "observed": "RED",
+      "reason": "literal direct original scalar origins"
+    },
+    {
+      "name": "lost callback",
+      "observed": "RED",
+      "reason": "unchanged exact callback effects"
+    },
+    {
+      "name": "lost actual run",
+      "observed": "RED",
+      "reason": "complete guarded command population"
+    },
+    {
+      "name": "lost Git input",
+      "observed": "RED",
+      "reason": "complete unique Git membership"
+    },
+    {
+      "name": "unrelated RED stderr",
+      "observed": "RED",
+      "reason": "only expected RED harness diagnostics"
+    }
+  ],
+  "instrument_sha256": "eb92fe65485540b7e9ce8255c146cae1d6691051cd42fc326351feac65aedf83"
+}

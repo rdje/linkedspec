@@ -1,0 +1,25 @@
+{
+  "complete": true,
+  "streams": [
+    {
+      "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.1-initial-red.log.json",
+      "bytes": 22972,
+      "sha256": "3bb1933391129f9384f455c0924715eb5388bba5b04d50648df8d83f68953b39",
+      "exact": true
+    },
+    {
+      "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.1-initial-green.log.json",
+      "bytes": 16483,
+      "sha256": "7849679129278677a89f4a14ed0f6cbcf13c7d3e726f322db9a7ded5fa0de09f",
+      "exact": true
+    },
+    {
+      "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.1-green.log.json",
+      "bytes": 15904,
+      "sha256": "4909c3636813553e40a09f6b8c317688013dfbb09282d62b114c439ddee58cc4",
+      "exact": true
+    }
+  ],
+  "instrument_sha256": "72329ed361f83aa8938cef55c1e484bac0f5bffb779712334d5df60b65f14b51",
+  "scope": "Copy and verify exact three owned raw logs before their original staging/worktree entries are removed. This packaging retains original evidence bytes and does not change source/test/capture outcomes."
+}

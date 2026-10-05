@@ -12,6 +12,12 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-10-05 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.1: direct Flow source hooks
+
+Add twelve remaining regex producer hooks and one next statement hook in FlowRules; existing if hook remains unchanged. Regex producers snapshot original scalar coordinates before parsing and return original event/argument objects. next consumes existing statement frames by occurrence, including ignored statements, with exact source/raw authority. Recognition, callback effects, public event schema and recursive case/default behavior remain unchanged.
+
+Retain original and corrected regression failures, per-entry callback authority, immutable before/after inputs and full public/compiler channels under three seeds. Standard source/AST/order/trace consumers plus Phase0 are selected; final evidence and complete book rendering retain actual producers and distinguishing controls. Prior42 diagnosis input hashes verify before historical freeze. Direct aliases/markers/repeated Unicode/CRLF occurrences, nested/error/foreign/copied/transformed/empty boundaries and actual returned references are covered. Recursive argument authority/translation and canonical Flow acceptance remain owned. Source-bound record: docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.1.json.
+
 ## 2026-10-05 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.0: original Flow source diagnosis
 
 Retain original sixteen-contract Flow public/private callback and complete compiler channels from immutable b73f1f59a regular Git inputs plus three explicit source/probe/oracle overlays. Literal scalar/source/argument oracles preserve depth-first marker recursion followed by inline branch traversal. Original if origins remain intact; other Flow origins are absent. Six unchanged source/AST/order/trace suites pass103 groups; complete book render teaches direct aliases and composite traversal. Separate direct hooks, argument authority diagnosis/bridge, recursive translation and canonical acceptance are owned before production changes.

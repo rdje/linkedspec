@@ -12,6 +12,12 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-10-05 — Direct Flow origins preserve original producer authority (.1.3.1)
+
+All thirteen direct regex Flow producers now record their original match frame; twelve hooks are new and if_flow is unchanged. next_stmt uses the existing statement bridge, advances its frame index before recognition, and declines changed raw/source authority without losing ordinary callback events. Aliases and bare markers retain authored spelling, not normalized parser text. Per-entry split authority preserves an unchanged neighbor even if another entry changes; the original false test expectation and failure are retained before correction.
+
+The private recorder returns the original event/argument objects and preserves callback/error behavior. Exact immutable input guards, independent literal intervals and full before/after compiler channels cover the bounded change. Case/default recursive argument translation and executable membership remain separate; no lexical sorting, MethodExpr/Core/recognizer/dispatch/schema/dependency changes. See docs/knowledge/perl-flow-recursive-source-provenance.md and the .1.3.1 source-bound claim for retained producers, original failures and limits.
+
 ## 2026-10-05 — Original recursive Flow occurrence authority (.1.3.0)
 
 FlowRules case/default concatenate marker/block depth-first traversal with inline-switch argument traversal. A later tail marker therefore precedes an earlier inline branch; lexical sorting changes the contract. Equal branch twins require occurrence authority from captured block bases and actual MethodExpr CSV argument frames. CSV trims whitespace and drops empty slots; a raw-key lookup cannot reconstruct their original positions. Preserve default callback effects and returned event/argument references; custom copied/transformed/foreign results must decline authority. Own that bridge diagnosis before implementation, then direct and recursive producer slices and canonical family acceptance.
