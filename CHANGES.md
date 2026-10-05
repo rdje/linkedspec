@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-10-06 — Due retained artifact review (REPO-HYGIENE.10)
+
+Retain the dated parent/Rust metadata census, actual producer exits and full channels. Independent per-file metadata and corruption/exclusion controls verify the snapshot; zero files removed. Preserve proof/cache data and all repository boundaries. Freeze the two prior Legacy claims at clean f3a49dd after verifying224 original bindings/112 unique hashes; render the complete58-input book before returning to Legacy .1.4.1.
+
 ## 2026-10-05 — Original Legacy producer diagnosis and finite note admission (.1.4.0)
 
 Original Legacy .1.4.0 verifies4252 immutable inputs/three exact overlays/four guarded commands;112 contracts/115 cases/227 events/two origins per seed/103 groups/123 RED. Six safe families are owned. Granted ADR0127 admits only three engineering-note scalars with exact rollover/18 production thresholds/13 RED controls; exact canonical receipt gates landing. Complete58-input book renders19 examples/three chapters with20 RED controls;108 prior hashes verify before historical freeze. Runtime/spec/standard tests remain unchanged.

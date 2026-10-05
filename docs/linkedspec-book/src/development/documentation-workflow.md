@@ -103,10 +103,10 @@ observation, while a read-only reviewer can still check the old recorded totals 
 For a retained daily snapshot, the review order is census completion, fresh scoped comparison,
 and independent per-file metadata checks. Save the actual producers, exit statuses and both
 output channels before advancing the latest date. A successful review may remove zero files.
-For example, the retained October4 snapshot can be checked without recapturing changing state:
+For example, the retained daily snapshot can be checked without recapturing changing state:
 
 ```bash
-bash tools/run_python_project_data.sh docs/checkpoints/REPO-HYGIENE.9-review.py
+bash tools/run_python_project_data.sh docs/checkpoints/REPO-HYGIENE.10-review.py
 ```
 
 All other Git repositories and submodules are excluded before traversal. A project task or

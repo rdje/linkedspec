@@ -6,7 +6,7 @@
 - Status: `completed`
 - Roadmap lane: `Overall roadmap — repository maintenance`
 - Created: `2026-06-16`
-- Last updated: `2026-10-04` (`REPO-HYGIENE.9`: due review after clean private splitter frames)
+- Last updated: `2026-10-06` (`REPO-HYGIENE.10`: due review after clean Legacy diagnosis)
 - Owner: repo-local workflow
 
 ## Goal
@@ -40,7 +40,7 @@ the durable handoff state current.
 - ID: `REPO-HYGIENE`
   Status: `completed`
   Goal: `Repository hygiene — ignore local artifacts and safely reclaim generated caches`
-  Children: `REPO-HYGIENE.1`, `REPO-HYGIENE.2`, `REPO-HYGIENE.3`, `REPO-HYGIENE.4`, `REPO-HYGIENE.5`, `REPO-HYGIENE.6`, `REPO-HYGIENE.7`, `REPO-HYGIENE.8`, `REPO-HYGIENE.9`
+  Children: `REPO-HYGIENE.1`, `REPO-HYGIENE.2`, `REPO-HYGIENE.3`, `REPO-HYGIENE.4`, `REPO-HYGIENE.5`, `REPO-HYGIENE.6`, `REPO-HYGIENE.7`, `REPO-HYGIENE.8`, `REPO-HYGIENE.9`, `REPO-HYGIENE.10`
 
 - ID: `REPO-HYGIENE.1`
   Status: `done`
@@ -201,6 +201,21 @@ the durable handoff state current.
   Commit: `REPO-HYGIENE.9 - retain daily artifact census` (Git owns identity).
   Handoff: Activate SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.2 from clean HEAD; no required job remains.
 
+- ID: `REPO-HYGIENE.10`
+  Status: `done`
+  Goal: Complete the due daily metadata census after clean Legacy diagnosis; retain evidence, caches and every repository boundary.
+  Activation: Clean f3a49dd82794c494625e33fe83ccf6cf01b4df8e; empty brief, clean Git and no required background jobs confirmed before pivot.
+  Reproduce: Latest cleanup October4 20:15 UTC is over24 hours old on October6 local time.
+  Owned paths: docs/ARTIFACT_CLEANUP.md; new docs/checkpoints/REPO-HYGIENE.10-* census/review/capture/freeze/book/claim instruments and results; docs/claims/REPO-HYGIENE.10.json; historical durability boundary of the two Legacy .1.4.0 claims; cleanup Knowledge and public documentation-workflow.md; this tree/index, ROADMAP.md, bounded history/live/resume and derived map. Scratch .linkedspec-data/scratch/hygiene10. Previous proof artifacts remain immutable.
+  Verification tier: `focused`
+  Focused checks: Non-following parent metadata census and explicit Rust release/deps/incremental log-bin locations; fresh scoped census and independent per-file lstat, aggregate inflation/balanced wrong-size rejection and inclusion/exclusion fixture. Retain actual commands/exits/full channels/input guards; verify all original Legacy claim hashes before freezing; render complete book inputs and verify retention teaching. Run memory/history/Knowledge/claims/diff/all doctrines.
+  Canonical trigger: none; recurring metadata record under unchanged storage/runtime/dependency/verification mechanisms.
+  Claim verification: `docs/claims/REPO-HYGIENE.10.json`
+  Acceptance: Retain all artifacts unless exact disposal is proved. Exclude submodules/nested repositories, symlinks, other volumes, managed runs and retained caches/generated outputs; inspect three Rust metadata locations separately. No deletion based on age/size, no process recovery/purge or other-repository writes. Commit before returning to Legacy .1.4.1.
+
+  Verification: PASS; Dated 2026-10-05T23:43:45.934735+00:00 census retains 8931 parent candidates/12619808609 bytes and excludes nine nested repositories. Rust release is absent, deps has zero log/bin files, incremental retains 483 rows/2390808555 bytes. Fresh scoped census and independent lstat agree; two metadata/four actual-channel/five render controls reject. Zero removals; complete58-input book renders one example. Two Legacy claims freeze at clean f3a49dd with224 original bindings/112 unique hashes. Initial uncommitted change-note insertion matched inline Markdown rather than a heading; bounded-history check rejected it. Anchored insertion restores the exact preamble and both chronology checks pass. An early isolated claim check overlapped staging and exited1 with the documented mixed-index missing-declaration diagnostic (Knowledge card claim-verification-index-snapshot); its original cached blob table was not retained. Staging now precedes verification; the subsequent doctrine driver reports all10 PASS, including the claim check. No checker or policy was changed. All doctrines/memory/Knowledge/claims/diff pass before landing.
+  Commit: `REPO-HYGIENE.10 - retain daily artifact census`
+
 ## Current Frontier
 
 | Order | Leaf | Status | Why next |
@@ -212,6 +227,7 @@ the durable handoff state current.
 | 5 | `REPO-HYGIENE.7` | `done` | Due October2 review after clean instrument recovery; retain proof/cache data and enforce other-repository exclusion. |
 | 6 | `REPO-HYGIENE.8` | `done` | Due October3 review after clean diagnosis; preserve proof inputs/cache and return to compiler .6.1. |
 | 7 | `REPO-HYGIENE.9` | `done` | Due October4 review after clean private frames; preserve evidence and resume eleven producer hooks. |
+| 8 | `REPO-HYGIENE.10` | `done` | Due October6 review after clean Legacy diagnosis; preserve evidence and resume eight call/return/push producers. |
 
 ## Decisions
 
@@ -240,6 +256,7 @@ the durable handoff state current.
 
 | Date | Leaf | Checks | Result |
 | --- | --- | --- | --- |
+| `2026-10-06` | `REPO-HYGIENE.10` | Actual census/live reviewer; original Legacy claim freeze; complete book/render controls; retained-claim replay; memory/history/Knowledge/claims/doctrines/diff | PASS — 8931 parent candidates/12619808609 bytes;483 incremental rows/2390808555 bytes; nine nested repositories excluded; zero removals;224 original bindings/112 unique hashes. |
 | `2026-10-04` | `REPO-HYGIENE.9` | Actual census/live lstat/fresh metadata, two metadata/four channel/five book controls; claim/Knowledge/history/memory/doctrine/diff | PASS — zero removals; retained exact snapshot; producer hooks .1.1.1.2 next. |
 | `2026-10-03` | `REPO-HYGIENE.8` | Tracked census/live lstat/fresh metadata and corruption/fixture controls; book/history/memory/Knowledge/doctrine/diff | PASS — zero removals; exact snapshot retained; compiler .6.1 next. |
 | `2026-10-02` | `REPO-HYGIENE.7` | Archived census/review; actual per-path and fixture/corrupt-count controls; book/memory/history/Knowledge/doctrine/diff | PASS — zero removals; exact dated scope/enumeration in checkpoint. Resume claim-policy .0.2.1.4.1. |
@@ -254,6 +271,7 @@ the durable handoff state current.
 
 | Leaf | Commit subject or reference | Notes |
 | --- | --- | --- |
+| `REPO-HYGIENE.10` | `REPO-HYGIENE.10 - retain daily artifact census` | Exact metadata/actual-channel/book proof; zero removals, resume Legacy call/return/push. |
 | `REPO-HYGIENE.9` | `REPO-HYGIENE.9 - retain daily artifact census` | Actual full channels and independent metadata; preserve evidence/cache and return to eleven statement hooks. |
 | `REPO-HYGIENE.8` | `REPO-HYGIENE.8 - retain daily artifact census` | Dated snapshot/current OS metadata proof; preserve artifacts and return to .6.1. |
 | `REPO-HYGIENE.7` | `REPO-HYGIENE.7 - review artifacts and correct read-only boundary` | Due review preserves all proof/cache data and excludes every other repository. |
@@ -265,6 +283,8 @@ the durable handoff state current.
 | `REPO-HYGIENE.1` | `pending` | Populated after commit |
 
 ## Changelog
+
+- 2026-10-06: `.10` verifies the due retained census with zero removals and returns to Legacy .1.4.1 after a clean commit.
 
 - 2026-10-04: `.9` verifies due metadata/actual-channel/book proof with zero removals, preserves all inputs/caches and resumes eleven statement event hooks.
 

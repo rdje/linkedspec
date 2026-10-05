@@ -12,6 +12,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-10-06 — Daily metadata review (.10)
+
+A new daily census is a dated observation, not authorization to delete logs or caches. Preserve prior proof bytes, freeze bound live claims at their clean Git boundary, and retain actual producer exits/full channels. REPO-HYGIENE.10 repeats the unchanged inclusion/exclusion and independent per-file metadata checks; no resource-reclamation or process-liveness claim follows.
+
 ## 2026-10-05 — Original Legacy producer partition (.1.4.0)
 
 Original Legacy dispatch has112 internal contracts in six safe families: call/return/push8, anonymous capture26, named capture17, mark control14, cursor/input15 and entry/match32. Literal cumulative Unicode/CRLF fixtures distinguish repeated occurrences; only return_general has existing private origins. Public/internal contract IDs are not helper admission. Quoted boundary comma tokenization is separately owned before that producer family; preserve original scanner and lowering channels. See docs/knowledge/perl-legacy-source-producer-partition.md.

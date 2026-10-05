@@ -4,7 +4,7 @@ October5 mixed BasicRules proof: SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.
 
 October4 statement-family acceptance: SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.3 verifies complete immutable recurrence without production changes; exact staged canonical receipt gates closeout. Twenty-contract basic composition .1.1.2 follows.
 
-October4 artifact review: REPO-HYGIENE.9 retains the verified exact metadata/full channels with zero removals; private frames are committed at abe6756ae. Eleven event-producer hooks .1.1.1.2 resume next.
+October6 artifact review: REPO-HYGIENE.10 retains the verified exact metadata/full channels with zero removals; original Legacy diagnosis is committed at f3a49dd. Eight call/return/push producers .1.4.1 resume after the maintenance commit.
 
 # ROADMAP
 

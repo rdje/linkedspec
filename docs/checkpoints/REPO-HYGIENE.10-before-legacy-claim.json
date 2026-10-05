@@ -1,0 +1,1172 @@
+{
+  "version": 1,
+  "owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0",
+  "claims": [
+    {
+      "name": "original-legacy-source-producer-diagnosis",
+      "statement": "Fresh immutable original Legacy diagnosis retains4252 regular Git inputs/three exact authored overlays/four fully guarded commands.112 internal dispatcher contracts partition into six families (8/26/17/14/15/32).115 independent literal cases retain227 original events and two existing return_general source origins per seed, actual returned/constructor/args identities and exact public/private callback effects. All three full seed channels are byte-identical, including eleven original Toolbox substitution/descriptor/parser-source cases. Six unchanged suites pass103 ordered groups.123 reason-specific evidence controls observe RED. Complete58-input book renders19 original examples/three chapters with20 rejection controls.108 prior live input hashes verify before historical freeze.",
+      "scope": "Immutable clean da3d34945d5067410b79f51782395f15b5184ff4 regular Git supplied-input superset, not minimal observed IO; all original object/content/mode/membership and exact three cases/probe/oracle overlays are retained. Every command/channel/input guard is complete. Internal compatibility IDs are not public helper admission. Literal expected raw/args and cumulative scalar intervals are authored independently of observed matches. Original return_general helper-pattern view preserves actual parser/trim callbacks and source identities; remaining producers have no source origins yet. Textual inventory describes exact producer mechanisms, not arbitrary runtime reachability. Quoted comma boundary observation is retained unchanged with both scanner and Contracts repair owner .1.4.0.1; arbitrary label syntax is not admitted. First macro/mark argument expectations and source_span schema correction retain original failed authoring inputs; exploratory descriptor serialization and parser-source dereference errors are not final runtime acceptance. Book render is teaching, not native execution. The director-granted finite capacity prerequisite is separately verified in this record; exact canonical landing remains required. No production/spec/standard tests/CI/dependency/other-repository change. Only the separately scoped finite engineering-note storage controls change. Required OS/Perl/Python/prove/mdBook are read-only tools; project data stays repository-local. Gitlinks/nonregular metadata excludes payload reads; RGX/PGEN remain black boxes. Other producer implementations, executable membership/comments/replacement and global historical audits remain separate.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-inventory.py; bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-capture.py; bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-review.py; bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-freeze.py; bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-book.py --review",
+        "granularity": "112 contracts/115 literal cases/3 seeds/227 events and2 origins per seed;4252 Git inputs/3 overlays/4 commands;6 suites/103 groups;11 compiler cases per seed;58 book inputs/19 examples/3 chapters;108 prior hashes.",
+        "result": "Fresh immutable original Legacy diagnosis retains4252 regular Git inputs/three exact authored overlays/four fully guarded commands.112 internal dispatcher contracts partition into six families (8/26/17/14/15/32).115 independent literal cases retain227 original events and two existing return_general source origins per seed, actual returned/constructor/args identities and exact public/private callback effects. All three full seed channels are byte-identical, including eleven original Toolbox substitution/descriptor/parser-source cases. Six unchanged suites pass103 ordered groups.123 reason-specific evidence controls observe RED. Complete58-input book renders19 original examples/three chapters with20 rejection controls.108 prior live input hashes verify before historical freeze."
+      },
+      "falsify": {
+        "status": "checked",
+        "hypothesis": "Omitted compatibility contracts, incorrect original arguments, invented source authority, equal-valued copied references or incomplete captured inputs/TAP could falsely establish a complete original diagnosis.",
+        "oracle": "Independent retained literal raw/args/cumulative scalar source fixture oracle; exact original dispatcher/handler inventory and complete six-family partition; actual return constructor/args/event references; exact default callback sequence/results; complete original full channels across seeds; immutable Git byte/mode/membership and positive ordered TAP/nested-failure rejection.",
+        "red_control": "123 actual reason-specific RED controls erase each of112 contract event populations, forge each returned/constructor/args relationship, invent an uninstrumented origin, omit a return origin, lose commands/guards/Git/overlays or forge channel/producer.20 actual rendered-book controls reject missing Legacy family teaching, original examples, earlier source teaching, guards/input/channel/renderer or failed rendering. The original quoted-comma result differs from the independently authored two-token intended boundary list; its repair remains owned."
+      },
+      "durability": {
+        "status": "checked",
+        "mode": "live",
+        "inputs": [
+          {
+            "path": "DEVELOPMENT_NOTES.md",
+            "sha256": "29f362ac64eb3e69c8ab11682eaacc85f8b138469782e60d827908993b2e62b2",
+            "role": "input"
+          },
+          {
+            "path": "README_POLICY.md",
+            "sha256": "9e967c6a0de617945e0d4b39631103334cf2144875b96fd37ed98f93aada2686",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.0-capture.py",
+            "sha256": "d054f68eb1a892b56ec2db1d4b6c56bcfb0bce5ac9b9e4fdef225c2273ffb1fe",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-before-producer-claim.json",
+            "sha256": "0f4a0fa494e12c55f46bc0a077e3a17ff5e8eade3323a818149adbccdd881bb0",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-book-inputs.json",
+            "sha256": "759f5019ec4f753720e386b4a9fef52923b340529f1044e8dd6c34179288e12b",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-book-inputs.tar.gz",
+            "sha256": "d13cf5002eda16618936a9416c92d1d14e22fd5dccc0e5614c84292fa25dd184",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-book-verification.json",
+            "sha256": "e0e8899e5e45dbd4bc42ebefaa18d6bdc5fbd72146794415b3c97c4afa1c3f04",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-book.json",
+            "sha256": "c72934c41d6fce9a714bb5d1ed8f2f88bf6cca541a5234a9ae9ac35415ab57a5",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-book.py",
+            "sha256": "0ac1920d5300c21f8e3a2589357da206bb31a3af7257164eaae5730a8a906542",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-boundary-original.json",
+            "sha256": "c2a4ad7a58cc87aca9f465e2599ecbf1c32ab5d6f1ab0603a2901f0b29979b22",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-boundary-probe.pl",
+            "sha256": "a507365029e3a5f7a5a0f3fb9b72738d2fd805d783e1f8263d75060ba4d8dbb1",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-capacity-controls.json",
+            "sha256": "020527112980f173157c95b63c97bf1534929a786885f733d1dae603f560e71b",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-capacity-controls.pl",
+            "sha256": "b8b4d9a8499786ec387f9bf73aed8dc07d72041f4b2f66b5c940a945281262f8",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-capacity-decision.md",
+            "sha256": "23d5002b86edda97081f739f862818c53eac1bbed8d4bbf2f5e6f73b7c67ec95",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-capacity-proposal.json",
+            "sha256": "68470987380854b93663b331fdffc21e47053ca6d0a7700f5fc7beea02af25a6",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-capacity-proposal.py",
+            "sha256": "f9ce861bc0adc09e8c33676e3f7b10fb33f028c1e022f435f2334908b80deae5",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-capacity-publish.py",
+            "sha256": "debca0cb1ede8d52fee472066c5ea47e8e19d95014ff01e55ec1299083d047ac",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-capacity-review.py",
+            "sha256": "d9340ae58a67e7e4f54a6ea4b44cd209931600bcb11bf038a4ee5435f276f532",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-capacity-verification.json",
+            "sha256": "ae151f4d8d1515362c627903b5dc750bf421bbaa2cadcec4714e3b2f7dbfeaac",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-capture.py",
+            "sha256": "edc7d4fc7c10a16e2769898ddfbbbc349c59d825e1b7e754b60e123ba279e176",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-cases.json",
+            "sha256": "44f02bf4d0dfc839caa8062401ae8b2db71160223873a60deffdfdb589abf6e6",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-claim.py",
+            "sha256": "c02d59f25c52161feae3adcf5961f7ca8a8556e0cf7d0f68c3bfc89f1c0f4e79",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-exploratory.json",
+            "sha256": "2686a8d45ca7917877759d819b8fe45e259c7f57375fd04990b63c159a622fc7",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-freeze.json",
+            "sha256": "a51223fa9f06310e487fb873ace770e4337251b17898d787a495302145958fba",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-freeze.py",
+            "sha256": "5850dec5da76df9e06bd340727c678aa1064c5be08ebae9fe75e79986f9534b1",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-incomplete-boundary-probe.pl",
+            "sha256": "b718ddab39567708ed1218444f4252b47bb919d19d780a81d9e1fa4413d93986",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-incomplete-boundary.json",
+            "sha256": "d861e7a93ffe79264be2113683cfb0709969e9f9d21cd126cca3bdbe55600d2b",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-initial-book-inputs.json",
+            "sha256": "7958b702314053041643ecddf1aa879e3320a7917c2069ba536b06e50485e25c",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-initial-book-verification.json",
+            "sha256": "de5d4b036b7aeb4ad1765806e6bb4040eb4e048c2043afafe68fce119629a596",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-initial-book.json",
+            "sha256": "eececf08b881eaa4a9629bcf00044fa45a79b41b51280636227988afe611bda4",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-initial-book.py",
+            "sha256": "93f9acaa27d25d3cd2895d5fb93abb018e696286c192c5998ecc54aaa4a71dde",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-initial-boundary-probe.pl",
+            "sha256": "1534dbb5bd1b12295dc37a0bd20bfc9c8860dcc51213fb30bd65434f087fb0e6",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-initial-capacity-publish.py",
+            "sha256": "22e6f0cf3508343e16eddcddc287cdce2ddb0ce13b5c2f72f45475df448d5c2a",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-initial-cases.json",
+            "sha256": "0f7bc46eddda86854d726f5f12fcf9c0726e53bcc6769b64a161ff2e7a1f250b",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-initial-exploratory.json",
+            "sha256": "d4593eb91886a8b296c588976cfabbb66b562199d2a845c2f64e8d4e84b74f06",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-initial-inventory.py",
+            "sha256": "04ac988740705714bdffb0425d159335e583bf831c035d6b6897cf2f0727bb20",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-initial-oracle.py",
+            "sha256": "aec35193265688728c0bb88b20f1189daeb4bae18a40947300511296988846ad",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-inputs.json",
+            "sha256": "3a143b5a7e45bffdc980904d10fe40f497a6fac3ae78984d28410a96c589576d",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-inventory.json",
+            "sha256": "b1632c4623aa68550ceb57a17c27d1944d26a50c3f4a1f8a83b4901b8dc5812e",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-inventory.py",
+            "sha256": "4193972c257cef7cb2a64108b739b47c2b452dbb35f718590c57d06b2dfe4397",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-observations.json",
+            "sha256": "024a6c5716b2fbdbe3d2cd03d438ea68b37b62cd427fd790d67d1076a7339113",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-oracle.py",
+            "sha256": "baf3ced633b323c4589a26c609ea0316e344a9a8eac2c6309553b3bdb9b6c9dc",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-probe.pl",
+            "sha256": "8a61d8f530400d602ef74846439d929980da0c87d7302bf0af8e07709dfc8e76",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-proposed-note.md",
+            "sha256": "2420e9cec562c94862d0aa7ace47fb7120390aad3367f5d79074c368f5e253cc",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-review.py",
+            "sha256": "81a04add99fc5b9e48d8a659af4a79202bc7abbed60633838c1aa5a15c19fdc4",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-schema-review.json",
+            "sha256": "79643897d4846155b8b05f92f28db65dfd0c4f6d1d1062d39eb1a81b4d5b9c2e",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-schema-review.py",
+            "sha256": "9e0ec00438baa1e3fcfd70abcf10f88d1ef8408f486c6b76cbaa59fbfe62b563",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-verification.json",
+            "sha256": "0de01cb04888ad159ee315dc278ec670348a763e4dd076ea63d943654b457b8e",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0127-legacy-diagnosis-note-capacity.md",
+            "sha256": "23d5002b86edda97081f739f862818c53eac1bbed8d4bbf2f5e6f73b7c67ec95",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/INDEX.md",
+            "sha256": "da3891ca99568ab7a31d27287fb4577c455be14c5d72188773aa64a785dc6281",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/manifest.jsonl",
+            "sha256": "650fa15087cb318afa8bd72836cded55f3076b6108ca2ec878b68a56a990707e",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4964-8783c6d63164.md",
+            "sha256": "8783c6d63164ded0745e6fd2e9cd9a440d71e3d5b682635b1b5573e126507f0e",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4965-eb7229ea8dfa.md",
+            "sha256": "eb7229ea8dfaeac4e049787f76c1b6b9f5570a5292fe83194eb34a2f28f94c34",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4966-43fddeef5cda.md",
+            "sha256": "43fddeef5cdad1dd30802ed9949088e21e3f29bc5caa50a6ca03d20b8cbbfec8",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4967-f52d344f119c.md",
+            "sha256": "f52d344f119cb7554f8377b5e3d9f5aa5e27a74e665470b9ac47c70e7dbef661",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4968-f62a72418c77.md",
+            "sha256": "f62a72418c776bdbe31e4dab43c7a16194dc751a0df5826a975a0dd8c41e4e1b",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4969-daedb2f87400.md",
+            "sha256": "daedb2f874009d1bbf3847deac57723b0684f9eb9bba6b7c7dad1e1adac6c6b1",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4970-d61f2b9e16b5.md",
+            "sha256": "d61f2b9e16b5faf19472983158c5cc1909a2569b82000d7d63aef8ea59eb62de",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4971-cca28e89f3a1.md",
+            "sha256": "cca28e89f3a16fd7a69ec5021674328ead902c04cc9a57eaa8aea3496efb3eee",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4972-0e0508fa8d0b.md",
+            "sha256": "0e0508fa8d0bb93dc4b1a5186215fe0c8e6703ef2da269ca97566e5cf368eaeb",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4973-2fb7ebaade12.md",
+            "sha256": "2fb7ebaade12c0117e9f726745d8ec73fd615d8b99d0166f396e830437ec3bd7",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4974-99c831091c2b.md",
+            "sha256": "99c831091c2b5cd4287db01a1668be24f4e01426bedb6001b43b969fb7684abb",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4975-47ec3018dc4a.md",
+            "sha256": "47ec3018dc4a9ac97af1c2cb5c95e37013778764b9102615f9ad50611eec9e89",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4976-8f23f4b6bde6.md",
+            "sha256": "8f23f4b6bde6b9b9796b1b35403a37aa7ece9bc3747ece75b8f9ed397ced9366",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4977-4ba5996b63aa.md",
+            "sha256": "4ba5996b63aa2691ddd791a6aef43273494fc830c04de9a1b6d8f77c024795f1",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4978-60c526ee0cd8.md",
+            "sha256": "60c526ee0cd898663095b552894a065ead05aa436aa815bd18813f75e073461c",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4979-63966e071583.md",
+            "sha256": "63966e071583c27d1bd80cfbad47b49f0aa5c535bfb70aa27af8cb2b2f760046",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4980-b29e3bd321a1.md",
+            "sha256": "b29e3bd321a1357afe2e779c7e138986e96bef3258c4408d785fc06b11bb58f5",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4981-a05653da7d6c.md",
+            "sha256": "a05653da7d6cf5c2b36c780e9322e3ab336ef97178e21876d2fb20fc74fb8be0",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4982-0cca6b887182.md",
+            "sha256": "0cca6b887182b2d3abbd731a906726d05df4ab9916262d29dcef754f5d895b16",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4983-274cdb2ddc2b.md",
+            "sha256": "274cdb2ddc2b6672965d365d2cb98b0f7800db1e84f491bb2ec4436c2d98a6d1",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4984-dd7eba212246.md",
+            "sha256": "dd7eba212246efd893dbff32143a2c821576c7a704e1a697265213dc728d1f9a",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4985-18da440ab1c4.md",
+            "sha256": "18da440ab1c428796a98f3826d6a9c66e540abcbb40be45b4f54d585786bb090",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4986-1f25a697bee5.md",
+            "sha256": "1f25a697bee5a52222669b059dc52bad9bb4444670b903f3f3180f5446626a22",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4987-d0f32351bfe7.md",
+            "sha256": "d0f32351bfe743515b1a8db7ea6c2883c1474ff1123758fa1f3451fa028e6bf0",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4988-0b8be5746afe.md",
+            "sha256": "0b8be5746afef509b8e7044adc24626e661c5e5a10356ae911c4035af9f36330",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4989-0b0191f9e4ed.md",
+            "sha256": "0b0191f9e4edade408f1524ed60687b457e33d21f05721d600f6d25b5eb37e9a",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4990-be0e9432e2bb.md",
+            "sha256": "be0e9432e2bba9025471367aaebeba505c909a89a61ee86345dec4589dcf4b4f",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4991-1cb120d0ffcd.md",
+            "sha256": "1cb120d0ffcd13443f2abcc13e2fe64501b09343ef347c4e233c349553ffdce7",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4992-5973ef0574d7.md",
+            "sha256": "5973ef0574d7df8337f8647bd2752932839defa12f68c089687655d28c5c5ee3",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4993-6f38ebc623c7.md",
+            "sha256": "6f38ebc623c751637149cb3fc3c60b613e3d803231039a913cd8ce4f64add387",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4994-05cbbd6ba0c6.md",
+            "sha256": "05cbbd6ba0c6b1539f0021defd9ab32f96fc92da603235ef97403e2d9a111125",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4995-55a8d1e7f590.md",
+            "sha256": "55a8d1e7f5900576f89cdffed2819de4615f4ffc897354a99fba5c52aea895d1",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4996-0a3cc59ea122.md",
+            "sha256": "0a3cc59ea1220f753f26a4f46d93092609b102ce250d9946871728275ac0cec7",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4997-088d7f223720.md",
+            "sha256": "088d7f223720e570fd7ea27a8805208de71afe9e6d3e4cf4a97ad41ce4311ac0",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4998-06929d61de2f.md",
+            "sha256": "06929d61de2f91db7d723e7195bbc2e125e091c303c6e20cde0a4ba191da2ec5",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4999-b8c1bc03656b.md",
+            "sha256": "b8c1bc03656b411fa51065319f2f781186e2c9b916a38d8faeec5e7483962bc6",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-5000-b863304486bd.md",
+            "sha256": "b863304486bdbcd212192384d1c0cc0b2ab79d961a5417cc1d20bd6150352c0b",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-5001-b398b2628fb3.md",
+            "sha256": "b398b2628fb38f09508c1c50d11babb20bf708021aef461e3058729647b4e2d4",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-5002-f5c8f8bb2387.md",
+            "sha256": "f5c8f8bb2387796d32e1b60750f9e8af11267deb9a0aca09a68a2fcb494606b5",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-5003-a1c1eff80d8c.md",
+            "sha256": "a1c1eff80d8c58eb8eb1c240189daa0462d200650bc4dee7701212eaa865662c",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-5004-cc6de6bb9fcd.md",
+            "sha256": "cc6de6bb9fcdbe9f56dbeae8134c8caa07532cd6f71df0051d0d375db178e4a7",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-5005-b3b8a037c532.md",
+            "sha256": "b3b8a037c532800d75dac1f40243f220ab56d48795587141f06efa2ed6bdc1f0",
+            "role": "input"
+          },
+          {
+            "path": "docs/knowledge/perl-legacy-source-producer-partition.md",
+            "sha256": "a9548223dc8fd946d5214462b67012863cbedb3c569eb370ceb4aa212dbd8c05",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/dsl/actionir-lowering-mental-model.md",
+            "sha256": "7457647b892220ddf7b13d2af09fcca53cc978c8685d70d01016e7bb5987dc98",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/dsl/source-boundary-helper-reference.md",
+            "sha256": "5d84b72234dec305f645b459d47d739277826b2e68942e7cbc81d9098abe568c",
+            "role": "input"
+          },
+          {
+            "path": "doctrine/readme_stability/routes.jsonl",
+            "sha256": "c48b4d90f6bf8524bc49eb7d237814c610b1540b40f75c2210f93c1ad0236f50",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/Contracts.pm",
+            "sha256": "f062292c073f37817484fd77e54d763f9595618ecd7d05a5d592a4eca621c361",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/MethodExpr.pm",
+            "sha256": "b3775c83e30e3f9956430f026bf5fbd9ab275e4f51794ba1c9e5972196b0f406",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/Scanner.pm",
+            "sha256": "2e991add41a4325aec65eaa1a7c77904db2b5497292d134bf66d081cbc7579a6",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/Scanner/LegacyRules.pm",
+            "sha256": "81eebbba5f9ff48da857252f3f7962424a499b9616c0b5736f625753da02e962",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/ScannerCore.pm",
+            "sha256": "e301a561ee78289b33f52e27be10325aa8fc8fc52bc9b907ce2ee5d95c197332",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/RuleIR/EmitContext.pm",
+            "sha256": "f9f97eec8386bdf5571bcc4ac70ba6e42004d684b8c218328b42b42ec32dba13",
+            "role": "producer"
+          },
+          {
+            "path": "scripts/check_document_history.sh",
+            "sha256": "db277de703c12737a1c4eb7fe9ee591c8c7f22859cd780b6b173c4d861adb7bb",
+            "role": "producer"
+          },
+          {
+            "path": "scripts/check_readme_routing_pressure.pl",
+            "sha256": "c764d2f626bfb14db1919dc4af85827c61deec0c5fa98bb9e5aae354b7dfc083",
+            "role": "producer"
+          },
+          {
+            "path": "scripts/check_readme_stability.sh",
+            "sha256": "a0289f978b4e7fa29ec629392ffad22a33d625d8c530730ca06840d9b5c5d42e",
+            "role": "producer"
+          },
+          {
+            "path": "tools/check_claim_verification.py",
+            "sha256": "d283728bba09cab61714551d549019ea28b6a052c80184b54f6c1c3e65f6756b",
+            "role": "producer"
+          },
+          {
+            "path": "tools/project_data_env.sh",
+            "sha256": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73",
+            "role": "producer"
+          },
+          {
+            "path": "tools/project_data_run.sh",
+            "sha256": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f",
+            "role": "producer"
+          },
+          {
+            "path": "tools/read_document_history.pl",
+            "sha256": "11bfe195deb0375ecc1a1f6ad1f14a01be50138f12022132b1953b99b9432128",
+            "role": "producer"
+          },
+          {
+            "path": "tools/roll_document_history.pl",
+            "sha256": "3ac1dbb83f69272b870a6ab953e0fcafddf289e1aa6591a040c698f7e3b87521",
+            "role": "producer"
+          },
+          {
+            "path": "tools/run_python_project_data.sh",
+            "sha256": "0bc03bb8f4ce550397da9fda086215a1d9f6f452ec413605fbcb8976c06af604",
+            "role": "producer"
+          }
+        ]
+      }
+    },
+    {
+      "name": "granted-finite-engineering-note-rollover",
+      "statement": "Exactly three Granted scalars admit44 collection files and a43-line/26021-byte manifest. Governed clean segment4964 preserves201 lines/27233 bytes; final root144 lines/32359 bytes after removing only one final blank separator. All41 prior archive files and prior manifest rows remain byte-exact. Six reconstruction controls and seven actual production authority controls observe RED;18 actual threshold observations agree with independent scalar comparisons.",
+      "scope": "One exact engineering-note archive at clean da3d only; unchanged root/per-segment/aggregate budgets, stable route responsibility, other surfaces and all immutable prior history. Director Granted applies only to the retained three-scalar proposal. Actual production functions are extracted unchanged with in-memory staged-ADR fixtures; these bounded function checks do not replace normal resulting-tree doctrines or exact staged canonical CI. No later capacity, canonical or push waiver is inferred.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-capacity-review.py",
+        "granularity": "Every registry row/scalar and prior archive/manifest byte; full root reconstruction and exact new segment;18 actual threshold executions and seven actual indexed authority denials.",
+        "result": "3/44/43/26021 admission;201/27233 archive;144/32359 final root;41 prior archives exact;6 evidence RED/18 thresholds/7 authority RED PASS."
+      },
+      "falsify": {
+        "status": "checked",
+        "hypothesis": "Unrelated limit growth, changed prior history, altered source binding or missing exact indexed authority could be accepted as the approved finite rollover.",
+        "oracle": "Independent exact HEAD registry/manifest/archive/root byte reconstruction and literal approved scalar objects; actual unchanged production exceeds_limits and indexed ADR authorization functions.",
+        "red_control": "Six observed reason-specific RED controls corrupt new/prior archive bytes, prior manifest order, root bytes, unrelated aggregate capacity and source commit. Seven observed actual production RED controls remove added ADR/index, erase each old/new limits/contracts marker or deny reviewed authority. Actual new limits pass equality and reject plus-one for files, manifest lines and manifest bytes."
+      },
+      "durability": {
+        "status": "checked",
+        "mode": "live",
+        "inputs": [
+          {
+            "path": "DEVELOPMENT_NOTES.md",
+            "sha256": "29f362ac64eb3e69c8ab11682eaacc85f8b138469782e60d827908993b2e62b2",
+            "role": "input"
+          },
+          {
+            "path": "README_POLICY.md",
+            "sha256": "9e967c6a0de617945e0d4b39631103334cf2144875b96fd37ed98f93aada2686",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.0-capture.py",
+            "sha256": "d054f68eb1a892b56ec2db1d4b6c56bcfb0bce5ac9b9e4fdef225c2273ffb1fe",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-before-producer-claim.json",
+            "sha256": "0f4a0fa494e12c55f46bc0a077e3a17ff5e8eade3323a818149adbccdd881bb0",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-book-inputs.json",
+            "sha256": "759f5019ec4f753720e386b4a9fef52923b340529f1044e8dd6c34179288e12b",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-book-inputs.tar.gz",
+            "sha256": "d13cf5002eda16618936a9416c92d1d14e22fd5dccc0e5614c84292fa25dd184",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-book-verification.json",
+            "sha256": "e0e8899e5e45dbd4bc42ebefaa18d6bdc5fbd72146794415b3c97c4afa1c3f04",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-book.json",
+            "sha256": "c72934c41d6fce9a714bb5d1ed8f2f88bf6cca541a5234a9ae9ac35415ab57a5",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-book.py",
+            "sha256": "0ac1920d5300c21f8e3a2589357da206bb31a3af7257164eaae5730a8a906542",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-boundary-original.json",
+            "sha256": "c2a4ad7a58cc87aca9f465e2599ecbf1c32ab5d6f1ab0603a2901f0b29979b22",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-boundary-probe.pl",
+            "sha256": "a507365029e3a5f7a5a0f3fb9b72738d2fd805d783e1f8263d75060ba4d8dbb1",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-capacity-controls.json",
+            "sha256": "020527112980f173157c95b63c97bf1534929a786885f733d1dae603f560e71b",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-capacity-controls.pl",
+            "sha256": "b8b4d9a8499786ec387f9bf73aed8dc07d72041f4b2f66b5c940a945281262f8",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-capacity-decision.md",
+            "sha256": "23d5002b86edda97081f739f862818c53eac1bbed8d4bbf2f5e6f73b7c67ec95",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-capacity-proposal.json",
+            "sha256": "68470987380854b93663b331fdffc21e47053ca6d0a7700f5fc7beea02af25a6",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-capacity-proposal.py",
+            "sha256": "f9ce861bc0adc09e8c33676e3f7b10fb33f028c1e022f435f2334908b80deae5",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-capacity-publish.py",
+            "sha256": "debca0cb1ede8d52fee472066c5ea47e8e19d95014ff01e55ec1299083d047ac",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-capacity-review.py",
+            "sha256": "d9340ae58a67e7e4f54a6ea4b44cd209931600bcb11bf038a4ee5435f276f532",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-capacity-verification.json",
+            "sha256": "ae151f4d8d1515362c627903b5dc750bf421bbaa2cadcec4714e3b2f7dbfeaac",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-capture.py",
+            "sha256": "edc7d4fc7c10a16e2769898ddfbbbc349c59d825e1b7e754b60e123ba279e176",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-cases.json",
+            "sha256": "44f02bf4d0dfc839caa8062401ae8b2db71160223873a60deffdfdb589abf6e6",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-claim.py",
+            "sha256": "c02d59f25c52161feae3adcf5961f7ca8a8556e0cf7d0f68c3bfc89f1c0f4e79",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-exploratory.json",
+            "sha256": "2686a8d45ca7917877759d819b8fe45e259c7f57375fd04990b63c159a622fc7",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-freeze.json",
+            "sha256": "a51223fa9f06310e487fb873ace770e4337251b17898d787a495302145958fba",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-freeze.py",
+            "sha256": "5850dec5da76df9e06bd340727c678aa1064c5be08ebae9fe75e79986f9534b1",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-incomplete-boundary-probe.pl",
+            "sha256": "b718ddab39567708ed1218444f4252b47bb919d19d780a81d9e1fa4413d93986",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-incomplete-boundary.json",
+            "sha256": "d861e7a93ffe79264be2113683cfb0709969e9f9d21cd126cca3bdbe55600d2b",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-initial-book-inputs.json",
+            "sha256": "7958b702314053041643ecddf1aa879e3320a7917c2069ba536b06e50485e25c",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-initial-book-verification.json",
+            "sha256": "de5d4b036b7aeb4ad1765806e6bb4040eb4e048c2043afafe68fce119629a596",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-initial-book.json",
+            "sha256": "eececf08b881eaa4a9629bcf00044fa45a79b41b51280636227988afe611bda4",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-initial-book.py",
+            "sha256": "93f9acaa27d25d3cd2895d5fb93abb018e696286c192c5998ecc54aaa4a71dde",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-initial-boundary-probe.pl",
+            "sha256": "1534dbb5bd1b12295dc37a0bd20bfc9c8860dcc51213fb30bd65434f087fb0e6",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-initial-capacity-publish.py",
+            "sha256": "22e6f0cf3508343e16eddcddc287cdce2ddb0ce13b5c2f72f45475df448d5c2a",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-initial-cases.json",
+            "sha256": "0f7bc46eddda86854d726f5f12fcf9c0726e53bcc6769b64a161ff2e7a1f250b",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-initial-exploratory.json",
+            "sha256": "d4593eb91886a8b296c588976cfabbb66b562199d2a845c2f64e8d4e84b74f06",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-initial-inventory.py",
+            "sha256": "04ac988740705714bdffb0425d159335e583bf831c035d6b6897cf2f0727bb20",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-initial-oracle.py",
+            "sha256": "aec35193265688728c0bb88b20f1189daeb4bae18a40947300511296988846ad",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-inputs.json",
+            "sha256": "3a143b5a7e45bffdc980904d10fe40f497a6fac3ae78984d28410a96c589576d",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-inventory.json",
+            "sha256": "b1632c4623aa68550ceb57a17c27d1944d26a50c3f4a1f8a83b4901b8dc5812e",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-inventory.py",
+            "sha256": "4193972c257cef7cb2a64108b739b47c2b452dbb35f718590c57d06b2dfe4397",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-observations.json",
+            "sha256": "024a6c5716b2fbdbe3d2cd03d438ea68b37b62cd427fd790d67d1076a7339113",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-oracle.py",
+            "sha256": "baf3ced633b323c4589a26c609ea0316e344a9a8eac2c6309553b3bdb9b6c9dc",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-probe.pl",
+            "sha256": "8a61d8f530400d602ef74846439d929980da0c87d7302bf0af8e07709dfc8e76",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-proposed-note.md",
+            "sha256": "2420e9cec562c94862d0aa7ace47fb7120390aad3367f5d79074c368f5e253cc",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-review.py",
+            "sha256": "81a04add99fc5b9e48d8a659af4a79202bc7abbed60633838c1aa5a15c19fdc4",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-schema-review.json",
+            "sha256": "79643897d4846155b8b05f92f28db65dfd0c4f6d1d1062d39eb1a81b4d5b9c2e",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-schema-review.py",
+            "sha256": "9e0ec00438baa1e3fcfd70abcf10f88d1ef8408f486c6b76cbaa59fbfe62b563",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0-verification.json",
+            "sha256": "0de01cb04888ad159ee315dc278ec670348a763e4dd076ea63d943654b457b8e",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/0127-legacy-diagnosis-note-capacity.md",
+            "sha256": "23d5002b86edda97081f739f862818c53eac1bbed8d4bbf2f5e6f73b7c67ec95",
+            "role": "input"
+          },
+          {
+            "path": "docs/decisions/INDEX.md",
+            "sha256": "da3891ca99568ab7a31d27287fb4577c455be14c5d72188773aa64a785dc6281",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/manifest.jsonl",
+            "sha256": "650fa15087cb318afa8bd72836cded55f3076b6108ca2ec878b68a56a990707e",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4964-8783c6d63164.md",
+            "sha256": "8783c6d63164ded0745e6fd2e9cd9a440d71e3d5b682635b1b5573e126507f0e",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4965-eb7229ea8dfa.md",
+            "sha256": "eb7229ea8dfaeac4e049787f76c1b6b9f5570a5292fe83194eb34a2f28f94c34",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4966-43fddeef5cda.md",
+            "sha256": "43fddeef5cdad1dd30802ed9949088e21e3f29bc5caa50a6ca03d20b8cbbfec8",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4967-f52d344f119c.md",
+            "sha256": "f52d344f119cb7554f8377b5e3d9f5aa5e27a74e665470b9ac47c70e7dbef661",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4968-f62a72418c77.md",
+            "sha256": "f62a72418c776bdbe31e4dab43c7a16194dc751a0df5826a975a0dd8c41e4e1b",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4969-daedb2f87400.md",
+            "sha256": "daedb2f874009d1bbf3847deac57723b0684f9eb9bba6b7c7dad1e1adac6c6b1",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4970-d61f2b9e16b5.md",
+            "sha256": "d61f2b9e16b5faf19472983158c5cc1909a2569b82000d7d63aef8ea59eb62de",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4971-cca28e89f3a1.md",
+            "sha256": "cca28e89f3a16fd7a69ec5021674328ead902c04cc9a57eaa8aea3496efb3eee",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4972-0e0508fa8d0b.md",
+            "sha256": "0e0508fa8d0bb93dc4b1a5186215fe0c8e6703ef2da269ca97566e5cf368eaeb",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4973-2fb7ebaade12.md",
+            "sha256": "2fb7ebaade12c0117e9f726745d8ec73fd615d8b99d0166f396e830437ec3bd7",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4974-99c831091c2b.md",
+            "sha256": "99c831091c2b5cd4287db01a1668be24f4e01426bedb6001b43b969fb7684abb",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4975-47ec3018dc4a.md",
+            "sha256": "47ec3018dc4a9ac97af1c2cb5c95e37013778764b9102615f9ad50611eec9e89",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4976-8f23f4b6bde6.md",
+            "sha256": "8f23f4b6bde6b9b9796b1b35403a37aa7ece9bc3747ece75b8f9ed397ced9366",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4977-4ba5996b63aa.md",
+            "sha256": "4ba5996b63aa2691ddd791a6aef43273494fc830c04de9a1b6d8f77c024795f1",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4978-60c526ee0cd8.md",
+            "sha256": "60c526ee0cd898663095b552894a065ead05aa436aa815bd18813f75e073461c",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4979-63966e071583.md",
+            "sha256": "63966e071583c27d1bd80cfbad47b49f0aa5c535bfb70aa27af8cb2b2f760046",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4980-b29e3bd321a1.md",
+            "sha256": "b29e3bd321a1357afe2e779c7e138986e96bef3258c4408d785fc06b11bb58f5",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4981-a05653da7d6c.md",
+            "sha256": "a05653da7d6cf5c2b36c780e9322e3ab336ef97178e21876d2fb20fc74fb8be0",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4982-0cca6b887182.md",
+            "sha256": "0cca6b887182b2d3abbd731a906726d05df4ab9916262d29dcef754f5d895b16",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4983-274cdb2ddc2b.md",
+            "sha256": "274cdb2ddc2b6672965d365d2cb98b0f7800db1e84f491bb2ec4436c2d98a6d1",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4984-dd7eba212246.md",
+            "sha256": "dd7eba212246efd893dbff32143a2c821576c7a704e1a697265213dc728d1f9a",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4985-18da440ab1c4.md",
+            "sha256": "18da440ab1c428796a98f3826d6a9c66e540abcbb40be45b4f54d585786bb090",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4986-1f25a697bee5.md",
+            "sha256": "1f25a697bee5a52222669b059dc52bad9bb4444670b903f3f3180f5446626a22",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4987-d0f32351bfe7.md",
+            "sha256": "d0f32351bfe743515b1a8db7ea6c2883c1474ff1123758fa1f3451fa028e6bf0",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4988-0b8be5746afe.md",
+            "sha256": "0b8be5746afef509b8e7044adc24626e661c5e5a10356ae911c4035af9f36330",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4989-0b0191f9e4ed.md",
+            "sha256": "0b0191f9e4edade408f1524ed60687b457e33d21f05721d600f6d25b5eb37e9a",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4990-be0e9432e2bb.md",
+            "sha256": "be0e9432e2bba9025471367aaebeba505c909a89a61ee86345dec4589dcf4b4f",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4991-1cb120d0ffcd.md",
+            "sha256": "1cb120d0ffcd13443f2abcc13e2fe64501b09343ef347c4e233c349553ffdce7",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4992-5973ef0574d7.md",
+            "sha256": "5973ef0574d7df8337f8647bd2752932839defa12f68c089687655d28c5c5ee3",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4993-6f38ebc623c7.md",
+            "sha256": "6f38ebc623c751637149cb3fc3c60b613e3d803231039a913cd8ce4f64add387",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4994-05cbbd6ba0c6.md",
+            "sha256": "05cbbd6ba0c6b1539f0021defd9ab32f96fc92da603235ef97403e2d9a111125",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4995-55a8d1e7f590.md",
+            "sha256": "55a8d1e7f5900576f89cdffed2819de4615f4ffc897354a99fba5c52aea895d1",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4996-0a3cc59ea122.md",
+            "sha256": "0a3cc59ea1220f753f26a4f46d93092609b102ce250d9946871728275ac0cec7",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4997-088d7f223720.md",
+            "sha256": "088d7f223720e570fd7ea27a8805208de71afe9e6d3e4cf4a97ad41ce4311ac0",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4998-06929d61de2f.md",
+            "sha256": "06929d61de2f91db7d723e7195bbc2e125e091c303c6e20cde0a4ba191da2ec5",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-4999-b8c1bc03656b.md",
+            "sha256": "b8c1bc03656b411fa51065319f2f781186e2c9b916a38d8faeec5e7483962bc6",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-5000-b863304486bd.md",
+            "sha256": "b863304486bdbcd212192384d1c0cc0b2ab79d961a5417cc1d20bd6150352c0b",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-5001-b398b2628fb3.md",
+            "sha256": "b398b2628fb38f09508c1c50d11babb20bf708021aef461e3058729647b4e2d4",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-5002-f5c8f8bb2387.md",
+            "sha256": "f5c8f8bb2387796d32e1b60750f9e8af11267deb9a0aca09a68a2fcb494606b5",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-5003-a1c1eff80d8c.md",
+            "sha256": "a1c1eff80d8c58eb8eb1c240189daa0462d200650bc4dee7701212eaa865662c",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-5004-cc6de6bb9fcd.md",
+            "sha256": "cc6de6bb9fcdbe9f56dbeae8134c8caa07532cd6f71df0051d0d375db178e4a7",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/development-notes/segment-5005-b3b8a037c532.md",
+            "sha256": "b3b8a037c532800d75dac1f40243f220ab56d48795587141f06efa2ed6bdc1f0",
+            "role": "input"
+          },
+          {
+            "path": "docs/knowledge/perl-legacy-source-producer-partition.md",
+            "sha256": "a9548223dc8fd946d5214462b67012863cbedb3c569eb370ceb4aa212dbd8c05",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/dsl/actionir-lowering-mental-model.md",
+            "sha256": "7457647b892220ddf7b13d2af09fcca53cc978c8685d70d01016e7bb5987dc98",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/dsl/source-boundary-helper-reference.md",
+            "sha256": "5d84b72234dec305f645b459d47d739277826b2e68942e7cbc81d9098abe568c",
+            "role": "input"
+          },
+          {
+            "path": "doctrine/readme_stability/routes.jsonl",
+            "sha256": "c48b4d90f6bf8524bc49eb7d237814c610b1540b40f75c2210f93c1ad0236f50",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/Contracts.pm",
+            "sha256": "f062292c073f37817484fd77e54d763f9595618ecd7d05a5d592a4eca621c361",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/MethodExpr.pm",
+            "sha256": "b3775c83e30e3f9956430f026bf5fbd9ab275e4f51794ba1c9e5972196b0f406",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/Scanner.pm",
+            "sha256": "2e991add41a4325aec65eaa1a7c77904db2b5497292d134bf66d081cbc7579a6",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/Scanner/LegacyRules.pm",
+            "sha256": "81eebbba5f9ff48da857252f3f7962424a499b9616c0b5736f625753da02e962",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/ScannerCore.pm",
+            "sha256": "e301a561ee78289b33f52e27be10325aa8fc8fc52bc9b907ce2ee5d95c197332",
+            "role": "producer"
+          },
+          {
+            "path": "perl/LinkedSpec/RuleIR/EmitContext.pm",
+            "sha256": "f9f97eec8386bdf5571bcc4ac70ba6e42004d684b8c218328b42b42ec32dba13",
+            "role": "producer"
+          },
+          {
+            "path": "scripts/check_document_history.sh",
+            "sha256": "db277de703c12737a1c4eb7fe9ee591c8c7f22859cd780b6b173c4d861adb7bb",
+            "role": "producer"
+          },
+          {
+            "path": "scripts/check_readme_routing_pressure.pl",
+            "sha256": "c764d2f626bfb14db1919dc4af85827c61deec0c5fa98bb9e5aae354b7dfc083",
+            "role": "producer"
+          },
+          {
+            "path": "scripts/check_readme_stability.sh",
+            "sha256": "a0289f978b4e7fa29ec629392ffad22a33d625d8c530730ca06840d9b5c5d42e",
+            "role": "producer"
+          },
+          {
+            "path": "tools/check_claim_verification.py",
+            "sha256": "d283728bba09cab61714551d549019ea28b6a052c80184b54f6c1c3e65f6756b",
+            "role": "producer"
+          },
+          {
+            "path": "tools/project_data_env.sh",
+            "sha256": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73",
+            "role": "producer"
+          },
+          {
+            "path": "tools/project_data_run.sh",
+            "sha256": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f",
+            "role": "producer"
+          },
+          {
+            "path": "tools/read_document_history.pl",
+            "sha256": "11bfe195deb0375ecc1a1f6ad1f14a01be50138f12022132b1953b99b9432128",
+            "role": "producer"
+          },
+          {
+            "path": "tools/roll_document_history.pl",
+            "sha256": "3ac1dbb83f69272b870a6ab953e0fcafddf289e1aa6591a040c698f7e3b87521",
+            "role": "producer"
+          },
+          {
+            "path": "tools/run_python_project_data.sh",
+            "sha256": "0bc03bb8f4ce550397da9fda086215a1d9f6f452ec413605fbcb8976c06af604",
+            "role": "producer"
+          }
+        ]
+      }
+    }
+  ]
+}

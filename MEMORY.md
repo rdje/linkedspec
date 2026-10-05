@@ -1,10 +1,10 @@
 # MEMORY
 
-- activation_commit: `da3d34945d5067410b79f51782395f15b5184ff4` — clean Legacy diagnosis activation base.
-- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0 - diagnose Legacy source families`.
-- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0` (done) — original Legacy source diagnosis and Granted finite note admission.
+- activation_commit: `f3a49dd82794c494625e33fe83ccf6cf01b4df8e` — clean daily artifact-review activation.
+- latest_completed_leaf: `REPO-HYGIENE.10 - retain daily artifact census`.
+- active_work_unit: `REPO-HYGIENE.10` (done) — dated parent/Rust metadata review, zero removals and retained evidence/cache.
 - next_action: Activate Legacy .1.4.1 from clean committed HEAD; preserve existing return_general and verify original source/reference/callback behavior for eight call/return/push contracts.
-- in_flight_uncommitted: none — intended clean canonical landing; no required job remains after commit.
+- in_flight_uncommitted: none — intended clean focused landing; no required job remains after commit.
 - blockers: No access/decision blocker. Matches and attached/marker/value/null/while executors are repaired; control parent/order and raw-expression reporting are reconciled; quoted/comment readiness .7.2/.3 precedes dispatcher/full execution. Other startup repairs remain separate.
   Wrapper startup .7 remains open; recovery/purge stay prohibited.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the

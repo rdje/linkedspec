@@ -20,7 +20,7 @@
       },
       "durability": {
         "status": "checked",
-        "mode": "live",
+        "mode": "historical",
         "inputs": [
           {
             "path": "DEVELOPMENT_NOTES.md",
@@ -582,7 +582,8 @@
             "sha256": "0bc03bb8f4ce550397da9fda086215a1d9f6f452ec413605fbcb8976c06af604",
             "role": "producer"
           }
-        ]
+        ],
+        "revision": "f3a49dd82794c494625e33fe83ccf6cf01b4df8e"
       }
     },
     {
@@ -603,7 +604,7 @@
       },
       "durability": {
         "status": "checked",
-        "mode": "live",
+        "mode": "historical",
         "inputs": [
           {
             "path": "DEVELOPMENT_NOTES.md",
@@ -1165,7 +1166,8 @@
             "sha256": "0bc03bb8f4ce550397da9fda086215a1d9f6f452ec413605fbcb8976c06af604",
             "role": "producer"
           }
-        ]
+        ],
+        "revision": "f3a49dd82794c494625e33fe83ccf6cf01b4df8e"
       }
     }
   ]

@@ -2,11 +2,11 @@
 
 ## Current Activity
 
-Full PNT: original Legacy diagnosis and Granted finite engineering-note prerequisite verified; exact canonical landing governs completion. Six source families and quoted-boundary P1 repair are owned; production/spec/standard tests remain unchanged.
+Full PNT: due artifact maintenance is verified; Legacy call/return/push source hooks follow from a clean committed activation. Production/runtime/dependency mechanisms remain unchanged by maintenance.
 
 ## Latest Completed Slice
 
-`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0` — Original Legacy .1.4.0 verifies4252 immutable inputs/three exact overlays/four guarded commands;112 contracts/115 cases/227 events/two origins per seed/103 groups/123 RED. Six safe families are owned. Granted ADR0127 admits only three engineering-note scalars with exact rollover/18 production thresholds/13 RED controls; exact canonical receipt gates landing. Complete58-input book renders19 original examples/three chapters with20 RED controls;108 prior hashes verify before historical freeze. Prior41 archive files and manifest records remain byte-exact. Runtime implementation follows from a clean activation.
+`REPO-HYGIENE.10` — Dated 2026-10-05T23:43:45.934735+00:00 census retains 8931 parent candidates/12619808609 bytes and excludes nine nested repositories. Rust release is absent, deps has zero log/bin files, incremental retains 483 rows/2390808555 bytes. Fresh scoped census and independent lstat agree; two metadata/four actual-channel/five render controls reject. Zero removals; complete58-input book renders one example. Two Legacy claims freeze at clean f3a49dd with224 original bindings/112 unique hashes.
 
 ## Next Action
 
@@ -14,6 +14,7 @@ Activate Legacy .1.4.1 from clean committed HEAD and retain original source iden
 
 ## Recent Completions
 
+- `REPO-HYGIENE.10` — due retained parent/Rust census, zero removals and original Legacy claim freeze.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0` — original112-contract/115-case diagnosis; Granted three-scalar note rollover.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.3` — immutable Flow acceptance;16 contracts/147 origins/138 frames/837 groups/31 RED controls.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.2.1` — recursive Flow origins; RED6/GREEN7/1180 groups/147 origins/48 unchanged pairs.
@@ -29,7 +30,6 @@ Activate Legacy .1.4.1 from clean committed HEAD and retain original source iden
 - `2026-10-05` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.2.1` accepts3921-input immutable20-contract recurrence/144 groups behind exact canonical family landing.
 - `2026-10-05` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.2.0` verifies20 mixed contracts/147 origins/129 frames and144 consumer groups with27 proof/render controls.
 - `2026-10-05` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.3` accepts3864-input statement recurrence,80 fixture groups/111 origins and canonical family landing.
-- `2026-10-04` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.2` retains111 origins/29 GREEN, fixes foreign-source authority and verifies1148 guarded consumer groups.
 
 ## History
 
