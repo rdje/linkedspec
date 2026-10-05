@@ -1,0 +1,19 @@
+{
+  "command": [
+    "bash",
+    "scripts/check_claim_verification.sh"
+  ],
+  "exit": 1,
+  "authority": "Observed completion of exec session64359; tool-returned combined text copied exactly.",
+  "tool_output": {
+    "encoding": "gzip-base64",
+    "bytes": 203,
+    "sha256": "deb62c76cb19b363cab8cc697187e9ade04097d3cc0a0d7aa94aae19e20eb66f",
+    "data": "H4sIAAAAAAAC/22OQQrCMBRE9z3Fv0BiY0Ghu1DSUqixkHqAkH4hEhtNYtHbG3HjQmYxM4t5jHHaXsmKwZ6t0cn6pYaW90MNahQNGbjsTrwTRImhJc1RTryXByEnymiVVdI93WaVubPsrAZ8apPcC/yC0Hzo8EuHGY3T4ZsD3h824FyYPy8iujNJGBOMXCmo4OajTXZF2ADb5e0FTcIZjF9S8C4Wb2KhK5vLAAAA"
+  },
+  "checker": "tools/check_claim_verification.py",
+  "checker_sha256": "d283728bba09cab61714551d549019ea28b6a052c80184b54f6c1c3e65f6756b",
+  "initial_committed_revision": "77444c8d2372bf2cd1bbce29022b62c9c8f72e9d",
+  "later_staged_diff_sha256": "d13a6ab7d9391a19e644d1666868a6e6a3d912e9c98d197ad7121ced05478e4a",
+  "scope": "Index staging occurred while this background check was in flight. The checker caches index blob IDs at entry, then selects the owner from the later live index; the current staged node has its declaration. Original cached blob IDs were not retained, so the precise earlier read boundary is not claimed recovered. This is a source-backed sequencing diagnosis, not a new checker repair or complete original-input claim. Rerun only after staging completes and keep the index unchanged."
+}

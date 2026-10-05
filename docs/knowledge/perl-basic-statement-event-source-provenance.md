@@ -10,7 +10,7 @@ answers:
   - "how do nested basic statement scans restore outer source frames"
   - "does statement source provenance classify executable comments or quoted text"
 date: 2026-10-04
-status: eleven producer hooks verified under .2; statement-family acceptance .3 verified with canonical landing requirement; mixed focused proof verified; canonical wider closeout separately owned
+status: eleven producer hooks verified under .2; statement-family acceptance .3 verified with canonical landing requirement; mixed and immutable wider recurrence verified; exact canonical receipt gates family closeout
 tags: [perl, actionir, statements, source-provenance, identity, unicode]
 evidence: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.2 retains actual29-group RED21/GREEN0,66 full compiler pairs with unchanged public objects,177 unchanged source frames and111 exact event origins across22 authored cases/three seeds. Complete3811 immutable regular Git inputs plus two common overlays and two after-only production replacements supply3813 members. Sixteen independent source/event/compiler/channel corruptions reject."
 reverify:
@@ -84,5 +84,5 @@ exact staged canonical CI repeats after repair. Follow python-replay-traceback-s
 The mixed .1.1.2.0 proof independently supplies all twenty BasicRules contracts in
 one original action:147 event origins/129 splitter frames under three seeds, exact
 original argument/event references and144 unchanged consumer groups. Follow
-perl-basic-family-mixed-source-provenance; .1.1.2.1 owns canonical recurrence/parent
-closeout. The prior statement-family claim freezes historically at318457.
+perl-basic-family-mixed-source-provenance; .1.1.2.1 independently verifies the full
+immutable recurrence and gates parent closeout with the exact canonical receipt. The prior statement-family claim freezes historically at318457.

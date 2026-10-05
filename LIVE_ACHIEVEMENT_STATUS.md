@@ -2,17 +2,19 @@
 
 ## Current Activity
 
-Full PNT: the mixed twenty-contract BasicRules source/argument/occurrence proof is established without production changes. Canonical family recurrence and parent closeout follow before remaining provenance/membership work.
+Full PNT: all twenty BasicRules private provenance contracts are independently composed. Remaining PrimitivePipelineRules source provenance follows before recursive/legacy/staged producer and executable membership/replacement work.
 
 ## Latest Completed Slice
 
-`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.2.0` — One literal mixed source composes all20 BasicRules contracts under three seeds:60 ordered public/private contract pairs,147 original event/argument identities and scalar origins,129 statement frames, unchanged callback sequences and three clean complete Toolbox streams. Eight unchanged source/scanner/AST/order/raw suites pass144 full groups; three foreign-source probes retain events with zero invented origins. Twenty reason-specific controls observe RED. Complete3899 immutable regular Git inputs plus three explicit overlays are recoverable and guarded before/after all7 actual commands. The initial nonexistent test-path prove exit2 retains original producer/manifest/full channels as incomplete evidence; the corrected existing ordering suite is verified. Complete58-input book renders five original examples/two chapters with seven controls;53 original statement-family input hashes verify before historical-only freeze at318457. Production/spec/standard tests/CI/dependencies remain unchanged.
+`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.2.1` — Fresh immutable77444c recurrence supplies all3921 regular Git inputs/no overlays, full channels and before/after guards for7 actual commands. Three seeds retain60 ordered public/private pairs,147 original event/argument references and scalar origins,129 frames, unchanged callbacks and exact prior complete Toolbox streams. Eight unchanged suites pass144 full groups; three foreign-source probes retain events without origins. Twenty reason-specific RED controls reject false acceptance. Complete58-input book renders five original examples/two chapters/eight controls;38 prior mixed-claim input hashes verify before historical-only freeze. Earlier premature reviewer timing evidence retains combined failure with explicit original-input limits; final stable review passes. Known outer book setpgid warning retains startup .7 ownership and no group-establishment claim. Overlapping pre-stage claim check retains missing-declaration failure with unrecorded original-index limits; its mixed cached/live source readers require serialized staging. First canonical exit143/diff/log are preserved without a pass; corrected stable candidate requires a fresh gate. Production/spec/tests/CI/hooks/dependencies stay unchanged. Exact staged canonical CI receipt gates BasicRules .1.1/.1.1.2 closeout before landing.
 
 ## Next Action
 
-Activate `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.2.1` from clean HEAD; independently recur the committed mixed proof and run exact staged canonical CI before closing the BasicRules family. Remaining producers, executable membership, replacement, marker/comments and trace repairs retain separate owners.
+Activate `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2` from clean HEAD; inspect published scanner contracts and exact pipeline/frame constructors, then split bounded source-provenance leaves before implementation. Literal receivers and structured plans must remain original. Recursive/legacy/staged producers, membership/replacement, marker/comments and trace retain separate owners.
 
 ## Recent Completions
+
+- `2026-10-05` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.2.1` accepts3921-input immutable20-contract recurrence/144 groups behind exact canonical family landing.
 
 - `2026-10-05` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.2.0` verifies20 mixed contracts/147 origins/129 frames and144 consumer groups with27 proof/render controls.
 
@@ -43,8 +45,6 @@ Activate `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.2.1` from clean HEA
 - `2026-10-04` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1` canonically lands source-unit raw reporting/spans/legacy ownership at363c79109.
 
 - `2026-10-03` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.0` freezes nested raw/source-occurrence diagnosis and owns comment classification.
-
-- `2026-10-03` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.1` preserves pending scan occurrences; exact canonical receipt gates landing.
 
 ## History
 

@@ -1,0 +1,35 @@
+{
+  "command": [
+    "bash",
+    "tools/run_python_project_data.sh",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.2.1-book.py"
+  ],
+  "exit": 0,
+  "channel_kind": "Tool-returned combined outer invocation output; stdout/stderr separation unavailable",
+  "tool_output": {
+    "encoding": "gzip-base64",
+    "bytes": 214,
+    "sha256": "62a1417b8c8efe3e4d3d92723f73fde9f422284048b912e1cedb89a79769be6a",
+    "data": "H4sIAAAAAAAC/x2OwWrDMBBE7/mKPaaXCJKmBPfqnAM19BpkaWNvLe8Kadz286vm9gYeM+M+LW0rVzcMvestNFZUNwnmbXRJdOFYMwcHs1RdLvbFAffo4e9l00OdOwqzpEiVkSeJtH89nd+OBKMnvHR0y1w8xJTUQC2sAnDcnS8UbM2JwTSaLSSaN9R3esg3kxWZRH2iwhq5cCT+9f92dfixNuozuDSbZZpBH9e+tSlKu7n7AwBa/L7WAAAA"
+  },
+  "inputs": [
+    {
+      "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.2.1-book.py",
+      "sha256": "59576b11e34730879c55f7be7d0ed2885d06c55c002fca82fe8fc745602054dd"
+    },
+    {
+      "path": "tools/project_data_run.sh",
+      "sha256": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f"
+    },
+    {
+      "path": "tools/run_python_project_data.sh",
+      "sha256": "0bc03bb8f4ce550397da9fda086215a1d9f6f452ec413605fbcb8976c06af604"
+    },
+    {
+      "path": "tools/project_data_env.sh",
+      "sha256": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73"
+    }
+  ],
+  "repair_owner": "SESSION-STARTUP-READING.7",
+  "scope": "Known managed child-side setpgid warning with actual successful book completion. Original child PID43562/PGID was not independently inspected. No group-establishment, lifecycle or kernel-cause conclusion; no recovery/purge/deletion. Complete inner mdBook channels/render inputs are retained separately in book.json/manifest/capsule."
+}

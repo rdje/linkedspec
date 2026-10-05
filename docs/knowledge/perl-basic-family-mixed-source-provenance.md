@@ -7,11 +7,11 @@ answers:
   - "how many occurrences and frames are in the mixed BasicRules oracle"
   - "where is the combined BasicRules canonical closeout owned"
 date: 2026-10-05
-status: focused mixed proof verified; canonical family recurrence .1.1.2.1 remains separately owned
+status: independent immutable family recurrence verified; exact canonical receipt gates BasicRules parent closeout
 tags: [perl, actionir, scanner, source-provenance, identity, unicode]
 evidence: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.2.0 authors one literal mixed input:43 statements/49 selected event occurrences per seed, all20 BasicRules contracts. Three seeds retain147 origins/129 frames and exact original event/argument references. Eight unchanged suites pass144 groups; twenty reason-specific evidence corruptions observe RED."
 reverify:
-  - "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.2.0-review.py"
+  - "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.2.1-review.py"
 ---
 
 The literal oracle puts all nine regex forms inside one quoted assignment, then all
@@ -40,5 +40,8 @@ The initial driver used a nonexistent ordering-test path and exited2 after five 
 Its original source, manifest and full prove channels remain separately incomplete.
 The corrected existing canonical_event_occurrence_order suite runs in the fresh complete
 eight-suite proof. This repairs the harness selection, without changing production.
-Canonical recurrence and BasicRules parent closeout belong to .1.1.2.1; remaining scanner
+Independent immutable recurrence under .1.1.2.1 supplies3921 regular inputs/no overlays,
+retains the exact prior complete Toolbox streams and independently passes all twenty
+controls and144 original groups. All38 earlier claim inputs freeze historically at77444c.
+Exact staged canonical CI receipt gates BasicRules parent closeout before landing; remaining scanner
 families and executable membership/comment/replacement repairs retain their own leaves.

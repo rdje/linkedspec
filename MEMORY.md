@@ -1,10 +1,10 @@
 # MEMORY
 
-- activation_commit: `318457e6e62683d485ded02bdbe9566931aaca97` — clean mixed-family proof activation base.
-- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.2.0 - verify mixed basic source proof`.
-- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.2.1` (pending) — canonical twenty-contract BasicRules family recurrence.
-- next_action: Activate .1.1.2.1 from clean HEAD; independently recur the committed mixed source/argument/occurrence proof and run exact staged canonical CI before BasicRules parent closeout.
-- in_flight_uncommitted: None; focused twenty-contract mixed proof is committed. No jobs or deletions.
+- activation_commit: `77444c8d2372bf2cd1bbce29022b62c9c8f72e9d` — clean BasicRules canonical recurrence activation base.
+- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.2.1 - accept basic source family`.
+- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2` (pending) — remaining PrimitivePipelineRules source provenance.
+- next_action: Activate .1.2 from clean HEAD; inspect the remaining pipeline contract/frame constructors and split bounded provenance leaves before implementation, preserving literal receivers and structured plans.
+- in_flight_uncommitted: None; twenty-contract BasicRules recurrence and canonical family closeout are committed. No jobs or deletions.
 - blockers: No access/decision blocker. Matches and attached/marker/value/null/while executors are repaired; control parent/order and raw-expression reporting are reconciled; quoted/comment readiness .7.2/.3 precedes dispatcher/full execution. Other startup repairs remain separate.
   Wrapper startup .7 remains open; recovery/purge stay prohibited.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the

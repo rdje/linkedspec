@@ -1,0 +1,13 @@
+{
+  "exit": 1,
+  "channel_kind": "Tool-returned combined output; stdout/stderr separation unavailable",
+  "tool_output": {
+    "encoding": "gzip-base64",
+    "bytes": 816,
+    "sha256": "52b7e905d61091385e57aa9a221b60d4c8ceb3e48f95786c832f481de514b976",
+    "data": "H4sIAAAAAAAC/81S32vCMBB+9684fFGhP6wThjIHRasIro6182WsI6a3GUyTkqSbe9nfvrRuMhjsZS9+93CX3OXu+8KlilDcErqHbiG1AYUUhQFKOAdOtOmNWwBzxhHa/kbyqkDtJ8nMn0lqY2G0/8LMrtr6nIk95rpE6ueSap/ukO5LyeqS5DaauqswXtyHi8hNotXcna7jNFzGN1GceoF3Ya3vXXoDa317DqwPXIWvDN+88r3tgG2PMOiPHGACrgqZVxyvLTWAgjDR7TXhh0WWnRHhYHgkXHNsGDZDnhSWUpnu0Tk2K9gz2r8+ifhG9gtnJG40bLT9lNQIIFqjqjepvnnoUFmUHA12HoFpSFWFQER+StdtNZPCpicTuIs2y2S5jh04vQM8EGpcLStF0S5maSqFnWbSF7L/oBU2dC2DSCmpxvDn3NYn6LrJ5zADAAA="
+  },
+  "producer": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.2.1-review.py",
+  "producer_sha256": "43f65b01b504dcc6403c9548da235e32d182375f33fb0d5f99e7a92ae377e8a7",
+  "scope": "Premature reviewer launch observed incomplete-capture rejection. Concurrent in-flight observation bytes were not retained at the read boundary; no complete input closure or diagnostic reproduction claim. Final acceptance reruns only after successful capture completion."
+}

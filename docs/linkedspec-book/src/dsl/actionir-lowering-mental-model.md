@@ -398,8 +398,13 @@ including the existing callback, nested collector, opaque result, foreign-source
 caller-error guards. Actual full output channels and immutable source inputs are retained;
 twenty distinguishing controls reject missing or altered occurrences, arguments, references,
 callbacks, inputs and incomplete or failed results. The initial missing-test-path harness
-failure stays recorded as incomplete evidence. Canonical recurrence and BasicRules parent
-closeout remain separately owned. This composition does not classify executable text,
+failure stays recorded as incomplete evidence. A fresh immutable Git recurrence repeats all twenty contracts from the committed
+mixed-proof boundary with no overlays. It independently validates the complete source
+population and preserves the exact prior Toolbox channels under all three seeds, alongside
+all eight original test plans, occurrence/argument/reference checks and foreign-source
+guards. The exact staged canonical CI receipt gates BasicRules family closeout before
+landing. Other scanner families still require their own producer frames and independent
+composition before executable membership and source replacement can be repaired. This composition does not classify executable text,
 repair comment semantics or activate source replacement.
 
 
