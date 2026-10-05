@@ -12,6 +12,12 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-10-05 — pipeline regex constructor source identity (SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.1.0)
+
+Full-input regex coordinates and raw expressions are captured before parser/array-plan callbacks; the existing recorder receives each original event/argument object. Existing set_value remains untouched. One immutable Git population plus equal new fixture/original-owner overlays gives two3968-file boundaries; only the candidate PrimitivePipelineRules bytes differ. Three seed pairs retain all original event args/callback plans and full substitution/descriptor/dump channels while authored origins grow9-to99. The regression keeps observed original10-of13 failures and current13 GREEN;701 direct consumers and Phase01034 complete. Reviewer fixes suite plans to the original committed701-group oracle, binds all imported case/probe/input owners, rejects23 evidence corruptions and admits no additional input replacement.
+
+The original null split source metadata remains unchanged until .1.2.1.1. ArrayPipeline's binding split_value and legacy split construction both consume source_expr, while the scanner reads source_symbol; repair metadata explicitly and preserve lowerings without admitting the removed aggregate selector. Eight statement frame hooks and canonical family closeout stay separate. Complete book publication is captured independently; no rendered example is relabeled a native-execution measurement. See perl-pipeline-regex-source-provenance and the historical diagnosis card.
+
 ## 2026-10-05 — original pipeline source/plan diagnosis (SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.0)
 
 The literal mixed oracle selects69 events/45 statement frames per seed: eleven full-input regex contracts, eight statement contracts, both nested-assignment/value-drop constructors and standalone array value drops. Only set_value records origins; original public/private callback arguments and actual results match. Immutable Git population plus four explicit overlays binds every fresh command; independent Git object/content/mode/population, literal raw/args/interval/plan and complete TAP/channel checks reject22 corruptions. Source hooks must retain exact original default-callback arguments and quoted syntactic matches before executable-membership repair.

@@ -95,6 +95,7 @@ sub _scan_contract_push {
  my ($code) = @_;
  my @events;
 while ($code =~ /\b(?<expr>push\s*(?<PAREN>\((?:[^\(\)\"\\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^'])*\'|(?&PAREN))*\)))/g) {
+ my ($source_start, $source_end) = ($-[0], $+[0]);
  my $raw_expr = $+{expr};
  my $call = _parse_method_function_expr($raw_expr);
  next unless $call && $call->{method} eq 'push';
@@ -125,7 +126,9 @@ while ($code =~ /\b(?<expr>push\s*(?<PAREN>\((?:[^\(\)\"\\']++|\"(?:\\.|[^\"])*\
   $target_symbol = $1;
  }
  next unless defined($target_symbol) && length($target_symbol);
- push @events, {raw => $raw_expr, args => {target => $target_symbol, value => $value_expr}};
+ push @events, LinkedSpec::ActionIR::ScannerCore::_record_scanned_source_event(
+  {raw => $raw_expr, args => {target => $target_symbol, value => $value_expr}},
+  $code, $source_start, $source_end);
 }
  return \@events
 }
@@ -424,7 +427,14 @@ sub _scan_contract_regex_subst {
  my ($code) = @_;
  my @events;
 while ($code =~ /\b(?:substr|regex_subst)\s*\(\s*(?:(?<scope>\w+)\s*,\s*)?(?<target>:\w+|\w+)\s*,\s*(?<pattern>(?:\"(?:\\.|[^\"])*\"|'(?:\\.|[^'])*'|\/(?:\\.|[^\/])*\/))\s*,\s*(?<replacement>(?:\"(?:\\.|[^\"])*\"|'(?:\\.|[^'])*'|\/\/|\/(?:\\.|[^\/])*\/))\s*,\s*(?<flags>\w*)\s*\)/g) {
- push @events, {raw => $&, args => {scope => $+{scope}, target => $+{target}, pattern => $+{pattern}, replacement => $+{replacement}, flags => $+{flags}}};
+ my ($source_start, $source_end) = ($-[0], $+[0]);
+ push @events, LinkedSpec::ActionIR::ScannerCore::_record_scanned_source_event({
+  raw => $&,
+  args => {
+   scope => $+{scope}, target => $+{target}, pattern => $+{pattern},
+   replacement => $+{replacement}, flags => $+{flags},
+  },
+ }, $code, $source_start, $source_end);
 }
  return \@events
 }
@@ -433,18 +443,20 @@ sub _scan_contract_split_array {
  my ($code) = @_;
  my @events;
 while ($code =~ /\b(?<expr>split\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/g) {
- my $pipeline = _build_array_pipeline_plan_from_expr($+{expr});
+ my ($source_start, $source_end) = ($-[0], $+[0]);
+ my $raw_expr = $+{expr};
+ my $pipeline = _build_array_pipeline_plan_from_expr($raw_expr);
  next unless $pipeline && @{$pipeline->{ops} || []};
  my $last_op = $pipeline->{ops}[-1];
  next unless $last_op->{op} && $last_op->{op} eq 'split';
- push @events, {
-  raw => $+{expr},
+ push @events, LinkedSpec::ActionIR::ScannerCore::_record_scanned_source_event({
+  raw => $raw_expr,
   args => {
    target    => $pipeline->{target_symbol},
    source    => $last_op->{source_symbol},
    delimiter => $last_op->{delimiter_expr},
   },
- };
+ }, $code, $source_start, $source_end);
 }
  return \@events
 }
@@ -453,17 +465,19 @@ sub _scan_contract_split_each {
  my ($code) = @_;
  my @events;
 while ($code =~ /\b(?<expr>split_each\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/g) {
- my $pipeline = _build_array_pipeline_plan_from_expr($+{expr});
+ my ($source_start, $source_end) = ($-[0], $+[0]);
+ my $raw_expr = $+{expr};
+ my $pipeline = _build_array_pipeline_plan_from_expr($raw_expr);
  next unless $pipeline && @{$pipeline->{ops} || []};
  my $last_op = $pipeline->{ops}[-1];
  next unless $last_op->{op} && $last_op->{op} eq 'split_each';
- push @events, {
-  raw => $+{expr},
+ push @events, LinkedSpec::ActionIR::ScannerCore::_record_scanned_source_event({
+  raw => $raw_expr,
   args => {
    target    => $pipeline->{target_symbol},
    delimiter => $last_op->{delimiter_expr},
   },
- };
+ }, $code, $source_start, $source_end);
 }
  return \@events
 }
@@ -471,11 +485,15 @@ sub _scan_contract_trim_each {
  my ($code) = @_;
  my @events;
 while ($code =~ /\b(?<expr>trim_each\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/g) {
- my $pipeline = _build_array_pipeline_plan_from_expr($+{expr});
+ my ($source_start, $source_end) = ($-[0], $+[0]);
+ my $raw_expr = $+{expr};
+ my $pipeline = _build_array_pipeline_plan_from_expr($raw_expr);
  next unless $pipeline && @{$pipeline->{ops} || []};
  my $last_op = $pipeline->{ops}[-1];
  next unless $last_op->{op} && $last_op->{op} eq 'trim_each';
- push @events, {raw => $+{expr}, args => {target => $pipeline->{target_symbol}}};
+ push @events, LinkedSpec::ActionIR::ScannerCore::_record_scanned_source_event(
+  {raw => $raw_expr, args => {target => $pipeline->{target_symbol}}},
+  $code, $source_start, $source_end);
 }
  return \@events
 }
@@ -484,11 +502,15 @@ sub _scan_contract_filter_nonempty {
  my ($code) = @_;
  my @events;
 while ($code =~ /\b(?<expr>filter_nonempty\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/g) {
- my $pipeline = _build_array_pipeline_plan_from_expr($+{expr});
+ my ($source_start, $source_end) = ($-[0], $+[0]);
+ my $raw_expr = $+{expr};
+ my $pipeline = _build_array_pipeline_plan_from_expr($raw_expr);
  next unless $pipeline && @{$pipeline->{ops} || []};
  my $last_op = $pipeline->{ops}[-1];
  next unless $last_op->{op} && $last_op->{op} eq 'filter_nonempty';
- push @events, {raw => $+{expr}, args => {target => $pipeline->{target_symbol}}};
+ push @events, LinkedSpec::ActionIR::ScannerCore::_record_scanned_source_event(
+  {raw => $raw_expr, args => {target => $pipeline->{target_symbol}}},
+  $code, $source_start, $source_end);
 }
  return \@events
 }
@@ -497,11 +519,15 @@ sub _scan_contract_lowercase_each {
  my ($code) = @_;
  my @events;
 while ($code =~ /\b(?<expr>lowercase_each\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/g) {
- my $pipeline = _build_array_pipeline_plan_from_expr($+{expr});
+ my ($source_start, $source_end) = ($-[0], $+[0]);
+ my $raw_expr = $+{expr};
+ my $pipeline = _build_array_pipeline_plan_from_expr($raw_expr);
  next unless $pipeline && @{$pipeline->{ops} || []};
  my $last_op = $pipeline->{ops}[-1];
  next unless $last_op->{op} && $last_op->{op} eq 'lowercase_each';
- push @events, {raw => $+{expr}, args => {target => $pipeline->{target_symbol}}};
+ push @events, LinkedSpec::ActionIR::ScannerCore::_record_scanned_source_event(
+  {raw => $raw_expr, args => {target => $pipeline->{target_symbol}}},
+  $code, $source_start, $source_end);
 }
  return \@events
 }
@@ -510,11 +536,15 @@ sub _scan_contract_uppercase_each {
  my ($code) = @_;
  my @events;
 while ($code =~ /\b(?<expr>uppercase_each\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/g) {
- my $pipeline = _build_array_pipeline_plan_from_expr($+{expr});
+ my ($source_start, $source_end) = ($-[0], $+[0]);
+ my $raw_expr = $+{expr};
+ my $pipeline = _build_array_pipeline_plan_from_expr($raw_expr);
  next unless $pipeline && @{$pipeline->{ops} || []};
  my $last_op = $pipeline->{ops}[-1];
  next unless $last_op->{op} && $last_op->{op} eq 'uppercase_each';
- push @events, {raw => $+{expr}, args => {target => $pipeline->{target_symbol}}};
+ push @events, LinkedSpec::ActionIR::ScannerCore::_record_scanned_source_event(
+  {raw => $raw_expr, args => {target => $pipeline->{target_symbol}}},
+  $code, $source_start, $source_end);
 }
  return \@events
 }
@@ -523,11 +553,15 @@ sub _scan_contract_uniq_array {
  my ($code) = @_;
  my @events;
 while ($code =~ /\b(?<expr>uniq\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/g) {
- my $pipeline = _build_array_pipeline_plan_from_expr($+{expr});
+ my ($source_start, $source_end) = ($-[0], $+[0]);
+ my $raw_expr = $+{expr};
+ my $pipeline = _build_array_pipeline_plan_from_expr($raw_expr);
  next unless $pipeline && @{$pipeline->{ops} || []};
  my $last_op = $pipeline->{ops}[-1];
  next unless $last_op->{op} && $last_op->{op} eq 'uniq';
- push @events, {raw => $+{expr}, args => {target => $pipeline->{target_symbol}}};
+ push @events, LinkedSpec::ActionIR::ScannerCore::_record_scanned_source_event(
+  {raw => $raw_expr, args => {target => $pipeline->{target_symbol}}},
+  $code, $source_start, $source_end);
 }
  return \@events
 }
@@ -536,17 +570,19 @@ sub _scan_contract_filter_match {
  my ($code) = @_;
  my @events;
 while ($code =~ /\b(?<expr>filter_match\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/g) {
- my $pipeline = _build_array_pipeline_plan_from_expr($+{expr});
+ my ($source_start, $source_end) = ($-[0], $+[0]);
+ my $raw_expr = $+{expr};
+ my $pipeline = _build_array_pipeline_plan_from_expr($raw_expr);
  next unless $pipeline && @{$pipeline->{ops} || []};
  my $last_op = $pipeline->{ops}[-1];
  next unless $last_op->{op} && $last_op->{op} eq 'filter_match';
- push @events, {
-  raw => $+{expr},
+ push @events, LinkedSpec::ActionIR::ScannerCore::_record_scanned_source_event({
+  raw => $raw_expr,
   args => {
    target  => $pipeline->{target_symbol},
    pattern => $last_op->{pattern_expr},
   },
- };
+ }, $code, $source_start, $source_end);
 }
  return \@events
 }

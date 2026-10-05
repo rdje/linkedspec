@@ -1,0 +1,158 @@
+{
+  "complete": true,
+  "revision": "b6fa57422a803a8d70b3e391cc2c4c70d7d6cf25",
+  "populations": {
+    "before": [
+      3966,
+      3966,
+      2
+    ],
+    "after": [
+      3966,
+      3965,
+      3
+    ]
+  },
+  "actual_commands": 18,
+  "contracts": 19,
+  "regex_contracts": 11,
+  "new_hooks": 10,
+  "seeds": 3,
+  "selected_events_per_epoch": 207,
+  "authored_frames_per_epoch": 135,
+  "origins_before": 9,
+  "origins_after": 99,
+  "regression_groups": 13,
+  "original_failed_groups": 10,
+  "consumer_groups": 701,
+  "consumer_plans": [
+    28,
+    13,
+    23,
+    15,
+    12,
+    605,
+    5
+  ],
+  "phase0_groups": 1034,
+  "total_green_groups": 1748,
+  "unchanged_complete_toolbox": true,
+  "controls": [
+    {
+      "name": "erase contract",
+      "observed": "RED",
+      "reason": "exact nineteen-contract population and order"
+    },
+    {
+      "name": "change original argument",
+      "observed": "RED",
+      "reason": "authored exact public arguments and occurrences"
+    },
+    {
+      "name": "reuse equal raw origin",
+      "observed": "RED",
+      "reason": "exact before/after authored regex origins"
+    },
+    {
+      "name": "erase new origin",
+      "observed": "RED",
+      "reason": "exact before/after authored regex origins"
+    },
+    {
+      "name": "forge argument identity",
+      "observed": "RED",
+      "reason": "original regex event and argument reference identities"
+    },
+    {
+      "name": "erase callback effect",
+      "observed": "RED",
+      "reason": "unchanged original callback sequence arguments and results"
+    },
+    {
+      "name": "erase ignored frame",
+      "observed": "RED",
+      "reason": "authored mixed statement frames"
+    },
+    {
+      "name": "extend public schema",
+      "observed": "RED",
+      "reason": "unchanged private public events"
+    },
+    {
+      "name": "forge Toolbox success",
+      "observed": "RED",
+      "reason": "complete clean Toolbox inspection"
+    },
+    {
+      "name": "erase supplied input",
+      "observed": "RED",
+      "reason": "complete unique Git membership"
+    },
+    {
+      "name": "forge immutable bytes",
+      "observed": "RED",
+      "reason": "original Git member bytes"
+    },
+    {
+      "name": "erase candidate overlay",
+      "observed": "RED",
+      "reason": "exact authored overlay membership"
+    },
+    {
+      "name": "replace foreign owner",
+      "observed": "RED",
+      "reason": "only candidate owner replaces a Git member"
+    },
+    {
+      "name": "promote incomplete capture",
+      "observed": "RED",
+      "reason": "complete exact-source capture"
+    },
+    {
+      "name": "forge producer",
+      "observed": "RED",
+      "reason": "actual capture producer"
+    },
+    {
+      "name": "hide failed command",
+      "observed": "RED",
+      "reason": "actual expected command exit"
+    },
+    {
+      "name": "forge channel",
+      "observed": "RED",
+      "reason": "channel bytes"
+    },
+    {
+      "name": "hide original-owner override",
+      "observed": "RED",
+      "reason": "exact original-owner override environment"
+    },
+    {
+      "name": "shorten regression plan",
+      "observed": "RED",
+      "reason": "complete regression plan"
+    },
+    {
+      "name": "shorten direct-consumer plan",
+      "observed": "RED",
+      "reason": "complete selected suite plan"
+    },
+    {
+      "name": "shorten Phase0 plan",
+      "observed": "RED",
+      "reason": "complete Phase0 plan"
+    },
+    {
+      "name": "hide nested Phase0 failure",
+      "observed": "RED",
+      "reason": "no nested Phase0 failure"
+    },
+    {
+      "name": "change original lowering",
+      "observed": "RED",
+      "reason": "unchanged complete Toolbox channels"
+    }
+  ],
+  "instrument_sha256": "ad39b7657ce53246fe467ff7b4794deadc1d9fe221f75319f5a509d351fa3291"
+}

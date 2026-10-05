@@ -2446,7 +2446,7 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 - [x] **LOCKSTEP** — Complete58-input book/six examples/two chapters/nine controls;46 prior claim hashes frozen historically; task/index/two roadmaps/Knowledge/live/resume/history/claim/doctrines align. Runtime defects remain explicitly scheduled; no family admission closes here.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.1`
-  Status: `pending`
+  Status: `active`
   Goal: Complete ten remaining pipeline regex hooks and the separately diagnosed split-source metadata repair.
   Dependencies: `.1.3.3.0.7.2.2.0.1.2.0`
   Children: `.1.3.3.0.7.2.2.0.1.2.1.0`, `.1.3.3.0.7.2.2.0.1.2.1.1`
@@ -2454,11 +2454,29 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
   Acceptance: Both children verified and committed before statement implementation. Hook-only proof preserves original args; metadata repair declares its precise public diagnostic contract and compatibility limits.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.1.0`
-  Status: `pending`
+  Status: `done`
   Goal: Record exact full-input source coordinates for the ten remaining pipeline regex producers.
   Dependencies: `.1.3.3.0.7.2.2.0.1.2.0`
   Planned verification: Same source/argument before-after probe and permanent original-owner RED/GREEN; capture coordinates before parse/plan callbacks overwrite match globals; preserve existing set_value and direct consumers.
   Acceptance: Original raw/args, callback effects and order remain exact. No masked receiver/operand parsing or public event fields. The diagnosed null split-source argument stays unchanged until .1.2.1.1.
+
+  Activation: Clean b6fa57422a803a8d70b3e391cc2c4c70d7d6cf25; completed pipeline diagnosis, all ten hooks/post-pointer PASS, brief0 and no jobs. Original nineteen-contract oracle/probe/immutable supplied inputs, all ten regex constructors, dependency callbacks, existing basic/helper regressions and direct AST/order/binding/push/trace consumers plus ActionIR book reviewed. Split-source metadata repair remains separate.
+  Owned paths: PrimitivePipelineRules.pm's ten regex producer hooks; t/actionir_pipeline_regex_source_provenance.t; checkpoint prefix .1.2.1.0-/claim and prior .1.2.0 claim historical freeze; pipeline Knowledge and task/index/two-roadmap/resume/live/change/notes/book. No statement producer, public schema/argument, source membership/replacement, CI/hook/storage/dependency or other-repository changes.
+  Verification tier: `focused`
+  Focused checks: Actual original-owner RED and current GREEN on the same new regex regression; immutable parent regular inputs plus exact new fixture/original owner and candidate owner overlays; nineteen-contract before/after Toolbox channels, authored original args/frames, all eleven regex origins/event/argument identity and default callback inputs/results under three seeds. Seven direct consumers plus full Phase0, independent input/TAP/source corruptions, actual complete book capture/render, claim/Knowledge/memory/history/diff and all doctrines.
+  Canonical trigger: None for private sidecar-only hooks preserving public raw/arguments/schema/default callbacks; separate metadata contract repair .1.2.1.1 and family canonical .1.2.3 own their broader boundaries.
+  Claim verification: `docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.1.0.json`
+  Verification: Independent before/after supplied-input census verifies3968 files per epoch:3966 immutable regular Git inputs/two common overlays before,3965 unchanged regular inputs/three overlays after, with exactly one owner replacement. Eighteen actual full-channel guarded commands: unchanged13-group original-owner RED10/current GREEN13, seven unchanged direct suites701, full Phase01034 (1748 total GREEN), three seeds/all19 contracts/207 original events and135 frames per epoch; origins9-to99 for all eleven regex contracts with original event/args identity. Default callback arguments/results/order and complete substitution/descriptor/dump channels remain byte-identical. Twenty-three reason-specific evidence controls observe RED. Book58 inputs/seven examples/two chapters/nine controls passes;33 preceding diagnosis hashes verify before historical-only freeze. Statement/null-metadata/source membership and canonical family owners remain open; source changes only in the ten regex producers.
+  Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.1.0 - retain pipeline regex source origins`.
+
+## Acceptance Checklist — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.1.0
+
+- [x] **REPRODUCE / ISSUE** — Same13-group original-owner regression fails exactly ten missing-hook groups while existing set_value/empty/rejected-call guards pass; completed fixed before capture retains actual full channels/override environment and9 existing origins.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Ten PrimitivePipelineRules regex event constructors omit recording; parser/planner callbacks require original match boundaries/raw expressions to be captured before delegation. Literal original argument/span/plan oracle identifies repeated and quoted occurrences independently.
+- [x] **FIX** — Capture original scalar boundaries/raw before callbacks and pass original event/argument objects to the existing private recorder. Existing set_value, all statement producers and null split-source metadata remain unchanged; no public source fields or masked operands appear.
+- [x] **ADDRESSED (verified)** — Current13 groups pass; all eleven regex channels retain99 authored origins/reference identities under three seeds. Independent3968-file before/after census permits one actual producer replacement;23 reason-specific evidence controls observe RED.
+- [x] **NO REGRESSION** — Seven direct consumers finish701 groups and full Phase01034, totaling1748 GREEN. All19 contracts retain207 original events/135 frames per epoch; complete default callback plans and Toolbox substitution/descriptor/dump channels remain identical. Foreign-source and empty/rejected-call authority guards survive.
+- [x] **LOCKSTEP** — Complete58-input book/seven examples/two chapters/nine controls;33 prior hashes frozen historically; task/index/two roadmaps/Knowledge/live/resume/history/claim and mandatory doctrines align. Separate metadata .1.2.1.1, eight statement .1.2.2 and canonical family .1.2.3 remain owned.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.1.1`
   Status: `pending`

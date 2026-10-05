@@ -117,9 +117,25 @@ scan the original full input, while eight select original statements; nested has
 and value-only expressions each have two event-construction branches. The diagnostic source
 repeats literal receivers and structured plans around Unicode, CRLF, quoted helper text and
 ignored comments. Its public and private scans keep the same arguments and dependency
-callback inputs/results. Only the existing `set_value` hook currently reports private source
-origins; the eighteen remaining contracts are scheduled for provenance hooks. Quoted matches
-are syntactic observations, not executable membership.
+callback inputs/results. All eleven full-input regex pipeline contracts now retain private
+source origins; ten new hooks preserve the existing `set_value` channel. Match coordinates
+and raw expressions are captured before parser/planner callbacks, and recording keeps the
+original event and argument objects. Eight statement contracts still await their frame hooks.
+Quoted matches are syntactic observations, not executable membership.
+
+For repeated calls, the private channel identifies each original occurrence:
+
+```perl
+my $result = LinkedSpec::ActionIR::ScannerCore::_scan_contract_ir_events_with_provenance(
+    {id => 'push'}, "push(items, '雪'); push(items, '雪');", $scanner_deps
+);
+# source_origins spans: [0, 16), [18, 34)
+```
+
+The same original-owner regression first fails for the ten missing hooks, then passes for
+all eleven regex contracts; empty and rejected calls add no origins. Public events still
+contain only `raw` and `args`. Independent before/after probes preserve full generated
+source, substitution and descriptor channels, including original pipeline plan inputs.
 
 One metadata defect is explicitly retained rather than treated as a supported result:
 

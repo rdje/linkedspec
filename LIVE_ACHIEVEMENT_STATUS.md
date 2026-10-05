@@ -2,17 +2,19 @@
 
 ## Current Activity
 
-Full PNT: BasicRules is canonically committed; original nineteen-contract pipeline diagnosis is complete. Regex hooks, separately owned split-source metadata repair, statement hooks and canonical family composition follow before other producers and executable membership/replacement.
+Full PNT: all eleven pipeline regex channels retain original private origins. Null split-source metadata repair .1.2.1.1 follows clean hook-only landing, then eight statement hooks .1.2.2 and canonical family .1.2.3. Other producer/semantic owners stay separate.
 
 ## Latest Completed Slice
 
-`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.0` — Immutable3942 regular inputs/four authored overlays, eight full-channel guarded commands. Three seeds retain57 public/private pairs/207 original events/135 scalar frames and unchanged callback inputs/results; set_value alone supplies9 origins. Independent literal plans/Toolbox confirm null split source metadata and correct lowering. Seven unchanged consumers pass701 complete groups; three foreign-source probes supply no invented origins. Twenty-two reason-specific RED controls and nine book controls reject false acceptance;58 book inputs render six examples/two chapters. All46 preceding claim hashes verify before historical-only freeze. Preliminary exploratory/removed-selector outputs stay limited and separate. Stale V2 roadmap mirror is reconciled; production/spec/tests/CI/hooks/dependencies unchanged. Focused doctrines/claim/Knowledge/history/diff/hooks govern landing; repair and canonical family closure remain separately owned.
+`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.1.0` — Same13-group original-owner RED10/current GREEN13; seven unchanged direct suites701 and full Phase01034 (1748 total GREEN). Two3968-file input boundaries derive from immutable b6fa57422 with two common overlays and exactly one candidate owner replacement. Eighteen actual full-channel guarded commands retain all19 contracts/three seeds/207 original events and135 frames per epoch; origins9-to99 with original constructor/event/args identity. Exact default callback input/result/order and complete substitution/descriptor/dump channels remain unchanged. Twenty-three evidence controls observe RED;58-input book renders seven examples/two chapters/nine controls. All33 diagnosis input hashes verify before historical-only freeze. Statement producers/public args/schema/CI/hooks/storage/dependencies remain unchanged; metadata and canonical family acceptance stay owned. Focused mandatory doctrines/Knowledge/claim/history/diff/hooks govern landing.
 
 ## Next Action
 
-Activate `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.1.0` from clean HEAD; implement ten remaining full-input regex recorder hooks, preserving exact original arguments, plan/callback effects, quoted syntactic occurrences and existing set_value. Commit before split-source metadata repair .1.2.1.1; then statement .1.2.2 and canonical family .1.2.3. Other producer/semantic owners remain open.
+Activate `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.1.1` from clean HEAD. Declare/gate source-expression metadata, repair split_array's null source at the published planner boundary, preserve original diagnosis/lowerings and run canonical public-contract acceptance. Commit before statement .1.2.2; final family .1.2.3 and other producer/semantic repairs remain open.
 
 ## Recent Completions
+
+- `2026-10-05` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.1.0` retains ten pipeline regex hooks/RED10-GREEN13/1748 groups/99 origins.
 
 - `2026-10-05` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.0` retains original19-contract pipeline diagnosis/701 groups and owns split-source repair.
 
@@ -43,8 +45,6 @@ Activate `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.1.0` from clean HEA
 - `2026-10-04` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.1` freezes current quoted value/event/marker/runtime diagnosis and splits bounded repair.
 
 - `2026-10-04` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.0` splits quoted-data work and reconciles the canonical reporting handoff.
-
-- `2026-10-04` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1` canonically lands source-unit raw reporting/spans/legacy ownership at363c79109.
 
 ## History
 
