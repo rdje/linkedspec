@@ -16921,7 +16921,7 @@ _Perl outward descriptor metadata names the nested spec state instead of its com
 _Eleven pipeline regex contracts retain exact original private origins and callback plans_
 
 - **answers:** how are pipeline regex original source origins recorded | which pipeline scanner contracts still need statement source frames | does pipeline regex provenance preserve literal receivers and original planner inputs | where is the pipeline regex original-owner RED GREEN proof
-- **date:** 2026-10-05 · **status:** regex and statement channels implemented; full canonical family closeout separate
+- **date:** 2026-10-05 · **status:** all nineteen channels recur from immutable Git; exact canonical receipt gates family landing
 - **evidence:** `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.1.0 supplies immutable before/after inputs and the same regression: original ten missing hooks fail; all eleven regex contracts pass. Literal source/argument/interval and public/private callback plans are independently checked; default original generated/compiler channels remain exact.`
 - **source:** [`docs/knowledge/perl-pipeline-regex-source-provenance.md`](docs/knowledge/perl-pipeline-regex-source-provenance.md)
 
@@ -16929,7 +16929,7 @@ _Eleven pipeline regex contracts retain exact original private origins and callb
 _Pipeline scanner diagnosis preserves original plans and owns null split source metadata_
 
 - **answers:** which pipeline scanner contracts still lack original source origins | why does split_array report a null source while lowering reads input | where are the independent pipeline argument and source position oracles | which pipeline statement contracts have two event constructor branches
-- **date:** 2026-10-05 · **status:** historical original diagnosis; regex, metadata and statement repairs implemented
+- **date:** 2026-10-05 · **status:** historical original diagnosis retained; repaired family recurs from immutable Git
 - **evidence:** `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.0 probe/reviewer bind all nineteen original public/private contracts, exact arguments, scalar frames and default callback plan inputs/results. Only set_value supplies private origins. split planner source_expr and scanner source_symbol diverge; complete Toolbox channels reproduce null metadata and correct lowering.`
 - **source:** [`docs/knowledge/perl-pipeline-source-provenance-diagnosis.md`](docs/knowledge/perl-pipeline-source-provenance-diagnosis.md)
 
@@ -16945,7 +16945,7 @@ _Split metadata reports normalized planner expression with compatible legacy fal
 _Eight pipeline statement contracts preserve original occurrence and returned event identity_
 
 - **answers:** how do pipeline statement scanners retain original source frames | which pipeline statement contracts have private source origins | why is the original pipeline probe origin_event comparison limited | how does an equal-valued returned event copy distinguish reference identity | what source authority do copied or foreign pipeline splitter results have
-- **date:** 2026-10-05 · **status:** focused statement family verified; canonical nineteen-contract closeout remains separate
+- **date:** 2026-10-05 · **status:** immutable nineteen-contract family independently verified; canonical receipt gates landing
 - **evidence:** `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.2 owns eight statement loops/ten constructors, literal source/argument/interval oracle, complete before/after boundaries, corrected returned-array probe and actual copied-return control.`
 - **source:** [`docs/knowledge/perl-pipeline-statement-source-provenance.md`](docs/knowledge/perl-pipeline-statement-source-provenance.md)
 

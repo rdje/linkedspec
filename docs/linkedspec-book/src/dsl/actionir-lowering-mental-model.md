@@ -167,6 +167,16 @@ the resulting raw text no longer matches the original frame. Exceptions and call
 state retain their existing behavior. This is private compiler provenance; public events
 remain `raw`/`args`, and family signoff still requires its canonical closeout.
 
+A fresh immutable Git recurrence now repeats all nineteen pipeline contracts from the
+committed implementation, with no candidate overlays. Three controlled seeds preserve
+the literal source/argument/interval oracle, actual returned-event and constructor/argument
+references, all five callback effects, and the exact earlier complete compiler channels.
+The normalized split and equal-valued copied-return controls also recur unchanged.
+Fourteen direct suites check the composed pipeline and existing source-frame consumers.
+Canonical acceptance additionally requires the exact staged local CI receipt before family
+closure. This closes private pipeline provenance; Flow, legacy and staged producers,
+executable membership, comments and replacement remain separate work.
+
 The split scanner now reports the normalized source expression from its successful planner:
 
 ```perl

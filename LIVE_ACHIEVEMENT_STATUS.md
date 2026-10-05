@@ -2,17 +2,19 @@
 
 ## Current Activity
 
-Full PNT: all nineteen pipeline private provenance contracts are implemented. Statement .1.2.2 is focused-verified; independent immutable canonical family .1.2.3 is next. Remaining Flow/legacy/staged producers and semantic repairs stay separate.
+Full PNT: immutable pipeline family recurrence is accepted; exact canonical receipt gates its parent landing. Next .1.3 diagnoses and slices Flow recursive source provenance. Legacy/staged producers, source membership/comments/replacement and semantic/global audit remain separate.
 
 ## Latest Completed Slice
 
-`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.2` — Eight statement contracts retain original frames through ten constructors. Same16-group fixture is original-owner RED10/current GREEN16; ten direct consumers751 and full Phase01034 complete1801 GREEN groups. Twenty guarded commands supply two4029-file boundaries from immutablea076218; only PrimitivePipelineRules changes. Three seeds retain207 original events/135 frames per epoch; private origins grow99 to207. Public arguments, five default callback sequences/results, normalized split metadata and full substitution/descriptor/generated-parser channels remain exact. Twenty-six reason-specific evidence controls observe RED. Corrected origin_event compares actual returned events; an equal-valued returned-array copy distinguishes the old self-comparison marker. Original probe/adjudications and dedicated direct identity tests stay unchanged. Book58 inputs/ten examples/three chapters/thirteen controls and tool storage pass;110 prior input bindings verify before historical freeze. Focused doctrine boundary governs this slice.
+`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.3` — Fresh immutable e0a09bf recurrence supplies4050 regular Git inputs/no overlays/nine guarded commands. All19 contracts (11 regex/8 statement) retain207 actual returned/constructor/argument references and scalar origins,135 original frames and five default callback effects across three seeds. Complete Toolbox channels equal the exact prior committed proof. Fourteen unchanged suites pass803 ordered groups; three foreign-source probes retain zero origins. Normalized split metadata/actual equal-valued copied-return control recur unchanged.24 reason-specific evidence controls observe RED; complete58-input book renders ten examples/three chapters with14 controls. All38 prior claim input hashes verify before historical mode/revision-only freeze. Exact staged canonical CI receipt is mandatory before family parent closure; remaining producers/semantic/global audit stay separate.
 
 ## Next Action
 
-Activate `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.3` from the clean committed statement boundary. Independently recur all nineteen pipeline contracts with exact original arguments/frames/references/callbacks/compiler channels, retained distinguishing controls and direct consumers. Complete book/claim/live docs, then require exact staged canonical CI before family parent closure.
+Activate `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3` only from clean canonical pipeline landing. Use Knowledge/Toolbox to diagnose all original Flow source/recursive argument frames, preserve original contracts/callbacks/ordering and split implementation into safe owned leaves before changes.
 
 ## Recent Completions
+
+- `2026-10-05` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.3` accepts4050 immutable inputs/all19 pipeline contracts/207 origins/803 groups behind exact canonical landing.
 
 - `2026-10-05` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.2` retains eight statement frame contracts/RED10-GREEN16/1801 groups/207 origins and corrected returned-reference proof.
 
@@ -43,8 +45,6 @@ Activate `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.3` from the clean c
 - `2026-10-04` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.0` retains private positions for nine basic regex contracts; public compiler output unchanged.
 
 - `2026-10-04` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.0` implements exact private spans for three scanner contracts with public output unchanged.
-
-- `2026-10-04` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.0` rejects raw-key occurrence inference and freezes complete quote RED.
 
 ## History
 

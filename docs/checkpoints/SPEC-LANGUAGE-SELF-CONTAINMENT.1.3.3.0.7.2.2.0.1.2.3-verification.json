@@ -1,0 +1,142 @@
+{
+  "complete": true,
+  "revision": "e0a09bf474db1cec13b7169e7a3e2a33f97aaed4",
+  "regular_inputs": 4050,
+  "overlays": 0,
+  "contracts": 19,
+  "regex_contracts": 11,
+  "statement_contracts": 8,
+  "seeds": 3,
+  "actual_commands": 9,
+  "authored_statement_frames": 135,
+  "authored_event_origins": 207,
+  "fixture_suites": 14,
+  "fixture_groups": 803,
+  "foreign_probes": 3,
+  "exact_prior_complete_toolbox_recurrence": true,
+  "normalized_split_preserved": true,
+  "actual_returned_copy_distinguisher": true,
+  "controls": [
+    {
+      "name": "erase contract",
+      "observed": "RED",
+      "reason": "exact nineteen-contract population and order"
+    },
+    {
+      "name": "change original argument",
+      "observed": "RED",
+      "reason": "authored exact public arguments and occurrences"
+    },
+    {
+      "name": "erase original event",
+      "observed": "RED",
+      "reason": "authored exact public arguments and occurrences"
+    },
+    {
+      "name": "reuse equal raw occurrence",
+      "observed": "RED",
+      "reason": "exact before/after authored pipeline origins"
+    },
+    {
+      "name": "forge argument reference",
+      "observed": "RED",
+      "reason": "original returned event and argument reference identities"
+    },
+    {
+      "name": "forge original event reference",
+      "observed": "RED",
+      "reason": "original returned event and argument reference identities"
+    },
+    {
+      "name": "erase callback effect",
+      "observed": "RED",
+      "reason": "unchanged original callback sequence arguments and results"
+    },
+    {
+      "name": "erase ignored statement frame",
+      "observed": "RED",
+      "reason": "authored mixed statement frames"
+    },
+    {
+      "name": "promote private public schema",
+      "observed": "RED",
+      "reason": "unchanged private public events"
+    },
+    {
+      "name": "forge compiler success",
+      "observed": "RED",
+      "reason": "complete clean Toolbox inspection"
+    },
+    {
+      "name": "invent foreign origin",
+      "observed": "RED",
+      "reason": "literal foreign-source boundary"
+    },
+    {
+      "name": "erase supplied input",
+      "observed": "RED",
+      "reason": "complete unique Git membership"
+    },
+    {
+      "name": "forge supplied source bytes",
+      "observed": "RED",
+      "reason": "original Git member bytes"
+    },
+    {
+      "name": "alter prior compiler stream",
+      "observed": "RED",
+      "reason": "exact prior complete Toolbox recurrence"
+    },
+    {
+      "name": "promote incomplete run",
+      "observed": "RED",
+      "reason": "complete exact-source capture"
+    },
+    {
+      "name": "forge actual producer",
+      "observed": "RED",
+      "reason": "actual capture producer"
+    },
+    {
+      "name": "promote failed actual command",
+      "observed": "RED",
+      "reason": "actual successful exit"
+    },
+    {
+      "name": "forge actual channel",
+      "observed": "RED",
+      "reason": "channel bytes"
+    },
+    {
+      "name": "shorten actual TAP plan",
+      "observed": "RED",
+      "reason": "complete selected suite plan"
+    },
+    {
+      "name": "promote nested TAP failure",
+      "observed": "RED",
+      "reason": "no nested fixture failure"
+    },
+    {
+      "name": "erase nested hash origin",
+      "observed": "RED",
+      "reason": "exact before/after authored pipeline origins"
+    },
+    {
+      "name": "erase literal receiver origin",
+      "observed": "RED",
+      "reason": "exact before/after authored pipeline origins"
+    },
+    {
+      "name": "forge actual returned identity",
+      "observed": "RED",
+      "reason": "original returned event and argument reference identities"
+    },
+    {
+      "name": "promote tautological copied-return flag",
+      "observed": "RED",
+      "reason": "actual equal-valued copied-return distinguisher"
+    }
+  ],
+  "instrument_sha256": "0634ce9e691f9f8da27927642289bf54ee8913e5379b07650018b668a4ceea84"
+}

@@ -7,11 +7,11 @@ answers:
   - "does pipeline regex provenance preserve literal receivers and original planner inputs"
   - "where is the pipeline regex original-owner RED GREEN proof"
 date: 2026-10-05
-status: regex and statement channels implemented; full canonical family closeout separate
+status: all nineteen channels recur from immutable Git; exact canonical receipt gates family landing
 tags: [perl, actionir, scanner, source-provenance, pipeline, identity]
 evidence: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.1.0 supplies immutable before/after inputs and the same regression: original ten missing hooks fail; all eleven regex contracts pass. Literal source/argument/interval and public/private callback plans are independently checked; default original generated/compiler channels remain exact."
 reverify:
-  - "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.2-review.py"
+  - "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.3-review.py"
 ---
 
 PrimitivePipelineRules now records exact original full-input spans for push, regex_subst,
@@ -45,3 +45,10 @@ The original mixed probe origin_event marker compares an origin against itself. 
 boolean alone does not establish returned-array identity. Its historical bytes and
 adjudication remain unchanged; .1.2.2 uses the actual returned event and an equal-valued
 copy control. Earlier dedicated direct reference tests retain their original scope.
+
+Family .1.2.3 independently recurs4050 committed regular inputs without overlays:
+all19 contracts/three seeds retain207 origins/135 frames and exact prior complete
+compiler channels. Fourteen direct suites pass803 groups and24 evidence controls
+observe RED; complete58-input book/ten examples/three chapters/14 controls passes.
+Exact staged canonical receipt is mandatory before family landing; remaining Flow,
+legacy/staged, membership/comments/replacement and global audit keep separate owners.

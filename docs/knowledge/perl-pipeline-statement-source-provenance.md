@@ -8,11 +8,11 @@ answers:
   - "how does an equal-valued returned event copy distinguish reference identity"
   - "what source authority do copied or foreign pipeline splitter results have"
 date: 2026-10-05
-status: focused statement family verified; canonical nineteen-contract closeout remains separate
+status: immutable nineteen-contract family independently verified; canonical receipt gates landing
 tags: [perl, actionir, scanner, pipeline, source-provenance, identity]
 evidence: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.2 owns eight statement loops/ten constructors, literal source/argument/interval oracle, complete before/after boundaries, corrected returned-array probe and actual copied-return control."
 reverify:
-  - "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.2-review.py"
+  - "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.3-review.py"
 ---
 
 PrimitivePipelineRules reuses ScannerCore's canonical statement frame bridge for
@@ -52,3 +52,10 @@ Independent final review accepts20 guarded commands over two4029-file boundaries
 and candidate GREEN16,751 consumers and Phase01034 complete1801 GREEN. Twenty-six
 evidence controls observe RED; book58/ten examples/three chapters/thirteen controls
 and tool storage pass. All110 preceding claim input bindings verify before freeze.
+
+Family .1.2.3 independently recurs4050 committed regular inputs without overlays:
+all19 contracts/three seeds retain207 origins/135 frames and exact prior complete
+compiler channels. Fourteen direct suites pass803 groups and24 evidence controls
+observe RED; complete58-input book/ten examples/three chapters/14 controls passes.
+Exact staged canonical receipt is mandatory before family landing; remaining Flow,
+legacy/staged, membership/comments/replacement and global audit keep separate owners.

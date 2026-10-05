@@ -12,6 +12,14 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-10-05 — immutable pipeline family acceptance (SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.3)
+
+Repeat the exact committed corrected probe and original literal source/argument/interval/plan oracle from all4050 regular Git members, with no overlays. Validate every input object/content/mode/population and actual producer/import/prior channels; retain full stdout/stderr and guards for all nine commands. Current reference marker compares actual returned events, and the equal-valued copy control recurs unchanged. Historical null metadata/self-comparison/selector failures keep their original bytes, limits and repair ownership.
+
+Fresh immutable e0a09bf recurrence supplies4050 regular Git inputs/no overlays/nine guarded commands. All19 contracts (11 regex/8 statement) retain207 actual returned/constructor/argument references and scalar origins,135 original frames and five default callback effects across three seeds. Complete Toolbox channels equal the exact prior committed proof. Fourteen unchanged suites pass803 ordered groups; three foreign-source probes retain zero origins. Normalized split metadata/actual equal-valued copied-return control recur unchanged.24 reason-specific evidence controls observe RED; complete58-input book renders ten examples/three chapters with14 controls. All38 prior claim input hashes verify before historical mode/revision-only freeze. Exact staged canonical CI receipt is mandatory before family parent closure; remaining producers/semantic/global audit stay separate.
+
+This closes the private pipeline producer family only after exact staged canonical CI. Source membership/comment/replacement and remaining Flow/legacy/staged source owners are separate; no native/backend admission or broad historical-audit closure follows.
+
 ## 2026-10-05 — pipeline statement occurrence authority (SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.2)
 
 Reuse the established private statement bridge in eight loops and record all ten original event constructors. Frame selection occurs before recognition, preserving ignored-statement alignment. The original returned array and occurrence index authorize source coordinates; copied/changed/opaque/foreign results and later raw transformations preserve events without invented origins. Nested scans restore outer collectors; public values, callback effects and compiler outputs remain exact.

@@ -2412,12 +2412,14 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 - [x] **LOCKSTEP** — Bounded complete claim, historical old-input preservation, task/frontier/roadmaps, Knowledge, clean intended resume/live/history and mdBook agree. Canonical receipt gates this parent closeout. Broader historical audit remains startup .5.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2`
-  Status: `active`
+  Status: `done`
   Goal: Complete remaining PrimitivePipelineRules source provenance.
   Dependencies: `.1.3.3.0.7.2.2.0.1.1`
   Children: `.1.3.3.0.7.2.2.0.1.2.0`, `.1.3.3.0.7.2.2.0.1.2.1`, `.1.3.3.0.7.2.2.0.1.2.2`, `.1.3.3.0.7.2.2.0.1.2.3`
   Safe-slice split: Diagnose all nineteen dispatched contracts from an immutable boundary, retaining existing set_value provenance. Then implement the ten remaining full-input regex producers, then eight statement producers including both nested-assignment/value-drop constructor branches, then independently compose/canonically close the family. Exact callback/parser plans and original literal receivers remain unchanged; no masked operands or executable membership admission.
   Acceptance: Keep literal receivers and structured statement/array plans; explicitly translate complete statement frames and do not feed masked operands into parsing.
+
+  Closeout: .1.2.0 original diagnosis, .1.2.1 regex/normalized metadata repair and .1.2.2 all statement constructors are committed. .1.2.3 immutable nineteen-contract recurrence is independently accepted; exact staged canonical receipt is required before this parent status lands. Current normalized source and original marker/null/historical failure limits remain preserved. Flow .1.3 follows only from the clean committed canonical handoff.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.0`
   Status: `done`
@@ -2545,11 +2547,30 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 - [x] **LOCKSTEP** — Complete58-input book/ten examples/three chapters/thirteen controls;110 preceding input bindings frozen historically. Tool storage, task/frontier/index/two roadmaps/Knowledge/live/resume/history/claim/doctrines align; full family .1.2.3 stays canonical.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.3`
-  Status: `pending`
+  Status: `done`
   Goal: Independently compose and canonically accept all nineteen PrimitivePipelineRules provenance contracts.
   Dependencies: `.1.3.3.0.7.2.2.0.1.2.2`
   Planned verification: Immutable committed family recurrence, exact original arguments/occurrences/frames/private identities and direct consumers, independent distinguishing controls, actual book render and exact staged canonical gate before parent closeout.
   Acceptance: Close the pipeline family only after complete source-bound proof and canonical receipt. Flow/legacy/staged producers, executable membership/comments/replacement and broader audits remain separately owned.
+
+  Activation: Clean e0a09bf474db1cec13b7169e7a3e2a33f97aaed4; focused statement hooks committed, all ten doctrines/post-pointer PASS, brief0 and no jobs. Original nineteen-contract source/argument/interval oracle, corrected actual returned-array identity probe/copy control, exact current normalized split metadata and all regex/statement constructors, prior full compiler channels/consumer plans, current pipeline Knowledge and ActionIR/development book reviewed. Public events/callbacks/lowering remain unchanged; RGX/PGEN black boxes and other repositories read-only.
+  Owned paths: Leaf .1.2.3 checkpoint/claim producers and recoverable immutable recurrence evidence; historical-only freeze of .1.2.2 claim before bound publication changes; pipeline Knowledge, ActionIR/development book and task/frontier/index/roadmaps/live/resume/history. No production/spec/standard-test/CI/hook/storage/dependency/other-repository change planned.
+  Verification tier: `canonical`
+  Focused checks: Complete regular committed Git inputs with no overlays; all nineteen literal source/argument/interval/private returned/constructor/argument identities and five callback effects under three seeds, exact prior complete compiler recurrence, foreign-source and actual equal-valued copied-return controls. Fourteen unchanged direct suites, complete channels/content/mode/membership/TAP guards and distinguishing evidence corruptions; complete book inputs/render, prior claim freeze, memory/Knowledge/claim/history/diff and all doctrines.
+  Canonical trigger: Pipeline family parent closeout; stage completed reviewable candidate and require exact tools/run_ci_local.sh receipt before landing/closing .1.2. Remaining producer/semantic and global audit owners stay separate.
+  Claim verification: `docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.3.json`
+
+  Verification: Fresh immutable e0a09bf recurrence supplies4050 regular Git inputs/no overlays/nine guarded commands. All19 contracts (11 regex/8 statement) retain207 actual returned/constructor/argument references and scalar origins,135 original frames and five default callback effects across three seeds. Complete Toolbox channels equal the exact prior committed proof. Fourteen unchanged suites pass803 ordered groups; three foreign-source probes retain zero origins. Normalized split metadata/actual equal-valued copied-return control recur unchanged.24 reason-specific evidence controls observe RED; complete58-input book renders ten examples/three chapters with14 controls. All38 prior claim input hashes verify before historical mode/revision-only freeze. Exact staged canonical CI receipt is mandatory before family parent closure; remaining producers/semantic/global audit stay separate. No production/spec/standard-test/CI/hook/storage/dependency or other-repository change. Canonical receipt remains the mandatory landing condition, not inferred from focused recurrence.
+  Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.3 - accept pipeline source family`.
+
+## Acceptance Checklist — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.3
+
+- [x] **REPRODUCE / ISSUE** — Complete committed all19-contract recurrence independently repeats the accepted literal source/arguments/occurrences and exact previous full compiler channels; candidate overlays are absent.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Family closeout requires composed occurrence and actual returned-reference evidence beyond individual hooks. The original self-comparison marker remains limited; the corrected committed probe/copy control governs current identity.
+- [x] **FIX** — Retain immutable4050-input command boundary and full channels; independently gate object/content/mode/population, imported producer/prior streams, literal interval/plan/source authority and complete TAP. Production/standard fixtures remain exact committed bytes.
+- [x] **ADDRESSED (verified)** — Three seeds retain207 origins/135 frames and803 direct groups; actual foreign/source and equal-valued returned-copy controls recur. Twenty-four reason-specific corruptions observe RED, including both nested/literal constructors and actual returned references.
+- [x] **NO REGRESSION** — Complete public/private arguments, all five default callback effects, normalized split metadata and full prior compiler channels remain exact. Existing statement/regex/Basic/AST/order/binding/push/trace/source dependency/nested frame guards all complete; canonical receipt gates parent closure.
+- [x] **LOCKSTEP** — Book58 inputs/ten examples/three chapters/14 controls and prior38-hash historical freeze pass. Task/frontier/index/two roadmaps/Knowledge/live/resume/history/claim align; exact staged canonical gate must succeed before this completed candidate can land.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3`
   Status: `pending`
@@ -2858,9 +2879,9 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 | 43.4.2.0.1.1.1.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.2` | `done` | Eleven producer hooks:29 GREEN/111 origins/66 identical pairs,1148 guarded consumer groups; canonical .3 next. |
 | 43.4.2.0.1.1.1.3 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.3` | `done` | Immutable3864 inputs,80 GREEN groups/66 compiler recurrences/111 origins; exact canonical receipt gates closeout. |
 | 43.4.2.0.1.1.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.2` | `done` | Independent twenty-contract BasicRules family canonically accepted under .1.1.2.1. |
-| 43.4.2.0.1.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2` | `active` | All19 private source contracts implemented; canonical family .1.2.3 remains next. |
+| 43.4.2.0.1.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2` | `done` | All19 private source contracts independently verified; exact canonical receipt gates .1.2.3 parent acceptance. |
 | 43.4.2.0.1.2.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.2` | `done` | Eight statement contracts/ten constructors;1801 GREEN,207 origins and corrected returned-reference proof. |
-| 43.4.2.0.1.2.3 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.3` | `pending` | Fresh immutable nineteen-contract recurrence and exact canonical family acceptance. |
+| 43.4.2.0.1.2.3 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.3` | `done` | Immutable4050/no overlays;207 origins/135 frames/803 groups, canonical receipt gates landing. |
 | 43.4.2.0.1.3 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3` | `pending` | Complete recursive/composed flow source provenance before membership. |
 | 43.4.2.0.1.4 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4` | `pending` | Complete remaining legacy, to be split source provenance before membership. |
 | 43.4.2.0.1.5 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5` | `pending` | Complete staged/progressive/recognition source provenance before membership. |
@@ -2906,6 +2927,8 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 - None for `.1.1`. The September27 clean prioritization supersedes the earlier callable-first schedule. Format implementation and the optional frontend remain gated by their own prerequisites.
 
 ## Verification Log
+
+- `2026-10-05` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.3` — Fresh immutable e0a09bf recurrence supplies4050 regular Git inputs/no overlays/nine guarded commands. All19 contracts (11 regex/8 statement) retain207 actual returned/constructor/argument references and scalar origins,135 original frames and five default callback effects across three seeds. Complete Toolbox channels equal the exact prior committed proof. Fourteen unchanged suites pass803 ordered groups; three foreign-source probes retain zero origins. Normalized split metadata/actual equal-valued copied-return control recur unchanged.24 reason-specific evidence controls observe RED; complete58-input book renders ten examples/three chapters with14 controls. All38 prior claim input hashes verify before historical mode/revision-only freeze. Exact staged canonical CI receipt is mandatory before family parent closure; remaining producers/semantic/global audit stay separate.
 
 - `2026-10-05` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.2` — Eight statement contracts retain original frames through ten constructors. Same16-group fixture is original-owner RED10/current GREEN16; ten direct consumers751 and full Phase01034 complete1801 GREEN groups. Twenty guarded commands supply two4029-file boundaries from immutablea076218; only PrimitivePipelineRules changes. Three seeds retain207 original events/135 frames per epoch; private origins grow99 to207. Public arguments, five default callback sequences/results, normalized split metadata and full substitution/descriptor/generated-parser channels remain exact. Twenty-six reason-specific evidence controls observe RED. Corrected origin_event compares actual returned events; an equal-valued returned-array copy distinguishes the old self-comparison marker. Original probe/adjudications and dedicated direct identity tests stay unchanged. Book58 inputs/ten examples/three chapters/thirteen controls and tool storage pass;110 prior input bindings verify before historical freeze. Focused all-doctrine/hook boundary governs landing; canonical family .1.2.3 remains next.
 
@@ -2963,6 +2986,8 @@ September27 `.1.1.1`: seven neutral/structural checks, 34 ledger source-path/con
 
 ## Commit Log
 
+- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.3 - accept pipeline source family` — immutable all19-contract recurrence; exact canonical receipt gates parent closure.
+
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.2 - retain pipeline statement source origins` — eight frame loops/ten constructors and source-bound returned-reference proof; Git owns commit identity.
 
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.0 - retain basic regex match provenance` — private nine-contract instrumentation; Git owns commit identity.
@@ -3002,6 +3027,8 @@ September27 `.1.1.1`: seven neutral/structural checks, 34 ledger source-path/con
 | `.0` | `SPEC-LANGUAGE-SELF-CONTAINMENT.0 - ratify expressive spec self-containment` | Direction capture only; no parser/runtime behavior. |
 
 ## Changelog
+
+- `2026-10-05`: `.1.2.3` independently accepts4050 immutable inputs/no overlays,207 origins/135 frames,803 consumer groups/24 evidence controls and complete book proof. Exact canonical receipt gates .1.2 parent closure; next .1.3 owns recursive Flow provenance.
 
 - `2026-10-05`: `.1.2.2` completes eight statement source contracts/all ten constructors with1801 GREEN and207 private origins; preserve original probe-marker limitation and repair current reference proof. Reconcile stale Basic/pipeline frontier rows. Independent canonical .1.2.3 follows clean landing.
 
