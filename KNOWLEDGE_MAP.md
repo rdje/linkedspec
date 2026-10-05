@@ -16634,8 +16634,8 @@ _Perl's former contextual final-codeblock declaration gap_
 _Original Flow traversal concatenates marker recursion before inline arguments_
 
 - **answers:** how do FlowRules case and default scanners order recursive events | which FlowRules contracts already record original source origins | why must inline switch arguments have original occurrence frames | does a quoted case payload produce a Flow scanner event | what owns recursive Flow source provenance
-- **date:** 2026-10-05 · **status:** fourteen direct producer hooks verified; recursive argument frames pending
-- **evidence:** `Direct .1.3.1 verifies14 contracts/RED16-GREEN21/1158 groups/87 origins/48 complete unchanged compiler pairs,22 evidence and16 render controls at4099-input immutable before/after boundaries. SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.0 retains original public/private Toolbox effects from immutable b73f1f59a and independent literal scalar/argument/traversal oracles. Original omitted quoted-case expectation is separately retained and observed RED; runtime input bytes remain exact.`
+- **date:** 2026-10-05 · **status:** all sixteen Flow producer source contracts verified; canonical family acceptance owned
+- **evidence:** `Recursive .1.3.2.1 verifies4197-input before/after plus sole Flow/exact consumer deltas, RED6-GREEN7/1180 groups/147 origins/48 pairs/29 evidence controls and19 book examples. Direct .1.3.1 verifies14 contracts/RED16-GREEN21/1158 groups/87 origins/48 complete unchanged compiler pairs,22 evidence and16 render controls at4099-input immutable before/after boundaries. SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.0 retains original public/private Toolbox effects from immutable b73f1f59a and independent literal scalar/argument/traversal oracles. Original omitted quoted-case expectation is separately retained and observed RED; runtime input bytes remain exact.`
 - **source:** [`docs/knowledge/perl-flow-recursive-source-provenance.md`](docs/knowledge/perl-flow-recursive-source-provenance.md)
 
 ### perl-function-array-constructor-bare-values

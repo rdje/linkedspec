@@ -1,0 +1,92 @@
+{
+  "revision": "441f9c82343507f98428fa8982e5ad13c0cdae8c",
+  "epoch": "before",
+  "complete": true,
+  "runs": [
+    {
+      "kind": "authority",
+      "seed": 0,
+      "command": [
+        "bash",
+        "tools/project_data_run.sh",
+        "prove",
+        "-v",
+        "-Iperl",
+        "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.2.1-authority.t"
+      ],
+      "exit": 1,
+      "stdout": {
+        "encoding": "gzip-base64",
+        "bytes": 1422,
+        "sha256": "e5fa8fd0e02b610e25549a35825df9fe624f707dbf4ca754471ef740be00dd97",
+        "data": "H4sIAAAAAAAC/7WUTW/aQBCG7/4VI/UCKjY2tKmExAFRiCKlNApEPS/LBG+xd+nObgj99Z21Mbjilqb2ZT8877zz7Hg3RlJf5ih3e6O0o/7yYTaN7yeL26fJ7Sxezu7n8fT7YjW5W3ybLVZJlgz5TZMvyYDftJoPkiwW3uXGKndMHCQJRB9g6dcOyY1A5kJvcQO8vVVaFEAH5WQOwm59idrBBrVCAqOLI7hcOFC6UBqBWMEiRsCP2UEGMWtsWMIeQXpypgR8CQIvovBIfd5ECxZLoTTgq5CuCR1w6JUNKYpiLeSOYIe458yoLNBROw5UknXIF2eFYUthL2zIevYvhdbGQYG6XWRtHqSpPTOLSitLkmF0quafybQom7345TF4MVpxaRcRYa04cjmOsdAll8WfyIUa/U58TwaatCeq5yzApeXGO3i2orywGER/h7/Ff4uCs0LTs7ElU13zmGE6q8rmiJSu6hFgxYEnDi2X9k71t1MH+fo7uu63WrQKDZ5OzeV10w2aK2k3xRlEg6BKDWS8lcy7+fEu3dVSfROPSuSrXyvjqQcBbEjtrWaRDDoHctyJg883PUhfszTtRnOhirDXH1adyQEEUbQKgUtfloHnI+6NdVF8/USb/3AFdX4Ek6PgEoIPGjGO2uYIsi6zOnmu2waGvLIwOv6N1jBfxXg53nNYFs35QxpnvVpoPOwBpHDgw5SF4dMklAQdSJM0A08W6hEdCT5W40+hl+rlFGRYH1eTG5g+PHWjx+qaGcF8cncf/QEGMjhsjgUAAA=="
+      },
+      "stderr": {
+        "encoding": "gzip-base64",
+        "bytes": 572,
+        "sha256": "bd84fa57adbe07df5abb4f8d352404bf6e933148d8aeceb956eebb3287c0581b",
+        "data": "H4sIAAAAAAAC/7VQTWsCMRC9768YqGB72LgqflBoYbGrFuy2oD2VHrJxdje4JpLMWv33HbWK0EsvnSFkXniZefMC4LjhM5a6wiUQeoJmbVQpTcHYMObLOl1oIyuQrqjXaAgcktTGA+6kIvC2dgpB1lQylfbN4NxXEiyt8i1VolptrDbkW/O3ZBTO4nTyHk+ScJ7MxuHoNV3Ez+lLki5EW3Q5IzEQHc7oiDuiHV66C4JKG4ReT1zmAMzJ1Ypqhx4yZLWw1HmOTpuCRdxfEY/RKCyFjx/RJzzAk+U/xhIvoz1dMRu426BiA87MaTyf3ka7ger3lcyyzvDuhz2zduVZ1Qphb2vIT262T37aHLoiCH7ZTE4an1u35peMa1UCOb0GJc1BjTbbg9MSnPxiQOi2smoG/+7qUAR/WugbZueMUjwCAAA="
+      },
+      "inputs_before": 4198,
+      "inputs_after": 4198
+    },
+    {
+      "kind": "authority",
+      "seed": 1,
+      "command": [
+        "bash",
+        "tools/project_data_run.sh",
+        "prove",
+        "-v",
+        "-Iperl",
+        "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.2.1-authority.t"
+      ],
+      "exit": 1,
+      "stdout": {
+        "encoding": "gzip-base64",
+        "bytes": 1422,
+        "sha256": "e5fa8fd0e02b610e25549a35825df9fe624f707dbf4ca754471ef740be00dd97",
+        "data": "H4sIAAAAAAAC/7WUTW/aQBCG7/4VI/UCKjY2tKmExAFRiCKlNApEPS/LBG+xd+nObgj99Z21Mbjilqb2ZT8877zz7Hg3RlJf5ih3e6O0o/7yYTaN7yeL26fJ7Sxezu7n8fT7YjW5W3ybLVZJlgz5TZMvyYDftJoPkiwW3uXGKndMHCQJRB9g6dcOyY1A5kJvcQO8vVVaFEAH5WQOwm59idrBBrVCAqOLI7hcOFC6UBqBWMEiRsCP2UEGMWtsWMIeQXpypgR8CQIvovBIfd5ECxZLoTTgq5CuCR1w6JUNKYpiLeSOYIe458yoLNBROw5UknXIF2eFYUthL2zIevYvhdbGQYG6XWRtHqSpPTOLSitLkmF0quafybQom7345TF4MVpxaRcRYa04cjmOsdAll8WfyIUa/U58TwaatCeq5yzApeXGO3i2orywGER/h7/Ff4uCs0LTs7ElU13zmGE6q8rmiJSu6hFgxYEnDi2X9k71t1MH+fo7uu63WrQKDZ5OzeV10w2aK2k3xRlEg6BKDWS8lcy7+fEu3dVSfROPSuSrXyvjqQcBbEjtrWaRDDoHctyJg883PUhfszTtRnOhirDXH1adyQEEUbQKgUtfloHnI+6NdVF8/USb/3AFdX4Ek6PgEoIPGjGO2uYIsi6zOnmu2waGvLIwOv6N1jBfxXg53nNYFs35QxpnvVpoPOwBpHDgw5SF4dMklAQdSJM0A08W6hEdCT5W40+hl+rlFGRYH1eTG5g+PHWjx+qaGcF8cncf/QEGMjhsjgUAAA=="
+      },
+      "stderr": {
+        "encoding": "gzip-base64",
+        "bytes": 572,
+        "sha256": "5c3d238633b93847cc113697ba5777bd397a66274f40f1ea35878f3f688000af",
+        "data": "H4sIAAAAAAAC/7VQwWrCQBC95ysGKtgeskZFlEILwUYt2LQQeyo9bNZJshh3ZXdi9e87ahWhl146w7Lzlrczb14AHDd8JlLXuARCT9BujKqkKRkbxnxZp0ttZA3Slc0aDYFDktp4wJ1UBN42TiHIhiqm0r4dnPtKgqVVvqMqVKuN1YZ8J3tLxuE8Tqfv8TQJs2Q+Ccev6SJ+Tl+SdCG6os8ZiaHocUZH3BPd8NJdENTaIAwG4jIHICPXKGocesiR1cJSFwU6bUoWcX9FPEartBQ+fkSf8ABPlv8YS7yM9nTFbOFug4oNODNncTa7jXbDUS7loJ/3Rnc/7Lm1K8+qVgh720BxcrN78tMW0BdB8MtmctL4wro1v+RcqwrI6TUoaQ5qtNkenJbg5BcDQreVdTv4d1dHIvjTQt83LlIpPAIAAA=="
+      },
+      "inputs_before": 4198,
+      "inputs_after": 4198
+    },
+    {
+      "kind": "authority",
+      "seed": 42,
+      "command": [
+        "bash",
+        "tools/project_data_run.sh",
+        "prove",
+        "-v",
+        "-Iperl",
+        "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.2.1-authority.t"
+      ],
+      "exit": 1,
+      "stdout": {
+        "encoding": "gzip-base64",
+        "bytes": 1422,
+        "sha256": "c27f5ba045bfa208e5cd9f03037cd9c03252497f25930d5dafe0444848e90339",
+        "data": "H4sIAAAAAAAC/7WUTW/aQBCG7/4VI/UCKjY2KG2FxAFRiCKlNApEPS/LBG+xd+nObgj99Z21Mbjilqb2ZT8877zz7Hg3RlJf5ih3e6O0o/7yYTaN7yeL26fJ7Sxezu7n8fT7YjW5W3ybLVZJlgz5TZPPyYDftJoPkiwW3uXGKndMHCQJRB9g6dcOyY1A5kJvcQO8vVVaFEAH5WQOwm59idrBBrVCAqOLI7hcOFC6UBqBWMEiRsCP2UEGMWtsWMIeQXpypgR8CQIvovBIfd5ECxZLoTTgq5CuCR1w6JUNKYpiLeSOYIe458yoLNBROw5UknXIF2eFYUthL2zIevYvhdbGQYG6XWRtHqSpPTOLSitLkmF0quafybQom7345TF4MVpxaRcRYa04cjmOsdAll8WfyIUa/U58TwaatCeq5yzApeXGO3i2orywGER/h7/Ff4uCs0LTs7ElU13zmGE6q8rmiJSu6hFgxYEnDi2X9k71t1MH+fo7uu63WrQKDZ5OzeV10w2aK2k3xRlEg6BKDWS8lcy7+fEu3dVSfROPSuSrXyvjqQcBbEjtrWaRDDoHctyJg5tPPUhfszTtRnOhirDXH1adyQEEUbQKgUtfloHnI+6NdVF8/USb/3AFdX4Ek6PgEoIPGjGO2uYIsi6zOnmu2waGvLIwOv6N1jBfxXg53nNYFs35QxpnvVpoPOwBpHDgw5SF4dMklAQdSJM0A08W6hEdCT5W45vQS82yDOvjavIFpg9P3eixumZGMJ/c3Ud/APDRGmmOBQAA"
+      },
+      "stderr": {
+        "encoding": "gzip-base64",
+        "bytes": 572,
+        "sha256": "c107a29bc41743486b708a5f784efe72a7d90b6876455402dd2ba43591c01d5c",
+        "data": "H4sIAAAAAAAC/7VQwWoCMRC971cMVLA9bFwVqy20sNhVC3ZbWHsqPcQ4uxtcE0lmrf59R60i9NJLZwiZF15m3rwAOK74jKSucAGEnqBZG1VKUzA2jPmyThfayAqkK+oVGgKHJLXxgFupCLytnUKQNZVMpV0zOPWVBAurfEuVqJZrqw35VvaWDMNpnI7f43ESZsl0FA5f01n8nL4k6Uy0RZczEn3R4YwOuCPa4bm7IKi0Qej1xHkOQEauVlQ79DBHVgsLnefotClYxP0F8RCNwlL4+BF9wgM8Wf5jLPEy2tMFs4HbNSo24MScxNnkOtr2+3cSb/N5Z3Dzw55au/SsaomwszXkRzfbRz9tDl0RBL9sJieNz61b8cuca1UCOb0CJc1ejTabvdMSnPxiQOg2smoG/+7qQAR/Wugb7KiNljwCAAA="
+      },
+      "inputs_before": 4198,
+      "inputs_after": 4198
+    }
+  ],
+  "input_tree": ".linkedspec-data/scratch/pipeline-source-provenance/pipeline-family-acceptance-0j8ivpvp",
+  "instrument_sha256": "1a9e75644399e07984024618402736828fb6119f8a1015e950918e841e4f0cf1",
+  "stream_instrument_sha256": "d054f68eb1a892b56ec2db1d4b6c56bcfb0bce5ac9b9e4fdef225c2273ffb1fe",
+  "host_scope": "Read-only host OS/Perl and standard libraries; project scratch and output on repository volume."
+}

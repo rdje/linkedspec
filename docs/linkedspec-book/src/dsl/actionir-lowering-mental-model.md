@@ -243,7 +243,8 @@ and `case_flow` / `default_flow` each concatenate two traversals. At the origina
 pipeline acceptance boundary, only `if_flow` recorded private original-source origins
 in this family. All fourteen direct Flow contracts now retain original occurrence
 frames: thirteen regex producers and the `next_stmt` statement producer. The
-recursive case/default producers remain separately owned. These private hooks
+recursive case/default producers now translate their original block and parsed
+argument frames into the full action source. These private hooks
 do not change recognition or executable membership.
 
 Direct aliases and bare markers preserve their original spelling in event `raw`:
@@ -310,12 +311,37 @@ Sorting events by source position would change the original contract. Repeated
 `case("twin")` or `default()` arguments also require separate occurrence frames;
 equal raw text cannot identify which original argument produced an event.
 
-Recursive source provenance must translate each captured block and each trimmed
+Recursive source provenance translates each captured block and each trimmed
 parser argument back to the full original action. Leading/trailing whitespace and
 empty comma slots affect source offsets even when the parser drops them from its
 argument array. Private frame authority must therefore come from the actual parser
 invocation and returned argument references, with transformed/copied/foreign callback
 results retaining their events but receiving no invented source authority.
+
+Captured attached blocks retain their original base; nested inline arguments use
+the actual parser's retained argument frames. Both paths record the full original
+action rather than the local recursive substring:
+
+```perl
+my $result = LinkedSpec::ActionIR::ScannerCore::_scan_contract_ir_events_with_provenance(
+    {id => 'case_flow'}, 'case("outer") { case("inner") }', $scanner_deps
+);
+# event order: outer, inner
+# source_origins spans: [0, 31), [16, 29)
+# both source fields contain the complete original action
+```
+
+Repeated inline twins retain distinct original coordinates. Copied or foreign
+parser results keep their ordinary events but cannot lend inline argument
+coordinates; directly captured marker text retains its own match authority.
+A transformed branch trim also keeps its event without inventing an origin.
+Nested private scans restore the outer recorder, and callback counts, arguments,
+results, exceptions and public event fields remain unchanged.
+
+The scanner still observes case-like text inside quoted payloads where its
+original recognizer did so. Adding an exact source origin does not turn that
+observation into executable membership. Quoted-source membership is subsequent
+work; the provenance oracle retains the original syntactic population.
 
 ### Original method argument boundaries
 
@@ -353,8 +379,9 @@ including copied, changed, foreign-source and opaque results. It requires the
 actual canonical returned parser hash and argument array plus the original source
 before lending coordinates. Copied or foreign-source results receive no frames;
 a changed entry receives undef while an unchanged neighbor retains its occurrence.
-Nested calls and exceptions retain their existing behavior. These parser frames do not yet admit recursive Flow origins; Flow consumers are
-a separate implementation step.
+Nested calls and exceptions retain their existing behavior. Recursive Flow consumers now use these parser frames while keeping marker-first
+traversal followed by inline branches. Source provenance remains syntactic
+observation; executable membership is a separate contract.
 
 The CSV bridge returns its original array under `arguments`; the parser bridge
 returns its original hash under `call`. Both keep metadata in `source_frames`:

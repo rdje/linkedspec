@@ -8,11 +8,12 @@ answers:
   - "does a quoted case payload produce a Flow scanner event"
   - "what owns recursive Flow source provenance"
 date: 2026-10-05
-status: fourteen direct producer hooks verified; recursive argument frames pending
+status: all sixteen Flow producer source contracts verified; canonical family acceptance owned
 tags: [perl, actionir, flow, scanner, source-provenance, traversal]
-evidence: "Direct .1.3.1 verifies14 contracts/RED16-GREEN21/1158 groups/87 origins/48 complete unchanged compiler pairs,22 evidence and16 render controls at4099-input immutable before/after boundaries. SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.0 retains original public/private Toolbox effects from immutable b73f1f59a and independent literal scalar/argument/traversal oracles. Original omitted quoted-case expectation is separately retained and observed RED; runtime input bytes remain exact."
+evidence: "Recursive .1.3.2.1 verifies4197-input before/after plus sole Flow/exact consumer deltas, RED6-GREEN7/1180 groups/147 origins/48 pairs/29 evidence controls and19 book examples. Direct .1.3.1 verifies14 contracts/RED16-GREEN21/1158 groups/87 origins/48 complete unchanged compiler pairs,22 evidence and16 render controls at4099-input immutable before/after boundaries. SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.0 retains original public/private Toolbox effects from immutable b73f1f59a and independent literal scalar/argument/traversal oracles. Original omitted quoted-case expectation is separately retained and observed RED; runtime input bytes remain exact."
 reverify:
-  - "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.1-review.py"
+  - "After final recursive acceptance: bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.2.1-review.py"
+  - "At frozen6ce479842be85219990be889914f354f1a4aaa44 replay direct .1.3.1-review.py; do not refresh its original recursive boundary after consumption changes."
   - "At frozen f3f87ce110db89fca0e3db4debd4d9948df0b8df replay the original .1.3.0 diagnosis/control; its current-source guard must not be refreshed after producer changes."
 ---
 
@@ -63,3 +64,19 @@ uses exact original source/raw authority. A changed callback entry declines its
 frame while an unchanged neighboring entry retains its own original occurrence;
 unknown/copied/foreign arrays and trim transformations do not invent authority.
 Recursive case/default and their argument bridge remain separately owned.
+
+
+The recursive consumer under `.1.3.2.1` now carries an explicit original source
+and scalar base through attached marker recursion. Each regex snapshots its
+head/block/match bounds before callbacks. Inline switch parsing consumes the
+verified private MethodExpr frames, adds the switch match and branch argument
+bases, and passes translated nested argument bases into marker recursion.
+Missing copied/foreign argument authority preserves events without borrowed
+coordinates. Direct marker captures keep their own original match authority;
+transformed inline raw text declines an origin. Event order remains marker-first
+depth-first followed by inline traversal; no lexical sort or membership change.
+Final immutable ten-suite/Phase0 proof passes1180 groups and independent
+whole-stream review verifies87-to147 origins/three seeds/48 unchanged complete
+compiler pairs with29 evidence controls; the original quoted syntactic observations above stay part of the
+literal oracle. The previous direct-test assertion of absent recursive origins
+is explicitly reconciled to that independent original oracle.

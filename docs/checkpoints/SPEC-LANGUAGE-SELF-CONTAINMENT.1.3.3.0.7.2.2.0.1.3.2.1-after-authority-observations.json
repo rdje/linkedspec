@@ -1,0 +1,92 @@
+{
+  "revision": "441f9c82343507f98428fa8982e5ad13c0cdae8c",
+  "epoch": "after",
+  "complete": true,
+  "runs": [
+    {
+      "kind": "authority",
+      "seed": 0,
+      "command": [
+        "bash",
+        "tools/project_data_run.sh",
+        "prove",
+        "-v",
+        "-Iperl",
+        "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.2.1-authority.t"
+      ],
+      "exit": 0,
+      "stdout": {
+        "encoding": "gzip-base64",
+        "bytes": 1173,
+        "sha256": "95a71df876f74f68e2f8995b2ccc70fe29430f963f027c5eb64843c3a8270abe",
+        "data": "H4sIAAAAAAAC/62T327aMBTG7/MUR9rNpjUmgUmVKnERIVpN6hha6AMYcyAejs187LK8/U4CgbS9mbYmN/4Tf+f7fjneOEUjVaHaH5y2gUblcj5LH4vFw1PxME/L+eN9Ovu+WBVfF9/mi5XIxYTfTNyKMb9ZNx+LPJUxVM7r0IgAQkDyAcq4DkjhDlQl7Q43wNs7baUBOuqgKpB+F2u0ATZoNRI4axoIlQygrdEWgVjBIybAj9tDDilrbFjCN6AiBVcDPrcCz9JEpBFvogePtdQW8LdUoT865qNvbChpzFqqPcEe8cCVUXugxgY+qBXrUDQXhclA4SB9W/XiX0lrXQCDdhjyZB6UO3lmFp1WLsQkOaf5bzIDyu4gf0VsvTirOdpVRHovG44TGAtda3n8iRzU2XfiezbQlz1TvVQBjla5GGDrZX1lMU5eHv8X/wMKwUtLW+drprrmMcMMXtf9L9K2yyPByyNPAnqO9k75h6Vb+dN39LbfTqLDxoq27wTLKYYNcYHQx+/KArnoFbPuL92Lzpq8MvPXHM4CSWEMtDiJ+0wpJNpGI5J7bZCm+Q2s2q3p5AYggyNnUsZxKEJF8BEykeUQycNpRA3B5278pUXaL6t2fdpNbmG2fPqU/Ohu2x0si7JM/gClOZFzlQQAAA=="
+      },
+      "stderr": {
+        "encoding": "gzip-base64",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "data": "H4sIAAAAAAAC/wMAAAAAAAAAAAA="
+      },
+      "inputs_before": 4198,
+      "inputs_after": 4198
+    },
+    {
+      "kind": "authority",
+      "seed": 1,
+      "command": [
+        "bash",
+        "tools/project_data_run.sh",
+        "prove",
+        "-v",
+        "-Iperl",
+        "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.2.1-authority.t"
+      ],
+      "exit": 0,
+      "stdout": {
+        "encoding": "gzip-base64",
+        "bytes": 1173,
+        "sha256": "95a71df876f74f68e2f8995b2ccc70fe29430f963f027c5eb64843c3a8270abe",
+        "data": "H4sIAAAAAAAC/62T327aMBTG7/MUR9rNpjUmgUmVKnERIVpN6hha6AMYcyAejs187LK8/U4CgbS9mbYmN/4Tf+f7fjneOEUjVaHaH5y2gUblcj5LH4vFw1PxME/L+eN9Ovu+WBVfF9/mi5XIxYTfTNyKMb9ZNx+LPJUxVM7r0IgAQkDyAcq4DkjhDlQl7Q43wNs7baUBOuqgKpB+F2u0ATZoNRI4axoIlQygrdEWgVjBIybAj9tDDilrbFjCN6AiBVcDPrcCz9JEpBFvogePtdQW8LdUoT865qNvbChpzFqqPcEe8cCVUXugxgY+qBXrUDQXhclA4SB9W/XiX0lrXQCDdhjyZB6UO3lmFp1WLsQkOaf5bzIDyu4gf0VsvTirOdpVRHovG44TGAtda3n8iRzU2XfiezbQlz1TvVQBjla5GGDrZX1lMU5eHv8X/wMKwUtLW+drprrmMcMMXtf9L9K2yyPByyNPAnqO9k75h6Vb+dN39LbfTqLDxoq27wTLKYYNcYHQx+/KArnoFbPuL92Lzpq8MvPXHM4CSWEMtDiJ+0wpJNpGI5J7bZCm+Q2s2q3p5AYggyNnUsZxKEJF8BEykeUQycNpRA3B5278pUXaL6t2fdpNbmG2fPqU/Ohu2x0si7JM/gClOZFzlQQAAA=="
+      },
+      "stderr": {
+        "encoding": "gzip-base64",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "data": "H4sIAAAAAAAC/wMAAAAAAAAAAAA="
+      },
+      "inputs_before": 4198,
+      "inputs_after": 4198
+    },
+    {
+      "kind": "authority",
+      "seed": 42,
+      "command": [
+        "bash",
+        "tools/project_data_run.sh",
+        "prove",
+        "-v",
+        "-Iperl",
+        "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.2.1-authority.t"
+      ],
+      "exit": 0,
+      "stdout": {
+        "encoding": "gzip-base64",
+        "bytes": 1173,
+        "sha256": "95a71df876f74f68e2f8995b2ccc70fe29430f963f027c5eb64843c3a8270abe",
+        "data": "H4sIAAAAAAAC/62T327aMBTG7/MUR9rNpjUmgUmVKnERIVpN6hha6AMYcyAejs187LK8/U4CgbS9mbYmN/4Tf+f7fjneOEUjVaHaH5y2gUblcj5LH4vFw1PxME/L+eN9Ovu+WBVfF9/mi5XIxYTfTNyKMb9ZNx+LPJUxVM7r0IgAQkDyAcq4DkjhDlQl7Q43wNs7baUBOuqgKpB+F2u0ATZoNRI4axoIlQygrdEWgVjBIybAj9tDDilrbFjCN6AiBVcDPrcCz9JEpBFvogePtdQW8LdUoT865qNvbChpzFqqPcEe8cCVUXugxgY+qBXrUDQXhclA4SB9W/XiX0lrXQCDdhjyZB6UO3lmFp1WLsQkOaf5bzIDyu4gf0VsvTirOdpVRHovG44TGAtda3n8iRzU2XfiezbQlz1TvVQBjla5GGDrZX1lMU5eHv8X/wMKwUtLW+drprrmMcMMXtf9L9K2yyPByyNPAnqO9k75h6Vb+dN39LbfTqLDxoq27wTLKYYNcYHQx+/KArnoFbPuL92Lzpq8MvPXHM4CSWEMtDiJ+0wpJNpGI5J7bZCm+Q2s2q3p5AYggyNnUsZxKEJF8BEykeUQycNpRA3B5278pUXaL6t2fdpNbmG2fPqU/Ohu2x0si7JM/gClOZFzlQQAAA=="
+      },
+      "stderr": {
+        "encoding": "gzip-base64",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "data": "H4sIAAAAAAAC/wMAAAAAAAAAAAA="
+      },
+      "inputs_before": 4198,
+      "inputs_after": 4198
+    }
+  ],
+  "input_tree": ".linkedspec-data/scratch/pipeline-source-provenance/pipeline-family-acceptance-jqd6labt",
+  "instrument_sha256": "1a9e75644399e07984024618402736828fb6119f8a1015e950918e841e4f0cf1",
+  "stream_instrument_sha256": "d054f68eb1a892b56ec2db1d4b6c56bcfb0bce5ac9b9e4fdef225c2273ffb1fe",
+  "host_scope": "Read-only host OS/Perl and standard libraries; project scratch and output on repository volume."
+}

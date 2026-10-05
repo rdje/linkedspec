@@ -12,6 +12,12 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-10-05 — Recursive Flow source origins (.1.3.2.1)
+
+Translate original captured-block and verified MethodExpr argument frames into full-action scalar origins in recursive case/default producers. Snapshot bounds before callbacks and retain marker-first depth-first traversal followed by inline branches; original events/args/constructor references and quoted syntactic observations remain unchanged. Reconcile only the direct-test assertions that previously required absent recursive origins.
+
+Immutable4197-input proof declares one Flow delta plus exact consumer assertion delta;14 commands retain RED6/GREEN7, ten suites1180 groups including1034 Phase0,87-to147 origins/three seeds and48 complete unchanged compiler/callback pairs. Separate authority fixture is original RED1/GREEN3;29 evidence/18 book controls reject.58 book inputs render19 examples/three chapters;49 prior hashes verify before historical freeze. Initial literal bound, book instrument quote and consumer reviewer failures remain retained with exact repairs. Whole-family canonical acceptance and executable membership remain separate.
+
 ## 2026-10-05 — Original method argument frames (.1.3.2.0.1)
 
 Add invocation-local private CSV/parser sidecars in MethodExpr. Original flush boundaries and retained occurrence indices translate through leading trim/payload bases; exact canonical return/source/method/args identities guard authority. Copied/foreign/opaque results stay unchanged without frames; changed entries decline individually. Nested recorders/errors/caller state and ordinary parser fields/callback signatures remain intact.

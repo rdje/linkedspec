@@ -147,7 +147,10 @@ subtest 'empty rejected and recursive results remain original' => sub {
         my $case=next_recursive_case();
         my $result=private_scan($id,$case->{action});
         is_deeply($result->{events},public_scan($id,$case->{action}),$id.' recursive values unchanged');
-        is_deeply($result->{source_origins},[],$id.' recursive implementation stays separately owned');
+        is_deeply($result->{source_origins},[map { +{
+            event=>{raw=>$_->{raw},args=>$_->{args}},source=>$case->{action},
+            source_span=>{start=>$_->{start},end=>$_->{end}},
+        } } @{$case->{expected}{$id}}],$id.' recursive origins match independent original source');
     }
 };
 sub next_recursive_case {return (grep {$_->{id} eq 'recursive'} @$cases)[0]}

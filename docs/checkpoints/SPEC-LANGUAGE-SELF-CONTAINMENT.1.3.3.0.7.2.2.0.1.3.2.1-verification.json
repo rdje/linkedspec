@@ -1,0 +1,168 @@
+{
+  "complete": true,
+  "revision": "441f9c82343507f98428fa8982e5ad13c0cdae8c",
+  "regular_inputs": 4197,
+  "overlays": 2,
+  "contracts": 16,
+  "recursive_contracts": 2,
+  "consumer_delta": 1,
+  "seeds": 3,
+  "actual_commands": 14,
+  "authority_groups": 3,
+  "authority_before_red": 1,
+  "before_red_groups": 6,
+  "after_green_groups": 7,
+  "fixture_suites": 10,
+  "fixture_groups": 1180,
+  "before_origins": 87,
+  "after_origins": 147,
+  "complete_compiler_pairs": 48,
+  "controls": [
+    {
+      "name": "if_flow if_flow missing origin",
+      "observed": "RED",
+      "reason": "original hook population"
+    },
+    {
+      "name": "elseif_flow elseif_flow missing origin",
+      "observed": "RED",
+      "reason": "literal direct original scalar origins"
+    },
+    {
+      "name": "else_flow else_flow missing origin",
+      "observed": "RED",
+      "reason": "literal direct original scalar origins"
+    },
+    {
+      "name": "endif_flow endif_flow missing origin",
+      "observed": "RED",
+      "reason": "literal direct original scalar origins"
+    },
+    {
+      "name": "while_flow while_flow missing origin",
+      "observed": "RED",
+      "reason": "literal direct original scalar origins"
+    },
+    {
+      "name": "switch_flow switch_flow missing origin",
+      "observed": "RED",
+      "reason": "literal direct original scalar origins"
+    },
+    {
+      "name": "endcase_flow endcase_flow missing origin",
+      "observed": "RED",
+      "reason": "literal direct original scalar origins"
+    },
+    {
+      "name": "endswitch_flow endswitch_flow missing origin",
+      "observed": "RED",
+      "reason": "literal direct original scalar origins"
+    },
+    {
+      "name": "say_stmt say_stmt missing origin",
+      "observed": "RED",
+      "reason": "literal direct original scalar origins"
+    },
+    {
+      "name": "print_stmt print_stmt missing origin",
+      "observed": "RED",
+      "reason": "literal direct original scalar origins"
+    },
+    {
+      "name": "print_each print_each missing origin",
+      "observed": "RED",
+      "reason": "literal direct original scalar origins"
+    },
+    {
+      "name": "exit_now exit_now missing origin",
+      "observed": "RED",
+      "reason": "literal direct original scalar origins"
+    },
+    {
+      "name": "next_stmt next_stmt missing origin",
+      "observed": "RED",
+      "reason": "literal direct original scalar origins"
+    },
+    {
+      "name": "return_undef return_undef missing origin",
+      "observed": "RED",
+      "reason": "literal direct original scalar origins"
+    },
+    {
+      "name": "recursive switch_flow missing origin",
+      "observed": "RED",
+      "reason": "literal direct original scalar origins"
+    },
+    {
+      "name": "recursive case_flow missing origin",
+      "observed": "RED",
+      "reason": "literal direct original scalar origins"
+    },
+    {
+      "name": "recursive default_flow missing origin",
+      "observed": "RED",
+      "reason": "literal direct original scalar origins"
+    },
+    {
+      "name": "arguments case_flow missing origin",
+      "observed": "RED",
+      "reason": "literal direct original scalar origins"
+    },
+    {
+      "name": "arguments default_flow missing origin",
+      "observed": "RED",
+      "reason": "literal direct original scalar origins"
+    },
+    {
+      "name": "origin_event",
+      "observed": "RED",
+      "reason": "actual returned constructor argument identities"
+    },
+    {
+      "name": "constructed_event",
+      "observed": "RED",
+      "reason": "actual returned constructor argument identities"
+    },
+    {
+      "name": "constructed_args",
+      "observed": "RED",
+      "reason": "actual returned constructor argument identities"
+    },
+    {
+      "name": "wrong scalar interval",
+      "observed": "RED",
+      "reason": "literal direct original scalar origins"
+    },
+    {
+      "name": "lost callback",
+      "observed": "RED",
+      "reason": "unchanged exact callback effects"
+    },
+    {
+      "name": "lost actual run",
+      "observed": "RED",
+      "reason": "complete guarded command population"
+    },
+    {
+      "name": "lost Git input",
+      "observed": "RED",
+      "reason": "complete unique Git membership"
+    },
+    {
+      "name": "unrelated RED stderr",
+      "observed": "RED",
+      "reason": "only expected RED harness diagnostics"
+    },
+    {
+      "name": "lost authority command",
+      "observed": "RED",
+      "reason": "complete authority commands"
+    },
+    {
+      "name": "failed authority assertion",
+      "observed": "RED",
+      "reason": "positive authority fixture reach"
+    }
+  ],
+  "instrument_sha256": "f91dac4e98882dad88457e1beb7a9c5bf4767bd438a80153337d236fa2c2c8f5"
+}

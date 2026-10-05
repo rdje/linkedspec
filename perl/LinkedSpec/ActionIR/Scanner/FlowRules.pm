@@ -46,30 +46,64 @@ sub _normalize_bare_zero_arg_flow_marker_expr {
  return $expr
 }
 
+# Recursive scans retain local syntax and traversal while recording against the
+# full original action. An absent base preserves events without source authority.
+sub _record_recursive_flow_event {
+ my ($event, $source, $base, $start, $end) = @_;
+ return $event unless ref($LinkedSpec::ActionIR::ScannerCore::_source_event_recorder) eq 'CODE'
+  && defined($base) && defined($source) && !ref($source);
+ return LinkedSpec::ActionIR::ScannerCore::_record_scanned_source_event(
+  $event, $source, $base + $start, $base + $end,
+ )
+}
+
+sub _parse_flow_arguments_with_frames {
+ my @args = @_;
+ return {call => _parse_method_function_expr(@args), source_frames => []}
+  unless ref($LinkedSpec::ActionIR::ScannerCore::_source_event_recorder) eq 'CODE';
+ LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, 'LinkedSpec::ActionIR::MethodExpr');
+ return LinkedSpec::ActionIR::MethodExpr::_parse_method_with_source_frames(
+  \&_parse_method_function_expr, @args,
+ )
+}
+
 sub _scan_inline_switch_branch_events {
  my ($code, $target_method) = @_;
  my @events;
 
  while ($code =~ /\b(?<expr>switch\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))/g) {
-  my $switch_call = _parse_method_function_expr($+{expr});
+  my ($switch_start, $switch_expr) = ($-[0], $+{expr});
+  my $switch_framed = _parse_flow_arguments_with_frames($switch_expr);
+  my $switch_call = $switch_framed->{call};
   next unless $switch_call;
   my $switch_args = $switch_call->{args} || [];
   next unless ref($switch_args) eq 'ARRAY' && @$switch_args >= 2;
 
-  foreach my $branch_expr (@{$switch_args}[1 .. $#$switch_args]) {
-   my $branch_call = _parse_method_function_expr($branch_expr);
+  for my $branch_index (1 .. $#$switch_args) {
+   my $branch_expr = $switch_args->[$branch_index];
+   my $branch_frame = $switch_framed->{source_frames}[$branch_index];
+   my $branch_base = defined($branch_frame)
+    ? $switch_start + $branch_frame->{source_span}{start} : undef;
+   my $branch_framed = _parse_flow_arguments_with_frames($branch_expr);
+   my $branch_call = $branch_framed->{call};
    next unless $branch_call && ($branch_call->{method} // '') eq $target_method;
 
    if ($target_method eq 'case') {
     my $effective_args = $branch_call->{args} || [];
     next unless ref($effective_args) eq 'ARRAY' && @$effective_args >= 1;
-    push @events, {
+    my $event = {
      raw  => _trim_action_ir_value($branch_expr),
      args => {value => _trim_action_ir_value($effective_args->[0])},
     };
+    push @events, defined($branch_frame) && $event->{raw} eq $branch_frame->{raw}
+     ? _record_recursive_flow_event($event, $code, $branch_base, 0, length($branch_expr)) : $event;
     if (@$effective_args > 1) {
-     foreach my $nested_expr (@{$effective_args}[1 .. $#$effective_args]) {
-      push @events, @{_scan_contract_case_marker_events($nested_expr)};
+     for my $nested_index (1 .. $#$effective_args) {
+      my $nested_expr = $effective_args->[$nested_index];
+      my $frame = $branch_framed->{source_frames}[$nested_index];
+      my $base = defined($branch_base) && defined($frame)
+       ? $branch_base + $frame->{source_span}{start} : undef;
+      push @events, @{_scan_contract_case_marker_events($nested_expr, $code, $base)};
      }
     }
     next;
@@ -78,12 +112,18 @@ sub _scan_inline_switch_branch_events {
    if ($target_method eq 'default') {
     my $effective_args = $branch_call->{args} || [];
     next unless ref($effective_args) eq 'ARRAY';
-    push @events, {
+    my $event = {
      raw  => _trim_action_ir_value($branch_expr),
      args => {},
     };
-    foreach my $nested_expr (@$effective_args) {
-     push @events, @{_scan_contract_default_marker_events($nested_expr)};
+    push @events, defined($branch_frame) && $event->{raw} eq $branch_frame->{raw}
+     ? _record_recursive_flow_event($event, $code, $branch_base, 0, length($branch_expr)) : $event;
+    for my $nested_index (0 .. $#$effective_args) {
+     my $nested_expr = $effective_args->[$nested_index];
+     my $frame = $branch_framed->{source_frames}[$nested_index];
+     my $base = defined($branch_base) && defined($frame)
+      ? $branch_base + $frame->{source_span}{start} : undef;
+     push @events, @{_scan_contract_default_marker_events($nested_expr, $code, $base)};
     }
    }
   }
@@ -93,9 +133,11 @@ sub _scan_inline_switch_branch_events {
 }
 
 sub _scan_contract_case_marker_events {
- my ($code) = @_;
+ my ($code, $source, $base) = @_;
+ ($source, $base) = ($code, 0) if @_ == 1;
  my @events;
  while ($code =~ /\b(?<head>case\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))(?<block>\s*(?<BRACE>\{(?:[^{}\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&BRACE))*\}))?/g) {
+  my ($start, $end, $block_start) = ($-[0], $+[0], $-[3]);
   my $head = $+{head};
   my $block = $+{block};
   my $call = _parse_method_function_expr($head);
@@ -110,23 +152,30 @@ sub _scan_contract_case_marker_events {
   }
   next unless $effective_args;
   my $raw = $head.($block // '');
-  push @events, {raw => $raw, args => {value => _trim_action_ir_value($effective_args->[0])}};
-  push @events, @{_scan_contract_case_marker_events($block)} if defined $block;
+  push @events, _record_recursive_flow_event(
+   {raw => $raw, args => {value => _trim_action_ir_value($effective_args->[0])}},
+   $source, $base, $start, $end,
+  );
+  push @events, @{_scan_contract_case_marker_events($block, $source,
+   defined($base) ? $base + $block_start : undef)} if defined $block;
  }
  return \@events
 }
 
 sub _scan_contract_default_marker_events {
- my ($code) = @_;
+ my ($code, $source, $base) = @_;
+ ($source, $base) = ($code, 0) if @_ == 1;
  my @events;
  while ($code =~ /\b(?<head>default(?!\w)(?:\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\)))?)(?<block>\s*(?<BRACE>\{(?:[^{}\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&BRACE))*\}))?/g) {
+  my ($start, $end, $block_start, $head, $block) = ($-[0], $+[0], $-[3], $+{head}, $+{block});
   my $call = _parse_method_function_expr(_normalize_bare_zero_arg_flow_marker_expr($+{head}));
   next unless $call;
   my $effective_args = _normalize_method_args_with_optional_scope($call->{args} || [], 0, 0);
   next unless $effective_args;
-  my $raw = $+{head}.($+{block} // '');
-  push @events, {raw => $raw, args => {}};
-  push @events, @{_scan_contract_default_marker_events($+{block})} if defined $+{block};
+  my $raw = $head.($block // '');
+  push @events, _record_recursive_flow_event({raw => $raw, args => {}}, $source, $base, $start, $end);
+  push @events, @{_scan_contract_default_marker_events($block, $source,
+   defined($base) ? $base + $block_start : undef)} if defined $block;
  }
  return \@events
 }
