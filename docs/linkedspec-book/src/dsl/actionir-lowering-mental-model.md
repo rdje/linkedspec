@@ -120,7 +120,10 @@ ignored comments. Its public and private scans keep the same arguments and depen
 callback inputs/results. All eleven full-input regex pipeline contracts now retain private
 source origins; ten new hooks preserve the existing `set_value` channel. Match coordinates
 and raw expressions are captured before parser/planner callbacks, and recording keeps the
-original event and argument objects. Eight statement contracts still await their frame hooks.
+original event and argument objects. All eight statement contracts now carry original
+occurrence frames through their ten existing event constructors. The supplied splitter runs
+once and returns its original array. Ignored statements still advance the frame index;
+copied, changed, opaque or foreign-source arrays supply no occurrence authority.
 Quoted matches are syntactic observations, not executable membership.
 
 For repeated calls, the private channel identifies each original occurrence:
@@ -136,6 +139,33 @@ The same original-owner regression first fails for the ten missing hooks, then p
 all eleven regex contracts; empty and rejected calls add no origins. Public events still
 contain only `raw` and `args`. Independent before/after probes preserve full generated
 source, substitution and descriptor channels, including original pipeline plan inputs.
+
+Statement occurrences use the same private channel. Repeated equal text keeps distinct
+scalar intervals, and nested scans restore the outer collector:
+
+```perl
+my $result = LinkedSpec::ActionIR::ScannerCore::_scan_contract_ir_events_with_provenance(
+    {id => 'scalar_assignment_operator'}, 'value = 7; value = 7;', $scanner_deps
+);
+# source_origins spans: [0, 9), [11, 20)
+```
+
+Direct and nested hash assignments each keep their original constructor branch:
+
+```perl
+my $result = LinkedSpec::ActionIR::ScannerCore::_scan_contract_ir_events_with_provenance(
+    {id => 'hash_index_assignment_operator'}, "tree['key'] = '雪'; tree['key'][0] = '雪';", $scanner_deps
+);
+# source_origins spans: [0, 17), [19, 39)
+```
+
+The eight covered statement contracts are print-foreach, split/trim/filter assignment,
+scalar assignment, array append, array end mutation, hash-index assignment, key assignment
+and value discard. Both value-discard branches and all four array end methods retain their
+existing arguments. Later callback transformations preserve events but decline origins when
+the resulting raw text no longer matches the original frame. Exceptions and caller error
+state retain their existing behavior. This is private compiler provenance; public events
+remain `raw`/`args`, and family signoff still requires its canonical closeout.
 
 The split scanner now reports the normalized source expression from its successful planner:
 

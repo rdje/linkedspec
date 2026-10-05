@@ -1,0 +1,177 @@
+{
+  "complete": true,
+  "revision": "a076218e9d5591b7e0cbf796774476dd1fc90f61",
+  "populations": {
+    "before": [
+      4025,
+      4025,
+      4
+    ],
+    "after": [
+      4025,
+      4024,
+      5
+    ]
+  },
+  "actual_commands": 20,
+  "contracts": 19,
+  "regex_contracts": 11,
+  "statement_contracts": 8,
+  "new_constructors": 10,
+  "seeds": 3,
+  "selected_events_per_epoch": 207,
+  "authored_frames_per_epoch": 135,
+  "origins_before": 99,
+  "origins_after": 207,
+  "regression_groups": 16,
+  "original_failed_groups": 10,
+  "consumer_groups": 751,
+  "consumer_plans": [
+    28,
+    13,
+    23,
+    15,
+    12,
+    605,
+    5,
+    13,
+    8,
+    29
+  ],
+  "phase0_groups": 1034,
+  "total_green_groups": 1801,
+  "unchanged_complete_toolbox": true,
+  "controls": [
+    {
+      "name": "erase contract",
+      "observed": "RED",
+      "reason": "exact nineteen-contract population and order"
+    },
+    {
+      "name": "change original argument",
+      "observed": "RED",
+      "reason": "authored exact public arguments and occurrences"
+    },
+    {
+      "name": "reuse equal raw origin",
+      "observed": "RED",
+      "reason": "exact before/after authored pipeline origins"
+    },
+    {
+      "name": "erase new statement origin",
+      "observed": "RED",
+      "reason": "exact before/after authored pipeline origins"
+    },
+    {
+      "name": "forge argument identity",
+      "observed": "RED",
+      "reason": "original returned event and argument reference identities"
+    },
+    {
+      "name": "erase callback effect",
+      "observed": "RED",
+      "reason": "unchanged original callback sequence arguments and results"
+    },
+    {
+      "name": "erase ignored frame",
+      "observed": "RED",
+      "reason": "authored mixed statement frames"
+    },
+    {
+      "name": "extend public schema",
+      "observed": "RED",
+      "reason": "unchanged private public events"
+    },
+    {
+      "name": "forge Toolbox success",
+      "observed": "RED",
+      "reason": "complete clean Toolbox inspection"
+    },
+    {
+      "name": "erase nested assignment constructor origin",
+      "observed": "RED",
+      "reason": "exact before/after authored pipeline origins"
+    },
+    {
+      "name": "erase literal receiver constructor origin",
+      "observed": "RED",
+      "reason": "exact before/after authored pipeline origins"
+    },
+    {
+      "name": "promote tautological reference flag",
+      "observed": "RED",
+      "reason": "actual equal-valued copied-return distinguisher"
+    },
+    {
+      "name": "erase supplied input",
+      "observed": "RED",
+      "reason": "complete unique Git membership"
+    },
+    {
+      "name": "forge immutable bytes",
+      "observed": "RED",
+      "reason": "original Git member bytes"
+    },
+    {
+      "name": "erase candidate overlay",
+      "observed": "RED",
+      "reason": "exact authored overlay membership"
+    },
+    {
+      "name": "replace foreign owner",
+      "observed": "RED",
+      "reason": "only candidate owner replaces a Git member"
+    },
+    {
+      "name": "promote incomplete capture",
+      "observed": "RED",
+      "reason": "complete exact-source capture"
+    },
+    {
+      "name": "forge producer",
+      "observed": "RED",
+      "reason": "actual capture producer"
+    },
+    {
+      "name": "hide failed command",
+      "observed": "RED",
+      "reason": "actual expected command exit"
+    },
+    {
+      "name": "forge channel",
+      "observed": "RED",
+      "reason": "channel bytes"
+    },
+    {
+      "name": "hide original-owner override",
+      "observed": "RED",
+      "reason": "exact original-owner override environment"
+    },
+    {
+      "name": "shorten regression plan",
+      "observed": "RED",
+      "reason": "complete regression plan"
+    },
+    {
+      "name": "shorten direct-consumer plan",
+      "observed": "RED",
+      "reason": "complete selected suite plan"
+    },
+    {
+      "name": "shorten Phase0 plan",
+      "observed": "RED",
+      "reason": "complete Phase0 plan"
+    },
+    {
+      "name": "hide nested Phase0 failure",
+      "observed": "RED",
+      "reason": "no nested Phase0 failure"
+    },
+    {
+      "name": "change original lowering",
+      "observed": "RED",
+      "reason": "unchanged complete Toolbox channels"
+    }
+  ],
+  "instrument_sha256": "f9ecc709b1b3084bdefaab63ce03093a91c60037872d9b1f488d301d8e315a63"
+}

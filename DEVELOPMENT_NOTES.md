@@ -12,6 +12,14 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-10-05 — pipeline statement occurrence authority (SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.2)
+
+Reuse the established private statement bridge in eight loops and record all ten original event constructors. Frame selection occurs before recognition, preserving ignored-statement alignment. The original returned array and occurrence index authorize source coordinates; copied/changed/opaque/foreign results and later raw transformations preserve events without invented origins. Nested scans restore outer collectors; public values, callback effects and compiler outputs remain exact.
+
+Eight statement contracts retain original frames through ten constructors. Same16-group fixture is original-owner RED10/current GREEN16; ten direct consumers751 and full Phase01034 complete1801 GREEN groups. Twenty guarded commands supply two4029-file boundaries from immutablea076218; only PrimitivePipelineRules changes. Three seeds retain207 original events/135 frames per epoch; private origins grow99 to207. Public arguments, five default callback sequences/results, normalized split metadata and full substitution/descriptor/generated-parser channels remain exact. Twenty-six reason-specific evidence controls observe RED. Corrected origin_event compares actual returned events; an equal-valued returned-array copy distinguishes the old self-comparison marker. Original probe/adjudications and dedicated direct identity tests stay unchanged. Book58 inputs/ten examples/three chapters/thirteen controls and tool storage pass;110 prior input bindings verify before historical freeze.
+
+The original mixed probe origin_event marker is a self-comparison. Preserve its bytes/adjudication; the corrected probe compares actual returned events and an actual equal-valued array copy distinguishes values from references. Dedicated older direct reference tests retain their scope. Correct bounded frontier rows from their canonical done/active nodes; family .1.2.3 remains canonical.
+
 ## 2026-10-05 — split diagnostic source contract (SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.1.1)
 
 The successful default split plan already supplies source_expr and both binding/legacy lowering owners already consume it. Correct only scanner args.source, preferring a defined canonical expression and preserving older callback source_symbol when absent/undefined; defined "0" must survive. The independent oracle covers bare/literal/compound inputs plus five callback variants. Before/after metadata normalization permits only tagged split source values; all unrelated descriptor fields and full substitution/dump bytes remain equal. Source callbacks and original occurrence/reference identities are unchanged, including all19 mixed contracts. Same8-group RED5/GREEN8 and722 current groups plus25 evidence corruptions establish focused correction at complete fixed inputs.

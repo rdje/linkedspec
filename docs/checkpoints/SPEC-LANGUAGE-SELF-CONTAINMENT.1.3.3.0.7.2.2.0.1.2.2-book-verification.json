@@ -1,0 +1,74 @@
+{
+  "book_inputs": 58,
+  "rendered_examples": 10,
+  "rendered_sections": 3,
+  "controls": [
+    {
+      "name": "promote failed render",
+      "rejected": true,
+      "reason": "complete actual render"
+    },
+    {
+      "name": "erase render guard",
+      "rejected": true,
+      "reason": "book input guards"
+    },
+    {
+      "name": "forge renderer",
+      "rejected": true,
+      "reason": "actual book instrument"
+    },
+    {
+      "name": "forge rendered channel",
+      "rejected": true,
+      "reason": "book channel bytes"
+    },
+    {
+      "name": "erase actual examples",
+      "rejected": true,
+      "reason": "original authored rendered examples"
+    },
+    {
+      "name": "erase composition teaching",
+      "rejected": true,
+      "reason": "rendered twenty-contract composition teaching"
+    },
+    {
+      "name": "erase family closeout teaching",
+      "rejected": true,
+      "reason": "rendered immutable family closeout teaching"
+    },
+    {
+      "name": "erase pipeline diagnosis",
+      "rejected": true,
+      "reason": "rendered pipeline regex source teaching"
+    },
+    {
+      "name": "erase corrected metadata",
+      "rejected": true,
+      "reason": "rendered corrected source metadata teaching"
+    },
+    {
+      "name": "erase diagnostic teaching",
+      "rejected": true,
+      "reason": "rendered diagnostic source teaching"
+    },
+    {
+      "name": "erase historical input classification",
+      "rejected": true,
+      "reason": "rendered historical input classification teaching"
+    },
+    {
+      "name": "erase statement teaching",
+      "rejected": true,
+      "reason": "rendered pipeline statement source teaching"
+    },
+    {
+      "name": "erase returned identity teaching",
+      "rejected": true,
+      "reason": "rendered returned reference identity teaching"
+    }
+  ],
+  "complete": true,
+  "instrument_sha256": "88f6c1cbdc1a2237a146b90b35f714816d8d4b6b9fa2b024665bc5ba713b4467"
+}

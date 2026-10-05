@@ -1,0 +1,18 @@
+{
+  "scope": "Initial live original-owner fixture observes RED10/16. Retained exact fixture/owner/TAP bytes; complete artifact inputs are not closed by this preflight. Final capture repeats the original-owner failure with immutable parent input guards before production hooks. No promotion of this preliminary boundary.",
+  "fixture_sha256": "2114d9b7050dc324461f776ae8717b7cea384ba042e5219ba55e43593cd1c673",
+  "tap_sha256": "67fc8243e669081fb8bbef24892ec38204acc2d36094c51f4e3b611e32b76fd1",
+  "tap_bytes": 14748,
+  "baseline_environment": "LINKEDSPEC_PIPELINE_STATEMENT_BASELINE=1",
+  "command": [
+    "bash",
+    "tools/project_data_run.sh",
+    "env",
+    "LINKEDSPEC_PIPELINE_STATEMENT_BASELINE=1",
+    "prove",
+    "-v",
+    "-Iperl",
+    "t/actionir_pipeline_statement_source_provenance.t"
+  ],
+  "exit": 1
+}

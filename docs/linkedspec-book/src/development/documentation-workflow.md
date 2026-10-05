@@ -231,6 +231,19 @@ replays reproduce their same failures with the correct original lines. Distingui
 controls reject the old context, incomplete runs, changed producers, erased failures
 and forged channels. A filename alone is never evidence of diagnostic source identity.
 
+### Reference identity in provenance probes
+
+An origin must reference the actual event returned by the scanner. Comparing
+`origin.event` with a local variable assigned from that same field checks the object
+against itself; it cannot establish the returned-event relationship. Compare against
+`result.events[index]` instead. Equal JSON values do not establish reference identity.
+
+The retained original pipeline diagnosis contains that limited self-comparison marker.
+Its original bytes and adjudication remain available. A corrected probe compares the
+actual returned array, and a distinguishing control copies that array while preserving
+the origins: values remain equal, the old marker still passes, and the required reference
+relationship fails. Dedicated constructor/argument identity tests retain their own scope.
+
 ## Definition of done
 
 If a slice changes what the outside world needs to understand about LinkedSpec, the book should move too.

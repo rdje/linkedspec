@@ -2,19 +2,19 @@
 
 ## Current Activity
 
-Full PNT: pipeline regex source channels and normalized split-source metadata correction are focused-verified. Exact canonical receipt gates public correction/regex-parent landing. Eight statement frame contracts .1.2.2 follow, then independent canonical full family .1.2.3; other producers and semantic repairs stay separate.
+Full PNT: all nineteen pipeline private provenance contracts are implemented. Statement .1.2.2 is focused-verified; independent immutable canonical family .1.2.3 is next. Remaining Flow/legacy/staged producers and semantic repairs stay separate.
 
 ## Latest Completed Slice
 
-`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.1.1` — Same8-group original-owner RED5/current GREEN8; regex13 and seven direct suites701 complete722 GREEN groups. Two3991-file fixed boundaries derive from immutable95e6a0293; only actual producer and current regex expectation fixture replace Git members. Twenty-three full-channel guarded commands, three seeds/72 original metadata occurrences-origins/nine default Toolbox records per epoch; original19-contract mixed207 events/135 frames/99 origins preserved. Only declared source arguments/helper/canonical descriptor values change; all callback plans/raw/target/delimiter/references/origins and complete substitution/generated parser dumps stay exact. Twenty-five evidence controls observe RED;58-input book renders eight examples/three chapters/eleven controls. All33 preceding claim hashes verify before historical-only freeze. Original null records remain unchanged. Exact staged canonical CI is mandatory before public correction/regex .1.2.1 closure; focused claim publishes no new canonical measurement. Planner/statement hooks/hooks/storage/dependencies unchanged; directly dependent selector classification is repaired.
-
-First canonical failure is retained: two unchanged historical diagnosis artifacts needed exact path/content classification. Original/current/composed exits1/0/0 over4021 recoverable regular inputs pass18 controls, untracked/concurrency/public/runtime guards; exact restaged canonical receipt gates landing. Initial incomplete composed-input capture stays separately limited.
+`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.2` — Eight statement contracts retain original frames through ten constructors. Same16-group fixture is original-owner RED10/current GREEN16; ten direct consumers751 and full Phase01034 complete1801 GREEN groups. Twenty guarded commands supply two4029-file boundaries from immutablea076218; only PrimitivePipelineRules changes. Three seeds retain207 original events/135 frames per epoch; private origins grow99 to207. Public arguments, five default callback sequences/results, normalized split metadata and full substitution/descriptor/generated-parser channels remain exact. Twenty-six reason-specific evidence controls observe RED. Corrected origin_event compares actual returned events; an equal-valued returned-array copy distinguishes the old self-comparison marker. Original probe/adjudications and dedicated direct identity tests stay unchanged. Book58 inputs/ten examples/three chapters/thirteen controls and tool storage pass;110 prior input bindings verify before historical freeze. Focused doctrine boundary governs this slice.
 
 ## Next Action
 
-Activate `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.2` from clean HEAD only after metadata canonical landing. Bind exact original returned-array occurrence frames to eight statement contracts, including both structured-assignment/value-drop branches and original callback/source-authority guards. Commit focused proof before canonical full family .1.2.3; other producer/semantic repairs remain open.
+Activate `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.3` from the clean committed statement boundary. Independently recur all nineteen pipeline contracts with exact original arguments/frames/references/callbacks/compiler channels, retained distinguishing controls and direct consumers. Complete book/claim/live docs, then require exact staged canonical CI before family parent closure.
 
 ## Recent Completions
+
+- `2026-10-05` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.2` retains eight statement frame contracts/RED10-GREEN16/1801 groups/207 origins and corrected returned-reference proof.
 
 - `2026-10-05` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.1.1` corrects normalized split metadata/RED5-GREEN8/722 guards behind exact canonical landing.
 
@@ -45,8 +45,6 @@ Activate `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.2` from clean HEAD 
 - `2026-10-04` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.0` implements exact private spans for three scanner contracts with public output unchanged.
 
 - `2026-10-04` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.0` rejects raw-key occurrence inference and freezes complete quote RED.
-
-- `2026-10-04` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.1` freezes current quoted value/event/marker/runtime diagnosis and splits bounded repair.
 
 ## History
 

@@ -1,10 +1,10 @@
 # MEMORY
 
-- activation_commit: `95e6a02935155b9ab7b5c30f79a3275529b803da` — clean pipeline metadata repair activation base.
-- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.1.1 - repair split source metadata`.
-- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.2` (pending) — eight pipeline statement source-frame contracts.
-- next_action: Activate .1.2.2 from clean HEAD; implement original statement-array/occurrence frame hooks for all eight pipeline contracts and both nested-assignment/value-drop branches with source-bound RED/GREEN.
-- in_flight_uncommitted: None; metadata repair and exact historical selector classification land with focused proof and canonical receipt. First failed gate/evidence remain archived. No jobs/deletions.
+- activation_commit: `a076218e9d5591b7e0cbf796774476dd1fc90f61` — clean pipeline statement hook activation base.
+- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.2 - retain pipeline statement source origins`.
+- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.3` (pending) — independent canonical pipeline family acceptance.
+- next_action: Activate .1.2.3 from clean current HEAD; independently recur all19 committed pipeline contracts, original channels/identities and consumers, then require exact staged canonical CI before family closeout.
+- in_flight_uncommitted: none; .1.2.2 capture/review/book/storage fully consumed and accepted; all19 source contracts implemented with original public/compiler channels preserved.
 - blockers: No access/decision blocker. Matches and attached/marker/value/null/while executors are repaired; control parent/order and raw-expression reporting are reconciled; quoted/comment readiness .7.2/.3 precedes dispatcher/full execution. Other startup repairs remain separate.
   Wrapper startup .7 remains open; recovery/purge stay prohibited.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the

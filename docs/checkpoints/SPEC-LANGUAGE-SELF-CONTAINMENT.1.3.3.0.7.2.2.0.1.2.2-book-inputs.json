@@ -1,0 +1,354 @@
+{
+  "capsule_sha256": "4c1a5c6e817a1a37a694fb5650973d59a2584d74d2442b0f91219f59d9b09436",
+  "entries": [
+    {
+      "path": "docs/linkedspec-book/.gitignore",
+      "bytes": 6,
+      "sha256": "fe82c7da551079d832cf74200b0b359b4df9828cb4a0416fa7384f07a2ae6a13",
+      "mode": 420
+    },
+    {
+      "path": "docs/linkedspec-book/book.toml",
+      "bytes": 347,
+      "sha256": "a95355e608b34cd5373cab0f0d98817457dd2151002d3bf9d7333d3f29f25f9d",
+      "mode": 420
+    },
+    {
+      "path": "docs/linkedspec-book/src/SUMMARY.md",
+      "bytes": 3870,
+      "sha256": "c03d98fa7402249761b77e240abcd7a8f634566088f6ea49640d1019f6736a6c",
+      "mode": 420
+    },
+    {
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "bytes": 217436,
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2",
+      "mode": 420
+    },
+    {
+      "path": "docs/linkedspec-book/src/appendix/formal-grammar.md",
+      "bytes": 71918,
+      "sha256": "c114042e5cc8ac59097427a46a0f40821a0bb864f6aeac377aa2a2f41c3a0b19",
+      "mode": 420
+    },
+    {
+      "path": "docs/linkedspec-book/src/appendix/helper-contract-catalog.md",
+      "bytes": 121807,
+      "sha256": "11214e8d0a123fa30352a0686d8438f645708a607b956f800d35ec0a2a885f4c",
+      "mode": 420
+    },
+    {
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "bytes": 41970,
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c",
+      "mode": 420
+    },
+    {
+      "path": "docs/linkedspec-book/src/architecture/owner-tree.md",
+      "bytes": 45849,
+      "sha256": "1cb1d75f9ff0eb070495a702bf8215ee696212da21b15d099b388f32996e87a4",
+      "mode": 420
+    },
+    {
+      "path": "docs/linkedspec-book/src/architecture/structured-format-program.md",
+      "bytes": 100729,
+      "sha256": "f2ce513fdce3fd3774d9c6c51b9733a82275350e8d278f8e626040bebfe3b456",
+      "mode": 420
+    },
+    {
+      "path": "docs/linkedspec-book/src/compiler/compiled-state-model.md",
+      "bytes": 15178,
+      "sha256": "2665d8ae4968dd6fc81fc649b15240adbaf73793bde555f35a65b723bb508312",
+      "mode": 420
+    },
+    {
+      "path": "docs/linkedspec-book/src/compiler/diagnostics.md",
+      "bytes": 12299,
+      "sha256": "09208db53ac8040f6acf8a424883401f628c7d8bcdc55d4861b4e4c5947b14d8",
+      "mode": 420
+    },
+    {
+      "path": "docs/linkedspec-book/src/compiler/generated-handlers-and-dispatch.md",
+      "bytes": 31894,
+      "sha256": "c6a37d3f55e17e57379bff6537f8a26c67f44149bc07fa817b80ced01291b659",
+      "mode": 420
+    },
+    {
+      "path": "docs/linkedspec-book/src/compiler/pipeline-overview.md",
+      "bytes": 44210,
+      "sha256": "fd1d79a452c3ad6de36883dee14bcd6c33b81d2c346c2c165b0004dafdad760e",
+      "mode": 420
+    },
+    {
+      "path": "docs/linkedspec-book/src/compiler/staged-ast-enrichment.md",
+      "bytes": 61374,
+      "sha256": "38c48a27c5efe81c82940d8cadf38e6382377c75dd93dac23059b018ddc6a667",
+      "mode": 420
+    },
+    {
+      "path": "docs/linkedspec-book/src/development/codegen-inspector.md",
+      "bytes": 2518,
+      "sha256": "a695de68f3aa86242c7aeaba63d0981cdd268ee65fca2c6a17bf5bfef6eff81a",
+      "mode": 420
+    },
+    {
+      "path": "docs/linkedspec-book/src/development/documentation-workflow.md",
+      "bytes": 18011,
+      "sha256": "952a43e66c6f0000e82ba0acb51e1eb141198e2d6ec9a9fb2c582ba40eac03d2",
+      "mode": 420
+    },
+    {
+      "path": "docs/linkedspec-book/src/development/local-ci-and-regression.md",
+      "bytes": 147771,
+      "sha256": "2ebe2fa300c98a820c8c90eda946e3fac175ff1c8ebd73b95f5149d687624cd0",
+      "mode": 420
+    },
+    {
+      "path": "docs/linkedspec-book/src/development/macos-rust-launch-latency.md",
+      "bytes": 1686,
+      "sha256": "fa7d0935c2f9ee4a3b9f2a0ab30ff1ac9efdbac5b899e362eec7c5e637e162d0",
+      "mode": 420
+    },
+    {
+      "path": "docs/linkedspec-book/src/development/regression-fixtures.md",
+      "bytes": 3190,
+      "sha256": "8d31c1c58ec9b470b17a079f8d58f955b6cded9816d443f082f2ddb06cbae54e",
+      "mode": 420
+    },
+    {
+      "path": "docs/linkedspec-book/src/dsl/action-and-lifecycle-placement.md",
+      "bytes": 24890,
+      "sha256": "9d1889cd9c5406e3b0b7f9d80a4b2868839d006fdbfe08de176d5d808ae1dba9",
+      "mode": 420
+    },
+    {
+      "path": "docs/linkedspec-book/src/dsl/action-model-and-helper-surface.md",
+      "bytes": 11189,
+      "sha256": "6afdb038d62efae53b9ed6e9d3bc3777dae5e5bbbbc0703bab64ee1cee45d688",
+      "mode": 420
+    },
+    {
+      "path": "docs/linkedspec-book/src/dsl/actionir-lowering-mental-model.md",
+      "bytes": 41407,
+      "sha256": "4f39724f52efee7397e8f9407ed1257da99924ea0bd88a34c8a2b0780606c2bc",
+      "mode": 420
+    },
+    {
+      "path": "docs/linkedspec-book/src/dsl/capture-marks-and-source-locations.md",
+      "bytes": 94118,
+      "sha256": "6873cd55dd6a0cf1f6ee41d2c4e99c7ea1544e2bb875d71687823c00eb6205af",
+      "mode": 420
+    },
+    {
+      "path": "docs/linkedspec-book/src/dsl/declaration-helper-reference.md",
+      "bytes": 2612,
+      "sha256": "3a3e2430de60f898ac2167d47612e1378f4f49e478cee8576816da28d9d4641a",
+      "mode": 420
+    },
+    {
+      "path": "docs/linkedspec-book/src/dsl/fluent-and-block-forms.md",
+      "bytes": 17560,
+      "sha256": "de4f274f37eabbb632ca9767246a744e6468520ad5b8f703eb68c3b636f61daf",
+      "mode": 420
+    },
+    {
+      "path": "docs/linkedspec-book/src/dsl/source-boundary-helper-reference.md",
+      "bytes": 36129,
+      "sha256": "5d84b72234dec305f645b459d47d739277826b2e68942e7cbc81d9098abe568c",
+      "mode": 420
+    },
+    {
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "bytes": 99636,
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57",
+      "mode": 420
+    },
+    {
+      "path": "docs/linkedspec-book/src/dsl/values-containers-and-flow-helpers.md",
+      "bytes": 35413,
+      "sha256": "ec18e99ea54c3eb624747a928183ea873b77a3ec2e44fb96a6c52ed4f46c3171",
+      "mode": 420
+    },
+    {
+      "path": "docs/linkedspec-book/src/index.md",
+      "bytes": 2239,
+      "sha256": "0a129e808fb3fb6b21787091bc31a081d060c1ac0edc44f9645171a0ef254b23",
+      "mode": 420
+    },
+    {
+      "path": "docs/linkedspec-book/src/overview/design-rationale.md",
+      "bytes": 16527,
+      "sha256": "7f6cdde29a314bfbe0cbf740f2b9f8478848f5b7e9138ac2fd768468587e10f6",
+      "mode": 420
+    },
+    {
+      "path": "docs/linkedspec-book/src/overview/documentation-layers.md",
+      "bytes": 3020,
+      "sha256": "575cf2ce303ca06292dd7a734ccf9f5f709f45ecd1b974c0d7663915bfc2b1ee",
+      "mode": 420
+    },
+    {
+      "path": "docs/linkedspec-book/src/overview/project-status.md",
+      "bytes": 381917,
+      "sha256": "e0305e0d71cf5604a021a209bd8dbbfe37235ab2e870599292d8130ff9c054e0",
+      "mode": 420
+    },
+    {
+      "path": "docs/linkedspec-book/src/overview/what-is-linkedspec.md",
+      "bytes": 6691,
+      "sha256": "70d72dc417a0cf43bb2e14cdd8719f2c3dbad354fd2d7d9bbf25633e0d911fe1",
+      "mode": 420
+    },
+    {
+      "path": "docs/linkedspec-book/src/public-api/descriptor-introspection.md",
+      "bytes": 31584,
+      "sha256": "1e957803415adaba23b15a32f2388a9d71a041716689e8045fa799b852d7cae0",
+      "mode": 420
+    },
+    {
+      "path": "docs/linkedspec-book/src/public-api/get-and-get-parser.md",
+      "bytes": 33830,
+      "sha256": "2a635657ca19e3602f1fff742564589468d1b3479ff5813aeed87295c0a58464",
+      "mode": 420
+    },
+    {
+      "path": "docs/linkedspec-book/src/public-api/integration-dart.md",
+      "bytes": 19477,
+      "sha256": "df759f1978df3df6c27b24e531dd4787a6f18e876d12ab2aff480c4ac1e42bd7",
+      "mode": 420
+    },
+    {
+      "path": "docs/linkedspec-book/src/public-api/integration-julia.md",
+      "bytes": 19977,
+      "sha256": "b6c42ff4d60e18bd17beca4a27546276f15098d18a3370de5418f59f6d2559d0",
+      "mode": 420
+    },
+    {
+      "path": "docs/linkedspec-book/src/public-api/integration-lua.md",
+      "bytes": 20032,
+      "sha256": "5690eba8e4091900db2e6c94c004a4ac223396f0b1feefbad48913177a197d9b",
+      "mode": 420
+    },
+    {
+      "path": "docs/linkedspec-book/src/public-api/integration-perl.md",
+      "bytes": 24658,
+      "sha256": "5ec2f45ae024cf87cb8cae905fc6c3f15735a43bcc21874bd18c9ba1c8b9c441",
+      "mode": 420
+    },
+    {
+      "path": "docs/linkedspec-book/src/public-api/integration-rust.md",
+      "bytes": 43022,
+      "sha256": "958ead8127b47dd1a0ae494ce87ef19fa83451a083ff0523a388004799536442",
+      "mode": 420
+    },
+    {
+      "path": "docs/linkedspec-book/src/public-api/integration.md",
+      "bytes": 8654,
+      "sha256": "641a5ea0ec4872b6ac436d8b62c9d1b6cab9c5e422b6fb47b0d87a6aa2b8241c",
+      "mode": 420
+    },
+    {
+      "path": "docs/linkedspec-book/src/public-api/native-spec-loading.md",
+      "bytes": 22448,
+      "sha256": "85ff1f9cebf91b54b68bb7155db5c89b9866e956c74dff9b83f31ce360a8d7f5",
+      "mode": 420
+    },
+    {
+      "path": "docs/linkedspec-book/src/public-api/plugin-registry.md",
+      "bytes": 3278,
+      "sha256": "fe00a325064037455df8ffcdc611d5838df9001c5783a350c7900b1ab62ccff9",
+      "mode": 420
+    },
+    {
+      "path": "docs/linkedspec-book/src/public-api/semantic-introspection.md",
+      "bytes": 290974,
+      "sha256": "f9f3710cb41e073ea64989fd296cff93c23c10bdc434c66859de8929d2b338e7",
+      "mode": 420
+    },
+    {
+      "path": "docs/linkedspec-book/src/public-api/trace-api.md",
+      "bytes": 39386,
+      "sha256": "831366abed5d75daa881e6f993ea2f695e6b919529ad6964c353f831c47d60c3",
+      "mode": 420
+    },
+    {
+      "path": "docs/linkedspec-book/src/specs-and-corpora/ebnf-spec-walkthrough.md",
+      "bytes": 23758,
+      "sha256": "e74d2266f2c28d1a5425a94c60718548eb26cc83ed700fe4478cd23593ab1868",
+      "mode": 420
+    },
+    {
+      "path": "docs/linkedspec-book/src/specs-and-corpora/lispish-spec-walkthrough.md",
+      "bytes": 13579,
+      "sha256": "06cc2056aaddd80631878f99b75922c062f3e441562eed9233592cbae60d3c55",
+      "mode": 420
+    },
+    {
+      "path": "docs/linkedspec-book/src/specs-and-corpora/portmap-spec-walkthrough.md",
+      "bytes": 4746,
+      "sha256": "01dab1b4c29b4085e69aac5bed1de8e66256b1dfaa34ce3c56c3f43d1ad0fd95",
+      "mode": 420
+    },
+    {
+      "path": "docs/linkedspec-book/src/specs-and-corpora/pplugin-spec-walkthrough.md",
+      "bytes": 5894,
+      "sha256": "ddd3d22ccd28927c24e2a34db15f0bee2a940f6a8c3518252af402b7d7eb6b33",
+      "mode": 420
+    },
+    {
+      "path": "docs/linkedspec-book/src/specs-and-corpora/sexpr-document-v1.md",
+      "bytes": 8301,
+      "sha256": "65fde45de06b3c18cad59a01cb02944ed8ff105b94e0d02b2f61f525b88f391e",
+      "mode": 420
+    },
+    {
+      "path": "docs/linkedspec-book/src/specs-and-corpora/shipped-specs-and-corpora.md",
+      "bytes": 17002,
+      "sha256": "bd1667dd99133f5c6541eb9d6e127e8c529c05823b1e20829e78674d44ecad13",
+      "mode": 420
+    },
+    {
+      "path": "docs/linkedspec-book/src/specs-and-corpora/tablegrep-spec-walkthrough.md",
+      "bytes": 4959,
+      "sha256": "dfbe3a28ec0e9edb53d0ccd2af5a36c4bfb5521a258e7a7d1afd22b135edc982",
+      "mode": 420
+    },
+    {
+      "path": "docs/linkedspec-book/src/user-model/blind-calls-and-parser-orchestration.md",
+      "bytes": 13945,
+      "sha256": "cc8d62e530a80a2b317afbfe45950d42e11840844bf3f6565ed8f4d3735e9082",
+      "mode": 420
+    },
+    {
+      "path": "docs/linkedspec-book/src/user-model/regex-in-spec.md",
+      "bytes": 14290,
+      "sha256": "82d2e6997eecdac97bd7213d186acd021b87fc522b58eb62e5a90999adf2ab82",
+      "mode": 420
+    },
+    {
+      "path": "docs/linkedspec-book/src/user-model/rule-modes-and-parse-modes.md",
+      "bytes": 39736,
+      "sha256": "8fed7352d224f049cbf48c0416b6ac6c9d7df7c95c38395a48f7e2c6de7cb05b",
+      "mode": 420
+    },
+    {
+      "path": "docs/linkedspec-book/src/user-model/runtime-context-and-tracing.md",
+      "bytes": 25247,
+      "sha256": "4705ecabaab5cb159245172adaf409031680f35538408d0fd0a2f9800b685d3f",
+      "mode": 420
+    },
+    {
+      "path": "docs/linkedspec-book/src/user-model/spec-files-and-rule-paragraphs.md",
+      "bytes": 13457,
+      "sha256": "936b8b94d55846356dcc0e181f12a3a0fd35fd4a6ee6591b5777d9cc81a66715",
+      "mode": 420
+    },
+    {
+      "path": "docs/linkedspec-book/src/user-model/worked-spec-walkthrough.md",
+      "bytes": 12718,
+      "sha256": "564008087999530f5087c497f7ea035b29368dd7ea337589335a9bd3cf8e6eea",
+      "mode": 420
+    }
+  ],
+  "boundary": "Complete final working book publication, separate from immutable Git a076218 pipeline statement before/after proof."
+}
