@@ -137,21 +137,33 @@ all eleven regex contracts; empty and rejected calls add no origins. Public even
 contain only `raw` and `args`. Independent before/after probes preserve full generated
 source, substitution and descriptor channels, including original pipeline plan inputs.
 
-One metadata defect is explicitly retained rather than treated as a supported result:
+The split scanner now reports the normalized source expression from its successful planner:
 
 ```perl
 split(items, input, ',')
 # planner split op: source_expr => '$input'
-# original scanner event: source => undef
+# current scanner event: source => '$input'
 # lowering still reads $input
 ```
 
-The scanner reads an obsolete `source_symbol` field instead of the planner's `source_expr`.
-The Toolbox descriptor repeats the missing source, although generated lowering keeps the
-input expression. A separate repair follows the regex provenance hooks; until it lands,
-do not interpret that null diagnostic field as evidence that the split has no input.
-The original source, complete compiler channels and independent argument/plan oracle stay
-retained. This diagnosis adds no DSL form or native-execution guarantee.
+A bare input binding appears as `$input`; literal inputs keep their quoted text, and
+compound inputs keep their trimmed call expression. The descriptor's helper and canonical
+events report the same source expression. These examples show the event field:
+
+```perl
+split(items, ' 雪,β ', ',')
+# args.source => "' 雪,β '"
+split(items, cat('雪', ',β'), ',')
+# args.source => "cat('雪', ',β')"
+```
+
+Supplied planner callbacks that publish only the older `source_symbol` retain that value.
+A defined `source_expr` takes priority when both fields exist, including the expression
+`"0"`; an undefined canonical field falls back to the older field. Generated lowering,
+raw expressions, target/delimiter fields and private occurrence origins stay unchanged.
+The original null metadata remains retained as the before observation, with complete
+compiler channels and an independent source/argument/plan oracle. This correction adds
+no DSL form or native-execution guarantee.
 
 ### StatementSplit
 

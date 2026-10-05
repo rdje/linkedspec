@@ -1,0 +1,12 @@
+{
+  "base_revision": "95e6a02935155b9ab7b5c30f79a3275529b803da",
+  "candidate_diff_sha256": "262f71643e1fe39837bb81ec6c5345e68d0d5e0f018270a33c8f03f73946d1b0",
+  "candidate_diff_bytes": 3747824,
+  "merged_output_sha256": "ba3aa7053f603c24d263dc43d8e8db733081ea3567145ee2595c673a6fd18aa3",
+  "merged_output_bytes": 37332210,
+  "command": "set -o pipefail; bash tools/run_ci_local.sh 2>&1 | tee .linkedspec-data/scratch/split-source-metadata-canonical.log",
+  "exit_observed_from_exec_session": 1,
+  "exec_session": 54033,
+  "archive_instrument_sha256": "f4d1f8c857056134ec2ffce752b1198f0ee09c2973162474db7149b52aa815db",
+  "scope": "Original failed canonical execution, complete merged stdout/stderr bytes and exact staged binary diff retained before restaging. Exit1 observed when original exec session completed; archival operation did not execute CI or claim a completed canonical pass. Recover candidate from base Git revision and binary diff; unchanged CI producer comes from that candidate. External host/toolchain reads are not reconstructed by this archive."
+}

@@ -7,11 +7,11 @@ answers:
   - "does pipeline regex provenance preserve literal receivers and original planner inputs"
   - "where is the pipeline regex original-owner RED GREEN proof"
 date: 2026-10-05
-status: ten private regex recorder hooks; separate metadata and statement owners remain
+status: eleven regex channels preserved; normalized split metadata correction separately verified
 tags: [perl, actionir, scanner, source-provenance, pipeline, identity]
 evidence: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.1.0 supplies immutable before/after inputs and the same regression: original ten missing hooks fail; all eleven regex contracts pass. Literal source/argument/interval and public/private callback plans are independently checked; default original generated/compiler channels remain exact."
 reverify:
-  - "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.1.0-review.py"
+  - "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.1.1-review.py"
 ---
 
 PrimitivePipelineRules now records exact original full-input spans for push, regex_subst,
@@ -32,8 +32,10 @@ not minimal observed IO graphs. Complete channels and before/after input guards 
 Gitlinks and nonregular metadata are excluded without payload inspection. Host tools are
 read-only; all project output is repository-local on the same volume.
 
-Eight statement contracts still need frame hooks in .1.2.2. Original split source metadata
-remains null while the planner/lowering use source_expr; .1.2.1.1 owns that separate repair.
+Eight statement contracts still need frame hooks in .1.2.2. Original null split source metadata
+remains historically retained; .1.2.1.1 corrects the declared source value with legacy
+fallback while preserving all eleven regex origins and complete executable compiler channels.
+See perl-pipeline-split-source-metadata for the current value contract.
 Do not erase the original .1.2.0 null diagnosis or confuse syntactic quoted matches with
 executable membership. Family closeout is canonical .1.2.3; other scanner families, native
 execution/admission, source membership/replacement and global historical audit stay separate.

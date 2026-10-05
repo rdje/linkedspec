@@ -1,0 +1,104 @@
+{
+  "complete": true,
+  "regular_inputs": 4021,
+  "actual_commands": 3,
+  "historical_classifications": 2,
+  "original_positive_occurrences": 2,
+  "current_positive_occurrences": 0,
+  "classified_before": 20,
+  "classified_after": 22,
+  "controls": [
+    {
+      "name": "0 changed historical bytes",
+      "observed": "RED",
+      "reason": "full historical content identity changed; positive candidate rejected"
+    },
+    {
+      "name": "0 added positive selector",
+      "observed": "RED",
+      "reason": "full historical content identity changed; positive candidate rejected"
+    },
+    {
+      "name": "0 copied historical path",
+      "observed": "RED",
+      "reason": "unrecognized path cannot borrow a content classification"
+    },
+    {
+      "name": "0 missing classification",
+      "observed": "RED",
+      "reason": "exact expected path/digest authorization is required"
+    },
+    {
+      "name": "0 wrong digest",
+      "observed": "RED",
+      "reason": "exact expected path/digest authorization is required"
+    },
+    {
+      "name": "1 changed historical bytes",
+      "observed": "RED",
+      "reason": "full historical content identity changed; positive candidate rejected"
+    },
+    {
+      "name": "1 added positive selector",
+      "observed": "RED",
+      "reason": "full historical content identity changed; positive candidate rejected"
+    },
+    {
+      "name": "1 copied historical path",
+      "observed": "RED",
+      "reason": "unrecognized path cannot borrow a content classification"
+    },
+    {
+      "name": "1 missing classification",
+      "observed": "RED",
+      "reason": "exact expected path/digest authorization is required"
+    },
+    {
+      "name": "1 wrong digest",
+      "observed": "RED",
+      "reason": "exact expected path/digest authorization is required"
+    },
+    {
+      "name": "incomplete capture",
+      "observed": "RED",
+      "reason": "complete actual capture producer"
+    },
+    {
+      "name": "wrong producer",
+      "observed": "RED",
+      "reason": "complete actual capture producer"
+    },
+    {
+      "name": "missing command",
+      "observed": "RED",
+      "reason": "exact executed population"
+    },
+    {
+      "name": "wrong original exit",
+      "observed": "RED",
+      "reason": "actual command and expected exit"
+    },
+    {
+      "name": "short input guard",
+      "observed": "RED",
+      "reason": "complete before/after guards"
+    },
+    {
+      "name": "corrupt output hash",
+      "observed": "RED",
+      "reason": "complete channel bytes"
+    },
+    {
+      "name": "missing input",
+      "observed": "RED",
+      "reason": "complete supplied input census"
+    },
+    {
+      "name": "duplicate input",
+      "observed": "RED",
+      "reason": "unique input population"
+    }
+  ],
+  "instrument_sha256": "3bcb009670f0bbbd5c8398863b8d2d672856d2a69cd56433b70fbea71deb134f",
+  "scope": "Exact fixed candidate snapshot supplies every regular Git inventory input. Immutable Git95 objects recover unchanged members; declared overlays recover from capsule and the separately retained first capsule. Actual original/current/composed command channels, source identity and guards are independently checked. Ten classification and eight evidence/input RED controls preserve positive discovery. No full canonical pass is inferred."
+}

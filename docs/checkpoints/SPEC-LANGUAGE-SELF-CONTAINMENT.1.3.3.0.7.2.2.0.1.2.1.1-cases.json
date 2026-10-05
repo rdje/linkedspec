@@ -1,0 +1,263 @@
+[
+  {
+    "id": "bare",
+    "expr": "split(items, input, ',')",
+    "action": "# 雪\r\nprint \"quoted split(items, input, ',')\";\r\nsplit(items, input, ',');\r\nsplit(items, input, ',')",
+    "spans": [
+      {
+        "start": 19,
+        "end": 43
+      },
+      {
+        "start": 47,
+        "end": 71
+      },
+      {
+        "start": 74,
+        "end": 98
+      }
+    ],
+    "source_after": "$input",
+    "source_before": null,
+    "custom_plan": false,
+    "plan": {
+      "target_symbol": "items",
+      "ops": [
+        {
+          "op": "split",
+          "delimiter_expr": "/\\,/",
+          "source_expr": "$input"
+        }
+      ],
+      "binding_target": 1
+    }
+  },
+  {
+    "id": "literal",
+    "expr": "split(items, ' 雪,β ', ',')",
+    "action": "# 雪\r\nprint \"quoted split(items, ' 雪,β ', ',')\";\r\nsplit(items, ' 雪,β ', ',');\r\nsplit(items, ' 雪,β ', ',')",
+    "spans": [
+      {
+        "start": 19,
+        "end": 45
+      },
+      {
+        "start": 49,
+        "end": 75
+      },
+      {
+        "start": 78,
+        "end": 104
+      }
+    ],
+    "source_after": "' 雪,β '",
+    "source_before": null,
+    "custom_plan": false,
+    "plan": {
+      "target_symbol": "items",
+      "ops": [
+        {
+          "op": "split",
+          "delimiter_expr": "/\\,/",
+          "source_expr": "' 雪,β '"
+        }
+      ],
+      "binding_target": 1
+    }
+  },
+  {
+    "id": "compound",
+    "expr": "split(items, cat('雪', ',β'), ',')",
+    "action": "# 雪\r\nprint \"quoted split(items, cat('雪', ',β'), ',')\";\r\nsplit(items, cat('雪', ',β'), ',');\r\nsplit(items, cat('雪', ',β'), ',')",
+    "spans": [
+      {
+        "start": 19,
+        "end": 52
+      },
+      {
+        "start": 56,
+        "end": 89
+      },
+      {
+        "start": 92,
+        "end": 125
+      }
+    ],
+    "source_after": "cat('雪', ',β')",
+    "source_before": null,
+    "custom_plan": false,
+    "plan": {
+      "target_symbol": "items",
+      "ops": [
+        {
+          "op": "split",
+          "delimiter_expr": "/\\,/",
+          "source_expr": "cat('雪', ',β')"
+        }
+      ],
+      "binding_target": 1
+    }
+  },
+  {
+    "id": "legacy",
+    "expr": "split(items, input, ',')",
+    "action": "# 雪\r\nprint \"quoted split(items, input, ',')\";\r\nsplit(items, input, ',');\r\nsplit(items, input, ',')",
+    "spans": [
+      {
+        "start": 19,
+        "end": 43
+      },
+      {
+        "start": 47,
+        "end": 71
+      },
+      {
+        "start": 74,
+        "end": 98
+      }
+    ],
+    "source_after": "legacy",
+    "source_before": "legacy",
+    "custom_plan": true,
+    "plan": {
+      "target_symbol": "items",
+      "ops": [
+        {
+          "op": "split",
+          "delimiter_expr": "/\\,/",
+          "source_symbol": "legacy"
+        }
+      ]
+    }
+  },
+  {
+    "id": "canonical_precedence",
+    "expr": "split(items, input, ',')",
+    "action": "# 雪\r\nprint \"quoted split(items, input, ',')\";\r\nsplit(items, input, ',');\r\nsplit(items, input, ',')",
+    "spans": [
+      {
+        "start": 19,
+        "end": 43
+      },
+      {
+        "start": 47,
+        "end": 71
+      },
+      {
+        "start": 74,
+        "end": 98
+      }
+    ],
+    "source_after": "'canonical'",
+    "source_before": "legacy",
+    "custom_plan": true,
+    "plan": {
+      "target_symbol": "items",
+      "ops": [
+        {
+          "op": "split",
+          "delimiter_expr": "/\\,/",
+          "source_expr": "'canonical'",
+          "source_symbol": "legacy"
+        }
+      ]
+    }
+  },
+  {
+    "id": "canonical_zero",
+    "expr": "split(items, input, ',')",
+    "action": "# 雪\r\nprint \"quoted split(items, input, ',')\";\r\nsplit(items, input, ',');\r\nsplit(items, input, ',')",
+    "spans": [
+      {
+        "start": 19,
+        "end": 43
+      },
+      {
+        "start": 47,
+        "end": 71
+      },
+      {
+        "start": 74,
+        "end": 98
+      }
+    ],
+    "source_after": "0",
+    "source_before": "legacy",
+    "custom_plan": true,
+    "plan": {
+      "target_symbol": "items",
+      "ops": [
+        {
+          "op": "split",
+          "delimiter_expr": "/\\,/",
+          "source_expr": "0",
+          "source_symbol": "legacy"
+        }
+      ]
+    }
+  },
+  {
+    "id": "undefined_canonical",
+    "expr": "split(items, input, ',')",
+    "action": "# 雪\r\nprint \"quoted split(items, input, ',')\";\r\nsplit(items, input, ',');\r\nsplit(items, input, ',')",
+    "spans": [
+      {
+        "start": 19,
+        "end": 43
+      },
+      {
+        "start": 47,
+        "end": 71
+      },
+      {
+        "start": 74,
+        "end": 98
+      }
+    ],
+    "source_after": "legacy",
+    "source_before": "legacy",
+    "custom_plan": true,
+    "plan": {
+      "target_symbol": "items",
+      "ops": [
+        {
+          "op": "split",
+          "delimiter_expr": "/\\,/",
+          "source_expr": null,
+          "source_symbol": "legacy"
+        }
+      ]
+    }
+  },
+  {
+    "id": "missing_source",
+    "expr": "split(items, input, ',')",
+    "action": "# 雪\r\nprint \"quoted split(items, input, ',')\";\r\nsplit(items, input, ',');\r\nsplit(items, input, ',')",
+    "spans": [
+      {
+        "start": 19,
+        "end": 43
+      },
+      {
+        "start": 47,
+        "end": 71
+      },
+      {
+        "start": 74,
+        "end": 98
+      }
+    ],
+    "source_after": null,
+    "source_before": null,
+    "custom_plan": true,
+    "plan": {
+      "target_symbol": "items",
+      "ops": [
+        {
+          "op": "split",
+          "delimiter_expr": "/\\,/"
+        }
+      ]
+    }
+  }
+]

@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import fcntl
+import hashlib
 import os
 import re
 import subprocess
@@ -21,6 +22,15 @@ CONCURRENCY_LOCK_PATH = LOCK_DIRECTORY / "aggregate_selector_concurrency.lock"
 PROBE_DIRECTORY = ROOT
 PROBE_PREFIX = "aggregate_selector_untracked_probe_"
 TEST_HOLD_ENV = "_LINKEDSPEC_SELECTOR_PROBE_HOLD_SECONDS"
+# These immutable diagnostic inputs preserve an actual rejected experiment and
+# its historical claim description. Classify only their exact path and bytes;
+# a copied file, edited input or added selector remains a positive candidate.
+HISTORICAL_DIAGNOSTIC_INPUTS = {
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.0-claim.py":
+        "52a83a6bb01129e7f0c96f594a6e85bb2f25cedfbd86d91853a3e620b92bb90e",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.0-split-probe-initial.pl":
+        "1f96bcb1dd60201a602282b576074b0ab3abfd77fcf006ab16417bc25d8627c3",
+}
 SELECTOR = re.compile(
     r"(?<![A-Za-z0-9_.])(?:array|hash)\s*\(\s*[A-Za-z_][A-Za-z0-9_]*\s*\)"
 )
@@ -75,6 +85,9 @@ def classified_compatibility(path: str, line: str) -> bool:
     stripped = line.lstrip()
     if stripped.startswith(("#", "//", "/*", "*")):
         return True
+    historical_digest = HISTORICAL_DIAGNOSTIC_INPUTS.get(path)
+    if historical_digest is not None:
+        return hashlib.sha256((ROOT / path).read_bytes()).hexdigest() == historical_digest
     if "must be" in line and path in {
         "dart/lib/src/runtime/interpreter.dart",
         "julia/src/runtime/Interpreter.jl",

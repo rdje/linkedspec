@@ -1,0 +1,64 @@
+{
+  "book_inputs": 58,
+  "rendered_examples": 8,
+  "rendered_sections": 3,
+  "controls": [
+    {
+      "name": "promote failed render",
+      "rejected": true,
+      "reason": "complete actual render"
+    },
+    {
+      "name": "erase render guard",
+      "rejected": true,
+      "reason": "book input guards"
+    },
+    {
+      "name": "forge renderer",
+      "rejected": true,
+      "reason": "actual book instrument"
+    },
+    {
+      "name": "forge rendered channel",
+      "rejected": true,
+      "reason": "book channel bytes"
+    },
+    {
+      "name": "erase actual examples",
+      "rejected": true,
+      "reason": "original authored rendered examples"
+    },
+    {
+      "name": "erase composition teaching",
+      "rejected": true,
+      "reason": "rendered twenty-contract composition teaching"
+    },
+    {
+      "name": "erase family closeout teaching",
+      "rejected": true,
+      "reason": "rendered immutable family closeout teaching"
+    },
+    {
+      "name": "erase pipeline diagnosis",
+      "rejected": true,
+      "reason": "rendered pipeline regex source teaching"
+    },
+    {
+      "name": "erase corrected metadata",
+      "rejected": true,
+      "reason": "rendered corrected source metadata teaching"
+    },
+    {
+      "name": "erase diagnostic teaching",
+      "rejected": true,
+      "reason": "rendered diagnostic source teaching"
+    },
+    {
+      "name": "erase historical input classification",
+      "rejected": true,
+      "reason": "rendered historical input classification teaching"
+    }
+  ],
+  "complete": true,
+  "instrument_sha256": "c3fd4818a9c573655c04ae0d54f82cfa14175b43c590941e903ac14f33d437d6"
+}

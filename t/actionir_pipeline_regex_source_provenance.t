@@ -38,8 +38,13 @@ for my $contract (@contracts) {
             $private = LinkedSpec::ActionIR::ScannerCore::_scan_contract_ir_events_with_provenance(
                 {id => $contract->{id}}, $case->{action}, $deps);
         }
-        my @expected = map { {raw => $_->{raw}, args => $_->{args}} } @{$contract->{events}};
-        is_deeply($public, \@expected, 'independently authored original arguments and occurrences');
+        my @expected = map { {raw => $_->{raw}, args => {%{$_->{args}}}} } @{$contract->{events}};
+        # The original diagnosis retains its null observation. The current planner
+        # contract now exposes its normalized source expression in this event.
+        if ($contract->{id} eq 'split_array') {
+            $_->{args}{source} = '$input' for @expected;
+        }
+        is_deeply($public, \@expected, 'independently authored current arguments and original occurrences');
         is_deeply($private->{events}, \@expected, 'private channel preserves the public event contract');
         my $origins = $private->{source_origins};
         is(scalar(@$origins), scalar(@expected), 'each selected regex occurrence has an origin');

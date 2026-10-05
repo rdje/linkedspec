@@ -1,0 +1,170 @@
+{
+  "complete": true,
+  "revision": "95e6a02935155b9ab7b5c30f79a3275529b803da",
+  "populations": {
+    "before": [
+      3986,
+      3986,
+      5
+    ],
+    "after": [
+      3986,
+      3984,
+      7
+    ]
+  },
+  "actual_commands": 23,
+  "metadata_cases": 8,
+  "metadata_selected_events_per_epoch": 72,
+  "metadata_origins_per_epoch": 72,
+  "default_toolbox_records_per_epoch": 9,
+  "mixed_contracts": 19,
+  "mixed_events_per_epoch": 207,
+  "mixed_frames_per_epoch": 135,
+  "mixed_regex_origins_per_epoch": 99,
+  "seeds": 3,
+  "metadata_regression_groups": 8,
+  "original_failed_groups": 5,
+  "regex_guard_groups": 13,
+  "consumer_groups": 701,
+  "consumer_plans": [
+    28,
+    13,
+    23,
+    15,
+    12,
+    605,
+    5
+  ],
+  "total_green_groups": 722,
+  "unchanged_complete_substitution_and_dump": true,
+  "only_source_metadata_changes": true,
+  "controls": [
+    {
+      "name": "erase metadata case",
+      "observed": "RED",
+      "reason": "exact eight metadata case population"
+    },
+    {
+      "name": "retain original null default source",
+      "observed": "RED",
+      "reason": "authored normalized or legacy source metadata"
+    },
+    {
+      "name": "drop legacy fallback",
+      "observed": "RED",
+      "reason": "authored normalized or legacy source metadata"
+    },
+    {
+      "name": "prefer legacy over canonical source",
+      "observed": "RED",
+      "reason": "authored normalized or legacy source metadata"
+    },
+    {
+      "name": "treat zero expression as false",
+      "observed": "RED",
+      "reason": "authored normalized or legacy source metadata"
+    },
+    {
+      "name": "reuse equal raw origin",
+      "observed": "RED",
+      "reason": "authored original metadata source origins"
+    },
+    {
+      "name": "forge event identity",
+      "observed": "RED",
+      "reason": "original metadata event and argument references"
+    },
+    {
+      "name": "erase callback plan",
+      "observed": "RED",
+      "reason": "independent original metadata callback plans"
+    },
+    {
+      "name": "erase descriptor correction",
+      "observed": "RED",
+      "reason": "exact helper and canonical source metadata"
+    },
+    {
+      "name": "forge compiler success",
+      "observed": "RED",
+      "reason": "complete clean metadata Toolbox records"
+    },
+    {
+      "name": "erase supplied input",
+      "observed": "RED",
+      "reason": "complete unique Git membership"
+    },
+    {
+      "name": "forge immutable bytes",
+      "observed": "RED",
+      "reason": "original Git member bytes"
+    },
+    {
+      "name": "erase corrected fixture overlay",
+      "observed": "RED",
+      "reason": "exact authored overlay membership"
+    },
+    {
+      "name": "replace foreign Git member",
+      "observed": "RED",
+      "reason": "only declared owner and fixture replace Git members"
+    },
+    {
+      "name": "promote incomplete capture",
+      "observed": "RED",
+      "reason": "complete exact-source capture"
+    },
+    {
+      "name": "forge producer",
+      "observed": "RED",
+      "reason": "actual capture producer"
+    },
+    {
+      "name": "hide failed command",
+      "observed": "RED",
+      "reason": "actual expected command exit"
+    },
+    {
+      "name": "forge channel",
+      "observed": "RED",
+      "reason": "channel bytes"
+    },
+    {
+      "name": "hide original-owner override",
+      "observed": "RED",
+      "reason": "exact original-owner override environment"
+    },
+    {
+      "name": "shorten metadata TAP plan",
+      "observed": "RED",
+      "reason": "complete exact TAP plan"
+    },
+    {
+      "name": "shorten direct-consumer TAP plan",
+      "observed": "RED",
+      "reason": "complete selected suite plan"
+    },
+    {
+      "name": "hide nested consumer failure",
+      "observed": "RED",
+      "reason": "no nested fixture failure"
+    },
+    {
+      "name": "alter generated parser source",
+      "observed": "RED",
+      "reason": "unchanged complete executable Toolbox channels"
+    },
+    {
+      "name": "hide unrelated diagnostic change",
+      "observed": "RED",
+      "reason": "only declared helper and canonical diagnostic value changes"
+    },
+    {
+      "name": "erase regex origin",
+      "observed": "RED",
+      "reason": "exact before/after authored regex origins"
+    }
+  ],
+  "instrument_sha256": "0097798f92f0053308b529d15ac86f694aff1f36ecbdde60398b478d55c071c4"
+}

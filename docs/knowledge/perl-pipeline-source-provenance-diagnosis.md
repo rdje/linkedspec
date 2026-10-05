@@ -7,11 +7,11 @@ answers:
   - "where are the independent pipeline argument and source position oracles"
   - "which pipeline statement contracts have two event constructor branches"
 date: 2026-10-05
-status: historical original diagnosis; current regex proof and metadata/statement repairs separately owned
+status: historical original diagnosis; regex and metadata correction verified with statement hooks separate
 tags: [perl, actionir, scanner, source-provenance, pipeline]
 evidence: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.0 probe/reviewer bind all nineteen original public/private contracts, exact arguments, scalar frames and default callback plan inputs/results. Only set_value supplies private origins. split planner source_expr and scanner source_symbol diverge; complete Toolbox channels reproduce null metadata and correct lowering."
 reverify:
-  - "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.1.0-review.py"
+  - "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.1.1-review.py"
 ---
 
 PrimitivePipelineRules dispatches eleven full-input regex contracts and eight statement
@@ -30,7 +30,8 @@ keep the input expression. ArrayPipeline.pm also reads op.source_expr in both it
 binding split_value construction and legacy array split construction; the scanner does
 not supply the lowering expression. This source-owner relationship limits the planned
 metadata repair without admitting the removed aggregate selector. This is a diagnosed
-introspection defect, not source-language admission. Repair owner .1.2.1.1 follows .1.2.1.0's ten regex hooks and precedes .1.2.2's eight
+introspection defect, not source-language admission. Metadata repair .1.2.1.1 follows .1.2.1.0's ten regex hooks and is focused-verified
+behind exact canonical landing; see perl-pipeline-split-source-metadata. It precedes .1.2.2's eight
 statement hooks; .1.2.3 closes the family only after canonical acceptance. Original null
 observations must survive the repair. The initial array(items) exploratory probe is retained
 separately: the current public compiler rejects that removed selector; it is not the accepted

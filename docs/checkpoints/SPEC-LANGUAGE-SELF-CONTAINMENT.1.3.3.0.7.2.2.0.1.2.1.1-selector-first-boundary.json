@@ -1,0 +1,7 @@
+{
+  "scope": "Original 1321-potential-scanner-input capture retained unchanged. The composed result is an observed pass, but its suffix-excluded public/contract inputs were not captured. This preliminary boundary is not promoted to full composed proof. Current leaf immediately repairs capture to a conservative complete regular candidate superset before claiming composed acceptance.",
+  "repair_owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.1.1",
+  "logical_producer": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.1.1-selector-capture.py",
+  "recoverable_producer": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.1.1-selector-first-capture.py",
+  "original_producer_sha256": "5cb7fe3048effd31f031bb948fe3849818cd84093140a065d74a74ce1295febf"
+}

@@ -62,3 +62,14 @@ env PERL5LIB= bash tools/project_data_run.sh prove -v -Iperl t/legacy_pathsearch
 ```
 
 See [Local CI and Regression](local-ci-and-regression.md#verification-tiers) for verification tiers and gate composition.
+
+## Retained rejected-source diagnostics
+
+A historical diagnostic can deliberately contain language that the current compiler
+rejects. Keep the original producer and failure channels so the observation remains
+reproducible. The executable-source retirement scan classifies the two retained
+pipeline diagnosis artifacts by exact repository-relative path and full SHA-256
+identity. This preserves the rejected experiment and its historical description.
+An edited artifact, copied source or added selector remains a positive candidate;
+the existing untracked-discovery and concurrent-scan checks still run. This
+classification grants no authoring compatibility or executable admission.

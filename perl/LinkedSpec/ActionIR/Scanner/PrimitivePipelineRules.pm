@@ -453,7 +453,7 @@ while ($code =~ /\b(?<expr>split\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\
   raw => $raw_expr,
   args => {
    target    => $pipeline->{target_symbol},
-   source    => $last_op->{source_symbol},
+   source    => $last_op->{source_expr} // $last_op->{source_symbol},
    delimiter => $last_op->{delimiter_expr},
   },
  }, $code, $source_start, $source_end);

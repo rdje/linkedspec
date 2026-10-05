@@ -1,10 +1,10 @@
 # MEMORY
 
-- activation_commit: `b6fa57422a803a8d70b3e391cc2c4c70d7d6cf25` — clean pipeline regex hook activation base.
-- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.1.0 - retain pipeline regex source origins`.
-- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.1.1` (pending) — repair null split-source metadata.
-- next_action: Activate .1.2.1.1 from clean HEAD; declare exact planner-expression metadata contract and focused before/after guards, repair null split source, then run canonical public-contract acceptance before statement hooks.
-- in_flight_uncommitted: None; ten regex hooks/source-bound RED-GREEN/consumers/book are verified and committed. No jobs or deletions.
+- activation_commit: `95e6a02935155b9ab7b5c30f79a3275529b803da` — clean pipeline metadata repair activation base.
+- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.1.1 - repair split source metadata`.
+- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.2` (pending) — eight pipeline statement source-frame contracts.
+- next_action: Activate .1.2.2 from clean HEAD; implement original statement-array/occurrence frame hooks for all eight pipeline contracts and both nested-assignment/value-drop branches with source-bound RED/GREEN.
+- in_flight_uncommitted: None; metadata repair and exact historical selector classification land with focused proof and canonical receipt. First failed gate/evidence remain archived. No jobs/deletions.
 - blockers: No access/decision blocker. Matches and attached/marker/value/null/while executors are repaired; control parent/order and raw-expression reporting are reconciled; quoted/comment readiness .7.2/.3 precedes dispatcher/full execution. Other startup repairs remain separate.
   Wrapper startup .7 remains open; recovery/purge stay prohibited.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
