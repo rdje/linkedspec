@@ -1,10 +1,10 @@
 # MEMORY
 
-- activation_commit: `6ce479842be85219990be889914f354f1a4aaa44` — clean MethodExpr argument diagnosis activation base.
-- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.2.0 - diagnose MethodExpr argument authority`.
-- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.2.0` (done) — original MethodExpr/CSV argument authority diagnosis accepted.
-- next_action: Activate .1.3.2.0.1 from clean HEAD; implement invocation-local MethodExpr CSV/parser sidecars using accepted literal boundaries and identity contracts, then verify before recursive Flow consumers.
-- in_flight_uncommitted: none; original argument diagnosis/proof/book/Knowledge/live docs and claim are committed.
+- activation_commit: `2fd4e499e68f19d6a481662f46c4e24a1c0896a1` — clean MethodExpr frame bridge activation base.
+- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.2.0.1 - retain original method argument frames`.
+- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.2.0.1` (done) — private MethodExpr argument-frame bridge accepted.
+- next_action: Activate .1.3.2.1 from clean HEAD; consume verified block/argument frames for recursive Flow with original ordering; check notes pressure before new rollover.
+- in_flight_uncommitted: none; verified private MethodExpr bridge/proof/book/Knowledge/live docs and claim are committed.
 - blockers: No access/decision blocker. Matches and attached/marker/value/null/while executors are repaired; control parent/order and raw-expression reporting are reconciled; quoted/comment readiness .7.2/.3 precedes dispatcher/full execution. Other startup repairs remain separate.
   Wrapper startup .7 remains open; recovery/purge stay prohibited.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the

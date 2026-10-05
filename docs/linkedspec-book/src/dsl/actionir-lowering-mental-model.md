@@ -330,8 +330,8 @@ by its CSV splitter. Empty slots disappear from that array:
 # authored scalar argument intervals in the original input: [7, 11), [13, 17)
 ```
 
-Those intervals describe the original input; the current parser does not yet
-publish an argument-frame sidecar. Matching equal argument strings after parsing
+Those intervals describe the original input. The private parser bridge now
+publishes an aligned argument-frame sidecar without changing the ordinary result. Matching equal argument strings after parsing
 cannot distinguish their occurrences. Coordinates must be captured at the actual
 CSV piece boundaries, then translated through leading expression whitespace and
 the opening parenthesis. A returned argument index is not the original CSV slot
@@ -348,12 +348,31 @@ filter_match(/(x),雪/imu)  # receiver parser context
 
 The structural helper-pattern view preserves character offsets and original
 CR/LF; returned values come from the original source. Receiver calls pass their
-context to CSV splitting. The planned private bridge preserves all ordinary
-callback results and references, including copied, changed, foreign-source and
-opaque results, while requiring producer authority before lending coordinates.
-Nested calls and exceptions retain their existing behavior. This diagnosis does
-not admit recursive Flow origins; the bridge and its Flow consumers are separate
-implementation steps.
+context to CSV splitting. The private bridge preserves all ordinary callback results and references,
+including copied, changed, foreign-source and opaque results. It requires the
+actual canonical returned parser hash and argument array plus the original source
+before lending coordinates. Copied or foreign-source results receive no frames;
+a changed entry receives undef while an unchanged neighbor retains its occurrence.
+Nested calls and exceptions retain their existing behavior. These parser frames do not yet admit recursive Flow origins; Flow consumers are
+a separate implementation step.
+
+The CSV bridge returns its original array under `arguments`; the parser bridge
+returns its original hash under `call`. Both keep metadata in `source_frames`:
+
+```perl
+my $result = LinkedSpec::ActionIR::MethodExpr::_parse_method_with_source_frames(
+    $default_parse, ' call( same, ,same )'
+);
+# call.args: [same, same]
+# source_frames spans: [7, 11), [13, 17)
+```
+
+CSV frames are relative to its original payload; parser frames are relative to
+its full original expression. Empty slots affect the source coordinates but do
+not add returned arguments or frames. Unknown/opaque results stay unchanged,
+nested private calls restore the enclosing recorder, and original callback
+exceptions and caller error state are preserved. Ordinary parser and CSV calls
+publish no new fields or callbacks.
 
 ### CanonicalEvents
 

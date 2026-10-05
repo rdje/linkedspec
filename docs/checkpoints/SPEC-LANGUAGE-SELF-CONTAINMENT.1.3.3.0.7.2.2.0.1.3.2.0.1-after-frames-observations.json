@@ -1,0 +1,89 @@
+{
+  "revision": "2fd4e499e68f19d6a481662f46c4e24a1c0896a1",
+  "epoch": "after",
+  "complete": true,
+  "runs": [
+    {
+      "kind": "frames",
+      "seed": 0,
+      "command": [
+        "bash",
+        "tools/project_data_run.sh",
+        "perl",
+        "-Iperl",
+        "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.2.0.1-frames-probe.pl"
+      ],
+      "exit": 0,
+      "stdout": {
+        "encoding": "gzip-base64",
+        "bytes": 18716,
+        "sha256": "6eabb36448952e3c47e4666469053f677a5fe6a9df849e6aeaed28498b020ad1",
+        "data": "H4sIAAAAAAAC/+1bzW7jNhC++ykIXdYGJMT68U/6KlFgaGWmFmpLLklvnAYBAuxLFOih9x77IH2IvfXWRygp27EtkaK0oigp2RzsiByLnI8z3ww11N0AAPDMPuifEaCf8QIHG2iAnwBBO2ieesJgvRb3YNZqn5vwF9Zwuu3xzrsNjEkqeXfuYH2/RPHSMK/bwgDDoW/8+8dfvmGCy6vRqI7sEj4EuzUZnr6pxFng/kLYwMkOhXDxgKjSnFk/X12xH6DgkYnx1DnfL5UATARcTzU7cXl3XhUgHHaBt0GcWZOzDKQTpn0Tk9eJSYBIur7Z3perhhezJD4VlqsfuDnzYuDmP4ATGJxdDJyryuQ4Xt9HvGZOMV4TT4LXBdUNMhAy0uYTfJSObZDHKMZv8zcQxFSnLM2zYJDXIo0reQoVcH9FSv8O8cIgkIkDTH4DySo5oIAfIxKuslHlwnQOAsPGLGjEH3uRn+OA6ydNxrVvr1995MeNQ8AG8Uk9X7Jl0a79cNcnOF1JDLTnP+CsAOdUEhm9tiJjn0CcS8LltE64xNt1RBbnzc/grbe7u6k9BVy0IWpjH2Se7OdsI2yKwDzbBL2o6UnFNuCopSUOwi3o7EjYw3YUs0cHdHY9yUJPGsyN4WZLniy8TojuDFlgcDyvVpPYllvLLmepAFRTBYB+ZZpyDtKNgDuW+Katl4906++5kucc7zIR8Y3A/OwbWSb4FJrLT9nGAKHgaWibTo44ngGmPWm6aP7zN1ucl6wIQRDehQGhUgFLMH2DDju6V57Q8BXK2tZRilpUqin9PitHLzj60FaBCqDR3EeV1/FWtMOo2JJM4VYRLEKb7jA2zkxiMjNF4MjdusMoeRILcseKUBIxW38YSEJB3qzBrPzXXUIgtj6jIKRfNNDDvfLsXBwTRKxYSAvl3EIe8Ipz/VRLcabPuodqrajEfiCdlOrdQKmQrUHfqiFKsoGf6ovcHQTnVhKjPM0BvHsQuZInn47TVhjvHlaexJzcSZvBvHt4zSTcNHHe52Z2b6YVi2wguxnuR6znJtrsGthx8kfNZ3xHObrslxPqx/7xCsJWFJWFlNsGs9RtQAhEsRUmMYF70kCGKrYhgfEWZ4+bgIQriAsSyKPEULxcJfLB0zDqU8JSPvXt9WsJNViZsuGnw2PtXqZLdafumYFeRpJGA0YFKlVJn3a9QFGHPhEMYfQFIuvIo8r587s48iFa08ksUjcqIMpLsWFlhrwaRDVNVrAkUKRG3QeSshxk+j45wvY4tRDbuwkT3ABp8EbL80UqRePAYRo1F3auJ7c8QqZVNXtWs+Bbhw9jalQoCi28DvCqATIUmUrONosJMt2/FjDjYX+bX5kStHi4tXo+LOEkZWetuGI10+gsDanouDULTz3heQljV/f33yBKrNMYdf29wGGP5yEKXFZ0+ILjoqeblXbSj7Wmj6uIQOo1IbSSeP3UiVUFPmE7PvDhVjejLbutWbJNdaLGGSibyjARYLJP8/B/L14J1K+YbMs6669msuzTbXQ3voUBgUsrQcsoDtCT8gxUBGhBs9KyeG612iptyy2r5ISr2tdYT226Nf2mmg7Pt6Wg43zEx67HF44Eb8akVdNsn2/89+fvr/Q36st65Yp6xwfvad51OVHAWlhB9zC/uqfZtL72z0O6Lc3tuZ6ToG+G1A21Zc9UnSYzhF0chckSWiFaPzRQ6xQ5lsT6OK6u5Ahd2QVt73xcuVJoZX0UFEbHejL08rzUDg6OjJ8nWlmqHRCkB9puVecsg/vB/29UcQEcSQAA"
+      },
+      "stderr": {
+        "encoding": "gzip-base64",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "data": "H4sIAAAAAAAC/wMAAAAAAAAAAAA="
+      },
+      "inputs_before": 4163,
+      "inputs_after": 4163
+    },
+    {
+      "kind": "frames",
+      "seed": 1,
+      "command": [
+        "bash",
+        "tools/project_data_run.sh",
+        "perl",
+        "-Iperl",
+        "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.2.0.1-frames-probe.pl"
+      ],
+      "exit": 0,
+      "stdout": {
+        "encoding": "gzip-base64",
+        "bytes": 18716,
+        "sha256": "6eabb36448952e3c47e4666469053f677a5fe6a9df849e6aeaed28498b020ad1",
+        "data": "H4sIAAAAAAAC/+1bzW7jNhC++ykIXdYGJMT68U/6KlFgaGWmFmpLLklvnAYBAuxLFOih9x77IH2IvfXWRygp27EtkaK0oigp2RzsiByLnI8z3ww11N0AAPDMPuifEaCf8QIHG2iAnwBBO2ieesJgvRb3YNZqn5vwF9Zwuu3xzrsNjEkqeXfuYH2/RPHSMK/bwgDDoW/8+8dfvmGCy6vRqI7sEj4EuzUZnr6pxFng/kLYwMkOhXDxgKjSnFk/X12xH6DgkYnx1DnfL5UATARcTzU7cXl3XhUgHHaBt0GcWZOzDKQTpn0Tk9eJSYBIur7Z3perhhezJD4VlqsfuDnzYuDmP4ATGJxdDJyryuQ4Xt9HvGZOMV4TT4LXBdUNMhAy0uYTfJSObZDHKMZv8zcQxFSnLM2zYJDXIo0reQoVcH9FSv8O8cIgkIkDTH4DySo5oIAfIxKuslHlwnQOAsPGLGjEH3uRn+OA6ydNxrVvr1995MeNQ8AG8Uk9X7Jl0a79cNcnOF1JDLTnP+CsAOdUEhm9tiJjn0CcS8LltE64xNt1RBbnzc/grbe7u6k9BVy0IWpjH2Se7OdsI2yKwDzbBL2o6UnFNuCopSUOwi3o7EjYw3YUs0cHdHY9yUJPGsyN4WZLniy8TojuDFlgcDyvVpPYllvLLmepAFRTBYB+ZZpyDtKNgDuW+Katl4906++5kucc7zIR8Y3A/OwbWSb4FJrLT9nGAKHgaWibTo44ngGmPWm6aP7zN1ucl6wIQRDehQGhUgFLMH2DDju6V57Q8BXK2tZRilpUqin9PitHLzj60FaBCqDR3EeV1/FWtMOo2JJM4VYRLEKb7jA2zkxiMjNF4MjdusMoeRILcseKUBIxW38YSEJB3qzBrPzXXUIgtj6jIKRfNNDDvfLsXBwTRKxYSAvl3EIe8Ipz/VRLcabPuodqrajEfiCdlOrdQKmQrUHfqiFKsoGf6ovcHQTnVhKjPM0BvHsQuZInn47TVhjvHlaexJzcSZvBvHt4zSTcNHHe52Z2b6YVi2wguxnuR6znJtrsGthx8kfNZ3xHObrslxPqx/7xCsJWFJWFlNsGs9RtQAhEsRUmMYF70kCGKrYhgfEWZ4+bgIQriAsSyKPEULxcJfLB0zDqU8JSPvXt9WsJNViZsuGnw2PtXqZLdafumYFeRpJGA0YFKlVJn3a9QFGHPhEMYfQFIuvIo8r587s48iFa08ksUjcqIMpLsWFlhrwaRDVNVrAkUKRG3QeSshxk+j45wvY4tRDbuwkT3ABp8EbL80UqRePAYRo1F3auJ7c8QqZVNXtWs+Bbhw9jalQoCi28DvCqATIUmUrONosJMt2/FjDjYX+bX5kStHi4tXo+LOEkZWetuGI10+gsDanouDULTz3heQljV/f33yBKrNMYdf29wGGP5yEKXFZ0+ILjoqeblXbSj7Wmj6uIQOo1IbSSeP3UiVUFPmE7PvDhVjejLbutWbJNdaLGGSibyjARYLJP8/B/L14J1K+YbMs6669msuzTbXQ3voUBgUsrQcsoDtCT8gxUBGhBs9KyeG612iptyy2r5ISr2tdYT226Nf2mmg7Pt6Wg43zEx67HF44Eb8akVdNsn2/89+fvr/Q36st65Yp6xwfvad51OVHAWlhB9zC/uqfZtL72z0O6Lc3tuZ6ToG+G1A21Zc9UnSYzhF0chckSWiFaPzRQ6xQ5lsT6OK6u5Ahd2QVt73xcuVJoZX0UFEbHejL08rzUDg6OjJ8nWlmqHRCkB9puVecsg/vB/29UcQEcSQAA"
+      },
+      "stderr": {
+        "encoding": "gzip-base64",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "data": "H4sIAAAAAAAC/wMAAAAAAAAAAAA="
+      },
+      "inputs_before": 4163,
+      "inputs_after": 4163
+    },
+    {
+      "kind": "frames",
+      "seed": 42,
+      "command": [
+        "bash",
+        "tools/project_data_run.sh",
+        "perl",
+        "-Iperl",
+        "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.2.0.1-frames-probe.pl"
+      ],
+      "exit": 0,
+      "stdout": {
+        "encoding": "gzip-base64",
+        "bytes": 18716,
+        "sha256": "6eabb36448952e3c47e4666469053f677a5fe6a9df849e6aeaed28498b020ad1",
+        "data": "H4sIAAAAAAAC/+1bzW7jNhC++ykIXdYGJMT68U/6KlFgaGWmFmpLLklvnAYBAuxLFOih9x77IH2IvfXWRygp27EtkaK0oigp2RzsiByLnI8z3ww11N0AAPDMPuifEaCf8QIHG2iAnwBBO2ieesJgvRb3YNZqn5vwF9Zwuu3xzrsNjEkqeXfuYH2/RPHSMK/bwgDDoW/8+8dfvmGCy6vRqI7sEj4EuzUZnr6pxFng/kLYwMkOhXDxgKjSnFk/X12xH6DgkYnx1DnfL5UATARcTzU7cXl3XhUgHHaBt0GcWZOzDKQTpn0Tk9eJSYBIur7Z3perhhezJD4VlqsfuDnzYuDmP4ATGJxdDJyryuQ4Xt9HvGZOMV4TT4LXBdUNMhAy0uYTfJSObZDHKMZv8zcQxFSnLM2zYJDXIo0reQoVcH9FSv8O8cIgkIkDTH4DySo5oIAfIxKuslHlwnQOAsPGLGjEH3uRn+OA6ydNxrVvr1995MeNQ8AG8Uk9X7Jl0a79cNcnOF1JDLTnP+CsAOdUEhm9tiJjn0CcS8LltE64xNt1RBbnzc/grbe7u6k9BVy0IWpjH2Se7OdsI2yKwDzbBL2o6UnFNuCopSUOwi3o7EjYw3YUs0cHdHY9yUJPGsyN4WZLniy8TojuDFlgcDyvVpPYllvLLmepAFRTBYB+ZZpyDtKNgDuW+Katl4906++5kucc7zIR8Y3A/OwbWSb4FJrLT9nGAKHgaWibTo44ngGmPWm6aP7zN1ucl6wIQRDehQGhUgFLMH2DDju6V57Q8BXK2tZRilpUqin9PitHLzj60FaBCqDR3EeV1/FWtMOo2JJM4VYRLEKb7jA2zkxiMjNF4MjdusMoeRILcseKUBIxW38YSEJB3qzBrPzXXUIgtj6jIKRfNNDDvfLsXBwTRKxYSAvl3EIe8Ipz/VRLcabPuodqrajEfiCdlOrdQKmQrUHfqiFKsoGf6ovcHQTnVhKjPM0BvHsQuZInn47TVhjvHlaexJzcSZvBvHt4zSTcNHHe52Z2b6YVi2wguxnuR6znJtrsGthx8kfNZ3xHObrslxPqx/7xCsJWFJWFlNsGs9RtQAhEsRUmMYF70kCGKrYhgfEWZ4+bgIQriAsSyKPEULxcJfLB0zDqU8JSPvXt9WsJNViZsuGnw2PtXqZLdafumYFeRpJGA0YFKlVJn3a9QFGHPhEMYfQFIuvIo8r587s48iFa08ksUjcqIMpLsWFlhrwaRDVNVrAkUKRG3QeSshxk+j45wvY4tRDbuwkT3ABp8EbL80UqRePAYRo1F3auJ7c8QqZVNXtWs+Bbhw9jalQoCi28DvCqATIUmUrONosJMt2/FjDjYX+bX5kStHi4tXo+LOEkZWetuGI10+gsDanouDULTz3heQljV/f33yBKrNMYdf29wGGP5yEKXFZ0+ILjoqeblXbSj7Wmj6uIQOo1IbSSeP3UiVUFPmE7PvDhVjejLbutWbJNdaLGGSibyjARYLJP8/B/L14J1K+YbMs6669msuzTbXQ3voUBgUsrQcsoDtCT8gxUBGhBs9KyeG612iptyy2r5ISr2tdYT226Nf2mmg7Pt6Wg43zEx67HF44Eb8akVdNsn2/89+fvr/Q36st65Yp6xwfvad51OVHAWlhB9zC/uqfZtL72z0O6Lc3tuZ6ToG+G1A21Zc9UnSYzhF0chckSWiFaPzRQ6xQ5lsT6OK6u5Ahd2QVt73xcuVJoZX0UFEbHejL08rzUDg6OjJ8nWlmqHRCkB9puVecsg/vB/29UcQEcSQAA"
+      },
+      "stderr": {
+        "encoding": "gzip-base64",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "data": "H4sIAAAAAAAC/wMAAAAAAAAAAAA="
+      },
+      "inputs_before": 4163,
+      "inputs_after": 4163
+    }
+  ],
+  "input_tree": ".linkedspec-data/scratch/pipeline-source-provenance/pipeline-family-acceptance-_oc0teoq",
+  "instrument_sha256": "87c6b8c1334bdcbe14f50447a983364d8fcd830626aa9f86261dfa144db74455",
+  "stream_instrument_sha256": "d054f68eb1a892b56ec2db1d4b6c56bcfb0bce5ac9b9e4fdef225c2273ffb1fe",
+  "host_scope": "Read-only host OS/Perl and standard libraries; project scratch and output on repository volume."
+}

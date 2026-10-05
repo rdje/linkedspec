@@ -12,6 +12,12 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-10-05 — Original method argument frames (.1.3.2.0.1)
+
+Add invocation-local private CSV/parser sidecars in MethodExpr. Original flush boundaries and retained occurrence indices translate through leading trim/payload bases; exact canonical return/source/method/args identities guard authority. Copied/foreign/opaque results stay unchanged without frames; changed entries decline individually. Nested recorders/errors/caller state and ordinary parser fields/callback signatures remain intact.
+
+Immutable4162-input before/after proof declares one MethodExpr delta and retains14 commands, RED10/GREEN15, nine suites1173 groups including1034 Phase0,138 actual parser/CSV frames across three seeds and three complete unchanged compiler channels.23 evidence controls and17 complete-book controls reject;58 book inputs render18 examples/three chapters. Prior29 claim input hashes verify before historical freeze; original local producer/test/refinement and reviewer-import failure remain retained with precise limits. Recursive Flow consumption and canonical family acceptance remain owned.
+
 ## 2026-10-05 — MethodExpr argument occurrence diagnosis (.1.3.2.0)
 
 Retain original parser/CSV boundaries, callback arguments/results and actual returned references from4141 immutable regular Git inputs plus two authored runtime overlays. Ten literal cases/23 arguments recur across three seeds; seven affected suites pass124 groups and23 evidence controls observe RED. Original copy/change/foreign/opaque/nested/error behavior remains unchanged. The current parser publishes no argument frames; .1.3.2.0.1 owns invocation-local sidecars before recursive Flow consumers. Complete book teaching and55 prior claim bindings are retained; production and standard tests are unchanged.

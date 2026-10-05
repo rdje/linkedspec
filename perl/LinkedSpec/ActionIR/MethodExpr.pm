@@ -8,6 +8,86 @@ BEGIN {
  my $perl_root = File::Basename::dirname($linked_spec_dir);
  unshift @INC, $perl_root unless grep { defined($_) && $_ eq $perl_root } @INC;
 }
+use LinkedSpec::OwnerDispatch ();
+use Scalar::Util ();
+
+our ($_source_csv_recorder, $_source_method_recorder);
+
+# Select by retained occurrence index. Changed values lose only their own frame;
+# copied arrays and foreign source are rejected by the surrounding collector.
+sub _select_argument_frames {
+ my ($arguments, $frames) = @_;
+ return [] unless ref($arguments) eq 'ARRAY';
+ my @selected;
+ for my $index (0 .. $#$arguments) {
+  my $frame = $frames->[$index];
+  my $value = $arguments->[$index];
+  push @selected, defined($frame) && defined($value) && !ref($value)
+   && $frame->{raw} eq $value ? $frame : undef;
+ }
+ return \@selected
+}
+
+# Private sidecars leave the callback's actual return untouched. Local recorders
+# restore an enclosing invocation on both successful and exceptional returns.
+sub _split_csv_with_source_frames {
+ my ($callback, @args) = @_;
+ return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
+  my $source = $args[0];
+  my @recorded;
+  local $_source_csv_recorder = sub { push @recorded, $_[0] };
+  my $arguments = $callback->(@args);
+  my $frames = [];
+  if (ref($arguments) eq 'ARRAY' && defined($source) && !ref($source)) {
+   for my $batch (@recorded) {
+    next unless Scalar::Util::refaddr($batch->{arguments}) == Scalar::Util::refaddr($arguments)
+     && defined($batch->{source}) && !ref($batch->{source}) && $batch->{source} eq $source;
+    $frames = _select_argument_frames($arguments, $batch->{source_frames});
+    last;
+   }
+  }
+  return {arguments => $arguments, source_frames => $frames}
+ })
+}
+
+sub _parse_method_with_source_frames {
+ my ($callback, @args) = @_;
+ return LinkedSpec::OwnerDispatch::call_preserving_err(sub {
+  my $source = $args[0];
+  my @recorded;
+  local $_source_method_recorder = sub { push @recorded, $_[0] };
+  my $call = $callback->(@args);
+  my $frames = [];
+  if (ref($call) eq 'HASH' && ref($call->{args}) eq 'ARRAY'
+      && defined($source) && !ref($source)) {
+   for my $batch (@recorded) {
+    next unless Scalar::Util::refaddr($batch->{call}) == Scalar::Util::refaddr($call)
+     && Scalar::Util::refaddr($batch->{arguments}) == Scalar::Util::refaddr($call->{args})
+     && defined($batch->{source}) && !ref($batch->{source}) && $batch->{source} eq $source
+     && defined($call->{source}) && !ref($call->{source}) && $call->{source} eq $batch->{trimmed}
+     && defined($call->{method}) && !ref($call->{method}) && $call->{method} eq $batch->{method}
+     && defined($call->{source_method}) && !ref($call->{source_method})
+     && $call->{source_method} eq $batch->{source_method};
+    $frames = _select_argument_frames($call->{args}, $batch->{source_frames});
+    last;
+   }
+  }
+  return {call => $call, source_frames => $frames}
+ })
+}
+
+# Derive edge trimming from the original piece boundary, never a text search.
+sub _frame_for_csv_piece {
+ my ($source, $start, $end, $trimmed) = @_;
+ return undef unless defined($source) && !ref($source) && defined($trimmed) && !ref($trimmed);
+ my $piece = substr($source, $start, $end - $start);
+ my ($leading) = $piece =~ /\A(\s*)/;
+ my ($trailing) = $piece =~ /(\s*)\z/;
+ $start += length($leading);
+ $end -= length($trailing);
+ return undef if $start > $end || substr($source, $start, $end - $start) ne $trimmed;
+ return {source => $source, raw => $trimmed, source_span => {start => $start, end => $end}}
+}
 
 sub _trim_method_expr_value {
  my ($value) = @_;
@@ -312,6 +392,7 @@ sub _split_top_level_csv {
  $view = substr($view, length($prefix), length($text));
 
  my @parts;
+ my @source_frames;
  my $current = '';
  my $paren_depth = 0;
  my $brace_depth = 0;
@@ -413,7 +494,11 @@ sub _split_top_level_csv {
   }
   if ($char eq ',' && $paren_depth == 0 && $brace_depth == 0 && $bracket_depth == 0) {
    my $trimmed = _trim_method_expr_value(substr($text, $piece_start, $idx - $piece_start));
-   push @parts, $trimmed if defined($trimmed) && length($trimmed);
+   if (defined($trimmed) && length($trimmed)) {
+    push @parts, $trimmed;
+    push @source_frames, _frame_for_csv_piece($text, $piece_start, $idx, $trimmed)
+     if ref($_source_csv_recorder) eq 'CODE';
+   }
    $piece_start = $idx + 1;
    $current = '';
    next;
@@ -422,7 +507,13 @@ sub _split_top_level_csv {
  }
 
  my $trimmed = _trim_method_expr_value(substr($text, $piece_start));
- push @parts, $trimmed if defined($trimmed) && length($trimmed);
+ if (defined($trimmed) && length($trimmed)) {
+  push @parts, $trimmed;
+  push @source_frames, _frame_for_csv_piece($text, $piece_start, length($text), $trimmed)
+   if ref($_source_csv_recorder) eq 'CODE';
+ }
+ $_source_csv_recorder->({arguments => \@parts, source => $text, source_frames => \@source_frames})
+  if ref($_source_csv_recorder) eq 'CODE';
  return \@parts
 }
 
@@ -441,16 +532,40 @@ sub _parse_method_function_expr {
  $view = substr($view, 1) if $receiver;
  return undef unless $view =~ /^(?<method>\w+|==|!=|>=|<=|=|[+\-*\/%<>])\s*(?<PAREN>\((?:[^\(\)\"']++|\"(?:\\.|[^\"])*\"|'(?:\\.|[^'])*'|(?&PAREN))*\))$/o;
  my $source_method = $+{method};
+ my $payload_start = $-[2] + 1;
  my $method = _normalize_method_name($source_method);
 
  my $payload = substr($trimmed, $-[2], $+[2] - $-[2]);
  $payload =~ s/^\(|\)$//go;
- return {
+ my $framed = ref($_source_method_recorder) eq 'CODE'
+  ? _split_csv_with_source_frames(\&_split_top_level_csv, $payload, ($receiver ? '.' : '') . $method)
+  : undef;
+ my $call = {
   method        => $method,
   source_method => $source_method,
   source        => $trimmed,
-  args          => _split_top_level_csv($payload, ($receiver ? '.' : '') . $method),
+  args          => $framed ? $framed->{arguments}
+                   : _split_top_level_csv($payload, ($receiver ? '.' : '') . $method),
+ };
+ if (ref($_source_method_recorder) eq 'CODE') {
+  my @frames;
+  if (defined($expr) && !ref($expr)) {
+   my ($leading) = $expr =~ /\A(\s*)/;
+   my $base = length($leading);
+   my $exact = substr($expr, $base, length($trimmed)) eq $trimmed;
+   for my $frame (@{$framed->{source_frames}}) {
+    if (!$exact || !defined($frame)) { push @frames, undef; next }
+    my $start = $base + $payload_start + $frame->{source_span}{start};
+    my $end = $base + $payload_start + $frame->{source_span}{end};
+    push @frames, substr($expr, $start, $end - $start) eq $frame->{raw}
+     ? {source => $expr, raw => $frame->{raw}, source_span => {start => $start, end => $end}} : undef;
+   }
+  }
+  $_source_method_recorder->({call => $call, arguments => $call->{args}, source => $expr,
+                             trimmed => $trimmed, method => $method, source_method => $source_method,
+                             source_frames => \@frames});
  }
+ return $call
 }
 
 #------------------------------------------------------------------------------

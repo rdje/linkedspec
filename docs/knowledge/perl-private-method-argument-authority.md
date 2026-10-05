@@ -8,10 +8,12 @@ answers:
   - "how are dropped empty CSV arguments mapped to original source"
   - "can copied or foreign parser results borrow argument source authority"
 date: 2026-10-05
-status: original callback and boundary diagnosis verified; private bridge implementation owned
+status: private CSV/parser bridge verified; recursive Flow consumption owned
 tags: [perl, actionir, methodexpr, csv, source-provenance, identity]
 evidence: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.2.0 retains4141 regular immutable Git inputs/two exact runtime overlays, four guarded commands, ten literal cases/23 arguments/three seeds,14 controlled callback records, seven suites124 groups and23 distinguishing RED evidence controls."
-reverify: "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.2.0-review.py"
+reverify:
+  - "After final bridge acceptance: bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.2.0.1-review.py"
+  - "At frozen2fd4e499e68f19d6a481662f46c4e24a1c0896a1 replay original .1.3.2.0-review.py; do not refresh its unchanged-producer guard after bridge changes."
 ---
 
 # Argument authority begins at original producer boundaries
@@ -41,7 +43,7 @@ across three hash seeds. Flow retains marker-first traversal followed by inline
 arguments; copied parser results preserve ordinary events, while changed and
 foreign callbacks preserve their existing different values and event population.
 
-Implementation child `.1.3.2.0.1` owns invocation-local CSV and parser sidecars.
+Implementation child `.1.3.2.0.1` now implements invocation-local CSV and parser sidecars.
 CSV must publish at actual flush boundaries; parser must translate through its
 original leading trim and payload base. Collectors select the actual returned
 array/hash and exact source by identity and value, align by retained occurrence,
@@ -49,3 +51,15 @@ and decline copied/foreign/opaque or changed entries without altering their
 ordinary returns. Nested collection restores the outer invocation. No long-lived
 cache, equal-text search, new dependency callback or public result field is
 authorized. `.1.3.2.1` then consumes verified frames for recursive Flow scans.
+
+
+The bounded bridge implementation under `.1.3.2.0.1` now publishes CSV frames
+at its original flush boundaries and translates them through the parser's
+original leading trim/payload base. Both wrappers retain the actual callback
+return and reject copied/foreign/opaque authority. Parser source/method fields
+and original argument-array identity must remain exact; a changed argument
+entry declines individually. Nested collection restores the outer recorder and
+OwnerDispatch preserves successful caller error state. Final immutable nine-suite consumer/Phase0 proof passes1173 groups, with138
+actual parser/CSV frames under three seeds,23 evidence controls and18 rendered
+book examples; the diagnosis above is historical at
+6ce4798 and is not an unchanged-current-production replay after this change.

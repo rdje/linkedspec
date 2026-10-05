@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Full PNT: original MethodExpr/CSV argument diagnosis is accepted. Next .1.3.2.0.1 implements invocation-local producer sidecars before recursive Flow consumption. Direct Flow remains accepted; whole-family canonical acceptance and other producers/membership/comments/replacement/global audits remain owned.
+Full PNT: invocation-local MethodExpr argument sidecars are verified. Next .1.3.2.1 consumes the verified original block/argument frames for recursive Flow, preserving marker-first traversal. Complete Flow canonical acceptance and other producer/membership/comment/replacement/global audits remain owned.
 
 ## Latest Completed Slice
 
-`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.2.0` — Argument diagnosis .1.3.2.0 verifies4141 immutable inputs/two overlays, ten literal cases/23 arguments/three seeds,14 callback controls and124 groups;23 evidence controls reject. Exact CSV return identity, trim/payload bases, empty slots and original custom behavior are retained. Production and standard tests remain unchanged. Prior55 direct Flow claim hashes verify before historical freeze; book17 examples/three chapters reflect current diagnosis and future bridge ownership.
+`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.2.0.1` — Private MethodExpr bridge .1.3.2.0.1 verifies4162 immutable inputs/one owner delta, RED10-GREEN15/1173 groups and138 original parser/CSV frames under three seeds. Original complete channels/reference identities stay exact;23 evidence/17 book controls reject. Fourteen guarded commands and three complete unchanged compiler pairs;58-input book18 examples/three chapters. Prior29 diagnosis claim hashes verify before historical freeze. Original initial/refined local results and corrected reviewer import remain retained; no Flow recognition/public schema/dependency change.
 
 ## Next Action
 
-Activate .1.3.2.0.1 from clean HEAD; implement bounded invocation-local MethodExpr CSV/parser frames from the accepted literal producer/identity contracts, retaining RED/GREEN and unchanged ordinary channels before recursive consumers.
+Activate .1.3.2.1 from clean HEAD; translate original captured block and verified parsed argument frames to full action source, preserving recursive event order and callback authority. Check engineering history pressure before its new notes require rollover/capacity work.
 
 ## Recent Completions
 
+- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.2.0.1` — private method argument frames; RED10/GREEN15/1173 groups/138 exact frames.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.2.0` — original argument/callback authority diagnosis;124 groups/23 literal arguments and RED evidence controls.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.1` — fourteen direct Flow hooks; RED16/GREEN21/1158 groups/87 origins and unchanged compiler pairs.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.0` — original Flow recursive source diagnosis and safe repair owners; original quoted observation retained.
@@ -29,7 +30,7 @@ Activate .1.3.2.0.1 from clean HEAD; implement bounded invocation-local MethodEx
 - `2026-10-04` — `REPO-HYGIENE.9` retains the due exact metadata census/full channels with zero removals.
 - `2026-10-04` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.1` captures177 private scalar frames,28 GREEN and1148 unchanged consumer groups.
 - `2026-10-04` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.1.0` verifies contiguous statement intervals and owns three implementation slices.
-- `2026-10-04` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.3.1` accepts1337 source-bound groups and preserves the initial checkpoint-input RED.
+
 
 
 ## History

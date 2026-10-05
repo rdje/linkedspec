@@ -1,0 +1,135 @@
+{
+  "complete": true,
+  "revision": "2fd4e499e68f19d6a481662f46c4e24a1c0896a1",
+  "regular_inputs": 4162,
+  "compatibility_overlays": 2,
+  "frame_overlays": 1,
+  "commands": 14,
+  "cases": 10,
+  "arguments": 23,
+  "seeds": 3,
+  "before_red_groups": 10,
+  "after_green_groups": 15,
+  "fixture_suites": 9,
+  "fixture_groups": 1173,
+  "observed_frames": 138,
+  "complete_compiler_pairs": 3,
+  "controls": [
+    {
+      "name": "twins missing result",
+      "observed": "RED",
+      "reason": "literal original parser scalar frames"
+    },
+    {
+      "name": "twins missing csv",
+      "observed": "RED",
+      "reason": "literal original CSV scalar frames"
+    },
+    {
+      "name": "empty-slots missing result",
+      "observed": "RED",
+      "reason": "literal original parser scalar frames"
+    },
+    {
+      "name": "empty-slots missing csv",
+      "observed": "RED",
+      "reason": "literal original CSV scalar frames"
+    },
+    {
+      "name": "quotes-braces-index missing result",
+      "observed": "RED",
+      "reason": "literal original parser scalar frames"
+    },
+    {
+      "name": "quotes-braces-index missing csv",
+      "observed": "RED",
+      "reason": "literal original CSV scalar frames"
+    },
+    {
+      "name": "pattern-context missing result",
+      "observed": "RED",
+      "reason": "literal original parser scalar frames"
+    },
+    {
+      "name": "pattern-context missing csv",
+      "observed": "RED",
+      "reason": "literal original CSV scalar frames"
+    },
+    {
+      "name": "receiver-pattern missing result",
+      "observed": "RED",
+      "reason": "literal original parser scalar frames"
+    },
+    {
+      "name": "receiver-pattern missing csv",
+      "observed": "RED",
+      "reason": "literal original CSV scalar frames"
+    },
+    {
+      "name": "numeric-slash missing result",
+      "observed": "RED",
+      "reason": "literal original parser scalar frames"
+    },
+    {
+      "name": "numeric-slash missing csv",
+      "observed": "RED",
+      "reason": "literal original CSV scalar frames"
+    },
+    {
+      "name": "repeated-ordinary missing result",
+      "observed": "RED",
+      "reason": "literal original parser scalar frames"
+    },
+    {
+      "name": "repeated-ordinary missing csv",
+      "observed": "RED",
+      "reason": "literal original CSV scalar frames"
+    },
+    {
+      "name": "unicode-crlf missing result",
+      "observed": "RED",
+      "reason": "literal original parser scalar frames"
+    },
+    {
+      "name": "unicode-crlf missing csv",
+      "observed": "RED",
+      "reason": "literal original CSV scalar frames"
+    },
+    {
+      "name": "call_same",
+      "observed": "RED",
+      "reason": "actual private returned references"
+    },
+    {
+      "name": "args_same",
+      "observed": "RED",
+      "reason": "actual private returned references"
+    },
+    {
+      "name": "csv_same",
+      "observed": "RED",
+      "reason": "actual private returned references"
+    },
+    {
+      "name": "wrong scalar",
+      "observed": "RED",
+      "reason": "literal original parser scalar frames"
+    },
+    {
+      "name": "lost run",
+      "observed": "RED",
+      "reason": "complete guarded command population"
+    },
+    {
+      "name": "lost Git input",
+      "observed": "RED",
+      "reason": "complete unique Git membership"
+    },
+    {
+      "name": "unrelated RED stderr",
+      "observed": "RED",
+      "reason": "only expected RED harness diagnostics"
+    }
+  ],
+  "instrument_sha256": "c7b98e8d512c7ecff0fa510586b5ffb965d8608870c53dc53077de870f362f11"
+}

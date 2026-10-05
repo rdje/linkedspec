@@ -12,6 +12,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-10-05 — Private argument frames (.1.3.2.0.1)
+
+CSV/parser sidecars select canonical return identities and original source; altered entries decline individually. See docs/knowledge/perl-private-method-argument-authority.md.
+
 ## 2026-10-05 — Method argument authority diagnosis (.1.3.2.0)
 
 Original CSV identity, trim/payload bases and dropped slots are verified. Bridge implementation follows .1.3.2.0.1; see docs/knowledge/perl-private-method-argument-authority.md.
