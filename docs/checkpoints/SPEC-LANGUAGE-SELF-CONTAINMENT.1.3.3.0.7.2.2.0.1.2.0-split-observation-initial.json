@@ -1,0 +1,29 @@
+{
+   "diagnostics" : null,
+   "dump" : null,
+   "events" : [
+      {
+         "args" : {
+            "delimiter" : "/\\,/",
+            "source" : null,
+            "target" : "items"
+         },
+         "raw" : "split(array(items), input, ',')"
+      }
+   ],
+   "expr" : "split(array(items), input, ',')",
+   "failure" : "aggregate_selector_removed surface=array identifier=items replacement=items\n",
+   "internal_stderr" : "",
+   "internal_stdout" : "",
+   "plan" : {
+      "ops" : [
+         {
+            "delimiter_expr" : "/\\,/",
+            "op" : "split",
+            "source_expr" : "$input"
+         }
+      ],
+      "target_symbol" : "items"
+   },
+   "substitution" : null
+}

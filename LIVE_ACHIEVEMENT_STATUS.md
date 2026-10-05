@@ -2,17 +2,19 @@
 
 ## Current Activity
 
-Full PNT: all twenty BasicRules private provenance contracts are independently composed. Remaining PrimitivePipelineRules source provenance follows before recursive/legacy/staged producer and executable membership/replacement work.
+Full PNT: BasicRules is canonically committed; original nineteen-contract pipeline diagnosis is complete. Regex hooks, separately owned split-source metadata repair, statement hooks and canonical family composition follow before other producers and executable membership/replacement.
 
 ## Latest Completed Slice
 
-`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.2.1` — Fresh immutable77444c recurrence supplies all3921 regular Git inputs/no overlays, full channels and before/after guards for7 actual commands. Three seeds retain60 ordered public/private pairs,147 original event/argument references and scalar origins,129 frames, unchanged callbacks and exact prior complete Toolbox streams. Eight unchanged suites pass144 full groups; three foreign-source probes retain events without origins. Twenty reason-specific RED controls reject false acceptance. Complete58-input book renders five original examples/two chapters/eight controls;38 prior mixed-claim input hashes verify before historical-only freeze. Earlier premature reviewer timing evidence retains combined failure with explicit original-input limits; final stable review passes. Known outer book setpgid warning retains startup .7 ownership and no group-establishment claim. Overlapping pre-stage claim check retains missing-declaration failure with unrecorded original-index limits; its mixed cached/live source readers require serialized staging. First canonical exit143/diff/log are preserved without a pass; corrected stable candidate requires a fresh gate. Production/spec/tests/CI/hooks/dependencies stay unchanged. Exact staged canonical CI receipt gates BasicRules .1.1/.1.1.2 closeout before landing.
+`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.0` — Immutable3942 regular inputs/four authored overlays, eight full-channel guarded commands. Three seeds retain57 public/private pairs/207 original events/135 scalar frames and unchanged callback inputs/results; set_value alone supplies9 origins. Independent literal plans/Toolbox confirm null split source metadata and correct lowering. Seven unchanged consumers pass701 complete groups; three foreign-source probes supply no invented origins. Twenty-two reason-specific RED controls and nine book controls reject false acceptance;58 book inputs render six examples/two chapters. All46 preceding claim hashes verify before historical-only freeze. Preliminary exploratory/removed-selector outputs stay limited and separate. Stale V2 roadmap mirror is reconciled; production/spec/tests/CI/hooks/dependencies unchanged. Focused doctrines/claim/Knowledge/history/diff/hooks govern landing; repair and canonical family closure remain separately owned.
 
 ## Next Action
 
-Activate `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2` from clean HEAD; inspect published scanner contracts and exact pipeline/frame constructors, then split bounded source-provenance leaves before implementation. Literal receivers and structured plans must remain original. Recursive/legacy/staged producers, membership/replacement, marker/comments and trace retain separate owners.
+Activate `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.1.0` from clean HEAD; implement ten remaining full-input regex recorder hooks, preserving exact original arguments, plan/callback effects, quoted syntactic occurrences and existing set_value. Commit before split-source metadata repair .1.2.1.1; then statement .1.2.2 and canonical family .1.2.3. Other producer/semantic owners remain open.
 
 ## Recent Completions
+
+- `2026-10-05` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.0` retains original19-contract pipeline diagnosis/701 groups and owns split-source repair.
 
 - `2026-10-05` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.2.1` accepts3921-input immutable20-contract recurrence/144 groups behind exact canonical family landing.
 
@@ -43,8 +45,6 @@ Activate `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2` from clean HEAD; i
 - `2026-10-04` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.0` splits quoted-data work and reconciles the canonical reporting handoff.
 
 - `2026-10-04` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1` canonically lands source-unit raw reporting/spans/legacy ownership at363c79109.
-
-- `2026-10-03` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.0` freezes nested raw/source-occurrence diagnosis and owns comment classification.
 
 ## History
 

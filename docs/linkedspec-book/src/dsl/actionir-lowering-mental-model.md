@@ -112,6 +112,31 @@ source rule paragraph text
 
 `ActionIR::Scanner` discovers which helper contracts are present in a rule's action text. It uses a registry of scanner rule families (`PrimitiveBasicRules`, `PrimitivePipelineRules`, `FlowRules`, `LegacyRules`) to match helper syntax patterns and classify them into contract families. `ScannerCore` is the single source of truth for the scanner dependency contract — the mapping between recognized helper patterns and their lowering handlers.
 
+The pipeline family has a separately retained nineteen-contract diagnosis. Eleven contracts
+scan the original full input, while eight select original statements; nested hash assignment
+and value-only expressions each have two event-construction branches. The diagnostic source
+repeats literal receivers and structured plans around Unicode, CRLF, quoted helper text and
+ignored comments. Its public and private scans keep the same arguments and dependency
+callback inputs/results. Only the existing `set_value` hook currently reports private source
+origins; the eighteen remaining contracts are scheduled for provenance hooks. Quoted matches
+are syntactic observations, not executable membership.
+
+One metadata defect is explicitly retained rather than treated as a supported result:
+
+```perl
+split(items, input, ',')
+# planner split op: source_expr => '$input'
+# original scanner event: source => undef
+# lowering still reads $input
+```
+
+The scanner reads an obsolete `source_symbol` field instead of the planner's `source_expr`.
+The Toolbox descriptor repeats the missing source, although generated lowering keeps the
+input expression. A separate repair follows the regex provenance hooks; until it lands,
+do not interpret that null diagnostic field as evidence that the split has no input.
+The original source, complete compiler channels and independent argument/plan oracle stay
+retained. This diagnosis adds no DSL form or native-execution guarantee.
+
 ### StatementSplit
 
 `ActionIR::StatementSplit` splits action text into individual statements safe for independent lowering. This is important because a single action block can contain multiple helper calls (`set(...)`, `push(...)`, `return(...)`) that must be lowered separately.

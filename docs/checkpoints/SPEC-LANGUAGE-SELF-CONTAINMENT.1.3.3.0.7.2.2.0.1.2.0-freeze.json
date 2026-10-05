@@ -1,0 +1,8 @@
+{
+  "revision": "a2f6d61815a551bf578dbce0e4b453f0f8ce8513",
+  "bound_inputs": 46,
+  "before_sha256": "783c00ec061266839ac2bc307b87c529b71c3f42976bf8614675cb25ca80f3bc",
+  "after_sha256": "003bc309941e62904b89443076e9cbcda1a6b5aad51409351ca3962fcb45fbd6",
+  "instrument_sha256": "0e238d28c5d0e93bb1cf20b6524cbd0c306053f5ed338e615ab2e740e875b27a",
+  "scope": "Only durability mode/revision change; every original claim/input identity retained."
+}

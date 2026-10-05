@@ -1,0 +1,54 @@
+{
+  "book_inputs": 58,
+  "rendered_examples": 6,
+  "rendered_sections": 2,
+  "controls": [
+    {
+      "name": "promote failed render",
+      "rejected": true,
+      "reason": "complete actual render"
+    },
+    {
+      "name": "erase render guard",
+      "rejected": true,
+      "reason": "book input guards"
+    },
+    {
+      "name": "forge renderer",
+      "rejected": true,
+      "reason": "actual book instrument"
+    },
+    {
+      "name": "forge rendered channel",
+      "rejected": true,
+      "reason": "book channel bytes"
+    },
+    {
+      "name": "erase actual examples",
+      "rejected": true,
+      "reason": "original authored rendered examples"
+    },
+    {
+      "name": "erase composition teaching",
+      "rejected": true,
+      "reason": "rendered twenty-contract composition teaching"
+    },
+    {
+      "name": "erase family closeout teaching",
+      "rejected": true,
+      "reason": "rendered immutable family closeout teaching"
+    },
+    {
+      "name": "erase pipeline diagnosis",
+      "rejected": true,
+      "reason": "rendered original pipeline diagnosis"
+    },
+    {
+      "name": "erase diagnostic teaching",
+      "rejected": true,
+      "reason": "rendered diagnostic source teaching"
+    }
+  ],
+  "complete": true,
+  "instrument_sha256": "68b837deaf09c1c0f73c2d42ec1c98def889ecd67cdc29631163b94050870e80"
+}

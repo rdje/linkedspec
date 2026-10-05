@@ -2412,10 +2412,78 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 - [x] **LOCKSTEP** — Bounded complete claim, historical old-input preservation, task/frontier/roadmaps, Knowledge, clean intended resume/live/history and mdBook agree. Canonical receipt gates this parent closeout. Broader historical audit remains startup .5.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2`
-  Status: `pending`
+  Status: `active`
   Goal: Complete remaining PrimitivePipelineRules source provenance.
   Dependencies: `.1.3.3.0.7.2.2.0.1.1`
+  Children: `.1.3.3.0.7.2.2.0.1.2.0`, `.1.3.3.0.7.2.2.0.1.2.1`, `.1.3.3.0.7.2.2.0.1.2.2`, `.1.3.3.0.7.2.2.0.1.2.3`
+  Safe-slice split: Diagnose all nineteen dispatched contracts from an immutable boundary, retaining existing set_value provenance. Then implement the ten remaining full-input regex producers, then eight statement producers including both nested-assignment/value-drop constructor branches, then independently compose/canonically close the family. Exact callback/parser plans and original literal receivers remain unchanged; no masked operands or executable membership admission.
   Acceptance: Keep literal receivers and structured statement/array plans; explicitly translate complete statement frames and do not feed masked operands into parsing.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.0`
+  Status: `done`
+  Goal: Retain an independent source/argument diagnosis for the nineteen pipeline contracts before their remaining hooks.
+  Dependencies: `.1.3.3.0.7.2.2.0.1.1.2.1`
+  Activation: Clean a2f6d61815a551bf578dbce0e4b453f0f8ce8513, exact committed canonical receipt/all ten hooks verified, brief0 and no jobs. Canonical seven-family inventory/occurrence fact, all PrimitivePipelineRules constructors, public dependency facades, relevant roadmap and ActionIR book reviewed; affected AST/order/uniform-binding/push/trace consumers selected.
+  Owned paths: Checkpoint prefix .1.2.0- and claim; prior .1.1.2.1 claim historical freeze; pipeline Knowledge card and task/index/resume/live/roadmap/change/notes/ActionIR book. No production, standard tests, specs, CI, hooks, dependencies or other repositories change.
+  Verification tier: `focused`
+  Focused checks: Immutable regular Git inputs plus explicit authored source/probe overlays; all nineteen public/private scanner contracts and original arguments/statement frames/Toolbox outputs under three seeds; distinguish the already instrumented set_value from actual absent remaining origins; exact receiver/pipeline-plan inputs, structured assignment and literal value-drop branches; independent source/argument oracles and observed RED evidence corruptions; affected unchanged consumers, complete book render, memory/Knowledge/claim/history/diff and all doctrines.
+  Canonical trigger: None; bounded diagnosis/ownership split only. .1.2.3 owns canonical family closeout after source recording implementation.
+  Claim verification: `docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.0.json`
+  Acceptance: Capture actual original source/arguments and missing private positions before changes. Literal construction defines exact scalar event/statement intervals without searching equal text. Preserve original callback plan inputs and compiler channels, including quoted syntax and repeated forms. Any surprising result gets a source-backed tool diagnosis and owned repair before acceptance; no production or public admission.
+  Owned mirror defect: ROADMAP_V2.md's expressive self-containment row still selects completed BasicRules composition .1.1.2 despite committed .1.1.2.1. Reproduce by comparing that row with the clean activation task and Git record. Impact: readers can select finished work. Reconcile both current roadmap rows and task index with this pipeline diagnosis and exact next hook/metadata/statement/composition sequence; no historical status is overwritten.
+
+
+  Verification: Complete3942 immutable regular Git inputs/four authored overlays bind eight actual guarded commands. Three seeds retain57 public/private pairs,207 original events/135 scalar frames and unchanged callback argument/result logs; only existing set_value supplies9 origins and eighteen contracts supply none. Independent literal plans and full Toolbox channels reproduce null split metadata with correct input lowering. Seven unchanged fixtures/consumers complete701 groups (28/13/23/15/12/605/5); three foreign-source probes retain zero origins. Twenty-two reason-specific controls observe RED;58-input book renders six examples/two chapters with nine controls. All46 prior family claim hashes verify before historical-only freeze. Preliminary exploratory/removed-selector outputs stay separate and limited; acceptance uses only the completed fixed capture. Both current roadmap mirrors and index now select the pipeline sequence; no production/spec/test/CI/hook/dependency change.
+  Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.0 - diagnose pipeline source contracts`.
+
+## Acceptance Checklist — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.0
+
+- [x] **REPRODUCE / ISSUE** — All19 original public/private contracts measured;18 have no origins and set_value retains9 under three seeds. Public split planner/scanner/substitution/descriptor/dump reproduce null source metadata and correct lowering.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Original regex/statement constructors lack recording hooks; split_array reads source_symbol instead of the planner's source_expr. Literal oracle defines raw/args/scalar intervals and all structured/value branches without raw-text searching.
+- [x] **FIX** — Diagnosis/source/plan proof retained before production changes; hook-only .1.2.1.0, metadata repair .1.2.1.1, statement .1.2.2 and canonical family .1.2.3 own the exact next sequence. Stale V2 mirror selects current work again.
+- [x] **ADDRESSED (verified)** — Independent immutable3942-input/four-overlay census, eight actual commands/full channels/guards and22 distinguishing REDs reject false source/plan/TAP acceptance. Original null result is retained for later repair.
+- [x] **NO REGRESSION** — Seven unchanged consumers finish701 groups; public/private event arguments and callback inputs/results agree, existing set_value identity/origins remain exact and three foreign-source guards reject invented authority.
+- [x] **LOCKSTEP** — Complete58-input book/six examples/two chapters/nine controls;46 prior claim hashes frozen historically; task/index/two roadmaps/Knowledge/live/resume/history/claim/doctrines align. Runtime defects remain explicitly scheduled; no family admission closes here.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.1`
+  Status: `pending`
+  Goal: Complete ten remaining pipeline regex hooks and the separately diagnosed split-source metadata repair.
+  Dependencies: `.1.3.3.0.7.2.2.0.1.2.0`
+  Children: `.1.3.3.0.7.2.2.0.1.2.1.0`, `.1.3.3.0.7.2.2.0.1.2.1.1`
+  Safe-slice split: Land exact original argument/provenance hook compatibility first; then explicitly repair and document the original null split-source defect, preserving the diagnosis. Do not mix the two before/after contracts.
+  Acceptance: Both children verified and committed before statement implementation. Hook-only proof preserves original args; metadata repair declares its precise public diagnostic contract and compatibility limits.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.1.0`
+  Status: `pending`
+  Goal: Record exact full-input source coordinates for the ten remaining pipeline regex producers.
+  Dependencies: `.1.3.3.0.7.2.2.0.1.2.0`
+  Planned verification: Same source/argument before-after probe and permanent original-owner RED/GREEN; capture coordinates before parse/plan callbacks overwrite match globals; preserve existing set_value and direct consumers.
+  Acceptance: Original raw/args, callback effects and order remain exact. No masked receiver/operand parsing or public event fields. The diagnosed null split-source argument stays unchanged until .1.2.1.1.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.1.1`
+  Status: `pending`
+  Goal: Repair split_array's null source metadata at the public planner/scanner boundary.
+  Priority: P1; execute after .1.2.1.0 provenance hooks land cleanly, before statement implementation.
+  Dependencies: `.1.3.3.0.7.2.2.0.1.2.1.0`
+  Reproduce: .1.2.0-split-probe.pl uses split(items, input, ','). Public planner returns source_expr=$input; scanner args.source is null, while Toolbox substitution correctly emits the input expression and return_descriptor repeats null metadata.
+  Root cause: PrimitivePipelineRules.pm split_array reads last_op.source_symbol, but ArrayPipeline.pm's split plan publishes source_expr. Retained .1.2.0 original probe/channels bind this diagnosis. Initial array(items) probe is separately retained as a removed-selector rejection and is not the successful DSL case.
+  Impact: Helper/canonical introspection loses the split input despite correct generated lowering; source expressions and literals need a defined, documented event contract.
+  Planned verification: Independent original-owner RED and repaired source-expression/literal/legacy compatibility cases, exact event/provenance and callback-plan boundaries, original lowerings and direct consumers; scoped canonical trigger assessment before activation.
+  Acceptance: Resolve the producer/consumer contract explicitly and verify every maintained consumer; retain .1.2.0's original null observation, update public teaching and ownership. No unrelated DSL admission.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.2`
+  Status: `pending`
+  Goal: Bind exact original statement frames to the eight pipeline statement contracts and all original constructor branches.
+  Dependencies: `.1.3.3.0.7.2.2.0.1.2.1.1`
+  Planned verification: Original returned-array/occurrence/private frame bridge, both structured assignment and literal value-drop branches, original callback/argument/reference guards and affected consumers with actual source-bound RED/GREEN.
+  Acceptance: Reuse canonical frames only for exact original raw/source authority; preserve literal receivers and nested paths. Unknown/transformed/foreign callback results retain events without invented origins.
+
+- ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.3`
+  Status: `pending`
+  Goal: Independently compose and canonically accept all nineteen PrimitivePipelineRules provenance contracts.
+  Dependencies: `.1.3.3.0.7.2.2.0.1.2.2`
+  Planned verification: Immutable committed family recurrence, exact original arguments/occurrences/frames/private identities and direct consumers, independent distinguishing controls, actual book render and exact staged canonical gate before parent closeout.
+  Acceptance: Close the pipeline family only after complete source-bound proof and canonical receipt. Flow/legacy/staged producers, executable membership/comments/replacement and broader audits remain separately owned.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3`
   Status: `pending`

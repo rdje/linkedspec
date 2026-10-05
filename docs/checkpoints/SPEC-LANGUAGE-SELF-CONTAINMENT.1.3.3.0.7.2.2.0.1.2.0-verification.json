@@ -1,0 +1,138 @@
+{
+  "complete": true,
+  "revision": "a2f6d61815a551bf578dbce0e4b453f0f8ce8513",
+  "regular_inputs": 3942,
+  "overlays": 4,
+  "contracts": 19,
+  "seeds": 3,
+  "authored_statement_frames": 135,
+  "selected_events": 207,
+  "existing_origins": 9,
+  "contracts_without_origins": 18,
+  "fixture_suites": 7,
+  "fixture_plans": [
+    28,
+    13,
+    23,
+    15,
+    12,
+    605,
+    5
+  ],
+  "fixture_groups": 701,
+  "foreign_probes": 3,
+  "split_source_defect_reproduced": true,
+  "controls": [
+    {
+      "name": "erase contract",
+      "observed": "RED",
+      "reason": "exact nineteen-contract population and order"
+    },
+    {
+      "name": "change original argument",
+      "observed": "RED",
+      "reason": "authored exact public arguments and occurrences"
+    },
+    {
+      "name": "erase original event",
+      "observed": "RED",
+      "reason": "authored exact public arguments and occurrences"
+    },
+    {
+      "name": "reuse equal raw set occurrence",
+      "observed": "RED",
+      "reason": "only existing set_value has original origins"
+    },
+    {
+      "name": "invent uninstrumented origin",
+      "observed": "RED",
+      "reason": "only existing set_value has original origins"
+    },
+    {
+      "name": "forge argument identity",
+      "observed": "RED",
+      "reason": "original set_value event and argument reference identities"
+    },
+    {
+      "name": "erase callback result",
+      "observed": "RED",
+      "reason": "unchanged original callback sequence arguments and results"
+    },
+    {
+      "name": "erase ignored frame",
+      "observed": "RED",
+      "reason": "authored mixed statement frames"
+    },
+    {
+      "name": "promote public schema",
+      "observed": "RED",
+      "reason": "unchanged private public events"
+    },
+    {
+      "name": "forge compiler success",
+      "observed": "RED",
+      "reason": "complete clean Toolbox inspection"
+    },
+    {
+      "name": "invent foreign origin",
+      "observed": "RED",
+      "reason": "literal foreign-source boundary"
+    },
+    {
+      "name": "erase supplied input",
+      "observed": "RED",
+      "reason": "complete unique Git membership"
+    },
+    {
+      "name": "forge supplied bytes",
+      "observed": "RED",
+      "reason": "original Git member bytes"
+    },
+    {
+      "name": "erase overlay",
+      "observed": "RED",
+      "reason": "exact authored overlay membership"
+    },
+    {
+      "name": "promote incomplete capture",
+      "observed": "RED",
+      "reason": "complete exact-source capture"
+    },
+    {
+      "name": "forge producer",
+      "observed": "RED",
+      "reason": "actual capture producer"
+    },
+    {
+      "name": "promote failed command",
+      "observed": "RED",
+      "reason": "actual successful exit"
+    },
+    {
+      "name": "forge channel",
+      "observed": "RED",
+      "reason": "channel bytes"
+    },
+    {
+      "name": "shorten TAP plan",
+      "observed": "RED",
+      "reason": "complete ordered positive fixture reach"
+    },
+    {
+      "name": "promote nested TAP failure",
+      "observed": "RED",
+      "reason": "no nested fixture failure"
+    },
+    {
+      "name": "hide original metadata defect",
+      "observed": "RED",
+      "reason": "retained original null source defect"
+    },
+    {
+      "name": "drop planner input expression",
+      "observed": "RED",
+      "reason": "independent split planner input expression"
+    }
+  ],
+  "instrument_sha256": "fea4b1898fb1318b745219c4538d736cf6db626101561dbe6a9d89addbfa74e7"
+}

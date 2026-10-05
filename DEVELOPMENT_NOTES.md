@@ -12,6 +12,12 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-10-05 — original pipeline source/plan diagnosis (SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.0)
+
+The literal mixed oracle selects69 events/45 statement frames per seed: eleven full-input regex contracts, eight statement contracts, both nested-assignment/value-drop constructors and standalone array value drops. Only set_value records origins; original public/private callback arguments and actual results match. Immutable Git population plus four explicit overlays binds every fresh command; independent Git object/content/mode/population, literal raw/args/interval/plan and complete TAP/channel checks reject22 corruptions. Source hooks must retain exact original default-callback arguments and quoted syntactic matches before executable-membership repair.
+
+Public Toolbox diagnosis finds split_array reading last_op.source_symbol while the planner supplies source_expr=$input. Descriptor metadata is null but substitution/generated lowering correctly reads input. Preserve this original defect, land hook-only .1.2.1.0 first, then repair the precise public metadata contract in .1.2.1.1. Initial array(items) probe rejects the removed selector; retain it separately from the successful current bare-binding case. Current V2 roadmap row lagged BasicRules canonical completion; reconcile both selected rows without rewriting past proof. Full family closure remains canonical .1.2.3; global audit/startup defects remain separately owned.
+
 ## 2026-10-05 — BasicRules immutable family recurrence (SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.2.1)
 
 The committed mixed oracle/probe now recur without overlays against the complete3921 regular Git-member population. Independent object/content/mode/membership validation also binds every imported original oracle/reviewer and prior Toolbox stream. Each fresh three-seed channel equals the exact earlier complete record;144 ordered test groups and original private-channel guards remain unchanged. Producer/consumer orchestration must consume final capture exit0 before review: the premature attempt correctly rejected incomplete observations, but its concurrent read bytes were not retained, so that historical diagnostic stays limited. The outer managed book warning is the already-owned startup .7 process-group issue; successful render does not prove original PGID establishment. Complete focused proof and book/claim closure precede exact staged canonical CI; only its receipt permits BasicRules parent closeout.

@@ -1,0 +1,1192 @@
+{
+  "action": "# 雪\r\n \tprint \"雪;push(items, '雪');set(value, '雪');regex_subst(value, /a/, '雪', g);split(items, input, ',');split_each(items, ',');trim_each(items);filter_nonempty(items);lowercase_each(items);uppercase_each(items);uniq(items);filter_match(items, /a/);\";\r\n\tpush(items, '雪');\r\n set(value, '雪');\r\n regex_subst(value, /a/, '雪', g);\r\n split(items, input, ',');\r\n split_each(items, ',');\r\n trim_each(items);\r\n filter_nonempty(items);\r\n lowercase_each(items);\r\n uppercase_each(items);\r\n uniq(items);\r\n filter_match(items, /a/);\r\n print $_ foreach(@items);\r\n my @parts = grep { length($_) } map { my $v = $_; $v =~ s/^ +//g; $v } split /,/, $input;\r\n value = '雪';\r\n items += '雪';\r\n items.push_back('雪');\r\n tree['key'] = '雪';\r\n tree['key'][0] = '雪';\r\n set_key(tree, 'key', '雪');\r\n trim(' 雪 ');\r\n ' 雪 '.trim();\r\n # β\r\n\t' 雪 '.trim();\r\n trim(' 雪 ');\r\n set_key(tree, 'key', '雪');\r\n tree['key'][0] = '雪';\r\n tree['key'] = '雪';\r\n items.push_back('雪');\r\n items += '雪';\r\n value = '雪';\r\n my @parts = grep { length($_) } map { my $v = $_; $v =~ s/^ +//g; $v } split /,/, $input;\r\n print $_ foreach(@items);\r\n filter_match(items, /a/);\r\n uniq(items);\r\n uppercase_each(items);\r\n lowercase_each(items);\r\n filter_nonempty(items);\r\n trim_each(items);\r\n split_each(items, ',');\r\n split(items, input, ',');\r\n regex_subst(value, /a/, '雪', g);\r\n set(value, '雪');\r\n push(items, '雪');\r\n ",
+  "statements": [
+    {
+      "raw": "# 雪",
+      "source_span": {
+        "start": 0,
+        "end": 3
+      }
+    },
+    {
+      "raw": "print \"雪;push(items, '雪');set(value, '雪');regex_subst(value, /a/, '雪', g);split(items, input, ',');split_each(items, ',');trim_each(items);filter_nonempty(items);lowercase_each(items);uppercase_each(items);uniq(items);filter_match(items, /a/);\"",
+      "source_span": {
+        "start": 7,
+        "end": 251
+      }
+    },
+    {
+      "raw": "push(items, '雪')",
+      "source_span": {
+        "start": 255,
+        "end": 271
+      }
+    },
+    {
+      "raw": "set(value, '雪')",
+      "source_span": {
+        "start": 275,
+        "end": 290
+      }
+    },
+    {
+      "raw": "regex_subst(value, /a/, '雪', g)",
+      "source_span": {
+        "start": 294,
+        "end": 325
+      }
+    },
+    {
+      "raw": "split(items, input, ',')",
+      "source_span": {
+        "start": 329,
+        "end": 353
+      }
+    },
+    {
+      "raw": "split_each(items, ',')",
+      "source_span": {
+        "start": 357,
+        "end": 379
+      }
+    },
+    {
+      "raw": "trim_each(items)",
+      "source_span": {
+        "start": 383,
+        "end": 399
+      }
+    },
+    {
+      "raw": "filter_nonempty(items)",
+      "source_span": {
+        "start": 403,
+        "end": 425
+      }
+    },
+    {
+      "raw": "lowercase_each(items)",
+      "source_span": {
+        "start": 429,
+        "end": 450
+      }
+    },
+    {
+      "raw": "uppercase_each(items)",
+      "source_span": {
+        "start": 454,
+        "end": 475
+      }
+    },
+    {
+      "raw": "uniq(items)",
+      "source_span": {
+        "start": 479,
+        "end": 490
+      }
+    },
+    {
+      "raw": "filter_match(items, /a/)",
+      "source_span": {
+        "start": 494,
+        "end": 518
+      }
+    },
+    {
+      "raw": "print $_ foreach(@items)",
+      "source_span": {
+        "start": 522,
+        "end": 546
+      }
+    },
+    {
+      "raw": "my @parts = grep { length($_) } map { my $v = $_; $v =~ s/^ +//g; $v } split /,/, $input",
+      "source_span": {
+        "start": 550,
+        "end": 638
+      }
+    },
+    {
+      "raw": "value = '雪'",
+      "source_span": {
+        "start": 642,
+        "end": 653
+      }
+    },
+    {
+      "raw": "items += '雪'",
+      "source_span": {
+        "start": 657,
+        "end": 669
+      }
+    },
+    {
+      "raw": "items.push_back('雪')",
+      "source_span": {
+        "start": 673,
+        "end": 693
+      }
+    },
+    {
+      "raw": "tree['key'] = '雪'",
+      "source_span": {
+        "start": 697,
+        "end": 714
+      }
+    },
+    {
+      "raw": "tree['key'][0] = '雪'",
+      "source_span": {
+        "start": 718,
+        "end": 738
+      }
+    },
+    {
+      "raw": "set_key(tree, 'key', '雪')",
+      "source_span": {
+        "start": 742,
+        "end": 767
+      }
+    },
+    {
+      "raw": "trim(' 雪 ')",
+      "source_span": {
+        "start": 771,
+        "end": 782
+      }
+    },
+    {
+      "raw": "' 雪 '.trim()",
+      "source_span": {
+        "start": 786,
+        "end": 798
+      }
+    },
+    {
+      "raw": "# β",
+      "source_span": {
+        "start": 802,
+        "end": 805
+      }
+    },
+    {
+      "raw": "' 雪 '.trim()",
+      "source_span": {
+        "start": 808,
+        "end": 820
+      }
+    },
+    {
+      "raw": "trim(' 雪 ')",
+      "source_span": {
+        "start": 824,
+        "end": 835
+      }
+    },
+    {
+      "raw": "set_key(tree, 'key', '雪')",
+      "source_span": {
+        "start": 839,
+        "end": 864
+      }
+    },
+    {
+      "raw": "tree['key'][0] = '雪'",
+      "source_span": {
+        "start": 868,
+        "end": 888
+      }
+    },
+    {
+      "raw": "tree['key'] = '雪'",
+      "source_span": {
+        "start": 892,
+        "end": 909
+      }
+    },
+    {
+      "raw": "items.push_back('雪')",
+      "source_span": {
+        "start": 913,
+        "end": 933
+      }
+    },
+    {
+      "raw": "items += '雪'",
+      "source_span": {
+        "start": 937,
+        "end": 949
+      }
+    },
+    {
+      "raw": "value = '雪'",
+      "source_span": {
+        "start": 953,
+        "end": 964
+      }
+    },
+    {
+      "raw": "my @parts = grep { length($_) } map { my $v = $_; $v =~ s/^ +//g; $v } split /,/, $input",
+      "source_span": {
+        "start": 968,
+        "end": 1056
+      }
+    },
+    {
+      "raw": "print $_ foreach(@items)",
+      "source_span": {
+        "start": 1060,
+        "end": 1084
+      }
+    },
+    {
+      "raw": "filter_match(items, /a/)",
+      "source_span": {
+        "start": 1088,
+        "end": 1112
+      }
+    },
+    {
+      "raw": "uniq(items)",
+      "source_span": {
+        "start": 1116,
+        "end": 1127
+      }
+    },
+    {
+      "raw": "uppercase_each(items)",
+      "source_span": {
+        "start": 1131,
+        "end": 1152
+      }
+    },
+    {
+      "raw": "lowercase_each(items)",
+      "source_span": {
+        "start": 1156,
+        "end": 1177
+      }
+    },
+    {
+      "raw": "filter_nonempty(items)",
+      "source_span": {
+        "start": 1181,
+        "end": 1203
+      }
+    },
+    {
+      "raw": "trim_each(items)",
+      "source_span": {
+        "start": 1207,
+        "end": 1223
+      }
+    },
+    {
+      "raw": "split_each(items, ',')",
+      "source_span": {
+        "start": 1227,
+        "end": 1249
+      }
+    },
+    {
+      "raw": "split(items, input, ',')",
+      "source_span": {
+        "start": 1253,
+        "end": 1277
+      }
+    },
+    {
+      "raw": "regex_subst(value, /a/, '雪', g)",
+      "source_span": {
+        "start": 1281,
+        "end": 1312
+      }
+    },
+    {
+      "raw": "set(value, '雪')",
+      "source_span": {
+        "start": 1316,
+        "end": 1331
+      }
+    },
+    {
+      "raw": "push(items, '雪')",
+      "source_span": {
+        "start": 1335,
+        "end": 1351
+      }
+    }
+  ],
+  "contracts": [
+    {
+      "id": "push",
+      "family": "regex",
+      "events": [
+        {
+          "raw": "push(items, '雪')",
+          "args": {
+            "target": "items",
+            "value": "'雪'"
+          },
+          "source_span": {
+            "start": 16,
+            "end": 32
+          }
+        },
+        {
+          "raw": "push(items, '雪')",
+          "args": {
+            "target": "items",
+            "value": "'雪'"
+          },
+          "source_span": {
+            "start": 255,
+            "end": 271
+          }
+        },
+        {
+          "raw": "push(items, '雪')",
+          "args": {
+            "target": "items",
+            "value": "'雪'"
+          },
+          "source_span": {
+            "start": 1335,
+            "end": 1351
+          }
+        }
+      ]
+    },
+    {
+      "id": "set_value",
+      "family": "regex",
+      "events": [
+        {
+          "raw": "set(value, '雪')",
+          "args": {
+            "target": "value",
+            "source": "'雪'"
+          },
+          "source_span": {
+            "start": 33,
+            "end": 48
+          }
+        },
+        {
+          "raw": "set(value, '雪')",
+          "args": {
+            "target": "value",
+            "source": "'雪'"
+          },
+          "source_span": {
+            "start": 275,
+            "end": 290
+          }
+        },
+        {
+          "raw": "set(value, '雪')",
+          "args": {
+            "target": "value",
+            "source": "'雪'"
+          },
+          "source_span": {
+            "start": 1316,
+            "end": 1331
+          }
+        }
+      ]
+    },
+    {
+      "id": "regex_subst",
+      "family": "regex",
+      "events": [
+        {
+          "raw": "regex_subst(value, /a/, '雪', g)",
+          "args": {
+            "scope": null,
+            "target": "value",
+            "pattern": "/a/",
+            "replacement": "'雪'",
+            "flags": "g"
+          },
+          "source_span": {
+            "start": 49,
+            "end": 80
+          }
+        },
+        {
+          "raw": "regex_subst(value, /a/, '雪', g)",
+          "args": {
+            "scope": null,
+            "target": "value",
+            "pattern": "/a/",
+            "replacement": "'雪'",
+            "flags": "g"
+          },
+          "source_span": {
+            "start": 294,
+            "end": 325
+          }
+        },
+        {
+          "raw": "regex_subst(value, /a/, '雪', g)",
+          "args": {
+            "scope": null,
+            "target": "value",
+            "pattern": "/a/",
+            "replacement": "'雪'",
+            "flags": "g"
+          },
+          "source_span": {
+            "start": 1281,
+            "end": 1312
+          }
+        }
+      ]
+    },
+    {
+      "id": "split_array",
+      "family": "regex",
+      "events": [
+        {
+          "raw": "split(items, input, ',')",
+          "args": {
+            "target": "items",
+            "source": null,
+            "delimiter": "/\\,/"
+          },
+          "source_span": {
+            "start": 81,
+            "end": 105
+          }
+        },
+        {
+          "raw": "split(items, input, ',')",
+          "args": {
+            "target": "items",
+            "source": null,
+            "delimiter": "/\\,/"
+          },
+          "source_span": {
+            "start": 329,
+            "end": 353
+          }
+        },
+        {
+          "raw": "split(items, input, ',')",
+          "args": {
+            "target": "items",
+            "source": null,
+            "delimiter": "/\\,/"
+          },
+          "source_span": {
+            "start": 1253,
+            "end": 1277
+          }
+        }
+      ]
+    },
+    {
+      "id": "split_each",
+      "family": "regex",
+      "events": [
+        {
+          "raw": "split_each(items, ',')",
+          "args": {
+            "target": "items",
+            "delimiter": "/\\,/"
+          },
+          "source_span": {
+            "start": 106,
+            "end": 128
+          }
+        },
+        {
+          "raw": "split_each(items, ',')",
+          "args": {
+            "target": "items",
+            "delimiter": "/\\,/"
+          },
+          "source_span": {
+            "start": 357,
+            "end": 379
+          }
+        },
+        {
+          "raw": "split_each(items, ',')",
+          "args": {
+            "target": "items",
+            "delimiter": "/\\,/"
+          },
+          "source_span": {
+            "start": 1227,
+            "end": 1249
+          }
+        }
+      ]
+    },
+    {
+      "id": "trim_each",
+      "family": "regex",
+      "events": [
+        {
+          "raw": "trim_each(items)",
+          "args": {
+            "target": "items"
+          },
+          "source_span": {
+            "start": 129,
+            "end": 145
+          }
+        },
+        {
+          "raw": "trim_each(items)",
+          "args": {
+            "target": "items"
+          },
+          "source_span": {
+            "start": 383,
+            "end": 399
+          }
+        },
+        {
+          "raw": "trim_each(items)",
+          "args": {
+            "target": "items"
+          },
+          "source_span": {
+            "start": 1207,
+            "end": 1223
+          }
+        }
+      ]
+    },
+    {
+      "id": "filter_nonempty",
+      "family": "regex",
+      "events": [
+        {
+          "raw": "filter_nonempty(items)",
+          "args": {
+            "target": "items"
+          },
+          "source_span": {
+            "start": 146,
+            "end": 168
+          }
+        },
+        {
+          "raw": "filter_nonempty(items)",
+          "args": {
+            "target": "items"
+          },
+          "source_span": {
+            "start": 403,
+            "end": 425
+          }
+        },
+        {
+          "raw": "filter_nonempty(items)",
+          "args": {
+            "target": "items"
+          },
+          "source_span": {
+            "start": 1181,
+            "end": 1203
+          }
+        }
+      ]
+    },
+    {
+      "id": "lowercase_each",
+      "family": "regex",
+      "events": [
+        {
+          "raw": "lowercase_each(items)",
+          "args": {
+            "target": "items"
+          },
+          "source_span": {
+            "start": 169,
+            "end": 190
+          }
+        },
+        {
+          "raw": "lowercase_each(items)",
+          "args": {
+            "target": "items"
+          },
+          "source_span": {
+            "start": 429,
+            "end": 450
+          }
+        },
+        {
+          "raw": "lowercase_each(items)",
+          "args": {
+            "target": "items"
+          },
+          "source_span": {
+            "start": 1156,
+            "end": 1177
+          }
+        }
+      ]
+    },
+    {
+      "id": "uppercase_each",
+      "family": "regex",
+      "events": [
+        {
+          "raw": "uppercase_each(items)",
+          "args": {
+            "target": "items"
+          },
+          "source_span": {
+            "start": 191,
+            "end": 212
+          }
+        },
+        {
+          "raw": "uppercase_each(items)",
+          "args": {
+            "target": "items"
+          },
+          "source_span": {
+            "start": 454,
+            "end": 475
+          }
+        },
+        {
+          "raw": "uppercase_each(items)",
+          "args": {
+            "target": "items"
+          },
+          "source_span": {
+            "start": 1131,
+            "end": 1152
+          }
+        }
+      ]
+    },
+    {
+      "id": "uniq_array",
+      "family": "regex",
+      "events": [
+        {
+          "raw": "uniq(items)",
+          "args": {
+            "target": "items"
+          },
+          "source_span": {
+            "start": 213,
+            "end": 224
+          }
+        },
+        {
+          "raw": "uniq(items)",
+          "args": {
+            "target": "items"
+          },
+          "source_span": {
+            "start": 479,
+            "end": 490
+          }
+        },
+        {
+          "raw": "uniq(items)",
+          "args": {
+            "target": "items"
+          },
+          "source_span": {
+            "start": 1116,
+            "end": 1127
+          }
+        }
+      ]
+    },
+    {
+      "id": "filter_match",
+      "family": "regex",
+      "events": [
+        {
+          "raw": "filter_match(items, /a/)",
+          "args": {
+            "target": "items",
+            "pattern": "/a/"
+          },
+          "source_span": {
+            "start": 225,
+            "end": 249
+          }
+        },
+        {
+          "raw": "filter_match(items, /a/)",
+          "args": {
+            "target": "items",
+            "pattern": "/a/"
+          },
+          "source_span": {
+            "start": 494,
+            "end": 518
+          }
+        },
+        {
+          "raw": "filter_match(items, /a/)",
+          "args": {
+            "target": "items",
+            "pattern": "/a/"
+          },
+          "source_span": {
+            "start": 1088,
+            "end": 1112
+          }
+        }
+      ]
+    },
+    {
+      "id": "print_foreach_iterable",
+      "family": "statement",
+      "events": [
+        {
+          "raw": "print $_ foreach(@items)",
+          "args": {
+            "iterable": "items"
+          },
+          "source_span": {
+            "start": 522,
+            "end": 546
+          }
+        },
+        {
+          "raw": "print $_ foreach(@items)",
+          "args": {
+            "iterable": "items"
+          },
+          "source_span": {
+            "start": 1060,
+            "end": 1084
+          }
+        }
+      ]
+    },
+    {
+      "id": "split_trim_filter_assignment",
+      "family": "statement",
+      "events": [
+        {
+          "raw": "my @parts = grep { length($_) } map { my $v = $_; $v =~ s/^ +//g; $v } split /,/, $input",
+          "args": {
+            "target": "parts",
+            "source": "input",
+            "delimiter": "/,/",
+            "transforms": [
+              "split",
+              "trim_each",
+              "filter_nonempty"
+            ],
+            "scope": "my"
+          },
+          "source_span": {
+            "start": 550,
+            "end": 638
+          }
+        },
+        {
+          "raw": "my @parts = grep { length($_) } map { my $v = $_; $v =~ s/^ +//g; $v } split /,/, $input",
+          "args": {
+            "target": "parts",
+            "source": "input",
+            "delimiter": "/,/",
+            "transforms": [
+              "split",
+              "trim_each",
+              "filter_nonempty"
+            ],
+            "scope": "my"
+          },
+          "source_span": {
+            "start": 968,
+            "end": 1056
+          }
+        }
+      ]
+    },
+    {
+      "id": "scalar_assignment_operator",
+      "family": "statement",
+      "events": [
+        {
+          "raw": "value = '雪'",
+          "args": {
+            "target": "value",
+            "source": "'雪'"
+          },
+          "source_span": {
+            "start": 642,
+            "end": 653
+          }
+        },
+        {
+          "raw": "value = '雪'",
+          "args": {
+            "target": "value",
+            "source": "'雪'"
+          },
+          "source_span": {
+            "start": 953,
+            "end": 964
+          }
+        }
+      ]
+    },
+    {
+      "id": "array_append_operator",
+      "family": "statement",
+      "events": [
+        {
+          "raw": "items += '雪'",
+          "args": {
+            "target": "items",
+            "value": "'雪'"
+          },
+          "source_span": {
+            "start": 657,
+            "end": 669
+          }
+        },
+        {
+          "raw": "items += '雪'",
+          "args": {
+            "target": "items",
+            "value": "'雪'"
+          },
+          "source_span": {
+            "start": 937,
+            "end": 949
+          }
+        }
+      ]
+    },
+    {
+      "id": "array_end_mutation_method",
+      "family": "statement",
+      "events": [
+        {
+          "raw": "items.push_back('雪')",
+          "args": {
+            "target": "items",
+            "method": "push_back",
+            "value": "'雪'"
+          },
+          "source_span": {
+            "start": 673,
+            "end": 693
+          }
+        },
+        {
+          "raw": "items.push_back('雪')",
+          "args": {
+            "target": "items",
+            "method": "push_back",
+            "value": "'雪'"
+          },
+          "source_span": {
+            "start": 913,
+            "end": 933
+          }
+        }
+      ]
+    },
+    {
+      "id": "hash_index_assignment_operator",
+      "family": "statement",
+      "events": [
+        {
+          "raw": "tree['key'] = '雪'",
+          "args": {
+            "target": "tree",
+            "key": "'key'",
+            "value": "'雪'"
+          },
+          "source_span": {
+            "start": 697,
+            "end": 714
+          }
+        },
+        {
+          "raw": "tree['key'][0] = '雪'",
+          "args": {
+            "target": "tree",
+            "path_segment_count": 2,
+            "value": "'雪'"
+          },
+          "source_span": {
+            "start": 718,
+            "end": 738
+          }
+        },
+        {
+          "raw": "tree['key'][0] = '雪'",
+          "args": {
+            "target": "tree",
+            "path_segment_count": 2,
+            "value": "'雪'"
+          },
+          "source_span": {
+            "start": 868,
+            "end": 888
+          }
+        },
+        {
+          "raw": "tree['key'] = '雪'",
+          "args": {
+            "target": "tree",
+            "key": "'key'",
+            "value": "'雪'"
+          },
+          "source_span": {
+            "start": 892,
+            "end": 909
+          }
+        }
+      ]
+    },
+    {
+      "id": "set_key_statement",
+      "family": "statement",
+      "events": [
+        {
+          "raw": "set_key(tree, 'key', '雪')",
+          "args": {
+            "target": "tree",
+            "key": "'key'",
+            "value": "'雪'"
+          },
+          "source_span": {
+            "start": 742,
+            "end": 767
+          }
+        },
+        {
+          "raw": "set_key(tree, 'key', '雪')",
+          "args": {
+            "target": "tree",
+            "key": "'key'",
+            "value": "'雪'"
+          },
+          "source_span": {
+            "start": 839,
+            "end": 864
+          }
+        }
+      ]
+    },
+    {
+      "id": "value_drop_statement",
+      "family": "statement",
+      "events": [
+        {
+          "raw": "split(items, input, ',')",
+          "args": {
+            "expr": "split(items, input, ',')"
+          },
+          "source_span": {
+            "start": 329,
+            "end": 353
+          }
+        },
+        {
+          "raw": "split_each(items, ',')",
+          "args": {
+            "expr": "split_each(items, ',')"
+          },
+          "source_span": {
+            "start": 357,
+            "end": 379
+          }
+        },
+        {
+          "raw": "trim_each(items)",
+          "args": {
+            "expr": "trim_each(items)"
+          },
+          "source_span": {
+            "start": 383,
+            "end": 399
+          }
+        },
+        {
+          "raw": "filter_nonempty(items)",
+          "args": {
+            "expr": "filter_nonempty(items)"
+          },
+          "source_span": {
+            "start": 403,
+            "end": 425
+          }
+        },
+        {
+          "raw": "lowercase_each(items)",
+          "args": {
+            "expr": "lowercase_each(items)"
+          },
+          "source_span": {
+            "start": 429,
+            "end": 450
+          }
+        },
+        {
+          "raw": "uppercase_each(items)",
+          "args": {
+            "expr": "uppercase_each(items)"
+          },
+          "source_span": {
+            "start": 454,
+            "end": 475
+          }
+        },
+        {
+          "raw": "uniq(items)",
+          "args": {
+            "expr": "uniq(items)"
+          },
+          "source_span": {
+            "start": 479,
+            "end": 490
+          }
+        },
+        {
+          "raw": "filter_match(items, /a/)",
+          "args": {
+            "expr": "filter_match(items, /a/)"
+          },
+          "source_span": {
+            "start": 494,
+            "end": 518
+          }
+        },
+        {
+          "raw": "trim(' 雪 ')",
+          "args": {
+            "expr": "trim(' 雪 ')"
+          },
+          "source_span": {
+            "start": 771,
+            "end": 782
+          }
+        },
+        {
+          "raw": "' 雪 '.trim()",
+          "args": {
+            "expr": "' 雪 '.trim()"
+          },
+          "source_span": {
+            "start": 786,
+            "end": 798
+          }
+        },
+        {
+          "raw": "' 雪 '.trim()",
+          "args": {
+            "expr": "' 雪 '.trim()"
+          },
+          "source_span": {
+            "start": 808,
+            "end": 820
+          }
+        },
+        {
+          "raw": "trim(' 雪 ')",
+          "args": {
+            "expr": "trim(' 雪 ')"
+          },
+          "source_span": {
+            "start": 824,
+            "end": 835
+          }
+        },
+        {
+          "raw": "filter_match(items, /a/)",
+          "args": {
+            "expr": "filter_match(items, /a/)"
+          },
+          "source_span": {
+            "start": 1088,
+            "end": 1112
+          }
+        },
+        {
+          "raw": "uniq(items)",
+          "args": {
+            "expr": "uniq(items)"
+          },
+          "source_span": {
+            "start": 1116,
+            "end": 1127
+          }
+        },
+        {
+          "raw": "uppercase_each(items)",
+          "args": {
+            "expr": "uppercase_each(items)"
+          },
+          "source_span": {
+            "start": 1131,
+            "end": 1152
+          }
+        },
+        {
+          "raw": "lowercase_each(items)",
+          "args": {
+            "expr": "lowercase_each(items)"
+          },
+          "source_span": {
+            "start": 1156,
+            "end": 1177
+          }
+        },
+        {
+          "raw": "filter_nonempty(items)",
+          "args": {
+            "expr": "filter_nonempty(items)"
+          },
+          "source_span": {
+            "start": 1181,
+            "end": 1203
+          }
+        },
+        {
+          "raw": "trim_each(items)",
+          "args": {
+            "expr": "trim_each(items)"
+          },
+          "source_span": {
+            "start": 1207,
+            "end": 1223
+          }
+        },
+        {
+          "raw": "split_each(items, ',')",
+          "args": {
+            "expr": "split_each(items, ',')"
+          },
+          "source_span": {
+            "start": 1227,
+            "end": 1249
+          }
+        },
+        {
+          "raw": "split(items, input, ',')",
+          "args": {
+            "expr": "split(items, input, ',')"
+          },
+          "source_span": {
+            "start": 1253,
+            "end": 1277
+          }
+        }
+      ]
+    }
+  ]
+}
