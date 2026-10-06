@@ -12,6 +12,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-10-06 — Mark-copy argument source versus physical source (.1.4.4)
+
+Save the14 original mark regex bounds before argument construction. mark_copy keeps target first/source second in the original argument object; origin.source separately carries the physical action text. Stable contract IDs select actual mark/cursor/reversed-copy controls and family assertions prevent ordinal label drift. Existing missing-source clearing observation remains CONFORMANCE-SOURCE-READING.2.7-owned; no runtime semantics or wrapper lifecycle guarantee follows. Read docs/knowledge/perl-legacy-mark-control-source-origins.md.
+
 ## 2026-10-06 — Named symbolic marks and strict stream boundaries (.1.4.3)
 
 Keep one-mark aliases and two-mark start/end order at their original regex constructor. The named boundary bridge shares the same source-frame rule; no equal-text search or runtime mark storage change follows. Retain the initial setpgid92090 warning and reject that report under the strict outer-stderr oracle, then replay original inputs without stream filtering. Existing startup .7 owns group establishment/liveness; original PGID is unmeasured and recovery/purge remain prohibited. Correct the historical index34 control label scope with explicit original named24/current mark51/reversed two-mark47 denials; all prior proof bytes remain exact. Read docs/knowledge/perl-legacy-named-capture-source-origins.md.

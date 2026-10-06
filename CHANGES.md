@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-10-06 — Original mark-control source hooks (.1.4.4)
+
+All14 mark-control regex producers preserve original symbolic mark/target-source order, physical bounds and actual event/argument identities. 4438 immutable originals/three overlays/eight commands retain112 contracts/115 cases/227 events under three seeds; private origins105→133. Original RED14/GREEN81; eleven suites1259 groups including Phase01035 and148 evidence RED pass. Book58 inputs/nine examples/three chapters/17 RED and33-hash historical freeze pass. Public compiler/callback channels and original grammar remain exact; missing-source clearing observation .2.7 and wrapper startup .7 remain separately owned. Whole-file source inverse restores the committed producer. No public schema, runtime clearing semantics or executable-membership admission changes; canonical remains at family/push boundaries.
+
 ## 2026-10-06 — Original named capture source hooks (.1.4.3)
 
 All17 named capture regex producers preserve symbolic mark/start-end order, original spelling, scalar bounds and actual event/argument identities. 4415 immutable originals/three overlays/eight accepted commands retain112 contracts/115 cases/227 events under three seeds; private origins71→105. Original RED17/GREEN67; eleven suites1245 groups including Phase01035 and152 evidence RED pass. Book58 inputs/seven examples/three chapters/15 RED and30-hash historical freeze pass. Four initial commands retain the strictly rejected wrapper warning; replay is unfiltered, startup .7 remains its owner. Public compiler/callback channels and original grammar stay exact. Exact source inverse recovers the committed producer. No public schema, mark-runtime semantics or executable-membership admission changes; canonical remains at family/push boundaries.

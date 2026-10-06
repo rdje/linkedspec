@@ -15,7 +15,7 @@ tags: [perl, actionir, legacy, capture, source-provenance, aliases]
 evidence: "Owning .1.4.2 retains4394 immutable regular originals/three overlays/eight commands,112 contracts/115 cases under three seeds,227 events and18-to71 origins per seed. Original RED27/repaired GREEN50; ten suites1225 groups/Phase01035 and159 reason-specific controls pass. Book58 inputs/five examples/three chapters/13 RED;43 prior hashes verify."
 reverify:
   - "bash tools/project_data_run.sh prove -v -Iperl t/actionir_helper_source_provenance.t"
-  - "The .1.4.2 review is historical at2bd501d5e03a28d98bc687dc885c9b04ca519bf8; current named .1.4.3 recurrence preserves all anonymous origins."
+  - "The .1.4.2 review is historical at2bd501d5e03a28d98bc687dc885c9b04ca519bf8; current mark .1.4.4 recurrence preserves all anonymous origins."
 ---
 
 # Snapshot original producer bounds before argument work

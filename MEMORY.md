@@ -1,10 +1,10 @@
 # MEMORY
 
-- activation_commit: `2bd501d5e03a28d98bc687dc885c9b04ca519bf8` — clean named-capture source activation.
-- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.3 - retain named capture source origins`.
-- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.4` (pending activation) — original14 mark-control producers.
-- next_action: Activate mark-control provenance .1.4.4 from clean committed HEAD; retain all14 original producers, mark_copy argument order, exact own coordinates and public channels. Remaining source families, quoted/comment membership, replacement and audits stay owned.
-- in_flight_uncommitted: None; original/repaired capture, initial diagnostic rejection, review/book/claim and handoff complete. No required job remains.
+- activation_commit: `d0b40ade098e1c2e8e7fc983ee2d9f3980205e46` — clean mark-control source activation.
+- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.4 - retain mark-control source origins`.
+- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.5` (pending activation) — original15 cursor/input producers.
+- next_action: Activate cursor/input provenance .1.4.5 from clean committed HEAD; retain all15 original producers, balanced input_slice arguments, exact own coordinates and public channels. Entry/match, quoted/comment membership, replacement and audits stay owned.
+- in_flight_uncommitted: None; original/repaired capture, source review/book/claim and clean handoff complete. No required job remains.
 - blockers: No access/decision blocker. Matches and attached/marker/value/null/while executors are repaired; control parent/order and raw-expression reporting are reconciled; quoted/comment readiness .7.2/.3 precedes dispatcher/full execution. Other startup repairs remain separate.
   Wrapper startup .7 remains open; recovery/purge stay prohibited.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the

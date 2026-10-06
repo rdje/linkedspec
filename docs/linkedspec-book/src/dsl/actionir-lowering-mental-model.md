@@ -452,8 +452,27 @@ capture_between(first, second); capture_between(first, second)
 
 These private source frames preserve the original syntactic population and public
 compiler output. They add no executable quoted/comment membership authority and
-change no runtime mark storage or capture semantics. Mark controls, cursor/input
-and entry/match origins remain subsequent work.
+change no runtime mark storage or capture semantics. Mark-control producers preserve target/source order and their original event objects.
+All14 creation, copy, query and clearing producers save physical regex bounds
+before argument construction. For `mark_copy(first, second)`, `first` stays the
+target and `second` stays the source mark. The source mark argument remains inside
+the event's arguments; the private source frame separately retains the original
+action text. These fields never overwrite each other:
+
+```text
+mark_here(edge); mark_here(edge)
+# mark: edge; scalar intervals: [0, 15), [17, 32)
+```
+
+```text
+mark_copy(first, second); mark_copy(first, second)
+# target: first; source: second; scalar intervals: [0, 24), [26, 50)
+```
+
+Position, line, column, existence and clearing calls retain the same symbolic
+mark names and public compiler output. This source work changes no runtime mark
+storage, missing-source clearing semantics or executable quoted/comment membership.
+Cursor/input and entry/match origins remain subsequent work.
 
 ### Original method argument boundaries
 
