@@ -544,7 +544,8 @@ helper-looking data as executable code.
 ### Dedicated annotation source provenance
 
 The staged producer now retains a private source origin for each unchanged
-original annotation. Progressive and recognition scanners still return their
+original annotation. The progressive producer now retains a private source origin
+for its unchanged whole statement too. Recognition scanners still return their
 events without a private event-source origin. Their canonical statement splitter
 already supplies physical statement frames. A dedicated annotation owns its
 whole statement, including its original target and operands:
@@ -584,6 +585,28 @@ child = dispatch_span("expr-v1", "Expr", span)
 child = dispatch_span(parser, "Expr", span)  # rejected: parser identity must be literal
 ```
 
+Progressive frames retain the original parser, top-rule and span operands, together
+with the result binding. Equal repeated dispatches keep independent scalar positions:
+
+```text
+child = dispatch_span("expr-v1", "Expr", span); child = dispatch_span("expr-v1", "Expr", span)
+# original scalar intervals: [0, 46), [48, 94)
+```
+
+The original event and argument references survive, including dynamic parser and
+wrong-arity events that static validation rejects. For example:
+
+```text
+child = dispatch_span("expr-v1", "Expr", span, other)
+# rejected: dispatch_span requires exactly three operands
+```
+
+Private source provenance does not grant parser authority or relax static policy.
+Copied splitter arrays, foreign source and transformed raw text gain no invented
+progressive coordinates; nested scans restore independent recorder contexts.
+Host registry authority, capability restrictions and separately tracked resource
+ceiling enforcement retain their existing contracts.
+
 Recognition statement provenance must preserve the token and unevaluated static
 callee. A transaction selects one terminal operation:
 
@@ -601,8 +624,8 @@ dispatcher references and complete callback/compiler channels preserve the origi
 behavior. Invalid annotations retain their original event arguments so validation
 can reject them; attaching provenance must preserve that path.
 This diagnosis changes no static policy, recognition behavior or public event fields.
-The staged repair preserves those boundaries and complete public compiler channels;
-progressive and recognition source-origin implementation remains pending.
+The staged and progressive repairs preserve those boundaries and complete public
+compiler channels; recognition source-origin implementation remains pending.
 Executable membership, precise replacement and separately owned runtime defects
 remain subsequent work.
 

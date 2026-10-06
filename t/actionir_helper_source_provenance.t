@@ -512,8 +512,8 @@ open my $dedicated_file, '<:raw', 'docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINME
 my $dedicated_cases = $json->decode(do { local $/; <$dedicated_file> });
 close $dedicated_file or die $!;
 
-sub staged_observed_scan {
-    my ($action, $custom) = @_;
+sub dedicated_observed_scan {
+    my ($contract_id, $action, $custom) = @_;
     my (@public_calls, @private_calls, @constructed);
     my %callbacks = (%$deps, %{ $custom || {} });
     my $observe = sub {
@@ -529,7 +529,7 @@ sub staged_observed_scan {
             })
         } keys %callbacks};
     };
-    my $contract = {id => 'staged_parse_job'};
+    my $contract = {id => $contract_id};
     my $public = LinkedSpec::ActionIR::Scanner::scan_contract_ir_events(
         $contract, $action, $observe->(\@public_calls));
     my $private;
@@ -554,7 +554,7 @@ for my $case (@{$dedicated_cases->{cases}}) {
     for my $row (grep { $_->{contract} eq 'staged_parse_job' } @{$case->{rows}}) {
         $staged_raw ||= $row->{expected_events}[0]{raw} if @{$row->{expected_events}};
         subtest 'Staged original producer: '.$case->{id} => sub {
-            my ($public, $private, $constructed) = staged_observed_scan($case->{action});
+            my ($public, $private, $constructed) = dedicated_observed_scan('staged_parse_job', $case->{action});
             is_deeply($public, $row->{expected_events}, 'original literal events, text plans, options and validation');
             my @expected = map {
                 my $index = $_;
@@ -574,7 +574,7 @@ for my $case (@{$dedicated_cases->{cases}}) {
 }
 
 subtest 'Staged copied statement array declines borrowed origins' => sub {
-    my ($public, $private) = staged_observed_scan($staged_raw, {
+    my ($public, $private) = dedicated_observed_scan('staged_parse_job', $staged_raw, {
         split_action_ir_statements => sub { return [@{$deps->{split_action_ir_statements}->(@_)}] },
     });
     is(scalar(@$public), 1, 'copied callback still produces the original event');
@@ -582,7 +582,7 @@ subtest 'Staged copied statement array declines borrowed origins' => sub {
 };
 
 subtest 'Staged foreign source declines borrowed origins' => sub {
-    my ($public, $private) = staged_observed_scan('note()', {
+    my ($public, $private) = dedicated_observed_scan('staged_parse_job', 'note()', {
         split_action_ir_statements => sub { return $deps->{split_action_ir_statements}->($staged_raw) },
     });
     is(scalar(@$public), 1, 'foreign callback retains its original event behavior');
@@ -590,7 +590,7 @@ subtest 'Staged foreign source declines borrowed origins' => sub {
 };
 
 subtest 'Staged transformed raw declines original coordinates' => sub {
-    my ($public, $private) = staged_observed_scan($staged_raw, {
+    my ($public, $private) = dedicated_observed_scan('staged_parse_job', $staged_raw, {
         trim_action_ir_value => sub {
             my $value = $deps->{trim_action_ir_value}->(@_);
             $value =~ s/\Ajob/changed_job/ if defined($value) && $value eq $staged_raw;
@@ -621,8 +621,8 @@ subtest 'Staged callback fatal error is unchanged' => sub {
 
 subtest 'Staged nested real scans restore their source recorders' => sub {
     my $outer_action = $staged_raw.'; '.$staged_raw;
-    my (@inners, @inner_events);
-    my ($public, $private, $constructed) = staged_observed_scan($outer_action, {
+    my @inners;
+    my ($public, $private, $constructed) = dedicated_observed_scan('staged_parse_job', $outer_action, {
         split_action_ir_statements => sub {
             my $inner = private_scan({id => 'staged_parse_job'}, $staged_raw);
             push @inners, $inner;
@@ -637,6 +637,99 @@ subtest 'Staged nested real scans restore their source recorders' => sub {
         is(scalar(@{$inner->{source_origins}}), 1, 'inner invocation has its own origin');
         if (@{$inner->{source_origins}}) {
             is($inner->{source_origins}[0]{source}, $staged_raw, 'inner source stays independent');
+            is(refaddr($inner->{source_origins}[0]{event}), refaddr($inner->{events}[0]), 'inner returned event identity survives');
+        }
+    }
+};
+
+my $progressive_raw;
+for my $case (@{$dedicated_cases->{cases}}) {
+    for my $row (grep { $_->{contract} eq 'progressive_span_dispatch' } @{$case->{rows}}) {
+        $progressive_raw ||= $row->{expected_events}[0]{raw} if @{$row->{expected_events}};
+        subtest 'Progressive original producer: '.$case->{id} => sub {
+            my ($public, $private, $constructed) = dedicated_observed_scan('progressive_span_dispatch', $case->{action});
+            is_deeply($public, $row->{expected_events}, 'original literal events, parser/top/span operands and arity');
+            my @expected = map {
+                my $index = $_;
+                {event => $row->{expected_events}[$index], source => $case->{action},
+                 source_span => {start => $row->{original_spans}[$index][0], end => $row->{original_spans}[$index][1]}}
+            } 0 .. $#{$row->{expected_events}};
+            is_deeply($private->{source_origins}, \@expected, 'each original occurrence has its literal scalar frame');
+            is(scalar(@$constructed), scalar(@expected), 'one actual constructor event per selected occurrence');
+            for my $index (0 .. $#{$private->{source_origins}}) {
+                my $event = $private->{events}[$index];
+                is(refaddr($private->{source_origins}[$index]{event}), refaddr($event), 'origin retains actual returned event');
+                is(refaddr($constructed->[$index][0]), refaddr($event), 'original constructor event survives');
+                is(refaddr($constructed->[$index][1]), refaddr($event->{args}), 'original argument object survives');
+            }
+        };
+    }
+}
+
+subtest 'Progressive copied statement array declines borrowed origins' => sub {
+    my ($public, $private) = dedicated_observed_scan('progressive_span_dispatch', $progressive_raw, {
+        split_action_ir_statements => sub { return [@{$deps->{split_action_ir_statements}->(@_)}] },
+    });
+    is(scalar(@$public), 1, 'copied callback still produces the original event');
+    is_deeply($private->{source_origins}, [], 'equal copied statements gain no invented origin');
+};
+
+subtest 'Progressive foreign source declines borrowed origins' => sub {
+    my ($public, $private) = dedicated_observed_scan('progressive_span_dispatch', 'note()', {
+        split_action_ir_statements => sub { return $deps->{split_action_ir_statements}->($progressive_raw) },
+    });
+    is(scalar(@$public), 1, 'foreign callback retains its original event behavior');
+    is_deeply($private->{source_origins}, [], 'foreign source gains no invented origin');
+};
+
+subtest 'Progressive transformed raw declines original coordinates' => sub {
+    my ($public, $private) = dedicated_observed_scan('progressive_span_dispatch', $progressive_raw, {
+        trim_action_ir_value => sub {
+            my $value = $deps->{trim_action_ir_value}->(@_);
+            $value =~ s/\Achild/changed_child/ if defined($value) && $value eq $progressive_raw;
+            return $value;
+        },
+    });
+    is($public->[0]{args}{result}, 'changed_child', 'transformed callback retains its original event behavior');
+    is_deeply($private->{source_origins}, [], 'changed raw gains no invented original interval');
+};
+
+subtest 'Progressive callback fatal error is unchanged' => sub {
+    my %broken = (%$deps, trim_action_ir_value => sub { die "progressive callback sentinel\n" });
+    my @errors;
+    for my $private (0,1) {
+        my $ok = eval {
+            $private
+                ? LinkedSpec::ActionIR::ScannerCore::_scan_contract_ir_events_with_provenance(
+                    {id => 'progressive_span_dispatch'}, $progressive_raw, \%broken)
+                : LinkedSpec::ActionIR::Scanner::scan_contract_ir_events(
+                    {id => 'progressive_span_dispatch'}, $progressive_raw, \%broken);
+            1;
+        };
+        ok(!$ok, 'actual fatal callback propagates');
+        push @errors, $@;
+    }
+    is_deeply(\@errors, ["progressive callback sentinel\n", "progressive callback sentinel\n"], 'complete fatal error is exact');
+};
+
+subtest 'Progressive nested real scans restore their source recorders' => sub {
+    my $outer_action = $progressive_raw.'; '.$progressive_raw;
+    my @inners;
+    my ($public, $private, $constructed) = dedicated_observed_scan('progressive_span_dispatch', $outer_action, {
+        split_action_ir_statements => sub {
+            my $inner = private_scan({id => 'progressive_span_dispatch'}, $progressive_raw);
+            push @inners, $inner;
+            return $deps->{split_action_ir_statements}->(@_);
+        },
+    });
+    is_deeply([map { $_->{source_span} } @{$private->{source_origins}}],
+        [{start => 0, end => length($progressive_raw)},
+         {start => length($progressive_raw)+2, end => 2*length($progressive_raw)+2}], 'outer repeated origins stay independent');
+    is(scalar(@inners), 2, 'one real inner scan per public/private callback');
+    for my $inner (@inners) {
+        is(scalar(@{$inner->{source_origins}}), 1, 'inner invocation has its own origin');
+        if (@{$inner->{source_origins}}) {
+            is($inner->{source_origins}[0]{source}, $progressive_raw, 'inner source stays independent');
             is(refaddr($inner->{source_origins}[0]{event}), refaddr($inner->{events}[0]), 'inner returned event identity survives');
         }
     }

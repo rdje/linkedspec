@@ -1,0 +1,27 @@
+{
+  "revision": "ef2dd019bae121674a6e37a2b14d223bf6c7088c",
+  "complete": true,
+  "command": [
+    "bash",
+    "tools/run_python_project_data.sh",
+    "tools/check_progressive_span_dispatch_contract.py"
+  ],
+  "exit": 0,
+  "stdout": {
+    "encoding": "gzip-base64",
+    "bytes": 389,
+    "sha256": "fb63668fbd936c102992d27dc47e9a8d6d843cc9b3db9f94845682648b8728a0",
+    "data": "H4sIAAAAAAAC/2WQz07DMAzG7zyFjyCo+keoWuHKCZCQeIPUMa21NKkcZ2Nvj1cN7bBT4p/tz/68SpqEcuYDVXl1sfJsj+JcYYoqDvUFvj7gvgOhibPKCcg4U36FDnIqgpTrHRyYjoZ6cEXnJKwneLQIXUQKwSmnaGAHODs+/56BfgnLxtHls9wA3yXrVvXmRA2LzRGwdeYt/V4Cu1v8WW5gA6PDPUUPU3Hic938Z9oGUtGjwUvKbPTg2U0xZWW0WFIIVgNDPQCmZQ2k9GSSq+lxnEyjNWOX68BSdHNnjWsZA6O59gnLYmfKddvBT5KRvadYX2fXfXNtfLj7A6a/1M2FAQAA"
+  },
+  "stderr": {
+    "encoding": "gzip-base64",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "data": "H4sIAAAAAAAC/wMAAAAAAAAAAAA="
+  },
+  "inputs_before": 4638,
+  "instrument_sha256": "bbfff24bf7db9c96559dc79a439e384c9a525f1d2196939e7862ed50c27cdc30",
+  "input_manifest_sha256": "7fed520c707cbc2e56a58be6442dbc02c47ba9deced0769442aa56814110ef3d",
+  "host_scope": "Necessary read-only OS/Python/Git prerequisites; all project data stays on the repository volume. Only public tracked metadata is read; other repositories and submodule implementations are not consulted.",
+  "inputs_after": 4638
+}

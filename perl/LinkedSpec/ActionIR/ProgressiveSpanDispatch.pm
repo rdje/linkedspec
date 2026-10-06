@@ -40,7 +40,12 @@ sub try_scan_contract_ir_events {
  return undef unless defined($id) && $id eq 'progressive_span_dispatch';
 
  my @events;
- for my $statement (@{_split_action_ir_statements($code)}) {
+ my $framed = ref($LinkedSpec::ActionIR::ScannerCore::_source_event_recorder) eq 'CODE'
+  ? LinkedSpec::ActionIR::ScannerCore::_split_scanner_statements_with_source_frames(\&_split_action_ir_statements, $code) : undef;
+ my $statements = $framed ? $framed->{statements} : _split_action_ir_statements($code);
+ my $statement_index = 0;
+ for my $statement (@$statements) {
+  my $frame = $framed ? $framed->{source_frames}[$statement_index++] : undef;
   my $raw = _trim_action_ir_value($statement);
   next unless defined($raw)
    && $raw =~ /\A(?<result>[A-Za-z_][A-Za-z0-9_]*)\s*=\s*(?<source>dispatch_span\s*\(.*\))\z/so;
@@ -63,7 +68,9 @@ sub try_scan_contract_ir_events {
   @args{qw/parser_id top_rule span_binding/} =
    @{$validated}{qw/parser_id top_rule span_binding/}
     if ref($validated) eq 'HASH' && $validated->{ok};
-  push @events, {raw => $raw, args => \%args};
+  push @events, LinkedSpec::ActionIR::ScannerCore::_record_statement_source_event(
+   {raw => $raw, args => \%args}, $frame,
+  );
  }
  return \@events
 }

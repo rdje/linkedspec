@@ -3208,11 +3208,37 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 - [x] **LOCKSTEP** — Book58 inputs/24 examples/four chapters/42 effective controls,101 original-hash historical freeze, Knowledge/current task/index/roadmaps/live/resume and bounded histories name the same staged-only scope; original ineffective book control is retained and precisely repaired.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.2`
-  Status: `pending`
+  Status: `done`
   Goal: Retain original progressive annotation statement origins.
   Dependencies: `.1.5.1`
+  Activation: Cleanef2dd019bae121674a6e37a2b14d223bf6c7088c after staged origin repair; all ten hooks and first-parent pointer PASS, brief0 and no required jobs. Reviewed complete ProgressiveSpanDispatch owner, canonical carrier/authority scope, original dedicated cases and current source-origin book. The historical objective audit selects neither this ActionIR owner nor the provenance fixture.
   Scope: ProgressiveSpanDispatch's one dedicated producer and exact private provenance proof/teaching. Existing authority/resource ceilings, static operands and public exclusion retain their owners.
+  Owned paths: perl/LinkedSpec/ActionIR/ProgressiveSpanDispatch.pm; t/actionir_helper_source_provenance.t including shared dedicated scan observation and unused nested-fixture lexical cleanup; leaf-prefixed original/repaired proof and formal claim; hash-verified .1.5.1 claim freeze; dedicated/staged/progressive source and component input-mode Knowledge plus derived map; source-origin book; task/index/roadmaps/live/resume/change/notes. No other producer, policy, carrier, admission, CI or storage change.
+  Verification tier: `focused`
+  Focused checks: Original progressive recurring fixture RED/GREEN while all staged groups remain exact; immutable before/after seven-contract channels under seeds0/1/42, actual references/callbacks and unsupported/nested/error coordinates; preceding ten suites including required Phase01035 plus the nine-group progressive authority consumer; progressive component contract gate in actual tracked Git context; effective evidence RED, full rendered book and claim/Knowledge/memory/history/doctrines/diff hygiene.
+  Canonical trigger: none for one private source-origin producer hook; dedicated-family acceptance .1.5.4 remains the canonical boundary.
+  Claim verification: `docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.2.json`
+  Reproduction: Original dedicated oracle has eight progressive events with independently authored whole-statement scalar intervals; the current plain split loop drops their source frames. The preceding staged repair records its own eight origins and preserves all full original channels; those outcomes must remain exact in both epochs.
+  Original proof: Actual148-group fixture observes only RED139/141/142/143/148; all preceding staged groups pass. Three original dedicated channels remain retained;111 prior staged input hashes verify before mode/revision-only freeze. Shared dedicated observation removes duplicate instrumentation and an unused nested fixture lexical; staged assertions stay exact.
+  Implementation: ProgressiveSpanDispatch retains canonical original statement frames only during private recording, before trim/operand callbacks, and records the same constructor event/args object for unchanged original raw. Static parser/top/span operands, dynamic/arity invalid events, exclusive ownership, policy and lowering remain unchanged.
+  Component capture correction owned here: The published checker requires tracked Git metadata, so run it read-only at the actual root with complete parent byte recovery/guarded deltas rather than the metadata-free runtime trees. Preserve the original before-capture producer after separating this selected command. An original component instrument RED1 stops before the checker because it equates full filesystem permissions with Git mode. Full census36 includes noncore/AmbiTiming.pm0640 versus100644 and zero executable drift; retain the producer/actual failure/census, record filesystem mode separately and guard it unchanged. No project permission/source/contract change is authorized by that instrument repair.
+  Verification: PASS; Immutableef2dd019b supplies4638 regular inputs, one declared fixture replacement per epoch/one progressive owner delta after and ten guarded runtime commands. OriginalRED5 becomes GREEN148. Seven original contracts/22 cases preserve42 events/63 frames per seed and retain eight staged plus eight new progressive origins; full prior staged/callback/compiler channels remain exact under three seeds. Eleven suites pass1608 groups including Phase01035;153 effective evidence controls RED. Actual-root component PASS4638 guarded inputs/five retained byte deltas; original mode-instrument RED1/36 dated differences/zero executable drift and exact repair/four evidence controls are retained. Book58/26/four chapters/47 RED and111-hash mode/revision-only staged freeze pass. No authority/static-policy/public event/carrier/admission change.
   Acceptance: Original RED/GREEN distinguishes repeated annotations and actual statement intervals/returned references; preserve original parser/top/span operands, invalid/dynamic/arity events, callback order, exclusive assignment ownership and complete Toolbox channels. Decline unsupported callback coordinates, re-run original diagnosis and changed-surface/direct consumers plus required Phase0, then commit before recognition .1.5.3.
+
+  Pre-landing continuation: If HEAD isef2dd019b and this progressive candidate is dirty, finish focused publication checks and all normal hooks/commit before activating recognition .1.5.3. Runtime/reviewer/component/book/freeze proofs are complete; dedicated canonical acceptance remains .1.5.4.
+  Frontier repair owned here: Exact-ID inspection finds .1.5.2-.4 defined as nodes but absent from the current frontier table after its .1.5.1 row. This can skip or strand the next eligible leaf despite correct MEMORY. Add those three rows with node-matching done/pending states before landing, then reverify exact current IDs and all normal task metadata checks. Preserve prior committed nodes/evidence.
+  Focused publication checks: Formal publisher validates122 retained bindings; memory/handoff PASS59 lines, derived Knowledge1283 facts/9967 keys and whitespace PASS. Change/notes pressure PASS187 lines/39638 bytes and200 lines/43223 bytes within unchanged bounds; claim self-controls3 positive/16 rejected PASS. Staged new record and frontier admission remain governed by all normal doctrine hooks.
+  Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.2 - retain progressive annotation statement origins`.
+  Next: Activate recognition/observation statement origins .1.5.3 from clean committed HEAD. Reuse the original seven-contract cases and complete staged/progressive channels; change only its five recognition-family producers while preserving token/result/callee/malformed operand fields, objects/callbacks and compiler channels. Canonical family acceptance, composition, membership/replacement and separate runtime defects retain their owners.
+
+### `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.2` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Original148-group fixture observes exactly five progressive/nested RED groups and all prior staged groups pass. Actual LinkedSpec::Get/return_descriptor/call_spec_handler_subst/dump_parser_source channels retain the original seven-contract population.
+- [x] **ROOT CAUSE (WHY + WHERE)** — ProgressiveSpanDispatch::try_scan_contract_ir_events drops canonical original statement frames at its ordinary split loop; original literal intervals distinguish repeated dispatch annotations. The separate component instrument falsely equates full permissions with Git mode before checker execution.
+- [x] **FIX** — Privately acquire occurrence-aligned canonical frames before trim/operand parsing, record the same constructor event/args object only for unchanged raw and decline copied/foreign/transformed coordinates. Preserve both actual filesystem and recorded Git modes in component input recovery without changing permissions.
+- [x] **ADDRESSED (verified)** — PASS148 recurring groups and16 combined original staged/progressive origins per seed with constructor/nested/error controls.153 effective runtime/component-evidence RED and four exact mode-repair evidence controls preserve the complete36-path dated census and original failure.
+- [x] **NO REGRESSION** — Eleven focused/direct-consumer/authority suites pass1608 ordered groups including Phase01035, both syntax checks and complete previous staged/compiler/callback channels agree under three seeds. Actual-root component gate passes; authority/static operands/exclusive ownership and separate runtime defects retain their contracts/owners.
+- [x] **LOCKSTEP** — Book58 inputs/26 examples/four chapters/47 RED,111 original-hash historical freeze, actual-root4638-input/five-delta recovery, both actual capture producer versions, formal claim/Knowledge/current task/index/roadmaps/live/resume and bounded histories agree on the progressive-only scope.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.3`
   Status: `pending`
@@ -3541,6 +3567,9 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 | 43.4.2.0.1.4.7 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.7` | `done` | Fresh complete Legacy-family immutable recurrence; exact canonical landing gates closure. |
 | 43.4.2.0.1.5.0 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.0` | `done` | Original7-contract/22-case/42-event/63-frame diagnosis,544 groups/108 RED and safe three-family partition. |
 | 43.4.2.0.1.5.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.1` | `done` | OriginalRED5/GREEN138; eight staged origins/1589 consumer groups/130 RED with complete original channels. |
+| 43.4.2.0.1.5.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.2` | `done` | OriginalRED5/GREEN148;16 combined origins/1608 groups/153 RED and exact actual-root mode repair. |
+| 43.4.2.0.1.5.3 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.3` | `pending` | Retain five recognition/observation producer origins with original operands and full prior channels. |
+| 43.4.2.0.1.5.4 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.4` | `pending` | Fresh immutable complete dedicated-family recurrence and exact canonical acceptance before parent closure. |
 | 43.4.2.0.1.6 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6` | `pending` | Complete independent producer composition source provenance before membership. |
 | 43.4.2.0.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2` | `pending` | Executable source membership with original arguments. |
 | 43.4.2.0.3 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3` | `pending` | Exact replacement preserving quoted twins and genuine order. |
@@ -3668,6 +3697,8 @@ September27 `.1.1.1`: seven neutral/structural checks, 34 ledger source-path/con
 ## Commit Log
 
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.0 - diagnose dedicated source producers` — original dedicated diagnosis and safe repair partition; normal focused hooks govern landing.
+- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.1 - retain staged annotation statement origins` — committedef2dd019b; all ten doctrines and first-parent pointer PASS.
+- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.2 - retain progressive annotation statement origins` — original/repaired progressive proof plus retained staged channels; normal focused hooks govern landing.
 
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1.1.1 - preserve rollover EOF and pending recovery` — bounded writer and actual registered regression; exact canonical receipt gates landing; Git owns identity.
 
@@ -3809,3 +3840,5 @@ September27 `.1.1.1`: seven neutral/structural checks, 34 ledger source-path/con
   signoff passes without behavior change. `.0` is done and `.1+` remains unscheduled behind callable parity.
 
 - `2026-10-06`: .1.5.1 retains staged statement origins and closes originalRED5/GREEN138/1589 groups/130 evidence controls; progressive .1.5.2 follows clean landing.
+
+- `2026-10-06`: .1.5.2 retains progressive origins alongside staged proof; RED5/GREEN148/1608 groups/153 RED and exact actual-root mode repair; recognition .1.5.3 follows clean landing.

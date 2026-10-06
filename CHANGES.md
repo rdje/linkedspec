@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-10-06 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.2 - retain progressive annotation statement origins
+
+Immutableef2dd019b supplies4638 regular inputs, one declared fixture replacement per epoch/one progressive owner delta after and ten guarded runtime commands. OriginalRED5 becomes GREEN148. Seven original contracts/22 cases preserve42 events/63 frames per seed and retain eight staged plus eight new progressive origins; full prior staged/callback/compiler channels remain exact under three seeds. Eleven suites pass1608 groups including Phase01035;153 effective evidence controls RED. Actual-root component PASS4638 guarded inputs/five retained byte deltas; original mode-instrument RED1/36 dated differences/zero executable drift and exact repair/four evidence controls are retained. Book58/26/four chapters/47 RED and111-hash mode/revision-only staged freeze pass. No authority/static-policy/public event/carrier/admission change. Next: recognition .1.5.3 after clean landing.
+
 ## 2026-10-06 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.1 - retain staged annotation statement origins
 
 Immutable8a64493d9 supplies4614 regular inputs, one declared fixture replacement in both epochs/one staged producer delta after and ten guarded commands. Original fixture RED5 becomes GREEN138. All seven original contracts/22 cases preserve42 events/63 frames per seed and gain only eight staged origins; complete prior callback/compiler channels remain exact under three seeds. Ten suites pass1589 groups including Phase01035;130 effective evidence controls RED. Book58/24/four chapters/42 RED and101-hash mode/revision-only diagnosis freeze pass. Initial ineffective HTML quote control and its exact repair are retained; no static policy, payload provenance, public event, carrier or admission change. Next: progressive .1.5.2 after clean landing.

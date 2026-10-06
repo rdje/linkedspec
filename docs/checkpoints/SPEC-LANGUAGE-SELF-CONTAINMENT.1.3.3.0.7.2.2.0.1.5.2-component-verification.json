@@ -1,0 +1,34 @@
+{
+  "complete": true,
+  "revision": "ef2dd019bae121674a6e37a2b14d223bf6c7088c",
+  "actual_root_inputs": 4638,
+  "byte_deltas": 5,
+  "mode_differences": 36,
+  "original_instrument_exit": 1,
+  "component_exit": 0,
+  "controls": [
+    {
+      "name": "omitted mode difference",
+      "observed": "RED",
+      "reason": "independent complete actual-root mode census"
+    },
+    {
+      "name": "forged old producer",
+      "observed": "RED",
+      "reason": "mode-repair producer identities"
+    },
+    {
+      "name": "hidden original instrument RED",
+      "observed": "RED",
+      "reason": "actual original capture-instrument RED"
+    },
+    {
+      "name": "forged repair producer",
+      "observed": "RED",
+      "reason": "actual mode-repair producer"
+    }
+  ],
+  "instrument_sha256": "9cb6562e4bb14765d5587b54fc9ba79faf6da6d2bb3776ae67147cf8f8b245b3",
+  "review_producer_sha256": "83c01b65afe50519a08e41f44b2abf31cf0eafaf341c08930e259b634b14083a",
+  "scope": "Actual-root component guard/input recovery and exact mode-instrument repair; changing filesystem permissions are a dated observation, not a repository defect or permission policy. Four effective evidence RED preserve the actual before/after producer and complete census."
+}

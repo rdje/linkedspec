@@ -12,6 +12,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-10-06 — Progressive original frames and actual-root evidence modes (.1.5.2)
+
+Progressive recording follows actual returned statement frames before trim/operand callbacks and retains constructor references, static parser/top/span validation and invalid arity data. Shared observation keeps all prior staged assertions; sixteen combined origins retain full previous channels. The published component checker needs tracked Git context, so its separate actual-root snapshot preserves4638 parent inputs/five complete byte deltas. Initial instrumentation equated full stat permissions with Git mode; actual RED and all36 readable differences/zero executable drift remain retained, followed by exact three-edit mode recording/guard repair and four evidence RED. No project permissions change. RuntimeRED5/GREEN148/1608 groups/153 RED; book58/26/four/47; prior111 hashes freeze mode/revision only. Source facts: docs/knowledge/perl-progressive-annotation-statement-origins.md and docs/knowledge/project-root-evidence-filesystem-modes.md.
+
 ## 2026-10-06 — Staged statement origins preserve existing annotation policy (.1.5.1)
 
 The private staged path retains canonical original statement frames before trim and operand callbacks, then records the actual constructor event/argument object. Public events, direct/derived text plans, normalized options and invalid validation remain exact; copied/foreign/changed raw declines invented coordinates. Constructor/nested/error fixture proof complements dispatcher identity. Complete original seven-contract compiler/callback channels distinguish compatibility from new eight-origin counts. The first book corruption used encoded quotes absent from actual HTML; retain its RED and change only the one literal needle, preserving all prior controls. Runtime4614/RED5-GREEN138/1589 groups/130 RED; book58/24/four/42; prior101 hashes freeze mode/revision only. See docs/knowledge/perl-staged-annotation-statement-origins.md.

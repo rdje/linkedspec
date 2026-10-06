@@ -1,0 +1,797 @@
+{
+  "complete": true,
+  "revision": "ef2dd019bae121674a6e37a2b14d223bf6c7088c",
+  "regular_inputs": 4638,
+  "runtime_overlays": 0,
+  "fixture_replacements": 1,
+  "owner_deltas": 1,
+  "commands": 10,
+  "component_commands": 1,
+  "component_inputs": 4638,
+  "component_deltas": 5,
+  "seeds": 3,
+  "contracts": 7,
+  "events": 42,
+  "statement_frames": 63,
+  "source_origins": 16,
+  "cases": 22,
+  "compiler_cases": 4,
+  "original_red_groups": [
+    139,
+    141,
+    142,
+    143,
+    148
+  ],
+  "fixture_suites": 11,
+  "fixture_groups": 1608,
+  "controls": [
+    {
+      "name": "staged_parse_job/staged_parse_job omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "staged_parse_job/lost original origin",
+      "observed": "RED",
+      "reason": "exact selected annotation source origins"
+    },
+    {
+      "name": "staged_parse_job/wrong repeated interval",
+      "observed": "RED",
+      "reason": "exact selected annotation source origins"
+    },
+    {
+      "name": "staged_parse_job/changed origin argument",
+      "observed": "RED",
+      "reason": "exact selected annotation source origins"
+    },
+    {
+      "name": "staged_parse_job/foreign source",
+      "observed": "RED",
+      "reason": "exact selected annotation source origins"
+    },
+    {
+      "name": "progressive_span_dispatch/progressive_span_dispatch omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "progressive_span_dispatch/lost original origin",
+      "observed": "RED",
+      "reason": "exact selected annotation source origins"
+    },
+    {
+      "name": "progressive_span_dispatch/wrong repeated interval",
+      "observed": "RED",
+      "reason": "exact selected annotation source origins"
+    },
+    {
+      "name": "progressive_span_dispatch/changed origin argument",
+      "observed": "RED",
+      "reason": "exact selected annotation source origins"
+    },
+    {
+      "name": "progressive_span_dispatch/foreign source",
+      "observed": "RED",
+      "reason": "exact selected annotation source origins"
+    },
+    {
+      "name": "observe_recognition/observe_recognition omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "recognition_checkpoint/recognition_checkpoint omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "recognize_once/recognize_once omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "recognition_commit/recognition_commit omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "recognition_rollback/recognition_rollback omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "staged-derived-options/staged_parse_job omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "staged-derived-options/lost original origin",
+      "observed": "RED",
+      "reason": "exact selected annotation source origins"
+    },
+    {
+      "name": "staged-derived-options/wrong repeated interval",
+      "observed": "RED",
+      "reason": "exact selected annotation source origins"
+    },
+    {
+      "name": "staged-derived-options/changed origin argument",
+      "observed": "RED",
+      "reason": "exact selected annotation source origins"
+    },
+    {
+      "name": "staged-derived-options/foreign source",
+      "observed": "RED",
+      "reason": "exact selected annotation source origins"
+    },
+    {
+      "name": "staged-unknown-option/staged_parse_job omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "staged-unknown-option/lost original origin",
+      "observed": "RED",
+      "reason": "exact selected annotation source origins"
+    },
+    {
+      "name": "staged-unknown-option/wrong repeated interval",
+      "observed": "RED",
+      "reason": "exact selected annotation source origins"
+    },
+    {
+      "name": "staged-unknown-option/changed origin argument",
+      "observed": "RED",
+      "reason": "exact selected annotation source origins"
+    },
+    {
+      "name": "staged-unknown-option/foreign source",
+      "observed": "RED",
+      "reason": "exact selected annotation source origins"
+    },
+    {
+      "name": "progressive-dynamic-parser/progressive_span_dispatch omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "progressive-dynamic-parser/lost original origin",
+      "observed": "RED",
+      "reason": "exact selected annotation source origins"
+    },
+    {
+      "name": "progressive-dynamic-parser/wrong repeated interval",
+      "observed": "RED",
+      "reason": "exact selected annotation source origins"
+    },
+    {
+      "name": "progressive-dynamic-parser/changed origin argument",
+      "observed": "RED",
+      "reason": "exact selected annotation source origins"
+    },
+    {
+      "name": "progressive-dynamic-parser/foreign source",
+      "observed": "RED",
+      "reason": "exact selected annotation source origins"
+    },
+    {
+      "name": "progressive-extra-argument/progressive_span_dispatch omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "progressive-extra-argument/lost original origin",
+      "observed": "RED",
+      "reason": "exact selected annotation source origins"
+    },
+    {
+      "name": "progressive-extra-argument/wrong repeated interval",
+      "observed": "RED",
+      "reason": "exact selected annotation source origins"
+    },
+    {
+      "name": "progressive-extra-argument/changed origin argument",
+      "observed": "RED",
+      "reason": "exact selected annotation source origins"
+    },
+    {
+      "name": "progressive-extra-argument/foreign source",
+      "observed": "RED",
+      "reason": "exact selected annotation source origins"
+    },
+    {
+      "name": "recognition-value-operand/recognize_once omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "observation-missing-operand/observe_recognition omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "observation-extra-argument/observe_recognition omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "mixed-repeated-dedicated-producers/staged_parse_job omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "mixed-repeated-dedicated-producers/lost original origin",
+      "observed": "RED",
+      "reason": "exact selected annotation source origins"
+    },
+    {
+      "name": "mixed-repeated-dedicated-producers/wrong repeated interval",
+      "observed": "RED",
+      "reason": "exact selected annotation source origins"
+    },
+    {
+      "name": "mixed-repeated-dedicated-producers/changed origin argument",
+      "observed": "RED",
+      "reason": "exact selected annotation source origins"
+    },
+    {
+      "name": "mixed-repeated-dedicated-producers/foreign source",
+      "observed": "RED",
+      "reason": "exact selected annotation source origins"
+    },
+    {
+      "name": "mixed-repeated-dedicated-producers/progressive_span_dispatch omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "mixed-repeated-dedicated-producers/lost original origin",
+      "observed": "RED",
+      "reason": "exact selected annotation source origins"
+    },
+    {
+      "name": "mixed-repeated-dedicated-producers/wrong repeated interval",
+      "observed": "RED",
+      "reason": "exact selected annotation source origins"
+    },
+    {
+      "name": "mixed-repeated-dedicated-producers/changed origin argument",
+      "observed": "RED",
+      "reason": "exact selected annotation source origins"
+    },
+    {
+      "name": "mixed-repeated-dedicated-producers/foreign source",
+      "observed": "RED",
+      "reason": "exact selected annotation source origins"
+    },
+    {
+      "name": "mixed-repeated-dedicated-producers/observe_recognition omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "mixed-repeated-dedicated-producers/recognition_checkpoint omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "mixed-repeated-dedicated-producers/recognize_once omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "mixed-repeated-dedicated-producers/recognition_commit omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "mixed-repeated-dedicated-producers/recognition_rollback omitted event",
+      "observed": "RED",
+      "reason": "literal original events and arguments"
+    },
+    {
+      "name": "staged_parse_job/public forged event",
+      "observed": "RED",
+      "reason": "actual dispatcher event and argument identities"
+    },
+    {
+      "name": "staged_parse_job/public forged args",
+      "observed": "RED",
+      "reason": "actual dispatcher event and argument identities"
+    },
+    {
+      "name": "staged_parse_job/public cloned array",
+      "observed": "RED",
+      "reason": "actual dispatcher returned-array identity"
+    },
+    {
+      "name": "staged_parse_job/private forged event",
+      "observed": "RED",
+      "reason": "actual dispatcher event and argument identities"
+    },
+    {
+      "name": "staged_parse_job/private forged args",
+      "observed": "RED",
+      "reason": "actual dispatcher event and argument identities"
+    },
+    {
+      "name": "staged_parse_job/private cloned array",
+      "observed": "RED",
+      "reason": "actual dispatcher returned-array identity"
+    },
+    {
+      "name": "staged_parse_job lost callback",
+      "observed": "RED",
+      "reason": "exact original callback channels"
+    },
+    {
+      "name": "progressive_span_dispatch/public forged event",
+      "observed": "RED",
+      "reason": "actual dispatcher event and argument identities"
+    },
+    {
+      "name": "progressive_span_dispatch/public forged args",
+      "observed": "RED",
+      "reason": "actual dispatcher event and argument identities"
+    },
+    {
+      "name": "progressive_span_dispatch/public cloned array",
+      "observed": "RED",
+      "reason": "actual dispatcher returned-array identity"
+    },
+    {
+      "name": "progressive_span_dispatch/private forged event",
+      "observed": "RED",
+      "reason": "actual dispatcher event and argument identities"
+    },
+    {
+      "name": "progressive_span_dispatch/private forged args",
+      "observed": "RED",
+      "reason": "actual dispatcher event and argument identities"
+    },
+    {
+      "name": "progressive_span_dispatch/private cloned array",
+      "observed": "RED",
+      "reason": "actual dispatcher returned-array identity"
+    },
+    {
+      "name": "progressive_span_dispatch lost callback",
+      "observed": "RED",
+      "reason": "exact original callback channels"
+    },
+    {
+      "name": "observe_recognition/public forged event",
+      "observed": "RED",
+      "reason": "actual dispatcher event and argument identities"
+    },
+    {
+      "name": "observe_recognition/public forged args",
+      "observed": "RED",
+      "reason": "actual dispatcher event and argument identities"
+    },
+    {
+      "name": "observe_recognition/public cloned array",
+      "observed": "RED",
+      "reason": "actual dispatcher returned-array identity"
+    },
+    {
+      "name": "observe_recognition/private forged event",
+      "observed": "RED",
+      "reason": "actual dispatcher event and argument identities"
+    },
+    {
+      "name": "observe_recognition/private forged args",
+      "observed": "RED",
+      "reason": "actual dispatcher event and argument identities"
+    },
+    {
+      "name": "observe_recognition/private cloned array",
+      "observed": "RED",
+      "reason": "actual dispatcher returned-array identity"
+    },
+    {
+      "name": "observe_recognition lost callback",
+      "observed": "RED",
+      "reason": "exact original callback channels"
+    },
+    {
+      "name": "observe_recognition invented source origin",
+      "observed": "RED",
+      "reason": "unchanged other producer origin gaps"
+    },
+    {
+      "name": "recognition_checkpoint/public forged event",
+      "observed": "RED",
+      "reason": "actual dispatcher event and argument identities"
+    },
+    {
+      "name": "recognition_checkpoint/public forged args",
+      "observed": "RED",
+      "reason": "actual dispatcher event and argument identities"
+    },
+    {
+      "name": "recognition_checkpoint/public cloned array",
+      "observed": "RED",
+      "reason": "actual dispatcher returned-array identity"
+    },
+    {
+      "name": "recognition_checkpoint/private forged event",
+      "observed": "RED",
+      "reason": "actual dispatcher event and argument identities"
+    },
+    {
+      "name": "recognition_checkpoint/private forged args",
+      "observed": "RED",
+      "reason": "actual dispatcher event and argument identities"
+    },
+    {
+      "name": "recognition_checkpoint/private cloned array",
+      "observed": "RED",
+      "reason": "actual dispatcher returned-array identity"
+    },
+    {
+      "name": "recognition_checkpoint lost callback",
+      "observed": "RED",
+      "reason": "exact original callback channels"
+    },
+    {
+      "name": "recognition_checkpoint invented source origin",
+      "observed": "RED",
+      "reason": "unchanged other producer origin gaps"
+    },
+    {
+      "name": "recognize_once/public forged event",
+      "observed": "RED",
+      "reason": "actual dispatcher event and argument identities"
+    },
+    {
+      "name": "recognize_once/public forged args",
+      "observed": "RED",
+      "reason": "actual dispatcher event and argument identities"
+    },
+    {
+      "name": "recognize_once/public cloned array",
+      "observed": "RED",
+      "reason": "actual dispatcher returned-array identity"
+    },
+    {
+      "name": "recognize_once/private forged event",
+      "observed": "RED",
+      "reason": "actual dispatcher event and argument identities"
+    },
+    {
+      "name": "recognize_once/private forged args",
+      "observed": "RED",
+      "reason": "actual dispatcher event and argument identities"
+    },
+    {
+      "name": "recognize_once/private cloned array",
+      "observed": "RED",
+      "reason": "actual dispatcher returned-array identity"
+    },
+    {
+      "name": "recognize_once lost callback",
+      "observed": "RED",
+      "reason": "exact original callback channels"
+    },
+    {
+      "name": "recognize_once invented source origin",
+      "observed": "RED",
+      "reason": "unchanged other producer origin gaps"
+    },
+    {
+      "name": "recognition_commit/public forged event",
+      "observed": "RED",
+      "reason": "actual dispatcher event and argument identities"
+    },
+    {
+      "name": "recognition_commit/public forged args",
+      "observed": "RED",
+      "reason": "actual dispatcher event and argument identities"
+    },
+    {
+      "name": "recognition_commit/public cloned array",
+      "observed": "RED",
+      "reason": "actual dispatcher returned-array identity"
+    },
+    {
+      "name": "recognition_commit/private forged event",
+      "observed": "RED",
+      "reason": "actual dispatcher event and argument identities"
+    },
+    {
+      "name": "recognition_commit/private forged args",
+      "observed": "RED",
+      "reason": "actual dispatcher event and argument identities"
+    },
+    {
+      "name": "recognition_commit/private cloned array",
+      "observed": "RED",
+      "reason": "actual dispatcher returned-array identity"
+    },
+    {
+      "name": "recognition_commit lost callback",
+      "observed": "RED",
+      "reason": "exact original callback channels"
+    },
+    {
+      "name": "recognition_commit invented source origin",
+      "observed": "RED",
+      "reason": "unchanged other producer origin gaps"
+    },
+    {
+      "name": "recognition_rollback/public forged event",
+      "observed": "RED",
+      "reason": "actual dispatcher event and argument identities"
+    },
+    {
+      "name": "recognition_rollback/public forged args",
+      "observed": "RED",
+      "reason": "actual dispatcher event and argument identities"
+    },
+    {
+      "name": "recognition_rollback/public cloned array",
+      "observed": "RED",
+      "reason": "actual dispatcher returned-array identity"
+    },
+    {
+      "name": "recognition_rollback/private forged event",
+      "observed": "RED",
+      "reason": "actual dispatcher event and argument identities"
+    },
+    {
+      "name": "recognition_rollback/private forged args",
+      "observed": "RED",
+      "reason": "actual dispatcher event and argument identities"
+    },
+    {
+      "name": "recognition_rollback/private cloned array",
+      "observed": "RED",
+      "reason": "actual dispatcher returned-array identity"
+    },
+    {
+      "name": "recognition_rollback lost callback",
+      "observed": "RED",
+      "reason": "exact original callback channels"
+    },
+    {
+      "name": "recognition_rollback invented source origin",
+      "observed": "RED",
+      "reason": "unchanged other producer origin gaps"
+    },
+    {
+      "name": "staged lost node",
+      "observed": "RED",
+      "reason": "dedicated compiler node"
+    },
+    {
+      "name": "staged changed substitution",
+      "observed": "RED",
+      "reason": "dedicated substitution constructor"
+    },
+    {
+      "name": "staged changed dump",
+      "observed": "RED",
+      "reason": "dedicated emitted constructor"
+    },
+    {
+      "name": "progressive lost node",
+      "observed": "RED",
+      "reason": "dedicated compiler node"
+    },
+    {
+      "name": "progressive changed substitution",
+      "observed": "RED",
+      "reason": "dedicated substitution constructor"
+    },
+    {
+      "name": "progressive changed dump",
+      "observed": "RED",
+      "reason": "dedicated emitted constructor"
+    },
+    {
+      "name": "recognition lost node",
+      "observed": "RED",
+      "reason": "dedicated compiler node"
+    },
+    {
+      "name": "recognition changed substitution",
+      "observed": "RED",
+      "reason": "dedicated substitution constructor"
+    },
+    {
+      "name": "recognition changed dump",
+      "observed": "RED",
+      "reason": "dedicated emitted constructor"
+    },
+    {
+      "name": "observation lost node",
+      "observed": "RED",
+      "reason": "dedicated compiler node"
+    },
+    {
+      "name": "observation changed substitution",
+      "observed": "RED",
+      "reason": "dedicated substitution constructor"
+    },
+    {
+      "name": "observation changed dump",
+      "observed": "RED",
+      "reason": "dedicated emitted constructor"
+    },
+    {
+      "name": "before/lost command",
+      "observed": "RED",
+      "reason": "complete command population"
+    },
+    {
+      "name": "before/lost guard",
+      "observed": "RED",
+      "reason": "complete runtime guards and actual exit"
+    },
+    {
+      "name": "before/wrong actual exit",
+      "observed": "RED",
+      "reason": "complete runtime guards and actual exit"
+    },
+    {
+      "name": "before/forged command",
+      "observed": "RED",
+      "reason": "actual command identity"
+    },
+    {
+      "name": "before/forged channel",
+      "observed": "RED",
+      "reason": "complete channel bytes"
+    },
+    {
+      "name": "before/forged capture",
+      "observed": "RED",
+      "reason": "actual capture producer"
+    },
+    {
+      "name": "before/forged stream",
+      "observed": "RED",
+      "reason": "actual stream producer"
+    },
+    {
+      "name": "before/incomplete capture",
+      "observed": "RED",
+      "reason": "complete capture boundary"
+    },
+    {
+      "name": "after/lost command",
+      "observed": "RED",
+      "reason": "complete command population"
+    },
+    {
+      "name": "after/lost guard",
+      "observed": "RED",
+      "reason": "complete runtime guards and actual exit"
+    },
+    {
+      "name": "after/wrong actual exit",
+      "observed": "RED",
+      "reason": "complete runtime guards and actual exit"
+    },
+    {
+      "name": "after/forged command",
+      "observed": "RED",
+      "reason": "actual command identity"
+    },
+    {
+      "name": "after/forged channel",
+      "observed": "RED",
+      "reason": "complete channel bytes"
+    },
+    {
+      "name": "after/forged capture",
+      "observed": "RED",
+      "reason": "actual capture producer"
+    },
+    {
+      "name": "after/forged stream",
+      "observed": "RED",
+      "reason": "actual stream producer"
+    },
+    {
+      "name": "after/incomplete capture",
+      "observed": "RED",
+      "reason": "complete capture boundary"
+    },
+    {
+      "name": "shortened positive TAP reach",
+      "observed": "RED",
+      "reason": "complete ordered positive fixture reach"
+    },
+    {
+      "name": "hidden nested TAP failure",
+      "observed": "RED",
+      "reason": "all nested fixture assertions pass"
+    },
+    {
+      "name": "hidden original progressive RED",
+      "observed": "RED",
+      "reason": "original five progressive RED groups"
+    },
+    {
+      "name": "before lost original input",
+      "observed": "RED",
+      "reason": "complete unique original Git population"
+    },
+    {
+      "name": "before extra runtime overlay",
+      "observed": "RED",
+      "reason": "no extra runtime overlays"
+    },
+    {
+      "name": "before lost fixture declaration",
+      "observed": "RED",
+      "reason": "one declared fixture overlay"
+    },
+    {
+      "name": "after lost original input",
+      "observed": "RED",
+      "reason": "complete unique original Git population"
+    },
+    {
+      "name": "after extra runtime overlay",
+      "observed": "RED",
+      "reason": "no extra runtime overlays"
+    },
+    {
+      "name": "after lost fixture declaration",
+      "observed": "RED",
+      "reason": "one declared fixture overlay"
+    },
+    {
+      "name": "lost progressive owner declaration",
+      "observed": "RED",
+      "reason": "one declared progressive owner delta"
+    },
+    {
+      "name": "failed component",
+      "observed": "RED",
+      "reason": "complete healthy component gate"
+    },
+    {
+      "name": "lost component guard",
+      "observed": "RED",
+      "reason": "complete component input guards"
+    },
+    {
+      "name": "forged component producer",
+      "observed": "RED",
+      "reason": "actual component producer"
+    },
+    {
+      "name": "forged component manifest",
+      "observed": "RED",
+      "reason": "actual component input manifest"
+    },
+    {
+      "name": "truncated component success",
+      "observed": "RED",
+      "reason": "complete component success channel"
+    },
+    {
+      "name": "lost component Git input",
+      "observed": "RED",
+      "reason": "complete component original Git population"
+    },
+    {
+      "name": "lost actual-root byte delta",
+      "observed": "RED",
+      "reason": "retained actual-root byte delta"
+    },
+    {
+      "name": "forged actual-root byte delta",
+      "observed": "RED",
+      "reason": "complete channel bytes"
+    }
+  ],
+  "instrument_sha256": "83c01b65afe50519a08e41f44b2abf31cf0eafaf341c08930e259b634b14083a",
+  "scope": "One progressive producer; preserves all preceding staged origins; all seven original dedicated contracts and complete original channels remain retained. Constructor identity and unsupported/nested/error callback behavior are recurring fixture assertions; probe identities are at actual dispatcher return. No parser execution beyond selected consumers, membership, admission or separate runtime-defect closure."
+}

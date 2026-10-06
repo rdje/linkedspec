@@ -1,0 +1,242 @@
+{
+  "command": [
+    "bash",
+    "tools/run_python_project_data.sh",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.2-component.py"
+  ],
+  "exit": 1,
+  "stdout": {
+    "encoding": "gzip-base64",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "data": "H4sIAAAAAAAC/wMAAAAAAAAAAAA="
+  },
+  "stderr": {
+    "encoding": "gzip-base64",
+    "bytes": 341,
+    "sha256": "0e37b261e71a20d3992c78a45b4198f67d2d3f93442080b94fb82d7f8edb542e",
+    "data": "H4sIAAAAAAAC/4VOTWvDMAy951eIXtJCYveDsRLWQWjTMuiyQbJdSgeuI1oTxwq2c9i/n9ttt8Heu0hP0nuqrZB4ErKFcUfOg0WJxoMUWoMWzk+yCGCrNMKIv5MeOnS8qjZ8QzLUxjt+Vv4ynLhWpsXG9Sh5Q9JxeUHZ9qSuK9VrsU73ebl7y3dFWhX7bbp+Kev8qXwuyprN2CJwyu7ZPHAa+js2TyV1PZkQwfrPUQLBH2G2TEAZeOioGTQ+htcAhHNoPQQJV6sQNyarzsoIfYivWnw8pIvsmCwnCcS/o2DSD9838c3kBx//IspvcYpMYS3ZDP6wjL4A5Cj001UBAAA="
+  },
+  "before_sha256": "ac90d97b3770a349fa50fb62aa7a397bc220c19835fc6beee951cb534b1c4f0e",
+  "after_sha256": "bbfff24bf7db9c96559dc79a439e384c9a525f1d2196939e7862ed50c27cdc30",
+  "mode_differences": [
+    {
+      "path": "noncore/AmbiTiming.pm",
+      "git_mode": "100644",
+      "filesystem_mode": 416,
+      "executable_drift": false
+    },
+    {
+      "path": "noncore/EasyTk.pm",
+      "git_mode": "100644",
+      "filesystem_mode": 416,
+      "executable_drift": false
+    },
+    {
+      "path": "noncore/EncounTiming.pm",
+      "git_mode": "100644",
+      "filesystem_mode": 416,
+      "executable_drift": false
+    },
+    {
+      "path": "noncore/Global.pm",
+      "git_mode": "100644",
+      "filesystem_mode": 416,
+      "executable_drift": false
+    },
+    {
+      "path": "noncore/HDisplay.pm",
+      "git_mode": "100644",
+      "filesystem_mode": 416,
+      "executable_drift": false
+    },
+    {
+      "path": "noncore/HLinkSubst.pm",
+      "git_mode": "100644",
+      "filesystem_mode": 416,
+      "executable_drift": false
+    },
+    {
+      "path": "noncore/HUtils.pm",
+      "git_mode": "100644",
+      "filesystem_mode": 416,
+      "executable_drift": false
+    },
+    {
+      "path": "noncore/LibReader.pm",
+      "git_mode": "100644",
+      "filesystem_mode": 416,
+      "executable_drift": false
+    },
+    {
+      "path": "noncore/LispML.pm",
+      "git_mode": "100644",
+      "filesystem_mode": 416,
+      "executable_drift": false
+    },
+    {
+      "path": "noncore/Lispish.pm",
+      "git_mode": "100644",
+      "filesystem_mode": 416,
+      "executable_drift": false
+    },
+    {
+      "path": "noncore/MagmaTiming.pm",
+      "git_mode": "100644",
+      "filesystem_mode": 416,
+      "executable_drift": false
+    },
+    {
+      "path": "noncore/PTiming.pm",
+      "git_mode": "100644",
+      "filesystem_mode": 416,
+      "executable_drift": false
+    },
+    {
+      "path": "noncore/Reportiming.pm",
+      "git_mode": "100644",
+      "filesystem_mode": 416,
+      "executable_drift": false
+    },
+    {
+      "path": "noncore/Table.pm",
+      "git_mode": "100644",
+      "filesystem_mode": 416,
+      "executable_drift": false
+    },
+    {
+      "path": "noncore/Table2SS.pm",
+      "git_mode": "100644",
+      "filesystem_mode": 416,
+      "executable_drift": false
+    },
+    {
+      "path": "noncore/TableGrep.pm",
+      "git_mode": "100644",
+      "filesystem_mode": 416,
+      "executable_drift": false
+    },
+    {
+      "path": "noncore/TableScript.pm",
+      "git_mode": "100644",
+      "filesystem_mode": 416,
+      "executable_drift": false
+    },
+    {
+      "path": "noncore/TableSort.pm",
+      "git_mode": "100644",
+      "filesystem_mode": 416,
+      "executable_drift": false
+    },
+    {
+      "path": "noncore/TcFlow.pm",
+      "git_mode": "100644",
+      "filesystem_mode": 416,
+      "executable_drift": false
+    },
+    {
+      "path": "noncore/TkGui.pm",
+      "git_mode": "100644",
+      "filesystem_mode": 416,
+      "executable_drift": false
+    },
+    {
+      "path": "noncore/XLSreader.pm",
+      "git_mode": "100644",
+      "filesystem_mode": 416,
+      "executable_drift": false
+    },
+    {
+      "path": "noncore/rvp.pm",
+      "git_mode": "100644",
+      "filesystem_mode": 416,
+      "executable_drift": false
+    },
+    {
+      "path": "perl/LinkedRE.pm",
+      "git_mode": "100644",
+      "filesystem_mode": 416,
+      "executable_drift": false
+    },
+    {
+      "path": "perl/PathSearch.pm",
+      "git_mode": "100644",
+      "filesystem_mode": 416,
+      "executable_drift": false
+    },
+    {
+      "path": "perl/env.conf",
+      "git_mode": "100644",
+      "filesystem_mode": 416,
+      "executable_drift": false
+    },
+    {
+      "path": "perl/gdcheck.pl",
+      "git_mode": "100644",
+      "filesystem_mode": 416,
+      "executable_drift": false
+    },
+    {
+      "path": "perl/htmlcss_driver.pl",
+      "git_mode": "100644",
+      "filesystem_mode": 416,
+      "executable_drift": false
+    },
+    {
+      "path": "perl/ptchange.pl",
+      "git_mode": "100755",
+      "filesystem_mode": 488,
+      "executable_drift": false
+    },
+    {
+      "path": "specs/ifelse.spec",
+      "git_mode": "100644",
+      "filesystem_mode": 416,
+      "executable_drift": false
+    },
+    {
+      "path": "specs/operators_try.spec",
+      "git_mode": "100644",
+      "filesystem_mode": 416,
+      "executable_drift": false
+    },
+    {
+      "path": "specs/portmap.spec",
+      "git_mode": "100644",
+      "filesystem_mode": 416,
+      "executable_drift": false
+    },
+    {
+      "path": "specs/regdef.spec",
+      "git_mode": "100644",
+      "filesystem_mode": 416,
+      "executable_drift": false
+    },
+    {
+      "path": "specs/tclite.spec",
+      "git_mode": "100644",
+      "filesystem_mode": 416,
+      "executable_drift": false
+    },
+    {
+      "path": "specs/verilog.spec",
+      "git_mode": "100644",
+      "filesystem_mode": 416,
+      "executable_drift": false
+    },
+    {
+      "path": "tests/corpus/lispish/input.spec",
+      "git_mode": "100644",
+      "filesystem_mode": 416,
+      "executable_drift": false
+    },
+    {
+      "path": "tests/corpus/tablegrep/input.spec",
+      "git_mode": "100644",
+      "filesystem_mode": 416,
+      "executable_drift": false
+    }
+  ],
+  "instrument_sha256": "3fd777528b5972334d0b589c43424085fa8063e1c6905c001057aebb33ac264d",
+  "scope": "Original capture stops before the component gate executes: full filesystem permissions were incorrectly equated with Git mode. Thirty-six readable files differ, including noncore/AmbiTiming.pm0640 versus tracked100644; no executable-bit drift. Preserve actual filesystem mode separately and guard that same mode after execution. No chmod, tracked mode, source-byte or contract change."
+}

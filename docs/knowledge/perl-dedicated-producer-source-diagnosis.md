@@ -8,12 +8,12 @@ answers:
   - "does staged payload provenance already provide authored action event provenance"
   - "where are original dedicated scanner literals and callbacks retained"
 date: 2026-10-06
-status: historical original diagnosis verified at3482a5d22; staged repair .1.5.1 verified
+status: historical original diagnosis verified at3482a5d22; staged/progressive verified; recognition remains owned
 tags: [perl, actionir, source-provenance, staged, progressive, recognition]
 evidence: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.0 retains4593 regular committed inputs plus three authored overlays/four guarded commands. Seven original dedicated contracts cover22 cases/42 events/63 statement frames and zero event-source origins per seed. Actual dispatcher-returned array/event/argument identities, complete callback channels and four Toolbox compiler-construction cases agree under three seeds. Nine unchanged suites pass544 groups;108 effective reason-specific evidence controls reject."
 reverify:
-  - "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.1-review.py"
-  - "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.1-book.py --review"
+  - "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.2-review.py"
+  - "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.2-book.py --review"
 ---
 
 # Dedicated statement ownership is a separate source channel
@@ -58,6 +58,7 @@ existing token-order/resource/restoration/marker-identity defects and global aud
 retain their separate task owners. No new helper, event field or admission is claimed.
 
 The staged repair [[perl-staged-annotation-statement-origins]] owns the current
-implementation and explicit original/repaired input trees. Progressive and
-recognition repairs remain separate. The reverify commands above review that
+implementation and explicit original/repaired input trees. The progressive
+repair [[perl-progressive-annotation-statement-origins]] retains that staged proof;
+recognition remains separate. The reverify commands above review that
 controlled comparison and current teaching, not a new all-zero diagnosis.
