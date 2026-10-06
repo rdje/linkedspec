@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Full PNT: original dedicated producer diagnosis complete; staged annotation source origins next. Legacy family is committed and canonical; executable membership and separate runtime defects remain open.
+Full PNT: staged annotation source origins verified; progressive origins next. Canonical dedicated-family acceptance, executable membership and separately owned runtime defects remain open.
 
 ## Latest Completed Slice
 
-`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.0` — Immutable3482a5d22 diagnosis retains4593 regular Git inputs/three authored overlays/four guarded commands. Seven dedicated contracts cover22 literal cases/42 events/63 statement frames and zero event-source origins per seed. Actual dispatcher array/event/argument references and complete callback/Toolbox channels agree under three seeds; four compiler-construction examples preserve dedicated nodes/constructors. Nine unchanged suites pass544 groups;108 effective evidence controls RED. Book58/22/four chapters/37 RED and103-hash mode/revision-only Legacy claim freeze pass. No production/spec/standard-test/policy/format/admission change; three implementation families and canonical acceptance are scheduled.
+`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.1` — Immutable8a64493d9 supplies4614 regular inputs, one declared fixture replacement in both epochs/one staged producer delta after and ten guarded commands. Original fixture RED5 becomes GREEN138. All seven original contracts/22 cases preserve42 events/63 frames per seed and gain only eight staged origins; complete prior callback/compiler channels remain exact under three seeds. Ten suites pass1589 groups including Phase01035;130 effective evidence controls RED. Book58/24/four chapters/42 RED and101-hash mode/revision-only diagnosis freeze pass. Initial ineffective HTML quote control and its exact repair are retained; no static policy, payload provenance, public event, carrier or admission change.
 
 ## Next Action
 
-Activate staged annotation origins .1.5.1 from clean committed HEAD. Reuse the original seven-contract diagnosis and implement only its one staged producer; preserve text/options policy, original objects/callbacks and full compiler channels. Progressive and recognition families, all-producer composition, membership/replacement and separately owned runtime defects retain their next leaves.
+Activate progressive annotation origins .1.5.2 from clean committed HEAD. Reuse the original seven-contract cases and staged before/after channels; change only its progressive producer while preserving static operands, invalid-event fields, callbacks/objects and complete compiler channels. Recognition, canonical family acceptance, composition, membership/replacement and separately owned runtime defects retain their leaves.
 
 ## Recent Completions
 
+- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.1` — stagedRED5/GREEN138; eight origins/1589 groups/130 RED and full original compiler/callback channels.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.0` — original7 contracts/42 events/63 frames/zero origins,544 groups/108 RED; three-family repair partition.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.7` — all112 contracts/227 origins/1318 groups/269 RED; fresh immutable family acceptance.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1.1.1` — EOF/recovery/audit; RED12-GREEN41/153 + audit20 evidence denials.
@@ -29,7 +30,6 @@ Activate staged annotation origins .1.5.1 from clean committed HEAD. Reuse the o
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0` — original112-contract/115-case diagnosis; Granted three-scalar note rollover.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.3` — immutable Flow acceptance;16 contracts/147 origins/138 frames/837 groups/31 RED controls.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.2.1` — recursive Flow origins; RED6/GREEN7/1180 groups/147 origins/48 unchanged pairs.
-- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.3.2.0.1` — private method argument frames; RED10/GREEN15/1173 groups/138 exact frames.
 
 ## History
 

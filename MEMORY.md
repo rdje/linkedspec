@@ -1,10 +1,10 @@
 # MEMORY
 
-- activation_commit: `3482a5d220bd7063a910c09de883faa903d24135` — clean staged/progressive/recognition diagnosis activation.
-- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.0 - diagnose dedicated source producers`.
-- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.1` (pending activation) — staged annotation producer origins.
-- next_action: Activate staged annotation origins .1.5.1 from clean committed HEAD. Reuse the original seven-contract diagnosis and implement only its one staged producer; preserve text/options policy, original objects/callbacks and full compiler channels. Progressive and recognition families, all-producer composition, membership/replacement and separately owned runtime defects retain their next leaves.
-- in_flight_uncommitted: None; original diagnosis/consumer/book/freeze/claim proof is complete; focused publication checks and normal hooks enforce this post-landing handoff.
+- activation_commit: `8a64493d96795ef7398926b508e07595d01ef26c` — clean staged annotation source-origin activation.
+- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.1 - retain staged annotation statement origins`.
+- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.2` (pending activation) — progressive annotation producer origins.
+- next_action: Activate progressive annotation origins .1.5.2 from clean committed HEAD. Reuse the original seven-contract cases and staged before/after channels; change only its progressive producer while preserving static operands, invalid-event fields, callbacks/objects and complete compiler channels. Recognition, canonical family acceptance, composition, membership/replacement and separately owned runtime defects retain their leaves.
+- in_flight_uncommitted: None; staged original/repaired consumers/Phase0/channel/control/book/freeze proof is complete; focused publication checks and normal hooks enforce this post-landing handoff.
 - blockers: No access/decision blocker. Matches and attached/marker/value/null/while executors are repaired; control parent/order and raw-expression reporting are reconciled; quoted/comment readiness .7.2/.3 precedes dispatcher/full execution. Other startup repairs remain separate.
   Wrapper startup .7 remains open; recovery/purge stay prohibited.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the

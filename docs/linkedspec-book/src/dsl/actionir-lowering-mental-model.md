@@ -543,7 +543,8 @@ helper-looking data as executable code.
 
 ### Dedicated annotation source provenance
 
-The staged, progressive and recognition scanners still return their original
+The staged producer now retains a private source origin for each unchanged
+original annotation. Progressive and recognition scanners still return their
 events without a private event-source origin. Their canonical statement splitter
 already supplies physical statement frames. A dedicated annotation owns its
 whole statement, including its original target and operands:
@@ -552,8 +553,31 @@ whole statement, including its original target and operands:
 job = parse_job(entry_text(), hash("node_kind","expression","payload_kind","text","spec","expr-v1","result_policy","replace_marker","on_error","fail"))
 ```
 
-Staged text plans and options keep their existing validation. Progressive dispatch
-also keeps the distinction between a literal parser identity and a dynamic operand:
+Staged source frames retain the original statement occurrence before trim or
+operand parsing callbacks run. The private sidecar points at the actual returned
+event and argument objects; public events and generated parser text keep their
+existing shape. Repeated equal annotations retain distinct original intervals.
+Copied splitter arrays, foreign source and changed raw text gain no invented
+coordinates. Nested scans keep independent recorder contexts.
+
+A derived text plan and normalized options retain their existing validation:
+
+```text
+job = parse_job(cat(entry_group(1), cat(match_text(), entry_text())), hash("node_kind","expression","payload_kind","text","spec","expr-v1","result_policy","append_child","on_error","keep_text","top","Expr","into","children","required_capabilities",array("z.cap","a.cap")))
+```
+
+The concatenation keeps its ordered entry-group, match-text and entry-text
+segments; required capabilities normalize to `a.cap`, `z.cap`. An invalid option
+still produces the original scanner event and its validation failure:
+
+```text
+job = parse_job(entry_text(), hash("node_kind","expression","payload_kind","text","spec","expr-v1","result_policy","replace_marker","on_error","fail","unknown","value"))
+```
+
+The source origin does not make `unknown` a supported option. Staged payload
+provenance continues to describe parsed input text, separately from this authored
+annotation's source position. Progressive dispatch also keeps the distinction
+between a literal parser identity and a dynamic operand:
 
 ```text
 child = dispatch_span("expr-v1", "Expr", span)
@@ -570,13 +594,15 @@ payload = recognition_commit(scope)
 # Alternative terminal: recognition_rollback(scope)
 ```
 
-The current diagnosis checks all seven dedicated contracts: one staged annotation,
+The original diagnosis checks all seven dedicated contracts: one staged annotation,
 one progressive annotation, four transaction forms and recursive observation.
 Independent original intervals distinguish repeated equal statements; actual
 dispatcher references and complete callback/compiler channels preserve the original
 behavior. Invalid annotations retain their original event arguments so validation
 can reject them; attaching provenance must preserve that path.
 This diagnosis changes no static policy, recognition behavior or public event fields.
+The staged repair preserves those boundaries and complete public compiler channels;
+progressive and recognition source-origin implementation remains pending.
 Executable membership, precise replacement and separately owned runtime defects
 remain subsequent work.
 

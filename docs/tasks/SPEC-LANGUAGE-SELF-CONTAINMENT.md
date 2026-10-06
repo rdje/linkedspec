@@ -3176,11 +3176,36 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.1`
-  Status: `pending`
+  Status: `done`
   Goal: Retain original staged annotation statement origins.
   Dependencies: `.1.5.0`
+  Activation: Clean8a64493d96795ef7398926b508e07595d01ef26c after committed original diagnosis; all ten hooks and post-commit pointer PASS, brief0 and no required jobs. Original staged owner, private frame/recorder interfaces, authored oracle, direct consumers and source-origin book reviewed. Historical objective audit selects perl/LinkedSpec/StagedParseJob.pm, not this ActionIR producer or provenance fixture.
   Scope: StagedParseJob's one dedicated producer, recurring private provenance fixture, retained original before/after evidence and source-origin teaching/continuity. No payload-provenance/static-option/policy/format/admission change.
+  Owned paths: perl/LinkedSpec/ActionIR/StagedParseJob.pm; t/actionir_helper_source_provenance.t; leaf-prefixed checkpoint producers/evidence and formal claim; hash-verified historical freeze of .1.5.0 claim; dedicated diagnosis/staged source Knowledge and derived map; source-origin book; task/index/roadmaps/live/resume/change/notes. Other producers, admission, runtime defects and historical audit implementation remain unchanged.
+  Verification tier: `focused`
+  Focused checks: Original staged recurring fixture RED/GREEN; immutable before/after dedicated oracle under seeds0/1/42 with exact callbacks/compiler channels; actual event/argument identities and copied/foreign/transformed/nested/error controls; nine direct consumer suites plus required Phase01035; effective evidence RED, full book render, claim/Knowledge/memory/history/doctrines and diff hygiene.
+  Canonical trigger: none for one private producer source-origin hook with no public contract, format, admission or infrastructure movement; dedicated family acceptance .1.5.4 remains canonical.
+  Claim verification: `docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.1.json`
+  Reproduction: Original .1.5.0 records42 events/63 physical statement frames and zero origins per seed. Its staged rows contain8 events with independent original intervals; unchanged statements currently lose those frames at the plain split loop in StagedParseJob::try_scan_contract_ir_events.
+  Original proof: Independent before-review PASS4614 regular parent inputs, one declared fixture replacement/no runtime overlay and four guarded commands. All three original dedicated channels are intact. The138-group recurring fixture observes exactly RED129/131/132/133/138; all other groups pass. Freeze verifies101 original diagnosis hashes and changes only mode/revision.
+  Implementation: Privately collect canonical statement frames only when a recorder is active; index the actual returned statements before trim/operand parsing and record the same constructed event/args object only when raw remains original. Only StagedParseJob's producer changes; copied/foreign/transformed callbacks preserve behavior without invented origins.
+  Publication-control repair owned here: Actual mdBook text HTML contains one literal quoted unknown option and zero encoded-quote needles. The new encoded-quote corruption initially makes no change and observes RED1 at the effective-mutation assertion. Retain original producer/render/actual failure channels; change only that mutation needle, re-render and require all42 effective book RED controls. Corrected book PASS58 inputs/24 literal examples/four chapters; original37 controls remain.
+  Verification: PASS; Immutable8a64493d9 supplies4614 regular inputs, one declared fixture replacement in both epochs/one staged producer delta after and ten guarded commands. Original fixture RED5 becomes GREEN138. All seven original contracts/22 cases preserve42 events/63 frames per seed and gain only eight staged origins; complete prior callback/compiler channels remain exact under three seeds. Ten suites pass1589 groups including Phase01035;130 effective evidence controls RED. Book58/24/four chapters/42 RED and101-hash mode/revision-only diagnosis freeze pass. Initial ineffective HTML quote control and its exact repair are retained; no static policy, payload provenance, public event, carrier or admission change.
   Acceptance: Observe RED on the unchanged original dedicated oracle; privately acquire canonical original statement frames only during recording, capture the same returned event/argument objects and decline transformed/copied/foreign source. Preserve valid direct/derived text plans, literal normalized options, invalid-event validation, exclusive ownership, callback order and all complete public Toolbox channels under the original seeds. Run changed-surface/direct consumers and required action-rewriter Phase0; freeze prior live claims before mutable publication changes; commit before progressive .1.5.2.
+
+  Pre-landing continuation: If HEAD is8a64493d9 and this staged candidate is dirty, finish focused publication gates and normal hooks/commit before activating progressive .1.5.2. All runtime/reviewer/book/freeze proof is complete; canonical family acceptance remains .1.5.4.
+  Focused publication checks: Memory/handoff PASS59 lines, including healthy approved host retry after the known startup.7 sandbox setpgid warning; no PGID/lifecycle claim is made. Change/notes pressure PASS183 lines/38635 bytes and196 lines/42182 bytes within unchanged caps. Formal publisher validates111 retained bindings; existing tracked claims PASS58 records/61 claims/zero disclosed leg gaps and3 positive/16 rejected controls. New record admission uses the staged index and all normal doctrine hooks; derived Knowledge1281 facts/9958 keys and whitespace PASS.
+  Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.1 - retain staged annotation statement origins`.
+  Next: Activate progressive annotation origins .1.5.2 from clean committed HEAD. Reuse the original seven-contract cases and staged before/after channels; change only its progressive producer while preserving static operands, invalid-event fields, callbacks/objects and complete compiler channels. Recognition, canonical family acceptance, composition, membership/replacement and separately owned runtime defects retain their leaves.
+
+### `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.1` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Original138-group fixture observes exactly five staged/nested RED groups; all other groups pass. Actual LinkedSpec::Get/return_descriptor/call_spec_handler_subst/dump_parser_source and original seven-contract channels remain retained.
+- [x] **ROOT CAUSE (WHY + WHERE)** — StagedParseJob::try_scan_contract_ir_events discards canonical statement frames before event construction; payload provenance cannot identify the authored action occurrence. The original literal scalar oracle distinguishes repeated equal annotations.
+- [x] **FIX** — Collect frames only during private recording, index actual returned statements before trim/operand parsing and record the same event/argument objects for unchanged original raw. Decline copied/foreign/transformed callback coordinates.
+- [x] **ADDRESSED (verified)** — PASS138 recurring groups and eight original staged origins per seed; constructor identities, real nested contexts and exact fatal callback behavior pass.130 effective reason-specific evidence mutations observe RED.
+- [x] **NO REGRESSION** — Ten focused/direct-consumer suites pass1589 ordered groups including Phase01035; both syntax checks and complete three-seed public callback/compiler channels match originals. Other dedicated origin gaps, policies and runtime defects retain their owners.
+- [x] **LOCKSTEP** — Book58 inputs/24 examples/four chapters/42 effective controls,101 original-hash historical freeze, Knowledge/current task/index/roadmaps/live/resume and bounded histories name the same staged-only scope; original ineffective book control is retained and precisely repaired.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.2`
   Status: `pending`
@@ -3515,7 +3540,7 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 | 43.4.2.0.1.4.6 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.6` | `done` | Entry/match32;163→227 origins/RED32-GREEN128/1318 groups/168 RED; rollover next. |
 | 43.4.2.0.1.4.7 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.7` | `done` | Fresh complete Legacy-family immutable recurrence; exact canonical landing gates closure. |
 | 43.4.2.0.1.5.0 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.0` | `done` | Original7-contract/22-case/42-event/63-frame diagnosis,544 groups/108 RED and safe three-family partition. |
-| 43.4.2.0.1.5.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.1` | `pending` | Retain only the staged annotation producer origins with original text/options/callback behavior. |
+| 43.4.2.0.1.5.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.1` | `done` | OriginalRED5/GREEN138; eight staged origins/1589 consumer groups/130 RED with complete original channels. |
 | 43.4.2.0.1.6 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6` | `pending` | Complete independent producer composition source provenance before membership. |
 | 43.4.2.0.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2` | `pending` | Executable source membership with original arguments. |
 | 43.4.2.0.3 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3` | `pending` | Exact replacement preserving quoted twins and genuine order. |
@@ -3782,3 +3807,5 @@ September27 `.1.1.1`: seven neutral/structural checks, 34 ledger source-path/con
   before ownership existed.
 - `2026-07-30`: ADR `0064`, the detailed program, Knowledge Map, roadmaps/live architecture, and mdBook align; full
   signoff passes without behavior change. `.0` is done and `.1+` remains unscheduled behind callable parity.
+
+- `2026-10-06`: .1.5.1 retains staged statement origins and closes originalRED5/GREEN138/1589 groups/130 evidence controls; progressive .1.5.2 follows clean landing.

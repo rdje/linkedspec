@@ -12,6 +12,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-10-06 — Staged statement origins preserve existing annotation policy (.1.5.1)
+
+The private staged path retains canonical original statement frames before trim and operand callbacks, then records the actual constructor event/argument object. Public events, direct/derived text plans, normalized options and invalid validation remain exact; copied/foreign/changed raw declines invented coordinates. Constructor/nested/error fixture proof complements dispatcher identity. Complete original seven-contract compiler/callback channels distinguish compatibility from new eight-origin counts. The first book corruption used encoded quotes absent from actual HTML; retain its RED and change only the one literal needle, preserving all prior controls. Runtime4614/RED5-GREEN138/1589 groups/130 RED; book58/24/four/42; prior101 hashes freeze mode/revision only. See docs/knowledge/perl-staged-annotation-statement-origins.md.
+
 ## 2026-10-06 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.0: dedicated statement ownership
 
 Staged payload provenance is distinct from authored action-event provenance. The original three scanner owners have seven dedicated contracts and no private recorder calls; existing canonical physical frames can authorize their unchanged whole statements. Preserve malformed operands/options for policy rejection, actual dispatcher-returned references and full callback/compiler channels. The retained diagnosis owns .1 staged, .2 progressive, .3 recognition/observation and .4 canonical acceptance; no production change or existing runtime-defect closure. Runtime4593+3/22/42/63/0 and544 groups/108 RED; book58/22/four/37; prior Legacy103 hashes freeze mode/revision only.

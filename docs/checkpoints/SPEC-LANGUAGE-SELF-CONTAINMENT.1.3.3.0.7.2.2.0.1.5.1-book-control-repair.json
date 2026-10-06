@@ -1,0 +1,27 @@
+{
+  "command": [
+    "bash",
+    "tools/run_python_project_data.sh",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.1-book.py",
+    "--review"
+  ],
+  "exit": 1,
+  "stdout": {
+    "encoding": "gzip-base64",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "data": "H4sIAAAAAAAC/wMAAAAAAAAAAAA="
+  },
+  "stderr": {
+    "encoding": "gzip-base64",
+    "bytes": 592,
+    "sha256": "05957f5c0f6f903da1186f7f407fb9d5f70b8f7995c6ad0f89a3798b030d95f1",
+    "data": "H4sIAAAAAAAC/82OQUvDQBCF7/0VYy9NodltIyJUK4Q2LYJGIdVjYTuZtks2u2F3I/Tib3cTQQ/iyYtvLm+Wt/O+rRVIe4EVRLVxHiwhaQ8olAIlnB/PBwBrqQiG/NWotibHi2LFVwaD197xo/Snds+V1BWVriHkpUHH8URYNUZ2keI5W8YPab55STdZXGQP63j5lG/T+/wxy7dsxi7DTNk1S8JMw37FZvHemIo15+EEwmmCJEkmIDXc1qZsFd0FLIBaSB2Ne/setNv9F9jZtIft+Ho6FLqUpfC0QNOcWUnUdCay1BjrxzeAJ6GPFH3lwpNwjqz//goXC/jMT2BEhwOhl28EXTWgsbZtvDR61Pf9QbufGqQ9SrieWWvsHH5tH3wAWozz/1ACAAA="
+  },
+  "before_sha256": "3bcaa0e0f755b2232a1c1504ca3e25c1d6b7bba2d590472d9874cdfcd3a90da4",
+  "after_sha256": "d06bc18703a9463b7f04dd39bb494f6c232a81271afb068185c976f7a5f55f74",
+  "literal_needles": 1,
+  "escaped_needles": 0,
+  "instrument_sha256": "cc49d5a0983a961043f939e8042cb1c0bbb7a481c2529cb2898ee31fee891dc7",
+  "scope": "One new book corruption used encoded quotes absent from actual mdBook text HTML; preserve RED and change only its needle to the single actual literal. No book/runtime/oracle requirement is weakened."
+}

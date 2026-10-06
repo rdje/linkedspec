@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-10-06 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.1 - retain staged annotation statement origins
+
+Immutable8a64493d9 supplies4614 regular inputs, one declared fixture replacement in both epochs/one staged producer delta after and ten guarded commands. Original fixture RED5 becomes GREEN138. All seven original contracts/22 cases preserve42 events/63 frames per seed and gain only eight staged origins; complete prior callback/compiler channels remain exact under three seeds. Ten suites pass1589 groups including Phase01035;130 effective evidence controls RED. Book58/24/four chapters/42 RED and101-hash mode/revision-only diagnosis freeze pass. Initial ineffective HTML quote control and its exact repair are retained; no static policy, payload provenance, public event, carrier or admission change. Next: progressive .1.5.2 after clean landing.
+
 ## 2026-10-06 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.0 - diagnose dedicated source producers
 
 Immutable3482a5d22 diagnosis retains4593 regular Git inputs/three authored overlays/four guarded commands. Seven dedicated contracts cover22 literal cases/42 events/63 statement frames and zero event-source origins per seed. Actual dispatcher array/event/argument references and complete callback/Toolbox channels agree under three seeds; four compiler-construction examples preserve dedicated nodes/constructors. Nine unchanged suites pass544 groups;108 effective evidence controls RED. Book58/22/four chapters/37 RED and103-hash mode/revision-only Legacy claim freeze pass. No production/spec/standard-test/policy/format/admission change; three implementation families and canonical acceptance are scheduled. Next: .1.5.1 staged origins; current routing corrected without changing runtime behavior.

@@ -1,6 +1,6 @@
 ---
 id: perl-dedicated-producer-source-diagnosis
-title: Seven dedicated annotation producers still lack private event-source origins
+title: Original diagnosis isolates seven dedicated annotation source-origin gaps
 answers:
   - "which staged progressive and recognition producers lack private source origins"
   - "how are dedicated annotation source producers partitioned for repair"
@@ -8,21 +8,21 @@ answers:
   - "does staged payload provenance already provide authored action event provenance"
   - "where are original dedicated scanner literals and callbacks retained"
 date: 2026-10-06
-status: original diagnosis verified at immutable 3482a5d22; implementation remains owned
+status: historical original diagnosis verified at3482a5d22; staged repair .1.5.1 verified
 tags: [perl, actionir, source-provenance, staged, progressive, recognition]
 evidence: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.0 retains4593 regular committed inputs plus three authored overlays/four guarded commands. Seven original dedicated contracts cover22 cases/42 events/63 statement frames and zero event-source origins per seed. Actual dispatcher-returned array/event/argument identities, complete callback channels and four Toolbox compiler-construction cases agree under three seeds. Nine unchanged suites pass544 groups;108 effective reason-specific evidence controls reject."
 reverify:
-  - "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.0-review.py"
-  - "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.0-book.py --review"
+  - "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.1-review.py"
+  - "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.1-book.py --review"
 ---
 
 # Dedicated statement ownership is a separate source channel
 
 The immutable diagnosis inventories StagedParseJob, ProgressiveSpanDispatch and
 RecognitionTransactionRules: one staged annotation, one progressive annotation,
-recursive observation and four transaction forms. These scanners use the ordinary
-statement split callback and return their dedicated events without invoking the
-private source recorder. Staged payload provenance describes parsed input text;
+recursive observation and four transaction forms. At that immutable original boundary these scanners use the ordinary statement
+split callback and return their dedicated events without invoking the private
+source recorder. Staged payload provenance describes parsed input text;
 it does not supply the authored action statement's event origin.
 
 The canonical splitter already supplies exact physical statement frames. Independent
@@ -56,3 +56,8 @@ tree; do not treat a current-file hash mismatch as a historical runtime defect.
 Executable quoted/comment membership, replacement, all-producer composition,
 existing token-order/resource/restoration/marker-identity defects and global audits
 retain their separate task owners. No new helper, event field or admission is claimed.
+
+The staged repair [[perl-staged-annotation-statement-origins]] owns the current
+implementation and explicit original/repaired input trees. Progressive and
+recognition repairs remain separate. The reverify commands above review that
+controlled comparison and current teaching, not a new all-zero diagnosis.
