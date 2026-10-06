@@ -1,10 +1,10 @@
 # MEMORY
 
-- activation_commit: `b2156813fffed53622e640583a46a4ca94186a08` — clean nested unknown-escape activation.
-- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1.1 - preserve nested boundary call spelling`.
-- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1.1` (done) — nested boundary lexical repair verified; anonymous origins next.
-- next_action: Activate anonymous-capture provenance .1.4.2 from clean committed HEAD; retain all26 original contracts/public channels and exact own coordinates before callbacks. Remaining producer families, quoted/comment membership, replacement and audits stay owned.
-- in_flight_uncommitted: none — intended clean focused landing; all required runtime/review/book jobs completed.
+- activation_commit: `d52add3e5e070b243eb3a2a532d061b51994a36a` — clean anonymous-capture source activation.
+- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.2 - retain anonymous capture source origins`.
+- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.3` (pending activation) — original17 named capture producers.
+- next_action: Activate named-capture provenance .1.4.3 from clean committed HEAD; retain all17 original contracts, mark argument order, exact own coordinates and public channels. Remaining producer families, quoted/comment membership, replacement and audits stay owned.
+- in_flight_uncommitted: None; original/repaired immutable captures, review, rendered book and claim complete. No required job remains.
 - blockers: No access/decision blocker. Matches and attached/marker/value/null/while executors are repaired; control parent/order and raw-expression reporting are reconciled; quoted/comment readiness .7.2/.3 precedes dispatcher/full execution. Other startup repairs remain separate.
   Wrapper startup .7 remains open; recovery/purge stay prohibited.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the

@@ -1,0 +1,74 @@
+{
+  "book_inputs": 58,
+  "rendered_examples": 5,
+  "rendered_sections": 3,
+  "controls": [
+    {
+      "name": "failed render",
+      "rejected": true,
+      "reason": "complete actual render"
+    },
+    {
+      "name": "missing guard",
+      "rejected": true,
+      "reason": "book input guards"
+    },
+    {
+      "name": "forged instrument",
+      "rejected": true,
+      "reason": "actual book instrument"
+    },
+    {
+      "name": "forged channel",
+      "rejected": true,
+      "reason": "book channel bytes"
+    },
+    {
+      "name": "missing examples",
+      "rejected": true,
+      "reason": "original rendered boundary examples"
+    },
+    {
+      "name": "missing label teaching",
+      "rejected": true,
+      "reason": "whole quoted label teaching"
+    },
+    {
+      "name": "hidden nested behavior",
+      "rejected": true,
+      "reason": "nested unknown-escape teaching"
+    },
+    {
+      "name": "hidden backend scope",
+      "rejected": true,
+      "reason": "explicit cross-backend scope"
+    },
+    {
+      "name": "missing catalog contract",
+      "rejected": true,
+      "reason": "public catalog quoted-label contract"
+    },
+    {
+      "name": "missing mechanism",
+      "rejected": true,
+      "reason": "structural lexical authority teaching"
+    },
+    {
+      "name": "hidden quoted source debt",
+      "rejected": true,
+      "reason": "explicit quoted-source repair owner"
+    },
+    {
+      "name": "missing anonymous examples",
+      "rejected": true,
+      "reason": "original anonymous source examples"
+    },
+    {
+      "name": "missing anonymous producer authority",
+      "rejected": true,
+      "reason": "anonymous original producer authority"
+    }
+  ],
+  "complete": true,
+  "instrument_sha256": "bb53f5151f571d01dc04a937eb87c558ad251f6e2de37c3d35911f1367e5904a"
+}

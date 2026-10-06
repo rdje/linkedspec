@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Full PNT: atomic quoted labels and nested boundary lexical serialization are verified; anonymous capture source origins follow. Quoted executable membership remains owned.
+Full PNT: call and anonymous capture source origins plus quoted/nested boundary repairs are verified; named capture follows. Executable quoted membership remains owned.
 
 ## Latest Completed Slice
 
-`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1.1` — Boundary lexical serialization validates complete decoded atoms against typed args. 4368 originals/three overlays/four exact deltas retain28 cases (17 public/11 AST), seven runtime repairs and three seeds/eight guarded commands. RED11/GREEN28; ten suites1198 groups/Phase01035 and39 evidence RED pass. Book58 inputs/three examples/three chapters/11 RED and33-hash historical freeze pass. Five grammar exclusions and quoted-source membership P1 .7.2.2 remain explicit.
+`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.2` — All26 anonymous regex producers now snapshot original coordinates before argument work and retain actual event/argument identities. 4394 immutable originals/three overlays/eight commands preserve112 contracts/115 cases/227 events across three seeds; private origins18→71. Original RED27/GREEN50; ten suites1225 groups including Phase01035 and159 evidence RED pass. Book58 inputs/five examples/three chapters/13 RED and43-hash historical freeze pass. Public compiler/callback channels and original grammar remain byte-exact; quoted executable membership remains separately owned.
 
 ## Next Action
 
-Activate anonymous-capture provenance .1.4.2 from clean committed HEAD; retain all26 original contracts/public channels and exact own coordinates before callbacks. Remaining producer families, quoted/comment membership, replacement and audits stay owned.
+Activate named-capture provenance .1.4.3 from clean committed HEAD; retain all17 original contracts, mark argument order, exact own coordinates and public channels. Remaining producer families, quoted/comment membership, replacement and audits stay owned.
 
 ## Recent Completions
 
+- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.2` — anonymous26;18→71 origins/RED27-GREEN50/1225 groups/159 RED.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1.1` — nested lexical repair; RED11/GREEN28/1198 groups/39 RED; recurring Phase01035.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1` — quoted atoms; RED9/GREEN18/1169 groups/36 RED; immediate nested escape repair remains owned.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.1` — seven hooks; final RED9/GREEN23,2→18 origins and1147 consumers/140 RED.
@@ -29,7 +30,6 @@ Activate anonymous-capture provenance .1.4.2 from clean committed HEAD; retain a
 - `2026-10-05` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.2` retains eight statement frame contracts/RED10-GREEN16/1801 groups/207 origins and corrected returned-reference proof.
 - `2026-10-05` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.1.1` corrects normalized split metadata/RED5-GREEN8/722 guards behind exact canonical landing.
 - `2026-10-05` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.1.0` retains ten pipeline regex hooks/RED10-GREEN13/1748 groups/99 origins.
-- `2026-10-05` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.0` retains original19-contract pipeline diagnosis/701 groups and owns split-source repair.
 
 ## History
 

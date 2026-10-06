@@ -12,7 +12,7 @@ tags: [perl, actionir, legacy, source-provenance, callbacks, event-identity]
 evidence: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.1 owns seven original regex source hooks and preserves return_general. The standard helper-source fixture reuses independently authored original diagnosis intervals/arguments and tests selected constructor/returned/argument identities, callback effects, Unicode/CRLF repeats and two exclusion controls."
 reverify:
   - "bash tools/project_data_run.sh prove -Iperl t/actionir_helper_source_provenance.t"
-  - "Full .1.4.1 review is historical at da5c8d1f66732f0989cecca745557005fe44e7c1; current quoted repair recurrence includes the unchanged call-source consumer under .1.4.0.1-review.py."
+  - "Full .1.4.1 review is historical at da5c8d1f66732f0989cecca745557005fe44e7c1; current .1.4.2 anonymous recurrence preserves this call-source family."
 ---
 
 # Selected original Legacy call/return/push occurrences
@@ -32,7 +32,7 @@ Repeated equal raw text has independent scalar intervals, including Unicode
 prefixes and CRLF. The public event fields gain no source metadata.
 
 These are internal compatibility IDs, not new public helper admission. Other
-Legacy source families, quoted boundary-token repair, executable membership,
+Legacy source families, executable membership,
 comments, replacement and global audits retain their separate task owners.
 
 The exact clean0083dc7 boundary supplies4318 regular Git originals, a declared
@@ -51,4 +51,4 @@ scope, producer/input/channel identities and exact replay boundaries.
 The later quoted-label repair changes only the boundary token decoder/imports;
 call/return/push hooks and callbacks remain exact. The complete original
 112-contract recurrence above is frozen at da5c8d; current quoted labels and the
-separate nested unknown-escape owner are in [[perl-quoted-boundary-labels]].
+verified nested unknown-escape repair are in [[perl-quoted-boundary-labels]].

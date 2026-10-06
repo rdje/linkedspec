@@ -45,6 +45,7 @@ Successor .1.4.0.1.1 restores this existing Perl behavior by preserving only a
 fully recognized call spelling whose decoded atoms and count agree with typed
 arguments. Read [the serializer fact](perl-boundary-call-lexical-serialization.md).
 The standard quoted fixture enables both runtime assertions, and recurring Phase0
-includes public comma/assignment/return/hash controls. Neither leaf adds boundary
-source sidecars or admits quoted executable membership; .7.2.2 still owns that
-separate failure and .1.4.2 owns anonymous-capture provenance.
+includes public comma/assignment/return/hash controls. Those repairs add no coordinate authority or executable quoted membership.
+Successor .1.4.2 owns original anonymous/boundary producer sidecars; read
+[anonymous origins](perl-legacy-anonymous-capture-source-origins.md).
+The .7.2.2 quoted-source execution failure remains separately owned.

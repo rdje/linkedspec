@@ -405,8 +405,34 @@ push(items, true); push(items, target)
 
 The public event fields, callback effects, substitution, descriptors and parser
 source remain unchanged. These internal compatibility IDs admit no new helper
-spelling. Anonymous/named capture, mark, cursor/input and entry/match origins are
-subsequent work; the quoted boundary-token repair remains separately owned.
+spelling.
+
+Anonymous capture producers also retain their own original scalar occurrences.
+The 26 internal contracts cover capture macros, rule-label capture, zero-argument
+slice/rest/start/position reads, take aliases and structural-boundary capture.
+Each producer snapshots its regex bounds before constructing arguments or decoding
+boundary labels. The private recorder retains the original event and argument
+objects; the public event fields and complete compiler/callback channels stay the
+same. Both repeated macro occurrences keep separate frames:
+
+```text
+$CAPTURE; $CAPTURE
+# original scalar intervals: [0, 8), [10, 18)
+```
+
+Aliases retain the spelling that actually appeared in the source:
+
+```text
+capture_take(); capture_take()
+# capture_take_slice dispatcher; scalar intervals: [0, 14), [16, 30)
+```
+
+A quoted comma inside `capture_until_boundary("a,b", end)` remains one label;
+its source origin covers the complete original call before quote decoding. The
+nested lexical serializer described above still supplies no coordinate authority.
+These private origins preserve the original syntactic population, including
+helper-looking quoted data: executable membership has not yet been admitted.
+Named capture, mark, cursor/input and entry/match origins remain subsequent work.
 
 ### Original method argument boundaries
 

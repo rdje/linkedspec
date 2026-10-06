@@ -12,6 +12,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-10-06 — Anonymous producer bounds and original spelling (.1.4.2)
+
+Save each existing regex match interval immediately, before boundary-label decoding or constructor work. Pass the original event/argument objects through the existing private recorder. $CAPTURE includes its dollar sign; CAPTURE_IF() retains the original regex interval without a preceding dollar. capture_take_slice is an internal dispatcher ID matching capture_take(), so its source spelling stays physical. Full source inverse and unchanged all112 public/compiler channels prove this bounded change. Read docs/knowledge/perl-legacy-anonymous-capture-source-origins.md; named17 is the next owned family.
+
 ## 2026-10-06 — Lexical spelling versus source authority (.1.4.0.1.1)
 
 AST and boundary atoms retain unknown escapes, but value-source string reconstruction doubles backslashes before the later compatibility helper lookup. Preserve lexical call spelling only with recognized grammar and complete typed atom agreement, including empty quoted slots. A new typed emitter would admit dropped generic CSV slots, so it was rejected before implementation. No coordinate authority is inferred; callbacks and ordinary strings retain their existing paths. Quoted-marker data still fails generated compilation and is owned by executable membership .7.2.2. Read docs/knowledge/perl-boundary-call-lexical-serialization.md and the retained three-seed/RED11/GREEN28 proof.

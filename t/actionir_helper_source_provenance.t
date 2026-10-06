@@ -211,4 +211,63 @@ for my $case (grep { $legacy_ids{$_->{id}} } @$legacy_cases) {
     };
 }
 
+# Current anonymous fixtures preserve the immutable original scalar oracle and
+# incorporate only the already verified whole quoted-label correction.
+open my $anonymous_file, '<:raw', 'docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.2-cases.json' or die $!;
+my $anonymous_cases = $json->decode(do { local $/; <$anonymous_file> });
+close $anonymous_file or die $!;
+
+for my $case (grep { $_->{family} eq 'anonymous-capture' } @$anonymous_cases) {
+    subtest 'Anonymous original producer: '.$case->{id} => sub {
+        my $contract = {id => $case->{contracts}[0]};
+        my (@public_calls, @private_calls, @constructed);
+        my $observe = sub {
+            my ($calls) = @_;
+            return {map {
+                my $key = $_;
+                ($key => sub {
+                    my $row = {callback => $key, args => $json->decode($json->encode([@_]))};
+                    push @$calls, $row;
+                    my $result = $deps->{$key}->(@_);
+                    $row->{result} = $json->decode($json->encode($result));
+                    return $result;
+                })
+            } keys %$deps};
+        };
+        my $public = LinkedSpec::ActionIR::Scanner::scan_contract_ir_events(
+            $contract, $case->{action}, $observe->(\@public_calls));
+        my $private;
+        {
+            my $recorder = \&LinkedSpec::ActionIR::ScannerCore::_record_scanned_source_event;
+            no warnings 'redefine';
+            local *LinkedSpec::ActionIR::ScannerCore::_record_scanned_source_event = sub {
+                my $event = $_[0];
+                push @constructed, [$event, $event->{args}];
+                return $recorder->(@_);
+            };
+            $private = LinkedSpec::ActionIR::ScannerCore::_scan_contract_ir_events_with_provenance(
+                $contract, $case->{action}, $observe->(\@private_calls));
+        }
+        is_deeply($public, $case->{expected_events}, 'original literal events and arguments');
+        is_deeply($private->{events}, $public, 'private scan preserves public events');
+        is_deeply(\@private_calls, \@public_calls, 'default callback effects and results stay exact');
+        my @expected = map {
+            my $index = $_;
+            {event => $case->{expected_events}[$index], source => $case->{action},
+             source_span => {start => $case->{original_spans}[$index][0], end => $case->{original_spans}[$index][1]}}
+        } 0 .. $#{$case->{expected_events}};
+        is_deeply($private->{source_origins}, \@expected, 'each selected original occurrence has its literal scalar frame');
+        is(scalar(@constructed), scalar(@expected), 'one constructor event per selected occurrence');
+        for my $index (0 .. $#{$private->{source_origins}}) {
+            my $origin = $private->{source_origins}[$index];
+            my $event = $private->{events}[$index];
+            is(refaddr($origin->{event}), refaddr($event), 'origin retains actual returned event');
+            is(refaddr($constructed[$index][0]), refaddr($event), 'origin retains actual constructor event');
+            is(refaddr($constructed[$index][1]), refaddr($event->{args}), 'original argument object survives');
+        }
+        ok(!grep({exists $_->{source_span} || exists $_->{source_origins}} @$public), 'public events gain no source fields');
+        is_deeply(private_scan($contract, 'note()'), {events => [], source_origins => []}, 'empty match gains no invented origin');
+    };
+}
+
 done_testing();

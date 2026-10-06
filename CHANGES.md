@@ -12,6 +12,11 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-10-06 — Original anonymous capture source hooks (.1.4.2)
+
+All26 anonymous regex producers now snapshot original coordinates before argument work and retain actual event/argument identities. 4394 immutable originals/three overlays/eight commands preserve112 contracts/115 cases/227 events across three seeds; private origins18→71. Original RED27/GREEN50; ten suites1225 groups including Phase01035 and159 evidence RED pass. Book58 inputs/five examples/three chapters/13 RED and43-hash historical freeze pass. Public compiler/callback channels and original grammar remain byte-exact; quoted executable membership remains separately owned. Whole-file source inverse independently restores the original Git producer bytes. No public schema or executable-membership admission changes. Canonical acceptance remains at the complete-family and push boundaries.
+
+
 ## 2026-10-06 — Nested boundary lexical serialization (.1.4.0.1.1)
 
 Preserve an original recognized boundary call only when its complete decoded atoms agree with typed arguments. Restore unknown escapes through assignment/return/hash/repeated Unicode-CRLF routes without new grammar, callback priority or ordinary string changes. Remove both skipped quoted runtime assertions and add four public recurring Phase0 cases. Boundary lexical serialization validates complete decoded atoms against typed args. 4368 originals/three overlays/four exact deltas retain28 cases (17 public/11 AST), seven runtime repairs and three seeds/eight guarded commands. RED11/GREEN28; ten suites1198 groups/Phase01035 and39 evidence RED pass. Book58 inputs/three examples/three chapters/11 RED and33-hash historical freeze pass. Five grammar exclusions and quoted-source membership P1 .7.2.2 remain explicit. Full source reconstruction and lossless public channels bind acceptance; dynamic trace clocks are the sole comparison normalization. Canonical CI remains required at family/push boundaries.
