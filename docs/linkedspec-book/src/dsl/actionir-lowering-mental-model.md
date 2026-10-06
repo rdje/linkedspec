@@ -663,8 +663,13 @@ behavior. Invalid annotations retain their original event arguments so validatio
 can reject them; attaching provenance must preserve that path.
 This diagnosis changes no static policy, recognition behavior or public event fields.
 The staged, progressive and recognition repairs preserve those boundaries and
-complete public compiler channels. Independent canonical family acceptance
-remains a separate checkpoint.
+complete public compiler channels. Complete dedicated-family validation replays all seven original contracts through
+22 literal cases from a fresh committed input tree without overlays. It preserves
+all 42 event origins, actual returned references and complete callback/compiler
+channels under the original three seeds. Constructor and custom-callback checks
+remain recurring fixture observations; the four Toolbox compiler examples build
+parsers without adding four parser executions. Canonical CI gates this family
+checkpoint; all-producer composition remains separate.
 Executable membership, precise replacement and separately owned runtime defects
 remain subsequent work.
 

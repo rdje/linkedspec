@@ -1,10 +1,10 @@
 # MEMORY
 
-- activation_commit: `34f687c09e197cf0798ed01c3c760e63a0203513` — clean recognition/observation source-origin activation.
-- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.3 - retain recognition annotation statement origins`.
-- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.4` (pending activation) — canonical dedicated-family acceptance.
-- next_action: Activate canonical dedicated-family acceptance .1.5.4 from clean committed HEAD. Replay all seven original producers through fresh immutable committed inputs without overlays; retain complete three-seed channels, constructor/callback/consumer and book proof, then exact staged canonical receipt and normal hooks before closing .1.5. All-producer composition, quoted/comment membership, precise replacement and separate runtime defects retain their owners.
-- in_flight_uncommitted: None; recognition and preserved staged/progressive channels, consumers/Phase0/component/book/freeze proof are complete; focused publication checks and normal hooks enforce this post-landing handoff.
+- activation_commit: `7dc393211a12d54d5986c8f6a5462c25615ccbc4` — clean canonical dedicated-family activation.
+- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.4 - accept complete dedicated source family`.
+- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6` (pending activation) — all-producer provenance composition.
+- next_action: Activate independent all-producer provenance composition .1.6 from clean committed HEAD. Retrieve each accepted family and original oracle; compose selected event/source/reference/callback/error/order channels and direct consumers with source-bound proof before closing private provenance .0.1. Executable quoted/comment membership, precise replacement and separately owned runtime defects remain next owners.
+- in_flight_uncommitted: None; fresh dedicated runtime/book/freeze/claim proof is complete; exact staged canonical receipt and normal hooks enforce this post-landing handoff.
 - blockers: No access/decision blocker. Matches and attached/marker/value/null/while executors are repaired; control parent/order and raw-expression reporting are reconciled; quoted/comment readiness .7.2/.3 precedes dispatcher/full execution. Other startup repairs remain separate.
   Wrapper startup .7 remains open; recovery/purge stay prohibited.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the

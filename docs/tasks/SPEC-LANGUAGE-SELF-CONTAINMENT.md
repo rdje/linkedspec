@@ -3139,11 +3139,12 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 - [x] **LOCKSTEP** — Book58/18/four chapters/31 RED and457-hash historical freeze, formal claim/Knowledge/task/frontier/roadmaps/live/resume and bounded histories name the same private scope. Further producers/membership/replacement and owned observations stay separate.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5`
-  Status: `active`
+  Status: `done`
   Goal: Complete staged/progressive/recognition source provenance.
   Dependencies: `.1.3.3.0.7.2.2.0.1.4`
   Children: `.1.5.0`, `.1.5.1`, `.1.5.2`, `.1.5.3`, `.1.5.4`; diagnosis preserves the original seven-contract partition before production edits.
   Acceptance: Use published LinkedSpec contracts and exact option/token/transaction sources; only this repository is writable and RGX/PGEN stay black boxes.
+  Closeout: Fresh immutable .1.5.4 acceptance and exact staged canonical receipt/normal hooks govern completion of all five children; all-producer .1.6 remains next.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.0`
   Status: `done`
@@ -3274,10 +3275,31 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 - [x] **LOCKSTEP** — Book58/29/four/53,122 original-hash mode/revision-only freeze, historical mode reverify/current source cards, derived Knowledge/task/index/roadmaps/live/resume and bounded histories agree. Canonical family/composition/membership/replacement and runtime defects retain owners.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.4`
-  Status: `pending`
+  Status: `done`
   Goal: Independently accept complete dedicated annotation source provenance.
   Dependencies: `.1.5.3`
   Acceptance: Fresh immutable committed producer recurrence without overlays; all seven original contracts/cases/events/statement intervals, actual references and complete callback/Toolbox channels under the original seeds. Independently effective evidence controls, all changed-surface/direct consumers, full rendered book and source-bound claims/Knowledge/continuity; exact staged canonical receipt and normal commit hooks before closing .1.5. All-producer composition .1.6, executable membership/replacement and separate runtime defects remain owned.
+
+  Activation: Clean7dc393211a12d54d5986c8f6a5462c25615ccbc4 after recognition repair; all ten hooks/post-commit pointer PASS, brief0 and no required jobs. Original seven-contract oracle and all three controlled repairs are read; fresh acceptance changes no runtime/source/test/contract/admission bytes.
+  Owned paths: Leaf-prefixed immutable committed capture/reviewer/book/freeze/claim evidence; hash-verified recognition claim historical freeze; dedicated/recognition/staged/progressive/mode/acceptance Knowledge and derived map; book/task/index/roadmaps/live/resume/change/notes. All-producer composition and separate defects retain owners.
+  Verification tier: `canonical`
+  Focused checks: Fresh immutable regular committed Git inputs with no overlays; all original seven-contract22-case42-event63-frame42-origin channels under seeds0/1/42, full preceding channel equality and actual references/callbacks; twelve unchanged direct consumers excluding Phase0 in this capture, whose mandatory execution/syntax is covered by exact staged canonical CI; effective independent original-evidence RED; full rendered book and source-bound claim/Knowledge/memory/history/doctrine/diff proof.
+  Canonical trigger: Dedicated annotation-family milestone/parent closeout .1.5; exact staged tools/run_ci_local.sh receipt plus normal hooks required before landing.
+  Claim verification: `docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.4.json`
+  Verification: PASS; Fresh immutable7dc393211 supplies4692 regular committed Git inputs/no overlays/four guarded commands. All seven original dedicated contracts retain22 cases/42 events/63 physical frames/42 origins per seed, actual dispatcher references and full preceding compiler/callback/origin channels under seeds0/1/42. Twelve unchanged direct consumers pass636 ordered groups;184 effective evidence controls RED. Book58/29/four chapters/54 RED and120-hash mode/revision-only recognition freeze pass. Exact staged canonical receipt gates .1.5 closeout, including required Phase01035; no production/spec/test/policy/admission changes.
+  Pre-landing continuation: If HEAD is7dc393211 and this candidate is dirty, finish exact staged canonical CI and normal hooks/commit. Fresh runtime/reviewer/book/freeze/claim proof is complete; no parent or all-producer acceptance may bypass that receipt.
+  Publication checks: Actual publisher binds111 inputs; memory/handoff PASS59 lines, derived Knowledge1285 facts/9980 keys, whitespace and unchanged history caps PASS195 lines/41451 bytes and208 lines/45848 bytes. Exact staged canonical proof remains required; do not refresh measured producer inputs after that receipt.
+  Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.4 - accept complete dedicated source family`.
+  Next: Activate independent all-producer provenance composition .1.6 from clean committed HEAD. Retrieve each accepted family and original oracle; compose selected event/source/reference/callback/error/order channels and direct consumers with source-bound proof before closing private provenance .0.1. Executable quoted/comment membership, precise replacement and separately owned runtime defects remain next owners.
+
+### `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.4` Acceptance Checklist
+
+- [x] **REPRODUCE / ISSUE** — Original seven-contract diagnosis and all three repairs supply unchanged literal source/argument/scalar and full-channel oracles; fresh committed recurrence preserves the complete22-case population.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Private origins require actual producer occurrence frames, not equal-raw searching. Dedicated whole-statement hooks preserve constructor/argument ownership and invalid-event validation.
+- [x] **FIX** — Acceptance changes no production/spec/standard-test bytes; retain all4692 original regular Git inputs with no overlays and four actual guarded commands.
+- [x] **ADDRESSED (verified)** — All42 event origins/63 statement frames and complete three-seed channels equal the preceding proof;184 effective reason-specific evidence controls RED.
+- [x] **NO REGRESSION** — Twelve unchanged direct consumers pass636 complete ordered groups with no nested failures. Required Phase0 and broader milestone proof run in exact staged canonical CI; receipt plus normal hooks enforce landing.
+- [x] **LOCKSTEP** — Book58/29/four/54,120 original-hash historical freeze, source-bound claim/Knowledge/task/index/roadmaps/live/resume and bounded histories agree. Only dedicated parent .1.5 closes; all-producer .1.6 and membership/replacement/runtime owners remain.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6`
   Status: `pending`
@@ -3595,7 +3617,7 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 | 43.4.2.0.1.5.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.1` | `done` | OriginalRED5/GREEN138; eight staged origins/1589 consumer groups/130 RED with complete original channels. |
 | 43.4.2.0.1.5.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.2` | `done` | OriginalRED5/GREEN148;16 combined origins/1608 groups/153 RED and exact actual-root mode repair. |
 | 43.4.2.0.1.5.3 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.3` | `done` | OriginalRED18/GREEN191;42 dedicated origins/1671 groups/200 RED; canonical acceptance next. |
-| 43.4.2.0.1.5.4 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.4` | `pending` | Fresh immutable complete dedicated-family recurrence and exact canonical acceptance before parent closure. |
+| 43.4.2.0.1.5.4 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.4` | `done` | Fresh immutable complete dedicated-family recurrence and exact canonical acceptance before parent closure. |
 | 43.4.2.0.1.6 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6` | `pending` | Complete independent producer composition source provenance before membership. |
 | 43.4.2.0.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2` | `pending` | Executable source membership with original arguments. |
 | 43.4.2.0.3 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3` | `pending` | Exact replacement preserving quoted twins and genuine order. |
@@ -3638,6 +3660,8 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 - None for `.1.1`. The September27 clean prioritization supersedes the earlier callable-first schedule. Format implementation and the optional frontend remain gated by their own prerequisites.
 
 ## Verification Log
+
+October6 `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.4`: Fresh immutable7dc393211 supplies4692 regular committed Git inputs/no overlays/four guarded commands. All seven original dedicated contracts retain22 cases/42 events/63 physical frames/42 origins per seed, actual dispatcher references and full preceding compiler/callback/origin channels under seeds0/1/42. Twelve unchanged direct consumers pass636 ordered groups;184 effective evidence controls RED. Book58/29/four chapters/54 RED and120-hash mode/revision-only recognition freeze pass. Exact staged canonical receipt gates .1.5 closeout, including required Phase01035; no production/spec/test/policy/admission changes.
 
 October6 `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.3`: Immutable34f687c09 supplies4668 regular inputs, one declared fixture replacement per epoch/one recognition-family owner delta after and ten guarded runtime commands. OriginalRED18 becomes GREEN191. Seven original contracts/22 cases preserve42 events/63 frames per seed and retain16 staged/progressive plus26 new recognition/observation origins, for42 total. Complete preceding staged/progressive and public callback/compiler channels remain exact under three seeds. Thirteen suites pass1671 groups including Phase01035;200 effective evidence controls RED. Actual-root recognition component PASS4668 guarded inputs/five retained byte deltas; separate filesystem/Git modes remain unchanged. Book58/29/four chapters/53 RED and122-hash mode/revision-only progressive freeze pass. No static policy/runtime/public event/carrier/admission change.
 
@@ -3724,7 +3748,8 @@ September27 `.1.1.1`: seven neutral/structural checks, 34 ledger source-path/con
 
 ## Commit Log
 
-- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.3 - retain recognition annotation statement origins` — original/repaired recognition proof plus retained staged/progressive channels; normal focused hooks govern landing.
+- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.4 - accept complete dedicated source family` — exact staged canonical receipt and normal hooks gate dedicated-family closure.
+- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.3 - retain recognition annotation statement origins` — committed7dc393211; all ten doctrines and first-parent pointer PASS.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.0 - diagnose dedicated source producers` — original dedicated diagnosis and safe repair partition; normal focused hooks govern landing.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.1 - retain staged annotation statement origins` — committedef2dd019b; all ten doctrines and first-parent pointer PASS.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.2 - retain progressive annotation statement origins` — committed34f687c09; all ten doctrines and first-parent pointer PASS.
@@ -3873,3 +3898,5 @@ September27 `.1.1.1`: seven neutral/structural checks, 34 ledger source-path/con
 - `2026-10-06`: .1.5.2 retains progressive origins alongside staged proof; RED5/GREEN148/1608 groups/153 RED and exact actual-root mode repair; recognition .1.5.3 follows clean landing.
 
 - `2026-10-06`: .1.5.3 retains five recognition/observation origins; RED18/GREEN191/42 total/1671 groups/200 RED. Canonical .1.5.4 follows clean landing.
+
+- `2026-10-06`: .1.5.4 fresh immutable dedicated recurrence4692/no overlays/42 origins/636 groups/184 RED; exact canonical receipt gates dedicated parent closure before .1.6.

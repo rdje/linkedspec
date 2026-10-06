@@ -12,8 +12,8 @@ status: historical original diagnosis verified at3482a5d22; all three implementa
 tags: [perl, actionir, source-provenance, staged, progressive, recognition]
 evidence: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.0 retains4593 regular committed inputs plus three authored overlays/four guarded commands. Seven original dedicated contracts cover22 cases/42 events/63 statement frames and zero event-source origins per seed. Actual dispatcher-returned array/event/argument identities, complete callback channels and four Toolbox compiler-construction cases agree under three seeds. Nine unchanged suites pass544 groups;108 effective reason-specific evidence controls reject."
 reverify:
-  - "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.3-review.py"
-  - "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.3-book.py --review"
+  - "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.4-review.py"
+  - "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.4-book.py --review"
 ---
 
 # Dedicated statement ownership is a separate source channel
@@ -64,3 +64,8 @@ repair [[perl-progressive-annotation-statement-origins]] retains that staged pro
 The reverify commands above review that controlled comparison and current
 teaching, not a new all-zero diagnosis. The original dated measurement remains
 historical rather than refreshed.
+
+[[perl-dedicated-family-source-acceptance]] now owns the fresh committed
+no-overlay recurrence and current teaching. The commands above review that
+complete controlled population; this original implementation measurement stays
+historical rather than refreshed. Canonical receipt enforces milestone landing.

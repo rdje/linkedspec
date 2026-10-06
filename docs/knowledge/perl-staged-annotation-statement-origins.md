@@ -13,8 +13,8 @@ status: staged original/repaired proof verified under .1.5.1; canonical family a
 tags: [perl, actionir, staged, source-provenance, statement-frames]
 evidence: "Immutable8a64493d9 supplies4614 regular inputs, one declared fixture replacement in both epochs/one staged producer delta after and ten guarded commands. Original fixture RED5 becomes GREEN138. All seven original contracts/22 cases preserve42 events/63 frames per seed and gain only eight staged origins; complete prior callback/compiler channels remain exact under three seeds. Ten suites pass1589 groups including Phase01035;130 effective evidence controls RED. Book58/24/four chapters/42 RED and101-hash mode/revision-only diagnosis freeze pass. Initial ineffective HTML quote control and its exact repair are retained; no static policy, payload provenance, public event, carrier or admission change."
 reverify:
-  - "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.3-review.py"
-  - "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.3-book.py --review"
+  - "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.4-review.py"
+  - "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.4-book.py --review"
 ---
 
 The private recording path obtains canonical statement frames through the existing
@@ -58,3 +58,8 @@ The recognition repair [[perl-recognition-annotation-statement-origins]] retains
 complete preceding channels after the shared fixture evolves. The commands above
 review that controlled comparison and current teaching; the original dated
 measurement remains historical rather than refreshed.
+
+[[perl-dedicated-family-source-acceptance]] now owns the fresh committed
+no-overlay recurrence and current teaching. The commands above review that
+complete controlled population; this original implementation measurement stays
+historical rather than refreshed. Canonical receipt enforces milestone landing.

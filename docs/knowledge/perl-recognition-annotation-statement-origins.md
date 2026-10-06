@@ -14,8 +14,8 @@ status: recognition/observation original-repaired proof verified; canonical fami
 tags: [perl, actionir, recognition, observation, source-provenance, statement-frames]
 evidence: "Immutable34f687c09 supplies4668 regular inputs, one declared fixture replacement per epoch/one recognition-family owner delta after and ten guarded runtime commands. OriginalRED18 becomes GREEN191. Seven original contracts/22 cases preserve42 events/63 frames per seed and retain16 staged/progressive plus26 new recognition/observation origins, for42 total. Complete preceding staged/progressive and public callback/compiler channels remain exact under three seeds. Thirteen suites pass1671 groups including Phase01035;200 effective evidence controls RED. Actual-root recognition component PASS4668 guarded inputs/five retained byte deltas; separate filesystem/Git modes remain unchanged. Book58/29/four chapters/53 RED and122-hash mode/revision-only progressive freeze pass. No static policy/runtime/public event/carrier/admission change."
 reverify:
-  - "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.3-review.py"
-  - "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.3-book.py --review"
+  - "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.4-review.py"
+  - "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.4-book.py --review"
 ---
 
 RecognitionTransactionRules obtains canonical frames through its existing split
@@ -58,3 +58,8 @@ repairs remain owned; recovery/purge remain prohibited. Source origins add no
 public event fields, policy, runtime, lowering, carrier, admission or dependency
 change. All project data is repository-local; necessary OS/toolchain prerequisites
 are read-only. RGX/PGEN remain black boxes and other repositories read-only.
+
+[[perl-dedicated-family-source-acceptance]] now owns the fresh committed
+no-overlay recurrence and current teaching. The commands above review that
+complete controlled population; this original implementation measurement stays
+historical rather than refreshed. Canonical receipt enforces milestone landing.

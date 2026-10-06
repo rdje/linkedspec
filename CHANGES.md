@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-10-06 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.4 - accept complete dedicated source family
+
+Fresh immutable7dc393211 supplies4692 regular committed Git inputs/no overlays/four guarded commands. All seven original dedicated contracts retain22 cases/42 events/63 physical frames/42 origins per seed, actual dispatcher references and full preceding compiler/callback/origin channels under seeds0/1/42. Twelve unchanged direct consumers pass636 ordered groups;184 effective evidence controls RED. Book58/29/four chapters/54 RED and120-hash mode/revision-only recognition freeze pass. Exact staged canonical receipt gates .1.5 closeout, including required Phase01035; no production/spec/test/policy/admission changes. Next: .1.6 after exact canonical landing.
+
 ## 2026-10-06 — SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.3 - retain recognition annotation statement origins
 
 Immutable34f687c09 supplies4668 regular inputs, one declared fixture replacement per epoch/one recognition-family owner delta after and ten guarded runtime commands. OriginalRED18 becomes GREEN191. Seven original contracts/22 cases preserve42 events/63 frames per seed and retain16 staged/progressive plus26 new recognition/observation origins, for42 total. Complete preceding staged/progressive and public callback/compiler channels remain exact under three seeds. Thirteen suites pass1671 groups including Phase01035;200 effective evidence controls RED. Actual-root recognition component PASS4668 guarded inputs/five retained byte deltas; separate filesystem/Git modes remain unchanged. Book58/29/four chapters/53 RED and122-hash mode/revision-only progressive freeze pass. No static policy/runtime/public event/carrier/admission change. Next: canonical dedicated-family acceptance .1.5.4 after clean landing.
