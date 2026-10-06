@@ -12,6 +12,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 
 
 
+## 2026-10-06 — Named symbolic marks and strict stream boundaries (.1.4.3)
+
+Keep one-mark aliases and two-mark start/end order at their original regex constructor. The named boundary bridge shares the same source-frame rule; no equal-text search or runtime mark storage change follows. Retain the initial setpgid92090 warning and reject that report under the strict outer-stderr oracle, then replay original inputs without stream filtering. Existing startup .7 owns group establishment/liveness; original PGID is unmeasured and recovery/purge remain prohibited. Correct the historical index34 control label scope with explicit original named24/current mark51/reversed two-mark47 denials; all prior proof bytes remain exact. Read docs/knowledge/perl-legacy-named-capture-source-origins.md.
+
 ## 2026-10-06 — Anonymous producer bounds and original spelling (.1.4.2)
 
 Save each existing regex match interval immediately, before boundary-label decoding or constructor work. Pass the original event/argument objects through the existing private recorder. $CAPTURE includes its dollar sign; CAPTURE_IF() retains the original regex interval without a preceding dollar. capture_take_slice is an internal dispatcher ID matching capture_take(), so its source spelling stays physical. Full source inverse and unchanged all112 public/compiler channels prove this bounded change. Read docs/knowledge/perl-legacy-anonymous-capture-source-origins.md; named17 is the next owned family.

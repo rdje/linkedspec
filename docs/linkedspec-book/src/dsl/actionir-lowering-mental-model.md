@@ -432,7 +432,28 @@ its source origin covers the complete original call before quote decoding. The
 nested lexical serializer described above still supplies no coordinate authority.
 These private origins preserve the original syntactic population, including
 helper-looking quoted data: executable membership has not yet been admitted.
-Named capture, mark, cursor/input and entry/match origins remain subsequent work.
+Named captures preserve their original symbolic mark arguments and start/end order.
+Their17 producers save physical match coordinates and keep the same event and
+argument objects, including the bridge that restores the anonymous capture
+boundary from a named mark. One-mark take forms retain their actual spelling;
+`capture_take(edge)` differs from anonymous `capture_take()` by its existing
+argument grammar. Two-mark readers retain the first mark as `start` and the
+second as `end`:
+
+```text
+capture_from(edge); capture_from(edge)
+# mark: edge; scalar intervals: [0, 18), [20, 38)
+```
+
+```text
+capture_between(first, second); capture_between(first, second)
+# start: first; end: second; scalar intervals: [0, 30), [32, 62)
+```
+
+These private source frames preserve the original syntactic population and public
+compiler output. They add no executable quoted/comment membership authority and
+change no runtime mark storage or capture semantics. Mark controls, cursor/input
+and entry/match origins remain subsequent work.
 
 ### Original method argument boundaries
 

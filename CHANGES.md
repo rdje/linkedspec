@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 
 
+## 2026-10-06 — Original named capture source hooks (.1.4.3)
+
+All17 named capture regex producers preserve symbolic mark/start-end order, original spelling, scalar bounds and actual event/argument identities. 4415 immutable originals/three overlays/eight accepted commands retain112 contracts/115 cases/227 events under three seeds; private origins71→105. Original RED17/GREEN67; eleven suites1245 groups including Phase01035 and152 evidence RED pass. Book58 inputs/seven examples/three chapters/15 RED and30-hash historical freeze pass. Four initial commands retain the strictly rejected wrapper warning; replay is unfiltered, startup .7 remains its owner. Public compiler/callback channels and original grammar stay exact. Exact source inverse recovers the committed producer. No public schema, mark-runtime semantics or executable-membership admission changes; canonical remains at family/push boundaries.
+
 ## 2026-10-06 — Original anonymous capture source hooks (.1.4.2)
 
 All26 anonymous regex producers now snapshot original coordinates before argument work and retain actual event/argument identities. 4394 immutable originals/three overlays/eight commands preserve112 contracts/115 cases/227 events across three seeds; private origins18→71. Original RED27/GREEN50; ten suites1225 groups including Phase01035 and159 evidence RED pass. Book58 inputs/five examples/three chapters/13 RED and43-hash historical freeze pass. Public compiler/callback channels and original grammar remain byte-exact; quoted executable membership remains separately owned. Whole-file source inverse independently restores the original Git producer bytes. No public schema or executable-membership admission changes. Canonical acceptance remains at the complete-family and push boundaries.

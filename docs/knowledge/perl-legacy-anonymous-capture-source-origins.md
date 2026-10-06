@@ -8,13 +8,14 @@ answers:
   - "when are boundary call source bounds saved relative to quote decoding"
   - "do anonymous capture hooks preserve constructor and argument identities"
   - "does anonymous source provenance admit executable quoted membership"
+  - "which Legacy origin control mislabeled an anonymous producer as named"
 date: 2026-10-06
 status: focused source-provenance acceptance verified
 tags: [perl, actionir, legacy, capture, source-provenance, aliases]
 evidence: "Owning .1.4.2 retains4394 immutable regular originals/three overlays/eight commands,112 contracts/115 cases under three seeds,227 events and18-to71 origins per seed. Original RED27/repaired GREEN50; ten suites1225 groups/Phase01035 and159 reason-specific controls pass. Book58 inputs/five examples/three chapters/13 RED;43 prior hashes verify."
 reverify:
   - "bash tools/project_data_run.sh prove -v -Iperl t/actionir_helper_source_provenance.t"
-  - "Replay the full .1.4.2-review.py at its accepted input boundary; later producer hooks require their own proof."
+  - "The .1.4.2 review is historical at2bd501d5e03a28d98bc687dc885c9b04ca519bf8; current named .1.4.3 recurrence preserves all anonymous origins."
 ---
 
 # Snapshot original producer bounds before argument work
@@ -46,3 +47,11 @@ comment syntactic recognition remains the original population; executable source
 membership, coordinate use in replacement, named captures/marks/read families,
 other backends and global history audits remain separately owned. The earlier
 nested boundary lexical repair stays independent of this coordinate provenance.
+
+The historical159 controls all observed RED, but the control labeled
+"invented uninstrumented named origin" targets original case34,
+`capture_take_slice_len`, which was already an anonymous producer. Its actual
+scope is rejection of an extra anonymous origin. The all-family literal oracle
+still requires empty sidecars for untouched named producers. Successor .1.4.3
+owns explicit original named and current uninstrumented mark denials; historical
+producer/report bytes and counts remain exact.

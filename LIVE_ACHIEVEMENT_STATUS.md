@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Full PNT: call and anonymous capture source origins plus quoted/nested boundary repairs are verified; named capture follows. Executable quoted membership remains owned.
+Full PNT: call/anonymous/named source origins and quoted/nested boundary repairs verified; mark controls next. Executable quoted membership and startup wrapper establishment/liveness repair remain owned.
 
 ## Latest Completed Slice
 
-`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.2` — All26 anonymous regex producers now snapshot original coordinates before argument work and retain actual event/argument identities. 4394 immutable originals/three overlays/eight commands preserve112 contracts/115 cases/227 events across three seeds; private origins18→71. Original RED27/GREEN50; ten suites1225 groups including Phase01035 and159 evidence RED pass. Book58 inputs/five examples/three chapters/13 RED and43-hash historical freeze pass. Public compiler/callback channels and original grammar remain byte-exact; quoted executable membership remains separately owned.
+`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.3` — All17 named capture regex producers preserve symbolic mark/start-end order, original spelling, scalar bounds and actual event/argument identities. 4415 immutable originals/three overlays/eight accepted commands retain112 contracts/115 cases/227 events under three seeds; private origins71→105. Original RED17/GREEN67; eleven suites1245 groups including Phase01035 and152 evidence RED pass. Book58 inputs/seven examples/three chapters/15 RED and30-hash historical freeze pass. Four initial commands retain the strictly rejected wrapper warning; replay is unfiltered, startup .7 remains its owner. Public compiler/callback channels and original grammar stay exact.
 
 ## Next Action
 
-Activate named-capture provenance .1.4.3 from clean committed HEAD; retain all17 original contracts, mark argument order, exact own coordinates and public channels. Remaining producer families, quoted/comment membership, replacement and audits stay owned.
+Activate mark-control provenance .1.4.4 from clean committed HEAD; retain all14 original producers, mark_copy argument order, exact own coordinates and public channels. Remaining source families, quoted/comment membership, replacement and audits stay owned.
 
 ## Recent Completions
 
+- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.3` — named17;71→105 origins/RED17-GREEN67/1245 groups/152 RED; initial warning retained.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.2` — anonymous26;18→71 origins/RED27-GREEN50/1225 groups/159 RED.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1.1` — nested lexical repair; RED11/GREEN28/1198 groups/39 RED; recurring Phase01035.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1` — quoted atoms; RED9/GREEN18/1169 groups/36 RED; immediate nested escape repair remains owned.
@@ -29,7 +30,6 @@ Activate named-capture provenance .1.4.3 from clean committed HEAD; retain all17
 - `2026-10-05` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.3` accepts4050 immutable inputs/all19 pipeline contracts/207 origins/803 groups behind exact canonical landing.
 - `2026-10-05` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.2` retains eight statement frame contracts/RED10-GREEN16/1801 groups/207 origins and corrected returned-reference proof.
 - `2026-10-05` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.1.1` corrects normalized split metadata/RED5-GREEN8/722 guards behind exact canonical landing.
-- `2026-10-05` — `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.1.0` retains ten pipeline regex hooks/RED10-GREEN13/1748 groups/99 origins.
 
 ## History
 

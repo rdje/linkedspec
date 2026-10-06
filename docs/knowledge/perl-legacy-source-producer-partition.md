@@ -12,7 +12,7 @@ status: historical original diagnosis verified; current source families have sep
 tags: [perl, actionir, legacy, scanner, source-provenance]
 evidence: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0 retains4252 immutable regular Git inputs/three exact overlays/four guarded commands,112 contracts/115 cases/227 original events and two return origins per seed,103 compatibility groups and123 reason-specific RED controls. Eleven full Toolbox compiler cases recur under three seeds."
 reverify:
-  - "Original .1.4.0 review is historical at f3a49dd82794c494625e33fe83ccf6cf01b4df8e; do not replay its unchanged-producer guard against later hooks/token repairs. Current quoted/nested labels: perl-quoted-boundary-labels; original producers recur under .1.4.2."
+  - "Original .1.4.0 review is historical at f3a49dd82794c494625e33fe83ccf6cf01b4df8e; do not replay its unchanged-producer guard against later hooks/token repairs. Current quoted/nested labels: perl-quoted-boundary-labels; original producers recur under .1.4.3."
 ---
 
 Original LegacyRules owns112 dispatcher IDs. Source-bound textual inventory and
@@ -60,4 +60,5 @@ Current quoted-label behavior belongs to [[perl-quoted-boundary-labels]]. Atomic
 label repair `.1.4.0.1` preserves commas; nested unknown escapes are repaired by
 `.1.4.0.1.1`. Current call origins belong to [[perl-legacy-call-source-origins]]
 and the26 anonymous producers to [[perl-legacy-anonymous-capture-source-origins]].
+The17 named capture producers belong to [[perl-legacy-named-capture-source-origins]].
 The original split-label observation above remains historical, not current truth.

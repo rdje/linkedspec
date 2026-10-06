@@ -612,7 +612,11 @@ sub _scan_contract_start_capture_slice_from_mark {
  my ($code) = @_;
  my @events;
 while ($code =~ /\bstart_capture_slice_from\s*\(\s*(?<mark>\w+)\s*\)/g) {
- push @events, {raw => $&, args => {mark => $+{mark}}};
+ my ($start, $end) = ($-[0], $+[0]);
+ push @events, LinkedSpec::ActionIR::ScannerCore::_record_scanned_source_event(
+  {raw => $&, args => {mark => $+{mark}}},
+  $code, $start, $end,
+ );
 }
  return \@events
 }
@@ -621,7 +625,11 @@ sub _scan_contract_capture_from_mark {
  my ($code) = @_;
  my @events;
 while ($code =~ /\bcapture_from\s*\(\s*(?<mark>\w+)\s*\)/g) {
- push @events, {raw => $&, args => {mark => $+{mark}}};
+ my ($start, $end) = ($-[0], $+[0]);
+ push @events, LinkedSpec::ActionIR::ScannerCore::_record_scanned_source_event(
+  {raw => $&, args => {mark => $+{mark}}},
+  $code, $start, $end,
+ );
 }
  return \@events
 }
@@ -630,7 +638,11 @@ sub _scan_contract_capture_len_from_mark {
  my ($code) = @_;
  my @events;
 while ($code =~ /\bcapture_len_from\s*\(\s*(?<mark>\w+)\s*\)/g) {
- push @events, {raw => $&, args => {mark => $+{mark}}};
+ my ($start, $end) = ($-[0], $+[0]);
+ push @events, LinkedSpec::ActionIR::ScannerCore::_record_scanned_source_event(
+  {raw => $&, args => {mark => $+{mark}}},
+  $code, $start, $end,
+ );
 }
  return \@events
 }
@@ -639,7 +651,11 @@ sub _scan_contract_capture_take_from_mark {
  my ($code) = @_;
  my @events;
 while ($code =~ /\bcapture_take\s*\(\s*(?<mark>\w+)\s*\)/g) {
- push @events, {raw => $&, args => {mark => $+{mark}}};
+ my ($start, $end) = ($-[0], $+[0]);
+ push @events, LinkedSpec::ActionIR::ScannerCore::_record_scanned_source_event(
+  {raw => $&, args => {mark => $+{mark}}},
+  $code, $start, $end,
+ );
 }
  return \@events
 }
@@ -648,7 +664,11 @@ sub _scan_contract_capture_take_len_from_mark {
  my ($code) = @_;
  my @events;
 while ($code =~ /\bcapture_take_len_from\s*\(\s*(?<mark>\w+)\s*\)/g) {
- push @events, {raw => $&, args => {mark => $+{mark}}};
+ my ($start, $end) = ($-[0], $+[0]);
+ push @events, LinkedSpec::ActionIR::ScannerCore::_record_scanned_source_event(
+  {raw => $&, args => {mark => $+{mark}}},
+  $code, $start, $end,
+ );
 }
  return \@events
 }
@@ -657,7 +677,11 @@ sub _scan_contract_capture_rest_from_mark {
  my ($code) = @_;
  my @events;
 while ($code =~ /\bcapture_rest_from\s*\(\s*(?<mark>\w+)\s*\)/g) {
- push @events, {raw => $&, args => {mark => $+{mark}}};
+ my ($start, $end) = ($-[0], $+[0]);
+ push @events, LinkedSpec::ActionIR::ScannerCore::_record_scanned_source_event(
+  {raw => $&, args => {mark => $+{mark}}},
+  $code, $start, $end,
+ );
 }
  return \@events
 }
@@ -666,7 +690,11 @@ sub _scan_contract_capture_rest_len_from_mark {
  my ($code) = @_;
  my @events;
 while ($code =~ /\bcapture_rest_len_from\s*\(\s*(?<mark>\w+)\s*\)/g) {
- push @events, {raw => $&, args => {mark => $+{mark}}};
+ my ($start, $end) = ($-[0], $+[0]);
+ push @events, LinkedSpec::ActionIR::ScannerCore::_record_scanned_source_event(
+  {raw => $&, args => {mark => $+{mark}}},
+  $code, $start, $end,
+ );
 }
  return \@events
 }
@@ -675,7 +703,11 @@ sub _scan_contract_capture_take_rest_from_mark {
  my ($code) = @_;
  my @events;
 while ($code =~ /\bcapture_take_rest_from\s*\(\s*(?<mark>\w+)\s*\)/g) {
- push @events, {raw => $&, args => {mark => $+{mark}}};
+ my ($start, $end) = ($-[0], $+[0]);
+ push @events, LinkedSpec::ActionIR::ScannerCore::_record_scanned_source_event(
+  {raw => $&, args => {mark => $+{mark}}},
+  $code, $start, $end,
+ );
 }
  return \@events
 }
@@ -684,7 +716,11 @@ sub _scan_contract_capture_take_rest_len_from_mark {
  my ($code) = @_;
  my @events;
 while ($code =~ /\bcapture_take_rest_len_from\s*\(\s*(?<mark>\w+)\s*\)/g) {
- push @events, {raw => $&, args => {mark => $+{mark}}};
+ my ($start, $end) = ($-[0], $+[0]);
+ push @events, LinkedSpec::ActionIR::ScannerCore::_record_scanned_source_event(
+  {raw => $&, args => {mark => $+{mark}}},
+  $code, $start, $end,
+ );
 }
  return \@events
 }
@@ -693,7 +729,11 @@ sub _scan_contract_capture_until_cursor_from_mark {
  my ($code) = @_;
  my @events;
 while ($code =~ /\bcapture_until_cursor_from\s*\(\s*(?<mark>\w+)\s*\)/g) {
- push @events, {raw => $&, args => {mark => $+{mark}}};
+ my ($start, $end) = ($-[0], $+[0]);
+ push @events, LinkedSpec::ActionIR::ScannerCore::_record_scanned_source_event(
+  {raw => $&, args => {mark => $+{mark}}},
+  $code, $start, $end,
+ );
 }
  return \@events
 }
@@ -702,7 +742,11 @@ sub _scan_contract_capture_until_cursor_len_from_mark {
  my ($code) = @_;
  my @events;
 while ($code =~ /\bcapture_until_cursor_len_from\s*\(\s*(?<mark>\w+)\s*\)/g) {
- push @events, {raw => $&, args => {mark => $+{mark}}};
+ my ($start, $end) = ($-[0], $+[0]);
+ push @events, LinkedSpec::ActionIR::ScannerCore::_record_scanned_source_event(
+  {raw => $&, args => {mark => $+{mark}}},
+  $code, $start, $end,
+ );
 }
  return \@events
 }
@@ -711,7 +755,11 @@ sub _scan_contract_capture_take_until_cursor_from_mark {
  my ($code) = @_;
  my @events;
 while ($code =~ /\bcapture_take_until_cursor_from\s*\(\s*(?<mark>\w+)\s*\)/g) {
- push @events, {raw => $&, args => {mark => $+{mark}}};
+ my ($start, $end) = ($-[0], $+[0]);
+ push @events, LinkedSpec::ActionIR::ScannerCore::_record_scanned_source_event(
+  {raw => $&, args => {mark => $+{mark}}},
+  $code, $start, $end,
+ );
 }
  return \@events
 }
@@ -720,7 +768,11 @@ sub _scan_contract_capture_take_until_cursor_len_from_mark {
  my ($code) = @_;
  my @events;
 while ($code =~ /\bcapture_take_until_cursor_len_from\s*\(\s*(?<mark>\w+)\s*\)/g) {
- push @events, {raw => $&, args => {mark => $+{mark}}};
+ my ($start, $end) = ($-[0], $+[0]);
+ push @events, LinkedSpec::ActionIR::ScannerCore::_record_scanned_source_event(
+  {raw => $&, args => {mark => $+{mark}}},
+  $code, $start, $end,
+ );
 }
  return \@events
 }
@@ -729,7 +781,11 @@ sub _scan_contract_capture_between_marks {
  my ($code) = @_;
  my @events;
 while ($code =~ /\bcapture_between\s*\(\s*(?<start>\w+)\s*,\s*(?<end>\w+)\s*\)/g) {
- push @events, {raw => $&, args => {start => $+{start}, end => $+{end}}};
+ my ($start, $end) = ($-[0], $+[0]);
+ push @events, LinkedSpec::ActionIR::ScannerCore::_record_scanned_source_event(
+  {raw => $&, args => {start => $+{start}, end => $+{end}}},
+  $code, $start, $end,
+ );
 }
  return \@events
 }
@@ -738,7 +794,11 @@ sub _scan_contract_capture_len_between_marks {
  my ($code) = @_;
  my @events;
 while ($code =~ /\bcapture_len_between\s*\(\s*(?<start>\w+)\s*,\s*(?<end>\w+)\s*\)/g) {
- push @events, {raw => $&, args => {start => $+{start}, end => $+{end}}};
+ my ($start, $end) = ($-[0], $+[0]);
+ push @events, LinkedSpec::ActionIR::ScannerCore::_record_scanned_source_event(
+  {raw => $&, args => {start => $+{start}, end => $+{end}}},
+  $code, $start, $end,
+ );
 }
  return \@events
 }
@@ -747,7 +807,11 @@ sub _scan_contract_capture_take_between_marks {
  my ($code) = @_;
  my @events;
 while ($code =~ /\bcapture_take_between\s*\(\s*(?<start>\w+)\s*,\s*(?<end>\w+)\s*\)/g) {
- push @events, {raw => $&, args => {start => $+{start}, end => $+{end}}};
+ my ($start, $end) = ($-[0], $+[0]);
+ push @events, LinkedSpec::ActionIR::ScannerCore::_record_scanned_source_event(
+  {raw => $&, args => {start => $+{start}, end => $+{end}}},
+  $code, $start, $end,
+ );
 }
  return \@events
 }
@@ -756,7 +820,11 @@ sub _scan_contract_capture_take_between_len_marks {
  my ($code) = @_;
  my @events;
 while ($code =~ /\bcapture_take_between_len\s*\(\s*(?<start>\w+)\s*,\s*(?<end>\w+)\s*\)/g) {
- push @events, {raw => $&, args => {start => $+{start}, end => $+{end}}};
+ my ($start, $end) = ($-[0], $+[0]);
+ push @events, LinkedSpec::ActionIR::ScannerCore::_record_scanned_source_event(
+  {raw => $&, args => {start => $+{start}, end => $+{end}}},
+  $code, $start, $end,
+ );
 }
  return \@events
 }
