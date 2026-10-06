@@ -9,12 +9,13 @@ answers:
   - "why did the initial fatal nested composition probe fail dispatcher order"
   - "where do current Basic pipeline and Flow provenance reverify commands point"
 date: 2026-10-06
-status: focused original population and representative composition verified; immutable canonical closeout remains .1.6.1
+status: historical focused composition; current immutable acceptance is .1.6.1
 tags: [perl, actionir, scanner, source-provenance, composition, identity, measurement]
 evidence: "Fresh immutable37401 supplies4708 committed regular inputs plus exactly two authored observation inputs per tree. 26 original-population commands and three corrected nested commands retain174 distinct selected contract IDs/436 events and origins per seed, full earlier compiler/callback/origin channels,46 MethodExpr/CSV frames and29 unchanged suites/1440 ordered groups. Seven representatives cover49 ordered nested pairs/42 off-diagonal pairs/seven caught fatal routes per seed. 320 effective exact-reason evidence controls RED; three original fatal visitor channels independently rejected and instrument-only repair retained. Prior dedicated111 hashes verify before historical freeze."
 reverify:
-  - "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6.0-review.py"
-  - "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6.0-book.py --review"
+  - "Current immutable acceptance: bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6.1-review.py"
+  - "Historical accepted56c8f38 input boundary only; preserve original hashes: bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6.0-review.py"
+  - "Historical accepted56c8f38 input boundary only; preserve original hashes: bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6.0-book.py --review"
 ---
 
 The ordered seven-family registry and five dependencies remain the public scanner
@@ -69,3 +70,7 @@ closing private provenance .0.1. Quoted/comment executable membership, selected
 replacement and separately owned token/effect/boolean/cursor/resource/marker/mark-copy/
 wrapper defects stay open. Recovery/purge remain prohibited; no new helper, public
 event/policy/admission/backend/CI/storage/dependency/global-audit claim follows.
+
+[[perl-all-producer-source-acceptance]] owns fresh4745-input/no-overlay committed
+recurrence and exact canonical private parent closeout. Original focused claims,
+rejected instruments and measurements remain historical rather than refreshed.

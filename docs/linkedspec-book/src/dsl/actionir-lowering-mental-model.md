@@ -670,7 +670,7 @@ all 42 event origins, actual returned references and complete callback/compiler
 channels under the original three seeds. Constructor and custom-callback checks
 remain recurring fixture observations; the four Toolbox compiler examples build
 parsers without adding four parser executions. Canonical CI gates this family
-checkpoint; all-producer composition remains separate.
+checkpoint; the complete producer composition is reviewed below.
 Executable membership, precise replacement and separately owned runtime defects
 remain subsequent work.
 
@@ -741,9 +741,22 @@ bash tools/run_python_project_data.sh \
 ```
 
 This command reviews retained observations and their exact input identities;
-it does not launch additional runtime scans. Fresh no-overlay committed replay
-and canonical CI are required at the following private provenance closeout.
-A syntactic source origin still does not authorize quoted/comment membership or
+it does not launch additional runtime scans. Fresh committed acceptance replays
+all 174 selected contract IDs with no runtime overlays. The complete committed
+input population is 4,745 regular Git files. All 436 selected events and origins
+per seed, complete earlier compiler/callback channels and the representative
+nested scans recur unchanged. Exact staged canonical CI gates private provenance
+closeout, separately from these runtime and rendered-evidence measurements.
+
+The committed acceptance can be reviewed with:
+
+```sh
+bash tools/run_python_project_data.sh \
+  docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6.1-review.py
+```
+
+Private source provenance is now independently composed; executable lexical
+membership is the next repair. A syntactic source origin still does not authorize quoted/comment membership or
 replacement. Identical literal twins must remain data until the separate membership
 and selected-occurrence repair is verified. No arbitrary callback, new helper,
 static-policy relaxation or runtime-defect closure follows from this composition.

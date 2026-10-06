@@ -1,0 +1,1844 @@
+{
+  "complete": true,
+  "revision": "56c8f38d12a799e4f4fb8c5b0cfe27690d27f1fc",
+  "regular_git_inputs": 4745,
+  "runtime_overlays": 0,
+  "commands": 26,
+  "seeds": 3,
+  "original_populations": {
+    "basic": {
+      "selected_contract_ids": [
+        "assign_call",
+        "assign_call_my",
+        "assign_match_my",
+        "destructure_imatch_list_my",
+        "entry_slot",
+        "exit_bare",
+        "gap_kind",
+        "gap_span",
+        "gap_text",
+        "linecount_prefix_newline_matches",
+        "my_declare_bare",
+        "next_bare",
+        "position_tracking",
+        "print_capture_substr",
+        "push_child_call_builtin",
+        "push_child_call_indexed_builtin",
+        "ref_field_assign",
+        "regex_subst_assignment",
+        "return_bare",
+        "return_call"
+      ],
+      "contracts": 20,
+      "authored_source_cases": 1,
+      "selected_events_per_seed": 49,
+      "selected_origins_per_seed": 49,
+      "physical_statement_frames_per_seed": 43
+    },
+    "pipeline": {
+      "selected_contract_ids": [
+        "array_append_operator",
+        "array_end_mutation_method",
+        "filter_match",
+        "filter_nonempty",
+        "hash_index_assignment_operator",
+        "lowercase_each",
+        "print_foreach_iterable",
+        "push",
+        "regex_subst",
+        "scalar_assignment_operator",
+        "set_key_statement",
+        "set_value",
+        "split_array",
+        "split_each",
+        "split_trim_filter_assignment",
+        "trim_each",
+        "uniq_array",
+        "uppercase_each",
+        "value_drop_statement"
+      ],
+      "contracts": 19,
+      "authored_source_cases": 1,
+      "selected_events_per_seed": 69,
+      "selected_origins_per_seed": 69,
+      "physical_statement_frames_per_seed": 45
+    },
+    "flow": {
+      "selected_contract_ids": [
+        "case_flow",
+        "default_flow",
+        "else_flow",
+        "elseif_flow",
+        "endcase_flow",
+        "endif_flow",
+        "endswitch_flow",
+        "exit_now",
+        "if_flow",
+        "next_stmt",
+        "print_each",
+        "print_stmt",
+        "return_undef",
+        "say_stmt",
+        "switch_flow",
+        "while_flow"
+      ],
+      "contracts": 16,
+      "authored_source_cases": 16,
+      "selected_events_per_seed": 49,
+      "selected_origins_per_seed": 49,
+      "physical_statement_frames_per_seed": 49
+    },
+    "legacy": {
+      "selected_contract_ids": [
+        "call",
+        "capture",
+        "capture_between_marks",
+        "capture_from_mark",
+        "capture_from_rule_start",
+        "capture_if",
+        "capture_if_macro",
+        "capture_len_between_marks",
+        "capture_len_from_mark",
+        "capture_len_from_rule_start",
+        "capture_macro",
+        "capture_rest",
+        "capture_rest_from_mark",
+        "capture_rest_len",
+        "capture_rest_len_from_mark",
+        "capture_rest_length",
+        "capture_slice",
+        "capture_slice_col",
+        "capture_slice_here",
+        "capture_slice_len",
+        "capture_slice_length",
+        "capture_slice_line",
+        "capture_slice_pos",
+        "capture_slice_until_cursor",
+        "capture_slice_until_cursor_len",
+        "capture_take_between_len_marks",
+        "capture_take_between_marks",
+        "capture_take_from_mark",
+        "capture_take_len_from_mark",
+        "capture_take_rest",
+        "capture_take_rest_from_mark",
+        "capture_take_rest_len",
+        "capture_take_rest_len_from_mark",
+        "capture_take_slice",
+        "capture_take_slice_len",
+        "capture_take_until_cursor",
+        "capture_take_until_cursor_from_mark",
+        "capture_take_until_cursor_len",
+        "capture_take_until_cursor_len_from_mark",
+        "capture_until_boundary",
+        "capture_until_cursor_from_mark",
+        "capture_until_cursor_len_from_mark",
+        "clear_mark",
+        "cursor_col",
+        "cursor_line",
+        "cursor_pos",
+        "cursor_rest",
+        "cursor_rest_len",
+        "entry_col",
+        "entry_end_col",
+        "entry_end_line",
+        "entry_end_pos",
+        "entry_group",
+        "entry_groups",
+        "entry_has",
+        "entry_len",
+        "entry_line",
+        "entry_map",
+        "entry_named",
+        "entry_named_map",
+        "entry_start_col",
+        "entry_start_line",
+        "entry_start_pos",
+        "entry_text",
+        "input_end_col",
+        "input_end_line",
+        "input_end_pos",
+        "input_len",
+        "input_slice",
+        "input_text",
+        "mark_capture_slice",
+        "mark_col",
+        "mark_copy",
+        "mark_entry_end",
+        "mark_entry_start",
+        "mark_exists",
+        "mark_here",
+        "mark_input_end",
+        "mark_input_start",
+        "mark_line",
+        "mark_match_end",
+        "mark_match_start",
+        "mark_pos",
+        "match_col",
+        "match_end_col",
+        "match_end_line",
+        "match_end_pos",
+        "match_group",
+        "match_groups",
+        "match_has",
+        "match_len",
+        "match_line",
+        "match_map",
+        "match_named",
+        "match_named_map",
+        "match_start_col",
+        "match_start_line",
+        "match_start_pos",
+        "match_text",
+        "push_indexed_arg",
+        "push_scope_target_arg",
+        "push_single_arg",
+        "push_target_arg",
+        "push_target_indexed_arg",
+        "restore_cursor",
+        "return",
+        "return_general",
+        "rewind_entry_start",
+        "rewind_match_start",
+        "save_cursor",
+        "start_capture_slice",
+        "start_capture_slice_from_mark"
+      ],
+      "contracts": 112,
+      "authored_source_cases": 115,
+      "selected_events_per_seed": 227,
+      "selected_origins_per_seed": 227,
+      "physical_statement_frames_per_seed": 456
+    },
+    "dedicated": {
+      "selected_contract_ids": [
+        "observe_recognition",
+        "progressive_span_dispatch",
+        "recognition_checkpoint",
+        "recognition_commit",
+        "recognition_rollback",
+        "recognize_once",
+        "staged_parse_job"
+      ],
+      "contracts": 7,
+      "authored_source_cases": 22,
+      "selected_events_per_seed": 42,
+      "selected_origins_per_seed": 42,
+      "physical_statement_frames_per_seed": 63
+    }
+  },
+  "unique_selected_contract_ids": 174,
+  "selected_events_per_seed": 436,
+  "selected_origins_per_seed": 436,
+  "method_expression_and_csv_frames_per_seed": 46,
+  "cross_family_representatives": 7,
+  "nested_pairs_per_seed": 49,
+  "off_diagonal_pairs_per_seed": 42,
+  "fatal_nested_routes_per_seed": 7,
+  "representative_events_per_scan": 2,
+  "fixture_suites": 29,
+  "fixture_groups": 1440,
+  "controls": [
+    {
+      "name": "staged_parse_job/staged_parse_job/outer origins",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "staged_parse_job/staged_parse_job/outer reference",
+      "observed": "RED",
+      "reason": "actual returned constructor and origin identities"
+    },
+    {
+      "name": "staged_parse_job/staged_parse_job/caller error",
+      "observed": "RED",
+      "reason": "actual caller error preservation"
+    },
+    {
+      "name": "staged_parse_job/staged_parse_job/recorder restoration",
+      "observed": "RED",
+      "reason": "real nested scan and outer recorder restoration"
+    },
+    {
+      "name": "staged_parse_job/staged_parse_job/inner origin",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "staged_parse_job/progressive_span_dispatch/outer origins",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "staged_parse_job/progressive_span_dispatch/outer reference",
+      "observed": "RED",
+      "reason": "actual returned constructor and origin identities"
+    },
+    {
+      "name": "staged_parse_job/progressive_span_dispatch/caller error",
+      "observed": "RED",
+      "reason": "actual caller error preservation"
+    },
+    {
+      "name": "staged_parse_job/progressive_span_dispatch/recorder restoration",
+      "observed": "RED",
+      "reason": "real nested scan and outer recorder restoration"
+    },
+    {
+      "name": "staged_parse_job/progressive_span_dispatch/inner origin",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "staged_parse_job/recognition_checkpoint/outer origins",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "staged_parse_job/recognition_checkpoint/outer reference",
+      "observed": "RED",
+      "reason": "actual returned constructor and origin identities"
+    },
+    {
+      "name": "staged_parse_job/recognition_checkpoint/caller error",
+      "observed": "RED",
+      "reason": "actual caller error preservation"
+    },
+    {
+      "name": "staged_parse_job/recognition_checkpoint/recorder restoration",
+      "observed": "RED",
+      "reason": "real nested scan and outer recorder restoration"
+    },
+    {
+      "name": "staged_parse_job/recognition_checkpoint/inner origin",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "staged_parse_job/my_declare_bare/outer origins",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "staged_parse_job/my_declare_bare/outer reference",
+      "observed": "RED",
+      "reason": "actual returned constructor and origin identities"
+    },
+    {
+      "name": "staged_parse_job/my_declare_bare/caller error",
+      "observed": "RED",
+      "reason": "actual caller error preservation"
+    },
+    {
+      "name": "staged_parse_job/my_declare_bare/recorder restoration",
+      "observed": "RED",
+      "reason": "real nested scan and outer recorder restoration"
+    },
+    {
+      "name": "staged_parse_job/my_declare_bare/inner origin",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "staged_parse_job/scalar_assignment_operator/outer origins",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "staged_parse_job/scalar_assignment_operator/outer reference",
+      "observed": "RED",
+      "reason": "actual returned constructor and origin identities"
+    },
+    {
+      "name": "staged_parse_job/scalar_assignment_operator/caller error",
+      "observed": "RED",
+      "reason": "actual caller error preservation"
+    },
+    {
+      "name": "staged_parse_job/scalar_assignment_operator/recorder restoration",
+      "observed": "RED",
+      "reason": "real nested scan and outer recorder restoration"
+    },
+    {
+      "name": "staged_parse_job/scalar_assignment_operator/inner origin",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "staged_parse_job/if_flow/outer origins",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "staged_parse_job/if_flow/outer reference",
+      "observed": "RED",
+      "reason": "actual returned constructor and origin identities"
+    },
+    {
+      "name": "staged_parse_job/if_flow/caller error",
+      "observed": "RED",
+      "reason": "actual caller error preservation"
+    },
+    {
+      "name": "staged_parse_job/if_flow/recorder restoration",
+      "observed": "RED",
+      "reason": "real nested scan and outer recorder restoration"
+    },
+    {
+      "name": "staged_parse_job/if_flow/inner origin",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "staged_parse_job/return_general/outer origins",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "staged_parse_job/return_general/outer reference",
+      "observed": "RED",
+      "reason": "actual returned constructor and origin identities"
+    },
+    {
+      "name": "staged_parse_job/return_general/caller error",
+      "observed": "RED",
+      "reason": "actual caller error preservation"
+    },
+    {
+      "name": "staged_parse_job/return_general/recorder restoration",
+      "observed": "RED",
+      "reason": "real nested scan and outer recorder restoration"
+    },
+    {
+      "name": "staged_parse_job/return_general/inner origin",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "progressive_span_dispatch/staged_parse_job/outer origins",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "progressive_span_dispatch/staged_parse_job/outer reference",
+      "observed": "RED",
+      "reason": "actual returned constructor and origin identities"
+    },
+    {
+      "name": "progressive_span_dispatch/staged_parse_job/caller error",
+      "observed": "RED",
+      "reason": "actual caller error preservation"
+    },
+    {
+      "name": "progressive_span_dispatch/staged_parse_job/recorder restoration",
+      "observed": "RED",
+      "reason": "real nested scan and outer recorder restoration"
+    },
+    {
+      "name": "progressive_span_dispatch/staged_parse_job/inner origin",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "progressive_span_dispatch/progressive_span_dispatch/outer origins",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "progressive_span_dispatch/progressive_span_dispatch/outer reference",
+      "observed": "RED",
+      "reason": "actual returned constructor and origin identities"
+    },
+    {
+      "name": "progressive_span_dispatch/progressive_span_dispatch/caller error",
+      "observed": "RED",
+      "reason": "actual caller error preservation"
+    },
+    {
+      "name": "progressive_span_dispatch/progressive_span_dispatch/recorder restoration",
+      "observed": "RED",
+      "reason": "real nested scan and outer recorder restoration"
+    },
+    {
+      "name": "progressive_span_dispatch/progressive_span_dispatch/inner origin",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "progressive_span_dispatch/recognition_checkpoint/outer origins",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "progressive_span_dispatch/recognition_checkpoint/outer reference",
+      "observed": "RED",
+      "reason": "actual returned constructor and origin identities"
+    },
+    {
+      "name": "progressive_span_dispatch/recognition_checkpoint/caller error",
+      "observed": "RED",
+      "reason": "actual caller error preservation"
+    },
+    {
+      "name": "progressive_span_dispatch/recognition_checkpoint/recorder restoration",
+      "observed": "RED",
+      "reason": "real nested scan and outer recorder restoration"
+    },
+    {
+      "name": "progressive_span_dispatch/recognition_checkpoint/inner origin",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "progressive_span_dispatch/my_declare_bare/outer origins",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "progressive_span_dispatch/my_declare_bare/outer reference",
+      "observed": "RED",
+      "reason": "actual returned constructor and origin identities"
+    },
+    {
+      "name": "progressive_span_dispatch/my_declare_bare/caller error",
+      "observed": "RED",
+      "reason": "actual caller error preservation"
+    },
+    {
+      "name": "progressive_span_dispatch/my_declare_bare/recorder restoration",
+      "observed": "RED",
+      "reason": "real nested scan and outer recorder restoration"
+    },
+    {
+      "name": "progressive_span_dispatch/my_declare_bare/inner origin",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "progressive_span_dispatch/scalar_assignment_operator/outer origins",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "progressive_span_dispatch/scalar_assignment_operator/outer reference",
+      "observed": "RED",
+      "reason": "actual returned constructor and origin identities"
+    },
+    {
+      "name": "progressive_span_dispatch/scalar_assignment_operator/caller error",
+      "observed": "RED",
+      "reason": "actual caller error preservation"
+    },
+    {
+      "name": "progressive_span_dispatch/scalar_assignment_operator/recorder restoration",
+      "observed": "RED",
+      "reason": "real nested scan and outer recorder restoration"
+    },
+    {
+      "name": "progressive_span_dispatch/scalar_assignment_operator/inner origin",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "progressive_span_dispatch/if_flow/outer origins",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "progressive_span_dispatch/if_flow/outer reference",
+      "observed": "RED",
+      "reason": "actual returned constructor and origin identities"
+    },
+    {
+      "name": "progressive_span_dispatch/if_flow/caller error",
+      "observed": "RED",
+      "reason": "actual caller error preservation"
+    },
+    {
+      "name": "progressive_span_dispatch/if_flow/recorder restoration",
+      "observed": "RED",
+      "reason": "real nested scan and outer recorder restoration"
+    },
+    {
+      "name": "progressive_span_dispatch/if_flow/inner origin",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "progressive_span_dispatch/return_general/outer origins",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "progressive_span_dispatch/return_general/outer reference",
+      "observed": "RED",
+      "reason": "actual returned constructor and origin identities"
+    },
+    {
+      "name": "progressive_span_dispatch/return_general/caller error",
+      "observed": "RED",
+      "reason": "actual caller error preservation"
+    },
+    {
+      "name": "progressive_span_dispatch/return_general/recorder restoration",
+      "observed": "RED",
+      "reason": "real nested scan and outer recorder restoration"
+    },
+    {
+      "name": "progressive_span_dispatch/return_general/inner origin",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "recognition_checkpoint/staged_parse_job/outer origins",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "recognition_checkpoint/staged_parse_job/outer reference",
+      "observed": "RED",
+      "reason": "actual returned constructor and origin identities"
+    },
+    {
+      "name": "recognition_checkpoint/staged_parse_job/caller error",
+      "observed": "RED",
+      "reason": "actual caller error preservation"
+    },
+    {
+      "name": "recognition_checkpoint/staged_parse_job/recorder restoration",
+      "observed": "RED",
+      "reason": "real nested scan and outer recorder restoration"
+    },
+    {
+      "name": "recognition_checkpoint/staged_parse_job/inner origin",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "recognition_checkpoint/progressive_span_dispatch/outer origins",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "recognition_checkpoint/progressive_span_dispatch/outer reference",
+      "observed": "RED",
+      "reason": "actual returned constructor and origin identities"
+    },
+    {
+      "name": "recognition_checkpoint/progressive_span_dispatch/caller error",
+      "observed": "RED",
+      "reason": "actual caller error preservation"
+    },
+    {
+      "name": "recognition_checkpoint/progressive_span_dispatch/recorder restoration",
+      "observed": "RED",
+      "reason": "real nested scan and outer recorder restoration"
+    },
+    {
+      "name": "recognition_checkpoint/progressive_span_dispatch/inner origin",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "recognition_checkpoint/recognition_checkpoint/outer origins",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "recognition_checkpoint/recognition_checkpoint/outer reference",
+      "observed": "RED",
+      "reason": "actual returned constructor and origin identities"
+    },
+    {
+      "name": "recognition_checkpoint/recognition_checkpoint/caller error",
+      "observed": "RED",
+      "reason": "actual caller error preservation"
+    },
+    {
+      "name": "recognition_checkpoint/recognition_checkpoint/recorder restoration",
+      "observed": "RED",
+      "reason": "real nested scan and outer recorder restoration"
+    },
+    {
+      "name": "recognition_checkpoint/recognition_checkpoint/inner origin",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "recognition_checkpoint/my_declare_bare/outer origins",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "recognition_checkpoint/my_declare_bare/outer reference",
+      "observed": "RED",
+      "reason": "actual returned constructor and origin identities"
+    },
+    {
+      "name": "recognition_checkpoint/my_declare_bare/caller error",
+      "observed": "RED",
+      "reason": "actual caller error preservation"
+    },
+    {
+      "name": "recognition_checkpoint/my_declare_bare/recorder restoration",
+      "observed": "RED",
+      "reason": "real nested scan and outer recorder restoration"
+    },
+    {
+      "name": "recognition_checkpoint/my_declare_bare/inner origin",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "recognition_checkpoint/scalar_assignment_operator/outer origins",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "recognition_checkpoint/scalar_assignment_operator/outer reference",
+      "observed": "RED",
+      "reason": "actual returned constructor and origin identities"
+    },
+    {
+      "name": "recognition_checkpoint/scalar_assignment_operator/caller error",
+      "observed": "RED",
+      "reason": "actual caller error preservation"
+    },
+    {
+      "name": "recognition_checkpoint/scalar_assignment_operator/recorder restoration",
+      "observed": "RED",
+      "reason": "real nested scan and outer recorder restoration"
+    },
+    {
+      "name": "recognition_checkpoint/scalar_assignment_operator/inner origin",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "recognition_checkpoint/if_flow/outer origins",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "recognition_checkpoint/if_flow/outer reference",
+      "observed": "RED",
+      "reason": "actual returned constructor and origin identities"
+    },
+    {
+      "name": "recognition_checkpoint/if_flow/caller error",
+      "observed": "RED",
+      "reason": "actual caller error preservation"
+    },
+    {
+      "name": "recognition_checkpoint/if_flow/recorder restoration",
+      "observed": "RED",
+      "reason": "real nested scan and outer recorder restoration"
+    },
+    {
+      "name": "recognition_checkpoint/if_flow/inner origin",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "recognition_checkpoint/return_general/outer origins",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "recognition_checkpoint/return_general/outer reference",
+      "observed": "RED",
+      "reason": "actual returned constructor and origin identities"
+    },
+    {
+      "name": "recognition_checkpoint/return_general/caller error",
+      "observed": "RED",
+      "reason": "actual caller error preservation"
+    },
+    {
+      "name": "recognition_checkpoint/return_general/recorder restoration",
+      "observed": "RED",
+      "reason": "real nested scan and outer recorder restoration"
+    },
+    {
+      "name": "recognition_checkpoint/return_general/inner origin",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "my_declare_bare/staged_parse_job/outer origins",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "my_declare_bare/staged_parse_job/outer reference",
+      "observed": "RED",
+      "reason": "actual returned constructor and origin identities"
+    },
+    {
+      "name": "my_declare_bare/staged_parse_job/caller error",
+      "observed": "RED",
+      "reason": "actual caller error preservation"
+    },
+    {
+      "name": "my_declare_bare/staged_parse_job/recorder restoration",
+      "observed": "RED",
+      "reason": "real nested scan and outer recorder restoration"
+    },
+    {
+      "name": "my_declare_bare/staged_parse_job/inner origin",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "my_declare_bare/progressive_span_dispatch/outer origins",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "my_declare_bare/progressive_span_dispatch/outer reference",
+      "observed": "RED",
+      "reason": "actual returned constructor and origin identities"
+    },
+    {
+      "name": "my_declare_bare/progressive_span_dispatch/caller error",
+      "observed": "RED",
+      "reason": "actual caller error preservation"
+    },
+    {
+      "name": "my_declare_bare/progressive_span_dispatch/recorder restoration",
+      "observed": "RED",
+      "reason": "real nested scan and outer recorder restoration"
+    },
+    {
+      "name": "my_declare_bare/progressive_span_dispatch/inner origin",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "my_declare_bare/recognition_checkpoint/outer origins",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "my_declare_bare/recognition_checkpoint/outer reference",
+      "observed": "RED",
+      "reason": "actual returned constructor and origin identities"
+    },
+    {
+      "name": "my_declare_bare/recognition_checkpoint/caller error",
+      "observed": "RED",
+      "reason": "actual caller error preservation"
+    },
+    {
+      "name": "my_declare_bare/recognition_checkpoint/recorder restoration",
+      "observed": "RED",
+      "reason": "real nested scan and outer recorder restoration"
+    },
+    {
+      "name": "my_declare_bare/recognition_checkpoint/inner origin",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "my_declare_bare/my_declare_bare/outer origins",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "my_declare_bare/my_declare_bare/outer reference",
+      "observed": "RED",
+      "reason": "actual returned constructor and origin identities"
+    },
+    {
+      "name": "my_declare_bare/my_declare_bare/caller error",
+      "observed": "RED",
+      "reason": "actual caller error preservation"
+    },
+    {
+      "name": "my_declare_bare/my_declare_bare/recorder restoration",
+      "observed": "RED",
+      "reason": "real nested scan and outer recorder restoration"
+    },
+    {
+      "name": "my_declare_bare/my_declare_bare/inner origin",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "my_declare_bare/scalar_assignment_operator/outer origins",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "my_declare_bare/scalar_assignment_operator/outer reference",
+      "observed": "RED",
+      "reason": "actual returned constructor and origin identities"
+    },
+    {
+      "name": "my_declare_bare/scalar_assignment_operator/caller error",
+      "observed": "RED",
+      "reason": "actual caller error preservation"
+    },
+    {
+      "name": "my_declare_bare/scalar_assignment_operator/recorder restoration",
+      "observed": "RED",
+      "reason": "real nested scan and outer recorder restoration"
+    },
+    {
+      "name": "my_declare_bare/scalar_assignment_operator/inner origin",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "my_declare_bare/if_flow/outer origins",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "my_declare_bare/if_flow/outer reference",
+      "observed": "RED",
+      "reason": "actual returned constructor and origin identities"
+    },
+    {
+      "name": "my_declare_bare/if_flow/caller error",
+      "observed": "RED",
+      "reason": "actual caller error preservation"
+    },
+    {
+      "name": "my_declare_bare/if_flow/recorder restoration",
+      "observed": "RED",
+      "reason": "real nested scan and outer recorder restoration"
+    },
+    {
+      "name": "my_declare_bare/if_flow/inner origin",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "my_declare_bare/return_general/outer origins",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "my_declare_bare/return_general/outer reference",
+      "observed": "RED",
+      "reason": "actual returned constructor and origin identities"
+    },
+    {
+      "name": "my_declare_bare/return_general/caller error",
+      "observed": "RED",
+      "reason": "actual caller error preservation"
+    },
+    {
+      "name": "my_declare_bare/return_general/recorder restoration",
+      "observed": "RED",
+      "reason": "real nested scan and outer recorder restoration"
+    },
+    {
+      "name": "my_declare_bare/return_general/inner origin",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "scalar_assignment_operator/staged_parse_job/outer origins",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "scalar_assignment_operator/staged_parse_job/outer reference",
+      "observed": "RED",
+      "reason": "actual returned constructor and origin identities"
+    },
+    {
+      "name": "scalar_assignment_operator/staged_parse_job/caller error",
+      "observed": "RED",
+      "reason": "actual caller error preservation"
+    },
+    {
+      "name": "scalar_assignment_operator/staged_parse_job/recorder restoration",
+      "observed": "RED",
+      "reason": "real nested scan and outer recorder restoration"
+    },
+    {
+      "name": "scalar_assignment_operator/staged_parse_job/inner origin",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "scalar_assignment_operator/progressive_span_dispatch/outer origins",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "scalar_assignment_operator/progressive_span_dispatch/outer reference",
+      "observed": "RED",
+      "reason": "actual returned constructor and origin identities"
+    },
+    {
+      "name": "scalar_assignment_operator/progressive_span_dispatch/caller error",
+      "observed": "RED",
+      "reason": "actual caller error preservation"
+    },
+    {
+      "name": "scalar_assignment_operator/progressive_span_dispatch/recorder restoration",
+      "observed": "RED",
+      "reason": "real nested scan and outer recorder restoration"
+    },
+    {
+      "name": "scalar_assignment_operator/progressive_span_dispatch/inner origin",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "scalar_assignment_operator/recognition_checkpoint/outer origins",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "scalar_assignment_operator/recognition_checkpoint/outer reference",
+      "observed": "RED",
+      "reason": "actual returned constructor and origin identities"
+    },
+    {
+      "name": "scalar_assignment_operator/recognition_checkpoint/caller error",
+      "observed": "RED",
+      "reason": "actual caller error preservation"
+    },
+    {
+      "name": "scalar_assignment_operator/recognition_checkpoint/recorder restoration",
+      "observed": "RED",
+      "reason": "real nested scan and outer recorder restoration"
+    },
+    {
+      "name": "scalar_assignment_operator/recognition_checkpoint/inner origin",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "scalar_assignment_operator/my_declare_bare/outer origins",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "scalar_assignment_operator/my_declare_bare/outer reference",
+      "observed": "RED",
+      "reason": "actual returned constructor and origin identities"
+    },
+    {
+      "name": "scalar_assignment_operator/my_declare_bare/caller error",
+      "observed": "RED",
+      "reason": "actual caller error preservation"
+    },
+    {
+      "name": "scalar_assignment_operator/my_declare_bare/recorder restoration",
+      "observed": "RED",
+      "reason": "real nested scan and outer recorder restoration"
+    },
+    {
+      "name": "scalar_assignment_operator/my_declare_bare/inner origin",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "scalar_assignment_operator/scalar_assignment_operator/outer origins",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "scalar_assignment_operator/scalar_assignment_operator/outer reference",
+      "observed": "RED",
+      "reason": "actual returned constructor and origin identities"
+    },
+    {
+      "name": "scalar_assignment_operator/scalar_assignment_operator/caller error",
+      "observed": "RED",
+      "reason": "actual caller error preservation"
+    },
+    {
+      "name": "scalar_assignment_operator/scalar_assignment_operator/recorder restoration",
+      "observed": "RED",
+      "reason": "real nested scan and outer recorder restoration"
+    },
+    {
+      "name": "scalar_assignment_operator/scalar_assignment_operator/inner origin",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "scalar_assignment_operator/if_flow/outer origins",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "scalar_assignment_operator/if_flow/outer reference",
+      "observed": "RED",
+      "reason": "actual returned constructor and origin identities"
+    },
+    {
+      "name": "scalar_assignment_operator/if_flow/caller error",
+      "observed": "RED",
+      "reason": "actual caller error preservation"
+    },
+    {
+      "name": "scalar_assignment_operator/if_flow/recorder restoration",
+      "observed": "RED",
+      "reason": "real nested scan and outer recorder restoration"
+    },
+    {
+      "name": "scalar_assignment_operator/if_flow/inner origin",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "scalar_assignment_operator/return_general/outer origins",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "scalar_assignment_operator/return_general/outer reference",
+      "observed": "RED",
+      "reason": "actual returned constructor and origin identities"
+    },
+    {
+      "name": "scalar_assignment_operator/return_general/caller error",
+      "observed": "RED",
+      "reason": "actual caller error preservation"
+    },
+    {
+      "name": "scalar_assignment_operator/return_general/recorder restoration",
+      "observed": "RED",
+      "reason": "real nested scan and outer recorder restoration"
+    },
+    {
+      "name": "scalar_assignment_operator/return_general/inner origin",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "if_flow/staged_parse_job/outer origins",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "if_flow/staged_parse_job/outer reference",
+      "observed": "RED",
+      "reason": "actual returned constructor and origin identities"
+    },
+    {
+      "name": "if_flow/staged_parse_job/caller error",
+      "observed": "RED",
+      "reason": "actual caller error preservation"
+    },
+    {
+      "name": "if_flow/staged_parse_job/recorder restoration",
+      "observed": "RED",
+      "reason": "real nested scan and outer recorder restoration"
+    },
+    {
+      "name": "if_flow/staged_parse_job/inner origin",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "if_flow/progressive_span_dispatch/outer origins",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "if_flow/progressive_span_dispatch/outer reference",
+      "observed": "RED",
+      "reason": "actual returned constructor and origin identities"
+    },
+    {
+      "name": "if_flow/progressive_span_dispatch/caller error",
+      "observed": "RED",
+      "reason": "actual caller error preservation"
+    },
+    {
+      "name": "if_flow/progressive_span_dispatch/recorder restoration",
+      "observed": "RED",
+      "reason": "real nested scan and outer recorder restoration"
+    },
+    {
+      "name": "if_flow/progressive_span_dispatch/inner origin",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "if_flow/recognition_checkpoint/outer origins",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "if_flow/recognition_checkpoint/outer reference",
+      "observed": "RED",
+      "reason": "actual returned constructor and origin identities"
+    },
+    {
+      "name": "if_flow/recognition_checkpoint/caller error",
+      "observed": "RED",
+      "reason": "actual caller error preservation"
+    },
+    {
+      "name": "if_flow/recognition_checkpoint/recorder restoration",
+      "observed": "RED",
+      "reason": "real nested scan and outer recorder restoration"
+    },
+    {
+      "name": "if_flow/recognition_checkpoint/inner origin",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "if_flow/my_declare_bare/outer origins",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "if_flow/my_declare_bare/outer reference",
+      "observed": "RED",
+      "reason": "actual returned constructor and origin identities"
+    },
+    {
+      "name": "if_flow/my_declare_bare/caller error",
+      "observed": "RED",
+      "reason": "actual caller error preservation"
+    },
+    {
+      "name": "if_flow/my_declare_bare/recorder restoration",
+      "observed": "RED",
+      "reason": "real nested scan and outer recorder restoration"
+    },
+    {
+      "name": "if_flow/my_declare_bare/inner origin",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "if_flow/scalar_assignment_operator/outer origins",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "if_flow/scalar_assignment_operator/outer reference",
+      "observed": "RED",
+      "reason": "actual returned constructor and origin identities"
+    },
+    {
+      "name": "if_flow/scalar_assignment_operator/caller error",
+      "observed": "RED",
+      "reason": "actual caller error preservation"
+    },
+    {
+      "name": "if_flow/scalar_assignment_operator/recorder restoration",
+      "observed": "RED",
+      "reason": "real nested scan and outer recorder restoration"
+    },
+    {
+      "name": "if_flow/scalar_assignment_operator/inner origin",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "if_flow/if_flow/outer origins",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "if_flow/if_flow/outer reference",
+      "observed": "RED",
+      "reason": "actual returned constructor and origin identities"
+    },
+    {
+      "name": "if_flow/if_flow/caller error",
+      "observed": "RED",
+      "reason": "actual caller error preservation"
+    },
+    {
+      "name": "if_flow/if_flow/recorder restoration",
+      "observed": "RED",
+      "reason": "real nested scan and outer recorder restoration"
+    },
+    {
+      "name": "if_flow/if_flow/inner origin",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "if_flow/return_general/outer origins",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "if_flow/return_general/outer reference",
+      "observed": "RED",
+      "reason": "actual returned constructor and origin identities"
+    },
+    {
+      "name": "if_flow/return_general/caller error",
+      "observed": "RED",
+      "reason": "actual caller error preservation"
+    },
+    {
+      "name": "if_flow/return_general/recorder restoration",
+      "observed": "RED",
+      "reason": "real nested scan and outer recorder restoration"
+    },
+    {
+      "name": "if_flow/return_general/inner origin",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "return_general/staged_parse_job/outer origins",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "return_general/staged_parse_job/outer reference",
+      "observed": "RED",
+      "reason": "actual returned constructor and origin identities"
+    },
+    {
+      "name": "return_general/staged_parse_job/caller error",
+      "observed": "RED",
+      "reason": "actual caller error preservation"
+    },
+    {
+      "name": "return_general/staged_parse_job/recorder restoration",
+      "observed": "RED",
+      "reason": "real nested scan and outer recorder restoration"
+    },
+    {
+      "name": "return_general/staged_parse_job/inner origin",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "return_general/progressive_span_dispatch/outer origins",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "return_general/progressive_span_dispatch/outer reference",
+      "observed": "RED",
+      "reason": "actual returned constructor and origin identities"
+    },
+    {
+      "name": "return_general/progressive_span_dispatch/caller error",
+      "observed": "RED",
+      "reason": "actual caller error preservation"
+    },
+    {
+      "name": "return_general/progressive_span_dispatch/recorder restoration",
+      "observed": "RED",
+      "reason": "real nested scan and outer recorder restoration"
+    },
+    {
+      "name": "return_general/progressive_span_dispatch/inner origin",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "return_general/recognition_checkpoint/outer origins",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "return_general/recognition_checkpoint/outer reference",
+      "observed": "RED",
+      "reason": "actual returned constructor and origin identities"
+    },
+    {
+      "name": "return_general/recognition_checkpoint/caller error",
+      "observed": "RED",
+      "reason": "actual caller error preservation"
+    },
+    {
+      "name": "return_general/recognition_checkpoint/recorder restoration",
+      "observed": "RED",
+      "reason": "real nested scan and outer recorder restoration"
+    },
+    {
+      "name": "return_general/recognition_checkpoint/inner origin",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "return_general/my_declare_bare/outer origins",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "return_general/my_declare_bare/outer reference",
+      "observed": "RED",
+      "reason": "actual returned constructor and origin identities"
+    },
+    {
+      "name": "return_general/my_declare_bare/caller error",
+      "observed": "RED",
+      "reason": "actual caller error preservation"
+    },
+    {
+      "name": "return_general/my_declare_bare/recorder restoration",
+      "observed": "RED",
+      "reason": "real nested scan and outer recorder restoration"
+    },
+    {
+      "name": "return_general/my_declare_bare/inner origin",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "return_general/scalar_assignment_operator/outer origins",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "return_general/scalar_assignment_operator/outer reference",
+      "observed": "RED",
+      "reason": "actual returned constructor and origin identities"
+    },
+    {
+      "name": "return_general/scalar_assignment_operator/caller error",
+      "observed": "RED",
+      "reason": "actual caller error preservation"
+    },
+    {
+      "name": "return_general/scalar_assignment_operator/recorder restoration",
+      "observed": "RED",
+      "reason": "real nested scan and outer recorder restoration"
+    },
+    {
+      "name": "return_general/scalar_assignment_operator/inner origin",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "return_general/if_flow/outer origins",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "return_general/if_flow/outer reference",
+      "observed": "RED",
+      "reason": "actual returned constructor and origin identities"
+    },
+    {
+      "name": "return_general/if_flow/caller error",
+      "observed": "RED",
+      "reason": "actual caller error preservation"
+    },
+    {
+      "name": "return_general/if_flow/recorder restoration",
+      "observed": "RED",
+      "reason": "real nested scan and outer recorder restoration"
+    },
+    {
+      "name": "return_general/if_flow/inner origin",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "return_general/return_general/outer origins",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "return_general/return_general/outer reference",
+      "observed": "RED",
+      "reason": "actual returned constructor and origin identities"
+    },
+    {
+      "name": "return_general/return_general/caller error",
+      "observed": "RED",
+      "reason": "actual caller error preservation"
+    },
+    {
+      "name": "return_general/return_general/recorder restoration",
+      "observed": "RED",
+      "reason": "real nested scan and outer recorder restoration"
+    },
+    {
+      "name": "return_general/return_general/inner origin",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "staged_parse_job/fatal restoration",
+      "observed": "RED",
+      "reason": "fatal nested outer recorder restoration"
+    },
+    {
+      "name": "staged_parse_job/actual fatal callback",
+      "observed": "RED",
+      "reason": "actual nested callback exception and recorder change"
+    },
+    {
+      "name": "progressive_span_dispatch/fatal restoration",
+      "observed": "RED",
+      "reason": "fatal nested outer recorder restoration"
+    },
+    {
+      "name": "progressive_span_dispatch/actual fatal callback",
+      "observed": "RED",
+      "reason": "actual nested callback exception and recorder change"
+    },
+    {
+      "name": "recognition_checkpoint/fatal restoration",
+      "observed": "RED",
+      "reason": "fatal nested outer recorder restoration"
+    },
+    {
+      "name": "recognition_checkpoint/actual fatal callback",
+      "observed": "RED",
+      "reason": "actual nested callback exception and recorder change"
+    },
+    {
+      "name": "my_declare_bare/fatal restoration",
+      "observed": "RED",
+      "reason": "fatal nested outer recorder restoration"
+    },
+    {
+      "name": "my_declare_bare/actual fatal callback",
+      "observed": "RED",
+      "reason": "actual nested callback exception and recorder change"
+    },
+    {
+      "name": "scalar_assignment_operator/fatal restoration",
+      "observed": "RED",
+      "reason": "fatal nested outer recorder restoration"
+    },
+    {
+      "name": "scalar_assignment_operator/actual fatal callback",
+      "observed": "RED",
+      "reason": "actual nested callback exception and recorder change"
+    },
+    {
+      "name": "if_flow/fatal restoration",
+      "observed": "RED",
+      "reason": "fatal nested outer recorder restoration"
+    },
+    {
+      "name": "if_flow/actual fatal callback",
+      "observed": "RED",
+      "reason": "actual nested callback exception and recorder change"
+    },
+    {
+      "name": "return_general/fatal restoration",
+      "observed": "RED",
+      "reason": "fatal nested outer recorder restoration"
+    },
+    {
+      "name": "return_general/actual fatal callback",
+      "observed": "RED",
+      "reason": "actual nested callback exception and recorder change"
+    },
+    {
+      "name": "staged_parse_job/equal raw swapped scalar",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "staged_parse_job/cloned arguments",
+      "observed": "RED",
+      "reason": "actual returned constructor and origin identities"
+    },
+    {
+      "name": "staged_parse_job/lost returned array",
+      "observed": "RED",
+      "reason": "actual first-defined returned-array identity"
+    },
+    {
+      "name": "staged_parse_job/dispatcher reorder",
+      "observed": "RED",
+      "reason": "exact first-defined dispatcher order"
+    },
+    {
+      "name": "staged_parse_job/changed callback result",
+      "observed": "RED",
+      "reason": "public private callback equality"
+    },
+    {
+      "name": "progressive_span_dispatch/equal raw swapped scalar",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "progressive_span_dispatch/cloned arguments",
+      "observed": "RED",
+      "reason": "actual returned constructor and origin identities"
+    },
+    {
+      "name": "progressive_span_dispatch/lost returned array",
+      "observed": "RED",
+      "reason": "actual first-defined returned-array identity"
+    },
+    {
+      "name": "progressive_span_dispatch/dispatcher reorder",
+      "observed": "RED",
+      "reason": "exact first-defined dispatcher order"
+    },
+    {
+      "name": "progressive_span_dispatch/changed callback result",
+      "observed": "RED",
+      "reason": "public private callback equality"
+    },
+    {
+      "name": "recognition_checkpoint/equal raw swapped scalar",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "recognition_checkpoint/cloned arguments",
+      "observed": "RED",
+      "reason": "actual returned constructor and origin identities"
+    },
+    {
+      "name": "recognition_checkpoint/lost returned array",
+      "observed": "RED",
+      "reason": "actual first-defined returned-array identity"
+    },
+    {
+      "name": "recognition_checkpoint/dispatcher reorder",
+      "observed": "RED",
+      "reason": "exact first-defined dispatcher order"
+    },
+    {
+      "name": "recognition_checkpoint/changed callback result",
+      "observed": "RED",
+      "reason": "public private callback equality"
+    },
+    {
+      "name": "my_declare_bare/equal raw swapped scalar",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "my_declare_bare/cloned arguments",
+      "observed": "RED",
+      "reason": "actual returned constructor and origin identities"
+    },
+    {
+      "name": "my_declare_bare/lost returned array",
+      "observed": "RED",
+      "reason": "actual first-defined returned-array identity"
+    },
+    {
+      "name": "my_declare_bare/dispatcher reorder",
+      "observed": "RED",
+      "reason": "exact first-defined dispatcher order"
+    },
+    {
+      "name": "my_declare_bare/changed callback result",
+      "observed": "RED",
+      "reason": "public private callback equality"
+    },
+    {
+      "name": "scalar_assignment_operator/equal raw swapped scalar",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "scalar_assignment_operator/cloned arguments",
+      "observed": "RED",
+      "reason": "actual returned constructor and origin identities"
+    },
+    {
+      "name": "scalar_assignment_operator/lost returned array",
+      "observed": "RED",
+      "reason": "actual first-defined returned-array identity"
+    },
+    {
+      "name": "scalar_assignment_operator/dispatcher reorder",
+      "observed": "RED",
+      "reason": "exact first-defined dispatcher order"
+    },
+    {
+      "name": "scalar_assignment_operator/changed callback result",
+      "observed": "RED",
+      "reason": "public private callback equality"
+    },
+    {
+      "name": "if_flow/equal raw swapped scalar",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "if_flow/cloned arguments",
+      "observed": "RED",
+      "reason": "actual returned constructor and origin identities"
+    },
+    {
+      "name": "if_flow/lost returned array",
+      "observed": "RED",
+      "reason": "actual first-defined returned-array identity"
+    },
+    {
+      "name": "if_flow/dispatcher reorder",
+      "observed": "RED",
+      "reason": "exact first-defined dispatcher order"
+    },
+    {
+      "name": "if_flow/changed callback result",
+      "observed": "RED",
+      "reason": "public private callback equality"
+    },
+    {
+      "name": "return_general/equal raw swapped scalar",
+      "observed": "RED",
+      "reason": "literal representative scalar origins"
+    },
+    {
+      "name": "return_general/cloned arguments",
+      "observed": "RED",
+      "reason": "actual returned constructor and origin identities"
+    },
+    {
+      "name": "return_general/lost returned array",
+      "observed": "RED",
+      "reason": "actual first-defined returned-array identity"
+    },
+    {
+      "name": "return_general/dispatcher reorder",
+      "observed": "RED",
+      "reason": "exact first-defined dispatcher order"
+    },
+    {
+      "name": "return_general/changed callback result",
+      "observed": "RED",
+      "reason": "public private callback equality"
+    },
+    {
+      "name": "lost nested pair",
+      "observed": "RED",
+      "reason": "complete ordered nested pair population"
+    },
+    {
+      "name": "opaque invented origin",
+      "observed": "RED",
+      "reason": "opaque first-defined identity and no invented origins"
+    },
+    {
+      "name": "empty falls through",
+      "observed": "RED",
+      "reason": "empty first-defined stops and discards unselected records"
+    },
+    {
+      "name": "recorder leaks",
+      "observed": "RED",
+      "reason": "final recorder inactive"
+    },
+    {
+      "name": "capture incomplete",
+      "observed": "RED",
+      "reason": "complete actual composition capture"
+    },
+    {
+      "name": "forged input tree",
+      "observed": "RED",
+      "reason": "repository-local immutable input tree"
+    },
+    {
+      "name": "lost command",
+      "observed": "RED",
+      "reason": "complete actual command population"
+    },
+    {
+      "name": "forged command",
+      "observed": "RED",
+      "reason": "actual declared observation command"
+    },
+    {
+      "name": "failed exit",
+      "observed": "RED",
+      "reason": "complete before after runtime guards"
+    },
+    {
+      "name": "lost guard",
+      "observed": "RED",
+      "reason": "complete before after runtime guards"
+    },
+    {
+      "name": "forged capture",
+      "observed": "RED",
+      "reason": "actual composition capture producer"
+    },
+    {
+      "name": "forged stream",
+      "observed": "RED",
+      "reason": "actual retained stream producer"
+    },
+    {
+      "name": "forged channel",
+      "observed": "RED",
+      "reason": "complete channel bytes"
+    },
+    {
+      "name": "outer stderr",
+      "observed": "RED",
+      "reason": "empty actual outer stderr"
+    },
+    {
+      "name": "short positive TAP",
+      "observed": "RED",
+      "reason": "complete ordered positive TAP reach"
+    },
+    {
+      "name": "hidden nested TAP failure",
+      "observed": "RED",
+      "reason": "no nested fixture failure"
+    },
+    {
+      "name": "basic/changed full compiler channel",
+      "observed": "RED",
+      "reason": "complete original family channel recurrence"
+    },
+    {
+      "name": "pipeline/changed full compiler channel",
+      "observed": "RED",
+      "reason": "complete original family channel recurrence"
+    },
+    {
+      "name": "flow/changed full compiler channel",
+      "observed": "RED",
+      "reason": "complete original family channel recurrence"
+    },
+    {
+      "name": "legacy/changed full compiler channel",
+      "observed": "RED",
+      "reason": "complete original family channel recurrence"
+    },
+    {
+      "name": "dedicated/changed full compiler channel",
+      "observed": "RED",
+      "reason": "complete original family channel recurrence"
+    },
+    {
+      "name": "lost committed member",
+      "observed": "RED",
+      "reason": "complete unique input population"
+    },
+    {
+      "name": "extra runtime overlay",
+      "observed": "RED",
+      "reason": "immutable boundary without overlays"
+    },
+    {
+      "name": "forged object bytes",
+      "observed": "RED",
+      "reason": "exact immutable input bytes"
+    },
+    {
+      "name": "forged executable mode",
+      "observed": "RED",
+      "reason": "exact immutable object and mode"
+    },
+    {
+      "name": "lost black-box exclusion",
+      "observed": "RED",
+      "reason": "exact black-box metadata exclusions"
+    }
+  ],
+  "instrument_sha256": "7cab6ddd009a53bfa79724ca64c01618a7a9a37b59fa694e86bf61b270ffa57b",
+  "scope": "Fresh complete committed Git superset without overlays or production/fixture replacements. Original independent five-corpus174-ID population retains436 events/origins per seed; exact complete previous selected producer/callback/compiler/origin channels recur. Actual nesting uses seven representatives/49 ordered pairs/seven caught fatal routes per seed, not all174 IDs or arbitrary callbacks. Original rejected instruments and historical adjudications stay unchanged. Physical source frames, selected origins and46 MethodExpr/CSV frames are distinct populations. Rendered teaching is not extra runtime execution. Exact staged canonical CI independently gates immutable private provenance parent closeout; this record does not publish canonical CI measurements. Quoted/comment executable membership and selected replacement remain separate."
+}

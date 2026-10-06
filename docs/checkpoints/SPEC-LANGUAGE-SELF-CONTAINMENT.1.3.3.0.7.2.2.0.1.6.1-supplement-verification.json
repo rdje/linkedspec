@@ -1,0 +1,34 @@
+{
+  "complete": true,
+  "revision": "56c8f38d12a799e4f4fb8c5b0cfe27690d27f1fc",
+  "bound_inputs": 151,
+  "controls": [
+    {
+      "name": "rewritten original statement",
+      "observed": "RED",
+      "reason": "mode revision only composition freeze"
+    },
+    {
+      "name": "rewritten original binding",
+      "observed": "RED",
+      "reason": "exact original composition claim"
+    },
+    {
+      "name": "lost original population",
+      "observed": "RED",
+      "reason": "complete actual composition freeze"
+    },
+    {
+      "name": "forged original producer",
+      "observed": "RED",
+      "reason": "actual composition freeze instrument"
+    },
+    {
+      "name": "forged original channel",
+      "observed": "RED",
+      "reason": "actual freeze channel identities"
+    }
+  ],
+  "instrument_sha256": "c627e6e88b4a2a4ee3107eed12b7687b79597008874f7226634f7826c38243c5",
+  "scope": "Every original composition hash, statement, rejected instrument/channel, historical adjudication and input binding stays exact at the committed revision. Only durability mode/revision changes. Current source/publication changes require new evidence; no refresh of old observations."
+}

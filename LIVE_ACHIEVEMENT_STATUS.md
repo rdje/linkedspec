@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Full PNT: focused original producer composition verified and committed per slice; fresh immutable canonical .1.6.1 remains next. Private provenance parent stays active; executable quoted/comment membership/replacement and separately owned runtime defects remain open.
+Full PNT: immutable all-producer provenance independently verified; exact canonical receipt/normal hooks gate private parent closeout. Executable quoted/pattern membership .0.2 is next; replacement and separately owned runtime defects remain open.
 
 ## Latest Completed Slice
 
-`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6.0` — Immutable37401 supplies4708 regular committed inputs plus exactly two authored observation inputs per tree;26 original-population commands and three corrected nested commands retain174 disjoint selected contract IDs/436 events and origins per seed,46 MethodExpr/CSV frames and complete previous compiler/callback/origin channels under seeds0/1/42. Seven representatives verify49 ordered nested pairs/42 off-diagonal pairs/seven fatal routes per seed;29 unchanged suites pass1440 ordered groups. Independent320 evidence RED, three actual rejected initial probe channels,111-hash mode/revision-only freeze, three stale-route guard rejections/seven supplemental RED and book58/31/four chapters/61 RED are retained. No production/spec/test changes; private parent remains active for canonical .1.6.1.
+`SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6.1` — Fresh immutable56c8f38 supplies4745 regular committed inputs/no overlays and26 guarded commands. All174 disjoint selected IDs retain436 events/origins and46 MethodExpr/CSV frames per seed with exact complete previous compiler/callback/origin channels. Seven representatives retain49 ordered nested pairs/42 off-diagonal pairs/seven fatal routes per seed. All29 unchanged suites pass1440 ordered groups;320 effective evidence RED. Original151 hashes freeze mode/revision only with five supplemental RED; book58/32/four chapters/63 RED. Exact staged canonical receipt and normal hooks gate .1.6/private .0.1 closeout; no production/spec/test/policy change.
 
 ## Next Action
 
-Activate .1.6.1 from the clean committed composition boundary. Reconstruct all regular committed inputs with no overlays, recur complete original/corrected nested channels and direct consumers, retain independent controls/publication/freeze evidence and require exact staged canonical CI before closing .1.6/private provenance .0.1. Executable quoted/comment membership .0.2 and selected replacement .0.3 remain next.
+Activate executable quoted/pattern membership .0.2 from the clean canonical committed boundary. Retrieve original quote/mapping counterexamples and exact private producer spans; diagnose/implement only a safely bounded membership slice preserving original arguments, literal receivers, real dependencies and family order. Selected replacement .0.3 and recurring executable repair acceptance .0.4 remain separate; retain other runtime/diagnostic defect owners.
 
 ## Recent Completions
 
+- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6.1` — immutable4745/no overlays,174 IDs/436 origins/1440 groups/320 RED; canonical private closeout.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6.0` —174 IDs/436 origins,49 nested pairs/seven fatal routes,1440 groups/320 RED; instrument defects repaired.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.4` — immutable4692/no overlays;42 origins/636 groups/184 RED; canonical milestone landing.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.3` — recognitionRED18/GREEN191;42 origins/1671 groups/200 RED; complete earlier channels.
@@ -29,7 +30,6 @@ Activate .1.6.1 from the clean committed composition boundary. Reconstruct all r
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.2` — anonymous26;18→71 origins/RED27-GREEN50/1225 groups/159 RED.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1.1` — nested lexical repair; RED11/GREEN28/1198 groups/39 RED; recurring Phase01035.
 - `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1` — quoted atoms; RED9/GREEN18/1169 groups/36 RED; immediate nested escape repair remains owned.
-- `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.1` — seven hooks; final RED9/GREEN23,2→18 origins and1147 consumers/140 RED.
 
 ## History
 

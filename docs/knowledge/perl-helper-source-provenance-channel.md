@@ -12,7 +12,7 @@ status: historical first three-contract proof at80ecf47f2; remaining producer fa
 tags: [perl, actionir, scanner, source-provenance, source-span, event-order]
 evidence: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.0 owns four source owners, actual13-group provenance RED/GREEN and six exact sources/18 before-after public compiler pairs. Original parser dumps, emissions, diagnostics and event arrays remain identical; private match positions satisfy independent scalar-span oracles."
 reverify:
-  - "Current composed proof: bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6.0-review.py"
+  - "Current composed proof: bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6.1-review.py"
   - "bash tools/project_data_run.sh env PERL5LIB= prove -v -Iperl t/actionir_helper_source_provenance.t"
   - "At frozen80ecf47f258a7f23a59598a1c5500a34fe662a7c run bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.0-review.py; subsequent producer/book changes require historical replay, never refreshing old captures."
 ---
@@ -53,6 +53,6 @@ by the sibling leaves. Executable membership, exact residual replacement, recurr
 registration/canonical acceptance, unsupported-marker provenance and source comments
 are subsequent work. The existing quoted-value/readiness defects remain unresolved.
 
-[[perl-all-producer-source-composition]] independently verifies current seven-family
+[[perl-all-producer-source-acceptance]] independently verifies current seven-family
 representative nesting and complete original selected source channels. This does
 not authorize quoted/comment rewriting or close separately owned runtime defects.

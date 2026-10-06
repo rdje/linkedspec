@@ -12,7 +12,7 @@ status: immutable nineteen-contract family independently verified; canonical rec
 tags: [perl, actionir, scanner, pipeline, source-provenance, identity]
 evidence: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.2 owns eight statement loops/ten constructors, literal source/argument/interval oracle, complete before/after boundaries, corrected returned-array probe and actual copied-return control."
 reverify:
-  - "Current composed proof: bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6.0-review.py"
+  - "Current composed proof: bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6.1-review.py"
   - "Historical accepted input boundary only; do not refresh after later producer/fixture/book changes: bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.2.3-review.py"
 ---
 
@@ -61,7 +61,7 @@ observe RED; complete58-input book/ten examples/three chapters/14 controls passe
 Exact staged canonical receipt is mandatory before family landing; remaining Flow,
 legacy/staged, membership/comments/replacement and global audit keep separate owners.
 
-Current-source recurrence is owned by [[perl-all-producer-source-composition]].
+Current-source recurrence is owned by [[perl-all-producer-source-acceptance]].
 The old source guards remain historical and unchanged; current verification uses
 the composed retained proof, with executable membership/replacement and canonical
-private parent closeout still separate.
+private parent closeout gated by exact canonical receipt.

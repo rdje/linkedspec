@@ -2092,13 +2092,15 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
   Commit: This leaf lands the bounded additional diagnosis; Git is the commit identity authority. Next producer provenance .1 activates only after the clean handoff.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1`
-  Status: `active`
+  Status: `done`
   Goal: Preserve scanner match provenance through a private source-bound interface.
   Dependencies: `.1.3.3.0.7.2.2.0.0`
   Acceptance: Select exact producer families from the committed inventory and split if needed. Capture actual regex offsets before nested parsing overwrites match globals; translate recursive/substatement frames explicitly. Preserve original raw/args bytes, family precedence, occurrence order, opaque delegation and caller error state; no public event schema changes. Verify affected scanner/control/recognized-pattern consumers and commit before membership changes.
 
   Children: `.1.3.3.0.7.2.2.0.1.0`, `.1.3.3.0.7.2.2.0.1.1`, `.1.3.3.0.7.2.2.0.1.2`, `.1.3.3.0.7.2.2.0.1.3`, `.1.3.3.0.7.2.2.0.1.4`, `.1.3.3.0.7.2.2.0.1.5`, `.1.3.3.0.7.2.2.0.1.6`
   Producer slices: First establish the private recording seam and three source-bound return/set/IF producers. Then complete basic, remaining pipeline, recursive/composed flow, remaining legacy and staged/progressive/recognition owners separately; split the large legacy owner into measured safe batches before activation. Each slice keeps public events unchanged and owns actual source-position tests. Private provenance is not connected to readiness/replacement until the parent is independently composed.
+
+  Closeout: Immutable .1.6.1 original/representative recurrence plus exact staged canonical receipt and normal hooks gate this intended private done state. Quoted/comment membership, replacement and other runtime defects remain open.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.0`
   Status: `done`
@@ -3302,12 +3304,14 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 - [x] **LOCKSTEP** — Book58/29/four/54,120 original-hash historical freeze, source-bound claim/Knowledge/task/index/roadmaps/live/resume and bounded histories agree. Only dedicated parent .1.5 closes; all-producer .1.6 and membership/replacement/runtime owners remain.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6`
-  Status: `active`
+  Status: `done`
   Goal: Independently compose all producer provenance.
   Dependencies: `.1.3.3.0.7.2.2.0.1.5`
   Acceptance: Verify every selected producer/source frame, public-event equality, opaque/error/order invariants and source-bound recurrence before closing this private parent.
   Children: `.1.3.3.0.7.2.2.0.1.6.0`, `.1.3.3.0.7.2.2.0.1.6.1`
   Safe-slice split: Establish the original selected population and cross-family composition with focused source-bound evidence first; then replay its committed producers without overlays and require exact canonical receipt before closing .1.6 and private provenance .0.1. Membership/replacement remain separate.
+
+  Closeout: Immutable .1.6.1 original/representative recurrence plus exact staged canonical receipt and normal hooks gate this intended private done state. Quoted/comment membership, replacement and other runtime defects remain open.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6.0`
   Status: `done`
@@ -3337,11 +3341,30 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 - [x] **LOCKSTEP** — Book58/31/four/61,111 verified historical hashes, three exact stale-route rejections/seven supplemental RED, Knowledge/task/index/roadmaps/live/resume and bounded histories align. Private parent remains active.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6.1`
-  Status: `pending`
+  Status: `done`
   Goal: Independently accept immutable all-producer composition and close private provenance.
   Dependencies: `.1.6.0`
   Planned verification: Fresh committed regular inputs without runtime overlays, complete original and cross-family channels/references/callbacks/order/error boundaries and direct consumers, independent evidence/render controls and source-bound retention; exact staged canonical CI and normal hooks before parent closeout.
   Acceptance: Close only .1.6 and private provenance .0.1 after the independently reviewed committed recurrence and canonical receipt land. Executable quoted/comment membership .0.2, precise replacement .0.3, recurring registration .0.4 and separately owned runtime/diagnostic defects retain their owners.
+
+  Activation: Clean56c8f38d12a799e4f4fb8c5b0cfe27690d27f1fc, all ten normal commit hooks and post-commit activation check PASS; brief0, no modified/untracked files or required jobs. Relevant parent/leaf/roadmap, seven-family source/callback/error interfaces, original pure validators/cases/probes, precise selected-versus-representative grain and current ActionIR book reviewed. Cleanup record remains younger than24h.
+  Owned paths: Leaf-prefixed capture/manifest/full channels/independent review/controls/book/freeze/claim; hash-verified historical mode/revision-only .1.6.0 claim freeze before bound teaching/cards change; all-producer/current family Knowledge/derived map; owning task/frontier/index/roadmaps/live/resume and bounded change/notes. No production/spec/standard-test/CI/hook/storage/dependency/submodule/other-repository change.
+  Verification tier: `canonical`
+  Focused checks: Fresh complete regular committed Git population without overlays; unchanged original probes and corrected committed nested probe under seeds0/1/42, independent literal event/argument/scalar/reference/order/error oracles and exact complete previous channels. Full ordered29-suite TAP, guarded command/input/object/content/mode/member/channel population, reason-specific effective RED, original151-hash historical freeze and complete public-book input/render/control proof. Claim/Knowledge/memory/history/diff and all ten doctrines.
+  Canonical trigger: Immutable all-producer acceptance and private provenance parent closeout; exact staged tools/run_ci_local.sh receipt, required Phase0 and normal hooks must pass before landing .1.6.1 and closing .1.6/.0.1.
+  Claim verification: `docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6.1.json`
+
+  Verified focused result: Fresh immutable56c8f38 supplies4745 regular committed inputs/no overlays and26 guarded commands. All174 disjoint selected IDs retain436 events/origins and46 MethodExpr/CSV frames per seed with exact complete previous compiler/callback/origin channels. Seven representatives retain49 ordered nested pairs/42 off-diagonal pairs/seven fatal routes per seed. All29 unchanged suites pass1440 ordered groups;320 effective evidence RED. Original151 hashes freeze mode/revision only with five supplemental RED; book58/32/four chapters/63 RED. Exact staged canonical receipt and normal hooks gate .1.6/private .0.1 closeout; no production/spec/test/policy change.
+  Canonical landing condition: Exact staged canonical CI receipt and normal hooks are mandatory before this intended done state lands; required Phase0 belongs to that canonical execution, not a repeated focused capture claim.
+  Commit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6.1 - accept all producer source provenance` (derive identity from Git after landing).
+  Next: Activate executable quoted/pattern membership .0.2 from the clean canonical committed boundary. Retrieve original quote/mapping counterexamples and exact private producer spans; diagnose/implement only a safely bounded membership slice preserving original arguments, literal receivers, real dependencies and family order. Selected replacement .0.3 and recurring executable repair acceptance .0.4 remain separate; retain other runtime/diagnostic defect owners.
+
+- [x] **REPRODUCE / ISSUE** — Original complete selected and corrected nested channels recur from immutable4745-file Git input without overlays.
+- [x] **ROOT CAUSE (WHY + WHERE)** — Actual producer coordinates and returned references preserve source authority; rejected earlier instruments and historical adjudications stay unchanged.
+- [x] **FIX** — Acceptance changes retained evidence/teaching/current pointers only; production/spec/standard-test bytes remain activation-exact.
+- [x] **ADDRESSED (verified)** — 174 selected IDs/436 origins per seed;49 representative nested pairs/seven fatal routes;320 effective exact-reason RED and complete earlier channel recurrence.
+- [x] **NO REGRESSION** — 29 unchanged suites reach1440 ordered groups with complete TAP/no nested failures. Exact canonical receipt, required Phase0 and normal hooks gate private parent landing.
+- [x] **LOCKSTEP** — Book58/32/four/63,151 original hashes/five supplemental RED, claim/Knowledge/task/index/roadmaps/live/resume/history align; membership/replacement/runtime owners remain.
 
 - ID: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2`
   Status: `pending`
@@ -3614,7 +3637,7 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 | 43.4.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2` | `active` | Evidence-selected bounded lexical ownership repair after committed diagnosis. |
 | 43.4.2.0 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0` | `active` | Executable occurrence repair, including quoted literal corruption and typed nested host-call failures. |
 | 43.4.2.0.0 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.0` | `done` | Two raw-key mapper failures and complete expected RED; production unchanged. |
-| 43.4.2.0.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1` | `active` | Producer source provenance and explicit recursive frames. |
+| 43.4.2.0.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1` | `done` | Producer source provenance and explicit recursive frames. |
 | 43.4.2.0.1.0 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.0` | `done` | Private three-contract spans;18 public identities/39 origins/13 GREEN groups/1199 unchanged tests. |
 | 43.4.2.0.1.1.0 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.0` | `done` | Nine regex contracts;27 public identities/81 spans, complete RED/GREEN and unchanged consumers. |
 | 43.4.2.0.1.1.3 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.3` | `done` | Source-bound1337 consumer groups at explicit two-capsule boundaries; statement frames next. |
@@ -3654,9 +3677,9 @@ At this .0 diagnostic boundary, bridge implementation is pending. No complete ne
 | 43.4.2.0.1.5.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.2` | `done` | OriginalRED5/GREEN148;16 combined origins/1608 groups/153 RED and exact actual-root mode repair. |
 | 43.4.2.0.1.5.3 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.3` | `done` | OriginalRED18/GREEN191;42 dedicated origins/1671 groups/200 RED; canonical acceptance next. |
 | 43.4.2.0.1.5.4 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.4` | `done` | Fresh immutable complete dedicated-family recurrence and exact canonical acceptance before parent closure. |
-| 43.4.2.0.1.6 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6` | `in_progress` | Complete independent producer composition source provenance before membership. |
+| 43.4.2.0.1.6 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6` | `done` | Complete independent producer composition source provenance before membership. |
 | 43.4.2.0.1.6.0 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6.0` | `done` | Original174 IDs/436 origins,49 representative pairs/seven fatal routes/1440 groups verified; canonical .1.6.1 next. |
-| 43.4.2.0.1.6.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6.1` | `pending` | Independently accept immutable all-producer recurrence and private parent through canonical CI. |
+| 43.4.2.0.1.6.1 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6.1` | `done` | Independently accept immutable all-producer recurrence and private parent through canonical CI. |
 | 43.4.2.0.2 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2` | `pending` | Executable source membership with original arguments. |
 | 43.4.2.0.3 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3` | `pending` | Exact replacement preserving quoted twins and genuine order. |
 | 43.4.2.0.4 | `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.4` | `pending` | Recurring test registration and exact canonical composition. |
@@ -3940,3 +3963,5 @@ September27 `.1.1.1`: seven neutral/structural checks, 34 ledger source-path/con
 - `2026-10-06`: .1.5.4 fresh immutable dedicated recurrence4692/no overlays/42 origins/636 groups/184 RED; exact canonical receipt gates dedicated parent closure before .1.6.
 
 - `2026-10-06`: .1.6.0 composes174 IDs/436 origins per seed,49 representative pairs/seven fatal routes,1440 groups/320 RED; retained actual instrument rejections repaired. Private canonical .1.6.1 follows clean landing.
+
+- `2026-10-06`: .1.6.1 immutable4745/no-overlay recurrence174 IDs/436 origins,49 representative pairs/seven fatal routes/1440 groups/320 RED; exact canonical receipt gates private .1.6/.0.1 closeout. Executable membership .0.2 follows clean landing.

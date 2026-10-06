@@ -1,10 +1,10 @@
 # MEMORY
 
-- activation_commit: `37401f576c517a91f49942893c41af020bcbfda4` — clean all-producer composition activation.
-- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6.0 - compose all scanner source producers`.
-- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6.1` — pending immutable canonical composition/private provenance closeout.
-- next_action: Activate .1.6.1 from the clean committed composition boundary. Reconstruct all regular committed inputs with no overlays, recur complete original/corrected nested channels and direct consumers, retain independent controls/publication/freeze evidence and require exact staged canonical CI before closing .1.6/private provenance .0.1. Executable quoted/comment membership .0.2 and selected replacement .0.3 remain next.
-- in_flight_uncommitted: none after landing .1.6.0; completed observations/publication and instrument/routing repairs are retained and reviewed; no required background job. Derive current commit from Git; activate .1.6.1 only from this clean committed boundary.
+- activation_commit: `56c8f38d12a799e4f4fb8c5b0cfe27690d27f1fc` — clean immutable all-producer acceptance activation.
+- latest_completed_leaf: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6.1 - accept all producer source provenance`.
+- active_work_unit: `SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2` (pending activation) — executable quoted/pattern membership.
+- next_action: Activate executable quoted/pattern membership .0.2 from the clean canonical committed boundary. Retrieve original quote/mapping counterexamples and exact private producer spans; diagnose/implement only a safely bounded membership slice preserving original arguments, literal receivers, real dependencies and family order. Selected replacement .0.3 and recurring executable repair acceptance .0.4 remain separate; retain other runtime/diagnostic defect owners.
+- in_flight_uncommitted: none after canonical .1.6.1 landing; immutable runtime/book/freeze/claim proof and exact staged canonical receipt/normal hooks enforce intended private parent closeout. Derive current commit from Git; activate .0.2 only from clean committed HEAD.
 - blockers: No access/decision blocker. Matches and attached/marker/value/null/while executors are repaired; control parent/order and raw-expression reporting are reconciled; quoted/comment readiness .7.2/.3 precedes dispatcher/full execution. Other startup repairs remain separate.
   Wrapper startup .7 remains open; recovery/purge stay prohibited.
 - current_task_index_contract: checker-owned closed-state markers live only between the stable sentinels after the
